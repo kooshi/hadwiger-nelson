@@ -169,7 +169,7 @@ reason by the close.*
 24. **Brief FS131-K2b, wave 2 finished** (`debruijn`, Opus; `data/fs131/briefs/FS131-K2b-wave2-finish.md`): the six example rows, the obligation-modeling
     pass over all 28, item 23's question, the handoff brought to 28 rows; continues K2's record on `fs131-w2`. Gated PASS after one fix (its quotation's
     source lives on the branch; the source line now names the worktree's copy). Source: this commit.
-25. **FS131-K3 handed back at stage 2, harness ≈ 501k** (report `data/fs131/reports/FS131-K3.md`; branch `fs131-w3` at `7d89b077`, commits checked): wave 3's
+25. **FS131-K3 handed back at stage 2, harness ≈ 501k** (report on its branch, `.claude/worktrees/fs131-w3/data/fs131/reports/FS131-K3.md`; branch `fs131-w3` at `7d89b077`, commits checked): wave 3's
     foundation sorry-free and green (Plane/LocalMap, LocalMapExamples, CircleColouring; 45 records clean; two new example maps `halfPlane2`, `quadRing`;
     RINGBAND's two models inhabited); no statement defect, and no definitional choice changes a row (§ 2.2); the reading every row inherits — "a tile of
     colour c" read as the colour class `region c`, equal to the literal tile reading once `finite_tiles_near` is proved (§ 2.1). Stage 3 (the 20 rows'
@@ -204,3 +204,7 @@ reason by the close.*
     `scripts/Vacuity.lean`. Job FS131-T1.
 31. **I1's held items**: the scratch backups in the worktree's `build/` (`build/i1-backup`, `build/i1-*.log`; gitignored) — default: kept until the
     milestone's close, then removed with the worktree; the worktree `fs131-w1` itself — kept as the home of wave 1's gate logs until the close.
+32. **Briefs FS131-K3b** (wave 3's skeleton, `debruijn`, Opus; `data/fs131/briefs/FS131-K3b-wave3-skeleton.md`) **and FS131-T1** (the vacuity carriers,
+    `debruijn-implementer`, Sonnet, in the main tree; `data/fs131/briefs/FS131-T1-vacuity-carriers.md`), both gated PASS. **Slip, the coordinator's** (found
+    by the gate, twice): each brief first quoted a hand-back message's text as if it were the report file's — the two differ — and named a worktree's file
+    by a main-tree path. Fixed by copying each line from its file by script. Rule: quote a report from its file, never from the hand-back. Source: this commit.
