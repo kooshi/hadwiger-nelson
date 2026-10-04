@@ -493,3 +493,32 @@ One line per item with its source; no narration. Each line is ticked done or dec
 127. **SR3 item (a) done** (stage 1, commit `fb7cbc4c`): FS114-Y6-E2RED's survivor S6 is empty by a parity argument — ALT at three of the four pocket
      pairs forces it at the fourth (FS129-SR3-E2ONE, derived, one mind); PINALL's E2 exception narrows to E2 at two or more blades. SR3 continues
      with (b) and (c).
+128. **FS129-SR3 reported DONE** (`data/fs129/reports/FS129-SR3.md`; commits `84d57d82` … `a84ab453`, seven, all present; ≈458k by the harness, past
+     the brief's 400k line during stage 5 — guidance, not a slip). **Lane R's pass 3 is complete, and with it all three passes in both lanes.**
+     **Keryx's receipt**: derive gate re-run, exit 0, PASS. Entries, derived, one mind: FS129-SR3-E2ONE (item 127), -EMPTY-NS, -QFREE-NS (item 125),
+     -OUTERADJ (V6-ADJ widened: two change points 60° apart, each with its outer germ off the shared arc free of (Q) arcs, never share a single
+     outer colour; non-Siamese, no simplicity — DOUBLETIP's outer twin).
+129. **Item 63 finished** (SR3 (c)): 9 lines in 8 entries — 3 answered elsewhere with no link back (FS111-M-PINCH line 442, FS112-SIX line 49,
+     FS116-S1-KAPPA line 816), 3 answered in place, 3 open (FS111-M2-INT line 853 — its MUA form is FS-120's question 3; BV-HEX line 968 — an owed
+     second mind; FS114-Y3-RSTOP line 607 — unplaced: FS-124 case 6 or FS-117). None shows a held result false.
+130. **Corrections owed, from SR3** (for FS129-Z1/Z2 as they fall): FS114-Y5-PINALL's exception narrows to "E1, or E2 at two or more blades";
+     FS114-Y5-PIN120's to E2 with E1 or a second E2; FS114-Y6-E2RED's not-claimed line answered (S6 empty); FS114-K1's list drops S6 and the wrap's
+     E2RED site; FS129-SR2-QFCASE cites QFREE-NS and its "simple at p" gloss is withdrawn; FS129-OR1-QFREE's not-claimed line and
+     FS116-C114-LOCAL-F's Γ-free line narrow to the Siamese class; FS111-M-PINCH's not-claimed line to point to FS111-M-EXTREME with R7 and to
+     FS121-DB1-L3; FS112-SIX's GAP line to cite `plans/FS112-NB-verification.md` line 205 and FS116-N2-SIXRING; FS116-S1-KAPPA's last clause is over
+     a class empty by QFREE-NS.
+131. **Statement defect for the Lean list, SR3's L1 item 25** (with item 126): SR1's L1 item 2 ("DOUBLETIP in place of V6-HUG, and of EMPTY's
+     double-tip step") would confine EMPTY to the simple class; keep V6-HUG's colour step for EMPTY-NS. SR3 asked whether this goes to the backlog
+     session before FS129-L1's brief: **ruling** — no; FS129-L1 carries it as a line of the backlog's input, which is where the backlog reads.
+     Alternative: a separate note to the backlog session. Why: one place for the backlog's instructions. Confidence: high.
+132. **Tool defect**: `tools/fs129_sr2_gaps.py --fault` writes the same output file as the clean run, so the committed
+     `data/fs129/sr2/item63-gap-lines.md` is the fault run's list (36 table lines against the clean 29, Keryx's count); the clean list is
+     `data/fs129/sr3/item63-gap-lines-clean.md`. For FS129-Z2 (a note in the index README; the clean file is the one to cite).
+133. **Stubs to re-aim, from SR3** (FS129-Z2): FS-124 — add OUTERADJ beside DOUBLETIP as a pruning rule; case 6 loses S6; the Reuleaux (2,1,1,0)
+     residue is the whole HALF class; FS-123 — question 3's non-simple half closed for (Q)-free rings by QFREE-NS, the Siamese half stays; the
+     unplaced FS114-Y3-RSTOP line (FS-124 case 6 or FS-117). **SR3's registration** (record § 5.2): six binary predictions, Brier 0.215; three "does a
+     held result reach further?" questions each priced below even, all three landed. Prior art owed: E2ONE, QFREE-NS, OUTERADJ; EMPTY-NS partly.
+134. **Ruling — the record job's two parts run side by side**: FS129-Z1 files SR3's entries too (amendment to its brief), so FS129-derivation.md has
+     one writer; FS129-Z2 launches now on the stubs, the index corrections and its where-else column, the scored predictions and the Searcher's
+     results, and drafts the front page last, from Z1's file once it is committed. Alternative: Z2 after Z1. Why: most of Z2 is independent of Z1;
+     the one dependency is ordered inside Z2. Confidence: medium.

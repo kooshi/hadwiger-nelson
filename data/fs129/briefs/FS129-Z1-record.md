@@ -92,3 +92,12 @@ The order of the file, the head section's form, and how to mark supersession. Wh
 and choose the one the argument supports, saying why; where a merged form drops a hypothesis its source needed, keep the source's form and
 report it — that is a statement defect, and the coordinator wants it at once. If an entry cannot be stated faithfully from its record, file
 it as "not filed: <why>" in your record rather than smoothing it.
+
+## Amendment, 2026-10-03 — FS129-SR3 has reported: file its entries too
+
+Lane R's last pass-3 reader, FS129-SR3, has reported (`plans/FS129-SR3-audit.md`; `data/fs129/reports/FS129-SR3.md`), so that
+`plans/FS129-derivation.md` keeps one writer, its entries are yours rather than FS129-Z2's: FS129-SR3-E2ONE, -EMPTY-NS, -QFREE-NS and -OUTERADJ,
+with QFCASE citing QFREE-NS (`plans/FS129-close-inventory.md` items 125, 128). Its corrections to earlier derivation files are item 130; file
+those that touch derivation files, and leave the stubs to FS129-Z2, which launches now beside you and drafts the front page from your file
+once you commit it — so commit the derivation file at a saved stage as early as it passes the gate, and say in your report which commit
+holds it. Standing rules unchanged — start no agent of your own (staffing is Kooshi's; the coordinator reviews only work it knows exists).
