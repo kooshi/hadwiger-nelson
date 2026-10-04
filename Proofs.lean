@@ -161,6 +161,9 @@ import Proofs.HadwigerNelson.Plane.Closure
 import Proofs.HadwigerNelson.Plane.Diameter
 import Proofs.HadwigerNelson.Plane.UnitAvoiding
 import Proofs.HadwigerNelson.Plane.Chord
+import Proofs.HadwigerNelson.Plane.LocalMap
+import Proofs.HadwigerNelson.Plane.LocalMapExamples
+import Proofs.HadwigerNelson.Plane.CircleColouring
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 

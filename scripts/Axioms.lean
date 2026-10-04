@@ -1889,6 +1889,54 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Arith.falconerFan_hom
 #print axioms HadwigerNelson.Arith.falconerFan_chromaticNumber
 
+/-! ## FS-131 wave 3 (job FS131-K3) — the foundation: the local geometry of an arc map, the ring vocabulary, RINGBAND's circle colourings -/
+
+#print axioms HadwigerNelson.Plane.Arc.isCompact_carrier
+#print axioms HadwigerNelson.Plane.Arc.isClosed_carrier
+#print axioms HadwigerNelson.Plane.coneAt_mono
+#print axioms HadwigerNelson.Plane.mem_coneAt_add_two_pi
+#print axioms HadwigerNelson.Plane.mem_closure_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.germ_mono
+#print axioms HadwigerNelson.Plane.GermIn.mono
+#print axioms HadwigerNelson.Plane.GermIn.inter
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.interiorPts_subset_dom
+#print axioms HadwigerNelson.Plane.ArcMap.continuousOn_col
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_region
+#print axioms HadwigerNelson.Plane.ArcMap.region_subset_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.subset_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.isPreconnected
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.col_eq
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.tileOf
+#print axioms HadwigerNelson.Plane.ArcMap.TileOf.subset_region
+#print axioms HadwigerNelson.Plane.ArcMap.mem_coloursAt_of_tileOf
+#print axioms HadwigerNelson.Plane.im_eq_zero_of_mem_segment_neg
+#print axioms HadwigerNelson.Plane.mem_segment_neg_of_im_eq_zero
+#print axioms HadwigerNelson.Plane.re_eq_zero_of_mem_segment_neg_I
+#print axioms HadwigerNelson.Plane.halfPlane2_mem_interiorPts
+#print axioms HadwigerNelson.Plane.halfPlane2_im_eq_zero_of_mem_Γ
+#print axioms HadwigerNelson.Plane.exists_sin_ne_zero_of_lt
+#print axioms HadwigerNelson.Plane.halfPlane2_not_isRingArc
+#print axioms HadwigerNelson.Plane.halfPlane2_isChangePoint
+#print axioms HadwigerNelson.Plane.quadRing_mem_interiorPts
+#print axioms HadwigerNelson.Plane.quadRing_ringPt_mem_Γ
+#print axioms HadwigerNelson.Plane.quadRing_col_first
+#print axioms HadwigerNelson.Plane.eventually_first_quadrant
+#print axioms HadwigerNelson.Plane.quadRing_first_mem_region
+#print axioms HadwigerNelson.Plane.dist_scale_e
+#print axioms HadwigerNelson.Plane.quadRing_isRingArc
+#print axioms HadwigerNelson.Plane.quadRing_coloursAt_zero
+#print axioms HadwigerNelson.Plane.quadRing_isQArc
+#print axioms HadwigerNelson.Plane.upperDensityAt_empty
+#print axioms HadwigerNelson.Plane.upperDensityAt_univ
+#print axioms HadwigerNelson.Plane.const_ball_isTile_iff
+#print axioms HadwigerNelson.Plane.cellIndex_eventually_eq
+#print axioms HadwigerNelson.Plane.cellIndex_jump
+#print axioms HadwigerNelson.Plane.cellIndex_six
+#print axioms HadwigerNelson.Plane.cellIndex_nine
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
