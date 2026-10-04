@@ -427,3 +427,62 @@ hypotheses of the three theorems (our own unproved results enter as hypotheses, 
   (F2)".
 
 The report is `data/fs131/reports/FS131-W.md`; its text is the job's hand-back.
+
+---
+
+*Stages 6 on: job **FS131-W2** (de Bruijn, the planner; Opus 5.5), 2026-10-04 from 10:55 UTC. Brief `data/fs131/briefs/FS131-W2-woodall-replan.md`
+(on `main`) with `plans/STANDING-RULES.md` and `LEAN.md`, read in full, and `RUNNING.md` § Building. Resuming check (standing rule 2): this record's
+last SAVED stage is 5, matching `git log` (`9b82b6e4`, then `7aaaf2c4` the report's commit list); W2 continues at stage 6 and redoes nothing saved.
+Same worktree and branch (`fs131-ww`). Report: `data/fs131/reports/FS131-W2.md`. Working files: `data/fs131/w2/`.*
+
+## Stage 6 — SAVED: FS131-W2's readback
+
+### 6.1 The brief's quotations against their sources (standing rule 3)
+
+| quotation in the brief | source | result |
+|---|---|---|
+| "waits for FS131-E1. If E1 closes the GAPs, the chain lands unconditionally; if not, it lands with the open steps as named propositions — hypotheses of" | `plans/FS131-close-inventory.md` (main) item 98 | **matches** verbatim (a prefix-cut substring of the item; the brief says so with "that ruling is item 98") |
+| E1-NO45's statement ("in a five-colour almost-everywhere-proper arc map in Woodall's normal form, no point lies on the boundary of exactly four or exactly five sectors") | `plans/FS131-E1-derivation.md` § 3.6, `statement:` line | **matches** |
+| E1-NOBRANCH's statement ("in an almost-everywhere-proper arc map satisfying (N1), with any finite number of colours, some point lies on the boundary of three or more sectors") | § 3.7, `statement:` line | **matches** |
+| E1-MAPS6's statement ("no five-colour almost-everywhere-proper arc map in Woodall's normal form exists") | § 3.8, `statement:` line | **matches** |
+| E1-NO45's handoff ("de Bruijn — replaces the open leaves `step5_eq` and `step7` (and the held step 8, which is no longer needed) …") | § 3.6, `handoff:` line | **matches** |
+| E1-NOBRANCH's handoff ("de Bruijn — the last step of FS106-AE-MAP6 over ArcMap; it needs the Jordan curve theorem for arc curves …") | § 3.7, `handoff:` line | **matches** |
+| items 106–107 (glossed: E1-NO45 at one mind; Kooshi asked about a blind second mind; the kernel the default second check) | inventory items 106, 107 | the glosses agree ("**Held for Kooshi**: a blind second mind on E1-NO45 before de Bruijn formalizes it, or the kernel as the second check (Workflow 3.1's default)") |
+
+No mismatch; no finding about the brief.
+
+### 6.2 The chain as E1 restores it
+
+> In such a map every boundary point has two to five sectors (N1, five colours). Step 6 excludes three, E1-NO45 excludes four and five, so there is no
+> branch point, against E1-NOBRANCH. ∎
+> — source: `plans/FS131-E1-derivation.md` § E1-MAPS6, the argument
+
+> uses only: (N1), which bounds the sectors at a point by five; step 6 (FS106-WO, held: no point of three sectors); E1-NO45 (none of four or five); E1-NOBRANCH; and through E1-NO45, strict step 5
+> — source: § 3.8, E1-MAPS6's `uses only:` line
+
+with E1-NO45's lemmas E1-SEE (§ 3.1), E1-RAY (§ 3.2), E1-CROSS (§ 3.3), E1-COVER (§ 3.4), E1-BAD (§ 3.5), and E1's normal form (§ 3.0): **(N1)** at
+every boundary point the sectors carry pairwise distinct colours; **(N2)** at every branch point every sector has angle at least `π/3` (strict step 5).
+So, on W's skeleton: FS106-AE-MAP6 = step 3 (`exists_woodallMerged`) + strict step 5 (`step5_lt`, giving the normal form with angles `≥ π/3`) + step 6
+(`step6`) + E1-NO45 + E1-NOBRANCH. No step reads an angle equal to `π/3` (E1-Q1's handoff), and nothing of Woodall's steps 7–8 is used.
+
+### 6.3 W's leaves (§ 4.5): what stays, goes, or changes
+
+| leaf (W's § 4.5) | fate | why |
+|---|---|---|
+| every leaf of `Plane/Woodall/Collar` (15), and Engines A–D (§ 4.1) | **stay** | `woodall_step4` (Engine C), `townsend_lemma` (Engines A, B, D) and the shadow lemmas are still consumed (step 5, step 6) |
+| `exists_sectorsAt`, `SectorsAt.coloursAt_eq`, `exists_woodallMerged`, `step5_lt`, `aeMap6`, `woodall_thm6` | **stay** | unchanged statements and routes |
+| `step5_eq` (open, Q1) | **goes** | E1-Q1: no step of the restored chain reads an angle equal to `π/3` |
+| `step7` (open, Q2), `step8` | **go** | replaced by E1-NO45 (E1-Q2; step 8 "no longer needed") |
+| `step5_eq_of_condition5`, `aeMap6_merged_of_condition5` | **go** (W2's decision) | they served only `aeMap6_of_condition5`, which becomes a corollary of `aeMap6` (E1-MAPS6's handoff: "the Condition-5 form becomes a corollary"); nothing else consumes them |
+| `ArcMap.WoodallNormal` (definition, `Woodall/Basic`) | **changes**: angles `π/3 ≤`, not `π/3 <` | E1's (N2) is "at least `π/3`" (strict step 5 only); the strict form needed `step5_eq` |
+| `step6` | **changes** its hypothesis `hang` to `π/3 ≤` | it is now applied at a point of E1's normal form (angles `≥ π/3`); W's route for it reads only positivity and one angle `< 2π/3` (§ 4.5's row), so the weaker hypothesis costs nothing |
+| `aeMap6_merged` | **changes** its route | merged ⇒ normal by `step5_lt` alone (W's horn chain, minus `step5_eq`) |
+| `aeMap6_normal` | **changes** its route | degree 3: `step6`; degrees 4–5: E1-NO45 (in place of `step7`, `step8`) |
+| `aeMap6_of_condition5` | **changes** its route | `aeMap6` (Condition 5 unused); statement unchanged |
+| `exists_three_le_sectors` | **stays**, read back as **E1-NOBRANCH** | § 7.4 (the Jordan decision) |
+| the second-order lemma (W's § 4.1, unstated, priced M+) | **changes**: stated, in its refined form | it now also carries E1-BAD's edge case (§ 7.2) |
+
+### 6.4 The worktree builds as W left it
+
+At `7aaaf2c4`: `./scripts/build.sh` under the slot (40 GiB, 8 cpus, `BATCH=4`), from inside the worktree: **OK — all 1744 modules already up to date,
+nothing built, 13 module(s) with warnings**, 2 s, exit 0 (`build/gate/build/20261004T111525Z-3004683.log`; driver log `data/fs131/w2/build-stage1.log`).
