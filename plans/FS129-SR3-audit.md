@@ -16,6 +16,8 @@ with its § Amendment, 2026-10-03 (commit `520b2a0c`, item (d)). Plan: `plans/FS
   colours has a Γ-free ring (FS116-V6's route reads no simplicity once V6-COUNT's last step is read on sectors) — hand — § 2.2.
 - **FS129-SR3-QFREE-NS** — FS129-OR1-QFREE with "simple" dropped (no non-Siamese fragment of that kind has a (Q)-free ring); FS116-S1-QF is its case
   with no "simple at p" step — derived from FS129-SR3-EMPTY-NS, FS129-OR1-QFREE-CLASS — § 2.2.
+- **FS129-SR3-OUTERADJ** — FS116-V6-ADJ widened, DOUBLETIP's mirror: two change points 60° apart whose outer germs off the shared arc are free of (Q)
+  arcs never share their only outer colour; non-Siamese, no simplicity read — hand — § 3.
 
 ## Stage 1 — SAVED: readback, registered expectations, item (a)
 
@@ -244,3 +246,86 @@ derivation: FS129-SR3-QFREE-NS
   FS116-Y4-EMPTY's double-tip step on route 2)"): DOUBLETIP identifies its flank tile by a cone interval at `y` and `y′` (its step 3: "`R`'s cone — one
   interval (simple)"), so an EMPTY formalized through DOUBLETIP needs simplicity at the hubs and does not give FS129-SR3-EMPTY-NS. V6-HUG's own step (by
   colour, through V6-GERM) does. Formalize V6-HUG's argument for the Γ-free ring, and DOUBLETIP for the wider ring classes it serves.
+
+## Stage 3 — SAVED: item (b) — a wider V6-ADJ, DOUBLETIP's mirror on the outer side
+
+**Read:** `plans/FS116-derivation.md` FS116-V6-ADJ, -V6-HUG, -RING-GERM, -N1-GERM-R, -N2-STAR; `plans/FS116-V6-verification.md` §§ 2.2 (V6-GERM,
+V6-HUG), 2.3 item 2 (the adjacency rule); `plans/FS129-MR1-audit.md` § Mechanism 1 (DOUBLETIP, the model) and § Mechanism 3a; `plans/FS129-SR1-audit.md`
+§ 3.1 (TWOCIRC, whose last line names V6-ADJ's arcs "the same statement for the apex `p′ = y₀ + y₁ − p` of the other Reuleaux triangle");
+`data/fs116/claims.md` l. 183 (outer tile, outer pair `{u⁻, v⁺}`, tip pair `{v⁻, u⁺}`).
+
+**What V6-ADJ carries.** Its `uses only:` is V6-DICH and the identity with both arcs run outward; its class (a Γ-free ring) is never read, and its
+"hug" is a hypothesis. So as stated it is TWOCIRC at the mirror apex plus non-Siamese, at any two points 1 apart — and, its class being empty
+(FS116-Y4-EMPTY), SR1 listed it "do not formalize as stated". The wider form must *derive* the hugging. DOUBLETIP's shape transfers: there a sole
+shared tip fills both tip cones (RING-GERM (i)) and is pinned by the diameter bound; here a sole outer colour fills both outer cones (RING-GERM (ii)),
+its two tiles are distinct and so pinned out of each other's point's disc, and the tiles beyond them are pinned in by the ring's germs. The mirror of
+"one tile" is "one colour, two tiles": one tile cannot fill both outer cones (they face apart: check 1a below).
+
+derivation: FS129-SR3-OUTERADJ
+  statement: in a non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) and
+    y′ = r(ψ + 60°) be change points of the ring such that neither the arc of ω(p) just counter-clockwise of r(ψ − 60°) nor the arc just clockwise of
+    r(ψ + 120°) lies on a (Q) arc; then no colour of p is at once the only colour carried at y by a tile that is not a tile of p and the only colour
+    carried at y′ by a tile that is not a tile of p
+  uses only: FS116-RING-GERM (ii) at y (outer pair u⁻, v⁺) and at y′ (u′⁻, v′⁺) — u⁻ (the ring just clockwise of y′) and v′⁺ (just counter-clockwise
+    of y) are off Γ because y′ and y are change points, the other two by hypothesis — and its first clause (p has four colours, X and X̄ absent);
+    V6-GERM's neighbourhood form at y from the germs u⁻ (colour X) and u⁺ (colour X̄), and at y′ from v′⁺ (X) and v′⁻ (X̄), all off Γ (the argument of
+    FS116-N1-GERM-R, which reads only N-E1 and the germs' colours); the germs' colours from validity (ring points 60° apart differ, two absent colours);
+    non-Siamese (one tile per colour at a point; distinct tiles of one colour have no closure points below 1 apart, FS116-V4-DICHOTOMY); the diameter
+    bound; FS129-SR1-TWOCIRC at the mirror apex y + y′ − p; six colours, spent in RING-GERM and in the colour of the tile beyond the outer tile
+  not claimed: anything when y or y′ carries two or more outer colours (the tile beyond the outer tile may then be outer and unpinned: tangent segments
+    stay exactly 1 apart, plant --fault-tangent); anything when the arc just counter-clockwise of r(ψ − 60°) or just clockwise of r(ψ + 120°) lies on a
+    (Q) arc (RING-GERM (ii) is then unavailable); the Siamese class; anything at k ≥ 7 (a third absent colour leaves the tile beyond unpinned, plant
+    --fault-seven); that y or y′ has a single tip
+  converse: one-way — a non-existence; "the only" names the hypothesis, not a characterization
+  argument: § 3.1 Argument for FS129-SR3-OUTERADJ
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none can exist (a non-existence, hypothetical by design); the hypotheses without the shared colour are met at a four-colour hub whose neighbour
+    has another outer colour — no held fragment has two change points 60° apart (as for DOUBLETIP); FS116-V6's stage-1 candidate (outer colours 2, 3 at
+    y_0 and 2 at y_1, `plans/FS116-V6-verification.md` § 2.3 item 1) shows the rule at work: its builder gave y_0 a second outer colour because of it
+  prior art: owed — an in-house composition; its last step is FS116-V6-ADJ's and FS114-Y5-PXKILL's mechanism (G83's straddle), unsearched outside
+  handoff: de Bruijn — the statement and its not claimed, over RING-GERM (ii), V6-GERM's neighbourhood form and TWOCIRC; it carries FS116-V6-ADJ's
+    argument as its last step, so V6-ADJ is formalized class-free (two distinct same-colour tiles holding the two lens arcs beyond a unit pair) or
+    not at all
+
+control: fs129-sr3-outeradj
+  of: FS129-SR3-OUTERADJ — the cone facts at y and y′ (interval arithmetic), the colour step, and the mirror arcs below 1 (identity exact, grid by intervals)
+  run: python3 ../tools/fs129_sr3_outeradj.py
+  expect: outeradj: cones ok; colour ok; arcs ok
+  fault: python3 ../tools/fs129_sr3_outeradj.py --fault-tangent
+
+control: fs129-sr3-outeradj-seven
+  of: FS129-SR3-OUTERADJ — the colour step spends six: with a third absent colour the tile beyond the outer tile is not forced to be X
+  run: python3 ../tools/fs129_sr3_outeradj.py
+  expect: outeradj: cones ok; colour ok; arcs ok
+  fault: python3 ../tools/fs129_sr3_outeradj.py --fault-seven
+
+### 3.1 Argument for FS129-SR3-OUTERADJ
+
+Put `ψ = 0`: `p = 0`, `y = e(0°)`, `y′ = e(60°)`, `p′ = y + y′`. By RING-GERM `p` has four colours, `X`, `X̄` absent; `X` is the ring colour just
+counter-clockwise of `y` and `X̄` just clockwise. The germs just clockwise and just counter-clockwise of `y′` are off `Γ` (a change point) and `60°` from
+those of `y`, so they carry `X` and `X̄` respectively (ring points `60°` apart are 1 apart, and only two colours are absent). Suppose `o` is the only
+outer colour at `y` and at `y′`.
+1. *Two tiles.* RING-GERM (ii) at `y` (its outer pair: `u⁻` off `Γ`, `v⁺` by hypothesis) puts every direction of `(−30°, 30°)` in the cone of an outer
+   tile; all have colour `o`, and one tile of each colour is at `y`: one tile `O`. Likewise one tile `O′` of colour `o` fills `(30°, 90°)` at `y′`. The
+   points `y + s e(θ)`, `θ ∈ (−30°, 30°)`, lie outside `B̄(y′)` (`|y + s e(θ) − y′|² = 1 + s² − 2s cos(θ − 120°) > 1`; check 1a), so `O ⊄ B̄(y′)` and
+   `O ≠ O′` (a tile holding `y′` lies in `B̄(y′)`). Non-Siamese: `O` misses `B(y′)` and `O′` misses `B(y)`.
+2. *The outer tiles end at the lens arcs.* `O`'s directions at `y` lie where `y + s e(θ)` stays out of `B(y′)`, the closed range `[−150°, 30°]`; the
+   sector of `O` holding the directions just below `30°` therefore ends at `30°`. Let `N` be the tile whose sector follows it counter-clockwise. Its points
+   `y + s e(30° + η)` lie in `B(y′)` and outside `B̄(p)` (check 1b), so `N ≠ O`, `N` is not a tile of `p` (a tile of `p` lies in `B̄(p)`), its colour is
+   not `o`, and not another colour of `p` (that would be a second outer colour at `y`); not `X̄` (V6-GERM from `u⁺`: `X̄`-tiles near `y` avoid `B(y′)`).
+   So `N` has colour `X`, and near `y` the `X`-tiles lie in `B̄(y′)` (V6-GERM from `u⁻`). The common boundary of `O` and `N` leaving `y` lies in
+   `cl O ∩ cl N ⊆ (ℝ² ∖ B(y′)) ∩ B̄(y′) = ω(y′)`: `cl O` holds an arc of `ω(y′)` from `y`, leaving in direction `30°` — toward `p′`. At `y′`, with the roles
+   turned: `O′`'s sector ends at `30°` clockwise; the tile `N′` before it has points `y′ + s e(30° − η)` in `B(y)` and outside `B̄(p)` (check 1c); it is not
+   `X̄` (V6-GERM from `v′⁻`, the ring just clockwise of `y`: `X̄`-tiles near `y′` avoid `B(y)`), so it is `X`, which near `y′` lies in `B̄(y)` (from `v′⁺`);
+   `cl O′` holds an arc of `ω(y)` from `y′` toward `p′`.
+3. *The straddle at the mirror apex.* With `a(s) = y + e(120° − s)` (on `ω(y)` from `y′` toward `p′`) and `b(t) = y′ + e(t − 60°)` (on `ω(y′)` from `y`
+   toward `p′`), FS129-SR1-TWOCIRC gives `|a(s) − b(t)|² − 1 = −8 sin(s/2) sin(t/2) cos((s + t)/2) < 0` for small `s, t > 0` (check 3). So `cl O′` and `cl O`
+   hold points below 1 apart, and FS116-V4-DICHOTOMY makes the distinct tiles `O`, `O′` of colour `o` near — against non-Siamese. ∎
+
+No step reads "simple": every identification is by colour and disc, none by a cone interval (contrast DOUBLETIP's step 3). *Look-back.* Foreseeable from
+TWOCIRC's last line; it is the outer-side twin of DOUBLETIP, with RING-GERM's two pairs exchanged. In FS-124's terms (its recurrence: a hub of four colours
+carries `X`, `X̄`, one tip colour and one outer colour), **two adjacent four-colour hubs whose outer germs off the shared arc are free carry different
+outer colours** — and, by DOUBLETIP (its tip germs free), different tips. A pruning rule for case 5's ring types; a line for FS129-Z2's bearing on
+`plans/STUB-q-ring.md`.
