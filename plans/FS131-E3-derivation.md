@@ -84,3 +84,48 @@ Because this was found before the registration, Q1 *as stated* carries no regist
 | E3-P4 | `aeMap6` needs the merged form only on `closedBall 0 3` and only at points of at least three colours, with edits to `aeMap6_merged`, `aeMap6_normal` and `false_of_four_le_sectors` and no new mathematics | 0.95 | which statement the planner states in place of `exists_woodallMerged` |
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: recognition (`ephodos-recognition`, invoked fresh)
+
+**The stall, read.** Two of the skill's shapes at once. *A known theorem that almost applies*: FS110-W-MERGE is step 3 with two minds, but in `𝓜_K`,
+under Condition 5, by contacts on `ω(v)` (the allowed cone `D_c(v)`), and with the horn end sandwiched by N3-UP; the Lean statement assumes none of
+the first three. *A wall that describes a counterexample*: Woodall's cone, where merging fails. And a third, found in Stage 1: the conclusion as stated
+is unsatisfiable (phantom horns), so the target itself must be re-posed before any route is priced.
+
+**For a stranger** (a plane geometer, and an analyst who works on feasible sets): the plane is cut by a locally finite family of segments and circular
+arcs into open cells, each given one of `k` colours, so that no two points of open cells of one colour are exactly 1 apart. At a point `v` each colour
+approaches along a closed set of directions (its cone), a finite union of closed arcs. A colour is *badly placed* at `v` when it approaches along two
+separated arcs of positive length, or when another colour pokes into the inside of its arc along a single direction. Unknown: a recolouring inside small
+discs about finitely many points that leaves no badly placed colour at any point of a given compact set and keeps the no-unit-pair property. *This is a*
+local saturation of one colour class across a wedge, and its clearance question — is the wedge at distance `≠ 1` from the class? — is the question
+"does a unit circle through a point of the wedge cross the class near `v`?"
+
+**Features, sorted** (receipts in Stage 3's entries):
+| feature | sort | receipt |
+|---|---|---|
+| Condition 5 | accompanies | E3-W reads none of it; W-MERGE used it for finitely many contacts and for the cone's strictness, and neither is read by the merge the chain needs |
+| the contacts of `c` on `ω(v)` and the cone `D_c(v)` | accompany for merges between two positive-angle sectors; determine only for merging a horn | E3-W runs with two open ray segments and `ω(v) ∩ S = ∅` alone |
+| "repeated colours sit on horns" (Woodall's conclusion) | accompanies for the chain | the chain kills every horn whose neighbours differ (`step5_lt`), so it needs only "positive sectors carry distinct colours, and every horn sits between distinct colours" (E3-NICE) |
+| the gap between the two sectors is `< π` | determines E3-W | the sagitta bound `r₁ cos(α/2) − r₁²` vanishes at `α = π`; control `e3-sagitta` |
+| every point of the plane | accompanies | `aeMap6` reads the picture at the point `ts_t` finds (`|v| < 1/√2 + 1`) and at one point of `ω(v)`: `closedBall 0 3` (E3-CHAIN) |
+| "every picture" in `WoodallMerged` | determines the vacuity | E3-PHANTOM |
+
+**Homes.** (H1) *Woodall's own criterion*, p. 197: "each unit circle through Q, except for those through P, passes through X or Y" — the old proof
+applies at once to two sectors of positive angle; made quantitative by the sagitta of a unit circle in a small disc, it is E3-W, and the exceptions
+vanish: no cone, no contacts, no Condition 5, and the same lemma removes a horn of another colour poking into a sector (a neighbour it predicts).
+(H2) *Feasible sets under a constraint qualification* (nonsmooth analysis): the clear set near `v` is the feasible set of the semi-infinite system
+`|z − y| ≠ 1, y ∈ S near ω(v)`, its linearized cone is `D_c(v)`, and `int D_c(v) ≠ ∅` is Mangasarian–Fromovitz's condition; this is W-MERGE's mechanism, and
+the horn end is the second-order case where the qualification direction `n` propagates feasibility (N3-UP). It is needed only to merge a horn with a
+sector, which the chain does not need. (H3) *This project's contact theory* (G84: a saturated class is carved by unit circles about its own points): the
+merge is a local saturation; it adds no theorem the first two lack. **Adopted: H1**, carried across as E3-W with the one changed step named — Woodall's
+"angle less than π" becomes an explicit radius `r₁ cos(α/2)/2`, proved by the sagitta, and his exception "except for those through P" is E1-SEE
+(no point of the class on `ω(v)`).
+
+**The class.** E3-W holds for any open set `S` with no unit pair and any point `v` with `ω(v) ∩ S = ∅`: no colouring, no map, no arcs.
+
+**Prior art.** `[Woodall1973]` p. 197, step 3 (read, page image) — the criterion, asserted without a computation; FS110-W-MERGE (this project, two minds,
+Condition 5, contacts); E1-RAY (this project) uses the same first-order picture. The sagitta form and the reduction to "positive sectors distinct, horns
+between distinct colours" not found in print; no new search run (the object is a lemma inside a held proof; FS131-E1's queries of 2026-10-04 covered
+Woodall's step 3 and its repairs).
+
+## Stage 2 — SAVED
