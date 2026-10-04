@@ -2161,9 +2161,37 @@ No native evaluation. -/
 
 /-! ## FS-131 wave 3 (job FS131-I3c) — the implementer's added children and the rows' leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.IsJordanDomain.local_connected
+#print axioms HadwigerNelson.Plane.e_mul_e_sub_pi
+#print axioms HadwigerNelson.Plane.mul_e_of_arg
+#print axioms HadwigerNelson.Plane.arg_side
+#print axioms HadwigerNelson.Plane.arg_near
+#print axioms HadwigerNelson.Plane.exists_shift_Ico
+#print axioms HadwigerNelson.Plane.periodic_int
+#print axioms HadwigerNelson.Plane.exists_angleIcc_of_no_gap
+#print axioms HadwigerNelson.Plane.isClosed_coneAt
+#print axioms HadwigerNelson.Plane.mem_coneAt_of_mem_isOpen
+#print axioms HadwigerNelson.Plane.coneAt_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.IsJordanDomain.coneAt_eq_angleIcc
+#print axioms HadwigerNelson.Plane.ArcMap.e_third_eq
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.not_mem_closure_of_side
+#print axioms HadwigerNelson.Plane.ArcMap.dist_ringPt_third
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.not_mem_closure_third
+#print axioms HadwigerNelson.Plane.ArcMap.carries_absent
+#print axioms HadwigerNelson.Plane.ArcMap.subsingleton_e_eq
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_regularAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_regular_germ
+#print axioms HadwigerNelson.Plane.ArcMap.finite_not_regular
+#print axioms HadwigerNelson.Plane.ArcMap.absent_subsingleton
+#print axioms HadwigerNelson.Plane.ArcMap.exists_regular_pair
+#print axioms HadwigerNelson.Plane.ArcMap.qOpen_subset
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_qOpen
+#print axioms HadwigerNelson.Plane.ArcMap.qOpen_periodic
+#print axioms HadwigerNelson.Plane.ArcMap.qOpen_of_regular
+#print axioms HadwigerNelson.Plane.arcLength_apply
+#print axioms HadwigerNelson.Plane.arcLength_preimage_add_periodic
 #print axioms HadwigerNelson.Plane.ArcMap.mem_angleIcc_of_cos_nonneg_single
 #print axioms HadwigerNelson.Plane.ArcMap.cos_nonneg_of_mem_coneAt
-#print axioms HadwigerNelson.Plane.ArcMap.isClosed_coneAt
 #print axioms HadwigerNelson.Plane.ArcMap.e_sigma_half
 #print axioms HadwigerNelson.Plane.ArcMap.initialPiece_cases
 #print axioms HadwigerNelson.Plane.ArcMap.sq_norm_pieceB
