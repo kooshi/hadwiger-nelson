@@ -969,6 +969,38 @@ Contact 10, UnitArc 5), no other warning. `tools/fs131_k4_decls.py --check` exit
 was the reusable cost. The base's five (`pair_i`, `pair_ii`, `fail_*`, `anti`) share (a)–(d) above, priced at one session for (a)–(e) plus
 `fail_leavingCentre`, then about one leaf per 40k.
 
+## Stage 29 — SAVED (FS131-I4k): readback, the as-given build
+
+*FS131-I4k (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4k-wave4.md` on `main`) continues this record from `cd0fe492`.
+Inventory ruling 194: this job takes `BaseSteps` and `UnitArc` only (11 leaves); `Contact` (10 `sorry` lines) is FS131-IC4's on `fs131-w4c`, and
+`Contact.lean` is not edited here except by merging that branch.*
+
+**The brief's quotations against their sources** (standing rule 3). The brief says "six"; it carries seven quotation blocks: (1) "**It may**: add children
+anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md`
+§ 14.2 (line 887): **matches as a truncation**. (2) "**What is left (11 in this job's files: UnitArc `bend_toward`, `bend_away`, `flankQ_upper`, `flankQ_lower`,
+`nb4p`; BaseSteps `pair_i`, `pair_ii`," — this record, Stage 28 (line 933): **matches as a truncation**. (3) "- **`fail_leavingCentre`** (S–V Prop. 10's place,
+by votes). (a) A new `localSectors_disj` in `Plane/LocalStructure`: `localSectors`' proof already establishes" — Stage 28 (line 935): **matches as a truncation**.
+(4) item 194 — `plans/FS131-close-inventory.md` on `main` (line 1358): **matches as a truncation**. (5) item 244 — same file (line 1751): **matches as a
+truncation**; its continuation (ruling (b), `localSectors_disj` in `Plane/LocalStructure` with `localSectors` re-derived, statement unchanged; (c) run Stage 28's
+step (iii) and report at once if it fails) is as the brief summarizes it. (6) item 177 — same file (line 1229): **matches as a truncation**. (7) item 185 —
+same file (line 1300): **matches as a truncation**. The source headings the brief gives for (2)–(3) are this record's Stage 28 heading, verbatim. No
+mismatch but the count (seven blocks, not six).
+
+**What I may change** (§ 14.2, unchanged since Stage 1, with ruling 244 (b)): add children anywhere in the wave's modules (engines in `Basic`, sorry-free, with
+spec examples; every child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`,
+wave 1's `Plane/Chord`, `Diameter`, `Basic`), statements unchanged; in `Plane/LocalStructure`, the new `localSectors_disj` with `localSectors` re-derived from it
+(statement unchanged); imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then `tools/fs131_k4_decls.py --check`);
+wave 4's vacuity carriers at the gate (`AeProperRegions` registered, item 144). **What I may not change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s
+clause 3 in its ruled local form, item 177; `l60_eq_third`'s binder `_hF`, item 185; `pair_P'`'s `_h`, item 244 (a)); any definition of `Plane/ValidMap/Basic`;
+the fragments' definitions but for a coordinate slip found against the source tool (a finding); the read-backs' conventions; TS-T's Condition-5 clause in its
+carried form (item 142); no new `axiom`, no `native_decide`; `Contact.lean` (ruling 194) except by merging the parallel branch. A leaf that cannot be proved
+as written goes to Keryx at once. No edit while a build of the edited file runs. A merge commit is the one commit made without paths.
+
+**The worktree as given** (`cd0fe492`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — all
+1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T212339Z-2513792.log`; driver log
+`data/fs131/i4/build-i4k-readback.log`). 21 `declaration uses sorry` warnings — BaseSteps 6, Contact 10, UnitArc 5 — and no other warning. This job's scratch
+mirror for `iter.sh`/`chk.sh`/`errs.sh` is `S=/home/kooshi/scratch-w4k`.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
