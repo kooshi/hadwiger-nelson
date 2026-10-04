@@ -3155,10 +3155,130 @@ theorem chiM0_le_chiCP : chiM0 ≤ chiCP := by
   have hmeas : Measurable (ct f) := hct.comp (measurable_const.prodMk measurable_id)
   exact chiM0_le ⟨ct f, hmeas, hf⟩
 
+/-- A null set of the plane meets almost every unit circle in an arc-null set (Fubini on `(x, θ) ↦ x + e θ`). -/
+theorem ae_arcLength_null {N : Set ℂ} (hN : MeasurableSet N) (h0 : volume N = 0) :
+    ∀ᵐ x ∂volume, arcLength {θ | x + e θ ∈ N} = 0 := by
+  set S : Set (ℂ × ℝ) := {p | p.1 + e p.2 ∈ N} with hS
+  have hSm : MeasurableSet S := (measurable_fst.add (continuous_e.measurable.comp measurable_snd)) hN
+  have hz : (volume.prod arcLength) S = 0 := by
+    rw [Measure.prod_apply_symm hSm]
+    have : ∀ θ : ℝ, volume ((fun x => (x, θ)) ⁻¹' S) = 0 := by
+      intro θ
+      have : (fun x => (x, θ)) ⁻¹' S = (· + e θ) ⁻¹' N := rfl
+      rw [this, measure_preimage_add_right]; exact h0
+    simp [this]
+  exact (Measure.measure_prod_null hSm).1 hz
+
 /-- **FS106-EQ**, (a) ⟺ (c), and FS106-COMP's first clause as (c) ⟹ (a) at every `k` (SR2 item 11):
 `χ_m⁰(ℝ²) ≤ k ⟺ µ_k⁰ = 1`. -/
 theorem chiM0_le_iff_muZero_eq_one (k : ℕ) : chiM0 ≤ k ↔ muZero k = 1 := by
-  sorry
+  classical
+  constructor
+  · intro hk
+    obtain ⟨c, -⟩ := exists_tight_iff_chiM0_le.2 hk
+    exact le_antisymm (muZero_le_one k) (one_le_muZero c)
+  intro h1
+  obtain ⟨C, hCP, hhole⟩ := exists_translates_small_hole (P := fun C : Fin k → Set ℂ => ∀ j, UnitPairsNull (C j))
+    (fun C v hC j => unitPairsNull_preimage_add (hC j) v) h1
+  set g : ℕ → Fin k → ℂ → ℝ := fun m j => (C m j).indicator 1 with hgdef
+  have hgm : ∀ m j, Measurable (g m j) := fun m j => measurable_const.indicator ((hCP m).1.1 j)
+  have hg01 : ∀ m j x, 0 ≤ g m j x ∧ g m j x ≤ 1 := fun m j x => by
+    by_cases hx : x ∈ C m j <;> simp [hgdef, hx]
+  obtain ⟨σ, F, hσ, hFm, hF01, hw⟩ := exists_weakStar_subseq g hgm hg01
+  have hsum : ∀ᵐ x ∂volume, ∑ j, F j x = 1 :=
+    ae_sum_eq_one_of_weakStar (C := fun m => C (σ m)) (fun m => (hCP (σ m)).1) (fun R => (hhole R).comp hσ.tendsto_atTop)
+      hFm hw
+  have hUm : ∀ A : Set ℂ, MeasurableSet A → MeasurableSet (unitPairSet A) := fun A hA =>
+    (measurable_fst hA).inter ((measurable_fst.add (continuous_e.measurable.comp measurable_snd)) hA)
+  -- the unit form of each `g m j` vanishes
+  have hgz : ∀ m j R, ∫ x in ball (0 : ℂ) R, g m j x * ∫ θ in Ico 0 (2 * Real.pi), g m j (x + e θ) = 0 := by
+    intro m j R
+    have hsl := (Measure.measure_prod_null (hUm _ ((hCP m).1.1 j))).1 ((hCP m).2 j)
+    refine integral_eq_zero_of_ae ?_
+    filter_upwards [ae_restrict_of_ae hsl] with x hx
+    by_cases hxC : x ∈ C m j
+    · have hin : ∫ θ in Ico 0 (2 * Real.pi), g m j (x + e θ) = 0 := by
+        refine integral_eq_zero_of_ae ?_
+        refine measure_mono_null (fun θ hθ => ?_) hx
+        simp only [Pi.zero_apply] at hθ
+        by_cases h1 : x + e θ ∈ C m j
+        · exact ⟨hxC, h1⟩
+        · exact absurd (by simp [hgdef, h1]) hθ
+      simp [hin]
+    · simp [hgdef, hxC]
+  -- the unit form of each `F j` vanishes, and pointwise
+  have hFb : ∀ j, ∀ᵐ x ∂volume, |F j x| ≤ 1 := fun j => (hF01 j).mono fun x hx => by
+    rw [abs_le]; constructor <;> linarith [hx.1, hx.2]
+  have hNj : ∀ j, MeasurableSet {y | ¬ (0 ≤ F j y ∧ F j y ≤ 1)} := fun j =>
+    ((measurableSet_le measurable_const (hFm j)).inter (measurableSet_le (hFm j) measurable_const)).compl
+  have hcirc : ∀ j, ∀ᵐ x ∂volume, ∀ᵐ θ ∂arcLength, 0 ≤ F j (x + e θ) ∧ F j (x + e θ) ≤ 1 := by
+    intro j
+    filter_upwards [ae_arcLength_null (hNj j) (ae_iff.1 (hF01 j))] with x hx
+    exact ae_iff.2 hx
+  have hF0 : ∀ j, ∀ᵐ x ∂volume, F j x * ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ) = 0 := by
+    intro j
+    have hTm : AEStronglyMeasurable (fun x => ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ)) volume :=
+      AEStronglyMeasurable.integral_prod_right' (f := fun p : ℂ × ℝ => F j (p.1 + e p.2))
+        ((hFm j).comp (measurable_fst.add (continuous_e.measurable.comp measurable_snd))).aestronglyMeasurable
+    have hball : ∀ n : ℕ, ∀ᵐ x ∂(volume.restrict (ball (0 : ℂ) n)),
+        F j x * ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ) = 0 := by
+      intro n
+      have hlim := unitForm_tendsto (g := fun m => g (σ m) j) (fun m => hgm _ j) (fun m x => hg01 (σ m) j x)
+        (hFm j) (hF01 j) (hw j) n
+      have hz : ∫ x in ball (0 : ℂ) n, F j x * ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ) = 0 := by
+        refine tendsto_nhds_unique hlim ?_
+        simp only [hgz]
+        exact tendsto_const_nhds
+      refine (setIntegral_eq_zero_iff_of_nonneg_ae ?_ ?_).1 hz
+      · filter_upwards [ae_restrict_of_ae (hF01 j), ae_restrict_of_ae (hcirc j)] with x hx hxc
+        exact mul_nonneg hx.1 (integral_nonneg_of_ae (hxc.mono fun θ hθ => hθ.1))
+      · refine Measure.integrableOn_of_bounded measure_ball_lt_top.ne ((hFm j).aestronglyMeasurable.mul hTm)
+          (M := 1 * (2 * Real.pi)) ?_
+        filter_upwards [ae_restrict_of_ae (hFb j), ae_restrict_of_ae (hcirc j)] with x hx hxc
+        rw [norm_mul, Real.norm_eq_abs]
+        refine mul_le_mul hx ?_ (norm_nonneg _) zero_le_one
+        have := norm_integral_le_of_norm_le_const (μ := arcLength) (C := 1) (f := fun θ => F j (x + e θ))
+          (hxc.mono fun θ hθ => by rw [Real.norm_eq_abs, abs_le]; constructor <;> linarith [hθ.1, hθ.2])
+        refine this.trans_eq ?_
+        simp [arcLength, Measure.real, Real.volume_Ico, Real.pi_pos.le]
+    have hall : ∀ᵐ x ∂volume, ∀ n : ℕ, x ∈ ball (0 : ℂ) n → F j x * ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ) = 0 :=
+      ae_all_iff.2 fun n => (ae_restrict_iff' measurableSet_ball).1 (hball n)
+    filter_upwards [hall] with x hx
+    obtain ⟨n, hn⟩ := exists_nat_gt ‖x‖
+    exact hx n (by rw [mem_ball, dist_zero_right]; exact hn)
+  -- selection
+  obtain ⟨c, hcm, hcpos⟩ := exists_selection hFm hsum (fun j => (hF01 j).mono fun x hx => hx.1)
+  have hN1m : MeasurableSet {y | ¬ 0 < F (c y) y} := by
+    have : {y | ¬ 0 < F (c y) y} = ⋃ j, (c ⁻¹' {j} ∩ {y | ¬ 0 < F j y}) := by
+      ext y; simp only [mem_setOf_eq, mem_iUnion, mem_inter_iff, mem_preimage, mem_singleton_iff]
+      exact ⟨fun h => ⟨c y, rfl, h⟩, fun ⟨j, hj, h⟩ => hj ▸ h⟩
+    rw [this]
+    exact MeasurableSet.iUnion fun j => (hcm (measurableSet_singleton j)).inter
+      (measurableSet_lt measurable_const (hFm j)).compl
+  have hN1 : volume {y | ¬ 0 < F (c y) y} = 0 := ae_iff.1 hcpos
+  refine chiM0_le ⟨c, hcm, fun j => ?_⟩
+  rw [UnitPairsNull, Measure.measure_prod_null (hUm _ (hcm (measurableSet_singleton j)))]
+  filter_upwards [hcpos, hF0 j, ae_arcLength_null hN1m hN1, hcirc j] with x hxpos hx0 hxN hxc
+  by_cases hxD : c x = j
+  · have hFx : 0 < F j x := hxD ▸ hxpos
+    have hconv0 : ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ) = 0 := by
+      rcases mul_eq_zero.1 hx0 with h | h
+      · exact absurd h hFx.ne'
+      · exact h
+    have hint : Integrable (fun θ => F j (x + e θ)) arcLength := by
+      refine Integrable.of_bound (C := 1) ((hFm j).comp (measurable_const.add continuous_e.measurable)).aestronglyMeasurable ?_
+      filter_upwards [hxc] with θ hθ
+      rw [Real.norm_eq_abs, abs_le]; constructor <;> linarith [hθ.1, hθ.2]
+    have hae := (integral_eq_zero_iff_of_nonneg_ae (hxc.mono fun θ hθ => hθ.1) hint).1 hconv0
+    refine measure_mono_null (fun θ hθ => ?_) (measure_union_null (ae_iff.1 hae) hxN)
+    simp only [mem_preimage, unitPairSet, mem_setOf_eq, mem_singleton_iff] at hθ
+    obtain ⟨-, hθD⟩ := hθ
+    by_cases hFy : 0 < F j (x + e θ)
+    · left; simp only [mem_setOf_eq, Pi.zero_apply]; exact hFy.ne'
+    · right; simp only [mem_setOf_eq]; rw [hθD]; exact hFy
+  · refine measure_mono_null (fun θ hθ => ?_) measure_empty
+    simp only [mem_preimage, unitPairSet, mem_setOf_eq, mem_singleton_iff] at hθ
+    exact absurd hθ.1 hxD
 
 /-- **FS106-EQ**, (a) ⟺ (b), given FS-103's M1 (`Row130M1`, named): `χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k`. -/
 theorem chiM0_le_iff_chiCP_le (hM1 : Row130M1) (k : ℕ) : chiM0 ≤ k ↔ chiCP ≤ k :=

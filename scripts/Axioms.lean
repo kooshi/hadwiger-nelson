@@ -3084,6 +3084,7 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.exists_ball_diff_le_avg
 #print axioms HadwigerNelson.Plane.conv_props
 #print axioms HadwigerNelson.Plane.exists_L2_weak_subseq
+#print axioms HadwigerNelson.Plane.ae_arcLength_null
 
 #eval IO.println "=== PURCHASED ==="
 
