@@ -1500,3 +1500,23 @@ reason by the close.*
      `[SokolovVoronov2025]` (FS110-CB, -CD, -CE, -CC, BASE-V), settle `NoInertNear`'s scope (item 199 (b)) and Lemma 3 with contact arcs (item 207), lay out
      `row134BaseUA`'s proof as a skeleton, plan per leaf, obligation pass, handoff. Worktree `fs131-w5b` from `fs131-w5` at `764cc558` (`.lake/build` copied from
      `fs131-w5`); merges into `fs131-w5` on Keryx's word. Launched in the fourth slot (item 211): 1 (I2l) + 1 (I4h) + 1 (IC1) + 1 (KB) = 4.
+213. **FS131-KB mid-job, six findings** (message 2026-10-04; record `plans/FS131-w5base-kernel-plan.md` on `fs131-w5b`): **GAP-ELEVEN — a GAP at a named step of
+     FS112-N3-BASE's walk** (so of `row134BaseUA`'s proof; one mind, a planner's reading; not a counterexample): the 10 + 1 pigeonhole needs an eleventh
+     trichromatic point `q ∈ B̄(u, 1)` with two colours of `c(u)` and one other; every source gets it on the outer rim of `R*` (the `c(u)`-component of `u`)
+     once tiles are simply connected — S–V p. 28 ("on the boundary of the union of three regions of colors 1, 2, 3 whose vertex is u, there is at least one
+     more trichromatic point (Fig. 6)"), Voronov 2023 Lemma 6.1 ("all regions are 1-connected", Obs. 2.2, hole-filling), FS110-CB D5 item 6, FS110-CE E6
+     ("after hole-filling"), FS112-N3-3. In the local base `u` is fixed and H holds only on `B̄(u, 2)`, so hole-filling can destroy `u`: a tile `R°` of a colour
+     of `u` enclosing `u` inside `B(u, 1)`, with `u`'s other tiles in its hole, leaves `R*`'s outer rim bordering `R°` alone; no local contradiction found.
+     FS110-CD § 2.6 and § 2.8 item 2 named this multiply connected case and left it unsettled. Repairs proposed if not excluded: (a) a no-enclosure hypothesis
+     on `Row134BaseUA`, `localDense` choosing an un-enclosed `u` (perhaps radius 4); (b) `BaseHyp` at radius 3. The skeleton isolates it as one leaf,
+     `exists_eleventh`. **Question 2 settled**: in- and out-contact unit arcs can occur on pigeonhole vertices' circles, so `bv_l3`'s `RingProper` fails there;
+     the walk needs Lemma 3 in pseudo-colour form, stated as `l3_base` in the base module ((i), (ii) from `pair_i`, `pair_ii`; finiteness from `NoInertNear`;
+     core shared with `bv_l3`, which stays as stated). **Question 1 settled**: `NoInertNear` stays (the walk reads it at pigeonhole centres on `ω(u)`, where an
+     inert arc may end at `u`); the cost falls on `n3_base`'s pre-bend — a strengthened-bend child keeping `u` cubic trichromatic with the same colours (NB3 step
+     4), no statement change. **Confirmation**: no piece of `[SokolovVoronov2025]` used purely by statement except the eleventh-point sentence, which cannot be
+     an axiom (it is the step in question, and it rests on simple connectivity). **Size**: the planar core (Prop. 19(b)'s endpoints, the circle-only reduction's
+     colour pattern and nesting, the eleventh point) needs boundary-path topology; Mathlib has no Jordan curve theorem at the pin — the same kind of work as
+     CVB-THOM's planar core; KB suggests one shared infrastructure job (the finite boundary graph of an `ArcMap` in a compact disc, then the handshake lemma).
+     **Routing** (Keryx): GAP-ELEVEN → an Ephodos job (FS131-E4) in the next free slot, ahead of wave 5's implementer, since it bears on rows 135 and 137 —
+     its questions: is the enclosure case excluded under H at a fixed `u`; if not, which repair holds and what it costs `localDense`, N3-DENSE3 and CV-EXISTS;
+     and do rows 134, 135, 137 as filed rest on the local form at a fixed `u` or on the global form after hole-filling. Rulings on items 2–5 at KB's hand-back.
