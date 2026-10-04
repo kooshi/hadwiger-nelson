@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Dense
 import Proofs.HadwigerNelson.Plane.RingBand
+import Proofs.HadwigerNelson.Plane.ValidMap.MapTopology
 
 /-!
 # Row 134's base with unit arcs: the walk's leaves
@@ -173,25 +174,67 @@ theorem BaseCtx.retArcs_finite (B : F.BaseCtx u) :
     {q : ℝ × ℝ | q.1 ∈ Ico 0 (2 * π) ∧ F.IsRetArc u q.1 q.2}.Finite := by
   sorry
 
+/-- **Returning arcs do not interleave** (FS110-CB D5 item 1; FS131-KP plan § 4, leaf NEST-X): with `s < s' + 2πn < t < t' + 2πn`, the
+closures of the two joining continua meet (`inter_nonempty_of_interleaved`, after the shift by `2πn`), at a point `z` of `B̄(u, 1)` in the
+closures of the `a`- and `c`-tiles of both pairs. If the pairs' tiles differ, `z` carries two tiles of one colour (a repeated colour) or a
+fourth colour, against H. If they are the same two tiles, both continua lie in one component of their common boundary in `B̄(u, 1)`, which
+(child PATH, plan § 4: under H the `T₁|T₂` boundary graph in the closed disc has degree at most `2` inside and `1` at a two-colour change
+point of `ω(u)`) is a path with two ends — not four. -/
+theorem BaseCtx.retArcs_not_interleaved (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t') (n : ℤ)
+    (hi : s < s' + 2 * π * n ∧ s' + 2 * π * n < t ∧ t < t' + 2 * π * n) : False := by
+  sorry
+
+/-- **Returning arcs do not abut** (FS131-KP plan § 4, leaf NEST-A): at a common end `p = r(t) = r(s')` the germs force the second pair to be `(c, a)` (`GermPseudo.eq_of_cw`), so its tiles are the
+first pair's (one sector per colour at `p`, under H); both continua then lie in one component of the `T₁|T₂` boundary in `B̄(u, 1)`, a path
+(child PATH) with three ends `r(s)`, `p`, `r(t')`. -/
+theorem BaseCtx.retArcs_not_abut (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t')
+    (hab : ringPt u t = ringPt u s') : False := by
+  sorry
+
 /-- **The returning arcs nest or are disjoint** (FS110-CB D5 item 1, "paths do not cross; their arcs nest or are disjoint"; FS110-CD Lemma R
 step 4) — **planar core**: interleaved ends would make the `a`-tile of one pair cross the boundary of the other's tiles away from a
 four-colour point, and abutting ends would need two inner `a|c` germs at one point of `ω(u)` (each point there has at most three colours, one
 sector each, under H, and an `a|c` germ along `ω(u)` is an inert arc, excluded by `NoInertNear`) — the joining continua `K` of `IsRetArc` carry
-this. Planned over the finite boundary graph of the disc (plan § 4, leaf C3). -/
+this. Reduced (FS131-KP, `plans/FS131-planar-kernel-plan.md` § 4) to `ringArc_cases`, `retArcs_not_interleaved` (over the crossing
+lemma `inter_nonempty_of_interleaved`) and `retArcs_not_abut`. -/
 theorem BaseCtx.retArcs_nested (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t') :
     Disjoint (ringArc u s t) (ringArc u s' t') ∨ ringArc u s t ⊆ ringArc u s' t' ∨ ringArc u s' t' ⊆ ringArc u s t := by
+  rcases ringArc_cases u h.1 h.2.1 h'.1 h'.2.1 with hd | hn | hn | ⟨n, hi | hi⟩ | hab | hab
+  · exact Or.inl hd
+  · exact Or.inr (Or.inl hn)
+  · exact Or.inr (Or.inr hn)
+  · exact (B.retArcs_not_interleaved h h' n hi).elim
+  · exact (B.retArcs_not_interleaved h' h (-n) ⟨by push_cast; linarith, by push_cast; linarith, by push_cast; linarith⟩).elim
+  · exact (B.retArcs_not_abut h h' hab).elim
+  · exact (B.retArcs_not_abut h' h hab).elim
+
+/-- **The far end gives an endpoint** (FS110-CD Lemma E, FS110-CE R1–R4; FS131-KP plan § 4, leaf END-C): a far end `q` of the `a|c` boundary
+from `r(θ)` (`exists_far_end`) with three colours in `B(u, 1)` is an endpoint outright; a three-colour point on `ω(u)` (`r(θ)` itself
+included) is V-in (its colour of `u` has a tile meeting `B(u, 1)`: CE R2, R4), an endpoint; a two-colour exit `q ≠ r(θ)` closes a returning
+pair through `r(θ)` — against `hout`. **Owed before proving** (plan § 4): the exit
+case must be read against CD Lemma E/R and CE R1–R4 (not read by this planner) — if an exit can return farther than `60°` from `r(θ)`, the
+parity is re-run on the component without that exit, and if that fails, `IsRetArc`'s `60°` bound is a statement question for Keryx. -/
+theorem BaseCtx.endpoint_of_far_end (B : F.BaseCtx u) {θ : ℝ} {a c : Fin 6} (hac : a ≠ c) (ha : F.GermPseudo u θ .cw a)
+    (hc : F.GermPseudo u θ .ccw c) (hout : ∀ s t, F.IsRetArc u s t → ringPt u θ ∉ ringArc u s t) {T₁ T₂ : Set ℂ}
+    (h₁ : F.TileOf a T₁) (h₂ : F.TileOf c T₂) (hx₁ : ringPt u θ ∈ closure T₁) (hx₂ : ringPt u θ ∈ closure T₂) {q : ℂ}
+    (hq : q ∈ connectedComponentIn (closure T₁ ∩ closure T₂ ∩ closedBall u 1) (ringPt u θ))
+    (hq3 : (F.coloursAt q).ncard = 3 ∨ (q ≠ ringPt u θ ∧ dist q u = 1)) : ∃ p, F.IsEndpoint u (ringPt u θ) a c p := by
   sorry
 
 /-- **A non-returning change point has an endpoint** (`[SokolovVoronov2025]` Prop. 19(b) as FS110-CD Lemma E and FS110-CE R1–R4 repaired it,
 path-free in its conclusion) — **planar core**: a change point `r(θ)` of the pseudo-colouring of `ω(u)` with pair `{a, c}`, outside every returning
 arc (CD's sense: `IsRetArc` carries the joining `a|c` continuum in the closed disc, inventory item 232), has an
 endpoint: the `a|c` boundary from it, continued through spikes, ends at a three-colour point of `B(u, 1)` or at a V-in vertex of `ω(u)`, in the
-closures of the two tiles at `r(θ)`. Planned over the finite boundary graph (the handshake lemma, plan § 4, leaf C4). -/
+closures of the two tiles at `r(θ)`. Reduced (FS131-KP plan § 4) to `exists_far_end` (the handshake on the finite boundary graph) and
+`endpoint_of_far_end`; the dead disjunct of `hc` by `GermPseudo.eq_of_cw`. -/
 theorem BaseCtx.exists_endpoint (B : F.BaseCtx u) {θ : ℝ} {a c : Fin 6} (hac : a ≠ c) (ha : F.GermPseudo u θ .cw a)
     (hc : F.GermPseudo u θ .ccw c ∨ (F.GermPseudo u θ .cw c ∧ F.GermPseudo u θ .ccw a))
     (hout : ∀ s t, F.IsRetArc u s t → ringPt u θ ∉ ringArc u s t) :
     ∃ p, F.IsEndpoint u (ringPt u θ) a c p := by
-  sorry
+  rcases hc with hc | ⟨hc', -⟩
+  · obtain ⟨T₁, T₂, h₁, h₂, hx₁, hx₂, q, hq, hq3⟩ := exists_far_end B.valid B.covers B.hyp hac ha hc
+    exact B.endpoint_of_far_end hac ha hc hout h₁ h₂ hx₁ hx₂ hq hq3
+  · exact absurd (GermPseudo.eq_of_cw ha hc') hac
 
 /-- **The eleventh point** (`[SokolovVoronov2025]` p. 28, "on the boundary of the union of three regions … whose vertex is `u`, there is at
 least one more trichromatic point"; FS110-CD § 2.6; FS112-N3-3) — proved from `B.unenclosed` (FS131-E4 E4-RIM, `plans/FS131-E4-derivation.md`
@@ -201,8 +244,8 @@ hypothesis `UnenclosedC u` replaces that step. A three-colour point of `B̄(u, 1
 colours lie in `B(u, 1)`. -/
 theorem BaseCtx.exists_eleventh (B : F.BaseCtx u) :
     ∃ q ∈ closedBall u 1, (F.coloursAt q).ncard = 3 ∧ (F.coloursAt q ∩ F.coloursAt u).ncard = 2 ∧
-      ∀ j ∈ F.coloursAt q ∩ F.coloursAt u, ∀ T, F.TileOf j T → q ∈ closure T → T ⊆ ball u 1 := by
-  sorry
+      ∀ j ∈ F.coloursAt q ∩ F.coloursAt u, ∀ T, F.TileOf j T → q ∈ closure T → T ⊆ ball u 1 :=
+  exists_eleventh_of B.valid B.covers B.cubic B.hyp B.unenclosed
 
 /-! ## D — the refuters and the distances -/
 

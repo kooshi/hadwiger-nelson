@@ -3016,6 +3016,44 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.holedFrag_valid
 #print axioms HadwigerNelson.Plane.isPreconnected_holedAnnulus
 
+/-! ## FS-131 wave 5 (job FS131-KP) — the planar infrastructure: plane topology, map topology, the seven planar leaves' children (sorry until the planar implementer lands them) -/
+
+#print axioms HadwigerNelson.Plane.isPreconnected_inter_of_union_eq_univ
+#print axioms HadwigerNelson.Plane.isPreconnected_compl_connectedComponentIn
+#print axioms HadwigerNelson.Plane.isPreconnected_frontier_connectedComponentIn
+#print axioms HadwigerNelson.Plane.exists_inter_of_finite_closed_cover
+#print axioms HadwigerNelson.Plane.isBounded_connectedComponentIn_of_frontier_subset
+#print axioms HadwigerNelson.Plane.connectedComponentIn_eq_of_not_isBounded
+#print axioms HadwigerNelson.Plane.isPreconnected_compl_closedBall
+#print axioms HadwigerNelson.Plane.inter_nonempty_of_interleaved
+#print axioms HadwigerNelson.Plane.ringArc_cases
+#print axioms HadwigerNelson.Plane.not_isHoleOf_chain
+#print axioms HadwigerNelson.Plane.isHoleOf_cluster
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.subset_compl_closure
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.subset_or_subset_of_separated
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tile_inter_of_isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tile_mem_closure_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.mem_of_touch_closed
+#print axioms HadwigerNelson.Plane.ArcMap.finite_tiles_closure_inter
+#print axioms HadwigerNelson.Plane.ArcMap.exists_outermost
+#print axioms HadwigerNelson.Plane.ArcMap.exists_rim_vertex
+#print axioms HadwigerNelson.Plane.ArcMap.isCubicTrichromatic_of_three_tiles
+#print axioms HadwigerNelson.Plane.ArcMap.unenclosed_of_rim_vertex
+#print axioms HadwigerNelson.Plane.ArcMap.tileOf_subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.exists_eleventh_of
+#print axioms HadwigerNelson.Plane.ArcMap.exists_far_end
+#print axioms HadwigerNelson.Plane.ArcMap.GermPseudo.eq_of_cw
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_locallyFinite
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_connected
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_infinite
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_rings
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_oneInf
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_planarLike
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_not_interleaved
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_not_abut
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.endpoint_of_far_end
+#print axioms HadwigerNelson.Thomassen.reduced_props_of_planarLike
+
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 
 #print axioms HadwigerNelson.Plane.dot_e_e

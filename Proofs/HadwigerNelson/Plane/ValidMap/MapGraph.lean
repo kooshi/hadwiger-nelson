@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.SVMap
+import Proofs.HadwigerNelson.Plane.ValidMap.MapTopology
 import Mathlib.Combinatorics.SimpleGraph.Paths
 import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected
 import Mathlib.Combinatorics.SimpleGraph.Connectivity.Subgraph
@@ -61,6 +62,51 @@ def reducedVerts : Set V := {v | ∀ x y, IsMaximalTwoSep G x y → v ∉ twoSep
 
 /-- **`H`** (`[Thomassen1999]` p. 852): `G` with the interior of every maximal 2-separator deleted. -/
 def reduced : SimpleGraph (reducedVerts G) := G.induce (reducedVerts G)
+
+/-- **A ring at `x`** (the combinatorial shadow of `x`'s boundary walk, CVB B2 step 2 over `[Thomassen1999]` p. 851; FS131-KP plan § 4): a list
+`r` whose entries are exactly `x`'s neighbours, cyclically consecutive entries equal or adjacent, and in which any two appearances of a vertex
+`y` separate: an entry strictly between them and one strictly outside, both other than `y`, lie in different components of `G − x − y`.
+(The planar ring lists each repeated neighbour only at its edge contacts — Thomassen's rule — since at a vertex contact the tiles on both
+sides are adjacent and the separation fails.) -/
+def IsRing (x : V) (r : List V) : Prop :=
+  (∀ y, y ∈ r ↔ G.Adj x y) ∧ (∀ i a b, r[i]? = some a → r[(i + 1) % r.length]? = some b → a = b ∨ G.Adj a b) ∧
+    ∀ y i j, i < j → r[i]? = some y → r[j]? = some y → ∀ m n a b, i < m → m < j → (n < i ∨ j < n) →
+      r[m]? = some a → r[n]? = some b → ∀ (ha : a ∈ offTwo x y) (hb : b ∈ offTwo x y),
+        ¬ (G.induce (offTwo x y)).Reachable ⟨a, ha⟩ ⟨b, hb⟩
+
+/-- `y` appears at two positions of `r` that are not cyclically consecutive (`[Thomassen1999]` p. 851: "`y = xᵢ = xⱼ` for `1 ≤ i < j − 1 <
+k − 1`"). -/
+def TwiceApart (r : List V) (y : V) : Prop :=
+  ∃ i j, i + 1 < j ∧ ¬ (i = 0 ∧ j + 1 = r.length) ∧ r[i]? = some y ∧ r[j]? = some y
+
+/-- **The planar properties Thomassen's reduction reads** (FS131-KP plan § 4; CVB B2 steps 1–3): locally finite, connected, infinite; a ring
+at every vertex, with `G − x − y` connected unless `y` appears twice apart in `x`'s ring; and for every pair exactly one infinite component of
+`G − x − y` (CVB step 2: "the complement of the compact connected `cl x̂ ∪ cl ŷ` has one unbounded component and every other component of
+`M − x − y` is finite"). The filled map graph of a valid plane map has them (`ArcMap.filledGraph_planarLike`); the reduction is
+`reduced_props_of_planarLike`. -/
+structure PlanarLike : Prop where
+  /-- Locally finite. -/
+  locFin : ∀ x, (G.neighborSet x).Finite
+  /-- Connected. -/
+  conn : G.Connected
+  /-- Infinite. -/
+  inf : Infinite V
+  /-- A ring at every vertex, `G − x − y` connected unless `y` appears twice apart. -/
+  ring : ∀ x, ∃ r, IsRing G x r ∧ ∀ y, y ≠ x → ¬ TwiceApart r y → (G.induce (offTwo x y)).Connected
+  /-- Exactly one infinite component of `G − x − y`. -/
+  oneInf : ∀ x y, x ≠ y → ∃ c : (G.induce (offTwo x y)).ConnectedComponent, ¬ c.supp.Finite ∧ ∀ c', ¬ c'.supp.Finite → c' = c
+
+/-- **Thomassen's reduction, as pure graph theory** (`[Thomassen1999]` pp. 851–852 with CVB B2 step 3's replacement of the count by
+finiteness): for a graph with the planar properties, `H = reduced G` is connected, locally finite, locally Hamiltonian and infinite. The
+proof (plan § 4, leaf T-GRAPH): 2-separators are pairs with finite components; interiors nest (Thomassen: "`int(M, x, y) ⊆ int(M, u, v)`" when
+`x` or `y` lies in `int(M, u, v)`, from the rings' separation); a maximal 2-separator exists above every 2-separator (a strictly increasing
+chain of finite interiors containing a fixed vertex's neighbourhood is finite, by local finiteness and `oneInf`); `H` connected (a shortest
+path never enters an interior), locally finite (an induced subgraph); locally Hamiltonian (delete from `x`'s ring the vertices in interiors
+of 2-separators through `x`; the reduced cyclic sequence has no repetition and at least three entries, else `G` is finite by `oneInf`); infinite
+(every interior is finite and the maximal 2-separators' crucial edges are locally finite in number). -/
+theorem reduced_props_of_planarLike (h : PlanarLike G) :
+    (reduced G).Connected ∧ (∀ x, ((reduced G).neighborSet x).Finite) ∧ LocallyHamiltonian (reduced G) ∧ Infinite (reducedVerts G) := by
+  sorry
 
 /-! ## Lemma 1's two local facts, and the discrete intermediate value theorem they share -/
 
@@ -633,6 +679,45 @@ variable {k : ℕ} {F : ArcMap k}
 
 /-! ## FS114-CVB-THOM -/
 
+/-- The filled map graph is locally finite (FS131-KP plan § 4, leaf F-LOC): a filled tile lies in its hull, inside `B̄(x, 1)` for any `x` in
+its closure (`IsTile.closure_subset_closedBall`, `exists_outermost`'s hull bound), so the tiles whose filled closures meet it have closures
+meeting a compact set (`finite_tiles_closure_inter`). -/
+theorem filledGraph_locallyFinite (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :
+    (F.filledGraph.neighborSet x).Finite := by
+  sorry
+
+/-- The filled map graph is connected (leaf F-CONN): the filled outer tiles' closures cover the plane (every tile lies in an outer tile's
+fill: the enclosure chain stops, as in `exists_outermost`), so `mem_of_touch_closed` on `U = ℂ` with the touching relation of the fills. -/
+theorem filledGraph_connected (hF : F.Valid) (hP : F.IsPlaneMap) : F.filledGraph.Connected := by
+  sorry
+
+/-- The filled map graph is infinite (leaf F-INF): the plane is unbounded and every filled tile bounded. -/
+theorem filledGraph_infinite (hF : F.Valid) (hP : F.IsPlaneMap) : Infinite {T : Set ℂ // F.IsOuterTile T} := by
+  sorry
+
+/-- **Rings from boundary walks** (leaf F-RING, the planar heart of CVB B2 step 2): every filled outer tile `x̂` has a ring — the outer
+boundary walk of `x̂` (`frontier (outerDom x)`, preconnected), listing the tiles met at each pass (sector charts), each repeated tile only at
+its edge contacts — and `M̂ − x − y` is connected unless `y` appears twice apart (a bounded component of `ℂ ∖ (cl x̂ ∪ cl ŷ)` is enclosed by
+edges of both; CVB's sketch, one mind). Plan § 4: the boundary walk is built over the finite boundary graph of `F` near `cl x̂` (the same
+graph as `exists_far_end`'s); separation by `isPreconnected_frontier_connectedComponentIn` and `inter_nonempty_of_interleaved`. **H**, the
+wave's longest leaf; may be its own job (Keryx's call after the implementer's measurement). -/
+theorem filledGraph_rings (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :
+    ∃ r, Thomassen.IsRing F.filledGraph x r ∧
+      ∀ y, y ≠ x → ¬ Thomassen.TwiceApart r y → (F.filledGraph.induce (Thomassen.offTwo x y)).Connected := by
+  sorry
+
+/-- **One infinite component** (leaf F-ONE, CVB B2 step 2): for distinct outer tiles `x`, `y`, `M̂ − x − y` has exactly one infinite
+component — the tiles of the unbounded component of `ℂ ∖ (cl x̂ ∪ cl ŷ)` are chained (`mem_of_touch_closed`) and infinitely many, those of
+bounded components finitely many (`finite_tiles_closure_inter` on the hull), and every component meeting no unbounded tile is among them. -/
+theorem filledGraph_oneInf (hF : F.Valid) (hP : F.IsPlaneMap) (x y : {T : Set ℂ // F.IsOuterTile T}) (hxy : x ≠ y) :
+    ∃ c : (F.filledGraph.induce (Thomassen.offTwo x y)).ConnectedComponent, ¬ c.supp.Finite ∧ ∀ c', ¬ c'.supp.Finite → c' = c := by
+  sorry
+
+/-- **The filled map graph of a valid plane map has Thomassen's planar properties** (CVB B2 steps 1–3; the five leaves above). -/
+theorem filledGraph_planarLike (hF : F.Valid) (hP : F.IsPlaneMap) : Thomassen.PlanarLike F.filledGraph :=
+  ⟨filledGraph_locallyFinite hF hP, filledGraph_connected hF hP, filledGraph_infinite hF hP, filledGraph_rings hF hP,
+    filledGraph_oneInf hF hP⟩
+
 /-- **FS114-CVB-THOM, B2 steps 1–3** (`plans/FS114-CVB-verification.md` § 1.9): for every valid map of the plane, Siamese pairs allowed, the
 reduced filled map graph `H` is connected, locally finite, locally Hamiltonian and infinite — `[Thomassen1999]`'s steps other than the
 rainbow step, with holes filled, facial cycles read as boundary walks, and the count in `int(R)` replaced by local finiteness. Colour-free
@@ -640,8 +725,8 @@ rainbow step, with holes filled, facial cycles read as boundary walks, and the c
 (`dist_lt_one_of_forall_dist_ne_one`). Every `k`. Model of the hypotheses: `sevenBrickMap` (valid, of the plane, `k = 7`). -/
 theorem cvb_thom_reduced (hF : F.Valid) (hP : F.IsPlaneMap) :
     (Thomassen.reduced F.filledGraph).Connected ∧ (∀ x, ((Thomassen.reduced F.filledGraph).neighborSet x).Finite) ∧
-      Thomassen.LocallyHamiltonian (Thomassen.reduced F.filledGraph) ∧ Infinite (Thomassen.reducedVerts F.filledGraph) := by
-  sorry
+      Thomassen.LocallyHamiltonian (Thomassen.reduced F.filledGraph) ∧ Infinite (Thomassen.reducedVerts F.filledGraph) :=
+  Thomassen.reduced_props_of_planarLike _ (filledGraph_planarLike hF hP)
 
 /-- **FS114-CVB-THOM** (B2 step 4): every valid map of the plane, Siamese pairs allowed, has an outer tile of degree at least `6` in the reduced
 filled map graph `H` (`cvb_thom_reduced` and `Thomassen.lemma1`). The rainbow step — that such a tile's neighbours carry six colours — is not
@@ -657,6 +742,16 @@ connected — at a pinched tile (its boundary walk visits a vertex twice) as at 
 with no hole; Thomassen's own case is the unpinched one). Model of the hypotheses: a brick of `sevenBrickMap`. -/
 theorem cvb_pinch_connected (hF : F.Valid) (hP : F.IsPlaneMap) {T : Set ℂ} (hT : F.IsTile T) (hno : ∀ Hc, ¬ IsHoleOf T Hc) :
     (F.mapGraph.induce {T' | T' ≠ ⟨T, hT⟩}).Connected := by
+  -- FS131-KP plan § 4, leaf PINCH: through the separation, with local finiteness read at one point only
+  have hbd : Bornology.IsBounded (closure T) := sorry -- `IsTile.closure_subset_closedBall`
+  -- `M − T` has a vertex: a tile of the unbounded complementary component (`isPreconnected_compl_closedBall`, `exists_tile_inter_of_isOpen`)
+  have hne : Nonempty {T' : {T : Set ℂ // F.IsTile T} // T' ∈ {T' | T' ≠ ⟨T, hT⟩}} := sorry
+  -- fix a tile `A ≠ T`; let `P` be the tiles reachable from it in `M − T`, `Y` the union of the components of `(cl T)ᶜ` holding a tile of `P`
+  -- (each such component's tiles all lie in `P`: `mem_of_touch_closed`), and `Hc := (cl T)ᶜ \ Y`. A point of `cl Hc ∩ cl Y` lies in `cl T`
+  -- (both are unions of open components), and there `exists_tile_mem_closure_of_mem_closure` gives tiles of `Hc` and `Y` whose closures meet,
+  -- adjacent in `M − T`, so the first is in `P`: `Hc` and `Y` are separated. The one not holding the unbounded component
+  -- (`connectedComponentIn_eq_of_not_isBounded`) is bounded; were `Hc` nonempty, `Hc` or `Y` would be a hole, against `hno`. So every tile is
+  -- in `P` (`IsTile.subset_compl_closure`).
   sorry
 
 /-- **FS114-CVB-PINCH, the hole clause** (B1): in the map graph of a valid map of the plane, removing a tile with a hole disconnects the graph
@@ -664,6 +759,16 @@ theorem cvb_pinch_connected (hF : F.Valid) (hP : F.IsPlaneMap) {T : Set ℂ} (hT
 cannot be refuted by an object"); the local configuration is `exists_holed_valid_fragment`. `GENERIC` on plane maps. -/
 theorem cvb_hole_disconnected (hF : F.Valid) (hP : F.IsPlaneMap) {T Hc : Set ℂ} (hT : F.IsTile T) (hH : IsHoleOf T Hc) :
     ¬ (F.mapGraph.induce {T' | T' ≠ ⟨T, hT⟩}).Connected := by
+  -- FS131-KP plan § 4, leaf HOLE: no Jordan curve theorem, only the separation clause
+  obtain ⟨hne, hsub, hb, hsep⟩ := hH
+  -- `Hc` and the rest of `(cl T)ᶜ` are open (`Hc = (cl T)ᶜ \ cl ((cl T)ᶜ \ Hc)`)
+  have hHo : IsOpen Hc := sorry
+  -- a tile inside the hole (`exists_tile_inter_of_isOpen`, `IsTile.subset_compl_closure`, `IsTile.subset_or_subset_of_separated`)
+  have hin : ∃ A, F.IsTile A ∧ A ⊆ Hc := sorry
+  -- a tile outside it: the rest holds the unbounded component (`isPreconnected_compl_closedBall`, `IsTile.closure_subset_closedBall`)
+  have hout : ∃ B, F.IsTile B ∧ B ≠ T ∧ B ⊆ (closure T)ᶜ \ Hc := sorry
+  -- a walk of `M − T` from `A` to `B` has a dart leaving the tiles inside `Hc` (`SimpleGraph.Walk.exists_boundary_dart`); the dart's two tiles
+  -- have closures in `cl Hc` and `cl ((cl T)ᶜ \ Hc)`, disjoint by `hsep`, yet adjacent
   sorry
 
 end ArcMap

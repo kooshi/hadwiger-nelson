@@ -112,3 +112,69 @@ Iteration (`lake env lean` on `MapGraph`): exit 0, only the `sorry` warnings of 
 
 The slot admitted the build at about 18:16, after stage 2's edit to `MapGraph` was on disk, so the build that ran covers this stage's tree.
 Its result is recorded with stage 4's build.
+
+## Stage 3 — SAVED: the route and the shared lemmas
+
+### 3.1 Which plane topology the seven leaves read
+
+Not one topology but three, and the cheapest adequate route for each:
+
+| leaves | what they read | route |
+|---|---|---|
+| `cvb_hole_disconnected`, `cvb_pinch_connected` | tiles sorted by the components of `(cl T)ᶜ`; chains of touching tiles inside an open connected set; local finiteness at one point | **no Jordan-type theorem** under the repaired `IsHoleOf` (§ 2): `MapTopology` § A only |
+| `exists_eleventh`, `exists_unenclosed_or_bad` | **a plane continuum's outer frontier is connected** (FS131-E4's home theorem), plus the last exit | **unicoherence of `ℂ`**, formalized (`PlaneTopology`), then E4-RIM / E4-OUTERMOST step by step (`MapTopology` §§ B–C) |
+| `retArcs_nested` | two continua in a disc joining interleaved circle points meet | **the crossing lemma** (`inter_nonempty_of_interleaved`), from unicoherence through the Phragmén–Brouwer property |
+| `exists_endpoint` | the common boundary of two tiles from a circle point has a far end | **a finite plane graph's handshake**: the finite boundary graph of `F` in `B̄(u, 1)` and `SimpleGraph.even_card_odd_degree_vertices` |
+| `cvb_thom_reduced` | boundary walks (rings) of filled tiles, their separation, one infinite component of `M̂ − x − y` | **graph theory over an abstract `PlanarLike`** (pure, Thomassen pp. 851–852) **+ the planar construction** (`filledGraph_planarLike`: four leaves of `MapTopology` § A kind, one boundary-walk leaf over the finite boundary graph) |
+
+The decisive observation: **unicoherence of `ℂ` is within reach in Lean**, so FS131-E4's "read, not proved" home theorem is formalized,
+not imported. Mathlib has `IsCoveringMap.existsUnique_continuousMap_lifts` (maps from a simply connected, locally path-connected space lift
+through a covering), `Circle.isCoveringMap_exp`, and `SimplyConnectedSpace ℂ` by instance (all `#check`ed, § 1.3). Unicoherence is then the
+ten-line classical argument (the Urysohn angle on `A`, `1` on `B`, lift, compare integer constants on `A` and `B`). **No `axiom` is planned;
+nothing enters `ARCHITECTURE.md` § Trust.** Mathlib has no unicoherence, Janiszewski, Jordan curve, Brouwer fixed point or winding-number
+lemma at the pin (grep; E4's grep agrees).
+
+### 3.2 The shared lemmas, read back
+
+`Proofs/HadwigerNelson/Plane/PlaneTopology.lean` (pure `ℂ`, imports Mathlib and `Plane/Basic`):
+
+| declaration | statement (read back) | the source it formalizes |
+|---|---|---|
+| `isPreconnected_inter_of_union_eq_univ` | closed preconnected `A`, `B` with `A ∪ B = univ` ⟹ `A ∩ B` preconnected | unicoherence of the plane (classical; Kuratowski's definition) — exact |
+| `isPreconnected_compl_connectedComponentIn` | `K` closed preconnected ⟹ the complement of any component of `Kᶜ` is preconnected | the filled continuum is a continuum — exact |
+| `isPreconnected_frontier_connectedComponentIn` | `K` closed preconnected ⟹ `frontier` of any component of `Kᶜ` preconnected | E4's "the frontier of each component of the complement of a continuum is connected" — **wider** (no compactness; any component) |
+| `isBounded_connectedComponentIn_of_frontier_subset` | `K` closed bounded, `W` an unbounded component of `Kᶜ` with `frontier W ⊆ R` (`R` closed) ⟹ every point off `W` and `R` is in a bounded component of `Rᶜ` | E4-RIM step 3's and E4-OUTERMOST step 3's "last exit" — exact |
+| `connectedComponentIn_eq_of_not_isBounded` | `K` bounded ⟹ two unbounded components of `Kᶜ` coincide | "one unbounded component" — exact |
+| `exists_inter_of_finite_closed_cover` | preconnected `S` covered by finitely many closed `C i`, two distinct indices meeting `S` ⟹ two distinct indices meet in `S` | E4-RIM step 4 — exact (any space) |
+| `isPreconnected_compl_closedBall` | `(B̄(c, R))ᶜ` preconnected | — |
+| `inter_nonempty_of_interleaved` | closed preconnected `K`, `K'` in `B̄(u, 1)`, `r(s), r(t) ∈ K`, `r(s'), r(t') ∈ K'`, `s < s' < t < t' < s + 2π` ⟹ `K ∩ K' ≠ ∅` | CB D5 item 1's "paths do not cross", for continua — exact. **Closed** is assumed (the classical form is for continua; not claimed for non-closed connected sets); `retArcs_nested` passes `closure K`, still connected and inside `cl T₁ ∩ cl T₂ ∩ B̄(u, 1)` |
+
+`Proofs/HadwigerNelson/Plane/ValidMap/MapTopology.lean` (imports `HexRing`, `Tiles`, `PlaneTopology`; upstream of `MapGraph`, `BaseWalk`,
+`BaseDense`): § A `IsTile.subset_compl_closure`, `IsTile.subset_or_subset_of_separated`, `exists_tile_inter_of_isOpen`,
+`exists_tile_mem_closure_of_mem_closure`, `mem_of_touch_closed`, `finite_tiles_closure_inter` (each read back in its docstring; all generic in
+`k`, over `F.dom`, no validity except where named); § B `outerDom`, `EnclosesTile` (with `Unenclosed v ⟺ ∀ T S, IsTile T → IsTile S → v ∈ cl S
+→ ¬ EnclosesTile T S`, by unfolding), `exists_outermost` (E4-OUTERMOST steps 1–2 — same), `exists_rim_vertex` (step 3 — **narrower in its
+hypotheses than E4 needs**: no "no bad point" hypothesis, since the one-tile case closes by the last exit alone), `isCubicTrichromatic_of_three_tiles`
+(step 4 — same), `unenclosed_of_rim_vertex` (step 5 — same); § C `tileOf_subset_ball` (Lemma H(a), any `k` — same), `exists_eleventh_of`
+(E4-RIM, all steps, the fields of `BaseCtx` it reads as hypotheses: `Valid`, `Covers u 2`, cubic, `BaseHyp`, `UnenclosedC` — **`NoInertNear` not
+read**, as E4 says); § D `exists_far_end` (the handshake step of CD Lemma E), `GermPseudo.eq_of_cw`, `ringArc_cases`.
+
+`MapGraph` gains (namespace `Thomassen`, pure graph theory): `IsRing` (a ring at `x`: entries exactly the neighbours, cyclic consecutive
+entries equal or adjacent, two appearances of `y` separate the entries between from those outside in `G − x − y`), `TwiceApart`,
+`PlanarLike` (locally finite, connected, infinite, rings with "`G − x − y` connected unless `y` twice apart", exactly one infinite component of
+`G − x − y`), `reduced_props_of_planarLike` (Thomassen pp. 851–852 as graph theory); and on maps `filledGraph_locallyFinite`, `_connected`,
+`_infinite`, `_rings`, `_oneInf`, `filledGraph_planarLike`. **Read-back of `IsRing` against Thomassen:** his sequence lists every neighbour in
+boundary order and keeps a repeated neighbour only at its edge contacts ("we list only those appearances such that `C_{x_i}` and `C_x` share an
+edge"); `IsRing`'s separation clause holds exactly for such appearances (at a vertex contact the tiles on the two sides share the vertex and are
+adjacent in `M`, so separation fails — which is why the rule exists). His "consecutive vertices are neighbours" is the second clause; "`M − x − y`
+is connected unless `y` appears twice" is `PlanarLike.ring`'s second part; CVB step 2's "precisely one" is `oneInf`. **Same**, with Thomassen's
+finite-diameter contradictions replaced by `inf` and `oneInf` (CVB step 3).
+
+### 3.3 What is formalized here, what may be its own job
+
+Everything above is planned for formalization in this repository on the standard three axioms. Two pieces are large enough that the
+implementer should measure them from their first child and report (Keryx's call to split): **the crossing lemma** (Phragmén–Brouwer from
+unicoherence, then the corollary), and **the finite boundary graph of an `ArcMap` in a compact disc** (shared by `exists_far_end` and
+`filledGraph_rings`: vertices the arc ends, crossings and circle points in the disc — finitely many, from `locallyFinite`, compactness and
+`Arc.finite_inter_sphere_or_eq_circ`; edges the arc pieces between them, subdivided to make a simple graph; degrees from the sector charts,
+`localSectors`).

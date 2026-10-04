@@ -67,7 +67,21 @@ refutations, and a model at seven colours is `sevenBrickMap` (a corner within `1
 theorem exists_unenclosed_or_bad {k : ℕ} {F : ArcMap k} (hF : F.Valid) {x : ℂ} {ρ : ℝ} (hρ : 0 < ρ)
     (hx : closedBall x (1 + ρ) ⊆ F.dom) :
     (∃ y ∈ closedBall x 1, y ∈ F.fourSet ∪ F.repSet) ∨ ∃ v ∈ closedBall x 1, F.IsCubicTrichromatic v ∧ F.Unenclosed v := by
-  sorry
+  by_cases hbad : ∃ y ∈ closedBall x 1, y ∈ F.fourSet ∪ F.repSet
+  · exact Or.inl hbad
+  right
+  push Not at hbad
+  obtain ⟨T, hT, -, hhull, hno⟩ := exists_outermost hF hρ hx
+  have hdom : (outerDom T)ᶜ ⊆ F.dom := hhull.trans ((closedBall_subset_closedBall (by linarith)).trans hx)
+  obtain ⟨X, Y, v, hX, hY, hXY, hXo, hYo, hvfr, hvT, hvX, hvY⟩ := exists_rim_vertex hF hT hdom hno
+  -- the rim lies in the hull (`outerDom T` is open: a union of components of an open set)
+  have hvx : v ∈ closedBall x 1 := hhull (sorry : v ∈ (outerDom T)ᶜ)
+  have hvd : v ∈ F.dom := hx (closedBall_subset_closedBall (by linarith) hvx)
+  -- `T` misses its outer domain
+  have hTX : T ≠ X := sorry
+  have hTY : T ≠ Y := sorry
+  have hcub := isCubicTrichromatic_of_three_tiles hvd hT hX hY hTX hTY hXY hvT hvX hvY (hbad v hvx)
+  exact ⟨v, hvx, hcub, unenclosed_of_rim_vertex hvd hT hX hY hXY hXo hYo hvT hvX hvY hcub hno⟩
 
 /-- **FS129-OR1-LOCALDENSE**: every valid six-coloured fragment on a closed disc `B̄(x, 3)` has, in `B̄(x, 3)`, a
 vertex of at least four colours or a vertex with a repeated colour. The proof is FS131-E4's (E4-LOCALDENSE): `exists_unenclosed_or_bad` (with
