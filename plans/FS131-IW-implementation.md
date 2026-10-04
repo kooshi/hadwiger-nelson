@@ -413,3 +413,26 @@ branch; the gate and the landing wait for wave 4.
 
 None: no milestone state moved (the gate has not run; `Merge` keeps three `sorry` leaves). Slot, when the chain's gate runs: `CLAUDE.md` § The gate
 and § Trust ledger get the counts, and the FS106-WO, FS106-TW, FS106-AE-MAP6 and E1-NO45 ledger rows are regraded then.
+
+## Stage 13 — SAVED (FS131-IWd): the readback
+
+*Brief `data/fs131/briefs/FS131-IWd-woodall-merge.md` (on `main`); the fourth implementer on this chain, de Bruijn on Opus 5.5; branch `fs131-ww` at
+`ca6ec757`.*
+
+**The brief's two quotations** match their sources verbatim: "180. **FS131-IWc handed back at stage 12, harness ≈ 494k** (report on its branch; `fs131-ww`
+at `ca6ec757`, checked): **20 of its 23 leaves proved**, statements unchanged," is `plans/FS131-close-inventory.md` (main) line 1257 (`grep -nF`, one hit; the
+item read whole, and item 181); "**Proved (children of `exists_merge_at`, in `Merge` after `dirColourAt_wedgeMerge`)**: `mem_coneAt_inter_annSector` (cones
+are local in direction:" is this record's Stage 11 opening (`grep -cF` → 1; the stage read whole, with plan §§ 14–15). No mismatch.
+
+**The build as given** (`ca6ec757`, before any edit): OK — all 1748 modules already up to date, nothing built, 6 modules with warnings (wave 4's five
+skeleton modules and `Woodall/Merge`), 2 s, exit 0 (`build/gate/build/20261004T163241Z-772535.log`; driver log `data/fs131/iwd/build0.log`). The `Merge`
+warnings are its three `declaration uses 'sorry'` at lines 873, 1074, 1089 (`niceAt_of_dirColourAt`, `wedgeMerge_niceAt`, `exists_merge_at`).
+
+**What I may change**: children anywhere in the five Woodall modules (in `Basic` and `Merge` children only, no definition or statement), supporting lemmas
+in the foundation modules (statements of other waves unchanged), imports, `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`, `tools/fs131_iw_*.py`,
+`data/fs131/iw/`, `data/fs131/iwd/`, this record, my report. After wave 4 lands: the merge of `main`, deleting this branch's identical copies of
+`abs_dot_le`, `dot_add_left`, `dot_e_e`, `isOpen_shadow` for wave 4's; QA2-1's plane-map model. **What I may not**: any statement or definition of
+`Woodall/Basic` or `Woodall/Merge`, any chain theorem of `Woodall/Steps`, any new `axiom`, any `native_decide`; nothing with a `sorry` reaches `main`; no
+landing before wave 4 is on `main` (at this stage it is not: `origin/main` at `b8b478a6`, `fs131-w4` at `89ab1ab7`).
+
+Iteration script: `data/fs131/iwd/run.sh` (`lake env lean` with the lakefile's options against the built oleans, read only; never evidence).
