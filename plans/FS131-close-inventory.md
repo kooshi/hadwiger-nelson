@@ -917,3 +917,11 @@ reason by the close.*
      `sixFrag_nonSiamese`, then `localSectors` (branch form) and `Simple.coneAt_eq_angleIcc_sep`; I3g takes `localSectors` next, while its engine is fresh, and
      the `SixFragment` leaves after if budget allows. Accepted without a message: wave 4 has no implementer running, and the engine is the cheaper thing for
      this context to finish. Keryx's receipt: the commit exists; `sorry` lines by count — `RingGerm` 0, `SixFragment` 2, `LocalStructure` 0.
+146. **FS131-LEB mid-job: Lebesgue's covering theorem for the square proved in full** (message 2026-10-04; branch `fs131-leb`): no `sorry`, build green, standard
+     three axioms by its report; the gate running. Modules `Topology/SpernerGrid` (Sperner's lemma on a triangulated grid, a mod-2 door count) and
+     `Topology/LebesgueCovering` (Lebesgue number lemma, grid, least-index labelling; Hurewicz–Wallman's grouping, Thm IV 2, pp. 42–44 of the 1948 edition, read
+     from an archive.org scan), namespace `HadwigerNelson.LebesgueCovering` (chosen so wave 4's `open … Topology` cannot make `closedSquare` ambiguous). Wave 4's
+     `sorry` discharges in one line, tested against a verbatim copy (`data/fs131/leb/Wave4Bridge.lean`). Generalizations proved: any closed rectangle and any
+     finite index type (`lebesgue_covering_rect`); the cubical KKM three-set form (`exists_mem_inter_three`); read off the proof, not stated: the top/bottom
+     hypothesis is needed only for sets missing the left side. No statement defect; wave 4's statement true and not vacuous. **The landing is a ruling of
+     mine** (its brief, Done means 6), on the gate's saved logs at its report.
