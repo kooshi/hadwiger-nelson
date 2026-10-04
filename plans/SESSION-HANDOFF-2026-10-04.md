@@ -36,7 +36,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 1 + 1 + 1 = 3 of 3, all Opus)
+## 3. Running now (slots used: 1 + 1 + 1 = 3 of 3, all Opus; plus FS131-QA2 in Kooshi's special slot)
 
 | job | model | brief | reports to |
 |---|---|---|---|
@@ -46,6 +46,8 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 
 
 **Implementers are Opus from now on** (Kooshi, item 137): the four Sonnet implementers above finish on Sonnet; each successor launches with `model: "opus"` (the agent file says so too) and counts one slot.
+
+| FS131-QA2 (impossible-assumption audit, read-only; items 165–166) | Opus (special slot) | `data/fs131/briefs/FS131-QA2-impossible-assumptions.md` | `data/fs131/reports/FS131-QA2.md` |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. A notification arrives when each hands back; if the session restarted, resume a job from
 its record's last SAVED stage with a fresh agent on the same brief.
