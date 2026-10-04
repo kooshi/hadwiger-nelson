@@ -396,6 +396,29 @@ sorry` lines (the gate's warning count fires on exactly what it guards). Axioms:
 in the CLEAN section gave "FAIL: sorryAx on the audited surface", naming it (`data/fs131/i3/axioms-h-plant.log`); reverted, `git diff` empty. Vacuity: the
 self-test is the control suite, and the twelve new controls fired. Architecture: red on the two stale Imports cells above, naming both modules, before the fix.
 
+## Stage 11 — SAVED (FS131-I3h): wave 3 landed on `main`; `localSectors` handed on
+
+**Landing.** `main` moved after stage 10 (`fef2e6ea`, `51a3c45c`: plans and data only); merged again (`0fdacddb`) and the gate re-run on that commit: build
+"all 1737 modules already up to date, nothing built, 0 module(s) with warnings" (`data/fs131/i3/build-h-gate2.log`, `build/gate/build/20261004T135527Z-4016354.log`);
+axioms "OK — 1794 clean, 11 axiom-free, 5 declared purchase(s)" (`data/fs131/i3/axioms-h-gate2.log`, `build/gate/axioms/20261004T135536Z-4017034.log`); vacuity
+"OK", counts as stage 10 (`data/fs131/i3/vacuity-h-gate2.log`, `build/gate/vacuity/20261004T135539Z-4017362.log`); `check_architecture` exit 0. Then
+`origin/main` fast-forwarded `51a3c45c..0fdacddb` by `git push origin HEAD:main` from this worktree. **The main tree's local `main` was not touched**: it holds
+uncommitted edits to `scripts/Axioms.lean`, `scripts/axioms.sh`, `scripts/gate_report.py` (not this job's; FS131-T3's work, by their content's subject), so a
+`git merge --ff-only` there would have run into them; its owner pulls.
+
+**Not done: `localSectors`, `Simple.coneAt_eq_angleIcc_sep`, `four_of_bothKind_simple` without `hnc`** (brief item 8; the budget's hand-back line was reached at
+the landing). What a successor starts from: `data/fs131/i3/h/LS.lean`, a draft statement in wave 3's vocabulary that elaborates against the landed
+`Plane/LocalStructure` with one `sorry` — `branchPt v β κ s = v + s e(β + arcsin(κ s / 2))`, `sectorBetween`, `BranchGerms n` (`β κ : Fin n → ℝ`, `nextβ`/`nextκ`
+wrapping one turn, `sector`, `Sorted` lexicographic in `(β, κ)`), the structure `ArcMap.IsSectorChart F G v r₀` (positive radius, ball in the domain, sorted,
+`|κ i| r₀ < 2`, `v ∈ Γ ↔ 0 < n`, the punctured ball's arcs are the branches, the ball interior when `n = 0`, and for every `r ≤ r₀` the interior points of
+`ball v r` are the sectors — open, preconnected, pairwise disjoint, each with cone `angleIcc (β i) (nextβ i)`), and `localSectors : ∃ r₀ n G, IsSectorChart`.
+The route, from I3g's notes and this job's reading: `GoodAt` gives the arcs through `v` on finitely many full curves meeting only at `v`; each covered branch of
+a curve `(κ, b)` is a germ `(arg b ∓ π/2, ±1/‖b‖)` (or `(arg b ± π/2, 0)` for a line), wholly covered within `r₀` below every arc end's distance; normalize `β`
+into `[0, 2π)` and sort lexicographically; the direction functions `fᵢ(s) = βᵢ + arcsin(κᵢ s/2)` never meet mod `2π` on `(0, r₀)` (`GoodAt.uniq`; a circle's two
+branches meet only at distance `2ρ > r₀`), so by continuity their cyclic order at every `s` is the order at `0⁺`; a sector is the image of `(0, r) × (0, 1)` under
+`(s, t) ↦ v + s e(fᵢ(s) + t(fᵢ₊₁(s) − fᵢ(s)))` (preconnected), open as the image of an open set under the polar chart, and its cone is `[βᵢ, βᵢ₊₁]` since
+`fᵢ(s) → βᵢ`. The separation lemma's statement is E2's § 2.7 verbatim; its proof is on `localSectors` and `jordan_two_branches` (E2 § 2.4).
+
 ## Theorems this phase proved (FS131-I3h)
 
 Axioms read from the gate's saved audit log `build/gate/axioms/20261004T135108Z-4008434.log` (copy `data/fs131/i3/axioms-h-gate.log`); statements as the skeleton
