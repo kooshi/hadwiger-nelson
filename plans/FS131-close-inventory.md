@@ -334,3 +334,10 @@ reason by the close.*
     row and its derivation claim, and moves the hypothesis to exactly where the argument reads it; R7's use (`r7_lowerGraph`) then shows the region below its
     arc lies in its class's density set, which holds for its classes (closed sets, the region in the interior). Confidence: medium-high. The record job notes
     the reading under FS111-M-COVER-SC's erratum (item 18).
+57. **Statement defect in wave 2's skeleton — `CurvatureLeOne` tests from the wrong side** (FS131-I2b, message 2026-10-04): the definition quantifies over every
+    C² `φ` touching `u` from above and concludes `φ'' ≤ (1 + φ'²)^(3/2)` — false for every `u`, since `φ = u + N(s − s₀)²` touches from above with `φ''` unbounded
+    in `N` (Keryx's receipt: that one line); concretely false on R7's lower arc, where `u'' = (1 + u'²)^(3/2)` exactly. The viscosity form of "curvature at most
+    1" tests from below: `φ ≤ u` near `s₀`, `φ(s₀) = u(s₀)`, then `φ ≤ u ≤ ψ` with `ψ` the supporting unit arc gives `φ'' ≤ ψ'' ≤` the bound. A formalization slip
+    in the skeleton's encoding of item 19's ruling (whose words — "touched from above at each point by a unit arc … in the viscosity sense" — name the supporting
+    arc, not the test side). **Ruling: flip `u s ≤ φ s` to `φ s ≤ u s` in `CurvatureLeOne`**; `semiconcaveWith` re-derived from the corrected form. Alternative:
+    none live. Confidence: high. No erratum on the derivation beyond item 18's.
