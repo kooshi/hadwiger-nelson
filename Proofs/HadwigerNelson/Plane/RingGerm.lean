@@ -529,14 +529,35 @@ theorem germS_four (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.c
 
 /-! ## FS116-RING-Q-PRIME-S -/
 
+/-- The base point of a germ lies in the closure of the germ. -/
+theorem ringPt_mem_closure_germ (p : ℂ) (θ : ℝ) (s : Side) {δ : ℝ} (hδ : 0 < δ) :
+    ringPt p θ ∈ closure (germ p θ s δ) := by
+  rw [Metric.mem_closure_iff]
+  intro ε hε
+  set t := min (ε / 2) (δ / 2) with ht
+  have ht0 : 0 < t := lt_min (by linarith) (by linarith)
+  refine ⟨ringPt p (θ + s.sign * t), ⟨t, ⟨ht0, lt_of_le_of_lt (min_le_right _ _) (by linarith)⟩, rfl⟩, ?_⟩
+  have h1 := dist_ringPt_germ_le p θ s ht0.le
+  have : t ≤ ε / 2 := min_le_left _ _
+  linarith
+
+/-- A germ on a (Q) arc puts its base point on a closed (Q) arc (the arc is closed). -/
+theorem onQArc_of_germOnQ {p : ℂ} {θ : ℝ} {s : Side} (h : F.GermOnQ p θ s) : F.OnQArc p (ringPt p θ) := by
+  obtain ⟨θ₁, θ₂, hQ, δ, hδ, hsub⟩ := h
+  refine ⟨θ₁, θ₂, hQ, ?_⟩
+  have hc : IsClosed (ringArc p θ₁ θ₂) := by
+    have hcont : Continuous (ringPt p) := by unfold ringPt e; fun_prop
+    exact (isCompact_Icc.image hcont).isClosed
+  exact hc.closure_subset_iff.mpr hsub (ringPt_mem_closure_germ p θ s hδ)
+
 /-- **FS116-RING-Q-PRIME-S** (carrying FS116-RING-Q-PRIME; at every `k` with at most two colours absent): a change point of
 the ring of a vertex of at least four colours whose points at `±60°` lie on no closed (Q) arc is a vertex of at least four
 colours. -/
 theorem ringQPrimeS (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
     (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X')
     (hu : ¬ F.OnQArc p (ringPt p (ψ + π / 3))) (hv : ¬ F.OnQArc p (ringPt p (ψ - π / 3))) :
-    4 ≤ (F.coloursAt (ringPt p ψ)).ncard := by
-  sorry
+    4 ≤ (F.coloursAt (ringPt p ψ)).ncard :=
+  germS_four hF hp h4 hk hy fun _ => ⟨fun hg => hu (onQArc_of_germOnQ hg), fun hg => hv (onQArc_of_germOnQ hg)⟩
 
 /-! ## FS116-N1-QFREE4 (at every `k`) -/
 
@@ -1185,7 +1206,9 @@ colours of an arc of `Γ` on `ω(z)` carries at least four colours. -/
 theorem four_of_bothKind_simple (hF : F.Valid) (hN : F.NonSiamese) (hS : F.Simple) {z : ℂ} (hz : z ∈ F.dom)
     {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') (hc : c ∈ F.coloursAt z)
     (hc' : c' ∈ F.coloursAt z) : 4 ≤ (F.coloursAt z).ncard := by
-  sorry
+  refine four_of_bothKind hF hz hA hc hc' (fun d T T' hT hT' hzT hzT' => ?_)
+    (fun T hT hzT => hS.coneAt_eq_angleIcc hT hz hzT)
+  exact hN.eq_of_unitNear hT hT' (unitNear_of_mem_closure hF hT hT' hzT hzT' (by simp))
 
 /-! ## FS116-Y4-FLANK (any valid map; the covering hypothesis is idle) -/
 
@@ -1227,7 +1250,15 @@ theorem flank (hF : F.Valid) {t : Set ℂ} (ht : F.IsTile t) {p : ℂ} {ψ : ℝ
     (hB : α.InitialPiece (ringPt p ψ) (ψ + 7 * π / 6) B) (hB' : α'.InitialPiece (ringPt p (ψ + π / 3)) (ψ + 7 * π / 6) B')
     (hBt : B ⊆ closure t) (hB't : B' ⊆ closure t) {a b : Set ℂ} (ha : B ⊆ closure a) (hb : B' ⊆ closure b) :
     ∃ z ∈ closure a, ∃ z' ∈ closure b, dist z z' < 1 := by
-  sorry
+  have hyy' : ringPt p (ψ + π / 3) - ringPt p ψ = e (ψ + 2 * π / 3) := by
+    have h := ringPt_sub_ringPt_plus_third p ψ
+    have h2 : e (ψ + 2 * π / 3) = - e (ψ - π / 3) := by
+      have : ψ + 2 * π / 3 = (ψ - π / 3) + π := by ring
+      rw [this, e_add, e_pi]; ring
+    rw [h2, ← h]; ring
+  obtain ⟨z, hz, z', hz', hlt⟩ := flank_initialPieces hyy' hB hB'
+    (hBt.trans (ht.closure_subset_closedBall hF hy')) (hB't.trans (ht.closure_subset_closedBall hF hy))
+  exact ⟨z, ha hz, z', hb hz', hlt⟩
 
 end ArcMap
 
