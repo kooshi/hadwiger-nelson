@@ -74,3 +74,81 @@ Registered after the reading in § 1.2 and a first pass of thought, before any s
 | E4-P5 | row 134 rests on the hole-filled global form, rows 135 and 137 on the base at a fixed vertex (through FS112-N3-DENSE3) | 0.85 | which rows need correction text |
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: recognition (the opening play), on each claim
+
+*`ephodos-recognition`, invoked fresh. The stall read first, then the stranger, the features with receipts, the homes, and what each claim is.*
+
+### 2.1 The stall
+
+Two dispatch shapes at once. **A known theorem that almost applies:** `[Voronov2023]` Lemma 6.1 proves the eleventh point, and one hypothesis fails as
+the object is described — its regions are 1-connected (made so by Observation 2.2, a global recolouring), and a tile of a fragment need not be. **A wall
+that describes a counterexample:** the planner's picture (a tile of a colour of `u` wrapped round `u`) is what a counterexample to the step must carry.
+The stall is located exactly: the walk's paragraph "The eleventh point [hand, one mind]" (`plans/FS112-N-proof.md` l. 796–798) proves where `R` lies
+(`R ⊂ B(u, 1)`, through NOBOTH) and never that the point exists; its table row "the eleventh point | `R` inside `γ(u)` | `R ⊂ B(u, 1)` by N-E1 | nowhere"
+records the location step and is silent on existence.
+
+### 2.2 For a stranger: a plane topologist
+
+*Let `K ⊂ ℝ²` be a compact connected set that is the union of the closures of finitely many open, connected, pairwise disjoint sets ("tiles"), each
+labelled with one of three labels, two tiles with a common closure point never sharing a label. Let `W` be the unbounded component of `ℝ² ∖ K`.
+Must some point of the frontier of `W` lie in the closures of two tiles with different labels?*
+
+Every word is the reader's. Struck as accompaniment by the translation: the six colours, the unit distance, the radius 2 of `BaseHyp`, unit arcs, the
+pseudo-colouring of `ω(u)`. They enter the walk elsewhere; the existence of the point reads none of them. Kept as determiners, with their roles: "two
+tiles with a common closure point never share a label" (in the base it is `BaseHyp`'s no-repeated-colour clause, read inside `B̄(u, 1)`); "`K` lies in
+`B(u, 1)`" (Lemma H and NOBOTH, which make `q`'s tiles lie in `B(u, 1)`); and three colours at `q`, not four (`BaseHyp`'s four-colour clause).
+
+**This is the frontier of a complementary domain of a plane continuum**, and the home theorem is classical: *the frontier of each component of the
+complement of a continuum in the sphere is connected* (unicoherence of `S²`; Janiszewski; for a finite cell complex, the boundary of the outer face of a
+connected plane graph is connected). Read in this form, not proved here; Mathlib holds no unicoherence or Janiszewski lemma (grep of
+`.lake/packages/mathlib`, 2026-10-04: no hit for unicoherent, Janiszewski or a frontier-of-component lemma). With it the answer is: **yes, unless one tile's
+closure contains the whole frontier of `W`**, and then every other tile of `K` lies in a bounded component of the complement of that tile's closure — that
+tile encloses the rest.
+
+### 2.3 The features, sorted (with receipts)
+
+| feature | sort | receipt |
+|---|---|---|
+| every region 1-connected (Voronov's hypothesis) | **splits**: consumed only as "the frontier of `W` is not inside one tile's closure"; that consequence determines, the rest accompanies | Voronov's own sentence uses it once, for exactly this (`[Voronov2023]` p. 12, quoted in § 1.2); stage 3's E4-RIM runs with the split hypothesis alone |
+| the split hypothesis, at `u`: no tile has a tile at `u` in a bounded component of the complement of its closure | **determines** | E4-RIM consumes it; without it the model below has no eleventh point (`fs131-e4-model`: `eleventh=0` with `encloses=True`) |
+| validity (no unit pair of one colour) | **accompanies** the existence of enclosure; **determines** Lemma H (the location) | the model is valid because its domain has diameter `9/10 < 1`, and it encloses `u` |
+| `BaseHyp` read inside a small disc about `u` | **accompanies** the existence of enclosure | the model has five vertices, all cubic trichromatic, no repeated colour, no four colours (`bad=0`) |
+| `NoInertNear` read inside a small disc about `u` | **accompanies** | the model has no unit arc (its arcs have radius `1/10`, `3/10`, or are segments) |
+| the types of the pigeonhole's points | **cannot** close the count without a tenth point in the nine endpoint classes | `fs131-e4-count`: nine endpoint types occupy nine distinct classes, none is `u`'s, each `q`-type's class holds exactly one endpoint type, and `u` with nine distinct endpoints is not forced to collide (`forced=False`) |
+| where the endpoints lie, and how far apart same-type points of `B(u, 1)` are | **unsorted** for Q2 | no argument found consumes it to a collision (stage 4) |
+
+### 2.4 What each claim is, recognized
+
+- **Q1 is not a lemma about enclosure; it is the base itself at an enclosed `u`.** The small model satisfies every hypothesis of `BaseCtx` that reads
+  only a disc of radius `0.34` about `u` (validity, cubic trichromatic `u`, no repeated colour, no four colours, no inert unit arc), with `u` enclosed and
+  no eleventh point. So **no exclusion of enclosure reading only near `u` exists** — in particular neither of the two attacks the brief names: all
+  distances inside the hole are below 1 in the model (a distance bound inside the hole is satisfied, not violated), and the enclosing tile's boundary
+  carries no unit arc (`NoInertNear` read there is vacuous). Any exclusion must read the map out to `ω(u)` and beyond, where the only machinery is the
+  base's. And since stage 3 proves the base at every un-enclosed `u` given the rest of the walk, "`BaseCtx` with `u` enclosed is impossible" is the same
+  statement as "`BaseCtx` is impossible", i.e. `Row134BaseUA` given the walk's other leaves. The remaining step of Q1 is the problem renamed (the
+  recognition's mirror test, run and passed honestly: it is a mirror). FS114-CVB § 1.9's annulus fragment is the same observation for holed tiles in general.
+- **Q2 is the pigeonhole without its tenth point.** Types alone never collide (the count tool); a collision needs geometry: either a second point in one
+  of the nine endpoint classes, or a same-type pair at a distance some lemma refutes. Candidate homes: the parity of the network of `C|C` arcs (handshake
+  lemma), Voronov's hole-filling, a second base vertex. Stage 4 tests each.
+- **Q3 is the split of Voronov's hypothesis.** The global argument consumes 1-connectedness only as "the base is run at a vertex no tile encloses". So the
+  class is the un-enclosed vertices, and the repair is to say so in the statement and to choose such a vertex in the consumer: the maximal element of the
+  laminar family of filled tiles containing a given point (stage 3). This is Observation 2.2 read locally: Voronov fills; we choose the outermost tile
+  and stand on its rim, which needs no modification of the map and keeps `u`'s neighbourhood as it is.
+- **Q4 is a dependency trace**: for each row, the vertex at which its derivation runs the base, and whether that vertex was chosen after a global
+  hole-filling (row 134: CB D6, inside FS110-COR1-NOD2) or as an arbitrary vertex of a disc (rows 135, 137: FS112-N3-DENSE3's vertex from FS112-DISC1's
+  nesting chain, which stops at the first branch point and is not the outermost tile).
+
+control: fs131-e4-count
+  of: E4-RIM — the recognition's sort: the pigeonhole's types alone never force a collision without a tenth point in the nine endpoint classes
+  run: python3 ../tools/fs131_e4_count.py
+  expect: classes=10 endpoint=9/9 ucls=False qcomp=[1] forced=False
+  fault: python3 ../tools/fs131_e4_count.py --fault
+
+control: fs131-e4-model
+  of: E4-RIM — the recognition's sort: a valid fragment about u with u enclosed and every near-u hypothesis of BaseCtx holding has no eleventh point
+  run: python3 ../tools/fs131_e4_enclosure_model.py
+  expect: valid=True cubic_u=True vertices=5 bad=0 encloses=True eleventh=0
+  fault: python3 ../tools/fs131_e4_enclosure_model.py --fault
+
+## Stage 2 — SAVED
