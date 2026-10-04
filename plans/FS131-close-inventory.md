@@ -360,3 +360,10 @@ reason by the close.*
     re-rank. Items for FS-130 if it opens: the Searcher's three questions for Ephodos (§ 4.1); the queue row's wording defect (the row's object is FS107-R
     § 3.6's special case, not FS106-TS's reduction — both run); prior-art debt (arc colourings of two unit circles not searched in print). The Searcher's
     overrun of its hand-back line is not a slip (agent budgets are guidance). No continuation proposed (FS-130 is ranked 18, bearing "none known").
+61. **Statement defect in wave 3's skeleton — FS129-SR1-RINGBAND (iv)'s second conjunct** (FS131-I3b, message 2026-10-04; `CircleColouring.ringband_iv`,
+    `Plane/RingBand`): "(no π/3-invariance of `S`) → `W = 6M + 3`" is false because the structure's `S` need only contain the true change points: I3b's
+    counterexample adds non-change points `0.1 + 2πk` to the hexagon colouring's `S`, which keeps every structure field, breaks π/3-invariance, and leaves
+    `W(π/6) = 2`. The row means the genuine change set; a formalization slip of the skeleton (the structure's `S` a superset), not a defect of the derivation.
+    **Ruling: add `∀ x ∈ C.S, ¬ ∃ v, C.LeftVal x v ∧ C.RightVal x v` (every point of `S` a genuine change) to the second conjunct.** Alternative weighed: redefine
+    `S` as exactly the change set in `Plane/CircleColouring` — a definition the implementer may not change and many statements use. Why: the minimal hypothesis
+    that restores the row's meaning, where it is read. Confidence: high. No erratum owed on the derivation.
