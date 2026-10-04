@@ -23,7 +23,7 @@ that judge the milestone, written before any job).*
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
 | wave 2 (28 rows) | the Opus trial (I2f, item 129) closed 37 lines and five rows; 117 `sorry` lines left; **FS131-I2g running** | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | 92 of 96 proved (I3–I3f, item 131); `localSectors` now wave 3's (item 132); **FS131-I3g running**; when it messages the `localSectors` commit, tell FS131-I4b | `.claude/worktrees/fs131-w3` |
-| wave 4 (25 rows) | 26 of 86 proved (I4, item 125); `localSectors` ruled (item 126); **FS131-I4b running** | `.claude/worktrees/fs131-w4` |
+| wave 4 (25 rows) | 32 of 86 proved (I4, I4b; items 125, 143); two plan routes owed (`lemmaL`, `lock` clause 1); ~20 leaves wait on `localSectors`; **next: an Opus implementer when a whole slot frees** | `.claude/worktrees/fs131-w4` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | re-planned by W2 with **no open leaf** (item 124); E1-BAD erratum filed; **FS131-IW running**; lands after waves 3–4 and LEB | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
 | Lebesgue's covering theorem (FS131-LEB) | **planner running** on its own branch, to land on `main` ahead of wave 4 and Woodall (item 141) | `.claude/worktrees/fs131-leb` |
@@ -36,7 +36,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 0.5 + 0.5 + 0.5 + 0.5 + 1 = 3 of 3, plus FS131-QA1 in Kooshi's special slot)
+## 3. Running now (slots used: 0.5 + 0.5 + 0.5 + 1 = 2.5 of 3 — the free half waits for a whole Opus slot; plus FS131-QA1 in Kooshi's special slot)
 
 | job | model | brief | reports to |
 |---|---|---|---|
@@ -44,7 +44,6 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | FS131-I3g (wave 3, seventh; `localSectors` first, then the four leaves; items 132–133) | Sonnet | `data/fs131/briefs/FS131-I3g-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3g.md` |
 | FS131-LEB (Lebesgue's covering theorem, own branch `fs131-leb`; item 141) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-LEB-lebesgue.md` | its branch's `data/fs131/reports/FS131-LEB.md` |
 | FS131-I2g (wave 2, seventh implementer; item 130) | Sonnet | `data/fs131/briefs/FS131-I2g-wave2.md` | its branch's (`fs131-w2`) `data/fs131/reports/FS131-I2g.md` |
-| FS131-I4b (wave 4, second implementer; item 130) | Sonnet | `data/fs131/briefs/FS131-I4b-wave4.md` | its branch's (`fs131-w4`) `data/fs131/reports/FS131-I4b.md` |
 
 | FS131-QA1 (code-quality audit, read-only; items 137–138) | Opus (special slot) | `data/fs131/briefs/FS131-QA1-quality-audit.md` | `data/fs131/reports/FS131-QA1.md` |
 

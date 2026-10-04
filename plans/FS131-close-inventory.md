@@ -880,3 +880,12 @@ reason by the close.*
      different forms), `Plane.e_mul_conj_e` (w3 vs ww, identical), `Plane.abs_dot_le` (w4 vs ww, identical). **Ruling**: at every landing merge, after merging
      `main`, the landing implementer runs `tools/fs131_qa1_dupes.py`; the branch landing later renames its copy (different statements) or deletes it and uses
      the landed one (identical), before the gate. Added to the landing procedure in the handoff and to every implementer brief from now on. Confidence: high.
+143. **FS131-I4b handed back at stage 4, harness ≈ 320k** (report on its branch; `fs131-w4` at `f1f26a8a`, checked): six leaves — FS112-ISO (`ArcMap.iso`, all eight
+     clauses, and `isoCol_locallyConstant`), `l60_eq_third` (over two wave-3 `sorry`s, so `sorryAx` until wave 3 lands), FS106-L's adversary
+     `not_lemmaL_of_not_mem`, `bowtieArcs_nondegenerate`, `bowtieArcs_locallyFinite`; 54 left. Keryx's receipt: `data/fs131/i4/build-i4b-stage4b.log` (w4) "build:
+     OK — 442 of 442 batches", exit 0; 54 `sorry` by count (BaseSteps 20, UnitArc 20, Contact 10, SVMap 4). **Corrections owed to wave 4's plan** (for the next
+     wave-4 job): `lemmaL`'s sweep route (§ 13.5) is incomplete — the sweeps are open with `S_A ⊆ cl B`, `S_B ⊆ cl A`, but the contradiction needs `S_A ∩ S_B ≠ ∅`,
+     a two-dimensional covering step the plan does not state; `lock` clause 1 (§ 4.17) needs N-E2 between the outer tile at `w` and a second tile of colour
+     `c′` to exclude `P + 2e(θ)` — validity at `w` alone does not. Tool defect (I4b's): the scratch mirror's `chk.sh` can elaborate a name the real build
+     lacks (`Real.pi_gt_three`); every stage ends with a real build. About 20 of the 54 wait on `localSectors` (item 132). Pace: about six leaves per 250k at
+     this difficulty on Sonnet. **Next on wave 4**: an Opus implementer (item 137), when a whole slot is free — the half slot I4b freed stays empty until then.
