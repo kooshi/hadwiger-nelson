@@ -1131,3 +1131,10 @@ reason by the close.*
      closure — `clear_wedge` in the new `Plane/Woodall/Merge` (skeleton, `sorry` leaves). No statement defect. Keryx's receipt: the two commits exist on
      `origin`; `false_of_four_le_sectors`, `aeMap6_merged`, `aeMap6` and the inhabitants read at `89a4aad0`. **With this, item 150's check on E1-NO45 is restored
      on real definitions, modulo its citations** (E3-BALL's leaves and the cited unlanded statements) — the withdrawal of item 158 stands for the old form.
+165. **Kooshi, 2026-10-04 (verbatim)**: *"Ok, I'm caught up. Yes, run the impossible assumption audit. And thank you and all the agents for your excellent work.
+     Always, and especially throughout this backlog."* — the second audit pass authorized as proposed (one Opus auditor in a special slot: wave 4's skeleton
+     statements, and across every branch each Prop-valued hypothesis checked for a non-degenerate inhabitant). His thanks are recorded here for every mind on
+     the milestone (credit to agents that have handed back goes in this file, never by message).
+166. **Brief FS131-QA2, the impossible-assumption audit** (`debruijn`, Opus, Kooshi's special slot; `data/fs131/briefs/FS131-QA2-impossible-assumptions.md`, gated PASS):
+     a census of every definition used as a hypothesis across `main`, `fs131-w2`, `fs131-w4`, `fs131-ww` and `fs131-w3b`, refutation-shaped theorems first; for each,
+     an instance exercising every clause, or the finding that none exists; wave 4's skeleton statements read against their rows; read-only everywhere.
