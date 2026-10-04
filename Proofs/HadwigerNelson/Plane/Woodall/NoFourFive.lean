@@ -126,24 +126,7 @@ theorem exists_Ioo_avoiding (K : Finset ℝ) (hK : K.card ≤ 5) :
       · rw [div_lt_iff₀ h5]; nlinarith
     exact hnot (Finset.mem_image.mpr ⟨κ, Finset.mem_erase.mpr ⟨hκκ, hκ⟩, hjκ⟩)
 
-/-- An open annular sector at `v` approaches `v` along each of its open directions. -/
-theorem mem_coneAt_annSector (v : ℂ) {r a b γ : ℝ} (hr : 0 < r) (hγ : γ ∈ Ioo a b) : γ ∈ coneAt (annSector v 0 r a b) v := by
-  intro ε hε
-  set t := min r ε / 2 with ht
-  have ht0 : 0 < t := by positivity
-  have htr : t < r := by have := min_le_left r ε; linarith
-  have htε : t < ε := by have := min_le_right r ε; linarith
-  have hz : v + (t : ℂ) * e γ - v = (t : ℂ) * e γ := by ring
-  have hn : ‖(t : ℂ) * e γ‖ = t := by
-    rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
-  refine ⟨v + (t : ℂ) * e γ, ⟨(t, γ), ⟨⟨ht0, htr⟩, hγ⟩, rfl⟩, ?_, ?_, ?_⟩
-  · intro hzv
-    have := congrArg (fun w => ‖w - v‖) hzv
-    simp only [hz, hn, sub_self, norm_zero] at this
-    linarith
-  · rw [dist_eq_norm, hz, hn]; exact htε
-  · rw [hz, hn, mul_div_cancel_left₀ _ (by exact_mod_cast ht0.ne' : (t : ℂ) ≠ 0), sub_self, norm_zero]
-    exact hε
+-- `mem_coneAt_annSector` moved to `Plane/Woodall/Basic` (FS131-IWc: the inhabitants' cone of a sector reads it).
 
 /-- The frame distance formula: the squared distance from `framePt v β x (κ x²/2)` to the point `v + ρ e(β + σπ/2 + τ)`. -/
 theorem norm_sq_framePt_sub {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) (v : ℂ) (β κ ρ τ x : ℝ) :

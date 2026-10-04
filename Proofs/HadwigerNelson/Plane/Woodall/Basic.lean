@@ -162,6 +162,151 @@ theorem coneAt_univ (v : ℂ) : coneAt univ v = univ := by
     rw [mul_div_cancel_left₀ _ h2, sub_self, norm_zero]
     exact hε
 
+/-! ## Polar coordinates, and the cone of an open sector at its apex (children of the inhabitants' leaves; FS131-IWc) -/
+
+/-- A point at radius `s ≥ 0` along a direction lies at distance `s`. -/
+theorem norm_real_mul_e {s : ℝ} (hs : 0 ≤ s) (θ : ℝ) : ‖(s : ℂ) * e θ‖ = s := by
+  rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hs]
+
+/-- Polar coordinates about `v` are injective in the radius, and in the direction up to `2π`. -/
+theorem polar_inj {v : ℂ} {s s' θ θ' : ℝ} (hs : 0 < s) (hs' : 0 ≤ s') (h : v + (s : ℂ) * e θ = v + (s' : ℂ) * e θ') :
+    s = s' ∧ e θ = e θ' := by
+  have h1 : (s : ℂ) * e θ = (s' : ℂ) * e θ' := by linear_combination h
+  have hss : s = s' := by
+    have := congrArg norm h1
+    rwa [norm_real_mul_e hs.le, norm_real_mul_e hs'] at this
+  refine ⟨hss, ?_⟩
+  rw [← hss] at h1
+  exact mul_left_cancel₀ (by exact_mod_cast hs.ne') h1
+
+/-- Two directions less than `2π` apart are different. -/
+theorem e_ne_e_of_lt {θ θ' : ℝ} (h1 : θ < θ') (h2 : θ' < θ + 2 * π) : e θ ≠ e θ' := by
+  intro he
+  obtain ⟨n, hn⟩ := e_eq_e_iff.mp he.symm
+  have hπ := Real.pi_pos
+  have h0 : (0 : ℝ) * (2 * π) < n * (2 * π) := by linarith
+  have h1' : (n : ℝ) * (2 * π) < 1 * (2 * π) := by linarith
+  have hn1 : (0 : ℝ) < n := lt_of_mul_lt_mul_right h0 (by positivity)
+  have hn2 : (n : ℝ) < 1 := lt_of_mul_lt_mul_right h1' (by positivity)
+  have : (0 : ℤ) < n := by exact_mod_cast hn1
+  have : n < 1 := by exact_mod_cast hn2
+  omega
+
+/-- Two angles in `(0, 2π]` with one direction are equal. -/
+theorem eq_of_e_eq_of_mem_Ioc {θ θ' : ℝ} (h : θ ∈ Ioc 0 (2 * π)) (h' : θ' ∈ Ioc 0 (2 * π)) (he : e θ = e θ') : θ = θ' := by
+  rcases lt_trichotomy θ θ' with hl | hl | hl
+  · exact absurd he (e_ne_e_of_lt hl (by linarith [h.1, h'.2]))
+  · exact hl
+  · exact absurd he.symm (e_ne_e_of_lt hl (by linarith [h'.1, h.2]))
+
+/-- The closure of an annular sector lies in the image of its closed radii and closed angles (a compact set). -/
+theorem closure_annSector_subset (u : ℂ) {r₁ r₂ θ₁ θ₂ : ℝ} (hr : r₁ ≤ r₂) (hθ : θ₁ ≤ θ₂) :
+    closure (annSector u r₁ r₂ θ₁ θ₂) ⊆ (fun q : ℝ × ℝ => u + (q.1 : ℂ) * e q.2) '' (Icc r₁ r₂ ×ˢ Icc θ₁ θ₂) := by
+  have _ := hr
+  have _ := hθ
+  have hf : Continuous fun q : ℝ × ℝ => u + (q.1 : ℂ) * e q.2 := by have := continuous_e; fun_prop
+  refine closure_minimal ?_ ((isCompact_Icc.prod isCompact_Icc).image hf).isClosed
+  rintro _ ⟨q, ⟨h1, h2⟩, rfl⟩
+  exact ⟨q, ⟨Ioo_subset_Icc_self h1, Ioo_subset_Icc_self h2⟩, rfl⟩
+
+/-- An open annular sector at `v` approaches `v` along each of its open directions. -/
+theorem mem_coneAt_annSector (v : ℂ) {r a b γ : ℝ} (hr : 0 < r) (hγ : γ ∈ Ioo a b) : γ ∈ coneAt (annSector v 0 r a b) v := by
+  intro ε hε
+  set t := min r ε / 2 with ht
+  have ht0 : 0 < t := by positivity
+  have htr : t < r := by have := min_le_left r ε; linarith
+  have htε : t < ε := by have := min_le_right r ε; linarith
+  have hz : v + (t : ℂ) * e γ - v = (t : ℂ) * e γ := by ring
+  have hn : ‖(t : ℂ) * e γ‖ = t := by
+    rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
+  refine ⟨v + (t : ℂ) * e γ, ⟨(t, γ), ⟨⟨ht0, htr⟩, hγ⟩, rfl⟩, ?_, ?_, ?_⟩
+  · intro hzv
+    have := congrArg (fun w => ‖w - v‖) hzv
+    simp only [hz, hn, sub_self, norm_zero] at this
+    linarith
+  · rw [dist_eq_norm, hz, hn]; exact htε
+  · rw [hz, hn, mul_div_cancel_left₀ _ (by exact_mod_cast ht0.ne' : (t : ℂ) ≠ 0), sub_self, norm_zero]
+    exact hε
+
+/-- **The cone of an open sector at its apex is its closed angular interval.** -/
+theorem coneAt_annSector_eq (v : ℂ) {r a b : ℝ} (hr : 0 < r) (hab : a < b) :
+    coneAt (annSector v 0 r a b) v = angleIcc a b := by
+  apply Subset.antisymm
+  · intro β hβ
+    have hcl : e β ∈ closure (e '' Ioo a b) := by
+      rw [Metric.mem_closure_iff]
+      intro ε hε
+      obtain ⟨_, ⟨⟨s, θ⟩, ⟨hs, hθ⟩, rfl⟩, -, -, hdir⟩ := hβ ε hε
+      refine ⟨e θ, ⟨θ, hθ, rfl⟩, ?_⟩
+      simp only at hs hθ hdir
+      have h1 : (v + (s : ℂ) * e θ - v) / (‖v + (s : ℂ) * e θ - v‖ : ℂ) = e θ := by
+        rw [add_sub_cancel_left, norm_real_mul_e hs.1.le, mul_div_cancel_left₀ _ (by exact_mod_cast hs.1.ne' : (s : ℂ) ≠ 0)]
+      rw [h1] at hdir
+      rw [dist_comm, dist_eq_norm]; exact hdir
+    obtain ⟨θ, hθ, he⟩ := closure_minimal (image_mono Ioo_subset_Icc_self) (isCompact_Icc.image continuous_e).isClosed hcl
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp he.symm
+    exact mem_iUnion.mpr ⟨n, by rw [hn]; constructor <;> linarith [hθ.1, hθ.2]⟩
+  · intro β hβ
+    obtain ⟨m, hm⟩ := mem_iUnion.mp hβ
+    have hIcc : Icc a b ⊆ coneAt (annSector v 0 r a b) v := by
+      rw [← closure_Ioo hab.ne]
+      exact closure_minimal (fun γ hγ => mem_coneAt_annSector v hr hγ) (isClosed_coneAt _ _)
+    rw [show β = (β - 2 * π * m) + 2 * π * m by ring, periodic_int (fun γ => mem_coneAt_add_two_pi)]
+    exact hIcc ⟨by linarith [hm.1], by linarith [hm.2]⟩
+
+/-- Polar form about `0` with the angle in `(0, 2π]`: `z = ‖z‖ e(π + arg(−z))`. -/
+theorem eq_norm_mul_e_pi_add_arg (z : ℂ) : z = (‖z‖ : ℂ) * e (π + Complex.arg (-z)) := by
+  have h := Complex.norm_mul_exp_arg_mul_I (-z)
+  rw [norm_neg] at h
+  have hepi : e (π + Complex.arg (-z)) = -e (Complex.arg (-z)) := by
+    rw [e_add]; simp [e, Complex.exp_pi_mul_I]
+  rw [hepi]
+  have h' : (‖z‖ : ℂ) * e (Complex.arg (-z)) = -z := h
+  linear_combination h'
+
+/-- The angle `π + arg(−z)` lies in `(0, 2π]`. -/
+theorem pi_add_arg_neg_mem (z : ℂ) : π + Complex.arg (-z) ∈ Ioc 0 (2 * π) :=
+  ⟨by linarith [Complex.neg_pi_lt_arg (-z)], by linarith [Complex.arg_le_pi (-z)]⟩
+
+/-- A direction `e α` of a point `z ≠ 0` fixes its angle `π + arg(−z)` in `(0, 2π]`. -/
+theorem pi_add_arg_neg_eq {z : ℂ} {s α : ℝ} (hs : 0 < s) (hz : z = (s : ℂ) * e α) (hα : α ∈ Ioc 0 (2 * π)) :
+    π + Complex.arg (-z) = α := by
+  refine eq_of_e_eq_of_mem_Ioc (pi_add_arg_neg_mem z) hα ?_
+  have h1 := eq_norm_mul_e_pi_add_arg z
+  have hn : ‖z‖ = s := by rw [hz, norm_real_mul_e hs.le]
+  rw [hn] at h1
+  exact (polar_inj (v := 0) hs hs.le (by rw [zero_add, zero_add, ← h1, hz])).2.symm
+
+/-- Membership in an open sector at `0` inside `(0, 2π]`, read through the angle `π + arg(−z)`. -/
+theorem mem_annSector_zero_iff {r a b : ℝ} (ha : 0 ≤ a) (hb : b ≤ 2 * π) (z : ℂ) :
+    z ∈ annSector 0 0 r a b ↔ z ≠ 0 ∧ ‖z‖ < r ∧ π + Complex.arg (-z) ∈ Ioo a b := by
+  constructor
+  · rintro ⟨⟨s, θ⟩, ⟨hs, hθ⟩, rfl⟩
+    simp only at hs hθ ⊢
+    rw [zero_add]
+    refine ⟨mul_ne_zero (by exact_mod_cast hs.1.ne') (e_ne_zero θ), (norm_real_mul_e hs.1.le θ).symm ▸ hs.2, ?_⟩
+    rw [pi_add_arg_neg_eq hs.1 rfl ⟨by linarith [hθ.1], by linarith [hθ.2]⟩]
+    exact hθ
+  · rintro ⟨hz, hr, hθ⟩
+    refine ⟨(‖z‖, π + Complex.arg (-z)), ⟨⟨norm_pos_iff.mpr hz, hr⟩, hθ⟩, ?_⟩
+    show 0 + ((‖z‖ : ℝ) : ℂ) * e (π + Complex.arg (-z)) = z
+    rw [zero_add]; exact (eq_norm_mul_e_pi_add_arg z).symm
+
+/-- A point of the disc of radius `1/2` lies on the segment from `0` to `e(α)/2` exactly when it is `0` or has direction `e(α)`. -/
+theorem mem_segment_half_iff {z : ℂ} (hz : ‖z‖ < 1 / 2) (α : ℝ) :
+    z ∈ segment ℝ 0 (e α / 2) ↔ z = 0 ∨ z = (‖z‖ : ℂ) * e α := by
+  constructor
+  · rintro ⟨a', b', ha', hb', hab, rfl⟩
+    have h1 : a' • (0 : ℂ) + b' • (e α / 2) = ((b' / 2 : ℝ) : ℂ) * e α := by
+      simp only [smul_zero, zero_add, Complex.real_smul]; push_cast; ring
+    rw [h1, norm_real_mul_e (by positivity)]
+    exact Or.inr rfl
+  · rintro (rfl | h)
+    · exact left_mem_segment ℝ _ _
+    · refine ⟨1 - 2 * ‖z‖, 2 * ‖z‖, by linarith, by positivity, by ring, ?_⟩
+      rw [h]; simp only [smul_zero, zero_add, Complex.real_smul, norm_real_mul_e (norm_nonneg z)]
+      push_cast; ring
+
 namespace ArcMap
 
 /-- With one colour, no picture has two sectors (adjacent sectors carry different colours). -/
@@ -199,10 +344,62 @@ noncomputable def threeCol (z : ℂ) : Fin 3 :=
 noncomputable def threeCuts : Set Arc :=
   {Arc.seg 0 (e 0 / 2), Arc.seg 0 (e (2 * π / 3) / 2), Arc.seg 0 (e (4 * π / 3) / 2)}
 
+/-- The cuts of `threeSectorDisc`, in its disc: the centre and the points of angle `2π/3`, `4π/3`, `2π` (the angle `π + arg(−z)`). -/
+theorem mem_threeCuts_iff {z : ℂ} (hz : ‖z‖ < 1 / 3) :
+    z ∈ ⋃ a ∈ threeCuts, a.carrier ↔ z = 0 ∨ π + Complex.arg (-z) = 2 * π / 3 ∨ π + Complex.arg (-z) = 4 * π / 3 ∨
+      π + Complex.arg (-z) = 2 * π := by
+  have hz2 : ‖z‖ < 1 / 2 := by linarith
+  have hπ := Real.pi_pos
+  have key : ∀ α ∈ Ioc 0 (2 * π), z ≠ 0 → (z = (‖z‖ : ℂ) * e α ↔ π + Complex.arg (-z) = α) := by
+    intro α hα hz0
+    refine ⟨fun h => pi_add_arg_neg_eq (norm_pos_iff.mpr hz0) h hα, fun h => ?_⟩
+    rw [← h]; exact eq_norm_mul_e_pi_add_arg z
+  have he0 : e 0 = e (2 * π) := by rw [show (2 * π) = 0 + 2 * π by ring, e_add_two_pi]
+  simp only [threeCuts, Set.biUnion_insert, Set.biUnion_singleton, Set.mem_union, Arc.carrier,
+    mem_segment_half_iff hz2]
+  by_cases hz0 : z = 0
+  · simp [hz0]
+  · rw [he0, key _ ⟨by positivity, le_rfl⟩ hz0, key _ ⟨by positivity, by linarith⟩ hz0,
+      key _ ⟨by positivity, by linarith⟩ hz0]
+    tauto
+
+/-- The colour of `threeSectorDisc` read through the angle `π + arg(−z) ∈ (0, 2π]`. -/
+theorem threeCol_eq_iff (z : ℂ) (j : Fin 3) : threeCol z = j ↔
+    (j = 0 ∧ π + Complex.arg (-z) < 2 * π / 3) ∨ (j = 1 ∧ 2 * π / 3 ≤ π + Complex.arg (-z) ∧ π + Complex.arg (-z) < 4 * π / 3) ∨
+      (j = 2 ∧ 4 * π / 3 ≤ π + Complex.arg (-z)) := by
+  have hπ := Real.pi_pos
+  unfold threeCol
+  split_ifs with h1 h2 <;> fin_cases j <;> simp_all
+  linarith
+
 /-- `threeCol` is locally constant off the cuts in the disc of radius `1/3`. -/
 theorem threeCol_locallyConstant : ∀ x ∈ ball (0 : ℂ) (1 / 3), x ∉ ⋃ a ∈ threeCuts, a.carrier →
     ∀ᶠ y in 𝓝 x, threeCol y = threeCol x := by
-  sorry
+  intro x hx hcut
+  have hπ := Real.pi_pos
+  rw [mem_ball, dist_zero_right] at hx
+  rw [mem_threeCuts_iff hx] at hcut
+  push Not at hcut
+  obtain ⟨hx0, h1, h2, h3⟩ := hcut
+  have hslit : -x ∈ Complex.slitPlane := by
+    rw [Complex.mem_slitPlane_iff_arg]
+    exact ⟨fun h => h3 (by rw [h]; ring), neg_ne_zero.mpr hx0⟩
+  have hcont : ContinuousAt (fun y : ℂ => π + Complex.arg (-y)) x :=
+    continuousAt_const.add ((Complex.continuousAt_arg hslit).comp continuous_neg.continuousAt)
+  have hlt : ∀ {c : ℝ}, π + Complex.arg (-x) < c → ∀ᶠ y in 𝓝 x, π + Complex.arg (-y) < c := fun h =>
+    hcont.eventually (gt_mem_nhds h)
+  have hgt : ∀ {c : ℝ}, c < π + Complex.arg (-x) → ∀ᶠ y in 𝓝 x, c < π + Complex.arg (-y) := fun h =>
+    hcont.eventually (lt_mem_nhds h)
+  rcases lt_or_gt_of_ne h1 with ha | ha
+  · filter_upwards [hlt ha] with y hy
+    unfold threeCol; rw [if_pos hy, if_pos ha]
+  · rcases lt_or_gt_of_ne h2 with hb | hb
+    · filter_upwards [hgt ha, hlt hb] with y hy1 hy2
+      unfold threeCol
+      rw [if_neg (not_lt.mpr hy1.le), if_pos hy2, if_neg (not_lt.mpr ha.le), if_pos hb]
+    · filter_upwards [hgt hb] with y hy
+      unfold threeCol
+      rw [if_neg (by linarith), if_neg (not_lt.mpr hy.le), if_neg (by linarith), if_neg (not_lt.mpr hb.le)]
 
 /-- **A disc cut into three sectors** (FS131-E3's inhabitant): the disc of radius `1/3` cut by the three segments from `0` in the directions
 `2πj/3`, colour `j` on the open sector of directions `(2πj/3, 2π(j+1)/3)`. Its centre carries three colours, every other point at most two. -/
@@ -234,20 +431,137 @@ theorem threeSectorDisc_valid : threeSectorDisc.Valid := by
   have : dist x y < 1 := by rw [dist_eq_norm]; linarith [norm_sub_le x y]
   exact absurd hd this.ne
 
+/-- The region of colour `j` of `threeSectorDisc` is the open sector of angles `(2πj/3, 2π(j+1)/3)`. -/
+theorem threeSectorDisc_region (j : Fin 3) :
+    threeSectorDisc.region j = annSector 0 0 (1 / 3) (2 * π * (j : ℕ) / 3) (2 * π * ((j : ℕ) + 1) / 3) := by
+  have hπ := Real.pi_pos
+  ext z
+  have hj : (0 : ℝ) ≤ 2 * π * (j : ℕ) / 3 := by positivity
+  have hj2 : 2 * π * ((j : ℕ) + 1) / 3 ≤ 2 * π := by
+    have : ((j : ℕ) : ℝ) ≤ 2 := by exact_mod_cast Nat.lt_succ_iff.mp j.isLt
+    nlinarith
+  rw [mem_annSector_zero_iff hj hj2]
+  have hm := pi_add_arg_neg_mem z
+  change (z ∈ ball (0 : ℂ) (1 / 3) ∧ z ∉ ⋃ a ∈ threeCuts, a.carrier) ∧ threeCol z = j ↔ _
+  rw [mem_ball, dist_zero_right, threeCol_eq_iff]
+  constructor
+  · rintro ⟨⟨hz, hcut⟩, hcol⟩
+    rw [mem_threeCuts_iff hz] at hcut
+    push Not at hcut
+    refine ⟨hcut.1, hz, ?_⟩
+    rcases hcol with ⟨rfl, h⟩ | ⟨rfl, h⟩ | ⟨rfl, h⟩
+    · simp only [Fin.val_zero, CharP.cast_eq_zero, mul_zero, zero_div, zero_add, mul_one]
+      exact ⟨hm.1, h⟩
+    · simp only [Fin.val_one, Nat.cast_one, mul_one]
+      exact ⟨lt_of_le_of_ne h.1 (Ne.symm hcut.2.1), by linarith [h.2]⟩
+    · simp only [show ((2 : Fin 3) : ℕ) = 2 from rfl, Nat.cast_ofNat]
+      exact ⟨lt_of_le_of_ne (by linarith [h]) (fun h' => hcut.2.2.1 (by linarith)), by
+        linarith [lt_of_le_of_ne hm.2 hcut.2.2.2]⟩
+  · rintro ⟨hz0, hz, hθ⟩
+    refine ⟨⟨hz, fun hcut => ?_⟩, ?_⟩
+    · rw [mem_threeCuts_iff hz] at hcut
+      fin_cases j <;> simp at hθ <;> rcases hcut with h | h | h | h <;> first | exact hz0 h | (rw [h] at hθ; linarith [hθ.1, hθ.2])
+    · fin_cases j <;> simp at hθ ⊢ <;> first | linarith [hθ.1, hθ.2] | (constructor <;> linarith [hθ.1, hθ.2])
+
+/-- The three regions of `threeSectorDisc`, by name. -/
+theorem threeSectorDisc_region_zero : threeSectorDisc.region 0 = annSector 0 0 (1 / 3) 0 (2 * π / 3) := by
+  rw [threeSectorDisc_region]; norm_num
+
+theorem threeSectorDisc_region_one : threeSectorDisc.region 1 = annSector 0 0 (1 / 3) (2 * π / 3) (4 * π / 3) := by
+  rw [threeSectorDisc_region]; norm_num; ring_nf
+
+theorem threeSectorDisc_region_two : threeSectorDisc.region 2 = annSector 0 0 (1 / 3) (4 * π / 3) (2 * π) := by
+  rw [threeSectorDisc_region]
+  congr 1 <;> simp <;> ring
+
+/-- Angular intervals grow with their ends. -/
+theorem angleIcc_subset_angleIcc {a b a' b' : ℝ} (ha : a' ≤ a) (hb : b ≤ b') : angleIcc a b ⊆ angleIcc a' b' := by
+  intro β hβ
+  obtain ⟨m, hm⟩ := mem_iUnion.mp hβ
+  exact mem_iUnion.mpr ⟨m, by constructor <;> linarith [hm.1, hm.2]⟩
+
 /-- The picture of `threeSectorDisc` at its centre: three sectors of angle `2π/3`, colours `0, 1, 2`. -/
 theorem threeSectorDisc_sectorsAt :
     threeSectorDisc.SectorsAt 0 3 ![0, 2 * π / 3, 4 * π / 3, 2 * π] ![0, 1, 2] := by
-  sorry
+  have hπ := Real.pi_pos
+  refine ⟨by norm_num, ?_, by simp, fun _ => by decide, by simp [threeSectorDisc], fun j => ?_⟩
+  · rw [Fin.monotone_iff_le_succ]; intro i; fin_cases i <;> simp <;> linarith
+  · ext β
+    simp only [mem_iUnion, mem_setOf_eq, exists_prop]
+    fin_cases j <;> simp only [Fin.zero_eta, Fin.mk_one, Fin.reduceFinMk]
+    · rw [threeSectorDisc_region_zero, coneAt_annSector_eq 0 (by norm_num) (by positivity)]
+      constructor
+      · intro h; exact ⟨0, rfl, by simpa using h⟩
+      · rintro ⟨i, hi, h⟩; fin_cases i <;> simp_all
+    · rw [threeSectorDisc_region_one, coneAt_annSector_eq 0 (by norm_num) (by linarith)]
+      constructor
+      · intro h; exact ⟨1, rfl, by simpa using h⟩
+      · rintro ⟨i, hi, h⟩; fin_cases i <;> simp_all
+    · rw [threeSectorDisc_region_two, coneAt_annSector_eq 0 (by norm_num) (by linarith)]
+      constructor
+      · intro h; exact ⟨2, rfl, by simpa using h⟩
+      · rintro ⟨i, hi, h⟩; fin_cases i <;> simp_all
 
 /-- **The phantom picture** (E3-PHANTOM): a `1`-horn then a `0`-horn inserted at the direction `2π/3` — every clause of `SectorsAt` still
 holds (the cones are unchanged), and colour `0` now sits on a sector of positive angle and on a horn. -/
 theorem threeSectorDisc_phantom :
     threeSectorDisc.SectorsAt 0 5 ![0, 2 * π / 3, 2 * π / 3, 2 * π / 3, 4 * π / 3, 2 * π] ![0, 1, 0, 1, 2] := by
-  sorry
+  have hπ := Real.pi_pos
+  refine ⟨by norm_num, ?_, by simp, fun _ => by decide, by simp [threeSectorDisc], fun j => ?_⟩
+  · rw [Fin.monotone_iff_le_succ]; intro i; fin_cases i <;> simp <;> linarith
+  · ext β
+    simp only [mem_iUnion, mem_setOf_eq, exists_prop]
+    fin_cases j <;> simp only [Fin.zero_eta, Fin.mk_one, Fin.reduceFinMk]
+    · rw [threeSectorDisc_region_zero, coneAt_annSector_eq 0 (by norm_num) (by positivity)]
+      constructor
+      · intro h; exact ⟨0, rfl, by simpa using h⟩
+      · rintro ⟨i, hi, h⟩
+        fin_cases i <;> simp_all
+        exact angleIcc_subset_angleIcc (by positivity) le_rfl h
+    · rw [threeSectorDisc_region_one, coneAt_annSector_eq 0 (by norm_num) (by linarith)]
+      constructor
+      · intro h; exact ⟨3, rfl, by simpa using h⟩
+      · rintro ⟨i, hi, h⟩
+        fin_cases i <;> simp_all
+        exact angleIcc_subset_angleIcc le_rfl (by linarith) h
+    · rw [threeSectorDisc_region_two, coneAt_annSector_eq 0 (by norm_num) (by linarith)]
+      constructor
+      · intro h; exact ⟨4, rfl, by simpa using h⟩
+      · rintro ⟨i, hi, h⟩; fin_cases i <;> simp_all
 
 /-- Every point of `threeSectorDisc` other than the centre carries at most two colours. -/
 theorem threeSectorDisc_ncard_coloursAt_le_two {w : ℂ} (hw : w ≠ 0) : (threeSectorDisc.coloursAt w).ncard ≤ 2 := by
-  sorry
+  have hπ := Real.pi_pos
+  have hw0 : 0 < ‖w‖ := norm_pos_iff.mpr hw
+  have hsub : ∀ {a b : ℝ}, a ≤ b → w ∈ closure (annSector 0 0 (1 / 3) a b) → ∃ θ ∈ Icc a b, w = (‖w‖ : ℂ) * e θ := by
+    intro a b hab hcl
+    obtain ⟨⟨s, θ⟩, ⟨hs, hθ⟩, hst⟩ := closure_annSector_subset 0 (by norm_num) hab hcl
+    simp only [zero_add] at hst
+    have hn : ‖w‖ = s := by rw [← hst, norm_real_mul_e hs.1]
+    exact ⟨θ, hθ, by rw [hn, hst]⟩
+  have hne : threeSectorDisc.coloursAt w ≠ univ := by
+    intro huniv
+    have h0 : w ∈ closure (threeSectorDisc.region 0) := show (0 : Fin 3) ∈ threeSectorDisc.coloursAt w from huniv ▸ mem_univ _
+    have h1 : w ∈ closure (threeSectorDisc.region 1) := show (1 : Fin 3) ∈ threeSectorDisc.coloursAt w from huniv ▸ mem_univ _
+    have h2 : w ∈ closure (threeSectorDisc.region 2) := show (2 : Fin 3) ∈ threeSectorDisc.coloursAt w from huniv ▸ mem_univ _
+    rw [threeSectorDisc_region_zero] at h0
+    rw [threeSectorDisc_region_one] at h1
+    rw [threeSectorDisc_region_two] at h2
+    obtain ⟨θ₀, hθ₀, e0⟩ := hsub (by positivity) h0
+    obtain ⟨θ₁, hθ₁, e1⟩ := hsub (by linarith) h1
+    obtain ⟨θ₂, hθ₂, e2⟩ := hsub (by linarith) h2
+    have e01 : e θ₀ = e θ₁ := (polar_inj (v := 0) hw0 hw0.le (by rw [zero_add, zero_add, ← e0, ← e1])).2
+    have e12 : e θ₁ = e θ₂ := (polar_inj (v := 0) hw0 hw0.le (by rw [zero_add, zero_add, ← e1, ← e2])).2
+    have h01 : θ₀ = θ₁ := by
+      by_contra hne
+      exact e_ne_e_of_lt (lt_of_le_of_ne (by linarith [hθ₀.2, hθ₁.1]) hne) (by linarith [hθ₀.1, hθ₁.2]) e01
+    have h12 : θ₁ = θ₂ := by
+      by_contra hne
+      exact e_ne_e_of_lt (lt_of_le_of_ne (by linarith [hθ₁.2, hθ₂.1]) hne) (by linarith [hθ₁.1, hθ₂.2]) e12
+    linarith [hθ₀.2, hθ₂.1]
+  have hlt := Set.ncard_lt_ncard (Set.ssubset_univ_iff.mpr hne) (Set.toFinite _)
+  rw [Set.ncard_univ, Nat.card_eq_fintype_card, Fintype.card_fin] at hlt
+  omega
 
 /-- The centre of `threeSectorDisc` is `NiceAt` (no horn; distinct colours). -/
 theorem threeSectorDisc_niceAt : threeSectorDisc.NiceAt 0 := by
@@ -303,7 +617,70 @@ end ArcMap
 
 /-- The picture of `halfDisc` at its centre: the upper half (colour `1`) over `[0, π]`, the lower (colour `0`) over `[π, 2π]`. -/
 theorem halfDisc_sectorsAt : halfDisc.SectorsAt 0 2 ![0, π, 2 * π] ![1, 0] := by
-  sorry
+  have hπ := Real.pi_pos
+  have hreg1 : halfDisc.region 1 = annSector 0 0 (1 / 3) 0 π := by
+    ext z
+    rw [mem_annSector_zero_iff le_rfl (by linarith)]
+    change z ∈ halfDisc.interiorPts ∧ (if 0 < z.im then (1 : Fin 2) else 0) = 1 ↔ _
+    rw [halfDisc_mem_interiorPts]
+    have hm := pi_add_arg_neg_mem z
+    have key : π + Complex.arg (-z) < π ↔ 0 < z.im := by
+      rw [show π + Complex.arg (-z) < π ↔ Complex.arg (-z) < 0 by constructor <;> intro h <;> linarith,
+        Complex.arg_neg_iff, Complex.neg_im, neg_lt_zero]
+    constructor
+    · rintro ⟨⟨hz, -⟩, hc⟩
+      have him : 0 < z.im := by by_contra h; rw [if_neg h] at hc; exact absurd hc (by decide)
+      exact ⟨fun h => by simp [h] at him, hz, hm.1, key.mpr him⟩
+    · rintro ⟨-, hz, -, hθ⟩
+      have him := key.mp hθ
+      exact ⟨⟨hz, him.ne'⟩, if_pos him⟩
+  have hreg0 : halfDisc.region 0 = annSector 0 0 (1 / 3) π (2 * π) := by
+    ext z
+    rw [mem_annSector_zero_iff hπ.le le_rfl]
+    change z ∈ halfDisc.interiorPts ∧ (if 0 < z.im then (1 : Fin 2) else 0) = 0 ↔ _
+    rw [halfDisc_mem_interiorPts]
+    have hm := pi_add_arg_neg_mem z
+    have key : π < π + Complex.arg (-z) ∧ π + Complex.arg (-z) < 2 * π ↔ z.im < 0 := by
+      constructor
+      · rintro ⟨h1, h2⟩
+        have ha : 0 < Complex.arg (-z) := by linarith
+        have hb : Complex.arg (-z) < π := by linarith
+        have hnn : 0 ≤ (-z).im := Complex.arg_nonneg_iff.mp ha.le
+        rcases lt_or_eq_of_le hnn with h | h
+        · simp only [Complex.neg_im, neg_pos] at h; exact h
+        · exfalso
+          rcases le_or_gt 0 (-z).re with hr | hr
+          · exact ha.ne' (Complex.arg_eq_zero_iff.mpr ⟨hr, h.symm⟩)
+          · exact hb.ne (Complex.arg_eq_pi_iff.mpr ⟨hr, h.symm⟩)
+      · intro him
+        have h1 : 0 < (-z).im := by simp only [Complex.neg_im, neg_pos]; exact him
+        have ha : 0 ≤ Complex.arg (-z) := Complex.arg_nonneg_iff.mpr h1.le
+        have ha' : Complex.arg (-z) ≠ 0 := fun h => h1.ne' (Complex.arg_eq_zero_iff.mp h).2
+        have hb : Complex.arg (-z) < π := Complex.arg_lt_pi_iff.mpr (Or.inr h1.ne')
+        constructor <;> [linarith [lt_of_le_of_ne ha (Ne.symm ha')]; linarith]
+    constructor
+    · rintro ⟨⟨hz, hne⟩, hc⟩
+      have him : z.im < 0 := by
+        rcases lt_or_gt_of_ne hne with h | h
+        · exact h
+        · rw [if_pos h] at hc; exact absurd hc (by decide)
+      exact ⟨fun h => by simp [h] at him, hz, key.mpr him⟩
+    · rintro ⟨-, hz, hθ⟩
+      have him := key.mp hθ
+      exact ⟨⟨hz, him.ne⟩, if_neg (not_lt.mpr him.le)⟩
+  refine ⟨by norm_num, ?_, by simp, fun _ => by decide, by simp [halfDisc], fun j => ?_⟩
+  · rw [Fin.monotone_iff_le_succ]; intro i; fin_cases i <;> simp <;> linarith
+  · ext β
+    simp only [mem_iUnion, mem_setOf_eq, exists_prop]
+    fin_cases j <;> simp only [Fin.zero_eta, Fin.mk_one]
+    · rw [hreg0, coneAt_annSector_eq 0 (by norm_num) (by linarith)]
+      constructor
+      · intro h; exact ⟨1, rfl, by simpa using h⟩
+      · rintro ⟨i, hi, h⟩; fin_cases i <;> simp_all
+    · rw [hreg1, coneAt_annSector_eq 0 (by norm_num) hπ]
+      constructor
+      · intro h; exact ⟨0, rfl, by simpa using h⟩
+      · rintro ⟨i, hi, h⟩; fin_cases i <;> simp_all
 
 /-- **Inhabitant of `NiceAt`** at a point of two colours: the centre of `halfDisc`. -/
 theorem halfDisc_niceAt : halfDisc.NiceAt 0 := by

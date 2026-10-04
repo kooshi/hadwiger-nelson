@@ -39,10 +39,6 @@ open Complex Real Set Filter Topology Metric
 /-- `φ` is off the finitely many directions `D`, mod `2π`. -/
 def OffDirs (D : Finset ℝ) (φ : ℝ) : Prop := ∀ δ ∈ D, ∀ m : ℤ, φ ≠ δ + 2 * π * m
 
-/-- A point at radius `s ≥ 0` along a direction lies at distance `s`. -/
-theorem norm_real_mul_e {s : ℝ} (hs : 0 ≤ s) (θ : ℝ) : ‖(s : ℂ) * e θ‖ = s := by
-  rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hs]
-
 /-- An annular sector of non-negative inner radius lies in the ball of its outer radius. -/
 theorem annSector_subset_ball (u : ℂ) {r₁ : ℝ} (hr : 0 ≤ r₁) (r₂ θ₁ θ₂ : ℝ) : annSector u r₁ r₂ θ₁ θ₂ ⊆ ball u r₂ := by
   rintro _ ⟨⟨s, θ⟩, ⟨hs, -⟩, rfl⟩
@@ -63,16 +59,6 @@ theorem mem_segment_ray {u : ℂ} {ρ s : ℝ} (hρ : 0 < ρ) (hs0 : 0 ≤ s) (h
   push_cast
   field_simp
   ring
-
-/-- The closure of an annular sector lies in the image of its closed radii and closed angles (a compact set). -/
-theorem closure_annSector_subset (u : ℂ) {r₁ r₂ θ₁ θ₂ : ℝ} (hr : r₁ ≤ r₂) (hθ : θ₁ ≤ θ₂) :
-    closure (annSector u r₁ r₂ θ₁ θ₂) ⊆ (fun q : ℝ × ℝ => u + (q.1 : ℂ) * e q.2) '' (Icc r₁ r₂ ×ˢ Icc θ₁ θ₂) := by
-  have _ := hr
-  have _ := hθ
-  have hf : Continuous fun q : ℝ × ℝ => u + (q.1 : ℂ) * e q.2 := by have := continuous_e; fun_prop
-  refine closure_minimal ?_ ((isCompact_Icc.prod isCompact_Icc).image hf).isClosed
-  rintro _ ⟨q, ⟨h1, h2⟩, rfl⟩
-  exact ⟨q, ⟨Ioo_subset_Icc_self h1, Ioo_subset_Icc_self h2⟩, rfl⟩
 
 /-- A point of the punctured disc off the two edge rays at `d₁` and `d₂` lies in one of the open sectors `(d₁, d₂)`, `(d₂, d₁ + 2π)` (either
 empty when `d₂` is outside `(d₁, d₁ + 2π)`). -/
@@ -360,6 +346,54 @@ theorem wedgeArcs_nondegenerate {v : ℂ} {ρ d₁ d₂ : ℝ} (hρ : 0 < ρ) (h
   · exact hseg d₁
   · exact hseg d₂
   · exact ⟨hρ, hd, hd2⟩
+
+/-- The wedge's arcs lie in the polar image of its closed radii and closed angles. -/
+theorem wedgeArcs_subset_polar {v : ℂ} {ρ d₁ d₂ : ℝ} (hρ : 0 < ρ) (hd : d₁ ≤ d₂) :
+    ⋃ a ∈ wedgeArcs v ρ d₁ d₂, a.carrier ⊆ (fun q : ℝ × ℝ => v + (q.1 : ℂ) * e q.2) '' (Icc 0 ρ ×ˢ Icc d₁ d₂) := by
+  refine iUnion₂_subset fun a ha => ?_
+  have hseg : ∀ d ∈ Icc d₁ d₂, segment ℝ v (v + (ρ : ℂ) * e d) ⊆
+      (fun q : ℝ × ℝ => v + (q.1 : ℂ) * e q.2) '' (Icc 0 ρ ×ˢ Icc d₁ d₂) := by
+    rintro d hd' _ ⟨a', b', ha', hb', hab, rfl⟩
+    refine ⟨(b' * ρ, d), ⟨⟨by positivity, by nlinarith⟩, hd'⟩, ?_⟩
+    simp only [Complex.real_smul]
+    rw [show (a' : ℂ) = 1 - b' by rw [show a' = 1 - b' by linarith]; push_cast; ring]
+    push_cast; ring
+  simp only [wedgeArcs, mem_insert_iff, mem_singleton_iff] at ha
+  rcases ha with rfl | rfl | rfl
+  · exact hseg d₁ ⟨le_rfl, hd⟩
+  · exact hseg d₂ ⟨hd, le_rfl⟩
+  · rintro _ ⟨θ, hθ, rfl⟩
+    exact ⟨(ρ, θ), ⟨⟨hρ.le, le_rfl⟩, hθ⟩, rfl⟩
+
+/-- A point at a direction in `(d₂, d₁ + 2π)` is off the polar image of `[0, ρ] × [d₁, d₂]`. -/
+theorem polar_notMem {v : ℂ} {ρ d₁ d₂ s θ : ℝ} (hs : 0 < s) (hθ : θ ∈ Ioo d₂ (d₁ + 2 * π)) :
+    v + (s : ℂ) * e θ ∉ (fun q : ℝ × ℝ => v + (q.1 : ℂ) * e q.2) '' (Icc 0 ρ ×ˢ Icc d₁ d₂) := by
+  rintro ⟨⟨s', θ'⟩, ⟨hs', hθ'⟩, h⟩
+  simp only at h hs' hθ'
+  exact e_ne_e_of_lt (show θ' < θ by linarith [hθ.1, hθ'.2]) (by linarith [hθ.2, hθ'.1])
+    (polar_inj hs hs'.1 h.symm).2.symm
+
+/-- The open wedge meets none of its arcs. -/
+theorem annSector_notMem_wedgeArcs {v : ℂ} {ρ d₁ d₂ : ℝ} (hd2 : d₂ ≤ d₁ + 2 * π) {z : ℂ}
+    (hz : z ∈ annSector v 0 ρ d₁ d₂) : z ∉ ⋃ a ∈ wedgeArcs v ρ d₁ d₂, a.carrier := by
+  obtain ⟨⟨s, θ⟩, ⟨hs, hθ⟩, rfl⟩ := hz
+  simp only at hs hθ
+  intro h
+  obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp h
+  have hseg : ∀ d : ℝ, v + (s : ℂ) * e θ ∈ segment ℝ v (v + (ρ : ℂ) * e d) → e θ = e d := by
+    rintro d ⟨a', b', ha', hb', hab, he⟩
+    have he' : v + (s : ℂ) * e θ = v + ((b' * ρ : ℝ) : ℂ) * e d := by
+      rw [← he]; simp only [Complex.real_smul]
+      rw [show (a' : ℂ) = 1 - b' by rw [show a' = 1 - b' by linarith]; push_cast; ring]
+      push_cast; ring
+    exact (polar_inj hs.1 (by have := hs.1; nlinarith [hs.2]) he').2
+  simp only [wedgeArcs, mem_insert_iff, mem_singleton_iff] at ha
+  rcases ha with rfl | rfl | rfl
+  · exact e_ne_e_of_lt hθ.1 (by linarith [hθ.2]) (hseg d₁ hza).symm
+  · exact e_ne_e_of_lt (show θ < d₂ from hθ.2) (by linarith [hθ.1]) (hseg d₂ hza)
+  · obtain ⟨θ', -, h'⟩ := hza
+    have := (polar_inj hs.1 (le_of_lt (hs.1.trans hs.2)) h'.symm).1
+    linarith [hs.2]
 
 /-- The frontier of the open annular sector lies on its two edges and its outer arc. -/
 theorem frontier_annSector_subset {v : ℂ} {ρ d₁ d₂ : ℝ} (hρ : 0 < ρ) (hd : d₁ < d₂) (hd2 : d₂ ≤ d₁ + 2 * π) :
@@ -850,7 +884,71 @@ theorem dirColourAt_wedgeMerge {v : ℂ} {D : Finset ℝ} {σ : ℝ → Fin k} (
     (hd : d₁ < d₂) (hd2 : d₂ < d₁ + 2 * π) :
     (F.wedgeMerge v hρ hd hd2.le c).DirColourAt v (insert d₁ (insert d₂ D))
       (fun φ => by classical exact if φ ∈ angleIoo d₁ d₂ then c else σ φ) := by
-  sorry
+  classical
+  intro φ hφ
+  have hφ1 : ∀ m : ℤ, φ ≠ d₁ + 2 * π * m := hφ d₁ (Finset.mem_insert_self _ _)
+  have hφ2 : ∀ m : ℤ, φ ≠ d₂ + 2 * π * m := hφ d₂ (Finset.mem_insert_of_mem (Finset.mem_insert_self _ _))
+  have hφD : OffDirs D φ := fun δ hδ => hφ δ (Finset.mem_insert_of_mem (Finset.mem_insert_of_mem hδ))
+  obtain ⟨r, hr, hsub⟩ := hD φ hφD
+  have hπ := Real.pi_pos
+  have hmono : ∀ r' ≤ r, annSector v 0 r' (φ - r') (φ + r') ⊆ annSector v 0 r (φ - r) (φ + r) := by
+    rintro r' hr' _ ⟨⟨s, θ⟩, ⟨hs, hθ⟩, rfl⟩
+    exact ⟨(s, θ), ⟨⟨hs.1, hs.2.trans_le hr'⟩, ⟨by linarith [hθ.1], by linarith [hθ.2]⟩⟩, rfl⟩
+  by_cases hin : φ ∈ angleIoo d₁ d₂
+  · obtain ⟨m, hm⟩ := mem_iUnion.mp hin
+    set r' := min r (min ρ (min (φ - (d₁ + 2 * π * m)) (d₂ + 2 * π * m - φ))) with hr'
+    have hr'0 : 0 < r' := lt_min hr (lt_min hρ (lt_min (by linarith [hm.1]) (by linarith [hm.2])))
+    have h1 : r' ≤ r := min_le_left _ _
+    have h2 : r' ≤ ρ := (min_le_right _ _).trans (min_le_left _ _)
+    have h3 : r' ≤ φ - (d₁ + 2 * π * m) := (min_le_right _ _).trans ((min_le_right _ _).trans (min_le_left _ _))
+    have h4 : r' ≤ d₂ + 2 * π * m - φ := (min_le_right _ _).trans ((min_le_right _ _).trans (min_le_right _ _))
+    refine ⟨r', hr'0, fun w hw => ?_⟩
+    have hwF := hsub (hmono r' h1 hw)
+    obtain ⟨⟨s, θ⟩, ⟨hs, hθ⟩, rfl⟩ := hw
+    simp only at hs hθ hwF ⊢
+    have hW : v + (s : ℂ) * e θ ∈ annSector v 0 ρ d₁ d₂ := by
+      refine ⟨(s, θ + 2 * π * ((-m : ℤ) : ℝ)), ⟨⟨hs.1, hs.2.trans_le h2⟩, ?_, ?_⟩, ?_⟩
+      · push_cast; linarith [hθ.1]
+      · push_cast; linarith [hθ.2]
+      · simp only [e_add_two_pi_mul_int]
+    rw [if_pos hin]
+    refine ⟨⟨hwF.1.1, fun h => ?_⟩, ?_⟩
+    · obtain ⟨a, ha | ha, hza⟩ := mem_iUnion₂.mp h
+      · exact hwF.1.2 (mem_iUnion₂.mpr ⟨a, ha, hza⟩)
+      · exact annSector_notMem_wedgeArcs hd2.le hW (mem_iUnion₂.mpr ⟨a, ha, hza⟩)
+    · show (if v + (s : ℂ) * e θ ∈ annSector v 0 ρ d₁ d₂ then c else F.col (v + (s : ℂ) * e θ)) = c
+      rw [if_pos hW]
+  · obtain ⟨n, hn⟩ := exists_shift_Ico d₁ φ
+    have hn1 : d₁ < φ + 2 * π * n := lt_of_le_of_ne hn.1 fun h => hφ1 (-n) (by push_cast; linarith)
+    have hn2 : d₂ < φ + 2 * π * n := by
+      rcases lt_trichotomy (φ + 2 * π * n) d₂ with h | h | h
+      · exact absurd (mem_iUnion.mpr ⟨-n, by push_cast; constructor <;> linarith⟩) hin
+      · exact absurd (by push_cast; linarith : φ = d₂ + 2 * π * ((-n : ℤ) : ℝ)) (hφ2 (-n))
+      · exact h
+    set r' := min r (min (φ + 2 * π * n - d₂) (d₁ + 2 * π - (φ + 2 * π * n))) with hr'
+    have hr'0 : 0 < r' := lt_min hr (lt_min (by linarith) (by linarith [hn.2]))
+    have h1 : r' ≤ r := min_le_left _ _
+    have h3 : r' ≤ φ + 2 * π * n - d₂ := (min_le_right _ _).trans (min_le_left _ _)
+    have h4 : r' ≤ d₁ + 2 * π - (φ + 2 * π * n) := (min_le_right _ _).trans (min_le_right _ _)
+    refine ⟨r', hr'0, fun w hw => ?_⟩
+    have hwF := hsub (hmono r' h1 hw)
+    obtain ⟨⟨s, θ⟩, ⟨hs, hθ⟩, rfl⟩ := hw
+    simp only at hs hθ hwF ⊢
+    rw [if_neg hin]
+    have hoff : v + (s : ℂ) * e θ ∉ closure (annSector v 0 ρ d₁ d₂) ∪ ⋃ a ∈ wedgeArcs v ρ d₁ d₂, a.carrier := by
+      have hP := polar_notMem (v := v) (ρ := ρ) (d₁ := d₁) (d₂ := d₂) hs.1
+        (show θ + 2 * π * n ∈ Ioo d₂ (d₁ + 2 * π) from ⟨by linarith [hθ.1], by linarith [hθ.2]⟩)
+      rw [e_add_two_pi_mul_int] at hP
+      rintro (h | h)
+      · exact hP (closure_annSector_subset v hρ.le hd.le h)
+      · exact hP (wedgeArcs_subset_polar hρ hd.le h)
+    have key := recolour_region_diff (F := F) (W := annSector v 0 ρ d₁ d₂) (B := wedgeArcs v ρ d₁ d₂)
+      (hB := wedgeArcs_nondegenerate hρ hd hd2.le) (hBf := ((finite_singleton _).insert _).insert _)
+      (hW := frontier_annSector_subset hρ hd hd2.le) (c := c) (σ φ)
+    have : v + (s : ℂ) * e θ ∈ F.region (σ φ) \ (closure (annSector v 0 ρ d₁ d₂) ∪ ⋃ a ∈ wedgeArcs v ρ d₁ d₂, a.carrier) :=
+      ⟨hwF, hoff⟩
+    rw [← key] at this
+    exact this.1
 
 /-- **The points a merge at a wedge creates are `NiceAt`** (E3-NICE's crossings): inside a good ball of `F` at `v`, with the two edges in
 `F`'s class of `c` a little beyond the radius `ρ`, every point of `closedBall v ρ` other than `v` that carries three or more colours after the

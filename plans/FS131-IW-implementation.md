@@ -290,3 +290,41 @@ rounds; the plan's M and M+ (150–250) hold. At this rate the four leaves left 
 `wedgeMerge_niceAt` H−, `exists_merge_at` H) are 900–1,300 lines, more than this job's remaining budget; T1–T5 about 300.
 
 **Left in `Merge` (4)**: `niceAt_of_dirColourAt`, `dirColourAt_wedgeMerge`, `wedgeMerge_niceAt`, `exists_merge_at`; in `Basic` T1–T5.
+
+## Stage 10 — SAVED (FS131-IWc): the local data after a merge; `Basic`'s five inhabitant leaves (T1–T5)
+
+**Build of stage 9's tree**: OK — 445 of 445 batches, 3 modules rebuilt, 7 with warnings, 8 m 47 s, exit 0 (`build/gate/build/20261004T155530Z-491688.log`;
+driver log `data/fs131/iwc/build2.log`).
+
+**Proved (statements unchanged)**:
+* **`dirColourAt_wedgeMerge`** — off `D` and the two edge directions, a direction inside the wedge (mod `2π`) has a thin cone inside the open wedge and
+  inside `F`'s thin cone, so of interior points of the merged map (the wedge meets none of its own arcs, `annSector_notMem_wedgeArcs`) coloured `c`; a
+  direction outside the closed wedge has a thin cone off the polar image of `[0, ρ] × [d₁, d₂]` (`polar_notMem`), which holds the wedge's closure and
+  arcs (`closure_annSector_subset`, `wedgeArcs_subset_polar`), so the regions there are `F`'s (`recolour_region_diff`).
+* **T1 `threeCol_locallyConstant`** — off the cuts in the disc, `x ≠ 0` and its angle `π + arg(−x) ∈ (0, 2π]` avoids `2π/3`, `4π/3`, `2π`
+  (`mem_threeCuts_iff`); so `−x` is in the slit plane and the angle is continuous at `x`; the strict inequality that fixes `threeCol x` holds nearby.
+* **T2 `threeSectorDisc_sectorsAt`**, **T3 `threeSectorDisc_phantom`** — the region of colour `j` is the open sector `(2πj/3, 2π(j+1)/3)` of radius `1/3`
+  (`threeSectorDisc_region`), and the cone of an open sector at its apex is its closed angular interval (`coneAt_annSector_eq`, the plan's reusable
+  child); the phantom's horns at `2π/3` sit inside both neighbours' intervals (`angleIcc_subset_angleIcc`).
+* **T4 `threeSectorDisc_ncard_coloursAt_le_two`** — a point `w ≠ 0` in the closures of all three sectors would have one direction in `[0, 2π/3]`,
+  `[2π/3, 4π/3]` and `[4π/3, 2π]` at once (`closure_annSector_subset`, `polar_inj`, `e_ne_e_of_lt`).
+* **T5 `halfDisc_sectorsAt`** — the regions of `halfDisc` are the open sectors `(0, π)` and `(π, 2π)` (`Complex.arg_neg_iff`, `arg_nonneg_iff`,
+  `arg_lt_pi_iff`, `arg_eq_zero_iff`, `arg_eq_pi_iff`), then `coneAt_annSector_eq`.
+
+So `threeSectorDisc_niceAt`, `_woodallMerged`, `_woodallNormal`, the two phantom adversaries and `halfDisc_niceAt` are now on their proved leaves:
+**`Plane/Woodall/Basic` is `sorry`-free.**
+
+**Children added.** In `Basic` (new section "Polar coordinates, and the cone of an open sector at its apex"): `eq_of_e_eq_of_mem_Ioc`,
+`coneAt_annSector_eq`, `eq_norm_mul_e_pi_add_arg`, `pi_add_arg_neg_mem`, `pi_add_arg_neg_eq`, `mem_annSector_zero_iff`, `mem_segment_half_iff`,
+`ArcMap.mem_threeCuts_iff`, `ArcMap.threeCol_eq_iff`, `ArcMap.threeSectorDisc_region` (with `_zero`, `_one`, `_two`), `ArcMap.angleIcc_subset_angleIcc`.
+**Moved upstream into `Basic`, unchanged** (the inhabitants need them, and `Basic` is upstream of both): `norm_real_mul_e`, `closure_annSector_subset`,
+`polar_inj`, `e_ne_e_of_lt` (from `Merge`) and `mem_coneAt_annSector` (from `NoFourFive`, a `--` line left at its old place). In `Merge`:
+`polar_inj` and `e_ne_e_of_lt` (then moved), `wedgeArcs_subset_polar`, `polar_notMem`, `annSector_notMem_wedgeArcs`. Records: a new section "FS-131
+Woodall's chain (job FS131-IWc)" for `Basic`'s children, three lines in the merge section; `tools/fs131_w3_decls.py --check`: 182 theorems, 182 records,
+0 missing, 0 stale. No new name is declared in any other worktree's `Proofs/` or on `main` (`rg`, 20 names).
+
+**Left in `Merge` (3)**: `niceAt_of_dirColourAt`, `wedgeMerge_niceAt`, `exists_merge_at`.
+
+**Build of this stage**: OK — 445 of 445 batches, 6 modules rebuilt, 6 with warnings (wave 4's five skeleton modules and `Woodall/Merge`), 9 m 8 s,
+exit 0 (`build/gate/build/20261004T160612Z-574527.log`; driver log `data/fs131/iwc/build3.log`); the only Woodall warnings are `Merge`'s three
+`declaration uses 'sorry'` (each printed three times by the replays); `Basic` builds with no warning.

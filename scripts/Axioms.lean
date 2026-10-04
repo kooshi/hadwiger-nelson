@@ -2513,6 +2513,25 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.halfDisc_sectorsAt
 #print axioms HadwigerNelson.Plane.halfDisc_niceAt
 
+/-! ## FS-131 Woodall's chain (job FS131-IWc) — the inhabitants' children: polar coordinates about `0`, the cone of an open sector at its apex, the regions of `threeSectorDisc` and `halfDisc` -/
+
+#print axioms HadwigerNelson.Plane.eq_of_e_eq_of_mem_Ioc
+#print axioms HadwigerNelson.Plane.coneAt_annSector_eq
+#print axioms HadwigerNelson.Plane.eq_norm_mul_e_pi_add_arg
+#print axioms HadwigerNelson.Plane.pi_add_arg_neg_mem
+#print axioms HadwigerNelson.Plane.pi_add_arg_neg_eq
+#print axioms HadwigerNelson.Plane.mem_annSector_zero_iff
+#print axioms HadwigerNelson.Plane.mem_segment_half_iff
+#print axioms HadwigerNelson.Plane.polar_inj
+#print axioms HadwigerNelson.Plane.e_ne_e_of_lt
+#print axioms HadwigerNelson.Plane.ArcMap.mem_threeCuts_iff
+#print axioms HadwigerNelson.Plane.ArcMap.threeCol_eq_iff
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_region
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_region_zero
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_region_one
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_region_two
+#print axioms HadwigerNelson.Plane.ArcMap.angleIcc_subset_angleIcc
+
 /-! ## FS-131 Woodall's merge (job FS131-W3) — step 3 localized: E3-W, recolouring, the merge at a wedge, locality, the local data, E3-NICE, E3-BALL (sorry until the chain's implementer lands them) -/
 
 #print axioms HadwigerNelson.Plane.clear_wedge
@@ -2523,6 +2542,9 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.closure_annSector_subset
 #print axioms HadwigerNelson.Plane.mem_annSector_union_of_ne
 #print axioms HadwigerNelson.Plane.disjoint_annSector_wedges
+#print axioms HadwigerNelson.Plane.wedgeArcs_subset_polar
+#print axioms HadwigerNelson.Plane.polar_notMem
+#print axioms HadwigerNelson.Plane.annSector_notMem_wedgeArcs
 #print axioms HadwigerNelson.Plane.wedgeArcs_nondegenerate
 #print axioms HadwigerNelson.Plane.frontier_annSector_subset
 #print axioms HadwigerNelson.Plane.ArcMap.recolour_isPlaneMap
