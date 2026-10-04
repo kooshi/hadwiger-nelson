@@ -3073,6 +3073,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4, `Contact` (job FS131-IC2) — the second implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.shaveAvailable_of_adjacent_horns
 #print axioms HadwigerNelson.Plane.mem_coneAt_hornSet
 #print axioms HadwigerNelson.Plane.e_eq_of_mem_coneAt_hornSet
 #print axioms HadwigerNelson.Plane.dot_neg_left

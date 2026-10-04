@@ -67,6 +67,7 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.ArcMap.exists_hasSectors
 #print axioms HadwigerNelson.Plane.ArcMap.e_eq_or_of_two_horns
 #print axioms HadwigerNelson.Plane.ArcMap.covers_of_isPlaneMap
+#print axioms HadwigerNelson.Plane.ArcMap.shaveAvailable_of_adjacent_horns
 #print axioms HadwigerNelson.Plane.ArcMap.flank_shadows
 #print axioms HadwigerNelson.Plane.ArcMap.shaveAvailable_of_not_doublyShadowed
 #print axioms HadwigerNelson.Plane.ArcMap.exists_shave

@@ -22,6 +22,8 @@ Axioms from `#print axioms` against the stage-2 build's oleans (`data/fs131/ic/a
 - 9 children (FS131-IC2, Stage 5), each `[propext, Classical.choice, Quot.sound]`: `mem_coneAt_hornSet`, `e_eq_of_mem_coneAt_hornSet` (a horn approaches its
   base point exactly along its axis), `dot_neg_left`, `ArcMap.IsHorn.congr`, `ArcMap.IsHorn.eventually_subset_region`, `ArcMap.IsHorn.mem_coneAt_region`,
   `ArcMap.exists_hasSectors` (every colour has a sector count at a point of the domain), `ArcMap.e_eq_or_of_two_horns`, `ArcMap.covers_of_isPlaneMap`.
+- 1 child (FS131-IC2, Stage 6), `[propext, Classical.choice, Quot.sound]`: `ArcMap.shaveAvailable_of_adjacent_horns` (two `c`-horns on one ray sharing their
+  bounding arc, with a lower flank, make SHAVE available — Stage 5's finding 1).
 
 ## Stage 1 — SAVED: the readback, the as-given build
 
@@ -244,3 +246,30 @@ API and the derivation cost more than the proof. The five left are each about a 
 **What is left (5)**, in the order I would take it: `stuck_cone` (finding 2, over `IsHorn.exists_flanks`) → `flank_shadows` with N4-FLANK's mechanism as a child
 (IC1's item 1) → `stuck_structure` over both (then `stuck_chain` and its three children are sorry-free) → the three moves (IC1's items 3–4; engine 2
 `ringArcsWithin_of_Γ_subset` is still written nowhere — FS131-I4i on `fs131-w4` has it first on its list).
+
+## Stage 6 — SAVED (FS131-IC2 stage 3): `shaveAvailable_of_adjacent_horns`; 5 `sorry` left in `Contact`, and the hand-back
+
+**Added** (a child, no statement changed): `ArcMap.shaveAvailable_of_adjacent_horns` — Stage 5's finding 1 made a lemma: if the `c`-horn between `κ₁ < κ₂` has the
+`c`-horn between `κ₂ < κ₃` directly above it and a lower flank `h`, SHAVE is available at `v` with upper flank `c` and `σ = κ₁` (the tip is `c`'s own class,
+so clear for `c` in a valid map). With `IsHorn.exists_flanks` (Stage 5's finding 1, not yet written) it gives `stuck_structure`'s "one horn per ray" in the
+adjacent case. Docstring notes added where the gate asks for a model: this lemma and `stuck_neighbour`, `stuck_flip`, `stuck_step` are steps inside proofs by
+contradiction (N4-STUCK (i), N4-PROP), with no model expected, as `stuck_chain`'s own docstring says.
+
+**Engine 2** (the coordinator's message during this stage): `ringArcsWithin_of_Γ_subset` is written on `fs131-w4` by FS131-I4i, commit `3f7ea033` (only
+`Plane/ValidMap/Basic`, 112 added lines). Not written here. A successor whose moves need it before the merge brings that exact hunk onto this branch
+(`git diff 3f7ea033~1 3f7ea033 -- Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean | git apply`, then build; commit by explicit path naming `3f7ea033`), so the two
+copies are identical at the merge (inventory item 218 (g)).
+
+**Build of this stage**: `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — 444 of 444 batches, 2 module(s)
+rebuilt, 3 module(s) with warnings, 8m42s", exit 0 (`build/gate/build/20261004T200630Z-1991775.log`; driver log `data/fs131/ic/build-ic2-stage6.log`). 29
+distinct `declaration uses sorry` warnings — `Contact` 5 (lines 1641, 1680, 1694, 1710, 1726: `flank_shadows`, `exists_shave`, `exists_rayMerge`,
+`exists_merge`, `stuck_structure`), `UnitArc` 17 and `BaseSteps` 7 (I4h's, as given) — and no other warning or error. Nothing was edited while it ran.
+**Axioms** against its oleans (`data/fs131/ic/AxiomsIC2.lean` → `data/fs131/ic/axioms-ic2-stage6.txt`, `pp.fullNames`; not a gate log): all 78 theorems of
+`Contact`; 68 read `[propext, Classical.choice, Quot.sound]`; 10 read `sorryAx` besides (the five leaves; `shaveAvailable_of_not_doublyShadowed` through
+`flank_shadows`; `stuck_neighbour`, `stuck_flip`, `stuck_step`, `stuck_chain` through `stuck_structure`). **Records**: `tools/fs131_ic2_addrecords.py` — 78
+names, 1 added, `--check` exit 0.
+
+**The hand-back.** Proved in this job (FS131-IC2): `stuck_chain` over `stuck_structure` (Contact 6 → 5 `sorry`), its three step children over the same, and 10
+sorry-free children. **Left (5)**: `flank_shadows`, `exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure` — the order and what each needs is Stage 5's
+"What is left" (with IC1's Stage 2 items 1, 3, 4). Branch `fs131-w4c` is ready for the merge into `fs131-w4` (my records in their own block headed "FS131-IC2"
+in `scripts/Axioms.lean`, after IC1's; no import or `ARCHITECTURE.md` change in this job). I did not merge or run wave 4's gate.

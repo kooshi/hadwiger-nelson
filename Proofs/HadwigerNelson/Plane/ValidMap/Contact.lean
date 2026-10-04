@@ -1619,6 +1619,19 @@ theorem e_eq_or_of_two_horns {v : ℂ} {c : Fin k} {α α₀ κ₁ κ₂ κ₁' 
 theorem covers_of_isPlaneMap (hP : F.IsPlaneMap) (x : ℂ) (R : ℝ) : F.Covers x R := by
   intro z _; rw [hP]; trivial
 
+/-- **Two `c`-horns on one ray sharing their bounding arc can be shaved** (SHAVE with upper flank `c`): if the `c`-horn between the
+curvatures `κ₁ < κ₂` has the `c`-horn between `κ₂ < κ₃` directly above it and some lower flank `h`, SHAVE is available at `v`, at
+`σ = κ₁` — the whole tip is the upper part, clear for `c` because it is `c`'s own class in a valid map. So a stuck vertex has no two
+adjacent `c`-horns along one ray (the case `RayAvailable`, which needs a gap `κ₂ < κ₃`, does not cover). No model of all three hypotheses at once is held: it is a step inside N4-STUCK (i)'s proof by
+contradiction (finding 1 of `plans/FS131-IC-implementation.md` Stage 5). -/
+theorem shaveAvailable_of_adjacent_horns (hF : F.Valid) {v : ℂ} {α κ₁ κ₂ κ₃ : ℝ} {c h : Fin k}
+    (hH : F.IsHorn v α κ₁ κ₂ c) (hH' : F.IsHorn v α κ₂ κ₃ c) (hh : F.IsFlankBelow v α κ₁ h) : F.ShaveAvailable v := by
+  refine ⟨c, c, h, α, κ₁, κ₂, κ₁, hH, ⟨κ₃, hH'.1, hH'.eventually_subset_region⟩, hh, le_rfl, hH.1.le, ?_⟩
+  filter_upwards [hH.eventually_subset_region] with r hr z hz
+  refine ⟨fun _ y hy hzy => ?_, fun hA => absurd hz.2.2.1 hA⟩
+  have hzr := hr hz
+  exact hF z hzr.1 y hy.1 hzy (hzr.2.trans hy.2.symm)
+
 /-! ## FS110-N4-SHADOW: N4-FLANK -/
 
 /-- **FS110-N4-SHADOW**, N4-FLANK: for a `c`-horn along `a` with curvatures in `(−1, 1)`, upper flank `g` and lower flank `h`
@@ -1730,7 +1743,8 @@ theorem stuck_structure (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} (hv : F.Cov
 /-- **The neighbour on the normal line is stuck, with a horn along the same axis** (FS110-N4-PROP's step, its second half): in a
 terminal valid plane map with Condition 5 and at most three colours everywhere, if a colour `h` carried at `v` has at least two
 sectors at `P = v + e(α + π/2)`, then `P` is stuck and `h` has a horn at `P` along `e α`. The axis: `v` is an `h`-contact of `P`,
-and both directions of `h`'s horns at `P` lie in `D_h(P)`, so they are perpendicular to `v − P`. -/
+and both directions of `h`'s horns at `P` lie in `D_h(P)`, so they are perpendicular to `v − P`. No model of its hypotheses is expected: like
+`stuck_chain`, it is a step inside FS110-N4-PROP's proof by contradiction. -/
 theorem stuck_neighbour (hF : F.Valid) (h5 : F.Condition5) (hP : F.IsPlaneMap) (hT : F.Terminal)
     (h3 : ∀ x, (F.coloursAt x).ncard ≤ 3) {v : ℂ} {α : ℝ} {h : Fin k} (hhv : h ∈ F.coloursAt v)
     (hhN : h ∈ F.coloursAt (v + e (α + π / 2)))
@@ -1778,7 +1792,8 @@ theorem stuck_neighbour (hF : F.Valid) (h5 : F.Condition5) (hP : F.IsPlaneMap) (
     rw [e_add_pi', he, e_add_pi', neg_neg]
 
 /-- **The stuck colour's other horn** (N4-STUCK (i)): at a stuck vertex of such a map, a horn along `e α` of a colour with at least
-two sectors comes with a horn of that colour along `e(α + π)`. -/
+two sectors comes with a horn of that colour along `e(α + π)`. No model of its hypotheses is expected: like
+`stuck_chain`, it is a step inside FS110-N4-PROP's proof by contradiction. -/
 theorem stuck_flip (hF : F.Valid) (h5 : F.Condition5) (hP : F.IsPlaneMap) (h3 : ∀ x, (F.coloursAt x).ncard ≤ 3) {w : ℂ}
     {α κ₁ κ₂ : ℝ} {c : Fin k} {m : ℕ} (hst : F.IsStuck w) (hm : 2 ≤ m) (hc : F.HasSectors w c m)
     (hH : F.IsHorn w α κ₁ κ₂ c) : ∃ κ κ' : ℝ, F.IsHorn w (α + π) κ κ' c := by
@@ -1790,7 +1805,8 @@ theorem stuck_flip (hF : F.Valid) (h5 : F.Condition5) (hP : F.IsPlaneMap) (h3 : 
 
 /-- **The step along the normal line** (FS110-N4-PROP's step `k → k + 1`): at a stuck vertex of a terminal valid plane map with
 Condition 5 and at most three colours everywhere, a horn along `e α` of a colour with at least two sectors makes `w + e(α + π/2)`
-stuck, with a horn along `e α` of a colour with at least two sectors there. -/
+stuck, with a horn along `e α` of a colour with at least two sectors there. No model of its hypotheses is expected: like
+`stuck_chain`, it is a step inside FS110-N4-PROP's proof by contradiction. -/
 theorem stuck_step (hF : F.Valid) (h5 : F.Condition5) (hP : F.IsPlaneMap) (hT : F.Terminal)
     (h3 : ∀ x, (F.coloursAt x).ncard ≤ 3) {w : ℂ} {α κ₁ κ₂ : ℝ} {c : Fin k} {m : ℕ} (hst : F.IsStuck w) (hm : 2 ≤ m)
     (hc : F.HasSectors w c m) (hH : F.IsHorn w α κ₁ κ₂ c) :
