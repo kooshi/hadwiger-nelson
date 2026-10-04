@@ -624,3 +624,11 @@ reason by the close.*
      gated PASS): `step5_eq`, `step7` and step 8 out; E1-SEE, -RAY, -CROSS, -COVER, -BAD, -NO45, -NOBRANCH in over `ArcMap`; the Jordan curve theorem for
      segment-and-arc curves decided; leaf plans and the handoff current. Row statements unchanged. Launched in the slot E1 freed: slots 0.5 + 0.5 + 1 + 1 = 3,
      plus EXT-HN1 in the special slot. FS131-IW waits for it.
+110. **EXT-HN1 early answer** (message 2026-10-04; commit pulled `outside-commit-1`, one Lean file `OutsideClaim.lean`, 102 lines):
+     the headline `outside_headline` concludes only `(∑ i, outside_measure r (C.color i)) < 2 * π` for a six-set cover of one circle of radius `r`, from the
+     hypothesis `h_safe : ∀ i, OutsideDensity r (C.color i)` — "a unit-safe set has angular measure `< π/3`" — which is assumed, never proved; no graph, no chromatic
+     number, no conclusion `False`; "= 7" only in the README and comments. The assumed claim is false (for `r < 1/2` the whole circle has no unit pair and measure
+     `2π`; for `r ≥ 1/2` the circle's unit graph is rotation by `±θ`, degree ≤ 2, so every circle is 3-colourable). Build broken as shipped (no `require mathlib`,
+     no manifest, default target's root absent). **Keryx's receipt**: read the file at that commit in the agent's working copy — `outside_headline`'s statement,
+     its proof (six reals each `< π/3` sum to `< 2π`) and the definitions `OutsideColoring`, `outside_safe`, `OutsideDensity`, `outside_measure` as quoted; and the `r < 1/2`
+     case by hand (diameter `2r < 1`). Agent continuing: compile against Mathlib, small Lean refutations, `#print axioms`.
