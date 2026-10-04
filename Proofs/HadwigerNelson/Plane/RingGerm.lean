@@ -1234,6 +1234,83 @@ theorem flank_edge_exists (hF : F.Valid) {t : Set ℂ} (ht : F.IsTile t) {p : �
       ∃ α' ∈ F.arcs, ∃ B', α'.InitialPiece (ringPt p (ψ + π / 3)) (ψ + 7 * π / 6) B' ∧ B' ⊆ closure t := by
   sorry
 
+/-- `e(σ π/2) = σ i` for `σ = ±1`. -/
+theorem e_sigma_half {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) : e (σ * (π / 2)) = (σ : ℂ) * I := by
+  rcases hσ with rfl | rfl
+  · simp [e_pi_div_two]
+  · rw [show (-1 : ℝ) * (π / 2) = -(π / 2) by ring, e_neg]; simp
+
+/-- An initial piece of an arc leaving `y` in the direction `i m` (`‖m‖ = 1`): either the arc is a segment and the piece
+contains `y + ε i m`, or it is circular and contains the points `y + σρ m (e(σt) − 1)`, `0 ≤ t ≤ ε`, `σ = ±1`. -/
+theorem initialPiece_cases {α : Arc} {y m : ℂ} {δ : ℝ} {B : Set ℂ} (hδ : e δ = I * m)
+    (hB : α.InitialPiece y δ B) :
+    (∃ ε : ℝ, 0 < ε ∧ y + (ε : ℂ) * (I * m) ∈ B) ∨
+      ∃ ρ : ℝ, 0 < ρ ∧ ∃ ε : ℝ, 0 < ε ∧ ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧
+        ∀ t ∈ Icc 0 ε, y + ((σ * ρ : ℝ) : ℂ) * m * (e (σ * t) - 1) ∈ B := by
+  cases α with
+  | seg a b =>
+    obtain ⟨ε, hε, hBeq, -⟩ := hB
+    left
+    refine ⟨ε, hε, ?_⟩
+    rw [hBeq, hδ]
+    exact right_mem_segment ℝ _ _
+  | circ c ρ θ₀ θ₁ =>
+    obtain ⟨hρ, φ, ε, σ, hσ, hε, hy, hδφ, hBeq, -⟩ := hB
+    right
+    refine ⟨ρ, hρ, ε, hε, σ, hσ, fun t ht => ?_⟩
+    have hE0 : e φ ≠ 0 := fun h => by simpa [h] using norm_e φ
+    have hφm : e φ = (σ : ℂ) * m := by
+      have h1 : e δ = e φ * ((σ : ℂ) * I) := by rw [hδφ, e_add, e_sigma_half hσ]
+      have hI : (I : ℂ) ≠ 0 := Complex.I_ne_zero
+      have h2 : (I : ℂ) * (e φ * σ) = I * (σ * σ * m) := by
+        have hσσ : (σ : ℂ) * σ = 1 := by rcases hσ with rfl | rfl <;> simp
+        calc (I : ℂ) * (e φ * σ) = e φ * (σ * I) := by ring
+          _ = e δ := h1.symm
+          _ = I * m := hδ
+          _ = I * (σ * σ * m) := by rw [hσσ, one_mul]
+      have h3 := mul_left_cancel₀ hI h2
+      have hσσ : (σ : ℂ) * σ = 1 := by rcases hσ with rfl | rfl <;> simp
+      calc e φ = e φ * (σ * σ) := by rw [hσσ, mul_one]
+        _ = (e φ * σ) * σ := by ring
+        _ = (σ * σ * m) * σ := by rw [h3]
+        _ = σ * m * (σ * σ) := by ring
+        _ = σ * m := by rw [hσσ, mul_one]
+    rw [hBeq]
+    refine ⟨t, ht, ?_⟩
+    simp only
+    have hc : c = y - ρ * e φ := by rw [hy]; ring
+    rw [hc, e_add, hφm]
+    push_cast
+    have hσσ : (σ : ℂ) * σ = 1 := by rcases hσ with rfl | rfl <;> simp
+    ring
+
+
+/-- The squared norm of `σρ(e(σt) − 1) − 1` (the offset of a point of a piece from the far point). -/
+theorem sq_norm_pieceB {σ ρ : ℝ} (hσ : σ = 1 ∨ σ = -1) (t : ℝ) :
+    ‖((σ * ρ : ℝ) : ℂ) * (e (σ * t) - 1) - 1‖ ^ 2 = 1 + 2 * ρ * (ρ + σ) * (1 - Real.cos t) := by
+  rw [sq_norm_eq]
+  simp only [Complex.sub_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, Complex.one_re, Complex.sub_im,
+    Complex.mul_im, Complex.one_im, re_e, im_e, zero_mul, sub_zero, add_zero]
+  rcases hσ with rfl | rfl
+  · simp only [one_mul]
+    linear_combination ρ ^ 2 * Real.sin_sq_add_cos_sq t
+  · simp only [neg_mul, one_mul, Real.cos_neg, Real.sin_neg]
+    linear_combination ρ ^ 2 * Real.sin_sq_add_cos_sq t
+
+/-- The squared norm of `1 + σρ(e(σt) − 1)` (the offset of a point of a piece at the far end from the near point). -/
+theorem sq_norm_pieceB' {σ ρ : ℝ} (hσ : σ = 1 ∨ σ = -1) (t : ℝ) :
+    ‖1 + ((σ * ρ : ℝ) : ℂ) * (e (σ * t) - 1)‖ ^ 2 = 1 + 2 * ρ * (ρ - σ) * (1 - Real.cos t) := by
+  rw [sq_norm_eq]
+  simp only [Complex.add_re, Complex.sub_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, Complex.one_re,
+    Complex.add_im, Complex.sub_im, Complex.mul_im, Complex.one_im, re_e, im_e, zero_mul, sub_zero,
+    add_zero]
+  rcases hσ with rfl | rfl
+  · simp only [one_mul]
+    linear_combination ρ ^ 2 * Real.sin_sq_add_cos_sq t
+  · simp only [neg_mul, one_mul, Real.cos_neg, Real.sin_neg]
+    linear_combination ρ ^ 2 * Real.sin_sq_add_cos_sq t
+
+
 /-- **FS116-Y4-FLANK**, the geometry (TWOCIRC in place of its identity step, SR1 item 1): two initial pieces of arcs leaving
 `y` and `y'` (with `y' − y = e(ψ + 120°)`) in the direction `ψ + 210°`, the first inside `B̄(y', 1)` and the second inside
 `B̄(y, 1)`, have points nearer than `1`. (Staying in the disc forces each to curve toward the other centre with radius at most
@@ -1241,7 +1318,110 @@ theorem flank_edge_exists (hF : F.Valid) {t : Set ℂ} (ht : F.IsTile t) {p : �
 theorem flank_initialPieces {y y' : ℂ} {ψ : ℝ} (hyy' : y' - y = e (ψ + 2 * π / 3)) {α α' : Arc} {B B' : Set ℂ}
     (hB : α.InitialPiece y (ψ + 7 * π / 6) B) (hB' : α'.InitialPiece y' (ψ + 7 * π / 6) B')
     (hBd : B ⊆ closedBall y' 1) (hB'd : B' ⊆ closedBall y 1) : ∃ z ∈ B, ∃ z' ∈ B', dist z z' < 1 := by
-  sorry
+  set m : ℂ := e (ψ + 2 * π / 3) with hm
+  have hmn : ‖m‖ = 1 := norm_e _
+  have hδ : e (ψ + 7 * π / 6) = I * m := by
+    rw [show ψ + 7 * π / 6 = (ψ + 2 * π / 3) + π / 2 by ring, e_add, e_pi_div_two, mul_comm]
+  have hy' : y' = y + m := by rw [← hyy']; ring
+  have hπ := Real.pi_gt_three
+  have he0 : e 0 = 1 := by simp [e]
+  have hIε : ∀ ε : ℝ, 0 < ε → 1 < ‖(ε : ℂ) * I - 1‖ := by
+    intro ε hε
+    have h := sq_norm_eq ((ε : ℂ) * I - 1)
+    simp only [Complex.sub_re, Complex.mul_re, Complex.ofReal_re, Complex.I_re, Complex.ofReal_im, Complex.I_im,
+      Complex.one_re, Complex.sub_im, Complex.mul_im, Complex.one_im] at h
+    norm_num at h
+    nlinarith [norm_nonneg ((ε : ℂ) * I - 1)]
+  have hIε' : ∀ ε : ℝ, 0 < ε → 1 < ‖1 + (ε : ℂ) * I‖ := by
+    intro ε hε
+    have h := sq_norm_eq (1 + (ε : ℂ) * I)
+    simp only [Complex.add_re, Complex.mul_re, Complex.ofReal_re, Complex.I_re, Complex.ofReal_im, Complex.I_im,
+      Complex.one_re, Complex.add_im, Complex.mul_im, Complex.one_im] at h
+    norm_num at h
+    nlinarith [norm_nonneg (1 + (ε : ℂ) * I)]
+  rcases initialPiece_cases hδ hB with ⟨ε, hε, hz⟩ | ⟨ρ, hρ, ε, hε, σ, hσ, hpts⟩
+  · exfalso
+    have h := mem_closedBall.mp (hBd hz)
+    rw [dist_eq_norm, hy', show y + (ε : ℂ) * (I * m) - (y + m) = m * ((ε : ℂ) * I - 1) by ring, norm_mul, hmn,
+      one_mul] at h
+    exact absurd (hIε ε hε) (not_lt.mpr h)
+  rcases initialPiece_cases hδ hB' with ⟨ε', hε', hz'⟩ | ⟨ρ', hρ', ε', hε', σ', hσ', hpts'⟩
+  · exfalso
+    have h := mem_closedBall.mp (hB'd hz')
+    rw [dist_eq_norm, hy', show y + m + (ε' : ℂ) * (I * m) - y = m * (1 + (ε' : ℂ) * I) by ring, norm_mul, hmn,
+      one_mul] at h
+    exact absurd (hIε' ε' hε') (not_lt.mpr h)
+  -- both pieces are circular
+  set t0 : ℝ := min (min ε ε') 1 with ht0
+  have ht0pos : 0 < t0 := lt_min (lt_min hε hε') one_pos
+  have ht0ε : t0 ≤ ε := (min_le_left _ _).trans (min_le_left _ _)
+  have ht0ε' : t0 ≤ ε' := (min_le_left _ _).trans (min_le_right _ _)
+  have ht01 : t0 ≤ 1 := min_le_right _ _
+  have hc1 : Real.cos t0 < 1 := by
+    have := Real.cos_lt_cos_of_nonneg_of_le_pi (le_refl 0) (by linarith : t0 ≤ π) ht0pos
+    simpa using this
+  have hcpos : 0 < Real.cos t0 := Real.cos_pos_of_mem_Ioo ⟨by linarith, by linarith⟩
+  have hzmem : y + ((σ * ρ : ℝ) : ℂ) * m * (e (σ * t0) - 1) ∈ B := hpts t0 ⟨ht0pos.le, ht0ε⟩
+  have hz'mem : y' + ((σ' * ρ' : ℝ) : ℂ) * m * (e (σ' * t0) - 1) ∈ B' := hpts' t0 ⟨ht0pos.le, ht0ε'⟩
+  -- distances of the two pieces' points to the far centres
+  have hdB : dist (y + ((σ * ρ : ℝ) : ℂ) * m * (e (σ * t0) - 1)) y' ^ 2 = 1 + 2 * ρ * (ρ + σ) * (1 - Real.cos t0) := by
+    rw [dist_eq_norm, hy', show y + ((σ * ρ : ℝ) : ℂ) * m * (e (σ * t0) - 1) - (y + m)
+      = m * (((σ * ρ : ℝ) : ℂ) * (e (σ * t0) - 1) - 1) by ring, norm_mul, hmn, one_mul]
+    exact sq_norm_pieceB hσ t0
+  have hdB' : dist (y' + ((σ' * ρ' : ℝ) : ℂ) * m * (e (σ' * t0) - 1)) y ^ 2 = 1 + 2 * ρ' * (ρ' - σ') * (1 - Real.cos t0) := by
+    rw [dist_eq_norm, hy', show y + m + ((σ' * ρ' : ℝ) : ℂ) * m * (e (σ' * t0) - 1) - y
+      = m * (1 + ((σ' * ρ' : ℝ) : ℂ) * (e (σ' * t0) - 1)) by ring, norm_mul, hmn, one_mul]
+    exact sq_norm_pieceB' hσ' t0
+  have hle : dist (y + ((σ * ρ : ℝ) : ℂ) * m * (e (σ * t0) - 1)) y' ≤ 1 := mem_closedBall.mp (hBd hzmem)
+  have hle' : dist (y' + ((σ' * ρ' : ℝ) : ℂ) * m * (e (σ' * t0) - 1)) y ≤ 1 := mem_closedBall.mp (hB'd hz'mem)
+  have h1c : 0 < 1 - Real.cos t0 := by linarith
+  have hsq : ∀ d : ℝ, 0 ≤ d → d ≤ 1 → d ^ 2 ≤ 1 := fun d h0 h1 => by nlinarith
+  have hσ1 : σ = -1 ∧ ρ ≤ 1 := by
+    have h2 := hsq _ dist_nonneg hle
+    rw [hdB] at h2
+    have h3 : ρ * (ρ + σ) ≤ 0 := by
+      by_contra hcon
+      push Not at hcon
+      nlinarith [mul_pos hcon h1c]
+    rcases hσ with rfl | rfl
+    · nlinarith
+    · exact ⟨rfl, by nlinarith⟩
+  have hσ1' : σ' = 1 ∧ ρ' ≤ 1 := by
+    have h2 := hsq _ dist_nonneg hle'
+    rw [hdB'] at h2
+    have h3 : ρ' * (ρ' - σ') ≤ 0 := by
+      by_contra hcon
+      push Not at hcon
+      nlinarith [mul_pos hcon h1c]
+    rcases hσ' with rfl | rfl
+    · exact ⟨rfl, by nlinarith⟩
+    · nlinarith
+  obtain ⟨rfl, hρ1⟩ := hσ1
+  obtain ⟨rfl, hρ1'⟩ := hσ1'
+  rcases lt_or_eq_of_le hρ1 with hρlt | rfl
+  · refine ⟨_, hzmem, y', ?_, ?_⟩
+    · have := hpts' 0 ⟨le_rfl, hε'.le⟩
+      simpa [he0] using this
+    · have h2 : dist (y + ((-1 * ρ : ℝ) : ℂ) * m * (e (-1 * t0) - 1)) y' ^ 2 < 1 := by
+        rw [hdB]; nlinarith [mul_pos (mul_pos hρ (sub_pos.mpr hρlt)) h1c]
+      nlinarith [dist_nonneg (x := y + ((-1 * ρ : ℝ) : ℂ) * m * (e (-1 * t0) - 1)) (y := y')]
+  rcases lt_or_eq_of_le hρ1' with hρlt' | rfl
+  · refine ⟨y, ?_, _, hz'mem, ?_⟩
+    · have := hpts 0 ⟨le_rfl, hε.le⟩
+      simpa [he0] using this
+    · have h2 : dist (y' + ((1 * ρ' : ℝ) : ℂ) * m * (e (1 * t0) - 1)) y ^ 2 < 1 := by
+        rw [hdB']; nlinarith [mul_pos (mul_pos hρ' (sub_pos.mpr hρlt')) h1c]
+      rw [dist_comm]
+      nlinarith [dist_nonneg (x := y' + ((1 * ρ' : ℝ) : ℂ) * m * (e (1 * t0) - 1)) (y := y)]
+  · refine ⟨_, hzmem, _, hz'mem, ?_⟩
+    have hcc : (1 - e (-t0) - e t0 : ℂ) = ((1 - 2 * Real.cos t0 : ℝ) : ℂ) := by
+      rw [e_neg, e_eq]; push_cast; ring
+    rw [dist_eq_norm, hy', show y + ((-1 * 1 : ℝ) : ℂ) * m * (e (-1 * t0) - 1)
+        - (y + m + ((1 * 1 : ℝ) : ℂ) * m * (e (1 * t0) - 1)) = m * (1 - e (-t0) - e t0) by
+        simp only [neg_mul, one_mul]; push_cast; ring, norm_mul, hmn, one_mul, hcc, Complex.norm_real,
+      Real.norm_eq_abs, abs_lt]
+    constructor <;> linarith
+
 
 /-- **FS116-Y4-FLANK**, the row's last clause (for any sets `a`, `b` whose closures hold the two edges: the row's tiles
 bordering `t` along them, or `t` itself): some point of `cl a` and some point of `cl b` are nearer than `1`. -/
