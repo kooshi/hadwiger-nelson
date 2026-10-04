@@ -514,3 +514,14 @@ reason by the close.*
     with F1's and F2's leaves marked open for the deriver, and under Condition 5, which the chain proves.
 90. **Routed — F1 and F2 to an Ephodos job** (FS131-E1, queued for the first free slot): close each GAP or exhibit the configuration (a five-colour arc map,
     almost-everywhere proper, with unit-arc boundaries at Townsend's configuration or with an edge continuing along ω(P)), from W's record and the papers.
+91. **Retraction and widening, W's own (item 88 corrected)** (FS131-W, message 2026-10-04): **F2 survives Condition 5.** At Woodall's step 7 the region D may reach
+    ω(P) at a single point Q of the window — the outward tip of a D wedge (two sides, one boundary curve with a corner at Q), or an arc of radius below 1 tangent
+    to ω(P) from inside — with E outside near Q and B absent, so Q carries only D and E; Condition 5 forbids neither. Checked against lemma (L) (the wedge sides'
+    change points land beyond the arc's ends when Q is strictly inside the window), the d-sector at P and TS-U: no contradiction [planner's check, one mind].
+    Woodall's "must terminate … at a vertex" holds only if such a corner counts as a vertex, and Condition 2's "at least three boundaries" excludes it.
+    **Withdrawn**: "step 8 alike" — outside the window only B is allowed, so the accumulation point carries B, D, E and step 6 finishes it. **F1 stands**; it closes
+    under Condition 5 by the second-order extension at the arc's ends. **So**: AE-MAP6 unconditionally has two open leaves (step 5's equality case, F1; step 7,
+    F2); **under Condition 5 it still has one (step 7)** — item 88's "under Condition 5 both vanish and the chain closes" is withdrawn. Held leaves: FS106-TW,
+    FS106-WO's strict step-4 lemma, the ⅔π adversary, steps 3, 5 (strict), 6 and 8. Retractions counted: W, one (item 88's Condition-5 clause and step 8). The
+    correction owed (item 88) widens: row 132's "maps need six" and `CLAUDE.md` § The aim item 4 hold only modulo step 7 in every class, and modulo step 5's
+    equality case with unit arcs — pending FS131-E1.
