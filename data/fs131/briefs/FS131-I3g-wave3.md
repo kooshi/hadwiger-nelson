@@ -100,3 +100,17 @@ exit 75 wait ten minutes and retry. `lake env lean` (with the flags § 7.1 gives
 own copy; never replace it with a symlink — two trees compiling into one build race on the same compiled files.
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2026-10-04 (Keryx) — the order, the form of `localSectors`, and the separation lemma
+
+Three rulings since launch, each sent by message, recorded here so a successor has them (`plans/FS131-close-inventory.md` items 135, 136 and 139):
+1. **Order** (item 135): `four_of_bothKind` and `flank_edge_exists` first, on your inversion-coordinates engine, then `localSectors`. The engine's general
+   lemmas (the inversion chart, convexity near a direction, disjoint interiors of tiles' cones) go in `Plane/LocalStructure` as public lemmas.
+2. **The form of `localSectors`** (item 136, wave 4's answer): for `v ∈ dom`, some `r₀` and a finite list of branch germs — each a tangent direction and a
+   signed curvature (0 for a segment) — whose union is the arcs in `ball v r₀`; for `r < r₀` the sectors are exactly the regions between consecutive
+   branches, finite in number and constant in `r`; each sector's cone an angle interval. State it in wave 3's vocabulary; the bridge to wave 4's `IsSector`
+   and `hornSet` is wave 4's.
+3. **The separation lemma** (item 139, from FS131-E2's record `plans/FS131-E2-derivation.md` § 2.7): state `Simple.coneAt_eq_angleIcc_sep` beside
+   `localSectors`; then, if budget allows, restore `four_of_bothKind_simple` to its `05cb0a3e` statement (no `hnc`) by that record's § 2.4 route. If not,
+   leave `hnc` and say so. Message me the commit when `localSectors` is in. You still start no agents of your own (standing rule 1: delegation is one level
+   deep, because the coordinator can only review work it knows exists).
