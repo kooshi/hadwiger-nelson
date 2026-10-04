@@ -840,3 +840,56 @@ land, by merging `main` and the implementer's gate. The open-leaf landing form (
 The report is `data/fs131/reports/FS131-W2.md` (standing rule 11's form); its text is the job's hand-back. No drafts for Keryx's files beyond § 7.4's
 erratum for E1's record: `CLAUDE.md` § The aim item 4 and `LEDGER.md` row 132 already state maps-need-six for arc maps through E1-NO45 (filed at
 inventory item 107), and nothing here changes them.
+
+---
+
+*Stages 11 on: job **FS131-W3** (de Bruijn, the planner; Opus 5.5), 2026-10-04 from 14:20 UTC. Brief `data/fs131/briefs/FS131-W3-woodall-nice.md` (on
+`main`) with `plans/STANDING-RULES.md` and `LEAN.md`, read in full, and `RUNNING.md` § Building. Resuming check (standing rule 2): this record's last
+SAVED stage is 10, matching `git log -- plans/FS131-W-kernel-plan.md` (`058c65f8`); the branch has since carried FS131-IW's and FS131-IWb's
+implementation (their records `plans/FS131-IW-implementation.md`, IWb's report), to `f73cb1e3`. W3 continues at stage 11 and redoes nothing saved.
+Same worktree and branch (`fs131-ww`). Report: `data/fs131/reports/FS131-W3.md`. Working files: `data/fs131/w3/`.*
+
+## Stage 11 — SAVED: FS131-W3's readback
+
+### 11.1 The brief's quotations against their sources (standing rule 3)
+
+| quotation in the brief | source | result |
+|---|---|---|
+| "161. **FS131-E3 done, harness ≈ 470k** (report `data/fs131/reports/FS131-E3.md`; record `plans/FS131-E3-derivation.md`; commits `d21f2998`, `69660332`, `64fa012f`, `81e35157`):" | `plans/FS131-close-inventory.md` (main) line 1089 | **matches** verbatim (`grep -cF` → 1; the brief says "the item continues there") |
+| "def NiceAt (v : ℂ) : Prop :=" | `plans/FS131-E3-derivation.md` § 4.1, line 330 | **matches** verbatim |
+| glosses: the drafts listed in § 4.1 (`NiceAt`, `WoodallMerged K`, `WoodallNormal K`, `exists_woodallMerged … (R : ℝ)`, `NiceAt.normal`, `false_of_four_le_sectors` with `hN : WoodallNormal (sphere v 1)`, `aeMap6_normal`, `aeMap6_merged`, `aeMap6`, `halfDisc.NiceAt 0`, `threeSectorDisc : ArcMap 3`); E3-BALL, E3-W, E3-NICE, E3-CHAIN at §§ 3.2–3.4; items 154–155 (clause 5 now `v ∈ F.dom`, on the branch) | E3's record §§ 3.2–3.4, 4.1; inventory items 154–155; `Plane/Woodall/Basic.lean` | the glosses agree (`SectorsAt`'s fifth clause reads `v ∈ F.dom ∧` on the branch) |
+| item 158 (the defect), item 136 (`localSectors`' form), item 142 (the name collisions), item 162 (this brief's launch) | inventory (main) | read; the brief's glosses agree |
+
+No mismatch; no finding about the brief.
+
+### 11.2 What changes and what stays (E3's § 4.1 applied to the branch at `f73cb1e3`)
+
+**The defect** (item 158, E3-PHANTOM): `SectorsAt` reads only cones, so at a boundary direction between colours `A ≠ B` a `B`-horn then an `A`-horn
+can be inserted; the ∀-over-pictures forms `WoodallMerged`, `WoodallNormal` then fail at every point of two or more colours, and the theorems taking
+them as hypotheses (`aeMap6_merged`, `aeMap6_normal`, `false_of_four_le_sectors` through `hN`) held only vacuously. Their one inhabitant was the
+one-colour plane, where no clause bites.
+
+| declaration | at `f73cb1e3` | after this job |
+|---|---|---|
+| `ArcMap.WoodallMerged` (`Basic`) | ∀ pictures, a repeated colour sits on horns only | **replaced**: `WoodallMerged (K : Set ℂ)` — every point of `K` of three or more colours is `NiceAt` |
+| `ArcMap.NiceAt` (`Basic`) | — | **new**: ∃ a picture whose positive-angle sectors carry distinct colours and whose horns sit between distinct colours |
+| `ArcMap.WoodallNormal` (`Basic`) | ∀ pictures of `≥ 3` sectors: injective, angles `≥ π/3` | **replaced**: `WoodallNormal (K : Set ℂ)` — every point of `K` of three or more colours has ∃ a picture injective with angles `≥ π/3` |
+| `const_woodallNormal`, `const_woodallMerged` (`Basic`) | degenerate inhabitants (no clause bites) | **replaced** by non-degenerate ones on `threeSectorDisc` (and `halfDisc.NiceAt 0`) |
+| `not_woodallNormal_of_repeat` (`Basic`) | adversary to the ∀-form | **replaced** by the phantom-picture adversary (the old ∀-forms fail on `threeSectorDisc`) |
+| `exists_woodallMerged` (`Steps`) | global, ∀-form conclusion (false at `k = 7`, E3-Q1) | **restated** with `(R : ℝ)`, conclusion `F'.WoodallMerged (closedBall 0 R)`; proved from E3-BALL's children (§ 14) |
+| `NiceAt.normal` | — | **new** (E3's draft): `NiceAt` at a point of `≥ 3` colours gives a normal picture (strict step 5) |
+| `false_of_four_le_sectors` | `hN : F.WoodallNormal` (∀-form), reads `exists_sectorsAt` | **restated**: explicit `hc`, `hang`, and `hN : F.WoodallNormal (sphere v 1)`; the auxiliary point's picture from `hN` |
+| `aeMap6_normal`, `aeMap6_merged` | ∀-forms, global | **restated** on `closedBall 0 3` |
+| `aeMap6` | `exists_woodallMerged hF hP` | `exists_woodallMerged hF hP 3` |
+| `exists_sectorsAt`, `exists_three_le_sectors` | in the chain | leave the chain (E3's proof notes); fate decided at stage 13 |
+| `SectorsAt`, every leaf of `Collar` and `NoFourFive`, `step5_lt`, `step6`, `aeMap6_of_condition5`, `woodall_thm6` | — | **stay**, statements unchanged |
+
+No reader of the old forms outside `Woodall/Basic` and `Woodall/Steps` (grep: `NoFourFive` mentions `exists_sectorsAt` and `exists_three_le_sectors`
+only in its module docstring; `scripts/Axioms.lean` holds five records of them).
+
+### 11.3 The worktree builds as given
+
+At `f73cb1e3`, from inside the worktree, under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1745 modules already up to date, nothing built,
+12 module(s) with warnings**, 2 s, exit 0 (`build/gate/build/20261004T142136Z-4107546.log`; driver log `data/fs131/w3/build-stage1.log`). The Woodall
+modules' only `sorry`s are `Steps`' two (`exists_sectorsAt` line 106, `exists_woodallMerged` line 189); `Collar` and `NoFourFive` are `sorry`-free in
+their own text and carry `sorryAx` through waves 3–4's skeleton statements on this branch (`LocalStructure`, `SVMap`, `Tiles`, …).
