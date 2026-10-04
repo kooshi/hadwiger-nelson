@@ -1182,3 +1182,56 @@ scratch directory).
 
 **Build as given** at `57c26bd0`: OK — all 1750 modules up to date, nothing built, 1 module with warnings, 5 warning lines, 5 distinct, every one
 `declaration uses 'sorry'` (`build/gate/build/20261004T204820Z-2280708.log`; counted with `grep -c`).
+
+## Stage 29 — SAVED (FS131-I2n): the five HC/IRREG leaves closed; wave 2 is sorry-free
+
+**Closed** (statements untouched — `hc_lemmaNL`'s statement too, only its proof was split; every new child stated before use
+with a docstring and a `scripts/Axioms.lean` record in block "FS131-I2n"; four new definitions, `hcCorner`, `hcNframe`, `hcN0`,
+`hcKZ`, each with a spec `example`):
+- `hc_sausage_cover` (B1) — **not by rotations**: `exists_near_hcFace` gives a face `O` within `L`; `hc_face_cone` reads `z` in
+  one of the six edge frames about `O` (`hcFrame_face`: the six frames `(m, n, 1)`, `(m − 1, n + 1, 0)`, `(m − 1, n + 1, 2)`,
+  `(m − 1, n, 1)`, `(m − 1, n, 0)`, `(m, n, 2)` in Cartesian form about `O`; the cone `√3|t − 1| ≤ √3 + 1/2 − εs` by the signs
+  of three linear forms); in the cone (`hc_cone_cover`), with `u = √3 + 1/2 − εs`, `v = t − 1`: `u² + v² ≤ 9/4` is the disc;
+  otherwise `u > 3√3/4`, and `|v| ≤ 1` gives the slab `|s| ≤ 1/2` or a near corner `(ε/2, τ)` strictly within `1`
+  (`(√3 − u)² < 3/16` plus `(t − τ)² ≤ 1/4`, split at `v = ±1/2` — simpler than H3's quadrilateral), `|v| > 1` puts `z` in the up
+  or down triangle (`mem_hcUpTri_iff_frame`, `mem_hcDownTri_iff_frame`: each triangle in ONE frame, `t ≥ 2, √3|s| ≤ 2 + √3/2 − t`
+  and `t ≤ 0, √3|s| ≤ √3/2 + t`; the bound `√3u + |v| ≤ 2L < 4 + √3` by Cauchy–Schwarz). The refined cover `hc_cover` records
+  `εs > 1/2` at the corners, which makes the far corner of the same side `> 1` away for free.
+- `hc_exclusion` (B2) and `hc_ae_phi_pos` — **I2m's route, one strict exclusion** `hc_strict_exclusion`: every `z ∉ int HC` lies in
+  `N₀` (`hcN0`: face circles of radius `1/2`, `3/2`; per frame the lines `t ∈ {0, 1, 2}`, `s = ±1/2`, the graph of `ℓ`, the unit
+  circles about eight frame corners, the frontiers of both triangles and of `U`), or in `K_Z` (`hcKZ`: unit circles about `Z × {1}`
+  of every segment), or at distance `1` from a point of `int HC`. Cases from `hc_cover`: face (`hc_se_face`, the radial point),
+  up triangle (`hc_se_up`: `∂U`, a side line, or a sliver — `hc_lemmaNL_lt`), down triangle (its frontier), slab (`hc_se_slab`:
+  below `σ` the down triangle by the IVT on its interior or `σ` via (C0) `hc_c0_end`; above `σ` the band, the graph of `ℓ`, or `U°`
+  by the IVT, or `σ` via (C0)'s mirror `hc_c0_end'`), corners (`hc_se_corner`); `σ` itself is `hc_seg_exclusion` (the crossing
+  `s′` by the IVT along `σ`; `s′ ∈ Z` is `K_Z`; else the band holds a box over `s′` by continuity of `ℓ`, and the transversal crossing
+  puts points of the box's closure strictly inside and outside the circle). The IVT tool is `exists_dist_eq_one_of_star` (the body of
+  `phi_pos_of_star`, concluding the point); `U°` is star-shaped about `C` (`hcUpO_star`). `volume_hcN0` (independent of `|Z|`),
+  `volume_hcKZ` (a smooth image of `{w : w.re ∈ Z}`, `addHaar_image_eq_zero_of_differentiableOn_of_addHaar_eq_zero`),
+  `hcKZ_subset` (`σ ⊆ cl Λ`: `hcFrame_mem_closure_band`), `isClosed_unitShadow` (`F + S¹`). Then `hc_exclusion`: points of
+  `HCᶜ ∖ N₀` are in the closed shadow and are dense in `(int HC)ᶜ`; `hc_ae_phi_pos`: off `N₀ ∪ K_Z`, `phi_pos_of_mem_open`.
+- `hc_free_subset_nowhereDense` (IRREG (2)) — I2m's route verbatim: `K = {z : ∀θ, z + e θ ∉ int HC} ∩ (int HC)ᶜ`, closed, and
+  empty-interior by `hc_exclusion` + `closure_interior_hcSet`.
+- `hc_free_pos` (IRREG (1)) — in the frame of edge `(0, 0, 0)` (`w₀ = 1`, so the frame is a reflection, a swap and a
+  translation: `measurePreserving_hcFrame000`): `hc_free_near` (within `1` of `z = (s, t)`, `|s| < 1/2`, `0 < t < 1/20`, HC is only
+  the down triangle `(1, −1)` and the closed band — far blocks by the centre lattice, `√3 + 1/2 − 0.61 − 3/5 > 1`; the triangle's
+  other two bands by `hcFrame_dn000_others`, `t = −t₀/2 − √3/4 ± (√3/2)s₀ < 0` in their frames), the down triangle inside the
+  unit circle (`hcDownTri_one_neg_one`: its vertices are `(0, −√3/2)`, `(∓1/2, 0)`), `hc_free_arc` (the arc above the band: the only
+  closed-band points on the circle are `(s ± ρ, 1)`, by `t' − t ≥ 1 − tu/ρ` and `g ≤ (ρ − u)²/4`), so the circle meets `int HC`
+  in a countable set of directions (`countable_setOf_add_e_eq`) and `φ = 0` (`hc_free_mem`); positivity: a density point `p` of
+  `Z` in `(−1/2, 1/2)` (`exists_density_point`, Besicovitch's density theorem), each slice `{s : |s − p| < h, s ∓ ρ ∈ Z}` of
+  measure `≥ h` (`hc_free_slice`), Fubini (`hc_free_param_pos`), and the frame's measure preservation.
+- Five module docstrings that still said their children were `sorry`ed (`Arith/PlaceHom`, `Plane/Cover`, `Arith/Dyadic`,
+  `Plane/FalconerReduction`, `Plane/Slack`) corrected to say they are proved — prose only.
+
+**Builds** (`./scripts/build.sh` under the slot, `MEMMAX=40G BATCH=4`): at `f84dce14` (B1, IRREG (2)) OK, 2 modules rebuilt, 6
+warning lines = 3 distinct, every one `declaration uses 'sorry'` (`build/gate/build/20261004T211414Z-2441453.log`); at `49e217da`
+(B2, a.e.) OK, 2 modules rebuilt, 2 warning lines = 1 distinct, `declaration uses 'sorry'` (`build/gate/build/20261004T213918Z-2607493.log`);
+counted with `grep`. At `d078808a` (the last leaf): pending at this save. The module was never edited while a build ran; scratch
+files were compiled with `lake env lean -DautoImplicit=false` (never evidence), under `scripts/slot.py --mem 6`.
+
+**Re-pricing** (from the first two hard children, as the brief asks): B1 with its cone machinery about 40k tokens (K2d's table
+40k + 35k); the strict exclusion with both assemblies about 100k (table 40k + 3 × 25k + 40k + 2 × 25k = 205k); IRREG (1) about 70k
+(table 70k); IRREG (2) about 5k (table 40k). About half the table overall, the hardest leaf at the table.
+
+**Still `sorry`**: none — `grep` finds no `sorry` term in `Proofs/` (the word survives in prose only, "sorry-free").
