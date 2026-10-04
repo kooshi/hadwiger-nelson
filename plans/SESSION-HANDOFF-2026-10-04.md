@@ -22,9 +22,9 @@ that judge the milestone, written before any job).*
 |---|---|---|
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
 | wave 2 (28 rows) | 91 `sorry` lines left (I2g, item 148); FALC-RED sorry-free over the declared import; **FS131-T3 must land before wave 2's gate**; next: an Opus implementer | `.claude/worktrees/fs131-w2` |
-| wave 3 (20 rows + 6 merged) | 94 of 96 proved (I3–I3g, items 131, 145, 147); **FS131-I3h (Opus) running**: two leaves, gate, landing, then `localSectors` | `.claude/worktrees/fs131-w3` |
+| wave 3 (20 rows + 6 merged) | **LANDED on `main`** (item 157; gated commit `0fdacddb`): held in the kernel, 502 records on the standard three; `localSectors` follows on `fs131-w3b` (FS131-I3i) | — |
 | wave 4 (25 rows) | 32 of 86 proved (I4, I4b; items 125, 143); two plan routes owed (`lemmaL`, `lock` clause 1); ~20 leaves wait on `localSectors`; **next: an Opus implementer when a whole slot frees** | `.claude/worktrees/fs131-w4` |
-| Woodall's chain (FS106-WO, -TW, -AE-MAP6) | all but two leaves proved (items 150, 156): `exists_sectorsAt` (route ready, next implementer) and `exists_woodallMerged` (Woodall's step 3, **FS131-E3 deriving**) | `.claude/worktrees/fs131-ww` |
+| Woodall's chain (FS106-WO, -TW, -AE-MAP6) | **definition defect (item 158)**: `WoodallMerged`/`WoodallNormal` unsatisfiable (phantom horns), so `aeMap6_normal`, `aeMap6_merged`, `false_of_four_le_sectors` hold only vacuously and `exists_woodallMerged` is false at `k = 7`; ∃-forms ruled; **FS131-E3** drafting them and deriving step 3; then a Woodall implementer applies and re-runs | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
 | Lebesgue's covering theorem (FS131-LEB) | **LANDED on `main`** (item 151; `33471a75`): held in the kernel, standard three; wave 4 discharges its `sorry` in one line | `Proofs/HadwigerNelson/Topology/` |
 | waves 5–10 (124 rows) | not started; wave 5 carries C-DOUBLE + Y3-END-NEEDS (item 69) and FLANK-Q's discharge (item 79); wave 9 bound by item 89's note and item 96's vacuity rule | plan § 7 |
@@ -42,7 +42,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 |---|---|---|---|
 | FS131-E3 (Woodall's step 3: derive the modification, or a route around it; Ephodos; item 156) | Opus | `data/fs131/briefs/FS131-E3-woodall-step3.md` | `data/fs131/reports/FS131-E3.md` (claim list `data/fs131/claims-E3.md`) |
 | FS131-T3 (the axiom gate: CLEAN subset check, IMPORTED category; item 153) | Opus (tooling, main tree) | `data/fs131/briefs/FS131-T3-axiom-gate.md` | `data/fs131/reports/FS131-T3.md` |
-| FS131-I3h (wave 3 on **Opus**: last two leaves, the gate, the landing; then `localSectors` on `fs131-w3b`; item 147) | Opus | `data/fs131/briefs/FS131-I3h-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3h.md` |
+| FS131-I3i (`localSectors`, the separation lemma, `four_of_bothKind_simple` without `hnc`; on `fs131-w3b`; item 157) | Opus | `data/fs131/briefs/FS131-I3i-localsectors.md` | its branch's `data/fs131/reports/FS131-I3i.md` |
 
 
 **Implementers are Opus from now on** (Kooshi, item 137): the four Sonnet implementers above finish on Sonnet; each successor launches with `model: "opus"` (the agent file says so too) and counts one slot.

@@ -171,7 +171,10 @@ the characteristic failure here:
   digest: every count, whether the counts recorded in `CLAUDE.md` still match, every flagged or declared row in full, and every row
   that changed since the previous run (`scripts/gate_report.py`). `regen-check.sh` keeps each step's log in its scratch directory.
 - **Every theorem whose hypothesis is a structure** (a colouring, an embedding, a certificate, a homomorphism) **ships a named
-  inhabitant** in the same file, or a one-line note naming the theorem that supplies one.
+  inhabitant** in the same file, or a one-line note naming the theorem that supplies one. **The inhabitant exercises every clause**: a
+  Prop-valued hypothesis of a theorem concluding `False` is skipped by the vacuity scan, so a degenerate model where a clause is vacuous
+  (a one-colour map for a condition on points of two or more colours) proves nothing — such a hypothesis can be unsatisfiable on every
+  real instance and the gate stays green.
 - Every definition has a `#eval`/`example` that would fail if it drifted.
 - The Moser spindle's non-3-colourability is proved **twice** — by `decide` and through the SAT bridge — so the CNF encoding is
   checked against an independent oracle.
