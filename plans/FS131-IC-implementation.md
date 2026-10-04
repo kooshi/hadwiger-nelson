@@ -488,3 +488,38 @@ by `have _ := …` (the convention of `UnitArc`).
 `data/fs131/ic/Scratch7.lean` is the iteration copy (it redeclares the new names, so it no longer elaborates against `Contact`; nothing builds it).
 
 **Re-pricing**: `flank_shadows` took about 120k of context, about a session as IC3 priced it; the mirror half was cheap once the first half stood.
+
+## Stage 12 — SAVED (FS131-IC4 stage 3): the hand-back
+
+**Proved in this job (FS131-IC4)**: `flank_shadows` (N4-FLANK), sorry-free, and with it `shaveAvailable_of_not_doublyShadowed`; 25 children (Stage 11). **Left (4)**:
+`stuck_structure`, `exists_shave`, `exists_rayMerge`, `exists_merge` — the moves untouched (item 236: a parallel implementer's, IC1's Stage 2 items 3–4 stand). The build
+log and the axioms print against its oleans are Stage 11's (`build/gate/build/20261004T212953Z-2540733.log`, `data/fs131/ic/axioms-ic4-stage11.txt`). Branch
+`fs131-w4c` is ready for the merge into `fs131-w4` (records in their own block headed "FS131-IC4" in `scripts/Axioms.lean`, after IC3's; no import, module or
+`ARCHITECTURE.md` change in this job). I did not merge or run wave 4's gate. I stopped at my context line (about 440k of 500k), not at a wall.
+
+**`stuck_structure`, the route** (my reading for the successor; none changes a statement):
+1. `stuck_horns` gives `H₊` (along `α`, `κ₁ < κ₂`), `H₋` (along `α + π`, `κ₃ < κ₄`), `HasSectors v c 2`, out-type `c` at `N` and `S′`. Flanks by
+   `IsHorn.exists_flankAbove/Below`: `g₊`, `h₊` for `H₊`; for `H₋` in its frame, the `IsFlankAbove v (α + π) κ₄` colour is on the global `−n` side and the
+   `IsFlankBelow v (α + π) κ₃` colour on the `+n` side, and `v + e(α + π + π/2) = S′`.
+2. No flank colour is `c`: a `c`-coloured flank band lies in a `c`-sector other than `H₊` (disjoint, by `tanHeight`) and `H₋` (cones `{α}`, `{α + π}`:
+   `e_eq_of_mem_coneAt_hornSet`) — a third `c`-sector against `HasSectors v c 2`.
+3. `¬ ShaveAvailable` and `shaveAvailable_of_not_doublyShadowed` (now sorry-free) make both horns doubly shadowed; a doubly shadowed band gives horn points arbitrarily near
+   `v` in both shadows (`exists_mem_hornSet_near`), so `outType_S_of_shadow` / `outType_N_of_shadow`: `g₊` out at `S′`, `h₊` out at `N`, and for `H₋` the global-below
+   colour out at `N`, the global-above out at `S′`.
+4. **`g ≠ h` does not follow from `flank_shadows`' statement**: with `g = h = k` the whole horn may lie in `k`'s shadow (`σ_g = κ₂`, `σ_h = κ₁`) and the statement is met.
+   It follows from the mechanism, which Stage 11 made lemmas: the converse `shadow_of_tangent_sector_S` holds at every point near `v` on the `+a` side outside `B̄(S′, 1)`,
+   lower-flank points included, so a `g`-shadow reaching the horn (which needs a tangent `g`-sector at `S′` with `f̃(υ) > κ₁`, `sector_shadow_S`) reaches the lower flank,
+   coloured `h = g` — against validity (the derivation's N4-SHAVE "`g = h`" case). Expose the tangent sector as a child of `flank_shadow_g` (`σ_g > κ₁ ⟹ ∃` a tangent
+   `g`-sector with `f̃(υ) = σ_g`, read off `Finset.max'_mem`), then a small `flank_ne_of_doublyShadowed`.
+5. (ii) `P_cl(v) = {c, g, h}` by `h3` at `v` and step 3's types (the derivation's "if `g₋ = h₊` …" paragraph); degree 4 through the chart at `v`: each sector's colour is in
+   `{c, g, h}`, `g`'s cones lie in `{d·n ≥ 0}` and `h`'s in `{d·n ≤ 0}` (`coneAt_subset_allowedCone`), `g` and `h` have one sector each (two would give `int D = ∅` by no
+   MERGE, then `woodallCone` horns, but `α ± π/2` lie in their cones), so the degree is `2 + 1 + 1` (a counting child over the chart's sectors, `encard_sectors`).
+6. (iii) `D_g(v)` contains `e(φ)` for `φ ∈ (α, α + π)` (the `g`-sector's cone), so a `g`-contact is `v ± n`; in-type at `N` is Siamese with the `g`-sector (`false_of_pole`,
+   flank points outside `B̄(N, 1)`), so `S′`, out-type. Mirror for `h`.
+7. (iv) at `N`: `c` (stuck_horns), `h` (step 3) and a ring colour `r` — Condition 5 and local finiteness leave `ω(v)`'s points near `N` interior, their colours outside
+   `P_cl(v)` (N-E1, `ne1_region`), and one of finitely many accumulates at `N`; `h3` at `N` gives `{c, h, r}`. **Two `h`-sectors at `N`**: `sector_shadow_N` /
+   `shadow_of_tangent_sector_N` give a tangent `h`-sector at `N` along `+a` (lower germ `α + 2πm`, it shadows `H₊`) and, in the frame `α + π`, one along `−a`; one sector
+   holding both would span `N`'s upper half (`exists_lift_upper`: `h`'s sectors at `N` look up), leaving no room for `c` at `N` (its sectors at `N` look up too — `v` is an
+   out-type `c`-contact of `N` — and one in the `+a` stack below the tangent `h`-sector would shadow `H₊`, by `sector_shadow_N`'s mechanism applied to `c`, against validity).
+   The mirror at `S′` in the frame `α + π`.
+Price: about two sessions; (iv)'s two-sector clause is most of it, (ii)'s degree count next.
