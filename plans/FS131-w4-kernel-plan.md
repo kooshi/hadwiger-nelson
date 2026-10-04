@@ -849,3 +849,103 @@ leaves (M–H), the two bends and the side chain (engine 6), `flankQ_upper`, `fl
 (FS131-LEB). Critical path: engine 4 (frame algebra) and engine 1 (validity transfer) unblock the most leaves and are E; engine 6 unblocks L60's five;
 wave 3's `localSectors` (wave 3's implementer) gates `woodallCone`, `exists_hasDegree_of_mem_dom` and engine 5. The repository's measured ratio
 (`CLAUDE.md` § What compute actually helps) says these grades are priced high: re-price from the first two leaves.
+
+## Stage 14 — SAVED (K4c stage 5): the handoff to wave 4's implementer (the form of `plans/FS131-kernel-plan.md` § 6.1 and wave 3's § 7)
+
+### 14.1 Where it is, and how the implementer works
+
+**Branch `fs131-w4`, head `878cac7a`** (pushed; this section's commit follows it), worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w4` (its
+`.lake/packages` a symlink to the main tree's, its `.lake/build` its own copy — never replace it with a symlink). The branch sits on wave 3's skeleton
+(`05cb0a3e`), which already merged `main` with wave 1 landed. Wave 4 is **six modules**: the foundation `Plane/ValidMap/Basic`, sorry-free, and five
+skeleton modules — `Plane/StuckChain` (5 `sorry` leaves), `Plane/ValidMap/Contact` (16), `Plane/ValidMap/UnitArc` (29), `Plane/SVMap` (14),
+`Plane/ValidMap/BaseSteps` (22) — **86 declarations using `sorry`**. The build is green with only those warnings and wave 3's
+(`build/gate/build/20261004T090600Z-2377760.log` in the worktree). `Proofs.lean`, `ARCHITECTURE.md` (`tools/check_architecture.py` exit 0) and
+`scripts/Axioms.lean` (the foundation's 2 records clean; 97 skeleton records in four sections, listed and checked by `tools/fs131_k4_decls.py --check`)
+are updated, so the wave lands by fast-forward once its gate is green. **Not in wave 4**: FS106-WO, FS106-TW, FS106-AE-MAP6 (FS131-W, inventory item 54);
+FS112-C-DOUBLE (wave 5, item 69); `lebesgue_covering_square` stays a `sorry`ed theorem until FS131-LEB lands (item 66) — the one leaf the implementer
+does not prove.
+
+**The build**: from inside the worktree, `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`;
+never `lake build`. Up to two builds from different worktrees may run at once when the slot admits them (inventory ruling 5); on exit 75 wait ten
+minutes and retry. For iteration, `lake env lean` with `-DautoImplicit=false -DrelaxedAutoImplicit=false`; a module's dependents can be iterated against
+scratch oleans (mirror `.lake/build/lib/lean/Proofs` into a scratch directory with `cp -rs`, remove the mirrored link of the module you rebuild, write
+its olean there with `lean -o`, and put the scratch first on `LEAN_PATH`) — never as evidence, and never writing `-o` onto a mirrored link.
+
+**Wave 3 is not landed yet**: its implementer (FS131-I3c) is proving its leaves on `fs131-w3`. Wave 4 cites wave 3's statements as committed on
+`05cb0a3e`; they gain children but never change. Merge `fs131-w3` into `fs131-w4` when wave 3 lands (or earlier, to use its proofs while iterating),
+resolving the append-only lines of `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean`.
+
+**The plan to work from**: § 13 — the seven engines first (§ 13.1), the leaf table per module (§ 13.5), the order of § 13.6. The read-backs (§§ 3.2, 7.2,
+8.2, 12.2) say what each statement means. Order: engine 4 (frame algebra) and engine 1 (validity transfer) → `StuckChain` (pure real arithmetic, a warm-up
+that re-prices the wave) → Contact's E/M leaves → engine 2, engine 5 → UnitArc's E/M leaves (`n2_sign`, `lock`, `u1_shadow`, `inType_shadows_horn`,
+`flank_siamese_of_inType`, `flankQ_both`, `iso`) → engine 6 and L60's five → engine 7 and `a4six` → engine 3 and the six moves → `flankQ_upper`/`_lower`,
+`woodallCone`, `flank_shadows`, `stuck_structure`, `stuck_chain` → `nb4p` (re-read FS110-NB-4 first) → SVMap → BaseSteps (the bowtie's tiles checked
+against `tools/fs112_yb3_frags.py bowtie` before any bowtie leaf; `n3_end` last, over FLANK and the moves).
+
+### 14.2 What the implementer may and may not change
+
+**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the
+foundation `Plane/ValidMap/Basic` where § 13.1 puts them, sorry-free, each with a spec example); add supporting lemmas to the foundation modules (wave 4's
+`Basic`, wave 3's `Plane/LocalMap`, `Plane/LocalStructure`, `Plane/Tiles`, wave 1's `Plane/Chord`, `Plane/Diameter`, `Plane/Basic`), statements unchanged;
+change imports (updating `ARCHITECTURE.md`'s Imports cell, and adding each new record to `scripts/Axioms.lean`, then `tools/fs131_k4_decls.py --check`).
+
+**It may not**: change any statement of §§ 3.2, 7.2, 8.2, 12.2 (the row theorems, their hypotheses and conclusions), any definition of
+`Plane/ValidMap/Basic`, the fragments' definitions (`bowtie*`, `l60*`, `isoY`, `isoFrag`, `sevenBrick*`) except to repair a coordinate slip found against
+the source tool (a finding to report, with the tool's output), or the read-back conventions. A statement that cannot be proved as written — a missing
+hypothesis, a false clause — comes back to the planner through Keryx with the counterexample or the stuck goal; it is a finding, never a quiet edit.
+
+### 14.3 The vacuity scan's carriers and the inhabitants
+
+Every theorem whose hypothesis is a structure ships an inhabitant or a note (`LEAN.md` § The gate):
+- `F.Valid`, `F.IsPlaneMap`: `sevenBrickMap_valid`, `sevenBrickMap_isPlaneMap` (proved); fragments `bowtie_valid`, `l60_real`, `iso`.
+- `IsRingArc` (U1, L60, the bends, NOBOTH's context): `l60_real` (at `ℓ = 60°`), `iso`; the bends' centre conditions (`c' ∉ coloursAt P`, `c ∉ coloursAt P`)
+  both hold in `isoFrag` at `P = 0`.
+- `IsHorn`, `IsFlankAbove`/`Below`, `IsStuck`, `TerminalOn`, `DoublyShadowed`, in-type contacts: the bowtie (`bowtie_isHorn`, `bowtie_flanks`,
+  `bowtie_isStuck`, `bowtie_terminalOn`, `bowtie_doublyShadowed`, `bowtie_inType`) — which also inhabits `flank_siamese_of_inType`, `flankQ_upper` (its (Q)
+  case, `hQR` included: the bowtie's two arcs of `ω(i)` are its only arcs there, both (Q)) and `flankQ_both` (`X = T_g = bowtieG`, the "self" case).
+- `Terminal` on a whole plane map with a stuck vertex (`stuck_chain`, `n3_end`): **no inhabitant in the library** — `GENERIC`, FS-115's question; the
+  docstrings say so where the vacuity scan asks.
+- `AeProperRegions`: `sevenBrickRegions`. `Condition5`, `Condition6`, `InMK`: the one-colour plane (Basic's spec examples).
+- `a4six`'s hypotheses (a four-colour vertex with no covering pair on its circle): no inhabitant held (the strip of `[AxenovichEtAl2014]` is one, not
+  formalized) — `GENERIC`. `nb4p` concludes `False`: a refutation, skipped by the scan.
+
+Carriers for `scripts/Vacuity.lean` (the procedure "How a later wave registers its carriers"), the planner's recommendation, the implementer's decision to
+record: **IN** for `IsHorn`, `IsStuck`, `Terminal`/`TerminalOn`, `Condition5` (each refutable at a concrete map — `const_not_isSector_far`'s plane has no
+horn, the one-colour plane no stuck vertex — and inhabited by the bowtie or the one-colour plane), with controls; **OUT** for `AgreesOff`, `RingArcsWithin`
+(conclusions, or reflexive), `IsCoveringPair` (taken negated), `AeProperRegions` (existence is a construction, `sevenBrickRegions`).
+
+### 14.4 How the wave lands
+
+1. Every `sorry` of the five modules gone except `lebesgue_covering_square` (FS131-LEB's); the full gate green on one commit in the worktree:
+   `./scripts/build.sh` with zero warnings (once FS131-LEB has landed, or with its `axiom` and the four items of `LEAN.md` § Assumptions if Keryx so rules
+   at that point — inventory item 66); `./scripts/axioms.sh` clean — the 97 skeleton records and every added child read the standard three or fewer; no
+   `native_decide`, no axiom beyond a ruled one; `./scripts/vacuity.sh` and `--self-test` green, every change in `sites` and the verdict counts explained;
+   `tools/check_architecture.py` exit 0; `python3 tools/fs131_k4_decls.py --check` exit 0.
+2. `main` (and `fs131-w3`, if not already in `main`) merged into `fs131-w4`; the gate re-run on the merged commit.
+3. The branch fast-forwarded onto `main` (Keryx's step, after reading the saved gate logs). Nothing with a `sorry` reaches `main`.
+4. The implementer's record lists every statement it proved, with its declaration, against the read-backs — "same statement" or the finding.
+
+### 14.5 Notes for wave 5's planner (from wave 4's planners; Keryx's rulings in brackets)
+
+- **FLANK-Q's discharge obligation** [inventory items 79–80, ruled 2026-10-04]: `flankQ_upper`, `flankQ_lower` take `hQR` — every arc of `Γ` on `ω(N)` (resp.
+  `ω(S′)`) with constant sides is (Q) or (R2) — N2-RED's conclusion, FS112-N2-TERM's clause 1. **Wave 5 owes the unconditional form**: state FLANK-Q in
+  `M*` (or in any map satisfying N2-TERM's clause 1) by applying N2-TERM to discharge `hQR`. No cycle: N2-RED does not read FLANK-Q; N2-TERM's clause 3
+  reads FLANK-Q, so the order inside wave 5 is N2-RED/N2-TERM clause 1 → FLANK-Q unconditional → N2-TERM clause 3.
+- **The moves' form (G-MOVES-UA)**: `exists_shave`, `exists_rayMerge`, `exists_merge` hold with unit arcs and conclude `F'.RingArcsWithin F` (no unit arc
+  created) and `F'.AgreesOff F (closedBall v ρ)`; the bends (`bend_toward`, `bend_away`, `bend_away_whole`) likewise over `thickening ε ᾱ`. N2-RED's
+  termination ("the moves never add a colour to a unit-arc centre"; "no unit arc created") reads these: colours at points off `closure U` are unchanged
+  (a corollary of `AgreesOff`, an engine-1 child), and `RingArcsWithin` is the no-new-unit-arc clause.
+- **FS112-C-DOUBLE** (moved here, item 69): the reading of § 8.3 — state it over `Terminal` at `k = 6` with the corrected FS112-Y3-END-NEEDS as its
+  supporting lemma, checking in the obligation pass whether any step reads N2-TERM's bends beyond Y3-END-NEEDS's levels; engine 5
+  (`IsHorn.isRingArc_upper`) gives its arcs of `ω(E ± n)`; `bowtie` inhabits its local hypotheses, not the whole (a fragment, not a terminal plane map).
+- **FS112-N3-END's chain clause** ("and the chain is the single vertex", item 74): stated in wave 5 with the stuck-chain vocabulary.
+- **FS114-L60-WALK** (merged into L60-LE, R8): check its five consumers (FS112-N2-RED, -N3-COR3, -N3-BASE, -N3-DENSE3, FS114-CV-EXISTS) over `l60_le`'s
+  non-strict bound; its clause L60-D5 goes with FS112-N3-BASE's setting.
+- **Hypotheses from outside the backlog** (items 53, 68): FS110-N4-STUCK assumes "at most three colours on `B̄(v, 1)`" (FS110-NB-4's conclusion); FS106-TS-T's
+  Condition-5 clause assumes "at most three colours at every point" (S–V Lemma 2 a.e.); a consumer needing either unconditionally formalizes the lemma beside it.
+- **Three readings fixed in wave 4 that a wave-5 statement may meet**: "a tile of colour `c`" in class form (wave 3's convention); FS106-L at a change point
+  **in** the open set (item 67); L60-EQ's "third tile" as a tile from the far open half-plane.
+
+## Stage 15 — the report
+
+`data/fs131/reports/FS131-K4c.md`, standing rule 11's form; its text is the job's hand-back.
