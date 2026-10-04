@@ -1,0 +1,2 @@
+d = 8/5; {'cut_points': 29, 'cells': 29, 'pairs_checked': 72, 'exact_zero_tests': 77}
+REJECT: 10 monochromatic unit pair(s); first: ('intersection point coloured differently on the two circles', ['0.80000000000000000000', '-0.60000000000000000000'], 2, ['0.80000000000000000000', '-0.60000000000000000000'], 3)
