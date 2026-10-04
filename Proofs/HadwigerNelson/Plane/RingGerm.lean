@@ -1082,6 +1082,36 @@ theorem IsRingArc.radial_outer {z : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA 
       Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith [ht.1])]
     linarith [ht.1]
 
+/-- Angular intervals `[A, B]` and `(C, D)` are disjoint when `D ≤ A` and `B ≤ C + 2π`. -/
+theorem disjoint_angleIcc_angleIoo_of_le {A B C D : ℝ} (h1 : D ≤ A) (h2 : B ≤ C + 2 * π) :
+    Disjoint (angleIcc A B) (angleIoo C D) := by
+  have hπ := Real.pi_pos
+  rw [Set.disjoint_left]
+  rintro x hx hx'
+  obtain ⟨n, hn1, hn2⟩ := mem_iUnion.mp hx
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hx'
+  rcases lt_trichotomy n m with h | h | h
+  · have : (n : ℝ) + 1 ≤ m := by exact_mod_cast h
+    nlinarith
+  · subst h; linarith
+  · have : (m : ℝ) + 1 ≤ n := by exact_mod_cast h
+    nlinarith
+
+/-- Angular intervals `[A, B]` and `(C, D)` are disjoint when `B ≤ C` and `D ≤ A + 2π`. -/
+theorem disjoint_angleIcc_angleIoo_of_le' {A B C D : ℝ} (h1 : B ≤ C) (h2 : D ≤ A + 2 * π) :
+    Disjoint (angleIcc A B) (angleIoo C D) := by
+  have hπ := Real.pi_pos
+  rw [Set.disjoint_left]
+  rintro x hx hx'
+  obtain ⟨n, hn1, hn2⟩ := mem_iUnion.mp hx
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hx'
+  rcases lt_trichotomy n m with h | h | h
+  · have : (n : ℝ) + 1 ≤ m := by exact_mod_cast h
+    nlinarith
+  · subst h; linarith
+  · have : (m : ℝ) + 1 ≤ n := by exact_mod_cast h
+    nlinarith
+
 /-- **FS116-V5-U1**, inner side: if `A = r([θ₁, θ₂])` (about `z`) is an arc of `Γ` on `ω(z)` with inner colour `c`, the class
 of `c` approaches `z` only within the closed cone `[θ₂ − 90°, θ₁ + 90°]` facing `A`. -/
 theorem ringArc_cone_inner (hF : F.Valid) {z : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') :
@@ -1109,12 +1139,18 @@ theorem ringArc_cone_outer (hF : F.Valid) {z : ℂ} {θ₁ θ₂ : ℝ} {c c' : 
 /-- **FS116-V5-U1**: the open side cone `(θ₁ − 90°, θ₂ − 90°)` holds neither side colour. -/
 theorem ringArc_sideCone_inner (hF : F.Valid) {z : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') :
     Disjoint (coneAt (F.region c) z ∪ coneAt (F.region c') z) (angleIoo (θ₁ - π / 2) (θ₂ - π / 2)) := by
-  sorry
+  have hπ := Real.pi_pos
+  rw [Set.disjoint_union_left]
+  exact ⟨(disjoint_angleIcc_angleIoo_of_le (by linarith) (by linarith)).mono_left (ringArc_cone_inner hF hA),
+    (disjoint_angleIcc_angleIoo_of_le (by linarith) (by linarith)).mono_left (ringArc_cone_outer hF hA)⟩
 
 /-- **FS116-V5-U1**: the open side cone `(θ₁ + 90°, θ₂ + 90°)` holds neither side colour. -/
 theorem ringArc_sideCone_outer (hF : F.Valid) {z : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') :
     Disjoint (coneAt (F.region c) z ∪ coneAt (F.region c') z) (angleIoo (θ₁ + π / 2) (θ₂ + π / 2)) := by
-  sorry
+  have hπ := Real.pi_pos
+  rw [Set.disjoint_union_left]
+  exact ⟨(disjoint_angleIcc_angleIoo_of_le' (by linarith) (by linarith)).mono_left (ringArc_cone_inner hF hA),
+    (disjoint_angleIcc_angleIoo_of_le (by linarith) (by linarith)).mono_left (ringArc_cone_outer hF hA)⟩
 
 /-- **FS116-V5-U1**, "the side cones hold two further colours": at a point `z` of the domain, every direction of either open
 side cone lies in the cone of a colour other than `c` and `c'`. (`z ∈ F.dom` is a hypothesis the row leaves implicit: off
@@ -1123,7 +1159,16 @@ theorem ringArc_sideCone_other (hF : F.Valid) {z : ℂ} (hz : z ∈ F.dom) {θ�
     (hA : F.IsRingArc z θ₁ θ₂ c c') {β : ℝ}
     (hβ : β ∈ angleIoo (θ₁ - π / 2) (θ₂ - π / 2) ∪ angleIoo (θ₁ + π / 2) (θ₂ + π / 2)) :
     ∃ d, d ≠ c ∧ d ≠ c' ∧ β ∈ coneAt (F.region d) z := by
-  sorry
+  obtain ⟨d, hd⟩ := F.exists_mem_coneAt_region hz β
+  refine ⟨d, ?_, ?_, hd⟩
+  · rintro rfl
+    rcases hβ with h | h
+    · exact Set.disjoint_left.mp (ringArc_sideCone_inner hF hA) (Or.inl hd) h
+    · exact Set.disjoint_left.mp (ringArc_sideCone_outer hF hA) (Or.inl hd) h
+  · rintro rfl
+    rcases hβ with h | h
+    · exact Set.disjoint_left.mp (ringArc_sideCone_inner hF hA) (Or.inr hd) h
+    · exact Set.disjoint_left.mp (ringArc_sideCone_outer hF hA) (Or.inr hd) h
 
 /-- **FS116-V5-U1**, the four-colour clause at the class it reads: if `z` (in the domain) carries both side colours of an arc
 of `Γ` on `ω(z)` (the arc is both-kind), each colour has at most one tile with `z` in its closure, and each such tile's cone
