@@ -379,3 +379,19 @@ reason by the close.*
     `sqrt3_local_of_congr` takes `s² − 3 ∈ (4)·P` as a global ideal of `𝓞F` and a local square at P gives the congruence only at P; the statement is not in
     doubt. The implementer builds a P-local Kummer–Dedekind lemma (`s² − 3 ∈ P^(2e+1)`) as a child — formalization, its own to decide; mathematics beyond that
     comes back as a question.
+65. **FS131-K4b stage 2** (`fs131-w4` at `f2a09351`): FS106-L and FS106-TS-T stated in `Plane/SVMap`, over open colour classes (region-only); build 441/441, only
+    `sorry` warnings; read-backs in the record § 7. **FS131-W may branch from `f2a09351`.** Added to the foundation: `ArcMap.Condition6` (spec example proved);
+    the inhabitant of "a valid map of the plane" is `sevenBrickMap`, M36's brick colouring read as an arc map.
+66. **Ruling — Lebesgue's covering theorem for the square** (K4b's OUT-LEB; TS-T's first clause rests on it; Mathlib has neither it nor Brouwer nor Sperner):
+    **its own planner-and-implementer job, FS131-LEB**, to formalize it (by Sperner's lemma or the route its planner chooses), with the skeleton's
+    `lebesgue_covering_square` a `sorry`ed theorem meanwhile; an `axiom` with the four items of `LEAN.md` § Assumptions only if FS131-LEB has not landed when wave
+    4's gate is otherwise green. Alternative weighed: the axiom now. Why: the theorem is published and classical (so an axiom is allowed), but it is a gap in
+    Mathlib that every later use of plane topology here will want, and the four items need a source read that is not yet held. Confidence: high. **Prior-art
+    / bibliography debt**: K4b cites Hurewicz–Wallman, *Dimension Theory*, Thm IV 2 (recalled, not read; not in `BIBLIOGRAPHY.md`, not in `~/source/library/`).
+    FS131-LEB's planner reads a source (that book or a modern one) and proposes the row.
+67. **Reading with a counterexample — FS106-L holds only for a change point in the open set** (K4b's L-READ; record § 7.3, adversary `not_lemmaL_of_not_mem`): at a
+    frontier point a two-cone example refutes it; the row's words ("of the set") already place `b` in the set, so no defect of the row, but K4's draft form (b in
+    `cl A ∩ cl B`) was false. FS131-W must apply (L) only at points of the open set (Townsend's annulus; Woodall's step 4) — for W's brief.
+68. **Completeness, same shape as item 53** (K4b's F-A5): TS-T's Condition-5 clause rests on S–V Lemma 2 almost everywhere (not a backlog row); stated over its
+    conclusion (at most three colours at every point), the class its argument reads. No backlog consumer reads the clause. Accepted. Generalization (G-L):
+    lemma (L) needs no disjointness of the two colour classes.
