@@ -522,3 +522,6 @@ One line per item with its source; no narration. Each line is ticked done or dec
      one writer; FS129-Z2 launches now on the stubs, the index corrections and its where-else column, the scored predictions and the Searcher's
      results, and drafts the front page last, from Z1's file once it is committed. Alternative: Z2 after Z1. Why: most of Z2 is independent of Z1;
      the one dependency is ordered inside Z2. Confidence: medium.
+135. **Launched 2026-10-04 01:58 UTC**: FS129-Z2, the record job, part 2 (`general-purpose`, Opus; `data/fs129/briefs/FS129-Z2-record.md`, gated
+     PASS, at `c2bade3a`). Running: the Searcher, FS129-Z1, FS129-Z2 — the cap of three. After both record parts: FS129-L1 (the Clerk) and FS129-P1
+     (Poros), then Keryx files the front page and FS-129 is Derived.
