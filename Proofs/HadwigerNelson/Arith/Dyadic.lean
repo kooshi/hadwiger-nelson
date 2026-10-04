@@ -11,6 +11,8 @@ import Mathlib.RingTheory.RamificationInertia.Ramification
 import Mathlib.RingTheory.RamificationInertia.Inertia
 import Mathlib.RingTheory.DedekindDomain.AdicValuation
 import Mathlib.RingTheory.Conductor
+import Mathlib.NumberTheory.NumberField.Ideal.Basic
+import Mathlib.NumberTheory.RamificationInertia.Basic
 
 /-!
 # Dyadic places where `3` is a square: unramified in `F(i)`, split iff the residue degree is even (FS-131 wave 2)
@@ -489,7 +491,21 @@ theorem comap_conductor_sup_eq_top (hdeg : Module.finrank F L = 2) (P : HeightOn
   rw [sup_comm]
   exact ‹P.asIdeal.IsMaximal›.out.2 _ (left_lt_sup.mpr hle)
 
-open Polynomial in
+/-- `3 ∣ 2^f − 1` exactly when `f` is even (`4^m ≡ 1 (mod 3)`). -/
+theorem three_dvd_two_pow_sub_one_iff (f : ℕ) : 3 ∣ 2 ^ f - 1 ↔ Even f := by
+  rcases Nat.even_or_odd' f with ⟨m, rfl | rfl⟩
+  · have h1 : 3 ∣ 4 ^ m - 1 := by simpa using Nat.sub_dvd_pow_sub_pow 4 1 m
+    have : (2 : ℕ) ^ (2 * m) = 4 ^ m := by rw [pow_mul]; norm_num
+    rw [this]; simpa using h1
+  · have h1 : 3 ∣ 4 ^ m - 1 := by simpa using Nat.sub_dvd_pow_sub_pow 4 1 m
+    have h4 : 1 ≤ 4 ^ m := Nat.one_le_pow _ _ (by norm_num)
+    have : (2 : ℕ) ^ (2 * m + 1) = 2 * 4 ^ m := by rw [pow_succ, pow_mul]; norm_num; ring
+    rw [this]
+    have hodd : ¬ Even (2 * m + 1) := by simp
+    simp only [hodd, iff_false]
+    omega
+
+open Polynomial UniqueFactorizationMonoid in
 /-- **Kummer–Dedekind at `P`** (`KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map`,
 `KummerDedekind.emultiplicity_factors_map_eq_emultiplicity`, `Ideal.sum_ramification_inertia`): the minimal polynomial reduces
 to `X² + X + 1`, separable (so every prime over `P` is unramified), split iff `3 ∣ 2^f − 1` iff `f` even, else irreducible
@@ -499,7 +515,119 @@ theorem dyadicConclusion_of_minpoly (hdeg : Module.finrank F L = 2) (P : HeightO
     (hmin : minpoly (𝓞 F) γ = X ^ 2 + C d * X + C δ)
     (hcond : (conductor (𝓞 F) γ).comap (algebraMap (𝓞 F) (𝓞 L)) ⊔ P.asIdeal = ⊤) :
     DyadicSqrt3Conclusion L P := by
-  sorry
+  classical
+  haveI hPmax : P.asIdeal.IsMaximal := P.isPrime.isMaximal P.ne_bot
+  have hP0 : P.asIdeal ≠ ⊥ := P.ne_bot
+  have hint : IsIntegral (𝓞 F) γ := Algebra.IsIntegral.isIntegral γ
+  set p := P.asIdeal with hp
+  letI : Field (𝓞 F ⧸ p) := Ideal.Quotient.field p
+  letI : Fintype (𝓞 F ⧸ p) := Fintype.ofFinite _
+  have h2k : ((2 : ℕ) : 𝓞 F ⧸ p) = 0 := by
+    rw [Nat.cast_ofNat, ← map_ofNat (Ideal.Quotient.mk p), Ideal.Quotient.eq_zero_iff_mem]; exact h2
+  haveI : CharP (𝓞 F ⧸ p) 2 := by
+    refine ringChar.of_eq ?_
+    rcases (Nat.dvd_prime Nat.prime_two).mp (ringChar.dvd h2k) with h | h
+    · exact absurd h (CharP.ringChar_ne_one)
+    · exact h
+  have hcard : Fintype.card (𝓞 F ⧸ p) = 2 ^ Ideal.inertiaDeg p ℤ := by
+    rw [← Nat.card_eq_fintype_card]; exact card_quot_eq_two_pow P h2
+  -- the reduced minimal polynomial
+  have hred : (minpoly (𝓞 F) γ).map (Ideal.Quotient.mk p) = (X ^ 2 + X + 1 : (𝓞 F ⧸ p)[X]) := by
+    have e1 : Ideal.Quotient.mk p d = 1 := by
+      rw [← map_one (Ideal.Quotient.mk p)]; exact Ideal.Quotient.eq.mpr hd
+    have e2 : Ideal.Quotient.mk p δ = 1 := by
+      rw [← map_one (Ideal.Quotient.mk p)]; exact Ideal.Quotient.eq.mpr hδ1
+    rw [hmin]
+    simp [Polynomial.map_add, Polynomial.map_mul, e1, e2]
+  obtain ⟨hsep, hirr⟩ := x2x1_separable_irreducible_iff (K := 𝓞 F ⧸ p)
+  rw [hcard, three_dvd_two_pow_sub_one_iff] at hirr
+  set q : (𝓞 F ⧸ p)[X] := X ^ 2 + X + 1 with hq
+  have hq0 : q ≠ 0 := hsep.ne_zero
+  have hMnd : (normalizedFactors q).Nodup := (squarefree_iff_nodup_normalizedFactors hq0).mp hsep.squarefree
+  -- Kummer–Dedekind
+  set NF := normalizedFactors (p.map (algebraMap (𝓞 F) (𝓞 L))) with hNF
+  have hKD := KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map hPmax hP0 hcond hint
+  have hcardNF : Multiset.card NF = Multiset.card (normalizedFactors q) := by
+    rw [hNF, hKD, Multiset.card_map]
+    erw [Multiset.card_attach]
+    rw [hred]
+  have hNFnd : NF.Nodup := by
+    rw [hNF, hKD]
+    refine Multiset.Nodup.map (fun a b hab => ?_) (Multiset.nodup_attach.mpr (hred ▸ hMnd))
+    exact (KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk hPmax hP0 hcond hint).symm.injective
+      (Subtype.val_injective hab)
+  have hmemP : ∀ Q : Ideal (𝓞 L), Q ∈ p.primesOver (𝓞 L) ↔ Q ∈ NF := fun Q =>
+    Ideal.mem_primesOver_iff_mem_normalizedFactors (𝓞 L) hP0
+  have hset : p.primesOver (𝓞 L) = ↑NF.toFinset := by
+    ext Q; rw [hmemP, Finset.mem_coe, Multiset.mem_toFinset]
+  have hncard : (p.primesOver (𝓞 L)).ncard = Multiset.card (normalizedFactors q) := by
+    rw [hset, Set.ncard_coe_finset, Multiset.toFinset_card_of_nodup hNFnd, hcardNF]
+  have hpS : p.map (algebraMap (𝓞 F) (𝓞 L)) ≠ ⊥ := Ideal.map_ne_bot_of_ne_bot hP0
+  have he : ∀ Q ∈ p.primesOver (𝓞 L), Ideal.ramificationIdx Q (𝓞 F) = 1 := by
+    intro Q hQ
+    haveI : Q.LiesOver p := hQ.2
+    rw [Ideal.IsDedekindDomain.ramificationIdx_eq_normalizedFactors_count p Q hpS]
+    exact Multiset.count_eq_one_of_mem hNFnd ((hmemP Q).1 hQ)
+  -- `1 ≤ card ≤ 2`, and `= 1` iff irreducible
+  have hle2 : Multiset.card (normalizedFactors q) ≤ 2 := by
+    haveI : NoZeroSMulDivisors (𝓞 F) (𝓞 L) := ⟨fun {r m} h => by
+      rw [Algebra.smul_def] at h
+      rcases mul_eq_zero.mp h with h | h
+      · exact Or.inl ((map_eq_zero_iff _ (FaithfulSMul.algebraMap_injective (𝓞 F) (𝓞 L))).mp h)
+      · exact Or.inr h⟩
+    have := Ideal.card_primesOverFinset_le_finrank (𝓞 L) F L hP0 (p := p)
+    rw [hdeg] at this
+    rw [← hncard, ← IsDedekindDomain.coe_primesOverFinset hP0 (𝓞 L), Set.ncard_coe_finset]
+    exact this
+  have hge1 : 1 ≤ Multiset.card (normalizedFactors q) := by
+    rw [Nat.one_le_iff_ne_zero, Ne, Multiset.card_eq_zero]
+    intro h0
+    have hprod := prod_normalizedFactors hq0
+    rw [h0, Multiset.prod_zero] at hprod
+    have hu : IsUnit q := hprod.isUnit_iff.mp isUnit_one
+    have : q.natDegree = 0 := natDegree_eq_zero_of_isUnit hu
+    rw [hq] at this
+    have h2d : (X ^ 2 + X + 1 : (𝓞 F ⧸ p)[X]).natDegree = 2 := by compute_degree!
+    omega
+  have hone : Multiset.card (normalizedFactors q) = 1 ↔ Irreducible q := by
+    constructor
+    · intro h1
+      obtain ⟨r, hr⟩ := Multiset.card_eq_one.mp h1
+      have hprod := prod_normalizedFactors hq0
+      rw [hr, Multiset.prod_singleton] at hprod
+      exact hprod.irreducible (irreducible_of_normalized_factor r (by rw [hr]; exact Multiset.mem_singleton_self r))
+    · intro hi
+      rw [normalizedFactors_irreducible hi, Multiset.card_singleton]
+  have hsplit : (p.primesOver (𝓞 L)).ncard = 2 ↔ Even (Ideal.inertiaDeg p ℤ) := by
+    rw [hncard]
+    constructor
+    · intro h2'
+      by_contra hne
+      have := hone.mpr (hirr.mpr hne)
+      omega
+    · intro hev
+      have hni : ¬ Irreducible q := fun hi => hirr.mp hi hev
+      have : Multiset.card (normalizedFactors q) ≠ 1 := fun h => hni (hone.mp h)
+      omega
+  refine ⟨he, hsplit, fun hne => ?_⟩
+  have h1 : (p.primesOver (𝓞 L)).ncard = 1 := by rw [hncard] at hne ⊢; omega
+  refine ⟨h1, fun Q hQ => ?_, Nat.not_even_iff_odd.mp ((hsplit.not).mp hne), card_quot_eq_two_pow P h2⟩
+  haveI : Q.IsPrime := hQ.1
+  haveI : Q.LiesOver p := hQ.2
+  haveI : Q.IsMaximal := Ideal.IsMaximal.of_liesOver_isMaximal Q p
+  have hfin : IsDedekindDomain.primesOverFinset p (𝓞 L) = {Q} := by
+    have hc : (IsDedekindDomain.primesOverFinset p (𝓞 L)).card = 1 := by
+      rw [← Set.ncard_coe_finset, IsDedekindDomain.coe_primesOverFinset hP0]; exact h1
+    obtain ⟨Q', hQ'⟩ := Finset.card_eq_one.mp hc
+    have hmem : Q ∈ IsDedekindDomain.primesOverFinset p (𝓞 L) := by
+      rw [← Finset.mem_coe, IsDedekindDomain.coe_primesOverFinset hP0]; exact hQ
+    rw [hQ'] at hmem ⊢
+    rw [Finset.mem_singleton.mp hmem]
+  have hsum := Ideal.sum_ramification_inertia (𝓞 L) F L hP0 (p := p)
+  rw [hfin, Finset.sum_singleton, hdeg, Ideal.ramificationIdx'_eq_ramificationIdx p Q hP0, he Q hQ, one_mul,
+    Ideal.inertiaDeg'_eq_inertiaDeg p Q] at hsum
+  exact hsum
+
 
 /-- **The P-local engine**: the coefficients of `exists_dyadic_coeffs` give the conclusion (`exists_root_quadratic`,
 `minpoly_eq_of_root`, `comap_conductor_sup_eq_top`, `dyadicConclusion_of_minpoly`). Both leaves are its cases: the congruence
@@ -508,19 +636,43 @@ at `d = 1`, `δ = 1 + (s² − 3)/4`; the local square through `exists_span_four
 theorem dyadicConclusion_of_coeffs (hdeg : Module.finrank F L = 2) (hi : ∃ ι : L, ι ^ 2 = -1 ∧ ι ∉ Set.range (algebraMap F L))
     (P : HeightOneSpectrum (𝓞 F)) (h2 : (2 : 𝓞 F) ∈ P.asIdeal) {s d δ : 𝓞 F} (hδ : 4 * δ = d ^ 2 * (1 + s ^ 2))
     (hd : d - 1 ∈ P.asIdeal) (hδ1 : δ - 1 ∈ P.asIdeal) (hs : s ∉ P.asIdeal) : DyadicSqrt3Conclusion L P := by
-  sorry
+  have hd0 : d ≠ 0 := by
+    rintro rfl
+    exact P.isPrime.ne_top ((Ideal.eq_top_iff_one _).mpr (by simpa using P.asIdeal.neg_mem hd))
+  have hs0 : s ≠ 0 := by
+    rintro rfl
+    exact hs P.asIdeal.zero_mem
+  obtain ⟨γ, hroot, hnot⟩ := exists_root_quadratic hdeg hi hδ hd0 hs0
+  exact dyadicConclusion_of_minpoly hdeg P h2 hd hδ1 (minpoly_eq_of_root hdeg hroot hnot)
+    (comap_conductor_sup_eq_top hdeg P hδ hd hs hroot hnot)
 
 /-- **SQRT3-LOCAL from the congruence**: if `s² − 3 ∈ 4P` for some `s ∈ 𝓞 F`, the dyadic prime `P` satisfies the conclusion. (Ruling, inventory item 134: `hi` carries `ι ∉ F`.) -/
 theorem sqrt3_local_of_congr (hdeg : Module.finrank F L = 2) (hi : ∃ ι : L, ι ^ 2 = -1 ∧ ι ∉ Set.range (algebraMap F L)) (P : HeightOneSpectrum (𝓞 F))
     (h2 : (2 : 𝓞 F) ∈ P.asIdeal) (hs : ∃ s : 𝓞 F, s ^ 2 - 3 ∈ Ideal.span {(4 : 𝓞 F)} * P.asIdeal) :
     DyadicSqrt3Conclusion L P := by
-  sorry
+  obtain ⟨s, hs⟩ := hs
+  obtain ⟨t, ht, hst⟩ := Ideal.mem_span_singleton_mul.mp hs
+  have hsP : s ∉ P.asIdeal := by
+    intro h
+    have h3 : (3 : 𝓞 F) ∈ P.asIdeal := by
+      have : (3 : 𝓞 F) = s ^ 2 - 4 * t := by rw [hst]; ring
+      rw [this]
+      exact P.asIdeal.sub_mem (P.asIdeal.pow_mem_of_mem h 2 (by norm_num)) (P.asIdeal.mul_mem_left _ ht)
+    have : (1 : 𝓞 F) ∈ P.asIdeal := by
+      have : (1 : 𝓞 F) = 3 - 2 := by norm_num
+      rw [this]; exact P.asIdeal.sub_mem h3 h2
+    exact P.isPrime.ne_top ((Ideal.eq_top_iff_one _).mpr this)
+  refine dyadicConclusion_of_coeffs hdeg hi P h2 (s := s) (d := 1) (δ := 1 + t) ?_ (by simp) (by simpa using ht) hsP
+  linear_combination hst
 
 /-- **FS129-SA1-SQRT3-LOCAL**: for a place `w` of `F` above `2` at which `3` is a square in the completion `F_w`, `w` is
 unramified in `F(i)/F`, splits iff `f(w|2)` is even, and is inert of norm `2^f`, `f` odd, when it does not split. (Ruling, inventory item 134: `hi` carries `ι ∉ F`.) -/
 theorem sqrt3_local (hdeg : Module.finrank F L = 2) (hi : ∃ ι : L, ι ^ 2 = -1 ∧ ι ∉ Set.range (algebraMap F L)) (P : HeightOneSpectrum (𝓞 F))
     (h2 : (2 : 𝓞 F) ∈ P.asIdeal) (h3 : IsSquare (3 : P.adicCompletion F)) : DyadicSqrt3Conclusion L P := by
-  sorry
+  obtain ⟨a, I, h4, hI⟩ := exists_span_four_eq P
+  obtain ⟨s, hs⟩ := exists_sq_sub_three_mem_pow P h3 (a + 1)
+  obtain ⟨s', d, δ, hδ, hd, hδ1, hs'⟩ := exists_dyadic_coeffs P h2 h4 hI hs
+  exact dyadicConclusion_of_coeffs hdeg hi P h2 hδ hd hδ1 hs'
 
 /-- **TC1-SQRT3-DYADIC** (merged): if `√3 ∈ F` and `i ∉ F`, every place of `F` above `2` satisfies the conclusion. (Ruling, inventory item 134: `hi` carries `ι ∉ F`.) -/
 theorem sqrt3_dyadic (hdeg : Module.finrank F L = 2) (hi : ∃ ι : L, ι ^ 2 = -1 ∧ ι ∉ Set.range (algebraMap F L)) (h3 : ∃ r : F, r ^ 2 = 3)

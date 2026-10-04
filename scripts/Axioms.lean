@@ -2377,6 +2377,9 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Arith.exists_powerBasis_of_root
 #print axioms HadwigerNelson.Arith.exists_coords_of_quadratic
 
+-- FS131-I2h: children added by the eighth wave-2 implementer
+#print axioms HadwigerNelson.Arith.three_dvd_two_pow_sub_one_iff
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
