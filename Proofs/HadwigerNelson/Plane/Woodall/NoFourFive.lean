@@ -311,6 +311,189 @@ theorem one_sub_e_neg_two_mul (φ : ℝ) : 1 - e (-(2 * φ)) = ((2 * Real.sin φ
   push_cast
   linear_combination (-2 : ℂ) * hsc
 
+/-! ## Sector bookkeeping (the `Fin` wrap) and the parabola's meeting with arcs -/
+
+/-- **The previous sector's end is this sector's start**, through the `Fin` wrap: for `i ≠ 0` the sector before `i` ends at `i`'s start; for
+`i = 0` it is the last sector, ending at `d (last n)`. -/
+theorem prev_succ {n : ℕ} (i : Fin n) :
+    (((finRotate n).symm i).succ = i.castSucc ∧ (i : ℕ) ≠ 0) ∨ (((finRotate n).symm i).succ = Fin.last n ∧ (i : ℕ) = 0) := by
+  obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by have := i.pos; omega⟩
+  set j := (finRotate (m + 1)).symm i with hj
+  have hji : finRotate (m + 1) j = i := (finRotate (m + 1)).apply_symm_apply i
+  by_cases hlt : (j : ℕ) < m
+  · have h1 : finRotate (m + 1) j = ⟨j + 1, by omega⟩ := finRotate_of_lt hlt
+    rw [h1] at hji
+    have hi : (i : ℕ) = j + 1 := by rw [← hji]
+    left
+    refine ⟨?_, by omega⟩
+    ext; simp [hi]
+  · have hjm : (j : ℕ) = m := by have := j.isLt; omega
+    have h1 : finRotate (m + 1) j = ⟨0, by omega⟩ := by
+      have : j = ⟨m, by omega⟩ := by ext; simp [hjm]
+      rw [this]; exact finRotate_last'
+    rw [h1] at hji
+    have hi : (i : ℕ) = 0 := by rw [← hji]
+    right
+    refine ⟨?_, hi⟩
+    ext; simp [hjm]
+
+/-- The start of the sector after `prev i` is `d i.castSucc`, up to the wrap `2π` when `i = 0`. -/
+theorem d_prev_succ {n : ℕ} {d : Fin (n + 1) → ℝ} (hlast : d (Fin.last n) = d 0 + 2 * π) (i : Fin n) :
+    (d ((finRotate n).symm i).succ = d i.castSucc ∧ (i : ℕ) ≠ 0) ∨
+      (d ((finRotate n).symm i).succ = d i.castSucc + 2 * π ∧ (i : ℕ) = 0) := by
+  rcases prev_succ i with ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · exact Or.inl ⟨by rw [h1], h2⟩
+  · refine Or.inr ⟨?_, h2⟩
+    have : i.castSucc = 0 := by ext; simp [h2]
+    rw [h1, hlast, this]
+
+/-- **A sector edge lies in the closed range of only its two sectors** (positive angles): if `d i.castSucc` lies in the closed range of sector `i'`
+mod `2π`, then `i'` is `i` or the sector before `i`. -/
+theorem eq_of_edge_mem_angleIcc {n : ℕ} {d : Fin (n + 1) → ℝ} (hmono : StrictMono d) (hlast : d (Fin.last n) = d 0 + 2 * π)
+    {i i' : Fin n} (hx : d i.castSucc ∈ angleIcc (d i'.castSucc) (d i'.succ)) : i' = i ∨ i' = (finRotate n).symm i := by
+  obtain ⟨m, hm⟩ := mem_iUnion.mp hx
+  obtain ⟨hm1, hm2⟩ := hm
+  have hpi := Real.pi_pos
+  have h0i' : d 0 ≤ d i'.castSucc := hmono.monotone (Fin.zero_le _)
+  have hi'last : d i'.succ ≤ d (Fin.last n) := hmono.monotone (Fin.le_last _)
+  have h0i : d 0 ≤ d i.castSucc := hmono.monotone (Fin.zero_le _)
+  have hilast : d i.castSucc < d (Fin.last n) := hmono (Fin.castSucc_lt_last i)
+  have hi'lt : d i'.castSucc < d i'.succ := hmono (Fin.castSucc_lt_succ)
+  rw [hlast] at hi'last hilast
+  have hm_lt : (m : ℝ) < 1 := by
+    by_contra hcon; push Not at hcon; nlinarith
+  have hm_gt : (-2 : ℝ) < m := by
+    by_contra hcon; push Not at hcon; nlinarith
+  have hm1' : m < 1 := by exact_mod_cast hm_lt
+  have hm2' : -2 < m := by exact_mod_cast hm_gt
+  have hm0 : m = 0 ∨ m = -1 := by omega
+  rcases hm0 with rfl | rfl
+  · -- the same period
+    simp only [Int.cast_zero, mul_zero, add_zero] at hm1 hm2
+    have hle1 : i'.castSucc ≤ i.castSucc := hmono.le_iff_le.mp hm1
+    have hle2 : i.castSucc ≤ i'.succ := hmono.le_iff_le.mp hm2
+    have h1 : (i' : ℕ) ≤ i := by simpa using hle1
+    have h2 : (i : ℕ) ≤ i' + 1 := by rw [Fin.le_def] at hle2; simpa using hle2
+    by_cases hii : (i : ℕ) = i'
+    · left; exact Fin.ext hii.symm
+    · right
+      have hi1 : (i : ℕ) = i' + 1 := by omega
+      rcases prev_succ i with ⟨hs, -⟩ | ⟨-, hz⟩
+      · have := congrArg Fin.val hs
+        rw [Fin.val_succ, Fin.val_castSucc] at this
+        exact Fin.ext (by omega)
+      · omega
+  · -- the previous period: `i` is the first sector
+    simp only [Int.cast_neg, Int.cast_one] at hm1 hm2
+    have hsucc : d i'.succ = d (Fin.last n) := by rw [hlast]; linarith
+    have hi'succ : i'.succ = Fin.last n := hmono.injective hsucc
+    have hi0 : d i.castSucc = d 0 := by linarith
+    have hi0' : i.castSucc = 0 := hmono.injective hi0
+    have hiz : (i : ℕ) = 0 := by simpa using congrArg Fin.val hi0'
+    right
+    rcases prev_succ i with ⟨-, hne⟩ | ⟨hs, -⟩
+    · exact absurd hiz hne
+    · exact Fin.succ_injective _ (hi'succ.trans hs.symm)
+
+open Polynomial in
+/-- The zeros of a real quartic with a nonzero coefficient of positive degree are finitely many. -/
+theorem finite_roots_quartic (a0 a1 a2 a3 a4 : ℝ) (h : a1 ≠ 0 ∨ a2 ≠ 0 ∨ a3 ≠ 0 ∨ a4 ≠ 0) :
+    {x : ℝ | a0 + a1 * x + a2 * x ^ 2 + a3 * x ^ 3 + a4 * x ^ 4 = 0}.Finite := by
+  set P : ℝ[X] := C a0 + C a1 * X + C a2 * X ^ 2 + C a3 * X ^ 3 + C a4 * X ^ 4 with hP
+  have hP0 : P ≠ 0 := by
+    intro hz
+    have h1 : P.coeff 1 = a1 := by simp [hP]
+    have h2 : P.coeff 2 = a2 := by simp [hP]
+    have h3 : P.coeff 3 = a3 := by simp [hP]
+    have h4 : P.coeff 4 = a4 := by simp [hP]
+    rw [hz] at h1 h2 h3 h4
+    simp only [coeff_zero] at h1 h2 h3 h4
+    rcases h with h | h | h | h
+    · exact h h1.symm
+    · exact h h2.symm
+    · exact h h3.symm
+    · exact h h4.symm
+  refine (Polynomial.finite_setOf_isRoot hP0).subset fun x hx => ?_
+  simp only [mem_setOf_eq] at hx ⊢
+  simp [hP, IsRoot, eval_add, eval_mul, eval_pow, eval_C, eval_X]
+  linarith
+
+
+theorem framePt_re (v : ℂ) (β x y : ℝ) : (framePt v β x y).re = v.re + x * Real.cos β - y * Real.sin β := by
+  simp [framePt, e_eq, Complex.mul_re, Complex.mul_im, -Complex.ofReal_cos, -Complex.ofReal_sin]
+  ring
+
+theorem framePt_im (v : ℂ) (β x y : ℝ) : (framePt v β x y).im = v.im + x * Real.sin β + y * Real.cos β := by
+  simp [framePt, e_eq, Complex.mul_re, Complex.mul_im, -Complex.ofReal_cos, -Complex.ofReal_sin]
+  ring
+
+/-- **A nondegenerate arc meets the parabola of curvature `1/2` tangent to `e β` at `v` in finitely many points**: the parabola lies on no
+circle and no line. -/
+theorem Arc.finite_inter_parabola (a : Arc) (ha : a.Nondegenerate) (v : ℂ) (β : ℝ) :
+    {x : ℝ | framePt v β x ((1 / 2 : ℝ) * x ^ 2 / 2) ∈ a.carrier}.Finite := by
+  have hg : Real.cos β ^ 2 + Real.sin β ^ 2 = 1 := by rw [add_comm]; exact Real.sin_sq_add_cos_sq β
+  cases a with
+  | seg p q =>
+    -- on the line through `p` and `q`
+    have hpq : p ≠ q := ha
+    obtain ⟨w1, hw1⟩ : ∃ w1, w1 = (q - p).re := ⟨_, rfl⟩
+    obtain ⟨w2, hw2⟩ : ∃ w2, w2 = (q - p).im := ⟨_, rfl⟩
+    have hw : w1 ≠ 0 ∨ w2 ≠ 0 := by
+      by_contra hcon; push Not at hcon
+      exact hpq (sub_eq_zero.mp (Complex.ext (by rw [← hw1]; simp [hcon.1]) (by rw [← hw2]; simp [hcon.2]))).symm
+    refine (finite_roots_quartic ((v - p).im * w1 - (v - p).re * w2)
+      (Real.sin β * w1 - Real.cos β * w2) ((Real.cos β * w1 + Real.sin β * w2) / 4) 0 0 ?_).subset ?_
+    · by_contra hcon
+      push Not at hcon
+      obtain ⟨h1, h2, -, -⟩ := hcon
+      have e1 : Real.cos β * w1 + Real.sin β * w2 = 0 := by linarith
+      have hw1' : w1 = 0 := by
+        have : w1 * (Real.cos β ^ 2 + Real.sin β ^ 2) = Real.cos β * (Real.cos β * w1 + Real.sin β * w2) + Real.sin β * (Real.sin β * w1 - Real.cos β * w2) := by ring
+        rw [hg, e1, h1] at this; linarith
+      have hw2' : w2 = 0 := by
+        have : w2 * (Real.cos β ^ 2 + Real.sin β ^ 2) = Real.sin β * (Real.cos β * w1 + Real.sin β * w2) - Real.cos β * (Real.sin β * w1 - Real.cos β * w2) := by ring
+        rw [hg, e1, h1] at this; linarith
+      rcases hw with h | h <;> contradiction
+    · intro x hx
+      simp only [Arc.carrier, mem_setOf_eq] at hx ⊢
+      obtain ⟨s, t, hs, ht, hst, hz⟩ := hx
+      have hre := congrArg Complex.re hz
+      have him := congrArg Complex.im hz
+      rw [framePt_re] at hre
+      rw [framePt_im] at him
+      simp [Complex.add_re, Complex.add_im] at hre him
+      have hw1' : w1 = q.re - p.re := by rw [hw1]; simp
+      have hw2' : w2 = q.im - p.im := by rw [hw2]; simp
+      have hs' : s = 1 - t := by linarith
+      subst hs'
+      have hvp1 : (v - p).re = v.re - p.re := Complex.sub_re v p
+      have hvp2 : (v - p).im = v.im - p.im := Complex.sub_im v p
+      rw [hvp1, hvp2, hw1', hw2']
+      linear_combination (q.re - p.re) * (-1 : ℝ) * him + (q.im - p.im) * hre
+  | circ c ρ θ₀ θ₁ =>
+    have hρ : 0 < ρ := ha.1
+    refine (finite_roots_quartic ((v.re - c.re) ^ 2 + (v.im - c.im) ^ 2 - ρ ^ 2)
+      (2 * ((v.re - c.re) * Real.cos β + (v.im - c.im) * Real.sin β))
+      (((v.im - c.im) * Real.cos β - (v.re - c.re) * Real.sin β) / 2 + 1) 0 (1 / 16) (Or.inr (Or.inr (Or.inr (by norm_num))))).subset ?_
+    intro x hx
+    simp only [Arc.carrier, mem_setOf_eq] at hx ⊢
+    obtain ⟨θ, -, hz⟩ := hx
+    have hn : ‖framePt v β x ((1 / 2 : ℝ) * x ^ 2 / 2) - c‖ ^ 2 = ρ ^ 2 := by
+      rw [← hz, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hρ]
+    rw [Complex.sq_norm, Complex.normSq_apply, Complex.sub_re, Complex.sub_im, framePt_re, framePt_im] at hn
+    linear_combination hn - (x ^ 2 + x ^ 4 / 16) * hg
+
+namespace ArcMap
+
+/-- **A sector edge lies in the closed range of only its two sectors** (a picture with positive angles). -/
+theorem SectorsAt.eq_of_edge_mem_angleIcc {k : ℕ} {F : ArcMap k} {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k}
+    (h : F.SectorsAt v n d c) (hpos : ∀ i : Fin n, 0 < d i.succ - d i.castSucc) {i i' : Fin n}
+    (hx : d i.castSucc ∈ angleIcc (d i'.castSucc) (d i'.succ)) : i' = i ∨ i' = (finRotate n).symm i :=
+  _root_.HadwigerNelson.Plane.eq_of_edge_mem_angleIcc
+    (Fin.strictMono_iff_lt_succ.mpr fun i => by have := hpos i; linarith) h.2.2.1 hx
+
+end ArcMap
+
 namespace ArcMap
 
 variable {k : ℕ} (F : ArcMap k)
@@ -911,7 +1094,93 @@ theorem SectorsAt.exists_parabola_region (hP : F.IsPlaneMap) {v : ℂ} {n : ℕ}
     (h : F.SectorsAt v n d c) (hn : 2 ≤ n) (hpos : ∀ j : Fin n, 0 < d j.succ - d j.castSucc) (i : Fin n) :
     ∃ r > 0, ∃ j : Fin k, (j = c ((finRotate n).symm i) ∨ j = c i) ∧
       ∀ x ∈ Ioo 0 r, framePt v (d i.castSucc) x ((1 / 2 : ℝ) * x ^ 2 / 2) ∈ F.region j := by
-  sorry
+  have _ := hn
+  set β := d i.castSucc with hβ
+  set w : ℝ → ℂ := fun x => framePt v β x ((1 / 2 : ℝ) * x ^ 2 / 2) with hw
+  have hwc : Continuous w := by simp only [hw, framePt]; fun_prop
+  have hw0 : w 0 = v := by simp [hw, framePt]
+  have hwv : ∀ x : ℝ, w x - v = (x : ℂ) * (1 + ((x / 4 : ℝ) : ℂ) * I) * e β := by
+    intro x; simp only [hw, framePt]; push_cast; ring
+  -- (a)-(c): small parameters give interior points
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite v (by rw [hP]; trivial)
+  set Z : Set ℝ := ⋃ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ t).Nonempty}, {x | w x ∈ a.carrier} with hZ
+  have hZfin : Z.Finite := hfin.biUnion fun a ha => Arc.finite_inter_parabola a (F.nondegenerate a ha.1) v β
+  have hwt : ∀ᶠ x in 𝓝 (0 : ℝ), w x ∈ t := by
+    exact hwc.continuousAt.preimage_mem_nhds (by rwa [hw0])
+  obtain ⟨ε, hε, hεt⟩ := Metric.eventually_nhds_iff.mp hwt
+  obtain ⟨r₀, hr₀, hZr⟩ : ∃ r₀ > 0, ∀ x ∈ Z, 0 < x → r₀ ≤ x := by
+    obtain ⟨r₀, hr₀, hle⟩ := exists_pos_le_finset (hZfin.inter_of_left (Ioi (0 : ℝ))).toFinset
+      (fun x : ℝ => if 0 < x then x else 1) (fun x => by by_cases hx : 0 < x <;> simp [hx])
+    exact ⟨r₀, hr₀, fun x hxZ hx0 => by
+      have := hle x ((Set.Finite.mem_toFinset _).mpr ⟨hxZ, hx0⟩)
+      simpa [hx0] using this⟩
+  set r := min ε r₀ with hr
+  have hr0 : 0 < r := lt_min hε hr₀
+  have hint : ∀ x ∈ Ioo 0 r, w x ∈ F.interiorPts := by
+    intro x hx
+    refine ⟨by rw [hP]; trivial, fun hmem => ?_⟩
+    obtain ⟨a, ha, hwa⟩ := mem_iUnion₂.mp hmem
+    have hwt' : w x ∈ t := hεt (by rw [Real.dist_eq, sub_zero, abs_of_pos hx.1]; exact lt_of_lt_of_le hx.2 (min_le_left _ _))
+    have hxZ : x ∈ Z := mem_iUnion₂.mpr ⟨a, ⟨ha, ⟨w x, hwa, hwt'⟩⟩, hwa⟩
+    have := hZr x hxZ hx.1
+    have := min_le_right ε r₀
+    linarith [hx.2]
+  -- (d): one colour along the small parabola
+  have himg : IsPreconnected (w '' Ioo 0 r) := isPreconnected_Ioo.image _ hwc.continuousOn
+  have hcont : ContinuousOn F.col (w '' Ioo 0 r) :=
+    F.continuousOn_col.mono (by rintro _ ⟨x, hx, rfl⟩; exact hint x hx)
+  set j := F.col (w (r / 2)) with hj
+  have hcol : ∀ x ∈ Ioo 0 r, F.col (w x) = j := fun x hx =>
+    himg.constant (f := F.col) hcont (mem_image_of_mem w hx) (mem_image_of_mem w (show r / 2 ∈ Ioo 0 r from ⟨by positivity, by linarith⟩))
+  have hreg : ∀ x ∈ Ioo 0 r, w x ∈ F.region j := fun x hx => ⟨hint x hx, hcol x hx⟩
+  refine ⟨r, hr0, j, ?_, hreg⟩
+  -- (e): `β` is in the cone of `j`'s class at `v`
+  have hcone : β ∈ coneAt (F.region j) v := by
+    intro ε' hε'
+    set f : ℝ → ℂ := fun x => (1 + ((x / 4 : ℝ) : ℂ) * I) / (‖1 + ((x / 4 : ℝ) : ℂ) * I‖ : ℂ) with hf
+    have hunorm : ∀ x : ℝ, ‖1 + ((x / 4 : ℝ) : ℂ) * I‖ ≠ 0 := fun x => by
+      rw [norm_ne_zero_iff]
+      intro h0
+      have := congrArg Complex.re h0
+      simp at this
+    have hfc : Continuous f := by
+      refine Continuous.div (by fun_prop) (by fun_prop) fun x => ?_
+      exact_mod_cast hunorm x
+    have hf0 : f 0 = 1 := by simp [hf]
+    have hev : ∀ᶠ x in 𝓝 (0 : ℝ), dist (w x) v < ε' ∧ ‖f x - 1‖ < ε' := by
+      have h1 : ∀ᶠ x in 𝓝 (0 : ℝ), dist (w x) v < ε' :=
+        (hwc.continuousAt (x := 0)).eventually (by rw [hw0]; exact Metric.ball_mem_nhds _ hε')
+      have h2 : ∀ᶠ x in 𝓝 (0 : ℝ), ‖f x - 1‖ < ε' := by
+        have := (hfc.continuousAt (x := 0)).eventually (Metric.ball_mem_nhds (f 0) hε')
+        filter_upwards [this] with x hx
+        rwa [dist_eq_norm, hf0] at hx
+      exact h1.and h2
+    obtain ⟨δ, hδ, hδx⟩ := Metric.eventually_nhds_iff.mp hev
+    set x := min δ r / 2 with hx
+    have hx0 : 0 < x := by positivity
+    have hxδ : x < δ := by have := min_le_left δ r; linarith
+    have hxr : x < r := by have := min_le_right δ r; linarith
+    obtain ⟨hd, hfx⟩ := hδx (by rw [Real.dist_eq, sub_zero, abs_of_pos hx0]; exact hxδ)
+    have hxne : (x : ℂ) ≠ 0 := by exact_mod_cast hx0.ne'
+    have hnorm : ‖w x - v‖ = x * ‖1 + ((x / 4 : ℝ) : ℂ) * I‖ := by
+      rw [hwv, norm_mul, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hx0]
+    refine ⟨w x, hreg x ⟨hx0, hxr⟩, ?_, hd, ?_⟩
+    · intro hxv
+      rw [← sub_eq_zero, hwv] at hxv
+      have hu : (1 + ((x / 4 : ℝ) : ℂ) * I) ≠ 0 := fun h0 => hunorm x (by rw [h0, norm_zero])
+      exact mul_ne_zero (mul_ne_zero hxne hu) (e_ne_zero β) hxv
+    · have hdir : (w x - v) / (‖w x - v‖ : ℂ) = f x * e β := by
+        rw [hnorm, hwv, hf]
+        have hn0 : (‖1 + ((x / 4 : ℝ) : ℂ) * I‖ : ℂ) ≠ 0 := by exact_mod_cast hunorm x
+        push_cast
+        field_simp
+      rw [hdir, show f x * e β - e β = (f x - 1) * e β by ring, norm_mul, norm_e, mul_one]
+      exact hfx
+  rw [h.2.2.2.2.2 j] at hcone
+  obtain ⟨i', hi', hmem⟩ := mem_iUnion₂.mp hcone
+  rcases h.eq_of_edge_mem_angleIcc hpos (i := i) (i' := i') hmem with rfl | rfl
+  · exact Or.inr hi'.symm
+  · exact Or.inl hi'.symm
 
 /-- **The refined second-order lemma** (§ 7.3 (b); W's § 4.1 lemma in the form E1-BAD's count and `step6` consume): in a map of the plane, at
 every edge direction `β = d i` of a picture with positive angles, one of the edge's two normals `β ± π/2` carries an inner collar in the shadow of
