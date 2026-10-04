@@ -12,20 +12,18 @@
    plan (`plans/FS129-cross-application-audit.md`; Kooshi's decisions and his note on roots verbatim in § 1), its inventory
    (`plans/FS129-close-inventory.md`, items 1–74: every result, ruling, receipt and routed item, with sources), and its stub
    (`plans/STUB-cross-application-audit.md`, with Poros's card).
-3. **Where it stands** (updated 2026-10-03):
-   - **Done**: the index (FS129-IX1, the Clerk; `data/fs129/index/`, with roots, a vacuity column and completeness assertions); the card and
-     the ranked demand list (FS129-Q1, Poros; `data/fs129/demand-judged.md`, J1–J24); pass 1 in both lanes (FS129-OA1, FS129-OR1); pass 2, lane
-     A, first part (FS129-MA1: 23 of lane A's 70 mechanisms). Results so far are all "derived, one mind": the arithmetic era bears on FS-104
-     through Γ₁₁'s slack (items 38–39, 66–68); J1 closed yes — FS129-OR1-QFREE answers FS-123's first question (item 54).
-   - **Running** (two of the cap of three; ids in Keryx's scratch only): FS129-MR1 (pass 2, lane R; `data/fs129/briefs/FS129-MR1-pass2.md`)
-     and FS129-MA2 (pass 2, lane A, the other 47 mechanisms; `data/fs129/briefs/FS129-MA2-pass2.md`). If either is gone, launch a fresh
-     agent on the same brief: it resumes from its record's last SAVED stage (standing rule 2).
-   - **Next**: when lane A's pass 2 is complete (MA2, or MA3 from MA2's list), pass 3 in each lane (FS129-SA1, FS129-SR1), scoped to
-     `data/fs129/index/lean-order.md` first, carrying the vacuity sort with four headings (items 33–37) and the items routed "for pass 3"
-     (55, 63, 68, 69, and the merges in the readers' tables of misses); then the record job (FS129-Z1), then FS129-L1 and FS129-P1 (plan § 3).
-   - **Held for Kooshi**: the finite-graph search for a Falconer fan (`plans/SEARCH-QUEUE.md` row 3; default held); whether a blind second
-     mind checks J1's close (item 56; default no). The Searcher has not yet been briefed today on queue rows 1, 2 and 4.
-   - Pass-2 briefs are built from Keryx's scratch template; rebuild from `data/fs129/briefs/FS129-MA1-pass2.md` if the scratch is gone.
+3. **Where it stands** (updated 2026-10-03, late evening; the inventory's items 1–114 are the detail):
+   - **Done**: the index (FS129-IX1); the card and demand list (FS129-Q1); lane A's three passes (OA1, MA1, MA2, SA1) — complete; lane R's passes
+     1 and 2 (OR1, MR1) and pass 3's first part (SR1). All results "derived, one mind". Headlines: J1 closed yes (FS129-OR1-QFREE; attacked at its
+     named steps by SR1, the attack failed); the arithmetic era bears on FS-104 through the slack residue planes, merged by SA1 into seven
+     statements; V6-HUG's identity found three times (MR1); 15 lost theorems found (SA1, item 110), eight of them inputs of row 121.
+   - **Running** (ids in Keryx's scratch only): FS129-SR2 (pass 3, lane R, second part; `data/fs129/briefs/FS129-SR2-pass3.md`) and the day's
+     Searcher (`data/search/briefs/SEARCH-2026-10-03.md`; queue rows 1, 2, 4, 5). If either is gone, launch a fresh agent on the same brief.
+   - **Next**: when lane R's pass 3 is complete (SR2, or SR3 from SR2's list), the record job in two parts (FS129-Z1: the derivation file, the
+     lost theorems, the errata; FS129-Z2: the index corrections of items 99 and 111, the stubs, the scored predictions, the front-page drafts),
+     then FS129-L1 and FS129-P1 (plan § 3). The record job's inputs are every "For FS129-Z1" line in the inventory.
+   - **Held for Kooshi**: the finite-graph search for a Falconer fan (`plans/SEARCH-QUEUE.md` row 3; default held); a blind second mind on J1's
+     close (item 56; default no — SR1's attack failed, item 95).
 4. **Kooshi's order** (2026-10-03): FS-129; then **the Lean backlog**, in a session of its own, from the input FS-129 prepares
    (`plans/LEAN-BACKLOG.md`: the 77 results handed to de Bruijn and what they rest on, in dependency order, with FS-129's merges applied,
    and FS-129's own compositions); then Poros's ranking, whose top is FS-123, the (Q)-free ring.
