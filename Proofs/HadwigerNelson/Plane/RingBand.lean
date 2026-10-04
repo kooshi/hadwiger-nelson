@@ -106,16 +106,49 @@ namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
 
+/-- `e` is injective on `[0, 2π)`. -/
+theorem e_injOn_Ico : InjOn e (Ico 0 (2 * π)) := by
+  intro a ha b hb hab
+  have hπ := Real.pi_pos
+  have h := Complex.exp_eq_exp_iff_exists_int.mp hab
+  obtain ⟨n, hn⟩ := h
+  have hn' : (a : ℂ) = b + n * (2 * π) := by
+    have := congrArg (fun z => z / I) hn
+    simp only [mul_div_cancel_right₀ _ Complex.I_ne_zero] at this
+    rw [this]; field_simp
+  have hn'' : a = b + n * (2 * π) := by exact_mod_cast hn'
+  have h1 : (n : ℝ) < 1 := by nlinarith [ha.1, ha.2, hb.1, hb.2]
+  have h2 : (-1 : ℝ) < n := by nlinarith [ha.1, ha.2, hb.1, hb.2]
+  have h1' : n < 1 := by exact_mod_cast h1
+  have h2' : -1 < n := by exact_mod_cast h2
+  have : n = 0 := by omega
+  rw [hn'', this]; simp
+
 /-- The change set of the ring: `S = {θ | r(θ) ∈ Γ}`, finite per period on a covered ring carrying no arc of `Γ`
 (`finite_ringΓ_off_ringArc`). -/
 theorem ring_finite_S {p : ℂ} (hp : F.Covers p 1) (hno : ∀ x, ¬ F.OnRingArc p x) :
     ({θ | ringPt p θ ∈ F.Γ} ∩ Ico 0 (2 * π)).Finite := by
-  sorry
+  have hfin : (F.Γ ∩ sphere p 1).Finite := by
+    refine ((F.finite_ringΓ_off_ringArc hp).union (Set.toFinite ∅)).subset ?_
+    intro x hx
+    by_cases h : F.OnRingArc p x
+    · exact absurd h (hno x)
+    · exact Or.inl ⟨hx, h⟩
+  have hinj : InjOn (ringPt p) (Ico 0 (2 * π)) := fun a ha b hb hab =>
+    e_injOn_Ico ha hb (add_left_cancel hab)
+  refine Set.Finite.of_finite_image (f := ringPt p) (hfin.subset ?_) (hinj.mono inter_subset_right)
+  rintro _ ⟨θ, ⟨hθ, -⟩, rfl⟩
+  exact ⟨hθ, ringPt_mem_sphere p θ⟩
 
 /-- The ring colouring is locally constant off `S`: a ring point off `Γ` on a covered ring is an interior point. -/
 theorem ring_locallyConstant {p : ℂ} (hp : F.Covers p 1) (g : Fin k → ZMod 3) :
     ∀ θ ∉ {θ | ringPt p θ ∈ F.Γ}, ∀ᶠ θ' in 𝓝 θ, g (F.col (ringPt p θ')) = g (F.col (ringPt p θ)) := by
-  sorry
+  intro θ hθ
+  have hxd : ringPt p θ ∈ F.dom := hp (sphere_subset_closedBall (ringPt_mem_sphere p θ))
+  have hloc := F.locallyConstant _ hxd (fun h => hθ ⟨hxd, h⟩)
+  have hcont : Continuous (ringPt p) := by unfold ringPt e; fun_prop
+  filter_upwards [hcont.continuousAt.eventually hloc] with θ' h
+  rw [h]
 
 /-- The ring colouring is proper at `60°`: two ring points off `Γ` `60°` apart are at distance `1`, so have different colours
 (validity), both absent at `p` (FS116-V4-TWIST), which `g` keeps apart. -/
@@ -123,7 +156,22 @@ theorem ring_proper (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) {g : Fin k → 
     (hg : Set.InjOn g (F.coloursAt p)ᶜ) :
     ∀ θ, θ ∉ {θ | ringPt p θ ∈ F.Γ} → θ + π / 3 ∉ {θ | ringPt p θ ∈ F.Γ} →
       g (F.col (ringPt p θ)) ≠ g (F.col (ringPt p (θ + π / 3))) := by
-  sorry
+  intro θ h0 h1 hgg
+  have hd0 : ringPt p θ ∈ F.dom := hp (sphere_subset_closedBall (ringPt_mem_sphere p θ))
+  have hd1 : ringPt p (θ + π / 3) ∈ F.dom := hp (sphere_subset_closedBall (ringPt_mem_sphere p _))
+  have hi0 := F.mem_interiorPts_of_notMem_Γ hd0 h0
+  have hi1 := F.mem_interiorPts_of_notMem_Γ hd1 h1
+  have hdist : dist (ringPt p θ) (ringPt p (θ + π / 3)) = 1 := by
+    have hπ := Real.pi_pos
+    refine ((dist_ringPt_ringPt_cmp_one p (α := θ) (β := θ + π / 3) ?_).1).mpr ?_
+    · rw [show θ - (θ + π / 3) = -(π / 3) by ring, abs_neg, abs_of_pos (by positivity)]; linarith
+    · rw [show θ - (θ + π / 3) = -(π / 3) by ring, abs_neg, abs_of_pos (by positivity)]
+  have hne := hF _ hi0 _ hi1 hdist
+  have a0 : F.col (ringPt p θ) ∈ (F.coloursAt p)ᶜ :=
+    not_mem_coloursAt_of_mem_sphere hF (ringPt_mem_sphere p θ) ⟨hi0, rfl⟩
+  have a1 : F.col (ringPt p (θ + π / 3)) ∈ (F.coloursAt p)ᶜ :=
+    not_mem_coloursAt_of_mem_sphere hF (ringPt_mem_sphere p _) ⟨hi1, rfl⟩
+  exact hne (hg a0 a1 hgg)
 
 /-- **The map bridge** (FS110-N2-RING's setting): the ring of a point `p` of a valid map covering `B̄(p, 1)`, whose ring carries
 no arc of `Γ`, coloured through `g : Fin k → ZMod 3` injective on the colours absent at `p`, is a circle colouring with change
