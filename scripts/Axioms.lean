@@ -2288,6 +2288,15 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.collarAt_shadow_inner_of_mem_coneAt
 #print axioms HadwigerNelson.Plane.ArcMap.collarAt_shadow_outer_of_mem_coneAt
 #print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.mem_coneAt_of_mem_Icc
+#print axioms HadwigerNelson.Plane.collarAt_setOf_forall_mem
+#print axioms HadwigerNelson.Plane.CollarAt.of_abs_sub_lt
+#print axioms HadwigerNelson.Plane.false_of_cos_eq_zero_on_Icc
+#print axioms HadwigerNelson.Plane.exists_eq_add_half_pi_of_cos_eq_zero
+#print axioms HadwigerNelson.Plane.cos_neg_of_pi_div_two_lt_of_lt_three_pi_div_two
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.region_dist_ne_one
+#print axioms HadwigerNelson.Plane.ArcMap.exists_two_cover_of_three_le_card
+#print axioms HadwigerNelson.Plane.ArcMap.collarAt_closure_of_forall_shadow
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_opposite
 
 #eval IO.println "=== PURCHASED ==="
 

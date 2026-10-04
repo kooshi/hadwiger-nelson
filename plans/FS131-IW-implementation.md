@@ -23,6 +23,10 @@ statement (`lemmaL`; `ArcMap.dense_interiorPts`; `ArcMap.Valid.unitPairsNull_reg
 | `SectorsAt.coloursAt_eq` | § 4.5 (`j ∈ coloursAt v ⟺ j ∈ range c`) | standard three |
 | **E1-NO45** `ArcMap.false_of_four_le_sectors` | `plans/FS131-E1-derivation.md` § 3.6 ("no point lies on the boundary of exactly four or exactly five sectors"), read as `4 ≤ n`, `k ≤ 5`, `WoodallNormal` | `sorryAx` through its citations: `exists_sectorsAt`, `step6` (open leaves) and the cited statements; the argument itself is proved: the angle bound `≤ π`, `habs`, the avoiding arc, the three-colour point, its picture |
 | `ArcMap.exists_three_le_sectors`, `ArcMap.aeMap6_normal`, `ArcMap.aeMap6_merged` (moved after `aeMap6_normal`, which it cites), `ArcMap.aeMap6`, `ArcMap.aeMap6_of_condition5`, `woodall_thm6` | compositions, § 9.3; `aeMap6_merged` as § 9.3's route (cyclic step by the orbit of `finRotate`, `step5_lt` at the horn, injectivity, `step5_lt` again for the angles) | proved from their citations; `sorryAx` through `exists_sectorsAt`, `ts_t`, `step6`, `step5_lt`, `exists_woodallMerged` (open or cited) |
+| **FS131-IWb** — the connected piece: `ArcMap.exists_preconnected_of_mem_coneAt`, `collarAt_shadow_inner_of_mem_coneAt`, `collarAt_shadow_outer_of_mem_coneAt`, `SectorsAt.mem_coneAt_of_mem_Icc` | the brief's child ("a preconnected piece of a colour class approaching a point along a cone direction, for a horn and for any sector") | `sorryAx` through wave 3's `coneAt_region_eq_biUnion` (proved on `fs131-w3`, unlanded); `mem_coneAt_of_mem_Icc`: standard three |
+| **FS131-IWb** — E1-RAY (inner, outer) and E1-BAD's interior case `SectorsAt.not_mem_coloursAt_of_mem_Ioo`, re-proved through the cone clause (items 154–155) | unchanged statements, § 8.5 | `sorryAx` through the connected piece (wave 3) and, for E1-BAD's case, E1-SEE's citation (`unitPairsNull_region`) |
+| **FS131-IWb** — **`ArcMap.step5_lt`** (Woodall's step 5, strict), with `SectorsAt.collarAt_opposite`, `collarAt_closure_of_forall_shadow`, `exists_two_cover_of_three_le_card`, `Valid.region_dist_ne_one` | § 4.5's route: the inner arc `(β₂ − 3π/2, β₁ − π/2)` of length `π − φ > 2π/3`, inner collars for the three colours from the two edges as cone directions (horns included), two colours left, `woodall_step4` | `sorryAx` through cited statements only: `lemmaL` (via `woodall_step4`), `dense_interiorPts` (via `subset_closure_of_subset_shadow`), `coneAt_region_eq_biUnion`; `exists_two_cover_of_three_le_card`, `Valid.region_dist_ne_one`: standard three |
+| **FS131-IWb** — **`ArcMap.step6`** (Woodall's step 6 by Townsend's lemma), with `false_of_cos_eq_zero_on_Icc`, `exists_eq_add_half_pi_of_cos_eq_zero`, `cos_neg_of_pi_div_two_lt_of_lt_three_pi_div_two`, `collarAt_setOf_forall_mem`, `CollarAt.of_abs_sub_lt` | § 4.5 / § 9.3's route: off the six edge normals one side works at first order (two sectors failing on opposite sides share an edge whose normal is the angle); the seed is an opposite arc of length `π − φ > π/3` when some angle is `< 2π/3`, else the certified normal of edge `d 0` (`exists_normal_collarAt`) extends one of length exactly `π/3`; `townsend_lemma` | `sorryAx` through cited statements only (`lemmaL` via `townsend_lemma`; `dense_interiorPts`; `coneAt_region_eq_biUnion`); the five real-variable children: standard three |
 
 **E1-NO45 holds in the kernel as a proof from its citations**: the proof of `false_of_four_le_sectors` is complete, and the check on E1's argument it was
 asked to be (inventory item 111) found no gap: E1-BAD's count (`K.card ≤ n`), E1-COVER's colour-class form and the refined second-order lemma all closed
@@ -141,3 +145,70 @@ here until wave 3 lands), so they show `sorryAx` until then. Before this stage E
 driver log `data/fs131/iwb/build1.log`); `Woodall/Basic`, `Collar` and `NoFourFive` built with no warning, and the only warnings in `Steps` are the four
 `declaration uses 'sorry'`. Iteration tools: `data/fs131/iwb/run.sh` and `olean.sh` (a private `cp -rs` olean mirror under `build/iwb-olean`; the symlink is
 removed before an olean is written, so nothing writes through into `.lake/build`). Never evidence.
+
+## Stage 6 — SAVED (FS131-IWb): `step5_lt` and `step6` proved; the route for `exists_sectorsAt`; `exists_woodallMerged` re-priced
+
+**`step5_lt` proved** (statement unchanged). The connected piece closes the plan gap IW found: both edges `β₁ = d i.castSucc`, `β₂ = d i.succ` of sector `i` are
+cone directions of `c i`, and, mod `2π` (`d_prev_succ`), of the previous and the next colour. For `ψ` in the inner arc `(β₂ − 3π/2, β₁ − π/2)` both edges lie in
+the far half `(ψ + π/2, ψ + 3π/2)`, so the three colours carry inner collars about `ψ` (`SectorsAt.collarAt_opposite`, which reads only cone directions, so a horn
+sector or horn neighbour needs no case). `collarAt_closure_of_forall_shadow` (W's `subset_closure_of_subset_shadow` on the intersected collar) leaves the two
+other colours (`exists_two_cover_of_three_le_card`, `k ≤ 5`), and `woodall_step4` on the arc of length `π − φ > 2π/3` gives `False`. No δ, no truncated sector.
+
+**`step6` proved** (statement unchanged). Cut angles `K` are the six edge normals `d j ± π/2` (`j = 0, 1, 2`). Off `K`, inner or outer first order holds at `θ`.
+If not, some sector has `cos (γ − θ) ≥ 0` throughout and some sector has `≤ 0` throughout. One sector can't do both (`false_of_cos_eq_zero_on_Icc`: zeros of
+`cos` are `π` apart). So they are two sectors, which with three sectors are adjacent: their common edge `e` has `cos (e − θ) = 0`, and `θ` is a normal of `e`
+(`exists_eq_add_half_pi_of_cos_eq_zero`), in `K`. The seed: if some angle is `< 2π/3`, the arc opposite it has length `π − φ > π/3` and is inner at first order
+(each sector holds an edge in the far half). If all three are `2π/3`, the refined second-order lemma (`exists_normal_collarAt`) certifies a normal
+`d 0 + σπ/2` of edge `d 0` for both of its colours; the third colour's cone holds `d 2` (σ = 1) or `d 1` (σ = −1) in the far half; the collar there extends
+the opposite arc of length exactly `π/3` (of sector 2, resp. 0) by a margin (`CollarAt.of_abs_sub_lt`). `townsend_lemma` finishes. W's count of "at most three
+cut angles" is not needed: `townsend_lemma` takes any finite `K`.
+
+**Build of this stage**: OK — 444 of 444 batches, 2 modules rebuilt, 12 with warnings, 8 m 26 s, exit 0 (`build/gate/build/20261004T133104Z-3845273.log`,
+driver log `data/fs131/iwb/build2.log`). The only warnings in the Woodall modules are the two `declaration uses 'sorry'` in `Steps`: line 106
+(`exists_sectorsAt`) and line 189 (`exists_woodallMerged`). Records: 9 more in the FS131-IWb section of `scripts/Axioms.lean`; `tools/fs131_w2_decls.py --check`: 128 theorems, 128 records, 0 missing, 0 stale;
+`--plant` FIRED both ways. Name collisions: none of the 13 new theorem names is declared on `main`, `fs131-w2`, `fs131-w3`, `fs131-w4` or `fs131-leb` (`git grep`;
+the QA1 tool runs at the gate). Axioms (iteration print, `data/fs131/iwb/scratch/ax.lean`, never evidence): `step5_lt` and `step6` show `sorryAx` only through
+cited unlanded statements (`lemmaL`, `dense_interiorPts`, `coneAt_region_eq_biUnion`, `Valid.unitPairsNull_region`); the five real-variable children,
+`exists_two_cover_of_three_le_card`, `Valid.region_dist_ne_one`, `SectorsAt.mem_coneAt_of_mem_Icc` and `const_sectorsAt` are on the standard three.
+
+**The route for `exists_sectorsAt`** (the clause-5 replacement makes it a statement about cones only; no `localSectors` needed; every named lemma is
+wave 3's, proved on `fs131-w3`, public at the end of `Plane/LocalStructure`):
+1. *Bad directions.* `GoodAt v ρ₀` (`exists_goodAt`); `𝒜` the finitely many arcs meeting `ball v ρ₀`, all through `v`. For an arc with `b = (a.curveData v).2 ≠ 0`,
+   `Arc.Tang v (e β) a` is `(b * conj (e β)).re = 0`, i.e. `|b| cos (arg b − β) = 0`, i.e. `β ∈ arg b + π/2 + πℤ`. Let `T` be the finset `{arg b_a + π/2}` and
+   `Bad β := ∃ t ∈ T, ∃ m : ℤ, β = t + π m`. Then `¬ Bad β` means no arc of `𝒜` is tangent to `e β`, and `Bad` meets any bounded window in a finite set.
+2. *A good direction has one colour, locally.* For `¬ Bad β`: `GoodAt.exists_wedge` (with `u = e β`) gives `m`, `N₀`; with `N = max N₀ 1` the wedge
+   `W = Rgn v (e β) N m` lies in the interior points (every arc meeting it is tangent to `e β`, and none is). `W` is preconnected (`isPreconnected_Rgn_lev`, `I = univ`),
+   so it lies in one class, of colour `a β`. (U) every colour whose cone holds `β` is `a β`: by `exists_mem_Rgn_of_mem_coneAt`, its class meets `W`.
+   (N) there is `ε > 0` with `Ioo (β − ε) (β + ε) ⊆ coneAt (region (a β)) v`: `ray_mem_Rgn` (with `u₀ < min (m/4) (1/2)`) puts the rays at `β ± u₀`, and the ray at
+   `β` itself, into `W` for small radius, and a ray inside a set approaches along its own direction (a three-line child). Define `a β` as `Classical.choose
+   (exists_mem_coneAt_region hv β)`; by (U) it is the wedge's colour.
+3. *Constant between bad directions.* (N) at `β` with (U) at `β'` gives `a β' = a β` for nearby good `β'`; on an open interval with no bad direction, `a` is
+   locally constant, hence constant (`isPreconnected_Ioo.constant`, continuity from local constancy as in `continuousOn_col`).
+4. *A pre-picture with uniform slots.* Choose a good `θ₀` (the bad directions in `[0, 1]` are finite). Let `p : Fin r → ℝ` be the sorted bad directions in
+   `(θ₀, θ₀ + 2π)` (`Finset.orderEmbOfFin`). If `r = 0`: `n = 1`, `d = (θ₀, θ₀ + 2π)`, `c = a θ₀`. If `r ≥ 1`, give each breakpoint `k + 1` slots:
+   `n = r (k + 1)`; slot `(l, s)` (index `l (k + 1) + s`) starts at `d = p l`; for `s < k` it is a horn of colour `if s ∈ H l then s else a_l`, where
+   `H l = {j | p l ∈ coneAt (region j) v}`; for `s = k` it is the interval `[p l, p (l + 1)]` (`p r := p 0 + 2π`) of colour `a_l = a ((p l + p (l + 1))/2)`;
+   `d n = p 0 + 2π`. A horn coloured `a_l` is harmless: `p l` lies in the closed interval of that colour. The cone clause: `⊆` from (U) off `Bad`, and from
+   `H l` at a breakpoint (shifted into the window by periodicity, `mem_coneAt_add_two_pi`); `⊇` from (N) on each open interval, closedness of the cone
+   (`isClosed_coneAt`) at its ends and at the interior points that are not true breakpoints, and the definition of `H l` for the horns.
+5. *Merge.* `PreSectorsAt` := `SectorsAt` without clause 4. Strong induction on `n`: if `n = 1` or every adjacent pair differs, done. Else merge a pair
+   `(i, i + 1)` of one colour with `i + 1 < n` by `Fin.removeNth (i + 1)` on `d` and `c` (cone clause: `angleIcc a b ∪ angleIcc b c' = angleIcc a c'` for
+   `a ≤ b ≤ c'`). A wrap pair `(n − 1, 0)` is first rotated (`d' k = d (k + 1)` for `k < n`, `d' n = d 1 + 2π`, `c' = c ∘ finRotate n`; the cone clause
+   holds by `2π`-periodicity of `angleIcc`), which makes it the pair `(n − 2, n − 1)`.
+Price: H, about 600–800 lines (step 4's index arithmetic and step 5's `Fin.removeNth` are most of it). Its axioms will be wave 3's.
+
+**`exists_woodallMerged`, re-priced: H+, a job of its own, and first a derivation.** What it needs, none of it held:
+(i) Woodall's clearness lemma in this project's terms (region-only: a run of sectors of total angle `< π` between two sectors of colour `c` at `P` has,
+near `P`, no point at distance exactly `1` from a point of colour `c`). W's § 4.5 has it in one paragraph, and no derivation in `plans/` re-derives
+step 3 the way E1 re-derived steps 5–8.
+(ii) The modification as an `ArcMap`: arcs of `F` outside small discs, a circle of radius `ε(P) < 1` about each vertex with a repeated colour, radii small
+enough for disjointness and local finiteness, colours changed on the runs. Plus validity across discs and against far points, the plane, and
+Condition 5 kept.
+(iii) `WoodallMerged` for the new map at every point. That reads its pictures (old vertices after recolouring, and the new vertices where the small circles
+cross old arcs), so it needs `exists_sectorsAt`'s analysis applied to the modified map.
+Rough size: 1500–3000 lines. Recommended: a derivation of step 3 as a modification lemma with every clause, then a planner's skeleton, then an
+implementer. A derivation might also find a statement that avoids the modification: E1-style handling of repeated colours at a point directly in the
+contradiction chain. That is the deriver's question, not mine.
+
+**Where I stop.** At about 430k by the harness's count, under the brief's line of about 500k. `exists_sectorsAt` (H, 600–800 lines) would not fit, so
+it is left with the route above. The gate and the landing still wait for waves 3–4 and FS131-LEB.
