@@ -254,3 +254,4 @@ inside the refutation. `eleventh_type` and `endpoint_dist_ge` are unconditional 
 (`build/gate/build/20261004T192248Z-1722529.log`; driver log `data/fs131/kb/build-asgiven.log`). Every warning was `declaration uses sorry` except five
 `missing doc string for public field BaseCtx.*` in `BaseWalk`. Those are fixed (field docstrings), and `lake env lean` on `BaseWalk` shows only `sorry`
 warnings. The confirming build is `data/fs131/kb/build-stage3b.log`, recorded in the report if it lands before hand-back.
+Confirming build: **OK, 446 of 446, 3 modules rebuilt, exit 0, 0 warnings other than `declaration uses sorry`** (`build/gate/build/20261004T193142Z-1794581.log`; driver log `data/fs131/kb/build-stage3b.log`).
