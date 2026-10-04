@@ -803,3 +803,11 @@ reason by the close.*
      (algebraMap F L)` in `exists_root_quadratic`, `dyadicConclusion_of_coeffs`, `sqrt3_local_of_congr`, `sqrt3_local` and `sqrt3_dyadic` (with finrank 2 it makes
      `L = F(i)`, the row's reading). Alternative weighed: state `L` as `F⟮ι⟯` explicitly. Why not: the implementer's form is the smallest change and says the
      same. Confidence: high. No hand result changes; credit I2g.
+135. **Ruling — I3g's order accepted, with the engine kept shared** (FS131-I3g, message 2026-10-04, proposing a re-order): it proves `four_of_bothKind` and
+     `flank_edge_exists` first, on an inversion-coordinates engine (`ζ = (w − y)e(−δ)`, `ν = ζ/|ζ|²`: every curve through `y` becomes a line, regions near a
+     direction are convex, and the disjoint-interiors lemma for tiles' cones falls out), then states `localSectors` if its budget remains. Its observation:
+     wave 4's `Plane/ValidMap/Basic` defines its own `IsSector`/`HasSectors`, and nothing in wave 4's tree yet cites a wave-3 `localSectors`. **Condition**: the
+     engine's general lemmas (the inversion chart, convexity near a direction, disjoint interiors of tiles' cones) go in `Plane/LocalStructure` as public lemmas,
+     not private to `RingGerm`, so wave 4 can use them. Alternative weighed: `localSectors` strictly first (item 132). Why not: the two leaves gate wave 3's
+     landing and the cheaper route is complete; FS131-I4b has 50-odd leaves that do not need sectors. **Routed**: I ask I4b which shape its six sector-leaves
+     need (the plan's branch list, or its own `HasSectors` with directions), and relay the answer to I3g. Confidence: medium-high.
