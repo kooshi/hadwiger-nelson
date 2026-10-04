@@ -21,9 +21,9 @@ that judge the milestone, written before any job).*
 | job | state | where |
 |---|---|---|
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
-| wave 2 (28 rows) | K2d done (item 118): every leaf has stated children; 13 of its 17 closed from children; `Instances/FalconerOrbit` proved; merged into `fs131-w2` (`ddc5b5c8`); 154 `sorry` lines left; **FS131-I2f (Opus trial) running** | `.claude/worktrees/fs131-w2` |
+| wave 2 (28 rows) | the Opus trial (I2f, item 129) closed 37 lines and five rows; 117 `sorry` lines left; **FS131-I2g running** | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | 91 of 96 proved (I3–I3e); item 112's cusp ruling applied; **FS131-I3f running** on the last 5, then the gate and the landing | `.claude/worktrees/fs131-w3` |
-| wave 4 (25 rows) | 26 of 86 proved (I4, item 125); `localSectors` gap ruled (item 126); **next half slot: FS131-I4b** from I4's record stage 3 | `.claude/worktrees/fs131-w4` |
+| wave 4 (25 rows) | 26 of 86 proved (I4, item 125); `localSectors` ruled (item 126); **FS131-I4b running** | `.claude/worktrees/fs131-w4` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | re-planned by W2 with **no open leaf** (item 124); E1-BAD erratum filed; **FS131-IW running**; lands after waves 3–4 and LEB | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
 | Lebesgue's covering theorem (FS131-LEB) | queued (item 66) | — |
@@ -36,14 +36,15 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 0.5 + 0.5 + 1 + 1 = 3 of 3)
+## 3. Running now (slots used: 0.5 + 0.5 + 1 + 0.5 + 0.5 = 3 of 3)
 
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-IW (Woodall's chain implementer; item 128) | Sonnet | `data/fs131/briefs/FS131-IW-woodall.md` | its branch's (`fs131-ww`) `data/fs131/reports/FS131-IW.md` |
 | FS131-I3f (wave 3, last five, gate, landing; item 117) | Sonnet | `data/fs131/briefs/FS131-I3f-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3f.md` |
 | FS131-E2 (the cusp case; Ephodos; item 127) | Opus | `data/fs131/briefs/FS131-E2-cusp-case.md` | `data/fs131/reports/FS131-E2.md` (claim list `data/fs131/claims-E2.md`) |
-| FS131-I2f (wave 2, the Opus-implementer trial; item 119) | **Opus** (`debruijn-implementer`, `model: "opus"`) | `data/fs131/briefs/FS131-I2f-wave2.md` | its branch's (`fs131-w2`) `data/fs131/reports/FS131-I2f.md` |
+| FS131-I2g (wave 2, seventh implementer; item 130) | Sonnet | `data/fs131/briefs/FS131-I2g-wave2.md` | its branch's (`fs131-w2`) `data/fs131/reports/FS131-I2g.md` |
+| FS131-I4b (wave 4, second implementer; item 130) | Sonnet | `data/fs131/briefs/FS131-I4b-wave4.md` | its branch's (`fs131-w4`) `data/fs131/reports/FS131-I4b.md` |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. A notification arrives when each hands back; if the session restarted, resume a job from
 its record's last SAVED stage with a fresh agent on the same brief.
@@ -52,7 +53,7 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 1. ~~Fill the free slot~~ — done: FS131-K2d launched (item 104). The next free slot (a half when I3e hands back): FS131-IW or FS131-I4 (Sonnet), briefs derived
    from the nearest earlier brief by script, gated with `python3 .claude/skills/keryx/scripts/brief_gate.py all`.
-2. (done) The Opus-implementer trial launched (item 119). On its report: compare leaves and children closed per session with I2–I2e, and tell Kooshi.
+2. (done) The Opus-implementer trial scored (item 129): about 1.5× the priced work per unit of budget, one session. **Held for Kooshi**: implementers on Opus? Default: Sonnet.
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
 5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
