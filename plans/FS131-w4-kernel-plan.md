@@ -405,3 +405,111 @@ definitions built from leaves (`--check`: 45 names, 0 missing; `--plant`: FIRED,
 - **OUT-LEB (decision owed).** Lebesgue's covering theorem for the square: an axiom with the four items, or a separate formalization job (§ 7.4).
   My recommendation: a separate job (it is the plane's dimension theorem, a reusable Mathlib-shaped result, and the only outside theorem the wave
   needs); the axiom only if that job has not landed when wave 4's gate is otherwise green.
+
+## Stage 8 — SAVED (K4b stage 3, partial): the base's steps and the bowtie (`Plane/ValidMap/BaseSteps`)
+
+### 8.1 The module
+
+`Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean` (imports `Plane/ValidMap/Basic`, `Plane/LocalMapExamples`). New vocabulary, each with a
+proved spec example: `pseudoColours u x` (CB's `c′`, S–V Def. 7, `coloursAt x \ coloursAt u` — at six colours with `c(u) = {4,5,6}` exactly
+`c(x) ∩ {1,2,3}`), `IsLeavingCentre u q`, `leavingInner`, `leavingOuter`, `StripHolds u q` (CB D2: one side of `ω(u)` near `q` free of
+`c(u)`), `MIn u x` (CE E6: a colour of `c(u)` with `x` in the closure of its part inside `ω(u)`; class form, equal to CE's tile form through
+`finite_tiles_near`); the helper `const_univ_coloursAt` (proved). The bowtie is a map by tiles: `bowtieG`, `bowtieH`, `bowtieC` (both horns),
+`bowtieCN`, `bowtieCS`, `bowtieX σ`, `bowtieY σ`, `bowtieZ σ` (`σ = ±1` the mirror), `bowtieCol` (YB3's colours less one), `bowtieArcs`
+(two unit arcs, `arcsin (5/13)` the sectors' half-angle, and the tiles' segments), domain the interior of the closure of the tiles; its
+three field leaves (`bowtieArcs_nondegenerate`, `_locallyFinite`, `bowtieCol_locallyConstant`). Every tile inequality was derived from
+`tools/fs112_yb3_frags.py bowtie` by hand (the sector condition `12|x| < 5(1 − y)` is `tan α = 5/12`; `XR` is the angular sector at `N` from
+direction `(s, −c)` to `(1, 1)` cut by `x < ρ`, `y > 1 − cρ`; `ZR` is the rectangle `(9/26, 113/260) × (−11/65, 11/65)` less the notch left of
+`G`'s and `H`'s right edges and of `x = 5/13`, its reflex corners at `G_R`, `H_R`). **The implementer checks each tile against the tool's
+polygon before proving anything about the map** (a planted coordinate slip here would make every bowtie leaf false).
+
+### 8.2 The read-backs
+
+| row | declarations | read-back |
+|---|---|---|
+| **FS112-N3-PAIRS** | `pair_i`, `pair_ii`, `pair_P'` | Row: "(i) never fails; (ii) fails only when a point read has at least four colours or its partner is a both-centre; two cubic trichromatic vertices with one multicolour are never at distance 1". (i) (N3-I): cubic trichromatic `u₁`, `u₂` (`IsCubicTrichromatic`: degree 3 and three colours), `F.Covers u_i 1`, `x ∈ ω(u₁)`, `y ∈ ω(u₂)`, `|x − y| = 1`, `c′(x) = c′(y) = {a}` ⟹ `False`, with **no transversality** (N3-I's unconditional form) and `u₁ = u₂` allowed. (ii) (N3-II): the same with `c′ = {a, b}`, `a ≠ b`, and transversality (`y ≠ u₁`, `|y − u₁| ≠ 2`, CB D1's criterion) ⟹ `4 ≤ ncard (coloursAt x)` or `y` the centre of a both-kind unit arc (`∃ θ₁ θ₂, BothKind y θ₁ θ₂`, the row's "partner is a both-centre"; with `noBoth` it gives N3-II's "four colours or a repeated colour"). (P′) (N3-P′): `u ≠`-free form `dist u u' ≠ 1` for cubic trichromatic `u`, `u'` in the domain with equal `coloursAt`. `c′` relative to each centre (CB's argument reads `a ∈ c(y)` only). `Covers u_i 1` is the class the argument reads (the strip at `x` reads the arcs at `u₁` and the map near `x`; `c(y)` the map near `y`); the derivation's setting is a valid map of the plane — **a widening to fragments**, reported. **Same, widened** |
+| **FS112-N3-FAIL** | `fail_leavingCentre`, `fail_colours` | Row: "the strip fails at `q ∈ ω(u)` only when `q` is a leaving centre of `u`; there the colours of `c(u)` allowed inside `ω(u)` near `q` are exactly the inner colours of those arcs, outside exactly their outer colours". Formal: `¬ StripHolds u q ⟹ IsLeavingCentre u q`; and the colours of `c(u)` occurring inside near `q` (`innerColours u q ∩ coloursAt u`, wave 3's `innerColours`) form a nonempty subset of `leavingInner u q`, outside likewise with `leavingOuter`. **"Exactly" is read as the proof's "only"** (VOTES: "inside allows only the inner colours, outside only the outer ones") plus nonemptiness, which is the failure itself; equality follows when one unit arc of `ω(q)` leaves `u` (the non-DEG2 case). Whether every leaving arc's inner colour occurs inside in DEG2 is not claimed. **Same in content; "exactly" read as "only"** |
+| **FS112-N3-ANTI** | `anti` | Row: "at a cubic trichromatic vertex no two points of its unit circle at distance 2 are both M-in". Formal: `x, y ∈ ω(u)`, `|x − y| = 2`, `MIn u x`, `MIn u y` ⟹ `False`, `F.Covers u 1`. **Same** |
+| **FS112-N3-END** | `n3_end` | Row: "A stuck chain's end with horn bound `−1` has a vertex one step beyond it carrying at least four colours and a repeated colour, and a both-kind unit arc centred two steps beyond it; or, if an in-type flank tile sits at the other neighbour, both horns' upper arcs lie on that neighbour's unit circle and the chain is the single vertex" (NB3's corrected form, the derivation's). Formal: valid, plane, `Terminal`; `IsStuck v` with three colours at `v` (NB-4 at `P_0` only, the derivation's "where six is spent"; ruling 53's pattern), `HasSectors v c 2`, `IsHorn v α (−1) κ₂ c` (lower arc on `ω(v − n)`) ⟹ [`4 ≤ ncard (coloursAt (v − n))` ∧ `HasRepeatedColour (v − n)` ∧ a both-kind unit arc centred at `v − 2n`] ∨ [the upper flank `g` is a contact at `v + n`, in-type, `κ₂ = 1`, and the `−a` horn's arc on the `+n` side has curvature `−1` in its own frame, i.e. lies on `ω(v + n)`]. **"And the chain is the single vertex" is not stated**: NB3 item 1 proves that `P_1` does not continue the chain (a stuck `P_1` "would need `c` to fill its `+n` side"), a statement about N4's chain structure at `P_1`, not about `IsStuck (v + n)` (no moves and a repeated colour), which it does not exclude; the stuck-chain vocabulary is wave 5's foundation ("stuck chains along the normal line"), and the clause belongs there. **A narrowing, reported (finding N-END-CHAIN)**; no wave-4 or wave-5 consumer reads the clause (C-HORNEND reads N3-END's first disjunct; C-DOUBLE, now wave 5, derives the one-vertex structure itself) |
+| **FS112-BOWTIE** | `bowtie` and the eleven `bowtie_*` theorems | Row: "An exact valid local fragment realises a one-vertex stuck chain bounded by unit arcs on both sides: `E = (0, 0)` with three colours, its two horns of colour 2 between `ω(E + n)` and `ω(E − n)`, shadowed by in-type radius-1 sectors of colours 1 and 3 at `E + n` and `E − n`; both neighbours four-coloured, one sector per colour, neither stuck, no MERGE, MERGE-RAY or SHAVE applicable at `E`, `E ± n`; every unit arc's end interior with its neighbourhood coloured." Formal, clause by clause (`n = i`, colours less one): valid (`bowtie_valid`); `E`, `N`, `S` in the domain; `coloursAt 0 = {0, 1, 2}` and two sectors of colour `1`; the horns `IsHorn 0 0 (−1) 1 1`, `IsHorn 0 π (−1) 1 1` (between `ω(S)` and `ω(N)` in each horn's frame); flanks `0` above, `2` below; `DoublyShadowed` for both horns (the whole horn, `s₁ = −1`, `s₂ = 1`: "shadowed"); in-type contacts of colour `0` at `N` and `2` at `S` ("in-type radius-1 sectors"); `coloursAt N = {0,1,3,4}`, `coloursAt S = {2,1,3,4}`, one sector per colour; `IsStuck 0`, `¬ IsStuck N`, `¬ IsStuck S` ("a one-vertex stuck chain", "neither stuck"); `TerminalOn {0, N, S}`; each unit arc's endpoints in the domain. **Same** (the "chain" here is literal: `E` stuck and its neighbours not) |
+
+### 8.3 FS112-C-DOUBLE — moved to wave 5 (inventory item 69); the reading so far, for wave 5's planner
+
+Row: "In a terminal valid map, a stuck vertex `E` all four of whose horn arcs are unit arcs, of `ω(E + n)` above and `ω(E − n)` below, carries an
+in-type tile of its upper flank colour at `E + n` and of its lower flank colour at `E − n`, and both are (Q) centres with at least four colours." C116's
+errata item 3 is a regrade only (two minds: FS112-C with C2, FS114-CV). **Its proof** (`data/fs112/fs112-c/reconciliation.md` § 1.9, quoted in the
+derivation entry, `plans/FS112-derivation.md` l. 237) reads: (a) FS112-Y3-END-NEEDS's levels with `n` reversed (to exclude `g` absent at `N`: "its levels then
+need a seventh colour at `S − n`" — six colours used, and Y3-END-NEEDS in its corrected scope is **not a backlog row**: wave 5 formalizes it as a
+supporting lemma, item 69); (b) "the arcs of `ω(N)` bounding the horns carry both side colours at their centre, are not (R2), hence (Q) **in `M*`**" — `M*`
+is FS112-N2-TERM's terminal map (wave 5). **The definition question for wave 5**: the row's "terminal valid map" is, by its proof, N2-TERM's `M*`, not wave 4's `Terminal` (no MERGE,
+MERGE-RAY or SHAVE) alone. One observation narrows it: an (R2) arc has its inner colour absent at its centre, so "both side colours at the centre" already
+excludes (R2), and the step "(Q) in `M*`" then needs `M*` only through "at least four colours at the centre", which (a) supplies. **My reading**: state C-DOUBLE over `Terminal` with `k = 6` and the corrected Y3-END-NEEDS as its supporting lemma, check in the obligation pass
+whether any step reads N2-TERM's bends beyond (a), and if none, the edge to N2-TERM is a proof edge through Y3-END-NEEDS only. The formal shape I had
+drafted: valid, plane, `Terminal`, `IsStuck E`, `IsHorn E α (−1) 1 c ∧ IsHorn E (α + π) (−1) 1 c` (all four arcs on `ω(E ± n)`), flanks `g` above and `h`
+below ⟹ (`IsContact E g N ∧ InType E g N`) ∧ (`IsContact E h S ∧ InType E h S`) ∧ `4 ≤ ncard (coloursAt N)` ∧ `4 ≤ ncard (coloursAt S)` ∧ every
+`IsRingArc N θ₁ θ₂` bounding a horn is `IsQArc N θ₁ θ₂` (and at `S`). Its inhabitant of the local hypotheses is `bowtie` (whose `N`, `S` carry exactly four
+colours and whose horn arcs are (Q) at `N`, `S`), though `bowtie` is a fragment, not a terminal plane map — so C-DOUBLE's hypotheses as a whole have no
+inhabitant in the library (`GENERIC`; FS-115's question is whether one exists).
+
+### 8.4 The build of this stage
+
+`./scripts/build.sh` (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 442 of 442 batches, 2 modules rebuilt, 11 modules with warnings** (the ten before and
+`Plane/ValidMap/BaseSteps`; every warning `declaration uses 'sorry'`), 8 m 4 s, exit 0 (`build/gate/build/20261004T082912Z-2202484.log`; driver log
+`data/fs131/k4/build-k4b-stage3.log`). `tools/check_architecture.py`: PASS. `scripts/Axioms.lean`: section "FS-131 wave 4 (job FS131-K4b) — the base's
+steps …", 23 records; `tools/fs131_k4_decls.py --check`: 68 names, 0 missing; `--plant`: FIRED.
+
+### 8.5 Findings with this stage
+
+- **C-DOUBLE (dependency, ruled: inventory item 69).** Its proof needs FS112-N2-TERM (wave 5) and Y3-END-NEEDS (not a backlog row); moved to wave 5;
+  the table changed on `main` (`4ebc6b3c`: wave 5, `extra_upstream = FS112-N2-TERM`; `tools/fs131_k1_dispositions.py` green, self-test every plant fired).
+- **N-END-CHAIN (narrowing).** FS112-N3-END's "the chain is the single vertex" is stated in wave 5 with the stuck-chain vocabulary (§ 8.2).
+- **G-PAIRS (generalization).** N3-PAIRS (i), (ii) stated for fragments covering `B̄(u_i, 1)`, not only maps of the plane.
+- **FAIL-EXACT (a reading).** N3-FAIL's "exactly" read as the proof's "only" plus nonemptiness; equality in the one-arc case.
+
+## Stage 9 — SAVED (K4b): what is left, and the handoff to the next planner
+
+K4b reached its context line here (brief: hand back before about 480k). **Stated in wave 4 so far: 17 of the 28 rows now in the wave** (C-DOUBLE moved
+to wave 5; Woodall's three are FS131-W's): K4's nine, FS106-L, FS106-TS-T, FS112-BOWTIE, N3-PAIRS, N3-FAIL, N3-ANTI, N3-END — plus the outside theorem
+`lebesgue_covering_square` (FS131-LEB, item 65). **Left: the nine unit-arc items**, all for `Plane/ValidMap/UnitArc`, in the order I would take them
+(sources in `data/fs131/k4/rows.md` and K4's § 5.2, whose "needs" column stands):
+
+| item | what is settled already | the open choice |
+|---|---|---|
+| FS112-U1, shadow clause only (SR1 item 4) | wave 3's `ringArc_cone_*` carry U1's first three clauses | "first-order shadow": state `∀ β ∈ (θ₁ − π/2, θ₂ + π/2), ∀ᶠ t in 𝓝[>] 0, P + t e β ∈ shadow (F.region c')` for the outer colour `c'` (class form, stronger than the tile form); check against `plans/FS112-N-proof.md` § 1.3 and NB-U1 |
+| FS114-L60-LE: L60-EQ, L60-REAL | `l60_le` (K4) | `Reul X Y Z := closedBall X 1 ∩ closedBall Y 1 ∩ closedBall Z 1`; EQ at `θ₂ − θ₁ = π/3`: inner class `⊆ Reul P A B`, outer `⊆ Reul A B C ∖ B̄(P, 1)`, the corner cones, "each end a vertex carrying a third tile" (`3 ≤ ncard (coloursAt A)`); REAL a fragment by formula (`tools/fs114_l60_check.py`) — an existence theorem with a named fragment, like `bowtie` |
+| FS112-N2-BENDS (the bends) + FS112-BEND | `n2_sign` (K4) | the bent map's existence: `∀ ε > 0, ∃ F'` valid, equal to `F` off the `ε`-neighbourhood of the open arc, no new unit arc, the open arc's points interior points of `F'`, no point gaining a colour; toward `P` unless the outer colour is at `P`; away unless the inner colour is at `P` or `R₂(ᾱ) ⊆ closure (region c)` (the radius-2 clause); the tangent bend at isolated (R2) contacts; BEND is the case off the end vertices. Shares the recolouring engine of `exists_shave`/`exists_merge` (K4's leaf 13) |
+| N2-BENDS's ENV lemma | — | make "near" quantitative from N2's identities ENVT, ENVA (`plans/FS112-N-proof.md` N2-3) |
+| FS112-ISO | — | a fragment by formula (an inner tile outside `B̄(P, 2)` touching `R₂` at one corner) and "blocks a first-order away-bend" as: the radial points `P + (1 + t) e θ₀` are not clear for the inner colour (`plans/FS112-NB-verification.md` § 2.3 #4) |
+| FS112-FLANK | `flank_shadows`, `ShaveAvailable` (K4) | at `κ₂ = 1` an in-type flank tile at `N` is Siamese with the flank and shadows a band of the horn; "SHAVE's criterion is incomplete" as: `¬ DoublyShadowed` computed from out-type contacts alone does not give `ShaveAvailable` — a counterexample statement; `bowtie` is the natural model (its horns' upper arcs are on `ω(N)` with in-type `G`) |
+| FS112-N2-FLANK-Q | — | a horn bound `±1` on a (Q) arc (both horns' upper arcs one arc of `ω(N)` through `v`) or on an (R2) arc (its inner tile at the far antipode is FLANK's out-type tile); N3-END cites it |
+| FS112-A4SIX | — | "covering pair" in the union sense (`coloursAt v ∪ coloursAt y = univ`, `data/fs110/claims.md` § 9 item 1); "arcs of `Γ` centred at it of total length ≥ 60°" as `ENNReal.ofReal (π/3) ≤ arcLength {θ \| OnRingArc v (ringPt v θ)}` (FIVERING's convention); "six, one in each of six consecutive 60° windows" — decide "lies in" or "meets" with `plans/POROS-2026-09-27-fs110-competition.md` § A4-1 |
+| FS112-NB4P | `IsChangePoint` (wave 3) | covering pair at a change point; the `σ_v`-orbit `y_k = ringPt v (ψ + kπ/3)`; "in the closure of an arc of `Γ` on `ω(v)`" as `∃ θ₁ θ₂, ringArc v θ₁ θ₂ ⊆ F.Γ ∧ θ₁ < θ₂ ∧ y ∈ closure (ringArc v θ₁ θ₂)` (closed arc, so `y ∈ ringArc`) |
+
+**Still owed after them**: the `debruijn-obligation-modeling` pass over the whole wave (K4's slip, item 52; now mine and not run — the next planner
+runs it fresh over all wave-4 rows, K4's leaf plans § 4 included); the leaf plans for this session's rows (sketches below); and the handoff section in
+wave 3's § 7 form.
+
+**Leaf sketches for this session's rows** (to be checked in the obligation pass; E/M/H as K4's):
+- `lemmaL` — **M–H**, by sweeps, no genericity: for open `O`, `O + S¹ = {w | ∃ o ∈ O, dist w o = 1}` is open and misses any set containing `O` with no
+  unit pair; if `G` is dense in an open `V`, `G + S¹` is dense in `V + S¹`. Take `x ∈ A`, `y ∈ B` near `b`, the annuli `N_x = ball(x, ρ) + S¹` (missing `A`)
+  and `N_y` (missing `B`); near `q`, `B` is dense in `N_x ∩ ball(q, δ)` and `A` in `N_y ∩ ball(q, δ)`; their sweeps back near `b` miss `B` and `A` and are
+  dense in the open sets `P_x = (N_x ∩ ball(q, δ)) + S¹`, `P_y`; a point of `P_x ∩ P_y ∩ ball(b, η) ⊆ W` (here `b ∈ W` is used) then has a dense open
+  neighbourhood missing `A ∪ B` inside `cl (A ∪ B)` — contradiction. The geometric child: `P_x ∩ P_y ∩ ball(b, η) ≠ ∅` via `z = (x + y)/2 + λ i(q − b)`,
+  `λ ≈ √|x − y|`, `a ∈ ω(x) ∩ ω(z)`, `b' ∈ ω(y) ∩ ω(z)` near `q` (explicit intersection points of two unit circles).
+- `not_lemmaL_of_not_mem` — **M**: the cones of § 7.3, four inequalities.
+- `lebesgue_covering_square` — FS131-LEB (item 65).
+- `exists_three_le_multicolour` — **M** over Lebesgue: chain components of each colour's regions (`Relation.EqvGen` of "closures meet"), `F_K` the
+  closures meeting the square, finitely many by local finiteness, each of diameter `≤ 1` (wave 1's `dist_lt_one_of_chain`, closure); three `F_K` at one
+  point have three colours. `…_lt_one` — **E** (`ε = 1 − 1/√2`).
+- `region_locallyFinite`, `dense_iUnion_region` — **E–M** over wave 3's `finite_tiles_near`, `dense_interiorPts` (components of `region j` are tiles of
+  colour `j`). `ts_t` — **E**. `exists_hasDegree_of_mem_dom` — **M** over wave 3's `localSectors`. `ts_t_trichromatic`, `ts_t_degree_three` — **E**.
+- `sevenBrickArcs_*`, `sevenBrick_color_locallyConstant` — **M** (floors locally constant off the grid; finitely many cells meet a ball).
+- `pair_i`, `pair_ii`, `pair_P'`, `fail_*`, `anti` — **M–H** each, N3's proofs over `noBoth`, CB's (P) sweep (a child: `ω(y)` through an interior
+  point of an `a`-tile ⟹ `a ∉ coloursAt y`, the same sweep lemma as `lemmaL`'s) and the votes (S–V Prop. 2: a non-unit arc from `u` votes in at `q` when
+  `|q − x_τ(δ)| > 1`, excluding its colours inside `ω(u)` near `q`).
+- `n3_end` — **H**, NB3 items 1–5 over `woodallCone` (non-strict), `flank_shadows`' unit-arc analogue (FLANK, not yet stated), `exists_merge`,
+  `noBoth`, U1's side cones (wave 3).
+- `bowtie_*` — **H** for `bowtie_valid` (YB3's 21 pairs), **M** for the rest (each a finite computation at `E`, `N`, `S`); the field leaves **M**.
+
+**The implementer's rules** stand as K4's § 5.3 says: children anywhere in the wave's modules and supporting lemmas in the foundation modules (wave 3's
+included, statements unchanged); no statement changes — a needed change comes back through Keryx; nothing with a `sorry` reaches `main`.

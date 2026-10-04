@@ -2098,6 +2098,32 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.sevenBrickMap_valid
 #print axioms HadwigerNelson.Plane.sevenBrickRegions
 
+/-! ## FS-131 wave 4 (job FS131-K4b) — the base's steps with unit arcs and the bowtie fragment (sorry until wave 4's implementer lands it) -/
+
+#print axioms HadwigerNelson.Plane.const_univ_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.pair_i
+#print axioms HadwigerNelson.Plane.ArcMap.pair_ii
+#print axioms HadwigerNelson.Plane.ArcMap.pair_P'
+#print axioms HadwigerNelson.Plane.ArcMap.fail_leavingCentre
+#print axioms HadwigerNelson.Plane.ArcMap.fail_colours
+#print axioms HadwigerNelson.Plane.ArcMap.anti
+#print axioms HadwigerNelson.Plane.ArcMap.n3_end
+#print axioms HadwigerNelson.Plane.bowtieArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.bowtieArcs_locallyFinite
+#print axioms HadwigerNelson.Plane.bowtieCol_locallyConstant
+#print axioms HadwigerNelson.Plane.bowtie
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_valid
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_mem_dom
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_coloursAt_zero
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_isHorn
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_flanks
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_doublyShadowed
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_inType
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_neighbours
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_isStuck
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_terminalOn
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_unitArcEnds
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -8,9 +8,10 @@ import re, sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 MODS = ["Proofs/HadwigerNelson/Plane/StuckChain.lean", "Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean",
-        "Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean", "Proofs/HadwigerNelson/Plane/SVMap.lean"]
+        "Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean", "Proofs/HadwigerNelson/Plane/SVMap.lean",
+        "Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean"]
 # Definitions built from `sorry` leaves (FS131-K4b): recorded like theorems, so their axioms are audited when the leaves land.
-DEFS = {"toAeProperRegions", "sevenBrickMap", "sevenBrickRegions"}
+DEFS = {"toAeProperRegions", "sevenBrickMap", "sevenBrickRegions", "bowtie"}
 
 
 def names(track=True):
