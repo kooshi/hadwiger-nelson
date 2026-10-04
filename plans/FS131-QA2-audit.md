@@ -231,3 +231,48 @@ at every point of every domain; `halfDisc_sectorChart` names one at a point of t
 theorems quantify over** (the item-158 class: a ∀ over presentations, or a clause that real maps break). By evidence: U 14, N 63, S 11,
 H 8, D 5 (counting each row's predicates; the two carried propositions apart). The findings are all of one kind — **a hypothesis whose
 only exhibited model lives where the theorem's other hypotheses fail** — QA2-1 to QA2-5, ranked in Stage 5.
+
+## Stage 4 — SAVED
+
+### 4.1 Wave 4's skeleton statements against their rows (§§ 3.2, 7.2, 8.2, 12.2 of `FS131-w4-kernel-plan.md` at `f1f26a8a`)
+
+Read: each row's "Statement as filed" in `data/fs131/k4/rows.md` (on `fs131-w4`, quoted verbatim from `plans/LEAN-BACKLOG.md`) against
+the Lean signature at `f1f26a8a`, with every definition unfolded (Stage 3), then against the plan's read-back. QA1's form: same / stronger
+/ weaker (with what) / different. "Known" = already filed in the inventory with a ruling; not re-reported. All 29 rows of the four
+sections are read; FS106-TS-T's Condition-5 clause is item 142 and is not re-reported.
+
+| row | declarations | verdict | what, if not "same" |
+|---|---|---|---|
+| FS110-N4-FIN | `n4_fin` | **same** | checked by hand as well: `f(λ) ≤ λ` and `f̃(υ) ≥ υ`, so `u_k ↑ 0` forces `λ_k < 0`, and the backward iterates of `f` reach `−1` in finitely many steps |
+| FS112-N2-RAY | `ray_chain`, `exists_oneSided_chain`, `rayLower_pencil` | **same** (R9: the verdict "GAP" dropped) | |
+| FS110-N3-CONF | `contact_inType_or_outType`, `coneAt_subset_allowedCone`, `clear_of_subset_interior_allowedCone`, lens/lune lemmas | **stronger** (no Condition 5) | |
+| FS110-N3-DEG | `woodallCone_strict` / `woodallCone` | **same** / **stronger** (non-strict curvatures, no Condition 5) | |
+| FS110-N4-SHADOW | `shadow_farSide_above/below`, `flank_shadows` | **stronger** (concentric clause: a set, no tile) and **weaker** in one clause: "only through out-type tiles at `S′` and `N` tangent to `a`" is not stated | known (K4's G-SHADOW; "stand as stated", inventory line 315) |
+| FS110-N4-SHAVE | `shaveAvailable_of_not_doublyShadowed`, `exists_shave`, `exists_rayMerge` | **same** | |
+| FS110-N4-STUCK | `stuck_structure`, `stuck_chain` | **same over a carried hypothesis** (NB-4's "at most three colours", ruling 53) | known; see QA2-5 for its model |
+| FS110-W-MERGE | `exists_merge` | **stronger** (unit arcs allowed; adjacent sectors covered) | |
+| FS112-LOCK | `lock` | **stronger** (class form) — and true in that form: the local argument at `w` reads any point of the class near `q`, not only the side tile | |
+| FS112-N2-BENDS (N2-SIGN) | `n2_sign` (proved) | **stronger** (class form; `z ≠ P` automatic, since `P` is in no side class) | |
+| FS114-L60-LE (L60-LE) | `l60_le` | **same** | |
+| FS112-N3-NOBOTH | `noBoth` | **same, with `P ∈ F.dom`** (wave 3's finding) | |
+| FS106-L | `lemmaL` | **same**, `b ∈ W` read as necessary (adversary `not_lemmaL_of_not_mem`) | |
+| FS106-TS-T | `exists_three_le_multicolour`, `ts_t`, `ts_t_trichromatic`, `ts_t_degree_three` | first two **same**; Condition-5/6 clauses **weaker** | known (item 142) |
+| FS112-N3-PAIRS | `pair_i`, `pair_ii`, `pair_P'` | **stronger** (fragments, `Covers u 1`); (ii) carries CB's transversality, which is CB step (ii)'s own setting — the row's words omit it | |
+| FS112-N3-FAIL | `fail_leavingCentre`, `fail_colours` | **weaker**: the row's "exactly" is read as "only" plus non-emptiness (the derivation's VOTES wording) | known (FAIL-EXACT, inventory lines 429, 541) — the row's word "exactly" owes a correction at the close |
+| FS112-N3-ANTI | `anti` | **same** | model owed: QA2-2 |
+| FS112-N3-END | `n3_end` | **weaker**: "and the chain is the single vertex" not stated | known (N-END-CHAIN, inventory line 429) |
+| FS112-BOWTIE | `bowtie`, eleven `bowtie_*` | **same** (colours shifted down by one) | every clause `sorry`: QA2-4 |
+| FS112-U1 (shadow) | `u1_shadow` | **stronger** (no validity; a smaller shadowing set) — checked: an outer point `P + (1 + s) e(θ)` at distance exactly `1` from `P + t e(β)` exists for small `t` iff `cos(θ − β) > 0` for some arc angle, i.e. `β ∈ (θ₁ − π/2, θ₂ + π/2)` | |
+| FS114-L60-LE (L60-EQ) | `l60_eq_inner/outer/corners/third` | **same, class form** — true in that form: any inner-class point near the arc is within `< 1` of the whole open arc (N2-SIGN), so its tile lies in the Reuleaux triangle whether or not other arcs split the inner band | |
+| FS114-L60-LE (L60-REAL) | `l60Frag`, `l60_real` | **same** | |
+| FS112-N2-BENDS (N2-ENV) | `n2_env_*` | **same**, "near" made quantitative | |
+| FS112-N2-BENDS (bends; FS112-BEND merged) | `bend_toward`, `bend_away`, `bend_away_whole` | **same** in the reading "bends = removed as an arc of `ω(P)`" | |
+| FS112-ISO | `iso` (proved) | **same** (QA1 row 19) | |
+| FS112-FLANK | `inType_shadows_horn`, `flank_siamese_of_inType` (proved), `flank_incomplete_bowtie` | **same**; (1) widened | |
+| FS112-N2-FLANK-Q | `flankQ_upper/lower` (`sorry`), `flankQ_both` (proved) | **weaker**: over `hQR` (N2-RED/N2-TERM's conclusion as a named hypothesis) | known (FLANKQ-TERM, plan § 12.3) — `hQR` is not vacuous: the conclusion's own arc is a ring arc on `ω(N)`, so `hQR` must classify it; the bowtie models it (its `N` carries both side colours and four colours: a (Q) arc) |
+| FS112-A4SIX | `a4six` | **stronger** (any `k`, exactly two absent) | note: `hno` forbids every change point on `ω(v)` (a change point's two colours are the two absent at `v`, as `nb4p`'s read-back observes), so its hypotheses force every `a`/`b` transition on the ring onto unit arcs of `ω(v)` — the derivation's own case, no model exhibited, not a defect |
+| FS112-NB4P | `nb4p` | **same** (covering pair automatic — checked: a ring point of an interior colour `X` with `X ∈ P_cl(v)` gives a unit pair of `X`, so the change point's two colours are exactly the two absent) | |
+
+**Tally (29 rows)**: same 15, stronger 8, weaker 6 — and all six weaker ones are known and ruled (TS-T item 142; N4-SHADOW's mechanism
+clause; N4-STUCK and N3-FAIL and N3-END and FLANK-Q by K4b/K4c's filed findings). **No new statement defect; no statement says other
+than its row.**
