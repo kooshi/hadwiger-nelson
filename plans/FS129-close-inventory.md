@@ -472,3 +472,11 @@ One line per item with its source; no narration. Each line is ticked done or dec
 123. **Launched 2026-10-04 01:21 UTC**: FS129-SR3 (pass 3, lane R, last items; `data/fs129/briefs/FS129-SR3-pass3.md`) and FS129-Z1 (the record job,
      part 1; `data/fs129/briefs/FS129-Z1-record.md`), both `general-purpose`, Opus, gated PASS, at `dae18a6b`. Running: the Searcher, SR3, Z1 —
      the cap of three.
+124. **Statement defect, found by FS129-Z1 mid-job — credit to Z1**: FS129-SR2-QFCASE's argument shows FS116-S1-QF's fragments simple at p only
+     ("FS-116's "simple": one sector per tile at p", `plans/FS129-SR2-audit.md` line 413), but FS-116 defines simple for the whole fragment
+     (`data/fs116/claims.md` line 31). **Keryx's receipt**: both lines read. So QFCASE, SR2's "formalize QFREE in place of S1-QF" (SR2 § 4.3
+     item 19) and item 117's "S1-QF has no non-simple remainder" are **conditional** on FS129-OR1-QFREE's chain reading simplicity at p alone
+     (V6's route to FS116-Y4-EMPTY says it does; Y4's own route is unchecked). Z1 files QFCASE as derived with a dated note and leaves OR1 § J3's
+     sentence standing beside item 117's correction — the right handling. Routed to FS129-SR3 as item (d) by a dated amendment to its brief:
+     either QFREE holds with "simple at p" (a weakening, QFCASE stands) or a named step needs global simplicity (QFCASE fails, item 117's
+     correction withdrawn). FS129-L1 waits on the answer for S1-QF.

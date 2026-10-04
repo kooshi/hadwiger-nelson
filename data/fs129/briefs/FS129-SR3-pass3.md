@@ -92,3 +92,24 @@ Which merges deserve an entry and which a line; how far to weaken a hypothesis b
 disagreement between records. When two records disagree, quote both with their addresses and say which the argument supports; never edit
 either (corrections are drafted, item by item, for the record job). If an attack on a one-mind composition succeeds, say exactly where, and
 message the coordinator at once: a refutation of something the ranking is about to rest on cannot wait.
+
+## Amendment, 2026-10-03 — one more item, (d): what "simple" FS129-OR1-QFREE's chain uses
+
+The record job (FS129-Z1, running) found, while filing FS129-SR2-QFCASE, that its argument shows FS116-S1-QF's fragments simple **at p** only —
+glossing FS-116's "simple" as "one sector per tile at p" (`plans/FS129-SR2-audit.md` line 413) — while FS-116's claim list defines simple for
+the whole fragment:
+
+> - **Simple** (`plans/FS114-N-proof.md` l. 444, verbatim): "every tile an open disc whose closure meets each other tile's closure in a connected set or not at
+> — source: data/fs116/claims.md § 0
+
+(the definition continues on its next line there). So QFCASE, SR2's line "formalize QFREE in place of S1-QF", and the correction "S1-QF has no
+non-simple remainder" (`plans/FS129-close-inventory.md` items 115, 117) hold only if FS129-OR1-QFREE's chain reads simplicity at p alone.
+
+**Item (d), after your items (a)–(c) or before them if you judge it more urgent:** read FS129-OR1-QFREE's chain — FS129-OR1-WHOLE,
+FS129-OR1-BENDFRAG, FS129-OR1-QFREE-CLASS, FS129-SR1-BENDANY's class clause, and FS116-Y4-EMPTY by both its routes (FS116-Y4's own: RING-GERM,
+Y3-TIPS, FLANK; and FS116-V6's, whose `uses only:` line says simplicity enters only at V6-COUNT's last step, at p, per
+`plans/FS116-V6-verification.md`) — and say, step by step, whether each uses "simple" globally or only at p. Then one of: (i) the whole chain
+needs simplicity only at p — derive QFREE with "simple at p" as an entry (a weakening), and QFCASE stands; (ii) some step needs it globally —
+name the step; QFCASE then fails, S1-QF keeps its own route (S1-LENS, S1-EXIT, S1-CLUSTER), and item 117's correction is withdrawn. Either is a
+good result. Standing rules unchanged — start no agent of your own, because staffing is Kooshi's and the coordinator reviews only work it
+knows exists; save the item as a stage.
