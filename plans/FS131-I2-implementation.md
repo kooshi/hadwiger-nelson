@@ -960,3 +960,54 @@ written goes to Keryx at once, and the others continue. The untracked `build-i2*
 
 **Build as given** at `1cc25e27`: OK — all 1750 modules up to date, nothing built, 1 module with warnings, 23 warnings, every one `declaration uses
 'sorry'`, 23 distinct (`build/gate/build/20261004T182453Z-1418891.log`; counted with `grep -c`).
+
+## Stage 25 — SAVED (FS131-I2l): R7 closed — all seven R7 children proved; CoverExamples 23 → 16; handoff — 16 `sorry` left, all HC/IRREG
+
+**Closed** (statements untouched; new children stated before use, each with a docstring and a `scripts/Axioms.lean` record in block "FS131-I2l";
+two new definitions, `r7UpOpen` and `r7DownOpen`, each with a spec `example` that fails if it drifts):
+- `r7Up_unitPair` — through a new general lemma, `reuleaux_unitPair`: if `x, y` are within `1` of the three vertices of a unit equilateral triangle
+  and `|x − y| = 1`, then `x` is at distance `1` from a vertex. Proof: in the frame `w = conj(y − x)(· − x)` every vertex lies in the lens
+  `|w| ≤ 1`, `|w − 1| ≤ 1`; if no vertex is on `|w| = 1`, two of the three lie on one closed side of the axis (pigeonhole on the signs of `Im w`)
+  and are then less than `1` apart (`reuleaux_aux`, a two-case `nlinarith`) — against the side length `1`.
+- `r7Up_sep` — offsets `2(P, Q)` with `triQ(P, Q) ≥ 3` are too far (`|λ' − λ| ≥ 2√3 > 3`, three unit steps); the six offsets of length `2` each give a
+  vertex `W` of `U(m, n)` and a vertex `W''` of `U(m', n')` at distance exactly `3`, so `dist x W = 1` (`dist_eq_one_of_three`).
+- `r7Down_dist_ne_one` — in lattice coordinates (`dist_eq_triQ`, `triCoord_mem_downTri`, `r7Down_coords`): the same tile (barycentric identity
+  `2 − 2 triQ = 2Σαα′ + Σα(1 − α) + Σα′(1 − α′)` forces `x` to a vertex, which the tests exclude); the six offsets of length `√3` (the two tiles lie in
+  opposite 60° cones at a shared lattice point `V₀`, one of the six bulge tests puts the far point outside the unit circle about `V₀`, and `triQ` is
+  monotone on the cone, `triQ_le_add`); offsets with `triQ ≥ 5` too far (centroid bound `triQ(u − 2/3, v − 2/3) ≤ 1/3`, `sqrt_triQ_add_le`).
+- `r7_boundary_offLattice` — `r7_local`: near a non-lattice point at most two colours occur (lattice-coordinate case analysis: the lines `a ∈ ℤ`,
+  `b ∈ ℤ` carry one colour; in an open cell the three tests, with the circles' tangencies `triQ_tangent`), and when two do the point is on a unit
+  circle about a lattice point that is a vertex of the up tile and a cusp of a down tile of the other colour; supports by
+  `r7Up_vertex_mem_essSupport` (the open up triangle reaches its vertices) and `r7_down_mem_essSupport` (every down colour has a cusp at every
+  lattice point; `mem_closure_r7DownOpen` reaches each cusp along its horn with explicit points `(1 − s, 2s)`, `(2s, 1 − s)`, `(1 − s, 1 − s)`).
+- `r7_boundary_lattice` — the up colour of `λ₀ + 1 + ω` is absent from `B(λ₀, 7/10)` (`r7_far_vertex`: such a tile has a vertex at distance `≥ √3`),
+  so it is not in the essential closure (`not_mem_essClosure_of_eventually`); every pair from the other six colours is carried by one of
+  `λ₀ + 1`, `λ₀ + ω`, `λ₀ − 1 + ω`. (The planner's route through "cusps have density 0" is not needed: the down colours are in the support at
+  every neighbour, so the six-colour pairs all close.)
+- `r7_phi_pos_up`, `r7_phi_pos_down` — off the null union of unit circles about lattice points, a point `p` outside class `j` lies in a tile of its
+  own colour (`r7Col_mem_tile`); from that tile a witness tile of colour `j` is named with one vertex/cusp strictly inside and one strictly outside the
+  unit circle about `p` (twelve cases; "within 1" from the tile, "beyond 1" from an antipodal lattice point or a bulge test, equality excluded by the
+  null set); the witness tile's open part is star-shaped about its centroid (`r7UpOpen_star`, `r7DownOpen_star` via `triQ_star`), so the
+  intermediate value theorem puts a point of it on the unit circle (`phi_pos_of_star`) and an open arc follows (`phi_pos_of_mem_open`).
+- **So R7 is sorry-free**: `r7_aeColouring`, `r7Cls_saturated`, `exists_r7` (FS111-M-R7's first three clauses) and `r7Cls_isMaximalCover`.
+
+**Builds**: at `58c3cbc9` (the three tile lemmas) OK, 2 modules rebuilt, 40 warning lines = 20 distinct, every one `declaration uses 'sorry'`
+(`build/gate/build/20261004T185334Z-1534006.log`). At `635088cf` (R7 closed): pending at the time of this stage's first commit — recorded below.
+Iteration: `lake env lean -DautoImplicit=false` on scratch files (not evidence), then the module in place.
+
+**Re-pricing** (from the first two hard children, as the brief asks): `r7Up_unitPair` with `reuleaux_unitPair` about 12k tokens, `r7Up_sep` 5k,
+`r7Down_dist_ne_one` 12k (K2d's table: 40k each); the four boundary/`φ` leaves together about 45k (table 160k) — a quarter of the table, as I2k found.
+
+**Still `sorry`** (16, all in `Plane/CoverExamples`, HC/IRREG): `hcUp_slivers`, `hcBandTop_bounds`, `lt_hcBandTop_iff`, `continuousOn_hcBandTop`,
+`isClosed_hcSet`, `closure_interior_hcSet`, `volume_frontier_hcSet`, `hc_band_dist_lt_one`, `hc_unitAvoiding`, `hc_sausage_cover`, `hc_lemmaNL`,
+`hc_exclusion`, `hc_ae_phi_pos`, `hcBand_component_iff`, `hc_free_pos`, `hc_free_subset_nowhereDense`.
+
+**For the next implementer.** (1) The lattice-coordinate kit now in the module is reusable for HC's face lattice: `dist_add_mul`, `dist_eq_triQ`,
+`triCoord_combo`, `sqrt_triQ_add_le`, `triQ_le_add`; and the `φ` kit is general: `phi_pos_of_mem_open` (a point at distance `1` inside an open part),
+`phi_pos_of_star` (a star-shaped open part with closure points inside and outside the unit circle), `not_mem_essClosure_of_eventually`,
+`mem_essSupport_of_mem_closure` — `hc_ae_phi_pos`'s "`E°_B` ⟹ `T₁(z)` meets `int B`" is `phi_pos_of_star` with `O = int B` (blocks are convex or
+star-shaped). (2) HC's derivation is `plans/FS111-M3-finiteness.md` §§ 1.6, 2.2–2.4 and 4.2 (read this session); K2d's table § 17 is the plan.
+(3) Traps met: `isOpen_lt (by fun_prop) (by fun_prop)` on a set-builder `def` sticks on a metavariable type — give the continuous functions as
+`have` terms first; `norm_num at h1 h2` after `interval_cases` errors "no goals" when the first hypothesis closes the goal — use
+`(try norm_num at h1) <;> (try norm_num at h2)`; a tactic block inside parentheses must not break a `simp only [...]` list across lines followed
+by `; omega` (parse error) — state the membership as a disjunction that `omega` proves.
