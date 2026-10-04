@@ -322,3 +322,6 @@ reason by the close.*
     and land before wave 9 (their only consumers outside the chain: FS111-C-SIX-M, FS111-M2-REDUCE-C, FS129-OR1-TOP5, all wave 9; checked by script). They keep
     wave 4 in the table; wave 4 lands without them. Alternative weighed: inside wave 4 (K4's question). Why: the proof is a whole theorem, wave 4's planning
     already outruns one context, and nothing before wave 9 waits on it. Confidence: high.
+55. **Brief FS131-I2b, wave 2's second implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I2b-wave2.md`), gated PASS; continues I2's record
+    on `fs131-w2` from its stage 3 (48 leaves). Launched in the slot K4 freed. Queued next, as slots free: FS131-I3b (once I3 stops) and FS131-K4b. Source: this
+    commit.
