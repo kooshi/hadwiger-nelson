@@ -1,0 +1,18 @@
+A  FS116-N1-GERM-R
+  ok    v-: s*dphi vanishes at psi+150deg and psi+330deg  (0, 0)
+  ok    v-: s*dphi > 0 at the interval's middle (2*sqrt(3)/3) and < 0 opposite (-2*sqrt(3)/3)
+  ok    v-: interval length is 180deg
+  ok    v-: at psi=0, beta=middle, |h|=1/50 the distance-1 ring point is -1.327568deg from phi0 (side -1; first order predicts 1.323189deg); | |z - r(phi)| - 1 | = 5.6e-191
+  FAIL  v+: s*dphi vanishes at psi-30deg and psi+170deg  (0, -2*sqrt(3)*sin(pi/9)/3)
+  ok    v+: s*dphi > 0 at the interval's middle (2*sqrt(3)*cos(pi/18)/3) and < 0 opposite (-2*sqrt(3)*cos(pi/18)/3)
+  FAIL  v+: interval length is 180deg
+  ok    v+: at psi=0, beta=middle, |h|=1/50 the distance-1 ring point is 1.301722deg from phi0 (side +1; first order predicts 1.323189deg); | |z - r(phi)| - 1 | = 5.6e-191
+  ok    u-: s*dphi vanishes at psi-150deg and psi+30deg  (0, 0)
+  ok    u-: s*dphi > 0 at the interval's middle (2*sqrt(3)/3) and < 0 opposite (-2*sqrt(3)/3)
+  ok    u-: interval length is 180deg
+  ok    u-: at psi=0, beta=middle, |h|=1/50 the distance-1 ring point is -1.318752deg from phi0 (side -1; first order predicts 1.323189deg); | |z - r(phi)| - 1 | = 0.0e+00
+  ok    u+: s*dphi vanishes at psi+30deg and psi+210deg  (0, 0)
+  ok    u+: s*dphi > 0 at the interval's middle (2*sqrt(3)/3) and < 0 opposite (-2*sqrt(3)/3)
+  ok    u+: interval length is 180deg
+  ok    u+: at psi=0, beta=middle, |h|=1/50 the distance-1 ring point is 1.327568deg from phi0 (side +1; first order predicts 1.323189deg); | |z - r(phi)| - 1 | = 5.6e-191
+=> A: FAIL   [plant A]

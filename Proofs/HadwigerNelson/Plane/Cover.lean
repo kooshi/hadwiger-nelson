@@ -484,7 +484,7 @@ theorem subset_densitySet_of_isOpen_ae_subset {U A : Set ℂ} (hU : IsOpen U) (h
   exact (ENNReal.div_self (measure_closedBall_pos volume x hr.1).ne' measure_closedBall_lt_top.ne).symm
 
 /-- `d = ‖d‖ · e (arg d)`. -/
-theorem eq_norm_mul_e_arg (d : ℂ) : d = (‖d‖ : ℂ) * e (Complex.arg d) := by
+theorem self_eq_norm_mul_e_arg (d : ℂ) : d = (‖d‖ : ℂ) * e (Complex.arg d) := by
   unfold e
   exact (Complex.norm_mul_exp_arg_mul_I d).symm
 
@@ -611,7 +611,7 @@ theorem arcLength_ball_ge {x y : ℂ} {ε t : ℝ} (hε : 0 < ε) (hε2 : ε ≤
   have hdn : ‖d‖ = 1 + t := by rw [hdd, ← dist_eq_norm, dist_comm]; exact hd
   set α := Complex.arg d
   have hd' : d = ((1 + t : ℝ) : ℂ) * e α := by
-    have := eq_norm_mul_e_arg d; rwa [hdn] at this
+    have := self_eq_norm_mul_e_arg d; rwa [hdn] at this
   have hS : MeasurableSet {θ : ℝ | x + e θ ∈ ball y (2 * ε)} := by
     have := measurableSet_angles (isOpen_ball (x := y) (ε := 2 * ε)) x 1
     simpa using this
@@ -647,7 +647,7 @@ theorem arcLength_sub_ball_le (v z : ℂ) {ρ : ℝ} (hρ : 0 < ρ) (hρ1 : ρ �
   set w := v - z with hwd
   set s := ‖w‖ with hs
   set β := Complex.arg w
-  have hw' : w = (s : ℂ) * e β := by simpa using eq_norm_mul_e_arg w
+  have hw' : w = (s : ℂ) * e β := by simpa using self_eq_norm_mul_e_arg w
   have hS : MeasurableSet {θ : ℝ | v - e θ ∈ ball z ρ} := by
     have := measurableSet_angles (isOpen_ball (x := z) (ε := ρ)) v (-1)
     simpa [sub_eq_add_neg] using this
@@ -692,7 +692,7 @@ theorem arcLength_bigBall_ge {u z : ℂ} {R : ℝ} (hR : 1 < R) (hu : u ∈ ball
   set w := z - u with hwd
   set s := ‖w‖ with hs
   set β := Complex.arg w
-  have hw' : w = (s : ℂ) * e β := by simpa using eq_norm_mul_e_arg w
+  have hw' : w = (s : ℂ) * e β := by simpa using self_eq_norm_mul_e_arg w
   have hsR : s < R := by
     have : dist u z < R := mem_ball.1 hu
     rw [dist_eq_norm, ← norm_neg] at this; simpa [hs, hwd] using this

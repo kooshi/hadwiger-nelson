@@ -16,20 +16,40 @@ section:
 
 or by hand with `lake env lean scripts/Axioms.lean`.
 
-## The two sections, and why the banners are printed rather than commented
+## The three sections, and why the banners are printed rather than commented
 
 A native purchase shows up as **one long name in the middle of a wall of text** — at v4.32.0
 `native_decide` mints a per-declaration axiom, `foo._native.native_decide.ax_1_1`, and
 `Lean.ofReduceBool` never appears at all. Eyeballing that difference across twenty lines is exactly
 the check that silently stops being run. So the file prints machine-readable banners, the audit
-splits on them, and the rule is mechanical:
+splits on them, and the rule is mechanical — **every axiom a record carries must be one its section
+allows** (`scripts/axioms.sh` checks each record's list as a set, FS131-T3):
 
-* **CLEAN** — every line must be exactly `propext`, `Classical.choice`, `Quot.sound`. Any
-  `native_decide`, `ofReduceBool` or `sorryAx` here fails the gate.
+* **CLEAN** — nothing but `propext`, `Classical.choice`, `Quot.sound`: a subset of the standard three,
+  the empty set included. Any other axiom here fails the gate, and the failure says which kind it is:
+  a native purchase, a declared import (the record belongs under IMPORTED), `sorryAx`, or an axiom
+  nobody declared.
 * **PURCHASED** — these carry a native-evaluation axiom *by design*. Each corresponds to a
   declaration whose docstring opens with "**Trust purchase: native evaluation.**"
   (`grep -rn "Trust purchase" Proofs/` is the source-side ledger), and to an entry in
-  `ARCHITECTURE.md` § 5. `sorryAx` still fails here.
+  `ARCHITECTURE.md` § 5. A record here with no native axiom is a stale entry and fails; besides the
+  standard three and its native axioms it may carry only declared imports. `sorryAx` still fails here.
+* **IMPORTED** — these rest on a **declared outside theorem**: an `axiom` named by an
+  `AxiomAudit.declareImport` line in that section, the one list of them, each with the four items of
+  `LEAN.md` § Assumptions. A record here may carry the standard three and declared imports, nothing
+  else, and must carry at least one declared import. How a wave declares one is written beside the
+  banner, which comes first, just above CLEAN.
+
+Two more kinds of line are printed, and neither is a record: `DECLARED IMPORT <name>` from each
+`declareImport`, and, from `AxiomAudit.libraryAxioms` — the file's last command — every `axiom` the
+library declares (`LIBRARY SUMMARY …`, `LIBRARY AXIOM <name>`), so an axiom whose consumers this file
+never audits still reaches the gate, which fails on any library axiom that is not declared.
+
+**Every axiom is printed by its full name** (`set_option pp.fullNames true`, below). `#print axioms`
+renders an axiom with `MessageData.ofConstName`, which shortens it against the open namespaces, and
+this file opens `HadwigerNelson`: without the option, `HadwigerNelson.Plane.falconer_lemma2_nonempty`
+prints as `Plane.falconer_lemma2_nonempty`, and the declared list and the records would spell one
+axiom two ways.
 
 `moserSpindle_valid` and `deGrey_valid` are the ones to watch in the clean section: both rest on
 kernel *reduction* rather than on a written proof, and both stay inside the standard axiom set.
@@ -38,6 +58,150 @@ bought with no native evaluation at all.
 -/
 
 open HadwigerNelson
+
+set_option pp.fullNames true
+
+/-! ## The audit's own instruments (FS131-T3)
+
+`declareImport` is the one list of imported outside theorems; `libraryAxioms` lists every `axiom` the
+library declares. Both print fixed-prefix lines that `scripts/axioms.sh` parses, and both refuse loudly
+rather than print less: a refusal is an elaboration error, and the gate fails on an audit that does not
+elaborate. -/
+
+namespace AxiomAudit
+
+open Lean Elab Command
+
+/-- `n` is declared in the library — a module under `Proofs` — or in this file. The second clause
+serves the planted controls of `scripts/axioms.sh --self-test`; the audit itself declares no axiom. -/
+def inScope (env : Environment) (n : Name) : Bool :=
+  match env.getModuleIdxFor? n with
+  | none => true
+  | some i => match env.allImportedModuleNames[i.toNat]? with
+    | some m => (`Proofs).isPrefixOf m
+    | none => false
+
+/-- A native-evaluation auxiliary: `native_decide` mints `foo._native.native_decide.ax_N_M` per use.
+These are accounted for by the PURCHASED section and the "**Trust purchase:**" docstrings, not by the
+import list. -/
+def isNativeAux (n : Name) : Bool :=
+  n.components.contains `_native
+
+/-- A bibliography key in this project's form — capitalized letters, a four-digit year, at most one
+lower-case letter: `Falconer1981`, `ShelahSoifer2003b` — the key `LEAN.md` § Assumptions item 1 asks an
+imported theorem's docstring to name. -/
+def isBibKey (k : String) : Bool :=
+  let cs := k.toList
+  let letters := cs.takeWhile Char.isAlpha
+  let rest := cs.drop letters.length
+  let digits := rest.takeWhile Char.isDigit
+  let tail := rest.drop digits.length
+  (cs.head?.map Char.isUpper).getD false && digits.length == 4 &&
+    (tail.isEmpty || (tail.length == 1 && tail.all Char.isLower))
+
+/-- Some bracketed span of `doc` is a bibliography key (`isBibKey`). -/
+def hasBibKey (doc : String) : Bool :=
+  ((doc.splitOn "[").drop 1).any fun piece =>
+    match piece.splitOn "]" with
+    | k :: _ :: _ => isBibKey k
+    | _ => false
+
+example : isBibKey "Falconer1981" ∧ isBibKey "ShelahSoifer2003b" ∧ ¬ isBibKey "Falconer" ∧
+    ¬ isBibKey "falconer1981" ∧ ¬ isBibKey "Falconer1981bc" := by decide
+
+-- `String.splitOn` does not reduce in the kernel, so these two are evaluated, not decided.
+#guard hasBibKey "`[Falconer1981]` Lemma 2 (i), p. 185"
+#guard !hasBibKey "Lemma 2 [i], p. 185"
+
+/-- **Declare an imported outside theorem to the gate.** This is the one list of them; the procedure is
+beside the IMPORTED banner, at the end of this file. Refuses — so the audit does not elaborate and the
+gate fails — unless `n` is an `axiom` declared in the library whose docstring names a bibliography key
+(`LEAN.md` § Assumptions item 1). Prints `DECLARED IMPORT <full name>`. Called as
+`#eval AxiomAudit.declareImport ``Full.Name`: the double backtick elaborates only if the constant
+exists, so a mistyped declaration cannot read as an empty one. -/
+def declareImport (n : Name) : CommandElabM Unit := do
+  let env ← getEnv
+  let some ci := env.find? n | throwError "declareImport: unknown constant {n}"
+  unless ci.isAxiom do
+    throwError "declareImport: {n} is not an `axiom`; only an axiom is an imported outside theorem"
+  unless inScope env n do
+    throwError "declareImport: {n} is not declared in the library (a module under `Proofs`); \
+      an axiom of a dependency is not ours to declare"
+  let some doc ← findDocString? env n
+    | throwError "declareImport: {n} has no docstring; LEAN.md § Assumptions item 1 asks it to name \
+        its bibliography key, section and page"
+  unless hasBibKey doc do
+    throwError "declareImport: {n}'s docstring names no bibliography key of the form [Author2024]; \
+      LEAN.md § Assumptions item 1"
+  logInfo m!"DECLARED IMPORT {n}"
+
+/-- **Every `axiom` the library declares**, except the native-evaluation auxiliaries: a count line
+`LIBRARY SUMMARY axioms=N native=M` (`M` counts the auxiliaries left out), then `LIBRARY AXIOM <full
+name>` per axiom, sorted. `scripts/axioms.sh` fails on a listed axiom that no `declareImport` names, and
+on a count that disagrees with the lines. It must stay the file's last command: an axiom declared after
+it is not seen. -/
+def libraryAxioms : CommandElabM Unit := do
+  let env ← getEnv
+  let (own, native) := env.constants.fold (init := ((#[] : Array Name), (0 : Nat))) fun acc n ci =>
+    if ci.isAxiom && inScope env n then
+      if isNativeAux n then (acc.1, acc.2 + 1) else (acc.1.push n, acc.2)
+    else acc
+  let own := own.qsort (fun a b => a.toString < b.toString)
+  logInfo m!"LIBRARY SUMMARY axioms={own.size} native={native}"
+  for n in own do
+    logInfo m!"LIBRARY AXIOM {n}"
+
+end AxiomAudit
+
+#eval IO.println "=== IMPORTED ==="
+
+/-! ## IMPORTED — records resting on a declared outside theorem (FS131-T3, 2026-10-04)
+
+A record here may carry the standard three and **declared imports**, nothing else, and must carry at
+least one declared import: a record with none belongs under CLEAN (`stale-import`). A declared import
+is an `axiom` named by an `AxiomAudit.declareImport` line in this section — the one list of them. Of the
+four items `LEAN.md` § Assumptions requires of it, the gate checks two: its docstring names a
+bibliography key (item 1; `declareImport` refuses otherwise) and `ARCHITECTURE.md` § Trust names it in
+backticks (item 4; `arch-missing`). Any other axiom fails wherever it appears — under CLEAN, here,
+under PURCHASED — and so does any axiom the library declares without a `declareImport` line, audited or
+not (`undeclared-library-axiom`, from `libraryAxioms`, the file's last command). `main` declares no
+import yet, so this section is empty there.
+
+**Why this section comes first.** The gate reads the sections in any order, but two things do not move:
+PURCHASED stays last, because `tools/check_architecture.py` reads every `#print axioms` after its banner
+as a purchase; and the waves append their CLEAN records just above the PURCHASED banner, so a section
+placed there would meet every landing's merge in the same lines.
+
+**How a wave declares an import, at its landing** (written for wave 2's `falconer_lemma2_nonempty`; the
+same for any later one): (1) check the four items of `LEAN.md` § Assumptions are done — the docstring
+names its bibliography key, section and page; the statement is read back against the paper in the
+planner's record; a model of its hypotheses sits in the same file; and `ARCHITECTURE.md` § Trust has its
+row, naming the axiom in backticks — `` `Plane.falconer_lemma2_nonempty` `` or the full name (the gate
+accepts the name with or without its leading `HadwigerNelson.`); (2) add one line below this comment,
+the FULL name after a double backtick:
+
+```
+#eval AxiomAudit.declareImport ``HadwigerNelson.Plane.falconer_lemma2_nonempty
+```
+
+(3) move every record whose axioms include it from CLEAN to below that line, above the CLEAN banner: run
+`./scripts/axioms.sh`, and each record still under CLEAN that carries the import fails as
+`import-in-clean`, naming itself. For wave 2 at `fs131-w2` `59976a11` these are `falconer_reduction`,
+`le_chiM_of_falconerFan`, `exists_mem_falconerE` and `fan_tip_ae_mem` (`data/fs131/t3/wave_dryrun.sh`,
+run in the wave's worktree before merging, lists them for any later state); (4) run
+`./scripts/axioms.sh --self-test`, then `./scripts/axioms.sh`, and read the digest: it lists the declared
+imports and the IMPORTED records; the clean count falls by exactly the records moved, the imported count
+rises by the same, and nothing else moves; draft `CLAUDE.md` § Trust ledger's sentence with the new
+counts for Keryx. A mistyped name does not elaborate (the double backtick resolves it); an import
+declared that no audited record carries fails as `stale-declaration`. -/
+
+#eval AxiomAudit.declareImport ``HadwigerNelson.Plane.falconer_lemma2_nonempty
+
+-- FS131-I2h: wave 2's records resting on `falconer_lemma2_nonempty` (FS129-SA1-FALC-RED)
+#print axioms HadwigerNelson.Plane.falconer_reduction
+#print axioms HadwigerNelson.Plane.le_chiM_of_falconerFan
+#print axioms HadwigerNelson.Plane.exists_mem_falconerE
+#print axioms HadwigerNelson.Plane.fan_tip_ae_mem
 
 #eval IO.println "=== CLEAN ==="
 
@@ -1888,6 +2052,528 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Arith.rhombus_falconerFan
 #print axioms HadwigerNelson.Arith.falconerFan_hom
 #print axioms HadwigerNelson.Arith.falconerFan_chromaticNumber
+#print axioms HadwigerNelson.SpernerGrid.exists_rainbowCell
+#print axioms HadwigerNelson.LebesgueCovering.exists_mem_inter_three
+#print axioms HadwigerNelson.LebesgueCovering.lebesgue_covering_rect'
+#print axioms HadwigerNelson.LebesgueCovering.lebesgue_covering_rect
+#print axioms HadwigerNelson.LebesgueCovering.closedSquare_eq_reProdIm
+#print axioms HadwigerNelson.LebesgueCovering.lebesgue_covering_square
+#print axioms HadwigerNelson.LebesgueCovering.quadrant_hypotheses
+
+/-! ## FS-131 wave 3 (job FS131-K3) — the foundation: the local geometry of an arc map, the ring vocabulary, RINGBAND's circle colourings -/
+
+#print axioms HadwigerNelson.Plane.Arc.isCompact_carrier
+#print axioms HadwigerNelson.Plane.Arc.isClosed_carrier
+#print axioms HadwigerNelson.Plane.coneAt_mono
+#print axioms HadwigerNelson.Plane.mem_coneAt_add_two_pi
+#print axioms HadwigerNelson.Plane.mem_closure_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.germ_mono
+#print axioms HadwigerNelson.Plane.GermIn.mono
+#print axioms HadwigerNelson.Plane.GermIn.inter
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.interiorPts_subset_dom
+#print axioms HadwigerNelson.Plane.ArcMap.continuousOn_col
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_region
+#print axioms HadwigerNelson.Plane.ArcMap.region_subset_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.subset_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.isPreconnected
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.col_eq
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.tileOf
+#print axioms HadwigerNelson.Plane.ArcMap.TileOf.subset_region
+#print axioms HadwigerNelson.Plane.ArcMap.mem_coloursAt_of_tileOf
+#print axioms HadwigerNelson.Plane.im_eq_zero_of_mem_segment_neg
+#print axioms HadwigerNelson.Plane.mem_segment_neg_of_im_eq_zero
+#print axioms HadwigerNelson.Plane.re_eq_zero_of_mem_segment_neg_I
+#print axioms HadwigerNelson.Plane.halfPlane2_mem_interiorPts
+#print axioms HadwigerNelson.Plane.halfPlane2_im_eq_zero_of_mem_Γ
+#print axioms HadwigerNelson.Plane.exists_sin_ne_zero_of_lt
+#print axioms HadwigerNelson.Plane.halfPlane2_not_isRingArc
+#print axioms HadwigerNelson.Plane.halfPlane2_isChangePoint
+#print axioms HadwigerNelson.Plane.quadRing_mem_interiorPts
+#print axioms HadwigerNelson.Plane.quadRing_ringPt_mem_Γ
+#print axioms HadwigerNelson.Plane.quadRing_col_first
+#print axioms HadwigerNelson.Plane.eventually_first_quadrant
+#print axioms HadwigerNelson.Plane.quadRing_first_mem_region
+#print axioms HadwigerNelson.Plane.dist_scale_e
+#print axioms HadwigerNelson.Plane.quadRing_isRingArc
+#print axioms HadwigerNelson.Plane.quadRing_coloursAt_zero
+#print axioms HadwigerNelson.Plane.quadRing_isQArc
+#print axioms HadwigerNelson.Plane.upperDensityAt_empty
+#print axioms HadwigerNelson.Plane.upperDensityAt_univ
+#print axioms HadwigerNelson.Plane.const_ball_isTile_iff
+#print axioms HadwigerNelson.Plane.cellIndex_eventually_eq
+#print axioms HadwigerNelson.Plane.cellIndex_jump
+#print axioms HadwigerNelson.Plane.cellIndex_six
+#print axioms HadwigerNelson.Plane.cellIndex_nine
+
+/-! ## FS-131 wave 3 (job FS131-K3b) — the skeleton: local structure, SIXFRAG, tiles, the ring, the lens, RINGBAND (landed sorry-free by FS131-I3h) -/
+
+#print axioms HadwigerNelson.Plane.norm_div_norm_sub_le
+#print axioms HadwigerNelson.Plane.Icc_subset_angleIcc
+#print axioms HadwigerNelson.Plane.Ioo_subset_angleIoo
+#print axioms HadwigerNelson.Plane.Arc.finite_inter_sphere_or_eq_circ
+#print axioms HadwigerNelson.Plane.volume_segment_eq_zero
+#print axioms HadwigerNelson.Plane.Arc.volume_carrier
+#print axioms HadwigerNelson.Plane.ArcMap.covers_one_iff
+#print axioms HadwigerNelson.Plane.ArcMap.finite_ringΓ_off_ringArc
+#print axioms HadwigerNelson.Plane.ArcMap.dense_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.finite_ray_inter_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.subsingleton_ray_inter_segment
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ray_in_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_tile
+#print axioms HadwigerNelson.Plane.ArcMap.finite_tiles_near
+#print axioms HadwigerNelson.Plane.ArcMap.mem_coloursAt_iff_exists_tileOf
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_region_eq_biUnion
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_coneAt_region
+#print axioms HadwigerNelson.Plane.ArcMap.germ_dichotomy
+#print axioms HadwigerNelson.Plane.ArcMap.Simple.coneAt_eq_angleIcc
+#print axioms HadwigerNelson.Plane.sixArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.sixArcs_locallyFinite
+#print axioms HadwigerNelson.Plane.sixCol_locallyConstant
+#print axioms HadwigerNelson.Plane.sixFrag
+#print axioms HadwigerNelson.Plane.sixFrag_valid
+#print axioms HadwigerNelson.Plane.sixFrag_nonSiamese
+#print axioms HadwigerNelson.Plane.sixFrag_covers
+#print axioms HadwigerNelson.Plane.sixFrag_coloursAt_zero
+#print axioms HadwigerNelson.Plane.sixFrag_sphere_subset_Γ
+#print axioms HadwigerNelson.Plane.sixFrag_isQArc
+#print axioms HadwigerNelson.Plane.sixFrag_isRingArc
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.unitPairsNull_region
+#print axioms HadwigerNelson.Plane.ArcMap.ne1_region
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.dist_lt_or_gt_of_isPreconnected
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.closure_subset_closedBall
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.dist_lt_one
+#print axioms HadwigerNelson.Plane.ArcMap.unitNear_or_unitFar
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.unitNear_self
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.dist_le_one_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.UnitNear.dist_le_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.UnitFar.one_le_dist_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.unitNear_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.unitFar_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.NonSiamese.eq_of_unitNear
+#print axioms HadwigerNelson.Plane.ArcMap.unitNear_iff_of_mem_closure_inter
+#print axioms HadwigerNelson.Plane.ArcMap.cluster
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.wholeRestrict
+#print axioms HadwigerNelson.Plane.ArcMap.wholeRestrict_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.wholeRestrict_covers
+#print axioms HadwigerNelson.Plane.ArcMap.isTile_wholeRestrict_iff
+#print axioms HadwigerNelson.Plane.ArcMap.isTile_wholeRestrict_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.NonSiamese.wholeRestrict
+#print axioms HadwigerNelson.Plane.ArcMap.Simple.wholeRestrict
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_closure_wholeRestrict_of_inner
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_closure_wholeRestrict_R₂
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.false_of_crossing
+#print axioms HadwigerNelson.Plane.ArcMap.isPreconnected_germ
+#print axioms HadwigerNelson.Plane.ArcMap.dist_ringPt_shift_cmp
+#print axioms HadwigerNelson.Plane.ArcMap.norm_add_sq_eq
+#print axioms HadwigerNelson.Plane.ArcMap.cone_expand
+#print axioms HadwigerNelson.Plane.ArcMap.dist_ringPt_germ_le
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonneg_of_germ
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonpos_of_germ
+#print axioms HadwigerNelson.Plane.ArcMap.e_pi
+#print axioms HadwigerNelson.Plane.ArcMap.re_e_mul_conj_e
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_sub_ringPt_minus_third
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_sub_ringPt_plus_third
+#print axioms HadwigerNelson.Plane.ArcMap.not_germIn_closure_rotate
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_mem_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.isClosed_ringD
+#print axioms HadwigerNelson.Plane.ArcMap.mem_interiorPts_of_notMem_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.col_eq_of_mem_closure_region
+#print axioms HadwigerNelson.Plane.ArcMap.ringD_subset_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.finite_ringD_off_ringArc
+#print axioms HadwigerNelson.Plane.ArcMap.germR_vMinus
+#print axioms HadwigerNelson.Plane.ArcMap.germR_vPlus
+#print axioms HadwigerNelson.Plane.ArcMap.germR_uMinus
+#print axioms HadwigerNelson.Plane.ArcMap.germR_uPlus
+#print axioms HadwigerNelson.Plane.ArcMap.GermIn.exists_mem_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.IsChangePoint.not_mem_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.IsChangePoint.ncard_add_two_le
+#print axioms HadwigerNelson.Plane.ArcMap.germS_absent
+#print axioms HadwigerNelson.Plane.ArcMap.germS_inward
+#print axioms HadwigerNelson.Plane.ArcMap.germS_outward
+#print axioms HadwigerNelson.Plane.ArcMap.germS_four
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_mem_closure_germ
+#print axioms HadwigerNelson.Plane.ArcMap.onQArc_of_germOnQ
+#print axioms HadwigerNelson.Plane.ArcMap.ringQPrimeS
+#print axioms HadwigerNelson.Plane.ArcMap.qfree4
+#print axioms HadwigerNelson.Plane.ArcMap.fiveRing_no_changePoint
+#print axioms HadwigerNelson.Plane.ArcMap.fiveRing_finite_off_Q
+#print axioms HadwigerNelson.Plane.ArcMap.fiveRing_length
+#print axioms HadwigerNelson.Plane.ArcMap.fiveRing_no_hub
+#print axioms HadwigerNelson.Plane.ArcMap.sixQ_sphere_subset_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.sixQ_sides
+#print axioms HadwigerNelson.Plane.ArcMap.sixQ_isQArc
+#print axioms HadwigerNelson.Plane.ArcMap.sixQ_inhabited
+#print axioms HadwigerNelson.Plane.ArcMap.touchW
+#print axioms HadwigerNelson.Plane.ArcMap.echo_unique
+#print axioms HadwigerNelson.Plane.ArcMap.echo_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.echo
+#print axioms HadwigerNelson.Plane.ArcMap.side_ball_subset_closure
+#print axioms HadwigerNelson.Plane.ArcMap.norm_sub_sq_eq
+#print axioms HadwigerNelson.Plane.ArcMap.norm_sq_sub_radial
+#print axioms HadwigerNelson.Plane.ArcMap.re_mul_conj_e_bound
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.cos_nonneg_of_radial_inner
+#print axioms HadwigerNelson.Plane.ArcMap.outer_near_arith
+#print axioms HadwigerNelson.Plane.ArcMap.outer_far_arith
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.cos_nonpos_of_radial_outer
+#print axioms HadwigerNelson.Plane.ArcMap.mem_angleIcc_of_cos_nonneg
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.radial_inner
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.radial_outer
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_angleIcc_angleIoo_of_le
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_angleIcc_angleIoo_of_le'
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_cone_inner
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_cone_outer
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_sideCone_inner
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_sideCone_outer
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_sideCone_other
+#print axioms HadwigerNelson.Plane.ArcMap.four_of_bothKind
+#print axioms HadwigerNelson.Plane.ArcMap.four_of_bothKind_simple
+#print axioms HadwigerNelson.Plane.ArcMap.flank_cone
+#print axioms HadwigerNelson.Plane.ArcMap.flank_edge_exists
+#print axioms HadwigerNelson.Plane.ArcMap.flank_initialPieces
+#print axioms HadwigerNelson.Plane.ArcMap.flank
+#print axioms HadwigerNelson.Plane.exit_lens
+#print axioms HadwigerNelson.Plane.exit_lens_row
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_lift
+#print axioms HadwigerNelson.Plane.CircleColouring.ringband_i
+#print axioms HadwigerNelson.Plane.CircleColouring.ringband_ii
+#print axioms HadwigerNelson.Plane.CircleColouring.W_eq
+#print axioms HadwigerNelson.Plane.CircleColouring.ringband_iii
+#print axioms HadwigerNelson.Plane.CircleColouring.ringband_iv
+#print axioms HadwigerNelson.Plane.CircleColouring.ringband_v
+#print axioms HadwigerNelson.Plane.CircleColouring.ringband_vi_periodic
+#print axioms HadwigerNelson.Plane.CircleColouring.ringband_vi_noJump
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_swap_of_abs_W_le_one
+#print axioms HadwigerNelson.Plane.CircleColouring.W_mod_six
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_pair_of_abs_W_le_two
+#print axioms HadwigerNelson.Plane.ArcMap.e_injOn_Ico
+#print axioms HadwigerNelson.Plane.ArcMap.ring_finite_S
+#print axioms HadwigerNelson.Plane.ArcMap.ring_locallyConstant
+#print axioms HadwigerNelson.Plane.ArcMap.ring_proper
+#print axioms HadwigerNelson.Plane.ArcMap.ringCircleColouring
+#print axioms HadwigerNelson.Plane.ArcMap.exists_swap_of_ring
+
+/-! ## FS-131 wave 3 (job FS131-I3b) — the implementer's added children (every one a theorem the rows rest on) -/
+
+#print axioms HadwigerNelson.Plane.sixArcs_finite
+#print axioms HadwigerNelson.Plane.dist_polar_sq
+#print axioms HadwigerNelson.Plane.arg_polar
+#print axioms HadwigerNelson.Plane.norm_polar
+#print axioms HadwigerNelson.Plane.norm_e_add_e_sq
+#print axioms HadwigerNelson.Plane.one_le_norm_e_add_e
+#print axioms HadwigerNelson.Plane.sixFrag_mem_interiorPts
+#print axioms HadwigerNelson.Plane.sixCol_sector
+#print axioms HadwigerNelson.Plane.zero_mem_closure_region
+#print axioms HadwigerNelson.Plane.norm_e_sub_e_sq
+#print axioms HadwigerNelson.Plane.no_int_lens
+#print axioms HadwigerNelson.Plane.no_int_radial
+#print axioms HadwigerNelson.Plane.norm_e_sub_lens_ne
+#print axioms HadwigerNelson.Plane.sin_eq_zero_of_mem_radial
+#print axioms HadwigerNelson.Plane.e_notMem_lens_union
+#print axioms HadwigerNelson.Plane.dist_polar_same
+#print axioms HadwigerNelson.Plane.sixCol_inner_zero
+#print axioms HadwigerNelson.Plane.sixCol_outer_two
+#print axioms HadwigerNelson.Plane.CircleColouring.mem_S_add_int
+#print axioms HadwigerNelson.Plane.CircleColouring.S_inter_Icc_finite
+#print axioms HadwigerNelson.Plane.CircleColouring.eventually_notMem_S
+#print axioms HadwigerNelson.Plane.CircleColouring.eventually_notMem_S_lt
+#print axioms HadwigerNelson.Plane.CircleColouring.eventually_notMem_S_gt
+#print axioms HadwigerNelson.Plane.CircleColouring.const_on_Ioo
+#print axioms HadwigerNelson.Plane.CircleColouring.const_of_local
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_good_near
+#print axioms HadwigerNelson.Plane.CircleColouring.Good.notMem
+#print axioms HadwigerNelson.Plane.CircleColouring.Good.hex_notMem
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_left_const
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_right_const
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.exists_sides
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.Sides.unique
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.Sides.vals
+#print axioms HadwigerNelson.Plane.CircleColouring.LeftVal.unique
+#print axioms HadwigerNelson.Plane.CircleColouring.RightVal.unique
+#print axioms HadwigerNelson.Plane.CircleColouring.eventually_lt_add
+#print axioms HadwigerNelson.Plane.CircleColouring.eventually_gt_add
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.Sides.periodic
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.W_eq_aux
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.D0_mod_ne
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.D_eq_D0
+#print axioms HadwigerNelson.Plane.CircleColouring.step_cast
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.D_mod_ne_good
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.hex_summary
+#print axioms HadwigerNelson.Plane.CircleColouring.liftB_fin
+#print axioms HadwigerNelson.Plane.CircleColouring.liftB_add
+#print axioms HadwigerNelson.Plane.CircleColouring.liftB_of_le
+#print axioms HadwigerNelson.Plane.CircleColouring.liftA_sub
+#print axioms HadwigerNelson.Plane.CircleColouring.liftB_empty
+#print axioms HadwigerNelson.Plane.CircleColouring.liftB_single
+#print axioms HadwigerNelson.Plane.CircleColouring.D_eq_sub
+#print axioms HadwigerNelson.Plane.CircleColouring.hex_near
+#print axioms HadwigerNelson.Plane.CircleColouring.m_eq_near
+#print axioms HadwigerNelson.Plane.CircleColouring.h_eq_of_m_eq
+#print axioms HadwigerNelson.Plane.CircleColouring.m_eq_m0
+#print axioms HadwigerNelson.Plane.CircleColouring.D0_near
+#print axioms HadwigerNelson.Plane.CircleColouring.m0_const
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_M
+#print axioms HadwigerNelson.Plane.CircleColouring.D0_eq
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_T0_left
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_T0_right
+#print axioms HadwigerNelson.Plane.CircleColouring.hbig_of_noPair
+#print axioms HadwigerNelson.Plane.CircleColouring.hbig_of_noSwap
+#print axioms HadwigerNelson.Plane.CircleColouring.J_eq_of_rho
+#print axioms HadwigerNelson.Plane.CircleColouring.rho_const
+#print axioms HadwigerNelson.Plane.CircleColouring.jump_ne_of_mem
+#print axioms HadwigerNelson.Plane.CircleColouring.mem_of_jump_ne
+#print axioms HadwigerNelson.Plane.CircleColouring.inv_of_J_eq
+#print axioms HadwigerNelson.Plane.CircleColouring.hSum_shift
+#print axioms HadwigerNelson.Plane.CircleColouring.ringband_iii'
+
+/-! ## FS-131 wave 3 (job FS131-I3c) — the implementer's added children and the rows' leaves -/
+
+#print axioms HadwigerNelson.Plane.mem_arcs_rot
+#print axioms HadwigerNelson.Plane.rot_mem_interiorPts
+#print axioms HadwigerNelson.Plane.sixPair_gg
+#print axioms HadwigerNelson.Plane.sixPair_ss
+#print axioms HadwigerNelson.Plane.sixPair_gRe
+#print axioms HadwigerNelson.Plane.sixPair_qg
+#print axioms HadwigerNelson.Plane.sixPair_qf
+#print axioms HadwigerNelson.Plane.sixPair_qq
+#print axioms HadwigerNelson.Plane.sixPair_sg
+#print axioms HadwigerNelson.Plane.sixPair_sq
+#print axioms HadwigerNelson.Plane.sixPair_gg'
+#print axioms HadwigerNelson.Plane.dist_lt_one_iff_arg
+#print axioms HadwigerNelson.Plane.one_lt_dist_iff_arg
+#print axioms HadwigerNelson.Plane.floor_arg_bounds
+#print axioms HadwigerNelson.Plane.sixCol_zero_cases
+#print axioms HadwigerNelson.Plane.dist_sq_re_im
+#print axioms HadwigerNelson.Plane.sq_norm_re_im
+#print axioms HadwigerNelson.Plane.e_re_im
+#print axioms HadwigerNelson.Plane.cos_five_pi_div_six
+#print axioms HadwigerNelson.Plane.sin_five_pi_div_six
+#print axioms HadwigerNelson.Plane.dist_e_neg_five_pi_div_six_sq
+#print axioms HadwigerNelson.Plane.dist_e_neg_pi_div_two_sq
+#print axioms HadwigerNelson.Plane.dist_e_pi_div_two_sq
+#print axioms HadwigerNelson.Plane.sixPieceS_coords
+#print axioms HadwigerNelson.Plane.sixPieceQ_coords
+#print axioms HadwigerNelson.Plane.sixPieceG_coords
+#print axioms HadwigerNelson.Plane.one_lt_dist_of_sq
+#print axioms HadwigerNelson.Plane.dist_sq_polar
+#print axioms HadwigerNelson.Plane.sixPieceS_diam
+#print axioms HadwigerNelson.Plane.sixPieceS_sixPieceQ
+#print axioms HadwigerNelson.Plane.sixPieceS_sixPieceG
+#print axioms HadwigerNelson.Plane.sixPieceQ_sixPieceG
+#print axioms HadwigerNelson.Plane.sixPieceG_near
+#print axioms HadwigerNelson.Plane.sixPieceG_diam
+#print axioms HadwigerNelson.Plane.dist_ne_one_of_isOpen
+#print axioms HadwigerNelson.Plane.sixLensQ0_diam
+#print axioms HadwigerNelson.Plane.sixPieceQ_ne_one
+#print axioms HadwigerNelson.Plane.sixFrag_valid_zero
+#print axioms HadwigerNelson.Plane.sixCol_rot_to_zero
+#print axioms HadwigerNelson.Plane.e_add_e_eq
+#print axioms HadwigerNelson.Plane.exists_int_arg_eq
+#print axioms HadwigerNelson.Plane.sixArcs_polar
+#print axioms HadwigerNelson.Plane.int_lt_of_mul_pi_lt
+#print axioms HadwigerNelson.Plane.sixPieceQ_interior
+#print axioms HadwigerNelson.Plane.sixPieceG_interior
+#print axioms HadwigerNelson.Plane.isPreconnected_polarBand
+#print axioms HadwigerNelson.Plane.mem_polarBand
+#print axioms HadwigerNelson.Plane.polarBand_bounds
+#print axioms HadwigerNelson.Plane.sixPieceS_connected
+#print axioms HadwigerNelson.Plane.sixPieceQ_connected
+#print axioms HadwigerNelson.Plane.sixGAngles_ordConnected
+#print axioms HadwigerNelson.Plane.sixPieceG_connected
+#print axioms HadwigerNelson.Plane.sixFrag_connected_of_zero
+#print axioms HadwigerNelson.Plane.ArcMap.changePoint_germs
+#print axioms HadwigerNelson.Plane.ArcMap.tile_subset_closedBall_of_cone
+#print axioms HadwigerNelson.Plane.ArcMap.outward_of_cone
+#print axioms HadwigerNelson.Plane.ArcMap.changePoint_germs_out
+#print axioms HadwigerNelson.Plane.ArcMap.exists_near_of_mem_closure_isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_closure_of_four_germs
+#print axioms HadwigerNelson.Plane.ArcMap.exists_germ_interior
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.ringArc_subset_closure
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.eq_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.germ_absent_class
+#print axioms HadwigerNelson.Plane.ArcMap.mem_ringArc_of_germIn
+#print axioms HadwigerNelson.Plane.ArcMap.IsJordanDomain.local_connected
+#print axioms HadwigerNelson.Plane.e_mul_e_sub_pi
+#print axioms HadwigerNelson.Plane.mul_e_of_arg
+#print axioms HadwigerNelson.Plane.arg_side
+#print axioms HadwigerNelson.Plane.arg_near
+#print axioms HadwigerNelson.Plane.exists_shift_Ico
+#print axioms HadwigerNelson.Plane.periodic_int
+#print axioms HadwigerNelson.Plane.exists_angleIcc_of_no_gap
+#print axioms HadwigerNelson.Plane.isClosed_coneAt
+#print axioms HadwigerNelson.Plane.mem_coneAt_of_mem_isOpen
+#print axioms HadwigerNelson.Plane.coneAt_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.IsJordanDomain.coneAt_eq_angleIcc
+#print axioms HadwigerNelson.Plane.ArcMap.e_third_eq
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.not_mem_closure_of_side
+#print axioms HadwigerNelson.Plane.ArcMap.dist_ringPt_third
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.not_mem_closure_third
+#print axioms HadwigerNelson.Plane.ArcMap.carries_absent
+#print axioms HadwigerNelson.Plane.ArcMap.subsingleton_e_eq
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_regularAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_regular_germ
+#print axioms HadwigerNelson.Plane.ArcMap.finite_not_regular
+#print axioms HadwigerNelson.Plane.ArcMap.absent_subsingleton
+#print axioms HadwigerNelson.Plane.ArcMap.exists_regular_pair
+#print axioms HadwigerNelson.Plane.ArcMap.qOpen_subset
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_qOpen
+#print axioms HadwigerNelson.Plane.ArcMap.qOpen_periodic
+#print axioms HadwigerNelson.Plane.ArcMap.qOpen_of_regular
+#print axioms HadwigerNelson.Plane.arcLength_apply
+#print axioms HadwigerNelson.Plane.arcLength_preimage_add_periodic
+#print axioms HadwigerNelson.Plane.ArcMap.mem_angleIcc_of_cos_nonneg_single
+#print axioms HadwigerNelson.Plane.ArcMap.cos_nonneg_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.e_sigma_half
+#print axioms HadwigerNelson.Plane.ArcMap.initialPiece_cases
+#print axioms HadwigerNelson.Plane.ArcMap.sq_norm_pieceB
+#print axioms HadwigerNelson.Plane.ArcMap.sq_norm_pieceB'
+#print axioms HadwigerNelson.Plane.carrier_circ_unit
+#print axioms HadwigerNelson.Plane.Arc.OnRing.carrier_subset_sphere
+#print axioms HadwigerNelson.Plane.continuous_polarPt
+#print axioms HadwigerNelson.Plane.norm_polarPt_sub
+#print axioms HadwigerNelson.Plane.dist_polarPt_ringPt_le
+#print axioms HadwigerNelson.Plane.abs_norm_sub_one_le
+#print axioms HadwigerNelson.Plane.polar_nbhd
+#print axioms HadwigerNelson.Plane.e_eq_e_iff
+#print axioms HadwigerNelson.Plane.exists_mem_Icc_e_eq
+#print axioms HadwigerNelson.Plane.e_ne_one
+#print axioms HadwigerNelson.Plane.dist_ringPt_side_le
+#print axioms HadwigerNelson.Plane.dist_lt_of_mem_germ
+#print axioms HadwigerNelson.Plane.ringPt_notMem_germ
+#print axioms HadwigerNelson.Plane.isPreconnected_germ
+#print axioms HadwigerNelson.Plane.sideInterval
+#print axioms HadwigerNelson.Plane.exists_germ_subset_ringArc
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_finite
+#print axioms HadwigerNelson.Plane.ArcMap.finite_nonring_inter_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_onRing
+#print axioms HadwigerNelson.Plane.ArcMap.exists_sides_nbhd
+#print axioms HadwigerNelson.Plane.ArcMap.sides_const
+#print axioms HadwigerNelson.Plane.lens_stepA
+#print axioms HadwigerNelson.Plane.lens_stepB
+#print axioms HadwigerNelson.Plane.re_e
+#print axioms HadwigerNelson.Plane.im_e
+#print axioms HadwigerNelson.Plane.sq_norm_eq
+#print axioms HadwigerNelson.Plane.e_mul_conj_e
+#print axioms HadwigerNelson.Plane.conj_e
+#print axioms HadwigerNelson.Plane.lens_core
+#print axioms HadwigerNelson.Plane.deriv_nonneg_of_leftmax
+#print axioms HadwigerNelson.Plane.re_conj_mul_nonneg_of_exit
+#print axioms HadwigerNelson.Plane.im_leftNormal_mul_conj
+
+#print axioms HadwigerNelson.Plane.coneAt_biUnion_finite
+#print axioms HadwigerNelson.Plane.coneAt_inter_ball
+#print axioms HadwigerNelson.Plane.mem_curveAt_scale
+#print axioms HadwigerNelson.Plane.farther_out
+#print axioms HadwigerNelson.Plane.circle_step_real
+#print axioms HadwigerNelson.Plane.farther_in
+#print axioms HadwigerNelson.Plane.exists_farther
+#print axioms HadwigerNelson.Plane.re_mul_conj_eq
+#print axioms HadwigerNelson.Plane.sq_re_im_ne
+#print axioms HadwigerNelson.Plane.eq_of_re_im
+#print axioms HadwigerNelson.Plane.perp_circle
+#print axioms HadwigerNelson.Plane.curve_inter
+#print axioms HadwigerNelson.Plane.curveAt_eq_of_same
+#print axioms HadwigerNelson.Plane.Arc.curveData_kappa
+#print axioms HadwigerNelson.Plane.Arc.curveData_ne
+#print axioms HadwigerNelson.Plane.Arc.carrier_subset_curve
+#print axioms HadwigerNelson.Plane.exists_notMem_curveAt
+#print axioms HadwigerNelson.Plane.finite_perp_circle
+#print axioms HadwigerNelson.Plane.finite_curve_inter_sphere
+#print axioms HadwigerNelson.Plane.finite_image_of_locConst
+#print axioms HadwigerNelson.Plane.ArcMap.exists_goodAt
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.subset_of_preconnected
+#print axioms HadwigerNelson.Plane.ArcMap.GoodAt.exists_local_curve
+#print axioms HadwigerNelson.Plane.ArcMap.GoodAt.not_tile_subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.continuous_spherePt
+#print axioms HadwigerNelson.Plane.ArcMap.norm_spherePt_sub
+#print axioms HadwigerNelson.Plane.ArcMap.spherePt_mem_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.injOn_spherePt
+#print axioms HadwigerNelson.Plane.ArcMap.GoodAt.finite_tiles_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.region_inter_ball_subset
+#print axioms HadwigerNelson.Plane.invC_invC
+#print axioms HadwigerNelson.Plane.invC_re
+#print axioms HadwigerNelson.Plane.invC_im
+#print axioms HadwigerNelson.Plane.invC_ne_zero
+#print axioms HadwigerNelson.Plane.continuousOn_invC
+#print axioms HadwigerNelson.Plane.rotD_eq
+#print axioms HadwigerNelson.Plane.normSq_rotD
+#print axioms HadwigerNelson.Plane.rotD_ne_zero_iff
+#print axioms HadwigerNelson.Plane.mem_Rgn_iff
+#print axioms HadwigerNelson.Plane.levD_eq
+#print axioms HadwigerNelson.Plane.isPreconnected_Rgn_lev
+#print axioms HadwigerNelson.Plane.conj_mul_self_e
+#print axioms HadwigerNelson.Plane.exists_mem_Rgn_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.ray_mem_Rgn
+#print axioms HadwigerNelson.Plane.mem_curveAt_iff_rot
+#print axioms HadwigerNelson.Plane.nontang_avoid
+#print axioms HadwigerNelson.Plane.Rgn_subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.GoodAt.exists_wedge
+#print axioms HadwigerNelson.Plane.countable_e_preimage
+#print axioms HadwigerNelson.Plane.countable_tang_dirs
+#print axioms HadwigerNelson.Plane.ArcMap.GoodAt.exists_generic_dir
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_interiors_disjoint
+#print axioms HadwigerNelson.Plane.e_sub_eq
+#print axioms HadwigerNelson.Plane.tang_circ
+#print axioms HadwigerNelson.Plane.e_mul_sign
+#print axioms HadwigerNelson.Plane.rotD_circ
+#print axioms HadwigerNelson.Plane.circ_mem_Rgn
+#print axioms HadwigerNelson.Plane.sin_half_ge
+#print axioms HadwigerNelson.Plane.circ_gap_aux
+#print axioms HadwigerNelson.Plane.circ_gap_false
+#print axioms HadwigerNelson.Plane.circ_initialPiece
+#print axioms HadwigerNelson.Plane.seg_initialPiece
+#print axioms HadwigerNelson.Plane.Arc.exists_initialPiece_of_approach
+#print axioms HadwigerNelson.Plane.mem_Rgn_lev_of_Kinv
+#print axioms HadwigerNelson.Plane.Rgn_mono
+#print axioms HadwigerNelson.Plane.isOpen_Rgn
+#print axioms HadwigerNelson.Plane.Arc.InitialPiece.subset_carrier
+#print axioms HadwigerNelson.Plane.conj_ne_zero_of_norm
+#print axioms HadwigerNelson.Plane.u_conj_u
+#print axioms HadwigerNelson.Plane.levD_eq_of_mem_curve
+#print axioms HadwigerNelson.Plane.mem_levCurve
+#print axioms HadwigerNelson.Plane.isClosed_curveAt
+#print axioms HadwigerNelson.Plane.exists_pt_off_levels
+#print axioms HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_cone
+#print axioms HadwigerNelson.Plane.e_add_int_mul_two_pi
+#print axioms HadwigerNelson.Plane.inSixLens_add_six
+#print axioms HadwigerNelson.Plane.dist_polar_lt_one_iff
+#print axioms HadwigerNelson.Plane.dist_polar_eq_one_iff
+#print axioms HadwigerNelson.Plane.eq_norm_mul_e_arg
+#print axioms HadwigerNelson.Plane.exists_int_abs_lt_of_half_lt_cos
+#print axioms HadwigerNelson.Plane.sixRound_of_lens
+#print axioms HadwigerNelson.Plane.sixCol_of_lens
+#print axioms HadwigerNelson.Plane.e_pi_div_six
+#print axioms HadwigerNelson.Plane.e_neg_pi_div_six
+#print axioms HadwigerNelson.Plane.re_nonneg_aux
+#print axioms HadwigerNelson.Plane.lens_boundary_core
+#print axioms HadwigerNelson.Plane.exists_fin_six_rep
+#print axioms HadwigerNelson.Plane.mem_arcs_side₁
+#print axioms HadwigerNelson.Plane.mem_arcs_side₂
+#print axioms HadwigerNelson.Plane.e_zero
+#print axioms HadwigerNelson.Plane.dist_rot
+#print axioms HadwigerNelson.Plane.mem_arcs_of_lens_boundary₁
+#print axioms HadwigerNelson.Plane.mem_arcs_of_lens_boundary₂
+#print axioms HadwigerNelson.Plane.mem_arcs_of_norm_eq_one
+#print axioms HadwigerNelson.Plane.mem_arcs_radial
+#print axioms HadwigerNelson.Plane.inSixLens_reduce
+#print axioms HadwigerNelson.Plane.exists_one_lt_dist_of_not_lens
+#print axioms HadwigerNelson.Plane.eventually_floor_arg
+#print axioms HadwigerNelson.Plane.e_ne_zero'
+#print axioms HadwigerNelson.Plane.dist_rot_left
+#print axioms HadwigerNelson.Plane.exists_int_of_e_eq_e
+#print axioms HadwigerNelson.Plane.arg_rot
+#print axioms HadwigerNelson.Plane.inSixLens_rot
+#print axioms HadwigerNelson.Plane.sixCol_rot
+#print axioms HadwigerNelson.Plane.ArcMap.exists_lift_of_Icc_subset_angleIcc
+#print axioms HadwigerNelson.Plane.ArcMap.cone_region_tile
+#print axioms HadwigerNelson.Plane.ArcMap.overlap_false
+#print axioms HadwigerNelson.Plane.ArcMap.disj_lifts
+#print axioms HadwigerNelson.Plane.ArcMap.add_notMem_angleIcc
+#print axioms HadwigerNelson.Plane.ArcMap.sub_notMem_angleIcc
 
 /-! ## FS-131 wave 2's foundation (job FS131-K2) — covers, partial colourings and the suprema, CP colourings
 
@@ -1950,8 +2636,6 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.CPColouring.forcedSet_eq_zero
 #print axioms HadwigerNelson.Plane.twoCircle_preimage_null
 #print axioms HadwigerNelson.Plane.falconer_lemma1
-#print axioms HadwigerNelson.Plane.falconer_reduction
-#print axioms HadwigerNelson.Plane.le_chiM_of_falconerFan
 #print axioms HadwigerNelson.Plane.chromaticNumber_plane_le_chiM0
 #print axioms HadwigerNelson.Plane.chiM0_le_of_fragments
 #print axioms HadwigerNelson.Plane.chromaticNumber_plane_le_six_of_fragments
@@ -2058,7 +2742,7 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.hasFDerivAt_twoCircleMap
 #print axioms HadwigerNelson.Plane.twoCircleDeriv_injective
 #print axioms HadwigerNelson.Plane.volume_sinZero_null
-#print axioms HadwigerNelson.Plane.eq_norm_mul_e_arg
+#print axioms HadwigerNelson.Plane.self_eq_norm_mul_e_arg
 #print axioms HadwigerNelson.Plane.slice_slice_null
 #print axioms HadwigerNelson.Plane.CPColouring.law_shift
 #print axioms HadwigerNelson.Plane.CPColouring.measurableSet_eq
@@ -2206,12 +2890,10 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Arith.dyadicConclusion_of_coeffs
 #print axioms HadwigerNelson.Plane.upperHalfPlane_falconer_hyp
 #print axioms HadwigerNelson.Plane.densitySet_dist_ne_one
-#print axioms HadwigerNelson.Plane.exists_mem_falconerE
 #print axioms HadwigerNelson.Plane.two_classes_of_mem_falconerE
 #print axioms HadwigerNelson.Plane.dist_circle_rotate
 #print axioms HadwigerNelson.Plane.not_rotate_ae_eq_compl
 #print axioms HadwigerNelson.Plane.falconer_lemma4
-#print axioms HadwigerNelson.Plane.fan_tip_ae_mem
 #print axioms HadwigerNelson.Plane.exists_isMaxIn
 #print axioms HadwigerNelson.Plane.isMaxIn_maxIn
 #print axioms HadwigerNelson.Plane.grundyTaken_eq
@@ -2371,7 +3053,7 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.ae_arcLength_shift
 #print axioms HadwigerNelson.Plane.densitySet_disjoint
 #print axioms HadwigerNelson.Plane.unitPairsNull_of_no_unit_pair
-#print axioms HadwigerNelson.Plane.dist_rot
+#print axioms HadwigerNelson.Plane.dist_add_e_mul
 #print axioms HadwigerNelson.Plane.shift_re
 #print axioms HadwigerNelson.Plane.shift_im
 #print axioms HadwigerNelson.Arith.exists_powerBasis_of_root
@@ -2393,3 +3075,5 @@ reaches above without them — which is the point of proving it twice. -/
 #print axioms moserSpindleCubes_unsat
 #print axioms moserSpindle_not_colorable_three_cubes
 #print axioms four_le_chromaticNumber_plane_certified
+
+#eval AxiomAudit.libraryAxioms

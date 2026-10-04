@@ -1,0 +1,12 @@
+B  FS116-Y4-FLANK
+  ok    y' - y = e(psi + 120deg)
+  ok    cone of B(y',1) at y: first order sin(-beta + psi + pi/6) vanishes at psi+30, psi+210 and is < 0 at psi+120
+  ok    cone of B(y,1) at y': first order -sin(-beta + psi + pi/6) vanishes at psi+210, psi+390 and is < 0 at psi+300
+  ok    a segment leaving y along 210deg: |seg(s) - y'|^2 - 1 = s**2 > 0 for s > 0
+  FAIL  radius 1: the arc leaving y along 210deg curving toward y' stays in B(y',1) at turn 15deg (|z - y'| - 1 = 6.597e-02)
+  ok    radius 1: the arc curving away leaves B(y',1) at turn 15deg (|z - y'| - 1 = 6.597e-02)
+  FAIL  radius 1/2: the arc leaving y along 210deg curving toward y' stays in B(y',1) at turn 15deg (|z - y'| - 1 = 2.524e-02)
+  ok    radius 1/2: the arc curving away leaves B(y',1) at turn 15deg (|z - y'| - 1 = 2.524e-02)
+  ok    the unit arcs' centres are y' and y (1/2 + sqrt(3)*I/2, 1)
+  ok    TWOCIRC at equal turns: |a(s) - b(s)|^2 - 1 + 8 sin^2(s/2) cos s = 0
+=> B: FAIL   [plant B]

@@ -1,0 +1,4 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 8,9
+d=1.3100: least failing measure 0.0000 at boundaries ((10.0, 12.0), 1); feasible patterns 4; first [((10.0, 12.0), 1), ((10.0, 12.0), 2), ((48.0, 50.0), 1)] [17s]
+d=1.4000: least failing measure 0.0000 at boundaries ((2.0,), 1); feasible patterns 44; first [((2.0,), 1), ((2.0,), 2), ((4.0,), 1)] [17s]
+SCAN-E COMPLETE data/search/2026-10-04/scanE-k2-s2-control.json

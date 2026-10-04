@@ -91,7 +91,7 @@ theorem AeColouring.exists_motion {k : ℕ} (c : AeColouring k) {V : Set ℂ} (h
     simp [AeColouring.cls]
   · have h1 : w - u = e (Complex.arg (w - u)) := by
       have hn : ‖w - u‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact hd
-      have := eq_norm_mul_e_arg (w - u)
+      have := self_eq_norm_mul_e_arg (w - u)
       rw [hn] at this; simpa using this
     have : e θ * u + v + e (θ + Complex.arg (w - u)) = e θ * w + v := by
       rw [e_add, ← h1]; ring

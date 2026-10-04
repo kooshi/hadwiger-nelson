@@ -257,4 +257,23 @@ theorem xcorner {θ : ℝ} (hθ : 0 < θ) (hθ' : θ < π) (z : ℂ) (φ : ℝ) 
     field_simp
     ring
 
+/-! ## Components of `e θ`, conjugation (FS131-I3c's supporting lemmas) -/
+
+/-- The real and imaginary parts of `e θ`. -/
+theorem re_e (θ : ℝ) : (e θ).re = Real.cos θ := by simp [e, Complex.exp_ofReal_mul_I_re]
+/-- The imaginary part of `e θ`. -/
+theorem im_e (θ : ℝ) : (e θ).im = Real.sin θ := by simp [e, Complex.exp_ofReal_mul_I_im]
+
+/-- The squared norm in coordinates. -/
+theorem sq_norm_eq (z : ℂ) : ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := by
+  rw [Complex.sq_norm, Complex.normSq_apply]; ring
+
+/-- `e θ` is nonzero and `e θ * conj (e θ) = 1`. -/
+theorem e_mul_conj_e (θ : ℝ) : e θ * (starRingEnd ℂ) (e θ) = 1 := by
+  rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, norm_e]; simp
+
+/-- Conjugation reverses the angle: `conj (e θ) = e (−θ)`. -/
+theorem conj_e (θ : ℝ) : (starRingEnd ℂ) (e θ) = e (-θ) := by
+  rw [e, e, ← Complex.exp_conj]; congr 1; simp [map_mul, Complex.conj_ofReal]
+
 end HadwigerNelson.Plane

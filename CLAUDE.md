@@ -85,8 +85,9 @@ skipping six): *"You can remove the old goals. We blaze the trail now."*
    closed sets covering a disc of radius 3 realize the unit distance; closedness enters once, as compactness giving a band), and so does any
    colouring with slack (Thm 1.1) — proofs repaired locally, the paper an unrefereed preprint. Almost everywhere, boundaries free: slack needs
    seven; polygons and locally finite convex tilings need seven, `[SokolovVoronov2025]` repaired, its map theorem a
-   GAP at the fills; nice maps need seven (`[Thomassen1999]`). Maps need six: `[Woodall1973]` Thm 6 and Townsend's manuscript, each repairing
-   the other (`[Townsend1981]` prints no proof); `[Coulson2004]`'s six is for tiles with an area bound.
+   GAP at the fills; nice maps need seven (`[Thomassen1999]`). Maps need six for arc maps:
+   `[Woodall1973]`'s steps 1–6 (step 6 by Townsend's lemma) and FS131-E1's lemma in place of his steps 7–8, which have GAPs as printed; for
+   Jordan boundaries, owed (`[Townsend1981]` prints no proof); `[Coulson2004]`'s six is for tiles with an area bound.
 5. **So, given MR, Hadwiger–Nelson is one question: can vanishing holes save a colour?** With no MR, `χ_m⁰(ℝ²) ≥ 7` iff six classes, each
    free of monochromatic pairs at distances in `[1−ε, 1+ε]`, cannot cover the plane up to holes of density tending to 0 as `ε → 0` (row 131;
    `[SokolovVoronov2025]` §9's hypothesis). A refutation needs no wild set: it is a sequence of periodic grid-square colourings, wild only in the
@@ -333,7 +334,7 @@ file, and loads into that mind alone.*
 | **ask and rank** | Poros | Opus | `.claude/agents/poros.md` |
 | **derive** | Ephodos | Opus | `.claude/agents/ephodos.md` |
 | **plan the kernel module** | de Bruijn | Opus | `.claude/agents/debruijn.md` |
-| **implement it** | de Bruijn | Sonnet 5.5 | `.claude/agents/debruijn-implementer.md` |
+| **implement it** | de Bruijn | Opus 5.5 | `.claude/agents/debruijn-implementer.md` |
 | **search**, once a day | the Searcher | Opus | `.claude/agents/searcher.md` |
 | **file**: reading and bookkeeping | the Clerk | Sonnet 5.5 | `.claude/agents/clerk.md` |
 
@@ -444,9 +445,10 @@ One reduction plus two certified computations, and why nothing in `tools/` is tr
 
 ## Trust ledger
 
-Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/axioms.sh`); the
-current audit reads 1285 clean and 5 declared purchases (and 11 axiom-free; 1,301 records at FS-131 wave 1's landing, 2026-10-04), each listed in `ARCHITECTURE.md` § Trust. Rung B
-holds none.
+Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/axioms.sh`, which checks each record's axioms
+as a set); the current audit reads 1794 clean and 5 declared purchases, and 0 imported (and 11 axiom-free; 1,810 records at wave 3's
+landing with FS131-T3's gate repair, 2026-10-04), each purchase listed in `ARCHITECTURE.md` § Trust; an imported record rests on a
+declared outside theorem (`LEAN.md` § Trust ledger). Rung B holds none.
 
 What the audit accepts and what it buys — the ledger's entries, `native_decide`'s per-declaration axioms, an imported theorem's four
 items, `lean4checker` as the publication gate — is `LEAN.md` § Trust ledger.
@@ -499,7 +501,7 @@ The Lean gate — the build, zero `sorry`, the axiom audit, linters, spec exampl
 `LEAN.md` § The gate. Its recorded state stays here, where `scripts/gate_report.py`
 reads it. The vacuity scan's **counts** — a silent change in them is this gate's own failure mode (declarations are the library's;
 the audit's own are not counted):
-`declarations=7624 refutations-skipped=45 sites=357`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=335 unknown=2`.
+`declarations=8385 refutations-skipped=57 sites=459`, `vacuous=0 stale=0 declared=3 witnessed=21 generic=433 unknown=2`.
 The baseline's two entries, `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
 
 What follows binds every mind that builds an instrument, not only the kernel lane.

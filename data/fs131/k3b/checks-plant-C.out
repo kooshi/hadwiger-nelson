@@ -1,0 +1,14 @@
+C  FS116-S1-EXIT
+  ok    P = y_b at beta = tau
+  ok    |y_b - y_3| = 1
+  FAIL  d|P - y_3|^2/dbeta at tau = -2 cos(phi - b + 150deg)  (got -2*sin(b - phi + pi/3))
+  ok    phi - b + 150deg ranges in (330deg, 450deg) on the box, where cos > 0, so the derivative is < 0
+  ok    Q = y_a at beta = tau'
+  ok    |y_a - y_5| = 1
+  ok    d|Q - y_5|^2/dbeta at tau' = 2 cos(g - a - 150deg)  (got -2*sin(a - g + pi/3))
+  ok    g - a - 150deg ranges in (-90deg, 30deg), where cos > 0, so the derivative is > 0
+  FAIL  |x_e - y_3| = 0.517638090205 >= 1 (the row's hypothesis)
+  FAIL  the feasible heading arc has width 150.00000deg <= 120deg
+  FAIL  tau is its lower end (offset -150.000deg) and its upper end is tau + 1.6560843E-170deg
+  FAIL  so it meets the exit window [tau - 180deg, tau] in tau alone: P = y_b
+=> C: FAIL   [plant C]

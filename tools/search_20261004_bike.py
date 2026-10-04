@@ -423,6 +423,100 @@ def summary(outdir):
     return per_d
 
 
+# ---------------------------------------------------------------- TS1-E: T1(u) any finite-arc proper two-colouring (a stage-4 extension)
+#
+# A proper two-colouring of T1(u) at 60 degrees satisfies c(theta + 60) = 3 - c(theta), so it is fixed by E = {t in [0, 60) : c(t) = 1}.
+# E is given as a sorted list of boundary points in (0, 60), colour 1 on alternate pieces starting with colour `first` on [0, e1).
+# The uniform alternating pattern with offset phi is E = [phi, 60): boundaries [phi], first = 2.
+
+def u_colour_E(theta, bnds, first):
+    t = theta % 360.0
+    k = int(t // 60.0) % 6
+    r = t - 60.0 * int(t // 60.0)
+    j = sum(1 for e in bnds if e <= r)
+    base = first if j % 2 == 0 else 3 - first
+    return base if k % 2 == 0 else 3 - base
+
+
+def y_type_E(d, eta, bnds, first):
+    e = math.radians(eta)
+    yx, yy = d + math.cos(e), math.sin(e)
+    r = math.hypot(yx, yy)
+    if r > 2.0:
+        return N_T
+    tc = math.degrees(math.atan2(yy, yx))
+    b = math.degrees(math.acos(min(1.0, r / 2.0)))
+    c1, c2 = u_colour_E(tc + b, bnds, first), u_colour_E(tc - b, bnds, first)
+    if c1 != c2:
+        return F_T
+    return P1_T if c1 == 1 else P2_T
+
+
+def breakpoints_E(d, bnds):
+    out = []
+    for e0 in [0.0] + list(bnds):
+        for k in range(6):
+            a = math.radians(e0 + 60.0 * k)
+            xx, xy = math.cos(a), math.sin(a)
+            dx, dy = xx - d, xy
+            D = math.hypot(dx, dy)
+            if D <= 2.0:
+                mx, my = (xx + d) / 2.0, xy / 2.0
+                h = math.sqrt(max(0.0, 1.0 - D * D / 4.0))
+                px, py = -dy / D, dx / D
+                for s_ in (1.0, -1.0):
+                    out.append(math.degrees(math.atan2(my + s_ * h * py, mx + s_ * h * px - d)) % 360.0)
+    c = (3.0 - d * d) / (2.0 * d)
+    if -1.0 <= c <= 1.0:
+        t = math.degrees(math.acos(c))
+        out += [t % 360.0, (-t) % 360.0]
+    return sorted(out)
+
+
+def ts1_E(d, bnds, first):
+    fail = 0.0
+    for lo, hi in cells(breakpoints_E(d, bnds), 60.0):
+        if hi - lo < DEGEN:
+            continue
+        t = (lo + hi) / 2.0
+        if not HEX[tuple(y_type_E(d, t + 60.0 * k, bnds, first) for k in range(6))]:
+            fail += hi - lo
+    return fail
+
+
+def scanE_one(args):
+    d, k, step = args
+    import itertools
+    pts = [step * i for i in range(1, int(round(60.0 / step)))]
+    best = (1e9, None)
+    nfeas = 0
+    feas = []
+    for nb in range(1, 2 * k + 1):
+        for bnds in itertools.combinations(pts, nb):
+            for first in (1, 2):
+                f = ts1_E(d, bnds, first)
+                if f < best[0]:
+                    best = (f, (bnds, first))
+                if f == 0.0:
+                    nfeas += 1
+                    if len(feas) < 20:
+                        feas.append((bnds, first))
+    return d, best, nfeas, feas
+
+
+def scanE(out, ds, k, step, workers):
+    ctx = multiprocessing.get_context("fork")
+    res = []
+    t0 = time.time()
+    with ctx.Pool(workers) as pool:
+        for d, best, nfeas, feas in pool.imap(scanE_one, [(d, k, step) for d in ds]):
+            line = f"d={d:.4f}: least failing measure {best[0]:.4f} at boundaries {best[1]}; feasible patterns {nfeas}; first {feas[:3]}"
+            print(line, f"[{time.time() - t0:.0f}s]", flush=True)
+            res.append({"d": d, "best": best[0], "at": best[1], "nfeas": nfeas, "feas": feas})
+            json.dump({"k": k, "step": step, "rows": res}, open(out, "w"))
+    print("SCAN-E COMPLETE", out)
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "controls":
@@ -438,6 +532,17 @@ if __name__ == "__main__":
     elif cmd == "scan":
         extra = [float(x) for x in sys.argv[8:10]]
         scan(sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), int(sys.argv[5]), int(sys.argv[6]), int(sys.argv[7]), *extra)
+    elif cmd == "scan-e":   # scan-e OUT.json K STEP W d1 d2 ...  (patterns with up to 2K boundary points in (0, 60) on a STEP-degree grid)
+        scanE(sys.argv[2], [float(x) for x in sys.argv[6:]], int(sys.argv[3]), float(sys.argv[4]), int(sys.argv[5]))
+    elif cmd == "check-e":  # control: TS1-E with E = [phi, 60) reproduces TS1 at offset phi
+        import random
+        rng = random.Random(5)
+        worst = 0.0
+        for _ in range(300):
+            d, phi = 1.0 + rng.random(), 0.5 + 59.0 * rng.random()
+            worst = max(worst, abs(ts1(d, phi)[0] - ts1_E(d, [phi], 2)))
+        print(f"TS1-E vs TS1 on 300 random (d, phi): max difference {worst:.2e}")
+        sys.exit(0 if worst < 1e-9 else 1)
     elif cmd == "summary":
         summary(sys.argv[2])
     else:

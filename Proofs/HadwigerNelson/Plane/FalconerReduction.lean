@@ -207,8 +207,8 @@ theorem slice_slice_null {E : Set ℂ} (hEm : MeasurableSet E) (hE0 : volume E =
   have hSeq : S = (Prod.map (· + a₀) (· + a₁)) ⁻¹' (G ⁻¹' E) := by
     ext q
     simp only [hS, hG, mem_setOf_eq, mem_preimage, Prod.map_fst, Prod.map_snd, e_add]
-    have h0 := eq_norm_mul_e_arg d₀
-    have h1 := eq_norm_mul_e_arg d₁
+    have h0 := self_eq_norm_mul_e_arg d₀
+    have h1 := self_eq_norm_mul_e_arg d₁
     have : p₀ + e q.1 * d₀ + e q.2 * d₁ = p₀ + (r₀ : ℂ) * (e q.1 * e a₀) + (r₁ : ℂ) * (e q.2 * e a₁) := by
       conv_lhs => rw [h0, h1]
       ring
@@ -600,7 +600,7 @@ theorem unitPairsNull_of_no_unit_pair {S : Set ℂ} (hno : ∀ x ∈ S, ∀ y �
   rw [UnitPairsNull, this, measure_empty]
 
 /-- A rotation about a point is an isometry: `dist (p + e θ * y) (p + e θ * z) = dist y z`. -/
-theorem dist_rot (p : ℂ) (θ : ℝ) (y z : ℂ) : dist (p + e θ * y) (p + e θ * z) = dist y z := by
+theorem dist_add_e_mul (p : ℂ) (θ : ℝ) (y z : ℂ) : dist (p + e θ * y) (p + e θ * z) = dist y z := by
   rw [dist_eq_norm, dist_eq_norm, show p + e θ * y - (p + e θ * z) = e θ * (y - z) by ring, norm_mul, norm_e, one_mul]
 
 /-- **The placement and the fan** (MA1 § 2.2): for a disjoint measurable cover with no monochromatic unit pair, a Falconer
@@ -648,7 +648,7 @@ theorem fan_tip_ae_mem {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht
     have hrot : ∀ y z : ℂ, dist (q y) (q z) = dist y z := fun y z => by
       simp only [hq]
       rw [show a + v + e θ * (y - a) = (a + v) + e θ * (y - a) from rfl]
-      rw [dist_rot (a + v) θ (y - a) (z - a), dist_eq_norm, dist_eq_norm]; congr 1; ring
+      rw [dist_add_e_mul (a + v) θ (y - a) (z - a), dist_eq_norm, dist_eq_norm]; congr 1; ring
     let C' : ((unitDistance ℂ).induce (V : Set ℂ)).induce {w : ↥(V : Set ℂ) | w ≠ ⟨a, ha⟩} |>.Coloring (Fin k) :=
       SimpleGraph.Coloring.mk f (by
         intro u w huw hfe
@@ -679,7 +679,7 @@ theorem fan_tip_ae_mem {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht
     have hres := hF C' i j hij hav hta'
     have hft := hf ⟨⟨t, ht⟩, hta'⟩
     have hqt : q t = a + v + (r : ℂ) * e (θ + α) := by
-      have h0 := eq_norm_mul_e_arg (t - a)
+      have h0 := self_eq_norm_mul_e_arg (t - a)
       have hrn : (r : ℂ) = ‖t - a‖ := by rw [hr, dist_eq_norm]
       simp only [hq]
       rw [e_add, ← mul_assoc, hrn, mul_comm (‖t - a‖ : ℂ) (e θ), mul_assoc, ← h0]

@@ -963,7 +963,7 @@ theorem phi_closedBall_pos {p c : ℂ} (h1 : 1 / 2 < dist p c) (h2 : dist p c < 
   set α : ℝ := Complex.arg d
   have hdn : ‖d‖ = dist p c := by rw [hd, dist_comm, dist_eq_norm]
   have hα : dist (p + e α) c < 1 / 2 := by
-    have h := eq_norm_mul_e_arg d
+    have h := self_eq_norm_mul_e_arg d
     have : p + e α - c = e α * (1 - (‖d‖ : ℂ)) := by
       have hc' : c = p + d := by rw [hd]; ring
       rw [hc', show p + e α - (p + d) = e α - d by ring]

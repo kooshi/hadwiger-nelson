@@ -696,7 +696,7 @@ theorem exists_circle_point_halfBox {x : ℂ} {θ ε : ℝ} {y' : ℂ} {s₁ t�
   set t := (1 - l) * t₁ + l * t₂ with ht
   have hl1' : dist (framePt x θ s t) y' = 1 := hl1
   have hz : framePt x θ s t - y' = e ((framePt x θ s t - y').arg) := by
-    have := eq_norm_mul_e_arg (framePt x θ s t - y')
+    have := self_eq_norm_mul_e_arg (framePt x θ s t - y')
     rw [← dist_eq_norm, hl1'] at this
     simpa using this
   refine ⟨(framePt x θ s t - y').arg, ?_⟩
@@ -836,7 +836,7 @@ theorem exists_far_point {g ε' ρ u v : ℝ} (hg : 0 < g) (hg1 : g < 1) (hε' :
       rw [this, show (v + κ - v) ^ 2 = κ ^ 2 by ring, hκ2]; ring
 
 theorem exists_phi_of_dist_eq_one {z y' : ℂ} (h : dist z y' = 1) : ∃ φ : ℝ, y' + e φ = z := by
-  have := eq_norm_mul_e_arg (z - y')
+  have := self_eq_norm_mul_e_arg (z - y')
   rw [← dist_eq_norm, h] at this
   exact ⟨(z - y').arg, by rw [← one_mul (e _)]; simp at this; rw [← this]; ring⟩
 

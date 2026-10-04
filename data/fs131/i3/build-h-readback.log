@@ -1,0 +1,11 @@
+slot: waiting (ledger 80 + 40 > budget 90 GiB)
+slot: waiting (ledger 64 + 40 > budget 90 GiB)
+slot: admitted env: mem 40 GiB (hard cap), cpus 4,5,6,7,8,9,10,11
+==> build: this run's full output: build/gate/build/20261004T130158Z-3736565.log
+    ⚠ [3468/3610] Replayed Proofs.HadwigerNelson.Plane.SixFragment
+    warning: Proofs/HadwigerNelson/Plane/SixFragment.lean:844:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SixFragment.lean:849:8: declaration uses `sorry`
+    All targets up-to-date (5348 jobs).
+==> build: OK — all 1735 modules already up to date, nothing built, 1 module(s) with warnings, 2s
+    full output: build/gate/build/20261004T130158Z-3736565.log
+exit=0
