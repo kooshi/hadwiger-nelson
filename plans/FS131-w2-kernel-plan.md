@@ -348,3 +348,145 @@ No mismatch.
 `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree,
 2026-10-04: **OK** — all 1738 modules up to date, nothing built, 2 s (`build/gate/build/20261004T060508Z-1509443.log`); 76 distinct warnings,
 every one `declaration uses 'sorry'`: 28 wave 1's, 48 wave 2's (K2's count).
+
+## Stage 7 — SAVED: the six example rows stated (`Plane/CoverExamples`)
+
+### 7.1 The model (`debruijn-domain-modeling`, invoked fresh, scoped to the six objects)
+
+- **One lattice for three objects.** `tri m n = m + n e(π/3)`: R7's tiles sit on it, DISC7's centres are `(√3/2)·tri` (M2 § 1.6's
+  `c(m, n) = m(√3/2, 0) + n(√3/4, 3/4)` exactly), HC's face centres `L√3 e(π/6)·tri` (§ 1.6's span of `L(3/2, √3/2)`, `L(0, √3)`).
+- **R7 is a colouring given in lattice coordinates**, not a union of tiles: `triCoord z = (a, b)`, cell `(⌊a⌋, ⌊b⌋)`, fractional part `(u, v)`.
+  Inside a cell's down triangle `D(m, n) ⊆ B̄(λ + 1, 1) ∩ B̄(λ + ω, 1)`, so a point there is in `U(m, n)` iff it is within 1 of `λ`, in
+  `U(m + 1, n)` iff within 1 of `λ + 2`, in `U(m, n + 1)` iff within 1 of `λ + 2ω`; on the up half `triQ u v ≤ (u + v)² ≤ 1` holds
+  automatically. So `r7ColTri` is three quadratic tests (`triQ a b = a² + ab + b² = ‖a + bω‖²`) and the colours of § 2.4: ups
+  `2(m mod 2) + (n mod 2)` (cosets of `2Λ`), downs `4 + ((m − n) mod 3)` (`M = ⟨(0, √3), (3/2, √3/2)⟩ = {λ(m, n) : m ≡ n (mod 3)}`, since
+  `(0, √3) = λ(−1, 2)`, `(3/2, √3/2) = λ(1, 1)`). A function, because the row's a.e.-properness and tightness are about an `AeColouring`;
+  its classes `r7Cls` are the family the saturation and boundary clauses read.
+- **DISC7 is a family**, `disc7 a = ⋃ {B̄(c(m, n), 1/2) : (m + 3n) mod 7 = a}` (a cover with overlaps, so no colouring function).
+- **HC is one set parametrized by `g`**, built from § 1.6 literally: down triangles, `U = {z ∈ T_up : t ≥ 2 + g(s)` in its three edge frames`}`,
+  the bands `{|s| < 1/2, 1 < t < ℓ(s)}` with `ℓ(s) = sInf {t : infDist (frame s t) U ≤ 1}`, the face discs. Edges are indexed by an up
+  centroid `(m, n)` and `j : Fin 3` (direction `e(2πj/3)` to the down neighbour); `hcFrame` is `(s, t) ↦ C_u + ((L − √3/6 − t) − s i) w`,
+  with `hcFrameS`, `hcFrameT` its inverse. `G1Bounds Z g` is (G1) as §§ 2.2–2.4 read it; `hcGap Z` is § 1.6's formula.
+- **IRREG's fat set is `fatZ`**: `[−1/2, 1/2]` minus balls of radius `min(4^{−(n+2)}, dist(q_n, ±1/2)/2)` about an enumeration of `ℚ` —
+  closed, nowhere dense, length `≥ 5/6`, `±1/2 ∈`. The proof reads only those four properties, so the Smith–Volterra–Cantor set's
+  construction is incidental; IRREG is stated for every such `Z`.
+- **Refused**: a structure per object; HC by a fundamental domain and its symmetry group (up/down-preserving, so the edge frames would still
+  be needed); the hexagonal colouring Hex7 as an object (DISC7's description, not a clause).
+
+### 7.2 Validation (spec examples, all sorry-free)
+
+- R7: `r7ColTri (1/3) (1/3) = 0` (U(0,0)'s centroid), `(2/3, 2/3) ↦ 4` (D(0,0)'s centroid), **`(11/20, 11/20) ↦ 0`** (a down-half point in
+  U(0,0)'s bulge — the Reuleaux test fires), `(4/3, 1/3) ↦ 2`, `(5/3, 2/3) ↦ 5`, **`(99/100, 1/50) ↦ 4`** (inside D(0,0)'s cusp at the vertex
+  1, outside both bulges by `3·10⁻⁴` — the cusp is not swallowed). `triCoord_add_mul`, `normSq_add_mul` tie the coordinates to `ℂ`.
+- DISC7: `c(1, 2)` has the origin's colour at distance exactly `√21/2`; **adversary**: the neighbours `c(1, 0)`, `c(0, 1)`, `c(1, −1)` get
+  other colours; `0 ∈ disc7 0`.
+- HC: face spacing `L√3 = 2√3 + 1`; the up vertex toward its face centre at distance exactly 2; the facing sides `2` apart in every frame;
+  `0 ∈ hcSet g` for every `g`.
+- Models of hypotheses: `hcZ0_spec` (HC₀, `Z = {±1/2}`, with `hcGap`; closed from the leaf `g1Bounds_hcGap`) for HC; `fatZ_spec` with
+  `g1Bounds_hcGap` for IRREG (used in `not_forall_isRegularMUA`). `fatZ` is closed by a sorry-free example.
+
+### 7.3 The read-backs (each statement against its row, `data/fs131/k2/rows-wave2.md`)
+
+| row | declarations | read-back |
+|---|---|---|
+| FS111-M-R7 | `r7Col` (object); `exists_r7` (closed from `r7_aeColouring`, `r7_not_bandNull`, `r7Cls_saturated`); `r7_boundary` | a.e.-proper: an `AeColouring 7` with `col = r7Col`; tight: `c.Tight`; saturated: `Saturated c.cls` (the row's parenthesis, contact form). Last clause read pointwise: a point in the essential closure of two classes is at distance exactly 1 from a lattice point in the **support** of both ("carries": a down carries its colour at a lattice point by a cusp, of density 0 but in the support). At a lattice point where three up colours meet, each pair has such a centre (`λ₀ + 1`, `λ₀ + ω`, `λ₀ + ω − 1`; checked by hand). **Same** |
+| (defect witness) | `not_forall_semiconcaveWith_one` (closed from `r7Cls_isMaximalCover`, `r7_lowerGraph`, `not_semiconcaveWith_one_lowerArc`) | the literal COVER-SC clause, quantified over every maximal cover, refuted on R7's down class 4 under the lower arc about 0 near `e(π/6)`, `J = (1/10, 1/5)`. `r7Cls_isMaximalCover` is FS111-VMW-R7-MAX's last clause (a derivation entry, not a backlog row), formalized here as a leaf |
+| FS111-M2-DISC7 | `disc7` (object); `disc7_isMaximalCover`, `disc7_isRegularMUA`, `disc7_lens`, `disc7_upperDensity`, `disc7_sum_upperDensity` (closed from the per-class density) | maximal admissible seven-cover; regular classes (`IsRegularMUA`); "overlaps (lenses) have positive measure" read as **every two classes** meet in positive measure (each disc meets one disc of every other colour: the six neighbour differences are `±1, ±3, ∓2`) — the strongest reading, true; densities as `upperDensity`; the sum is the value `2π/(3√3)`, Kershner's optimality not stated (the row names the number) |
+| FS111-M3-BAND | `IsMUA.add_normal_mem_essSupport`; `band_excludes_horn`, `le_one_of_band_unitFree`; `vesica_apex`, `vesica_apex_exact` | (1) **wider and sharper** (messaged to Keryx, a generalization): any MUA set, at any point with the half-box behind it a.e. inside and the normal ray just beyond outside the support, has `m + e θ` in its support — so material at distance exactly 1 over the whole side; no block, diameter or regularity read. (2) the band idealized as its base segment `[p, p + ℓd]`: a horn point past the end at offset `(x, w)` is excluded iff `x − √(1 − w²) ∈ [0, ℓ]`, a window of length exactly `ℓ` ("out to λ" read as the window's length; § 1.5's own sentence "at distance u from the band's left end" holds only at `λ = 1`); "unit-free only if λ ≤ 1" pointwise. (3) "excluded exactly by an apex at depth √3/2, tight at one point": depth `√3/2` excludes the lower half-vesica with equality at exactly `(0, 1 − √3/2)` (C0), and every smaller depth fails |
+| FS111-M3-HC | `hcSet g` (object), `G1Bounds`, `hcGap`; `hc_isRegularMUA`, `hc_band_components` | for every closed null `Z ⊆ [−1/2, 1/2]` holding `±1/2` and every `g` with (G1)'s bounds: `int HC` is a regular MUA set, `supp (int HC) = HC`, and M2-FIX's identity. (G1) carries the lower-parabola bound in place of `|g″| ≤ 1/2` (its only use; **wider**). The Cantor clause **at every `Z`** (the argument reads only that `g` vanishes exactly on `Z`; **wider**): two band points share a component iff no point of `Z` lies between their `s` |
+| FS111-M3-IRREG | `hc_irreg`; `not_forall_isRegularMUA` (closed from `fatZ_spec`, `g1Bounds_hcGap`, `exists_isMUA_ae_le`, `hc_irreg`) | for every closed nowhere dense `Z ⊆ [−1/2, 1/2]` of positive length holding `±1/2` (**wider** than the Smith–Volterra–Cantor set) and every `g` with (G1): unit-avoiding pointwise, `cl A = HC`, `|HC ∖ A| = 0`, `|∂HC| = 0`, the shadow identity, `¬ IsMUA A`, and every MUA `A′ ≥ᵐ A` (a.e. containment, **wider** than `⊆`) has `|∂ supp A′| > 0`; MUA-REG-U false as `¬ ∀ A, IsMUA A → IsRegularMUA A` |
+| FS111-M3-FIXCONV | `not_forall_fix_converse` (closed from `hc_irreg` at `fatZ`) | "the converse of M2-FIX fails" as the negated universal: closed, `cl int F = F`, `|∂F| = 0` (M2 § 1.3's regularity of a closed set), `int F` with null unit pairs and `int F = ℝ² ∖ (F + S¹)` does not force `IsMUA (int F)`. **Same** |
+
+**Generalizations at this stage** (for Keryx; none narrows a row): BAND (1) (messaged); HC's Cantor clause at every `Z`; (G1) with the
+lower-parabola bound; IRREG for every closed nowhere dense `Z` of positive length and a.e. containment.
+
+### 7.4 The plan per leaf (22 new leaves; E easy, M moderate, H hard)
+
+- `r7_aeColouring` (H): measurability (`Int.measurable_floor`, `measurableSet_le`, `Measurable.ite`, countable-valued `r7UpCol ⌊a⌋ ⌊b⌋`); null
+  unit pairs: by the period lattice `{m, n even, m ≡ n (3)}` (index 12) every same-colour pair of points at distance 1 lies in one of finitely
+  many same-colour tile pairs (centroids within 3; § 2.4's 240), each of which either has diameter 1 (one up: only vertex–arc pairs) or is at
+  distance `≥ 1` with the distance-1 pairs on boundary arcs; the pair set is then inside `{x on a circle or arc}` (null). Children:
+  `r7_sameColour_pair` (the finite case table, exact in `ℚ(√3)`, `nlinarith` per pair type after the symmetry reduction), `unitPairsNull_of_subset_boundary`.
+- `r7_not_bandNull` (E–M): in `U(0, 0)` pairs near the vertex `0` and near the arc point `e(π/6)` at distances in `(1 − ε, 1)` form an open
+  nonempty subset of `int U × int U`: positive `Leb ⊗ Leb` measure.
+- `r7Cls_saturated` (H) and `r7_boundary` (M–H): one shared child, `r7_essClosure_classify` — a point in the essential closure of two classes
+  lies on an arc of some `U(m, n)` facing a down (P = {up, down}) or is a lattice point (P = its three up colours; the cusps have density
+  0: two tangent unit circles bound them, area `O(r³)` in `B(x, r)`) — and `r7_arc_centre_colours` (M-R7-FORCE's coset computation: the
+  arc's centre `v` is a vertex of the up and the cusp of the down's colour at `v` is the backward one). Saturation: the up colour is bound by
+  `v` (in `cl` of the up's density set), the down colour by `v` through the cusp.
+- `r7Cls_isMaximalCover` (M–H): `isMaximalCover_iff`; each class MUA through FS111-M2-ZERO (`isMUA_iff_ae_phi_pos`): for a.e. `x` off class
+  `j`, the unit circle about `x` crosses class `j` in an arc (VMW-R7-MAX's strongest-reading saturation made strict a.e.).
+- `r7_lowerGraph` (M): points `e(π/6) + e(2π/3)(s + t i)` within `δ` below the lower arc are outside `B̄(0, 1)` and more than 1 from `2` and
+  `2ω` (`≈ 1.31`, `≈ 1.24` from `e(π/6)`): interior of `D(0, 0)`, colour 4; above it, inside `B(0, 1)` near `e(π/6)`: interior of `U(0, 0)`.
+- `not_semiconcaveWith_one_lowerArc` (E): `u − s²/2` is strictly convex on `J` (`u″ = (1 − s²)^{−3/2} > 1`); or the explicit triple
+  `s = 3/20`, `h = 1/25`.
+- `disc7_isMaximalCover` (M), `disc7_isRegularMUA` (M): `isMaximalCover_iff`; null unit pairs (one disc: only antipodal boundary pairs;
+  two same-colour discs `≥ √21/2 − 1 > 1` apart); maximal: covering radius `√7/2 < 3/2` of the colour lattice (spanned by `c(1, 2)`,
+  `c(−3, 1)`), so for a.e. `z` off the class `1/2 < |z − c| < 3/2` for some centre and the circle crosses that disc; cover: covering radius
+  `1/2` of all centres. Regular: a locally finite union of closed discs is its own support, boundary in circles. Children:
+  `disc7_coveringRadius_colour`, `disc7_coveringRadius_all`.
+- `disc7_lens` (E–M): the disc of colour `a` at a centre and its neighbour with colour difference `b − a` (all six nonzero residues occur)
+  are `√3/2 < 1` apart: their lens has nonempty interior.
+- `disc7_upperDensity` (M–H): child `upperDensity_of_periodic` (a set invariant under a lattice with a bounded fundamental domain `D` has
+  density `|S ∩ D|/|D|`, the ratio over `B(0, R)` converging by counting cells; shared with SUPK's Lemma P), covolume `21√3/8`, one disc
+  `π/4` per cell.
+- `IsMUA.add_normal_mem_essSupport` (M): stage 7.3's argument. Children: `IsMUA.interior_union_unitShadow` (SATC (ii) for one MUA set; the
+  cover version then follows coordinatewise), `essSupport_eq_closure_densitySet`, M2-INT (wave 1), an open set a.e. inside `A` lies in `Ã`.
+- `band_excludes_horn` (E), `le_one_of_band_unitFree` (E): real algebra; `s = (ℓ − 1)/2`, `s + 1`.
+- `vesica_apex` (M): (C0) — from `(x ± 1/2)² + (y − 1)² ≤ 1`, `y ≤ 1`: `x² + (y + √3/2)² ≥ 1`, equality only at `x = 0`, `y = 1 − √3/2`;
+  `nlinarith` with `√3² = 3`. `vesica_apex_exact` (E): `z = (1 − √3/2 + η) i`.
+- `g1Bounds_hcGap` (M–H): gap endpoints `a(s) = sSup (Z ∩ Iic s)`, `b(s) = sInf (Z ∩ Ici s)`; on a gap the polynomial identities of (G1);
+  at points of `Z` the derivative is `0` by `g ≤ dist²/4`; `g′` is `1/2`-Lipschitz across gaps, then Taylor for the lower parabola.
+- `hc_isRegularMUA` (H, the wave's largest example leaf): §§ 2.3–2.4. Children, each stated with `interior Z = ∅` in place of `volume Z = 0`
+  wherever § 4.2 (1) says nullity is unused, so IRREG reuses them: `hcUp_slivers` (G2), `hcBandTop_spec` (G3: `1 ≤ ℓ ≤ 1 + g`, `ℓ = 1` iff
+  `s ∈ Z`, `ℓ` continuous, `{t < ℓ} = {d_U > 1}` on `t < 2`), `hc_unitAvoiding` (§ 2.3: block distances on one period, exact in `ℚ(√3)`; the
+  band's diameter `≤ 1` by the quartic thinning), `hc_sausage_cover` (B1, with H3's quadrilateral), `hc_lemmaNL` (the exterior disc
+  `R = 5/4`, H5's constants), `hc_exclusion` (B2: every `z ∉ int HC` in `HC + S¹`), and, using nullity, `hc_ae_phi_pos` (strictness off the
+  null level sets and `N_e`). Then `isMUA_iff_ae_phi_pos` (wave 1) and regularity (boundary in segments, circles, graphs).
+- `hc_band_components` (M): `hcBandTop_spec`; `hcFrame` is an isometry; over a gap the region `{s ∈ J, 1 < t < ℓ(s)}` is connected
+  (vertical intervals over an interval, `ℓ` continuous); a point of `Z` between gives an empty fibre, separating.
+- `fatZ_spec` (M): `±1/2` survive (radius `≤` half the distance); `|⋃ balls| ≤ Σ 2·4^{−(n+2)} = 1/6`; empty interior by density of `ℚ` and
+  `Denumerable.ofNat` surjective.
+- `exists_isMUA_ae_le` (M): exhaustion by a measure-maximizing sequence (as `exists_isMaximalCover`; the implementer proves one from the other).
+- `hc_irreg` (H): clause (1) from `hc_isRegularMUA`'s nullity-free children; `|E| > 0` by the bulge-crossing argument (`(s, t) ↦ (s + r, s − r)` a
+  local diffeomorphism near `t = 0⁺`, density points of `Z × Z`, the arc-above-band inequality `t·d/r > d²/4`); (2) `E ⊆ K` closed nowhere
+  dense (Baire on `(Z − ρ) ∪ (Z + ρ)`); (3) every completion irregular.
+
+### 7.5 The count
+
+`Plane/CoverExamples` now holds 23 `sorry` leaves (SQ9's and 22 new), and 5 theorems closed from leaves (`exists_r7`,
+`not_forall_semiconcaveWith_one`, `disc7_sum_upperDensity`, `not_forall_isRegularMUA`, `not_forall_fix_converse`) plus `hcZ0_spec`.
+`scripts/Axioms.lean`: 60 new records. `ARCHITECTURE.md`'s row rewritten (imports now `Plane/MaximalCover`, `Plane/Slack`, for `halfBox`);
+`tools/check_architecture.py` PASS.
+
+## Stage 8 — SAVED: inventory item 23 — FS106-COMP's ⟸ reads SUP's attainment; stated as carried content of SUPK's row
+
+**Read**: `plans/FS106-derivation.md`'s FS106-COMP entry ("*Proof:* TQ §3.3 …; QB §2.7") and `plans/FS106-QB-verification.md` §§ 1.2, 2.3,
+2.4, 2.6, 2.7 in full.
+
+**The answer: yes.** QB § 2.7 (ii), verbatim: "If `µ₆(ε) = 1`, the attaining family covers the plane up to a null set, and I-D4's construction
+(re-derived: §2.8, Lemma F with `r → 0`, i.e. `c(x) = min{j : x ∈ supp C_j}`) is proper at every pair at distance in `(1 − ε, 1 + ε)`, contradicting
+V-1.1 at `ε/2`". That is COMP's second clause's ⟸ (`Voronov11 → ∀ ε > 0, µ₆(ε) < 1`, by contraposition), and "the attaining family" is SUP's
+attainment clause ("attained (by a stationary family and by almost every sample of it)"), which FS129-SR2-SUPK's merged form does not claim.
+
+**What exactly is read**: only the value `1`, in the a.e.-cover sense. Upper density `1` alone does not make the uncovered set null; the
+stationary attaining family does (its mean coverage `P(0 covered) = 1` makes each sample's uncovered set null by Fubini). **That case needs no
+stationarity**: QB § 2.4's compactness argument for (c) ⟹ (a), run on the band form, gives it at every `k` — choose translates whose hole in
+`B(x_m, r_m)` is small, take a weak-* limit `F`, `ΣF = 1` a.e., the band form `∫_B F_j (F_j ∗ 1_{annulus})` is weak-* continuous because its
+kernel is `L¹` (QB § 2.3's parenthesis: "no decay is needed" — no Rajchman step, no Krylov–Bogolyubov), and support selection gives a disjoint
+band-null family covering a.e. [hand, one mind, this record].
+
+**Stated**, as carried content of SUP's merged row, in `Plane/Slack` (a leaf, M):
+`exists_bandNull_aeCover_of_mu_eq_one : 0 < ε → mu k ε = 1 → ∃ C, IsPartialColouring C ∧ (∀ j, BandNull (C j) ε) ∧ ∀ᵐ x, ∃ j, x ∈ C j`.
+No statement already read back changes. **Messaged to Keryx** (a merged form that lost a needed clause).
+
+**`forall_mu_six_lt_one_iff`'s leaf plan, corrected**: ⟸ by contraposition — `µ₆(ε) = 1` (it is `≤ 1`), `exists_bandNull_aeCover_of_mu_eq_one`,
+then child `colouring_of_bandNull_aeCover` (D4: `c(x) = min{j : x ∈ supp C_j}` is defined everywhere — every point is in some class's support
+since the union is co-null and there are finitely many classes — and proper at every pair in `(1 − ε, 1 + ε)`), which contradicts `Voronov11` at
+`ε/2`. ⟹ by contraposition — a colouring `f` proper on `[1 − ε, 1 + ε]` (`Voronov11` quantifies over all colourings, measurable or not) is
+pixelated by **cell corners** (cell `Q` gets `f` of its lower-left corner) into a measurable band-free family at `ε − 2√2h`, so
+`µ₆(ε − 2√2h) = 1`. Price M (was H).
+
+**The gate on stages 7–8**: `./scripts/build.sh` under the slot (`--mem 40 --cpus 8`, `MEMMAX=40G BATCH=4`): **OK** — 443 of 443 batches,
+5 modules rebuilt (`Plane/Slack`, `Plane/YesLimit`, `Plane/CoverExamples`, `Proofs`), every warning `declaration uses 'sorry'`, 8 m 40 s
+(`build/gate/build/20261004T062108Z-1588600.log`; its replay prefix lists the pre-edit line numbers too). `tools/check_architecture.py` PASS.

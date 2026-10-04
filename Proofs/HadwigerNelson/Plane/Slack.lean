@@ -80,6 +80,15 @@ equivalence, not a use). -/
 def Voronov11 : Prop :=
   ∀ ε > 0, ¬ ∃ f : ℂ → Fin 6, ∀ x y, 1 - ε ≤ dist x y → dist x y ≤ 1 + ε → f x ≠ f y
 
+/-- **FS106-SUP's attainment clause, at the value FS106-COMP reads** (carried content of FS129-SR2-SUPK's merged row, inventory
+item 23): if `µ_k(ε) = 1`, some partial `k`-colouring whose classes are band-null at `ε` covers almost every point. QB § 2.7
+reaches it through SUP's stationary attaining family (mean coverage `1`); FS106-QB § 2.4's compactness argument for (c) ⟹ (a)
+gives it directly at every `k` — translates to windows of small hole measure, a weak-* limit, the band form continuous because
+its kernel `1_{annulus}` is `L¹` (no Rajchman step, no Krylov–Bogolyubov), and support selection. -/
+theorem exists_bandNull_aeCover_of_mu_eq_one {k : ℕ} {ε : ℝ} (hε : 0 < ε) (h : mu k ε = 1) :
+    ∃ C : Fin k → Set ℂ, IsPartialColouring C ∧ (∀ j, BandNull (C j) ε) ∧ ∀ᵐ x ∂volume, ∃ j, x ∈ C j := by
+  sorry
+
 /-- **FS106-COMP**, second clause: "`µ₆(ε) < 1` for every `ε > 0`" is equivalent to `[Voronov2023]` Thm 1.1. -/
 theorem forall_mu_six_lt_one_iff : (∀ ε > (0 : ℝ), mu 6 ε < 1) ↔ Voronov11 := by
   sorry
