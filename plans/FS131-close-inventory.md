@@ -654,3 +654,14 @@ reason by the close.*
      `unit_clique_verified`, lean4checker replays clean with its controls firing. The audit module proves, against their unchanged definitions, on the standard
      three: `not_outsideDensity_quarter` (the assumed density lemma false at `r = 1/4`), a `OutsideColoring (1/4)` failing `h_safe`, and
      `outside_headline_hypotheses_never_hold` — for every `r ≥ 0`, no six-colouring of the circle satisfies the hypothesis, so the theorem applies to nothing.
+114. **FS131-I2e handed back at stage 7, harness ≈ 330k** (report on its branch; `fs131-w2` at `ded70272`, checked): four of the 16 re-planned leaves —
+     `keptAt_band` (FS106-REM clause 1), `AeColouring.exists_grundy` (FS121-D3-GRUNDY), `face` (FS121-D4-FACE), `exists_face_fails` (FS121-V5-FACE-SHARP's
+     failure half, item 86) — and 31 children; 125 → 90 `sorry` declarations. Keryx's receipt: build log `build/gate/build/20261004T105629Z-2873941.log`
+     (worktree) ends "Build completed successfully (5604 jobs)", 90 distinct warnings, every one `declaration uses \`sorry\``; `data/fs131/i2/i2e-axioms.txt`
+     has no `sorryAx` and only the standard three. Prices held within ×2 (actuals: Cover arcs 45k, `keptAt_band` 25k, `exists_grundy` 60k, `face` 85k,
+     `exists_face_fails` 45k). Generalization: `exists_isMaxIn` with a.e. inclusion (`B ≤ᵐ Tᶜ`) — the trick for any "maximal inside a complement" argument.
+     Its "item 100 has no row" is mistaken: item 100 is filed. Open: 12 of the 16 re-planned leaves; Cover 2, Slack 46, FalconerReduction 9, YesLimit 4,
+     Dyadic 12 `sorry` lines, plus K2d's three files. **Next on wave 2**: the Opus-implementer trial (item 103), when an Opus slot frees (K2d or W2); it
+     merges `fs131-w2d` first if K2d has handed back. Credit: I2e, for the item-100 slip found and four hard leaves closed.
+115. **Brief FS131-I4, wave 4's first implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I4-wave4.md`, gated PASS; carries item 112's cusp note
+     for `noBoth`). Launched in the half slot I2e freed: slots 0.5 (I3e) + 0.5 (I4) + 1 (K2d) + 1 (W2) = 3, plus EXT-HN1 in the special slot.
