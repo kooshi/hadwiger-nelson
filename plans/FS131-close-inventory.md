@@ -945,3 +945,7 @@ reason by the close.*
      land before wave 2's gate. Left: Slack 39, CoverExamples 44, Dyadic 4 (`dyadicConclusion_of_minpoly`, the Kummer–Dedekind engine, the hard one), YesLimit 4
      (waits on `chiM0_le_iff_muZero_eq_one`). Recipe: `QuasiMeasurePreserving.ae` times out unless `(p := …)` is explicit. Its re-pricing: about a third of
      K2c's table at the Sonnet rate. The half slot it freed waits for a whole one (implementers are Opus).
+149. **A stray wait loop stopped** (Keryx): FS131-I2g left a shell loop in `fs131-w2` (PID 3517281, 28 min) waiting for its build log's **last** line to contain
+     "build: "; the build finished OK at 07:36 (`build/gate/build/20261004T122644Z-3444226.log`) but printed that word on the second-to-last line, so the
+     loop would never end, and on ending it would have resumed I2g past its hand-back. Killed by PID; it forfeits nothing (a `sleep 10` poll, no work). Lesson
+     for briefs: a wait loop matches the build's result line anywhere in the log's tail, not only its last line.
