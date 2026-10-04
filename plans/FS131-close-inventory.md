@@ -1520,3 +1520,17 @@ reason by the close.*
      **Routing** (Keryx): GAP-ELEVEN → an Ephodos job (FS131-E4) in the next free slot, ahead of wave 5's implementer, since it bears on rows 135 and 137 —
      its questions: is the enclosure case excluded under H at a fixed `u`; if not, which repair holds and what it costs `localDense`, N3-DENSE3 and CV-EXISTS;
      and do rows 134, 135, 137 as filed rest on the local form at a fixed `u` or on the global form after hole-filling. Rulings on items 2–5 at KB's hand-back.
+214. **FS131-I2l handed back at stage 25, harness ≈ 498k** (report `data/fs131/reports/FS131-I2l.md` on `fs131-w2`; branch at `63ffebec`, checked): 23 → 16.
+     **[kernel] on the branch, standard three**: **FS111-M-R7 sorry-free** — `r7_aeColouring` (R7 a measurable seven-colouring with null monochromatic unit
+     pairs), `exists_r7` (tight and saturated), `r7Cls_isMaximalCover` (FS111-VMW-R7-MAX), `r7Cls_saturated`; the seven R7 children; 45 new children, two
+     general (`reuleaux_unitPair` for any unit equilateral triangle; `phi_pos_of_star` / `phi_pos_of_mem_open` for any measurable set). Keryx's receipts: build
+     log `build/gate/build/20261004T192247Z-1722400.log` (w2) "Build completed successfully (5732 jobs)", 16 distinct warnings, all `sorry`, no other kind;
+     `sorry` lines by count: CoverExamples 16, no other file; `data/fs131/i2/i2l-axioms.txt` prints `r7_aeColouring`, `exists_r7`, `r7Cls_isMaximalCover` on the
+     standard three and `hc_irreg` with `sorryAx`. Route correction (to K2d's plan § 16, R7 row): the density route for `r7_boundary_lattice` was not needed —
+     all three down colours are in the support at every lattice point, and only the seventh colour must be shown absent near `λ₀`. Re-pricing: R7's seven
+     leaves ≈ 75k against K2d's 280k. Left: HC/IRREG 16, the carriers (the `IsEmpty (CPColouring 0/1)` instance question still open), the gate, the landing.
+     **Next**: FS131-I2m (Opus), in the same slot.
+215. **Brief FS131-I2m, wave 2's thirteenth implementer** (Opus; `data/fs131/briefs/FS131-I2m-wave2.md`, derived by script from I2l's, gated PASS): HC/IRREG's 16,
+     the carriers, the gate and the landing. Launched in I2l's slot: 1 (I4h) + 1 (IC1) + 1 (KB) + 1 (I2m) = 4. **Second instance of item 206's gate defect**: my
+     script's global rename turned the quoted source heading "(FS131-I2l)" into "(FS131-I2m)", a heading that does not exist, and the gate passed it; caught by
+     reading the draft, fixed before launch. The gate's § check is evidently by prefix or looser; the agent-forge repro is owed (item 206).
