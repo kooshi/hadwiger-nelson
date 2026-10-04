@@ -2238,6 +2238,66 @@ theorem ringArc_sideCone_other (hF : F.Valid) {z : ℂ} (hz : z ∈ F.dom) {θ�
     · exact Set.disjoint_left.mp (ringArc_sideCone_inner hF hA) (Or.inr hd) h
     · exact Set.disjoint_left.mp (ringArc_sideCone_outer hF hA) (Or.inr hd) h
 
+/-- An interval inside `angleIcc A B` (of width below `2π`) lies in one lift. -/
+theorem exists_lift_of_Icc_subset_angleIcc {A B p q : ℝ} (hAB : B - A < 2 * π) (hpq : p ≤ q)
+    (h : Icc p q ⊆ angleIcc A B) : ∃ j : ℤ, A + 2 * π * j ≤ p ∧ q ≤ B + 2 * π * j := by
+  have hp := h ⟨le_rfl, hpq⟩
+  obtain ⟨j, hj1, hj2⟩ := mem_iUnion.mp hp
+  refine ⟨j, hj1, ?_⟩
+  by_contra hq
+  push Not at hq
+  set η : ℝ := min (q - (B + 2 * π * j)) ((A + 2 * π * (j + 1) - (B + 2 * π * j)) / 2) with hη
+  have hη0 : 0 < η := lt_min (by linarith) (by linarith [Real.pi_pos])
+  have hx : B + 2 * π * j + η ∈ Icc p q :=
+    ⟨by linarith, by linarith [min_le_left (q - (B + 2 * π * j)) ((A + 2 * π * (j + 1) - (B + 2 * π * j)) / 2)]⟩
+  obtain ⟨i, hi1, hi2⟩ := mem_iUnion.mp (h hx)
+  have hlt : (j : ℝ) < i := by
+    by_contra hc
+    push Not at hc
+    have : (i : ℝ) * (2 * π) ≤ j * (2 * π) := mul_le_mul_of_nonneg_right hc (by positivity)
+    linarith
+  have hlt' : j + 1 ≤ i := by exact_mod_cast (by exact_mod_cast hlt : j < i)
+  have : (j + 1 : ℝ) ≤ i := by exact_mod_cast hlt'
+  have h2 : η ≤ (A + 2 * π * (j + 1) - (B + 2 * π * j)) / 2 := min_le_right _ _
+  nlinarith [Real.pi_pos]
+
+theorem cone_region_tile {z : ℂ} (hz : z ∈ F.dom) {d : Fin k} (hd : d ∈ F.coloursAt z)
+    (hone : ∀ d T T', F.TileOf d T → F.TileOf d T' → z ∈ closure T → z ∈ closure T' → T = T')
+    (hint : ∀ T, F.IsTile T → z ∈ closure T → ∃ β₁ β₂, β₁ < β₂ ∧ β₂ ≤ β₁ + 2 * π ∧ coneAt T z = angleIcc β₁ β₂) :
+    ∃ T, F.TileOf d T ∧ z ∈ closure T ∧ ∃ β₁ β₂, β₁ < β₂ ∧ coneAt (F.region d) z = angleIcc β₁ β₂ ∧
+      coneAt T z = angleIcc β₁ β₂ := by
+  obtain ⟨T, hT, hzT⟩ := (F.mem_coloursAt_iff_exists_tileOf hz).mp hd
+  obtain ⟨β₁, β₂, h12, -, hc⟩ := hint T hT.1 hzT
+  refine ⟨T, hT, hzT, β₁, β₂, h12, ?_, hc⟩
+  rw [F.coneAt_region_eq_biUnion hz d, ← hc]
+  apply Set.Subset.antisymm
+  · intro β hβ
+    obtain ⟨T', hT', hβ'⟩ := mem_iUnion₂.mp hβ
+    rwa [hone d T' T hT'.1 hT hT'.2 hzT] at hβ'
+  · intro β hβ
+    exact mem_iUnion₂.mpr ⟨T, ⟨hT, hzT⟩, hβ⟩
+
+theorem overlap_false {d e : Fin k} {Td Te : Set ℂ} (hTd : F.TileOf d Td) (hTe : F.TileOf e Te) (hde : d ≠ e)
+    {z : ℂ} (hz : z ∈ F.dom) {x₁ x₂ : ℝ} (hx : x₁ < x₂) (hd : Icc x₁ x₂ ⊆ coneAt Td z)
+    (he : Icc x₁ x₂ ⊆ coneAt Te z) : False := by
+  refine coneAt_interiors_disjoint hTd.1 hTe.1 ?_ hz hx (Ioo_subset_Icc_self.trans hd) (Ioo_subset_Icc_self.trans he)
+  rintro rfl
+  obtain ⟨p, hp⟩ := hTd.1.nonempty
+  exact hde ((hTd.2 hp).symm.trans (hTe.2 hp) |> fun h => by simpa using h)
+
+theorem disj_lifts {θ₁ θ₂ x : ℝ} (h : θ₁ < θ₂) (i j : ℤ) (h1 : θ₂ - π / 2 + 2 * π * i ≤ x ∧ x ≤ θ₁ + π / 2 + 2 * π * i)
+    (h2 : θ₂ + π / 2 + 2 * π * j ≤ x ∧ x ≤ θ₁ + 3 * π / 2 + 2 * π * j) : False := by
+  have hπ := Real.pi_pos
+  have a1 : (j : ℝ) < i := by
+    by_contra hc; push Not at hc
+    nlinarith [mul_le_mul_of_nonneg_right hc (by positivity : (0:ℝ) ≤ 2 * π)]
+  have a2 : (i : ℝ) < j + 1 := by
+    by_contra hc; push Not at hc
+    nlinarith [mul_le_mul_of_nonneg_right hc (by positivity : (0:ℝ) ≤ 2 * π)]
+  have b1 : j < i := by exact_mod_cast a1
+  have b2 : i < j + 1 := by exact_mod_cast a2
+  omega
+
 /-- **FS116-V5-U1**, the four-colour clause at the class it reads: if `z` (in the domain) carries both side colours of an arc
 of `Γ` on `ω(z)` (the arc is both-kind), each colour has at most one tile with `z` in its closure, and each such tile's cone
 at `z` is one closed angular interval of positive length (`β₁ < β₂`: no cusp at `z`; inventory item 112), then `z` carries at
@@ -2247,7 +2307,75 @@ theorem four_of_bothKind (hF : F.Valid) {z : ℂ} (hz : z ∈ F.dom) {θ₁ θ�
     (hone : ∀ d T T', F.TileOf d T → F.TileOf d T' → z ∈ closure T → z ∈ closure T' → T = T')
     (hint : ∀ T, F.IsTile T → z ∈ closure T → ∃ β₁ β₂, β₁ < β₂ ∧ β₂ ≤ β₁ + 2 * π ∧ coneAt T z = angleIcc β₁ β₂) :
     4 ≤ (F.coloursAt z).ncard := by
-  sorry
+  have hπ := Real.pi_pos
+  have h12 : θ₁ < θ₂ := hA.1
+  obtain ⟨Tc, hTc, hzTc, δ₁, δ₂, hδ, hcone_c, hconeT_c⟩ := cone_region_tile hz hc hone hint
+  obtain ⟨Tc', hTc', hzTc', ε₁, ε₂, hε, hcone_c', hconeT_c'⟩ := cone_region_tile hz hc' hone hint
+  have hin_c := ringArc_cone_inner hF hA
+  have hin_c' := ringArc_cone_outer hF hA
+  rw [hcone_c] at hin_c
+  rw [hcone_c'] at hin_c'
+  obtain ⟨jc, hjc1, hjc2⟩ := exists_lift_of_Icc_subset_angleIcc (A := θ₂ - π / 2) (B := θ₁ + π / 2) (by linarith)
+    hδ.le ((Icc_subset_angleIcc δ₁ δ₂).trans hin_c)
+  obtain ⟨jd, hjd1, hjd2⟩ := exists_lift_of_Icc_subset_angleIcc (A := θ₂ + π / 2) (B := θ₁ + 3 * π / 2) (by linarith)
+    hε.le ((Icc_subset_angleIcc ε₁ ε₂).trans hin_c')
+  -- c ≠ c'
+  have hcc' : c ≠ c' := by
+    rintro rfl
+    have hmem : δ₁ ∈ coneAt (F.region c) z := by rw [hcone_c]; exact Icc_subset_angleIcc δ₁ δ₂ ⟨le_rfl, hδ.le⟩
+    rw [hcone_c'] at hmem
+    obtain ⟨i, hi1, hi2⟩ := mem_iUnion.mp hmem
+    exact disj_lifts (x := δ₁) h12 jc (jd + i) ⟨by linarith, by linarith⟩ ⟨by push_cast; linarith, by push_cast; linarith⟩
+  -- the side directions
+  obtain ⟨d₁, hd₁c, hd₁c', hd₁⟩ := F.ringArc_sideCone_other hF hz hA (β := (θ₁ + θ₂) / 2 - π / 2)
+    (Or.inl (Ioo_subset_angleIoo _ _ ⟨by linarith, by linarith⟩))
+  obtain ⟨d₂, hd₂c, hd₂c', hd₂⟩ := F.ringArc_sideCone_other hF hz hA (β := (θ₁ + θ₂) / 2 + π / 2)
+    (Or.inr (Ioo_subset_angleIoo _ _ ⟨by linarith, by linarith⟩))
+  have hd₁d₂ : d₁ ≠ d₂ := by
+    rintro rfl
+    have hdz : d₁ ∈ F.coloursAt z := mem_closure_of_mem_coneAt hd₁
+    obtain ⟨Td, hTd, hzTd, γ₁, γ₂, hγ, hcone_d, hconeT_d⟩ := cone_region_tile hz hdz hone hint
+    rw [hcone_d] at hd₁ hd₂
+    obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hd₁
+    obtain ⟨n, hn1, hn2⟩ := mem_iUnion.mp hd₂
+    have hmπ : ∀ a b : ℤ, a ≤ b → 2 * π * a ≤ 2 * π * b := fun a b h =>
+      mul_le_mul_of_nonneg_left (by exact_mod_cast h) (by positivity)
+    rcases le_or_gt n m with hnm | hnm
+    · have hnm' := hmπ n m hnm
+      refine overlap_false hTd hTc hd₁c hz (x₁ := δ₁ - 2 * π * (m + jc)) (x₂ := δ₂ - 2 * π * (m + jc))
+        (by linarith) ?_ ?_
+      · rw [hconeT_d]
+        intro x hx
+        refine Icc_subset_angleIcc γ₁ γ₂ ⟨?_, ?_⟩
+        · linarith [hx.1]
+        · linarith [hx.2]
+      · rw [hconeT_c]
+        intro x hx
+        exact mem_iUnion.mpr ⟨-(m + jc), by push_cast at hx ⊢; constructor <;> linarith [hx.1, hx.2]⟩
+    · have hnm' := hmπ (m + 1) n (by omega)
+      refine overlap_false hTd hTc' hd₁c' hz (x₁ := ε₁ - 2 * π * (m + 1 + jd)) (x₂ := ε₂ - 2 * π * (m + 1 + jd))
+        (by linarith) ?_ ?_
+      · rw [hconeT_d]
+        intro x hx
+        refine Icc_subset_angleIcc γ₁ γ₂ ⟨?_, ?_⟩
+        · push_cast at hnm'; linarith [hx.1]
+        · linarith [hx.2]
+      · rw [hconeT_c']
+        intro x hx
+        exact mem_iUnion.mpr ⟨-(m + 1 + jd), by push_cast at hx ⊢; constructor <;> linarith [hx.1, hx.2]⟩
+  have hd₁z : d₁ ∈ F.coloursAt z := mem_closure_of_mem_coneAt hd₁
+  have hd₂z : d₂ ∈ F.coloursAt z := mem_closure_of_mem_coneAt hd₂
+  classical
+  have hcard : ({c, c', d₁, d₂} : Finset (Fin k)).card = 4 := by
+    rw [Finset.card_insert_of_notMem, Finset.card_insert_of_notMem, Finset.card_pair hd₁d₂]
+    · simp [Ne.symm hd₁c', Ne.symm hd₂c']
+    · simp [hcc', Ne.symm hd₁c, Ne.symm hd₂c]
+  have hsub : (↑({c, c', d₁, d₂} : Finset (Fin k)) : Set (Fin k)) ⊆ F.coloursAt z := by
+    intro x hx
+    simp only [Finset.coe_insert, Finset.coe_singleton, mem_insert_iff, mem_singleton_iff] at hx
+    rcases hx with rfl | rfl | rfl | rfl <;> assumption
+  have := Set.ncard_le_ncard hsub (Set.toFinite _)
+  rwa [Set.ncard_coe_finset, hcard] at this
 
 /-- **FS116-V5-U1**, the row's four-colour clause: in a non-Siamese simple map, a point `z` of the domain carrying both side
 colours of an arc of `Γ` on `ω(z)` carries at least four colours, provided no tile with `z` in its closure has a cone reduced to
@@ -2374,6 +2502,30 @@ theorem flank_cone (hF : F.Valid) {t : Set ℂ} (ht : F.IsTile t) {p : ℂ} {ψ 
     rw [closure_Ioo (by linarith)] at this
     exact this ⟨le_rfl, by linarith⟩
 
+theorem add_notMem_angleIcc {a b u : ℝ} (hu : 0 < u) (hu2 : u < 2 * π - (b - a)) : b + u ∉ angleIcc a b := by
+  intro h
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp h
+  have hπ := Real.pi_pos
+  have hm : (0 : ℝ) < m := by
+    by_contra hc; push Not at hc
+    nlinarith [mul_nonneg (neg_nonneg.2 hc) (by positivity : (0 : ℝ) ≤ 2 * π)]
+  have hm1' : 1 ≤ m := by have : 0 < m := by exact_mod_cast hm
+                          omega
+  have hm' : (1 : ℝ) ≤ m := by exact_mod_cast hm1'
+  nlinarith [mul_le_mul_of_nonneg_right hm' (by positivity : (0 : ℝ) ≤ 2 * π)]
+
+theorem sub_notMem_angleIcc {a b u : ℝ} (hu : 0 < u) (hu2 : u < 2 * π - (b - a)) : a - u ∉ angleIcc a b := by
+  intro h
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp h
+  have hπ := Real.pi_pos
+  have hm : (m : ℝ) < 0 := by
+    by_contra hc; push Not at hc
+    nlinarith [mul_nonneg hc (by positivity : (0 : ℝ) ≤ 2 * π)]
+  have hm1' : m ≤ -1 := by have : m < 0 := by exact_mod_cast hm
+                           omega
+  have hm' : (m : ℝ) ≤ -1 := by exact_mod_cast hm1'
+  nlinarith [mul_le_mul_of_nonneg_right hm' (by positivity : (0 : ℝ) ≤ 2 * π)]
+
 /-- **FS116-Y4-FLANK**, the edges exist: at `y` (in the domain) under the cone hypotheses, `t`'s edge leaving `y` in the
 direction `ψ + 210°` is an initial piece of an arc of the map lying in `cl t`; likewise at `y'`. -/
 theorem flank_edge_exists (hF : F.Valid) {t : Set ℂ} (ht : F.IsTile t) {p : ℂ} {ψ : ℝ}
@@ -2382,13 +2534,18 @@ theorem flank_edge_exists (hF : F.Valid) {t : Set ℂ} (ht : F.IsTile t) {p : �
     (hcy' : Ioo (ψ + 7 * π / 6) (ψ + 3 * π / 2) ⊆ coneAt t (ringPt p (ψ + π / 3))) :
     (∃ α ∈ F.arcs, ∃ B, α.InitialPiece (ringPt p ψ) (ψ + 7 * π / 6) B ∧ B ⊆ closure t) ∧
       ∃ α' ∈ F.arcs, ∃ B', α'.InitialPiece (ringPt p (ψ + π / 3)) (ψ + 7 * π / 6) B' ∧ B' ⊆ closure t := by
-  sorry
-
-/-- `e(σ π/2) = σ i` for `σ = ±1`. -/
-theorem e_sigma_half {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) : e (σ * (π / 2)) = (σ : ℂ) * I := by
-  rcases hσ with rfl | rfl
-  · simp [e_pi_div_two]
-  · rw [show (-1 : ℝ) * (π / 2) = -(π / 2) by ring, e_neg]; simp
+  have hπ := Real.pi_pos
+  obtain ⟨h1, h2, h3, h4⟩ := flank_cone hF ht hy hy' hcy hcy'
+  refine ⟨exists_initialPiece_of_cone hyd ht (σ := 1) (Or.inl rfl) h2 (u₁ := π) hπ ?_,
+    exists_initialPiece_of_cone hy'd ht (σ := -1) (Or.inr rfl) h4 (u₁ := π) hπ ?_⟩
+  · intro u hu hu1 hmem
+    have := h1 hmem
+    rw [one_mul] at this
+    exact add_notMem_angleIcc (a := ψ + π / 6) (b := ψ + 7 * π / 6) hu (by linarith) this
+  · intro u hu hu1 hmem
+    have := h3 hmem
+    rw [neg_one_mul, ← sub_eq_add_neg] at this
+    exact sub_notMem_angleIcc (a := ψ + 7 * π / 6) (b := ψ + 13 * π / 6) hu (by linarith) this
 
 /-- An initial piece of an arc leaving `y` in the direction `i m` (`‖m‖ = 1`): either the arc is a segment and the piece
 contains `y + ε i m`, or it is circular and contains the points `y + σρ m (e(σt) − 1)`, `0 ≤ t ≤ ε`, `σ = ±1`. -/

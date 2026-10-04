@@ -304,6 +304,24 @@ Axioms: scratch only (`lake env lean`), not the gate; the stage build log is `da
   Then the four colours `c, c', d₁, d₂` (`d₁ ≠ d₂` since a common interval cone would contain the cone of `c` or of `c'`).
 * `flank_edge_exists`. Same sector machinery: if no arc through `y` leaves in direction `δ`, a sector about `δ` is interior and in `t`, contradicting `cone ⊆ [ψ+30°, ψ+210°]`; then the arc piece and `B ⊆ closure t` from the neighbouring sector. **`localSectors` (inventory item 126) is not stated and not needed by this route** as far as it goes (it uses `GoodAt`, `curveAt` and a generic-direction sector lemma instead); wave 4's implementer should state it after wave 3 lands.
 
+## Stage 7 — SAVED (FS131-I3g): readback; the inversion engine; `four_of_bothKind` and `flank_edge_exists` proved; 2 leaves left
+
+**Readback.** The three brief quotations match their sources (plan § 6.1 item 3; plan § 7.2 "It may"; Stage 6 above). The branch was `5537611a`; it builds (`build/gate/build/20261004T120117Z-3341389.log`: "build: OK", 2 modules with warnings, 4 `sorry`).
+I may add children and foundation lemmas; I may not change a § 5 statement or a definition of `LocalMap`, `CircleColouring`, `SixFragment`; no axiom, no `native_decide`. Rulings from Keryx in force: the engine's general lemmas are public in `Plane/LocalStructure` (inventory item 135); `localSectors` is to be stated in the plan's branch form after the two leaves (item 136); `Simple.coneAt_eq_angleIcc_sep` is to be stated beside it (item 139).
+
+**The engine** (end of `Plane/LocalStructure`, all public): the inversion chart `rotD y u w = (w - y) conj u`, `invC ζ = (conj ζ)⁻¹`, the wedge `Rgn y u N m` (`N |ζ|² < Re ζ`, `|Im ζ| < m Re ζ`; in the inverted plane the convex `Kinv N m`), the level `levD y u σ w = σ Im ν`. Results:
+`isPreconnected_Rgn_lev` (a wedge cut by an order-connected level set is the image of a convex set under the inversion, so preconnected),
+`exists_mem_Rgn_of_mem_coneAt` (a direction in a cone puts points in every wedge about it), `ray_mem_Rgn`,
+`GoodAt.exists_wedge` (in a good ball a wedge about `u` meets an arc only if the arc passes through `y` tangent to `u`),
+`GoodAt.exists_generic_dir`, **`coneAt_interiors_disjoint`** (distinct tiles' cones at a point of the domain share no open interval),
+`Arc.exists_initialPiece_of_approach` (an arc approaching `y` along a tangent direction has an initial piece inside any wedge; children `tang_circ`, `rotD_circ`, `circ_mem_Rgn`, `circ_gap_aux`, `circ_gap_false`, `circ_initialPiece`, `seg_initialPiece`),
+**`exists_initialPiece_of_cone`** (if a tile approaches `y` along `δ` but along no `δ + σu`, `0<u<u₁`, an arc has an initial piece in direction `δ` lying in the tile's closure; the levels of the present tangent arcs cut the wedge into convex regions, the top boundary of the region holding the tile is such an arc).
+`ArcMap.e_sigma_half` moved from `RingGerm` to the engine (position only).
+
+**Proved in `Plane/RingGerm`** (statements unchanged): `four_of_bothKind` (children `exists_lift_of_Icc_subset_angleIcc`, `cone_region_tile`, `overlap_false`, `disj_lifts`: the two side cones hold colours `d₁ ≠ d₂`, else one tile's interval cone would overlap the cone of `c` or of `c'` in an open interval) and `flank_edge_exists` (children `add_notMem_angleIcc`, `sub_notMem_angleIcc`; both clauses are the engine's `exists_initialPiece_of_cone` with `σ = 1` at `y` and `σ = -1` at `y'`).
+Scratch audit (`lake env lean` over scratch oleans, not the gate): all `[propext, Classical.choice, Quot.sound]`.
+Open at this stage: `sixFrag_valid`, `sixFrag_nonSiamese` (2 `sorry`); then `localSectors`, `Simple.coneAt_eq_angleIcc_sep`.
+
 ## Theorems this phase proved (FS131-I3f)
 
 Scratch audit only, not the gate; statements as the skeleton gave them. **FS116-Y2-SIXFRAG**, one clause: `HadwigerNelson.Plane.sixCol_locallyConstant` (`[propext, Classical.choice, Quot.sound]` expected; to be read from the gate log), so `sixFrag` itself is now free of its own `sorry`.

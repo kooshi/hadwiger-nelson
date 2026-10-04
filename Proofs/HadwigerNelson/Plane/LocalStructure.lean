@@ -29,7 +29,8 @@ these forward from wave 4's foundation). Pure topology of `ArcMap`: no validity,
 * **Interval cones in a simple map** (`Simple.coneAt_eq_angleIcc`): each tile's cone at a point of its closure is one closed
   angular interval.
 
-Every leaf is `sorry` until wave 3's implementer lands it (`plans/FS131-w3-kernel-plan.md` § the leaf plans).
+The inversion engine at the end of the module (`rotD`, `invC`, `Rgn`, `levD`: the chart `ζ ↦ ζ/|ζ|²` about a point turns every
+curve through it into a line) gives the wedge lemma, tiles' cones with disjoint interiors, and initial pieces of arcs.
 -/
 
 namespace HadwigerNelson.Plane
@@ -2460,6 +2461,1114 @@ theorem Simple.coneAt_eq_angleIcc (hS : F.Simple) {T : Set ℂ} (hT : F.IsTile T
   exact (hS.1 T hT).coneAt_eq_angleIcc hT.isOpen hx
 
 end Simple
+
+end ArcMap
+
+/-! ## The inversion engine: wedges about a direction, cones with disjoint interiors, initial pieces -/
+
+/-- `e(σ π/2) = σ i` for `σ = ±1`. -/
+theorem ArcMap.e_sigma_half {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) : e (σ * (π / 2)) = (σ : ℂ) * I := by
+  rcases hσ with rfl | rfl
+  · simp [e_pi_div_two]
+  · rw [show (-1 : ℝ) * (π / 2) = -(π / 2) by ring, e_neg]; simp
+
+/-! ## Inversion coordinates at a point -/
+
+/-- The displacement from `y`, rotated by `-δ` where `u = e δ`: the direction `u` becomes the positive real axis. -/
+noncomputable def rotD (y u w : ℂ) : ℂ := (w - y) * (starRingEnd ℂ) u
+
+/-- The inversion `ζ ↦ ζ / |ζ|²` (it is `(conj ζ)⁻¹`). -/
+noncomputable def invC (ζ : ℂ) : ℂ := ((starRingEnd ℂ) ζ)⁻¹
+
+theorem invC_invC (ζ : ℂ) : invC (invC ζ) = ζ := by
+  simp [invC, map_inv₀]
+
+theorem invC_re (ζ : ℂ) : (invC ζ).re = ζ.re / Complex.normSq ζ := by
+  simp [invC, Complex.inv_re]
+
+theorem invC_im (ζ : ℂ) : (invC ζ).im = ζ.im / Complex.normSq ζ := by
+  simp [invC, Complex.inv_im]
+
+theorem invC_ne_zero {ζ : ℂ} (h : ζ ≠ 0) : invC ζ ≠ 0 := by
+  simp [invC, h]
+
+theorem continuousOn_invC : ContinuousOn invC {ζ : ℂ | ζ ≠ 0} := by
+  unfold invC
+  exact ContinuousOn.inv₀ (Complex.continuous_conj.continuousOn) (fun ζ hζ => by simpa using hζ)
+
+theorem rotD_eq (y u w : ℂ) (hu : ‖u‖ = 1) : (w - y) = rotD y u w * u := by
+  unfold rotD
+  have : (starRingEnd ℂ) u * u = 1 := by
+    rw [mul_comm, Complex.mul_conj, Complex.normSq_eq_norm_sq, hu]; simp
+  calc w - y = (w - y) * ((starRingEnd ℂ) u * u) := by rw [this, mul_one]
+    _ = _ := by ring
+
+theorem normSq_rotD (y u w : ℂ) (hu : ‖u‖ = 1) : Complex.normSq (rotD y u w) = Complex.normSq (w - y) := by
+  unfold rotD
+  simp [map_mul, Complex.normSq_eq_norm_sq, hu]
+
+theorem rotD_ne_zero_iff (y u w : ℂ) (hu : ‖u‖ = 1) : rotD y u w ≠ 0 ↔ w ≠ y := by
+  unfold rotD
+  have hu0 : (starRingEnd ℂ) u ≠ 0 := by
+    intro h; rw [map_eq_zero] at h; simp [h] at hu
+  simp [hu0, sub_eq_zero]
+
+/-- The wedge region of directions near `u` at distance below `1/N`, in coordinates: in the inverted plane
+it is the convex set `{ν : N < Re ν, |Im ν| < m Re ν}`. -/
+def Rgn (y u : ℂ) (N m : ℝ) : Set ℂ :=
+  {w | w ≠ y ∧ N * Complex.normSq (rotD y u w) < (rotD y u w).re ∧ |(rotD y u w).im| < m * (rotD y u w).re}
+
+/-- The level function: `σ Im ν` in the inverted plane. -/
+noncomputable def levD (y u : ℂ) (σ : ℝ) (w : ℂ) : ℝ := σ * (rotD y u w).im / Complex.normSq (rotD y u w)
+
+/-- The inverted wedge. -/
+def Kinv (N m : ℝ) : Set ℂ := {ν | N < ν.re ∧ |ν.im| < m * ν.re}
+
+theorem mem_Rgn_iff {y u w : ℂ} (hu : ‖u‖ = 1) (N m : ℝ) :
+    w ∈ Rgn y u N m ↔ w ≠ y ∧ invC (rotD y u w) ∈ Kinv N m := by
+  by_cases hw : w = y
+  · simp [Rgn, hw]
+  · have hζ : rotD y u w ≠ 0 := (rotD_ne_zero_iff y u w hu).mpr hw
+    have hpos : 0 < Complex.normSq (rotD y u w) := Complex.normSq_pos.mpr hζ
+    simp only [Rgn, Kinv, mem_setOf_eq, invC_re, invC_im, hw, ne_eq, not_false_eq_true, true_and]
+    rw [lt_div_iff₀ hpos, abs_div, abs_of_pos hpos, ← mul_div_assoc, div_lt_div_iff_of_pos_right hpos]
+
+theorem levD_eq {y u w : ℂ} (σ : ℝ) : levD y u σ w = σ * (invC (rotD y u w)).im := by
+  rw [invC_im]; unfold levD; ring
+
+/-- The wedge, cut by a level interval, is the image of a convex set under the inversion: so it is preconnected. -/
+theorem isPreconnected_Rgn_lev {y u : ℂ} (hu : ‖u‖ = 1) {N m : ℝ} (hN : 0 < N) (σ : ℝ) {I : Set ℝ}
+    (hI : I.OrdConnected) : IsPreconnected {w ∈ Rgn y u N m | levD y u σ w ∈ I} := by
+  set K : Set ℂ := {ν | ν ∈ Kinv N m ∧ σ * ν.im ∈ I} with hK
+  have hconv : Convex ℝ K := by
+    rw [convex_iff_forall_pos]
+    intro x hx y hy a b ha hb hab
+    obtain ⟨⟨hx1, hx2⟩, hx3⟩ := hx
+    obtain ⟨⟨hy1, hy2⟩, hy3⟩ := hy
+    have hre : (a • x + b • y).re = a * x.re + b * y.re := by simp
+    have him : (a • x + b • y).im = a * x.im + b * y.im := by simp
+    refine ⟨⟨?_, ?_⟩, ?_⟩
+    · rw [hre]; nlinarith [mul_pos ha (sub_pos.2 hx1), mul_pos hb (sub_pos.2 hy1)]
+    · rw [hre, him]
+      rw [abs_lt] at hx2 hy2 ⊢
+      constructor <;> nlinarith [mul_pos ha (sub_pos.2 hx2.1), mul_pos ha (sub_pos.2 hx2.2), mul_pos hb (sub_pos.2 hy2.1), mul_pos hb (sub_pos.2 hy2.2)]
+    · have := (hI.convex hx3 hy3 ha.le hb.le hab)
+      simpa [him, mul_add, smul_eq_mul, mul_left_comm] using this
+  have himg : {w ∈ Rgn y u N m | levD y u σ w ∈ I} = (fun ν => y + invC ν * u) '' K := by
+    ext w
+    constructor
+    · rintro ⟨hw, hl⟩
+      rw [mem_Rgn_iff hu] at hw
+      refine ⟨invC (rotD y u w), ⟨hw.2, ?_⟩, ?_⟩
+      · rwa [levD_eq] at hl
+      · simp only [invC_invC]
+        have := rotD_eq y u w hu
+        linear_combination (-1 : ℂ) * this
+    · rintro ⟨ν, ⟨hν1, hν2⟩, rfl⟩
+      have hν0 : ν ≠ 0 := by
+        intro h; rw [h] at hν1; simp [Kinv] at hν1
+      have hne : invC ν ≠ 0 := invC_ne_zero hν0
+      have hrot : rotD y u (y + invC ν * u) = invC ν := by
+        unfold rotD
+        have : (starRingEnd ℂ) u * u = 1 := by
+          rw [mul_comm, Complex.mul_conj, Complex.normSq_eq_norm_sq, hu]; simp
+        calc (y + invC ν * u - y) * (starRingEnd ℂ) u = invC ν * (u * (starRingEnd ℂ) u) := by ring
+          _ = invC ν := by rw [mul_comm u, this, mul_one]
+      have hwy : y + invC ν * u ≠ y := by
+        intro h
+        have hu0 : u ≠ 0 := by intro h0; simp [h0] at hu
+        have : invC ν * u = 0 := by linear_combination h
+        rcases mul_eq_zero.mp this with h1 | h1
+        · exact hne h1
+        · exact hu0 h1
+      refine ⟨(mem_Rgn_iff hu N m).mpr ⟨hwy, ?_⟩, ?_⟩
+      · rw [hrot, invC_invC]; exact hν1
+      · rw [levD_eq, hrot, invC_invC]; exact hν2
+  rw [himg]
+  refine (hconv.isPreconnected).image _ ?_
+  intro ν hν
+  have : ν ≠ 0 := by
+    intro h; rw [h] at hν; have := hν.1.1; simp at this; linarith
+  exact (continuousOn_invC.continuousAt (isOpen_ne.mem_nhds this)).continuousWithinAt.mul continuousWithinAt_const |>.const_add y
+
+
+theorem conj_mul_self_e (β : ℝ) : (starRingEnd ℂ) (e β) * e β = 1 := by
+  rw [mul_comm, Complex.mul_conj, Complex.normSq_eq_norm_sq, norm_e]; simp
+
+/-- A direction in the cone of `S` at `y` puts points of `S` in every wedge about it. -/
+theorem exists_mem_Rgn_of_mem_coneAt {S : Set ℂ} {y : ℂ} {β : ℝ} (hβ : β ∈ coneAt S y) {N m : ℝ}
+    (hN : 0 < N) (hm : 0 < m) : ∃ w ∈ S, w ∈ Rgn y (e β) N m := by
+  set ε : ℝ := min (1 / 2) (min (1 / (2 * N)) (m / 2)) with hε
+  have hε0 : 0 < ε := by positivity
+  have hε1 : ε ≤ 1 / 2 := min_le_left _ _
+  have hε2 : ε ≤ 1 / (2 * N) := (min_le_right _ _).trans (min_le_left _ _)
+  have hε3 : ε ≤ m / 2 := (min_le_right _ _).trans (min_le_right _ _)
+  obtain ⟨z, hzS, hzy, hzd, hdir⟩ := hβ ε hε0
+  refine ⟨z, hzS, hzy, ?_⟩
+  have hu : ‖e β‖ = 1 := norm_e β
+  set r : ℝ := ‖z - y‖ with hr
+  have hr0 : 0 < r := norm_pos_iff.mpr (sub_ne_zero.mpr hzy)
+  have hrε : r < ε := by rwa [dist_eq_norm] at hzd
+  set η : ℂ := (z - y) / (r : ℂ) * (starRingEnd ℂ) (e β) - 1 with hη
+  have hηn : ‖η‖ < ε := by
+    have : η = ((z - y) / (r : ℂ) - e β) * (starRingEnd ℂ) (e β) := by
+      rw [hη]; linear_combination (1 : ℂ) * (conj_mul_self_e β)
+    rw [this, norm_mul, Complex.norm_conj, hu, mul_one]; exact hdir
+  have hζ : rotD y (e β) z = (r : ℂ) * (1 + η) := by
+    unfold rotD
+    rw [hη]
+    have : (r : ℂ) ≠ 0 := by exact_mod_cast hr0.ne'
+    field_simp; ring
+  have hnS : Complex.normSq (rotD y (e β) z) = r ^ 2 := by
+    rw [normSq_rotD y _ z hu, Complex.normSq_eq_norm_sq]
+  have hre : (rotD y (e β) z).re = r * (1 + η.re) := by rw [hζ]; simp
+  have him : (rotD y (e β) z).im = r * η.im := by rw [hζ]; simp
+  have h1 : |η.re| < ε := lt_of_le_of_lt (Complex.abs_re_le_norm η) hηn
+  have h2 : |η.im| < ε := lt_of_le_of_lt (Complex.abs_im_le_norm η) hηn
+  rw [abs_lt] at h1 h2
+  have hNr : N * r < 1 / 2 := by
+    have : r < 1 / (2 * N) := hrε.trans_le hε2
+    rw [lt_div_iff₀ (by positivity)] at this; linarith
+  refine ⟨?_, ?_⟩
+  · rw [hnS, hre]
+    have : N * r ^ 2 = r * (N * r) := by ring
+    nlinarith [mul_pos hr0 hr0]
+  · rw [him, hre, abs_mul, abs_of_pos hr0]
+    have : |η.im| < m * (1 + η.re) := by
+      rw [abs_lt]; constructor <;> nlinarith
+    calc r * |η.im| < r * (m * (1 + η.re)) := by gcongr
+      _ = m * (r * (1 + η.re)) := by ring
+
+/-- Points on the ray at angle `δ + σ u₀` (small `u₀`) lie in the wedge at small distance, with level `sin u₀ / s`. -/
+theorem ray_mem_Rgn {y : ℂ} {δ σ u₀ : ℝ} (hσ : σ = 1 ∨ σ = -1) {N m : ℝ} (hN : 0 < N)
+    (hu₀ : 0 < u₀) (hu₁ : u₀ < π / 2) (hm : Real.sin u₀ < m * Real.cos u₀) :
+    ∃ s₀ > 0, ∀ s : ℝ, s ∈ Ioo 0 s₀ → y + (s : ℂ) * e (δ + σ * u₀) ∈ Rgn y (e δ) N m ∧
+      levD y (e δ) σ (y + (s : ℂ) * e (δ + σ * u₀)) = Real.sin u₀ / s := by
+  have hc : 0 < Real.cos u₀ := Real.cos_pos_of_mem_Ioo ⟨by linarith, hu₁⟩
+  refine ⟨Real.cos u₀ / N, by positivity, fun s hs => ?_⟩
+  have _ := hs
+  obtain ⟨hs0, hs1⟩ := hs
+  have hζ : rotD y (e δ) (y + (s : ℂ) * e (δ + σ * u₀)) = (s : ℂ) * e (σ * u₀) := by
+    unfold rotD
+    rw [e_add]
+    have := conj_mul_self_e δ
+    calc (y + (s : ℂ) * (e δ * e (σ * u₀)) - y) * (starRingEnd ℂ) (e δ)
+        = (s : ℂ) * e (σ * u₀) * ((starRingEnd ℂ) (e δ) * e δ) := by ring
+      _ = _ := by rw [this, mul_one]
+  have hre : ((s : ℂ) * e (σ * u₀)).re = s * Real.cos u₀ := by
+    rcases hσ with rfl | rfl <;> simp [e_eq, Real.cos_neg, Complex.cos_ofReal_re, Complex.sin_ofReal_re]
+  have him : ((s : ℂ) * e (σ * u₀)).im = σ * (s * Real.sin u₀) := by
+    rcases hσ with rfl | rfl <;> simp [e_eq, Real.sin_neg, Complex.cos_ofReal_re, Complex.sin_ofReal_re, Complex.cos_ofReal_im, Complex.sin_ofReal_im]
+  have hnS : Complex.normSq ((s : ℂ) * e (σ * u₀)) = s ^ 2 := by
+    rw [Complex.normSq_eq_norm_sq, norm_mul, norm_e, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hs0]; ring
+  have hne : y + (s : ℂ) * e (δ + σ * u₀) ≠ y := by
+    intro h
+    have : (s : ℂ) * e (δ + σ * u₀) = 0 := by linear_combination h
+    rcases mul_eq_zero.mp this with h1 | h1
+    · exact hs0.ne' (by exact_mod_cast h1)
+    · exact e_ne_zero _ h1
+  have hσ2 : σ ^ 2 = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  refine ⟨⟨hne, ?_, ?_⟩, ?_⟩
+  · rw [hζ, hnS, hre]
+    have : N * s < Real.cos u₀ := by rwa [lt_div_iff₀ hN, mul_comm] at hs1
+    nlinarith
+  · rw [hζ, hre, him, abs_mul, abs_mul, abs_of_pos hs0, abs_of_pos (Real.sin_pos_of_pos_of_lt_pi hu₀ (by linarith)) ]
+    have : |σ| = 1 := by rcases hσ with rfl | rfl <;> simp
+    rw [this, one_mul]
+    nlinarith
+  · unfold levD; rw [hζ, hnS, him]
+    field_simp; rw [hσ2]; ring_nf
+
+
+/-- The arc's full curve through `y` is tangent to the direction `u` there. -/
+def Arc.Tang (y u : ℂ) (a : Arc) : Prop := ((a.curveData y).2 * (starRingEnd ℂ) u).re = 0
+
+theorem mem_curveAt_iff_rot {y u : ℂ} (hu : ‖u‖ = 1) (κ : ℝ) (b w : ℂ) :
+    w ∈ curveAt y κ b ↔ κ * Complex.normSq (rotD y u w) =
+      2 * ((rotD y u w).re * (b * (starRingEnd ℂ) u).re + (rotD y u w).im * (b * (starRingEnd ℂ) u).im) := by
+  have h1 : (w - y) * (starRingEnd ℂ) b = rotD y u w * (starRingEnd ℂ) (b * (starRingEnd ℂ) u) := by
+    have hh := rotD_eq y u w hu
+    rw [map_mul, Complex.conj_conj]
+    calc (w - y) * (starRingEnd ℂ) b = (rotD y u w * u) * (starRingEnd ℂ) b := by rw [← hh]
+      _ = _ := by ring
+  have key : ((w - y) * (starRingEnd ℂ) b).re =
+      (rotD y u w).re * (b * (starRingEnd ℂ) u).re + (rotD y u w).im * (b * (starRingEnd ℂ) u).im := by
+    rw [h1]; simp only [Complex.mul_re, Complex.conj_re, Complex.conj_im]; ring
+  show κ * Complex.normSq (w - y) = 2 * ((w - y) * (starRingEnd ℂ) b).re ↔ _
+  rw [key, ← normSq_rotD y u w hu]
+
+theorem nontang_avoid {κ N m : ℝ} (hκ : κ = 0 ∨ κ = 1) {ζ b : ℂ} (hb1 : b.re ≠ 0)
+    (hm : m * |b.im| < |b.re| / 2) (hN : 1 ≤ N * |b.re|) (hm0 : 0 < m)
+    (h1 : N * Complex.normSq ζ < ζ.re) (h2 : |ζ.im| < m * ζ.re) :
+    κ * Complex.normSq ζ ≠ 2 * (ζ.re * b.re + ζ.im * b.im) := by
+  intro h
+  have hre : 0 < ζ.re := by
+    have := abs_nonneg ζ.im
+    nlinarith
+  have hN0 : 0 ≤ N := by
+    by_contra hneg
+    push Not at hneg
+    have : N * |b.re| < 0 := mul_neg_of_neg_of_pos hneg (abs_pos.mpr hb1)
+    linarith
+  have hns : 0 ≤ Complex.normSq ζ := Complex.normSq_nonneg ζ
+  have hκ1 : κ * Complex.normSq ζ ≤ Complex.normSq ζ := by
+    rcases hκ with rfl | rfl <;> nlinarith
+  have hX : ζ.re * |b.re| / 2 ≤ |ζ.re * b.re + ζ.im * b.im| := by
+    have h3 : |ζ.re * b.re| = ζ.re * |b.re| := by rw [abs_mul, abs_of_pos hre]
+    have h4 : |ζ.im * b.im| ≤ m * ζ.re * |b.im| := by
+      rw [abs_mul]; exact mul_le_mul_of_nonneg_right h2.le (abs_nonneg _)
+    have h5 := abs_sub_abs_le_abs_sub (ζ.re * b.re) (-(ζ.im * b.im))
+    rw [abs_neg, sub_neg_eq_add] at h5
+    have h6 : m * ζ.re * |b.im| ≤ ζ.re * (|b.re| / 2) := by
+      nlinarith [mul_pos hre (sub_pos.2 hm)]
+    nlinarith
+  have hstrict : Complex.normSq ζ < 2 * |ζ.re * b.re + ζ.im * b.im| := by
+    rcases eq_or_lt_of_le hns with h0 | h0
+    · -- normSq = 0 forces ζ.re ≤ 0, contradiction
+      rw [← h0] at h1; nlinarith
+    · have : Complex.normSq ζ * 1 ≤ Complex.normSq ζ * (N * |b.re|) := mul_le_mul_of_nonneg_left hN hns
+      nlinarith [mul_lt_mul_of_pos_right h1 (abs_pos.mpr hb1)]
+  have : |κ * Complex.normSq ζ| = 2 * |ζ.re * b.re + ζ.im * b.im| := by
+    rw [h, abs_mul, abs_of_pos (by norm_num : (0:ℝ) < 2)]
+  rw [abs_of_nonneg (by rcases hκ with rfl | rfl <;> simp [hns])] at this
+  linarith
+
+
+theorem Rgn_subset_ball {y u : ℂ} (hu : ‖u‖ = 1) {N ρ : ℝ} (hN : 0 < N) (hρ : 1 / N ≤ ρ) (m : ℝ) :
+    Rgn y u N m ⊆ ball y ρ := by
+  rintro w ⟨hw, h1, -⟩
+  rw [mem_ball, dist_eq_norm]
+  have hn : Complex.normSq (rotD y u w) = ‖w - y‖ ^ 2 := by
+    rw [normSq_rotD y u w hu, Complex.normSq_eq_norm_sq]
+  have hre : (rotD y u w).re ≤ ‖w - y‖ := by
+    have := Complex.re_le_norm (rotD y u w)
+    unfold rotD at this
+    rwa [norm_mul, Complex.norm_conj, hu, mul_one] at this
+  have hp : 0 < ‖w - y‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hw)
+  rw [hn] at h1
+  have : N * ‖w - y‖ < 1 := by nlinarith
+  calc ‖w - y‖ < 1 / N := by rw [lt_div_iff₀ hN]; linarith
+    _ ≤ ρ := hρ
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- **The wedge lemma**: in a good ball about `y`, for any direction `u`, a thin wedge about `u` (cone slope `m`, distance
+below `1/N`) meets `Γ` only in arcs through `y` that are tangent to `u` there. -/
+theorem GoodAt.exists_wedge {y : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt y ρ₀) {u : ℂ} (hu : ‖u‖ = 1) :
+    ∃ m > 0, ∃ N₀ > 0, ∀ N ≥ N₀, Rgn y u N m ⊆ ball y ρ₀ ∧
+      ∀ w ∈ Rgn y u N m, ∀ a ∈ F.arcs, w ∈ a.carrier → y ∈ a.carrier ∧ a.Tang y u := by
+  classical
+  set 𝒜 := {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ρ₀).Nonempty} with h𝒜
+  have bt : ∀ a : Arc, ((a.curveData y).2 * (starRingEnd ℂ) u) = (a.curveData y).2 * (starRingEnd ℂ) u := fun _ => rfl
+  have evm : ∀ᶠ m in 𝓝[>] (0 : ℝ), 0 < m ∧ ∀ a ∈ 𝒜, ¬ a.Tang y u →
+      m * |((a.curveData y).2 * (starRingEnd ℂ) u).im| < |((a.curveData y).2 * (starRingEnd ℂ) u).re| / 2 := by
+    have h0 : ∀ᶠ m in 𝓝[>] (0 : ℝ), 0 < m := self_mem_nhdsWithin
+    refine h0.and ((eventually_all_finite hG.fin).mpr fun a _ => ?_)
+    by_cases hT : a.Tang y u
+    · exact Filter.Eventually.of_forall fun _ h => absurd hT h
+    · have hpos : 0 < |((a.curveData y).2 * (starRingEnd ℂ) u).re| / 2 := by
+        have : ((a.curveData y).2 * (starRingEnd ℂ) u).re ≠ 0 := hT
+        positivity
+      have hc : ContinuousAt (fun m : ℝ => m * |((a.curveData y).2 * (starRingEnd ℂ) u).im|) 0 := by fun_prop
+      have := hc.eventually (gt_mem_nhds (by show (0:ℝ) * _ < _; rw [zero_mul]; exact hpos))
+      exact Filter.Eventually.mono (Filter.Eventually.filter_mono nhdsWithin_le_nhds this) fun m hm _ => hm
+  obtain ⟨m, hm0, hm⟩ := evm.exists
+  have evN : ∀ᶠ N in atTop, 1 / ρ₀ ≤ N ∧ 0 < N ∧ ∀ a ∈ 𝒜, ¬ a.Tang y u →
+      1 ≤ N * |((a.curveData y).2 * (starRingEnd ℂ) u).re| := by
+    refine (eventually_ge_atTop _).and ((eventually_gt_atTop 0).and ((eventually_all_finite hG.fin).mpr fun a _ => ?_))
+    by_cases hT : a.Tang y u
+    · exact Filter.Eventually.of_forall fun _ h => absurd hT h
+    · have hpos : 0 < |((a.curveData y).2 * (starRingEnd ℂ) u).re| := by
+        have : ((a.curveData y).2 * (starRingEnd ℂ) u).re ≠ 0 := hT
+        positivity
+      filter_upwards [eventually_ge_atTop (1 / |((a.curveData y).2 * (starRingEnd ℂ) u).re|)] with N hN _
+      rwa [div_le_iff₀ hpos] at hN
+  obtain ⟨N₀, hN₀⟩ := eventually_atTop.mp evN
+  refine ⟨m, hm0, max N₀ 1, by positivity, fun N hN => ?_⟩
+  obtain ⟨hρN, hN0, hNb⟩ := hN₀ N (le_trans (le_max_left _ _) hN)
+  have hρ0 := hG.pos
+  have hball : Rgn y u N m ⊆ ball y ρ₀ := by
+    refine Rgn_subset_ball hu hN0 ?_ m
+    have := (div_le_iff₀ hρ0).mp hρN
+    rw [div_le_iff₀ hN0]; linarith
+  refine ⟨hball, ?_⟩
+  · intro w hwR a ha hwa
+    have hwb : w ∈ ball y ρ₀ := hball hwR
+    have ha𝒜 : a ∈ 𝒜 := ⟨ha, w, hwa, hwb⟩
+    have hya := hG.through a ha ⟨w, hwa, hwb⟩
+    refine ⟨hya, ?_⟩
+    by_contra hT
+    have hcurve := Arc.carrier_subset_curve hya hwa
+    have hκ := Arc.curveData_kappa y a
+    rw [Arc.curve, mem_curveAt_iff_rot hu] at hcurve
+    obtain ⟨hw1, hw2, hw3⟩ := hwR
+    exact nontang_avoid hκ (by exact hT) (hm a ha𝒜 hT) (hNb a ha𝒜 hT) hm0 hw2 hw3 hcurve
+
+end ArcMap
+
+
+theorem countable_e_preimage (v : ℂ) : {β : ℝ | e β = v}.Countable := by
+  by_cases hne : ∃ β₀, e β₀ = v
+  · obtain ⟨β₀, hβ₀⟩ := hne
+    refine (Set.countable_range (fun n : ℤ => β₀ + n * (2 * π))).mono ?_
+    intro β hβ
+    have : e β = e β₀ := hβ.trans hβ₀.symm
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp this
+    exact ⟨n, by simp [hn]⟩
+  · push Not at hne
+    exact (Set.countable_empty).mono fun β hβ => absurd hβ (hne β)
+
+theorem countable_tang_dirs (y : ℂ) (a : Arc) (ha : a.Nondegenerate) (hy : y ∈ a.carrier) :
+    {β : ℝ | a.Tang y (e β)}.Countable := by
+  have hb := Arc.curveData_ne ha hy
+  have hfin := finite_perp_circle (a.curveData y).2 hb 0 1
+  refine (hfin.countable.biUnion fun m _ => countable_e_preimage m).mono ?_
+  intro β hβ
+  refine mem_iUnion₂.mpr ⟨e β, ⟨?_, ?_⟩, rfl⟩
+  · have : ((a.curveData y).2 * (starRingEnd ℂ) (e β)).re = 0 := hβ
+    simpa [Complex.mul_re, mul_comm] using this
+  · have := norm_e β
+    have h := Complex.sq_norm (e β)
+    rw [Complex.normSq_apply, this] at h
+    nlinarith
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- A direction in any open interval that is tangent to none of the arcs through `y` in a good ball. -/
+theorem GoodAt.exists_generic_dir {y : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt y ρ₀) {a b : ℝ} (hab : a < b) :
+    ∃ β ∈ Ioo a b, ∀ a' ∈ F.arcs, (a'.carrier ∩ ball y ρ₀).Nonempty → ¬ a'.Tang y (e β) := by
+  by_contra hcon
+  push Not at hcon
+  have hsub : Ioo a b ⊆ ⋃ a' ∈ {a' | a' ∈ F.arcs ∧ (a'.carrier ∩ ball y ρ₀).Nonempty}, {β : ℝ | a'.Tang y (e β)} := by
+    intro β hβ
+    obtain ⟨a', ha', hne, hT⟩ := hcon β hβ
+    exact mem_iUnion₂.mpr ⟨a', ⟨ha', hne⟩, hT⟩
+  have hc : (⋃ a' ∈ {a' | a' ∈ F.arcs ∧ (a'.carrier ∩ ball y ρ₀).Nonempty}, {β : ℝ | a'.Tang y (e β)}).Countable :=
+    hG.fin.countable.biUnion fun a' ha' =>
+      countable_tang_dirs y a' (F.nondegenerate a' ha'.1) (hG.through a' ha'.1 ha'.2)
+  have h0 := (hc.mono hsub).measure_zero MeasureTheory.volume
+  simp [Real.volume_Ioo] at h0
+  linarith
+
+/-- **Tiles' cones have disjoint interiors.** At a point `z` of the domain, the cones of two distinct tiles share no open
+interval of directions: a direction tangent to no arc has a wedge in the interior points, which lies in one tile. -/
+theorem coneAt_interiors_disjoint {T T' : Set ℂ} (hT : F.IsTile T) (hT' : F.IsTile T') (hne : T ≠ T') {z : ℂ}
+    (hz : z ∈ F.dom) {a b : ℝ} (hab : a < b) (h1 : Ioo a b ⊆ coneAt T z) (h2 : Ioo a b ⊆ coneAt T' z) : False := by
+  obtain ⟨ρ₀, hG⟩ := F.exists_goodAt hz
+  obtain ⟨β, hβ, hgen⟩ := hG.exists_generic_dir hab
+  have hu : ‖e β‖ = 1 := norm_e β
+  obtain ⟨m, hm0, N₀, hN₀, hN⟩ := hG.exists_wedge hu
+  set N := max N₀ 1 with hNdef
+  have hN0 : 0 < N := lt_max_of_lt_right one_pos
+  obtain ⟨hball, hΓ⟩ := hN N (le_max_left _ _)
+  have hI : Rgn z (e β) N m ⊆ F.interiorPts := by
+    intro w hw
+    refine ⟨hG.subdom (hball hw), fun hwa => ?_⟩
+    obtain ⟨a', ha', hwa'⟩ := mem_iUnion₂.mp hwa
+    obtain ⟨-, hT''⟩ := hΓ w hw a' ha' hwa'
+    exact hgen a' ha' ⟨w, hwa', hball hw⟩ hT''
+  have hpre : IsPreconnected (Rgn z (e β) N m) := by
+    have := isPreconnected_Rgn_lev (y := z) hu hN0 1 (I := Set.univ) ordConnected_univ (m := m)
+    simpa using this
+  obtain ⟨w, hwT, hwR⟩ := exists_mem_Rgn_of_mem_coneAt (h1 hβ) hN0 hm0
+  obtain ⟨w', hwT', hwR'⟩ := exists_mem_Rgn_of_mem_coneAt (h2 hβ) hN0 hm0
+  have e1 := hT.subset_of_preconnected hpre hI hwR hwT
+  have e2 := hT'.subset_of_preconnected hpre hI hwR' hwT'
+  have hwT'' : w ∈ T' := e2 hwR
+  obtain ⟨x, hx, rfl⟩ := hT
+  obtain ⟨x', hx', rfl⟩ := hT'
+  exact hne ((connectedComponentIn_eq hwT).trans (connectedComponentIn_eq hwT'').symm)
+
+end ArcMap
+
+/-! ## Initial pieces from approach -/
+
+theorem e_sub_eq (a b : ℝ) : e (a - b) = e a * (starRingEnd ℂ) (e b) := by
+  rw [sub_eq_add_neg, e_add, conj_e]
+
+/-- A circle through `y = c + ρ e θ`, tangent there to `e δ`, has `e δ = e (θ + σ π/2)` with `σ = ±1`. -/
+theorem tang_circ {c y : ℂ} {ρ θ δ : ℝ} (hρ : 0 < ρ) (hy : y = c + ρ * e θ)
+    (hT : ((c - y) * (starRingEnd ℂ) (e δ)).re = 0) :
+    ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧ e δ = e (θ + σ * (π / 2)) := by
+  have h1 : (c - y) * (starRingEnd ℂ) (e δ) = -(ρ : ℂ) * e (θ - δ) := by
+    rw [hy, e_sub_eq]; ring_nf
+  rw [h1] at hT
+  have hc : Real.cos (θ - δ) = 0 := by
+    have : (-(ρ : ℂ) * e (θ - δ)).re = -ρ * Real.cos (θ - δ) := by
+      simp only [e_eq, Complex.mul_re, Complex.neg_re, Complex.neg_im, Complex.ofReal_re, Complex.ofReal_im,
+        Complex.add_re, Complex.mul_im, Complex.add_im, Complex.I_re, Complex.I_im]; ring
+    rw [this] at hT
+    rcases mul_eq_zero.mp hT with h | h
+    · linarith
+    · exact h
+  have hs : Real.sin (δ - θ) = 1 ∨ Real.sin (δ - θ) = -1 := by
+    have := Real.sin_sq_add_cos_sq (δ - θ)
+    have hcc : Real.cos (δ - θ) = 0 := by rw [show δ - θ = -(θ - δ) by ring, Real.cos_neg]; exact hc
+    have h2 : Real.sin (δ - θ) ^ 2 = 1 := by rw [hcc] at this; linarith
+    exact sq_eq_one_iff.mp h2
+  have hc' : Real.cos (δ - θ) = 0 := by rw [← neg_sub, Real.cos_neg]; exact hc
+  have hδ : e δ = e θ * e (δ - θ) := by rw [← e_add]; ring_nf
+  rcases hs with h | h
+  · refine ⟨1, Or.inl rfl, ?_⟩
+    rw [hδ, one_mul, e_add, e_pi_div_two]
+    congr 1
+    rw [e_eq, hc', h]; simp
+  · refine ⟨-1, Or.inr rfl, ?_⟩
+    rw [hδ, e_add, neg_one_mul, e_neg, Real.cos_pi_div_two, Real.sin_pi_div_two]
+    congr 1
+    rw [e_eq, hc', h]; simp
+
+theorem e_mul_sign (σ s : ℝ) (hσ : σ = 1 ∨ σ = -1) :
+    e (σ * s) = (Real.cos s : ℂ) + (σ : ℂ) * (Real.sin s : ℂ) * I := by
+  rcases hσ with rfl | rfl
+  · simp [e_eq]
+  · rw [neg_one_mul, e_neg]; push_cast; ring
+
+theorem rotD_circ {c : ℂ} {ρ θ δ σ s : ℝ} (hσ : σ = 1 ∨ σ = -1) (hδ : e δ = e (θ + σ * (π / 2))) :
+    rotD (c + ρ * e θ) (e δ) (c + ρ * e (θ + σ * s)) =
+      ((ρ * Real.sin s : ℝ) : ℂ) + ((σ * ρ * (1 - Real.cos s) : ℝ) : ℂ) * I := by
+  have hδ' : e δ = e θ * ((σ : ℂ) * I) := by rw [hδ, e_add, ArcMap.e_sigma_half hσ]
+  have hE := e_mul_conj_e θ
+  have hσ2 : (σ : ℂ) ^ 2 = 1 := by rcases hσ with rfl | rfl <;> simp
+  unfold rotD
+  rw [hδ', map_mul, map_mul, Complex.conj_I, Complex.conj_ofReal, e_add, e_mul_sign σ s hσ]
+  simp only [Complex.ofReal_mul, Complex.ofReal_sub, Complex.ofReal_one]
+  linear_combination (ρ * ((Real.cos s : ℂ) + σ * Real.sin s * I - 1) * (-(σ : ℂ) * I)) * hE
+    + (-(ρ * Real.sin s * I ^ 2 : ℂ)) * hσ2 + (-(ρ * Real.sin s : ℂ)) * Complex.I_sq
+
+theorem circ_mem_Rgn {c : ℂ} {ρ θ δ σ : ℝ} (hρ : 0 < ρ) (hσ : σ = 1 ∨ σ = -1)
+    (hδ : e δ = e (θ + σ * (π / 2))) {N m : ℝ} (hN : 0 < N) (hm : 0 < m) :
+    ∃ t₁ > 0, ∀ s : ℝ, 0 < s → s ≤ t₁ → c + ρ * e (θ + σ * s) ∈ Rgn (c + ρ * e θ) (e δ) N m := by
+  refine ⟨min 1 (min (1 / (2 * N * ρ)) m), by positivity, fun s hs0 hs => ?_⟩
+  have hs1 : s ≤ 1 := hs.trans (min_le_left _ _)
+  have hs2 : s ≤ 1 / (2 * N * ρ) := hs.trans ((min_le_right _ _).trans (min_le_left _ _))
+  have hs3 : s ≤ m := hs.trans ((min_le_right _ _).trans (min_le_right _ _))
+  have hsin : 3 * s / 4 ≤ Real.sin s := by
+    have := Real.sin_gt_sub_cube hs0
+    nlinarith [pow_pos hs0 3, pow_le_one₀ hs0.le hs1 (n := 2), mul_pos hs0 hs0]
+  have hcos : 1 - Real.cos s ≤ s ^ 2 / 2 := by
+    have := Real.one_sub_sq_div_two_le_cos (x := s); linarith
+  have hcos0 : 0 ≤ 1 - Real.cos s := by linarith [Real.cos_le_one s]
+  have hNs : N * ρ * s ≤ 1 / 2 := by
+    rw [le_div_iff₀ (by positivity)] at hs2; nlinarith
+  have hζ := rotD_circ (c := c) (ρ := ρ) (θ := θ) (δ := δ) (σ := σ) (s := s) hσ hδ
+  have hre : (rotD (c + ρ * e θ) (e δ) (c + ρ * e (θ + σ * s))).re = ρ * Real.sin s := by rw [hζ]; simp only [Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.I_re, Complex.I_im, Complex.ofReal_im]; ring
+  have him : (rotD (c + ρ * e θ) (e δ) (c + ρ * e (θ + σ * s))).im = σ * ρ * (1 - Real.cos s) := by rw [hζ]; simp only [Complex.add_im, Complex.ofReal_im, Complex.mul_im, Complex.I_re, Complex.I_im, Complex.ofReal_re]; ring
+  have hns : Complex.normSq (rotD (c + ρ * e θ) (e δ) (c + ρ * e (θ + σ * s))) = 2 * ρ ^ 2 * (1 - Real.cos s) := by
+    rw [Complex.normSq_apply, hre, him]
+    have hσ2 : σ ^ 2 = 1 := by rcases hσ with rfl | rfl <;> norm_num
+    have := Real.sin_sq_add_cos_sq s
+    linear_combination ρ ^ 2 * this + (ρ ^ 2 * (1 - Real.cos s) ^ 2) * hσ2
+  have hsinpos : 0 < ρ * Real.sin s := by
+    have : 0 < Real.sin s := by linarith
+    positivity
+  refine ⟨?_, ?_, ?_⟩
+  · intro h
+    have : rotD (c + ρ * e θ) (e δ) (c + ρ * e (θ + σ * s)) = 0 := by
+      unfold rotD; rw [h]; simp
+    rw [this, Complex.zero_re] at hre; linarith
+  · rw [hns, hre]
+    nlinarith [mul_pos hρ hs0, mul_nonneg hρ.le hcos0]
+  · rw [him, hre, abs_mul, abs_mul, abs_of_pos hρ, abs_of_nonneg hcos0]
+    have : |σ| = 1 := by rcases hσ with rfl | rfl <;> simp
+    rw [this, one_mul]
+    nlinarith [mul_pos hρ hs0, mul_pos hm hρ]
+
+theorem sin_half_ge {s : ℝ} (h0 : 0 < s) (h1 : s < π) : s / π ≤ Real.sin (s / 2) := by
+  have := Real.mul_le_sin (x := s / 2) (by linarith) (by linarith [Real.pi_pos])
+  have hπ := Real.pi_pos
+  calc s / π = 2 / π * (s / 2) := by field_simp
+    _ ≤ _ := this
+
+/-- A circular arc that ends at `y` (in the sense `σ`) and does not close up has no points near `y` on the `σ` side:
+`happ` would put a point of the arc, on that side, within `g` of the end. -/
+theorem circ_gap_aux {c : ℂ} {ρ θ₀ θ₁ θ δ σ m : ℝ} (hρ : 0 < ρ) (hlt : θ₁ - θ₀ < 2 * π)
+    (hσ : σ = 1 ∨ σ = -1)
+    (hδ : e δ = e (θ + σ * (π / 2)))
+    (happ : ∀ N > 0, ((Arc.circ c ρ θ₀ θ₁).carrier ∩ Rgn (c + ρ * e θ) (e δ) N m).Nonempty) :
+    ∃ s : ℝ, 0 < s ∧ s < 2 * π - (θ₁ - θ₀) ∧ ∃ θN ∈ Icc θ₀ θ₁, ∃ n : ℤ, θN = θ + σ * s + n * (2 * π) := by
+  have hπ := Real.pi_pos
+  set g : ℝ := 2 * π - (θ₁ - θ₀) with hg
+  have hg0 : 0 < g := by linarith
+  set N : ℝ := π / (2 * ρ * g) + 1 with hN
+  have hN0 : 0 < N := by positivity
+  obtain ⟨w, ⟨θN, hθN, rfl⟩, hwR⟩ := happ N hN0
+  -- the angle of `w` about `y`
+  set ξ : ℂ := e θN * (starRingEnd ℂ) (e θ) with hξ
+  have hξn : ‖ξ‖ = 1 := by simp [hξ]
+  set τ : ℝ := Complex.arg ξ with hτ
+  have hτe : e τ = ξ := by
+    have := Complex.norm_mul_exp_arg_mul_I ξ
+    rw [hξn, Complex.ofReal_one, one_mul] at this
+    exact this
+  have hθNe : e θN = e (θ + τ) := by
+    rw [e_add, hτe, hξ]; linear_combination (-(e θN)) * e_mul_conj_e θ
+  have hσ2 : σ * σ = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  set s : ℝ := σ * τ with hs
+  have hτs : τ = σ * s := by rw [hs, ← mul_assoc, hσ2, one_mul]
+  have hw : c + ρ * e θN = c + ρ * e (θ + σ * s) := by rw [hθNe, hτs]
+  have hwR : c + ρ * e θN ∈ Rgn (c + ρ * e θ) (e δ) N m := hwR
+  rw [hw] at hwR
+  have hζ := rotD_circ (c := c) (ρ := ρ) (θ := θ) (δ := δ) (σ := σ) (s := s) hσ hδ
+  obtain ⟨-, h1, -⟩ := hwR
+  rw [hζ] at h1
+  have hre : (((ρ * Real.sin s : ℝ) : ℂ) + ((σ * ρ * (1 - Real.cos s) : ℝ) : ℂ) * I).re = ρ * Real.sin s := by
+    simp only [Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.I_re, Complex.I_im, Complex.ofReal_im]; ring
+  have him : (((ρ * Real.sin s : ℝ) : ℂ) + ((σ * ρ * (1 - Real.cos s) : ℝ) : ℂ) * I).im = σ * ρ * (1 - Real.cos s) := by
+    simp only [Complex.add_im, Complex.ofReal_im, Complex.mul_im, Complex.I_re, Complex.I_im, Complex.ofReal_re]; ring
+  have hns : Complex.normSq (((ρ * Real.sin s : ℝ) : ℂ) + ((σ * ρ * (1 - Real.cos s) : ℝ) : ℂ) * I) =
+      2 * ρ ^ 2 * (1 - Real.cos s) := by
+    rw [Complex.normSq_apply, hre, him]
+    have := Real.sin_sq_add_cos_sq s
+    linear_combination ρ ^ 2 * this + (ρ ^ 2 * (1 - Real.cos s) ^ 2) * (by rcases hσ with rfl | rfl <;> norm_num : σ ^ 2 = 1)
+  rw [hns, hre] at h1
+  have hsin : 0 < Real.sin s := by
+    by_contra hcon
+    push Not at hcon
+    have : ρ * Real.sin s ≤ 0 := mul_nonpos_of_nonneg_of_nonpos hρ.le hcon
+    nlinarith [Real.cos_le_one s, Real.neg_one_le_cos s, mul_pos hρ hρ, mul_pos hN0 (mul_pos hρ hρ)]
+  -- s ∈ (0, π)
+  have hτb : -π < τ ∧ τ ≤ π := ⟨Complex.neg_pi_lt_arg ξ, Complex.arg_le_pi ξ⟩
+  have hs0 : 0 < s ∧ s < π := by
+    rcases hσ with rfl | rfl
+    · have hs' : s = τ := by rw [hs]; ring
+      have : s ≠ π := by
+        intro h; rw [h, Real.sin_pi] at hsin; exact lt_irrefl _ hsin
+      constructor
+      · by_contra hc; push Not at hc
+        have : Real.sin s ≤ 0 := Real.sin_nonpos_of_nonpos_of_neg_pi_le hc (by linarith [hτb.1])
+        linarith
+      · exact lt_of_le_of_ne (by linarith [hτb.2]) this
+    · have hs' : s = -τ := by rw [hs]; ring
+      have : s ≠ π := by
+        intro h; rw [h, Real.sin_pi] at hsin; exact lt_irrefl _ hsin
+      constructor
+      · by_contra hc; push Not at hc
+        have : Real.sin s ≤ 0 := Real.sin_nonpos_of_nonpos_of_neg_pi_le hc (by linarith [hτb.2])
+        linarith
+      · exact lt_of_le_of_ne (by linarith [hτb.1]) this
+  obtain ⟨hs0, hsπ⟩ := hs0
+  -- the size of `s`
+  have hsh : 0 < Real.sin (s / 2) := Real.sin_pos_of_pos_of_lt_pi (by linarith) (by linarith)
+  have hch : 0 ≤ Real.cos (s / 2) := Real.cos_nonneg_of_mem_Icc ⟨by linarith, by linarith⟩
+  have hc1 : Real.cos s = 1 - 2 * Real.sin (s / 2) ^ 2 := by
+    have := Real.cos_two_mul (s / 2)
+    rw [show 2 * (s / 2) = s by ring] at this
+    nlinarith [Real.sin_sq_add_cos_sq (s / 2)]
+  have hs1 : Real.sin s = 2 * Real.sin (s / 2) * Real.cos (s / 2) := by
+    have := Real.sin_two_mul (s / 2)
+    rwa [show 2 * (s / 2) = s by ring] at this
+  have hcle : Real.cos (s / 2) ≤ 1 := Real.cos_le_one _
+  have h2 : 2 * N * ρ * Real.sin (s / 2) < 1 := by
+    rw [hc1, hs1] at h1
+    have hpos : 0 < ρ * Real.sin (s / 2) := mul_pos hρ hsh
+    by_contra hcon
+    push Not at hcon
+    nlinarith [mul_le_mul_of_nonneg_left hcon hpos.le, mul_nonneg hpos.le (sub_nonneg.2 hcle), mul_pos hρ hρ]
+  have hjor := sin_half_ge hs0 hsπ
+  have hsg : s < g := by
+    have h3 : 2 * N * ρ * (s / π) < 1 := lt_of_le_of_lt (by gcongr) h2
+    have h4 : 2 * N * ρ * s < π := by
+      rw [mul_div_assoc', div_lt_one hπ] at h3; exact h3
+    have h5 : π / (2 * ρ * g) < N := by rw [hN]; linarith
+    rw [div_lt_iff₀ (by positivity)] at h5
+    by_contra hcon; push Not at hcon
+    nlinarith [mul_le_mul_of_nonneg_left hcon (by positivity : (0:ℝ) ≤ 2 * N * ρ)]
+  obtain ⟨n, hn⟩ := e_eq_e_iff.mp hθNe
+  exact ⟨s, hs0, hsg, θN, hθN, n, by rw [hn, hτs]⟩
+
+theorem circ_gap_false {c : ℂ} {ρ θ₀ θ₁ θ δ σ m : ℝ} (hρ : 0 < ρ) (hlt : θ₁ - θ₀ < 2 * π)
+    (hσ : σ = 1 ∨ σ = -1) (hend : (σ = 1 ∧ θ = θ₁) ∨ (σ = -1 ∧ θ = θ₀))
+    (hδ : e δ = e (θ + σ * (π / 2)))
+    (happ : ∀ N > 0, ((Arc.circ c ρ θ₀ θ₁).carrier ∩ Rgn (c + ρ * e θ) (e δ) N m).Nonempty) : False := by
+  have hπ := Real.pi_pos
+  obtain ⟨s, hs0, hsg, θN, ⟨hθN1, hθN2⟩, n, hn⟩ := circ_gap_aux hρ hlt hσ hδ happ
+  rcases hend with ⟨rfl, hθ⟩ | ⟨rfl, hθ⟩
+  · have hn' : θN = θ₁ + s + n * (2 * π) := by rw [hn, hθ]; ring
+    have hn0 : (n : ℝ) < 0 := by
+      by_contra hc; push Not at hc; nlinarith [mul_nonneg hc (by positivity : (0:ℝ) ≤ 2 * π)]
+    have hn1 : n ≤ -1 := by
+      have : n < 0 := by exact_mod_cast hn0
+      omega
+    have : (n : ℝ) ≤ -1 := by exact_mod_cast hn1
+    have h6 := mul_le_mul_of_nonneg_right this (by positivity : (0:ℝ) ≤ 2 * π)
+    linarith
+  · have hn' : θN = θ₀ - s + n * (2 * π) := by rw [hn, hθ]; ring
+    have hn0 : (0 : ℝ) < n := by
+      by_contra hc; push Not at hc; nlinarith [mul_nonneg (neg_nonneg.2 hc) (by positivity : (0:ℝ) ≤ 2 * π)]
+    have hn1 : 1 ≤ n := by
+      have : 0 < n := by exact_mod_cast hn0
+      omega
+    have : (1 : ℝ) ≤ n := by exact_mod_cast hn1
+    have h6 := mul_le_mul_of_nonneg_right this (by positivity : (0:ℝ) ≤ 2 * π)
+    linarith
+
+theorem circ_initialPiece {c : ℂ} {ρ θ₀ θ₁ θ δ σ m N' : ℝ} (hρ : 0 < ρ) (h01' : θ₁ ≤ θ₀ + 2 * π)
+    (hθ : θ ∈ Icc θ₀ θ₁) (hm : 0 < m) (hN' : 0 < N') (hσ : σ = 1 ∨ σ = -1) (hδ : e δ = e (θ + σ * (π / 2)))
+    (happ : ∀ N > 0, ((Arc.circ c ρ θ₀ θ₁).carrier ∩ Rgn (c + ρ * e θ) (e δ) N m).Nonempty) :
+    ∃ B, (Arc.circ c ρ θ₀ θ₁).InitialPiece (c + ρ * e θ) δ B ∧
+      ∀ w ∈ B, w = c + ρ * e θ ∨ w ∈ Rgn (c + ρ * e θ) (e δ) N' m := by
+  have hπ := Real.pi_pos
+  obtain ⟨t₁, ht₁, hRg⟩ := circ_mem_Rgn (c := c) (ρ := ρ) (θ := θ) (δ := δ) (σ := σ) hρ hσ hδ hN' hm
+  -- the start of the piece
+  have key : ∃ φ ε₀ : ℝ, 0 < ε₀ ∧ e φ = e θ ∧ (fun t : ℝ => φ + σ * t) '' Icc 0 ε₀ ⊆ Icc θ₀ θ₁ := by
+    by_cases hfull : θ₁ - θ₀ = 2 * π
+    · rcases hσ with rfl | rfl
+      · by_cases hlt : θ < θ₁
+        · refine ⟨θ, θ₁ - θ, by linarith, rfl, ?_⟩
+          rintro _ ⟨t, ⟨ht0, ht1⟩, rfl⟩
+          exact ⟨by linarith [hθ.1], by linarith⟩
+        · have hθ1 : θ = θ₁ := le_antisymm hθ.2 (not_lt.mp hlt)
+          refine ⟨θ₀, 2 * π, by linarith, ?_, ?_⟩
+          · rw [hθ1, show θ₁ = θ₀ + 2 * π by linarith, e_add_two_pi]
+          · rintro _ ⟨t, ⟨ht0, ht1⟩, rfl⟩
+            exact ⟨by linarith, by linarith⟩
+      · by_cases hlt : θ₀ < θ
+        · refine ⟨θ, θ - θ₀, by linarith, rfl, ?_⟩
+          rintro _ ⟨t, ⟨ht0, ht1⟩, rfl⟩
+          exact ⟨by linarith, by linarith [hθ.2]⟩
+        · have hθ1 : θ = θ₀ := le_antisymm (not_lt.mp hlt) hθ.1
+          refine ⟨θ₁, 2 * π, by linarith, ?_, ?_⟩
+          · rw [hθ1, show θ₁ = θ₀ + 2 * π by linarith, e_add_two_pi]
+          · rintro _ ⟨t, ⟨ht0, ht1⟩, rfl⟩
+            exact ⟨by linarith, by linarith⟩
+    · have hlt : θ₁ - θ₀ < 2 * π := lt_of_le_of_ne (by linarith) hfull
+      rcases hσ with rfl | rfl
+      · by_cases hl : θ < θ₁
+        · refine ⟨θ, θ₁ - θ, by linarith, rfl, ?_⟩
+          rintro _ ⟨t, ⟨ht0, ht1⟩, rfl⟩
+          exact ⟨by linarith [hθ.1], by linarith⟩
+        · exact (circ_gap_false hρ hlt (Or.inl rfl) (Or.inl ⟨rfl, le_antisymm hθ.2 (not_lt.mp hl)⟩) hδ happ).elim
+      · by_cases hl : θ₀ < θ
+        · refine ⟨θ, θ - θ₀, by linarith, rfl, ?_⟩
+          rintro _ ⟨t, ⟨ht0, ht1⟩, rfl⟩
+          exact ⟨by linarith, by linarith [hθ.2]⟩
+        · exact (circ_gap_false hρ hlt (Or.inr rfl) (Or.inr ⟨rfl, le_antisymm (not_lt.mp hl) hθ.1⟩) hδ happ).elim
+  obtain ⟨φ, ε₀, hε₀, hφ, hsub⟩ := key
+  set ε : ℝ := min ε₀ t₁ with hε
+  have hε0 : 0 < ε := lt_min hε₀ ht₁
+  have hy : c + ρ * e θ = c + ρ * e φ := by rw [hφ]
+  refine ⟨(fun t : ℝ => c + ρ * e (φ + σ * t)) '' Icc 0 ε, ⟨hρ, φ, ε, σ, hσ, hε0, hy, ?_, rfl, ?_⟩, ?_⟩
+  · rw [hδ, e_add, e_add, hφ]
+  · exact (image_mono (Icc_subset_Icc_right (min_le_left _ _))).trans hsub
+  · rintro _ ⟨t, ⟨ht0, ht1⟩, rfl⟩
+    rcases eq_or_lt_of_le ht0 with h0 | h0
+    · left; rw [← h0]; simp [hφ]
+    · right
+      have : c + ρ * e (φ + σ * t) = c + ρ * e (θ + σ * t) := by rw [e_add, e_add, hφ]
+      show c + ρ * e (φ + σ * t) ∈ _
+      rw [this]
+      exact hRg t h0 (ht1.trans (min_le_right _ _))
+
+theorem seg_initialPiece {p q y : ℂ} (hy : y ∈ segment ℝ p q) {δ m N' : ℝ} (hm : 0 < m) (hN' : 0 < N')
+    (hT : ((I * (q - p)) * (starRingEnd ℂ) (e δ)).re = 0)
+    (happ : ∀ N > 0, ((Arc.seg p q).carrier ∩ Rgn y (e δ) N m).Nonempty) :
+    ∃ B, (Arc.seg p q).InitialPiece y δ B ∧ ∀ w ∈ B, w = y ∨ w ∈ Rgn y (e δ) N' m := by
+  have hu : ‖e δ‖ = 1 := norm_e δ
+  obtain ⟨w, hwS, hw1, hw2, hw3⟩ := happ N' hN'
+  have hwS' : w ∈ segment ℝ p q := hwS
+  rw [segment_eq_image'] at hy hwS'
+  obtain ⟨t, ht, rfl⟩ := hy
+  obtain ⟨t', ht', rfl⟩ := hwS'
+  set d := q - p with hd
+  set ζ := rotD (p + t • d) (e δ) (p + t' • d) with hζ
+  have him0 : ζ.im = 0 := by
+    have h1 : ζ = ((t' - t : ℝ) : ℂ) * (d * (starRingEnd ℂ) (e δ)) := by
+      rw [hζ]; unfold rotD; simp only [Complex.real_smul]; push_cast; ring
+    have h2 : (d * (starRingEnd ℂ) (e δ)).im = 0 := by
+      have : ((I * d) * (starRingEnd ℂ) (e δ)).re = -(d * (starRingEnd ℂ) (e δ)).im := by
+        rw [mul_assoc]; simp
+      linarith
+    rw [h1]; simp [h2]
+  have hre : 0 < ζ.re := by
+    have := Complex.normSq_nonneg ζ
+    nlinarith
+  set r := ζ.re with hr
+  have hζr : ζ = (r : ℂ) := Complex.ext (by simp [hr]) (by simpa using him0)
+  have hww : p + t' • d = (p + t • d) + (r : ℂ) * e δ := by
+    have := rotD_eq (p + t • d) (e δ) (p + t' • d) hu
+    rw [← hζ, hζr] at this
+    linear_combination this
+  have hN'r : N' * r < 1 := by
+    have : N' * Complex.normSq ζ = N' * r ^ 2 := by rw [hζr, Complex.normSq_ofReal]; ring
+    nlinarith
+  refine ⟨segment ℝ (p + t • d) (p + t • d + (r : ℂ) * e δ), ⟨r, hre, rfl, ?_⟩, ?_⟩
+  · rw [← hww]
+    exact (convex_segment p q).segment_subset (by rw [segment_eq_image']; exact ⟨t, ht, rfl⟩) hwS
+  · intro w' hw'
+    rw [segment_eq_image'] at hw'
+    obtain ⟨s, ⟨hs0, hs1⟩, rfl⟩ := hw'
+    rcases eq_or_lt_of_le hs0 with h0 | h0
+    · left; rw [← h0]; simp
+    · right
+      have hrot : rotD (p + t • d) (e δ) ((p + t • d) + s • (p + t • d + (r : ℂ) * e δ - (p + t • d))) = ((s * r : ℝ) : ℂ) := by
+        unfold rotD
+        have := conj_mul_self_e δ
+        simp only [Complex.real_smul]
+        push_cast
+        linear_combination ((s : ℂ) * r) * this
+      have hsr : 0 < s * r := mul_pos h0 hre
+      refine ⟨?_, ?_, ?_⟩
+      · intro h
+        have h' : p + t • d + s • (p + t • d + (r : ℂ) * e δ - (p + t • d)) = p + t • d := h
+        have h2 : rotD (p + t • d) (e δ) (p + t • d + s • (p + t • d + (r : ℂ) * e δ - (p + t • d))) = 0 := by
+          unfold rotD; rw [h']; simp
+        rw [hrot] at h2
+        have h3 := congrArg Complex.re h2
+        rw [Complex.ofReal_re, Complex.zero_re] at h3
+        linarith
+      · rw [hrot, Complex.normSq_ofReal]
+        simp only [Complex.ofReal_re]
+        have h3 : N' * (s * r) < 1 := by nlinarith [mul_le_mul_of_nonneg_left hs1 (mul_pos hN' hre).le]
+        nlinarith [mul_lt_mul_of_pos_left h3 hsr]
+      · rw [hrot]
+        simp only [Complex.ofReal_im, abs_zero, Complex.ofReal_re]
+        positivity
+
+/-- **An arc that approaches `y` along a tangent direction has an initial piece there**, inside any given wedge. -/
+theorem Arc.exists_initialPiece_of_approach {a : Arc} (ha : a.Nondegenerate) {y : ℂ} (hy : y ∈ a.carrier)
+    {δ m N' : ℝ} (hm : 0 < m) (hN' : 0 < N') (hT : a.Tang y (e δ))
+    (happ : ∀ N > 0, (a.carrier ∩ Rgn y (e δ) N m).Nonempty) :
+    ∃ B, a.InitialPiece y δ B ∧ ∀ w ∈ B, w = y ∨ w ∈ Rgn y (e δ) N' m := by
+  cases a with
+  | seg p q => exact seg_initialPiece hy hm hN' hT happ
+  | circ c ρ θ₀ θ₁ =>
+    obtain ⟨hρ, h01, h01'⟩ := ha
+    obtain ⟨θ, hθ, rfl⟩ := hy
+    obtain ⟨σ, hσ, hδ⟩ := tang_circ (c := c) (y := c + ρ * e θ) hρ rfl hT
+    exact circ_initialPiece hρ h01' hθ hm hN' hσ hδ happ
+
+theorem mem_Rgn_lev_of_Kinv {y u : ℂ} (hu : ‖u‖ = 1) {N m : ℝ} {ν : ℂ} (hν : ν ∈ Kinv N m) (σ : ℝ) :
+    y + invC ν * u ∈ Rgn y u N m ∧ levD y u σ (y + invC ν * u) = σ * ν.im := by
+  have hν0 : ν ≠ 0 := by
+    intro h; rw [h] at hν; simp [Kinv] at hν
+  have hne : invC ν ≠ 0 := invC_ne_zero hν0
+  have hrot : rotD y u (y + invC ν * u) = invC ν := by
+    unfold rotD
+    have : (starRingEnd ℂ) u * u = 1 := by
+      rw [mul_comm, Complex.mul_conj, Complex.normSq_eq_norm_sq, hu]; simp
+    calc (y + invC ν * u - y) * (starRingEnd ℂ) u = invC ν * (u * (starRingEnd ℂ) u) := by ring
+      _ = invC ν := by rw [mul_comm u, this, mul_one]
+  have hwy : y + invC ν * u ≠ y := by
+    intro h
+    have hu0 : u ≠ 0 := by intro h0; simp [h0] at hu
+    have : invC ν * u = 0 := by linear_combination h
+    rcases mul_eq_zero.mp this with h1 | h1
+    · exact hne h1
+    · exact hu0 h1
+  refine ⟨(mem_Rgn_iff hu N m).mpr ⟨hwy, ?_⟩, ?_⟩
+  · rw [hrot, invC_invC]; exact hν
+  · rw [levD_eq, hrot, invC_invC]
+
+theorem Rgn_mono {y u : ℂ} {N N' m : ℝ} (h : N ≤ N') : Rgn y u N' m ⊆ Rgn y u N m := by
+  rintro w ⟨h1, h2, h3⟩
+  exact ⟨h1, lt_of_le_of_lt (mul_le_mul_of_nonneg_right h (Complex.normSq_nonneg _)) h2, h3⟩
+
+theorem isOpen_Rgn (y u : ℂ) (N m : ℝ) : IsOpen (Rgn y u N m) := by
+  have hc : Continuous fun w : ℂ => rotD y u w := by unfold rotD; fun_prop
+  have h1 : IsOpen {w : ℂ | w ≠ y} := isOpen_ne
+  have h2 : IsOpen {w : ℂ | N * Complex.normSq (rotD y u w) < (rotD y u w).re} :=
+    isOpen_lt (by fun_prop) (Complex.continuous_re.comp hc)
+  have h3 : IsOpen {w : ℂ | |(rotD y u w).im| < m * (rotD y u w).re} :=
+    isOpen_lt (continuous_abs.comp (Complex.continuous_im.comp hc)) (by fun_prop)
+  exact h1.inter (h2.inter h3)
+
+theorem Arc.InitialPiece.subset_carrier {a : Arc} {y : ℂ} {δ : ℝ} {B : Set ℂ} (h : a.InitialPiece y δ B) :
+    B ⊆ a.carrier := by
+  cases a with
+  | seg p q => obtain ⟨ε, -, -, hB⟩ := h; exact hB
+  | circ c ρ θ₀ θ₁ =>
+    obtain ⟨-, φ, ε, σ, -, -, -, -, rfl, hsub⟩ := h
+    rintro _ ⟨t, ht, rfl⟩
+    exact ⟨φ + σ * t, hsub ⟨t, ht, rfl⟩, rfl⟩
+
+theorem conj_ne_zero_of_norm {u : ℂ} (hu : ‖u‖ = 1) : (starRingEnd ℂ) u ≠ 0 := by
+  intro h; rw [map_eq_zero] at h; simp [h] at hu
+
+theorem u_conj_u {u : ℂ} (hu : ‖u‖ = 1) : u * (starRingEnd ℂ) u = 1 := by
+  rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, hu]; simp
+
+theorem levD_eq_of_mem_curve {y u : ℂ} (hu : ‖u‖ = 1) {κ : ℝ} {b : ℂ} (hb : b ≠ 0)
+    (hT : (b * (starRingEnd ℂ) u).re = 0) {w : ℂ} (hw : w ≠ y) (hc : w ∈ curveAt y κ b) (σ : ℝ) :
+    levD y u σ w = σ * κ / (2 * (b * (starRingEnd ℂ) u).im) := by
+  rw [mem_curveAt_iff_rot hu, hT] at hc
+  have him : (b * (starRingEnd ℂ) u).im ≠ 0 := by
+    intro h
+    have : b * (starRingEnd ℂ) u = 0 := Complex.ext hT h
+    rcases mul_eq_zero.mp this with h1 | h1
+    · exact hb h1
+    · exact conj_ne_zero_of_norm hu h1
+  have hpos : 0 < Complex.normSq (rotD y u w) := Complex.normSq_pos.mpr ((rotD_ne_zero_iff y u w hu).mpr hw)
+  unfold levD
+  rw [div_eq_div_iff hpos.ne' (by positivity)]
+  have : κ * Complex.normSq (rotD y u w) = 2 * ((rotD y u w).im * (b * (starRingEnd ℂ) u).im) := by
+    linarith
+  linear_combination σ * (-this)
+
+/-- The curve through `y` on which the level function takes the value `q`. -/
+def levCurve (y u : ℂ) (σ q : ℝ) : Set ℂ :=
+  if q = 0 then curveAt y 0 (I * u) else curveAt y 1 ((I * σ / (2 * q) : ℂ) * u)
+
+theorem mem_levCurve {y u : ℂ} (hu : ‖u‖ = 1) {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) {w : ℂ} (hw : w ≠ y) {q : ℝ}
+    (h : levD y u σ w = q) : w ∈ levCurve y u σ q := by
+  have hpos : 0 < Complex.normSq (rotD y u w) := Complex.normSq_pos.mpr ((rotD_ne_zero_iff y u w hu).mpr hw)
+  have hσ0 : σ ≠ 0 := by rcases hσ with rfl | rfl <;> norm_num
+  have huu := u_conj_u hu
+  unfold levD at h
+  unfold levCurve
+  split_ifs with hq
+  · rw [mem_curveAt_iff_rot hu]
+    have hb : I * u * (starRingEnd ℂ) u = I := by linear_combination I * huu
+    rw [hb]
+    have : σ * (rotD y u w).im = 0 := by
+      rw [hq] at h; rw [div_eq_zero_iff] at h; rcases h with h | h
+      · exact h
+      · exact absurd h hpos.ne'
+    have : (rotD y u w).im = 0 := by
+      rcases mul_eq_zero.mp this with h | h
+      · exact absurd h hσ0
+      · exact h
+    simp [this]
+  · rw [mem_curveAt_iff_rot hu]
+    have hb : (I * σ / (2 * q) : ℂ) * u * (starRingEnd ℂ) u = I * σ / (2 * q) := by
+      linear_combination (I * σ / (2 * q) : ℂ) * huu
+    rw [hb]
+    have hre : (I * (σ : ℂ) / (2 * (q : ℂ))).re = 0 := by
+      have : (I * (σ : ℂ) / (2 * (q : ℂ))) = (((σ / (2 * q) : ℝ)) : ℂ) * I := by push_cast; ring
+      rw [this]; simp only [Complex.mul_re, Complex.ofReal_re, Complex.I_re, Complex.ofReal_im, Complex.I_im]; ring
+    have him : (I * (σ : ℂ) / (2 * (q : ℂ))).im = σ / (2 * q) := by
+      have : (I * (σ : ℂ) / (2 * (q : ℂ))) = (((σ / (2 * q) : ℝ)) : ℂ) * I := by push_cast; ring
+      rw [this]; simp only [Complex.mul_im, Complex.ofReal_re, Complex.I_re, Complex.ofReal_im, Complex.I_im]; ring
+    rw [hre, him]
+    rw [div_eq_iff hpos.ne'] at h
+    field_simp
+    nlinarith [h]
+
+theorem isClosed_curveAt (x : ℂ) (κ : ℝ) (b : ℂ) : IsClosed (curveAt x κ b) := by
+  unfold curveAt
+  exact isClosed_eq (by fun_prop) (by fun_prop)
+
+theorem exists_pt_off_levels {y u : ℂ} (hu : ‖u‖ = 1) {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) (Λ : Finset ℝ) :
+    ∀ {U : Set ℂ}, IsOpen U → U.Nonempty → ∃ z ∈ U, ∀ q ∈ Λ, z ∉ levCurve y u σ q := by
+  classical
+  induction Λ using Finset.induction_on with
+  | empty => intro U _ hne; obtain ⟨z, hz⟩ := hne; exact ⟨z, hz, by simp⟩
+  | insert q Λ hq ih =>
+    intro U hU hne
+    have hu0 : u ≠ 0 := by intro h0; simp [h0] at hu
+    have hσ0 : (σ : ℂ) ≠ 0 := by rcases hσ with rfl | rfl <;> norm_num
+    have hex : ∃ w ∈ U, w ∉ levCurve y u σ q := by
+      unfold levCurve
+      split_ifs with hq0
+      · exact exists_notMem_curveAt (Or.inl rfl) (mul_ne_zero Complex.I_ne_zero hu0) hU hne
+      · refine exists_notMem_curveAt (Or.inr rfl) (mul_ne_zero ?_ hu0) hU hne
+        have : (q : ℂ) ≠ 0 := by exact_mod_cast hq0
+        exact div_ne_zero (mul_ne_zero Complex.I_ne_zero hσ0) (mul_ne_zero two_ne_zero this)
+    obtain ⟨w, hwU, hwq⟩ := hex
+    have hcl : IsClosed (levCurve y u σ q) := by
+      unfold levCurve; split_ifs <;> exact isClosed_curveAt _ _ _
+    obtain ⟨z, hzU, hz⟩ := ih (hU.sdiff hcl) ⟨w, hwU, hwq⟩
+    refine ⟨z, hzU.1, ?_⟩
+    intro q' hq'
+    rcases Finset.mem_insert.mp hq' with rfl | hq'
+    · exact hzU.2
+    · exact hz q' hq'
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- **The edge of a tile's cone is an initial piece of an arc.** At `y` in the domain, if `t` approaches `y` along `δ` but along
+no direction `δ + σ u` (`σ = ±1`, `0 < u < u₁`), then some arc of the map has an initial piece leaving `y` in the direction
+`δ` that lies in `cl t`. -/
+theorem exists_initialPiece_of_cone {y : ℂ} (hy : y ∈ F.dom) {t : Set ℂ} (ht : F.IsTile t) {δ σ : ℝ}
+    (hσ : σ = 1 ∨ σ = -1) (hδ : δ ∈ coneAt t y) {u₁ : ℝ} (hu₁ : 0 < u₁)
+    (hex : ∀ u : ℝ, 0 < u → u < u₁ → δ + σ * u ∉ coneAt t y) :
+    ∃ α ∈ F.arcs, ∃ B, α.InitialPiece y δ B ∧ B ⊆ closure t := by
+  classical
+  have hπ := Real.pi_pos
+  obtain ⟨ρ₀, hG⟩ := F.exists_goodAt hy
+  have hu : ‖e δ‖ = 1 := norm_e δ
+  obtain ⟨m, hm0, N₀, hN₀, hN⟩ := hG.exists_wedge hu
+  set 𝒜 : Set Arc := {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ρ₀).Nonempty} with h𝒜
+  -- present arcs: those that approach `y` along `δ`
+  let Pr : Arc → Prop := fun a => ∀ N > 0, (a.carrier ∩ Rgn y (e δ) N m).Nonempty
+  have evN : ∀ᶠ N in atTop, ∀ a ∈ 𝒜, ¬ Pr a → ∀ N' ≥ N, (a.carrier ∩ Rgn y (e δ) N' m) = ∅ := by
+    refine (eventually_all_finite hG.fin).mpr fun a _ => ?_
+    by_cases hP : Pr a
+    · exact Filter.Eventually.of_forall fun _ h => absurd hP h
+    · simp only [Pr, not_forall, Set.not_nonempty_iff_eq_empty] at hP
+      obtain ⟨N₂, hN₂, hemp⟩ := hP
+      filter_upwards [eventually_ge_atTop N₂] with N hN2 _ N' hN'
+      exact eq_empty_of_subset_empty (hemp ▸ inter_subset_inter_right _ (Rgn_mono (hN2.trans hN')))
+  obtain ⟨N, hNge, hNev⟩ := ((eventually_ge_atTop (max N₀ 1)).and evN).exists
+  have hN0 : 0 < N := lt_of_lt_of_le (lt_max_of_lt_right one_pos) hNge
+  obtain ⟨hball, hwedge⟩ := hN N (le_trans (le_max_left _ _) hNge)
+  set Lv : Arc → ℝ := fun a =>
+    σ * (a.curveData y).1 / (2 * ((a.curveData y).2 * (starRingEnd ℂ) (e δ)).im) with hLv
+  set Λ : Set ℝ := Lv '' {a | a ∈ 𝒜 ∧ Pr a} with hΛ
+  have hΛfin : Λ.Finite := (hG.fin.subset (fun a (ha : a ∈ 𝒜 ∧ Pr a) => ha.1)).image _
+  have claimA : ∀ w ∈ Rgn y (e δ) N m, ∀ a ∈ F.arcs, w ∈ a.carrier →
+      a ∈ 𝒜 ∧ Pr a ∧ levD y (e δ) σ w = Lv a := by
+    intro w hw a ha hwa
+    have ha𝒜 : a ∈ 𝒜 := ⟨ha, w, hwa, hball hw⟩
+    obtain ⟨hya, hT⟩ := hwedge w hw a ha hwa
+    have hP : Pr a := by
+      by_contra hP
+      have := hNev a ha𝒜 hP N le_rfl
+      exact (eq_empty_iff_forall_notMem.mp this) w ⟨hwa, hw⟩
+    refine ⟨ha𝒜, hP, ?_⟩
+    exact levD_eq_of_mem_curve hu (Arc.curveData_ne (F.nondegenerate a ha) hya) hT hw.1
+      (Arc.carrier_subset_curve hya hwa) σ
+  have claimΓ : ∀ w ∈ Rgn y (e δ) N m, w ∈ F.Γ → levD y (e δ) σ w ∈ Λ := by
+    intro w hw hwΓ
+    obtain ⟨a, ha, hwa⟩ := mem_iUnion₂.mp hwΓ.2
+    obtain ⟨ha𝒜, hP, hl⟩ := claimA w hw a ha hwa
+    exact ⟨a, ⟨ha𝒜, hP⟩, hl.symm⟩
+  -- a point of `t` in the wedge, off every level of `Λ`
+  have hUo : IsOpen (t ∩ Rgn y (e δ) N m) := ht.isOpen.inter (isOpen_Rgn _ _ _ _)
+  obtain ⟨w₀, hw₀t, hw₀R⟩ := exists_mem_Rgn_of_mem_coneAt hδ hN0 hm0
+  obtain ⟨z, ⟨hzt, hzR⟩, hz⟩ := exists_pt_off_levels hu hσ hΛfin.toFinset hUo ⟨w₀, hw₀t, hw₀R⟩
+  have hzΛ : levD y (e δ) σ z ∉ Λ := by
+    intro h
+    exact hz _ (hΛfin.mem_toFinset.mpr h) (mem_levCurve hu hσ hzR.1 rfl)
+  set L : ℝ := levD y (e δ) σ z with hL
+  set I : Set ℝ := {q | ∀ l ∈ Λ, (l < L → l < q) ∧ (L < l → q < l)} with hI
+  have hIoc : I.OrdConnected := by
+    refine ⟨fun x hx y' hy' q hq l hl => ⟨fun h => ?_, fun h => ?_⟩⟩
+    · exact lt_of_lt_of_le ((hx l hl).1 h) hq.1
+    · exact lt_of_le_of_lt hq.2 ((hy' l hl).2 h)
+  have hLI : L ∈ I := fun l _ => ⟨fun h => h, fun h => h⟩
+  set Sg : Set ℂ := {w ∈ Rgn y (e δ) N m | levD y (e δ) σ w ∈ I} with hSg
+  have hSgint : Sg ⊆ F.interiorPts := by
+    intro w hw
+    refine ⟨hG.subdom (hball hw.1), fun hwa => ?_⟩
+    have hΓ : w ∈ F.Γ := ⟨hG.subdom (hball hw.1), hwa⟩
+    have h1 := claimΓ w hw.1 hΓ
+    have h2 := hw.2 _ h1
+    have h3 : levD y (e δ) σ w = L := le_antisymm (not_lt.mp fun h => lt_irrefl _ (h2.2 h)) (not_lt.mp fun h => lt_irrefl _ (h2.1 h))
+    rw [h3] at h1
+    exact hzΛ h1
+  have hpre : IsPreconnected Sg := isPreconnected_Rgn_lev hu hN0 σ hIoc
+  have hSgt : Sg ⊆ t := ht.subset_of_preconnected hpre hSgint ⟨hzR, hLI⟩ hzt
+  have hσ2 : σ * σ = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  by_cases hup : ∃ l ∈ Λ, L < l
+  · -- the top boundary of the region is an arc leaving `y` along `δ`
+    have hne : (hΛfin.toFinset.filter (fun l => L < l)).Nonempty := by
+      obtain ⟨l, hl, hLl⟩ := hup
+      exact ⟨l, Finset.mem_filter.mpr ⟨hΛfin.mem_toFinset.mpr hl, hLl⟩⟩
+    set b := (hΛfin.toFinset.filter (fun l => L < l)).min' hne with hb
+    have hbmem := Finset.mem_filter.mp (Finset.min'_mem _ hne)
+    have hbΛ : b ∈ Λ := hΛfin.mem_toFinset.mp hbmem.1
+    have hLb : L < b := hbmem.2
+    have hbmin : ∀ l ∈ Λ, L < l → b ≤ l := fun l hl hLl =>
+      Finset.min'_le _ _ (Finset.mem_filter.mpr ⟨hΛfin.mem_toFinset.mpr hl, hLl⟩)
+    have hIoo : ∀ q ∈ Ioo L b, q ∈ I := fun q hq l hl =>
+      ⟨fun h => lt_trans h hq.1, fun h => lt_of_lt_of_le hq.2 (hbmin l hl h)⟩
+    obtain ⟨a, ⟨ha𝒜, hP⟩, hab⟩ := hbΛ
+    have ha : a ∈ F.arcs := ha𝒜.1
+    have hya : y ∈ a.carrier := hG.through a ha ha𝒜.2
+    obtain ⟨w₁, hw₁a, hw₁R⟩ := hP N hN0
+    have hT : a.Tang y (e δ) := (hwedge w₁ hw₁R a ha hw₁a).2
+    obtain ⟨B, hBip, hBsub⟩ := Arc.exists_initialPiece_of_approach (F.nondegenerate a ha) hya hm0 hN0 hT hP
+    refine ⟨a, ha, B, hBip, ?_⟩
+    intro w hwB
+    rcases hBsub w hwB with rfl | hwR
+    · exact mem_closure_of_mem_coneAt hδ
+    · have hwa : w ∈ a.carrier := hBip.subset_carrier hwB
+      have hlev : levD y (e δ) σ w = b := by rw [(claimA w hwR a ha hwa).2.2]; exact hab
+      have hν : invC (rotD y (e δ) w) ∈ Kinv N m := ((mem_Rgn_iff hu N m).mp hwR).2
+      set ν := invC (rotD y (e δ) w) with hνdef
+      have hνim : σ * ν.im = b := by rw [← hlev, levD_eq]
+      have hKo : IsOpen (Kinv N m) := by
+        have h1 : IsOpen {ν : ℂ | N < ν.re} := isOpen_lt continuous_const Complex.continuous_re
+        have h2 : IsOpen {ν : ℂ | |ν.im| < m * ν.re} :=
+          isOpen_lt (continuous_abs.comp Complex.continuous_im) (by fun_prop)
+        exact h1.inter h2
+      have hcont : Continuous fun h : ℝ => ν - ((σ * h : ℝ) : ℂ) * Complex.I := by fun_prop
+      have hev1 : ∀ᶠ h in 𝓝 (0 : ℝ), ν - ((σ * h : ℝ) : ℂ) * Complex.I ∈ Kinv N m := by
+        refine hcont.continuousAt.eventually (hKo.mem_nhds ?_)
+        simpa using hν
+      have hν0 : ν ≠ 0 := by
+        intro h; rw [h] at hν; simp [Kinv] at hν
+      have hgc : ContinuousAt (fun h : ℝ => y + invC (ν - ((σ * h : ℝ) : ℂ) * Complex.I) * e δ) 0 := by
+        have hc2 : ContinuousAt invC (ν - ((σ * (0:ℝ) : ℝ) : ℂ) * Complex.I) := by
+          simpa using continuousOn_invC.continuousAt (isOpen_ne.mem_nhds hν0)
+        have h3 := (hc2.comp (f := fun h : ℝ => ν - ((σ * h : ℝ) : ℂ) * Complex.I) hcont.continuousAt).mul_const (e δ)
+        exact continuousAt_const.add h3
+      have hg0 : y + invC (ν - ((σ * (0:ℝ) : ℝ) : ℂ) * Complex.I) * e δ = w := by
+        simp only [mul_zero, Complex.ofReal_zero, zero_mul, sub_zero, hνdef, invC_invC]
+        have := rotD_eq y (e δ) w hu
+        linear_combination (-1 : ℂ) * this
+      have hlim : Tendsto (fun h : ℝ => y + invC (ν - ((σ * h : ℝ) : ℂ) * Complex.I) * e δ) (𝓝[>] 0) (𝓝 w) := by
+        rw [← hg0]; exact hgc.tendsto.mono_left nhdsWithin_le_nhds
+      refine mem_closure_of_tendsto hlim ?_
+      filter_upwards [nhdsWithin_le_nhds hev1, Ioo_mem_nhdsGT (sub_pos.2 hLb)] with h hh1 hh2
+      apply hSgt
+      have hmem := mem_Rgn_lev_of_Kinv (y := y) hu hh1 σ
+      refine ⟨hmem.1, ?_⟩
+      rw [hmem.2]
+      apply hIoo
+      have : σ * (ν - ((σ * h : ℝ) : ℂ) * Complex.I).im = b - h := by
+        simp only [Complex.sub_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+        linear_combination hνim - h * hσ2
+      rw [this]
+      constructor <;> linarith [hh2.1, hh2.2]
+  · -- no arc above: the region reaches the directions above `δ`, which `t` does not approach
+    exfalso
+    push Not at hup
+    set u₀ : ℝ := min (u₁ / 2) (min (1 / 2) (m / 4)) with hu₀
+    have hu₀0 : 0 < u₀ := by positivity
+    have hu₀1 : u₀ < u₁ := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+    have hu₀2 : u₀ ≤ 1 / 2 := (min_le_right _ _).trans (min_le_left _ _)
+    have hu₀3 : u₀ ≤ m / 4 := (min_le_right _ _).trans (min_le_right _ _)
+    have hu₀π : u₀ < π / 2 := by linarith [Real.two_le_pi]
+    have hsin : Real.sin u₀ < m * Real.cos u₀ := by
+      have h1 : Real.sin u₀ ≤ u₀ := Real.sin_le hu₀0.le
+      have h2 := Real.one_sub_sq_div_two_le_cos (x := u₀)
+      have h3 : 1 / 2 ≤ Real.cos u₀ := by nlinarith
+      nlinarith [mul_le_mul_of_nonneg_left h3 hm0.le]
+    obtain ⟨s₀, hs₀, hray⟩ := ray_mem_Rgn (y := y) (δ := δ) hσ hN0 hu₀0 hu₀π hsin
+    have hsinpos : 0 < Real.sin u₀ := Real.sin_pos_of_pos_of_lt_pi hu₀0 (by linarith [Real.two_le_pi])
+    set s₁ : ℝ := min s₀ (Real.sin u₀ / (|L| + 1)) with hs₁
+    have hs₁0 : 0 < s₁ := lt_min hs₀ (by positivity)
+    have hrayt : ∀ s : ℝ, 0 < s → s < s₁ → y + (s : ℂ) * e (δ + σ * u₀) ∈ t := by
+      intro s hs0 hs1
+      obtain ⟨hR, hlev⟩ := hray s ⟨hs0, hs1.trans_le (min_le_left _ _)⟩
+      apply hSgt
+      refine ⟨hR, ?_⟩
+      rw [hlev]
+      have h1 : s < Real.sin u₀ / (|L| + 1) := hs1.trans_le (min_le_right _ _)
+      rw [lt_div_iff₀ (by positivity)] at h1
+      have h2 : |L| + 1 < Real.sin u₀ / s := by rw [lt_div_iff₀ hs0]; linarith
+      intro l hl
+      refine ⟨fun h => ?_, fun h => absurd (hup l hl) (not_le.mpr h)⟩
+      have := le_abs_self L
+      linarith
+    apply hex u₀ hu₀0 hu₀1
+    intro ε hε
+    set s : ℝ := min (s₁ / 2) (ε / 2) with hs
+    have hs0 : 0 < s := lt_min (by linarith) (by linarith)
+    have hss : s < s₁ := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+    have hsε : s < ε := lt_of_le_of_lt (min_le_right _ _) (by linarith)
+    have hd : ‖(s : ℂ) * e (δ + σ * u₀)‖ = s := by
+      rw [norm_mul, Complex.norm_real, norm_e, mul_one, Real.norm_eq_abs, abs_of_pos hs0]
+    refine ⟨y + (s : ℂ) * e (δ + σ * u₀), hrayt s hs0 hss, ?_, ?_, ?_⟩
+    · intro h
+      have : (s : ℂ) * e (δ + σ * u₀) = 0 := by linear_combination h
+      rw [← norm_eq_zero, hd] at this
+      exact hs0.ne' this
+    · rw [dist_eq_norm, add_sub_cancel_left, hd]; exact hsε
+    · rw [add_sub_cancel_left, hd]
+      have : (s : ℂ) * e (δ + σ * u₀) / ((s : ℝ) : ℂ) = e (δ + σ * u₀) := by
+        have : (s : ℂ) ≠ 0 := by exact_mod_cast hs0.ne'
+        field_simp
+      rw [this, sub_self, norm_zero]; exact hε
+
 
 end ArcMap
 
