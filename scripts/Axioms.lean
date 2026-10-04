@@ -2166,6 +2166,40 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.const_woodallMerged
 #print axioms HadwigerNelson.Plane.ArcMap.not_woodallNormal_of_repeat
 
+/-! ## FS-131 Woodall's chain (job FS131-W) — the skeleton: Townsend's π/3 lemma, Woodall's step-4 lemma, maps need six over arc maps (sorry until the chain's implementer lands it; `step5_eq` and `step7` are open, FS131-E1) -/
+
+#print axioms HadwigerNelson.Plane.isOpen_annSector
+#print axioms HadwigerNelson.Plane.isPreconnected_annSector
+#print axioms HadwigerNelson.Plane.isOpen_collar
+#print axioms HadwigerNelson.Plane.collar_subset_collar
+#print axioms HadwigerNelson.Plane.exists_collar_of_collarAt
+#print axioms HadwigerNelson.Plane.exists_unit_pair_collar
+#print axioms HadwigerNelson.Plane.exists_changePt
+#print axioms HadwigerNelson.Plane.sphere_meets_of_collarAt
+#print axioms HadwigerNelson.Plane.woodall_step4
+#print axioms HadwigerNelson.Plane.not_woodall_step4_two_thirds
+#print axioms HadwigerNelson.Plane.townsend_lemma
+#print axioms HadwigerNelson.Plane.collarAt_shadow_outer
+#print axioms HadwigerNelson.Plane.collarAt_shadow_inner
+#print axioms HadwigerNelson.Plane.ArcMap.col_not_mem_of_mem_shadow
+#print axioms HadwigerNelson.Plane.ArcMap.subset_closure_of_subset_shadow
+#print axioms HadwigerNelson.Plane.ArcMap.exists_sectorsAt
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.coloursAt_eq
+#print axioms HadwigerNelson.Plane.ArcMap.exists_woodallMerged
+#print axioms HadwigerNelson.Plane.ArcMap.step5_lt
+#print axioms HadwigerNelson.Plane.ArcMap.step5_eq_of_condition5
+#print axioms HadwigerNelson.Plane.ArcMap.step5_eq
+#print axioms HadwigerNelson.Plane.ArcMap.aeMap6_merged
+#print axioms HadwigerNelson.Plane.ArcMap.aeMap6_merged_of_condition5
+#print axioms HadwigerNelson.Plane.ArcMap.step6
+#print axioms HadwigerNelson.Plane.ArcMap.step7
+#print axioms HadwigerNelson.Plane.ArcMap.step8
+#print axioms HadwigerNelson.Plane.ArcMap.exists_three_le_sectors
+#print axioms HadwigerNelson.Plane.ArcMap.aeMap6_normal
+#print axioms HadwigerNelson.Plane.ArcMap.aeMap6
+#print axioms HadwigerNelson.Plane.ArcMap.aeMap6_of_condition5
+#print axioms HadwigerNelson.Plane.woodall_thm6
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

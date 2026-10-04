@@ -177,6 +177,8 @@ import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 import Proofs.HadwigerNelson.Plane.SVMap
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
 import Proofs.HadwigerNelson.Plane.Woodall.Basic
+import Proofs.HadwigerNelson.Plane.Woodall.Collar
+import Proofs.HadwigerNelson.Plane.Woodall.Steps
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 

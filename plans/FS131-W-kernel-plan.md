@@ -190,3 +190,55 @@ outer collars; **adversary** a collar of thickness `≤ 1` misses its own circle
 options passed), no warning; the build runs at stage 3. `Proofs.lean`, `ARCHITECTURE.md` (§ 3.11 row; `tools/check_architecture.py` PASS),
 `scripts/Axioms.lean` (section "FS-131 Woodall's chain (job FS131-W) — the foundation", 7 records); `tools/fs131_w_decls.py --check` (7 names, 0
 missing) and `--plant` (FIRED, 7 missing).
+
+## Stage 3 — SAVED: the skeleton and the read-backs
+
+### 3.1 The skeleton
+
+Two skeleton modules over the foundation; every leaf `sorry`; elaborated with `lake env lean` (lakefile options) against scratch oleans, only
+`sorry` warnings; the build is § 3.4.
+
+| module | declarations (each `sorry`) |
+|---|---|
+| `Plane/Woodall/Collar` (imports `Woodall/Basic`, `SVMap`) | `isOpen_annSector`, `isPreconnected_annSector`, `isOpen_collar`, `collar_subset_collar`, `exists_collar_of_collarAt`, `exists_unit_pair_collar`, `exists_changePt`, `sphere_meets_of_collarAt`; **`woodall_step4`** (FS106-WO, clause 2); **`not_woodall_step4_two_thirds`** (adversary: Townsend's counterexample); **`townsend_lemma`** (FS106-TW); `collarAt_shadow_outer`, `collarAt_shadow_inner`, `ArcMap.col_not_mem_of_mem_shadow`, `ArcMap.subset_closure_of_subset_shadow` |
+| `Plane/Woodall/Steps` (imports `Woodall/Collar`) | `ArcMap.exists_sectorsAt`, `SectorsAt.coloursAt_eq`; `exists_woodallMerged` (step 3); `step5_lt`, `step5_eq_of_condition5`, **`step5_eq` (open: Q1)**; `aeMap6_merged`, `aeMap6_merged_of_condition5`; `step6`, **`step7` (open: Q2)**, `step8`; `exists_three_le_sectors`; `aeMap6_normal`; **`ArcMap.aeMap6`** (FS106-AE-MAP6), `ArcMap.aeMap6_of_condition5`; **`woodall_thm6`** (FS106-WO, clause 1) |
+
+`scripts/Axioms.lean`: section "FS-131 Woodall's chain (job FS131-W) — the skeleton", 31 records; `tools/fs131_w_decls.py --check`: 38 names (7
+foundation + 31), 0 missing. `ARCHITECTURE.md` § 3.11: three rows; `tools/check_architecture.py` PASS. `Proofs.lean`: three imports.
+
+**Vacuity.** Every theorem whose hypotheses include `k ≤ 5`, `F.Valid` and `F.IsPlaneMap` concludes `False`: by `aeMap6` itself their domain is
+empty, so a non-`False` statement there would be vacuous (the scan skips refutations). This is why steps 3–5's normal form is not a stated lemma:
+`aeMap6_merged` folds "merged ⇒ normal ⇒ `False`" (an implementer's private child "merged ⇒ normal" carries `VACUITY DECLARED`, with this reason).
+The theorems with non-`False` conclusions quantify over domains the library inhabits: `exists_sectorsAt` and `SectorsAt.coloursAt_eq` (the one-colour
+plane, `const_sectorsAt`), `exists_woodallMerged` and `exists_three_le_sectors` (any `k`: `sevenBrickMap`, `sevenBrickMap_valid`,
+`sevenBrickMap_isPlaneMap`), `col_not_mem_of_mem_shadow` and `subset_closure_of_subset_shadow` (any valid map). No new vacuity carrier.
+
+### 3.2 The read-backs (each formal statement against its row and against the papers)
+
+| row | formal statement | read-back |
+|---|---|---|
+| **FS106-TW** (R9: "Townsend's π/3 lemma") | `townsend_lemma` | `[Townsend1979ms]` Thm 1: "Let A0 be a finitely disconnected unit annulus (see Definition 2) for which the unit circle contained in its closure, A, has at least one segment of length greater than ⅓π containing no cut points of A. Then any 2-colouring of A0 contains a monochrome unit." Formal: two open classes `A`, `B` with no unit pair in either (no monochrome unit, region-only: points outside the classes carry no colour — weaker than Townsend's colouring of every point, so stronger); the annulus is read as **a finite set of cut angles `K` off which every angle carries a collar, on either side, inside `closure (A ∪ B)`** (Definition 2's closed doubly connected set: its interior is a band about the circle, possibly one-sided, pinching only at cut points — V3: "one-sided width suffices"); the uncut segment is read as **one side carrying collars about every angle of a closed arc of length `> π/3`**. Differences: (i) generalization: one-sided width, varying side, region-only; (ii) narrowing: Townsend's component over the uncut segment may switch sides, the formal seed may not — every use (`step6`) has a one-sided seed (§ 4's plan for `step6`). The Corollary of Thm 4 ("Every 5-coloured planar map containing a vertex of degree 3 contains a monochrome unit") is `step6` (normal form at the vertex: the repaired form, V3's "regions pairwise sharing an edge"); the Corollary of Thm 3 (four colours) is `aeMap6` at `k ≤ 4`; Thm 2 is not stated (R9: the row's mathematical content is the lemma). The row's bibliographic clauses ("states … with no proof", "Thm 4 itself GAP", "Thm 5 a GAP at (c)") are verdicts on texts, dropped (R9). **Same, read as above** |
+| **FS106-WO**, clause 2 ("Woodall's step-4 lemma holds for arcs strictly longer than ⅔π, by lemma (L)") | `woodall_step4` | `[Woodall1973]` p. 198, verbatim: "A set R in the plane is said to be an interior, respectively exterior, unit arc of positive thickness of length φ with center P, if there is an open interval (θ1, θ2) with θ2 − θ1 = φ, and a function f defined on (θ1, θ2) such that f(θ) < 1, respectively f(θ) > 1, for all θ (θ1 < θ < θ2), such that R = {z : arg(z − P) =: θ, θ1 < θ < θ2 and f(θ) < \|z − P\| < 1}, respectively, R = {z : arg(z − P) =: θ, θ1 < θ < θ2 and 1 < \|z − P\| < f(θ)}. The lemma is that an (interior or exterior) unit arc of positive thickness of length ⅔π cannot lie entirely in two of the covering sets." Formal: side `s` (interior/exterior); "of positive thickness" read as **a collar about every angle of `(θ₁, θ₂)`** (true of Woodall's `R` when `f` is locally bounded away from `1`, e.g. upper semicontinuous on the inner side; for an `f` tending to `1` at an inner angle `R` has no thickness there and nothing is claimed); "lie entirely in two of the covering sets" read region-only as "inside `closure (A ∪ B)`", `A`, `B` open with no unit pair; length **strictly** `> 2π/3` (the repair). The adversary `not_woodall_step4_two_thirds` states the printed `⅔π` form false (Townsend's counterexample, V3 stage 1's check) — the mathematics of "step 6 rests on the assertion Townsend's counterexample refutes", the verdict itself dropped (R9). **Same** |
+| **FS106-WO**, clause 1 ("Thm 6 (maps need six) … repaired") | `woodall_thm6` | `[Woodall1973]` p. 195: "THEOREM 6. R(b) ≥ 6"; p. 196: "Suppose that the plane is covered by five sets, A, B, C, D and E, which are simultaneously divisible into regions with map M (say), in such a way that no two points that are unit distance apart are in the same set." Formal: `k ≤ 5` colours, an arc map `F` of the plane (inventory item 88: arcs in place of Woodall's Jordan arcs — narrower in the edges; no "regions are Jordan domains" or "G connected" — wider there), `col : ℂ → Fin k` equal to `F.col` at interior points (each region in one set; boundary points in any set), proper at every unit pair. A corollary of `aeMap6`, so its open leaves are `step5_eq` and `step7` (F1, F2). "Repaired" (step 6 by Townsend's lemma) is the route of `step6`. **Narrowed to arc maps (ruled); otherwise same** |
+| **FS106-AE-MAP6** | `ArcMap.aeMap6` (and `aeMap6_of_condition5`) | Row: "No map-type colouring (Conditions 2–4) with five colours is almost-everywhere proper, modulo Townsend's simplification (c) as filled by Woodall's steps 2, 3, 5; no step uses 'boundaries of measure 0', which only identifies D-AEMAP with Leb ⊗ σ-a.e. properness." Formal: `F : ArcMap k`, `k ≤ 5`, `F.Valid` (no two interior points of one colour at distance `1` — D-AEMAP, boundaries uncoloured), `F.IsPlaneMap` ⟹ `False`. Conditions 2–4 read as arc maps (item 88: locally finite segments and circular arcs; Condition 2's "every vertex is an endpoint of at least three boundaries" and "regions sharing a boundary have different colours" are not assumed — wider). "Modulo (c) as filled by Woodall's steps 2, 3, 5" is not a hypothesis: the fill is formalized (step 2 free for arcs; step 3 `exists_woodallMerged`; step 5 `step5_lt`, `step5_eq`), and its step-5 equality case is F1's open leaf. No measure enters the statement (the row's last clause). **Same, over arc maps; the proof has two open leaves (F1, F2)** |
+
+**Consumers checked against these forms.** FS111-C-SIX-M, FS111-M2-REDUCE-C, FS129-OR1-TOP5 (wave 9) cite "FS106-AE-MAP6": with `aeMap6` stated
+as `∀ F : ArcMap k, k ≤ 5 → F.Valid → F.IsPlaneMap → False`, their REG-I₅ must produce a valid five-coloured arc map of the plane; REDUCE-C's
+REG-J′-C₅ (Jordan arcs) needs its interfaces to be segments and arcs (Keryx, item 88, logged for wave 9).
+
+### 3.3 Findings with this stage
+
+Sent at stage 1 (two messages): F1 (step 5's equality case), F2 (step 7's terminal vertex, surviving Condition 5), F3 (TS's reduction), F4
+(representation, ruled). New at this stage:
+- **G-TW (generalization, small).** Townsend's lemma holds with one-sided collars of varying side, region-only (the formal hypothesis); the seed
+  must be one-sided (a narrowing of Townsend's side-switching component, harmless for every use).
+- **Vacuity of the chain's intermediate statements.** Every non-`False` statement over valid five-coloured maps of the plane is vacuous by
+  `aeMap6`; the normal-form step is folded into `aeMap6_merged` (§ 3.1). A rule for wave 9's consumers too: a composition over "a valid five-coloured
+  arc map" is a refutation, never a structure lemma.
+
+### 3.4 The build of this stage
+
+`./scripts/build.sh` under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 444 of 444 batches, 4 modules rebuilt, 13 with warnings** (the two new
+skeleton modules and waves 3–4's; every warning `declaration uses 'sorry'`; the one other line is the up-to-date probe's expected "target is
+out-of-date"; `Woodall/Basic` builds with no warning), 8 m 19 s, exit 0 (`build/gate/build/20261004T095859Z-2589972.log`; driver log
+`data/fs131/w/build-stage3.log`).
