@@ -1,0 +1,20 @@
+{
+ "graph": "uq",
+ "m": 1,
+ "Q": 2,
+ "poly": 7,
+ "mu": [
+  1,
+  2,
+  3
+ ],
+ "k": 4,
+ "gaps": 1,
+ "enc": "sb",
+ "vertices": 4,
+ "degree": 3,
+ "vars": 16,
+ "clauses": 58,
+ "u0": 1,
+ "vertex_index": "element bits in F_2[x]/(poly)"
+}

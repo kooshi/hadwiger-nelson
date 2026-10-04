@@ -1,0 +1,26 @@
+c --- [ banner ] -------------------------------------------------------------
+c 
+c CaDiCaL SAT Solver
+c Copyright (c) 2016-2024
+c A. Biere, M. Fleury, N. Froleyks, K. Fazekas, F. Pollitt, T. Faller
+c JKU Linz, University of Freiburg, TU Wien
+c 
+c Version 2.1.2
+c clang++-Clang 22.1.4 (https://github.com/llvm/llvm-project 35990504507d79e0b9deb809c8ee5e1b34ceef20)
+c Jan  1 1980 00:00:00
+c 
+c --- [ limit ] --------------------------------------------------------------
+c 
+c setting time limit to 300 seconds real time (due to '-t 300')
+c 
+c --- [ proof tracing ] ------------------------------------------------------
+c 
+c opening file to write 'data/search/2026-10-03/row4/calib/gamma19-k5-g1-sb.lrat'
+c writing non-binary proof trace to 'data/search/2026-10-03/row4/calib/gamma19-k5-g1-sb.lrat'
+c 
+c --- [ parsing input ] ------------------------------------------------------
+c 
+c reading DIMACS file from 'data/search/2026-10-03/row4/calib/gamma19-k5-g1-sb.cnf'
+c opening file to read 'data/search/2026-10-03/row4/calib/gamma19-k5-g1-sb.cnf'
+c found 'p cnf 1805 22044' header
+cadical: error: data/search/2026-10-03/row4/calib/gamma19-k5-g1-sb.cnf:13935: parse error: last clause without terminating '0'

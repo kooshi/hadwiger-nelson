@@ -1,0 +1,5 @@
+U_2: d = 3; spectrum {-1: 3, 3: 1}; lambda_min = -1; Hoffman floor 1 - d/lambda_min = 4 = 4.0000; lambda_min + d/3 = 0: TIGHT at four colours
+U_4: d = 5; spectrum {-3: 5, 1: 10, 5: 1}; lambda_min = -3; Hoffman floor 1 - d/lambda_min = 8/3 = 2.6667; lambda_min + d/3 = -4/3: SLACK at four colours
+U_8: d = 9; spectrum {-3: 27, 1: 27, 5: 9, 9: 1}; lambda_min = -3; Hoffman floor 1 - d/lambda_min = 4 = 4.0000; lambda_min + d/3 = 0: TIGHT at four colours
+U_16: d = 17; spectrum {-7: 34, -3: 68, 1: 85, 5: 68, 17: 1}; lambda_min = -7; Hoffman floor 1 - d/lambda_min = 24/7 = 3.4286; lambda_min + d/3 = -4/3: SLACK at four colours
+U_32: d = 33; spectrum {-11: 33, -7: 165, -3: 330, 1: 165, 5: 165, 9: 165, 33: 1}; lambda_min = -11; Hoffman floor 1 - d/lambda_min = 4 = 4.0000; lambda_min + d/3 = 0: TIGHT at four colours

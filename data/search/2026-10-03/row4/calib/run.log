@@ -1,0 +1,4 @@
+slot: admitted search-r4-calib: mem 4 GiB (hard cap), cpus 0,1,2
+RESULT gamma19-k5-g1-sb solver=cadical status=None rc=1 wall=0.00s vars=1805 clauses=22044 UNKNOWN
+RESULT gamma19-k5-g1-sb solver=kissat status=SATISFIABLE rc=10 wall=7.34s vars=1805 clauses=22044
+RESULT gamma19-k5-g0-plain solver=cadical status=SATISFIABLE rc=10 wall=14.23s vars=1805 clauses=22021

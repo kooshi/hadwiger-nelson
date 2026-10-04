@@ -1,0 +1,8 @@
+PLANTS FIRE: gamma11-k5-g2-plain.colouring.json: as filed at 2 gap(s): ACCEPTED; claimed at 3: REJECTED; vertex 0's colour copied onto neighbour 1: REJECTED (improper: vertices 0 and 1 adjacent, both colour 0 (3 monochromatic edges))
+EXIT=0
+PLANTS FIRE: gamma11-k5-g2-sb.colouring.json: as filed at 2 gap(s): ACCEPTED; claimed at 3: REJECTED; vertex 0's colour copied onto neighbour 1: REJECTED (improper: vertices 0 and 1 adjacent, both colour 0 (3 monochromatic edges))
+EXIT=0
+PLANTS FIRE: uq2-k4-g1-plain.colouring.json: as filed at 1 gap(s): ACCEPTED; claimed at 2: REJECTED; vertex 0's colour copied onto neighbour 1: REJECTED (improper: vertices 0 and 1 adjacent, both colour 0 (1 monochromatic edges))
+EXIT=0
+PLANTS FIRE: uq2-k4-g1-sb.colouring.json: as filed at 1 gap(s): ACCEPTED; claimed at 2: REJECTED; vertex 0's colour copied onto neighbour 1: REJECTED (improper: vertices 0 and 1 adjacent, both colour 0 (1 monochromatic edges))
+EXIT=0

@@ -1,0 +1,130 @@
+c --- [ banner ] -------------------------------------------------------------
+c 
+c CaDiCaL SAT Solver
+c Copyright (c) 2016-2024
+c A. Biere, M. Fleury, N. Froleyks, K. Fazekas, F. Pollitt, T. Faller
+c JKU Linz, University of Freiburg, TU Wien
+c 
+c Version 2.1.2
+c clang++-Clang 22.1.4 (https://github.com/llvm/llvm-project 35990504507d79e0b9deb809c8ee5e1b34ceef20)
+c Jan  1 1980 00:00:00
+c 
+c --- [ limit ] --------------------------------------------------------------
+c 
+c setting time limit to 600 seconds real time (due to '-t 600')
+c 
+c --- [ proof tracing ] ------------------------------------------------------
+c 
+c opening file to write 'data/search/2026-10-03/row5/uq4-k4-g1-sb.lrat'
+c writing non-binary proof trace to 'data/search/2026-10-03/row5/uq4-k4-g1-sb.lrat'
+c 
+c --- [ parsing input ] ------------------------------------------------------
+c 
+c reading DIMACS file from 'data/search/2026-10-03/row5/uq4-k4-g1-sb.cnf'
+c opening file to read 'data/search/2026-10-03/row5/uq4-k4-g1-sb.cnf'
+c found 'p cnf 1024 10516' header
+c parsed 10516 clauses in 0.00 seconds process time
+c 
+c --- [ options ] ------------------------------------------------------------
+c 
+c   --binary=false                 (different from default 'true')
+c   --lrat=true                    (different from default 'false')
+c 
+c --- [ solving ] ------------------------------------------------------------
+c 
+c time measured in process time since initialization
+c 
+c  seconds  reductions  redundant  irredundant
+c         MB    restarts       trail     variables
+c          level   conflicts       glue      remaining
+c 
+c *  0.00  6  0 0   0    0    0  0% 0 10496 968 95%
+c {  0.00  6  0 0   0    0    0  0% 0 10496 968 95%
+c -  0.01  6  6 1   0  301  203 46% 5 9454 968 95%
+c -  0.02  6  7 2  53  901  653 46% 5 9454 968 95%
+c }  0.02  6  7 2  53 1001  747 46% 5 9454 968 95%
+c [  0.02  6  0 2  53 1001  747  0% 0 9454 968 95%
+c O  0.02  6 12 2  53 1002  748 52% 5 9454 968 95%
+c -  0.03  6  6 3  53 1802 1093 46% 5 9454 968 95%
+c i  0.04  6  6 3  53 2023 1228 47% 5 9454 967 94%
+c ]  0.05  6  7 3  54 3001 2057 46% 5 9454 967 94%
+c {  0.05  6  7 3  54 3001 2057 46% 5 9454 967 94%
+c -  0.05  6  7 4  54 3002 1430 46% 5 9436 967 94%
+c F  0.05  6  7 4  54 3003 1431 46% 5 9436 967 94%
+c i  0.07  6  6 4  69 3767 1988 46% 5 9436 966 94%
+c i  0.07  6  6 4  69 3892 2073 46% 5 9436 965 94%
+c i  0.08  6  6 4  69 4355 2416 46% 4 9436 947 92%
+c i  0.08  6  6 4  69 4470 2478 46% 4 9436 946 92%
+c -  0.08  6  6 5  69 4504 1277 46% 4 9065 946 92%
+c i  0.08  6  6 5  69 4511 1282 46% 4 9065 896 88%
+c i  0.08  7  6 5  69 4550  878 37% 4 8191 878 86%
+c 
+c  seconds  reductions  redundant irredundant
+c         MB    restarts       trail    variables
+c          level   conflicts       glue     remaining
+c 
+c i  0.08  7  6 5  69 4552  879 37% 4 8191 877 86%
+c i  0.08  7  6 5  69 4556  882 37% 4 8191 822 80%
+c i  0.08  7  6 5  69 4563  886 38% 4 8191 794 78%
+c }  0.08  7  6 5  69 4568  887 37% 4 8191 760 74%
+c 0  0.08  7  6 5  69 4568  887 37% 4 8191 760 74%
+c 
+c --- [ closing proof ] ------------------------------------------------------
+c 
+c LRAT proof file 'data/search/2026-10-03/row5/uq4-k4-g1-sb.lrat' closed
+c LRAT 5737 added clauses 45.36%
+c LRAT 6910 deleted clauses 54.64%
+c LRAT 1297156 bytes (1.24 MB)
+c 
+c --- [ result ] -------------------------------------------------------------
+c 
+s UNSATISFIABLE
+c 
+c --- [ run-time profiling ] -------------------------------------------------
+c 
+c process time taken by individual solving procedures
+c (percentage relative to process time for solving)
+c 
+c         0.08   99.93% search
+c         0.04   55.51% unstable
+c         0.04   44.25% stable
+c         0.00    2.30% parse
+c         0.00    0.12% lucky
+c         0.00    0.00% simplify
+c   =================================
+c         0.08   97.56% solve
+c 
+c last line shows process time for solving
+c (percentage relative to total process time)
+c 
+c --- [ statistics ] ---------------------------------------------------------
+c 
+c chronological:               620        13.57 %  of conflicts
+c conflicts:                  4568     57127.14    per second
+c decisions:                  5234     65456.09    per second
+c fixed:                       264        25.78 %  of all variables
+c learned:                    4455        97.53 %  per conflict
+c learned_lits:              72773       100.00 %  learned literals
+c minimized:                     0         0.00 %  learned literals
+c shrunken:                  24904        34.22 %  learned literals
+c minishrunken:               3397         4.67 %  learned literals
+c otfs:                         16         0.35 %  of conflict
+c propagations:             808934        10.12 M  per second
+c reduced:                     811        17.75 %  per conflict
+c rephased:                      2      2284.00    interval
+c restarts:                     69        66.20    interval
+c stabilizing:                   1        43.78 %  of conflicts
+c subsumed:                   1046         7.00 %  of all clauses
+c strengthened:                 15         0.10 %  of all clauses
+c 
+c seconds are measured in process time for solving
+c 
+c --- [ resources ] ----------------------------------------------------------
+c 
+c total process time since initialization:         0.08    seconds
+c total real time since initialization:            0.08    seconds
+c maximum resident set size of process:           19.57    MB
+c 
+c --- [ shutting down ] ------------------------------------------------------
+c 
+c exit 20

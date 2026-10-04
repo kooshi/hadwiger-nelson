@@ -1,0 +1,12 @@
+ACCEPTED: the documented formula for uq1-k4-g1-sb.meta.json (58 clauses, 16 vars), regenerated here; the encoder's CNF is byte-identical; cake_lpr says 's VERIFIED UNSAT' on uq1-k4-g1-sb.lrat.gz
+EXIT=0
+ACCEPTED: the documented formula for uq1-k4-g1-plain.meta.json (69 clauses, 20 vars), regenerated here; the encoder's CNF is byte-identical; cake_lpr says 's VERIFIED UNSAT' on uq1-k4-g1-plain.lrat.gz
+EXIT=0
+ACCEPTED: the documented formula for uq3-k4-g1-sb.meta.json (1612 clauses, 256 vars), regenerated here; the encoder's CNF is byte-identical; cake_lpr says 's VERIFIED UNSAT' on uq3-k4-g1-sb.lrat.gz
+EXIT=0
+ACCEPTED: the documented formula for uq3-k4-g1-plain.meta.json (1641 clauses, 260 vars), regenerated here; the encoder's CNF is byte-identical; cake_lpr says 's VERIFIED UNSAT' on uq3-k4-g1-plain.lrat.gz
+EXIT=0
+ACCEPTED: the documented formula for uq4-k4-g1-sb.meta.json (10516 clauses, 1024 vars), regenerated here; the encoder's CNF is byte-identical; cake_lpr says 's VERIFIED UNSAT' on uq4-k4-g1-sb.lrat.gz
+EXIT=0
+ACCEPTED: the documented formula for uq4-k4-g1-plain.meta.json (10569 clauses, 1028 vars), regenerated here; the encoder's CNF is byte-identical; cake_lpr says 's VERIFIED UNSAT' on uq4-k4-g1-plain.lrat.gz
+EXIT=0

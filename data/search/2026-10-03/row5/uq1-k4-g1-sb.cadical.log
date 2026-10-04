@@ -1,0 +1,86 @@
+c --- [ banner ] -------------------------------------------------------------
+c 
+c CaDiCaL SAT Solver
+c Copyright (c) 2016-2024
+c A. Biere, M. Fleury, N. Froleyks, K. Fazekas, F. Pollitt, T. Faller
+c JKU Linz, University of Freiburg, TU Wien
+c 
+c Version 2.1.2
+c clang++-Clang 22.1.4 (https://github.com/llvm/llvm-project 35990504507d79e0b9deb809c8ee5e1b34ceef20)
+c Jan  1 1980 00:00:00
+c 
+c --- [ limit ] --------------------------------------------------------------
+c 
+c setting time limit to 600 seconds real time (due to '-t 600')
+c 
+c --- [ proof tracing ] ------------------------------------------------------
+c 
+c opening file to write 'data/search/2026-10-03/row5/uq1-k4-g1-sb.lrat'
+c writing non-binary proof trace to 'data/search/2026-10-03/row5/uq1-k4-g1-sb.lrat'
+c 
+c --- [ parsing input ] ------------------------------------------------------
+c 
+c reading DIMACS file from 'data/search/2026-10-03/row5/uq1-k4-g1-sb.cnf'
+c opening file to read 'data/search/2026-10-03/row5/uq1-k4-g1-sb.cnf'
+c found 'p cnf 16 58' header
+c parsed 58 clauses in 0.00 seconds process time
+c 
+c --- [ options ] ------------------------------------------------------------
+c 
+c   --binary=false                 (different from default 'true')
+c   --lrat=true                    (different from default 'false')
+c 
+c --- [ solving ] ------------------------------------------------------------
+c 
+c time measured in process time since initialization
+c 
+c  seconds  reductions  redundant irredundant
+c         MB    restarts       trail    variables
+c          level   conflicts       glue     remaining
+c 
+c 0  0.00  4  0 0   0    0    0  0% 0   52   0  0%
+c 
+c --- [ closing proof ] ------------------------------------------------------
+c 
+c LRAT proof file 'data/search/2026-10-03/row5/uq1-k4-g1-sb.lrat' closed
+c LRAT 14 added clauses 82.35%
+c LRAT 3 deleted clauses 17.65%
+c LRAT 247 bytes (0.00 MB)
+c 
+c --- [ result ] -------------------------------------------------------------
+c 
+s UNSATISFIABLE
+c 
+c --- [ run-time profiling ] -------------------------------------------------
+c 
+c process time taken by individual solving procedures
+c (percentage relative to process time for solving)
+c 
+c         0.00  153.33% parse
+c         0.00    0.00% search
+c         0.00    0.00% simplify
+c   =================================
+c         0.00   12.15% solve
+c 
+c last line shows process time for solving
+c (percentage relative to total process time)
+c 
+c --- [ statistics ] ---------------------------------------------------------
+c 
+c fixed:                        16       100.00 %  of all variables
+c minimized:                     0         0.00 %  learned literals
+c shrunken:                      0         0.00 %  learned literals
+c minishrunken:                  0         0.00 %  learned literals
+c propagations:                 16         0.53 M  per second
+c 
+c seconds are measured in process time for solving
+c 
+c --- [ resources ] ----------------------------------------------------------
+c 
+c total process time since initialization:         0.00    seconds
+c total real time since initialization:            0.00    seconds
+c maximum resident set size of process:           18.06    MB
+c 
+c --- [ shutting down ] ------------------------------------------------------
+c 
+c exit 20

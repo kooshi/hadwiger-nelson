@@ -1,0 +1,14 @@
+{
+ "graph": "gamma",
+ "n": 19,
+ "units": 20,
+ "k": 5,
+ "gaps": 1,
+ "enc": "sb",
+ "vertices": 361,
+ "degree": 20,
+ "vars": 1805,
+ "clauses": 22044,
+ "u0": 19,
+ "vertex_index": "x*n+y"
+}

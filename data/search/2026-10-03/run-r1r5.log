@@ -1,0 +1,27 @@
+slot: admitted search-r1r5: mem 4 GiB (hard cap), cpus 0
+RESULT gamma11-k5-g2-sb solver=cadical status=SATISFIABLE rc=10 wall=0.02s vars=605 clauses=5110
+EXIT=0
+RESULT gamma11-k5-g2-plain solver=cadical status=SATISFIABLE rc=10 wall=0.01s vars=610 clauses=5031
+EXIT=0
+RESULT uq1-k4-g1-sb solver=cadical status=UNSATISFIABLE rc=20 wall=0.00s vars=16 clauses=58 lrat=data/search/2026-10-03/row5/uq1-k4-g1-sb.lrat
+EXIT=0
+RESULT uq1-k4-g1-plain solver=cadical status=UNSATISFIABLE rc=20 wall=0.00s vars=20 clauses=69 lrat=data/search/2026-10-03/row5/uq1-k4-g1-plain.lrat
+EXIT=0
+RESULT uq2-k4-g1-sb solver=cadical status=SATISFIABLE rc=10 wall=0.00s vars=64 clauses=280
+EXIT=0
+RESULT uq2-k4-g1-plain solver=cadical status=SATISFIABLE rc=10 wall=0.00s vars=68 clauses=297
+EXIT=0
+RESULT uq3-k4-g1-sb solver=cadical status=UNSATISFIABLE rc=20 wall=0.00s vars=256 clauses=1612 lrat=data/search/2026-10-03/row5/uq3-k4-g1-sb.lrat
+EXIT=0
+RESULT uq3-k4-g1-plain solver=cadical status=UNSATISFIABLE rc=20 wall=0.00s vars=260 clauses=1641 lrat=data/search/2026-10-03/row5/uq3-k4-g1-plain.lrat
+EXIT=0
+RESULT uq4-k4-g1-sb solver=cadical status=UNSATISFIABLE rc=20 wall=0.08s vars=1024 clauses=10516 lrat=data/search/2026-10-03/row5/uq4-k4-g1-sb.lrat
+EXIT=0
+RESULT uq4-k4-g1-plain solver=cadical status=UNSATISFIABLE rc=20 wall=2.90s vars=1028 clauses=10569 lrat=data/search/2026-10-03/row5/uq4-k4-g1-plain.lrat
+EXIT=0
+RESULT uq3-k4-g0-plain solver=cadical status=SATISFIABLE rc=10 wall=0.00s vars=256 clauses=1600
+EXIT=0
+RESULT uq4-k4-g0-plain solver=cadical status=SATISFIABLE rc=10 wall=0.00s vars=1024 clauses=10496
+EXIT=0
+RESULT uq5-k4-g0-plain solver=cadical status=SATISFIABLE rc=10 wall=0.03s vars=4096 clauses=74752
+EXIT=0

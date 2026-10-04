@@ -1,0 +1,34 @@
+controls: the held kernel tables against the rebuilt graphs
+  [PASS] Gamma_11 rebuilt with degree q + 1 = 12 (got 12)
+  [PASS] finitePlane11Table: proper with a single gap somewhere: ACCEPTED: proper; degree 12; colours used 5; max colours absent from a closed neighbourhood 1; vertices with >= 1 absent: 3 of 121; e.g. vertex 26, absent colours [2]
+  [PASS] finitePlane11Table: no vertex with two gaps (the requests' premise): REJECTED
+  [PASS] Gamma_11 rebuilt with degree q + 1 = 12 (got 12)
+  [PASS] finitePlane11DoubleGapTable: proper with a single gap somewhere: ACCEPTED: proper; degree 12; colours used 5; max colours absent from a closed neighbourhood 1; vertices with >= 1 absent: 10 of 121; e.g. vertex 0, absent colours [4]
+  [PASS] finitePlane11DoubleGapTable: no vertex with two gaps (the requests' premise): REJECTED
+  [PASS] Gamma_19 rebuilt with degree q + 1 = 20 (got 20)
+  [PASS] finitePlane19QuotColouring: proper with a single gap somewhere: ACCEPTED: proper; degree 20; colours used 5; max colours absent from a closed neighbourhood 1; vertices with >= 1 absent: 38 of 361; e.g. vertex 4, absent colours [1]
+  [PASS] finitePlane19QuotColouring: no vertex with two gaps (the requests' premise): REJECTED
+  [PASS] Gamma_7 rebuilt with degree q + 1 = 8 (got 8)
+  [PASS] circ7Table along projAlong (1, 2): proper with a single gap somewhere: ACCEPTED: proper; degree 8; colours used 4; max colours absent from a closed neighbourhood 1; vertices with >= 1 absent: 14 of 49; e.g. vertex 2, absent colours [3]
+  [PASS] circ7Table along projAlong (1, 2): no vertex with two gaps (the requests' premise): REJECTED
+  [PASS] circ7Table gapped at 14 of 49 vertices (brief; FS129-MA2-G7GAP): 14
+plants: each must fail
+  [PASS] one entry of finitePlane11Table copied onto a neighbour: REJECTED: improper: vertices 0 and 1 adjacent, both colour 0 (5 monochromatic edges)
+  [PASS] the graph built at quadrance 2 instead of 1 (the held table must fail there): REJECTED
+  [PASS] the held five-colouring claimed as a four-colouring: REJECTED: a colour outside range(4)
+  [PASS] a reducible polynomial for F_16 refused: REFUSED: poly 0x15 is not an irreducible polynomial of degree 4
+  [PASS] U_4 rebuilt: 16 vertices of degree 5 (5)
+  [PASS] U_4 triangle-free (the Clebsch graph): trace(A^3) = 0
+plants on the UNSAT path
+  [PASS] control instance Gamma_11 at four colours refused by the encoder's solve: RESULT gamma11-k4-g1-plain solver=cadical status=UNSATISFIABLE rc=20 wall=0.00s vars=488 clauses=3804 lrat=/tmp/claude-1000/-home-kooshi-source-lean-dir/984eeaca-d907-4cf5-b8de-38dbe42187be/scratchpad/search20261003-1pq8_tgj/gamma11-k4-g1-plain.lrat
+ACCEPTED: the documented formula for gamma11-k4-g1-plain.meta.json (3804 clauses, 488 vars), regenerated here; the encoder's CNF is byte-identical; cake_lpr says 's VERIFIED UNSAT' on gamma11-k4-g1-plain.lrat
+  [PASS] the faithful pair: Gamma_11 at four colours, its CNF and LRAT accepted
+REJECTED: drop.cnf is not byte-identical to the documented formula as regenerated here (3803 clauses there, 3804 here)
+  [PASS] a CNF with one clause dropped: refused as not the documented formula
+  [PASS] the LRAT proof truncated to half: cake_lpr says 'c empty clause not derived at end of proof'
+  [PASS] another formula's proof (Gamma_7 at three colours) on Gamma_11's CNF: cake_lpr says 'c Checking failed at line: 0. Reason: clause not empty or singleton after reduction'
+ACCEPTED: the documented formula for gamma11-k4-g1-plain.meta.json (3804 clauses, 488 vars), regenerated here; cake_lpr says 's VERIFIED UNSAT' on proof.lrat.gz
+  [PASS] the same proof gzipped, checked against the regenerated CNF alone
+REJECTED: cake_lpr did not verify (rc 0): 'c Checking failed at line: 0. Reason: clause index unavailable: 3790'
+  [PASS] the plain encoding's proof against the sb meta (another formula): refused
+CONTROLS: ALL PASS

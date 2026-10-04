@@ -1,0 +1,14 @@
+ACCEPTED: gamma11-k5-g2-plain.colouring.json: proper; degree 12; colours used 5; max colours absent from a closed neighbourhood 2; vertices with >= 2 absent: 1 of 121; e.g. vertex 0, absent colours [1, 4]
+EXIT=0
+ACCEPTED: gamma11-k5-g2-sb.colouring.json: proper; degree 12; colours used 5; max colours absent from a closed neighbourhood 2; vertices with >= 2 absent: 1 of 121; e.g. vertex 0, absent colours [3, 4]
+EXIT=0
+ACCEPTED: uq2-k4-g1-plain.colouring.json: proper; degree 5; colours used 4; max colours absent from a closed neighbourhood 1; vertices with >= 1 absent: 2 of 16; e.g. vertex 0, absent colours [3]
+EXIT=0
+ACCEPTED: uq2-k4-g1-sb.colouring.json: proper; degree 5; colours used 4; max colours absent from a closed neighbourhood 1; vertices with >= 1 absent: 2 of 16; e.g. vertex 0, absent colours [3]
+EXIT=0
+ACCEPTED: uq3-k4-g0-plain.colouring.json: proper; degree 9; colours used 4; max colours absent from a closed neighbourhood 0; vertices with >= 0 absent: 64 of 64; e.g. vertex 0, absent colours []
+EXIT=0
+ACCEPTED: uq4-k4-g0-plain.colouring.json: proper; degree 17; colours used 4; max colours absent from a closed neighbourhood 0; vertices with >= 0 absent: 256 of 256; e.g. vertex 0, absent colours []
+EXIT=0
+ACCEPTED: uq5-k4-g0-plain.colouring.json: proper; degree 33; colours used 4; max colours absent from a closed neighbourhood 0; vertices with >= 0 absent: 1024 of 1024; e.g. vertex 0, absent colours []
+EXIT=0
