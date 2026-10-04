@@ -7,7 +7,24 @@
 
 ## Theorems this phase proved
 
-*(filled at the last stage)*
+Each `derived`, one mind, prior art partly or owed (for FS129-Z1's gate); handoff de Bruijn unless said. Each is a merged or weakened form
+of held results (§ 6.3 says which it replaces), not a new answer.
+
+- **FS129-SA1-NOAFF-K** — a sum `Σ_v φ_v(C(v))` constant over the proper `k`-colourings of a graph with a homomorphism `ρ` into `T` has `φ_u` constant
+  at every `u` whose image is gapped in some colouring of `T`; all constant if `T` is slack. [hand; control FS129-SA1-NOAFF4] — § 2.3
+- **FS129-SA1-PLACE-HOM** — for a number field F with a usable prime of residue field `𝔽_q`, the plane over `F(t₁, …, t_n)` has a graph homomorphism
+  into Γ_q through one subring holding every unit vector and a ring map into `𝔽_q`. [hand] — § 2.3
+- **FS129-SA1-NOAFF-FIELDS** — over `F(t₁, …, t_n)`, no non-constant such sum at `k = 5` (a usable 𝔽₁₁ or 𝔽₁₉ prime, or `χ(F²) ≤ 4`) or `k = 4`
+  (a usable 𝔽₇ prime, or `χ(F²) ≤ 3`). [derived from NOAFF-K, PLACE-HOM] — § 2.3
+- **FS129-SA1-FALC-FAN** — a Falconer fan at `k` colours mapped into `T`: (A) the tip's colour and every tip gap lie in `{C(ρa), γ}`; (B) every proper
+  `(k − 1)`-colouring of `T` identifies `ρa, ρt` and has no gap at `ρt`. [hand; control FS129-SA1-FAN4] — § 2.3
+- **FS129-SA1-FALC-DICHO-K** — a fan at `k` has `χ(H) ≥ k − 1`, and at `χ(H) = k − 1` forces its apex and tip at `k − 1` colours. [derived from
+  FALC-FAN] — § 2.3
+- **FS129-SA1-FALC-RES** — over `F(t₁, …, t_n)`, a fan at five needs `χ(F²) ≥ 4` and no usable 𝔽₇ prime, and has its tip in its apex's residue class
+  at every usable 𝔽₁₁ or 𝔽₁₉ prime. [derived from FALC-FAN, DICHO-K, PLACE-HOM; controls FS129-SA1-ORBIT11, -ORBIT19] — § 2.3
+- **FS129-SA1-FALC-RED** — FS129-OA1-FALC-RED's statement, verbatim, argued in `[Falconer1981]`'s order (Lemma 1's motion chosen by the lemma). [hand] — § 2.3
+- **FS129-SA1-SQRT3-LOCAL** — at a dyadic place `w` with `3` a square in `F_w`, `w` is unramified in `F(i)`, split iff `f(w|2)` is even, else inert.
+  [hand; control FS129-SA1-SQRT3] — § 6.1
 
 ## Stage 1 — SAVED (readback, registered expectations, the plan of stages)
 
@@ -651,3 +668,98 @@ and CL5's fields at their bands), so an older entry quantifying over `Θ₄(R_{�
 
 Only "empty" passes vacuity to dependents, and the only lane-A "empty" sort is ASTRA-T10 on its 𝔽₁₁-or-four-colourable sub-scope, with **no
 dependents**. **No lane-A result rests on a vacuous one.**
+
+## Stage 6 — SAVED (the Lean order, lane A's part; the list for FS129-L1; the registration, provisionally scored)
+
+### 6.1 The Lean order, lane A's part (`data/fs129/index/lean-order.md` rows 196–197; both conditional seeds, item 13)
+
+| # | result | sweep |
+|---|---|---|
+| 196 | TC1-SQRT3-DYADIC | **hypothesis weakened**: "√3 ∈ F and i ∉ F" to "3 is a square in F_w", place by place — its own `uses only:` already reads only `F_w` ("F_w(i) = F_w(√−3) when √3 ∈ F_w"), and its *not claimed* ("anything for F without √3") refuses more than the argument needs: ℚ(√51), without √3, has its dyadic place inert in F(i). Derived below as FS129-SA1-SQRT3-LOCAL |
+| 197 | TC1-STANDING-FIVE | **unchanged**: a statement about one field; it uses TC1-SQRT3-DYADIC only as a cross-check of TC1-FIELDS' exact decomposition, which SQRT3-LOCAL also covers |
+
+derivation: FS129-SA1-SQRT3-LOCAL
+  statement: for a number field F and a place w of F above 2 at which 3 is a square in the completion F_w, w is unramified in F(i)/F, and w
+    splits in F(i) if and only if its residue degree f(w|2) is even; when it does not split it is inert, of norm 2^f with f = f(w|2) odd
+  uses only: √−3 generates ℚ₄ = ℚ₂(ζ₃), the unramified quadratic extension of ℚ₂; F_w(i) = F_w(√−3) when 3 is a square in F_w (i = √−3/√3);
+    a compositum with an unramified extension is unramified over the smaller field; ℚ₄ ⊆ F_w when 2 divides f(w|2), and not otherwise
+  not claimed: anything at a dyadic place where 3 is not a square — ℚ(ζ₇)⁺'s one place above 2 is ramified in F(i) (TC1-FIELDS); at ℚ(√7)'s,
+    i ∈ F_w and w splits with f = 1; anything about the places of F not above 2
+  converse: § 6.2 The argument for FS129-SA1-SQRT3-LOCAL
+  argument: § 6.2 The argument for FS129-SA1-SQRT3-LOCAL
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: F = ℚ(√51), which does not contain √3: 51 = 3 · 17 with 17 a square in ℚ₂, so F_w = ℚ₂(√3); f = 1, and w is inert in F(i) (2 has
+    e = 2, f = 2, g = 1 in ℚ(√51, i)); over the control's 223 dyadic places, 43 have 3 a square, 33 of them in fields without √3 — no violation
+    (control FS129-SA1-SQRT3)
+  prior art: partly: TC1-SQRT3-DYADIC (the case √3 ∈ F, by the same argument); the local facts are standard (recalled, not read)
+  handoff: de Bruijn — formalize in place of TC1-SQRT3-DYADIC, as a conditional seed like it: one local lemma; it crosses with G56's dyadic
+    exclusion if that is formalized
+
+control: FS129-SA1-SQRT3
+  of: FS129-SA1-SQRT3-LOCAL — both directions, at every dyadic place of 194 fields (the 182 real quadratic fields of squarefree d ≤ 300, K, K(√5), K(√7), ℚ(√3, √5), ℚ(√2, √3), ℚ(√51, √5) and six cubic or sextic fields), by PARI's relative prime decomposition
+  run: gp -q ../tools/fs129_sa1_sqrt3_local.gp < /dev/null | tail -1
+  expect: violations=0
+  fault: FAULT=1 gp -q ../tools/fs129_sa1_sqrt3_local.gp < /dev/null | tail -1
+
+control: FS129-SA1-SQRT3-CONV
+  of: FS129-SA1-SQRT3-LOCAL — the converse direction alone: at a place with 3 a square, no split place has f(w|2) odd and no inert place has f(w|2) even
+  run: CONV=1 gp -q ../tools/fs129_sa1_sqrt3_local.gp < /dev/null | tail -1
+  expect: violations=0
+  fault: CONV=1 FAULT=1 gp -q ../tools/fs129_sa1_sqrt3_local.gp < /dev/null | tail -1
+
+### 6.2 The argument for FS129-SA1-SQRT3-LOCAL
+
+Let `√3 ∈ F_w`. Then `i = √−3 / √3`, so `F_w(i) = F_w(√−3)`. The polynomial `x² + x + 1` (roots `(−1 ± √−3)/2`) is irreducible over `𝔽₂`, so
+`ℚ₂(√−3) = ℚ₂(ζ₃) = ℚ₄` is the unramified quadratic extension of `ℚ₂`, and `F_w(i) = F_w · ℚ₄` is unramified over `F_w`: `w` is unramified in
+`F(i)`. The maximal unramified subextension of `F_w/ℚ₂` has degree `f(w|2)`, and unramified extensions of `ℚ₂` are one per degree, nested by
+divisibility; so `ℚ₄ ⊆ F_w` if `2 | f(w|2)`, and then `F_w(i) = F_w` — `w` splits. **Conversely**, if `f(w|2)` is odd then `ℚ₄ ⊄ F_w`, so
+`[F_w(i) : F_w] = 2` and unramified: `w` is inert, the place above it has residue degree 2 over `w`, and `w`'s own norm is `2^{f(w|2)}` with
+`f(w|2)` odd. Both directions use only `F_w`. ∎ TC1-SQRT3-DYADIC is the case `√3 ∈ F` (then `3` is a square in every `F_w`).
+
+### 6.3 The list for FS129-L1 (the Lean backlog's input)
+
+**Formalize X in place of A, B, C:**
+1. **FS129-SA1-NOAFF-K** (with its field corollary **FS129-SA1-NOAFF-FIELDS**) in place of FS129-OA1-NOLIN5, FS129-MA1-NOAFF5, MA2's k = 4 note
+   (`plans/FS129-MA2-audit.md` § 2.3) and FS84-S1e (`plans/FS84-S1-derivation.md` § 4.2); `Slack.forces_iff_of_hom` (row 66, kernel) is its
+   two-vertex case.
+2. **FS129-SA1-PLACE-HOM**, once, as the homomorphism every field statement of the family goes through (the coset map behind
+   `unitQuadrance_colorable_of_valuationSubring`, iterated, composed with the residue map).
+3. **FS129-SA1-FALC-FAN** in place of FS129-MA1-FALC-T and FS129-MA2-FALC-GAP4.
+4. **FS129-SA1-FALC-DICHO-K** in place of FS129-MA2-FALC-DICHO.
+5. **FS129-SA1-FALC-RES** in place of FS129-OA1-FALC-11, FS129-MA1-FALC-19 and FS129-MA2-FALC-HOSTS clause (i); HOSTS clauses (ii)–(iv) as filed,
+   from FALC-FAN (B) and DICHO-K.
+6. **FS129-OA1-FALC-RED's statement from FS129-SA1-FALC-RED's argument**, importing `[Falconer1981]` Lemma 1 in the paper's form only (the motion
+   is the lemma's; never "for every e ∈ E, almost every rotation about e").
+7. **FS129-SA1-SQRT3-LOCAL** in place of TC1-SQRT3-DYADIC (a conditional seed, as filed).
+
+**Do not formalize as stated:**
+8. **ASTRA-2026-09-14-T10** — its hypothesis is empty over every `F ⊇ K` with a usable prime of residue field 𝔽₁₁ or with `χ(F²) ≤ 4` (§ 3.2), and
+   its sentence ("has a proper five-colouring in which two points at distance 2 are properly separated") is weaker than the `Separated` it means
+   and false as read; if FS-49 is formalized, its hypothesis is `Separated` (every colouring), never instantiated over those fields.
+9. **FS89-S0A-2, FS89-S0A-10, FS89-CL2 with the Notation's `A` (`λ_e`, one embedding)** — false as written (§ 3.1); formalize only with
+   `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`. S0A-2's kernel line names it a candidate for FS-87's list.
+
+**Upstream missing from the backlog's closure** (for FS129-Z1 to file first): J45-N1, -N2, -SI-4 (A⁺), -SI-5, -SI-J, -SI-C, -SP-oi, -SP-if
+(`plans/FS84-SI-D-derivation.md`), inputs of FS100-Q47 (`χ(ℚ(√47)²) = 5`) and FS103-F-* with no entry; X25B-L1 and X25B-PZ, inputs of FS103-F-FRAC.
+
+**Unchanged:** FS129-OA1-NOPERLAW (handoff none); TC1-STANDING-FIVE (a conditional seed).
+
+**Index corrections, for FS129-Z1's index pass:** remove the 8 false lane-A edges and reverse the one reversed (§ 4.3), and the two
+correcting-entry edges into FS89-CL2 (§ 3.1); resolve ids with their milestone prefix (16 of item 20's 68, § 4.2); `roots.md` rank 45
+(FS91-J01-3) is an artifact.
+
+### 6.4 The registration (§ 1.3), provisionally scored (FS129-Z1 scores)
+
+| id | registered | outcome |
+|---|---|---|
+| SA1-E1 merges earning an entry, family | 3 | **5** — NOAFF-K, NOAFF-FIELDS, FALC-FAN, FALC-DICHO-K, FALC-RES (plus PLACE-HOM, a rider entered, and FALC-RED re-argued) |
+| SA1-E2 merge lines, whole job | 10 | **17** statements found to be one (§ 2.2's 14 rows, FS84-S1e into NOAFF-K, X25B-LP and FS84-S1a-P into FS86-LP), beside 42 bookkeeping duplicates in item (c) |
+| SA1-E3 weakenings derived | 2 | **2** — NOAFF-K (slackness to a gap at `ρ(u)`), SQRT3-LOCAL (`√3 ∈ F` to `3 ∈ F_w²`); one more found, not derived (X22D-FLK2: FS100-FLK's rotation invariance to translation invariance, every `k`) |
+| SA1-E4 lane-A results sorted empty | 2 | **1** — ASTRA-T10, on a sub-scope, with no dependents |
+| SA1-E5 disagreeing records beyond the two named | 2 | **2** — FS89-S0A-2 and -S0A-10 under the same Notation as CL2; FS100-T1's grade line against row 117. And three pass-2 merge lines corrected (M60-T2, M61-T5, FS86-Cx-C11) |
+| SA1-E6 of the 68 ids, lost theorems | 5 | **14** (15 with X25B-PZ), ten of them load-bearing |
+| SA1-E7 lane A's share of item 77; false | 6; half | **9** (the coordinator's relay, SR1's list; my script agrees); **8 false, 1 reversed, 0 real** |
+| SA1-E8 P(a held result found false, beyond FS89-CL2) | 0.12 | **not met in content**: no held result is false as mathematics; two more statements are false as written (S0A-2, S0A-10, the same wording defect as CL2) and T10's sentence is false as read — wording, each with a true statement its argument carries |
+| SA1-E9 P(an attack on a lane-A one-mind composition succeeds) | 0.10 | **not met**: § 2.4 re-derives every family argument (NOLIN5, NOAFF5, FALC-T, DICHO, GAP4, HOSTS (i), FALC-11/19 through the orbit controls, FALC-RED in Falconer's order); none fails. Not re-derived: HOSTS (iii)–(iv) (rows 78, 88's consequences) |
