@@ -1158,3 +1158,17 @@ reason by the close.*
      (item 151); the non-sector leaves; then, once `localSectors` is on `main` (Keryx messages it), the bridge to wave 4's `IsSector`/`hornSet` (item 136) and the
      sector-reading leaves; the two plan gaps (item 143); `AeProperRegions` as a vacuity carrier and TS-T's carried form (items 144, 142) before the gate.
      Launched in W3's slot: 1 (I3i) + 1 (I2h) + 1 (I4c) = 3, plus QA2. Woodall's implementer (FS131-IWc) next.
+169. **FS131-I2h handed back at stage 15, harness ≈ 492k** (report on its branch; `fs131-w2` at `e8237b4b`, checked): 38 lines closed (91 → 53: Slack 39 → 19,
+     CoverExamples 44 → 34, Dyadic 4 → 0, YesLimit 4 → 0), 12 children added. **[kernel], standard three**: FS129-SA1-SQRT3-LOCAL (`sqrt3_local`) and TC1-SQRT3-DYADIC
+     (`sqrt3_dyadic`) under item 134's `hi` (the Kummer–Dedekind engine `dyadicConclusion_of_minpoly` through `normalizedFactors`; the minimal polynomial reduces to
+     `X² + X + 1`, separable, one or two factors, one exactly when `f` is odd); **FS111-M2-DISC7 sorry-free** (`disc7_upperDensity`: density `(π/4)/(21√3/8)`);
+     `muZero_eq_one_of_fragments`; `upperDensity_of_periodic`, `upperDensity_periodize` through a new `upperDensity_of_tiling` (any lattice-periodic set).
+     Proved from open children: FS111-V0-RESCALE (`exists_tight`), SUPK's three limits, `chiM0_le_chiCP`; `chiM0_le_of_fragments` waits only on
+     `chiM0_le_iff_muZero_eq_one`. **Merged `main` early** (`28f26bc1`) to use wave 3's `ArcMap.isOpen_region`, `Arc.volume_carrier` rather than duplicate them;
+     collisions resolved on wave 2's side (`dist_rot` → `dist_add_e_mul`, `eq_norm_mul_e_arg` → `self_eq_norm_mul_e_arg`); the IMPORTED move done by T3's
+     procedure (one `declareImport` for `falconer_lemma2_nonempty`, the four records under it; not yet checked by `axioms.sh`). Keryx's receipts: latest build log
+     "Build completed successfully (5722 jobs)", no warning but `sorry`; 53 `sorry` lines by count; `data/fs131/i2/i2h-axioms.txt` prints `sqrt3_dyadic` on the
+     standard three. **Ruling**: the early merge accepted — alternative, at the landing as the brief said; why: it avoided duplicating two landed facts under new
+     names (item 142's point); confidence high. Owed before wave 2's gate (carried to the next brief): QA1's docstrings, FALC-HOSTS (iv)'s docstring, wave 2's
+     vacuity carriers (`CPColouring`, `AeCover`, maximal covers, partial colourings). Re-pricing: Opus at about 25–30k on leaves K2c priced 40k at the Sonnet
+     rate. Cheapest next leaves named in its stage 15.
