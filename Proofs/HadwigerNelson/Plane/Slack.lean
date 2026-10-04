@@ -53,11 +53,18 @@ noncomputable def pairMass (A : Set ℂ) (R r : ℝ) : ENNReal :=
 
 theorem IccPairNull.mono {A : Set ℂ} {a b a' b' : ℝ} (h : IccPairNull A a b) (ha : a ≤ a') (hb : b' ≤ b) :
     IccPairNull A a' b' := by
-  sorry
+  exact
+  measure_mono_null (fun q (hq : q ∈ {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a' ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b'}) =>
+    (⟨hq.1, hq.2.1, ha.trans hq.2.2.1, hq.2.2.2.trans hb⟩ : q ∈ {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b})) h
 
 theorem IccPairNull.union {A : Set ℂ} {a b c : ℝ} (h1 : IccPairNull A a b) (h2 : IccPairNull A b c) :
     IccPairNull A a c := by
-  sorry
+  refine measure_mono_null (t := {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b} ∪
+    {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ b ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ c}) ?_ (measure_union_null h1 h2)
+  intro q hq
+  rcases le_total (dist q.1 q.2) b with h | h
+  · exact Or.inl ⟨hq.1, hq.2.1, hq.2.2.1, h⟩
+  · exact Or.inr ⟨hq.1, hq.2.1, h, hq.2.2.2⟩
 
 /-- The pairs at one exact distance are `Leb ⊗ Leb`-null (a circle is null in each slice). -/
 theorem volume_prod_dist_eq_null (r : ℝ) : (volume.prod volume) {q : ℂ × ℂ | dist q.1 q.2 = r} = 0 := by
@@ -145,10 +152,24 @@ theorem keptAt_of_dist_le {A : Set ℂ} {η ε : ℝ} (hε : 0 < ε) (hη : 0 �
 def periodize (T : Set ℂ) (L : ℝ) : Set ℂ := {x | ∃ m n : ℤ, x - ((m * L : ℝ) + (n * L : ℝ) * I) ∈ T}
 
 theorem isPeriodicSet_periodize (T : Set ℂ) (L : ℝ) : IsPeriodicSet L (periodize T L) := by
-  sorry
+  intro x
+  constructor
+  · constructor
+    · rintro ⟨m, n, h⟩
+      exact ⟨m - 1, n, by convert h using 1; push_cast; ring⟩
+    · rintro ⟨m, n, h⟩
+      exact ⟨m + 1, n, by convert h using 1; push_cast; ring⟩
+  · constructor
+    · rintro ⟨m, n, h⟩
+      exact ⟨m, n - 1, by convert h using 1; push_cast; ring⟩
+    · rintro ⟨m, n, h⟩
+      exact ⟨m, n + 1, by convert h using 1; push_cast; ring⟩
 
 theorem measurableSet_periodize {T : Set ℂ} (hT : MeasurableSet T) (L : ℝ) : MeasurableSet (periodize T L) := by
-  sorry
+  have : periodize T L = ⋃ (m : ℤ) (n : ℤ), (fun x : ℂ => x - (((m * L : ℝ) : ℂ) + ((n * L : ℝ) : ℂ) * I)) ⁻¹' T := by
+    ext x; simp [periodize]
+  rw [this]
+  exact MeasurableSet.iUnion fun m => MeasurableSet.iUnion fun n => (measurable_id.sub_const _) hT
 
 theorem isGridUnion_periodize {T : Set ℂ} {h : ℝ} (hh : 0 < h) {N : ℕ} (hT : IsGridUnion h T) :
     IsGridUnion h (periodize T (N * h)) := by
@@ -161,10 +182,37 @@ theorem bandFree_periodize {T : Set ℂ} {z : ℂ} {ℓ ε : ℝ} (hT : T ⊆ sq
 
 theorem disjoint_periodize {T T' : Set ℂ} {z : ℂ} {ℓ : ℝ} (hT : T ⊆ squareWin z ℓ) (hT' : T' ⊆ squareWin z ℓ)
     (h : Disjoint T T') : Disjoint (periodize T (ℓ + 2)) (periodize T' (ℓ + 2)) := by
-  sorry
+  rw [Set.disjoint_left]
+  rintro x ⟨m, n, hx⟩ ⟨m', n', hx'⟩
+  have h1 := hT hx
+  have h2 := hT' hx'
+  simp only [squareWin, mem_setOf_eq, Complex.sub_re, Complex.add_re, Complex.ofReal_re, Complex.mul_re,
+    Complex.I_re, Complex.ofReal_im, Complex.I_im, Complex.sub_im, Complex.add_im, Complex.mul_im] at h1 h2
+  have hℓ : ℓ + 2 > 0 := by
+    have := h1.1; have := h1.2.1; linarith
+  have hm : m = m' := by
+    by_contra hne
+    rcases lt_or_gt_of_ne hne with hlt | hlt
+    · have : (m : ℝ) + 1 ≤ m' := by exact_mod_cast hlt
+      nlinarith [h1.1, h1.2.1, h2.1, h2.2.1]
+    · have : (m' : ℝ) + 1 ≤ m := by exact_mod_cast hlt
+      nlinarith [h1.1, h1.2.1, h2.1, h2.2.1]
+  have hn : n = n' := by
+    by_contra hne
+    rcases lt_or_gt_of_ne hne with hlt | hlt
+    · have : (n : ℝ) + 1 ≤ n' := by exact_mod_cast hlt
+      nlinarith [h1.2.2.1, h1.2.2.2, h2.2.2.1, h2.2.2.2]
+    · have : (n' : ℝ) + 1 ≤ n := by exact_mod_cast hlt
+      nlinarith [h1.2.2.1, h1.2.2.2, h2.2.2.1, h2.2.2.2]
+  subst hm; subst hn
+  exact Set.disjoint_left.1 h hx hx'
 
 theorem iUnion_periodize {T : Fin k → Set ℂ} (L : ℝ) : ⋃ j, periodize (T j) L = periodize (⋃ j, T j) L := by
-  sorry
+  ext x
+  simp only [periodize, mem_iUnion, mem_setOf_eq]
+  constructor
+  · rintro ⟨j, m, n, h⟩; exact ⟨m, n, j, h⟩
+  · rintro ⟨m, n, j, h⟩; exact ⟨j, m, n, h⟩
 
 /-- **The density of a lattice-periodic set** (stage 9.2's `upperDensity_of_periodic`): for an `ℝ`-basis `v₁, v₂` and a
 measurable `S` invariant under `ℤv₁ + ℤv₂`, `d̄(S) = |S ∩ D| / |D|` with `D = {s v₁ + t v₂ : s, t ∈ [0, 1)}` (count the
