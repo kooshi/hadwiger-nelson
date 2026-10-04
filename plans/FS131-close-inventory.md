@@ -403,3 +403,12 @@ reason by the close.*
     Alternative weighed: keep C-DOUBLE in wave 4 with Y3-END-NEEDS and N2-TERM's conclusion as named hypotheses. Why: N2-TERM is ours and lands in wave 5, so a
     hypothesis there would only be discharged later; moving the row puts it beside what it reads. K4b is the table's one writer for this change (brief
     amended). Confidence: high.
+70. **FS131-I2c handed back at stage 5, harness ≈ 316k** (report on its branch; `fs131-w2` at `04c44d29`, checked): five more leaves — `disc7_lens`,
+    `nonempty_cpColouring_nine` (a CP colouring with nine colours: `sq9` under a uniform random translation of the torus), and three derived closures resting on
+    open leaves — 33 of 71; build 443/443, only `sorry` warnings; item 63 applied. **The equator configuration of `curvatureLeOne` is vacuous in both cases**
+    (no defect; Keryx's inference of item 58 borne out). Found: `exists_tight` and `exists_bandNull_aeCover_of_mu_eq_one` need continuity in r of the
+    three-dimensional unit-pair mass. Costs: 20k–90k tokens a leaf. 38 left.
+71. **Order of launches changed** (Keryx): the slot I2c freed goes to wave 2's fourth implementer, FS131-I2d (`data/fs131/briefs/FS131-I2d-wave2.md`, gated PASS),
+    ahead of FS131-W and FS131-LEB. Why: two implementers and one planner keep the pipeline balanced, and a landed wave yields held results and tests the
+    landing (the vacuity carriers' merge) sooner; W is needed only by wave 9, LEB by wave 4's gate, which is not near. W and LEB take the next planner slots
+    (when FS131-K4b hands back). Confidence: medium. Source: this commit.
