@@ -429,3 +429,73 @@ control: fs129-sr1-edges
   (Q)) and V6-ADJ's own pinning of the outer tiles to the lens arcs; TWOCIRC covers its last step (the mirror apex). (3) FS106-BIKE's coupling of two
   circles' windings across the cross curve — FS129-SR1-RINGBAND sharpens the single-circle input (no swap point and a change set not invariant under
   `60°` give `|W| ≥ 3`, not only `≥ 2`), and **the coupling stays missing**. All three to FS129-SR2.
+
+## Stage 5 — SAVED: the vacuity sort (brief § Done means 3; inventory items 33–37)
+
+**Rule used to split "empty" from "hypothetical by design"**, since several classes are now *known* empty: a statement over a class that a held no-go
+empties is **hypothetical by design** when it is a step of that no-go's held proof (or of a held second route to such a step), and **empty** when no held
+contradiction proof uses it — then formalizing it as stated formalizes a vacuous statement with no consumer. Classes known empty, with their receipts:
+`C_Γ` — non-Siamese simple valid six-coloured fragments, radius above 1, about a vertex of at least four colours whose ring carries no arc of `Γ`
+(FS116-Y4-EMPTY, held; its two routes: FLANK, Y3-SIX, Y3-TIPS, RING-GERM — or V6-HUBS, V6-HUG, V6-ANTI, V6-COUNT); HEX3's class `⊂ C_Γ`; `C_Q` — the same
+with "no (Q) arc" (FS129-OR1-QFREE, **derived, one mind**). Classes **not** known empty: the same with non-Siamese or simple dropped (FS-123 question 3,
+J7); rings with (Q) arcs (FS-124); five-colour vertices; saturated touch points (FS-125); curved tangent interfaces, (R2) arcs and LRA in honest saturated
+colourings (FS-126, FS-127); valid maps of the plane (the NO). Dependents are read from `data/fs129/index/edges.csv` with § 4.1's false edges removed
+(`data/fs129/sr1/vacuity_input.txt`, the working list).
+
+### 5.1 The 55 `none-known` results
+
+**No-go (4)** — the statement is that a class is empty; nothing passes on.
+| id | reading |
+|---|---|
+| FS121-D4-HOLE | "a colouring whose Σ is locally finite has no region with a hole"; after § 4.1 it has **no dependent** (its 60 were the false edge) |
+| FS116-Y4-EMPTY | `C_Γ` is empty |
+| FS116-Y4-OBST | "no fragment of the HEX3 class exists" — a corollary of Y4-EMPTY (HEX3's class lies in `C_Γ`) |
+| FS116-N1-QFREE4 (borderline) | equivalent to "no vertex of five or six colours (Siamese allowed) has a ring free of (Q) arcs", whose class is inhabited by FS116-Y2-SIXFRAG's centre (six colours, six (Q) arcs) — not vacuous |
+
+**Inhabited (1)**
+| id | object |
+|---|---|
+| FS121-O1-OUT (borderline) | `k = 9`, FS111-W-SQ9: its flat edges are tangent-type interface pieces of infinite radius, and their unit parallels carry the ladder (48 of 48 edge-sides, its model line); the curved case (finite `n`) is uninhabited and hypothetical by design (FS-126) |
+
+**Empty (15)** — the class has no member; the statement holds vacuously; **do not formalize as stated**.
+| id | why empty | dependents (corrected edges), and whether each inherits |
+|---|---|---|
+| FS116-Y3-NOQ | `C_Γ` (Y3-TIPS's setting); used by neither route of Y4-EMPTY | Y3-LENS, -STARFORCE, -TIGHTLENS, Y4-Q1, Y4-SPOKE — all inherit (same class) |
+| FS116-Y3-TIGHT | `C_Γ` | Y3-LENS, Y4-Q1 — inherit |
+| FS116-Y3-HUBCOL | `C_Γ` | Y3-STARFORCE, -TIGHTLENS — inherit |
+| FS116-Y3-LENS | `C_Γ` | Y3-STARFORCE, -TIGHTLENS — inherit |
+| FS116-Y3-NBTIP | `C_Γ` | Y3-STARFORCE, Y4-SPOKE — inherit |
+| FS116-Y3-TIGHTLENS | `C_Γ` at radius `≥ √3` | Y3-STARFORCE — inherits |
+| FS116-Y3-STARFORCE | `C_Γ` at radius `≥ √3` | Y4-Q1, Y4-SPOKE — inherit |
+| FS116-Y4-SYM | HEX3's class | Y4-SPOKE — inherits |
+| FS116-Y4-SPOKE | HEX3's class | Y4-Q1 — inherits |
+| FS116-Y4-Q1 | HEX3's class | none |
+| FS116-V6-ADJ | `C_Γ`; not used by Y4-EMPTY | none (its wider form, § 4.2 item 81 (2), is not derived) |
+| FS116-V1-FRAME | `C_Γ` | none |
+| FS116-N2-HEX6 | `C_Γ` at radius above 2 | N2-HEX3 — inherits; RING-TRANSFER-C — **inherits on its four-colour clause only** (the Γ-free hubs); its five- and six-colour clauses and STAR's partial form are inhabited (strip `P₀`, SIXFRAG) and do not |
+| FS116-N2-HEX3 | `C_Γ` | none |
+| FS114-N7-HUB | `C_Q` (rings (Q)-free after the bends, non-Siamese simple) — empty **given FS129-OR1-QFREE (one mind)**; its Γ-free part by Y4-EMPTY (held), as its model line says | FS114-N7-3T — inherits (OR1: N7-3T's class is empty at `1 + ε` in the non-Siamese simple class); FS116-N2-HEX6 — already empty |
+
+**Hypothetical by design (35)** — properties of an object whose emptiness is the goal (or a step of a held second route); nothing passes on.
+- *Steps of Y4-EMPTY's held routes:* FS116-Y3-SIX, -Y3-TIPS, -V6-HUBS, -V6-HUG (a case of FS129-MR1-DOUBLETIP), -V6-ANTI, -V6-COUNT.
+- *V5's second routes* (V5-RING's setting drops simplicity, so its class is **not** known empty — a lead for J7's non-simple half): FS116-V5-RING, -V5-GERM,
+  -V5-OUT, -V5-TIPSET, -V5-LENS; and toward FS-124's (Q)-ring cases: -V5-QCOL, -V5-OUT2, -V5-DICHO.
+- *Toward S1-QF's saturated cross:* FS116-V4-OUTER (non-Siamese, simplicity not assumed).
+- *FS-124 / FS-125 tools on classes not known empty:* FS116-N2-RECIP, -N2-ANTI (hubs), -N2-FIVERING (five colours), -N1-ECHO (a saturated touch point),
+  -RING-Q-PRIME, -RING-Q-PRIME-S (change points on rings with (Q) arcs).
+- *The NO's object (a valid map of the plane):* FS114-Y-PAIRSHARE, -NB-DUAL, -Y-REDBLOCK1.
+- *FS-126 / FS-127 (curved tangent interfaces, (R2) arcs, LRA, junctions inside arcs):* FS121-D1-PENCILWIN, -V5-RAY (a contradiction lemma), -D2-EXT,
+  -D1-R2CORNER, -D1-R2SMOOTH, -D1-RUNG2, -D2-THIN, -D1-FIRSTORDER, -D2-INCURVED, -DB1-L5, -O1-LRA-LINE.
+
+### 5.2 The second list (the 16 loose-pattern `named` entries; the 2 borderline ones are sorted above)
+
+| heading | ids |
+|---|---|
+| inhabited (5) | FS111-M4-LADDER (SQ9, unpinched); FS114-N114-COMPACT (the brick seven-colouring at `K = 2`, its model line); FS116-N3-SEMI (the strip's `P₀` at `P₂`, FS114-Y2-BOWTIE's centre); FS116-RING-TRANSFER-C (strip `P₀`, SIXFRAG — clause by clause; its four-colour clause inherits HEX6's emptiness, above); FS116-RING-TWIST-C (strip `P₀`, first clause; the parity clause feeds Y3-SIX, a step of Y4-EMPTY) |
+| no-go (1) | FS114-N6-NOQ ("No pinwheel has a ring free of (Q) arcs") — now also a case of FS129-OR1-QFREE in the non-Siamese simple class |
+| hypothetical by design (10) | FS111-C-REG-EQ, -C-SEVEN-M, -C-SIX-M, -C1-ROUTES, -VM2-EQ5, FS121-D3-EQ (conditionals whose premises are the open steps: reductions, not object classes); FS111-M4-MOVE (two hypothetical partitions); FS114-CV-EXISTS (the NO's object: its model line says the class is empty exactly when the NO holds); FS116-S1-KAPPA, -S1-PAIR (toward S1-QF; Siamese allowed, class not known empty) |
+
+**Tally.** Main list: hypothetical 35, empty 15, no-go 4, inhabited 1 (registered 38 / 6 / 7 / 4 — "empty" under-priced: the construction side's Y3/Y4
+lists were built before Y4-EMPTY, and Y4-EMPTY's routes use few of them). The one "empty" whose dependent uses a non-vacuous part is N2-HEX6 →
+RING-TRANSFER-C; no non-contradiction use of an empty class reaches a result outside its own class (registered P = 0.30 that one would matter: not met,
+except RING-TRANSFER-C's clause, which is in the same class).

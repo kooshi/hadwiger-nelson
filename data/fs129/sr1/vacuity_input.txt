@@ -1,0 +1,293 @@
+## FS121-D4-HOLE L | derived
+S: in an honest saturated colouring in D-NF, if a region D (a component of the interior of the density set of one colour) has a bounded complementary component K of its closure, then every point of ∂K lies in Σ; so Σ contains a non-degenerate continuum, and a colouring whose Σ is locally finite has no region with a hole
+M: none held of the hypothesis (R7, SQ9, HEX9, TINY16 have no region with a hole); a no-go for islands whose shore holds a point off Σ
+D: 
+## FS116-N1-QFREE4 L | derived
+S: at a vertex p of at least four colours of a valid fragment on a closed disc of radius above 1 about p, Siamese pairs allowed, if the ring carries no (Q) arc then p has four colours and no more
+M: FS114-Y2-BOWTIE's ring has (Q) arcs and is no model; the degree-4 vertices of FS114-N6's (Q)-free pinwheel frame have four colours by hypothesis — none held with a (Q)-free ring at six colours
+D: FS116-N2-HEX6(both), FS116-Y3-SIX(grade+rests+uses)
+## FS116-V5-RING L | derived
+S: at a point p of a valid six-coloured fragment on a closed disc of radius above 1 about p, non-Siamese, with at least four colours at p and Γ ∩ ω(p) containing no arc: Γ ∩ ω(p) is finite; every point of ω(p) off Γ is interior to a tile of one of the colours absent at p; p has exactly four colours, so exactly two are absent, X and X̄; the ring colour c satisfies c(θ + 60°) ≠ c(θ) off Γ; every tile T meeting ω(p) at r(θ
+M: none held — no fragment of the class is known, and the class may be empty (the list's preamble: a statement about a possible object)
+D: FS116-V5-GERM(both), FS116-V5-LENS(both), FS116-Y3-SIX(rests)
+## FS116-V5-GERM L | derived
+S: in V5-RING's setting, let y = r(ψ) be a change point, X₊ the ring colour just counter-clockwise of y and X₋ the one just clockwise; for β − ψ in each open interval below, every point y + t e(β′) with t > 0 small and β′ near β that is off Γ lies in a tile of the colours named: (−30°, 30°) a colour of p, on a tile that is not a tile of p (an outer tile); (30°, 90°) X₊ or an outer tile; (90°, 150°) X₊ or a tile of p; (1
+M: none held — V5-RING's class is not known to be non-empty
+D: FS116-V5-LENS(both), FS116-Y3-SIX(rests)
+## FS116-V5-OUT L | derived
+S: in V5-RING's setting, let y = r(ψ) be a ring point and O a tile of colour c ∈ P, not a tile of p, with points y + s e(γ) for arbitrarily small s > 0 along a direction γ with cos(γ − ψ) > 0; then the cone at p of p's tile of colour c lies in the closed half-plane of directions [ψ + 90°, ψ + 270°]
+M: none held — V5-RING's class is not known to be non-empty
+D: FS116-V5-LENS(both), FS116-Y3-SIX(rests)
+## FS116-V5-TIPSET L | derived
+S: in V5-RING's setting with the change points at y_k = e(60°k), let a tile T of p be a tip at y_k (y_k ∈ cl T); then cl T lies in B̄(y_k, 1) ∩ B̄(p, 1), its cone at p lies in [60°k − 90°, 60°k + 90°] and its cone at y_k in [60°k + 90°, 60°k + 270°]; T is a tip at no hub other than y_{k±1}, and at y_k and y_{k+1} only if its cone at p lies in [60°k − 30°, 60°k + 90°]; a tip at y_k and a tip at y_{k+3} have closures meet
+M: none held — V5-RING's class is not known to be non-empty
+D: FS116-V5-LENS(both), FS116-Y3-SIX(rests)
+## FS116-V5-LENS L | derived
+S: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours whose ring carries no arc of Γ, labelled as FS116-Y3-TIPS, at the lens L_1 (hubs y_1, y_2, far vertex q_1 = √3 e(90°)): (a) every interior point of L_1 off Γ has colour X̄, 2 or 4; (b) no tile of colour X̄ has q_1 in its closure, and no tile of colour 4 with points in L_1 does; (c) ever
+M: none held — the class is not known to be non-empty, at any radius (FS116-Y3-STARFORCE's own not-claimed line)
+D: FS116-Y3-SIX(rests)
+## FS116-Y3-SIX L | derived
+S: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, the ring has exactly six change points, 60° apart, each a hub, and p has exactly four tiles
+M: none at six colours (no Γ-free four-colour vertex is held: N2 § 2.4); SQ9 at k = 9 meets every hypothesis but six colours and has twelve change points — control fs116-y3-sq9
+D: FS116-Y3-NOQ(grade+rests+uses), FS116-Y3-TIPS(grade+rests+uses), FS116-Y4-EMPTY(grade+rests+uses)
+## FS116-Y3-TIPS L | derived
+S: in FS116-Y3-SIX's setting, with the hubs y_k = e(60k), each hub has exactly one tip, the tips of antipodal hubs are opposite tiles of p, and up to rotation of the labels the four tiles of p, counter-clockwise, are T1 tipping y_0 and y_1 (cone at p in [−30°, 90°]), T3 tipping y_2 (in [30°, 210°]), T2 tipping y_3 and y_4 (in [150°, 270°]) and T4 tipping y_5 (in [210°, 30°])
+M: none at six colours; the lattice facts it uses are control fs116-y3-lattice
+D: FS116-V5-LENS(both), FS116-Y3-HUBCOL(grade+rests+uses), FS116-Y3-LENS(grade+rests+uses), FS116-Y3-NBTIP(grade+rests+uses), FS116-Y3-TIGHT(grade+rests+uses), FS116-Y4-EMPTY(grade+rests+uses), FS116-Y4-SYM(both)
+## FS121-D1-PENCILWIN L | derived
+S: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, a tangent-type interface arc of finite radius n ≥ 2 about z whose chain of unit parallels ends at a single unit arc lies in a pencil whose rungs of radius at least 2 share one window, of angular width ℓ with 4 sin(ℓ/2) ≤ 1
+M: none held of the hypothesis at any k (no held colouring has a curved tangent interface)
+D: 
+## FS121-O1-OUT L | derived
+S: in an honest saturated colouring in D-NF satisfying REG-J′, the unit parallel away from the centre of every tangent-type interface arc of radius n (n a positive integer, or infinite for a segment) is, off Σ, a tangent-type interface arc of radius n + 1; so every curved interface of tangent type lies in a one-sided infinite family of concentric interface arcs of radii n, n + 1, n + 2, … over one angular window
+M: k = 9: SQ9, whose flat edges carry the ladder at every unit translate (48 of 48 edge-sides); no held object has a curved tangent interface
+D: FS121-D1-PENCILWIN(both), FS121-D2-SYM(both), FS121-O1-PER(both), FS121-V5-SYM-CPT(both), FS121-V5-SYM-UP(uses), FS121-Z1-NOCURVED(grade+rests+uses)
+## FS116-V6-HUBS L | derived
+S: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, m = 1: the change points are y_k = r(ψ₀ + 60°k), six of them; a tile of p tips at most two, and two only if consecutive
+M: none at six colours (FS116-Y4-EMPTY, held: the class is empty); SQ9 at k = 9 for the hypotheses but the colour count (control v6-sq9)
+D: FS116-V6-ANTI(rests), FS116-V6-COUNT(both), FS116-V6-HUG(rests), FS116-Y4-EMPTY(rests)
+## FS121-V5-RAY L | derived
+S: in an honest saturated colouring in D-NF satisfying REG-J′, let C_n ⊆ cl 𝓘 be arcs of circles of radii R_n → ∞, or segments, no two sharing a sub-arc of positive length, with points p_n ∈ C_n, p_n → x₀, from which C_n continues for arclength at least λ > 0 with unit tangent u_n → u; then Σ contains the open segment (x₀, x₀ + λu), so Σ is not locally finite
+M: none held of the hypothesis at any k (no held colouring has arcs of radius ≥ 2); the statement is a contradiction lemma
+D: FS121-D2-SYM(both), FS121-V5-LOC(rests), FS121-V5-SYM-CPT(grade+rests+uses)
+## FS116-V4-OUTER L | derived
+S: in a non-Siamese valid fragment on a disc of radius above 1 about a degree-4 vertex p of four colours whose four edges are segments at right angles and whose ring carries no (Q) arc, at each of κ's change points c in an open quadrant, the directions within 30° of the outward direction at c lie in one tile, not a tile of p, of the colour of the quadrant tile opposite to c's quadrant
+M: none at six colours — the class is the one QF empties; the step's arithmetic is checked on its own (control `v4-outer`)
+D: FS116-S1-KAPPA(rests)
+## FS114-N7-HUB L | derived
+S: At a four-colour vertex (non-Siamese, simple) whose ring is (Q)-free after the bends, each of the six change points `y_k` is a vertex of at least four colours: the directions toward `p` there lie in tiles of `p` reaching `y_k` (a **tip**, which meets `B(y_{k−1},1) ∩ B(y_{k+1},1)`, so its colour is carried at `y_{k±1}` by no other tile), and the outward directions in tiles of `p`'s colours outside `B̄(p,1)` whose `p`-
+M: none held — FS114-Y2-BOWTIE's centre is not one (its ring carries two (Q) arcs, the erratum above); on rings carrying no arc of Γ none exists at six colours, non-Siamese and simple (FS116-Y4-EMPTY, he
+D: FS114-N7-3T(rests), FS116-N2-HEX6(rests)
+## FS116-V5-QCOL L | derived
+S: in this setting p has exactly four colours and X, X̄ are the two absent; a germ that lies on no (Q) arc "carries" an absent colour — the ring colour there if the germ is off Γ, else an absent side colour of the arc of Γ on ω(p) it lies on — namely X at u⁻ and v⁻ and X̄ at u⁺ and v⁺, and the hub's partner point (u or v) lies in the closure of a tile of that colour; a germ on a (Q) arc lies on an arc of ω(p) whose inne
+M: none held — no fragment of the class is known
+D: FS116-N3-SEMI(rests), FS116-V5-CROSS-S(grade+rests+uses), FS116-V5-DICHO(both)
+## FS116-V6-HUG L | derived
+S: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, with its change points y_k = e(60°k) (FS116-V6-HUBS), no tile T of p tips both y_0 and y_1 while being the only tip at each
+M: none at six colours; V6's stage-1 candidate (a star with two five-colour hubs, § 2.3 item 1) fails exactly here, its two X̄ ring tiles √3 − 1 apart at s = t = 30°
+D: FS116-V6-ADJ(uses), FS116-V6-COUNT(both), FS116-Y4-EMPTY(rests)
+## FS116-Y3-NOQ L | derived
+S: in FS116-Y3-TIPS's setting, at a hub y_k, no tile adjacent at y_k to the ring tile over the arc from y_(k−1) to y_k lies in B̄(q_k, 1), and no tile adjacent at y_k to the ring tile over the arc from y_k to y_(k+1) lies in B̄(q_(k−1), 1), where q_k = y_k + y_(k+1); in particular the clockwise-most outer tile at y_k does not have q_k in its closure, the counter-clockwise-most does not have q_(k−1), and an only outer ti
+M: none at six colours; the lattice facts are control fs116-y3-lens
+D: FS116-Y3-LENS(grade+rests+uses), FS116-Y3-STARFORCE(both), FS116-Y3-TIGHTLENS(grade+rests+uses), FS116-Y4-Q1(both), FS116-Y4-SPOKE(both)
+## FS116-Y3-TIGHT L | derived
+S: in FS116-Y3-TIPS's labelling, the ring tile clockwise of y_0 does not have q_5 = √3 e(330°) in its closure, the ring tile counter-clockwise of y_1 not q_1, the one counter-clockwise of y_3 not q_2, the one clockwise of y_4 not q_4; at y_0 and y_1 the tip T1's cone has the endpoint 210°, at y_3 and y_4 the tip T2's the endpoint 30°, each along an edge inside the unit disc about the double tip's other hub
+M: none at six colours
+D: FS116-Y3-LENS(grade+rests+uses), FS116-Y4-Q1(both)
+## FS116-V5-OUT2 L | derived
+S: in V5-QCOL's setting (or V5-RING's), if an outer tile of colour c has a ring point r(θ) in its closure, then p's tile of colour c has its cone at p in [θ + 90°, θ + 270°]
+M: none held — no fragment of the class is known
+D: FS116-N3-SEMI(rests), FS116-V5-CROSS-S(grade+rests+uses)
+## FS116-V6-ANTI L | derived
+S: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, with its change points y_k (FS116-V6-HUBS), a tile tipping y_k and a tile tipping y_(k+3) share no edge at p
+M: none at six colours
+D: FS116-V6-COUNT(rests), FS116-Y4-EMPTY(rests)
+## FS116-Y3-HUBCOL L | derived
+S: in FS116-Y3-TIPS's labelling, each hub's colours are X, X̄, its tip's colour and a non-empty set of outer colours drawn from the list of § 2.3 (y_0: 2, and 3 only if δ_1 = 90°; y_1: 2, and 4 only if δ_4 = −30°; y_2: 4, and 2 only if δ_2 = 210°, 1 only if δ_1 = 30°; y_3: 1, and 4 only if δ_3 = 270°; y_4: 1, and 3 only if δ_2 = 150°; y_5: 3, and 1 only if δ_4 = 30°, 2 only if δ_3 = 210°); when every δ is interior to it
+M: none at six colours
+D: FS116-Y3-STARFORCE(grade+rests+uses), FS116-Y3-TIGHTLENS(grade+rests+uses)
+## FS116-Y3-LENS L | derived
+S: in FS116-Y3-TIPS's labelling, for k in {1, 2, 4, 5} and every point x close enough to q_k inside B(y_k, 1) ∩ B(y_(k+1), 1), every colour at x is a colour of p other than the tip colours of y_k and y_(k+1); and if it is a colour of y_k (of y_(k+1)), that hub's tile of that colour has q_k in its closure
+M: none at six colours
+D: FS116-Y3-STARFORCE(both), FS116-Y3-TIGHTLENS(grade+rests+uses)
+## FS121-D2-EXT L | derived
+S: in an honest saturated colouring in D-NF satisfying REG-J′, let a be a point of an interface arc, not in Σ, at which the arc passes from a circular piece γ of radius n ≥ 3 and centre z to a piece not on γ's circle, and let L be the normal line at a; then for every integer k with 1 ≤ k ≤ n − 2, and for every integer k ≤ −1, no arc of the circle ∂B(z, n − k) that lies on the far side of L from γ and has an end on L lie
+M: none held of the hypothesis at any k (no held colouring has a junction inside an interface arc)
+D: FS121-D2-SYM(rests), FS121-D2-THIN(grade+rests+uses)
+## FS116-N2-RECIP L | derived
+S: in a non-Siamese valid fragment on a closed disc of radius above 2 about a vertex p of four colours P, let y = r(ψ) be a hub of p with four colours and no more; the points of ω(y) at 60° on either side of p are r(ψ + 60°) and r(ψ − 60°); if p lies on no arc of Γ on ω(y) and the four arcs of ω(y) just clockwise and just counter-clockwise of those two points lie on no (Q) arc of y's ring, then p is a change point of y'
+M: none held (no held fragment has a hub, § 2.4); on (Q)-free rings FS114-N7-HUB's six change points are its instances where their rings meet the hypotheses
+D: FS116-N2-HEX6(grade+rests+uses), FS116-RING-TRANSFER-C(grade+rests+uses)
+## FS116-V5-DICHO L | derived
+S: in V5-QCOL's setting, if both germs of one pair at y lie on (Q) arcs A₁, A₂ with colour pairs Π₁, Π₂, then Π₁ = Π₂ (and then the inner colour of each is the outer colour of the other) or Π₁ ∩ Π₂ = ∅
+M: none held — no fragment of the class is known
+D: FS116-N3-SEMI(rests)
+## FS116-V6-COUNT L | derived
+S: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, with V6-HUG, the tips force two antipodal doubly-tipped hubs and four double tiles: M = 4, s = 2, each hub of S has exactly two tips, and every tip at a hub of S is a double tile; the two hubs of S are antipodal, y_k and y_(k+3), each tipped by two of the fou
+M: none at six colours
+D: FS116-Y4-EMPTY(rests)
+## FS116-Y3-NBTIP L | derived
+S: in FS116-Y3-TIPS's setting, the tip of each hub meets the open unit disc about each of the two neighbouring hubs; so no hub has a neighbour's tip colour as an outer colour, and the only outer colour of y_2 is 4 and of y_5 is 3
+M: none at six colours; the angle fact is control fs116-y3-nbtip
+D: FS116-Y3-STARFORCE(grade+rests+uses), FS116-Y4-SPOKE(grade+rests+uses)
+## FS116-Y3-TIGHTLENS L | derived
+S: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours whose ring carries no arc of Γ, labelled as FS116-Y3-TIPS, the edges of p satisfy (Q1) δ_4 = −30° or δ_1 = 30° or δ_2 = 210°; (Q2) δ_3 = 270° or δ_1 = 30° or δ_2 = 210°; (Q4) δ_2 = 150° or δ_4 = 30° or δ_3 = 210°; (Q5) δ_1 = 90° or δ_4 = 30° or δ_3 = 210° — for each lens beside a single
+M: none at six colours (it is an obstruction); the truth table of its four conditions is control fs116-y3-lens
+D: FS116-Y3-STARFORCE(grade+rests+uses)
+## FS121-D1-R2CORNER - | derived
+S: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, at an (R2) arc about z with window ℓ whose ends are not points of Σ and whose continuations beyond both ends begin straight, q's sector at z is the whole away cone, and within distance tan(ℓ/2) ≤ 1/√15 of the ends A₀, A₁, measured along the continuations, one continuation bends or changes its outer colour, or each of q's two edges at z has a point o
+M: none held of the hypothesis at any k
+D: FS121-D1-R2SMOOTH(rests), FS121-D1-RUNG2(rests), FS121-R2-FOUR(rests)
+## FS121-D1-R2SMOOTH - | derived
+S: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, if an end A₁ = z + u(α₁) of an (R2) arc about z is not a point of Σ, then the edge of q's sector at z on that side has direction α₁ + π/2 — the boundary of the away cone — and is the unit parallel, on the inner side, of the arc's tangent-type continuation beyond A₁
+M: none held of the hypothesis at any k
+D: FS121-D1-R2CORNER(grade+rests+uses)
+## FS121-D1-RUNG2 - | derived
+S: the window ℓ of an (R2) arc in an honest saturated colouring in D-NF satisfying REG-J′ satisfies 2 sin(ℓ/2) ≤ 1; if the colouring is cusp-free, 4 sin(ℓ/2) ≤ 1, so ℓ ≤ 2 arcsin(1/4) < 29°
+M: none held of the hypothesis at any k; the bound is the diameter of the p-tile the (R2) definition names
+D: FS121-D1-R2CORNER(grade+rests+uses), FS121-R2-FOUR(rests)
+## FS121-D2-THIN L | derived
+S: in an honest saturated colouring in D-NF satisfying REG-J′, if interface pieces whose radii tend to infinity accumulate at a point, then for every integer r ≥ 2 the colouring has infinitely many radius-r arcs — maximal arcs of circles of radius r contained in the closure of the interface set — whose angular windows tend to 0
+M: none held of the hypothesis at any k (no held colouring has LRA)
+D: FS121-D2-SYM(grade+rests+uses), FS121-NOLRA(rests)
+## FS116-N2-FIVERING L | derived
+S: in a valid fragment on a closed disc of radius above 1 about a vertex p of five colours, Siamese pairs allowed, the ring has no change point, and for every θ outside a finite set r(θ) or r(θ + 60°) lies on a (Q) arc; so the (Q) arcs of the ring have total length at least 180° and p has no hub
+M: none held with five colours at a vertex; at k = 7 the vertices of R7 carry six of seven, and the step "the absent colour is X" is where six is spent
+D: FS116-C114-LOCAL-F(rests), FS116-RING-TRANSFER-C(grade+rests+uses)
+## FS116-N2-HEX6 L | derived
+S: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours whose ring carries no arc of Γ, the ring's change points include six hubs y_k = r(ψ + 60°k), k in Z/6, and of any four consecutive y_k at least one has a ring carrying an arc of Γ; in particular the six rings are not all free of arcs of Γ
+M: none held at six colours (no Γ-free four-colour vertex is held: FS116-N1-QFREE4's model line); the hypotheses at p are FS114-N7-HUB's, whose six change points are this hexagon
+D: FS116-N2-HEX3(grade+rests+uses), FS116-RING-TRANSFER-C(grade+rests+uses)
+## FS116-Y3-STARFORCE L | derived
+S: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours whose ring carries no arc of Γ, labelled as FS116-Y3-TIPS, the edges of p are δ_1 = 90°, δ_2 = 150°, δ_3 = 270°, δ_4 = −30° (FS116-N2-HEX3's star); 3 is an outer colour of y_0 and of y_4, and 4 of y_1 and of y_3; each of these four hubs has that outer colour alone or two outer tiles, co
+M: none at six colours; the truth table is control fs116-y3-star
+D: FS116-Y4-Q1(grade+rests+uses), FS116-Y4-SPOKE(grade+rests+uses)
+## FS116-Y4-EMPTY L | derived
+S: no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no arc of Γ
+M: none can exist (the statement is a non-existence); its geometric step is control fs116-y4-flank, whose plant three shows where six is spent
+D: FS116-C114-LOCAL-F(rests), FS116-Y4-OBST(grade+rests+uses)
+## FS116-Y4-SYM L | derived
+S: let F be a fragment of the HEX3 class on B̄(p, R), R ≥ √3; then σ_30(F), with the colours 3 and 4 exchanged, and σ_120(F), with the colours 1 and 2 exchanged and X and X̄ exchanged, are fragments of the HEX3 class on B̄(p, R) with the same labels — σ_30 fixing T1 and T2 and exchanging T3 and T4, σ_120 exchanging T1 and T2 and fixing T3 and T4 — so every statement of this record about F at a point z holds at σ(z) with
+M: none at six colours (the class may be empty); the table is control fs116-y4-sym
+D: FS116-Y4-SPOKE(grade+rests+uses)
+## FS114-Y-PAIRSHARE - | derived
+S: (Y-PAIRSHARE) In a valid map, any two close complementary cubic trichromatic partners `u′`, `u″` of a cubic trichromatic vertex `u` have a common unit point with `u` in common: `(ω(u) ∩ ω(u′)) ∩ (ω(u) ∩ ω(u″)) ≠ ∅`; (Y-K6) A design screen, about every valid map: if two cubic vertices `u`, `u′` at distance `< 2` have six incident tiles that pairwise straddle distance 1, they are complementary under every colouring, an
+M: none known in a valid map; the hypothesis (a cubic trichromatic vertex with close complementary partners) met on the strip and the disk as fragments, where FS114-Y-PENT and FS114-Y-STRIPK6 show the sc
+D: FS114-Y-PENT(both)
+## FS116-N2-ANTI L | derived
+S: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of four colours, let y = r(ψ) and y* = r(ψ + 180°) be hubs of p, and let ψ + 90° and ψ − 90° lie in the interiors of the cones at p of tiles t⁺ and t⁻; then t⁺ ≠ t⁻, A(y) = A(y*) = {c(t⁺), c(t⁻)}, T_y = O_(y*) and O_y = T_(y*), each a single colour, and y and y* have four colours and no more
+M: none held with two antipodal hubs; the strip's P₀ meets every hypothesis but the interiority of the flanking directions, and fails the conclusion (A(P₂) = {M, P}, A(P₋₂) = {B, O}) — control fs116-n2-s
+D: FS116-RING-TRANSFER-C(grade+rests+uses)
+## FS116-Y4-SPOKE L | derived
+S: in a fragment of the HEX3 class on a closed disc of radius above 2 about p, the outer tile O_2 of y_2 (colour 4) has 2y_2 in its closure, lies in B̄(y_2, 1) ∩ B̄(2y_2, 1), and contains every point of some neighbourhood of 2y_2 that lies in B(y_2, 1) and off Γ; every tile with a point of that neighbourhood outside B̄(y_2, 1) in its closure has colour 3, X or X̄; so near 2y_2 the circle ω(y_2) lies in Γ, with inner col
+M: none at six colours; the plane facts at twelve points round 2y_2 are control fs116-y4-spoke
+D: FS116-Y4-Q1(grade+rests+uses)
+## FS121-D1-FIRSTORDER - | derived
+S: in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, at a centre z of an (R2) arc carrying three colours q, r, s, the edge between r and s points into the antipodal cone of q's sector, and every partner point and split centre on ω(z) that the three edges at z require lies off the relative interior of the (R2) arc, whatever the edges' types
+M: none held of the hypothesis at any k (no held colouring has an (R2) arc, C121-PER)
+D: FS121-R2-FOUR(rests)
+## FS121-D2-INCURVED - | derived
+S: in an honest saturated colouring in D-NF satisfying REG-J′, if interface pieces whose radii tend to infinity accumulate at a point, then the colouring has tangent-type interface arcs of finite radius at least 2, infinitely many of them
+M: none held of the hypothesis at any k; a containment of two uninhabited classes
+D: FS121-Z1-NOCURVED(grade+rests+uses)
+## FS114-NB-DUAL - | derived
+S: Sirgedas's 80%: unit-arc edges `≥ Σ_v d(d−3) = 2F + 2V₅ + 6V₆` of `E′ = 2.5F`; with absent colours `Σ_v (d−3) = (F + Σa)/2`
+M: none known in the class (no doubly periodic valid map is known); the count's local terms met at the disk's corners (four-colour, degree 4)
+D: 
+## FS114-Y-REDBLOCK1 - | derived
+S: C114-REDBLOCK's first clause TRUE: in a non-Siamese valid map in which every tile has five edge-neighbours, the red tiles' closed edge-neighbourhoods partition the tiles (with N2-PENT, "no pentagons": in a non-Siamese six-map where every tile has five edge-neighbours, the five tiles at a degree-5 vertex never lie in five different blocks of the missing colour)
+M: none known in the class (every tile with five edge-neighbours, non-Siamese, valid); the partition's hypothesis met by the hexagonal seven-colouring at seven colours with six edge-neighbours, which the
+D: 
+## FS116-N1-ECHO L | derived
+S: in a valid k-coloured fragment on a closed disc of radius above 2 about a point p, for any k, Siamese pairs allowed, let w be a point of ω(p) whose ring just clockwise and just counter-clockwise of w lies in tiles of one colour X absent at p; if w is an essential boundary point at which the fragment is saturated (each colour of P(w) has a point of its support at distance exactly 1 from w) and X is in w's essential mu
+M: none held saturated at a touch point; F(1/5)'s q_N has the ring hypothesis (R on both sides, R of density 1/2 at q_N) but F(1/5) is saturated on B̄(P₀, 1/5) only and ends at radius 6/5, before (0, 2)
+D: 
+## FS116-N2-HEX3 L | derived
+S: in HEX6's setting, if every y_k has four colours and no more, the set S of k whose y_k has a ring free of arcs of Γ is empty, one hub, or of the form {k, k+1}, {k, k+3}, {k, k+2} or {k, k+1, k+2}; with {k, k+3} the missing pairs of y_k and y_(k+3) are not complementary; with {k, k+2} or {k, k+1, k+2} the four edges of p leave at D_k, D_(k+1), D_(k+3), D_(k+4) (D_m = ψ + 30° + 60°m), y_k and y_(k+2) miss one pair and 
+M: none held, as HEX6
+D: 
+## FS116-RING-Q-PRIME L | derived
+S: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours whose ring carries a (Q) arc, every change point of the ring whose points at ±60° on ω(p) lie on no (Q) arc is a vertex of at least four colours
+M: none held with a (Q) arc on the ring and a change point in scope — the strip's and the Y2 bowtie's change points have ±60° points ending (Q) arcs, the disk's inside them; the statement holds at the cl
+D: 
+## FS116-RING-Q-PRIME-S L | derived
+S: in a valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, Siamese pairs allowed, every change point of the ring whose points at ±60° on ω(p) lie on no closed (Q) arc is a vertex of at least four colours
+M: none held with a change point in scope, as RING-Q-PRIME (§ 3.5); FS114-N7-HUB's (Q)-free rings are its non-Siamese instances
+D: 
+## FS116-V1-FRAME - | derived
+S: at a degree-4 vertex p of four colours, every tile at p with a cone of positive angle, of a non-Siamese simple valid fragment on an open set containing B̄(p, 1) whose ring ω(p) carries no arc of Γ, the ring has exactly six change points, 60° apart, and the centre of every tactic edge at p is a change point of the ring
+M: none at six colours; V1 read the frame's colour-level conditions by hand on OC, the (1, 2, 1, 2) pinwheel, +++ and the γ = 0° lens (V1 § 3.2), which are patterns, not fragments
+D: 
+## FS116-V6-ADJ - | derived
+S: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, outer tiles of one colour at adjacent hubs cannot both hug the lens arcs beyond their hubs (ω(y_1) beyond y_0, ω(y_0) beyond y_1)
+M: none at six colours; V6's stage-1 candidate needed five-colour hubs because of it (§ 2.3 item 2)
+D: 
+## FS116-Y4-OBST - | derived
+S: for every R > 1, no fragment of the HEX3 class exists on the closed disc of radius R about p
+M: none can exist
+D: 
+## FS116-Y4-Q1 - | derived
+S: in a fragment of the HEX3 class on a closed disc of radius above 2 about p, for every point x = q_1 + s·e(χ) of some neighbourhood of q_1, colours 4 and X̄ are absent at x; X is absent when χ lies in (150°, 390°); 3 is absent when χ lies in (150°, 330°); 1 is absent when χ lies in (210°, 390°); and the points with χ in (210°, 330°) are in Z_1 (colour 2)
+M: none at six colours; the plane facts at twelve points round q_1 are control fs116-y4-q1
+D: 
+## FS121-DB1-L5 - | derived
+S: in an honest saturated colouring in D-NF satisfying REG-J′, the centre of a tangent-type unit arc that carries the arc's outer colour and not its inner lies in Σ, with at least two further positive-angle sectors of pairwise distinct colours besides the outer colour's: three distinct colours, with no condition on densities
+M: none held of the hypothesis at any k (no held colouring has an (R2) arc, C121-PER); R7, SQ9, HEX9 meet it vacuously
+D: 
+## FS121-O1-LRA-LINE - | derived
+S: in an honest saturated colouring in D-NF satisfying REG-J′, if interface pieces of radii tending to infinity accumulate at a point x₀ of the interface curve on which they lie, with normal ν there, then pieces of radii tending to infinity accumulate at x₀ + kν for every integer k
+M: none held of the hypothesis at any k (no held saturated colouring has LRA); the statement is a reduction, and R7, SQ9, HEX9 meet it vacuously
+D: 
+=== SECOND LIST
+## FS116-N1-QFREE4 L | derived
+S: at a vertex p of at least four colours of a valid fragment on a closed disc of radius above 1 about p, Siamese pairs allowed, if the ring carries no (Q) arc then p has four colours and no more
+M: FS114-Y2-BOWTIE's ring has (Q) arcs and is no model; the degree-4 vertices of FS114-N6's (Q)-free pinwheel frame have four colours by hypothesis — none held with a (Q)-free ring at six colours
+D: FS116-N2-HEX6(both), FS116-Y3-SIX(grade+rests+uses)
+## FS121-O1-OUT L | derived
+S: in an honest saturated colouring in D-NF satisfying REG-J′, the unit parallel away from the centre of every tangent-type interface arc of radius n (n a positive integer, or infinite for a segment) is, off Σ, a tangent-type interface arc of radius n + 1; so every curved interface of tangent type lies in a one-sided infinite family of concentric interface arcs of radii n, n + 1, n + 2, … over one angular window
+M: k = 9: SQ9, whose flat edges carry the ladder at every unit translate (48 of 48 edge-sides); no held object has a curved tangent interface
+D: FS121-D1-PENCILWIN(both), FS121-D2-SYM(both), FS121-O1-PER(both), FS121-V5-SYM-CPT(both), FS121-V5-SYM-UP(uses), FS121-Z1-NOCURVED(grade+rests+uses)
+## FS111-C-REG-EQ - | derived
+S: given Q-NO, REG-A₆ ⟺ χ_m⁰(ℝ²) ≥ 7; given FS106-AE-MAP6, REG-I₅ ⟺ χ_m⁰(ℝ²) ≥ 6
+M: premises open; the statement's content is the direction of the caution
+D: FS111-VM2-EQ5(rests)
+## FS111-C-SEVEN-M - | derived
+S: Q-NO ∧ REG-A₆ ⟹ χ_m⁰(ℝ²) ≥ 7
+M: both premises open; a conditional
+D: FS111-C-REG-EQ(grade+rests+uses), FS111-C1-ROUTES(grade+rests+uses), FS111-M2-REDUCE-A(grade+uses)
+## FS111-C-SIX-M L | derived
+S: FS106-AE-MAP6 ∧ REG-I₅ ⟹ χ_m⁰(ℝ²) ≥ 6; given MR (row 130), χ(ℝ²) ≥ 6
+M: premises open; a conditional
+D: FS111-C-REG-EQ(grade+uses), FS111-M2-REDUCE-C(rests)
+## FS111-C1-ROUTES - | derived
+S: route R — FS107-R-CP with A-ALL and B-RR gives χ_m⁰(ℝ²) ≥ 7 without Q-NO; route M — Q-NO with REG-A₆ gives it; the front page's composition (FS-114's NO plus the cone scale) is route M with REG-I and REG-A missing, or route R with (A) at every complexity missing
+M: premises open; a map of routes
+D: 
+## FS111-M4-LADDER - | derived
+S: in a saturated colouring (every regular maximal partition), a layer of class a over an interval, flat below (class b) and bounded above by a graph β ≥ 0 (class c) vanishing exactly on a closed set Z with empty interior, with ordinary interfaces near the four unit-parallel curves: every interface point is of FS111-M-PINCH's tangent type with its contacts one unit along the normal; the regions W⁺ and W⁻ are a-free, van
+M: SQ9 (unpinched: every flat edge's ladder); no pinched inhabitant is held
+D: FS111-M4-CUT(grade+rests), FS111-M4-MOVE(grade+rests+uses)
+## FS111-M4-MOVE - | derived
+S: if two regular maximal partitions agree outside the ladder region of a gap J and differ there by replacing β with β′ ≠ β, both ordinary through rungs −N, …, N over J, then the classes at every rung are the same in both (no spare colour enters, at any k; M3-MOVE's lost sliver is absorbed by the class under the band), every downward rung's curved side moves, and the cascade runs one rung per step, ending only where the
+M: HC_K → g_τ (FS111-M3-MOVE) in two partitions ordinary through the same rungs (hypothetical: no such partition is held)
+D: 
+## FS111-VM2-EQ5 - | derived
+S: given FS106-AE-MAP6, the conditional statement "if a tight a.e.-proper five-colouring exists, some maximal five-cover has regular classes whose boundaries form a locally finite plane graph" holds iff χ_m⁰(ℝ²) ≥ 6
+M: premises open; the statement is the caution
+D: 
+## FS114-CV-EXISTS L | derived
+S: Every valid map has a vertex of at least four colours, in the map itself; the proof passes through `M*`, where with no such vertex every stuck chain would be bi-infinite; it uses neither CV-HD nor FS112-C-ENDS, no ray step and no residue
+M: no valid map of the plane is known (the class is empty exactly when the NO holds); the statement's local content is met on every held fragment — the capped strip's midline vertices and the disk's corn
+D: FS112-L60(rests), FS112-N3-DENSE3(rests), FS114-GSD(rests), FS114-L60-WALK(rests)
+## FS114-N114-COMPACT - | derived
+S: C114-COMPACT: TRUE at every `K`; a radius uniform in `K` exists iff C-LOCAL holds, and then (with FS112-N3-DENSE3) at radius `R + 3`
+M: the class `𝓜_K` at `K = 2` holds the brick seven-colouring (valid at seven colours), so the compactness class is not empty
+D: 
+## FS114-N6-NOQ L | derived
+S: **No pinwheel has a ring free of (Q) arcs** (after the bends); in particular none with a `Γ`-free ring, at radius `1 + ε` (with N6-RING60: a four-colour vertex whose ring carries no (Q) arc has ring change points exactly `y + 60°ℤ`, six ring tiles alternating the absent colours, each spanning a closed 60° arc; and N6-CENT: at a non-Siamese degree-4 vertex whose ring carries no (Q) arc, all tactic centres lie in one c
+M: FS114-Y2-BOWTIE's centre for the ring lemma's hypotheses (a four-colour vertex after the bends); no pinwheel is held at `1 + ε`
+D: FS114-N7-3T(both), FS114-N7-HUB(uses), FS114-N7-QOPP(uses), FS114-Y5-PINALL(rests)
+## FS116-N3-SEMI L | derived
+S: in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) be a semi-hub of the ring of p; then y is a vertex of at least four colours, or y is a vertex of exactly three colours one of whose edges at y is an arc of the unit circle about r(ψ + 60°) or about r(ψ − 60°) whose two side colours are both carried at that centre, which is then a vertex of
+M: the strip's P₀ at P₂ and P₋₂ and P₁ at its two change points (crossed full semi-hubs of kind O, four colours) and FS114-Y2-BOWTIE's centre at top and bot (parallel full semi-hubs of kind O, four colou
+D: FS116-RING-TRANSFER-QC(grade+rests+uses)
+## FS116-RING-TRANSFER-C L | derived
+S: in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours: a ring of five or six colours has no change point and places no vertex through RING-GERM, the six-colour ring being six 60° (Q) arcs, one per tile of p, each tile in the Reuleaux triangle on its arc; a ring of four colours places its hubs, and at each hub y = r(ψ) the ring of p and the tiles of p holdi
+M: the strip's P₀ for STAR's partial form (control fs116-n2-star); FS116-Y2-SIXFRAG for the six-colour clause; no held hub for the rest
+D: 
+## FS116-RING-TWIST-C L | derived
+S: at a vertex p of at least four colours of a valid fragment on a closed disc of radius above 1 about p (Siamese pairs allowed, any degree), the set D of points of ω(p) in the closure of a tile of one of p's colours is closed and lies in the union of the arcs of Γ on ω(p) and finitely many points; and for every half-open 60° window W of ω(p) with W ∪ σ(W) disjoint from D: p has four colours and no more; off a finite se
+M: the capped strip's midline vertex P₀ for the hypotheses of the first clause and the antiperiodic colouring (0 violations in 2,360 sampled pairs); no held fragment has a qualifying window, so the parit
+D: FS116-N1-TWIST-LIT(both), FS116-RING-TRANSFER-C(both), FS116-RING-TWIST-Q(grade+rests+uses), FS116-Y3-SIX(grade+rests+uses)
+## FS116-S1-KAPPA L | derived
+S: at a vertex p of four colours and no more of a valid fragment on a closed disc of radius above 1 about p, Siamese pairs allowed, whose ring carries no (Q) arc, every germ of ω(p) (an arc just clockwise or just counter-clockwise of a ring point) lies in the closure of tiles of exactly one of the two colours absent at p, κ, and the germ 60° on carries the other; so κ's change points form a finite non-empty set invarian
+M: SQ9 at k = 9 about a grid point satisfies every hypothesis but the colour count, and its N-E1 clause holds while its antipodal clause fails — control sq9-antipode; no vertex of the class is held at si
+D: FS116-S1-LENS(grade+rests+uses), FS116-S1-PAIR(grade+rests+uses)
+## FS116-S1-PAIR L | derived
+S: in a valid fragment as in FS116-S1-KAPPA, let z be a point with 0 < |z − p| < 2, φ its direction from p and α = arccos(|z − p|/2), so that r(φ + α) and r(φ − α) are the ring points at distance 1 from z; if neither φ + α nor φ − α is a change point, no tile of colour κ(φ + α) or κ(φ − α) has z in its closure; in particular where κ(φ + α) ≠ κ(φ − α) only colours of p are carried at z
+M: SQ9 at k = 9 shows the contrapositive's content: there the two ring points' colours exclude two of five absent colours and leave three; no six-colour model is held
+D: FS116-S1-LENS(grade+rests+uses)
+## FS121-D3-EQ - | derived
+S: C121-SAT6 at k = 6 holds if χ_m⁰(ℝ²) ≥ 7; its failure implies χ_m⁰(ℝ²) ≤ 6, hence χ(ℝ²) ≤ 6 with no MR; and if no honest saturated a.e.-proper colouring of the plane with at most six colours exists, C121-SAT6 at k = 6 holds if and only if χ_m⁰(ℝ²) ≥ 7
+M: premises open; at seven its analogue is empty of content, R7 being an honest saturated seven-colouring
+D: FS121-SAT6(rests)
