@@ -74,11 +74,11 @@ put(4, P + "ValidMap/Contact", "FS110-N3-CONF", "FS110-N3-DEG", "FS110-W-MERGE",
 put(4, P + "ValidMap/UnitArc", "FS112-U1", "FS112-LOCK", "FS112-ISO", "FS112-FLANK", "FS112-N2-FLANK-Q",
     "FS112-N2-RAY", "FS112-A4SIX", "FS112-NB4P", "FS112-N2-BENDS", "FS114-L60-LE")
 put(4, P + "ValidMap/BaseSteps", "FS112-N3-ANTI", "FS112-N3-FAIL", "FS112-N3-NOBOTH", "FS112-N3-PAIRS",
-    "FS112-N3-END", "FS112-C-DOUBLE", "FS112-BOWTIE")
+    "FS112-N3-END", "FS112-BOWTIE")
 put(4, P + "StuckChain", "FS110-N4-FIN")
 put(4, P + "SVMap", "FS106-L", "FS106-TS-T", "FS106-WO", "FS106-TW", "FS106-AE-MAP6")
 # wave 5
-put(5, P + "ValidMap/Terminal", "FS112-N2-TERM", "FS112-C-ENDS", "FS114-CV-HD")
+put(5, P + "ValidMap/Terminal", "FS112-N2-TERM", "FS112-C-ENDS", "FS114-CV-HD", "FS112-C-DOUBLE")
 put(5, P + "ValidMap/Dense", "FS112-N3-COR3", "FS112-ROTHEX", "FS112-N3-BASE", "FS112-N3-DENSE3", "FS114-BV-HEX",
     "FS114-CVB-THOM", "FS114-CV-EXISTS", "FS129-SR2-DISC1TS", "FS129-OR1-LOCALDENSE")
 # wave 6
@@ -186,7 +186,7 @@ NOTE = {
     "FS89-S0A-10": ("with the corrected A, as FS89-S0A-2", SA1, False),
     "FS89-CL2": ("with the corrected A, as FS89-S0A-2", SA1, False),
     "FS112-C-ENDS": ("in its erratum's form (residue deleted), caution C116", SR2, False),
-    "FS112-C-DOUBLE": ("with its errata, caution C116", SR2, False),
+    "FS112-C-DOUBLE": ("with its errata, caution C116; moved from wave 4 to wave 5 beside FS112-N2-TERM and FS112-C-ENDS by inventory item 69 (plans/FS131-close-inventory.md): its proof reads N2-TERM's terminal map M* and FS112-Y3-END-NEEDS as corrected, the latter a wave-5 supporting lemma", SR2, False),
     "FS112-N3-BASE": ("with its errata, caution C116; row 134's base enters as the named hypothesis Row134Base (outside the backlog, plan § 3.3)", SR2, False),
     "FS114-N2-ENDS": ("with its errata, caution C116", SR2, False),
     "FS116-V6-HUG": ("with its own colour step (V6-GERM), not DOUBLETIP's (cautions C126, C131); stated in the non-Siamese class without 'simple', as SR3 item 24's route for EMPTY-NS needs", SR3, True),
@@ -218,6 +218,7 @@ EXTRA_UP = {
     "FS116-O1-YESLIM": ["FS106-EQ"],
     "FS129-SR3-QFREE-NS": ["FS129-SR3-EMPTY-NS"],
     "FS121-D4-FACE": ["FS121-V5-FACE-SHARP"],
+    "FS112-C-DOUBLE": ["FS112-N2-TERM"],  # inventory item 69: its (Q) step is "not (R2), hence (Q) in M*", N2-TERM's map
 }
 OUTSIDE_BACKLOG = {"FS129-OR1-TOP5": "FS111-M-REDUCE-I"}
 
