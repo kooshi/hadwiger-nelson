@@ -2046,3 +2046,25 @@ reason by the close.*
      medium-high — what would change it: infinitely many complementary components making "no separated bounded part" weaker than "the cluster graph is
      connected", which `cvb_pinch_connected`'s plan must then handle through the separation directly. CVB's frame note (phantom arcs) goes to the errata at the
      filing.
+278. **FS131-IM2 handed back** (Stage 6 SAVED, harness ≈ 505k; report `fs131-w4m`'s `data/fs131/reports/FS131-IM2.md`; commits `aee53d57`, `fe10562b`,
+     `4e9bd505`, `de8842c6`, `37f29db8`, `6c7573dd`, `9ffc2aba`). **Done**: the second move (item 263; d4f946ae l. 1058–2592, whole declarations, into `Cone`,
+     checked byte for byte by `tools/fs131_im_move_cone.py`, three new controls watched red); item 269 applied in both copies (`tools/fs131_im_statements.py`
+     empty diffs, both IM tools now read a table of ruled amendments, `tools/fs131_im_amend.py`). **Held, [kernel]**: 93 machinery theorems in `Moves` (the chart
+     near its point, `eventually_ord`, `ncard_coloursAt_le_two`, `col_eq_of_flankAbove`/`_Below`, `Arc.outer_spec`, `ArcMap.surgery` with agreement off the
+     ball, no new unit arc and Condition 5, `encard_sectorsOf_of_partition`, `ArcMap.Near` and `Near.move`) and `Near.exists_cut` (cutting a germ's branch whose
+     two side sectors share colour `c` gives a valid map agreeing off `B̄(v, ρ)`, no new unit arc, Condition 5 kept, one `c`-sector fewer at `v`, no colour added at
+     `v`, at most two colours on the circle). **The three moves: not proved.** **Receipt (Keryx)**: the commits exist;
+     `build/gate/build/20261004T231602Z-3342967.log` ends "Build completed successfully (5361 jobs)", 107 `sorry` warnings and 0 others; `sorry` lines by count
+     `Moves` 3, `Cone` 0, `Contact` 4 (this branch's copy predates IC5); `data/fs131/im/axioms-stage6.txt`: 96 records, exactly 3 on `sorryAx`, `Near.exists_cut`
+     on the standard three. **Re-priced** (record § 6.3): SHAVE's two cut cases about 60 lines of glue each, its recolouring case about half a session; RAY about
+     1.5 sessions; MERGE about two (it cannot use the full rim circle). **Corrections**: SHAVE's table in IM1's § 3.2 is wrong for `g = c` and `h = c` (the cut alone
+     merges, no recolouring, `hclear` not read; § 6.3 replaces it). **Generalization**: `eventually_ord` recovers branch disjointness and germ order below some
+     radius from `Sorted` alone, for any chart. **Tool defect**: `tools/check_architecture.py` exits 1 on "purchase ledgers disagree" (its check [5]) on this
+     branch, before IM2's edits as well — for whoever lands wave 4 (`main`'s gate passed it at wave 2's landing). Credit: IM2, for the shared surgery and the cut.
+279. **Ruling: the moves' machinery becomes `Plane/ValidMap/Surgery`, and FS131-IM3 continues on `fs131-w4m`.** Choice: IM3 first moves IM2's machinery (`Moves`
+     from "The chart near its point" through `Near.exists_cut`) verbatim into a new module `Plane/ValidMap/Surgery` upstream of `Moves`, checked byte for byte;
+     then SHAVE's three cases, RAY and MERGE in § 6.3's order. When a second slot frees, MERGE may go to a parallel implementer on its own branch cut from
+     `fs131-w4m` after the split, editing only `exists_merge_aux` and children beside it. Alternative weighed: keep the machinery in `Moves` and run the three
+     moves serially. Why: IM2 found the machinery reads only `Cone` and wave 3, so the split is clean, costs one checked move, shortens `Moves`' rebuilds, and
+     lets two implementers work the moves without sharing a file's growing machinery; serial work leaves wave 4's longest path at about four sessions.
+     Confidence: medium-high. IM2's slot → IM3: 1 (I4l) + 1 (I5c) + 1 (KP) + 1 (IM3) = 4.
