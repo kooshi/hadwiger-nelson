@@ -288,3 +288,94 @@ What the numbers say, with instances:
    module rows and `#print axioms` lines. Wave 3's seven statement changes in shared skeleton files are used by neither wave 4 nor
    Woodall (checked), so the semantic risk is the six names of Stage 3.2.
 10. **Dead or WIP code: none found.** No `TODO`, no debug output, no commented-out proofs left in code in any body.
+
+## Stage 6 — SAVED (the verdict)
+
+### 6.1 In plain words
+
+The code is good, and better on the thing that matters most than on the things that are easy to fix. Of 22 statements read against
+their rows, 17 say what the row says or more, 3 were changed by recorded rulings and are right, one is a frame that holds less than
+it seems to (HOSTS (iv)), and **one is weaker than its row with no ruling that covers it** (TS-T's Condition-5/6 clauses, now with the
+coordinator). The foundations have no hidden traps: every carrier has a named inhabitant and an adversary, the home-made notions match
+the standard ones, and the one modeling choice every ring row inherits (a tile's colour read as its colour class) is written down and
+holds where it is used. Trust is clean: one imported axiom, carried with all four items and used exactly where declared; no native
+evaluation and no raised heartbeat budget anywhere. The proofs are structured and not brittle.
+
+The weak side is engineering across branches: every declaration is public in one namespace, so six helper names already collide
+between branches (four with different statements), several small facts and three notions are defined twice, a real inner product is
+re-invented, wave 2 left 84 theorems without docstrings, four modules are past 1,500 lines, and the trust and vacuity gates have not
+caught up with the new kinds of object (an imported axiom; two new carriers).
+
+**Grade: B+ overall** — A− for statement fidelity and trust (the part a skeptical referee checks first), B for engineering hygiene
+(the part a Mathlib reviewer would send back). For a research formalization written by about thirty agents in one day, that is high;
+it is not yet publication-grade, and every gap named below has a mechanical fix.
+
+### 6.2 Findings, ranked, each with its fix and who makes it
+
+**(A) Correctness and fidelity**
+1. TS-T's Condition-5/6 clauses (`fs131-w4` `Plane/SVMap.lean:348,357`) assume `h3 : ∀ x, ncard (coloursAt x) ≤ 3` in place of
+   Condition 5; the row's content is not formalized and `h3` is not a listed named hypothesis (Stage 3 row 18). *Fix*: state with
+   `F.Condition5` plus S–V Lemma 2 (or NB-4) as a named lemma or hypothesis, or a ruling that the clause is held only over NB-4's
+   conclusion and the ledger says so. *Who*: wave 4's planner, by Keryx's ruling. Messaged.
+2. HOSTS (iv) (`fs131-w2` `Arith/FalconerField.lean:274`): `P`, `Per` free, so the kernel holds "a fan's `t − a` is a non-zero forced
+   difference of `R`" and nothing about the three fields (Stage 3 row 10). *Fix*: one docstring sentence now; an instance corollary
+   when the rings exist; the ledger line must not say more. *Who*: wave 2's implementer (docstring), the filing (ledger wording).
+3. Woodall's normal forms say nothing at a point with no `SectorsAt` presentation; `exists_sectorsAt` (`sorry`) is what makes them
+   bite (Stage 2 D7). *Fix*: prove it first. *Who*: Woodall's implementer.
+
+**(B) Trust**
+1. The axiom gate has no place for an imported axiom and does not enforce the standard three under CLEAN; `le_chiM_of_falconerFan`
+   will be counted clean with Falconer's axiom once `falconer_reduction` is proved (Stage 4.1). *Fix*: an IMPORTED banner with a
+   declared list, and a subset check on CLEAN, each with a planted control. *Who*: a de Bruijn job on `scripts/axioms.sh`,
+   `scripts/gate_report.py`, before wave 2 lands.
+2. The vacuity gate does not track `CPColouring` or `AeProperRegions`, both of which are empty at `k ≤ 1` (Stage 4.3). *Fix*: add both
+   with planted controls. *Who*: whoever holds `scripts/Vacuity.lean`, before waves 2 and 4 land.
+3. `lebesgue_covering_square` (`fs131-w4` `Plane/SVMap.lean:253`) is an outside theorem as a `sorry`-theorem, disposition owed. *Who*:
+   wave 4's planner.
+
+**(C) Debt to fix before each wave lands**
+1. Six cross-branch name collisions (`framePt`, `dist_rot`, `eq_norm_mul_e_arg`, `e_add_int_mul_two_pi`, `e_mul_conj_e`,
+   `abs_dot_le`; `data/fs131/qa1/dupes.txt`). *Fix*: the later branch renames or deletes its copy at merge; re-run
+   `tools/fs131_qa1_dupes.py` before each merge. *Who*: the implementer merging. Messaged.
+2. Append-point conflicts in `scripts/Axioms.lean`, `Proofs.lean`, `ARCHITECTURE.md` at identical lines in all four branches, with wave
+   3's skeleton rows carried in two of them. *Fix*: merge w2, then w3, then w4, then Woodall, one resolver, `tools/check_architecture.py`
+   and the axiom gate's "audited more than once" line read after each. *Who*: Keryx sets the order; implementers merge.
+3. Vocabulary duplicates: `unitShadow`/`shadow`, `essMulticolour`/`essColours`, `IsContactFor`/`SaturatedAt` (wave 2 already proves
+   `essSupport_eq_closure_densitySet`), `ne1_region`/`not_mem_coloursAt_of_dist_eq_one`, `dot_sub`/`dot_sub_left`. *Fix*: one name each,
+   `abbrev` or bridge lemma for the other, at the merge that brings them together. *Who*: the merging implementer.
+4. Wave 2's 84 undocumented public theorems (`Slack` 31, `Stationary` 26, `MaximalCover` 10). *Who*: wave 2's implementer, before
+   landing (the build will not say: `linter.missingDocs` does not check theorems, verified in core's `Lean/Linter/MissingDocs.lean`).
+5. Stale "skeleton" labels in `ARCHITECTURE.md` rows and `scripts/Axioms.lean` section headers. *Who*: each wave's landing commit.
+
+**(D) Debt to fix before publication**
+1. Replace `dot` with Mathlib's `⟪·,·⟫_ℝ` on `ℂ` (`Complex.inner`); `abs_dot_le` is `abs_real_inner_le_norm`. *Who*: a cleanup job.
+2. Make helpers `private` or put them in per-module namespaces; rename row-mnemonic theorems by their statements, keeping row ids in
+   the docstrings — at the comparator stage, when the trusted surface is chosen. *Who*: a planner for the publication surface.
+3. Split `RingGerm` (2,595), `LocalStructure` (2,466), `CoverExamples` (1,954), `Slack` (1,501). *Who*: nobody yet; after the waves
+   land (splitting now multiplies merge conflicts).
+4. Idle hypotheses: general theorem without them plus a `_row` corollary with them, in place of 15 `have _ := h` and 6 `_h…` binders
+   (`Plane/Lens.lean:218`'s `Ne.symm (Ne.symm hne)` first). *Who*: implementers, when they next touch those files.
+5. 72 mid-proof bare `simp` to `simp only` via `simp?` (`quality.json` lists them); watch the ≈ 450 `nlinarith` calls at the next Mathlib
+   bump. *Who*: a cleanup job.
+6. Small docstring and definition notes: `Arc.Nondegenerate` admits a whole circle against its docstring; `Condition5` reads presented
+   arcs, not `Γ` (say so); `Siamese` could use `UnitNear`. *Who*: a cleanup job.
+
+**(E) Practices worth keeping** (credit, plainly)
+1. Every carrier ships a named inhabitant and an adversary (`IsEmpty (AeColouring 1)`, `IsEmpty (CPColouring 1)`, `halfDiscMono`,
+   `bowtie`, `sixFrag`), and a `False`-concluding lemma ships its sharpness counterexample (`not_woodall_step4_two_thirds`,
+   `not_forall_semiconcaveWith_one`).
+2. Docstrings that carry the read-back: the row id, what is stronger and why ("the row's `χ(H) = k − 1` is idle"), the ruling item
+   number when a statement changed. A referee can check fidelity from the file alone.
+3. Generalizations stated as the theorem, the row's form as a corollary (`qfree4`, `falconerFan_chromaticNumber`, `exit_lens_row`).
+4. One structure with classes as predicates (`ArcMap` with `Valid`, `NonSiamese`, `Simple`; G86), so Siamese-allowed lemmas and class
+   statements share objects — the reason wave 3's ring rows compose without casts.
+5. Trust discipline: one axiom with all four items, no native evaluation, no heartbeat raises in ≈ 30,000 lines.
+6. Implementers stop and report a statement defect instead of patching it: about fifteen caught and ruled before this audit, and the
+   sampled statements show the process working.
+
+### 6.3 What was not done
+
+Statements outside the 22 sampled were not read against their rows (about 230 row theorems exist across the bodies); the planners'
+read-backs in the wave plans were cited, not re-read; no module was compiled or timed (no build was needed for any finding). A
+second pass worth running before the close: the same read-back over wave 2's remaining 13 `sorry` row theorems and wave 4's 113 skeleton
+statements, which no implementer has reached.
