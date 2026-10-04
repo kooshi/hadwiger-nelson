@@ -260,7 +260,7 @@ N("SRAY", "(b′) the stuck ray", "step", "Can a one-sided infinite chain of stu
 N("CHAINB", "(b″) chains bounded", "step", "Is the length of finite stuck chains bounded uniformly over a map? Long chains are arithmetically "
   "free: a map with infinitely many arc radii can carry chains of every length. Named at FS-112's close (FS-115).", RSTUB,
   "Is the length of finite stuck chains bounded — uniformly over the map — or can a valid map carry finite chains of every length?",
-  (L(135), "Not claimed: the NO; FS-114's global step; (b′); (b″)"), at=(70, 530), sector="seven",
+  (L(135), "Not claimed: the NO; FS-114's global step; (b′); (b″)"), at=(68, 530), sector="seven",
   registered=dict(p=0.25, src=RSTUB, quote="(b″) bounded (a uniform bound on finite chains) | 0.25",
                   population="within FS-115: a uniform bound on finite chain length"))
 N("N3PER", "N3-PER", "held", "A doubly periodic six-map has a periodic terminal modification: no stuck ray, bounded chains. So for periodic "
@@ -375,10 +375,10 @@ N("MEET", "the doors are two routes", "reading-link", "Card 1, answered at two m
 N("FS121", "the map step", "step", "Route M's third statement. Closed undecided (rows 142–144): honest saturated ladders end inward at (Q) or (R2) arcs and never outward; honesty is free (Grundy); symmetric and grid colourings are regular; open: curved tangent interfaces, lateral extent, the top colour at six.", STUB("STUB-map-step.md"),
   "the map step: can a tight colouring of the plane be replaced by a map", (STUB("STUB-map-step.md"),
   "Decisive at its top, and at its top the answer restated."), at=(57, 270), sector="seven", tier=1)
-N("FS120", "the pinch at a junction", "step", "In a measurable fall colouring, a pinch climbs a short ladder of unit parallels; is its cascade "
+N("FS120", "the pinch at a junction, and the cover route at five", "step", "In a measurable fall colouring, a pinch climbs a short ladder of unit parallels; is its cascade "
   "absorbed where the ladder ends?", STUB("STUB-pinch-at-junction.md"),
   "the pinch at a junction, and the cover route at five: can a pinch in a measurable fall colouring of the plane be removed locally", (STUB("STUB-pinch-at-junction.md"),
-  "None alone; it is a colour-generic rung of route M, smaller than the answer."), at=(65, 330), sector="seven")
+  "None alone; it is a colour-generic rung of route M, smaller than the answer."), at=(66, 416), sector="seven")
 N("FS122", "the forced pair", "step", "Route R's third statement: a close complementary pair of fat junctions in every near-colouring; "
   "equivalent to seven (FS111-W-NEG), so its smaller statements are B-RR and a robust junction count.", STUB("STUB-forced-pair.md"),
   "the forced pair at every complexity (route R's third statement)", (STUB("STUB-forced-pair.md"), "Decisive, and the answer restated:"),
@@ -389,9 +389,9 @@ N("FS126", "curved pencils", "step", "Does any honest saturated colouring have a
 N("FS127", "lateral extent", "step", "Is the singular set of every honest saturated colouring locally finite? Open at LAT, point-like accumulation; true on grids (two minds).",
   STUB("STUB-lateral-extent.md"),
   "is the singular set of every honest saturated colouring of the plane locally finite?", (STUB("STUB-lateral-extent.md"), "None alone; a colour-generic rung."), at=(52, 418), sector="seven")
-N("FS128", "the six-colour rungs", "step", "Binding the top colour of a Grundy six-colouring (TOP₆), and NO-PAR under Condition 5 (the parked cover route).",
+N("FS128", "the top colour, at five and six", "step", "Binding the top colour of a Grundy six-colouring (TOP₆), and NO-PAR under Condition 5 (the parked cover route).",
   STUB("STUB-top-colour.md"),
-  "can the top colour of a Grundy six-colouring be bound, and does NO-PAR hold under Condition 5?", (STUB("STUB-top-colour.md"), "At six, and next to the answer."), at=(61, 167), sector="seven")
+  "can the top colour of a Grundy six-colouring be bound, and does NO-PAR hold under Condition 5?", (STUB("STUB-top-colour.md"), "At six, and next to the answer."), at=(61, 162), sector="seven")
 
 # ================================================================ toward six from below (right)
 N("FS104", "χ_CP(ℝ²) ≥ 6", "question", "Is the stationary (equivalently the measurable) chromatic number at least six? Two-sided: a "

@@ -1243,7 +1243,7 @@
     "row": "135"
    },
    "grade": "Not claimed: the NO; FS-114's global step; (b′); (b″)",
-   "theta": 70,
+   "theta": 68,
    "r": 530,
    "sector": "seven",
    "tier": 2,
@@ -1857,7 +1857,7 @@
   },
   {
    "id": "FS120",
-   "label": "the pinch at a junction",
+   "label": "the pinch at a junction, and the cover route at five",
    "role": "step",
    "plain": "In a measurable fall colouring, a pinch climbs a short ladder of unit parallels; is its cascade absorbed where the ladder ends?",
    "src": {
@@ -1868,8 +1868,8 @@
     "file": "plans/STUB-pinch-at-junction.md"
    },
    "grade": "None alone; it is a colour-generic rung of route M, smaller than the answer.",
-   "theta": 65,
-   "r": 330,
+   "theta": 66,
+   "r": 416,
    "sector": "seven",
    "tier": 2,
    "status": "?",
@@ -1949,7 +1949,7 @@
   },
   {
    "id": "FS128",
-   "label": "the six-colour rungs",
+   "label": "the top colour, at five and six",
    "role": "step",
    "plain": "Binding the top colour of a Grundy six-colouring (TOP₆), and NO-PAR under Condition 5 (the parked cover route).",
    "src": {
@@ -1961,7 +1961,7 @@
    },
    "grade": "At six, and next to the answer.",
    "theta": 61,
-   "r": 167,
+   "r": 162,
    "sector": "seven",
    "tier": 2,
    "status": "?",

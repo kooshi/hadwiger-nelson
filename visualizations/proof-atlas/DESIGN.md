@@ -261,3 +261,24 @@ The layout lint reads 0 overlaps. Palette review 0 failed; its self-test and the
 ## Theorems this phase proved
 
 None. The job folds a close into an instrument.
+
+## FS129-AT1 — SAVED: two labels, the one look, the rebuild
+
+*The Clerk's job FS129-AT1 (`data/fs129/at1/README.md`), finishing FS129-F1's filing.*
+
+**What moved:** the FS128 node's label is now "the top colour, at five and six" (the title of `plans/STUB-top-colour.md`; `CLAUDE.md` § Frontier says "FS-128, the
+top colour, at five and six") and the FS120 node's "the pinch at a junction, and the cover route at five" (title of `plans/STUB-pinch-at-junction.md`;
+`CLAUDE.md` says "FS-120, the pinch at a junction, and the cover route at five"). No quote or address changed; neither plain statement named the old title.
+The longer labels raised 4 zoomed-label overlaps, cleared by moving three marks: FS128 (61, 167) to (61, 162), FS120 (65, 330) to (66, 416), CHAINB (70, 530)
+to (68, 530). The checker reads 212, failed 0, errors 0; its self-test, the palette review and its self-test pass; the lint reads 0 overlaps; the build wrote
+`index.html` (176,070 bytes).
+
+**The one look:** headless Firefox under `unshare -rn`, 1440 px wide, the page in the publish skeleton with `data-theme` stamped light and dark, at 1000 px and
+1900 px tall (`data/fs129/at1/atlas-{light,dark}.png`, `-tall.png`). Both themes read: no overlapping labels at rest, no unreadable text, no empty panel; the
+three answer tiles read 8.16, 7.40 and 5.28 bits at the defaults. Not looked at: the zoomed (All labels) state, where the moved marks' labels show.
+**Left for the owner:** the eyebrow still reads "2026-09-28, after FS-114's and FS-111's closes" (`page.tmpl.html` line 283), and the Routes footnote speaks of
+"FS-114's global step"; both are page text, not marks.
+
+## Theorems this phase proved
+
+None. The job corrects labels and looks at the page.
