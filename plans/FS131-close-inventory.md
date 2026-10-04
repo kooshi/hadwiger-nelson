@@ -1363,3 +1363,26 @@ reason by the close.*
      slot frees while I4g still has work; if none does, I4g's successor simply takes `Contact` too.
 195. **Brief FS131-I4g, wave 4's seventh implementer** (Opus; `data/fs131/briefs/FS131-I4g-wave4.md`, derived by script from I4f's, gated PASS): the bowtie's
      moves, `UnitArc` and `BaseSteps` (29), not `Contact` (item 194). Launched in I4f's slot: 1 (I2k) + 1 (K5) + 1 (I4g) = 3.
+196. **FS131-K5 mid-job, five findings** (message 2026-10-04; record `plans/FS131-w5-kernel-plan.md` §§ 2.2, 3.4 on `fs131-w5`): **F-BASE** — `Row134Base` stated at the
+     unit-arc class after the inert pre-bend (a valid six-coloured fragment covering `B̄(u, 2)`: `BaseHyp u ∧ NoInertNear u` impossible), because the Condition-5
+     base (S–V Cor. 1 as FS-110 repaired it) does not compose — FS112-N3-BASE's walk swaps Condition 5 out step by step inside the base's proof, and an (R2)
+     arc and the in/out arcs at leaving centres survive every bend; K5 proposed that the walk's assembly (N3-BASE's table) move to the `Row134Base` job.
+     **F-WALK5** — N4-STUCK (i)–(ii) with unit arcs (FS112-WALK's row 5; FS112-WALK declined) is read by CV-L0, CV-HD, CV-CLASS, C-ENDS, N2-TERM's chain
+     clause and CV-EXISTS; formalized in wave 5 as the supporting lemma `stuck_structure_ua` (the pattern of items 8 and 53). **R-CDOUBLE** (item 69's
+     question) — "terminal valid map" = `IsTerminalMap` (wave 4's `Terminal` plus N2-TERM's clause 1), proved as a corollary of CV-HD's cycle and clause 1
+     (FS114-CV's route); `y3_end_needs` used inside CV-HD's branch `¬G_N`. **R-CHAIN** — a chain vertex is stuck with at most three colours (N2-TERM's split);
+     no row's words change. **R-MOD** — "valid modification" = `IsModification` (same domain, no unit arc created, every point of ≥ 4 colours keeps them).
+     Generalizations for errata: N3-COR3 on fragments covering `B̄(u, 1)`, `B̄(u′, 1)`; DISC1TS gives three colours (more than degree 3); the base and
+     LOCALDENSE's input on fragments covering `B̄(u, 2)`; N2-RED, CV-L0, FLANK-Q unconditional and N3-END's chain clause at every `k`. Risk noted:
+     `bend_toward` moves end vertices, so the pre-bend at an inert arc ending at `u` may move `u`. State: 10 of 13 rows stated (ROTHEX, BV-HEX, CVB-THOM not
+     yet); the obligation pass owed to a successor planner.
+197. **Ruling on F-BASE: the unit-arc statement stays, as an intermediate `Prop` proved inside FS-131 — not as the outside hypothesis.** Choice: K5's unit-arc
+     form is wave 5's intermediate statement (a name that does not read as the outside hypothesis, e.g. `Row134BaseUA`, K5's call); the walk's assembly
+     (N3-BASE's table) is a wave-5 theorem proving it, so FS112-N3-BASE's Lean proof is the pre-bend plus the walk; the named outside hypotheses are only the
+     pieces of `[SokolovVoronov2025]` (in FS-110's repaired forms) that the walk uses **by statement**, each a named `Prop`; any piece the walk reads inside a
+     proof is ours to formalize. Alternative weighed: K5's proposal — the unit-arc form as `Row134Base` itself, the walk moved to the separate `Row134Base`
+     job. Why: § What "Closed" means, item 3 — no hand result of ours is left as a hypothesis unless it is outside the backlog and named; N3-BASE (and its walk)
+     is a wave-5 *formalize* row, so it cannot sit inside a named hypothesis at the close, and K5's form would make N3-BASE's Lean proof a restatement of its
+     hypothesis. Confidence: high on the principle; medium on the residual's size — the fact that would change the shape: if the walk reads S–V's proofs
+     throughout, the residual is S–V Cor. 1's whole argument; that is still to be placed inside FS-131 (a wave-5b planner), and the stub then covers nothing.
+     F-WALK5, R-CDOUBLE, R-CHAIN and R-MOD accepted as stated (confidence high). Amendment appended to `data/fs131/briefs/FS131-K5-wave5.md`.

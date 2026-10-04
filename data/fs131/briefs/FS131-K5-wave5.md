@@ -131,3 +131,21 @@ because the coordinator can only review work it knows exists).
 - **Nothing with a `sorry` reaches `main`** (the opening plan § 7.5): your work stays on `fs131-w5` and lands with the wave, after its implementer's gate,
   once wave 4 has landed. Wave 4's statements may still gain children as its implementer works on `fs131-w4`, but never change: build on them as committed;
   wave 5's implementer merges `fs131-w4` (or `main`, once wave 4 lands) before its gate.
+
+## Amendment 2026-10-04 (Keryx) — F-BASE ruled; F-WALK5, R-CDOUBLE, R-CHAIN, R-MOD accepted
+
+Your five findings are logged as `plans/FS131-close-inventory.md` item 196 and ruled in item 197. In short: your unit-arc statement of the base stays, but as
+wave 5's **intermediate `Prop`**, proved inside this milestone — not as the outside hypothesis. The walk's assembly (N3-BASE's table) is a wave-5 theorem, so
+FS112-N3-BASE's Lean proof is the pre-bend plus the walk. The named outside hypotheses are only the pieces of `[SokolovVoronov2025]` (in FS-110's repaired
+forms) that the walk uses by statement, each a named `Prop`; any piece the walk reads inside a proof is ours to formalize. The reason is the milestone's
+Closed rule, item 3: no hand result of ours may be left as a hypothesis unless it is outside the backlog, and N3-BASE is a wave-5 row.
+
+What this asks of you, as far as your context allows (handing the rest to a successor planner in your § 5 is a good report):
+1. Rename the intermediate so it does not read as the outside hypothesis (`Row134BaseUA`, or your choice), and add the walk's assembly to the skeleton as a
+   theorem with its leaves, or name it in § 5 for the successor.
+2. In the record, list which pieces of `[SokolovVoronov2025]` the walk uses by statement (the candidates for named outside `Prop`s) and which it reads inside
+   a proof; if the second list is the whole argument, say so plainly — I then place it in this milestone as its own planner job.
+3. Rewrite the stub draft (`data/fs131/k5/STUB-row134-base-lean.md`) to cover only what stays outside, or say it covers nothing.
+
+F-WALK5's `stuck_structure_ua`, R-CDOUBLE's `IsTerminalMap`, R-CHAIN's chain vertices and R-MOD's `IsModification` are accepted as stated. You still start no
+agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
