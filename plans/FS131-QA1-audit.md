@@ -60,3 +60,44 @@ to). The list, 20 theorems: wave 1 `AeColouring.dist_ne_one`, `dist_ne_one_of_me
 `IsMaximalCover.semiconcaveWith`, `falconerFan_five_mem_eight`, `CPColouring.forcedSet_eq_zero`, `exists_face_fails`; wave 3 `qfree4`,
 `ringQPrimeS`, `ringband_v`, `echo`, `IsTile.dist_lt_one`; wave 4 `ArcMap.ts_t`, `iso`; Woodall `woodall_step4`, `townsend_lemma`,
 `not_mem_coloursAt_of_dist_eq_one`. (21 listed; any not reached is named as such in Stage 3.)
+
+## Stage 2 — SAVED
+
+### 2.1 What was read
+
+Every definition in the foundation modules, each unfolded to Mathlib's: wave 1 `Plane/Basic` (`e`, `ringPt`, `arcLength`),
+`Plane/UnitPairs` (`unitPairSet`, `UnitPairsNull`, `densityRatio`, `densitySet`, `upperDensityAt`, `essSupport`, `pairSet`),
+`Plane/AeColouring` (`AeColouring`, `chiM0`), `Plane/UnitAvoiding` (`phi`, `IsMUA`), `Plane/ArcMap` (`Arc`, `carrier`, `Nondegenerate`,
+`IsUnitArc`, `ArcMap`, `Γ`, `interiorPts`, `region`, `IsTile`, `coloursAt`, `Valid`, `Covers`, `IsPlaneMap`, `Siamese`, `NonSiamese`,
+`IsJordanDomain`, `Simple`); wave 2 `Plane/Cover` (all fourteen), `Plane/Suprema` (all fifteen), `Plane/CPColouring` (`shiftCol`,
+`rotCol`, `CPColouring`, `RotationInvariant`, `chiCP`), `Arith/PlaceHom` (`IsUsablePrime`, `pureTranscendental`, `IsPlaceHom`,
+`NoAffFieldHyp`); wave 3 `Plane/LocalMap` (all twenty-five), `Plane/LocalStructure` (`angleIcc`, `angleIoo`, `Arc.OnRing`),
+`Plane/CircleColouring` (`CircleColouring`, `Lift`, `Good`, `step`, `hSum`, `h`, `LeftVal`, `RightVal`, `IsSwap`, `W`, `D`, `m`, `n₂`);
+wave 4 `Plane/ValidMap/Basic` (all forty-two at `fs131-w4`); Woodall `Plane/Woodall/Basic` (`annSector`, `Rim`, `collar`, `CollarAt`,
+`SectorsAt`, `WoodallMerged`, `WoodallNormal`).
+
+### 2.2 Verdict on the definitions
+
+**No trap of the sinking kind was found.** Every carrier the rows quantify over is inhabited by a named object in the same module
+(`ArcMap.const`, `halfDisc`; `sq9 : AeColouring 9`; `sq9CP`; `unitArcPlane`; `bowtie`; the one-colour plane for `SectorsAt` and both
+Woodall normal forms), and the degenerate carriers are refuted where they should be (`IsEmpty (AeColouring 1)`, `IsEmpty (CPColouring 1)`,
+the adversaries `not_unitPairsNull_ball_two`, `halfDiscMono`). The home-made notions agree with the standard ones where a standard one
+exists: `IsUsablePrime` (`𝔭` maximal, `#(𝓞_F/𝔭) ≡ 3 (mod 4)`) is exactly the Notation's "q ≡ 3 (mod 4), i.e. p ≡ 3 (mod 4) and f odd";
+`CPColouring` as a shift-invariant law on `ℂ → Fin k` is faithful to D-CP because every clause of D-CP reads finite-dimensional
+marginals only; `densitySet`/`upperDensityAt` use closed balls and `𝓝[>] 0`, Mathlib's own Besicovitch form; `IsJordanDomain` and `Simple`
+read the row's "open disc whose closure meets each other tile's closure in a connected set or not at all" exactly (the empty set is
+preconnected); `CircleColouring.h` and `Lift.m` use `Int` division, which is Euclidean (floor for a positive divisor), as the rows'
+`⌊·/3⌋` asks, and `hSum` is a multiple of 3 by telescoping so `h` loses nothing.
+
+Findings, each small:
+
+| # | where | finding | class |
+|---|---|---|---|
+| D1 | `Plane/ArcMap.lean` `Arc.Nondegenerate` | docstring "an arc of positive length that is not a whole circle"; the definition `θ₁ ≤ θ₀ + 2π` admits the whole circle. Harmless (a whole circle is a legitimate boundary), but the docstring is wrong | D: fix the docstring (or make it `<`) |
+| D2 | `fs131-w2` `Plane/Cover` vs `fs131-w3` `Plane/LocalMap` | two vocabularies for one notion: `essMulticolour C x` (w2) and `F.essColours w` (w3) are definitionally `essMulticolour F.region w`; `IsContactFor` reads `closure (densitySet A)` (w2) where `SaturatedAt` reads `essSupport A` (w3) — equal for measurable `A` (a density point is a support point; a support point has density points nearby), with no bridge lemma in either branch | C: before wave 3 lands, define `essColours := essMulticolour F.region` and prove `closure_densitySet_eq_essSupport` once (an implementer) |
+| D3 | `fs131-w2` `Plane/Cover.lean:79` `unitShadow` vs K4 `Plane/ValidMap/Basic.lean:76` `shadow` | the same set `{z | ∃ y ∈ T, dist z y = 1}` under two names in branches that will merge | C: keep `unitShadow`, make `shadow` an `abbrev` or delete it at wave 4's merge |
+| D4 | `Plane/ArcMap.lean` `Siamese` vs `fs131-w3` `UnitNear` | the cross-distance clause is inlined in `Siamese` and named `UnitNear` a wave later | D: restate `Siamese` with `UnitNear` when convenient |
+| D5 | K4 `Plane/ValidMap/Basic` `Condition5` | reads the presented `F.arcs`, not `Γ`: a map with a spurious unit arc (one colour on both sides) fails `Condition5` though its boundaries meet unit circles finitely. A theorem with `hC5 : F.Condition5` is so slightly narrower than "under Condition 5" read on boundaries; the docstring of `RingArcsWithin` already names presentation-dependence | D: note it in `Condition5`'s docstring; nobody need change a statement now |
+| D6 | `fs131-w3` `Plane/LocalMap` (module doc) | "a tile of colour `c`" is read as the colour class `F.region c` wherever a row speaks of its closure, cone or germ. For existential uses this is exact by local finiteness (finitely many tiles near a point of the domain; a cone of a finite union is the union of cones); universal uses keep `TileOf` (`InType`, `OutType`, GERM-S's "every tile of `p` of colour `c`"). Checked in the sampled statements of Stage 3 | none — a good, documented ruling |
+| D7 | `fs131-ww` `Plane/Woodall/Basic` `WoodallMerged`, `WoodallNormal` | both quantify over every `SectorsAt` presentation, so at a point with none they say nothing; `ArcMap.exists_sectorsAt` (still `sorry`, `Woodall/Steps`) is what makes them bite. The final theorems' statements do not depend on this, so it is not a fidelity risk, but `exists_sectorsAt` is load-bearing and should be proved before the chain's step lemmas are trusted as meaningful | C: keep `exists_sectorsAt` first in Woodall's order (implementer) |
+| D8 | K4 `Plane/ValidMap/Basic` `IsQArc`, `InContact`, … | the ring-arc kinds do not require the two side colours to differ. Under `Valid` with the side colour carried at the centre a same-colour arc is impossible (the circles about nearby points of that colour sweep the arc's neighbourhood), so nothing is lost; noted so nobody "fixes" it into a hypothesis | none |
