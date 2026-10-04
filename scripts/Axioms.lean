@@ -2347,6 +2347,10 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.frame_dist_sq
 #print axioms HadwigerNelson.Plane.mem_faceFailClass_iff
 
+-- FS131-I2f: children added by the sixth wave-2 implementer
+#print axioms HadwigerNelson.Plane.upperDensityAt_pos_of_balls
+#print axioms HadwigerNelson.Plane.sq9_openSq_subset
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

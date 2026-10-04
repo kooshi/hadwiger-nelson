@@ -100,33 +100,181 @@ theorem sq9_tight : sq9.Tight := fun ε hε hs => by
 def sq9Sq (n m : ℤ) : Set ℂ :=
   {z | (n : ℝ) / 2 ≤ z.re ∧ z.re ≤ ((n : ℝ) + 1) / 2 ∧ (m : ℝ) / 2 ≤ z.im ∧ z.im ≤ ((m : ℝ) + 1) / 2}
 
+/-- **A ball of a quarter radius inside `closedBall x r`, a.e. inside `A`, at every small radius**: then `A` has positive upper
+density at `x` (the density ratio is at least `1/16`). A child of `sq9Sq_subset_essClosure` (FS131-I2f). -/
+theorem upperDensityAt_pos_of_balls {A : Set ℂ} {x : ℂ} {r₀ : ℝ} (hr₀ : 0 < r₀)
+    (h : ∀ r, 0 < r → r < r₀ → ∃ c, ball c (r / 4) ⊆ closedBall x r ∧ volume (ball c (r / 4) \ A) = 0) :
+    0 < upperDensityAt A x := by
+  have hev : ∀ᶠ r in 𝓝[>] (0 : ℝ), (1 / 16 : ENNReal) ≤ densityRatio A x r := by
+    filter_upwards [Ioo_mem_nhdsGT hr₀] with r hr
+    obtain ⟨c, hcl, h4⟩ := h r hr.1 hr.2
+    have hmeas : volume (ball c (r / 4)) ≤ volume (A ∩ closedBall x r) := by
+      calc volume (ball c (r / 4)) ≤ volume (ball c (r / 4) ∩ A) + volume (ball c (r / 4) \ A) :=
+            measure_le_inter_add_sdiff _ _ _
+        _ = volume (ball c (r / 4) ∩ A) := by rw [h4, add_zero]
+        _ ≤ volume (A ∩ closedBall x r) := measure_mono fun w hw => ⟨hw.2, hcl hw.1⟩
+    unfold densityRatio
+    refine (ENNReal.le_div_iff_mul_le (Or.inl (measure_closedBall_pos volume x hr.1).ne')
+      (Or.inl measure_closedBall_lt_top.ne)).2 ?_
+    refine le_trans ?_ hmeas
+    rw [Complex.volume_ball, Complex.volume_closedBall]
+    have h4 : ENNReal.ofReal (r / 4) = ENNReal.ofReal r / 4 := by
+      rw [ENNReal.ofReal_div_of_pos (by norm_num)]; simp
+    rw [h4, div_eq_mul_inv (ENNReal.ofReal r), mul_pow, ← ENNReal.inv_pow]
+    have h16 : (4 : ENNReal) ^ 2 = 16 := by norm_num
+    rw [h16, one_div]
+    refine le_of_eq ?_
+    ring
+  exact lt_of_lt_of_le (by norm_num) (le_limsup_of_frequently_le hev.frequently)
+
+/-- The open square inside `sq9Sq n m` is inside the square's class (FS131-I2f). -/
+theorem sq9_openSq_subset {n m : ℤ} {w : ℂ} (h1 : (n : ℝ) / 2 < w.re) (h2 : w.re < ((n : ℝ) + 1) / 2)
+    (h3 : (m : ℝ) / 2 < w.im) (h4 : w.im < ((m : ℝ) + 1) / 2) :
+    w ∈ sq9.cls (finProdFinEquiv ((n : ZMod 3), (m : ZMod 3))) := by
+  show sq9Col w = _
+  exact sq9Col_of_floor (Int.floor_eq_iff.2 ⟨by linarith, by linarith⟩) (Int.floor_eq_iff.2 ⟨by linarith, by linarith⟩)
+
 /-- Saturation with positive-density partners implies saturation (`essClosure ⊆ essSupport = closure Ã`). -/
 theorem SaturatedPos.saturated {k : ℕ} {C : Fin k → Set ℂ} (h : SaturatedPos C) : Saturated C := by
-  sorry
+  intro j x hx
+  obtain ⟨y, hy, hxy⟩ := h j x hx
+  exact ⟨y, by rw [← essSupport_eq_closure_densitySet]; exact essClosure_subset_essSupport _ hy, hxy⟩
 
 /-- A point of positive upper density of a class lies in a closed square of that class (the closed squares of one colour are a
 locally finite closed family containing the class). -/
 theorem sq9_essClosure_subset {j : Fin 9} {x : ℂ} (hx : x ∈ essClosure (sq9.cls j)) :
     ∃ n m : ℤ, finProdFinEquiv ((n : ZMod 3), (m : ZMod 3)) = j ∧ x ∈ sq9Sq n m := by
-  sorry
+  by_contra hno
+  simp only [not_exists, not_and] at hno
+  let f : ℤ × ℤ → Set ℂ := fun p => if finProdFinEquiv ((p.1 : ZMod 3), (p.2 : ZMod 3)) = j then sq9Sq p.1 p.2 else ∅
+  have hclosed : ∀ p, IsClosed (f p) := by
+    intro p
+    simp only [f]
+    split_ifs
+    · exact (isClosed_le continuous_const Complex.continuous_re).inter ((isClosed_le Complex.continuous_re continuous_const).inter
+        ((isClosed_le continuous_const Complex.continuous_im).inter (isClosed_le Complex.continuous_im continuous_const)))
+    · exact isClosed_empty
+  have hlf : LocallyFinite f := by
+    intro z
+    refine ⟨ball z (1 / 4), ball_mem_nhds z (by norm_num), ?_⟩
+    refine (Set.finite_Icc (⌊2 * z.re⌋ - 1, ⌊2 * z.im⌋ - 1) (⌊2 * z.re⌋ + 1, ⌊2 * z.im⌋ + 1)).subset ?_
+    rintro ⟨p, q⟩ ⟨w, hwf, hw⟩
+    simp only [f] at hwf
+    split_ifs at hwf with hc
+    · obtain ⟨w1, w2, w3, w4⟩ := hwf
+      rw [mem_ball] at hw
+      have hre : |w.re - z.re| < 1 / 4 := lt_of_le_of_lt (by
+        have := Complex.abs_re_le_norm (w - z); simpa [dist_eq_norm] using this) hw
+      have him : |w.im - z.im| < 1 / 4 := lt_of_le_of_lt (by
+        have := Complex.abs_im_le_norm (w - z); simpa [dist_eq_norm] using this) hw
+      rw [abs_lt] at hre him
+      have f1 := Int.floor_le (2 * z.re)
+      have f2 := Int.lt_floor_add_one (2 * z.re)
+      have f3 := Int.floor_le (2 * z.im)
+      have f4 := Int.lt_floor_add_one (2 * z.im)
+      have k1 : (p : ℝ) < ⌊2 * z.re⌋ + 2 := by linarith
+      have k2 : (⌊2 * z.re⌋ : ℝ) - 2 < p := by linarith
+      have k3 : (q : ℝ) < ⌊2 * z.im⌋ + 2 := by linarith
+      have k4 : (⌊2 * z.im⌋ : ℝ) - 2 < q := by linarith
+      have l1 : p < ⌊2 * z.re⌋ + 2 := by exact_mod_cast k1
+      have l2 : ⌊2 * z.re⌋ - 2 < p := by exact_mod_cast k2
+      have l3 : q < ⌊2 * z.im⌋ + 2 := by exact_mod_cast k3
+      have l4 : ⌊2 * z.im⌋ - 2 < q := by exact_mod_cast k4
+      exact ⟨⟨by omega, by omega⟩, ⟨by omega, by omega⟩⟩
+    · exact hwf.elim
+  have hS : IsClosed (⋃ p, f p) := hlf.isClosed_iUnion hclosed
+  have hxS : x ∉ ⋃ p, f p := by
+    simp only [mem_iUnion, not_exists]
+    intro p hp
+    simp only [f] at hp
+    split_ifs at hp with hc
+    · exact hno p.1 p.2 hc hp
+    · exact hp
+  obtain ⟨r₀, hr₀, hball⟩ := Metric.isOpen_iff.1 hS.isOpen_compl x hxS
+  have h0 : upperDensityAt (sq9.cls j) x = 0 := by
+    refine upperDensityAt_eq_zero_of_null (r₀ := r₀ / 2) (by positivity) fun r hr hrr => ?_
+    refine measure_mono_null (t := ∅) (fun z hz => ?_) measure_empty
+    obtain ⟨hzj, hzb⟩ := hz
+    have hzS : z ∈ ⋃ p, f p := by
+      refine mem_iUnion.2 ⟨(⌊2 * z.re⌋, ⌊2 * z.im⌋), ?_⟩
+      have hcol : finProdFinEquiv (((⌊2 * z.re⌋ : ℤ) : ZMod 3), ((⌊2 * z.im⌋ : ℤ) : ZMod 3)) = j := by
+        rw [← sq9Col_of_floor rfl rfl]; exact hzj
+      simp only [f, hcol, if_true]
+      refine ⟨?_, ?_, ?_, ?_⟩
+      · have := Int.floor_le (2 * z.re); linarith
+      · have := Int.lt_floor_add_one (2 * z.re); linarith
+      · have := Int.floor_le (2 * z.im); linarith
+      · have := Int.lt_floor_add_one (2 * z.im); linarith
+    exact hball (by rw [mem_ball]; rw [mem_closedBall] at hzb; linarith) hzS
+  exact (ne_of_gt hx) h0
 
 /-- Every point of a closed square has positive upper density for the square's class (a corner sub-square of side `r/√2`). -/
 theorem sq9Sq_subset_essClosure (n m : ℤ) :
     sq9Sq n m ⊆ essClosure (sq9.cls (finProdFinEquiv ((n : ZMod 3), (m : ZMod 3)))) := by
-  sorry
+  intro x hx
+  obtain ⟨hx1, hx2, hx3, hx4⟩ := hx
+  refine upperDensityAt_pos_of_balls (r₀ := 1 / 2) (by norm_num) fun r hr hr2 => ?_
+  set a : ℝ := if x.re ≤ (2 * n + 1) / 4 then x.re + r / 4 else x.re - r / 4 with ha
+  set b : ℝ := if x.im ≤ (2 * m + 1) / 4 then x.im + r / 4 else x.im - r / 4 with hb
+  have hal : (n : ℝ) / 2 ≤ a - r / 4 ∧ a + r / 4 ≤ ((n : ℝ) + 1) / 2 := by
+    rw [ha]; split_ifs with h <;> constructor <;> linarith
+  have hbl : (m : ℝ) / 2 ≤ b - r / 4 ∧ b + r / 4 ≤ ((m : ℝ) + 1) / 2 := by
+    rw [hb]; split_ifs with h <;> constructor <;> linarith
+  have hda : |a - x.re| = r / 4 := by rw [ha]; split_ifs <;> simp [abs_of_pos, hr, abs_of_neg]
+  have hdb : |b - x.im| = r / 4 := by rw [hb]; split_ifs <;> simp [abs_of_pos, hr, abs_of_neg]
+  refine ⟨⟨a, b⟩, fun w hw => ?_, ?_⟩
+  · rw [mem_ball] at hw
+    rw [mem_closedBall]
+    have hcx : dist (⟨a, b⟩ : ℂ) x ≤ r / 2 := by
+      rw [Complex.dist_eq_re_im]
+      refine Real.sqrt_le_iff.2 ⟨by linarith, ?_⟩
+      have e1 : ((⟨a, b⟩ : ℂ).re - x.re) ^ 2 = (r / 4) ^ 2 := by rw [← hda, sq_abs]
+      have e2 : ((⟨a, b⟩ : ℂ).im - x.im) ^ 2 = (r / 4) ^ 2 := by rw [← hdb, sq_abs]
+      rw [e1, e2]; nlinarith
+    linarith [dist_triangle w ⟨a, b⟩ x]
+  · refine measure_mono_null (t := ∅) (fun w hw => ?_) measure_empty
+    obtain ⟨hw, hwA⟩ := hw
+    rw [mem_ball] at hw
+    have hre : |w.re - a| < r / 4 := lt_of_le_of_lt (by
+      have := Complex.abs_re_le_norm (w - ⟨a, b⟩); simpa [dist_eq_norm] using this) hw
+    have him : |w.im - b| < r / 4 := lt_of_le_of_lt (by
+      have := Complex.abs_im_le_norm (w - ⟨a, b⟩); simpa [dist_eq_norm] using this) hw
+    rw [abs_lt] at hre him
+    exact hwA (sq9_openSq_subset (by linarith) (by linarith) (by linarith) (by linarith))
 
 /-- A point of a closed square that is not a density point of its class lies on an edge (the open square is a.e. inside). -/
 theorem sq9_mem_edge_of_not_mem_densitySet {n m : ℤ} {x : ℂ} (hx : x ∈ sq9Sq n m)
     (hd : x ∉ densitySet (sq9.cls (finProdFinEquiv ((n : ZMod 3), (m : ZMod 3))))) :
     x.re = n / 2 ∨ x.re = (n + 1) / 2 ∨ x.im = m / 2 ∨ x.im = (m + 1) / 2 := by
-  sorry
+  by_contra hne
+  simp only [not_or] at hne
+  obtain ⟨h1, h2, h3, h4⟩ := hne
+  obtain ⟨hx1, hx2, hx3, hx4⟩ := hx
+  let U : Set ℂ := {w | (n : ℝ) / 2 < w.re ∧ w.re < ((n : ℝ) + 1) / 2 ∧ (m : ℝ) / 2 < w.im ∧ w.im < ((m : ℝ) + 1) / 2}
+  have hU : IsOpen U :=
+    (isOpen_lt continuous_const Complex.continuous_re).inter ((isOpen_lt Complex.continuous_re continuous_const).inter
+      ((isOpen_lt continuous_const Complex.continuous_im).inter (isOpen_lt Complex.continuous_im continuous_const)))
+  have hxU : x ∈ U := ⟨lt_of_le_of_ne hx1 (Ne.symm h1), lt_of_le_of_ne hx2 h2, lt_of_le_of_ne hx3 (Ne.symm h3),
+    lt_of_le_of_ne hx4 h4⟩
+  exact hd (subset_densitySet_of_isOpen_ae_subset hU
+    (Eventually.of_forall fun w hw => sq9_openSq_subset hw.1 hw.2.1 hw.2.2.1 hw.2.2.2) hxU)
 
 /-- **W's ladder**: a point on an edge of a closed square is at distance exactly `1` from a point of a closed square of the same
 colour (`x ∓ 1` on the facing edge of the square three steps across, or `x ∓ i`). -/
 theorem sq9_partner {n m : ℤ} {x : ℂ} (hx : x ∈ sq9Sq n m)
     (he : x.re = n / 2 ∨ x.re = (n + 1) / 2 ∨ x.im = m / 2 ∨ x.im = (m + 1) / 2) :
     ∃ (y : ℂ) (n' m' : ℤ), dist x y = 1 ∧ (n' : ZMod 3) = n ∧ (m' : ZMod 3) = m ∧ y ∈ sq9Sq n' m' := by
-  sorry
+  have h3 : ((3 : ℤ) : ZMod 3) = 0 := by decide
+  obtain ⟨hx1, hx2, hx3, hx4⟩ := hx
+  rcases he with h | h | h | h
+  · refine ⟨x - 1, n - 3, m, by simp, by rw [Int.cast_sub, h3, sub_zero], rfl, ?_⟩
+    refine ⟨?_, ?_, ?_, ?_⟩ <;> simp <;> linarith
+  · refine ⟨x + 1, n + 3, m, by simp, by rw [Int.cast_add, h3, add_zero], rfl, ?_⟩
+    refine ⟨?_, ?_, ?_, ?_⟩ <;> simp <;> linarith
+  · refine ⟨x - I, n, m - 3, by simp, rfl, by rw [Int.cast_sub, h3, sub_zero], ?_⟩
+    refine ⟨?_, ?_, ?_, ?_⟩ <;> simp <;> linarith
+  · refine ⟨x + I, n, m + 3, by simp, rfl, by rw [Int.cast_add, h3, add_zero], ?_⟩
+    refine ⟨?_, ?_, ?_, ?_⟩ <;> simp <;> linarith
 
 /-- **FS111-W-SQ9**, saturation clauses (the remaining leaf of `sq9_tight_saturated`): every essential boundary point of a class
 lies on an edge of one of its squares, and the facing same-class square's edge is at distance exactly `1`. -/
