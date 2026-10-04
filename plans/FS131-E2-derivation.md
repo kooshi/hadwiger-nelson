@@ -6,7 +6,21 @@ none). No agents, no search, no Lean builds.*
 
 ## Theorems this phase proved
 
-*(filled at the last stage)*
+- **FS131-E2-U1-CUSP** — FS116-V5-U1's four-colour clause holds when a tile at `z` has a cusp there (non-Siamese simple valid fragments, any
+  `k`). [hand], one mind; § 2.1, argument § 2.4. Answers Q1: **derived**.
+- **FS131-E2-NOBOTH-CUSP** — FS112-N3-NOBOTH holds when a sector at the centre is a cusp (valid maps and fragments, any `k`, Siamese pairs
+  allowed, simplicity not assumed). [derived], one mind; § 2.1, argument § 2.5. Answers Q2: **derived**; its own two minds had the case in a
+  clause.
+- **FS131-E2-SECT** — the sector structure at a point of a segment-and-arc map, with the cone of each sector and the separation of sectors
+  (no direction of one sector's open cone lies in another sector's cone). [hand], one mind; § 2.2.
+- **FS131-E2-ONESECT** — in a simple map a tile meets a small disc about a point of its closure in one sector. [derived], one mind; § 2.3.
+- **FS131-E2-SEP** — in a simple map a tile's cone at a point is a closed interval whose open part meets no other tile's cone there. [derived],
+  one mind; § 2.3.
+- **FS131-E2-MONSTER** — a valid non-Siamese fragment, simple but for one tile, with a both-kind unit arc at `0`, a cusp at `0`, and three
+  colours at `0`; it refutes `four_of_bothKind` as stated at commit `05cb0a3e` (cones `β₁ ≤ β₂`). [tools] exact with the hand validity proof,
+  one mind; § 2.6, `tools/fs131_e2_frag.py --variant monster`.
+- **FS131-E2-MODEL** — a non-Siamese simple valid fragment with a both-kind unit arc at `0`, a cusp at `0`, and four colours at `0`: the cusp
+  case of Q1 is inhabited. [tools] exact with the hand validity proof, one mind; § 2.6, `--variant model`.
 
 ## Stage 1 — SAVED
 
@@ -473,3 +487,100 @@ is the sector between them" exported (FS131-E2-ONESECT). With it, `four_of_bothK
 (finitely many tiles near `z`, `finite_tiles_near`). Then each lies in the open interval of the tile whose cone holds it, and the rest is as
 written. `four_of_bothKind_simple` then holds **without `hnc`** — its skeleton statement at `05cb0a3e`. Wave 4's `noBoth` needs the same
 separation for sectors (`IsSector`), which is FS131-E2-SECT itself.
+
+## Stage 3 — SAVED
+
+### 3.1 Q3 — the consumers
+
+The verdicts of Q1 and Q2 are **derived**, so no consumer can fail by the cusp case. The question left is where each consumer reads the clause,
+whether a cusp can occur there, and whether its wording carries the mechanism right: "one sector per tile" (which holds at a cusp) or "one
+cone per tile" (which does not).
+
+| consumer | where it reads the clause | a cusp there? | fate |
+|---|---|---|---|
+| FS116-V5-DICHO (`plans/FS116-V5-verification.md` § V5-DICHO's argument) | V5-U1's cone clauses at `p`, then its own exclusions "both lie in the fourth tile, on both sides of the shared tile — two sectors" at `p`: the four-colour clause's mechanism, not its conclusion | yes: a tile of `p` may be a cusp at `p`, the shared tile included; nothing in the setting excludes it | **survives as stated.** The step is FS131-E2-SEP: a tile on both sides of a cusp is two sectors, against simple. A formalization through interval cones alone would miss it, as `four_of_bothKind`'s did |
+| FS116-V5-CROSS-S (§ 3.4) | V5-U1's **cone clauses** at `p` only (step 1: "each side cone holds neither colour of its arc and only one of the other two fits it"), and V5-OUT2 | yes, but the cone clauses hold for every tile, cusps included, and no sector step is used | **survives as stated**, independent of Q1 |
+| V5's second derivation of FS116-N3-SEMI (§ 3.2) | the **four-colour clause at `v` or `u`**, alternative (b): "both side colours carried at `v`, and `v` has at least four colours (V5-U1)"; and, in the parallel case, "the two other tiles fill the two gaps, one each" at `p` | yes, at `v`, at `u` and at `p` | **survives as stated**: FS131-E2-U1-CUSP at `u`, `v`; FS131-E2-SEP for "one each" |
+| V5's second derivation of FS116-N3-PAIR (§ 3.3) | **nowhere**: it reads V5-QCOL and V5-NE1 only ("'Simple' and the four colours' count beyond V5-QCOL are not used") | — | **survives**; V5-U1's "Rests on it" line overstates by this entry |
+| V5's second derivation of FS116-N3-CROSS (§ 3.4) | V5-U1's cone clauses at `p` (step 1); step 6's "(Q) arc" uses `y`'s four colours as a hypothesis and the definition of (Q), not the clause | at `p`, harmless as above; at `y`, CROSS's own first clause ("every tile of p at y has a cone at y of zero angle") is vacuous by CROSS-S | **survives as stated** |
+| FS112-N3-COR3 (`plans/FS112-N-proof.md` l. 773–781) | NOBOTH at the cubic trichromatic `u`, `u′`, to forbid a both-kind arc there | yes: a cubic trichromatic vertex has "three colours, one sector each (cusp sectors allowed)" (l. 724) | **survives as stated**: FS131-E2-NOBOTH-CUSP; a cubic trichromatic vertex has neither four colours nor a repeated colour |
+| FS112-N3-PAIRS (l. 771–789) | NOBOTH at `y` (N3-II) and at the cubic `p′` (N3-P′) | yes | **survives as stated** |
+| FS112-N3-END (l. 860–869) | NOBOTH at `P_{−2}` (item 4); U1's side cone at `P_{−1}` (item 3, a cone clause) | yes: the chain's vertices carry horns, cusp sectors by construction | **survives as stated** |
+
+**Readers the claim list does not name** (found by grep; each survives as stated):
+- **FS112-N3-BASE**'s pseudo-colouring and its eleventh point (l. 783–798): NOBOTH at a cubic `u`.
+- **FS116-N3-CONE (c)** (`plans/FS116-N3-proof.md` l. 212–215), and through it **FS116-N3-SEMI**'s first derivation and
+  **FS116-RING-TRANSFER-QC**: NOBOTH at `u` or `v`, then "four colours, the class being non-Siamese". *Wording:* removing the repeated colour
+  needs simple as well. A colour on two sectors at `w` may be one tile, and simple excludes that; non-Siamese excludes two tiles. The entry's
+  `uses only:` names both, so the result stands.
+- **FS129-SR1-BENDLE3** (`plans/FS129-derivation.md` l. 647–649): V5-U1's four-colour clause at `p`, any `k`. *Wording:* its gloss "one tile per
+  colour at a point and **one cone per tile** at a vertex" is the cone reading. That reading does not carry the cusp case: the monster has one
+  interval cone per tile. It should read "one sector per tile".
+- **FS129-OR1-DISCF-NS** (l. 997): "one tile twice at a vertex has a closure that meets itself", which is FS131-E2-ONESECT, read correctly.
+- **FS114-L60-WALK** and **FS121-O1-ENDS** (Lean backlog rows 70, 169): NOBOTH as stated. O1-ENDS's step from "or a repeated colour" to four
+  colours is its own (density-0 colours excluded, FS111-W-NOREP / FS121-DB1-L3), outside this question.
+
+**Filed rows and frontier statements.** `LEDGER.md` rows 135, 137, 147, 149 and 150, which rest on these chains, are unchanged. So is every
+statement of `CLAUDE.md` § Where the problem stands, item 31. **No correction to the ledger or to `CLAUDE.md` is owed.**
+
+**What does change is in the Lean.**
+1. `four_of_bothKind_simple`'s `hnc` is removable (§ 2.7). Until it is removed, every formal consumer that goes through it carries "no cusp at
+   the point" and so proves a weaker theorem than the hand one. The backlog's C17 (FS129-SR1-BENDLE3, which needs FS116-V5-U1) is one, and
+   DICHO and SEMI are others if they route through it.
+2. The general `four_of_bothKind` keeps `β₁ < β₂` or takes § 2.7's separated interval. With `β₁ ≤ β₂` alone it is false (FS131-E2-MONSTER).
+3. Wave 4's `noBoth` keeps its statement; its proof runs on sectors.
+
+### 3.2 Attack on the questions themselves
+
+- **Does the setting make the cusp case vacuous?** No. A cusp tile is a Jordan domain, so simple allows it. FS131-E2-MODEL has a cusp at a
+  both-kind centre, in a non-Siamese simple valid fragment. The cusp case is inhabited, and it is fine because of a hypothesis already stated:
+  simple forbids a tile on both sides of a cusp, which is what the implementer's picture needs.
+- **Is "simple" used only there?** Yes. Of simple, the clause reads only "each tile one sector at `z`" (FS131-E2-SEP). The second clause,
+  closures meeting in connected sets, is idle. So the clause holds in the class "non-Siamese, every tile at `z` one sector at `z`", a local
+  condition at `z` (a generalization, below).
+- **The statement's wording, a monster in Lakatos's sense.** FS116-V5-U1 says "so if z carries both c and c′ (A is both-kind), the side cones hold
+  two further colours and, in a non-Siamese simple fragment, z has at least four colours". The clause "the side cones hold two further colours"
+  sits outside "in a non-Siamese simple fragment". Read as "two different further colours", it is false there: FS131-E2-MONSTER is valid and
+  non-Siamese, and one colour fills both side cones. Read as "a further colour in each side cone", it is true and is what the Lean states
+  (`ringArc_sideCone_other`). The monster exposes the unfixed term; the correction is a wording one (§ 3.4 draft 2).
+- **Is the hand argument itself in cones or in sectors?** In sectors. V5-U1's says "a sector meeting both side cones would contain one of
+  those sectors", and N3's and NB3's name the horn. The defect was only in the formal route's translation, sectors to cones, which is exact
+  except at a cusp.
+
+### 3.3 Predictions scored
+
+| # | registered | p | outcome | Brier |
+|---|---|---|---|---|
+| P1 | Q1 derived | 0.88 | **met** — FS131-E2-U1-CUSP | 0.0144 |
+| P2 | Q2 derived | 0.93 | **met** — FS131-E2-NOBOTH-CUSP | 0.0049 |
+| P3 | no consumer changes; no ledger or `CLAUDE.md` correction | 0.88 | **met** — § 3.1 (two wording errata and one overstated "Rests on it", no statement) | 0.0144 |
+| P4 | the implementer's picture realizable as an exact valid fragment, non-Siamese and simple but for one tile, refuting the 05cb0a3e form | 0.75 | **met** — FS131-E2-MONSTER | 0.0625 |
+
+Mean Brier 0.024. All four point the same way, toward the derivation I had seen before registering (§ 1.4). They measure how far reading the
+arguments had settled the question before the entries were written, more than any risk taken.
+
+### 3.4 Drafts for the coordinator (each names its slot; Keryx's pen)
+
+1. **`plans/FS131-close-inventory.md`, a new item after the last** (it answers item 112's "Correction owed"):
+   > **FS131-E2 answered item 112** (report `data/fs131/reports/FS131-E2.md`; record `plans/FS131-E2-derivation.md`): the four-colour clause of
+   > FS116-V5-U1 **holds with cusps** in the non-Siamese simple class (FS131-E2-U1-CUSP, [hand], one mind); FS112-N3-NOBOTH holds with cusps in
+   > every valid map (FS131-E2-NOBOTH-CUSP; its two minds had the case in a clause). Item 112's "held only with no cusp at `z`" is withdrawn; no
+   > hand consumer inherits anything (§ 3.1); no ledger row or `CLAUDE.md` statement changes. The skeleton's general `four_of_bothKind` (05cb0a3e,
+   > `β₁ ≤ β₂`) is **false**: FS131-E2-MONSTER, an exact valid non-Siamese fragment, simple but for one tile wrapped round a cusp, three colours at a
+   > both-kind centre — so the ruling's `β₁ < β₂` was needed there. `four_of_bothKind_simple` holds **without `hnc`** through a separated-interval
+   > lemma on `localSectors` (`Simple.coneAt_eq_angleIcc_sep`, record § 2.7).
+2. **`plans/FS116-derivation.md`, a dated paragraph after the paragraph that follows derivation FS116-V5-U1** (the one beginning "V5's lemma,
+   one mind; known (FS112-U1). Rests on it:"), the entry left standing:
+   > *Note (2026-10-04, FS131-E2, `plans/FS131-E2-derivation.md`):* the four-colour clause holds when a tile at `z` has a cusp there
+   > (FS131-E2-U1-CUSP): of simple it reads only "one sector per tile at `z`" (FS131-E2-SEP), which a tile wrapped round a cusp violates. "The side
+   > cones hold two further colours" is true as "each side cone holds a colour other than `c` and `c′`"; as "two different further colours" it needs
+   > the class's hypotheses — FS131-E2-MONSTER (valid, non-Siamese, one tile not a Jordan domain) has one colour in both side cones. FS116-V5's
+   > second derivation of FS116-N3-PAIR does not read this entry.
+3. **`plans/FS116-N3-proof.md` § 2.1 (c)**, after "— four colours, the class being non-Siamese.": a dated note: "*(2026-10-04, FS131-E2:)* and
+   simple — a repeated colour may be one tile on two sectors, which simple excludes and non-Siamese does not; the § 2.4 uses line names both."
+4. **`plans/FS129-derivation.md`, under derivation FS129-SR1-BENDLE3**, a dated note after its "Rests on it" paragraph: "*(2026-10-04,
+   FS131-E2:)* in `uses only:`, 'one cone per tile at a vertex' should read 'one sector per tile at a vertex' — at a cusp an interval cone does not
+   give one sector (FS131-E2-MONSTER); the statement is unchanged."
+
+No ledger row, no `CLAUDE.md` text, no grokking and no bibliography row is drafted: none changes. No external literature was read. Every
+statement here is a lemma about this project's own class, and the prior-art lines name in-house sources.
