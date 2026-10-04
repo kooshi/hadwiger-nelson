@@ -325,3 +325,12 @@ reason by the close.*
 55. **Brief FS131-I2b, wave 2's second implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I2b-wave2.md`), gated PASS; continues I2's record
     on `fs131-w2` from its stage 3 (48 leaves). Launched in the slot K4 freed. Queued next, as slots free: FS131-I3b (once I3 stops) and FS131-K4b. Source: this
     commit.
+56. **Statement gap — FS111-M-COVER-SC's curvature clause, as skeletoned** (FS131-I2b, message 2026-10-04): `IsMaximalCover.curvatureLeOne` and
+    `semiconcaveWith` (`Plane/MaximalCover`) take `IsLowerGraphOf` on the class's essential support, but the argument (`plans/FS111-M-regularity.md` § 3.4,
+    lines 380–383: "each path-connected piece `P` of `F̃_a` near `x`") applies the enclosing-or-exterior dichotomy to pieces of the density set `F̃_a`, and for a
+    general maximal-cover class the interior of the support need not lie in the density set (it does for regular classes). Not shown false; not derivable as
+    stated. **Ruling: state `IsLowerGraphOf` on the density set** (the region below the graph lies in `densitySet (C a)`) — the class the argument reads (G92).
+    Alternative weighed: add `IsRegularMUA (C a)` (I2b's other proposal). Why: the density-set form keeps the clause for every maximal cover, which is what the
+    row and its derivation claim, and moves the hypothesis to exactly where the argument reads it; R7's use (`r7_lowerGraph`) then shows the region below its
+    arc lies in its class's density set, which holds for its classes (closed sets, the region in the interior). Confidence: medium-high. The record job notes
+    the reading under FS111-M-COVER-SC's erratum (item 18).
