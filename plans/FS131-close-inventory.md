@@ -1831,3 +1831,6 @@ reason by the close.*
      `BaseDense`), so auditing first saves sessions built on a faulty definition. Alternative weighed: run it after wave 5 resumes. Why: four of today's five
      definition faults (items 231, 241, 251, and 158 before) cost a session each after an implementer built on them. Confidence: medium-high. Brief written now
      (`data/fs131/briefs/FS131-QA3-definitions.md`), launched when a slot frees; staffing stays at four.
+256. **Item 255 sharpened: QA3 takes wave 2's slot** when FS131-I2n hands back (landed or not), not the first slot of any lane. Why: wave 4's three lanes are the
+     milestone's longest path and nothing in waves 4–5 waits on wave 2, so wave 2's last steps (5 leaves, the carriers, the gate) can wait one slot-turn; if I2n
+     lands wave 2, its slot is free anyway. Wave 2's successor, if one is needed, and wave 5's next implementer then follow as slots free. Confidence: medium.
