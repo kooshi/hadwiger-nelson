@@ -1209,3 +1209,6 @@ reason by the close.*
 173. **Item 172's brick receipt completed after it was written** (Keryx's order slip: the line was logged before the check ran): `sevenBrick := cosetBrick 3 (4/5)
      (3/5) (2/5)` (`Instances/Seven.lean` line 75 on `fs131-w4`), so a cell's diagonal is `√((4/5)² + (3/5)²) = 1`; `tools/fs131_qa2_brick.py` prints "brick check:
      OK (0 failures; shear 2/5)". The QA2 items went to FS131-I4c by message and by amendment to its brief; QA2-1 to FS131-IWc's brief by amendment (a landing item).
+174. **Brief FS131-I2i, wave 2's ninth implementer** (Opus; `data/fs131/briefs/FS131-I2i-wave2.md`, gated PASS): the 53 lines, the owed items (docstrings, FALC-HOSTS (iv),
+     wave 2's vacuity carriers with clause-exercising inhabitants), the gate (warnings counted, not the exit status — item 171's observation) and the landing.
+     Launched in I3i's slot: 1 (I4c) + 1 (IWc) + 1 (I2i) = 3.
