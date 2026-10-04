@@ -1,0 +1,202 @@
+# The axiom gate's controls (FS131-T3, 2026-10-04) — read by `./scripts/axioms.sh --self-test`.
+#
+# Each block below is planted into a COPY of the shipped `scripts/Axioms.lean`: the lines after `## at <SECTION>`
+# go immediately before that section closes (PRE: before the first banner), the copy is elaborated, and the gate's
+# own `check_receipt` judges it. Every check the gate makes has a control here that must make it fire, and the
+# PASS controls are the partners showing a refusal comes from the plant, not the scaffolding.
+#
+# Directives: `## control <name>`; `## expect PASS | FAIL <kind> <culprit> | NOFAIL <kind> | ELAB <text> |
+# COUNT <key>=<value>`; `## arch <name>` (a row naming <name> in backticks, added to a copy of ARCHITECTURE.md
+# § Trust); `## drop-banner <SECTION>`; `## drop-output <prefix>` (delete the first output line with that prefix,
+# after elaboration); `## digest <variant> <exit> <text>` (run `scripts/gate_report.py axioms` on this control's
+# output against a one-section CLAUDE.md whose Trust ledger sentence is <variant> — `new`, the sentence with the
+# right counts; `off`, its imported count one too high; `old`, the form without an imported count; `doubled`, the
+# right sentence twice — and expect that exit status and <text> in its output); `## at PRE|CLEAN|PURCHASED|IMPORTED`.
+# The audit's order is IMPORTED, CLEAN, PURCHASED, so every planted declaration goes under PRE, ahead of the
+# `declareImport` and `#print axioms` lines that use it. Lines starting with `# ` outside a block are comments.
+# Planted names start `t3c_`.
+
+## control baseline
+## expect PASS
+## expect COUNT imported=0
+## expect COUNT declared=0
+## expect COUNT library=0
+## digest old 0 match (clean and purchases compared; the sentence is in its older form
+## digest new 0 match (clean, purchases and imported compared)
+## digest doubled 3 not one
+
+## control imported_declared
+## expect PASS
+## expect COUNT imported=1
+## expect COUNT declared=1
+## expect COUNT library=1
+## arch t3c_import
+## digest new 0 match (clean, purchases and imported compared)
+## digest off 0 RECORDED COUNT IS STALE
+## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 1 imported
+## at PRE
+/-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, `[Planted2026]` p. 1. -/
+axiom t3c_import : True
+theorem t3c_imported_user : True := t3c_import
+## at IMPORTED
+#eval AxiomAudit.declareImport ``t3c_import
+#print axioms t3c_imported_user
+
+## control imported_undeclared
+## expect FAIL undeclared-in-imported t3c_ax_b
+## expect FAIL undeclared-library-axiom t3c_ax_b
+## expect NOFAIL stale-import
+## arch t3c_import
+## at PRE
+/-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, `[Planted2026]` p. 1. -/
+axiom t3c_import : True
+axiom t3c_ax_b : True
+theorem t3c_imported_user : True := (And.intro t3c_import t3c_ax_b).1
+## at IMPORTED
+#eval AxiomAudit.declareImport ``t3c_import
+#print axioms t3c_imported_user
+
+## control clean_undeclared
+## expect FAIL undeclared-in-clean t3c_clean_user
+## expect FAIL undeclared-library-axiom t3c_ax_a
+## at PRE
+axiom t3c_ax_a : True
+theorem t3c_clean_user : True := t3c_ax_a
+## at CLEAN
+#print axioms t3c_clean_user
+
+## control import_in_clean
+## expect FAIL import-in-clean t3c_imported_user
+## expect NOFAIL stale-declaration
+## arch t3c_import
+## at PRE
+/-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, `[Planted2026]` p. 1. -/
+axiom t3c_import : True
+theorem t3c_imported_user : True := t3c_import
+## at IMPORTED
+#eval AxiomAudit.declareImport ``t3c_import
+## at CLEAN
+#print axioms t3c_imported_user
+
+## control arch_missing
+## expect FAIL arch-missing t3c_import
+## at PRE
+/-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, `[Planted2026]` p. 1. -/
+axiom t3c_import : True
+theorem t3c_imported_user : True := t3c_import
+## at IMPORTED
+#eval AxiomAudit.declareImport ``t3c_import
+#print axioms t3c_imported_user
+
+## control stale_declaration
+## expect FAIL stale-declaration t3c_import
+## arch t3c_import
+## at PRE
+/-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, `[Planted2026]` p. 1. -/
+axiom t3c_import : True
+## at IMPORTED
+#eval AxiomAudit.declareImport ``t3c_import
+
+## control declared_twice
+## expect FAIL declared-twice t3c_import
+## arch t3c_import
+## at PRE
+/-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, `[Planted2026]` p. 1. -/
+axiom t3c_import : True
+theorem t3c_imported_user : True := t3c_import
+## at IMPORTED
+#eval AxiomAudit.declareImport ``t3c_import
+#eval AxiomAudit.declareImport ``t3c_import
+#print axioms t3c_imported_user
+
+## control stale_import
+## expect FAIL stale-import four_le_chromaticNumber_plane
+## at IMPORTED
+#print axioms four_le_chromaticNumber_plane
+
+## control native_in_imported
+## expect FAIL native-in-imported moserSpindle_cnf_unsat
+## expect FAIL stale-import moserSpindle_cnf_unsat
+## at IMPORTED
+#print axioms moserSpindle_cnf_unsat
+
+## control library_undeclared
+## expect FAIL undeclared-library-axiom t3c_unaudited
+## at PRE
+axiom t3c_unaudited : True
+theorem t3c_unaudited_user : True := t3c_unaudited
+
+## control library_accounting
+## expect FAIL library-accounting LIBRARY
+## expect NOFAIL undeclared-library-axiom
+## drop-output LIBRARY AXIOM
+## at PRE
+axiom t3c_unaudited : True
+
+## control declare_not_axiom
+## expect ELAB is not an `axiom`
+## at IMPORTED
+#eval AxiomAudit.declareImport ``four_le_chromaticNumber_plane
+
+## control declare_outside_library
+## expect ELAB is not declared in the library
+## at IMPORTED
+#eval AxiomAudit.declareImport ``propext
+
+## control declare_no_doc
+## expect ELAB has no docstring
+## at PRE
+axiom t3c_import : True
+## at IMPORTED
+#eval AxiomAudit.declareImport ``t3c_import
+
+## control declare_no_key
+## expect ELAB names no bibliography key
+## at PRE
+/-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, with no key. -/
+axiom t3c_import : True
+## at IMPORTED
+#eval AxiomAudit.declareImport ``t3c_import
+
+## control declare_typo
+## expect ELAB Unknown constant `t3c_no_such_axiom`
+## at IMPORTED
+#eval AxiomAudit.declareImport ``t3c_no_such_axiom
+
+## control sorry
+## expect FAIL sorry t3c_sorry
+## at PRE
+theorem t3c_sorry : True := sorry
+## at CLEAN
+#print axioms t3c_sorry
+
+## control native_in_clean
+## expect FAIL native-in-clean moserSpindle_cnf_unsat
+## at CLEAN
+#print axioms moserSpindle_cnf_unsat
+
+## control stale_purchase
+## expect FAIL stale-purchase four_le_chromaticNumber_plane
+## expect FAIL purchase-ledgers disagree
+## at PURCHASED
+#print axioms four_le_chromaticNumber_plane
+
+## control purchased_undeclared
+## expect FAIL undeclared-in-purchased t3c_ax_c
+## expect FAIL undeclared-library-axiom t3c_ax_c
+## expect FAIL purchase-ledgers disagree
+## expect NOFAIL stale-purchase
+## at PRE
+axiom t3c_ax_c : True
+theorem t3c_mixed : True := (And.intro t3c_ax_c moserSpindle_cnf_unsat).1
+## at PURCHASED
+#print axioms t3c_mixed
+
+## control outside_banners
+## expect FAIL outside-banners four_le_chromaticNumber_plane
+## at PRE
+#print axioms four_le_chromaticNumber_plane
+
+## control banner_dropped
+## expect FAIL banners IMPORTED
+## drop-banner IMPORTED

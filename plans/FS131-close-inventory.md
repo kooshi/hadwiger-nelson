@@ -1026,3 +1026,96 @@ reason by the close.*
      `data/fs131/claims-E3.md`; brief `data/fs131/briefs/FS131-E3-woodall-step3.md`, gated PASS): Q1 the modification as the Lean states it, Q2 a route around it.
      Alternative: a planner straight on step 3. Why not: no derivation holds the global clauses, and a route around it would save the 1,500–3,000 lines.
      Launched in IWb's slot: 1 (I3h) + 1 (T3) + 1 (E3) = 3.
+157. **Wave 3 LANDED on `main`** (FS131-I3h, report on its branch; `origin/main` fast-forwarded to the gated commit `0fdacddb` by `git push origin HEAD:main` from
+     the w3 worktree; tip `0ff8f659` adds the record and report). **The second wave held in the kernel**: both `sixFrag` leaves proved (FS116-Y2-SIXFRAG validity and
+     non-Siamese — the QQ pair by the Reuleaux triangle on `e(∓30°)` and `√3`, `linear_combination` with `s² = 3`; the pieces in polar bands of interior points),
+     all 502 wave-3 records on the standard three or fewer. Keryx's receipts: build log `build/gate/build/20261004T135527Z-4016354.log` (w3) — "All targets
+     up-to-date (5350 jobs)", 0 warnings; `gate_report.py axioms` on `build/gate/axioms/20261004T135536Z-4017034.log` — "1810 records — 1794 clean …, 11 axiom-free,
+     5 declared purchase(s)", `sorryAx` 0; vacuity `build/gate/vacuity/20261004T135539Z-4017362.log` — "declarations=8385 refutations-skipped=57", "sites=459
+     vacuous=0 stale=0 declared=3 witnessed=21 generic=433 unknown=2"; `check_architecture` PASS; `0fdacddb` an ancestor of `origin/main`. Vacuity carriers
+     registered: `IsRingArc`, `IsChangePoint`, `IsHub`, `IsQArc` IN; `IsEssBoundary`, `SaturatedAt` OUT (reasons beside the list). Corrections owed and filed
+     at the next main-tree commit: `CLAUDE.md` § Trust ledger and § The gate, `scripts/vacuity-baseline.txt` header (drafts in its record). Fixed by I3h:
+     `ARCHITECTURE.md` Imports cells of `Plane/LocalStructure` and `Plane/Lens`. Cosmetic tool defect: the self-test still prints "twenty planted defects" for 32
+     expectations. Collisions with the landed wave 3 (`data/fs131/i3/dupes-h.log`): `dist_rot`, `eq_norm_mul_e_arg` (w2), `e_add_int_mul_two_pi`, `e_mul_conj_e`
+     (ww) — those branches rename at their merges (item 142). **Coordination**: the main tree's `main` sat 71 commits behind with FS131-T3's uncommitted edits to
+     the axiom gate's files; T3 told to WIP-commit, merge `origin/main` (resolving `scripts/Axioms.lean`: 502 new records), rebuild, re-check, push; Keryx holds
+     main-tree commits until it does. Not done: `localSectors` and the separation lemma (budget). **Brief FS131-I3i** (Opus; `data/fs131/briefs/FS131-I3i-localsectors.md`,
+     gated PASS): `localSectors` from I3h's draft, the separation lemma, `four_of_bothKind_simple` without `hnc`, on `fs131-w3b` (from `origin/main` `0ff8f659`,
+     build copied from w3's), landed by its own gate. Launched in I3h's slot: 1 (T3) + 1 (E3) + 1 (I3i) = 3. Over its line (537k): not a slip.
+158. **Statement defect — definitions: `WoodallMerged` and `WoodallNormal` are unsatisfiable on every valid plane map; `exists_woodallMerged` is false at
+     `k = 7`** (FS131-E3, message 2026-10-04; `fs131-ww` at `f73cb1e3`, `Plane/Woodall/Basic.lean` lines 74, 81): `SectorsAt` admits **phantom horns** — at a
+     boundary direction `θ` between sectors of colours `A ≠ B`, insert a `B`-horn then an `A`-horn: adjacent colours stay distinct, `d` stays monotone, the cones
+     are unchanged (θ already lies in both neighbours' intervals), so `A` repeats on a sector of positive angle and `WoodallMerged` (a `∀`-over-pictures form)
+     fails; concretely at an edge midpoint of the hexagonal seven-colouring, `n = 2, d = (0, π, 2π), c = (A, B)` becomes `n = 4, d = (0, π, π, π, 2π),
+     c = (A, B, A, B)`. Every valid plane map has a point of two colours with a picture, so `F′.WoodallMerged` is false for every valid plane `F′`:
+     `exists_woodallMerged` is false at `k = 7`, and at `k ≤ 5` it is equivalent to `aeMap6` itself. **Consequence: `aeMap6_normal`, `aeMap6_merged` and
+     `false_of_four_le_sectors` (through `hN`) hold only vacuously — item 150's "E1-NO45's argument closed in Lean … the check item 111 asked for" is withdrawn
+     as stated**: the argument's steps were formalized and are sound logic, but the theorem's hypothesis is unsatisfiable, so it certifies nothing about real
+     maps until the definitions are fixed and the proofs re-run (E3: small edits). Keryx's receipt: the two definitions read (∀ over every `SectorsAt` picture),
+     and their only inhabitants `const_woodallNormal` / `const_woodallMerged` are the one-colour constant map, where no two-sector picture exists — which is why
+     no inhabitant check caught it. **Ruling**: the ∃-forms E3 proposes — `WoodallMerged`: at every point (or every point of `≥ 3` colours) of the domain, **some**
+     picture whose repeated colours are horns; `WoodallNormal`: at every point of `≥ 3` colours, **some** picture with injective colours and every angle `≥ π/3`
+     — with E3 drafting their exact Lean statements and the adapted chain (its note: `aeMap6_merged`'s argument works on the picture it is handed;
+     `false_of_four_le_sectors` takes the auxiliary point's normal picture from the ∃-form, `n′ = 3`; `exists_sectorsAt` then leaves the chain), and the next
+     Woodall job applying them. Alternative weighed: forbid phantom horns inside `SectorsAt` (a minimality clause). Why not: E3's ∃-forms need no new clause and
+     keep `SectorsAt` as the cones define it. Confidence: high on the defect (the construction is elementary), medium-high on the fix pending E3's derivation.
+     **Lesson, for `LEAN.md` § The gate at the next filing**: a refutation-shaped theorem's Prop-valued hypothesis is skipped by the vacuity scan, so its
+     inhabitant must exercise every clause (here: a valid map with a point of two or more colours), never a degenerate model where the clause is vacuous.
+     Credit E3.
+159. **The main tree current again; wave 3's counts filed** (FS131-T3's message 2026-10-04): T3 WIP-committed (`a09b2254`), merged `origin/main` (`58a1cea5`; `scripts/Axioms.lean`
+     merged clean — wave 3's records under CLEAN, the new IMPORTED section above CLEAN, PURCHASED last), built (441 batches, 14 modules rebuilt, 0 warnings), and
+     re-ran its audit on the merged state (1810 records: 1794 clean, all within the standard three; 11 axiom-free; 0 imported; 5 purchases; 23 controls behave)
+     and pushed (`0db64494`); E3's two commits landed in between, history linear. **Filed** (this commit): `CLAUDE.md` § Trust ledger (1794 clean, 1,810 records)
+     and § The gate (`declarations=8385 refutations-skipped=57 sites=459`, `vacuous=0 stale=0 declared=3 witnessed=21 generic=433 unknown=2`);
+     `scripts/vacuity-baseline.txt` header; `LEAN.md` § The gate, the inhabitant rule extended (item 158's lesson). Keryx's receipts, read **before** this commit:
+     `gate_report.py vacuity` — baseline header and CLAUDE.md § The gate "match (9 of 9 compared)"; `gate_report.py axioms` on `build/gate/axioms/20261004T141303Z-4086598.log`
+     — "match (clean and purchases compared …)"; fact audit — losses are only the superseded counts (`1292`, `1308`, `357`, the two old count strings). The I3i
+     brief, written while the tree was busy, committed here.
+160. **FS131-T3 done, harness ≈ 330k** (report `data/fs131/reports/FS131-T3.md`; record `plans/FS131-T3-axioms.md`; commits `9df42b80`, `a09b2254`, `58a1cea5`, `0db64494`,
+     `9afe260c`, `de4d8cc9`): the axiom gate repaired — the defect reproduced first on `main` (a planted axiom under CLEAN passed, "1293 clean"); CLEAN now fails
+     any record whose axioms are not within the standard three; a new **IMPORTED** section (above CLEAN; PURCHASED stays last because
+     `tools/check_architecture.py` reads everything after its banner as a purchase) holds records resting on a declared outside theorem, declared only by
+     `#eval AxiomAudit.declareImport ``Full.Name` lines there (Lean refuses a name that is not an axiom under `Proofs/` whose docstring names a bibliography key);
+     PURCHASED narrowed (only the standard three, native axioms and declared imports); the gate fails if `ARCHITECTURE.md` § Trust omits a declared import, and on
+     any undeclared axiom in the library; `scripts/gate_report.py` counts IMPORTED and reads a three-count sentence; 23 two-sided controls, and four mutants of the
+     checker each turning controls red. Four tool defects fixed on the way (shortened axiom names; PURCHASED's laxity; unaudited library axioms; a root-namespace
+     purchase skipped). **Wave 2 dry run**: four records move to IMPORTED — `falconer_reduction`, `le_chiM_of_falconerFan`, `exists_mem_falconerE`, `fan_tip_ae_mem`
+     (two beyond the brief's) — listed by `data/fs131/t3/wave_dryrun.sh`. **Filed verbatim from its drafts** (this commit): `CLAUDE.md` § Trust ledger's paragraph
+     (three counts: 1794 clean, 5 declared purchases, 0 imported); `LEAN.md` § Trust ledger's last row and the paragraph after the table; `LEAN.md` § The gate's
+     axioms item with `--self-test`. Also: `tools/claude_md_fact_audit.py`'s `GATE_CHANGES` gains the two transitions this session made ((1285, 5) → (1292, 5) at
+     LEB's landing; (1292, 5) → (1794, 5) at wave 3's). Keryx's receipts, read before this commit: `gate_report.py axioms` on
+     `build/gate/axioms/20261004T141303Z-4086598.log` — "match (clean, purchases and imported compared)"; fact audit `--base c6f8d56d` — "AUDIT PASSED (0
+     failure(s))". Open for the tool's owner (T3's question): `GATE_RE` reads only (clean, purchases), so a change in the imported count alone passes it unseen.
+161. **FS131-E3 done, harness ≈ 470k** (report `data/fs131/reports/FS131-E3.md`; record `plans/FS131-E3-derivation.md`; commits `d21f2998`, `69660332`, `64fa012f`, `81e35157`):
+     **Q1 as stated FALSE** (E3-PHANTOM [hand, one mind]; E3-Q1 [derived]; item 158). **Q1 repaired in the form the chain reads — TRUE** (E3-BALL [derived,
+     one mind]): every valid plane arc map has a valid plane arc map in which every point of `closedBall 0 R` of three or more colours has a picture in
+     **NiceAt** form (positive-angle sectors carry distinct colours; every horn sits between two distinct colours), Condition 5 kept and not required of the
+     input; finitely many merges, each by **E3-W** (Woodall's criterion with an explicit radius, by the sagitta of a unit circle in a small disc: two open ray
+     segments of a unit-pair-free open set less than π apart clear the wedge up to radius `r₁ cos(α/2)/2`) — no contacts on the unit circle, no Condition 5, no
+     Woodall cone. Woodall's horn-only conclusion everywhere: GAP, not needed by the chain (it would need FS110-W-MERGE's contact cone past Condition 5). **Q2: no
+     modification-free route** (E3-FAKE [hand]: at a vertex reading A, B, A, C, Townsend's hypothesis fails on arcs of positive length). The chain needs NiceAt
+     only on `closedBall 0 3`, only at points of three or more colours (E3-CHAIN [derived]); `exists_sectorsAt` drops out of the chain. Lean drafts in its § 4.1
+     (`NiceAt`, `WoodallMerged K`, `WoodallNormal K`; `exists_woodallMerged … (R : ℝ)`, `NiceAt.normal`, `false_of_four_le_sectors` with `hN : WoodallNormal
+     (sphere v 1)`, `aeMap6_normal`, `aeMap6_merged`, `aeMap6`), with non-degenerate inhabitants (`halfDisc.NiceAt 0`, a new `threeSectorDisc : ArcMap 3`) and a
+     phantom-picture adversary that would have caught item 158. Price: 900–1,400 lines once `localSectors` lands, against 1,500–3,000 for the horn-only form.
+     Predictions P1–P4 met. Keryx's receipts: derive gate on the record — "GATE: PASS (0 failures, 3 warnings)", three controls each firing on its fault;
+     `tools/fs131_e3_phantom.py` prints `honest=True:ok merged=True phantom=True:ok phantom_merged=False` (the phantom picture breaks the ∀-form). Slip (E3's):
+     its push published T3's two local commits, unchanged. **Rulings on its held items**: (a) **NiceAt adopted** as the ∃-form of `WoodallMerged` (and
+     `WoodallNormal K`), localized as E3-CHAIN reads — alternative, Woodall's horn-only ∃-form; why: the chain reads NiceAt, it is proved and cheaper, the
+     horn-only form is a GAP; confidence high. (b) Woodall's horn-only conclusion everywhere is **not wanted now** — no consumer; recorded as an optional stub
+     (FS110-W-MERGE past Condition 5) for whoever needs it. **Next**: a planner pass on Woodall's chain (FS131-W3) applies E3's § 4.1 drafts and states E3-BALL's
+     children with leaf plans, then an implementer. Credit E3: a definition defect that made a proved-looking chain vacuous, found before it was relied on.
+162. **Briefs FS131-W3 and FS131-I2h** (both Opus; gated PASS): **W3** (`debruijn` planner; `data/fs131/briefs/FS131-W3-woodall-nice.md`) applies E3's § 4.1 drafts to
+     Woodall's chain — the ∃-form definitions, the adapted statements, non-degenerate inhabitants and a phantom-picture adversary — re-proves the small
+     adaptations, states E3-BALL's children with leaf plans (saying which need `localSectors`), and writes the handoff. **I2h** (`debruijn-implementer`;
+     `data/fs131/briefs/FS131-I2h-wave2.md`) continues wave 2's 91 lines and carries the owed items: QA1's 84 docstrings and FALC-HOSTS (iv)'s docstring, the four
+     imported records moved under T3's procedure, `CPColouring` registered as a vacuity carrier, the collisions with wave 3 (`dist_rot`, `eq_norm_mul_e_arg`)
+     resolved at the merge; then the gate and the landing. Launched in T3's and E3's slots: 1 (I3i) + 1 (W3) + 1 (I2h) = 3. Next: wave 4's Opus implementer
+     (the LEB discharge, the two plan gaps, `localSectors` once I3i lands it, `AeProperRegions` as a carrier).
+163. **FS131-I3i mid-job: `localSectors` proved** (message 2026-10-04; `fs131-w3b` at `d8a3177f`, pushed), in I3h's drafted shape unchanged — `HadwigerNelson.Plane.localSectors
+     (F) {v} (hv : v ∈ F.dom) : ∃ r₀ n G, F.IsSectorChart G v r₀` in `Plane/LocalStructure` § `LocalSectors`; in the same commit `ArcMap.Simple.coneAt_eq_angleIcc_sep`
+     (E2 § 2.7 verbatim), `IsSectorChart.exists_tile_inter_ball` (E2's ONESECT, derived from the landed `IsJordanDomain.local_connected` — no Jordan curve theorem),
+     and `four_of_bothKind_simple` **without `hnc`** (its `05cb0a3e` statement; item 139's strengthening done — the four-colour clause of FS116-V5-U1 now holds in
+     Lean for simple maps, cusps included, once the gate reads it). Build green, 0 warnings; scratch axioms the standard three. Exported for wave 4:
+     `isSectorChart_of`, `BranchGerms.dir_lt_nextDir`, `Mono.disjoint`, `exists_angle`, `Mono.not_mem_angleIoo`, `coneAt_sector`, `sector_nonempty`, inhabitant
+     `halfDisc_sectorChart`. Keryx's receipt: the commit exists on `origin`, and the theorems read at that commit. Next: its gate and landing. Relayed to FS131-W3.
