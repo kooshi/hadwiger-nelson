@@ -212,7 +212,7 @@ closes on `u⁺` there) bars both colours at `y`: `u⁺`'s from `(30°, 210°)`,
 **(c) Two tiles across a unit circle.** If tiles `T₁`, `T₂` consecutive at `y` have `T₁ ⊂ B̄(w, 1)` and `T₂ ∩ B(w, 1) = ∅`, the edge between them at `y` lies in
 `cl T₁ ∩ cl T₂ ⊂ ω(w)`: an arc of `ω(w)`. If both colours are carried at `w`, the arc is of kind both at `w` (`data/fs112/claims.md` § 0: in-contact and
 out-contact), and FS112-N3-NOBOTH (two minds; its proof, `plans/FS112-N-proof.md` l. 731 with FS112-U1, reads only the cones at the centre) makes `w` a vertex
-of at least four colours or a repeated colour — four colours, the class being non-Siamese.
+of at least four colours or a repeated colour — four colours, the class being non-Siamese. *(2026-10-04, FS131-E2:)* and simple — a repeated colour may be one tile on two sectors, which simple excludes and non-Siamese does not; the § 2.4 uses line names both. (filed by Keryx from `plans/FS131-E2-derivation.md` § 3.4, draft 3)
 
 **(d) STAR's windows** (FS116-N2-STAR, one mind): `C(y) = A(p) ⊔ T_y ⊔ O_y` and `A(y) = P ∖ (T_y ∪ O_y)`; a tip's cone at `p` lies in `[−90°, 90°]` and at
 `y` in `[90°, 270°]` (it lies in `B̄(p, 1)`); an outer tile's cone at `y` lies in `[−90°, 90°]` and the tile of `p` of its colour in `[90°, 180° + 90°]` (the two

@@ -663,6 +663,8 @@ GATE_CHANGES: dict[tuple, str] = {
     (("1034", "5"), ("1130", "5")): "M2's close gate (J23b stage 0; build/gate/axioms/20260925T232928Z-253944.log): 1,146 records, 1,130 clean, 11 axiom-free, 5 purchases",
     (("1130", "5"), ("1193", "5")): "FS-75's close gate (the owner's re-run at J52K's end; build/gate/axioms/20260926T053431Z-866750.log): 1,209 records, 1,193 clean, 11 axiom-free, 5 purchases",
     (("1193", "5"), ("1236", "5")): "X11K3's gate (FS-100 wave 3's kernel lane; build/gate/axioms/20260926T122606Z-1387817.log): 1,252 records, 1,236 clean, 11 axiom-free, 5 purchases",
+    (("1285", "5"), ("1292", "5")): "FS131-LEB's landing gate (Lebesgue's covering theorem; .claude/worktrees/fs131-leb/build/gate/axioms/20261004T130707Z-3747446.log): 1,308 records, 1,292 clean, 11 axiom-free, 5 purchases",
+    (("1292", "5"), ("1794", "5")): "FS-131 wave 3's landing, gated with FS131-T3's repair (build/gate/axioms/20261004T141303Z-4086598.log): 1,810 records, 1,794 clean, 11 axiom-free, 0 imported, 5 purchases",
 }
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")

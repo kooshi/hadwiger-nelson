@@ -1,0 +1,10 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 8,9,10,11,12,13,14,15
+d=1.1000: least failing measure 4.4827 at boundaries ((43.0, 58.0, 59.0), 1); feasible patterns 0; first [] [484s]
+d=1.2000: least failing measure 7.9248 at boundaries ((4.0, 17.0, 43.0, 56.0), 1); feasible patterns 0; first [] [484s]
+d=1.2500: least failing measure 8.1380 at boundaries ((2.0, 6.0, 15.0, 29.0), 1); feasible patterns 0; first [] [484s]
+d=1.2700: least failing measure 7.8048 at boundaries ((2.0, 4.0, 56.0, 58.0), 1); feasible patterns 0; first [] [484s]
+d=1.2900: least failing measure 7.9816 at boundaries ((1.0, 32.0, 34.0, 59.0), 1); feasible patterns 0; first [] [484s]
+d=1.3000: least failing measure 5.4305 at boundaries ((1.0, 42.0, 53.0), 1); feasible patterns 0; first [] [484s]
+d=1.3020: least failing measure 5.1607 at boundaries ((1.0, 42.0, 53.0), 1); feasible patterns 0; first [] [484s]
+d=1.3100: least failing measure 0.0000 at boundaries ((10.0, 12.0), 1); feasible patterns 16; first [((10.0, 12.0), 1), ((10.0, 12.0), 2), ((10.0, 13.0), 1)] [484s]
+SCAN-E COMPLETE data/search/2026-10-04/scanE-k2-s1.json

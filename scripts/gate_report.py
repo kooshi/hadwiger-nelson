@@ -8,7 +8,8 @@ and call this to print, from that file and the previous complete run's file:
 * whether those counts still match the ones the repository records, **one line per recorded source, and
   a source is named on a "match" line only if it was read and every count it records was compared**:
   the vacuity scan's nine counts against the baseline's header AND against `CLAUDE.md` § The gate; the
-  axiom audit's two against `CLAUDE.md` § Trust ledger. A drifted record is flagged here, never failed;
+  axiom audit's three (clean, declared purchases, imported) against `CLAUDE.md` § Trust ledger. A drifted
+  record is flagged here, never failed;
 * every row that changed since the previous complete run, which answers "which declarations are the new
   ones?" without a second scan.
 
@@ -151,16 +152,24 @@ def recorded_in_claude_gate(claude) -> dict:
 
 
 TRUST = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")
+TRUST_IMPORTED = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases, and (\d+) imported")
 
 
-def recorded_in_trust_ledger(claude) -> tuple[int, int]:
-    """(clean, purchases) from the one sentence of `CLAUDE.md` § Trust ledger that records the axiom audit."""
+def recorded_in_trust_ledger(claude) -> tuple[int, int, int | None]:
+    """(clean, purchases, imported) from the one sentence of `CLAUDE.md` § Trust ledger that records the axiom audit.
+
+    The sentence reads "current audit reads N clean and M declared purchases, and I imported" (FS131-T3). Its older
+    form, without ", and I imported", is still read, with `None` for the count it does not record: the caller
+    compares it only while the audit has no IMPORTED record and flags it as stale once it has one. The older form
+    is kept as the new form's prefix so that `tools/claude_md_fact_audit.py`, which reads that prefix, still reads it."""
     label = claude_label(claude, "Trust ledger")
-    found = TRUST.findall(re.sub(r"\s+", " ", section_text(claude, "Trust ledger", label)))
+    text = re.sub(r"\s+", " ", section_text(claude, "Trust ledger", label))
+    found = TRUST.findall(text)
     if len(found) != 1:
         raise Unreadable(f"could not read the counts in {label}: {len(found)} sentences reading "
-                         "'current audit reads N clean and M declared purchases', not one")
-    return int(found[0][0]), int(found[0][1])
+                         "'current audit reads N clean and M declared purchases[, and I imported]', not one")
+    full = TRUST_IMPORTED.findall(text)
+    return int(found[0][0]), int(found[0][1]), (int(full[0][2]) if full else None)
 
 
 def compare(label: str, recorded: dict, now: dict) -> None:
@@ -290,6 +299,20 @@ def read_axioms(path) -> tuple[list, list]:
     return records, warnings
 
 
+def read_declarations(path) -> tuple[list, list, dict]:
+    """The audit's non-record lines: each `DECLARED IMPORT <name>`, each `LIBRARY AXIOM <name>`, and the counts of
+    its `LIBRARY SUMMARY` line (`AxiomAudit.declareImport` and `AxiomAudit.libraryAxioms`, FS131-T3)."""
+    declared, library, summary = [], [], {}
+    for line in lines_of(path):
+        if line.startswith("DECLARED IMPORT "):
+            declared.append(line[len("DECLARED IMPORT "):].strip())
+        elif line.startswith("LIBRARY AXIOM "):
+            library.append(line[len("LIBRARY AXIOM "):].strip())
+        elif line.startswith("LIBRARY SUMMARY "):
+            summary = {k: int(v) for k, v in re.findall(r"(\w+)=(\d+)", line)}
+    return declared, library, summary
+
+
 def axiom_set(axioms: tuple) -> str:
     if not axioms:
         return "(no axioms)"
@@ -301,13 +324,16 @@ def axiom_set(axioms: tuple) -> str:
 def axioms(cur_path: str, prev_path: str, claude: str) -> list[str]:
     records, warnings = read_axioms(cur_path)
     clean = [r for r in records if r[0] == "CLEAN"]
+    imported = [r for r in records if r[0] == "IMPORTED"]
     purchased = [r for r in records if r[0] == "PURCHASED"]
     if not clean:
         raise Malformed("no records under '=== CLEAN ==='")
+    declared, library, summary = read_declarations(cur_path)
     with_axioms = [r for r in clean if r[2]]
     free = sorted(r[1] for r in clean if not r[2])
     say(f"audited: {len(records)} records — {len(with_axioms)} clean on the standard axioms, "
-        f"{len(free)} axiom-free, {len(purchased)} declared purchase(s)")
+        f"{len(free)} axiom-free, {len(imported)} imported (resting on a declared outside theorem), "
+        f"{len(purchased)} declared purchase(s)")
     say("clean records, by axiom set:")
     for axs, n in sorted(Counter(r[2] for r in with_axioms).items(), key=lambda kv: (-kv[1], kv[0])):
         say(f"  {n:5d}  {axiom_set(axs)}")
@@ -315,9 +341,15 @@ def axioms(cur_path: str, prev_path: str, claude: str) -> list[str]:
     say("declared purchases:")
     for _, name, axs in purchased:
         say(f"  {name}  {axiom_set(axs)}")
-    stray = [r for r in records if r[0] not in ("CLEAN", "PURCHASED")]
+    say(f"declared imports ({len(declared)}): " + (", ".join(declared) if declared else "none"))
+    say(f"imported records ({len(imported)})" + (":" if imported else ": none"))
+    for _, name, axs in imported:
+        say(f"  {name}  {axiom_set(axs)}")
+    say(f"library axioms other than native auxiliaries ({len(library)}): " + (", ".join(library) if library else "none")
+        + (f"; native auxiliaries: {summary['native']}" if "native" in summary else "; no LIBRARY SUMMARY line"))
+    stray = [r for r in records if r[0] not in ("CLEAN", "IMPORTED", "PURCHASED")]
     if stray:
-        say(f"records outside both banners: {len(stray)}: {', '.join(r[1] for r in stray)}")
+        say(f"records outside the three banners: {len(stray)}: {', '.join(r[1] for r in stray)}")
     twice = sorted(n for n, c in Counter(r[1] for r in records).items() if c > 1)
     if twice:
         say(f"audited more than once: {', '.join(twice)}")
@@ -328,17 +360,25 @@ def axioms(cur_path: str, prev_path: str, claude: str) -> list[str]:
 
     unreadable, label = [], claude_label(claude, "Trust ledger")
     try:
-        was_clean, was_purchased = recorded_in_trust_ledger(claude)
+        was_clean, was_purchased, was_imported = recorded_in_trust_ledger(claude)
     except Unreadable as e:
         say(f"RECORDED COUNT NOT COMPARED — {e}")
         unreadable.append(str(e))
     else:
-        pairs = ((was_clean, len(with_axioms), "clean"), (was_purchased, len(purchased), "purchases"))
+        pairs = [(was_clean, len(with_axioms), "clean"), (was_purchased, len(purchased), "purchases")]
+        if was_imported is not None:
+            pairs.append((was_imported, len(imported), "imported"))
         drift = [f"{was} {what} → {now}" for was, now, what in pairs if was != now]
+        if was_imported is None and imported:
+            drift.append(f"the sentence is in its older form, which records no imported count, and the audit has "
+                         f"{len(imported)} imported record(s): write '…, and {len(imported)} imported'")
         if drift:
             say(f"RECORDED COUNT IS STALE in {label} — update it: " + ", ".join(drift))
+        elif was_imported is None:
+            say(f"recorded count in {label}: match (clean and purchases compared; the sentence is in its older form, "
+                "which records no imported count, and the audit has no imported record)")
         else:
-            say(f"recorded count in {label}: match (clean and purchases compared)")
+            say(f"recorded count in {label}: match (clean, purchases and imported compared)")
 
     say("--- changes since the previous complete run ---")
     if not prev_path:
@@ -356,9 +396,19 @@ def axioms(cur_path: str, prev_path: str, claude: str) -> list[str]:
     def show(v):
         return f"{v[0]} {axiom_set(v[1])}"
 
+    def moved(old, new):
+        """A changed record's row. When the rendered sets read the same — native axioms are shown as a count, so a
+        renamed native axiom, or the receipt starting to print full names (FS131-T3), would read `X → X` — the row
+        names the axioms that left and arrived."""
+        line = f"{show(old)} → {show(new)}"
+        if show(old) == show(new):
+            gone, came = sorted(set(old[1]) - set(new[1])), sorted(set(new[1]) - set(old[1]))
+            line += f"  (axiom names changed: − {', '.join(gone) or 'none'}; + {', '.join(came) or 'none'})"
+        return line
+
     rows = ([f"+ {n}  {show(after[n])}" for n in sorted(after.keys() - before.keys())]
             + [f"- {n}  {show(before[n])}" for n in sorted(before.keys() - after.keys())]
-            + [f"~ {n}  {show(before[n])} → {show(after[n])}"
+            + [f"~ {n}  {moved(before[n], after[n])}"
                for n in sorted(after.keys() & before.keys()) if after[n] != before[n]])
     for row in rows:
         say(row)

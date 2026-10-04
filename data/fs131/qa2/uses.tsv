@@ -1,0 +1,1640 @@
+pred	decl	body	where	kind	role	sorry
+main:AeColouring	chiM0_le	main	Plane/AeColouring.lean:35	theorem	hyp	
+main:AeColouring	AeColouring.cls	w2	Plane/Cover.lean:62	def	hyp	
+main:AeColouring	AeColouring.measurableSet_cls	w2	Plane/Cover.lean:64	theorem	hyp	
+main:AeColouring	AeColouring.iUnion_cls	w2	Plane/Cover.lean:67	theorem	hyp	
+main:AeColouring	AeColouring.pairwise_disjoint_cls	w2	Plane/Cover.lean:70	theorem	hyp	
+main:AeColouring	AeColouring.isAeCover	w2	Plane/Cover.lean:74	theorem	hyp	
+main:AeColouring	AeColouring.dist_ne_one	main	Plane/DensityPoints.lean:168	theorem	hyp	
+main:AeColouring	AeColouring.exists_isMaximalCover	w2	Plane/MaximalCover.lean:203	theorem	hyp	
+main:AeColouring	grundyS	w2	Plane/MaximalCover.lean:794	def	hyp	
+main:AeColouring	grundyTaken	w2	Plane/MaximalCover.lean:797	def	hyp	
+main:AeColouring	grundyCls	w2	Plane/MaximalCover.lean:802	def	hyp	
+main:AeColouring	measurableSet_grundyS	w2	Plane/MaximalCover.lean:805	theorem	hyp	
+main:AeColouring	unitPairsNull_grundyS	w2	Plane/MaximalCover.lean:810	theorem	hyp	
+main:AeColouring	measurableSet_grundyTaken	w2	Plane/MaximalCover.lean:815	theorem	hyp	
+main:AeColouring	grundyTaken_eq	w2	Plane/MaximalCover.lean:825	theorem	hyp	
+main:AeColouring	grundyCls_isMaxIn	w2	Plane/MaximalCover.lean:842	theorem	hyp	
+main:AeColouring	AeColouring.fillCol	w2	Plane/MaximalCover.lean:86	def	hyp	
+main:AeColouring	AeColouring.exists_grundy	w2	Plane/MaximalCover.lean:903	theorem	hyp	
+main:AeColouring	AeColouring.exists_fill	w2	Plane/MaximalCover.lean:91	theorem	hyp	
+main:AeColouring	AeColouring.exists_tight	w2	Plane/Slack.lean:1767	theorem	hyp	
+main:AeColouring	AeColouring.exists_rescale	w2	Plane/Slack.lean:195	theorem	hyp	
+main:AeColouring	AeColouring.exists_pos_not_iccPairNull	w2	Plane/Slack.lean:215	theorem	hyp	sorry
+main:AeColouring	AeColouring.isPartialColouring	w2	Plane/Suprema.lean:114	theorem	hyp	
+main:AeColouring	one_le_muZero	w2	Plane/Suprema.lean:118	theorem	hyp	
+main:AeColouring		w2	Plane/Suprema.lean:191	example	hyp	
+main:AeColouring	AeColouring.HasSlack	w2	Plane/Suprema.lean:92	def	hyp	
+main:AeColouring	AeColouring.Tight	w2	Plane/Suprema.lean:95	def	hyp	
+main:AeColouring	AeColouring.volume_badAngles_null	w2	Plane/YesLimit.lean:20	theorem	hyp	
+main:AeColouring	AeColouring.exists_motion	w2	Plane/YesLimit.lean:53	theorem	hyp	
+main:AeColouring		main	Plane/AeColouring.lean:38	instance	concl	
+main:AeColouring		main	Plane/AeColouring.lean:41	instance	concl	
+main:AeColouring	sq9	w2	Plane/Cover.lean:178	def	concl	
+main:AeColouring	r7_aeColouring	w2	Plane/CoverExamples.lean:473	theorem	concl	
+main:AeColouring	exists_r7	w2	Plane/CoverExamples.lean:614	theorem	concl	
+main:AeColouring	IsAdmissible.exists_aeColouring	w2	Plane/MaximalCover.lean:219	theorem	concl	
+main:AeColouring	exists_aeColouring_of_noUnitPairs	w2	Plane/Slack.lean:1691	theorem	concl	
+main:AeColouring	exists_tight_iff_chiM0_le	w2	Plane/Slack.lean:1805	theorem	concl	
+main:AeColouring	exists_face_fails	w2	Plane/Slack.lean:2212	theorem	concl	
+main:Arc	circ_gap_false	main	Plane/LocalStructure.lean:3084	theorem	REFUT	
+main:Arc	circ_gap_false	w3b	Plane/LocalStructure.lean:3090	theorem	REFUT	
+main:Arc	carrier	main	Plane/ArcMap.lean:55	def	hyp	
+main:Arc	Nondegenerate	main	Plane/ArcMap.lean:60	def	hyp	
+main:Arc	IsUnitArc	main	Plane/ArcMap.lean:65	def	hyp	
+main:Arc	Arc.InitialPiece	main	Plane/LocalMap.lean:142	def	hyp	
+main:Arc	Arc.isClosed_carrier	main	Plane/LocalMap.lean:60	theorem	hyp	
+main:Arc	Arc.curveData	main	Plane/LocalStructure.lean:1162	def	hyp	
+main:Arc	Arc.curve	main	Plane/LocalStructure.lean:1167	def	hyp	
+main:Arc	Arc.curveData	w3b	Plane/LocalStructure.lean:1168	def	hyp	
+main:Arc	Arc.curveData_kappa	main	Plane/LocalStructure.lean:1170	theorem	hyp	
+main:Arc	Arc.curve	w3b	Plane/LocalStructure.lean:1173	def	hyp	
+main:Arc	Arc.curveData_ne	main	Plane/LocalStructure.lean:1174	theorem	hyp	
+main:Arc	Arc.curveData_kappa	w3b	Plane/LocalStructure.lean:1176	theorem	hyp	
+main:Arc	Arc.curveData_ne	w3b	Plane/LocalStructure.lean:1180	theorem	hyp	
+main:Arc	Arc.carrier_subset_curve	main	Plane/LocalStructure.lean:1192	theorem	hyp	
+main:Arc	Arc.carrier_subset_curve	w3b	Plane/LocalStructure.lean:1198	theorem	hyp	
+main:Arc	GoodAt.exists_local_curve	main	Plane/LocalStructure.lean:1712	theorem	hyp	
+main:Arc	GoodAt.exists_local_curve	w3b	Plane/LocalStructure.lean:1718	theorem	hyp	
+main:Arc	Arc.Tang	main	Plane/LocalStructure.lean:2684	def	hyp	
+main:Arc	Arc.Tang	w3b	Plane/LocalStructure.lean:2690	def	hyp	
+main:Arc	countable_tang_dirs	main	Plane/LocalStructure.lean:2823	theorem	hyp	
+main:Arc	countable_tang_dirs	w3b	Plane/LocalStructure.lean:2829	theorem	hyp	
+main:Arc	circ_gap_aux	main	Plane/LocalStructure.lean:2989	theorem	hyp	
+main:Arc	circ_gap_aux	w3b	Plane/LocalStructure.lean:2995	theorem	hyp	
+main:Arc	circ_initialPiece	main	Plane/LocalStructure.lean:3110	theorem	hyp	
+main:Arc	circ_initialPiece	w3b	Plane/LocalStructure.lean:3116	theorem	hyp	
+main:Arc	seg_initialPiece	main	Plane/LocalStructure.lean:3167	theorem	hyp	
+main:Arc	seg_initialPiece	w3b	Plane/LocalStructure.lean:3173	theorem	hyp	
+main:Arc	Arc.exists_initialPiece_of_approach	main	Plane/LocalStructure.lean:3233	theorem	hyp	
+main:Arc	Arc.exists_initialPiece_of_approach	w3b	Plane/LocalStructure.lean:3239	theorem	hyp	
+main:Arc	Arc.InitialPiece.subset_carrier	main	Plane/LocalStructure.lean:3280	theorem	hyp	
+main:Arc	Arc.InitialPiece.subset_carrier	w3b	Plane/LocalStructure.lean:3286	theorem	hyp	
+main:Arc	Arc.ends	w3b	Plane/LocalStructure.lean:4305	def	hyp	
+main:Arc	Arc.finite_ends	w3b	Plane/LocalStructure.lean:4309	theorem	hyp	
+main:Arc	Arc.eventually_mem_carrier	w3b	Plane/LocalStructure.lean:4313	theorem	hyp	
+main:Arc	Arc.exists_near	w3b	Plane/LocalStructure.lean:4401	theorem	hyp	
+main:Arc	Arc.branch_mem_of_mem	w3b	Plane/LocalStructure.lean:4443	theorem	hyp	
+main:Arc	Arc.finite_inter_sphere_or_eq_circ	main	Plane/LocalStructure.lean:451	theorem	hyp	
+main:Arc	Arc.finite_inter_sphere_or_eq_circ	w3b	Plane/LocalStructure.lean:457	theorem	hyp	
+main:Arc	Arc.volume_carrier	main	Plane/LocalStructure.lean:538	theorem	hyp	
+main:Arc	Arc.volume_carrier	w3b	Plane/LocalStructure.lean:544	theorem	hyp	
+main:Arc	Arc.OnRing	main	Plane/LocalStructure.lean:552	def	hyp	
+main:Arc	Arc.OnRing.carrier_subset_sphere	main	Plane/LocalStructure.lean:555	theorem	hyp	
+main:Arc	Arc.OnRing	w3b	Plane/LocalStructure.lean:558	def	hyp	
+main:Arc	Arc.OnRing.carrier_subset_sphere	w3b	Plane/LocalStructure.lean:561	theorem	hyp	
+main:Arc	initialPiece_cases	main	Plane/RingGerm.lean:2552	theorem	hyp	
+main:Arc	flank_initialPieces	main	Plane/RingGerm.lean:2625	theorem	hyp	
+main:Arc	initialPiece_cases	w3b	Plane/RingGerm.lean:2663	theorem	hyp	
+main:Arc	flank	main	Plane/RingGerm.lean:2735	theorem	hyp	
+main:Arc	flank_initialPieces	w3b	Plane/RingGerm.lean:2736	theorem	hyp	
+main:Arc	flank	w3b	Plane/RingGerm.lean:2846	theorem	hyp	
+main:Arc	isoCol_locallyConstant	w4	Plane/ValidMap/UnitArc.lean:415	theorem	hyp	
+main:Arc	recolour	ww	Plane/Woodall/Merge.lean:75	def	hyp	
+main:Arc	Arc.finite_inter_parabola	ww	Plane/Woodall/NoFourFive.lean:453	theorem	hyp	
+main:Arc	Arc.isCompact_carrier	main	Plane/LocalMap.lean:53	theorem	concl	
+main:Arc		main	Plane/LocalMapExamples.lean:592	example	concl	
+main:Arc		main	Plane/LocalMapExamples.lean:599	example	NEG	
+main:Arc		main	Plane/LocalMapExamples.lean:608	example	concl	
+main:Arc		w3b	Plane/LocalStructure.lean:4948	example	concl	
+main:Arc	carrier_circ_unit	main	Plane/LocalStructure.lean:548	theorem	concl	
+main:Arc	carrier_circ_unit	w3b	Plane/LocalStructure.lean:554	theorem	concl	
+main:Arc	sevenBrickArcs	ww	Plane/SVMap.lean:194	def	concl	
+main:Arc	sevenBrickArcs	w4	Plane/SVMap.lean:373	def	concl	
+main:Arc	e_notMem_lens_union	main	Plane/SixFragment.lean:2046	theorem	concl	
+main:Arc	sixArcs	main	Plane/SixFragment.lean:52	def	concl	
+main:Arc	bowtieArcs	w4	Plane/ValidMap/BaseSteps.lean:232	def	concl	
+main:Arc	l60Arcs	w4	Plane/ValidMap/UnitArc.lean:255	def	concl	
+main:Arc	mem_isoArc_of_norm_one	w4	Plane/ValidMap/UnitArc.lean:380	theorem	concl	
+main:Arc	threeCuts	ww	Plane/Woodall/Basic.lean:199	def	concl	
+main:Arc	wedgeArcs	ww	Plane/Woodall/Merge.lean:53	def	concl	
+main:Arc.InitialPiece	Arc.InitialPiece.subset_carrier	main	Plane/LocalStructure.lean:3280	theorem	hyp	
+main:Arc.InitialPiece	Arc.InitialPiece.subset_carrier	w3b	Plane/LocalStructure.lean:3286	theorem	hyp	
+main:Arc.InitialPiece	initialPiece_cases	main	Plane/RingGerm.lean:2552	theorem	hyp	
+main:Arc.InitialPiece	flank_initialPieces	main	Plane/RingGerm.lean:2625	theorem	hyp	
+main:Arc.InitialPiece	initialPiece_cases	w3b	Plane/RingGerm.lean:2663	theorem	hyp	
+main:Arc.InitialPiece	flank	main	Plane/RingGerm.lean:2735	theorem	hyp	
+main:Arc.InitialPiece	flank_initialPieces	w3b	Plane/RingGerm.lean:2736	theorem	hyp	
+main:Arc.InitialPiece	flank	w3b	Plane/RingGerm.lean:2846	theorem	hyp	
+main:Arc.InitialPiece		main	Plane/LocalMapExamples.lean:592	example	concl	
+main:Arc.InitialPiece		main	Plane/LocalMapExamples.lean:599	example	concl	
+main:Arc.InitialPiece		main	Plane/LocalMapExamples.lean:608	example	concl	
+main:Arc.InitialPiece	circ_initialPiece	main	Plane/LocalStructure.lean:3110	theorem	concl	
+main:Arc.InitialPiece	circ_initialPiece	w3b	Plane/LocalStructure.lean:3116	theorem	concl	
+main:Arc.InitialPiece	seg_initialPiece	main	Plane/LocalStructure.lean:3167	theorem	concl	
+main:Arc.InitialPiece	seg_initialPiece	w3b	Plane/LocalStructure.lean:3173	theorem	concl	
+main:Arc.InitialPiece	Arc.exists_initialPiece_of_approach	main	Plane/LocalStructure.lean:3233	theorem	concl	
+main:Arc.InitialPiece	Arc.exists_initialPiece_of_approach	w3b	Plane/LocalStructure.lean:3239	theorem	concl	
+main:Arc.InitialPiece	exists_initialPiece_of_cone	main	Plane/LocalStructure.lean:3388	theorem	concl	
+main:Arc.InitialPiece	exists_initialPiece_of_cone	w3b	Plane/LocalStructure.lean:3394	theorem	concl	
+main:Arc.InitialPiece	flank_edge_exists	main	Plane/RingGerm.lean:2531	theorem	concl	
+main:Arc.InitialPiece	flank_edge_exists	w3b	Plane/RingGerm.lean:2642	theorem	concl	
+main:Arc.OnRing	exists_ball_onRing	main	Plane/LocalStructure.lean:2133	theorem	hyp	
+main:Arc.OnRing	exists_ball_onRing	w3b	Plane/LocalStructure.lean:2139	theorem	hyp	
+main:Arc.OnRing	exists_sides_nbhd	main	Plane/LocalStructure.lean:2154	theorem	hyp	
+main:Arc.OnRing	exists_sides_nbhd	w3b	Plane/LocalStructure.lean:2160	theorem	hyp	
+main:Arc.OnRing	Arc.OnRing.carrier_subset_sphere	main	Plane/LocalStructure.lean:555	theorem	hyp	
+main:Arc.OnRing	Arc.OnRing.carrier_subset_sphere	w3b	Plane/LocalStructure.lean:561	theorem	hyp	
+main:Arc.OnRing	finite_nonring_inter_sphere	main	Plane/LocalStructure.lean:2121	theorem	NEG	
+main:Arc.OnRing	finite_nonring_inter_sphere	w3b	Plane/LocalStructure.lean:2127	theorem	NEG	
+main:Arc.Tang	Arc.exists_initialPiece_of_approach	main	Plane/LocalStructure.lean:3233	theorem	hyp	
+main:Arc.Tang	Arc.exists_initialPiece_of_approach	w3b	Plane/LocalStructure.lean:3239	theorem	hyp	
+main:Arc.Tang	GoodAt.exists_wedge	main	Plane/LocalStructure.lean:2759	theorem	concl	
+main:Arc.Tang	GoodAt.exists_wedge	w3b	Plane/LocalStructure.lean:2765	theorem	concl	
+main:Arc.Tang	countable_tang_dirs	main	Plane/LocalStructure.lean:2823	theorem	concl	
+main:Arc.Tang	countable_tang_dirs	w3b	Plane/LocalStructure.lean:2829	theorem	concl	
+main:Arc.Tang	GoodAt.exists_generic_dir	main	Plane/LocalStructure.lean:2842	theorem	NEG	
+main:Arc.Tang	GoodAt.exists_generic_dir	w3b	Plane/LocalStructure.lean:2848	theorem	NEG	
+main:ArcMap	nb4p	w4	Plane/ValidMap/UnitArc.lean:1037	theorem	REFUT	sorry
+main:ArcMap	aeMap6	ww	Plane/Woodall/Steps.lean:566	theorem	REFUT	
+main:ArcMap	aeMap6_of_condition5	ww	Plane/Woodall/Steps.lean:572	theorem	REFUT	
+main:ArcMap	woodall_thm6	ww	Plane/Woodall/Steps.lean:582	theorem	REFUT	
+main:ArcMap	ArcMap.IsJordanDomain.local_connected	main	Plane/LocalStructure.lean:100	theorem	hyp	
+main:ArcMap	ArcMap.IsJordanDomain.local_connected	w3b	Plane/LocalStructure.lean:106	theorem	hyp	
+main:ArcMap	ArcMap.IsJordanDomain.coneAt_eq_angleIcc	main	Plane/LocalStructure.lean:380	theorem	hyp	
+main:ArcMap	ArcMap.IsJordanDomain.coneAt_eq_angleIcc	w3b	Plane/LocalStructure.lean:386	theorem	hyp	
+main:ArcMap	ringD	main	Plane/RingGerm.lean:333	def	hyp	
+main:ArcMap	ringD	w3b	Plane/RingGerm.lean:333	def	hyp	
+main:ArcMap	RegularAt	main	Plane/RingGerm.lean:682	def	hyp	
+main:ArcMap	RegularAt	w3b	Plane/RingGerm.lean:682	def	hyp	
+main:ArcMap	qOpen	main	Plane/RingGerm.lean:923	def	hyp	
+main:ArcMap	qOpen	w3b	Plane/RingGerm.lean:923	def	hyp	
+main:ArcMap	qOpen_subset	main	Plane/RingGerm.lean:926	theorem	hyp	
+main:ArcMap	qOpen_subset	w3b	Plane/RingGerm.lean:926	theorem	hyp	
+main:ArcMap	isOpen_qOpen	main	Plane/RingGerm.lean:931	theorem	hyp	
+main:ArcMap	isOpen_qOpen	w3b	Plane/RingGerm.lean:931	theorem	hyp	
+main:ArcMap	qOpen_periodic	main	Plane/RingGerm.lean:941	theorem	hyp	
+main:ArcMap	qOpen_periodic	w3b	Plane/RingGerm.lean:941	theorem	hyp	
+main:ArcMap	AgreesOff	w4	Plane/ValidMap/Basic.lean:223	def	hyp	
+main:ArcMap	AgreesOff	ww	Plane/ValidMap/Basic.lean:223	def	hyp	
+main:ArcMap	RingArcsWithin	w4	Plane/ValidMap/Basic.lean:229	def	hyp	
+main:ArcMap	RingArcsWithin	ww	Plane/ValidMap/Basic.lean:229	def	hyp	
+main:ArcMap	sectorsAt_one_colour	ww	Plane/Woodall/Basic.lean:168	theorem	hyp	
+main:ArcMap	wedgeMerge	ww	Plane/Woodall/Merge.lean:143	def	hyp	
+main:ArcMap	coloursAt_congr	ww	Plane/Woodall/Merge.lean:169	theorem	hyp	sorry
+main:ArcMap	niceAt_congr	ww	Plane/Woodall/Merge.lean:174	theorem	hyp	sorry
+main:ArcMap	DirColourAt	ww	Plane/Woodall/Merge.lean:184	def	hyp	
+main:ArcMap	recolour	ww	Plane/Woodall/Merge.lean:75	def	hyp	
+main:ArcMap	SectorsAt.eq_of_edge_mem_angleIcc	ww	Plane/Woodall/NoFourFive.lean:510	theorem	hyp	
+main:ArcMap	ArcMap.measurableSet_region_inter	w2	Plane/YesLimit.lean:117	theorem	hyp	
+main:ArcMap	ArcMap.volume_ball_diff_region	w2	Plane/YesLimit.lean:124	theorem	hyp	
+main:ArcMap	ArcMap.bandFree_region	w2	Plane/YesLimit.lean:141	theorem	hyp	
+main:ArcMap	muZero_eq_one_of_fragments	w2	Plane/YesLimit.lean:151	theorem	hyp	
+main:ArcMap	chiM0_le_of_fragments	w2	Plane/YesLimit.lean:210	theorem	hyp	
+main:ArcMap	chromaticNumber_plane_le_six_of_fragments	w2	Plane/YesLimit.lean:215	theorem	hyp	
+main:ArcMap	const	main	Plane/ArcMap.lean:139	def	concl	
+main:ArcMap	halfDisc	main	Plane/ArcMap.lean:172	def	concl	
+main:ArcMap		main	Plane/ArcMap.lean:224	example	concl	
+main:ArcMap		main	Plane/ArcMap.lean:232	example	NEG	
+main:ArcMap	halfDiscMono	main	Plane/ArcMap.lean:270	def	concl	
+main:ArcMap		main	Plane/ArcMap.lean:367	example	concl	
+main:ArcMap	restrict	main	Plane/LocalMap.lean:300	def	concl	
+main:ArcMap	wholeRestrict	main	Plane/LocalMap.lean:314	def	concl	
+main:ArcMap	halfPlane2	main	Plane/LocalMapExamples.lean:124	def	concl	
+main:ArcMap	quadRing	main	Plane/LocalMapExamples.lean:246	def	concl	
+main:ArcMap		main	Plane/LocalMapExamples.lean:535	example	NEG	
+main:ArcMap	const_ball_isTile_iff	main	Plane/LocalMapExamples.lean:561	theorem	concl	
+main:ArcMap		main	Plane/LocalMapExamples.lean:573	example	concl	
+main:ArcMap		main	Plane/LocalMapExamples.lean:578	example	concl	
+main:ArcMap	sevenBrickMap	ww	Plane/SVMap.lean:213	def	concl	
+main:ArcMap	sevenBrickMap	w4	Plane/SVMap.lean:554	def	concl	
+main:ArcMap	sixFrag	main	Plane/SixFragment.lean:553	def	concl	
+main:ArcMap		w4	Plane/ValidMap/BaseSteps.lean:115	example	NEG	
+main:ArcMap	bowtie	w4	Plane/ValidMap/BaseSteps.lean:301	def	concl	
+main:ArcMap	const_univ_coloursAt	w4	Plane/ValidMap/BaseSteps.lean:65	theorem	concl	
+main:ArcMap		w4	Plane/ValidMap/BaseSteps.lean:81	example	concl	
+main:ArcMap		w4	Plane/ValidMap/BaseSteps.lean:85	example	concl	
+main:ArcMap		w4	Plane/ValidMap/BaseSteps.lean:92	example	NEG	
+main:ArcMap	const_isSector_ball	ww	Plane/ValidMap/Basic.lean:278	theorem	concl	
+main:ArcMap	const_not_isSector_far	ww	Plane/ValidMap/Basic.lean:290	theorem	NEG	
+main:ArcMap		ww	Plane/ValidMap/Basic.lean:297	example	concl	
+main:ArcMap		ww	Plane/ValidMap/Basic.lean:303	example	concl	
+main:ArcMap		ww	Plane/ValidMap/Basic.lean:321	example	concl	
+main:ArcMap		ww	Plane/ValidMap/Basic.lean:330	example	concl	
+main:ArcMap		ww	Plane/ValidMap/Basic.lean:335	example	NEG	
+main:ArcMap	unitArcPlane	ww	Plane/ValidMap/Basic.lean:341	def	concl	
+main:ArcMap		ww	Plane/ValidMap/Basic.lean:356	example	concl	
+main:ArcMap		ww	Plane/ValidMap/Basic.lean:370	example	concl	
+main:ArcMap		ww	Plane/ValidMap/Basic.lean:382	example	NEG	
+main:ArcMap	const_isSector_ball	w4	Plane/ValidMap/Basic.lean:572	theorem	concl	
+main:ArcMap	const_not_isSector_far	w4	Plane/ValidMap/Basic.lean:584	theorem	NEG	
+main:ArcMap		w4	Plane/ValidMap/Basic.lean:591	example	concl	
+main:ArcMap		w4	Plane/ValidMap/Basic.lean:597	example	concl	
+main:ArcMap		w4	Plane/ValidMap/Basic.lean:615	example	concl	
+main:ArcMap		w4	Plane/ValidMap/Basic.lean:624	example	concl	
+main:ArcMap		w4	Plane/ValidMap/Basic.lean:629	example	NEG	
+main:ArcMap	unitArcPlane	w4	Plane/ValidMap/Basic.lean:635	def	concl	
+main:ArcMap		w4	Plane/ValidMap/Basic.lean:650	example	concl	
+main:ArcMap		w4	Plane/ValidMap/Basic.lean:664	example	concl	
+main:ArcMap		w4	Plane/ValidMap/Basic.lean:676	example	NEG	
+main:ArcMap	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	concl	sorry
+main:ArcMap	exists_rayMerge	w4	Plane/ValidMap/Contact.lean:705	theorem	concl	sorry
+main:ArcMap	exists_merge	w4	Plane/ValidMap/Contact.lean:721	theorem	concl	sorry
+main:ArcMap	l60Frag	w4	Plane/ValidMap/UnitArc.lean:281	def	concl	
+main:ArcMap	bend_toward	w4	Plane/ValidMap/UnitArc.lean:334	theorem	concl	sorry
+main:ArcMap	bend_away	w4	Plane/ValidMap/UnitArc.lean:347	theorem	concl	sorry
+main:ArcMap	bend_away_whole	w4	Plane/ValidMap/UnitArc.lean:359	theorem	concl	sorry
+main:ArcMap	isoFrag	w4	Plane/ValidMap/UnitArc.lean:466	def	concl	
+main:ArcMap	const_sectorsAt	ww	Plane/Woodall/Basic.lean:175	theorem	concl	
+main:ArcMap	threeSectorDisc	ww	Plane/Woodall/Basic.lean:209	def	concl	
+main:ArcMap		ww	Plane/Woodall/Merge.lean:188	example	concl	
+main:ArcMap	exists_merge_at	ww	Plane/Woodall/Merge.lean:247	theorem	concl	sorry
+main:ArcMap	exists_woodallMerged	ww	Plane/Woodall/Merge.lean:257	theorem	concl	sorry
+main:ArcMap		ww	Plane/Woodall/NoFourFive.lean:563	example	concl	
+main:ArcMap		ww	Plane/Woodall/NoFourFive.lean:588	example	NEG	
+main:CircleColouring	Good.notMem	main	Plane/RingBand.lean:159	theorem	hyp	
+main:CircleColouring	Good.hex_notMem	main	Plane/RingBand.lean:162	theorem	hyp	
+main:CircleColouring	liftB	main	Plane/RingBand.lean:463	def	hyp	
+main:CircleColouring	liftA	main	Plane/RingBand.lean:467	def	hyp	
+main:CircleColouring	liftB_fin	main	Plane/RingBand.lean:471	theorem	hyp	
+main:CircleColouring	liftB_add	main	Plane/RingBand.lean:475	theorem	hyp	
+main:CircleColouring	liftB_of_le	main	Plane/RingBand.lean:483	theorem	hyp	
+main:CircleColouring	liftA_sub	main	Plane/RingBand.lean:488	theorem	hyp	
+main:CircleColouring	liftB_empty	main	Plane/RingBand.lean:507	theorem	hyp	
+main:CircleColouring	liftB_single	main	Plane/RingBand.lean:512	theorem	hyp	
+main:CircleColouring	T0	main	Plane/RingBand.lean:707	def	hyp	
+main:CircleColouring	arcsColouring	main	Plane/CircleColouring.lean:174	def	concl	
+main:CircleColouring	hexColouring	main	Plane/CircleColouring.lean:257	def	concl	
+main:CircleColouring	nineColouring	main	Plane/CircleColouring.lean:260	def	concl	
+main:CircleColouring	ringCircleColouring	main	Plane/RingBand.lean:1170	def	concl	
+main:Covers	pair_i	w4	Plane/ValidMap/BaseSteps.lean:130	theorem	REFUT	sorry
+main:Covers	anti	w4	Plane/ValidMap/BaseSteps.lean:170	theorem	REFUT	sorry
+main:Covers	nb4p	w4	Plane/ValidMap/UnitArc.lean:1037	theorem	REFUT	sorry
+main:Covers	finite_ringΓ_off_ringArc	main	Plane/LocalStructure.lean:1386	theorem	hyp	
+main:Covers	finite_ringΓ_off_ringArc	w3b	Plane/LocalStructure.lean:1392	theorem	hyp	
+main:Covers	ring_finite_S	main	Plane/RingBand.lean:1119	theorem	hyp	
+main:Covers	ring_locallyConstant	main	Plane/RingBand.lean:1134	theorem	hyp	
+main:Covers	ring_proper	main	Plane/RingBand.lean:1145	theorem	hyp	
+main:Covers	ringCircleColouring	main	Plane/RingBand.lean:1170	def	hyp	
+main:Covers	exists_swap_of_ring	main	Plane/RingBand.lean:1182	theorem	hyp	
+main:Covers	fiveRing_length	main	Plane/RingGerm.lean:1045	theorem	hyp	
+main:Covers	fiveRing_length	w3b	Plane/RingGerm.lean:1045	theorem	hyp	
+main:Covers	fiveRing_no_hub	main	Plane/RingGerm.lean:1102	theorem	hyp	
+main:Covers	fiveRing_no_hub	w3b	Plane/RingGerm.lean:1102	theorem	hyp	
+main:Covers	sixQ_sphere_subset_Γ	main	Plane/RingGerm.lean:1111	theorem	hyp	
+main:Covers	sixQ_sphere_subset_Γ	w3b	Plane/RingGerm.lean:1111	theorem	hyp	
+main:Covers	germ_absent_class	main	Plane/RingGerm.lean:1289	theorem	hyp	
+main:Covers	germ_absent_class	w3b	Plane/RingGerm.lean:1289	theorem	hyp	
+main:Covers	touchW	main	Plane/RingGerm.lean:1356	theorem	hyp	
+main:Covers	touchW	w3b	Plane/RingGerm.lean:1356	theorem	hyp	
+main:Covers	changePoint_germs	main	Plane/RingGerm.lean:1634	theorem	hyp	
+main:Covers	changePoint_germs	w3b	Plane/RingGerm.lean:1634	theorem	hyp	
+main:Covers	germS_inward	main	Plane/RingGerm.lean:1712	theorem	hyp	
+main:Covers	germS_inward	w3b	Plane/RingGerm.lean:1712	theorem	hyp	
+main:Covers	changePoint_germs_out	main	Plane/RingGerm.lean:1798	theorem	hyp	
+main:Covers	changePoint_germs_out	w3b	Plane/RingGerm.lean:1798	theorem	hyp	
+main:Covers	germS_outward	main	Plane/RingGerm.lean:1821	theorem	hyp	
+main:Covers	germS_outward	w3b	Plane/RingGerm.lean:1821	theorem	hyp	
+main:Covers	germS_four	main	Plane/RingGerm.lean:1849	theorem	hyp	
+main:Covers	germS_four	w3b	Plane/RingGerm.lean:1849	theorem	hyp	
+main:Covers	ringQPrimeS	main	Plane/RingGerm.lean:1907	theorem	hyp	
+main:Covers	ringQPrimeS	w3b	Plane/RingGerm.lean:1907	theorem	hyp	
+main:Covers	ringD_subset_Γ	main	Plane/RingGerm.lean:353	theorem	hyp	
+main:Covers	ringD_subset_Γ	w3b	Plane/RingGerm.lean:353	theorem	hyp	
+main:Covers	finite_ringD_off_ringArc	main	Plane/RingGerm.lean:363	theorem	hyp	
+main:Covers	finite_ringD_off_ringArc	w3b	Plane/RingGerm.lean:363	theorem	hyp	
+main:Covers	germS_absent	main	Plane/RingGerm.lean:486	theorem	hyp	
+main:Covers	germS_absent	w3b	Plane/RingGerm.lean:486	theorem	hyp	
+main:Covers	carries_absent	main	Plane/RingGerm.lean:688	theorem	hyp	
+main:Covers	carries_absent	w3b	Plane/RingGerm.lean:688	theorem	hyp	
+main:Covers	isOpen_regularAt	main	Plane/RingGerm.lean:755	theorem	hyp	
+main:Covers	isOpen_regularAt	w3b	Plane/RingGerm.lean:755	theorem	hyp	
+main:Covers	exists_regular_germ	main	Plane/RingGerm.lean:773	theorem	hyp	
+main:Covers	exists_regular_germ	w3b	Plane/RingGerm.lean:773	theorem	hyp	
+main:Covers	finite_not_regular	main	Plane/RingGerm.lean:807	theorem	hyp	
+main:Covers	finite_not_regular	w3b	Plane/RingGerm.lean:807	theorem	hyp	
+main:Covers	exists_regular_pair	main	Plane/RingGerm.lean:846	theorem	hyp	
+main:Covers	exists_regular_pair	w3b	Plane/RingGerm.lean:846	theorem	hyp	
+main:Covers	qfree4	main	Plane/RingGerm.lean:861	theorem	hyp	
+main:Covers	qfree4	w3b	Plane/RingGerm.lean:861	theorem	hyp	
+main:Covers	fiveRing_no_changePoint	main	Plane/RingGerm.lean:887	theorem	hyp	
+main:Covers	fiveRing_no_changePoint	w3b	Plane/RingGerm.lean:887	theorem	hyp	
+main:Covers	fiveRing_finite_off_Q	main	Plane/RingGerm.lean:894	theorem	hyp	
+main:Covers	fiveRing_finite_off_Q	w3b	Plane/RingGerm.lean:894	theorem	hyp	
+main:Covers	wholeRestrict_covers	main	Plane/Tiles.lean:260	theorem	hyp	
+main:Covers	pair_ii	w4	Plane/ValidMap/BaseSteps.lean:137	theorem	hyp	sorry
+main:Covers	fail_leavingCentre	w4	Plane/ValidMap/BaseSteps.lean:153	theorem	hyp	sorry
+main:Covers	fail_colours	w4	Plane/ValidMap/BaseSteps.lean:160	theorem	hyp	sorry
+main:Covers	contact_inType_or_outType	w4	Plane/ValidMap/Contact.lean:414	theorem	hyp	
+main:Covers	coneAt_subset_allowedCone	w4	Plane/ValidMap/Contact.lean:489	theorem	hyp	
+main:Covers	clear_of_subset_interior_allowedCone	w4	Plane/ValidMap/Contact.lean:525	theorem	hyp	sorry
+main:Covers	woodallCone	w4	Plane/ValidMap/Contact.lean:646	theorem	hyp	sorry
+main:Covers	woodallCone_strict	w4	Plane/ValidMap/Contact.lean:655	theorem	hyp	sorry
+main:Covers	flank_shadows	w4	Plane/ValidMap/Contact.lean:669	theorem	hyp	sorry
+main:Covers	shaveAvailable_of_not_doublyShadowed	w4	Plane/ValidMap/Contact.lean:680	theorem	hyp	sorry
+main:Covers	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	hyp	sorry
+main:Covers	exists_rayMerge	w4	Plane/ValidMap/Contact.lean:705	theorem	hyp	sorry
+main:Covers	exists_merge	w4	Plane/ValidMap/Contact.lean:721	theorem	hyp	sorry
+main:Covers	stuck_structure	w4	Plane/ValidMap/Contact.lean:737	theorem	hyp	sorry
+main:Covers	a4six	w4	Plane/ValidMap/UnitArc.lean:1026	theorem	hyp	sorry
+main:Covers	flankQ_upper	w4	Plane/ValidMap/UnitArc.lean:897	theorem	hyp	sorry
+main:Covers	flankQ_lower	w4	Plane/ValidMap/UnitArc.lean:915	theorem	hyp	sorry
+main:Covers	flankQ_both	w4	Plane/ValidMap/UnitArc.lean:932	theorem	hyp	
+main:Covers	ArcMap.measurableSet_region_inter	w2	Plane/YesLimit.lean:117	theorem	hyp	
+main:Covers	ArcMap.volume_ball_diff_region	w2	Plane/YesLimit.lean:124	theorem	hyp	
+main:Covers	muZero_eq_one_of_fragments	w2	Plane/YesLimit.lean:151	theorem	hyp	
+main:Covers	chiM0_le_of_fragments	w2	Plane/YesLimit.lean:210	theorem	hyp	
+main:Covers	chromaticNumber_plane_le_six_of_fragments	w2	Plane/YesLimit.lean:215	theorem	hyp	
+main:Covers	covers_one_iff	main	Plane/LocalStructure.lean:1370	theorem	concl	
+main:Covers	covers_one_iff	w3b	Plane/LocalStructure.lean:1376	theorem	concl	
+main:Covers	sixQ_inhabited	main	Plane/RingGerm.lean:1133	theorem	concl	
+main:Covers	sixQ_inhabited	w3b	Plane/RingGerm.lean:1133	theorem	concl	
+main:Covers	sixFrag_covers	main	Plane/SixFragment.lean:1947	theorem	concl	
+main:FalconerFan	not_falconerFan_five_of_hom_slack	w2	Arith/FalconerField.lean:146	theorem	REFUT	
+main:FalconerFan	falconerFan_chromaticNumber	main	Arith/FalconerFan.lean:139	theorem	hyp	
+main:FalconerFan	falconerFan_hom	main	Arith/FalconerFan.lean:57	theorem	hyp	
+main:FalconerFan	tip_eq_zero_of_tipFree	w2	Arith/FalconerField.lean:128	theorem	hyp	
+main:FalconerFan	falconerFan_five_field	w2	Arith/FalconerField.lean:156	theorem	hyp	
+main:FalconerFan	falconerFan_five_placeHom	w2	Arith/FalconerField.lean:182	theorem	hyp	
+main:FalconerFan	falconerFan_five_mem_eight	w2	Arith/FalconerField.lean:259	theorem	hyp	
+main:FalconerFan	falconerFan_five_mem_P	w2	Arith/FalconerField.lean:274	theorem	hyp	
+main:FalconerFan	fan_tip_ae_mem	w2	Plane/FalconerReduction.lean:608	theorem	hyp	
+main:FalconerFan	falconer_reduction	w2	Plane/FalconerReduction.lean:698	theorem	hyp	
+main:FalconerFan	le_chiM_of_falconerFan	w2	Plane/FalconerReduction.lean:728	theorem	hyp	
+main:FalconerFan	rhombus_falconerFan	main	Arith/FalconerFan.lean:31	theorem	concl	
+main:FalconerFan	not_falconerFan_five_of_fanGap	w2	Arith/FalconerField.lean:227	theorem	NEG	
+main:FalconerFan	not_falconerFan_of_colorable	w2	Arith/FalconerField.lean:36	theorem	NEG	
+main:GermIn	GermIn.mono	main	Plane/LocalMap.lean:121	theorem	hyp	
+main:GermIn	GermIn.inter	main	Plane/LocalMap.lean:127	theorem	hyp	
+main:GermIn	not_mem_closure_of_four_germs	main	Plane/RingGerm.lean:1160	theorem	hyp	
+main:GermIn	not_mem_closure_of_four_germs	w3b	Plane/RingGerm.lean:1160	theorem	hyp	
+main:GermIn	exists_germ_interior	main	Plane/RingGerm.lean:1189	theorem	hyp	
+main:GermIn	exists_germ_interior	w3b	Plane/RingGerm.lean:1189	theorem	hyp	
+main:GermIn	germ_absent_class	main	Plane/RingGerm.lean:1289	theorem	hyp	
+main:GermIn	germ_absent_class	w3b	Plane/RingGerm.lean:1289	theorem	hyp	
+main:GermIn	mem_ringArc_of_germIn	main	Plane/RingGerm.lean:1337	theorem	hyp	
+main:GermIn	mem_ringArc_of_germIn	w3b	Plane/RingGerm.lean:1337	theorem	hyp	
+main:GermIn	Valid.cone_re_nonneg_of_germ	main	Plane/RingGerm.lean:134	theorem	hyp	
+main:GermIn	Valid.cone_re_nonneg_of_germ	w3b	Plane/RingGerm.lean:134	theorem	hyp	
+main:GermIn	echo_unique	main	Plane/RingGerm.lean:1442	theorem	hyp	
+main:GermIn	echo_unique	w3b	Plane/RingGerm.lean:1442	theorem	hyp	
+main:GermIn	echo_of_mem_closure	main	Plane/RingGerm.lean:1574	theorem	hyp	
+main:GermIn	echo_of_mem_closure	w3b	Plane/RingGerm.lean:1574	theorem	hyp	
+main:GermIn	echo	main	Plane/RingGerm.lean:1583	theorem	hyp	
+main:GermIn	echo	w3b	Plane/RingGerm.lean:1583	theorem	hyp	
+main:GermIn	Valid.cone_re_nonpos_of_germ	main	Plane/RingGerm.lean:195	theorem	hyp	
+main:GermIn	Valid.cone_re_nonpos_of_germ	w3b	Plane/RingGerm.lean:195	theorem	hyp	
+main:GermIn	germR_vMinus	main	Plane/RingGerm.lean:372	theorem	hyp	
+main:GermIn	germR_vMinus	w3b	Plane/RingGerm.lean:372	theorem	hyp	
+main:GermIn	germR_vPlus	main	Plane/RingGerm.lean:393	theorem	hyp	
+main:GermIn	germR_vPlus	w3b	Plane/RingGerm.lean:393	theorem	hyp	
+main:GermIn	germR_uMinus	main	Plane/RingGerm.lean:414	theorem	hyp	
+main:GermIn	germR_uMinus	w3b	Plane/RingGerm.lean:414	theorem	hyp	
+main:GermIn	germR_uPlus	main	Plane/RingGerm.lean:434	theorem	hyp	
+main:GermIn	germR_uPlus	w3b	Plane/RingGerm.lean:434	theorem	hyp	
+main:GermIn	GermIn.exists_mem_sphere	main	Plane/RingGerm.lean:456	theorem	hyp	
+main:GermIn	GermIn.exists_mem_sphere	w3b	Plane/RingGerm.lean:456	theorem	hyp	
+main:GermIn	germ_dichotomy	main	Plane/LocalStructure.lean:2313	theorem	concl	
+main:GermIn	germ_dichotomy	w3b	Plane/LocalStructure.lean:2319	theorem	concl	
+main:GermIn	touchW	main	Plane/RingGerm.lean:1356	theorem	concl	
+main:GermIn	touchW	w3b	Plane/RingGerm.lean:1356	theorem	concl	
+main:GermIn	changePoint_germs	main	Plane/RingGerm.lean:1634	theorem	concl	
+main:GermIn	changePoint_germs	w3b	Plane/RingGerm.lean:1634	theorem	concl	
+main:GermIn	changePoint_germs_out	main	Plane/RingGerm.lean:1798	theorem	concl	
+main:GermIn	changePoint_germs_out	w3b	Plane/RingGerm.lean:1798	theorem	concl	
+main:GermIn	not_germIn_closure_rotate	main	Plane/RingGerm.lean:289	theorem	NEG	
+main:GermIn	not_germIn_closure_rotate	w3b	Plane/RingGerm.lean:289	theorem	NEG	
+main:GermOnQ	germ_absent_class	main	Plane/RingGerm.lean:1289	theorem	hyp	
+main:GermOnQ	germ_absent_class	w3b	Plane/RingGerm.lean:1289	theorem	hyp	
+main:GermOnQ	touchW	main	Plane/RingGerm.lean:1356	theorem	hyp	
+main:GermOnQ	touchW	w3b	Plane/RingGerm.lean:1356	theorem	hyp	
+main:GermOnQ	germS_inward	main	Plane/RingGerm.lean:1712	theorem	hyp	
+main:GermOnQ	germS_inward	w3b	Plane/RingGerm.lean:1712	theorem	hyp	
+main:GermOnQ	germS_outward	main	Plane/RingGerm.lean:1821	theorem	hyp	
+main:GermOnQ	germS_outward	w3b	Plane/RingGerm.lean:1821	theorem	hyp	
+main:GermOnQ	germS_four	main	Plane/RingGerm.lean:1849	theorem	hyp	
+main:GermOnQ	germS_four	w3b	Plane/RingGerm.lean:1849	theorem	hyp	
+main:GermOnQ	onQArc_of_germOnQ	main	Plane/RingGerm.lean:513	theorem	hyp	
+main:GermOnQ	onQArc_of_germOnQ	w3b	Plane/RingGerm.lean:513	theorem	hyp	
+main:GermOnQ		main	Plane/LocalMapExamples.lean:484	example	concl	
+main:GermOnQ	changePoint_germs	main	Plane/RingGerm.lean:1634	theorem	NEG	
+main:GermOnQ	changePoint_germs	w3b	Plane/RingGerm.lean:1634	theorem	NEG	
+main:GermOnQ	changePoint_germs_out	main	Plane/RingGerm.lean:1798	theorem	NEG	
+main:GermOnQ	changePoint_germs_out	w3b	Plane/RingGerm.lean:1798	theorem	NEG	
+main:Good	ringband_vi_periodic	main	Plane/RingBand.lean:1010	theorem	hyp	
+main:Good	ringband_vi_noJump	main	Plane/RingBand.lean:1015	theorem	hyp	
+main:Good	Good.notMem	main	Plane/RingBand.lean:159	theorem	hyp	
+main:Good	Good.hex_notMem	main	Plane/RingBand.lean:162	theorem	hyp	
+main:Good	D_mod_ne_good	main	Plane/RingBand.lean:375	theorem	hyp	
+main:Good	hex_summary	main	Plane/RingBand.lean:383	theorem	hyp	
+main:Good	ringband_i	main	Plane/RingBand.lean:589	theorem	hyp	
+main:Good	ringband_ii	main	Plane/RingBand.lean:600	theorem	hyp	
+main:Good	hex_near	main	Plane/RingBand.lean:625	theorem	hyp	
+main:Good	m_eq_near	main	Plane/RingBand.lean:657	theorem	hyp	
+main:Good	h_eq_of_m_eq	main	Plane/RingBand.lean:690	theorem	hyp	
+main:Good	exists_M	main	Plane/RingBand.lean:759	theorem	hyp	
+main:Good	rho_const	main	Plane/RingBand.lean:839	theorem	hyp	
+main:Good	ringband_iii'	main	Plane/RingBand.lean:923	theorem	hyp	
+main:Good	ringband_iii	main	Plane/RingBand.lean:929	theorem	hyp	
+main:Good	ringband_iv	main	Plane/RingBand.lean:936	theorem	hyp	
+main:Good	ringband_v	main	Plane/RingBand.lean:959	theorem	hyp	
+main:Good		main	Plane/CircleColouring.lean:293	example	concl	
+main:Good	exists_good_near	main	Plane/RingBand.lean:143	theorem	concl	
+main:GoodAt	GoodAt.not_tile_subset_ball	main	Plane/LocalStructure.lean:1746	theorem	REFUT	
+main:GoodAt	GoodAt.not_tile_subset_ball	w3b	Plane/LocalStructure.lean:1752	theorem	REFUT	
+main:GoodAt	GoodAt.exists_local_curve	main	Plane/LocalStructure.lean:1712	theorem	hyp	
+main:GoodAt	GoodAt.exists_local_curve	w3b	Plane/LocalStructure.lean:1718	theorem	hyp	
+main:GoodAt	GoodAt.finite_tiles_sphere	main	Plane/LocalStructure.lean:1859	theorem	hyp	
+main:GoodAt	GoodAt.finite_tiles_sphere	w3b	Plane/LocalStructure.lean:1865	theorem	hyp	
+main:GoodAt	GoodAt.exists_wedge	main	Plane/LocalStructure.lean:2759	theorem	hyp	
+main:GoodAt	GoodAt.exists_wedge	w3b	Plane/LocalStructure.lean:2765	theorem	hyp	
+main:GoodAt	GoodAt.exists_generic_dir	main	Plane/LocalStructure.lean:2842	theorem	hyp	
+main:GoodAt	GoodAt.exists_generic_dir	w3b	Plane/LocalStructure.lean:2848	theorem	hyp	
+main:GoodAt	GoodAt.ncard_coloursAt_le_two	ww	Plane/Woodall/Merge.lean:198	theorem	hyp	sorry
+main:GoodAt	wedgeMerge_niceAt	ww	Plane/Woodall/Merge.lean:232	theorem	hyp	sorry
+main:GoodAt	exists_goodAt	main	Plane/LocalStructure.lean:1645	theorem	concl	
+main:GoodAt	exists_goodAt	w3b	Plane/LocalStructure.lean:1651	theorem	concl	
+main:InSixLens	sixRound_of_lens	main	Plane/SixFragment.lean:168	theorem	hyp	
+main:InSixLens	sixCol_of_lens	main	Plane/SixFragment.lean:206	theorem	hyp	
+main:InSixLens	exists_one_lt_dist_of_not_lens	main	Plane/SixFragment.lean:446	theorem	hyp	
+main:InSixLens	inSixLens_add_six	main	Plane/SixFragment.lean:114	theorem	concl	
+main:InSixLens	inSixLens_reduce	main	Plane/SixFragment.lean:434	theorem	concl	
+main:InSixLens	inSixLens_rot	main	Plane/SixFragment.lean:796	theorem	concl	
+main:IsChangePoint	nb4p	w4	Plane/ValidMap/UnitArc.lean:1037	theorem	REFUT	sorry
+main:IsChangePoint	touchW	main	Plane/RingGerm.lean:1356	theorem	hyp	
+main:IsChangePoint	touchW	w3b	Plane/RingGerm.lean:1356	theorem	hyp	
+main:IsChangePoint	changePoint_germs	main	Plane/RingGerm.lean:1634	theorem	hyp	
+main:IsChangePoint	changePoint_germs	w3b	Plane/RingGerm.lean:1634	theorem	hyp	
+main:IsChangePoint	germS_inward	main	Plane/RingGerm.lean:1712	theorem	hyp	
+main:IsChangePoint	germS_inward	w3b	Plane/RingGerm.lean:1712	theorem	hyp	
+main:IsChangePoint	changePoint_germs_out	main	Plane/RingGerm.lean:1798	theorem	hyp	
+main:IsChangePoint	changePoint_germs_out	w3b	Plane/RingGerm.lean:1798	theorem	hyp	
+main:IsChangePoint	germS_outward	main	Plane/RingGerm.lean:1821	theorem	hyp	
+main:IsChangePoint	germS_outward	w3b	Plane/RingGerm.lean:1821	theorem	hyp	
+main:IsChangePoint	germS_four	main	Plane/RingGerm.lean:1849	theorem	hyp	
+main:IsChangePoint	germS_four	w3b	Plane/RingGerm.lean:1849	theorem	hyp	
+main:IsChangePoint	ringQPrimeS	main	Plane/RingGerm.lean:1907	theorem	hyp	
+main:IsChangePoint	ringQPrimeS	w3b	Plane/RingGerm.lean:1907	theorem	hyp	
+main:IsChangePoint	IsChangePoint.not_mem_coloursAt	main	Plane/RingGerm.lean:464	theorem	hyp	
+main:IsChangePoint	IsChangePoint.not_mem_coloursAt	w3b	Plane/RingGerm.lean:464	theorem	hyp	
+main:IsChangePoint	IsChangePoint.ncard_add_two_le	main	Plane/RingGerm.lean:472	theorem	hyp	
+main:IsChangePoint	IsChangePoint.ncard_add_two_le	w3b	Plane/RingGerm.lean:472	theorem	hyp	
+main:IsChangePoint	germS_absent	main	Plane/RingGerm.lean:486	theorem	hyp	
+main:IsChangePoint	germS_absent	w3b	Plane/RingGerm.lean:486	theorem	hyp	
+main:IsChangePoint	halfPlane2_isChangePoint	main	Plane/LocalMapExamples.lean:197	theorem	concl	
+main:IsChangePoint		main	Plane/LocalMapExamples.lean:233	example	NEG	
+main:IsChangePoint		main	Plane/LocalMapExamples.lean:491	example	NEG	
+main:IsChangePoint	fiveRing_no_changePoint	main	Plane/RingGerm.lean:887	theorem	NEG	
+main:IsChangePoint	fiveRing_no_changePoint	w3b	Plane/RingGerm.lean:887	theorem	NEG	
+main:IsEssBoundary	echo	main	Plane/RingGerm.lean:1583	theorem	hyp	
+main:IsEssBoundary	echo	w3b	Plane/RingGerm.lean:1583	theorem	hyp	
+main:IsEssBoundary		main	Plane/LocalMapExamples.lean:535	example	concl	
+main:IsHub		main	Plane/LocalMapExamples.lean:219	example	concl	
+main:IsHub	fiveRing_no_hub	main	Plane/RingGerm.lean:1102	theorem	NEG	
+main:IsHub	fiveRing_no_hub	w3b	Plane/RingGerm.lean:1102	theorem	NEG	
+main:IsJordanDomain	ArcMap.IsJordanDomain.local_connected	main	Plane/LocalStructure.lean:100	theorem	hyp	
+main:IsJordanDomain	ArcMap.IsJordanDomain.local_connected	w3b	Plane/LocalStructure.lean:106	theorem	hyp	
+main:IsJordanDomain	ArcMap.IsJordanDomain.coneAt_eq_angleIcc	main	Plane/LocalStructure.lean:380	theorem	hyp	
+main:IsJordanDomain	ArcMap.IsJordanDomain.coneAt_eq_angleIcc	w3b	Plane/LocalStructure.lean:386	theorem	hyp	
+main:IsJordanDomain	IsSectorChart.exists_tile_inter_ball	w3b	Plane/LocalStructure.lean:4794	theorem	hyp	
+main:IsMUA	IsMUA.exists_shadow_point	w2	Plane/CoverExamples.lean:1413	theorem	hyp	
+main:IsMUA	IsMUA.add_normal_mem_essSupport	w2	Plane/CoverExamples.lean:1498	theorem	hyp	
+main:IsMUA	hc_irreg	w2	Plane/CoverExamples.lean:2090	theorem	hyp	sorry
+main:IsMUA	not_forall_isRegularMUA	w2	Plane/CoverExamples.lean:2099	theorem	hyp	
+main:IsMUA	IsMUA.interior_union_unitShadow	w2	Plane/MaximalCover.lean:22	theorem	hyp	
+main:IsMUA	exists_isMUA_ae_le	w2	Plane/Cover.lean:350	theorem	concl	
+main:IsMUA	disc7_isMUA	w2	Plane/CoverExamples.lean:1014	theorem	concl	
+main:IsMUA	not_forall_fix_converse	w2	Plane/CoverExamples.lean:2116	theorem	concl	
+main:IsMUA	isMaximalCover_iff	w2	Plane/MaximalCover.lean:166	theorem	concl	
+main:IsMUA	isMUA_iff_ae_eq	main	Plane/UnitAvoiding.lean:170	theorem	concl	
+main:IsMUA	isMUA_iff_ae_phi_pos	main	Plane/UnitAvoiding.lean:79	theorem	concl	
+main:IsPlaneMap	SectorsAt.false_of_ncard_le_two_on_arc	ww	Plane/Woodall/NoFourFive.lean:1042	theorem	REFUT	
+main:IsPlaneMap	step5_lt	ww	Plane/Woodall/Steps.lean:252	theorem	REFUT	
+main:IsPlaneMap	step6	ww	Plane/Woodall/Steps.lean:277	theorem	REFUT	
+main:IsPlaneMap	false_of_four_le_sectors	ww	Plane/Woodall/Steps.lean:471	theorem	REFUT	
+main:IsPlaneMap	aeMap6_normal	ww	Plane/Woodall/Steps.lean:537	theorem	REFUT	
+main:IsPlaneMap	aeMap6_merged	ww	Plane/Woodall/Steps.lean:558	theorem	REFUT	
+main:IsPlaneMap	aeMap6	ww	Plane/Woodall/Steps.lean:566	theorem	REFUT	
+main:IsPlaneMap	aeMap6_of_condition5	ww	Plane/Woodall/Steps.lean:572	theorem	REFUT	
+main:IsPlaneMap	woodall_thm6	ww	Plane/Woodall/Steps.lean:582	theorem	REFUT	
+main:IsPlaneMap	region_locallyFinite	ww	Plane/SVMap.lean:146	theorem	hyp	sorry
+main:IsPlaneMap	dense_iUnion_region	ww	Plane/SVMap.lean:151	theorem	hyp	sorry
+main:IsPlaneMap	toAeProperRegions	ww	Plane/SVMap.lean:155	def	hyp	
+main:IsPlaneMap	ts_t	ww	Plane/SVMap.lean:163	theorem	hyp	sorry
+main:IsPlaneMap	ts_t_trichromatic	ww	Plane/SVMap.lean:175	theorem	hyp	sorry
+main:IsPlaneMap	ts_t_degree_three	ww	Plane/SVMap.lean:181	theorem	hyp	sorry
+main:IsPlaneMap	region_locallyFinite	w4	Plane/SVMap.lean:298	theorem	hyp	
+main:IsPlaneMap	dense_iUnion_region	w4	Plane/SVMap.lean:316	theorem	hyp	
+main:IsPlaneMap	toAeProperRegions	w4	Plane/SVMap.lean:328	def	hyp	
+main:IsPlaneMap	ts_t	w4	Plane/SVMap.lean:336	theorem	hyp	
+main:IsPlaneMap	ts_t_trichromatic	w4	Plane/SVMap.lean:348	theorem	hyp	
+main:IsPlaneMap	ts_t_degree_three	w4	Plane/SVMap.lean:357	theorem	hyp	
+main:IsPlaneMap	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+main:IsPlaneMap	stuck_chain	w4	Plane/ValidMap/Contact.lean:757	theorem	hyp	sorry
+main:IsPlaneMap	subset_closure_of_subset_shadow	ww	Plane/Woodall/Collar.lean:924	theorem	hyp	
+main:IsPlaneMap	recolour_isPlaneMap	ww	Plane/Woodall/Merge.lean:112	theorem	hyp	
+main:IsPlaneMap	exists_merge_at	ww	Plane/Woodall/Merge.lean:247	theorem	hyp	sorry
+main:IsPlaneMap	exists_woodallMerged	ww	Plane/Woodall/Merge.lean:257	theorem	hyp	sorry
+main:IsPlaneMap	SectorsAt.exists_parabola_region	ww	Plane/Woodall/NoFourFive.lean:1151	theorem	hyp	
+main:IsPlaneMap	SectorsAt.exists_normal_collarAt	ww	Plane/Woodall/NoFourFive.lean:1313	theorem	hyp	
+main:IsPlaneMap	SectorsAt.exists_two_absent	ww	Plane/Woodall/NoFourFive.lean:1353	theorem	hyp	
+main:IsPlaneMap	exists_mem_interiorPts_of_isOpen	ww	Plane/Woodall/NoFourFive.lean:614	theorem	hyp	
+main:IsPlaneMap	exists_side_colours_of_not_crossesAt	ww	Plane/Woodall/NoFourFive.lean:781	theorem	hyp	
+main:IsPlaneMap	mem_closure_inside_of_colour	ww	Plane/Woodall/NoFourFive.lean:888	theorem	hyp	
+main:IsPlaneMap	exists_inside_colour	ww	Plane/Woodall/NoFourFive.lean:901	theorem	hyp	
+main:IsPlaneMap	exists_closure_colour_of_arc	ww	Plane/Woodall/NoFourFive.lean:924	theorem	hyp	
+main:IsPlaneMap	collarAt_closure_of_forall_shadow	ww	Plane/Woodall/Steps.lean:200	theorem	hyp	
+main:IsPlaneMap	NiceAt.normal	ww	Plane/Woodall/Steps.lean:444	theorem	hyp	
+main:IsPlaneMap	sevenBrickMap_isPlaneMap	ww	Plane/SVMap.lean:223	theorem	concl	
+main:IsPlaneMap	sevenBrickMap_isPlaneMap	w4	Plane/SVMap.lean:564	theorem	concl	
+main:IsQArc	qfree4	main	Plane/RingGerm.lean:861	theorem	hyp	
+main:IsQArc	qfree4	w3b	Plane/RingGerm.lean:861	theorem	hyp	
+main:IsQArc	flankQ_upper	w4	Plane/ValidMap/UnitArc.lean:897	theorem	hyp	sorry
+main:IsQArc	flankQ_lower	w4	Plane/ValidMap/UnitArc.lean:915	theorem	hyp	sorry
+main:IsQArc	quadRing_isQArc	main	Plane/LocalMapExamples.lean:479	theorem	concl	
+main:IsQArc	sixQ_isQArc	main	Plane/RingGerm.lean:1125	theorem	concl	
+main:IsQArc	sixQ_isQArc	w3b	Plane/RingGerm.lean:1125	theorem	concl	
+main:IsQArc	sixFrag_isQArc	main	Plane/SixFragment.lean:2107	theorem	concl	
+main:IsRingArc	sixQ_sides	main	Plane/RingGerm.lean:1119	theorem	hyp	
+main:IsRingArc	sixQ_sides	w3b	Plane/RingGerm.lean:1119	theorem	hyp	
+main:IsRingArc	sixQ_isQArc	main	Plane/RingGerm.lean:1125	theorem	hyp	
+main:IsRingArc	sixQ_isQArc	w3b	Plane/RingGerm.lean:1125	theorem	hyp	
+main:IsRingArc	IsRingArc.ringArc_subset_closure	main	Plane/RingGerm.lean:1218	theorem	hyp	
+main:IsRingArc	IsRingArc.ringArc_subset_closure	w3b	Plane/RingGerm.lean:1218	theorem	hyp	
+main:IsRingArc	IsRingArc.eq_of_mem_closure	main	Plane/RingGerm.lean:1239	theorem	hyp	
+main:IsRingArc	IsRingArc.eq_of_mem_closure	w3b	Plane/RingGerm.lean:1239	theorem	hyp	
+main:IsRingArc	IsRingArc.radial_inner	main	Plane/RingGerm.lean:2117	theorem	hyp	
+main:IsRingArc	IsRingArc.radial_inner	w3b	Plane/RingGerm.lean:2117	theorem	hyp	
+main:IsRingArc	IsRingArc.radial_outer	main	Plane/RingGerm.lean:2134	theorem	hyp	
+main:IsRingArc	IsRingArc.radial_outer	w3b	Plane/RingGerm.lean:2134	theorem	hyp	
+main:IsRingArc	ringArc_cone_inner	main	Plane/RingGerm.lean:2185	theorem	hyp	
+main:IsRingArc	ringArc_cone_inner	w3b	Plane/RingGerm.lean:2185	theorem	hyp	
+main:IsRingArc	ringArc_cone_outer	main	Plane/RingGerm.lean:2194	theorem	hyp	
+main:IsRingArc	ringArc_cone_outer	w3b	Plane/RingGerm.lean:2194	theorem	hyp	
+main:IsRingArc	ringArc_sideCone_inner	main	Plane/RingGerm.lean:2208	theorem	hyp	
+main:IsRingArc	ringArc_sideCone_inner	w3b	Plane/RingGerm.lean:2208	theorem	hyp	
+main:IsRingArc	ringArc_sideCone_outer	main	Plane/RingGerm.lean:2216	theorem	hyp	
+main:IsRingArc	ringArc_sideCone_outer	w3b	Plane/RingGerm.lean:2216	theorem	hyp	
+main:IsRingArc	ringArc_sideCone_other	main	Plane/RingGerm.lean:2226	theorem	hyp	
+main:IsRingArc	ringArc_sideCone_other	w3b	Plane/RingGerm.lean:2226	theorem	hyp	
+main:IsRingArc	four_of_bothKind	main	Plane/RingGerm.lean:2305	theorem	hyp	
+main:IsRingArc	four_of_bothKind	w3b	Plane/RingGerm.lean:2305	theorem	hyp	
+main:IsRingArc	four_of_bothKind_simple	main	Plane/RingGerm.lean:2383	theorem	hyp	
+main:IsRingArc	four_of_bothKind_simple	w3b	Plane/RingGerm.lean:2386	theorem	hyp	
+main:IsRingArc	IsRingArc.not_mem_closure_third	main	Plane/RingGerm.lean:659	theorem	hyp	
+main:IsRingArc	IsRingArc.not_mem_closure_third	w3b	Plane/RingGerm.lean:659	theorem	hyp	
+main:IsRingArc	sixFrag_isQArc	main	Plane/SixFragment.lean:2107	theorem	hyp	
+main:IsRingArc	lock	w4	Plane/ValidMap/UnitArc.lean:140	theorem	hyp	sorry
+main:IsRingArc	n2_sign	w4	Plane/ValidMap/UnitArc.lean:148	theorem	hyp	
+main:IsRingArc	l60_le	w4	Plane/ValidMap/UnitArc.lean:178	theorem	hyp	sorry
+main:IsRingArc	u1_shadow	w4	Plane/ValidMap/UnitArc.lean:194	theorem	hyp	sorry
+main:IsRingArc	l60_eq_inner	w4	Plane/ValidMap/UnitArc.lean:208	theorem	hyp	sorry
+main:IsRingArc	l60_eq_outer	w4	Plane/ValidMap/UnitArc.lean:215	theorem	hyp	sorry
+main:IsRingArc	l60_eq_corners	w4	Plane/ValidMap/UnitArc.lean:223	theorem	hyp	sorry
+main:IsRingArc	l60_eq_third	w4	Plane/ValidMap/UnitArc.lean:234	theorem	hyp	
+main:IsRingArc	bend_toward	w4	Plane/ValidMap/UnitArc.lean:334	theorem	hyp	sorry
+main:IsRingArc	bend_away	w4	Plane/ValidMap/UnitArc.lean:347	theorem	hyp	sorry
+main:IsRingArc	bend_away_whole	w4	Plane/ValidMap/UnitArc.lean:359	theorem	hyp	sorry
+main:IsRingArc	flankQ_upper	w4	Plane/ValidMap/UnitArc.lean:897	theorem	hyp	sorry
+main:IsRingArc	flankQ_lower	w4	Plane/ValidMap/UnitArc.lean:915	theorem	hyp	sorry
+main:IsRingArc	halfPlane2_not_isRingArc	main	Plane/LocalMapExamples.lean:188	theorem	NEG	
+main:IsRingArc	quadRing_isRingArc	main	Plane/LocalMapExamples.lean:392	theorem	concl	
+main:IsRingArc	germ_dichotomy	main	Plane/LocalStructure.lean:2313	theorem	concl	
+main:IsRingArc	germ_dichotomy	w3b	Plane/LocalStructure.lean:2319	theorem	concl	
+main:IsRingArc	sixQ_inhabited	main	Plane/RingGerm.lean:1133	theorem	concl	
+main:IsRingArc	sixQ_inhabited	w3b	Plane/RingGerm.lean:1133	theorem	concl	
+main:IsRingArc	sixFrag_isRingArc	main	Plane/SixFragment.lean:2115	theorem	concl	
+main:IsRingArc	l60_real	w4	Plane/ValidMap/UnitArc.lean:293	theorem	concl	sorry
+main:IsRingArc	iso	w4	Plane/ValidMap/UnitArc.lean:544	theorem	concl	
+main:IsSwap	hbig_of_noSwap	main	Plane/RingBand.lean:800	theorem	hyp	
+main:IsSwap	ringband_iv	main	Plane/RingBand.lean:936	theorem	hyp	
+main:IsSwap	exists_swap_of_abs_W_le_one	main	Plane/RingBand.lean:1065	theorem	concl	
+main:IsSwap	exists_swap_of_ring	main	Plane/RingBand.lean:1182	theorem	concl	
+main:IsTile	GoodAt.not_tile_subset_ball	main	Plane/LocalStructure.lean:1746	theorem	REFUT	
+main:IsTile	GoodAt.not_tile_subset_ball	w3b	Plane/LocalStructure.lean:1752	theorem	REFUT	
+main:IsTile	coneAt_interiors_disjoint	main	Plane/LocalStructure.lean:2859	theorem	REFUT	
+main:IsTile	coneAt_interiors_disjoint	w3b	Plane/LocalStructure.lean:2865	theorem	REFUT	
+main:IsTile	IsTile.subset_interiorPts	main	Plane/LocalMap.lean:194	theorem	hyp	
+main:IsTile	IsTile.isOpen	main	Plane/LocalMap.lean:199	theorem	hyp	
+main:IsTile	IsTile.isPreconnected	main	Plane/LocalMap.lean:204	theorem	hyp	
+main:IsTile	IsTile.nonempty	main	Plane/LocalMap.lean:209	theorem	hyp	
+main:IsTile	IsTile.col_eq	main	Plane/LocalMap.lean:214	theorem	hyp	
+main:IsTile	IsTile.tileOf	main	Plane/LocalMap.lean:228	theorem	hyp	
+main:IsTile	IsTile.subset_of_preconnected	main	Plane/LocalStructure.lean:1705	theorem	hyp	
+main:IsTile	IsTile.subset_of_preconnected	w3b	Plane/LocalStructure.lean:1711	theorem	hyp	
+main:IsTile	Simple.coneAt_eq_angleIcc	main	Plane/LocalStructure.lean:2457	theorem	hyp	
+main:IsTile	Simple.coneAt_eq_angleIcc	w3b	Plane/LocalStructure.lean:2463	theorem	hyp	
+main:IsTile	exists_initialPiece_of_cone	main	Plane/LocalStructure.lean:3388	theorem	hyp	
+main:IsTile	exists_initialPiece_of_cone	w3b	Plane/LocalStructure.lean:3394	theorem	hyp	
+main:IsTile	IsTile.eq_of_mem	w3b	Plane/LocalStructure.lean:4768	theorem	hyp	
+main:IsTile	IsSectorChart.exists_tile_inter_ball	w3b	Plane/LocalStructure.lean:4794	theorem	hyp	
+main:IsTile	Simple.coneAt_eq_angleIcc_sep	w3b	Plane/LocalStructure.lean:4841	theorem	hyp	
+main:IsTile	cone_region_tile	main	Plane/RingGerm.lean:2264	theorem	hyp	
+main:IsTile	cone_region_tile	w3b	Plane/RingGerm.lean:2264	theorem	hyp	
+main:IsTile	four_of_bothKind	main	Plane/RingGerm.lean:2305	theorem	hyp	
+main:IsTile	four_of_bothKind	w3b	Plane/RingGerm.lean:2305	theorem	hyp	
+main:IsTile	four_of_bothKind_simple	main	Plane/RingGerm.lean:2383	theorem	hyp	
+main:IsTile	flank_cone	main	Plane/RingGerm.lean:2468	theorem	hyp	
+main:IsTile	flank_edge_exists	main	Plane/RingGerm.lean:2531	theorem	hyp	
+main:IsTile	flank_cone	w3b	Plane/RingGerm.lean:2579	theorem	hyp	
+main:IsTile	flank_edge_exists	w3b	Plane/RingGerm.lean:2642	theorem	hyp	
+main:IsTile	flank	main	Plane/RingGerm.lean:2735	theorem	hyp	
+main:IsTile	flank	w3b	Plane/RingGerm.lean:2846	theorem	hyp	
+main:IsTile	IsTile.unitNear_self	main	Plane/Tiles.lean:125	theorem	hyp	
+main:IsTile	IsTile.dist_le_one_of_mem_closure	main	Plane/Tiles.lean:129	theorem	hyp	
+main:IsTile	isTile_wholeRestrict_of_mem_closure	main	Plane/Tiles.lean:328	theorem	hyp	
+main:IsTile	IsTile.subset_ball	main	Plane/Tiles.lean:65	theorem	hyp	
+main:IsTile	IsTile.closure_subset_closedBall	main	Plane/Tiles.lean:82	theorem	hyp	
+main:IsTile	IsTile.dist_lt_one	main	Plane/Tiles.lean:88	theorem	hyp	
+main:IsTile	const_ball_isTile_iff	main	Plane/LocalMapExamples.lean:561	theorem	concl	
+main:IsTile	mem_closure_tile	main	Plane/LocalStructure.lean:1596	theorem	concl	
+main:IsTile	mem_closure_tile	w3b	Plane/LocalStructure.lean:1602	theorem	concl	
+main:IsTile	GoodAt.finite_tiles_sphere	main	Plane/LocalStructure.lean:1859	theorem	concl	
+main:IsTile	GoodAt.finite_tiles_sphere	w3b	Plane/LocalStructure.lean:1865	theorem	concl	
+main:IsTile	finite_tiles_near	main	Plane/LocalStructure.lean:1958	theorem	concl	
+main:IsTile	finite_tiles_near	w3b	Plane/LocalStructure.lean:1964	theorem	concl	
+main:IsTile	wholeRestrict_interiorPts	main	Plane/Tiles.lean:251	theorem	concl	
+main:IsTile	isTile_wholeRestrict_iff	main	Plane/Tiles.lean:277	theorem	concl	
+main:IsTile	exists_tile_cone_dot_neg	w4	Plane/ValidMap/UnitArc.lean:122	theorem	concl	
+main:IsTile	l60_eq_third	w4	Plane/ValidMap/UnitArc.lean:234	theorem	concl	
+main:LeftVal	LeftVal.unique	main	Plane/RingBand.lean:232	theorem	hyp	
+main:LeftVal	jump_ne_of_mem	main	Plane/RingBand.lean:870	theorem	hyp	
+main:LeftVal	inv_of_J_eq	main	Plane/RingBand.lean:884	theorem	hyp	
+main:LeftVal	Sides.vals	main	Plane/RingBand.lean:221	theorem	concl	
+main:LeftVal	ringband_iv	main	Plane/RingBand.lean:936	theorem	concl	
+main:Lift	exists_swap_of_ring	main	Plane/RingBand.lean:1182	theorem	hyp	
+main:Lift	Lift.D_eq_D0	main	Plane/RingBand.lean:344	theorem	hyp	
+main:Lift	arcsLift	main	Plane/CircleColouring.lean:250	def	concl	
+main:Lift	exists_lift	main	Plane/RingBand.lean:517	theorem	concl	
+main:NonSiamese	four_of_bothKind_simple	main	Plane/RingGerm.lean:2383	theorem	hyp	
+main:NonSiamese	four_of_bothKind_simple	w3b	Plane/RingGerm.lean:2386	theorem	hyp	
+main:NonSiamese	NonSiamese.eq_of_unitNear	main	Plane/Tiles.lean:170	theorem	hyp	
+main:NonSiamese	NonSiamese.wholeRestrict	main	Plane/Tiles.lean:335	theorem	hyp	
+main:NonSiamese		main	Plane/ArcMap.lean:328	example	concl	
+main:NonSiamese		main	Plane/ArcMap.lean:341	example	NEG	
+main:NonSiamese	sixFrag_nonSiamese	main	Plane/SixFragment.lean:1908	theorem	concl	
+main:Nondegenerate	Arc.curveData_ne	main	Plane/LocalStructure.lean:1174	theorem	hyp	
+main:Nondegenerate	Arc.curveData_ne	w3b	Plane/LocalStructure.lean:1180	theorem	hyp	
+main:Nondegenerate	countable_tang_dirs	main	Plane/LocalStructure.lean:2823	theorem	hyp	
+main:Nondegenerate	countable_tang_dirs	w3b	Plane/LocalStructure.lean:2829	theorem	hyp	
+main:Nondegenerate	Arc.exists_initialPiece_of_approach	main	Plane/LocalStructure.lean:3233	theorem	hyp	
+main:Nondegenerate	Arc.exists_initialPiece_of_approach	w3b	Plane/LocalStructure.lean:3239	theorem	hyp	
+main:Nondegenerate	Arc.eventually_mem_carrier	w3b	Plane/LocalStructure.lean:4313	theorem	hyp	
+main:Nondegenerate	Arc.exists_near	w3b	Plane/LocalStructure.lean:4401	theorem	hyp	
+main:Nondegenerate	Arc.branch_mem_of_mem	w3b	Plane/LocalStructure.lean:4443	theorem	hyp	
+main:Nondegenerate	Arc.finite_inter_sphere_or_eq_circ	main	Plane/LocalStructure.lean:451	theorem	hyp	
+main:Nondegenerate	Arc.finite_inter_sphere_or_eq_circ	w3b	Plane/LocalStructure.lean:457	theorem	hyp	
+main:Nondegenerate	recolour	ww	Plane/Woodall/Merge.lean:75	def	hyp	
+main:Nondegenerate	Arc.finite_inter_parabola	ww	Plane/Woodall/NoFourFive.lean:453	theorem	hyp	
+main:Nondegenerate	sevenBrickArcs_nondegenerate	ww	Plane/SVMap.lean:199	theorem	concl	sorry
+main:Nondegenerate	sevenBrickArcs_nondegenerate	w4	Plane/SVMap.lean:378	theorem	concl	
+main:Nondegenerate	sixArcs_nondegenerate	main	Plane/SixFragment.lean:58	theorem	concl	
+main:Nondegenerate	bowtieArcs_nondegenerate	w4	Plane/ValidMap/BaseSteps.lean:253	theorem	concl	
+main:Nondegenerate	l60Arcs_nondegenerate	w4	Plane/ValidMap/UnitArc.lean:270	theorem	concl	
+main:Nondegenerate	wedgeArcs_nondegenerate	ww	Plane/Woodall/Merge.lean:57	theorem	concl	sorry
+main:OnQArc	ringQPrimeS	main	Plane/RingGerm.lean:1907	theorem	hyp	
+main:OnQArc	ringQPrimeS	w3b	Plane/RingGerm.lean:1907	theorem	hyp	
+main:OnQArc	carries_absent	main	Plane/RingGerm.lean:688	theorem	hyp	
+main:OnQArc	carries_absent	w3b	Plane/RingGerm.lean:688	theorem	hyp	
+main:OnQArc	qOpen_of_regular	main	Plane/RingGerm.lean:946	theorem	hyp	
+main:OnQArc	qOpen_of_regular	w3b	Plane/RingGerm.lean:946	theorem	hyp	
+main:OnQArc		main	Plane/LocalMapExamples.lean:515	example	concl	
+main:OnQArc	fiveRing_length	main	Plane/RingGerm.lean:1045	theorem	concl	
+main:OnQArc	fiveRing_length	w3b	Plane/RingGerm.lean:1045	theorem	concl	
+main:OnQArc	onQArc_of_germOnQ	main	Plane/RingGerm.lean:513	theorem	concl	
+main:OnQArc	onQArc_of_germOnQ	w3b	Plane/RingGerm.lean:513	theorem	concl	
+main:OnQArc	fiveRing_finite_off_Q	main	Plane/RingGerm.lean:894	theorem	NEG	
+main:OnQArc	fiveRing_finite_off_Q	w3b	Plane/RingGerm.lean:894	theorem	NEG	
+main:OnQArc	qOpen_subset	main	Plane/RingGerm.lean:926	theorem	concl	
+main:OnQArc	qOpen_subset	w3b	Plane/RingGerm.lean:926	theorem	concl	
+main:OnRingArc	nb4p	w4	Plane/ValidMap/UnitArc.lean:1037	theorem	REFUT	sorry
+main:OnRingArc	ring_finite_S	main	Plane/RingBand.lean:1119	theorem	hyp	
+main:OnRingArc	ringCircleColouring	main	Plane/RingBand.lean:1170	def	hyp	
+main:OnRingArc	exists_swap_of_ring	main	Plane/RingBand.lean:1182	theorem	hyp	
+main:OnRingArc	touchW	main	Plane/RingGerm.lean:1356	theorem	hyp	
+main:OnRingArc	touchW	w3b	Plane/RingGerm.lean:1356	theorem	hyp	
+main:OnRingArc		main	Plane/LocalMapExamples.lean:225	example	NEG	
+main:OnRingArc		main	Plane/LocalMapExamples.lean:515	example	concl	
+main:OnRingArc	finite_ringΓ_off_ringArc	main	Plane/LocalStructure.lean:1386	theorem	concl	
+main:OnRingArc	finite_ringΓ_off_ringArc	w3b	Plane/LocalStructure.lean:1392	theorem	concl	
+main:OnRingArc	finite_ringD_off_ringArc	main	Plane/RingGerm.lean:363	theorem	concl	
+main:OnRingArc	finite_ringD_off_ringArc	w3b	Plane/RingGerm.lean:363	theorem	concl	
+main:OnRingArc	a4six	w4	Plane/ValidMap/UnitArc.lean:1026	theorem	concl	sorry
+main:OnRingArc	bend_toward	w4	Plane/ValidMap/UnitArc.lean:334	theorem	NEG	sorry
+main:OnRingArc	bend_away	w4	Plane/ValidMap/UnitArc.lean:347	theorem	concl	sorry
+main:OnRingArc	bend_away_whole	w4	Plane/ValidMap/UnitArc.lean:359	theorem	NEG	sorry
+main:PairPos	ringband_vi_noJump	main	Plane/RingBand.lean:1015	theorem	hyp	
+main:PairPos	m_eq_near	main	Plane/RingBand.lean:657	theorem	hyp	
+main:PairPos	ringband_iii'	main	Plane/RingBand.lean:923	theorem	hyp	
+main:PairPos	ringband_iii	main	Plane/RingBand.lean:929	theorem	hyp	
+main:Rainbow	door_cell	main	Topology/SpernerGrid.lean:68	theorem	hyp	
+main:Rainbow	Rainbow.exhaust	main	Topology/SpernerGrid.lean:89	theorem	hyp	
+main:Rainbow		main	Topology/SpernerGrid.lean:178	example	NEG	
+main:Rainbow		main	Topology/SpernerGrid.lean:39	instance	concl	
+main:RainbowCell	rowDoors_add_rowDoors	main	Topology/SpernerGrid.lean:106	theorem	hyp	
+main:RainbowCell	rowDoors_succ_eq	main	Topology/SpernerGrid.lean:146	theorem	hyp	
+main:RainbowCell	exists_rainbowCell	main	Topology/SpernerGrid.lean:157	theorem	concl	
+main:RainbowCell		main	Topology/SpernerGrid.lean:190	example	concl	
+main:RainbowCell		main	Topology/SpernerGrid.lean:48	instance	concl	
+main:RegularAt	carries_absent	main	Plane/RingGerm.lean:688	theorem	hyp	
+main:RegularAt	carries_absent	w3b	Plane/RingGerm.lean:688	theorem	hyp	
+main:RegularAt	qOpen_of_regular	main	Plane/RingGerm.lean:946	theorem	hyp	
+main:RegularAt	qOpen_of_regular	w3b	Plane/RingGerm.lean:946	theorem	hyp	
+main:RegularAt	isOpen_regularAt	main	Plane/RingGerm.lean:755	theorem	concl	
+main:RegularAt	isOpen_regularAt	w3b	Plane/RingGerm.lean:755	theorem	concl	
+main:RegularAt	exists_regular_germ	main	Plane/RingGerm.lean:773	theorem	concl	
+main:RegularAt	exists_regular_germ	w3b	Plane/RingGerm.lean:773	theorem	concl	
+main:RegularAt	finite_not_regular	main	Plane/RingGerm.lean:807	theorem	NEG	
+main:RegularAt	finite_not_regular	w3b	Plane/RingGerm.lean:807	theorem	NEG	
+main:RegularAt	exists_regular_pair	main	Plane/RingGerm.lean:846	theorem	concl	
+main:RegularAt	exists_regular_pair	w3b	Plane/RingGerm.lean:846	theorem	concl	
+main:RightVal	RightVal.unique	main	Plane/RingBand.lean:236	theorem	hyp	
+main:RightVal	jump_ne_of_mem	main	Plane/RingBand.lean:870	theorem	hyp	
+main:RightVal	inv_of_J_eq	main	Plane/RingBand.lean:884	theorem	hyp	
+main:RightVal	Sides.vals	main	Plane/RingBand.lean:221	theorem	concl	
+main:RightVal	ringband_iv	main	Plane/RingBand.lean:936	theorem	concl	
+main:SaturatedAt	echo	main	Plane/RingGerm.lean:1583	theorem	hyp	
+main:SaturatedAt	echo	w3b	Plane/RingGerm.lean:1583	theorem	hyp	
+main:SaturatedAt		main	Plane/LocalMapExamples.lean:535	example	concl	
+main:Side	Side.sign	main	Plane/LocalMap.lean:105	def	hyp	
+main:Side	germ	main	Plane/LocalMap.lean:110	def	hyp	
+main:Side	GermIn	main	Plane/LocalMap.lean:114	def	hyp	
+main:Side	germ_mono	main	Plane/LocalMap.lean:117	theorem	hyp	
+main:Side	GermIn.mono	main	Plane/LocalMap.lean:121	theorem	hyp	
+main:Side	GermIn.inter	main	Plane/LocalMap.lean:127	theorem	hyp	
+main:Side	GermOnQ	main	Plane/LocalMap.lean:268	def	hyp	
+main:Side	germ_dichotomy	main	Plane/LocalStructure.lean:2313	theorem	hyp	
+main:Side	germ_dichotomy	w3b	Plane/LocalStructure.lean:2319	theorem	hyp	
+main:Side	dist_ringPt_side_le	main	Plane/LocalStructure.lean:660	theorem	hyp	
+main:Side	dist_ringPt_side_le	w3b	Plane/LocalStructure.lean:666	theorem	hyp	
+main:Side	dist_lt_of_mem_germ	main	Plane/LocalStructure.lean:670	theorem	hyp	
+main:Side	dist_lt_of_mem_germ	w3b	Plane/LocalStructure.lean:676	theorem	hyp	
+main:Side	ringPt_notMem_germ	main	Plane/LocalStructure.lean:682	theorem	hyp	
+main:Side	ringPt_notMem_germ	w3b	Plane/LocalStructure.lean:688	theorem	hyp	
+main:Side	isPreconnected_germ	main	Plane/LocalStructure.lean:694	theorem	hyp	
+main:Side	sideInterval	main	Plane/LocalStructure.lean:699	theorem	hyp	
+main:Side	isPreconnected_germ	w3b	Plane/LocalStructure.lean:700	theorem	hyp	
+main:Side	sideInterval	w3b	Plane/LocalStructure.lean:705	theorem	hyp	
+main:Side	exists_germ_subset_ringArc	main	Plane/LocalStructure.lean:716	theorem	hyp	
+main:Side	exists_germ_subset_ringArc	w3b	Plane/LocalStructure.lean:722	theorem	hyp	
+main:Side	exists_germ_interior	main	Plane/RingGerm.lean:1189	theorem	hyp	
+main:Side	exists_germ_interior	w3b	Plane/RingGerm.lean:1189	theorem	hyp	
+main:Side	dist_ringPt_germ_le	main	Plane/RingGerm.lean:121	theorem	hyp	
+main:Side	dist_ringPt_germ_le	w3b	Plane/RingGerm.lean:121	theorem	hyp	
+main:Side	germ_absent_class	main	Plane/RingGerm.lean:1289	theorem	hyp	
+main:Side	germ_absent_class	w3b	Plane/RingGerm.lean:1289	theorem	hyp	
+main:Side	mem_ringArc_of_germIn	main	Plane/RingGerm.lean:1337	theorem	hyp	
+main:Side	mem_ringArc_of_germIn	w3b	Plane/RingGerm.lean:1337	theorem	hyp	
+main:Side	Valid.cone_re_nonneg_of_germ	main	Plane/RingGerm.lean:134	theorem	hyp	
+main:Side	Valid.cone_re_nonneg_of_germ	w3b	Plane/RingGerm.lean:134	theorem	hyp	
+main:Side	Valid.cone_re_nonpos_of_germ	main	Plane/RingGerm.lean:195	theorem	hyp	
+main:Side	Valid.cone_re_nonpos_of_germ	w3b	Plane/RingGerm.lean:195	theorem	hyp	
+main:Side	not_germIn_closure_rotate	main	Plane/RingGerm.lean:289	theorem	hyp	
+main:Side	not_germIn_closure_rotate	w3b	Plane/RingGerm.lean:289	theorem	hyp	
+main:Side	GermIn.exists_mem_sphere	main	Plane/RingGerm.lean:456	theorem	hyp	
+main:Side	GermIn.exists_mem_sphere	w3b	Plane/RingGerm.lean:456	theorem	hyp	
+main:Side	ringPt_mem_closure_germ	main	Plane/RingGerm.lean:501	theorem	hyp	
+main:Side	ringPt_mem_closure_germ	w3b	Plane/RingGerm.lean:501	theorem	hyp	
+main:Side	onQArc_of_germOnQ	main	Plane/RingGerm.lean:513	theorem	hyp	
+main:Side	onQArc_of_germOnQ	w3b	Plane/RingGerm.lean:513	theorem	hyp	
+main:Side	isPreconnected_germ	main	Plane/RingGerm.lean:69	theorem	hyp	
+main:Side	isPreconnected_germ	w3b	Plane/RingGerm.lean:69	theorem	hyp	
+main:Side	exists_regular_germ	main	Plane/RingGerm.lean:773	theorem	hyp	
+main:Side	exists_regular_germ	w3b	Plane/RingGerm.lean:773	theorem	hyp	
+main:Sides	Sides.unique	main	Plane/RingBand.lean:216	theorem	hyp	
+main:Sides	Sides.vals	main	Plane/RingBand.lean:221	theorem	hyp	
+main:Sides	Sides.periodic	main	Plane/RingBand.lean:268	theorem	hyp	
+main:Sides	D0_near	main	Plane/RingBand.lean:710	theorem	hyp	
+main:Sides	m0_const	main	Plane/RingBand.lean:735	theorem	hyp	
+main:Sides	exists_T0_left	main	Plane/RingBand.lean:776	theorem	hyp	
+main:Sides	exists_T0_right	main	Plane/RingBand.lean:783	theorem	hyp	
+main:Sides	hbig_of_noPair	main	Plane/RingBand.lean:790	theorem	hyp	
+main:Sides	hbig_of_noSwap	main	Plane/RingBand.lean:800	theorem	hyp	
+main:Sides	J_eq_of_rho	main	Plane/RingBand.lean:826	theorem	hyp	
+main:Sides	jump_ne_of_mem	main	Plane/RingBand.lean:870	theorem	hyp	
+main:Sides	mem_of_jump_ne	main	Plane/RingBand.lean:878	theorem	hyp	
+main:Sides	inv_of_J_eq	main	Plane/RingBand.lean:884	theorem	hyp	
+main:Sides	exists_sides	main	Plane/RingBand.lean:197	theorem	concl	
+main:Simple	Simple.coneAt_eq_angleIcc	main	Plane/LocalStructure.lean:2457	theorem	hyp	
+main:Simple	Simple.coneAt_eq_angleIcc	w3b	Plane/LocalStructure.lean:2463	theorem	hyp	
+main:Simple	Simple.coneAt_eq_angleIcc_sep	w3b	Plane/LocalStructure.lean:4841	theorem	hyp	
+main:Simple	four_of_bothKind_simple	main	Plane/RingGerm.lean:2383	theorem	hyp	
+main:Simple	four_of_bothKind_simple	w3b	Plane/RingGerm.lean:2386	theorem	hyp	
+main:Simple	Simple.wholeRestrict	main	Plane/Tiles.lean:340	theorem	hyp	
+main:Simple		main	Plane/ArcMap.lean:367	example	concl	
+main:TileOf	overlap_false	main	Plane/RingGerm.lean:2280	theorem	REFUT	
+main:TileOf	overlap_false	w3b	Plane/RingGerm.lean:2280	theorem	REFUT	
+main:TileOf	TileOf.subset_region	main	Plane/LocalMap.lean:232	theorem	hyp	
+main:TileOf	mem_coloursAt_of_tileOf	main	Plane/LocalMap.lean:236	theorem	hyp	
+main:TileOf	tile_subset_closedBall_of_cone	main	Plane/RingGerm.lean:1658	theorem	hyp	
+main:TileOf	tile_subset_closedBall_of_cone	w3b	Plane/RingGerm.lean:1658	theorem	hyp	
+main:TileOf	germS_inward	main	Plane/RingGerm.lean:1712	theorem	hyp	
+main:TileOf	germS_inward	w3b	Plane/RingGerm.lean:1712	theorem	hyp	
+main:TileOf	outward_of_cone	main	Plane/RingGerm.lean:1740	theorem	hyp	
+main:TileOf	outward_of_cone	w3b	Plane/RingGerm.lean:1740	theorem	hyp	
+main:TileOf	germS_outward	main	Plane/RingGerm.lean:1821	theorem	hyp	
+main:TileOf	germS_outward	w3b	Plane/RingGerm.lean:1821	theorem	hyp	
+main:TileOf	cone_region_tile	main	Plane/RingGerm.lean:2264	theorem	hyp	
+main:TileOf	cone_region_tile	w3b	Plane/RingGerm.lean:2264	theorem	hyp	
+main:TileOf	four_of_bothKind	main	Plane/RingGerm.lean:2305	theorem	hyp	
+main:TileOf	four_of_bothKind	w3b	Plane/RingGerm.lean:2305	theorem	hyp	
+main:TileOf	unitNear_of_mem_closure	main	Plane/Tiles.lean:156	theorem	hyp	
+main:TileOf	unitFar_of_mem_closure	main	Plane/Tiles.lean:163	theorem	hyp	
+main:TileOf	NonSiamese.eq_of_unitNear	main	Plane/Tiles.lean:170	theorem	hyp	
+main:TileOf	unitNear_iff_of_mem_closure_inter	main	Plane/Tiles.lean:179	theorem	hyp	
+main:TileOf	cluster	main	Plane/Tiles.lean:198	theorem	hyp	
+main:TileOf	not_mem_closure_wholeRestrict_of_inner	main	Plane/Tiles.lean:349	theorem	hyp	
+main:TileOf	not_mem_closure_wholeRestrict_R₂	main	Plane/Tiles.lean:396	theorem	hyp	
+main:TileOf	unitNear_or_unitFar	main	Plane/Tiles.lean:97	theorem	hyp	
+main:TileOf	lock	w4	Plane/ValidMap/UnitArc.lean:140	theorem	hyp	sorry
+main:TileOf	l60_eq_inner	w4	Plane/ValidMap/UnitArc.lean:208	theorem	hyp	sorry
+main:TileOf	l60_eq_outer	w4	Plane/ValidMap/UnitArc.lean:215	theorem	hyp	sorry
+main:TileOf	l60_eq_corners	w4	Plane/ValidMap/UnitArc.lean:223	theorem	hyp	sorry
+main:TileOf	flank_siamese_of_inType	w4	Plane/ValidMap/UnitArc.lean:867	theorem	hyp	
+main:TileOf	flankQ_both	w4	Plane/ValidMap/UnitArc.lean:932	theorem	hyp	
+main:TileOf	IsTile.tileOf	main	Plane/LocalMap.lean:228	theorem	concl	
+main:TileOf		main	Plane/LocalMapExamples.lean:573	example	concl	
+main:TileOf	region_inter_ball_subset	main	Plane/LocalStructure.lean:1940	theorem	concl	
+main:TileOf	region_inter_ball_subset	w3b	Plane/LocalStructure.lean:1946	theorem	concl	
+main:TileOf	mem_coloursAt_iff_exists_tileOf	main	Plane/LocalStructure.lean:1982	theorem	concl	
+main:TileOf	mem_coloursAt_iff_exists_tileOf	w3b	Plane/LocalStructure.lean:1988	theorem	concl	
+main:TileOf	coneAt_region_eq_biUnion	main	Plane/LocalStructure.lean:2003	theorem	concl	
+main:TileOf	coneAt_region_eq_biUnion	w3b	Plane/LocalStructure.lean:2009	theorem	concl	
+main:TileOf	iso	w4	Plane/ValidMap/UnitArc.lean:544	theorem	concl	
+main:TileOf	flankQ_upper	w4	Plane/ValidMap/UnitArc.lean:897	theorem	concl	sorry
+main:TileOf	flankQ_lower	w4	Plane/ValidMap/UnitArc.lean:915	theorem	concl	sorry
+main:UnitFar	UnitFar.one_le_dist_of_mem_closure	main	Plane/Tiles.lean:147	theorem	hyp	
+main:UnitFar		main	Plane/LocalMapExamples.lean:84	example	concl	
+main:UnitFar	unitFar_of_mem_closure	main	Plane/Tiles.lean:163	theorem	concl	
+main:UnitFar	unitNear_or_unitFar	main	Plane/Tiles.lean:97	theorem	concl	
+main:UnitNear	UnitNear.dist_le_of_mem_closure	main	Plane/Tiles.lean:138	theorem	hyp	
+main:UnitNear	NonSiamese.eq_of_unitNear	main	Plane/Tiles.lean:170	theorem	hyp	
+main:UnitNear		main	Plane/LocalMapExamples.lean:77	example	concl	
+main:UnitNear	IsTile.unitNear_self	main	Plane/Tiles.lean:125	theorem	concl	
+main:UnitNear	unitNear_of_mem_closure	main	Plane/Tiles.lean:156	theorem	concl	
+main:UnitNear	unitNear_iff_of_mem_closure_inter	main	Plane/Tiles.lean:179	theorem	concl	
+main:UnitNear	unitNear_or_unitFar	main	Plane/Tiles.lean:97	theorem	concl	
+main:UnitPairsNull	dist_ne_one_of_mem_of_mem_closure	main	Plane/Closure.lean:29	theorem	hyp	
+main:UnitPairsNull	UnitPairsNull.congr_ae	w2	Plane/Cover.lean:255	theorem	hyp	
+main:UnitPairsNull	exists_isMUA_ae_le	w2	Plane/Cover.lean:350	theorem	hyp	
+main:UnitPairsNull	densityRatio_le_of_unit_dist	w2	Plane/Cover.lean:812	theorem	hyp	
+main:UnitPairsNull	essClosure_dist_ne_one_of_mem_densitySet	w2	Plane/Cover.lean:866	theorem	hyp	
+main:UnitPairsNull	not_forall_fix_converse	w2	Plane/CoverExamples.lean:2116	theorem	hyp	
+main:UnitPairsNull	dist_ne_one_of_mem_densitySet	main	Plane/DensityPoints.lean:104	theorem	hyp	
+main:UnitPairsNull	hullset	main	Plane/DensityPoints.lean:182	theorem	hyp	
+main:UnitPairsNull	hullset_of_isCompact	main	Plane/DensityPoints.lean:189	theorem	hyp	
+main:UnitPairsNull	hull2	main	Plane/DensityPoints.lean:205	theorem	hyp	
+main:UnitPairsNull	dist_ne_one_of_mem_interior_densitySet	main	Plane/DensityPoints.lean:228	theorem	hyp	
+main:UnitPairsNull	exists_mem_slice_null	main	Plane/DensityPoints.lean:45	theorem	hyp	
+main:UnitPairsNull	dist_lt_one_of_closure_inter_nonempty	main	Plane/Diameter.lean:104	theorem	hyp	
+main:UnitPairsNull	chain_step	main	Plane/Diameter.lean:40	theorem	hyp	
+main:UnitPairsNull	dist_lt_one_of_chain	main	Plane/Diameter.lean:63	theorem	hyp	
+main:UnitPairsNull	unitPairsNull_iUnion_of_monotone	w2	Plane/MaximalCover.lean:744	theorem	hyp	
+main:UnitPairsNull	exists_isMaxIn	w2	Plane/MaximalCover.lean:759	theorem	hyp	
+main:UnitPairsNull	isMaxIn_maxIn	w2	Plane/MaximalCover.lean:787	theorem	hyp	
+main:UnitPairsNull	unitPairsNull_preimage_add	w2	Plane/Slack.lean:1161	theorem	hyp	
+main:UnitPairsNull	keptAt_band	w2	Plane/Slack.lean:2090	theorem	hyp	
+main:UnitPairsNull	face	w2	Plane/Slack.lean:2122	theorem	hyp	
+main:UnitPairsNull	keptAt_band_le_half	w2	Plane/Slack.lean:821	theorem	hyp	
+main:UnitPairsNull	not_keptAt_of_half_lt	w2	Plane/Slack.lean:856	theorem	hyp	
+main:UnitPairsNull	isMUA_iff_ae_phi_pos	main	Plane/UnitAvoiding.lean:79	theorem	hyp	
+main:UnitPairsNull	UnitPairsNull.mono	main	Plane/UnitPairs.lean:59	theorem	hyp	
+main:UnitPairsNull	clear_wedge	ww	Plane/Woodall/Merge.lean:46	theorem	hyp	sorry
+main:UnitPairsNull	dist_le_one_of_subset_closure	ww	Plane/Woodall/NoFourFive.lean:48	theorem	hyp	
+main:UnitPairsNull	unitPairsNull_of_unitPair_mem	w2	Plane/CoverExamples.lean:458	theorem	concl	
+main:UnitPairsNull	unitPairsNull_of_no_unit_pair	w2	Plane/FalconerReduction.lean:593	theorem	concl	
+main:UnitPairsNull	unitPairsNull_grundyS	w2	Plane/MaximalCover.lean:810	theorem	concl	
+main:UnitPairsNull	AeColouring.exists_grundy	w2	Plane/MaximalCover.lean:903	theorem	concl	
+main:UnitPairsNull	unitPairsNull_iff_pairMass	w2	Plane/Slack.lean:120	theorem	concl	
+main:UnitPairsNull	not_unitPairsNull_of_circles_meet	w2	Plane/Slack.lean:1400	theorem	NEG	
+main:UnitPairsNull	unitPairsNull_of_bandFree	w2	Plane/Slack.lean:1903	theorem	concl	
+main:UnitPairsNull	bandNull_unitPairsNull	w2	Plane/Slack.lean:221	theorem	concl	
+main:UnitPairsNull	CPColouring.ae_unitPairsNull_of_modification	w2	Plane/Slack.lean:975	theorem	concl	sorry
+main:UnitPairsNull	Valid.unitPairsNull_region	main	Plane/Tiles.lean:41	theorem	concl	
+main:UnitPairsNull	unitPairsNull_iff_ae_phi_eq_zero	main	Plane/UnitAvoiding.lean:72	theorem	concl	
+main:UnitPairsNull	unitPairsNull_iff_ae_slice	main	Plane/UnitPairs.lean:153	theorem	concl	
+main:UnitPairsNull		main	Plane/UnitPairs.lean:172	example	concl	
+main:UnitPairsNull	unitPairsNull_of_dist_lt_one	main	Plane/UnitPairs.lean:44	theorem	concl	
+main:UnitPairsNull	not_unitPairsNull_ball_two	main	Plane/UnitPairs.lean:64	theorem	NEG	
+main:Valid	Valid.false_of_crossing	main	Plane/RingGerm.lean:49	theorem	REFUT	
+main:Valid	Valid.false_of_crossing	w3b	Plane/RingGerm.lean:49	theorem	REFUT	
+main:Valid	pair_i	w4	Plane/ValidMap/BaseSteps.lean:130	theorem	REFUT	sorry
+main:Valid	anti	w4	Plane/ValidMap/BaseSteps.lean:170	theorem	REFUT	sorry
+main:Valid	nb4p	w4	Plane/ValidMap/UnitArc.lean:1037	theorem	REFUT	sorry
+main:Valid	SectorsAt.false_of_ncard_le_two_on_arc	ww	Plane/Woodall/NoFourFive.lean:1042	theorem	REFUT	
+main:Valid	step5_lt	ww	Plane/Woodall/Steps.lean:252	theorem	REFUT	
+main:Valid	step6	ww	Plane/Woodall/Steps.lean:277	theorem	REFUT	
+main:Valid	false_of_four_le_sectors	ww	Plane/Woodall/Steps.lean:471	theorem	REFUT	
+main:Valid	aeMap6_normal	ww	Plane/Woodall/Steps.lean:537	theorem	REFUT	
+main:Valid	aeMap6_merged	ww	Plane/Woodall/Steps.lean:558	theorem	REFUT	
+main:Valid	aeMap6	ww	Plane/Woodall/Steps.lean:566	theorem	REFUT	
+main:Valid	aeMap6_of_condition5	ww	Plane/Woodall/Steps.lean:572	theorem	REFUT	
+main:Valid	ring_proper	main	Plane/RingBand.lean:1145	theorem	hyp	
+main:Valid	ringCircleColouring	main	Plane/RingBand.lean:1170	def	hyp	
+main:Valid	exists_swap_of_ring	main	Plane/RingBand.lean:1182	theorem	hyp	
+main:Valid	fiveRing_length	main	Plane/RingGerm.lean:1045	theorem	hyp	
+main:Valid	fiveRing_length	w3b	Plane/RingGerm.lean:1045	theorem	hyp	
+main:Valid	fiveRing_no_hub	main	Plane/RingGerm.lean:1102	theorem	hyp	
+main:Valid	fiveRing_no_hub	w3b	Plane/RingGerm.lean:1102	theorem	hyp	
+main:Valid	sixQ_sphere_subset_Γ	main	Plane/RingGerm.lean:1111	theorem	hyp	
+main:Valid	sixQ_sphere_subset_Γ	w3b	Plane/RingGerm.lean:1111	theorem	hyp	
+main:Valid	not_mem_closure_of_four_germs	main	Plane/RingGerm.lean:1160	theorem	hyp	
+main:Valid	not_mem_closure_of_four_germs	w3b	Plane/RingGerm.lean:1160	theorem	hyp	
+main:Valid	germ_absent_class	main	Plane/RingGerm.lean:1289	theorem	hyp	
+main:Valid	germ_absent_class	w3b	Plane/RingGerm.lean:1289	theorem	hyp	
+main:Valid	Valid.cone_re_nonneg_of_germ	main	Plane/RingGerm.lean:134	theorem	hyp	
+main:Valid	Valid.cone_re_nonneg_of_germ	w3b	Plane/RingGerm.lean:134	theorem	hyp	
+main:Valid	touchW	main	Plane/RingGerm.lean:1356	theorem	hyp	
+main:Valid	touchW	w3b	Plane/RingGerm.lean:1356	theorem	hyp	
+main:Valid	echo_unique	main	Plane/RingGerm.lean:1442	theorem	hyp	
+main:Valid	echo_unique	w3b	Plane/RingGerm.lean:1442	theorem	hyp	
+main:Valid	echo_of_mem_closure	main	Plane/RingGerm.lean:1574	theorem	hyp	
+main:Valid	echo_of_mem_closure	w3b	Plane/RingGerm.lean:1574	theorem	hyp	
+main:Valid	echo	main	Plane/RingGerm.lean:1583	theorem	hyp	
+main:Valid	echo	w3b	Plane/RingGerm.lean:1583	theorem	hyp	
+main:Valid	changePoint_germs	main	Plane/RingGerm.lean:1634	theorem	hyp	
+main:Valid	changePoint_germs	w3b	Plane/RingGerm.lean:1634	theorem	hyp	
+main:Valid	tile_subset_closedBall_of_cone	main	Plane/RingGerm.lean:1658	theorem	hyp	
+main:Valid	tile_subset_closedBall_of_cone	w3b	Plane/RingGerm.lean:1658	theorem	hyp	
+main:Valid	germS_inward	main	Plane/RingGerm.lean:1712	theorem	hyp	
+main:Valid	germS_inward	w3b	Plane/RingGerm.lean:1712	theorem	hyp	
+main:Valid	outward_of_cone	main	Plane/RingGerm.lean:1740	theorem	hyp	
+main:Valid	outward_of_cone	w3b	Plane/RingGerm.lean:1740	theorem	hyp	
+main:Valid	changePoint_germs_out	main	Plane/RingGerm.lean:1798	theorem	hyp	
+main:Valid	changePoint_germs_out	w3b	Plane/RingGerm.lean:1798	theorem	hyp	
+main:Valid	germS_outward	main	Plane/RingGerm.lean:1821	theorem	hyp	
+main:Valid	germS_outward	w3b	Plane/RingGerm.lean:1821	theorem	hyp	
+main:Valid	germS_four	main	Plane/RingGerm.lean:1849	theorem	hyp	
+main:Valid	germS_four	w3b	Plane/RingGerm.lean:1849	theorem	hyp	
+main:Valid	ringQPrimeS	main	Plane/RingGerm.lean:1907	theorem	hyp	
+main:Valid	ringQPrimeS	w3b	Plane/RingGerm.lean:1907	theorem	hyp	
+main:Valid	Valid.cos_nonneg_of_radial_inner	main	Plane/RingGerm.lean:1915	theorem	hyp	
+main:Valid	Valid.cos_nonneg_of_radial_inner	w3b	Plane/RingGerm.lean:1915	theorem	hyp	
+main:Valid	Valid.cone_re_nonpos_of_germ	main	Plane/RingGerm.lean:195	theorem	hyp	
+main:Valid	Valid.cone_re_nonpos_of_germ	w3b	Plane/RingGerm.lean:195	theorem	hyp	
+main:Valid	Valid.cos_nonpos_of_radial_outer	main	Plane/RingGerm.lean:2004	theorem	hyp	
+main:Valid	Valid.cos_nonpos_of_radial_outer	w3b	Plane/RingGerm.lean:2004	theorem	hyp	
+main:Valid	ringArc_cone_inner	main	Plane/RingGerm.lean:2185	theorem	hyp	
+main:Valid	ringArc_cone_inner	w3b	Plane/RingGerm.lean:2185	theorem	hyp	
+main:Valid	ringArc_cone_outer	main	Plane/RingGerm.lean:2194	theorem	hyp	
+main:Valid	ringArc_cone_outer	w3b	Plane/RingGerm.lean:2194	theorem	hyp	
+main:Valid	ringArc_sideCone_inner	main	Plane/RingGerm.lean:2208	theorem	hyp	
+main:Valid	ringArc_sideCone_inner	w3b	Plane/RingGerm.lean:2208	theorem	hyp	
+main:Valid	ringArc_sideCone_outer	main	Plane/RingGerm.lean:2216	theorem	hyp	
+main:Valid	ringArc_sideCone_outer	w3b	Plane/RingGerm.lean:2216	theorem	hyp	
+main:Valid	ringArc_sideCone_other	main	Plane/RingGerm.lean:2226	theorem	hyp	
+main:Valid	ringArc_sideCone_other	w3b	Plane/RingGerm.lean:2226	theorem	hyp	
+main:Valid	four_of_bothKind	main	Plane/RingGerm.lean:2305	theorem	hyp	
+main:Valid	four_of_bothKind	w3b	Plane/RingGerm.lean:2305	theorem	hyp	
+main:Valid	four_of_bothKind_simple	main	Plane/RingGerm.lean:2383	theorem	hyp	
+main:Valid	four_of_bothKind_simple	w3b	Plane/RingGerm.lean:2386	theorem	hyp	
+main:Valid	flank_cone	main	Plane/RingGerm.lean:2468	theorem	hyp	
+main:Valid	flank_edge_exists	main	Plane/RingGerm.lean:2531	theorem	hyp	
+main:Valid	flank_cone	w3b	Plane/RingGerm.lean:2579	theorem	hyp	
+main:Valid	flank_edge_exists	w3b	Plane/RingGerm.lean:2642	theorem	hyp	
+main:Valid	flank	main	Plane/RingGerm.lean:2735	theorem	hyp	
+main:Valid	flank	w3b	Plane/RingGerm.lean:2846	theorem	hyp	
+main:Valid	not_germIn_closure_rotate	main	Plane/RingGerm.lean:289	theorem	hyp	
+main:Valid	not_germIn_closure_rotate	w3b	Plane/RingGerm.lean:289	theorem	hyp	
+main:Valid	not_mem_coloursAt_of_mem_sphere	main	Plane/RingGerm.lean:325	theorem	hyp	
+main:Valid	not_mem_coloursAt_of_mem_sphere	w3b	Plane/RingGerm.lean:325	theorem	hyp	
+main:Valid	ringD_subset_Γ	main	Plane/RingGerm.lean:353	theorem	hyp	
+main:Valid	ringD_subset_Γ	w3b	Plane/RingGerm.lean:353	theorem	hyp	
+main:Valid	finite_ringD_off_ringArc	main	Plane/RingGerm.lean:363	theorem	hyp	
+main:Valid	finite_ringD_off_ringArc	w3b	Plane/RingGerm.lean:363	theorem	hyp	
+main:Valid	germR_vMinus	main	Plane/RingGerm.lean:372	theorem	hyp	
+main:Valid	germR_vMinus	w3b	Plane/RingGerm.lean:372	theorem	hyp	
+main:Valid	germR_vPlus	main	Plane/RingGerm.lean:393	theorem	hyp	
+main:Valid	germR_vPlus	w3b	Plane/RingGerm.lean:393	theorem	hyp	
+main:Valid	germR_uMinus	main	Plane/RingGerm.lean:414	theorem	hyp	
+main:Valid	germR_uMinus	w3b	Plane/RingGerm.lean:414	theorem	hyp	
+main:Valid	germR_uPlus	main	Plane/RingGerm.lean:434	theorem	hyp	
+main:Valid	germR_uPlus	w3b	Plane/RingGerm.lean:434	theorem	hyp	
+main:Valid	IsChangePoint.not_mem_coloursAt	main	Plane/RingGerm.lean:464	theorem	hyp	
+main:Valid	IsChangePoint.not_mem_coloursAt	w3b	Plane/RingGerm.lean:464	theorem	hyp	
+main:Valid	IsChangePoint.ncard_add_two_le	main	Plane/RingGerm.lean:472	theorem	hyp	
+main:Valid	IsChangePoint.ncard_add_two_le	w3b	Plane/RingGerm.lean:472	theorem	hyp	
+main:Valid	germS_absent	main	Plane/RingGerm.lean:486	theorem	hyp	
+main:Valid	germS_absent	w3b	Plane/RingGerm.lean:486	theorem	hyp	
+main:Valid	Valid.not_mem_closure_of_side	main	Plane/RingGerm.lean:556	theorem	hyp	
+main:Valid	Valid.not_mem_closure_of_side	w3b	Plane/RingGerm.lean:556	theorem	hyp	
+main:Valid	IsRingArc.not_mem_closure_third	main	Plane/RingGerm.lean:659	theorem	hyp	
+main:Valid	IsRingArc.not_mem_closure_third	w3b	Plane/RingGerm.lean:659	theorem	hyp	
+main:Valid	carries_absent	main	Plane/RingGerm.lean:688	theorem	hyp	
+main:Valid	carries_absent	w3b	Plane/RingGerm.lean:688	theorem	hyp	
+main:Valid	qfree4	main	Plane/RingGerm.lean:861	theorem	hyp	
+main:Valid	qfree4	w3b	Plane/RingGerm.lean:861	theorem	hyp	
+main:Valid	fiveRing_no_changePoint	main	Plane/RingGerm.lean:887	theorem	hyp	
+main:Valid	fiveRing_no_changePoint	w3b	Plane/RingGerm.lean:887	theorem	hyp	
+main:Valid	fiveRing_finite_off_Q	main	Plane/RingGerm.lean:894	theorem	hyp	
+main:Valid	fiveRing_finite_off_Q	w3b	Plane/RingGerm.lean:894	theorem	hyp	
+main:Valid	toAeProperRegions	ww	Plane/SVMap.lean:155	def	hyp	
+main:Valid	ts_t	ww	Plane/SVMap.lean:163	theorem	hyp	sorry
+main:Valid	ts_t_trichromatic	ww	Plane/SVMap.lean:175	theorem	hyp	sorry
+main:Valid	ts_t_degree_three	ww	Plane/SVMap.lean:181	theorem	hyp	sorry
+main:Valid	toAeProperRegions	w4	Plane/SVMap.lean:328	def	hyp	
+main:Valid	ts_t	w4	Plane/SVMap.lean:336	theorem	hyp	
+main:Valid	ts_t_trichromatic	w4	Plane/SVMap.lean:348	theorem	hyp	
+main:Valid	ts_t_degree_three	w4	Plane/SVMap.lean:357	theorem	hyp	
+main:Valid	IsTile.unitNear_self	main	Plane/Tiles.lean:125	theorem	hyp	
+main:Valid	IsTile.dist_le_one_of_mem_closure	main	Plane/Tiles.lean:129	theorem	hyp	
+main:Valid	unitNear_of_mem_closure	main	Plane/Tiles.lean:156	theorem	hyp	
+main:Valid	unitFar_of_mem_closure	main	Plane/Tiles.lean:163	theorem	hyp	
+main:Valid	unitNear_iff_of_mem_closure_inter	main	Plane/Tiles.lean:179	theorem	hyp	
+main:Valid	cluster	main	Plane/Tiles.lean:198	theorem	hyp	
+main:Valid	Valid.wholeRestrict	main	Plane/Tiles.lean:243	theorem	hyp	
+main:Valid	not_mem_closure_wholeRestrict_of_inner	main	Plane/Tiles.lean:349	theorem	hyp	
+main:Valid	not_mem_closure_wholeRestrict_R₂	main	Plane/Tiles.lean:396	theorem	hyp	
+main:Valid	Valid.unitPairsNull_region	main	Plane/Tiles.lean:41	theorem	hyp	
+main:Valid	ne1_region	main	Plane/Tiles.lean:52	theorem	hyp	
+main:Valid	Valid.dist_lt_or_gt_of_isPreconnected	main	Plane/Tiles.lean:59	theorem	hyp	
+main:Valid	IsTile.subset_ball	main	Plane/Tiles.lean:65	theorem	hyp	
+main:Valid	IsTile.closure_subset_closedBall	main	Plane/Tiles.lean:82	theorem	hyp	
+main:Valid	IsTile.dist_lt_one	main	Plane/Tiles.lean:88	theorem	hyp	
+main:Valid	unitNear_or_unitFar	main	Plane/Tiles.lean:97	theorem	hyp	
+main:Valid	pair_ii	w4	Plane/ValidMap/BaseSteps.lean:137	theorem	hyp	sorry
+main:Valid	pair_P'	w4	Plane/ValidMap/BaseSteps.lean:145	theorem	hyp	sorry
+main:Valid	fail_leavingCentre	w4	Plane/ValidMap/BaseSteps.lean:153	theorem	hyp	sorry
+main:Valid	fail_colours	w4	Plane/ValidMap/BaseSteps.lean:160	theorem	hyp	sorry
+main:Valid	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+main:Valid	Valid.of_agreesOff	w4	Plane/ValidMap/Basic.lean:246	theorem	hyp	
+main:Valid	contact_inType_or_outType	w4	Plane/ValidMap/Contact.lean:414	theorem	hyp	
+main:Valid	coneAt_subset_allowedCone	w4	Plane/ValidMap/Contact.lean:489	theorem	hyp	
+main:Valid	clear_of_subset_interior_allowedCone	w4	Plane/ValidMap/Contact.lean:525	theorem	hyp	sorry
+main:Valid	woodallCone	w4	Plane/ValidMap/Contact.lean:646	theorem	hyp	sorry
+main:Valid	woodallCone_strict	w4	Plane/ValidMap/Contact.lean:655	theorem	hyp	sorry
+main:Valid	flank_shadows	w4	Plane/ValidMap/Contact.lean:669	theorem	hyp	sorry
+main:Valid	shaveAvailable_of_not_doublyShadowed	w4	Plane/ValidMap/Contact.lean:680	theorem	hyp	sorry
+main:Valid	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	hyp	sorry
+main:Valid	exists_rayMerge	w4	Plane/ValidMap/Contact.lean:705	theorem	hyp	sorry
+main:Valid	exists_merge	w4	Plane/ValidMap/Contact.lean:721	theorem	hyp	sorry
+main:Valid	stuck_structure	w4	Plane/ValidMap/Contact.lean:737	theorem	hyp	sorry
+main:Valid	stuck_chain	w4	Plane/ValidMap/Contact.lean:757	theorem	hyp	sorry
+main:Valid	a4six	w4	Plane/ValidMap/UnitArc.lean:1026	theorem	hyp	sorry
+main:Valid	lock	w4	Plane/ValidMap/UnitArc.lean:140	theorem	hyp	sorry
+main:Valid	n2_sign	w4	Plane/ValidMap/UnitArc.lean:148	theorem	hyp	
+main:Valid	l60_le	w4	Plane/ValidMap/UnitArc.lean:178	theorem	hyp	sorry
+main:Valid	noBoth	w4	Plane/ValidMap/UnitArc.lean:183	theorem	hyp	sorry
+main:Valid	l60_eq_inner	w4	Plane/ValidMap/UnitArc.lean:208	theorem	hyp	sorry
+main:Valid	l60_eq_outer	w4	Plane/ValidMap/UnitArc.lean:215	theorem	hyp	sorry
+main:Valid	l60_eq_corners	w4	Plane/ValidMap/UnitArc.lean:223	theorem	hyp	sorry
+main:Valid	l60_eq_third	w4	Plane/ValidMap/UnitArc.lean:234	theorem	hyp	
+main:Valid	bend_toward	w4	Plane/ValidMap/UnitArc.lean:334	theorem	hyp	sorry
+main:Valid	bend_away	w4	Plane/ValidMap/UnitArc.lean:347	theorem	hyp	sorry
+main:Valid	bend_away_whole	w4	Plane/ValidMap/UnitArc.lean:359	theorem	hyp	sorry
+main:Valid	flank_siamese_of_inType	w4	Plane/ValidMap/UnitArc.lean:867	theorem	hyp	
+main:Valid	flankQ_upper	w4	Plane/ValidMap/UnitArc.lean:897	theorem	hyp	sorry
+main:Valid	flankQ_lower	w4	Plane/ValidMap/UnitArc.lean:915	theorem	hyp	sorry
+main:Valid	flankQ_both	w4	Plane/ValidMap/UnitArc.lean:932	theorem	hyp	
+main:Valid	col_not_mem_of_mem_shadow	ww	Plane/Woodall/Collar.lean:916	theorem	hyp	
+main:Valid	subset_closure_of_subset_shadow	ww	Plane/Woodall/Collar.lean:924	theorem	hyp	
+main:Valid	recolour_valid	ww	Plane/Woodall/Merge.lean:122	theorem	hyp	sorry
+main:Valid	wedgeMerge_valid	ww	Plane/Woodall/Merge.lean:150	theorem	hyp	sorry
+main:Valid	exists_merge_at	ww	Plane/Woodall/Merge.lean:247	theorem	hyp	sorry
+main:Valid	exists_woodallMerged	ww	Plane/Woodall/Merge.lean:257	theorem	hyp	sorry
+main:Valid	SectorsAt.not_mem_coloursAt_of_mem_Ioo	ww	Plane/Woodall/NoFourFive.lean:1108	theorem	hyp	
+main:Valid	SectorsAt.absent_at_normal	ww	Plane/Woodall/NoFourFive.lean:1330	theorem	hyp	
+main:Valid	SectorsAt.exists_two_absent	ww	Plane/Woodall/NoFourFive.lean:1353	theorem	hyp	
+main:Valid	not_mem_coloursAt_of_dist_eq_one	ww	Plane/Woodall/NoFourFive.lean:603	theorem	hyp	
+main:Valid	not_mem_shadow_of_mem_region	ww	Plane/Woodall/NoFourFive.lean:609	theorem	hyp	
+main:Valid	not_mem_coloursAt_of_collarAt	ww	Plane/Woodall/NoFourFive.lean:647	theorem	hyp	
+main:Valid	SectorsAt.not_mem_range_of_crossesAt	ww	Plane/Woodall/NoFourFive.lean:740	theorem	hyp	
+main:Valid	Valid.region_dist_ne_one	ww	Plane/Woodall/Steps.lean:182	theorem	hyp	
+main:Valid	collarAt_closure_of_forall_shadow	ww	Plane/Woodall/Steps.lean:200	theorem	hyp	
+main:Valid	NiceAt.normal	ww	Plane/Woodall/Steps.lean:444	theorem	hyp	
+main:Valid	ArcMap.bandFree_region	w2	Plane/YesLimit.lean:141	theorem	hyp	
+main:Valid	muZero_eq_one_of_fragments	w2	Plane/YesLimit.lean:151	theorem	hyp	
+main:Valid	chiM0_le_of_fragments	w2	Plane/YesLimit.lean:210	theorem	hyp	
+main:Valid	chromaticNumber_plane_le_six_of_fragments	w2	Plane/YesLimit.lean:215	theorem	hyp	
+main:Valid		main	Plane/ArcMap.lean:224	example	concl	
+main:Valid		main	Plane/ArcMap.lean:232	example	concl	
+main:Valid	sixQ_inhabited	main	Plane/RingGerm.lean:1133	theorem	concl	
+main:Valid	sixQ_inhabited	w3b	Plane/RingGerm.lean:1133	theorem	concl	
+main:Valid	sevenBrickMap_valid	ww	Plane/SVMap.lean:226	theorem	concl	
+main:Valid	sevenBrickMap_valid	w4	Plane/SVMap.lean:567	theorem	concl	
+main:Valid	sixFrag_valid	main	Plane/SixFragment.lean:1607	theorem	concl	
+main:Valid	bowtie_valid	w4	Plane/ValidMap/BaseSteps.lean:313	theorem	concl	sorry
+main:Valid	l60_real	w4	Plane/ValidMap/UnitArc.lean:293	theorem	concl	sorry
+main:Valid	iso	w4	Plane/ValidMap/UnitArc.lean:544	theorem	concl	
+main:Valid	threeSectorDisc_valid	ww	Plane/Woodall/Basic.lean:226	theorem	concl	
+main:sixPieceG	sixPieceG_coords	main	Plane/SixFragment.lean:1413	theorem	hyp	
+main:sixPieceG	sixPieceS_sixPieceG	main	Plane/SixFragment.lean:1465	theorem	hyp	
+main:sixPieceG	sixPieceQ_sixPieceG	main	Plane/SixFragment.lean:1478	theorem	hyp	
+main:sixPieceG	sixPieceG_near	main	Plane/SixFragment.lean:1500	theorem	hyp	
+main:sixPieceG	sixPieceG_diam	main	Plane/SixFragment.lean:1518	theorem	hyp	
+main:sixPieceG	sixPieceG_interior	main	Plane/SixFragment.lean:1732	theorem	hyp	
+main:sixPieceG	sixPieceG_connected	main	Plane/SixFragment.lean:1858	theorem	hyp	
+main:sixPieceG		main	Plane/SixFragment.lean:1130	example	concl	
+main:sixPieceG	sixCol_zero_cases	main	Plane/SixFragment.lean:1189	theorem	concl	
+main:sixPieceQ	sixPieceQ_coords	main	Plane/SixFragment.lean:1402	theorem	hyp	
+main:sixPieceQ	sixPieceS_sixPieceQ	main	Plane/SixFragment.lean:1456	theorem	hyp	
+main:sixPieceQ	sixPieceQ_sixPieceG	main	Plane/SixFragment.lean:1478	theorem	hyp	
+main:sixPieceQ	sixPieceQ_ne_one	main	Plane/SixFragment.lean:1569	theorem	hyp	
+main:sixPieceQ	sixPieceQ_interior	main	Plane/SixFragment.lean:1709	theorem	hyp	
+main:sixPieceQ	sixPieceQ_connected	main	Plane/SixFragment.lean:1798	theorem	hyp	
+main:sixPieceQ		main	Plane/SixFragment.lean:1115	example	concl	
+main:sixPieceQ	sixCol_zero_cases	main	Plane/SixFragment.lean:1189	theorem	concl	
+main:sixPieceS	sixPieceS_coords	main	Plane/SixFragment.lean:1386	theorem	hyp	
+main:sixPieceS	sixPieceS_diam	main	Plane/SixFragment.lean:1441	theorem	hyp	
+main:sixPieceS	sixPieceS_sixPieceQ	main	Plane/SixFragment.lean:1456	theorem	hyp	
+main:sixPieceS	sixPieceS_sixPieceG	main	Plane/SixFragment.lean:1465	theorem	hyp	
+main:sixPieceS	sixPieceS_connected	main	Plane/SixFragment.lean:1781	theorem	hyp	
+main:sixPieceS		main	Plane/SixFragment.lean:1107	example	concl	
+main:sixPieceS	sixCol_zero_cases	main	Plane/SixFragment.lean:1189	theorem	concl	
+w2:AeColouring.HasSlack		w2	Plane/Suprema.lean:191	example	concl	
+w2:AeColouring.Tight	sq9_tight_saturated	w2	Plane/CoverExamples.lean:294	theorem	concl	
+w2:AeColouring.Tight	exists_r7	w2	Plane/CoverExamples.lean:614	theorem	concl	
+w2:AeColouring.Tight	sq9_tight	w2	Plane/CoverExamples.lean:93	theorem	concl	
+w2:AeColouring.Tight	AeColouring.exists_tight	w2	Plane/Slack.lean:1767	theorem	concl	
+w2:AeColouring.Tight	exists_tight_iff_chiM0_le	w2	Plane/Slack.lean:1805	theorem	concl	
+w2:AeLE		w2	Plane/Cover.lean:200	example	concl	
+w2:AeLE	AeColouring.exists_isMaximalCover	w2	Plane/MaximalCover.lean:203	theorem	concl	
+w2:BandFree	unitPairsNull_of_bandFree	w2	Plane/Slack.lean:1903	theorem	hyp	
+w2:BandFree	bandNull_of_bandFree	w2	Plane/Slack.lean:232	theorem	hyp	
+w2:BandFree	bandFree_periodize	w2	Plane/Slack.lean:383	theorem	hyp	
+w2:BandFree	chiM0_le_iff_periodic	w2	Plane/Slack.lean:1916	theorem	concl	
+w2:BandFree		w2	Plane/Suprema.lean:173	example	concl	
+w2:BandFree		w2	Plane/Suprema.lean:177	example	NEG	
+w2:BandFree	ArcMap.bandFree_region	w2	Plane/YesLimit.lean:141	theorem	concl	
+w2:BandNull	bandNull_preimage_add	w2	Plane/Slack.lean:1151	theorem	hyp	
+w2:BandNull	bandNull_unitPairsNull	w2	Plane/Slack.lean:221	theorem	hyp	
+w2:BandNull	sq9_not_bandNull	w2	Plane/CoverExamples.lean:43	theorem	NEG	
+w2:BandNull	r7_not_bandNull	w2	Plane/CoverExamples.lean:491	theorem	NEG	
+w2:BandNull	exists_bandNull_aeCover_of_mu_eq_one	w2	Plane/Slack.lean:1970	theorem	concl	sorry
+w2:BandNull	bandNull_of_bandFree	w2	Plane/Slack.lean:232	theorem	concl	
+w2:BandNull	bandNull_iff_iccPairNull	w2	Plane/Slack.lean:53	theorem	concl	
+w2:CPColouring	CPColouring.RotationInvariant	w2	Plane/CPColouring.lean:58	def	hyp	
+w2:CPColouring	chiCP_le	w2	Plane/CPColouring.lean:63	theorem	hyp	
+w2:CPColouring	CPColouring.tendsto_not_kept	w2	Plane/Slack.lean:2102	theorem	hyp	sorry
+w2:CPColouring	CPColouring.law_ne_shift	w2	Plane/Slack.lean:909	theorem	hyp	
+w2:CPColouring	CPColouring.exists_unif	w2	Plane/Slack.lean:920	theorem	hyp	
+w2:CPColouring	CPColouring.exists_modification	w2	Plane/Slack.lean:970	theorem	hyp	sorry
+w2:CPColouring	CPColouring.ae_unitPairsNull_of_modification	w2	Plane/Slack.lean:975	theorem	hyp	sorry
+w2:CPColouring	CPColouring.lintegral_ball_ne	w2	Plane/Slack.lean:982	theorem	hyp	
+w2:CPColouring	CPColouring.forcedSet	w2	Plane/Stationary.lean:244	def	hyp	
+w2:CPColouring	CPColouring.law_shift	w2	Plane/Stationary.lean:247	theorem	hyp	
+w2:CPColouring	CPColouring.law_eq_translate	w2	Plane/Stationary.lean:255	theorem	hyp	
+w2:CPColouring	CPColouring.law_ne_triangle	w2	Plane/Stationary.lean:261	theorem	hyp	
+w2:CPColouring	CPColouring.law_ne_eq	w2	Plane/Stationary.lean:268	theorem	hyp	
+w2:CPColouring	CPColouring.isClosed_forcedSet	w2	Plane/Stationary.lean:273	theorem	hyp	
+w2:CPColouring	CPColouring.law_eq_one_iff	w2	Plane/Stationary.lean:291	theorem	hyp	
+w2:CPColouring	CPColouring.forcedSubgroup	w2	Plane/Stationary.lean:298	def	hyp	
+w2:CPColouring	CPColouring.exists_discrete_forcedSet	w2	Plane/Stationary.lean:364	theorem	hyp	
+w2:CPColouring	CPColouring.forcedSet_eq_zero	w2	Plane/Stationary.lean:388	theorem	hyp	
+w2:CPColouring		w2	Plane/CPColouring.lean:66	instance	concl	
+w2:CPColouring		w2	Plane/CPColouring.lean:73	instance	concl	
+w2:CPColouring	nonempty_cpColouring_nine	w2	Plane/Stationary.lean:236	theorem	concl	
+w2:CPColouring.RotationInvariant	CPColouring.forcedSet_eq_zero	w2	Plane/Stationary.lean:388	theorem	hyp	
+w2:CurvatureLeOne	semiconcave_pos	w2	Plane/MaximalCover.lean:620	theorem	hyp	
+w2:CurvatureLeOne	IsMaximalCover.curvatureLeOne	w2	Plane/MaximalCover.lean:434	theorem	concl	
+w2:DyadicSqrt3Conclusion	dyadicConclusion_of_minpoly	w2	Arith/Dyadic.lean:513	theorem	concl	
+w2:DyadicSqrt3Conclusion	dyadicConclusion_of_coeffs	w2	Arith/Dyadic.lean:636	theorem	concl	
+w2:DyadicSqrt3Conclusion	sqrt3_local_of_congr	w2	Arith/Dyadic.lean:650	theorem	concl	
+w2:DyadicSqrt3Conclusion	sqrt3_local	w2	Arith/Dyadic.lean:670	theorem	concl	
+w2:DyadicSqrt3Conclusion	sqrt3_dyadic	w2	Arith/Dyadic.lean:678	theorem	concl	
+w2:G1Bounds	hcUp_slivers	w2	Plane/CoverExamples.lean:1838	theorem	hyp	sorry
+w2:G1Bounds	hcBandTop_bounds	w2	Plane/CoverExamples.lean:1844	theorem	hyp	sorry
+w2:G1Bounds	lt_hcBandTop_iff	w2	Plane/CoverExamples.lean:1850	theorem	hyp	sorry
+w2:G1Bounds	continuousOn_hcBandTop	w2	Plane/CoverExamples.lean:1856	theorem	hyp	sorry
+w2:G1Bounds	isClosed_hcSet	w2	Plane/CoverExamples.lean:1862	theorem	hyp	sorry
+w2:G1Bounds	closure_interior_hcSet	w2	Plane/CoverExamples.lean:1867	theorem	hyp	sorry
+w2:G1Bounds	volume_frontier_hcSet	w2	Plane/CoverExamples.lean:1872	theorem	hyp	sorry
+w2:G1Bounds	hc_band_dist_lt_one	w2	Plane/CoverExamples.lean:1877	theorem	hyp	sorry
+w2:G1Bounds	hc_unitAvoiding	w2	Plane/CoverExamples.lean:1885	theorem	hyp	sorry
+w2:G1Bounds	hc_lemmaNL	w2	Plane/CoverExamples.lean:1903	theorem	hyp	sorry
+w2:G1Bounds	hc_exclusion	w2	Plane/CoverExamples.lean:1910	theorem	hyp	sorry
+w2:G1Bounds	hc_ae_phi_pos	w2	Plane/CoverExamples.lean:1916	theorem	hyp	sorry
+w2:G1Bounds	hcBand_component_iff	w2	Plane/CoverExamples.lean:1932	theorem	hyp	sorry
+w2:G1Bounds	hc_free_pos	w2	Plane/CoverExamples.lean:1942	theorem	hyp	sorry
+w2:G1Bounds	hc_free_subset_nowhereDense	w2	Plane/CoverExamples.lean:1949	theorem	hyp	sorry
+w2:G1Bounds	hc_isRegularMUA	w2	Plane/CoverExamples.lean:1976	theorem	hyp	sorry
+w2:G1Bounds	hc_band_components	w2	Plane/CoverExamples.lean:1985	theorem	hyp	sorry
+w2:G1Bounds	hc_irreg	w2	Plane/CoverExamples.lean:2090	theorem	hyp	sorry
+w2:G1Bounds	g1Bounds_hcGap	w2	Plane/CoverExamples.lean:1806	theorem	concl	
+w2:G1Bounds	hcZ0_spec	w2	Plane/CoverExamples.lean:1964	theorem	concl	
+w2:IccPairNull	ae_pairMass_eq_zero	w2	Plane/Slack.lean:140	theorem	hyp	sorry
+w2:IccPairNull	pairMass_eq_zero_of_iccPairNull	w2	Plane/Slack.lean:145	theorem	hyp	
+w2:IccPairNull	IccPairNull.mono	w2	Plane/Slack.lean:59	theorem	hyp	
+w2:IccPairNull	IccPairNull.union	w2	Plane/Slack.lean:65	theorem	hyp	
+w2:IccPairNull	iccPairNull_of_forall_lt	w2	Plane/Slack.lean:87	theorem	hyp	
+w2:IccPairNull	iccPairNull_preimage_mul	w2	Plane/Slack.lean:170	theorem	concl	
+w2:IccPairNull	AeColouring.exists_pos_not_iccPairNull	w2	Plane/Slack.lean:215	theorem	NEG	sorry
+w2:IccPairNull	bandNull_iff_iccPairNull	w2	Plane/Slack.lean:53	theorem	concl	
+w2:IsAdmissible	IsAdmissible.exists_aeColouring	w2	Plane/MaximalCover.lean:219	theorem	hyp	
+w2:IsAdmissible	face_densitySet	w2	Plane/Slack.lean:2196	theorem	hyp	
+w2:IsAeCover		w2	Plane/Cover.lean:194	example	concl	
+w2:IsAeCover	AeColouring.isAeCover	w2	Plane/Cover.lean:74	theorem	concl	
+w2:IsContactFor		w2	Plane/Cover.lean:219	example	concl	
+w2:IsContactFor		w2	Plane/Cover.lean:225	example	NEG	
+w2:IsContactFor	AeColouring.exists_grundy	w2	Plane/MaximalCover.lean:903	theorem	concl	
+w2:IsGridUnion	isGridUnion_periodize	w2	Plane/Slack.lean:369	theorem	hyp	
+w2:IsGridUnion	exists_tiled_kept	w2	Plane/Slack.lean:780	theorem	concl	sorry
+w2:IsLowerGraphOf	not_forall_semiconcaveWith_one	w2	Plane/CoverExamples.lean:778	theorem	hyp	
+w2:IsLowerGraphOf	IsMaximalCover.curvatureLeOne	w2	Plane/MaximalCover.lean:434	theorem	hyp	
+w2:IsLowerGraphOf	IsMaximalCover.semiconcaveWith	w2	Plane/MaximalCover.lean:713	theorem	hyp	
+w2:IsLowerGraphOf	r7_lowerGraph	w2	Plane/CoverExamples.lean:672	theorem	concl	
+w2:IsMaxIn	essSupport_subset_unitShadow_of_isMaxIn	w2	Plane/MaximalCover.lean:851	theorem	hyp	
+w2:IsMaxIn	exists_isMaxIn	w2	Plane/MaximalCover.lean:759	theorem	concl	
+w2:IsMaxIn	isMaxIn_maxIn	w2	Plane/MaximalCover.lean:787	theorem	concl	
+w2:IsMaxIn	grundyCls_isMaxIn	w2	Plane/MaximalCover.lean:842	theorem	concl	
+w2:IsMaximalCover	not_forall_semiconcaveWith_one	w2	Plane/CoverExamples.lean:778	theorem	hyp	
+w2:IsMaximalCover	IsMaximalCover.interior_union_unitShadow	w2	Plane/MaximalCover.lean:212	theorem	hyp	
+w2:IsMaximalCover	IsMaximalCover.enclosing_or_exterior_contact	w2	Plane/MaximalCover.lean:273	theorem	hyp	
+w2:IsMaximalCover	IsMaximalCover.enclosing_or_exterior	w2	Plane/MaximalCover.lean:299	theorem	hyp	
+w2:IsMaximalCover	IsMaximalCover.curvatureLeOne	w2	Plane/MaximalCover.lean:434	theorem	hyp	
+w2:IsMaximalCover	IsMaximalCover.semiconcaveWith	w2	Plane/MaximalCover.lean:713	theorem	hyp	
+w2:IsMaximalCover	disc7_isMaximalCover	w2	Plane/CoverExamples.lean:1328	theorem	concl	
+w2:IsMaximalCover	r7Cls_isMaximalCover	w2	Plane/CoverExamples.lean:625	theorem	concl	
+w2:IsMaximalCover	isMaximalCover_iff	w2	Plane/MaximalCover.lean:166	theorem	concl	
+w2:IsMaximalCover	AeColouring.exists_isMaximalCover	w2	Plane/MaximalCover.lean:203	theorem	concl	
+w2:IsPartialColouring	exists_translates_small_hole	w2	Plane/Slack.lean:1065	theorem	hyp	sorry
+w2:IsPartialColouring	ae_sum_eq_one_of_weakStar	w2	Plane/Slack.lean:1073	theorem	hyp	sorry
+w2:IsPartialColouring	chiM0_le_iff_periodic	w2	Plane/Slack.lean:1916	theorem	concl	
+w2:IsPartialColouring	exists_bandNull_aeCover_of_mu_eq_one	w2	Plane/Slack.lean:1970	theorem	concl	sorry
+w2:IsPartialColouring	exists_tiled_kept	w2	Plane/Slack.lean:780	theorem	concl	sorry
+w2:IsPartialColouring	AeColouring.isPartialColouring	w2	Plane/Suprema.lean:114	theorem	concl	
+w2:IsPartialColouring		w2	Plane/Suprema.lean:173	example	concl	
+w2:IsPeriodic	chiM0_le_iff_periodic	w2	Plane/Slack.lean:1916	theorem	concl	
+w2:IsPeriodicSet	isPeriodicSet_periodize	w2	Plane/Slack.lean:345	theorem	concl	
+w2:IsPeriodicSet		w2	Plane/Suprema.lean:187	example	concl	
+w2:IsPlaceHom	falconerFan_five_placeHom	w2	Arith/FalconerField.lean:182	theorem	hyp	
+w2:IsPlaceHom	exists_hom_apex	w2	Arith/FalconerField.lean:90	theorem	hyp	
+w2:IsPlaceHom	placeHom_step	w2	Arith/PlaceHom.lean:222	theorem	hyp	
+w2:IsPlaceHom	exists_hom_of_isPlaceHom	w2	Arith/PlaceHom.lean:308	theorem	hyp	
+w2:IsPlaceHom	exists_placeHom	w2	Arith/PlaceHom.lean:366	theorem	hyp	
+w2:IsPlaceHom	placeHom_base	w2	Arith/PlaceHom.lean:183	theorem	concl	
+w2:IsPlaceHom	exists_isPlaceHom	w2	Arith/PlaceHom.lean:289	theorem	concl	
+w2:IsRegularMUA	IsRegularMUA.interior_eq_compl_unitShadow	w2	Plane/MaximalCover.lean:230	theorem	hyp	
+w2:IsRegularMUA	IsRegularMUA.component_side	w2	Plane/MaximalCover.lean:249	theorem	hyp	
+w2:IsRegularMUA	disc7_isRegularMUA	w2	Plane/CoverExamples.lean:1334	theorem	concl	
+w2:IsRegularMUA	hc_isRegularMUA	w2	Plane/CoverExamples.lean:1976	theorem	concl	sorry
+w2:IsRegularMUA	not_forall_isRegularMUA	w2	Plane/CoverExamples.lean:2099	theorem	concl	
+w2:IsSelection	IsAdmissible.exists_aeColouring	w2	Plane/MaximalCover.lean:219	theorem	hyp	
+w2:IsSelection		w2	Plane/Cover.lean:197	example	concl	
+w2:IsTiled	chiM0_le_iff_periodic	w2	Plane/Slack.lean:1916	theorem	concl	
+w2:IsUsablePrime	falconerFan_five_placeHom	w2	Arith/FalconerField.lean:182	theorem	hyp	
+w2:IsUsablePrime	placeHom_base	w2	Arith/PlaceHom.lean:183	theorem	hyp	
+w2:IsUsablePrime	exists_isPlaceHom	w2	Arith/PlaceHom.lean:289	theorem	hyp	
+w2:IsUsablePrime	exists_placeHom	w2	Arith/PlaceHom.lean:366	theorem	hyp	
+w2:IsUsablePrime	exists_hom_finitePlane_of_card	w2	Arith/PlaceHom.lean:405	theorem	hyp	
+w2:IsUsablePrime	falconerFan_five_field	w2	Arith/FalconerField.lean:156	theorem	concl	
+w2:KeptAt	keptAt_band	w2	Plane/Slack.lean:2090	theorem	hyp	
+w2:KeptAt	keptAt_of_dist_le	w2	Plane/Slack.lean:303	theorem	hyp	
+w2:KeptAt	keptAt_band_le_half	w2	Plane/Slack.lean:821	theorem	hyp	
+w2:KeptAt	CPColouring.tendsto_not_kept	w2	Plane/Slack.lean:2102	theorem	NEG	sorry
+w2:KeptAt	exists_not_uniform_kept	w2	Plane/Slack.lean:2111	theorem	NEG	sorry
+w2:KeptAt	ae_eventually_keptAt	w2	Plane/Slack.lean:260	theorem	concl	
+w2:KeptAt	exists_tiled_kept	w2	Plane/Slack.lean:780	theorem	concl	sorry
+w2:KeptAt	not_keptAt_of_half_lt	w2	Plane/Slack.lean:856	theorem	NEG	
+w2:NoAffFieldHyp	exists_hom_slack	w2	Arith/PlaceHom.lean:426	theorem	hyp	
+w2:NoAffFieldHyp	noAffine_fields	w2	Arith/PlaceHom.lean:461	theorem	hyp	
+w2:PieceF	real_no_unit	w2	Plane/Slack.lean:1582	theorem	concl	
+w2:PieceF	mem_faceFailClass_iff	w2	Plane/Slack.lean:1623	theorem	concl	
+w2:PieceH	real_no_unit	w2	Plane/Slack.lean:1582	theorem	concl	
+w2:PieceH	mem_faceFailClass_iff	w2	Plane/Slack.lean:1623	theorem	concl	
+w2:PieceQ	real_no_unit	w2	Plane/Slack.lean:1582	theorem	concl	
+w2:PieceQ	mem_faceFailClass_iff	w2	Plane/Slack.lean:1623	theorem	concl	
+w2:Row130M1	chiM0_le_iff_chiCP_le	w2	Plane/Slack.lean:1893	theorem	hyp	
+w2:Saturated	face_densitySet	w2	Plane/Slack.lean:2196	theorem	hyp	
+w2:Saturated	SaturatedPos.saturated	w2	Plane/CoverExamples.lean:138	theorem	concl	
+w2:Saturated	sq9_saturated_both	w2	Plane/CoverExamples.lean:281	theorem	concl	
+w2:Saturated	sq9_tight_saturated	w2	Plane/CoverExamples.lean:294	theorem	concl	
+w2:Saturated	r7Cls_saturated	w2	Plane/CoverExamples.lean:605	theorem	concl	
+w2:Saturated	exists_r7	w2	Plane/CoverExamples.lean:614	theorem	concl	
+w2:SaturatedPos	SaturatedPos.saturated	w2	Plane/CoverExamples.lean:138	theorem	hyp	
+w2:SaturatedPos	sq9_saturated_both	w2	Plane/CoverExamples.lean:281	theorem	concl	
+w2:SaturatedPos	sq9_tight_saturated	w2	Plane/CoverExamples.lean:294	theorem	concl	
+w2:SemiconcaveWith	not_semiconcaveWith_one_lowerArc	w2	Plane/CoverExamples.lean:762	theorem	NEG	
+w2:SemiconcaveWith	not_forall_semiconcaveWith_one	w2	Plane/CoverExamples.lean:778	theorem	concl	
+w2:SemiconcaveWith	IsMaximalCover.semiconcaveWith	w2	Plane/MaximalCover.lean:713	theorem	concl	
+w2:Voronov11	mu_lt_of_voronov11	w2	Plane/Slack.lean:2027	theorem	hyp	
+w2:Voronov11	voronov11_of_forall_mu_lt	w2	Plane/Slack.lean:1977	theorem	concl	
+w2:Voronov11	forall_mu_six_lt_one_iff	w2	Plane/Slack.lean:2084	theorem	concl	
+w2:WeakStarTendsto	convForm_tendsto	w2	Plane/Slack.lean:1031	theorem	hyp	sorry
+w2:WeakStarTendsto	unitForm_tendsto	w2	Plane/Slack.lean:1056	theorem	hyp	sorry
+w2:WeakStarTendsto	ae_sum_eq_one_of_weakStar	w2	Plane/Slack.lean:1073	theorem	hyp	sorry
+w2:WeakStarTendsto	exists_weakStar_subseq	w2	Plane/Slack.lean:1023	theorem	concl	sorry
+w3b:Arc.OnRing	exists_ball_onRing	w3b	Plane/LocalStructure.lean:2139	theorem	hyp	
+w3b:Arc.OnRing	exists_sides_nbhd	w3b	Plane/LocalStructure.lean:2160	theorem	hyp	
+w3b:Arc.OnRing	Arc.OnRing.carrier_subset_sphere	w3b	Plane/LocalStructure.lean:561	theorem	hyp	
+w3b:Arc.OnRing	finite_nonring_inter_sphere	w3b	Plane/LocalStructure.lean:2127	theorem	NEG	
+w3b:Arc.Tang	Arc.exists_initialPiece_of_approach	w3b	Plane/LocalStructure.lean:3239	theorem	hyp	
+w3b:Arc.Tang	GoodAt.exists_wedge	w3b	Plane/LocalStructure.lean:2765	theorem	concl	
+w3b:Arc.Tang	countable_tang_dirs	w3b	Plane/LocalStructure.lean:2829	theorem	concl	
+w3b:Arc.Tang	GoodAt.exists_generic_dir	w3b	Plane/LocalStructure.lean:2848	theorem	NEG	
+w3b:BranchGerms	Sorted.mono	w3b	Plane/LocalStructure.lean:3741	theorem	hyp	
+w3b:BranchGerms	exists_angle	w3b	Plane/LocalStructure.lean:3813	theorem	hyp	
+w3b:BranchGerms	isSectorChart_of	w3b	Plane/LocalStructure.lean:4519	theorem	hyp	
+w3b:BranchGerms	IsSectorChart.sector_subset_interiorPts	w3b	Plane/LocalStructure.lean:4775	theorem	hyp	
+w3b:BranchGerms	IsSectorChart.sector_nonempty	w3b	Plane/LocalStructure.lean:4783	theorem	hyp	
+w3b:BranchGerms	IsSectorChart.exists_tile_inter_ball	w3b	Plane/LocalStructure.lean:4794	theorem	hyp	
+w3b:BranchGerms	atRadius	w3b	Plane/LocalStructure.lean:3723	def	concl	
+w3b:BranchGerms	localSectors	w3b	Plane/LocalStructure.lean:4606	theorem	concl	
+w3b:BranchGerms		w3b	Plane/LocalStructure.lean:4916	example	concl	
+w3b:BranchGerms		w3b	Plane/LocalStructure.lean:4921	example	concl	
+w3b:BranchGerms		w3b	Plane/LocalStructure.lean:4927	example	concl	
+w3b:BranchGerms		w3b	Plane/LocalStructure.lean:4933	example	concl	
+w3b:BranchGerms		w3b	Plane/LocalStructure.lean:4951	example	concl	
+w3b:BranchGerms	halfDisc_sectorChart	w3b	Plane/LocalStructure.lean:4960	theorem	concl	
+w3b:GoodAt	GoodAt.not_tile_subset_ball	w3b	Plane/LocalStructure.lean:1752	theorem	REFUT	
+w3b:GoodAt	GoodAt.exists_local_curve	w3b	Plane/LocalStructure.lean:1718	theorem	hyp	
+w3b:GoodAt	GoodAt.finite_tiles_sphere	w3b	Plane/LocalStructure.lean:1865	theorem	hyp	
+w3b:GoodAt	GoodAt.exists_wedge	w3b	Plane/LocalStructure.lean:2765	theorem	hyp	
+w3b:GoodAt	GoodAt.exists_generic_dir	w3b	Plane/LocalStructure.lean:2848	theorem	hyp	
+w3b:GoodAt	exists_goodAt	w3b	Plane/LocalStructure.lean:1651	theorem	concl	
+w3b:IsSectorChart	IsSectorChart.sector_subset_interiorPts	w3b	Plane/LocalStructure.lean:4775	theorem	hyp	
+w3b:IsSectorChart	IsSectorChart.sector_nonempty	w3b	Plane/LocalStructure.lean:4783	theorem	hyp	
+w3b:IsSectorChart	IsSectorChart.exists_tile_inter_ball	w3b	Plane/LocalStructure.lean:4794	theorem	hyp	
+w3b:IsSectorChart	isSectorChart_of	w3b	Plane/LocalStructure.lean:4519	theorem	concl	
+w3b:IsSectorChart	localSectors	w3b	Plane/LocalStructure.lean:4606	theorem	concl	
+w3b:IsSectorChart	halfDisc_sectorChart	w3b	Plane/LocalStructure.lean:4960	theorem	concl	
+w3b:Mono	Mono.le_add	w3b	Plane/LocalStructure.lean:3746	theorem	hyp	
+w3b:Mono	Mono.le_of_le	w3b	Plane/LocalStructure.lean:3754	theorem	hyp	
+w3b:Mono	Mono.le_two_pi	w3b	Plane/LocalStructure.lean:3759	theorem	hyp	
+w3b:Mono	Mono.nextβ_le	w3b	Plane/LocalStructure.lean:3766	theorem	hyp	
+w3b:Mono	Mono.zero_le	w3b	Plane/LocalStructure.lean:3772	theorem	hyp	
+w3b:Mono	Mono.nextβ_le_add	w3b	Plane/LocalStructure.lean:3775	theorem	hyp	
+w3b:Mono	Mono.nextβ_le_of_lt	w3b	Plane/LocalStructure.lean:3778	theorem	hyp	
+w3b:Mono	Mono.disjoint	w3b	Plane/LocalStructure.lean:3784	theorem	hyp	
+w3b:Mono	Mono.not_mem_angleIoo	w3b	Plane/LocalStructure.lean:3841	theorem	hyp	
+w3b:Mono	coneAt_sector	w3b	Plane/LocalStructure.lean:4050	theorem	hyp	
+w3b:Mono	Sorted.mono	w3b	Plane/LocalStructure.lean:3741	theorem	concl	
+w3b:Mono	atRadius_mono	w3b	Plane/LocalStructure.lean:3937	theorem	concl	
+w3b:RegularAt	carries_absent	w3b	Plane/RingGerm.lean:688	theorem	hyp	
+w3b:RegularAt	qOpen_of_regular	w3b	Plane/RingGerm.lean:946	theorem	hyp	
+w3b:RegularAt	isOpen_regularAt	w3b	Plane/RingGerm.lean:755	theorem	concl	
+w3b:RegularAt	exists_regular_germ	w3b	Plane/RingGerm.lean:773	theorem	concl	
+w3b:RegularAt	finite_not_regular	w3b	Plane/RingGerm.lean:807	theorem	NEG	
+w3b:RegularAt	exists_regular_pair	w3b	Plane/RingGerm.lean:846	theorem	concl	
+w3b:Sorted	Sorted.mono	w3b	Plane/LocalStructure.lean:3741	theorem	hyp	
+w3b:Sorted	dir_lt_nextDir	w3b	Plane/LocalStructure.lean:3887	theorem	hyp	
+w3b:Sorted	isSectorChart_of	w3b	Plane/LocalStructure.lean:4519	theorem	hyp	
+w3b:Sorted		w3b	Plane/LocalStructure.lean:4921	example	concl	
+w3b:Sorted		w3b	Plane/LocalStructure.lean:4927	example	concl	
+w3b:Sorted		w3b	Plane/LocalStructure.lean:4933	example	concl	
+w4:AeProperRegions	toAeProperRegions	w4	Plane/SVMap.lean:328	def	concl	
+w4:AeProperRegions	sevenBrickRegions	w4	Plane/SVMap.lean:571	def	concl	
+w4:AgreesOff	Valid.of_agreesOff	w4	Plane/ValidMap/Basic.lean:246	theorem	hyp	
+w4:AgreesOff		w4	Plane/ValidMap/Basic.lean:624	example	concl	
+w4:AgreesOff		w4	Plane/ValidMap/Basic.lean:629	example	concl	
+w4:AgreesOff	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	concl	sorry
+w4:AgreesOff	exists_rayMerge	w4	Plane/ValidMap/Contact.lean:705	theorem	concl	sorry
+w4:AgreesOff	exists_merge	w4	Plane/ValidMap/Contact.lean:721	theorem	concl	sorry
+w4:AgreesOff	bend_toward	w4	Plane/ValidMap/UnitArc.lean:334	theorem	concl	sorry
+w4:AgreesOff	bend_away	w4	Plane/ValidMap/UnitArc.lean:347	theorem	concl	sorry
+w4:AgreesOff	bend_away_whole	w4	Plane/ValidMap/UnitArc.lean:359	theorem	concl	sorry
+w4:BothKind	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+w4:BothKind	noBoth	w4	Plane/ValidMap/UnitArc.lean:183	theorem	hyp	sorry
+w4:BothKind	pair_ii	w4	Plane/ValidMap/BaseSteps.lean:137	theorem	concl	sorry
+w4:Condition5	woodallCone_strict	w4	Plane/ValidMap/Contact.lean:655	theorem	hyp	sorry
+w4:Condition5	flank_shadows	w4	Plane/ValidMap/Contact.lean:669	theorem	hyp	sorry
+w4:Condition5	shaveAvailable_of_not_doublyShadowed	w4	Plane/ValidMap/Contact.lean:680	theorem	hyp	sorry
+w4:Condition5	stuck_structure	w4	Plane/ValidMap/Contact.lean:737	theorem	hyp	sorry
+w4:Condition5	stuck_chain	w4	Plane/ValidMap/Contact.lean:757	theorem	hyp	sorry
+w4:Condition5		w4	Plane/ValidMap/Basic.lean:591	example	concl	
+w4:Condition5	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	concl	sorry
+w4:Condition5	exists_rayMerge	w4	Plane/ValidMap/Contact.lean:705	theorem	concl	sorry
+w4:Condition5	exists_merge	w4	Plane/ValidMap/Contact.lean:721	theorem	concl	sorry
+w4:Condition6	ts_t_degree_three	w4	Plane/SVMap.lean:357	theorem	hyp	
+w4:Condition6		w4	Plane/ValidMap/Basic.lean:597	example	concl	
+w4:DoublyShadowed	shaveAvailable_of_not_doublyShadowed	w4	Plane/ValidMap/Contact.lean:680	theorem	hyp	sorry
+w4:DoublyShadowed	bowtie_doublyShadowed	w4	Plane/ValidMap/BaseSteps.lean:335	theorem	concl	sorry
+w4:HasDegree	exists_hasDegree_of_mem_dom	w4	Plane/SVMap.lean:342	theorem	concl	sorry
+w4:HasDegree	ts_t_trichromatic	w4	Plane/SVMap.lean:348	theorem	concl	
+w4:HasDegree	ts_t_degree_three	w4	Plane/SVMap.lean:357	theorem	concl	
+w4:HasDegree	stuck_structure	w4	Plane/ValidMap/Contact.lean:737	theorem	concl	sorry
+w4:HasRepeatedColour	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+w4:HasRepeatedColour	exists_merge	w4	Plane/ValidMap/Contact.lean:721	theorem	NEG	sorry
+w4:HasRepeatedColour	noBoth	w4	Plane/ValidMap/UnitArc.lean:183	theorem	concl	sorry
+w4:HasSectors	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+w4:HasSectors	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	hyp	sorry
+w4:HasSectors	exists_rayMerge	w4	Plane/ValidMap/Contact.lean:705	theorem	hyp	sorry
+w4:HasSectors	exists_merge	w4	Plane/ValidMap/Contact.lean:721	theorem	hyp	sorry
+w4:HasSectors	stuck_structure	w4	Plane/ValidMap/Contact.lean:737	theorem	hyp	sorry
+w4:HasSectors	stuck_chain	w4	Plane/ValidMap/Contact.lean:757	theorem	hyp	sorry
+w4:HasSectors	bowtie_coloursAt_zero	w4	Plane/ValidMap/BaseSteps.lean:321	theorem	concl	sorry
+w4:HasSectors	bowtie_neighbours	w4	Plane/ValidMap/BaseSteps.lean:343	theorem	concl	sorry
+w4:InMK		w4	Plane/ValidMap/Basic.lean:591	example	concl	
+w4:InType	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+w4:InType	bowtie_inType	w4	Plane/ValidMap/BaseSteps.lean:339	theorem	concl	sorry
+w4:InType	contact_inType_or_outType	w4	Plane/ValidMap/Contact.lean:414	theorem	NEG	
+w4:IsClear	Valid.of_agreesOff	w4	Plane/ValidMap/Basic.lean:246	theorem	hyp	
+w4:IsClear	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	hyp	sorry
+w4:IsClear	clear_of_subset_interior_allowedCone	w4	Plane/ValidMap/Contact.lean:525	theorem	concl	sorry
+w4:IsClear	exists_rayMerge	w4	Plane/ValidMap/Contact.lean:705	theorem	concl	sorry
+w4:IsClear	iso	w4	Plane/ValidMap/UnitArc.lean:544	theorem	NEG	
+w4:IsContact	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+w4:IsContact	contact_inType_or_outType	w4	Plane/ValidMap/Contact.lean:414	theorem	hyp	
+w4:IsContact	flankQ_upper	w4	Plane/ValidMap/UnitArc.lean:897	theorem	hyp	sorry
+w4:IsContact	flankQ_lower	w4	Plane/ValidMap/UnitArc.lean:915	theorem	hyp	sorry
+w4:IsContact	flankQ_both	w4	Plane/ValidMap/UnitArc.lean:932	theorem	hyp	
+w4:IsContact	bowtie_inType	w4	Plane/ValidMap/BaseSteps.lean:339	theorem	concl	sorry
+w4:IsContact	flank_incomplete_bowtie	w4	Plane/ValidMap/BaseSteps.lean:365	theorem	NEG	sorry
+w4:IsContact		w4	Plane/ValidMap/Basic.lean:615	example	concl	
+w4:IsContact	woodallCone	w4	Plane/ValidMap/Contact.lean:646	theorem	concl	sorry
+w4:IsContact	woodallCone_strict	w4	Plane/ValidMap/Contact.lean:655	theorem	concl	sorry
+w4:IsContact	stuck_structure	w4	Plane/ValidMap/Contact.lean:737	theorem	concl	sorry
+w4:IsCoveringPair	a4six	w4	Plane/ValidMap/UnitArc.lean:1026	theorem	hyp	sorry
+w4:IsCoveringPair		w4	Plane/ValidMap/Basic.lean:664	example	concl	
+w4:IsCoveringPair		w4	Plane/ValidMap/Basic.lean:676	example	concl	
+w4:IsCubicTrichromatic	pair_i	w4	Plane/ValidMap/BaseSteps.lean:130	theorem	REFUT	sorry
+w4:IsCubicTrichromatic	anti	w4	Plane/ValidMap/BaseSteps.lean:170	theorem	REFUT	sorry
+w4:IsCubicTrichromatic	pair_ii	w4	Plane/ValidMap/BaseSteps.lean:137	theorem	hyp	sorry
+w4:IsCubicTrichromatic	pair_P'	w4	Plane/ValidMap/BaseSteps.lean:145	theorem	hyp	sorry
+w4:IsCubicTrichromatic	fail_leavingCentre	w4	Plane/ValidMap/BaseSteps.lean:153	theorem	hyp	sorry
+w4:IsCubicTrichromatic	fail_colours	w4	Plane/ValidMap/BaseSteps.lean:160	theorem	hyp	sorry
+w4:IsFlankAbove	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+w4:IsFlankAbove	flank_shadows	w4	Plane/ValidMap/Contact.lean:669	theorem	hyp	sorry
+w4:IsFlankAbove	shaveAvailable_of_not_doublyShadowed	w4	Plane/ValidMap/Contact.lean:680	theorem	hyp	sorry
+w4:IsFlankAbove	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	hyp	sorry
+w4:IsFlankAbove	flankQ_upper	w4	Plane/ValidMap/UnitArc.lean:897	theorem	hyp	sorry
+w4:IsFlankAbove	bowtie_flanks	w4	Plane/ValidMap/BaseSteps.lean:330	theorem	concl	sorry
+w4:IsFlankBelow	flank_shadows	w4	Plane/ValidMap/Contact.lean:669	theorem	hyp	sorry
+w4:IsFlankBelow	shaveAvailable_of_not_doublyShadowed	w4	Plane/ValidMap/Contact.lean:680	theorem	hyp	sorry
+w4:IsFlankBelow	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	hyp	sorry
+w4:IsFlankBelow	flankQ_lower	w4	Plane/ValidMap/UnitArc.lean:915	theorem	hyp	sorry
+w4:IsFlankBelow	bowtie_flanks	w4	Plane/ValidMap/BaseSteps.lean:330	theorem	concl	sorry
+w4:IsHorn	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+w4:IsHorn	flank_shadows	w4	Plane/ValidMap/Contact.lean:669	theorem	hyp	sorry
+w4:IsHorn	shaveAvailable_of_not_doublyShadowed	w4	Plane/ValidMap/Contact.lean:680	theorem	hyp	sorry
+w4:IsHorn	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	hyp	sorry
+w4:IsHorn	exists_rayMerge	w4	Plane/ValidMap/Contact.lean:705	theorem	hyp	sorry
+w4:IsHorn	stuck_chain	w4	Plane/ValidMap/Contact.lean:757	theorem	hyp	sorry
+w4:IsHorn	flankQ_upper	w4	Plane/ValidMap/UnitArc.lean:897	theorem	hyp	sorry
+w4:IsHorn	flankQ_lower	w4	Plane/ValidMap/UnitArc.lean:915	theorem	hyp	sorry
+w4:IsHorn	flankQ_both	w4	Plane/ValidMap/UnitArc.lean:932	theorem	hyp	
+w4:IsHorn	bowtie_isHorn	w4	Plane/ValidMap/BaseSteps.lean:326	theorem	concl	sorry
+w4:IsHorn	stuck_structure	w4	Plane/ValidMap/Contact.lean:737	theorem	concl	sorry
+w4:IsLeavingCentre		w4	Plane/ValidMap/BaseSteps.lean:111	example	concl	
+w4:IsLeavingCentre		w4	Plane/ValidMap/BaseSteps.lean:115	example	concl	
+w4:IsLeavingCentre	fail_leavingCentre	w4	Plane/ValidMap/BaseSteps.lean:153	theorem	concl	sorry
+w4:IsR2Arc	flankQ_upper	w4	Plane/ValidMap/UnitArc.lean:897	theorem	hyp	sorry
+w4:IsR2Arc	flankQ_lower	w4	Plane/ValidMap/UnitArc.lean:915	theorem	hyp	sorry
+w4:IsSector	const_isSector_ball	w4	Plane/ValidMap/Basic.lean:572	theorem	concl	
+w4:IsSector	const_not_isSector_far	w4	Plane/ValidMap/Basic.lean:584	theorem	concl	
+w4:IsStuck	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+w4:IsStuck	stuck_structure	w4	Plane/ValidMap/Contact.lean:737	theorem	hyp	sorry
+w4:IsStuck	stuck_chain	w4	Plane/ValidMap/Contact.lean:757	theorem	hyp	sorry
+w4:IsStuck	bowtie_isStuck	w4	Plane/ValidMap/BaseSteps.lean:348	theorem	NEG	sorry
+w4:MIn	anti	w4	Plane/ValidMap/BaseSteps.lean:170	theorem	REFUT	sorry
+w4:MIn		w4	Plane/ValidMap/BaseSteps.lean:85	example	concl	
+w4:OutType	flankQ_upper	w4	Plane/ValidMap/UnitArc.lean:897	theorem	hyp	sorry
+w4:OutType	flankQ_lower	w4	Plane/ValidMap/UnitArc.lean:915	theorem	hyp	sorry
+w4:OutType	flankQ_both	w4	Plane/ValidMap/UnitArc.lean:932	theorem	hyp	
+w4:OutType	flank_incomplete_bowtie	w4	Plane/ValidMap/BaseSteps.lean:365	theorem	concl	sorry
+w4:OutType	contact_inType_or_outType	w4	Plane/ValidMap/Contact.lean:414	theorem	concl	
+w4:OutType	woodallCone	w4	Plane/ValidMap/Contact.lean:646	theorem	concl	sorry
+w4:OutType	woodallCone_strict	w4	Plane/ValidMap/Contact.lean:655	theorem	concl	sorry
+w4:OutType	stuck_structure	w4	Plane/ValidMap/Contact.lean:737	theorem	concl	sorry
+w4:RingArcsWithin		w4	Plane/ValidMap/Basic.lean:650	example	NEG	
+w4:RingArcsWithin	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	concl	sorry
+w4:RingArcsWithin	exists_rayMerge	w4	Plane/ValidMap/Contact.lean:705	theorem	concl	sorry
+w4:RingArcsWithin	exists_merge	w4	Plane/ValidMap/Contact.lean:721	theorem	concl	sorry
+w4:RingArcsWithin	bend_toward	w4	Plane/ValidMap/UnitArc.lean:334	theorem	concl	sorry
+w4:RingArcsWithin	bend_away	w4	Plane/ValidMap/UnitArc.lean:347	theorem	concl	sorry
+w4:RingArcsWithin	bend_away_whole	w4	Plane/ValidMap/UnitArc.lean:359	theorem	concl	sorry
+w4:ShaveAvailable	flank_incomplete_bowtie	w4	Plane/ValidMap/BaseSteps.lean:365	theorem	NEG	sorry
+w4:ShaveAvailable	shaveAvailable_of_not_doublyShadowed	w4	Plane/ValidMap/Contact.lean:680	theorem	concl	sorry
+w4:StripHolds	fail_leavingCentre	w4	Plane/ValidMap/BaseSteps.lean:153	theorem	hyp	sorry
+w4:StripHolds	fail_colours	w4	Plane/ValidMap/BaseSteps.lean:160	theorem	hyp	sorry
+w4:StripHolds		w4	Plane/ValidMap/BaseSteps.lean:92	example	concl	
+w4:TanAbove	exists_shave	w4	Plane/ValidMap/Contact.lean:691	theorem	hyp	sorry
+w4:TanAbove	tanAbove_one_iff	w4	Plane/ValidMap/Basic.lean:325	theorem	concl	
+w4:TanAbove	tanAbove_neg_one_iff	w4	Plane/ValidMap/Basic.lean:339	theorem	concl	
+w4:TanAbove	tanAbove_iff_of_pos	w4	Plane/ValidMap/Basic.lean:363	theorem	concl	
+w4:TanAbove	tanAbove_iff_of_neg	w4	Plane/ValidMap/Basic.lean:447	theorem	concl	
+w4:TanAbove		w4	Plane/ValidMap/Basic.lean:522	example	NEG	
+w4:TanAbove	shadow_farSide_above	w4	Plane/ValidMap/Contact.lean:152	theorem	concl	
+w4:TanAbove	flank_shadows	w4	Plane/ValidMap/Contact.lean:669	theorem	concl	sorry
+w4:TanAbove	exists_mem_hornSet_aboveBelow	w4	Plane/ValidMap/UnitArc.lean:66	theorem	concl	
+w4:TanBelow	tanBelow_one_iff	w4	Plane/ValidMap/Basic.lean:332	theorem	concl	
+w4:TanBelow	tanBelow_neg_one_iff	w4	Plane/ValidMap/Basic.lean:347	theorem	concl	
+w4:TanBelow	tanBelow_iff_of_pos	w4	Plane/ValidMap/Basic.lean:373	theorem	concl	
+w4:TanBelow	tanBelow_iff_of_neg	w4	Plane/ValidMap/Basic.lean:459	theorem	concl	
+w4:TanBelow	shadow_farSide_below	w4	Plane/ValidMap/Contact.lean:248	theorem	concl	
+w4:TanBelow	flank_shadows	w4	Plane/ValidMap/Contact.lean:669	theorem	concl	sorry
+w4:TanBelow	exists_mem_hornSet_aboveBelow	w4	Plane/ValidMap/UnitArc.lean:66	theorem	concl	
+w4:Terminal	n3_end	w4	Plane/ValidMap/BaseSteps.lean:181	theorem	hyp	sorry
+w4:Terminal	stuck_chain	w4	Plane/ValidMap/Contact.lean:757	theorem	hyp	sorry
+w4:TerminalOn	bowtie_terminalOn	w4	Plane/ValidMap/BaseSteps.lean:352	theorem	concl	sorry
+ww-k4:AeProperRegions	toAeProperRegions	ww	Plane/SVMap.lean:155	def	concl	
+ww-k4:AeProperRegions	sevenBrickRegions	ww	Plane/SVMap.lean:230	def	concl	
+ww-k4:AgreesOff		ww	Plane/ValidMap/Basic.lean:330	example	concl	
+ww-k4:AgreesOff		ww	Plane/ValidMap/Basic.lean:335	example	concl	
+ww-k4:Condition5	aeMap6_of_condition5	ww	Plane/Woodall/Steps.lean:572	theorem	REFUT	
+ww-k4:Condition5	recolour_condition5	ww	Plane/Woodall/Merge.lean:127	theorem	hyp	
+ww-k4:Condition5	wedgeMerge_condition5	ww	Plane/Woodall/Merge.lean:157	theorem	hyp	sorry
+ww-k4:Condition5		ww	Plane/ValidMap/Basic.lean:297	example	concl	
+ww-k4:Condition5	exists_merge_at	ww	Plane/Woodall/Merge.lean:247	theorem	concl	sorry
+ww-k4:Condition5	exists_woodallMerged	ww	Plane/Woodall/Merge.lean:257	theorem	concl	sorry
+ww-k4:Condition6	ts_t_degree_three	ww	Plane/SVMap.lean:181	theorem	hyp	sorry
+ww-k4:Condition6		ww	Plane/ValidMap/Basic.lean:303	example	concl	
+ww-k4:HasDegree	exists_hasDegree_of_mem_dom	ww	Plane/SVMap.lean:169	theorem	concl	sorry
+ww-k4:HasDegree	ts_t_trichromatic	ww	Plane/SVMap.lean:175	theorem	concl	sorry
+ww-k4:HasDegree	ts_t_degree_three	ww	Plane/SVMap.lean:181	theorem	concl	sorry
+ww-k4:InMK		ww	Plane/ValidMap/Basic.lean:297	example	concl	
+ww-k4:IsContact		ww	Plane/ValidMap/Basic.lean:321	example	concl	
+ww-k4:IsCoveringPair		ww	Plane/ValidMap/Basic.lean:370	example	concl	
+ww-k4:IsCoveringPair		ww	Plane/ValidMap/Basic.lean:382	example	concl	
+ww-k4:IsSector	const_isSector_ball	ww	Plane/ValidMap/Basic.lean:278	theorem	concl	
+ww-k4:IsSector	const_not_isSector_far	ww	Plane/ValidMap/Basic.lean:290	theorem	concl	
+ww-k4:RingArcsWithin		ww	Plane/ValidMap/Basic.lean:356	example	NEG	
+ww:CollarAt	false_of_changePt_landing	ww	Plane/Woodall/Collar.lean:468	theorem	REFUT	
+ww:CollarAt	false_of_collars_closed	ww	Plane/Woodall/Collar.lean:489	theorem	REFUT	
+ww:CollarAt	woodall_step4	ww	Plane/Woodall/Collar.lean:590	theorem	REFUT	
+ww:CollarAt	not_woodall_step4_two_thirds	ww	Plane/Woodall/Collar.lean:620	theorem	REFUT	
+ww:CollarAt	townsend_lemma	ww	Plane/Woodall/Collar.lean:764	theorem	REFUT	
+ww:CollarAt	exists_collar_of_collarAt	ww	Plane/Woodall/Collar.lean:149	theorem	hyp	
+ww:CollarAt	sphere_meets_of_collarAt	ww	Plane/Woodall/Collar.lean:311	theorem	hyp	
+ww:CollarAt	eventually_collarAt	ww	Plane/Woodall/Collar.lean:454	theorem	hyp	
+ww:CollarAt	CollarAt.interior	ww	Plane/Woodall/Collar.lean:461	theorem	hyp	
+ww:CollarAt	SectorsAt.absent_at_normal	ww	Plane/Woodall/NoFourFive.lean:1330	theorem	hyp	
+ww:CollarAt	CollarAt.mono	ww	Plane/Woodall/NoFourFive.lean:317	theorem	hyp	
+ww:CollarAt	CollarAt.inter	ww	Plane/Woodall/NoFourFive.lean:327	theorem	hyp	
+ww:CollarAt	not_mem_coloursAt_of_collarAt	ww	Plane/Woodall/NoFourFive.lean:647	theorem	hyp	
+ww:CollarAt	collarAt_closure_of_forall_shadow	ww	Plane/Woodall/Steps.lean:200	theorem	hyp	
+ww:CollarAt	collarAt_setOf_forall_mem	ww	Plane/Woodall/Steps.lean:52	theorem	hyp	
+ww:CollarAt	collarAt_shadow_outer	ww	Plane/Woodall/Collar.lean:822	theorem	concl	
+ww:CollarAt	collarAt_shadow_inner	ww	Plane/Woodall/Collar.lean:867	theorem	concl	
+ww:CollarAt	SectorsAt.collarAt_prev_inner	ww	Plane/Woodall/NoFourFive.lean:1261	theorem	concl	
+ww:CollarAt	SectorsAt.collarAt_prev_outer	ww	Plane/Woodall/NoFourFive.lean:1271	theorem	concl	
+ww:CollarAt	SectorsAt.collarAt_cur_inner	ww	Plane/Woodall/NoFourFive.lean:1291	theorem	concl	
+ww:CollarAt	SectorsAt.collarAt_cur_outer	ww	Plane/Woodall/NoFourFive.lean:1301	theorem	concl	
+ww:CollarAt	SectorsAt.exists_normal_collarAt	ww	Plane/Woodall/NoFourFive.lean:1313	theorem	concl	
+ww:CollarAt	collarAt_shadow_of_parabola	ww	Plane/Woodall/NoFourFive.lean:171	theorem	concl	
+ww:CollarAt	collarAt_shadow_inner_of_mem_coneAt	ww	Plane/Woodall/NoFourFive.lean:703	theorem	concl	
+ww:CollarAt	collarAt_shadow_outer_of_mem_coneAt	ww	Plane/Woodall/NoFourFive.lean:709	theorem	concl	
+ww:CollarAt	SectorsAt.collarAt_shadow_inner_of_mem	ww	Plane/Woodall/NoFourFive.lean:726	theorem	concl	
+ww:CollarAt	SectorsAt.collarAt_shadow_outer_of_mem	ww	Plane/Woodall/NoFourFive.lean:732	theorem	concl	
+ww:CollarAt	SectorsAt.collarAt_opposite	ww	Plane/Woodall/Steps.lean:222	theorem	concl	
+ww:CollarAt	CollarAt.of_abs_sub_lt	ww	Plane/Woodall/Steps.lean:67	theorem	concl	
+ww:CrossesAt	SectorsAt.not_mem_range_of_crossesAt	ww	Plane/Woodall/NoFourFive.lean:740	theorem	hyp	
+ww:CrossesAt	exists_side_colours_of_not_crossesAt	ww	Plane/Woodall/NoFourFive.lean:781	theorem	hyp	
+ww:CrossesAt	exists_inside_colour	ww	Plane/Woodall/NoFourFive.lean:901	theorem	hyp	
+ww:CrossesAt	exists_closure_colour_of_arc	ww	Plane/Woodall/NoFourFive.lean:924	theorem	hyp	
+ww:CrossesAt		ww	Plane/Woodall/NoFourFive.lean:563	example	concl	
+ww:CrossesAt		ww	Plane/Woodall/NoFourFive.lean:588	example	concl	
+ww:DirColourAt	niceAt_of_dirColourAt	ww	Plane/Woodall/Merge.lean:212	theorem	hyp	sorry
+ww:DirColourAt	dirColourAt_wedgeMerge	ww	Plane/Woodall/Merge.lean:222	theorem	hyp	sorry
+ww:DirColourAt		ww	Plane/Woodall/Merge.lean:188	example	concl	
+ww:DirColourAt	exists_dirColourAt	ww	Plane/Woodall/Merge.lean:193	theorem	concl	sorry
+ww:NiceAt	NiceAt.normal	ww	Plane/Woodall/Steps.lean:444	theorem	hyp	
+ww:NiceAt	threeSectorDisc_niceAt	ww	Plane/Woodall/Basic.lean:253	theorem	concl	
+ww:NiceAt	halfDisc_niceAt	ww	Plane/Woodall/Basic.lean:309	theorem	concl	
+ww:NiceAt	niceAt_congr	ww	Plane/Woodall/Merge.lean:174	theorem	concl	sorry
+ww:NiceAt	niceAt_of_dirColourAt	ww	Plane/Woodall/Merge.lean:212	theorem	concl	sorry
+ww:NiceAt	wedgeMerge_niceAt	ww	Plane/Woodall/Merge.lean:232	theorem	concl	sorry
+ww:OffDirs	niceAt_of_dirColourAt	ww	Plane/Woodall/Merge.lean:212	theorem	hyp	sorry
+ww:Rim	false_of_changePt_landing	ww	Plane/Woodall/Collar.lean:468	theorem	REFUT	
+ww:Rim	false_of_collars_closed	ww	Plane/Woodall/Collar.lean:489	theorem	REFUT	
+ww:Rim	woodall_step4	ww	Plane/Woodall/Collar.lean:590	theorem	REFUT	
+ww:Rim	not_woodall_step4_two_thirds	ww	Plane/Woodall/Collar.lean:620	theorem	REFUT	
+ww:Rim	townsend_lemma	ww	Plane/Woodall/Collar.lean:764	theorem	REFUT	
+ww:Rim		ww	Plane/Woodall/Basic.lean:121	example	hyp	
+ww:Rim	collar	ww	Plane/Woodall/Basic.lean:49	def	hyp	
+ww:Rim	CollarAt	ww	Plane/Woodall/Basic.lean:55	def	hyp	
+ww:Rim	collar_subset_collar	ww	Plane/Woodall/Collar.lean:102	theorem	hyp	
+ww:Rim	Rim.radii	ww	Plane/Woodall/Collar.lean:112	def	hyp	
+ww:Rim	Rim.radii_mono	ww	Plane/Woodall/Collar.lean:117	theorem	hyp	
+ww:Rim	mem_collar_iff	ww	Plane/Woodall/Collar.lean:123	theorem	hyp	
+ww:Rim	exists_collar_of_collarAt	ww	Plane/Woodall/Collar.lean:149	theorem	hyp	
+ww:Rim	exists_chord_angle	ww	Plane/Woodall/Collar.lean:177	theorem	hyp	
+ww:Rim	exists_unit_pair_collar	ww	Plane/Woodall/Collar.lean:224	theorem	hyp	
+ww:Rim	sphere_meets_of_collarAt	ww	Plane/Woodall/Collar.lean:311	theorem	hyp	
+ww:Rim	isPreconnected_collar	ww	Plane/Woodall/Collar.lean:450	theorem	hyp	
+ww:Rim	eventually_collarAt	ww	Plane/Woodall/Collar.lean:454	theorem	hyp	
+ww:Rim	CollarAt.interior	ww	Plane/Woodall/Collar.lean:461	theorem	hyp	
+ww:Rim	exists_changePt_band	ww	Plane/Woodall/Collar.lean:477	theorem	hyp	
+ww:Rim	isOpen_collar	ww	Plane/Woodall/Collar.lean:96	theorem	hyp	
+ww:Rim	CollarAt.mono	ww	Plane/Woodall/NoFourFive.lean:317	theorem	hyp	
+ww:Rim	CollarAt.inter	ww	Plane/Woodall/NoFourFive.lean:327	theorem	hyp	
+ww:Rim	collarAt_closure_of_forall_shadow	ww	Plane/Woodall/Steps.lean:200	theorem	hyp	
+ww:Rim	collarAt_setOf_forall_mem	ww	Plane/Woodall/Steps.lean:52	theorem	hyp	
+ww:Rim	CollarAt.of_abs_sub_lt	ww	Plane/Woodall/Steps.lean:67	theorem	hyp	
+ww:SectorsAt	SectorsAt.false_of_ncard_le_two_on_arc	ww	Plane/Woodall/NoFourFive.lean:1042	theorem	REFUT	
+ww:SectorsAt	step5_lt	ww	Plane/Woodall/Steps.lean:252	theorem	REFUT	
+ww:SectorsAt	step6	ww	Plane/Woodall/Steps.lean:277	theorem	REFUT	
+ww:SectorsAt	false_of_four_le_sectors	ww	Plane/Woodall/Steps.lean:471	theorem	REFUT	
+ww:SectorsAt	sectorsAt_one_colour	ww	Plane/Woodall/Basic.lean:168	theorem	hyp	
+ww:SectorsAt	threeSectorDisc_not_forall_merged	ww	Plane/Woodall/Basic.lean:285	theorem	hyp	
+ww:SectorsAt	threeSectorDisc_not_forall_normal	ww	Plane/Woodall/Basic.lean:295	theorem	hyp	
+ww:SectorsAt	SectorsAt.exists_mem_Ico	ww	Plane/Woodall/NoFourFive.lean:1075	theorem	hyp	
+ww:SectorsAt	SectorsAt.not_mem_coloursAt_of_mem_Ioo	ww	Plane/Woodall/NoFourFive.lean:1108	theorem	hyp	
+ww:SectorsAt	SectorsAt.exists_parabola_region	ww	Plane/Woodall/NoFourFive.lean:1151	theorem	hyp	
+ww:SectorsAt	SectorsAt.exists_prev_dir	ww	Plane/Woodall/NoFourFive.lean:1244	theorem	hyp	
+ww:SectorsAt	SectorsAt.collarAt_prev_inner	ww	Plane/Woodall/NoFourFive.lean:1261	theorem	hyp	
+ww:SectorsAt	SectorsAt.collarAt_prev_outer	ww	Plane/Woodall/NoFourFive.lean:1271	theorem	hyp	
+ww:SectorsAt	SectorsAt.collarAt_cur_inner	ww	Plane/Woodall/NoFourFive.lean:1291	theorem	hyp	
+ww:SectorsAt	SectorsAt.collarAt_cur_outer	ww	Plane/Woodall/NoFourFive.lean:1301	theorem	hyp	
+ww:SectorsAt	SectorsAt.exists_normal_collarAt	ww	Plane/Woodall/NoFourFive.lean:1313	theorem	hyp	
+ww:SectorsAt	SectorsAt.absent_at_normal	ww	Plane/Woodall/NoFourFive.lean:1330	theorem	hyp	
+ww:SectorsAt	SectorsAt.exists_two_absent	ww	Plane/Woodall/NoFourFive.lean:1353	theorem	hyp	
+ww:SectorsAt	SectorsAt.eq_of_edge_mem_angleIcc	ww	Plane/Woodall/NoFourFive.lean:510	theorem	hyp	
+ww:SectorsAt	SectorsAt.mem_coneAt_of_mem_Icc	ww	Plane/Woodall/NoFourFive.lean:715	theorem	hyp	
+ww:SectorsAt	SectorsAt.collarAt_shadow_inner_of_mem	ww	Plane/Woodall/NoFourFive.lean:726	theorem	hyp	
+ww:SectorsAt	SectorsAt.collarAt_shadow_outer_of_mem	ww	Plane/Woodall/NoFourFive.lean:732	theorem	hyp	
+ww:SectorsAt	SectorsAt.not_mem_range_of_crossesAt	ww	Plane/Woodall/NoFourFive.lean:740	theorem	hyp	
+ww:SectorsAt	SectorsAt.coloursAt_eq	ww	Plane/Woodall/Steps.lean:164	theorem	hyp	
+ww:SectorsAt	SectorsAt.collarAt_opposite	ww	Plane/Woodall/Steps.lean:222	theorem	hyp	
+ww:SectorsAt	const_sectorsAt	ww	Plane/Woodall/Basic.lean:175	theorem	concl	
+ww:SectorsAt	threeSectorDisc_sectorsAt	ww	Plane/Woodall/Basic.lean:238	theorem	concl	sorry
+ww:SectorsAt	threeSectorDisc_phantom	ww	Plane/Woodall/Basic.lean:244	theorem	concl	sorry
+ww:SectorsAt	halfDisc_sectorsAt	ww	Plane/Woodall/Basic.lean:305	theorem	concl	sorry
+ww:SectorsAt	NiceAt.normal	ww	Plane/Woodall/Steps.lean:444	theorem	concl	
+ww:WoodallMerged	aeMap6_merged	ww	Plane/Woodall/Steps.lean:558	theorem	REFUT	
+ww:WoodallMerged	threeSectorDisc_woodallMerged	ww	Plane/Woodall/Basic.lean:264	theorem	concl	
+ww:WoodallMerged	exists_merge_at	ww	Plane/Woodall/Merge.lean:247	theorem	concl	sorry
+ww:WoodallMerged	exists_woodallMerged	ww	Plane/Woodall/Merge.lean:257	theorem	concl	sorry
+ww:WoodallNormal	false_of_four_le_sectors	ww	Plane/Woodall/Steps.lean:471	theorem	REFUT	
+ww:WoodallNormal	aeMap6_normal	ww	Plane/Woodall/Steps.lean:537	theorem	REFUT	
+ww:WoodallNormal	threeSectorDisc_woodallNormal	ww	Plane/Woodall/Basic.lean:271	theorem	concl	

@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Basic
 import Proofs.HadwigerNelson.Instances.Seven
+import Proofs.HadwigerNelson.Topology.LebesgueCovering
 
 /-!
 # Almost-everywhere-proper maps, region-only: lemma (L) and TS-T (FS-106)
@@ -18,8 +19,7 @@ a boundary point"), so both are stated over open colour classes, never over a ma
   multicolour by definition.
 * **FS106-TS-T**: a point of chromaticity `≥ 3` within `1/√2 + ε` of every point
   (`AeProperRegions.exists_three_le_multicolour`, SB's route through **Lebesgue's covering theorem** for the square,
-  `lebesgue_covering_square` — an outside theorem, its disposition owed, `plans/FS131-w4-kernel-plan.md` § 7) and within `1` (TS's
-  form); for arc maps (`ArcMap.ts_t`), a point of chromaticity `≥ 3` has degree `≥ 3` (`ArcMap.exists_hasDegree_of_mem_dom`), at most
+  `lebesgue_covering_square` — held in the kernel by FS131-LEB, `Topology/LebesgueCovering`) and within `1` (TS's form); for arc maps (`ArcMap.ts_t`), a point of chromaticity `≥ 3` has degree `≥ 3` (`ArcMap.exists_hasDegree_of_mem_dom`), at most
   three colours everywhere (S–V Lemma 2's conclusion under Condition 5, not a backlog row) makes it trichromatic, and Condition 6
   (`ArcMap.Condition6`) of degree `3`.
 * **The inhabitant**: `sevenBrickMap`, the brick seven-colouring of `Instances/Seven` (M36) as an arc map of the plane, valid.
@@ -247,15 +247,15 @@ example : multicolour (![ball (0 : ℂ) 1, ball 2 1] : Fin 2 → Set ℂ) (5 * I
 def closedSquare (c : ℂ) (s : ℝ) : Set ℂ := {z | c.re ≤ z.re ∧ z.re ≤ c.re + s ∧ c.im ≤ z.im ∧ z.im ≤ c.im + s}
 
 /-- **Lebesgue's covering theorem for the square** (`n = 2`): if a closed square is covered by finitely many closed sets none of
-which meets two opposite sides, some point of the square lies in three of them. Hurewicz–Wallman, *Dimension Theory* (1941), Thm IV 2
-(the `n`-cube, `n + 1` sets); SB's step 6 (`plans/FS106-SB-verification.md` § 2.5). **An outside theorem, its disposition owed**
-(`plans/FS131-w4-kernel-plan.md` § 7: a separate formalization job, or an `axiom` with `LEAN.md` § Assumptions' four items). -/
+which meets two opposite sides, some point of the square lies in three of them. `[HurewiczWallman1948]` Thm IV 2, p. 42 (the
+`n`-cube, `n + 1` sets); SB's step 6 (`plans/FS106-SB-verification.md` § 2.5). Proved in the kernel by FS131-LEB
+(`HadwigerNelson.LebesgueCovering.lebesgue_covering_square`, `Topology/LebesgueCovering`, through Sperner's lemma on the grid). -/
 theorem lebesgue_covering_square {m : ℕ} (c : ℂ) {s : ℝ} (hs : 0 < s) (F : Fin m → Set ℂ) (hF : ∀ i, IsClosed (F i))
     (hcov : closedSquare c s ⊆ ⋃ i, F i)
     (hLR : ∀ i, ¬ ((∃ z ∈ F i ∩ closedSquare c s, z.re = c.re) ∧ ∃ z ∈ F i ∩ closedSquare c s, z.re = c.re + s))
     (hBT : ∀ i, ¬ ((∃ z ∈ F i ∩ closedSquare c s, z.im = c.im) ∧ ∃ z ∈ F i ∩ closedSquare c s, z.im = c.im + s)) :
-    ∃ z ∈ closedSquare c s, ∃ i j l : Fin m, i ≠ j ∧ i ≠ l ∧ j ≠ l ∧ z ∈ F i ∧ z ∈ F j ∧ z ∈ F l := by
-  sorry
+    ∃ z ∈ closedSquare c s, ∃ i j l : Fin m, i ≠ j ∧ i ≠ l ∧ j ≠ l ∧ z ∈ F i ∧ z ∈ F j ∧ z ∈ F l :=
+  LebesgueCovering.lebesgue_covering_square c hs F hF hcov hLR hBT
 
 /-! ## FS106-TS-T, region-only -/
 

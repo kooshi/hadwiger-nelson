@@ -178,6 +178,8 @@ import Proofs.HadwigerNelson.Plane.SVMap
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
+import Proofs.HadwigerNelson.Topology.SpernerGrid
+import Proofs.HadwigerNelson.Topology.LebesgueCovering
 
 /-!
 # Proofs

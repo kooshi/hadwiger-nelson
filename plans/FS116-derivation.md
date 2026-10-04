@@ -1553,6 +1553,8 @@ derivation: FS116-V5-U1
 
 V5's lemma, one mind; known (FS112-U1). Rests on it: FS116-V5-DICHO; FS116-V5-CROSS-S; FS116-V5's second derivations of FS116-N3-SEMI, -PAIR and -CROSS.
 
+*Note (2026-10-04, FS131-E2, `plans/FS131-E2-derivation.md`):* the four-colour clause holds when a tile at `z` has a cusp there (FS131-E2-U1-CUSP): of simple it reads only "one sector per tile at `z`" (FS131-E2-SEP), which a tile wrapped round a cusp violates. "The side cones hold two further colours" is true as "each side cone holds a colour other than `c` and `c′`"; as "two different further colours" it needs the class's hypotheses — FS131-E2-MONSTER (valid, non-Siamese, one tile not a Jordan domain) has one colour in both side cones. FS116-V5's second derivation of FS116-N3-PAIR does not read this entry. (filed by Keryx from `plans/FS131-E2-derivation.md` § 3.4, draft 2)
+
 derivation: FS116-V5-OUT2
   statement: in V5-QCOL's setting (or V5-RING's), if an outer tile of colour c has a ring point r(θ) in its closure, then p's tile of colour c has its
     cone at p in [θ + 90°, θ + 270°]

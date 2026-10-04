@@ -659,6 +659,8 @@ derivation: FS129-SR1-BENDLE3
 
 Rests on it: nothing derived; it derives inventory item 82's "generalization, not derived" (below √3 the bends free the ring of any point of at most three colours). **Record-job note (2026-10-03):** FS129-OR1-BEND3, which this replaces with BENDANY, also concludes that the new fragment's tiles include every tile of F meeting B(q, min(r, √3)) other than the ring arcs' side tiles, changed only inside thin lenses; this statement does not say so, though its fragment is BENDANY's F″, whose statement does. No hypothesis is dropped; the Lean statement should conclude with BENDANY's tile clause, or that clause of BEND3 is lost.
 
+*(2026-10-04, FS131-E2:)* in `uses only:`, 'one cone per tile at a vertex' should read 'one sector per tile at a vertex' — at a cusp an interval cone does not give one sector (FS131-E2-MONSTER); the statement is unchanged. (filed by Keryx from `plans/FS131-E2-derivation.md` § 3.4, draft 4)
+
 derivation: FS129-OR1-QFREE-CLASS
   statement: for each of the four classes of valid six-coloured fragments — all of them, the non-Siamese ones, the simple ones, the non-Siamese
     simple ones — if for every r > 1 no fragment of the class on B̄(p, r) about a vertex p of at least four colours has a ring carrying no arc of
