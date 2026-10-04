@@ -1,5 +1,7 @@
 import Proofs.HadwigerNelson.Plane.CPColouring
 import Proofs.HadwigerNelson.Plane.Cover
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+import Mathlib.MeasureTheory.Integral.Indicator
 
 /-!
 # Forced translations of a CP colouring (FS-131 wave 2)
@@ -15,10 +17,228 @@ open Complex Set MeasureTheory Filter Topology
 
 variable {k : ℕ}
 
+/-! ### The inhabitant's construction: `sq9` under a uniform random translation of the period torus -/
+
+theorem sq9Index_periodic : Function.Periodic sq9Index (3 / 2 : ℝ) := by
+  intro t
+  unfold sq9Index
+  have : ⌊2 * (t + 3 / 2)⌋ = ⌊2 * t⌋ + 3 := by
+    rw [show 2 * (t + 3 / 2) = 2 * t + (3 : ℤ) by push_cast; ring, Int.floor_add_intCast]
+  rw [this]; push_cast
+  have h3 : (3 : ZMod 3) = 0 := by decide
+  rw [h3, add_zero]
+
+local instance : Fact (0 < (3 / 2 : ℝ)) := ⟨by norm_num⟩
+
+/-- The square index of a point of the circle `ℝ / (3/2)ℤ`. -/
+noncomputable def cIdx (t : AddCircle (3 / 2 : ℝ)) : ZMod 3 := sq9Index (AddCircle.equivIoc (3 / 2 : ℝ) 0 t).1
+
+theorem cIdx_coe (a : ℝ) : cIdx (a : AddCircle (3 / 2 : ℝ)) = sq9Index a := by
+  unfold cIdx
+  have h : (AddCircle.equivIoc (3 / 2 : ℝ) 0 (a : AddCircle (3 / 2 : ℝ))).1 = toIocMod (by norm_num : (0 : ℝ) < 3 / 2) 0 a := by
+    have := QuotientAddGroup.equivIocMod_coe (by norm_num : (0 : ℝ) < 3 / 2) 0 a
+    exact congrArg Subtype.val this
+  rw [h]
+  have h2 := self_sub_toIocMod (by norm_num : (0 : ℝ) < 3 / 2) 0 a
+  have : toIocMod (by norm_num : (0 : ℝ) < 3 / 2) 0 a = a - toIocDiv (by norm_num : (0 : ℝ) < 3 / 2) 0 a • (3 / 2 : ℝ) := by linarith
+  rw [this]
+  exact sq9Index_periodic.sub_zsmul_eq _
+
+
+/-- The period torus `(ℝ / (3/2)ℤ)²`. -/
+abbrev Tor := AddCircle (3 / 2 : ℝ) × AddCircle (3 / 2 : ℝ)
+
+/-- The point of the torus under `y`. -/
+noncomputable def torPt (y : ℂ) : Tor := ((y.re : ℝ), (y.im : ℝ))
+
+theorem torPt_add (y z : ℂ) : torPt (y + z) = torPt y + torPt z := by
+  simp [torPt]
+
+/-- `sq9`'s colour as a function on the torus. -/
+noncomputable def torCol (t : Tor) : Fin 9 := finProdFinEquiv (cIdx t.1, cIdx t.2)
+
+theorem torCol_coe (a b : ℝ) : torCol (((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) =
+    sq9Col ⟨a, b⟩ := by
+  simp [torCol, sq9Col, cIdx_coe]
+
+theorem torCol_pt_add (a b : ℝ) (z : ℂ) :
+    torCol ((((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) + torPt z) = sq9Col (⟨a, b⟩ + z) := by
+  have : ((((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) + torPt z : Tor) =
+      (((a + z.re : ℝ) : AddCircle (3 / 2 : ℝ)), ((b + z.im : ℝ) : AddCircle (3 / 2 : ℝ))) := by
+    simp [torPt]
+  rw [this, torCol_coe]; rfl
+
+theorem exists_coe_eq (t : Tor) : ∃ a b : ℝ, t = (((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) := by
+  obtain ⟨a, ha⟩ := QuotientAddGroup.mk_surjective t.1
+  obtain ⟨b, hb⟩ := QuotientAddGroup.mk_surjective t.2
+  exact ⟨a, b, Prod.ext ha.symm hb.symm⟩
+
+theorem measurable_cIdx : Measurable cIdx := by
+  have hs : Measurable sq9Index := by
+    unfold sq9Index
+    exact (measurable_of_countable (fun n : ℤ => (n : ZMod 3))).comp (Int.measurable_floor.comp (measurable_const.mul measurable_id))
+  exact hs.comp (measurable_subtype_coe.comp (AddCircle.measurableEquivIoc (3 / 2 : ℝ) 0).measurable)
+
+theorem measurable_torCol : Measurable torCol := by
+  have h1 : Measurable fun t : Tor => (cIdx t.1, cIdx t.2) :=
+    (measurable_cIdx.comp measurable_fst).prodMk (measurable_cIdx.comp measurable_snd)
+  have h2 : Measurable (fun p : ZMod 3 × ZMod 3 => (finProdFinEquiv p : Fin 9)) := by
+    haveI : MeasurableSingletonClass (ZMod 3 × ZMod 3) := inferInstance
+    exact measurable_of_finite _
+  exact h2.comp h1
+
+
+/-- The random colouring at the torus point `t`: `y ↦ sq9 (y + t)`. -/
+noncomputable def torField (t : Tor) : ℂ → Fin 9 := fun y => torCol (t + torPt y)
+
+theorem measurable_torField : Measurable torField :=
+  measurable_pi_lambda _ fun _ => measurable_torCol.comp (measurable_id.add_const _)
+
+theorem torField_shift (x : ℂ) (t : Tor) : shiftCol x (torField t) = torField (t + torPt x) := by
+  funext y
+  simp only [shiftCol, torField, torPt_add, add_assoc, add_comm (torPt x)]
+
+theorem volume_tor_univ : (volume : Measure Tor) univ = ENNReal.ofReal (3 / 2) * ENNReal.ofReal (3 / 2) := by
+  rw [Measure.volume_eq_prod, ← univ_prod_univ, Measure.prod_prod, AddCircle.measure_univ]
+
+/-- The law of the torus-random colouring. -/
+noncomputable def cpLaw : Measure (ℂ → Fin 9) :=
+  (ENNReal.ofReal (3 / 2) * ENNReal.ofReal (3 / 2))⁻¹ • (volume : Measure Tor).map torField
+
+theorem cpLaw_apply {S : Set (ℂ → Fin 9)} (hS : MeasurableSet S) :
+    cpLaw S = (ENNReal.ofReal (3 / 2) * ENNReal.ofReal (3 / 2))⁻¹ * volume (torField ⁻¹' S) := by
+  rw [cpLaw, Measure.smul_apply, Measure.map_apply measurable_torField hS, smul_eq_mul]
+
+instance : (volume : Measure Tor).IsAddLeftInvariant := by
+  rw [Measure.volume_eq_prod]; infer_instance
+
+theorem cpLaw_map_shift (x : ℂ) : cpLaw.map (shiftCol x) = cpLaw := by
+  rw [cpLaw, Measure.map_smul, Measure.map_map (measurable_shiftCol x) measurable_torField]
+  congr 1
+  have : (shiftCol x ∘ torField) = torField ∘ (· + torPt x) := by
+    funext t; exact torField_shift x t
+  have hm : Measurable (fun t : Tor => t + torPt x) := measurable_add_const _
+  have hmp : Measure.map (fun t : Tor => t + torPt x) (volume : Measure Tor) = volume :=
+    by simpa only [add_comm _ (torPt x)] using (measurePreserving_add_left (volume : Measure Tor) (torPt x)).map_eq
+  rw [this, ← Measure.map_map measurable_torField hm, hmp]
+
+
+theorem vol_tor_shift (v : Tor) {S : Set Tor} (hS : MeasurableSet S) : volume {t : Tor | t + v ∈ S} = volume S := by
+  have := (measurePreserving_add_left (volume : Measure Tor) v).measure_preimage hS.nullMeasurableSet
+  have e : {t : Tor | t + v ∈ S} = (fun x => v + x) ⁻¹' S := by ext t; simp [add_comm]
+  rw [e]; exact this
+
+/-- The half-integer points of the circle. -/
+def halfPts : Set (AddCircle (3 / 2 : ℝ)) := range fun n : ℤ => (((n : ℝ) / 2 : ℝ) : AddCircle (3 / 2 : ℝ))
+
+theorem volume_halfPts : volume halfPts = 0 := by
+  have hc : halfPts.Countable := countable_range _
+  rw [AddCircle.add_projection_respects_measure (3 / 2 : ℝ) 0 hc.measurableSet]
+  refine measure_mono_null (t := range fun k : ℤ => (k : ℝ) / 2) ?_ ((countable_range _).measure_zero volume)
+  rintro a ⟨⟨n, hn⟩, -⟩
+  have h : (((a - (n : ℝ) / 2 : ℝ)) : AddCircle (3 / 2 : ℝ)) = 0 := by
+    rw [AddCircle.coe_sub, sub_eq_zero]; exact hn.symm
+  obtain ⟨m, hm⟩ := (AddCircle.coe_eq_zero_iff (3 / 2 : ℝ)).1 h
+  refine ⟨n + 3 * m, ?_⟩
+  push_cast
+  simp only [zsmul_eq_mul] at hm
+  linarith
+
+theorem sq9Index_eventually {a : ℝ} (ha : ∀ n : ℤ, 2 * a ≠ n) : ∀ᶠ s in 𝓝 (0 : ℝ), sq9Index (a + s) = sq9Index a := by
+  have h1 : (⌊2 * a⌋ : ℝ) < 2 * a := lt_of_le_of_ne (Int.floor_le _) (ha _).symm
+  have h2 : 2 * a < ⌊2 * a⌋ + 1 := Int.lt_floor_add_one _
+  have hopen : IsOpen {s : ℝ | (⌊2 * a⌋ : ℝ) < 2 * (a + s) ∧ 2 * (a + s) < ⌊2 * a⌋ + 1} :=
+    (isOpen_lt (continuous_const : Continuous fun _ : ℝ => (⌊2 * a⌋ : ℝ)) (by fun_prop : Continuous fun s : ℝ => 2 * (a + s))).inter
+      (isOpen_lt (by fun_prop : Continuous fun s : ℝ => 2 * (a + s)) (continuous_const : Continuous fun _ : ℝ => (⌊2 * a⌋ : ℝ) + 1))
+  filter_upwards [hopen.mem_nhds (by simp only [mem_setOf_eq, add_zero]; exact ⟨h1, h2⟩)] with s hs
+  have : ⌊2 * (a + s)⌋ = ⌊2 * a⌋ := by
+    rw [Int.floor_eq_iff]; exact ⟨by linarith [hs.1], by linarith [hs.2]⟩
+  unfold sq9Index; rw [this]
+
+
+theorem isProbabilityMeasure_cpLaw : IsProbabilityMeasure cpLaw := by
+  refine ⟨?_⟩
+  rw [cpLaw_apply MeasurableSet.univ, preimage_univ, volume_tor_univ]
+  exact ENNReal.inv_mul_cancel (by simp) (ENNReal.mul_ne_top ENNReal.ofReal_ne_top ENNReal.ofReal_ne_top)
+
+theorem torField_eq (a b : ℝ) (z : ℂ) :
+    torField (((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) z = sq9Col (⟨a, b⟩ + z) :=
+  torCol_pt_add a b z
+
+theorem cpLaw_proper (x w : ℂ) (hw : ‖w‖ = 1) : cpLaw {f | f x = f (x + w)} = 0 := by
+  have hm : MeasurableSet {f : ℂ → Fin 9 | f x = f (x + w)} :=
+    measurableSet_eq_fun (measurable_pi_apply x) (measurable_pi_apply _)
+  rw [cpLaw_apply hm]
+  have : torField ⁻¹' {f : ℂ → Fin 9 | f x = f (x + w)} = ∅ := by
+    refine eq_empty_of_forall_notMem fun t ht => ?_
+    obtain ⟨a, b, rfl⟩ := exists_coe_eq t
+    simp only [mem_preimage, mem_setOf_eq, torField_eq] at ht
+    refine sq9Col_ne_of_dist_eq_one (x := (⟨a, b⟩ : ℂ) + x) (y := (⟨a, b⟩ : ℂ) + (x + w)) ?_ ht
+    rw [dist_eq_norm, show (⟨a, b⟩ : ℂ) + x - ((⟨a, b⟩ : ℂ) + (x + w)) = -w by ring, norm_neg, hw]
+  rw [this, measure_empty, mul_zero]
+
+
+/-- The torus points where the colour changes under a translation by `d`. -/
+def torChange (d : ℂ) : Set Tor := {t | torCol t ≠ torCol (t + torPt d)}
+
+theorem measurableSet_torChange (d : ℂ) : MeasurableSet (torChange d) :=
+  (measurableSet_eq_fun measurable_torCol (measurable_torCol.comp (measurable_add_const _))).compl
+
+theorem tendsto_volume_torChange : Tendsto (fun d : ℂ => volume (torChange d)) (𝓝 0) (𝓝 0) := by
+  have hnull : (volume : Measure Tor) (halfPts ×ˢ univ ∪ univ ×ˢ halfPts) = 0 := by
+    refine measure_union_null ?_ ?_ <;> rw [Measure.volume_eq_prod, Measure.prod_prod]
+    · rw [volume_halfPts, zero_mul]
+    · rw [volume_halfPts, mul_zero]
+  have key := tendsto_measure_of_ae_tendsto_indicator_of_isFiniteMeasure (μ := (volume : Measure Tor))
+    (𝓝 (0 : ℂ)) (A := (∅ : Set Tor)) MeasurableSet.empty measurableSet_torChange (As := torChange) ?_
+  · simpa using key
+  · filter_upwards [measure_eq_zero_iff_ae_notMem.1 hnull] with t ht
+    have h1 : t.1 ∉ halfPts := fun h => ht (Or.inl ⟨h, mem_univ _⟩)
+    have h2 : t.2 ∉ halfPts := fun h => ht (Or.inr ⟨mem_univ _, h⟩)
+    obtain ⟨a, b, rfl⟩ := exists_coe_eq t
+    have ha : ∀ n : ℤ, 2 * a ≠ n := fun n hn => h1 ⟨n, by
+      show (((n : ℝ) / 2 : ℝ) : AddCircle (3 / 2 : ℝ)) = _
+      rw [show (n : ℝ) / 2 = a by linarith]⟩
+    have hb : ∀ n : ℤ, 2 * b ≠ n := fun n hn => h2 ⟨n, by
+      show (((n : ℝ) / 2 : ℝ) : AddCircle (3 / 2 : ℝ)) = _
+      rw [show (n : ℝ) / 2 = b by linarith]⟩
+    have hre : Tendsto (fun d : ℂ => d.re) (𝓝 0) (𝓝 0) := by simpa using Complex.continuous_re.tendsto 0
+    have him : Tendsto (fun d : ℂ => d.im) (𝓝 0) (𝓝 0) := by simpa using Complex.continuous_im.tendsto 0
+    filter_upwards [hre.eventually (sq9Index_eventually ha), him.eventually (sq9Index_eventually hb)] with d h1 h2
+    simp only [torChange, mem_setOf_eq, mem_empty_iff_false, iff_false, not_not]
+    have e1 : (((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) + torPt d =
+        (((a + d.re : ℝ) : AddCircle (3 / 2 : ℝ)), ((b + d.im : ℝ) : AddCircle (3 / 2 : ℝ))) := by
+      simp [torPt]
+    rw [e1, torCol_coe, torCol_coe]
+    simp only [sq9Col]
+    rw [h1, h2]
+
+theorem cpLaw_tendsto (x : ℂ) : Tendsto (fun y => cpLaw {f | f x ≠ f y}) (𝓝 x) (𝓝 0) := by
+  have hmeas : ∀ y, MeasurableSet {f : ℂ → Fin 9 | f x ≠ f y} := fun y =>
+    (measurableSet_eq_fun (measurable_pi_apply x) (measurable_pi_apply y)).compl
+  have hform : ∀ y, cpLaw {f | f x ≠ f y} =
+      (ENNReal.ofReal (3 / 2) * ENNReal.ofReal (3 / 2))⁻¹ * volume (torChange (y - x)) := by
+    intro y
+    rw [cpLaw_apply (hmeas y), ← vol_tor_shift (torPt x) (measurableSet_torChange (y - x))]
+    congr 2
+    ext t
+    simp only [mem_preimage, mem_setOf_eq, torChange, torField]
+    rw [add_assoc, ← torPt_add, add_sub_cancel]
+  simp_rw [hform]
+  have h0 : Tendsto (fun y : ℂ => y - x) (𝓝 x) (𝓝 0) := tendsto_sub_nhds_zero_iff.2 tendsto_id
+  have hc : (ENNReal.ofReal (3 / 2) * ENNReal.ofReal (3 / 2))⁻¹ ≠ ⊤ :=
+    ENNReal.inv_ne_top.2 (mul_ne_zero (ENNReal.ofReal_pos.2 (by norm_num)).ne' (ENNReal.ofReal_pos.2 (by norm_num)).ne')
+  have := ENNReal.Tendsto.const_mul (tendsto_volume_torChange.comp h0) (Or.inr hc)
+  rwa [mul_zero] at this
+
 /-- **Inhabitant**: `sq9` under a uniformly random translation of its period torus `(3/2)ℤ²` — the law of
 `y ↦ sq9.col (y + z)`, `z` uniform on `[0, 3/2)²`. -/
 theorem nonempty_cpColouring_nine : Nonempty (CPColouring 9) := by
-  sorry
+  exact ⟨{ law := cpLaw
+           isProbabilityMeasure := isProbabilityMeasure_cpLaw
+           map_shift := cpLaw_map_shift
+           tendsto_ne := cpLaw_tendsto
+           proper := cpLaw_proper }⟩
 
 /-- `Z`: the vectors `x` with `c(0) = c(x)` almost surely. -/
 def CPColouring.forcedSet (c : CPColouring k) : Set ℂ := {x | c.law {f | f 0 = f x} = 1}

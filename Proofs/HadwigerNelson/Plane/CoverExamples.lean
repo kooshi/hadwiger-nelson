@@ -232,10 +232,56 @@ theorem disc7_isMaximalCover : IsMaximalCover disc7 := by
 theorem disc7_isRegularMUA (a : Fin 7) : IsRegularMUA (disc7 a) := by
   sorry
 
+/-- Every other colour is a lattice neighbour's colour (differences `±1, ±2, ±3`). -/
+theorem disc7_nbr : ∀ a b : Fin 7, a ≠ b → ∃ d ∈ ([(1,0),(0,1),(-1,0),(0,-1),(1,-1),(-1,1)] : List (ℤ×ℤ)),
+    disc7Col ((a.val : ℤ) + d.1) d.2 = b := by decide +kernel
+
+/-- Two closed discs of radius `1/2` with centres within `9/10` overlap in positive measure. -/
+theorem lens_pos {p q : ℂ} (h : dist p q ≤ 9 / 10) : 0 < volume (closedBall p (1 / 2) ∩ closedBall q (1 / 2)) := by
+  set M : ℂ := (p + q) / 2
+  have hp : dist M p ≤ 9 / 20 := by
+    have : M - p = (q - p) / 2 := by simp only [M]; ring
+    rw [dist_eq_norm, this, norm_div, ← dist_eq_norm, dist_comm]; simp; linarith
+  have hq : dist M q ≤ 9 / 20 := by
+    have : M - q = (p - q) / 2 := by simp only [M]; ring
+    rw [dist_eq_norm, this, norm_div, ← dist_eq_norm]; simp; linarith [dist_comm p q]
+  refine lt_of_lt_of_le (measure_ball_pos volume M (by norm_num : (0:ℝ) < 1 / 20)) (measure_mono ?_)
+  intro w hw
+  rw [mem_ball] at hw
+  refine ⟨?_, ?_⟩ <;> rw [mem_closedBall]
+  · linarith [dist_triangle w M p]
+  · linarith [dist_triangle w M q]
+
+/-- A unit lattice step moves `tri` by distance `1`. -/
+theorem norm_tri_sub (m n d1 d2 : ℤ) (h : triQ d1 d2 = 1) : dist (tri (m + d1) (n + d2)) (tri m n) = 1 := by
+  have : tri (m + d1) (n + d2) - tri m n = (((d1 : ℝ) : ℂ) + ((d2 : ℝ) : ℂ) * e (π / 3)) := by
+    simp only [tri]; push_cast; ring
+  rw [dist_eq_norm, this, Complex.norm_def, normSq_add_mul, h]; simp
+
 /-- **FS111-M2-DISC7**: the overlaps (lenses) have positive measure — every two classes meet in positive measure (each disc meets
 one disc of every other colour: the six neighbouring colour differences are `±1, ±2, ±3`). -/
 theorem disc7_lens {a b : Fin 7} (hab : a ≠ b) : 0 < volume (disc7 a ∩ disc7 b) := by
-  sorry
+  obtain ⟨d, hd, hcol⟩ := disc7_nbr a b hab
+  have hq : triQ (d.1 : ℝ) (d.2 : ℝ) = 1 := by
+    simp only [List.mem_cons, List.not_mem_nil, or_false] at hd
+    rcases hd with rfl | rfl | rfl | rfl | rfl | rfl <;> norm_num [triQ]
+  have hdist : dist (disc7Centre ((a.val : ℤ) + d.1) d.2) (disc7Centre a.val 0) ≤ 9 / 10 := by
+    have h1 : disc7Centre ((a.val : ℤ) + d.1) d.2 - disc7Centre a.val 0 =
+        ((√3 / 2 : ℝ) : ℂ) * (tri ((a.val : ℤ) + d.1) (0 + d.2) - tri a.val 0) := by
+      simp only [disc7Centre]; ring_nf
+    rw [dist_eq_norm, h1, norm_mul, ← dist_eq_norm, zero_add]
+    have := norm_tri_sub a.val 0 d.1 d.2 (by exact_mod_cast hq)
+    rw [zero_add] at this
+    rw [this, norm_real, Real.norm_eq_abs, abs_of_pos (by positivity), mul_one]
+    have : √3 ≤ 9 / 5 := Real.sqrt_le_iff.2 ⟨by norm_num, by norm_num⟩
+    linarith
+  have hca0 : ∀ x : Fin 7, disc7Col (x.val : ℤ) 0 = x := by decide +kernel
+  have hca := hca0 a
+  refine lt_of_lt_of_le (lens_pos (p := disc7Centre a.val 0) (by rw [dist_comm]; exact hdist)) (measure_mono ?_)
+  intro w ⟨hw1, hw2⟩
+  refine ⟨?_, ?_⟩
+  · exact mem_iUnion.2 ⟨_, mem_iUnion.2 ⟨_, mem_iUnion.2 ⟨hca, hw1⟩⟩⟩
+  · exact mem_iUnion.2 ⟨_, mem_iUnion.2 ⟨_, mem_iUnion.2 ⟨hcol, hw2⟩⟩⟩
 
 /-- **FS111-M2-DISC7**: each class has density `2π/(21√3)`. -/
 theorem disc7_upperDensity (a : Fin 7) : upperDensity (disc7 a) = ENNReal.ofReal (2 * π / (21 * √3)) := by
