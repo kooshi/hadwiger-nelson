@@ -2816,9 +2816,10 @@ theorem stripeCol_ne_of_dist_eq_one (n : ℕ) {x y : ℂ} (h : dist x y = 1) : s
   nlinarith [r1.1, r1.2, r2.1, r2.2]
 
 /-- **FS106-REM**, third clause (ruling `plans/FS131-close-inventory.md` item 63: `η < 1` added, since at `η ≥ 1` every point
-is kept): the uniform form is FALSE — some measurable colouring proper at every unit pair (the
-zigzag colouring, FS106-TQ's control C2) has, at every `ε`, translates of the unit square holding non-kept points of
-measure bounded below. -/
+is kept): the uniform form is FALSE — some measurable colouring proper at every unit pair has, at every `ε`, translates
+of the unit square holding non-kept points of measure bounded below. The row names FS106-TQ's control C2 (the zigzag
+colouring); the witness proved here is the stripe colouring `stripeCol` (squares of side `1/2` mod `4`, striped ever finer
+as rows rise), whose every point of the unit square high enough is non-kept at radius `ε/2`. -/
 theorem exists_not_uniform_kept {η : ℝ} (hη0 : 0 < η) (hη : η < 1) :
     ∃ (k : ℕ) (f : ℂ → Fin k), Measurable f ∧ (∀ x y, dist x y = 1 → f x ≠ f y) ∧ ∃ m > (0 : ENNReal),
       ∀ ε > (0 : ℝ), ∃ z : ℂ, m ≤ volume {x | x - z ∈ {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧ 0 ≤ w.im ∧ w.im ≤ 1} ∧
