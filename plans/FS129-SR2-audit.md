@@ -16,6 +16,9 @@ Writes only this file, `data/fs129/sr2/`, `tools/fs129_sr2_*.py` and `data/fs129
   from FS111-V0-ID1 — § 2.2.
 - **FS129-SR2-SUPK** — FS106-SUP's equality of the tight, slack, tiled and periodic suprema at every `k` — derived from FS106-SUP — § 2.2.
 - **FS129-SR2-DISC1TS** — FS112-DISC1 as a case of FS106-TS-T — derived from FS106-TS-T — § 2.2.
+- **FS129-SR2-YESLIM-EQ** — FS116-O1-YESLIM as FS106-EQ's (c) ⟹ (a) at `k` composed with Lemma P — derived from FS106-EQ — § 3.2.
+- **FS129-SR2-QFCASE** — FS116-S1-QF as a case of FS129-OR1-QFREE (simple at `p` is automatic) — derived from FS129-OR1-QFREE — § 3.2.
+- **FS129-SR2-TOUCHW** — FS116-N1-TOUCH without its idle hypothesis — derived from FS116-N1-TOUCH (FS116-V3's reading) — § 3.2.
 
 ## Stage 1 — SAVED: readback and registered expectations
 
@@ -295,3 +298,131 @@ backlog must quote it with the entry, or it formalizes a false or superseded for
 - **FS114-N2-ENDS** (row 85) and **FS114-N3-JOINT** (row 88): their model lines — the errata of FS116-O1 (2026-09-29) under each entry,
   `plans/FS114-derivation.md` ll. 255, 277.
 - **FS114-N7-3T** (row 102, SR1's): the erratum of FS116-Z2 under the entry (l. 740), which split FS114-N7-QFREE off it.
+
+## Stage 3 — SAVED: the sweep, rows 104–193 (FS-114's last row, FS-116, FS-121)
+
+*Read for this stage: each row's statement, `uses only:` and handoff (`data/fs129/sr2/rows.md`); FS116-N1-TOUCH's entry and
+`plans/FS116-V3-verification.md` §§ 3.1, 4.4 (its idle hypothesis); FS116-V5-NE1's entry; FS129-OR1-QFREE's entry and `plans/FS129-OR1-audit.md`
+§ J3; `plans/FS106-TQ-derivation.md` § 3.1 (Lemma P). With stage 2 this completes SR1's § 6.3 row list: all 151 rows swept.*
+
+### 3.1 The sweep, second part
+
+| row | id | line |
+|---|---|---|
+| 104 | FS116-N1-GERM-R | unchanged |
+| 105 | FS116-N1-TWIST-D | unchanged; **carries** FS116-RING-TWIST-C's first clause (row 127) and FS116-V5-RING's first two clauses (row 146), and is SR1's SIXQ's source |
+| 106 | FS116-N1-ECHO | unchanged (V3 § 4.4's statement defect for ECHO is FS-116's, already filed) |
+| 107 | FS116-N1-GERM-S | unchanged; it carries RING-GERM's (iii) with Siamese pairs allowed, and (i), (ii) only in facing form, so neither is a case of the other — formalize both, GERM-S first (its handoff) |
+| 109 | FS116-N1-TOUCH | **hypothesis weakened**: "in the closure of a tile of one of p's colours" is idle (FS116-V3 § 3.1, filed only as a uses-only note) — FS129-SR2-TOUCHW states it without; formalize TOUCHW in its place |
+| 112 | FS116-N3-PAIR | unchanged; on FS116-V5-QCOL's setting (four colours at `p`) it is FS116-V5-DICHO's parenthetical clause, and DICHO adds the disjoint alternative |
+| 113 | FS116-N3-STAR2 | unchanged |
+| 114, 115 | FS116-O1-SATPIN, -N1-AXIS | unchanged |
+| 116 | FS116-O1-YESLIM | **merge**: a corollary of FS106-EQ's (c) ⟹ (a) at `k` (FS106-COMP's first clause at `k`) by Lemma P — FS129-SR2-YESLIM-EQ; its own route is COMP's Route I (Rajchman, weak-* compactness), so de Bruijn formalizes the weak-* step once, in EQ, and YESLIM in two lines |
+| 117 | FS116-RING-GERM | unchanged |
+| 118–120 | FS116-N2-STAR, -N2-ANTI, -N2-RECIP | unchanged |
+| 123, 124 | FS116-N3-CONE, -N3-CROSS | unchanged |
+| 125 | FS116-RING-Q-PRIME | **a case of FS116-RING-Q-PRIME-S** (row 126): Q-PRIME-S allows Siamese pairs, radius above 1 and any ring; Q-PRIME's own `uses only:` ("a (Q) arc whose closure holds a ring point holds one of its two germs") forces its "on no (Q) arc" to be read as "on no closed (Q) arc", Q-PRIME-S's wording. Formalize Q-PRIME-S (over GERM-S) in its place; Q-PRIME over RING-GERM is the second route |
+| 126 | FS116-RING-Q-PRIME-S | unchanged; carries Q-PRIME |
+| 127 | FS116-RING-TWIST-C | its first clause is N1-TWIST-D's at four or more colours — formalize TWIST-D once; TWIST-C's other clauses over it |
+| 129 | FS116-S1-CLUSTER | unchanged (V4-DICHOTOMY carried along a connected family) |
+| 130, 131 | FS116-S1-EXIT, -S1-RUNG | unchanged |
+| 132 | FS116-V4-CHORD | unchanged |
+| 133 | FS116-V4-DICHOTOMY | its first clause is FS111-M-HULL2's case for two open tiles (every point of an open tile is a density point; a tile is path-connected), and "A ~ A" is FS106-DIAM (i) for a tile — one more member of SR1's group-4 family; its closure clause by continuity. Unchanged as a statement |
+| 134–137 | FS116-V4-MEET, -V4-OUTER, -V4-PARTNER, -V4-TWIST | unchanged; second-route steps (SR1 § 4.1), they leave the order on first routes |
+| 139, 140 | FS116-S1-PAIR, -S1-LENS | unchanged; S1-QF's inputs, a second route once S1-QF is read as QFREE's case |
+| 141 | FS116-S1-QF | **stated in a stronger form already held**: FS129-OR1-QFREE (FS129-SR2-QFCASE) — at `p` a degree-4 vertex of four colours with four edges has one sector per tile, so S1-QF's class is simple at `p` and lies in QFREE's; **OR1 § J3's "what is left … their non-simple part (FS116-S1-QF is stated for non-Siamese fragments without 'simple')" is empty for S1-QF** |
+| 142 | FS116-V5-NE1 | **merge**: its first clause is FS129-SR2-CLOSURE, its "in particular" FS106-DIAM (i)'s connectedness step — formalize those two once |
+| 143–145, 147, 148 | FS116-V5-OUT, -V5-OUT2, -V5-QCOL, -V5-GERM, -V5-TIPSET | unchanged (relay-results of V5's route); V5-TIPSET's hub clause is FS116-V6-HUBS's tip clause (the two routes' copies of one fact) |
+| 146 | FS116-V5-RING | its first two clauses are N1-TWIST-D's case with no arc of Γ (TWIST-D: Siamese allowed, any `k`); "exactly four colours" is its own (six colours, non-Siamese) |
+| 153 | FS116-V5-DICHO | unchanged; carries N3-PAIR on its setting (row 112) |
+| 154, 155 | FS116-N3-SEMI, -RING-TRANSFER-QC | unchanged |
+| 156, 157, 159 | FS116-V6-HUBS, -V6-ANTI, -V6-COUNT | unchanged (V6's route to Y4-EMPTY, hypothetical by design under SR1's rule) |
+| 160 | FS116-Y2-SIXFRAG | unchanged (an exact control object) |
+| 172, 175 | FS121-C1-BOUND, -C1-SAT | unchanged |
+| 176 | FS121-D1-XCORNER | unchanged (elementary) |
+| 177, 178 | FS121-D2-EXT, -D2-THIN | unchanged |
+| 179 | FS121-D3-FALLSAT | unchanged; its partitions are the maximal admissible covers (FS111-M2-COV, ⟸) that are partitions |
+| 181 | FS121-DB1-L3 | unchanged; **it is FS111-W-NOREP's stronger form** (cusps allowed; honest saturated colourings with REG-J′ in place of saturated cusp-free maps; FS121-O1-ENDS already cites L3 in NOREP's place) — **row 43's line is corrected**: formalize L3 in place of NOREP |
+| 182 | FS121-DB1-L7 | unchanged; INTRAD's outward step with REG-J′ dropped (already that weaker form); leaves the order (SR1's false edge) |
+| 183 | FS121-O1-ENDS | unchanged |
+| 192, 193 | FS121-V5-LOC, -V5-RAY | unchanged; the cycle breaks at RAY → LOC (reversed, § 2.3) |
+
+### 3.2 The entries
+
+derivation: FS129-SR2-YESLIM-EQ
+  statement: for every k ≥ 1, if for every R > 0 some closed disc of radius R carries a valid k-coloured fragment, then χ_m⁰(ℝ²) ≤ k (FS116-O1-YESLIM's
+    first clause), as a corollary of FS106-EQ's implication (c) ⟹ (a) at k
+  uses only: FS106-EQ (c) ⟹ (a) at k — if for every δ > 0 there are k disjoint measurable classes with Leb ⊗ σ-null monochromatic unit pairs whose union
+    has upper density at least 1 − δ, then χ_m⁰(ℝ²) ≤ k (FS106-COMP's first clause, stated by EQ at every k); Lemma P of plans/FS106-TQ-derivation.md
+    § 3.1 in its Leb ⊗ σ-null form; that a fragment's tile boundaries are Lebesgue-null and its colour classes have no unit pair between interior points
+  not claimed: YESLIM's clause at six with no MR (that is row 130's χ(ℝ²) ≤ χ_m⁰(ℝ²), unchanged); anything about a single fragment of bounded radius
+  argument: § 3.2.1 FS129-SR2-YESLIM-EQ, the argument
+  verdict: derived
+  grade: derived from: FS106-EQ
+  minds: 1
+  model: k = 7 — the tight hexagonal seven-colouring restricted to discs of every radius is a valid seven-coloured fragment on each, and χ_m⁰(ℝ²) ≤ 7
+  prior art: partly: FS116-O1-YESLIM (the same statement by COMP's Route I directly), FS106-COMP
+  handoff: de Bruijn — formalize FS106-EQ's (c) ⟹ (a) once at every k (the weak-* step), and YESLIM as this two-line corollary in place of its own
+    weak-* argument
+
+derivation: FS129-SR2-QFCASE
+  statement: FS116-S1-QF's statement — no non-Siamese valid fragment on B̄(p, 2), saturated on B̄(p, 1), whose ring ω(p) carries no (Q) arc, has at p a
+    degree-4 vertex of four colours whose four edges are segments at right angles — is a case of FS129-OR1-QFREE
+  uses only: FS129-OR1-QFREE; that a degree-4 vertex of four colours with four edges has four sectors, one tile each, so the fragment is simple at p;
+    that radius 2 is above 1; FS-116's "valid fragment", six-coloured unless "k-coloured" is written
+  not claimed: anything for S1-QF in a k-coloured reading with k ≥ 7 (QFREE's limit); anything about saturation's role (QFREE needs none); anything for
+    rings carrying a (Q) arc
+  argument: § 3.2.2 FS129-SR2-QFCASE, the argument
+  verdict: derived
+  grade: derived from: FS129-OR1-QFREE
+  minds: 1
+  model: none — a no-go, its class empty (by S1-QF's route and by QFREE); with "no (Q) arc" dropped the class is inhabited (QFREE's model,
+    FS114-Y2-BOWTIE, whose ring carries two (Q) arcs), so the statement is not empty for want of fragments
+  prior art: partly: FS116-S1-QF (its own route through S1-LENS, S1-EXIT, S1-CLUSTER); FS129-OR1-QFREE
+  handoff: de Bruijn — formalize QFREE (over FS116-Y4-EMPTY) and read S1-QF as its case; S1-QF's own route (LENS, EXIT, CLUSTER) is then a second route
+
+derivation: FS129-SR2-TOUCHW
+  statement: in a valid fragment on a closed disc of radius above 1 about a vertex p of four colours and no more, Siamese pairs allowed, let w be a
+    point of ω(p) which is not a change point of the ring and lies on no arc of Γ on ω(p), and suppose none of the four arcs of ω(p) just clockwise and
+    just counter-clockwise of w + 60° and w − 60° lies on a (Q) arc; then the ring just clockwise and just counter-clockwise of w lies in tiles of one
+    colour X absent at p, each of the four arcs lies in the closure of a tile of the other absent colour X̄ and of no tile of colour X, and no tile of
+    colour X̄ has w in its closure
+  uses only: FS116-N1-TOUCH's argument (plans/FS116-N1-proof.md § 4.2), in which the hypothesis "w in the closure of a tile of one of p's colours" is
+    idle (FS116-V3 § 3.1: TRUE with it idle; § 4.4's uses-only note); FS116-N1-TWIST-D; N-E1; FS116-N1-GERM-R with c = X̄ at all four germs; six colours
+  not claimed: anything at k ≥ 7; anything when a germ lies on a (Q) arc; that such a point exists in any fragment of SAT-QFREE's class
+  argument: § 3.2.3 FS129-SR2-TOUCHW, the argument
+  verdict: derived
+  grade: derived from: FS116-N1-TOUCH
+  minds: 1
+  model: FS116-Y1-F15's F(1/5) at q_N — the ring there is R with germs G, as TOUCH's model line says, and q_N meets the hypotheses with or without the idle one
+  prior art: owed — in-house (FS116-V3 § 3.1 found the hypothesis idle; this entry states the wider form)
+  handoff: de Bruijn — in place of FS116-N1-TOUCH; FS116-N2-RECIP's use of TOUCH reads it
+
+#### 3.2.1 FS129-SR2-YESLIM-EQ, the argument
+
+Fix `δ > 0` and take `R` with `(R√2)²/(R√2 + 2)² ≥ 1 − δ`. Let `Q` be the square of side `R√2` inscribed in a disc of radius `R` carrying a valid
+`k`-coloured fragment, and `C_j` the union of the colour-`j` tiles inside `Q`. The `C_j` are disjoint, open, cover `Q` up to the tile boundaries (a
+null set), and no two points of one `C_j` are at distance exactly 1, so their monochromatic unit pairs are `Leb ⊗ σ`-null. Lemma P (TQ § 3.1, its
+"`Leb ⊗ σ`-null at distance 1" form) copies them on the lattice `(R√2 + 2)ℤ²`: points of different copies are at distance at least 2, so the copies
+are `k` disjoint measurable classes with null unit pairs, of density `|Q|/(R√2 + 2)² ≥ 1 − δ`. As `δ` was arbitrary, FS106-EQ's (c) ⟹ (a) at `k`
+gives `χ_m⁰(ℝ²) ≤ k`. ∎
+
+#### 3.2.2 FS129-SR2-QFCASE, the argument
+
+Let a fragment be in S1-QF's class. At `p` the four edges cut a small disc into four sectors; the four colours of `p` are on four tiles, so each tile
+of `p` has one sector at `p`: the fragment is simple at `p` (FS-116's "simple": one sector per tile at `p`). It is non-Siamese, valid (six colours),
+on a closed disc of radius 2 > 1 about a vertex of four colours, and its ring carries no (Q) arc. FS129-OR1-QFREE says no such fragment exists. ∎
+Saturation and the right angles are not used.
+
+#### 3.2.3 FS129-SR2-TOUCHW, the argument
+
+FS116-V3 § 3.1 derived TOUCH as stated and found the hypothesis "`w` in the closure of a tile of one of `p`'s colours" idle: the three conclusions come
+from the `σ`-images of the ring germs (TWIST-D, N-E1) and GERM-R's four open intervals with `c = X̄`, none of which reads whether `w` lies in such a
+closure; V3's attack (§ 3.2) placed the only failure at a germ on a (Q) arc, which TOUCHW keeps excluded. ∎ (One mind on the wider statement: V3's
+reading, recorded here as an entry so that the backlog formalizes the wider form.)
+
+### 3.3 Additions to the vacuity sort (brief § Done means 3)
+
+None found. Every row this sweep reached whose class is known empty is already in SR1's § 5.1 lists or is a no-go in nonexistence form (FS116-S1-QF,
+FS114-N6-NOQ, FS114-N4-D, FS114-Y4-RSTOPALL, FS114-Y5-PINALL); the FS-112 statements over valid maps (FS112-DISC1 among them) are hypothetical by
+design, valid maps being the class whose emptiness is the map NO.
