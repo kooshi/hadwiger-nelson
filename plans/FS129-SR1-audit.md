@@ -365,3 +365,67 @@ put every change point in such a pair (and `Σ` is non-empty: a colouring with `
 *The three statements it carries:* FS110-N2-RING ("if it has no swap point then `|W(u)| ≥ 2`") is (iv)'s first part; FS110-Y3-GP ("winds `W ≡ 3 (mod 6)`")
 is (v); FS129-OA1-RINGWIND ("`W` takes values in `{−2, 0, 2}`, has period `60°`, and changes across `θ₀` only if `Σ` contains two points `θ₀ + 60°j` and
 `θ₀ + 60°(j+1)`") is (i) with (iii), its period being the definition's.
+
+## Stage 4 — SAVED: the "Rests on it: nothing" edges (item 2(d), inventory item 77); the unread items (2(e), items 63, 81)
+
+### 4.1 The edges, sorted
+
+Found by script: every index record whose "Rests on it" text begins "nothing" or "none" and still carries ids — **25 lane-R records, 26 edges** (and 9
+lane-A records, lane A's pass 3's; item 77's count of 24 used another matcher). Each edge `from → to` reads "`to` uses `from`". I read each sentence
+and the `uses only:` line of each `to`. Classes: **real** (`to` rests on `from`); **route** (`from` is a step of a second mind's route to `to`, counted in
+`to`'s minds, not needed by its first proof); **false** (`to` does not use `from`); **reversed** (false as written; the dependency runs `to → from`).
+
+| from | to | class | reading |
+|---|---|---|---|
+| FS111-C-HULL-SO | FS111-C-HULL | false | a refuted entry naming its corrected form |
+| FS111-M2-DISCK7-AS-PLACED | FS111-M2-DISCK7 | false | the same |
+| FS112-Y3-R1 | FS112-N3-CHAINS | false | "nothing beyond": Y3-R1 is the same arithmetic, subsumed (its kernel line says so) |
+| FS114-K1 | FS114-N7-HUB | false | K1 is the successor's opening list; it names a blind check of N7-HUB |
+| FS114-ROUTE-T | FS114-N2-LEMMAS | reversed | ROUTE-T cites N2-LEMMAS' REFINE as its reason |
+| FS116-O1-YESLIM | FS116-C114-LOCAL-F | real | the YES side of the open statement |
+| FS116-RING-Q | FS116-C114-LOCAL-F | real | an open step of the open statement |
+| FS116-RING-TRANSFER-QC | FS116-C114-LOCAL-F | real | its (Q)-ring case |
+| FS116-S1-QF | FS116-C114-LOCAL-F | real | its saturated-cross case |
+| FS116-S1-QF | FS116-SAT-STRIP | real | "SAT-STRIP's narrowing" |
+| FS116-SEMI-PAR3 | FS116-C114-LOCAL-F | real | an open step of the open statement |
+| FS116-V4-MEET, -OUTER, -PARTNER, -TWIST | FS116-S1-KAPPA | route (4 edges) | "FS116-V4's second derivations of FS116-S1-KAPPA, -RUNG and -QF"; KAPPA's own `uses only:` reads N-E1, local finiteness, (Q), transversality |
+| FS116-V5-DICHO | FS116-N3-SEMI | route | SEMI's minds: "FS116-V5-U1 … and FS116-V5-DICHO for crossed-or-parallel" (V5's method) |
+| FS116-V5-LENS | FS116-Y3-SIX | route | "FS116-V5's second derivations of FS116-Y3-SIX, -TIPS, …"; Y3-SIX's `uses only:` reads QFREE4, RING-TWIST-C, RING-GERM |
+| FS121-C1-GMAP | FS121-D3-GRUNDY | false | "with FS121-D3-GRUNDY, once map colourings … are in Lean" — a crossing note; GRUNDY's `uses only:` has no GMAP |
+| FS121-D1-PENCILWIN | FS121-O1-OUT | false | "it crosses with FS121-O1-OUT if a curved inhabitant lands"; O1-OUT's `uses only:` has no PENCILWIN |
+| FS121-D2-PERFIN | FS121-D2-SYM | reversed | PERFIN is derived from SYM |
+| FS121-D4-HOLE | FS111-M-PINCH | false | "it crosses with FS111-M-PINCH"; M-PINCH (FS-111) reads C-HULL, (H1), (H2), saturation |
+| FS121-DB1-L6 | FS111-M2-INTRAD | false | "a re-derivation inside C121-ENDS's verification"; INTRAD reads M-C11 |
+| FS121-DB1-L7 | FS121-O1-OUT | false | "it crosses with"; O1-OUT's `uses only:` has no L7 (L7's `uses only:` is O1-OUT's own) |
+| FS121-V2-EROSION-DIAM | FS121-D1-EROSION | false | "it places … EROSION's content"; EROSION reads VT, XCORNER, M-C11 |
+| FS121-V2-VT-W | FS121-D1-VT | false | VT-W is VT's wider form (a merge, sweep § 6), not an input |
+| FS121-V3-CPI | FS121-V2-SECTOR | false | "a corollary inside FS121-V2-SECTOR's verification"; SECTOR reads Lemma C, M-PINCH, M-C11 |
+
+**Tally:** real 6, route 6, false 12, reversed 2 — real dependencies are 6 of 26 (23 %), or 12 of 26 (46 %) with second routes (registered: 30 %).
+
+**What the false edges do to the index** (`tools/fs129_sr1_edges.py`, which checks every row above is in `data/fs129/index/edges.csv`, removes the false
+and reversed ones, and recomputes; control `fs129-sr1-edges`): **seven lane-R cycles break** — M-PINCH ↔ D4-HOLE, INTRAD ↔ DB1-L6, GMAP ↔ GRUNDY,
+PENCILWIN ↔ O1-OUT, PERFIN ↔ D2-SYM, N2-AVG / N2-LEMMAS / ROUTE-T, and K1 / N7-3T / N7-HUB shrinks to N7-3T ↔ N7-HUB — so lane-R cycles go from 17 to
+11; and **FS121-D4-HOLE's transitive dependents go from 61 to 0**: `data/fs129/index/vacuity.md` ranks D4-HOLE first ("transitive 60") entirely through
+the false edge into FS111-M-PINCH, and `data/fs129/index/lean-order.md` row 28 lists M-PINCH as needing D4-HOLE. Route edges are kept (they are real for
+the second route); removing them too would break V5-LENS / Y3-SIX / Y3-TIPS for a Lean order that follows the first routes.
+
+For FS129-Z1, which corrects the index when it adds its column: drop the 12 false edges, reverse nothing (the true direction of each reversed edge is
+already in `edges.csv`), mark the 6 route edges `route`, and recompute `roots.md`, `hubs.md`, `cycles.md`, `vacuity.md` and the Lean order.
+
+control: fs129-sr1-edges
+  of: § 4.1 — the 26 sorted edges are in edges.csv; dropping the false and reversed ones breaks seven lane-R cycles and leaves D4-HOLE no dependent
+  run: cd .. && python3 tools/fs129_sr1_edges.py
+  expect: edges sorted: 26 (real 6, route 6, false 12, reversed 2); lane-R cycles 17 -> 11; D4-HOLE dependents 61 -> 0
+  fault: cd .. && python3 tools/fs129_sr1_edges.py --fault
+
+### 4.2 The unread items (items 63, 81): what this pass read, and what it leaves
+
+- **Item 63** (the mechanical half, `data/fs129/index/open-steps.md` § 3, lane R beyond FS-110): **not read by this agent**; left for FS129-SR2, scoped
+  to the GAP lines of the Lean order's lane-R ids (FS-111, FS-112, FS-114, FS-116, FS-121), as the plan says.
+- **Item 81**, three leads from MR1: (1) G83's straddle against FS114-K1's (Q)-ring residues (FS114-Y6-E2RED's survivor S6, the wrap, the Reuleaux
+  `(2, 1, 1, 0)` past `√3`) — **not read**; FS129-SR1-TWOCIRC is the tool to try first (S1 died to PXKILL, which is TWOCIRC). (2) V6-ADJ at adjacent change
+  points whose outer pairs are off (Q) — **not derived**: the analogue of DOUBLETIP would need RING-GERM (ii) at both points (outer germs `u⁻`, `v⁺` off
+  (Q)) and V6-ADJ's own pinning of the outer tiles to the lens arcs; TWOCIRC covers its last step (the mirror apex). (3) FS106-BIKE's coupling of two
+  circles' windings across the cross curve — FS129-SR1-RINGBAND sharpens the single-circle input (no swap point and a change set not invariant under
+  `60°` give `|W| ≥ 3`, not only `≥ 2`), and **the coupling stays missing**. All three to FS129-SR2.
