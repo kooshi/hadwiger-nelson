@@ -1,0 +1,10 @@
+entry lint
+  claim HOLE-t: minds 1 — FS106-TQ's derivation
+  warn  FS106-derivation.md:256 (HOLE-t): prior art owed — novelty unmeasured; a standing finding
+  claim HOLE-t: prior art owed
+  entries: 1  derived: 1  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  controls: 0  fired on their faults: 0
+GATE: PASS (0 failures, 1 warning)

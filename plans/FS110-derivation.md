@@ -207,6 +207,8 @@ off the headline's path.
 A3 and N2 used is wrong (A4), the verdict survives on another argument. *Rests on it:* the unit-arc branch. *Prior art:* TS §5 for the `|P| ≥ 5` case.
 *Kernel:* declined — off the headline's path.
 
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-MR1-audit.md` § The leads of pass 1, lead (a), and § Lead (a), completed; `plans/FS129-close-inventory.md` item 78):* this entry's GAP — both steps when the vertex's unit circle carries an arc of `Γ` — was answered later without a link back. Its first step is held, stronger, as FS116-N1-QFREE4 ("if the ring carries no (Q) arc then `p` has four colours and no more", Siamese pairs allowed), so the GAP branch is exactly the rings carrying a (Q) arc, and there the step is false on fragments: FS116-Y2-SIXFRAG holds a six-colour vertex on every disc of radius below 3/2. Its second step is FS112-A4SIX's branch (a four-colour vertex with no covering pair on its unit circle has on that circle arcs of `Γ` centred at it of total length at least 60°, or at least six, one in each of six consecutive 60° windows), or else a change point of exactly two colours (FS116-N2-STAR gives `C(y) = A(p) ⊔ T_y ⊔ O_y`; FS116-N1-QDISK's corner change point is one). A miss of citation, not of work.
+
 ## §3. Act One and the winding apparatus (off the headline's path)
 
 **FS110-N2-RING — At a three-colour vertex whose unit circle carries no arc of `Γ` the ring has a winding `W`; `|W| ≤ 1` forces a swap point. [hand; two minds, one blind: N2; NB]**

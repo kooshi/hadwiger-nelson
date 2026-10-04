@@ -498,6 +498,8 @@ Rests on it: FS111-W-HULLREG-MAPS; the exclusion of M's stub (d) among maps with
 
 *Correction (2026-10-03, FS-121's close; FS121-DB1 § 3.3 item 2, one mind):* the argument's two cases (`plans/FS111-W-wild.md` § 2.3) do not cover an edge that is a unit arc whose centre carries the repeated colour on the far side of the edge from the sector, where case (i)'s parallel collapses to a point. The statement stands through FS121-DB1-L3's case K+ (`plans/FS121-derivation.md` FS121-DB1-L3, two minds), which also localises it to a point of Σ with cusps allowed.
 
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR2-audit.md` § 4.1, row 43; `plans/FS129-close-inventory.md` item 117):* the not-claimed line's GAP ("the same for general saturated colourings (GAP: (H2) at the partners is not among C11's hypotheses there)") is answered for honest saturated colourings in D-NF satisfying REG-J′ by FS121-DB1-L3 ("at every point of Σ no colour occupies two sectors of positive angle, whatever cusps are present at the point or elsewhere", two minds); what is left open is saturated colourings that are not honest or do not satisfy REG-J′. FS121-DB1-L3 is formalized in this entry's place (SR2 § 4.3 item 22).
+
 derivation: FS111-W-HULLREG-MAPS
   statement: on every saturated map without cusps, each point with two colours locally has a neighbourhood in which the interface is the graph of a
     C^{1,1} function with |κ| ≤ 1, semiconcave and semiconvex
@@ -545,6 +547,8 @@ derivation: FS111-M-COVER-SC
   handoff: none — superseded by FS111-M2-HULLC's fuller form; crosses with it
 
 Rests on it: FS111-M2-HULLC.
+
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR2-audit.md` § 2.1, rows 25 and 37; `plans/FS129-close-inventory.md` item 117):* the handoff's "superseded by FS111-M2-HULLC's fuller form" is wrong: HULLC adds "with regular classes", while this entry's semiconcavity holds on every maximal cover (it uses FS111-M-SATC and C-HULL only). Formalize this entry's semiconcavity in place of HULLC's semiconcave clause (SR2 § 4.3 item 17); the edge from this entry into HULLC is not a use. C-HULL is itself a case of FS129-SR2-HULLSET (`plans/FS129-derivation.md`).
 
 derivation: FS111-M-HALF
   statement: at a point x saturated for j, every path-connected piece of S̃_j with x in its closure lies in a closed half-plane in every blow-up at x, so

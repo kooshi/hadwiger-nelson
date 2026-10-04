@@ -29,6 +29,8 @@ of `[Berend1983]`/`[Berend1984]` (§9a: PA-B1, PA-B2; its PA-B3 is a reading, §
 A **corner** is a character `x` with `2x = θ₂` (orbit coordinates `(1+i)/4 + ½ℤ[i]`). **RQ_k**: `Θ_k(Q) ⊆ T + A`. **RS_k(S)**: `Θ_k(R_S) ⊆ T + A`.
 **MS_k(S)**: every `U_S`-minimal closed subset of `Θ_k(R_S)` lies in `T + A`.
 
+*Erratum (2026-10-03, FS129-SA1, from FS91-J03a-9 and FS91-J07-14; `plans/FS91-close-inventory.md` rows 61, 69, 78):* over `R_F` with `F ≠ ℚ`, read `A` as `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`, the archimedean characters of every place of `F(i)`; `λ_e(x) = Re(ē x)` at one embedding is its case `F = ℚ`. With the one-embedding reading FS89-S0A-2, FS89-S0A-10 and FS89-CL2 are false (ℚ(√3), band 1/4: `τ + Re(ē σ₂(·))`); with `A(R_F)` they hold, and every proof step in this file already reads every real place (FS91-J07-14). *(Filed 2026-10-03 by FS129-Z1, verbatim from `plans/FS129-SA1-audit.md` § 3.1's draft; `plans/FS129-close-inventory.md` item 108. The Notation above stands as written.)*
+
 **Scope, stated once.** Every statement below is about **characters** (colourings `x ↦ ⌊kθ(x)⌋`), never about `χ`: at four colours emptiness
 of `Θ₄` is one-sided (G71), and a non-character colouring is untouched. A result on `Q` or `R_S` is a result on the rational unit circle; it
 reaches a real field `F` only through the gluing (FS89-S0A-2) and at that entry's grade. "Not found in print" is not "new". **Prior art,
@@ -326,6 +328,8 @@ retires the owner's reconciliation note. *Prior art:* none. *Kernel:* declined.
 **FS89-CL2 — For every subfield `F ⊆ ℝ`: `Θ₄(R_F) ⊆ T₁₆₈ + A` and `Θ₅(R_F) ⊆ T + A`; every four- or five-colour character colouring of any real field's plane is a torsion character plus an archimedean one. [hand; a composition: S0A-10 and S0A-3 (verifier G; N₀ twice) with D2-T1 and D5-T2 — no new step]**
 *Proof:* this entry. *Proof verdict:* closes at the composed grades. *Rests on it:* CL3–CL5; row 95's field clause. *Prior art:* as D2-T1.
 *Kernel:* declined.
+
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SA1-audit.md` § 3.1; `plans/FS129-close-inventory.md` item 108):* the correction banner above this entry covers FS89-S0A-2 and FS89-S0A-10 as well: they state the field clause with the same Notation's `A`, and are false as written for the same reason (ℚ(√3), band 1/4). The repair is the one line filed under the Notation (`A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`), and it makes all three true. Nothing downstream inherits the falsity: CL3–CL5 read both real places (`plans/FS91-S1D-character.md` § 4.4). For the Lean backlog: S0A-2's kernel line names it a candidate for FS-87's list; formalized from the Notation as written it is unprovable (inventory item 109).
 
 **FS89-CL3 — HD1 for ℚ(√59), ℚ(√83), ℚ(√131): every four-colour band character of the plane is a dyadic torsion (pullback) character; so no character colouring of these planes is non-periodic. `F(R)` stays undecided, and non-character colourings are untouched. [hand; a composition: S0A-6 with D2-T1, at FS86-dB-Theta's grade (two derivations, given V3: FS-66's certificates at 11, and at 19 for 83 and 131, and Zhang2012 Thm 1.8(i))]**
 By FS86-dB-HDcert, HD1 now has a finite exact certificate on some finitely generated `Λ₁ ∋ 1` (existence only; no size bound, and `Λ₅₁₀` is

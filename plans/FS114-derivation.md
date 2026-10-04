@@ -616,6 +616,8 @@ derivation: FS114-Y3-RSTOP
 
 Rests on it: FS114-Y4-RSTOPALL's first member; the blind convergence at `√3` with FS114-N4-D (inventory item 66).
 
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR2-audit.md` § 2.1, row 95; `plans/FS129-close-inventory.md` item 117):* the handoff's "a member of FS114-Y4-RSTOPALL" holds only on the non-Siamese simple part: this entry allows Siamese pairs (its own statement, for FS114-Y2-BOWTIE), so it is not a case of RSTOPALL, which uses its lemma Y3-R. It stays a separate statement for the Lean backlog (SR2 § 4.3 item 16).
+
 derivation: FS114-N6-NOQ
   statement: **No pinwheel has a ring free of (Q) arcs** (after the bends); in particular none with a `Γ`-free ring, at radius `1 + ε` (with N6-RING60: a
     four-colour vertex whose ring carries no (Q) arc has ring change points exactly `y + 60°ℤ`, six ring tiles alternating the absent colours, each

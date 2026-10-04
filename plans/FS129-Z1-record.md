@@ -169,3 +169,31 @@ have no model of their hypothesis (the open sign problem); each says so ("none k
 **Handoffs**: the eight J45 statements cross to de Bruijn with FS100-Q47's closure (row 121); X25B-PZ and X25B-L1 only if FS103-F-FRAC's X25B
 route is taken (C14.1–C14.3 is the held alternative); S1e through FS129-SA1-NOAFF-K; S1b, S1b-47, S1d-K, X22D-FLK2, HOLE-t none (no later entry cites
 them; FS100-FLK's kernel line is "declined").
+
+## Stage 4 — SAVED: the errata filed
+
+Ten dated paragraphs, each directly under the text it corrects, by `tools/fs129_z1_errata.py --apply` (the texts and anchors are in the tool).
+`git diff --stat` at this stage: 20 insertions, 0 deletions across eight files — every original line stands. The check (`--check`: each erratum
+present exactly once, each anchor still standing) printed "errata check: 10 errata, 0 problems"; with a fault planted (`--check --fault`) it printed
+"ERRATUM NOT PRESENT ONCE in FS89 … 1 problems" and exited 1 — it fires.
+
+| # | file, under | source | inventory |
+|---|---|---|---|
+| 1 | `plans/FS89-derivation.md`, the Notation | SA1 § 3.1's draft, verbatim: `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`, repairing FS89-CL2, -S0A-2, -S0A-10 | 89, 108 |
+| 2 | `plans/FS89-derivation.md`, FS89-CL2 | SA1 § 3.1: the banner covers S0A-2 and S0A-10; nothing downstream inherits; S0A-2 unprovable as written (for the backlog) | 108, 109 |
+| 3 | `plans/ASTRA-2026-09-14-derivation.md`, T10 | SA1 § 3.2's draft, verbatim: hypothesis read as `Separated`; empty over usable-𝔽₁₁ fields and `χ(F²) ≤ 4` | 69, 108 |
+| 4 | `plans/FS100-derivation.md`, FS100-T1 | SA1 § 4.2 row X25B-T1: the grade gains X25B-T1, blind to the proofs (row 117 counts it) | 108 |
+| 5 | `plans/FS106-derivation.md`, FS106-EQ | SR2 § 2.1 row 5, § 2.2.3: its every-k form cites FS129-SR2-SUPK | 117 |
+| 6 | `plans/FS110-derivation.md`, FS110-A3-HOLE | MR1 lead (a): first step FS116-N1-QFREE4 (false with (Q) arcs, FS116-Y2-SIXFRAG); second FS112-A4SIX or a two-colour change point | 78 |
+| 7 | `plans/FS111-derivation.md`, FS111-M-COVER-SC | SR2 § 2.1 rows 25, 37: "superseded by HULLC" is wrong; COVER-SC's semiconcavity formalized in HULLC's clause's place | 117 |
+| 8 | `plans/FS111-derivation.md`, FS111-W-NOREP | SR2 § 4.1 row 43: the not-claimed GAP answered by FS121-DB1-L3 for honest REG-J′ colourings | 117 |
+| 9 | `plans/FS114-derivation.md`, FS114-Y3-RSTOP | SR2 § 2.1 row 95: "a member of RSTOPALL" only on the non-Siamese simple part | 117 |
+| 10 | `plans/FS116-derivation.md`, FS116-Y4-EMPTY | SR1 § 2.3: the (R2)-arc rings reached by FS129-OR1-QFREE in the non-Siamese simple class; SR3's EMPTY-NS and QFREE-NS named (Z2 files them) | 96 |
+
+**Gates after** (`data/fs129/z1/gate-errata-<file>.txt`): FS100, FS106, FS111, FS114, FS116 PASS (FS100 and FS106 pass because of stage 3's
+entries; FS111, FS114, FS116 passed before and pass after); FS89, ASTRA-2026-09-14, FS110 FAIL as before, with the one failure "no derivation
+entry" — an erratum is prose, not an entry; reported, not repaired.
+
+**Not filed here, outside this job's files** (for FS129-Z2 or the coordinator): item 59's side-1 remarks (`plans/FS114-NB5-verification.md` § 1b.3,
+`plans/FS114-NB6-verification.md` § 1b.0, `plans/FS114-N7-proof.md` lines 88–89) and `plans/FS116-local-exclusion.md` § 3.6; item 96's
+`plans/FS116-Y4-construction.md` § 3.3; item 59's `data/fs129/demand-judged.md` J10 line. None is a derivation file.

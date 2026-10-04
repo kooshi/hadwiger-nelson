@@ -202,6 +202,8 @@ TRUE by both (A2 §1a.1). **G21: a compactness restatement; it moves no value** 
 not found in print; its analytic step is the one row 130 uses, and the compactness/Rajchman step of the `m₁(ℝ²)` literature was not searched
 (QB §3.3, a debt). *Kernel:* stub — after row 130's M1 enters FS-101.
 
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR2-audit.md` § 2.1 row 5 and § 2.2.3; `plans/FS129-close-inventory.md` item 117):* this entry is stated "for every k", and its periodic grid-square clause rests on FS106-SUP, which is stated at six only. The input at every k is FS129-SR2-SUPK (`plans/FS129-derivation.md`: FS106-SUP's argument, which reads no number of classes, at every k; derived, one mind). Read EQ's every-k form as citing SUPK; EQ's (c) ⟺ (d) is SUPK read at the value 1. No statement changes.
+
 **FS106-SUP — The tight and slack suprema coincide: µ₆⁰ = lim µ₆(ε) = lim µ₆^tile(ε) = lim µ₆^per(ε); moreover µ₆^per(ε) = µ₆(ε) at each ε, and µ₆⁰ and µ₆(ε) are attained (by a stationary family and by almost every sample of it). [hand; two minds, one blind: TQ, QB (stronger)]**
 *Proof:* TQ §3.2, §3.4; QB §2.6, §2.7. *Proof verdict:* TRUE. *Rests on it:* FS106-EQ (e); FS-107's W target (tight polygonal tilings with
 vanishing voids suffice). *Prior art:* not found. *Kernel:* declined.

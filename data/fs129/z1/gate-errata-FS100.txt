@@ -1,0 +1,15 @@
+entry lint
+  claim X25B-PZ: minds 1 — X25B's derivation
+  claim X25B-PZ: prior art partly
+  claim X25B-L1: minds 1 — X25B's derivation
+  warn  FS100-derivation.md:418 (X25B-L1): prior art owed — novelty unmeasured; a standing finding
+  claim X25B-L1: prior art owed
+  claim X22D-FLK2: minds 1 — the two sharpenings are X22D's alone (FS129-SA1 § 4.2, item 113: "one mind"); on X03D-FL-K's own statement X22D agrees with X03D (§ 4.1, "Agrees with X03D"), which FS100-FLK's grade already counts with X05V; nothing is added there
+  warn  FS100-derivation.md:437 (X22D-FLK2): prior art owed — novelty unmeasured; a standing finding
+  claim X22D-FLK2: prior art owed
+  entries: 3  derived: 3  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  controls: 0  fired on their faults: 0
+GATE: PASS (0 failures, 2 warnings)

@@ -1744,6 +1744,8 @@ control: fs116-y4-flank-seven
   expect: double-tip positions whose two flank ring arcs share a colour: 6 of 6
   fault: python3 ../tools/fs116_y4_lattice.py flank --plant three | sed -n 14p
 
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR1-audit.md` § 2.3; `plans/FS129-close-inventory.md` item 96):* the not-claimed line's "rings carrying an arc of Γ that is not a (Q) arc (the (Q)-free rings of FS114-N6-RING60 after the bends, with (R2) arcs)" are now reached in the non-Siamese simple class by FS129-OR1-QFREE (derived, one mind; `plans/FS129-derivation.md`): no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex of at least four colours has a ring carrying no (Q) arc. FS129-SR3 (`plans/FS129-SR3-audit.md` § Stage 2 — SAVED: item (d); derived, one mind; FS129-Z2 files its entries) derives this entry and QFREE with "simple" dropped on FS116-V6's route (FS129-SR3-EMPTY-NS, FS129-SR3-QFREE-NS), which reaches the not-claimed line's non-simple class as well; FS116-Y4's own route uses simplicity.
+
 derivation: FS116-Y4-OBST
   statement: for every R > 1, no fragment of the HEX3 class exists on the closed disc of radius R about p
   uses only: FS116-Y4-EMPTY (the HEX3 class is a subclass of its class)
