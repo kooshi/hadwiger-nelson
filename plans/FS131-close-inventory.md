@@ -412,3 +412,8 @@ reason by the close.*
     ahead of FS131-W and FS131-LEB. Why: two implementers and one planner keep the pipeline balanced, and a landed wave yields held results and tests the
     landing (the vacuity carriers' merge) sooner; W is needed only by wave 9, LEB by wave 4's gate, which is not near. W and LEB take the next planner slots
     (when FS131-K4b hands back). Confidence: medium. Source: this commit.
+72. **Item 56's encoding included the graph itself** (FS131-I2d, message 2026-10-04): `IsLowerGraphOf`'s first clause quantifies over `u s − δ < t ≤ u s`, so it puts
+    points of the graph in the density set; a point on a smooth arc has density 1/2 in either side, so `r7_lowerGraph` is false as stated (I2d's counterexample:
+    `s = 3/20`, `t = u s`, `z₀ = e(π/6)`, `θ = 2π/3`). Item 56 ruled "the region below the graph"; the encoding took the closed region. **Ruling: make the first
+    clause strict, `t < u s`** — the open region below the graph, the pieces `P` of `F̃_a` the derivation's dichotomy reads (with `x ∈ cl P`). `curvatureLeOne` and
+    `semiconcaveWith` are proved with the strict form. Alternative: none live. Confidence: high. Slip, shared: the coordinator's ruling did not say "open".
