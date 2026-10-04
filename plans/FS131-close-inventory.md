@@ -1722,3 +1722,17 @@ reason by the close.*
      FS131-I5b, skips these five.
 240. **Brief FS131-I5b, wave 5's second implementer** (Opus; `data/fs131/briefs/FS131-I5b-wave5.md`, derived by script from I5's, gated PASS): wave 5's 41 leaves less
      the planar core, in I5's Stage 6 order (`Thomassen.lemma1` first, its proof planned). Launched in I5's slot: 1 (I2n) + 1 (I4j) + 1 (IC4) + 1 (I5b) = 4.
+241. **FS131-I5b mid-job, a definition defect in `MapGraph`** (message 2026-10-04): **`cvb_hole_disconnected` is false as written**, because Lean's `IsHoleOf` is weaker
+     than CVB's "a boundary component of x disjoint from its outer one". Counterexample at `k = 7` (credit: I5b): in `sevenBrickMap`'s brick (0,0), centre
+     `c = 2/5 + (3/10)i`, add three whole circles as arcs — radius 1/4 about `c` (disc D0), radius 1/16 about `c + 1/16` (D1) and about `c + 3/16` (D2); D1, D2
+     touch at `c + 1/8`, D2 touches D0's circle from inside at `c + 1/4`; colouring unchanged, so still `Valid` and `IsPlaneMap`. `T = ball c (1/4) ∖ (D̄1 ∪ D̄2)`;
+     `(closure T)ᶜ` has components open D1, open D2 and `|z − c| > 1/4`, so `IsHoleOf T (open D1)` holds, yet `mapGraph ∖ T` stays connected (R1 ~ R2 ~ R3 ~ the
+     bricks) — while `∂T` is connected, so in CVB's sense T has no hole. I5b's proposed repair: quantify the last clause over every other complementary
+     component, not only the unbounded ones. `cvb_pinch_connected` looks true as written. `IsHoleOf` feeds `fill`, `IsOuterTile`, `filledGraph`, and so
+     `cvb_thom_reduced`.
+242. **Ruling: `IsHoleOf`'s repair goes to the planar-infrastructure job, as its first question; `cvb_hole_disconnected` joins that job's leaves.** Choice: defer
+     the definition, and I5b skips the leaf (it already has). Alternative weighed: adopt I5b's repair now. Why: I5b's repair makes a cluster of bounded components
+     whose closures touch one another but miss the outer boundary into no hole at all, though CVB counts it as one boundary component disjoint from the outer —
+     so `fill` might leave a CVB-hole unfilled; the faithful definition (holes as boundary components, or as clusters of complementary components chained by
+     touching closures) is a design question for the job that owns `fill`, `IsOuterTile`, `filledGraph` and `cvb_thom_reduced`, read against
+     `plans/FS114-CVB-verification.md` § 1.9. Confidence: medium — the fact that would change it: CVB's consumers never meet a cluster (then I5b's repair suffices).
