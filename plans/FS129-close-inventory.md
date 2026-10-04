@@ -332,3 +332,26 @@ One line per item with its source; no narration. Each line is ticked done or dec
 85. **Launched 2026-10-04 00:14 UTC**: FS129-SR1, pass 3, lane R (`general-purpose`, Opus; `data/fs129/briefs/FS129-SR1-pass3.md`, gated PASS, at
     `86730055`), carrying items 13, 33–37, 55, 61–63, 70, 76, 77, 79, 81 and FS-116 items 136/145. Lane R's part of the Lean order is 195 of
     its 197 results, so pass 3 lane R is planned as successive agents (SR2 from SR1's list). Running: FS129-MA2 and FS129-SR1, two of three.
+86. **FS129-MA2 reported DONE** (`data/fs129/reports/FS129-MA2.md`; commits `96967cf5`, `4344f4a5`, `f1f9114b`, `41abedb0`, `22edb097`, all present;
+    ≈360k by the harness): all 47 mechanisms MA1 left, plus G2 and G3 (item 83) — **lane A's pass 2 is complete; no FS129-MA3**. Three entries,
+    derived, hand, one mind: FS129-MA2-FALC-DICHO (a five-colour Falconer fan has χ(H) ≥ 4, and at χ(H) = 4 forces apex = tip), -FALC-GAP4 (no
+    homomorphism into a target with a four-colouring gapped at the tip's image), -FALC-HOSTS (no fan over a field with a usable 𝔽₃ or 𝔽₇ prime
+    or a dyadic place ramified in F(i), e.g. ℚ(√11); none in a lattice with a gapped four-colouring of a finite quotient; t − a ∈ 8Λ in de Grey's
+    lattice; over ℚ(√59), ℚ(√83), ℚ(√131), t − a ∈ R ∩ 𝔓⁴). Ten mechanisms bear somewhere unapplied (G43, G48, G54's slack face, G68, G69, G76 in
+    the fan family; G63 as a rider; G41, G32 as consequence lines; G26 a near miss); no miss of the Y4 kind; no new cross-era site. **Keryx's
+    receipt**: derive gate re-run, exit 0, PASS (2 controls fire); `tools/fs129_ma2_fangap.py gamma7` re-run — "proper=True gapped=14/49".
+87. **Bearing line to carry — FALC-HOSTS (iv) ties FS-104 route (b) to row 88**: one Falconer fan at five colours over ℚ(√59), ℚ(√83) or ℚ(√131)
+    would settle row 88's question (every four-colouring of that plane periodic); a non-periodic four-colouring there would rule fans out. For
+    FS129-Z1 (FS-104's stub, route (b)) and FS129-P1. MA2 held it for Keryx; carried.
+88. **Merges and riders for pass 3, lane A** (MA2): FALC-T clause (3) is GAP4's three-colourable case and clause (2) with T = H is DICHO;
+    NOAFF5's argument works at every k — at k = 4 its instances are Γ₇ and every three-colourable target, so G75's four-colour annihilator format
+    is empty over fields with a usable 𝔽₃ or 𝔽₇ prime (not entered); G63's place t ↦ 0 carries HOSTS (i), FALC-11, FALC-19 and NOAFF5 to
+    F(t₁, …, t_n) (not entered); G9 and DICHO one mechanism. Source: `plans/FS129-MA2-audit.md` §§ 2.3, 3.1, 4.1, 4.2.
+89. **Correction owed, known and unfiled — FS89-CL2 is false as written** in `plans/FS89-derivation.md`; the front page was corrected at FS-91
+    (`plans/FS91-close-inventory.md` rows 61, 69, 78), the record was not. It sits two links above the end of the deepest lane-A root chain. For
+    FS129-SA1 (records that disagree) and FS129-Z1.
+90. **Index notes, for FS129-Z1's README pass** (MA2): the mention counts for G1–G4, FS-89's "G1"/"G2", FS-56's "G27" and M49's "G31" are mostly
+    homonyms (item 83's cause); the lane-A roots MA1 attributed to G74 and G77 belong to G76 (FS-89's and FS-91's band-character chains).
+91. **Search requests**: row 5 queued (U₄, U₈, U₁₆ with a gapped four-colouring); row 3 annotated with MA2's filters (still held for Kooshi).
+92. **MA2's registration, provisionally scored** (record § 4.3; FS129-Z1 scores): 49 reached against 28 expected; 3 compositions against 3; 10
+    bearing unapplied against 6; 0 Y4-kind misses; 0 new cross-era sites; nothing found false. Prior art owed for DICHO, GAP4, HOSTS.
