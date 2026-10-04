@@ -2749,6 +2749,34 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.rayParam_circ
+#print axioms HadwigerNelson.Plane.ArcMap.tanBelow_tanAbove_false
+#print axioms HadwigerNelson.Plane.ArcMap.frame_ray
+#print axioms HadwigerNelson.Plane.ArcMap.eventually_ray_not_mem_hornSet
+#print axioms HadwigerNelson.Plane.ArcMap.eventually_not_two_rays_hornSet
+#print axioms HadwigerNelson.Plane.ArcMap.eq_e_of_ray_subset_hornSet
+#print axioms HadwigerNelson.Plane.ArcMap.IsSector.subset
+#print axioms HadwigerNelson.Plane.ArcMap.IsSector.nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.IsSector.subset_of_isPreconnected
+#print axioms HadwigerNelson.Plane.ArcMap.ray_mem_ball
+#print axioms HadwigerNelson.Plane.ArcMap.IsSector.disjoint_of_rays
+#print axioms HadwigerNelson.Plane.ArcMap.HasSectors.eq
+#print axioms HadwigerNelson.Plane.ArcMap.HasSectors.eq_zero_of_not_mem
+#print axioms HadwigerNelson.Plane.ArcMap.ray_coords
+#print axioms HadwigerNelson.Plane.ArcMap.im_pt_mul_conj_pt
+#print axioms HadwigerNelson.Plane.ArcMap.norm_ray_sub_lt_one
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_negI
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_hornSet_zero
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_hasSectors_zero_two
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_tileOf_one
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_outType_one
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_not_merge_zero
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_not_ray_zero
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_flank_colour
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_not_shave_zero
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_hasSectors_le_one
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_terminal_pm_I
 #print axioms HadwigerNelson.Plane.ArcMap.coloursAt_hasSectors_of_tiles
 #print axioms HadwigerNelson.Plane.ArcMap.convex_halfPlane
 #print axioms HadwigerNelson.Plane.ArcMap.mem_bowtieArcs_near_I

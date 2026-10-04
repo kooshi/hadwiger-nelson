@@ -570,6 +570,40 @@ that cannot be proved as written goes to Keryx at once. No edit while a build of
 1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T175529Z-1222267.log`; driver log
 `data/fs131/i4/build-i4g-readback.log`). 39 `declaration uses sorry` warnings — BaseSteps 10, Contact 10, UnitArc 19 — and no other warning.
 
+## Stage 16 — SAVED (FS131-I4g): the bowtie's moves (`bowtie_isStuck`, `bowtie_terminalOn`, `flank_incomplete_bowtie`) and `u1_shadow`; 25 `sorry` left in `BaseSteps` and `UnitArc`
+
+**The bowtie's moves, through one engine: a horn is tangent to its axis.** `eventually_ray_not_mem_hornSet` — a ray `v + t d` with `d` off `±e α` leaves
+every horn set at `v` along `e α` for small `t` (in the frame, `κ₁ t N/2 < Im(d ē(α)) < κ₂ t N/2`); so two non-parallel rays are never both in a horn set
+(`eventually_not_two_rays_hornSet`), and a horn set holding a whole unit ray points along it (`eq_e_of_ray_subset_hornSet`). A sector absorbs every preconnected
+set of interior points it meets (`IsSector.subset_of_isPreconnected`), so a horn set that is a sector misses every convex set holding two non-parallel rays
+(`IsSector.disjoint_of_rays`). **At `±i`**: the four tiles there (`G`, `CN`, `X±` at `i`; `H`, `CS`, `Y±` at `−i`) each hold two such rays, so **no horn at `±i`**
+(`bowtie_not_isHorn_I/negI`) — no MERGE-RAY, no SHAVE — and every colour has at most one sector (`bowtie_hasSectors_le_one`, from `bowtie_neighbours` and
+`HasSectors.eq_zero_of_not_mem`), so no MERGE and not stuck. **At `E = 0`**: the disc parts hold two rays each, so a horn set meets only the cusp horns, holds the
+right one with `e α = 1` or the left with `e α = −1`, and lies outside `ω(±i)` (`bowtie_hornSet_zero`). No MERGE: only colour `1` has two sectors
+(`bowtie_hasSectors_zero_two`), its tiles lie in `C`, `CN` or `CS` (`bowtie_tileOf_one`), so its contacts `±i` are out-type (`bowtie_outType_one`) and its allowed
+cone lies in the line `im d = 0`. No MERGE-RAY: two disjoint horn sets along one axis would hold the same cusp horn. No SHAVE: a flank point is on the horn's side
+(`frameX > 0`) and off the horn, so in a disc part (`bowtie_flank_colour`): `g, h ∈ {0, 2}`, and every horn point is in both shadows (I4f's
+`mem_shadow_bowtie_region_zero/two`). `flank_incomplete_bowtie`'s first clause: at `i` (colour `0`) and `−i` (colour `2`) the in-type contact's tile is not
+out-type; `0` is not carried at `−i`, `2` not at `i` (`bowtie_neighbours`). `BaseSteps` now imports `Plane/ValidMap/UnitArc` (for `exists_mem_hornSet_aboveBelow`,
+the flank point; `n3_end` will need UnitArc's FLANK and `noBoth` too); `ARCHITECTURE.md`'s Imports cell updated, `tools/check_architecture.py` PASS.
+
+**`u1_shadow` proved** (no validity read): pick `θ ∈ (θ₁, θ₂)` within `90°` of `β` (the midpoint of `(max θ₁ (β − 90°), min θ₂ (β + 90°))`), `w = r(θ)`; the outer patch
+`ball w δ₁ \ B̄(P, 1) ⊆ cl(region c')` (wave 3's `side_ball_subset_closure`), a ball about `w` in the domain, and the finitely many arcs near `w`. A centre
+`P + t e(β)` lies on the ray at one parameter (`rayParam`, with `rayParam_circ` and a spec example), so for small `t > 0` no arc near `w` is a unit arc about
+`z = P + t e(β)`; the point `z + e θ = w + t e(β)` is outside `B̄(P, 1)` (`|t e(β) + e θ|² = 1 + t² + 2t cos(β − θ)`), an injective arc of `ω(z)` about it lies in
+the patch, it meets the nearby arcs in finitely many points (`Arc.finite_inter_sphere_or_eq_circ`), and any other of its points is an interior point of colour `c'`
+(`col_eq_of_mem_closure_region`) within `ε` of the arc, at distance `1` from `z`.
+
+**Axioms** (`#print axioms` against this stage's build's oleans, `data/fs131/i4/axioms-i4g.lean` → `axioms-i4g.txt`, not a gate log): the four leaves and their 28
+children, `[propext, Classical.choice, Quot.sound]`. **Records**: `tools/fs131_i4_addrecords.py` — 369 names, 28 added, 0 missing; `tools/fs131_k4_decls.py --check`
+286 names, 0 missing. **No statement changed, no new axiom, no `native_decide`.** Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with
+warnings", exit 0 (`build/gate/build/20261004T181925Z-1381684.log`; driver log `data/fs131/i4/build-i4g-stage16.log`): 35 distinct `declaration uses sorry`
+(BaseSteps 7, Contact 10, UnitArc 18), no other warning. (`u1_shadow` was inserted into `UnitArc` while the build waited for the slot, before it read any file; no
+edit was made during the build.)
+
+**Re-pricing.** The three bowtie moves cost about 70k tokens with their engine (most of it the ray engine and the tile rays, each elaborated on the first or second
+pass); `u1_shadow` (planned M) about 25k, two passes. The ray engine is general (any `ArcMap`, any horn) and serves `n3_end` and wave 5.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -634,4 +668,18 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   `bowtieCol_cases`, `bowtie_interiorPts_cases`, `dist_lt_one_of_mem_bowtieG/H`, `sq_ne_one_of_bowtie_one/XY`, `not_mem_bowtieArcs_near_I/negI`,
   `mem_bowtieArcs_near_I/negI`, `bowtie_partition_I/negI`, `convex_bowtie_tiles`, `bowtie_arc_ends`, `bowtie_dom_end_pp/np/pn/nn`,
   `mem_shadow_bowtie_region_zero/two`, `I_mem_closure_bowtie_region` (records in `scripts/Axioms.lean`, FS131-I4 block).
+
+## Theorems this phase proved (FS131-I4g's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4g.txt`, not a gate log)
+
+- FS112-BOWTIE: `HadwigerNelson.Plane.ArcMap.bowtie_isStuck` — `[propext, Classical.choice, Quot.sound]`. Read against § 8.2: same statement (`E` stuck; `±i` not).
+- FS112-BOWTIE: `ArcMap.bowtie_terminalOn` — the standard three. Same statement (no MERGE, MERGE-RAY or SHAVE at `0`, `i`, `−i`).
+- FS112-FLANK, its last clause: `ArcMap.flank_incomplete_bowtie` — the standard three. Same statement (no out-type contact of `0` or `2` at `±i`; no SHAVE at `E`).
+- FS112-U1, the shadow clause: `ArcMap.u1_shadow` — the standard three. Read against § 12.2: same statement (for `β` in the open facing cone and `ε > 0`, the points
+  `P + t e(β)`, small `t > 0`, are at distance `1` from the outer colour's class outside `B̄(P, 1)` within `ε` of the arc; no validity read).
+- Children (no row), the standard three: the ray engine `ArcMap.eventually_ray_not_mem_hornSet`, `ArcMap.eventually_not_two_rays_hornSet`,
+  `ArcMap.eq_e_of_ray_subset_hornSet`, `ArcMap.frame_ray`, `ArcMap.tanBelow_tanAbove_false`; sectors `ArcMap.IsSector.subset`, `.nonempty`,
+  `.subset_of_isPreconnected`, `.disjoint_of_rays`, `ArcMap.HasSectors.eq`, `.eq_zero_of_not_mem`; `ArcMap.ray_mem_ball`, `ray_coords`, `im_pt_mul_conj_pt`,
+  `norm_ray_sub_lt_one`; the bowtie's `bowtie_not_isHorn_I/negI`, `bowtie_hornSet_zero`, `bowtie_hasSectors_zero_two`, `bowtie_tileOf_one`, `bowtie_outType_one`,
+  `bowtie_not_merge_zero`, `bowtie_not_ray_zero`, `bowtie_flank_colour`, `bowtie_not_shave_zero`, `bowtie_hasSectors_le_one`, `bowtie_terminal_pm_I`; and
+  `ArcMap.rayParam_circ` (UnitArc).
 

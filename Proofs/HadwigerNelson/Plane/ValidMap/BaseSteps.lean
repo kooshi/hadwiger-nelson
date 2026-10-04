@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Basic
 import Proofs.HadwigerNelson.Plane.SVMap
 import Proofs.HadwigerNelson.Plane.LocalMapExamples
+import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 
 /-!
 # The base's steps with unit arcs (FS-112's N3 round) and the bowtie fragment
@@ -2107,13 +2108,558 @@ theorem bowtie_neighbours : bowtie.coloursAt I = {0, 1, 3, 4} ∧ bowtie.colours
     (by decide) (by decide) (by decide) (by decide) (by decide) (by decide)
   exact ⟨h1, h3, h2, h4⟩
 
+/-- Below an arc of curvature `κ` and above one of curvature `κ' ≥ κ`, through the same point with the same tangent: impossible. -/
+theorem tanBelow_tanAbove_false {v : ℂ} {α κ κ' : ℝ} (hκ : κ ≤ κ') {z : ℂ} (h1 : TanBelow v α κ z) (h2 : TanAbove v α κ' z) :
+    False := by
+  unfold TanBelow TanAbove tanHeight at *
+  nlinarith [sq_nonneg (frameX v α z), sq_nonneg (frameY v α z)]
+
+/-- The frame coordinates of a point of the ray from `v` along `d`. -/
+theorem frame_ray (v : ℂ) (α t : ℝ) (d : ℂ) :
+    frameX v α (v + t * d) = t * (d * starRingEnd ℂ (e α)).re ∧ frameY v α (v + t * d) = t * (d * starRingEnd ℂ (e α)).im := by
+  have : (v + (t : ℂ) * d - v) * starRingEnd ℂ (e α) = (t : ℂ) * (d * starRingEnd ℂ (e α)) := by ring
+  unfold frameX frameY
+  rw [this, Complex.re_ofReal_mul, Complex.im_ofReal_mul]
+  exact ⟨rfl, rfl⟩
+
+/-- **A ray off a horn's axis leaves every horn set near the vertex**: if `d` is not along `±e α`, the points `v + t d` lie in no
+horn set at `v` along `e α`, for every small `t > 0` (a horn is tangent to its axis). -/
+theorem eventually_ray_not_mem_hornSet (v : ℂ) (α κ₁ κ₂ : ℝ) {d : ℂ} (hd : (d * starRingEnd ℂ (e α)).im ≠ 0) :
+    ∀ᶠ t : ℝ in 𝓝[>] (0 : ℝ), ∀ r, v + (t : ℂ) * d ∉ hornSet v α κ₁ κ₂ r := by
+  set u := d * starRingEnd ℂ (e α) with hu
+  set a := u.im
+  set N := u.re ^ 2 + u.im ^ 2
+  have hN : 0 ≤ N := by positivity
+  set M := (|κ₁| + |κ₂|) * N + 1
+  have hM : 0 < M := by positivity
+  have ha : 0 < |a| := abs_pos.mpr hd
+  filter_upwards [Ioo_mem_nhdsGT (show 0 < |a| / M by positivity)] with t ⟨ht0, ht1⟩ r hmem
+  obtain ⟨-, -, hA, hB⟩ := hmem
+  obtain ⟨hx, hy⟩ := frame_ray v α t d
+  unfold TanAbove tanHeight at hA
+  unfold TanBelow tanHeight at hB
+  rw [hx, hy] at hA hB
+  have hsq : (t * u.re) ^ 2 + (t * u.im) ^ 2 = t ^ 2 * N := by ring
+  rw [hsq] at hA hB
+  have htM : t * M < |a| := by rwa [lt_div_iff₀ hM] at ht1
+  have hk1 : |κ₁| * (t * N) ≤ t * M := by
+    have : |κ₁| * N ≤ M := by nlinarith [abs_nonneg κ₂, abs_nonneg κ₁]
+    nlinarith
+  have hk2 : |κ₂| * (t * N) ≤ t * M := by
+    have : |κ₂| * N ≤ M := by nlinarith [abs_nonneg κ₂, abs_nonneg κ₁]
+    nlinarith
+  -- from `hA`, `hB` divided by `t > 0`: `κ₁ t N / 2 < a < κ₂ t N / 2`
+  have hA' : κ₁ * (t * N) / 2 < a := by nlinarith
+  have hB' : a < κ₂ * (t * N) / 2 := by nlinarith
+  have h1 := neg_abs_le κ₁
+  have h2 := le_abs_self κ₂
+  have htN : 0 ≤ t * N := by positivity
+  rcases lt_or_gt_of_ne hd with hneg | hpos
+  · rw [abs_of_neg hneg] at htM
+    nlinarith
+  · rw [abs_of_pos hpos] at htM
+    nlinarith
+
+/-- **Two rays from `v` that are not parallel are never both in a horn set at `v`**, near `v`. -/
+theorem eventually_not_two_rays_hornSet (v : ℂ) (α κ₁ κ₂ : ℝ) {d₁ d₂ : ℂ} (h : (d₁ * starRingEnd ℂ d₂).im ≠ 0) :
+    ∀ᶠ t : ℝ in 𝓝[>] (0 : ℝ), ∀ r, ¬ (v + (t : ℂ) * d₁ ∈ hornSet v α κ₁ κ₂ r ∧ v + (t : ℂ) * d₂ ∈ hornSet v α κ₁ κ₂ r) := by
+  by_cases h1 : (d₁ * starRingEnd ℂ (e α)).im = 0
+  · by_cases h2 : (d₂ * starRingEnd ℂ (e α)).im = 0
+    · exfalso
+      apply h
+      have hd : d₁ * starRingEnd ℂ d₂ = (d₁ * starRingEnd ℂ (e α)) * starRingEnd ℂ (d₂ * starRingEnd ℂ (e α)) := by
+        rw [map_mul, Complex.conj_conj]
+        calc d₁ * starRingEnd ℂ d₂ = d₁ * starRingEnd ℂ d₂ * (e α * starRingEnd ℂ (e α)) := by rw [conj_e_mul_e, mul_one]
+          _ = _ := by ring
+      rw [hd, Complex.mul_im, Complex.conj_re, Complex.conj_im, h1, h2]; ring
+    · filter_upwards [eventually_ray_not_mem_hornSet v α κ₁ κ₂ h2] with t ht r hr
+      exact ht r hr.2
+  · filter_upwards [eventually_ray_not_mem_hornSet v α κ₁ κ₂ h1] with t ht r hr
+    exact ht r hr.1
+
+/-- **A horn set holding a whole unit ray from `v` points along it**: `e α = d`. -/
+theorem eq_e_of_ray_subset_hornSet {v d : ℂ} (hd : ‖d‖ = 1) {α κ₁ κ₂ δ r : ℝ} (hδ : 0 < δ)
+    (h : ∀ t : ℝ, 0 < t → t < δ → v + (t : ℂ) * d ∈ hornSet v α κ₁ κ₂ r) : e α = d := by
+  set u := d * starRingEnd ℂ (e α) with hu
+  have him : u.im = 0 := by
+    by_contra hne
+    obtain ⟨t, ht, ht0⟩ := ((eventually_ray_not_mem_hornSet v α κ₁ κ₂ hne).and (Ioo_mem_nhdsGT hδ)).exists
+    exact ht r (h t ht0.1 ht0.2)
+  have hre : 0 < u.re := by
+    have hm := (h (δ / 2) (by linarith) (by linarith)).2.1
+    rw [(frame_ray v α (δ / 2) d).1] at hm
+    exact pos_of_mul_pos_right hm (by linarith)
+  have hnorm : ‖u‖ = 1 := by rw [hu, norm_mul, Complex.norm_conj, norm_e, hd, mul_one]
+  have hsq : u.re ^ 2 + u.im ^ 2 = 1 := by
+    have := Complex.sq_norm u
+    rw [hnorm, Complex.normSq_apply] at this
+    nlinarith
+  rw [him] at hsq
+  have hre1 : u.re = 1 := by nlinarith
+  have hu1 : u = 1 := Complex.ext (by simp [hre1]) (by simp [him])
+  calc e α = u * e α := by rw [hu1, one_mul]
+    _ = d * (e α * starRingEnd ℂ (e α)) := by rw [hu]; ring
+    _ = d := by rw [conj_e_mul_e, mul_one]
+
+section Sectors
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- A sector lies among the interior points of its ball. -/
+theorem IsSector.subset {v : ℂ} {r : ℝ} {S : Set ℂ} (hS : F.IsSector v r S) : S ⊆ F.interiorPts ∩ ball v r := by
+  obtain ⟨x, -, rfl, -⟩ := hS
+  exact connectedComponentIn_subset _ _
+
+/-- A sector is non-empty. -/
+theorem IsSector.nonempty {v : ℂ} {r : ℝ} {S : Set ℂ} (hS : F.IsSector v r S) : S.Nonempty := by
+  obtain ⟨x, hx, rfl, -⟩ := hS
+  exact ⟨x, mem_connectedComponentIn hx⟩
+
+/-- A preconnected set of interior points of the ball meeting a sector lies in it. -/
+theorem IsSector.subset_of_isPreconnected {v : ℂ} {r : ℝ} {S A : Set ℂ} (hS : F.IsSector v r S) (hA : IsPreconnected A)
+    (hAU : A ⊆ F.interiorPts ∩ ball v r) {a : ℂ} (haA : a ∈ A) (haS : a ∈ S) : A ⊆ S := by
+  obtain ⟨x, -, rfl, -⟩ := hS
+  rw [connectedComponentIn_eq haS]
+  exact hA.subset_connectedComponentIn haA hAU
+
+/-- A point of a ray from `v` within `r` of `v`. -/
+theorem ray_mem_ball {v d : ℂ} {t r : ℝ} (ht : 0 < t) (h : t * (|d.re| + |d.im|) < r) : v + (t : ℂ) * d ∈ ball v r := by
+  rw [mem_ball, dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht]
+  calc t * ‖d‖ ≤ t * (|d.re| + |d.im|) := mul_le_mul_of_nonneg_left (Complex.norm_le_abs_re_add_abs_im d) ht.le
+    _ < r := h
+
+/-- **A convex set holding two non-parallel rays from `v` misses every horn set that is a sector at `v`** (its part near `v`
+would lie in the sector, a horn being tangent to its axis). -/
+theorem IsSector.disjoint_of_rays {v : ℂ} {r α κ₁ κ₂ : ℝ} (hS : F.IsSector v r (hornSet v α κ₁ κ₂ r)) {T : Set ℂ}
+    (hT : Convex ℝ T) (hTU : T ∩ ball v r ⊆ F.interiorPts) {d₁ d₂ : ℂ} (hd : (d₁ * starRingEnd ℂ d₂).im ≠ 0) {δ : ℝ}
+    (hδ : 0 < δ) (hray : ∀ t : ℝ, 0 < t → t < δ → v + (t : ℂ) * d₁ ∈ T ∧ v + (t : ℂ) * d₂ ∈ T) :
+    Disjoint (T ∩ ball v r) (hornSet v α κ₁ κ₂ r) := by
+  obtain ⟨x, hx⟩ := hS.nonempty
+  have hr : 0 < r := lt_of_le_of_lt dist_nonneg (mem_ball.mp (hS.subset hx).2)
+  rw [Set.disjoint_left]
+  intro a haA haS
+  have hsub := hS.subset_of_isPreconnected (hT.inter (convex_ball v r)).isPreconnected
+    (fun z hz => ⟨hTU hz, hz.2⟩) haA haS
+  set M := |d₁.re| + |d₁.im| + |d₂.re| + |d₂.im| + 1
+  have hM : 0 < M := by positivity
+  obtain ⟨t, ht, ht0⟩ := ((eventually_not_two_rays_hornSet v α κ₁ κ₂ hd).and
+    (Ioo_mem_nhdsGT (lt_min hδ (div_pos hr hM)))).exists
+  have htδ : t < δ := ht0.2.trans_le (min_le_left _ _)
+  have htM : t * M < r := by
+    have := ht0.2.trans_le (min_le_right _ _); rwa [lt_div_iff₀ hM] at this
+  obtain ⟨h1, h2⟩ := hray t ht0.1 htδ
+  have hb1 : v + (t : ℂ) * d₁ ∈ ball v r := ray_mem_ball ht0.1 (by
+    nlinarith [abs_nonneg d₂.re, abs_nonneg d₂.im, ht0.1])
+  have hb2 : v + (t : ℂ) * d₂ ∈ ball v r := ray_mem_ball ht0.1 (by
+    nlinarith [abs_nonneg d₁.re, abs_nonneg d₁.im, ht0.1])
+  exact ht r ⟨hsub ⟨h1, hb1⟩, hsub ⟨h2, hb2⟩⟩
+
+/-- Two counts of one colour's sectors agree. -/
+theorem HasSectors.eq {v : ℂ} {c : Fin k} {n m : ℕ} (hn : F.HasSectors v c n) (hm : F.HasSectors v c m) : n = m := by
+  obtain ⟨r, hr⟩ := (hn.and hm).exists
+  exact_mod_cast hr.1.symm.trans hr.2
+
+/-- A colour not carried at `v` has no sector there. -/
+theorem HasSectors.eq_zero_of_not_mem {v : ℂ} {c : Fin k} {n : ℕ} (hn : F.HasSectors v c n) (hc : c ∉ F.coloursAt v) :
+    n = 0 := by
+  obtain ⟨r, hr⟩ := hn.exists
+  have : F.sectorsOf v r c = ∅ := by
+    ext S
+    simp only [sectorsOf, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+    intro hS hSc
+    apply hc
+    obtain ⟨x, hx, hSeq, hvS⟩ := id hS
+    exact closure_mono (show S ⊆ F.region c from fun z hz => ⟨(hS.subset hz).1, hSc hz⟩) hvS
+  rw [this, encard_empty] at hr
+  exact_mod_cast hr.symm
+
+end Sectors
+
+/-! ### The bowtie's moves (FS131-I4g) -/
+
+/-- The coordinates of a point of the ray from `v` along `pt a b`. -/
+theorem ray_coords (v : ℂ) (t a b : ℝ) :
+    (v + (t : ℂ) * pt a b).re = v.re + t * a ∧ (v + (t : ℂ) * pt a b).im = v.im + t * b := by
+  simp [pt]
+
+/-- `Im (pt a b · conj (pt c d)) = b c − a d`. -/
+theorem im_pt_mul_conj_pt (a b c d : ℝ) : (pt a b * starRingEnd ℂ (pt c d)).im = b * c - a * d := by
+  simp [pt]; ring
+
+/-- A point of the ray from `v` along `pt a b`, for `t (|a| + |b|) < 1`, lies in `B(v, 1)`. -/
+theorem norm_ray_sub_lt_one {v : ℂ} {t a b : ℝ} (ht : 0 < t) (h : t * (|a| + |b|) < 1) : ‖v + (t : ℂ) * pt a b - v‖ < 1 := by
+  have := ray_mem_ball (v := v) (d := pt a b) (r := 1) ht (by simpa [pt] using h)
+  rwa [mem_ball, dist_eq_norm] at this
+
+/-- **No horn at `N = i`**: near `i` the bowtie's sectors are its four angular tiles, each holding two non-parallel rays. -/
+theorem bowtie_not_isHorn_I (α κ₁ κ₂ : ℝ) (c : Fin 6) : ¬ bowtie.IsHorn I α κ₁ κ₂ c := by
+  rintro ⟨-, hH⟩
+  obtain ⟨r, ⟨hsec, -⟩, hr⟩ := (hH.and (Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 10 by norm_num))).exists
+  obtain ⟨x, hx⟩ := hsec.nonempty
+  have hxU := hsec.subset hx
+  have hpart := bowtie_partition_I hr.2
+  obtain ⟨cG, -, cCN, -, cXY⟩ := convex_bowtie_tiles
+  rw [hpart] at hxU
+  have hU : ∀ T : Set ℂ, T ∩ ball I r ⊆ bowtie.interiorPts ∩ ball I r → T ∩ ball I r ⊆ bowtie.interiorPts :=
+    fun T h z hz => (h hz).1
+  rcases hxU with ((hxT | hxT) | hxT) | hxT
+  · refine disjoint_left.mp (hsec.disjoint_of_rays cG (hU _ (by rw [hpart]; intro z hz; simp [hz]))
+      (d₁ := pt 0 (-1)) (d₂ := pt (1 / 5) (-1)) (by rw [im_pt_mul_conj_pt]; norm_num) (δ := 1 / 2) (by norm_num) ?_) hxT hx
+    intro t ht0 ht1
+    have hm : ∀ a b : ℝ, |a| + |b| ≤ 2 → b = -1 → 12 * |a| < 5 → I + (t : ℂ) * pt a b ∈ bowtieG := by
+      intro a b hab hb ha
+      obtain ⟨hre, him⟩ := ray_coords I t a b
+      refine ⟨norm_ray_sub_lt_one ht0 (by nlinarith), ?_, ?_⟩
+      · rw [him, hb]; simp; linarith
+      · rw [hre, him, hb]; simp only [Complex.I_re, Complex.I_im, zero_add, abs_mul, abs_of_pos ht0]; nlinarith
+    exact ⟨hm 0 (-1) (by norm_num) rfl (by norm_num), hm (1 / 5) (-1) (by norm_num [abs_of_pos]) rfl (by norm_num [abs_of_pos])⟩
+  · refine disjoint_left.mp (hsec.disjoint_of_rays cCN (hU _ (by rw [hpart]; intro z hz; simp [hz]))
+      (d₁ := pt 0 1) (d₂ := pt 1 2) (by rw [im_pt_mul_conj_pt]; norm_num) (δ := 1 / 5) (by norm_num) ?_) hxT hx
+    intro t ht0 ht1
+    have hm : ∀ a b : ℝ, |a| < b → b ≤ 2 → I + (t : ℂ) * pt a b ∈ bowtieCN := by
+      intro a b hab hb
+      obtain ⟨hre, him⟩ := ray_coords I t a b
+      refine ⟨?_, ?_⟩
+      · rw [hre, him]; simp only [Complex.I_re, Complex.I_im, zero_add, abs_mul, abs_of_pos ht0]; nlinarith
+      · rw [him]; simp; nlinarith
+    exact ⟨hm 0 1 (by norm_num) (by norm_num), hm 1 2 (by norm_num) le_rfl⟩
+  · refine disjoint_left.mp (hsec.disjoint_of_rays (cXY 1).1 (hU _ (by rw [hpart]; intro z hz; simp [hz]))
+      (d₁ := pt 1 0) (d₂ := pt 2 1) (by rw [im_pt_mul_conj_pt]; norm_num) (δ := 1 / 5) (by norm_num) ?_) hxT hx
+    intro t ht0 ht1
+    have hm : ∀ a b : ℝ, 0 ≤ b → b < a → a ≤ 2 → I + (t : ℂ) * pt a b ∈ bowtieX 1 := by
+      intro a b hb hab ha
+      obtain ⟨hre, him⟩ := ray_coords I t a b
+      refine ⟨?_, ?_, ?_, ?_⟩ <;> simp only [hre, him, Complex.I_re, Complex.I_im] <;> nlinarith
+    exact ⟨hm 1 0 le_rfl (by norm_num) (by norm_num), hm 2 1 (by norm_num) (by norm_num) le_rfl⟩
+  · refine disjoint_left.mp (hsec.disjoint_of_rays (cXY (-1)).1 (hU _ (by rw [hpart]; intro z hz; simp [hz]))
+      (d₁ := pt (-1) 0) (d₂ := pt (-2) 1) (by rw [im_pt_mul_conj_pt]; norm_num) (δ := 1 / 5) (by norm_num) ?_) hxT hx
+    intro t ht0 ht1
+    have hm : ∀ a b : ℝ, 0 ≤ b → b < -a → -a ≤ 2 → I + (t : ℂ) * pt a b ∈ bowtieX (-1) := by
+      intro a b hb hab ha
+      obtain ⟨hre, him⟩ := ray_coords I t a b
+      refine ⟨?_, ?_, ?_, ?_⟩ <;> simp only [hre, him, Complex.I_re, Complex.I_im] <;> nlinarith
+    exact ⟨hm (-1) 0 le_rfl (by norm_num) (by norm_num), hm (-2) 1 (by norm_num) (by norm_num) (by norm_num)⟩
+
+/-- **No horn at `S′ = −i`**, the mirror. -/
+theorem bowtie_not_isHorn_negI (α κ₁ κ₂ : ℝ) (c : Fin 6) : ¬ bowtie.IsHorn (-I) α κ₁ κ₂ c := by
+  rintro ⟨-, hH⟩
+  obtain ⟨r, ⟨hsec, -⟩, hr⟩ := (hH.and (Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 10 by norm_num))).exists
+  obtain ⟨x, hx⟩ := hsec.nonempty
+  have hxU := hsec.subset hx
+  have hpart := bowtie_partition_negI hr.2
+  obtain ⟨-, cH, -, cCS, cXY⟩ := convex_bowtie_tiles
+  rw [hpart] at hxU
+  have hU : ∀ T : Set ℂ, T ∩ ball (-I) r ⊆ bowtie.interiorPts ∩ ball (-I) r → T ∩ ball (-I) r ⊆ bowtie.interiorPts :=
+    fun T h z hz => (h hz).1
+  rcases hxU with ((hxT | hxT) | hxT) | hxT
+  · refine disjoint_left.mp (hsec.disjoint_of_rays cH (hU _ (by rw [hpart]; intro z hz; simp [hz]))
+      (d₁ := pt 0 1) (d₂ := pt (1 / 5) 1) (by rw [im_pt_mul_conj_pt]; norm_num) (δ := 1 / 2) (by norm_num) ?_) hxT hx
+    intro t ht0 ht1
+    have hm : ∀ a b : ℝ, |a| + |b| ≤ 2 → b = 1 → 12 * |a| < 5 → -I + (t : ℂ) * pt a b ∈ bowtieH := by
+      intro a b hab hb ha
+      obtain ⟨hre, him⟩ := ray_coords (-I) t a b
+      refine ⟨?_, ?_, ?_⟩
+      · have := norm_ray_sub_lt_one (v := -I) ht0 (show t * (|a| + |b|) < 1 by nlinarith)
+        rwa [sub_neg_eq_add] at this
+      · rw [him, hb]; simp; linarith
+      · rw [hre, him, hb]; simp only [Complex.neg_re, Complex.neg_im, Complex.I_re, Complex.I_im, neg_zero, zero_add,
+          abs_mul, abs_of_pos ht0]; nlinarith
+    exact ⟨hm 0 1 (by norm_num) rfl (by norm_num), hm (1 / 5) 1 (by norm_num [abs_of_pos]) rfl (by norm_num [abs_of_pos])⟩
+  · refine disjoint_left.mp (hsec.disjoint_of_rays cCS (hU _ (by rw [hpart]; intro z hz; simp [hz]))
+      (d₁ := pt 0 (-1)) (d₂ := pt 1 (-2)) (by rw [im_pt_mul_conj_pt]; norm_num) (δ := 1 / 5) (by norm_num) ?_) hxT hx
+    intro t ht0 ht1
+    have hm : ∀ a b : ℝ, |a| < -b → -b ≤ 2 → -I + (t : ℂ) * pt a b ∈ bowtieCS := by
+      intro a b hab hb
+      obtain ⟨hre, him⟩ := ray_coords (-I) t a b
+      refine ⟨?_, ?_⟩
+      · rw [hre, him]; simp only [Complex.neg_re, Complex.neg_im, Complex.I_re, Complex.I_im, neg_zero, zero_add, abs_mul,
+          abs_of_pos ht0]; nlinarith
+      · rw [him]; simp; nlinarith
+    exact ⟨hm 0 (-1) (by norm_num) (by norm_num), hm 1 (-2) (by norm_num) (by norm_num)⟩
+  · refine disjoint_left.mp (hsec.disjoint_of_rays (cXY 1).2 (hU _ (by rw [hpart]; intro z hz; simp [hz]))
+      (d₁ := pt 1 0) (d₂ := pt 2 (-1)) (by rw [im_pt_mul_conj_pt]; norm_num) (δ := 1 / 5) (by norm_num) ?_) hxT hx
+    intro t ht0 ht1
+    have hm : ∀ a b : ℝ, 0 ≤ -b → -b < a → a ≤ 2 → -I + (t : ℂ) * pt a b ∈ bowtieY 1 := by
+      intro a b hb hab ha
+      obtain ⟨hre, him⟩ := ray_coords (-I) t a b
+      refine ⟨?_, ?_, ?_, ?_⟩ <;> simp only [hre, him, Complex.neg_re, Complex.neg_im, Complex.I_re, Complex.I_im] <;>
+        nlinarith
+    exact ⟨hm 1 0 (by norm_num) (by norm_num) (by norm_num), hm 2 (-1) (by norm_num) (by norm_num) le_rfl⟩
+  · refine disjoint_left.mp (hsec.disjoint_of_rays (cXY (-1)).2 (hU _ (by rw [hpart]; intro z hz; simp [hz]))
+      (d₁ := pt (-1) 0) (d₂ := pt (-2) (-1)) (by rw [im_pt_mul_conj_pt]; norm_num) (δ := 1 / 5) (by norm_num) ?_) hxT hx
+    intro t ht0 ht1
+    have hm : ∀ a b : ℝ, 0 ≤ -b → -b < -a → -a ≤ 2 → -I + (t : ℂ) * pt a b ∈ bowtieY (-1) := by
+      intro a b hb hab ha
+      obtain ⟨hre, him⟩ := ray_coords (-I) t a b
+      refine ⟨?_, ?_, ?_, ?_⟩ <;> simp only [hre, him, Complex.neg_re, Complex.neg_im, Complex.I_re, Complex.I_im] <;>
+        nlinarith
+    exact ⟨hm (-1) 0 (by norm_num) (by norm_num) (by norm_num), hm (-2) (-1) (by norm_num) (by norm_num) (by norm_num)⟩
+
+/-- **A horn of the bowtie at `E = 0`** is one of the two cusp horns: its set holds the cusp's right horn and its axis is `e α = 1`,
+or the left horn and `e α = −1`; and every point of it lies outside both `ω(i)` and `ω(−i)` (the disc parts hold two
+non-parallel rays each, so no horn set meets them). -/
+theorem bowtie_hornSet_zero {α κ₁ κ₂ r : ℝ} (hr : r ≤ 1 / 13) (hS : bowtie.IsSector 0 r (hornSet 0 α κ₁ κ₂ r)) :
+    ((e α = 1 ∧ cuspPiece r 0 ⊆ hornSet 0 α κ₁ κ₂ r) ∨ (e α = -1 ∧ cuspPiece r 1 ⊆ hornSet 0 α κ₁ κ₂ r)) ∧
+      ∀ z ∈ hornSet 0 α κ₁ κ₂ r, 1 < ‖z - I‖ ∧ 1 < ‖z + I‖ := by
+  obtain ⟨x, hx⟩ := hS.nonempty
+  have hr0 : 0 < r := lt_of_le_of_lt dist_nonneg (mem_ball.mp (hS.subset hx).2)
+  have hpart := bowtie_partition hr
+  obtain ⟨-, hpre, -, -, -⟩ := cuspPiece_data hr0 (by linarith)
+  have hpU : ∀ i, cuspPiece r i ⊆ bowtie.interiorPts ∩ ball 0 r := fun i => by
+    rw [hpart]; exact subset_iUnion (fun i => cuspPiece r i) i
+  -- the disc parts miss the horn set
+  have hsq : ∀ w : ℂ, ‖w‖ ^ 2 < 1 → ‖w‖ < 1 := fun w h => (sq_lt_one_iff₀ (norm_nonneg w)).mp h
+  have hd2 : Disjoint (cuspPiece r 2) (hornSet 0 α κ₁ κ₂ r) := by
+    have h := hS.disjoint_of_rays (convex_ball I 1) (T := ball I 1) (d₁ := pt 0 1) (d₂ := pt 1 2)
+      (fun z hz => (hpU 2 (show z ∈ ball 0 r ∩ ball I 1 from ⟨hz.2, hz.1⟩)).1) (by rw [im_pt_mul_conj_pt]; norm_num)
+      (δ := 1 / 2) (by norm_num) (fun t ht0 ht1 => by
+        obtain ⟨a1, b1⟩ := ray_coords 0 t 0 1
+        obtain ⟨a2, b2⟩ := ray_coords 0 t 1 2
+        refine ⟨?_, ?_⟩ <;> rw [mem_ball, dist_eq_norm] <;> refine hsq _ ?_ <;> rw [norm_sub_I_sq]
+        · rw [a1, b1]; simp only [Complex.zero_re, Complex.zero_im, zero_add, mul_zero]; nlinarith
+        · rw [a2, b2]; simp only [Complex.zero_re, Complex.zero_im, zero_add]; nlinarith)
+    rwa [inter_comm] at h
+  have hd3 : Disjoint (cuspPiece r 3) (hornSet 0 α κ₁ κ₂ r) := by
+    have h := hS.disjoint_of_rays (convex_ball (-I) 1) (T := ball (-I) 1) (d₁ := pt 0 (-1)) (d₂ := pt 1 (-2))
+      (fun z hz => (hpU 3 (show z ∈ ball 0 r ∩ ball (-I) 1 from ⟨hz.2, hz.1⟩)).1) (by rw [im_pt_mul_conj_pt]; norm_num)
+      (δ := 1 / 2) (by norm_num) (fun t ht0 ht1 => by
+        obtain ⟨a1, b1⟩ := ray_coords 0 t 0 (-1)
+        obtain ⟨a2, b2⟩ := ray_coords 0 t 1 (-2)
+        refine ⟨?_, ?_⟩ <;> rw [mem_ball, dist_eq_norm, sub_neg_eq_add] <;> refine hsq _ ?_ <;> rw [norm_add_I_sq]
+        · rw [a1, b1]; simp only [Complex.zero_re, Complex.zero_im, zero_add, mul_zero]; nlinarith
+        · rw [a2, b2]; simp only [Complex.zero_re, Complex.zero_im, zero_add]; nlinarith)
+    rwa [inter_comm] at h
+  have hmem : ∀ z ∈ hornSet 0 α κ₁ κ₂ r, z ∈ cuspPiece r 0 ∨ z ∈ cuspPiece r 1 := by
+    intro z hz
+    have hzU := hS.subset hz
+    rw [hpart, mem_iUnion] at hzU
+    obtain ⟨i, hi⟩ := hzU
+    fin_cases i
+    · exact Or.inl hi
+    · exact Or.inr hi
+    · exact absurd hz (disjoint_left.mp hd2 hi)
+    · exact absurd hz (disjoint_left.mp hd3 hi)
+  refine ⟨?_, fun z hz => ?_⟩
+  · rcases hmem x hx with hx0 | hx1
+    · have hsub := hS.subset_of_isPreconnected (hpre 0) (hpU 0) hx0 hx
+      refine Or.inl ⟨eq_e_of_ray_subset_hornSet (v := 0) (d := 1) (by simp) hr0 fun t ht0 htr => hsub ?_, hsub⟩
+      rw [zero_add, mul_one]
+      exact (hornSet_cusp_iff r _).mpr ⟨by rw [Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]; exact htr,
+        by simpa using ht0, by
+          refine (one_lt_sq_iff₀ (norm_nonneg _)).mp ?_; rw [norm_add_I_sq]; simp; nlinarith, by
+          refine (one_lt_sq_iff₀ (norm_nonneg _)).mp ?_; rw [norm_sub_I_sq]; simp; nlinarith⟩
+    · have hsub := hS.subset_of_isPreconnected (hpre 1) (hpU 1) hx1 hx
+      refine Or.inr ⟨eq_e_of_ray_subset_hornSet (v := 0) (d := -1) (by simp) hr0 fun t ht0 htr => hsub ?_, hsub⟩
+      rw [zero_add, mul_neg_one]
+      refine mem_cuspPiece_one.mpr ⟨by rw [norm_neg, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]; exact htr,
+        by simpa using ht0, ?_, ?_⟩ <;> refine (one_lt_sq_iff₀ (norm_nonneg _)).mp ?_
+      · rw [norm_add_I_sq]; simp; nlinarith
+      · rw [norm_sub_I_sq]; simp; nlinarith
+  · rcases hmem z hz with h0 | h1
+    · obtain ⟨-, -, h2, h3⟩ := (hornSet_cusp_iff r z).mp h0
+      exact ⟨h3, h2⟩
+    · obtain ⟨-, -, h2, h3⟩ := mem_cuspPiece_one.mp h1
+      exact ⟨h3, h2⟩
+
+/-- At `E` only the horn colour `1` has two sectors (the disc parts are one sector each, of colours `0` and `2`). -/
+theorem bowtie_hasSectors_zero_two {c : Fin 6} {n : ℕ} (hn : bowtie.HasSectors 0 c n) (h2 : 2 ≤ n) : c = 1 := by
+  obtain ⟨r, hrn, hr⟩ := (hn.and (Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 13 by norm_num))).exists
+  have hlt : 1 < (bowtie.sectorsOf 0 r c).encard := by rw [hrn]; exact_mod_cast h2
+  obtain ⟨S₁, S₂, ⟨hS₁, hc₁⟩, ⟨hS₂, hc₂⟩, hne⟩ := Set.one_lt_encard_iff.mp hlt
+  obtain ⟨ho, hp, hd, hnn, hcl⟩ := cuspPiece_data hr.1 (by linarith [hr.2])
+  have hpart := bowtie_partition hr.2
+  obtain ⟨j₁, rfl⟩ := (isSector_iff_of_partition hpart ho hp hd hnn hcl).mp hS₁
+  obtain ⟨j₂, rfl⟩ := (isSector_iff_of_partition hpart ho hp hd hnn hcl).mp hS₂
+  have hcol : ∀ j, cuspPiece r j ⊆ bowtie.col ⁻¹' {c} → c = ![1, 1, 0, 2] j := by
+    intro j hj
+    obtain ⟨z, hz⟩ := hnn j
+    have hzc : bowtie.col z = c := hj hz
+    have := bowtieCol_cuspPiece hr.2 (z := z)
+    fin_cases j
+    · exact hzc.symm.trans (this.1 hz)
+    · exact hzc.symm.trans (this.2.1 hz)
+    · exact hzc.symm.trans (this.2.2.1 hz)
+    · exact hzc.symm.trans (this.2.2.2 hz)
+  have e1 := hcol j₁ hc₁
+  have e2 := hcol j₂ hc₂
+  fin_cases j₁ <;> fin_cases j₂ <;> simp_all
+
+/-- A tile of the horn colour `1` lies in `C`, `CN` or `CS` (the three are separated open sets). -/
+theorem bowtie_tileOf_one {T : Set ℂ} (hT : bowtie.TileOf 1 T) : T ⊆ bowtieC ∨ T ⊆ bowtieCN ∨ T ⊆ bowtieCS := by
+  obtain ⟨⟨x, -, rfl⟩, hcol⟩ := hT
+  have hpre := isPreconnected_connectedComponentIn (F := bowtie.interiorPts) (x := x)
+  have hsub : connectedComponentIn bowtie.interiorPts x ⊆ bowtieC ∪ (bowtieCN ∪ bowtieCS) := by
+    intro z hz
+    have := (bowtieCol_cases z).2.1 (hcol hz)
+    rcases this with (h | h) | h
+    exacts [Or.inl h, Or.inr (Or.inl h), Or.inr (Or.inr h)]
+  have hdCN : Disjoint bowtieCN bowtieCS := disjoint_left.mpr fun z h1 h2 => by
+    have := abs_nonneg z.re; linarith [h1.1, h2.1]
+  have hdC : Disjoint bowtieC (bowtieCN ∪ bowtieCS) := disjoint_left.mpr fun z h1 h2 => by
+    have hi := abs_lt.mp h1.2.2.1
+    rcases h2 with h2 | h2
+    · have := abs_nonneg z.re; linarith [h2.1]
+    · have := abs_nonneg z.re; linarith [h2.1]
+  rcases hpre.subset_or_subset isOpen_bowtieC (isOpen_bowtieCN.union isOpen_bowtieCS) hdC hsub with h | h
+  · exact Or.inl h
+  · rcases hpre.subset_or_subset isOpen_bowtieCN isOpen_bowtieCS hdCN h with h' | h'
+    · exact Or.inr (Or.inl h')
+    · exact Or.inr (Or.inr h')
+
+/-- The horn colour's contacts at `N = i` and `S′ = −i` on `ω(E)` are out-type. -/
+theorem bowtie_outType_one : bowtie.OutType 0 1 I ∧ bowtie.OutType 0 1 (-I) := by
+  have hcl : ∀ (A : Set ℂ) (a : ℝ), (∀ z ∈ A, z.im < a) → ∀ z ∈ closure A, z.im ≤ a := fun A a h z hz =>
+    closure_minimal (fun w hw => (h w hw).le) (isClosed_le Complex.continuous_im continuous_const) hz
+  have hcl' : ∀ (A : Set ℂ) (a : ℝ), (∀ z ∈ A, a < z.im) → ∀ z ∈ closure A, a ≤ z.im := fun A a h z hz =>
+    closure_minimal (fun w hw => (h w hw).le) (isClosed_le continuous_const Complex.continuous_im) hz
+  have hC : ∀ z ∈ bowtieC, |z.im| < 1 / 13 := fun z hz => hz.2.2.1
+  have hCN : ∀ z ∈ bowtieCN, 1 < z.im := fun z hz => by have := abs_nonneg z.re; linarith [hz.1]
+  have hCS : ∀ z ∈ bowtieCS, z.im < -1 := fun z hz => by have := abs_nonneg z.re; linarith [hz.1]
+  have him : ∀ z ∈ closedBall (0 : ℂ) 1, |z.im| ≤ 1 := fun z hz => by
+    rw [mem_closedBall, dist_zero_right] at hz; exact (Complex.abs_im_le_norm z).trans hz
+  refine ⟨fun T hT hIT => ?_, fun T hT hIT => ?_⟩
+  · rcases bowtie_tileOf_one hT with h | h | h
+    · have := hcl T (1 / 13) (fun z hz => (abs_lt.mp (hC z (h hz))).2) I hIT; simp at this; norm_num at this
+    · exact disjoint_left.mpr fun z hz hz' => by have := abs_le.mp (him z hz'); linarith [hCN z (h hz)]
+    · have := hcl T (-1) (fun z hz => hCS z (h hz)) I hIT; simp at this; norm_num at this
+  · rcases bowtie_tileOf_one hT with h | h | h
+    · have := hcl' T (-1 / 13) (fun z hz => by linarith [(abs_lt.mp (hC z (h hz))).1]) (-I) hIT
+      simp at this; norm_num at this
+    · have := hcl' T 1 (fun z hz => hCN z (h hz)) (-I) hIT; simp at this; norm_num at this
+    · exact disjoint_left.mpr fun z hz hz' => by have := abs_le.mp (him z hz'); linarith [hCS z (h hz)]
+
+/-- **No MERGE at `E`**: only the horn colour has two sectors, and its allowed cone lies in the line `im d = 0`, its contacts at `±i`
+being out-type. -/
+theorem bowtie_not_merge_zero : ¬ bowtie.MergeAvailable 0 := by
+  rintro ⟨c, n, hn2, hn, d, hd⟩
+  obtain rfl := bowtie_hasSectors_zero_two hn hn2
+  obtain ⟨hI, hnI, -, -⟩ := bowtie_neighbours
+  have h1 : (1 : Fin 6) ∈ bowtie.coloursAt 0 := by rw [bowtie_coloursAt_zero.1]; simp
+  have hcI : bowtie.IsContact 0 1 I := ⟨h1, by simp, show (1 : Fin 6) ∈ bowtie.coloursAt I by rw [hI]; simp⟩
+  have hcnI : bowtie.IsContact 0 1 (-I) := ⟨h1, by simp, show (1 : Fin 6) ∈ bowtie.coloursAt (-I) by rw [hnI]; simp⟩
+  have hsub : bowtie.allowedCone 0 1 ⊆ {z : ℂ | 0 * z.re + 1 * z.im = 0} := by
+    intro w hw
+    have a := (hw I hcI).2 bowtie_outType_one.1
+    have b := (hw (-I) hcnI).2 bowtie_outType_one.2
+    simp only [dot, sub_zero, map_neg, Complex.conj_I, neg_neg, Complex.mul_re, Complex.neg_re, Complex.neg_im,
+      Complex.I_re, Complex.I_im] at a b
+    simp only [mem_setOf_eq]
+    linarith
+  have := interior_mono hsub hd
+  rw [interior_line_eq_empty (Or.inr one_ne_zero)] at this
+  exact this
+
+/-- **No MERGE-RAY at `E`**: two disjoint horn sets along one axis would both hold the same cusp horn. -/
+theorem bowtie_not_ray_zero : ¬ bowtie.RayAvailable 0 := by
+  rintro ⟨c, α, κ₁, κ₂, κ₃, κ₄, h23, ⟨-, h1⟩, ⟨-, h2⟩⟩
+  obtain ⟨r, ⟨⟨hs1, -⟩, ⟨hs2, -⟩⟩, hr⟩ :=
+    ((h1.and h2).and (Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 13 by norm_num))).exists
+  obtain ⟨hA, -⟩ := bowtie_hornSet_zero hr.2 hs1
+  obtain ⟨hB, -⟩ := bowtie_hornSet_zero hr.2 hs2
+  have hdisj : ∀ z, z ∈ hornSet 0 α κ₁ κ₂ r → z ∈ hornSet 0 α κ₃ κ₄ r → False := fun z h h' =>
+    tanBelow_tanAbove_false h23.le h.2.2.2 h'.2.2.1
+  obtain ⟨-, -, -, hne, -⟩ := cuspPiece_data hr.1 (by linarith [hr.2])
+  rcases hA with ⟨he, hA⟩ | ⟨he, hA⟩ <;> rcases hB with ⟨he', hB⟩ | ⟨he', hB⟩
+  · obtain ⟨z, hz⟩ := hne 0; exact hdisj z (hA hz) (hB hz)
+  · rw [he] at he'; norm_num at he'
+  · rw [he] at he'; norm_num at he'
+  · obtain ⟨z, hz⟩ := hne 1; exact hdisj z (hA hz) (hB hz)
+
+/-- At `E`, a point of the domain near `E` on the horn's side of its normal line and off the horn has colour `0` or `2` (it lies in a
+disc part: the other cusp horn is on the far side). -/
+theorem bowtie_flank_colour {α κ₁ κ₂ r : ℝ} (hr : r ≤ 1 / 13) (hS : bowtie.IsSector 0 r (hornSet 0 α κ₁ κ₂ r)) {z : ℂ}
+    (hz : z ∈ bowtie.interiorPts) (hzr : ‖z‖ < r) (hzx : 0 < frameX 0 α z) (hzH : z ∉ hornSet 0 α κ₁ κ₂ r) :
+    bowtie.col z = 0 ∨ bowtie.col z = 2 := by
+  have hzU : z ∈ bowtie.interiorPts ∩ ball 0 r := ⟨hz, mem_ball_zero_iff.mpr hzr⟩
+  rw [bowtie_partition hr, mem_iUnion] at hzU
+  obtain ⟨i, hi⟩ := hzU
+  obtain ⟨hdir, -⟩ := bowtie_hornSet_zero hr hS
+  have hfx1 : e α = 1 → frameX 0 α z = z.re := fun he => by simp [frameX, he]
+  have hfx2 : e α = -1 → frameX 0 α z = -z.re := fun he => by simp [frameX, he]
+  have hc := bowtieCol_cuspPiece hr (z := z)
+  fin_cases i
+  · exfalso
+    have hre := ((hornSet_cusp_iff r z).mp hi).2.1
+    rcases hdir with ⟨he, hsub⟩ | ⟨he, -⟩
+    · exact hzH (hsub hi)
+    · rw [hfx2 he] at hzx; linarith
+  · exfalso
+    have hre := (mem_cuspPiece_one.mp hi).2.1
+    rcases hdir with ⟨he, -⟩ | ⟨he, hsub⟩
+    · rw [hfx1 he] at hzx; linarith
+    · exact hzH (hsub hi)
+  · exact Or.inl (hc.2.2.1 hi)
+  · exact Or.inr (hc.2.2.2 hi)
+
+/-- **No SHAVE at `E`**: a horn there is a cusp horn, its flanks are the colours `0` and `2`, and every point of it is in the shadow
+of both classes (`mem_shadow_bowtie_region_zero/two`), so neither part of any split is clear for its flank. -/
+theorem bowtie_not_shave_zero : ¬ bowtie.ShaveAvailable 0 := by
+  rintro ⟨c, g, h, α, κ₁, κ₂, σ, ⟨-, hH⟩, ⟨κ', hκ', hfa⟩, ⟨κ'', hκ'', hfb⟩, -, -, hsh⟩
+  obtain ⟨r, ⟨⟨⟨⟨hs, -⟩, hfa'⟩, hfb'⟩, hsh'⟩, hr⟩ :=
+    ((((hH.and hfa).and hfb).and hsh).and (Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 20 by norm_num))).exists
+  have hr13 : r ≤ 1 / 13 := by linarith [hr.2]
+  obtain ⟨-, hout⟩ := bowtie_hornSet_zero hr13 hs
+  obtain ⟨z₁, hz₁, -, -⟩ := exists_mem_hornSet_aboveBelow 0 α (κ₁ := κ₂) (κ₂ := κ') (s := (κ₂ + κ') / 2) (m := κ') hr.1
+    (by linarith) (by linarith) (by intro h; linarith)
+  obtain ⟨z₂, hz₂, -, -⟩ := exists_mem_hornSet_aboveBelow 0 α (κ₁ := κ'') (κ₂ := κ₁) (s := (κ'' + κ₁) / 2) (m := κ₁) hr.1
+    (by linarith) (by linarith) (by intro h; linarith)
+  have hg : g = 0 ∨ g = 2 := by
+    obtain ⟨hint, hcol⟩ := hfa' hz₁
+    have := bowtie_flank_colour hr13 hs hint (by simpa using hz₁.1) hz₁.2.1
+      (fun hH' => tanBelow_tanAbove_false le_rfl hH'.2.2.2 hz₁.2.2.1)
+    rwa [show bowtie.col z₁ = g from hcol] at this
+  have hh : h = 0 ∨ h = 2 := by
+    obtain ⟨hint, hcol⟩ := hfb' hz₂
+    have := bowtie_flank_colour hr13 hs hint (by simpa using hz₂.1) hz₂.2.1
+      (fun hH' => tanBelow_tanAbove_false le_rfl hz₂.2.2.2 hH'.2.2.1)
+    rwa [show bowtie.col z₂ = h from hcol] at this
+  obtain ⟨z, hz⟩ := hs.nonempty
+  obtain ⟨h1, h2⟩ := hout z hz
+  have hzr : ‖z‖ < 1 / 20 := by
+    have := mem_ball_zero_iff.mp (hs.subset hz).2; linarith [hr.2]
+  have hnc : ∀ j : Fin 6, j = 0 ∨ j = 2 → ¬ bowtie.IsClear j z := by
+    rintro j (rfl | rfl) hc
+    · obtain ⟨y, hy, hyd⟩ := mem_shadow_bowtie_region_zero hzr h1; exact hc y hy hyd
+    · obtain ⟨y, hy, hyd⟩ := mem_shadow_bowtie_region_two hzr h2; exact hc y hy hyd
+  obtain ⟨hA, hB⟩ := hsh' z hz
+  by_cases hσ : TanAbove 0 α σ z
+  · exact hnc g hg (hA hσ)
+  · exact hnc h hh (hB hσ)
+
+/-- At `N = i` and `S′ = −i` every colour has at most one sector. -/
+theorem bowtie_hasSectors_le_one {v : ℂ} (hv : v = I ∨ v = -I) {c : Fin 6} {n : ℕ} (hn : bowtie.HasSectors v c n) : n ≤ 1 := by
+  obtain ⟨-, -, hI, hnI⟩ := bowtie_neighbours
+  by_cases hc : c ∈ bowtie.coloursAt v
+  · rcases hv with rfl | rfl
+    · exact (hn.eq (hI c hc)).le
+    · exact (hn.eq (hnI c hc)).le
+  · rw [hn.eq_zero_of_not_mem hc]; exact zero_le_one
+
+/-- No move at `±i`: no colour has two sectors, and there is no horn. -/
+theorem bowtie_terminal_pm_I {v : ℂ} (hv : v = I ∨ v = -I) :
+    ¬ bowtie.MergeAvailable v ∧ ¬ bowtie.RayAvailable v ∧ ¬ bowtie.ShaveAvailable v := by
+  have hno : ∀ α κ₁ κ₂ c, ¬ bowtie.IsHorn v α κ₁ κ₂ c := by
+    rcases hv with rfl | rfl
+    exacts [bowtie_not_isHorn_I, bowtie_not_isHorn_negI]
+  refine ⟨?_, ?_, ?_⟩
+  · rintro ⟨c, n, h2, hn, -⟩; have := bowtie_hasSectors_le_one hv hn; omega
+  · rintro ⟨c, α, κ₁, κ₂, κ₃, κ₄, -, hH, -⟩; exact hno _ _ _ _ hH
+  · rintro ⟨c, g, h, α, κ₁, κ₂, σ, hH, -⟩; exact hno _ _ _ _ hH
+
 /-- **A one-vertex stuck chain**: `E` is stuck, neither neighbour is. -/
 theorem bowtie_isStuck : bowtie.IsStuck 0 ∧ ¬ bowtie.IsStuck I ∧ ¬ bowtie.IsStuck (-I) := by
-  sorry
+  refine ⟨⟨bowtie_not_merge_zero, bowtie_not_ray_zero, bowtie_not_shave_zero, 1, 2, le_rfl, bowtie_coloursAt_zero.2⟩, ?_, ?_⟩
+  · rintro ⟨-, -, -, c, n, h2, hn⟩; have := bowtie_hasSectors_le_one (Or.inl rfl) hn; omega
+  · rintro ⟨-, -, -, c, n, h2, hn⟩; have := bowtie_hasSectors_le_one (Or.inr rfl) hn; omega
 
 /-- **No MERGE, MERGE-RAY or SHAVE applies at `E`, `E ± n`.** -/
 theorem bowtie_terminalOn : bowtie.TerminalOn {0, I, -I} := by
-  sorry
+  intro v hv
+  simp only [mem_insert_iff, mem_singleton_iff] at hv
+  rcases hv with rfl | rfl | rfl
+  · exact ⟨bowtie_not_merge_zero, bowtie_not_ray_zero, bowtie_not_shave_zero⟩
+  · exact bowtie_terminal_pm_I (Or.inl rfl)
+  · exact bowtie_terminal_pm_I (Or.inr rfl)
 
 /-! ### The ends of the bowtie's unit arcs lie in its domain (FS131-I4f) -/
 
@@ -2356,7 +2902,21 @@ theorem bowtie_unitArcEnds : ∀ a ∈ bowtie.arcs, ∀ p θ₀ θ₁, a = .circ
 theorem flank_incomplete_bowtie :
     (∀ j ∈ ({0, 2} : Set (Fin 6)), ∀ w ∈ ({I, -I} : Set ℂ), ¬ (bowtie.IsContact 0 j w ∧ bowtie.OutType 0 j w)) ∧
       ¬ bowtie.ShaveAvailable 0 := by
-  sorry
+  refine ⟨?_, (bowtie_terminalOn 0 (by simp)).2.2⟩
+  intro j hj w hw ⟨hcon, hout⟩
+  simp only [mem_insert_iff, mem_singleton_iff] at hj hw
+  obtain ⟨hI, hnI, -, -⟩ := bowtie_neighbours
+  obtain ⟨⟨-, hin0⟩, ⟨-, hin2⟩⟩ := bowtie_inType
+  have hcw : j ∈ bowtie.coloursAt w := hcon.2.2
+  rcases hj with rfl | rfl <;> rcases hw with rfl | rfl
+  · obtain ⟨T, hT, hIT⟩ := (bowtie.mem_coloursAt_iff_exists_tileOf bowtie_mem_dom.2.1).mp hcw
+    obtain ⟨x, hx⟩ := hT.1.nonempty
+    exact disjoint_left.mp (hout T hT hIT) hx (ball_subset_closedBall (hin0 T hT hIT hx))
+  · rw [hnI] at hcw; simp at hcw
+  · rw [hI] at hcw; simp at hcw
+  · obtain ⟨T, hT, hIT⟩ := (bowtie.mem_coloursAt_iff_exists_tileOf bowtie_mem_dom.2.2).mp hcw
+    obtain ⟨x, hx⟩ := hT.1.nonempty
+    exact disjoint_left.mp (hout T hT hIT) hx (ball_subset_closedBall (hin2 T hT hIT hx))
 
 end ArcMap
 

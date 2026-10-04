@@ -453,6 +453,17 @@ theorem noBoth (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} (hP : P ∈ F.dom) (
 
 /-! ## FS112-U1, its shadow clause -/
 
+/-- The parameter of a centre on the ray from `P` along `e β`: `t` for `P + t e β`. -/
+noncomputable def rayParam (P : ℂ) (β : ℝ) : Arc → ℝ
+  | .seg _ _ => 0
+  | .circ c _ _ _ => ((c - P) * starRingEnd ℂ (e β)).re
+
+theorem rayParam_circ (P : ℂ) (β t ρ θa θb : ℝ) : rayParam P β (.circ (P + (t : ℂ) * e β) ρ θa θb) = t := by
+  simp only [rayParam, add_sub_cancel_left, mul_assoc, conj_e_mul_e, mul_one, Complex.ofReal_re]
+
+/-- A segment carries no centre: its parameter is `0`. -/
+example : rayParam 0 0 (.seg 0 1) = 0 := rfl
+
 /-- **FS112-U1**, the shadow clause (its first three clauses are wave 3's `ringArc_cone_inner`, `ringArc_cone_outer`,
 `ringArc_sideCone_inner`, `ringArc_sideCone_outer` — FS116-V5-U1's, by SR1-6.2 item 4): the outer side's first-order shadow near
 `P` contains the open facing cone `(θ₁ − 90°, θ₂ + 90°)` of width `π + ℓ`. For every direction `β` of it and every `ε > 0`, the points
@@ -462,7 +473,102 @@ theorem u1_shadow {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc
     (hβ : β ∈ Ioo (θ₁ - π / 2) (θ₂ + π / 2)) {ε : ℝ} (hε : 0 < ε) :
     ∀ᶠ t : ℝ in 𝓝[>] 0,
       P + (t : ℂ) * e β ∈ shadow ((F.region c' ∩ thickening ε (ringArc P θ₁ θ₂)) \ closedBall P 1) := by
-  sorry
+  obtain ⟨h12, hΓ, hside⟩ := hA
+  have hπ := Real.pi_pos
+  -- the arc point `w = r(θ)` facing `e β`
+  set θ := (max θ₁ (β - π / 2) + min θ₂ (β + π / 2)) / 2 with hθdef
+  have hlo : max θ₁ (β - π / 2) < min θ₂ (β + π / 2) :=
+    max_lt (lt_min h12 (by linarith [hβ.1])) (lt_min (by linarith [hβ.2]) (by linarith))
+  have hθ : θ ∈ Ioo θ₁ θ₂ :=
+    ⟨by linarith [le_max_left θ₁ (β - π / 2)], by linarith [min_le_left θ₂ (β + π / 2)]⟩
+  have hcos : 0 < Real.cos (β - θ) := Real.cos_pos_of_mem_Ioo
+    ⟨by linarith [min_le_right θ₂ (β + π / 2)], by linarith [le_max_right θ₁ (β - π / 2)]⟩
+  set w := ringPt P θ with hw
+  have hwarc : w ∈ ringArc P θ₁ θ₂ := ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩
+  have hwd : w ∈ F.dom := (hΓ hwarc).1
+  -- the outer patch, the domain, the finitely many arcs near `w`
+  obtain ⟨δ₁, hδ₁, hpatch⟩ := F.side_ball_subset_closure (isOpen_compl_iff.mpr isClosed_closedBall) hwd (c := c')
+    (fun d hd => by
+      have : d ∈ F.outerColours P w := by rw [outerColours, mem_setOf_eq, sdiff_eq]; exact hd
+      rw [(hside θ hθ).2] at this; exact this)
+  obtain ⟨δ₂, hδ₂, hdom⟩ := Metric.isOpen_iff.mp F.isOpen_dom w hwd
+  obtain ⟨tw, htw, hfin⟩ := F.locallyFinite w hwd
+  obtain ⟨δ₃, hδ₃, htwb⟩ := Metric.mem_nhds_iff.mp htw
+  set A := {a | a ∈ F.arcs ∧ (a.carrier ∩ tw).Nonempty}
+  set δ := min (min δ₁ δ₂) (min δ₃ ε) with hδdef
+  have hδ : 0 < δ := lt_min (lt_min hδ₁ hδ₂) (lt_min hδ₃ hε)
+  have hbad : ((rayParam P β '' A) \ {0}).Finite := (hfin.image _).subset sdiff_subset
+  have hev : ∀ᶠ t : ℝ in 𝓝[>] 0, t ∈ Ioo 0 (δ / 2) ∧ t ∉ (rayParam P β '' A) \ {0} :=
+    Filter.Eventually.and (Ioo_mem_nhdsGT (by linarith))
+      (nhdsWithin_le_nhds (hbad.isClosed.isOpen_compl.mem_nhds (by simp)))
+  filter_upwards [hev] with t ⟨⟨ht0, htδ⟩, htbad⟩
+  set z := P + (t : ℂ) * e β with hz
+  -- the point `q₀ = z + e θ = w + t e β` of `ω(z)`, outside `B̄(P, 1)` and within `t` of `w`
+  set U := ball w δ ∩ (closedBall P 1)ᶜ with hU
+  have hUo : IsOpen U := isOpen_ball.inter (isOpen_compl_iff.mpr isClosed_closedBall)
+  have hq₀ : z + e θ ∈ U := by
+    refine ⟨?_, ?_⟩
+    · rw [mem_ball, dist_eq_norm, hw, ringPt, hz,
+        show P + (t : ℂ) * e β + e θ - (P + e θ) = (t : ℂ) * e β by ring, norm_mul, norm_e, mul_one,
+        Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
+      linarith
+    · rw [mem_compl_iff, mem_closedBall, dist_eq_norm, not_le, hz, show P + (t : ℂ) * e β + e θ - P = (t : ℂ) * e β + e θ by ring]
+      have hsq : ‖(t : ℂ) * e β + e θ‖ ^ 2 = 1 + t ^ 2 + 2 * t * Real.cos (β - θ) := by
+        rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]
+        simp only [Complex.add_re, Complex.add_im, Complex.re_ofReal_mul, Complex.im_ofReal_mul, re_e, im_e, Real.cos_sub]
+        nlinarith [Real.cos_sq_add_sin_sq β, Real.cos_sq_add_sin_sq θ]
+      have : 1 < ‖(t : ℂ) * e β + e θ‖ ^ 2 := by rw [hsq]; nlinarith
+      exact (one_lt_sq_iff₀ (norm_nonneg _)).mp this
+  obtain ⟨s₀, hs₀, hs₀U⟩ := Metric.isOpen_iff.mp hUo _ hq₀
+  -- an injective arc of `ω(z)` inside `U`
+  set q : ℝ → ℂ := fun s => z + e (θ + s) with hq
+  have hqU : ∀ s ∈ Ioo 0 (min s₀ 1), q s ∈ U := by
+    intro s hs
+    apply hs₀U
+    rw [mem_ball, dist_eq_norm, hq, show z + e (θ + s) - (z + e θ) = e (θ + s) - e θ by ring]
+    calc ‖e (θ + s) - e θ‖ ≤ |θ + s - θ| := norm_e_sub_e_le _ _
+      _ = s := by rw [add_sub_cancel_left, abs_of_pos hs.1]
+      _ < s₀ := hs.2.trans_le (min_le_left _ _)
+  have hqinj : InjOn q (Ioo 0 (min s₀ 1)) := by
+    intro s hs s' hs' hss
+    have h' : e (θ + s) = e (θ + s') := add_left_cancel hss
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp h'
+    have hs1 := hs.2.trans_le (min_le_right _ _)
+    have hs1' := hs'.2.trans_le (min_le_right _ _)
+    have hn0 : n = 0 := by
+      have hlt : |(n : ℝ) * (2 * π)| < 2 * π := by
+        rw [show (n : ℝ) * (2 * π) = s - s' by linarith, abs_lt]; constructor <;> linarith [hs.1, hs'.1, Real.pi_gt_three]
+      rw [abs_mul, abs_of_pos (by positivity : (0:ℝ) < 2 * π)] at hlt
+      have : |(n : ℝ)| < 1 := by nlinarith
+      have h1 : (-1 : ℝ) < n := (abs_lt.mp this).1
+      have h2 : (n : ℝ) < 1 := (abs_lt.mp this).2
+      have h1' : -1 < n := by exact_mod_cast h1
+      have h2' : n < 1 := by exact_mod_cast h2
+      omega
+    rw [hn0] at hn; simp at hn; linarith
+  have hQinf : (q '' Ioo 0 (min s₀ 1)).Infinite := (Ioo_infinite (lt_min hs₀ one_pos)).image hqinj
+  -- finitely many points of `ω(z)` lie on arcs near `w`
+  have hfin2 : (⋃ a ∈ A, a.carrier ∩ sphere z 1).Finite := by
+    refine hfin.biUnion fun a ha => ?_
+    rcases Arc.finite_inter_sphere_or_eq_circ a (F.nondegenerate a ha.1) z with h | ⟨θa, θb, rfl⟩
+    · exact h
+    · exfalso
+      refine htbad ⟨⟨_, ha, rayParam_circ P β t 1 θa θb⟩, ?_⟩
+      simp only [mem_singleton_iff]; exact ht0.ne'
+  obtain ⟨_, ⟨s, hs, rfl⟩, hsn⟩ := (hQinf.sdiff hfin2).nonempty
+  have hqs := hqU s hs
+  have hqsph : q s ∈ sphere z 1 := by simp [hq]
+  have hqb : dist (q s) w < δ := hqs.1
+  have hqint : q s ∈ F.interiorPts := by
+    refine ⟨hdom (lt_of_lt_of_le hqb ((min_le_left _ _).trans (min_le_right _ _))), fun hmem => hsn ?_⟩
+    obtain ⟨a, ha, hqa⟩ := mem_iUnion₂.mp hmem
+    have hqtw : q s ∈ tw := htwb (lt_of_lt_of_le hqb ((min_le_right _ _).trans (min_le_left _ _)))
+    exact mem_iUnion₂.mpr ⟨a, ⟨ha, q s, hqa, hqtw⟩, hqa, hqsph⟩
+  have hqcl : q s ∈ closure (F.region c') :=
+    hpatch ⟨lt_of_lt_of_le hqb ((min_le_left _ _).trans (min_le_left _ _)), hqs.2⟩
+  refine ⟨q s, ⟨⟨⟨hqint, col_eq_of_mem_closure_region hqint hqcl⟩, ?_⟩, hqs.2⟩, ?_⟩
+  · exact Metric.mem_thickening_iff.mpr ⟨w, hwarc, lt_of_lt_of_le hqb ((min_le_right _ _).trans (min_le_right _ _))⟩
+  · rw [dist_comm]; exact hqsph
 
 /-! ## FS114-L60-LE: the equality case and its fragment -/
 
