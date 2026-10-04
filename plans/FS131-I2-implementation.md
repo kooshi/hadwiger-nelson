@@ -322,9 +322,9 @@ never a missing lemma.
 
 **Still `sorry`** (lines that are exactly `sorry`): `Plane/Slack` 46 (unchanged: `exists_tight` and its children, the three limits and SUPK's
 children, the modification and `chiM0_le_chiCP`, `tendsto_not_kept`, the compactness children and the attainment lemma, `exists_not_uniform_kept`),
-`Plane/CoverExamples` 44 (R7 10: `measurable_r7Col`, `r7Col_mem_tile`, `r7UpCol_ne_r7DownCol`, `r7Up_unitPair`, `r7Up_sep`, `r7Down_dist_ne_one`,
-`volume_iUnion_sphere_tri`, `r7_boundary_lattice`, `r7_boundary_offLattice`, `r7_phi_pos_up`/`_down` (11 with both); DISC7 3; (G1) 4; HC/IRREG 26
-plus the three assemblies), `Arith/Dyadic` 12, `Plane/FalconerReduction` 9, `Plane/YesLimit` 4, `Plane/Cover` 2.
+`Plane/CoverExamples` 44 (R7 11: `measurable_r7Col`, `r7Col_mem_tile`, `r7UpCol_ne_r7DownCol`, `r7Up_unitPair`, `r7Up_sep`, `r7Down_dist_ne_one`,
+`volume_iUnion_sphere_tri`, `r7_boundary_lattice`, `r7_boundary_offLattice`, `r7_phi_pos_up`, `r7_phi_pos_down`; DISC7 3; (G1) 4; HC/IRREG 23 children
+and the three assemblies), `Arith/Dyadic` 12, `Plane/FalconerReduction` 9, `Plane/YesLimit` 4, `Plane/Cover` 2.
 **Not touched**: `exists_not_uniform_kept`'s fringe formula (§ 17.1's open point) — no message to Keryx was needed, since I did not reach it.
 
 **For the next implementer.**
