@@ -577,3 +577,7 @@ One line per item with its source; no narration. Each line is ticked done or dec
      need a new kind of input (so the card's hunch — at least a third of the steps need a new kind — went unscored).
 147. **FS-123's banner filed** by Keryx, verbatim from `plans/FS129-Z2-record.md` § Stage 4, under the title of `plans/STUB-qfree-ring.md`, before
      FS129-P1 reads it.
+148. **Launched 2026-10-04 02:36 UTC**: FS129-L1 (the Lean backlog's input; `clerk`, Sonnet; `data/fs129/briefs/FS129-L1-backlog.md`) and FS129-P1
+     (the re-rank; `poros`, Opus; `data/fs129/briefs/FS129-P1-rerank.md`), both gated PASS, at `fc9a4ac1`. Running: the Searcher, L1, P1 — the cap of
+     three. When both report: Keryx files the front page from Z2's drafts and P1's re-rank (the filing, by the Clerk as pen if large), and FS-129 is
+     Derived.
