@@ -74,14 +74,104 @@ within distance `1` of every point of the lens `B(v, 1) ∩ B̄(N, 1)` it was wi
 theorem lens_dist_lt_one_of_up (v : ℂ) (α : ℝ) :
     ∃ r > 0, ∀ z, dist z v < r → ∀ t : ℝ, 0 ≤ t → dist (z + t * e (α + π / 2)) v < r →
       ∀ p ∈ ball v 1 ∩ closedBall (v + e (α + π / 2)) 1, dist z p < 1 → dist (z + t * e (α + π / 2)) p < 1 := by
-  sorry
+  refine ⟨1 / 8, by norm_num, fun z hz t ht hz' p hp hd => ?_⟩
+  obtain ⟨hpv, hpN⟩ := hp
+  rw [mem_ball] at hpv
+  rw [mem_closedBall] at hpN
+  set z' := z + (t : ℂ) * e (α + π / 2) with hz'def
+  have hx' : frameX v α z' = frameX v α z := frameX_add_normal v α t z
+  have hy' : frameY v α z' = frameY v α z + t := frameY_add_normal v α t z
+  have hdz : dist z' p ^ 2 = (frameX v α z - frameX v α p) ^ 2 + (frameY v α z + t - frameY v α p) ^ 2 := by
+    rw [sq_dist_frame v α z' p, hx', hy']
+  have hdz0 : dist z p ^ 2 = (frameX v α z - frameX v α p) ^ 2 + (frameY v α z - frameY v α p) ^ 2 :=
+    sq_dist_frame v α z p
+  have hpN2 : dist p (v + e (α + π / 2)) ^ 2 = frameX v α p ^ 2 + (frameY v α p - 1) ^ 2 := by
+    rw [sq_dist_frame v α p, frameX_N, frameY_N]; ring
+  have hpv2 : dist p v ^ 2 = frameX v α p ^ 2 + frameY v α p ^ 2 := by
+    rw [sq_dist_frame v α p v, frameX_self, frameY_self]; ring
+  have hz'v : frameX v α z' ^ 2 + frameY v α z' ^ 2 = dist z' v ^ 2 := by
+    rw [sq_dist_frame v α z' v, frameX_self, frameY_self]; ring
+  have hzv : frameX v α z ^ 2 + frameY v α z ^ 2 = dist z v ^ 2 := by
+    rw [sq_dist_frame v α z v, frameX_self, frameY_self]; ring
+  set a := frameX v α p
+  set b := frameY v α p
+  set x := frameX v α z
+  set y := frameY v α z
+  have hpN' : a ^ 2 + (b - 1) ^ 2 ≤ 1 := by
+    have := pow_le_pow_left₀ dist_nonneg hpN 2
+    rw [hpN2] at this; linarith
+  have hzr : dist z v ^ 2 < 1 / 64 := by
+    have := pow_lt_pow_left₀ hz dist_nonneg (two_ne_zero); nlinarith
+  have hz'r : dist z' v ^ 2 < 1 / 64 := by
+    have := pow_lt_pow_left₀ hz' dist_nonneg (two_ne_zero); nlinarith
+  have hd2 : dist z p ^ 2 < 1 := by
+    have := pow_lt_pow_left₀ hd dist_nonneg (two_ne_zero); simpa using this
+  rw [← sq_lt_one_iff₀ dist_nonneg]
+  by_cases hcase : 1 / 4 ≤ a ^ 2 + b ^ 2
+  · -- the point `p` is ahead of both: moving up only approaches it
+    have hpN'' : a ^ 2 + b ^ 2 ≤ 2 * b := by
+      have : (b - 1) ^ 2 = b ^ 2 - 2 * b + 1 := by ring
+      linarith
+    have hb : 1 / 8 ≤ b := by linarith
+    have hy2 : y + t < 1 / 8 := by
+      have h1 : (y + t) ^ 2 < (1 / 8) ^ 2 := by
+        rw [← hy']; nlinarith [sq_nonneg (frameX v α z')]
+      exact (abs_lt.mp (abs_lt_of_sq_lt_sq h1 (by norm_num))).2
+    have hy1 : y ≤ y + t := by linarith
+    have hle : t * (y + (y + t) - 2 * b) ≤ 0 := mul_nonpos_of_nonneg_of_nonpos ht (by linarith)
+    have : dist z' p ^ 2 ≤ dist z p ^ 2 := by rw [hdz, hdz0]; nlinarith [hle]
+    linarith
+  · -- the point `p` is within `1/2` of `v`
+    push Not at hcase
+    have hpv' : dist p v < 1 / 2 := by
+      have h1 : dist p v ^ 2 < (1 / 2) ^ 2 := by nlinarith
+      exact lt_of_pow_lt_pow_left₀ 2 (by norm_num) h1
+    have hz'v' : dist z' v < 1 / 8 := hz'
+    have : dist z' p < 1 := by
+      calc dist z' p ≤ dist z' v + dist v p := dist_triangle _ _ _
+        _ < 1 / 8 + 1 / 2 := by rw [dist_comm v p]; linarith
+        _ < 1 := by norm_num
+    exact pow_lt_one₀ dist_nonneg this two_ne_zero
 
 /-- **FS110-N3-CONF**, (iv) (N3-UP, the lune `p_y ≤ −1/2`, check C2): moving a point near `v` in the `+n` direction moves it
 away from every point of the lune `B̄(S′, 1) ∖ B(v, 1)` — so a point clear of an out-type tile at `S′` (all of whose distances
 exceed `1`) stays clear. -/
 theorem lune_dist_le_of_up (v : ℂ) (α : ℝ) {z : ℂ} (hz : dist z v < 1 / 2) {t : ℝ} (ht : 0 ≤ t)
     {p : ℂ} (hp : p ∈ closedBall (v - e (α + π / 2)) 1 \ ball v 1) : dist z p ≤ dist (z + t * e (α + π / 2)) p := by
-  sorry
+  obtain ⟨hpS, hpv⟩ := hp
+  rw [mem_closedBall] at hpS
+  rw [mem_ball, not_lt] at hpv
+  have hdz : dist (z + (t : ℂ) * e (α + π / 2)) p ^ 2 =
+      (frameX v α z - frameX v α p) ^ 2 + (frameY v α z + t - frameY v α p) ^ 2 := by
+    rw [sq_dist_frame v α _ p, frameX_add_normal, frameY_add_normal]
+  have hdz0 : dist z p ^ 2 = (frameX v α z - frameX v α p) ^ 2 + (frameY v α z - frameY v α p) ^ 2 :=
+    sq_dist_frame v α z p
+  have hpS2 : dist p (v - e (α + π / 2)) ^ 2 = frameX v α p ^ 2 + (frameY v α p + 1) ^ 2 := by
+    rw [sq_dist_frame v α p, frameX_S, frameY_S]; ring
+  have hpv2 : dist p v ^ 2 = frameX v α p ^ 2 + frameY v α p ^ 2 := by
+    rw [sq_dist_frame v α p v, frameX_self, frameY_self]; ring
+  have hzv : frameX v α z ^ 2 + frameY v α z ^ 2 = dist z v ^ 2 := by
+    rw [sq_dist_frame v α z v, frameX_self, frameY_self]; ring
+  set a := frameX v α p
+  set b := frameY v α p
+  set y := frameY v α z
+  have hpS' : a ^ 2 + (b + 1) ^ 2 ≤ 1 := by
+    have := pow_le_pow_left₀ dist_nonneg hpS 2
+    rw [hpS2] at this; linarith
+  have hpv' : 1 ≤ a ^ 2 + b ^ 2 := by
+    have := pow_le_pow_left₀ zero_le_one hpv 2
+    rw [hpv2] at this; linarith
+  have hb : b ≤ -1 / 2 := by
+    have : (b + 1) ^ 2 = b ^ 2 + 2 * b + 1 := by ring
+    linarith
+  have hy : -(1 / 2) < y := by
+    have h1 : y ^ 2 < (1 / 2) ^ 2 := by
+      have := pow_lt_pow_left₀ hz dist_nonneg two_ne_zero
+      nlinarith [sq_nonneg (frameX v α z)]
+    exact (abs_lt.mp (abs_lt_of_sq_lt_sq h1 (by norm_num))).1
+  have hle : 0 ≤ t * (2 * (y - b) + t) := mul_nonneg ht (by linarith)
+  have : dist z p ^ 2 ≤ dist (z + (t : ℂ) * e (α + π / 2)) p ^ 2 := by rw [hdz, hdz0]; nlinarith [hle]
+  exact (pow_le_pow_iff_left₀ dist_nonneg dist_nonneg two_ne_zero).mp this
 
 namespace ArcMap
 

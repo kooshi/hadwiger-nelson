@@ -234,6 +234,226 @@ def IsCoveringPair (u y : ℂ) : Prop := F.coloursAt u ∪ F.coloursAt y = univ
 
 end ArcMap
 
+/-! ## Engines 1–2: validity transfer, and no new unit arc from a `Γ` inclusion -/
+
+namespace ArcMap
+
+variable {k : ℕ} {F F' : ArcMap k}
+
+/-- **The validity transfer** (wave 4's engine 1): a map agreeing with a valid map off `U`, each of whose interior points in
+`U` is clear in the old map for its new colour, with no unit pair of one colour among its interior points in `U`, is valid.
+Every local move's validity is then its clearness. -/
+theorem Valid.of_agreesOff (hF : F.Valid) {U : Set ℂ} (hA : F'.AgreesOff F U)
+    (hclear : ∀ z ∈ U ∩ F'.interiorPts, F.IsClear (F'.col z) z)
+    (hUU : ∀ z ∈ U ∩ F'.interiorPts, ∀ y ∈ U ∩ F'.interiorPts, dist z y = 1 → F'.col z ≠ F'.col y) :
+    F'.Valid := by
+  intro x hx y hy hxy
+  by_cases hxU : x ∈ U <;> by_cases hyU : y ∈ U
+  · exact hUU x ⟨hxU, hx⟩ y ⟨hyU, hy⟩ hxy
+  · obtain ⟨hyi, hyc⟩ := hA.2 y hyU
+    have hy' : y ∈ F.interiorPts := hyi.mpr hy
+    intro hcol
+    refine hclear x ⟨hxU, hx⟩ y ⟨hy', ?_⟩ hxy
+    show F.col y = F'.col x
+    rw [hyc, hcol]
+  · obtain ⟨hxi, hxc⟩ := hA.2 x hxU
+    have hx' : x ∈ F.interiorPts := hxi.mpr hx
+    intro hcol
+    refine hclear y ⟨hyU, hy⟩ x ⟨hx', ?_⟩ (by rw [dist_comm]; exact hxy)
+    show F.col x = F'.col y
+    rw [hxc, hcol]
+  · obtain ⟨hxi, hxc⟩ := hA.2 x hxU
+    obtain ⟨hyi, hyc⟩ := hA.2 y hyU
+    have := hF x (hxi.mpr hx) y (hyi.mpr hy) hxy
+    rwa [hxc, hyc] at this
+
+end ArcMap
+
+/-! ## The frame algebra (wave 4's engine 4): a point against `N`, `S′` and the circles of the pencil -/
+
+/-- The unit normal at `v` along `e α` is `i · e α`. -/
+theorem e_add_pi_div_two (α : ℝ) : e (α + π / 2) = I * e α := by
+  rw [e_add, mul_comm]
+  congr 1
+  rw [e_eq]; simp
+
+/-- The frame's two coordinates are the plane's norm: `x² + y² = ‖z − v‖²`. -/
+theorem frame_normSq (v : ℂ) (α : ℝ) (z : ℂ) :
+    frameX v α z ^ 2 + frameY v α z ^ 2 = ‖z - v‖ ^ 2 := by
+  unfold frameX frameY
+  have h := Complex.sq_norm ((z - v) * starRingEnd ℂ (e α))
+  rw [Complex.normSq_apply, norm_mul, RCLike.norm_conj, norm_e, mul_one] at h
+  nlinarith [h]
+
+/-- The distance to the point `v + c n` of the normal line, in frame coordinates: `x² + (y − c)²`. -/
+theorem sq_dist_normalPt (v : ℂ) (α c : ℝ) (z : ℂ) :
+    ‖z - (v + (c : ℂ) * e (α + π / 2))‖ ^ 2 = frameX v α z ^ 2 + (frameY v α z - c) ^ 2 := by
+  have hce : (e α) * starRingEnd ℂ (e α) = 1 := by
+    rw [Complex.mul_conj, Complex.normSq_eq_norm_sq]; simp
+  have h : z - (v + (c : ℂ) * e (α + π / 2)) = ((z - v) * starRingEnd ℂ (e α) - (c * I)) * e α := by
+    rw [e_add_pi_div_two]
+    calc z - (v + (c : ℂ) * (I * e α)) = (z - v) - c * I * e α := by ring
+      _ = ((z - v) * (e α * starRingEnd ℂ (e α)) - c * I * e α) := by rw [hce]; ring
+      _ = _ := by ring
+  have h1 : ‖z - (v + (c : ℂ) * e (α + π / 2))‖ = ‖(z - v) * starRingEnd ℂ (e α) - (c * I)‖ := by
+    rw [h, norm_mul, norm_e, mul_one]
+  rw [h1, Complex.sq_norm, Complex.normSq_apply]
+  unfold frameX frameY
+  simp
+  ring
+
+/-- `dist z N` squared, `N = v + n`: `x² + (y − 1)²`. -/
+theorem sq_dist_N (v : ℂ) (α : ℝ) (z : ℂ) :
+    dist z (v + e (α + π / 2)) ^ 2 = frameX v α z ^ 2 + (frameY v α z - 1) ^ 2 := by
+  have := sq_dist_normalPt v α 1 z
+  rw [dist_eq_norm]
+  simpa using this
+
+/-- `dist z S′` squared, `S′ = v − n`: `x² + (y + 1)²`. -/
+theorem sq_dist_S (v : ℂ) (α : ℝ) (z : ℂ) :
+    dist z (v - e (α + π / 2)) ^ 2 = frameX v α z ^ 2 + (frameY v α z + 1) ^ 2 := by
+  have := sq_dist_normalPt v α (-1) z
+  rw [dist_eq_norm]
+  have h2 : v + ((-1 : ℝ) : ℂ) * e (α + π / 2) = v - e (α + π / 2) := by push_cast; ring
+  rw [h2] at this
+  rw [this]; ring
+
+theorem lt_iff_sq_lt_sq' {d r : ℝ} (hd : 0 ≤ d) (hr : 0 ≤ r) : d < r ↔ d ^ 2 < r ^ 2 :=
+  (pow_lt_pow_iff_left₀ hd hr (by norm_num)).symm
+
+/-- **Above `ω(N)`'s arc** (curvature `1`): `z` is inside the unit disc about `N`. -/
+theorem tanAbove_one_iff (v : ℂ) (α : ℝ) (z : ℂ) : TanAbove v α 1 z ↔ dist z (v + e (α + π / 2)) < 1 := by
+  have h := sq_dist_N v α z
+  rw [lt_iff_sq_lt_sq' dist_nonneg zero_le_one, h]
+  unfold TanAbove tanHeight
+  constructor <;> intro h <;> nlinarith [h]
+
+/-- **Below `ω(N)`'s arc**: `z` is outside the unit disc about `N`. -/
+theorem tanBelow_one_iff (v : ℂ) (α : ℝ) (z : ℂ) : TanBelow v α 1 z ↔ 1 < dist z (v + e (α + π / 2)) := by
+  have h := sq_dist_N v α z
+  rw [lt_iff_sq_lt_sq' zero_le_one dist_nonneg, h]
+  unfold TanBelow tanHeight
+  constructor <;> intro h <;> nlinarith [h]
+
+/-- **Above `ω(S′)`'s arc** (curvature `−1`): `z` is outside the unit disc about `S′`. -/
+theorem tanAbove_neg_one_iff (v : ℂ) (α : ℝ) (z : ℂ) :
+    TanAbove v α (-1) z ↔ 1 < dist z (v - e (α + π / 2)) := by
+  have h := sq_dist_S v α z
+  rw [lt_iff_sq_lt_sq' zero_le_one dist_nonneg, h]
+  unfold TanAbove tanHeight
+  constructor <;> intro h <;> nlinarith [h]
+
+/-- **Below `ω(S′)`'s arc**: `z` is inside the unit disc about `S′`. -/
+theorem tanBelow_neg_one_iff (v : ℂ) (α : ℝ) (z : ℂ) :
+    TanBelow v α (-1) z ↔ dist z (v - e (α + π / 2)) < 1 := by
+  have h := sq_dist_S v α z
+  rw [lt_iff_sq_lt_sq' dist_nonneg zero_le_one, h]
+  unfold TanBelow tanHeight
+  constructor <;> intro h <;> nlinarith [h]
+
+/-- The height above the arc of curvature `κ ≠ 0` is a multiple of the power of the point against its circle. -/
+theorem tanHeight_eq_of_ne_zero {κ : ℝ} (hκ : κ ≠ 0) (x y : ℝ) :
+    tanHeight κ x y = -(κ / 2) * (x ^ 2 + (y - 1 / κ) ^ 2 - (1 / κ) ^ 2) := by
+  unfold tanHeight
+  field_simp
+  ring
+
+/-- For `κ > 0`, above the arc of curvature `κ` is inside the circle of radius `1/κ` about `v + n/κ` (the `κ = 1` case is
+`tanAbove_one_iff`). -/
+theorem tanAbove_iff_of_pos (v : ℂ) (α : ℝ) {κ : ℝ} (hκ : 0 < κ) (z : ℂ) :
+    TanAbove v α κ z ↔ dist z (v + ((1 / κ : ℝ) : ℂ) * e (α + π / 2)) < 1 / κ := by
+  have h := sq_dist_normalPt v α (1 / κ) z
+  rw [lt_iff_sq_lt_sq' dist_nonneg (by positivity), dist_eq_norm, h]
+  unfold TanAbove
+  rw [tanHeight_eq_of_ne_zero hκ.ne']
+  have : 0 < κ / 2 := by positivity
+  constructor <;> intro h <;> nlinarith [h]
+
+/-- For `κ > 0`, below the arc of curvature `κ` is outside the circle of radius `1/κ` about `v + n/κ`. -/
+theorem tanBelow_iff_of_pos (v : ℂ) (α : ℝ) {κ : ℝ} (hκ : 0 < κ) (z : ℂ) :
+    TanBelow v α κ z ↔ 1 / κ < dist z (v + ((1 / κ : ℝ) : ℂ) * e (α + π / 2)) := by
+  have h := sq_dist_normalPt v α (1 / κ) z
+  rw [lt_iff_sq_lt_sq' (by positivity) dist_nonneg, dist_eq_norm, h]
+  unfold TanBelow
+  rw [tanHeight_eq_of_ne_zero hκ.ne']
+  have : 0 < κ / 2 := by positivity
+  constructor <;> intro h <;> nlinarith [h]
+
+/-- `e α · conj (e α) = 1`. -/
+theorem conj_e_mul_e (α : ℝ) : (e α) * starRingEnd ℂ (e α) = 1 := by
+  rw [Complex.mul_conj, Complex.normSq_eq_norm_sq]; simp
+
+/-- Frame coordinates are additive: `frameX z − frameX w` is the real part of `(z − w) ē`. -/
+theorem frameX_sub (v : ℂ) (α : ℝ) (z w : ℂ) :
+    frameX v α z - frameX v α w = ((z - w) * starRingEnd ℂ (e α)).re := by
+  unfold frameX; rw [← Complex.sub_re]; congr 1; ring
+
+/-- `frameY z − frameY w` is the imaginary part of `(z − w) ē`. -/
+theorem frameY_sub (v : ℂ) (α : ℝ) (z w : ℂ) :
+    frameY v α z - frameY v α w = ((z - w) * starRingEnd ℂ (e α)).im := by
+  unfold frameY; rw [← Complex.sub_im]; congr 1; ring
+
+/-- **The frame is an isometry**: `dist z w² = Δx² + Δy²` in the frame at any `v`. -/
+theorem sq_dist_frame (v : ℂ) (α : ℝ) (z w : ℂ) :
+    dist z w ^ 2 = (frameX v α z - frameX v α w) ^ 2 + (frameY v α z - frameY v α w) ^ 2 := by
+  rw [frameX_sub, frameY_sub, dist_eq_norm]
+  have h := Complex.sq_norm ((z - w) * starRingEnd ℂ (e α))
+  rw [Complex.normSq_apply, norm_mul, RCLike.norm_conj, norm_e, mul_one] at h
+  nlinarith [h]
+
+/-- Moving along the normal `n` changes only the `y` coordinate: `x` is kept. -/
+theorem frameX_add_normal (v : ℂ) (α t : ℝ) (z : ℂ) :
+    frameX v α (z + (t : ℂ) * e (α + π / 2)) = frameX v α z := by
+  unfold frameX
+  have : (z + (t : ℂ) * e (α + π / 2) - v) * starRingEnd ℂ (e α) =
+      (z - v) * starRingEnd ℂ (e α) + t * I := by
+    rw [e_add_pi_div_two]
+    have := conj_e_mul_e α
+    calc _ = (z - v) * starRingEnd ℂ (e α) + t * I * (e α * starRingEnd ℂ (e α)) := by ring
+      _ = _ := by rw [this]; ring
+  rw [this]; simp
+
+/-- Moving by `t n` adds `t` to the `y` coordinate. -/
+theorem frameY_add_normal (v : ℂ) (α t : ℝ) (z : ℂ) :
+    frameY v α (z + (t : ℂ) * e (α + π / 2)) = frameY v α z + t := by
+  unfold frameY
+  have : (z + (t : ℂ) * e (α + π / 2) - v) * starRingEnd ℂ (e α) =
+      (z - v) * starRingEnd ℂ (e α) + t * I := by
+    rw [e_add_pi_div_two]
+    have := conj_e_mul_e α
+    calc _ = (z - v) * starRingEnd ℂ (e α) + t * I * (e α * starRingEnd ℂ (e α)) := by ring
+      _ = _ := by rw [this]; ring
+  rw [this]; simp
+
+/-- `v` has frame coordinates `(0, 0)`. -/
+theorem frameX_self (v : ℂ) (α : ℝ) : frameX v α v = 0 := by simp [frameX]
+/-- `v` has frame coordinates `(0, 0)`. -/
+theorem frameY_self (v : ℂ) (α : ℝ) : frameY v α v = 0 := by simp [frameY]
+
+/-- `N = v + n` has frame coordinates `(0, 1)`. -/
+theorem frameX_N (v : ℂ) (α : ℝ) : frameX v α (v + e (α + π / 2)) = 0 := by
+  have := frameX_add_normal v α 1 v; simp at this; rw [this, frameX_self]
+/-- `N = v + n` has frame coordinates `(0, 1)`. -/
+theorem frameY_N (v : ℂ) (α : ℝ) : frameY v α (v + e (α + π / 2)) = 1 := by
+  have := frameY_add_normal v α 1 v; simp at this; rw [this, frameY_self]; ring
+/-- `S′ = v − n` has frame coordinates `(0, −1)`. -/
+theorem frameX_S (v : ℂ) (α : ℝ) : frameX v α (v - e (α + π / 2)) = 0 := by
+  have := frameX_add_normal v α (-1) v; simp at this; rw [sub_eq_add_neg, this, frameX_self]
+/-- `S′ = v − n` has frame coordinates `(0, −1)`. -/
+theorem frameY_S (v : ℂ) (α : ℝ) : frameY v α (v - e (α + π / 2)) = -1 := by
+  have := frameY_add_normal v α (-1) v; simp at this; rw [sub_eq_add_neg, this, frameY_self]; ring
+
+/-- Spec: the frame algebra at `α = 0`, `v = 0`: `2i` (frame `(0, 2)`) lies on `ω(N)`'s arc, so it is not above it, and `i/2`
+is. -/
+example : ¬ TanAbove 0 0 1 (2 * I) ∧ TanAbove 0 0 1 (I / 2) := by
+  rw [tanAbove_one_iff, tanAbove_one_iff]
+  simp [e_eq]
+  constructor
+  · norm_num [Complex.dist_eq, Complex.norm_def, Complex.normSq_apply]
+  · have h4 : Real.sqrt 4 = 2 := by
+      rw [show (4 : ℝ) = 2 ^ 2 by norm_num]; exact Real.sqrt_sq (by norm_num)
+    norm_num [Complex.dist_eq, Complex.norm_def, Complex.normSq_apply, h4]
+
 /-! ## Spec examples (each fails if its definition drifts) -/
 
 /-- `frameX` reads the coordinate along `e α`: at `α = 0` it is the real part of `z − v`. -/
