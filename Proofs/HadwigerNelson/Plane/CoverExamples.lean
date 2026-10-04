@@ -1131,7 +1131,46 @@ theorem volume_frontier_disc7 (a : Fin 7) : volume (frontier (disc7 a)) = 0 := b
 /-- A class is invariant under the colour lattice, spanned by `c(1, 2)` and `c(−3, 1)`. -/
 theorem disc7_periodic (a : Fin 7) (x : ℂ) :
     (x + disc7Centre 1 2 ∈ disc7 a ↔ x ∈ disc7 a) ∧ (x + disc7Centre (-3) 1 ∈ disc7 a ↔ x ∈ disc7 a) := by
-  sorry
+  have hlin : ∀ m n m' n' : ℤ, disc7Centre (m + m') (n + n') = disc7Centre m n + disc7Centre m' n' := by
+    intro m n m' n'; simp only [disc7Centre, tri]; push_cast; ring
+  have hcol : ∀ m n p q : ℤ, (p + 3 * q) % 7 = 0 → disc7Col (m + p) (n + q) = disc7Col m n := by
+    intro m n p q hpq
+    simp only [disc7Col, Fin.ext_iff]
+    congr 1
+    omega
+  have key : ∀ p q : ℤ, (p + 3 * q) % 7 = 0 → ∀ x, x + disc7Centre p q ∈ disc7 a ↔ x ∈ disc7 a := by
+    intro p q hpq x
+    simp only [disc7, mem_iUnion, mem_closedBall]
+    constructor
+    · rintro ⟨m, n, hc, hx⟩
+      refine ⟨m + -p, n + -q, ?_, ?_⟩
+      · rw [hcol m n (-p) (-q) (by omega)]; exact hc
+      · rw [hlin, show disc7Centre (-p) (-q) = - disc7Centre p q by simp only [disc7Centre, tri]; push_cast; ring,
+          ← dist_add_right x _ (disc7Centre p q)]
+        convert hx using 2; ring
+    · rintro ⟨m, n, hc, hx⟩
+      refine ⟨m + p, n + q, ?_, ?_⟩
+      · rw [hcol m n p q hpq]; exact hc
+      · rw [hlin, dist_add_right]; exact hx
+  exact ⟨key 1 2 (by norm_num) x, key (-3) 1 (by norm_num) x⟩
+
+/-- The colour lattice's generators are independent. -/
+theorem disc7_linearIndependent : LinearIndependent ℝ ![disc7Centre 1 2, disc7Centre (-3) 1] := by
+  rw [LinearIndependent.pair_iff]
+  intro s t hst
+  have h3 : (√3 : ℝ) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have h3p : (0 : ℝ) < √3 := by positivity
+  have hre := congrArg Complex.re hst
+  have him := congrArg Complex.im hst
+  simp only [disc7Centre, tri, e_pi_div_three, Complex.real_smul, Complex.add_re, Complex.mul_re, Complex.mul_im,
+    Complex.add_im, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.intCast_re,
+    Complex.intCast_im, Complex.zero_re, Complex.zero_im] at hre him
+  norm_num at hre him
+  have ht : t = 0 := by nlinarith [mul_pos h3p h3p]
+  subst ht
+  constructor
+  · nlinarith [mul_pos h3p h3p]
+  · rfl
 
 /-- One cell of the colour lattice holds one disc's area `π/4` of the class, in covolume `21√3/8`. -/
 theorem volume_disc7_cell (a : Fin 7) :
@@ -1139,11 +1178,129 @@ theorem volume_disc7_cell (a : Fin 7) :
         x = s * disc7Centre 1 2 + t * disc7Centre (-3) 1}) = ENNReal.ofReal (π / 4) ∧
       volume {x : ℂ | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧
         x = s * disc7Centre 1 2 + t * disc7Centre (-3) 1} = ENNReal.ofReal (21 * √3 / 8) := by
-  sorry
-
-/-- The colour lattice's generators are independent. -/
-theorem disc7_linearIndependent : LinearIndependent ℝ ![disc7Centre 1 2, disc7Centre (-3) 1] := by
-  sorry
+  set c₁ := disc7Centre 1 2 with hc₁
+  set c₂ := disc7Centre (-3) 1 with hc₂
+  have h3 : (√3 : ℝ) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have hc₁re : c₁.re = √3 := by
+    simp only [hc₁, disc7Centre, tri, e_pi_div_three, Complex.mul_re, Complex.add_re, Complex.ofReal_re,
+      Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.add_im, Complex.mul_im, Complex.intCast_re,
+      Complex.intCast_im]
+    norm_num
+  have hc₁im : c₁.im = 3 / 2 := by
+    simp only [hc₁, disc7Centre, tri, e_pi_div_three, Complex.mul_re, Complex.add_re, Complex.ofReal_re,
+      Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.add_im, Complex.mul_im, Complex.intCast_re,
+      Complex.intCast_im]
+    norm_num; nlinarith [h3]
+  have hc₂re : c₂.re = -(5 * √3 / 4) := by
+    simp only [hc₂, disc7Centre, tri, e_pi_div_three, Complex.mul_re, Complex.add_re, Complex.ofReal_re,
+      Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.add_im, Complex.mul_im, Complex.intCast_re,
+      Complex.intCast_im]
+    norm_num; ring
+  have hc₂im : c₂.im = 3 / 4 := by
+    simp only [hc₂, disc7Centre, tri, e_pi_div_three, Complex.mul_re, Complex.add_re, Complex.ofReal_re,
+      Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.add_im, Complex.mul_im, Complex.intCast_re,
+      Complex.intCast_im]
+    norm_num; nlinarith [h3]
+  have hP : {x : ℂ | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧ x = s * c₁ + t * c₂} = parallelogram c₁ c₂ := rfl
+  rw [hP]
+  obtain ⟨hDm, -, -, hcov, hdisj⟩ := parallelogram_tiling disc7_linearIndependent
+  refine ⟨?_, ?_⟩
+  · -- one disc's area per cell
+    set c₀ := disc7Centre (a.val : ℤ) 0 with hc₀
+    set g := latticePt c₁ c₂ with hg
+    have hlin : ∀ p q : ℤ, g (p, q) = disc7Centre (p - 3 * q) (2 * p + q) := by
+      intro p q
+      simp only [hg, latticePt, hc₁, hc₂, disc7Centre, tri]; push_cast; ring
+    have hlin' : ∀ m n m' n' : ℤ, disc7Centre (m - m') (n - n') = disc7Centre m n - disc7Centre m' n' := by
+      intro m n m' n'; simp only [disc7Centre, tri]; push_cast; ring
+    have hunion : disc7 a = ⋃ pq : ℤ × ℤ, closedBall (c₀ - g pq) (1 / 2) := by
+      ext x
+      simp only [disc7, mem_iUnion]
+      constructor
+      · rintro ⟨m, n, hc, hx⟩
+        have hmod : (m + 3 * n) % 7 = (a.val : ℤ) := by
+          have := congrArg Fin.val hc
+          simp only [disc7Col] at this
+          have h0 : 0 ≤ (m + 3 * n) % 7 := Int.emod_nonneg _ (by norm_num)
+          omega
+        set p : ℤ := -(((m - a.val) + 3 * n) / 7) with hp
+        refine ⟨(p, -n - 2 * p), ?_⟩
+        have hpq : c₀ - g (p, -n - 2 * p) = disc7Centre m n := by
+          rw [hlin, hc₀, ← hlin']
+          congr 1 <;> omega
+        rw [hpq]; exact hx
+      · rintro ⟨⟨p, q⟩, hx⟩
+        refine ⟨a.val - (p - 3 * q), 0 - (2 * p + q), ?_, ?_⟩
+        · ext
+          simp only [disc7Col]
+          have : ((a.val : ℤ) - (p - 3 * q) + 3 * (0 - (2 * p + q))) % 7 = (a.val : ℤ) := by
+            have := a.isLt; omega
+          rw [this]; simp
+        · rw [hlin', ← hlin, ← hc₀]; exact hx
+    have hB : ∀ pq, (fun x => x + -g pq) ⁻¹' (closedBall (c₀ - g pq) (1 / 2) ∩ parallelogram c₁ c₂) =
+        closedBall c₀ (1 / 2) ∩ {x | x - g pq ∈ parallelogram c₁ c₂} := by
+      intro pq; ext x
+      simp only [mem_preimage, mem_inter_iff, mem_closedBall, mem_setOf_eq, ← sub_eq_add_neg, dist_sub_right]
+    have hdisjB : Pairwise (Function.onFun Disjoint fun pq : ℤ × ℤ => closedBall (c₀ - g pq) (1 / 2)) := by
+      intro pq pq' hne
+      refine Set.disjoint_left.2 fun x hx hx' => ?_
+      rw [mem_closedBall] at hx hx'
+      have hd : dist (c₀ - g pq) (c₀ - g pq') ≤ 1 := by
+        calc _ ≤ dist (c₀ - g pq) x + dist x (c₀ - g pq') := dist_triangle _ _ _
+          _ ≤ 1 / 2 + 1 / 2 := by rw [dist_comm]; exact add_le_add hx hx'
+          _ = 1 := by norm_num
+      obtain ⟨p, q⟩ := pq
+      obtain ⟨p', q'⟩ := pq'
+      rw [hlin, hlin, hc₀, ← hlin', ← hlin'] at hd
+      have hcol : disc7Col (a.val - (p - 3 * q)) (0 - (2 * p + q)) = disc7Col (a.val - (p' - 3 * q')) (0 - (2 * p' + q')) := by
+        simp only [disc7Col, Fin.ext_iff]; congr 1; omega
+      have hne' : ((a.val : ℤ) - (p - 3 * q), (0 : ℤ) - (2 * p + q)) ≠ (a.val - (p' - 3 * q'), 0 - (2 * p' + q')) := by
+        intro h
+        apply hne
+        simp only [Prod.mk.injEq] at h ⊢
+        omega
+      have := disc7Col_eq_dist_ge hcol hne'
+      have h21 : (2 : ℝ) < √21 := by
+        rw [show (2 : ℝ) = √4 by rw [show (4 : ℝ) = 2 ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]]
+        exact Real.sqrt_lt_sqrt (by norm_num) (by norm_num)
+      linarith
+    rw [hunion, iUnion_inter, measure_iUnion (fun pq pq' hne => (hdisjB hne).mono inter_subset_left inter_subset_left)
+      (fun pq => measurableSet_closedBall.inter hDm)]
+    have hterm : ∀ pq, volume (closedBall (c₀ - g pq) (1 / 2) ∩ parallelogram c₁ c₂) =
+        volume (closedBall c₀ (1 / 2) ∩ {x | x - g pq ∈ parallelogram c₁ c₂}) := by
+      intro pq; rw [← hB, measure_preimage_add_right]
+    rw [tsum_congr hterm]
+    have hU := measure_iUnion (μ := volume)
+      (f := fun pq => closedBall c₀ (1 / 2) ∩ {x | x - g pq ∈ parallelogram c₁ c₂})
+      (fun pq pq' hne => Set.disjoint_left.2 fun x hx hx' => hne (hdisj pq pq' x hx.2 hx'.2))
+      (fun pq => measurableSet_closedBall.inter ((measurable_id.sub_const _) hDm))
+    rw [← hU, ← inter_iUnion]
+    have hcovU : (⋃ pq, {x | x - g pq ∈ parallelogram c₁ c₂}) = univ :=
+      eq_univ_of_forall fun x => mem_iUnion.2 (hcov x)
+    rw [hcovU, inter_univ, volume_closedBall_ofReal]
+    · congr 1; ring
+    · norm_num
+  · -- the covolume
+    set f : ℂ →ₗ[ℝ] ℂ := Complex.reLm.smulRight c₁ + Complex.imLm.smulRight c₂ with hf
+    have hfz : ∀ z : ℂ, f z = (z.re : ℂ) * c₁ + (z.im : ℂ) * c₂ := by
+      intro z; simp [hf, Complex.real_smul]
+    have himg : parallelogram c₁ c₂ = f '' squareWin 0 1 := by
+      ext x
+      constructor
+      · rintro ⟨s, t, hs, ht, rfl⟩
+        refine ⟨(s : ℂ) + (t : ℂ) * I, ?_, ?_⟩
+        · simp only [squareWin, mem_setOf_eq]; simp; exact ⟨hs.1, hs.2, ht.1, ht.2⟩
+        · rw [hfz]; simp
+      · rintro ⟨z, ⟨h1, h2, h3, h4⟩, rfl⟩
+        simp only [Complex.zero_re, Complex.zero_im, zero_add] at h1 h2 h3 h4
+        exact ⟨z.re, z.im, ⟨h1, h2⟩, ⟨h3, h4⟩, hfz z⟩
+    have hdet : LinearMap.det f = 21 * √3 / 8 := by
+      rw [← LinearMap.det_toMatrix Complex.basisOneI, Matrix.det_fin_two]
+      simp only [LinearMap.toMatrix_apply, Complex.coe_basisOneI_repr, Complex.coe_basisOneI, hfz]
+      simp [hc₁re, hc₁im, hc₂re, hc₂im]
+      ring
+    rw [himg, MeasureTheory.Measure.addHaar_image_linearMap, volume_squareWin 0 zero_le_one, hdet]
+    rw [abs_of_pos (by positivity), one_pow, ENNReal.ofReal_one, mul_one]
 
 /-! ### The row -/
 
