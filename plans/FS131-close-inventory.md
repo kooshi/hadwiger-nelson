@@ -103,3 +103,11 @@ reason by the close.*
     and -FALC-DICHO-K need no finiteness of H; G4 DICHO-K's second clause needs no hypothesis on χ(H). No Ephodos job runs; for the record job's
     errata at the close (the derivation entries state the narrower forms). Method note for every wave: "diameter ≤ 1" is stated pointwise, since
     `Metric.diam` is 0 on unbounded sets.
+13. **FS131-K1 done** (report `data/fs131/reports/FS131-K1.md`; harness 526k by the task count — past the replacement line, so no resume): the plan
+    complete through § 7 (ten waves; three outside-backlog hypotheses by name — `Row134Base`, `Row130Collapse`, `Row123Chain`, § 7.4; the gate design,
+    § 7.5; a draft bearing for the stub, § 7.6). Its held items: a question for Ephodos before wave 7 or 8 (does "simple" for a fragment require tiles
+    crossing the domain's boundary to be Jordan domains? § 7.3 item 2); a stub to mint (`Row134Base` in Lean, FS-110's repaired base, as its own
+    planner-and-implementer job, § 7.4); predictions scored so far (E9 waves 10, inside [6, 14]; E10 205/25/29/0; E6, E7 met; E4 not met — a named
+    hypothesis, not an axiom; E5 never arose; E3 not met in wave 1).
+14. **Brief FS131-I1, wave 1's implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I1-wave1.md`): gated PASS after one rewording
+    (a backticked file extension read as a path). Worktree `.claude/worktrees/fs131-w1`, branch `fs131-w1` at `3358a401`. Source: this commit.
