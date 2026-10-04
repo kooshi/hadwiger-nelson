@@ -1,0 +1,7 @@
+slot: admitted search-r4-price: mem 48 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29
+cubes: 30 to run (0 done) of 1024; workers 30; cube timeout 300 s
+[33s] 16/30 {'UNSAT-VERIFIED': 16} last: cube 37 UNSAT-VERIFIED 29.9s
+[300s] 28/30 {'UNSAT-VERIFIED': 27, 'UNKNOWN': 1} last: cube 1019 UNKNOWN 300.01s
+[300s] 29/30 {'UNSAT-VERIFIED': 27, 'UNKNOWN': 2} last: cube 975 UNKNOWN 300.02s
+[300s] 30/30 {'UNSAT-VERIFIED': 27, 'UNKNOWN': 3} last: cube 1005 UNKNOWN 300.01s
+CUBES END: {'UNSAT-VERIFIED': 27, 'UNKNOWN': 3} wall 300s

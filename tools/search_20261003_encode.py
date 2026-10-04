@@ -174,6 +174,8 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--timeout", type=int, default=600)
     ap.add_argument("--solver", choices=["cadical", "kissat"], default="cadical")
+    ap.add_argument("--cnf-only", action="store_true", help="write the CNF and meta, solve nothing")
+    ap.add_argument("--decode", metavar="LOG", help="decode a model from a solver log (v lines) for this formula; solve nothing")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     N, adj, info, u0 = build(a.graph, a.param)
@@ -185,9 +187,20 @@ def main():
                 vertex_index="x*n+y" if a.graph != "uq" else "element bits in F_2[x]/(poly)")
     with open(os.path.join(a.out, tag + ".meta.json"), "w") as f:
         json.dump(meta, f, indent=1)
+    if a.cnf_only:
+        print(f"CNF {cnf} vars={nv} clauses={len(clauses)}")
+        sys.exit(0)
     lrat = os.path.join(a.out, tag + ".lrat")
     log = os.path.join(a.out, tag + f".{a.solver}.log")
-    rc, status, model, wall, cmd = run_solver(a.solver, cnf, lrat, a.timeout, log)
+    if a.decode:
+        status, model, rc, wall, cmd = None, [], 0, 0.0, ["(decoded from)", a.decode]
+        for ln in open(a.decode):
+            if ln.startswith("s "):
+                status = ln[2:].strip()
+            elif ln.startswith("v "):
+                model += [int(t) for t in ln[2:].split()]
+    else:
+        rc, status, model, wall, cmd = run_solver(a.solver, cnf, lrat, a.timeout, log)
     if a.solver == "kissat" or status != "UNSATISFIABLE":
         if os.path.exists(lrat):
             os.remove(lrat)

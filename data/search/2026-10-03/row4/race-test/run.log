@@ -1,0 +1,4 @@
+slot: admitted search-race-test: mem 4 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11,12
+race: 13 configurations on data/search/2026-10-03/row4/race-test/gamma19-k5-g1-sb.cnf, wall 100 s, pgids in data/search/2026-10-03/row4/race-test/race.pgids
+finished: {'name': 'kissat-sat-s1', 'cmd': ['/usr/bin/kissat', '--sat', '--seed=1', 'data/search/2026-10-03/row4/race-test/gamma19-k5-g1-sb.cnf'], 'rc': 10, 'status': 'SATISFIABLE', 'wall': 3.01}
+RACE END: winner=kissat-sat-s1 status=SATISFIABLE wall=3.0s stopped=12 still-alive-after-kill=[]

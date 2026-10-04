@@ -18,6 +18,8 @@ Subcommands:
                           (the clause order is part of the documentation, so LRAT clause ids carry over), runs cake_lpr (the
                           CakeML-verified LRAT checker) on the REGENERATED CNF and the proof, and, if the encoder's CNF is given,
                           requires it byte-identical. ACCEPTED iff cake_lpr prints "s VERIFIED UNSAT" (and the bytes agree).
+  cubes META.json CUBEDIR a cube-and-conquer refutation (tools/search_20261003_cubes.py): base CNF regenerated here, the cover
+                          recomputed as all 2^s sign patterns on the manifest's variables, every cube proof checked by cake_lpr.
   plant CERT.json         the certificate's own negative controls: accepted at its claim, rejected one gap above it, and rejected
                           with vertex 0's colour copied onto a neighbour. Exit 0 iff all three fire as expected.
   controls                the held kernel tables accepted, and every planted fault watched failing (see controls()).
@@ -361,6 +363,57 @@ def controls():
     return 0 if fails == 0 else 1
 
 
+def cmd_cubes(meta_path, cubedir):
+    """A cube-and-conquer refutation: the documented base CNF regenerated here; the cover is every one of the 2^s sign patterns on the
+    manifest's variables (recomputed here from the cube index, never read from the run's records); each cube's CNF (base + units,
+    appended) rebuilt here and its proof checked by cake_lpr."""
+    with open(meta_path) as f:
+        meta = json.load(f)
+    nv, cls = regenerate_cnf(meta)
+    man = json.load(open(os.path.join(cubedir, "manifest.json")))
+    vars_ = [int(v) for v in man["vars"]]
+    if len(set(abs(v) for v in vars_)) != len(vars_) or not all(0 < v <= nv for v in vars_):
+        print("REFUSED: cube variables repeated or out of range")
+        return 2
+    base_text = cnf_text(nv, cls)
+    if os.path.exists(man["base"]) and open(man["base"]).read() != base_text:
+        print("REJECTED: the run's base CNF is not byte-identical to the documented formula regenerated here")
+        return 1
+    n = 1 << len(vars_)
+    have = {}
+    for line in open(os.path.join(cubedir, "cubes.jsonl")):
+        e = json.loads(line)
+        if e.get("status") == "UNSAT-VERIFIED" and e.get("proof_gz"):
+            have[int(e["cube"])] = e["proof_gz"]
+    missing = [i for i in range(n) if i not in have]
+    if missing:
+        print(f"REJECTED: {len(missing)} of {n} cubes have no proof (first: {missing[:5]})")
+        return 1
+    body = "".join(" ".join(map(str, cl)) + " 0\n" for cl in cls)
+    work = tempfile.mkdtemp(prefix="cubes-", dir=cubedir)
+    bad = []
+    try:
+        for i in range(n):
+            u = [v if (i >> j) & 1 else -v for j, v in enumerate(vars_)]
+            cnf = os.path.join(work, "cube.cnf")
+            with open(cnf, "w") as f:
+                f.write(f"p cnf {nv} {len(cls) + len(u)}\n" + body + "".join(f"{l} 0\n" for l in u))
+            proof = os.path.join(work, "cube.lrat")
+            with gzip.open(os.path.join(cubedir, have[i]), "rb") as g, open(proof, "wb") as h:
+                shutil.copyfileobj(g, h)
+            rc, line = cake(cnf, proof)
+            if line != "s VERIFIED UNSAT":
+                bad.append((i, line))
+    finally:
+        shutil.rmtree(work)
+    if bad:
+        print(f"REJECTED: {len(bad)} cube proofs not verified, first {bad[0]}")
+        return 1
+    print(f"ACCEPTED: the documented formula for {os.path.basename(meta_path)} ({len(cls)} clauses, {nv} vars) regenerated here; "
+          f"all {n} cubes over {len(vars_)} variables (every sign pattern) refuted, each proof 's VERIFIED UNSAT' by cake_lpr")
+    return 0
+
+
 def cmd_plant(path):
     """Per-certificate negative controls: the certificate as filed must be ACCEPTED at its claim and REJECTED one gap above it,
     and with the gapped vertex's colour copied onto one of its neighbours."""
@@ -389,6 +442,8 @@ if __name__ == "__main__":
         sys.exit(cmd_colouring(a[1]))
     if a[0] == "unsat" and len(a) in (3, 4):
         sys.exit(cmd_unsat(a[1], a[2], a[3] if len(a) == 4 else None))
+    if a[0] == "cubes" and len(a) == 3:
+        sys.exit(cmd_cubes(a[1], a[2]))
     if a[0] == "plant" and len(a) == 2:
         sys.exit(cmd_plant(a[1]))
     if a[0] == "controls":

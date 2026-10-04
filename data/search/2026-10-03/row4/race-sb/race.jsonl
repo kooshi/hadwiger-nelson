@@ -1,0 +1,13 @@
+{"name": "kissat-default-s0", "cmd": ["/usr/bin/kissat", "--seed=0", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.22}
+{"name": "kissat-default-s1", "cmd": ["/usr/bin/kissat", "--seed=1", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.22}
+{"name": "kissat-default-s2", "cmd": ["/usr/bin/kissat", "--seed=2", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.22}
+{"name": "kissat-default-s3", "cmd": ["/usr/bin/kissat", "--seed=3", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.23}
+{"name": "kissat-sat-s0", "cmd": ["/usr/bin/kissat", "--sat", "--seed=0", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.23}
+{"name": "kissat-sat-s1", "cmd": ["/usr/bin/kissat", "--sat", "--seed=1", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.23}
+{"name": "kissat-unsat-s0", "cmd": ["/usr/bin/kissat", "--unsat", "--seed=0", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.23}
+{"name": "kissat-unsat-s1", "cmd": ["/usr/bin/kissat", "--unsat", "--seed=1", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.23}
+{"name": "cadical-default-s0", "cmd": ["/home/kooshi/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical", "--seed=0", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.23}
+{"name": "cadical-default-s1", "cmd": ["/home/kooshi/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical", "--seed=1", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.23}
+{"name": "cadical-default-s2", "cmd": ["/home/kooshi/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical", "--seed=2", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.23}
+{"name": "cadical-sat-s0", "cmd": ["/home/kooshi/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical", "--sat", "--seed=0", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.23}
+{"name": "cadical-unsat-s0", "cmd": ["/home/kooshi/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical", "--unsat", "--seed=0", "data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf"], "rc": null, "status": "STOPPED", "wall": 900.23}

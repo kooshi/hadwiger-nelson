@@ -1,0 +1,30 @@
+{"cube": 376, "units": [-322, -467, -7, 1512, 1557, 1582, 1437, -92, 392, -347], "rc": 20, "wall": 11.09, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 26302733}
+{"cube": 116, "units": [-322, -467, 7, -1512, 1557, 1582, 1437, -92, -392, -347], "rc": 20, "wall": 11.49, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 27520125}
+{"cube": 681, "units": [322, -467, -7, 1512, -1557, 1582, -1437, 92, -392, 347], "rc": 20, "wall": 12.52, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 29824337}
+{"cube": 79, "units": [322, 467, 7, 1512, -1557, -1582, 1437, -92, -392, -347], "rc": 20, "wall": 14.24, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 34184418}
+{"cube": 610, "units": [-322, 467, -7, -1512, -1557, 1582, 1437, -92, -392, 347], "rc": 20, "wall": 16.29, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 37447929}
+{"cube": 793, "units": [322, -467, -7, 1512, 1557, -1582, -1437, -92, 392, 347], "rc": 20, "wall": 15.51, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 34783616}
+{"cube": 590, "units": [-322, 467, 7, 1512, -1557, -1582, 1437, -92, -392, 347], "rc": 20, "wall": 16.52, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 38295768}
+{"cube": 461, "units": [322, -467, 7, 1512, -1557, -1582, 1437, 92, 392, -347], "rc": 20, "wall": 17.82, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 40233099}
+{"cube": 293, "units": [322, -467, 7, -1512, -1557, 1582, -1437, -92, 392, -347], "rc": 20, "wall": 18.92, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 41355993}
+{"cube": 771, "units": [322, 467, -7, -1512, -1557, -1582, -1437, -92, 392, 347], "rc": 20, "wall": 14.05, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 31122119}
+{"cube": 697, "units": [322, -467, -7, 1512, 1557, 1582, -1437, 92, -392, 347], "rc": 20, "wall": 17.1, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 37816380}
+{"cube": 737, "units": [322, -467, -7, -1512, -1557, 1582, 1437, 92, -392, 347], "rc": 20, "wall": 23.02, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 47041948}
+{"cube": 218, "units": [-322, 467, -7, 1512, 1557, -1582, 1437, 92, -392, -347], "rc": 20, "wall": 23.25, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 45871125}
+{"cube": 57, "units": [322, -467, -7, 1512, 1557, 1582, -1437, -92, -392, -347], "rc": 20, "wall": 27.53, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 62428411}
+{"cube": 655, "units": [322, 467, 7, 1512, -1557, -1582, -1437, 92, -392, 347], "rc": 20, "wall": 28.45, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 63667562}
+{"cube": 37, "units": [322, -467, 7, -1512, -1557, 1582, -1437, -92, -392, -347], "rc": 20, "wall": 29.9, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 65937117}
+{"cube": 104, "units": [-322, -467, -7, 1512, -1557, 1582, 1437, -92, -392, -347], "rc": 20, "wall": 32.99, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 73908587}
+{"cube": 693, "units": [322, -467, 7, -1512, 1557, 1582, -1437, 92, -392, 347], "rc": 20, "wall": 39.3, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 82070086}
+{"cube": 294, "units": [-322, 467, 7, -1512, -1557, 1582, -1437, -92, 392, -347], "rc": 20, "wall": 48.55, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 112589327}
+{"cube": 73, "units": [322, -467, -7, 1512, -1557, -1582, 1437, -92, -392, -347], "rc": 20, "wall": 49.19, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 113159912}
+{"cube": 622, "units": [-322, 467, 7, 1512, -1557, 1582, 1437, -92, -392, 347], "rc": 20, "wall": 54.98, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 127955202}
+{"cube": 473, "units": [322, -467, -7, 1512, 1557, -1582, 1437, 92, 392, -347], "rc": 20, "wall": 61.85, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 147541364}
+{"cube": 260, "units": [-322, -467, 7, -1512, -1557, -1582, -1437, -92, 392, -347], "rc": 20, "wall": 75.19, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 168775130}
+{"cube": 925, "units": [322, -467, 7, 1512, 1557, -1582, -1437, 92, 392, 347], "rc": 20, "wall": 75.08, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 171605353}
+{"cube": 10, "units": [-322, 467, -7, 1512, -1557, -1582, -1437, -92, -392, -347], "rc": 20, "wall": 76.98, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 180913238}
+{"cube": 254, "units": [-322, 467, 7, 1512, 1557, 1582, 1437, 92, -392, -347], "rc": 20, "wall": 88.9, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 199119408}
+{"cube": 516, "units": [-322, -467, 7, -1512, -1557, -1582, -1437, -92, -392, 347], "rc": 20, "wall": 162.14, "cake": "s VERIFIED UNSAT", "status": "UNSAT-VERIFIED", "proof_bytes": 358763550}
+{"cube": 1019, "units": [322, 467, -7, 1512, 1557, 1582, 1437, 92, 392, 347], "rc": 0, "wall": 300.01, "status": "UNKNOWN"}
+{"cube": 975, "units": [322, 467, 7, 1512, -1557, -1582, 1437, 92, 392, 347], "rc": 0, "wall": 300.02, "status": "UNKNOWN"}
+{"cube": 1005, "units": [322, -467, 7, 1512, -1557, 1582, 1437, 92, 392, 347], "rc": 0, "wall": 300.01, "status": "UNKNOWN"}
