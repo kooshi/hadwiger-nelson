@@ -763,3 +763,20 @@ reason by the close.*
      slots 0.5 (I3f) + 1 (I2f) + 1 (E2) + 0.5 (IW) = 3. **Next half slot**: FS131-I4b (wave 4's successor; item 126's `localSectors`). **Gate quirk, unreproduced**:
      the gate placed § 9.5's opening lines "not under § 9.5" (W2's plan repeats near-identical paragraphs in § 4.7); a minimal two-section repro passed, so the
      cause is not yet known — the brief quotes lines unique to § 9.5 instead. Not filed in agent-forge until reproduced.
+129. **FS131-I2f (the Opus-implementer trial) handed back at stage 9, harness ≈ 380k** (report on its branch; `fs131-w2` at `7c890ed9`, checked): 37 `sorry`
+     lines closed and 5 children added (154 → 117); **five rows sorry-free** — FS129-SA1-PLACE-HOM (`exists_placeHom`), FS129-SA1-NOAFF-FIELDS (`noAffine_fields`),
+     FS129-SA1-FALC-RES (i) and (ii) (`falconerFan_five_field`, `falconerFan_five_placeHom`), FS111-W-SQ9 (`sq9_tight_saturated`), FS111-M3-BAND (clause 1,
+     `IsMUA.add_normal_mem_essSupport`; its others were closed) — and DISC7's first two clauses. Keryx's receipt: build log
+     `build/gate/build/20261004T114615Z-3230511.log` (w2) "Build completed successfully (5605 jobs)", 117 distinct warnings, all `declaration uses sorry`;
+     `data/fs131/i2/i2f-axioms.txt` has no `sorryAx` and prints the standard three for each named row theorem; 117 `sorry` lines by count. A shorter Mathlib
+     route found (`Localization.subalgebra.ofField` + `IsLocalization.lift` for the residue map). Tool defect: the coordinator's scratch overlay `ol` holds
+     stale real oleans from earlier sessions — successors use private overlays (in I2g's brief). Slip (I2f's): its readback build waited 20 min for a slot and
+     read its first edits. **The trial, scored** (item 103's measure): per session, closures comparable in number to the best Sonnet session on this wave
+     (I2e: 35 `sorry` declarations at ≈ 330k; I2f: 37 lines at ≈ 380k), but the items closed carried about three times the planners' price (I2f: ≈ 780k at
+     the Sonnet rate, done for ≈ 120k of proof work by its own count; I2e's items: within ×2 of price, nothing cheaper), and five whole rows against I2e's
+     four leaves. That is roughly 1.5× the priced work per unit of budget — one session, a mixed item set, a rough figure.
+     Whether implementers move to Opus is Kooshi's (staffing); default: Sonnet, the standing rule, unless he says otherwise.
+130. **Briefs FS131-I2g (wave 2, seventh implementer) and FS131-I4b (wave 4, second implementer)** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I2g-wave2.md`,
+     `data/fs131/briefs/FS131-I4b-wave4.md`, both gated PASS; I4b carries item 126's `localSectors` ruling and item 125's two plan corrections and the cusp note).
+     Launched in I2f's Opus slot as two half slots: 0.5 (I3f) + 0.5 (IW) + 1 (E2) + 0.5 (I2g) + 0.5 (I4b) = 3. FS131-LEB stays queued: it blocks only the
+     landings of wave 4 and Woodall's chain, both far from their last leaf.
