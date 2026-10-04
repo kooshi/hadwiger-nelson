@@ -2600,6 +2600,16 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.not_offDirs_of_ne
 #print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.const_of_noChange
 #print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.noChange_of_const
+#print axioms HadwigerNelson.Plane.dot_real_mul_right
+#print axioms HadwigerNelson.Plane.eq_of_cos_sub_eq_zero
+#print axioms HadwigerNelson.Plane.exists_mem_Ioo_of_cos_pos
+#print axioms HadwigerNelson.Plane.cos_pos_arc
+#print axioms HadwigerNelson.Plane.exists_sign_near
+#print axioms HadwigerNelson.Plane.coneAt_subset_halfPlane
+#print axioms HadwigerNelson.Plane.norm_add_sq_dot
+#print axioms HadwigerNelson.Plane.ArcMap.niceAt_of_crossing
+#print axioms HadwigerNelson.Plane.ArcMap.GoodAt.exists_sides
+#print axioms HadwigerNelson.Plane.ArcMap.wedgeMerge_crossing
 
 
 /-! ## FS-131 wave 3 (job FS131-I3b) — the implementer's added children (every one a theorem the rows rest on) -/

@@ -462,3 +462,34 @@ theorems, 212 records, 0 missing, 0 stale; `--plant`: FIRED both ways, exit 0. N
 **Build of this stage**: OK — 445 of 445 batches, 3 modules rebuilt, 6 with warnings (wave 4's five skeleton modules and `Woodall/Merge`), 8 m 46 s,
 exit 0 (`build/gate/build/20261004T170025Z-886887.log`; driver log `data/fs131/iwd/build1.log`); the only Woodall warnings are `Merge`'s two
 `declaration uses 'sorry'` (`wedgeMerge_niceAt`, `exists_merge_at`). Scratch: `data/fs131/iwd/scratch/A.lean` (the leaf as developed, iteration only).
+
+## Stage 15 — SAVED (FS131-IWd): `wedgeMerge_niceAt` proved
+
+**Proved (statement unchanged)**: `wedgeMerge_niceAt`. With `w = v + s e θ`, `θ ∈ [d₁, d₁ + 2π)`: on an edge (`θ = d₁` or `d₂`; `s ≤ ρ < r₁`)
+`w` is in `F`'s class of `c` (`hc`), an open set on which the merged map has the one colour `c`; strictly inside the open wedge one colour; off the
+closed wedge (`θ ∈ (d₂, d₁ + 2π)`) the merged map is `F` near `w` (off the compact polar image of `[0, ρ] × [d₁, d₂]`) and `F` has at most two
+colours there (`GoodAt.ncard_coloursAt_le_two`); on the outer arc at a point off `F`'s arcs, `c` and `F`'s colour at `w`. Each of these has at most
+two colours, against `h3`. What is left is the crossing: `w = v + ρ e θ`, `θ ∈ (d₁, d₂)`, on an arc of `F` (`wedgeMerge_crossing`).
+
+**The crossing, region-only (`niceAt_of_crossing`)**: near `w`, the open inner side of the circle `‖z − v‖ = ρ`, written at `w` as
+`2 dot (z − w) (ρ e θ) + ‖z − w‖² < 0`, carries `c`; the outer side is split by the one curve of `F` through `w` (`κ ‖z − v‖² − 2 dot (z − v) b`,
+written at `w` as `2 dot (z − w) n_C + κ ‖z − w‖²` with `n_C = κ (w − v) − b`) into `x` and `y`, the colours of its two sides
+(`GoodAt.exists_sides`, IWc's construction in `GoodAt.ncard_coloursAt_le_two` kept as a lemma). The colours at `w` are among `c, x, y` (any open
+set near `w` has a point off both curves, `exists_notMem_curveAt`), so with three colours they are distinct. The local data: `D` the four tangent
+directions `θ ± π/2`, `arg n_C ± π/2`; `σ` = `c` where `cos (φ − θ) < 0`, else `x` or `y` by the sign of `cos (φ − arg n_C)`; a thin cone keeps
+the signs of both first-order terms (`exists_sign_near`). The run condition: each colour class is an open half-circle or the intersection of two,
+and of two directions in an open half-circle the shorter arc between them lies in it (`cos_pos_arc`), the same arc for both half-circles. The poke
+condition: at a tangent direction outside the circle or on it, the colours just before and just after differ (so the hypothesis is never met);
+inside, only `c` approaches (`coneAt_subset_halfPlane`: a set kept off the open side of a circle approaches only from the closed other side).
+`niceAt_of_dirColourAt` finishes. **No transversality hypothesis is needed** (the plan expected one): if the curve were tangent to the circle, a
+third colour would only be a horn; the stage-11 note that `GoodAt.big` makes the crossing transversal is true but unused.
+
+**Children added** (`Merge`): Plane-level, after `leftCol` — `dot_real_mul_right`, `eq_of_cos_sub_eq_zero`, `exists_mem_Ioo_of_cos_pos`,
+`cos_pos_arc`, `exists_sign_near`, `coneAt_subset_halfPlane`, `norm_add_sq_dot`; in a section "The crossings a merge creates" before the leaf —
+`niceAt_of_crossing`, `GoodAt.exists_sides`, `wedgeMerge_crossing`. Records added (`tools/fs131_iw_add_records.py`);
+`tools/fs131_w3_decls.py --check`: 222 theorems, 222 records, 0 missing, 0 stale. `exists_sides` is also a name on `main` (`Plane/RingBand`, a
+different namespace); the full names differ.
+
+**Build of this stage**: OK — 445 of 445 batches, 3 modules rebuilt, 6 with warnings (wave 4's five skeleton modules and `Woodall/Merge`), 8 m 45 s,
+exit 0 (`build/gate/build/20261004T171824Z-982130.log`; driver log `data/fs131/iwd/build2.log`); the only Woodall warning is `Merge`'s one
+`declaration uses 'sorry'` (`exists_merge_at`). Scratch: `data/fs131/iwd/scratch/B2.lean` (iteration only).
