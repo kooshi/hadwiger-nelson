@@ -486,3 +486,9 @@ reason by the close.*
     rest coloured by `sq9`; k = 10), checked by hand, one mind. Alternative weighed: state only the derivation's single example. Why: the repaired range is the
     true form the construction reaches, and the kernel decides. Confidence: medium-high. Correction owed: with item 37, an erratum on FS121-V5-FACE-SHARP's
     both halves (positive half `g < 1`; failure half `2ρ < 1`, `g² + ρ² < 1`), for the record job.
+87. **FS131-I3c handed back at stage 3, harness ≈ 485k** (report on its branch; `fs131-w3` at `98f4b279`, checked): FS116-S1-EXIT (`exit_lens`, `exit_lens_row`; three
+    hypotheses idle), `ArcMap.germ_dichotomy`, FS116-Y4-FLANK (`flank_initialPieces`, `flank_cone`, so `flank`) — standard three axioms (Keryx's receipt:
+    `germ_dichotomy`, `flank`, `exit_lens_row` read from `build/gate/axioms/20261004T092614Z-2442823.log` in the worktree). 80 of 96; 16 left, each with a plan
+    in the record's Stage 3. Routes found: engine 3 without a sector parametrization; `sixCol (e(π/3)·x) = sixCol x + 1` for SixFragment; the sub-arc and the
+    finiteness of Z for `qfree4` and FIVERING. Note for the merge: five helper lemmas moved into wave 1's `Plane/Chord`. Successor FS131-I3d
+    (`data/fs131/briefs/FS131-I3d-wave3.md`, gated PASS), launched in the slot I3c freed. Source: this commit.
