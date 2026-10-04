@@ -1138,3 +1138,19 @@ reason by the close.*
 166. **Brief FS131-QA2, the impossible-assumption audit** (`debruijn`, Opus, Kooshi's special slot; `data/fs131/briefs/FS131-QA2-impossible-assumptions.md`, gated PASS):
      a census of every definition used as a hypothesis across `main`, `fs131-w2`, `fs131-w4`, `fs131-ww` and `fs131-w3b`, refutation-shaped theorems first; for each,
      an instance exercising every clause, or the finding that none exists; wave 4's skeleton statements read against their rows; read-only everywhere.
+167. **FS131-W3 done, harness ≈ 442k** (report on its branch; `fs131-ww` at `8488ad82`, checked): E3's drafts in the chain, statements verbatim, each elaborating on the
+     first build; `NiceAt.normal`, `false_of_four_le_sectors`, `aeMap6_normal`, `aeMap6_merged`, `aeMap6` proved as compositions (item 164); inhabitants
+     `threeSectorDisc` (`WoodallMerged univ`, `WoodallNormal univ`) and `halfDisc_niceAt`, phantom adversaries in, from five `sorry` inhabitant leaves (T1–T5); the
+     degenerate `const_woodall*` inhabitants removed; `exists_sectorsAt` and `exists_three_le_sectors` removed (nothing reads them: pictures come from `NiceAt`/
+     `WoodallNormal`, the vertex from `ts_t`). **E3-BALL stated** in the new `Plane/Woodall/Merge` — `recolour` and `recolour_condition5` proved; 18 `sorry` leaves
+     with routes, names and prices (E3-W as `clear_wedge`; the merge at a wedge with validity, Condition 5, agreement off the disc; locality; local data;
+     finiteness of three-colour points; the NiceAt picture; after-merge data; crossings; E3-NICE; E3-BALL), none needing `localSectors`. Obligation pass:
+     E3-BALL by strong induction on a finite set of bad points, no radius condition; E3-NICE's measure "runs plus pokes". Keryx's receipt: latest build log
+     "Build completed successfully (5361 jobs)", no warning but `sorry`; `tools/fs131_w3_decls.py --check` "155 theorems, 155 records; 0 missing, 0 stale"; `sorry`
+     lines Basic 5, Merge 18, Steps 0, NoFourFive 0, Collar 0. Tool note: `tools/fs131_w2_decls.py` is frozen to four modules; `tools/fs131_w3_decls.py` covers five.
+     **Rulings on its held items**: (a) the stage-12 merge of `main` (wave 3 and LEB) confirmed. (b) `NiceAt.normal` — a non-`False` statement over valid
+     five-coloured plane maps, a class empty by the chain's own conclusion — **made private** (W's § 3.1 rule: public statements over that class are
+     refutations), its docstring saying why; alternative, keep it public under `VACUITY DECLARED`; why not: the scan does not track `ArcMap` binders, so the
+     marker would be unchecked. Confidence high. (c) Its representation choices recorded. (d) The `LEAN.md` pattern line (an inhabitant with an adversary for the
+     form it replaces) waits for Woodall's landing, when the example is on `main`. **Next on the chain**: an Opus implementer (FS131-IWc) in § 15.3's order,
+     1,100–1,800 lines; queued after wave 4's implementer.
