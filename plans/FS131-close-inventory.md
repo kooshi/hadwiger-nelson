@@ -1794,3 +1794,21 @@ reason by the close.*
      record only). **Brief FS131-IC5, wave 4's fifth `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC5-contact.md`, derived by script from IC4's, at
      `addcfbf3`, gated PASS): `stuck_structure` by IC4's Stage-12 route; the moves stay IM1's. Launched in IC4's slot: 1 (I2n) + 1 (I4k) + 1 (IM1) + 1 (IC5) = 4.
      Wave 5 waits for the next free slot (item 247 (c)).
+251. **FS131-IC5 mid-job, a statement defect in `stuck_structure`'s sides clause** (message 2026-10-04; `Contact.lean` on `fs131-w4c` at `addcfbf3`, l. 4065): the clause
+     `∀ᶠ ρ, ∀ z ∈ interiorPts ∩ ball v ρ, (0 < frameY v α z → col z = g ∨ col z = c) ∧ (frameY v α z < 0 → col z = h ∨ col z = c)` is stated point by point,
+     while the derivation's (ii) is directional — "one `g`-sector filling the side `(z − v)·n > 0`" (`plans/FS110-N-proof.md` l. 846). With `κ₂ < 0` the upper
+     flank band of `H₊` holds `g`-points arbitrarily near `v` with `frameY = m s²/2 < 0` (and `g ≠ h`, `g ≠ c`), so the clause fails at every radius; likewise
+     `κ₁ > 0`, and for `H₋`. It holds exactly when `κ₁ ≤ 0 ≤ κ₂` and `κ₃ ≤ 0 ≤ κ₄`, which nothing forces (N4-SHADOW's `σ_g`, `σ_h` take every value in (−1, 1)). No
+     counterexample built: **the library holds no model of `stuck_structure`'s hypotheses at all** (the bowtie has unit arcs, so fails Condition 5). The same
+     clause is in wave 5's `stuck_structure_ua` (`Plane/ValidMap/Terminal.lean` l. 57 on `fs131-w5`), with curvatures up to ±1. No wave-4 consumer reads it
+     (`stuck_step`, `stuck_flip`, `stuck_neighbour` discard it). Repairs offered: (a) the flank form (as `stuck_structure_ua` already states beside it); (b) the
+     point form outside the parabola, `(‖z − v‖²/2 < frameY v α z → col z = g) ∧ (frameY v α z < −‖z − v‖²/2 → col z = h)`, true for curvatures in [−1, 1]
+     since both horns lie in `|frameY| ≤ ‖z − v‖²/2`; (c) drop it. Credit: IC5.
+252. **Ruling: the sides clause becomes form (b), in `stuck_structure` and in `stuck_structure_ua`.** Choice: (b), the point form outside the parabola. Alternative
+     weighed: (a) alone, or (c). Why: (b) says what the derivation says — the side off the horns is filled by `g` above and `h` below — in the clause's own pointwise
+     idiom; (a) says only that a flank band lies beside each horn, weaker than "filling the side"; (c) drops content the row states. `stuck_structure_ua` keeps
+     its flank conjuncts as well. Confidence: medium-high — the fact that would change it: a wave-5 consumer reading the clause at points inside the parabola
+     band (then (a) is added beside (b)). IC5 applies it on `fs131-w4c`; wave 5's next implementer applies it on `fs131-w5`. **Vacuity note for wave 4's gate**:
+     `stuck_structure`'s hypothesis class (a stuck vertex under Condition 5 covering `B̄(v, 2)`, at most three colours on `B̄(v, 1)`) has no model in the library;
+     the gate's implementer either builds one or writes `VACUITY DECLARED:` with the theorem that empties it (row 134 empties Condition-5 six-maps of the plane,
+     but not obviously these local fragments at every `k`).

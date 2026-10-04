@@ -92,3 +92,13 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 several trees are building today, so on exit 75 wait ten minutes and retry. `lake env lean` (with § 14.1's flags) is for iteration only, never evidence.
 The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`. You start no agents of your own
 (standing rule 1).
+
+## Amendment 2026-10-04 (Keryx) — `stuck_structure`'s sides clause, ruled
+
+Your finding is logged as `plans/FS131-close-inventory.md` item 251 and ruled in item 252: replace the sides clause of `stuck_structure` with form (b),
+`(‖z − v‖ ^ 2 / 2 < frameY v α z → F.col z = g) ∧ (frameY v α z < -(‖z − v‖ ^ 2 / 2) → F.col z = h)` under the same `∀ᶠ ρ in 𝓝[>] 0, ∀ z ∈ F.interiorPts ∩ ball v ρ`,
+with the docstring's sentence "the interior points near `v` above the axis of colour `g` or `c` and below it of colour `h` or `c`" rewritten to match and
+citing item 252; record the change, the counterexample shape (`κ₂ < 0`) and the derivation's directional wording (`plans/FS110-N-proof.md` l. 846) in your record.
+Your lemmas for forms (a) and (b) are welcome as children. Do not edit wave 5's `stuck_structure_ua` (another branch; its implementer applies the same ruling).
+No other statement changes; you still start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work
+it knows exists).
