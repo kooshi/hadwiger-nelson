@@ -21,8 +21,8 @@ cycles as boundary walks, replace the count in `int(R)` by local finiteness — 
   `IsMaximalTwoSep` (Thomassen p. 852: "no 2-separator `{u, v}` with `x` or `y` in `int(M, u, v)`"); `reducedVerts`, `reduced` — `H`, the graph
   with every maximal 2-separator's interior deleted.
 
-**On a map** (`ArcMap`): `mapGraph` (tiles, adjacent when their closures meet), `IsHoleOf` (a bounded component of the complement of a tile's
-closure whose closure misses every unbounded one: "a boundary component of `x` disjoint from its outer one"), `fill` (a tile with its holes),
+**On a map** (`ArcMap`): `mapGraph` (tiles, adjacent when their closures meet), `IsHoleOf` (a nonempty bounded part of the complement of a tile's
+closure separated from the rest of it — "a boundary component of `x` disjoint from its outer one", read through the closure; FS131-KP), `fill` (a tile with its holes),
 `IsOuterTile` (a tile inside no hole of another tile), `filledGraph` (the filled map's graph: outer tiles, adjacent when their filled closures
 meet).
 
@@ -562,12 +562,15 @@ def mapGraph : SimpleGraph {T : Set ℂ // F.IsTile T} where
   symm := ⟨fun T T' h => ⟨h.1.symm, by rw [inter_comm]; exact h.2⟩⟩
   loopless := ⟨fun T h => h.1 rfl⟩
 
-/-- **`Hc` is a hole of `T`** (CVB B1: "a boundary component of `x` disjoint from its outer one"): a bounded connected component of the
-complement of `T`'s closure whose closure misses the closure of every unbounded component. -/
+/-- **`Hc` is a hole of `T`** (CVB B1: "a boundary component of `x` disjoint from its outer one"; FS131-KP's repair, plan § 2): a nonempty
+bounded part of the complement of `T`'s closure whose closure misses the closure of the rest of that complement. The separation makes `Hc` a
+union of whole clusters of complementary components (components chained by touching closures) not containing the unbounded one; so `T` has a
+hole exactly when the complementary components, joined when their closures touch, are not one cluster — exactly when `mapGraph − T` is
+disconnected. It reads the complement of the closure, not the components of `∂T`: a phantom slit can join `∂T`'s components while `cl T`
+still separates (plan § 2.2). Not required to be one cluster: `fill`, `IsOuterTile` and the `cvb_*` leaves read holes only through their union
+or their existence. -/
 def IsHoleOf (T Hc : Set ℂ) : Prop :=
-  (∃ z ∈ (closure T)ᶜ, Hc = connectedComponentIn (closure T)ᶜ z) ∧ Bornology.IsBounded Hc ∧
-    ∀ z ∈ (closure T)ᶜ, ¬ Bornology.IsBounded (connectedComponentIn (closure T)ᶜ z) →
-      Disjoint (closure Hc) (closure (connectedComponentIn (closure T)ᶜ z))
+  Hc.Nonempty ∧ Hc ⊆ (closure T)ᶜ ∧ Bornology.IsBounded Hc ∧ Disjoint (closure Hc) (closure ((closure T)ᶜ \ Hc))
 
 /-- **The filled tile** `x̂` (CVB B2 step 1): the tile with its holes. -/
 def fill (T : Set ℂ) : Set ℂ := T ∪ ⋃₀ {Hc | IsHoleOf T Hc}
@@ -602,8 +605,25 @@ example (j : Fin 2) (T T' : {T : Set ℂ // (ArcMap.const univ isOpen_univ j).Is
 
 /-- **Adversary**: a set with empty closure-complement has no hole (a spec example for `IsHoleOf`: the plane is no tile's hole-maker). -/
 example (Hc : Set ℂ) : ¬ ArcMap.IsHoleOf (univ : Set ℂ) Hc := by
-  rintro ⟨⟨z, hz, -⟩, -⟩
-  simp at hz
+  rintro ⟨⟨z, hz⟩, hsub, -⟩
+  simpa using hsub hz
+
+/-- **Adversary: a chain to the outside is no hole** (FS131-I5b's counterexample to the old definition, as a plane set; plan § 2.3): the
+unit disc minus the closed discs of radius `1/4` about `1/4` and `3/4` — the first touches the second at `1/2`, the second touches the unit
+circle at `1`. A separated part of the complement holding either small disc holds the other, then the outside, so it is unbounded. (Under the
+old definition the disc about `1/4` was a hole, and `cvb_hole_disconnected` was false.) -/
+theorem not_isHoleOf_chain (Hc : Set ℂ) :
+    ¬ ArcMap.IsHoleOf (ball 0 1 \ (closedBall (1 / 4 : ℂ) (1 / 4) ∪ closedBall (3 / 4 : ℂ) (1 / 4))) Hc := by
+  sorry
+
+/-- **A cluster is one hole** (item 242's case; plan § 2.3): the unit disc minus the closed discs of radius `1/4` about `±1/4`, which touch at
+`0` and miss the unit circle; the two open small discs together are a hole (neither alone is: their closures touch). Exercises the separation
+clause on a hole of two components. -/
+theorem isHoleOf_cluster :
+    ArcMap.IsHoleOf (ball 0 1 \ (closedBall (-1 / 4 : ℂ) (1 / 4) ∪ closedBall (1 / 4 : ℂ) (1 / 4)))
+      (ball (-1 / 4 : ℂ) (1 / 4) ∪ ball (1 / 4 : ℂ) (1 / 4)) ∧
+    ¬ ArcMap.IsHoleOf (ball 0 1 \ (closedBall (-1 / 4 : ℂ) (1 / 4) ∪ closedBall (1 / 4 : ℂ) (1 / 4))) (ball (1 / 4 : ℂ) (1 / 4)) := by
+  sorry
 
 end Spec
 
@@ -936,25 +956,32 @@ theorem exists_holed_valid_fragment :
     exact ⟨fun h w hw => by rw [mem_ball, dist_zero_right]; exact h1 h w hw, fun h w hw => h2 h w hw⟩
   have h0 : (0 : ℂ) ∈ (closure A)ᶜ := fun h => by have := (hclsub h).1; simp at this; linarith
   have hHc := (hside 0 h0).1 (by simp)
+  -- the disc `|z| < 1/4` lies in the hole (preconnected, off `cl A`, through `0`)
+  have hball : ball (0 : ℂ) (1 / 4) ⊆ connectedComponentIn (closure A)ᶜ 0 :=
+    (convex_ball (0 : ℂ) (1 / 4)).isPreconnected.subset_connectedComponentIn (mem_ball_self (by norm_num))
+      (fun w hw hwA => by
+        have := (hclsub hwA).1
+        rw [mem_ball, dist_zero_right] at hw
+        linarith)
+  -- the rest of the complement lies beyond `1/2`
+  have hrest : (closure A)ᶜ \ connectedComponentIn (closure A)ᶜ 0 ⊆ {w : ℂ | 1 / 2 < ‖w‖} := by
+    rintro w ⟨hw, hwn⟩
+    rcases havoid w hw with h | h
+    · exact absurd (hball (by rw [mem_ball, dist_zero_right]; exact h)) hwn
+    · exact h
   refine ⟨holedFrag, holedFrag_valid, fun z hz => ?_, A, connectedComponentIn (closure A)ᶜ 0, ⟨3 / 8, hAint h38, hT⟩,
-    ⟨0, h0, rfl⟩, Metric.isBounded_ball.subset hHc, ?_⟩
+    ⟨0, mem_connectedComponentIn h0⟩, connectedComponentIn_subset _ _, Metric.isBounded_ball.subset hHc, ?_⟩
   · show z ∈ ball (0 : ℂ) (3 / 5)
     rw [mem_closedBall] at hz; rw [mem_ball]; linarith
-  · intro z hz hunb
-    have hz2 : 1 / 2 < ‖z‖ := by
-      rcases havoid z hz with h | h
-      · exact absurd (Metric.isBounded_ball.subset ((hside z hz).1 h)) hunb
-      · exact h
-    have hW := (hside z hz).2 hz2
-    have hc1 : closure (connectedComponentIn (closure A)ᶜ 0) ⊆ closedBall 0 (1 / 4) :=
+  · have hc1 : closure (connectedComponentIn (closure A)ᶜ 0) ⊆ closedBall 0 (1 / 4) :=
       (closure_mono hHc).trans (closure_ball_subset_closedBall)
-    have hc2 : closure (connectedComponentIn (closure A)ᶜ z) ⊆ {w : ℂ | 1 / 2 ≤ ‖w‖} :=
-      closure_minimal (fun w hw => show 1 / 2 ≤ ‖w‖ from (show 1 / 2 < ‖w‖ from hW hw).le) (isClosed_le continuous_const continuous_norm)
+    have hc2 : closure ((closure A)ᶜ \ connectedComponentIn (closure A)ᶜ 0) ⊆ {w : ℂ | 1 / 2 ≤ ‖w‖} :=
+      closure_minimal (fun w hw => show 1 / 2 ≤ ‖w‖ from (show 1 / 2 < ‖w‖ from hrest hw).le)
+        (isClosed_le continuous_const continuous_norm)
     refine Set.disjoint_left.mpr fun w hw1 hw2 => ?_
     have := hc1 hw1
     have := hc2 hw2
     simp only [mem_closedBall, dist_zero_right, mem_setOf_eq] at *
     linarith
-
 
 end HadwigerNelson.Plane

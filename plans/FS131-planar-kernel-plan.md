@@ -55,3 +55,60 @@ building). Result recorded at the stage that sees it land (§ 1.4). Mathlib name
 `IsCompact.elim_finite_subcover`, `Set.Finite.isClosed_biUnion`, `SimpleGraph.even_card_odd_degree_vertices`, `Continuous.piecewise`,
 `Metric.infDist`. (Not found under the names tried: `IsClosed.biUnion`, `ContinuousMap.piecewise`; the graph names failed only for want of an import
 and are confirmed in `MapGraph` itself.)
+
+## Stage 2 — SAVED: `IsHoleOf` settled (message to Keryx sent before the change; adopted, inventory item 277)
+
+### 2.1 The choice
+
+```lean
+def IsHoleOf (T Hc : Set ℂ) : Prop :=
+  Hc.Nonempty ∧ Hc ⊆ (closure T)ᶜ ∧ Bornology.IsBounded Hc ∧ Disjoint (closure Hc) (closure ((closure T)ᶜ \ Hc))
+```
+
+A hole is a nonempty bounded part of `O := (cl T)ᶜ` whose closure misses the closure of `O ∖ Hc`. The separation clause makes `Hc` open
+(`Hc = O ∖ cl (O ∖ Hc)`) and a union of whole components of `O` closed under "closures touch"; boundedness excludes the unbounded component
+(unique: `cl T` is bounded, a tile having diameter at most 1, and the complement of a large closed ball is connected). Not required to be one
+cluster: `fill` reads holes through their union, `IsOuterTile` through "lies inside one", the `cvb_*` leaves through existence; each is the same
+whether a hole is one cluster or a union of clusters.
+
+### 2.2 Read against CVB § 1.9 and every consumer, bound both ways (QA3's note f)
+
+- **Every CVB hole is counted.** In CVB's frame (every arc separates two colours, so `∂x = ∂(cl x)`), a boundary component `C` disjoint from
+  the outer one is the frontier of the union `Hc` of the complementary components whose frontiers lie in `C` (each component's frontier is
+  connected — `PlaneTopology`'s frontier lemma — so it lies in one boundary component); `cl Hc ∖ Hc ⊆ C` and `cl (O ∖ Hc)` misses `C`. Item 242's
+  cluster (two touching discs inside, missing the outer boundary) is one hole: `isHoleOf_cluster`.
+- **Nothing else is counted.** A bounded part chained by touching closures to the unbounded component is never separated: FS131-I5b's chain
+  (`D₁` touching `D₂` touching the outer circle) is no hole: `not_isHoleOf_chain`, the adversary.
+- **The exact characterization** (the reason the two `cvb_*` leaves are true): `T` has no hole ⟺ the graph on the components of `O`, joined
+  when their closures meet, is connected ⟺ `mapGraph − T` is connected. Proved through the separation directly (§ 4, leaf `cvb_pinch_connected`),
+  with local finiteness read only at one point of `cl T` — so Keryx's caveat (infinitely many complementary components) does not arise; in fact
+  finitely many components exist (finitely many tiles meet the compact `cl T`'s neighbourhood), but no proof reads it.
+- **CVB's own words are not the definition for `ArcMap`** (finding, sent): "a boundary component of `x` disjoint from its outer one" assumes
+  CVB's WLOG frame. `ArcMap` admits phantom arcs (QA3 note a): an annulus tile cut by a phantom radial slit has connected `∂T` (no hole in
+  CVB's words) yet `cl T` is the closed annulus and `mapGraph − T` is disconnected. A boundary-component definition would make
+  `cvb_pinch_connected` false there. The closure's complement is the right object; the definition reads it. (Keryx: errata for CVB's frame.)
+- **Alternative weighed:** I5b's repair (the last clause over every other component): misses clusters, so `cvb_pinch_connected` fails at
+  item 242's configuration. Rejected.
+- **Statements changed:** none. `fill`, `IsOuterTile`, `filledGraph`, the three `cvb_*` leaves keep their text. `exists_holed_valid_fragment`'s
+  statement is unchanged; the tail of its proof (the old last clause) is rewritten: `ball 0 (1/4)` lies in the hole, the rest of the
+  complement beyond `1/2` (touch granted by Keryx, item 277).
+
+### 2.3 Inhabitant and adversaries
+
+- **Inhabitant** (every clause exercised): `exists_holed_valid_fragment` — `holedFrag`'s annulus `A` and the hole `connectedComponentIn (cl A)ᶜ 0`:
+  nonempty (`0`), inside `(cl A)ᶜ`, bounded, separated (closure in `B̄(0, 1/4)`, the rest's closure in `|w| ≥ 1/2`). **Proved** (iteration-green).
+- **`isHoleOf_cluster`** (stated, `sorry`, the implementer's): two touching discs `B(±1/4, 1/4)` inside the unit disc form a hole, and one of
+  them alone does not — the cluster clause exercised.
+- **`not_isHoleOf_chain`** (stated, `sorry`): the chain configuration has no hole. Plan for both: `(cl T)ᶜ` is the union of the three (two)
+  open pieces (`⊇`: `T` lies in the closed complement; `⊆`: points of the closed region are limits of `T`, by radial pushes off the small
+  circles and the touching points handled by a segment); each piece preconnected (balls; the outside by polar coordinates, as
+  `isPreconnected_holedAnnulus`), so a separated `Hc` contains or misses each; touching points transfer membership. **M** each.
+- The old adversary (`univ` has no hole) is kept, re-proved for the new clauses.
+
+Iteration (`lake env lean` on `MapGraph`): exit 0, only the `sorry` warnings of `cvb_thom_reduced`, `cvb_pinch_connected`,
+`cvb_hole_disconnected`, `not_isHoleOf_chain`, `isHoleOf_cluster`.
+
+### 1.4 The as-given build — not obtained separately (a slip, logged; KB's and K5's, for the same reason)
+
+The slot admitted the build at about 18:16, after stage 2's edit to `MapGraph` was on disk, so the build that ran covers this stage's tree.
+Its result is recorded with stage 4's build.
