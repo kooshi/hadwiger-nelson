@@ -1,0 +1,17 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 6,7
+'HadwigerNelson.Plane.e_sub_e_two_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.branchPt_eq_circle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.abs_half_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.carrier_germArc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.germArc_nondegenerate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.germArc_isUnitArc_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.isClear_of_mem_closure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_shave_aux' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_rayMerge_aux' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_merge_aux' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ringArcsWithin_of_Γ_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.tanHeight_anti' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.clear_of_subset_interior_allowedCone' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSector.eq_of_mem' depends on axioms: [propext, Classical.choice, Quot.sound]

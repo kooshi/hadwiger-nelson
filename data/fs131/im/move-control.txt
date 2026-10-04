@@ -1,0 +1,7 @@
+FAIL: source lines 26-1056 are not found verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1716-1718 (3 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1373-1386 (14 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 2627-2632 (6 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+FAIL: Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean differs from the text regenerated from d4f946ae
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean is d4f946ae's minus exactly the moved ranges (and their trailing blank lines) plus `import Proofs.HadwigerNelson.Plane.ValidMap.Cone`
+FAIL: 2 check(s) failed

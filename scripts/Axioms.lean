@@ -3164,6 +3164,19 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 #eval IO.println "=== PURCHASED ==="
 
+/-! ## FS-131 wave 4, `Moves` (job FS131-IM1) — the three moves under `Contact`'s statements, and their children -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.exists_shave_aux
+#print axioms HadwigerNelson.Plane.ArcMap.exists_rayMerge_aux
+#print axioms HadwigerNelson.Plane.ArcMap.exists_merge_aux
+#print axioms HadwigerNelson.Plane.e_sub_e_two_mul
+#print axioms HadwigerNelson.Plane.branchPt_eq_circle
+#print axioms HadwigerNelson.Plane.abs_half_le_one
+#print axioms HadwigerNelson.Plane.carrier_germArc
+#print axioms HadwigerNelson.Plane.germArc_nondegenerate
+#print axioms HadwigerNelson.Plane.germArc_isUnitArc_iff
+#print axioms HadwigerNelson.Plane.ArcMap.isClear_of_mem_closure
+
 /-! ## M03 — the certificate routes
 
 Each of these evaluates `LRAT.check` by `native_decide`, which is the only thing that can evaluate

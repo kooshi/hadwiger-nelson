@@ -267,6 +267,95 @@ theorem Valid.of_agreesOff (hF : F.Valid) {U : Set ℂ} (hA : F'.AgreesOff F U)
     have := hF x (hxi.mpr hx) y (hyi.mpr hy) hxy
     rwa [hxc, hyc] at this
 
+/-- A point of a closed sub-arc of positive length of `ω(p)` is a limit of the sub-arc's points off any finite set. -/
+theorem mem_closure_ringArc_diff_finite {p : ℂ} {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂) {C : Set ℂ} (hC : C.Finite) {y : ℂ}
+    (hy : y ∈ ringArc p θ₁ θ₂) : y ∈ closure (ringArc p θ₁ θ₂ \ C) := by
+  obtain ⟨θ, hθ, rfl⟩ := hy
+  rw [Metric.mem_closure_iff]
+  intro ε hε
+  have hπ := Real.pi_pos
+  set η := min ε π with hη
+  have hη0 : 0 < η := lt_min hε hπ
+  -- an open interval of angles inside `[θ₁, θ₂]` within `η` of `θ`
+  obtain ⟨a, b, hab, hJ⟩ : ∃ a b, a < b ∧ Ioo a b ⊆ Icc θ₁ θ₂ ∩ Ioo (θ - η) (θ + η) := by
+    rcases lt_or_eq_of_le hθ.2 with h | h
+    · refine ⟨θ, min θ₂ (θ + η), lt_min h (by linarith), fun t ht => ⟨⟨by linarith [hθ.1, ht.1], ?_⟩, by linarith [ht.1], ?_⟩⟩
+      · linarith [ht.2, min_le_left θ₂ (θ + η)]
+      · linarith [ht.2, min_le_right θ₂ (θ + η)]
+    · refine ⟨max θ₁ (θ - η), θ, max_lt (by linarith) (by linarith), fun t ht => ⟨⟨?_, by linarith [ht.2]⟩, ?_, by linarith [ht.2]⟩⟩
+      · linarith [ht.1, le_max_left θ₁ (θ - η)]
+      · linarith [ht.1, le_max_right θ₁ (θ - η)]
+  have hinj : InjOn (ringPt p) (Ioo a b) := by
+    intro s hs s' hs' hss
+    have hss' : spherePt p 1 s = spherePt p 1 s' := by simpa [spherePt, ringPt] using hss
+    have hJs := hJ hs; have hJs' := hJ hs'
+    exact injOn_spherePt p one_pos (θ - η) ⟨hJs.2.1, by linarith [hJs.2.2, min_le_right ε π]⟩
+      ⟨hJs'.2.1, by linarith [hJs'.2.2, min_le_right ε π]⟩ hss'
+  have hinf : (ringPt p '' Ioo a b).Infinite := (Ioo_infinite hab).image hinj
+  obtain ⟨_, ⟨t, ht, rfl⟩, htC⟩ := (hinf.sdiff hC).nonempty
+  refine ⟨ringPt p t, ⟨⟨t, (hJ ht).1, rfl⟩, htC⟩, ?_⟩
+  rw [dist_eq_norm, ringPt, ringPt, show p + e θ - (p + e t) = e θ - e t by ring]
+  calc ‖e θ - e t‖ ≤ |θ - t| := norm_e_sub_e_le θ t
+    _ < η := by rw [abs_lt]; constructor <;> linarith [(hJ ht).2.1, (hJ ht).2.2]
+    _ ≤ ε := min_le_left _ _
+
+/-- The closed sub-arc `r([θ₁, θ₂])` lies in `Γ` once it lies in the domain and, off a finite set, in `Γ` (`Γ` is closed in the
+domain: near each point finitely many closed arcs). -/
+theorem ringArc_subset_Γ_of_finite {p : ℂ} {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂) (hdom : ringArc p θ₁ θ₂ ⊆ F.dom) {C : Set ℂ}
+    (hC : C.Finite) (hsub : ringArc p θ₁ θ₂ \ C ⊆ F.Γ) : ringArc p θ₁ θ₂ ⊆ F.Γ := by
+  intro y hy
+  have hyd := hdom hy
+  refine ⟨hyd, ?_⟩
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite y hyd
+  set D := ⋃ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ t).Nonempty}, a.carrier with hD
+  have hDc : IsClosed D := hfin.isClosed_biUnion fun a _ => a.isClosed_carrier
+  have hyD : y ∈ D := by
+    have hcl := mem_closure_ringArc_diff_finite h12 hC hy
+    rw [← hDc.closure_eq]
+    rw [Metric.mem_closure_iff] at hcl ⊢
+    obtain ⟨r, hr, hrt⟩ := Metric.mem_nhds_iff.mp ht
+    intro ε hε
+    obtain ⟨z, hz, hzd⟩ := hcl (min ε r) (lt_min hε hr)
+    have hzt : z ∈ t := hrt (by rw [mem_ball, dist_comm]; exact lt_of_lt_of_le hzd (min_le_right _ _))
+    obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp (hsub hz).2
+    exact ⟨z, mem_iUnion₂.mpr ⟨a, ⟨ha, z, hza, hzt⟩, hza⟩, lt_of_lt_of_le hzd (min_le_left _ _)⟩
+  obtain ⟨a, ha, hya⟩ := mem_iUnion₂.mp hyD
+  exact mem_iUnion₂.mpr ⟨a, ha.1, hya⟩
+
+/-- **No new unit arc from a `Γ` inclusion** (wave 4's engine 2, `plans/FS131-w4-kernel-plan.md` § 13.1): a map `F'` on the same
+domain whose `Γ` lies in `F.Γ` together with the carriers of a family `A'` of non-degenerate arcs, locally finite on the domain, none
+of them a unit arc, creates no unit arc over `F`: every sub-arc of positive length of a unit circle in `F'.Γ` lies in `F.Γ`. (A
+sub-arc meets the finitely many nearby `A'`-carriers in finitely many points, `Arc.finite_inter_sphere_or_eq_circ`; off them it lies
+in `F.Γ`, which is closed in the domain.) Consumers: the six moves. -/
+theorem ringArcsWithin_of_Γ_subset (hdom : F'.dom = F.dom) {A' : Set Arc} (hnd : ∀ a ∈ A', a.Nondegenerate)
+    (hlf : ∀ x ∈ F.dom, ∃ t ∈ 𝓝 x, {a | a ∈ A' ∧ (a.carrier ∩ t).Nonempty}.Finite) (hunit : ∀ a ∈ A', ¬ a.IsUnitArc)
+    (hΓ : F'.Γ ⊆ F.Γ ∪ ⋃ a ∈ A', a.carrier) : F'.RingArcsWithin F := by
+  rintro p x ⟨θ₁, θ₂, h12, hx, hsub⟩
+  refine ⟨θ₁, θ₂, h12, hx, ?_⟩
+  have hdomF : ringArc p θ₁ θ₂ ⊆ F.dom := fun y hy => hdom ▸ (hsub hy).1
+  -- finitely many arcs of `A'` meet the compact sub-arc
+  choose! t ht hfin using hlf
+  have hK : IsCompact (ringArc p θ₁ θ₂) := isCompact_Icc.image (by unfold ringPt e; fun_prop)
+  obtain ⟨S, hSK, hcov⟩ := hK.elim_nhds_subcover t fun y hy => ht y (hdomF hy)
+  have h𝒜 : {a | a ∈ A' ∧ (a.carrier ∩ ringArc p θ₁ θ₂).Nonempty}.Finite := by
+    refine (S.finite_toSet.biUnion fun y hy => hfin y (hdomF (hSK y hy))).subset ?_
+    rintro a ⟨ha, z, hza, hzK⟩
+    obtain ⟨y, hyS, hzy⟩ := mem_iUnion₂.mp (hcov hzK)
+    exact mem_iUnion₂.mpr ⟨y, hyS, ha, z, hza, hzy⟩
+  set C := ⋃ a ∈ {a | a ∈ A' ∧ (a.carrier ∩ ringArc p θ₁ θ₂).Nonempty}, a.carrier ∩ sphere p 1 with hCdef
+  have hC : C.Finite := by
+    refine h𝒜.biUnion fun a ha => ?_
+    rcases Arc.finite_inter_sphere_or_eq_circ a (hnd a ha.1) p with h | ⟨θa, θb, rfl⟩
+    · exact h
+    · exact absurd rfl (hunit _ ha.1)
+  refine ringArc_subset_Γ_of_finite h12 hdomF hC fun y ⟨hy, hyC⟩ => ?_
+  rcases hΓ (hsub hy) with h | h
+  · exact h
+  · exfalso
+    obtain ⟨a, ha, hya⟩ := mem_iUnion₂.mp h
+    have hysph : y ∈ sphere p 1 := by obtain ⟨θ, -, rfl⟩ := hy; exact ringPt_mem_sphere p θ
+    exact hyC (mem_iUnion₂.mpr ⟨a, ⟨ha, y, hya, hy⟩, hya, hysph⟩)
+
 end ArcMap
 
 /-! ## The frame algebra (wave 4's engine 4): a point against `N`, `S′` and the circles of the pencil -/
@@ -659,6 +748,29 @@ example : unitArcPlane.RingArcsWithin unitArcPlane ∧
   have hm : ringPt 0 θ₁ ∈ ringArc 0 θ₁ θ₂ := ⟨θ₁, ⟨le_rfl, hlt.le⟩, rfl⟩
   have := hsub hm
   simp [Γ, const] at this
+
+/-- A map with one segment: the plane, one colour, the segment `[0, 1]` as its only arc. -/
+noncomputable def segPlane : ArcMap 1 where
+  dom := univ
+  isOpen_dom := isOpen_univ
+  arcs := {Arc.seg 0 1}
+  nondegenerate := by
+    intro a ha
+    rw [mem_singleton_iff] at ha
+    subst ha
+    exact zero_ne_one
+  locallyFinite := fun _ _ => ⟨univ, univ_mem, (finite_singleton _).subset fun a ha => ha.1⟩
+  col := fun _ => 0
+  locallyConstant := fun _ _ _ => Filter.Eventually.of_forall fun _ => rfl
+
+/-- **Engine 2 at work**: the segment of `segPlane` is not a unit arc, so `segPlane` creates no unit arc over the arc-free plane
+(`ringArcsWithin_of_Γ_subset` with `A' = {[0, 1]}`); `unitArcPlane` above is the adversary, whose arc is a unit arc. -/
+example : segPlane.RingArcsWithin (ArcMap.const univ isOpen_univ 0) := by
+  refine ringArcsWithin_of_Γ_subset rfl (A' := {Arc.seg 0 1}) (fun a ha => segPlane.nondegenerate a ha)
+    (fun _ _ => ⟨univ, univ_mem, (finite_singleton _).subset fun a ha => ha.1⟩)
+    (fun a ha => by rw [mem_singleton_iff] at ha; subst ha; exact not_false) ?_
+  intro z hz
+  exact Or.inr hz.2
 
 /-- On the one-colour plane with one colour, every pair is a covering pair; with two colours (`Fin 2`), none is. -/
 example : (ArcMap.const univ isOpen_univ (0 : Fin 1)).IsCoveringPair 0 1 := by
