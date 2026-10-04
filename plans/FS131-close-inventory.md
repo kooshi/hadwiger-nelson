@@ -1119,3 +1119,42 @@ reason by the close.*
      Lean for simple maps, cusps included, once the gate reads it). Build green, 0 warnings; scratch axioms the standard three. Exported for wave 4:
      `isSectorChart_of`, `BranchGerms.dir_lt_nextDir`, `Mono.disjoint`, `exists_angle`, `Mono.not_mem_angleIoo`, `coneAt_sector`, `sector_nonempty`, inhabitant
      `halfDisc_sectorChart`. Keryx's receipt: the commit exists on `origin`, and the theorems read at that commit. Next: its gate and landing. Relayed to FS131-W3.
+164. **FS131-W3 mid-job: Woodall's chain restated on E3's repair and re-proved** (message 2026-10-04; `fs131-ww` at `89a4aad0`): E3's drafts applied verbatim —
+     `NiceAt`, `WoodallMerged K`, `WoodallNormal K` (∃-forms); `NiceAt.normal`, **`false_of_four_le_sectors`** (now with `hN : WoodallNormal (sphere v 1)`),
+     `aeMap6_normal`, `aeMap6_merged` (over `closedBall 0 3`) and `aeMap6` **proved** on the satisfiable definitions; non-degenerate inhabitants (`threeSectorDisc`,
+     a valid disc of three `2π/3` sectors, in both forms on the whole plane; `halfDisc`) and **phantom adversaries** (`threeSectorDisc_not_forall_merged`,
+     `_not_forall_normal`: the old ∀-forms fail there); `exists_sectorsAt` and `exists_three_le_sectors` out of the chain. `main` merged (`6e681acb`, wave 3 and LEB):
+     collisions resolved (`e_mul_conj_e` deleted as identical; `e_add_int_mul_two_pi` renamed `e_add_two_pi_mul_int`). **None of E3-BALL's children needs
+     `localSectors`**: wave 3's landed `GoodAt` engine supplies every local fact (thin cones off finitely many directions; in a good ball only the centre
+     carries three colours, so three-colour points are finite on compacts; the NiceAt picture chart-free; the merge an `ArcMap.recolour` of an open annular
+     sector). **Generalization of E3-W**: "ω(v) misses S" is automatic (wave 1's `dist_ne_one_of_mem_of_mem_closure`), and the segments need only lie in the
+     closure — `clear_wedge` in the new `Plane/Woodall/Merge` (skeleton, `sorry` leaves). No statement defect. Keryx's receipt: the two commits exist on
+     `origin`; `false_of_four_le_sectors`, `aeMap6_merged`, `aeMap6` and the inhabitants read at `89a4aad0`. **With this, item 150's check on E1-NO45 is restored
+     on real definitions, modulo its citations** (E3-BALL's leaves and the cited unlanded statements) — the withdrawal of item 158 stands for the old form.
+165. **Kooshi, 2026-10-04 (verbatim)**: *"Ok, I'm caught up. Yes, run the impossible assumption audit. And thank you and all the agents for your excellent work.
+     Always, and especially throughout this backlog."* — the second audit pass authorized as proposed (one Opus auditor in a special slot: wave 4's skeleton
+     statements, and across every branch each Prop-valued hypothesis checked for a non-degenerate inhabitant). His thanks are recorded here for every mind on
+     the milestone (credit to agents that have handed back goes in this file, never by message).
+166. **Brief FS131-QA2, the impossible-assumption audit** (`debruijn`, Opus, Kooshi's special slot; `data/fs131/briefs/FS131-QA2-impossible-assumptions.md`, gated PASS):
+     a census of every definition used as a hypothesis across `main`, `fs131-w2`, `fs131-w4`, `fs131-ww` and `fs131-w3b`, refutation-shaped theorems first; for each,
+     an instance exercising every clause, or the finding that none exists; wave 4's skeleton statements read against their rows; read-only everywhere.
+167. **FS131-W3 done, harness ≈ 442k** (report on its branch; `fs131-ww` at `8488ad82`, checked): E3's drafts in the chain, statements verbatim, each elaborating on the
+     first build; `NiceAt.normal`, `false_of_four_le_sectors`, `aeMap6_normal`, `aeMap6_merged`, `aeMap6` proved as compositions (item 164); inhabitants
+     `threeSectorDisc` (`WoodallMerged univ`, `WoodallNormal univ`) and `halfDisc_niceAt`, phantom adversaries in, from five `sorry` inhabitant leaves (T1–T5); the
+     degenerate `const_woodall*` inhabitants removed; `exists_sectorsAt` and `exists_three_le_sectors` removed (nothing reads them: pictures come from `NiceAt`/
+     `WoodallNormal`, the vertex from `ts_t`). **E3-BALL stated** in the new `Plane/Woodall/Merge` — `recolour` and `recolour_condition5` proved; 18 `sorry` leaves
+     with routes, names and prices (E3-W as `clear_wedge`; the merge at a wedge with validity, Condition 5, agreement off the disc; locality; local data;
+     finiteness of three-colour points; the NiceAt picture; after-merge data; crossings; E3-NICE; E3-BALL), none needing `localSectors`. Obligation pass:
+     E3-BALL by strong induction on a finite set of bad points, no radius condition; E3-NICE's measure "runs plus pokes". Keryx's receipt: latest build log
+     "Build completed successfully (5361 jobs)", no warning but `sorry`; `tools/fs131_w3_decls.py --check` "155 theorems, 155 records; 0 missing, 0 stale"; `sorry`
+     lines Basic 5, Merge 18, Steps 0, NoFourFive 0, Collar 0. Tool note: `tools/fs131_w2_decls.py` is frozen to four modules; `tools/fs131_w3_decls.py` covers five.
+     **Rulings on its held items**: (a) the stage-12 merge of `main` (wave 3 and LEB) confirmed. (b) `NiceAt.normal` — a non-`False` statement over valid
+     five-coloured plane maps, a class empty by the chain's own conclusion — **made private** (W's § 3.1 rule: public statements over that class are
+     refutations), its docstring saying why; alternative, keep it public under `VACUITY DECLARED`; why not: the scan does not track `ArcMap` binders, so the
+     marker would be unchecked. Confidence high. (c) Its representation choices recorded. (d) The `LEAN.md` pattern line (an inhabitant with an adversary for the
+     form it replaces) waits for Woodall's landing, when the example is on `main`. **Next on the chain**: an Opus implementer (FS131-IWc) in § 15.3's order,
+     1,100–1,800 lines; queued after wave 4's implementer.
+168. **Brief FS131-I4c, wave 4's first Opus implementer** (`data/fs131/briefs/FS131-I4c-wave4.md`, gated PASS): merge `main`; discharge `lebesgue_covering_square` in one line
+     (item 151); the non-sector leaves; then, once `localSectors` is on `main` (Keryx messages it), the bridge to wave 4's `IsSector`/`hornSet` (item 136) and the
+     sector-reading leaves; the two plan gaps (item 143); `AeProperRegions` as a vacuity carrier and TS-T's carried form (items 144, 142) before the gate.
+     Launched in W3's slot: 1 (I3i) + 1 (I2h) + 1 (I4c) = 3, plus QA2. Woodall's implementer (FS131-IWc) next.
