@@ -3,6 +3,9 @@ import Proofs.HadwigerNelson.Plane.UnitAvoiding
 import Mathlib.MeasureTheory.Function.Floor
 import Mathlib.MeasureTheory.Measure.Support
 import Mathlib.MeasureTheory.Covering.BesicovitchVectorSpace
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+import Mathlib.Analysis.Real.Pi.Bounds
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
 
 /-!
 # Families of colour classes: covers, maximal covers, selections, saturation (FS-131 wave 2's foundation)
@@ -486,6 +489,77 @@ theorem eq_norm_mul_e_arg (d : ℂ) : d = (‖d‖ : ℂ) * e (Complex.arg d) :=
 
 
 
+/-! ## Arc lemmas: helpers -/
+
+/-- A `2π`-periodic measurable set of angles has the same mass in every window of length `2π`. -/
+theorem arcLength_eq_window {S : Set ℝ} (hS : MeasurableSet S) (hper : ∀ θ, θ + 2 * Real.pi ∈ S ↔ θ ∈ S)
+    (a : ℝ) : arcLength S = volume (S ∩ Ioc a (a + 2 * Real.pi)) := by
+  have hT : 0 < 2 * Real.pi := by positivity
+  have h1 : arcLength S = volume (S ∩ Ioc 0 (0 + 2 * Real.pi)) := by
+    rw [arcLength, Measure.restrict_apply hS]
+    refine measure_congr (ae_eq_set_inter (ae_eq_refl S) ?_)
+    rw [zero_add]; exact Ico_ae_eq_Ioc
+  rw [h1]
+  haveI : VAddInvariantMeasure (AddSubgroup.zmultiples (2 * Real.pi)) ℝ volume :=
+    ⟨fun c s _ => measure_preimage_add _ _ _⟩
+  refine (isAddFundamentalDomain_Ioc hT 0).measure_set_eq
+    (isAddFundamentalDomain_Ioc hT a) hS ?_
+  rintro ⟨g, hg⟩
+  obtain ⟨n, rfl⟩ := AddSubgroup.mem_zmultiples_iff.1 hg
+  ext θ
+  have hp : Function.Periodic (fun θ => θ ∈ S) (2 * Real.pi) := fun θ => propext (hper θ)
+  have := (hp.zsmul n θ)
+  simp only [mem_preimage]
+  show (n • (2 * Real.pi) + θ) ∈ S ↔ θ ∈ S
+  rw [add_comm]; exact iff_of_eq this
+
+/-- An arc of angles `(α − ε, α + ε)` inside a `2π`-periodic set gives it mass `≥ 2ε`. -/
+theorem arcLength_ge_of_Ioo {S : Set ℝ} (hS : MeasurableSet S) (hper : ∀ θ, θ + 2 * Real.pi ∈ S ↔ θ ∈ S)
+    {α ε : ℝ} (hε : ε ≤ Real.pi) (hsub : Ioo (α - ε) (α + ε) ⊆ S) :
+    ENNReal.ofReal (2 * ε) ≤ arcLength S := by
+  rw [arcLength_eq_window hS hper (α - Real.pi)]
+  have hw : Ioo (α - ε) (α + ε) ⊆ Ioc (α - Real.pi) (α - Real.pi + 2 * Real.pi) :=
+    fun θ hθ => ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+  calc ENNReal.ofReal (2 * ε) = volume (Ioo (α - ε) (α + ε)) := by
+        rw [Real.volume_Ioo]; congr 1; ring
+    _ ≤ _ := measure_mono (subset_inter hsub hw)
+
+/-- An arc of angles `[α − ε, α + ε]` containing a `2π`-periodic set's mass in one window bounds it by `2ε`. -/
+theorem arcLength_le_of_subset_Ioo {S : Set ℝ} (hS : MeasurableSet S) (hper : ∀ θ, θ + 2 * Real.pi ∈ S ↔ θ ∈ S)
+    {α ε : ℝ} (hsub : ∀ θ ∈ Ioc (α - Real.pi) (α + Real.pi), θ ∈ S → θ ∈ Ioo (α - ε) (α + ε)) :
+    arcLength S ≤ ENNReal.ofReal (2 * ε) := by
+  rw [arcLength_eq_window hS hper (α - Real.pi)]
+  calc _ ≤ volume (Ioo (α - ε) (α + ε)) := measure_mono (fun θ hθ => hsub θ (by
+          have := hθ.2; constructor <;> linarith [this.1, this.2]) hθ.1)
+    _ = _ := by rw [Real.volume_Ioo]; congr 1; ring
+
+/-- `‖e θ − s e β‖² = 1 + s² − 2 s cos (θ − β)`. -/
+theorem norm_sq_e_sub (θ s β : ℝ) : ‖e θ - (s : ℂ) * e β‖ ^ 2 = 1 + s ^ 2 - 2 * s * Real.cos (θ - β) := by
+  have h : e θ - (s : ℂ) * e β = e β * (e (θ - β) - (s : ℂ)) := by
+    rw [mul_sub, ← e_add]; ring_nf
+  rw [h, norm_mul, norm_e, one_mul, e_eq, Complex.sq_norm, Complex.normSq_apply]
+  simp only [Complex.sub_re, Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.I_re,
+    Complex.ofReal_im, Complex.I_im, Complex.sub_im, Complex.add_im, Complex.mul_im]
+  nlinarith [Real.sin_sq_add_cos_sq (θ - β)]
+
+/-- The angles `θ` with `c + σ e θ` in an open set form a measurable set. -/
+theorem measurableSet_angles {W : Set ℂ} (hW : IsOpen W) (c : ℂ) (σ : ℝ) :
+    MeasurableSet {θ : ℝ | c + σ • e θ ∈ W} := by
+  refine (hW.preimage ?_).measurableSet
+  unfold e; fun_prop
+
+/-- The mass of `{(u, θ) : u ∈ U, u + e θ ∈ B}` is the integral of `φ_B` over `U`. -/
+theorem pairs_eq_lintegral {U B : Set ℂ} (hU : MeasurableSet U) (hB : MeasurableSet B) :
+    (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B} = ∫⁻ u in U, phi B u := by
+  have hme : Measurable (fun θ : ℝ => e θ) := by unfold e; fun_prop
+  have hP : MeasurableSet {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B} :=
+    (measurable_fst hU).inter ((measurable_fst.add (hme.comp measurable_snd)) hB)
+  rw [Measure.prod_apply hP, ← lintegral_indicator hU]
+  refine lintegral_congr fun u => ?_
+  by_cases hu : u ∈ U
+  · simp [hu, phi, Set.indicator_of_mem]
+  · simp [hu]
+
 /-! ## FS131-K2c: shared children — arcs of unit circles in balls, and the two-ball pair bound
 
 Each `sorry`ed; plan `plans/FS131-w2-kernel-plan.md` § 12. They carry `keptAt_band` (`Plane/Slack`) and Lemma 3 of
@@ -493,35 +567,193 @@ Each `sorry`ed; plan `plans/FS131-w2-kernel-plan.md` § 12. They carry `keptAt_b
 
 /-- Positive upper density at `x` puts `x` in the support. -/
 theorem essClosure_subset_essSupport (A : Set ℂ) : essClosure A ⊆ essSupport A := by
-  sorry
+  intro x hx r hr
+  by_contra h
+  have h0 : volume (A ∩ ball x r) = 0 := by simpa using h
+  have : upperDensityAt A x = 0 := by
+    refine upperDensityAt_eq_zero_of_null (half_pos hr) fun s hs hsr => ?_
+    exact measure_mono_null (inter_subset_inter_right _
+      (closedBall_subset_ball (by linarith))) h0
+  exact absurd this (ne_of_gt hx)
+
+/-- On a closed ball the ratios of a measurable set and of its complement sum to `1`. -/
+theorem densityRatio_add_compl {A : Set ℂ} (hA : MeasurableSet A) (x : ℂ) {r : ℝ} (hr : 0 < r) :
+    densityRatio A x r + densityRatio Aᶜ x r = 1 := by
+  have hB : volume (closedBall x r) ≠ 0 := (measure_closedBall_pos volume x hr).ne'
+  have hB' : volume (closedBall x r) ≠ ⊤ := measure_closedBall_lt_top.ne
+  rw [densityRatio, densityRatio, ← ENNReal.add_div]
+  have := measure_inter_add_sdiff (μ := volume) (closedBall x r) hA
+  rw [inter_comm A, inter_comm Aᶜ, ← sdiff_eq, this, ENNReal.div_self hB hB']
+
+/-- A density point of a measurable set is not a density point of its complement. -/
+theorem densitySet_disjoint_compl {A : Set ℂ} (hA : MeasurableSet A) {x : ℂ} (h1 : x ∈ densitySet A) :
+    x ∉ densitySet Aᶜ := by
+  intro h2
+  have := h1.add h2
+  have h3 : Tendsto (fun r => densityRatio A x r + densityRatio Aᶜ x r) (𝓝[>] 0) (𝓝 1) :=
+    tendsto_const_nhds.congr' (by
+      filter_upwards [self_mem_nhdsWithin] with r hr
+      exact (densityRatio_add_compl hA x hr).symm)
+  have := tendsto_nhds_unique this h3
+  norm_num at this
 
 /-- A measurable set differs from its density set by a null set (the other half of `volume_diff_densitySet`). -/
 theorem volume_densitySet_diff {A : Set ℂ} (hA : MeasurableSet A) : volume (densitySet A \ A) = 0 := by
-  sorry
+  refine measure_mono_null (fun x hx => ?_) (volume_diff_densitySet hA.compl)
+  exact ⟨hx.2, densitySet_disjoint_compl hA hx.1⟩
 
 /-- **The chord lemma** (FS106-TQ § 2.2): for `ε ≤ 1/2` and `|x − y| = 1 + t` with `|t| ≤ 3ε/2`, the unit circle about `x`
 meets `B(y, 2ε)` in an arc of length at least `2ε`. -/
 theorem arcLength_ball_ge {x y : ℂ} {ε t : ℝ} (hε : 0 < ε) (hε2 : ε ≤ 1 / 2) (ht : |t| ≤ 3 * ε / 2)
     (hd : dist x y = 1 + t) : ENNReal.ofReal (2 * ε) ≤ arcLength {θ | x + e θ ∈ ball y (2 * ε)} := by
-  sorry
+  set d := y - x with hdd
+  have hdn : ‖d‖ = 1 + t := by rw [hdd, ← dist_eq_norm, dist_comm]; exact hd
+  set α := Complex.arg d
+  have hd' : d = ((1 + t : ℝ) : ℂ) * e α := by
+    have := eq_norm_mul_e_arg d; rwa [hdn] at this
+  have hS : MeasurableSet {θ : ℝ | x + e θ ∈ ball y (2 * ε)} := by
+    have := measurableSet_angles (isOpen_ball (x := y) (ε := 2 * ε)) x 1
+    simpa using this
+  have hper : ∀ θ, θ + 2 * Real.pi ∈ {θ : ℝ | x + e θ ∈ ball y (2 * ε)} ↔ θ ∈ {θ : ℝ | x + e θ ∈ ball y (2 * ε)} := by
+    intro θ; simp only [mem_setOf_eq, e_add_two_pi]
+  refine arcLength_ge_of_Ioo hS hper (α := α) (by linarith [Real.pi_gt_three]) ?_
+  intro θ hθ
+  show x + e θ ∈ ball y (2 * ε)
+  rw [mem_ball, dist_eq_norm]
+  have hn : ‖x + e θ - y‖ = ‖e θ - ((1 + t : ℝ) : ℂ) * e α‖ := by
+    rw [← hd', hdd]; congr 1; ring
+  rw [hn]
+  have hsq := norm_sq_e_sub θ (1 + t) α
+  have hcos := Real.one_sub_sq_div_two_le_cos (x := θ - α)
+  have hφ : (θ - α) ^ 2 < ε ^ 2 := by
+    have : |θ - α| < ε := abs_lt.2 ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+    nlinarith [abs_nonneg (θ - α), sq_abs (θ - α)]
+  have habs := abs_le.1 ht
+  have hr0 : 0 ≤ 1 + t := by linarith
+  have h1 : 2 * (1 + t) * (1 - Real.cos (θ - α)) ≤ (1 + t) * (θ - α) ^ 2 := by
+    nlinarith [mul_nonneg hr0 (sub_nonneg.2 hcos)]
+  have h2 : (1 + t) * (θ - α) ^ 2 ≤ 7 / 4 * (θ - α) ^ 2 := by nlinarith [sq_nonneg (θ - α)]
+  have h3 : t ^ 2 ≤ 9 / 4 * ε ^ 2 := by nlinarith
+  by_contra hcon
+  push Not at hcon
+  have := mul_self_le_mul_self (by positivity) hcon
+  nlinarith
 
 /-- A unit circle meets a ball of radius `ρ ≤ 1` in an arc of length at most `πρ` (written for the directions `v − e θ`,
 the form the exchange bound reads). -/
 theorem arcLength_sub_ball_le (v z : ℂ) {ρ : ℝ} (hρ : 0 < ρ) (hρ1 : ρ ≤ 1) :
     arcLength {θ | v - e θ ∈ ball z ρ} ≤ ENNReal.ofReal (Real.pi * ρ) := by
-  sorry
+  set w := v - z with hwd
+  set s := ‖w‖ with hs
+  set β := Complex.arg w
+  have hw' : w = (s : ℂ) * e β := by simpa using eq_norm_mul_e_arg w
+  have hS : MeasurableSet {θ : ℝ | v - e θ ∈ ball z ρ} := by
+    have := measurableSet_angles (isOpen_ball (x := z) (ε := ρ)) v (-1)
+    simpa [sub_eq_add_neg] using this
+  have hper : ∀ θ, θ + 2 * Real.pi ∈ {θ : ℝ | v - e θ ∈ ball z ρ} ↔ θ ∈ {θ : ℝ | v - e θ ∈ ball z ρ} := by
+    intro θ; simp only [mem_setOf_eq, e_add_two_pi]
+  have hb : arcLength {θ : ℝ | v - e θ ∈ ball z ρ} ≤ ENNReal.ofReal (2 * (Real.pi * ρ / 2)) := by
+    refine arcLength_le_of_subset_Ioo hS hper (α := β) ?_
+    intro θ hθ hmem
+    by_contra hout
+    have hφ : Real.pi * ρ / 2 ≤ |θ - β| := by
+      by_contra h; push Not at h
+      exact hout ⟨by linarith [(abs_lt.1 h).1], by linarith [(abs_lt.1 h).2]⟩
+    have habs : |θ - β| ≤ Real.pi := abs_le.2 ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+    have hx0 : 0 ≤ Real.pi * ρ / 2 := by positivity
+    have hx1 : Real.pi * ρ / 2 ≤ Real.pi / 2 := by nlinarith [Real.pi_pos]
+    have hcos : Real.cos (θ - β) ≤ Real.cos (Real.pi * ρ / 2) := by
+      rw [← Real.cos_abs (θ - β)]
+      exact Real.cos_le_cos_of_nonneg_of_le_pi hx0 habs hφ
+    set κ := Real.cos (Real.pi * ρ / 2) with hκ
+    have hκ0 : 0 ≤ κ := Real.cos_nonneg_of_mem_Icc ⟨by linarith, hx1⟩
+    have hsin : ρ ≤ Real.sin (Real.pi * ρ / 2) := by
+      have := Real.mul_le_sin hx0 hx1
+      have h2 : 2 / Real.pi * (Real.pi * ρ / 2) = ρ := by field_simp
+      linarith
+    have hκ2 : κ ^ 2 ≤ 1 - ρ ^ 2 := by
+      have := Real.sin_sq_add_cos_sq (Real.pi * ρ / 2)
+      nlinarith
+    have hnorm : ‖e θ - (s : ℂ) * e β‖ < ρ := by
+      have : v - e θ - z = -(e θ - (s : ℂ) * e β) := by rw [← hw', hwd]; ring
+      have h' : ‖v - e θ - z‖ < ρ := by simpa [dist_eq_norm] using hmem
+      rwa [this, norm_neg] at h'
+    have hsq := norm_sq_e_sub θ s β
+    have hlt : ‖e θ - (s : ℂ) * e β‖ ^ 2 < ρ ^ 2 := by nlinarith [norm_nonneg (e θ - (s : ℂ) * e β)]
+    have hs0 : 0 ≤ s := norm_nonneg w
+    nlinarith [sq_nonneg (s - κ), mul_le_mul_of_nonneg_left hcos hs0]
+  refine hb.trans (le_of_eq ?_)
+  congr 1; ring
 
-/-- A point of a ball of radius `R ≥ 1` sees at least a third of its unit circle inside the ball. -/
-theorem arcLength_bigBall_ge {u z : ℂ} {R : ℝ} (hR : 1 ≤ R) (hu : u ∈ ball z R) :
+/-- A point of a ball of radius `R > 1` (strict: at `R = 1`, `u = z` the circle about `u` lies on the sphere, outside the open ball; ruling, `plans/FS131-close-inventory.md` item 100) sees at least a third of its unit circle inside the ball. -/
+theorem arcLength_bigBall_ge {u z : ℂ} {R : ℝ} (hR : 1 < R) (hu : u ∈ ball z R) :
     ENNReal.ofReal (2 * Real.pi / 3) ≤ arcLength {θ | u + e θ ∈ ball z R} := by
-  sorry
+  set w := z - u with hwd
+  set s := ‖w‖ with hs
+  set β := Complex.arg w
+  have hw' : w = (s : ℂ) * e β := by simpa using eq_norm_mul_e_arg w
+  have hsR : s < R := by
+    have : dist u z < R := mem_ball.1 hu
+    rw [dist_eq_norm, ← norm_neg] at this; simpa [hs, hwd] using this
+  have hS : MeasurableSet {θ : ℝ | u + e θ ∈ ball z R} := by
+    have := measurableSet_angles (isOpen_ball (x := z) (ε := R)) u 1
+    simpa using this
+  have hper : ∀ θ, θ + 2 * Real.pi ∈ {θ : ℝ | u + e θ ∈ ball z R} ↔ θ ∈ {θ : ℝ | u + e θ ∈ ball z R} := by
+    intro θ; simp only [mem_setOf_eq, e_add_two_pi]
+  have := arcLength_ge_of_Ioo hS hper (α := β) (ε := Real.pi / 3) (by linarith [Real.pi_pos]) ?_
+  · refine le_of_eq_of_le ?_ this; congr 1; ring
+  intro θ hθ
+  show u + e θ ∈ ball z R
+  rw [mem_ball, dist_eq_norm]
+  have hn : ‖u + e θ - z‖ = ‖e θ - (s : ℂ) * e β‖ := by
+    rw [← hw', hwd]; congr 1; ring
+  rw [hn]
+  have hsq := norm_sq_e_sub θ s β
+  have habs : |θ - β| < Real.pi / 3 := abs_lt.2 ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+  have hcos : 1 / 2 < Real.cos (θ - β) := by
+    rw [← Real.cos_abs (θ - β), ← Real.cos_pi_div_three]
+    exact Real.cos_lt_cos_of_nonneg_of_le_pi (abs_nonneg _) (by linarith [Real.pi_pos]) habs
+  have hs0 : 0 ≤ s := norm_nonneg w
+  have hq : s ^ 2 - s + 1 < R ^ 2 := by
+    rcases le_or_gt s 1 with h | h <;> nlinarith
+  by_contra hcon
+  push Not at hcon
+  have := mul_self_le_mul_self (by linarith) hcon
+  nlinarith [mul_le_mul_of_nonneg_left hcos.le hs0]
 
 /-- **The exchange bound** (FS106-TQ's (EX), Tonelli in the other order): the pairs `(u, θ)` with `u ∈ U`, `u + e θ ∈ N`
 have mass at most `M · |N|` when every `v` sees `U` through an arc of length at most `M`. -/
 theorem pairs_le_of_arc {U N : Set ℂ} (hU : MeasurableSet U) (hN : MeasurableSet N) {M : ENNReal}
     (hM : ∀ v : ℂ, arcLength {θ | v - e θ ∈ U} ≤ M) :
     (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ N} ≤ M * volume N := by
-  sorry
+  have hme : Measurable (fun θ : ℝ => e θ) := by unfold e; fun_prop
+  have hP : MeasurableSet {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ N} :=
+    (measurable_fst hU).inter ((measurable_fst.add (hme.comp measurable_snd)) hN)
+  rw [Measure.prod_apply_symm hP]
+  have hB : ∀ θ : ℝ, MeasurableSet {v : ℂ | v - e θ ∈ U} := fun θ =>
+    (measurable_id.sub_const _) hU
+  have h1 : ∀ θ : ℝ, volume ((fun x : ℂ => (x, θ)) ⁻¹' {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ N}) =
+      ∫⁻ v in N, {v : ℂ | v - e θ ∈ U}.indicator 1 v := by
+    intro θ
+    have : (fun x : ℂ => (x, θ)) ⁻¹' {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ N} =
+        (fun x : ℂ => x + e θ) ⁻¹' ({v : ℂ | v - e θ ∈ U} ∩ N) := by
+      ext x; simp
+    rw [this, measure_preimage_add_right, lintegral_indicator_one (hB θ),
+      Measure.restrict_apply (hB θ)]
+  simp_rw [h1]
+  have hmeas : MeasurableSet {q : ℝ × ℂ | q.2 - e q.1 ∈ U} :=
+    (measurable_snd.sub (hme.comp measurable_fst)) hU
+  rw [lintegral_lintegral_swap]
+  swap
+  · exact (measurable_one.indicator hmeas).aemeasurable
+  calc ∫⁻ v in N, ∫⁻ θ, {v' : ℂ | v' - e θ ∈ U}.indicator 1 v ∂arcLength ∂volume
+      ≤ ∫⁻ v in N, M ∂volume := by
+        refine lintegral_mono fun v => ?_
+        have hv : MeasurableSet {θ : ℝ | v - e θ ∈ U} := (measurable_const.sub hme) hU
+        have : ∫⁻ θ, {v' : ℂ | v' - e θ ∈ U}.indicator 1 v ∂arcLength = arcLength {θ : ℝ | v - e θ ∈ U} := by
+          rw [← lintegral_indicator_one hv]; rfl
+        rw [this]; exact hM v
+    _ = M * volume N := by rw [lintegral_const, Measure.restrict_apply_univ]
 
 /-- **The two-ball pair bound** (good pairs minus bad pairs, FS106-TQ § 2.2 in one inequality): for `r ≤ 1/2` and
 `|dist x y − 1| ≤ r`, the unit pairs of `A` from `B(x, r/2)` into `B(y, 2r)`, plus `πr/2` times the hole of `A` in `B(y, 2r)`,
@@ -532,7 +764,42 @@ theorem twoBall_pairs_ge {A : Set ℂ} (hA : MeasurableSet A) {x y : ℂ} {r : �
     ENNReal.ofReal (2 * r) * volume (A ∩ ball x (r / 2)) ≤
       (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ A ∩ ball x (r / 2) ∧ q.1 + e q.2 ∈ A ∩ ball y (2 * r)} +
         ENNReal.ofReal (Real.pi * r / 2) * volume (ball y (2 * r) \ A) := by
-  sorry
+  set U := A ∩ ball x (r / 2) with hUd
+  set N := ball y (2 * r) \ A with hNd
+  have hU : MeasurableSet U := hA.inter measurableSet_ball
+  have hN : MeasurableSet N := measurableSet_ball.diff hA
+  have hB : MeasurableSet (A ∩ ball y (2 * r)) := hA.inter measurableSet_ball
+  have hpt : ∀ u ∈ U, ENNReal.ofReal (2 * r) ≤ phi (A ∩ ball y (2 * r)) u + phi N u := by
+    intro u hu
+    have hux : dist u x < r / 2 := mem_ball.1 hu.2
+    have hdu : |dist u y - 1| ≤ 3 * r / 2 := by
+      have h1 := abs_dist_sub_le u x y
+      have h2 : |dist u y - 1| ≤ |dist u y - dist x y| + |dist x y - 1| := by
+        have := abs_add_le (dist u y - dist x y) (dist x y - 1); simpa using this
+      linarith
+    have := arcLength_ball_ge (x := u) (y := y) (ε := r) (t := dist u y - 1) hr hr2 hdu (by ring)
+    refine this.trans ?_
+    refine le_trans (measure_mono ?_) (measure_union_le _ _)
+    intro θ hθ
+    by_cases hAu : u + e θ ∈ A
+    · exact Or.inl ⟨hAu, hθ⟩
+    · exact Or.inr ⟨hθ, hAu⟩
+  have hphi : ∀ B : Set ℂ, MeasurableSet B → Measurable (phi B) := fun B hB => measurable_phi hB
+  calc ENNReal.ofReal (2 * r) * volume U = ∫⁻ u in U, ENNReal.ofReal (2 * r) := by
+        rw [lintegral_const, Measure.restrict_apply_univ, mul_comm]
+    _ ≤ ∫⁻ u in U, (phi (A ∩ ball y (2 * r)) u + phi N u) := setLIntegral_mono' hU hpt
+    _ = (∫⁻ u in U, phi (A ∩ ball y (2 * r)) u) + ∫⁻ u in U, phi N u :=
+        lintegral_add_left (hphi _ hB) _
+    _ ≤ _ := by
+        rw [← pairs_eq_lintegral hU hB, ← pairs_eq_lintegral hU hN]
+        gcongr
+        refine pairs_le_of_arc hU hN fun v => ?_
+        have h0 := arcLength_sub_ball_le (v) x (ρ := r / 2) (by positivity) (by linarith)
+        have h1 : ENNReal.ofReal (Real.pi * (r / 2)) = ENNReal.ofReal (Real.pi * r / 2) := by
+          congr 1; ring
+        rw [h1] at h0
+        refine le_trans (measure_mono fun θ hθ => ?_) h0
+        exact hθ.2
 
 /-- **Lemma 3's core** (`[Falconer1981]` Lemma 3, measurable form): for a measurable `A` with null unit pairs, a point
 where `A` has positive upper density is never at distance exactly `1` from a density point of `A`. From `twoBall_pairs_ge`
@@ -546,10 +813,45 @@ theorem essClosure_dist_ne_one_of_mem_densitySet {A : Set ℂ} (hA : MeasurableS
 theorem measurableSet_densitySet {A : Set ℂ} (hA : MeasurableSet A) : MeasurableSet (densitySet A) := by
   sorry
 
+/-- A point outside the essential closure has density ratio tending to `0`. -/
+theorem tendsto_densityRatio_of_notMem_essClosure {A : Set ℂ} {x : ℂ} (h : x ∉ essClosure A) :
+    Tendsto (densityRatio A x) (𝓝[>] 0) (𝓝 0) := by
+  have h0 : upperDensityAt A x = 0 := by
+    simpa [essClosure, pos_iff_ne_zero] using h
+  refine tendsto_order.2 ⟨fun a ha => absurd ha (not_lt_zero), fun b hb => ?_⟩
+  exact eventually_lt_of_limsup_lt (by rw [upperDensityAt] at h0; rw [h0]; exact hb)
+
 /-- In a finite disjoint measurable cover, a point of the essential boundary of one class lies in the essential closure
 of another (the densities of the classes sum to `1`). -/
 theorem exists_ne_mem_essClosure {C : Fin k → Set ℂ} (hm : ∀ j, MeasurableSet (C j)) (hd : Pairwise (Disjoint on C))
     (hcov : ⋃ j, C j = univ) {a : Fin k} {x : ℂ} (hx : x ∈ essBoundary (C a)) : ∃ b ≠ a, x ∈ essClosure (C b) := by
-  sorry
+  by_contra hcon
+  push Not at hcon
+  refine hx.2 ?_
+  have hsum : ∀ r : ℝ, 0 < r → ∑ b, densityRatio (C b) x r = 1 := by
+    intro r hr
+    have hB : volume (closedBall x r) ≠ 0 := (measure_closedBall_pos volume x hr).ne'
+    have hB' : volume (closedBall x r) ≠ ⊤ := measure_closedBall_lt_top.ne
+    simp only [densityRatio, div_eq_mul_inv, ← Finset.sum_mul]
+    have : ∑ b, volume (C b ∩ closedBall x r) = volume (closedBall x r) := by
+      have h := measure_iUnion (μ := volume) (f := fun b => C b ∩ closedBall x r)
+        (fun i j hij => (hd hij).mono inter_subset_left inter_subset_left)
+        (fun b => (hm b).inter measurableSet_closedBall)
+      rw [tsum_fintype, ← iUnion_inter, hcov, univ_inter] at h
+      exact h.symm
+    rw [this, ENNReal.mul_inv_cancel hB hB']
+  have hS : Tendsto (fun r => ∑ b ∈ Finset.univ.erase a, densityRatio (C b) x r) (𝓝[>] 0) (𝓝 0) := by
+    have := tendsto_finsetSum (Finset.univ.erase a) (fun b hb =>
+      tendsto_densityRatio_of_notMem_essClosure (hcon b (Finset.ne_of_mem_erase hb)))
+    simpa using this
+  have h1 := ENNReal.Tendsto.sub (tendsto_const_nhds (x := (1 : ENNReal))) hS (Or.inl ENNReal.one_ne_top)
+  rw [tsub_zero] at h1
+  refine h1.congr' ?_
+  filter_upwards [self_mem_nhdsWithin] with r hr
+  have hs := hsum r hr
+  rw [← Finset.add_sum_erase _ _ (Finset.mem_univ a)] at hs
+  have hne : ∑ b ∈ Finset.univ.erase a, densityRatio (C b) x r ≠ ⊤ := by
+    intro htop; rw [htop, add_top] at hs; exact ENNReal.top_ne_one hs
+  exact (ENNReal.eq_sub_of_add_eq hne hs).symm
 
 end HadwigerNelson.Plane
