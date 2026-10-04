@@ -2372,6 +2372,10 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.densitySet_disjoint
 #print axioms HadwigerNelson.Plane.unitPairsNull_of_no_unit_pair
 #print axioms HadwigerNelson.Plane.dist_rot
+#print axioms HadwigerNelson.Plane.shift_re
+#print axioms HadwigerNelson.Plane.shift_im
+#print axioms HadwigerNelson.Arith.exists_powerBasis_of_root
+#print axioms HadwigerNelson.Arith.exists_coords_of_quadratic
 
 #eval IO.println "=== PURCHASED ==="
 

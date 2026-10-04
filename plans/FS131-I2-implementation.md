@@ -382,3 +382,55 @@ Left in Dyadic: `comap_conductor_sup_eq_top`, `dyadicConclusion_of_minpoly`, and
 `AddCircle (2π)` through `AddCircle.ergodic_add_right`), `falconer_lemma4`, `fan_tip_ae_mem`, `falconer_reduction`. 16 children added, each stated before
 use and recorded in `scripts/Axioms.lean` block "FS131-I2g". New imports in `Plane/Cover` (`Lebesgue.VolumeOfBalls`) and `Plane/FalconerReduction`
 (`Dynamics.Ergodic.AddCircleAdd`, `Dynamics.Ergodic.Function`). Not yet built through `build.sh`: Cover's edit rebuilds every wave-2 dependent.
+
+## Stage 12 — SAVED (FS131-I2g): `comap_conductor_sup_eq_top`, seven `Plane/Slack` leaves; handoff — 91 `sorry` left
+
+**Closed since Stage 11** (statements untouched):
+- `Arith/Dyadic`: `comap_conductor_sup_eq_top`, through two new children `exists_powerBasis_of_root` (a root of a quadratic outside `F` generates `L/F`:
+  `Field.primitive_element_iff_minpoly_natDegree_eq`, `PowerBasis.ofAdjoinEqTop`) and `exists_coords_of_quadratic` (every integral `b ∈ L` has
+  `(d² − 4δ) b = p + q g` with `p, q ∈ 𝓞 F`: write `b = u + v g`, read `Tr b` and `Tr (b g)` in `𝓞 F` (`Algebra.isIntegral_trace`,
+  `IsIntegrallyClosed.isIntegral_iff`) and solve the 2×2 system, whose determinant is `d² − 4δ` — no `Algebra.discr`). The conductor then contains
+  `d² s²` (`d² − 4δ = −d² s²`), a `P`-unit. Left in Dyadic: `dyadicConclusion_of_minpoly` (Kummer–Dedekind), and the assemblies
+  `dyadicConclusion_of_coeffs`, `sqrt3_local_of_congr`, `sqrt3_local` (`sqrt3_dyadic` is proved from `sqrt3_local_of_congr`).
+- `Plane/Slack` (46 → 39): `volume_prod_dist_eq_null`, `iccPairNull_of_forall_lt`, `muTile_le_mu`, `muPer_le_muTile`, `isGridUnion_periodize`,
+  `bandFree_periodize` (two new children `shift_re`, `shift_im`), `keptAt_of_dist_le`. Moves: `volume_ball_ofReal` and `bandNull_of_bandFree` up
+  in the file (no change).
+
+**Still `sorry`** (lines that are exactly `sorry`; by file): `Plane/Slack` 39 (`unitPairsNull_iff_pairMass`, `continuous_pairMass`,
+`ae_pairMass_eq_zero`, `pairMass_eq_zero_of_iccPairNull`, `iccPairNull_preimage_mul`, `AeColouring.exists_rescale`, `exists_pos_not_iccPairNull`,
+`bandNull_unitPairsNull`, `mu_le_muZero`, `exists_squareWin_dense`, `ae_eventually_keptAt`, `upperDensity_of_periodic`, `upperDensity_periodize`,
+`exists_tiled_kept`, `eventually_le_muPer`, the modification block (7), the compactness block (8), `exists_tight`, the three limits,
+`chiM0_le_chiCP`, `chiM0_le_iff_muZero_eq_one`, `exists_bandNull_aeCover_of_mu_eq_one`, `tendsto_not_kept`, `exists_not_uniform_kept`),
+`Plane/CoverExamples` 44 (unchanged), `Arith/Dyadic` 4, `Plane/YesLimit` 4 (its row waits on Slack's `chiM0_le_iff_muZero_eq_one`).
+Sorry-free now: `Plane/Cover`, `Plane/FalconerReduction` (FS129-SA1-FALC-RED: the one declared import is `falconer_lemma2_nonempty`),
+`Arith/PlaceHom`, `Arith/FalconerField`.
+
+**Re-pricing.** This session's context: about 120k to read, plan and wait on builds; about 330k to prove. `Plane/Cover`'s two leaves (priced
+30k + the Lemma 3 core) took about 22k and 18k; `FalconerReduction`'s nine (priced about 190k at the Sonnet rate) about 60k; `comap_conductor`
+(priced 40k) about 20k. The Sonnet implementer's rate here was roughly a third of K2c's table; the cost was in finding the right Mathlib API
+(`Valued.mem_nhds` with `restrict`, `AddCircle.ergodic_add_right`, `measurePreserving_add_right.quasiMeasurePreserving.ae` needing `(p := …)`
+to elaborate within the heartbeat limit).
+
+**For the next implementer.** (1) Order by row: `exists_squareWin_dense`, `ae_eventually_keptAt`, `exists_tiled_kept`, `upperDensity_of_periodic`,
+`upperDensity_periodize` finish SUPK's lower bound (`eventually_le_muPer`); `continuous_pairMass`, `ae_pairMass_eq_zero` unlock
+`pairMass_eq_zero_of_iccPairNull`, `bandNull_unitPairsNull`, `mu_le_muZero`. (2) `dyadicConclusion_of_minpoly` is the one hard Dyadic child;
+the rest of Dyadic is plumbing from it. (3) `exists_not_uniform_kept`'s fringe-colouring open point (§ 17.1) was not reached.
+(4) Iteration: `lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false <file>` reads the worktree's built oleans directly (the build is
+a few seconds for files whose upstream is built); a scratch file `import`ing the module being edited conflicts with its declared names, so give
+test copies fresh names. Do not edit a module while `build.sh` has not yet passed it.
+
+## Theorems this phase proved (FS131-I2g, additions)
+
+Axioms are those of the gate-less `lake env lean` run of `scripts/Axioms.lean`'s block "FS131-I2g" (see Stage 12's build; `falconer_reduction`
+and `le_chiM_of_falconerFan` carry `falconer_lemma2_nonempty`):
+- `HadwigerNelson.Plane.falconer_reduction`, `le_chiM_of_falconerFan` — FS129-SA1-FALC-RED (the import `falconer_lemma2_nonempty` declared).
+- Its children: `essClosure_dist_ne_one_of_mem_densitySet`, `measurableSet_densitySet`, `densitySet_dist_ne_one`, `exists_mem_falconerE`,
+  `two_classes_of_mem_falconerE`, `dist_circle_rotate`, `not_rotate_ae_eq_compl`, `falconer_lemma4`, `fan_tip_ae_mem`, `upperHalfPlane_falconer_hyp`.
+- `HadwigerNelson.Arith.comap_conductor_sup_eq_top`, `exists_dyadic_coeffs`, `exists_root_quadratic`, `minpoly_eq_of_root`, `exists_sq_sub_three_mem_pow`,
+  `exists_span_four_eq`, `card_quot_eq_two_pow`, `x2x1_separable_irreducible_iff` — children of FS129-SA1-SQRT3-LOCAL (row not closed).
+- `HadwigerNelson.Plane.keptAt_of_dist_le`, `isGridUnion_periodize`, `bandFree_periodize`, `muTile_le_mu`, `muPer_le_muTile`,
+  `volume_prod_dist_eq_null`, `iccPairNull_of_forall_lt` — children of SUPK (row not closed).
+
+## Drafts for the front page (FS131-I2g)
+
+None: the gate was not run (91 `sorry` remain in wave 2's modules).

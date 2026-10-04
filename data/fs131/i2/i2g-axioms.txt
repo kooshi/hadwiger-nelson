@@ -1,0 +1,49 @@
+'HadwigerNelson.Arith.ideal_le_of_mul_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.volume_closedBall_ofReal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.densityRatio_le_of_unit_dist' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.tendsto_mul_nhdsGT' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.tendsto_densityRatio_compl_of_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_densitySet_of_tendsto_compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.measurable_densityRatio_centre' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.densitySet_iff_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sum_densityRatio_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_mem_essClosure_of_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.densityRatio_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.densitySet_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_unit_pair_of_conull' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ae_arcLength_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.densitySet_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.unitPairsNull_of_no_unit_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_rot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.shift_re' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.shift_im' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Arith.exists_powerBasis_of_root' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Arith.exists_coords_of_quadratic' depends on axioms: [propext, Classical.choice, Quot.sound]
+data/fs131/i2/i2g-axioms.lean:23:15: error(lean.unknownIdentifier): Unknown constant `moserSpindle_cnf_unsat`
+data/fs131/i2/i2g-axioms.lean:24:15: error(lean.unknownIdentifier): Unknown constant `moserSpindle_not_colorable_three_lrat`
+data/fs131/i2/i2g-axioms.lean:25:15: error(lean.unknownIdentifier): Unknown constant `moserSpindleCubes_unsat`
+data/fs131/i2/i2g-axioms.lean:26:15: error(lean.unknownIdentifier): Unknown constant `moserSpindle_not_colorable_three_cubes`
+data/fs131/i2/i2g-axioms.lean:27:15: error(lean.unknownIdentifier): Unknown constant `four_le_chromaticNumber_plane_certified`
+'HadwigerNelson.Plane.falconer_reduction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Plane.falconer_lemma2_nonempty]
+'HadwigerNelson.Plane.le_chiM_of_falconerFan' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Plane.falconer_lemma2_nonempty]
+'HadwigerNelson.Plane.measurableSet_densitySet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.essClosure_dist_ne_one_of_mem_densitySet' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.not_rotate_ae_eq_compl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.fan_tip_ae_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Plane.falconer_lemma2_nonempty]
+'HadwigerNelson.Plane.keptAt_of_dist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.bandFree_periodize' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Arith.comap_conductor_sup_eq_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Arith.exists_dyadic_coeffs' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Arith.minpoly_eq_of_root' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_not_uniform_kept' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,5 +1,10 @@
 import Mathlib.Algebra.Polynomial.SpecificDegree
 import Mathlib.FieldTheory.Finite.Basic
+import Mathlib.FieldTheory.PrimitiveElement
+import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
+import Mathlib.RingTheory.Trace.Basic
+import Mathlib.RingTheory.Adjoin.PowerBasis
+import Mathlib.RingTheory.IntegralClosure.IntegralRestrict
 import Mathlib.NumberTheory.KummerDedekind
 import Mathlib.NumberTheory.NumberField.Basic
 import Mathlib.RingTheory.RamificationInertia.Ramification
@@ -334,6 +339,112 @@ theorem minpoly_eq_of_root (hdeg : Module.finrank F L = 2) {d δ : 𝓞 F} {γ :
     rw [map_neg, ← IsScalarTower.algebraMap_apply (𝓞 F) F L c, hc, RingOfIntegers.coe_eq_algebraMap, map_neg,
       ← IsScalarTower.algebraMap_apply (𝓞 F) (𝓞 L) L c]
 
+open Polynomial in
+/-- A root of a quadratic outside `F` generates `L/F` when `[L : F] = 2` (a power basis). -/
+theorem exists_powerBasis_of_root (hdeg : Module.finrank F L = 2) {g : L} (hint : IsIntegral F g)
+    (hnot : g ∉ Set.range (algebraMap F L)) : ∃ B : PowerBasis F L, B.gen = g := by
+  have hdeg2 : (minpoly F g).natDegree = 2 := by
+    have hle : (minpoly F g).natDegree ≤ 2 := hdeg ▸ minpoly.natDegree_le g
+    have hpos := minpoly.natDegree_pos hint
+    by_contra h2
+    have h1 : (minpoly F g).natDegree = 1 := by omega
+    have hX := (minpoly.monic hint).eq_X_add_C h1
+    have ha := minpoly.aeval F g
+    rw [hX] at ha
+    simp only [map_add, aeval_X, aeval_C] at ha
+    exact hnot ⟨-((minpoly F g).coeff 0), by
+      rw [map_neg]; exact (eq_neg_of_add_eq_zero_left ha).symm⟩
+  have htop : IntermediateField.adjoin F {g} = ⊤ := (Field.primitive_element_iff_minpoly_natDegree_eq F g).2 (by rw [hdeg2, hdeg])
+  have hadj : Algebra.adjoin F {g} = ⊤ := by
+    rw [← IntermediateField.adjoin_simple_toSubalgebra_of_isAlgebraic hint.isAlgebraic, htop, IntermediateField.top_toSubalgebra]
+  exact ⟨PowerBasis.ofAdjoinEqTop hint hadj, PowerBasis.ofAdjoinEqTop_gen hint hadj⟩
+
+open Polynomial in
+/-- Coordinates of an integral element of a quadratic extension, up to the discriminant of the generator. -/
+theorem exists_coords_of_quadratic (hdeg : Module.finrank F L = 2) {d δ : 𝓞 F} {g : L}
+    (hq : g ^ 2 + algebraMap (𝓞 F) L d * g + algebraMap (𝓞 F) L δ = 0)
+    (hnot : g ∉ Set.range (algebraMap F L)) {b : L} (hb : IsIntegral (𝓞 F) b) :
+    ∃ p q : 𝓞 F, algebraMap (𝓞 F) L (d ^ 2 - 4 * δ) * b = algebraMap (𝓞 F) L p + algebraMap (𝓞 F) L q * g := by
+  have hint : IsIntegral F g := IsIntegral.of_finite F g
+  obtain ⟨B, hB⟩ := exists_powerBasis_of_root hdeg hint hnot
+  set dF : F := algebraMap (𝓞 F) F d
+  set δF : F := algebraMap (𝓞 F) F δ
+  have e1 : algebraMap (𝓞 F) L d = algebraMap F L dF := IsScalarTower.algebraMap_apply (𝓞 F) F L d
+  have e2 : algebraMap (𝓞 F) L δ = algebraMap F L δF := IsScalarTower.algebraMap_apply (𝓞 F) F L δ
+  rw [e1, e2] at hq
+  -- the minimal polynomial over `F`
+  have hmin : minpoly F g = X ^ 2 + C dF * X + C δF := by
+    have hdeg2 : (minpoly F g).natDegree = 2 := by
+      have hle : (minpoly F g).natDegree ≤ 2 := hdeg ▸ minpoly.natDegree_le g
+      have hpos := minpoly.natDegree_pos hint
+      by_contra h2
+      have h1 : (minpoly F g).natDegree = 1 := by omega
+      have hX := (minpoly.monic hint).eq_X_add_C h1
+      have ha := minpoly.aeval F g
+      rw [hX] at ha
+      simp only [map_add, aeval_X, aeval_C] at ha
+      exact hnot ⟨-((minpoly F g).coeff 0), by rw [map_neg]; exact (eq_neg_of_add_eq_zero_left ha).symm⟩
+    have hmon : (X ^ 2 + C dF * X + C δF : F[X]).Monic := by monicity!
+    have hp : (X ^ 2 + C dF * X + C δF : F[X]).natDegree = 2 := by compute_degree!
+    have hz : aeval g (X ^ 2 + C dF * X + C δF : F[X]) = 0 := by simpa [aeval_def] using hq
+    exact (eq_of_monic_of_dvd_of_natDegree_le (minpoly.monic hint) hmon (minpoly.dvd F g hz) (by omega)).symm
+  -- traces
+  have hdim : B.dim = 2 := by rw [← B.finrank, hdeg]
+  have htr1 : Algebra.trace F L (1 : L) = 2 := by
+    have := Algebra.trace_algebraMap (R := F) (S := L) 1
+    rw [map_one, hdeg] at this; simpa using this
+  have htrg : Algebra.trace F L g = -dF := by
+    have := B.trace_gen_eq_nextCoeff_minpoly
+    rw [hB, hmin] at this
+    rw [this]
+    have hn : (X ^ 2 + C dF * X + C δF : F[X]).natDegree = 2 := by compute_degree!
+    have : (X ^ 2 + C dF * X + C δF : F[X]).nextCoeff = dF := by
+      rw [nextCoeff_of_natDegree_pos (by omega), hn]
+      simp [coeff_add, coeff_X_pow, coeff_C]
+    rw [this]
+  have hg2 : g ^ 2 = -(algebraMap F L dF * g) - algebraMap F L δF := by linear_combination hq
+  obtain ⟨f, hfd, hbf⟩ := B.exists_eq_aeval b
+  rw [hdim] at hfd
+  have hf1 : f.natDegree ≤ 1 := by omega
+  have hfe := eq_X_add_C_of_natDegree_le_one hf1
+  set u : F := f.coeff 0
+  set v : F := f.coeff 1
+  have hbuv : b = u • (1 : L) + v • g := by
+    rw [hbf, hfe, hB]; simp [aeval_def, Algebra.smul_def, add_comm]
+  have hgint : IsIntegral (𝓞 F) g := by
+    refine ⟨X ^ 2 + C d * X + C δ, by monicity!, ?_⟩
+    simp only [eval₂_add, eval₂_mul, eval₂_pow, eval₂_X, eval₂_C]
+    rw [e1, e2]; exact hq
+  have hT0 : Algebra.trace F L b = 2 * u - v * dF := by
+    rw [hbuv, map_add, map_smul, map_smul, htr1, htrg]; simp only [smul_eq_mul]; ring
+  have hT1 : Algebra.trace F L (b * g) = -dF * u + v * (dF ^ 2 - 2 * δF) := by
+    have : b * g = u • g + v • (-(dF • g) - δF • (1 : L)) := by
+      rw [hbuv, add_mul, smul_mul_assoc, smul_mul_assoc, one_mul, ← pow_two, hg2]
+      simp only [Algebra.smul_def]; ring_nf
+    rw [this, map_add, map_smul, map_smul, map_sub, map_neg, map_smul, map_smul, htr1, htrg]
+    simp only [smul_eq_mul]; ring
+  obtain ⟨t0, ht0⟩ := IsIntegrallyClosed.isIntegral_iff.1 (Algebra.isIntegral_trace (L := F) (F := L) hb)
+  obtain ⟨t1, ht1⟩ := IsIntegrallyClosed.isIntegral_iff.1 (Algebra.isIntegral_trace (L := F) (F := L) (hb.mul hgint))
+  refine ⟨(d ^ 2 - 2 * δ) * t0 + d * t1, d * t0 + 2 * t1, ?_⟩
+  have hu : (dF ^ 2 - 4 * δF) * u = (dF ^ 2 - 2 * δF) * algebraMap (𝓞 F) F t0 + dF * algebraMap (𝓞 F) F t1 := by
+    rw [ht0, ht1, hT0, hT1]; ring
+  have hv : (dF ^ 2 - 4 * δF) * v = dF * algebraMap (𝓞 F) F t0 + 2 * algebraMap (𝓞 F) F t1 := by
+    rw [ht0, ht1, hT0, hT1]; ring
+  have hL : ∀ x : 𝓞 F, algebraMap (𝓞 F) L x = algebraMap F L (algebraMap (𝓞 F) F x) := fun x =>
+    IsScalarTower.algebraMap_apply (𝓞 F) F L x
+  have hbuv' : b = algebraMap F L u + algebraMap F L v * g := by
+    rw [hbuv]; simp [Algebra.smul_def]
+  have hP : algebraMap (𝓞 F) F ((d ^ 2 - 2 * δ) * t0 + d * t1) =
+      (dF ^ 2 - 2 * δF) * algebraMap (𝓞 F) F t0 + dF * algebraMap (𝓞 F) F t1 := by
+    simp only [map_add, map_mul, map_sub, map_pow, map_ofNat, dF, δF]
+  have hQ : algebraMap (𝓞 F) F (d * t0 + 2 * t1) = dF * algebraMap (𝓞 F) F t0 + 2 * algebraMap (𝓞 F) F t1 := by
+    simp only [map_add, map_mul, map_ofNat, dF]
+  have hD : algebraMap (𝓞 F) F (d ^ 2 - 4 * δ) = dF ^ 2 - 4 * δF := by
+    simp only [map_sub, map_mul, map_pow, map_ofNat, dF, δF]
+  rw [hL, hL, hL, hP, hQ, hD, ← hu, ← hv, hbuv']
+  simp only [map_mul, map_sub, map_pow, map_ofNat]; ring
+
+
 /-- **The conductor is prime to `P`** (`Algebra.discr_mul_isIntegral_mem_adjoin`: the discriminant `d² − 4δ = −d²s²` of the
 power basis `1, γ` lies in the conductor, and it is a `P`-unit). -/
 theorem comap_conductor_sup_eq_top (hdeg : Module.finrank F L = 2) (P : HeightOneSpectrum (𝓞 F)) {s d δ : 𝓞 F}
@@ -341,7 +452,42 @@ theorem comap_conductor_sup_eq_top (hdeg : Module.finrank F L = 2) (P : HeightOn
     (hroot : γ ^ 2 + algebraMap (𝓞 F) (𝓞 L) d * γ + algebraMap (𝓞 F) (𝓞 L) δ = 0)
     (hnot : (γ : L) ∉ Set.range (algebraMap F L)) :
     (conductor (𝓞 F) γ).comap (algebraMap (𝓞 F) (𝓞 L)) ⊔ P.asIdeal = ⊤ := by
-  sorry
+  haveI : P.asIdeal.IsMaximal := P.isPrime.isMaximal P.ne_bot
+  have hdP : d ∉ P.asIdeal := by
+    intro h
+    have : (1 : 𝓞 F) ∈ P.asIdeal := by
+      have h1 : (1 : 𝓞 F) = d - (d - 1) := by ring
+      rw [h1]; exact P.asIdeal.sub_mem h hd
+    exact P.isPrime.ne_top ((Ideal.eq_top_iff_one _).mpr this)
+  have hxP : d ^ 2 * s ^ 2 ∉ P.asIdeal := by
+    intro h
+    rcases P.isPrime.mem_or_mem h with h | h
+    · exact hdP (P.isPrime.mem_of_pow_mem 2 h)
+    · exact hs (P.isPrime.mem_of_pow_mem 2 h)
+  have hq : (γ : L) ^ 2 + algebraMap (𝓞 F) L d * γ + algebraMap (𝓞 F) L δ = 0 := by
+    have := congrArg (fun z : 𝓞 L => (z : L)) hroot
+    simpa [RingOfIntegers.coe_eq_algebraMap, IsScalarTower.algebraMap_apply (𝓞 F) (𝓞 L) L] using this
+  have hmem : algebraMap (𝓞 F) (𝓞 L) (d ^ 2 * s ^ 2) ∈ conductor (𝓞 F) γ := by
+    rw [mem_conductor_iff]
+    intro b
+    have hbi : IsIntegral (𝓞 F) (b : L) := (RingOfIntegers.isIntegral_coe b).tower_top
+    obtain ⟨p, q, hpq⟩ := exists_coords_of_quadratic hdeg hq hnot hbi
+    have hD : d ^ 2 - 4 * δ = -(d ^ 2 * s ^ 2) := by linear_combination -hδ
+    rw [hD, map_neg, neg_mul, neg_eq_iff_eq_neg] at hpq
+    have : algebraMap (𝓞 F) (𝓞 L) (d ^ 2 * s ^ 2) * b = algebraMap (𝓞 F) (𝓞 L) (-p) + algebraMap (𝓞 F) (𝓞 L) (-q) * γ := by
+      apply Subtype.val_injective
+      have hc : ∀ x : 𝓞 F, ((algebraMap (𝓞 F) (𝓞 L) x : 𝓞 L) : L) = algebraMap (𝓞 F) L x := fun x => by
+        rw [IsScalarTower.algebraMap_apply (𝓞 F) (𝓞 L) L x]
+      show ((algebraMap (𝓞 F) (𝓞 L) (d ^ 2 * s ^ 2) : 𝓞 L) : L) * (b : L) =
+        ((algebraMap (𝓞 F) (𝓞 L) (-p) : 𝓞 L) : L) + ((algebraMap (𝓞 F) (𝓞 L) (-q) : 𝓞 L) : L) * (γ : L)
+      rw [hc, hc, hc, map_neg, map_neg]
+      linear_combination hpq
+    rw [this]
+    exact Subalgebra.add_mem _ (Subalgebra.algebraMap_mem _ _)
+      (Subalgebra.mul_mem _ (Subalgebra.algebraMap_mem _ _) (Algebra.self_mem_adjoin_singleton _ _))
+  have hle : ¬ (conductor (𝓞 F) γ).comap (algebraMap (𝓞 F) (𝓞 L)) ≤ P.asIdeal := fun h => hxP (h hmem)
+  rw [sup_comm]
+  exact ‹P.asIdeal.IsMaximal›.out.2 _ (left_lt_sup.mpr hle)
 
 open Polynomial in
 /-- **Kummer–Dedekind at `P`** (`KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map`,

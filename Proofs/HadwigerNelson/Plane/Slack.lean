@@ -39,6 +39,11 @@ def farBox (x : ℂ) (θ g ε' ρ : ℝ) : Set ℂ :=
 Each child is `sorry`ed and priced in `plans/FS131-w2-kernel-plan.md` § 12 (route, Mathlib names confirmed with `#check`, order).
 A leaf whose proof is still `sorry` is closed from its children by the assembly the plan describes. -/
 
+/-- The area of a disc, in `ofReal` form. -/
+theorem volume_ball_ofReal (z : ℂ) {ρ : ℝ} (hρ : 0 ≤ ρ) : volume (ball z ρ) = ENNReal.ofReal (ρ ^ 2 * Real.pi) := by
+  rw [Complex.volume_ball, ENNReal.ofReal_mul (sq_nonneg ρ), ENNReal.ofReal_pow hρ, ← NNReal.coe_real_pi,
+    ENNReal.ofReal_coe_nnreal]
+
 /-! ### Radius bands and the pair mass at one radius (`exists_tight`, SUPK's upper bound) -/
 
 /-- The pairs of `A` at a distance in `[a, b]` are `Leb ⊗ Leb`-null (the radius form of `BandNull`). -/
@@ -68,12 +73,49 @@ theorem IccPairNull.union {A : Set ℂ} {a b c : ℝ} (h1 : IccPairNull A a b) (
 
 /-- The pairs at one exact distance are `Leb ⊗ Leb`-null (a circle is null in each slice). -/
 theorem volume_prod_dist_eq_null (r : ℝ) : (volume.prod volume) {q : ℂ × ℂ | dist q.1 q.2 = r} = 0 := by
-  sorry
+  have hm : MeasurableSet {q : ℂ × ℂ | dist q.1 q.2 = r} :=
+    (isClosed_eq (continuous_fst.dist continuous_snd) continuous_const).measurableSet
+  rw [Measure.measure_prod_null hm]
+  refine Eventually.of_forall fun x => ?_
+  have : Prod.mk x ⁻¹' {q : ℂ × ℂ | dist q.1 q.2 = r} = sphere x r := by
+    ext y; simp only [mem_preimage, mem_setOf_eq, mem_sphere]; rw [dist_comm]
+  show volume (Prod.mk x ⁻¹' _) = 0
+  rw [this]
+  exact Measure.addHaar_sphere volume x r
 
 /-- Null on `[a', b]` for every `a' > a` gives null on `[a, b]` (a countable union and one null sphere). -/
 theorem iccPairNull_of_forall_lt {A : Set ℂ} {a b : ℝ} (h : ∀ a', a < a' → a' ≤ b → IccPairNull A a' b) :
     IccPairNull A a b := by
-  sorry
+  unfold IccPairNull at h ⊢
+  by_cases hab : a < b
+  · -- a countable union over `a + (b - a)/(n+2)` plus the sphere at `a`
+    refine measure_mono_null (t := {q : ℂ × ℂ | dist q.1 q.2 = a} ∪ ⋃ n : ℕ,
+      {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a + (b - a) / (n + 2) ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b}) ?_ ?_
+    · intro q hq
+      rcases eq_or_lt_of_le hq.2.2.1 with h1 | h1
+      · exact Or.inl h1.symm
+      · right
+        obtain ⟨n, hn⟩ := exists_nat_gt ((b - a) / (dist q.1 q.2 - a))
+        refine mem_iUnion.2 ⟨n, hq.1, hq.2.1, ?_, hq.2.2.2⟩
+        have hpos : 0 < dist q.1 q.2 - a := by linarith
+        have h2 : (b - a) / ((n : ℝ) + 2) ≤ dist q.1 q.2 - a := by
+          rw [div_le_iff₀ (by positivity)]
+          rw [div_lt_iff₀ hpos] at hn
+          nlinarith
+        linarith
+    · refine measure_union_null (volume_prod_dist_eq_null a) (measure_iUnion_null fun n => h _ ?_ ?_)
+      · have : 0 < (b - a) / ((n : ℝ) + 2) := by apply div_pos <;> [linarith; positivity]
+        linarith
+      · have : (b - a) / ((n : ℝ) + 2) ≤ b - a := by
+          rw [div_le_iff₀ (by positivity)]; nlinarith [(by positivity : (0:ℝ) ≤ n), sub_pos.2 hab]
+        linarith
+  · by_cases hab' : a = b
+    · subst hab'
+      refine measure_mono_null (fun q hq => ?_) (volume_prod_dist_eq_null a)
+      exact le_antisymm hq.2.2.2 hq.2.2.1
+    · have : b < a := lt_of_le_of_ne (not_lt.1 hab) (Ne.symm hab')
+      refine measure_mono_null (fun q hq => ?_) (measure_empty (μ := volume.prod volume))
+      exact absurd (hq.2.2.1.trans hq.2.2.2) (not_le.2 this)
 
 theorem unitPairsNull_iff_pairMass {A : Set ℂ} : UnitPairsNull A ↔ ∀ R : ℝ, pairMass A R 1 = 0 := by
   sorry
@@ -120,11 +162,22 @@ theorem bandNull_unitPairsNull {A : Set ℂ} (hA : MeasurableSet A) {ε : ℝ} (
 theorem mu_le_muZero (k : ℕ) {ε : ℝ} (hε0 : 0 < ε) (hε1 : ε < 1) : mu k ε ≤ muZero k := by
   sorry
 
+/-- A band-free class is band-null. -/
+theorem bandNull_of_bandFree {A : Set ℂ} {ε : ℝ} (h : BandFree A ε) : BandNull A ε := by
+  have : bandPairSet A ε = ∅ := by
+    ext q
+    simp only [bandPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+    intro hx hy h1 h2
+    rcases h _ hx _ hy with h3 | h3 <;> linarith
+  rw [BandNull, this, measure_empty]
+
 theorem muTile_le_mu (k : ℕ) (ε : ℝ) : muTile k ε ≤ mu k ε := by
-  sorry
+  refine iSup_le fun C => iSup_le fun h => ?_
+  exact le_iSup₂_of_le C ⟨h.1, fun j => bandNull_of_bandFree (h.2.2 j)⟩ le_rfl
 
 theorem muPer_le_muTile (k : ℕ) (ε : ℝ) : muPer k ε ≤ muTile k ε := by
-  sorry
+  refine iSup_le fun C => iSup_le fun h => ?_
+  exact le_iSup₂_of_le C ⟨h.1, h.2.1, h.2.2.2⟩ le_rfl
 
 /-- The half-open square window `[z, z + ℓ)²`. -/
 def squareWin (z : ℂ) (ℓ : ℝ) : Set ℂ := {w | z.re ≤ w.re ∧ w.re < z.re + ℓ ∧ z.im ≤ w.im ∧ w.im < z.im + ℓ}
@@ -146,7 +199,42 @@ theorem ae_eventually_keptAt {A : Set ℂ} (hA : MeasurableSet A) {η : ℝ} (h�
 lost area is at most `π(2ρd + d²) ≤ 3πρd`). -/
 theorem keptAt_of_dist_le {A : Set ℂ} {η ε : ℝ} (hε : 0 < ε) (hη : 0 ≤ η) (hη1 : η ≤ 1) {x x' : ℂ}
     (hx : KeptAt A (η / 2) ε x) (hd : dist x x' ≤ η * ε / 12) : KeptAt A η ε x' := by
-  sorry
+  intro ρ hρ
+  have hρ' : ε / 2 ≤ ρ := by rcases hρ with rfl | rfl <;> [exact le_rfl; linarith]
+  have hρ0 : 0 < ρ := by linarith
+  set d := dist x x' with hdd
+  have hd0 : 0 ≤ d := dist_nonneg
+  have hdρ : d ≤ η * ρ / 4 := by nlinarith
+  have hdρ' : d ≤ ρ := by nlinarith
+  have h1 := hx ρ hρ
+  set D := densitySet A
+  have hsub : ball x (ρ - d) ⊆ ball x' ρ := by
+    intro y hy
+    rw [mem_ball] at hy ⊢
+    have := dist_triangle y x x'
+    linarith
+  have hsplit : volume (ball x ρ ∩ D) ≤ volume (ball x (ρ - d) ∩ D) + volume (ball x ρ \ ball x (ρ - d)) := by
+    refine le_trans (measure_mono ?_) (measure_union_le _ _)
+    intro y hy
+    by_cases hy' : y ∈ ball x (ρ - d)
+    · exact Or.inl ⟨hy', hy.2⟩
+    · exact Or.inr ⟨hy.1, hy'⟩
+  have hdiff : volume (ball x ρ \ ball x (ρ - d)) = ENNReal.ofReal ((ρ ^ 2 - (ρ - d) ^ 2) * Real.pi) := by
+    rw [measure_sdiff (ball_subset_ball (by linarith)) measurableSet_ball.nullMeasurableSet measure_ball_lt_top.ne,
+      volume_ball_ofReal x hρ0.le, volume_ball_ofReal x (by linarith), ← ENNReal.ofReal_sub _ (by positivity)]
+    congr 1; ring
+  rw [volume_ball_ofReal x hρ0.le, ← ENNReal.ofReal_mul (by linarith)] at h1
+  rw [volume_ball_ofReal x' hρ0.le, ← ENNReal.ofReal_mul (by linarith)]
+  have h2 : ENNReal.ofReal ((1 - η / 2) * (ρ ^ 2 * Real.pi)) ≤
+      volume (ball x (ρ - d) ∩ D) + ENNReal.ofReal ((ρ ^ 2 - (ρ - d) ^ 2) * Real.pi) :=
+    h1.trans (hsplit.trans (by rw [hdiff]))
+  have h3 := tsub_le_iff_right.mpr h2
+  have hb : 0 ≤ (ρ ^ 2 - (ρ - d) ^ 2) * Real.pi := mul_nonneg (by nlinarith) Real.pi_pos.le
+  rw [← ENNReal.ofReal_sub _ hb] at h3
+  refine le_trans ?_ (h3.trans (measure_mono (inter_subset_inter_left _ hsub)))
+  refine ENNReal.ofReal_le_ofReal ?_
+  have hkey : 0 ≤ η * ρ ^ 2 / 2 - (ρ ^ 2 - (ρ - d) ^ 2) := by nlinarith [mul_nonneg hd0 hd0, mul_nonneg hη hρ0.le]
+  nlinarith [mul_nonneg hkey Real.pi_pos.le]
 
 /-- The periodization of `T` with period `L` in both coordinates. -/
 def periodize (T : Set ℂ) (L : ℝ) : Set ℂ := {x | ∃ m n : ℤ, x - ((m * L : ℝ) + (n * L : ℝ) * I) ∈ T}
@@ -171,14 +259,61 @@ theorem measurableSet_periodize {T : Set ℂ} (hT : MeasurableSet T) (L : ℝ) :
   rw [this]
   exact MeasurableSet.iUnion fun m => MeasurableSet.iUnion fun n => (measurable_id.sub_const _) hT
 
+theorem shift_re (m n : ℤ) (L : ℝ) : (((m * L : ℝ) : ℂ) + ((n * L : ℝ) : ℂ) * I).re = m * L := by simp
+
+theorem shift_im (m n : ℤ) (L : ℝ) : (((m * L : ℝ) : ℂ) + ((n * L : ℝ) : ℂ) * I).im = n * L := by simp
+
 theorem isGridUnion_periodize {T : Set ℂ} {h : ℝ} (hh : 0 < h) {N : ℕ} (hT : IsGridUnion h T) :
     IsGridUnion h (periodize T (N * h)) := by
-  sorry
+  intro x ⟨m, n, hx⟩ y hy
+  refine ⟨m, n, hT _ hx ?_⟩
+  obtain ⟨h1, h2⟩ := hy
+  have key : ∀ (a : ℝ) (j : ℤ), ⌊(a - (j : ℝ) * (N * h)) / h⌋ = ⌊a / h⌋ - j * N := by
+    intro a j
+    have : (a - (j : ℝ) * (N * h)) / h = a / h - ((j * N : ℤ) : ℝ) := by
+      push_cast; field_simp
+    rw [this, Int.floor_sub_intCast]
+  simp only [gridCell, mem_setOf_eq, Complex.sub_re, Complex.sub_im, shift_re, shift_im, key]
+  exact ⟨by rw [h1], by rw [h2]⟩
 
 /-- Copies of a window of side `ℓ` at period `ℓ + 2` are `2` apart, beyond every band distance when `ε < 1`. -/
 theorem bandFree_periodize {T : Set ℂ} {z : ℂ} {ℓ ε : ℝ} (hT : T ⊆ squareWin z ℓ) (hε : ε < 1) (h : BandFree T ε) :
     BandFree (periodize T (ℓ + 2)) ε := by
-  sorry
+  intro x ⟨m, n, hx⟩ y ⟨m', n', hy⟩
+  have h1 := hT hx
+  have h2 := hT hy
+  simp only [squareWin, mem_setOf_eq, Complex.sub_re, Complex.sub_im, shift_re, shift_im] at h1 h2
+  have hℓ : 0 ≤ ℓ := by have := h1.1; have := h1.2.1; linarith
+  by_cases hm : m = m'
+  · by_cases hn : n = n'
+    · subst hm; subst hn
+      have := h _ hx _ hy
+      have e : dist (x - (((m * (ℓ + 2) : ℝ) : ℂ) + ((n * (ℓ + 2) : ℝ) : ℂ) * I))
+          (y - (((m * (ℓ + 2) : ℝ) : ℂ) + ((n * (ℓ + 2) : ℝ) : ℂ) * I)) = dist x y := by
+        rw [dist_eq_norm, dist_eq_norm]; congr 1; ring
+      rwa [e] at this
+    · right
+      have hd : 2 ≤ |y.im - x.im| := by
+        rcases lt_or_gt_of_ne hn with hlt | hlt
+        · have : (n : ℝ) + 1 ≤ n' := by exact_mod_cast hlt
+          rw [abs_of_nonneg (by nlinarith)]; nlinarith
+        · have : (n' : ℝ) + 1 ≤ n := by exact_mod_cast hlt
+          rw [abs_of_nonpos (by nlinarith)]; nlinarith
+      have := Complex.abs_im_le_norm (y - x)
+      rw [Complex.sub_im] at this
+      rw [dist_eq_norm, ← norm_neg, neg_sub]
+      linarith
+  · right
+    have hd : 2 ≤ |y.re - x.re| := by
+      rcases lt_or_gt_of_ne hm with hlt | hlt
+      · have : (m : ℝ) + 1 ≤ m' := by exact_mod_cast hlt
+        rw [abs_of_nonneg (by nlinarith)]; nlinarith
+      · have : (m' : ℝ) + 1 ≤ m := by exact_mod_cast hlt
+        rw [abs_of_nonpos (by nlinarith)]; nlinarith
+    have := Complex.abs_re_le_norm (y - x)
+    rw [Complex.sub_re] at this
+    rw [dist_eq_norm, ← norm_neg, neg_sub]
+    linarith
 
 theorem disjoint_periodize {T T' : Set ℂ} {z : ℂ} {ℓ : ℝ} (hT : T ⊆ squareWin z ℓ) (hT' : T' ⊆ squareWin z ℓ)
     (h : Disjoint T T') : Disjoint (periodize T (ℓ + 2)) (periodize T' (ℓ + 2)) := by
@@ -247,11 +382,6 @@ theorem eventually_le_muPer (k : ℕ) {d : ENNReal} (hd : d < muZero k) : ∀ᶠ
   sorry
 
 /-! ### `keptAt_band`: the two cases -/
-
-/-- The area of a disc, in `ofReal` form. -/
-theorem volume_ball_ofReal (z : ℂ) {ρ : ℝ} (hρ : 0 ≤ ρ) : volume (ball z ρ) = ENNReal.ofReal (ρ ^ 2 * Real.pi) := by
-  rw [Complex.volume_ball, ENNReal.ofReal_mul (sq_nonneg ρ), ENNReal.ofReal_pow hρ, ← NNReal.coe_real_pi,
-    ENNReal.ofReal_coe_nnreal]
 
 /-- A measurable set equals its density set up to a null set. -/
 theorem ae_eq_densitySet {A : Set ℂ} (hA : MeasurableSet A) : A =ᵐ[volume] densitySet A :=
@@ -1235,15 +1365,6 @@ its kernel `1_{annulus}` is `L¹` (no Rajchman step, no Krylov–Bogolyubov), an
 theorem exists_bandNull_aeCover_of_mu_eq_one {k : ℕ} {ε : ℝ} (hε : 0 < ε) (h : mu k ε = 1) :
     ∃ C : Fin k → Set ℂ, IsPartialColouring C ∧ (∀ j, BandNull (C j) ε) ∧ ∀ᵐ x ∂volume, ∃ j, x ∈ C j := by
   sorry
-
-/-- A band-free class is band-null. -/
-theorem bandNull_of_bandFree {A : Set ℂ} {ε : ℝ} (h : BandFree A ε) : BandNull A ε := by
-  have : bandPairSet A ε = ∅ := by
-    ext q
-    simp only [bandPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
-    intro hx hy h1 h2
-    rcases h _ hx _ hy with h3 | h3 <;> linarith
-  rw [BandNull, this, measure_empty]
 
 open Classical in
 /-- COMP, `⟹`: if `µ₆(ε) < 1` for every `ε > 0`, no six-colouring is proper on a band (the closures of the colour
