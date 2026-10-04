@@ -619,3 +619,8 @@ reason by the close.*
      read the headline statement aloud against the claim down to Mathlib's definitions, build sandboxed (`bwrap`, network off for the build, under the slot),
      compile the headline's file directly, `#print axioms`, locate any defect with the smallest demonstration; read-only toward the outside world. Launched in
      the special slot, outside the three-slot cap (Kooshi's word).
+109. **Brief FS131-W2, Woodall's chain re-planned** (`debruijn`, Opus, a fresh planner rather than W resumed — W's 270k would leave too little room for the
+     re-plan, and a fresh reading of E1's argument line by line is the first check of it by a second reader, not a second mind; `data/fs131/briefs/FS131-W2-woodall-replan.md`,
+     gated PASS): `step5_eq`, `step7` and step 8 out; E1-SEE, -RAY, -CROSS, -COVER, -BAD, -NO45, -NOBRANCH in over `ArcMap`; the Jordan curve theorem for
+     segment-and-arc curves decided; leaf plans and the handoff current. Row statements unchanged. Launched in the slot E1 freed: slots 0.5 + 0.5 + 1 + 1 = 3,
+     plus EXT-HN1 in the special slot. FS131-IW waits for it.
