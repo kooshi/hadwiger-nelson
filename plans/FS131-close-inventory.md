@@ -234,3 +234,11 @@ reason by the close.*
     theorem makes no site, and over a concrete empty carrier it would be silent — wider than `LEAN.md` § The gate's law, which skips declarations concluding
     `False`. Pre-existing. Job FS131-T2 (`data/fs131/briefs/FS131-T2-vacuity-negations.md`, `debruijn-implementer`, Sonnet, main tree), gated PASS; before
     wave 2 lands.
+37. **Statement defect — the merged sharp form of FS121-D4-FACE is false for gaps `g ≥ 2`** (FS131-K2b, message 2026-10-04): `Plane/Slack.face` and
+    `face_densitySet` (on `fs131-w2`, from K2) carry FS121-V5-FACE-SHARP's hypothesis `2g − g² ≤ ρ²`, which every `ρ` satisfies once `g ≥ 2`
+    (Keryx's receipt: `2g − g² ≤ 0` there); K2b's counterexample at `g = 3`, `ρ = 1/10` — a half-box at `x`, a small ball touching `y = x + e θ`, and the far
+    box — has no unit pairs, both boxes in the set, and `y` in its support at distance 1 from `x`. The row's own form (`0 < 2g < ρ²`) forces `ρ ≤ 1/2` and
+    `g < 1/8` and had no such case; the merge lost that bound. **Ruling: add `g < 1`** to `face` and `face_densitySet` (the derivation's regime: the far box
+    between `x` and `x + e θ`). Alternative weighed: `g < 2`, which K2b believes true (one mind, unproved). Why: `g < 1` is the derivation's own regime,
+    covers the row's original range, and is safe; `g < 2` would be a widening to argue later. `exists_face_fails` is unaffected. Confidence: high.
+    Correction owed: an erratum on FS121-V5-FACE-SHARP (its hypothesis needs `g < 1`, or a proof for `1 ≤ g < 2`), for the record job.
