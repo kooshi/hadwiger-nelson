@@ -37,6 +37,31 @@ open Complex Real Set Filter Topology Metric
 
 /-! ## Angular intervals -/
 
+/-- Normalising is `2/‖u‖`-Lipschitz at `u`: `‖w/‖w‖ − u/‖u‖‖ ≤ 2‖w − u‖/‖u‖`. -/
+theorem norm_div_norm_sub_le {u w : ℂ} (hu : u ≠ 0) (hw : w ≠ 0) :
+    ‖w / (‖w‖ : ℂ) - u / (‖u‖ : ℂ)‖ ≤ 2 * ‖w - u‖ / ‖u‖ := by
+  set a := ‖u‖ with ha
+  set b := ‖w‖ with hb
+  have ha0 : 0 < a := norm_pos_iff.mpr hu
+  have hb0 : 0 < b := norm_pos_iff.mpr hw
+  have hac : (a : ℂ) ≠ 0 := by exact_mod_cast ha0.ne'
+  have hbc : (b : ℂ) ≠ 0 := by exact_mod_cast hb0.ne'
+  have key : w / (b : ℂ) - u / (a : ℂ) = (w - u) / (a : ℂ) + w * (((a - b) / (a * b) : ℝ) : ℂ) := by
+    push_cast; field_simp; ring
+  rw [key]
+  refine (norm_add_le _ _).trans ?_
+  have h1 : ‖(w - u) / (a : ℂ)‖ = ‖w - u‖ / a := by
+    rw [norm_div, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ha0]
+  have h2 : ‖w * (((a - b) / (a * b) : ℝ) : ℂ)‖ = |a - b| / a := by
+    rw [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_div, abs_of_pos (mul_pos ha0 hb0), ← hb]
+    field_simp
+  have h3 : |a - b| ≤ ‖w - u‖ := by
+    rw [abs_sub_comm]; exact abs_norm_sub_norm_le w u
+  rw [h1, h2]
+  have : |a - b| / a ≤ ‖w - u‖ / a := div_le_div_of_nonneg_right h3 ha0.le
+  have e : 2 * ‖w - u‖ / a = ‖w - u‖ / a + ‖w - u‖ / a := by ring
+  rw [e]; linarith
+
 /-- The closed angular interval `[a, b]`, repeated with period `2π`. -/
 def angleIcc (a b : ℝ) : Set ℝ := ⋃ m : ℤ, Icc (a + 2 * π * m) (b + 2 * π * m)
 
@@ -441,7 +466,101 @@ theorem coneAt_region_eq_biUnion {x : ℂ} (hx : x ∈ F.dom) (c : Fin k) :
 /-- At a point of the domain every direction lies in the cone of some colour (pigeonhole over the finitely many colours,
 on interior points near the ray). -/
 theorem exists_mem_coneAt_region {x : ℂ} (hx : x ∈ F.dom) (β : ℝ) : ∃ c, β ∈ coneAt (F.region c) x := by
-  sorry
+  classical
+  obtain ⟨r, hr, hrsub⟩ := Metric.isOpen_iff.mp F.isOpen_dom x hx
+  obtain ⟨N₀, hN₀⟩ := exists_nat_gt (2 / r)
+  set N : ℕ := N₀ + 2 with hNdef
+  have hN : 2 / r < N := lt_of_lt_of_le hN₀ (by rw [hNdef]; push_cast; linarith)
+  have hN2 : (2 : ℝ) ≤ N := by rw [hNdef]; push_cast; linarith [(Nat.cast_nonneg N₀ : (0 : ℝ) ≤ N₀)]
+  have hmge : ∀ n : ℕ, (N : ℝ) ≤ ((n + N : ℕ) : ℝ) := fun n => by
+    push_cast; linarith [(Nat.cast_nonneg n : (0 : ℝ) ≤ n)]
+  have hex : ∀ n : ℕ, ∃ z : ℂ, z ∈ F.interiorPts ∧
+      dist z (x + e β / ((n + N : ℕ) : ℂ)) < 1 / ((n + N : ℕ) : ℝ) ^ 2 := by
+    intro n
+    have hm0 : (0 : ℝ) < ((n + N : ℕ) : ℝ) := lt_of_lt_of_le (by linarith) (hmge n)
+    have hmem : x + e β / ((n + N : ℕ) : ℂ) ∈ ball x r := by
+      rw [mem_ball, dist_eq_norm, add_sub_cancel_left, norm_div, norm_e, Complex.norm_natCast]
+      rw [div_lt_iff₀ hm0]
+      have h2 : 2 / r < N := hN
+      rw [div_lt_iff₀ hr] at h2
+      nlinarith [hmge n]
+    have hd := F.dense_interiorPts (hrsub hmem)
+    obtain ⟨z, hz, hzd⟩ := Metric.mem_closure_iff.mp hd (1 / ((n + N : ℕ) : ℝ) ^ 2) (by positivity)
+    exact ⟨z, hz, by rw [dist_comm]; exact hzd⟩
+  choose z hzI hzd using hex
+  obtain ⟨c, hc⟩ : ∃ c : Fin k, {n : ℕ | F.col (z n) = c}.Infinite := by
+    by_contra hcon
+    push Not at hcon
+    have hfin : (Set.univ : Set ℕ).Finite := by
+      have : (Set.univ : Set ℕ) = ⋃ c : Fin k, {n : ℕ | F.col (z n) = c} := by
+        ext n; simp
+      rw [this]
+      exact Set.finite_iUnion fun c => hcon c
+    exact Set.infinite_univ hfin
+  refine ⟨c, fun ε hε => ?_⟩
+  obtain ⟨M, hM⟩ : ∃ M : ℕ, 8 / ε < M := exists_nat_gt _
+  obtain ⟨n, hn, hnM⟩ := hc.exists_gt M
+  have hmM : (M : ℝ) < ((n + N : ℕ) : ℝ) := by
+    have : M < n + N := by omega
+    exact_mod_cast this
+  set m : ℕ := n + N with hm
+  have hm0 : (2 : ℝ) ≤ m := (hN2.trans (hmge n))
+  have hmpos : (0 : ℝ) < m := by linarith
+  have hmε : 8 < ε * m := by
+    have : 8 / ε < m := hM.trans hmM
+    rwa [div_lt_iff₀ hε, mul_comm] at this
+  set u : ℂ := e β / (m : ℂ) with hu
+  have hun : ‖u‖ = 1 / m := by rw [hu, norm_div, norm_e, Complex.norm_natCast]
+  have hu0 : u ≠ 0 := by
+    intro h; rw [h, norm_zero] at hun; have : (0:ℝ) < 1 / m := by positivity
+    linarith
+  have hwu : ‖z n - x - u‖ < 1 / (m : ℝ) ^ 2 := by
+    have := hzd n
+    rw [dist_eq_norm, show z n - (x + u) = z n - x - u by ring] at this
+    exact this
+  have hwu' : 1 / (m : ℝ) ^ 2 ≤ 1 / (2 * m) := by
+    rw [div_le_div_iff₀ (by positivity) (by positivity)]; nlinarith
+  have hwn : 1 / (2 * (m : ℝ)) ≤ ‖z n - x‖ := by
+    have h2 := norm_sub_norm_le u (z n - x)
+    rw [norm_sub_rev u (z n - x), hun] at h2
+    have : 1 / (m : ℝ) = 2 * (1 / (2 * m)) := by field_simp
+    linarith
+  have hw0 : z n - x ≠ 0 := by
+    intro h; rw [h, norm_zero] at hwn
+    have : (0 : ℝ) < 1 / (2 * (m : ℝ)) := by positivity
+    linarith
+  refine ⟨z n, ⟨hzI n, hn⟩, sub_ne_zero.mp hw0 |> fun h => h, ?_, ?_⟩
+  · rw [dist_eq_norm]
+    have h1 : ‖z n - x‖ ≤ ‖u‖ + ‖z n - x - u‖ := by
+      have := norm_add_le u (z n - x - u)
+      rw [show u + (z n - x - u) = z n - x by ring] at this; exact this
+    rw [hun] at h1
+    have : 1 / (m : ℝ) + 1 / (m : ℝ) ^ 2 ≤ 2 / m := by
+      rw [show 2 / (m : ℝ) = 1 / m + 1 / m by ring]
+      have : 1 / (m : ℝ) ^ 2 ≤ 1 / m := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]; nlinarith
+      linarith
+    have h2 : 2 / (m : ℝ) < ε := by
+      rw [div_lt_iff₀ hmpos]; nlinarith
+    linarith
+  · have hdir := norm_div_norm_sub_le hu0 hw0
+    have hub : u / (‖u‖ : ℂ) = e β := by
+      rw [hun, hu]
+      have : ((1 / (m : ℝ) : ℝ) : ℂ) = 1 / (m : ℂ) := by push_cast; rfl
+      rw [this]
+      have hmc : (m : ℂ) ≠ 0 := by exact_mod_cast hmpos.ne'
+      field_simp
+    rw [hub] at hdir
+    refine lt_of_le_of_lt hdir ?_
+    rw [hun, div_lt_iff₀ (by positivity)]
+    have : 2 * ‖z n - x - u‖ < 2 * (1 / (m : ℝ) ^ 2) := by linarith
+    have h3 : 2 * (1 / (m : ℝ) ^ 2) = ε * (1 / m) * (2 / (ε * m)) := by field_simp
+    have h4 : 2 / (ε * (m : ℝ)) < 1 := by rw [div_lt_one (by positivity)]; linarith
+    calc 2 * ‖z n - x - u‖ < 2 * (1 / (m : ℝ) ^ 2) := this
+      _ = ε * (1 / m) * (2 / (ε * m)) := h3
+      _ ≤ ε * (1 / m) := by
+        have : 0 ≤ ε * (1 / (m : ℝ)) := by positivity
+        nlinarith
 
 /-! ## The germ dichotomy -/
 
