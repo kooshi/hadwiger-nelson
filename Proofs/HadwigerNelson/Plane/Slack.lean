@@ -1695,6 +1695,27 @@ theorem exists_weakStar_subseq (g : ℕ → Fin k → ℂ → ℝ) (hg : ∀ m j
       (∀ j, ∀ᵐ x ∂volume, 0 ≤ F j x ∧ F j x ≤ 1) ∧ ∀ j, WeakStarTendsto (fun m => g (σ m) j) (F j) := by
   sorry
 
+/-- The convolution `u ⋆ κ` (in the form `x ↦ ∫ u(x + w) κ(w) dw`) of an a.e.-bounded measurable `u` with an integrable kernel:
+a.e.-strongly measurable, bounded by `‖κ‖₁` everywhere, and equal to `∫ u(y) κ(y − x) dy`. -/
+theorem conv_props {u : ℂ → ℝ} (hu : Measurable u) (hb : ∀ᵐ x ∂volume, |u x| ≤ 1) {κ : ℂ → ℝ} (hκ : Integrable κ) :
+    AEStronglyMeasurable (fun x => ∫ w, u (x + w) * κ w) volume ∧
+      (∀ x, |∫ w, u (x + w) * κ w| ≤ ∫ w, ‖κ w‖) ∧
+      ∀ x, ∫ w, u (x + w) * κ w = ∫ y, u y * κ (y - x) := by
+  refine ⟨?_, fun x => ?_, fun x => ?_⟩
+  · refine AEStronglyMeasurable.integral_prod_right' (f := fun p : ℂ × ℂ => u (p.1 + p.2) * κ p.2) ?_
+    exact (hu.comp measurable_add).aestronglyMeasurable.mul
+      (hκ.1.comp_quasiMeasurePreserving Measure.quasiMeasurePreserving_snd)
+  · rw [← Real.norm_eq_abs]
+    refine norm_integral_le_of_norm_le hκ.norm ?_
+    have hq : ∀ᵐ w ∂volume, |u (x + w)| ≤ 1 :=
+      (measurePreserving_add_left volume x).quasiMeasurePreserving.ae hb
+    filter_upwards [hq] with w hw
+    rw [norm_mul, Real.norm_eq_abs (u _)]
+    exact mul_le_of_le_one_left (norm_nonneg _) hw
+  · have := integral_add_left_eq_self (μ := volume) (fun y => u y * κ (y - x)) x
+    simp only [add_sub_cancel_left] at this
+    exact this
+
 /-- **Convolution forms with an integrable kernel are weak-* continuous on bounded families** (no decay needed — QB § 2.3:
 `g_m ∗ κ → F ∗ κ` pointwise and boundedly, then dominated convergence on the ball). -/
 theorem convForm_tendsto {g : ℕ → ℂ → ℝ} {F : ℂ → ℝ} (hg : ∀ m, Measurable (g m)) (hb : ∀ m x, |g m x| ≤ 1)
@@ -1702,7 +1723,71 @@ theorem convForm_tendsto {g : ℕ → ℂ → ℝ} {F : ℂ → ℝ} (hg : ∀ m
     (R : ℝ) :
     Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * ∫ w, g m (x + w) * κ w) atTop
       (𝓝 (∫ x in ball (0 : ℂ) R, F x * ∫ w, F (x + w) * κ w)) := by
-  sorry
+  set K := ∫ w, ‖κ w‖ with hK
+  set h : ℕ → ℂ → ℝ := fun m x => ∫ w, g m (x + w) * κ w with hh
+  set h0 : ℂ → ℝ := fun x => ∫ w, F (x + w) * κ w with hh0
+  have Pg := fun m => conv_props (hg m) (Eventually.of_forall (hb m)) hκ
+  have P0 := conv_props hFm hF hκ
+  have hBfin : volume (ball (0 : ℂ) R) ≠ ⊤ := measure_ball_lt_top.ne
+  set μB := volume.restrict (ball (0 : ℂ) R) with hμB
+  haveI : IsFiniteMeasure μB := ⟨by rw [hμB, Measure.restrict_apply_univ]; exact measure_ball_lt_top⟩
+  -- pointwise convergence of the convolutions
+  have hpt : ∀ x, Tendsto (fun m => h m x) atTop (𝓝 (h0 x)) := by
+    intro x
+    simp only [hh, hh0, (Pg _).2.2 x, P0.2.2 x]
+    exact hw _ (hκ.comp_sub_right x)
+  -- the bounded pieces are integrable on the ball
+  have hint : ∀ (a b : ℂ → ℝ), AEStronglyMeasurable a μB → AEStronglyMeasurable b μB → (∀ x, |a x| ≤ 1) →
+      (∀ x, |b x| ≤ 2 * K) → Integrable (fun x => a x * b x) μB := by
+    intro a b ha hb' ha1 hb1
+    refine Integrable.bdd_mul (c := 1) ?_ ha (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact ha1 x)
+    exact (integrable_const (2 * K)).mono' hb' (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hb1 x)
+  have hK0 : 0 ≤ K := integral_nonneg fun w => norm_nonneg _
+  have hbh : ∀ m x, |h m x| ≤ 2 * K := fun m x => ((Pg m).2.1 x).trans (by linarith)
+  have hbh0 : ∀ x, |h0 x| ≤ 2 * K := fun x => (P0.2.1 x).trans (by linarith)
+  have hdiff : Tendsto (fun m => ∫ x, |h m x - h0 x| ∂μB) atTop (𝓝 0) := by
+    have := tendsto_integral_of_dominated_convergence (μ := μB) (F := fun m x => |h m x - h0 x|) (f := fun _ => 0)
+      (fun _ => 4 * K) (fun m => ((Pg m).1.restrict.sub P0.1.restrict).norm) (integrable_const _)
+      (fun m => Eventually.of_forall fun x => by
+        rw [Real.norm_eq_abs, abs_abs]
+        calc |h m x - h0 x| ≤ |h m x| + |h0 x| := abs_sub _ _
+          _ ≤ 4 * K := by linarith [hbh m x, hbh0 x])
+      (Eventually.of_forall fun x => by
+        have := ((hpt x).sub_const (h0 x)).abs
+        simpa using this)
+    simpa using this
+  -- the cross term by weak-* convergence against `1_B h0`
+  have hcross : Tendsto (fun m => ∫ x, g m x * h0 x ∂μB) atTop (𝓝 (∫ x, F x * h0 x ∂μB)) := by
+    have hφ : Integrable ((ball (0 : ℂ) R).indicator h0) := by
+      refine (Measure.integrableOn_of_bounded hBfin P0.1 (M := 2 * K) (Eventually.of_forall fun x => ?_)).integrable_indicator
+        measurableSet_ball
+      rw [Real.norm_eq_abs]; exact hbh0 x
+    have e : ∀ u : ℂ → ℝ, ∫ x, u x * h0 x ∂μB = ∫ x, u x * (ball (0 : ℂ) R).indicator h0 x := by
+      intro u
+      rw [hμB, ← integral_indicator measurableSet_ball]
+      congr 1; ext x
+      by_cases hx : x ∈ ball (0 : ℂ) R <;> simp [hx]
+    simp_rw [e]
+    exact hw _ hφ
+  have hsplit : ∀ m, ∫ x, g m x * h m x ∂μB = ∫ x, g m x * (h m x - h0 x) ∂μB + ∫ x, g m x * h0 x ∂μB := by
+    intro m
+    rw [← integral_add]
+    · congr 1; ext x; ring
+    · exact hint _ _ (hg m).aestronglyMeasurable ((Pg m).1.restrict.sub P0.1.restrict) (hb m)
+        (fun x => (abs_sub _ _).trans (by linarith [hbh m x, hbh0 x, (Pg m).2.1 x, P0.2.1 x]))
+    · exact hint _ _ (hg m).aestronglyMeasurable P0.1.restrict (hb m) hbh0
+  have hsmall : Tendsto (fun m => ∫ x, g m x * (h m x - h0 x) ∂μB) atTop (𝓝 0) := by
+    refine squeeze_zero_norm (fun m => ?_) hdiff
+    refine norm_integral_le_of_norm_le ?_ (Eventually.of_forall fun x => ?_)
+    · exact (integrable_const (4 * K)).mono' ((Pg m).1.restrict.sub P0.1.restrict).norm
+        (Eventually.of_forall fun x => by
+          rw [Real.norm_eq_abs, abs_abs]
+          exact (abs_sub _ _).trans (by linarith [hbh m x, hbh0 x]))
+    · rw [norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+      exact mul_le_of_le_one_left (abs_nonneg _) (hb m x)
+  show Tendsto (fun m => ∫ x, g m x * h m x ∂μB) atTop (𝓝 (∫ x, F x * h0 x ∂μB))
+  simp_rw [hsplit]
+  simpa using hsmall.add hcross
 
 /-- The law of `e φ − e θ` under `arcLength ⊗ arcLength` is absolutely continuous (`twoCircle_preimage_null` at
 `r₁ = r₂ = 1`, `e φ − e θ = e φ + e (θ + π)`). Stated with its density, for `integral_circleAvg_sq`. -/
