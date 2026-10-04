@@ -42,7 +42,6 @@ put(1, P + "Closure", "FS129-SR2-CLOSURE")
 put(1, P + "DensityPoints", "FS111-V0-ID1", "FS129-SR2-HULLSET", "FS111-M-HULL2", "FS111-M2-INT")
 put(1, P + "UnitAvoiding", "FS111-M2-ZERO")
 put(1, P + "Chord", "FS116-V4-CHORD", "FS129-SR1-TWOCIRC", "FS121-D1-XCORNER")
-put(1, P + "RingBand", "FS129-SR1-RINGBAND")
 put(1, A + "NoAffine", "FS129-SA1-NOAFF-K")
 put(1, A + "FalconerFan", "FS129-SA1-FALC-FAN", "FS129-SA1-FALC-DICHO-K")
 # wave 2
@@ -61,6 +60,7 @@ put(2, A + "Dyadic", "FS129-SA1-SQRT3-LOCAL")
 put(3, P + "Tiles", "FS116-V5-NE1", "FS116-V4-DICHOTOMY", "FS116-V4-MEET", "FS116-V4-TWIST", "FS116-S1-CLUSTER",
     "FS129-OR1-WHOLE")
 put(3, P + "Lens", "FS116-S1-EXIT")
+put(3, P + "RingBand", "FS129-SR1-RINGBAND")
 put(3, P + "RingGerm", "FS116-N1-TWIST-D", "FS116-N1-GERM-R", "FS116-N1-ECHO", "FS116-N1-GERM-S", "FS116-N1-QFREE4",
     "FS129-SR2-TOUCHW", "FS116-RING-Q-PRIME-S", "FS116-N2-FIVERING", "FS129-SR1-SIXQ", "FS116-V5-U1",
     "FS116-Y4-FLANK")

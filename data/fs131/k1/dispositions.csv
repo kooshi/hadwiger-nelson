@@ -194,7 +194,7 @@ FS129-SA1-SQRT3-LOCAL,comps,formalize,,,2,Proofs/HadwigerNelson/Arith/Dyadic,,,,
 FS129-SR1-BENDANY,comps,formalize,,,9,Proofs/HadwigerNelson/Plane/Classes,,,,,
 FS129-OR1-QFREE-CLASS,comps,formalize,,,9,Proofs/HadwigerNelson/Plane/Classes,,,,,
 FS129-SR1-BENDLE3,comps,formalize,,,9,Proofs/HadwigerNelson/Plane/Classes,,,,,
-FS129-SR1-RINGBAND,comps,formalize,,,1,Proofs/HadwigerNelson/Plane/RingBand,,,,,
+FS129-SR1-RINGBAND,comps,formalize,,,3,Proofs/HadwigerNelson/Plane/RingBand,,,,,
 FS129-SR1-SIXQ,comps,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
 FS129-SR1-TWOCIRC,comps,formalize,,,1,Proofs/HadwigerNelson/Plane/Chord,,,,,
 FS129-SR2-CLOSURE,comps,formalize,,,1,Proofs/HadwigerNelson/Plane/Closure,,,,,
@@ -236,8 +236,8 @@ FS121-V2-VT-W,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,
 FS121-D1-PENCILWIN,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
 FS121-D2-PERFIN,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
 ASTRA-2026-09-14-T10,extras,excluded,,,,,,,,SA1 item 8: hypothesis empty over every F containing K with a usable prime of residue field F_11 or chi <= 4; its sentence is weaker than the Separated it means and false as read; FS-49 is not formalized here,plans/FS129-SA1-audit.md
-FS110-N2-RING,extras,merged into,FS129-SR1-RINGBAND,,1,Proofs/HadwigerNelson/Plane/RingBand,,,,SR1 item 8,plans/FS129-SR1-audit.md:550
-FS110-Y3-GP,extras,merged into,FS129-SR1-RINGBAND,,1,Proofs/HadwigerNelson/Plane/RingBand,,,,SR1 item 8,plans/FS129-SR1-audit.md:550
+FS110-N2-RING,extras,merged into,FS129-SR1-RINGBAND,,3,Proofs/HadwigerNelson/Plane/RingBand,,,,SR1 item 8,plans/FS129-SR1-audit.md:550
+FS110-Y3-GP,extras,merged into,FS129-SR1-RINGBAND,,3,Proofs/HadwigerNelson/Plane/RingBand,,,,SR1 item 8,plans/FS129-SR1-audit.md:550
 FS114-Y6-E2RED,extras,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Pinwheel,,,,"its chain clause only; the survivor clause read as 'no survivor at a single blade' (SR3 item 27, DNF-1)",plans/FS129-SR3-audit.md
 FS116-V1-FRAME,extras,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
 FS116-V6-ADJ,extras,merged into,FS129-SR3-OUTERADJ,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,,"SR3 item 26 (OUTERADJ in place of V6-ADJ; V6-ADJ's argument its last step, class-free); SR1's DNF list also names V6-ADJ",plans/FS129-SR3-audit.md

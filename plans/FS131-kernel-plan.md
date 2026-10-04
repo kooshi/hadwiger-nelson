@@ -303,3 +303,166 @@ its supplier:
 **Drafts for Keryx** (files I do not write): `CLAUDE.md` § Trust ledger, "1236 clean" → "1257 clean"; `CLAUDE.md` § The gate,
 `declarations=7438 refutations-skipped=313` → `declarations=7557 refutations-skipped=314` (sites line unchanged); the same two numbers in
 `scripts/vacuity-baseline.txt`'s header.
+
+## Stage 6 — SAVED: wave 1's skeleton (`debruijn-obligation-modeling`, invoked fresh)
+
+### 6.1 Where it is, and how the implementer works
+
+**Branch `fs131-w1`, head `3358a401`** (pushed to origin), seven modules, 14 rows, **28 `sorry` leaves**, building through `./scripts/build.sh`
+in the worktree (440 of 440 batches; the only warnings are the 28 `declaration uses 'sorry'`; `build/gate/build/20261004T050005Z-1179761.log`
+in the worktree). `Proofs.lean`, `ARCHITECTURE.md` § 3.11 (seven rows; `tools/check_architecture.py` exit 0, 189 rows, 0 mismatches) and
+`scripts/Axioms.lean` (28 records) are already updated on the branch, so the wave lands by fast-forward once the gate is green.
+
+FS129-SR1-RINGBAND moved from wave 1 to wave 3 at this stage (its circle-colouring lift is ring vocabulary; nothing in wave 1 consumes it); the
+CSV and checker are re-run green (wave 1: 14 formalize rows).
+
+**The worktree recipe** (Keryx's word, Kooshi's this session: "use symlinks to avoid full rebuilds as we've done before";
+`plans/CRUNCH-2026-09-25-queue.md` § 1.6). The wave-1 worktree already exists at
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w1` (branch `fs131-w1`); for any later wave:
+```bash
+cd /home/kooshi/source/lean-dir
+git worktree add -b fs131-wN .claude/worktrees/fs131-wN main
+mkdir -p .claude/worktrees/fs131-wN/.lake
+ln -s /home/kooshi/source/lean-dir/.lake/packages .claude/worktrees/fs131-wN/.lake/packages
+cp -a /home/kooshi/source/lean-dir/.lake/build .claude/worktrees/fs131-wN/.lake/build     # 4.4 GB, ~20 s
+```
+**Never symlink `.lake/build`** into a tree that compiles: two trees writing one build race on the same `.olean` paths, and the corruption looks like a
+proof failure. **One Lean build at a time across all trees**, always the worktree's own `./scripts/build.sh` under
+`/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` (run from inside the worktree). For
+iteration, `lake env lean <file>` in the worktree, never as evidence. The wave lands when the full gate is green on one commit in the worktree
+(build with zero warnings, `scripts/axioms.sh` clean — the 28 records must read the standard three —, `scripts/vacuity.sh` and `--self-test`
+green, `tools/check_architecture.py` exit 0); then `main` is merged into the branch (resolve the append-only lines of `ARCHITECTURE.md`,
+`Proofs.lean`, `scripts/Axioms.lean`), the gate re-run, and the branch fast-forwarded onto `main`.
+
+**The implementer may**: add lemmas (children) anywhere in the wave's modules, add supporting lemmas to the foundation modules
+(`Plane/UnitPairs` is where `measurableSet_unitPairSet` belongs), change imports (updating `ARCHITECTURE.md`'s Imports cell), and import
+library modules such as `FanGap` (row 66's `pullbackRepaint`). **It may not** change any statement below; a needed change comes back through Keryx.
+
+### 6.2 The read-backs (each formal statement against its row)
+
+| row | declaration (module) | read-back |
+|---|---|---|
+| FS111-V0-ID1 | `AeColouring.dist_ne_one` (DensityPoints); its engine `dist_ne_one_of_mem_densitySet` | Row: "if y ∈ S̃_j and d̄_j(x) > 0 then \|x − y\| ≠ 1", every a.e.-proper measurable colouring. Formal: for `c : AeColouring k`, `y ∈ densitySet (c.col⁻¹ {j})`, `0 < upperDensityAt (c.col⁻¹ {j}) x` ⟹ `dist x y ≠ 1`. `S̃_j` = density-1 points (closed balls); `d̄_j` = upper density. **Same statement.** The engine is the set form (one measurable set with null unit pairs), which HULLSET's `uses only:` names as the argument's real class |
+| FS129-SR2-HULLSET | `hullset`, `hullset_of_isCompact` (DensityPoints) | Row: measurable `A`, null unit pairs, `C ⊆ Ã` path-connected, `x ∈ A*` ⟹ all `< 1` or all `> 1`; compact `C` ⟹ `sup < 1` or `dist(x, C) > 1`. Formal: same, with **`IsPreconnected C` in place of path-connected** (weaker hypothesis — a generalization, reported), and the compact clause as `∃ r < 1, ∀ c, dist ≤ r` or `∃ r > 1, ∀ c, r ≤ dist`, equivalent to the row's for nonempty compact `C` and free of `Metric.infDist`'s junk value at `∅` |
+| FS111-C-HULL (merged) | carried by `hullset` | C-HULL's colouring/tight/D-NF hypotheses are dropped per SR2 item 10 |
+| FS111-M-HULL2 | `hull2` (DensityPoints) | Row: "two path-connected pieces of one class of an a.e.-proper colouring have all cross distances < 1 or all > 1"; `uses only:` C-HULL's first clause at each point of one piece, path-connectedness of the other. Formal: `P ⊆ {d̄_A > 0}`, `Q ⊆ Ã`, both preconnected ⟹ all `< 1` or all `> 1`. A piece of a class's density set satisfies both inclusions (density 1 ⟹ positive upper density, `upperDensityAt_pos_of_mem_densitySet`), so the row is the case `P, Q ⊆ Ã`; preconnected widens path-connected (reported) |
+| FS111-M2-INT | `dist_ne_one_of_mem_interior_densitySet` (DensityPoints) | Row: "for every a.e. unit-avoiding A, int Ã contains no point at distance exactly 1 from cl Ã". Formal: measurable `A` with `UnitPairsNull A`, `x ∈ interior (densitySet A)`, `y ∈ closure (densitySet A)` ⟹ `dist x y ≠ 1`. **Measurability added** — the row's "A" is a measurable set throughout FS-111 (`D-NF`'s classes); its not-claimed line (the support's interior) is not claimed here either |
+| FS129-SR2-CLOSURE | `dist_ne_one_of_mem_of_mem_closure` (Closure) | Row: `U` open, `(Leb ⊗ σ){(x, w) ∈ U × S¹ : x + w ∈ U} = 0` ⟹ no point of `U` at distance exactly `1` from a point of `cl U`. Formal: `IsOpen U`, `UnitPairsNull U`, `x ∈ U`, `y ∈ closure U` ⟹ `dist x y ≠ 1`. **Same statement** (`UnitPairsNull` is the row's null set in the angle parametrization of `σ`) |
+| FS106-DIAM | `dist_lt_one_of_forall_dist_ne_one` (i), `dist_lt_one_of_closure_inter_nonempty` (ii) (Diameter) | Row (i): "a connected set with no two points at distance 1 has diameter ≤ 1". Formal: preconnected `S`, no two points at distance `1` ⟹ every two points at distance `< 1` — **stronger** (pointwise strict; the argument gives it; diameter stated pointwise because `Metric.diam` is `0` on unbounded sets). Row (ii): "two same-colour regions whose closures meet have union of diameter ≤ 1" — regions of an almost-everywhere-proper map; formal: `U, V` open preconnected, `UnitPairsNull (U ∪ V)` (same colour, a.e.-proper), closures meet ⟹ all distances in `U ∪ V` below `1`. (iii) is CLOSURE's |
+| FS106-TS-C | `dist_lt_one_of_chain` (Diameter) | Row: "a chain of same-colour regions of an almost-everywhere-proper map whose closures meet in sequence has diameter ≤ 1". Formal: `U : Fin (n+1) → Set ℂ` open preconnected, `UnitPairsNull (⋃ U i)`, `cl U i ∩ cl U (i+1) ≠ ∅` ⟹ all distances in `⋃ U i` below `1` (pointwise strict). The regions' union, not the closures', carries the conclusion — two closure points may be exactly `1` apart (CLOSURE's not-claimed line) |
+| FS111-M2-ZERO | `unitPairsNull_iff_ae_phi_eq_zero`, `isMUA_iff_ae_phi_pos`, `isMUA_iff_ae_eq` (UnitAvoiding) | Row: "a measurable A is a MUA set iff A = {φ_A = 0} a.e.; unit-avoiding is φ_A = 0 a.e. on A, maximal is φ_A > 0 a.e. off A". Formal: the three clauses, `φ_A(p) = arcLength {θ \| p + e θ ∈ A}` (`= σ{w ∈ S¹ : p + w ∈ A}`); MUA = measurable, null unit pairs, maximal up to null sets (`A ≤ᵐ B ⟹ B ≤ᵐ A` for every measurable `B` with null unit pairs). The maximal half assumes null unit pairs, as the row's "maximal is …" reads it |
+| FS116-V4-CHORD | `ringPt_sub_ringPt`, `dist_ringPt_ringPt`, `dist_ringPt_ringPt_cmp_one` (Chord) | Row: distance `2 sin(δ/2)` at `δ = \|α − β\| ∈ [0°, 180°]`; `= 1` at 60°, `< 1` below, `> 1` above up to 180°; the chord from `r(α)` to `r(β)` points along `(α + β)/2 + 90°` for `β > α`. Formal: the same three, the direction clause as the exact vector identity `r(β) − r(α) = 2 sin((β − α)/2) e((α + β)/2 + π/2)` (which is the row's clause wherever `sin((β − α)/2) > 0`, i.e. `0 < β − α < 2π`) |
+| FS129-SR1-TWOCIRC | `twoCirc_identity`, `twoCirc_cmp_one`, `exists_sign_of_equilateral` (Chord) | Row: `\|y₀ − y₁\| = \|p − y₀\| = \|p − y₁\| = 1`, `a(s)` from `y₁` turning `s` about `y₀` toward `p`, `b(t)` from `y₀` turning `t` about `y₁` toward `p`; the identity and the three regimes for `0 < s, t < 180°`. Formal: "toward `p`" is the turning sense `σ = ±1` with `p = y₀ + (y₁ − y₀) e(σπ/3)`, so `a(s) = y₀ + (y₁ − y₀) e(σ s)`, `b(t) = y₁ + (y₀ − y₁) e(−σ t)` (the `uses only:` frame `a(s) = y₀ + e(120° + s)`, `b(t) = y₁ + e(300° − t)` is `σ = 1` at `y₀ = e(0°)`, `y₁ = e(60°)`); `exists_sign_of_equilateral` shows every `p` the row allows has such a `σ`. Checked numerically on 4,000 random configurations (both signs, both forms of the identity): 0 mismatches |
+| FS121-D1-XCORNER | `xcorner` (Chord) | Row: at a convex corner `z` of angle `θ ∈ (0, π)` with straight edges, the inner unit parallels meet at distance `1/sin(θ/2)` on the bisector, the image of the points at distance `cot(θ/2)` along each edge. Formal: edges along `e(φ)`, `e(φ + θ)`, inner normals `e(φ + π/2)`, `e(φ + θ − π/2)`; the parallels `z + s e(φ) + e(φ + π/2)` and `z + t e(φ + θ) + e(φ + θ − π/2)` coincide iff `s = t = cot(θ/2)`, and the common point is `z + (1/sin(θ/2)) e(φ + θ/2)`. Checked numerically (2,000 random corners) |
+| FS129-SA1-NOAFF-K | `noAffine` (Arith/NoAffine) | Row: `k ≥ 2`, `ρ : G → T` a homomorphism, `φ_v : Fin k → ℝ` finitely supported, `Σ φ_v(C(v)) = b` on every proper `k`-colouring of `G` ⟹ `φ_u` constant where some proper `k`-colouring of `T` leaves a colour absent from `N_T[ρ(u)]`; all constant and `b` their sum if every vertex of `T` has one. Formal: the same; "finitely supported" is `(Function.support φ).Finite` (`φ v ≠ 0` as a function), the sum is `∑ᶠ`, "absent from `N_T[w]`" is `∀ x, x = w ∨ T.Adj w x → C' x ≠ γ`, and "the sum of their values" is `∑ᶠ v, φ v 0` |
+| FS84-S1-S1e (merged) | carried by `noAffine` | SA1 item 1 |
+| FS129-SA1-FALC-FAN | `FalconerFan`, `falconerFan_hom` (Arith/FalconerFan) | Row: `k ≥ 3`, `H` finite, `a ≠ t` non-adjacent forming a Falconer fan at `k` colours; (A) and (B). Formal: `FalconerFan H k a t` is the row's definition verbatim (`H − a` the induced subgraph on `{v ≠ a}`); (A) and (B) as stated, the `(k − 1)`-colourings valued in `Fin (k − 1)`. **Finiteness of `H` dropped** (no step reads it — reported). Inhabitant `rhombus_falconerFan` (the unit rhombus at four colours, the row's not-claimed line names it) |
+| FS129-SA1-FALC-DICHO-K | `falconerFan_chromaticNumber` (Arith/FalconerFan) | Row: `χ(H) ≥ k − 1`, and if `χ(H) = k − 1` every proper `(k − 1)`-colouring gives `a, t` one colour. Formal: `(k − 1 : ℕ∞) ≤ χ(H)` and, **unconditionally**, every proper `(k − 1)`-colouring gives `a, t` one colour — stronger: the hypothesis `χ(H) = k − 1` is idle (a `(k − 1)`-colouring exists only when `χ(H) ≤ k − 1`) |
+
+**Statement findings from the read-backs** (sent to Keryx with this stage, none a defect): **G1** HULLSET and HULL2 hold for preconnected pieces,
+not only path-connected; **G2** FS106-DIAM (i), (ii) and TS-C give the strict bound pointwise (`< 1` between every two points), stronger than
+"diameter ≤ 1"; **G3** FALC-FAN and DICHO-K need no finiteness of `H`; **G4** DICHO-K's second clause holds with no hypothesis on `χ(H)`.
+**One definitional note** (not a defect): every "diameter ≤ 1" of the rows must be read pointwise in Lean, because `Metric.diam` is `0` on an
+unbounded set — a formal statement through `diam` would be true of unbounded sets for the wrong reason.
+
+### 6.3 The plan per leaf (Mathlib names confirmed with `#check` at the pin, `v4.32.0`, in a scratch file 2026-10-04)
+
+Confirmed: `IsPreconnected.image`, `IsPreconnected.Icc_subset`, `IsPreconnected.subset_closure`, `IsPreconnected.union`, `Continuous.dist`,
+`Besicovitch.ae_tendsto_measure_inter_div`, `MeasureTheory.Measure.prod_apply`, `MeasureTheory.Measure.measure_prod_null`,
+`MeasureTheory.Measure.measurePreserving_swap`, `measurable_measure_prodMk_left`, `IsCompact.exists_isMinOn`, `IsCompact.exists_isMaxOn`,
+`interior_maximal`, `closure_mono`, `Metric.mem_closure_iff`, `Real.sin_pos_of_pos_of_lt_pi`, `Real.strictMonoOn_sin`, `Real.cos_sq`,
+`Real.sin_sq`, `Real.cos_two_mul`, `Real.sin_two_mul`, `Real.cos_sub_cos`, `Real.cot_eq_cos_div_sin`, `Complex.exp_sub`,
+`Complex.norm_exp_ofReal_mul_I`, `SimpleGraph.Coloring`, `SimpleGraph.Coloring.mk`, `SimpleGraph.Coloring.valid`, `SimpleGraph.Hom.comp`,
+`SimpleGraph.chromaticNumber_le_iff_colorable`, `SimpleGraph.Colorable.chromaticNumber_le`, `SimpleGraph.induce`, `SimpleGraph.completeGraph`,
+`finsum_eq_sum_of_support_subset`, `Equiv.swap_apply_left`, `Function.update_apply`, `Fin.castLE`. (Unknown at the pin, so not to be cited:
+`measure_prod_null` outside `Measure`, `Real.cos_sq_half`, `Real.sin_sq_half`.)
+
+Leaves in dependency order (a leaf's children are lemmas the implementer adds; difficulty E easy, M moderate, H hard):
+
+**`Plane/DensityPoints`**
+1. `dist_ne_one_of_mem_densitySet` — **H, the wave's hardest leaf.** Contrapositive: `|x − y| = 1`, `y − x = e θ₀`. From `0 < d̄_A(x)` take
+   `δ > 0` and radii `r → 0` with `|A ∩ B̄(x, r)| ≥ δ|B̄(x, r)|` (frequently, from `limsup`); from `y ∈ Ã`, eventually `|B̄(y, 2r) ∖ A| ≤ η|B̄(y, 2r)|`.
+   For `x' ∈ B̄(x, r)` and `θ` in a one-sided interval of length `r` at `θ₀` inside `[0, 2π)` (take `[θ₀, θ₀ + r]` if `θ₀ ≤ π`, else `[θ₀ − r, θ₀]`),
+   `x' + e θ ∈ B̄(y, 2r)` (`|e θ − e θ₀| ≤ |θ − θ₀|`). By Tonelli in `θ` and translation invariance of `volume`, the unit pairs inside
+   `B̄(x, r) × I` have measure at least `r(δπr² − η·4πr²) > 0` once `η < δ/4`. Children: `measurableSet_unitPairSet` (in `Plane/UnitPairs`),
+   `unitPairsNull_iff_lintegral` (Tonelli: `Measure.prod_apply` after `Measure.measurePreserving_swap`), `frequently_densityRatio_gt`,
+   `eventually_densityRatio_gt`, `norm_e_sub_e_le` (`|e θ − e θ₀| ≤ |θ − θ₀|`, from `ringPt_sub_ringPt` and `|sin u| ≤ |u|`). Hard: the ENNReal
+   bookkeeping and `Complex.volume_closedBall`-style constants; nothing conceptual.
+2. `AeColouring.dist_ne_one` — **E**: leaf 1 at `A = c.col ⁻¹' {j}` (`c.measurable (measurableSet_singleton j)`, `c.unitPairsNull j`).
+3. `upperDensityAt_pos_of_mem_densitySet` — **E**: `Tendsto.limsup_eq` gives `d̄ = 1`.
+4. `hullset` — **E**: `f = dist x ·` is continuous; `f '' C` preconnected (`IsPreconnected.image`); `1 ∉ f '' C` by leaf 1; values on both sides of
+   `1` would put `1` in `f '' C` (`IsPreconnected.Icc_subset`).
+5. `hullset_of_isCompact` — **E**: leaf 4, then `IsCompact.exists_isMaxOn` / `exists_isMinOn` of `dist x ·` (empty `C`: any `r`).
+6. `hull2` — **E–M**: empty cases trivial; fix `q₀ ∈ Q`; `dist · q₀` never equals `1` on `P` (leaf 1, `x := p`, `y := q₀`), so `P` is all near or
+   all far from `q₀`; at each `p`, leaf 4 (`C := Q`) gives near-all or far-all, and the side is the one `q₀` lies on.
+7. `dist_ne_one_of_mem_interior_densitySet` — **M**: `B(x, r) ⊆ Ã`; `y' ∈ Ã` with `|y − y'| < r/2` (`Metric.mem_closure_iff`); the point
+   `x' = y' + (x − y')/|x − y'|` on `ω(y')` has `|x' − x| = \|1 − |x − y'|\| < r/2`, so `x' ∈ Ã`, `d̄_A(x') > 0` (leaf 3) and `|x' − y'| = 1`,
+   against leaf 1. Child: `exists_mem_sphere_near`.
+
+**`Plane/Closure`**
+8. `subset_densitySet_of_isOpen` — **E**: `ball x ε ⊆ U`; for `r < ε`, `U ∩ B̄(x, r) = B̄(x, r)`, ratio `1` (`densityRatio_univ`'s proof).
+9. `dist_ne_one_of_mem_of_mem_closure` — **E**: leaf 7 at `A = U` (`hU.measurableSet`), `x ∈ interior Ũ` by `interior_maximal`, `y ∈ closure Ũ` by
+   `closure_mono`.
+
+**`Plane/Diameter`**
+10. `dist_lt_one_of_isPreconnected` — **E**: `dist x ''  S` is a preconnected set of reals containing a value `< 1` and missing `1`.
+11. `dist_lt_one_of_forall_dist_ne_one` — **E**: leaf 10 with `s₀ = x`.
+12. `dist_lt_one_of_chain` — **M**: fix `x ∈ U j₀`; claim every `U i` lies within `< 1` of `x`, by induction outward from `j₀` in both directions.
+    Step (`chain_step`): if `U i` is within `< 1` of `x` and `z ∈ cl U i ∩ cl U i'`, then `dist x z ≤ 1` (closure of a strict bound) and `≠ 1`
+    (leaf 9: `x ∈ ⋃ U`, open, `z ∈ cl ⋃ U`), so `< 1`; `insert z (U i')` is preconnected (`IsPreconnected.subset_closure`) and misses distance `1`
+    from `x` (leaf 9 again), so leaf 10 at `s₀ = z`. Hard: only the `Fin` bookkeeping (`Fin.induction` upward from `j₀`, `Fin.reverseInduction`
+    downward).
+13. `dist_lt_one_of_closure_inter_nonempty` — **E**: leaf 12 at `n = 1` with `![U, V]`.
+
+**`Plane/UnitAvoiding`**
+14. `phi_univ` — **E**: `arcLength univ` (the foundation's spec example).
+15. `unitPairsNull_iff_ae_phi_eq_zero` — **M**: Tonelli, `(volume ⊗ arcLength)(unitPairSet A) = ∫⁻ x in A, φ_A x`
+    (`Measure.prod_apply`, the slice at `x` is `{θ | x + e θ ∈ A}` on `A` and `∅` off it), then `lintegral_eq_zero_iff` with `measurable_phi`
+    (`measurable_measure_prodMk_left`). Children: `measurableSet_unitPairSet`, `measurable_phi`.
+16. `isMUA_iff_ae_phi_pos` — **H**. (⇐) for `B ⊇ A` a.e. with null unit pairs, the pairs `(B ∖ A) → A` are pairs of `B`, so `φ_A = 0` a.e. on
+    `B ∖ A`, hence `|B ∖ A| = 0`. (⇒) if `E = {p ∉ A | φ_A(p) = 0}` has positive measure, a disc `D` of radius `1/3` has `|E ∩ D| > 0` (cover `ℂ`
+    by countably many such discs); `B = A ∪ (E ∩ D)` has null unit pairs — `A → E ∩ D` null by the **pair symmetry** (child
+    `unitPairs_comm`: `(Leb ⊗ σ){x ∈ S, x + w ∈ T} = (Leb ⊗ σ){x ∈ T, x + w ∈ S}`, by translation in `x` for each `θ` and the shift `θ ↦ θ + π`
+    of a `2π`-periodic integrand over `[0, 2π)`), `E ∩ D → A` null by the choice of `E`, `E ∩ D` has no pairs at all (`unitPairsNull_of_dist_lt_one`) —
+    so maximality gives `|E ∩ D| = 0`. Hard: the periodic shift on `[0, 2π)` (search Mathlib for the periodic set-lintegral lemma at
+    implementation; the fallback is splitting `[0, 2π)` at `π`).
+17. `isMUA_iff_ae_eq` — **M**: `A =ᵐ {φ_A = 0}` is "`φ_A = 0` a.e. on `A`" and "`φ_A ≠ 0` a.e. off `A`" (`ae_eq_set`), then leaves 15, 16.
+
+**`Plane/Chord`**
+18. `ringPt_sub_ringPt` — **E**: coordinates (`e_eq`, `Complex.ext`) and `Real.cos_sub_cos`, `Real.sin_sub_sin`, or `e_add` with
+    `e x − e (−x) = 2i sin x`.
+19. `dist_ringPt_ringPt` — **E**: leaf 18, `‖e _‖ = 1`, `|sin((β − α)/2)| = sin(|α − β|/2)` for `|α − β| ≤ π`.
+20. `dist_ringPt_ringPt_cmp_one` — **E**: `Real.strictMonoOn_sin` on `[0, π/2]` and `Real.sin_pi_div_six`.
+21. `twoCirc_identity` — **M**: `y₁ − y₀ = e φ₀`, so `a − b = e φ₀ (−1 + e(σ s) + e(−σ t))`; `‖−1 + e u + e v‖² = 3 − 2cos u − 2cos v + 2cos(u − v)`;
+    with `σ² = 1`, `cos(σ s) = cos s`, `u − v = σ(s + t)`; then the two closed forms by `Real.cos_add`, `Real.cos_two_mul`, `Real.sin_two_mul` at the
+    half angles (`s = 2·(s/2)`), closed by `ring`/`nlinarith`.
+22. `twoCirc_cmp_one` — **E**: sign of `−8 sin(s/2) sin(t/2) cos((s + t)/2)` with `s/2, t/2 ∈ (0, π/2)`; `dist = ‖·‖`, compare squares.
+23. `exists_sign_of_equilateral` — **M**: `w = (p − y₀)/(y₁ − y₀)` has `|w| = |w − 1| = 1`, so `Re w = 1/2`, `(Im w)² = 3/4`, `w = e(±π/3)`.
+24. `xcorner` — **M**: multiply by `e(−φ)` to reduce to `φ = 0`; the real and imaginary parts give a 2×2 linear system with determinant `sin θ ≠ 0`;
+    `cot(θ/2) = (1 + cos θ)/sin θ`; the common point by `e(θ/2)` algebra (`cot c cos c + sin c = 1/sin c`).
+
+**`Arith/NoAffine`**
+25. `noAffine` — **M**: at `u` with gap `γ` in `C'`, for each permutation `π` of `Fin k`, `π ∘ C' ∘ ρ` and its repaint at `u` with `π γ` are proper
+    colourings of `G` (`u`'s neighbours map into `N_T(ρ u)`, which `C'` keeps off `γ`); they differ only at `u`, so `φ_u(π(C'(ρ u))) = φ_u(π γ)`;
+    `(C'(ρ u), γ)` is an ordered pair of distinct colours and `π` reaches any target pair (`Equiv.swap` composites). Second clause: constancy at
+    every vertex, then `b` from one colouring (`C' ∘ ρ`; if `V` is empty, `b = 0 =` the empty sum). Children: `repaint` (`Coloring.mk` with
+    `Function.update`), `finsum_update` (via `finsum_eq_sum_of_support_subset`), `exists_perm_pair`. `FanGap.pullbackRepaint` may be reused.
+
+**`Arith/FalconerFan`**
+26. `rhombus_falconerFan` — **E**: `0 ≠ 3`, `¬ rhombus.Adj 0 3` by `decide` after `SimpleGraph.fromRel_adj`; the fan condition reduces to five
+    values in `Fin 4` (`C 1, C 2, C 3, c₁, c₂`) under the triangle's three inequalities and the four avoidances — `revert` them and `decide`
+    (1,024 cases).
+27. `falconerFan_hom` — **M**: (A) restrict `C ∘ ρ` to `H − a` (`Coloring.mk`), apply the fan with `{c₁, c₂} = {C(ρ a), γ}` (distinct: `γ` is absent at
+    `ρ a` itself); the second part of (A) repaints `t` with `δ` (legal: `t ∉ N(a)`, and `ρ(N(t)) ⊆ N_T(ρ t)` avoids `δ`). (B) read a
+    `(k − 1)`-colouring as a `k`-colouring through `Fin.castLE` whose top colour is absent everywhere; (A) with `γ` = the top colour gives
+    `C(ρ t) = C(ρ a)`, and a colour absent from `N_T[ρ t]` would equal `C(ρ a) = C(ρ t)`, absent at `ρ t` itself — contradiction.
+28. `falconerFan_chromaticNumber` — **M**: if `H` were `m`-colourable with `m ≤ k − 2`, its colouring is a homomorphism to `⊤` on `Fin m`
+    (`SimpleGraph.Coloring` is `G →g ⊤`); `Fin.castLE` is a proper `(k − 1)`-colouring of `⊤` leaving colour `k − 2` absent everywhere, against
+    leaf 27 (B). The second clause is leaf 27 (B) at `T = H`, `ρ = id`.
+
+**Price** (re-price from the first two leaves, `CLAUDE.md` § What compute actually helps): leaves 1 and 16 are the only hard ones; the other 26 are
+easy or moderate. My estimate, to be scored: the wave lands in one implementer session of about 300–450k (harness count).
+
+**Inhabitants and vacuity.** Structures taken as hypotheses: `AeColouring` (leaf 2; inhabitant noted in `Plane/AeColouring`, FS111-W-SQ9 in wave 2),
+`FalconerFan` (leaves 27–28; `rhombus_falconerFan`). The set hypotheses (`UnitPairsNull`, density) are inhabited by the foundation's examples
+(`B(0, 1/3)`). No wave-1 statement quantifies over a class the backlog proves empty.
