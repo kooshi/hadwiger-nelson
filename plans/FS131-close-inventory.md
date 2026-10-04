@@ -2024,3 +2024,25 @@ reason by the close.*
      = 4.
 275. **Kooshi, 2026-10-04 (verbatim)**, after wave 2's landing notification: *"I just saw the notification and got caught up. Great work so far! You and every
      agent. I'm very grateful."* Recorded here for every job of this milestone (credit goes in the inventory, never in a message to a finished agent).
+276. **FS131-KP mid-job: its choice for `IsHoleOf`, sent before the change** (message, 2026-10-04). The definition: `Hc.Nonempty ∧ Hc ⊆ (closure T)ᶜ ∧
+     Bornology.IsBounded Hc ∧ Disjoint (closure Hc) (closure ((closure T)ᶜ \ Hc))` — a nonempty bounded part of the complement of `T`'s closure whose closure
+     misses the closure of the rest; so `Hc` is open and a union of whole clusters of complementary components (chained by touching closures) not containing the
+     unbounded one; a hole need not be a single cluster (no consumer needs it). **Bound both ways** (QA3's note f): every CVB hole is counted, item 242's touching
+     pair of discs included (I5b's repair counted neither, which would make `cvb_pinch_connected` false); I5b's chain is not a hole (any separated part holding
+     `D₁` holds `D₂`, then the unbounded component). "No hole" is then "the complementary components, joined when their closures touch, form one connected
+     graph". **Finding**: CVB's "a boundary component of `x` disjoint from its outer one" assumes its frame (every arc separates two colours); `ArcMap` allows
+     phantom arcs, and an annulus tile cut by a phantom radial slit has connected `∂T` yet disconnects `M` when removed — so the faithful definition reads the
+     complement of `cl T`, not the components of `∂T`. **Statements changed: none.** One proof needs its last lines rewritten: `exists_holed_valid_fragment`
+     (statement unchanged), outside KP's touches. Inhabitant: `holedFrag`'s annulus with the disc `|z| < 1/4`; adversary: I5b's chain as a plane-set example.
+     **Re-priced**: `cvb_pinch_connected` and `cvb_hole_disconnected` need no Jordan-type theorem under this definition — local facts already held
+     (`finite_tiles_near`, `dense_interiorPts`, tile diameter at most 1) plus one lemma (inside an open connected set, tiles are joined by chains of tiles whose
+     closures meet): M each, not H. Credit: KP, for the definition and the phantom-slit case.
+277. **Ruling on item 276: adopt KP's `IsHoleOf`; KP may rewrite `exists_holed_valid_fragment`'s proof.** Choice: the separated-part definition as sent; KP's
+     touches gain `exists_holed_valid_fragment`'s proof (statement unchanged). Alternatives weighed: I5b's repair (the last clause over every other component),
+     which misses touching clusters (item 242's fear, confirmed); a definition by the boundary components of `cl T`, CVB's own words, which phantom slits break.
+     Why: it is bound both ways as QA3 required, changes no statement, survives `ArcMap`'s phantom arcs, and turns two H leaves into M. Keryx's check of the
+     hole clause, one step: a tile other than `T` is open and disjoint from `T`, so it lies in `(cl T)ᶜ`, in one component, hence inside `Hc` or inside its
+     complement, and two tiles on opposite sides have disjoint closures — so no edge of `M − T` crosses a hole, as `cvb_hole_disconnected` needs. Confidence:
+     medium-high — what would change it: infinitely many complementary components making "no separated bounded part" weaker than "the cluster graph is
+     connected", which `cvb_pinch_connected`'s plan must then handle through the separation directly. CVB's frame note (phantom arcs) goes to the errata at the
+     filing.

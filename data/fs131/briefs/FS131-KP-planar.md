@@ -108,3 +108,15 @@ coordinator can only review work it knows exists).
   ./scripts/build.sh`; never `lake build`. Up to two such builds from different worktrees may run at once when the slot admits them; four agents are building,
   so on exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only.
 - **Nothing with a `sorry` reaches `main`**: your branch merges into `fs131-w5` when I say so, and lands with wave 5 after wave 4.
+
+
+## Amendment, 2026-10-04 — `IsHoleOf` adopted (inventory items 276–277)
+
+Your choice is logged as item 276 and ruled in item 277, whose first line is:
+
+> 277. **Ruling on item 276: adopt KP's `IsHoleOf`; KP may rewrite `exists_holed_valid_fragment`'s proof.** Choice: the separated-part definition as sent; KP's
+> — source: plans/FS131-close-inventory.md
+
+Your touches gain the proof of `exists_holed_valid_fragment` in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5p/Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean`
+(statement unchanged). You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows
+exists).
