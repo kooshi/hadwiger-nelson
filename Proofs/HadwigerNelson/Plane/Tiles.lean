@@ -246,31 +246,100 @@ theorem Valid.wholeRestrict (hF : F.Valid) (p : ℂ) (ρ : ℝ) : (F.wholeRestri
   have hy' : y ∈ F.interiorPts := ⟨(F.wholeRestrict p ρ).interiorPts_subset_dom hy |>.1, hy.2⟩
   exact hF x hx' y hy' hxy
 
+/-- The interior points of `F_ρ`: those of `F` inside the interior of the union of the closures of the tiles meeting
+`B(p, ρ)`. -/
+theorem wholeRestrict_interiorPts (p : ℂ) (ρ : ℝ) :
+    (F.wholeRestrict p ρ).interiorPts =
+      F.interiorPts ∩ interior (⋃₀ {S | ∃ T, F.IsTile T ∧ (T ∩ ball p ρ).Nonempty ∧ S = closure T}) := by
+  ext x
+  simp only [interiorPts, wholeRestrict, restrict, wholeDom, Set.mem_sdiff, mem_inter_iff]
+  tauto
+
 /-- **FS129-OR1-WHOLE**, the disc: if `F` covers `B̄(p, r)` and `ρ ≤ r`, then `F_ρ` covers `B̄(p, ρ')` for every `ρ' < ρ`
 (finitely many tiles meet a small disc about each point, `finite_tiles_near`). -/
 theorem wholeRestrict_covers {p : ℂ} {r ρ ρ' : ℝ} (hr : F.Covers p r) (hρ : ρ ≤ r) (hρ' : ρ' < ρ) :
     (F.wholeRestrict p ρ).Covers p ρ' := by
-  sorry
+  intro y hy
+  have hyb : y ∈ ball p ρ := by
+    rw [mem_ball]; exact lt_of_le_of_lt (mem_closedBall.mp hy) hρ'
+  have hball : ball p ρ ⊆ ⋃₀ {S | ∃ T, F.IsTile T ∧ (T ∩ ball p ρ).Nonempty ∧ S = closure T} := by
+    intro z hz
+    obtain ⟨T, hT, hzT⟩ := F.mem_closure_tile
+      (hr ((ball_subset_closedBall.trans (closedBall_subset_closedBall hρ)) hz))
+    refine ⟨closure T, ⟨T, hT, ?_, rfl⟩, hzT⟩
+    obtain ⟨w, hw, hwT⟩ := mem_closure_iff.mp hzT (ball p ρ) isOpen_ball hz
+    exact ⟨w, hwT, hw⟩
+  exact ⟨hr (closedBall_subset_closedBall (hρ'.le.trans hρ) hy),
+    interior_maximal hball isOpen_ball hyb⟩
 
 /-- **FS129-OR1-WHOLE**, the tiles: the tiles of `F_ρ` are exactly the tiles of `F` meeting `B(p, ρ)` (the same sets, so
 the same closures and the same colours). -/
 theorem isTile_wholeRestrict_iff {p : ℂ} {ρ : ℝ} {T : Set ℂ} :
     (F.wholeRestrict p ρ).IsTile T ↔ F.IsTile T ∧ (T ∩ ball p ρ).Nonempty := by
-  sorry
+  set U := ⋃₀ {S | ∃ T, F.IsTile T ∧ (T ∩ ball p ρ).Nonempty ∧ S = closure T} with hU
+  have hint := wholeRestrict_interiorPts (F := F) p ρ
+  rw [← hU] at hint
+  have hcol : (F.wholeRestrict p ρ).arcs = F.arcs := rfl
+  constructor
+  · rintro ⟨x, hx, rfl⟩
+    rw [hint] at hx
+    obtain ⟨hxI, hxU⟩ := hx
+    obtain ⟨S, ⟨T'', hT'', hmeet, rfl⟩, hxT''⟩ := interior_subset hxU
+    -- the tile of `F` through `x` is `T''`
+    have hxTile : F.IsTile (connectedComponentIn F.interiorPts x) := ⟨x, hxI, rfl⟩
+    obtain ⟨w, hw, hwT⟩ := mem_closure_iff.mp hxT'' _ hxTile.isOpen (mem_connectedComponentIn hxI)
+    have hT''eq : connectedComponentIn F.interiorPts x = T'' := by
+      obtain ⟨y'', hy'', rfl⟩ := hT''
+      have hw2 : w ∈ connectedComponentIn F.interiorPts y'' := hwT
+      rw [connectedComponentIn_eq hw, ← connectedComponentIn_eq hw2]
+    have hsubU : connectedComponentIn F.interiorPts x ⊆ interior U := by
+      rw [hT''eq]
+      refine interior_maximal ?_ (hT''.isOpen)
+      exact fun z hz => ⟨closure T'', ⟨T'', hT'', hmeet, rfl⟩, subset_closure hz⟩
+    have hsubW : connectedComponentIn F.interiorPts x ⊆ (F.wholeRestrict p ρ).interiorPts := by
+      rw [hint]
+      exact fun z hz => ⟨connectedComponentIn_subset _ _ hz, hsubU hz⟩
+    have heq : connectedComponentIn (F.wholeRestrict p ρ).interiorPts x =
+        connectedComponentIn F.interiorPts x := by
+      refine Subset.antisymm ?_ ?_
+      · exact connectedComponentIn_mono x (by rw [hint]; exact inter_subset_left)
+      · exact isPreconnected_connectedComponentIn.subset_connectedComponentIn
+          (mem_connectedComponentIn hxI) hsubW
+    rw [heq]
+    exact ⟨hxTile, by rw [hT''eq]; exact hmeet⟩
+  · rintro ⟨hT, hmeet⟩
+    obtain ⟨x, hxT⟩ := hT.nonempty
+    have hxI : x ∈ F.interiorPts := hT.subset_interiorPts hxT
+    have hTeq : T = connectedComponentIn F.interiorPts x := by
+      obtain ⟨y, hy, rfl⟩ := hT
+      exact connectedComponentIn_eq hxT
+    have hsubU : T ⊆ interior U :=
+      interior_maximal (fun z hz => ⟨closure T, ⟨T, hT, hmeet, rfl⟩, subset_closure hz⟩) hT.isOpen
+    have hsubW : T ⊆ (F.wholeRestrict p ρ).interiorPts := by
+      rw [hint]; exact fun z hz => ⟨hT.subset_interiorPts hz, hsubU hz⟩
+    refine ⟨x, hsubW hxT, ?_⟩
+    refine Subset.antisymm ?_ ?_
+    · exact hT.isPreconnected.subset_connectedComponentIn hxT hsubW
+    · rw [hTeq]
+      exact connectedComponentIn_mono x (by rw [hint]; exact inter_subset_left)
 
 /-- **FS129-OR1-WHOLE**, the tiles at `p`: for `ρ > 0`, a tile of `F` with `p` in its closure is a tile of `F_ρ` (and
 conversely, by `isTile_wholeRestrict_iff`). -/
 theorem isTile_wholeRestrict_of_mem_closure {p : ℂ} {ρ : ℝ} (hρ : 0 < ρ) {T : Set ℂ} (hT : F.IsTile T)
     (hp : p ∈ closure T) : (F.wholeRestrict p ρ).IsTile T := by
-  sorry
+  refine isTile_wholeRestrict_iff.mpr ⟨hT, ?_⟩
+  obtain ⟨w, hw, hwT⟩ := mem_closure_iff.mp hp (ball p ρ) isOpen_ball (mem_ball_self hρ)
+  exact ⟨w, hwT, hw⟩
 
 /-- **FS129-OR1-WHOLE**: `F_ρ` is non-Siamese if `F` is. -/
 theorem NonSiamese.wholeRestrict (hN : F.NonSiamese) (p : ℂ) (ρ : ℝ) : (F.wholeRestrict p ρ).NonSiamese := by
-  sorry
+  rintro T T' ⟨hT, hT', hne, hcol, hd⟩
+  exact hN T T' ⟨(isTile_wholeRestrict_iff.mp hT).1, (isTile_wholeRestrict_iff.mp hT').1, hne, hcol, hd⟩
 
 /-- **FS129-OR1-WHOLE**: `F_ρ` is simple if `F` is (closures read in the plane, as the row reads them). -/
-theorem Simple.wholeRestrict (hS : F.Simple) (p : ℂ) (ρ : ℝ) : (F.wholeRestrict p ρ).Simple := by
-  sorry
+theorem Simple.wholeRestrict (hS : F.Simple) (p : ℂ) (ρ : ℝ) : (F.wholeRestrict p ρ).Simple :=
+  ⟨fun T hT => hS.1 T (isTile_wholeRestrict_iff.mp hT).1, fun T T' hT hT' hne =>
+    hS.2 T T' (isTile_wholeRestrict_iff.mp hT).1 (isTile_wholeRestrict_iff.mp hT').1 hne⟩
 
 /-- **FS129-OR1-WHOLE**, the `R₂` clause, at the class its argument reads (pointwise in the arc, and with no use of the
 arc lying in `Γ`): for `ρ ≤ √3`, if `p + e θ` is a closure point of the part inside `B(p, 1)` of a tile `T` of colour `c`
@@ -280,7 +349,46 @@ of `F`, no tile of `F_ρ` of colour `c` has `p + 2 e θ` in its closure. (A tile
 theorem not_mem_closure_wholeRestrict_of_inner {p : ℂ} {ρ : ℝ} (hF : F.Valid) (hρ : ρ ≤ √3) {c : Fin k}
     {T : Set ℂ} (hT : F.TileOf c T) {θ : ℝ} (hθ : ringPt p θ ∈ closure (T ∩ ball p 1)) {T' : Set ℂ}
     (hT' : (F.wholeRestrict p ρ).TileOf c T') : p + 2 * e θ ∉ closure T' := by
-  sorry
+  intro hq
+  obtain ⟨hT'F, hmeet⟩ := isTile_wholeRestrict_iff.mp hT'.1
+  have hT'c : F.TileOf c T' := ⟨hT'F, hT'.2⟩
+  obtain ⟨w, hwT', hwb⟩ := hmeet
+  have hwq : dist w (p + 2 * e θ) < 1 := by
+    have := hT'F.subset_ball hF hq hwT'
+    rwa [mem_ball] at this
+  have hwp : ‖w - p‖ < √3 := lt_of_lt_of_le (by simpa [dist_eq_norm] using hwb) hρ
+  have hy : dist (ringPt p θ) w < 1 := by
+    have hpar := parallelogram_law_with_norm ℝ (w - p - e θ) (e θ)
+    have h1 : w - p - e θ + e θ = w - p := by ring
+    have h2 : w - p - e θ - e θ = w - (p + 2 * e θ) := by ring
+    rw [h1, h2, norm_e] at hpar
+    have h3 : ‖w - (p + 2 * e θ)‖ < 1 := by simpa [dist_eq_norm] using hwq
+    have h4 : ‖w - p‖ ^ 2 < 3 := by
+      have : ‖w - p‖ ^ 2 < √3 ^ 2 := by gcongr
+      rwa [Real.sq_sqrt (by norm_num)] at this
+    have h5 : ‖w - (p + 2 * e θ)‖ ^ 2 < 1 := by nlinarith [norm_nonneg (w - (p + 2 * e θ))]
+    have h6 : ‖w - p - e θ‖ ^ 2 < 1 := by nlinarith
+    have h7 : ‖w - p - e θ‖ < 1 := by
+      by_contra hge; push Not at hge; nlinarith [norm_nonneg (w - p - e θ)]
+    rw [dist_comm, dist_eq_norm]
+    simpa [ringPt, sub_sub] using h7
+  have hyT : ringPt p θ ∈ closure T := closure_mono inter_subset_left hθ
+  have hnear := unitNear_of_mem_closure hF hT hT'c hyT (subset_closure hwT') hy
+  obtain ⟨t, htT, htb⟩ : (T ∩ ball p 1).Nonempty := by
+    by_contra hne
+    rw [not_nonempty_iff_eq_empty] at hne
+    rw [hne, closure_empty] at hθ
+    exact hθ
+  have h1 := UnitNear.dist_le_of_mem_closure hnear (subset_closure htT) hq
+  have h2 : 1 < dist t (p + 2 * e θ) := by
+    have htp : ‖t - p‖ < 1 := by simpa [dist_eq_norm] using htb
+    have : ‖(p + 2 * e θ) - p‖ = 2 := by simp
+    have htri : ‖(p + 2 * e θ) - p‖ ≤ ‖(p + 2 * e θ) - t‖ + ‖t - p‖ := by
+      calc _ = ‖((p + 2 * e θ) - t) + (t - p)‖ := by ring_nf
+        _ ≤ _ := norm_add_le _ _
+    rw [dist_comm, dist_eq_norm]
+    linarith
+  linarith
 
 /-- **FS129-OR1-WHOLE**, the `R₂` clause in the row's form: for `ρ ≤ √3` and an arc `r([θ₁, θ₂])` of `ω(p)` of positive
 length whose inner side is one tile `T`, of colour `c` (every interior angle has the points `p + (1 − η) e θ`, `η > 0`
@@ -289,7 +397,34 @@ theorem not_mem_closure_wholeRestrict_R₂ {p : ℂ} {ρ : ℝ} (hF : F.Valid) (
     (hT : F.TileOf c T) {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂)
     (hinner : ∀ θ ∈ Ioo θ₁ θ₂, ∃ δ > 0, ∀ η ∈ Ioo 0 δ, p + ((1 - η : ℝ) : ℂ) * e θ ∈ T) {T' : Set ℂ}
     (hT' : (F.wholeRestrict p ρ).TileOf c T') : ∀ θ ∈ Icc θ₁ θ₂, p + 2 * e θ ∉ closure T' := by
-  sorry
+  have hcl : IsClosed {θ : ℝ | ringPt p θ ∈ closure (T ∩ ball p 1)} :=
+    isClosed_closure.preimage (by unfold ringPt e; fun_prop)
+  have hIoo : Ioo θ₁ θ₂ ⊆ {θ : ℝ | ringPt p θ ∈ closure (T ∩ ball p 1)} := by
+    intro θ hθ
+    obtain ⟨δ, hδ, hη⟩ := hinner θ hθ
+    rw [mem_setOf_eq, Metric.mem_closure_iff]
+    intro ε hε
+    set η := min (min (δ / 2) (ε / 2)) (1 / 2) with hηdef
+    have hη0 : 0 < η := lt_min (lt_min (half_pos hδ) (half_pos hε)) (by norm_num)
+    have hηδ : η < δ := lt_of_le_of_lt ((min_le_left _ _).trans (min_le_left _ _)) (by linarith)
+    have hηε : η < ε := lt_of_le_of_lt ((min_le_left _ _).trans (min_le_right _ _)) (by linarith)
+    have hη1 : η ≤ 1 / 2 := min_le_right _ _
+    refine ⟨p + ((1 - η : ℝ) : ℂ) * e θ, ⟨hη _ ⟨hη0, hηδ⟩, ?_⟩, ?_⟩
+    · rw [mem_ball, dist_eq_norm]
+      simp only [add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs]
+      rw [abs_of_pos (by linarith)]; linarith
+    · rw [dist_eq_norm]
+      have : ringPt p θ - (p + ((1 - η : ℝ) : ℂ) * e θ) = (η : ℂ) * e θ := by
+        simp only [ringPt]; push_cast; ring
+      rw [this, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hη0]
+      exact hηε
+  intro θ hθ
+  have hmem : θ ∈ {θ : ℝ | ringPt p θ ∈ closure (T ∩ ball p 1)} := by
+    have : closure (Ioo θ₁ θ₂) ⊆ {θ : ℝ | ringPt p θ ∈ closure (T ∩ ball p 1)} :=
+      closure_minimal hIoo hcl
+    rw [closure_Ioo h12.ne] at this
+    exact this hθ
+  exact not_mem_closure_wholeRestrict_of_inner hF hρ hT hmem hT'
 
 end ArcMap
 
