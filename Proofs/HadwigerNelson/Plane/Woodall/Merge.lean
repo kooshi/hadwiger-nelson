@@ -950,6 +950,123 @@ theorem dirColourAt_wedgeMerge {v : ℂ} {D : Finset ℝ} {σ : ℝ → Fin k} (
     rw [← key] at this
     exact this.1
 
+/-! ## Cones after a merge (children of `exists_merge_at`'s measure, FS131-IWc) -/
+
+/-- **Cones are local in direction**: a set approaching `v` along `δ` does so inside every thin truncated cone about `δ`. -/
+theorem mem_coneAt_inter_annSector {S : Set ℂ} {v : ℂ} {δ : ℝ} (h : δ ∈ coneAt S v) {r η : ℝ} (hr : 0 < r) (hη : 0 < η) :
+    δ ∈ coneAt (S ∩ annSector v 0 r (δ - η) (δ + η)) v := by
+  have hcont : ContinuousAt Complex.arg 1 := Complex.continuousAt_arg (by simp [Complex.slitPlane])
+  obtain ⟨κ, hκ, hball⟩ := Metric.continuousAt_iff.mp hcont η hη
+  intro ε hε
+  obtain ⟨z, hzS, hzv, hzd, hdir⟩ := h (min ε (min r κ)) (by positivity)
+  refine ⟨z, ⟨hzS, ?_⟩, hzv, hzd.trans_le (min_le_left _ _), hdir.trans_le (min_le_left _ _)⟩
+  have hn : 0 < ‖z - v‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hzv)
+  have hpol := eq_add_norm_mul_e v z δ
+  set u := (z - v) / (‖z - v‖ : ℂ) * starRingEnd ℂ (e δ) with hu
+  have hu1 : dist u 1 < κ := by
+    rw [dist_eq_norm, hu, show (z - v) / (‖z - v‖ : ℂ) * starRingEnd ℂ (e δ) - 1 =
+      ((z - v) / (‖z - v‖ : ℂ) - e δ) * starRingEnd ℂ (e δ) by rw [sub_mul, e_mul_conj_e], norm_mul,
+      Complex.norm_conj, norm_e, mul_one]
+    exact hdir.trans_le ((min_le_right _ _).trans (min_le_right _ _))
+  have hn' : ((‖z - v‖ : ℝ) : ℂ) ≠ 0 := by exact_mod_cast hn.ne'
+  have harg : Complex.arg ((z - v) * starRingEnd ℂ (e δ)) = Complex.arg u := by
+    rw [hu, show (z - v) * starRingEnd ℂ (e δ) = ((‖z - v‖ : ℝ) : ℂ) * ((z - v) / (‖z - v‖ : ℂ) * starRingEnd ℂ (e δ)) by
+      field_simp, Complex.arg_real_mul _ hn]
+  have h1 := hball hu1
+  rw [Complex.arg_one, Real.dist_eq, sub_zero] at h1
+  rw [← harg] at h1
+  have h2 := abs_lt.mp h1
+  refine ⟨(‖z - v‖, δ + Complex.arg ((z - v) * starRingEnd ℂ (e δ))), ⟨⟨hn, ?_⟩, ⟨by linarith, by linarith⟩⟩, hpol.symm⟩
+  rw [← dist_eq_norm]; exact hzd.trans_le ((min_le_right _ _).trans (min_le_left _ _))
+
+/-- An angle lies in `angleIcc a b` exactly when its direction is one of `[a, b]`. -/
+theorem mem_angleIcc_iff_e {a b β : ℝ} : β ∈ angleIcc a b ↔ e β ∈ e '' Icc a b := by
+  constructor
+  · intro hβ
+    obtain ⟨m, hm⟩ := mem_iUnion.mp hβ
+    refine ⟨β + 2 * π * ((-m : ℤ) : ℝ), ⟨by push_cast; linarith [hm.1], by push_cast; linarith [hm.2]⟩, ?_⟩
+    rw [e_add_two_pi_mul_int]
+  · rintro ⟨θ, hθ, he⟩
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp he.symm
+    exact mem_iUnion.mpr ⟨n, by rw [hn]; constructor <;> linarith [hθ.1, hθ.2]⟩
+
+/-- Angular intervals are closed. -/
+theorem isClosed_angleIcc (a b : ℝ) : IsClosed (angleIcc a b) := by
+  have : angleIcc a b = e ⁻¹' (e '' Icc a b) := Set.ext fun β => mem_angleIcc_iff_e
+  rw [this]
+  exact (isCompact_Icc.image continuous_e).isClosed.preimage continuous_e
+
+/-- **Off the closed wedge, a merge leaves the cones at `v` alone.** -/
+theorem coneAt_wedgeMerge_of_notMem {v : ℂ} {ρ d₁ d₂ : ℝ} (hρ : 0 < ρ) (hd : d₁ < d₂) (hd2 : d₂ ≤ d₁ + 2 * π) {δ : ℝ}
+    (hδ : δ ∉ angleIcc d₁ d₂) (j : Fin k) :
+    δ ∈ coneAt ((F.wedgeMerge v hρ hd hd2 c).region j) v ↔ δ ∈ coneAt (F.region j) v := by
+  obtain ⟨η, hη, hηsub⟩ := Metric.isOpen_iff.mp (isClosed_angleIcc d₁ d₂).isOpen_compl δ hδ
+  have hoff : ∀ z ∈ annSector v 0 ρ (δ - η) (δ + η),
+      z ∉ closure (annSector v 0 ρ d₁ d₂) ∪ ⋃ a ∈ wedgeArcs v ρ d₁ d₂, a.carrier := by
+    rintro _ ⟨⟨s, θ⟩, ⟨hs, hθ⟩, rfl⟩ hX
+    simp only at hs hθ hX
+    have hP := hX.elim (fun h => closure_annSector_subset v hρ.le hd.le h) (fun h => wedgeArcs_subset_polar hρ hd.le h)
+    obtain ⟨⟨s', θ'⟩, ⟨hs', hθ'⟩, h⟩ := hP
+    simp only at h hs' hθ'
+    have he := (polar_inj hs.1 hs'.1 h.symm).2
+    exact hηsub (show θ ∈ Metric.ball δ η by rw [Metric.mem_ball, Real.dist_eq, abs_lt]; constructor <;> linarith [hθ.1, hθ.2])
+      (mem_angleIcc_iff_e.mpr ⟨θ', hθ', he.symm⟩)
+  have key := recolour_region_diff (F := F) (W := annSector v 0 ρ d₁ d₂) (B := wedgeArcs v ρ d₁ d₂)
+    (hB := wedgeArcs_nondegenerate hρ hd hd2) (hBf := ((finite_singleton _).insert _).insert _)
+    (hW := frontier_annSector_subset hρ hd hd2) (c := c) j
+  have hA : (F.wedgeMerge v hρ hd hd2 c).region j ∩ annSector v 0 ρ (δ - η) (δ + η) =
+      F.region j ∩ annSector v 0 ρ (δ - η) (δ + η) := by
+    ext z
+    constructor
+    · rintro ⟨hz, hzA⟩
+      have : z ∈ (F.wedgeMerge v hρ hd hd2 c).region j \ (closure (annSector v 0 ρ d₁ d₂) ∪
+        ⋃ a ∈ wedgeArcs v ρ d₁ d₂, a.carrier) := ⟨hz, hoff z hzA⟩
+      exact ⟨(key ▸ this : z ∈ F.region j \ _).1, hzA⟩
+    · rintro ⟨hz, hzA⟩
+      have : z ∈ F.region j \ (closure (annSector v 0 ρ d₁ d₂) ∪ ⋃ a ∈ wedgeArcs v ρ d₁ d₂, a.carrier) := ⟨hz, hoff z hzA⟩
+      exact ⟨(key.symm ▸ this : z ∈ (F.wedgeMerge v hρ hd hd2 c).region j \ _).1, hzA⟩
+  constructor
+  · intro h
+    have := mem_coneAt_inter_annSector h hρ hη
+    rw [hA] at this
+    exact coneAt_mono inter_subset_left v this
+  · intro h
+    have := mem_coneAt_inter_annSector h hρ hη
+    rw [← hA] at this
+    exact coneAt_mono inter_subset_left v this
+
+/-- **Inside the wedge, after a merge only `c` approaches `v`.** -/
+theorem eq_of_mem_coneAt_wedgeMerge {v : ℂ} {ρ d₁ d₂ : ℝ} (hρ : 0 < ρ) (hd : d₁ < d₂) (hd2 : d₂ ≤ d₁ + 2 * π) {δ : ℝ}
+    (hδ : δ ∈ angleIoo d₁ d₂) {j : Fin k} (h : δ ∈ coneAt ((F.wedgeMerge v hρ hd hd2 c).region j) v) : j = c := by
+  classical
+  obtain ⟨m, hm⟩ := mem_iUnion.mp hδ
+  have hη : 0 < min (δ - (d₁ + 2 * π * m)) (d₂ + 2 * π * m - δ) := lt_min (by linarith [hm.1]) (by linarith [hm.2])
+  obtain ⟨z, ⟨hzR, hzA⟩, -⟩ := mem_coneAt_inter_annSector h hρ hη 1 one_pos
+  obtain ⟨⟨s, θ⟩, ⟨hs, hθ⟩, rfl⟩ := hzA
+  simp only at hs hθ hzR
+  have h1 := min_le_left (δ - (d₁ + 2 * π * m)) (d₂ + 2 * π * m - δ)
+  have h2 := min_le_right (δ - (d₁ + 2 * π * m)) (d₂ + 2 * π * m - δ)
+  have hzW : v + (s : ℂ) * e θ ∈ annSector v 0 ρ d₁ d₂ := by
+    refine ⟨(s, θ + 2 * π * ((-m : ℤ) : ℝ)), ⟨hs, ?_, ?_⟩, ?_⟩
+    · push_cast; linarith [hθ.1]
+    · push_cast; linarith [hθ.2]
+    · simp only [e_add_two_pi_mul_int]
+  have hcol : (if v + (s : ℂ) * e θ ∈ annSector v 0 ρ d₁ d₂ then c else F.col (v + (s : ℂ) * e θ)) = j := hzR.2
+  rw [if_pos hzW] at hcol
+  exact hcol.symm
+
+/-- **Along a direction whose thin cone lies in `F`'s class of `c`, after a merge only `c` approaches `v`** (the merge recolours with
+`c`, and leaves the rest of that cone alone). -/
+theorem eq_of_mem_coneAt_wedgeMerge_of_subset {v : ℂ} {ρ d₁ d₂ : ℝ} (hρ : 0 < ρ) (hd : d₁ < d₂) (hd2 : d₂ ≤ d₁ + 2 * π)
+    {d r : ℝ} (hr : 0 < r) (hF : annSector v 0 r (d - r) (d + r) ⊆ F.region c) {j : Fin k}
+    (h : d ∈ coneAt ((F.wedgeMerge v hρ hd hd2 c).region j) v) : j = c := by
+  classical
+  obtain ⟨z, ⟨hzR, hzA⟩, -⟩ := mem_coneAt_inter_annSector h hr hr 1 one_pos
+  have hcol : (if z ∈ annSector v 0 ρ d₁ d₂ then c else F.col z) = j := hzR.2
+  by_cases hzW : z ∈ annSector v 0 ρ d₁ d₂
+  · rw [if_pos hzW] at hcol; exact hcol.symm
+  · rw [if_neg hzW] at hcol; rw [← hcol]; exact (hF hzA).2
+
 /-- **The points a merge at a wedge creates are `NiceAt`** (E3-NICE's crossings): inside a good ball of `F` at `v`, with the two edges in
 `F`'s class of `c` a little beyond the radius `ρ`, every point of `closedBall v ρ` other than `v` that carries three or more colours after the
 merge is `NiceAt` — it is a transversal crossing of the outer arc with a branch through `v`, `c` on the inner half and two other colours outside

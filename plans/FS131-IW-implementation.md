@@ -8,6 +8,9 @@ Axioms below are from `#print axioms` on **iteration oleans** (`data/fs131/iw/it
 oleans), the whole print in `data/fs131/iw/axioms-iteration.txt` and its split in `data/fs131/iw/axioms-iteration-summary.txt`. The gate has not run
 (waves 3–4 and FS131-LEB have not landed): this is **not gate evidence**. A `sorryAx` below is never this job's: it comes through a cited, unlanded
 statement (`lemmaL`; `ArcMap.dense_interiorPts`; `ArcMap.Valid.unitPairsNull_region`) or through one of the five leaves left (stage 2).
+The FS131-IWc rows (stages 7–11) are from `data/fs131/iwc/axioms-iteration.txt` (`lake env lean` on a copy of `Merge` with the prints appended,
+`data/fs131/iwc/scratch/ax.lean`; never evidence); since the stage-12 merge of `main` (wave 3 landed) every IWc theorem but `exists_woodallMerged`
+prints the standard three alone.
 
 | declaration | read against | axioms |
 |---|---|---|
@@ -27,6 +30,11 @@ statement (`lemmaL`; `ArcMap.dense_interiorPts`; `ArcMap.Valid.unitPairsNull_reg
 | **FS131-IWb** — E1-RAY (inner, outer) and E1-BAD's interior case `SectorsAt.not_mem_coloursAt_of_mem_Ioo`, re-proved through the cone clause (items 154–155) | unchanged statements, § 8.5 | `sorryAx` through the connected piece (wave 3) and, for E1-BAD's case, E1-SEE's citation (`unitPairsNull_region`) |
 | **FS131-IWb** — **`ArcMap.step5_lt`** (Woodall's step 5, strict), with `SectorsAt.collarAt_opposite`, `collarAt_closure_of_forall_shadow`, `exists_two_cover_of_three_le_card`, `Valid.region_dist_ne_one` | § 4.5's route: the inner arc `(β₂ − 3π/2, β₁ − π/2)` of length `π − φ > 2π/3`, inner collars for the three colours from the two edges as cone directions (horns included), two colours left, `woodall_step4` | `sorryAx` through cited statements only: `lemmaL` (via `woodall_step4`), `dense_interiorPts` (via `subset_closure_of_subset_shadow`), `coneAt_region_eq_biUnion`; `exists_two_cover_of_three_le_card`, `Valid.region_dist_ne_one`: standard three |
 | **FS131-IWb** — **`ArcMap.step6`** (Woodall's step 6 by Townsend's lemma), with `false_of_cos_eq_zero_on_Icc`, `exists_eq_add_half_pi_of_cos_eq_zero`, `cos_neg_of_pi_div_two_lt_of_lt_three_pi_div_two`, `collarAt_setOf_forall_mem`, `CollarAt.of_abs_sub_lt` | § 4.5 / § 9.3's route: off the six edge normals one side works at first order (two sectors failing on opposite sides share an edge whose normal is the angle); the seed is an opposite arc of length `π − φ > π/3` when some angle is `< 2π/3`, else the certified normal of edge `d 0` (`exists_normal_collarAt`) extends one of length exactly `π/3`; `townsend_lemma` | `sorryAx` through cited statements only (`lemmaL` via `townsend_lemma`; `dense_interiorPts`; `coneAt_region_eq_biUnion`); the five real-variable children: standard three |
+| **FS131-IWc** — **`clear_wedge` (E3-W)**, with `mem_annSector_union_of_ne`, `disjoint_annSector_wedges`, `annSector_subset_ball`, `annSector_mono_r₂`, `mem_segment_ray` | `plans/FS131-E3-derivation.md` § 3.2 (E3-W; the plan's read-back: hypotheses weaker, same radius and conclusion) | standard three |
+| **FS131-IWc** — the recolouring and the merge at a wedge: `recolour_valid`, `recolour_region_diff`, `wedgeArcs_nondegenerate`, `frontier_annSector_subset`, `wedgeMerge_valid`, `wedgeMerge_condition5`, `wedgeMerge_region_diff`, with `wedgeArcs_subset_polar`, `polar_notMem`, `annSector_notMem_wedgeArcs` | `plans/FS131-W-kernel-plan.md` § 14.2–14.3 rows | standard three |
+| **FS131-IWc** — locality and local data: `coloursAt_congr`, `niceAt_congr`, `exists_dirColourAt`, `GoodAt.ncard_coloursAt_le_two` (with `ncard_coloursAt_le_two_of_sides`, `mem_curveAt_one_iff`), `finite_three_le_coloursAt`, `dirColourAt_wedgeMerge`; cones after a merge `coneAt_wedgeMerge_of_notMem`, `eq_of_mem_coneAt_wedgeMerge`, `eq_of_mem_coneAt_wedgeMerge_of_subset` (with `mem_coneAt_inter_annSector`, `mem_angleIcc_iff_e`, `isClosed_angleIcc`) | § 14.2–14.3 rows; § 14.4 / stage 11 (the measure's cone facts) | standard three |
+| **FS131-IWc** — **`exists_woodallMerged` (E3-BALL)** as a composition | E3-BALL, `plans/FS131-E3-derivation.md` § 3.4 (verbatim E3's draft) | `sorryAx` through `exists_merge_at` (open leaf) only |
+| **FS131-IWc** — `Basic`'s inhabitant leaves T1–T5 (`threeCol_locallyConstant`, `threeSectorDisc_sectorsAt`, `threeSectorDisc_phantom`, `threeSectorDisc_ncard_coloursAt_le_two`, `halfDisc_sectorsAt`), so `threeSectorDisc_niceAt`, `_woodallMerged`, `_woodallNormal`, both phantom adversaries and `halfDisc_niceAt`; children `coneAt_annSector_eq`, `mem_annSector_zero_iff`, `threeSectorDisc_region`, … | § 13.2's table (every clause of the ∃-forms exercised on a valid map; item 158's defect a test) | standard three |
 
 **E1-NO45 holds in the kernel as a proof from its citations**: the proof of `false_of_four_le_sectors` is complete, and the check on E1's argument it was
 asked to be (inventory item 111) found no gap: E1-BAD's count (`K.card ≤ n`), E1-COVER's colour-class form and the refined second-order lemma all closed
@@ -328,3 +336,61 @@ Woodall's chain (job FS131-IWc)" for `Basic`'s children, three lines in the merg
 **Build of this stage**: OK — 445 of 445 batches, 6 modules rebuilt, 6 with warnings (wave 4's five skeleton modules and `Woodall/Merge`), 9 m 8 s,
 exit 0 (`build/gate/build/20261004T160612Z-574527.log`; driver log `data/fs131/iwc/build3.log`); the only Woodall warnings are `Merge`'s three
 `declaration uses 'sorry'` (each printed three times by the replays); `Basic` builds with no warning.
+
+## Stage 11 — SAVED (FS131-IWc): cones after a merge (`exists_merge_at`'s measure, proved children); the three leaves left, with routes
+
+**Proved (children of `exists_merge_at`, in `Merge` after `dirColourAt_wedgeMerge`)**: `mem_coneAt_inter_annSector` (cones are local in direction:
+a set approaching `v` along `δ` does so inside every thin truncated cone about `δ`, by continuity of `arg` at `1`), `mem_angleIcc_iff_e`,
+`isClosed_angleIcc`, and the three cone facts after a merge: **`coneAt_wedgeMerge_of_notMem`** (off the closed wedge the cones at `v` are `F`'s),
+**`eq_of_mem_coneAt_wedgeMerge`** (inside the open wedge only `c` approaches `v`), **`eq_of_mem_coneAt_wedgeMerge_of_subset`** (along a direction
+whose thin cone lies in `F`'s class of `c`, only `c` does). All on the standard three axioms (iteration print). Records added;
+`tools/fs131_w3_decls.py --check`: 188 theorems, 188 records, 0 missing, 0 stale; `--plant`: FIRED both ways, exit 0. `tools/check_architecture.py`:
+PASS (`Basic` and `Merge` rows rewritten).
+
+### The three leaves left, each read against its statement (no statement defect found), with a route
+
+**`exists_merge_at` — a simpler measure than § 14.4's "runs plus pokes".** § 14.4's measure needs the colour word of `(D, σ)` sorted into runs, the
+same machinery as `niceAt_of_dirColourAt`. This one needs none: for local data `(D, σ)` of `F` at `v`,
+`μ(F, D) = ∑ δ ∈ D, ((Finset.univ.filter fun j => δ ∈ coneAt (F.region j) v).card − 1)`
+(duplicates in `D` mod `2π` are harmless). One step, of either of § 14.4's two kinds:
+* *the step's parameters* (a lemma to state and prove): if `hrun ∧ hpoke` fails for `(D, σ)`, there are `d₁ < d₂ < d₁ + π`, both `OffDirs D`,
+  `σ d₁ = σ d₂ = c`, and some `δ ∈ D` with `δ ∈ angleIoo d₁ d₂` whose cone-colour set has two members. From `¬ hrun` (`φ₁ < φ₂ < φ₁ + 2π`, one
+  colour `c`, a direction `ψ ≠ c` on each side): one of `(φ₁, φ₂)`, `(φ₂, φ₁ + 2π)` has length `≤ π`; shrink its right end by a little inside
+  `c`'s thin cone (and off `D`) to make it `< π` with `ψ` still inside; take `d₁, d₂` its ends. From `¬ hpoke` at `δ`: `d₁, d₂ = δ ∓ t` off `D`.
+  The two-colour `δ`: the closed sets `C_c = coneAt (F.region c) v ∩ [d₁, ψ]` and `⋃_{j ≠ c} coneAt (F.region j) v ∩ [d₁, ψ]` cover `[d₁, ψ]`
+  (`exists_mem_coneAt_region`); `[d₁, ψ]` is preconnected, `d₁` is in the first only and `ψ` in the second, so they meet at some `δ'`; off `D`
+  a direction is in one cone only (the thin cone and disjoint regions), so `δ' ≡ δ ∈ D`, and `δ' ≠ d₁`, `δ' ≤ ψ < d₂`. For `¬ hpoke` the
+  two colours are `j` and `c` (closedness of `c`'s cone).
+* *the decrease*: with `F' = F.wedgeMerge v hρ hd hd2 c` and `D' = insert d₁ (insert d₂ D)`, every `δ ∈ D` is `≢ d₁, d₂`; if
+  `δ ∈ angleIoo d₁ d₂` its count is now `0` (**`eq_of_mem_coneAt_wedgeMerge`**, proved), otherwise unchanged
+  (**`coneAt_wedgeMerge_of_notMem`**, proved); `d₁` and `d₂` count `0` (**`eq_of_mem_coneAt_wedgeMerge_of_subset`**, proved, from `F`'s thin
+  cones there); `Finset.sum_lt_sum` at the two-colour `δ`.
+* *the state* of the strong induction on `μ`, generalized over the map: `G` valid, plane, `F.Condition5 → G.Condition5`, regions equal to `F`'s off
+  `closedBall v ρ₁`, every `w ∈ closedBall v ρ₁ \ {v}` of three or more colours `NiceAt` in `G`, and local data `(D, σ)` of `G` at `v`. No
+  decreasing radii are needed in the state (§ 14.4 carries them): each merge takes `ρ' < min (good radius of G at v) ρ₁`, below E3-W's bound
+  `r₁ cos(α/2)/2` and below `r₁`, with `r₁ < cos(α/2)/2` under both thin-cone radii at `d₁, d₂`; `wedgeMerge_valid`, `wedgeMerge_condition5`,
+  `wedgeMerge_region_diff`, `wedgeMerge_niceAt` (`hc` from the thin cones), `coloursAt_congr`/`niceAt_congr` off `closedBall v ρ'`, and
+  `dirColourAt_wedgeMerge` keep it. *Start*: `ρ₁ < min ε (good radius of F)`, the ring clause by `GoodAt.ncard_coloursAt_le_two`, data by
+  `exists_dirColourAt`. *End* (`hrun ∧ hpoke`): `niceAt_of_dirColourAt` at `v`.
+  Price: M+ (150–250 lines) on top of its three proved cone children and `niceAt_of_dirColourAt`.
+
+**`niceAt_of_dirColourAt` (H−).** True as stated (checked: with `h3`, a colour at `v` has a nonempty cone; off `D` it is a run colour, on `D` it is
+a run colour or, by `hpoke`, a horn at a change point; runs have distinct colours by `hrun`; `σ` is `2π`-periodic off `D` because the thin cones of
+`φ` and `φ + 2π` are one set). The work is the picture's indexing: sort the change points `q₀ < … < q_{m−1}` in a window `[θ₀, θ₀ + 2π)` with `θ₀`
+off `D` (`m ≥ 2` by `h3` and `hpoke`); the arc `(q_l, q_{l+1})` has colour `a_l` (constant: `σ` is locally constant off `D`, and equal across a
+non-change point); horns at `q_l`: the colours `j ∉ {a_{l−1}, a_l}` with `q_l ∈ coneAt (F.region j) v`. Suggested representation: a
+`List (ℝ × Fin k)` of (start angle, colour), `[(q_l, h) for h in H_l] ++ [(q_l, a_l)]` concatenated over `l`, then `n = length`, `d i = start`,
+`d n = q₀ + 2π`, `c i = colour`, with one generic lemma "a sorted list with cyclically distinct neighbours and the cone clause in list form gives
+`SectorsAt`". The cone clause: `⊇` from `hD` on open arcs and `isClosed_coneAt`; `⊆` off `D` by disjointness of regions near a thin cone, on `D`
+by `hpoke` and the horn lists. `coneAt_annSector_eq` (proved, `Basic`) is not needed here; `isClosed_angleIcc` and `mem_angleIcc_iff_e` (proved)
+are.
+
+**`wedgeMerge_niceAt` (H−).** True as stated (checked case by case): inside the open wedge one colour; on an edge or at an edge's outer end, `F`'s
+colour there is `c` (`hc`, `ρ < r₁`), so one colour; off the closed wedge and its arcs `F` is unchanged near `w` and `GoodAt.ncard_coloursAt_le_two`
+gives at most two; on the outer arc at a direction strictly inside, either `w` is off `F`'s arcs (two colours) or on exactly one full curve
+`C` through `v` (`GoodAt.exists_local_curve`), which crosses the circle `‖· − v‖ = ρ` transversally (a segment through `v` is radial; a circle
+through `v` of radius `R` has `2R > ρ₀ > ρ` by `GoodAt.big`, and it is tangent to the circle of radius `ρ` about `v` only if `ρ = 2R`). Then the colours
+are `c` on the inner side and `F`'s two side colours `g, g′` outside, and at three colours the picture has three sectors (`c` on the inner half,
+angle `π`; `g`, `g′` between the tangent of `C` and the circle's tangents), no horn. The work is the three cone identities at `w` for curvilinear
+sectors (bounded by a circle and a line or circle crossing transversally): each cone is the closed interval between the two tangent directions.
+`ArcMap.ncard_coloursAt_le_two_of_sides` (proved) is the counting half; the cones need a curvilinear analogue of `coneAt_annSector_eq`.

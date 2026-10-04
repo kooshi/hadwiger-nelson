@@ -2564,6 +2564,12 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.finite_three_le_coloursAt
 #print axioms HadwigerNelson.Plane.ArcMap.niceAt_of_dirColourAt
 #print axioms HadwigerNelson.Plane.ArcMap.dirColourAt_wedgeMerge
+#print axioms HadwigerNelson.Plane.ArcMap.mem_coneAt_inter_annSector
+#print axioms HadwigerNelson.Plane.ArcMap.mem_angleIcc_iff_e
+#print axioms HadwigerNelson.Plane.ArcMap.isClosed_angleIcc
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_wedgeMerge_of_notMem
+#print axioms HadwigerNelson.Plane.ArcMap.eq_of_mem_coneAt_wedgeMerge
+#print axioms HadwigerNelson.Plane.ArcMap.eq_of_mem_coneAt_wedgeMerge_of_subset
 #print axioms HadwigerNelson.Plane.ArcMap.wedgeMerge_niceAt
 #print axioms HadwigerNelson.Plane.ArcMap.exists_merge_at
 #print axioms HadwigerNelson.Plane.ArcMap.exists_woodallMerged
