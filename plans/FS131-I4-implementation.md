@@ -104,6 +104,53 @@ E/M leaves; the engine children are where the shared work is.
   arithmetic — `bowtie_mem_dom` is *not* E, it needs `0 ∈ interior (closure bowtieTiles)`, i.e. a covering of a neighbourhood of `0` by the tiles' closures).
 - **The gate has not run**: it needs every `sorry` gone except `lebesgue_covering_square`. The real build of this stage: `data/fs131/i4/build-stage3.log`.
 
+## Stage 4 — SAVED (FS131-I4b): readback, six leaves, 54 `sorry` left
+
+**Readback (brief FS131-I4b).** The four quotations (§ 14.2 "It may", ruling 126, the Wave 4 note, the Stage 3 "Where it stands") match their sources;
+ruling 126 has since been replaced by item 132 (coordinator's message): `localSectors` is **not** mine to state; wave 3's FS131-I3g states it in
+`Plane/LocalStructure`, and I iterate against it with `data/fs131/i4/w3snap.sh` once told. What I may change: unchanged from Stage 1. The worktree at `d011c17d` built
+as given: "all 1741 modules already up to date" (`data/fs131/i4/build-i4b-readback.log`), nothing edited before it.
+
+**Proved this stage (6 leaves; 60 → 54 `sorry`; `lebesgue_covering_square` still among them, FS131-LEB's):**
+`bowtieArcs_nondegenerate`, `bowtieArcs_locallyFinite` (BaseSteps); `isoCol_locallyConstant`, `iso` (all eight clauses), `l60_eq_third` (UnitArc);
+`not_lemmaL_of_not_mem` (SVMap; the counterexample is the planner's § 7.3 with straight cones and radius `1/10`, `1/4`). Children added (UnitArc): `exists_dir_dot_neg`,
+`ArcMap.exists_tile_cone_dot_neg` (a tile with a direction `β`, `e β · u < 0`, at any point of the domain, over wave 3's `exists_mem_coneAt_region` and
+`coneAt_region_eq_biUnion`), `mem_isoArc_of_norm_one`, `two_lt_norm_of_mem_isoY`, `norm_bounds_of_mem_ball_one`, `isoFrag_col_eq_zero_iff`,
+`norm_eq_one_of_mem_isoFrag_arcs`, `mem_isoFrag_dom`, `isoFrag_region_one`. Import added to `UnitArc`: `Mathlib.Analysis.Real.Pi.Bounds` (for `Real.pi_gt_three`).
+**No statement changed, no new axiom, no `native_decide`.**
+
+**A tool caveat found.** `data/fs131/i4/chk.sh` resolves imports through the scratch mirror, whose `RingGerm` is wave 3's snapshot: it imports Mathlib modules that
+the skeleton's `RingGerm` does not, so a name can elaborate under `chk.sh` and be unknown in the real build (`Real.pi_gt_three`, found by the real build, not by `chk.sh`).
+Every stage therefore ends with a real `./scripts/build.sh`.
+
+**What is left, and what I judged (so a successor does not redo it):**
+- *Needs `localSectors` (item 132)*: `woodallCone`, `woodallCone_strict`, `exists_hasDegree_of_mem_dom`, `noBoth`'s repeated-colour clause, engine 5
+  (`flankQ_upper`, `flankQ_lower`), `stuck_structure`, `stuck_chain`, `pair_*`, `fail_*`, `anti` (the cubic-vertex statements), the three Contact moves.
+  Told the coordinator what form I need (message "Answer on sector structure": the branch-germ form with horn identification, not only my `IsSector`).
+- *`lemmaL` (FS106-L)*: the sweep argument alone does not close it. With `S_A = ⋃_{a ∈ A∩B(b,η)} ω(a)` (open, disjoint from `A`) and `S_B` likewise, `S_A ⊆ cl B` and `S_B ⊆ cl A`
+  near `y ∈ ω(b)∩W`, and the contradiction needs `S_A ∩ S_B ≠ ∅`, i.e. a pair `a ∈ A`, `a' ∈ B` near `b` with `a' − a` within `r` of the direction perpendicular to `y − b`
+  (two unit circles then meet near `y`). That pair exists by a two-dimensional covering argument (all lines of that direction near `b` cannot be split between `A` and `B`
+  while both accumulate at `b` and `B(b,η) ⊆ cl(A∪B)`) that the plan's "sweep" note does not state. Not attempted past this analysis.
+- *`lock`*: clauses 1 and 2 follow from `n2_sign` by transversality of `ω(z)` to `ω(P)` at `w` (`z ∉ {P, P + 2e θ}`); clause 1's exclusion of `P + 2e θ` for the *outer*
+  colour is not a consequence of validity at `w` alone (a second tile of colour `c'` far away may touch there); it needs N-E2 between the outer tile at `w` and that tile.
+- *`l60_real`, `l60Col_locallyConstant`*: validity needs the Reuleaux-triangle width lemma (interior points of `B(0,1)∩B(A,1)∩B(B,1)` are `< 1` apart) and three trig facts
+  (`lens ∩ ω(0)`, `∩ ω(1)`, `∩ ω(e 60°)` lie on the listed arcs); not started.
+- *`n2_env_*`*: the identity route needs `∀ p ∈` lens a bound uniform in `p`; the chord-convexity shortcut (`w` in the chord triangle) fails because lens points can be farther than `1` from `P`.
+  Not started.
+- *Bowtie* (11 leaves): `bowtieCol_locallyConstant` needs the 11 tiles pairwise disjoint (55 pairs) and "domain minus arcs ⊆ tiles", the heaviest finite computation of the
+  wave; every other bowtie leaf reads it or `bowtie_mem_dom`. Not started.
+- *`exists_three_le_multicolour`* (over `lebesgue_covering_square`): route worked out, not written: components as pairs `(j, C)`, the relation "same colour, closures meet",
+  `ReflTransGen` classes of diameter `< 1` by `chain_step` induction, class closures locally finite hence closed (`LocallyFinite.isClosed_iUnion`), finitely many classes meet
+  the square (compactness), side `1 + ε` against `1/√2 + ε`, three classes at the Lebesgue point have three distinct colours (two classes of one colour with closures meeting would coincide).
+
+## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
+
+- FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
+  `0 ∉ P_cl(0)`; `isoY` a tile of colour `0` outside `B̄(0,2)` with corner `2`; `C₂ = {0}`; the radial points `1 + s` at distance exactly `1` from the class). Inhabits the bends' centre conditions.
+- FS114-L60-LE, L60-EQ's third tile: `ArcMap.l60_eq_third` — same statement; axioms `[propext, sorryAx, Classical.choice, Quot.sound]` **(over sorry)**: wave 3's `exists_mem_coneAt_region`, `coneAt_region_eq_biUnion` are `sorry` on this branch's skeleton.
+- FS106-L's adversary: `not_lemmaL_of_not_mem` — same statement.
+- FS112-BOWTIE's fragment data: `bowtieArcs_nondegenerate`, `bowtieArcs_locallyFinite` — same statements.
+
 ## Drafts for the front page
 
 None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_covering_square`).

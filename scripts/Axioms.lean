@@ -2158,6 +2158,15 @@ No native evaluation. -/
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.exists_dir_dot_neg
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tile_cone_dot_neg
+#print axioms HadwigerNelson.Plane.ArcMap.mem_isoArc_of_norm_one
+#print axioms HadwigerNelson.Plane.ArcMap.two_lt_norm_of_mem_isoY
+#print axioms HadwigerNelson.Plane.ArcMap.norm_bounds_of_mem_ball_one
+#print axioms HadwigerNelson.Plane.ArcMap.isoFrag_col_eq_zero_iff
+#print axioms HadwigerNelson.Plane.ArcMap.norm_eq_one_of_mem_isoFrag_arcs
+#print axioms HadwigerNelson.Plane.ArcMap.mem_isoFrag_dom
+#print axioms HadwigerNelson.Plane.ArcMap.isoFrag_region_one
 #print axioms HadwigerNelson.Plane.n4_fin_u_nonpos
 #print axioms HadwigerNelson.Plane.rayLower_neg
 #print axioms HadwigerNelson.Plane.rayLower_eq_curvDown

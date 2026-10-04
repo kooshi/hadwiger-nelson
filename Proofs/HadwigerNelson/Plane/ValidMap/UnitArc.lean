@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Basic
+import Mathlib.Analysis.Real.Pi.Bounds
 import Proofs.HadwigerNelson.Plane.RingGerm
 
 /-!
