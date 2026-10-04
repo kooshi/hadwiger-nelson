@@ -36,14 +36,13 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 0.5 + 0.5 + 1 + 1 = 3 of 3, plus EXT-HN1 in Kooshi's special slot)
+## 3. Running now (slots used: 0.5 + 0.5 + 1 + 1 = 3 of 3)
 
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-I4 (wave 4, first implementer; item 115) | Sonnet | `data/fs131/briefs/FS131-I4-wave4.md` | its branch's (`fs131-w4`) `data/fs131/reports/FS131-I4.md` |
 | FS131-I3f (wave 3, last five, gate, landing; item 117) | Sonnet | `data/fs131/briefs/FS131-I3f-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3f.md` |
 | FS131-W2 (Woodall's chain re-planned on E1-NO45; item 109) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-W2-woodall-replan.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-W2.md` |
-| EXT-HN1 (audit of an outside repository; item 108) | Opus (de Bruijn) | `data/external/briefs/EXT-HN1-outside-claim.md` | `data/external/reports/EXT-HN1.md` |
 | FS131-I2f (wave 2, the Opus-implementer trial; item 119) | **Opus** (`debruijn-implementer`, `model: "opus"`) | `data/fs131/briefs/FS131-I2f-wave2.md` | its branch's (`fs131-w2`) `data/fs131/reports/FS131-I2f.md` |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. A notification arrives when each hands back; if the session restarted, resume a job from
@@ -76,8 +75,8 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 - The GitHub repository `decalion89/chromatic-number-of-the-plane` (release v1.1.0; claims Lean proofs of rows 103 and 57; item 9) — Kooshi is reading it; the
   record holds its name from a search listing only, and the same pass saw an unread Zenodo record claiming a formal verification that the plane is
-  seven-chromatic (`plans/FS131-kernel-plan.md` § 3.2). Addresses (item 105): an outside record and
-  https://github.com/decalion89/chromatic-number-of-the-plane/releases/tag/v1.1.0 — Kooshi investigating both.
+  seven-chromatic (`plans/FS131-kernel-plan.md` § 3.2). Addresses (item 105). **Audited (EXT-HN1, items 108–122)**: the outside-account-1 repository (= the Zenodo record) states no Hadwiger–Nelson result;
+  The outside repository's issue is written. The Mathlib harness `~/.cache/ext-hn1/` (7.6 GB) is kept until the issue is answered.
 - From FS-129: the order (backlog, then FS-124 — stands); the finite-graph search (held); a blind second mind on FS129-OR1-QFREE (none); FS-129 closes when its 32
   compositions pass (spread across waves).
 - The Proof Atlas: two stale page notes and the zoomed labels (item 4), at the next atlas update.
