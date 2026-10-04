@@ -367,3 +367,6 @@ reason by the close.*
     **Ruling: add `∀ x ∈ C.S, ¬ ∃ v, C.LeftVal x v ∧ C.RightVal x v` (every point of `S` a genuine change) to the second conjunct.** Alternative weighed: redefine
     `S` as exactly the change set in `Plane/CircleColouring` — a definition the implementer may not change and many statements use. Why: the minimal hypothesis
     that restores the row's meaning, where it is read. Confidence: high. No erratum owed on the derivation.
+62. **Brief FS131-K4b, wave 4's second planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K4b-wave4.md`), gated PASS: K4's § 5.2 less Woodall's chain (17 items),
+    FS106-L and FS106-TS-T first (Woodall's job branches from them), the obligation-modeling pass owed by K4, the handoff. Launched in the slot the Searcher
+    freed. Source: this commit.
