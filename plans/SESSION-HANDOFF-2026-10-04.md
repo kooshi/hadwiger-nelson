@@ -24,7 +24,7 @@ that judge the milestone, written before any job).*
 | wave 2 (28 rows) | 53 lines left (I2h, item 169); dyadic rows and DISC7 held in the kernel on the branch; **FS131-I2i (Opus) running** to the landing | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | **LANDED** (item 157); `localSectors` and the cusp-free four-colour clause **LANDED** too (item 171, `0131aa59`) | — |
 | wave 4 (25 rows) | 36 of 86 proved (item 178: the bridge, SVMap sorry-free, QA2's inhabitants); `lock` clause 3 ruled local (item 177); **FS131-I4e (Opus) running** | `.claude/worktrees/fs131-w4` |
-| Woodall's chain (FS106-WO, -TW, -AE-MAP6) | re-planned on NiceAt (W3, item 167): chain re-proved as compositions; 18 `Merge` leaves + 5 inhabitant leaves left, none needing `localSectors`; **next: FS131-IWc (Opus)**, 1,100–1,800 lines | `.claude/worktrees/fs131-ww` |
+| Woodall's chain (FS106-WO, -TW, -AE-MAP6) | 3 leaves left (item 180: E3-W, the E3-BALL composition, `Basic` sorry-free); **FS131-IWd (Opus) running**; lands after wave 4 | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
 | Lebesgue's covering theorem (FS131-LEB) | **LANDED on `main`** (item 151; `33471a75`): held in the kernel, standard three; wave 4 discharges its `sorry` in one line | `Proofs/HadwigerNelson/Topology/` |
 | waves 5–10 (124 rows) | not started; wave 5 carries C-DOUBLE + Y3-END-NEEDS (item 69) and FLANK-Q's discharge (item 79); wave 9 bound by item 89's note and item 96's vacuity rule | plan § 7 |
@@ -40,7 +40,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 
 | job | model | brief | reports to |
 |---|---|---|---|
-| FS131-IWc (Woodall's localized step 3: `Merge`'s 18 leaves and 5 inhabitants; QA2-1 before the landing; item 170) | Opus | `data/fs131/briefs/FS131-IWc-woodall-merge.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-IWc.md` |
+| FS131-IWd (Woodall's last three leaves; after wave 4 lands: merge, brick-map model, gate, landing; item 181) | Opus | `data/fs131/briefs/FS131-IWd-woodall-merge.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-IWd.md` |
 | FS131-I4e (wave 4 on Opus: `lock`, the bowtie near E, the rest, linter warnings, the landing; item 179) | Opus | `data/fs131/briefs/FS131-I4e-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4e.md` |
 | FS131-I2i (wave 2 on Opus: 53 lines, the owed items, the gate, the landing; item 174) | Opus | `data/fs131/briefs/FS131-I2i-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2i.md` |
 
