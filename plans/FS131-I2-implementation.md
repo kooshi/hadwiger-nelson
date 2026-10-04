@@ -434,3 +434,19 @@ and `le_chiM_of_falconerFan` carry `falconer_lemma2_nonempty`):
 ## Drafts for the front page (FS131-I2g)
 
 None: the gate was not run (91 `sorry` remain in wave 2's modules).
+
+## Stage 13 — SAVED (FS131-I2h, Opus): readback; the branch builds as given
+
+**Readback.** Both brief quotations checked by `grep -F` against their sources: the "May" line (`plans/FS131-w2-kernel-plan.md` line 754, § Stage 13) and
+"**Closed since Stage 11** (statements untouched):" (this record, Stage 12, line 388) — both exact. Counts at `59976a11` by script (lines that are exactly
+`sorry`): `Plane/Slack` 39, `Plane/CoverExamples` 44, `Arith/Dyadic` 4, `Plane/YesLimit` 4 — 91, as the brief says.
+
+**May**: prove any child or leaf; add further children (each stated as a lemma before use, with its `scripts/Axioms.lean` record); move declarations within
+a module; add imports (with `ARCHITECTURE.md`'s Imports cell); add supporting definitions (the fringe colouring of `exists_not_uniform_kept`); register wave 2's
+vacuity carriers under FS131-T1's procedure; move the four `falconer_lemma2_nonempty` records to the IMPORTED section; docstrings. **May not**: change any row
+statement, hypothesis or definition's meaning (the rulings 48, 56, 57, 63, 72, 86, 100, 134 are the authorised changes; item 134's Dyadic repair is kept), nor
+any child statement fixed by K2c or K2d; no new `axiom` (`falconer_lemma2_nonempty` is the one declared import), no `native_decide`. A leaf that cannot be
+proved as written goes to Keryx.
+
+**Build as given** at `59976a11`: OK — all 1739 modules up to date, 4 modules with warnings, 91 warnings, every one `declaration uses 'sorry'`
+(`build/gate/build/20261004T142103Z-4106167.log`).
