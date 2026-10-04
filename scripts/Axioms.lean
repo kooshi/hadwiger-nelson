@@ -2222,6 +2222,37 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.ArcMap.bandFree_region
 #print axioms HadwigerNelson.Plane.muZero_eq_one_of_fragments
 
+-- FS131-K2d: wave 2 children (sorry until the implementer closes them; the orbit and slack facts proved)
+#print axioms HadwigerNelson.Arith.pureTranscendental_zero
+#print axioms HadwigerNelson.Arith.pureTranscendental_succ
+#print axioms HadwigerNelson.Arith.algebraicIndependent_init_and_transcendental_last
+#print axioms HadwigerNelson.Arith.exists_valuationSubring_localization
+#print axioms HadwigerNelson.Arith.exists_residue_localization
+#print axioms HadwigerNelson.Arith.placeHom_base
+#print axioms HadwigerNelson.Arith.placeHom_step
+#print axioms HadwigerNelson.Arith.exists_isPlaceHom
+#print axioms HadwigerNelson.Arith.exists_hom_of_isPlaceHom
+#print axioms HadwigerNelson.Arith.chromaticNumber_planeOver_pureTranscendental_eq
+#print axioms HadwigerNelson.Arith.nonempty_ringEquiv_zmod_of_card
+#print axioms HadwigerNelson.Arith.exists_hom_finitePlane_of_card
+#print axioms HadwigerNelson.Arith.slack_complete
+#print axioms HadwigerNelson.Arith.exists_hom_slack
+#print axioms HadwigerNelson.Arith.forall_const_of_hom_slack
+#print axioms HadwigerNelson.Arith.not_falconerFan_of_colorable
+#print axioms HadwigerNelson.Arith.sub_mem_of_connected
+#print axioms HadwigerNelson.Arith.exists_hom_apex
+#print axioms HadwigerNelson.Arith.tip_eq_zero_of_tipFree
+#print axioms HadwigerNelson.Arith.not_falconerFan_five_of_hom_slack
+#print axioms HadwigerNelson.finitePlane7QuotColouring_proper
+#print axioms HadwigerNelson.finitePlane7_fanGap
+#print axioms HadwigerNelson.finitePlane7_not_fanGap_zero
+#print axioms HadwigerNelson.finitePlane7_slack
+#print axioms HadwigerNelson.gamma11_orbit
+#print axioms HadwigerNelson.gamma19_orbit
+#print axioms HadwigerNelson.tipFree_of_orbit
+#print axioms HadwigerNelson.finitePlane11_tipFree
+#print axioms HadwigerNelson.finitePlane19_tipFree
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

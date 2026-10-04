@@ -814,3 +814,79 @@ in the three files are 13 + 2 + 2 = **17**, as the brief's own count says, and 1
 2026-10-04: **OK** — 443 of 443 batches, 3 modules rebuilt, 9 modules with warnings, 8 m 54 s (`build/gate/build/20261004T104203Z-2786032.log`).
 Every warning is `declaration uses 'sorry'` except two deprecations in FS131-I2e's `Plane/MaximalCover` (`Set.diff_subset` at lines 821
 and 846; for the implementer, not this job).
+
+## Stage 15 — SAVED: lane A's children stated; the orbit and slack facts proved (FS131-K2d)
+
+*No fresh modeling-skill pass (budget); the decomposition is mine. Prices are harness tokens at the Sonnet implementers' measured rates
+(§ 12's basis); the next implementer (Opus, a trial) re-prices from its first two children. Mathlib names confirmed with `#check` at the
+pin (2026-10-04, `lake env lean`): `FiniteField.isSquare_neg_one_iff`, `SimpleGraph.induceHomOfLE`, `SimpleGraph.Colorable.of_hom`,
+`SimpleGraph.chromaticNumber_le_iff_colorable`, `ZMod.ringEquivOfPrime` (needs `Fintype`, from `Nat.finite_of_card_ne_zero`),
+`IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain`, `ValuationRing.iff_isInteger_or_isInteger`,
+`IsLocalization.AtPrime.equivQuotMaximalIdeal`, `IntermediateField.transcendental_adjoin_iff`, `AlgebraicIndependent.transcendental_adjoin`,
+`Fin.init`, `finsum_eq_sum_of_fintype`, `ValuationSubring.valuation_le_one_iff`; repository: `mem_valuationSubring_of_sq_add_sq_eq_one`,
+`zeroPlace`, `evalZero`, `adjoinTranscendentalEquiv` (namespace `HadwigerNelson.RouteC`, now opened in `Arith/PlaceHom`), `cosetResidue`,
+`noAffine`, `falconerFan_hom`, `FanGap.translate`, `slack_addCayley_of_fanGap`, `rotHom`, `unitQuadrance.map`.*
+
+### 15.1 Departures from K2c's table (§ 12.2), and why
+
+- **No orbit fact at `7`.** FALC-FAN (B)'s last clause already says every 4-colouring of the target leaves no colour absent from the
+  tip image's closed neighbourhood; a target slack at four colours contradicts it outright. So clause (i)'s `𝔽₇` half needs only
+  `finitePlane7_slack` (the periodic colouring `circ7Table ∘ projAlong (1, 2)` has colour `3` absent from `N[(0, 2)]`), not `gamma7_orbit`.
+- **The orbit facts at `11` and `19` need no new table and no search.** The colourings already in the kernel with a gap
+  (`finitePlane11_fanGap`, `finitePlane19_fanGap`), rotated about the gapped vertex, cover every `w ≠ 0`: checked first in Python
+  (`tools/fs131_k2d_orbit.py`, exit 0; plants `gap` and `table` each fire, exit 1) and then **proved** by `decide +kernel` in 2.3 s
+  (`q = 11`, 120 × 12) and 3.7 s (`q = 19`, 360 × 20), 3.1–3.5 GB. Negative control: the same statement without `w ≠ 0` is refuted by
+  `decide` (watched). A first plant (gap colour `2` replaced by `0`) did **not** fire — that statement is also true; logged, replaced.
+- **Clause (ii) needs no cosets**: `v ↦ (φ (v − a).re, φ (v − a).im)` is defined on the whole connected graph (every `v − a` has
+  coordinates in `V`, `sub_mem_of_connected`), and sends the apex to `0`; it is transported to `UD(𝔽_q, 2)` by `unitQuadrance.map` of the
+  ring isomorphism, where `tip_eq_zero_of_tipFree` lands the tip. K2c's `tip_mem_of_hom` is this pair of children.
+- **NOAFF's targets in one child** (`exists_hom_slack`) with K2c's `slack_gamma7` proved as `finitePlane7_slack`.
+
+### 15.2 What is stated (✓ = proved in this job, sorry-free)
+
+New module **`Instances/FalconerOrbit`** (all ✓): `finitePlane7QuotColouring`, `finitePlane7QuotColouring_proper`, `finitePlane7QuotColoring`,
+`finitePlane7_fanGap`, `finitePlane7_not_fanGap_zero` (red control), `finitePlane7_slack`, `gamma11_orbit`, `gamma19_orbit`, `tipFree_of_orbit`,
+`finitePlane11_tipFree`, `finitePlane19_tipFree`.
+
+`Arith/PlaceHom` — `exists_placeHom` **closed from** `exists_isPlaceHom` (✓, induction, closed from its children) and `exists_hom_of_isPlaceHom`;
+`noAffine_fields` **closed from** `exists_hom_slack` and `forall_const_of_hom_slack`:
+
+| child | route | price |
+|---|---|---|
+| `pureTranscendental_zero` | `Subfield.closure (F ∪ ∅) = F` (`Subfield.closure_eq`) | 5k |
+| `pureTranscendental_succ` | `Subfield.closure_union`, `IntermediateField.adjoin_toSubfield`/`closure` of `F(t_init) ∪ {t_last}`; `Fin.range` split by `Fin.lastCases` | 20k |
+| `algebraicIndependent_init_and_transcendental_last` | `AlgebraicIndependent.comp` with `Fin.castSucc_injective`; `transcendental_adjoin` at `s = range castSucc`, `i = last`, then `IntermediateField.transcendental_adjoin_iff` and the identification of `IntermediateField.adjoin F (range (init t))` with `pureTranscendental F (init t)` | 35k |
+| `exists_valuationSubring_localization` | `B` := the image of `Localization.AtPrime 𝔭` in `F`; DVR (`isDiscreteValuationRing_of_dedekind_domain`, `𝔭 ≠ ⊥` since maximal in a domain that is not a field) ⟹ `ValuationRing` ⟹ `iff_isInteger_or_isInteger` | 35k |
+| `exists_residue_localization` | `r (a/s) = ā · s̄⁻¹` well defined by cross-multiplication (`𝔭` maximal: the quotient is a field); ring hom; `r x ≠ 0` ⟹ `x = a/s` with `a ∉ 𝔭` ⟹ `x⁻¹ = s/a ∈ B` ⟹ unit | 30k |
+| `placeHom_base` | `V` := `B` carried into `ℝ` by `F.subtype`; unit vectors by `mem_valuationSubring_of_sq_add_sq_eq_one` with `hB` from `FiniteField.isSquare_neg_one_iff` (`r (1 + x²) = 1 + (r x)² ≠ 0`); the third clause from `exists_residue_localization` | 30k |
+| `placeHom_step` | `V₁ = {f ∈ E₀(s) : lift f ∈ zeroPlace E₀ ∧ ↑(evalZero (lift f)) ∈ V₀}`, `lift = adjoinTranscendentalEquiv`; `φ₁ = φ₀ ∘ evalZero`; unit vectors of `E₀(s)²` in `zeroPlace` (`mem_valuationSubring_of_sq_add_sq_eq_one`, residue `E₀ ⊆ ℝ`, `one_add_sq_ne_zero_of_subfield`), their values unit vectors of `E₀²`; constants evaluate to themselves | 40k |
+| `exists_hom_of_isPlaceHom` | `unitQuadrance_colorable_of_subring`'s coset step with `planeOverIso`: `ψ = (φ, φ)` on `V × V`, `h = cosetResidue ψ`; adjacency from `cosetResidue_sub` | 30k |
+| `chromaticNumber_planeOver_pureTranscendental_eq` | induction on `n` exactly as `exists_isPlaceHom`, with `chromaticNumber_planeOver_adjoin_transcendental_eq` | 15k |
+| `nonempty_ringEquiv_zmod_of_card` | `Fintype.ofFinite`, `Nat.card_eq_fintype_card`, `(ZMod.ringEquivOfPrime R hp _).symm` | 10k |
+| `exists_hom_finitePlane_of_card` | `exists_placeHom`'s `h` composed with `unitQuadrance.map e.toRingHom` | 15k |
+| `slack_complete` | the colouring `Fin.castSucc` of `⊤`, gap colour `Fin.last k` | 10k |
+| `exists_hom_slack` | four cases: `11`, `19` (`exists_hom_finitePlane_of_card`, `finitePlane11_slack`, `finitePlane19_slack`), `7` (`finitePlane7_slack`), `χ(F²) ≤ k − 1` (`chromaticNumber_planeOver_pureTranscendental_eq`, `chromaticNumber_le_iff_colorable`: a colouring is a hom to `⊤`; `slack_complete (k − 1)`) | 30k |
+| `forall_const_of_hom_slack` | `noAffine hk ρ φ (Set.toFinite _) b` with `finsum_eq_sum_of_fintype`; its second clause at `Slack` | 15k |
+
+`Arith/FalconerField` — **both leaves closed from their children** (clause (i): `not_falconerFan_of_colorable` with
+`chromaticNumber_planeOver_pureTranscendental_eq`; the `𝔽₇` half by `exists_hom_finitePlane_of_card` and `not_falconerFan_five_of_hom_slack`;
+clause (ii): `sub_mem_of_connected`, `exists_hom_apex`, `nonempty_ringEquiv_zmod_of_card`, `tip_eq_zero_of_tipFree`, the tip-free facts):
+
+| child | route | price |
+|---|---|---|
+| `not_falconerFan_of_colorable` | restrict a `(k − 2)`-colouring to `H − a` (values `Fin.castLE`), `c₁ = k − 2`, `c₂ = k − 1` absent everywhere | 15k |
+| `sub_mem_of_connected` | walk induction, as in `falconerFan_five_mem_P` (each step adds a unit vector with coordinates in `E`) | 15k |
+| `exists_hom_apex` | `toFun v = (φ ⟨_, (sub_mem…).1⟩, φ ⟨_, (sub_mem…).2⟩)`; adjacency: the difference of images is `(φ, φ)` of the unit vector `u − v` (`map_sub`), whose image is on the circle (`map_pow`, `map_add`, `map_one`) and nonzero in a nontrivial ring | 25k |
+| `tip_eq_zero_of_tipFree` | by contradiction with `falconerFan_hom (by norm_num) hfan ρ` (A) at `C, γ` from `hfree (ρ t)` (the gap `FanGap C 0 γ` is (A)'s hypothesis at `ρ a = 0`) | 15k |
+| `not_falconerFan_five_of_hom_slack` | `hT (ρ t)` gives `C, γ` with a gap at `ρ t`; (B)'s last clause at `δ = γ` gives a neighbour coloured `γ` | 10k |
+
+**Generalizations** (for Keryx; neither narrows a row): FALC-RES clause (i) does not read connectedness (`have _ := hconn` keeps the row's
+hypothesis and the linter silent); clause (ii) does not read the transcendence of `t` — it holds over any subfield carrying a place-hom pair
+(`have _ := ht`). Both are visible in the assemblies.
+
+**Count**: 29 new theorems (11 ✓ in `Instances/FalconerOrbit`, `exists_isPlaceHom` ✓ from children; 17 `sorry`ed children), 2 new
+definitions (✓); 4 leaves closed from children (`exists_placeHom`, `noAffine_fields`, `falconerFan_five_field`, `falconerFan_five_placeHom`).
+Records: `scripts/Axioms.lean` block "FS131-K2d" (`tools/fs131_k2d_records.py` exit 0; its plant, one record hidden, exit 1).
+`Proofs.lean`, `ARCHITECTURE.md` (the new row, two Imports cells, § 3.10's theory-imports-instance line): `tools/check_architecture.py` PASS.
+Elaboration: each file by `lake env lean -DautoImplicit=false` against a scratch olean of `Instances/FalconerOrbit` (iteration only; the
+build at the end of this job is the evidence).
