@@ -798,8 +798,8 @@ N4-RAY's crossing; N3-CLEAR at the gap with NB3's two repairs) and the sector co
 - `n2_env_toward`, `n2_env_away`, `n2_env_near`, `n2_env_near_away` **M–H** each, one identity: N2-ENV's
   `|p − z|² − 1 = 8cos η·sin(η + Δ/2)·sin(Δ/2) ± s(4cos η·cos(η + Δ) − 2) + s²` for `p` beyond an end on `ω(A)` (`ρ = 2cos η`), monotone in `ρ`
   beyond; within the arc's directions `B̄(z, 1) ⊆ B̄(P, 2 − s)` (toward). Choose `ψ` from `r` explicitly (the probe: `r(ψ) ≈ ψ`). Children: the identity
-  (`ring_nf` after `Complex.sq_norm`, `Real.cos_sub`), `sin_half_ge` (`sin(Δ/2) ≥ Δ/π` for `Δ ≤ π`, from `Real.sin_le`-style concavity: Mathlib's
-  `Real.two_div_pi_mul_le_sin` — to be `#check`ed by the implementer; if absent, Jordan's inequality is a child).
+  (`ring_nf` after `Complex.sq_norm`, `Real.cos_sub`), `sin_half_ge` (`sin(Δ/2) ≥ Δ/π` for `Δ ≤ π`, Jordan's inequality, Mathlib's `Real.mul_le_sin`: `0 ≤ x ≤ π/2 → 2/π·x ≤ sin x`,
+  confirmed with `#check`; `Real.two_div_pi_mul_le_sin` is unknown at the pin).
 - `bend_toward` **H**, `bend_away` **H**, `bend_away_whole` **E** over `bend_away` (`r2Contacts` empty): engines 1–3 plus N2-TOWARD / N2-AWAY / N2-TAN's
   clearness (N2-ENV, N2-SIGN, `hout`/`hin` as positive distance of the class from `P`, `R₂(ᾱ)`); the tangent bend's cap estimate (N2-TAN, `TAN` exact
   in `tools/fs112_n2_checks.py`); the lens profile at the ends (a corner of angle `ψ` inside the side tile's sector at `A`, or a tangent start, N2-TOWARD).
