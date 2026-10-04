@@ -1755,3 +1755,22 @@ reason by the close.*
      implementer runs Stage 28's step (iii) and reports at once if it fails.
 245. **Brief FS131-I4k, wave 4's eleventh implementer** (Opus; `data/fs131/briefs/FS131-I4k-wave4.md`, derived by script from I4j's, `LocalStructure` added to its
      touches for item 244 (b), gated PASS): `UnitArc` and `BaseSteps`' 11 in Stage 28's order. Launched in I4j's slot: 1 (I2n) + 1 (IC4) + 1 (I5b) + 1 (I4k) = 4.
+246. **FS131-I5b handed back at stage 8, harness ≈ 379k** (report `data/fs131/reports/FS131-I5b.md` on `fs131-w5`; branch at `0db34854`, checked): wave 5 46 → 44.
+     **[kernel] on the branch, standard three**: **`Thomassen.lemma1`** (`[Thomassen1999]` p. 850, Lemma 1: a connected, locally finite, locally Hamiltonian graph
+     with at least 13 vertices has a vertex of degree ≥ 6 — formalized, no axiom) with children `exists_two_common`, `two_mid`, `exists_eq_of_steps(_up)`; and
+     FS114-CVB-PINCH's last clause **`exists_holed_valid_fragment`** (a valid six-coloured fragment covering `B̄(0, 1/2)` with a holed tile — `holedFrag`, the
+     annulus 1/4 < |z| < 1/2 about the disc |z| < 1/4, four quadrant colours outside). Keryx's receipts: build log `build/gate/build/20261004T212909Z-2535131.log`
+     (w5) "Build completed successfully (5366 jobs)", 0 warnings other than `sorry`; `sorry` lines by count Terminal 12, Dense 3, HexRing 7, MapGraph 3, BaseWalk
+     15, BaseDense 4 (44); `data/fs131/i5b/I5bAxioms.out` prints `lemma1` and `exists_holed_valid_fragment` on the standard three and `cvb_thom` with `sorryAx`.
+     Generalization: `lemma1`'s count needs no maximum-degree vertex (one case for all; the icosahedron shows 13 is load-bearing). `cvb_hole_disconnected`'s defect
+     as item 241. **Re-pricing**: both leaves the plan's M at its price; the 39 left sit on four unbuilt infrastructures — the brick map's point classification
+     (`sevenBrickMap_isTerminalMap`, `not_row134BaseUA_seven`; 400–600 lines), sector-chart geometry at a point (`bv_nd`, `bv_nd1`, `hex_regular`), the stuck
+     structure (`stuck_structure_ua` and the seven chain leaves), the limit constructions (`exists_red`, `exists_terminal`); `disc1_local` needs a fragment form of
+     TS-T's regions. `cvb_pinch_connected` looks true but needs planar topology of the planar core's kind.
+247. **Rulings on I5b's held items and the slot.** (a) `IsHoleOf` / `cvb_hole_disconnected`: as item 242 (the planar job's first question). (b)
+     **`cvb_pinch_connected` joins the planar-infrastructure job** (seven leaves now: the five of item 239, `cvb_hole_disconnected`, `cvb_pinch_connected`).
+     Confidence: high. (c) **I5b's slot goes to the moves' parallel implementer, FS131-IM1 (item 236), now; wave 5 resumes in the next slot that frees** (wave 2's
+     landing). Alternative weighed: a wave-5 successor in the same slot (the rule of item 199 (c): a lane keeps its slot). Why: wave 5 cannot land before wave 4,
+     and splitting the moves off takes about three sessions off wave 4's longest path (item 236), while pausing wave 5 for one slot-turn costs it about one;
+     I5b also stopped below its line with its remaining leaves gated on unbuilt infrastructure. Confidence: medium — the fact that would change it: wave 2's landing
+     slipping by several sessions, which would leave wave 5 idle too long.
