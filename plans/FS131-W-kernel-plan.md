@@ -138,3 +138,55 @@ reduces to step 6 at `Q` in Woodall's normal form: Q2 is step 7's alone.
 `./scripts/build.sh` under the slot (40 GiB, 8 cpus, `BATCH=4`), from inside the worktree: **OK — 442 of 442 batches, 16 modules rebuilt, 11 with
 warnings** (every warning `declaration uses 'sorry'`, waves 3–4's skeleton modules), 8 m 28 s, exit 0 (`build/gate/build/20261004T094153Z-2467841.log`;
 driver log `data/fs131/w/build-stage1.log`).
+
+## Stage 2 — SAVED: the foundation (`debruijn-domain-modeling`, invoked fresh)
+
+### 2.1 The model, and why this shape
+
+`Proofs/HadwigerNelson/Plane/Woodall/Basic.lean` (imports `Plane/ValidMap/Basic`), sorry-free. Region-only and extrinsic throughout: predicates on
+sets and on one `ArcMap`, one two-constructor type.
+
+**The intrinsic structure.** Every step of both papers, once repaired, is one move: an open set `W` coloured by two colours with no monochrome unit,
+a change point `b ∈ W`, and a proof that `ω(b)` meets `W` — contradicting lemma (L) (`lemmaL`, FS106-L). `ω(b)` meets `W` because `ω(b)` crosses
+`ω(u)` transversally at the two angles `θ_b ± α_b` (`α_b = arccos(|b − u|/2)`) and `W` carries a one-sided collar about one of them. So:
+- Woodall's "unit arc of positive thickness" with a variable thickness `f(θ)` is incidental; intrinsic is **a collar about each angle**
+  (`CollarAt W u s θ`: some collar of positive thickness and half-width around `θ`, on the side `s`). Over a compact sub-interval this gives a
+  uniform collar.
+- Townsend's "finitely disconnected unit annulus" (a closed doubly connected set, cut points as points whose removal makes it simply connected) is
+  incidental framing; intrinsic is **a finite set of cut angles off which every angle carries a one-sided collar, and one seed** (a one-sided collar
+  over an arc longer than `π/3`, which holds a unit pair in every thin band near `ω(u)`, hence change points at infinitely many radii, hence one
+  avoiding the finitely many points whose circles pass through two cut points).
+- The 2-coloured set is wave 4's `shadow`: `⋂ c ∈ T, shadow (F.region c)` — the points whose unit circles meet every class of `T`; its region
+  points carry no colour of `T` (validity).
+- Which collars exist is decided, to first order, by the **cones** of the classes at `u` (wave 3's `coneAt`): an outer collar about `ψ` meets a
+  connected open piece `R` with `u ∈ cl R` when `cone(R)` meets the open half-circle about `ψ`, an inner collar when it meets the opposite one
+  (connectedness: `R` has points inside and outside `B(z, 1)`). At the switching angles (normals to an edge at `u`) the second order decides: one
+  side's collar survives unless the edge lies on the unit circle centred there — for arc maps, a comparison of a segment or circle with a unit circle.
+- **The picture at a point** (`ArcMap.SectorsAt v n d c`) is Woodall's "regions at a vertex" read on colour changes: `n` sectors between monotone
+  directions `d` (`d (last n) = d 0 + 2π`; zero-angle sectors are horns), adjacent colours different (Woodall's step 1 is automatic), truncated open
+  sectors strictly inside each sector in its class, and the cone of each class equal to the union of its closed sectors. Edges have directions
+  automatically for arcs (Woodall's step 2). `WoodallMerged` is step 3's conclusion in Woodall's words ("if two of the regions are in the same set,
+  then each of them subtends angle 0 at P"); `WoodallNormal` is steps 3 and 5 (distinct colours, every angle above `π/3`, at points of three or more
+  sectors).
+
+**Placement.** Nothing is indexed but the picture's `n`, which every step inspects (degree 3, 4, 5): `d : Fin (n + 1) → ℝ`, `c : Fin n → Fin k`.
+
+### 2.2 Alternatives weighed
+
+| choice | taken | alternative | why |
+|---|---|---|---|
+| boundaries | wave 3/4's `ArcMap` | general Jordan arcs (Conditions 2–4) | F4, ruled (a): the local theory of Jordan arcs needs the Jordan curve and θ-curve theorems (not in Mathlib) and Woodall's step 2 |
+| Townsend's annulus | cut angles + `CollarAt` + one-sided seed | his Definition 2 literally | the literal form is plane topology (doubly connected, cut points by removal) and its proof reads only the collar property |
+| the seed | one-sided collar over an arc `> π/3` | a connected open set meeting both sides | the side-switching seed needs "an open connected set minus a finite set is connected" (not in Mathlib's relative form); every application has a one-sided seed (§ 3.2, `step6`'s plan) |
+| Woodall's step 3 | a global modification `exists_woodallMerged` | modification-free choice of points | without recolouring, a three-colour point with a repeated colour (`c₁ c₃ c₂ c₃`) has a cut set of positive length and no lemma applies to it (F3) |
+| the picture | on colour changes | on arcs (every arc through `v` a boundary) | arcs between equal colours are invisible to validity; the colour-change picture makes Woodall's step 1 free |
+
+### 2.3 Validation and the gate on this commit
+
+Spec examples (each fails if its definition drifts): a point of `annSector`; **adversary** the centre is in no annular sector; points of the inner and
+outer collars; **adversary** a collar of thickness `≤ 1` misses its own circle; `angleIcc_zero_two_pi`, `coneAt_univ`. Inhabitants:
+`ArcMap.const_sectorsAt` (the one-colour plane has the one-sector picture at every point), `const_woodallNormal`, `const_woodallMerged`; **adversary**
+`not_woodallNormal_of_repeat` (a three-sector picture with a repeated colour violates `WoodallNormal`). Elaborated with `lake env lean` (lakefile
+options passed), no warning; the build runs at stage 3. `Proofs.lean`, `ARCHITECTURE.md` (§ 3.11 row; `tools/check_architecture.py` PASS),
+`scripts/Axioms.lean` (section "FS-131 Woodall's chain (job FS131-W) — the foundation", 7 records); `tools/fs131_w_decls.py --check` (7 names, 0
+missing) and `--plant` (FIRED, 7 missing).

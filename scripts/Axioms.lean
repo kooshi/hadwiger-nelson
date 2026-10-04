@@ -2156,6 +2156,16 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.nb4p
 #print axioms HadwigerNelson.Plane.ArcMap.flank_incomplete_bowtie
 
+/-! ## FS-131 Woodall's chain (job FS131-W) — the foundation: collars about a unit circle, the picture at a point, Woodall's normal forms -/
+
+#print axioms HadwigerNelson.Plane.angleIcc_zero_two_pi
+#print axioms HadwigerNelson.Plane.coneAt_univ
+#print axioms HadwigerNelson.Plane.ArcMap.const_sectorsAt
+#print axioms HadwigerNelson.Plane.ArcMap.sectorsAt_one_colour
+#print axioms HadwigerNelson.Plane.ArcMap.const_woodallNormal
+#print axioms HadwigerNelson.Plane.ArcMap.const_woodallMerged
+#print axioms HadwigerNelson.Plane.ArcMap.not_woodallNormal_of_repeat
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
