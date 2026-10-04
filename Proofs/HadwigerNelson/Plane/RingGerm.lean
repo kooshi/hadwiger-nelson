@@ -1177,6 +1177,218 @@ theorem sixQ_inhabited : sixFrag.Valid ∧ sixFrag.Covers 0 1 ∧ sixFrag.colour
 
 /-! ## FS129-SR2-TOUCHW (at every `k` with exactly two colours absent; the row is `k = 6`) -/
 
+/-- An open set whose closure holds `x` has points of it other than `x` arbitrarily near `x`. -/
+theorem exists_near_of_mem_closure_isOpen {T : Set ℂ} (hTo : IsOpen T) {x : ℂ} (hx : x ∈ closure T) :
+    ∀ ε > 0, ∃ z ∈ T, z ≠ x ∧ dist z x < ε := by
+  intro ε hε
+  obtain ⟨z, hzT, hzd⟩ := Metric.mem_closure_iff.mp hx (ε / 2) (half_pos hε)
+  by_cases hzx : z = x
+  · subst hzx
+    obtain ⟨r, hr, hrT⟩ := Metric.isOpen_iff.mp hTo z hzT
+    have hm := lt_min (half_pos hr) (half_pos hε)
+    refine ⟨z + ((min (r / 2) (ε / 2) : ℝ) : ℂ), hrT ?_, ?_, ?_⟩
+    · rw [mem_ball, dist_eq_norm, add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hm]
+      exact lt_of_le_of_lt (min_le_left _ _) (by linarith)
+    · intro h
+      have : ((min (r / 2) (ε / 2) : ℝ) : ℂ) = 0 := by simpa using h
+      exact hm.ne' (Complex.ofReal_eq_zero.mp this)
+    · rw [dist_eq_norm, add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hm]
+      exact lt_of_le_of_lt (min_le_right _ _) (by linarith)
+  · exact ⟨z, hzT, hzx, by rw [dist_comm]; linarith⟩
+
+/-- **The four germs at `r(ψ ± 60°)` in the closure of one class keep the class away from `r(ψ)`**: GERM-R's four open
+direction sets cover every direction. -/
+theorem not_mem_closure_of_four_germs (hF : F.Valid) {p : ℂ} {ψ : ℝ} {c : Fin k}
+    (h1 : GermIn p (ψ - π / 3) .cw (closure (F.region c))) (h2 : GermIn p (ψ - π / 3) .ccw (closure (F.region c)))
+    (h3 : GermIn p (ψ + π / 3) .cw (closure (F.region c))) (h4 : GermIn p (ψ + π / 3) .ccw (closure (F.region c))) :
+    ringPt p ψ ∉ closure (F.region c) := by
+  have hπ := Real.pi_pos
+  intro hy
+  obtain ⟨β, hβ⟩ := coneAt_nonempty (exists_near_of_mem_closure_isOpen (F.isOpen_region c) hy)
+  obtain ⟨m, hm⟩ := exists_shift_Ico (ψ - π / 2) β
+  have hper : ∀ β, β + 2 * π ∈ coneAt (F.region c) (ringPt p ψ) ↔ β ∈ coneAt (F.region c) (ringPt p ψ) :=
+    fun β => mem_coneAt_add_two_pi
+  have hβ' : β + 2 * π * m ∈ coneAt (F.region c) (ringPt p ψ) := (periodic_int hper β m).mpr hβ
+  set b := β + 2 * π * m with hb
+  obtain ⟨hb1, hb2⟩ := hm
+  have hv := germR_vMinus hF h1
+  have hvp := germR_vPlus hF h2
+  have hu := germR_uMinus hF h3
+  have hup := germR_uPlus hF h4
+  by_cases c1 : b < ψ + π / 6
+  · exact hu b ⟨by linarith, c1⟩ hβ'
+  · by_cases c2 : b < ψ + 5 * π / 6
+    · exact hvp b ⟨by linarith, c2⟩ hβ'
+    · by_cases c3 : b < ψ + 7 * π / 6
+      · exact hup b ⟨by linarith, c3⟩ hβ'
+      · exact hv b ⟨by linarith, by linarith⟩ hβ'
+
+
+
+/-- **A germ on a ring arc is, off at most two angles, interior to the arc**: near a ring point, on one side, every angle of
+the germ is congruent to an interior angle of the arc. -/
+theorem exists_germ_interior {p : ℂ} {θ₁ θ₂ : ℝ} {θ : ℝ} {s : Side} (hg : GermIn p θ s (ringArc p θ₁ θ₂)) :
+    ∃ δ > 0, ∀ t ∈ Ioo (0 : ℝ) δ, ∃ ψ ∈ Ioo θ₁ θ₂, e ψ = e (θ + s.sign * t) := by
+  have hσ : s.sign = 1 ∨ s.sign = -1 := by cases s <;> simp [Side.sign]
+  obtain ⟨δ, hδ, hsub⟩ := hg
+  set B : Set ℝ := {t ∈ Ioo (0 : ℝ) 1 | e (θ + s.sign * t) = e θ₁ ∨ e (θ + s.sign * t) = e θ₂} with hB
+  have hBfin : B.Finite := by
+    have : B ⊆ {t ∈ Ioo (0 : ℝ) 1 | e (θ + s.sign * t) = e θ₁} ∪ {t ∈ Ioo (0 : ℝ) 1 | e (θ + s.sign * t) = e θ₂} := by
+      intro t ht
+      rcases ht.2 with h | h
+      · exact Or.inl ⟨ht.1, h⟩
+      · exact Or.inr ⟨ht.1, h⟩
+    exact (((subsingleton_e_eq θ θ₁ _ hσ).finite).union ((subsingleton_e_eq θ θ₂ _ hσ).finite)).subset this
+  have h0 : (0 : ℝ) ∈ Bᶜ := fun h => lt_irrefl _ h.1.1
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hBfin.isClosed.isOpen_compl 0 h0
+  refine ⟨min (min δ ε) 1, lt_min (lt_min hδ hε) one_pos, fun t ht => ?_⟩
+  have htδ : t < δ := lt_of_lt_of_le ht.2 ((min_le_left _ _).trans (min_le_left _ _))
+  have htε : t < ε := lt_of_lt_of_le ht.2 ((min_le_left _ _).trans (min_le_right _ _))
+  have ht1 : t < 1 := lt_of_lt_of_le ht.2 (min_le_right _ _)
+  obtain ⟨ψ, hψ, hψe⟩ : ringPt p (θ + s.sign * t) ∈ ringArc p θ₁ θ₂ := hsub ⟨t, ⟨ht.1, htδ⟩, rfl⟩
+  have hψe' : e ψ = e (θ + s.sign * t) := by simpa [ringPt] using hψe
+  refine ⟨ψ, ⟨lt_of_le_of_ne hψ.1 ?_, lt_of_le_of_ne hψ.2 ?_⟩, hψe'⟩
+  · intro hψ1
+    have : t ∈ B := ⟨⟨ht.1, ht1⟩, Or.inl (by rw [← hψe', ← hψ1])⟩
+    exact hball (by rw [mem_ball, Real.dist_eq, sub_zero, abs_of_pos ht.1]; exact htε) this
+  · intro hψ2
+    have : t ∈ B := ⟨⟨ht.1, ht1⟩, Or.inr (by rw [← hψe', hψ2])⟩
+    exact hball (by rw [mem_ball, Real.dist_eq, sub_zero, abs_of_pos ht.1]; exact htε) this
+
+/-- The whole closed arc of a ring arc lies in the closure of each side colour's class. -/
+theorem IsRingArc.ringArc_subset_closure {p : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc p θ₁ θ₂ c c') :
+    ringArc p θ₁ θ₂ ⊆ closure (F.region c) ∧ ringArc p θ₁ θ₂ ⊆ closure (F.region c') := by
+  have hcont : Continuous fun θ : ℝ => ringPt p θ := by unfold ringPt e; fun_prop
+  have hmem : ∀ d, (∀ φ ∈ Ioo θ₁ θ₂, ringPt p φ ∈ closure (F.region d)) →
+      ringArc p θ₁ θ₂ ⊆ closure (F.region d) := by
+    intro d hd
+    have h1 : ringPt p '' Icc θ₁ θ₂ ⊆ closure (ringPt p '' Ioo θ₁ θ₂) := by
+      rw [← closure_Ioo hA.1.ne]
+      exact image_closure_subset_closure_image hcont
+    refine h1.trans (closure_minimal ?_ isClosed_closure)
+    rintro _ ⟨φ, hφ, rfl⟩
+    exact hd φ hφ
+  constructor
+  · refine hmem c fun φ hφ => ?_
+    have : c ∈ F.innerColours p (ringPt p φ) := by rw [(hA.2.2 φ hφ).1]; rfl
+    exact closure_mono Set.inter_subset_left this
+  · refine hmem c' fun φ hφ => ?_
+    have : c' ∈ F.outerColours p (ringPt p φ) := by rw [(hA.2.2 φ hφ).2]; rfl
+    exact closure_mono Set.sdiff_subset this
+
+/-- **An interior point of a ring arc lies in the closure of a class only if the class is a side colour**. -/
+theorem IsRingArc.eq_of_mem_closure {p : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc p θ₁ θ₂ c c') {φ : ℝ}
+    (hφ : φ ∈ Ioo θ₁ θ₂) {X : Fin k} (hX : ringPt p φ ∈ closure (F.region X)) : X = c ∨ X = c' := by
+  have ha : ringPt p φ ∈ F.dom := (hA.2.1 ⟨φ, Ioo_subset_Icc_self hφ, rfl⟩).1
+  obtain ⟨ε₁, hε₁, hin⟩ := F.side_ball_subset_closure (O := ball p 1) isOpen_ball ha (c := c) fun d hd => by
+    have : d ∈ F.innerColours p (ringPt p φ) := hd
+    rw [(hA.2.2 φ hφ).1] at this; exact this
+  obtain ⟨ε₂, hε₂, hout⟩ := F.side_ball_subset_closure (O := (closedBall p 1)ᶜ) isClosed_closedBall.isOpen_compl ha
+    (c := c') fun d hd => by
+    have : d ∈ F.outerColours p (ringPt p φ) := by
+      show ringPt p φ ∈ closure (F.region d \ closedBall p 1)
+      rwa [Set.sdiff_eq]
+    rw [(hA.2.2 φ hφ).2] at this; exact this
+  set ε := min ε₁ ε₂ with hε
+  have hε0 : 0 < ε := lt_min hε₁ hε₂
+  obtain ⟨z, hzX, hzd⟩ := Metric.mem_closure_iff.mp hX (ε / 2) (half_pos hε0)
+  -- a point of `region X` near the ring point, strictly inside or strictly outside the unit circle about `p`
+  have key : ∃ w ∈ F.region X, dist w (ringPt p φ) < ε ∧ (‖w - p‖ < 1 ∨ 1 < ‖w - p‖) := by
+    rcases lt_trichotomy ‖z - p‖ 1 with h | h | h
+    · exact ⟨z, hzX, by rw [dist_comm]; linarith, Or.inl h⟩
+    · obtain ⟨η, hη, hηsub⟩ := Metric.isOpen_iff.mp (F.isOpen_region X) z hzX
+      set w : ℂ := z + (((min η (ε / 2)) / 2 : ℝ) : ℂ) * (z - p) with hw
+      have hzp : ‖z - p‖ = 1 := h
+      have hm : 0 < min η (ε / 2) := lt_min hη (half_pos hε0)
+      have hwz : ‖w - z‖ = min η (ε / 2) / 2 := by
+        rw [hw, add_sub_cancel_left, norm_mul, hzp, mul_one, Complex.norm_real, Real.norm_eq_abs,
+          abs_of_pos (by positivity)]
+      refine ⟨w, hηsub (by rw [mem_ball, dist_eq_norm, hwz]; linarith [min_le_left η (ε / 2)]), ?_, Or.inr ?_⟩
+      · have : dist w z < ε / 2 := by
+          rw [dist_eq_norm, hwz]; linarith [min_le_right η (ε / 2)]
+        have h2 := dist_triangle w z (ringPt p φ)
+        rw [dist_comm (ringPt p φ) z] at hzd
+        linarith
+      · have : w - p = (1 + (min η (ε / 2)) / 2 : ℝ) * (z - p) := by rw [hw]; push_cast; ring
+        rw [this, norm_mul, hzp, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by positivity)]
+        linarith
+    · exact ⟨z, hzX, by rw [dist_comm]; linarith, Or.inr h⟩
+  obtain ⟨w, hwX, hwd, hwp | hwp⟩ := key
+  · left
+    have hwc : w ∈ closure (F.region c) := hin ⟨by rw [mem_ball]; exact lt_of_lt_of_le hwd (min_le_left _ _), by rwa [mem_ball, dist_eq_norm]⟩
+    obtain ⟨u, huX, huc⟩ := mem_closure_iff.mp hwc (F.region X) (F.isOpen_region X) hwX
+    exact huX.2.symm.trans huc.2
+  · right
+    have hwc : w ∈ closure (F.region c') :=
+      hout ⟨by rw [mem_ball]; exact lt_of_lt_of_le hwd (min_le_right _ _), by rw [mem_compl_iff, mem_closedBall, dist_eq_norm]; linarith⟩
+    obtain ⟨u, huX, huc⟩ := mem_closure_iff.mp hwc (F.region X) (F.isOpen_region X) hwX
+    exact huX.2.symm.trans huc.2
+
+/-- **A germ off a (Q) arc, with `X` absent and not in the germ's closure: it lies with the other absent colour `X'`.** With
+exactly the colours `X`, `X'` absent at `p` and `X ≠ X'`, a germ of the ring that lies on no (Q) arc and not in the closure of
+the class of `X` lies in the closure of the class of `X'` and misses the closure of the class of `X`. -/
+theorem germ_absent_class (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard) {X X' : Fin k}
+    (hXX' : X ≠ X') (hcompl : (F.coloursAt p)ᶜ = {X, X'}) {θ : ℝ} (s : Side) (hQ : ¬ F.GermOnQ p θ s)
+    (hnoX : ¬ GermIn p θ s (closure (F.region X))) :
+    GermIn p θ s (closure (F.region X')) ∧ GermIn p θ s (closure (F.region X))ᶜ := by
+  have hdom : ringPt p θ ∈ F.dom := hp (by simp [mem_closedBall, ringPt, dist_eq_norm])
+  have habs : ∀ d, d ∉ F.coloursAt p → d = X ∨ d = X' := by
+    intro d hd
+    have : d ∈ (F.coloursAt p)ᶜ := hd
+    rw [hcompl] at this
+    simpa using this
+  rcases F.germ_dichotomy hdom s with ⟨c, hc⟩ | ⟨θ₁, θ₂, c, c', hA, hgArc⟩
+  · obtain ⟨δ, hδ, hsub⟩ := hc
+    have hq : ringPt p (θ + s.sign * (δ / 2)) ∈ F.region c := hsub ⟨δ / 2, ⟨by linarith, by linarith⟩, rfl⟩
+    have hcabs : c ∉ F.coloursAt p := F.not_mem_coloursAt_of_mem_sphere hF (ringPt_mem_sphere p _) hq
+    have hcX' : c = X' := by
+      rcases habs c hcabs with h | h
+      · exact absurd ⟨δ, hδ, hsub.trans (subset_closure.trans (closure_mono (by rw [h]))) ⟩ hnoX
+      · exact h
+    subst hcX'
+    refine ⟨⟨δ, hδ, hsub.trans subset_closure⟩, δ, hδ, hsub.trans ?_⟩
+    intro z hz hzc
+    obtain ⟨u, huc, huX⟩ := mem_closure_iff.mp hzc (F.region c) (F.isOpen_region c) hz
+    exact hXX' (huX.2.symm.trans huc.2)
+  · have hnotboth : ¬ (c ∈ F.coloursAt p ∧ c' ∈ F.coloursAt p) := fun ⟨h1, h2⟩ =>
+      hQ ⟨θ₁, θ₂, ⟨c, c', hA, h1, h2, h4⟩, hgArc⟩
+    obtain ⟨hcl, hcl'⟩ := hA.ringArc_subset_closure
+    have hXc : X ≠ c := fun h => hnoX (hgArc.mono (h ▸ hcl))
+    have hXc' : X ≠ c' := fun h => hnoX (hgArc.mono (h ▸ hcl'))
+    refine ⟨?_, ?_⟩
+    · by_cases hc : c ∈ F.coloursAt p
+      · have hc' : c' ∉ F.coloursAt p := fun h => hnotboth ⟨hc, h⟩
+        rcases habs c' hc' with h | h
+        · exact absurd h.symm hXc'
+        · exact hgArc.mono (h ▸ hcl')
+      · rcases habs c hc with h | h
+        · exact absurd h.symm hXc
+        · exact hgArc.mono (h ▸ hcl)
+    · obtain ⟨δ, hδ, hint⟩ := exists_germ_interior hgArc
+      refine ⟨δ, hδ, ?_⟩
+      rintro _ ⟨t, ht, rfl⟩ hclo
+      obtain ⟨ψ', hψ', he⟩ := hint t ht
+      have hr : ringPt p (θ + s.sign * t) = ringPt p ψ' := by simp only [ringPt, he]
+      have hclo' : ringPt p ψ' ∈ closure (F.region X) := by rw [← hr]; exact hclo
+      rcases hA.eq_of_mem_closure hψ' hclo' with h | h
+      · exact hXc h
+      · exact hXc' h
+
+/-- A germ of the ring inside a closed sub-arc of the ring: its base point lies in the sub-arc. -/
+theorem mem_ringArc_of_germIn {p : ℂ} {ψ θ₁ θ₂ : ℝ} {s : Side} (hg : GermIn p ψ s (ringArc p θ₁ θ₂)) :
+    ringPt p ψ ∈ ringArc p θ₁ θ₂ := by
+  have hcont : Continuous fun θ : ℝ => ringPt p θ := by unfold ringPt e; fun_prop
+  have hclosed : IsClosed (ringArc p θ₁ θ₂) := (isCompact_Icc.image hcont).isClosed
+  obtain ⟨δ, hδ, hsub⟩ := hg
+  refine hclosed.closure_subset_iff.mpr hsub ?_
+  rw [Metric.mem_closure_iff]
+  intro ε hε
+  set t := min (δ / 2) (ε / 2) with ht
+  have ht0 : 0 < t := lt_min (half_pos hδ) (half_pos hε)
+  refine ⟨ringPt p (ψ + s.sign * t), ⟨t, ⟨ht0, lt_of_le_of_lt (min_le_left _ _) (by linarith)⟩, rfl⟩, ?_⟩
+  rw [dist_comm]
+  exact lt_of_le_of_lt (dist_ringPt_side_le p ψ s ht0.le) (lt_of_le_of_lt (min_le_right _ _) (by linarith))
+
 /-- **FS129-SR2-TOUCHW** (carrying FS116-N1-TOUCH, its idle hypothesis "w in the closure of a tile of one of `p`'s colours"
 dropped): at a vertex of at least four colours with exactly two colours absent, let `w = r(ψ)` be no change point, on no arc
 of `Γ` on `ω(p)`, with none of the four germs at `ψ ± 60°` on a (Q) arc. Then the ring just clockwise and just
@@ -1191,7 +1403,78 @@ theorem touchW (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.colou
       (∀ θ ∈ ({ψ + π / 3, ψ - π / 3} : Set ℝ), ∀ s,
         GermIn p θ s (closure (F.region X')) ∧ GermIn p θ s (closure (F.region X))ᶜ) ∧
       X' ∉ F.coloursAt (ringPt p ψ) := by
-  sorry
+  have hπ := Real.pi_pos
+  have hdom : ringPt p ψ ∈ F.dom := hp (by simp [mem_closedBall, ringPt, dist_eq_norm])
+  have hcard : ((F.coloursAt p)ᶜ).ncard = 2 := by
+    have h := Set.ncard_add_ncard_compl (F.coloursAt p)
+    rw [Nat.card_eq_fintype_card, Fintype.card_fin] at h
+    omega
+  obtain ⟨A, B, hAB, hcompl⟩ := Set.ncard_eq_two.mp hcard
+  -- the ring germs at `w` lie in classes (never on an arc)
+  have hgerm : ∀ s : Side, ∃ c, GermIn p ψ s (F.region c) := by
+    intro s
+    rcases F.germ_dichotomy hdom s with h | ⟨θ₁, θ₂, c, c', hA, hg⟩
+    · exact h
+    · exact absurd ⟨θ₁, θ₂, hA.1, mem_ringArc_of_germIn hg, hA.2.1⟩ hna
+  obtain ⟨c₁, hc₁⟩ := hgerm .cw
+  obtain ⟨c₂, hc₂⟩ := hgerm .ccw
+  have hcabs : ∀ s c, GermIn p ψ s (F.region c) → c ∉ F.coloursAt p := by
+    rintro s c ⟨δ, hδ, hsub⟩
+    exact F.not_mem_coloursAt_of_mem_sphere hF (ringPt_mem_sphere p _)
+      (hsub ⟨δ / 2, ⟨by linarith, by linarith⟩, rfl⟩)
+  have h12 : c₁ = c₂ := by
+    by_cases hΓ : ringPt p ψ ∈ F.Γ
+    · by_contra hne
+      exact hnc c₂ c₁ ⟨hΓ, fun h => hne h.symm, hc₂, hc₁⟩
+    · have hint : ringPt p ψ ∈ F.interiorPts := ⟨hdom, fun h => hΓ ⟨hdom, h⟩⟩
+      have hr : ringPt p ψ ∈ F.region (F.col (ringPt p ψ)) := ⟨hint, rfl⟩
+      obtain ⟨η, hη, hηsub⟩ := Metric.isOpen_iff.mp (F.isOpen_region _) _ hr
+      have hside : ∀ s c, GermIn p ψ s (F.region c) → c = F.col (ringPt p ψ) := by
+        rintro s c ⟨δ, hδ, hsub⟩
+        set t := min (δ / 2) (η / 2) with ht
+        have ht0 : 0 < t := lt_min (half_pos hδ) (half_pos hη)
+        have hq1 : ringPt p (ψ + s.sign * t) ∈ F.region c :=
+          hsub ⟨t, ⟨ht0, lt_of_le_of_lt (min_le_left _ _) (by linarith)⟩, rfl⟩
+        have hq2 : ringPt p (ψ + s.sign * t) ∈ F.region (F.col (ringPt p ψ)) :=
+          hηsub (by
+            rw [mem_ball]
+            exact lt_of_le_of_lt (dist_ringPt_side_le p ψ s ht0.le)
+              (lt_of_le_of_lt (min_le_right _ _) (by linarith)))
+        exact hq1.2.symm.trans hq2.2
+      rw [hside .cw c₁ hc₁, hside .ccw c₂ hc₂]
+  subst h12
+  -- name the two absent colours `X = c₁` and `X'`
+  have hXabs : c₁ ∈ (F.coloursAt p)ᶜ := hcabs .cw c₁ hc₁
+  obtain ⟨X', hXX', hcompl'⟩ : ∃ X', c₁ ≠ X' ∧ (F.coloursAt p)ᶜ = {c₁, X'} := by
+    rw [hcompl] at hXabs
+    rcases hXabs with h | h
+    · exact ⟨B, by rw [h]; exact hAB, by rw [hcompl, h]⟩
+    · exact ⟨A, by rw [h]; exact hAB.symm, by rw [hcompl, h, pair_comm]⟩
+  -- the four germs
+  have hno : ∀ θ s, (θ = ψ + π / 3 ∨ θ = ψ - π / 3) → ¬ GermIn p θ s (closure (F.region c₁)) := by
+    intro θ s hθ hg
+    have hcl : GermIn p ψ s (closure (F.region c₁)) := by
+      cases s with
+      | cw => exact hc₁.mono subset_closure
+      | ccw => exact hc₂.mono subset_closure
+    rcases hθ with rfl | rfl
+    · exact F.not_germIn_closure_rotate hF p ψ s c₁ ⟨hcl, hg⟩
+    · refine F.not_germIn_closure_rotate hF p (ψ - π / 3) s c₁ ⟨hg, ?_⟩
+      rwa [show ψ - π / 3 + π / 3 = ψ by ring]
+  have hfour : ∀ θ, (θ = ψ + π / 3 ∨ θ = ψ - π / 3) → ∀ s,
+      GermIn p θ s (closure (F.region X')) ∧ GermIn p θ s (closure (F.region c₁))ᶜ := by
+    intro θ hθ s
+    have hQ : ¬ F.GermOnQ p θ s := by
+      rcases hθ with rfl | rfl
+      · exact (hq s).1
+      · exact (hq s).2
+    exact germ_absent_class hF hp h4 hXX' hcompl' s hQ (hno θ s hθ)
+  refine ⟨c₁, X', hXX', hcompl', hc₁, hc₂, ?_, ?_⟩
+  · rintro θ hθ s
+    exact hfour θ (by simpa using hθ) s
+  · intro hmem
+    exact not_mem_closure_of_four_germs hF (hfour _ (Or.inr rfl) .cw).1 (hfour _ (Or.inr rfl) .ccw).1
+      (hfour _ (Or.inl rfl) .cw).1 (hfour _ (Or.inl rfl) .ccw).1 hmem
 
 /-! ## FS116-N1-ECHO (any valid map; the radius-2 hypothesis is idle) -/
 

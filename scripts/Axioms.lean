@@ -2161,6 +2161,13 @@ No native evaluation. -/
 
 /-! ## FS-131 wave 3 (job FS131-I3c) — the implementer's added children and the rows' leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.exists_near_of_mem_closure_isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_closure_of_four_germs
+#print axioms HadwigerNelson.Plane.ArcMap.exists_germ_interior
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.ringArc_subset_closure
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.eq_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.germ_absent_class
+#print axioms HadwigerNelson.Plane.ArcMap.mem_ringArc_of_germIn
 #print axioms HadwigerNelson.Plane.ArcMap.IsJordanDomain.local_connected
 #print axioms HadwigerNelson.Plane.e_mul_e_sub_pi
 #print axioms HadwigerNelson.Plane.mul_e_of_arg

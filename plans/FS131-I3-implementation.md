@@ -190,6 +190,55 @@ splitting the lemma, were needed to stay under the heartbeat limit) plus a 40-li
 independent of it): about 450 lines — the polar chart `Φ(ρ, ψ) = p + ρ e(ψ)` replaces every connectedness argument for the two sides. `flank_initialPieces` (M): the two TWOCIRC-style
 cases collapse to `‖σρ(e(σt)−1) − 1‖² = 1 + 2ρ(ρ+σ)(1 − cos t)`; about 140 lines. `flank_cone` (M): about 120 lines. The H leaves left are the three engine-3 leaves, `Simple.coneAt_eq_angleIcc`, and the SixFragment trio.
 
+## Stage 4 — SAVED (FS131-I3d): Simple.coneAt_eq_angleIcc, qfree4, fiveRing_finite_off_Q, fiveRing_length, touchW; 11 leaves left
+
+Branch `fs131-w3`, commits after `98f4b279` (I3c's head). **16 `sorry` declarations at the start, 11 now** (`LocalStructure` 3, `SixFragment` 3, `RingGerm` 5).
+Readback: both quotations of the brief match their sources (plan § 7.2 "It may" paragraph; this record's Stage 3 first table row); branch as I3c left it
+(`98f4b279`). Scratch iteration: `/home/kooshi/scratch-fs131` (a `cp -rs` mirror of the worktree's `.lake/build/lib/lean/Proofs`; `it.sh Plane/X` compiles a module into it,
+`c.sh file.lean` checks a scratch file against it) — never evidence.
+
+### Findings that change the plan for the rest
+
+* **The sector engine (`localSectors`) is not on the critical path of the interval cones.** `Simple.coneAt_eq_angleIcc` needs no sectors: it is the Jordan chart
+  (`ArcMap.IsJordanDomain.local_connected`: near `x`, `T ∩ ball x r'` lies in a preconnected `C ⊆ T ∩ ball x r`, the image of a convex set under the chart),
+  a separation lemma in `arg` (`arg_side`, `arg_near`: a preconnected set avoiding two rays from `x` lies on one side), and a real-analysis lemma
+  (`exists_angleIcc_of_no_gap`: a closed nonempty `2π`-periodic set of angles with no two separated points is one angular interval). It uses only `IsOpen T` and `IsJordanDomain T`.
+* **The three engine-3 leaves left (`finite_tiles_near`, `mem_coloursAt_iff_exists_tileOf`, `coneAt_region_eq_biUnion`) are terminal except for
+  `four_of_bothKind`** (which needs the cone of a class to be the union of its tiles' cones). Nothing else in the repository uses them. Route found, not built:
+  (i) for small `ρ₀`, only arcs through `x` meet `B(x, ρ₀)`; they pairwise meet only at `x` and each carrier circle through `x` has `2ρ > ρ₀`;
+  (ii) *no tile lies in `B(x, ρ₀)` and meets `B(x, r)`*: the farthest point `z*` of the closure lies on exactly one carrier, transversal to `sphere(x, |z*−x|)`
+  (circle `|z−x| = 2ρ|sin(Δ/2)|`, `Δ < π`); both sides of the carrier near `z*` hold points beyond `|z*−x|` (a polar box chart about the centre for a circle, a
+  box for a line; the side sets are images of convex boxes, so preconnected, and lie in `interiorPts`); (iii) hence every tile meeting `B(x, r)` meets `sphere(x, ρ)`
+  for every `ρ ∈ (r, ρ₀)`, and the tiles meeting `sphere(x, ρ)` are finite: `Γ ∩ sphere(x, ρ)` is finite (≤ 2 per carrier), and the tile of `x + ρ e(φ)` depends only on
+  the step function `φ ↦ #{roots below φ}`. A shorter statement of (ii) in rays: along the ray from `x` in direction `u` the carrier circle `|z − c| = ρ_a` through `x`
+  meets it at the single point `x + 2⟨c − x, u⟩ u`, so a tile `T ⊆ B(x, R)` lies inside `⋃ B(c_a, ρ_a)`.
+* **The (Q)-free and five-colour ring rows share one regularity layer** (all in `RingGerm`, before `qfree4`): `RegularAt p θ` (off `Γ`, or an interior angle of an arc of
+  `Γ` on `ω(p)` with constant sides), `isOpen_regularAt`, `exists_regular_germ` (every side germ is regular: the dichotomy less at most two end angles),
+  `finite_not_regular` (irregular angles in a bounded range are finite: a closed set of isolated points in a compact range), and `carries_absent` (a regular
+  ring point on no (Q) arc lies in the closure of the one absent colour's class while `r(θ ± 60°)` does not: N-E1 off `Γ`, `IsRingArc.not_mem_closure_third` on an arc).
+  The geometry of the arc case is one crossing lemma, `Valid.not_mem_closure_of_side`, parametrized by the side `s = ±1` and the direction `σ = ±1`.
+* **No finite exceptional set is needed in `qfree4`**: two regular angles `60°` apart exist (`exists_regular_pair`, finite exclusions from an interval).
+* **`fiveRing_length` goes through the open angles `qOpen`** (interior to a (Q) arc): `qOpen` is open, periodic, inside the (Q) set, and every regular angle on a closed (Q) arc is in it
+  (`qOpen_of_regular`: the constant-side arc through a regular angle has the (Q) arc's colours), so the cover `[0, 2π) ⊆ qOpen ∪ (qOpen − 60°) ∪ finite` and the measure
+  of a periodic measurable set under a shift (`arcLength_preimage_add_periodic`) give `2π ≤ 2 · arcLength (qOpen)`. The set of (Q) angles itself need not be measurable.
+* **TOUCHW** is `germ_absent_class` (a germ off (Q) arcs not in the closure of `X`'s class lies in the closure of the other absent colour `X'`'s class and misses `X`'s:
+  the dichotomy, `IsRingArc.exists_germ_interior`, `IsRingArc.eq_of_mem_closure`) four times, the TWIST rotation for "not `X`", and
+  `not_mem_closure_of_four_germs` (GERM-R's four direction sets cover every direction) for "`X'` not carried at `w`".
+
+### Re-pricing (first hard leaves of this job)
+
+`Simple.coneAt_eq_angleIcc` (priced H on `localSectors`): about 330 lines, no sectors. `qfree4` (M–H): about 330 lines in five reusable lemmas (the crossing at a side ~110 lines, regular germs and
+finiteness ~150). `fiveRing_finite_off_Q` (M–H): 30 lines on those. `fiveRing_length` (M): 220 lines, the measure layer being most of it. `touchW` (H): about 330 lines in six lemmas.
+The leaves that remain are all either engine-3 (`finite_tiles_near` and its two corollaries, `flank_edge_exists`, `four_of_bothKind`), the `germS_*` trio, or the SixFragment trio.
+
+### What is left (11)
+
+| module | leaves | route |
+|---|---|---|
+| `LocalStructure` (3) | `finite_tiles_near`, `mem_coloursAt_iff_exists_tileOf`, `coneAt_region_eq_biUnion` | the route in Findings above; the other two are short on the first (closure of a finite union; the cone of a finite union and its locality) |
+| `SixFragment` (3) | `sixCol_locallyConstant`, `sixFrag_valid`, `sixFrag_nonSiamese` | unchanged from Stage 3. Note for `sixFrag_valid`: the three colour-`0` tiles are `S_0` (angles `(0°, 60°)`, `r < 1`), `Q_4` (angles about `240°`, in the lens) and `G_2` (angles in `[120°, 180°)`, outside the lens of its index); `S_0`–`Q_4` is easy (angular gap `≥ 150°`, `r ≥ 1`: `|x − y|² ≥ r² + s² + √3 rs > 1`); `S_0`–`G_2` is not (the `60°` angular gap alone gives only `1 − s + s² < 1`; the lens exclusion is what keeps `G_2` away from `e(120°)`) |
+| `RingGerm` (5) | `germS_inward`, `germS_outward`, `germS_four`, `four_of_bothKind`, `flank_edge_exists` | `germS_*`: `germ_absent_class` and `not_mem_closure_of_four_germs` are the machinery TOUCHW used; the new step is the inward and outward cones (§ 4.1 (i), (ii) of `plans/FS116-N1-proof.md`). `four_of_bothKind`: needs `coneAt_region_eq_biUnion` and the disjoint-interiors of cones of distinct tiles (which has a route without sectors: the cone of `Γ` at `x` is finite mod `2π`, so for a generic direction a small convex sector lies in `interiorPts` and hence in one tile). `flank_edge_exists`: the end direction of a tile's cone is a tangent of an arc through `y` (sectors) |
+
 ## Drafts for the front page
 
 None yet: 16 `sorry` remain, so the gate has not run. (The build above is the iteration check, not the gate.)
