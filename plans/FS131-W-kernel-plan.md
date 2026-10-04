@@ -486,3 +486,110 @@ So, on W's skeleton: FS106-AE-MAP6 = step 3 (`exists_woodallMerged`) + strict st
 
 At `7aaaf2c4`: `./scripts/build.sh` under the slot (40 GiB, 8 cpus, `BATCH=4`), from inside the worktree: **OK — all 1744 modules already up to date,
 nothing built, 13 module(s) with warnings**, 2 s, exit 0 (`build/gate/build/20261004T111525Z-3004683.log`; driver log `data/fs131/w2/build-stage1.log`).
+
+## Stage 7 — SAVED: E1's argument read line by line (§§ 3.0–3.8), as the mind that formalizes it
+
+Read: `plans/FS131-E1-derivation.md` §§ 1.3 (the normal form's reading), 3.0–3.10, 4.1–4.2, and the controls' tools (`tools/fs131_e1_count.py`
+read in full). Message sent to the coordinator at this stage ("FS131-W2: E1's argument read …", 2026-10-04): items 7.1–7.4 below.
+
+### 7.1 Step by step
+
+| E1 entry | step | survives formalization? |
+|---|---|---|
+| E1-SEE (§ 3.1) | translate a disc of `q`'s region by `z − Y` | **yes**; it is wave 1's `dist_ne_one_of_mem_of_mem_closure` (FS129-SR2-CLOSURE) with `Valid.unitPairsNull_region` (`Plane/Tiles`): a three-line corollary |
+| E1-RAY (§ 3.2) | the explicit root of the ray–circle equation | **yes**; it is W's `collarAt_shadow_inner/_outer` applied to a truncated sector (`SectorsAt`'s fifth clause), whose cone at `v` holds its open directions |
+| E1-CROSS (§ 3.3) | a direction with `cos(γ − ψ) ≠ 0` in a sector of positive angle; E1-RAY; D-AEMAP | **yes**, read on colour classes (the argument reads no connectedness of `R`) |
+| E1-COVER (§ 3.4) (a) | arc-end types I/O/A at a non-branch point of `ω(P)` | **not needed**: replaced by a colour-class lemma (7.3 (a)): at a point of `ω(P)` with at most two colours where no colour crosses, near it every interior point inside `ω(P)` has one colour `A` and every one outside another `B` (density of interior points, finitely many colours) |
+| E1-COVER (c) | "a point of `Γ′` in the closures of two E regions would carry two sectors of colour E … against (N1)"; connectedness gives one E region | **fails in W's model** (two tiles of one colour may meet across an arc there, 7.2); **not needed**: one colour class suffices (7.3 (a)) |
+| E1-COVER (d) | the intermediate value of `|x − ·|` on one connected region | **replaced** by: a connected subset of the closure of an open set with no unit pair has every two points at distance `≤ 1` (7.3 (a)) — the same argument with `z ∈ U` near `x` in place of `x ∈ R` |
+| E1-COVER (e) | "at least six" | **replaced** by the pigeonhole downstream: at most five exceptional angles leave an open arc of length `2π/5 > π/3` free of them |
+| E1-BAD (§ 3.5), the dichotomy | each branch of `ω(Y)` runs, near `P`, in one sector unless an edge lies on `ω(Y)` | **yes in E1's model**; in W's model it needs the arc-level (N1)/(N2) (7.2) and is replaced by the refined second-order lemma (7.3 (b)) |
+| E1-BAD, "Counting" | "only for the one of these two on `s`'s side (the branches lie on `Y`'s side of the line through the two edges)" | **FALSE** — 7.4; the statement's count survives as a total |
+| E1-NO45 (§ 3.6) | angles `≤ π` from `≥ π/3` at four or five sectors; E1-BAD; E1-COVER; E1-SEE; (N1); step 6 | **yes**, with E1-BAD's count recounted (7.4): at most `k` exceptional points, not `k + 1` |
+| E1-NOBRANCH (§ 3.7) | regions of diameter `≤ 1`; a nested sequence of boundary curves by the Jordan curve theorem | **not formalized as argued**: its conclusion is W's `exists_three_le_sectors` from wave 4's `ts_t` (7.5) |
+| E1-MAPS6 (§ 3.8) | degrees 2–5; step 6, E1-NO45, E1-NOBRANCH | **yes** (W's `aeMap6_normal` with `step7`, `step8` replaced) |
+
+### 7.2 E1's caveats checked against W's definitions
+
+**(N1) per sector, and (N2)'s "no two edges at a branch point leave it in one direction"** (§ 3.0, § 3.10's fifth attack). W's `ArcMap.SectorsAt` is
+the picture *on colour changes* (§ 2.1): adjacent sectors of one colour are merged, so an arc of `F` with one colour on both sides (an *invisible* arc)
+is not seen by the picture, and several arcs may leave a point in one direction (a horn inside a colour, or an invisible arc tangent to an edge).
+`WoodallNormal` (every picture with at least three sectors has injective colours and angles `≥ π/3`) gives E1's (N1) **for colours** — no colour on two
+sectors at a point of three or more — but not for arcs. E1-NO45 reads the arc-level form at two steps:
+- E1-COVER (c) (above): **not needed** (7.3 (a)).
+- E1-BAD's "one exceptional point per edge": in W's model it fails — at an edge direction `β` of `P` between `X` (below) and `Y` (above), a visible
+  edge on `ω(P + e(β − π/2))` and an invisible unit arc on `ω(P + e(β + π/2))` bounding a cusp of `Y` make both normals exceptional in E1's exact
+  sense. **Not needed**: 7.3 (b) counts at most one bad normal per edge direction in W's model, with no arc-level hypothesis.
+
+So the formal E1-NO45 needs **no hypothesis beyond W's `WoodallNormal`** (with `π/3 ≤`). No hidden hypothesis; no statement defect.
+
+**"The argument reads the arc-map form at three places"** (§ 3.6's *not claimed*): arc-end types (not read on this route), tangent curves meeting
+once (read at `P`'s edges, in the second-order lemma), finiteness (read at `P`: finitely many arcs tangent to an edge; and of colours). **The arc-map
+form is read only at the point of four or five sectors** — and in step 6 only at the point of three: a finding for the Jordan-boundaries stub
+(item 107's "stub to mint"): the obstacle is local to vertices.
+
+### 7.3 The two replacements (the routes the skeleton states)
+
+**(a) E1-COVER on colour classes.** For a point `v` whose picture has positive angles and at most one colour `E` absent, and an open arc
+`(θ₁, θ₂)` of `ω(v)` on which every point carries at most two colours:
+1. *crossing*: a colour whose class has `v + e θ` in the closure of its part inside `ω(v)` and of its part outside is absent from `v` (E1-CROSS);
+2. *non-crossing points* (`NC`): at most two colours and no crossing give `r > 0` and `A ≠ B` with every interior point of `B(v + e θ, r)`
+   inside `ω(v)` coloured `A`, outside coloured `B`, none on `ω(v)`; so the colours there are `{A, B}`;
+3. *the clopen argument*: `T = {θ : NC(θ) ∧ E ∉ coloursAt (v + e θ)}` is open (item 2's radius) and closed in `(θ₁, θ₂)` (a limit of points of `T`
+   with colours `{A, B}` carries `A`, `B`, and — off `T` — `E`: three colours); its complement is `{θ : E ∈ coloursAt}` (a crossing colour is `E`). So
+   `T = ∅` (every point in the closure of `E`'s class) or `T` is everything (the inside colour is locally constant, hence constant `X`): **one colour
+   class `X` has every point of the arc in its closure**;
+4. *diameter*: a connected subset of `closure U`, `U` open with null unit pairs, has every two points at distance `≤ 1` (for `x, y` at distance
+   `> 1`, a point `z ∈ U` near `x` sees the value `1` of `dist z ·` on the subset, at a point of `closure U` — wave 1's
+   `dist_ne_one_of_mem_of_mem_closure` forbids it); a closed sub-arc of length in `(π/3, π]` has chord `> 1`.
+Neither (N1) on `ω(v)`, nor the normal form, nor five colours is read: **E1-COVER in E1-GEN6's form, region-only off `v`** (a generalization,
+messaged).
+
+**(b) E1-BAD's edge case: the refined second-order lemma.** At an edge direction `β` of a picture with positive angles, between `X` (the sector
+before) and `Y` (the sector after): finitely many arcs of `F` through `v` are tangent to `β` (local finiteness), each the circle (or line) of some
+upward curvature `κ ∈ K` (`tanHeight`'s frame); for `κ ∉ K` the points of the tangent circle `C_κ` near `v` on the `β` side are interior points of one
+tile, of colour `f(κ) ∈ {X, Y}` (the only colours whose cone holds `β`). The unit circle about `v + e(β + π/2)` is `C_1`, about `v + e(β − π/2)` is
+`C_{−1}`. For `z` in a thin inner collar about `β + π/2`, `ω(z)` meets `X` (first order) and, in the tangential regime, every tile `f(κ₀)`, `κ₀ < 1`
+(its effective curvature sweeps `(−∞, 1)`; in the transversal regime it crosses the whole tangent bundle and meets `X` and `Y`); for an outer collar,
+`Y` and every `f(κ₀)`, `κ₀ > 1`. So the normal `β + π/2` is **bad** (no two-colour collar on either side) only if `f ≡ X` on `(−∞, 1) ∖ K` and
+`f ≡ Y` on `(1, ∞) ∖ K`; the normal `β − π/2` only if `f ≡ X` on `(−∞, −1) ∖ K` and `f ≡ Y` on `(−1, ∞) ∖ K`. Both force `X = Y` on `(−1, 1) ∖ K`.
+**At least one normal of every edge is good** — no (N1), no (N2), no injectivity read. At a good normal the kill follows: the collar's side
+`s` and the first-order collar on the other side (E1-RAY) put one of `X`, `Y` in the shadow on both sides, so its class misses a punctured
+neighbourhood of the normal point and the colour is absent there. (W's § 4.1 form "unless the edge is a unit arc centred there" is true per normal
+but allows two bad normals per direction in W's model; the refined form is what the count needs, and it serves `step6` equally: one good normal
+per edge.)
+
+### 7.4 The finding on E1-BAD's count (messaged; correction owed to E1-BAD's argument, no statement change)
+
+E1-BAD's "Counting": "A sector `s` of angle `π` with edges at `σ, σ + π` contains both branches only if `ψ ± π/2 = σ, σ + π`, so
+`Y = P + e(σ ± π/2)`, and only for the one of these two on `s`'s side (the branches lie on `Y`'s side of the line through the two edges)". **False**:
+the region of `s` near `P` is bounded by the two edges, which may curve to `Y`'s side. Counterexample: `P = 0`, the edges of `s` the two arc-ends at
+`P` of the circle `C` of radius `1/2` about `(0, −1/2)`, `s` outside `C`; both `Y₊ = (0, 1)` and `Y₋ = (0, −1)` have both branches of `ω(Y)` in `s`
+(`ω(Y₋)`'s points `(sin t, −1 + cos t)` satisfy `|w − (0, −½)|² = 5/4 − cos t > 1/4`). Exact check: `tools/fs131_w2_bad_pi.py` → `Y+: in_s=10/10
+Y-: in_s=10/10 both_exceptional=True` (exit 0); `--fault` (radius 2, curvature `1/2 < 1`) → `Y-: in_s=0/10 … both_exceptional=False` (exit 1). **The
+statement survives** as a total count, and E1-NO45 with it: the second-kind points of a `π`-sector `[a, a + π]` are among `P + e(a ± π/2)`, the
+normals of its two edges, among which the two edges' unit-arc centres also lie; so the exceptional set has at most `k` points (`≤ 4` at `k = 4`,
+`≤ 5` at `k = 5`; E1 wrote `k + 1 = 5` at `k = 4`). Control e1-count's model ("(ii) one per sector of angle exactly π") has the wrong reason and a
+correct upper bound. A draft for E1's record, for Keryx to file (slot: `plans/FS131-E1-derivation.md` § E1-BAD, the argument, after "one `Y` per such
+sector. ∎"): *"Erratum (FS131-W2): 'only for the one of these two on s's side' is false — the edges may curve to Y's side (FS131-W2 § 7.4, with
+`tools/fs131_w2_bad_pi.py`); a π-sector can carry two exceptional points, both normals of its two edges, among which those edges' unit-arc centres
+lie; the total count `≤ (edges) + (π-sectors)` stands, and E1-NO45's bound improves to `k`."*
+
+### 7.5 The Jordan curve theorem, decided: not needed (Done item 4)
+
+E1-NOBRANCH's conclusion — a point of at least three sectors — is W's **`exists_three_le_sectors`**, planned in § 4.5 from wave 4's **`ArcMap.ts_t`**
+(FS106-TS-T: a point of at least three colours within `1/√2 + ε` of every point), which rests on **`lebesgue_covering_square`** (Lebesgue's covering
+theorem for the square, FS131-LEB's disposition, inventory item 66). The chain already depended on it; routing E1-NOBRANCH through it adds no outside
+theorem. Alternatives weighed: (i) the Jordan curve theorem for closed curves of segments and circular arcs, formalized here — not in Mathlib, and
+E1's argument needs with it the interior/exterior of each frontier curve and their nesting, a job of its own (several hours to a day of agent work,
+unmeasured); (ii) an imported `axiom` — a second outside theorem where one (Lebesgue's) already carries the same plane topology; (iii) E1's
+diameter step in collar language alone cannot suffice: "a valid map has a point of three colours" is false on the line (unit intervals two-coloured),
+so some two-dimensional topology must enter, and the plan's is Lebesgue's. **Decision: (iv), `ts_t`.** E1-NOBRANCH is read back as
+`exists_three_le_sectors` (§ 8), which is stronger (no (N1) read: a picture of `≥ 3` sectors exists in any valid map of the plane, any `k`).
+
+### 7.6 Hand checks of this stage (planner's checks, one mind)
+
+The refined second-order dichotomy (7.3 (b)) on three configurations: one straight edge (`K = {0}`: `β + π/2` good, inner side); a visible edge at
+`κ = −1` with an invisible unit arc at `κ = 1` (W's-model counterexample to E1's exact count: `β − π/2` bad, `β + π/2` good, inner side); an
+alternation `X | Y | X | Y` at `κ = −1, 0, 1` (both good). The angle arithmetic of E1-NO45 (`≥ π/3` at `n ≥ 4` gives `≤ π`, at most one `π`-sector,
+none at `n = 5`), and the distinctness of the two kills off `K` (7.3; § 9's plan for E1-BAD).
