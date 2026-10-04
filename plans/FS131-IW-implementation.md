@@ -111,3 +111,33 @@ holds a point of the segment, which is not an interior point. The same happens a
 7-colouring with one slit is a valid plane map with no picture at the slit's midpoint). Proposed fix, the planner's call: drop clause 5 or weaken it to `⊆ closure
 (F.region (c i))`. Its only readers, E1-RAY (inner, outer) and E1-BAD's interior case, re-prove from the cone equation through the connected-piece child below.
 `exists_sectorsAt` is held until the ruling.
+
+## Stage 5 — SAVED (FS131-IWb): `SectorsAt`'s fifth clause replaced by `v ∈ F.dom` (inventory items 154, 155); the three readers re-routed; the connected piece
+
+**The rulings.** Item 154 (Keryx, 2026-10-04): drop clause 5. **A second finding, messaged before the change**: dropping it outright makes E1-RAY false
+off the domain. Counterexample: `v = 0 ∉ dom`; colour 0 on `A = ⋃ₘ annSector 0 2^(−2m−1) 2^(−2m) a b` (radial pieces with gaps accumulating at `0`), colour 1 on
+the open sector `(b, a + 2π)`, `dom = A ∪ B`, no arcs. The picture `n = 2`, `d = (a, b, a + 2π)`, `c = (0, 1)` satisfies every other clause. Unit circles about
+points just inside `ω(0)` cross the narrow `A`-directions near `0` in a band of distance ratio below 2, which falls in a radial gap infinitely often, so no inner
+collar lies in `shadow A`. Item 155 (Keryx): **replace clause 5 by `v ∈ F.dom`, at the same position** (no projection moves; the cone clause stays
+`h.2.2.2.2.2`).
+
+**Changes (no statement of §§ 3.1, 8.4–8.5 changed; the one definition the amendment licenses).**
+* `Plane/Woodall/Basic`: `SectorsAt`'s fifth clause is now `v ∈ F.dom`, and its docstring and the module docstring say so with the item number;
+  `const_sectorsAt`'s fifth component is `mem_univ v`.
+* `Plane/Woodall/NoFourFive`, new children before E1-RAY: **`exists_preconnected_of_mem_coneAt`** (the connected piece your brief asked for: at a
+  point of the domain, a direction of the cone of `j`'s class is a direction of the cone of one of its tiles, a preconnected subset of the class — wave 3's
+  `coneAt_region_eq_biUnion`; a horn's direction included); **`collarAt_shadow_inner_of_mem_coneAt`**, **`collarAt_shadow_outer_of_mem_coneAt`** (W's
+  `collarAt_shadow_inner/_outer` on that piece); **`SectorsAt.mem_coneAt_of_mem_Icc`** (a direction of a closed sector is in its colour's cone).
+* Re-routed, statements unchanged: **E1-RAY** inner and outer (`SectorsAt.collarAt_shadow_inner_of_mem`, `_outer_of_mem`) — the cone clause, the
+  connected piece, `hv := h.2.2.2.2.1`; **E1-BAD's interior case** (`SectorsAt.not_mem_coloursAt_of_mem_Ioo`) — directions of sector `i` at `D₂ ± η` give an
+  inner and an outer collar about `ψ` (E1-RAY), and the robust kill `not_mem_coloursAt_of_collarAt` finishes; no exact point is read.
+* `scripts/Axioms.lean`: a section "FS-131 Woodall's chain (job FS131-IWb)" with the four records; `tools/fs131_w2_decls.py --check`: 119 theorems,
+  119 records, 0 missing, 0 stale.
+
+**Axioms**: the four children, E1-RAY and E1-BAD's interior case now cite `coneAt_region_eq_biUnion` (wave 3, proved on `fs131-w3`, a `sorry` statement
+here until wave 3 lands), so they show `sorryAx` until then. Before this stage E1-RAY was on the standard three axioms.
+
+**Build of this stage**: OK — 444 of 444 batches, 5 modules rebuilt, 12 with warnings, 8 m 46 s, exit 0 (`build/gate/build/20261004T132056Z-3782220.log`,
+driver log `data/fs131/iwb/build1.log`); `Woodall/Basic`, `Collar` and `NoFourFive` built with no warning, and the only warnings in `Steps` are the four
+`declaration uses 'sorry'`. Iteration tools: `data/fs131/iwb/run.sh` and `olean.sh` (a private `cp -rs` olean mirror under `build/iwb-olean`; the symlink is
+removed before an olean is written, so nothing writes through into `.lake/build`). Never evidence.

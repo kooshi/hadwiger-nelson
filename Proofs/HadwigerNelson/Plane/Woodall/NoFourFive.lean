@@ -684,37 +684,53 @@ theorem not_mem_coloursAt_of_collarAt (hF : F.Valid) {v : ℂ} {ψ : ℝ} {j : F
     exact not_mem_shadow_of_mem_region hF hq'R (hin' ((hcol q' hq'd).1 hq'lt))
   · exact not_mem_shadow_of_mem_region hF hq (hout' ((hcol q hqd').2 hgt))
 
+/-! ## The connected piece: a cone direction of a colour class is a cone direction of one of its tiles -/
+
+/-- **The connected piece** (FS131-IWb's child for `step5_lt` and `step6`, and the route of E1-RAY since inventory item 155): at a point of the
+domain, a direction along which a colour class approaches is a direction along which a preconnected subset of it approaches — one of its tiles
+(wave 3's `coneAt_region_eq_biUnion`; a tile is a connected component of the interior points). It holds for every cone direction, a horn's
+included: the class itself need not be connected. -/
+theorem exists_preconnected_of_mem_coneAt {v : ℂ} (hv : v ∈ F.dom) {j : Fin k} {β : ℝ}
+    (hβ : β ∈ coneAt (F.region j) v) : ∃ R ⊆ F.region j, IsPreconnected R ∧ β ∈ coneAt R v := by
+  rw [F.coneAt_region_eq_biUnion hv j] at hβ
+  obtain ⟨T, ⟨hT, -⟩, hβT⟩ := mem_iUnion₂.mp hβ
+  exact ⟨T, hT.subset_region, hT.1.isPreconnected, hβT⟩
+
+/-- **Inner collars from a cone direction of a colour class** (W's `collarAt_shadow_inner` on the connected piece): at a point of the domain, a
+direction `β` of the cone of `j`'s class with `cos (β − ψ) < 0` puts an inner collar about `ψ` in the shadow of the class. -/
+theorem collarAt_shadow_inner_of_mem_coneAt {v : ℂ} (hv : v ∈ F.dom) {j : Fin k} {β ψ : ℝ}
+    (hβ : β ∈ coneAt (F.region j) v) (hcos : Real.cos (β - ψ) < 0) : CollarAt (shadow (F.region j)) v .inner ψ := by
+  obtain ⟨R, hRj, hR, hβR⟩ := exists_preconnected_of_mem_coneAt hv hβ
+  exact (collarAt_shadow_inner hR hβR hcos).mono (shadow_mono hRj)
+
+/-- **Outer collars from a cone direction of a colour class**: the same with `cos (β − ψ) > 0` and an outer collar. -/
+theorem collarAt_shadow_outer_of_mem_coneAt {v : ℂ} (hv : v ∈ F.dom) {j : Fin k} {β ψ : ℝ}
+    (hβ : β ∈ coneAt (F.region j) v) (hcos : 0 < Real.cos (β - ψ)) : CollarAt (shadow (F.region j)) v .outer ψ := by
+  obtain ⟨R, hRj, hR, hβR⟩ := exists_preconnected_of_mem_coneAt hv hβ
+  exact (collarAt_shadow_outer hR hβR hcos).mono (shadow_mono hRj)
+
+/-- Every direction of a closed sector of a picture is a cone direction of the sector's colour class (the cone clause of `SectorsAt`). -/
+theorem SectorsAt.mem_coneAt_of_mem_Icc {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k}
+    (h : F.SectorsAt v n d c) (i : Fin n) {γ : ℝ} (hγ : γ ∈ Icc (d i.castSucc) (d i.succ)) :
+    γ ∈ coneAt (F.region (c i)) v := by
+  rw [h.2.2.2.2.2 (c i)]
+  exact mem_iUnion₂.mpr ⟨i, rfl, Icc_subset_angleIcc _ _ hγ⟩
+
 /-! ## E1-RAY and E1-CROSS -/
 
 /-- **E1-RAY, inner** (`plans/FS131-E1-derivation.md` § 3.2): a sector at `v` holding the direction `γ` in its open range, with
-`cos (γ − ψ) < 0`, puts an inner collar about `ψ` in its colour's shadow (W's `collarAt_shadow_inner` on a truncated sector,
-`mem_coneAt_annSector`). -/
+`cos (γ − ψ) < 0`, puts an inner collar about `ψ` in its colour's shadow (`γ` lies in the cone of the colour class by the cone clause; W's
+`collarAt_shadow_inner` on the connected piece, `collarAt_shadow_inner_of_mem_coneAt`; inventory item 155 replaced the truncated-sector clause). -/
 theorem SectorsAt.collarAt_shadow_inner_of_mem {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k}
     (h : F.SectorsAt v n d c) (i : Fin n) {γ ψ : ℝ} (hγ : γ ∈ Ioo (d i.castSucc) (d i.succ)) (hcos : Real.cos (γ - ψ) < 0) :
-    CollarAt (shadow (F.region (c i))) v .inner ψ := by
-  obtain ⟨hδ0, hδ1⟩ := hγ
-  set δ := min (γ - d i.castSucc) (d i.succ - γ) / 2 with hδ
-  have hδpos : 0 < δ := by rw [hδ]; have := lt_min (sub_pos.mpr hδ0) (sub_pos.mpr hδ1); linarith
-  obtain ⟨r, hr, hR⟩ := h.2.2.2.2.1 i δ hδpos
-  have hγ' : γ ∈ Ioo (d i.castSucc + δ) (d i.succ - δ) := by
-    constructor
-    · have := min_le_left (γ - d i.castSucc) (d i.succ - γ); rw [hδ]; linarith
-    · have := min_le_right (γ - d i.castSucc) (d i.succ - γ); rw [hδ]; linarith
-  exact (collarAt_shadow_inner (isPreconnected_annSector _ _ _ _ _) (mem_coneAt_annSector v hr hγ') hcos).mono (shadow_mono hR)
+    CollarAt (shadow (F.region (c i))) v .inner ψ :=
+  collarAt_shadow_inner_of_mem_coneAt h.2.2.2.2.1 (h.mem_coneAt_of_mem_Icc i (Ioo_subset_Icc_self hγ)) hcos
 
 /-- **E1-RAY, outer**: the same with `cos (γ − ψ) > 0` and an outer collar. -/
 theorem SectorsAt.collarAt_shadow_outer_of_mem {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k}
     (h : F.SectorsAt v n d c) (i : Fin n) {γ ψ : ℝ} (hγ : γ ∈ Ioo (d i.castSucc) (d i.succ)) (hcos : 0 < Real.cos (γ - ψ)) :
-    CollarAt (shadow (F.region (c i))) v .outer ψ := by
-  obtain ⟨hδ0, hδ1⟩ := hγ
-  set δ := min (γ - d i.castSucc) (d i.succ - γ) / 2 with hδ
-  have hδpos : 0 < δ := by rw [hδ]; have := lt_min (sub_pos.mpr hδ0) (sub_pos.mpr hδ1); linarith
-  obtain ⟨r, hr, hR⟩ := h.2.2.2.2.1 i δ hδpos
-  have hγ' : γ ∈ Ioo (d i.castSucc + δ) (d i.succ - δ) := by
-    constructor
-    · have := min_le_left (γ - d i.castSucc) (d i.succ - γ); rw [hδ]; linarith
-    · have := min_le_right (γ - d i.castSucc) (d i.succ - γ); rw [hδ]; linarith
-  exact (collarAt_shadow_outer (isPreconnected_annSector _ _ _ _ _) (mem_coneAt_annSector v hr hγ') hcos).mono (shadow_mono hR)
+    CollarAt (shadow (F.region (c i))) v .outer ψ :=
+  collarAt_shadow_outer_of_mem_coneAt h.2.2.2.2.1 (h.mem_coneAt_of_mem_Icc i (Ioo_subset_Icc_self hγ)) hcos
 
 /-- **E1-CROSS** (`plans/FS131-E1-derivation.md` § 3.3), on colour classes: in a valid map, at a point whose picture has positive angles, a colour
 crossing `ω(v)` at any angle is carried by no sector (a sector of colour `X` has a direction with `cos (γ − θ) ≠ 0`, so a collar on one side
@@ -1083,49 +1099,47 @@ theorem SectorsAt.exists_mem_Ico {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {
     have : i'.succ = i₀.castSucc := by ext; simp [hi']; omega
     rw [this] at hle; exact hle
 
-/-- **E1-BAD, interior directions** (§ 3.5's first bullet, with E1-SEE): if a branch direction `ψ ± π/2` of `ω(v + e ψ)` at `v` is, mod `2π`,
-interior to sector `i`, the branch near `v` runs in a truncated sector, so `v + e ψ` does not carry `c i`. -/
+/-- **E1-BAD, interior directions** (§ 3.5's first bullet, in its robust form): if a branch direction `ψ ± π/2` of `ω(v + e ψ)` at `v` is, mod
+`2π`, interior to sector `i`, then `v + e ψ` does not carry `c i` — the directions of sector `i` just either side of the branch direction give an inner
+and an outer collar about `ψ` in the shadow of `c i`'s class (E1-RAY), and the robust kill `not_mem_coloursAt_of_collarAt` finishes (since
+inventory item 155, no point of the sector at an exact place is read). -/
 theorem SectorsAt.not_mem_coloursAt_of_mem_Ioo (hF : F.Valid) {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k}
     (h : F.SectorsAt v n d c) (i : Fin n) {ψ D : ℝ} (hD : D = ψ + π / 2 ∨ D = ψ - π / 2) {m : ℤ}
     (hm : D + 2 * π * m ∈ Ioo (d i.castSucc) (d i.succ)) : c i ∉ F.coloursAt (v + e ψ) := by
   set D₂ := D + 2 * π * m with hD₂
   obtain ⟨hD1, hD2⟩ := hm
-  set δ := min (D₂ - d i.castSucc) (d i.succ - D₂) / 2 with hδ
-  have hδ0 : 0 < δ := by rw [hδ]; have := lt_min (sub_pos.mpr hD1) (sub_pos.mpr hD2); linarith
-  have hδ1 : 2 * δ ≤ D₂ - d i.castSucc := by rw [hδ]; have := min_le_left (D₂ - d i.castSucc) (d i.succ - D₂); linarith
-  have hδ2 : 2 * δ ≤ d i.succ - D₂ := by rw [hδ]; have := min_le_right (D₂ - d i.castSucc) (d i.succ - D₂); linarith
-  obtain ⟨r, hr, hR⟩ := h.2.2.2.2.1 i δ hδ0
-  set φ := min (min (δ / 2) (r / 4)) 1 with hφ
-  have hφ0 : 0 < φ := lt_min (lt_min (by positivity) (by positivity)) one_pos
-  have hφ1 : φ ≤ 1 := min_le_right _ _
-  have hφδ : φ ≤ δ / 2 := (min_le_left _ _).trans (min_le_left _ _)
-  have hφr : φ ≤ r / 4 := (min_le_left _ _).trans (min_le_right _ _)
-  have hsin0 : 0 < Real.sin φ := Real.sin_pos_of_pos_of_lt_pi hφ0 (by linarith [Real.two_le_pi])
-  have hsin1 : Real.sin φ ≤ φ := Real.sin_le hφ0.le
-  have hρ : 0 < 2 * Real.sin φ ∧ 2 * Real.sin φ < r := ⟨by linarith, by linarith⟩
-  refine not_mem_coloursAt_of_dist_eq_one hF (q := v + ((2 * Real.sin φ : ℝ) : ℂ) * e (if D = ψ + π / 2 then D₂ - φ else D₂ + φ))
-    (Y := v + e ψ) ?_ ?_
-  · refine hR ⟨(2 * Real.sin φ, if D = ψ + π / 2 then D₂ - φ else D₂ + φ), ⟨hρ, ?_⟩, rfl⟩
-    split_ifs <;> constructor <;> linarith
-  · have hper : ∀ x : ℝ, e (x + 2 * π * m) = e x := fun x => e_add_int_mul_two_pi x m
-    rcases hD with hD | hD
-    · rw [if_pos hD, dist_eq_norm]
-      have h1 : D₂ - φ = (D - φ) + 2 * π * m := by rw [hD₂]; ring
-      have h2 : e (D - φ) = e ψ * e (π / 2 - φ) := by rw [← e_add, hD]; congr 1; ring
-      have h3 : ((2 * Real.sin φ : ℝ) : ℂ) * e (π / 2 - φ) = 1 - e (-(2 * φ)) := (one_sub_e_neg_two_mul φ).symm
-      have h4 : v + ((2 * Real.sin φ : ℝ) : ℂ) * e (D₂ - φ) - (v + e ψ) = -(e ψ * e (-(2 * φ))) := by
-        rw [h1, hper, h2]
-        linear_combination (e ψ) * h3
-      rw [h4, norm_neg, norm_mul, norm_e, norm_e, one_mul]
-    · have hne : D ≠ ψ + π / 2 := by rw [hD]; linarith [Real.pi_pos]
-      rw [if_neg hne, dist_eq_norm]
-      have h1 : D₂ + φ = (D + φ) + 2 * π * m := by rw [hD₂]; ring
-      have h2 : e (D + φ) = e ψ * e (φ - π / 2) := by rw [← e_add, hD]; congr 1; ring
-      have h3 : ((2 * Real.sin φ : ℝ) : ℂ) * e (φ - π / 2) = 1 - e (2 * φ) := (one_sub_e_two_mul φ).symm
-      have h4 : v + ((2 * Real.sin φ : ℝ) : ℂ) * e (D₂ + φ) - (v + e ψ) = -(e ψ * e (2 * φ)) := by
-        rw [h1, hper, h2]
-        linear_combination (e ψ) * h3
-      rw [h4, norm_neg, norm_mul, norm_e, norm_e, one_mul]
+  set η := min (min (D₂ - d i.castSucc) (d i.succ - D₂)) 1 / 2 with hη
+  have hη0 : 0 < η := by
+    rw [hη]; have := lt_min (lt_min (sub_pos.mpr hD1) (sub_pos.mpr hD2)) one_pos; linarith
+  have hm1 := min_le_left (min (D₂ - d i.castSucc) (d i.succ - D₂)) 1
+  have hm2 := min_le_left (D₂ - d i.castSucc) (d i.succ - D₂)
+  have hm3 := min_le_right (D₂ - d i.castSucc) (d i.succ - D₂)
+  have hm4 := min_le_right (min (D₂ - d i.castSucc) (d i.succ - D₂)) 1
+  have hη1 : η < D₂ - d i.castSucc := by rw [hη]; linarith [sub_pos.mpr hD1]
+  have hη2 : η < d i.succ - D₂ := by rw [hη]; linarith [sub_pos.mpr hD2]
+  have hηπ : η < π := by rw [hη]; linarith [Real.two_le_pi]
+  have hsin : 0 < Real.sin η := Real.sin_pos_of_pos_of_lt_pi hη0 hηπ
+  have hlo : D₂ - η ∈ Ioo (d i.castSucc) (d i.succ) := ⟨by linarith, by linarith⟩
+  have hhi : D₂ + η ∈ Ioo (d i.castSucc) (d i.succ) := ⟨by linarith, by linarith⟩
+  rcases hD with hD | hD
+  · -- the branch direction is `ψ + π/2`: inside just above it, outside just below it
+    have h1 : Real.cos (D₂ + η - ψ) = -Real.sin η := by
+      rw [show D₂ + η - ψ = (η + π / 2) + (m : ℝ) * (2 * π) by rw [hD₂, hD]; ring, Real.cos_add_int_mul_two_pi,
+        Real.cos_add_pi_div_two]
+    have h2 : Real.cos (D₂ - η - ψ) = Real.sin η := by
+      rw [show D₂ - η - ψ = (π / 2 - η) + (m : ℝ) * (2 * π) by rw [hD₂, hD]; ring, Real.cos_add_int_mul_two_pi,
+        Real.cos_pi_div_two_sub]
+    exact not_mem_coloursAt_of_collarAt hF (h.collarAt_shadow_inner_of_mem i hhi (by rw [h1]; linarith))
+      (h.collarAt_shadow_outer_of_mem i hlo (by rw [h2]; exact hsin))
+  · -- the branch direction is `ψ − π/2`: inside just below it, outside just above it
+    have h1 : Real.cos (D₂ - η - ψ) = -Real.sin η := by
+      rw [show D₂ - η - ψ = -((η + π / 2) + ((-m : ℤ) : ℝ) * (2 * π)) by rw [hD₂, hD]; push_cast; ring, Real.cos_neg,
+        Real.cos_add_int_mul_two_pi, Real.cos_add_pi_div_two]
+    have h2 : Real.cos (D₂ + η - ψ) = Real.sin η := by
+      rw [show D₂ + η - ψ = (η - π / 2) + (m : ℝ) * (2 * π) by rw [hD₂, hD]; ring, Real.cos_add_int_mul_two_pi,
+        Real.cos_sub_pi_div_two]
+    exact not_mem_coloursAt_of_collarAt hF (h.collarAt_shadow_inner_of_mem i hlo (by rw [h1]; linarith))
+      (h.collarAt_shadow_outer_of_mem i hhi (by rw [h2]; exact hsin))
 
 /-- **The colour of a tangent parabola at an edge** (the second-order lemma's map-level input, § 9.1): in a map of the plane, at an edge
 direction `β = d i` of a picture with positive angles, the parabola tangent to `e β` at `v` with upward curvature `1/2` has its points `0 < x < r`,

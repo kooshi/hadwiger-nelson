@@ -2282,6 +2282,13 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.coneAt_nonempty_of_mem_closure_region
 #print axioms HadwigerNelson.Plane.finRotate_ne_symm
 
+/-! ## FS-131 Woodall's chain (job FS131-IWb) — the connected piece (a cone direction of a colour class is one of a tile's), steps 5 and 6, the picture -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.exists_preconnected_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.collarAt_shadow_inner_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.collarAt_shadow_outer_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.mem_coneAt_of_mem_Icc
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

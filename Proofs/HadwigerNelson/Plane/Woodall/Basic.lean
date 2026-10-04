@@ -11,8 +11,9 @@ on one arc map, one two-constructor type.
   `[Woodall1973]`'s "interior, respectively exterior, unit arc of positive thickness" with constant thickness `h` (p. 198); Woodall's variable
   thickness `f(θ)` enters as "a collar about each angle" (`plans/FS131-W-kernel-plan.md` § 3.2's read-back).
 * **The picture at a point** (`ArcMap.SectorsAt`, region-only): `n` sectors in counter-clockwise order between directions `d i ≤ d (i + 1)`
-  (zero-angle sectors, horns, allowed), adjacent sectors of different colours, a truncated open sector strictly inside each sector lying in its
-  colour class, and the cone of each colour class at the point equal to the union of its closed sectors. It is Woodall's "regions at a vertex
+  (zero-angle sectors, horns, allowed), adjacent sectors of different colours, the point in the domain, and the cone of each colour class at the
+  point equal to the union of its closed sectors (inventory item 155: no clause asks a sector to avoid the arcs, so a sector may be merged across
+  an arc between two sides of one colour). It is Woodall's "regions at a vertex
   `P`" after his steps 1–2: adjacent regions of one colour are one sector (step 1), and every edge has a direction (step 2; automatic for arcs).
 * **Woodall's normal forms.** `ArcMap.WoodallMerged`: a colour repeated at a point sits on zero-angle sectors only (the conclusion of his step 3:
   "if two of the regions are in the same set, then each of them subtends angle 0 at P"); `ArcMap.WoodallNormal`: at every point of three or more
@@ -58,12 +59,14 @@ variable {k : ℕ} (F : ArcMap k)
 
 /-- **Woodall's picture at `v`** (region-only): `n ≥ 1` sectors in counter-clockwise order, sector `i` between the directions `d i.castSucc`
 and `d i.succ`, `d` monotone with `d (last n) = d 0 + 2π` (so zero-angle sectors, horns, are allowed), of colour `c i`; adjacent sectors carry
-different colours (when `n ≥ 2`); for every `δ > 0` a truncated open sector strictly inside each sector lies in its colour class; and the cone
-of each colour class at `v` is the union of the closed sectors of that colour. -/
+different colours (when `n ≥ 2`); `v` is a point of the domain; and the cone of each colour class at `v` is the union of the closed sectors of
+that colour. The fifth clause was "for every `δ > 0` a truncated open sector strictly inside each sector lies in its colour class" until inventory
+item 155 (FS131-IWb): a sector merged across an arc between two sides of one colour holds points of that arc, so no picture existed at such a point;
+its readers go through the cone clause and the domain point instead (`ArcMap.exists_preconnected_of_mem_coneAt`). -/
 def SectorsAt (v : ℂ) (n : ℕ) (d : Fin (n + 1) → ℝ) (c : Fin n → Fin k) : Prop :=
   0 < n ∧ Monotone d ∧ d (Fin.last n) = d 0 + 2 * π ∧
     (2 ≤ n → ∀ i : Fin n, c i ≠ c (finRotate n i)) ∧
-    (∀ i : Fin n, ∀ δ > 0, ∃ r > 0, annSector v 0 r (d i.castSucc + δ) (d i.succ - δ) ⊆ F.region (c i)) ∧
+    v ∈ F.dom ∧
     ∀ j : Fin k, coneAt (F.region j) v = ⋃ i ∈ {i : Fin n | c i = j}, angleIcc (d i.castSucc) (d i.succ)
 
 /-- **Woodall's step 3, its conclusion**: at every point, a colour carried by two sectors is carried by zero-angle sectors only ("if two of
@@ -163,8 +166,7 @@ theorem const_sectorsAt (v : ℂ) :
   refine ⟨one_pos, ?_, by simp, fun h => absurd h (by norm_num), ?_, ?_⟩
   · intro i j hij
     fin_cases i <;> fin_cases j <;> (simp_all; try positivity)
-  · intro i δ _
-    exact ⟨1, one_pos, by rw [hreg]; exact subset_univ _⟩
+  · exact mem_univ v
   · intro j
     rw [hreg, coneAt_univ]
     refine (eq_univ_of_forall fun x => mem_iUnion₂.mpr ⟨(0 : Fin 1), (Subsingleton.elim _ _ : (![0] : Fin 1 → Fin 1) 0 = j), ?_⟩).symm
