@@ -94,10 +94,52 @@ theorem sq9_tight : sq9.Tight := fun ε hε hs => by
   obtain ⟨j, hj⟩ := sq9_not_bandNull hε
   exact hj (hs j)
 
+/-! ### FS131-K2d: children of `sq9_saturated_both` (plan § 16) -/
+
+/-- The closed square `[n/2, (n+1)/2] × [m/2, (m+1)/2]` of `sq9`'s grid. -/
+def sq9Sq (n m : ℤ) : Set ℂ :=
+  {z | (n : ℝ) / 2 ≤ z.re ∧ z.re ≤ ((n : ℝ) + 1) / 2 ∧ (m : ℝ) / 2 ≤ z.im ∧ z.im ≤ ((m : ℝ) + 1) / 2}
+
+/-- Saturation with positive-density partners implies saturation (`essClosure ⊆ essSupport = closure Ã`). -/
+theorem SaturatedPos.saturated {k : ℕ} {C : Fin k → Set ℂ} (h : SaturatedPos C) : Saturated C := by
+  sorry
+
+/-- A point of positive upper density of a class lies in a closed square of that class (the closed squares of one colour are a
+locally finite closed family containing the class). -/
+theorem sq9_essClosure_subset {j : Fin 9} {x : ℂ} (hx : x ∈ essClosure (sq9.cls j)) :
+    ∃ n m : ℤ, finProdFinEquiv ((n : ZMod 3), (m : ZMod 3)) = j ∧ x ∈ sq9Sq n m := by
+  sorry
+
+/-- Every point of a closed square has positive upper density for the square's class (a corner sub-square of side `r/√2`). -/
+theorem sq9Sq_subset_essClosure (n m : ℤ) :
+    sq9Sq n m ⊆ essClosure (sq9.cls (finProdFinEquiv ((n : ZMod 3), (m : ZMod 3)))) := by
+  sorry
+
+/-- A point of a closed square that is not a density point of its class lies on an edge (the open square is a.e. inside). -/
+theorem sq9_mem_edge_of_not_mem_densitySet {n m : ℤ} {x : ℂ} (hx : x ∈ sq9Sq n m)
+    (hd : x ∉ densitySet (sq9.cls (finProdFinEquiv ((n : ZMod 3), (m : ZMod 3))))) :
+    x.re = n / 2 ∨ x.re = (n + 1) / 2 ∨ x.im = m / 2 ∨ x.im = (m + 1) / 2 := by
+  sorry
+
+/-- **W's ladder**: a point on an edge of a closed square is at distance exactly `1` from a point of a closed square of the same
+colour (`x ∓ 1` on the facing edge of the square three steps across, or `x ∓ i`). -/
+theorem sq9_partner {n m : ℤ} {x : ℂ} (hx : x ∈ sq9Sq n m)
+    (he : x.re = n / 2 ∨ x.re = (n + 1) / 2 ∨ x.im = m / 2 ∨ x.im = (m + 1) / 2) :
+    ∃ (y : ℂ) (n' m' : ℤ), dist x y = 1 ∧ (n' : ZMod 3) = n ∧ (m' : ZMod 3) = m ∧ y ∈ sq9Sq n' m' := by
+  sorry
+
 /-- **FS111-W-SQ9**, saturation clauses (the remaining leaf of `sq9_tight_saturated`): every essential boundary point of a class
 lies on an edge of one of its squares, and the facing same-class square's edge is at distance exactly `1`. -/
 theorem sq9_saturated_both : Saturated sq9.cls ∧ SaturatedPos sq9.cls := by
-  sorry
+  have hpos : SaturatedPos sq9.cls := by
+    intro j x hx
+    obtain ⟨n, m, hj, hxs⟩ := sq9_essClosure_subset hx.1
+    subst hj
+    obtain ⟨y, n', m', hd, hn, hm, hy⟩ := sq9_partner hxs (sq9_mem_edge_of_not_mem_densitySet hxs hx.2)
+    refine ⟨y, ?_, hd⟩
+    have := sq9Sq_subset_essClosure n' m' hy
+    rwa [hn, hm] at this
+  exact ⟨hpos.saturated, hpos⟩
 
 /-- **FS111-W-SQ9**: the half-square nine-colouring is a.e.-proper (it is `sq9 : AeColouring 9`), tight, saturated, and
 saturated with positive-density partners. -/
@@ -190,9 +232,75 @@ example : r7ColTri (99 / 100) (1 / 50) = 4 := by
 
 /-! ### The row -/
 
+/-! ### FS131-K2d: children of R7's leaves (plan § 16) -/
+
+/-- The up tile `U(m, n)`: the Reuleaux triangle on `λ, λ + 1, λ + ω`, `λ = tri m n`. -/
+def r7Up (m n : ℤ) : Set ℂ := closedBall (tri m n) 1 ∩ closedBall (tri (m + 1) n) 1 ∩ closedBall (tri m (n + 1)) 1
+
+/-- The down tile `D(m, n)`: the cell's down triangle (vertices `λ + 1, λ + ω, λ + 1 + ω`) outside the three bulges (more than
+`1` from `λ`, `λ + 2`, `λ + 2ω`). -/
+def r7Down (m n : ℤ) : Set ℂ :=
+  {z | z ∈ convexHull ℝ {tri (m + 1) n, tri m (n + 1), tri (m + 1) (n + 1)} ∧ 1 < dist z (tri m n) ∧
+    1 < dist z (tri (m + 2) n) ∧ 1 < dist z (tri m (n + 2))}
+
+theorem measurable_r7Col : Measurable r7Col := by
+  sorry
+
+/-- Every point lies in an up tile of its colour (colours `< 4`) or a down tile of its colour (colours `≥ 4`). -/
+theorem r7Col_mem_tile (z : ℂ) :
+    (∃ m n : ℤ, z ∈ r7Up m n ∧ r7Col z = r7UpCol m n) ∨ ∃ m n : ℤ, z ∈ r7Down m n ∧ r7Col z = r7DownCol m n := by
+  sorry
+
+/-- Up colours are `< 4`, down colours `≥ 4`: an up tile and a down tile never share a colour. -/
+theorem r7UpCol_ne_r7DownCol (m n m' n' : ℤ) : r7UpCol m n ≠ r7DownCol m' n' := by
+  sorry
+
+/-- **Within one up tile** a unit pair has a vertex at one end and the opposite arc at the other, so `x` is at distance `1` from
+a lattice point. -/
+theorem r7Up_unitPair {m n : ℤ} {x y : ℂ} (hx : x ∈ r7Up m n) (hy : y ∈ r7Up m n) (hxy : dist x y = 1) :
+    ∃ m' n' : ℤ, dist x (tri m' n') = 1 := by
+  sorry
+
+/-- **Two up tiles of one colour** (`λ' − λ ∈ 2Λ ∖ 0`) meet the unit distance only at a pair of lattice points (a half-plane
+separation along the offset; offsets of length `> 2` are too far). -/
+theorem r7Up_sep {m n m' n' : ℤ} (hne : (m, n) ≠ (m', n')) (hc : r7UpCol m n = r7UpCol m' n') {x y : ℂ}
+    (hx : x ∈ r7Up m n) (hy : y ∈ r7Up m' n') (hxy : dist x y = 1) : ∃ m'' n'' : ℤ, dist x (tri m'' n'') = 1 := by
+  sorry
+
+/-- **Down tiles carry no unit pair of one colour**: within a tile (inside a unit triangle, vertices excluded) and across tiles
+of one colour (`λ' − λ ∈ M ∖ 0`, the bulges keep them apart). -/
+theorem r7Down_dist_ne_one {m n m' n' : ℤ} (hc : r7DownCol m n = r7DownCol m' n') {x y : ℂ} (hx : x ∈ r7Down m n)
+    (hy : y ∈ r7Down m' n') : dist x y ≠ 1 := by
+  sorry
+
+/-- **Same-colour unit pairs of R7 start on a unit circle about a lattice point** (the case table, assembled). -/
+theorem r7_unitPair_mem_sphere {x y : ℂ} (hxy : dist x y = 1) (hc : r7Col x = r7Col y) :
+    ∃ m n : ℤ, dist x (tri m n) = 1 := by
+  rcases r7Col_mem_tile x with ⟨m, n, hx, hcx⟩ | ⟨m, n, hx, hcx⟩ <;>
+    rcases r7Col_mem_tile y with ⟨m', n', hy, hcy⟩ | ⟨m', n', hy, hcy⟩
+  · by_cases h : (m, n) = (m', n')
+    · obtain ⟨rfl, rfl⟩ := Prod.mk.inj h
+      exact r7Up_unitPair hx hy hxy
+    · exact r7Up_sep h (hcx.symm.trans (hc.trans hcy)) hx hy hxy
+  · exact absurd (hcx.symm.trans (hc.trans hcy)) (r7UpCol_ne_r7DownCol _ _ _ _)
+  · exact absurd (hcy.symm.trans (hc.symm.trans hcx)) (r7UpCol_ne_r7DownCol _ _ _ _)
+  · exact absurd hxy (r7Down_dist_ne_one (hcx.symm.trans (hc.trans hcy)) hx hy)
+
+/-- A measurable set whose unit pairs all start in a null set has null unit pairs (`unitPairSet A ⊆ N ×ˢ univ`). -/
+theorem unitPairsNull_of_unitPair_mem {A N : Set ℂ} (hN : volume N = 0)
+    (h : ∀ x ∈ A, ∀ y ∈ A, dist x y = 1 → x ∈ N) : UnitPairsNull A := by
+  sorry
+
+/-- The unit circles about the lattice points are null together (`MeasureTheory.Measure.addHaar_sphere`, countable union). -/
+theorem volume_iUnion_sphere_tri : volume (⋃ (m : ℤ) (n : ℤ), sphere (tri m n) 1) = 0 := by
+  sorry
+
 /-- **FS111-M-R7**, a.e.-properness: R7 is a measurable seven-colouring with null monochromatic unit pairs. -/
 theorem r7_aeColouring : ∃ c : AeColouring 7, c.col = r7Col := by
-  sorry
+  refine ⟨⟨r7Col, measurable_r7Col, fun j => ?_⟩, rfl⟩
+  refine unitPairsNull_of_unitPair_mem volume_iUnion_sphere_tri fun x hx y hy hxy => ?_
+  obtain ⟨m, n, h⟩ := r7_unitPair_mem_sphere hxy (hx.trans hy.symm)
+  exact mem_iUnion.2 ⟨m, mem_iUnion.2 ⟨n, by rw [mem_sphere]; exact h⟩⟩
 
 /-- Inside the open cell `(0, 0)` and the open unit disc, R7's colour is `0` (`U(0, 0)`). -/
 theorem r7ColTri_zero {a b : ℝ} (ha : 0 < a) (hb : 0 < b) (ha1 : a < 1) (hb1 : b < 1) (hq : triQ a b ≤ 1) :
@@ -281,9 +389,52 @@ theorem r7_not_bandNull {ε : ℝ} (hε : 0 < ε) : ∃ j, ¬ BandNull (r7Cls j)
   have hpos : 0 < (volume.prod volume) P := hPo.measure_pos _ ⟨_, hPn⟩
   exact hpos.ne' (measure_mono_null hsub hN)
 
+/-- R7's classes are measurable. -/
+theorem measurableSet_r7Cls (j : Fin 7) : MeasurableSet (r7Cls j) := measurable_r7Col (measurableSet_singleton j)
+
+/-- **R7's boundary at a lattice point**: of the classes with positive upper density at `tri m n` (only its three up colours —
+the cusps have density `0`), every two have a common centre at distance `1` in both supports (`λ₀ + 1`, `λ₀ + ω`, `λ₀ + ω − 1`). -/
+theorem r7_boundary_lattice {m n : ℤ} {a b : Fin 7} (hab : a ≠ b) (ha : tri m n ∈ essClosure (r7Cls a))
+    (hb : tri m n ∈ essClosure (r7Cls b)) :
+    ∃ m' n' : ℤ, dist (tri m n) (tri m' n') = 1 ∧ tri m' n' ∈ essSupport (r7Cls a) ∧ tri m' n' ∈ essSupport (r7Cls b) := by
+  sorry
+
+/-- **R7's boundary off the lattice**: two classes meet only on an arc of an up tile facing a down tile, centred at a vertex `v`
+of the up tile; `v` is in the up colour's support (a vertex) and in the down colour's (the cusp of that colour at `v`, by
+M-R7-FORCE's coset computation: `D(m − 1, n − 1)` for the arc about `λ`, `D(m − 1, n + 1)` for the arc about `λ + ω`). -/
+theorem r7_boundary_offLattice {x : ℂ} (hx : ∀ m n : ℤ, x ≠ tri m n) {a b : Fin 7} (hab : a ≠ b)
+    (ha : x ∈ essClosure (r7Cls a)) (hb : x ∈ essClosure (r7Cls b)) :
+    ∃ m n : ℤ, dist x (tri m n) = 1 ∧ tri m n ∈ essSupport (r7Cls a) ∧ tri m n ∈ essSupport (r7Cls b) := by
+  sorry
+
+/-- **R7's classes are maximal, up colours**: for almost every point off an up class, the unit circle about it crosses an open
+disc inside a tile of that colour (one period, finitely many explicit witness discs). -/
+theorem r7_phi_pos_up {j : Fin 7} (hj : j.val < 4) : ∀ᵐ p ∂(volume.restrict (r7Cls j)ᶜ), 0 < phi (r7Cls j) p := by
+  sorry
+
+/-- **R7's classes are maximal, down colours.** -/
+theorem r7_phi_pos_down {j : Fin 7} (hj : 4 ≤ j.val) : ∀ᵐ p ∂(volume.restrict (r7Cls j)ᶜ), 0 < phi (r7Cls j) p := by
+  sorry
+
+/-- **FS111-M-R7**, last clause: every boundary is a unit arc centred at a lattice point carrying both its side colours — a point
+in the essential closure of two classes is at distance exactly `1` from a lattice point in the support of both. -/
+theorem r7_boundary {x : ℂ} {a b : Fin 7} (hab : a ≠ b) (ha : x ∈ essClosure (r7Cls a))
+    (hb : x ∈ essClosure (r7Cls b)) :
+    ∃ m n : ℤ, dist x (tri m n) = 1 ∧ tri m n ∈ essSupport (r7Cls a) ∧ tri m n ∈ essSupport (r7Cls b) := by
+  by_cases hl : ∃ m n : ℤ, x = tri m n
+  · obtain ⟨m, n, rfl⟩ := hl
+    exact r7_boundary_lattice hab ha hb
+  · push Not at hl
+    exact r7_boundary_offLattice hl hab ha hb
+
 /-- **FS111-M-R7**, saturation: every essential boundary point of a class is a contact point of that class. -/
 theorem r7Cls_saturated : Saturated r7Cls := by
-  sorry
+  intro j x hx
+  have hd : Pairwise (Function.onFun Disjoint r7Cls) := fun i i' hii' => Disjoint.preimage _ (disjoint_singleton.2 hii')
+  have hcov : ⋃ i, r7Cls i = univ := eq_univ_of_forall fun z => mem_iUnion.2 ⟨r7Col z, rfl⟩
+  obtain ⟨b, hb, hxb⟩ := exists_ne_mem_essClosure measurableSet_r7Cls hd hcov hx
+  obtain ⟨m, n, h1, h2, -⟩ := r7_boundary (Ne.symm hb) hx.1 hxb
+  exact ⟨tri m n, by rw [← essSupport_eq_closure_densitySet]; exact h2, h1⟩
 
 /-- **FS111-M-R7**, first three clauses: R7 is a.e.-proper, tight and saturated. -/
 theorem exists_r7 : ∃ c : AeColouring 7, c.col = r7Col ∧ c.Tight ∧ Saturated c.cls := by
@@ -293,19 +444,20 @@ theorem exists_r7 : ∃ c : AeColouring 7, c.col = r7Col ∧ c.Tight ∧ Saturat
   obtain ⟨j, hj⟩ := r7_not_bandNull hε
   exact hj (hcls ▸ hs j)
 
-/-- **FS111-M-R7**, last clause: every boundary is a unit arc centred at a lattice point carrying both its side colours — a point
-in the essential closure of two classes is at distance exactly `1` from a lattice point in the support of both. -/
-theorem r7_boundary {x : ℂ} {a b : Fin 7} (hab : a ≠ b) (ha : x ∈ essClosure (r7Cls a))
-    (hb : x ∈ essClosure (r7Cls b)) :
-    ∃ m n : ℤ, dist x (tri m n) = 1 ∧ tri m n ∈ essSupport (r7Cls a) ∧ tri m n ∈ essSupport (r7Cls b) := by
-  sorry
-
 /-! ### R7 against FS111-M-COVER-SC's literal second clause (ruling: `plans/FS131-close-inventory.md` items 18–19) -/
 
 /-- R7's classes are a maximal admissible cover (FS111-VMW-R7-MAX's last clause; not a backlog row, formalized here as the
 counterexample's other half). -/
 theorem r7Cls_isMaximalCover : IsMaximalCover r7Cls := by
-  sorry
+  obtain ⟨c, hc⟩ := r7_aeColouring
+  have hnull : ∀ j, UnitPairsNull (r7Cls j) := fun j => by
+    have := c.unitPairsNull j
+    rwa [show c.col ⁻¹' {j} = r7Cls j by simp [r7Cls, hc]] at this
+  refine (isMaximalCover_iff measurableSet_r7Cls).2 ⟨fun j => ?_, Eventually.of_forall fun z => ⟨r7Col z, rfl⟩⟩
+  refine (isMUA_iff_ae_phi_pos (measurableSet_r7Cls j) (hnull j)).2 ?_
+  rcases lt_or_ge j.val 4 with h | h
+  · exact r7_phi_pos_up h
+  · exact r7_phi_pos_down h
 
 /-! ### Children of `r7_lowerGraph`: R7 in the frame `(e(π/6), 2π/3)` -/
 
@@ -488,15 +640,77 @@ example : disc7Col 1 0 ≠ disc7Col 0 0 ∧ disc7Col 0 1 ≠ disc7Col 0 0 ∧ di
 example : (0 : ℂ) ∈ disc7 0 :=
   mem_iUnion.2 ⟨0, mem_iUnion.2 ⟨0, mem_iUnion.2 ⟨rfl, by simp [disc7Centre, tri]⟩⟩⟩
 
+/-! ### FS131-K2d: children of DISC7's leaves (plan § 16) -/
+
+theorem measurableSet_disc7 (a : Fin 7) : MeasurableSet (disc7 a) := by
+  sorry
+
+/-- Same-colour centres are at least `√21/2` apart (`triQ ≥ 7` on the index-7 sublattice `{m + 3n ≡ 0 (mod 7)}`). -/
+theorem disc7Col_eq_dist_ge {m n m' n' : ℤ} (hc : disc7Col m n = disc7Col m' n') (hne : (m, n) ≠ (m', n')) :
+    √21 / 2 ≤ dist (disc7Centre m n) (disc7Centre m' n') := by
+  sorry
+
+/-- **DISC7's classes have null unit pairs**: inside one disc of radius `1/2` only antipodal boundary pairs are at distance `1`,
+and two discs of one colour are more than `√21/2 − 1 > 1` apart; so every unit pair starts on a boundary circle. -/
+theorem disc7_unitPair_mem_sphere {a : Fin 7} {x y : ℂ} (hx : x ∈ disc7 a) (hy : y ∈ disc7 a) (hxy : dist x y = 1) :
+    ∃ m n : ℤ, dist x (disc7Centre m n) = 1 / 2 := by
+  sorry
+
+/-- The discs cover the plane (the centre lattice's covering radius is `1/2`). -/
+theorem disc7_cover (z : ℂ) : ∃ m n : ℤ, dist z (disc7Centre m n) ≤ 1 / 2 := by
+  sorry
+
+/-- Every point is within `√7/2` of a centre of each colour (the colour lattice's covering radius). -/
+theorem disc7_colour_near (a : Fin 7) (z : ℂ) : ∃ m n : ℤ, disc7Col m n = a ∧ dist z (disc7Centre m n) ≤ √7 / 2 := by
+  sorry
+
+/-- The unit circle about `p` crosses a closed disc of radius `1/2` at distance in `(1/2, 3/2)` in an arc of positive length. -/
+theorem phi_closedBall_pos {p c : ℂ} (h1 : 1 / 2 < dist p c) (h2 : dist p c < 3 / 2) :
+    0 < phi (closedBall c (1 / 2)) p := by
+  sorry
+
+/-- DISC7's classes are MUA sets (null unit pairs; `φ > 0` off the class, since `√7/2 < 3/2`). -/
+theorem disc7_isMUA (a : Fin 7) : IsMUA (disc7 a) := by
+  sorry
+
+/-- A union of closed discs of radius `1/2` about a discrete lattice coset is its own support. -/
+theorem essSupport_disc7 (a : Fin 7) : essSupport (disc7 a) = disc7 a := by
+  sorry
+
+/-- The frontier of a class lies on the boundary circles: null. -/
+theorem volume_frontier_disc7 (a : Fin 7) : volume (frontier (disc7 a)) = 0 := by
+  sorry
+
+/-- A class is invariant under the colour lattice, spanned by `c(1, 2)` and `c(−3, 1)`. -/
+theorem disc7_periodic (a : Fin 7) (x : ℂ) :
+    (x + disc7Centre 1 2 ∈ disc7 a ↔ x ∈ disc7 a) ∧ (x + disc7Centre (-3) 1 ∈ disc7 a ↔ x ∈ disc7 a) := by
+  sorry
+
+/-- One cell of the colour lattice holds one disc's area `π/4` of the class, in covolume `21√3/8`. -/
+theorem volume_disc7_cell (a : Fin 7) :
+    volume (disc7 a ∩ {x | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧
+        x = s * disc7Centre 1 2 + t * disc7Centre (-3) 1}) = ENNReal.ofReal (π / 4) ∧
+      volume {x : ℂ | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧
+        x = s * disc7Centre 1 2 + t * disc7Centre (-3) 1} = ENNReal.ofReal (21 * √3 / 8) := by
+  sorry
+
+/-- The colour lattice's generators are independent. -/
+theorem disc7_linearIndependent : LinearIndependent ℝ ![disc7Centre 1 2, disc7Centre (-3) 1] := by
+  sorry
+
 /-! ### The row -/
 
 /-- **FS111-M2-DISC7**, first clause: the discs form a maximal admissible seven-cover. -/
 theorem disc7_isMaximalCover : IsMaximalCover disc7 := by
-  sorry
+  refine (isMaximalCover_iff measurableSet_disc7).2 ⟨disc7_isMUA, Eventually.of_forall fun z => ?_⟩
+  obtain ⟨m, n, h⟩ := disc7_cover z
+  exact ⟨disc7Col m n, mem_iUnion.2 ⟨m, mem_iUnion.2 ⟨n, mem_iUnion.2 ⟨rfl, h⟩⟩⟩⟩
 
 /-- **FS111-M2-DISC7**: its classes are regular. -/
 theorem disc7_isRegularMUA (a : Fin 7) : IsRegularMUA (disc7 a) := by
-  sorry
+  refine ⟨disc7_isMUA a, ?_, ?_⟩
+  · rw [essSupport_disc7, sdiff_self, measure_empty]
+  · rw [essSupport_disc7]; exact volume_frontier_disc7 a
 
 /-- Every other colour is a lattice neighbour's colour (differences `±1, ±2, ±3`). -/
 theorem disc7_nbr : ∀ a b : Fin 7, a ≠ b → ∃ d ∈ ([(1,0),(0,1),(-1,0),(0,-1),(1,-1),(-1,1)] : List (ℤ×ℤ)),
@@ -551,7 +765,11 @@ theorem disc7_lens {a b : Fin 7} (hab : a ≠ b) : 0 < volume (disc7 a ∩ disc7
 
 /-- **FS111-M2-DISC7**: each class has density `2π/(21√3)`. -/
 theorem disc7_upperDensity (a : Fin 7) : upperDensity (disc7 a) = ENNReal.ofReal (2 * π / (21 * √3)) := by
-  sorry
+  rw [upperDensity_of_periodic disc7_linearIndependent (measurableSet_disc7 a) (disc7_periodic a),
+    (volume_disc7_cell a).1, (volume_disc7_cell a).2, ← ENNReal.ofReal_div_of_pos (by positivity)]
+  congr 1
+  field_simp
+  ring
 
 /-- **FS111-M2-DISC7**: the seven densities sum to Kershner's thinnest-covering density `2π/(3√3)` (the value; that it is the
 thinnest covering density by equal discs is `[Kershner1939]`'s theorem and is not stated). -/
@@ -563,6 +781,19 @@ theorem disc7_sum_upperDensity : ∑ a, upperDensity (disc7 a) = ENNReal.ofReal 
   ring
 
 /-! ## FS111-M3-BAND: what a flat side needs -/
+
+/-! ### FS131-K2d: children of `IsMUA.add_normal_mem_essSupport` (plan § 16) -/
+
+/-- Points just beyond `m` along the normal, outside the support, are at distance `1` from the support (SATC (ii) for one MUA
+set, `IsMUA.interior_union_unitShadow`). -/
+theorem IsMUA.exists_shadow_point {A : Set ℂ} (hA : IsMUA A) {z : ℂ} (hz : z ∉ essSupport A) :
+    ∃ y ∈ essSupport A, dist z y = 1 := by
+  sorry
+
+/-- **The unit circle about any point at distance `1` from `m`, other than `m + e θ`, enters the open half-box behind `m`.** -/
+theorem circle_meets_halfBox_of_ne {m y : ℂ} {θ ε : ℝ} (hε : 0 < ε) (hy : dist m y = 1) (hne : y ≠ m + e θ) :
+    ∃ z ∈ halfBox m θ ε, dist z y = 1 := by
+  sorry
 
 /-- **FS111-M3-BAND**, first clause, at the class its argument reads (wider; `plans/FS131-w2-kernel-plan.md` § 7): at a point `m`
 of the boundary of a MUA set's support where the set fills the half-box behind `m` (in direction `−e θ`) and the support misses
@@ -803,9 +1034,187 @@ example (g : ℝ → ℝ) : (0 : ℂ) ∈ hcSet g :=
 
 /-! ### The row -/
 
+/-! ### FS131-K2d: children of `g1Bounds_hcGap` (plan § 16) -/
+
+/-- On a gap `(a, b)` of `Z` (`a, b ∈ Z`, no point of `Z` strictly between), `hcGap Z` is `(s − a)²(b − s)²/4`. -/
+theorem hcGap_eq_of_gap {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) {a b s : ℝ} (ha : a ∈ Z)
+    (hb : b ∈ Z) (hab : ∀ z ∈ Z, z ∉ Ioo a b) (hs : s ∈ Ioo a b) : hcGap Z s = (s - a) ^ 2 * (b - s) ^ 2 / 4 := by
+  sorry
+
+/-- `hcGap Z` is differentiable on `ℝ`, with `|g′| ≤ dist(·, Z)/2` on `[−1/2, 1/2]` (`g′ = 0` on `Z` because `g ≤ dist²/4`). -/
+theorem differentiable_hcGap {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) :
+    Differentiable ℝ (hcGap Z) ∧ ∀ s ∈ Icc (-1 / 2 : ℝ) (1 / 2), |deriv (hcGap Z) s| ≤ infDist s Z / 2 := by
+  sorry
+
+/-- (G1)'s pointwise bounds on `[−1/2, 1/2]`: `0 ≤ g ≤ dist²/4`, `g ≤ 1/64`, `|g′| ≤ 1/8`, `g > 0` off `Z` (gaps have width
+`≤ 1`). -/
+theorem hcGap_bounds {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) :
+    ∀ s ∈ Icc (-1 / 2 : ℝ) (1 / 2), 0 ≤ hcGap Z s ∧ hcGap Z s ≤ infDist s Z ^ 2 / 4 ∧ hcGap Z s ≤ 1 / 64 ∧
+      |deriv (hcGap Z) s| ≤ 1 / 8 ∧ (s ∉ Z → 0 < hcGap Z s) := by
+  sorry
+
+/-- The lower-parabola bound: `g′` is `1/2`-Lipschitz on `[−1/2, 1/2]` (`|g″| ≤ 1/2` on gaps, `g′ = 0` on `Z`), then Taylor. -/
+theorem hcGap_lowerParabola {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) :
+    ∀ s ∈ Icc (-1 / 2 : ℝ) (1 / 2), ∀ σ ∈ Icc (-1 / 2 : ℝ) (1 / 2),
+      hcGap Z σ + deriv (hcGap Z) σ * (s - σ) - (s - σ) ^ 2 / 4 ≤ hcGap Z s := by
+  sorry
+
 /-- `(G1)` holds for § 1.6's formula on every closed `Z ⊆ [−1/2, 1/2]` holding `±1/2` (the gaps have width at most `1`). -/
 theorem g1Bounds_hcGap {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) : G1Bounds Z (hcGap Z) := by
+  obtain ⟨hd, hd'⟩ := differentiable_hcGap hZc hZs hl hr
+  have hb := hcGap_bounds hZc hZs hl hr
+  refine ⟨hd, fun s hs => ⟨(hb s hs).1, (hb s hs).2.1, hd' s hs, (hb s hs).2.2.1, (hb s hs).2.2.2.1⟩,
+    fun s hs hsZ => (hb s hs).2.2.2.2 hsZ, hcGap_lowerParabola hZc hZs hl hr⟩
+
+/-! ### FS131-K2d: children of HC's and IRREG's leaves (plan § 17; `plans/FS111-M3-finiteness.md` §§ 2.2–2.4, 4.2)
+
+Every child is stated with `interior Z = ∅` where § 4.2 (1) says nullity is unused, so IRREG reuses it; nullity enters only in
+`hc_ae_phi_pos`. -/
+
+/-- The segment `σ_e = [−1/2, 1/2] × {1}` of an edge, in its frame. -/
+def hcSeg (m n : ℤ) (j : Fin 3) : Set ℂ := (fun s => hcFrame m n j s 1) '' Icc (-1 / 2) (1 / 2)
+
+/-- The edge frame is an isometry from `ℝ²`. -/
+theorem dist_hcFrame (m n : ℤ) (j : Fin 3) (s t s' t' : ℝ) :
+    dist (hcFrame m n j s t) (hcFrame m n j s' t') = √((s - s') ^ 2 + (t - t') ^ 2) := by
+  sorry
+
+/-- `hcFrameS`, `hcFrameT` invert the frame. -/
+theorem hcFrame_coords (m n : ℤ) (j : Fin 3) (s t : ℝ) :
+    hcFrameS m n j (hcFrame m n j s t) = s ∧ hcFrameT m n j (hcFrame m n j s t) = t := by
+  sorry
+
+/-- The up triangle in each of its edge frames: `|s| ≤ 1/2`, `2 ≤ t ≤ 2 + √3/2`. -/
+theorem hcUpTri_frame {m n : ℤ} {z : ℂ} (hz : z ∈ hcUpTri m n) (j : Fin 3) :
+    |hcFrameS m n j z| ≤ 1 / 2 ∧ 2 ≤ hcFrameT m n j z ∧ hcFrameT m n j z ≤ 2 + √3 / 2 := by
+  sorry
+
+/-- **(G2)**: the graph `t = 2 + g(s)`, `|s| ≤ 1/2`, of every side lies in `U` (the three slivers are disjoint and miss the other
+sides' curves: `g ≤ (1/2 − |s|)²/4` against the corner distance `0.8 (1/2 − |s|)`). -/
+theorem hcUp_slivers {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) :
+    hcFrame m n j s (2 + g s) ∈ hcUp g m n := by
+  sorry
+
+/-- **(G3)**, bounds: `1 ≤ ℓ ≤ 1 + g`, and `ℓ(s) = 1` iff `s ∈ Z`. -/
+theorem hcBandTop_bounds {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) :
+    1 ≤ hcBandTop g m n j s ∧ hcBandTop g m n j s ≤ 1 + g s ∧ (hcBandTop g m n j s = 1 ↔ s ∈ Z) := by
+  sorry
+
+/-- **(G3)**, the band below `t = 2` is exactly where `d_U > 1` (`d_U` strictly decreasing in `t` there). -/
+theorem lt_hcBandTop_iff {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s t : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) (ht : t < 2) :
+    t < hcBandTop g m n j s ↔ 1 < infDist (hcFrame m n j s t) (hcUp g m n) := by
+  sorry
+
+/-- **(G3)**, continuity of `ℓ`. -/
+theorem continuousOn_hcBandTop {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) :
+    ContinuousOn (hcBandTop g m n j) (Icc (-1 / 2 : ℝ) (1 / 2)) := by
+  sorry
+
+/-- HC is closed (a locally finite union of closed blocks). -/
+theorem isClosed_hcSet {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) : IsClosed (hcSet g) := by
+  sorry
+
+/-- HC is the closure of its interior (each block is; `Z` has empty interior, so `σ_e ⊆ cl Λ_e`). -/
+theorem closure_interior_hcSet {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) : closure (interior (hcSet g)) = hcSet g := by
+  sorry
+
+/-- HC's frontier is null: segments, circles and graphs of continuous functions, locally finitely many. -/
+theorem volume_frontier_hcSet {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) : volume (frontier (hcSet g)) = 0 := by
+  sorry
+
+/-- **The band has diameter `< 1`**: it thins to `0` quadratically at both ends (§ 2.3: `|z₁ − z₂|² < 1 − σ + σ² ≤ 1`). -/
+theorem hc_band_dist_lt_one {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {x y : ℂ} (hx : x ∈ hcBand g m n j) (hy : y ∈ hcBand g m n j) :
+    dist x y < 1 := by
+  sorry
+
+/-- **§ 2.3, unit-avoiding**: no two points of `int HC` are at distance `1` — the block-distance table H1 (exact in `ℚ(√3)`, one
+period), the band within `1/64` of `σ_e`, the flanking pairs (`Λ_e ⊆ {t > 1}`, `d_U > 1` on `Λ_e`), diameters. **Split at
+implementation** into the table and the flanking pairs. -/
+theorem hc_unitAvoiding {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) : ∀ x ∈ interior (hcSet g), ∀ y ∈ interior (hcSet g), dist x y ≠ 1 := by
+  sorry
+
+/-- Every point is within `L` of a face centre (the face lattice's covering radius). -/
+theorem exists_near_hcFace (z : ℂ) : ∃ m n : ℤ, dist z (hcFace m n) ≤ hcL := by
+  sorry
+
+/-- **B1, the sausage cover (flat skeleton)**: every point is within `1` of a flat triangle or a segment, or within `3/2` of a face
+centre — the fundamental triangle `O C M` with H3's quadrilateral `Q ⊆ B̄(v, 1) ∪ B̄(e, 1)`, carried around each face by the 60°
+rotations (`exists_near_hcFace`). -/
+theorem hc_sausage_cover (z : ℂ) :
+    (∃ m n : ℤ, infDist z (hcDownTri m n) ≤ 1) ∨ (∃ m n : ℤ, infDist z (hcUpTri m n) ≤ 1) ∨
+      (∃ (m n : ℤ) (j : Fin 3), infDist z (hcSeg m n j) ≤ 1) ∨ ∃ m n : ℤ, dist z (hcFace m n) ≤ 3 / 2 := by
+  sorry
+
+/-- **Lemma NL**: a sliver point `(s, t)`, `2 < t ≤ 2 + g(s)`, is at distance `1` from a point of `cl Λ_e` (of `Λ_e` when
+`t < 2 + g(s)`) — the exterior disc of radius `5/4`, H5's constants. -/
+theorem hc_lemmaNL {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s t : ℝ} (hs : |s| < 1 / 2) (ht : 2 < t) (htg : t ≤ 2 + g s) :
+    ∃ p ∈ closure (hcBand g m n j), dist (hcFrame m n j s t) p = 1 := by
+  sorry
+
+/-- **B2, the exclusion**: every point outside `int HC` is at distance `1` from HC — B1's cases with (C0) (`vesica_apex` in the
+edge frame, through `dist_hcFrame`), (G3) and Lemma NL. -/
+theorem hc_exclusion {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) {z : ℂ} (hz : z ∉ interior (hcSet g)) : z ∈ unitShadow (hcSet g) := by
+  sorry
+
+/-- **§ 2.4, almost everywhere**: with `Z` null, almost every point off `int HC` has `φ > 0` — the exclusion inequalities strict off
+null level sets, `N_e = (Z × {1} + S¹) ∪ T₁(e±)` null, and `E°`-points see an open arc of a block's interior. -/
+theorem hc_ae_phi_pos {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (hZ0 : volume Z = 0) :
+    ∀ᵐ z ∂(volume.restrict (interior (hcSet g))ᶜ), 0 < phi (interior (hcSet g)) z := by
+  sorry
+
+/-- An open set with no two points at distance `1` meets no unit circle about its closure (perturb the far end into the set). -/
+theorem subset_compl_unitShadow_closure {U : Set ℂ} (hU : IsOpen U) (h : ∀ x ∈ U, ∀ y ∈ U, dist x y ≠ 1) :
+    U ⊆ (unitShadow (closure U))ᶜ := by
+  sorry
+
+/-- The support of an open set is its closure. -/
+theorem essSupport_of_isOpen {U : Set ℂ} (hU : IsOpen U) : essSupport U = closure U := by
+  sorry
+
+/-- The band over one gap is connected and separated from the bands over other gaps (§ 2.2 (G3): vertical fibres over a
+connected base; an empty fibre at each point of `Z`). -/
+theorem hcBand_component_iff {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s₁ t₁ s₂ t₂ : ℝ} (h₁ : hcFrame m n j s₁ t₁ ∈ hcBand g m n j)
+    (h₂ : hcFrame m n j s₂ t₂ ∈ hcBand g m n j) :
+    (∃ S ⊆ hcBand g m n j, IsPreconnected S ∧ hcFrame m n j s₁ t₁ ∈ S ∧ hcFrame m n j s₂ t₂ ∈ S) ↔
+      Disjoint (uIcc s₁ s₂) Z := by
+  sorry
+
+/-- **IRREG (1), `|E| > 0`**: with `Z` of positive length, the bulge points whose unit circle crosses `t = 1` at two points of
+`Z` see no point of `int HC` (the arc passes above the band: `t·d/r > d²/4`), and they have positive measure (density points of
+`Z × Z` through the local diffeomorphism `(s, t) ↦ (s + r, s − r)`). -/
+theorem hc_free_pos {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (hZpos : 0 < volume Z) :
+    0 < volume {z | z ∉ hcSet g ∧ phi (interior (hcSet g)) z = 0} := by
+  sorry
+
+/-- **IRREG (2)**: the free points lie in a closed nowhere dense set (null level sets, flat side lines, the circles about `σ_e`'s
+ends, and `K_e = ⋃_{c ∈ Z} T₁((c, 1))`, nowhere dense by Baire on `(Z − ρ) ∪ (Z + ρ)`). -/
+theorem hc_free_subset_nowhereDense {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) :
+    ∃ K : Set ℂ, IsClosed K ∧ interior K = ∅ ∧ {z | z ∉ hcSet g ∧ phi (interior (hcSet g)) z = 0} ⊆ K := by
+  sorry
+
+/-- **IRREG (3), general**: a set `A′` whose part outside a closed `F` has positive measure and lies a.e. in a closed nowhere
+dense `K` has a support whose frontier has positive measure (density points of `A′ ∖ F` are boundary points of `supp A′`). -/
+theorem frontier_essSupport_pos {A' F K : Set ℂ} (hF : IsClosed F) (hK : IsClosed K) (hKi : interior K = ∅)
+    (hS : 0 < volume (A' \ F)) (hsub : A' \ F ≤ᵐ[volume] K) : 0 < volume (frontier (essSupport A')) := by
   sorry
 
 /-- HC₀'s zero set `Z = {−1/2, 1/2}` (every band one lens). -/

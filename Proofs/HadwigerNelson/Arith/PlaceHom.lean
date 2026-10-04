@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Transcendental
 import Proofs.HadwigerNelson.Arith.NoAffine
+import Proofs.HadwigerNelson.Instances.FalconerOrbit
 import Mathlib.NumberTheory.NumberField.Basic
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
@@ -18,7 +19,7 @@ every such pair.
 
 namespace HadwigerNelson.Arith
 
-open HadwigerNelson NumberField SimpleGraph
+open HadwigerNelson HadwigerNelson.RouteC NumberField SimpleGraph
 
 /-- A usable prime of `F`: maximal, with residue field of size `q ≡ 3 (mod 4)`. -/
 def IsUsablePrime {F : Subfield ℝ} (𝔭 : Ideal (𝓞 F)) : Prop := 𝔭.IsMaximal ∧ Nat.card (𝓞 F ⧸ 𝔭) % 4 = 3
@@ -35,6 +36,86 @@ def IsPlaceHom (F : Subfield ℝ) (𝔭 : Ideal (𝓞 F)) (E : Subfield ℝ) (V 
     ∀ a s : 𝓞 F, s ∉ 𝔭 → ∃ h : ((a : F) : ℝ) / ((s : F) : ℝ) ∈ V,
       φ ⟨_, h⟩ * Ideal.Quotient.mk 𝔭 s = Ideal.Quotient.mk 𝔭 a
 
+/-! ## FS131-K2d: children of `exists_placeHom` and `noAffine_fields`
+
+Each child is `sorry`ed and priced in `plans/FS131-w2-kernel-plan.md` § 15 (route, Mathlib names confirmed with `#check`, order).
+`exists_placeHom` is induction on `n` **generalizing the base field** (stage 9.3): the base is the localization of `𝓞 F` at `𝔭`
+inside `F ⊆ ℝ`, the step is evaluation at `t = 0` (`zeroPlace`, `evalZero`), and the homomorphism is the coset construction of
+`unitQuadrance_colorable_of_subring`. -/
+
+/-- `F(t₁, …, t₀) = F`. -/
+theorem pureTranscendental_zero (F : Subfield ℝ) (t : Fin 0 → ℝ) : pureTranscendental F t = F := by
+  sorry
+
+/-- **The last variable**: `F(t₁, …, t_{n+1}) = F(t₁, …, t_n)(t_{n+1})`. -/
+theorem pureTranscendental_succ (F : Subfield ℝ) {n : ℕ} (t : Fin (n + 1) → ℝ) :
+    pureTranscendental F t = adjoinTranscendental (pureTranscendental F (Fin.init t)) (t (Fin.last n)) := by
+  sorry
+
+/-- **Algebraic independence, peeled**: the first `n` variables stay independent, and the last is transcendental over the
+field they generate with `F` (`AlgebraicIndependent.transcendental_adjoin`, `IntermediateField.transcendental_adjoin_iff`). -/
+theorem algebraicIndependent_init_and_transcendental_last (F : Subfield ℝ) {n : ℕ} {t : Fin (n + 1) → ℝ}
+    (ht : AlgebraicIndependent F t) :
+    AlgebraicIndependent F (Fin.init t) ∧ Transcendental (pureTranscendental F (Fin.init t)) (t (Fin.last n)) := by
+  sorry
+
+/-- **The base: the localization at `𝔭` is a valuation subring of `F`.** Its elements are the `a/s`, `a, s ∈ 𝓞 F`, `s ∉ 𝔭`
+(`IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain`, `ValuationRing.iff_isInteger_or_isInteger`). -/
+theorem exists_valuationSubring_localization (F : Subfield ℝ) [NumberField F] {𝔭 : Ideal (𝓞 F)} (h𝔭 : 𝔭.IsMaximal) :
+    ∃ B : ValuationSubring F, ∀ x : F, x ∈ B ↔ ∃ a s : 𝓞 F, s ∉ 𝔭 ∧ x = (a : F) / (s : F) := by
+  sorry
+
+/-- **The base: its residue map** onto `𝓞 F ⧸ 𝔭`, `a/s ↦ ā s̄⁻¹` (well defined by cross-multiplication), killing exactly the
+non-units. -/
+theorem exists_residue_localization (F : Subfield ℝ) [NumberField F] {𝔭 : Ideal (𝓞 F)} (h𝔭 : 𝔭.IsMaximal)
+    (B : ValuationSubring F) (hB : ∀ x : F, x ∈ B ↔ ∃ a s : 𝓞 F, s ∉ 𝔭 ∧ x = (a : F) / (s : F)) :
+    ∃ r : B →+* (𝓞 F ⧸ 𝔭), (∀ (a s : 𝓞 F) (hs : s ∉ 𝔭),
+        r ⟨(a : F) / (s : F), (hB _).2 ⟨a, s, hs, rfl⟩⟩ * Ideal.Quotient.mk 𝔭 s = Ideal.Quotient.mk 𝔭 a) ∧
+      ∀ x : B, r x ≠ 0 → (x : F) ∉ B.nonunits := by
+  sorry
+
+/-- **PLACE-HOM at `n = 0`**: the localization at a usable prime, carried into `ℝ`, with its residue map. Unit vectors of `F²`
+are integral there because `−1` is not a square in `𝔽_q`, `q ≡ 3 (mod 4)` (`FiniteField.isSquare_neg_one_iff`,
+`mem_valuationSubring_of_sq_add_sq_eq_one`). -/
+theorem placeHom_base (F : Subfield ℝ) [NumberField F] {𝔭 : Ideal (𝓞 F)} (h𝔭 : IsUsablePrime 𝔭) :
+    ∃ (V : Subring ℝ) (φ : V →+* (𝓞 F ⧸ 𝔭)), IsPlaceHom F 𝔭 F V φ := by
+  sorry
+
+/-- **PLACE-HOM's step**: a place-hom pair over `E₀` extends over `E₀(s)`, `s` transcendental over `E₀` — `V₁` the elements of
+`E₀(s)` regular at `s = 0` whose value there is in `V₀`, `φ₁ = φ₀ ∘ evalZero` (through `adjoinTranscendentalEquiv`); unit vectors
+of `E₀(s)²` are regular at `0` (`mem_valuationSubring_of_sq_add_sq_eq_one` at `zeroPlace`) and evaluate to unit vectors of `E₀²`. -/
+theorem placeHom_step (F : Subfield ℝ) [NumberField F] {𝔭 : Ideal (𝓞 F)} {E₀ : Subfield ℝ} {V₀ : Subring ℝ}
+    {φ₀ : V₀ →+* (𝓞 F ⧸ 𝔭)} (h₀ : IsPlaceHom F 𝔭 E₀ V₀ φ₀) {s : ℝ} (hs : Transcendental E₀ s) :
+    ∃ (V₁ : Subring ℝ) (φ₁ : V₁ →+* (𝓞 F ⧸ 𝔭)), IsPlaceHom F 𝔭 (adjoinTranscendental E₀ s) V₁ φ₁ := by
+  sorry
+
+/-- **PLACE-HOM's pair**, by induction on `n` from `placeHom_base` through `placeHom_step`. -/
+theorem exists_isPlaceHom (F : Subfield ℝ) [NumberField F] {𝔭 : Ideal (𝓞 F)} (h𝔭 : IsUsablePrime 𝔭) :
+    ∀ {n : ℕ} (t : Fin n → ℝ), AlgebraicIndependent F t →
+      ∃ (V : Subring ℝ) (φ : V →+* (𝓞 F ⧸ 𝔭)), IsPlaceHom F 𝔭 (pureTranscendental F t) V φ := by
+  intro n
+  induction n with
+  | zero =>
+    intro t _
+    rw [pureTranscendental_zero]
+    exact placeHom_base F h𝔭
+  | succ n ih =>
+    intro t ht
+    obtain ⟨hinit, hlast⟩ := algebraicIndependent_init_and_transcendental_last F ht
+    obtain ⟨V₀, φ₀, h₀⟩ := ih (Fin.init t) hinit
+    rw [pureTranscendental_succ]
+    exact placeHom_step F h₀ hlast
+
+/-- **The homomorphism from a place-hom pair**: on each coset `x₀ + V²` of the plane over `E`, `x ↦ (φ, φ)(x − x₀)`
+(`cosetResidue`, as in `unitQuadrance_colorable_of_subring`); a unit edge's difference is a unit vector with coordinates in `V`,
+which `φ` carries to the circle. -/
+theorem exists_hom_of_isPlaceHom {F : Subfield ℝ} {𝔭 : Ideal (𝓞 F)} [𝔭.IsMaximal] {E : Subfield ℝ} {V : Subring ℝ}
+    {φ : V →+* (𝓞 F ⧸ 𝔭)} (hφ : IsPlaceHom F 𝔭 E V φ) :
+    ∃ h : (unitDistance ℂ).induce (planeOver E) →g unitQuadrance (𝓞 F ⧸ 𝔭),
+      ∀ x y : planeOver E, ∀ (hre : (x : ℂ).re - (y : ℂ).re ∈ V) (him : (x : ℂ).im - (y : ℂ).im ∈ V),
+        h x - h y = (φ ⟨_, hre⟩, φ ⟨_, him⟩) := by
+  sorry
+
 /-- **FS129-SA1-PLACE-HOM**: for a number field `F ⊆ ℝ` with a usable prime `𝔭` and `t₁, …, t_n` algebraically independent
 over `F`, there are `V` and `φ` as in `IsPlaceHom`; so the unit-distance graph on `E²` has a homomorphism into `Γ_q`, given on
 each coset `x₀ + V²` by `x ↦ φ(x − x₀)`. -/
@@ -44,7 +125,9 @@ theorem exists_placeHom (F : Subfield ℝ) [NumberField F] {𝔭 : Ideal (𝓞 F
       ∃ h : (unitDistance ℂ).induce (planeOver (pureTranscendental F t)) →g unitQuadrance (𝓞 F ⧸ 𝔭),
         ∀ x y : planeOver (pureTranscendental F t), ∀ (hre : (x : ℂ).re - (y : ℂ).re ∈ V)
           (him : (x : ℂ).im - (y : ℂ).im ∈ V), h x - h y = (φ ⟨_, hre⟩, φ ⟨_, him⟩) := by
-  sorry
+  haveI : 𝔭.IsMaximal := h𝔭.1
+  obtain ⟨V, φ, hφ⟩ := exists_isPlaceHom F h𝔭 t ht
+  exact ⟨V, φ, hφ, exists_hom_of_isPlaceHom hφ⟩
 
 /-- The field hypotheses of NOAFF-FIELDS at `k`: `k = 5` and a usable prime with residue field `𝔽₁₁` or `𝔽₁₉`, or `χ(F²) ≤ 4`;
 or `k = 4` and a usable prime with residue field `𝔽₇`, or `χ(F²) ≤ 3`. -/
@@ -54,6 +137,47 @@ def NoAffFieldHyp (F : Subfield ℝ) (k : ℕ) : Prop :=
     (k = 4 ∧ ((∃ 𝔭 : Ideal (𝓞 F), IsUsablePrime 𝔭 ∧ Nat.card (𝓞 F ⧸ 𝔭) = 7) ∨
       ((unitDistance ℂ).induce (planeOver F)).chromaticNumber ≤ 3))
 
+/-- **Transcendence is free, `n` times** (row 104 iterated): `χ(F(t₁, …, t_n)²) = χ(F²)` for algebraically independent `tᵢ`
+(`chromaticNumber_planeOver_adjoin_transcendental_eq` through `pureTranscendental_succ`). -/
+theorem chromaticNumber_planeOver_pureTranscendental_eq (F : Subfield ℝ) {n : ℕ} (t : Fin n → ℝ)
+    (ht : AlgebraicIndependent F t) :
+    ((unitDistance ℂ).induce (planeOver (pureTranscendental F t))).chromaticNumber =
+      ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
+  sorry
+
+/-- A commutative ring of prime cardinality `p` is `ZMod p` (`ZMod.ringEquivOfPrime`, with `Fintype` from `Nat.card ≠ 0`). -/
+theorem nonempty_ringEquiv_zmod_of_card {R : Type*} [CommRing R] {p : ℕ} (hp : p.Prime) (h : Nat.card R = p) :
+    Nonempty (R ≃+* ZMod p) := by
+  sorry
+
+/-- **The plane over `E = F(t₁, …, t_n)` maps to `UD(𝔽_p, 2)`** at a usable prime with residue field of prime size `p`:
+`exists_placeHom` composed with `unitQuadrance.map` of the ring isomorphism. -/
+theorem exists_hom_finitePlane_of_card (F : Subfield ℝ) [NumberField F] {n : ℕ} (t : Fin n → ℝ)
+    (ht : AlgebraicIndependent F t) {𝔭 : Ideal (𝓞 F)} (h𝔭 : IsUsablePrime 𝔭) {p : ℕ} (hp : p.Prime)
+    (hcard : Nat.card (𝓞 F ⧸ 𝔭) = p) :
+    Nonempty ((unitDistance ℂ).induce (planeOver (pureTranscendental F t)) →g finitePlane p) := by
+  sorry
+
+/-- **The complete graph on `k` vertices is slack at `k + 1` colours**: colour `k` is absent everywhere. -/
+theorem slack_complete (k : ℕ) : Slack (⊤ : SimpleGraph (Fin k)) (k + 1) := by
+  sorry
+
+/-- **NOAFF's targets**: under the field hypotheses at `k`, the plane over `E` maps to a graph slack at `k` colours — `Γ₁₁`,
+`Γ₁₉` (`finitePlane11_slack`, `finitePlane19_slack`), `Γ₇` (`finitePlane7_slack`), or `K_{k−1}` when `χ(F²) ≤ k − 1`. -/
+theorem exists_hom_slack (F : Subfield ℝ) [NumberField F] {n : ℕ} (t : Fin n → ℝ) (ht : AlgebraicIndependent F t)
+    {k : ℕ} (hk : NoAffFieldHyp F k) :
+    ∃ (W : Type) (T : SimpleGraph W), Slack T k ∧
+      Nonempty ((unitDistance ℂ).induce (planeOver (pureTranscendental F t)) →g T) := by
+  sorry
+
+/-- **`noAffine` on a finite vertex set**: a homomorphism into a graph slack at `k ≥ 2` colours makes every `φ_v` constant
+(`noAffine`'s second clause, with `finsum_eq_sum_of_fintype`). -/
+theorem forall_const_of_hom_slack {V : Finset ℂ} {W : Type} {T : SimpleGraph W} {k : ℕ} (hk : 2 ≤ k) (hT : Slack T k)
+    (ρ : (unitDistance ℂ).induce (V : Set ℂ) →g T) (φ : V → Fin k → ℝ) (b : ℝ)
+    (hconst : ∀ C : ((unitDistance ℂ).induce (V : Set ℂ)).Coloring (Fin k), ∑ v, φ v (C v) = b) :
+    ∀ v i j, φ v i = φ v j := by
+  sorry
+
 /-- **FS129-SA1-NOAFF-FIELDS**: over `E = F(t₁, …, t_n)` with the field hypotheses at `k`, for every finite unit-distance
 graph `H ⊂ E²` and every family `φ_v : Fin k → ℝ` with `Σ_v φ_v(C(v))` taking one value on every proper `k`-colouring of `H`,
 every `φ_v` is constant. -/
@@ -62,6 +186,8 @@ theorem noAffine_fields (F : Subfield ℝ) [NumberField F] {n : ℕ} (t : Fin n 
     (φ : V → Fin k → ℝ) (b : ℝ)
     (hconst : ∀ C : ((unitDistance ℂ).induce (V : Set ℂ)).Coloring (Fin k), ∑ v, φ v (C v) = b) :
     ∀ v i j, φ v i = φ v j := by
-  sorry
+  obtain ⟨W, T, hT, ⟨ρ⟩⟩ := exists_hom_slack F t ht hk
+  have hk2 : 2 ≤ k := by rcases hk with ⟨rfl, -⟩ | ⟨rfl, -⟩ <;> norm_num
+  exact forall_const_of_hom_slack hk2 hT (ρ.comp (SimpleGraph.induceHomOfLE _ hV).toHom) φ b hconst
 
 end HadwigerNelson.Arith

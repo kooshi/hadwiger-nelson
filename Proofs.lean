@@ -114,6 +114,7 @@ import Proofs.HadwigerNelson.PlaneRotation
 import Proofs.HadwigerNelson.Instances.PlaneFreedom
 import Proofs.HadwigerNelson.Instances.FanGap11
 import Proofs.HadwigerNelson.Instances.FanGap19
+import Proofs.HadwigerNelson.Instances.FalconerOrbit
 import Proofs.HadwigerNelson.Instances.TwoAdicFour
 import Proofs.HadwigerNelson.Instances.TwoAdicFive
 import Proofs.HadwigerNelson.Instances.Heule553

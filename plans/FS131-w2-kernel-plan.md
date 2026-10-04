@@ -21,6 +21,12 @@ FS131-K2c (stages 11–13): none. Two skeleton facts closed in passing, not resu
 record (one mind): the counterexamples and construction behind ruling 86 (§ 12.1), the Fourier-free Rajchman route (§ 12.1), the P-local
 Kummer–Dedekind coefficients (`exists_dyadic_coeffs`' docstring), the window route for SUPK's lower bound (`eventually_le_muPer`).
 
+FS131-K2d (stages 14–18): [kernel], sorry-free, in `Instances/FalconerOrbit` — `finitePlane7QuotColouring_proper`, `finitePlane7_fanGap`,
+`finitePlane7_not_fanGap_zero`, `finitePlane7_slack` (`UD(𝔽₇, 2)` is slack at four colours), `gamma11_orbit`, `gamma19_orbit` (the orbit
+facts, `decide +kernel` on held colourings), `tipFree_of_orbit`, `finitePlane11_tipFree`, `finitePlane19_tipFree`; skeleton facts closed in
+passing, not results: `exists_isPlaceHom`, `r7_unitPair_mem_sphere` (from `sorry`ed children), `measurableSet_r7Cls`, and the 13 leaves closed
+from children (§ 18).
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -765,3 +771,316 @@ never symlink it). On top of stage 10's state and the implementers' stages 1–6
   `ARCHITECTURE.md` § Trust; `scripts/axioms.sh` must be taught the name — a change Keryx owns, `LEAN.md` § Trust ledger); `./scripts/vacuity.sh`
   and `--self-test` green with the counts reconciled (inhabitants as stage 10; `upperHalfPlane_falconer_hyp` models the import);
   `tools/check_architecture.py` exit 0; then merge `main`, re-run, fast-forward.
+
+## Stage 14 — SAVED: the readback (FS131-K2d)
+
+*Job FS131-K2d, de Bruijn (Opus 5.5), launched 2026-10-04 to state the children of wave 2's last 18 leaves (brief
+`data/fs131/briefs/FS131-K2d-wave2-children.md`, with `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building), in the worktree
+`.claude/worktrees/fs131-w2d` (branch `fs131-w2d`, from `fs131-w2` at `29082313`). Resuming per standing rule 2: stages 1–13 are saved
+(K2, K2b, K2c); this job numbers its stages from 14 and redoes none. Theorems this job proves are listed under "Theorems this phase proved"
+at the end of its last stage.*
+
+### 14.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (each `>` block, minus its `— source:` line, as an exact substring of the file the source names):
+
+| # | quotation (opening words) | source | result |
+|---|---|---|---|
+| 1 | "RESULT: GAP at a planning step — 18 leaves (lane A's 4, CoverExamples' 13, exists_not_uniform_kept) …" | `.claude/worktrees/fs131-w2/data/fs131/reports/FS131-K2c.md` | exact |
+| 2 | "\| `hc_isRegularMUA`, `hc_band_components`, `hc_irreg` \| stage 7.4 and 9.2's named children \| ◇ …" | this record § 12.2 | exact |
+| 3 | "- **May**: prove any child or leaf; add further children …" | this record § 13 | exact |
+
+**One finding about the brief**: its list of the leaves in `Plane/CoverExamples` names 14 declarations, `fatZ_spec` among them, but
+`fatZ_spec` is **proved** at `29082313` (sorry-free since K2b's commit `344a9081` stated and proved it; it has no `sorry` line). The leaves
+in the three files are 13 + 2 + 2 = **17**, as the brief's own count says, and 18 with `exists_not_uniform_kept`. Nothing to do.
+
+### 14.2 The 18 leaves at `29082313` (lines that are exactly `sorry`, by script) with their ◇ children (§ 12.2, names verbatim)
+
+| module | leaf | ◇ children named by K2c |
+|---|---|---|
+| `Plane/CoverExamples` | `sq9_saturated_both` | `sq9_essClosure_subset`, `sq9_square_subset_densitySet`, `sq9_essBoundary_on_edge`, `sq9_partner` |
+| | `r7_aeColouring` | `measurable_r7Col`, `r7Col_add_period`, `r7_sameColour_unit_mem_sphere`, `unitPairsNull_of_first_mem_null`, `volume_iUnion_sphere_null` |
+| | `r7Cls_saturated` | — (assembly from `exists_ne_mem_essClosure`, `r7_boundary`, `essSupport_eq_closure_densitySet`) |
+| | `r7_boundary` | `r7_lattice_essClosure`, `r7_two_up_colours`, `r7_offLattice_arc`, `r7_arc_centre_colours` (✓ `essClosure_subset_essSupport`) |
+| | `r7Cls_isMaximalCover` | `r7_phi_pos` |
+| | `disc7_isMaximalCover` | `disc7Col_eq_dist_ge`, `disc7_dist_eq_one_mem_sphere`, `measurableSet_disc7`, `disc7_cover`, `disc7_colour_cover`, `phi_closedBall_pos` |
+| | `disc7_isRegularMUA` | `essSupport_disc7`, `volume_frontier_disc7` |
+| | `disc7_upperDensity` | `disc7_periodic`, `volume_disc7_cell` |
+| | `IsMUA.add_normal_mem_essSupport` | `exists_shadow_point`, `circle_meets_halfBox_of_ne` (with `IsMUA.interior_union_unitShadow`, `subset_densitySet_of_isOpen_ae_subset`, both held) |
+| | `g1Bounds_hcGap` | `hcGap_gap_formula`, `hcGap_deriv`, `hcGap_lowerParabola` |
+| | `hc_isRegularMUA`, `hc_band_components`, `hc_irreg` | `hcBandTop_spec`, `hcUp_slivers`, `hc_unitAvoiding`, `hc_sausage_cover`, `hc_lemmaNL`, `hc_exclusion`, `hc_ae_phi_pos`; for IRREG the bulge-crossing `\|E\| > 0` and Baire on `(Z − ρ) ∪ (Z + ρ)` |
+| `Arith/PlaceHom` | `exists_placeHom` | `placeHom_step`, `pureTranscendental_snoc`, `placeHom_base`, `exists_hom_of_isPlaceHom` |
+| | `noAffine_fields` | `chromaticNumber_planeOver_pureTranscendental_eq`, `ringEquivZMod_of_card`, `slack_complete`, `slack_gamma7` |
+| `Arith/FalconerField` | `falconerFan_five_field`, `falconerFan_five_placeHom` | `not_falconerFan_of_colorable`, `tip_mem_of_hom`, `gamma7_orbit`, `gamma11_orbit`, `gamma19_orbit`, `sub_mem_of_connected` |
+| `Plane/Slack` (FS131-I2e's) | `exists_not_uniform_kept` | ◇ "the colouring by formula (a definition), its measurability and properness, the non-kept band per scale" (no names) |
+
+### 14.3 The worktree builds as given
+
+`/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree,
+2026-10-04: **OK** — 443 of 443 batches, 3 modules rebuilt, 9 modules with warnings, 8 m 54 s (`build/gate/build/20261004T104203Z-2786032.log`).
+Every warning is `declaration uses 'sorry'` except two deprecations in FS131-I2e's `Plane/MaximalCover` (`Set.diff_subset` at lines 821
+and 846; for the implementer, not this job).
+
+## Stage 15 — SAVED: lane A's children stated; the orbit and slack facts proved (FS131-K2d)
+
+*No fresh modeling-skill pass (budget); the decomposition is mine. Prices are harness tokens at the Sonnet implementers' measured rates
+(§ 12's basis); the next implementer (Opus, a trial) re-prices from its first two children. Mathlib names confirmed with `#check` at the
+pin (2026-10-04, `lake env lean`): `FiniteField.isSquare_neg_one_iff`, `SimpleGraph.induceHomOfLE`, `SimpleGraph.Colorable.of_hom`,
+`SimpleGraph.chromaticNumber_le_iff_colorable`, `ZMod.ringEquivOfPrime` (needs `Fintype`, from `Nat.finite_of_card_ne_zero`),
+`IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain`, `ValuationRing.iff_isInteger_or_isInteger`,
+`IsLocalization.AtPrime.equivQuotMaximalIdeal`, `IntermediateField.transcendental_adjoin_iff`, `AlgebraicIndependent.transcendental_adjoin`,
+`Fin.init`, `finsum_eq_sum_of_fintype`, `ValuationSubring.valuation_le_one_iff`; repository: `mem_valuationSubring_of_sq_add_sq_eq_one`,
+`zeroPlace`, `evalZero`, `adjoinTranscendentalEquiv` (namespace `HadwigerNelson.RouteC`, now opened in `Arith/PlaceHom`), `cosetResidue`,
+`noAffine`, `falconerFan_hom`, `FanGap.translate`, `slack_addCayley_of_fanGap`, `rotHom`, `unitQuadrance.map`.*
+
+### 15.1 Departures from K2c's table (§ 12.2), and why
+
+- **No orbit fact at `7`.** FALC-FAN (B)'s last clause already says every 4-colouring of the target leaves no colour absent from the
+  tip image's closed neighbourhood; a target slack at four colours contradicts it outright. So clause (i)'s `𝔽₇` half needs only
+  `finitePlane7_slack` (the periodic colouring `circ7Table ∘ projAlong (1, 2)` has colour `3` absent from `N[(0, 2)]`), not `gamma7_orbit`.
+- **The orbit facts at `11` and `19` need no new table and no search.** The colourings already in the kernel with a gap
+  (`finitePlane11_fanGap`, `finitePlane19_fanGap`), rotated about the gapped vertex, cover every `w ≠ 0`: checked first in Python
+  (`tools/fs131_k2d_orbit.py`, exit 0; plants `gap` and `table` each fire, exit 1) and then **proved** by `decide +kernel` in 2.3 s
+  (`q = 11`, 120 × 12) and 3.7 s (`q = 19`, 360 × 20), 3.1–3.5 GB. Negative control: the same statement without `w ≠ 0` is refuted by
+  `decide` (watched). A first plant (gap colour `2` replaced by `0`) did **not** fire — that statement is also true; logged, replaced.
+- **Clause (ii) needs no cosets**: `v ↦ (φ (v − a).re, φ (v − a).im)` is defined on the whole connected graph (every `v − a` has
+  coordinates in `V`, `sub_mem_of_connected`), and sends the apex to `0`; it is transported to `UD(𝔽_q, 2)` by `unitQuadrance.map` of the
+  ring isomorphism, where `tip_eq_zero_of_tipFree` lands the tip. K2c's `tip_mem_of_hom` is this pair of children.
+- **NOAFF's targets in one child** (`exists_hom_slack`) with K2c's `slack_gamma7` proved as `finitePlane7_slack`.
+
+### 15.2 What is stated (✓ = proved in this job, sorry-free)
+
+New module **`Instances/FalconerOrbit`** (all ✓): `finitePlane7QuotColouring`, `finitePlane7QuotColouring_proper`, `finitePlane7QuotColoring`,
+`finitePlane7_fanGap`, `finitePlane7_not_fanGap_zero` (red control), `finitePlane7_slack`, `gamma11_orbit`, `gamma19_orbit`, `tipFree_of_orbit`,
+`finitePlane11_tipFree`, `finitePlane19_tipFree`.
+
+`Arith/PlaceHom` — `exists_placeHom` **closed from** `exists_isPlaceHom` (✓, induction, closed from its children) and `exists_hom_of_isPlaceHom`;
+`noAffine_fields` **closed from** `exists_hom_slack` and `forall_const_of_hom_slack`:
+
+| child | route | price |
+|---|---|---|
+| `pureTranscendental_zero` | `Subfield.closure (F ∪ ∅) = F` (`Subfield.closure_eq`) | 5k |
+| `pureTranscendental_succ` | `Subfield.closure_union`, `IntermediateField.adjoin_toSubfield`/`closure` of `F(t_init) ∪ {t_last}`; `Fin.range` split by `Fin.lastCases` | 20k |
+| `algebraicIndependent_init_and_transcendental_last` | `AlgebraicIndependent.comp` with `Fin.castSucc_injective`; `transcendental_adjoin` at `s = range castSucc`, `i = last`, then `IntermediateField.transcendental_adjoin_iff` and the identification of `IntermediateField.adjoin F (range (init t))` with `pureTranscendental F (init t)` | 35k |
+| `exists_valuationSubring_localization` | `B` := the image of `Localization.AtPrime 𝔭` in `F`; DVR (`isDiscreteValuationRing_of_dedekind_domain`, `𝔭 ≠ ⊥` since maximal in a domain that is not a field) ⟹ `ValuationRing` ⟹ `iff_isInteger_or_isInteger` | 35k |
+| `exists_residue_localization` | `r (a/s) = ā · s̄⁻¹` well defined by cross-multiplication (`𝔭` maximal: the quotient is a field); ring hom; `r x ≠ 0` ⟹ `x = a/s` with `a ∉ 𝔭` ⟹ `x⁻¹ = s/a ∈ B` ⟹ unit | 30k |
+| `placeHom_base` | `V` := `B` carried into `ℝ` by `F.subtype`; unit vectors by `mem_valuationSubring_of_sq_add_sq_eq_one` with `hB` from `FiniteField.isSquare_neg_one_iff` (`r (1 + x²) = 1 + (r x)² ≠ 0`); the third clause from `exists_residue_localization` | 30k |
+| `placeHom_step` | `V₁ = {f ∈ E₀(s) : lift f ∈ zeroPlace E₀ ∧ ↑(evalZero (lift f)) ∈ V₀}`, `lift = adjoinTranscendentalEquiv`; `φ₁ = φ₀ ∘ evalZero`; unit vectors of `E₀(s)²` in `zeroPlace` (`mem_valuationSubring_of_sq_add_sq_eq_one`, residue `E₀ ⊆ ℝ`, `one_add_sq_ne_zero_of_subfield`), their values unit vectors of `E₀²`; constants evaluate to themselves | 40k |
+| `exists_hom_of_isPlaceHom` | `unitQuadrance_colorable_of_subring`'s coset step with `planeOverIso`: `ψ = (φ, φ)` on `V × V`, `h = cosetResidue ψ`; adjacency from `cosetResidue_sub` | 30k |
+| `chromaticNumber_planeOver_pureTranscendental_eq` | induction on `n` exactly as `exists_isPlaceHom`, with `chromaticNumber_planeOver_adjoin_transcendental_eq` | 15k |
+| `nonempty_ringEquiv_zmod_of_card` | `Fintype.ofFinite`, `Nat.card_eq_fintype_card`, `(ZMod.ringEquivOfPrime R hp _).symm` | 10k |
+| `exists_hom_finitePlane_of_card` | `exists_placeHom`'s `h` composed with `unitQuadrance.map e.toRingHom` | 15k |
+| `slack_complete` | the colouring `Fin.castSucc` of `⊤`, gap colour `Fin.last k` | 10k |
+| `exists_hom_slack` | four cases: `11`, `19` (`exists_hom_finitePlane_of_card`, `finitePlane11_slack`, `finitePlane19_slack`), `7` (`finitePlane7_slack`), `χ(F²) ≤ k − 1` (`chromaticNumber_planeOver_pureTranscendental_eq`, `chromaticNumber_le_iff_colorable`: a colouring is a hom to `⊤`; `slack_complete (k − 1)`) | 30k |
+| `forall_const_of_hom_slack` | `noAffine hk ρ φ (Set.toFinite _) b` with `finsum_eq_sum_of_fintype`; its second clause at `Slack` | 15k |
+
+`Arith/FalconerField` — **both leaves closed from their children** (clause (i): `not_falconerFan_of_colorable` with
+`chromaticNumber_planeOver_pureTranscendental_eq`; the `𝔽₇` half by `exists_hom_finitePlane_of_card` and `not_falconerFan_five_of_hom_slack`;
+clause (ii): `sub_mem_of_connected`, `exists_hom_apex`, `nonempty_ringEquiv_zmod_of_card`, `tip_eq_zero_of_tipFree`, the tip-free facts):
+
+| child | route | price |
+|---|---|---|
+| `not_falconerFan_of_colorable` | restrict a `(k − 2)`-colouring to `H − a` (values `Fin.castLE`), `c₁ = k − 2`, `c₂ = k − 1` absent everywhere | 15k |
+| `sub_mem_of_connected` | walk induction, as in `falconerFan_five_mem_P` (each step adds a unit vector with coordinates in `E`) | 15k |
+| `exists_hom_apex` | `toFun v = (φ ⟨_, (sub_mem…).1⟩, φ ⟨_, (sub_mem…).2⟩)`; adjacency: the difference of images is `(φ, φ)` of the unit vector `u − v` (`map_sub`), whose image is on the circle (`map_pow`, `map_add`, `map_one`) and nonzero in a nontrivial ring | 25k |
+| `tip_eq_zero_of_tipFree` | by contradiction with `falconerFan_hom (by norm_num) hfan ρ` (A) at `C, γ` from `hfree (ρ t)` (the gap `FanGap C 0 γ` is (A)'s hypothesis at `ρ a = 0`) | 15k |
+| `not_falconerFan_five_of_hom_slack` | `hT (ρ t)` gives `C, γ` with a gap at `ρ t`; (B)'s last clause at `δ = γ` gives a neighbour coloured `γ` | 10k |
+
+**Generalizations** (for Keryx; neither narrows a row): FALC-RES clause (i) does not read connectedness (`have _ := hconn` keeps the row's
+hypothesis and the linter silent); clause (ii) does not read the transcendence of `t` — it holds over any subfield carrying a place-hom pair
+(`have _ := ht`). Both are visible in the assemblies.
+
+**Count**: 29 new theorems (11 ✓ in `Instances/FalconerOrbit`, `exists_isPlaceHom` ✓ from children; 17 `sorry`ed children), 2 new
+definitions (✓); 4 leaves closed from children (`exists_placeHom`, `noAffine_fields`, `falconerFan_five_field`, `falconerFan_five_placeHom`).
+Records: `scripts/Axioms.lean` block "FS131-K2d" (`tools/fs131_k2d_records.py` exit 0; its plant, one record hidden, exit 1).
+`Proofs.lean`, `ARCHITECTURE.md` (the new row, two Imports cells, § 3.10's theory-imports-instance line): `tools/check_architecture.py` PASS.
+Elaboration: each file by `lake env lean -DautoImplicit=false` against a scratch olean of `Instances/FalconerOrbit` (iteration only; the
+build at the end of this job is the evidence).
+
+## Stage 16 — SAVED: children for SQ9, R7, DISC7, BAND (1) and (G1) stated; seven leaves closed from them (FS131-K2d)
+
+*Prices as stage 15. Mathlib names (`#check`ed at the pin): `MeasureTheory.Measure.addHaar_sphere`, `LocallyFinite.isClosed_iUnion`,
+`Metric.infDist_le_dist_of_mem`, `isOpen_interior`; repository: `exists_ne_mem_essClosure`, `isMaximalCover_iff`, `isMUA_iff_ae_phi_pos`,
+`essSupport_eq_closure_densitySet`, `subset_densitySet_of_isOpen_ae_subset`, `upperDensity_of_periodic` (a `Plane/Slack` leaf),
+`IsMUA.interior_union_unitShadow`, `dist_ne_one_of_mem_interior_densitySet`.*
+
+**Closed from children in this stage** (assemblies written, sorry-free): `sq9_saturated_both`, `r7_aeColouring`, `r7Cls_saturated`,
+`r7_boundary` (moved above `r7Cls_saturated`, a move), `r7Cls_isMaximalCover`, `disc7_isMaximalCover`, `disc7_isRegularMUA`,
+`disc7_upperDensity`, `g1Bounds_hcGap`; and `r7_unitPair_mem_sphere` (a child, closed from its own children). `measurableSet_r7Cls` ✓.
+
+| leaf | child | route | price |
+|---|---|---|---|
+| SQ9 | `sq9Sq` (def) | the closed square `[n/2, (n+1)/2] × [m/2, (m+1)/2]` | — |
+| | `SaturatedPos.saturated` | `essClosure_subset_essSupport`, `essSupport_eq_closure_densitySet` | 5k |
+| | `sq9_essClosure_subset` | the closed squares of one colour are locally finite and closed (`LocallyFinite.isClosed_iUnion`) and contain the class (half-open ⊆ closed); off them a ball misses the class: `upperDensityAt_eq_zero_of_null` | 25k |
+| | `sq9Sq_subset_essClosure` | `ball x r ∩ (open square)` holds a square of side `r/√2` at the corner toward the square: ratio `≥ 1/(2π)` | 25k |
+| | `sq9_mem_edge_of_not_mem_densitySet` | the open square is inside the class; `subset_densitySet_of_isOpen_ae_subset` | 15k |
+| | `sq9_partner` | `x ∓ 1` lies on the facing edge of the square `(n ∓ 3, m)`, `x ∓ i` of `(n, m ∓ 3)`; `((n ∓ 3 : ℤ) : ZMod 3) = n` | 15k |
+| R7 | `r7Up`, `r7Down` (defs) | the Reuleaux triangle on `λ, λ + 1, λ + ω`; the cell's down triangle outside the three bulges (the colouring's own tests) | — |
+| | `measurable_r7Col` | `Int.measurable_floor`, `measurableSet_le`, `Measurable.ite`, a countable-valued composition (`measurable_to_countable'`) | 15k |
+| | `r7Col_mem_tile` | unfold `r7ColTri`: the first test puts `z` in `U(m, n)` (the up half satisfies all three vertex tests: `triQ u v ≤ (u + v)² ≤ 1`, and the two other vertices by the same bound), the second and third in `U(m + 1, n)`, `U(m, n + 1)`, else `D(m, n)`; `normSq_add_mul`, `triCoord_add_mul` | 35k |
+| | `r7UpCol_ne_r7DownCol` | values `< 4` against `≥ 4` (`omega` on the `Fin.val`s) | 5k |
+| | `r7Up_unitPair` | Reuleaux width 1: for `x, y ∈ U` with `‖x − y‖ = 1`, the diameter of a Reuleaux triangle is attained only vertex–arc; prove: if neither is a vertex, `‖x − y‖ < 1` (each lies in the intersection of three closed unit discs; write `y − x` against the vertex `v` opposite the arc `y` is nearest; `nlinarith` in lattice coordinates) — then `x` is a vertex (at distance `1` from the other two) or on the arc about the vertex `y` | 40k |
+| | `r7Up_sep` | `r7UpCol` equal ⟹ `(m' − m, n' − n) ∈ 2ℤ²`; if `‖λ' − λ‖ > 2` the tiles (circumradius `1/√3`) are more than `2 − 2/√3`... use `> 2.155`: centroids `≥ 2√3 > 1 + 2/√3` apart, no unit pair; the six offsets of length `2`: half-plane separation along the offset (`Re⟨x, u⟩ ≤ c` on `U(λ)`, `≥ c + 1` on `U(λ')`, equality only at the facing vertices) | 40k |
+| | `r7Down_dist_ne_one` | same tile: inside a closed unit triangle, distance `1` only between two vertices, which `r7Down` excludes (`1 < dist z λ…`); different tiles of one colour (`m − n ≡ m' − n' (mod 3)`): offsets of length `√3` (six) — the far tile lies outside the unit circle about the shared-neighbourhood vertex, so `‖x − y‖ > 1` (the cusp computation of § 2.4: transverse deviation `≤ s²/2`); longer offsets are too far | 40k |
+| | `unitPairsNull_of_unitPair_mem` | `unitPairSet A ⊆ N ×ˢ univ` (`dist x (x + e θ) = 1`), `Measure.prod_prod`, `hN` | 10k |
+| | `volume_iUnion_sphere_tri` | `measure_iUnion_null` twice, `MeasureTheory.Measure.addHaar_sphere` | 10k |
+| | `r7_boundary_lattice` | at `λ₀ = tri m n` only the three up colours (`U(λ₀)`, `U(λ₀ − 1)`, `U(λ₀ − ω)`) have positive upper density (the cusps' density is `0`: between two tangent unit circles, area `O(r³)` in `B(λ₀, r)`); pairs witnessed by `λ₀ + 1`, `λ₀ + ω`, `λ₀ + ω − 1` (each a vertex of both tiles' closures, hence in both supports) | 40k |
+| | `r7_boundary_offLattice` | off the lattice two classes meet only on an up/down arc of `U(m, n)` about a vertex `v` (else `x` is interior to one tile, or on two downs — impossible, downs never touch off the lattice); `v ∈ supp` of the up colour (a vertex) and of the down colour (the cusp at `v` of colour `m − n` resp. `m − n + 1` mod 3, checked by hand in § 12.2) | 40k |
+| | `r7_phi_pos_up`, `r7_phi_pos_down` | for `p` off class `j` (off the null union of tile boundaries), some tile of colour `j` has `dist p (its centroid) ∈ (r_in, r_out)` window with an open disc of the tile crossing the unit circle about `p`; by `r7Col_add_period`-style periodicity (period lattice `{m, n even, m ≡ n (mod 3)}`, index 12) one period, finitely many explicit witness discs, `phi` monotone; **split further at implementation** (one child per colour type) | 40k each |
+| DISC7 | `measurableSet_disc7` | `MeasurableSet.iUnion` (countable), `measurableSet_closedBall` | 5k |
+| | `disc7Col_eq_dist_ge` | `(m − m') + 3(n − n') ≡ 0 (mod 7)` ⟹ `triQ (m − m') (n − n') ≥ 7` (a finite check on `|m − m'|, |n − n'| ≤ 3`, else large), `normSq_add_mul` | 30k |
+| | `disc7_unitPair_mem_sphere` | one disc: `‖x − y‖ ≤ 1` with equality only antipodal on the boundary; two discs of one colour: `≥ √21/2 − 1 > 1` | 20k |
+| | `disc7_cover` | nearest lattice point by rounding in lattice coordinates: the hexagonal covering radius `(√3/2)/√3 = 1/2` | 30k |
+| | `disc7_colour_near` | the same for the colour lattice spanned by `c(1, 2)`, `c(−3, 1)` (spacing `√21/2`, covering radius `√7/2`) | 30k |
+| | `phi_closedBall_pos` | the circle about `p` meets the open disc in an arc around the direction of `c`: angles with `|p + e θ − c| < 1/2` form an open nonempty set (`measurableSet_angles`, `arcLength_ge_of_Ioo`) | 20k |
+| | `disc7_isMUA` | `isMUA_iff_ae_phi_pos`: null unit pairs from `disc7_unitPair_mem_sphere` (`unitPairsNull_of_unitPair_mem`, spheres null); off the class `1/2 < dist p c ≤ √7/2 < 3/2` for the nearest centre of colour `a`; `phi` monotone | 20k |
+| | `essSupport_disc7` | `⊆`: the class is closed (locally finite union); `⊇`: every point of a closed disc of radius `1/2` has positive measure of the disc in every ball | 25k |
+| | `volume_frontier_disc7` | `frontier ⊆ ⋃ sphere (centre) (1/2)` (`frontier_iUnion` for a locally finite family), spheres null | 15k |
+| | `disc7_periodic` | `disc7Centre (m + 1) (n + 2)`: colour `+ 7 ≡ 0`; `(m − 3) + 3(n + 1) = m + 3n`; reindex the union | 15k |
+| | `volume_disc7_cell` | the parallelogram's area `|det| = 21√3/8`; the class meets one cell in a full disc's area `π/4` by periodicity (cut-and-paste: `MeasureTheory.measure_preimage_add` over the cell's translates) | 35k |
+| | `disc7_linearIndependent` | the determinant `≠ 0` (`LinearIndependent.pair_iff`) | 10k |
+| BAND (1) | `IsMUA.exists_shadow_point` | `IsMUA.interior_union_unitShadow`: `z ∉ supp` ⟹ `z ∉ int supp` | 5k |
+| | `circle_meets_halfBox_of_ne` | `y = m + e θ · e(ψ)`, `ψ ≢ 0`: the circle through `m` about `y` leaves `m` along `±i e(ψ) e θ`, which has a component along `−e θ` unless `ψ = 0`, entering the half-box; explicit point at small arc parameter | 40k |
+| | assembly of `IsMUA.add_normal_mem_essSupport` (**not written**) | `y_k` for `τ_k = δ/(k + 2)` by `exists_shadow_point`, a limit `y*` (`IsCompact.tendsto_subseq` in `closedBall m 2`, `essSupport` closed), `dist m y* = 1`; if `y* ≠ m + e θ`, `circle_meets_halfBox_of_ne` gives a half-box point at distance `1` from `y*`, the half-box lies in `int Ã` (`subset_densitySet_of_isOpen_ae_subset`, `isOpen_halfBox`), against `dist_ne_one_of_mem_interior_densitySet` | 30k |
+| (G1) | `hcGap_eq_of_gap` | `sSup (Z ∩ Iic s) = a`, `sInf (Z ∩ Ici s) = b` (`csSup_eq_of_forall_le_of_forall_lt_exists_gt`, closedness gives attainment) | 25k |
+| | `differentiable_hcGap` | on a gap a polynomial (`hcGap_eq_of_gap`, open gap), at `z ∈ Z` derivative `0` from `|g| ≤ (s − z)²/4` (`hasDerivAt_of_isLittleO`), outside `[−1/2, 1/2]` zero; the derivative bound on gaps `|xy(y − x)/2| ≤ min(x, y)/2` | 35k |
+| | `hcGap_bounds` | on a gap `x²y²/4 ≤ min(x, y)²/4` with `x + y ≤ 1` (so `≤ 1/64`), `|g′| ≤ 1/8`; positivity off `Z` | 30k |
+| | `hcGap_lowerParabola` | `g′` is `1/2`-Lipschitz on `[−1/2, 1/2]` (`|g″| = |x² − 4xy + y²|/2 ≤ 1/2` on gaps; across a point of `Z` add the two bounds), then the mean value form (`image_le_of_deriv_right_le_deriv_boundary` or integrate `g′`) | 30k |
+
+## Stage 17 — SAVED: HC's and IRREG's children stated (after `plans/FS111-M3-finiteness.md` §§ 1.5–2.6 and 4.1–4.2, read line by line); `exists_not_uniform_kept`'s children planned (FS131-K2d)
+
+**Read** (this job, in full): FS111-M3 §§ 1.5, 1.6 (HC by formula), 2.1–2.6 ((G1)–(G3), unit-avoidance, B1, B2 with (C0) and cases 1–6,
+Lemma NL, the exact check H1–H7), 4.1–4.3 (IRREG: `|E| > 0`, `E ⊆ K`, irregularity of every completion). Nullity of `Z` enters only
+in the almost-everywhere step through `N_e` (§ 2.4) — so every child but `hc_ae_phi_pos` is stated with `interior Z = ∅` and serves
+IRREG too (§ 4.2 (1)). **(C0) is already in the kernel**: `vesica_apex` (BAND's third clause, proved) is (C0) in an edge frame; B2 reads it
+through `dist_hcFrame`.
+
+**Stated** (`Plane/CoverExamples`, each `sorry`, records written): `hcSeg` (def), and
+
+| child | route (FS111-M3 address) | price |
+|---|---|---|
+| `dist_hcFrame` | `hcFrame` is `C_u + (·)·w`, `‖w‖ = 1` (`norm_e`) | 10k |
+| `hcFrame_coords` | divide by `w` | 10k |
+| `hcUpTri_frame` | `convexHull` of the three vertices, each with `|s| ≤ 1/2`, `t ∈ [2, 2 + √3/2]` in every frame (frames are affine) | 20k |
+| `hcUp_slivers` | (G2) § 2.2 | 35k |
+| `hcBandTop_bounds` | (G3): `(s, 2 + g(s)) ∈ U` (`hcUp_slivers`) gives `ℓ ≤ 1 + g`; every `u ∈ U` has `u_t ≥ 2` (`hcUpTri_frame`), so `d_U ≥ 1` at `t ≤ 1`, with equality iff `u = (s, 2)` ∈ `U` iff `g(s) = 0` iff `s ∈ Z` | 35k |
+| `lt_hcBandTop_iff` | (G3): `d_U(s, ·)` strictly decreasing on `t < 2` | 30k |
+| `continuousOn_hcBandTop` | (G3): `ℓ` is the root of a continuous strictly decreasing family (`d_U` 1-Lipschitz) | 35k |
+| `isClosed_hcSet` | `LocallyFinite.isClosed_iUnion` for each family (face lattice discrete; blocks bounded) | 30k |
+| `closure_interior_hcSet` | each block is the closure of its interior; `σ_e ⊆ cl Λ_e` by `interior Z = ∅` and `hcBandTop_bounds` | 30k |
+| `volume_frontier_hcSet` | frontier in segments, circles, graphs of continuous functions (`MeasureTheory.Measure.addHaar_sphere`; a graph of a continuous function is null by Fubini) | 35k |
+| `hc_band_dist_lt_one` | § 2.3's band computation | 30k |
+| `hc_unitAvoiding` | § 2.3 (H1 on one period, flanking pairs, diameters, `hc_band_dist_lt_one`); **split at implementation** into the block table and the flanking pairs | 40k + 40k |
+| `exists_near_hcFace` | rounding in the face lattice's coordinates; covering radius `L` | 25k |
+| `hc_sausage_cover` | B1: reduce to the kite about the ray `O C_k` by `exists_near_hcFace` and the six 60° rotations (each carries the standard triangle and segments onto the actual ones — a child to state at implementation, `hc_pieces_rot`), then H3's quadrilateral by `nlinarith` | 40k + 35k |
+| `hc_lemmaNL` | Lemma NL § 2.4 (exterior disc `R = 5/4`, H5's inequality `max((2/5)x², |y|) > (5/16)x² + (5/256)y²`) | 40k |
+| `hc_exclusion` | B2 § 2.4, cases 1–6; (C0) = `vesica_apex`; **split at implementation** by case (disc; vesica; flat bulges; sliver) | 40k + 3 × 25k |
+| `hc_ae_phi_pos` | § 2.4's last paragraph; children at implementation: `N_e` null (`Z` null, Lipschitz image), level sets null, `E°` ⟹ open arc in the block's interior | 40k + 2 × 25k |
+| `subset_compl_unitShadow_closure` | perturb: `y′ ∈ U` near `y ∈ cl U`, then `z + (y′ − y) ∈ U` is at distance `1` from `y′` | 15k |
+| `essSupport_of_isOpen` | `⊆` support ⊆ closure; `⊇` an open set has positive measure in every ball about a point of its closure | 10k |
+| `hcBand_component_iff` | (G3): over a gap the region `{s ∈ J, 1 < t < ℓ(s)}` is connected (`ℓ` continuous, fibres intervals); a point `c ∈ Z` between gives `ℓ(c) = 1`, an empty fibre, which separates (the frame is a homeomorphism) | 35k |
+| `hc_free_pos` | § 4.2 (1): the arc-above-band inequality `t·d/r > d²/4`, and positivity through density points of `Z × Z` and the local diffeomorphism `(s, t) ↦ (s + r, s − r)` near `t = 0⁺`; **split**: the arc lemma, the measure lemma | 35k + 35k |
+| `hc_free_subset_nowhereDense` | § 4.2 (2): `K` the union of the null level sets, flat side lines, `T₁(e±)`, and `K_e`; `K_e` closed (`Z` compact) with empty interior by Baire on `(Z − ρ) ∪ (Z + ρ)` (`IsClosed.interior_union_left`/`nowhereDense_union`) | 40k |
+| `frontier_essSupport_pos` | § 4.2 (3), general: a density point `x ∈ K ∖ F` of `A′ ∖ F` has a neighbourhood where `supp A′ ⊆ K` (closed, empty interior), so `x ∈ ∂ supp A′` | 30k |
+
+**The assemblies, not written in this job** (each from the children above; for the next implementer):
+- `hc_isRegularMUA` (25k): `A = int HC` is open (measurable) with no unit pairs (`hc_unitAvoiding`: `unitPairSet A = ∅`, as in
+  `not_forall_isRegularMUA`); MUA by `isMUA_iff_ae_phi_pos` with `hc_ae_phi_pos`; `essSupport A = closure A = HC`
+  (`essSupport_of_isOpen`, `closure_interior_hcSet`); `|HC ∖ A| ≤ |frontier HC| = 0` (`isClosed_hcSet`: `HC ∖ int HC = frontier HC`);
+  shadow identity: `⊆` by `subset_compl_unitShadow_closure`, `⊇` by `hc_exclusion` (`interior Z = ∅` from `volume Z = 0`:
+  `interior_eq_empty_of_null`-type fact, a line).
+- `hc_band_components` (15k): `connectedComponentIn` equality ⟺ some preconnected subset holds both (`IsPreconnected.subset_connectedComponentIn`,
+  `isPreconnected_connectedComponentIn`), then `hcBand_component_iff`.
+- `hc_irreg` (35k): (1) from `hc_unitAvoiding`, `closure_interior_hcSet`, `volume_frontier_hcSet`, `isClosed_hcSet`, `hc_exclusion`; `¬ IsMUA`
+  from `hc_free_pos` against `isMUA_iff_ae_phi_pos`; completions: `A′ ∖ HC` has positive measure (else `A′ =ᵐ A` up to the null frontier,
+  and the free set would be in `A′` with `φ_{A′} = 0`, against `A′` MUA), lies a.e. in the free set (unit-avoidance of `A′` and
+  `∫_{A′∖A} φ_A = 0`), hence in `K` (`hc_free_subset_nowhereDense`); `frontier_essSupport_pos` with `F = HC`.
+- `IsMUA.add_normal_mem_essSupport` (30k): stage 16's table.
+
+### 17.1 `exists_not_uniform_kept`'s children (to paste into `Plane/Slack` by the implementer who next holds it; not edited here)
+
+The leaf (verbatim, `Plane/Slack`): `exists_not_uniform_kept {η : ℝ} (hη0 : 0 < η) (hη : η < 1) : ∃ (k : ℕ) (f : ℂ → Fin k), Measurable f ∧
+(∀ x y, dist x y = 1 → f x ≠ f y) ∧ ∃ m > (0 : ENNReal), ∀ ε > (0 : ℝ), ∃ z : ℂ, m ≤ volume {x | x - z ∈ {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧
+0 ≤ w.im ∧ w.im ≤ 1} ∧ ¬ KeptAt (f ⁻¹' {f x}) η ε x}`.
+
+**A simpler route than K2c's fringe colouring** (one mind, this record; the implementer may take either): the colouring need not
+change with `ε` in a way tied to annuli — **a chequer at every scale, placed in disjoint windows**. Base: `sq9` by squares of side `1/2`
+(proper at every unit pair, `sq9Col_ne_of_dist_eq_one`, colours `0–8`). Modification: in the unit square `W_j = j·(10, 0) + [0, 1]²`
+(`j ≥ 1`, far apart), replace the colouring by a chequerboard of side `h_j = 1/(10 j)` in **two fresh colours** `9, 10` — proper inside `W_j`
+since a chequer of side `h` has same-colour points at distance `1` (e.g. along an axis by `1 = (10j)·h`, an even number of cells: same
+colour!). So the chequer alone is **not** proper; K2c's margins avoided this with narrow strips. **Repair**: chequer `W_j` in colours `9, 10`
+by cells of side `h_j` with **diameter of `W_j` < 1**: take `W_j = j·(10, 0) + [0, 1/2]²` (diameter `√2/2 < 1`, so no unit pair inside
+`W_j`), and pairs between `W_j` and the rest use colours `9, 10` only in `W_j`s, which are `> 1` apart. At scale `ε` with `2ε ≥ h_j`... the
+kept test at `x ∈ W_j` with `ε/2 ≫ h_j` sees own-colour density `≈ 1/2 < 1 − η` iff `η < 1/2`. **This route needs `η < 1/2`, the leaf has
+`η < 1`**: at `1/2 ≤ η < 1` a chequer is kept (density `1/2 ≥ 1 − η`). Use `N` fresh colours cycled in cells (density `1/N`): take
+`N > 1/(1 − η)`, i.e. `k = 9 + N` with `N = ⌈2/(1 − η)⌉`; own-colour density `≈ 1/N < 1 − η`. The translate `z` of the unit square is chosen
+to contain `W_j` for `j` with `h_j ≤ ε/100` (so the ball of radius `ε/2` about most points of `W_j` stays inside `W_j` — needs
+`ε/2 < 1/4`: for `ε ≥ 1/2` use `W_1` at scale — at `2ε` the ball leaves `W_j`; the definition of `KeptAt` tests both radii `ε/2` and `2ε`:
+non-kept at either radius suffices). The measure bound `m = 1/16` (a quarter of `W_j`'s area `1/4`, the points at distance `≥ ε/2` from
+`∂W_j` when `ε ≤ 1/4`; for larger `ε`, points of `W_1` whose `ε/2`-ball is mostly outside `W_1` lie in sq9's classes… — **this case needs
+care**: for `ε ≥ 1/4`, choose instead a fixed configuration: a cycled chequer of side `h ≤ ε/100` inside a disc of radius `1/2`, so pick
+`W_j` with `h_j ≤ ε/100` **and side growing**? The side is capped by `< 1/√2` for unit-pair freedom). **So K2c's fringe route is the one
+that handles all `ε` uniformly**, and the children below follow it, with the colour count chosen from `η` as above:
+
+```lean
+/-- The zigzag colouring of FS106-TQ's control C2, with `N` fringe colours: `sq9` off the fringes; in the annulus `j ≤ ‖z‖ < j + 1`, a
+fringe of width `1/50` along every grid edge chequered by cells of side `1/(j + 1)` in `N` colours `9, …, 8 + N`. -/
+noncomputable def zigzagCol (N : ℕ) (z : ℂ) : Fin (9 + N) := sorry  -- a definition by formula; to be written
+
+theorem measurable_zigzagCol (N : ℕ) : Measurable (zigzagCol N) := sorry
+theorem zigzagCol_ne_of_dist_eq_one (N : ℕ) (hN : 1 ≤ N) {x y : ℂ} (h : dist x y = 1) : zigzagCol N x ≠ zigzagCol N y := sorry
+theorem exists_square_not_kept (N : ℕ) (hN : 1 ≤ N) {η : ℝ} (hη : (1 : ℝ) / N < 1 - η) {ε : ℝ} (hε : 0 < ε) :
+    ∃ z : ℂ, ENNReal.ofReal (1 / 1000) ≤ volume {x | x - z ∈ {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧ 0 ≤ w.im ∧ w.im ≤ 1} ∧
+      ¬ KeptAt (zigzagCol N ⁻¹' {zigzagCol N x}) η ε x} := sorry
+```
+
+with the assembly `⟨9 + N, zigzagCol N, measurable_zigzagCol N, fun x y h => zigzagCol_ne_of_dist_eq_one N hN h, ENNReal.ofReal (1/1000),
+by positivity, fun ε hε => exists_square_not_kept N hN hNη hε⟩`, `N = ⌈2 / (1 − η)⌉₊`. Prices: the definition 15k (a formula: `sq9Col`
+off the fringe set, `9 + ((⌊re·(j+1)⌋ + ⌊im·(j+1)⌋) mod N)` on it, `j = ⌊‖z‖⌋`), measurability 15k, properness 40k (fringe colours only in
+fringes of width `1/50`; two fringe points at distance `1` lie in fringes of grid edges `≥ 1/2 − 2/50` apart in the transverse direction or
+in the same fringe strip — **the latter can be at distance exactly 1 along the strip**: the cycled chequer along a strip of length `1/2` has
+length `< 1`, so pairs at distance `1` along fringes are in different strips; colour them by `(strip index mod 3)`-shifted cycles — the
+implementer must fix the formula so that fringes of edges at distance `≤ 1 + 1/25` get disjoint colour sets, e.g. `N` colours per strip
+class mod 3, `k = 9 + 3N`), the measure bound 40k. **K2c's sketch (§ 12.2) does not settle the fringe-to-fringe pairs; the formula above
+must**, and the properness child is where that is proved — if it cannot be, that is a missing lemma for the deriver (FS106-TQ's control
+C2 is a hand construction).
+
+## Stage 18 — SAVED: the handoff for the next implementer, for these 18 leaves (stage 13's form)
+
+**Branch `fs131-w2d`** in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w2d`, merged with `fs131-w2` at `3dffa363` (merge `0f6015a8`;
+the one conflict, `scripts/Axioms.lean`, append-only, both sides kept). **The implementer's first step**: merge `fs131-w2d` into `fs131-w2`
+(in the wave's worktree, after FS131-I2e has stopped), resolve append-only lines by keeping both sides, build.
+
+- **Builds**: from inside the worktree, `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
+  ./scripts/build.sh`; never `lake build`; up to two such builds across trees (ruling 5); exit 75 → wait ten minutes. `lake env lean
+  -DautoImplicit=false <file>` for iteration only, never as evidence. A module importing a not-yet-built new module needs that module's
+  olean: compile it to a scratch directory and prepend it to `LEAN_PATH` **only if no other `Proofs.*` olean lives there** (Lean resolves the
+  root `Proofs` to the first path holding it).
+- **May / may not**: § 13's rules, unchanged — prove any child or leaf; add further children (state each as a lemma first, add its
+  `scripts/Axioms.lean` record; `python3 tools/fs131_k2d_records.py` checks this job's files and can be extended); move declarations within
+  a module; add imports (updating `ARCHITECTURE.md`'s Imports cell). Never change a row statement, a hypothesis, a definition's meaning
+  (including `r7Up`, `r7Down`, `sq9Sq`, `hcSeg` and every child statement of this job — a child found false comes back through Keryx); no
+  `axiom`, no `native_decide`. The `have _ := hconn` / `have _ := ht` lines in `Arith/FalconerField` keep the row's hypotheses and the linter
+  silent; leave them.
+- **What is closed** (sorry-free from children): `exists_placeHom`, `noAffine_fields`, `falconerFan_five_field`, `falconerFan_five_placeHom`,
+  `sq9_saturated_both`, `r7_aeColouring`, `r7Cls_saturated`, `r7_boundary`, `r7Cls_isMaximalCover`, `disc7_isMaximalCover`,
+  `disc7_isRegularMUA`, `disc7_upperDensity`, `g1Bounds_hcGap` (13 of the 17 leaves in the three files). **Proved outright**: all of
+  `Instances/FalconerOrbit` (the slack fact at `7`, the orbit facts at `11` and `19`, the tip-free facts).
+- **What is left**: 77 `sorry`ed children (lane A 19: § 15.2's tables; CoverExamples 58: §§ 16–17's tables) and 4 leaves whose assemblies
+  are planned but not written (`IsMUA.add_normal_mem_essSupport` § 16, `hc_isRegularMUA`, `hc_band_components`, `hc_irreg` § 17), plus
+  `exists_not_uniform_kept` in `Plane/Slack` (§ 17.1: its children to paste; the fringe-to-fringe pairs are the open point).
+- **Order** (by what unblocks most and what is cheapest to re-price from): (1) lane A — `nonempty_ringEquiv_zmod_of_card`, `slack_complete`,
+  `not_falconerFan_of_colorable`, `sub_mem_of_connected`, `tip_eq_zero_of_tipFree`, `not_falconerFan_five_of_hom_slack`, `exists_hom_apex`
+  (FALC-RES then lands except through `exists_hom_finitePlane_of_card`), then `pureTranscendental_*`, the independence peel,
+  `chromaticNumber_planeOver_pureTranscendental_eq`, `exists_hom_slack`, `forall_const_of_hom_slack`, then the place-hom pipeline
+  (`exists_valuationSubring_localization`, `exists_residue_localization`, `placeHom_base`, `placeHom_step`, `exists_hom_of_isPlaceHom`);
+  (2) DISC7 and SQ9 (E–M children), (G1); (3) BAND (1)'s two children and its assembly; (4) R7 (`measurable_r7Col`, `r7Col_mem_tile`, the
+  three tile lemmas, then boundary and `phi` children); (5) HC/IRREG, frame facts first (`dist_hcFrame`, `hcFrame_coords`,
+  `hcUpTri_frame`), then (G2), (G3), closedness/frontier, unit-avoidance, B1, Lemma NL, B2, the a.e. step, then IRREG's three.
+  **Price the run from the first two children**, not from these tables (prices here are at the Sonnet rate; an Opus implementer is the trial
+  of inventory item 103).
+- **The landing**: § 13's gate (build with no warning; `scripts/axioms.sh` clean with `falconer_lemma2_nonempty` the one declared import;
+  `./scripts/vacuity.sh` and `--self-test` green with the counts reconciled; `tools/check_architecture.py` exit 0). Inhabitants for this
+  job's new hypotheses: none new (every new child's structure hypotheses are R7's, DISC7's, HC's, or a place-hom pair, inhabited as § 10
+  says; `IsPlaceHom` is inhabited by `exists_placeHom` at `ℚ ⊆ ℝ`, `𝔭 = (3)`, `n = 0` once its children land).
