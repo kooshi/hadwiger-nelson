@@ -140,3 +140,81 @@ derivation: E1-Q1
   statement: the configuration of Q1 — a point with consecutive sectors a, b, c of distinct colours and the angle of b exactly π/3 — does not occur in a five-colour almost-everywhere-proper arc map in Woodall's normal form, with or without the two edges of b on unit circles
   argument: § 1.3 The questions, restated (verbatim from the claim list)
   verdict: stalls at: stage 1 — registered, not yet derived
+
+## Stage 2 — SAVED: recognition (`ephodos-recognition`, invoked fresh)
+
+### 2.1 The stall, read
+
+Both questions are the same stall in two places: Woodall's argument is a **local chase** — from one opposite arc (the interior arc opposite the
+smallest sector) toward one point of `ω(P)` — and it fails exactly where the chase lands somewhere that is not a vertex of three colours: at `φ_b = π/3`
+the arc has the critical length and its two ends are cut by unit arcs (Q1, Townsend's `2π/3` picture), and in step 7 the chase lands on a two-colour
+corner `Q` (Q2). The shape is "a clause per case" (steps 5, 6, 7, 8 are one clause per degree, and each clause chases one arc) and "a wall that describes a
+counterexample" (each GAP says what an escaping configuration would have to look like). The cure the stall points to: stop chasing one arc and ask what
+the **whole** circle `ω(P)` must carry, for every solution.
+
+### 2.2 For a stranger (a plane topologist who works on arrangements of curves)
+
+*A plane is cut by a locally finite arrangement of segments and circular arcs into open faces; each face gets one of five colours; no two points of faces
+of one colour are at distance exactly 1 (points on the arrangement carry no colour). A* branch point *is a point on the closure of three or more faces;
+at every point the faces around it carry distinct colours, and at a branch point the angular sectors between consecutive arcs are at least `π/3`.
+Show that no branch point has exactly four or exactly five faces around it.*
+
+Words the stranger would stop at, and what each turned out to be:
+- "unit circle about a point", "sees a sector": not jargon to strike — the **determiner** (below). In the stranger's words: the circle `ω(z)`, for `z` near
+  the circle `ω(P)`, passes near `P` along a curve that tends to the line through `P` perpendicular to `z − P`; it meets the faces at `P` whose directions
+  lie in the open half-plane on the far side of that line from `z` (if `|z − P| < 1`) or the near side (if `|z − P| > 1`). That is the support-line /
+  half-plane picture of convex geometry, and it is first order.
+- "interior arc of positive thickness", "window", "change point", lemma (L): **accompaniments** of Woodall's route — the stranger's statement does not
+  need them, and the derivation below consumes none of them.
+
+"This is a" — **an annulus-crossing question in plane topology, with a first-order visibility constraint**: around the circle `ω(P)`, in a thin annulus,
+either some face crosses from inside to outside, or the boundary runs along the circle, and the visibility constraint says which colours a crossing face
+may have. The classical dichotomy (Janiszewski's theorem; the "crosscut or separating loop" alternative for an annulus) is the home theorem, and a counting
+step decides which points of the circle can be branch points of four colours.
+
+### 2.3 The features, sorted
+
+| feature | sort | receipt |
+|---|---|---|
+| five colours | determines (consumed) | consumed at "a face crossing `ω(P)` avoids all `k ≥ 4` sector colours, so has the one colour left" and "two faces of that colour never share a non-branch boundary point"; with six colours two colours are left and the cover step fails as written; a six-colour counterexample is not exhibited, so the second half of the receipt is a consumed step, not a counterexample |
+| `k ∈ {4, 5}` sectors at `P` | determines (consumed) | consumed by the same step (`k ≥ 4` leaves at most one colour to a crossing face) and by the count `k ≤ 5 < 6`; at `k = 3` two colours are left and Townsend's `2π/3` two-colouring shows the cover step has nothing to act on — step 6 (Townsend's lemma) handles `k = 3` instead |
+| every sector angle `≤ π`, none zero | determines (consumed) | consumed by the colour step (the two branches of `ω(Y)` at `P` fall in two different sectors); a sector of angle `> π` contains both branch directions for an arc of `Y`'s, where four colours are allowed (first-order count); a zero-angle sector (Woodall's cone) is invisible to the crossing step. Both are supplied by strict step 5 |
+| an edge at `P` lying on a unit circle `ω(Y)`, `Y ∈ ω(P)` (Q1's double unit arc; F2's form (a)) | splits | consumed only through "each edge lies on at most one unit circle through `P`": at most `k` exceptional points `Y`; the rest of the feature (which edges, curving which way, Q1's pairing with the arc's ends) accompanies |
+| `φ_b = π/3` exactly (Q1) | accompanies | the derivation never reads an angle except through "`≤ π`" and "`≥ π/3`" |
+| `φ_b` the smallest, `≤ π/2`; `B` absent near `Q`; `Q` a tip or an arc (Q2) | accompanies | not consumed |
+| the window, lemma (L), the strict step-4 lemma | accompanies (for E1-NO45) | not consumed by E1-NO45; lemma (L) is consumed upstream, inside step 6 (Townsend's lemma) and strict step 5 |
+| arc map (segments and circular arcs, locally finite) | determines (consumed) | consumed at: two distinct circles (or a circle and a line) tangent at `P` meet only at `P`; finitely many branch points and faces near a compact set; each boundary arc near a point of `ω(P)` is inside, outside, or along `ω(P)`. For Jordan boundaries these become owed (tangency can oscillate) |
+| almost-everywhere properness (region points only) | determines (consumed) | every step reads colours only at points of open faces; no boundary colour is read |
+
+### 2.4 The homes, tested
+
+1. **The poser's literature — `[Townsend2005]` Thm 5 (ii)** (read, § 1.2). Name there: the annulus `T = ∪Tᵢ`, "every boundary point of a region in T⁰ is a
+   boundary point of at most three regions", the cross-cut, "at most four points … the cut points". *Old proof applies?* Its skeleton does: a vertex must
+   appear on `ω(P)`, and almost every point of `ω(P)` sees three colours only. *Changed steps:* two — the cross-cut step (asserted in print) is replaced by
+   a passage lemma plus a cover argument (stage 3, L-COVER), and the "at most four cut points" (asserted) by a count of edges at `P` that are unit arcs, at
+   most `k` (L-BAD). *Exceptions vanish?* Yes: degrees 4 and 5 in one statement; Woodall's steps 5 (equality), 7 and 8 are not used. *Predicts a
+   neighbour?* Yes: under Condition 5 there are no exceptional points, so one branch point on `ω(P)` suffices; and at six colours the same cover step works
+   at points of five or six sectors (one colour left to a crossing face) — the neighbour E1-GEN6 below. **Adopted.**
+2. **Plane topology — the annulus dichotomy** (Janiszewski; for arc maps it is elementary: a finite planar arrangement). Supplies L-COVER's topology.
+   Dictionary: crosscut ↔ a boundary curve passing from inside to outside of `ω(P)`; separating loop ↔ one face (or one colour class through faces whose
+   closures meet) encircling `P` near `ω(P)`. Holds both ways for arc maps. **Used inside home 1.**
+3. **Woodall's own route** (steps 5–8; the costume's home). Old proof fails at F1, F2 as the claim list shows. **Killed** as a home for the answer (kept as
+   the reason for the questions).
+4. **The project's held lemmas** — FS106-DIAM ("an open set avoiding distance 1 has `ω(p)` disjoint from it for every `p` in its closure"), FS106-TS-T
+   (a point of chromaticity `≥ 3` within `1/√2 + ε` of every point), FS106-TS-U. DIAM is exactly the colour step's engine (stage 3, L-SEE); TS-T gives a
+   branch point near any point but not **on** `ω(P)`, which is what the count needs; TS-U is not needed. **DIAM used.**
+
+### 2.5 The class
+
+The determiners place the statement at: five colours, arc maps, normal form with strict step 5, `k ∈ {4, 5}`. The instance questions (Q1 at `k ≥ 4`, Q2)
+become corollaries. The cover step alone lives at a wider class — any number `c` of colours, points with `k ≥ c − 1` sectors — recorded as a
+generalization (E1-GEN6), not used.
+
+### 2.6 Prior art, measured (2026-10-04, zbMATH Open API)
+
+`ti:"monochrome unit"` (1: `[Townsend1981]`); `au:"Townsend, S" & ti:"colour*"` (2: the 1981 note, `[Townsend2005]`); `ti:"colored map" & ti:"unit
+distance"` (0); `ab:"map" & ab:"unit distance" & ab:"six colors"` (0); `ci:0251.50003`, the works citing `[Woodall1973]` (4: Townsend 1981, Reid–Jungreis–Witte
+1990, Zaks 1992, Sokolov–Voronov 2026); `ci:1506.05079`, citing `[Townsend2005]` (1: Sokolov–Voronov 2026). Sokolov–Voronov is held and read by the project
+(`[SokolovVoronov2025]`, FS-106): it treats maps under Conditions 5–6 with six colours and does not repair Woodall's steps 5 or 7. Reid–Jungreis–Witte and Zaks
+are about rational spaces (titles; not opened — their subject is not maps). Result: the theorem "maps need six" is Woodall's and Townsend's; **a repair of
+Woodall's steps 5 (equality) and 7 is not found in print**; the idea of the route is `[Townsend2005]` Thm 5 (ii)'s.
