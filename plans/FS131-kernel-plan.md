@@ -466,3 +466,147 @@ easy or moderate. My estimate, to be scored: the wave lands in one implementer s
 **Inhabitants and vacuity.** Structures taken as hypotheses: `AeColouring` (leaf 2; inhabitant noted in `Plane/AeColouring`, FS111-W-SQ9 in wave 2),
 `FalconerFan` (leaves 27–28; `rhombus_falconerFan`). The set hypotheses (`UnitPairsNull`, density) are inhabited by the foundation's examples
 (`B(0, 1/3)`). No wave-1 statement quantifies over a class the backlog proves empty.
+
+## Stage 7 — SAVED: the waves after wave 1, and how `main`'s gate stays meaningful
+
+### 7.1 The ten waves at a glance
+
+| wave | subject | rows | foundation it adds (its planner's first job) | outside theorems and named hypotheses |
+|---|---|---|---|---|
+| 1 | the plane, sets with null unit pairs, chords, finite graphs | 14 | — (stage 5's) | none |
+| 2 | measurable colourings: covers, maximal covers, the slack suprema, examples; place homomorphisms, the dyadic lemma | 27 | partial colourings and covers (`AeCover k`), `IsMaximalCover`, `µ_k(ε)` with band-properness, tile and periodic forms, upper density of a set, tight/slack (the rescaling), `essential multicolour`, saturated (for the examples), stationary families (Krylov–Bogolyubov), `χ_CP` | Krylov–Bogolyubov for `ℤ²` (formalize: Følner averages + `CompactSpace (ProbabilityMeasure _)`); de Bruijn–Erdős (formalize from `Finset.rado_selection`); Banach–Alaoglu (Mathlib); `[Falconer1981]` Lemma 1 (decide: formalize or axiom with the four items); supporting lemma **N-EASY** (row 130's free half, `χ(ℝ²) ≤ χ_m⁰(ℝ²)`, FS-103) formalized here for YESLIM |
+| 3 | arc maps and fragments, Siamese allowed: tiles, the ring, germs, change points, (Q) | 21 | `isOpen_interiorPts`; arcs of `Γ` on `ω(p)` with constant sides and their inner/outer colours; (Q) at a ring; germs (`u±`, `v±`), change points, hubs; the circle colouring of RINGBAND | none |
+| 4 | valid maps: contact types, Woodall's merge, shadows, the unit-arc calculus, the base's steps; S–V maps a.e. | 29 | sectors and degree at a point (components of `B(p, r) ∖ Γ` with `p` in their closure, stable for small `r`), cones (limit directions), contact types in/out/both/inert, horns, `𝓜_K`, "terminal modification" as a relation on `ArcMap 6`; S–V map-type colourings (Conditions 2–6) | none (Woodall, Townsend: their mathematics as ours, ruling R9) |
+| 5 | termination, the stuck chains' ends, row 134's base, density | 12 | stuck chains along the normal line; `F(M)`, `R(M)` | **`Row134Base`** (named hypothesis, outside the backlog: `[SokolovVoronov2025]` Cor. 1 a.e. for curved cubic maps with no `d = 2` exception, as FS-110 repaired it); its own formalization is a separate planner-and-implementer job (stub to mint) |
+| 6 | saturated colourings: the pinch, `C^{1,1}` interfaces, ladders of unit parallels, sectors at the singular set, map colourings `𝒫_k` | 35 | `D-NF`, honest, saturated, the singular set `Σ`, interface arcs and their tangent/split type, `REG-J′`, unit parallels, semiconcavity; `𝒫_k`, Grundy-bound | none |
+| 7 | four-colour vertices: bowties, lunes, pinwheels; route T's count | 20 | Reuleaux triangles/lenses, tactic edges, pinwheels and their blades (E1, E2); the **combinatorial torus map** (rotation system with `V − E + F = 0`) | Euler's formula for cellular torus maps, and the passage from a doubly periodic valid map to one: decided at this wave's planning job (combinatorial maps here; the passage a separate job or an axiom with the four items) |
+| 8 | the ring calculus, non-Siamese: RING-GERM, the star, semi-hubs, the Γ-free class's emptiness | 22 | tips, the transfer star, semi-hubs (full, parallel, crossed), the Γ-free and (Q)-free classes as predicates | none |
+| 9 | the reductions (FS-111's `χ_m⁰ ≥ 6` route, TOP5) and the class statements (BENDANY, QFREE-NS, DISCF-NS) | 11 | the fragment restriction `F_ρ` (OR1-WHOLE's), complexity-`K` tilings and `δ₀(K)` | **row 130's conclusion** `χ(ℝ²) = χ_m⁰(ℝ²)` as a named hypothesis for C-SIX-M's and M2-REDUCE-C's "hence χ(ℝ²) ≥ 6" (given MR); supporting lemma **FS111-M-REDUCE-I** formalized here (R13) |
+| 10 | arithmetic II: the degree-28 field, character colourings, stationary ratios, the spectral inputs | 14 | the field `K·E₇` (cyclotomic `ℚ(ζ₂₉)`'s degree-7 subfield), `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`, `Θ_k`, `E_S`, spectral measures (against `SpectralChain`'s objects) | **`Row123Chain`** (named hypothesis, outside the backlog: row 123's chain, FS-101's slot) for TC1-STANDING-FIVE's MR clause; MR itself never imported |
+
+Totals: 205 formalize rows (14 + 27 + 21 + 29 + 12 + 35 + 20 + 22 + 11 + 14). The waves are ordered by dependency (the checker's guarantee), not by
+size; waves 2 (measure) and 3 (fragments) are independent of each other, as are 6 and 7, and either pair may run concurrently in two worktrees
+(builds still one at a time). Lane A's rows (waves 1, 2, 10) depend on nothing in lanes P and M.
+
+### 7.2 Each wave's rows and modules (from `data/fs131/k1/dispositions.csv`)
+
+**Wave 2** (27 rows):
+- `Plane/MaximalCover`: FS111-C-FILL, FS111-M-SATC, FS111-M2-COV, FS111-M2-FIX, FS121-D3-GRUNDY, FS111-M-COVER-SC
+- `Plane/CoverExamples`: FS111-M-R7, FS111-W-SQ9, FS111-M2-DISC7, FS111-M3-BAND, FS111-M3-FIXCONV, FS111-M3-HC, FS111-M3-IRREG
+- `Plane/Slack`: FS111-V0-RESCALE, FS121-D4-FACE, FS129-SR2-SUPK, FS106-COMP, FS106-REM, FS106-EQ, FS121-V5-FACE-SHARP
+- `Plane/Stationary`: FS129-OA1-NOPERLAW
+- `Plane/FalconerReduction`: FS129-SA1-FALC-RED
+- `Arith/PlaceHom`: FS129-SA1-PLACE-HOM, FS129-SA1-NOAFF-FIELDS
+- `Arith/FalconerField`: FS129-SA1-FALC-RES, FS129-MA2-FALC-HOSTS
+- `Arith/Dyadic`: FS129-SA1-SQRT3-LOCAL
+- merged here: FS106-SUP → FS129-SR2-SUPK; TC1-SQRT3-DYADIC → FS129-SA1-SQRT3-LOCAL
+
+**Wave 3** (21 rows):
+- `Plane/RingGerm`: FS116-N1-GERM-R, FS116-N1-TWIST-D, FS116-N1-ECHO, FS116-N1-GERM-S, FS116-N1-QFREE4, FS116-N2-FIVERING, FS116-RING-Q-PRIME-S, FS116-V5-U1, FS116-Y4-FLANK, FS129-SR1-SIXQ, FS129-SR2-TOUCHW
+- `Plane/YesLimit`: FS116-O1-YESLIM
+- `Plane/Tiles`: FS116-S1-CLUSTER, FS116-V4-DICHOTOMY, FS116-V4-MEET, FS116-V4-TWIST, FS116-V5-NE1, FS129-OR1-WHOLE
+- `Plane/Lens`: FS116-S1-EXIT
+- `Plane/SixFragment`: FS116-Y2-SIXFRAG
+- `Plane/RingBand`: FS129-SR1-RINGBAND
+- merged here: FS112-SIX → FS116-N2-FIVERING;FS129-SR1-SIXQ; FS116-N1-TOUCH → FS129-SR2-TOUCHW; FS116-RING-Q-PRIME → FS116-RING-Q-PRIME-S; FS116-RING-TRANSFER-C → FS116-N2-FIVERING;FS116-N2-SIXRING; FS129-SR2-YESLIM-EQ → FS116-O1-YESLIM; FS110-N2-RING → FS129-SR1-RINGBAND; FS110-Y3-GP → FS129-SR1-RINGBAND
+
+**Wave 4** (29 rows):
+- `Plane/SVMap`: FS106-L, FS106-TS-T, FS106-WO, FS106-TW, FS106-AE-MAP6
+- `Plane/ValidMap/Contact`: FS110-N3-CONF, FS110-N3-DEG, FS110-N4-SHADOW, FS110-N4-SHAVE, FS110-N4-STUCK, FS110-W-MERGE
+- `Plane/StuckChain`: FS110-N4-FIN
+- `Plane/ValidMap/UnitArc`: FS112-A4SIX, FS112-FLANK, FS112-ISO, FS112-LOCK, FS112-N2-BENDS, FS112-N2-FLANK-Q, FS112-N2-RAY, FS112-NB4P, FS112-U1, FS114-L60-LE
+- `Plane/ValidMap/BaseSteps`: FS112-BOWTIE, FS112-C-DOUBLE, FS112-N3-ANTI, FS112-N3-FAIL, FS112-N3-NOBOTH, FS112-N3-END, FS112-N3-PAIRS
+- merged here: FS112-BEND → FS112-N2-BENDS; FS114-L60-WALK → FS114-L60-LE
+
+**Wave 5** (12 rows):
+- `Plane/ValidMap/Dense`: FS114-BV-HEX, FS114-CVB-THOM, FS112-N3-COR3, FS112-ROTHEX, FS112-N3-BASE, FS112-N3-DENSE3, FS114-CV-EXISTS, FS129-OR1-LOCALDENSE, FS129-SR2-DISC1TS
+- `Plane/ValidMap/Terminal`: FS114-CV-HD, FS112-N2-TERM, FS112-C-ENDS
+- merged here: FS112-DISC1 → FS129-SR2-DISC1TS; FS112-N2-RED → FS112-N2-TERM
+
+**Wave 6** (35 rows):
+- `Plane/Saturated/Pinch`: FS111-M-HALF, FS111-M-PINCH, FS111-M-C11, FS111-M2-HULLC, FS111-W-KB-DIR, FS111-W-NOBEND, FS111-M2-INTRAD, FS121-D3-FALLSAT, FS121-V2-EROSION-DIAM
+- `Plane/Saturated/Fragment`: FS116-O1-SATPIN, FS116-N1-AXIS, FS116-S1-RUNG, FS116-V4-PARTNER, FS116-S1-KAPPA, FS116-S1-PAIR
+- `Plane/Saturated/MapColouring`: FS121-C1-BOUND, FS121-C1-SAT, FS121-C1-GMAP
+- `Plane/Saturated/Ladder`: FS121-D2-EXT, FS121-D2-THIN, FS121-DB1-L3, FS121-O1-ENDS, FS121-O1-OUT, FS121-V2-SECTOR, FS121-D1-EROSION, FS121-V5-LOC, FS121-V5-RAY, FS121-D2-SYM, FS121-D4-HOLE, FS121-DB1-L6, FS121-DB1-L7, FS121-V3-CPI, FS121-V2-VT-W, FS121-D1-PENCILWIN, FS121-D2-PERFIN
+- merged here: FS111-W-NOREP → FS121-DB1-L3; FS121-D1-VT → FS121-V2-VT-W
+
+**Wave 7** (20 rows):
+- `Plane/RouteT`: FS114-N114-RD, FS114-N114-EULER, FS114-N2-FIVE, FS114-N114-ROOM, FS114-N2-ENDS, FS114-N3-JOINT, FS114-Y-EDGE
+- `Plane/FourColour/Bowtie`: FS114-N3-LOCAL, FS114-N4-LEMMAS, FS114-N5-GRING, FS114-Y2-BOWTIE, FS114-Y3-RSTOP, FS114-Y4-LUNE, FS114-Y4-RSTOPALL, FS114-Y6-HALF
+- `Plane/FourColour/Pinwheel`: FS114-N6-NOQ, FS114-N7-QOPP, FS129-SR3-E2ONE, FS114-Y5-PINALL, FS114-Y6-E2RED
+- merged here: FS114-N3-DR → FS114-Y4-RSTOPALL; FS114-N4-D → FS114-Y4-RSTOPALL
+
+**Wave 8** (22 rows):
+- `Plane/RingCalculus/Star`: FS116-N2-SIXRING, FS116-RING-GERM, FS116-N2-STAR, FS116-N2-ANTI, FS116-N2-RECIP, FS116-RING-TWIST-C
+- `Plane/RingCalculus/SemiHub`: FS116-N3-PAIR, FS116-N3-STAR2, FS116-N3-CONE, FS116-N3-CROSS, FS116-V5-OUT2, FS116-V5-QCOL, FS116-V5-DICHO, FS116-N3-SEMI, FS116-RING-TRANSFER-QC
+- `Plane/RingCalculus/Empty`: FS116-V6-HUBS, FS116-V6-ANTI, FS116-V6-HUG, FS116-V6-COUNT, FS129-SR3-EMPTY-NS, FS129-SR3-OUTERADJ, FS129-MR1-DOUBLETIP
+- merged here: FS116-Y4-EMPTY → FS129-SR3-EMPTY-NS; FS116-V6-ADJ → FS129-SR3-OUTERADJ; FS116-Y4-OBST → FS129-SR3-EMPTY-NS
+
+**Wave 9** (11 rows):
+- `Plane/Reduction`: FS111-C1-UNIF, FS111-C-SIX-M, FS111-M2-REDUCE-C, FS129-OR1-TOP5, FS111-V0-CLEAN, FS111-C1-PW
+- `Plane/Classes`: FS129-OR1-DISCF-NS, FS129-SR1-BENDANY, FS129-OR1-QFREE-CLASS, FS129-SR1-BENDLE3, FS129-SR3-QFREE-NS
+- merged here: FS116-S1-QF → FS129-SR3-QFREE-NS; FS129-SR2-QFCASE → FS129-SR3-QFREE-NS
+
+**Wave 10** (14 rows):
+- `Arith/StandingFive`: TC1-STANDING-FIVE
+- `Arith/CharacterColouring`: FS89-CL2, FS89-S0A-10, FS89-S0A-2
+- `Arith/SpectralInputs`: J45-N1, J45-N2, J45-SI-4, J45-SI-5, J45-SI-C, J45-SI-J, J45-SP-if, J45-SP-oi
+- `Arith/StationaryRatio`: X25B-L1, X25B-PZ
+
+### 7.3 What each wave's planning job must hold
+
+Every wave after the first opens with a planning job (`debruijn`, this lane), then its implementer, exactly as wave 1. The planner of wave N:
+
+1. **Reads its rows' derivation entries in full** (the CSV gives each row's address in `plans/LEAN-BACKLOG.md`, which gives the derivation file's line),
+   with their errata (C116 rows: FS112-C-ENDS, -C-DOUBLE, -N3-BASE, FS114-N2-ENDS, -N3-JOINT) and the merge notes the CSV's reason column cites.
+2. **Writes the wave's foundation first** (the column above), sorry-free, with a spec example per definition and an inhabitant per structure, on the
+   wave's branch, and runs `debruijn-domain-modeling` fresh over it. The definitions the rows' words need and the derivations never fixed are the
+   likeliest statement defects of the milestone (E1): wave 3's "germ" and "change point" at a point of `Γ ∩ ω(p)` where `Γ` crosses `ω(p)`
+   transversally; wave 4's "sector" and "degree" at a cusp; wave 6's "honest" and "`D-NF`"; wave 7's "simple" for a fragment's tiles that cross the
+   domain's boundary (stage 5 reads `Simple` literally, over all tiles — the narrower reading, tiles meeting the disc, would strengthen every class
+   statement; the wave-7/8 planner decides with Ephodos's reading, and reports).
+3. **States every row at the class its argument reads** (G92), reports each widening to Keryx as a generalization, and reads each statement back in
+   its record against the row.
+4. **Names every hypothesis from outside the backlog** in the declaration's docstring and in § 7.4's list; never imports a hand result of ours as an
+   axiom.
+5. **Checks vacuity at the seam**: a route lemma over a class the backlog proves empty (wave 8's V6 lemmas, ruling R4) carries
+   `VACUITY DECLARED:` with the emptiness theorem's name; every other class lemma needs an inhabitant or a note naming one (the constructions
+   FS116-Y2-SIXFRAG, FS114-Y2-BOWTIE, FS112-BOWTIE, FS111-M-R7, -W-SQ9, -M2-DISC7 are the milestone's inhabitants — schedule each before the lemmas
+   that need it).
+6. **Prices from its first two leaves**, not from this table.
+
+### 7.4 Hypotheses from outside the backlog, by name (inventory § What "Closed" means, item 3)
+
+| name | what it states | where it is used | its own path to the kernel |
+|---|---|---|---|
+| `Row134Base` | `[SokolovVoronov2025]` Cor. 1 almost everywhere for curved cubic maps, no `d = 2` exception, with Lemma 5, Prop. 18, Lemma 6's `< 9` branch and CUSP-BASE, in FS-110's repaired form (FS110-CB, -CD, -CE) | FS112-N3-BASE, and through it FS112-N3-DENSE3, FS114-CV-EXISTS, FS129-OR1-LOCALDENSE (wave 5) | a separate planner-and-implementer job: FS-110's module (stub to mint) |
+| `Row130Collapse` | `χ(ℝ²) = χ_m⁰(ℝ²)` (row 130, given MR) | FS111-C-SIX-M's and FS111-M2-REDUCE-C's last clauses (wave 9) | FS-113 (MR in Lean) with FS-103's collapse |
+| `Row123Chain` | row 123's chain (`min(L(F), 5) ≤ χ(F²)` for every real number field, given MR) | TC1-STANDING-FIVE's MR clause (wave 10) | FS-101 |
+
+Formalized here instead of named: FS-103's N-EASY (`χ(ℝ²) ≤ χ_m⁰(ℝ²)`, no MR; wave 2) and FS111-M-REDUCE-I (wave 9).
+
+### 7.5 How `main`'s gate stays meaningful between waves (the brief's design question; Keryx accepted it ahead of this argument)
+
+**The rule: nothing with a `sorry` is ever on `main`.** The foundation of each wave lands on `main` only sorry-free and gate-green (as stage 5's
+did); each wave's skeleton lives on its own branch `fs131-wN`, built in its own worktree (§ 6.1's recipe), and reaches `main` only by a merge whose
+commit passes the full gate. Why this and not the alternatives:
+
+- **Modules kept out of the import surface** does not work here: `scripts/build.sh` builds every file under `Proofs/` (`scripts/build_order.py`
+  globs `Proofs/**/*.lean`), so an unimported skeleton still compiles, warns `declaration uses 'sorry'`, and turns "linters silent" red for every
+  milestone running beside this one. Moving skeletons outside `Proofs/` would change their module names at landing — every import rewritten at
+  the moment the wave is supposed to be done.
+- **A branch per wave** keeps `main` green and its gate's counts honest (they move only at a landing, by exactly the wave's declarations), lets
+  another milestone's job build `main` at any time, and makes "landed" a fact about one merge commit — what the inventory's announcement rule reads.
+  Its costs are small and known: a 4.4 GB copy per worktree (~20 s), and append-only conflicts in `ARCHITECTURE.md`, `Proofs.lean` and
+  `scripts/Axioms.lean` at the merge (resolved by keeping both sides), after which the gate is re-run on the merge commit.
+- **The one shared-resource rule**: one Lean build at a time across all trees, each under `scripts/slot.py`; two concurrent waves alternate builds.
+
+When a wave lands, its planner's record (or the implementer's report) gives Keryx the drafts for `CLAUDE.md` § Trust ledger and § The gate counts,
+and the `LEDGER.md` regrades, read from `build/gate/*/latest` on the merge commit (the inventory's announcement rule).
+
+### 7.6 The provisional bearing, rewritten (for the stub's § Bearing on the answer — Keryx's file)
+
+*Draft:* None by itself: FS-131 moves no value of χ. It is the promotion path for every [hand] result the frontier rests on, and the bar for
+publishing any of them. Its first product is the foundation every regularity-wall statement is now written over (`Proofs/HadwigerNelson/Plane/`);
+the formalization has so far found no statement defect among the rows it has stated (wave 1, 14 rows), four generalizations, and one backlog
+defect (FS114-K1, a gap-verdict entry entered as a row, now excluded).
