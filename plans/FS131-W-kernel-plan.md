@@ -682,3 +682,155 @@ probe's "target is out-of-date" line expected), 8 m 31 s, exit 0 (`build/gate/bu
 `data/fs131/w2/build-stage8b.log`). The run before the two refinements of § 9.1: OK, 444 of 444, 5 rebuilt, 14 with warnings, 8 m 31 s
 (`build/gate/build/20261004T112750Z-3099938.log`, `data/fs131/w2/build-stage8.log`). Iteration used `lake env lean` (lakefile options passed) with
 a scratch olean for `NoFourFive` under `Steps` — never as evidence.
+
+## Stage 9 — SAVED: the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), the plan per new leaf, the handoff
+
+### 9.1 What the pass found
+
+**The space.** No new leaf recurses; every obligation is a local geometric or topological check, and the global claims (E1-COVER, E1-BAD, E1-NO45)
+differ only in which local checks they assemble. Five engines carry everything new (each a child some leaves already cite, signatures in § 9.3):
+
+- **Engine E, the exclusion**: a point of `j`'s class lying in `shadow (F.region j)` contradicts `F.Valid` (two interior points of colour `j` at
+  distance `1`). Every kill ends here (`not_mem_coloursAt_of_collarAt`, `not_mem_range_of_crossesAt`); E1-SEE is its closure form (wave 1).
+- **Engine F, the value `1` on a connected set**: wave 1's `dist_lt_one_of_isPreconnected` (if a preconnected set holds a point nearer than `1` to
+  `z` and no point at distance `1`, all its points are nearer than `1`). It closes `dist_le_one_of_subset_closure` and
+  `collarAt_shadow_of_parabola`, as it closes W's `collarAt_shadow_*`.
+- **Engine G, local constancy on an interval**: `IsPreconnected.constant` (discrete codomain) on `Ioo θ₁ θ₂` — both cases of
+  `exists_closure_colour_of_arc` and the colour of the parabola in `exists_parabola_region`.
+- **Engine H, finitely many colours give a uniform radius**: `Filter.eventually_all` over `Fin k` — `exists_side_colours_of_not_crossesAt` and the
+  closedness half of the clopen argument.
+- **Engine I, directions mod `2π`**: `SectorsAt.exists_mem_Ico` (every direction in one half-open sector) and the antipodal disjointness (§ 9.3,
+  E1-BAD's children).
+
+**Two statements derived at this pass** (each found by attempting the proof and reading the stuck step):
+1. `exists_side_colours_of_not_crossesAt` now also concludes **`F.coloursAt (v + e θ) = {A, B}`**: the closedness half of the clopen argument
+   needs "a non-crossing point lacking `E` carries exactly its two side colours" and could not get it from the side colouring alone without
+   repeating the density argument.
+2. `exists_parabola_region` now names **one parabola, curvature `1/2`**, and needs **no tangent-arc analysis**: a parabola lies on no circle and
+   no line, so each arc meets it in at most four points (a nonzero polynomial of degree at most four in `x`); finitely many arcs pass near `v`
+   (local finiteness), so the parabola's points `0 < x < r`, `r` small, avoid every arc and lie in one tile. Its curvature `1/2 ∈ (−1, 1)` is all
+   the second-order lemma reads: if its colour is the one after the edge, the normal `β + π/2` is good, else `β − π/2`. (The stage-7 description
+   with tangent curvatures `K` and the colour function `f(κ)` is the same argument at every `κ`; one `κ` suffices.) The leaf drops from H− to M.
+
+**Measures.** None needed: no recursion. The pigeonhole is a cardinality comparison; the horn chain of `aeMap6_merged` is an extremal choice (W, § 4.2).
+
+**Prove / test / assume.** *Prove*: every new leaf. *Test*: `CrossesAt`'s spec example and adversary, the sharpness example of
+`dist_le_one_of_subset_closure` (all proved, in the module); `tools/fs131_w2_bad_pi.py` (the `π`-sector with two exceptional points — the unsampled
+member of E1-BAD's count); `tools/fs131_w2_decls.py` (records both ways). *Assume*: nothing new — the chain's one outside dependency is still
+`lebesgue_covering_square` (FS131-LEB) through `ts_t` and `exists_three_le_sectors`.
+
+**Mutation audit** (statement level, by hand): dropping `hπ` from E1-BAD breaks it (a sector wider than `π` has an arc of normals with both branches in
+it: no finite `K`); dropping `hc` breaks "`c i ≠ c j`"; dropping E1-COVER's `habs` breaks it (with two colours absent a crossing region may
+alternate, E1's § 3.10 `k = 3` attack); dropping `hpos` breaks E1-CROSS (a horn has no direction to see by); `≤ 1` → `< 1` in
+`dist_le_one_of_subset_closure` is false (its sharpness example); `K.card ≤ 5` → `≤ 6` in `exists_Ioo_avoiding` is false (six points at spacing
+`π/3`). **The caveat W recorded holds here too**: every statement whose hypotheses include `k ≤ 5`, `F.Valid` and `F.IsPlaneMap` is provable from
+`aeMap6` itself, so its mutation audit is empty — those statements conclude `False` and are refutations, not structure lemmas.
+
+### 9.2 Mathlib and library names confirmed with `#check` at the pin (`v4.32.0`, scratch file, 2026-10-04)
+
+`Metric.mem_closure_iff`, `closure_ball`, `IsPreconnected.image`, `isPreconnected_Ioo`, `isPreconnected_Icc`, `IsPreconnected.Icc_subset`,
+`IsPreconnected.constant`, `IsPreconnected.subset_left_of_subset_union`, `Complex.continuousAt_arg`, `Complex.norm_mul_exp_arg_mul_I`,
+`Real.cos_sub_pi_div_two`, `Real.cos_add_pi_div_two`, `Real.sin_pos_of_pos_of_lt_pi`, `Real.sin_neg_of_neg_of_neg_pi_lt`, `Real.sin_lt`,
+`Real.two_mul_sin_mul_cos`, `Set.Ioo_infinite`, `Set.Infinite.exists_notMem_finset` (the `notMem` spelling at this pin), `Set.Finite.isClosed`,
+`Set.Finite.exists_finset_coe`, `Finset.exists_ne_map_eq_of_card_lt_of_maps_to`, `Finset.card_image_le`, `Fintype.card_le_of_injective`,
+`Set.ncard_le_ncard`, `Set.ncard_eq_two`, `toIcoMod`, `toIcoMod_mem_Ico`, `Filter.eventually_all`, `IsCompact.exists_isMinOn`, `IsClosed.preimage`,
+`Continuous.dist`. Library: `dist_ne_one_of_mem_of_mem_closure` (`Plane/Closure`), `dist_lt_one_of_isPreconnected` (`Plane/Diameter`),
+`ArcMap.Valid.unitPairsNull_region` (`Plane/Tiles`), `ArcMap.dense_interiorPts`, `ArcMap.coneAt_region_eq_biUnion`,
+`Arc.finite_inter_sphere_or_eq_circ` (`Plane/LocalStructure`), `ArcMap.isOpen_region`, `ArcMap.continuousOn_col` (`Plane/LocalMap`),
+`dist_ringPt_ringPt_cmp_one` (`Plane/Chord`), `collarAt_shadow_inner`, `isPreconnected_annSector` (`Plane/Woodall/Collar`), `framePt`,
+`tanHeight` (`Plane/ValidMap/Basic`). **Not found**: `Set.ncard_le_two` (use `Set.ncard_eq_two` or `Set.ncard_le_ncard` against a pair).
+
+### 9.3 The plan per new leaf (E easy, M moderate, H hard; prices for an agent — re-price from the first two leaves)
+
+**`Plane/Woodall/NoFourFive` — region-only tools**
+
+| leaf | route | children / names | price |
+|---|---|---|---|
+| `dist_le_one_of_subset_closure` | by contradiction (`1 < dist x y`); `z ∈ U` with `dist x z < min 1 ((dist x y − 1)/2)` (`Metric.mem_closure_iff` at `hSU hx`); Engine F with `s₀ = x`, `h := fun s hs => (dist_ne_one_of_mem_of_mem_closure hU hnull hz (hSU hs))` gives `dist z y < 1`; but `dist z y ≥ dist x y − dist x z > 1` | `dist_lt_one_of_isPreconnected`, `dist_ne_one_of_mem_of_mem_closure` | E |
+| `exists_mem_collar_of_dist_lt` | rotate: `w = (z − u) * conj (e ψ)`, near `1`; `Complex.continuousAt_arg` at `1` (`Complex.one_mem_slitPlane`, `arg_one`) gives `ε₁` with `‖w − 1‖ < ε₁ → |arg w| < h`; `ε = min h ε₁`; `z = u + ‖z − u‖ * e (ψ + arg w)` (`Complex.norm_mul_exp_arg_mul_I`, `e_add`); radius `‖z − u‖ = dist z u ∈ (1 − h, 1)` or `(1, 1 + h)` | — | M− |
+| `exists_Ioo_avoiding` | `K = ∅`: `θ = 0`. Else `κ₀ ∈ K`; for `κ ∈ K` its arc index `j κ = ⌊(toIcoMod two_pi_pos κ₀ κ − κ₀) / (2π/5)⌋ ∈ {0,…,4}`; `(K.erase κ₀).image j` has card `≤ 4 < 5` (`Finset.card_image_le`), so some `j₀ ∈ range 5` is missed; `θ = κ₀ + 2π j₀/5`. A hit `κ + 2πm ∈ Ioo θ (θ + 2π/5) ⊆ Ioo κ₀ (κ₀ + 2π)` is `κ`'s reduction (`toIcoMod` is the unique representative in `[κ₀, κ₀ + 2π)`), so `j κ = j₀` and `κ ≠ κ₀` (`κ₀` reduces to `κ₀ ∉ Ioo θ …`) | `toIcoMod_mem_Ico`, `toIcoMod` uniqueness (`toIcoMod_eq_iff` or the defining identity), `Int.floor_eq_iff` | M |
+| `mem_coneAt_annSector` | for `ε`: `z = v + t * e γ`, `t = min r ε / 2`; `z ∈ annSector` (radius `t ∈ (0, r)`, angle `γ`), `z ≠ v`, `dist z v = t < ε`, `(z − v)/‖z − v‖ = e γ` | — | E |
+| `collarAt_shadow_of_parabola` | frame coordinates of `z = v + ρ' e(β + σπ/2 + τ)`: `a = −σρ' sin τ`, `b = σρ' cos τ` (`cos (σπ/2 + τ) = −σ sin τ`, `sin (σπ/2 + τ) = σ cos τ` for `σ = ±1`); for the parabola point `w x = framePt v β x (κx²/2)`, `g x := ‖w x − z‖² − 1 = x²(1 − σκρ' cos τ) + 2σρ' sin τ · x + κ²x⁴/4 − (1 − ρ'²)` (a child, `norm_sq_framePt_sub`). **Inner** (`σκ < 1`): `m := 1 − max (σκ) 0 > 0`; fix `x₀ = r/2`; for `h ≤ m x₀² / (4 (x₀ + 1))` (and `h < π/2` so `cos τ > 0`), `g x₀ ≥ m x₀²/2 > 0` on the collar; `g x → ρ'² − 1 < 0` as `x → 0`: a point of the arc nearer than `1` to `z`; Engine F on the arc `{w x : x ∈ Ioc 0 x₀}` (preconnected image) forces a point at distance `1`. **Outer** (`σκ > 1`): `m' := (σκ − 1)/2`; `x₀ < min r (√m' / |κ|)` so `κ²x₀⁴/4 < m'x₀²/4`; for small `h` (`cos h ≥ …`), `g x₀ < 0` while `g x → ρ'² − 1 > 0`: same | `norm_sq_framePt_sub` (child: the frame distance formula); Engine F | M |
+
+**`Plane/Woodall/NoFourFive` — map-level**
+
+| leaf | route | children / names | price |
+|---|---|---|---|
+| `not_mem_coloursAt_of_dist_eq_one` (E1-SEE) | `fun hY => dist_ne_one_of_mem_of_mem_closure (F.isOpen_region j) (hF.unitPairsNull_region j) hq hY hqY` | — | E |
+| `not_mem_coloursAt_of_collarAt` (robust E1-SEE) | `hY : v + e ψ ∈ closure (F.region j)`; thicknesses `h₁` (inner), `h₂` (outer), `h = min h₁ h₂`; `ε` from `exists_mem_collar_of_dist_lt v ψ h`; `q ∈ F.region j` with `dist (v + e ψ) q < ε`; if `dist q v < 1`, `q` lies in the inner collar (`collar_subset_collar` to `h₁`) hence in `shadow (F.region j)`: Engine E; `> 1` likewise; `= 1`: `F.region j` open, so `q' = v + (1 − t) (q − v)` for small `t > 0` is in the class, nearer than `ε` to `v + e ψ` and inside — Engine E | `exists_mem_collar_of_dist_lt`, `collar_subset_collar`, Engine E | M− |
+| `SectorsAt.collarAt_shadow_inner_of_mem`, `_outer_of_mem` (E1-RAY) | `δ = min (γ − d i.castSucc) (d i.succ − γ) / 2`; `h.2.2.2.2.1 i δ` gives `r` and `R = annSector v 0 r (d i.castSucc + δ) (d i.succ − δ) ⊆ F.region (c i)`; `collarAt_shadow_inner (isPreconnected_annSector …) (mem_coneAt_annSector …) hcos`; monotonicity of `shadow` and of `CollarAt` in the set | `mem_coneAt_annSector`, W's `collarAt_shadow_inner/_outer` | E |
+| `SectorsAt.not_mem_range_of_crossesAt` (E1-CROSS) | `rintro ⟨i, rfl⟩`; a direction `γ` in sector `i`'s open range with `cos (γ − θ) ≠ 0` (the midpoint, or the midpoint plus a small `ε < π`: `cos` vanishes at points `π` apart); `cos < 0`: E1-RAY inner, `exists_mem_collar_of_dist_lt`, a point of `hX.1` in the collar — Engine E; `> 0`: outer with `hX.2` | E1-RAY, Engine E | M− |
+| `exists_side_colours_of_not_crossesAt` | `Y = v + e θ`. Engine H: `∀ᶠ z in 𝓝 Y, ∀ j ∉ F.coloursAt Y, z ∉ F.region j`. `Cin = {j | Y ∈ closure (F.region j ∩ ball v 1)}`, `Cout` likewise: nonempty (if `Cin = ∅`, Engine H gives a disc about `Y` whose inside part has no interior point, against density — `dense_interiorPts`, `hP`, and `ball Y δ ∩ ball v 1` open nonempty); `Cin ∪ Cout ⊆ coloursAt Y` (`closure_mono`), disjoint (`hnc`), `ncard ≤ 2`: both singletons `{A}`, `{B}`, `A ≠ B`. Engine H again: a disc about `Y` whose inside interior points are `A`, outside `B`; an interior point on `ω(v)` has a disc in its class (open) meeting both sides: `A = B`, impossible. `coloursAt Y = {A, B}`: `⊆` by the side colouring (no other colour near `Y`), `⊇` by `Cin`, `Cout` | Engine H, `dense_interiorPts`, `Set.ncard_eq_two` | M |
+| `exists_closure_colour_of_arc` | **Case A**, no crossing on the arc: the inside colour `A_θ` (from the previous leaf) is locally constant on `Ioo θ₁ θ₂` (for `θ'` with `v + e θ'` within half of `θ`'s radius, the inside interior points near `v + e θ'` are `A_θ`, and they exist by density), so constant (Engine G, `ContinuousOn` of a locally constant function into `Fin k`); every `v + e θ` is in the closure of the inside points, of colour `X = A_{θ₀}`. Empty arc: `X = F.col 0`. **Case B**, a crossing at `θ₀` of colour `E`: `g θ = decide (E ∈ F.coloursAt (v + e θ))` is locally constant — where `E ∈`, by contradiction: frequently `E ∉` near `θ`; such `θ'` do not cross (a crossing colour is `E` by `hcross`, and crossing gives `E ∈`), so the previous leaf gives `coloursAt = {A, B}` with `E ∉ {A, B}`; finitely many pairs, so frequently one pair `(A, B)`; `{θ | A ∈ coloursAt (v + e θ)}` is closed (`IsClosed.preimage` of `isClosed_closure` under `θ ↦ v + e θ`), so `A, B ∈ coloursAt (v + e θ)` with `E`: three colours, against `hnb`; where `E ∉`: the same closedness. So `g` is constant, `true` at `θ₀` | the previous leaf; Engines G, H; `Filter.Frequently` + finite pigeonhole (`Finite.exists_... `, or `Filter.frequently_or_distrib` over the finite set of pairs) | M+ |
+| `SectorsAt.false_of_ncard_le_two_on_arc` (E1-COVER) | crossing colours avoid `range c` (E1-CROSS), so by `habs` they are one colour: `hcross`; `exists_closure_colour_of_arc` gives `X`; `a = θ₁ + δ`, `b = a + min (θ₂ − θ₁ − 2δ) π` with `δ` small so `π/3 < b − a ≤ π`; `S = (fun θ => v + e θ) '' Icc a b` (preconnected) `⊆ closure (F.region X)`; `dist (v + e a) (v + e b) > 1` (`dist_ringPt_ringPt_cmp_one`, `ringPt v θ = v + e θ`); `dist_le_one_of_subset_closure` with `F.isOpen_region X`, `hF.unitPairsNull_region X` | E1-CROSS, the previous two leaves | M− |
+| `SectorsAt.exists_mem_Ico` | `D' = toIcoMod two_pi_pos (d 0) D ∈ Ico (d 0) (d 0 + 2π)`, `D' = D + 2π m` (`toIcoMod`'s defining identity, `m = −toIcoDiv …`); `d 0 + 2π = d (last n)` (`h.2.2.1`); the largest `i` with `d i.castSucc ≤ D'` (`Finset.max'` of a nonempty filter of `Fin n`, `0 < n` from `h.1`) has `D' < d i.succ` (else `i + 1` qualifies, or `i` is last and `d (last n) > D'`) | `toIcoMod_mem_Ico`, `Finset.max'` | M− |
+| `SectorsAt.not_mem_coloursAt_of_mem_Ioo` (E1-BAD, interior) | the point `q = v + e ψ + e (ψ + π ∓ 2φ)` of `ω(v + e ψ)` equals `v + 2 sin φ · e (D ± φ)` (`D = ψ ∓ π/2`; the identity `1 − e(2φ) = 2 sin φ · e(φ − π/2)`); `δ` the distance of `D + 2πm` to the sector's ends, `r` the truncated sector's radius; `φ = min (δ/2) (r/4)`: `0 < 2 sin φ < r` (`Real.sin_pos_of_pos_of_lt_pi`, `Real.sin_lt`), angle within `δ`, so `q ∈ F.region (c i)` (`e`'s `2π`-periodicity, `e_add_two_pi`); `dist q (v + e ψ) = 1`; E1-SEE | E1-SEE | M− |
+| `SectorsAt.exists_parabola_region` | **κ = 1/2**, no tangent-arc analysis (9.1 item 2). (a) `F.locallyFinite v`: `t ∈ 𝓝 v` meeting finitely many arcs. (b) each nondegenerate arc meets the parabola `P = {framePt v β x (x²/4)}` at finitely many `x` — child **`Arc.finite_inter_parabola`**: the arc lies on a circle `‖w − c₀‖ = ρ`, `ρ > 0`, or a line `n · (w − p₀) = 0`, `n ≠ 0`; substituting `(x, x²/4)` gives a polynomial in `x` with leading coefficient `1/16` (circle: `(x²/4)²`) or, for a line, `n_y/4`, or then `n_x ≠ 0` (never the zero polynomial), so finitely many roots. (c) `r` below every such positive root and inside `t`: the points `0 < x < r` are interior points (`hP`). (d) the arc `{w x : x ∈ Ioo 0 r}` is preconnected and in `F.interiorPts`, so `F.col` is constant on it (Engine G with `F.continuousOn_col`): one colour `j`. (e) `d i.castSucc ∈ coneAt (F.region j) v` (the directions `(w x − v)/‖w x − v‖ → e β`); by `SectorsAt`'s cone clause, `β ∈ angleIcc` of a sector of colour `j`; child **`SectorsAt.eq_of_edge_mem_angleIcc`**: with positive angles, only the sectors `i` and `(finRotate n).symm i` hold `d i.castSucc` mod `2π` in their closed range | `Arc.finite_inter_parabola` (M−), `SectorsAt.eq_of_edge_mem_angleIcc` (M−), `ArcMap.continuousOn_col`, `IsPreconnected.constant` | M |
+| `SectorsAt.exists_normal_collarAt` (the refined second-order lemma) | `exists_parabola_region` gives `r`, `j`. `j = c i`: `σ = 1`; `collarAt_shadow_of_parabola` (`σκ = 1/2 < 1`) puts an inner collar about `β + π/2` in `shadow (F.region (c i))`; E1-RAY inner with `γ` in the previous sector just below `β` (`cos (γ − β − π/2) = sin (γ − β) < 0`) puts one in `shadow (F.region (c (symm i)))`; intersect (thickness the minimum, `collar_subset_collar`). `j = c (symm i)`: `σ = −1`, `σκ = −1/2 < 1`; E1-RAY inner for sector `i` with `γ` just above `β` (`cos (γ − β + π/2) = −sin (γ − β) < 0`). For `i = 0` the previous sector is `n − 1`, its range `(d (n−1), d 0 + 2π)`: shift `γ` by `2π` | `exists_parabola_region`, `collarAt_shadow_of_parabola`, E1-RAY | M− |
+| `SectorsAt.absent_at_normal` | `σ = 1`: the sector after the edge has `γ` just above `β` with `cos (γ − β − π/2) = sin (γ − β) > 0`: E1-RAY **outer** in `shadow (F.region (c i))`; with `hs`'s inner part, `not_mem_coloursAt_of_collarAt` kills `c i` (right disjunct). `σ = −1`: the previous sector, `cos (γ − β + π/2) = −sin (γ − β) > 0` for `γ` just below `β`: outer in its colour's shadow; kills `c (symm i)` (left disjunct) | E1-RAY, robust E1-SEE | E |
+| `SectorsAt.exists_two_absent` (E1-BAD) | For each edge `i`, `σ_i` from `exists_normal_collarAt` (choice); `ψ_i := d i.castSucc − σ_i π/2` (the uncertified normal). Angles `≤ π`, positive, `n ≥ 3`: at most one sector `i₀` of angle `π` (two would sum to `2π`); if it exists, override `ψ_{i₀} := d i₀.castSucc + π/2`, `ψ_{i₀⁺} := d i₀.castSucc − π/2` (`i₀⁺ = finRotate n i₀`, whose edge is `d i₀.succ ≡ d i₀.castSucc + π`) — both normals of both its edges. `K := univ.image ψ`, card `≤ n` (`Finset.card_image_le`). Off `K`: for `D₊ = ψ + π/2` and `D₋ = ψ − π/2`, `exists_mem_Ico` gives a sector; interior → `not_mem_coloursAt_of_mem_Ioo` kills its colour; an edge `i` → `ψ ≡ d i ∓ π/2` is a normal of edge `i`, not `ψ_i` (off `K`), so it is the certified one (and `i` bounds no `π`-sector): `absent_at_normal` kills a colour of `{c (symm i), c i}`. Each kill lies in `N(D)`, the sectors whose closed range holds `D` mod `2π`. **Distinct**: child **`SectorsAt.eq_pi_of_mem_antipodal`** — a sector whose closed range holds `D` and `D + π` (mod `2π`) has angle `π` and ends at `D`, `D + π`; off `K` no such sector, so `N(D₊) ∩ N(D₋) = ∅` and injectivity gives `c i ≠ c j` | `exists_normal_collarAt`, `absent_at_normal`, `not_mem_coloursAt_of_mem_Ioo`, `exists_mem_Ico`; children `SectorsAt.eq_pi_of_mem_antipodal` (M−), `SectorsAt.at_most_one_pi` (E) | M+ |
+
+**`Plane/Woodall/Steps` — the re-pointed and new leaves** (the rest of § 4.5's table stands)
+
+| leaf | route | children / names | price |
+|---|---|---|---|
+| `false_of_four_le_sectors` (E1-NO45) | `hN v n d c h (by omega)`: `c` injective, angles `≥ π/3`; `n ≤ k ≤ 5` (`Fintype.card_le_of_injective`); angles `≤ π` (child `SectorsAt.sum_angles`: `∑ i, (d i.succ − d i.castSucc) = 2π`, telescoping with `h.2.2.1`; the other `n − 1 ≥ 3` angles sum to `≥ π`); `habs` (two absent colours leave `range c` in `k − 2 ≤ 3` colours); `exists_two_absent` → `K`, `K.card ≤ n ≤ 5`; `exists_Ioo_avoiding K` → `θ`; by contradiction with `false_of_ncard_le_two_on_arc` on `(θ, θ + 2π/5)` (`2π/5 > π/3`), some `θ'` there has `3 ≤ ncard`; `θ'` is off `K`, so two of `v`'s colours are absent: `coloursAt (v + e θ') ⊆ univ \ {c i, c j}`, `ncard ≤ k − 2 ≤ 3`, so `= 3`; `exists_sectorsAt hP`, `coloursAt_eq`: a picture `(n', d', c')` with `3 ≤ ncard (range c') ≤ n'` (`Set.ncard_range_le`… or `Finite.card_range_le`); `hN`: injective, so `n' = 3`; `subst`; `step6` with `hN`'s angles | `SectorsAt.sum_angles` (E) | M− |
+| `aeMap6_merged` | W's route minus `step5_eq`: a zero-angle sector whose next has positive angle exists if any zero-angle sector does; its neighbours differ (`hM`), `step5_lt` kills it; so no horns, `c` injective (`hM`), and `step5_lt` gives every angle `≥ π/3` (`not_lt`): `WoodallNormal` for the merged map (private child, `VACUITY DECLARED`, W § 3.1); `aeMap6_normal` | `step5_lt`, `aeMap6_normal` | M |
+| `aeMap6_normal` | `exists_three_le_sectors`; `hN` gives `c` injective, `n ≤ k ≤ 5`; `n = 3`: `subst`, `step6` (angles from `hN`); `4 ≤ n`: `false_of_four_le_sectors` | — | E |
+| `aeMap6_of_condition5` | `aeMap6 F hk hF hP` | — | E |
+| `step6` | W's route (§ 4.5), its hypothesis weakened to `π/3 ≤` (it read only positivity and one angle `< 2π/3`); the switching normal from `SectorsAt.exists_normal_collarAt` (one per edge), in place of W's "unless the edge is a unit arc" | `exists_normal_collarAt` | H− (unchanged) |
+
+**Planner's checks of this stage.** `dist_le_one_of_subset_closure` and E1-SEE proved in a scratch file against the built library (both close as
+planned; `data/fs131/w2/planner-checks.lean`, under the primed names — the implementer may paste them); the frame distance formula of
+`collarAt_shadow_of_parabola`, `‖w x − z‖² − 1 = x²(1 − σκρ cos τ) + 2σρ sin τ · x + κ²x⁴/4 − (1 − ρ²)` for `z − v = ρ e(β + σπ/2 + τ)`, verified
+symbolically (sympy, both `σ = ±1`: difference `0`).
+
+### 9.4 Re-pricing
+
+`Plane/Woodall/NoFourFive`: 20 leaves — 6 E, 9 M− or M, 2 M+ (`exists_closure_colour_of_arc`, `exists_two_absent`) — plus 5 children named above
+(`norm_sq_framePt_sub`, `Arc.finite_inter_parabola`, `SectorsAt.eq_of_edge_mem_angleIcc`, `SectorsAt.eq_pi_of_mem_antipodal`,
+`SectorsAt.at_most_one_pi`; and `SectorsAt.sum_angles` in `Steps`). Nothing in it is H. `Plane/Woodall/Steps`: 11 leaves, none open; its hard ones are
+W's (`exists_sectorsAt` H, `exists_woodallMerged` H+, `step6` H−). The chain's hardest leaves are where they were (`exists_woodallMerged`,
+`exists_sectorsAt`); E1's replacement of steps 5 (equality), 7 and 8 costs about one implementer session, against two open leaves before.
+
+### 9.5 The handoff to the chain's implementer (§ 4.7's form, current; it supersedes § 4.7)
+
+**Where it is.** Branch `fs131-ww`, worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-ww` (`.lake/packages` a symlink to the main tree's,
+`.lake/build` its own copy — never replace it with a symlink), on wave 4's full skeleton `f620977c`. Four modules: `Plane/Woodall/Basic` (sorry-free;
+`WoodallNormal` now `π/3 ≤`), `Plane/Woodall/Collar` (15 `sorry` leaves, unchanged), `Plane/Woodall/NoFourFive` (20 `sorry` leaves, new; one
+definition and three examples proved), `Plane/Woodall/Steps` (11 `sorry` leaves). **No open leaf**: every leaf has a planned route (§ 4.5 for W's,
+§ 9.3 for the new and re-pointed). The build is green with only `sorry` warnings (§ 8.6). `Proofs.lean`, `ARCHITECTURE.md` and
+`scripts/Axioms.lean` are current; `tools/fs131_w2_decls.py --check` lists and checks the 53 records both ways (missing and stale).
+
+**The build**: from inside the worktree, `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
+./scripts/build.sh`; never `lake build`. For iteration, `lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false`, against scratch oleans for
+modules downstream of an edited one (mirror `.lake/build/lib/lean/Proofs` with `cp -rs`, write each edited module's olean there with `lean -o`, the
+scratch first on `LEAN_PATH`) — never as evidence.
+
+**Dependencies not yet landed.** Waves 3 and 4 (`Plane/LocalStructure`, `Plane/SVMap`'s `lemmaL`, `ts_t`, …) are skeletons on their branches: this
+chain cites their statements as committed at `f620977c`; merge their branches in when they land, or earlier to use their proofs, resolving the
+append-only lines of `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean`. `lebesgue_covering_square` is FS131-LEB's. Wave 1's
+`dist_ne_one_of_mem_of_mem_closure`, `dist_lt_one_of_isPreconnected` and `Valid.unitPairsNull_region` are proved (on `main`).
+
+**The order.** (1) `Collar`'s foundation leaves as § 4.7 had them (`isPreconnected_annSector`, `isOpen_collar`, `collar_subset_collar`,
+`isOpen_annSector`, `exists_collar_of_collarAt` — the first two re-price the module), and `collarAt_shadow_inner/_outer`. (2) `NoFourFive`'s
+region-only tools: `dist_le_one_of_subset_closure`, `mem_coneAt_annSector`, `exists_mem_collar_of_dist_lt`, `collarAt_shadow_of_parabola`,
+`exists_Ioo_avoiding`. (3) Its map-level leaves: E1-SEE, the robust kill, E1-RAY, E1-CROSS, `exists_side_colours_of_not_crossesAt`,
+`exists_closure_colour_of_arc`, E1-COVER; `exists_mem_Ico`, `not_mem_coloursAt_of_mem_Ioo`, `exists_parabola_region` (children
+`Arc.finite_inter_parabola`, `SectorsAt.eq_of_edge_mem_angleIcc`), `exists_normal_collarAt`, `absent_at_normal`, E1-BAD. (4) The rest of `Collar`
+(§ 4.7's order: change points, landings, Engines A–D, `woodall_step4`, `townsend_lemma`, the adversary). (5) `Steps`: `coloursAt_eq`,
+`exists_sectorsAt`, `step5_lt`, `false_of_four_le_sectors`, `aeMap6_normal`, `aeMap6_merged`, `exists_three_le_sectors`, the corollaries; then `step6`;
+`exists_woodallMerged` last (re-price it first; ask Keryx for a separate job if it outgrows the context).
+
+**What the implementer may and may not change.** It may add children anywhere (§ 4.1's engines, § 9.3's named children with the statements given or
+fixed by it and recorded back, the private "merged ⇒ normal" with `VACUITY DECLARED`), supporting lemmas in the foundation modules (statements of other
+waves unchanged), and imports (updating `ARCHITECTURE.md`, `scripts/Axioms.lean`, then `tools/fs131_w2_decls.py --check`). It may not change any
+statement of § 3.1's table that § 8.4 kept, any statement of § 8.4–8.5, or any definition of `Plane/Woodall/Basic` or `Plane/Woodall/NoFourFive`. A
+statement that cannot be proved as written comes back through Keryx with the stuck goal or the counterexample.
+
+**Vacuity and inhabitants** (§ 3.1, § 8.3): every theorem over valid five-coloured maps of the plane concludes `False` (skipped by the scan); the
+others are inhabited by `const_sectorsAt` and the brick map (`sevenBrickMap`, `sevenBrickMap_valid`, `sevenBrickMap_isPlaneMap`) at a corner; the one
+new definition (`CrossesAt`) has its spec example and adversary. No new carrier for `scripts/Vacuity.lean`.
+
+**How the chain lands.** Unconditionally (inventory item 98: E1 closed the GAPs): when every leaf is proved and the gate passes, after waves 3 and 4
+land, by merging `main` and the implementer's gate. The open-leaf landing form (b) of § 4.7 is withdrawn.
