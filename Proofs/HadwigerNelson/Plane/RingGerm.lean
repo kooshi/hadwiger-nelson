@@ -781,17 +781,330 @@ theorem echo (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X : Fin k} (hcw : GermIn p ψ 
 
 /-! ## FS116-V5-U1 (any valid map) -/
 
+/-- A side of a ring arc: if every colour whose class meets the open set `O` arbitrarily near `a` is `c`, then a small ball
+about `a` meets `O` only inside the closure of the class of `c` (the interior points are dense). -/
+theorem side_ball_subset_closure {O : Set ℂ} (hO : IsOpen O) {a : ℂ} (ha : a ∈ F.dom) {c : Fin k}
+    (hc : ∀ d, a ∈ closure (F.region d ∩ O) → d = c) : ∃ ε > 0, ball a ε ∩ O ⊆ closure (F.region c) := by
+  classical
+  have hev : ∀ᶠ y in 𝓝 a, ∀ d, d ≠ c → y ∉ F.region d ∩ O := by
+    refine Filter.eventually_all.2 fun d => ?_
+    by_cases hd : d = c
+    · exact Filter.Eventually.of_forall fun y h => absurd hd h
+    · have : a ∉ closure (F.region d ∩ O) := fun h => hd (hc d h)
+      exact (isClosed_closure.isOpen_compl.eventually_mem this).mono fun y hy _ hy' => hy (subset_closure hy')
+  obtain ⟨ε, hε, hball⟩ := Metric.mem_nhds_iff.mp (hev.and (F.isOpen_dom.mem_nhds ha))
+  refine ⟨ε, hε, ?_⟩
+  rintro y ⟨hya, hyO⟩
+  rw [_root_.mem_closure_iff]
+  intro o ho hyo
+  have hyd : y ∈ F.dom := (hball hya).2
+  have hy' := F.dense_interiorPts hyd
+  obtain ⟨w, hw, hwI⟩ := _root_.mem_closure_iff.mp hy' (o ∩ (ball a ε ∩ O)) (ho.inter (isOpen_ball.inter hO))
+    ⟨hyo, hya, hyO⟩
+  refine ⟨w, hw.1, ?_⟩
+  have hcol : F.col w = c := by
+    by_contra hne
+    exact (hball hw.2.1).1 (F.col w) hne ⟨⟨hwI, rfl⟩, hw.2.2⟩
+  exact ⟨hwI, hcol⟩
+
+/-- `‖a − b‖²` in terms of `Re(a b̄)`. -/
+theorem norm_sub_sq_eq (a b : ℂ) : ‖a - b‖ ^ 2 = ‖a‖ ^ 2 - 2 * (a * (starRingEnd ℂ) b).re + ‖b‖ ^ 2 := by
+  simp only [Complex.sq_norm, Complex.normSq_apply, Complex.sub_re, Complex.sub_im, Complex.mul_re,
+    Complex.conj_re, Complex.conj_im]
+  ring
+
+/-- The distance from `z + h` to the radial point `z + t e θ`, squared. -/
+theorem norm_sq_sub_radial (h : ℂ) (t θ : ℝ) :
+    ‖h - (t : ℂ) * e θ‖ ^ 2 = ‖h‖ ^ 2 - 2 * t * (h * (starRingEnd ℂ) (e θ)).re + t ^ 2 := by
+  rw [norm_sub_sq_eq, norm_mul, norm_e, Complex.norm_real, Real.norm_eq_abs, mul_one, sq_abs, map_mul,
+    Complex.conj_ofReal, show h * ((t : ℂ) * (starRingEnd ℂ) (e θ)) = (t : ℂ) * (h * (starRingEnd ℂ) (e θ)) by ring,
+    Complex.re_ofReal_mul]
+  ring
+
+/-- Re(h ē θ) in terms of a cone direction: for `h ≠ 0` with `‖h/‖h‖ − e β‖ < ε`,
+`|Re(h conj eθ) − ‖h‖ cos(β − θ)| ≤ ‖h‖ ε`. -/
+theorem re_mul_conj_e_bound {h : ℂ} (hh : h ≠ 0) {β θ ε : ℝ} (hu : ‖h / (‖h‖ : ℂ) - e β‖ < ε) :
+    |(h * (starRingEnd ℂ) (e θ)).re - ‖h‖ * Real.cos (β - θ)| ≤ ‖h‖ * ε := by
+  have hn : (‖h‖ : ℂ) ≠ 0 := by exact_mod_cast norm_ne_zero_iff.mpr hh
+  have hhu : h = (‖h‖ : ℂ) * (h / (‖h‖ : ℂ)) := by field_simp
+  have key : (h * (starRingEnd ℂ) (e θ)).re = ‖h‖ * ((h / (‖h‖ : ℂ)) * (starRingEnd ℂ) (e θ)).re := by
+    have : h * (starRingEnd ℂ) (e θ) = (‖h‖ : ℂ) * ((h / (‖h‖ : ℂ)) * (starRingEnd ℂ) (e θ)) := by
+      field_simp
+    rw [this, Complex.re_ofReal_mul]
+  have h1 : (h * (starRingEnd ℂ) (e θ)).re - ‖h‖ * Real.cos (β - θ) =
+      ‖h‖ * ((h / (‖h‖ : ℂ) - e β) * (starRingEnd ℂ) (e θ)).re := by
+    rw [key, sub_mul, Complex.sub_re, ← re_e_mul_conj_e β θ]
+    ring
+  rw [h1, abs_mul, abs_of_nonneg (norm_nonneg h)]
+  refine mul_le_mul_of_nonneg_left ?_ (norm_nonneg h)
+  calc |((h / (‖h‖ : ℂ) - e β) * (starRingEnd ℂ) (e θ)).re|
+      ≤ ‖(h / (‖h‖ : ℂ) - e β) * (starRingEnd ℂ) (e θ)‖ := Complex.abs_re_le_norm _
+    _ = ‖h / (‖h‖ : ℂ) - e β‖ := by rw [norm_mul, Complex.norm_conj, norm_e, mul_one]
+    _ ≤ ε := hu.le
+
+/-- **The radial lemma, inner side** (child of FS116-V5-U1): if the radial segment `z + t e θ`, `t ∈ (1 − η₀, 1)`, lies in
+the closure of the class of `c`, the class approaches `z` only along directions `β` with `cos(β − θ) ≥ 0`. -/
+theorem Valid.cos_nonneg_of_radial_inner (hF : F.Valid) {z : ℂ} {θ : ℝ} {c : Fin k} {η₀ : ℝ} (hη₀ : 0 < η₀)
+    (hseg : ∀ t ∈ Ioo (1 - η₀) 1, z + (t : ℂ) * e θ ∈ closure (F.region c)) :
+    ∀ β ∈ coneAt (F.region c) z, 0 ≤ Real.cos (β - θ) := by
+  intro β hβ
+  by_contra hneg
+  push Not at hneg
+  set κ := -Real.cos (β - θ) with hκ
+  have hκ0 : 0 < κ := by rw [hκ]; linarith
+  have hκ1 : κ ≤ 1 := by rw [hκ]; linarith [Real.neg_one_le_cos (β - θ)]
+  set ε := min (min (η₀ / 4) (κ / 2)) (1 / 4) with hε
+  have hε0 : 0 < ε := lt_min (lt_min (by linarith) (by linarith)) (by norm_num)
+  have hε1 : ε ≤ η₀ / 4 := (min_le_left _ _).trans (min_le_left _ _)
+  have hε2 : ε ≤ κ / 2 := (min_le_left _ _).trans (min_le_right _ _)
+  have hε3 : ε ≤ 1 / 4 := min_le_right _ _
+  obtain ⟨z', hz', hzz, hzd, hzu⟩ := hβ ε hε0
+  set h := z' - z with hh
+  have hh0 : h ≠ 0 := sub_ne_zero.mpr hzz
+  set ρ := ‖h‖ with hρ
+  have hρ0 : 0 < ρ := norm_pos_iff.mpr hh0
+  have hρε : ρ < ε := by rw [hρ, hh, ← dist_eq_norm]; exact hzd
+  have hre := re_mul_conj_e_bound hh0 (θ := θ) hzu
+  have hre' : (h * (starRingEnd ℂ) (e θ)).re ≤ ρ * (-κ + ε) := by
+    have := (abs_le.mp hre).2
+    rw [hκ] at *; nlinarith
+  have hreneg : (h * (starRingEnd ℂ) (e θ)).re ≤ -(ρ * κ / 2) := by nlinarith
+  have hdist : ∀ t : ℝ, dist z' (z + (t : ℂ) * e θ) ^ 2 =
+      ρ ^ 2 - 2 * t * (h * (starRingEnd ℂ) (e θ)).re + t ^ 2 := by
+    intro t
+    rw [dist_eq_norm, show z' - (z + (t : ℂ) * e θ) = h - (t : ℂ) * e θ by rw [hh]; ring, norm_sq_sub_radial]
+  have hS : IsPreconnected ((fun t : ℝ => z + (t : ℂ) * e θ) '' Ioo (1 - η₀) 1) := by
+    have hc : Continuous fun t : ℝ => z + (t : ℂ) * e θ := by fun_prop
+    exact isPreconnected_Ioo.image _ hc.continuousOn
+  have hSc : (fun t : ℝ => z + (t : ℂ) * e θ) '' Ioo (1 - η₀) 1 ⊆ closure (F.region c) := by
+    rintro _ ⟨t, ht, rfl⟩; exact hseg t ht
+  -- the near point `t = 1 − 2ρ` and the far point `t = 1 − κρ/4`
+  have htn : (1 - 2 * ρ) ∈ Ioo (1 - η₀) 1 := ⟨by linarith, by linarith⟩
+  have htf : (1 - κ * ρ / 4) ∈ Ioo (1 - η₀) 1 :=
+    ⟨by nlinarith, by nlinarith⟩
+  refine hF.false_of_crossing (subset_closure hz') hS hSc (u := z + ((1 - 2 * ρ : ℝ) : ℂ) * e θ)
+    (v := z + ((1 - κ * ρ / 4 : ℝ) : ℂ) * e θ) ⟨_, htn, rfl⟩ ⟨_, htf, rfl⟩ ?_ ?_
+  · have h1 := hdist (1 - 2 * ρ)
+    have hd0 := dist_nonneg (x := z') (y := z + ((1 - 2 * ρ : ℝ) : ℂ) * e θ)
+    have hRe : -(ρ) ≤ (h * (starRingEnd ℂ) (e θ)).re := by
+      have := Complex.abs_re_le_norm (h * (starRingEnd ℂ) (e θ))
+      rw [norm_mul, Complex.norm_conj, norm_e, mul_one] at this
+      linarith [neg_abs_le (h * (starRingEnd ℂ) (e θ)).re]
+    by_contra hge
+    push Not at hge
+    nlinarith
+  · have h1 := hdist (1 - κ * ρ / 4)
+    have hd0 := dist_nonneg (x := z') (y := z + ((1 - κ * ρ / 4 : ℝ) : ℂ) * e θ)
+    set x := κ * ρ / 4 with hx
+    have hx0 : 0 < x := by positivity
+    have hx1 : x ≤ 1 / 16 := by
+      have : κ * ρ ≤ 1 * ε := mul_le_mul hκ1 hρε.le hρ0.le (by norm_num)
+      rw [hx]; linarith
+    have hR : (h * (starRingEnd ℂ) (e θ)).re ≤ -(2 * x) := by rw [hx]; linarith
+    have h2 : 4 * x * (1 - x) ≤ -2 * (1 - x) * (h * (starRingEnd ℂ) (e θ)).re := by
+      nlinarith
+    have h3 : 1 < dist z' (z + ((1 - x : ℝ) : ℂ) * e θ) ^ 2 := by
+      rw [h1]; nlinarith [sq_nonneg ρ, mul_pos hρ0 hρ0]
+    by_contra hle
+    push Not at hle
+    nlinarith
+
+/-- Arithmetic of the outer radial lemma, near point. -/
+theorem outer_near_arith {ρ κ R x : ℝ} (hρ0 : 0 < ρ) (hκ0 : 0 < κ) (hκ1 : κ ≤ 1) (hρκ : ρ ≤ κ / 4)
+    (hR : ρ * κ * (3 / 4) ≤ R) (hx : x = κ * ρ / 2) : ρ ^ 2 - 2 * (1 + x) * R + (1 + x) ^ 2 < 1 := by
+  have hr : 0 < ρ * κ := mul_pos hρ0 hκ0
+  have hx0 : 0 < x := by rw [hx]; positivity
+  have h1 : -2 * (1 + x) * R ≤ -(3 / 2) * (1 + x) * (ρ * κ) := by nlinarith
+  have h2 : ρ ^ 2 ≤ ρ * κ / 4 := by nlinarith
+  have h3 : x ≤ ρ / 2 := by rw [hx]; nlinarith
+  have h4 : x ^ 2 ≤ ρ * κ / 16 := by
+    have e1 : x ^ 2 = κ ^ 2 * ρ ^ 2 / 4 := by rw [hx]; ring
+    have e2 : κ ^ 2 * ρ ^ 2 ≤ κ ^ 2 * (ρ * κ / 4) := mul_le_mul_of_nonneg_left h2 (sq_nonneg κ)
+    have e3 : ρ * κ * κ ^ 2 ≤ ρ * κ := mul_le_of_le_one_right hr.le (by nlinarith)
+    nlinarith
+  have hx2 : 2 * x = κ * ρ := by rw [hx]; ring
+  have h5 : 0 ≤ x * (ρ * κ) := by positivity
+  nlinarith
+
+/-- Arithmetic of the outer radial lemma, far point. -/
+theorem outer_far_arith {ρ R : ℝ} (hρ0 : 0 < ρ) (hR : R ≤ ρ) : 1 < ρ ^ 2 - 2 * (1 + 2 * ρ) * R + (1 + 2 * ρ) ^ 2 := by
+  have : -2 * (1 + 2 * ρ) * R ≥ -2 * (1 + 2 * ρ) * ρ := by nlinarith
+  nlinarith
+
+/-- **The radial lemma, outer side** (child of FS116-V5-U1): if the radial segment `z + t e θ`, `t ∈ (1, 1 + η₀)`, lies in
+the closure of the class of `c'`, the class approaches `z` only along directions `β` with `cos(β − θ) ≤ 0`. -/
+theorem Valid.cos_nonpos_of_radial_outer (hF : F.Valid) {z : ℂ} {θ : ℝ} {c : Fin k} {η₀ : ℝ} (hη₀ : 0 < η₀)
+    (hseg : ∀ t ∈ Ioo 1 (1 + η₀), z + (t : ℂ) * e θ ∈ closure (F.region c)) :
+    ∀ β ∈ coneAt (F.region c) z, Real.cos (β - θ) ≤ 0 := by
+  intro β hβ
+  by_contra hneg
+  push Not at hneg
+  set κ := Real.cos (β - θ) with hκ
+  have hκ0 : 0 < κ := hneg
+  have hκ1 : κ ≤ 1 := Real.cos_le_one _
+  set ε := min (min (η₀ / 4) (κ / 4)) (1 / 4) with hε
+  have hε0 : 0 < ε := lt_min (lt_min (by linarith) (by linarith)) (by norm_num)
+  have hε1 : ε ≤ η₀ / 4 := (min_le_left _ _).trans (min_le_left _ _)
+  have hε2 : ε ≤ κ / 4 := (min_le_left _ _).trans (min_le_right _ _)
+  obtain ⟨z', hz', hzz, hzd, hzu⟩ := hβ ε hε0
+  set h := z' - z with hh
+  have hh0 : h ≠ 0 := sub_ne_zero.mpr hzz
+  set ρ := ‖h‖ with hρ
+  have hρ0 : 0 < ρ := norm_pos_iff.mpr hh0
+  have hρε : ρ < ε := by rw [hρ, hh, ← dist_eq_norm]; exact hzd
+  have hre := re_mul_conj_e_bound hh0 (θ := θ) hzu
+  set R := (h * (starRingEnd ℂ) (e θ)).re with hR
+  have hR1 : ρ * (κ - ε) ≤ R := by
+    have := (abs_le.mp hre).1
+    rw [← hρ, ← hκ] at this; nlinarith
+  have hR2 : R ≤ ρ := by
+    have := Complex.abs_re_le_norm (h * (starRingEnd ℂ) (e θ))
+    rw [norm_mul, Complex.norm_conj, norm_e, mul_one] at this
+    linarith [le_abs_self R]
+  have hRpos : ρ * κ * (3 / 4) ≤ R := by nlinarith
+  have hdist : ∀ t : ℝ, dist z' (z + (t : ℂ) * e θ) ^ 2 = ρ ^ 2 - 2 * t * R + t ^ 2 := by
+    intro t
+    rw [dist_eq_norm, show z' - (z + (t : ℂ) * e θ) = h - (t : ℂ) * e θ by rw [hh]; ring, norm_sq_sub_radial]
+  have hS : IsPreconnected ((fun t : ℝ => z + (t : ℂ) * e θ) '' Ioo 1 (1 + η₀)) := by
+    have hc : Continuous fun t : ℝ => z + (t : ℂ) * e θ := by fun_prop
+    exact isPreconnected_Ioo.image _ hc.continuousOn
+  have hSc : (fun t : ℝ => z + (t : ℂ) * e θ) '' Ioo 1 (1 + η₀) ⊆ closure (F.region c) := by
+    rintro _ ⟨t, ht, rfl⟩; exact hseg t ht
+  have hxρ : κ * ρ / 2 ≤ ρ / 2 := by nlinarith
+  have htn : (1 + κ * ρ / 2) ∈ Ioo 1 (1 + η₀) := ⟨by nlinarith [mul_pos hκ0 hρ0], by nlinarith⟩
+  have htf : (1 + 2 * ρ) ∈ Ioo 1 (1 + η₀) := ⟨by linarith, by linarith⟩
+  refine hF.false_of_crossing (subset_closure hz') hS hSc (u := z + ((1 + κ * ρ / 2 : ℝ) : ℂ) * e θ)
+    (v := z + ((1 + 2 * ρ : ℝ) : ℂ) * e θ) ⟨_, htn, rfl⟩ ⟨_, htf, rfl⟩ ?_ ?_
+  · have h1 := hdist (1 + κ * ρ / 2)
+    have hd0 := dist_nonneg (x := z') (y := z + ((1 + κ * ρ / 2 : ℝ) : ℂ) * e θ)
+    have h3 := outer_near_arith hρ0 hκ0 hκ1 (by linarith) hRpos rfl
+    rw [← h1] at h3
+    by_contra hge
+    push Not at hge
+    nlinarith
+  · have h1 := hdist (1 + 2 * ρ)
+    have hd0 := dist_nonneg (x := z') (y := z + ((1 + 2 * ρ : ℝ) : ℂ) * e θ)
+    have h3 := outer_far_arith hρ0 hR2
+    rw [← h1] at h3
+    by_contra hle
+    push Not at hle
+    nlinarith
+
+/-- Cosine nonnegative against every angle of `(θ₁, θ₂)` puts `β` in the angular interval `[θ₂ − 90°, θ₁ + 90°]`. -/
+theorem mem_angleIcc_of_cos_nonneg {θ₁ θ₂ β : ℝ} (h12 : θ₁ < θ₂)
+    (h : ∀ θ ∈ Ioo θ₁ θ₂, 0 ≤ Real.cos (β - θ)) : β ∈ angleIcc (θ₂ - π / 2) (θ₁ + π / 2) := by
+  have hπ := Real.pi_pos
+  have hcl : IsClosed {θ : ℝ | 0 ≤ Real.cos (β - θ)} :=
+    isClosed_le continuous_const (by fun_prop)
+  have hIcc : ∀ θ ∈ Icc θ₁ θ₂, 0 ≤ Real.cos (β - θ) := by
+    have : closure (Ioo θ₁ θ₂) ⊆ {θ : ℝ | 0 ≤ Real.cos (β - θ)} := closure_minimal h hcl
+    rw [closure_Ioo h12.ne] at this
+    exact fun θ hθ => this hθ
+  set m : ℤ := round ((β - θ₁) / (2 * π)) with hm
+  set β₀ := β - 2 * π * m with hβ₀
+  have hcosβ₀ : ∀ θ, Real.cos (β₀ - θ) = Real.cos (β - θ) := by
+    intro θ
+    rw [hβ₀, show β - 2 * π * m - θ = (β - θ) - m * (2 * π) by ring, Real.cos_sub_int_mul_two_pi]
+  have hr : |(β - θ₁) / (2 * π) - m| ≤ 1 / 2 := abs_sub_round _
+  have hβ₀θ : |β₀ - θ₁| ≤ π := by
+    have : β₀ - θ₁ = 2 * π * ((β - θ₁) / (2 * π) - m) := by
+      rw [hβ₀]; field_simp; ring
+    rw [this, abs_mul, abs_of_pos (by positivity : 0 < 2 * π)]
+    nlinarith [abs_nonneg ((β - θ₁) / (2 * π) - m)]
+  have hc1 : 0 ≤ Real.cos (β₀ - θ₁) := by rw [hcosβ₀]; exact hIcc θ₁ ⟨le_rfl, h12.le⟩
+  have hβ₀1 : |β₀ - θ₁| ≤ π / 2 := by
+    by_contra hgt
+    push Not at hgt
+    rcases le_or_gt 0 (β₀ - θ₁) with hpos | hneg
+    · rw [abs_of_nonneg hpos] at hgt hβ₀θ
+      have := Real.cos_neg_of_pi_div_two_lt_of_lt hgt (by linarith)
+      linarith
+    · rw [abs_of_neg hneg] at hgt hβ₀θ
+      have := Real.cos_neg_of_pi_div_two_lt_of_lt (x := θ₁ - β₀) (by linarith) (by linarith)
+      rw [← Real.cos_neg, neg_sub] at hc1
+      linarith
+  have hβ₀2 : θ₂ - π / 2 ≤ β₀ := by
+    by_contra hlt
+    push Not at hlt
+    set ε₀ := min (π / 2) ((θ₂ - (β₀ + π / 2)) / 2) with hε₀
+    have hε0 : 0 < ε₀ := lt_min (by linarith) (by linarith)
+    have hε1 : ε₀ ≤ π / 2 := min_le_left _ _
+    have hε2 : ε₀ ≤ (θ₂ - (β₀ + π / 2)) / 2 := min_le_right _ _
+    have hθ : β₀ + π / 2 + ε₀ ∈ Ioo θ₁ θ₂ := by
+      constructor
+      · have := (abs_le.mp hβ₀1).1; linarith
+      · linarith
+    have := h _ hθ
+    rw [← hcosβ₀, show β₀ - (β₀ + π / 2 + ε₀) = -(π / 2 + ε₀) by ring, Real.cos_neg] at this
+    have := Real.cos_neg_of_pi_div_two_lt_of_lt (x := π / 2 + ε₀) (by linarith) (by linarith)
+    linarith
+  refine mem_iUnion.mpr ⟨m, ?_, ?_⟩
+  · have : β = β₀ + 2 * π * m := by rw [hβ₀]; ring
+    linarith
+  · have : β = β₀ + 2 * π * m := by rw [hβ₀]; ring
+    have := (abs_le.mp hβ₀1).2
+    linarith
+
+/-- The radial segment just inside an arc of `Γ` on `ω(z)` lies in the closure of the inner colour's class. -/
+theorem IsRingArc.radial_inner {z : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') {θ : ℝ}
+    (hθ : θ ∈ Ioo θ₁ θ₂) : ∃ η₀ : ℝ, 0 < η₀ ∧ ∀ t ∈ Ioo (1 - η₀) 1, z + (t : ℂ) * e θ ∈ closure (F.region c) := by
+  have ha : ringPt z θ ∈ F.dom := (hA.2.1 ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩).1
+  have hin := (hA.2.2 θ hθ).1
+  obtain ⟨ε, hε, hball⟩ := F.side_ball_subset_closure (O := ball z 1) isOpen_ball ha (c := c) fun d hd => by
+    have : d ∈ F.innerColours z (ringPt z θ) := hd
+    rw [hin] at this; exact this
+  refine ⟨min ε 1, lt_min hε one_pos, fun t ht => hball ⟨?_, ?_⟩⟩
+  · rw [mem_ball, dist_eq_norm, show z + (t : ℂ) * e θ - ringPt z θ = ((t - 1 : ℝ) : ℂ) * e θ by
+      simp only [ringPt]; push_cast; ring, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_neg (by linarith [ht.2])]
+    linarith [ht.1, min_le_left ε 1]
+  · rw [mem_ball, dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real,
+      Real.norm_eq_abs, abs_of_pos (by linarith [ht.1, min_le_right ε 1])]
+    exact ht.2
+
+/-- The radial segment just outside an arc of `Γ` on `ω(z)` lies in the closure of the outer colour's class. -/
+theorem IsRingArc.radial_outer {z : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') {θ : ℝ}
+    (hθ : θ ∈ Ioo θ₁ θ₂) : ∃ η₀ : ℝ, 0 < η₀ ∧ ∀ t ∈ Ioo 1 (1 + η₀), z + (t : ℂ) * e θ ∈ closure (F.region c') := by
+  have ha : ringPt z θ ∈ F.dom := (hA.2.1 ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩).1
+  have hout := (hA.2.2 θ hθ).2
+  obtain ⟨ε, hε, hball⟩ := F.side_ball_subset_closure (O := (closedBall z 1)ᶜ) isClosed_closedBall.isOpen_compl ha
+    (c := c') fun d hd => by
+    have : d ∈ F.outerColours z (ringPt z θ) := by
+      show ringPt z θ ∈ closure (F.region d \ closedBall z 1)
+      rwa [Set.sdiff_eq]
+    rw [hout] at this; exact this
+  refine ⟨ε, hε, fun t ht => hball ⟨?_, ?_⟩⟩
+  · rw [mem_ball, dist_eq_norm, show z + (t : ℂ) * e θ - ringPt z θ = ((t - 1 : ℝ) : ℂ) * e θ by
+      simp only [ringPt]; push_cast; ring, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos (by linarith [ht.1])]
+    linarith [ht.2]
+  · rw [mem_compl_iff, mem_closedBall, dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one,
+      Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith [ht.1])]
+    linarith [ht.1]
+
 /-- **FS116-V5-U1**, inner side: if `A = r([θ₁, θ₂])` (about `z`) is an arc of `Γ` on `ω(z)` with inner colour `c`, the class
 of `c` approaches `z` only within the closed cone `[θ₂ − 90°, θ₁ + 90°]` facing `A`. -/
 theorem ringArc_cone_inner (hF : F.Valid) {z : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') :
     coneAt (F.region c) z ⊆ angleIcc (θ₂ - π / 2) (θ₁ + π / 2) := by
-  sorry
+  intro β hβ
+  refine mem_angleIcc_of_cos_nonneg hA.1 fun θ hθ => ?_
+  obtain ⟨η₀, hη₀, hseg⟩ := hA.radial_inner hθ
+  exact hF.cos_nonneg_of_radial_inner hη₀ hseg β hβ
 
 /-- **FS116-V5-U1**, outer side: the class of the outer colour `c'` approaches `z` only within the closed cone
 `[θ₂ + 90°, θ₁ + 270°]` facing away from `A`. -/
 theorem ringArc_cone_outer (hF : F.Valid) {z : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') :
     coneAt (F.region c') z ⊆ angleIcc (θ₂ + π / 2) (θ₁ + 3 * π / 2) := by
-  sorry
+  intro β hβ
+  have h : β - π ∈ angleIcc (θ₂ - π / 2) (θ₁ + π / 2) := by
+    refine mem_angleIcc_of_cos_nonneg hA.1 fun θ hθ => ?_
+    obtain ⟨η₀, hη₀, hseg⟩ := hA.radial_outer hθ
+    have := hF.cos_nonpos_of_radial_outer hη₀ hseg β hβ
+    have h2 : Real.cos (β - π - θ) = -Real.cos (β - θ) := by
+      rw [show β - π - θ = (β - θ) - π by ring, Real.cos_sub_pi]
+    linarith
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp h
+  exact mem_iUnion.mpr ⟨m, by linarith, by linarith⟩
 
 /-- **FS116-V5-U1**: the open side cone `(θ₁ − 90°, θ₂ − 90°)` holds neither side colour. -/
 theorem ringArc_sideCone_inner (hF : F.Valid) {z : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') :
