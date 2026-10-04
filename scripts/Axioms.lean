@@ -3273,6 +3273,72 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.measurePreserving_hcFrame000
 #print axioms HadwigerNelson.Plane.hc_free_numeric
 
+/-! ## FS-131 (job FS131-I3i) — the sector structure at a point (`localSectors`), the separated interval, and the cusp-free
+four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`) -/
+
+#print axioms HadwigerNelson.Plane.branchPt_eq
+#print axioms HadwigerNelson.Plane.germDir_zero
+#print axioms HadwigerNelson.Plane.germDir_add_two_pi
+#print axioms HadwigerNelson.Plane.continuous_germDir
+#print axioms HadwigerNelson.Plane.continuous_branchPt
+#print axioms HadwigerNelson.Plane.norm_mul_e
+#print axioms HadwigerNelson.Plane.norm_branchPt_sub
+#print axioms HadwigerNelson.Plane.polar_eq_iff
+#print axioms HadwigerNelson.Plane.eq_polar_arg
+#print axioms HadwigerNelson.Plane.e_add_int_mul
+#print axioms HadwigerNelson.Plane.eq_polar_local
+#print axioms HadwigerNelson.Plane.continuousAt_arg_div
+#print axioms HadwigerNelson.Plane.arg_div_self
+#print axioms HadwigerNelson.Plane.sq_norm_e_sub_e
+#print axioms HadwigerNelson.Plane.BranchGerms.sector_eq
+#print axioms HadwigerNelson.Plane.BranchGerms.atRadius_nextβ
+#print axioms HadwigerNelson.Plane.BranchGerms.nextDir_eq
+#print axioms HadwigerNelson.Plane.BranchGerms.continuous_dir
+#print axioms HadwigerNelson.Plane.BranchGerms.continuous_nextDir
+#print axioms HadwigerNelson.Plane.BranchGerms.Sorted.mono
+#print axioms HadwigerNelson.Plane.BranchGerms.Mono.le_add
+#print axioms HadwigerNelson.Plane.BranchGerms.Mono.le_of_le
+#print axioms HadwigerNelson.Plane.BranchGerms.Mono.le_two_pi
+#print axioms HadwigerNelson.Plane.BranchGerms.Mono.nextβ_le
+#print axioms HadwigerNelson.Plane.BranchGerms.Mono.zero_le
+#print axioms HadwigerNelson.Plane.BranchGerms.Mono.nextβ_le_add
+#print axioms HadwigerNelson.Plane.BranchGerms.Mono.nextβ_le_of_lt
+#print axioms HadwigerNelson.Plane.BranchGerms.Mono.disjoint
+#print axioms HadwigerNelson.Plane.BranchGerms.exists_angle
+#print axioms HadwigerNelson.Plane.BranchGerms.Mono.not_mem_angleIoo
+#print axioms HadwigerNelson.Plane.BranchGerms.e_nextDir
+#print axioms HadwigerNelson.Plane.BranchGerms.nextDir_of_next_eq
+#print axioms HadwigerNelson.Plane.BranchGerms.nextκ_eq
+#print axioms HadwigerNelson.Plane.BranchGerms.dir_lt_nextDir
+#print axioms HadwigerNelson.Plane.BranchGerms.atRadius_mono
+#print axioms HadwigerNelson.Plane.BranchGerms.mem_sector_iff
+#print axioms HadwigerNelson.Plane.BranchGerms.sector_mono
+#print axioms HadwigerNelson.Plane.BranchGerms.sector_subset_ball
+#print axioms HadwigerNelson.Plane.BranchGerms.sector_disjoint
+#print axioms HadwigerNelson.Plane.BranchGerms.isOpen_sector
+#print axioms HadwigerNelson.Plane.BranchGerms.isPreconnected_sector
+#print axioms HadwigerNelson.Plane.BranchGerms.mem_coneAt_of_ray
+#print axioms HadwigerNelson.Plane.BranchGerms.coneAt_sector
+#print axioms HadwigerNelson.Plane.curveGerm_fst_mem
+#print axioms HadwigerNelson.Plane.e_toIcoMod_add
+#print axioms HadwigerNelson.Plane.branchPt_curveGerm
+#print axioms HadwigerNelson.Plane.mul_e_mul_conj
+#print axioms HadwigerNelson.Plane.branchPt_curveGerm_mem
+#print axioms HadwigerNelson.Plane.exists_eq_branchPt_curveGerm
+#print axioms HadwigerNelson.Plane.exists_germDir_ne
+#print axioms HadwigerNelson.Plane.Arc.finite_ends
+#print axioms HadwigerNelson.Plane.Arc.eventually_mem_carrier
+#print axioms HadwigerNelson.Plane.Arc.exists_near
+#print axioms HadwigerNelson.Plane.Arc.branch_mem_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.isSectorChart_of
+#print axioms HadwigerNelson.Plane.localSectors
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.eq_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.sector_subset_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.sector_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_tile_inter_ball
+#print axioms HadwigerNelson.Plane.ArcMap.Simple.coneAt_eq_angleIcc_sep
+#print axioms HadwigerNelson.Plane.halfDisc_sectorChart
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

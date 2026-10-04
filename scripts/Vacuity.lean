@@ -259,6 +259,13 @@ Two exclusions are worth their reasons, because both look like obvious additions
   set variable, `GENERIC`); `IsEssBoundary`, `SaturatedAt` (refuting either at a concrete instance is a density
   computation the library makes only inside an `example`; their one consumer, in `Plane/RingGerm`, takes them at a
   variable map; register them when a wave proves such a refutation as a theorem).
+* **The sector structure (FS131-I3i, by the procedure below).** **OUT**: `BranchGerms` (data — two angle and two curvature
+  functions — written down, `⟨![0, π], ![0, 0]⟩`); `BranchGerms.Sorted`, `BranchGerms.Mono` (predicates of that data, true
+  or false by a computation on a written-down instance); `ArcMap.IsSectorChart` — its existence at every point of the
+  domain is a theorem (`localSectors`, inhabitant `halfDisc_sectorChart`), and every site takes it at a variable map, germ
+  list, point and radius (`IsSectorChart.exists_tile_inter_ball`, `.sector_nonempty`, `.sector_subset_interiorPts`), so it
+  reads `GENERIC` everywhere, like `IsTile`; register it when a theorem takes it at a concrete instance or proves a
+  refutation `¬ F.IsSectorChart G v r₀` as a theorem.
 
 * **Wave 2's carriers (FS131-I2n, by the procedure below).** **IN**: `Plane.CPColouring` — the `AeColouring` case again, a
   structure whose emptiness is a theorem (`IsEmpty (CPColouring 0)`, `IsEmpty (CPColouring 1)`, both `instance`s, which the evidence
