@@ -574,3 +574,11 @@ reason by the close.*
      `IsJordanDomain.coneAt_eq_angleIcc` for any open set with Jordan-domain structure at a point. Slip (I3d's): a stale `scripts/Axioms.lean` record removed.
 102. **Order changed** (Keryx): FS131-I3e (wave 3's fifth implementer, `data/fs131/briefs/FS131-I3e-wave3.md`, gated PASS) takes the slot I3d freed, ahead of FS131-K2d.
      Why: wave 3 is nine leaves from the second landing. Queue after it: K2d, I4, IW, LEB. Source: this commit.
+103. **Kooshi's rulings, 2026-10-04** (verbatim): *"1. I extend the 3 agent cap with a rule: it was sized for 3 Opus agents. […] one
+     Opus slot may be filled with two Sonnet agents. 2. You may trial an Opus implementer 3. What is the URL of the github repo? It was likely very recently
+     published and also using AI. I'll check it out. 4. Please update the handoff, and I'll compact."* Filed: the staffing line of `.claude/output-styles/keryx.md`
+     § Staffing (an Opus agent one slot, a Sonnet agent half; three slots); the project memory. **The Opus-implementer trial**: run `debruijn-implementer` with the
+     Agent tool's `model: "opus"` override, as wave 2's next implementer after FS131-I2e (the most Sonnet history on comparable hard leaves: I2–I2e), and compare
+     leaves closed per session against I2–I2e (inventory items 49, 58, 70, 82). The GitHub repository (item 9): the record holds its name only, from a search
+     listing (`plans/FS131-kernel-plan.md` § 3.2) — `decalion89/chromatic-number-of-the-plane`, release v1.1.0; the same listing pass saw a Zenodo record claiming a
+     formal verification that the plane is seven-chromatic (not read). Kooshi reads the repository.
