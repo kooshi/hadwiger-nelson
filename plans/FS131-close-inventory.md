@@ -1270,3 +1270,18 @@ reason by the close.*
 181. **Brief FS131-IWd, Woodall's last three leaves** (Opus; `data/fs131/briefs/FS131-IWd-woodall-merge.md`, gated PASS): `niceAt_of_dirColourAt`, `wedgeMerge_niceAt`
      (with the curvilinear cone child), `exists_merge_at`; after wave 4 lands, the merge of `main` (this branch deletes its identical colliding copies), QA2-1's
      brick-map model, the gate and the landing. Launched in IWc's slot: 1 (I2i) + 1 (I4e) + 1 (IWd) = 3.
+182. **FS131-I2i handed back at stage 18, harness ≈ 402k** (report on its branch; `fs131-w2` at `f5e83938`, checked): 53 → 46. **[kernel], standard three**: **FS106-REM, all
+     three clauses** — `keptAt_band`, `CPColouring.tendsto_not_kept`, and `exists_not_uniform_kept` (the uniform form is false: a measurable colouring proper at
+     *every* unit pair with a whole unit square of non-kept points at every scale), witnessed by a simpler colouring than the plan's (`stripeCol`: squares of side
+     1/2 coloured `(⌊2 re⌋ mod 4, ⌊2 im⌋ mod 4)`, which makes any refinement proper at every unit pair, refined by stripes — the fringe-to-fringe pairs of § 17.1
+     never arise, so no deriver was needed); **FS111-V0-RESCALE** (`exists_tight`, `exists_tight_iff_chiM0_le`); **`chiM0_le_chiCP`** (FS106-EQ's easy direction,
+     `χ_m⁰(ℝ²) ≤ χ_CP(ℝ²)`), through a jointly measurable modification of every CP colouring (`exists_modification`, `ae_unitPairsNull_of_modification`) and
+     `continuous_pairMass` (via Mathlib's `tendsto_measure_symmDiff_preimage_nhds_zero`). **Owed docstrings done**: 86 wave-2 theorems and FALC-HOSTS (iv)'s frame
+     docstring; tool `tools/fs131_i2_docs.py` (self-test plants a fault). Keryx's receipts: build log `build/gate/build/20261004T162337Z-697910.log` (w2) "Build
+     completed successfully (5722 jobs)", no warning but `sorry`; 46 `sorry` by count; `data/fs131/i2/i2i-axioms.txt` prints `chiM0_le_chiCP`, `keptAt_band`,
+     `exists_not_uniform_kept` on the standard three; `fs131_i2_docs.py` "0 undocumented wave-2 theorems in 13 files". Left: Slack 12 (SUPK's lower bound ×3,
+     the compactness block ×9), CoverExamples 34 (R7 8, (G1) 4, HC/IRREG 22); the vacuity carriers (recommendation recorded: IN `CPColouring`, inhabited at 9;
+     OUT the family and set predicates by T1's rule). Slip (I2i's): `tools/fs131_qa1_quality.py` rewrites its JSON when run — restored, not committed.
+     **Next**: FS131-I2j (Opus).
+183. **Brief FS131-I2j, wave 2's tenth implementer** (Opus; `data/fs131/briefs/FS131-I2j-wave2.md`, gated PASS): the 46 lines, the vacuity carriers, the gate and the
+     landing. Launched in I2i's slot: 1 (I4e) + 1 (IWd) + 1 (I2j) = 3.
