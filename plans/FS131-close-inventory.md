@@ -1640,3 +1640,16 @@ reason by the close.*
      (item 227) verbatim, the base's owed obligation pass (item 218 (d)), then wave 5's leaves in plan § 10.1's order; `cvb_thom_reduced` priced from its first
      two children (item 208 (a)); no gate or landing (after wave 4). Launched in E4's slot: 1 (I2m) + 1 (I4i) + 1 (IC3) + 1 (I5) = 4. Kooshi notified of E4's
      verdict by push (rows 134, 137 stand; row 135's headline stands, its base clause needs the condition) per item 220's rule.
+229. **FS131-I4i handed back at stage 24, harness ≈ 422k** (report `data/fs131/reports/FS131-I4i.md` on `fs131-w4`; branch at `e16f5b2c`, checked): its files 19 →
+     14 (UnitArc 7, BaseSteps 7). **[kernel] on the branch, standard three**: FS114-L60-LE's first clause `l60_le` (a unit arc with constant sides has
+     θ₂ − θ₁ ≤ π/3), **FS112-N3-NOBOTH** `noBoth` (with the domain hypothesis), L60-EQ's `l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners` (so `l60_eq_third`
+     now reads the standard three), engine 2 `ringArcsWithin_of_Γ_subset` (with a spec example), 15 supporting lemmas. Keryx's receipts: build log
+     `build/gate/build/20261004T201515Z-2044743.log` (w4) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `sorry` lines by count
+     UnitArc 7, BaseSteps 7; `data/fs131/i4/axioms-i4i-24.txt` has no `sorryAx` and prints `l60_le`, `noBoth`, `l60_eq_corners`, engine 2 on the standard three.
+     **Correction owed** (route note, wave 4's plan § 13.1 and § 13.5): engine 6 ("the wave's second-hardest statement") is not needed — L60-LE and L60-EQ follow
+     from wave 3's crossing engine `Valid.dist_lt_or_gt_of_isPreconnected` (the open arc lies in the closure of each side colour); engine 6 not written.
+     Declaration order: `l60_eq_inner/outer/corners` moved below the `l60Frag` helpers they use, statements and docstrings verbatim (checked by script) — accepted,
+     no tool reads the order (`tools/fs131_k4_decls.py --check` exits 0). Imports: `UnitArc` now imports `Sectors`. Left: UnitArc 7 (the three bends,
+     `flankQ_upper/lower`, `a4six`, `nb4p`), BaseSteps 7 (`pair_P'` first; the vote leaves need a shared three-germs lemma; `n3_end` after `fs131-w4c` merges).
+230. **Brief FS131-I4j, wave 4's tenth implementer** (Opus; `data/fs131/briefs/FS131-I4j-wave4.md`, derived by script from I4i's, gated PASS; a stale "Where I4f left
+     it" corrected by reading): `UnitArc` and `BaseSteps`' 14 in Stage 24's order (`pair_P'` first). Launched in I4i's slot: 1 (I2m) + 1 (IC3) + 1 (I5) + 1 (I4j) = 4.
