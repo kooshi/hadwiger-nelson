@@ -333,11 +333,90 @@ theorem isOpen_isoDom : IsOpen (ball (1 : ℂ) (1 / 4) ∪ isoY) := by
   have h2 : IsOpen {z : ℂ | |(z - 2).im| < √3 * (z - 2).re} := isOpen_lt (by fun_prop) (by fun_prop)
   exact h1.inter h2
 
+/-- A point of `B(1, 1/4)` on the unit circle lies on `FS112-ISO`'s arc `r([−π/6, π/6])`. -/
+theorem mem_isoArc_of_norm_one {x : ℂ} (hball : x ∈ ball (1 : ℂ) (1 / 4)) (h1' : ‖x‖ = 1) :
+    x ∈ ⋃ a ∈ ({Arc.circ 0 1 (-(π / 6)) (π / 6)} : Set Arc), a.carrier := by
+  rw [mem_ball, dist_eq_norm] at hball
+  have hre : 31 / 32 < x.re := by
+    have hsq : ‖x - 1‖ ^ 2 < (1 / 4) ^ 2 := by
+      have := norm_nonneg (x - 1)
+      nlinarith
+    rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply] at hsq
+    simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im] at hsq
+    have hn : ‖x‖ ^ 2 = x.re ^ 2 + x.im ^ 2 := by
+      rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]; ring
+    nlinarith [sq_nonneg x.im, norm_nonneg x]
+  simp only [mem_iUnion, mem_singleton_iff]
+  refine ⟨_, rfl, ?_⟩
+  have hx0 : x ≠ 0 := by rintro rfl; simp at h1'
+  have hcos : Real.cos (Complex.arg x) = x.re := by
+    rw [Complex.cos_arg hx0, h1', div_one]
+  have habs : |Complex.arg x| ≤ π / 6 := by
+    by_contra hlt
+    rw [not_le] at hlt
+    have hc : Real.cos (Complex.arg x) = Real.cos |Complex.arg x| := (Real.cos_abs _).symm
+    have : Real.cos |Complex.arg x| < Real.cos (π / 6) :=
+      Real.cos_lt_cos_of_nonneg_of_le_pi (by positivity) (by linarith [Complex.abs_arg_le_pi x]) hlt
+    rw [Real.cos_pi_div_six] at this
+    have h3 : √3 < 2 * (31 / 32) := by
+      rw [Real.sqrt_lt' (by norm_num)]; norm_num
+    linarith
+  refine ⟨Complex.arg x, ?_, ?_⟩
+  · exact ⟨by linarith [(abs_le.mp habs).1], by linarith [(abs_le.mp habs).2]⟩
+  · have := Complex.norm_mul_exp_arg_mul_I x
+    simp only [h1', ofReal_one, one_mul] at this
+    simp only [e]
+    simpa using this
+
 /-- FS112-ISO's colouring is locally constant off its arc. -/
 theorem isoCol_locallyConstant : ∀ x ∈ ball (1 : ℂ) (1 / 4) ∪ isoY, x ∉ ⋃ a ∈ ({Arc.circ 0 1 (-(π / 6)) (π / 6)} : Set Arc),
     a.carrier → ∀ᶠ y in 𝓝 x, (by classical exact if ‖y‖ < 1 ∨ y ∈ isoY then (0 : Fin 2) else 1) =
       (by classical exact if ‖x‖ < 1 ∨ x ∈ isoY then (0 : Fin 2) else 1) := by
-  sorry
+  intro x hx hxa
+  classical
+  have hopenY : IsOpen isoY := by
+    have h1 : IsOpen {z : ℂ | ‖z - 2‖ < 1 / 4} := isOpen_lt (by fun_prop) continuous_const
+    have h2 : IsOpen {z : ℂ | |(z - 2).im| < √3 * (z - 2).re} := isOpen_lt (by fun_prop) (by fun_prop)
+    exact h1.inter h2
+  have hopenC : IsOpen {y : ℂ | ‖y‖ < 1 ∨ y ∈ isoY} :=
+    (isOpen_lt continuous_norm continuous_const).union hopenY
+  by_cases h : ‖x‖ < 1 ∨ x ∈ isoY
+  · filter_upwards [hopenC.mem_nhds h] with y hy
+    rw [if_pos hy, if_pos h]
+  · have hball : x ∈ ball (1 : ℂ) (1 / 4) := by
+      rcases hx with hx | hx
+      · exact hx
+      · exact absurd (Or.inr hx) h
+    push Not at h
+    obtain ⟨h1, hY⟩ := h
+    rw [mem_ball, dist_eq_norm] at hball
+    have hre : 31 / 32 < x.re := by
+      have hsq : ‖x - 1‖ ^ 2 < (1 / 4) ^ 2 := by
+        have := norm_nonneg (x - 1)
+        nlinarith
+      rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply] at hsq
+      simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im] at hsq
+      have hn : ‖x‖ ^ 2 = x.re ^ 2 + x.im ^ 2 := by
+        rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]; ring
+      nlinarith [sq_nonneg x.im, norm_nonneg x]
+    have hne : ‖x‖ ≠ 1 := fun h1' => hxa (mem_isoArc_of_norm_one (by rw [mem_ball, dist_eq_norm]; exact hball) h1')
+    have hgt : 1 < ‖x‖ := lt_of_le_of_ne h1 (Ne.symm hne)
+    have h2 : 3 / 4 < ‖x - 2‖ := by
+      have : ‖(1 : ℂ) - 2‖ ≤ ‖x - 1‖ + ‖x - 2‖ := by
+        calc ‖(1 : ℂ) - 2‖ = ‖(x - 2) - (x - 1)‖ := by congr 1; ring
+          _ ≤ ‖x - 2‖ + ‖x - 1‖ := norm_sub_le _ _
+          _ = _ := add_comm _ _
+      have h12 : ‖(1 : ℂ) - 2‖ = 1 := by norm_num
+      linarith
+    have hopen2 : IsOpen {y : ℂ | 1 < ‖y‖ ∧ 1 / 4 < ‖y - 2‖} :=
+      (isOpen_lt (f := fun _ : ℂ => (1 : ℝ)) (g := fun y : ℂ => ‖y‖) continuous_const continuous_norm).inter
+        (isOpen_lt (f := fun _ : ℂ => (1 / 4 : ℝ)) (g := fun y : ℂ => ‖y - 2‖) continuous_const (by fun_prop))
+    filter_upwards [hopen2.mem_nhds ⟨hgt, by linarith⟩] with y hy
+    have hn : ¬ (‖y‖ < 1 ∨ y ∈ isoY) := by
+      rintro (h | h)
+      · linarith [hy.1]
+      · linarith [hy.2, h.1]
+    rw [if_neg hn, if_neg (by rintro (h | h) <;> [linarith; exact hY h])]
 
 /-- **The fragment of FS112-ISO**, by formula (`plans/FS112-NB-verification.md` § 2.3 #4): about the arc of `ω(0)` near `1`, colour `0`
 inside and `1` outside; and the sector `isoY` at `q₀ = 2`, colour `0` (the inner colour). -/
@@ -354,6 +433,66 @@ noncomputable def isoFrag : ArcMap 2 where
   col := fun y => by classical exact if ‖y‖ < 1 ∨ y ∈ isoY then 0 else 1
   locallyConstant := isoCol_locallyConstant
 
+/-! ### `iso`'s facts -/
+
+/-- A point of `isoY` is farther than `2` from `0` (its corner `2` is the only point of `closedBall 0 2` the sector approaches). -/
+theorem two_lt_norm_of_mem_isoY {z : ℂ} (hz : z ∈ isoY) : 2 < ‖z‖ := by
+  obtain ⟨h1, h2⟩ := hz
+  have hre : 0 < (z - 2).re := by
+    have := abs_nonneg (z - 2).im
+    have h3 : 0 < √3 := Real.sqrt_pos.2 (by norm_num)
+    by_contra hle
+    push Not at hle
+    nlinarith [mul_nonpos_of_nonneg_of_nonpos h3.le hle]
+  have hre2 : 2 < z.re := by simpa using hre
+  have : z.re ≤ ‖z‖ := (Complex.re_le_norm z)
+  linarith
+
+/-- The points of the disc `B(1, 1/4)` have norm between `3/4` and `5/4`. -/
+theorem norm_bounds_of_mem_ball_one {z : ℂ} (hz : z ∈ ball (1 : ℂ) (1 / 4)) : 3 / 4 < ‖z‖ ∧ ‖z‖ < 5 / 4 := by
+  rw [mem_ball, dist_eq_norm] at hz
+  have h1 : ‖(1 : ℂ)‖ - ‖z - 1‖ ≤ ‖z‖ := by
+    have := norm_sub_norm_le (1 : ℂ) (1 - z)
+    rw [norm_sub_rev] at this
+    have h2 : (1 : ℂ) - (1 - z) = z := by ring
+    rw [h2] at this
+    simpa [norm_sub_rev] using this
+  have h2 : ‖z‖ ≤ ‖z - 1‖ + ‖(1 : ℂ)‖ := by
+    have := norm_le_norm_add_norm_sub' z 1
+    simp only [norm_one] at this ⊢
+    linarith
+  simp only [norm_one] at h1 h2
+  constructor <;> linarith
+
+/-- The colour of `isoFrag`: `0` exactly on the open unit disc and `isoY`. -/
+theorem isoFrag_col_eq_zero_iff (z : ℂ) : isoFrag.col z = 0 ↔ (‖z‖ < 1 ∨ z ∈ isoY) := by
+  classical
+  show (if ‖z‖ < 1 ∨ z ∈ isoY then (0 : Fin 2) else 1) = 0 ↔ _
+  split_ifs with h
+  · simp [h]
+  · simp only [h, iff_false]; decide
+
+/-- The arc of `isoFrag` lies on the unit circle. -/
+theorem norm_eq_one_of_mem_isoFrag_arcs {z : ℂ} (hz : z ∈ ⋃ a ∈ isoFrag.arcs, a.carrier) : ‖z‖ = 1 := by
+  simp only [isoFrag, mem_iUnion, mem_singleton_iff] at hz
+  obtain ⟨a, rfl, θ, -, rfl⟩ := hz
+  simp [e]
+
+/-- Every point of `isoFrag`'s domain is near `1` or in `isoY`. -/
+theorem mem_isoFrag_dom {z : ℂ} : z ∈ isoFrag.dom ↔ z ∈ ball (1 : ℂ) (1 / 4) ∨ z ∈ isoY := Iff.rfl
+
+/-- Colour-`1` points of `isoFrag` lie in the disc about `1`, outside the open unit disc. -/
+theorem isoFrag_region_one {z : ℂ} (hz : z ∈ isoFrag.region 1) : z ∈ ball (1 : ℂ) (1 / 4) ∧ 1 < ‖z‖ := by
+  obtain ⟨⟨hd, hna⟩, hc⟩ := hz
+  have hc' : isoFrag.col z = 1 := hc
+  have h0 : ¬ (‖z‖ < 1 ∨ z ∈ isoY) := fun h => by
+    have := (isoFrag_col_eq_zero_iff z).2 h
+    rw [hc'] at this; exact absurd this (by decide)
+  push Not at h0
+  have hball : z ∈ ball (1 : ℂ) (1 / 4) := hd.resolve_right h0.2
+  refine ⟨hball, lt_of_le_of_ne h0.1 fun h => hna ?_⟩
+  exact mem_isoArc_of_norm_one hball h.symm
+
 /-- **FS112-ISO**: isolated inner-colour contacts at `P + 2e(θ₀)` exist locally, and block a first-order away-bend. In `isoFrag`
 (valid), the arc `r([−1/8, 1/8])` of `ω(0)` has constant sides (inner `0`, outer `1`) and its inner colour is not carried at the
 centre (the away bend's precondition); the inner colour's tile `isoY` lies outside `B̄(0, 2)` but for its corner `2 = 0 + 2e(0)`,
@@ -363,7 +502,290 @@ theorem iso : isoFrag.Valid ∧ isoFrag.IsRingArc 0 (-(1 / 8)) (1 / 8) 0 1 ∧ (
     isoFrag.TileOf 0 isoY ∧ Disjoint isoY (closedBall 0 2) ∧ (2 : ℂ) ∈ closure isoY ∧
     isoFrag.r2Contacts 0 (-(1 / 8)) (1 / 8) 0 = {0} ∧
     ∀ᶠ s : ℝ in 𝓝[>] 0, ¬ isoFrag.IsClear 0 (0 + (1 + (s : ℂ)) * e 0) := by
-  sorry
+  have hopenY : IsOpen isoY := by
+    have h1 : IsOpen {z : ℂ | ‖z - 2‖ < 1 / 4} := isOpen_lt (by fun_prop) continuous_const
+    have h2 : IsOpen {z : ℂ | |(z - 2).im| < √3 * (z - 2).re} := isOpen_lt (by fun_prop) (by fun_prop)
+    exact h1.inter h2
+  have hY0 : ∀ z ∈ isoY, isoFrag.col z = 0 := fun z hz => (isoFrag_col_eq_zero_iff z).2 (Or.inr hz)
+  have hYint : ∀ z ∈ isoY, z ∈ isoFrag.interiorPts := fun z hz =>
+    ⟨Or.inr hz, fun h => by
+      have := norm_eq_one_of_mem_isoFrag_arcs h
+      linarith [two_lt_norm_of_mem_isoY hz]⟩
+  have hYreg : ∀ z ∈ isoY, z ∈ isoFrag.region 0 := fun z hz => ⟨hYint z hz, hY0 z hz⟩
+  have hnotY : ∀ z ∈ ball (1 : ℂ) (1 / 4), z ∉ isoY := fun z hz hzY => by
+    linarith [(norm_bounds_of_mem_ball_one hz).2, two_lt_norm_of_mem_isoY hzY]
+  have hhalf : ∀ {x y c : ℂ}, x ∈ ball c (1 / 4) → y ∈ ball c (1 / 4) → dist x y < 1 / 2 := by
+    intro x y c hx hy
+    rw [mem_ball] at hx hy
+    linarith [dist_triangle_right x y c]
+  have hregfar : ∀ c, ∀ z ∈ isoFrag.region c, 3 / 4 < ‖z‖ := by
+    intro c z hz
+    rcases hz.1.1 with h | h
+    · exact (norm_bounds_of_mem_ball_one h).1
+    · linarith [two_lt_norm_of_mem_isoY h]
+  have hclosfar : ∀ c, ∀ z ∈ closure (isoFrag.region c), 3 / 4 ≤ ‖z‖ := fun c z hz =>
+    closure_minimal (fun w hw => (hregfar c w hw).le)
+      (isClosed_le continuous_const continuous_norm : IsClosed {z : ℂ | (3 / 4 : ℝ) ≤ ‖z‖}) hz
+  have hclY : ∀ z ∈ closure isoY, 2 ≤ ‖z‖ := fun z hz =>
+    closure_minimal (fun w hw => (two_lt_norm_of_mem_isoY hw).le)
+      (isClosed_le continuous_const continuous_norm : IsClosed {z : ℂ | (2 : ℝ) ≤ ‖z‖}) hz
+  -- validity
+  have hvalid : isoFrag.Valid := by
+    intro x hx y hy hxy hcol
+    by_cases hx0 : isoFrag.col x = 0
+    · have hy0 : isoFrag.col y = 0 := hcol ▸ hx0
+      rw [isoFrag_col_eq_zero_iff] at hx0 hy0
+      rcases hx.1 with hxb | hxY <;> rcases hy.1 with hyb | hyY
+      · linarith [hhalf hxb hyb]
+      · have hxn : ‖x‖ < 1 := hx0.resolve_right (hnotY x hxb)
+        have h2 := two_lt_norm_of_mem_isoY hyY
+        have := norm_sub_norm_le y x
+        rw [← dist_eq_norm, dist_comm] at this
+        linarith
+      · have hyn : ‖y‖ < 1 := hy0.resolve_right (hnotY y hyb)
+        have h2 := two_lt_norm_of_mem_isoY hxY
+        have := norm_sub_norm_le x y
+        rw [← dist_eq_norm] at this
+        linarith
+      · have h1 : x ∈ ball (2 : ℂ) (1 / 4) := by rw [mem_ball, dist_eq_norm]; exact hxY.1
+        have h2 : y ∈ ball (2 : ℂ) (1 / 4) := by rw [mem_ball, dist_eq_norm]; exact hyY.1
+        linarith [hhalf h1 h2]
+    · have hy1 : ¬ isoFrag.col y = 0 := hcol ▸ hx0
+      rw [isoFrag_col_eq_zero_iff] at hx0 hy1
+      have hxb : x ∈ ball (1 : ℂ) (1 / 4) := hx.1.resolve_right fun h => hx0 (Or.inr h)
+      have hyb : y ∈ ball (1 : ℂ) (1 / 4) := hy.1.resolve_right fun h => hy1 (Or.inr h)
+      linarith [hhalf hxb hyb]
+  -- points near the arc
+  have hnear : ∀ θ : ℝ, |θ| ≤ 1 / 8 → ∀ t : ℝ, |t| ≤ 1 / 16 → (((1 + t : ℝ) : ℂ) * e θ) ∈ ball (1 : ℂ) (1 / 4) := by
+    intro θ hθ t ht
+    rw [mem_ball, dist_eq_norm]
+    have h1 : ‖e θ - 1‖ ≤ |θ| := by
+      have := Real.norm_exp_I_mul_ofReal_sub_one_le (x := θ)
+      rw [Real.norm_eq_abs] at this
+      simpa [e, mul_comm] using this
+    have h2 : ‖((1 + t : ℝ) : ℂ) * e θ - 1‖ ≤ ‖((1 + t : ℝ) : ℂ) * e θ - e θ‖ + ‖e θ - 1‖ := by
+      calc _ = ‖(((1 + t : ℝ) : ℂ) * e θ - e θ) + (e θ - 1)‖ := by congr 1; ring
+        _ ≤ _ := norm_add_le _ _
+    have h3 : ‖((1 + t : ℝ) : ℂ) * e θ - e θ‖ = |t| := by
+      have : ((1 + t : ℝ) : ℂ) * e θ - e θ = (t : ℂ) * e θ := by push_cast; ring
+      rw [this, norm_mul, Complex.norm_real, Real.norm_eq_abs]; simp [e]
+    linarith
+  have hne1 : ∀ θ : ℝ, ∀ t : ℝ, ‖((1 + t : ℝ) : ℂ) * e θ‖ = |1 + t| := by
+    intro θ t; rw [norm_mul, Complex.norm_real, Real.norm_eq_abs]; simp [e]
+  -- the ring arc
+  have harc : isoFrag.IsRingArc 0 (-(1 / 8)) (1 / 8) 0 1 := by
+    refine ⟨by norm_num, ?_, ?_⟩
+    · rintro _ ⟨θ, hθ, rfl⟩
+      have hθ' : |θ| ≤ 1 / 8 := abs_le.2 ⟨hθ.1, hθ.2⟩
+      refine ⟨Or.inl ?_, ?_⟩
+      · have := hnear θ hθ' 0 (by norm_num)
+        simpa [ringPt] using this
+      · simp only [isoFrag, mem_iUnion, mem_singleton_iff]
+        refine ⟨_, rfl, θ, ⟨by linarith [hθ.1, Real.pi_gt_three], by linarith [hθ.2, Real.pi_gt_three]⟩, ?_⟩
+        simp [ringPt]
+    · intro θ hθ
+      have hθ' : |θ| ≤ 1 / 8 := abs_le.2 ⟨hθ.1.le, hθ.2.le⟩
+      have hn1 : ‖ringPt 0 θ‖ = 1 := by simp [ringPt, e]
+      constructor
+      · ext c
+        simp only [mem_singleton_iff, innerColours, mem_setOf_eq]
+        constructor
+        · intro h
+          by_contra hc
+          have hc1 : c = 1 := by fin_cases c <;> simp_all
+          subst hc1
+          have hsub : isoFrag.region 1 ∩ ball 0 1 ⊆ (∅ : Set ℂ) := by
+            intro z hz
+            have := (isoFrag_region_one hz.1).2
+            have h2 := hz.2
+            rw [mem_ball, dist_zero_right] at h2
+            linarith
+          rw [subset_empty_iff.1 hsub, closure_empty] at h
+          exact h
+        · rintro rfl
+          refine Metric.mem_closure_iff.2 fun δ hδ => ?_
+          set t : ℝ := min (δ / 2) (1 / 16) with ht
+          have ht0 : 0 < t := lt_min (by linarith) (by norm_num)
+          have htδ : t < δ := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+          have ht16 : t ≤ 1 / 16 := min_le_right _ _
+          refine ⟨((1 + -t : ℝ) : ℂ) * e θ, ⟨⟨⟨Or.inl (hnear θ hθ' (-t) (by rw [abs_neg, abs_of_pos ht0]; exact ht16)), ?_⟩, ?_⟩, ?_⟩, ?_⟩
+          · intro h
+            have := norm_eq_one_of_mem_isoFrag_arcs h
+            rw [hne1, abs_of_pos (by linarith)] at this
+            linarith
+          · show isoFrag.col _ = 0
+            rw [isoFrag_col_eq_zero_iff]
+            left; rw [hne1, abs_of_pos (by linarith)]; linarith
+          · rw [mem_ball, dist_zero_right, hne1, abs_of_pos (by linarith)]; linarith
+          · rw [dist_eq_norm]
+            have : ringPt 0 θ - ((1 + -t : ℝ) : ℂ) * e θ = (t : ℂ) * e θ := by simp [ringPt]; push_cast; ring
+            rw [this, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]; simp [e]; exact htδ
+      · ext c
+        simp only [mem_singleton_iff, outerColours, mem_setOf_eq]
+        constructor
+        · intro h
+          by_contra hc
+          have hc0 : c = 0 := by fin_cases c <;> simp_all
+          subst hc0
+          have := hclY _ (closure_mono (fun z hz => by
+            have hz0 : isoFrag.col z = 0 := hz.1.2
+            rw [isoFrag_col_eq_zero_iff] at hz0
+            rcases hz0 with h0 | h0
+            · exfalso; exact hz.2 (by rw [mem_closedBall, dist_zero_right]; exact h0.le)
+            · exact h0) h)
+          rw [hn1] at this
+          linarith
+        · rintro rfl
+          refine Metric.mem_closure_iff.2 fun δ hδ => ?_
+          set t : ℝ := min (δ / 2) (1 / 16) with ht
+          have ht0 : 0 < t := lt_min (by linarith) (by norm_num)
+          have htδ : t < δ := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+          have ht16 : t ≤ 1 / 16 := min_le_right _ _
+          have hb : ((1 + t : ℝ) : ℂ) * e θ ∈ ball (1 : ℂ) (1 / 4) := hnear θ hθ' t (by rw [abs_of_pos ht0]; exact ht16)
+          have hnb : ‖((1 + t : ℝ) : ℂ) * e θ‖ = 1 + t := by rw [hne1, abs_of_pos (by linarith)]
+          refine ⟨((1 + t : ℝ) : ℂ) * e θ, ⟨⟨⟨Or.inl hb, ?_⟩, ?_⟩, ?_⟩, ?_⟩
+          · intro h
+            have := norm_eq_one_of_mem_isoFrag_arcs h
+            linarith
+          · show isoFrag.col _ = 1
+            have : ¬ isoFrag.col (((1 + t : ℝ) : ℂ) * e θ) = 0 := by
+              rw [isoFrag_col_eq_zero_iff]
+              rintro (h | h)
+              · linarith
+              · exact hnotY _ hb h
+            revert this
+            generalize isoFrag.col (((1 + t : ℝ) : ℂ) * e θ) = c
+            fin_cases c <;> simp
+          · rw [mem_closedBall, dist_zero_right, hnb]; intro h; linarith
+          · rw [dist_eq_norm]
+            have : ringPt 0 θ - ((1 + t : ℝ) : ℂ) * e θ = -((t : ℂ) * e θ) := by simp [ringPt]; push_cast; ring
+            rw [this, norm_neg, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]; simp [e]; exact htδ
+  have h0 : (0 : Fin 2) ∉ isoFrag.coloursAt 0 := fun h => by
+    have := hclosfar 0 0 h
+    norm_num at this
+  -- the sector tile
+  have hYconv : Convex ℝ isoY := by
+    have e1 : isoY = ball (2 : ℂ) (1 / 4) ∩ {z : ℂ | |(z - 2).im| < √3 * (z - 2).re} := by
+      ext z; simp [isoY, mem_ball, dist_eq_norm]
+    rw [e1]
+    refine (convex_ball _ _).inter ?_
+    intro a ha b hb s t hs ht hst
+    simp only [mem_setOf_eq] at ha hb ⊢
+    have hre : (s • a + t • b - 2).re = s * (a - 2).re + t * (b - 2).re := by
+      have : (s • a + t • b - 2) = (s : ℂ) * (a - 2) + (t : ℂ) * (b - 2) := by
+        have : (2 : ℂ) = ((s + t : ℝ) : ℂ) * 2 := by rw [hst]; simp
+        rw [Complex.real_smul, Complex.real_smul]
+        calc (s : ℂ) * a + t * b - 2 = s * a + t * b - ((s + t : ℝ) : ℂ) * 2 := by rw [← this]
+          _ = _ := by push_cast; ring
+      rw [this]; simp
+    have him : (s • a + t • b - 2).im = s * (a - 2).im + t * (b - 2).im := by
+      have : (s • a + t • b - 2) = (s : ℂ) * (a - 2) + (t : ℂ) * (b - 2) := by
+        have : (2 : ℂ) = ((s + t : ℝ) : ℂ) * 2 := by rw [hst]; simp
+        rw [Complex.real_smul, Complex.real_smul]
+        calc (s : ℂ) * a + t * b - 2 = s * a + t * b - ((s + t : ℝ) : ℂ) * 2 := by rw [← this]
+          _ = _ := by push_cast; ring
+      rw [this]; simp
+    rw [hre, him]
+    calc |s * (a - 2).im + t * (b - 2).im| ≤ |s * (a - 2).im| + |t * (b - 2).im| := abs_add_le _ _
+      _ = s * |(a - 2).im| + t * |(b - 2).im| := by rw [abs_mul, abs_mul, abs_of_nonneg hs, abs_of_nonneg ht]
+      _ < √3 * (s * (a - 2).re + t * (b - 2).re) := by
+        set A := √3 * (a - 2).re - |(a - 2).im| with hAdef
+        set B := √3 * (b - 2).re - |(b - 2).im| with hBdef
+        have hA : 0 < A := by rw [hAdef]; linarith
+        have hB : 0 < B := by rw [hBdef]; linarith
+        have h1 := mul_le_mul_of_nonneg_left (min_le_left A B) hs
+        have h2 := mul_le_mul_of_nonneg_left (min_le_right A B) ht
+        have h3 : s * min A B + t * min A B = min A B := by rw [← add_mul, hst, one_mul]
+        have h4 : 0 < min A B := lt_min hA hB
+        have : s * |(a - 2).im| + t * |(b - 2).im| = √3 * (s * (a - 2).re + t * (b - 2).re) - (s * A + t * B) := by
+          rw [hAdef, hBdef]; ring
+        linarith
+  have hx0 : ((21 / 10 : ℝ) : ℂ) ∈ isoY := by
+    refine ⟨?_, ?_⟩
+    · rw [show ((21 / 10 : ℝ) : ℂ) - 2 = ((1 / 10 : ℝ) : ℂ) by push_cast; ring, Complex.norm_real]; norm_num
+    · rw [show ((21 / 10 : ℝ) : ℂ) - 2 = ((1 / 10 : ℝ) : ℂ) by push_cast; ring]
+      simp only [Complex.ofReal_im, Complex.ofReal_re, abs_zero]
+      positivity
+  have htile : isoFrag.TileOf 0 isoY := by
+    refine ⟨⟨_, hYint _ hx0, ?_⟩, fun z hz => hY0 z hz⟩
+    apply subset_antisymm
+    · exact hYconv.isPreconnected.subset_connectedComponentIn hx0 (fun z hz => hYint z hz)
+    · refine IsPreconnected.subset_left_of_subset_union (v := (closure isoY)ᶜ) hopenY isClosed_closure.isOpen_compl
+        (disjoint_compl_right.mono_left subset_closure) ?_ ⟨_, mem_connectedComponentIn (hYint _ hx0), hx0⟩
+        isPreconnected_connectedComponentIn
+      intro p hp
+      have hpi := connectedComponentIn_subset _ _ hp
+      rcases hpi.1 with hb | hY
+      · right; intro hcl
+        have := hclY p hcl
+        linarith [(norm_bounds_of_mem_ball_one hb).2]
+      · left; exact hY
+  have hdisj : Disjoint isoY (closedBall 0 2) := disjoint_left.2 fun z hz hb => by
+    have := two_lt_norm_of_mem_isoY hz
+    rw [mem_closedBall, dist_zero_right] at hb
+    linarith
+  have hcl2 : (2 : ℂ) ∈ closure isoY := by
+    refine Metric.mem_closure_iff.2 fun δ hδ => ?_
+    set t : ℝ := min (δ / 2) (1 / 8) with ht
+    have ht0 : 0 < t := lt_min (by linarith) (by norm_num)
+    have htδ : t < δ := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+    have ht8 : t ≤ 1 / 8 := min_le_right _ _
+    refine ⟨2 + (t : ℂ), ⟨?_, ?_⟩, ?_⟩
+    · rw [add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]; linarith
+    · rw [add_sub_cancel_left]
+      simp only [Complex.ofReal_im, Complex.ofReal_re, abs_zero]
+      exact mul_pos (Real.sqrt_pos.2 (by norm_num)) ht0
+    · rw [dist_eq_norm, show (2 : ℂ) - (2 + (t : ℂ)) = -(t : ℂ) by ring, norm_neg, Complex.norm_real, Real.norm_eq_abs,
+        abs_of_pos ht0]
+      exact htδ
+  have hr2 : isoFrag.r2Contacts 0 (-(1 / 8)) (1 / 8) 0 = {0} := by
+    ext θ
+    simp only [ArcMap.r2Contacts, mem_setOf_eq, mem_singleton_iff]
+    constructor
+    · rintro ⟨hθ, hcl⟩
+      have hK : ∀ z ∈ closure (isoFrag.region 0), ‖z‖ ≤ 5 / 4 ∨ (‖z - 2‖ ≤ 1 / 4 ∧ |(z - 2).im| ≤ √3 * (z - 2).re) := by
+        intro z hz
+        have hKc : IsClosed {z : ℂ | ‖z‖ ≤ 5 / 4 ∨ (‖z - 2‖ ≤ 1 / 4 ∧ |(z - 2).im| ≤ √3 * (z - 2).re)} :=
+          (isClosed_le continuous_norm continuous_const).union
+            ((isClosed_le (f := fun z : ℂ => ‖z - 2‖) (g := fun _ => (1 / 4 : ℝ)) (by fun_prop) continuous_const).inter
+              (isClosed_le (f := fun z : ℂ => |(z - 2).im|) (g := fun z : ℂ => √3 * (z - 2).re) (by fun_prop) (by fun_prop)))
+        refine closure_minimal (fun w hw => ?_) hKc hz
+        rcases hw.1.1 with hb | hY
+        · exact Or.inl (norm_bounds_of_mem_ball_one hb).2.le
+        · exact Or.inr ⟨hY.1.le, hY.2.le⟩
+      have h2 := hK _ hcl
+      have hn2 : ‖(0 : ℂ) + 2 * e θ‖ = 2 := by simp [e]
+      rcases h2 with h | ⟨-, h⟩
+      · rw [hn2] at h; linarith
+      · have hre : ((0 : ℂ) + 2 * e θ - 2).re = 2 * (Real.cos θ - 1) := by simp [e, Complex.exp_ofReal_mul_I_re]; ring
+        have him : ((0 : ℂ) + 2 * e θ - 2).im = 2 * Real.sin θ := by simp [e, Complex.exp_ofReal_mul_I_im]
+        rw [hre, him] at h
+        have h3 : 0 < √3 := Real.sqrt_pos.2 (by norm_num)
+        have hc1 : Real.cos θ ≤ 1 := Real.cos_le_one θ
+        have hcc : Real.cos θ = 1 := by
+          have := abs_nonneg (2 * Real.sin θ)
+          nlinarith [mul_nonneg h3.le (sub_nonneg.2 hc1)]
+        have hs0 : Real.sin θ = 0 := by
+          have hsq := Real.sin_sq_add_cos_sq θ
+          rw [hcc] at hsq
+          nlinarith
+        exact (Real.sin_eq_zero_iff_of_lt_of_lt (by linarith [hθ.1, Real.pi_gt_three]) (by linarith [hθ.2, Real.pi_gt_three])).1 hs0
+    · rintro rfl
+      exact ⟨⟨by norm_num, by norm_num⟩, closure_mono (fun z hz => hYreg z hz) (by simpa [e] using hcl2)⟩
+  have hev : ∀ᶠ s : ℝ in 𝓝[>] 0, ¬ isoFrag.IsClear 0 (0 + (1 + (s : ℂ)) * e 0) := by
+    filter_upwards [Ioo_mem_nhdsGT (by norm_num : (0 : ℝ) < 1 / 4)] with s hs hclear
+    have hmem : (2 + (s : ℂ)) ∈ isoY := by
+      refine ⟨?_, ?_⟩
+      · rw [add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hs.1]; exact hs.2
+      · rw [add_sub_cancel_left]
+        simp only [Complex.ofReal_im, Complex.ofReal_re, abs_zero]
+        exact mul_pos (Real.sqrt_pos.2 (by norm_num)) hs.1
+    refine hclear _ (hYreg _ hmem) ?_
+    rw [dist_eq_norm]
+    simp [e]
+    ring_nf
+    simp
+  exact ⟨hvalid, harc, h0, htile, hdisj, hcl2, hr2, hev⟩
 
 /-! ## FS112-FLANK: N4-FLANK at a horn bound `±1` -/
 

@@ -251,12 +251,46 @@ noncomputable def bowtieArcs : Set Arc :=
 
 /-- Every boundary piece of the bowtie has positive length. -/
 theorem bowtieArcs_nondegenerate : ∀ a ∈ bowtieArcs, a.Nondegenerate := by
-  sorry
+  have hang : 0 < bowtieAngle := Real.arcsin_pos.2 (by norm_num)
+  have hang2 : bowtieAngle ≤ π / 2 := Real.arcsin_le_pi_div_two _
+  intro a ha
+  simp only [bowtieArcs, mem_setOf_eq, List.mem_cons, List.not_mem_nil, or_false] at ha
+  have hne : ∀ x y x' y' : ℝ, (x ≠ x' ∨ y ≠ y') → pt x y ≠ pt x' y' := by
+    intro x y x' y' h hxy
+    have h1 := congrArg Complex.re hxy
+    have h2 := congrArg Complex.im hxy
+    simp only [pt] at h1 h2
+    rcases h with h | h <;> contradiction
+  have hI : ∀ x y : ℝ, (x ≠ 0 ∨ y ≠ 1) → pt x y ≠ I := by
+    intro x y h hxy
+    have h1 := congrArg Complex.re hxy
+    have h2 := congrArg Complex.im hxy
+    simp only [pt, Complex.I_re, Complex.I_im] at h1 h2
+    rcases h with h | h <;> contradiction
+  have hnI : ∀ x y : ℝ, (x ≠ 0 ∨ y ≠ -1) → pt x y ≠ -I := by
+    intro x y h hxy
+    have h1 := congrArg Complex.re hxy
+    have h2 := congrArg Complex.im hxy
+    simp only [pt, Complex.neg_re, Complex.neg_im, Complex.I_re, Complex.I_im] at h1 h2
+    rcases h with h | h <;> [exact h (by linarith); exact h (by linarith)]
+  rcases ha with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl |
+    rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
+  · exact ⟨one_pos, by linarith, by linarith [Real.pi_pos]⟩
+  · exact ⟨one_pos, by linarith, by linarith [Real.pi_pos]⟩
+  all_goals first
+    | exact (hI _ _ (by norm_num)).symm
+    | exact hI _ _ (by norm_num)
+    | exact (hnI _ _ (by norm_num)).symm
+    | exact hnI _ _ (by norm_num)
+    | exact hne _ _ _ _ (by norm_num)
 
 /-- The bowtie has finitely many boundary pieces. -/
 theorem bowtieArcs_locallyFinite : ∀ x ∈ interior (closure bowtieTiles), ∃ t ∈ 𝓝 x,
     {a | a ∈ bowtieArcs ∧ (a.carrier ∩ t).Nonempty}.Finite := by
-  sorry
+  intro x _
+  refine ⟨univ, univ_mem, ?_⟩
+  have hfin : bowtieArcs.Finite := by unfold bowtieArcs; exact List.finite_toSet _
+  exact hfin.subset fun a ha => ha.1
 
 /-- The bowtie's colour is locally constant off its boundary pieces, inside its domain. -/
 theorem bowtieCol_locallyConstant : ∀ x ∈ interior (closure bowtieTiles), x ∉ ⋃ a ∈ bowtieArcs, a.carrier →
