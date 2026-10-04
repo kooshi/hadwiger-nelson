@@ -6,7 +6,15 @@ standing rules `plans/STANDING-RULES.md`. Nothing in this milestone is blind (in
 
 ## Theorems this phase proved
 
-*(filled as stages land; one line per theorem, its grade and its address)*
+- **E4-RIM** — at an un-enclosed `u` (no tile of a colour of `u` has a tile at `u` in a hole) the base's eleventh point exists — [hand], one mind —
+  § Argument for E4-RIM.
+- **E4-OUTERMOST** — within 1 of any point of a valid fragment: a bad point, or a cubic trichromatic vertex no tile encloses (any `k`) — [hand], one
+  mind — § Argument for E4-OUTERMOST.
+- **E4-BEND-UN** — the toward-bend keeps the un-enclosure hypothesis — [hand], one mind, a sketch at the collar push — § Argument for E4-BEND-UN.
+- **E4-N3BASE-UN** — FS112-N3-BASE with the un-enclosure hypothesis added — [hand], one mind, over the walk's other steps at their filed grade —
+  § Argument for E4-N3BASE-UN.
+- **E4-LOCALDENSE** — FS129-OR1-LOCALDENSE's statement, radius 3, re-proved over E4-OUTERMOST and E4-N3BASE-UN — [derived], one mind.
+- Stated as stalls (GAP): **E4-Q1** (enclosure excluded under `BaseCtx`) and **E4-Q2** (the count closes in the enclosure case) — § Q1 and Q2.
 
 ## Stage 1 — SAVED: the readback, the questions restated, the predictions
 
@@ -84,7 +92,7 @@ Registered after the reading in § 1.2 and a first pass of thought, before any s
 Two dispatch shapes at once. **A known theorem that almost applies:** `[Voronov2023]` Lemma 6.1 proves the eleventh point, and one hypothesis fails as
 the object is described — its regions are 1-connected (made so by Observation 2.2, a global recolouring), and a tile of a fragment need not be. **A wall
 that describes a counterexample:** the planner's picture (a tile of a colour of `u` wrapped round `u`) is what a counterexample to the step must carry.
-The stall is located exactly: the walk's paragraph "The eleventh point [hand, one mind]" (`plans/FS112-N-proof.md` l. 796–798) proves where `R` lies
+The stall is located exactly: the walk's paragraph "The eleventh point [hand, one mind]" (`plans/FS112-N-proof.md` l. 789–791) proves where `R` lies
 (`R ⊂ B(u, 1)`, through NOBOTH) and never that the point exists; its table row "the eleventh point | `R` inside `γ(u)` | `R ⊂ B(u, 1)` by N-E1 | nowhere"
 records the location step and is silent on existence.
 
@@ -388,3 +396,127 @@ derivation: E4-Q2
   handoff: none — a stated stall; its smallest open form, for the next mind: can an enclosed u have its nine selected endpoints of nine distinct multicolours?
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: Q3 (the repair, its cost, the Lean-level change) and Q4 (the filed rows)
+
+### 5.1 Q3 — which repair holds
+
+**Repair (b), at radius 3: holds, with no radius change anywhere** (E4-N3BASE-UN, E4-OUTERMOST, E4-LOCALDENSE). The fixed-vertex statements gain one
+hypothesis, `UnenclosedC u`; the consumer that chooses a vertex (`localDense`) chooses the rim vertex of the outermost tile about its centre, which lies
+within 1 of the centre exactly as FS112-DISC1's vertex did, and is un-enclosed by construction. The planner's "at radius 4 if needed" is not needed.
+
+**Repair (c), `BaseHyp` at radius 3: dominated.** Its proof would itself need E4-OUTERMOST (to move from an enclosed `u` to an un-enclosed `v` within 1),
+then the base at `v` with `NoInertNear` at `v` — so `NoInertNear` at radius 2 about `u` as well. And `localDense`, if it kept FS112-DISC1's vertex `w`,
+would read `B̄(w, 3) ⊆ B̄(x, 4)`: radius 4 in `localDense`, `dense3`, row 135's headline, and FS129-OR1-DISCF-NS's `R + 3`. If instead `localDense`
+used E4-OUTERMOST, (c) is not needed at all. Either way (b) is cheaper.
+
+| statement | under (b) — recommended | under (c) |
+|---|---|---|
+| `Row134BaseUA` | gains `F.UnenclosedC u` | `Covers u 3`, `BaseHyp` at radius 3, `NoInertNear` at radius 2 |
+| `BaseCtx` | gains the field `unenclosed : F.UnenclosedC u`; `exists_eleventh`'s statement unchanged, now provable (E4-RIM) | the same field inside its proof, after the move |
+| `n3_base` (FS112-N3-BASE) | gains `(hE : F.UnenclosedC u)`; a pre-bend child keeps it (E4-BEND-UN) | `Covers u 3`, `BaseHyp` at radius 3 |
+| `localDense` (FS129-OR1-LOCALDENSE) | **unchanged**; its proof calls a new lemma (E4-OUTERMOST) in place of FS112-DISC1 | radius 4, or (b)'s proof |
+| `dense3` (FS112-N3-DENSE3) | **unchanged** | radius 4 |
+| `cv_exists` (FS114-CV-EXISTS) | **unchanged** | unchanged (its route reads `dense3` at whatever radius) |
+| `not_row134BaseUA_seven` | its hypothesis list gains `F.UnenclosedC u`; the seven-brick map's tiles are rectangles, so it holds | radius 3 |
+| rows | row 135's base clause gains "un-enclosed"; no headline changes | row 135's headline radius 3 → 4 |
+
+### 5.2 The Lean-level change, drafted (for de Bruijn, through Keryx)
+
+In `Plane/ValidMap/Chain.lean`, namespace `ArcMap`, beside `NoInertNear`:
+```lean
+/-- **No tile of a colour of `u` encloses a tile at `u`** (FS131-E4 E4-RIM's hypothesis): for every tile `T` of a colour carried at `u` and every tile
+`S` whose closure holds `u`, each point of `S` off `cl T` lies in an unbounded component of `(cl T)ᶜ`. Without it the base's eleventh point is open
+(`plans/FS131-E4-derivation.md` E4-Q1, E4-Q2). -/
+def UnenclosedC (u : ℂ) : Prop :=
+  ∀ c ∈ F.coloursAt u, ∀ T S, F.TileOf c T → F.IsTile S → u ∈ closure S →
+    ∀ y ∈ S \ closure T, ¬ Bornology.IsBounded (connectedComponentIn (closure T)ᶜ y)
+
+/-- **No tile encloses a tile at `v`** (E4-OUTERMOST's conclusion; it implies `UnenclosedC v`). -/
+def Unenclosed (v : ℂ) : Prop :=
+  ∀ T S, F.IsTile T → F.IsTile S → v ∈ closure S →
+    ∀ y ∈ S \ closure T, ¬ Bornology.IsBounded (connectedComponentIn (closure T)ᶜ y)
+```
+and the statement, its docstring's bold sentence gaining "**and no tile of a colour of `u` enclosing a tile at `u`**":
+```lean
+def Row134BaseUA : Prop :=
+  ∀ (F : ArcMap 6) (u : ℂ), F.Valid → F.Covers u 2 → F.IsCubicTrichromatic u → F.BaseHyp u → F.NoInertNear u →
+    F.UnenclosedC u → False
+```
+In `Plane/ValidMap/BaseWalk.lean`: `BaseCtx` gains `unenclosed : F.UnenclosedC u` (doc: "no tile of a colour of `u` encloses a tile at `u`");
+`exists_eleventh`'s statement is unchanged and its docstring's "**GAP as the walk stands**" becomes "proved from `B.unenclosed` (FS131-E4 E4-RIM)". In
+`Plane/ValidMap/BaseDense.lean`:
+```lean
+theorem n3_base {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hu2 : F.Covers u 2)
+    (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u) (hE : F.UnenclosedC u) : False
+
+/-- **The outermost tile's rim** (FS131-E4 E4-OUTERMOST): within `1` of any point of a valid fragment there is a bad point, or a cubic trichromatic
+vertex that no tile encloses. Any `k`. -/
+theorem exists_unenclosed_or_bad {k : ℕ} {F : ArcMap k} (hF : F.Valid) {x : ℂ} {ρ : ℝ} (hρ : 0 < ρ)
+    (hx : closedBall x (1 + ρ) ⊆ F.dom) :
+    (∃ y ∈ closedBall x 1, y ∈ F.fourSet ∪ F.repSet) ∨ ∃ v ∈ closedBall x 1, F.IsCubicTrichromatic v ∧ F.Unenclosed v
+```
+`localDense`, `dense3`, `cv_exists`: statements unchanged; `localDense`'s proof is `exists_unenclosed_or_bad` (with `ρ = 2`) then `n3_base` at `v`
+(`closedBall v 2 ⊆ closedBall x 3`). `not_row134BaseUA_seven`'s quantified hypothesis list gains `F.UnenclosedC u` (one more conjunct for the
+seven-brick corner: each tile is an open rectangle, whose closure has a connected, unbounded complement).
+
+**Children owed by these proofs** (each has its argument in this record): `exists_eleventh` from `B.unenclosed` (§ Argument for E4-RIM);
+`exists_unenclosed_or_bad` (§ Argument for E4-OUTERMOST); the pre-bend keeps `UnenclosedC u` (§ Argument for E4-BEND-UN; it joins the planner's owed
+strengthened-bend child); `Unenclosed.unenclosedC` (by definition). **One planar lemma serves the first two**: the frontier of the unbounded component of
+the complement of a compact connected subset of `ℂ` is connected (unicoherence of the plane). Mathlib holds no such lemma (§ 2.2); the planner's "finite
+boundary graph" route for `retArcs_nested` and `exists_endpoint` may carry it as "the outer face of a connected finite plane graph has connected
+boundary". The route is de Bruijn's choice.
+
+### 5.3 Q4 — the filed rows, by address
+
+| row | where its derivation runs the base | fixed vertex or hole-filled? | fate |
+|---|---|---|---|
+| **134** | FS110-CLOSURE (`plans/FS110-derivation.md` l. 28–31): "FS110-COR1-NOD2 on the modification" — the terminal valid modification of a map of the plane. COR1-NOD2's proof is CB §D5–D6, whose D5 item 6 obtains the eleventh point "once monochromatic regions are simply connected — hole-filling (Voronov Obs. 2.2) is AE-valid globally", and D6 then runs the base "on any trichromatic u"; CE E6: "Its existence uses only that R's outer boundary carries two colours of M after hole-filling" | **hole-filled, global** — the sources' argument applies (Condition 5 holds everywhere, no radius) | **stands.** A grade precision, not a defect: of COR1-NOD2's two minds (CB, CD), CD left the eleventh point's existence open in multiply connected merged maps (CD § 2.6, § 2.8 item 2), so for that one step the minds are CB and CE, both through hole-filling |
+| **135** | its headline is FS112-N3-DENSE3 (`plans/FS112-derivation.md` l. 178–179): "a closed unit disc holds a vertex of degree at least 3 (FS112-DISC1); if it is cubic trichromatic, FS112-N3-BASE puts one of the two kinds within 2 of it" — the base at DISC1's vertex, whose chain stops at the first branch point (`plans/FS112-NB2-verification.md` § 1.4 item 3) and may be enclosed by a tile further out; and its clause "the base … still refutes a map near any cubic trichromatic vertex with no four-colour or repeated-colour vertex within 2" is FS112-N3-BASE as filed (l. 171) | **fixed vertex** — the step is open there | **headline stands**, its proof re-routed (E4-LOCALDENSE; `dense3` is `localDense` on a plane map). **The base clause, as filed, is a GAP at an enclosed vertex**; corrected text drafted below |
+| **137** | FS114-CV-EXISTS "over FS112-N3-DENSE3 and row 134's base" (its grade line); the route (`plans/FS114-CVB-verification.md` § 1.4) reads `dense3` on `M*` | **through DENSE3's statement** | **stands**: DENSE3's statement survives under the repair. Grade-line precision drafted |
+
+**Further consumers, traced by grep** (`plans/*derivation*.md`, `LEDGER.md`): FS129-OR1-LOCALDENSE — statement stands, its *uses only* line changes
+(E4-OUTERMOST and E4-N3BASE-UN replace FS112-DISC1 and FS112-N3-BASE as filed); FS129-OR1-DISCF-NS (rests on LOCALDENSE's statement) — stands, `R + 3`
+kept; FS112-C-COMPOSE (over DENSE3) — stands; FS112-DISC1 — stands, and is no longer read by DENSE3 or LOCALDENSE; FS114-L60-WALK (names N3-BASE for
+"no step needs the strict bound") — unaffected; FS131-E2's reading of the eleventh-point paragraph (NOBOTH at `u`) — unaffected (it reads the location
+step, which stands).
+
+### 5.4 Drafts for Keryx (each names its slot)
+
+1. **`LEDGER.md` row 135**, in the bold statement: replace
+   "the base (S–V Cor. 1, curved, almost everywhere) still refutes a map near any cubic trichromatic vertex with no four-colour or repeated-colour vertex
+   within 2, every unit-arc exception of its steps being such a vertex;"
+   by
+   "the base (S–V Cor. 1, curved, almost everywhere) still refutes a map near any cubic trichromatic vertex with no four-colour or repeated-colour vertex
+   within 2 that no tile of one of its colours encloses, every unit-arc exception of its steps being such a vertex — at an enclosed vertex its eleventh
+   point is open, and every closed disc of radius 1 holds an un-enclosed one or a vertex of those kinds (FS131-E4);"
+   and in its grade bracket, after "over row 134's base, re-derived by BASE-V at FS-114 but for Lemma 4 at cusps (CUSP-BASE's D5 items 1–4, 6, one mind),
+   where a common error would now sit;", insert " the eleventh point at an un-enclosed vertex and the outermost-tile choice one mind (FS131-E4);".
+2. **`LEDGER.md` row 137**, grade bracket: replace "over FS112-N3-DENSE3 and row 134's base" by "over FS112-N3-DENSE3 (its base run at an un-enclosed
+   vertex, FS131-E4) and row 134's base".
+3. **`LEDGER.md` row 134** (optional precision), grade bracket: after "S–V Cor. 1 a.e. with no `d = 2` exception two minds, both blind (CB, CD)", insert
+   " — the eleventh point's existence CB's and CE's, both after hole-filling; CD left it open in multiply connected merged maps".
+4. **Erratum to `plans/FS112-derivation.md`** (dated, under FS112-N3-BASE, the original standing above it): "*Erratum (2026-10-04, FS131-E4).* The walk's
+   eleventh-point step (N3 stage N3-3, l. 789–791) shows where the point lies, not that it exists; at a vertex enclosed by a tile of one of its colours
+   inside `B(u, 1)` its existence is open (`plans/FS131-E4-derivation.md` E4-Q1, E4-Q2). The entry holds as stated with the added hypothesis 'no tile of a
+   colour of `u` has a tile at `u` in a hole' (E4-N3BASE-UN, over E4-RIM); FS112-N3-DENSE3's statement holds, its vertex taken on the outermost tile's rim
+   (E4-OUTERMOST, E4-LOCALDENSE) in place of FS112-DISC1's."
+5. **Erratum to `plans/FS129-derivation.md`** (dated, under FS129-OR1-LOCALDENSE): "*Erratum (2026-10-04, FS131-E4).* The statement stands. Its *uses
+   only* line read FS112-N3-BASE at FS112-DISC1's vertex, where the base's eleventh point is open if that vertex is enclosed; the proof now reads
+   E4-OUTERMOST and E4-N3BASE-UN (`plans/FS131-E4-derivation.md`), radius 3 kept."
+6. **The planner's record** (`plans/FS131-w5base-kernel-plan.md` § 2.3, branch `fs131-w5b`) is de Bruijn's: its repair list resolves to (b) at radius 3,
+   with `UnenclosedC` as drafted in § 5.2.
+
+## Stage 5 — SAVED
+
+## Close — predictions scored (G21)
+
+| id | p | outcome | score |
+|---|---|---|---|
+| E4-P1 (Q1's exclusion derived) | 0.15 | not landed — E4-Q1 stalls | Brier 0.0225 |
+| E4-P2 (a configuration exhibited) | 0.02 | not landed | Brier 0.0004 |
+| E4-P3 (Q2's count closes another way) | 0.10 | not landed — E4-Q2 stalls | Brier 0.0100 |
+| E4-P4 (a repair keeps radius 3; only `Row134BaseUA` and `n3_base` gain a hypothesis) | 0.80 | met (with `BaseCtx`'s field and the seven-colour control's hypothesis list following mechanically) | Brier 0.0400 |
+| E4-P5 (row 134 hole-filled; rows 135, 137 at a fixed vertex through DENSE3) | 0.85 | met | Brier 0.0225 |
+
+Mean Brier 0.019. The repair was priced right; the closure was priced low and did not land.
