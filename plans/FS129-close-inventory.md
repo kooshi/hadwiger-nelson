@@ -436,3 +436,36 @@ One line per item with its source; no narration. Each line is ticked done or dec
 114. **SA1's registration, provisionally scored** (record § 6.4; FS129-Z1 scores): merges with an entry 5 (registered 3); merge lines 17 (10);
      weakenings 2 (2); empty 1 (2); disagreements 2 (2); lost 14 of 68 (5); lane-A edges 8 false of 9 (half); no held result false (P = 0.12); no
      attack succeeded (P = 0.10).
+115. **FS129-SR2 reported STAGE 4 SAVED** (`data/fs129/reports/FS129-SR2.md`; commits `21e80e0d` … `af8e9ddf`, five, all present; ≈342k by the
+     harness). Lane R's Lean-order sweep is complete: all 151 rows SR1 left have a line; 18 merges, 4 weakenings, 6 disagreements, 0 vacuity
+     additions; no held result false. Seven entries, derived, one mind: FS129-SR2-CLOSURE (FS106-DIAM (iii), FS111-V0-CLOSE and FS116-V5-NE1's
+     first clause one lemma, proved three times in two eras), -HULLSET (FS111-C-HULL for any single measurable set with null unit pairs — a
+     seed with a long chain), -SUPK (FS106-SUP at every k, the input FS106-EQ's every-k form uses), -DISC1TS, -YESLIM-EQ (FS116-O1-YESLIM in two
+     lines from FS106-EQ and Lemma P), -QFCASE (FS116-S1-QF a case of QFREE; no non-simple remainder), -TOUCHW (FS116-N1-TOUCH without its idle
+     hypothesis). **Keryx's receipt**: derive gate re-run, exit 0, PASS (3 controls fire); `tools/fs129_sr2_cycles.py` re-run — "SR2 edges sorted:
+     23 (real 1, route 3, false 13, reversed 6); lane-R cycles 11 -> 2; Lean order 197 -> 171 … -> 160".
+116. **Correction owed, the backlog's — errata the index cannot see** (SR2 § 2.4): FS129-L1 must quote FS112-L60, FS112-C-ENDS, FS112-C-DOUBLE,
+     FS112-N3-BASE, FS114-N2-ENDS, FS114-N3-JOINT and FS114-N7-3T together with the errata filed under them, or the backlog formalizes a false or
+     superseded form. For FS129-L1's brief.
+117. **Corrections owed, for FS129-Z1** (SR2): FS111-M-COVER-SC's handoff ("superseded by FS111-M2-HULLC") is wrong — HULLC adds regular classes;
+     FS106-EQ should cite SUPK; FS114-Y3-RSTOP is a member of FS114-Y4-RSTOPALL only on the non-Siamese simple part; `plans/FS129-OR1-audit.md` § J3:
+     S1-QF has no non-simple remainder; FS111-W-NOREP's GAP is answered by FS121-DB1-L3 for honest REG-J′ colourings. Stub line for FS-125: the
+     saturated cross with no (Q) arc is closed in its whole class (QFCASE).
+118. **Tool defect, item 99 extended** (SR2): 13 more false and 6 more reversed edges inside lane-R cycles (companion mentions, scope markers,
+     "members", refuted entries naming their corrected forms, "It rests on X" read backwards), 3 more route edges; with SR1's sort, lane-R cycles
+     11 → 2 and the Lean order 197 → 171 rows (160 on first routes). For FS129-Z2. **Held for the backlog session** (SR2): the rows that leave the
+     Lean order — FS106-EQ, -COMP, -REM, FS111-V0-CLEAN, -C1-PW among them — leave because no seed rests on them, "which is not the same as having
+     no value".
+119. **Item 63 scoped** (SR2): 27 GAP lines inside 24 Lean-order entries — 1 answered elsewhere without a link back (item 117's NOREP), 6 answered in
+     place, 11 open questions belonging to frontier stubs, 8 unread.
+120. **Ruling — pass 3's last items split**: FS129-SR3 takes item 81's first lead (G83's straddle against FS114-K1's (Q)-ring residues), the wider
+     V6-ADJ (DOUBLETIP's analogue; items (c) second lead and (d)), and item 63's 8 unread GAP lines — the cross-applications. Item 81's third lead
+     (a coupling of two circles' windings for FS106-BIKE) and item (e) (an O1-OUT for valid maps) are new derivations, not applications of a held
+     result: they go to FS129-Z2's stub lines and FS129-P1 (with item 101). Alternative: SR3 takes all five. Why: the audit applies what is held;
+     a missing lemma is a milestone's question. Confidence: medium.
+121. **Ruling — the record job's first part starts beside SR3**: FS129-Z1 (the derivation file, the lost theorems of item 110, the errata) launches
+     now; FS129-Z2 (the index corrections, stubs, scored predictions, front-page drafts) after SR3, folding SR3's entries in. Alternative: wait for
+     SR3. Why: Z1's inputs are all saved; SR3's are few and land in Z2. Confidence: high.
+122. **SR2's registration** (record § 4.4): merges 18 against 8; weakenings 4 against 2; disagreements 6 against 3; vacuity additions 0 against 2;
+     two binary predictions, Brier 0.108. Prior art: TOUCHW owed, the rest partly in-house. Slip, self-reported: stage 1 committed with the gate
+     failing on "no derivation entry" (registration only), disclosed.
