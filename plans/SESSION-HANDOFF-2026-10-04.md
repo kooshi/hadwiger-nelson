@@ -26,7 +26,7 @@ that judge the milestone, written before any job).*
 | wave 4 (25 rows) | 26 of 86 proved (I4, item 125); `localSectors` ruled (item 126); **FS131-I4b running** | `.claude/worktrees/fs131-w4` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | re-planned by W2 with **no open leaf** (item 124); E1-BAD erratum filed; **FS131-IW running**; lands after waves 3–4 and LEB | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
-| Lebesgue's covering theorem (FS131-LEB) | queued (item 66) | — |
+| Lebesgue's covering theorem (FS131-LEB) | **planner running** on its own branch, to land on `main` ahead of wave 4 and Woodall (item 141) | `.claude/worktrees/fs131-leb` |
 | waves 5–10 (124 rows) | not started; wave 5 carries C-DOUBLE + Y3-END-NEEDS (item 69) and FLANK-Q's discharge (item 79); wave 9 bound by item 89's note and item 96's vacuity rule | plan § 7 |
 
 **The finding with bearing** (items 88, 91): the repaired proof of "maps need six" has two GAPs — step 7 open in every class (even with no unit-arc boundaries),
@@ -42,7 +42,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 |---|---|---|---|
 | FS131-IW (Woodall's chain implementer; item 128) | Sonnet | `data/fs131/briefs/FS131-IW-woodall.md` | its branch's (`fs131-ww`) `data/fs131/reports/FS131-IW.md` |
 | FS131-I3g (wave 3, seventh; `localSectors` first, then the four leaves; items 132–133) | Sonnet | `data/fs131/briefs/FS131-I3g-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3g.md` |
-| FS131-E2 (the cusp case; Ephodos; item 127) | Opus | `data/fs131/briefs/FS131-E2-cusp-case.md` | `data/fs131/reports/FS131-E2.md` (claim list `data/fs131/claims-E2.md`) |
+| FS131-LEB (Lebesgue's covering theorem, own branch `fs131-leb`; item 141) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-LEB-lebesgue.md` | its branch's `data/fs131/reports/FS131-LEB.md` |
 | FS131-I2g (wave 2, seventh implementer; item 130) | Sonnet | `data/fs131/briefs/FS131-I2g-wave2.md` | its branch's (`fs131-w2`) `data/fs131/reports/FS131-I2g.md` |
 | FS131-I4b (wave 4, second implementer; item 130) | Sonnet | `data/fs131/briefs/FS131-I4b-wave4.md` | its branch's (`fs131-w4`) `data/fs131/reports/FS131-I4b.md` |
 
@@ -62,7 +62,8 @@ its record's last SAVED stage with a fresh agent on the same brief.
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
 5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
    FS131-I4 launched in I2e's half slot (item 115); I3e's half slot, when it frees, goes to FS131-IW once W2 has re-planned, else a wave-2 or wave-4 Sonnet successor.
-   Queued for the next free Opus slot: **FS131-E2** (Ephodos) — the four-colour clause of FS116-V5-U1 with a cusp at `z`: prove it or build the fragment (item 112).
+   FS131-E2 done (items 139–140): the cusp case holds in the simple class; the skeleton's loose form was false (the monster); errata filed. Queued: an Ephodos
+   job on `exists_not_uniform_kept`'s fringe colouring only if wave 2's implementer cannot find a proper formula (item 118).
 6. **(done) On E1's report**: file its verdicts; if a GAP closes, tell the Woodall implementer; file the row 132 / § The aim corrections per the verdict (W's drafts, plan
    § 5) and the FS106 errata through the record job.
 7. **On a landing** (wave 3 is closest): read the worktree's `build/gate/*/latest`, the axioms digest (`scripts/gate_report.py axioms <log> <prev> CLAUDE.md`),
