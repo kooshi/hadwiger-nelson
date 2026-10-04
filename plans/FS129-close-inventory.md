@@ -480,3 +480,16 @@ One line per item with its source; no narration. Each line is ticked done or dec
      sentence standing beside item 117's correction — the right handling. Routed to FS129-SR3 as item (d) by a dated amendment to its brief:
      either QFREE holds with "simple at p" (a weakening, QFCASE stands) or a named step needs global simplicity (QFCASE fails, item 117's
      correction withdrawn). FS129-L1 waits on the answer for S1-QF.
+125. **Item 124 resolved, outcome (i) and stronger** (FS129-SR3, stage 2, commit `2160c171`; `plans/FS129-SR3-audit.md` § Stage 2): on FS116-V6's
+     route to FS116-Y4-EMPTY, QFREE's chain never uses "simple", not even at p — V6-HUG identifies its tile by colour (through V6-GERM), and
+     V6-COUNT's last step needs only that every tile of p owns some sector at p. New entries, derived, one mind: **FS129-SR3-EMPTY-NS** (EMPTY
+     with "simple" dropped) and **FS129-SR3-QFREE-NS** ("no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a
+     vertex p of at least four colours has a ring carrying no (Q) arc"). QFCASE stands, citing QFREE-NS; item 117's correction stands. FS116-Y4's
+     own route does use simplicity. **Keryx's receipt**: commit present; SR3's derive gate run, exit 0, PASS; QFREE-NS's statement read.
+     **Bearing**: FS-123's non-simple question is closed with its Γ-free and (Q)-free halves; Siamese is what is left. Relayed to FS129-Z1 by
+     message.
+126. **Caution for FS129-L1** (SR3): SR1's list item 2, "DOUBLETIP in place of V6-HUG", would lose EMPTY-NS — DOUBLETIP's step 3 uses one cone per
+     tile at the hubs; keep V6-HUG's own colour step for the Γ-free ring. For FS129-Z2 and FS129-L1.
+127. **SR3 item (a) done** (stage 1, commit `fb7cbc4c`): FS114-Y6-E2RED's survivor S6 is empty by a parity argument — ALT at three of the four pocket
+     pairs forces it at the fourth (FS129-SR3-E2ONE, derived, one mind); PINALL's E2 exception narrows to E2 at two or more blades. SR3 continues
+     with (b) and (c).
