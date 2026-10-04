@@ -561,11 +561,365 @@ theorem ringQPrimeS (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.
 
 /-! ## FS116-N1-QFREE4 (at every `k`) -/
 
+/-- A side of a ring arc: if every colour whose class meets the open set `O` arbitrarily near `a` is `c`, then a small ball
+about `a` meets `O` only inside the closure of the class of `c` (the interior points are dense). -/
+theorem side_ball_subset_closure {O : Set ℂ} (hO : IsOpen O) {a : ℂ} (ha : a ∈ F.dom) {c : Fin k}
+    (hc : ∀ d, a ∈ closure (F.region d ∩ O) → d = c) : ∃ ε > 0, ball a ε ∩ O ⊆ closure (F.region c) := by
+  classical
+  have hev : ∀ᶠ y in 𝓝 a, ∀ d, d ≠ c → y ∉ F.region d ∩ O := by
+    refine Filter.eventually_all.2 fun d => ?_
+    by_cases hd : d = c
+    · exact Filter.Eventually.of_forall fun y h => absurd hd h
+    · have : a ∉ closure (F.region d ∩ O) := fun h => hd (hc d h)
+      exact (isClosed_closure.isOpen_compl.eventually_mem this).mono fun y hy _ hy' => hy (subset_closure hy')
+  obtain ⟨ε, hε, hball⟩ := Metric.mem_nhds_iff.mp (hev.and (F.isOpen_dom.mem_nhds ha))
+  refine ⟨ε, hε, ?_⟩
+  rintro y ⟨hya, hyO⟩
+  rw [_root_.mem_closure_iff]
+  intro o ho hyo
+  have hyd : y ∈ F.dom := (hball hya).2
+  have hy' := F.dense_interiorPts hyd
+  obtain ⟨w, hw, hwI⟩ := _root_.mem_closure_iff.mp hy' (o ∩ (ball a ε ∩ O)) (ho.inter (isOpen_ball.inter hO))
+    ⟨hyo, hya, hyO⟩
+  refine ⟨w, hw.1, ?_⟩
+  have hcol : F.col w = c := by
+    by_contra hne
+    exact (hball hw.2.1).1 (F.col w) hne ⟨⟨hwI, rfl⟩, hw.2.2⟩
+  exact ⟨hwI, hcol⟩
+
+/-- `cos 60° = 1/2` and `sin 60° = √3/2`, the ring point `60°` on in the frame of `r(φ)`. -/
+theorem e_third_eq : e (π / 3) = (1 / 2 : ℝ) + ((Real.sqrt 3 / 2 : ℝ) : ℂ) * I := by
+  rw [e_eq, Real.cos_pi_div_three, Real.sin_pi_div_three]
+
+/-- **The crossing at a side of a ring arc** (the geometry of "a ring arc of `Γ` excludes its side colours `60°` away"): if a
+ball about `r(φ)` meets the open set `O` only inside the closure of the class of `d`, where `O` holds every point whose
+distance from `p` is above `1` (`s = 1`) or below `1` (`s = −1`), then `r(φ ± 60°)` is not in the closure of the class of `d`. -/
+theorem Valid.not_mem_closure_of_side (hF : F.Valid) {p : ℂ} {φ : ℝ} {d : Fin k} {O : Set ℂ} {s σ ε : ℝ}
+    (hs : s = 1 ∨ s = -1) (hσ : σ = 1 ∨ σ = -1) (hε : 0 < ε)
+    (hO : ∀ z, 0 < s * (‖z - p‖ - 1) → z ∈ O) (hball : ball (ringPt p φ) ε ∩ O ⊆ closure (F.region d)) :
+    p + e (φ + σ * (π / 3)) ∉ closure (F.region d) := by
+  intro hy
+  have hs2 : s ^ 2 = 1 := by rcases hs with rfl | rfl <;> norm_num
+  have hσ2 : σ ^ 2 = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  set h : ℝ := min (ε / 2) (1 / 4) with hh
+  have hh0 : 0 < h := lt_min (half_pos hε) (by norm_num)
+  have hh1 : h ≤ ε / 2 := min_le_left _ _
+  have hh2 : h ≤ 1 / 4 := min_le_right _ _
+  -- the points `z(τ) = p + e φ (1 + s h + i s σ τ)`
+  let z : ℝ → ℂ := fun τ => p + e φ * (((1 + s * h : ℝ) : ℂ) + ((s * σ * τ : ℝ) : ℂ) * I)
+  have hzc : Continuous z := by fun_prop
+  have hznorm : ∀ τ, ‖z τ - p‖ ^ 2 = (1 + s * h) ^ 2 + τ ^ 2 := by
+    intro τ
+    have hsq : (s * σ * τ) ^ 2 = τ ^ 2 := by rw [mul_pow, mul_pow, hs2, hσ2]; ring
+    simp only [z, add_sub_cancel_left, norm_mul, norm_e, one_mul]
+    rw [sq_norm_eq]
+    simp only [Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im, Complex.mul_re, Complex.mul_im,
+      Complex.I_re, Complex.I_im]
+    nlinarith [hsq]
+  have hzq : ∀ τ, ‖z τ - ringPt p φ‖ ^ 2 = (s * h) ^ 2 + τ ^ 2 := by
+    intro τ
+    have : z τ - ringPt p φ = e φ * (((s * h : ℝ) : ℂ) + ((s * σ * τ : ℝ) : ℂ) * I) := by
+      simp only [z, ringPt]; push_cast; ring
+    have hsq : (s * σ * τ) ^ 2 = τ ^ 2 := by rw [mul_pow, mul_pow, hs2, hσ2]; ring
+    rw [this, norm_mul, norm_e, one_mul, sq_norm_eq]
+    simp only [Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im, Complex.mul_re, Complex.mul_im,
+      Complex.I_re, Complex.I_im]
+    nlinarith [hsq]
+  have hzS : ∀ τ ∈ Icc 0 h, z τ ∈ closure (F.region d) := by
+    intro τ hτ
+    refine hball ⟨?_, hO _ ?_⟩
+    · rw [mem_ball, dist_eq_norm]
+      have : ‖z τ - ringPt p φ‖ ^ 2 < ε ^ 2 := by
+        rw [hzq, mul_pow, hs2]; nlinarith [hτ.1, hτ.2]
+      exact lt_of_pow_lt_pow_left₀ 2 hε.le this
+    · have hsq := hznorm τ
+      rcases hs with rfl | rfl
+      · have : 1 < ‖z τ - p‖ := by
+          refine lt_of_pow_lt_pow_left₀ 2 (norm_nonneg _) ?_
+          rw [hsq]; nlinarith [hτ.1]
+        linarith
+      · have : ‖z τ - p‖ < 1 := by
+          refine lt_of_pow_lt_pow_left₀ 2 zero_le_one ?_
+          rw [hsq]; nlinarith [hτ.1, hτ.2]
+        linarith
+  have hpre : IsPreconnected (z '' Icc 0 h) := isPreconnected_Icc.image _ hzc.continuousOn
+  -- distances from `y`
+  have hc : Real.cos (σ * (π / 3)) = 1 / 2 := by
+    rcases hσ with rfl | rfl <;> simp [Real.cos_pi_div_three]
+  have hsn : Real.sin (σ * (π / 3)) = σ * (Real.sqrt 3 / 2) := by
+    rcases hσ with rfl | rfl <;> simp [Real.sin_pi_div_three, Real.sin_neg]
+  have hdist : ∀ τ, dist (p + e (φ + σ * (π / 3))) (z τ) ^ 2 = 1 + s * h + h ^ 2 - Real.sqrt 3 * s * τ + τ ^ 2 := by
+    intro τ
+    have h1 : p + e (φ + σ * (π / 3)) - z τ =
+        e φ * (e (σ * (π / 3)) - (((1 + s * h : ℝ) : ℂ) + ((s * σ * τ : ℝ) : ℂ) * I)) := by
+      simp only [z]; rw [e_add]; ring
+    have hsq : (s * σ * τ) ^ 2 = τ ^ 2 := by rw [mul_pow, mul_pow, hs2, hσ2]; ring
+    have h3 : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+    rw [dist_eq_norm, h1, norm_mul, norm_e, one_mul, sq_norm_eq]
+    simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, re_e, im_e, hc, hsn]
+    have h4 : σ * (Real.sqrt 3 / 2) - s * σ * τ = σ * (Real.sqrt 3 / 2 - s * τ) := by ring
+    have h5 : (σ * (Real.sqrt 3 / 2 - s * τ)) ^ 2 = (Real.sqrt 3 / 2 - s * τ) ^ 2 := by rw [mul_pow, hσ2, one_mul]
+    nlinarith [h3, hs2, h4, h5, hsq]
+  have h0 : (0 : ℝ) ∈ Icc 0 h := ⟨le_rfl, hh0.le⟩
+  have h1 : h ∈ Icc 0 h := ⟨hh0.le, le_rfl⟩
+  have hu := hzS 0 h0
+  have hv := hzS h h1
+  have hd0 := hdist 0
+  have hdh := hdist h
+  have h3 : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have h3' : 1.7 < Real.sqrt 3 := by
+    rw [Real.lt_sqrt (by norm_num)]; norm_num
+  rcases hs with rfl | rfl
+  · -- outer: the point at `τ = 0` is farther, the point at `τ = h` nearer
+    refine hF.false_of_crossing hy hpre (fun w hw => ?_) (u := z h) (v := z 0) ⟨h, h1, rfl⟩ ⟨0, h0, rfl⟩ ?_ ?_
+    · obtain ⟨τ, hτ, rfl⟩ := hw; exact hzS τ hτ
+    · refine lt_of_pow_lt_pow_left₀ 2 zero_le_one ?_
+      rw [hdh]; nlinarith
+    · refine lt_of_pow_lt_pow_left₀ 2 dist_nonneg ?_
+      rw [hd0]; nlinarith
+  · refine hF.false_of_crossing hy hpre (fun w hw => ?_) (u := z 0) (v := z h) ⟨0, h0, rfl⟩ ⟨h, h1, rfl⟩ ?_ ?_
+    · obtain ⟨τ, hτ, rfl⟩ := hw; exact hzS τ hτ
+    · refine lt_of_pow_lt_pow_left₀ 2 zero_le_one ?_
+      rw [hd0]; nlinarith
+    · refine lt_of_pow_lt_pow_left₀ 2 dist_nonneg ?_
+      rw [hdh]; nlinarith
+
+/-- Ring points `60°` apart are at distance `1`. -/
+theorem dist_ringPt_third (p : ℂ) (θ σ : ℝ) (hσ : σ = 1 ∨ σ = -1) :
+    dist (ringPt p θ) (ringPt p (θ + σ * (π / 3))) = 1 := by
+  have hπ := Real.pi_pos
+  have hab : |θ - (θ + σ * (π / 3))| = π / 3 := by
+    rcases hσ with rfl | rfl <;> simp [abs_of_pos (by positivity : 0 < π / 3)]
+  rw [dist_ringPt_ringPt p (by rw [hab]; linarith), hab,
+    show π / 3 / 2 = π / 6 by ring, Real.sin_pi_div_six]
+  norm_num
+
+/-- **A ring arc of `Γ` excludes its side colours `60°` away**: at an interior point `r(φ)` of an arc of `Γ` on `ω(p)` with
+constant sides `c`, `c'`, neither `r(φ + 60°)` nor `r(φ − 60°)` lies in the closure of the class of `c` or of `c'`. -/
+theorem IsRingArc.not_mem_closure_third (hF : F.Valid) {p : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
+    (hA : F.IsRingArc p θ₁ θ₂ c c') {φ : ℝ} (hφ : φ ∈ Ioo θ₁ θ₂) {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) :
+    ringPt p (φ + σ * (π / 3)) ∉ closure (F.region c) ∧ ringPt p (φ + σ * (π / 3)) ∉ closure (F.region c') := by
+  have ha : ringPt p φ ∈ F.dom := (hA.2.1 ⟨φ, Ioo_subset_Icc_self hφ, rfl⟩).1
+  constructor
+  · have hin := (hA.2.2 φ hφ).1
+    obtain ⟨ε, hε, hball⟩ := F.side_ball_subset_closure (O := ball p 1) isOpen_ball ha (c := c) fun d hd => by
+      have : d ∈ F.innerColours p (ringPt p φ) := hd
+      rw [hin] at this; exact this
+    exact hF.not_mem_closure_of_side (O := ball p 1) (s := -1) (Or.inr rfl) hσ hε
+      (fun z hz => by rw [mem_ball, dist_eq_norm]; linarith) hball
+  · have hout := (hA.2.2 φ hφ).2
+    obtain ⟨ε, hε, hball⟩ := F.side_ball_subset_closure (O := (closedBall p 1)ᶜ) isClosed_closedBall.isOpen_compl ha
+      (c := c') fun d hd => by
+      have : d ∈ F.outerColours p (ringPt p φ) := by
+        show ringPt p φ ∈ closure (F.region d \ closedBall p 1)
+        rwa [Set.sdiff_eq]
+      rw [hout] at this; exact this
+    exact hF.not_mem_closure_of_side (O := (closedBall p 1)ᶜ) (s := 1) (Or.inl rfl) hσ hε
+      (fun z hz => by rw [mem_compl_iff, mem_closedBall, dist_eq_norm]; linarith) hball
+
+
+/-- The ring point of a regular angle: off `Γ`, or at an interior angle of an arc of `Γ` on `ω(p)` with constant sides. -/
+def RegularAt (F : ArcMap k) (p : ℂ) (θ : ℝ) : Prop :=
+  ringPt p θ ∉ F.Γ ∨ ∃ θ₁ θ₂ c c', F.IsRingArc p θ₁ θ₂ c c' ∧ ∃ φ ∈ Ioo θ₁ θ₂, e φ = e θ
+
+/-- **A regular ring point not on a (Q) arc carries the one absent colour, and its `60°` neighbours do not.** With every
+absent colour equal to `X` (so at most one absent colour), a regular ring point `r(θ)` of a vertex of at least four colours,
+on no (Q) arc, lies in the closure of the class of `X`, while `r(θ ± 60°)` do not. -/
+theorem carries_absent (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard) {X : Fin k}
+    (hab : ∀ d, d ∉ F.coloursAt p → d = X) {θ : ℝ} (hQ : ¬ F.OnQArc p (ringPt p θ)) (hreg : F.RegularAt p θ) :
+    ringPt p θ ∈ closure (F.region X) ∧ ∀ σ : ℝ, (σ = 1 ∨ σ = -1) →
+      ringPt p (θ + σ * (π / 3)) ∉ closure (F.region X) := by
+  have hdom : ringPt p θ ∈ F.dom := hp (by simp [mem_closedBall, ringPt, dist_eq_norm])
+  rcases hreg with hΓ | ⟨θ₁, θ₂, c, c', hA, φ, hφ, heφ⟩
+  · have hint : ringPt p θ ∈ F.interiorPts := ⟨hdom, fun h => hΓ ⟨hdom, h⟩⟩
+    have hr : ringPt p θ ∈ F.region (F.col (ringPt p θ)) := ⟨hint, rfl⟩
+    have hX : F.col (ringPt p θ) = X :=
+      hab _ (F.not_mem_coloursAt_of_mem_sphere hF (ringPt_mem_sphere p θ) hr)
+    rw [hX] at hr
+    refine ⟨subset_closure hr, fun σ hσ hy => ?_⟩
+    exact F.ne1_region hF hy hr (dist_ringPt_third p θ σ hσ)
+  · have hrφ : ringPt p φ = ringPt p θ := by simp only [ringPt, heφ]
+    have hnotboth : ¬ (c ∈ F.coloursAt p ∧ c' ∈ F.coloursAt p) := by
+      rintro ⟨h1, h2⟩
+      exact hQ ⟨θ₁, θ₂, ⟨c, c', hA, h1, h2, h4⟩, ⟨φ, Ioo_subset_Icc_self hφ, by
+        simpa [ringPt] using hrφ⟩⟩
+    have hth : ∀ σ : ℝ, ringPt p (θ + σ * (π / 3)) = ringPt p (φ + σ * (π / 3)) := by
+      intro σ; simp only [ringPt, e_add, heφ]
+    by_cases hc : c ∈ F.coloursAt p
+    · have hc'0 : c' ∉ F.coloursAt p := fun h => hnotboth ⟨hc, h⟩
+      have hc'X : c' = X := hab _ hc'0
+      subst hc'X
+      have hout := (hA.2.2 φ hφ).2
+      have hmem : ringPt p φ ∈ closure (F.region c') := by
+        have : c' ∈ F.outerColours p (ringPt p φ) := by rw [hout]; rfl
+        exact closure_mono (Set.sdiff_subset) this
+      refine ⟨hrφ ▸ hmem, fun σ hσ => ?_⟩
+      rw [hth σ]
+      exact (hA.not_mem_closure_third hF hφ hσ).2
+    · have hcX : c = X := hab _ hc
+      subst hcX
+      have hin := (hA.2.2 φ hφ).1
+      have hmem : ringPt p φ ∈ closure (F.region c) := by
+        have : c ∈ F.innerColours p (ringPt p φ) := by rw [hin]; rfl
+        exact closure_mono Set.inter_subset_left this
+      refine ⟨hrφ ▸ hmem, fun σ hσ => ?_⟩
+      rw [hth σ]
+      exact (hA.not_mem_closure_third hF hφ hσ).1
+
+
+/-- Angles `θ + σ t`, `0 < t < 1`, with the same `e` as a given one: at most one. -/
+theorem subsingleton_e_eq (θ a σ : ℝ) (hσ : σ = 1 ∨ σ = -1) :
+    {t ∈ Ioo (0 : ℝ) 1 | e (θ + σ * t) = e a}.Subsingleton := by
+  have hπ := Real.pi_pos
+  intro t ht t' ht'
+  obtain ⟨n, hn⟩ := e_eq_e_iff.mp (ht.2.trans ht'.2.symm)
+  have h1 : σ * (t - t') = n * (2 * π) := by linarith
+  have hσ1 : |σ| = 1 := by rcases hσ with rfl | rfl <;> simp
+  have h2 : |(n : ℝ)| * (2 * π) < 2 * π := by
+    have : |σ * (t - t')| = |(n : ℝ) * (2 * π)| := by rw [h1]
+    rw [abs_mul, hσ1, one_mul, abs_mul, abs_of_pos (by positivity : 0 < 2 * π)] at this
+    have h3 : |t - t'| < 1 := by
+      rw [abs_lt]; constructor <;> linarith [ht.1.1, ht.1.2, ht'.1.1, ht'.1.2]
+    linarith [Real.pi_gt_three]
+  have hn0 : n = 0 := by
+    by_contra hne
+    have : (1 : ℝ) ≤ |(n : ℝ)| := by
+      have : (1 : ℤ) ≤ |n| := Int.one_le_abs hne
+      exact_mod_cast this
+    nlinarith
+  rw [hn0] at h1
+  simp only [Int.cast_zero, zero_mul] at h1
+  rcases hσ with rfl | rfl <;> linarith
+
+/-- The set of regular angles is open. -/
+theorem isOpen_regularAt {p : ℂ} (hp : F.Covers p 1) : IsOpen {θ | F.RegularAt p θ} := by
+  rw [isOpen_iff_mem_nhds]
+  intro θ hθ
+  rcases hθ with hΓ | ⟨θ₁, θ₂, c, c', hA, φ, hφ, heφ⟩
+  · have hdom : ringPt p θ ∈ F.dom := hp (by simp [mem_closedBall, ringPt, dist_eq_norm])
+    have hint : ringPt p θ ∈ F.interiorPts := ⟨hdom, fun h => hΓ ⟨hdom, h⟩⟩
+    have hcont : Continuous fun θ : ℝ => ringPt p θ := by unfold ringPt e; fun_prop
+    filter_upwards [hcont.continuousAt.eventually_mem (F.isOpen_interiorPts.mem_nhds hint)] with θ' hθ'
+    exact Or.inl fun hΓ' => hθ'.2 (mem_iUnion₂.mpr (by simpa [ArcMap.Γ] using hΓ'.2))
+  · have : Ioo (θ - (φ - θ₁)) (θ + (θ₂ - φ)) ∈ 𝓝 θ :=
+      Ioo_mem_nhds (by linarith [hφ.1]) (by linarith [hφ.2])
+    filter_upwards [this] with θ' hθ'
+    refine Or.inr ⟨θ₁, θ₂, c, c', hA, φ + (θ' - θ), ⟨by linarith [hθ'.1], by linarith [hθ'.2]⟩, ?_⟩
+    rw [show φ + (θ' - θ) = φ + (θ' - θ) from rfl, e_add, heφ, ← e_add]; congr 1; ring
+
+
+/-- **Every side germ of the ring is regular**: near any ring point, on each side, all the angles are regular (off `Γ`, or
+interior to an arc with constant sides: the germ dichotomy, less the at most two points of the germ at an end of the arc). -/
+theorem exists_regular_germ {p : ℂ} (hp : F.Covers p 1) (θ : ℝ) (s : Side) :
+    ∃ δ > 0, ∀ t ∈ Ioo (0 : ℝ) δ, F.RegularAt p (θ + s.sign * t) := by
+  have hdom : ringPt p θ ∈ F.dom := hp (by simp [mem_closedBall, ringPt, dist_eq_norm])
+  have hσ : s.sign = 1 ∨ s.sign = -1 := by cases s <;> simp [Side.sign]
+  rcases F.germ_dichotomy hdom s with ⟨c, δ, hδ, hsub⟩ | ⟨θ₁, θ₂, c, c', hA, δ, hδ, hsub⟩
+  · refine ⟨δ, hδ, fun t ht => Or.inl fun hΓ => ?_⟩
+    have hx : ringPt p (θ + s.sign * t) ∈ F.region c := hsub ⟨t, ht, rfl⟩
+    exact hx.1.2 (mem_iUnion₂.mpr (by simpa [ArcMap.Γ] using hΓ.2))
+  · set B : Set ℝ := {t ∈ Ioo (0 : ℝ) 1 | e (θ + s.sign * t) = e θ₁ ∨ e (θ + s.sign * t) = e θ₂} with hB
+    have hBfin : B.Finite := by
+      have : B ⊆ {t ∈ Ioo (0 : ℝ) 1 | e (θ + s.sign * t) = e θ₁} ∪ {t ∈ Ioo (0 : ℝ) 1 | e (θ + s.sign * t) = e θ₂} := by
+        intro t ht
+        rcases ht.2 with h | h
+        · exact Or.inl ⟨ht.1, h⟩
+        · exact Or.inr ⟨ht.1, h⟩
+      exact (((subsingleton_e_eq θ θ₁ _ hσ).finite).union ((subsingleton_e_eq θ θ₂ _ hσ).finite)).subset this
+    have h0 : (0 : ℝ) ∈ Bᶜ := fun h => lt_irrefl _ h.1.1
+    obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hBfin.isClosed.isOpen_compl 0 h0
+    refine ⟨min (min δ ε) 1, lt_min (lt_min hδ hε) one_pos, fun t ht => Or.inr ?_⟩
+    have htδ : t < δ := lt_of_lt_of_le ht.2 ((min_le_left _ _).trans (min_le_left _ _))
+    have htε : t < ε := lt_of_lt_of_le ht.2 ((min_le_left _ _).trans (min_le_right _ _))
+    have ht1 : t < 1 := lt_of_lt_of_le ht.2 (min_le_right _ _)
+    obtain ⟨ψ, hψ, hψe⟩ : ringPt p (θ + s.sign * t) ∈ ringArc p θ₁ θ₂ := hsub ⟨t, ⟨ht.1, htδ⟩, rfl⟩
+    have hψe' : e ψ = e (θ + s.sign * t) := by simpa [ringPt] using hψe
+    refine ⟨θ₁, θ₂, c, c', hA, ψ, ⟨lt_of_le_of_ne hψ.1 ?_, lt_of_le_of_ne hψ.2 ?_⟩, hψe'⟩
+    · intro hψ1
+      have : t ∈ B := ⟨⟨ht.1, ht1⟩, Or.inl (by rw [← hψe', ← hψ1])⟩
+      exact hball (by rw [mem_ball, Real.dist_eq, sub_zero, abs_of_pos ht.1]; exact htε) this
+    · intro hψ2
+      have : t ∈ B := ⟨⟨ht.1, ht1⟩, Or.inr (by rw [← hψe', hψ2])⟩
+      exact hball (by rw [mem_ball, Real.dist_eq, sub_zero, abs_of_pos ht.1]; exact htε) this
+
+/-- **The irregular angles of a bounded range are finitely many**: they form a closed set, each of whose points has no other
+irregular angle on either side nearby. -/
+theorem finite_not_regular {p : ℂ} (hp : F.Covers p 1) (N : ℝ) :
+    {θ | θ ∈ Icc 0 N ∧ ¬ F.RegularAt p θ}.Finite := by
+  set Z : Set ℝ := {θ | θ ∈ Icc 0 N ∧ ¬ F.RegularAt p θ} with hZ
+  have hZc : IsCompact Z := by
+    have : Z = Icc 0 N ∩ {θ | F.RegularAt p θ}ᶜ := by ext θ; simp [hZ]
+    rw [this]
+    exact isCompact_Icc.inter_right (isOpen_regularAt hp).isClosed_compl
+  have hiso : ∀ θ ∈ Z, ∃ ε > 0, ∀ θ' ∈ Z, dist θ' θ < ε → θ' = θ := by
+    intro θ hθ
+    obtain ⟨δ₁, hδ₁, h₁⟩ := exists_regular_germ hp θ .ccw
+    obtain ⟨δ₂, hδ₂, h₂⟩ := exists_regular_germ hp θ .cw
+    refine ⟨min δ₁ δ₂, lt_min hδ₁ hδ₂, fun θ' hθ' hd => ?_⟩
+    by_contra hne
+    rw [Real.dist_eq] at hd
+    rcases lt_or_gt_of_ne hne with hlt | hgt
+    · have := h₂ (θ - θ') ⟨by linarith, by rw [abs_lt] at hd; linarith [min_le_right δ₁ δ₂, hd.1]⟩
+      simp only [Side.sign] at this
+      exact hθ'.2 (by simpa using this)
+    · have := h₁ (θ' - θ) ⟨by linarith, by rw [abs_lt] at hd; linarith [min_le_left δ₁ δ₂, hd.2]⟩
+      simp only [Side.sign] at this
+      exact hθ'.2 (by simpa using this)
+  choose! ε hε hεZ using hiso
+  obtain ⟨S, hSZ, hcov⟩ := hZc.elim_nhds_subcover (fun z => ball z (ε z))
+    (fun z hz => ball_mem_nhds z (hε z hz))
+  refine S.finite_toSet.subset fun θ hθ => ?_
+  obtain ⟨z, hz, hmem⟩ := mem_iUnion₂.mp (hcov hθ)
+  have := hεZ z (hSZ z hz) θ hθ (by rwa [mem_ball] at hmem)
+  rw [this]; exact hz
+
+
+/-- At most one colour is absent at `p` when `k ≤ (colours at p) + 1`: any two absent colours agree. -/
+theorem absent_subsingleton {p : ℂ} (hk : k ≤ (F.coloursAt p).ncard + 1) :
+    ∀ a b, a ∉ F.coloursAt p → b ∉ F.coloursAt p → a = b := by
+  have h := Set.ncard_add_ncard_compl (F.coloursAt p)
+  rw [Nat.card_eq_fintype_card, Fintype.card_fin] at h
+  have hle : (F.coloursAt p)ᶜ.ncard ≤ 1 := by omega
+  exact fun a b ha hb => (Set.ncard_le_one_iff (Set.toFinite _)).mp hle ha hb
+
+/-- Two regular ring angles `60°` apart exist. -/
+theorem exists_regular_pair {p : ℂ} (hp : F.Covers p 1) :
+    ∃ θ, F.RegularAt p θ ∧ F.RegularAt p (θ + π / 3) := by
+  have hπ := Real.pi_pos
+  have hfin : ({θ | θ ∈ Icc 0 (4 * π) ∧ ¬ F.RegularAt p θ} ∪
+      (fun θ => θ - π / 3) '' {θ | θ ∈ Icc 0 (4 * π) ∧ ¬ F.RegularAt p θ}).Finite :=
+    (finite_not_regular hp _).union ((finite_not_regular hp _).image _)
+  obtain ⟨θ, hθ, hθn⟩ := ((Ioo_infinite (by linarith : (0 : ℝ) < 2 * π)).sdiff hfin).nonempty
+  refine ⟨θ, ?_, ?_⟩
+  · by_contra h
+    exact hθn (Or.inl ⟨⟨hθ.1.le, by linarith [hθ.2]⟩, h⟩)
+  · by_contra h
+    exact hθn (Or.inr ⟨θ + π / 3, ⟨⟨by linarith [hθ.1], by linarith [hθ.2]⟩, h⟩, by ring⟩)
+
 /-- **FS116-N1-QFREE4** (at every `k`: the argument reads that at least two colours are absent): at a vertex of at least four
 colours whose ring carries no (Q) arc, at least two colours are absent. At `k = 6`: "`p` has four colours and no more". -/
 theorem qfree4 (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
     (hq : ∀ θ₁ θ₂, ¬ F.IsQArc p θ₁ θ₂) : (F.coloursAt p).ncard + 2 ≤ k := by
-  sorry
+  by_contra hlt
+  push Not at hlt
+  have hkpos : 0 < k := by
+    have := Set.ncard_le_ncard (Set.subset_univ (F.coloursAt p)) Set.finite_univ
+    rw [Set.ncard_univ, Nat.card_eq_fintype_card, Fintype.card_fin] at this
+    omega
+  obtain ⟨θ, hθ, hθ'⟩ := exists_regular_pair hp
+  have hQ : ∀ θ, ¬ F.OnQArc p (ringPt p θ) := fun θ ⟨θ₁, θ₂, h, _⟩ => hq θ₁ θ₂ h
+  by_cases hex : ∃ d, d ∉ F.coloursAt p
+  · obtain ⟨X, hX⟩ := hex
+    have hab : ∀ d, d ∉ F.coloursAt p → d = X := fun d hd => absent_subsingleton (by omega) d X hd hX
+    have h1 := carries_absent hF hp h4 hab (hQ θ) hθ
+    have h2 := carries_absent hF hp h4 hab (hQ (θ + π / 3)) hθ'
+    exact h1.2 1 (Or.inl rfl) (by simpa using h2.1)
+  · push Not at hex
+    have hab : ∀ d, d ∉ F.coloursAt p → d = (⟨0, hkpos⟩ : Fin k) := fun d hd => absurd (hex d) hd
+    have h1 := carries_absent hF hp h4 hab (hQ θ) hθ
+    have h2 := carries_absent hF hp h4 hab (hQ (θ + π / 3)) hθ'
+    exact h1.2 1 (Or.inl rfl) (by simpa using h2.1)
 
 /-! ## FS116-N2-FIVERING (at every `k` with exactly one colour absent; the row is `k = 6`) -/
 
@@ -801,32 +1155,6 @@ theorem echo (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X : Fin k} (hcw : GermIn p ψ 
   exact ⟨z, hz.1, by rw [dist_comm]; exact hz.2⟩
 
 /-! ## FS116-V5-U1 (any valid map) -/
-
-/-- A side of a ring arc: if every colour whose class meets the open set `O` arbitrarily near `a` is `c`, then a small ball
-about `a` meets `O` only inside the closure of the class of `c` (the interior points are dense). -/
-theorem side_ball_subset_closure {O : Set ℂ} (hO : IsOpen O) {a : ℂ} (ha : a ∈ F.dom) {c : Fin k}
-    (hc : ∀ d, a ∈ closure (F.region d ∩ O) → d = c) : ∃ ε > 0, ball a ε ∩ O ⊆ closure (F.region c) := by
-  classical
-  have hev : ∀ᶠ y in 𝓝 a, ∀ d, d ≠ c → y ∉ F.region d ∩ O := by
-    refine Filter.eventually_all.2 fun d => ?_
-    by_cases hd : d = c
-    · exact Filter.Eventually.of_forall fun y h => absurd hd h
-    · have : a ∉ closure (F.region d ∩ O) := fun h => hd (hc d h)
-      exact (isClosed_closure.isOpen_compl.eventually_mem this).mono fun y hy _ hy' => hy (subset_closure hy')
-  obtain ⟨ε, hε, hball⟩ := Metric.mem_nhds_iff.mp (hev.and (F.isOpen_dom.mem_nhds ha))
-  refine ⟨ε, hε, ?_⟩
-  rintro y ⟨hya, hyO⟩
-  rw [_root_.mem_closure_iff]
-  intro o ho hyo
-  have hyd : y ∈ F.dom := (hball hya).2
-  have hy' := F.dense_interiorPts hyd
-  obtain ⟨w, hw, hwI⟩ := _root_.mem_closure_iff.mp hy' (o ∩ (ball a ε ∩ O)) (ho.inter (isOpen_ball.inter hO))
-    ⟨hyo, hya, hyO⟩
-  refine ⟨w, hw.1, ?_⟩
-  have hcol : F.col w = c := by
-    by_contra hne
-    exact (hball hw.2.1).1 (F.col w) hne ⟨⟨hwI, rfl⟩, hw.2.2⟩
-  exact ⟨hwI, hcol⟩
 
 /-- `‖a − b‖²` in terms of `Re(a b̄)`. -/
 theorem norm_sub_sq_eq (a b : ℂ) : ‖a - b‖ ^ 2 = ‖a‖ ^ 2 - 2 * (a * (starRingEnd ℂ) b).re + ‖b‖ ^ 2 := by
