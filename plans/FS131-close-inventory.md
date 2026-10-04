@@ -1344,3 +1344,22 @@ reason by the close.*
      `Row134Base` as a `Prop`), the 13 rows' skeleton with C-DOUBLE + Y3-END-NEEDS (item 69), FLANK-Q's unconditional form (item 79), N3-END's chain clause
      (item 74), leaf plans, the obligation pass, the handoff, and the `Row134Base` stub draft (item 191). Worktree `fs131-w5` from `fs131-w4` at `9a8de899`
      (`.lake/build` copied from `fs131-ww`). Launched in IWd's slot: 1 (I2k) + 1 (I4f) + 1 (K5) = 3.
+193. **FS131-I4f handed back at stage 14, harness ≈ 380k** (report `data/fs131/reports/FS131-I4f.md` on `fs131-w4`; branch at `8a184ec1`, checked): 45 → 39.
+     **[kernel], standard three**: **FS112-BOWTIE's fragment** — `bowtieCol_locallyConstant` (so the structure `bowtie` is sorry-free, and I4e's `bowtie_isHorn`,
+     `bowtie_flanks`, `bowtie_coloursAt_zero`, `bowtie_mem_dom` now read the standard three), `ArcMap.bowtie_valid` (YB3's pairs), `bowtie_doublyShadowed` (band
+     the whole horn), `bowtie_inType`, `bowtie_unitArcEnds`, `bowtie_neighbours` (P_cl(i) = {0,1,3,4}, P_cl(−i) = {2,1,3,4}, one sector per colour). Keryx's
+     receipts: build log `build/gate/build/20261004T174227Z-1140038.log` (w4) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `sorry`
+     lines by count Contact 10, UnitArc 19, BaseSteps 10; `data/fs131/i4/axioms-i4f.txt` prints `bowtieCol_locallyConstant`, `bowtie_valid`, `bowtie_isHorn`,
+     `bowtie_neighbours`, `bowtie_unitArcEnds` on the standard three. Generalization: `ArcMap.coloursAt_hasSectors_of_tiles` (any arc map: n disjoint convex open
+     one-colour tiles with distinct colours, each with `v` in its closure, give P_cl(v) and one sector per colour), reusable by wave 5. Route note: I4e's planned
+     route for the colouring was not needed (membership in nine open tiles suffices). **Correction owed** (to Stage 11's handoff): `n2_env_near` is not "one
+     identity" — it needs a lens estimate with `s ≤ ψ·Δ(φ)` near the ends. Slip (Keryx's): I4f's brief said "four quotations" and quoted five. Left: the bowtie's
+     moves (3, one engine: a horn at E is a cusp horn with flanks G, H), UnitArc 19, Contact 10, the base's steps 7 — routes in Stage 14.
+194. **Ruling: wave 4 splits by file** (item 191's condition met: six leaves a session on wave 4's last two sessions, 39 left). Choice: the next wave-4 implementer
+     (FS131-I4g, in `fs131-w4`) takes `BaseSteps` and `UnitArc` only (29 leaves); `Contact` (10 leaves) is reserved for a parallel implementer in a worktree of its
+     own branched from `fs131-w4`, with its own record file, launched in the next free slot; the two branches merge before the gate (`scripts/Axioms.lean`'s
+     appended records the only expected conflict). Alternative weighed: keep one implementer on all 39 in series. Why: the files are disjoint, wave 4 gates
+     Woodall's landing and wave 5's implementer, and at six a session the serial path is about six more sessions. Confidence: medium — the split pays only if a
+     slot frees while I4g still has work; if none does, I4g's successor simply takes `Contact` too.
+195. **Brief FS131-I4g, wave 4's seventh implementer** (Opus; `data/fs131/briefs/FS131-I4g-wave4.md`, derived by script from I4f's, gated PASS): the bowtie's
+     moves, `UnitArc` and `BaseSteps` (29), not `Contact` (item 194). Launched in I4f's slot: 1 (I2k) + 1 (K5) + 1 (I4g) = 3.
