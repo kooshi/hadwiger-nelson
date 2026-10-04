@@ -1280,23 +1280,6 @@ theorem cos_nonneg_of_mem_coneAt {S : Set ℂ} {y : ℂ} {γ : ℝ} (hS : S ⊆ 
   have hdir' : ‖w / (n : ℂ) - e β‖ < -Real.cos (β - γ) := hdir
   linarith
 
-/-- The cone of a set at a point is a closed set of angles. -/
-theorem isClosed_coneAt (S : Set ℂ) (y : ℂ) : IsClosed (coneAt S y) := by
-  rw [← isOpen_compl_iff, Metric.isOpen_iff]
-  intro β hβ
-  simp only [mem_compl_iff, coneAt, mem_setOf_eq, not_forall, not_exists, not_and, not_lt] at hβ
-  obtain ⟨ε, hε, hnone⟩ := hβ
-  refine ⟨ε / 2, half_pos hε, fun β' hβ' => ?_⟩
-  simp only [mem_compl_iff, coneAt, mem_setOf_eq, not_forall, not_exists, not_and, not_lt]
-  refine ⟨ε / 2, half_pos hε, fun z hzS hzy hzd => ?_⟩
-  have h1 := hnone z hzS hzy (by linarith [hzd])
-  have h2 : ‖e β' - e β‖ ≤ |β' - β| := norm_e_sub_e_le β' β
-  rw [mem_ball, Real.dist_eq] at hβ'
-  have h3 : ‖(z - y) / (‖z - y‖ : ℂ) - e β‖ ≤ ‖(z - y) / (‖z - y‖ : ℂ) - e β'‖ + ‖e β' - e β‖ := by
-    calc _ = ‖((z - y) / (‖z - y‖ : ℂ) - e β') + (e β' - e β)‖ := by ring_nf
-      _ ≤ _ := norm_add_le _ _
-  linarith
-
 /-- **FS116-Y4-FLANK**, the cones: let `t` be a tile with `y = r(ψ)` and `y' = r(ψ + 60°)` in its closure, its cone at `y`
 containing `(ψ + 150°, ψ + 210°)` and its cone at `y'` containing `(ψ + 210°, ψ + 270°)`; then its cone at `y` lies in
 `[ψ + 30°, ψ + 210°]` and holds `ψ + 210°` (it ends there), and its cone at `y'` lies in `[ψ + 210°, ψ + 390°]` and holds

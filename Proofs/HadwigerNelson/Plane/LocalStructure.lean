@@ -93,6 +93,356 @@ example : -(π / 2) ∉ angleIoo 0 π := by
   · have : (0 : ℝ) ≤ m := by exact_mod_cast hm
     nlinarith
 
+/-! ## Cones of a Jordan domain's tile: one angular interval -/
+/-- **The Jordan chart at a point of the closure**: near a point `x` of the closure of a Jordan domain `T`, the part of `T`
+in a small disc is contained in a preconnected subset of `T` lying in any prescribed disc about `x`. -/
+theorem ArcMap.IsJordanDomain.local_connected {T : Set ℂ} (hJ : ArcMap.IsJordanDomain T) {x : ℂ} (hx : x ∈ closure T)
+    {r : ℝ} (hr : 0 < r) :
+    ∃ r' > 0, ∃ C : Set ℂ, C ⊆ T ∧ C ⊆ ball x r ∧ IsPreconnected C ∧ T ∩ ball x r' ⊆ C := by
+  obtain ⟨h, hh⟩ := hJ
+  set xs : closure T := ⟨x, hx⟩ with hxs
+  set z₀ : closedBall (0 : ℂ) 1 := h.symm xs with hz₀
+  have hhz₀ : (h z₀ : ℂ) = x := by rw [hz₀]; simp [hxs]
+  -- continuity of h at z₀
+  have hcont : ContinuousAt (fun z : closedBall (0 : ℂ) 1 => (h z : ℂ)) z₀ :=
+    continuous_subtype_val.continuousAt.comp h.continuous.continuousAt
+  obtain ⟨s, hs, hsub⟩ := Metric.continuousAt_iff.mp hcont r hr
+  -- continuity of h.symm at xs
+  have hcont' : ContinuousAt h.symm xs := h.symm.continuous.continuousAt
+  obtain ⟨r', hr', hsub'⟩ := Metric.continuousAt_iff.mp hcont' s hs
+  set U : Set (closedBall (0 : ℂ) 1) := {z | (z : ℂ) ∈ ball (0 : ℂ) 1 ∩ ball (z₀ : ℂ) s} with hU
+  have hUpre : IsPreconnected U := by
+    rw [← Topology.IsInducing.subtypeVal.isPreconnected_image]
+    have : Subtype.val '' U = ball (0 : ℂ) 1 ∩ ball (z₀ : ℂ) s := by
+      ext z
+      constructor
+      · rintro ⟨w, hw, rfl⟩; exact hw
+      · intro hz
+        exact ⟨⟨z, ball_subset_closedBall hz.1⟩, hz, rfl⟩
+    rw [this]
+    exact ((convex_ball _ _).inter (convex_ball _ _)).isPreconnected
+  refine ⟨r', hr', (fun z : closedBall (0 : ℂ) 1 => (h z : ℂ)) '' U, ?_, ?_, ?_, ?_⟩
+  · rintro _ ⟨z, hz, rfl⟩
+    exact (hh z).mpr hz.1
+  · rintro _ ⟨z, hz, rfl⟩
+    have := hsub (x := z) (by rw [Subtype.dist_eq]; exact hz.2)
+    rw [dist_comm, hhz₀] at this
+    simpa [dist_comm] using this
+  · exact hUpre.image _ (continuous_subtype_val.comp h.continuous).continuousOn
+  · rintro y ⟨hyT, hyb⟩
+    set ys : closure T := ⟨y, subset_closure hyT⟩
+    set z := h.symm ys with hz
+    have hhz : (h z : ℂ) = y := by rw [hz]; simp [ys]
+    have hzball : (z : ℂ) ∈ ball (0 : ℂ) 1 := (hh z).mp (by rw [hhz]; exact hyT)
+    have hd : dist z z₀ < s := hsub' (x := ys) (by
+      rw [Subtype.dist_eq]; simpa [ys, xs, dist_comm] using hyb)
+    exact ⟨z, ⟨hzball, by rw [mem_ball]; exact hd⟩, hhz⟩
+
+
+
+/-- Rotating by `π − γ` and then by `γ − π` is the identity. -/
+theorem e_mul_e_sub_pi (γ : ℝ) : e (π - γ) * e (γ - π) = 1 := by
+  rw [← e_add]; simp [e]
+
+/-- A nonzero `w` of argument `a` is `‖w‖ e a`; rotating by `c` adds `c` to the angle. -/
+theorem mul_e_of_arg {w : ℂ} {a : ℝ} (ha : arg w = a) (c : ℝ) : w * e c = (‖w‖ : ℂ) * e (a + c) := by
+  have hw := Complex.norm_mul_exp_arg_mul_I w
+  rw [ha] at hw
+  rw [e_add, ← mul_assoc]
+  congr 1
+  exact hw.symm
+
+/-- A preconnected set missing a point of `ℂ` and the two rays at angles `γ` and `γ + δ` from it lies, in the angle
+`arg ((z − x) e(π − γ))`, on one side of the second ray. -/
+theorem arg_side {C : Set ℂ} (hC : IsPreconnected C) {x : ℂ} (hxC : x ∉ C) {γ δ : ℝ}
+    (h1 : ∀ z ∈ C, ∀ s : ℝ, 0 < s → z - x ≠ s * e γ)
+    (h2 : ∀ z ∈ C, ∀ s : ℝ, 0 < s → z - x ≠ s * e (γ + δ)) :
+    (∀ z ∈ C, arg ((z - x) * e (π - γ)) < δ - π) ∨ (∀ z ∈ C, δ - π < arg ((z - x) * e (π - γ))) := by
+  have hne : ∀ z ∈ C, z - x ≠ 0 := fun z hz h => hxC (by rwa [sub_eq_zero.mp h] at hz)
+  have hw0 : ∀ z ∈ C, (z - x) * e (π - γ) ≠ 0 := fun z hz => mul_ne_zero (hne z hz) (by simp [e])
+  have hback : ∀ z ∈ C, ∀ a : ℝ, arg ((z - x) * e (π - γ)) = a →
+      z - x = (‖(z - x) * e (π - γ)‖ : ℂ) * e (a + (γ - π)) := by
+    intro z hz a ha
+    have := mul_e_of_arg ha (γ - π)
+    rw [mul_assoc, e_mul_e_sub_pi, mul_one] at this
+    exact this
+  have hslit : ∀ z ∈ C, (z - x) * e (π - γ) ∈ slitPlane := by
+    intro z hz
+    rw [Complex.mem_slitPlane_iff_arg]
+    refine ⟨?_, hw0 z hz⟩
+    intro harg
+    apply h1 z hz ‖(z - x) * e (π - γ)‖ (norm_pos_iff.mpr (hw0 z hz))
+    have := hback z hz π harg
+    rw [show π + (γ - π) = γ by ring] at this
+    exact this
+  have hcont : ContinuousOn (fun z => arg ((z - x) * e (π - γ))) C := by
+    intro z hz
+    refine ContinuousAt.continuousWithinAt ?_
+    exact (Complex.continuousAt_arg (hslit z hz)).comp (f := fun z : ℂ => (z - x) * e (π - γ)) (by fun_prop)
+  have hpre := hC.image _ hcont
+  have hmiss : ∀ z ∈ C, arg ((z - x) * e (π - γ)) ≠ δ - π := by
+    intro z hz harg
+    apply h2 z hz ‖(z - x) * e (π - γ)‖ (norm_pos_iff.mpr (hw0 z hz))
+    have := hback z hz (δ - π) harg
+    rw [show δ - π + (γ - π) = (γ + δ) + (-(2 * π)) by ring, e_add, e_neg] at this
+    simpa using this
+  have := hpre.subset_or_subset (u := Iio (δ - π)) (v := Ioi (δ - π)) isOpen_Iio isOpen_Ioi
+    (Set.disjoint_left.mpr fun a (h : a < δ - π) (h' : δ - π < a) => lt_asymm h h')
+    (by rintro _ ⟨z, hz, rfl⟩; exact (lt_or_gt_of_ne (hmiss z hz)))
+  rcases this with h | h
+  · left; intro z hz; exact h ⟨z, hz, rfl⟩
+  · right; intro z hz; exact h ⟨z, hz, rfl⟩
+
+
+/-- The unit direction of `z − x` close to `e β` puts `arg ((z − x) e(π − γ))` close to `β − γ − π`, for `β` in the
+window `(γ, γ + 2π)` that `arg` reads without crossing its cut. -/
+theorem arg_near {γ β : ℝ} (h1 : γ < β) (h2 : β < γ + 2 * π) {η : ℝ} (hη : 0 < η) :
+    ∃ ε > 0, ∀ z x : ℂ, z ≠ x → ‖(z - x) / (‖z - x‖ : ℂ) - e β‖ < ε →
+      |arg ((z - x) * e (π - γ)) - (β - γ - π)| < η := by
+  have hπ := Real.pi_pos
+  have hW : e β * e (π - γ) = e (β - γ - π) := by
+    rw [← e_add, show β + (π - γ) = (β - γ - π) + 2 * π by ring, e_add_two_pi]
+  have harg : arg (e (β - γ - π)) = β - γ - π := by
+    show arg (Complex.exp (((β - γ - π : ℝ) : ℂ) * I)) = _
+    rw [Complex.exp_mul_I]
+    exact Complex.arg_cos_add_sin_mul_I (θ := β - γ - π) ⟨by linarith, by linarith⟩
+  have hslit : e (β - γ - π) ∈ slitPlane := by
+    rw [Complex.mem_slitPlane_iff_arg, harg]
+    exact ⟨by intro h; linarith, by simp [e]⟩
+  obtain ⟨ε, hε, hcont⟩ := Metric.continuousAt_iff.mp (Complex.continuousAt_arg hslit) η hη
+  refine ⟨ε, hε, fun z x hzx hd => ?_⟩
+  have hn : 0 < ‖z - x‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hzx)
+  have hnc : (‖z - x‖ : ℂ) ≠ 0 := by exact_mod_cast hn.ne'
+  set u : ℂ := (z - x) / (‖z - x‖ : ℂ) with hu
+  have hzu : (z - x) * e (π - γ) = (‖z - x‖ : ℝ) * (u * e (π - γ)) := by
+    rw [hu]; field_simp
+  have h3 := hcont (x := u * e (π - γ)) (by
+    rw [dist_eq_norm, ← hW, ← sub_mul, norm_mul, norm_e, mul_one]; exact hd)
+  rw [hzu, Complex.arg_real_mul _ hn]
+  rw [Real.dist_eq, harg] at h3
+  exact h3
+
+
+
+/-- Every real is congruent mod `2π` to one in `[θ₀, θ₀ + 2π)`. -/
+theorem exists_shift_Ico (θ₀ x : ℝ) : ∃ m : ℤ, x + 2 * π * m ∈ Ico θ₀ (θ₀ + 2 * π) := by
+  have hπ := Real.pi_pos
+  refine ⟨-⌊(x - θ₀) / (2 * π)⌋, ?_, ?_⟩
+  · have := Int.floor_le ((x - θ₀) / (2 * π))
+    rw [le_div_iff₀ (by positivity)] at this
+    push_cast; linarith
+  · have := Int.lt_floor_add_one ((x - θ₀) / (2 * π))
+    rw [div_lt_iff₀ (by positivity)] at this
+    push_cast; linarith
+
+/-- A `2π`-periodic set of angles is invariant under every integer shift. -/
+theorem periodic_int {K : Set ℝ} (hper : ∀ β, β + 2 * π ∈ K ↔ β ∈ K) (β : ℝ) (m : ℤ) :
+    β + 2 * π * m ∈ K ↔ β ∈ K := by
+  induction m using Int.induction_on with
+  | zero => simp
+  | succ n ih =>
+    have := hper (β + 2 * π * n)
+    push_cast at ih ⊢
+    rw [show β + 2 * π * ((n : ℝ) + 1) = β + 2 * π * n + 2 * π by ring, this, ih]
+  | pred n ih =>
+    have := hper (β + 2 * π * ((-(n : ℤ) - 1 : ℤ) : ℝ))
+    rw [show β + 2 * π * ((-(n : ℤ) - 1 : ℤ) : ℝ) + 2 * π = β + 2 * π * ((-(n : ℤ) : ℤ) : ℝ) by push_cast; ring] at this
+    rw [← this, ih]
+
+/-- **A closed nonempty `2π`-periodic set of angles with no two separated points is one angular interval.** -/
+theorem exists_angleIcc_of_no_gap {K : Set ℝ} (hK : IsClosed K) (hne : K.Nonempty)
+    (hper : ∀ β, β + 2 * π ∈ K ↔ β ∈ K)
+    (hgap : ∀ γ₁ a γ₂ b : ℝ, γ₁ < a → a < γ₂ → γ₂ < b → b < γ₁ + 2 * π → γ₁ ∉ K → γ₂ ∉ K → a ∈ K → b ∈ K →
+      False) :
+    ∃ β₁ β₂, β₁ ≤ β₂ ∧ β₂ ≤ β₁ + 2 * π ∧ K = angleIcc β₁ β₂ := by
+  have hπ := Real.pi_pos
+  by_cases hall : ∀ γ, γ ∈ K
+  · refine ⟨0, 2 * π, by positivity, by linarith, ?_⟩
+    ext y
+    simp only [hall y, true_iff, angleIcc, mem_iUnion]
+    obtain ⟨m, hm1, hm2⟩ := exists_shift_Ico 0 y
+    refine ⟨-m, ?_, ?_⟩ <;> push_cast <;> linarith
+  push Not at hall
+  obtain ⟨γ, hγ⟩ := hall
+  have hγ2 : γ + 2 * π ∉ K := fun h => hγ ((hper γ).mp h)
+  set A := K ∩ Icc γ (γ + 2 * π) with hA
+  have hAc : IsCompact A := isCompact_Icc.inter_left hK
+  obtain ⟨k₀, hk₀⟩ := hne
+  obtain ⟨m₀, hm₀⟩ := exists_shift_Ico γ k₀
+  have hAne : A.Nonempty := ⟨k₀ + 2 * π * m₀, (periodic_int hper k₀ m₀).mpr hk₀,
+    hm₀.1, hm₀.2.le⟩
+  obtain ⟨β₁, hβ₁A, hβ₁min⟩ := hAc.exists_isMinOn hAne continuousOn_id
+  obtain ⟨β₂, hβ₂A, hβ₂max⟩ := hAc.exists_isMaxOn hAne continuousOn_id
+  have hβ₁lt : γ < β₁ := lt_of_le_of_ne hβ₁A.2.1 (fun h => hγ (h ▸ hβ₁A.1))
+  have hβ₂lt : β₂ < γ + 2 * π := lt_of_le_of_ne hβ₂A.2.2 (fun h => hγ2 (h ▸ hβ₂A.1))
+  have hβ12 : β₁ ≤ β₂ := hβ₁min hβ₂A
+  have hIcc : Icc β₁ β₂ ⊆ K := by
+    intro t ht
+    by_contra htK
+    have h1 : β₁ < t := lt_of_le_of_ne ht.1 (fun h => htK (h ▸ hβ₁A.1))
+    have h2 : t < β₂ := lt_of_le_of_ne ht.2 (fun h => htK (h ▸ hβ₂A.1))
+    exact hgap γ β₁ t β₂ hβ₁lt h1 h2 hβ₂lt hγ htK hβ₁A.1 hβ₂A.1
+  refine ⟨β₁, β₂, hβ12, by linarith, ?_⟩
+  ext k
+  simp only [angleIcc, mem_iUnion]
+  constructor
+  · intro hk
+    obtain ⟨m, hm⟩ := exists_shift_Ico γ k
+    have hmem : k + 2 * π * m ∈ A := ⟨(periodic_int hper k m).mpr hk, hm.1, hm.2.le⟩
+    have h1 : β₁ ≤ k + 2 * π * m := hβ₁min hmem
+    have h2 : k + 2 * π * m ≤ β₂ := hβ₂max hmem
+    refine ⟨-m, ?_, ?_⟩ <;> push_cast <;> linarith
+  · rintro ⟨m, hm1, hm2⟩
+    have : k + 2 * π * ((-m : ℤ) : ℝ) ∈ K := hIcc ⟨by push_cast; linarith, by push_cast; linarith⟩
+    exact (periodic_int hper k (-m)).mp this
+
+
+/-- The cone of a set at a point is closed. -/
+theorem isClosed_coneAt (S : Set ℂ) (y : ℂ) : IsClosed (coneAt S y) := by
+  rw [← isOpen_compl_iff, Metric.isOpen_iff]
+  intro β hβ
+  simp only [mem_compl_iff, coneAt, mem_setOf_eq, not_forall, not_exists, not_and, not_lt] at hβ
+  obtain ⟨ε, hε, hnone⟩ := hβ
+  refine ⟨ε / 2, half_pos hε, fun β' hβ' => ?_⟩
+  simp only [mem_compl_iff, coneAt, mem_setOf_eq, not_forall, not_exists, not_and, not_lt]
+  refine ⟨ε / 2, half_pos hε, fun z hzS hzy hzd => ?_⟩
+  have h1 := hnone z hzS hzy (by linarith [hzd])
+  have h2 : ‖e β' - e β‖ ≤ |β' - β| := norm_e_sub_e_le β' β
+  rw [mem_ball, Real.dist_eq] at hβ'
+  have h3 : ‖(z - y) / (‖z - y‖ : ℂ) - e β‖ ≤ ‖(z - y) / (‖z - y‖ : ℂ) - e β'‖ + ‖e β' - e β‖ := by
+    calc _ = ‖((z - y) / (‖z - y‖ : ℂ) - e β') + (e β' - e β)‖ := by ring_nf
+      _ ≤ _ := norm_add_le _ _
+  linarith
+
+/-- Open sets approach their points along every direction. -/
+theorem mem_coneAt_of_mem_isOpen {T : Set ℂ} (hT : IsOpen T) {x : ℂ} (hx : x ∈ T) (β : ℝ) :
+    β ∈ coneAt T x := by
+  intro ε hε
+  obtain ⟨r, hr, hrT⟩ := Metric.isOpen_iff.mp hT x hx
+  set s : ℝ := min (r / 2) (ε / 2) with hs
+  have hs0 : 0 < s := lt_min (half_pos hr) (half_pos hε)
+  have hsr : s < r := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+  have hsε : s < ε := lt_of_le_of_lt (min_le_right _ _) (by linarith)
+  have hd : ‖(s : ℂ) * e β‖ = s := by rw [norm_mul, Complex.norm_real, norm_e, mul_one, Real.norm_eq_abs, abs_of_pos hs0]
+  refine ⟨x + (s : ℂ) * e β, hrT (by rw [mem_ball, dist_eq_norm, add_sub_cancel_left, hd]; exact hsr), ?_, ?_, ?_⟩
+  · intro h
+    have : (s : ℂ) * e β = 0 := by simpa using h
+    rw [← norm_eq_zero, hd] at this
+    exact hs0.ne' this
+  · rw [dist_eq_norm, add_sub_cancel_left, hd]; exact hsε
+  · rw [add_sub_cancel_left, hd]
+    have : (s : ℂ) * e β / ((s : ℝ) : ℂ) = e β := by
+      have : (s : ℂ) ≠ 0 := by exact_mod_cast hs0.ne'
+      field_simp
+    rw [this, sub_self, norm_zero]; exact hε
+
+/-- A set whose closure holds `x`, and which has points of `x`'s punctured neighbourhoods arbitrarily near, has a
+nonempty cone at `x`: the unit directions of such points have a limit point. -/
+theorem coneAt_nonempty {T : Set ℂ} {x : ℂ} (h : ∀ ε > 0, ∃ z ∈ T, z ≠ x ∧ dist z x < ε) :
+    (coneAt T x).Nonempty := by
+  choose z hzT hzx hzd using fun n : ℕ => h (1 / ((n : ℝ) + 1)) (by positivity)
+  set u : ℕ → ℂ := fun n => (z n - x) / (‖z n - x‖ : ℂ) with hu
+  have hun : ∀ n, u n ∈ sphere (0 : ℂ) 1 := by
+    intro n
+    have hn : ‖z n - x‖ ≠ 0 := norm_ne_zero_iff.mpr (sub_ne_zero.mpr (hzx n))
+    rw [mem_sphere_zero_iff_norm, hu]
+    simp only [norm_div, Complex.norm_real, norm_norm]
+    exact div_self hn
+  obtain ⟨a, ha, φ, hφ, hlim⟩ := (isCompact_sphere (0 : ℂ) 1).tendsto_subseq hun
+  have ha1 : ‖a‖ = 1 := by simpa using ha
+  have hae : a = e (arg a) := by
+    have := Complex.norm_mul_exp_arg_mul_I a
+    rw [ha1] at this
+    simpa [e] using this.symm
+  refine ⟨arg a, fun ε hε => ?_⟩
+  have h1 := (Metric.tendsto_atTop.mp hlim) ε hε
+  obtain ⟨N₁, hN₁⟩ := h1
+  obtain ⟨N₂, hN₂⟩ := exists_nat_gt (1 / ε)
+  refine ⟨z (φ (max N₁ N₂)), hzT _, hzx _, ?_, ?_⟩
+  · refine lt_of_lt_of_le (hzd _) ?_
+    have hφn : max N₁ N₂ ≤ φ (max N₁ N₂) := hφ.id_le _
+    have : (1 / ε) < ((φ (max N₁ N₂) : ℕ) : ℝ) + 1 := by
+      have : (N₂ : ℝ) ≤ ((φ (max N₁ N₂) : ℕ) : ℝ) :=
+        Nat.cast_le.mpr ((le_max_right _ _).trans hφn)
+      linarith
+    rw [div_le_iff₀ (by positivity)]
+    rw [div_lt_iff₀ hε] at this
+    nlinarith
+  · have := hN₁ (max N₁ N₂) (le_max_left _ _)
+    rw [dist_eq_norm] at this
+    show ‖(z (φ (max N₁ N₂)) - x) / (‖z (φ (max N₁ N₂)) - x‖ : ℂ) - e (arg a)‖ < ε
+    rw [← hae]; exact this
+
+/-- **The cone of a Jordan domain's tile is one angular interval.** Near a point `x` of the closure, the tile's part in a
+small disc lies in a preconnected piece of the tile in a slightly larger disc (the chart), so two separated directions of
+the cone, with two directions the cone misses between them, cannot both be approached (`arg_side`). -/
+theorem ArcMap.IsJordanDomain.coneAt_eq_angleIcc {T : Set ℂ} (hJ : ArcMap.IsJordanDomain T) (hTo : IsOpen T) {x : ℂ}
+    (hx : x ∈ closure T) :
+    ∃ β₁ β₂, β₁ ≤ β₂ ∧ β₂ ≤ β₁ + 2 * π ∧ coneAt T x = angleIcc β₁ β₂ := by
+  have hnear : ∀ ε > 0, ∃ z ∈ T, z ≠ x ∧ dist z x < ε := by
+    intro ε hε
+    obtain ⟨z, hzT, hzd⟩ := Metric.mem_closure_iff.mp hx (ε / 2) (half_pos hε)
+    by_cases hzx : z = x
+    · subst hzx
+      obtain ⟨r, hr, hrT⟩ := Metric.isOpen_iff.mp hTo z hzT
+      refine ⟨z + ((min (r / 2) (ε / 2) : ℝ) : ℂ), hrT ?_, ?_, ?_⟩
+      · rw [mem_ball, dist_eq_norm, add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs,
+          abs_of_pos (lt_min (half_pos hr) (half_pos hε))]
+        exact lt_of_le_of_lt (min_le_left _ _) (by linarith)
+      · intro h
+        have : ((min (r / 2) (ε / 2) : ℝ) : ℂ) = 0 := by simpa using h
+        have := lt_min (half_pos hr) (half_pos hε)
+        simp_all
+      · rw [dist_eq_norm, add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs,
+          abs_of_pos (lt_min (half_pos hr) (half_pos hε))]
+        exact lt_of_le_of_lt (min_le_right _ _) (by linarith)
+    · exact ⟨z, hzT, hzx, by rw [dist_comm]; linarith⟩
+  refine exists_angleIcc_of_no_gap (isClosed_coneAt T x) (coneAt_nonempty hnear)
+    (fun β => mem_coneAt_add_two_pi) ?_
+  intro γ₁ a γ₂ b h1 h2 h3 h4 hγ₁ hγ₂ ha hb
+  have hxT : x ∉ T := fun hxT => hγ₁ (mem_coneAt_of_mem_isOpen hTo hxT γ₁)
+  -- the two missing directions give a radius below which no point of `T` lies near them
+  have hmiss : ∀ γ, γ ∉ coneAt T x → ∃ ε > 0, ∀ z ∈ T, z ≠ x → dist z x < ε →
+      ∀ s : ℝ, 0 < s → z - x ≠ s * e γ := by
+    intro γ hγ
+    simp only [coneAt, mem_setOf_eq, not_forall, not_exists, not_and, not_lt] at hγ
+    obtain ⟨ε, hε, hnone⟩ := hγ
+    refine ⟨ε, hε, fun z hzT hzx hzd s hs hzs => ?_⟩
+    have h5 := hnone z hzT hzx hzd
+    have hu : (z - x) / (‖z - x‖ : ℂ) = e γ := by
+      rw [hzs, norm_mul, Complex.norm_real, norm_e, mul_one, Real.norm_eq_abs, abs_of_pos hs]
+      have : (s : ℂ) ≠ 0 := by exact_mod_cast hs.ne'
+      field_simp
+    rw [hu, sub_self, norm_zero] at h5
+    linarith
+  obtain ⟨ε₁, hε₁, hm₁⟩ := hmiss γ₁ hγ₁
+  obtain ⟨ε₂, hε₂, hm₂⟩ := hmiss γ₂ hγ₂
+  obtain ⟨r', hr', C, hCT, hCb, hCpre, hCsub⟩ := hJ.local_connected hx (lt_min hε₁ hε₂)
+  have hxC : x ∉ C := fun h => hxT (hCT h)
+  have hzx : ∀ z ∈ C, z ≠ x := fun z hz h => hxC (h ▸ hz)
+  have hside := arg_side hCpre hxC (γ := γ₁) (δ := γ₂ - γ₁)
+    (fun z hz s hs => hm₁ z (hCT hz) (hzx z hz)
+      (lt_of_lt_of_le (by simpa [dist_comm] using hCb hz) (min_le_left _ _)) s hs)
+    (fun z hz s hs => by
+      have := hm₂ z (hCT hz) (hzx z hz)
+        (lt_of_lt_of_le (by simpa [dist_comm] using hCb hz) (min_le_right _ _)) s hs
+      rwa [show γ₁ + (γ₂ - γ₁) = γ₂ by ring])
+  -- a point of `T` near the direction `a`, and one near `b`
+  obtain ⟨εa, hεa, hna⟩ := arg_near (γ := γ₁) (β := a) h1 (by linarith) (η := γ₂ - a) (by linarith)
+  obtain ⟨εb, hεb, hnb⟩ := arg_near (γ := γ₁) (β := b) (by linarith) h4 (η := b - γ₂) (by linarith)
+  obtain ⟨za, hzaT, hzax, hzad, hzau⟩ := ha (min r' εa) (lt_min hr' hεa)
+  obtain ⟨zb, hzbT, hzbx, hzbd, hzbu⟩ := hb (min r' εb) (lt_min hr' hεb)
+  have hza : za ∈ C := hCsub ⟨hzaT, by rw [mem_ball]; exact lt_of_lt_of_le hzad (min_le_left _ _)⟩
+  have hzb : zb ∈ C := hCsub ⟨hzbT, by rw [mem_ball]; exact lt_of_lt_of_le hzbd (min_le_left _ _)⟩
+  have hA := hna za x hzax (lt_of_lt_of_le hzau (min_le_right _ _))
+  have hB := hnb zb x hzbx (lt_of_lt_of_le hzbu (min_le_right _ _))
+  rw [abs_lt] at hA hB
+  rcases hside with hs | hs
+  · have := hs zb hzb
+    linarith [hB.1]
+  · have := hs za hza
+    linarith [hA.2]
+
 /-! ## Arcs against a unit circle -/
 
 /-- A nondegenerate arc meets the unit circle `ω(p)` in finitely many points, unless it is an arc of `ω(p)` itself (a
@@ -1130,7 +1480,8 @@ each a segment or a circular arc, and the tile is the sector between them. -/
 theorem Simple.coneAt_eq_angleIcc (hS : F.Simple) {T : Set ℂ} (hT : F.IsTile T) {x : ℂ} (hxd : x ∈ F.dom)
     (hx : x ∈ closure T) :
     ∃ β₁ β₂, β₁ ≤ β₂ ∧ β₂ ≤ β₁ + 2 * π ∧ coneAt T x = angleIcc β₁ β₂ := by
-  sorry
+  have _hxd := hxd
+  exact (hS.1 T hT).coneAt_eq_angleIcc hT.isOpen hx
 
 end Simple
 
