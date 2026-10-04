@@ -370,3 +370,12 @@ reason by the close.*
 62. **Brief FS131-K4b, wave 4's second planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K4b-wave4.md`), gated PASS: K4's § 5.2 less Woodall's chain (17 items),
     FS106-L and FS106-TS-T first (Woodall's job branches from them), the obligation-modeling pass owed by K4, the handoff. Launched in the slot the Searcher
     freed. Source: this commit.
+63. **Statement defect in wave 2's skeleton — `exists_not_uniform_kept` false for `η ≥ 1`** (FS131-I2c, message 2026-10-04; `Plane/Slack`): `KeptAt A η ε x` reads
+    `ofReal (1 − η) · volume (ball x ρ) ≤ volume (ball x ρ ∩ densitySet A)`, whose left side is 0 once `η ≥ 1`, so every point is kept and the set of non-kept
+    points is empty (Keryx's receipt: `ofReal` of a non-positive real is 0). The row's `η` is a fraction; a skeleton slip. **Ruling: add `(hη : η < 1)`.**
+    Alternative: none live. Confidence: high. I2c believes the `η < 1` form true (k depending on η, a fine-scale zigzag; unproved); if it stalls there, that
+    is a question for Ephodos, not a quiet change.
+64. **Route note, not a defect — `sqrt3_local`** (I2c; `Arith/Dyadic`): the plan's route (Newton's lemma, then `sqrt3_local_of_congr`) fails, because
+    `sqrt3_local_of_congr` takes `s² − 3 ∈ (4)·P` as a global ideal of `𝓞F` and a local square at P gives the congruence only at P; the statement is not in
+    doubt. The implementer builds a P-local Kummer–Dedekind lemma (`s² − 3 ∈ P^(2e+1)`) as a child — formalization, its own to decide; mathematics beyond that
+    comes back as a question.
