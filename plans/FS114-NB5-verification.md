@@ -120,6 +120,8 @@ contains `90°` (tools H1). SIGHT at `(top, p)`: `t1, t2, t3` meet `B(top, 1)` (
 N4-D (two minds) excludes it reading `B̄(p, √3)`, the top lune alone. **Radius note:** the bends can be run on a fragment on (a small neighbourhood of)
 `B̄(p, √3)` itself — restrict first; no (R2) witness is then visible, so only (Q) arcs are kept, and OUT4 kills those too. So the whole statement reads `√3`.
 
+*Dated note (FS129-Z2, 2026-10-03; the text above stands as written).* The radius note's "restrict first" holds for the **whole-tile restriction** of radius at most `√3` — the tiles meeting the open disc, each with its whole closure (FS129-OR1-WHOLE) — and not for a round neighbourhood: a fragment's tiles are the components of its open set minus `Γ`, so a round restriction can cut one tile into two pieces of one colour less than 1 apart (a Siamese pair) and can disconnect the meeting set of two closures (non-simple) (`plans/FS129-OR1-audit.md` § J1 and its control `fs129-or1-cut`). The sentence is true about the arcs — a round restriction also removes every non-(Q) ring arc — but does not carry class membership (`plans/FS129-SR1-audit.md` § 2.3). On the whole-tile restriction the bends keep validity, non-Siamese, simplicity and `p`'s colours and leave only the (Q) arcs (FS129-OR1-BENDFRAG; at any `k`, FS129-SR1-BENDANY; derived, one mind, kernel pending). Source: FS-129 inventory items 59, 96.
+
 ### 1b.4 N5-R0 — TRUE [hand, one mind; a route different from the statement's parenthesis]
 
 *Derivation.* Residual: `X = X′`, `colour(T) = X̄`; neither corner carries `X̄`.

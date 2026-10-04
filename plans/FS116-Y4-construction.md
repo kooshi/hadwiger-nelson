@@ -398,6 +398,7 @@ but no tip (its tiles of `p` do not reach `ω(p)`): every one is outside the cla
 - **For C114-LOCAL-F's case list:** the Γ-free ring type is removed at radius `1 + ε`. The (Q)-free rings that carry (R2) arcs after the bends
   (FS114-N6-RING60's class, where N7-HUB and N7-3T live) are not reached: there a change point of `κ` may end an (R2) arc, RING-GERM's tip is not given, and
   the double tip's existence is not shown. Whether FLANK closes them is the next question (§ 3.4).
+  *Dated note (FS129-Z2, 2026-10-03; the text above stands as written).* The (Q)-free rings that carry (R2) arcs are now reached: bending a fragment on a whole-tile restriction of radius at most `√3` keeps EMPTY's class and leaves only (Q) arcs, so "no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no (Q) arc" (FS129-OR1-QFREE), and without "simple" (FS129-SR3-QFREE-NS, on FS116-V6's route, which never uses simplicity) — each derived, one mind, kernel pending (`plans/FS129-derivation.md`; FS-129 item 96). FLANK is not needed for them.
 
 ### 3.4 Look-back
 

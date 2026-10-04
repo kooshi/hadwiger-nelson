@@ -338,6 +338,7 @@ to 1); `F⁻¹(j) ⊆ G_j = {g_j > 0}`, and for a.e. `x ∈ G_j`, `(g_j ∗ σ)(
   it needs no four-colour centre, and it is implied by seven. C114-LOCAL-F is DISC-F about four-colour vertices; with a local form of FS112-N3-DENSE3
   (a four-colour or repeated-colour vertex within a bounded distance of every point of a fragment's inner disc) they would be the same question — that local
   DENSE3 is a claim of its own (the claim list's LOCAL-DENSE).
+  *Dated note (FS129-Z2, 2026-10-03; the text above stands as written).* The local DENSE3 is now held at `r = 3` (FS129-OR1-LOCALDENSE: "every valid six-coloured fragment on a closed disc B̄(x, 3) has, in B̄(x, 3), a vertex of at least four colours or a vertex with a repeated colour"; possibly vacuous), but "the same question" holds only in the non-Siamese simple class: LOCAL-DENSE's alternative is a vertex of at least four colours *or one with a repeated colour*, and C114-LOCAL-F excludes only the first, so DISC-F follows from C114-LOCAL-F with LOCAL-DENSE where no vertex has a repeated colour (FS129-OR1-DISCF-NS); in the Siamese or non-simple class it needs, besides, the same exclusion about repeated-colour vertices or four-colour vertices within a bounded distance of every repeated-colour vertex (GS-4's density form; `plans/FS129-OR1-audit.md` § J19; FS-129 item 59). Each derived, one mind, kernel pending.
 
 ### 3.7 The open instances it would decide
 

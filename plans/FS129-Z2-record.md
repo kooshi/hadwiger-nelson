@@ -189,3 +189,19 @@ close, part 2 …*" paragraph, as a blockquote in the form of FS-115's banners:
 > simplicity; derived, one mind, kernel pending; `plans/FS129-derivation.md`). Question 2 is moot. **This stub's question is now question 3's Siamese
 > half**: does any Siamese valid six-coloured fragment about a vertex of at least four colours whose ring carries no (Q) arc survive past `1 + ε`?
 > FS129-OR1-QFREE-CLASS reduces it to the ring with no arc of `Γ`. The bearing section's paragraph "At FS-129's audit" has the detail.
+
+## Stage 5 — SAVED: dated notes on five records that are not derivation files (items 59, 96)
+
+**Tool**: `tools/fs129_z2_notes.py` (`--apply` once; `--check`: each note present once and directly after its anchor's paragraph, `git diff` deleting
+no line; `--check --fault` alters one note in memory — "note present 0 times … it fires"). Each note is a paragraph headed "*Dated note (FS129-Z2,
+2026-10-03; the text above stands as written).*", inserted directly after the text it corrects:
+
+| record | under | the note |
+|---|---|---|
+| `plans/FS114-NB5-verification.md` | § 1b.3, the radius note ("restrict first") | holds for the whole-tile restriction of radius ≤ `√3` (FS129-OR1-WHOLE), not a round neighbourhood, which can make a Siamese pair or a non-simple meeting (OR1 § J1, control `fs129-or1-cut`); true about the arcs, silent on class membership (SR1 § 2.3); on the whole-tile restriction the bends keep the class (BENDFRAG; BENDANY) |
+| `plans/FS114-NB6-verification.md` | § 1b.0, "Bends on a fragment" | the same |
+| `plans/FS114-N7-proof.md` | the setting paragraph, ll. 88–89 | the same, and: with QFREE and QFREE-NS the setting's class (a (Q)-free ring at a four-colour vertex) has no member on a disc of radius above 1 in the non-Siamese class; the per-pattern kills stand as arguments about an empty class |
+| `plans/FS116-Y4-construction.md` | § 3.3, "For C114-LOCAL-F's case list" | the (Q)-free rings with (R2) arcs are now reached (QFREE; QFREE-NS on FS116-V6's route); FLANK is not needed for them |
+| `plans/FS116-local-exclusion.md` | § 3.6, the sharper form's bullet | LOCAL-DENSE held at `r = 3` (possibly vacuous); "the same question" only in the non-Siamese simple class (DISCF-NS); elsewhere DISC-F needs besides an exclusion about repeated-colour vertices or GS-4's density form (OR1 § J19) |
+
+`git diff --numstat` on the five: lines added only (one note each, and a blank line around the two plain-paragraph notes), 0 deleted.
