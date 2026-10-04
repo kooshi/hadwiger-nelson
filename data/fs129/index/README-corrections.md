@@ -56,3 +56,12 @@ Each was stated from the uncorrected graph; the corrected value replaces it.
   `corrections.md` § Suffix candidates for a reader.
 - **"Rests on it: nothing …" read as edges** (items 77, 99, 118): sorted by the readers and applied (above). Four lane-A records whose Rests-on-it
   holds "none" or "nothing" mid-sentence (FS50-T2, FS66-L6, FS91-J08-5, MASCOT-T1) carry real edges and are unchanged (FS129-SA1 § 4.3).
+
+## 5. The where-else column (FS129-Z2)
+
+`theorems.jsonl` carries two more fields on every record, `where_else` and `near_misses`, each a list of
+`{"site", "kind", "address", "as", "by", "lane"}`; `where-else.md` is the same content as tables, with the counts per lane and a section for
+ledger rows (which are not records here). They are written by `python3 tools/fs129_z2_whereelse.py` from the FS-129 readers' tables, verdict
+paragraphs and entries; every other field is kept byte for byte (checked). **Re-running `tools/fs129_index.py` rewrites `theorems.jsonl` without
+them: re-run `tools/fs129_z2_whereelse.py` after it.** A site already joined to the theorem by an edge of `edges-corrected.csv` is not listed
+(a recorded use is not "elsewhere").

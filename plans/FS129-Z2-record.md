@@ -106,3 +106,35 @@ item 19's 87 of 100.
 
 **For FS129-L1**: cite `lean-order-corrected.md`; its ROUTE-ONLY flag marks entries in the closure only through a second mind's route; item 116's
 errata and FS129-SR1 § 6.2's "do not formalize as stated" list still apply (the index cannot see them).
+
+## Stage 3 — SAVED: the where-else column
+
+**Tool**: `tools/fs129_z2_whereelse.py` adds to every record of `data/fs129/index/theorems.jsonl` two fields, `where_else` and `near_misses`
+(each item `{"site", "kind", "address", "as", "by", "lane"}`; a near miss names a failing hypothesis and is not a bearing, so it is kept apart),
+and writes `data/fs129/index/where-else.md` (the same items as tables, the counts, and a section for ledger rows, which have no record here).
+**Encoding decisions** (mine to make): (1) sources are sections of the readers' records found by heading — the tables of misses (MA1 § 5.1,
+MA2 § 4.1, MR1), the merge lists and sweeps (SR1 Stage 3 and § 6.1; SR2 §§ 2.1, 3.1, 4.1; SA1 §§ 2.2, 4.2, 6.1; SR3 § 4.1; OA1 § 3.3), OA1's and
+OR1's verdict paragraphs (site: the demand step, J<n>), and every FS-129 entry's `uses only:` line in the reader's record (site: the entry; kind
+"composition"; FS129-MR1-DOUBLETIP's line with FS116-N2-STAR dropped, as `plans/FS129-derivation.md` has it); (2) in a table row the theorems are
+the ids of the first cell that names one, the sites the ids of the other cells; merges, shared steps and answers elsewhere are made symmetric
+when the row names at most six ids; (3) **a site already joined to the theorem by an edge of `edges-corrected.csv` is dropped** — a recorded use
+is not "elsewhere"; (4) a row that says "not read here" or begins "unchanged" with no merge is skipped; (5) the kind is read from the row's
+words (`kind_of`). Ids are index ids as written, or a hyphenated token with exactly one id ending in it (`V6-HUG`).
+
+**Checks**: every other field byte for byte (each record re-serializes to its original line, and each new line begins with the old one less its
+closing brace — asserted); every item's address re-read, the theorem's token and the site's on that line (an entry's header and block for a
+composition). **Fault** (`--fault`: every address moved one line down; nothing written): "address check failures 225" — it fires; clean: 0.
+
+**Counts** (from `where-else.md`): **97 theorems have at least one site, 200 sites** (era A 3, era R 94); near misses 28 on 27 theorems; ledger
+rows 6 with 23 sites (row 66 with 13: the Falconer-fan and slack-plane family; rows 78, 88, 104, 111, 1).
+
+| reading lane | theorems with a site | composition | merge | stronger form held | answered elsewhere | closes | shortens | reduces | shared step | bears unapplied | bears | near miss |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A (OA1, MA1, MA2, SA1) | 4 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
+| R (OR1, MR1, SR1, SR2, SR3) | 93 | 43 | 55 | 12 | 18 | 5 | 18 | 19 | 14 | 0 | 12 | 28 |
+
+**Reading the lane-A line**: lane A's bearings land on ledger rows (row 66 above all, through the kernel's `Slack` theorems) and on grokkings,
+not on `LEDGER.md` § B theorems; the column is per theorem, so lane A's yield shows in `where-else.md` § Ledger rows and in the grokking tables
+of FS129-MA1 § 3 and FS129-MA2 § 3.1 (bearing per mechanism), which this column does not encode. **Not encoded**: grokking-level bearings
+("bears unapplied" per mechanism), and steps of OR1/OA1 prose outside their verdict paragraphs. Re-running `tools/fs129_index.py` drops the two
+fields; the README note (`data/fs129/index/README-corrections.md` § 5) says to re-run this script after it.
