@@ -664,3 +664,188 @@ FLANK-Q reads N2-TERM's terminality: **met** (p 0.8). FLANK's shadow needs no va
 `./scripts/build.sh` (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — all 1741 modules up to date** (the stage-2 run had already compiled the final
 `UnitArc` and `BaseSteps`: Lake traces sources by hash), **11 modules with warnings**, 182 warnings all `declaration uses 'sorry'` (29 in `UnitArc`, 22 in
 `BaseSteps`), exit 0 (`build/gate/build/20261004T090600Z-2377760.log`; driver log `data/fs131/k4/build-k4c-stage3.log`).
+
+## Stage 13 — SAVED (K4c stage 4): the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh) and the plan for every leaf
+
+### 13.1 What the pass found: seven statements from which most leaves derive
+
+Wave 4 has **86 `sorry` leaves** (StuckChain 5, Contact 16, UnitArc 29, SVMap 14, BaseSteps 22). Read for the statement each proof derives from,
+they are not 86 arguments but seven engines, wave 3's three, and their instances. Each engine is a child the implementer states first, in the module
+named; none changes a row's statement.
+
+1. **The validity transfer** (`Plane/ValidMap/Basic`, child `Valid.of_agreesOff`, **E–M, pure logic**): `F.Valid`, `F'.AgreesOff F U`, every interior
+   point `z ∈ U` of `F'` clear in `F` for its new colour (`F.IsClear (F'.col z) z`), and no unit pair of one `F'`-colour among the interior points of `F'`
+   in `U` ⟹ `F'.Valid`. (Pairs both off `U` are `F`'s; one in `U` is the clearness; both in `U` the last hypothesis.) **Consumers: all six moves** —
+   `exists_shave`, `exists_rayMerge`, `exists_merge`, `bend_toward`, `bend_away`, `bend_away_whole`. Each move's validity is then its clearness, which is
+   the geometry the derivation actually argues (N3-CLEAR, N4-RAY's crossing, N2-ENV with N2-SIGN), and the "own colour" clause (the recoloured region
+   with the old class near it has diameter `< 1` inside itself: for the bends `T_out ∪ L ⊆ B̄(A,1) ∩ B̄(B,1)`, N2-TOWARD).
+2. **No new unit arc from a `Γ` inclusion** (`Basic`, child `ringArcsWithin_of_Γ_subset`, **M**): `F'.dom = F.dom`, `F'.Γ ⊆ F.Γ ∪ ⋃_{a ∈ A'} a.carrier`
+   with `A'` locally finite and no `a ∈ A'` a unit arc ⟹ `F'.RingArcsWithin F`. Route: a positive-length sub-arc of `ω(p)` in `F'.Γ` meets the
+   finitely many nearby `A'`-carriers in finitely many points (wave 3's `Arc.finite_inter_sphere_or_eq_circ`), so off them it lies in `F.Γ`, which is
+   closed in `dom` (`LocallyFinite.isClosed_iUnion` on the carriers); so the whole sub-arc does. A companion `condition5_of_ringArcsWithin`
+   (`G.Condition5 → F.RingArcsWithin G → F.Condition5`, **M**) gives every move's `F.Condition5 → F'.Condition5` clause. **Consumers: the six moves.**
+3. **The cut** (`Plane/ValidMap/UnitArc`, child `exists_cut_ringArc`, **M–H, bookkeeping**): for an open sub-arc `O = r((θ₁, θ₂))` of `ω(P)`, a locally
+   finite non-degenerate arc set whose carriers' union is `⋃ F.arcs` with `O` removed from every arc of `ω(P)` (each `circ P 1 θa θb` replaced by its
+   at most two pieces off `O`, angles taken mod `2π`), every other arc kept. **Consumers: the three bends** (the moves of Contact add arcs and recolour;
+   they never delete one — superfluous unit arcs inside a merge gap may stay, being `F`'s).
+4. **The frame algebra** (`Basic`, children, **E each**): `frame_normSq` (`frameX² + frameY² = ‖z − v‖²`), `tanAbove_one_iff`
+   (`TanAbove v α 1 z ↔ dist z N < 1`), `tanBelow_one_iff` (`↔ 1 < dist z N`), `tanAbove_neg_one_iff` (`↔ 1 < dist z S′`), `tanBelow_neg_one_iff`, and
+   the general `tanHeight_pos_iff` (for `κ > 0`: inside the circle of radius `1/κ` about `v + n/κ`). **Consumers**: `rayLower_pencil`,
+   `shadow_farSide_*`, `lens_dist_lt_one_of_up`, `lune_dist_le_of_up`, `woodallCone*`, `inType_shadows_horn`, `flank_siamese_of_inType`, `flankQ_*`,
+   `n3_end`, the bowtie's horn leaves — every "a horn point versus `N`, `S′`" step.
+5. **A horn's bounding arc is a ring arc** (`Plane/ValidMap/Contact` or `UnitArc`, child `IsHorn.isRingArc_upper` / `_lower`, **M**): `IsHorn v α κ₁ 1 c`
+   with flank `g` above (`IsFlankAbove v α 1 g`) and `F.Covers v 1` ⟹ `∃ θ₂ > α − π/2, IsRingArc N (α − π/2) θ₂ g c`; the mirror at `κ₁ = −1`. Route: points
+   of the arc near `v` are limits of both sectors and are not interior points (else the horn's component would be larger than `hornSet`, against
+   `IsSector`'s equality); the sides near each arc point are the flank and the horn sets. **Consumers**: `flankQ_upper`, `flankQ_lower`, `n3_end`, and
+   wave 5's C-DOUBLE.
+6. **The side chain of a ring arc** (`UnitArc`, child `IsRingArc.side_dist_le_one`, **H — the wave's second-hardest statement**): in a valid map, for
+   `IsRingArc P θ₁ θ₂ c c'`, any two points of the closures of tiles of the inner colour touching the open arc from inside are at distance `≤ 1`, and
+   both ends lie in the closure of their union; the same outside. Route: the inner strip `{P + (1 − s)e(φ) : φ ∈ (θ₁, θ₂), 0 < s < δ(φ)}` is
+   preconnected; on it the relation "joined by a chain of inner tiles whose closures meet in sequence" is locally true (finitely many tiles near each
+   point, `finite_tiles_near`), transitive and symmetric, so `IsPreconnected.induction₂` makes it total; wave 1's `dist_lt_one_of_chain` (FS106-TS-C)
+   on each chain (union's unit pairs null: `Valid.unitPairsNull_region`) gives `< 1` inside, `≤ 1` on closures. **Consumers**: `l60_le` (NB's route: if
+   `ℓ > 60°`, two interior points with `60° < θ′ − θ < 180°`, and outer points just beyond them more than `1` apart — not the ends, whose chord is
+   `≤ 1` again for `ℓ ≥ 300°`), `l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners`, `l60_eq_third`.
+7. **The covering change point** (`UnitArc`, child `exists_coveringPoint_of_window`, **M**): on a closed window `[x, x + w]` of `ω(v)` whose end points
+   are interior points of colours `a ≠ b` and which contains no positive-length arc of `Γ`, some point `y` of the window has `{a, b} ⊆ coloursAt y`.
+   Route: the window meets `Γ` in finitely many points (wave 3's `finite_ringΓ_off_ringArc`); the open gaps are preconnected sets of interior points,
+   each of one colour (`IsTile.col_eq` via `IsPreconnected.subset_connectedComponentIn`); induction on the sorted finite list of `Γ`-points
+   (`Set.Finite.toFinset`, `Finset.sort`) finds consecutive gaps `a | b`. **Consumers**: `a4six`, and wave 5's NB4P-style uses.
+
+Wave 3's engines are cited, never re-proved: **the crossing engine** `Valid.dist_lt_or_gt_of_isPreconnected` (`n2_sign`, `lock`, `u1_shadow`'s outer
+points, `coneAt_subset_allowedCone`, `contact_inType_or_outType`, `flankQ_*`), **one point in one tile's closure** `mem_closure_tile`, **the sector
+structure** `localSectors` (`woodallCone`, `exists_hasDegree_of_mem_dom`, the moves' sector counts, `IsHorn.isRingArc_upper`); and wave 3's
+`unitNear_or_unitFar` / `unitNear_of_mem_closure` / `unitFar_of_mem_closure` (N-E2) at every Siamese-or-outer step (`flank_siamese_of_inType`,
+`flankQ_upper`'s in-type tile, `flankQ_both`, `contact_inType_or_outType`, `woodallCone`'s "sectors outside `B(N, 1) ∪ B(S′, 1)`").
+
+### 13.2 Measures for the burn-down
+
+No leaf recurses through the map; the measure is the leaf count (86) and every turn replaces a leaf by stated children. The induction-shaped
+leaves, each with its recursion named: `n4_fin` — two inductions on `j : ℕ` (`1/υ_{m+j} ≤ 1/υ_m − j` upward, `1/λ_{m−j} ≥ 1/λ_m + j` downward;
+`Nat.rec`); `stuck_chain` — `Int.induction_on` both ways from `stuck_structure`'s step; `exists_coveringPoint_of_window` — `Finset.induction` on the sorted
+`Γ`-points; `IsRingArc.side_dist_le_one` — no induction, `IsPreconnected.induction₂`; `nb4p` — the alternation round the six-point orbit, induction on
+`k = 0, …, 5` with the invariant "the inner straddlers at `y_k` are one colour `i_k`, the outer one colour `o_k`" (W1 (ii)); `exists_three_le_multicolour`
+— the chain components as an equivalence (`Relation.EqvGen` of "closures meet"), finitely many meeting the square.
+
+### 13.3 Smells read
+
+(a) **The six moves were six constructions**: they are one pattern — data (`arcs'`, `col'`), the `ArcMap` fields, engines 1–2 — with the geometry in each
+move's clearness alone; the bends add engine 3. (b) **"A horn point versus `N` or `S′`"** recurs in a dozen leaves: engine 4, stated once.
+(c) **`flankQ_upper` and `flankQ_lower` are mirrors**, and FLANK's two clauses have mirrors too: K4's reflection child `ArcMap.reflect` (§ 2.1 (a)) is
+the uniform answer, but its transport API (horns, flanks, contacts, ring arcs, (Q), (R2), shadows) costs more than proving the mirror again over
+engine 4; the planner's recommendation: prove the mirrors directly, parametric in a sign where a child allows it. (d) **L60-EQ's four clauses** share one
+containment (engine 6) and one fact about cones of sets inside closed discs (child `coneAt_dot_nonneg_of_subset_closedBall`: `A ∈ ω(X)`,
+`T ⊆ B̄(X, 1)` ⟹ every direction `β` of `T` at `A` has `e(β)·(X − A) ≥ 0`; its twin for `T ∩ B(X, 1) = ∅` with `≤ 0`); the corner intervals are then
+trigonometry. (e) **A hypothesis no proof touches**: `flankQ_*`'s `hv : F.Covers v 1` is read (tiles at `N`, `S′`); `nb4p`'s change point needs no
+covering-pair hypothesis (dropped, § 12.2). (f) **The bowtie, `l60Frag`, `isoFrag`, the brick map**: per-fragment exact arithmetic, tile by tile; the
+bowtie's tiles are checked against `tools/fs112_yb3_frags.py bowtie` **before** any bowtie leaf is attempted (K4b § 8.1).
+
+### 13.4 Mathlib names confirmed with `#check` at the pin (`v4.32.0`, scratch file, 2026-10-04)
+
+`IsCompact.exists_thickening_subset_open`, `Metric.mem_thickening_iff`, `Metric.thickening_subset_cthickening`, `IsPreconnected.image`,
+`IsPreconnected.Icc_subset`, `intermediate_value_Icc`, `IsPreconnected.subset_connectedComponentIn`, `IsOpen.connectedComponentIn`,
+`Convex.isPreconnected`, `convex_ball`, `IsPreconnected.induction₂`, `isPreconnected_of_forall_pair`, `isPreconnected_iff_subset_of_disjoint`,
+`IsPreconnected.closure`, `Complex.dist_eq`, `Complex.sq_norm`, `Complex.normSq_apply`, `Complex.norm_exp_ofReal_mul_I`, `Complex.exp_add`,
+`Real.cos_pi_div_three`, `Real.sin_pi_div_three`, `Real.cos_pi_div_six`, `Real.sin_pi_div_six`, `Real.sin_lt`, `Real.sin_le`, `Real.strictAntiOn_cos`,
+`Real.sin_pos_of_pos_of_lt_pi`, `Real.cos_sq_add_sin_sq`, `Real.cos_sub`, `Real.sin_sub`, `Real.sqrt_lt_sqrt`, `Real.sq_sqrt`, `Real.sqrt_pos`,
+`real_inner_le_norm`, `MeasureTheory.measure_iUnion_le`, `MeasureTheory.measure_biUnion_finset_le`, `MeasureTheory.measure_union_le`,
+`MeasureTheory.measure_mono`, `MeasureTheory.Measure.restrict_apply'`, `Set.Finite.measure_zero`, `Real.volume_Ico`, `ENNReal.ofReal_lt_ofReal_iff`,
+`Set.Finite.toFinset`, `Finset.sort`, `Set.Finite.subset`, `Set.Finite.isClosed`, `Int.induction_on`, `Int.le_induction`, `Ioo_mem_nhdsGT`,
+`eventually_nhdsWithin_of_forall`, `Filter.Eventually.and`, `nhdsWithin_le_nhds`, `Metric.mem_closure_iff`, `closure_ball`, `IsClosed.closure_eq`,
+`LocallyFinite.isClosed_iUnion`, `IsCompact.exists_isMinOn`, `IsCompact.elim_finite_subcover`, `Complex.abs_re_le_norm`, `isOpen_lt`, `continuous_norm`,
+`IsClopen.eq_univ`, `isClopen_iff`, `Set.encard_le_card`, `Function.update`. **Unknown at the pin, not to be cited**: `Real.cos_lt_one`,
+`inner_le_norm_mul_norm` (use `real_inner_le_norm`), `isPreconnected_iff_subset_of_disjoint_fully`. The library's own: wave 1's `dist_lt_one_of_chain`
+(`Plane/Diameter`), `dist_ringPt_ringPt`; wave 3's engines (§ 13.1) and `finite_tiles_near`, `finite_ringΓ_off_ringArc`, `exists_mem_coneAt_region`,
+`coneAt_region_eq_biUnion`, `not_mem_coloursAt_of_mem_sphere`, `Arc.finite_inter_sphere_or_eq_circ`, `covers_one_iff` — statements as committed on
+`05cb0a3e` (wave 3's implementer may land their proofs meanwhile; never their statements).
+
+### 13.5 The plan per leaf (E easy, M moderate, H hard; "§ 4 n" is K4's item, "§ 9" K4b's sketch, each confirmed or corrected here)
+
+**`Plane/StuckChain`** (5): `curvUp_curvDown` **E** (§ 4.1). `n4_fin` **M** (§ 4.2; children `inv_curvUp`, `inv_curvDown`, the two inductions; strictness
+`λ < υ` is used). `ray_chain`, `exists_oneSided_chain` **E** (§ 4.3). `rayLower_pencil` **M** (§ 4.4, over engine 4's `frame_normSq`).
+
+**`Plane/ValidMap/Contact`** (16): `shadow_farSide_above`, `_below` **M–H** (§ 4.5; children `farSide_isPreconnected`, `dist_farSide`; engine 4).
+`contact_inType_or_outType` **M** (§ 4.6; N-E1 is `not_mem_coloursAt_of_mem_sphere`, N-E2 `unitNear_or_unitFar`). `coneAt_subset_allowedCone` **M**
+(§ 4.7). `clear_of_subset_interior_allowedCone` **H** (§ 4.8: per contact tile, a margin by compactness of `Λ`; contact *arcs* allowed — the margin is
+uniform over a compact contact arc, FS112-WALK row 3, NB C-CHAIN-3: confirmed). `lens_dist_lt_one_of_up`, `lune_dist_le_of_up` **E–M** (§ 4.9;
+`nlinarith` after engine 4). `woodallCone` **H**, `woodallCone_strict` **M** over it (§ 4.10; children `allowedCone_isClosed`, a planar "closed convex
+cone with empty interior lies in a line" lemma, `sector_eq_hornSet_of_cone_singleton` over `localSectors`). `flank_shadows` **H** (§ 4.11).
+`shaveAvailable_of_not_doublyShadowed` **M** (§ 4.12). `exists_shave`, `exists_rayMerge`, `exists_merge` **H** each, **re-priced to M–H**: engines 1–2
+carry validity, agreement and "no unit arc" (the new arcs have curvature `σ ∈ (−1, 1)`, or coincide with a bounding arc when `σ = ±1` — so `A'` has no
+unit arc: `exists_shave`'s new `h1`, `h2` are read exactly here; MERGE's arcs have radius `ρ < 1`, N3 § 2.2); left per move are the clearness (`hclear`;
+N4-RAY's crossing; N3-CLEAR at the gap with NB3's two repairs) and the sector count at `v`. `stuck_structure` **H** (§ 4.14). `stuck_chain` **M**
+(§ 4.15).
+
+**`Plane/ValidMap/UnitArc`** (29):
+- `n2_sign` **E** (§ 4.16). `lock` **M** (§ 4.17). `noBoth` **M** (§ 4.19, over wave 3's `ringArc_sideCone_other`).
+- `l60_le` **M** over engine 6 — **route corrected** from § 4.18's ends to NB's interior points (engine 6's note).
+- `u1_shadow` **M**: pick `θ ∈ (θ₁, θ₂)` with `cos(β − θ) > 0`; near `w = r(θ)` every interior point outside `B̄(P, 1)` has colour `c'` (else a second
+  outer colour at `w`); for all but finitely many small `t` (an arc of `F` lies on `ω(P + te(β))` for at most one `t` each, finitely many near `w`),
+  `ω(z)`, `z = P + te(β)`, crosses the outer side near `w` in an open arc whose points off finitely many are interior points within `ε` of `ᾱ`: one is
+  at distance `1` from `z`. Children: `outer_col_eq_near` (from `outerColours = {c'}`), the crossing of `ω(z)` with the radial line (exact:
+  `|z − (1+s)e(θ)|² = (1+s)² − 2t(1+s)cos(β−θ) + t²` takes values on both sides of `1`).
+- `l60_eq_inner`, `l60_eq_outer` **M** over engine 6: `L ∩ ω(P) = ᾱ` (child, trigonometry: `e(φ) ∈ B̄(A,1) ∩ B̄(B,1) ↔ φ ∈ [θ₁, θ₁ + 60°]` mod `2π`),
+  each tile connected in `L ∖ ᾱ`, which splits into `L ∩ B(P, 1)` and `L ∖ B̄(P, 1)` (`isPreconnected_iff_subset_of_disjoint`); outer: `L ∖ B(P, 1) ⊆
+  B̄(C, 1)` (child, audit § 1.3 (ii): its three boundary arcs lie in `B̄(C, 1)`; exact on the `ω(P)` arc, `|e(φ) − C|² = 4 − 2√3 cos(φ − θ₁ − 30°)`).
+- `l60_eq_corners` **M**: containments, then the child `coneAt_dot_nonneg_of_subset_closedBall` and its twin (§ 13.3 (d)), then
+  `{β : e(β)·(B − A) ≥ 0 ∧ e(β)·(P − A) ≥ 0} = angleIcc (θ₁ + 90°) (θ₁ + 210°)` and the three like it (trigonometry, `Real.cos_sub`).
+- `l60_eq_third` **E–M**: `exists_mem_coneAt_region` at `A ∈ dom` for a `β` with `e(β)·(B − A) < 0`, `coneAt_region_eq_biUnion` for its tile.
+- `l60Arcs_nondegenerate` **E** (five arcs, `pi_pos`). `l60Col_locallyConstant` **M** (in `int L` off the arcs, `‖z‖ < 1` locally constant; off `L` in a
+  small open disc; `l60Dom`'s points off `L` and off both open discs lie on the small circles). `l60_real` **M–H**: validity by the classes (`int Reul`
+  pairs `< 1`: constant width 1, child `dist_lt_one_of_mem_interior_reul`; discs of diameter `1/2`); `IsRingArc` (sides near the open arc: the lens rule
+  wins over the discs); `IsCompact.exists_thickening_subset_open` for `δ`. Check the four classes against `tools/fs114_l60_check.py` FRAG's 24 probes
+  first (they are the audit's own exact test of this fragment).
+- `n2_env_toward`, `n2_env_away`, `n2_env_near`, `n2_env_near_away` **M–H** each, one identity: N2-ENV's
+  `|p − z|² − 1 = 8cos η·sin(η + Δ/2)·sin(Δ/2) ± s(4cos η·cos(η + Δ) − 2) + s²` for `p` beyond an end on `ω(A)` (`ρ = 2cos η`), monotone in `ρ`
+  beyond; within the arc's directions `B̄(z, 1) ⊆ B̄(P, 2 − s)` (toward). Choose `ψ` from `r` explicitly (the probe: `r(ψ) ≈ ψ`). Children: the identity
+  (`ring_nf` after `Complex.sq_norm`, `Real.cos_sub`), `sin_half_ge` (`sin(Δ/2) ≥ Δ/π` for `Δ ≤ π`, from `Real.sin_le`-style concavity: Mathlib's
+  `Real.two_div_pi_mul_le_sin` — to be `#check`ed by the implementer; if absent, Jordan's inequality is a child).
+- `bend_toward` **H**, `bend_away` **H**, `bend_away_whole` **E** over `bend_away` (`r2Contacts` empty): engines 1–3 plus N2-TOWARD / N2-AWAY / N2-TAN's
+  clearness (N2-ENV, N2-SIGN, `hout`/`hin` as positive distance of the class from `P`, `R₂(ᾱ)`); the tangent bend's cap estimate (N2-TAN, `TAN` exact
+  in `tools/fs112_n2_checks.py`); the lens profile at the ends (a corner of angle `ψ` inside the side tile's sector at `A`, or a tangent start, N2-TOWARD).
+  The hardest leaves of the module, with the moves' shape.
+- `isOpen_isoDom` **E** (`isOpen_lt`, continuity of `re`, `im`, `‖·‖`). `isoCol_locallyConstant` **M**. `iso` **M**: validity by classes (colour `0`:
+  `‖z‖ < 1` against `isoY ⊆ {‖·‖ > 2}`; colour `1`: diameter `< 1/2`); `TileOf 0 isoY` (convex, open, separated from the disc); `C₂ = {0}`
+  (`2e(θ) − 2` has negative real part for `θ ≠ 0`); the blocking clause **E**: `y = 2 + s ∈ isoY` is at distance exactly `1` from `1 + s`.
+- `inType_shadows_horn` **E–M**: fix `p₀ ∈ X` (`X ≠ ∅` from `hN`); for `r < 1 − ‖p₀ − v‖` horn points are within `1` of `p₀` and farther than `1` from
+  `N` (engine 4, `κ₂ ≤ 1`), so `dist z ·` takes both sides of `1` on `X ∪`-near-`N` points; `IsPreconnected.image` + `IsPreconnected.Icc_subset`.
+- `flank_siamese_of_inType` **M**: the flank set (preconnected for small `r`) lies in one `g`-tile; `unitNear_or_unitFar` with `X`; not far (a flank point
+  inside `B(N, 1)` by engine 4, and points of `X` near `N`).
+- `flankQ_upper`, `flankQ_lower` **H** each: engine 5 for the ring arc; `c ∈ P_cl(N)` from `hcN`; split on `g ∈ P_cl(N)`: (Q) by `hQR` (not (R2): its inner
+  colour would be absent), the `g`-tile at `N` (`mem_coloursAt_iff_exists_tileOf`) in-type by N-E2 against the flank tile (out-type would make them
+  far, against a flank point inside `B(N, 1)`); (R2) by `hQR` (not (Q)): `S′ ∈ R₂` so in `cl(region g)`; `g`-tiles at `S′` out-type by N-E2 against the
+  flank tile (flank points are farther than `1` from `S′`); the horn's shadow by `shadow_farSide_below` at `υ = 1/2` (`curvUp (1/2) = 1`). Mirror directly.
+- `flankQ_both` **M**: `X` Siamese with `T_g` (`flank_siamese_of_inType`'s argument, or `unitNear_of_mem_closure`) so `T_g ⊆ B̄(N, 1)`; the `c`-horns lie
+  outside `B(N, 1)` (N-E2 against the out-type `c`-tile at `N`: near, it would put that tile inside `B̄(v, 1)`); in the `−a` horn's frame `B̄(N, 1)` is
+  "not above curvature `−1`" (engine 4), so `κ₃ ≤ −1` from the flank and `κ₃ ≥ −1` from the horn.
+- `a4six` **M**: if the arcs total `< π/3`, a shift `x` with all six `r(x + j·60°)` off `Γ` (child `exists_shift_avoiding`: the six translates of a
+  `2π`-periodic set of measure `< π/3` do not cover `[0, 2π)`, `MeasureTheory.measure_iUnion_le`; `Γ ∩ ω(v)` off ring arcs finite, measure zero); the
+  window ends are interior points of colours in `{a, b}` (`not_mem_coloursAt_of_mem_sphere`, `habs`), different (`hF`, chord `1`); engine 7 in each window
+  unless it holds an arc of `Γ`, and a point seeing `a` and `b` is a covering pair with `v` (`habs`).
+- `nb4p` **H**: FS110-NB-4's alternation with W1's corrections (`plans/FS112-N-proof.md` § 2.1 W1 (i)–(ii); FS110-NB-4's own proof, `plans/FS110-derivation.md`
+  l. 42 and its N-record): at each `y_k` both germs of `ω(v)` are interior points (hypothesis `hring` and `finite_ringΓ_off_ringArc`), the straddlers of
+  `ω(y_{k±1})` at `y_k` exist (`hnb`) and obey W1 (ii)'s (1)–(3); induction round the orbit; the implementer reads NB-4's closing count first — **the
+  one leaf whose derivation must be re-read in full before it is planned to the line**.
+
+**`Plane/SVMap`** (14; K4b's § 9 sketches, confirmed): `lemmaL` **M–H** (sweeps; child `sweep_isOpen`, `sweep_disjoint`: `O + S¹` open and disjoint from
+any set containing `O` with no unit pair — the same child serves BaseSteps' (P) sweep). `not_lemmaL_of_not_mem` **M** (§ 7.3's cones, four
+inequalities). `lebesgue_covering_square` — **FS131-LEB** (inventory item 66; stays `sorry` until that job lands; the axiom only if wave 4's gate is otherwise
+green first). `exists_three_le_multicolour` **M** over it; `…_lt_one` **E**. `region_locallyFinite`, `dense_iUnion_region` **E–M** (wave 3's
+`finite_tiles_near`, `dense_interiorPts`). `ts_t` **E**. `exists_hasDegree_of_mem_dom` **M** (`localSectors`). `ts_t_trichromatic`, `ts_t_degree_three`
+**E**. `sevenBrickArcs_nondegenerate` **E**, `sevenBrickArcs_locallyFinite`, `sevenBrick_color_locallyConstant` **M** (floors locally constant off the
+grid; finitely many cells meet a ball).
+
+**`Plane/ValidMap/BaseSteps`** (22; K4b's § 9 sketches, confirmed): `pair_i`, `pair_ii`, `pair_P'`, `fail_leavingCentre`, `fail_colours`, `anti` **M–H** each
+(N3's proofs over `noBoth`, the (P) sweep child, S–V Prop. 2's votes). `n3_end` **H** (NB3 items 1–5 over `woodallCone`, FLANK — now stated:
+`inType_shadows_horn`, `flank_siamese_of_inType` — `exists_merge`, `noBoth`, wave 3's U1 cones; engine 5). The bowtie: field leaves **M**,
+`bowtie_valid` **H** (YB3's 21 pairs), `bowtie_mem_dom` **E**, the rest **M** each (finite computations at `E`, `N`, `S′`); `flank_incomplete_bowtie` **E**
+over `bowtie_inType`, `bowtie_neighbours`, `bowtie_terminalOn` (colour `0` is not carried at `−i`, `2` not at `i`; an in-type tile is not out-type).
+
+### 13.6 Re-pricing
+
+From the leaves, not from a table: of the 86 leaves and the engines' children, **about 35 E/E–M**, **about 35 M/M–H**, **sixteen H**: `woodallCone`,
+`clear_of_subset_interior_allowedCone`, `flank_shadows`, `stuck_structure`, the three Contact moves (now M–H over engines 1–2), the two `shadow_farSide`
+leaves (M–H), the two bends and the side chain (engine 6), `flankQ_upper`, `flankQ_lower`, `nb4p`, `n3_end`, `bowtie_valid`; plus the outside theorem
+(FS131-LEB). Critical path: engine 4 (frame algebra) and engine 1 (validity transfer) unblock the most leaves and are E; engine 6 unblocks L60's five;
+wave 3's `localSectors` (wave 3's implementer) gates `woodallCone`, `exists_hasDegree_of_mem_dom` and engine 5. The repository's measured ratio
+(`CLAUDE.md` § What compute actually helps) says these grades are priced high: re-price from the first two leaves.
