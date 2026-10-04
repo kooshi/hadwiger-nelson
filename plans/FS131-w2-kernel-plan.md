@@ -612,3 +612,40 @@ closed from leaves: `chiM0_le_iff_chiCP_le`, `chromaticNumber_plane_le_six_of_fr
 **Build log of the handoff** (after the FACE ruling): `./scripts/build.sh` under the slot (`--mem 40 --cpus 8`, `MEMMAX=40G BATCH=4`): **OK** —
 443 of 443 batches, 4 modules rebuilt (`Plane/Slack` and its dependents), 16 modules with warnings, every warning `declaration uses 'sorry'`
 (wave 1's 28 and wave 2's), 8 m 42 s (`build/gate/build/20261004T063203Z-1649043.log`). `tools/check_architecture.py` PASS (stage 7).
+
+## Stage 11 — SAVED: the readback (FS131-K2c)
+
+*Job FS131-K2c, de Bruijn (Opus 5.5), launched 2026-10-04 to re-plan wave 2's remaining leaves (brief
+`data/fs131/briefs/FS131-K2c-wave2-replan.md`, with `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building). Resuming per
+standing rule 2: stages 1–10 are saved (K2, K2b); this job numbers its stages from 11 and redoes none. The implementers' record is
+`plans/FS131-I2-implementation.md` (stages 1–6).*
+
+### 11.1 The brief's quotation against its source (standing rule 3)
+
+| # | quotation (opening words) | source | result |
+|---|---|---|---|
+| 1 | "- `chiM0_le_chiCP` needs a jointly measurable modification of a process continuous in probability (dyadic approximation); `face` and `keptAt_band` are" | `plans/FS131-I2-implementation.md` § Stage 6 | exact (checked by script as a substring; it lies in the section headed "Stage 6 — SAVED (FS131-I2d)") |
+
+No mismatch.
+
+### 11.2 The 34 leaves at `3bd6cf52` (lines that are exactly `sorry`, by script)
+
+| module | leaves |
+|---|---|
+| `Plane/MaximalCover` (1) | `AeColouring.exists_grundy` |
+| `Plane/Slack` (12) | `AeColouring.exists_tight`, `tendsto_mu`, `tendsto_muTile`, `tendsto_muPer`, `chiM0_le_chiCP`, `chiM0_le_iff_muZero_eq_one`, `exists_bandNull_aeCover_of_mu_eq_one`, `keptAt_band`, `CPColouring.tendsto_not_kept`, `exists_not_uniform_kept`, `face`, `exists_face_fails` |
+| `Plane/FalconerReduction` (1) | `falconer_reduction` |
+| `Plane/YesLimit` (1) | `chiM0_le_of_fragments` |
+| `Plane/CoverExamples` (13) | `sq9_saturated_both`, `r7_aeColouring`, `r7Cls_saturated`, `r7_boundary`, `r7Cls_isMaximalCover`, `disc7_isMaximalCover`, `disc7_isRegularMUA`, `disc7_upperDensity`, `IsMUA.add_normal_mem_essSupport`, `g1Bounds_hcGap`, `hc_isRegularMUA`, `hc_band_components`, `hc_irreg` |
+| `Arith/PlaceHom` (2) | `exists_placeHom`, `noAffine_fields` |
+| `Arith/FalconerField` (2) | `falconerFan_five_field`, `falconerFan_five_placeHom` |
+| `Arith/Dyadic` (2) | `sqrt3_local_of_congr`, `sqrt3_local` |
+
+34, as the brief says. The statements are as read back in §§ 4.1 and 7.3 with the rulings of inventory items 18–19, 34, 37, 48, 56, 57,
+63, 72 applied (the implementers' stages 2, 4–6 record each).
+
+### 11.3 The worktree builds as given
+
+`/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree,
+2026-10-04: **OK** — all 1738 modules up to date, nothing built, 8 modules with warnings, every warning `declaration uses 'sorry'`
+(`build/gate/build/20261004T091307Z-2395296.log`).
