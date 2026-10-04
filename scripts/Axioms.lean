@@ -2610,6 +2610,7 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.niceAt_of_crossing
 #print axioms HadwigerNelson.Plane.ArcMap.GoodAt.exists_sides
 #print axioms HadwigerNelson.Plane.ArcMap.wedgeMerge_crossing
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.exists_merge_dirs
 
 
 /-! ## FS-131 wave 3 (job FS131-I3b) — the implementer's added children (every one a theorem the rows rest on) -/

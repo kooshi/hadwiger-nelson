@@ -8,7 +8,9 @@ Axioms below are from `#print axioms` on **iteration oleans** (`data/fs131/iw/it
 oleans), the whole print in `data/fs131/iw/axioms-iteration.txt` and its split in `data/fs131/iw/axioms-iteration-summary.txt`. The gate has not run
 (waves 3–4 and FS131-LEB have not landed): this is **not gate evidence**. A `sorryAx` below is never this job's: it comes through a cited, unlanded
 statement (`lemmaL`; `ArcMap.dense_interiorPts`; `ArcMap.Valid.unitPairsNull_region`) or through one of the five leaves left (stage 2).
-The FS131-IWc rows (stages 7–11) are from `data/fs131/iwc/axioms-iteration.txt` (`lake env lean` on a copy of `Merge` with the prints appended,
+The FS131-IWd rows (stages 14–16) are from `data/fs131/iwd/axioms-iteration.txt` (`lake env lean` on `data/fs131/iwd/scratch/ax.lean`, importing the built
+`Woodall/Steps`; never evidence): the three leaves and E3-BALL print the standard three; the chain theorems of `Steps` still print `sorryAx`, through wave 4's
+skeleton alone (`lemmaL`, `ts_t`, … in `Plane/SVMap`, a `sorry` statement on this branch until wave 4 lands). The FS131-IWc rows (stages 7–11) are from `data/fs131/iwc/axioms-iteration.txt` (`lake env lean` on a copy of `Merge` with the prints appended,
 `data/fs131/iwc/scratch/ax.lean`; never evidence); since FS131-W3's merge of `main` (wave 3 landed; kernel plan § 12) every IWc theorem but `exists_woodallMerged`
 prints the standard three alone.
 
@@ -35,6 +37,9 @@ prints the standard three alone.
 | **FS131-IWc** — locality and local data: `coloursAt_congr`, `niceAt_congr`, `exists_dirColourAt`, `GoodAt.ncard_coloursAt_le_two` (with `ncard_coloursAt_le_two_of_sides`, `mem_curveAt_one_iff`), `finite_three_le_coloursAt`, `dirColourAt_wedgeMerge`; cones after a merge `coneAt_wedgeMerge_of_notMem`, `eq_of_mem_coneAt_wedgeMerge`, `eq_of_mem_coneAt_wedgeMerge_of_subset` (with `mem_coneAt_inter_annSector`, `mem_angleIcc_iff_e`, `isClosed_angleIcc`) | § 14.2–14.3 rows; § 14.4 / stage 11 (the measure's cone facts) | standard three |
 | **FS131-IWc** — **`exists_woodallMerged` (E3-BALL)** as a composition | E3-BALL, `plans/FS131-E3-derivation.md` § 3.4 (verbatim E3's draft) | `sorryAx` through `exists_merge_at` (open leaf) only |
 | **FS131-IWc** — `Basic`'s inhabitant leaves T1–T5 (`threeCol_locallyConstant`, `threeSectorDisc_sectorsAt`, `threeSectorDisc_phantom`, `threeSectorDisc_ncard_coloursAt_le_two`, `halfDisc_sectorsAt`), so `threeSectorDisc_niceAt`, `_woodallMerged`, `_woodallNormal`, both phantom adversaries and `halfDisc_niceAt`; children `coneAt_annSector_eq`, `mem_annSector_zero_iff`, `threeSectorDisc_region`, … | § 13.2's table (every clause of the ∃-forms exercised on a valid map; item 158's defect a test) | standard three |
+| **FS131-IWd** — **`niceAt_of_dirColourAt`** (the `NiceAt` picture from the local data), with `DirColourAt.const_of_noChange`, `rightCol`/`leftCol` lemmas, `exists_offDirs_punctured`, `finRotate_val`, … (stage 14) | E3-NICE's last paragraph; plan § 14.3 row; stage 11's truth reading | standard three |
+| **FS131-IWd** — **`wedgeMerge_niceAt`** (the crossings a merge creates), with `niceAt_of_crossing`, `GoodAt.exists_sides`, `wedgeMerge_crossing`, `cos_pos_arc`, `exists_sign_near`, `coneAt_subset_halfPlane` (stage 15) | E3-NICE's crossings; plan § 14.3 row (no transversality needed) | standard three |
+| **FS131-IWd** — **`exists_merge_at` (E3-NICE)**, with `DirColourAt.exists_merge_dirs`; so **`exists_woodallMerged` (E3-BALL)** on its proved children (stage 16) | `plans/FS131-E3-derivation.md` § 3.3, as read back in plan § 14.2; stage 11's measure | standard three (both) |
 
 **E1-NO45 holds in the kernel as a proof from its citations**: the proof of `false_of_four_le_sectors` is complete, and the check on E1's argument it was
 asked to be (inventory item 111) found no gap: E1-BAD's count (`K.card ≤ n`), E1-COVER's colour-class form and the refined second-order lemma all closed
@@ -493,3 +498,47 @@ different namespace); the full names differ.
 **Build of this stage**: OK — 445 of 445 batches, 3 modules rebuilt, 6 with warnings (wave 4's five skeleton modules and `Woodall/Merge`), 8 m 45 s,
 exit 0 (`build/gate/build/20261004T171824Z-982130.log`; driver log `data/fs131/iwd/build2.log`); the only Woodall warning is `Merge`'s one
 `declaration uses 'sorry'` (`exists_merge_at`). Scratch: `data/fs131/iwd/scratch/B2.lean` (iteration only).
+
+## Stage 16 — SAVED (FS131-IWd): `exists_merge_at` proved; `Plane/Woodall/Merge` sorry-free
+
+**Proved (statement unchanged)**: `exists_merge_at` (E3-NICE), by stage 11's simpler measure `μ(G, D) = ∑_{δ ∈ D} (#{j | δ ∈ coneAt (G.region j) v} − 1)`.
+Strong induction on `μ`, generalized over the map: `G` valid, plane, Condition 5 kept, regions equal to `F`'s off `closedBall v ρ₁`, every point of
+`closedBall v ρ₁ \ {v}` of three or more colours `NiceAt` in `G`, local data `(D, σ)` of `G` at `v`; `ρ₁ = min (ε/2) (ρ₀/2)` with `ρ₀` a good radius
+of `F` at `v`, so the start is vacuous (`GoodAt.ncard_coloursAt_le_two`). If the run and poke conditions hold, `niceAt_of_dirColourAt` at `v` ends it.
+Else **`DirColourAt.exists_merge_dirs`** gives `d₁ < d₂ < d₁ + π` off `D` of one colour `c` with a direction `δ₀ ∈ D` strictly between at which a second
+colour approaches (from a failed run: the shorter of the two arcs, an endpoint pulled inside `c`'s thin cone; the two closed sets "cone of `c`" and
+"cones of the others" cover `[d₁, ψ₀]`, so meet, at a direction of `D`; from a failed poke: `δ ∓ t`). One merge `G.wedgeMerge v ρ' d₁ d₂ c` with
+`ρ' ≤ r₁ cos(α/2)/2`, `ρ' < ` a good radius of `G` at `v`, `ρ' < ρ₁/2`, `r₁` under both thin cones and `cos(α/2)/4`: valid (`wedgeMerge_valid`),
+Condition 5 (`ρ' < 1`), regions unchanged off `closedBall v ρ'`, the new points of three colours `NiceAt` (`wedgeMerge_niceAt`; outside
+`closedBall v ρ'` by `coloursAt_congr`/`niceAt_congr`), local data `(insert d₁ (insert d₂ D), σ')` (`dirColourAt_wedgeMerge`). The measure drops:
+`d₁`, `d₂` count `0` (`eq_of_mem_coneAt_wedgeMerge_of_subset`), every `δ ∈ D` inside the wedge counts `0` (`eq_of_mem_coneAt_wedgeMerge`), every
+other keeps its count (`coneAt_wedgeMerge_of_notMem`; a direction of `D` is never `d₁` or `d₂` mod `2π`), and `δ₀` drops from at least `1`.
+
+So **`exists_woodallMerged` (E3-BALL) rests on proved children only**, and **every Woodall module (`Basic`, `Collar`, `NoFourFive`, `Merge`,
+`Steps`) is `sorry`-free**; the chain's remaining `sorryAx` is wave 4's skeleton (`Plane/SVMap`), until wave 4 lands.
+
+**Children added**: `DirColourAt.exists_merge_dirs` (before `exists_merge_at`); its record. `tools/fs131_w3_decls.py --check`: 223 theorems, 223 records,
+0 missing, 0 stale; `--plant` FIRED both ways; the frozen `tools/fs131_w2_decls.py --check`: 151, 151, 0, 0. `ARCHITECTURE.md`: the `Merge` row
+rewritten (proved, sorry-free; the IWd children named); `tools/check_architecture.py`: PASS.
+
+**Build of this stage**: OK — 445 of 445 batches, 3 modules rebuilt, **5 with warnings** (wave 4's five skeleton modules; **no Woodall module warns**),
+8 m 45 s, exit 0 (`build/gate/build/20261004T172813Z-1058816.log`; driver log `data/fs131/iwd/build3.log`; `grep Woodall … | grep -ic warning` → 0).
+Axioms: `data/fs131/iwd/axioms-iteration.txt` (iteration, never evidence; see the table above). Scratch: `data/fs131/iwd/scratch/C.lean`.
+
+**Re-pricing, for the record.** IWc priced the three leaves at 900–1,300 lines with children; they took about 1,330 lines (leaf A ≈ 560 with its
+infrastructure, B ≈ 560, C ≈ 210), each elaborating after two to six rounds.
+
+## Stage 17 — SAVED (FS131-IWd): where I stop
+
+Item 2 of the brief is done. Item 3 waits: **wave 4 has not landed on `main`** (`origin/main` at `b3c6f5db`; `Plane/SVMap` there has no `sevenBrickMap`;
+FS131-I4f is running). So, per the brief, I stop after item 2: no merge of `main`, no `tools/fs131_qa1_dupes.py` run, no QA2-1 plane-map model, no gate,
+no landing. What the next job on this branch does once wave 4 lands: merge `main` (delete this branch's identical copies of `abs_dot_le`, `dot_add_left`,
+`dot_e_e`, `isOpen_shadow` for wave 4's; run `tools/fs131_qa1_dupes.py`), then QA2-1 (`sevenBrickMap.WoodallNormal univ` / `WoodallMerged univ`, or an
+`ArcMap 7` in normal form on `closedBall 0 3` with a three-colour point — the brick corner, `sevenBrick_corner_isCubicTrichromatic`), then the gate and the
+landing. Note for QA2-1: `exists_woodallMerged` is now proved for any number of colours, so `sevenBrickMap`'s merged map exists by theorem; the model the
+amendment asks for is still an explicit inhabitant with every clause exercised.
+
+## Drafts for the front page
+
+None: no milestone state moved (the gate has not run; wave 4's skeleton still carries `sorry` on this branch). Slot, when the chain's gate runs:
+`CLAUDE.md` § The gate and § Trust ledger get the counts, and the FS106-WO, FS106-TW, FS106-AE-MAP6 and E1-NO45 ledger rows are regraded then.
