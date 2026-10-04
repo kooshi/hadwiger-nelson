@@ -21,7 +21,7 @@ that judge the milestone, written before any job).*
 | job | state | where |
 |---|---|---|
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
-| wave 2 (28 rows) | 37 of 71 leaves proved (I2–I2d); re-planned by K2c (items 92–94): children stated for 16 leaves, 18 still need children; `falconer_lemma2_nonempty` an axiom (item 93); **FS131-I2e running** | `.claude/worktrees/fs131-w2` |
+| wave 2 (28 rows) | K2d done (item 118): every leaf has stated children; 13 of its 17 closed from children; `Instances/FalconerOrbit` proved; merged into `fs131-w2` (`ddc5b5c8`); 154 `sorry` lines left; **FS131-I2f (Opus trial) running** | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | 91 of 96 proved (I3–I3e); item 112's cusp ruling applied; **FS131-I3f running** on the last 5, then the gate and the landing | `.claude/worktrees/fs131-w3` |
 | wave 4 (25 rows) | fully planned (K4–K4c): 86 leaves; implementer handoff § 14; **notes for wave 5 in § 14.5** | `.claude/worktrees/fs131-w4` at `f620977c` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | planned (FS131-W, item 97): 31 leaves, two open in the derivation (`step5_eq`, `step7`); landing form per item 98 | `.claude/worktrees/fs131-ww` at `7aaaf2c4` |
@@ -44,7 +44,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | FS131-I3f (wave 3, last five, gate, landing; item 117) | Sonnet | `data/fs131/briefs/FS131-I3f-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3f.md` |
 | FS131-W2 (Woodall's chain re-planned on E1-NO45; item 109) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-W2-woodall-replan.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-W2.md` |
 | EXT-HN1 (audit of an outside repository; item 108) | Opus (de Bruijn) | `data/external/briefs/EXT-HN1-outside-claim.md` | `data/external/reports/EXT-HN1.md` |
-| FS131-K2d (wave 2's last 18 leaves: children; item 104) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-K2d-wave2-children.md` | its branch's (`fs131-w2d`, worktree `.claude/worktrees/fs131-w2d`) `data/fs131/reports/FS131-K2d.md` |
+| FS131-I2f (wave 2, the Opus-implementer trial; item 119) | **Opus** (`debruijn-implementer`, `model: "opus"`) | `data/fs131/briefs/FS131-I2f-wave2.md` | its branch's (`fs131-w2`) `data/fs131/reports/FS131-I2f.md` |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. A notification arrives when each hands back; if the session restarted, resume a job from
 its record's last SAVED stage with a fresh agent on the same brief.
@@ -53,8 +53,7 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 1. ~~Fill the free slot~~ — done: FS131-K2d launched (item 104). The next free slot (a half when I3e hands back): FS131-IW or FS131-I4 (Sonnet), briefs derived
    from the nearest earlier brief by script, gated with `python3 .claude/skills/keryx/scripts/brief_gate.py all`.
-2. I2e handed back (item 114: 4 leaves + 31 children; 90 `sorry` left). The **Opus-implementer trial** on wave 2 (item 103) takes the first Opus slot that
-   frees (K2d or W2); it merges `fs131-w2d` first if K2d has handed back.
+2. (done) The Opus-implementer trial launched (item 119). On its report: compare leaves and children closed per session with I2–I2e, and tell Kooshi.
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
 5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
