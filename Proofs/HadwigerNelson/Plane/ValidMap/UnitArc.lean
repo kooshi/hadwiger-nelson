@@ -154,7 +154,10 @@ theorem isOpen_l60Dom : IsOpen l60Dom := isOpen_interior
 
 /-- L60-REAL's arcs are non-degenerate. -/
 theorem l60Arcs_nondegenerate : ∀ a ∈ l60Arcs, a.Nondegenerate := by
-  sorry
+  intro a ha
+  simp only [l60Arcs, mem_insert_iff, mem_singleton_iff] at ha
+  have hπ := pi_pos
+  rcases ha with rfl | rfl | rfl | rfl | rfl <;> refine ⟨by norm_num, by linarith, by linarith⟩
 
 /-- L60-REAL's colouring is locally constant off its arcs. -/
 theorem l60Col_locallyConstant : ∀ x ∈ l60Dom, x ∉ ⋃ a ∈ l60Arcs, a.carrier → ∀ᶠ y in 𝓝 x, l60Col y = l60Col x := by
@@ -254,7 +257,10 @@ noncomputable def isoY : Set ℂ := {z | ‖z - 2‖ < 1 / 4 ∧ |(z - 2).im| < 
 
 /-- FS112-ISO's domain: a disc about the arc's middle point `1` and the sector `isoY`. -/
 theorem isOpen_isoDom : IsOpen (ball (1 : ℂ) (1 / 4) ∪ isoY) := by
-  sorry
+  refine isOpen_ball.union ?_
+  have h1 : IsOpen {z : ℂ | ‖z - 2‖ < 1 / 4} := isOpen_lt (by fun_prop) continuous_const
+  have h2 : IsOpen {z : ℂ | |(z - 2).im| < √3 * (z - 2).re} := isOpen_lt (by fun_prop) (by fun_prop)
+  exact h1.inter h2
 
 /-- FS112-ISO's colouring is locally constant off its arc. -/
 theorem isoCol_locallyConstant : ∀ x ∈ ball (1 : ℂ) (1 / 4) ∪ isoY, x ∉ ⋃ a ∈ ({Arc.circ 0 1 (-(π / 6)) (π / 6)} : Set Arc),
@@ -296,7 +302,28 @@ shadows omits. No map is read. -/
 theorem inType_shadows_horn (v : ℂ) {α κ₁ κ₂ : ℝ} (hκ₂ : κ₂ ≤ 1) {X : Set ℂ} (hX : IsPreconnected X)
     (hXv : X ⊆ ball v 1) (hN : v + e (α + π / 2) ∈ closure X) :
     ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α κ₁ κ₂ r ⊆ shadow X := by
-  sorry
+  obtain ⟨p₀, hp₀⟩ := closure_nonempty_iff.mp ⟨_, hN⟩
+  have hp₀v : dist p₀ v < 1 := hXv hp₀
+  filter_upwards [Ioo_mem_nhdsGT (show 0 < 1 - dist p₀ v by linarith)] with r hr z hz
+  obtain ⟨hzd, -, -, hzB⟩ := hz
+  -- below `ω(N)`'s arc: farther than `1` from `N`
+  have hzN : 1 < dist z (v + e (α + π / 2)) := by
+    refine (tanBelow_one_iff v α z).mp ?_
+    unfold TanBelow at hzB ⊢
+    unfold tanHeight at hzB ⊢
+    nlinarith [sq_nonneg (frameX v α z), sq_nonneg (frameY v α z)]
+  have hzp₀ : dist z p₀ < 1 := by
+    calc dist z p₀ ≤ dist z v + dist v p₀ := dist_triangle _ _ _
+      _ < r + dist p₀ v := by rw [dist_comm v p₀]; linarith
+      _ < 1 := by linarith [hr.2]
+  obtain ⟨y₁, hy₁, hy₁d⟩ := Metric.mem_closure_iff.mp hN (dist z (v + e (α + π / 2)) - 1) (by linarith)
+  have hzy₁ : 1 < dist z y₁ := by
+    have := dist_triangle z y₁ (v + e (α + π / 2))
+    rw [dist_comm y₁ _] at this
+    linarith [hy₁d, dist_comm (v + e (α + π / 2)) y₁]
+  have hcont : ContinuousOn (fun y => dist z y) X := by fun_prop
+  obtain ⟨y, hy, hyd⟩ := hX.intermediate_value hp₀ hy₁ hcont (show (1 : ℝ) ∈ Icc (dist z p₀) (dist z y₁) from ⟨hzp₀.le, hzy₁.le⟩)
+  exact ⟨y, hy, hyd⟩
 
 /-- **FS112-FLANK**, Siamese: when a horn's upper arc lies on `ω(N)` (`κ₂ = 1`) its upper flank lies inside `B(N, 1)`, so a tile of the
 flank colour inside `B(v, 1)` with `N` in its closure (in-type at `N`) is Siamese with the flank — within `< 1` of every flank point
@@ -305,7 +332,23 @@ theorem flank_siamese_of_inType (hF : F.Valid) {v : ℂ} {α κ' : ℝ} (hκ' : 
     (hfl : ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α 1 κ' r ⊆ F.region g) {X : Set ℂ} (hX : F.TileOf g X)
     (hXv : X ⊆ ball v 1) (hN : v + e (α + π / 2) ∈ closure X) :
     ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ z ∈ hornSet v α 1 κ' r, ∀ x ∈ X, dist x z < 1 := by
-  sorry
+  have _ := hκ'
+  have _ := hXv
+  filter_upwards [hfl] with r hr z hz x hx
+  have hzg : z ∈ F.region g := hr hz
+  have hzN : dist z (v + e (α + π / 2)) < 1 := (tanAbove_one_iff v α z).mp hz.2.2.1
+  have hT : F.IsTile (connectedComponentIn F.interiorPts z) := ⟨z, hzg.1, rfl⟩
+  have hzT : z ∈ connectedComponentIn F.interiorPts z := mem_connectedComponentIn hzg.1
+  have hTg : F.TileOf g (connectedComponentIn F.interiorPts z) := by
+    have := hT.tileOf hzT
+    rwa [show F.col z = g from hzg.2] at this
+  rcases unitNear_or_unitFar hF hTg hX with hnear | hfar
+  · rw [dist_comm]; exact hnear z hzT x hx
+  · exfalso
+    obtain ⟨y, hy, hyd⟩ := Metric.mem_closure_iff.mp hN (1 - dist z (v + e (α + π / 2))) (by linarith)
+    have h1 := hfar z hzT y hy
+    have := dist_triangle z (v + e (α + π / 2)) y
+    linarith
 
 /-! ## FS112-N2-FLANK-Q: horn bounds `±1` sit on (Q) or (R2) arcs -/
 
