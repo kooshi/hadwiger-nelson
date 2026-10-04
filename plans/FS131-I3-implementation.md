@@ -328,6 +328,36 @@ Open at this stage: `sixFrag_valid`, `sixFrag_nonSiamese` (2 `sorry`; routes in 
 **Readback.** The three brief quotations match their sources: plan § 7.2 ("**It may**: add lemmas (children) anywhere in the wave's modules — the three engines (`Valid.dist_lt_or_gt_of_isPreconnected`, `mem_closure_tile`,"), this record's Stage 6 opening ("**Readback.** Both brief quotations match their sources (plan § 7.2 "It may: add lemmas..."; this record's Stage 5 "9 sorry declarations at the start, 5 now"). The branch was `4f7b949d`; it builds"), and Stage 7's opening ("**Readback.** The three brief quotations match their sources (plan § 6.1 item 3; plan § 7.2 "It may"; Stage 6 above). The branch was `5537611a`; it builds (`build/gate/build/20261004T120117Z-3341389.log`: "build: OK", 2 modules with warnings, 4 `sorry`)."). The branch was `93ca3468`; one build under the slot (`data/fs131/i3/build-h-readback.log` = `build/gate/build/20261004T130158Z-3736565.log`): "build: OK", nothing rebuilt, exactly two warnings, `declaration uses sorry` at `SixFragment` lines 844 (`sixFrag_valid`) and 849 (`sixFrag_nonSiamese`).
 I may add children anywhere in the wave's modules and supporting lemmas in the named foundation modules; I may not change a § 5 statement, a definition of `LocalMap`, `CircleColouring` or `SixFragment` (`sixCol`, `sixArcs`), or the read-back conventions; no `axiom`, no `native_decide`. Open: `sixFrag_valid`, `sixFrag_nonSiamese`; then the gate, the landing, `localSectors` and `Simple.coneAt_eq_angleIcc_sep` on `fs131-w3b`.
 
+## Stage 9 — SAVED (FS131-I3h): `sixFrag_valid` and `sixFrag_nonSiamese` proved; wave 3 has no `sorry`
+
+Commits `1ea095bf` (`sixFrag_valid`), `8586427a` (`sixFrag_nonSiamese`), then the public-names commit below. Statements unchanged (both are
+`sixFrag.Valid` and `sixFrag.NonSiamese` as the skeleton gave them); no `axiom`, no `native_decide`. Scratch audit (`lake env lean`, not the gate): both
+read `[propext, Classical.choice, Quot.sound]`. Working files: `data/fs131/i3/h/` (`R1.lean`, `R2.lean` the real lemmas, `C1.lean`, `C2.lean`, `NS.lean`
+the complex layer as developed; `W.lean` the module as checked).
+
+**Re-pricing (brief: from the first two hard leaves).** I3f priced the QQ pair as the hard step (no `nlinarith` certificate at product degree 3). It took one
+idea and about 60 lines: the closed lens `Q_0` outside the unit disc lies in the Reuleaux triangle on `e(∓30°)`, `√3`; split the second point by barycentric
+coordinates on that triangle — inside the triangle the squared distance is convex (`|z − Σαᵢvᵢ|² = Σαᵢ|z − vᵢ|² − Σ_{i<j}αᵢαⱼ` for a unit equilateral triangle),
+beyond a side the segment's centre `c` gives `|z − w|² = (1 − λ − μ)|z − c|² − λ(1 − |z − d|²) − μ(1 − |z − f|²) + |w − c|²` — each a `linear_combination` of
+`s² = 3` and an `nlinarith only` with three product hints. The non-strict bound becomes `≠ 1` by openness (`dist_ne_one_of_isOpen`: push one point away from
+the other). The whole validity leaf: about 600 lines, three iterations of the build-free check. `sixFrag_nonSiamese`: about 330 lines, first try on every
+piece but the band applications.
+
+**How `sixFrag_valid` goes.** Rotate the common colour to `0` (`sixCol_rot`, `rot_mem_interiorPts` from `mem_arcs_rot`). Classify (`sixCol_zero_cases`): an
+interior point of colour `0` lies in `S_0` (`‖z‖ < 1`, `arg ∈ (0°, 60°)`), `Q_4` (`1 < ‖z‖ < 3/2`, `arg ∈ (−150°, −90°)`, within `1` of `e(−150°)` and
+`e(−90°)`) or `G_2` (`1 < ‖z‖ < 3/2`, `arg ∈ (120°, 180°)`, beyond `1` from `e(90°)` and `e(−150°)`) — floors and rounds of `arg/60°` in `[−3, 3]` and
+`ZMod 6` divisibility, the lens tests through `sixCol_of_lens` and `exists_one_lt_dist_of_not_lens`. Six pair bounds: SS polar (`cos > 1/2`); SQ and SG
+in coordinates (negative inner product; SG's near half by projection on `e(150°)`, the projection exceeding `1` because the gap point lies outside the disc
+about `i`); QG by `⟨x − c, y − c⟩ ≤ 0` at `c = e(−150°)`, a sum of two products of sign conditions times `1/√3`; GG by a disc of radius `1/2` about
+`(7/5) e(150°)` holding `G_2` (a univariate quadratic in `R = ‖y‖²` after the lens conditions give `4u² − 2Ru + R² − 3R > 0`); QQ as above.
+
+**How `sixFrag_nonSiamese` goes.** Two tiles of one colour, all cross distances below `1`: rotate to colour `0`; points of different pieces are more than
+`1` apart (the cross bounds), so both points lie in one piece; each piece lies in a preconnected set of interior points — `S_0`, `Q_4`, `G_2` are polar bands
+`{r e(φ) : φ ∈ J, ℓ(φ) < r < u(φ)}`, images of `J × (0, 1)` (`isPreconnected_polarBand`; `G_2`'s angles an interval by the monotonicity of `sin` and `cos`
+there), inside the interior points because the arcs in polar form (`sixArcs_polar`: closed unit disc, or on a lens circle with the argument in that lens's
+half-sextant) force the only lens side meeting a piece to be one of its own, at distance exactly `1` where the piece is strict. Rotating that set back puts
+both points in one component, so the tiles are equal.
+
 ## Theorems this phase proved (FS131-I3f)
 
 Scratch audit only, not the gate; statements as the skeleton gave them. **FS116-Y2-SIXFRAG**, one clause: `HadwigerNelson.Plane.sixCol_locallyConstant` (`[propext, Classical.choice, Quot.sound]` expected; to be read from the gate log), so `sixFrag` itself is now free of its own `sorry`.

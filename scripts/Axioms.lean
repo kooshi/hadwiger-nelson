@@ -1937,7 +1937,7 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.cellIndex_six
 #print axioms HadwigerNelson.Plane.cellIndex_nine
 
-/-! ## FS-131 wave 3 (job FS131-K3b) — the skeleton: local structure, SIXFRAG, tiles, the ring, the lens, RINGBAND (sorry until wave 3's implementer lands it) -/
+/-! ## FS-131 wave 3 (job FS131-K3b) — the skeleton: local structure, SIXFRAG, tiles, the ring, the lens, RINGBAND (landed sorry-free by FS131-I3h) -/
 
 #print axioms HadwigerNelson.Plane.norm_div_norm_sub_le
 #print axioms HadwigerNelson.Plane.Icc_subset_angleIcc
@@ -2161,6 +2161,59 @@ No native evaluation. -/
 
 /-! ## FS-131 wave 3 (job FS131-I3c) — the implementer's added children and the rows' leaves -/
 
+#print axioms HadwigerNelson.Plane.mem_arcs_rot
+#print axioms HadwigerNelson.Plane.rot_mem_interiorPts
+#print axioms HadwigerNelson.Plane.sixPair_gg
+#print axioms HadwigerNelson.Plane.sixPair_ss
+#print axioms HadwigerNelson.Plane.sixPair_gRe
+#print axioms HadwigerNelson.Plane.sixPair_qg
+#print axioms HadwigerNelson.Plane.sixPair_qf
+#print axioms HadwigerNelson.Plane.sixPair_qq
+#print axioms HadwigerNelson.Plane.sixPair_sg
+#print axioms HadwigerNelson.Plane.sixPair_sq
+#print axioms HadwigerNelson.Plane.sixPair_gg'
+#print axioms HadwigerNelson.Plane.dist_lt_one_iff_arg
+#print axioms HadwigerNelson.Plane.one_lt_dist_iff_arg
+#print axioms HadwigerNelson.Plane.floor_arg_bounds
+#print axioms HadwigerNelson.Plane.sixCol_zero_cases
+#print axioms HadwigerNelson.Plane.dist_sq_re_im
+#print axioms HadwigerNelson.Plane.sq_norm_re_im
+#print axioms HadwigerNelson.Plane.e_re_im
+#print axioms HadwigerNelson.Plane.cos_five_pi_div_six
+#print axioms HadwigerNelson.Plane.sin_five_pi_div_six
+#print axioms HadwigerNelson.Plane.dist_e_neg_five_pi_div_six_sq
+#print axioms HadwigerNelson.Plane.dist_e_neg_pi_div_two_sq
+#print axioms HadwigerNelson.Plane.dist_e_pi_div_two_sq
+#print axioms HadwigerNelson.Plane.sixPieceS_coords
+#print axioms HadwigerNelson.Plane.sixPieceQ_coords
+#print axioms HadwigerNelson.Plane.sixPieceG_coords
+#print axioms HadwigerNelson.Plane.one_lt_dist_of_sq
+#print axioms HadwigerNelson.Plane.dist_sq_polar
+#print axioms HadwigerNelson.Plane.sixPieceS_diam
+#print axioms HadwigerNelson.Plane.sixPieceS_sixPieceQ
+#print axioms HadwigerNelson.Plane.sixPieceS_sixPieceG
+#print axioms HadwigerNelson.Plane.sixPieceQ_sixPieceG
+#print axioms HadwigerNelson.Plane.sixPieceG_near
+#print axioms HadwigerNelson.Plane.sixPieceG_diam
+#print axioms HadwigerNelson.Plane.dist_ne_one_of_isOpen
+#print axioms HadwigerNelson.Plane.sixLensQ0_diam
+#print axioms HadwigerNelson.Plane.sixPieceQ_ne_one
+#print axioms HadwigerNelson.Plane.sixFrag_valid_zero
+#print axioms HadwigerNelson.Plane.sixCol_rot_to_zero
+#print axioms HadwigerNelson.Plane.e_add_e_eq
+#print axioms HadwigerNelson.Plane.exists_int_arg_eq
+#print axioms HadwigerNelson.Plane.sixArcs_polar
+#print axioms HadwigerNelson.Plane.int_lt_of_mul_pi_lt
+#print axioms HadwigerNelson.Plane.sixPieceQ_interior
+#print axioms HadwigerNelson.Plane.sixPieceG_interior
+#print axioms HadwigerNelson.Plane.isPreconnected_polarBand
+#print axioms HadwigerNelson.Plane.mem_polarBand
+#print axioms HadwigerNelson.Plane.polarBand_bounds
+#print axioms HadwigerNelson.Plane.sixPieceS_connected
+#print axioms HadwigerNelson.Plane.sixPieceQ_connected
+#print axioms HadwigerNelson.Plane.sixGAngles_ordConnected
+#print axioms HadwigerNelson.Plane.sixPieceG_connected
+#print axioms HadwigerNelson.Plane.sixFrag_connected_of_zero
 #print axioms HadwigerNelson.Plane.ArcMap.changePoint_germs
 #print axioms HadwigerNelson.Plane.ArcMap.tile_subset_closedBall_of_cone
 #print axioms HadwigerNelson.Plane.ArcMap.outward_of_cone

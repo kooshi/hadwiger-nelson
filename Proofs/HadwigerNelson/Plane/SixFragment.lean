@@ -882,17 +882,17 @@ theorem rot_mem_interiorPts (k : ℤ) {x : ℂ} (hx : x ∈ sixFrag.interiorPts)
       one_mul] at this
 
 /-- The sector `S_0` of colour `0`: the open unit disc between the angles `0°` and `60°`. -/
-private def sixS (z : ℂ) : Prop := ‖z‖ < 1 ∧ 0 < Complex.arg z ∧ Complex.arg z < π / 3
+def sixPieceS (z : ℂ) : Prop := ‖z‖ < 1 ∧ 0 < Complex.arg z ∧ Complex.arg z < π / 3
 
 /-- The lens `Q_4` of colour `0`, cut at `3/2`: outside the unit circle, within `1` of `e(−150°)` and of `e(−90°)`
 (its angles lie in `(−150°, −90°)`). -/
-private def sixQ (z : ℂ) : Prop :=
+def sixPieceQ (z : ℂ) : Prop :=
   1 < ‖z‖ ∧ ‖z‖ < 3 / 2 ∧ -(5 * π / 6) < Complex.arg z ∧ Complex.arg z < -(π / 2) ∧
     dist z (e (-(5 * π / 6))) < 1 ∧ dist z (e (-(π / 2))) < 1
 
 /-- The gap tile `G_2` of colour `0`, cut at `3/2`: outside the unit circle, angles in `(120°, 180°)`, farther than `1`
 from `e(90°)` and from `e(−150°)`. -/
-private def sixG (z : ℂ) : Prop :=
+def sixPieceG (z : ℂ) : Prop :=
   1 < ‖z‖ ∧ ‖z‖ < 3 / 2 ∧ 2 * π / 3 < Complex.arg z ∧ Complex.arg z < π ∧
     1 < dist z (e (π / 2)) ∧ 1 < dist z (e (-(5 * π / 6)))
 
@@ -1103,6 +1103,47 @@ theorem sixPair_gg' (p q s : ℝ) (hs : s ^ 2 = 3) (h1 : 1 < p ^ 2 + q ^ 2) (h2 
     linear_combination (-(p ^ 2 / 4) - q ^ 2 / 4 + 49 / 100) * hs
   rw [this]; exact key
 
+/-- `(1/2) e(30°)` lies in `S_0`. -/
+example : sixPieceS ((1 / 2 : ℂ) * e (π / 6)) := by
+  have hπ := Real.pi_pos
+  have hx : (1 / 2 : ℂ) * e (π / 6) = ((1 / 2 : ℝ) : ℂ) * e (π / 6) := by push_cast; ring
+  rw [hx]
+  refine ⟨by rw [norm_polar (by norm_num)]; norm_num, ?_, ?_⟩ <;>
+    rw [arg_polar (by norm_num) ⟨by linarith, by linarith⟩] <;> linarith
+
+/-- `(6/5) e(−120°)` lies in `Q_4`. -/
+example : sixPieceQ ((6 / 5 : ℂ) * e (-(2 * π / 3))) := by
+  have hπ := Real.pi_pos
+  have hx : (6 / 5 : ℂ) * e (-(2 * π / 3)) = ((6 / 5 : ℝ) : ℂ) * e (-(2 * π / 3)) := by push_cast; ring
+  have hs3 : (6 / 5 : ℝ) < Real.sqrt 3 := by rw [Real.lt_sqrt (by norm_num)]; norm_num
+  rw [hx]
+  refine ⟨by rw [norm_polar (by norm_num)]; norm_num, by rw [norm_polar (by norm_num)]; norm_num, ?_, ?_, ?_, ?_⟩
+  · rw [arg_polar (by norm_num) ⟨by linarith, by linarith⟩]; linarith
+  · rw [arg_polar (by norm_num) ⟨by linarith, by linarith⟩]; linarith
+  · rw [dist_polar_lt_one_iff (by norm_num), show -(2 * π / 3) - -(5 * π / 6) = π / 6 by ring, Real.cos_pi_div_six]
+    linarith
+  · rw [dist_polar_lt_one_iff (by norm_num), show -(2 * π / 3) - -(π / 2) = -(π / 6) by ring, Real.cos_neg,
+      Real.cos_pi_div_six]
+    linarith
+
+/-- `(6/5) e(150°)` lies in `G_2`. -/
+example : sixPieceG ((6 / 5 : ℂ) * e (5 * π / 6)) := by
+  have hπ := Real.pi_pos
+  have hx : (6 / 5 : ℂ) * e (5 * π / 6) = ((6 / 5 : ℝ) : ℂ) * e (5 * π / 6) := by push_cast; ring
+  have hd : ∀ α : ℝ, Real.cos (5 * π / 6 - α) = 1 / 2 → 1 < dist (((6 / 5 : ℝ) : ℂ) * e (5 * π / 6)) (e α) := by
+    intro α hα
+    have h := dist_polar_sq (6 / 5) (5 * π / 6) α
+    rw [hα] at h
+    nlinarith [dist_nonneg (x := ((6 / 5 : ℝ) : ℂ) * e (5 * π / 6)) (y := e α)]
+  rw [hx]
+  refine ⟨by rw [norm_polar (by norm_num)]; norm_num, by rw [norm_polar (by norm_num)]; norm_num, ?_, ?_, ?_, ?_⟩
+  · rw [arg_polar (by norm_num) ⟨by linarith, by linarith⟩]; linarith
+  · rw [arg_polar (by norm_num) ⟨by linarith, by linarith⟩]; linarith
+  · exact hd _ (by rw [show 5 * π / 6 - π / 2 = π / 3 by ring, Real.cos_pi_div_three])
+  · refine hd _ ?_
+    rw [show 5 * π / 6 - -(5 * π / 6) = -(π / 3) + 2 * π by ring, Real.cos_add_two_pi, Real.cos_neg,
+      Real.cos_pi_div_three]
+
 /-- The distance from `x ≠ 0` to `e(α)` is below `1` exactly when `‖x‖ < 2 cos(arg x − α)`. -/
 theorem dist_lt_one_iff_arg {x : ℂ} (hx : x ≠ 0) (α : ℝ) :
     dist x (e α) < 1 ↔ ‖x‖ < 2 * Real.cos (Complex.arg x - α) := by
@@ -1146,7 +1187,7 @@ theorem floor_arg_bounds (x : ℂ) : -3 ≤ ⌊Complex.arg x / (π / 3)⌋ ∧ �
 
 /-- **The colour-`0` interior points** of `sixFrag` lie in `S_0`, `Q_4` or `G_2`. -/
 theorem sixCol_zero_cases {x : ℂ} (hx : x ∈ sixFrag.interiorPts) (hc : sixCol x = 0) :
-    sixS x ∨ sixQ x ∨ sixG x := by
+    sixPieceS x ∨ sixPieceQ x ∨ sixPieceG x := by
   have hπ := Real.pi_pos
   obtain ⟨hxd, hxΓ⟩ := hx
   have hx32 : ‖x‖ < 3 / 2 := by
@@ -1342,7 +1383,7 @@ theorem dist_e_pi_div_two_sq (z : ℂ) : dist z (e (π / 2)) ^ 2 = z.re ^ 2 + (z
   ring
 
 /-- `S_0` in coordinates: the open first sextant. -/
-private theorem sixS_coords {x : ℂ} (h : sixS x) : 0 < x.re ∧ 0 < x.im ∧ x.im < Real.sqrt 3 * x.re := by
+theorem sixPieceS_coords {x : ℂ} (h : sixPieceS x) : 0 < x.re ∧ 0 < x.im ∧ x.im < Real.sqrt 3 * x.re := by
   have hπ := Real.pi_pos
   obtain ⟨-, h1, h2⟩ := h
   have hx0 : x ≠ 0 := by rintro rfl; simp at h1
@@ -1358,7 +1399,7 @@ private theorem sixS_coords {x : ℂ} (h : sixS x) : 0 < x.re ∧ 0 < x.im ∧ x
   nlinarith only [mul_pos hr hd]
 
 /-- `Q_4` in coordinates: the open third quadrant. -/
-private theorem sixQ_coords {y : ℂ} (h : sixQ y) : y.re < 0 ∧ y.im < 0 := by
+theorem sixPieceQ_coords {y : ℂ} (h : sixPieceQ y) : y.re < 0 ∧ y.im < 0 := by
   have hπ := Real.pi_pos
   obtain ⟨h1, -, h3, h4, -, -⟩ := h
   have hr : 0 < ‖y‖ := by linarith
@@ -1369,7 +1410,7 @@ private theorem sixQ_coords {y : ℂ} (h : sixQ y) : y.re < 0 ∧ y.im < 0 := by
   exact ⟨mul_neg_of_pos_of_neg hr hc, mul_neg_of_pos_of_neg hr hs⟩
 
 /-- `G_2` in coordinates: the open sextant between `120°` and `180°`. -/
-private theorem sixG_coords {y : ℂ} (h : sixG y) : 0 < y.im ∧ Real.sqrt 3 * y.re + y.im < 0 := by
+theorem sixPieceG_coords {y : ℂ} (h : sixPieceG y) : 0 < y.im ∧ Real.sqrt 3 * y.re + y.im < 0 := by
   have hπ := Real.pi_pos
   obtain ⟨h1, -, h3, h4, -, -⟩ := h
   have hr : 0 < ‖y‖ := by linarith
@@ -1397,7 +1438,7 @@ theorem dist_sq_polar (x y : ℂ) :
   nlinarith [Real.sin_sq_add_cos_sq (Complex.arg x), Real.sin_sq_add_cos_sq (Complex.arg y)]
 
 /-- SS: `S_0` has diameter below `1`. -/
-private theorem sixS_sixS {x y : ℂ} (hx : sixS x) (hy : sixS y) : dist x y < 1 := by
+theorem sixPieceS_diam {x y : ℂ} (hx : sixPieceS x) (hy : sixPieceS y) : dist x y < 1 := by
   have hπ := Real.pi_pos
   obtain ⟨hx1, hx2, hx3⟩ := hx
   obtain ⟨hy1, hy2, hy3⟩ := hy
@@ -1412,20 +1453,20 @@ private theorem sixS_sixS {x y : ℂ} (hx : sixS x) (hy : sixS y) : dist x y < 1
   nlinarith [dist_nonneg (x := x) (y := y)]
 
 /-- SQ: `S_0` and `Q_4` are more than `1` apart. -/
-private theorem sixS_sixQ {x y : ℂ} (hx : sixS x) (hy : sixQ y) : 1 < dist x y := by
-  obtain ⟨a1, a2, -⟩ := sixS_coords hx
-  obtain ⟨b1, b2⟩ := sixQ_coords hy
+theorem sixPieceS_sixPieceQ {x y : ℂ} (hx : sixPieceS x) (hy : sixPieceQ y) : 1 < dist x y := by
+  obtain ⟨a1, a2, -⟩ := sixPieceS_coords hx
+  obtain ⟨b1, b2⟩ := sixPieceQ_coords hy
   have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_re_im]; nlinarith [hy.1]
   apply one_lt_dist_of_sq
   rw [dist_sq_re_im]
   exact sixPair_sq _ _ _ _ a1 a2 b1 b2 hy1
 
 /-- SG: `S_0` and `G_2` are more than `1` apart. -/
-private theorem sixS_sixG {x y : ℂ} (hx : sixS x) (hy : sixG y) : 1 < dist x y := by
+theorem sixPieceS_sixPieceG {x y : ℂ} (hx : sixPieceS x) (hy : sixPieceG y) : 1 < dist x y := by
   have hs : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
   have hs0 : 0 < Real.sqrt 3 := by positivity
-  obtain ⟨-, a2, a3⟩ := sixS_coords hx
-  obtain ⟨b1, b2⟩ := sixG_coords hy
+  obtain ⟨-, a2, a3⟩ := sixPieceS_coords hx
+  obtain ⟨b1, b2⟩ := sixPieceG_coords hy
   have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_re_im]; nlinarith [hy.1]
   have hfar : 1 < y.re ^ 2 + (y.im - 1) ^ 2 := by
     rw [← dist_e_pi_div_two_sq]; nlinarith [hy.2.2.2.2.1, dist_nonneg (x := y) (y := e (π / 2))]
@@ -1434,10 +1475,10 @@ private theorem sixS_sixG {x y : ℂ} (hx : sixS x) (hy : sixG y) : 1 < dist x y
   exact sixPair_sg _ _ _ _ _ hs hs0 a2 a3 hy1 b1 b2 hfar
 
 /-- QG: `Q_4` and `G_2` are more than `1` apart. -/
-private theorem sixQ_sixG {x y : ℂ} (hx : sixQ x) (hy : sixG y) : 1 < dist x y := by
+theorem sixPieceQ_sixPieceG {x y : ℂ} (hx : sixPieceQ x) (hy : sixPieceG y) : 1 < dist x y := by
   have hs : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
   have hs0 : 0 < Real.sqrt 3 := by positivity
-  obtain ⟨b1, b2⟩ := sixG_coords hy
+  obtain ⟨b1, b2⟩ := sixPieceG_coords hy
   have hx1 : 1 < x.re ^ 2 + x.im ^ 2 := by rw [← sq_norm_re_im]; nlinarith [hx.1]
   have hxd : x.re ^ 2 + (x.im + 1) ^ 2 < 1 := by
     rw [← dist_e_neg_pi_div_two_sq]; nlinarith [hx.2.2.2.2.2, dist_nonneg (x := x) (y := e (-(π / 2)))]
@@ -1453,12 +1494,12 @@ private theorem sixQ_sixG {x y : ℂ} (hx : sixQ x) (hy : sixG y) : 1 < dist x y
   exact sixPair_qg _ _ _ _ _ hs hs0 hx1 hxd hy1 hy2 hfar hfar' b1 b2
 
 /-- The centre `(7/5) e(150°)` of a disc of radius `1/2` holding `G_2`. -/
-private noncomputable def gCentre : ℂ := ⟨-(7 * Real.sqrt 3 / 10), 7 / 10⟩
+noncomputable def sixGCentre : ℂ := ⟨-(7 * Real.sqrt 3 / 10), 7 / 10⟩
 
 /-- GG: `G_2` lies in the open disc of radius `1/2` about `(7/5) e(150°)`. -/
-private theorem sixG_near {y : ℂ} (hy : sixG y) : dist y gCentre < 1 / 2 := by
+theorem sixPieceG_near {y : ℂ} (hy : sixPieceG y) : dist y sixGCentre < 1 / 2 := by
   have hs : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
-  obtain ⟨b1, b2⟩ := sixG_coords hy
+  obtain ⟨b1, b2⟩ := sixPieceG_coords hy
   have hy1 : 1 < y.re ^ 2 + y.im ^ 2 := by rw [← sq_norm_re_im]; nlinarith [hy.1]
   have hy2 : y.re ^ 2 + y.im ^ 2 < 9 / 4 := by rw [← sq_norm_re_im]; nlinarith [hy.2.1, norm_nonneg y]
   have hfar : 1 < y.re ^ 2 + (y.im - 1) ^ 2 := by
@@ -1467,18 +1508,18 @@ private theorem sixG_near {y : ℂ} (hy : sixG y) : dist y gCentre < 1 / 2 := by
     rw [← dist_e_neg_five_pi_div_six_sq]
     nlinarith [hy.2.2.2.2.2, dist_nonneg (x := y) (y := e (-(5 * π / 6)))]
   have key := sixPair_gg' _ _ _ hs hy1 hy2 hfar hfar' b1 b2
-  have hd : dist y gCentre ^ 2 < (1 / 2) ^ 2 := by
+  have hd : dist y sixGCentre ^ 2 < (1 / 2) ^ 2 := by
     rw [dist_sq_re_im]
-    simp only [gCentre]
+    simp only [sixGCentre]
     nlinarith only [key]
-  nlinarith [dist_nonneg (x := y) (y := gCentre)]
+  nlinarith [dist_nonneg (x := y) (y := sixGCentre)]
 
 /-- GG: `G_2` has diameter below `1`. -/
-private theorem sixG_sixG {x y : ℂ} (hx : sixG x) (hy : sixG y) : dist x y < 1 := by
-  have h1 := sixG_near hx
-  have h2 := sixG_near hy
-  calc dist x y ≤ dist x gCentre + dist gCentre y := dist_triangle _ _ _
-    _ < 1 / 2 + 1 / 2 := by rw [dist_comm gCentre y]; linarith
+theorem sixPieceG_diam {x y : ℂ} (hx : sixPieceG x) (hy : sixPieceG y) : dist x y < 1 := by
+  have h1 := sixPieceG_near hx
+  have h2 := sixPieceG_near hy
+  calc dist x y ≤ dist x sixGCentre + dist sixGCentre y := dist_triangle _ _ _
+    _ < 1 / 2 + 1 / 2 := by rw [dist_comm sixGCentre y]; linarith
     _ = 1 := by norm_num
 
 /-- In an open set of diameter at most `1`, no two points are exactly `1` apart: push one point away from the other. -/
@@ -1499,13 +1540,13 @@ theorem dist_ne_one_of_isOpen {P : Set ℂ} (hP : IsOpen P) (h : ∀ x ∈ P, �
   linarith
 
 /-- The lens `Q_0` outside the unit circle, open. -/
-private def lensQ0 : Set ℂ := {z | 1 < ‖z‖ ∧ dist z (e (-(π / 6))) < 1 ∧ dist z (e (π / 6)) < 1}
+def sixLensQ0 : Set ℂ := {z | 1 < ‖z‖ ∧ dist z (e (-(π / 6))) < 1 ∧ dist z (e (π / 6)) < 1}
 
 /-- QQ in the frame of `Q_0`: two of its points are at most `1` apart. -/
-private theorem lensQ0_diam {z w : ℂ} (hz : z ∈ lensQ0) (hw : w ∈ lensQ0) : dist z w ≤ 1 := by
+theorem sixLensQ0_diam {z w : ℂ} (hz : z ∈ sixLensQ0) (hw : w ∈ sixLensQ0) : dist z w ≤ 1 := by
   have hs : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
   have hs0 : 0 < Real.sqrt 3 := by positivity
-  have hd : ∀ u : ℂ, u ∈ lensQ0 → 1 ≤ u.re ^ 2 + u.im ^ 2 ∧
+  have hd : ∀ u : ℂ, u ∈ sixLensQ0 → 1 ≤ u.re ^ 2 + u.im ^ 2 ∧
       u.re ^ 2 + u.im ^ 2 ≤ Real.sqrt 3 * u.re - u.im ∧ u.re ^ 2 + u.im ^ 2 ≤ Real.sqrt 3 * u.re + u.im := by
     intro u ⟨h1, h2, h3⟩
     have e1 : dist u (e (-(π / 6))) ^ 2 = u.re ^ 2 + u.im ^ 2 - Real.sqrt 3 * u.re + u.im + 1 := by
@@ -1525,34 +1566,34 @@ private theorem lensQ0_diam {z w : ℂ} (hz : z ∈ lensQ0) (hw : w ∈ lensQ0) 
   nlinarith [dist_nonneg (x := z) (y := w)]
 
 /-- QQ: no two points of `Q_4` are exactly `1` apart (rotate by `120°` to `Q_0`). -/
-private theorem sixQ_sixQ {x y : ℂ} (hx : sixQ x) (hy : sixQ y) : dist x y ≠ 1 := by
-  have hopen : IsOpen lensQ0 :=
+theorem sixPieceQ_ne_one {x y : ℂ} (hx : sixPieceQ x) (hy : sixPieceQ y) : dist x y ≠ 1 := by
+  have hopen : IsOpen sixLensQ0 :=
     (isOpen_lt continuous_const continuous_norm).inter
       ((isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
         (isOpen_lt (continuous_id.dist continuous_const) continuous_const))
-  have hrot : ∀ u : ℂ, sixQ u → u * e (2 * π / 3) ∈ lensQ0 := by
+  have hrot : ∀ u : ℂ, sixPieceQ u → u * e (2 * π / 3) ∈ sixLensQ0 := by
     rintro u ⟨h1, -, -, -, h5, h6⟩
     refine ⟨by rwa [norm_mul, norm_e, mul_one], ?_, ?_⟩
     · rw [show e (-(π / 6)) = e (-(5 * π / 6)) * e (2 * π / 3) by rw [← e_add]; congr 1; ring, dist_rot]
       exact h5
     · rw [show e (π / 6) = e (-(π / 2)) * e (2 * π / 3) by rw [← e_add]; congr 1; ring, dist_rot]
       exact h6
-  have := dist_ne_one_of_isOpen hopen (fun z hz w hw => lensQ0_diam hz hw) (hrot x hx) (hrot y hy)
+  have := dist_ne_one_of_isOpen hopen (fun z hz w hw => sixLensQ0_diam hz hw) (hrot x hx) (hrot y hy)
   rwa [dist_rot] at this
 
 /-- **Colour `0` is valid**: no two interior points of colour `0` are exactly `1` apart. -/
-private theorem valid_zero {x y : ℂ} (hx : x ∈ sixFrag.interiorPts) (hy : y ∈ sixFrag.interiorPts)
+theorem sixFrag_valid_zero {x y : ℂ} (hx : x ∈ sixFrag.interiorPts) (hy : y ∈ sixFrag.interiorPts)
     (hcx : sixCol x = 0) (hcy : sixCol y = 0) : dist x y ≠ 1 := by
   rcases sixCol_zero_cases hx hcx with h1 | h1 | h1 <;> rcases sixCol_zero_cases hy hcy with h2 | h2 | h2
-  · exact (sixS_sixS h1 h2).ne
-  · exact (sixS_sixQ h1 h2).ne'
-  · exact (sixS_sixG h1 h2).ne'
-  · rw [dist_comm]; exact (sixS_sixQ h2 h1).ne'
-  · exact sixQ_sixQ h1 h2
-  · exact (sixQ_sixG h1 h2).ne'
-  · rw [dist_comm]; exact (sixS_sixG h2 h1).ne'
-  · rw [dist_comm]; exact (sixQ_sixG h2 h1).ne'
-  · exact (sixG_sixG h1 h2).ne
+  · exact (sixPieceS_diam h1 h2).ne
+  · exact (sixPieceS_sixPieceQ h1 h2).ne'
+  · exact (sixPieceS_sixPieceG h1 h2).ne'
+  · rw [dist_comm]; exact (sixPieceS_sixPieceQ h2 h1).ne'
+  · exact sixPieceQ_ne_one h1 h2
+  · exact (sixPieceQ_sixPieceG h1 h2).ne'
+  · rw [dist_comm]; exact (sixPieceS_sixPieceG h2 h1).ne'
+  · rw [dist_comm]; exact (sixPieceQ_sixPieceG h2 h1).ne'
+  · exact (sixPieceG_diam h1 h2).ne
 
 /-- The rotation taking colour `c` to colour `0`. -/
 theorem sixCol_rot_to_zero (c : Fin 6) :
@@ -1575,7 +1616,7 @@ theorem sixFrag_valid : sixFrag.Valid := by
   have hcy : sixCol (e (k * (π / 3)) * y) = 0 := by
     have hc' : sixCol y = sixCol x := hc.symm
     rw [sixCol_rot k hy0, hc']; exact sixCol_rot_to_zero (sixCol x)
-  apply valid_zero (rot_mem_interiorPts k hx) (rot_mem_interiorPts k hy) hcx hcy
+  apply sixFrag_valid_zero (rot_mem_interiorPts k hx) (rot_mem_interiorPts k hy) hcx hcy
   rw [dist_rot_left, norm_e, one_mul]; exact hd
 
 /-! ## Non-Siamese: the pieces of colour `0` are connected subsets of the interior points -/
@@ -1665,7 +1706,7 @@ theorem int_lt_of_mul_pi_lt {a b : ℤ} (h : (a : ℝ) * π < b * π) : a < b :=
   exact_mod_cast this
 
 /-- `Q_4` lies in the interior points: its angles meet no lens side but its own, and it is open inside those. -/
-private theorem sixQ_interior {z : ℂ} (h : sixQ z) : z ∈ sixFrag.interiorPts := by
+theorem sixPieceQ_interior {z : ℂ} (h : sixPieceQ z) : z ∈ sixFrag.interiorPts := by
   have hπ := Real.pi_pos
   obtain ⟨h1, h2, h3, h4, h5, h6⟩ := h
   refine ⟨by show z ∈ ball (0 : ℂ) (3 / 2); rw [mem_ball_zero_iff]; exact h2, fun hz => ?_⟩
@@ -1688,7 +1729,7 @@ private theorem sixQ_interior {z : ℂ} (h : sixQ z) : z ∈ sixFrag.interiorPts
     rw [this] at hd; linarith
 
 /-- `G_2` lies in the interior points. -/
-private theorem sixG_interior {z : ℂ} (h : sixG z) : z ∈ sixFrag.interiorPts := by
+theorem sixPieceG_interior {z : ℂ} (h : sixPieceG z) : z ∈ sixFrag.interiorPts := by
   have hπ := Real.pi_pos
   obtain ⟨h1, h2, h3, h4, h5, h6⟩ := h
   refine ⟨by show z ∈ ball (0 : ℂ) (3 / 2); rw [mem_ball_zero_iff]; exact h2, fun hz => ?_⟩
@@ -1737,7 +1778,7 @@ theorem polarBand_bounds {J : Set ℝ} {ℓ u : ℝ → ℝ} (hlu : ∀ φ ∈ J
   refine ⟨φ, hφ, ℓ φ + t * (u φ - ℓ φ), by nlinarith, by nlinarith, rfl⟩
 
 /-- The sector `S_0` lies in a connected set of interior points. -/
-private theorem sixS_connected : ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ sixFrag.interiorPts ∧ ∀ z, sixS z → z ∈ C := by
+theorem sixPieceS_connected : ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ sixFrag.interiorPts ∧ ∀ z, sixPieceS z → z ∈ C := by
   have hπ := Real.pi_pos
   refine ⟨_, isPreconnected_polarBand (J := Ioo 0 (π / 3)) (ℓ := fun _ => 0) (u := fun _ => 1) isPreconnected_Ioo
     continuousOn_const continuousOn_const, ?_, ?_⟩
@@ -1751,14 +1792,14 @@ private theorem sixS_connected : ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ six
       (show Complex.arg z ∈ Ioo 0 (π / 3) from ⟨h2, h3⟩) (norm_pos_iff.mpr hz0) h1
 
 /-- The upper radius of `Q_4` on the ray `φ`. -/
-private noncomputable def uQ (φ : ℝ) : ℝ := min (3 / 2) (min (2 * Real.cos (φ + 5 * π / 6)) (2 * Real.cos (φ + π / 2)))
+noncomputable def sixQUpper (φ : ℝ) : ℝ := min (3 / 2) (min (2 * Real.cos (φ + 5 * π / 6)) (2 * Real.cos (φ + π / 2)))
 
 /-- The lens `Q_4` lies in a connected set of interior points. -/
-private theorem sixQ_connected : ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ sixFrag.interiorPts ∧ ∀ z, sixQ z → z ∈ C := by
+theorem sixPieceQ_connected : ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ sixFrag.interiorPts ∧ ∀ z, sixPieceQ z → z ∈ C := by
   have hπ := Real.pi_pos
-  have hcont : ContinuousOn uQ (Ioo (-(5 * π / 6)) (-(π / 2))) := by
-    unfold uQ; fun_prop
-  have hlu : ∀ φ ∈ Ioo (-(5 * π / 6)) (-(π / 2)), (fun _ => (1 : ℝ)) φ < uQ φ := by
+  have hcont : ContinuousOn sixQUpper (Ioo (-(5 * π / 6)) (-(π / 2))) := by
+    unfold sixQUpper; fun_prop
+  have hlu : ∀ φ ∈ Ioo (-(5 * π / 6)) (-(π / 2)), (fun _ => (1 : ℝ)) φ < sixQUpper φ := by
     intro φ hφ
     have c1 : 1 / 2 < Real.cos (φ + 5 * π / 6) := by
       rw [← Real.cos_pi_div_three]
@@ -1766,15 +1807,15 @@ private theorem sixQ_connected : ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ six
     have c2 : 1 / 2 < Real.cos (φ + π / 2) := by
       rw [← Real.cos_pi_div_three, ← Real.cos_neg (φ + π / 2)]
       exact Real.cos_lt_cos_of_nonneg_of_le_pi (by linarith [hφ.2]) (by linarith) (by linarith [hφ.1])
-    simp only [uQ, lt_min_iff]
+    simp only [sixQUpper, lt_min_iff]
     exact ⟨by norm_num, by linarith, by linarith⟩
-  refine ⟨_, isPreconnected_polarBand (J := Ioo (-(5 * π / 6)) (-(π / 2))) (ℓ := fun _ => 1) (u := uQ)
+  refine ⟨_, isPreconnected_polarBand (J := Ioo (-(5 * π / 6)) (-(π / 2))) (ℓ := fun _ => 1) (u := sixQUpper)
     isPreconnected_Ioo continuousOn_const hcont, ?_, ?_⟩
   · intro w hw
     obtain ⟨φ, hφ, r, h1, h2, rfl⟩ := polarBand_bounds hlu hw
-    simp only [uQ, lt_min_iff] at h2
+    simp only [sixQUpper, lt_min_iff] at h2
     have hr : 0 < r := by linarith [show (1 : ℝ) < r from h1]
-    apply sixQ_interior
+    apply sixPieceQ_interior
     refine ⟨by rw [norm_polar hr.le]; exact h1, by rw [norm_polar hr.le]; exact h2.1, ?_, ?_, ?_, ?_⟩
     · rw [arg_polar hr ⟨by linarith [hφ.1], by linarith [hφ.2]⟩]; exact hφ.1
     · rw [arg_polar hr ⟨by linarith [hφ.1], by linarith [hφ.2]⟩]; exact hφ.2
@@ -1788,18 +1829,18 @@ private theorem sixQ_connected : ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ six
     rw [show Complex.arg z - -(π / 2) = Complex.arg z + π / 2 by ring] at d2
     rw [eq_norm_mul_e_arg (x := z)]
     refine mem_polarBand (ℓ := fun _ => 1) ⟨h3, h4⟩ h1 ?_
-    simp only [uQ, lt_min_iff]
+    simp only [sixQUpper, lt_min_iff]
     exact ⟨h2, d1, d2⟩
 
 /-- The lower radius of `G_2` on the ray `φ`. -/
-private noncomputable def ℓG (φ : ℝ) : ℝ := max 1 (max (2 * Real.sin φ) (2 * Real.cos (φ + 5 * π / 6)))
+noncomputable def sixGLower (φ : ℝ) : ℝ := max 1 (max (2 * Real.sin φ) (2 * Real.cos (φ + 5 * π / 6)))
 
 /-- The angles of `G_2`: an interval. -/
-private theorem ordConnected_JG : (Ioo (2 * π / 3) π ∩ {φ | ℓG φ < 3 / 2}).OrdConnected := by
+theorem sixGAngles_ordConnected : (Ioo (2 * π / 3) π ∩ {φ | sixGLower φ < 3 / 2}).OrdConnected := by
   have hπ := Real.pi_pos
   refine ⟨fun a ha b hb c hc => ⟨⟨by linarith [ha.1.1, hc.1], by linarith [hb.1.2, hc.2]⟩, ?_⟩⟩
   have ha' := ha.2; have hb' := hb.2
-  simp only [ℓG, mem_setOf_eq, max_lt_iff] at ha' hb' ⊢
+  simp only [sixGLower, mem_setOf_eq, max_lt_iff] at ha' hb' ⊢
   refine ⟨by norm_num, ?_, ?_⟩
   · have : Real.sin c ≤ Real.sin a := by
       rw [← Real.sin_pi_sub c, ← Real.sin_pi_sub a]
@@ -1814,21 +1855,21 @@ private theorem ordConnected_JG : (Ioo (2 * π / 3) π ∩ {φ | ℓG φ < 3 / 2
     linarith [hb'.2.2]
 
 /-- The gap tile `G_2` lies in a connected set of interior points. -/
-private theorem sixG_connected : ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ sixFrag.interiorPts ∧ ∀ z, sixG z → z ∈ C := by
+theorem sixPieceG_connected : ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ sixFrag.interiorPts ∧ ∀ z, sixPieceG z → z ∈ C := by
   have hπ := Real.pi_pos
-  have hcont : ContinuousOn ℓG (Ioo (2 * π / 3) π ∩ {φ | ℓG φ < 3 / 2}) := by
-    unfold ℓG; fun_prop
-  refine ⟨_, isPreconnected_polarBand (u := fun _ => 3 / 2) ordConnected_JG.isPreconnected hcont continuousOn_const,
+  have hcont : ContinuousOn sixGLower (Ioo (2 * π / 3) π ∩ {φ | sixGLower φ < 3 / 2}) := by
+    unfold sixGLower; fun_prop
+  refine ⟨_, isPreconnected_polarBand (u := fun _ => 3 / 2) sixGAngles_ordConnected.isPreconnected hcont continuousOn_const,
     ?_, ?_⟩
   · intro w hw
-    obtain ⟨φ, hφ, r, h1, h2, rfl⟩ := polarBand_bounds (J := Ioo (2 * π / 3) π ∩ {φ | ℓG φ < 3 / 2}) (ℓ := ℓG)
-      (u := fun _ => 3 / 2) (fun φ hφ => show ℓG φ < 3 / 2 from hφ.2) hw
+    obtain ⟨φ, hφ, r, h1, h2, rfl⟩ := polarBand_bounds (J := Ioo (2 * π / 3) π ∩ {φ | sixGLower φ < 3 / 2}) (ℓ := sixGLower)
+      (u := fun _ => 3 / 2) (fun φ hφ => show sixGLower φ < 3 / 2 from hφ.2) hw
     replace h2 : r < 3 / 2 := h2
-    simp only [ℓG, max_lt_iff] at h1
+    simp only [sixGLower, max_lt_iff] at h1
     have hr : 0 < r := by linarith [h1.1]
     have harg : Complex.arg ((r : ℂ) * e φ) = φ := arg_polar hr ⟨by linarith [hφ.1.1], hφ.1.2.le⟩
     have hw0 : (r : ℂ) * e φ ≠ 0 := mul_ne_zero (by exact_mod_cast hr.ne') (e_ne_zero' φ)
-    apply sixG_interior
+    apply sixPieceG_interior
     refine ⟨by rw [norm_polar hr.le]; exact h1.1, by rw [norm_polar hr.le]; exact h2, by rw [harg]; exact hφ.1.1,
       by rw [harg]; exact hφ.1.2, ?_, ?_⟩
     · rw [one_lt_dist_iff_arg hw0, harg, norm_polar hr.le, Real.cos_sub_pi_div_two]; exact h1.2.1
@@ -1840,27 +1881,27 @@ private theorem sixG_connected : ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ six
     have d2 := (one_lt_dist_iff_arg hz0 _).mp h6
     rw [Real.cos_sub_pi_div_two] at d1
     rw [show Complex.arg z - -(5 * π / 6) = Complex.arg z + 5 * π / 6 by ring] at d2
-    have hl : ℓG (Complex.arg z) < ‖z‖ := by
-      simp only [ℓG, max_lt_iff]; exact ⟨h1, d1, d2⟩
+    have hl : sixGLower (Complex.arg z) < ‖z‖ := by
+      simp only [sixGLower, max_lt_iff]; exact ⟨h1, d1, d2⟩
     rw [eq_norm_mul_e_arg (x := z)]
-    exact mem_polarBand (J := Ioo (2 * π / 3) π ∩ {φ | ℓG φ < 3 / 2}) (ℓ := ℓG) (u := fun _ => 3 / 2)
-      (show Complex.arg z ∈ Ioo (2 * π / 3) π ∩ {φ | ℓG φ < 3 / 2} from ⟨⟨h3, h4⟩, hl.trans h2⟩) hl h2
+    exact mem_polarBand (J := Ioo (2 * π / 3) π ∩ {φ | sixGLower φ < 3 / 2}) (ℓ := sixGLower) (u := fun _ => 3 / 2)
+      (show Complex.arg z ∈ Ioo (2 * π / 3) π ∩ {φ | sixGLower φ < 3 / 2} from ⟨⟨h3, h4⟩, hl.trans h2⟩) hl h2
 
 /-- Two interior points of colour `0` less than `1` apart lie in one connected set of interior points: the pieces
 `S_0`, `Q_4`, `G_2` are connected, and points of different pieces are more than `1` apart. -/
-private theorem connected_of_zero {x y : ℂ} (hx : x ∈ sixFrag.interiorPts) (hy : y ∈ sixFrag.interiorPts)
+theorem sixFrag_connected_of_zero {x y : ℂ} (hx : x ∈ sixFrag.interiorPts) (hy : y ∈ sixFrag.interiorPts)
     (hcx : sixCol x = 0) (hcy : sixCol y = 0) (hd : dist x y < 1) :
     ∃ C : Set ℂ, IsPreconnected C ∧ C ⊆ sixFrag.interiorPts ∧ x ∈ C ∧ y ∈ C := by
   rcases sixCol_zero_cases hx hcx with h1 | h1 | h1 <;> rcases sixCol_zero_cases hy hcy with h2 | h2 | h2
-  · obtain ⟨C, hC, hCi, hS⟩ := sixS_connected; exact ⟨C, hC, hCi, hS x h1, hS y h2⟩
-  · exact absurd hd (sixS_sixQ h1 h2).not_gt
-  · exact absurd hd (sixS_sixG h1 h2).not_gt
-  · rw [dist_comm] at hd; exact absurd hd (sixS_sixQ h2 h1).not_gt
-  · obtain ⟨C, hC, hCi, hQ⟩ := sixQ_connected; exact ⟨C, hC, hCi, hQ x h1, hQ y h2⟩
-  · exact absurd hd (sixQ_sixG h1 h2).not_gt
-  · rw [dist_comm] at hd; exact absurd hd (sixS_sixG h2 h1).not_gt
-  · rw [dist_comm] at hd; exact absurd hd (sixQ_sixG h2 h1).not_gt
-  · obtain ⟨C, hC, hCi, hG⟩ := sixG_connected; exact ⟨C, hC, hCi, hG x h1, hG y h2⟩
+  · obtain ⟨C, hC, hCi, hS⟩ := sixPieceS_connected; exact ⟨C, hC, hCi, hS x h1, hS y h2⟩
+  · exact absurd hd (sixPieceS_sixPieceQ h1 h2).not_gt
+  · exact absurd hd (sixPieceS_sixPieceG h1 h2).not_gt
+  · rw [dist_comm] at hd; exact absurd hd (sixPieceS_sixPieceQ h2 h1).not_gt
+  · obtain ⟨C, hC, hCi, hQ⟩ := sixPieceQ_connected; exact ⟨C, hC, hCi, hQ x h1, hQ y h2⟩
+  · exact absurd hd (sixPieceQ_sixPieceG h1 h2).not_gt
+  · rw [dist_comm] at hd; exact absurd hd (sixPieceS_sixPieceG h2 h1).not_gt
+  · rw [dist_comm] at hd; exact absurd hd (sixPieceQ_sixPieceG h2 h1).not_gt
+  · obtain ⟨C, hC, hCi, hG⟩ := sixPieceG_connected; exact ⟨C, hC, hCi, hG x h1, hG y h2⟩
 
 /-- **FS116-Y2-SIXFRAG**, non-Siamese: two distinct tiles of one colour always have a pair of points at distance at least
 `1`. -/
@@ -1884,7 +1925,7 @@ theorem sixFrag_nonSiamese : sixFrag.NonSiamese := by
   have hd : dist (e (k * (π / 3)) * x) (e (k * (π / 3)) * y) < 1 := by
     rw [dist_rot_left, norm_e, one_mul]; exact hdist x hx y hy
   obtain ⟨C, hC, hCi, hxC, hyC⟩ :=
-    connected_of_zero (rot_mem_interiorPts k hxi) (rot_mem_interiorPts k hyi) hcx hcy hd
+    sixFrag_connected_of_zero (rot_mem_interiorPts k hxi) (rot_mem_interiorPts k hyi) hcx hcy hd
   -- rotate the connected set back
   have hback : ∀ z : ℂ, e ((-k : ℤ) * (π / 3)) * (e (k * (π / 3)) * z) = z := by
     intro z
