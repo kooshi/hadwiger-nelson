@@ -320,3 +320,56 @@ reaches further, or that a step closes, was priced low and landed (OR1's closes 
 the predictions of misses of the FS116-Y4 kind and of new cross-era sites were priced high and did not land (Poros A7, MA1 E4/E8, MA2 E4/E5). This is
 the counter-priors' measured direction (`CLAUDE.md` § Counter-priors). Lane R's Brier is twice lane A's because its two largest misses (OR1's close and
 bearing) are the audit's two largest results.
+
+## Stage 7 — SAVED: the sweeps
+
+**The plan and the stub, grepped for "conjecture" and "not claimed"** (`grep -n -i "conjecture\|not claimed"` over
+`plans/FS129-cross-application-audit.md` and `plans/STUB-cross-application-audit.md`): four hits, none a conjecture or a not-claimed statement —
+each names the `not claimed:` field of the block format (plan ll. 37, 53, 98; stub l. 24). **Declined, all four**: field names, no claim to carry.
+"conjecture" occurs in neither file.
+
+**Adapted: the 44 FS-129 entries' `not claimed:` lines**, the audit's own nearest-unproved statements, each given a carrier or a decline (read from the
+readers' records):
+
+| not claimed (entries) | carried by, or declined |
+|---|---|
+| the Siamese class (QFREE, QFREE-CLASS, QFREE-NS, EMPTY-NS, BENDLE3, BEND3, DOUBLETIP, OUTERADJ, E2ONE, DISCF-NS) | **FS-123** question 3 (its main question now) and **FS-124** case 7 |
+| rings carrying (Q) arcs; "that a vertex with a (Q) ring dies at any radius" (QFREE, QFREE-NS, QFCASE, TOUCHW) | **FS-124** |
+| DOUBLETIP's and OUTERADJ's excluded germs on (Q) arcs, two tips, SEMI-PAR3; BEND3's pinned bends; RINGWIND's "that SEMI-PAR3 holds or fails" | **FS-124** case 1 (its bearing now names the pinning caveat) |
+| E2ONE: E2 at two or more blades; the E1 residues; E1CAP's wrap | **FS-124** case 6 |
+| SIXQ: a fragment with a six-colour vertex beyond 3/2 | **FS-124** case 4 (construction) |
+| LOCALDENSE: that the class is inhabited; DISCF-NS's hypothesis | **FS-124** case 8 and the YES side's fragments (FS116-O1-YESLIM) |
+| BENDFRAG, BENDANY, WHOLE: anything at radius `√3` or more; saturation kept; other points' rings | **FS-124** (its bearing states the bends' reach); saturation: **FS-125** |
+| TOP5: REG-J′₅; the honest existence form at five | **FS-127** (LAT) and the map step at five's carrier — **FS129-P1** (item 26) |
+| FALC-RED, OA1-FALC-RED, FALC-11, FALC-19, FALC-RES: the almost-everywhere form | **FS-104** route (0): "it needs Lemma 3 with a positive-measure set of translations, which the 1981 text does not supply (FS103-M § 1.2's table) and the 2005 exposition is reported to" — the 2005 exposition is unread here: a reading debt (report INVENTORY) |
+| every fan entry: "that any Falconer fan at five colours exists" | **FS-104** route (b); the finite-witness search is `plans/SEARCH-QUEUE.md` row 3, held for Kooshi |
+| FALC-11, FALC-19, FALC-RES: the case `t ≡ a (mod 𝔭)`; HOSTS, FALC-RES: dyadic `U_Q`, `Q ∈ {4, 8, 16}` | search requests already queued (`plans/SEARCH-QUEUE.md` rows 1, 4, 5) |
+| NOLIN5, NOAFF5, NOAFF-K, NOAFF-FIELDS: inequalities (format (ii)); degree ≥ 2 identities | **FS-104** route (c) |
+| NOPERLAW: pairs forced with probability below 1; near-forcing at a scale | **FS-104** route (b) ("a forced pair whose distance moves continuously") |
+| every "anything at `k ≥ 7`" (QFREE, QFREE-NS, EMPTY-NS, DOUBLETIP, OUTERADJ, QFCASE, TOUCHW) | **declined**: the six-map NO is about six colours, and R7 inhabits seven |
+| NOAFF-FIELDS: K at `k = 4`; PLACE-HOM: E not purely transcendental; SQRT3-LOCAL: dyadic places where 3 is not a square | **declined**: each is false or uncontrolled as the line says (K's plane carries four-colour forced pairs; G63's Remark-1 caution; ℚ(ζ₇)⁺, ℚ(√7)) |
+| CLOSURE: two points of `cl U`; HULLSET: non-compact `C` | **declined**: false (the hexagonal seven-colouring; FS111-C-HULL-SO) |
+| SUPK: SUP's second clause at every `k` | **declined**: no consumer reads it (FS106-EQ uses the first clause); for the Lean backlog only if SUP's second clause is formalized |
+| TWOCIRC: tiles; RINGBAND: `h` constant across a swap; DISC1TS: a sharper radius; YESLIM-EQ: six with no MR | **declined**: each use adds its own pinning; the swap moves `h` (row 132); no consumer; row 130 already |
+| FALC-FAN, DICHO-K, DICHO: the converse | **declined**: false (Harder's 745-point pair at 8/3 over K) |
+
+**§G re-read — adapted (FS-129 had no §G)**: the audit's passes were the re-grokking of the whole corpus. The entries that bore and were not used
+before the audit are its table of misses (MA1 § 5.1, MA2 § 4.1, MR1 § Table of misses) and are in the where-else column (stage 3). **Which entry
+should have borne at the audit itself and was not used**: G49 (in-house vocabulary hides results from their neighbours, the stub's own precedent) —
+its kind recurred three times inside the corpus (CLOSURE proved three times in two eras; the two-circle identity found three times; FS84-S1e re-derived
+as NOAFF5 uncited), each found by a row-by-row comparison and none by a mention count; drafted as instances (stage 8), not a rewrite: the retired G49
+already names the mechanism.
+
+**§IQ and G79**: G79 — no counterexample: no FS-129 result came from a counterexample invariant alone; QFREE came from a held kill (EMPTY) and a
+modification lemma (WHOLE, BENDFRAG) that every bent fragment carries. **§IQ — a partial counterexample, recorded for Poros**: the audit's results came
+from the card's existence form ("which held result closes this step?"), step by step, with the structural form serving as a one-line aim before each
+step (inventory item 25); the structural form's product — the gap set of steps that need a kind of input no held result delivers — was not tallied by
+either pass-1 reader (OR1 never uses the card's phrase; OA1 twice). A result from somewhere other than the structural question, then, with the
+structural form as the aiming device; whether that is G72's rule working or bypassed is Poros's to read.
+
+**§PA — recognitions about what the objects are** (each to a drafted grokking or instance, stage 8): (1) **the same lemma in two eras' vocabularies**
+(SR2 § 4.4: "most of the extra merges are the same lemma proved in two eras' vocabularies (density sets against open tiles; maps against fragments),
+which no pass before this one compared row by row"); (2) **a restriction's class is a question** (OR1 § J1: a round restriction can leave the class an
+exclusion quantifies over; the fix is the whole-tile restriction); (3) **a held result reaches its argument's class** (MA1 and MA2's yield, SR3's three
+"reach further" landings, MR1's DOUBLETIP: arguments filed at a narrower class than they carry); (4) **row 66 is one mechanism under four grokkings**
+(MA1 § 5.2: G13's slack face, G26, G31, G48).
