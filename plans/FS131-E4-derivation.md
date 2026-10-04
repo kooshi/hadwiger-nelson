@@ -152,3 +152,175 @@ control: fs131-e4-model
   fault: python3 ../tools/fs131_e4_enclosure_model.py --fault
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the step at an un-enclosed vertex; the outermost tile; the base's consumers repaired at radius 3
+
+*Words used below.* `Unenclosed v`: for every tile `T` and every tile `S` with `v ∈ cl S`, every point of `S ∖ cl T` lies in an unbounded component of
+`ℂ ∖ cl T` (no tile has a tile at `v` in a hole). `UnenclosedC v`: the same with `T` ranging over tiles of colours carried at `v` only; `Unenclosed`
+implies it. E4-RIM and E4-N3BASE-UN carry `UnenclosedC` (all their arguments read); E4-OUTERMOST delivers `Unenclosed`. For a tile `T` with bounded closure, `W_T` is the unbounded component of `ℂ ∖ cl T` and
+`hull T = ℂ ∖ W_T`. A **bad point** is a point of `F(M) ∪ R(M)` (four or more colours, or a repeated colour). `BaseCtx F u` is the planner's bundle
+(valid, covers `B̄(u, 2)`, `u` cubic trichromatic, `BaseHyp u`, `NoInertNear u`).
+
+derivation: E4-RIM
+  statement: in the base's context at u (BaseCtx F u), if no tile of a colour of u has a tile at u in a bounded component of the complement of its
+    closure, then some point q of B̄(u, 1) carries exactly three colours, exactly two of them colours of u, and every tile of either of those two colours whose
+    closure holds q lies in B(u, 1)
+  uses only: validity (a tile of a colour of u meeting B(u, 1) lies in B(u, 1), Lemma H(a); no tile of a colour of u meets ω(u), N-E1); u cubic
+    trichromatic; BaseHyp read inside B̄(u, 1) (no repeated colour, no four colours); no both-kind unit arc centred at u (N3-NOBOTH, which reads BaseHyp
+    at u); local finiteness; the hypothesis, read only at u's three tiles against tiles of u's colours (so
+    Unenclosed u, which reads every tile, implies it); the frontier of the unbounded complementary component
+    of a plane continuum is connected (unicoherence of the plane, read, not proved here)
+  not claimed: the converse — an enclosed u may still have such a point (in a hole of its component bordered by two of its colours, or on another
+    component); that q lies in the open disc (it may lie on ω(u), where eleventh_antipodal applies); anything about NoInertNear, which is not used
+  argument: § Argument for E4-RIM
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none expected for the whole context (BaseCtx is what row134BaseUA refutes); the topological core (steps 2–5) is modelled by the faulted
+    enclosure model (tools/fs131_e4_enclosure_model.py --fault): a valid fragment about u = (1/10, 0) with u's enclosing tile cut open, in which two such
+    points appear on the enclosing tile's rim
+  prior art: partly — [Voronov2023] Lemma 6.1 (read 2026-10-04, p. 12) proves the point when every monochromatic region is 1-connected; the hypothesis
+    split to "no tile encloses a tile at u" is not found in print (searched only in [SokolovVoronov2025] and [Voronov2023])
+  handoff: de Bruijn — BaseCtx.exists_eleventh gains the hypothesis Unenclosed u; its proof is § Argument for E4-RIM, over one planar lemma (the outer
+    frontier of a continuum is connected) that Mathlib does not hold
+
+derivation: E4-OUTERMOST
+  statement: in a valid fragment covering B̄(x, 1 + ρ) for some ρ > 0, either B̄(x, 1) holds a point of F(M) ∪ R(M), or B̄(x, 1) holds a cubic trichromatic
+    vertex v with Unenclosed v
+  uses only: validity (a tile has diameter at most 1); local finiteness (finitely many tiles meet B̄(x, 1), and near a point the tiles holding it in
+    their closure are its sectors); the frontier of the unbounded complementary component of a plane continuum is connected; that three tiles of three
+    distinct colours at a point with no repeated colour and no fourth colour make it cubic trichromatic (wave 5's isCubicTrichromatic_of_three_of_noRep)
+  not claimed: that v is the vertex FS112-DISC1's nesting chain finds (that chain stops at the first branch point, and its vertex may be enclosed by a
+    tile further out); anything about colour counts — the statement holds for every k
+  argument: § Argument for E4-OUTERMOST
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the hexagonal seven-colouring with hexagons of diameter just below 1 (any point x; T* the hexagon whose closure holds x, every hexagon its own
+    hull; v a corner) — the statement is colour-free; and the unfaulted enclosure model with x = u = (1/10, 0): T* = R_4 (the annulus), v any of its three
+    outer-rim vertices, where u itself is enclosed
+  prior art: owed — in-house; its global relative is [Voronov2023] Observation 2.2 (fill every hole; read 2026-10-04, p. 4), which this replaces by a choice
+  handoff: de Bruijn — a new lemma for localDense's proof (it replaces FS112-DISC1's vertex)
+
+derivation: E4-BEND-UN
+  statement: the toward-bend of a whole inert unit arc (FS112-N2-BENDS, N2-TOWARD), with its lens chosen inside a collar of the arc in its inner tile,
+    keeps Unenclosed u, for u an end of the arc or off a neighbourhood of the lens
+  uses only: that the bend is induced by a homeomorphism of the plane supported in a small neighbourhood of the lens's closure, fixing the arc's ends,
+    carrying each old tile onto the new tile of the same index; that enclosure is invariant under homeomorphisms of the plane
+  not claimed: that every bend N2-BENDS allows has its lens in a collar (a lens may be chosen so; the existing bend lemma is not re-read for it); the
+    away-bend
+  argument: § Argument for E4-BEND-UN
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the bend of any inert unit arc of a held fragment with unit arcs — FS112-BOWTIE's inert arcs, if any; none checked here
+  prior art: owed — in-house
+  handoff: de Bruijn — a child of n3_base's pre-bend (the planner already owes a strengthened-bend child keeping u cubic trichromatic; this clause joins it)
+
+derivation: E4-N3BASE-UN
+  statement: in a valid six-coloured fragment covering B̄(u, 2), a cubic trichromatic vertex u with no point of F(M) ∪ R(M) in B̄(u, 2) and no tile of a
+    colour of u having a tile at u in a bounded component of the complement of its closure does not exist
+  uses only: FS112-N3-BASE's walk at its filed grade with its eleventh-point step replaced by E4-RIM; the pre-bend of inert unit arcs centred in B̄(u, 1),
+    with E4-BEND-UN keeping the new hypothesis
+  not claimed: the same statement without the new hypothesis (FS112-N3-BASE as filed): at an enclosed u the step is open (stage 4, Q1 and Q2); that the
+    walk's other steps are stronger than their grade (CUSP-BASE's D5 items 1–4 and 6 one mind)
+  argument: § Argument for E4-N3BASE-UN
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none expected — a refutation; its seven-colour form is false at the seven-brick map's corner, whose tiles are rectangles (so Unenclosed holds),
+    as not_row134BaseUA_seven already shows for the form without the hypothesis
+  prior art: partly — S–V Cor. 1 ([SokolovVoronov2025]) is the global form; with unit arcs and at a fixed un-enclosed vertex, not found in print
+  handoff: de Bruijn — Row134BaseUA and n3_base gain the hypothesis Unenclosed u (stage 5's drafts)
+
+derivation: E4-LOCALDENSE
+  statement: every valid six-coloured fragment on a closed disc B̄(x, 3) has, in B̄(x, 3), a vertex of at least four colours or a vertex with a repeated
+    colour
+  uses only: E4-OUTERMOST at x (a bad point in B̄(x, 1), or a cubic trichromatic un-enclosed v ∈ B̄(x, 1)); E4-N3BASE-UN at v, whose disc B̄(v, 2) lies in
+    B̄(x, 3)
+  not claimed: anything below radius 3; that the class is inhabited (no valid six-coloured fragment on a disc of radius 3 is held); that the vertex found
+    has four colours (it may have a repeated colour)
+  argument: § Argument for E4-LOCALDENSE
+  verdict: derived
+  grade: derived from: E4-OUTERMOST, E4-N3BASE-UN
+  minds: 1
+  model: none held — FS129-OR1-LOCALDENSE's own model line (the largest held fragment is FS112-CAL-DISK's, radius ≈ 2.1246)
+  prior art: owed — in-house; FS112-N3-DENSE3's own prior art is not found in print
+  handoff: de Bruijn — localDense's statement unchanged; its proof replaces FS112-DISC1's vertex by E4-OUTERMOST's and calls n3_base with Unenclosed
+
+### Argument for E4-RIM
+
+`C = P_cl(u)`; `S₁, S₂, S₃` the tiles at `u` (one sector per colour, and every tile holding `u` in its closure contributes a sector, so these are all).
+
+1. **The tiles of `u`'s component lie in `B(u, 1)`.** A tile `T′` of a colour `j ∈ C` meeting `B(u, 1)`: the set `S_j × T′` is connected, carries no
+   distance `1` (validity), and holds a pair at distance below `1` (points of `S_j` near `u`); so all its distances are below `1`, and letting the first
+   point tend to `u` gives `T′ ⊆ B̄(u, 1)`, hence `T′ ⊆ B(u, 1)` (open). No tile of a colour of `C` meets `ω(u)`: a point of `ω(u)` inside such a tile has
+   a neighbourhood in it, and points of `u`'s tile of that colour near `u` realise distance `1` to it. Let `K₀` be the union of the closures of the
+   (finitely many) tiles of colours in `C` meeting `B(u, 1)`, and `R*` its component containing `u`. A tile `T′` of a colour in `C` whose closure meets
+   the closure of such a tile `T` at `z`: if `z ∈ B(u, 1)`, `T′` meets `B(u, 1)`; if `z ∈ ω(u)`, `T′` misses `B(u, 1)` and `ω(u)`, so lies outside
+   `B̄(u, 1)`; at `z` the arc of `Γ` separating the sectors of `T` and `T′` (adjacent, `z` having at most three sectors) lies in `B̄(u, 1) ∩ (ℂ ∖ B(u, 1))
+   = ω(u)` — an arc of `Γ` on `ω(u)` whose two sides carry colours of `u`: a both-kind arc centred at `u`, which N3-NOBOTH forbids at a cubic
+   trichromatic vertex. So every tile of a colour in `C` whose closure meets `R*` is a tile of `R*`, and lies in `B(u, 1)`; `R* ⊆ B̄(u, 1)`.
+2. **The outer frontier.** `R*` is a continuum. Let `W` be the unbounded component of `ℂ ∖ R*` and `Φ` its frontier: `Φ ⊆ R*`, non-empty, and
+   connected (the home theorem). `Φ` is the union of the closed sets `cl T ∩ Φ` over the tiles `T` of `R*` whose closures meet it.
+3. **At least two tiles on `Φ`.** Suppose one tile `R°` alone has closure meeting `Φ`; `R°` is a tile of `R*`, so of a colour of `u`. Take a tile `S`
+   at `u` other than `R°`; `S ∩ cl R° = ∅`. If a point `y ∈ S` lay in the unbounded component of `ℂ ∖ cl R°`, a path from `y` to a far point (in `W`)
+   would avoid `cl R°`; at its last time in `R*` (closed) it is at a point of `cl W ∩ R* = Φ ⊆ cl R°` — a contradiction. So `S` lies in a bounded component
+   of `ℂ ∖ cl R°`, against `UnenclosedC u`.
+4. **The point.** `Φ` connected and covered by finitely many closed sets `cl T ∩ Φ`, at least two non-empty: grouping one against the rest, two meet. So
+   some `q ∈ Φ` lies in `cl T₀ ∩ cl T₁` for tiles `T₀ ≠ T₁` of `R*`.
+5. **Its colours.** `q ∈ R* ⊆ B̄(u, 1)`. `T₀`, `T₁` are distinct tiles at `q`, so (no repeated colour) of distinct colours, both in `C`. `q ∈ Φ = ∂W`:
+   `W ∩ B(q, ε)` is open and non-empty, so it holds interior points (`Γ` is nowhere dense), and for small `ε` every interior point of `B(q, ε)` lies in a
+   tile holding `q` in its closure (local finiteness: the arcs meeting `B(q, ε)` pass through `q`). So a tile `Y` at `q` meets `W`. `Y` has no colour of
+   `C`: such a tile would be a tile of `R*` (step 1), and `R* ∩ W = ∅`. Hence `P_cl(q)` contains `c(T₀), c(T₁) ∈ C` and `c(Y) ∉ C`; no four colours, so
+   exactly these three, exactly two in `C`. A second tile of colour `c(T₀)` at `q` would be a second sector of one colour, so `T₀` is the only one, and
+   likewise `T₁`; both lie in `B(u, 1)` (step 1). ∎
+
+*Where the six colours, the radius 2 and `NoInertNear` went:* nowhere. The step is topology plus Lemma H; enclosure is the only way it fails.
+
+### Argument for E4-OUTERMOST
+
+Suppose `B̄(x, 1)` holds no bad point.
+1. **Hulls.** A tile has diameter at most 1 (a connected open set of larger diameter holds a pair at distance exactly 1, of one colour). `ℂ ∖ conv(cl T)`
+   is connected, unbounded and misses `cl T`, so lies in `W_T`: `hull T ⊆ conv(cl T)`, of diameter at most 1. If a tile `T₁` has a tile `T₀` in a bounded
+   component of `ℂ ∖ cl T₁`, then `cl T₀ ⊆ hull T₁`, so `W_{T₁}` (connected, unbounded, missing `cl T₀`) lies in `W_{T₀}`: `hull T₀ ⊆ hull T₁`. The
+   inclusion is strict: equal hulls would put the frontier of their common outer domain inside both `cl T₀` and `cl T₁` on the same side, and a point
+   of an arc of that frontier has one tile on each side.
+2. **The outermost tile.** Take a tile `T₀` with `x ∈ cl T₀`. While some tile has the current tile in a bounded component of the complement of its closure,
+   pass to it: the hulls strictly increase, each contains `x` and has diameter at most 1, so each tile met lies in `B̄(x, 1)`, and finitely many tiles
+   meet `B̄(x, 1)`. The process stops at a tile `T*` with `x ∈ hull T*` that **no tile encloses**.
+3. **Its rim has two outer tiles.** Let `Φ* = ∂W_{T*} ⊆ cl T* ⊆ B̄(x, 1)`. Each point of `Φ*` lies in the closure of a tile meeting `W_{T*}` (as in E4-RIM
+   step 5), and such a tile, being connected and missing `cl T*`, lies in `W_{T*}`. If one tile `X` alone did, then near `Φ*` the domain `W_{T*}` lies in
+   `cl X` (an arc with `X` on both sides would be a repeated-colour point of `B̄(x, 1)`), and the last-exit argument of E4-RIM step 3 puts `T*` in a bounded
+   component of `ℂ ∖ cl X` — against step 2. So two tiles `X ≠ Y` of `W_{T*}` touch `Φ*`, and since `Φ*` is connected (`cl T*` is a continuum), their
+   closures meet it at a common point `v` (E4-RIM step 4).
+4. **`v` is cubic trichromatic.** `T*`, `X`, `Y` are three distinct tiles at `v ∈ B̄(x, 1)`. Two of one colour would be a repeated colour; a fourth colour
+   would be four colours: neither is there. So `v` has exactly three colours, one sector each.
+5. **`v` is un-enclosed.** Let `T` be a tile and `S ∈ {T*, X, Y}`, `S ≠ T`. If `S = T*`, step 2. If `S = X` (or `Y`) lay in a bounded component `B` of
+   `ℂ ∖ cl T`: when `v ∉ cl T` a small disc about `v` misses `cl T` and meets `X` and `T*`, so `T* ⊆ B` — against step 2; when `v ∈ cl T`, `T` is `T*` or
+   `Y`; `T = T*` is impossible since `X ⊆ W_{T*}`; for `T = Y`, the sectors of `T*` and `X` at `v` with the arc between them (minus `v`) form a connected
+   set missing `cl Y`, so again `T* ⊆ B`. ∎ And `|v − x| ≤ diam hull T* ≤ 1`.
+
+### Argument for E4-BEND-UN
+
+The bend replaces the inert arc `α` of `ω(P)` by a curve `β` bowing toward `P`, the lens `L` between them recoloured with the outer colour; `L` is chosen
+inside a collar of `α` in the inner tile `T_in` (a neighbourhood of `α°` in `cl T_in` homeomorphic to `α° × [0, 1)`, which local finiteness supplies, the
+lens's two tips at `α`'s ends inside `T_in`'s sectors there). Pushing `α` across the collar to `β` is a homeomorphism `h` of the plane supported in a
+small neighbourhood of `cl L`, fixing `α`'s ends, with `h(T_in) = T_in ∖ cl L`, `h(T_out) = T_out ∪ α° ∪ L`, and `h` the identity on every other tile. A
+homeomorphism of the plane carries bounded components of `ℂ ∖ cl T` to bounded components of `ℂ ∖ cl h(T)`, so `Unenclosed` holds at `h(u)` in the bent
+map; and `h(u) = u` because `u` is an end of `α` or off the support. Iterated bends: by induction. ∎
+
+### Argument for E4-N3BASE-UN
+
+FS112-N3-BASE's walk (`plans/FS112-N-proof.md` stage N3-3, as the planner cut it into `BaseWalk`'s leaves) uses the eleventh point only as the input to
+the count (`eleventh_type`, then `cor3_base` or `eleventh_antipodal`). E4-RIM supplies it under `UnenclosedC u`, after the pre-bend, which keeps
+it (E4-BEND-UN, whose argument holds for either form) and adds no colour or sector to any point (so `BaseHyp u` survives, as the walk already says). Every other leaf is read as
+filed. ∎
+
+### Argument for E4-LOCALDENSE
+
+Suppose `B̄(x, 3)` holds no bad point. E4-OUTERMOST gives a cubic trichromatic `v ∈ B̄(x, 1)` with `Unenclosed v`, hence `UnenclosedC v`. `B̄(v, 2) ⊆ B̄(x, 3)`, so the fragment
+covers `B̄(v, 2)` and `BaseHyp v` holds; E4-N3BASE-UN at `v` is a contradiction. ∎ FS112-DISC1 is no longer needed: E4-OUTERMOST supplies a vertex in
+`B̄(x, 1)` directly, and the right one.
+
+## Stage 3 — SAVED
