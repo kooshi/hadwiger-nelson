@@ -97,3 +97,14 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence; mirror
 oleans in a scratch directory of your own. The worktree's `.lake/build` is its own copy (from `fs131-w5b`; the first build rebuilds what differs); never replace
 it with a symlink. Nothing with a `sorry` reaches `main`.
+
+## Amendment 2026-10-04 (Keryx) — the block moves upstream into `Plane/ValidMap/Cone`
+
+Your finding is logged as `plans/FS131-close-inventory.md` item 253 and ruled in item 254. You may: create `Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean`
+(importing what `Contact` imports) holding `Contact`'s lines 27–1030 at `d4f946ae` and the three single lemmas (`hornSet_mono_radius`,
+`not_mem_interiorPts_of_mem_closure_sector`, `IsSector.eq_of_mem`) **verbatim** — statements, proofs, docstrings and namespaces unchanged; delete exactly those
+declarations from `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w4m/Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean` on your branch; make `Contact`
+and `Moves` import `Cone`; update `Proofs.lean` and `ARCHITECTURE.md`. Check by script that the moved text is byte-identical to its source lines, and record the
+check. Your touches extend to `Contact.lean` for this deletion and the import line only. FS131-IC5, on `fs131-w4c`, is told not to edit those lines, so the merge
+of your branch into its branch meets disjoint hunks. No statement changes; you still start no agents of your own (standing rule 1: delegation is one level deep,
+because the coordinator can only review work it knows exists).

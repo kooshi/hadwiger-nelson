@@ -1812,3 +1812,16 @@ reason by the close.*
      `stuck_structure`'s hypothesis class (a stuck vertex under Condition 5 covering `B̄(v, 2)`, at most three colours on `B̄(v, 1)`) has no model in the library;
      the gate's implementer either builds one or writes `VACUITY DECLARED:` with the theorem that empties it (row 134 empties Condition-5 six-maps of the plane,
      but not obviously these local fragments at every `k`).
+253. **FS131-IM1 mid-job: the moves do read `Contact` lemmas** (message 2026-10-04) — item 236's confidence fact met. All three read the branch-point and horn algebra
+     (`Contact.lean` l. 788–1030 at `d4f946ae`: `hornSet_congr`, `tanHeight_branchPt`, `branchPt_mem_hornSet`, `exists_small_s`, …) and three single lemmas
+     (`hornSet_mono_radius` l. 1717, `not_mem_interiorPts_of_mem_closure_sector` l. 1374, `IsSector.eq_of_mem` l. 2628); `exists_merge`'s clearness is N3-CLEAR and
+     N3-UP, the N3-CONF block at `Contact`'s head (l. 27–785). Each reads nothing of `Contact` below l. 1030. IM1's proposal: move `Contact`'s head (l. 27–1030) and
+     the three single lemmas, as one block, into a module upstream of both `Contact` and `Moves`.
+254. **Ruling: the block moves upstream on `fs131-w4m`, into `Plane/ValidMap/Cone`.** Choice: IM1 creates `Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean`
+     (importing what `Contact` imports) holding `Contact`'s l. 27–1030 and the three single lemmas **verbatim** (statements, proofs, docstrings, namespaces), deletes
+     them from `Contact.lean` on `fs131-w4m`, makes `Contact` and `Moves` import `Cone`, and updates `Proofs.lean`, `ARCHITECTURE.md`; the `scripts/Axioms.lean`
+     records are by name and unchanged. **FS131-IC5 (on `fs131-w4c`) does not edit those lines** (the head block and the three lemmas) and adds its children below
+     l. 1030 away from them, so the later merge of `fs131-w4m` into `fs131-w4c` meets disjoint hunks. Alternative weighed: a copy in `Cone` with `Contact` untouched
+     until the merge. Why: two modules declaring the same names cannot both be imported (the library root imports every module), so the copy would break the
+     branch's build; a move on one branch with the other branch fenced off those lines merges cleanly. Confidence: medium-high — the fact that would change it:
+     IC5 needing to edit a moved lemma (then it messages me first). IM1's brief amended; IC5 told by message.
