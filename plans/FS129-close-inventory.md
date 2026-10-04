@@ -634,3 +634,32 @@ One line per item with its source; no narration. Each line is ticked done or dec
      pairs, two prose-only, four reversed; `data/fs129/l1/final-run.out`): the order follows `uses only:`; a correction owed to
      `plans/FS129-derivation.md`'s prose at the close. **FS-112's `*Kernel:*` lines** still read "with FS-114" where its errata item 8 says
      "with FS-116"; each row points to item 8.
+159. **FS129-P1 reported DONE** (`data/fs129/reports/FS129-P1.md`; commits `99860912`, `41b16cd2`, `3bb21067`, `b3c69983`, `6440b53f`; ≈448k). The
+     re-rank drafted (`plans/POROS-2026-10-03-fs129-rerank.md` § Draft re-rank; the whole table `data/fs129/p1/frontier-table-draft.md`, built by
+     `data/fs129/p1/apply_rerank.py`): 1 FS-124, 2 FS-123 (re-aimed: the Siamese class), 3 FS-104, 4 FS-128 (re-aimed: the top colour at five and
+     six), 5 FS-125, 6 FS-122, 7 FS-120 (now also the cover route at five), 8 FS-127, 9 FS-126, 10–17 as now, 18 FS-130 (new), 19 FS-115, then the
+     rest each one lower. **The next milestone after the Lean backlog: FS-124**, its question posed in `plans/STUB-q-ring.md` § The question
+     (Poros, 2026-10-03), card "what-does-a-q-ring-pass-on". **Keryx's receipt**: `poros_gate.py all` on the record, exit 0, PASS; the drafted
+     table parsed — 74 rows, 74 distinct milestones, none lost from the current table, FS-130 the one new; FS-124's question section present.
+160. **The map step at five, carried** (P1's four-part decision, record § 3.1; item 26 done): no new stub; TOP₅ (row 154, FS129-OR1-TOP5) to FS-128;
+     MUA-REG-P to FS-120 beside MUA-FIN; REG-J′₅ stays with FS-127; FS-104 names all three as its route (e).
+161. **Corrections addressed to Poros, done** (items 43, 58, 138): FS-128's card wording corrected under the card in `plans/STUB-top-colour.md`;
+     J10 corrected in P1's record § 2.5; rank 5's (now FS-122's row) "meets route M nowhere below the answer" restricted to Condition 5 in its
+     draft row and banner. **On the §IQ partial counterexample** (item 146): P1 reads the audit's supply-side answer as G92 doing G72's work, not a
+     counterexample to G72; its card's hunch stays open (held results bore on 11 of 24 steps; the falsifier did not fire).
+162. **Invention signal, Poros's card 2** (P1 record § 2.4; addressed to Ephodos; no side picked): side 1 — `plans/FS111-C-close.md` line 252,
+     "(VM2-EQ5): a reformulation, not a step toward six", and `plans/FRONTIER-STUBS.md` rank 3, "a reformulation, not a shortcut"; side 2 —
+     `plans/STUB-pinch-at-junction.md` § Bearing, "a colour-generic rung of route M, smaller than the answer … at five, the cover statement
+     REG-J′-C₅", and `plans/FS129-OR1-audit.md` § J10 note 3. The premise both share: that equivalence to the answer, given held results, measures
+     a route — while by vacuity every regularisation step at k is equivalent to the answer given that k's NO. **Generalization** (P1 § 2.3 C2):
+     what sorts the steps is a tight colouring at k ≥ 7 that defeats the step, as FS121-O1-ABOVE7 does for the top colour. Card 2
+     ("does-a-rung-of-the-map-step-at-five-spend-five") is one derivation round; card 3 ("which-steps-read-non-siamese") is for FS-123's opening.
+163. **Held for Kooshi — the frame question** (P1 § 3.2): Poros recommends keeping his order — the Lean backlog, then FS-124 — and running card 2
+     beside FS-124's opening. Default: the order stands; card 2 runs at FS-124's opening.
+164. **Poros's scores** (P1 §§ 2.1, 2.2, 3.3): E1–E7, 1 of 7 met, Brier 0.274; R1–R4, 2 of 4, Brier 0.184; hunches — bends-keep-the-class confirmed
+     in a repaired form, qfree-class-is-empty confirmed stronger, identity-is-three-step-closure confirmed, next-miss confirmed weakly,
+     arithmetic-bears-through-compulsion killed by FS129-OA1-RINGWIND; three new hunches registered.
+165. **For the filing** (Keryx's to file, from P1): the frontier table and its changed rows, banners and open-milestones paragraph; FS-117's row's
+     bearing cell; the re-aimed titles of FS-123 ("the Siamese class"), FS-128 ("the top colour, at five and six") and FS-120 ("the pinch at a
+     junction, and the cover route at five"); `CLAUDE.md` § Paths forward's top three. Left to their openings: FS-123's question section (card 3)
+     and FS-104's route (e) (in its draft row).
