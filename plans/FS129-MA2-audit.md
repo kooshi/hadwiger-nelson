@@ -316,3 +316,57 @@ regularity-era questions by five reframes; each *bears* verdict I followed (G21,
 follow-up done; the *silent* ones I re-read against the open steps (J1–J24) and found the same, with G26 the one near miss (above). The two
 arithmetic-era doors pass 1 named (TOP₆'s coverage, FS-104's correlations) and MA1's (the Falconer fan) remain the only ones; stage 2 widened the
 third. MA2-E5 (expected 0.6 new cross-era bearings): 0 new sites; one deepening of J13.
+
+## Stage 4 — SAVED (the table of misses; the registration, provisionally scored; what is left)
+
+### 4.1 Table of misses (pass 3 and the record job read this first)
+
+| mechanism | site | what it would have given | derived or not |
+|---|---|---|---|
+| G43's plane at 7 with G54's slack face (the kernel's gapped `circ7Table`), and G48's tightness at `k = 4` | FS129-MA1-FALC-T, whose clause (3) MA1 applied only at three-colourable targets and clause (2) only at K | no Falconer fan at five colours over any real number field with a usable prime of residue field 𝔽₃ or 𝔽₇ or a dyadic place ramified in F(i) | **derived**: FS129-MA2-FALC-GAP4, FS129-MA2-FALC-HOSTS (i) |
+| G68 (gapped quotient colourings: FS70-T9's hexagonal fabric over ℚ(√3,√5), FS81-T24's 49 lattices over ℚ(√47)) | the same | no fan drawn in those lattices | **derived**: FS129-MA2-FALC-HOSTS (ii) |
+| G69 and G76 (rows 78, 88), through FALC-T clause (2) read with `T = H` | the same; J13 (FS-104 route (b)) and the Searcher's held row 3 | a four-colourable fan is a four-colour forcer; in de Grey's lattice `t − a ∈ 8Λ`; over ℚ(√59), ℚ(√83), ℚ(√131) `t − a ∈ R ∩ 𝔓⁴`, and one fan there would answer row 88 (every four-colouring periodic) | **derived**: FS129-MA2-FALC-DICHO, FS129-MA2-FALC-HOSTS (iii)–(iv) |
+| G63's place `t ↦ 0` | HOSTS (i), FS129-OA1-FALC-11, FS129-MA1-FALC-19, FS129-MA1-NOAFF5 (stated over number fields) | each carried to `F(t₁, …, t_n) ⊂ ℝ` | not entered — a rider for pass 3 (§ 3.1) |
+| G41 (additive four-colourings, Fischer's ℤ/4) | fans in K² | `t − a` in the kernel of every additive four-colouring of K² | a consequence line; adds nothing on the one named pair (§ 3.1) |
+| G32 (the two-distance dial) | FS129-MA2-FALC-DICHO | a four-colourable fan plus its apex–tip edge is a five-chromatic `{1, r}`-graph with one `r`-edge | a consequence line |
+| FS129-MA1-NOAFF5's argument at every `k` (G75) | G75's four-colour annihilator format over fields with a usable prime of residue field 𝔽₃ or 𝔽₇ | no affine identity there at four colours | a generalization for pass 3, not entered (§ 2.3) |
+| G26 (`hexShell_plane`) | row 145's ring at a four-colour vertex (FS-116) | near miss — lane R's ring theorem is stronger there; a contradiction needs virtual edges at √3 and 2 | not derived |
+| the root chain FS89-S0B-C1 → … → FS89-CL2 → CL3 (G76) | `plans/FS89-derivation.md` | FS89-CL2 false as written, corrected on the front page (J24), unapplied in the record | already known; for pass 3 (records that disagree) |
+
+**No miss of the FS116-Y4 kind** (a step worked for rounds that a held mechanism would have emptied) in the 49 mechanisms: no milestone worked a
+step that the fan family empties (the Searcher's row 3 never ran), and MA1's orbit computations at 11 and 19 are five-colour facts GAP4 does not
+reach.
+
+### 4.2 Mechanisms that are two, or not mine (the brief's "say so")
+
+- **G2 and G3** are lane A's by content (the coordinator's relay of lane R's finding, § 2.0); both are finite-witness readings, null.
+- **The homonym count.** Of the index's mention lists for my grokkings, the lane-R mentions of G1 (6), G2 (3), G3 (5) and G4 (3), FS-89's "G1" and
+  "G2", FS-56's "G27" and M49's "G31" are other objects named G-something; item 51's majority rule assigned G2 and G3 to lane R on them. A note for
+  the index's README (FS129-Z1): a mention count is an upper bound, and in these four entries the count is mostly homonyms.
+- **G9 and DICHO are one mechanism read twice**: "compulsions live one rung below the top" (G9) is what DICHO proves of a fan. A record job reading
+  for "where else" should read them together.
+- **G74's roots are G76's**: the lane-A roots MA1 attributed to G74 and G77 are FS-89's and FS-91's band-character chains (HD1), G76's; G74 enters
+  only through FS89-S0A-2's layer gluing.
+
+### 4.3 The registration (§ 1.3), provisionally scored (FS129-Z1 scores)
+
+| id | registered | outcome |
+|---|---|---|
+| MA2-E1 mechanisms reached | 28 (15–47) | **49** — all 47 left by MA1, plus G2 and G3; stage 3 in table form, as MA1's § 4.3 |
+| MA2-E2 bearing somewhere unapplied, beyond pass 1 and MA1 | 6; P(≥ 3) = 0.65 | **10** — six in the fan family (G43, G48, G54's slack face, G68, G69, G76), G63 (a rider), G41 and G32 (consequence lines), G26 (a near miss) |
+| MA2-E3 compositions | 3 (0–7) | **3** (DICHO, GAP4, HOSTS) |
+| MA2-E4 misses of the FS116-Y4 kind | 0.7; P(≥ 1) = 0.4 | **0** |
+| MA2-E5 cross-era bearings, new sites | 0.6; P(≥ 1) = 0.35 | **0 new sites**; one deepening of J13 |
+| MA2-E6 the bearing on the answer changes | P = 0.05 | **no** — J13 is narrowed (fans only in four-colour-rigid fabric or in planes needing five), no route closed or opened |
+| MA2-E7 a held result found false | P = 0.03 | **no** (FS89-CL2's falsity as written is already recorded) |
+| MA2-E8 share of nulls from retired finite-witness or search methods | 0.3 | **14 of 49 ≈ 0.29** (G2, G3, G4, G7, G12, G14, G34, G36, G37, G42, G45, G52, G62, G65) |
+| MA2-E9 a root yields a travelling strengthening | P = 0.2 | **no** |
+
+The miss runs as MA1's did: the yield came from reading one held composition (FALC-T) at the class its argument carries and listing the targets the
+record holds that meet the wider hypothesis — four grokkings each held one such target and none had been asked.
+
+### 4.4 What is left
+
+**Nothing of lane A's pass 2**: MA1 audited 23 mechanisms, this job the other 47 and G2, G3 (49), so every lane-A grokking has a row. FS129-MA3 is not
+needed for pass 2. For pass 3 (FS129-SA1): the merges of § 4.1 (FALC-T (3) ⊂ GAP4; FALC-T (2) with `T = H` = DICHO; NOAFF5 at every `k`; G63's rider),
+FS89-CL2's record correction, and DICHO/GAP4/HOSTS's prior-art debts.
