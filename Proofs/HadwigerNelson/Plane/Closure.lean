@@ -14,12 +14,22 @@ open Complex Set MeasureTheory Filter Topology Metric
 
 /-- Every point of an open set is a density point of it. -/
 theorem subset_densitySet_of_isOpen {U : Set ℂ} (hU : IsOpen U) : U ⊆ densitySet U := by
-  sorry
+  intro x hx
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hU x hx
+  refine tendsto_const_nhds.congr' ?_
+  have : Ioo 0 ε ∈ 𝓝[>] (0 : ℝ) := Ioo_mem_nhdsGT hε
+  filter_upwards [this] with r hr
+  have hsub : closedBall x r ⊆ U := fun y hy =>
+    hball (lt_of_le_of_lt (mem_closedBall.mp hy) hr.2)
+  rw [densityRatio, inter_eq_right.mpr hsub]
+  exact (ENNReal.div_self (measure_closedBall_pos volume x hr.1).ne' measure_closedBall_lt_top.ne).symm
 
 /-- **FS129-SR2-CLOSURE**: if `U ⊆ ℝ²` is open with `(Leb ⊗ σ){(x, w) ∈ U × S¹ : x + w ∈ U} = 0`, no point of `U` is at
 distance exactly `1` from a point of `cl U`. -/
 theorem dist_ne_one_of_mem_of_mem_closure {U : Set ℂ} (hU : IsOpen U) (hnull : UnitPairsNull U)
     {x y : ℂ} (hx : x ∈ U) (hy : y ∈ closure U) : dist x y ≠ 1 := by
-  sorry
+  refine dist_ne_one_of_mem_interior_densitySet hU.measurableSet hnull ?_ ?_
+  · exact interior_maximal (subset_densitySet_of_isOpen hU) hU hx
+  · exact closure_mono (subset_densitySet_of_isOpen hU) hy
 
 end HadwigerNelson.Plane
