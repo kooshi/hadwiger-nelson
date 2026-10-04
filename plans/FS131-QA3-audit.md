@@ -236,3 +236,54 @@ changes, and the statements added since (`Contact`'s and `Moves`'s moves, `stuck
 | `fail_colours` | "exactly" as "only" | M-R (planner's reading, § 8.2) |
 | `lemmaL`, `exists_three_le_multicolour`, `ts_t` | FS106-L, TS-T | M; `ts_t_trichromatic`, `ts_t_degree_three` are item 142's (K) |
 | `n4_fin`, `ray_chain`, `exists_oneSided_chain`, `rayLower_pencil` | FIN's strict bounds (with unit arcs, FS112-END keeps a bi-infinite chain's bounds strict) | M |
+
+### 3.4 After the message (2026-10-04)
+
+QA3-1 was filed as inventory item 268 and ruled in item 269: IM2 replaced the clause by `F'.coloursAt v ⊆ F.coloursAt v` in both copies on
+`fs131-w4m` (`de8842c6`; read: `Moves.lean` l. 265 now carries it, as `exists_shave_aux` l. 246 and `exists_rayMerge_aux` l. 257 do).
+
+### 3.5 Exact checks in Lean (scratch, against `fs131-w5`'s built oleans, read-only; under `scripts/slot.py --mem 12`)
+
+`data/fs131/qa3/QA3Checks.lean` (output `QA3Checks.out`, exit 0): (1) a germ pseudo-coloured `{a}` and `{c}` on one side forces `a = c` —
+`exists_endpoint`'s second disjunct of `hc` is dead (note 2.4 e); (2) `ringPt (w + e(β + π/2)) (β − π/2) = w` and (3) `ringPt (w − e(β + π/2))
+(β + π/2) = w` — `HornBoundsQR`'s two arcs start and end at the run vertex. **Planted fault**: (3) with `β − π/2` in place of the angle —
+**fired** (`QA3ChecksPlant.out`: "The `ring` tactic failed", exit 1).
+
+## Stage 4 — SAVED: the verdict
+
+### 4.1 In plain words
+
+I read **99 definitions** in the audited modules (41 in wave 5, 58 in wave 4), each against the sentence its docstring cites, and **31
+families of statement clauses** that restate a source in a Lean idiom (15 in wave 5, 16 in wave 4), trying for each an object the Lean admits and
+the source excludes, one the source admits and the Lean excludes, or a change of meaning by idiom. **97 of the definitions match their sources**
+(plain matches, matches with a reading the planner recorded and I checked, or forms that say less only where that is safe); two were known and
+ruled before I started (`IsRetArc`, now repaired, and `IsHoleOf`, with the planar job). **One clause was false: `exists_merge`'s**, which
+required every point off the rim of the merge's disc to gain no colour, though the merge recolours a region inside that disc by design — so no map
+could satisfy the conclusion whenever the hypotheses held. It went to Keryx at once and was fixed the same evening (items 268–269). **One minor
+definition says other than its source: `InMK`**, which bounds arcs per unit disc where `𝓜_K` bounds arcs per tile and tiles per unit disc; no
+theorem uses it. The other findings are precisions, none a defect.
+
+Wave 5, which the next implementers build on, came through with no new defect: its foundation (`Chain`), the terminal-map rows, the ring rows,
+the base's walk and Thomassen's graph theory all say what their sources say, with the readings the planners recorded.
+
+### 4.2 The findings, ranked by what rests on them
+
+| rank | finding | the fix, against its source | who |
+|---|---|---|---|
+| 1 | **QA3-1 `exists_merge` false as stated** (§ 3.1) — wave 4's moves lane and every wave-5 composition of the moves rest on it | `F'.coloursAt v ⊆ F.coloursAt v` for "types only shrink" (`plans/FS110-N-proof.md` l. 528) | **done**: IM2, item 269, `de8842c6` |
+| 2 | **QA3-2 `InMK` is `𝓜_K` only up to `K ↦ O(K²)`** (§ 3.2) — nothing rests on it today; a future statement with an explicit `K` (FS107-W-EQ-K, a radius uniform in `K`) would read the wrong class | either the source's three bounds — `(∀ a ∈ F.arcs, ∀ c ρ θ₀ θ₁, a = .circ c ρ θ₀ θ₁ → 1/K ≤ ρ) ∧ (∀ T, F.IsTile T → {a ∈ F.arcs ∣ (a.carrier ∩ closure T).Nonempty}.encard ≤ K) ∧ ∀ x, {T ∣ F.IsTile T ∧ (T ∩ ball x 1).Nonempty}.encard ≤ K` — or a docstring naming the class it is | the next implementer who touches `Plane/ValidMap/Basic`, or the planner of the first consumer |
+| 3 | note 2.4 f: **item 242's repair is bound both ways** — `cvb_pinch_connected` stays true only if the repaired `IsHoleOf` holds at every CVB hole (clusters included); `cvb_hole_disconnected` only if it holds nowhere else | a constraint for the design question already with the planar job | the planar-infrastructure job |
+| 4 | note 2.4 d: `linkage_dot_ne_zero`'s docstring says "both", the statement (rightly) says "one of" | the docstring sentence of § 2.4 d; the implementer of `bv_l3` / `l3_base` supplies the turning-point step (`λ₁, λ₂ ≠ 0` at a switch) | wave 5's next implementer |
+| 5 | note 2.4 a: no `ArcMap` predicate carries the source's WLOG "every arc separates two different colours"; phantom arcs make no statement of waves 4–5 false (checked through every hypothesis and conclusion that reads sectors, horns, inert arcs or `F(M) ∪ R(M)`) | optional: `F.Clean`, for a later statement to say it outright | none owed |
+| 6 | notes 2.4 c, e, b: `cv_class` (II) omits "`¬G_N ∧ ¬H_S`"; `exists_endpoint`'s `hc` has a dead disjunct (Lean-checked); `IsModification` makes `exists_red` hold at `k ≥ 7` by `sevenBrickMap` (the planner's recorded adversary) | optional | none owed |
+
+Known and still owed, not mine: items 251–252's sides clause is applied in `stuck_structure` (`fs131-w4c`, `f975677b`) but not yet in wave 5's
+`stuck_structure_ua` (`Terminal.lean` l. 63–64 on `fs131-w5`), owed by wave 5's next implementer.
+
+### 4.3 How the sample was chosen
+
+Everything in the audited modules was read except the constructions (`bowtie*`, `sevenBrick*`, `cusp*`, `halfDisc*`, `l60*`, `iso*`,
+`holed*`), which QA2 checked as models and YB3 built exactly; I re-derived the bowtie's sector picture at `N` (directions `[−67.4°, 45°]` colour
+3, `[45°, 135°]` colour 1, `[135°, 247.4°]` colour 4, `[247.4°, 292.6°]` colour 0: four colours, one sector each, no horn — `TerminalOn` there)
+and at `0` (`D_1(0)` the line `±a`, from out-type contacts of `CN`, `CS` at `±i`). The clauses read were those of every row statement and
+supporting lemma; the children implementers added were not.
