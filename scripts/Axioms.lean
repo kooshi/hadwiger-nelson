@@ -1889,6 +1889,30 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Arith.falconerFan_hom
 #print axioms HadwigerNelson.Arith.falconerFan_chromaticNumber
 
+/-! ## FS-131 wave 2's foundation (job FS131-K2) — covers, partial colourings and the suprema, CP colourings
+
+`Plane/Cover.lean`, `Plane/Suprema.lean`, `Plane/CPColouring.lean`: families of classes (admissible and maximal covers,
+selections, saturation), the inhabitant `sq9`, upper density and the four suprema `µ_k`, slack and tightness, CP
+colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No native evaluation. -/
+
+#print axioms HadwigerNelson.Plane.AeColouring.measurableSet_cls
+#print axioms HadwigerNelson.Plane.AeColouring.iUnion_cls
+#print axioms HadwigerNelson.Plane.AeColouring.pairwise_disjoint_cls
+#print axioms HadwigerNelson.Plane.AeColouring.isAeCover
+#print axioms HadwigerNelson.Plane.measurable_sq9Col
+#print axioms HadwigerNelson.Plane.abs_sub_lt_half_or_one_lt_of_sq9Index_eq
+#print axioms HadwigerNelson.Plane.sq9Col_ne_of_dist_eq_one
+#print axioms HadwigerNelson.Plane.sq9
+#print axioms HadwigerNelson.Plane.volume_ball_ne_zero
+#print axioms HadwigerNelson.Plane.upperDensity_univ
+#print axioms HadwigerNelson.Plane.upperDensity_empty
+#print axioms HadwigerNelson.Plane.AeColouring.isPartialColouring
+#print axioms HadwigerNelson.Plane.one_le_muZero
+#print axioms HadwigerNelson.Plane.upperDensity_ball_one
+#print axioms HadwigerNelson.Plane.measurable_shiftCol
+#print axioms HadwigerNelson.Plane.measurable_rotCol
+#print axioms HadwigerNelson.Plane.chiCP_le
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

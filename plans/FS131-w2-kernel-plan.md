@@ -82,3 +82,44 @@ each colour of `P(x)`; "bound at `x`" = contact), `plans/FS111-M2-regularity.md`
 `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, 2026-10-04:
 **OK** — 440 of 440 batches, 8 modules rebuilt, 8 m 12 s; the only warnings are wave 1's `declaration uses 'sorry'` (28 distinct lines,
 0 other warnings) (`build/gate/build/20261004T052044Z-1237531.log` in the worktree).
+
+## Stage 2 — SAVED: the foundation (`debruijn-domain-modeling`, invoked fresh)
+
+### 2.1 The model, and why this shape
+
+Three modules under `Proofs/HadwigerNelson/Plane/`, on the branch, sorry-free:
+
+| module | holds | the modeling decision |
+|---|---|---|
+| `Plane/Cover` | `AeLE`, `IsAdmissible`, `IsAeCover`, `IsMaximalCover`, `IsSelection`, `AeColouring.cls`; `unitShadow` (`F + S¹`), `IsRegularMUA`; one class: `essClosure` (`A*`), `essBoundary` (`∂_e`), `unitAnnulus` (`A_η(x)`), `IsFreeFor`, `IsContactFor`; a family: `essMulticolour` (`P(x)`), `Saturated`, `SaturatedPos`; inhabitant `sq9` | **a colouring's classes, a cover and a partial colouring are one object, a family `Fin k → Set ℂ`, read by predicates** — R7 is "a maximal cover with disjoint classes", DISC7 a maximal cover with overlaps, a selection is a colouring; three structures would need conversions at every one of those sentences. The class predicates stay on one set, as wave 1's `UnitPairsNull` does. `IsMaximalCover` is maximality in `AeLE` among admissible covers (the row's "maximal under inclusion up to null sets") |
+| `Plane/Suprema` | `upperDensity`, `bandPairSet`, `BandNull`, `BandFree`, `gridCell`, `IsGridUnion`, `IsPeriodicSet`, `IsPartialColouring`, `IsTiled`, `IsPeriodic`, `muZero`, `mu`, `muTile`, `muPer`, `AeColouring.HasSlack`, `AeColouring.Tight` | the four suprema exactly as FS106-TQ § 3 lists them, disjointness kept (the rows' "disjoint"; it is free for every supremum — a class-by-class difference keeps every class predicate — but the read-back stays literal). Two readings the derivations leave implicit are fixed and documented in the module: upper density is **centred at the origin, balls, `R → ∞`** (the suprema do not see the centre or the shape, a single family's density does); periodic is **`Lℤ²`-invariance** (Lemma P's lattice; narrower than "some lattice", so `lim µ^per = µ⁰` is the stronger statement). Limits in `ε` are `Tendsto … (𝓝[>] 0)` |
+| `Plane/CPColouring` | `CPColouring k`, `shiftCol`, `rotCol`, `RotationInvariant`, `chiCP` | **a CP colouring is its law on the canonical space** `ℂ → Fin k`: every clause of D-CP is a statement about the law, so no sample space (and no universe) is quantified over; FS129-OA1-NOPERLAW's "stationary random colouring, continuous in probability, proper almost surely on every unit pair" is the same structure. **No separate "stationary family"** object: SUPK's merged form drops SUP's attainment clause (its not-claimed line), the only consumer the opening plan named |
+
+The incidental structure refused: a structure per kind of family; a sample space in `χ_CP`; "kept", "fill", "boxes" and the
+example objects in the foundation (they are single rows' vocabulary and live in the row modules).
+
+### 2.2 Validation (the seams)
+
+- `sq9 : AeColouring 9` — the half-open squares of side `1/2` coloured `(⌊2x⌋ mod 3, ⌊2y⌋ mod 3)` are **proper at every unit pair**
+  (`sq9Col_ne_of_dist_eq_one`: one square gives distance `< √2/2`; equal indices mod 3 with different squares give a coordinate gap
+  `> 1`), so `AeColouring 9`, `IsAeCover sq9.cls`, `IsPartialColouring sq9.cls` are inhabited sorry-free, and `1 ≤ muZero 9`. The
+  opening plan's note "inhabitant: none cheap" is retired. Spec: `sq9` separates `0` and `1/2`, identifies `0` and `3/2`.
+- `upperDensity univ = 1`, `upperDensity ∅ = 0`, **adversary** `upperDensity_ball_one` (a bounded set has density `0` — catches a
+  limit taken at `R → 0`). `BandFree`: the empty family is band-free; **adversary**: `univ` is not, at any `ε ≥ 0`. `gridCell 1 0`
+  holds `1/2`, not `1` (half-open). `IsPeriodicSet L univ`; `(0, 1) ∈ bandPairSet univ 0`. `HasSlack (−1)` holds for every colouring
+  (the band is empty — `HasSlack` reads the band).
+- `essBoundary univ = ∅`; every point is a contact point of `univ`; **adversary**: none of `∅`.
+- `IsEmpty (CPColouring 0)`; **adversary** `IsEmpty (CPColouring 1)`; so `2 ≤ chiCP`. A CP inhabitant is a theorem:
+  `Plane/Stationary`'s leaf `sq9CP` (sq9 under a uniform random translation of its period torus `(3/2)ℤ²`; proper at every pair
+  because `sq9` is).
+- Maximal covers: inhabited by FS111-M-SATC's first clause (a leaf; `sq9` lies below one).
+
+### 2.3 The gate on this commit
+
+- `./scripts/build.sh` under the slot (`--mem 40 --cpus 8`, `MEMMAX=40G BATCH=4`): **OK** — 440 of 440 batches, 4 modules rebuilt (the three
+  and `Proofs`), no warning in the three new modules (the 7 modules with warnings are wave 1's `sorry`), 8 m 9 s
+  (`build/gate/build/20261004T053542Z-1335267.log`).
+- `#print axioms` of the 17 new records (`scripts/Axioms.lean`'s new section, run against the three modules): every one
+  `[propext, Classical.choice, Quot.sound]`. (`scripts/axioms.sh` over the branch fails on wave 1's skeleton by design; the branch's
+  gate is the implementer's.)
+- `tools/check_architecture.py`: exit 0 (192 module rows, 0 import mismatches).
