@@ -1,24 +1,27 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-04 by Keryx at Kooshi's word ("Please update the handoff, and I'll compact."). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–256 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–265 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-04):** inventory items run to **256**. **Landed on `main`, held in the kernel**: wave 1,
-> wave 3 (item 157), Lebesgue's covering theorem (151), `localSectors` (171); the axiom gate's IMPORTED section (160). **Staffing**: four Opus slots for the
-> backlog (Kooshi, item 211; no fifth — item 255). **Running (4)**: FS131-I2n (wave 2's last 5 leaves → carriers, gate, landing; item 234), FS131-I4k (wave 4's
-> `BaseSteps` + `UnitArc`, 11 left; item 245), FS131-IC5 (wave 4's `Contact`: `stuck_structure`, with ruling 252's sides clause and ruling 254's fence; item 250),
-> FS131-IM1 (wave 4's three moves in `Plane/ValidMap/Moves`, moving `Contact`'s head block into `Plane/ValidMap/Cone` on `fs131-w4m`; items 248, 254). **Next slot**:
-> **FS131-QA3, the definitions audit, takes wave 2's slot when I2n hands back** (items 255–256; brief `data/fs131/briefs/FS131-QA3-definitions.md`, gated, ready);
-> then wave 5's next implementer (paused at 44 leaves on `fs131-w5`; must apply ruling 252 to `stuck_structure_ua`), then the planar-infrastructure job (seven
-> leaves incl. `IsHoleOf`'s repair; items 239, 242, 247). **Wave 4's merge** when I4k, IC5 and IM1 are done: `fs131-w4m` → `fs131-w4c` (the three moves become
-> citations), then `fs131-w4c` → `fs131-w4`, the gate (vacuity note on `stuck_structure`'s hypothesis class, item 252), the landing; then Woodall's landing job
-> (item 190). **Held for the filing**: rows 134/135/137 from E4 § 5.4 (item 227), the Frontier clauses, the Proof Atlas, the stale `ARCHITECTURE.md` prose
-> counts, six finished worktrees' removal after rescuing their cited gate logs (~50 GB). **On each hand-back**: check the build log, `sorry` count and axioms
-> print; log; brief a successor by script from the previous brief (every implementer Opus, `model: "opus"`), gate, launch. **On a landing**: read the gate logs,
-> file counts (`CLAUDE.md` § Trust ledger, § The gate, `scripts/vacuity-baseline.txt`, `GATE_CHANGES`), run `gate_report.py` and the fact audit **before**
-> committing, notify Kooshi by push. Kooshi's reporting rule: no per-step reports; push notifications only for what he must know (memory `reporting-cadence`).
-> Tool defect owed: the brief gate passes a quotation under a wrong § heading (items 206, 215; agent-forge repro owed).
+> **Latest (2026-10-04, late evening):** inventory items run to **265**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157), Lebesgue's covering
+> theorem (151), `localSectors` (171); the axiom gate's IMPORTED section (160). **Staffing**: four Opus slots for the backlog (item 211; no fifth, item 255).
+> **Running (4)**: FS131-I2n (wave 2's last leaves → carriers, gate, landing; item 234; it also fixes the axiom self-test's four state-tied controls, items
+> 259–260), FS131-IC5 (wave 4's `Contact`: `stuck_structure`; items 250, 252; fenced off `Contact`'s d4f946ae l. 1–2593, items 254, 263), **FS131-IM2** (wave 4's
+> moves on `fs131-w4m`: the second prefix move into `Cone`, item 263, then SHAVE, RAY, MERGE; items 261–263), **FS131-QA3** (the definitions audit, read-only;
+> launched in I4k's slot, item 265). **Next slot (when I2n hands back)**: the I4 lane's successor on `fs131-w4` — `UnitArc`'s `bend_toward`, `bend_away`,
+> `flankQ_upper`, `flankQ_lower`, `nb4p`, and `pair_i` (now with `h3 : dist u₁ u₂ < 3`, ruling 258; its erratum draft is in I4k's report); `n3_end` waits for the
+> merge (item 264). Then wave 5's next implementer (paused at 44 leaves on `fs131-w5`; applies ruling 252 to `stuck_structure_ua`; `l3_base` discharges `pair_i`'s
+> `h3` from `ht'`, item 258), then the planar-infrastructure job. **Wave 4's moves are its longest path** (about seven to eight sessions, item 261); once SHAVE's
+> machinery lands, weigh RAY and MERGE in parallel. **Wave 4's merge** when IC5 and IM2's line are done: `fs131-w4m` → `fs131-w4c` (the three moves become
+> citations), then `fs131-w4c` → `fs131-w4` (keep `localSectors_disj` in wave 3's `LocalStructure`, item 264), the gate (re-run the axiom self-test, item 260;
+> vacuity note on `stuck_structure`, item 252), the landing; then Woodall's landing job (item 190). **Held for the filing**: rows 134/135/137 from E4 § 5.4 (item
+> 227); errata to FS112-N3-PAIRS (I4k's draft, item 264) and N4-RAY's route (item 262 (a)); the Frontier clauses; the Proof Atlas; the stale `ARCHITECTURE.md`
+> prose counts; six finished worktrees' removal after rescuing their cited gate logs. **Tool defects owed**: the brief gate passes a quotation under a wrong §
+> heading (items 206, 215); the axiom self-test's hard-coded counts (item 259); `tools/fs131_k4_decls.py`'s `_root_` names (item 262 (d)). **On each hand-back**:
+> check the build log, `sorry` count and axioms print; log; brief a successor by script from the previous brief (Opus), gate, launch. **On a landing**: read the
+> gate logs, file counts (`CLAUDE.md` § Trust ledger, § The gate, `scripts/vacuity-baseline.txt`, `GATE_CHANGES`), run `gate_report.py` and the fact audit
+> **before** committing, notify Kooshi by push. Reporting: no per-step reports; push notifications only for what he must know (memory `reporting-cadence`).
 
 ## 1. Read first
 
