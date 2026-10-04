@@ -575,3 +575,5 @@ One line per item with its source; no narration. Each line is ticked done or dec
      "meet nowhere below the answer" (item 58); Poros's FS-128 card wording (item 43); the demand list's J10 (item 138); a partial counterexample
      to the §IQ rule — the audit's results came from the card's existence form, step by step, and neither pass-1 reader tallied the steps that
      need a new kind of input (so the card's hunch — at least a third of the steps need a new kind — went unscored).
+147. **FS-123's banner filed** by Keryx, verbatim from `plans/FS129-Z2-record.md` § Stage 4, under the title of `plans/STUB-qfree-ring.md`, before
+     FS129-P1 reads it.

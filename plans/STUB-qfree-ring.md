@@ -1,5 +1,12 @@
 # FS-123 — the (Q)-free ring: does any four-colour vertex whose ring carries no (Q) arc survive past radius 1 + ε, in any class? (stub)
 
+> **Re-aimed 2026-10-03 (FS-129's audit).** Question 1 is answered yes in the non-Siamese class, simple or not: bending a fragment on a whole-tile
+> restriction of radius at most `√3` keeps its class and leaves only (Q) arcs on the ring, so no non-Siamese valid six-coloured fragment on a closed disc
+> of radius above 1 about a vertex of at least four colours has a ring carrying no (Q) arc (FS129-OR1-QFREE, simple; FS129-SR3-QFREE-NS, without
+> simplicity; derived, one mind, kernel pending; `plans/FS129-derivation.md`). Question 2 is moot. **This stub's question is now question 3's Siamese
+> half**: does any Siamese valid six-coloured fragment about a vertex of at least four colours whose ring carries no (Q) arc survive past `1 + ε`?
+> FS129-OR1-QFREE-CLASS reduces it to the ring with no arc of `Γ`. The bearing section's paragraph "At FS-129's audit" has the detail.
+
 *Minted 2026-10-03 by FS-116's close, part 2 (FS116-Z2; `plans/FS116-Z2-close.md` stage 3), carrying `plans/FS116-close-inventory.md` items 126 and 136
 (the invention signal on the bends), the (Q)-free half of FS116-C114-LOCAL-F's case list (`plans/FS116-Z1-close.md` § 2.6), FS114-N7-3T's class with its
 open-cap family OC, and the Siamese and non-simple forms of FS116-Y4-EMPTY. FS-116's successor; siblings FS-124 (`plans/STUB-q-ring.md`, the (Q) rings
