@@ -118,7 +118,16 @@ theorem iccPairNull_of_forall_lt {A : Set ℂ} {a b : ℝ} (h : ∀ a', a < a' �
       exact absurd (hq.2.2.1.trans hq.2.2.2) (not_le.2 this)
 
 theorem unitPairsNull_iff_pairMass {A : Set ℂ} : UnitPairsNull A ↔ ∀ R : ℝ, pairMass A R 1 = 0 := by
-  sorry
+  constructor
+  · intro h R
+    refine measure_mono_null (fun q hq => ?_) h
+    refine ⟨hq.1.1, ?_⟩
+    simpa using hq.2
+  · intro h
+    refine measure_mono_null (t := ⋃ n : ℕ, {q : ℂ × ℝ | q.1 ∈ A ∩ ball 0 n ∧ q.1 + ((1 : ℝ) : ℂ) * e q.2 ∈ A})
+      (fun q hq => ?_) (measure_iUnion_null fun n => h n)
+    obtain ⟨n, hn⟩ := exists_nat_gt ‖q.1‖
+    refine mem_iUnion.2 ⟨n, ⟨hq.1, by simpa using hn⟩, by simpa using hq.2⟩
 
 /-- **Continuity of the pair mass in the radius** (I2c's finding): `L¹` continuity of translation
 (`MeasureTheory.Lp.instContinuousVAddDomAddAct`, or `MemLp.exists_hasCompactSupport_eLpNorm_sub_le` and uniform
@@ -157,10 +166,13 @@ theorem AeColouring.exists_pos_not_iccPairNull (c : AeColouring k) : ∃ a > 0, 
 /-- A band-null measurable class (`0 < ε < 1`) has null unit pairs (`pairMass_eq_zero_of_iccPairNull` at `r = 1`). -/
 theorem bandNull_unitPairsNull {A : Set ℂ} (hA : MeasurableSet A) {ε : ℝ} (hε0 : 0 < ε) (hε1 : ε < 1)
     (h : BandNull A ε) : UnitPairsNull A := by
-  sorry
+  have hI : IccPairNull A (1 - ε) (1 + ε) := (bandNull_iff_iccPairNull A ε).1 h
+  have hP := pairMass_eq_zero_of_iccPairNull hA (by linarith) (by linarith) hI
+  exact unitPairsNull_iff_pairMass.2 fun R => hP R 1 ⟨by linarith, by linarith⟩
 
 theorem mu_le_muZero (k : ℕ) {ε : ℝ} (hε0 : 0 < ε) (hε1 : ε < 1) : mu k ε ≤ muZero k := by
-  sorry
+  refine iSup₂_le fun C hC => le_iSup₂_of_le (f := fun C (_ : IsPartialColouring C ∧ ∀ j, UnitPairsNull (C j)) =>
+    upperDensity (⋃ j, C j)) C ⟨hC.1, fun j => bandNull_unitPairsNull (hC.1.1 j) hε0 hε1 (hC.2 j)⟩ le_rfl
 
 /-- A band-free class is band-null. -/
 theorem bandNull_of_bandFree {A : Set ℂ} {ε : ℝ} (h : BandFree A ε) : BandNull A ε := by
@@ -497,23 +509,61 @@ theorem not_keptAt_of_half_lt {A : Set ℂ} (hA : MeasurableSet A) (hnull : Unit
 /-- Stationarity moves a pair to the origin. -/
 theorem CPColouring.law_ne_shift (c : CPColouring k) (x y : ℂ) :
     c.law {f | f x ≠ f y} = c.law {f | f 0 ≠ f (y - x)} := by
-  sorry
+  have hm : MeasurableSet {f : ℂ → Fin k | f 0 ≠ f (y - x)} :=
+    (measurableSet_eq_fun (measurable_pi_apply 0) (measurable_pi_apply (y - x))).compl
+  conv_rhs => rw [← c.map_shift x]
+  rw [Measure.map_apply (measurable_shiftCol x) hm]
+  congr 1
+  ext f
+  simp [shiftCol]
 
 /-- **Uniform continuity in probability** (stationarity and `tendsto_ne` at `0`). -/
 theorem CPColouring.exists_unif (c : CPColouring k) {δ : ENNReal} (hδ : 0 < δ) :
     ∃ r > (0 : ℝ), ∀ x y : ℂ, dist x y < r → c.law {f | f x ≠ f y} < δ := by
-  sorry
+  obtain ⟨r, hr, h⟩ := Metric.eventually_nhds_iff.mp ((c.tendsto_ne 0).eventually (gt_mem_nhds hδ))
+  refine ⟨r, hr, fun x y hxy => ?_⟩
+  rw [c.law_ne_shift]
+  refine h ?_
+  rw [dist_eq_norm, sub_zero, ← dist_eq_norm, dist_comm]
+  exact hxy
 
 /-- The lower-left corner of the grid cell of side `h` containing `x`. -/
 noncomputable def gridPoint (h : ℝ) (x : ℂ) : ℂ := ((h * ⌊x.re / h⌋ : ℝ) : ℂ) + ((h * ⌊x.im / h⌋ : ℝ) : ℂ) * I
 
 theorem dist_gridPoint_lt {h : ℝ} (hh : 0 < h) (x : ℂ) : dist (gridPoint h x) x < 2 * h := by
-  sorry
+  have h1 : ∀ t : ℝ, |h * ⌊t / h⌋ - t| < h := by
+    intro t
+    have a := Int.floor_le (t / h)
+    have b := Int.lt_floor_add_one (t / h)
+    have a' : h * ⌊t / h⌋ ≤ t := by
+      have := mul_le_mul_of_nonneg_left a hh.le
+      rwa [mul_div_cancel₀ _ hh.ne'] at this
+    have b' : t < h * ⌊t / h⌋ + h := by
+      have := mul_lt_mul_of_pos_left b hh
+      rw [mul_div_cancel₀ _ hh.ne', mul_add, mul_one] at this
+      exact this
+    rw [abs_lt]; constructor <;> linarith
+  rw [dist_eq_norm]
+  calc ‖gridPoint h x - x‖ ≤ |(gridPoint h x - x).re| + |(gridPoint h x - x).im| :=
+        Complex.norm_le_abs_re_add_abs_im _
+    _ < h + h := by
+        refine add_lt_add ?_ ?_
+        · simpa [gridPoint] using h1 x.re
+        · simpa [gridPoint] using h1 x.im
+    _ = 2 * h := by ring
 
 /-- `(f, x) ↦ f (gridPoint h x)` is jointly measurable (`gridPoint h` takes countably many values on measurable cells). -/
 theorem measurable_eval_gridPoint {h : ℝ} (hh : 0 < h) :
     Measurable fun p : (ℂ → Fin k) × ℂ => p.1 (gridPoint h p.2) := by
-  sorry
+  have _ := hh
+  have h1 : Measurable fun x : ℂ => (⌊x.re / h⌋, ⌊x.im / h⌋) :=
+    (Int.measurable_floor.comp (Complex.measurable_re.div_const h)).prodMk
+      (Int.measurable_floor.comp (Complex.measurable_im.div_const h))
+  have h2 : Measurable fun q : (ℂ → Fin k) × (ℤ × ℤ) =>
+      q.1 (((h * q.2.1 : ℝ) : ℂ) + ((h * q.2.2 : ℝ) : ℂ) * I) :=
+    measurable_from_prod_countable_left fun ab =>
+      measurable_pi_apply (((h * ab.1 : ℝ) : ℂ) + ((h * ab.2 : ℝ) : ℂ) * I)
+  exact h2.comp (measurable_fst.prodMk (h1.comp measurable_snd))
 
 /-- **The modification** (FS106-TQ § 2.3 step 1): scales `h_m` with `P(f x ≠ f (gridPoint h_m x)) ≤ 2^{−m}`
 (`CPColouring.exists_unif`), Borel–Cantelli (`MeasureTheory.measure_limsup_atTop_eq_zero`) at each `x`, and `ct f x` the
@@ -1261,15 +1311,39 @@ theorem exists_tight_iff_chiM0_le : (∃ c : AeColouring k, c.Tight) ↔ chiM0 �
 
 /-- **FS129-SR2-SUPK** (carrying FS106-SUP's first clause, at every `k`): `µ_k⁰ = lim_{ε→0} µ_k(ε)`. -/
 theorem tendsto_mu (k : ℕ) : Tendsto (mu k) (𝓝[>] 0) (𝓝 (muZero k)) := by
-  sorry
+  rw [tendsto_order]
+  constructor
+  · intro a ha
+    obtain ⟨d, had, hd⟩ := exists_between ha
+    filter_upwards [eventually_le_muPer k hd] with ε hε
+    exact lt_of_lt_of_le had (hε.trans ((muPer_le_muTile k ε).trans (muTile_le_mu k ε)))
+  · intro a ha
+    filter_upwards [Ioo_mem_nhdsGT (by norm_num : (0 : ℝ) < 1)] with ε hε
+    exact lt_of_le_of_lt (mu_le_muZero k hε.1 hε.2) ha
 
 /-- **FS129-SR2-SUPK**: `µ_k⁰ = lim_{ε→0} µ_k^tile(ε)`. -/
 theorem tendsto_muTile (k : ℕ) : Tendsto (muTile k) (𝓝[>] 0) (𝓝 (muZero k)) := by
-  sorry
+  rw [tendsto_order]
+  constructor
+  · intro a ha
+    obtain ⟨d, had, hd⟩ := exists_between ha
+    filter_upwards [eventually_le_muPer k hd] with ε hε
+    exact lt_of_lt_of_le had (hε.trans (muPer_le_muTile k ε))
+  · intro a ha
+    filter_upwards [Ioo_mem_nhdsGT (by norm_num : (0 : ℝ) < 1)] with ε hε
+    exact lt_of_le_of_lt ((muTile_le_mu k ε).trans (mu_le_muZero k hε.1 hε.2)) ha
 
 /-- **FS129-SR2-SUPK**: `µ_k⁰ = lim_{ε→0} µ_k^per(ε)`. -/
 theorem tendsto_muPer (k : ℕ) : Tendsto (muPer k) (𝓝[>] 0) (𝓝 (muZero k)) := by
-  sorry
+  rw [tendsto_order]
+  constructor
+  · intro a ha
+    obtain ⟨d, had, hd⟩ := exists_between ha
+    filter_upwards [eventually_le_muPer k hd] with ε hε
+    exact lt_of_lt_of_le had hε
+  · intro a ha
+    filter_upwards [Ioo_mem_nhdsGT (by norm_num : (0 : ℝ) < 1)] with ε hε
+    exact lt_of_le_of_lt (((muPer_le_muTile k ε).trans (muTile_le_mu k ε)).trans (mu_le_muZero k hε.1 hε.2)) ha
 
 /-- FS-103's M1, hard direction, as the named hypothesis FS106-EQ's `χ_CP` clause reads (outside the backlog). -/
 def Row130M1 : Prop := ∀ k : ℕ, chiM0 ≤ k → chiCP ≤ k
@@ -1277,7 +1351,11 @@ def Row130M1 : Prop := ∀ k : ℕ, chiM0 ≤ k → chiCP ≤ k
 /-- FS-103's M1, easy direction (TQ § 2.3, steps 1 and 3): a CP `k`-colouring has a jointly measurable modification whose
 realisations are a.e.-proper, so `χ_m⁰(ℝ²) ≤ χ_CP(ℝ²)`. Formalized here; no hypothesis. -/
 theorem chiM0_le_chiCP : chiM0 ≤ chiCP := by
-  sorry
+  refine le_iInf₂ fun k ⟨c⟩ => ?_
+  obtain ⟨ct, hct, hmod⟩ := c.exists_modification
+  obtain ⟨f, hf⟩ := (c.ae_unitPairsNull_of_modification hct hmod).exists
+  have hmeas : Measurable (ct f) := hct.comp (measurable_const.prodMk measurable_id)
+  exact chiM0_le ⟨ct f, hmeas, hf⟩
 
 /-- **FS106-EQ**, (a) ⟺ (c), and FS106-COMP's first clause as (c) ⟹ (a) at every `k` (SR2 item 11):
 `χ_m⁰(ℝ²) ≤ k ⟺ µ_k⁰ = 1`. -/
