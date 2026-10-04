@@ -197,6 +197,16 @@ Its discoverer declined the credit for depth and named this instead, which is wh
 
 **The consolidation run's instance:** `[Fischer1994]`'s value was restated in the two Geombinatorics surveys of the direction, `[Johnson2000]` p. 176 and `[Johnson2006]` p. 214 — the second being the survey `[Soifer2024]` ch. 11 sends readers to — and both left the four-colour question open (2000 poses the family `m ≡ 11 (mod 12)`; 2006 asks whether any `m` needs four, quoted in `LEDGER.md` row 73's prior art). And Theorem A's construction was `[Fischer1990]` Thm 1(i), its first instances `[BendaPerles2000]`'s (1976), held and marked read since 2026-09-08 and credited only with 'the unit argument' — the held-paper clause once more; and `[Madore2015]`'s footnote 5, held and read since FS-18, had pointed the bridge at `[BendaPerles2000]` all along, as `[Fischer1990]` p. 182 had in 1990.
 
+*FS129-Z2, FS-129's record; the mechanism inside the corpus, found by row-by-row comparison and by no mention count:* **one lemma proved three
+times, in two eras** — FS106-DIAM (iii), FS111-V0-CLOSE and FS116-V5-NE1's first clause are FS129-SR2-CLOSURE (`plans/FS129-SR2-audit.md` § 2.2);
+**one law found three times** — the two-circle identity at FS114-YB4-2ND (FS114-Y5-PXKILL's pair), at FS116-V6-HUG and -V6-ADJ, and at FS116-Y4-FLANK's
+least-curved case, one lemma as FS129-SR1-TWOCIRC (`plans/FS129-MR1-audit.md` § Mechanism 3a; Kooshi's "where else can we use that identity?",
+`plans/FS116-close-inventory.md` item 142); **one theorem re-derived uncited** — FS84-S1e (2026-09-25) is the four-colour form of FS129-MA1-NOAFF5
+(`plans/FS129-SA1-audit.md` § 4.2); **three GAPs answered elsewhere with no link back** (FS111-M-PINCH l. 442, FS112-SIX l. 49, FS116-S1-KAPPA l. 816;
+`plans/FS129-SR3-audit.md` § 4.1), and FS110-A3-HOLE's (`plans/FS129-MR1-audit.md` lead (a)). FS129-SR2's reading, verbatim: "most of the extra merges
+are the same lemma proved in two eras' vocabularies (density sets against open tiles; maps against fragments), which no pass before this one compared
+row by row".
+
 ## G50 — Read what the search found
 
 *M6, from G50, after “…same day; mark reading per section.”:*
@@ -456,6 +466,11 @@ FS116-O1-YESLIM (held, 2026-10-03) — run on exact valid fragments, the weak-* 
 
 "FS116-Y4 (2026-10-03): the Γ-free four-colour vertex dies at 1 + ε by G83's straddle — the double tip's two flank tiles, of one colour, forced along ω(y_0) and ω(y_1) within 1; round 3's FS116-Y3-TIGHT had stated both edges and used each only against a far lens vertex, so the class was worked for a round as possible"
 
+*FS129-Z2, FS-129's record; `plans/FS129-MR1-audit.md` § Table of misses, verbatim:* "G83's straddle / V6-HUG's argument | FS-124 ring types with two
+adjacent change points sharing a sole tip … | composition (an instance filed where the class was carried) | the double tip dies at `1 + ε` on every
+ring when the two outer tip germs are off (Q) arcs | yes — FS129-MR1-DOUBLETIP". The straddle held, its argument carried a wider class than its
+statement named (rings with no arc of `Γ`), and it was carried there only by the audit — FS116-Y4's pattern, one milestone later.
+
 ## G84 — Contact is the regularity mechanism
 
 *FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, `plans/FS116-S1-proof.md` § 1.3, verbatim:*
@@ -467,6 +482,12 @@ FS116-O1-YESLIM (held, 2026-10-03) — run on exact valid fragments, the weak-* 
 *FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, `plans/FS116-Z1-close.md` § 2.4 F2, `plans/FS116-Z2-close.md` § 1.5:*
 
 **its killing test fired once.** The bends collision stood on record before and during FS-116 — `plans/FS114-NB6-verification.md` § 1b.0 and `plans/FS114-NB5-verification.md` § 1b.3 on one side, FS114-N5-GRING's *uses only* line, `plans/FS116-Y4-construction.md` § 3.3 and FS116-Y4-EMPTY's *not claimed* line on the other — and no round reported it; part 1 of the close found it reading two passages side by side. The minds were on the lookout and wrote "none seen" (the plan, every record's G87 line). One firing is not a verdict on the rule; it says the lookout reads collisions inside one record, not between a record and an older one.
+
+*FS129-Z2, FS-129's record:* both collisions on file dissolved into scope defects, with no side picked first. FS-116's bends signal: side 1 holds for
+the whole-tile restriction of radius at most `√3`, side 2 for maps — "the two sides are about a map and a fragment and do not contradict"
+(`plans/FS129-SR1-audit.md` § 2.3); its repair, read on the definition of a tile, closed FS-123's first question (FS129-OR1-QFREE). Poros's route-R
+signal: "side 1 is a stub's bearing sentence whose conclusion exceeds its reason" — a Condition-5 theorem stated without Condition 5
+(`plans/FS129-OR1-audit.md` § J15).
 
 ## `CLAUDE.md` § Counter-priors
 

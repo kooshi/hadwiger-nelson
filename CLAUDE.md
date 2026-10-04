@@ -103,9 +103,8 @@ skipping six): *"You can remove the old goals. We blaze the trail now."*
 **The program** (`plans/STUB-regularity-wall.md`): **FS-106, the regular half — closed** (rows 131–132); **FS-107, stability — closed** (row 133):
 Voronov's contradiction survives a free colour if a complementary junction pair is forced at a scale bounded below, and vanishing holes at bounded
 complexity are a tight six-map; **FS-110, the tangency seam — closed** (row 134: none under Condition 5); **FS-112, the unit-arc half — closed** (rows 135–136);
-**FS-114, the unit-arc question — closed** (rows 137–138: one local exclusion about a four-colour vertex suffices for the NO); **FS-116, the local exclusion — closed** (rows 145–148: the Γ-free four-colour vertex dies at `1 + ε`); its successors **FS-123,
-the (Q)-free ring**, **FS-124, the (Q) ring**, **FS-125, the saturated class**;
-**FS-117, route T's count** (the non-Siamese part); **FS-115, the stuck ray** (the density form only); **FS-111, the cone scale and the regularity step — closed** (rows 139–141); its successors **FS-120, the pinch at a junction**, **FS-121, the map step — closed** (rows 142–144); its successors **FS-126, curved pencils**, **FS-127, lateral extent**, **FS-128, the six-colour rungs**, **FS-122, the forced pair**; **Lean throughout** — MR in full
+**FS-114, the unit-arc question — closed** (rows 137–138: one local exclusion about a four-colour vertex suffices for the NO); **FS-116, the local exclusion — closed** (rows 145–148: the Γ-free four-colour vertex dies at `1 + ε`); its successors **FS-123, the Siamese class**, **FS-124, the (Q) ring**, **FS-125, the saturated class**;
+**FS-117, route T's count** (the non-Siamese part); **FS-115, the stuck ray** (the density form only); **FS-111, the cone scale and the regularity step — closed** (rows 139–141); its successors **FS-120, the pinch at a junction, and the cover route at five**, **FS-121, the map step — closed** (rows 142–144); its successors **FS-126, curved pencils**, **FS-127, lateral extent**, **FS-128, the top colour, at five and six**, **FS-122, the forced pair**; **Lean throughout** — MR in full
 (Einsiedler–Lindenstrauss, Einsiedler–Fish), the collapse, the measurable chain, the map argument.
 
 ### Counter-priors — read before pricing anything (Kooshi, 2026-09-26)
@@ -197,9 +196,9 @@ rewritten in place at every filing; a milestone whose filing does not update thi
 results add up to lives in § Grokkings; both point (`row 68`, `G56`) and never retell.*
 
 *Last updated: 2026-10-03 — **Workflow 3.1**: a milestone moves Not started → Opened → Derived → Closed, and is Closed only when its Lean
-module passes the gate; milestones closed before it keep the word, and their hand results are the Lean backlog. Last filed: **FS-116,
-the local exclusion**, and **FS-121, the map step**, both closed undecided (rows 142–148; `plans/FS116-Z2-close.md`,
-`plans/FS121-Z1-close.md`). Earlier closes: `plans/FRONTIER-STUBS.md`'s closed list, and git.*
+module passes the gate; milestones closed before it keep the word, and their hand results are the Lean backlog. Last filed: **FS-129, the cross-application audit**, Derived (rows 149–154; `plans/FS129-derivation.md`, 44 entries, each derived, one mind); before
+it **FS-116, the local exclusion**, and **FS-121, the map step**, both closed undecided (rows 142–148). Earlier closes: `plans/FRONTIER-STUBS.md`'s
+closed list, and git.*
 
 ### Where the problem stands
 
@@ -221,19 +220,27 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
 local–global conjecture's proved range, measure rigidity and the collapse — are `plans/WHERE-THE-PROBLEM-STANDS.md`, numbered as cited
 across `plans/` and read by address; § Grokkings' theory in one paragraph summarizes them. Item 31 is the frontier:
 
-31. **The regularity wall, verified; the question is stability; at bounded complexity, one four-colour vertex** (§ The aim; rows 131–141,
-   145–148, 142–144; FS-117, FS-120, FS-122–FS-128). Regular classes need seven almost everywhere — slack, polygons, convex
-   tilings, nice maps — and maps six; closed classes are the tight question itself. With no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131). At bounded
-   complexity that is whether a tight six-map exists (row 133): under Condition 5 none does (row 134); with unit arcs every one has a vertex of at
-   least four colours (rows 135, 137), so one exclusion at an explicit radius, above `φ²/√2`, about such a vertex suffices for the NO; where the count
-   gives six room the configurations die at `√3` or `1 + ε` but for named cases, and both printed positives are part of no such map (rows 136, 138).
-   FS-116 (rows 145–148): valid fragments on discs of every radius give `χ(ℝ²) ≤ 6` with no MR, so that exclusion decides both ways;
-   a four-colour vertex whose ring carries no boundary arc dies at `1 + ε` (non-Siamese, simple), and the ring's change points off (Q) arcs are
-   four-colour vertices; open: (Q)-free rings with (R2) arcs, (Q) rings, five- and six-colour vertices, the saturated cross off its class, Siamese
-   fragments. The doors are two routes, not halves (row 139, two minds): seven is the NO's hole bound made uniform in the complexity bound, so
-   FS-114's NO reaches it only through the map step — or through route R's forced pair, where the NO is idle — and each is the answer restated;
-   route M's rungs hold down to the pinch at a junction (rows 140–141; FS-120–FS-122). On route M's map step (rows 142–144), at every `k`: honest saturated ladders end inward at (Q) or (R2) arcs and never outward, periodic classes have only segments and (Q) arcs, and honesty is free; what is open is curved tangent interfaces (one question for three claims), the singular set at lateral extent, and the top colour at six, the last the answer restated given a NO.
-   Bearing on the answer: none moved; half of door (A) closed, the other half one local statement, now a case list (FS-123–FS-125).
+31. **The regularity wall, verified; the question is stability; at bounded complexity, one four-colour vertex** (§ The aim; rows 131–154; FS-117,
+   FS-120, FS-122–FS-128, FS-130). Regular classes need seven almost everywhere — slack, polygons, convex tilings, nice maps — and maps six; closed
+   classes are the tight question itself. With no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131). At bounded complexity that is whether a tight six-map
+   exists (row 133): under Condition 5 none does (row 134); with unit arcs every one has a vertex of at least four colours (rows 135, 137), so one
+   exclusion at an explicit radius, above `φ²/√2`, about such a vertex suffices for the NO; where the count gives six room the configurations die at
+   `√3` or `1 + ε` but for named cases, and both printed positives are part of no such map (rows 136, 138). FS-116 and FS-129 (rows 145–150, 153):
+   valid fragments on discs of every radius give `χ(ℝ²) ≤ 6` with no MR, so that exclusion decides both ways; in the non-Siamese class, simple or not,
+   a four-colour vertex whose ring carries no (Q) arc dies at `1 + ε` (row 149: FS-112's bends, run on a whole-tile restriction of radius at most `√3`,
+   keep the class and leave only (Q) arcs); the ring's change points off (Q) arcs are four-colour vertices, and two of them 60° apart whose far germs
+   lie off (Q) arcs share no sole tip and no sole outer colour (row 150); in the non-Siamese simple class DISC-F follows from the exclusion (row 153);
+   open: (Q) rings (SEMI-PAR3, the disk's corner, crossed reciprocity, the recurrence, FS114-K1's residues), five- and six-colour vertices, the
+   saturated cross on rings with (Q) arcs, Siamese fragments. The doors are two routes, not halves (row 139, two minds): seven is the NO's hole bound
+   made uniform in the complexity bound, so FS-114's NO reaches it only through the map step — or through route R's forced pair, where the NO is idle —
+   and each is the answer restated; route M's rungs hold down to the pinch at a junction (rows 140–141; FS-120–FS-122). On route M's map step (rows
+   142–144), at every `k`: honest saturated ladders end inward at (Q) or (R2) arcs and never outward, periodic classes have only segments and (Q) arcs,
+   and honesty is free; what is open is curved tangent interfaces (one question for three claims), the singular set at lateral extent, and the top
+   colour at six, the last the answer restated given a NO; at five, given REG-J′₅, the honest existence form of C-SAT-T is equivalent to
+   `χ_m⁰(ℝ²) ≥ 6` (row 154). FS-104's routes (b) and (c) are narrowed from the arithmetic era: a slack residue target kills linear identities and
+   confines Falconer fans, and route (b)'s literal reading is empty (rows 151–152). Bearing on the answer: no value moved; of door (A)'s local
+   statement the (Q)-free half is closed in the non-Siamese class, and what is left is a case list — the Siamese (Q)-free ring (FS-123), the (Q) rings
+   and many-colour vertices (FS-124), the saturated class (FS-125).
 
 **The prior-art position**: what is ours, and every attribution, verbatim, is `LEDGER.md` § The claim list — read it before calling
 anything ours. The field-plane-to-finite-plane reduction's seven independent lineages are `plans/WHERE-THE-PROBLEM-STANDS.md` § The
@@ -241,7 +248,7 @@ prior-art position.
 
 ### The novel-results ledger
 
-**Rows 1–148 live in `LEDGER.md`**: one row per result, kernel-checked unless graded otherwise, with its address in `Proofs/` or
+**Rows 1–154 live in `LEDGER.md`**: one row per result, kernel-checked unless graded otherwise, with its address in `Proofs/` or
 `tools/` and its milestone. **Row numbers are stable identifiers cited across `plans/` and this file: never renumber, never reuse.** The
 file is not loaded here by design — results are looked up by row, understanding is reasoned from. Its § B indexes the theorems proved
 outside the kernel through FS-116 and FS-121; from Workflow 3.1 on, a milestone's derivation file (`plans/FSnn-derivation.md`) is its
@@ -252,20 +259,20 @@ theorem record, and no line per theorem goes to § B.
 *A summary of `plans/FRONTIER-STUBS.md`, which is authoritative: the top three here, the rest there. Poros ranks, choosing the next
 milestone; Kooshi may override.*
 
-**Open milestones.** **FS-129, the cross-application audit**, is Opened (`plans/FS129-cross-application-audit.md`; a special case,
-unranked); its first jobs, the index and Poros's question card, have not launched. **Next, in Kooshi's order** (2026-10-03): **the Lean
-backlog**, in a session of its own — the hand results of the milestones closed before Workflow 3.1, with FS-129's compositions, from the
-input FS-129 prepares (`plans/LEAN-BACKLOG.md`) — formalized before the pipeline continues; then the top of the ranking. **M63**
+**Open milestones.** **FS-129, the cross-application audit**, is Derived (`plans/FS129-derivation.md`, 44 entries; rows 149–154; the index corrected and given its where-else column, `data/fs129/index/`); it is
+Closed when its compositions pass the Lean gate, in the Lean backlog's session. **Next, in Kooshi's order** (2026-10-03): **the Lean backlog**, in a
+session of its own — the hand results of the milestones closed before Workflow 3.1, with FS-129's compositions and merged forms, from the input FS129-L1
+writes (`plans/LEAN-BACKLOG.md`, on `data/fs129/index/lean-order-corrected.md`) — formalized before the pipeline continues; then the top of the ranking, FS-124, the (Q) ring (its question posed in `plans/STUB-q-ring.md`). **M63**
 stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it.
 
 **Ranked stubs** (the top three; each bearing stated against the answer):
 
 | rank | stub | the question | bearing on the answer |
 |---|---|---|---|
-| 1 | **FS-123 the (Q)-free ring** — `plans/STUB-qfree-ring.md` (FS-116's successor) | does a four-colour vertex whose ring carries no (Q) arc survive past `1 + ε`? The Γ-free type is empty there (FS116-Y4-EMPTY, held). First: does a fragment bent on `B̄(p, 1 + ε)` keep its class? Side 1 names no ring type, so a yes leaves every ring its (Q) arcs (R2's card 1, `plans/POROS-2026-10-03-close-reread.md` § 2.5) | a necessary piece of C114-LOCAL-F: with FS-124's NO, route M's first half; fragments at every radius give `χ(ℝ²) ≤ 6` with no MR (YESLIM); its first question shapes FS-124's case list too |
-| 2 | **FS-124 the (Q) ring** — `plans/STUB-q-ring.md` (FS-116's successor) | does every four-colour vertex whose ring carries (Q) arcs, and every five- or six-colour vertex, die within an explicit radius? The placing rule is held (RING-GERM, SEMI); left: SEMI-PAR3, the disk's corner, crossed reciprocity, five and six colours, the recurrence, Siamese last | the bulk of C114-LOCAL-F and the YES side's home (row 136): with FS-123's NO, route M's first half; fragments at every radius give `χ(ℝ²) ≤ 6` with no MR |
-| 3 | **FS-104 `χ_CP(ℝ²)` at six** — `plans/STUB-cp-plane-six.md` | is `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (row 130)? — row 131's question at five colours; its null-set step to Falconer's `χ_m` is row 131's sub-question; standing here: `χ_B`, the ZF + DC audit (Soifer's Open AC Problem 62.14), the density family, `k`-point correlations (FS-80) | a NO (a CP five-colouring) gives `χ(ℝ²) = 5` with no MR; a YES gives `χ(ℝ²) ≥ 6` given MR (row 128), a new lower bound independent of the map line, six against seven left; success low, a named no-go the likely product |
-| 4–73 | 70 more open stubs, in rank order in `plans/FRONTIER-STUBS.md` | … | … |
+| 1 | **FS-124 the (Q) ring** — `plans/STUB-q-ring.md` (FS-116's successor) | does every four-colour vertex whose ring carries (Q) arcs, and every five- or six-colour vertex, die within an explicit radius? First: what a (Q) ring passes to the vertices it places, and whether it is conserved (its question section). Held: the placing rule; since FS-129 the pruning rules of row 150 and DISC-F from the exclusion (row 153). Left: SEMI-PAR3, the disk's corner, crossed reciprocity, five and six colours, the recurrence, FS114-K1's (Q) residues | the bulk of C114-LOCAL-F and the YES side's home (rows 136, 149): with FS-123's NO, route M's first half; in a valid map it also leaves no close complementary pair, route R's exact-map form (FS112-N3-COR3); fragments at every radius give `χ(ℝ²) ≤ 6` with no MR |
+| 2 | **FS-123 the Siamese class** — `plans/STUB-qfree-ring.md` (re-aimed at FS-129) | in the non-Siamese class no (Q)-free four-colour vertex survives past `1 + ε` (row 149); left: the Siamese class, reduced to FS116-Y4-EMPTY's Siamese form (FS129-OR1-QFREE-CLASS). First: does FS116-V6's route read non-Siamese anywhere but at `p`, the tips and the hugs? | a necessary piece of C114-LOCAL-F (G86: tile counts cannot see Siamese pairs); with FS-124's NO, route M's first half; Siamese fragments at every radius give `χ(ℝ²) ≤ 6` with no MR |
+| 3 | **FS-104 `χ_CP(ℝ²)` at six** — `plans/STUB-cp-plane-six.md` | is `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (row 130)? Since FS-129: route (c)'s linear identities and route (b)'s literal reading empty (rows 151–152); route (e), route M at five — FS-128's top colour (row 154) or FS-120's cover rungs, which need no NO beyond FS106-AE-MAP6 | a NO (a CP five-colouring) gives `χ(ℝ²) = 5` with no MR; a YES gives `χ(ℝ²) ≥ 6` given MR (row 128), a new lower bound independent of the six-map NO, six against seven left; route (e) is a reduction if its cover rungs need not spend five |
+| 4–74 | 71 more open stubs, in rank order in `plans/FRONTIER-STUBS.md` | … | … |
 
 **Closed as directions** (reasons in the grokkings): a five-colouring of ℚ(√167)'s plane from `UD(ℤ/529, 2)`, at any level (row 75); the six-level design target over a sealed field (FS-6) and
 the residue-allowed distances (FS-16), both dead by theorem (row 66, G48); the cell family, in both directions
@@ -303,7 +310,8 @@ limit, and gives χ(ℝ²) ≤ 6. Colourings with slack, polygonal ones and nice
 [hand], printed proofs repaired). At bounded complexity vanishing holes are a tight six-map (row 133); with no unit arcs none exists
 (row 134), and with them every one has a vertex of at least four colours, so the map NO follows from one exclusion about such a vertex
 at an explicit radius uniform in the complexity (row 137, G83), and a tile count reaches only its non-Siamese part (G86; all [hand]); such a
-vertex whose ring carries no boundary arc dies at `1 + ε` in the non-Siamese simple class (row 148, G91; [hand], two minds).
+vertex whose ring carries no boundary arc dies at `1 + ε` in the non-Siamese simple class (row 148, G91; [hand], two minds), and one whose ring carries
+no (Q) arc in the non-Siamese class, simple or not (row 149; [hand], one mind).
 Seven, χ_m⁰(ℝ²) ≥ 7, is the NO's hole bound made uniform in the complexity bound (row 139): it follows from the NO once the tight limit is made a map
 (route M, the map step), or from a forced complementary junction pair at every complexity with its cone scale bounded below (route R),
 and each route's third statement is the answer restated. Route M's regularity is contact: a saturated class is carved by unit circles

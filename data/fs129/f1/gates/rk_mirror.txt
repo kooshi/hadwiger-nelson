@@ -1,0 +1,1 @@
+RETIRED (Workflow 3.1, 2026-10-03): CLAUDE.md § Paths forward now carries the top three of plans/FRONTIER-STUBS.md and a group row; this check expects ranks 1-29 and is no longer run at a filing.

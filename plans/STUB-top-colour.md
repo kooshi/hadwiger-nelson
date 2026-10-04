@@ -1,4 +1,4 @@
-# FS-128 — the six-colour rungs of the map step: can the top colour of a Grundy six-colouring be bound, and does NO-PAR hold under Condition 5? (stub)
+# FS-128 — the top colour, at five and six: can the top colour of a Grundy six-colouring be bound, and does NO-PAR hold under Condition 5? (stub)
 
 *Minted 2026-10-03 by FS-121's close (FS121-Z1, stage 5). It holds FS-121's two rungs that are at six by nature: honest saturation's upper colour
 (TOP₆, the honest route) and the cover route's own NO (C121-NOPAR-C5), parked behind FS-116 (inventory items 51, 63). **Solver column: in-ban.**

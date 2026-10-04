@@ -1,4 +1,8 @@
-# FS-123 — the (Q)-free ring: does any four-colour vertex whose ring carries no (Q) arc survive past radius 1 + ε, in any class? (stub)
+# FS-123 — the Siamese class: does any four-colour vertex whose ring carries no (Q) arc survive past radius 1 + ε, in any class? (stub)
+
+> **Re-ranked 2026-10-03 (FS129-P1; 1 → 2).** Its first question is answered yes in the non-Siamese class and
+> its remainder is the Siamese class — a necessary piece, opening on card 3 of `plans/POROS-2026-10-03-fs129-rerank.md`; FS-124 carries the bulk of the case
+> list and route R's exact-map form, so it leads.
 
 > **Re-aimed 2026-10-03 (FS-129's audit).** Question 1 is answered yes in the non-Siamese class, simple or not: bending a fragment on a whole-tile
 > restriction of radius at most `√3` keeps its class and leaves only (Q) arcs on the ring, so no non-Siamese valid six-coloured fragment on a closed disc

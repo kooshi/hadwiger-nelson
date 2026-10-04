@@ -1,5 +1,8 @@
 # FS-126 — curved pencils: can an honest saturated colouring of the plane, with any number of colours, have a curved tangent-type interface? (stub)
 
+> **Re-ranked 2026-10-03 (FS129-P1; 7 → 9).** The map step at five reads REG-J′₅ and no ¬LRA
+> (FS129-OR1-TOP5), so FS-120 and FS-127, which carry rungs at five, move above it; it stays the honest route's rung at six.
+
 *Minted 2026-10-03 by FS-121's close (FS121-Z1; `plans/FS121-Z1-close.md` § 2.5, stage 5), carrying inventory items 24, 49 and 74 and the plan's
 not-claimed lines (close record § 4.4). Route M's honest branch; siblings FS-127 (the singular set) and FS-128 (the six-colour rungs); FS-115 is
 re-posed beside it. **Solver column: in-ban** — derivation, and constructions by formula with exact checks. Read first: `CLAUDE.md` § The aim and
