@@ -2104,7 +2104,83 @@ theorem hcFrame_coords (m n : ℤ) (j : Fin 3) (s t : ℝ) :
 /-- The up triangle in each of its edge frames: `|s| ≤ 1/2`, `2 ≤ t ≤ 2 + √3/2`. -/
 theorem hcUpTri_frame {m n : ℤ} {z : ℂ} (hz : z ∈ hcUpTri m n) (j : Fin 3) :
     |hcFrameS m n j z| ≤ 1 / 2 ∧ 2 ≤ hcFrameT m n j z ∧ hcFrameT m n j z ≤ 2 + √3 / 2 := by
-  sorry
+  set φ : ℝ := 2 * π * ((j : ℕ) : ℝ) / 3 with hφ
+  have hw0 : e φ ≠ 0 := by
+    intro h; have := norm_e φ; rw [h, norm_zero] at this; norm_num at this
+  have h3 : (√3 : ℝ) * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have h3p : (0 : ℝ) < √3 := by positivity
+  -- the frame is affine
+  set S : Set ℂ := {z | |hcFrameS m n j z| ≤ 1 / 2 ∧ 2 ≤ hcFrameT m n j z ∧ hcFrameT m n j z ≤ 2 + √3 / 2} with hS
+  have haff : ∀ x y : ℂ, ∀ a b : ℝ, a + b = 1 →
+      (a • x + b • y - hcUpC m n) / e φ = (a : ℂ) * ((x - hcUpC m n) / e φ) + (b : ℂ) * ((y - hcUpC m n) / e φ) := by
+    intro x y a b hab
+    have hab' : (a : ℂ) + b = 1 := by exact_mod_cast hab
+    have h : (a : ℂ) * x + b * y - hcUpC m n = a * (x - hcUpC m n) + b * (y - hcUpC m n) := by
+      linear_combination (hcUpC m n) * hab'
+    rw [Complex.real_smul, Complex.real_smul, h, add_div, mul_div_assoc, mul_div_assoc]
+  have hconv : Convex ℝ S := by
+    intro x hx y hy a b ha hb hab
+    have hS' : hcFrameS m n j (a • x + b • y) = a * hcFrameS m n j x + b * hcFrameS m n j y := by
+      simp only [hcFrameS]
+      rw [haff x y a b hab, Complex.add_im, Complex.im_ofReal_mul, Complex.im_ofReal_mul]; ring
+    have hT' : hcFrameT m n j (a • x + b • y) = a * hcFrameT m n j x + b * hcFrameT m n j y := by
+      simp only [hcFrameT]
+      rw [haff x y a b hab, Complex.add_re, Complex.re_ofReal_mul, Complex.re_ofReal_mul]
+      linear_combination (hcL - √3 / 6) * hab.symm
+    refine ⟨?_, ?_, ?_⟩
+    · rw [hS']
+      calc |a * hcFrameS m n j x + b * hcFrameS m n j y| ≤ a * |hcFrameS m n j x| + b * |hcFrameS m n j y| := by
+            refine (abs_add_le _ _).trans ?_
+            rw [abs_mul, abs_mul, abs_of_nonneg ha, abs_of_nonneg hb]
+        _ ≤ a * (1 / 2) + b * (1 / 2) := by gcongr; exacts [hx.1, hy.1]
+        _ = 1 / 2 := by rw [← add_mul, hab, one_mul]
+    · rw [hT']; nlinarith [hx.2.1, hy.2.1]
+    · rw [hT']; nlinarith [hx.2.2, hy.2.2]
+  -- the three vertices
+  have hq : ∀ θ : ℝ, (hcUpC m n + e θ / √3 - hcUpC m n) / e φ = e (θ - φ) / √3 := by
+    intro θ
+    rw [add_sub_cancel_left, show e θ = e (θ - φ) * e φ by rw [← e_add, sub_add_cancel]]
+    field_simp
+  have hgood : ∀ θ u : ℝ, e (θ - φ) = e u → |Real.sin u| ≤ √3 / 2 → -1 ≤ Real.cos u → Real.cos u ≤ 1 / 2 →
+      hcUpC m n + e θ / √3 ∈ S := by
+    intro θ u hu hs hc1 hc2
+    have hre : ((hcUpC m n + e θ / √3 - hcUpC m n) / e φ).re = Real.cos u / √3 := by
+      rw [hq, hu, Complex.div_ofReal_re, e_eq]; simp [Complex.cos_ofReal_re, Complex.sin_ofReal_re]
+    have him : ((hcUpC m n + e θ / √3 - hcUpC m n) / e φ).im = Real.sin u / √3 := by
+      rw [hq, hu, Complex.div_ofReal_im, e_eq]; simp [Complex.sin_ofReal_re]
+    refine ⟨?_, ?_, ?_⟩
+    · rw [hcFrameS, him, abs_neg, abs_div, abs_of_pos h3p, div_le_iff₀ h3p]; nlinarith
+    · rw [hcFrameT, hre, hcL]
+      have : Real.cos u / √3 ≤ √3 / 6 := by rw [div_le_iff₀ h3p]; nlinarith
+      nlinarith
+    · rw [hcFrameT, hre, hcL]
+      have : -(√3 / 3) ≤ Real.cos u / √3 := by rw [le_div_iff₀ h3p]; nlinarith
+      nlinarith
+  have hA : ∀ u : ℝ, u = π / 3 → |Real.sin u| ≤ √3 / 2 ∧ -1 ≤ Real.cos u ∧ Real.cos u ≤ 1 / 2 := by
+    rintro u rfl; rw [Real.sin_pi_div_three, Real.cos_pi_div_three, abs_of_pos (by positivity)]; norm_num
+  have hB : ∀ u : ℝ, u = -(π / 3) → |Real.sin u| ≤ √3 / 2 ∧ -1 ≤ Real.cos u ∧ Real.cos u ≤ 1 / 2 := by
+    rintro u rfl; rw [Real.sin_neg, Real.cos_neg, Real.sin_pi_div_three, Real.cos_pi_div_three, abs_neg,
+      abs_of_pos (by positivity)]; norm_num
+  have hC : ∀ u : ℝ, u = π → |Real.sin u| ≤ √3 / 2 ∧ -1 ≤ Real.cos u ∧ Real.cos u ≤ 1 / 2 := by
+    rintro u rfl; rw [Real.sin_pi, Real.cos_pi, abs_zero]; exact ⟨by positivity, by norm_num, by norm_num⟩
+  have hsub : {hcUpC m n + e (π / 3) / √3, hcUpC m n + e π / √3, hcUpC m n + e (5 * π / 3) / √3} ⊆ S := by
+    have he2 : ∀ x y : ℝ, x = y + 2 * π → e x = e y := fun x y h => by rw [h, e_add_two_pi]
+    have he3 : ∀ x y : ℝ, x + 2 * π = y → e x = e y := fun x y h => by rw [← e_add_two_pi x, h]
+    have hj : (j : ℕ) = 0 ∨ (j : ℕ) = 1 ∨ (j : ℕ) = 2 := by omega
+    intro x hx
+    simp only [mem_insert_iff, mem_singleton_iff] at hx
+    rcases hj with hj | hj | hj <;> simp only [hj, Nat.cast_zero, Nat.cast_one, Nat.cast_ofNat] at hφ <;>
+      rcases hx with rfl | rfl | rfl
+    · exact hgood _ _ (by congr 1; rw [hφ]; ring) (hA _ rfl).1 (hA _ rfl).2.1 (hA _ rfl).2.2
+    · exact hgood _ _ (by congr 1; rw [hφ]; ring) (hC _ rfl).1 (hC _ rfl).2.1 (hC _ rfl).2.2
+    · exact hgood _ _ (he2 _ (-(π / 3)) (by rw [hφ]; ring)) (hB _ rfl).1 (hB _ rfl).2.1 (hB _ rfl).2.2
+    · exact hgood _ _ (by congr 1; rw [hφ]; ring) (hB _ rfl).1 (hB _ rfl).2.1 (hB _ rfl).2.2
+    · exact hgood _ _ (by congr 1; rw [hφ]; ring) (hA _ rfl).1 (hA _ rfl).2.1 (hA _ rfl).2.2
+    · exact hgood _ _ (by congr 1; rw [hφ]; ring) (hC _ rfl).1 (hC _ rfl).2.1 (hC _ rfl).2.2
+    · exact hgood _ _ (he3 _ π (by rw [hφ]; ring)) (hC _ rfl).1 (hC _ rfl).2.1 (hC _ rfl).2.2
+    · exact hgood _ _ (by congr 1; rw [hφ]; ring) (hB _ rfl).1 (hB _ rfl).2.1 (hB _ rfl).2.2
+    · exact hgood _ _ (by congr 1; rw [hφ]; ring) (hA _ rfl).1 (hA _ rfl).2.1 (hA _ rfl).2.2
+  exact convexHull_min hsub hconv hz
 
 /-- **(G2)**: the graph `t = 2 + g(s)`, `|s| ≤ 1/2`, of every side lies in `U` (the three slivers are disjoint and miss the other
 sides' curves: `g ≤ (1/2 − |s|)²/4` against the corner distance `0.8 (1/2 − |s|)`). -/
