@@ -40,7 +40,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 
 | job | model | brief | reports to |
 |---|---|---|---|
-| FS131-I2e (wave 2, fifth implementer) | Sonnet | `data/fs131/briefs/FS131-I2e-wave2.md` | its branch's `data/fs131/reports/FS131-I2e.md` |
+| FS131-I4 (wave 4, first implementer; item 115) | Sonnet | `data/fs131/briefs/FS131-I4-wave4.md` | its branch's (`fs131-w4`) `data/fs131/reports/FS131-I4.md` |
 | FS131-I3e (wave 3, last nine, gate, landing) | Sonnet | `data/fs131/briefs/FS131-I3e-wave3.md` | its branch's `data/fs131/reports/FS131-I3e.md` |
 | FS131-W2 (Woodall's chain re-planned on E1-NO45; item 109) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-W2-woodall-replan.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-W2.md` |
 | EXT-HN1 (audit of an outside repository; item 108) | Opus (de Bruijn) | `data/external/briefs/EXT-HN1-outside-claim.md` | `data/external/reports/EXT-HN1.md` |
@@ -53,11 +53,12 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 1. ~~Fill the free slot~~ — done: FS131-K2d launched (item 104). The next free slot (a half when I3e hands back): FS131-IW or FS131-I4 (Sonnet), briefs derived
    from the nearest earlier brief by script, gated with `python3 .claude/skills/keryx/scripts/brief_gate.py all`.
-2. When I2e hands back: the **Opus-implementer trial** on wave 2 (item 103); its first step merges `fs131-w2d` (K2d's branch) into `fs131-w2`.
+2. I2e handed back (item 114: 4 leaves + 31 children; 90 `sorry` left). The **Opus-implementer trial** on wave 2 (item 103) takes the first Opus slot that
+   frees (K2d or W2); it merges `fs131-w2d` first if K2d has handed back.
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
 5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
-   I3e's half slot goes to FS131-I4 (its brief carries item 112's wave-4 note: `noBoth` likely has the same cusp case); FS131-IW waits for W2.
+   FS131-I4 launched in I2e's half slot (item 115); I3e's half slot, when it frees, goes to FS131-IW once W2 has re-planned, else a wave-2 or wave-4 Sonnet successor.
    Queued for the next free Opus slot: **FS131-E2** (Ephodos) — the four-colour clause of FS116-V5-U1 with a cusp at `z`: prove it or build the fragment (item 112).
 6. **(done) On E1's report**: file its verdicts; if a GAP closes, tell the Woodall implementer; file the row 132 / § The aim corrections per the verdict (W's drafts, plan
    § 5) and the FS106 errata through the record job.
