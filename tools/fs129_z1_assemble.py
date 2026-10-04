@@ -239,24 +239,25 @@ PROSE = {
 "and case 1's G3, closed in the non-Siamese simple class; FS116-Y4-EMPTY's not-claimed line, whose erratum this job files. Pass 3's attack on its two "
 "named steps did not succeed (`plans/FS129-SR1-audit.md` § 2.1; a checking reading, not a second mind). Whether a blind second mind runs is Kooshi's "
 "call (inventory item 56); the default files it derived, one mind.",
-"FS129-SR2-QFCASE": "Rests on it: nothing. **Record-job note (2026-10-03; sent to the coordinator the same evening):** the argument "
-"(`plans/FS129-SR2-audit.md` § 3.2.2) shows that a fragment of FS116-S1-QF's class is simple at p, reading FS-116's \"simple\" as \"one sector per tile "
+"FS129-SR2-QFCASE": "Rests on it: nothing. **Record-job note (2026-10-03), the condition raised and resolved the same evening:** the argument "
+"(`plans/FS129-SR2-audit.md` § 3.2.2) shows a fragment of FS116-S1-QF's class to be simple at p, reading FS-116's \"simple\" as \"one sector per tile "
 "at p\"; `data/fs116/claims.md` § 0 defines simple globally (\"every tile an open disc whose closure meets each other tile's closure in a connected set "
-"or not at all, and does not meet itself\"), and FS116-S1-QF does not assume it. So FS129-OR1-QFREE, as stated, does not apply to S1-QF's fragments. "
-"The composition is carried if QFREE's chain reads simplicity at p alone: FS129-OR1-WHOLE and the bends only preserve it, and FS116-V6's route to "
-"FS116-Y4-EMPTY says it uses simplicity only at p (`plans/FS116-V6-verification.md`, its uses-only paragraph: \"simple (one sector per tile at `p` "
-"… — V6-COUNT's last step only)\"); FS116-Y4's own route (RING-GERM, Y3-TIPS, FLANK) was not checked for it here. The verdict is left as SR2 derived "
-"it, because a held route bears the reading; the handoff holds only if de Bruijn states QFREE, FS116-Y4-EMPTY (by V6's route) and BENDANY's class "
-"clause with \"simple at p\", or else keeps S1-QF's own route (S1-LENS, S1-EXIT, S1-CLUSTER). For the same reason the correction of inventory item 117 "
-"to `plans/FS129-OR1-audit.md` § J3 (\"S1-QF has no non-simple remainder\") holds only under that reading; OR1's sentence (\"what is left of them is "
-"their non-simple part (FS116-S1-QF is stated for non-Siamese fragments without 'simple')\") stands beside it.",
+"or not at all, and does not meet itself\"), and FS116-S1-QF does not assume it, so FS129-OR1-QFREE as stated did not apply to S1-QF's fragments "
+"(raised to the coordinator by this job). **Resolved by FS129-SR3** (`plans/FS129-SR3-audit.md` § Stage 2 — SAVED: item (d), commit 2160c171; derived, "
+"one mind): on FS116-V6's route to FS116-Y4-EMPTY the chain under QFREE (WHOLE, the bends, QFREE-CLASS, EMPTY) never uses \"simple\", not even at p, "
+"and SR3 files FS129-SR3-EMPTY-NS and FS129-SR3-QFREE-NS (\"no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex "
+"p of at least four colours has a ring carrying no (Q) arc\"). So this entry stands, read as citing FS129-SR3-QFREE-NS, its \"simple at p\" step idle; "
+"and inventory item 117's correction to `plans/FS129-OR1-audit.md` § J3 (S1-QF has no non-simple remainder) stands. SR3's entries are FS129-Z2's to "
+"file. FS116-Y4's own route does use simplicity (at p and at a double-tipped hub), so the kernel module follows V6's route.",
 "FS129-MR1-DOUBLETIP": "Rests on it: FS116-V6-HUG, its Γ-free instance (a ring with no arc of Γ has every germ off (Q) arcs; `plans/FS129-SR1-audit.md` "
 "§ Stage 3, group 1), so the kernel proves this form once and V6-HUG from it; and FS-124's ring types, which it prunes in case 5 and at hubs and kind-T "
 "semi-hubs in case 1 (inventory item 82; FS129-Z2's stub line). It does not reach SEMI-PAR3. **Changed by the record job** (inventory items 95, 100): "
 "FS116-N2-STAR is dropped from `uses only:`, `grade:` and `handoff:` — pass 3's attack (`plans/FS129-SR1-audit.md` § 2.2, a checking reading that did "
 "not succeed) found that step 3 needs only non-Siamese and FS116-V4-DICHOTOMY. As MR1 filed them: `uses only:` held \"FS116-N2-STAR (C(y) = A(p) ⊔ T_y "
 "⊔ O_y at a change point, p of four colours)\" between FLANK and V4-TWIST; `grade:` read \"derived from: FS116-Y4-FLANK, FS116-RING-GERM, FS116-N2-STAR, "
-"FS116-V4-TWIST, FS116-V4-DICHOTOMY\"; the handoff read \"over FS116-Y4-FLANK, RING-GERM (i) and N2-STAR\".",
+"FS116-V4-TWIST, FS116-V4-DICHOTOMY\"; the handoff read \"over FS116-Y4-FLANK, RING-GERM (i) and N2-STAR\". **Caution for the Lean list (FS129-SR3, `plans/FS129-SR3-audit.md` § Stage 2 — SAVED: item (d)):** SR1 § 6.2 "
+"item 2, \"DOUBLETIP in place of V6-HUG\", would lose FS129-SR3-EMPTY-NS, because this entry's step 3 uses one cone per tile at the hubs; "
+"FS116-V6-HUG's own colour step is kept for the Γ-free ring.",
 "FS129-SR1-TWOCIRC": "Rests on it: the identity steps of FS114-Y5-PXKILL, FS116-V6-HUG, FS116-V6-ADJ and FS116-Y4-FLANK (each keeps its own pinning of "
 "two tiles), and through FLANK FS129-MR1-DOUBLETIP. It is Kooshi's \"where else can we use that identity?\" (`plans/FS116-close-inventory.md` item 142) "
 "answered: one law found three times, unnamed (inventory item 75).",
@@ -340,7 +341,9 @@ run those searches (its brief keeps each line as measured), so each such debt is
 Pass 3's entries that replace earlier milestones' statements (FS129-SR1-TWOCIRC, -SIXQ; FS129-SR2-CLOSURE, -HULLSET, -SUPK, -DISC1TS, -YESLIM-EQ,
 -QFCASE, -TOUCHW; FS129-SA1-SQRT3-LOCAL) say so in their own handoffs; the full lists for the Lean backlog are SA1 § 6.3, SR1 § 6.2 and SR2 § 4.3.
 
-**Record-job notes** (each under its entry): FS129-SR2-QFCASE reads FS-116's "simple" at p only; FS129-SR1-BENDLE3 omits FS129-OR1-BEND3's tile
+**Record-job notes** (each under its entry): FS129-SR2-QFCASE read FS-116's "simple" at p only — raised by this job and resolved by
+FS129-SR3 (its FS129-SR3-QFREE-NS drops "simple" from QFREE; `plans/FS129-SR3-audit.md` § Stage 2), so QFCASE stands; FS129-MR1-DOUBLETIP carries
+SR3's caution that it cannot replace FS116-V6-HUG without losing FS129-SR3-EMPTY-NS; FS129-SR1-BENDLE3 omits FS129-OR1-BEND3's tile
 clause, which FS129-SR1-BENDANY carries; FS129-SR1-RINGBAND does not restate FS129-OA1-RINGWIND's periodicity clauses. No hypothesis a source needed
 is dropped by a merged form. Corrections made inside entries: FS129-MR1-DOUBLETIP's `uses only:` (without FS116-N2-STAR) and FS129-OA1-RINGWIND's
 prior art (inventory item 100); FALC-RED's argument by supersession (items 67, 106).

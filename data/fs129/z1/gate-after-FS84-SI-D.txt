@@ -1,0 +1,31 @@
+entry lint
+  claim J45-N1: minds 1 — J45's derivation; FS100-Q47's grade counts a blind second derivation by J46 (J46-1), not counted here
+  warn  FS84-SI-D-derivation.md:419 (J45-N1): prior art owed — novelty unmeasured; a standing finding
+  claim J45-N1: prior art owed
+  claim J45-N2: minds 1 — J45's derivation; FS100-Q47's grade counts a blind second derivation by J46 (J46-1), not counted here
+  warn  FS84-SI-D-derivation.md:439 (J45-N2): prior art owed — novelty unmeasured; a standing finding
+  claim J45-N2: prior art owed
+  claim J45-SI-4: minds 1 — J45's derivation; J46 derived the min-support selection blind (J46-3, `plans/FS84-SI-V-verification.md`'s divergence table, row "SI ⟹"), not counted here
+  warn  FS84-SI-D-derivation.md:456 (J45-SI-4): prior art owed — novelty unmeasured; a standing finding
+  claim J45-SI-4: prior art owed
+  claim J45-SI-5: minds 1 — J45's derivation; J46 re-derived it from J45's statement (J46-11, "hand; from J45's statement"), a sighted reading, not counted here
+  warn  FS84-SI-D-derivation.md:473 (J45-SI-5): prior art owed — novelty unmeasured; a standing finding
+  claim J45-SI-5: prior art owed
+  claim J45-SI-J: minds 1 — J45's derivation; J46 re-derived it with SI-5 (J46-11), not counted here
+  warn  FS84-SI-D-derivation.md:491 (J45-SI-J): prior art owed — novelty unmeasured; a standing finding
+  claim J45-SI-J: prior art owed
+  claim J45-SI-C: minds 1 — J45's derivation; J46's control (J46-9, "TRUE under 'a.s. proper'") fixed the hypothesis, not the example, and is not counted here
+  warn  FS84-SI-D-derivation.md:507 (J45-SI-C): prior art owed — novelty unmeasured; a standing finding
+  claim J45-SI-C: prior art owed
+  claim J45-SP-oi: minds 1 — J45's derivation (the row: "[hand]", § 5.1 "one line")
+  warn  FS84-SI-D-derivation.md:523 (J45-SP-oi): prior art owed — novelty unmeasured; a standing finding
+  claim J45-SP-oi: prior art owed
+  claim J45-SP-if: minds 1 — J45's derivation (the row: "[hand]")
+  warn  FS84-SI-D-derivation.md:539 (J45-SP-if): prior art owed — novelty unmeasured; a standing finding
+  claim J45-SP-if: prior art owed
+  entries: 8  derived: 8  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  controls: 0  fired on their faults: 0
+GATE: PASS (0 failures, 8 warnings)

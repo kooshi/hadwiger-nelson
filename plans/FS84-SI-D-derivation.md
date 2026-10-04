@@ -404,3 +404,153 @@ mental pass measures the pass as much as the claims (G21).
 *Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
 
 See: `LEDGER.md` row 117 (`plans/FS100-derivation.md` FS100-K0); row 121 (`plans/FS100-derivation.md` FS100-Q47); row 123 (`plans/FS100-derivation.md` FS100-K0b, FS100-SPC).
+
+## Filed by FS129-Z1 (2026-10-03): eight theorems this record proved and no entry carried
+
+*Dated entries, appended by FS-129's record job (`plans/FS129-Z1-record.md`; `plans/FS129-close-inventory.md` item 110), found by FS129-SA1
+(`plans/FS129-SA1-audit.md` § 4.2). They are inputs of row 121, `χ(ℚ(√47)²) = 5`: FS100-Q47's grade (`plans/FS100-derivation.md` line 204) reads
+"SP-Cor three minds (J45; J46-13 from its statement; X05V blind) over N1, N2, R-U, A⁺ each two blind minds (J45; J46-1, J46-7, J46-5)", and FS103-F-*'s
+(`plans/FS103-derivation.md` line 72) names "J45-N1/N2, R-U, SP-oi". Each statement is this file's "Theorems this phase proved" row, verbatim (for
+SP-oi and SP-if the row points to SP, so the lemma of § 4.2 is quoted after it, verbatim); the notation is § 1.2's; the grade is the row's. The mind
+count is J45's own (one deriver; the rows state no count). J46's blind verification (`plans/FS84-SI-V-verification.md`) is named where it touches a
+statement and is not counted: this file does not count it, and the record job raises no grade. Uses-only, not-claimed and model lines are read off
+the proofs above, by the record job; nothing above this section is changed.*
+
+derivation: J45-N1
+  statement: `E_S = T + A + Fin_S` is exactly the group of characters continuous for `R → R̂_prof × (L⊗ℝ) × ∏_{v∈S} L_v`; `R` is dense there;
+    `E_S` is a proper dense σ-compact subgroup, Haar-null, `U`-invariant, Borel-isomorphic to the dual group
+  uses only: J28V-7's finite index of `NR` in `R` (`[LevitzMott1972]`); weak approximation for the norm-one torus of `L/F`; that characters of a
+    closed subgroup of an LCA group extend; Lusin–Souslin; the open-mapping theorem for σ-compact LCA groups; Steinhaus–Weil (Lemma N1's proof,
+    § 2.1; § 5.1's "Inputs, by name")
+  not claimed: Lemma R or Lemma C (neither is used); that `E_S` is J28D's `G_S`-continuity group in general — the two agree when every torsion
+    character is stable-continuous (§ 1.2; the Remark after Lemma N2)
+  converse: § 2.1 The two notation lemmas
+  argument: § 2.1 The two notation lemmas
+  verdict: derived
+  grade: hand
+  minds: 1 — J45's derivation; FS100-Q47's grade counts a blind second derivation by J46 (J46-1), not counted here
+  model: `F = ℚ(√47)`, `S = ∅`: `E_∅ = T + A`, a proper dense Haar-null subgroup of `R̂` (the setting of SP-Cor, § 4.2)
+  prior art: owed — none recorded in this file; FS129-SA1 found the statement and ran no search
+  handoff: de Bruijn — an input of FS100-Q47 (row 121); FS129-SA1 § 6.3 lists it among the statements upstream of FS100-Q47 with no entry
+
+Rests on it: J45-N2, J45-SI-J (through N1 (c)), J45-SP-if (the openness of `r₀R`), R-U (FS100-EFZ's first clause), and through them A⁺, SP-Cor and
+FS100-Q47 (row 121).
+
+derivation: J45-N2
+  statement: the vectors of `L²(μ)` with spectral measure on `E_S` are `L²(𝒜_S)` for a translation-invariant σ-algebra, and `Π(E_S) = E[·|𝒜_S]`
+  uses only: Bochner on `G′_S`; J45-N1 (b) (`R` dense in `G′_S`); uniqueness of Fourier–Stieltjes coefficients on the compact `R̂`; dominated
+    convergence (`G′_S` metrizable); that the bounded vectors with `τ′_S`-continuous orbits form a conjugation-closed algebra closed under `|·|` and
+    truncation; that `Π(E_S)` commutes with every `V_y` (Lemma N2's proof, § 2.1)
+  not claimed: anything about which `μ` has its spectrum on `E_S`; the same with `E = ⋃_S E_S` read as one factor — equality there gives a colouring
+    measurable for `⋁_S 𝒜_S`, not for a single `𝒜_S` (§ 2.2, "What SI-5 means")
+  argument: § 2.1 The two notation lemmas
+  verdict: derived
+  grade: hand
+  minds: 1 — J45's derivation; FS100-Q47's grade counts a blind second derivation by J46 (J46-1), not counted here
+  model: J45-SI-C's colouring `μ` over ℚ(√11): its `𝒜_S` contains `σ(Φ)`'s torsion eigenfunctions, and the constant `1` lies in `L²(𝒜_S)`
+  prior art: owed — none recorded in this file
+  handoff: de Bruijn — with J45-N1, an input of FS100-Q47 (row 121)
+
+Rests on it: the identity SI-1, J45-SI-4 (`p(x)` is `𝒜_S`-measurable), and through SI-4 A⁺ and FS100-Q47.
+
+derivation: J45-SI-4
+  statement: equality at every `u` ⟹ every selection from the supports is an `𝒜_S`-measurable equivariant proper four-colouring
+  uses only: SI-3 (equality at `u` makes the supports at `x` and `x + u` disjoint) and SI-2; J45-N2 (`p(x)` is `𝒜_S`-measurable); the versions
+    `p_j(x) = p_j(0) ∘ T_x` (§ 2.2)
+  not claimed: the converse, SI's "⟸" (a GAP at "an `𝒜_S`-measurable proper colouring forces adjacent supports apart"; over a (G2) field equivalent to
+    universal equality, J45-SI-5); that the selection is `c` itself
+  argument: § 2.2 SI
+  verdict: derived
+  grade: hand
+  minds: 1 — J45's derivation; J46 derived the min-support selection blind (J46-3, `plans/FS84-SI-V-verification.md`'s divergence table, row "SI ⟹"),
+    not counted here
+  model: J45-SI-C's colourings over ℚ(√11): equality at every `u`, and the min-support selection is C9's `γ_Φ`, proper
+  prior art: owed — none recorded in this file
+  handoff: de Bruijn — FS129-SA1 § 4.2: "A⁺ is SI-4 with N2 (FS100-K0)"; an input of FS100-Q47 (row 121)
+
+Rests on it: A⁺ (with T-C(A)), and through it SP-Cor and FS100-Q47 (row 121).
+
+derivation: J45-SI-5
+  statement: under (G2), "`𝒜_S` carries a proper colouring ⟹ equality" holds for every `μ` over `F` iff every `μ` over `F` has equality at `S`
+  uses only: SI-3; J45-SI-J; rotation by `v ∈ U` (`E_S` is `U`-invariant, J45-N1); (G2)'s adjacent gapped pair with one missing colour; the pointwise
+    ergodic theorem along tempered Følner sequences (`γ_Φ ∘ π_𝔓` is `c`-measurable); torsion eigenfunctions (Lemma SI-5's proof (a)–(d), § 2.2)
+  not claimed: that either side holds — over a (G2) field, ℚ(√11) among them, both are open, which is why SI's "⟸" is a GAP; anything over a field
+    without (G2)
+  converse: § 2.2 SI
+  argument: § 2.2 SI
+  verdict: derived
+  grade: hand
+  minds: 1 — J45's derivation; J46 re-derived it from J45's statement (J46-11, "hand; from J45's statement"), a sighted reading, not counted here
+  model: `F = ℚ(√11)`, which satisfies (G2) at 7 (J45-G2, tools exact: C9's `⌊4θ⌋` on `Γ₇` has 14 gapped vertices, all missing colour 3, spanning
+    28 directed edges)
+  prior art: owed — none recorded in this file
+  handoff: de Bruijn — FS129-SA1 § 6.3 lists it among the statements upstream of FS100-Q47 with no entry; it scopes SI's "⟸"
+
+Rests on it: the GAP verdict on SI's "⟸" (§ 5.1) and the correction to the Poros record's EI-2 reading (§ 2.2, "What SI-5 means").
+
+derivation: J45-SI-J
+  statement: the `E_S`-factor of an independent product of a finite translation system, a Bernoulli process and `c₂` is `σ(Φ) ∨ 𝒜_S(c₂)`
+  uses only: `L²(Φ)` is a finite sum of torsion eigenlines; Bernoulli shifts have Lebesgue spectrum, so a vector of `L²₀(ε)` has spectral measure
+    `≪ Haar`, which gives `E_S` measure 0 (J45-N1 (c)); spectral measures of independent tensor products convolve; `T ⊆ E_S`, a subgroup (Lemma
+    SI-J's proof, § 2.2)
+  not claimed: anything for a dependent product, or for noise that is not Bernoulli
+  argument: § 2.2 SI
+  verdict: derived
+  grade: hand
+  minds: 1 — J45's derivation; J46 re-derived it with SI-5 (J46-11), not counted here
+  model: J45-SI-C's construction — `Φ` a uniform translate of C9's colouring of `Γ₇`, `ε` fair bits, no `c₂`
+  prior art: owed — none recorded in this file
+  handoff: de Bruijn — with J45-SI-5 and J45-SI-C, which use it
+
+Rests on it: J45-SI-5 (step (c)) and J45-SI-C.
+
+derivation: J45-SI-C
+  statement: F2's noisy colourings over ℚ(√11) satisfy SI with equality at every `u` and `S`, with `σ_μ(R̂ ∖ E) > 0`
+  uses only: C9's colouring `γ = ⌊4θ⌋` of `Γ₇` and the exact facts of `tools/crunch_j45_gap7.py` (2)–(4) — `Z̄ = {θ = 0}` independent, every vertex of
+    it gapped with missing colour 3, the supports disjoint on all 392 directed edges; J45-SI-J; SI-3; J45-N1 (c) (§ 2.3)
+  not claimed: that every four-colouring over ℚ(√11) has equality (open: J45-SI-5's equivalent); anything over ℚ(√47)
+  argument: § 2.3 The control: F2's colourings satisfy SI with equality
+  verdict: derived
+  grade: hand — the row's grade is "[hand + tools exact]": the tool's items (2)–(4), exact over `Γ₇`'s 49 vertices and 392 directed edges, its two
+    plants firing (§ 2.3)
+  minds: 1 — J45's derivation; J46's control (J46-9, "TRUE under 'a.s. proper'") fixed the hypothesis, not the example, and is not counted here
+  model: the colouring itself — `γ = ⌊4(2x + 3y)/7⌋` on `Γ₇`, `Z̄ = {θ = 0}`, missing colour 3, fair bits
+  prior art: owed — none recorded in this file
+  handoff: de Bruijn — FS129-SA1 § 6.3 lists it among the statements upstream of FS100-Q47 with no entry; its finite facts are a `decide` over `Γ₇`
+
+Rests on it: SI's control (§ 5.1): equality with spectrum off `E`, so equality does not force the spectrum onto `E`.
+
+derivation: J45-SP-oi
+  statement: SP's "only if" — Lemma SP-only-if (§ 4.2), verbatim: "If a finite positive `U`-invariant `τ` has `τ(E) = 0` and `∫ Re χ(1) dτ < 0`,
+    then `τ` itself is a `U`-invariant finite measure with `τ(E) = 0` that is not a multiple of Haar"
+  uses only: `∫ χ(1) dHaar = 0` on the compact `R̂`, because `1 ≠ 0` in `R` (§ 4.2)
+  not claimed: SP's "if" (J45-SP-if); that such a `τ` exists (the open sign problem the Poros record's F5 names)
+  argument: § 4.2 SP
+  verdict: derived
+  grade: hand
+  minds: 1 — J45's derivation (the row: "[hand]", § 5.1 "one line")
+  model: none known — a finite positive `U`-invariant `E`-null `τ` with negative mean at `1` is exactly the open object; the statement is the one-line
+    direction of SP's equivalence, used inside SP-Cor's chain
+  prior art: owed — none recorded in this file
+  handoff: de Bruijn — FS103-F-*'s grade names it (`plans/FS103-derivation.md` line 72); with SP-Cor's chain (FS100-SPC, FS100-K0b, row 123)
+
+Rests on it: SP's equivalence and, through it, SP-Cor's reading of MR (§ 4.2); FS103-F-* (line 72).
+
+derivation: J45-SP-if
+  statement: SP's "if" (positive measures; complex with `|ν|(E) = 0`) — Lemma SP-if (§ 4.2), verbatim: "If some finite positive `U`-invariant `ν` with
+    `ν(E) = 0` is not a multiple of Haar, then some finite positive `U`-invariant `τ` has `τ(E) = 0` and `∫ Re χ(1) dτ < 0`."
+  uses only: Fourier uniqueness on the compact `R̂`; `−1 ∈ U` (so `ν̂(r₀)` is real); J28V-7 (`MR ⊆ r₀R`, so `r₀R` is `τ′_S`-open and the dual of
+    multiplication by `r₀` keeps characters off `E`); a real place of `F` and the archimedean circle measure of radius `r`, `2πr = j₁,₁`,
+    `J₀(j₁,₁) < 0`; that `E` is a group containing `A` (§ 4.2); for complex `ν`, the Jordan parts of `Re ν`, `Im ν` (§ 4.2, Readings)
+  not claimed: the literal value reading for signed measures, under which the hypothesis always holds and "if" would assert the open sign problem
+    itself (§ 4.2, Readings); that a non-Haar `E`-null invariant measure exists
+  argument: § 4.2 SP
+  verdict: derived
+  grade: hand
+  minds: 1 — J45's derivation (the row: "[hand]")
+  model: none known for the hypothesis — a non-Haar finite positive `U`-invariant `E`-null measure is the zero-entropy question the Poros record's F5
+    names; the statement is a reduction, used through SP
+  prior art: owed — none recorded in this file
+  handoff: de Bruijn — FS129-SA1 § 6.3 lists it among the statements upstream of FS100-Q47 with no entry; with SP-Cor's chain (FS100-SPC, FS100-K0b)
+
+Rests on it: SP's equivalence (with J45-SP-oi), hence the form of SP-Cor in which MR's measure statement is what decides `χ(ℚ(√47)²) ≥ 5`.
