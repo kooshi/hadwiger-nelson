@@ -3256,30 +3256,443 @@ theorem hcUpTri_frame {m n : ℤ} {z : ℂ} (hz : z ∈ hcUpTri m n) (j : Fin 3)
     · exact hgood _ _ (by congr 1; rw [hφ]; ring) (hA _ rfl).1 (hA _ rfl).2.1 (hA _ rfl).2.2
   exact convexHull_min hsub hconv hz
 
+/-- The edge directions `w_j = e(2πj/3)` explicitly. -/
+theorem hc_w_explicit (j : Fin 3) :
+    e (2 * π * ((j : ℕ) : ℝ) / 3) = ![(1 : ℂ), -1 / 2 + ((√3 / 2 : ℝ) : ℂ) * I, -1 / 2 - ((√3 / 2 : ℝ) : ℂ) * I] j := by
+  fin_cases j
+  · simp [e]
+  · simp only [Fin.mk_one, Fin.isValue, Matrix.cons_val_one, Nat.cast_one, mul_one]
+    rw [e_eq, show 2 * π / 3 = π - π / 3 by ring, Real.cos_pi_sub, Real.sin_pi_sub, Real.cos_pi_div_three,
+      Real.sin_pi_div_three]
+    push_cast; ring
+  · simp only [Fin.reduceFinMk, Matrix.cons_val, Nat.cast_ofNat]
+    rw [e_eq, show 2 * π * 2 / 3 = π / 3 + π by ring, Real.cos_add_pi, Real.sin_add_pi, Real.cos_pi_div_three,
+      Real.sin_pi_div_three]
+    push_cast; ring
+
+/-- The three edge frames of an up centroid in Cartesian coordinates `(a, b) = z − C`. -/
+theorem hcFrame_explicit (m n : ℤ) (z : ℂ) :
+    (hcFrameT m n 0 z = 2 + √3 / 6 - (z - hcUpC m n).re ∧ hcFrameS m n 0 z = -(z - hcUpC m n).im) ∧
+    (hcFrameT m n 1 z = 2 + √3 / 6 + (z - hcUpC m n).re / 2 - √3 / 2 * (z - hcUpC m n).im ∧
+      hcFrameS m n 1 z = √3 / 2 * (z - hcUpC m n).re + (z - hcUpC m n).im / 2) ∧
+    (hcFrameT m n 2 z = 2 + √3 / 6 + (z - hcUpC m n).re / 2 + √3 / 2 * (z - hcUpC m n).im ∧
+      hcFrameS m n 2 z = -(√3 / 2 * (z - hcUpC m n).re) + (z - hcUpC m n).im / 2) := by
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have hL : hcL - √3 / 6 = 2 + √3 / 6 := by unfold hcL; ring
+  set a := (z - hcUpC m n).re
+  set b := (z - hcUpC m n).im
+  have hz : z - hcUpC m n = (a : ℂ) + (b : ℂ) * I := (Complex.re_add_im _).symm
+  -- division by a unit complex number `w` is multiplication by its conjugate
+  have hdiv : ∀ c d : ℝ, c * c + d * d = 1 → (z - hcUpC m n) / ((c : ℂ) + (d : ℂ) * I) =
+      ((a * c + b * d : ℝ) : ℂ) + ((b * c - a * d : ℝ) : ℂ) * I := by
+    intro c d hcd
+    have hne : (c : ℂ) + (d : ℂ) * I ≠ 0 := by
+      intro h
+      have h1 := congrArg Complex.re h
+      have h2 := congrArg Complex.im h
+      simp at h1 h2
+      rw [h1, h2] at hcd; norm_num at hcd
+    rw [div_eq_iff hne, hz]
+    apply Complex.ext
+    · simp; linear_combination (-a) * hcd
+    · simp; linear_combination (-b) * hcd
+  have e0 : e (2 * π * (((0 : Fin 3) : ℕ) : ℝ) / 3) = 1 := by rw [hc_w_explicit]; simp
+  have e1 : e (2 * π * (((1 : Fin 3) : ℕ) : ℝ) / 3) = (((-1 / 2 : ℝ)) : ℂ) + ((√3 / 2 : ℝ) : ℂ) * I := by
+    rw [hc_w_explicit]; simp
+  have e2 : e (2 * π * (((2 : Fin 3) : ℕ) : ℝ) / 3) = (((-1 / 2 : ℝ)) : ℂ) + ((-(√3 / 2) : ℝ) : ℂ) * I := by
+    rw [hc_w_explicit]; simp; ring
+  have c1 : (-1 / 2 : ℝ) * (-1 / 2) + √3 / 2 * (√3 / 2) = 1 := by nlinarith
+  have c2 : (-1 / 2 : ℝ) * (-1 / 2) + -(√3 / 2) * -(√3 / 2) = 1 := by nlinarith
+  refine ⟨⟨?_, ?_⟩, ⟨?_, ?_⟩, ⟨?_, ?_⟩⟩
+  · simp only [hcFrameT, e0, div_one, hL]; rfl
+  · simp only [hcFrameS, e0, div_one]; rfl
+  · simp only [hcFrameT, e1]; rw [hdiv _ _ c1, hL]; simp; ring
+  · simp only [hcFrameS, e1]; rw [hdiv _ _ c1]; simp; ring
+  · simp only [hcFrameT, e2]; rw [hdiv _ _ c2, hL]; simp; ring
+  · simp only [hcFrameS, e2]; rw [hdiv _ _ c2]; simp; ring
+
+/-- The frame inverts its coordinates. -/
+theorem hcFrame_hcFrameST (m n : ℤ) (j : Fin 3) (z : ℂ) :
+    hcFrame m n j (hcFrameS m n j z) (hcFrameT m n j z) = z := by
+  have he : e (2 * π * ((j : ℕ) : ℝ) / 3) ≠ 0 := by
+    intro h; have := norm_e (2 * π * ((j : ℕ) : ℝ) / 3); rw [h, norm_zero] at this; norm_num at this
+  have hq : ((hcL - √3 / 6 - hcFrameT m n j z : ℝ) : ℂ) - (hcFrameS m n j z : ℂ) * I =
+      (z - hcUpC m n) / e (2 * π * ((j : ℕ) : ℝ) / 3) := by
+    simp only [hcFrameT, hcFrameS]
+    apply Complex.ext <;> simp
+  rw [hcFrame, hq, div_mul_cancel₀ _ he, add_sub_cancel]
+
+/-- Distance in an edge frame. -/
+theorem dist_eq_hcFrame (m n : ℤ) (j : Fin 3) (z z' : ℂ) :
+    dist z z' = √((hcFrameS m n j z - hcFrameS m n j z') ^ 2 + (hcFrameT m n j z - hcFrameT m n j z') ^ 2) := by
+  conv_lhs => rw [← hcFrame_hcFrameST m n j z, ← hcFrame_hcFrameST m n j z']
+  exact dist_hcFrame _ _ _ _ _ _ _
+
+/-- The frame's `t` difference is at most the distance. -/
+theorem abs_sub_hcFrameT_le (m n : ℤ) (j : Fin 3) (z z' : ℂ) :
+    |hcFrameT m n j z - hcFrameT m n j z'| ≤ dist z z' := by
+  rw [dist_eq_hcFrame m n j]
+  exact Real.abs_le_sqrt (by nlinarith [sq_nonneg (hcFrameS m n j z - hcFrameS m n j z')])
+
+/-- The frame's `s` difference is at most the distance. -/
+theorem abs_sub_hcFrameS_le (m n : ℤ) (j : Fin 3) (z z' : ℂ) :
+    |hcFrameS m n j z - hcFrameS m n j z'| ≤ dist z z' := by
+  rw [dist_eq_hcFrame m n j]
+  exact Real.abs_le_sqrt (by nlinarith [sq_nonneg (hcFrameT m n j z - hcFrameT m n j z')])
+
+/-- The frame coordinate `s` is continuous. -/
+theorem continuous_hcFrameS (m n : ℤ) (j : Fin 3) : Continuous (hcFrameS m n j) := by
+  unfold hcFrameS; fun_prop
+
+/-- The frame coordinate `t` is continuous. -/
+theorem continuous_hcFrameT (m n : ℤ) (j : Fin 3) : Continuous (hcFrameT m n j) := by
+  unfold hcFrameT; fun_prop
+
+/-- The frame map is continuous. -/
+theorem continuous_hcFrame (m n : ℤ) (j : Fin 3) : Continuous fun p : ℝ × ℝ => hcFrame m n j p.1 p.2 := by
+  unfold hcFrame; fun_prop
+
+/-- The frame map is continuous in `t`. -/
+theorem continuous_hcFrame_t (m n : ℤ) (j : Fin 3) (s : ℝ) : Continuous fun t : ℝ => hcFrame m n j s t := by
+  unfold hcFrame; fun_prop
+
+/-- The frame map is continuous in `s`. -/
+theorem continuous_hcFrame_s (m n : ℤ) (j : Fin 3) (t : ℝ) : Continuous fun s : ℝ => hcFrame m n j s t := by
+  unfold hcFrame; fun_prop
+
+/-- Two frames at one up centroid differ by a rotation of `±2π/3`. -/
+theorem hcFrame_other (m n : ℤ) {j k : Fin 3} (hjk : j ≠ k) (z : ℂ) : ∃ ε : ℝ, (ε = 1 ∨ ε = -1) ∧
+    hcFrameT m n k z = 2 + √3 / 6 + (2 + √3 / 6 - hcFrameT m n j z) / 2 - ε * (√3 / 2) * hcFrameS m n j z ∧
+    hcFrameS m n k z = -(ε * (√3 / 2) * (2 + √3 / 6 - hcFrameT m n j z)) - hcFrameS m n j z / 2 := by
+  have h3 : √3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  obtain ⟨⟨T0, S0⟩, ⟨T1, S1⟩, ⟨T2, S2⟩⟩ := hcFrame_explicit m n z
+  fin_cases j <;> fin_cases k <;> simp at hjk <;> simp only [Fin.zero_eta, Fin.mk_one, Fin.reduceFinMk, Fin.isValue]
+  · exact ⟨-1, Or.inr rfl, by rw [T1, T0, S0]; ring, by rw [S1, S0, T0]; ring⟩
+  · exact ⟨1, Or.inl rfl, by rw [T2, T0, S0]; ring, by rw [S2, S0, T0]; ring⟩
+  · refine ⟨1, Or.inl rfl, ?_, ?_⟩
+    · rw [T0, T1, S1]; ring_nf; rw [h3]; ring
+    · rw [S0, T1, S1]; ring_nf; rw [h3]; ring
+  · refine ⟨-1, Or.inr rfl, ?_, ?_⟩
+    · rw [T2, T1, S1]; ring_nf; rw [h3]; ring
+    · rw [S2, T1, S1]; ring_nf; rw [h3]; ring
+  · refine ⟨-1, Or.inr rfl, ?_, ?_⟩
+    · rw [T0, T2, S2]; ring_nf; rw [h3]; ring
+    · rw [S0, T2, S2]; ring_nf; rw [h3]; ring
+  · refine ⟨1, Or.inl rfl, ?_, ?_⟩
+    · rw [T1, T2, S2]; ring_nf; rw [h3]; ring
+    · rw [S1, T2, S2]; ring_nf; rw [h3]; ring
+
+/-- The up triangle's vertices relative to its centroid, in Cartesian form. -/
+theorem hcUpTri_vertices :
+    e (π / 3) / √3 = ((√3 / 6 : ℝ) : ℂ) + ((1 / 2 : ℝ) : ℂ) * I ∧ e π / √3 = ((-(√3 / 3) : ℝ) : ℂ) ∧
+      e (5 * π / 3) / √3 = ((√3 / 6 : ℝ) : ℂ) + ((-(1 / 2) : ℝ) : ℂ) * I := by
+  have h3 : (√3 : ℝ) ≠ 0 := by positivity
+  have h3' : (√3 : ℂ) ≠ 0 := by exact_mod_cast h3
+  have hs : √3 * √3 = (3 : ℝ) := Real.mul_self_sqrt (by norm_num)
+  refine ⟨?_, ?_, ?_⟩
+  · rw [e_eq, Real.cos_pi_div_three, Real.sin_pi_div_three, div_eq_iff h3']
+    apply Complex.ext <;> simp <;> nlinarith
+  · rw [e_eq, Real.cos_pi, Real.sin_pi, div_eq_iff h3']
+    apply Complex.ext <;> simp; nlinarith
+  · rw [e_eq, show 5 * π / 3 = 2 * π - π / 3 by ring, Real.cos_two_pi_sub, Real.sin_two_pi_sub, Real.cos_pi_div_three,
+      Real.sin_pi_div_three, div_eq_iff h3']
+    apply Complex.ext <;> simp <;> nlinarith
+
+/-- **The up triangle is the intersection of its three inner half-planes** `t ≥ 2`. -/
+theorem mem_hcUpTri_iff {m n : ℤ} {z : ℂ} : z ∈ hcUpTri m n ↔ ∀ k : Fin 3, 2 ≤ hcFrameT m n k z := by
+  refine ⟨fun hz k => (hcUpTri_frame hz k).2.1, fun h => ?_⟩
+  have hs : √3 * √3 = (3 : ℝ) := Real.mul_self_sqrt (by norm_num)
+  obtain ⟨⟨T0, -⟩, ⟨T1, -⟩, ⟨T2, -⟩⟩ := hcFrame_explicit m n z
+  have h0 := h 0
+  have h1 := h 1
+  have h2 := h 2
+  rw [T0] at h0
+  rw [T1] at h1
+  rw [T2] at h2
+  set a := (z - hcUpC m n).re
+  set b := (z - hcUpC m n).im
+  have hz : z = hcUpC m n + ((a : ℂ) + (b : ℂ) * I) := by rw [Complex.re_add_im]; ring
+  obtain ⟨v1, v2, v3⟩ := hcUpTri_vertices
+  have l0 : 0 ≤ 1 / 3 + √3 / 3 * a + b := by
+    rw [show 1 / 3 + √3 / 3 * a + b = 2 * √3 / 3 * (√3 / 6 + a / 2 + √3 / 2 * b) by
+      linear_combination (-(1 / 9) - b / 3) * hs]
+    exact mul_nonneg (by positivity) (by linarith)
+  have l1 : 0 ≤ 1 / 3 - 2 * √3 / 3 * a := by
+    rw [show 1 / 3 - 2 * √3 / 3 * a = 2 * √3 / 3 * (√3 / 6 - a) by linear_combination (-(1 / 9)) * hs]
+    exact mul_nonneg (by positivity) (by linarith)
+  have l2 : 0 ≤ 1 / 3 + √3 / 3 * a - b := by
+    rw [show 1 / 3 + √3 / 3 * a - b = 2 * √3 / 3 * (√3 / 6 + a / 2 - √3 / 2 * b) by
+      linear_combination (-(1 / 9) + b / 3) * hs]
+    exact mul_nonneg (by positivity) (by linarith)
+  have hmem := (convex_convexHull ℝ ({hcUpC m n + e (π / 3) / √3, hcUpC m n + e π / √3,
+      hcUpC m n + e (5 * π / 3) / √3} : Set ℂ)).sum_mem (t := Finset.univ)
+    (w := ![1 / 3 + √3 / 3 * a + b, 1 / 3 - 2 * √3 / 3 * a, 1 / 3 + √3 / 3 * a - b])
+    (z := ![hcUpC m n + e (π / 3) / √3, hcUpC m n + e π / √3, hcUpC m n + e (5 * π / 3) / √3])
+    (fun i _ => by fin_cases i <;> simp <;> linarith)
+    (by simp [Fin.sum_univ_three]; ring)
+    (fun i _ => by fin_cases i <;> simp <;> exact subset_convexHull ℝ _ (by simp))
+  unfold hcUpTri
+  convert hmem using 1
+  simp only [Fin.sum_univ_three, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.vecHead,
+    Matrix.vecTail, Function.comp, Fin.succ_zero_eq_one, Complex.real_smul]
+  rw [v1, v2, v3]
+  conv_lhs => rw [hz]
+  apply Complex.ext <;> simp <;> nlinarith [hs]
+
 /-- **(G2)**: the graph `t = 2 + g(s)`, `|s| ≤ 1/2`, of every side lies in `U` (the three slivers are disjoint and miss the other
 sides' curves: `g ≤ (1/2 − |s|)²/4` against the corner distance `0.8 (1/2 − |s|)`). -/
 theorem hcUp_slivers {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) :
     hcFrame m n j s (2 + g s) ∈ hcUp g m n := by
-  sorry
+  have _ := hZc; have _ := hZs; have _ := hZi
+  obtain ⟨-, hb, -, -⟩ := hg
+  have h3 : √3 * √3 = (3 : ℝ) := Real.mul_self_sqrt (by norm_num)
+  have h3l : (1.7 : ℝ) < √3 := by nlinarith [Real.sqrt_nonneg 3]
+  have h3u : √3 < (1.75 : ℝ) := by nlinarith [Real.sqrt_nonneg 3]
+  obtain ⟨hPS, hPT⟩ := hcFrame_coords m n j s (2 + g s)
+  obtain ⟨g0, gZ, -, g64, -⟩ := hb s hs
+  have key : ∀ k : Fin 3, 2 + g (hcFrameS m n k (hcFrame m n j s (2 + g s))) ≤ hcFrameT m n k (hcFrame m n j s (2 + g s)) ∧
+      2 ≤ hcFrameT m n k (hcFrame m n j s (2 + g s)) := by
+    intro k
+    by_cases hk : k = j
+    · subst hk; rw [hPS, hPT]; exact ⟨le_rfl, by linarith⟩
+    obtain ⟨ε, hε, hT, hS⟩ := hcFrame_other m n (Ne.symm hk) (hcFrame m n j s (2 + g s))
+    rw [hPS, hPT] at hT hS
+    set τ := g s
+    have hεε : ε * ε = 1 := by rcases hε with rfl | rfl <;> norm_num
+    have hεa : |ε| = 1 := by rcases hε with rfl | rfl <;> norm_num
+    -- `u = 1/2 − ε s` is the distance from `s` to the end `ε/2 ∈ Z`
+    set u := 1 / 2 - ε * s with hu
+    have hεs : |ε * s| ≤ 1 / 2 := by rw [abs_mul, hεa, one_mul, abs_le]; exact ⟨by linarith [hs.1], by linarith [hs.2]⟩
+    have hu0 : 0 ≤ u := by rw [hu]; linarith [le_abs_self (ε * s)]
+    have hu1 : u ≤ 1 := by rw [hu]; linarith [neg_abs_le (ε * s)]
+    have hend : ∀ σ : ℝ, σ = 1 ∨ σ = -1 → σ / 2 ∈ Z := by
+      rintro σ (rfl | rfl)
+      · simpa using hr
+      · simpa [neg_div] using hl
+    have hτu : τ ≤ u ^ 2 / 4 := by
+      have hd : infDist s Z ≤ u := by
+        refine (infDist_le_dist_of_mem (hend ε hε)).trans_eq ?_
+        rw [Real.dist_eq, show s - ε / 2 = ε * (ε * s - 1 / 2) by linear_combination (-s) * hεε + 0 * hεε, abs_mul, hεa,
+          one_mul, abs_sub_comm, abs_of_nonneg hu0]
+      refine gZ.trans ?_
+      have := infDist_nonneg (x := s) (s := Z)
+      nlinarith
+    -- the other frame's coordinates: `t − 2 = (√3 u − τ)/2`, `s = ε (a − 1/2)` with `a = u/2 + (√3/2) τ`
+    set α := u / 2 + √3 / 2 * τ with hα
+    have hSk : hcFrameS m n k (hcFrame m n j s (2 + g s)) = ε * (α - 1 / 2) := by
+      rw [hS, hα, hu]; linear_combination (-ε / 12) * h3 + (s / 2) * hεε
+    have hTk : hcFrameT m n k (hcFrame m n j s (2 + g s)) = 2 + (√3 * u - τ) / 2 := by
+      rw [hT, hu]; ring
+    have hα0 : 0 ≤ α := by rw [hα]; positivity
+    have hu2 : u ^ 2 ≤ u := by nlinarith
+    have hτ4 : τ ≤ u / 4 := by linarith
+    have hs3τ : √3 * τ ≤ 1.75 * (u / 4) := by
+      calc √3 * τ ≤ √3 * (u / 4) := mul_le_mul_of_nonneg_left hτ4 (Real.sqrt_nonneg 3)
+        _ ≤ 1.75 * (u / 4) := mul_le_mul_of_nonneg_right h3u.le (by linarith)
+    have hs3u : 1.7 * u ≤ √3 * u := mul_le_mul_of_nonneg_right h3l.le hu0
+    have hαu : α ≤ u := by rw [hα]; linarith
+    have hSk' : hcFrameS m n k (hcFrame m n j s (2 + g s)) ∈ Icc (-1 / 2 : ℝ) (1 / 2) := by
+      rw [hSk]
+      have : |ε * (α - 1 / 2)| ≤ 1 / 2 := by rw [abs_mul, hεa, one_mul, abs_le]; constructor <;> linarith
+      exact ⟨by linarith [neg_abs_le (ε * (α - 1 / 2))], by linarith [le_abs_self (ε * (α - 1 / 2))]⟩
+    obtain ⟨gk0, gkZ, -, -, -⟩ := hb _ hSk'
+    have hdk : infDist (hcFrameS m n k (hcFrame m n j s (2 + g s))) Z ≤ α := by
+      refine (infDist_le_dist_of_mem (hend (-ε) (by rcases hε with rfl | rfl <;> norm_num))).trans_eq ?_
+      rw [hSk, Real.dist_eq, show ε * (α - 1 / 2) - -ε / 2 = ε * α by ring, abs_mul, hεa, one_mul, abs_of_nonneg hα0]
+    have hgk : g (hcFrameS m n k (hcFrame m n j s (2 + g s))) ≤ α ^ 2 / 4 := by
+      refine gkZ.trans ?_
+      have := infDist_nonneg (x := hcFrameS m n k (hcFrame m n j s (2 + g s))) (s := Z)
+      nlinarith
+    have hα2 : α ^ 2 ≤ u ^ 2 := pow_le_pow_left₀ hα0 hαu 2
+    rw [hTk]
+    constructor
+    · linarith
+    · linarith
+  exact ⟨mem_hcUpTri_iff.2 fun k => (key k).2, fun k => (key k).1⟩
+
+/-- The up triangle is compact. -/
+theorem isCompact_hcUpTri (m n : ℤ) : IsCompact (hcUpTri m n) := by
+  unfold hcUpTri
+  exact Set.Finite.isCompact_convexHull (𝕜 := ℝ) (Set.Finite.insert _ (Set.Finite.insert _ (Set.finite_singleton _)))
+
+/-- `U` is compact (closed inside the up triangle; `g` is continuous). -/
+theorem isCompact_hcUp {Z : Set ℝ} {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) : IsCompact (hcUp g m n) := by
+  have hgc : Continuous g := hg.1.continuous
+  refine (isCompact_hcUpTri m n).of_isClosed_subset ?_ fun z hz => hz.1
+  have : hcUp g m n = hcUpTri m n ∩ ⋂ k : Fin 3, {z | 2 + g (hcFrameS m n k z) ≤ hcFrameT m n k z} := by
+    ext z; simp [hcUp]
+  rw [this]
+  exact (isCompact_hcUpTri m n).isClosed.inter (isClosed_iInter fun k =>
+    isClosed_le (continuous_const.add (hgc.comp (continuous_hcFrameS m n k))) (continuous_hcFrameT m n k))
+
+/-- Every point of `U` has `t ≥ 2 + g(s) ≥ 2` and `|s| ≤ 1/2` in each edge frame. -/
+theorem hcUp_frame {Z : Set ℝ} {g : ℝ → ℝ} (hg : G1Bounds Z g) {m n : ℤ} {u : ℂ} (hu : u ∈ hcUp g m n) (j : Fin 3) :
+    hcFrameS m n j u ∈ Icc (-1 / 2 : ℝ) (1 / 2) ∧ 2 + g (hcFrameS m n j u) ≤ hcFrameT m n j u ∧ 2 ≤ hcFrameT m n j u := by
+  obtain ⟨h1, -, -⟩ := hcUpTri_frame hu.1 j
+  have hS : hcFrameS m n j u ∈ Icc (-1 / 2 : ℝ) (1 / 2) := ⟨by linarith [neg_abs_le (hcFrameS m n j u)],
+    by linarith [le_abs_self (hcFrameS m n j u)]⟩
+  have := (hg.2.1 _ hS).1
+  exact ⟨hS, hu.2 j, by linarith [hu.2 j]⟩
+
+/-- `U` is nonempty: it holds the point `(0, 2 + g 0)` of every frame. -/
+theorem hcUp_nonempty {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅)
+    (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) : (hcUp g m n).Nonempty :=
+  ⟨_, hcUp_slivers hZc hZs hZi hl hr hg m n 0 (s := 0) ⟨by norm_num, by norm_num⟩⟩
+
+/-- Below `t = 2` the distance to `U` is at least `2 − t`. -/
+theorem sub_le_infDist_hcUp {Z : Set ℝ} {g : ℝ → ℝ} (hg : G1Bounds Z g) {m n : ℤ} (hne : (hcUp g m n).Nonempty)
+    (j : Fin 3) (s t : ℝ) : 2 - t ≤ infDist (hcFrame m n j s t) (hcUp g m n) := by
+  refine (le_infDist hne).2 fun u hu => ?_
+  have h := abs_sub_hcFrameT_le m n j u (hcFrame m n j s t)
+  rw [(hcFrame_coords m n j s t).2, dist_comm] at h
+  linarith [(hcUp_frame hg hu j).2.2, le_abs_self (hcFrameT m n j u - t)]
+
+/-- On the vertical line of `s`, below `t = 2`, a lower point is farther from every point of `U`. -/
+theorem dist_hcUp_le_of_le {Z : Set ℝ} {g : ℝ → ℝ} (hg : G1Bounds Z g) {m n : ℤ} {u : ℂ} (hu : u ∈ hcUp g m n)
+    (j : Fin 3) (s : ℝ) {t₁ t₂ : ℝ} (h12 : t₁ ≤ t₂) (h2 : t₂ ≤ 2) :
+    dist (hcFrame m n j s t₂) u ≤ dist (hcFrame m n j s t₁) u := by
+  have hT := (hcUp_frame hg hu j).2.2
+  rw [dist_eq_hcFrame m n j, dist_eq_hcFrame m n j, (hcFrame_coords m n j s t₁).1, (hcFrame_coords m n j s t₁).2,
+    (hcFrame_coords m n j s t₂).1, (hcFrame_coords m n j s t₂).2]
+  exact Real.sqrt_le_sqrt (by nlinarith)
+
+/-- The same, strictly. -/
+theorem dist_hcUp_lt_of_lt {Z : Set ℝ} {g : ℝ → ℝ} (hg : G1Bounds Z g) {m n : ℤ} {u : ℂ} (hu : u ∈ hcUp g m n)
+    (j : Fin 3) (s : ℝ) {t₁ t₂ : ℝ} (h12 : t₁ < t₂) (h2 : t₂ ≤ 2) :
+    dist (hcFrame m n j s t₂) u < dist (hcFrame m n j s t₁) u := by
+  have hT := (hcUp_frame hg hu j).2.2
+  rw [dist_eq_hcFrame m n j, dist_eq_hcFrame m n j, (hcFrame_coords m n j s t₁).1, (hcFrame_coords m n j s t₁).2,
+    (hcFrame_coords m n j s t₂).1, (hcFrame_coords m n j s t₂).2]
+  exact Real.sqrt_lt_sqrt (by positivity) (by nlinarith)
+
+/-- `d_U` is antitone in `t` below `2`. -/
+theorem infDist_hcUp_antitone {Z : Set ℝ} {g : ℝ → ℝ} (hg : G1Bounds Z g) {m n : ℤ} (hne : (hcUp g m n).Nonempty)
+    (j : Fin 3) (s : ℝ) {t₁ t₂ : ℝ} (h12 : t₁ ≤ t₂) (h2 : t₂ ≤ 2) :
+    infDist (hcFrame m n j s t₂) (hcUp g m n) ≤ infDist (hcFrame m n j s t₁) (hcUp g m n) :=
+  (le_infDist hne).2 fun _ hu => (infDist_le_dist_of_mem hu).trans (dist_hcUp_le_of_le hg hu j s h12 h2)
+
+/-- `d_U` is strictly decreasing in `t` below `2`. -/
+theorem infDist_hcUp_strictAnti {Z : Set ℝ} {g : ℝ → ℝ} (hg : G1Bounds Z g) {m n : ℤ} (hne : (hcUp g m n).Nonempty)
+    (j : Fin 3) (s : ℝ) {t₁ t₂ : ℝ} (h12 : t₁ < t₂) (h2 : t₂ ≤ 2) :
+    infDist (hcFrame m n j s t₂) (hcUp g m n) < infDist (hcFrame m n j s t₁) (hcUp g m n) := by
+  obtain ⟨u, hu, hd⟩ := (isCompact_hcUp hg m n).exists_infDist_eq_dist hne (hcFrame m n j s t₁)
+  rw [hd]
+  exact (infDist_le_dist_of_mem hu).trans_lt (dist_hcUp_lt_of_lt hg hu j s h12 h2)
+
+/-- The set `{t : d_U(s, t) ≤ 1}` whose infimum is `ℓ(s)`: closed, bounded below by `1`, holding `1 + g(s)`. -/
+theorem hcBandTop_set {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅)
+    (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s : ℝ}
+    (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) :
+    IsClosed {t | infDist (hcFrame m n j s t) (hcUp g m n) ≤ 1} ∧ 1 + g s ∈ {t | infDist (hcFrame m n j s t) (hcUp g m n) ≤ 1} ∧
+      ∀ t ∈ {t | infDist (hcFrame m n j s t) (hcUp g m n) ≤ 1}, 1 ≤ t := by
+  have hne := hcUp_nonempty hZc hZs hZi hl hr hg m n
+  refine ⟨isClosed_le ((continuous_infDist_pt _).comp (continuous_hcFrame_t m n j s)) continuous_const,
+    ?_, fun t ht => ?_⟩
+  · refine (infDist_le_dist_of_mem (hcUp_slivers hZc hZs hZi hl hr hg m n j hs)).trans (le_of_eq ?_)
+    rw [dist_hcFrame, show 1 + g s - (2 + g s) = -1 by ring]; simp
+  · by_contra h
+    have := sub_le_infDist_hcUp hg hne j s t
+    simp only [mem_setOf_eq] at ht
+    linarith
+
+/-- `ℓ(s)` lies in its set: `d_U(s, ℓ(s)) ≤ 1`, and `1 ≤ ℓ(s) ≤ 1 + g(s)`. -/
+theorem hcBandTop_spec {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅)
+    (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s : ℝ}
+    (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) :
+    infDist (hcFrame m n j s (hcBandTop g m n j s)) (hcUp g m n) ≤ 1 ∧ 1 ≤ hcBandTop g m n j s ∧
+      hcBandTop g m n j s ≤ 1 + g s := by
+  obtain ⟨hcl, hmem, hlow⟩ := hcBandTop_set hZc hZs hZi hl hr hg m n j hs
+  have hbdd : BddBelow {t | infDist (hcFrame m n j s t) (hcUp g m n) ≤ 1} := ⟨1, hlow⟩
+  exact ⟨hcl.csInf_mem ⟨_, hmem⟩ hbdd, le_csInf ⟨_, hmem⟩ hlow, csInf_le hbdd hmem⟩
 
 /-- **(G3)**, bounds: `1 ≤ ℓ ≤ 1 + g`, and `ℓ(s) = 1` iff `s ∈ Z`. -/
 theorem hcBandTop_bounds {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) :
     1 ≤ hcBandTop g m n j s ∧ hcBandTop g m n j s ≤ 1 + g s ∧ (hcBandTop g m n j s = 1 ↔ s ∈ Z) := by
-  sorry
+  obtain ⟨hin, h1, hg1⟩ := hcBandTop_spec hZc hZs hZi hl hr hg m n j hs
+  refine ⟨h1, hg1, ⟨fun heq => ?_, fun hsZ => ?_⟩⟩
+  · by_contra hsZ
+    have hpos := hg.2.2.1 s hs hsZ
+    rw [heq] at hin
+    obtain ⟨u, hu, hd⟩ := (isCompact_hcUp hg m n).exists_infDist_eq_dist (hcUp_nonempty hZc hZs hZi hl hr hg m n)
+      (hcFrame m n j s 1)
+    rw [hd, dist_eq_hcFrame m n j, (hcFrame_coords m n j s 1).1, (hcFrame_coords m n j s 1).2] at hin
+    obtain ⟨hS, hT, hT2⟩ := hcUp_frame hg hu j
+    have hsq : (s - hcFrameS m n j u) ^ 2 + (1 - hcFrameT m n j u) ^ 2 ≤ 1 := by
+      have := Real.sqrt_le_one.mp hin
+      nlinarith [Real.sq_sqrt (show 0 ≤ (s - hcFrameS m n j u) ^ 2 + (1 - hcFrameT m n j u) ^ 2 by positivity)]
+    have hTu : hcFrameT m n j u ≤ 2 := by nlinarith [sq_nonneg (s - hcFrameS m n j u)]
+    have hSu : hcFrameS m n j u = s := by nlinarith [sq_nonneg (s - hcFrameS m n j u)]
+    rw [hSu] at hT
+    linarith
+  · have hg0 : g s = 0 := by
+      have h := (hg.2.1 s hs)
+      rw [infDist_zero_of_mem hsZ] at h
+      linarith [h.1, h.2.1]
+    rw [hg0] at hg1
+    linarith
 
 /-- **(G3)**, the band below `t = 2` is exactly where `d_U > 1` (`d_U` strictly decreasing in `t` there). -/
 theorem lt_hcBandTop_iff {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s t : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) (ht : t < 2) :
     t < hcBandTop g m n j s ↔ 1 < infDist (hcFrame m n j s t) (hcUp g m n) := by
-  sorry
+  obtain ⟨hcl, hmem, hlow⟩ := hcBandTop_set hZc hZs hZi hl hr hg m n j hs
+  have hbdd : BddBelow {t | infDist (hcFrame m n j s t) (hcUp g m n) ≤ 1} := ⟨1, hlow⟩
+  obtain ⟨hin, -, -⟩ := hcBandTop_spec hZc hZs hZi hl hr hg m n j hs
+  constructor
+  · intro h
+    by_contra h'
+    exact absurd (csInf_le hbdd (show t ∈ {t | infDist (hcFrame m n j s t) (hcUp g m n) ≤ 1} from not_lt.1 h'))
+      (not_le.2 h)
+  · intro h
+    by_contra h'
+    have := infDist_hcUp_antitone hg (hcUp_nonempty hZc hZs hZi hl hr hg m n) j s (not_lt.1 h') ht.le
+    linarith
 
 /-- **(G3)**, continuity of `ℓ`. -/
 theorem continuousOn_hcBandTop {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) :
     ContinuousOn (hcBandTop g m n j) (Icc (-1 / 2 : ℝ) (1 / 2)) := by
-  sorry
+  have hne := hcUp_nonempty hZc hZs hZi hl hr hg m n
+  set d : ℝ → ℝ → ℝ := fun s t => infDist (hcFrame m n j s t) (hcUp g m n) with hd
+  -- `d` is `1`-Lipschitz in `s`
+  have hlip : ∀ s s' t, |d s t - d s' t| ≤ |s - s'| := by
+    intro s s' t
+    have h : dist (hcFrame m n j s t) (hcFrame m n j s' t) = |s - s'| := by
+      rw [dist_hcFrame]; simp [Real.sqrt_sq_eq_abs]
+    rw [abs_le]; constructor
+    · have := infDist_le_infDist_add_dist (x := hcFrame m n j s' t) (y := hcFrame m n j s t) (s := hcUp g m n)
+      rw [dist_comm, h] at this; simp only [hd]; linarith
+    · have := infDist_le_infDist_add_dist (x := hcFrame m n j s t) (y := hcFrame m n j s' t) (s := hcUp g m n)
+      rw [h] at this; simp only [hd]; linarith
+  intro s₀ hs₀
+  rw [Metric.continuousWithinAt_iff]
+  intro ε hε
+  obtain ⟨hin₀, h1₀, hg₀⟩ := hcBandTop_spec hZc hZs hZi hl hr hg m n j hs₀
+  have hg64 := (hg.2.1 s₀ hs₀).2.2.2.1
+  set ℓ₀ := hcBandTop g m n j s₀
+  set ε' := min ε (1 / 2) / 2 with hε'
+  have hε'0 : 0 < ε' := by positivity
+  have hε'1 : ε' < ε := by rw [hε']; linarith [min_le_left ε (1 / 2)]
+  have hε'2 : ε' ≤ 1 / 4 := by rw [hε']; linarith [min_le_right ε (1 / 2)]
+  have hlo : 1 < d s₀ (ℓ₀ - ε') :=
+    (lt_hcBandTop_iff hZc hZs hZi hl hr hg m n j hs₀ (by linarith)).1 (by linarith)
+  have hhi : d s₀ (ℓ₀ + ε') < 1 :=
+    (infDist_hcUp_strictAnti hg hne j s₀ (by linarith : ℓ₀ < ℓ₀ + ε') (by linarith)).trans_le hin₀
+  refine ⟨min (d s₀ (ℓ₀ - ε') - 1) (1 - d s₀ (ℓ₀ + ε')), lt_min (by linarith) (by linarith), fun s hs hss => ?_⟩
+  rw [Real.dist_eq] at hss ⊢
+  have hδ1 := (lt_min_iff.1 hss).1
+  have hδ2 := (lt_min_iff.1 hss).2
+  have a1 := hlip s s₀ (ℓ₀ - ε')
+  have a2 := hlip s s₀ (ℓ₀ + ε')
+  have hlo' : 1 < d s (ℓ₀ - ε') := by rw [abs_le] at a1; linarith [a1.1]
+  have hhi' : d s (ℓ₀ + ε') < 1 := by rw [abs_le] at a2; linarith [a2.2]
+  obtain ⟨-, hlow⟩ := (hcBandTop_set hZc hZs hZi hl hr hg m n j hs).2
+  have hup : hcBandTop g m n j s ≤ ℓ₀ + ε' := csInf_le ⟨1, hlow⟩ (show ℓ₀ + ε' ∈ {t | d s t ≤ 1} from hhi'.le)
+  have hdown : ℓ₀ - ε' < hcBandTop g m n j s :=
+    (lt_hcBandTop_iff hZc hZs hZi hl hr hg m n j hs (by linarith)).2 hlo'
+  rw [abs_lt]; constructor <;> linarith
 
 /-- HC is closed (a locally finite union of closed blocks). -/
 theorem isClosed_hcSet {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
@@ -3296,11 +3709,55 @@ theorem volume_frontier_hcSet {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc 
     (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) : volume (frontier (hcSet g)) = 0 := by
   sorry
 
+/-- The distance from `s ∈ [−1/2, 1/2]` to `Z ∋ ±1/2` is at most `1/2 − |s|`. -/
+theorem infDist_le_half_sub_abs {Z : Set ℝ} (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {s : ℝ}
+    (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) : infDist s Z ≤ 1 / 2 - |s| := by
+  rcases le_total 0 s with h | h
+  · refine (infDist_le_dist_of_mem hr).trans_eq ?_
+    rw [Real.dist_eq, abs_of_nonneg h, abs_of_nonpos (by linarith [hs.2])]; ring
+  · refine (infDist_le_dist_of_mem hl).trans_eq ?_
+    rw [Real.dist_eq, abs_of_nonpos h, abs_of_nonneg (by linarith [hs.1])]; ring
+
 /-- **The band has diameter `< 1`**: it thins to `0` quadratically at both ends (§ 2.3: `|z₁ − z₂|² < 1 − σ + σ² ≤ 1`). -/
 theorem hc_band_dist_lt_one {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {x y : ℂ} (hx : x ∈ hcBand g m n j) (hy : y ∈ hcBand g m n j) :
     dist x y < 1 := by
-  sorry
+  obtain ⟨s₁, t₁, hs₁, ht₁, ht₁', rfl⟩ := hx
+  obtain ⟨s₂, t₂, hs₂, ht₂, ht₂', rfl⟩ := hy
+  wlog h12 : s₁ ≤ s₂ generalizing s₁ t₁ s₂ t₂
+  · rw [dist_comm]; exact this s₂ t₂ hs₂ ht₂ ht₂' s₁ t₁ hs₁ ht₁ ht₁' (le_of_not_ge h12)
+  have hI : ∀ s : ℝ, |s| < 1 / 2 → s ∈ Icc (-1 / 2 : ℝ) (1 / 2) := fun s hs =>
+    ⟨by linarith [neg_abs_le s], by linarith [le_abs_self s]⟩
+  have b1 := (hcBandTop_bounds hZc hZs hZi hl hr hg m n j (hI s₁ hs₁)).2.1
+  have b2 := (hcBandTop_bounds hZc hZs hZi hl hr hg m n j (hI s₂ hs₂)).2.1
+  have g1 := (hg.2.1 s₁ (hI s₁ hs₁)).2.1
+  have g2 := (hg.2.1 s₂ (hI s₂ hs₂)).2.1
+  obtain ⟨u₁, hu₁d⟩ : ∃ u, u = s₁ + 1 / 2 := ⟨_, rfl⟩
+  obtain ⟨u₂, hu₂d⟩ : ∃ u, u = 1 / 2 - s₂ := ⟨_, rfl⟩
+  have hu₁ : 0 < u₁ := by rw [hu₁d]; linarith [neg_abs_le s₁]
+  have hu₂ : 0 < u₂ := by rw [hu₂d]; linarith [le_abs_self s₂]
+  have d1 : infDist s₁ Z ≤ u₁ :=
+    (infDist_le_dist_of_mem hl).trans_eq (by rw [Real.dist_eq, abs_of_pos (by linarith), hu₁d]; ring)
+  have d2 : infDist s₂ Z ≤ u₂ :=
+    (infDist_le_dist_of_mem hr).trans_eq (by rw [Real.dist_eq, abs_of_neg (by linarith), hu₂d]; ring)
+  have i1 := infDist_nonneg (x := s₁) (s := Z)
+  have i2 := infDist_nonneg (x := s₂) (s := Z)
+  obtain ⟨σ, hσ⟩ : ∃ σ, σ = u₁ + u₂ := ⟨_, rfl⟩
+  have hσ1 : σ ≤ 1 := by rw [hσ, hu₁d, hu₂d]; linarith
+  have hσ0 : 0 < σ := by rw [hσ]; positivity
+  -- `|t₁ − t₂| < σ²/4`
+  have e1 : g s₁ ≤ σ ^ 2 / 4 := g1.trans (by nlinarith)
+  have e2 : g s₂ ≤ σ ^ 2 / 4 := g2.trans (by nlinarith)
+  have ht : |t₁ - t₂| < σ ^ 2 / 4 := by rw [abs_lt]; constructor <;> linarith
+  have ht2 : (t₁ - t₂) ^ 2 < (σ ^ 2 / 4) ^ 2 := by
+    rw [← sq_abs]; exact pow_lt_pow_left₀ ht (abs_nonneg _) two_ne_zero
+  have hσ4 : (σ ^ 2 / 4) ^ 2 ≤ σ := by
+    have : σ ^ 3 ≤ 1 := pow_le_one₀ hσ0.le hσ1
+    nlinarith
+  rw [dist_hcFrame, Real.sqrt_lt' one_pos]
+  have hs : s₁ - s₂ = σ - 1 := by rw [hσ, hu₁d, hu₂d]; ring
+  rw [hs]
+  nlinarith
 
 /-- **§ 2.3, unit-avoiding**: no two points of `int HC` are at distance `1` — the block-distance table H1 (exact in `ℚ(√3)`, one
 period), the band within `1/64` of `σ_e`, the flanking pairs (`Λ_e ⊆ {t > 1}`, `d_U > 1` on `Λ_e`), diameters. **Split at
@@ -3342,7 +3799,87 @@ theorem hc_sausage_cover (z : ℂ) :
 theorem hc_lemmaNL {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s t : ℝ} (hs : |s| < 1 / 2) (ht : 2 < t) (htg : t ≤ 2 + g s) :
     ∃ p ∈ closure (hcBand g m n j), dist (hcFrame m n j s t) p = 1 := by
-  sorry
+  have hsI : s ∈ Icc (-1 / 2 : ℝ) (1 / 2) := ⟨by linarith [neg_abs_le s], by linarith [le_abs_self s]⟩
+  obtain ⟨-, gZ, ga, g64, ga8⟩ := hg.2.1 s hsI
+  have hne := hcUp_nonempty hZc hZs hZi hl hr hg m n
+  set a := deriv g s
+  set N := √(1 + a ^ 2) with hN
+  have hN2 : N ^ 2 = 1 + a ^ 2 := Real.sq_sqrt (by positivity)
+  have hN1 : 1 ≤ N := by rw [hN]; exact Real.one_le_sqrt.2 (by nlinarith)
+  have hNu : N ≤ 65 / 64 := by
+    have ha2 : a ^ 2 ≤ 1 / 64 := by rw [← sq_abs]; nlinarith [abs_nonneg a]
+    nlinarith
+  have hN0 : 0 < N := by linarith
+  -- the exterior disc about `c = (s, 2 + g s) + R ν`
+  set c := hcFrame m n j (s + 5 / 4 * a / N) (2 + g s - 5 / 4 / N) with hc
+  have hext : ∀ w ∈ hcUp g m n, 5 / 4 ≤ dist w c := by
+    intro w hw
+    obtain ⟨hSw, hTw, -⟩ := hcUp_frame hg hw j
+    have hpar := hg.2.2.2 (hcFrameS m n j w) hSw s hsI
+    rw [dist_eq_hcFrame m n j, hc, (hcFrame_coords m n j _ _).1, (hcFrame_coords m n j _ _).2]
+    refine Real.le_sqrt_of_sq_le ?_
+    set X := hcFrameS m n j w - s
+    set Y := hcFrameT m n j w - 2 - g s
+    have hq : -(X ^ 2 / 4) ≤ Y - a * X := by
+      simp only [X, Y]; linarith
+    -- `dist² − R² = X² + Y² + 2R(Y − aX)/N`
+    have key : (hcFrameS m n j w - (s + 5 / 4 * a / N)) ^ 2 + (hcFrameT m n j w - (2 + g s - 5 / 4 / N)) ^ 2 - (5 / 4) ^ 2 =
+        X ^ 2 + Y ^ 2 + 2 * (5 / 4) * (Y - a * X) / N := by
+      simp only [X, Y]; field_simp; rw [hN2]; ring
+    have hpos : 0 ≤ X ^ 2 + Y ^ 2 + 2 * (5 / 4) * (Y - a * X) / N := by
+      rw [add_div' _ _ _ hN0.ne', le_div_iff₀ hN0, zero_mul]
+      have h1 := mul_le_mul_of_nonneg_right hN1 (add_nonneg (sq_nonneg X) (sq_nonneg Y))
+      nlinarith [sq_nonneg X, sq_nonneg Y]
+    linarith
+  -- the band points `p(t') = (s, t') + ν`, `2 < t' < 2 + g s`
+  set P : ℝ → ℂ := fun t' => hcFrame m n j (s + a / N) (t' - 1 / N) with hP
+  have hPz : ∀ t', dist (hcFrame m n j s t') (P t') = 1 := by
+    intro t'
+    show dist (hcFrame m n j s t') (hcFrame m n j (s + a / N) (t' - 1 / N)) = 1
+    rw [dist_hcFrame, Real.sqrt_eq_one]
+    field_simp; rw [hN2]; ring
+  have hPband : ∀ t', 2 < t' → t' < 2 + g s → P t' ∈ hcBand g m n j := by
+    intro t' h2 hgt
+    have hη : 0 < 2 + g s - t' := by linarith
+    have hsa : |s + a / N| < 1 / 2 := by
+      have h1 : |a / N| ≤ |a| := by
+        rw [abs_div, abs_of_pos hN0]; exact div_le_self (abs_nonneg a) hN1
+      have h2 : |a| ≤ (1 / 2 - |s|) / 2 := ga.trans (by linarith [infDist_le_half_sub_abs hl hr hsI])
+      linarith [abs_add_le s (a / N)]
+    have hsaI : s + a / N ∈ Icc (-1 / 2 : ℝ) (1 / 2) :=
+      ⟨by linarith [neg_abs_le (s + a / N)], by linarith [le_abs_self (s + a / N)]⟩
+    have hinvN : 64 / 65 ≤ 1 / N := by rw [le_div_iff₀ hN0]; nlinarith
+    have hinvN1 : 1 / N ≤ 1 := by rw [div_le_one hN0]; exact hN1
+    have htop : t' - 1 / N < 2 := by linarith
+    refine ⟨s + a / N, t' - 1 / N, hsa, by linarith, ?_, rfl⟩
+    refine (lt_hcBandTop_iff hZc hZs hZi hl hr hg m n j hsaI htop).2 ?_
+    obtain ⟨w, hw, hd⟩ := (isCompact_hcUp hg m n).exists_infDist_eq_dist hne (P t')
+    rw [hd]
+    have hpc : dist (P t') c < 1 / 4 := by
+      show dist (hcFrame m n j (s + a / N) (t' - 1 / N)) (hcFrame m n j (s + 5 / 4 * a / N) (2 + g s - 5 / 4 / N)) < 1 / 4
+      rw [dist_hcFrame, Real.sqrt_lt' (by norm_num)]
+      have e : (s + a / N - (s + 5 / 4 * a / N)) ^ 2 + (t' - 1 / N - (2 + g s - 5 / 4 / N)) ^ 2 =
+          1 / 16 - (2 + g s - t') / (2 * N) + (2 + g s - t') ^ 2 := by
+        have e1 : (s + a / N - (s + 5 / 4 * a / N)) ^ 2 + (t' - 1 / N - (2 + g s - 5 / 4 / N)) ^ 2 =
+            (1 + a ^ 2) / (16 * N ^ 2) - (2 + g s - t') / (2 * N) + (2 + g s - t') ^ 2 := by
+          field_simp; ring
+        rw [e1, ← hN2]; field_simp
+      rw [e]
+      have : (2 + g s - t') ^ 2 < (2 + g s - t') / (2 * N) := by
+        rw [lt_div_iff₀ (by positivity)]; nlinarith
+      linarith
+    have h4 := hext w hw
+    have h3 := dist_triangle w (P t') c
+    rw [dist_comm w (P t')] at h3
+    linarith
+  rcases lt_or_eq_of_le htg with hlt | heq
+  · exact ⟨P t, subset_closure (hPband t ht hlt), hPz t⟩
+  · refine ⟨P t, ?_, hPz t⟩
+    have hcont : Continuous P := by rw [hP]; exact continuous_hcFrame_t m n j _ |>.comp (by fun_prop)
+    have htend : Tendsto P (𝓝[<] t) (𝓝 (P t)) := hcont.continuousAt.tendsto.mono_left nhdsWithin_le_nhds
+    refine mem_closure_of_tendsto htend ?_
+    filter_upwards [Ioo_mem_nhdsLT ht] with t' ht'
+    exact hPband t' ht'.1 (by rw [← heq]; exact ht'.2)
 
 /-- **B2, the exclusion**: every point outside `int HC` is at distance `1` from HC — B1's cases with (C0) (`vesica_apex` in the
 edge frame, through `dist_hcFrame`), (G3) and Lemma NL. -/

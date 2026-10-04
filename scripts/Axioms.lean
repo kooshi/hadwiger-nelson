@@ -3141,6 +3141,34 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.phi_pos_up_witness
 #print axioms HadwigerNelson.Plane.phi_pos_down_witness
 
+-- FS131-I2m: children added by the thirteenth wave-2 implementer
+#print axioms HadwigerNelson.Plane.hc_w_explicit
+#print axioms HadwigerNelson.Plane.hcFrame_explicit
+#print axioms HadwigerNelson.Plane.hcFrame_hcFrameST
+#print axioms HadwigerNelson.Plane.dist_eq_hcFrame
+#print axioms HadwigerNelson.Plane.abs_sub_hcFrameT_le
+#print axioms HadwigerNelson.Plane.abs_sub_hcFrameS_le
+#print axioms HadwigerNelson.Plane.continuous_hcFrameS
+#print axioms HadwigerNelson.Plane.continuous_hcFrameT
+#print axioms HadwigerNelson.Plane.continuous_hcFrame
+#print axioms HadwigerNelson.Plane.continuous_hcFrame_t
+#print axioms HadwigerNelson.Plane.continuous_hcFrame_s
+#print axioms HadwigerNelson.Plane.hcFrame_other
+#print axioms HadwigerNelson.Plane.hcUpTri_vertices
+#print axioms HadwigerNelson.Plane.mem_hcUpTri_iff
+#print axioms HadwigerNelson.Plane.isCompact_hcUpTri
+#print axioms HadwigerNelson.Plane.isCompact_hcUp
+#print axioms HadwigerNelson.Plane.hcUp_frame
+#print axioms HadwigerNelson.Plane.hcUp_nonempty
+#print axioms HadwigerNelson.Plane.sub_le_infDist_hcUp
+#print axioms HadwigerNelson.Plane.dist_hcUp_le_of_le
+#print axioms HadwigerNelson.Plane.dist_hcUp_lt_of_lt
+#print axioms HadwigerNelson.Plane.infDist_hcUp_antitone
+#print axioms HadwigerNelson.Plane.infDist_hcUp_strictAnti
+#print axioms HadwigerNelson.Plane.hcBandTop_set
+#print axioms HadwigerNelson.Plane.hcBandTop_spec
+#print axioms HadwigerNelson.Plane.infDist_le_half_sub_abs
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
