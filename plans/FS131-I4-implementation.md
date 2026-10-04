@@ -778,6 +778,21 @@ No edit while a build of the edited file runs. A merge commit is the one commit 
 `data/fs131/i4/build-i4i-readback.log`). 29 `declaration uses sorry` warnings — BaseSteps 7, Contact 10, UnitArc 12 — and no other warning. This job's scratch
 mirror for `iter.sh`/`chk.sh` is `S=/home/kooshi/scratch-w4i`.
 
+## Stage 23 — SAVED (FS131-I4i): engine 2 (`ringArcsWithin_of_Γ_subset`, in `Plane/ValidMap/Basic`); 19 `sorry` left in `BaseSteps` and `UnitArc`
+
+**Engine 2 written, under exactly the name item 218 (g) fixes**, in `Plane/ValidMap/Basic` § Engines 1–2:
+`ringArcsWithin_of_Γ_subset (hdom : F'.dom = F.dom) {A' : Set Arc} (hnd : ∀ a ∈ A', a.Nondegenerate) (hlf : ∀ x ∈ F.dom, ∃ t ∈ 𝓝 x,
+{a | a ∈ A' ∧ (a.carrier ∩ t).Nonempty}.Finite) (hunit : ∀ a ∈ A', ¬ a.IsUnitArc) (hΓ : F'.Γ ⊆ F.Γ ∪ ⋃ a ∈ A', a.carrier) :
+F'.RingArcsWithin F` — the plan's § 13.1 form, with `A'`'s non-degeneracy and local finiteness (on `F.dom`) as explicit hypotheses. Proof: a
+sub-arc of `ω(p)` in `F'.Γ` is compact, so meets finitely many `A'`-arcs, each (non-degenerate, not a unit arc) in finitely many points of
+`ω(p)` (`Arc.finite_inter_sphere_or_eq_circ`); off that finite set it lies in `F.Γ`; children `mem_closure_ringArc_diff_finite` (a point of a
+positive-length sub-arc is a limit of its points off a finite set) and `ringArc_subset_Γ_of_finite` (`Γ` is closed in the domain). Spec
+example: `segPlane` (one segment) creates no unit arc over the arc-free plane, through the engine; `unitArcPlane` is the existing adversary.
+Iteration-checked with `data/fs131/i4/errs.sh` (`S=/home/kooshi/scratch-w4i`), then the build: "build: OK — 444 of 444 batches, 8 module(s)
+rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T195613Z-1925227.log`; driver log `data/fs131/i4/build-i4i-engine2.log`):
+29 distinct `declaration uses sorry` (BaseSteps 7, Contact 10, UnitArc 12), no other warning. **For the merge with `fs131-w4c`**: if FS131-IC2
+writes its own copy, `tools/fs131_qa1_dupes.py` decides; this one's hypotheses are the plan's.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
