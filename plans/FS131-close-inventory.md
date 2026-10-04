@@ -1112,3 +1112,10 @@ reason by the close.*
      imported records moved under T3's procedure, `CPColouring` registered as a vacuity carrier, the collisions with wave 3 (`dist_rot`, `eq_norm_mul_e_arg`)
      resolved at the merge; then the gate and the landing. Launched in T3's and E3's slots: 1 (I3i) + 1 (W3) + 1 (I2h) = 3. Next: wave 4's Opus implementer
      (the LEB discharge, the two plan gaps, `localSectors` once I3i lands it, `AeProperRegions` as a carrier).
+163. **FS131-I3i mid-job: `localSectors` proved** (message 2026-10-04; `fs131-w3b` at `d8a3177f`, pushed), in I3h's drafted shape unchanged — `HadwigerNelson.Plane.localSectors
+     (F) {v} (hv : v ∈ F.dom) : ∃ r₀ n G, F.IsSectorChart G v r₀` in `Plane/LocalStructure` § `LocalSectors`; in the same commit `ArcMap.Simple.coneAt_eq_angleIcc_sep`
+     (E2 § 2.7 verbatim), `IsSectorChart.exists_tile_inter_ball` (E2's ONESECT, derived from the landed `IsJordanDomain.local_connected` — no Jordan curve theorem),
+     and `four_of_bothKind_simple` **without `hnc`** (its `05cb0a3e` statement; item 139's strengthening done — the four-colour clause of FS116-V5-U1 now holds in
+     Lean for simple maps, cusps included, once the gate reads it). Build green, 0 warnings; scratch axioms the standard three. Exported for wave 4:
+     `isSectorChart_of`, `BranchGerms.dir_lt_nextDir`, `Mono.disjoint`, `exists_angle`, `Mono.not_mem_angleIoo`, `coneAt_sector`, `sector_nonempty`, inhabitant
+     `halfDisc_sectorChart`. Keryx's receipt: the commit exists on `origin`, and the theorems read at that commit. Next: its gate and landing. Relayed to FS131-W3.
