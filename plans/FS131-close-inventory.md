@@ -1154,3 +1154,7 @@ reason by the close.*
      marker would be unchecked. Confidence high. (c) Its representation choices recorded. (d) The `LEAN.md` pattern line (an inhabitant with an adversary for the
      form it replaces) waits for Woodall's landing, when the example is on `main`. **Next on the chain**: an Opus implementer (FS131-IWc) in § 15.3's order,
      1,100–1,800 lines; queued after wave 4's implementer.
+168. **Brief FS131-I4c, wave 4's first Opus implementer** (`data/fs131/briefs/FS131-I4c-wave4.md`, gated PASS): merge `main`; discharge `lebesgue_covering_square` in one line
+     (item 151); the non-sector leaves; then, once `localSectors` is on `main` (Keryx messages it), the bridge to wave 4's `IsSector`/`hornSet` (item 136) and the
+     sector-reading leaves; the two plan gaps (item 143); `AeProperRegions` as a vacuity carrier and TS-T's carried form (items 144, 142) before the gate.
+     Launched in W3's slot: 1 (I3i) + 1 (I2h) + 1 (I4c) = 3, plus QA2. Woodall's implementer (FS131-IWc) next.
