@@ -441,3 +441,38 @@ terminal output `data/fs131/im/build-stage6.log`. **Axioms**, printed against th
 (`BranchGerms.next_injective`: `[propext, Quot.sound]`); the three `…_aux` read `sorryAx` besides. No `axiom`, no `native_decide`. The 93
 records are added to `scripts/Axioms.lean`'s FS131-IM1 block (names in `data/fs131/im/im2-names.txt`). The working file
 `data/fs131/im/scratch2/S1.lean`, now in `Moves`, is removed.
+
+## Stage 7 — SAVED: FS131-IM3's readback, the as-given build
+
+*FS131-IM3 (de Bruijn, the implementer, on Opus) resumes this record at Stage 7 (standing rule 2): the last SAVED stage is 6, committed in
+`6c7573dd` and reported in `9ffc2aba` (`git log -- plans/FS131-IM-implementation.md`). Brief: `data/fs131/briefs/FS131-IM3-moves.md` (on `main`).
+Report: `data/fs131/reports/FS131-IM3.md`.*
+
+### 7.1 The brief's quotations against their sources (standing rule 3)
+
+| quotation (a prefix, cut with `…`) | source | result |
+|---|---|---|
+| "**SHAVE (`exists_shave_aux`)**, three cases on the flank colours (one fewer than § 3.2's table: when `g = c` or `h = c` no recolouring is" | this record § 6.3 | **verbatim** |
+| "278. **FS131-IM2 handed back** (Stage 6 SAVED, harness ≈ 505k; report `fs131-w4m`'s `data/fs131/reports/FS131-IM2.md`; commits `aee53d57`, `fe10562b`," | `plans/FS131-close-inventory.md` l. 2049 (on `main`) | **verbatim** |
+| "279. **Ruling: the moves' machinery becomes `Plane/ValidMap/Surgery`, and FS131-IM3 continues on `fs131-w4m`.** Choice: IM3 first moves IM2's machinery (`Moves`" | the same, l. 2064 | **verbatim** |
+| "262. **Corrections, slips and a tool defect from IM1's report.** (a) **Correction owed — N4-RAY's route**: recolouring the whole gap merges every `c`-sector" | the same, l. 1884 | **verbatim** |
+| "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the" | `.claude/worktrees/fs131-w4/plans/FS131-w4-kernel-plan.md` § 14.2 (l. 887) | **verbatim** |
+| "- **The moves' form (G-MOVES-UA)**: `exists_shave`, `exists_rayMerge`, `exists_merge` hold with unit arcs and conclude `F'.RingArcsWithin F` (no unit arc" | the same, § 14.5 (l. 934) | **verbatim** |
+
+The brief's state is as stated: branch head `9ffc2aba`, tree clean. IM1's § 3 and IM2's Stages 5–6 (§ 6.3 above all) read.
+
+**One finding about the ruled range (item 279), not a defect of substance**: the ruling moves "from `/-! ## The chart near its point` through
+`Near.exists_cut`" (`Moves` l. 246–2087 at `9ffc2aba`), but that machinery reads IM1's children above it — `germArc`, `carrier_germArc`,
+`germArc_nondegenerate`, `germArc_isUnitArc_iff` (in `Near.germ`, `Near.newArcs_*`) and `ArcMap.isClear_of_mem_closure` (in `Near.exists_cut`),
+l. 25–244. Once `Moves` imports `Surgery`, those cannot stay in `Moves`; the split therefore moves l. 25–2087, every declaration before the
+three `…_aux` statements, so `Moves` keeps only the moves.
+
+### 7.2 The branch builds as given
+
+`9ffc2aba`, under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, admitted after about ten
+minutes' wait behind two other slots): **OK**, all 1746 modules already up to date, nothing built; warnings only `declaration uses 'sorry'` —
+`Moves` 3 (the three `…_aux`), `Contact` 4, `BaseSteps` 7, `UnitArc` 17. Log `build/gate/build/20261004T233507Z-3491303.log`; terminal output
+`data/fs131/im/build-im3-asgiven.log`. An olean mirror for iteration (`build/im3-mirror`, `data/fs131/im/iter3.sh`) taken from this build.
+
+**Early probe** (scratch, against the mirror, never evidence): SHAVE's two cut cases (`g = c`, `h = c`) elaborate over `Near.exists_cut` with
+three small children (`BranchGerms.ne_next_of_nextβ_eq`, `Near.horn_index`, `Near.encard_col_eq`); `data/fs131/im/scratch3/Cut.lean`.
