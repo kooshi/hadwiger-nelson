@@ -6,7 +6,23 @@ from `origin/main` at `0ff8f659`. Working files `data/fs131/i3i/`. No agents, no
 
 ## Theorems this phase proved
 
-*(Filled at the gate, from the saved audit log.)*
+Axioms read from the gate's saved audit log `build/gate/axioms/20261004T145223Z-97257.log` (copy `data/fs131/i3i/axioms-gate-full.log`), run on the
+merged branch (`167a2a74`, `origin/main` with T3's gate merged in); every one of the 62 records this job added reads `[propext, Classical.choice, Quot.sound]`.
+Statements read against their sources: `localSectors` and `ArcMap.IsSectorChart` against I3h's draft (`data/fs131/i3/h/LS.lean`, identical) and inventory
+item 136 (branch germs with direction and signed curvature, sectors between consecutive branches for every smaller radius, each sector's cone an
+interval); the separation lemma against `plans/FS131-E2-derivation.md` § 2.7 (identical text); `four_of_bothKind_simple` against `git show
+05cb0a3e:Proofs/HadwigerNelson/Plane/RingGerm.lean` l. 300–302 (identical binders and conclusion).
+- **FS131-E2-SECT, the sector structure** (inventory item 136) — `HadwigerNelson.Plane.localSectors` (every point of the domain has a sector chart:
+  `∃ r₀ n G, F.IsSectorChart G v r₀`): `[propext, Classical.choice, Quot.sound]`. Children on the same axioms: `ArcMap.isSectorChart_of`,
+  `BranchGerms.dir_lt_nextDir`, `BranchGerms.coneAt_sector`, `BranchGerms.isOpen_sector`, `BranchGerms.isPreconnected_sector`,
+  `BranchGerms.sector_disjoint`, `BranchGerms.Mono.disjoint`, `BranchGerms.exists_angle`, `BranchGerms.Mono.not_mem_angleIoo`, `branchPt_curveGerm_mem`,
+  `exists_eq_branchPt_curveGerm`, `exists_germDir_ne`, `Arc.eventually_mem_carrier`, `Arc.branch_mem_of_mem`, `Arc.exists_near`; inhabitant
+  `halfDisc_sectorChart`.
+- **FS131-E2-ONESECT, one sector per Jordan tile** — `HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_tile_inter_ball`: `[propext, Classical.choice,
+  Quot.sound]`.
+- **FS131-E2-SEP, the separated interval** — `HadwigerNelson.Plane.ArcMap.Simple.coneAt_eq_angleIcc_sep`: `[propext, Classical.choice, Quot.sound]`.
+- **FS116-V5-U1's four-colour clause in the simple class, cusps included** (FS131-E2-U1-CUSP; inventory item 139's ruling: `hnc` dropped, statement
+  `05cb0a3e`'s) — `HadwigerNelson.Plane.ArcMap.four_of_bothKind_simple`: `[propext, Classical.choice, Quot.sound]`.
 
 ## Stage 1 — SAVED: readback
 
@@ -92,3 +108,60 @@ with warnings" (`Plane.LocalStructure`, `Plane.Tiles`, `Plane.RingGerm`, `Plane.
 reasons (data; or existence a theorem, `localSectors`, and every site at a variable chart, `GENERIC`, like `IsTile`). One name renamed before landing:
 my `eq_norm_mul_e_arg` collided with `SixFragment`'s (same namespace, both imported by `RingGerm`); it is `eq_polar_arg`. The other new top-level names were
 grepped on `main`, `fs131-w2`, `fs131-w2d`, `fs131-w4`, `fs131-ww`: no collision.
+
+## Stage 3 — SAVED: the gate on `fs131-w3b`, merged with `origin/main`
+
+**Merge.** `origin/main` (`f01c964d`: T3's axiom-gate repair, E3, W3 and I2h briefs; no `Proofs/` change) merged into `fs131-w3b` as `167a2a74`, clean;
+`scripts/Axioms.lean` merged with this job's 62 records in T3's CLEAN section, before the PURCHASED banner. **T3 had landed first, so its gate is the one
+run**: the set check (CLEAN a subset of the standard three), the IMPORTED section, and `axioms.sh --self-test`.
+
+**The gate** (every log read, not only its last line):
+* **build** — `data/fs131/i3i/build-gate.log` = `build/gate/build/20261004T150953Z-223848.log`: "OK — 441 of 441 batches, 2 module(s) rebuilt, 0
+  module(s) with warnings" (the two are `RingBand` and `Proofs`, rebuilt after the build control below was reverted); stage 2's build of the same
+  Lean source: `build/gate/build/20261004T143952Z-4189697.log`, 5 rebuilt, 0 warnings. Zero `sorry` in `Plane/LocalStructure` and `Plane/RingGerm`
+  (grep, word match); `sorryAx` 0 times in the receipt.
+* **axioms** — `data/fs131/i3i/axioms-gate.log` (full: `build/gate/axioms/20261004T145223Z-97257.log`, copy `data/fs131/i3i/axioms-gate-full.log`):
+  "OK — 1856 clean, 11 axiom-free, 0 imported, 5 declared purchase(s)" over 1,872 records. **Reconciled**: 1794 + 62 = 1856 clean (this job's 62
+  records, every one `[propext, Classical.choice, Quot.sound]`); axiom-free, purchases (the five Moser-spindle ones) and imported unchanged. The digest
+  flags `CLAUDE.md` § Trust ledger stale (1794 → 1856): draft below.
+* **axioms self-test** — `data/fs131/i3i/axioms-selftest.log` (`build/gate/axioms-self-test/20261004T145240Z-99072.log`): "every planted fault fired,
+  and every partner passed".
+* **vacuity self-test** — `data/fs131/i3i/vacuity-selftest.log` (`build/gate/vacuity-self-test/20261004T145403Z-108385.log`): "every control fired, and
+  the silent ones stayed silent". No control added: the new structures are OUT (stage 2), so no `trackedProps` entry and no `expect` line.
+* **vacuity** — `data/fs131/i3i/vacuity-gate.log` (`build/gate/vacuity/20261004T145511Z-114524.log`): "vacuity: OK", `declarations=8500
+  refutations-skipped=57 sites=460`, `vacuous=0 stale=0 declared=3 witnessed=21 generic=434 unknown=2` (the baseline's two). **Reconciled against
+  8385 / 57 / 459 / 21 / 433**: declarations +115 = the 102 non-internal constants declared in section `LocalSectors` (counted by declaration range,
+  line ≥ 3581 of `Plane/LocalStructure`) + 13 generated ones without a range (`BranchGerms.mk.inj`, `.mk.injEq`, `.mk.sizeOf_spec`, `.ctorIdx`,
+  `.noConfusionType`, `Mono.le_add.match_1_1`, and the equation lemmas `branchPt.eq_1`, `germDir.eq_1`, `curveGerm.eq_1`, `BranchGerms.nextβ.eq_1`,
+  `.nextDir.eq_1`, `.next.eq_1`, `.dir.eq_1`); sites +1 = generic +1 = `ArcMap.Simple.coneAt_eq_angleIcc_sep :: F.Simple` (a variable map);
+  `four_of_bothKind_simple` keeps its four sites (`hnc` was never a tracked carrier); refutations-skipped, witnessed, vacuous, stale, declared, unknown
+  unchanged.
+* **architecture** — `tools/check_architecture.py`: exit 0, "RESULT: PASS" (`data/fs131/i3i/arch.log`).
+* **spec examples** — elaborated in the build (section `LocalSectors`'s twelve `example`s and `halfDisc_sectorChart`).
+
+**Negative controls, each watched red, each reverted** (`git diff` empty after each):
+* build — `theorem fs131_i3i_planted_build : (1 : ℕ) = 1 := by sorry` appended to `Plane/RingBand`: "2 module(s) rebuilt, **1 module(s) with
+  warnings**", naming `RingBand.lean:1191:8: declaration uses sorry` (`data/fs131/i3i/build-plant.log`). Observed: `build.sh` still exits 0 and prints
+  "OK" with a warning; the gate's zero-warnings check is the count, not the exit status — read the count.
+* axioms — `theorem fs131_i3i_planted_sorry : (1 : ℕ) = 2 := sorry` with its record in CLEAN: "FAIL sorry CLEAN 'fs131_i3i_planted_sorry' carries
+  sorryAx", exit 1 (`data/fs131/i3i/axioms-plant.log`).
+* vacuity — the self-test is the control suite, every control fired (above).
+* architecture — `Plane/LocalStructure`'s Imports cell without `Plane/Chord`: "FAIL imports of Plane/LocalStructure: … real-only ['Plane/Chord']",
+  exit 1 (`data/fs131/i3i/arch-plant.log`).
+
+## Drafts for the front page
+
+From the gate above (FS131-I3i, 2026-10-04; if another branch lands first, its records and declarations add to these numbers):
+1. **`CLAUDE.md` § Trust ledger**, replacing "the current audit reads 1794 clean and 5 declared purchases, and 0 imported (and 11 axiom-free; 1,810 records
+   at wave 3's landing with FS131-T3's gate repair, 2026-10-04)" with "the current audit reads 1856 clean and 5 declared purchases, and 0 imported (and 11
+   axiom-free; 1,872 records at `localSectors`' landing, FS131-I3i, 2026-10-04)".
+2. **`CLAUDE.md` § The gate**, replacing "`declarations=8385 refutations-skipped=57 sites=459`, `vacuous=0 stale=0 declared=3 witnessed=21 generic=433
+   unknown=2`" with "`declarations=8500 refutations-skipped=57 sites=460`, `vacuous=0 stale=0 declared=3 witnessed=21 generic=434 unknown=2`".
+3. **`scripts/vacuity-baseline.txt`'s header**, replacing "#   declarations=8385  refutations-skipped=57  sites=459" and "#   vacuous=0 stale=0
+   declared=3 witnessed=21 generic=433 unknown=2" with "#   declarations=8500  refutations-skipped=57  sites=460" and "#   vacuous=0 stale=0 declared=3
+   witnessed=21 generic=434 unknown=2". The baseline's two entries are unchanged.
+4. **`CLAUDE.md` § Frontier, "What the kernel holds, beyond the interval"**, in the FS-131 wave 3 clause, after "and FS116-Y2-SIXFRAG's six-colour fragment,
+   valid and non-Siamese," (if that clause is filed as I3h drafted it): "the sector structure at a point of an arc map (`localSectors`: finitely many branch
+   germs, the interior points near the point the sectors between consecutive germs, each with the cone of its two germs), one sector per Jordan tile and the
+   separated interval (FS131-E2-SECT, -ONESECT, -SEP), and FS116-V5-U1's four-colour clause in the simple class with cusps (FS131-E2-U1-CUSP),". Nothing
+   for `LEDGER.md` (rows are regraded at the milestone's filing); FS131-E2-SECT, -ONESECT, -SEP and -U1-CUSP move from [hand]/[derived] to [kernel] there.
