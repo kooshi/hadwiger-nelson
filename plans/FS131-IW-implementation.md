@@ -55,6 +55,17 @@ that every later leaf reused. All of `Collar` and `NoFourFive` (about 55 declara
   and `exists_cur_dir`/`exists_prev_dir`. Not started.
 * `exists_sectorsAt` (H) and `exists_woodallMerged` (H+): not started; the second is a separate job at this rate.
 
+**Plan gap found at `step5_lt` (read while pricing it; not yet a statement defect).** § 4.5's route puts an inner collar about each `ψ` of the arc
+`I = (β₂ − 3π/2, β₁ − π/2)` in the shadow of each of the three colours `A, B, C`, by `collarAt_shadow_inner` on a **preconnected piece** of the colour's
+class approaching `v` along a direction `γ ∈ (ψ + π/2, ψ + 3π/2)`. For the middle sector and for a neighbour of positive width that piece is a truncated
+sector (`SectorsAt.collarAt_shadow_inner_of_mem`, E1-RAY, with `γ = β₁ − δ` resp. `β₂ + δ`; strict inequalities make `δ` available). For a **horn**
+(sector `i` itself, or a neighbour, of width `0`; `SectorsAt` allows them) the plan says "a horn's own direction", but `SectorsAt` supplies the horn's
+direction only as a point of `coneAt (region c) v` (the cone equation), with no preconnected set of the class approaching along it (the class is a union
+of tiles, not connected), and `collarAt_shadow_inner` needs one. The fix is local structure (wave 3's tiles and `exists_mem_coneAt_region`, or the
+finitely many arcs near `v`), not a change of statement; the planner should price `step5_lt` with that child (a **connected piece of a colour class
+approaching `v` along any cone direction**, for an arc map of the plane), and likewise `step6` (its first-order presence sets read cone directions of
+sectors of any width). `aeMap6_merged` uses `step5_lt` precisely at a horn (the sector `i` itself has width `0`), so the horn case is the one it needs, not an exotic one.
+
 **Findings.** No statement defect: no leaf proved so far disagreed with its statement. E1-NO45's chain is formalizable as written (see above). Two
 notes for the planner: (i) `exists_parabola_region` and `absent_at_normal` carry `hn : 2 ≤ n` unused (it follows from the others); kept, discharged by `have _ := hn`.
 (ii) every theorem here that cites `lemmaL`, `dense_interiorPts` or `Valid.unitPairsNull_region` shows `sorryAx` until waves 3–4 land; the parabola lemmas, `exists_normal_collarAt`, `absent_at_normal` and `exists_mem_Ico` are free of it (`exists_two_absent` is not: it cites E1-SEE).
