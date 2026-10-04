@@ -23,8 +23,8 @@ that judge the milestone, written before any job).*
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
 | wave 2 (28 rows) | K2d done (item 118): every leaf has stated children; 13 of its 17 closed from children; `Instances/FalconerOrbit` proved; merged into `fs131-w2` (`ddc5b5c8`); 154 `sorry` lines left; **FS131-I2f (Opus trial) running** | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | 91 of 96 proved (I3–I3e); item 112's cusp ruling applied; **FS131-I3f running** on the last 5, then the gate and the landing | `.claude/worktrees/fs131-w3` |
-| wave 4 (25 rows) | fully planned (K4–K4c): 86 leaves; implementer handoff § 14; **notes for wave 5 in § 14.5** | `.claude/worktrees/fs131-w4` at `f620977c` |
-| Woodall's chain (FS106-WO, -TW, -AE-MAP6) | planned (FS131-W, item 97): 31 leaves, two open in the derivation (`step5_eq`, `step7`); landing form per item 98 | `.claude/worktrees/fs131-ww` at `7aaaf2c4` |
+| wave 4 (25 rows) | 26 of 86 proved (I4, item 125); `localSectors` gap ruled (item 126); **next half slot: FS131-I4b** from I4's record stage 3 | `.claude/worktrees/fs131-w4` |
+| Woodall's chain (FS106-WO, -TW, -AE-MAP6) | re-planned by W2 with **no open leaf** (item 124); E1-BAD erratum filed; **FS131-IW running**; lands after waves 3–4 and LEB | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
 | Lebesgue's covering theorem (FS131-LEB) | queued (item 66) | — |
 | waves 5–10 (124 rows) | not started; wave 5 carries C-DOUBLE + Y3-END-NEEDS (item 69) and FLANK-Q's discharge (item 79); wave 9 bound by item 89's note and item 96's vacuity rule | plan § 7 |
@@ -40,9 +40,9 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 
 | job | model | brief | reports to |
 |---|---|---|---|
-| FS131-I4 (wave 4, first implementer; item 115) | Sonnet | `data/fs131/briefs/FS131-I4-wave4.md` | its branch's (`fs131-w4`) `data/fs131/reports/FS131-I4.md` |
+| FS131-IW (Woodall's chain implementer; item 128) | Sonnet | `data/fs131/briefs/FS131-IW-woodall.md` | its branch's (`fs131-ww`) `data/fs131/reports/FS131-IW.md` |
 | FS131-I3f (wave 3, last five, gate, landing; item 117) | Sonnet | `data/fs131/briefs/FS131-I3f-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3f.md` |
-| FS131-W2 (Woodall's chain re-planned on E1-NO45; item 109) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-W2-woodall-replan.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-W2.md` |
+| FS131-E2 (the cusp case; Ephodos; item 127) | Opus | `data/fs131/briefs/FS131-E2-cusp-case.md` | `data/fs131/reports/FS131-E2.md` (claim list `data/fs131/claims-E2.md`) |
 | FS131-I2f (wave 2, the Opus-implementer trial; item 119) | **Opus** (`debruijn-implementer`, `model: "opus"`) | `data/fs131/briefs/FS131-I2f-wave2.md` | its branch's (`fs131-w2`) `data/fs131/reports/FS131-I2f.md` |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. A notification arrives when each hands back; if the session restarted, resume a job from
