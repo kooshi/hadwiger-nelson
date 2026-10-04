@@ -3240,7 +3240,137 @@ gives it directly at every `k` — translates to windows of small hole measure, 
 its kernel `1_{annulus}` is `L¹` (no Rajchman step, no Krylov–Bogolyubov), and support selection. -/
 theorem exists_bandNull_aeCover_of_mu_eq_one {k : ℕ} {ε : ℝ} (hε : 0 < ε) (h : mu k ε = 1) :
     ∃ C : Fin k → Set ℂ, IsPartialColouring C ∧ (∀ j, BandNull (C j) ε) ∧ ∀ᵐ x ∂volume, ∃ j, x ∈ C j := by
-  sorry
+  have _ := hε -- idle: the compactness argument reads no sign of `ε`
+  classical
+  obtain ⟨C, hCP, hhole⟩ := exists_translates_small_hole (P := fun C : Fin k → Set ℂ => ∀ j, BandNull (C j) ε)
+    (fun C v hC j => bandNull_preimage_add (hC j) v) h
+  set g : ℕ → Fin k → ℂ → ℝ := fun m j => (C m j).indicator 1 with hgdef
+  have hgm : ∀ m j, Measurable (g m j) := fun m j => measurable_const.indicator ((hCP m).1.1 j)
+  have hg01 : ∀ m j x, 0 ≤ g m j x ∧ g m j x ≤ 1 := fun m j x => by
+    by_cases hx : x ∈ C m j <;> simp [hgdef, hx]
+  obtain ⟨σ, F, hσ, hFm, hF01, hw⟩ := exists_weakStar_subseq g hgm hg01
+  have hsum : ∀ᵐ x ∂volume, ∑ j, F j x = 1 :=
+    ae_sum_eq_one_of_weakStar (C := fun m => C (σ m)) (fun m => (hCP (σ m)).1) (fun R => (hhole R).comp hσ.tendsto_atTop)
+      hFm hw
+  -- the band kernel
+  set A : Set ℂ := {w | 1 - ε ≤ ‖w‖ ∧ ‖w‖ ≤ 1 + ε} with hAdef
+  have hAm : MeasurableSet A :=
+    (measurableSet_le measurable_const continuous_norm.measurable).inter
+      (measurableSet_le continuous_norm.measurable measurable_const)
+  set κ : ℂ → ℝ := A.indicator 1 with hκdef
+  have hκi : Integrable κ := by
+    refine (integrableOn_const ?_).integrable_indicator hAm
+    refine measure_ne_top_of_subset (fun w hw => ?_) (measure_closedBall_lt_top (x := (0 : ℂ)) (r := 1 + ε)).ne
+    rw [mem_closedBall, dist_zero_right]; exact hw.2
+  have hκ0 : ∀ w, 0 ≤ κ w := fun w => by by_cases hw : w ∈ A <;> simp [hκdef, hw]
+  -- the band form of each `g m j` vanishes
+  have hgz : ∀ m j R, ∫ x in ball (0 : ℂ) R, g m j x * ∫ w, g m j (x + w) * κ w = 0 := by
+    intro m j R
+    have hB := (hCP m).2 j
+    have hBm : MeasurableSet (bandPairSet (C m j) ε) :=
+      (measurable_fst ((hCP m).1.1 j)).inter ((measurable_snd ((hCP m).1.1 j)).inter
+        ((measurableSet_le measurable_const (continuous_fst.dist continuous_snd).measurable).inter
+          (measurableSet_le (continuous_fst.dist continuous_snd).measurable measurable_const)))
+    have hsl := (Measure.measure_prod_null hBm).1 hB
+    refine integral_eq_zero_of_ae ?_
+    filter_upwards [ae_restrict_of_ae hsl] with x hx
+    by_cases hxC : x ∈ C m j
+    · have hin : ∫ w, g m j (x + w) * κ w = 0 := by
+        refine integral_eq_zero_of_ae ?_
+        have hnull : volume ((fun w => x + w) ⁻¹' (Prod.mk x ⁻¹' bandPairSet (C m j) ε)) = 0 := by
+          rw [measure_preimage_add]; exact hx
+        refine measure_mono_null (fun w hw => ?_) hnull
+        simp only [Pi.zero_apply] at hw
+        by_cases h1 : x + w ∈ C m j
+        · by_cases h2 : w ∈ A
+          · simp only [mem_preimage, bandPairSet, mem_setOf_eq]
+            refine ⟨hxC, h1, ?_, ?_⟩
+            · rw [dist_eq_norm, sub_add_cancel_left, norm_neg]; exact h2.1
+            · rw [dist_eq_norm, sub_add_cancel_left, norm_neg]; exact h2.2
+          · exact absurd (by simp [hκdef, h2]) hw
+        · exact absurd (by simp [hgdef, h1]) hw
+      simp [hin]
+    · simp [hgdef, hxC]
+  -- so the band form of each `F j` vanishes, and pointwise
+  have hFb : ∀ j, ∀ᵐ x ∂volume, |F j x| ≤ 1 := fun j => (hF01 j).mono fun x hx => by
+    rw [abs_le]; constructor <;> linarith [hx.1, hx.2]
+  have hF0 : ∀ j, ∀ᵐ x ∂volume, F j x * ∫ w, F j (x + w) * κ w = 0 := by
+    intro j
+    have P0 := conv_props (hFm j) (hFb j) hκi
+    have hinner : ∀ x, 0 ≤ ∫ w, F j (x + w) * κ w := fun x => by
+      refine integral_nonneg_of_ae ?_
+      filter_upwards [(measurePreserving_add_left volume x).quasiMeasurePreserving.ae (hF01 j)] with w hw
+      exact mul_nonneg hw.1 (hκ0 w)
+    have hball : ∀ n : ℕ, ∀ᵐ x ∂(volume.restrict (ball (0 : ℂ) n)), F j x * ∫ w, F j (x + w) * κ w = 0 := by
+      intro n
+      have hlim := convForm_tendsto (g := fun m => g (σ m) j) (fun m => hgm _ j)
+        (fun m x => by rw [abs_le]; constructor <;> linarith [(hg01 (σ m) j x).1, (hg01 (σ m) j x).2])
+        (hFm j) (hFb j) (hw j) hκi n
+      have hz : ∫ x in ball (0 : ℂ) n, F j x * ∫ w, F j (x + w) * κ w = 0 := by
+        refine tendsto_nhds_unique hlim ?_
+        simp only [hgz]
+        exact tendsto_const_nhds
+      refine (setIntegral_eq_zero_iff_of_nonneg_ae ?_ ?_).1 hz
+      · filter_upwards [ae_restrict_of_ae (hF01 j)] with x hx
+        exact mul_nonneg hx.1 (hinner x)
+      · refine Measure.integrableOn_of_bounded measure_ball_lt_top.ne ((hFm j).aestronglyMeasurable.mul P0.1)
+          (M := ∫ w, ‖κ w‖) ?_
+        filter_upwards [ae_restrict_of_ae (hFb j)] with x hx
+        rw [norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+        exact mul_le_of_le_one_left (abs_nonneg _) hx |>.trans (P0.2.1 x) |> fun h => by
+          calc |F j x| * |∫ w, F j (x + w) * κ w| ≤ 1 * |∫ w, F j (x + w) * κ w| := by gcongr
+            _ ≤ _ := by rw [one_mul]; exact P0.2.1 x
+    have hall : ∀ᵐ x ∂volume, ∀ n : ℕ, x ∈ ball (0 : ℂ) n → F j x * ∫ w, F j (x + w) * κ w = 0 :=
+      ae_all_iff.2 fun n => (ae_restrict_iff' measurableSet_ball).1 (hball n)
+    filter_upwards [hall] with x hx
+    obtain ⟨n, hn⟩ := exists_nat_gt ‖x‖
+    exact hx n (by rw [mem_ball, dist_zero_right]; exact hn)
+  -- selection
+  obtain ⟨c, hcm, hcpos⟩ := exists_selection hFm hsum (fun j => (hF01 j).mono fun x hx => hx.1)
+  refine ⟨fun j => c ⁻¹' {j}, ⟨fun j => hcm (measurableSet_singleton j), fun i j hij =>
+    Set.disjoint_left.2 fun x hi hj => hij (hi.symm.trans hj)⟩, fun j => ?_, Eventually.of_forall fun x => ⟨c x, rfl⟩⟩
+  have hDm : MeasurableSet (c ⁻¹' {j}) := hcm (measurableSet_singleton j)
+  have hBm : MeasurableSet (bandPairSet (c ⁻¹' {j}) ε) :=
+    (measurable_fst hDm).inter ((measurable_snd hDm).inter
+      ((measurableSet_le measurable_const (continuous_fst.dist continuous_snd).measurable).inter
+        (measurableSet_le (continuous_fst.dist continuous_snd).measurable measurable_const)))
+  have hN1 : volume {y | ¬ 0 < F (c y) y} = 0 := ae_iff.1 hcpos
+  rw [BandNull, Measure.measure_prod_null hBm]
+  filter_upwards [hcpos, hF0 j] with x hxpos hx0
+  by_cases hxD : c x = j
+  · have hFx : 0 < F j x := hxD ▸ hxpos
+    have hconv0 : ∫ w, F j (x + w) * κ w = 0 := by
+      rcases mul_eq_zero.1 hx0 with h | h
+      · exact absurd h hFx.ne'
+      · exact h
+    have hint : Integrable (fun w => F j (x + w) * κ w) := by
+      refine hκi.bdd_mul ((hFm j).comp (measurable_const_add x)).aestronglyMeasurable (c := 1) ?_
+      filter_upwards [(measurePreserving_add_left volume x).quasiMeasurePreserving.ae (hFb j)] with w hw
+      rwa [Real.norm_eq_abs]
+    have hnn : 0 ≤ᵐ[volume] fun w => F j (x + w) * κ w := by
+      filter_upwards [(measurePreserving_add_left volume x).quasiMeasurePreserving.ae (hF01 j)] with w hw
+      exact mul_nonneg hw.1 (hκ0 w)
+    have hae := (integral_eq_zero_iff_of_nonneg_ae hnn hint).1 hconv0
+    · have hN2 : volume ((fun y => y - x) ⁻¹' {w | F j (x + w) * κ w ≠ 0}) = 0 := by
+        simp only [sub_eq_add_neg]
+        rw [measure_preimage_add_right]
+        exact ae_iff.1 hae
+      refine measure_mono_null (fun y hy => ?_) (measure_union_null hN1 hN2)
+      simp only [mem_preimage, bandPairSet, mem_setOf_eq, mem_singleton_iff] at hy
+      obtain ⟨-, hyD, hy1, hy2⟩ := hy
+      by_cases hFy : 0 < F j y
+      · right
+        simp only [mem_preimage, mem_setOf_eq, add_sub_cancel]
+        have hyA : y - x ∈ A := by
+          refine ⟨?_, ?_⟩ <;> rw [← dist_eq_norm, dist_comm] <;> assumption
+        simp only [hκdef, indicator_of_mem hyA, Pi.one_apply, mul_one]
+        exact hFy.ne'
+      · left
+        simp only [mem_setOf_eq]
+        rw [hyD]; exact hFy
+  · refine measure_mono_null (fun y hy => ?_) measure_empty
+    simp only [mem_preimage, bandPairSet, mem_setOf_eq, mem_singleton_iff] at hy
+    exact absurd hy.1 hxD
 
 open Classical in
 /-- COMP, `⟹`: if `µ₆(ε) < 1` for every `ε > 0`, no six-colouring is proper on a band (the closures of the colour
