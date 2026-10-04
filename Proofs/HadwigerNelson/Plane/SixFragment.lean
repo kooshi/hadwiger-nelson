@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.LocalMap
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Complex
 
 /-!
 # FS116-Y2-SIXFRAG: a valid non-Siamese six-coloured fragment about a vertex of six colours
@@ -360,6 +361,133 @@ theorem sixFrag_sphere_subset_Γ : sphere (0 : ℂ) 1 ⊆ sixFrag.Γ := by
     show (0 : ℂ) + 1 * e (Complex.arg x + 2 * π) = x
     rw [zero_add, one_mul, e_add_two_pi]; exact hxe.symm
 
+/-! ## The ring arc `r([0°, 30°])` -/
+
+/-- `‖e a − e b‖² = 2 − 2 cos(a − b)`. -/
+theorem norm_e_sub_e_sq (a b : ℝ) : ‖e a - e b‖ ^ 2 = 2 - 2 * Real.cos (a - b) := by
+  rw [Complex.sq_norm, Complex.normSq_apply]
+  simp only [e_eq, Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
+    Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+  rw [Real.cos_sub]
+  nlinarith [Real.sin_sq_add_cos_sq a, Real.sin_sq_add_cos_sq b]
+
+/-- No integer `N` has `0 < N·60° < 30°`... in the form used here: `θ = 30° + N·60°` with `0 < θ < 30°` is impossible. -/
+theorem no_int_lens {θ : ℝ} (h0 : 0 < θ) (h1 : θ < π / 6) {N : ℤ} (hθ : θ = π / 6 + N * (π / 3)) : False := by
+  have hπ := Real.pi_pos
+  have hN1 : (N : ℝ) < 0 := by
+    by_contra hc; push Not at hc
+    nlinarith [mul_nonneg hc (by positivity : (0 : ℝ) ≤ π / 3)]
+  have hN2 : (-1 / 2 : ℝ) < N := by
+    by_contra hc; push Not at hc
+    nlinarith [mul_le_mul_of_nonneg_right hc (by positivity : (0 : ℝ) ≤ π / 3)]
+  have hN1' : N < 0 := by exact_mod_cast hN1
+  have : (N : ℝ) ≤ -1 := by exact_mod_cast (show N ≤ -1 by omega)
+  linarith
+
+/-- No integer `N` has `0 < N·60°/... `: `θ = N·(π/3)` with `0 < θ < π/6` is impossible. -/
+theorem no_int_radial {θ : ℝ} (h0 : 0 < θ) (h1 : θ < π / 6) {N : ℤ} (hθ : θ = N * (π / 3)) : False := by
+  have hπ := Real.pi_pos
+  have hN1 : (0 : ℝ) < N := by
+    by_contra hc; push Not at hc
+    nlinarith [mul_nonpos_of_nonpos_of_nonneg hc (by positivity : (0 : ℝ) ≤ π / 3)]
+  have hN1' : 0 < N := by exact_mod_cast hN1
+  have : (1 : ℝ) ≤ N := by exact_mod_cast hN1'
+  nlinarith
+
+/-- A point `e θ` of the ring strictly between `0°` and `30°` is not at distance `1` from any lens centre
+`e(30° + 60°m)`. -/
+theorem norm_e_sub_lens_ne {θ : ℝ} (h0 : 0 < θ) (h1 : θ < π / 6) (m : ℤ) :
+    ‖e θ - e (π / 6 + m * (π / 3))‖ ≠ 1 := by
+  have hπ := Real.pi_pos
+  intro h
+  have hsq := norm_e_sub_e_sq θ (π / 6 + m * (π / 3))
+  rw [h] at hsq
+  have hc : Real.cos (θ - (π / 6 + m * (π / 3))) = Real.cos (π / 3) := by
+    rw [Real.cos_pi_div_three]; linarith
+  obtain ⟨k, hk | hk⟩ := Real.cos_eq_cos_iff.mp hc
+  · exact no_int_lens h0 h1 (N := m + 1 - 6 * k) (by push_cast; linarith)
+  · exact no_int_lens h0 h1 (N := m - 1 + 6 * k) (by push_cast; linarith)
+
+/-- A point `t e(φ)`, `t > 0`, on the radial segment towards `e(60°k)` has `sin(φ − 60°k) = 0`. -/
+theorem sin_eq_zero_of_mem_radial {t φ : ℝ} (ht : 0 < t) {k : ℕ}
+    (h : (t : ℂ) * e φ ∈ segment ℝ 0 (e (k * (π / 3)))) : Real.sin (φ - k * (π / 3)) = 0 := by
+  obtain ⟨u, v, hu, hv, huv, hz⟩ := h
+  have h1 : (t : ℂ) * e (φ - k * (π / 3)) = (v : ℂ) := by
+    have : (t : ℂ) * e φ = v * e (k * (π / 3)) := by rw [← hz]; simp
+    rw [show φ = (φ - k * (π / 3)) + k * (π / 3) by ring, e_add] at this
+    have hne : e (k * (π / 3)) ≠ 0 := fun h => by
+      have := norm_e (k * (π / 3)); rw [h] at this; simp at this
+    exact mul_right_cancel₀ hne (by rw [← this]; ring)
+  have h2 : t * Real.sin (φ - k * (π / 3)) = 0 := by
+    have := congrArg Complex.im h1
+    simp only [e_eq, Complex.mul_im, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.I_re, Complex.I_im] at this
+    linarith
+  rcases mul_eq_zero.mp h2 with h | h
+  · exact absurd h ht.ne'
+  · exact h
+
+/-- The ring point `e θ`, `0 < θ < 30°`, is on no radial segment and no lens side. -/
+theorem e_notMem_lens_union {θ : ℝ} (h0 : 0 < θ) (h1 : θ < π / 6) :
+    e θ ∉ ⋃ a ∈ {a | a ∈ sixArcs ∧ a ≠ Arc.circ 0 1 0 (2 * π)}, a.carrier := by
+  have hπ := Real.pi_pos
+  intro hmem
+  obtain ⟨a, ⟨ha, hne⟩, hxa⟩ := mem_iUnion₂.mp hmem
+  rcases ha with ((ha | ha) | ha) | ha
+  · obtain ⟨k, rfl⟩ := ha
+    have h : ((1 : ℝ) : ℂ) * e θ ∈ segment ℝ 0 (e (((k : ℕ) : ℝ) * (π / 3))) := by
+      rw [Complex.ofReal_one, one_mul]; exact hxa
+    have h3 := sin_eq_zero_of_mem_radial one_pos h
+    obtain ⟨n, hn⟩ := Real.sin_eq_zero_iff.mp h3
+    exact no_int_radial h0 h1 (N := 3 * n + k) (by push_cast; linarith)
+  · exact hne (by simpa using ha)
+  · obtain ⟨k, rfl⟩ := ha
+    obtain ⟨θ', -, hθ'⟩ := hxa
+    refine norm_e_sub_lens_ne h0 h1 ((k : ℤ) - 1) ?_
+    have : e θ - e (π / 6 + (((k : ℤ) - 1 : ℤ) : ℝ) * (π / 3)) = 1 * e θ' := by
+      rw [show π / 6 + (((k : ℤ) - 1 : ℤ) : ℝ) * (π / 3) = ((k : ℕ) : ℝ) * (π / 3) - π / 6 by push_cast; ring]
+      rw [← hθ']; show _ = _; simp
+    rw [this]; simp
+  · obtain ⟨k, rfl⟩ := ha
+    obtain ⟨θ', -, hθ'⟩ := hxa
+    refine norm_e_sub_lens_ne h0 h1 (k : ℤ) ?_
+    have : e θ - e (π / 6 + ((k : ℤ) : ℝ) * (π / 3)) = 1 * e θ' := by
+      rw [show π / 6 + ((k : ℤ) : ℝ) * (π / 3) = ((k : ℕ) : ℝ) * (π / 3) + π / 6 by push_cast; ring]
+      rw [← hθ']; show _ = _; simp
+    rw [this]; simp
+
+/-- The distance between two points on one ray. -/
+theorem dist_polar_same (r s φ : ℝ) : dist ((r : ℂ) * e φ) ((s : ℂ) * e φ) = |r - s| := by
+  rw [Complex.dist_eq, ← sub_mul, norm_mul, norm_e, mul_one, ← Complex.ofReal_sub, Complex.norm_real,
+    Real.norm_eq_abs]
+
+/-- Inside the unit disc, an argument in `(0°, 60°)` means colour `0`. -/
+theorem sixCol_inner_zero {z : ℂ} (hz : ‖z‖ < 1) (ha : Complex.arg z ∈ Ioo 0 (π / 3)) : sixCol z = 0 := by
+  have hπ := Real.pi_pos
+  have hfl : ⌊Complex.arg z / (π / 3)⌋ = 0 :=
+    Int.floor_eq_zero_iff.mpr ⟨(div_pos ha.1 (by positivity)).le, by rw [div_lt_one (by positivity)]; exact ha.2⟩
+  simp [sixCol, hz, sixSector, hfl]
+
+/-- Outside the unit disc, an argument in `(0°, 30°)` and the two lens tests mean colour `2`. -/
+theorem sixCol_outer_two {z : ℂ} (hz : 1 ≤ ‖z‖) (ha : Complex.arg z ∈ Ioo 0 (π / 6))
+    (l1 : dist z (e (-(π / 6))) < 1) (l2 : dist z (e (π / 6)) < 1) : sixCol z = 2 := by
+  have hπ := Real.pi_pos
+  have hr : sixRound z = 0 := by
+    unfold sixRound
+    rw [round_eq, Int.floor_eq_zero_iff]
+    have q1 : 0 < Complex.arg z / (π / 3) := div_pos ha.1 (by positivity)
+    have q2 : Complex.arg z / (π / 3) < 1 / 2 := by rw [div_lt_iff₀ (by positivity)]; linarith [ha.2]
+    exact ⟨by linarith, by linarith⟩
+  have hl : InSixLens (sixRound z) z := by
+    rw [hr]
+    constructor
+    · simpa using l1
+    · simpa using l2
+  have hn : ¬ ‖z‖ < 1 := not_lt.mpr hz
+  simp only [sixCol, hn, if_false]
+  rw [if_pos hl, hr]
+  rfl
+
 /-- **FS116-Y2-SIXFRAG**, every arc of `Γ` on `ω(0)` (with constant sides) is a (Q) arc. -/
 theorem sixFrag_isQArc {θ₁ θ₂ : ℝ} {c c' : Fin 6} (h : sixFrag.IsRingArc 0 θ₁ θ₂ c c') :
     sixFrag.IsQArc 0 θ₁ θ₂ := by
@@ -370,6 +498,126 @@ theorem sixFrag_isQArc {θ₁ θ₂ : ℝ} {c c' : Fin 6} (h : sixFrag.IsRingArc
 /-- The last clause is not vacuous: `r([0°, 30°])` is an arc of `Γ` on `ω(0)`, inner colour `0` (the sector `S_0`), outer
 colour `2` (the lens `Q_0`). -/
 theorem sixFrag_isRingArc : sixFrag.IsRingArc 0 0 (π / 6) 0 2 := by
-  sorry
+  have hπ := Real.pi_pos
+  refine ⟨by positivity, ?_, fun θ hθ => ?_⟩
+  · rintro _ ⟨θ, -, rfl⟩
+    exact sixFrag_sphere_subset_Γ (ringPt_mem_sphere 0 θ)
+  have hx : ringPt 0 θ = ((1 : ℝ) : ℂ) * e θ := by simp [ringPt]
+  have harg : Complex.arg (ringPt 0 θ) = θ := by
+    rw [hx]; exact arg_polar one_pos ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+  have hslit : ringPt 0 θ ∈ Complex.slitPlane := by
+    rw [Complex.mem_slitPlane_iff]; left
+    have : (ringPt 0 θ).re = Real.cos θ := by
+      show (0 + e θ).re = _
+      rw [zero_add, e_eq]
+      simp only [Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.I_re, Complex.ofReal_im, Complex.I_im]
+      ring
+    rw [this]
+    exact Real.cos_pos_of_mem_Ioo ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+  have hnb1 : {z : ℂ | Complex.arg z ∈ Ioo 0 (π / 6)} ∈ 𝓝 (ringPt 0 θ) :=
+    (Complex.continuousAt_arg hslit).preimage_mem_nhds (by rw [harg]; exact Ioo_mem_nhds hθ.1 hθ.2)
+  -- the two lens tests at `e θ`
+  have k1 : 1 / 2 < Real.cos (θ - (π / 6)) := by
+    rw [← Real.cos_neg, neg_sub, ← Real.cos_pi_div_three]
+    exact Real.cos_lt_cos_of_nonneg_of_le_pi (by linarith [hθ.2]) (by linarith) (by linarith [hθ.1])
+  have k2 : 1 / 2 < Real.cos (θ + π / 6) := by
+    rw [← Real.cos_pi_div_three]
+    exact Real.cos_lt_cos_of_nonneg_of_le_pi (by linarith [hθ.1]) (by linarith) (by linarith [hθ.2])
+  have k12 : Real.cos (θ + π / 6) < Real.cos (θ - π / 6) := by
+    rw [← Real.cos_neg (θ - π / 6), neg_sub]
+    exact Real.cos_lt_cos_of_nonneg_of_le_pi (by linarith [hθ.2]) (by linarith [hθ.2]) (by linarith [hθ.1])
+  have dsq : ∀ (r : ℝ) (a : ℝ), dist ((r : ℂ) * e θ) (e a) ^ 2 = r ^ 2 - 2 * r * Real.cos (θ - a) + 1 :=
+    fun r a => dist_polar_sq r θ a
+  have l1x : dist (ringPt 0 θ) (e (-(π / 6))) < 1 := by
+    refine lt_of_pow_lt_pow_left₀ 2 (by norm_num) ?_
+    rw [hx, dsq, show θ - -(π / 6) = θ + π / 6 by ring]; nlinarith
+  have l2x : dist (ringPt 0 θ) (e (π / 6)) < 1 := by
+    refine lt_of_pow_lt_pow_left₀ 2 (by norm_num) ?_
+    rw [hx, dsq]; nlinarith
+  have hnb2 : {z : ℂ | dist z (e (-(π / 6))) < 1} ∈ 𝓝 (ringPt 0 θ) :=
+    (isOpen_lt (continuous_id.dist continuous_const) continuous_const).mem_nhds l1x
+  have hnb3 : {z : ℂ | dist z (e (π / 6)) < 1} ∈ 𝓝 (ringPt 0 θ) :=
+    (isOpen_lt (continuous_id.dist continuous_const) continuous_const).mem_nhds l2x
+  refine ⟨?_, ?_⟩
+  · -- inner side
+    ext c
+    simp only [mem_singleton_iff, ArcMap.innerColours, mem_setOf_eq]
+    constructor
+    · intro hc
+      obtain ⟨z, hzU, hzr⟩ := mem_closure_iff_nhds.mp hc _ hnb1
+      have hcol : sixCol z = c := hzr.1.2
+      have hz1 : ‖z‖ < 1 := by simpa using hzr.2
+      exact hcol.symm.trans (sixCol_inner_zero hz1 ⟨hzU.1, by linarith [hzU.2]⟩)
+    · rintro rfl
+      rw [Metric.mem_closure_iff]
+      intro ε hε
+      set η := min (1 / 2) (ε / 2) with hη
+      have hη0 : 0 < η := lt_min (by norm_num) (by linarith)
+      have hη1 : η ≤ 1 / 2 := min_le_left _ _
+      have hη2 : η ≤ ε / 2 := min_le_right _ _
+      have a1 : ((0 : ℤ) : ℝ) * (π / 3) < θ := by simp; linarith [hθ.1]
+      have a2 : θ < (((0 : ℤ) : ℝ) + 1) * (π / 3) := by simp; linarith [hθ.2]
+      refine ⟨((1 - η : ℝ) : ℂ) * e θ, ⟨⟨sixFrag_mem_interiorPts (by linarith) (by linarith) a1 a2, ?_⟩, ?_⟩, ?_⟩
+      · have := sixCol_sector (j := 0) (t := 1 - η) (φ := θ) (by linarith) (by linarith) (by norm_num) (by norm_num) a1 a2
+        show sixCol _ = 0
+        refine this.trans ?_
+        decide
+      · rw [mem_ball_zero_iff, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith)]
+        linarith
+      · rw [hx, dist_polar_same, abs_of_nonneg (by linarith)]; linarith
+  · -- outer side
+    ext c
+    simp only [mem_singleton_iff, ArcMap.outerColours, mem_setOf_eq]
+    constructor
+    · intro hc
+      obtain ⟨z, hzU, hzr⟩ := mem_closure_iff_nhds.mp hc _ (Filter.inter_mem hnb1 (Filter.inter_mem hnb2 hnb3))
+      have hcol : sixCol z = c := hzr.1.2
+      have hz1 : 1 ≤ ‖z‖ := by
+        have : z ∉ closedBall (0 : ℂ) 1 := hzr.2
+        rw [mem_closedBall_zero_iff, not_le] at this; exact this.le
+      exact hcol.symm.trans (sixCol_outer_two hz1 ⟨hzU.1.1, by linarith [hzU.1.2]⟩ hzU.2.1 hzU.2.2)
+    · rintro rfl
+      -- the ring point is off the radial segments and lens sides, a closed set
+      have hfin : {a | a ∈ sixArcs ∧ a ≠ Arc.circ 0 1 0 (2 * π)}.Finite := sixArcs_finite.subset fun a ha => ha.1
+      have hcl : IsClosed (⋃ a ∈ {a | a ∈ sixArcs ∧ a ≠ Arc.circ 0 1 0 (2 * π)}, a.carrier) :=
+        hfin.isClosed_biUnion fun a _ => a.isClosed_carrier
+      have hxA : ringPt 0 θ ∉ ⋃ a ∈ {a | a ∈ sixArcs ∧ a ≠ Arc.circ 0 1 0 (2 * π)}, a.carrier := by
+        simpa [ringPt] using e_notMem_lens_union hθ.1 hθ.2
+      obtain ⟨ρ, hρ, hball⟩ := Metric.mem_nhds_iff.mp (hcl.isOpen_compl.mem_nhds hxA)
+      rw [Metric.mem_closure_iff]
+      intro ε hε
+      set κ := Real.cos (θ + π / 6) with hκ
+      set η := min (min (1 / 4) (ε / 2)) (min (ρ / 2) ((2 * κ - 1) / 2)) with hη
+      have hη0 : 0 < η := lt_min (lt_min (by norm_num) (by linarith)) (lt_min (by linarith) (by linarith))
+      have hη1 : η ≤ 1 / 4 := (min_le_left _ _).trans (min_le_left _ _)
+      have hη2 : η ≤ ε / 2 := (min_le_left _ _).trans (min_le_right _ _)
+      have hη3 : η ≤ ρ / 2 := (min_le_right _ _).trans (min_le_left _ _)
+      have hη4 : η ≤ (2 * κ - 1) / 2 := (min_le_right _ _).trans (min_le_right _ _)
+      have hb : (((1 + η : ℝ) : ℂ) * e θ) ∈ (⋃ a ∈ {a | a ∈ sixArcs ∧ a ≠ Arc.circ 0 1 0 (2 * π)}, a.carrier)ᶜ := by
+        refine hball ?_
+        rw [Metric.mem_ball, hx, dist_comm, dist_polar_same, abs_of_nonpos (by linarith)]
+        linarith
+      have hbn : ‖((1 + η : ℝ) : ℂ) * e θ‖ = 1 + η := by
+        rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith)]
+      have hint : ((1 + η : ℝ) : ℂ) * e θ ∈ sixFrag.interiorPts := by
+        refine ⟨by show _ ∈ ball (0 : ℂ) (3 / 2); rw [mem_ball_zero_iff, hbn]; linarith, ?_⟩
+        intro hmem
+        obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp hmem
+        by_cases hac : a = Arc.circ 0 1 0 (2 * π)
+        · subst hac
+          obtain ⟨θ', -, hθ'⟩ := hza
+          have : ‖((1 + η : ℝ) : ℂ) * e θ‖ = 1 := by rw [← hθ']; simp
+          linarith
+        · exact hb (mem_iUnion₂.mpr ⟨a, ⟨ha, hac⟩, hza⟩)
+      have hbarg : Complex.arg (((1 + η : ℝ) : ℂ) * e θ) = θ :=
+        arg_polar (by linarith) ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+      refine ⟨((1 + η : ℝ) : ℂ) * e θ, ⟨⟨hint, ?_⟩, ?_⟩, ?_⟩
+      · refine sixCol_outer_two (by rw [hbn]; linarith) (by rw [hbarg]; exact hθ) ?_ ?_
+        · refine lt_of_pow_lt_pow_left₀ 2 (by norm_num) ?_
+          rw [dsq, show θ - -(π / 6) = θ + π / 6 by ring]; nlinarith
+        · refine lt_of_pow_lt_pow_left₀ 2 (by norm_num) ?_
+          rw [dsq]; nlinarith
+      · rw [mem_closedBall_zero_iff, hbn]; linarith
+      · rw [hx, dist_polar_same, abs_of_nonpos (by linarith)]; linarith
 
 end HadwigerNelson.Plane
