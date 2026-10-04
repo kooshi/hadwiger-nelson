@@ -144,17 +144,71 @@ theorem ae_pairMass_eq_zero {A : Set ℂ} (hA : MeasurableSet A) {a b : ℝ} (ha
 /-- From `ae_pairMass_eq_zero` and `continuous_pairMass`: null at every radius of the closed band. -/
 theorem pairMass_eq_zero_of_iccPairNull {A : Set ℂ} (hA : MeasurableSet A) {a b : ℝ} (ha : 0 < a) (hab : a < b)
     (h : IccPairNull A a b) (R : ℝ) : ∀ r ∈ Icc a b, pairMass A R r = 0 := by
-  sorry
+  intro r hr
+  have hc := continuous_pairMass hA R
+  have hae := ae_pairMass_eq_zero hA ha h R
+  have hZ : IsClosed {r | pairMass A R r = 0} := isClosed_eq hc continuous_const
+  have hO : IsOpen (Ioo a b ∩ {r | pairMass A R r = 0}ᶜ) := isOpen_Ioo.inter hZ.isOpen_compl
+  have hnull : volume (Ioo a b ∩ {r | pairMass A R r = 0}ᶜ) = 0 := by
+    rw [ae_iff] at hae
+    refine measure_mono_null (fun r hr => ?_) hae
+    simp only [mem_setOf_eq, Classical.not_imp]
+    exact ⟨hr.1, hr.2⟩
+  have hempty := (hO.measure_eq_zero_iff volume).mp hnull
+  have hsub : Ioo a b ⊆ {r | pairMass A R r = 0} := by
+    intro r hr'
+    by_contra hn
+    have : r ∈ Ioo a b ∩ {r | pairMass A R r = 0}ᶜ := ⟨hr', hn⟩
+    rw [hempty] at this
+    exact this
+  have hIcc : Icc a b ⊆ {r | pairMass A R r = 0} := by
+    rw [← closure_Ioo hab.ne]
+    exact closure_minimal hsub hZ
+  exact hIcc hr
 
 /-- Rescaling by `s`: radius bands of `x ↦ A (s x)` are radius bands of `A` scaled by `s` (volume scales by `s⁴`). -/
 theorem iccPairNull_preimage_mul {A : Set ℂ} {s a b : ℝ} (hs : 0 < s) :
     IccPairNull ((fun x : ℂ => (s : ℂ) * x) ⁻¹' A) a b ↔ IccPairNull A (s * a) (s * b) := by
-  sorry
+  unfold IccPairNull
+  set E : Set (ℂ × ℂ) := {q | q.1 ∈ A ∧ q.2 ∈ A ∧ s * a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ s * b} with hE
+  have hpre : {q : ℂ × ℂ | q.1 ∈ (fun x : ℂ => (s : ℂ) * x) ⁻¹' A ∧ q.2 ∈ (fun x : ℂ => (s : ℂ) * x) ⁻¹' A ∧
+      a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b} = (fun q : ℂ × ℂ => s • q) ⁻¹' E := by
+    ext ⟨x, y⟩
+    have hd : dist ((s : ℂ) * x) ((s : ℂ) * y) = s * dist x y := by
+      rw [dist_eq_norm, dist_eq_norm, ← mul_sub, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hs]
+    simp only [mem_setOf_eq, mem_preimage, Prod.smul_mk, Complex.real_smul, hE, hd]
+    constructor
+    · rintro ⟨h1, h2, h3, h4⟩; exact ⟨h1, h2, by nlinarith, by nlinarith⟩
+    · rintro ⟨h1, h2, h3, h4⟩; exact ⟨h1, h2, by nlinarith, by nlinarith⟩
+  rw [hpre, Measure.addHaar_preimage_smul (volume.prod volume) hs.ne']
+  constructor
+  · intro h0
+    rcases mul_eq_zero.mp h0 with h | h
+    · exfalso
+      rw [ENNReal.ofReal_eq_zero] at h
+      have : 0 < |(s ^ Module.finrank ℝ (ℂ × ℂ))⁻¹| := abs_pos.2 (inv_ne_zero (pow_ne_zero _ hs.ne'))
+      linarith
+    · exact h
+  · intro h0; rw [h0, mul_zero]
 
 /-- The rescaled colouring `x ↦ c (s x)` is an `AeColouring` when `c`'s pair mass at radius `s` vanishes. -/
 theorem AeColouring.exists_rescale (c : AeColouring k) {s : ℝ} (hs : 0 < s)
     (h : ∀ j R, pairMass (c.cls j) R s = 0) : ∃ c' : AeColouring k, ∀ x, c'.col x = c.col ((s : ℂ) * x) := by
-  sorry
+  refine ⟨⟨fun x => c.col ((s : ℂ) * x), c.measurable.comp (measurable_const_mul _), fun j => ?_⟩, fun x => rfl⟩
+  have hP : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ c.cls j ∧ q.1 + ((s : ℝ) : ℂ) * e q.2 ∈ c.cls j} = 0 := by
+    refine measure_mono_null (t := ⋃ n : ℕ, {q : ℂ × ℝ | q.1 ∈ c.cls j ∩ ball 0 n ∧ q.1 + ((s : ℝ) : ℂ) * e q.2 ∈ c.cls j})
+      (fun q hq => ?_) (measure_iUnion_null fun n => h j n)
+    obtain ⟨n, hn⟩ := exists_nat_gt ‖q.1‖
+    exact mem_iUnion.2 ⟨n, ⟨hq.1, by simpa using hn⟩, hq.2⟩
+  have hqmp : Measure.QuasiMeasurePreserving (Prod.map (fun x : ℂ => s • x) id) (volume.prod arcLength)
+      (volume.prod arcLength) :=
+    MeasureTheory.QuasiMeasurePreserving.prodMap (Measure.quasiMeasurePreserving_smul volume hs.ne')
+      (Measure.QuasiMeasurePreserving.id arcLength)
+  refine measure_mono_null ?_ (hqmp.preimage_null hP)
+  rintro ⟨x, θ⟩ ⟨hx, hy⟩
+  refine ⟨?_, ?_⟩
+  · simpa [AeColouring.cls, Complex.real_smul] using hx
+  · simpa [AeColouring.cls, Complex.real_smul, mul_add] using hy
 
 /-- A class of positive measure has non-null pairs at distances in `[a, 1]` for some `a > 0` (a density point `x` and
 `r ≤ 1/2` with density `≥ 9/10` in `B(x, r)` give positive mass to pairs at distance in `[r/2, 2r]`). -/
@@ -961,7 +1015,74 @@ theorem ae_sum_eq_one_of_weakStar {C : ℕ → Fin k → Set ℂ} (hC : ∀ m, I
 /-- **Selection**: from weights summing to `1`, a measurable colour of positive weight (argmax over `Fin k`). -/
 theorem exists_selection {F : Fin k → ℂ → ℝ} (hF : ∀ j, Measurable (F j)) (hsum : ∀ᵐ x ∂volume, ∑ j, F j x = 1)
     (hpos : ∀ j, ∀ᵐ x ∂volume, 0 ≤ F j x) : ∃ c : ℂ → Fin k, Measurable c ∧ ∀ᵐ x ∂volume, 0 < F (c x) x := by
-  sorry
+  classical
+  rcases Nat.eq_zero_or_pos k with rfl | hk
+  · exfalso
+    have : ∀ᵐ x ∂(volume : Measure ℂ), False := by
+      filter_upwards [hsum] with x hx
+      simp at hx
+    rw [ae_iff] at this
+    simp at this
+  · set j₀ : Fin k := ⟨0, hk⟩
+    set c : ℂ → Fin k := fun x =>
+      if h : ∃ j, 0 < F j x then (Finset.univ.filter fun j => 0 < F j x).min' (by
+        obtain ⟨j0, hj0⟩ := h; exact ⟨j0, Finset.mem_filter.2 ⟨Finset.mem_univ _, hj0⟩⟩) else j₀ with hc
+    have hmeasPos : ∀ j, MeasurableSet {x | 0 < F j x} := fun j => measurableSet_lt measurable_const (hF j)
+    have hpre : ∀ j, c ⁻¹' {j} = ({x | 0 < F j x} ∩ ⋂ i ∈ Finset.univ.filter (· < j), {x | ¬ 0 < F i x}) ∪
+        (if j = j₀ then {x | ∀ i, ¬ 0 < F i x} else ∅) := by
+      intro j
+      ext x
+      simp only [mem_preimage, mem_singleton_iff, hc]
+      by_cases h : ∃ j, 0 < F j x
+      · rw [dif_pos h]
+        have hne : ¬ ∀ i, ¬ 0 < F i x := by push Not; exact h
+        constructor
+        · intro hj
+          left
+          have hmem := Finset.min'_mem (Finset.univ.filter fun j => 0 < F j x) (by
+            obtain ⟨j0, hj0⟩ := h; exact ⟨j0, Finset.mem_filter.2 ⟨Finset.mem_univ _, hj0⟩⟩)
+          rw [hj] at hmem
+          refine ⟨(Finset.mem_filter.1 hmem).2, mem_iInter₂.2 fun i hi => ?_⟩
+          intro hi'
+          have := Finset.min'_le (Finset.univ.filter fun j => 0 < F j x) i (Finset.mem_filter.2 ⟨Finset.mem_univ _, hi'⟩)
+          rw [hj] at this
+          exact absurd (Finset.mem_filter.1 hi).2 (not_lt.2 this)
+        · rintro (⟨hj, hlt⟩ | hj)
+          · refine le_antisymm (Finset.min'_le (Finset.univ.filter fun j => 0 < F j x) j
+              (Finset.mem_filter.2 ⟨Finset.mem_univ _, hj⟩)) ?_
+            refine Finset.le_min' _ _ _ fun i hi => ?_
+            by_contra hlt'
+            push Not at hlt'
+            exact (mem_iInter₂.1 hlt i (by simp [hlt'])) (Finset.mem_filter.1 hi).2
+          · split_ifs at hj with hjj
+            · exact absurd hj hne
+            · exact hj.elim
+      · rw [dif_neg h]
+        push Not at h
+        constructor
+        · intro hj
+          right
+          rw [if_pos hj.symm]
+          exact fun i => not_lt.2 (h i)
+        · rintro (⟨hj, -⟩ | hj)
+          · exact absurd hj (not_lt.2 (h j))
+          · split_ifs at hj with hjj
+            · exact hjj.symm
+            · exact hj.elim
+    refine ⟨c, measurable_to_countable' fun j => ?_, ?_⟩
+    · rw [hpre]
+      refine ((hmeasPos j).inter (Finset.measurableSet_biInter _ fun i _ => (hmeasPos i).compl)).union ?_
+      split_ifs
+      · rw [setOf_forall]; exact MeasurableSet.iInter fun i => (hmeasPos i).compl
+      · exact MeasurableSet.empty
+    · filter_upwards [hsum, ae_all_iff.2 hpos] with x hx hx0
+      by_cases h : ∃ j, 0 < F j x
+      · simp only [hc, dif_pos h]
+        exact (Finset.mem_filter.1 (Finset.min'_mem (Finset.univ.filter fun j => 0 < F j x) _)).2
+      · exfalso
+        push Not at h
+        have : ∑ j, F j x ≤ 0 := Finset.sum_nonpos fun j _ => h j
+        linarith
 
 theorem bandNull_preimage_add {A : Set ℂ} {ε : ℝ} (h : BandNull A ε) (v : ℂ) : BandNull ((· + v) ⁻¹' A) ε := by
   let E : ℂ × ℂ ≃ᵐ ℂ × ℂ := MeasurableEquiv.prodCongr (MeasurableEquiv.addRight v) (MeasurableEquiv.addRight v)
@@ -1580,7 +1701,41 @@ theorem add_e_mem_essSupport_faceFailClass (x : ℂ) (θ ε g ε' ρ : ℝ) {δ 
 
 /-- **FS111-V0-RESCALE**: if an a.e.-proper measurable `k`-colouring exists, a tight one exists. -/
 theorem AeColouring.exists_tight (c : AeColouring k) : ∃ c' : AeColouring k, c'.Tight := by
-  sorry
+  set G : Set ℝ := {a | a ≤ 1 ∧ ∀ j, IccPairNull (c.cls j) a 1} with hG
+  obtain ⟨a₀, ha₀, j₀, hj₀⟩ := c.exists_pos_not_iccPairNull
+  have h1G : (1 : ℝ) ∈ G :=
+    ⟨le_rfl, fun j => measure_mono_null (fun q hq => le_antisymm hq.2.2.2 hq.2.2.1) (volume_prod_dist_eq_null 1)⟩
+  have hlow : ∀ a ∈ G, a₀ ≤ a := by
+    intro a ha
+    by_contra hlt
+    push Not at hlt
+    exact hj₀ ((ha.2 j₀).mono hlt.le le_rfl)
+  have hbdd : BddBelow G := ⟨a₀, hlow⟩
+  set a' := sInf G with ha'
+  have ha'0 : 0 < a' := lt_of_lt_of_le ha₀ (le_csInf ⟨1, h1G⟩ hlow)
+  have ha'1 : a' ≤ 1 := csInf_le hbdd h1G
+  have ha'G : ∀ j, IccPairNull (c.cls j) a' 1 := by
+    intro j
+    refine iccPairNull_of_forall_lt fun a'' h1 h2 => ?_
+    obtain ⟨g, hg, hga⟩ := exists_lt_of_csInf_lt ⟨1, h1G⟩ h1
+    exact (hg.2 j).mono hga.le le_rfl
+  have hpm : ∀ j R, pairMass (c.cls j) R a' = 0 := by
+    intro j R
+    rcases lt_or_eq_of_le ha'1 with hlt | heq
+    · exact pairMass_eq_zero_of_iccPairNull (c.measurableSet_cls j) ha'0 hlt (ha'G j) R a' ⟨le_rfl, hlt.le⟩
+    · rw [heq]; exact unitPairsNull_iff_pairMass.1 (c.unitPairsNull j) R
+  obtain ⟨c', hc'⟩ := c.exists_rescale ha'0 hpm
+  refine ⟨c', fun ε hε hs => ?_⟩
+  have hcls : ∀ j, c'.cls j = (fun x : ℂ => (a' : ℂ) * x) ⁻¹' c.cls j := fun j => by
+    ext x; simp [AeColouring.cls, hc']
+  have hnull : ∀ j, IccPairNull (c.cls j) (a' * (1 - ε)) (a' * (1 + ε)) := fun j => by
+    have := hs j
+    rw [bandNull_iff_iccPairNull, hcls, iccPairNull_preimage_mul ha'0] at this
+    exact this
+  have hmem : a' * (1 - ε) ∈ G :=
+    ⟨by nlinarith, fun j => ((hnull j).mono le_rfl (by nlinarith : a' ≤ a' * (1 + ε))).union (ha'G j)⟩
+  have := csInf_le hbdd hmem
+  nlinarith
 
 /-- **FS111-V0-RESCALE**, second clause: a tight a.e.-proper `k`-colouring exists iff `χ_m⁰(ℝ²) ≤ k`. -/
 theorem exists_tight_iff_chiM0_le : (∃ c : AeColouring k, c.Tight) ↔ chiM0 ≤ k := by

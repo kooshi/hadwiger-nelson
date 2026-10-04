@@ -392,7 +392,24 @@ def r7Down (m n : ℤ) : Set ℂ :=
     1 < dist z (tri (m + 2) n) ∧ 1 < dist z (tri m (n + 2))}
 
 theorem measurable_r7Col : Measurable r7Col := by
-  sorry
+  have hfl1 : Measurable fun p : ℝ × ℝ => ⌊p.1⌋ := Int.measurable_floor.comp measurable_fst
+  have hfl2 : Measurable fun p : ℝ × ℝ => ⌊p.2⌋ := Int.measurable_floor.comp measurable_snd
+  have hcast : Measurable fun n : ℤ => (n : ℝ) := measurable_of_countable _
+  have hu : Measurable fun p : ℝ × ℝ => p.1 - (⌊p.1⌋ : ℝ) := measurable_fst.sub (hcast.comp hfl1)
+  have hv : Measurable fun p : ℝ × ℝ => p.2 - (⌊p.2⌋ : ℝ) := measurable_snd.sub (hcast.comp hfl2)
+  have hdisc : ∀ f : ℤ × ℤ → Fin 7, Measurable fun p : ℝ × ℝ => f (⌊p.1⌋, ⌊p.2⌋) := fun f =>
+    (measurable_of_countable f).comp (hfl1.prodMk hfl2)
+  have hq : ∀ (x y : ℝ), Measurable fun p : ℝ × ℝ => triQ (p.1 - (⌊p.1⌋ : ℝ) + x) (p.2 - (⌊p.2⌋ : ℝ) + y) := by
+    intro x y; unfold triQ; fun_prop
+  have hT : Measurable fun p : ℝ × ℝ => r7ColTri p.1 p.2 := by
+    simp only [r7ColTri]
+    refine Measurable.ite ?_ (hdisc fun mn => r7UpCol mn.1 mn.2) (Measurable.ite ?_ (hdisc fun mn => r7UpCol (mn.1 + 1) mn.2)
+      (Measurable.ite ?_ (hdisc fun mn => r7UpCol mn.1 (mn.2 + 1)) (hdisc fun mn => r7DownCol mn.1 mn.2)))
+    · simpa using measurableSet_le (hq 0 0) measurable_const
+    · simpa [sub_eq_add_neg] using measurableSet_le (hq (-2) 0) measurable_const
+    · simpa [sub_eq_add_neg] using measurableSet_le (hq 0 (-2)) measurable_const
+  have hc : Continuous triCoord := by unfold triCoord; fun_prop
+  exact hT.comp hc.measurable
 
 /-- Every point lies in an up tile of its colour (colours `< 4`) or a down tile of its colour (colours `≥ 4`). -/
 theorem r7Col_mem_tile (z : ℂ) :
@@ -401,7 +418,10 @@ theorem r7Col_mem_tile (z : ℂ) :
 
 /-- Up colours are `< 4`, down colours `≥ 4`: an up tile and a down tile never share a colour. -/
 theorem r7UpCol_ne_r7DownCol (m n m' n' : ℤ) : r7UpCol m n ≠ r7DownCol m' n' := by
-  sorry
+  intro h
+  have := congrArg Fin.val h
+  simp only [r7UpCol, r7DownCol] at this
+  omega
 
 /-- **Within one up tile** a unit pair has a vertex at one end and the opposite arc at the other, so `x` is at distance `1` from
 a lattice point. -/
@@ -447,7 +467,7 @@ theorem unitPairsNull_of_unitPair_mem {A N : Set ℂ} (hN : volume N = 0)
 
 /-- The unit circles about the lattice points are null together (`MeasureTheory.Measure.addHaar_sphere`, countable union). -/
 theorem volume_iUnion_sphere_tri : volume (⋃ (m : ℤ) (n : ℤ), sphere (tri m n) 1) = 0 := by
-  sorry
+  exact measure_iUnion_null fun m => measure_iUnion_null fun n => Measure.addHaar_sphere volume _ _
 
 /-- **FS111-M-R7**, a.e.-properness: R7 is a measurable seven-colouring with null monochromatic unit pairs. -/
 theorem r7_aeColouring : ∃ c : AeColouring 7, c.col = r7Col := by
