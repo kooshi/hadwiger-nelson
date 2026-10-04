@@ -1,0 +1,173 @@
+{"pred": "main:FalconerFan", "kind": "def", "sig": "def FalconerFan {V : Type*} (H : SimpleGraph V) (k : ℕ) (a t : V) : Prop", "where": "Proofs/HadwigerNelson/Arith/FalconerFan.lean:20", "ref": "main"}
+{"pred": "main:AeColouring", "kind": "structure", "sig": "structure AeColouring (k : ℕ)", "where": "Proofs/HadwigerNelson/Plane/AeColouring.lean:23", "ref": "main"}
+{"pred": "main:Arc", "kind": "inductive", "sig": "inductive Arc", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:46", "ref": "main"}
+{"pred": "main:Nondegenerate", "kind": "def", "sig": "def Nondegenerate : Arc → Prop | seg a b => a ≠ b | circ _ ρ θ₀ θ₁ => 0 < ρ ∧ θ₀ < θ₁ ∧ θ₁ ≤ θ₀ + 2 * π", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:60", "ref": "main"}
+{"pred": "main:IsUnitArc", "kind": "def", "sig": "def IsUnitArc : Arc → Prop | seg _ _ => False | circ _ ρ _ _ => ρ = 1", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:65", "ref": "main"}
+{"pred": "main:ArcMap", "kind": "structure", "sig": "structure ArcMap (k : ℕ)", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:73", "ref": "main"}
+{"pred": "main:IsTile", "kind": "def", "sig": "def IsTile (T : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:103", "ref": "main"}
+{"pred": "main:Valid", "kind": "def", "sig": "def Valid : Prop", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:109", "ref": "main"}
+{"pred": "main:Covers", "kind": "def", "sig": "def Covers (p : ℂ) (R : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:112", "ref": "main"}
+{"pred": "main:IsPlaneMap", "kind": "def", "sig": "def IsPlaneMap : Prop", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:115", "ref": "main"}
+{"pred": "main:Siamese", "kind": "def", "sig": "def Siamese (T T' : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:118", "ref": "main"}
+{"pred": "main:NonSiamese", "kind": "def", "sig": "def NonSiamese : Prop", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:123", "ref": "main"}
+{"pred": "main:IsJordanDomain", "kind": "def", "sig": "def IsJordanDomain (T : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:126", "ref": "main"}
+{"pred": "main:Simple", "kind": "def", "sig": "def Simple : Prop", "where": "Proofs/HadwigerNelson/Plane/ArcMap.lean:130", "ref": "main"}
+{"pred": "main:CircleColouring", "kind": "structure", "sig": "structure CircleColouring", "where": "Proofs/HadwigerNelson/Plane/CircleColouring.lean:40", "ref": "main"}
+{"pred": "main:Lift", "kind": "structure", "sig": "structure Lift", "where": "Proofs/HadwigerNelson/Plane/CircleColouring.lean:62", "ref": "main"}
+{"pred": "main:Good", "kind": "def", "sig": "def Good (θ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/CircleColouring.lean:73", "ref": "main"}
+{"pred": "main:LeftVal", "kind": "def", "sig": "def LeftVal (x : ℝ) (v : ZMod 3) : Prop", "where": "Proofs/HadwigerNelson/Plane/CircleColouring.lean:86", "ref": "main"}
+{"pred": "main:RightVal", "kind": "def", "sig": "def RightVal (x : ℝ) (v : ZMod 3) : Prop", "where": "Proofs/HadwigerNelson/Plane/CircleColouring.lean:89", "ref": "main"}
+{"pred": "main:IsSwap", "kind": "def", "sig": "def IsSwap (x : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/CircleColouring.lean:93", "ref": "main"}
+{"pred": "main:UnitNear", "kind": "def", "sig": "def UnitNear (A B : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:65", "ref": "main"}
+{"pred": "main:UnitFar", "kind": "def", "sig": "def UnitFar (A B : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:68", "ref": "main"}
+{"pred": "main:Side", "kind": "inductive", "sig": "inductive Side", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:97", "ref": "main"}
+{"pred": "main:GermIn", "kind": "def", "sig": "def GermIn (p : ℂ) (θ : ℝ) (s : Side) (S : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:114", "ref": "main"}
+{"pred": "main:Arc.InitialPiece", "kind": "def", "sig": "def Arc.InitialPiece : Arc → ℂ → ℝ → Set ℂ → Prop | .seg a b, y, δ, B => ∃ ε : ℝ, 0 < ε ∧ B = segment ℝ y (y + (ε : ℂ) * e δ) ∧ B ⊆ segment ℝ a b | .circ c ρ θ₀ θ₁, y, δ, B => 0 < ρ ∧ ∃ φ ε σ : ℝ, (σ = 1 ∨ σ = -1) ∧ 0 < ε ∧ y = c + ρ * e φ ∧ e δ = e (φ + σ * (π / 2)) ∧ B = (fun t : ℝ => c + ρ * e (φ + σ * t)) '' Icc 0 ε ∧ (fun t : ℝ => φ + σ * t) '' Icc 0 ε ⊆ Icc θ₀ θ₁", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:142", "ref": "main"}
+{"pred": "main:TileOf", "kind": "def", "sig": "def TileOf (c : Fin k) (T : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:221", "ref": "main"}
+{"pred": "main:OnRingArc", "kind": "def", "sig": "def OnRingArc (p x : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:245", "ref": "main"}
+{"pred": "main:IsRingArc", "kind": "def", "sig": "def IsRingArc (p : ℂ) (θ₁ θ₂ : ℝ) (c c' : Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:258", "ref": "main"}
+{"pred": "main:IsQArc", "kind": "def", "sig": "def IsQArc (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:264", "ref": "main"}
+{"pred": "main:GermOnQ", "kind": "def", "sig": "def GermOnQ (p : ℂ) (θ : ℝ) (s : Side) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:268", "ref": "main"}
+{"pred": "main:OnQArc", "kind": "def", "sig": "def OnQArc (p x : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:271", "ref": "main"}
+{"pred": "main:IsChangePoint", "kind": "def", "sig": "def IsChangePoint (p : ℂ) (ψ : ℝ) (X X' : Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:277", "ref": "main"}
+{"pred": "main:IsHub", "kind": "def", "sig": "def IsHub (p : ℂ) (ψ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:282", "ref": "main"}
+{"pred": "main:IsEssBoundary", "kind": "def", "sig": "def IsEssBoundary (w : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:291", "ref": "main"}
+{"pred": "main:SaturatedAt", "kind": "def", "sig": "def SaturatedAt (w : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalMap.lean:295", "ref": "main"}
+{"pred": "main:Arc.OnRing", "kind": "def", "sig": "def Arc.OnRing (p : ℂ) (a : Arc) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalStructure.lean:552", "ref": "main"}
+{"pred": "main:GoodAt", "kind": "structure", "sig": "structure GoodAt (x : ℂ) (ρ₀ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalStructure.lean:1629", "ref": "main"}
+{"pred": "main:Arc.Tang", "kind": "def", "sig": "def Arc.Tang (y u : ℂ) (a : Arc) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalStructure.lean:2684", "ref": "main"}
+{"pred": "main:Sides", "kind": "def", "sig": "def Sides (x : ℝ) (l r : ℤ) : Prop", "where": "Proofs/HadwigerNelson/Plane/RingBand.lean:193", "ref": "main"}
+{"pred": "main:PairPos", "kind": "def", "sig": "def PairPos (θ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/RingBand.lean:584", "ref": "main"}
+{"pred": "main:RegularAt", "kind": "def", "sig": "def RegularAt (F : ArcMap k) (p : ℂ) (θ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/RingGerm.lean:682", "ref": "main"}
+{"pred": "main:InSixLens", "kind": "def", "sig": "def InSixLens (m : ℤ) (x : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/SixFragment.lean:40", "ref": "main"}
+{"pred": "main:sixPieceS", "kind": "def", "sig": "def sixPieceS (z : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/SixFragment.lean:885", "ref": "main"}
+{"pred": "main:sixPieceQ", "kind": "def", "sig": "def sixPieceQ (z : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/SixFragment.lean:889", "ref": "main"}
+{"pred": "main:sixPieceG", "kind": "def", "sig": "def sixPieceG (z : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/SixFragment.lean:895", "ref": "main"}
+{"pred": "main:IsMUA", "kind": "def", "sig": "def IsMUA (A : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/UnitAvoiding.lean:23", "ref": "main"}
+{"pred": "main:UnitPairsNull", "kind": "def", "sig": "def UnitPairsNull (A : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/UnitPairs.lean:28", "ref": "main"}
+{"pred": "main:Rainbow", "kind": "def", "sig": "def Rainbow (x y z : Fin 3) : Prop", "where": "Proofs/HadwigerNelson/Topology/SpernerGrid.lean:35", "ref": "main"}
+{"pred": "main:RainbowCell", "kind": "def", "sig": "def RainbowCell (ℓ : ℕ → ℕ → Fin 3) (i j : ℕ) : Prop", "where": "Proofs/HadwigerNelson/Topology/SpernerGrid.lean:44", "ref": "main"}
+{"pred": "w2:DyadicSqrt3Conclusion", "kind": "def", "sig": "def DyadicSqrt3Conclusion (L : Type*) [Field L] [NumberField L] [Algebra F L] (P : HeightOneSpectrum (𝓞 F)) : Prop", "where": "Proofs/HadwigerNelson/Arith/Dyadic.lean:38", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsUsablePrime", "kind": "def", "sig": "def IsUsablePrime {F : Subfield ℝ} (𝔭 : Ideal (𝓞 F)) : Prop", "where": "Proofs/HadwigerNelson/Arith/PlaceHom.lean:25", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsPlaceHom", "kind": "def", "sig": "def IsPlaceHom (F : Subfield ℝ) (𝔭 : Ideal (𝓞 F)) (E : Subfield ℝ) (V : Subring ℝ) (φ : V →+* (𝓞 F ⧸ 𝔭)) : Prop", "where": "Proofs/HadwigerNelson/Arith/PlaceHom.lean:34", "ref": "origin/fs131-w2"}
+{"pred": "w2:NoAffFieldHyp", "kind": "def", "sig": "def NoAffFieldHyp (F : Subfield ℝ) (k : ℕ) : Prop", "where": "Proofs/HadwigerNelson/Arith/PlaceHom.lean:378", "ref": "origin/fs131-w2"}
+{"pred": "w2:CPColouring", "kind": "structure", "sig": "structure CPColouring (k : ℕ)", "where": "Proofs/HadwigerNelson/Plane/CPColouring.lean:43", "ref": "origin/fs131-w2"}
+{"pred": "w2:CPColouring.RotationInvariant", "kind": "def", "sig": "def CPColouring.RotationInvariant (c : CPColouring k) : Prop", "where": "Proofs/HadwigerNelson/Plane/CPColouring.lean:58", "ref": "origin/fs131-w2"}
+{"pred": "w2:AeLE", "kind": "def", "sig": "def AeLE (C D : Fin k → Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Cover.lean:46", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsAdmissible", "kind": "def", "sig": "def IsAdmissible (C : Fin k → Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Cover.lean:49", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsAeCover", "kind": "def", "sig": "def IsAeCover (C : Fin k → Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Cover.lean:52", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsMaximalCover", "kind": "def", "sig": "def IsMaximalCover (C : Fin k → Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Cover.lean:55", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsSelection", "kind": "def", "sig": "def IsSelection (C : Fin k → Set ℂ) (f : ℂ → Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/Cover.lean:59", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsRegularMUA", "kind": "def", "sig": "def IsRegularMUA (A : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Cover.lean:83", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsFreeFor", "kind": "def", "sig": "def IsFreeFor (A : Set ℂ) (x : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Cover.lean:98", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsContactFor", "kind": "def", "sig": "def IsContactFor (A : Set ℂ) (x : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Cover.lean:102", "ref": "origin/fs131-w2"}
+{"pred": "w2:Saturated", "kind": "def", "sig": "def Saturated (C : Fin k → Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Cover.lean:111", "ref": "origin/fs131-w2"}
+{"pred": "w2:SaturatedPos", "kind": "def", "sig": "def SaturatedPos (C : Fin k → Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Cover.lean:115", "ref": "origin/fs131-w2"}
+{"pred": "w2:G1Bounds", "kind": "def", "sig": "def G1Bounds (Z : Set ℝ) (g : ℝ → ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/CoverExamples.lean:1731", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsLowerGraphOf", "kind": "def", "sig": "def IsLowerGraphOf (A : Set ℂ) (z₀ : ℂ) (θ : ℝ) (J : Set ℝ) (u : ℝ → ℝ) (δ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/MaximalCover.lean:312", "ref": "origin/fs131-w2"}
+{"pred": "w2:CurvatureLeOne", "kind": "def", "sig": "def CurvatureLeOne (u : ℝ → ℝ) (J : Set ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/MaximalCover.lean:319", "ref": "origin/fs131-w2"}
+{"pred": "w2:SemiconcaveWith", "kind": "def", "sig": "def SemiconcaveWith (K : ℝ) (u : ℝ → ℝ) (J : Set ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/MaximalCover.lean:584", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsMaxIn", "kind": "def", "sig": "def IsMaxIn (T S A : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/MaximalCover.lean:735", "ref": "origin/fs131-w2"}
+{"pred": "w2:KeptAt", "kind": "def", "sig": "def KeptAt (A : Set ℂ) (η ε : ℝ) (x : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Slack.lean:26", "ref": "origin/fs131-w2"}
+{"pred": "w2:IccPairNull", "kind": "def", "sig": "def IccPairNull (A : Set ℂ) (a b : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Slack.lean:50", "ref": "origin/fs131-w2"}
+{"pred": "w2:WeakStarTendsto", "kind": "def", "sig": "def WeakStarTendsto (g : ℕ → ℂ → ℝ) (F : ℂ → ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Slack.lean:1017", "ref": "origin/fs131-w2"}
+{"pred": "w2:PieceH", "kind": "def", "sig": "def PieceH (ε σ τ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Slack.lean:1571", "ref": "origin/fs131-w2"}
+{"pred": "w2:PieceF", "kind": "def", "sig": "def PieceF (g ε' ρ σ τ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Slack.lean:1574", "ref": "origin/fs131-w2"}
+{"pred": "w2:PieceQ", "kind": "def", "sig": "def PieceQ (δ σ τ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Slack.lean:1577", "ref": "origin/fs131-w2"}
+{"pred": "w2:Row130M1", "kind": "def", "sig": "def Row130M1 : Prop", "where": "Proofs/HadwigerNelson/Plane/Slack.lean:1876", "ref": "origin/fs131-w2"}
+{"pred": "w2:Voronov11", "kind": "def", "sig": "def Voronov11 : Prop", "where": "Proofs/HadwigerNelson/Plane/Slack.lean:1962", "ref": "origin/fs131-w2"}
+{"pred": "w2:BandNull", "kind": "def", "sig": "def BandNull (A : Set ℂ) (ε : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Suprema.lean:47", "ref": "origin/fs131-w2"}
+{"pred": "w2:BandFree", "kind": "def", "sig": "def BandFree (A : Set ℂ) (ε : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Suprema.lean:50", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsGridUnion", "kind": "def", "sig": "def IsGridUnion (h : ℝ) (A : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Suprema.lean:56", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsPeriodicSet", "kind": "def", "sig": "def IsPeriodicSet (L : ℝ) (A : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Suprema.lean:59", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsPartialColouring", "kind": "def", "sig": "def IsPartialColouring (C : Fin k → Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Suprema.lean:64", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsTiled", "kind": "def", "sig": "def IsTiled (C : Fin k → Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Suprema.lean:67", "ref": "origin/fs131-w2"}
+{"pred": "w2:IsPeriodic", "kind": "def", "sig": "def IsPeriodic (C : Fin k → Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Suprema.lean:70", "ref": "origin/fs131-w2"}
+{"pred": "w2:AeColouring.HasSlack", "kind": "def", "sig": "def AeColouring.HasSlack (c : AeColouring k) (ε : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Suprema.lean:92", "ref": "origin/fs131-w2"}
+{"pred": "w2:AeColouring.Tight", "kind": "def", "sig": "def AeColouring.Tight (c : AeColouring k) : Prop", "where": "Proofs/HadwigerNelson/Plane/Suprema.lean:95", "ref": "origin/fs131-w2"}
+{"pred": "w4:AeProperRegions", "kind": "structure", "sig": "structure AeProperRegions (k : ℕ)", "where": "Proofs/HadwigerNelson/Plane/SVMap.lean:208", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsLeavingCentre", "kind": "def", "sig": "def IsLeavingCentre (u q : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:39", "ref": "origin/fs131-w4"}
+{"pred": "w4:StripHolds", "kind": "def", "sig": "def StripHolds (u q : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:51", "ref": "origin/fs131-w4"}
+{"pred": "w4:MIn", "kind": "def", "sig": "def MIn (u x : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:56", "ref": "origin/fs131-w4"}
+{"pred": "w4:TanAbove", "kind": "def", "sig": "def TanAbove (v : ℂ) (α κ : ℝ) (z : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:52", "ref": "origin/fs131-w4"}
+{"pred": "w4:TanBelow", "kind": "def", "sig": "def TanBelow (v : ℂ) (α κ : ℝ) (z : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:55", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsClear", "kind": "def", "sig": "def IsClear (c : Fin k) (z : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:83", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsSector", "kind": "def", "sig": "def IsSector (v : ℂ) (r : ℝ) (S : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:89", "ref": "origin/fs131-w4"}
+{"pred": "w4:HasSectors", "kind": "def", "sig": "def HasSectors (v : ℂ) (c : Fin k) (n : ℕ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:96", "ref": "origin/fs131-w4"}
+{"pred": "w4:HasDegree", "kind": "def", "sig": "def HasDegree (v : ℂ) (n : ℕ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:99", "ref": "origin/fs131-w4"}
+{"pred": "w4:HasRepeatedColour", "kind": "def", "sig": "def HasRepeatedColour (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:102", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsCubicTrichromatic", "kind": "def", "sig": "def IsCubicTrichromatic (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:105", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsHorn", "kind": "def", "sig": "def IsHorn (v : ℂ) (α κ₁ κ₂ : ℝ) (c : Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:109", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsFlankAbove", "kind": "def", "sig": "def IsFlankAbove (v : ℂ) (α κ₂ : ℝ) (g : Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:113", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsFlankBelow", "kind": "def", "sig": "def IsFlankBelow (v : ℂ) (α κ₁ : ℝ) (h : Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:117", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsContact", "kind": "def", "sig": "def IsContact (v : ℂ) (c : Fin k) (w : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:124", "ref": "origin/fs131-w4"}
+{"pred": "w4:InType", "kind": "def", "sig": "def InType (v : ℂ) (c : Fin k) (w : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:128", "ref": "origin/fs131-w4"}
+{"pred": "w4:OutType", "kind": "def", "sig": "def OutType (v : ℂ) (c : Fin k) (w : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:131", "ref": "origin/fs131-w4"}
+{"pred": "w4:MergeAvailable", "kind": "def", "sig": "def MergeAvailable (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:143", "ref": "origin/fs131-w4"}
+{"pred": "w4:RayAvailable", "kind": "def", "sig": "def RayAvailable (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:147", "ref": "origin/fs131-w4"}
+{"pred": "w4:ShaveAvailable", "kind": "def", "sig": "def ShaveAvailable (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:153", "ref": "origin/fs131-w4"}
+{"pred": "w4:DoublyShadowed", "kind": "def", "sig": "def DoublyShadowed (v : ℂ) (α κ₁ κ₂ : ℝ) (g h : Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:160", "ref": "origin/fs131-w4"}
+{"pred": "w4:TerminalOn", "kind": "def", "sig": "def TerminalOn (U : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:166", "ref": "origin/fs131-w4"}
+{"pred": "w4:Terminal", "kind": "def", "sig": "def Terminal : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:169", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsStuck", "kind": "def", "sig": "def IsStuck (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:173", "ref": "origin/fs131-w4"}
+{"pred": "w4:InContact", "kind": "def", "sig": "def InContact (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:179", "ref": "origin/fs131-w4"}
+{"pred": "w4:OutContact", "kind": "def", "sig": "def OutContact (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:182", "ref": "origin/fs131-w4"}
+{"pred": "w4:BothKind", "kind": "def", "sig": "def BothKind (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:185", "ref": "origin/fs131-w4"}
+{"pred": "w4:Inert", "kind": "def", "sig": "def Inert (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:189", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsR2Arc", "kind": "def", "sig": "def IsR2Arc (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:197", "ref": "origin/fs131-w4"}
+{"pred": "w4:Condition5", "kind": "def", "sig": "def Condition5 : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:205", "ref": "origin/fs131-w4"}
+{"pred": "w4:Condition6", "kind": "def", "sig": "def Condition6 : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:210", "ref": "origin/fs131-w4"}
+{"pred": "w4:InMK", "kind": "def", "sig": "def InMK (K : ℕ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:214", "ref": "origin/fs131-w4"}
+{"pred": "w4:AgreesOff", "kind": "def", "sig": "def AgreesOff (F' : ArcMap k) (U : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:223", "ref": "origin/fs131-w4"}
+{"pred": "w4:RingArcsWithin", "kind": "def", "sig": "def RingArcsWithin (G : ArcMap k) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:229", "ref": "origin/fs131-w4"}
+{"pred": "w4:IsCoveringPair", "kind": "def", "sig": "def IsCoveringPair (u y : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:233", "ref": "origin/fs131-w4"}
+{"pred": "ww:Rim", "kind": "inductive", "sig": "inductive Rim", "where": "Proofs/HadwigerNelson/Plane/Woodall/Basic.lean:40", "ref": "origin/fs131-ww"}
+{"pred": "ww:CollarAt", "kind": "def", "sig": "def CollarAt (S : Set ℂ) (u : ℂ) (s : Rim) (θ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Woodall/Basic.lean:55", "ref": "origin/fs131-ww"}
+{"pred": "ww:SectorsAt", "kind": "def", "sig": "def SectorsAt (v : ℂ) (n : ℕ) (d : Fin (n + 1) → ℝ) (c : Fin n → Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/Woodall/Basic.lean:69", "ref": "origin/fs131-ww"}
+{"pred": "ww:NiceAt", "kind": "def", "sig": "def NiceAt (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Woodall/Basic.lean:80", "ref": "origin/fs131-ww"}
+{"pred": "ww:WoodallMerged", "kind": "def", "sig": "def WoodallMerged (K : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Woodall/Basic.lean:88", "ref": "origin/fs131-ww"}
+{"pred": "ww:WoodallNormal", "kind": "def", "sig": "def WoodallNormal (K : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Woodall/Basic.lean:94", "ref": "origin/fs131-ww"}
+{"pred": "ww:OffDirs", "kind": "def", "sig": "def OffDirs (D : Finset ℝ) (φ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Woodall/Merge.lean:40", "ref": "origin/fs131-ww"}
+{"pred": "ww:DirColourAt", "kind": "def", "sig": "def DirColourAt (F : ArcMap k) (v : ℂ) (D : Finset ℝ) (σ : ℝ → Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/Woodall/Merge.lean:184", "ref": "origin/fs131-ww"}
+{"pred": "ww:CrossesAt", "kind": "def", "sig": "def CrossesAt (v : ℂ) (X : Fin k) (θ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/Woodall/NoFourFive.lean:559", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:TanAbove", "kind": "def", "sig": "def TanAbove (v : ℂ) (α κ : ℝ) (z : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:52", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:TanBelow", "kind": "def", "sig": "def TanBelow (v : ℂ) (α κ : ℝ) (z : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:55", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:IsClear", "kind": "def", "sig": "def IsClear (c : Fin k) (z : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:83", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:IsSector", "kind": "def", "sig": "def IsSector (v : ℂ) (r : ℝ) (S : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:89", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:HasSectors", "kind": "def", "sig": "def HasSectors (v : ℂ) (c : Fin k) (n : ℕ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:96", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:HasDegree", "kind": "def", "sig": "def HasDegree (v : ℂ) (n : ℕ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:99", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:HasRepeatedColour", "kind": "def", "sig": "def HasRepeatedColour (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:102", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:IsCubicTrichromatic", "kind": "def", "sig": "def IsCubicTrichromatic (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:105", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:IsHorn", "kind": "def", "sig": "def IsHorn (v : ℂ) (α κ₁ κ₂ : ℝ) (c : Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:109", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:IsFlankAbove", "kind": "def", "sig": "def IsFlankAbove (v : ℂ) (α κ₂ : ℝ) (g : Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:113", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:IsFlankBelow", "kind": "def", "sig": "def IsFlankBelow (v : ℂ) (α κ₁ : ℝ) (h : Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:117", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:IsContact", "kind": "def", "sig": "def IsContact (v : ℂ) (c : Fin k) (w : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:124", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:InType", "kind": "def", "sig": "def InType (v : ℂ) (c : Fin k) (w : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:128", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:OutType", "kind": "def", "sig": "def OutType (v : ℂ) (c : Fin k) (w : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:131", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:MergeAvailable", "kind": "def", "sig": "def MergeAvailable (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:143", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:RayAvailable", "kind": "def", "sig": "def RayAvailable (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:147", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:ShaveAvailable", "kind": "def", "sig": "def ShaveAvailable (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:153", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:DoublyShadowed", "kind": "def", "sig": "def DoublyShadowed (v : ℂ) (α κ₁ κ₂ : ℝ) (g h : Fin k) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:160", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:TerminalOn", "kind": "def", "sig": "def TerminalOn (U : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:166", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:Terminal", "kind": "def", "sig": "def Terminal : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:169", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:IsStuck", "kind": "def", "sig": "def IsStuck (v : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:173", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:InContact", "kind": "def", "sig": "def InContact (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:179", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:OutContact", "kind": "def", "sig": "def OutContact (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:182", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:BothKind", "kind": "def", "sig": "def BothKind (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:185", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:Inert", "kind": "def", "sig": "def Inert (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:189", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:IsR2Arc", "kind": "def", "sig": "def IsR2Arc (p : ℂ) (θ₁ θ₂ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:197", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:Condition5", "kind": "def", "sig": "def Condition5 : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:205", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:Condition6", "kind": "def", "sig": "def Condition6 : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:210", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:InMK", "kind": "def", "sig": "def InMK (K : ℕ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:214", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:AgreesOff", "kind": "def", "sig": "def AgreesOff (F' : ArcMap k) (U : Set ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:223", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:RingArcsWithin", "kind": "def", "sig": "def RingArcsWithin (G : ArcMap k) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:229", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:IsCoveringPair", "kind": "def", "sig": "def IsCoveringPair (u y : ℂ) : Prop", "where": "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean:233", "ref": "origin/fs131-ww"}
+{"pred": "ww-k4:AeProperRegions", "kind": "structure", "sig": "structure AeProperRegions (k : ℕ)", "where": "Proofs/HadwigerNelson/Plane/SVMap.lean:62", "ref": "origin/fs131-ww"}
+{"pred": "w3b:Arc.OnRing", "kind": "def", "sig": "def Arc.OnRing (p : ℂ) (a : Arc) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalStructure.lean:558", "ref": "fs131-w3b"}
+{"pred": "w3b:GoodAt", "kind": "structure", "sig": "structure GoodAt (x : ℂ) (ρ₀ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalStructure.lean:1635", "ref": "fs131-w3b"}
+{"pred": "w3b:Arc.Tang", "kind": "def", "sig": "def Arc.Tang (y u : ℂ) (a : Arc) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalStructure.lean:2690", "ref": "fs131-w3b"}
+{"pred": "w3b:BranchGerms", "kind": "structure", "sig": "structure BranchGerms (n : ℕ)", "where": "Proofs/HadwigerNelson/Plane/LocalStructure.lean:3595", "ref": "fs131-w3b"}
+{"pred": "w3b:Sorted", "kind": "def", "sig": "def Sorted : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalStructure.lean:3617", "ref": "fs131-w3b"}
+{"pred": "w3b:Mono", "kind": "def", "sig": "def Mono : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalStructure.lean:3739", "ref": "fs131-w3b"}
+{"pred": "w3b:IsSectorChart", "kind": "structure", "sig": "structure IsSectorChart {n : ℕ} (G : BranchGerms n) (v : ℂ) (r₀ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/LocalStructure.lean:4491", "ref": "fs131-w3b"}
+{"pred": "w3b:RegularAt", "kind": "def", "sig": "def RegularAt (F : ArcMap k) (p : ℂ) (θ : ℝ) : Prop", "where": "Proofs/HadwigerNelson/Plane/RingGerm.lean:682", "ref": "fs131-w3b"}
