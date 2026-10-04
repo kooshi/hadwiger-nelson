@@ -20,6 +20,9 @@ session with no memory of FS-112: read `CLAUDE.md` § The aim and § Counter-pri
 G21 (a local fragment is not a map; a finite chain is not a ray), G30 (the next discipline: dynamics of a parabolic map), G51, G17, G71 (the index at a
 bowtie seam; FS-112's E12 untested); rows 133–136; stubs FS-114, FS-111. *At FS-114's close:* G83 (rewritten), rows 137–138; stubs FS-116, FS-117. *At FS-111's close:* FS111-M2-INTRAD (two minds on its core): off a locally finite singular set saturated interfaces have integer radii, so the map step at six needs only no large-radius accumulation — which is this stub's stuck ray in another form (FS111-M2-REDUCE-A); FS-121 shares it.
 
+*At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-OR1-LOCALDENSE, -DISCF-NS;
+FS121-O1-OUT, -D2-SYM, -DB1-L7 (the saturated continuation); G85.
+
 ## The question, in plain language
 
 Row 134 proved that no six-map of the plane bounded by segments and circular arcs, none of radius 1, is a valid six-colouring (no two interior points
@@ -68,6 +71,24 @@ whole unit-spaced normal line (FS121-O1-LRA-LINE, held), and it forces, for ever
 0 — thin pencils (FS121-D2-THIN, one mind). No colouring with a cocompact symmetry, so none doubly periodic, has LRA (FS121-D2-SYM, held). **Re-posed:**
 this stub's measurable question is thin pencils in aperiodic colourings, and it lives inside FS-126 (curved tangent interfaces; FS121-D2-INCURVED: LRA
 inhabits that class), which a NO there decides; the line form is not needed. Its map-colouring questions (b′), (b″), (c) are unchanged.
+
+*At FS-129's audit (FS129-Z2, 2026-10-03; from the readers' records, each FS-129 result derived, one mind, kernel pending, prior art owed unless named).* Two bearings this stub did not carry.
+- *DISC-F in the Siamese and non-simple classes* (`plans/FS129-OR1-audit.md` § J19). With FS129-OR1-LOCALDENSE, DISC-F follows from C114-LOCAL-F in the
+  non-Siamese simple class (FS129-OR1-DISCF-NS), where no vertex has a repeated colour; in the Siamese or non-simple class it needs, besides, the same
+  exclusion about repeated-colour vertices or four-colour vertices within a bounded distance of every repeated-colour vertex — FS114-CV-EXISTS's *not
+  claimed* ("GS-4's density form, which still needs FS-115's (b′) and (b″) for aperiodic maps"). So (b′) and (b″) bear on DISC-F there, against
+  `data/fs129/demand-judged.md` § 5 ("no bearing on the NO since FS114-CV-EXISTS").
+- *A new path, placed here: an analogue of FS121-O1-OUT for valid maps* (FS-129 items 101, 120). FS121-D2-SYM excludes LRA by a window bound on
+  radius-`r` arcs; moving that hypothesis to FS112-N3-PER, toward its GAP N3-ALPH — (b″)'s sub-question — **stalls**, in FS129-SR1's words
+  (`plans/FS129-SR1-audit.md` § Stage 3, group 5): "D2-SYM's kill uses that a tangent arc of radius `n` continues to `n + 1, n + 2, …` over one angular
+  window, so windows stay fixed while radii grow; FS-112's pencil arcs bound horns near `P_k` and nothing makes a valid map continue them along a window,
+  so their angular windows about `P_{−1}` need not be bounded below". The saturated continuation is FS121-DB1-L7 (INTRAD's outward step); a valid map has
+  no saturation, so the analogue must come from the map's own stuck chains, FS112-N2-RAY's pencil (`plans/FS129-SR2-audit.md` § 4.2). **The smallest open
+  form:** does a valid map with unit arcs continue a stuck chain's pencil arcs along one angular window — an O1-OUT for valid maps — or does some valid-map
+  pencil have windows that shrink? The first is what the transfer of D2-SYM's window hypothesis to N3-PER needs; the second shows it cannot run this way.
+  FS129-SR2 registered the first at 0.15 and the second at 0.15 (its § 1). **Why here and not a stub of its own**: its object is this stub's (the stuck
+  chains' pencil), its use is this stub's sub-question N3-ALPH, and its bearing is this stub's; a separate stub would split one object across two files.
+  FS-126 holds the saturated side, where O1-OUT is held.
 
 ## What FS-112 established (addresses in `plans/FS112-derivation.md`)
 

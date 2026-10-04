@@ -45,6 +45,15 @@ lengths `s, t` along which the two flank tiles hug the unit circles from the hub
 card's hunch names (a reading, FS116-Z2, one mind; untested at a band). FS116-O1-YESLIM (held) puts the YES side on fragments on growing discs, so a robust
 NO needs its margin bounded below independently of the complexity.
 
+*At FS-129's audit (FS129-Z2, 2026-10-03; from the readers' records, each FS-129 result derived, one mind, kernel pending, prior art owed unless named).* Poros's invention signal on this route (FS-129
+inventory item 27) does not stand — no two held results contradict (`plans/FS129-OR1-audit.md` § J15). Side 1's reason, row 134, is a Condition-5
+theorem; with unit arcs routes R and M meet at the pinned corner (FS112-STOP, FS112-Y3-R3, FS112-N3-COR3). In its exact-map form: in a valid map both
+common unit points of a cubic trichromatic complementary pair are vertices of at least four colours whose rings carry (Q) arcs (FS112-N3-COR3), so they
+are FS-124's class, and a local exclusion of four-colour vertices with (Q) rings leaves no such pair in any valid map. At `ε > 0` the bearing on this route
+needs a band-stable four-colour kill: the question reduces to the carried card `do-fs114-kills-survive-a-band` (J16). Not covered: route R's fat
+junctions of higher degree (COR3 is for cubic trichromatic vertices). The bicycle — Voronov's Lemma 6.1 branch (i) — has a stub of its own, FS-130
+(`plans/STUB-bicycle-windings.md`).
+
 ## Registered expectations (instruments, never caps)
 
 - B-RR decided at one mind: **0.1**. A robust Lemma 6.1 count on a named class of near-colourings (bounded complexity first): **0.25**.
@@ -83,3 +92,9 @@ question: do-fs114-kills-survive-a-band
 > (`plans/FS114-derivation.md` l. 26 on), and no one has a robust form. A band-stable local kill is a statement of route R's kind, beside (A) and B-RR, so
 > its home is FS-122. Hunch `kills-are-not-band-stable` stays open. **Default if Keryx says nothing:** the card is carried in FS-122's stub at its opening,
 > and FS-116 does not ask it.
+
+## Dated correction notes (FS129-Z2, 2026-10-03)
+
+- **§ Bearing on the answer, "so this route and FS-121's meet nowhere below the answer"** (line 37): true under Condition 5 only; with unit arcs the two
+  routes meet at the pinned corner (the paragraph "At FS-129's audit" above; `plans/FS129-OR1-audit.md` § J15; FS-129 item 58). `plans/FRONTIER-STUBS.md`
+  rank 5's line says the same and is the re-rank's.

@@ -94,6 +94,21 @@ its own right. Nothing here moves a value alone.
 
 **At R2's re-rank (2026-10-03).** Question 1's reach is every ring, not only (Q)-free ones: side 1's sentence (`plans/FS114-NB6-verification.md` ll. 106–108) names no ring type, so a yes also deletes from FS-124's case list every change point that ends a non-(Q) arc of `Γ`. In route M's saturated class the same (R2) arcs go another way, by FS-126's NO: FS121-Z1-NOCURVED (one mind) gives "no (R2) arc occurs" from it. NB6 ll. 109–111 record two readings of "(Q)"; this stub uses FS-112's (an arc whose centre carries both side colours) throughout (`plans/POROS-2026-10-03-close-reread.md` §§ 2.3 C1, C3).
 
+*At FS-129's audit (FS129-Z2, 2026-10-03; from the readers' records, each FS-129 result derived, one mind, kernel pending, prior art owed unless named).* **Question 1 is answered yes, with the restriction
+repaired.** Bending keeps a fragment in FS116-Y4-EMPTY's class when the bends run on a whole-tile restriction of radius at most `√3` (FS129-OR1-WHOLE;
+FS129-OR1-BENDFRAG, widened to any `k` and any centre as FS129-SR1-BENDANY) — not on the round neighbourhood side 1 names, which can cut a tile into a
+Siamese pair (`plans/FS129-OR1-audit.md` § J1; `plans/FS129-SR1-audit.md` § 2.3). With FS129-OR1-QFREE-CLASS (in each class, the Γ-free exclusion gives
+the (Q)-free one) this is **FS129-OR1-QFREE**: "no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no (Q) arc"; and on FS116-V6's route the chain never uses simplicity (`plans/FS129-SR3-audit.md` § 2), so
+**FS129-SR3-QFREE-NS**: "no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no (Q) arc", with FS129-SR3-EMPTY-NS (EMPTY without "simple"). So in the non-Siamese class, simple or not, no vertex of at least four colours
+whose ring carries no (Q) arc survives past `1 + ε`: question 2 is moot; the classes of FS114-N7-3T, FS114-N7-HUB and FS114-N6-RING60, and OC, are empty
+there; the first construction target below does not exist there. **What is left of this stub is question 3's Siamese half, now its main question.**
+FS129-OR1-QFREE-CLASS reduces it to EMPTY's Siamese form (a Γ-free Siamese exclusion gives the (Q)-free one at no cost); the V5-RING family holds without
+simplicity (`plans/FS129-SR1-audit.md` § Stage 3, group 3; inventory item 101) — a lead, not derived; G83's straddle in the Siamese class is a near miss
+("the last step survives; 'one tile per colour at a change point' fails", `plans/FS129-MR1-audit.md` § Table of misses). For FS-124 the bends give less
+than R2's card hoped: below `√3` about `p` a step may assume that `p`'s ring carries only its (Q) arcs and finitely many points (FS129-OR1-BENDFRAG), and
+no further — a step reading radius above 2, or a ring point's own ring, may not (`plans/FS129-OR1-audit.md` § J1). For FS-117: K1 on (Q)-free rings has no
+instance in the non-Siamese class, so route T's K1′ is owed only on (Q) rings (§ J24).
+
 ## Owed second minds (before anything final rests on them)
 
 FS116-Y4-FLANK (one mind; question 2 runs on it, while EMPTY's held count does not need it); FS114-N7-3T's per-pattern kills and FS114-N7-HUB on rings with
@@ -133,6 +148,10 @@ The plan (the reframe first); a derivation file in the Ephodos grammar; any obje
 G83 (the straddle; its reading's residue), G91 (drafted at FS-116's close: the ring rule), G87 (the bends collision), G86, G21, G79, G15; rows 133–138 and
 FS-116's; stubs FS-124, FS-125, FS-117, FS-122 (R1's card: EMPTY's margin is second order in the flank edges' lengths).
 
+*At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-OR1-WHOLE, -BENDFRAG,
+-QFREE-CLASS, -QFREE, FS129-SR1-BENDANY, FS129-SR3-EMPTY-NS, -QFREE-NS (`plans/FS129-derivation.md`); for question 3, FS129-SR1's group 3 (FS112-U1 =
+FS116-V5-U1 in its first three clauses) and the V5-RING family without simplicity; G83's straddle (a near miss in the Siamese class).
+
 ## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
 
 question: does-a-fragment-bend-keep-the-class
@@ -149,3 +168,16 @@ question: does-a-fragment-bend-keep-the-class
   hunch: it does (`bends-keep-the-class`, 0.6); the record has never held an inhabitant of the (Q)-free class (`qfree-class-is-empty`, 0.65)
   falsifier: a non-Siamese simple valid fragment about a four-colour vertex whose fragment bend creates a Siamese pair or a non-simple tile, or changes `p`'s colours
   rank: 1
+
+## Dated correction notes (FS129-Z2, 2026-10-03)
+
+- **§ The invention signal on the bends — settled; both sides stand.** The sides are about a map and a fragment and do not contradict: side 1's three
+  remarks hold for the whole-tile restriction of radius at most `√3`, not the round neighbourhood they name, which can cut a tile into a Siamese pair
+  (`plans/FS129-SR1-audit.md` § 2.3; `plans/FS129-OR1-audit.md` § J1; FS-129 inventory items 59, 96). A dated note says so under each remark
+  (`plans/FS114-NB5-verification.md` § 1b.3, `plans/FS114-NB6-verification.md` § 1b.0, `plans/FS114-N7-proof.md` ll. 88–89).
+- **§ Construction targets, first bullet** ("A valid fragment by formula about a vertex of at least four colours whose ring carries (R2) arcs and no (Q)
+  arc, on a disc of radius above 1"): none exists in the non-Siamese class (FS129-SR3-QFREE-NS, one mind); the target survives only with Siamese pairs.
+- **§ What FS-116 established, the FS114-N7-3T line**: its class is empty at `1 + ε` in the non-Siamese class (FS129-SR3-QFREE-NS), so its per-pattern
+  kills and FS114-N7-HUB on rings with (R2) arcs are owed only where Siamese pairs are allowed.
+- **§ Carried card, its hunches**: `bends-keep-the-class` (0.6) — they do, for the whole-tile restriction of radius at most `√3`;
+  `qfree-class-is-empty` (0.65) — it is, in the non-Siamese class. Scored at the opening, not here.

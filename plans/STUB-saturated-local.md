@@ -63,6 +63,18 @@ held). Each SAT-STRIP place alone is a piece.
 
 **At R2's re-rank (2026-10-03).** Given FS-126's NO (cusps allowed), no (R2) arc occurs in an honest saturated REG-J′ colouring (FS121-Z1-NOCURVED, one mind), so NO-SAT's rings would carry (Q) arcs only; FS116-Y4-EMPTY (held) removes the Γ-free type. The saturated case list is then the (Q) rings and the five- and six-colour vertices (`plans/POROS-2026-10-03-close-reread.md` § 2.3 C3).
 
+*At FS-129's audit (FS129-Z2, 2026-10-03; from the readers' records, each FS-129 result derived, one mind, kernel pending, prior art owed unless named).* Case 2 (SAT-QFREE's touch point) and case 1's G3
+(crosses not at right angles) concern fragments whose ring carries no (Q) arc, so FS129-OR1-QFREE closes both in the non-Siamese simple class, saturated
+or not, at any crossing angles (`plans/FS129-OR1-audit.md` § J3), and FS129-SR3-QFREE-NS without simplicity: **what is left of G3 and SAT-QFREE is their
+Siamese part, with G2**; G1 (the strip-like class) and question 3 are untouched. **FS116-S1-QF is a case of QFREE** — **FS129-SR2-QFCASE**: "FS116-S1-QF's statement — no non-Siamese valid fragment on B̄(p, 2), saturated on B̄(p, 1), whose ring ω(p) carries no (Q) arc, has at p a degree-4 vertex of four colours whose four edges are segments at right angles — is a case of FS129-OR1-QFREE", read as
+citing FS129-SR3-QFREE-NS (`plans/FS129-SR3-audit.md` § 2.3) — so the saturated cross whose ring carries no (Q) arc is closed in S1-QF's whole class: a
+second route to S1-QF, at one mind; question 0, S1-QF's own blind second mind, stays as Kooshi ruled it. FS116-S1-KAPPA's last clause is over a class
+empty by QFREE-NS (`plans/FS129-SR3-audit.md` § 4.1). Two questions for the opening, from FS129-MR1 (`plans/FS129-MR1-audit.md` § Stage 4, G84 and G85;
+neither derived): **which side's binding each kill reads** — FS116-S1-QF, -SAT-STRIP and -S1-RUNG assume each side colour bound at each edge point, while
+FS121-D3-GRUNDY makes every colour but the largest bound for free, so a kill reading only the lower colour's binding would hold for Grundy fragments and,
+by FS121-D3-EQ, bypass TOP₆; and **whether FS111-M2-INTRAD's one-step argument makes FS116-O1-SATPIN's tangent edges segments or arcs of integer
+radius**, given saturation one unit beyond toward the centre (a reading radius of about `R ≥ 3`).
+
 ## Owed second minds (before anything final rests on them)
 
 FS116-S1-QF (blind; question 0); FS116-S1-PAIR, -CLUSTER, -LENS, -EXIT (one mind each); FS116-V4's lemmas (CHORD, DICHOTOMY, MEET, TWIST, PARTNER, OUTER;
@@ -95,3 +107,6 @@ The plan (the reframe first); a derivation file; any object by formula with an e
 G84 (contact; SAT-STRIP's rung-and-contact collision is its instance at a vertex), G85, G89 (drafted at FS-121's close: honesty is free, the six-colour
 content is the top colour), G21 (the strip's dial is unsaturated), G86, G79; rows 140–141 and FS-116's; stubs FS-128, FS-126, FS-127, FS-120 (a rung is the
 first step of a pinch's ladder), FS-123, FS-124.
+
+*At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-OR1-QFREE,
+FS129-SR3-QFREE-NS, FS129-SR2-QFCASE, -TOUCHW (FS116-N1-TOUCH without its idle hypothesis); G84 with G89 (the binding question), G85 (INTRAD at a vertex).

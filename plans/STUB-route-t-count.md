@@ -9,6 +9,9 @@ FS-114: read `CLAUDE.md` § The aim and § Counter-priors, `LEDGER.md` rows 135 
 **Provisional bearings:** G86 (a tile count reaches the non-Siamese part only), G15 (count × local kill), G68 (the torus first), G83, G91 (drafted at FS-116's close: the ring rule; the Γ-free type empty), G72, G30 (the planar-map
 discipline: discharging, combinatorial curvature), G49 and G50 (Sirgedas's program is in print only as group posts); rows 135, 137–138; stubs FS-116, FS-111.
 
+*At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-OR1-QFREE, FS129-SR3-QFREE-NS
+(K1 on (Q)-free rings has no instance).
+
 ## The question, in plain language
 
 Every valid map's tiles meet like the faces of a planar map, and Euler's formula fixes their average number of neighbours. A six-colouring can afford
@@ -35,6 +38,13 @@ say which configurations FS-116 must exclude, so it can aim FS-116 even where it
 least four colours whose ring carries no arc of `Γ`; whether FS114-N7-3T's whole class — and so K1′'s deficient configurations on (Q)-free rings — is empty
 turns on whether a fragment's bends keep it in that class, FS-123's first question (`plans/STUB-qfree-ring.md`). FS116-V1-FRAME (one mind, true vacuously)
 re-derives "every tactic centre is a change point" there. No FS-116 step was a count: every kill landed is a straddle.
+
+*At FS-129's audit (FS129-Z2, 2026-10-03; from the readers' records, each FS-129 result derived, one mind, kernel pending, prior art owed unless named).* K1's (Q)-free case has no instance in the non-Siamese
+class: FS129-OR1-QFREE (simple) and FS129-SR3-QFREE-NS (without simplicity) exclude at `1 + ε` every vertex of at least four colours whose ring carries no
+(Q) arc, so route T's K1′ is owed only on (Q) rings (`plans/FS129-OR1-audit.md` § J24). An open line unplaced between this stub and FS-124's case 6:
+FS114-Y3-RSTOP's "Y3-D2 without reading R-T" — a Reuleaux bowtie with a non-tactic edge, which no held result reads; this stub's if the count pays it
+(`plans/FS129-SR3-audit.md` § 4.1). FS114-Y3-RSTOP is a member of FS114-Y4-RSTOPALL only on the non-Siamese simple part (FS-129 item 117; the erratum
+under FS114-Y3-RSTOP in `plans/FS114-derivation.md`).
 
 ## What is open, named
 

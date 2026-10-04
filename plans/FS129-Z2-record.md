@@ -138,3 +138,54 @@ not on `LEDGER.md` § B theorems; the column is per theorem, so lane A's yield s
 of FS129-MA1 § 3 and FS129-MA2 § 3.1 (bearing per mechanism), which this column does not encode. **Not encoded**: grokking-level bearings
 ("bears unapplied" per mechanism), and steps of OR1/OA1 prose outside their verdict paragraphs. Re-running `tools/fs129_index.py` drops the two
 fields; the README note (`data/fs129/index/README-corrections.md` § 5) says to re-run this script after it.
+
+## Stage 4 — SAVED: stubs — one minted, nine open stubs given FS-129's lines; FS-123's banner drafted
+
+**Tool**: `tools/fs129_z2_stubs.py` (`--apply` once; `--check`: each insertion present exactly once, the new stub equal to the tool's text, and
+`git diff` deleting no line of an open stub; `--check --fault` alters one insertion in memory — "insertion present 0 times … it fires"). Every FS-129
+statement quoted in a stub is read by the tool from the reader's record (`stmt()`), so each quotation is verbatim by construction. In open stubs only
+three places are written: the end of the bearing section, a sentence after the provisional-bearings line, and a closing section "Dated correction notes
+(FS129-Z2, 2026-10-03)" naming the line each note corrects. Poros's question sections and banners are untouched. `git diff --numstat`: 29, 5, 15, 11, 35,
+32, 10, 15, 21 lines added and 0 deleted in FS-104, FS-126, FS-122, FS-120, FS-124, FS-123, FS-117, FS-125, FS-115.
+
+**Minted — FS-130, the bicycle's windings** (`plans/STUB-bicycle-windings.md`; item 120's first derivation, item 81's third lead): C-T-BIKE (a proper
+three-colouring of `T₁(u) ∪ T₁(v)` by finitely many arcs, each `d ∈ (1, 2)`), with what is held (FS106-BIKE's lower bound; the one-circle winding of
+FS110-N2-RING, FS110-Y3-GP and FS129-SR1-RINGBAND; FS110-Y-BIKE-3C off grid corners; FS107-R's narrow failure of the `π/3` ansatz at `d = 1.9`; row 1's
+near miss) and what is missing (a coupling of the two circles' windings across the cross curve). **Its bearing, stated as none known**: the route that
+consumed C-T-BIKE (FS-107's R-S) is closed (row 133); whether it bears on FS-122's robust Lemma 6.1 count is Poros's first question. Not ranked.
+
+**Placed in an open stub, not minted — the O1-OUT analogue for valid maps** (item 120's second derivation, with item 101): in FS-115's bearing
+(`plans/STUB-stuck-ray.md`), with SR1's stall quoted verbatim, SR2's note on FS121-DB1-L7, and its smallest open form. **Why**: its object is FS-115's (the
+stuck chains' pencil, FS112-N2-RAY), its use is FS-115's own sub-question N3-ALPH ((b″)), and its bearing is FS-115's; a separate stub would split one
+object across two files. FS-126 gets a one-line cross-reference (the saturated side, where O1-OUT is held). Item 101's second lead (the V5-RING family
+holds without simplicity) is in FS-123's bearing as a lead for question 3.
+
+**Open stubs, item by item**
+
+| stub | items | what was added |
+|---|---|---|
+| FS-123 `plans/STUB-qfree-ring.md` | 54, 60, 101, 125, 133 | bearing: question 1 answered yes with the restriction repaired (QFREE, QFREE-NS, EMPTY-NS); question 2 moot; question 3's Siamese half is the main question; leads; what FS-124 may assume (BENDFRAG); K1 for FS-117. Notes: the invention signal settled; the first construction target does not exist in the non-Siamese class; N7-3T's class; the card's hunches' outcomes (scoring left to the opening) |
+| FS-124 `plans/STUB-q-ring.md` | 60, 80, 82, 129, 130, 133 | bearing: DOUBLETIP and OUTERADJ as pruning rules (and the Lean caution of items 126, 131); TWOCIRC; the bends' reach and BENDLE3 for case 1 (FS-110's winding at `y`); SEMI-PAR3's winding exploration (not derived); case 6 (E2ONE; PINALL's and PIN120's exceptions narrowed; the Reuleaux residue is HALF's whole class; RSTOP's R-T line unplaced); case 4 (FS112-SIX subsumed; its covering GAP); case 8 (LOCALDENSE, DISCF-NS); route R's pairs fall in this case list |
+| FS-125 `plans/STUB-saturated-local.md` | 60, 80, 117, 130 | bearing: G3 and SAT-QFREE closed in the non-Siamese class (QFREE, QFREE-NS); S1-QF a case of QFREE (QFCASE citing QFREE-NS), a second route at one mind, question 0 unchanged; KAPPA's last clause over an empty class; MR1's two questions (the binding each kill reads; INTRAD at a vertex) |
+| FS-104 `plans/STUB-cp-plane-six.md` | 28, 39, 42, 87, 26 | bearing: route (c) (NOAFF-FIELDS), route (0) (FALC-RED), route (b) (NOPERLAW; FALC-RES, FALC-FAN, DICHO-K; HOSTS (iv) ↔ row 88), the map step at five (TOP5; carrier left to the re-rank). Notes: line 53 (F1 held given MR: rows 128, 130); lines 55, 87 (Falconer held and read) |
+| FS-122 `plans/STUB-forced-pair.md` | 27, 58 | bearing: J15's verdict — routes R and M meet at the pinned corner with unit arcs; the exact-map form; the band form reduces to J16's card; pointer to FS-130. Note: line 37 holds under Condition 5 only (`plans/FRONTIER-STUBS.md` rank 5's line is the re-rank's) |
+| FS-115 `plans/STUB-stuck-ray.md` | 60, 101, 120 | bearing: DISC-F in the Siamese and non-simple classes; the O1-OUT analogue for valid maps, placed here with its reason |
+| FS-120 `plans/STUB-pinch-at-junction.md` | 129, 59 | bearing: FS111-M2-INT's GAP open, not refuted by M3-IRREG, its maximal-set form question 3; TOP5 and HULLSET bear on its rungs |
+| FS-117 `plans/STUB-route-t-count.md` | 129, 133, 117 | bearing: K1 on (Q)-free rings has no instance in the non-Siamese class; FS114-Y3-RSTOP's R-T line unplaced between here and FS-124 case 6; RSTOP ⊂ RSTOPALL only on the non-Siamese simple part |
+| FS-126 `plans/STUB-curved-pencils.md` | 62, 101 | bearing: stuck ray and tangent pencil one picture, not one statement; the valid-map side carried in FS-115; INTRAD at a saturated vertex would put FS-125's tangent edges in this class (not derived) |
+
+**Not done here, and why**: item 26 (the map step at five's carrier) and item 43 (Poros's FS-128 card wording) are FS129-P1's; item 59's J10 line in
+`data/fs129/demand-judged.md` is Poros's file (FS-104's bearing records the correction); `plans/FRONTIER-STUBS.md` rank 5's line (item 58) is Keryx's
+file and the re-rank's.
+
+### FS-123's banner, drafted for Keryx (not written; Keryx files banners)
+
+Slot: `plans/STUB-qfree-ring.md`, directly under the title line `# FS-123 — the (Q)-free ring: …` and above the italic "*Minted 2026-10-03 by FS-116's
+close, part 2 …*" paragraph, as a blockquote in the form of FS-115's banners:
+
+> **Re-aimed 2026-10-03 (FS-129's audit).** Question 1 is answered yes in the non-Siamese class, simple or not: bending a fragment on a whole-tile
+> restriction of radius at most `√3` keeps its class and leaves only (Q) arcs on the ring, so no non-Siamese valid six-coloured fragment on a closed disc
+> of radius above 1 about a vertex of at least four colours has a ring carrying no (Q) arc (FS129-OR1-QFREE, simple; FS129-SR3-QFREE-NS, without
+> simplicity; derived, one mind, kernel pending; `plans/FS129-derivation.md`). Question 2 is moot. **This stub's question is now question 3's Siamese
+> half**: does any Siamese valid six-coloured fragment about a vertex of at least four colours whose ring carries no (Q) arc survive past `1 + ε`?
+> FS129-OR1-QFREE-CLASS reduces it to the ring with no arc of `Γ`. The bearing section's paragraph "At FS-129's audit" has the detail.

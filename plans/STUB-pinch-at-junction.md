@@ -57,6 +57,14 @@ the rung's points (FS116-Y1-STRIPCEIL is its case at `r(120°)`); at a four-colo
 (FS116-S1's recognition; FS116-S1-QF). A rung is a ladder's first step, so the saturated cross is this stub's pinch read at a junction of four colours, on a
 fragment rather than a measurable fall colouring; FS-125 carries it.
 
+*At FS-129's audit (FS129-Z2, 2026-10-03; from the readers' records, each FS-129 result derived, one mind, kernel pending, prior art owed unless named).* FS111-M2-INT's GAP ("the same for the interior of
+the support F of a set with null unit pairs (a GAP under the topological reading of 'regular', VM2 (O2))") is open, and FS111-M3-IRREG does not refute
+it: the set maximality must add is nowhere dense, so it adds nothing to the interior of the support (`plans/FS129-SR3-audit.md` § 4.1); its maximal-set
+form is this stub's question 3. The map step at five's MUA-FIN is this stub's (`plans/FS129-OR1-audit.md` § J10), so FS129-OR1-TOP5 — with REG-J′₅,
+the honest existence form of C-SAT-T at five holds if and only if `χ_m⁰(ℝ²) ≥ 6` — bears on its rungs, as does FS129-SR2-HULLSET (FS111-C-HULL for one
+measurable set with null unit pairs, so FS111-M-PINCH and FS111-M-HULL2 need no colouring for that step; `plans/FS129-SR2-audit.md` § 2.1, row 24). No
+held result closes the pinch (`plans/FS129-OR1-audit.md` § J11).
+
 ## The room and the prior art
 
 The unit-distance graph's **fall colourings** (Dunbar et al. 2000, Zbl 0962.05020, finite graphs; held under FS-67) and measurable **maximal independent
@@ -97,3 +105,6 @@ Rows 131–136. Stubs: FS-121 (its top rungs need this), FS-115 (large-radius ac
 FS-114.
 
 *Would have searched here:* a local search over periodic partitions for a pinched class — post-ban, as a dial on question 1, never as its answer.
+
+*At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-SR2-HULLSET,
+-CLOSURE (FS106-DIAM (iii), FS111-V0-CLOSE and FS116-V5-NE1's first clause, one lemma), FS129-OR1-TOP5.

@@ -87,6 +87,11 @@ place's `J₀` minimum), G64 (six in the gap; skipping is not evidence), G48, G5
 G72 and G79 (pose the structural form; hunt the invariant every CP colouring carries), G21, G49/G50 (Falconer not held). Stubs: FS-103 (whose
 F1 makes this rung D), FS-44 (the mirror), FS-80 (route (c)), FS-49 (the finite-graph route to the same rung, post-ban), FS-102. **Added at FS-106's close (owner, 2026-09-27):** G82 — row 131 holds at every `k`, so this stub's question is a stability question at five: `χ_CP(ℝ²) ≥ 6` ⟺ `lim_{ε→0} µ₅(ε) < 1`, and a five-colour refutation is a sequence of periodic grid-square slack colourings with vanishing holes; FS-107's R and W at `k = 5`.
 
+*At FS-129's audit (FS129-Z2, 2026-10-03):* row 66 (the slack residue
+plane Γ₁₁ and the single-vertex repaint — one mechanism under G13, G26, G31 and G48), G75 (route (c)'s format), G55 with row 111 (route (b)'s literal
+reading), G43, G48, G54, G68, G69, G76 (the fan's hosts), G63 (the place `t ↦ 0`); FS129-SA1-NOAFF-K, -NOAFF-FIELDS, -PLACE-HOM, -FALC-FAN,
+-FALC-DICHO-K, -FALC-RES, -FALC-RED, FS129-OA1-NOPERLAW, FS129-MA2-FALC-HOSTS, FS129-OR1-TOP5.
+
 ## Bearing on χ ≥ 6
 
 Derived-decisive if FS-103's F1 holds (it is rung D); success per milestone very low; a no-go of a named format, or a reading that ties
@@ -100,3 +105,27 @@ Derived-decisive if FS-103's F1 holds (it is rung D); success per milestone very
 discs, no two interior points of one colour at distance 1 — on discs of every radius give `χ_m⁰(ℝ²) ≤ k`, with no map in the limit. So this stub's NO side
 (a CP five-colouring) can be supplied by valid five-coloured fragments on growing discs, and its YES (`χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6`, row 130) forbids them: some
 radius carries no valid five-coloured fragment on any disc.
+
+*At FS-129's audit (FS129-Z2, 2026-10-03; from the readers' records, each FS-129 result derived, one mind, kernel pending, prior art owed unless named).* The arithmetic era bears on this stub's routes — the audit's
+one cross-era hit (its decision 4; `plans/FS129-OA1-audit.md` §§ 2.2–2.3, `plans/FS129-MA1-audit.md` § 3, `plans/FS129-MA2-audit.md` § 2,
+`plans/FS129-SA1-audit.md` § 2):
+- *Route (c)*: G75's annihilator format is empty wherever a residue target is slack — **FS129-SA1-NOAFF-FIELDS**: "let F ⊆ ℝ be a number field, E = F(t₁, …, t_n) ⊂ ℝ with t₁, …, t_n algebraically independent over F (n ≥ 0), and H ⊂ E² a finite unit-distance graph; suppose k = 5 and F has a usable prime of residue field 𝔽₁₁ or 𝔽₁₉ or χ(F²) ≤ 4, or k = 4 and F has a usable prime of residue field 𝔽₇ or χ(F²) ≤ 3; then for every family of functions φ_v : Fin k → ℝ (v a vertex of H) with Σ_v φ_v(C(v)) taking one value on every proper k-colouring C of H, every φ_v is constant" (from FS129-SA1-NOAFF-K, row 66's
+  single-vertex repaint at any target). Route (c)'s linear-identity format dies over those fields; the route, and the format over the other fields, stand.
+- *Route (0)*: `[Falconer1981]` is held and read, its Lemmas 1–4 checked against the paper (`plans/FS129-MA1-audit.md` § 2.1); its mechanism, as a
+  statement: **FS129-SA1-FALC-RED**: "if a finite unit-distance graph H ⊂ ℝ² has a Falconer fan at k colours with apex a and tip t, |t − a| = r > 1/2, and arcsin(1/(2r))/π irrational, then every cover of ℝ² by k measurable sets has two points at distance 1 inside one of the sets, so χ_m(ℝ²) ≥ k + 1 for Falconer's everywhere-proper measurable chromatic number".
+- *Route (b)*: its literal reading is empty (`plans/FS129-OA1-audit.md` § 2.3) — **FS129-OA1-NOPERLAW**: "for a stationary random colouring c of ℝ², continuous in probability and proper almost surely on every unit pair, the set Z of vectors x with c(0) = c(x) almost surely is a discrete subgroup of ℝ²; if the law of c is rotation-invariant, Z = {0}". What remains is Falconer's fan, and the fan
+  family says where a five-colour fan can live: **FS129-SA1-FALC-RES**: "let F ⊆ ℝ be a number field, E = F(t₁, …, t_n) ⊂ ℝ with t₁, …, t_n algebraically independent over F (n ≥ 0), and H ⊂ E² a finite connected unit-distance graph with apex a and tip t forming a Falconer fan at five colours; then (i) χ(F²) ≥ 4, and F has no usable prime of residue field 𝔽₇; (ii) for every usable prime 𝔭 of F of residue field 𝔽₁₁ or 𝔽₁₉, with V and φ as in FS129-SA1-PLACE-HOM at 𝔭, t − a has coordinates in V and φ(t − a) = 0" (with FS129-SA1-FALC-FAN and FS129-SA1-FALC-DICHO-K: a five-colour fan has
+  `χ(H) ≥ 4`, and at `χ(H) = 4` every four-colouring gives apex and tip one colour). Over ℚ(√59), ℚ(√83) and ℚ(√131) a fan forces `t − a ∈ R ∩ 𝔓⁴`
+  and periodicity of every four-colouring (FS129-MA2-FALC-HOSTS (iv)), so one Falconer fan at five colours there would settle row 88's question, and a
+  non-periodic four-colouring there would rule such fans out (FS-129 item 87).
+- *The map step at five*: **FS129-OR1-TOP5**: "if REG-J′₅ holds — FS111-M-REDUCE-I's regularity hypothesis at five colours, a saturated colouring whose singular set Σ is locally finite with finitely many interface arcs at each point of Σ — then the honest existence form of C-SAT-T at five (every tight a.e.-proper five-colouring can be modified, keeping it a.e.-proper with five colours, into an honest saturated one; FS121-SAT6's k = 5 clause) holds if and only if χ_m⁰(ℝ²) ≥ 6, the forward direction at FS106-AE-MAP6's grade (modulo Townsend's simplification (c))" — the honest five-colour route to this stub's YES. Which stub carries it is the re-rank's call (FS-129
+  item 26); of its pieces MUA-FIN is FS-120's and REG-J′₅ FS-127's (`plans/FS129-OR1-audit.md` § J10).
+
+## Dated correction notes (FS129-Z2, 2026-10-03)
+
+- **§ The question, "given FS-103's F1 (a candidate, not held)"** (line 53): F1 is held, given MR — `LEDGER.md` row 128, "The collapse: given MR, the
+  plane's number is a field's", with `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)` at every totally real field whose stable places are all 6-thick, at [hand + tools exact];
+  row 130 adds `χ_CP(ℝ²) = χ_m⁰(ℝ²)` with no MR. So, given MR, this stub's question is rung D (FS-129 item 28; `data/fs129/reports/FS129-Q1.md`).
+- **§ The question, "`[Falconer1981]`, **not held**"** (line 55), and **§ Provisional bearings, "G49/G50 (Falconer not held)"** (line 87): held and read
+  in full (`BIBLIOGRAPHY.md` `[Falconer1981]` and its copy row); Lemmas 1–4 checked against pp. 185–187 (`plans/FS129-MA1-audit.md` § 2.1). Route (0)'s
+  reading is done (FS-129 items 38, 42, 67).

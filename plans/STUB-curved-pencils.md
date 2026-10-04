@@ -46,6 +46,11 @@ honest saturated REG-J′ colouring, only segments as tangent edges at such a ve
 
 **At R2's re-rank (2026-10-03).** The class has no held inhabitant, and FS-116 worked an empty class for two rounds (`plans/FS116-Z2-close.md` D3, the G21 instance): ask first for an inhabitant by formula at some `k ≥ 7`, or an obstruction, with FS121-D1's lemmas as the constraints it must meet. A NO here also removes the (R2) arcs FS-123's question 2 is about, in the class route M consumes (FS121-Z1-NOCURVED: "no (R2) arc occurs"; `plans/POROS-2026-10-03-close-reread.md` §§ 2.3 C3, 2.5 card 3).
 
+*At FS-129's audit (FS129-Z2, 2026-10-03; from the readers' records, each FS-129 result derived, one mind, kernel pending, prior art owed unless named).* FS-112's stuck ray and this stub's tangent pencil are
+one picture in two settings, not one statement (`plans/FS129-SR1-audit.md` § Stage 3, group 5); the valid-map side, an analogue of FS121-O1-OUT for valid
+maps, is carried in FS-115's bearing. FS111-M2-INTRAD's one-step argument, read at a vertex of a saturated fragment, would put FS-125's tangent edges in
+this stub's class (arcs of integer radius at least 2) given saturation one unit beyond (`plans/FS129-MR1-audit.md` § G85; not derived).
+
 ## Owed second minds (before anything final rests on them)
 
 FS121-Z1-NOCURVED; FS121-D2-INCURVED, -EXT, -THIN, -PERFIN; FS121-V5-RAY, -SYM-UP, -SYM-CPT, -LOC; FS121-D1-PENCILWIN, -DOUBLE; FS111-M2-INTRAD's

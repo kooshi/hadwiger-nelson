@@ -69,6 +69,37 @@ everywhere, for locally finite segment-and-arc maps — and, with FS-121's succe
 valid fragment by formula about a (Q)-ring vertex of at least four colours beyond `φ²/√2` meets G83's killing test and moves C114-LOCAL-F's dial; a family
 of such fragments on discs of every radius gives `χ(ℝ²) ≤ 6` with no MR (FS116-O1-YESLIM, held). Each case alone is a piece, not the answer.
 
+*At FS-129's audit (FS129-Z2, 2026-10-03; from the readers' records, each FS-129 result derived, one mind, kernel pending, prior art owed unless named).*
+- *Two pruning rules for ring types*, for case 5 (the recurrence) and at hubs and kind-T semi-hubs in case 1: **FS129-MR1-DOUBLETIP**: "in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) and y′ = r(ψ + 60°) be change points of the ring of p such that neither the arc of ω(p) just clockwise of r(ψ − 60°) nor the arc just counter-clockwise of r(ψ + 120°) lies on a (Q) arc; then no tile of p is at once the only tile of p whose closure holds y and the only tile of p whose closure holds y′" — the double-tip
+  kill of FS116-V6-HUG and FS116-Y4-EMPTY carried to every ring whose outer germs lie off (Q) arcs (its `uses only:` without FS116-N2-STAR,
+  `plans/FS129-SR1-audit.md` § 2.2) — and its outer twin **FS129-SR3-OUTERADJ**: "in a non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) and y′ = r(ψ + 60°) be change points of the ring such that neither the arc of ω(p) just counter-clockwise of r(ψ − 60°) nor the arc just clockwise of r(ψ + 120°) lies on a (Q) arc; then no colour of p is at once the only colour carried at y by a tile that is not a tile of p and the only colour carried at y′ by a tile that is not a tile of p" (non-Siamese, no simplicity). Neither reaches SEMI-PAR3. Caution for
+  the Lean list: DOUBLETIP cannot stand in for FS116-V6-HUG's colour step without losing FS129-SR3-EMPTY-NS, since DOUBLETIP's step 3 uses one cone per
+  tile at the hubs (FS-129 items 126, 131). The four uses of the two-circle identity (FS116-V6-HUG, FS114-Y5-PXKILL, FS116-V6-ADJ, FS116-Y4-FLANK's
+  least-curved case) are one lemma, FS129-SR1-TWOCIRC.
+- *The bends* (FS129-OR1-BENDFRAG; FS129-SR1-BENDANY at any `k`): below `√3` about `p` a step may assume `p`'s ring carries only its (Q) arcs and finitely
+  many points; a step reading radius above 2, or a ring point's own ring, may not (`plans/FS129-OR1-audit.md` § J1). At a vertex of exactly three colours
+  the whole ring is freed (FS129-SR1-BENDLE3), so case 1's reading of `y`'s own ring can start from a ring with no arc of `Γ` — the object of FS110-N2-RING
+  and FS110-Y3-GP, whose winding is the height lane A's question sought (their one lemma is FS129-SR1-RINGBAND), provided the bends at `y` are pinned at
+  `p`'s germs `r(ψ ± 60°)` (`plans/FS129-OR1-audit.md` § J2, its caveat). Case 1 shortened, not closed.
+- *SEMI-PAR3's winding, explored, not derived* (`plans/FS129-MR1-audit.md` § Stage 3, (d); `data/fs129/mr1/jump_explore.py`, an exploration, not a
+  control): when each (Q) arc's own side tiles hold `ω(y)`'s germs at its end, "the jump is 0 in all 8 consistent assignments, and `ω(y)` is forced to carry
+  `f`, `t_front`'s colour, at both `y + e(60°)` and `y + e(300°)`"; a jump of `±2` needs an `f`-coloured tile at `u` or `v`; then `t_front` can approach
+  `y` only inside the tip cone `(150°, 210°)` — a reading at radius `√3 + ε` about `p`, resting on a germ assignment not derived.
+- *Case 6*: **FS129-SR3-E2ONE**: "in a non-Siamese simple valid fragment containing a neighbourhood of the closed unit disc about p, with a pinwheel at p, no edge at p of length 60° (no E1) and E2 at exactly one blade t_{c+1}, the pocket colours satisfy m_{c−1} ≠ m_c; hence POCKET at w_c and CASE at q_c hold, and no such pinwheel exists at radius 1 + ε; in particular FS114-Y6-E2RED's survivor family S6, (120°, b, 180° − b, 60°), has no member". So FS114-Y5-PINALL's exception narrows to "E1, or E2 at two or more blades", FS114-Y5-PIN120's to E2 with E1 or a
+  second E2, and FS114-K1's list drops S6 (FS-129 item 130). Every Reuleaux `(2, 1, 1, 0)` in FS114-Y6-HALF's class carries a (Q) arc, so the Reuleaux
+  residue "on rings with (Q) arcs" is the whole HALF class, not killed past `√3` (`plans/FS129-SR3-audit.md` § 1.3). An open line unplaced between this
+  case and FS-117: FS114-Y3-RSTOP's "Y3-D2 without reading R-T" (a Reuleaux bowtie with a non-tactic edge, which no held result reads); whether FS-112's
+  bends remove it first is not read (`plans/FS129-SR3-audit.md` § 4.1).
+- *Case 4*: FS112-SIX is subsumed — its five-colour clause by FS116-N2-FIVERING, its six-colour clause by FS129-SR1-SIXQ (`plans/FS129-SR1-audit.md`
+  § Stage 3, group 2). FS112-SIX's covering-step GAP is answered in the non-Siamese class (FS116-V4-DICHOTOMY with FS116-N2-SIXRING) and open in the
+  Siamese class, case 7 (`plans/FS129-SR3-audit.md` § 4.1).
+- *Case 8*: **FS129-OR1-LOCALDENSE**: "every valid six-coloured fragment on a closed disc B̄(x, 3) has, in B̄(x, 3), a vertex of at least four colours or a vertex with a repeated colour" (possibly vacuous: no valid fragment on a disc of radius 3 is held) and **FS129-OR1-DISCF-NS**: "if for some R > 0 no non-Siamese simple valid six-coloured fragment exists on a closed disc of radius R about a vertex of at least four colours, then no non-Siamese simple valid six-coloured fragment exists on any closed disc of radius R + 3". So DISC-F
+  follows from C114-LOCAL-F in the non-Siamese simple class; in the Siamese or non-simple class it needs, besides, an exclusion about repeated-colour
+  vertices or GS-4's density form (FS-115; `plans/FS129-OR1-audit.md` § J19). `plans/FS116-local-exclusion.md` § 3.6's "one question" holds in the
+  non-Siamese simple class only (a dated note there).
+- *Route R meets this case list*: in a valid map both common unit points of a cubic trichromatic complementary pair are vertices of at least four colours
+  whose rings carry (Q) arcs (FS112-N3-COR3), so an exclusion here leaves no such pair in any valid map (`plans/FS129-OR1-audit.md` § J15).
+
 ## Owed second minds (before anything final rests on them)
 
 FS116-N3-CROSS's last clause (blind; Kooshi's ruling of item 115 applied in item 118); FS116-N2-STAR, -RECIP, -ANTI (item 69; HEX6 and HEX3 are true
@@ -118,6 +149,10 @@ it places, if one is built; the close's drafts.
 
 G83, G91 (drafted at FS-116's close), G84 (a (Q) arc is FS111-M-PINCH's split case), G15, G21, G79, G86; rows 133–138 and FS-116's; stubs FS-123, FS-125,
 FS-117, FS-121's successors FS-126–FS-128.
+
+*At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-MR1-DOUBLETIP, FS129-SR3-OUTERADJ,
+-E2ONE, FS129-SR1-TWOCIRC, -BENDANY, -BENDLE3, -RINGBAND, -SIXQ, FS129-OR1-BENDFRAG, -LOCALDENSE, -DISCF-NS; G71's height on a curve (FS110's winding)
+for case 1.
 
 ## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
 
