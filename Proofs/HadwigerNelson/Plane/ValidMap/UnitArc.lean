@@ -24,6 +24,77 @@ namespace HadwigerNelson.Plane
 
 open Complex Real Set Filter Topology Metric
 
+/-- `framePt` has the `x` coordinate it is built from. -/
+theorem frameX_framePt (v : ℂ) (α x y : ℝ) : frameX v α (framePt v α x y) = x := by
+  have hce := conj_e_mul_e α
+  unfold frameX framePt
+  have : (v + ((x : ℂ) + (y : ℂ) * I) * e α - v) * starRingEnd ℂ (e α) = (x : ℂ) + (y : ℂ) * I := by
+    calc _ = ((x : ℂ) + (y : ℂ) * I) * (e α * starRingEnd ℂ (e α)) := by ring
+      _ = _ := by rw [hce, mul_one]
+  rw [this]; simp
+
+/-- `framePt` has the `y` coordinate it is built from. -/
+theorem frameY_framePt (v : ℂ) (α x y : ℝ) : frameY v α (framePt v α x y) = y := by
+  have hce := conj_e_mul_e α
+  unfold frameY framePt
+  have : (v + ((x : ℂ) + (y : ℂ) * I) * e α - v) * starRingEnd ℂ (e α) = (x : ℂ) + (y : ℂ) * I := by
+    calc _ = ((x : ℂ) + (y : ℂ) * I) * (e α * starRingEnd ℂ (e α)) := by ring
+      _ = _ := by rw [hce, mul_one]
+  rw [this]; simp
+
+/-- The height of the parabola point `(t, s t²/2)` above the arc of curvature `κ`. -/
+theorem tanHeight_hornPt (κ s t : ℝ) : tanHeight κ t (s * t ^ 2 / 2) = (t ^ 2 / 2) * (s - κ - κ * s ^ 2 * t ^ 2 / 4) := by
+  unfold tanHeight; ring
+
+/-- Above a lower curvature `κ < s`, for small `t`: the sign of `tanHeight_hornPt`. -/
+theorem eventually_hornPt_pos {κ s : ℝ} (h : κ < s) : ∀ᶠ t in 𝓝[>] (0 : ℝ), 0 < s - κ - κ * s ^ 2 * t ^ 2 / 4 := by
+  have hc : Continuous fun t : ℝ => s - κ - κ * s ^ 2 * t ^ 2 / 4 := by fun_prop
+  have := hc.tendsto 0
+  simp only [ne_eq, OfNat.ofNat_ne_zero, not_false_eq_true, zero_pow, mul_zero, zero_div, sub_zero] at this
+  exact nhdsWithin_le_nhds (this.eventually (lt_mem_nhds (by linarith)))
+
+/-- Below a higher curvature `s < κ`, for small `t`. -/
+theorem eventually_hornPt_neg {κ s : ℝ} (h : s < κ) : ∀ᶠ t in 𝓝[>] (0 : ℝ), s - κ - κ * s ^ 2 * t ^ 2 / 4 < 0 := by
+  have hc : Continuous fun t : ℝ => s - κ - κ * s ^ 2 * t ^ 2 / 4 := by fun_prop
+  have := hc.tendsto 0
+  simp only [ne_eq, OfNat.ofNat_ne_zero, not_false_eq_true, zero_pow, mul_zero, zero_div, sub_zero] at this
+  exact nhdsWithin_le_nhds (this.eventually (gt_mem_nhds (by linarith)))
+
+/-- **A point of a horn at a prescribed height**: for `κ₁ < s < κ₂` there are horn points arbitrarily near the vertex on the
+parabola `y = s x²/2`, which lie above every arc of curvature `m < s` and below every arc of curvature `m > s`. -/
+theorem exists_mem_hornSet_aboveBelow (v : ℂ) (α : ℝ) {κ₁ κ₂ s m r : ℝ} (hr : 0 < r) (h1 : κ₁ < s) (h2 : s < κ₂)
+    (hm : m ≠ s) :
+    ∃ z ∈ hornSet v α κ₁ κ₂ r, (m < s → TanAbove v α m z) ∧ (s < m → TanBelow v α m z) := by
+  have hc : Continuous fun t : ℝ => framePt v α t (s * t ^ 2 / 2) := by unfold framePt; fun_prop
+  have hdist : ∀ᶠ t in 𝓝 (0 : ℝ), dist (framePt v α t (s * t ^ 2 / 2)) v < r := by
+    have := hc.tendsto 0
+    have h0 : framePt v α 0 (s * 0 ^ 2 / 2) = v := by simp [framePt]
+    rw [h0] at this
+    exact (Metric.tendsto_nhds.mp this) r hr
+  have e1 := eventually_hornPt_pos h1
+  have e2 := eventually_hornPt_neg h2
+  have e3 : ∀ᶠ t in 𝓝[>] (0 : ℝ), (m < s → 0 < s - m - m * s ^ 2 * t ^ 2 / 4) ∧ (s < m → s - m - m * s ^ 2 * t ^ 2 / 4 < 0) := by
+    rcases lt_or_gt_of_ne hm with hlt | hgt
+    · filter_upwards [eventually_hornPt_pos hlt] with t ht
+      exact ⟨fun _ => ht, fun h => absurd h (not_lt.mpr hlt.le)⟩
+    · filter_upwards [eventually_hornPt_neg hgt] with t ht
+      exact ⟨fun h => absurd h (not_lt.mpr hgt.le), fun _ => ht⟩
+  have hall : ∀ᶠ t in 𝓝[>] (0 : ℝ), 0 < s - κ₁ - κ₁ * s ^ 2 * t ^ 2 / 4 ∧ s - κ₂ - κ₂ * s ^ 2 * t ^ 2 / 4 < 0 ∧
+      ((m < s → 0 < s - m - m * s ^ 2 * t ^ 2 / 4) ∧ (s < m → s - m - m * s ^ 2 * t ^ 2 / 4 < 0)) ∧ t ∈ Ioi (0 : ℝ) ∧
+      dist (framePt v α t (s * t ^ 2 / 2)) v < r := by
+    filter_upwards [e1, e2, e3, eventually_mem_nhdsWithin, hdist.filter_mono nhdsWithin_le_nhds] with t a b c d e
+    exact ⟨a, b, c, d, e⟩
+  obtain ⟨t, ht1, ht2, ht3, ht0, hd⟩ := hall.exists
+  have ht0' : 0 < t := ht0
+  have hX : frameX v α (framePt v α t (s * t ^ 2 / 2)) = t := frameX_framePt v α _ _
+  have hY : frameY v α (framePt v α t (s * t ^ 2 / 2)) = s * t ^ 2 / 2 := frameY_framePt v α _ _
+  have hpos : 0 < t ^ 2 / 2 := by positivity
+  refine ⟨framePt v α t (s * t ^ 2 / 2), ⟨hd, by rw [hX]; exact ht0', ?_, ?_⟩, ?_, ?_⟩
+  · unfold TanAbove; rw [hX, hY, tanHeight_hornPt]; exact mul_pos hpos ht1
+  · unfold TanBelow; rw [hX, hY, tanHeight_hornPt]; exact mul_neg_of_pos_of_neg hpos ht2
+  · intro h; unfold TanAbove; rw [hX, hY, tanHeight_hornPt]; exact mul_pos hpos (ht3.1 h)
+  · intro h; unfold TanBelow; rw [hX, hY, tanHeight_hornPt]; exact mul_neg_of_pos_of_neg hpos (ht3.2 h)
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
@@ -401,7 +472,86 @@ theorem flankQ_both (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₃
     (hbe : ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v (α + π) κ'' κ₃ r ⊆ Tg)
     {X : Set ℂ} (hX : F.TileOf g X) (hXv : X ⊆ ball v 1) (hXN : v + e (α + π / 2) ∈ closure X) :
     κ₃ = -1 := by
-  sorry
+  have _ := hH
+  have _ := hXv
+  have hvdom : v ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  have hNdom : v + e (α + π / 2) ∈ F.dom := hv (by rw [mem_closedBall, dist_eq_norm]; simp)
+  have hepi : e (α + π + π / 2) = -e (α + π / 2) := by
+    rw [show α + π + π / 2 = (α + π / 2) + π by ring, e_add_pi]
+  have hconvA : ∀ z, TanAbove v (α + π) (-1) z ↔ 1 < dist z (v + e (α + π / 2)) := by
+    intro z; rw [tanAbove_neg_one_iff, hepi, sub_neg_eq_add]
+  have hconvB : ∀ z, TanBelow v (α + π) (-1) z ↔ dist z (v + e (α + π / 2)) < 1 := by
+    intro z; rw [tanBelow_neg_one_iff, hepi, sub_neg_eq_add]
+  -- Step 1: the tile `T_g` lies in `B̄(N, 1)` (Siamese with `X`)
+  obtain ⟨r₀, hr₀sub, hr₀pos⟩ := (hab.and eventually_mem_nhdsWithin).exists
+  have hr₀ : 0 < r₀ := hr₀pos
+  obtain ⟨z₀, hz₀, -, -⟩ := exists_mem_hornSet_aboveBelow v α (κ₁ := 1) (κ₂ := κ') (s := (1 + κ') / 2) (m := 1) hr₀
+    (by linarith) (by linarith) (by intro h; linarith)
+  have hz₀T : z₀ ∈ Tg := hr₀sub hz₀
+  have hz₀N : dist z₀ (v + e (α + π / 2)) < 1 := (tanAbove_one_iff v α z₀).mp hz₀.2.2.1
+  have hnear : UnitNear Tg X := by
+    rcases unitNear_or_unitFar hF hTg hX with h | h
+    · exact h
+    · exfalso
+      obtain ⟨y, hy, hyd⟩ := Metric.mem_closure_iff.mp hXN (1 - dist z₀ (v + e (α + π / 2))) (by linarith)
+      have h1 := h z₀ hz₀T y hy
+      have := dist_triangle z₀ (v + e (α + π / 2)) y
+      linarith
+  have hTgN : ∀ t ∈ Tg, dist t (v + e (α + π / 2)) ≤ 1 := by
+    intro t ht
+    have hsub : closure X ⊆ closedBall t 1 := by
+      refine closure_minimal (fun x hx => ?_) isClosed_closedBall
+      rw [mem_closedBall, dist_comm]; exact (hnear t ht x hx).le
+    have := mem_closedBall.mp (hsub hXN)
+    rwa [dist_comm] at this
+  apply le_antisymm
+  · -- κ₃ ≤ -1: the flank horn lies in `T_g ⊆ B̄(N, 1)`
+    by_contra hlt
+    rw [not_le] at hlt
+    obtain ⟨r, hrsub, hrpos⟩ := (hbe.and eventually_mem_nhdsWithin).exists
+    obtain ⟨z, hz, hzA, -⟩ := exists_mem_hornSet_aboveBelow v (α + π) (κ₁ := κ'') (κ₂ := κ₃)
+      (s := (max κ'' (-1) + κ₃) / 2) (m := -1) hrpos
+      (by have := le_max_left κ'' (-1); linarith [max_lt hκ'' hlt]) (by linarith [max_lt hκ'' hlt])
+      (by intro h; linarith [le_max_right κ'' (-1), max_lt hκ'' hlt])
+    have hzA' := hzA (by linarith [le_max_right κ'' (-1), max_lt hκ'' hlt])
+    have := hTgN z (hrsub hz)
+    have h2 := (hconvA z).mp hzA'
+    linarith
+  · -- κ₃ ≥ -1: the `c`-horn lies outside `B(N, 1)` (N-E2 against the out-type `c`-tile at `N`)
+    by_contra hlt
+    rw [not_le] at hlt
+    obtain ⟨r, ⟨hsec, hcol⟩, hrpos⟩ := (hH'.2.and eventually_mem_nhdsWithin).exists
+    obtain ⟨z, hz, -, hzB⟩ := exists_mem_hornSet_aboveBelow v (α + π) (κ₁ := κ₃) (κ₂ := κ₄)
+      (s := (κ₃ + min κ₄ (-1)) / 2) (m := -1) hrpos
+      (by linarith [lt_min hH'.1 hlt]) (by linarith [min_le_left κ₄ (-1), lt_min hH'.1 hlt])
+      (by intro h; linarith [min_le_right κ₄ (-1), lt_min hH'.1 hlt])
+    have hzB' := hzB (by linarith [min_le_right κ₄ (-1), lt_min hH'.1 hlt])
+    have hzN : dist z (v + e (α + π / 2)) < 1 := (hconvB z).mp hzB'
+    obtain ⟨x, hx, hSeq, hvcl⟩ := hsec
+    have hSpre : IsPreconnected (hornSet v (α + π) κ₃ κ₄ r) := by
+      rw [hSeq]; exact isPreconnected_connectedComponentIn
+    have hSsub : hornSet v (α + π) κ₃ κ₄ r ⊆ F.interiorPts := by
+      rw [hSeq]; exact (connectedComponentIn_subset _ _).trans inter_subset_left
+    have hTz : F.IsTile (connectedComponentIn F.interiorPts z) := ⟨z, hSsub hz, rfl⟩
+    have hzT : z ∈ connectedComponentIn F.interiorPts z := mem_connectedComponentIn (hSsub hz)
+    have hTzc : F.TileOf c (connectedComponentIn F.interiorPts z) := by
+      have := hTz.tileOf hzT
+      rwa [show F.col z = c from hcol hz] at this
+    have hST : hornSet v (α + π) κ₃ κ₄ r ⊆ connectedComponentIn F.interiorPts z :=
+      hSpre.subset_connectedComponentIn hz hSsub
+    have hvT : v ∈ closure (connectedComponentIn F.interiorPts z) := closure_mono hST hvcl
+    obtain ⟨TN, hTN, hNT⟩ := (F.mem_coloursAt_iff_exists_tileOf hNdom).mp hcN.1.2.2
+    have hout := hcN.2 TN hTN hNT
+    have hnear' : UnitNear (connectedComponentIn F.interiorPts z) TN :=
+      unitNear_of_mem_closure hF hTzc hTN (subset_closure hzT) hNT hzN
+    obtain ⟨b, hb⟩ := hTN.1.nonempty
+    have hsub : closure (connectedComponentIn F.interiorPts z) ⊆ closedBall b 1 := by
+      refine closure_minimal (fun a ha => ?_) isClosed_closedBall
+      rw [mem_closedBall]; exact (hnear' a ha b hb).le
+    have hvb : b ∈ closedBall v 1 := by
+      have := mem_closedBall.mp (hsub hvT)
+      rw [mem_closedBall, dist_comm]; exact this
+    exact disjoint_left.mp hout hb hvb
 
 /-! ## FS112-A4SIX and FS112-NB4P: four-colour vertices and their rings -/
 
