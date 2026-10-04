@@ -836,3 +836,109 @@ authorised changes and are kept, with the IMPORTED move and the docstrings); no 
 
 **Build as given** at `9e32ab1d`: OK — all 1750 modules up to date, nothing built, 2 modules with warnings, 36 warnings, every one `declaration uses
 'sorry'` (`build/gate/build/20261004T173350Z-1106823.log`; counted with `grep -c`).
+
+## Stage 23 — SAVED (FS131-I2k): `Plane/Slack` sorry-free; CoverExamples 34 → 23; the build is green; handoff — 23 `sorry` left
+
+**Closed** (statements untouched; new children stated before use, each with a docstring and a `scripts/Axioms.lean` record in block "FS131-I2k"):
+- `integral_circleAvg_sq` — I2j's route: `(∫_θ h)² = ∫ h(x + e p.1) h(x + e p.2) d(arcLength ⊗ arcLength)` (`integral_prod_mul`), Fubini
+  twice (both integrands bounded by `4 · 1_{B̄(0, R+1)}` resp. `4 · 1_{B̄(0, R)}` of the plane coordinate), the translation `y = x + e p.1`, and the
+  law of `e p.2 − e p.1` written as `volume.withDensity (ofReal ∘ ρ')` (`Measure.ext` on `hρN`), `ρ'` a measurable version of `ρ`. **The statement
+  does not assume `ρ ≥ 0`**; the proof derives `ρ ≥ 0` a.e. from `hρN` itself (at `N = univ` and `N = {ρ' ≥ 0}`: `ofReal (∫ ρ') = (2π)² =
+  ofReal (∫_{ρ' ≥ 0} ρ')`, so `∫_{ρ' < 0} ρ' = 0`).
+- `unitForm_tendsto` (the Rajchman step) — `F` clamped to `G = max 0 (min F 1)` (a.e. equal; `T F = T G` a.e. by `ae_arcLength_null`, **moved up**
+  from below `chiM0_le_chiCP`, a move), `h_m = 1_{B(0, R+1)}(g_m − G)`; `‖T h_m‖²_{L²} = ∫ h_m (h_m ⋆ ρ)` by `integral_circleAvg_sq` with
+  `exists_twoCircle_density`'s `ρ`, which tends to `0` by dominated convergence on `B(0, R+1)` (`(h_m ⋆ ρ)(y) → 0` pointwise by weak-*, against
+  `1_{B(0,R+1)} ρ(· − y)`; bound `‖ρ‖₁`) — no cross terms and no symmetry of `ρ` needed; then `∫_{B_R} |T h_m| → 0` by `|v| ≤ v²/(2δ) + δ/2` (no
+  Cauchy–Schwarz), and the second term `∫_{B_R} (g_m − G) T G → 0` by weak-* against `1_{B_R} T G`. **So `Plane/Slack` is sorry-free**, and with
+  it `chiM0_le_iff_muZero_eq_one` (FS106-EQ (a) ⟺ (c)), `chiM0_le_iff_periodic`, `seven_le_chiM0_iff` and YESLIM's `chiM0_le_of_fragments` read
+  the standard three.
+- **(G1)**: `hcGap_eq_of_gap` (`IsGreatest.csSup_eq`, `IsLeast.csInf_eq`; `hZc` idle, marked `have _ := hZc`), `differentiable_hcGap`,
+  `hcGap_bounds`, `hcGap_lowerParabola`, with six new children: `hcGap_exists_gap` (every point of `[−1/2, 1/2] ∖ Z` lies in a gap: `IsClosed.csSup_mem`),
+  `hasDerivAt_hcGap_of_gap` (`g′ = (s − a)(b − s)(a + b − 2s)/2`), `abs_hcGap_le_sq` (`|g(t)| ≤ (t − z)²/4` about `z ∈ Z`),
+  `hasDerivAt_hcGap_of_mem` (`g′ = 0` on `Z`, through `isLittleO_pow_id`), `abs_deriv_hcGap_le` (`|g′(t)| ≤ |t − z|/2`), `abs_deriv_hcGap_sub_le`
+  (`g′` is `1/2`-Lipschitz: across a point of `Z` the two bounds add; on one gap `g′(s) − g′(σ) = (s − σ) f / 2` with `−w²/2 ≤ f ≤ w²`, by
+  `nlinarith`). The lower parabola is the monotonicity route of Stage 18 (`monotoneOn_of_deriv_nonneg`, `antitoneOn_of_deriv_nonpos`). **So
+  `g1Bounds_hcGap` and HC's hypothesis model `hcZ0_spec` are sorry-free.**
+- `exists_near_hcFace` — `tri_cover` at scale `L√3` and rotation `e(π/6)`.
+- `hcUpTri_frame` — the frame map is affine (`haff`), so the frame conditions cut a convex set; the three vertices land on `e(π/3)/√3`,
+  `e(π)/√3 = −1/√3`, `e(−π/3)/√3` in every one of the three frames (angles reduced by `e_add_two_pi`); `convexHull_min`.
+- `frontier_essSupport_pos` (IRREG (3)) — almost every point of `A′ ∖ F` is a support point of `A′` in `K` off `F` (`volume_diff_essSupport`), and
+  such a point is not interior to the support: an open neighbourhood off `F` inside the support lies in `K` (a ball off `K` meets `A′ ∖ F` in a null
+  set), against `interior K = ∅`.
+- `r7Col_mem_tile` — lattice coordinates `z = a + bω` (proved inline), cell `(⌊a⌋, ⌊b⌋)`, distances `√(triQ (u − p) (v − q))`; the first test puts `z`
+  in `U(m, n)` (the other two vertices are always within `1` in the cell), the second in `U(m + 1, n)` (`triQ(u − 1, v − 1) = triQ(u − 2, v) − 1 + u − v`),
+  the third in `U(m, n + 1)`, else `D(m, n)` with `u + v > 1` and `z = (1 − v)(λ + 1) + (1 − u)(λ + ω) + (u + v − 1)(λ + 1 + ω)` (`Convex.sum_mem`).
+- **Assemblies** (bodies sorry-free; each still prints `sorryAx` through its children): `hc_band_components` (from `hcBand_component_iff`:
+  `connectedComponentIn` equality ⟺ a preconnected subset holding both; `interior Z = ∅` by `Measure.interior_eq_empty_of_null`), `hc_isRegularMUA`
+  (unit-avoidance gives null unit pairs; MUA by `isMUA_iff_ae_phi_pos` and `hc_ae_phi_pos`; support by `essSupport_of_isOpen`, `closure_interior_hcSet`;
+  `|HC ∖ int HC| = |∂HC| = 0`; shadow identity by `subset_compl_unitShadow_closure` and `hc_exclusion`), `hc_irreg` (as `hc_isRegularMUA` for the first
+  five clauses; `¬ IsMUA` from `hc_free_pos`; for a MUA completion `A′`: a.e. point of `A′` has `φ_A ≤ φ_{A′} = 0` (`ae_arcLength_null` on `A ∖ A′`,
+  `unitPairsNull_iff_ae_phi_eq_zero`), so `A′ ∖ HC` lies a.e. in the free set, hence in `K`; it has positive measure, else `A′ =ᵐ A` and `A` would be
+  MUA; then `frontier_essSupport_pos` with `F = HC`).
+
+**Builds** (`./scripts/build.sh` under the slot, `MEMMAX=40G BATCH=4`): at `e74a5e98` OK, but **not evidence for any commit** — CoverExamples was
+edited in the worktree while that build ran, so the final batch rebuilt it a second time (64 warning lines from two versions;
+`build/gate/build/20261004T173908Z-1124421.log`); a slip of this session, recorded so nobody reads that log as a state. At `0ad70eba` OK, 2 modules
+rebuilt, 48 warning lines, 24 distinct, every one `declaration uses 'sorry'` (each is printed twice: in its batch and replayed by the final `Proofs`
+batch) (`build/gate/build/20261004T180054Z-1245235.log`). At `925a8bd5` (the last Lean commit) OK, 2 modules rebuilt,
+46 warning lines, 23 distinct, every one `declaration uses 'sorry'` (`build/gate/build/20261004T181256Z-1328058.log`); counted with `grep`.
+
+**Axioms**, printed from the built library at `925a8bd5` with `lake env lean data/fs131/i2/i2k-axioms.lean` (not `scripts/axioms.sh`, which fails on
+the remaining `sorry` by design): `data/fs131/i2/i2k-axioms.txt`, 26 records, 22 reading the standard three. Negative controls in the same file:
+`hc_isRegularMUA`, `hc_irreg`, `hc_band_components` and `r7_aeColouring` print `sorryAx` — the check can fire (`r7_aeColouring` still waits on three
+R7 children).
+
+**Iteration**: `lake env lean -DautoImplicit=false` on scratch files importing the built module, under `scripts/slot.py --mem 5 --cpus 2` (peak RSS
+measured at 3.3 GB, mostly mapped `.olean`s), then the module in place (about 50 s); never evidence — the builds above are.
+
+**Re-pricing** (from the first two hard children, as the brief asks): `integral_circleAvg_sq` about 12k tokens and `unitForm_tendsto` about 20k (I2j
+had no price for either in the table; the compactness children ran at a half to a fifth of K2c's). CoverExamples against K2d's table: the (G1) block
+about 25k (table 120k), `hcUpTri_frame` 10k (20k), `r7Col_mem_tile` 10k (35k), `frontier_essSupport_pos` 5k (30k), `exists_near_hcFace` 3k (25k),
+the three assemblies 12k (75k) — a quarter of the table again.
+
+**Not done, owed before the gate**: wave 2's vacuity carriers. A survey by reading (not run), for whoever runs the gate: **IN** `CPColouring`
+(`IsEmpty (CPColouring 0)`, `IsEmpty (CPColouring 1)` in `Plane/CPColouring` — **as `instance`s, not theorems**: check that the scan's evidence
+collector sees instances before relying on them, or add theorem forms; inhabited at `9` by `nonempty_cpColouring_nine`). **OUT** by T1's set-variable
+rule (predicates of a family, set or function variable, `GENERIC` at every site, no `¬ P` theorem at a concrete instance found by grep):
+`IsPartialColouring`, `IsAdmissible`, `IsAeCover`, `IsMaximalCover`, `IsTiled`, `IsPeriodic`, `IsMaxIn`, `IsSelection`, `AeLE`, `BandNull`, `BandFree`,
+`IccPairNull`, `KeptAt`, `IsRegularMUA`, `Saturated`, `SaturatedPos`, `IsLowerGraphOf`, `CurvatureLeOne`, `SemiconcaveWith`, `G1Bounds`,
+`WeakStarTendsto`, `CPColouring.RotationInvariant`, `AeColouring.HasSlack`/`Tight`; but **`Tight` and `SemiconcaveWith` have concrete-instance
+facts** (`sq9_tight_saturated`, `exists_r7`'s `Tight` are positive; `not_semiconcaveWith_one_lowerArc` is a `¬ P` at a concrete instance) — the last
+is a candidate IN under T1's refutation clause; decide it with the scan's output in hand. `Row130M1`, `Voronov11` are closed propositions (no binder),
+outside the scan's per-binder question.
+
+**Still `sorry`** (23, all in `Plane/CoverExamples`): R7 7 — `r7Up_unitPair`, `r7Up_sep`, `r7Down_dist_ne_one`, `r7_boundary_lattice`,
+`r7_boundary_offLattice`, `r7_phi_pos_up`, `r7_phi_pos_down`; HC/IRREG 16 — `hcUp_slivers`, `hcBandTop_bounds`, `lt_hcBandTop_iff`,
+`continuousOn_hcBandTop`, `isClosed_hcSet`, `closure_interior_hcSet`, `volume_frontier_hcSet`, `hc_band_dist_lt_one`, `hc_unitAvoiding`,
+`hc_sausage_cover`, `hc_lemmaNL`, `hc_exclusion`, `hc_ae_phi_pos`, `hcBand_component_iff`, `hc_free_pos`, `hc_free_subset_nowhereDense`.
+
+**For the next implementer.** (1) Nearest the root: the three R7 children `r7Up_unitPair`, `r7Up_sep`, `r7Down_dist_ne_one` close
+`r7_aeColouring` (FS111-M-R7's a.e.-properness); `r7Col_mem_tile`'s `hD`/`hin`/`hout` pattern (distance to `tri (m + p) (n + q)` as
+`√(triQ (u − p) (v − q))`, with `P = m + p` as an equation argument so the casts never need rewriting) is reusable there. (2) HC: `hcUpTri_frame`'s
+`haff` (frame affine) and `hgood` (a vertex is in the frame set iff its angle's cosine and sine are bounded) carry over to `hcUp_slivers` and the
+block table. (3) Traps met this session: the unused-variable linter fires on an unused theorem hypothesis (a warning the build counts) — use
+`have _ := h -- idle: …`; `HasDerivAt.pow` here elaborates to the Pi-power form with mismatched module instances — build `(t − a)²(b − t)²` as a product
+of `HasDerivAt.mul`s; `(z / ↑r).re = z.re / r` is `Complex.div_ofReal_re`; a set built inside `≤ᵐ[volume]` needs `( … : Set ℂ)`. (4) **Never splice
+into a module while a build of the worktree runs** — the final batch rebuilds it and the log mixes two versions.
+
+## Theorems this phase proved (FS131-I2k, additions)
+
+Axioms read from `data/fs131/i2/i2k-axioms.txt` (printed from the built library at `925a8bd5`; the gate was not run). Each read against its docstring,
+which carries the row.
+- `HadwigerNelson.Plane.unitForm_tendsto` — `[propext, Classical.choice, Quot.sound]` — the Rajchman step (QB § 2.3): the unit form is weak-* continuous
+  on `[0, 1]`-valued families. With it, each the standard three: `chiM0_le_iff_muZero_eq_one` (FS106-EQ (a) ⟺ (c): `χ_m⁰ ≤ k ⟺ µ_k⁰ = 1`),
+  `chiM0_le_iff_periodic`, `seven_le_chiM0_iff` (`7 ≤ χ_m⁰ ⟺ sup_ε µ₆(ε) < 1`, row 131), and FS116-O1-YESLIM's `chiM0_le_of_fragments`.
+- `HadwigerNelson.Plane.integral_circleAvg_sq` — the standard three — `T*T` has the integrable kernel `ρ` (Fubini).
+- `HadwigerNelson.Plane.g1Bounds_hcGap` — the standard three — (G1) holds for § 1.6's gap function on every closed `Z ⊆ [−1/2, 1/2]` holding `±1/2`;
+  and through it `hcZ0_spec` (the model of FS111-M3-HC's hypotheses). Leaves: `hcGap_eq_of_gap`, `differentiable_hcGap`, `hcGap_bounds`,
+  `hcGap_lowerParabola`; children (new): `hcGap_exists_gap`, `hasDerivAt_hcGap_of_gap`, `abs_hcGap_le_sq`, `hasDerivAt_hcGap_of_mem`,
+  `abs_deriv_hcGap_le`, `abs_deriv_hcGap_sub_le` — each the standard three.
+- `HadwigerNelson.Plane.frontier_essSupport_pos` — the standard three — FS111-M3-IRREG (3) in general form.
+- `HadwigerNelson.Plane.exists_near_hcFace`, `hcUpTri_frame` — the standard three — HC's covering radius and the up triangle in its edge frames.
+- `HadwigerNelson.Plane.r7Col_mem_tile` — the standard three — every point lies in an R7 tile of its colour (a child of FS111-M-R7).
+- `hc_isRegularMUA`, `hc_irreg`, `hc_band_components` — assembled; print `sorryAx` through their children; not counted.
+
+## Drafts for the front page (FS131-I2k)
+
+None: the gate was not run (23 `sorry` remain in `Plane/CoverExamples`), so no count in `CLAUDE.md` § The gate or § Trust ledger moves, and no ledger
+row is regraded.

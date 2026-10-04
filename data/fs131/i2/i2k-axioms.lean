@@ -28,3 +28,4 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.hc_irreg
 #print axioms HadwigerNelson.Plane.hc_band_components
 #print axioms HadwigerNelson.Plane.r7_aeColouring
+#print axioms HadwigerNelson.Plane.r7Col_mem_tile
