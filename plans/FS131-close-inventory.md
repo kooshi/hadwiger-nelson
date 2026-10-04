@@ -709,3 +709,12 @@ reason by the close.*
      vertices of three, four and five sectors. (4) **The Jordan curve theorem is not needed**: E1-NOBRANCH's conclusion is W's `exists_three_le_sectors`, from
      wave 4's `ArcMap.ts_t` (FS106-TS-T), which rests on `lebesgue_covering_square` (FS131-LEB, item 66) — so Woodall's chain lands after LEB, like wave 4.
      Queue for the next Opus slot, by bearing: FS131-E2 (the cusp case — it may touch frontier hand results), then FS131-LEB (it blocks wave 4 and Woodall's chain).
+121. **EXT-HN1 issue check** (message 2026-10-04; logs `data/external/hn1/issue-check/`, with its stage 3): the issue's Lean block (2,575 characters, sha256
+     `9219ccba…`) compiles three ways — its own module beside the unchanged outside file, with `autoImplicit` off, and pasted after the original with the import
+     removed (the Lean 4 Web form) — each exit 0, no warnings; both `#print axioms` lines the standard three. Three prose sentences said more than the record:
+     "Everything here was checked in Lean" (the general three-colouring is a hand argument; "needs three" needs the unit triangle, hand only); "no six-colouring
+     of any circle" (Lean has `r ≥ 0`; at `r < 0` the circle is empty); and **"even a true density bound would not give χ(ℝ²) = 7" — mathematically wrong**
+     (Keryx's slip): a true bound at one radius would rule out six-colouring that circle, hence the plane. All three corrected in
+     `data/external/EXT-HN1-issue.md`; Keryx's receipt: the block's sha256 with its final newline re-computed, `9219ccba`, unchanged from the compiled one.
+     Also: `threeArcs` and `arcClass_unit_safe` (the three-arc colouring at radius `1/√3`) now kernel-checked in the audit file, to be committed at its stage 3.
+     Credit: EXT-HN1, for catching the coordinator's false sentence before it was posted.
