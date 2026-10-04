@@ -2161,7 +2161,23 @@ theorem hc_unitAvoiding {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 
 
 /-- Every point is within `L` of a face centre (the face lattice's covering radius). -/
 theorem exists_near_hcFace (z : ℂ) : ∃ m n : ℤ, dist z (hcFace m n) ≤ hcL := by
-  sorry
+  have hL : 0 < hcL := by unfold hcL; positivity
+  set c : ℂ := ((hcL * √3 : ℝ) : ℂ) * e (π / 6) with hc
+  have hcn : ‖c‖ = hcL * √3 := by
+    rw [hc, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by positivity)]
+  have hc0 : c ≠ 0 := by
+    intro h; rw [h, norm_zero] at hcn; nlinarith [Real.sqrt_pos.2 (show (0 : ℝ) < 3 by norm_num)]
+  obtain ⟨p, q, h⟩ := tri_cover (z / c)
+  refine ⟨p, q, ?_⟩
+  have e1 : z - hcFace p q = c * (z / c - tri p q) := by rw [hcFace, mul_sub, mul_div_cancel₀ _ hc0]
+  rw [dist_eq_norm, e1, norm_mul, hcn]
+  have hs : (√3) ^ 2 = (3 : ℝ) := Real.sq_sqrt (by norm_num)
+  have hn : ‖z / c - tri p q‖ ^ 2 ≤ 1 / 3 := by rw [Complex.sq_norm]; exact h
+  have hx2 : (√3 * ‖z / c - tri p q‖) ^ 2 ≤ 1 := by rw [mul_pow, hs]; linarith
+  have hx : √3 * ‖z / c - tri p q‖ ≤ 1 := (pow_le_one_iff_of_nonneg (by positivity) two_ne_zero).1 hx2
+  calc hcL * √3 * ‖z / c - tri p q‖ = hcL * (√3 * ‖z / c - tri p q‖) := by ring
+    _ ≤ hcL * 1 := mul_le_mul_of_nonneg_left hx hL.le
+    _ = hcL := mul_one _
 
 /-- **B1, the sausage cover (flat skeleton)**: every point is within `1` of a flat triangle or a segment, or within `3/2` of a face
 centre — the fundamental triangle `O C M` with H3's quadrilateral `Q ⊆ B̄(v, 1) ∪ B̄(e, 1)`, carried around each face by the 60°
