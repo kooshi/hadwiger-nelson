@@ -992,7 +992,7 @@ two new definitions, `r7UpOpen` and `r7DownOpen`, each with a spec `example` tha
 - **So R7 is sorry-free**: `r7_aeColouring`, `r7Cls_saturated`, `exists_r7` (FS111-M-R7's first three clauses) and `r7Cls_isMaximalCover`.
 
 **Builds**: at `58c3cbc9` (the three tile lemmas) OK, 2 modules rebuilt, 40 warning lines = 20 distinct, every one `declaration uses 'sorry'`
-(`build/gate/build/20261004T185334Z-1534006.log`). At `635088cf` (R7 closed): pending at the time of this stage's first commit — recorded below.
+(`build/gate/build/20261004T185334Z-1534006.log`). At `635088cf` (R7 closed) OK, 2 modules rebuilt, 32 warning lines = 16 distinct, every one `declaration uses 'sorry'`, no other warning (`build/gate/build/20261004T192247Z-1722400.log`; counted with `grep`). **Axioms**, printed from that built library with `lake env lean data/fs131/i2/i2l-axioms.lean` (not `scripts/axioms.sh`, which fails on the remaining `sorry` by design): `data/fs131/i2/i2l-axioms.txt`, 61 records — 58 read exactly the standard three (the 7 leaves, the 6 R7 declarations they close, 45 new children); the 3 negative controls `hc_isRegularMUA`, `hc_irreg`, `hc_band_components` print `sorryAx` (the check can fire).
 Iteration: `lake env lean -DautoImplicit=false` on scratch files (not evidence), then the module in place.
 
 **Re-pricing** (from the first two hard children, as the brief asks): `r7Up_unitPair` with `reuleaux_unitPair` about 12k tokens, `r7Up_sep` 5k,
@@ -1011,3 +1011,25 @@ star-shaped). (2) HC's derivation is `plans/FS111-M3-finiteness.md` §§ 1.6, 2.
 `have` terms first; `norm_num at h1 h2` after `interval_cases` errors "no goals" when the first hypothesis closes the goal — use
 `(try norm_num at h1) <;> (try norm_num at h2)`; a tactic block inside parentheses must not break a `simp only [...]` list across lines followed
 by `; omega` (parse error) — state the membership as a disjunction that `omega` proves.
+
+## Theorems this phase proved (FS131-I2l, additions)
+
+Axioms read from `data/fs131/i2/i2l-axioms.txt` (printed from the built library at `635088cf`; the gate was not run). Each read against its
+docstring, which carries the row.
+- `HadwigerNelson.Plane.r7_aeColouring` — `[propext, Classical.choice, Quot.sound]` — FS111-M-R7, a.e.-properness: R7 is a measurable
+  seven-colouring with null monochromatic unit pairs. With it `HadwigerNelson.Plane.exists_r7` (FS111-M-R7's first three clauses: a.e.-proper,
+  tight, saturated) and `HadwigerNelson.Plane.r7Cls_isMaximalCover` (FS111-VMW-R7-MAX's last clause: R7's classes are a maximal admissible cover),
+  each the standard three; also `r7Cls_saturated`, `r7_boundary`, `r7_unitPair_mem_sphere`.
+- The seven leaves, each the standard three: `r7Up_unitPair`, `r7Up_sep`, `r7Down_dist_ne_one`, `r7_boundary_lattice`, `r7_boundary_offLattice`,
+  `r7_phi_pos_up`, `r7_phi_pos_down`.
+- `HadwigerNelson.Plane.reuleaux_unitPair` — the standard three — Reuleaux's diameter in the form R7 reads it (two points within `1` of the three
+  vertices of a unit equilateral triangle, `1` apart, put the first on a unit circle about a vertex).
+- `HadwigerNelson.Plane.phi_pos_of_star`, `phi_pos_of_mem_open` — the standard three — `φ_A > 0` from a star-shaped open part of `A` reaching both
+  sides of the unit circle about `p`.
+- 41 further children (lattice coordinates, the open tiles and their closures, supports, the local analysis `r7_local`, the witnesses), each the
+  standard three; listed in `scripts/Axioms.lean` block "FS131-I2l" and `data/fs131/i2/i2l-axioms.txt`.
+
+## Drafts for the front page (FS131-I2l)
+
+None: the gate was not run (16 `sorry` remain in `Plane/CoverExamples`, all HC/IRREG), so no count in `CLAUDE.md` § The gate or § Trust ledger
+moves, and no ledger row is regraded.
