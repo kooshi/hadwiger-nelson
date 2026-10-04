@@ -373,3 +373,167 @@ which no pass before this one compared row by row"); (2) **a restriction's class
 exclusion quantifies over; the fix is the whole-tile restriction); (3) **a held result reaches its argument's class** (MA1 and MA2's yield, SR3's three
 "reach further" landings, MR1's DOUBLETIP: arguments filed at a narrower class than they carry); (4) **row 66 is one mechanism under four grokkings**
 (MA1 § 5.2: G13's slack face, G26, G31, G48).
+
+## Stage 8 — SAVED: drafts for the front page
+
+*Written after FS129-Z1's last commit (`a5c4d125`, the report; `plans/FS129-derivation.md` at `3f35c709`, 44 entries, QFREE superseded by QFREE-NS).
+Every FS-129 statement quoted below is copied by script from the reader's record (`data/fs129/z2/make_drafts.py`, through
+`tools/fs129_z2_stubs.py`'s `stmt()`), so each is verbatim. Grades are as filed: derived, one mind, kernel pending. Current state only.*
+
+## Drafts for the front page
+
+### `LEDGER.md` § A — rows 149–154
+
+**Slot**: `LEDGER.md` § A, the table, directly after row 148 (the row beginning "| 148 | **In non-Siamese simple valid six-coloured fragments, a vertex of
+at least four colours whose unit circle carries no arc of the boundary …"). Six new rows; the bundle of merges and weakenings that earns no row of its
+own (SUPK, HULLSET, CLOSURE, YESLIM-EQ, SIXQ, RINGBAND, TOUCHW, SQRT3-LOCAL) stays in `plans/FS129-derivation.md`, the theorem record (Workflow 3.1).
+
+| # | Result | Where | When |
+|---|---|---|---|
+| 149 | **In non-Siamese valid six-coloured fragments, simple or not, a vertex of at least four colours whose unit circle carries no (Q) arc — no arc of the boundary whose two side colours the vertex carries — exists on no disc of radius above 1 about it:** "no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no (Q) arc" (FS129-SR3-QFREE-NS). The step is FS-112's bends read on a fragment: on the whole-tile restriction of radius at most `√3` — the tiles meeting the open disc, each with its whole closure — "let F be a valid k-coloured fragment, for any k ≥ 1, on a closed disc B̄(p, r), r > 1, about a point p, and let 1 < ρ′ < min(r, √3); then there is a valid k-coloured fragment F″ on B̄(p, ρ′), with the same colours carried at p as in F, whose arcs of Γ on ω(p) are exactly the arcs of Γ on ω(p) in F both of whose side colours are carried at p, so that Γ ∩ ω(p) in F″ is those arcs and finitely many points; its tiles are the tiles of F meeting B(p, min(r, √3)), each unchanged except the two side tiles of each other ring arc, which differ from F's only inside lenses, as thin as wished, along that arc; and F″ is non-Siamese if F is, and simple if F is" (FS129-SR1-BENDANY, at any `k`; FS129-OR1-WHOLE), while a round restriction can cut one tile into a Siamese pair; so in each class the exclusion of rings with no arc of the boundary gives the (Q)-free one (FS129-OR1-QFREE-CLASS), and row 148's exclusion holds without simplicity, since FS116-V6's route never reads it (FS129-SR3-EMPTY-NS). FS-123's first question is answered yes; the classes of FS114-N7-3T, -N7-HUB and -N6-RING60 are empty there; FS116-S1-QF, the saturated straight cross of row 146, is a case (FS129-SR2-QFCASE). [hand], one mind, kernel pending (FS129-SR1's attacks on the chain's two named steps found no gap — checking readings, not second minds). **Not claimed:** the Siamese class (FS-123's question now); rings carrying a (Q) arc (FS-124); anything at seven colours or more. **Prior art:** owed; the bends are FS-112's moves (FS112-N2-RED, on maps), their reading on a fragment not searched. | `plans/FS129-derivation.md` (FS129-SR3-QFREE-NS, -EMPTY-NS; FS129-OR1-QFREE-CLASS, -WHOLE, -QFREE; FS129-SR1-BENDANY; FS129-SR2-QFCASE); `plans/FS129-OR1-audit.md` § J1; `plans/FS129-SR3-audit.md` § 2; `tools/fs129_or1_lens.py`, `tools/fs129_sr3_simple.py` | FS-129 (2026-10-03) |
+| 150 | **The (Q)-ring case list, pruned: two change points 60° apart on a four-colour vertex's ring whose far germs lie off (Q) arcs share neither a sole tip nor a sole outer colour, and one pinwheel residue is empty.** "in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) and y′ = r(ψ + 60°) be change points of the ring of p such that neither the arc of ω(p) just clockwise of r(ψ − 60°) nor the arc just counter-clockwise of r(ψ + 120°) lies on a (Q) arc; then no tile of p is at once the only tile of p whose closure holds y and the only tile of p whose closure holds y′" (FS129-MR1-DOUBLETIP); "in a non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) and y′ = r(ψ + 60°) be change points of the ring such that neither the arc of ω(p) just counter-clockwise of r(ψ − 60°) nor the arc just clockwise of r(ψ + 120°) lies on a (Q) arc; then no colour of p is at once the only colour carried at y by a tile that is not a tile of p and the only colour carried at y′ by a tile that is not a tile of p" (FS129-SR3-OUTERADJ, no simplicity); "in a non-Siamese simple valid fragment containing a neighbourhood of the closed unit disc about p, with a pinwheel at p, no edge at p of length 60° (no E1) and E2 at exactly one blade t_{c+1}, the pocket colours satisfy m_{c−1} ≠ m_c; hence POCKET at w_c and CASE at q_c hold, and no such pinwheel exists at radius 1 + ε; in particular FS114-Y6-E2RED's survivor family S6, (120°, b, 180° − b, 60°), has no member" (FS129-SR3-E2ONE). Behind them, and behind FS114-Y5-PXKILL, FS116-V6-HUG, -V6-ADJ and FS116-Y4-FLANK, one identity: `|a(s) − b(t)|² − 1 = −8 sin(s/2) sin(t/2) cos((s + t)/2) = 2(1 − cos s)(1 − cos t) − 2 sin s sin t` for the points reached by turning about two unit-distance centres toward a common unit neighbour (FS129-SR1-TWOCIRC). [hand], one mind each, kernel pending. **Not claimed:** SEMI-PAR3; germs on (Q) arcs; the Siamese class; E2 at two or more blades and E1's residues. **Prior art:** owed; the identity is held in-house since FS-114 (FS114-YB4-2ND). | `plans/FS129-derivation.md` (FS129-MR1-DOUBLETIP, FS129-SR3-OUTERADJ, -E2ONE, FS129-SR1-TWOCIRC); `plans/FS129-MR1-audit.md` § Stage 2; `plans/FS129-SR3-audit.md` §§ 1.3, 3.1; `tools/fs129_mr1_doubletip.py`, `tools/fs129_sr3_outeradj.py`, `tools/fs129_sr3_e2one.py`, `tools/fs129_sr1_twocirc.py` | FS-129 (2026-10-03) |
+| 151 | **A slack residue target kills every linear identity on a colouring, at every number of colours:** "let k ≥ 2, let ρ : G → T be a graph homomorphism, and let φ_v : Fin k → ℝ (v a vertex of G) be functions, all but finitely many identically zero, such that Σ_v φ_v(C(v)) takes one value b on every proper k-colouring C of G; then φ_u is constant for every vertex u of G such that some proper k-colouring of T leaves a colour absent from the closed neighbourhood of ρ(u); and if every vertex of T has such a colouring, every φ_v is constant and b is the sum of their values" (FS129-SA1-NOAFF-K, row 66's single-vertex repaint at any target). Over fields: "let F ⊆ ℝ be a number field, E = F(t₁, …, t_n) ⊂ ℝ with t₁, …, t_n algebraically independent over F (n ≥ 0), and H ⊂ E² a finite unit-distance graph; suppose k = 5 and F has a usable prime of residue field 𝔽₁₁ or 𝔽₁₉ or χ(F²) ≤ 4, or k = 4 and F has a usable prime of residue field 𝔽₇ or χ(F²) ≤ 3; then for every family of functions φ_v : Fin k → ℝ (v a vertex of H) with Σ_v φ_v(C(v)) taking one value on every proper k-colouring C of H, every φ_v is constant" (FS129-SA1-NOAFF-FIELDS, through G63's place `t ↦ 0` with the residue map, FS129-SA1-PLACE-HOM). So FS-104 route (c)'s linear-identity format (G75's annihilator) is empty over those fields. [hand], one mind, kernel pending. **Not claimed:** inequalities (three- and four-point positivity); identities of degree two or more; fields with no such prime and `χ(F²) ≥ k`. **Prior art:** partly — the four-colour form is FS84-S1e (2026-09-25, in-house); a gapped vertex is a non-frozen one (`[BrewsterEtAl2020]`); the field form owed. | `plans/FS129-derivation.md` (FS129-SA1-NOAFF-K, -NOAFF-FIELDS, -PLACE-HOM; superseded FS129-OA1-NOLIN5, FS129-MA1-NOAFF5); `plans/FS129-SA1-audit.md` § 2; `tools/fs129_sa1_family.py`, `tools/fs129_ma1_noaff.py` | FS-129 (2026-10-03) |
+| 152 | **Falconer's fan, at every number of colours, and where a five-colour fan can live; route (b)'s literal reading is empty.** "if a finite unit-distance graph H ⊂ ℝ² has a Falconer fan at k colours with apex a and tip t, |t − a| = r > 1/2, and arcsin(1/(2r))/π irrational, then every cover of ℝ² by k measurable sets has two points at distance 1 inside one of the sets, so χ_m(ℝ²) ≥ k + 1 for Falconer's everywhere-proper measurable chromatic number" (FS129-SA1-FALC-RED; `[Falconer1981]` Lemmas 1–4 checked against the paper). "let F ⊆ ℝ be a number field, E = F(t₁, …, t_n) ⊂ ℝ with t₁, …, t_n algebraically independent over F (n ≥ 0), and H ⊂ E² a finite connected unit-distance graph with apex a and tip t forming a Falconer fan at five colours; then (i) χ(F²) ≥ 4, and F has no usable prime of residue field 𝔽₇; (ii) for every usable prime 𝔭 of F of residue field 𝔽₁₁ or 𝔽₁₉, with V and φ as in FS129-SA1-PLACE-HOM at 𝔭, t − a has coordinates in V and φ(t − a) = 0" (FS129-SA1-FALC-RES; with FS129-SA1-FALC-FAN and -FALC-DICHO-K: a fan at `k` colours has `χ(H) ≥ k − 1`, and at `χ(H) = k − 1` gives apex and tip one colour). Over ℚ(√59), ℚ(√83), ℚ(√131) a five-colour fan forces `t − a ∈ R ∩ 𝔓⁴` and every four-colouring of the plane periodic (FS129-MA2-FALC-HOSTS (iv)), so one such fan would settle row 88's question. And "for a stationary random colouring c of ℝ², continuous in probability and proper almost surely on every unit pair, the set Z of vectors x with c(0) = c(x) almost surely is a discrete subgroup of ℝ²; if the law of c is rotation-invariant, Z = {0}" (FS129-OA1-NOPERLAW). [hand], one mind each, kernel pending. **Not claimed:** that any Falconer fan at five colours exists; the almost-everywhere form (it needs a positive-measure set of translations, which the 1981 text does not supply); anything for `χ(ℝ²)` without MR. **Prior art:** `[Falconer1981]` for the mechanism; the fan family and NOPERLAW owed. | `plans/FS129-derivation.md` (FS129-SA1-FALC-RED, -FALC-FAN, -FALC-DICHO-K, -FALC-RES, FS129-MA2-FALC-HOSTS, FS129-OA1-NOPERLAW); `plans/FS129-MA1-audit.md` § 2; `plans/FS129-OA1-audit.md` § 2.3; `tools/fs129_oa1_falconer_fan.py`, `tools/fs129_ma1_falcfan.py`, `tools/fs129_ma2_fangap.py` | FS-129 (2026-10-03) |
+| 153 | **A local density lemma for fragments, and DISC-F from the local exclusion in the non-Siamese simple class:** "every valid six-coloured fragment on a closed disc B̄(x, 3) has, in B̄(x, 3), a vertex of at least four colours or a vertex with a repeated colour" (FS129-OR1-LOCALDENSE, FS112-N3-DENSE3 read on a fragment; possibly vacuous — no fragment on a disc of radius 3 is held); "if for some R > 0 no non-Siamese simple valid six-coloured fragment exists on a closed disc of radius R about a vertex of at least four colours, then no non-Siamese simple valid six-coloured fragment exists on any closed disc of radius R + 3" (FS129-OR1-DISCF-NS). [hand], one mind, kernel pending. **Not claimed:** the Siamese or non-simple form (there the repeated-colour alternative is not covered by C114-LOCAL-F and needs GS-4's density form, FS-115); that the vertex found has four colours. **Prior art:** owed. | `plans/FS129-derivation.md` (FS129-OR1-LOCALDENSE, -DISCF-NS); `plans/FS129-OR1-audit.md` § J19 | FS-129 (2026-10-03) |
+| 154 | **The map step at five, as an equivalence:** "if REG-J′₅ holds — FS111-M-REDUCE-I's regularity hypothesis at five colours, a saturated colouring whose singular set Σ is locally finite with finitely many interface arcs at each point of Σ — then the honest existence form of C-SAT-T at five (every tight a.e.-proper five-colouring can be modified, keeping it a.e.-proper with five colours, into an honest saturated one; FS121-SAT6's k = 5 clause) holds if and only if χ_m⁰(ℝ²) ≥ 6, the forward direction at FS106-AE-MAP6's grade (modulo Townsend's simplification (c))" (FS129-OR1-TOP5). [hand], one mind, kernel pending. **Not claimed:** REG-J′₅ (FS-127); the honest existence form at five; anything at six. **Prior art:** owed. Which stub carries the map step at five is the re-rank's. | `plans/FS129-derivation.md` (FS129-OR1-TOP5); `plans/FS129-OR1-audit.md` § J10 | FS-129 (2026-10-03) |
+
+**And row 121, its "Where" column** (current state: the result's inputs now have entries). Slot: `LEDGER.md` § A row 121, the Where cell; **append**
+"; `plans/FS84-SI-D-derivation.md` (J45-N1, -N2, -SI-4, -SI-5, -SI-J, -SI-C, -SP-oi, -SP-if — the inputs FS100-Q47's grade names, filed as entries by
+FS129-Z1)". Why: FS129-SA1 found row 121's lower half resting on eight J45 statements with no entry (inventory item 110); FS129-Z1 filed them; the Lean
+backlog's closure for FS100-Q47 reads them.
+
+### `CLAUDE.md` § Frontier
+
+**1. The "Last updated" line.** Slot: § Frontier, the italic paragraph beginning "*Last updated: 2026-10-03 — **Workflow 3.1**:"; replace the words from
+"Last filed: **FS-116," to the end of the paragraph ("…and git.*") with:
+
+> Last filed: **FS-129, the cross-application audit**, Derived (rows 149–154; `plans/FS129-derivation.md`, 44 entries, each derived, one mind); before
+> it **FS-116, the local exclusion**, and **FS-121, the map step**, both closed undecided (rows 142–148). Earlier closes: `plans/FRONTIER-STUBS.md`'s
+> closed list, and git.*
+
+**2. The open-milestones line.** Slot: § Paths forward, ranked, the paragraph beginning "**Open milestones.** **FS-129, the cross-application audit**, is
+Opened"; replace the words from "is Opened" through "then the top of the ranking." with:
+
+> is Derived (`plans/FS129-derivation.md`, 44 entries; rows 149–154; the index corrected and given its where-else column, `data/fs129/index/`); it is
+> Closed when its compositions pass the Lean gate, in the Lean backlog's session. **Next, in Kooshi's order** (2026-10-03): **the Lean backlog**, in a
+> session of its own — the hand results of the milestones closed before Workflow 3.1, with FS-129's compositions and merged forms, from the input FS129-L1
+> writes (`plans/LEAN-BACKLOG.md`, on `data/fs129/index/lean-order-corrected.md`) — formalized before the pipeline continues; then the top of FS129-P1's
+> ranking.
+
+(The sentence on M63 and M62 that follows stays as it is.)
+
+**3. Item 31 of "Where the problem stands", in full.** Slot: § Where the problem stands, the numbered item beginning "31. **The regularity wall,
+verified;" through its last sentence "…now a case list (FS-123–FS-125)."; replace the whole item with:
+
+> 31. **The regularity wall, verified; the question is stability; at bounded complexity, one four-colour vertex** (§ The aim; rows 131–154; FS-117,
+>    FS-120, FS-122–FS-128, FS-130). Regular classes need seven almost everywhere — slack, polygons, convex tilings, nice maps — and maps six; closed
+>    classes are the tight question itself. With no MR, `χ_m⁰ ≥ 7` ⟺ `lim µ₆(ε) < 1` (row 131). At bounded complexity that is whether a tight six-map
+>    exists (row 133): under Condition 5 none does (row 134); with unit arcs every one has a vertex of at least four colours (rows 135, 137), so one
+>    exclusion at an explicit radius, above `φ²/√2`, about such a vertex suffices for the NO; where the count gives six room the configurations die at
+>    `√3` or `1 + ε` but for named cases, and both printed positives are part of no such map (rows 136, 138). FS-116 and FS-129 (rows 145–150, 153):
+>    valid fragments on discs of every radius give `χ(ℝ²) ≤ 6` with no MR, so that exclusion decides both ways; in the non-Siamese class, simple or not,
+>    a four-colour vertex whose ring carries no (Q) arc dies at `1 + ε` (row 149: FS-112's bends, run on a whole-tile restriction of radius at most `√3`,
+>    keep the class and leave only (Q) arcs); the ring's change points off (Q) arcs are four-colour vertices, and two of them 60° apart whose far germs
+>    lie off (Q) arcs share no sole tip and no sole outer colour (row 150); in the non-Siamese simple class DISC-F follows from the exclusion (row 153);
+>    open: (Q) rings (SEMI-PAR3, the disk's corner, crossed reciprocity, the recurrence, FS114-K1's residues), five- and six-colour vertices, the
+>    saturated cross on rings with (Q) arcs, Siamese fragments. The doors are two routes, not halves (row 139, two minds): seven is the NO's hole bound
+>    made uniform in the complexity bound, so FS-114's NO reaches it only through the map step — or through route R's forced pair, where the NO is idle —
+>    and each is the answer restated; route M's rungs hold down to the pinch at a junction (rows 140–141; FS-120–FS-122). On route M's map step (rows
+>    142–144), at every `k`: honest saturated ladders end inward at (Q) or (R2) arcs and never outward, periodic classes have only segments and (Q) arcs,
+>    and honesty is free; what is open is curved tangent interfaces (one question for three claims), the singular set at lateral extent, and the top
+>    colour at six, the last the answer restated given a NO; at five, given REG-J′₅, the honest existence form of C-SAT-T is equivalent to
+>    `χ_m⁰(ℝ²) ≥ 6` (row 154). FS-104's routes (b) and (c) are narrowed from the arithmetic era: a slack residue target kills linear identities and
+>    confines Falconer fans, and route (b)'s literal reading is empty (rows 151–152). Bearing on the answer: no value moved; of door (A)'s local
+>    statement the (Q)-free half is closed in the non-Siamese class, and what is left is a case list — the Siamese (Q)-free ring (FS-123), the (Q) rings
+>    and many-colour vertices (FS-124), the saturated class (FS-125).
+
+**The theory paragraph** (§ Grokkings, "The theory in one paragraph") — one sentence to replace, so the paragraph is current. Slot: the sentence "such a
+vertex whose ring carries no boundary arc dies at `1 + ε` in the non-Siamese simple class (row 148, G91; [hand], two minds)."; replace with: "such a
+vertex whose ring carries no boundary arc dies at `1 + ε` in the non-Siamese simple class (row 148, G91; [hand], two minds), and one whose ring carries
+no (Q) arc in the non-Siamese class, simple or not (row 149; [hand], one mind)."
+
+### Registered predictions, scored
+
+The table is § Stage 6 above (one table; Brier per registrant, per lane, pooled; Keryx's priors beside). For the close record: Poros's six binary
+predictions, Brier 0.374 (A4 and A5 met, both priced low); the readers' 46 binary predictions, Brier 0.149 (lane A 0.102, lane R 0.192).
+
+### `plans/GROKKING-INSTANCES.md` — new instances of existing entries
+
+**Slot 1**: § G49 — The prior-art gate, appended at the end of the section (after its last instance):
+
+> *FS129-Z2, FS-129's record; the mechanism inside the corpus, found by row-by-row comparison and by no mention count:* **one lemma proved three
+> times, in two eras** — FS106-DIAM (iii), FS111-V0-CLOSE and FS116-V5-NE1's first clause are FS129-SR2-CLOSURE (`plans/FS129-SR2-audit.md` § 2.2);
+> **one law found three times** — the two-circle identity at FS114-YB4-2ND (FS114-Y5-PXKILL's pair), at FS116-V6-HUG and -V6-ADJ, and at FS116-Y4-FLANK's
+> least-curved case, one lemma as FS129-SR1-TWOCIRC (`plans/FS129-MR1-audit.md` § Mechanism 3a; Kooshi's "where else can we use that identity?",
+> `plans/FS116-close-inventory.md` item 142); **one theorem re-derived uncited** — FS84-S1e (2026-09-25) is the four-colour form of FS129-MA1-NOAFF5
+> (`plans/FS129-SA1-audit.md` § 4.2); **three GAPs answered elsewhere with no link back** (FS111-M-PINCH l. 442, FS112-SIX l. 49, FS116-S1-KAPPA l. 816;
+> `plans/FS129-SR3-audit.md` § 4.1), and FS110-A3-HOLE's (`plans/FS129-MR1-audit.md` lead (a)). FS129-SR2's reading, verbatim: "most of the extra merges
+> are the same lemma proved in two eras' vocabularies (density sets against open tiles; maps against fragments), which no pass before this one compared
+> row by row".
+
+**Slot 2**: § G83 — With unit arcs, the tight question lives at one four-colour vertex, appended after FS116-Z2's instance:
+
+> *FS129-Z2, FS-129's record; `plans/FS129-MR1-audit.md` § Table of misses, verbatim:* "G83's straddle / V6-HUG's argument | FS-124 ring types with two
+> adjacent change points sharing a sole tip … | composition (an instance filed where the class was carried) | the double tip dies at `1 + ε` on every
+> ring when the two outer tip germs are off (Q) arcs | yes — FS129-MR1-DOUBLETIP". The straddle held, its argument carried a wider class than its
+> statement named (rings with no arc of `Γ`), and it was carried there only by the audit — FS116-Y4's pattern, one milestone later.
+
+**Slot 3**: § G87 — The invention signal, appended at the end of the section:
+
+> *FS129-Z2, FS-129's record:* both collisions on file dissolved into scope defects, with no side picked first. FS-116's bends signal: side 1 holds for
+> the whole-tile restriction of radius at most `√3`, side 2 for maps — "the two sides are about a map and a fragment and do not contradict"
+> (`plans/FS129-SR1-audit.md` § 2.3); its repair, read on the definition of a tile, closed FS-123's first question (FS129-OR1-QFREE). Poros's route-R
+> signal: "side 1 is a stub's bearing sentence whose conclusion exceeds its reason" — a Condition-5 theorem stated without Condition 5
+> (`plans/FS129-OR1-audit.md` § J15).
+
+### Proposed grokking G92 (G67's form)
+
+**Slot**: `.claude/skills/grokkings/SKILL.md`, after G91, as a new entry.
+
+> * **G92 — A held result reaches as far as its argument, not as far as its statement. [method; FS-129, one audit; new, untested]** Measured on the
+>   audit of 2026-10-03: the mechanism and merge passes found most of their yield by reading a held composition at the class its argument carries —
+>   NOLIN5 to NOAFF5 to NOAFF-K (any target, any `k`), FALC-11 to FALC-T to FALC-FAN, the double tip from Γ-free rings to every ring with outer germs off
+>   (Q) arcs (DOUBLETIP), FS106-SUP from six to every `k` (SUPK), EMPTY and QFREE without simplicity (EMPTY-NS, QFREE-NS); the three "does a held result
+>   reach further?" questions FS129-SR3 priced below even all landed (`plans/FS129-SR3-audit.md` § 5.2), while predictions of new sites and of misses of
+>   the FS116-Y4 kind, priced high, did not (`plans/FS129-Z2-record.md` § Stage 6). The cause is the filing: a result is stated for the milestone that
+>   needed it, so its hypotheses name that milestone's class (simple, Γ-free, five colours, a residue field 𝔽₁₁) whether or not its argument reads them.
+>   *Do: before applying or citing a held result, read its `uses only:` line, list the hypotheses its argument never consumes, and restate it without
+>   them before asking where else it bears; trigger: a statement whose class names a property its proof does not use, or a second milestone about to
+>   re-derive a near neighbour.* Killing test: a pass in which the restated (widened) forms fail on attack more often than they hold — then the
+>   statements were tight and the reach was not there.
+
+### Bibliography
+
+Checked against every section of `BIBLIOGRAPHY.md` (`grep -c "\[<key>\]"`): every key the FS-129 records cite — `[AldousLyons2007]`,
+`[AmbrusEtAl2023]`, `[AngelHutchcroftNachmiasRay2018]`, `[BrewsterEtAl2020]`, `[Croft1967]`, `[ExooIsmailescu2019]`, `[Falconer1981]`, `[Fischer1990]`,
+`[Polymath2021]`, `[Soifer2024]`, `[SokolovVoronov2025]`, `[Voronov2023]`, `[Zhang2012]` — is defined. **No new row is drafted.** One change to an
+existing row, drafted because it changes the row: `[Falconer1981]` (`BIBLIOGRAPHY.md` l. 169), its "what of ours rests on it" cell gains "FS129-SA1-FALC-RED
+and the fan family (FS129-SA1-FALC-FAN, -FALC-DICHO-K, -FALC-RES); Lemmas 1–4 and Theorems 1–2 checked against pp. 185–187 by FS129-MA1 (§ 2.1)".
+A reading debt, not a row: the "2005 exposition" said to give Falconer's Lemma 3 with a positive-measure set of translations (`plans/FS103-M-derivation.md`
+§ 1.2's table; FS129-OA1-FALC-RED's not-claimed line) is unidentified here — the almost-everywhere form of route (0) waits on it.
+
+### Proof Atlas facts — `tools/viz_proof_atlas_facts.py`
+
+**Slot**: after the node `N("GFREE", …)` and its edge `E("GFREE", "LOCALF", …)` in the "seven" sector; filed after rows 149–154, since each quote is a
+filed row's words. Positions are provisional (the filer places them).
+
+```python
+N("QFREE", "the (Q)-free vertex dies at 1 + ε", "nogo", "A four-colour vertex whose unit circle carries no (Q) arc has no valid six-coloured "
+  "fragment, non-Siamese, simple or not, on any disc of radius above 1: FS-112's bends, read on a fragment, leave only (Q) arcs.", L(149),
+  "no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no (Q) arc",
+  "[hand], one mind, kernel pending", at=(57, 520), sector="seven")
+E("GFREE", "QFREE", "rests", L(149), "the exclusion of rings with no arc of the boundary gives the (Q)-free one", label="the bends")
+E("QFREE", "LOCALF", "context", L(149), "FS-123's first question is answered yes", label="the (Q)-free half removed")
+N("QPRUNE", "(Q) rings pruned", "held", "On a four-colour vertex's ring, two change points 60° apart whose far germs lie off (Q) arcs share no sole tip "
+  "and no sole outer colour; one pinwheel residue is empty.", L(150),
+  "The (Q)-ring case list, pruned", "[hand], one mind each, kernel pending", at=(40, 540), sector="seven")
+E("QPRUNE", "LOCALF", "context", L(150), "The (Q)-ring case list, pruned", label="pruning rules")
+N("TOP5", "the map step at five", "held", "Given REG-J′₅, the honest five-colour existence form is equivalent to χ_m⁰(ℝ²) ≥ 6.", L(154),
+  "The map step at five, as an equivalence", "[hand], one mind, kernel pending", at=(150, 430), sector="six-up")
+```
+
+### Differences from FS129-Z1's file
+
+None that changes a statement. Two placements differ from Z1's prose, by design: FS-123's re-aim is drafted as a banner for Keryx (stage 4) rather
+than left in DOUBLETIP's and QFREE-NS's prose; and the O1-OUT analogue for valid maps is placed in FS-115's bearing (stage 4), where Z1's § 5.3 left it
+open between FS-126 and FS-115.
