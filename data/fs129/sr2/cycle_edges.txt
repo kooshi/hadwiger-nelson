@@ -1,0 +1,99 @@
+== FS111-C1-PW FS111-C1-UNIF
+-- FS111-C1-PW -> FS111-C1-UNIF [rests]
+   A.rests: …Rests on it: card 1's answer, with FS111-C1-UNIF: the map NO's whole content is pointwise in `K`.…
+   B.uses: H-EQ (row 131) and FS106-SUP's periodic attainment; the rasterisation of a periodic partial colouring into closed cells (density threshold, or V0's pixelation with slack loss 3h); that 𝓜_K is non-decreasing in K; the equivalence needs only H-EQ as quoted
+-- FS111-C1-UNIF -> FS111-C1-PW [rests]
+   A.rests: …Rests on it: card 1's answer (a hole bound uniform in `K` is seven itself, not a third statement); FS111-C1-PW's reading as the pointwise form; the dial FS-109 would read along `K`.…
+   B.uses: W-EQ-K (⟹; two minds, one blind); FS111-V0-CLEAN; row 134 for maps with no unit arc and FS-114's NO for maps with one (the premise Q-NO)
+== FS106-EQ FS106-SUP
+-- FS106-EQ -> FS106-SUP [rests]
+   A.rests: …`CLAUDE.md` § The aim link 5 (its equivalent form, the owner's ruling, inventory item 77); FS-107's two questions; FS106-SUP.…
+   B.uses: hand; two minds, one blind: TQ, QB (stronger)
+-- FS106-SUP -> FS106-EQ [rests]
+   A.rests: …FS106-EQ (e); FS-107's W target (tight polygonal tilings with vanishing voids suffice).…
+   B.uses: hand; two minds, one blind: TQ, QB by a different route at (c) ⟹ (a); (a) ⟺ (b) is row 130's
+== FS121-D1-R2CORNER FS121-D1-R2SMOOTH FS121-D1-RUNG2
+-- FS121-D1-R2CORNER -> FS121-D1-R2SMOOTH [rests]
+   A.rests: …Rests on it: FS121-D1-R2SMOOTH, FS121-D1-RUNG2, FS121-R2-FOUR.…
+   B.uses: one type along a connected interface off Σ (FS111-M-C11 (iii) and a limit of centres); FS111-M2-INTRAD (integer radii); FS121-D1-VT (i); FS112-U1; one sector per colour (FS121-V2-SECTOR)
+-- FS121-D1-R2CORNER -> FS121-D1-RUNG2 [rests]
+   A.rests: …Rests on it: FS121-D1-R2SMOOTH, FS121-D1-RUNG2, FS121-R2-FOUR.…
+   B.uses: FS111-M-HULL2; FS111-M-PINCH's partners at radius 2; FS121-D1-VT for the cusp-free clause; no colour count
+== FS121-DB1-L1 FS121-DB1-L4
+-- FS121-DB1-L4 -> FS121-DB1-L1 [rests]
+   A.rests: …Rests on it: FS121-O1-PER, FS121-DB1-L1.…
+   B.uses: properness straddles at the arc's points; FS112-U1's cones, re-derived in the saturated setting
+== FS121-V5-LOC FS121-V5-RAY
+-- FS121-V5-RAY -> FS121-V5-LOC [rests]
+   A.rests: …Rests on it: FS121-D2-SYM, FS121-V5-LOC, FS121-V5-SYM-CPT.…
+   B.uses: the definitions of ∂_e and Σ (cusps); FS111-M-PINCH and FS111-M-C11 at points off Σ
+== FS111-M2-FIX FS111-M3-BAND FS111-M3-FIXCONV FS111-M3-HC FS111-M3-IRREG
+-- FS111-M2-FIX -> FS111-M3-HC [rests]
+   A.rests: …Rests on it: FS111-M2-HULLC; FS111-M4-CUT's upward half ((F1)); FS111-M3-HC's maximality check; G84 ("a maximal class is a fixed point of its own unit shadow").…
+   B.uses: FS111-M3-BAND (a flat side needs its class at distance exactly 1 over its middle half; a band of length 1 excludes its horns); exact checks in ℚ(√3) of unit-avoidance and maximality at the finitely many critical configurations
+-- FS111-M3-FIXCONV -> FS111-M2-FIX [rests]
+   A.rests: …Rests on it: the one-way wording of FS111-M2-FIX.…
+   B.uses: FS111-M2-INT (no interior point on a unit circle about F); FS111-M2-ZERO (maximality: almost every point off A has φ_A > 0); regularity (|∂F| = 0) to pass from a.e. to every point
+-- FS111-M3-HC -> FS111-M3-IRREG [rests]
+   A.rests: …Rests on it: FS111-M3-FIN-U; FS111-M3-D3; FS111-M3-MOVE; FS111-M3-IRREG; FS111-M4-HC; G84 ("a maximal class is as wild as its bands' zero sets").…
+   B.uses: a pinch set of positive length makes a positive-measure set of points whose unit circles touch the class only at pinch points (excluded in closure, free in measure); maximality must add them, and they form a nowhere dense set
+== FS112-C-ENDS FS112-L60 FS112-N2-RED FS112-N2-TERM FS112-N3-BASE FS112-N3-COR3 FS112-N3-DENSE3 FS112-ROTHEX FS114-CV-EXISTS FS114-L60-WALK
+-- FS112-L60 -> FS112-N2-RED [rests]
+   A.rests: …FS112-N2-RED, FS112-N3-COR3.…
+   B.uses: hand; two minds, one blind: N2; NB2; over NB-MERGE3, two minds
+-- FS112-L60 -> FS112-N3-COR3 [rests]
+   A.rests: …FS112-N2-RED, FS112-N3-COR3.…
+   B.uses: hand; two minds, one blind, different routes: N3; NB3; tools exact, COR3 on 403 + 128 + 336 cases
+-- FS112-N2-RED -> FS112-N2-TERM [rests]
+   A.rests: …FS112-N2-TERM.…
+   B.uses: hand; two minds, one blind: N2; NB2
+-- FS112-N2-TERM -> FS112-C-ENDS [rests]
+   A.rests: …FS112-C-ENDS, FS112-C-COMPOSE.…
+   B.uses: hand; one mind: FS112-C, an assembly, repaired by FS112-C2; its links two minds, one blind, but the arc-through-N count one mind: NB, and FS112-C-DOUBLE one mind
+-- FS112-N3-BASE -> FS112-N3-DENSE3 [rests]
+   A.rests: …FS112-N3-DENSE3.…
+   B.uses: hand; two minds, one blind: N3; NB3; over FS112-N3-BASE and FS112-DISC1
+-- FS112-N3-COR3 -> FS112-N3-BASE [rests]
+   A.rests: …FS112-N3-BASE (Cor. 3's pairs), N2-ROT's "no `r`-tile at `x`" (FS112-ROTHEX), FS112-C-PARTNERS.…
+   B.uses: hand; two minds, one blind: N3; NB3; over row 134's base at its grade — CB's route with CE's repairs, CUSP-BASE, S–V Lemma 5, Prop. 18 and Lemma 6's `< 9` branch, unre-derived here — and FS112-U1, FS1
+-- FS112-N3-COR3 -> FS112-ROTHEX [rests]
+   A.rests: …FS112-N3-BASE (Cor. 3's pairs), N2-ROT's "no `r`-tile at `x`" (FS112-ROTHEX), FS112-C-PARTNERS.…
+   B.uses: hand; one mind: NB3, the named check
+-- FS112-ROTHEX -> FS112-N3-BASE [rests]
+   A.rests: …FS112-N3-BASE's Prop. 17 row.…
+   B.uses: hand; two minds, one blind: N3; NB3; over row 134's base at its grade — CB's route with CE's repairs, CUSP-BASE, S–V Lemma 5, Prop. 18 and Lemma 6's `< 9` branch, unre-derived here — and FS112-U1, FS1
+-- FS114-CV-EXISTS -> FS112-L60 [rests]
+   A.rests: …Rests on it: the reduction of the unit-arc NO to C114-LOCAL-F (so SIAM-KILL is subsumed and FS-115 bears only on GS-4's density form); FS114-GSD. Its chain is intact at FS112-L60's boundary (FS114-L60-WALK). It rests on FS112-N3-DENSE3, hence on row 134's base, whose Lemma 4 at cusps is still one mind (BASE-V).…
+   B.uses: hand; two minds, one blind: N; NB; tools exact
+-- FS114-CV-EXISTS -> FS112-N3-DENSE3 [rests]
+   A.rests: …uction of the unit-arc NO to C114-LOCAL-F (so SIAM-KILL is subsumed and FS-115 bears only on GS-4's density form); FS114-GSD. Its chain is intact at FS112-L60's boundary (FS114-L60-WALK). It rests on FS112-N3-DENSE3, hence on row 134's base, whose Lemma 4 at cusps is still one mind (BASE-V).…
+   B.uses: hand; two minds, one blind: N3; NB3; over FS112-N3-BASE and FS112-DISC1
+-- FS114-CV-EXISTS -> FS114-L60-WALK [rests]
+   A.rests: …Rests on it: the reduction of the unit-arc NO to C114-LOCAL-F (so SIAM-KILL is subsumed and FS-115 bears only on GS-4's density form); FS114-GSD. Its chain is intact at FS112-L60's boundary (FS114-L60-WALK). It rests on FS112-N3-DENSE3, hence on row 134's base, whose Lemma 4 at cusps is still one mind (BASE-V).…
+   B.uses: FS114-L60-LE, the statements and proofs of the five entries walked, N3-P′, N3-PAIR, N3-NOBOTH
+-- FS114-L60-WALK -> FS114-CV-EXISTS [rests]
+   A.rests: …Rests on it: FS114-CV-EXISTS's standing at the L60 boundary; the erratum's "no dependant affected" line.…
+   B.uses: FS112-N3-DENSE3 (a vertex of `F ∪ R` in every disc of radius 3), FS112-N2-TERM (the terminal modification `M*`, whose vertices are cubic, NB4P exceptions with at least four colours, or stuck on chains along their normal lines), N4-FIN (no bi-infinite stuck chain), and that a modification creating no
+== FS114-N6-NOQ FS114-Y5-PINALL
+-- FS114-N6-NOQ -> FS114-Y5-PINALL [rests]
+   A.rests: …Rests on it: with FS114-Y5-PINALL, the pinwheel closed from both ends at `1 + ε`; the coordinator's comparison that FS114-Y5's family `P_x` is N6's (Q)-pinwheel (invent…
+   B.uses: FS114-Y5-RAINBOW (C114-EDGE-RAINBOW's non-Siamese form), Y5-REGION, Y5-MU (with its two hypotheses: simple; edge `j + 1` below 60°), Y5-ALT, Y5-POCKET, Y5-CASE, Y5-REDUCE (outside E1 and E2 every pinwheel at `1 + ε` is `P_x`, cones `(x, 180° − x, x, 180° − x)`, `60° < x < 120°`), Y5-PIN120-60, and Y
+-- FS114-Y5-PINALL -> FS114-N6-NOQ [rests]
+   A.rests: …Rests on it: K1's pinwheel case reduced to E1 and E2 (FS114-Y6-E1CAP, FS114-Y6-E2RED); the pinwheel closed from both ends with FS114-N6-NOQ.…
+   B.uses: FS114-N5-GRING's N5-BENDG, FS112-U1, N6-KAPPA, N6-WIN in its §2.2 form (the reach of `y + 60°` when `κ` is defined just before it), N6-P60′, N6-ADJ, N6-QOUT, N6-QE1, N6-PIN180, FS114-N3-LOCAL's N3-FLANK
+== FS114-N4-D FS114-N5-GRING FS114-Y3-RSTOP FS114-Y4-RSTOPALL
+-- FS114-N5-GRING -> FS114-Y4-RSTOPALL [rests]
+   A.rests: …Rests on it: NB5-BOWTIE (K1-ΓRING closed at `√3`, one mind on its last step); with FS114-Y4-RSTOPALL, the bowtie family's exclusion by two independent derivations.…
+   B.uses: FS114-Y4-LUNE and its lemmas, FS114-Y4-DIAG (a diagonal bowtie with neighbourhoods of `top` and `bot` has five colours at each `q_i`, `X1` starting at exactly 60°, forcing E1 at `r` and then no colour for `bot`'s sector `(240°, 300°)`), FS114-Y3-R (every map with a bowtie containing a neighbourhood 
+-- FS114-Y3-RSTOP -> FS114-N4-D [rests]
+   A.rests: …Rests on it: FS114-Y4-RSTOPALL's first member; the blind convergence at `√3` with FS114-N4-D (inventory item 66).…
+   B.uses: FS114-N3-LOCAL, FS114-N3-DR's N3-DR1, and FS114-N4-LEMMAS (N4-TOP, N4-TANG, N4-LENS, N4-GP90); NB4-RING (a `Γ`-free lune ring has one change point, at `top`, or exactly two, `e(s)`, `e(s + 60°)`), which makes degenerate and general exhaust the `Γ`-free rings
+-- FS114-Y3-RSTOP -> FS114-Y4-RSTOPALL [rests]
+   A.rests: …Rests on it: FS114-Y4-RSTOPALL's first member; the blind convergence at `√3` with FS114-N4-D (inventory item 66).…
+   B.uses: FS114-Y4-LUNE and its lemmas, FS114-Y4-DIAG (a diagonal bowtie with neighbourhoods of `top` and `bot` has five colours at each `q_i`, `X1` starting at exactly 60°, forcing E1 at `r` and then no colour for `bot`'s sector `(240°, 300°)`), FS114-Y3-R (every map with a bowtie containing a neighbourhood 
+-- FS114-Y4-RSTOPALL -> FS114-N4-D [rests]
+   A.rests: …Rests on it: K1's four-tactic Reuleaux case closed at `√3`; C114-LOCAL-F's first piece; FS114-Y3-RSTOP and FS114-N4-D as members; the successor's Reuleaux `(2, 1, 1, 0)` question (FS114-Y6-HALF: the stop is not inherited).…
+   B.uses: FS114-N3-LOCAL, FS114-N3-DR's N3-DR1, and FS114-N4-LEMMAS (N4-TOP, N4-TANG, N4-LENS, N4-GP90); NB4-RING (a `Γ`-free lune ring has one change point, at `top`, or exactly two, `e(s)`, `e(s + 60°)`), which makes degenerate and general exhaust the `Γ`-free rings
+-- FS114-Y4-RSTOPALL -> FS114-Y3-RSTOP [rests]
+   A.rests: …Rests on it: K1's four-tactic Reuleaux case closed at `√3`; C114-LOCAL-F's first piece; FS114-Y3-RSTOP and FS114-N4-D as members; the successor's Reuleaux `(2, 1, 1, 0)` question (FS114-Y6-HALF: the stop is not inherited).…
+   B.uses: N-E1 at `q1`, FS112-U1, and FS114-Y2-BOWTIE's tiles near `q1`, `q2`

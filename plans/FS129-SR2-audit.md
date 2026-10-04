@@ -10,7 +10,12 @@ Writes only this file, `data/fs129/sr2/`, `tools/fs129_sr2_*.py` and `data/fs129
 
 *Filled at each stage.* Every entry is **derived, one mind, kernel pending**; none moves a value or the answer's bearing.
 
-- none yet.
+- **FS129-SR2-CLOSURE** — an open set with `Leb ⊗ σ`-null unit pairs has no point at distance 1 from its closure; FS106-DIAM (iii), FS111-V0-CLOSE and
+  FS116-V5-NE1's first clause are its cases — derived from FS111-M2-INT — § 2.2.
+- **FS129-SR2-HULLSET** — FS111-C-HULL for one measurable set with `Leb ⊗ σ`-null unit pairs (no colouring, no tightness, no normal form) — derived
+  from FS111-V0-ID1 — § 2.2.
+- **FS129-SR2-SUPK** — FS106-SUP's equality of the tight, slack, tiled and periodic suprema at every `k` — derived from FS106-SUP — § 2.2.
+- **FS129-SR2-DISC1TS** — FS112-DISC1 as a case of FS106-TS-T — derived from FS106-TS-T — § 2.2.
 
 ## Stage 1 — SAVED: readback and registered expectations
 
@@ -49,3 +54,244 @@ for this pass; scored at hand-back and at FS129-Z1; instruments for G21, never c
 merge or weakening, which is what the brief's gate rule binds (§ Done means 4). It is committed anyway because the registration must be dated before
 the corpus is read; every later stage is committed only with the gate passing. (SR1 logged the same case as a slip, its item 102; this is the same
 choice, made openly.)
+
+## Stage 2 — SAVED: the sweep, rows 1–27, 30–45, 47–64, 67–100 (FS-106, FS-111, FS-112, FS-114's first half); the cycles; the errata the index misses
+
+*Read for this stage: each row's statement, `uses only:` and handoff (`data/fs129/sr2/rows.md`, written by `tools/fs129_sr2_rows.py` from the index);
+FS-106's and FS-112's older-format entries in their derivation files (the index holds no statement for them); `plans/FS111-V0-verification.md` §§ 2.1,
+2.8; `plans/FS106-TQ-derivation.md` §§ 3.1–3.3; `plans/FS112-derivation.md` § Errata and regrades appended at FS-114's close; the `uses only:` lines of
+FS114-CV-EXISTS, -N4-D, -Y3-RSTOP, -N6-NOQ, FS116-V5-NE1 and FS129-OR1-QFREE. No grokking was needed for this stage.*
+
+### 2.1 The sweep (brief § Done means 4), first part
+
+One line per row of `data/fs129/index/lean-order.md`. "Leaves the order" means no seed rests on the row once the false and reversed edges of SR1's
+§ 4.1 and of § 2.3 below are dropped (`tools/fs129_sr2_cycles.py -v`); it is a fact about the Lean order, not a verdict on the result.
+
+| row | id | line |
+|---|---|---|
+| 1 | FS106-COMP | its first clause is FS106-EQ's (c) ⟹ (a) at `k = 6`, and EQ states it at every `k`: formalize once, at `k`, as EQ's; the second clause (equivalence with V-1.1) separately. Leaves the order (it was there only through EQ → SUP, false) |
+| 2 | FS106-DIAM | **merge**: clause (iii) is FS129-SR2-CLOSURE (§ 2.2), with FS111-V0-CLOSE and FS116-V5-NE1's first clause; clause (ii) is FS106-TS-C at a chain of two; clause (i) is the one connectedness lemma under FS116-V5-NE1's "in particular", TS-C, FS111-C-HULL and -M-HULL2 — formalize (i) once |
+| 3 | FS106-L | unchanged: CLOSURE applied to each colour class when the classes are open; Townsend's setting colours boundary points too, and V3's proof (stage 1) was not read here, so no merge is claimed |
+| 4 | FS106-REM | unchanged; leaves the order (with EQ) |
+| 5 | FS106-EQ | unchanged; **its every-`k` form rests on FS106-SUP, which is stated at six only** — FS129-SR2-SUPK (§ 2.2) states SUP at every `k`, so EQ's (e) has its input as stated; its (c) ⟺ (d) is SUPK read at the value 1. Leaves the order (its one seed edge, EQ → SUP, is false: § 2.3) |
+| 6 | FS106-SUP | **hypothesis weakened**: six → every `k` (FS129-SR2-SUPK); formalize SUPK in its place |
+| 7 | FS106-TS-C | unchanged; carries DIAM (ii) as its two-region case |
+| 8 | FS106-TS-T | unchanged; **carries FS112-DISC1** (row 51; FS129-SR2-DISC1TS) |
+| 9–11 | FS106-WO, -TW, -AE-MAP6 | unchanged (declined; the repairs of printed proofs) |
+| 12 | FS111-C-FILL | unchanged |
+| 13 | FS111-C-HULL-SO | **refuted** — do not formalize; leaves the order (SR1's false edge) |
+| 14 | FS111-M-R7 | unchanged (a control object, exact) |
+| 15, 16, 18 | FS111-M-SATC, -M2-COV, -M2-ZERO | unchanged; SATC's shadow identity `ℝ² = int F_j ∪ (F_j + S¹)` is FS111-M2-FIX's maximality half read coordinatewise through COV, and needs no regularity — FIX's regularity is spent on its other half |
+| 17 | FS111-M2-DISC7 | unchanged (a control object); leaves the order (its edge into M2-HULLC is a scope marker, § 2.3) |
+| 19 | FS111-V0-CLOSE | **merge**: a case of FS129-SR2-CLOSURE (`U` the union of the open colour-`j` regions) — formalize CLOSURE once |
+| 20 | FS111-V0-CLEAN | unchanged; leaves the order (with C1-PW) |
+| 21, 22 | FS111-C1-PW, -C1-UNIF | unchanged; their mutual edges are companion mentions (§ 2.3), so the cycle breaks and PW leaves the order |
+| 23 | FS111-V0-ID1 | unchanged; **its argument reads one class only** (a measurable set with `Leb ⊗ σ`-null unit pairs), which is what FS129-SR2-HULLSET uses |
+| 24 | FS111-C-HULL | **hypothesis weakened**: "a tight a.e.-proper k-colouring in D-NF" → one measurable set with `Leb ⊗ σ`-null unit pairs (FS129-SR2-HULLSET); formalize HULLSET in its place — its consumers (M-PINCH, M-HULL2, M2-FIX, M-COVER-SC, M-HALF) then need no colouring for this step |
+| 25 | FS111-M-COVER-SC | **records disagree**: its handoff says "superseded by FS111-M2-HULLC's fuller form", but HULLC adds "with regular classes" and COVER-SC's semiconcavity holds on every maximal cover (it uses SATC and C-HULL only). Formalize COVER-SC's semiconcavity in place of HULLC's semiconcave clause; leaves the order (its edge into HULLC is not a use, § 2.3) |
+| 26 | FS111-M-HALF | unchanged |
+| 27 | FS111-M-HULL2 | unchanged (already stated for any a.e.-proper colouring; it is HULLSET plus path-connectedness of the second piece); leaves the order (its consumers in the order were SR1's false edges) |
+| 30 | FS111-M-C11 | unchanged |
+| 31 | FS111-M2-INT | unchanged; **the measurable form of CLOSURE** — CLOSURE, V0-CLOSE, DIAM (iii) and V5-NE1's first clause are its open-set case |
+| 32 | FS111-M2-FIX | unchanged; the cycle FIX → HC → IRREG → FIXCONV → FIX breaks at FIXCONV → FIX, a scope marker (§ 2.3) |
+| 33–36 | FS111-M3-BAND, -FIXCONV, -HC, -IRREG | unchanged (design facts, a scope marker, a counterexample to a universal form, a no-go); all four leave the order |
+| 37 | FS111-M2-HULLC | unchanged, except its semiconcave clause, which COVER-SC carries without regular classes (row 25) |
+| 38 | FS111-V0-RESCALE | unchanged |
+| 39 | FS111-C-SIX-M | unchanged |
+| 40 | FS111-M2-REDUCE-C | unchanged (its second clause is C-SIX-M composed with its first) |
+| 41–43 | FS111-W-KB-DIR, -W-NOBEND, -W-NOREP | unchanged (corollaries of M-PINCH, M-C11) |
+| 44 | FS111-W-SQ9 | unchanged (a control object; it inhabits FS121-O1-OUT, SR1 § 5.1) |
+| 45 | FS111-M2-INTRAD | unchanged |
+| 47 | FS112-A4SIX | unchanged |
+| 48, 50, 62, 71, 68 | FS112-BOWTIE, -C-DOUBLE, -N3-END, -C-ENDS, FS114-CV-HD | unchanged, but **CV-EXISTS's own statement says it uses neither CV-HD nor C-ENDS**: these five are in the order only through FS114-CV's older route into CV-EXISTS, and leave it when the order follows first routes. C-ENDS's **erratum governs** (its residue clause deleted, `plans/FS112-derivation.md` § Errata … item 2) — quote the corrected form |
+| 49 | FS112-BUDGET2 | **FALSE as stated** — do not formalize; leaves the order (its edge into NB4P names the corrected form, § 2.3) |
+| 51 | FS112-DISC1 | **stated in a stronger form already held**: FS106-TS-T (a point of chromaticity ≥ 3 within `1/√2 + ε` of every point; FS129-SR2-DISC1TS) — formalize TS-T in its place |
+| 52 | FS112-FLANK | unchanged (an exception to N4-FLANK; FS112-N2-FLANK-Q classifies it) |
+| 53, 54 | FS112-ISO, -LOCK | unchanged |
+| 55 | FS112-BEND | **stated in a stronger form already held**: FS112-N2-BENDS (the whole arc, end vertices included), and through it FS129-SR1-BENDANY — do not formalize BEND separately |
+| 56 | FS112-N2-BENDS | SR1's line stands |
+| 57–61, 63 | FS112-N2-FLANK-Q, -N2-RAY, -N3-ANTI, -N3-FAIL, -N3-NOBOTH, -N3-PAIRS | unchanged |
+| 64 | FS112-NB4P | unchanged |
+| 67 | FS114-BV-HEX | unchanged |
+| 69 | FS114-CVB-THOM | unchanged |
+| 70 | FS114-L60-LE | unchanged; **formalize it in place of FS112-L60** (row 72) |
+| 72 | FS112-L60 | **FALSE as stated at exactly 60°** (its erratum, `plans/FS112-derivation.md` § Errata … item 1; FS114-L60-REAL realises equality) — do not formalize as stated; FS114-L60-LE in its place, which every consumer accepts (FS114-L60-WALK) |
+| 73 | FS112-N2-RED | **a case of FS112-N2-TERM**: its conclusion is TERM's first clause; formalize TERM, with RED's procedure as its lemma |
+| 74–78 | FS112-N2-TERM, -N3-BASE, -N3-COR3, -N3-DENSE3, -ROTHEX | unchanged; N3-BASE's regrade (erratum item 5) governs its grade line. The ten-member cycle breaks at three edges out of FS114-CV-EXISTS (§ 2.3) |
+| 79 | FS114-CV-EXISTS | unchanged; its first route is CVB's (DENSE3, N2-TERM, N4-FIN) |
+| 80 | FS114-L60-WALK | unchanged (an audit of a chain) |
+| 81–84 | FS114-N114-RD, -N114-EULER, -N2-FIVE, -N114-ROOM | unchanged |
+| 85 | FS114-N2-ENDS | unchanged; **its model line carries an erratum** (FS116-O1, 2026-09-29, under the entry) — quote it with the entry |
+| 86 | FS114-N3-LOCAL | unchanged |
+| 87 | FS114-N3-DR | **stated in a stronger form already held**: FS114-Y4-RSTOPALL (its handoff says so); its lemmas N3-CONT, N3-DR1 cross only as N4-D's inputs |
+| 88 | FS114-N3-JOINT | **merge**: its first clause, `N + U + 3V₆ = V₄`, is FS114-N2-ENDS's identity halved (`Σ n = 2N`, each non-tactic edge counted at both ends) — one identity, formalized once as N2-ENDS's; its model line carries the same erratum. Leaves the order |
+| 89 | FS114-N4-LEMMAS | unchanged; its input FS112-SIX reads as FS116-N2-FIVERING / FS129-SR1-SIXQ (SR1 § 6.2 item 3) |
+| 90 | FS114-Y-EDGE | unchanged; leaves the order |
+| 91, 92 | FS114-Y2-BOWTIE, -Y4-LUNE | unchanged |
+| 93 | FS114-N4-D | **a case of FS114-Y4-RSTOPALL** (Γ-free lune rings, the same non-Siamese simple class and radius `√3`); its handoff already says so — formalize RSTOPALL; N4-D is a second route |
+| 94 | FS114-N5-GRING | unchanged (a second route to RSTOPALL's ΓRING case) |
+| 95 | FS114-Y3-RSTOP | unchanged, and **not** a case of RSTOPALL: it allows Siamese pairs (its own statement) for Y2's bowtie, so its handoff's "a member of FS114-Y4-RSTOPALL" holds only on the non-Siamese simple part; RSTOPALL uses its lemma Y3-R |
+| 96 | FS114-Y4-RSTOPALL | unchanged; carries N4-D and N3-DR |
+| 97 | FS114-N6-NOQ | within the non-Siamese simple class its main clause is a case of FS129-OR1-QFREE (a pinwheel's centre is a four-colour vertex; radius `1 + ε` is "above 1"); QFREE is one mind and NOQ's class is not fixed in its statement line, so unchanged, with QFREE formalized for the class |
+| 98 | FS114-Y5-PINALL | unchanged; leaves the order (its edges into K1 and N6-NOQ were SR1's false edge and a companion mention) |
+| 99, 100 | FS114-N7-QOPP, -Y6-HALF | unchanged |
+
+### 2.2 The entries
+
+derivation: FS129-SR2-CLOSURE
+  statement: let U ⊆ ℝ² be open, with (Leb ⊗ σ){(x, w) ∈ U × S¹ : x + w ∈ U} = 0; then no point of U is at distance exactly 1 from a point of cl U
+  uses only: FS111-M2-INT with A = U; that every point of an open set is a Lebesgue density point of it, so U ⊆ int Ũ; that every density point of U
+    lies in cl U, so cl Ũ = cl U
+  not claimed: anything for a point of cl U against another point of cl U (two boundary points may be at distance 1: the hexagonal seven-colouring's
+    opposite vertices, FS111-C-HULL-SO's object); anything for sets that are not open (that is FS111-M2-INT itself)
+  argument: § 2.2.1 FS129-SR2-CLOSURE, the argument
+  verdict: derived
+  grade: derived from: FS111-M2-INT
+  minds: 1
+  model: U the open hexagon of circumradius 1/2 (diameter 1, so no two of its points are at distance 1); cl U's farthest point from any point of U is
+    below 1
+  prior art: partly: in-house three times — FS106-DIAM's third clause, FS111-V0-CLOSE, FS116-V5-NE1's first clause — and FS111-M2-INT is its measurable form
+  handoff: de Bruijn — formalize once, as FS111-M2-INT's corollary for open sets (or by V0-CLOSE's translation argument directly), in place of FS106-DIAM
+    (iii), FS111-V0-CLOSE and FS116-V5-NE1's first clause; the statement and its not claimed
+
+derivation: FS129-SR2-HULLSET
+  statement: let A ⊆ ℝ² be measurable with (Leb ⊗ σ){(x, w) : x ∈ A, x + w ∈ A} = 0, Ã its Lebesgue density points and A* = {x : d̄_A(x) > 0}; for
+    every path-connected C ⊆ Ã and every x ∈ A*, either |x − c| < 1 for every c ∈ C or |x − c| > 1 for every c ∈ C; when C is compact, either
+    sup_{c∈C}|x − c| < 1 or dist(x, C) > 1
+  uses only: FS111-V0-ID1's argument, which reads only that A's own unit pairs are null; continuity of c ↦ |x − c| on a path-connected C; a continuous
+    function on a compact set attains its bounds
+  not claimed: A* ⊆ {x : sup_{c∈C}|x − c| < 1} ∪ {x : dist(x, C) > 1} for non-compact C (FALSE: FS111-C-HULL-SO); anything at points of density 0
+  argument: § 2.2.2 FS129-SR2-HULLSET, the argument
+  verdict: derived
+  grade: derived from: FS111-V0-ID1
+  minds: 1
+  model: A one hexagon of the tight hexagonal seven-colouring (FS111-C-HULL's model), C its interior, x a point of another hexagon of the same colour
+    (distance above 1.29 to every point of C)
+  prior art: partly: FS111-C-HULL (the same conclusion for tight a.e.-proper colourings in D-NF), FS-106's I-D1 for tight colourings
+  handoff: de Bruijn — in place of FS111-C-HULL: one measurable set, no colouring, no tightness, no normal form; C-HULL is its case S_j = A
+
+derivation: FS129-SR2-SUPK
+  statement: for every k ≥ 1, µ_k⁰ = lim_{ε→0} µ_k(ε) = lim_{ε→0} µ_k^tile(ε) = lim_{ε→0} µ_k^per(ε), with µ_k⁰, µ_k(ε), µ_k^tile(ε), µ_k^per(ε)
+    defined as FS106-SUP defines them at six (the suprema of the upper densities covered by a.e.-proper, band-proper, band-proper tiled, and
+    band-proper periodic tiled partial k-colourings)
+  uses only: FS106-SUP's argument (plans/FS106-TQ-derivation.md § 3.2) and its Lemmas P and T (§ 3.1) and TQ-REM-i, none of which reads the number of
+    classes: Lemma P copies a colouring of a square, Lemma T colours each grid square by the least class meeting it in positive measure, REM-i keeps
+    points class by class
+  not claimed: SUP's second clause (µ^per(ε) = µ(ε) at each ε, and attainment) at every k — QB's stronger form was not read here; any value of µ_k⁰
+  argument: § 2.2.3 FS129-SR2-SUPK, the argument
+  verdict: derived
+  grade: derived from: FS106-SUP
+  minds: 1
+  model: k = 7 — the tight hexagonal seven-colouring covers everything with no monochromatic unit pair a.e., so µ₇⁰ = 1, and its slack shrinkings
+    show lim µ₇(ε) = 1
+  prior art: partly: FS106-SUP at six (two minds); FS106-EQ's every-k form already uses it at every k
+  handoff: de Bruijn — in place of FS106-SUP; then FS106-EQ's (e) has its input as stated, and EQ's (c) ⟺ (d) is SUPK at the value 1
+
+derivation: FS129-SR2-DISC1TS
+  statement: every closed disc of radius 1 of a valid map contains a vertex of degree at least 3 (FS112-DISC1's statement), as a case of FS106-TS-T
+  uses only: FS106-TS-T (every point of an almost-everywhere-proper map has a point of chromaticity at least 3 within 1/√2 + ε); that a valid map is an
+    almost-everywhere-proper map in TS-T's sense (FS-112's definition: a locally finite map by open connected tiles, no two interior points of one
+    colour at distance 1); that in a locally finite map a point in the closures of tiles of three colours is a vertex where at least three tiles meet
+  not claimed: anything sharper than TS-T's radius 1/√2 + ε; the trichromatic or cubic forms TS-T gives under Conditions 5 or 6
+  argument: § 2.2.4 FS129-SR2-DISC1TS, the argument
+  verdict: derived
+  grade: derived from: FS106-TS-T
+  minds: 1
+  model: none known for valid maps, which are six-coloured and whose non-existence is the map NO itself (hypothetical by design, a step toward the
+    NO); TS-T's own class, a.e.-proper maps with any number of colours, is inhabited by the tight hexagonal seven-colouring, which has a vertex of
+    degree 3 within 1/2 of every point
+  prior art: partly: CB's D6 (the trichromatic form for cubic maps), as FS112-DISC1's entry says
+  handoff: de Bruijn — formalize FS106-TS-T in place of FS112-DISC1; DISC1's consumers (FS112-N2-DENSE, -N3-DENSE3) read it as TS-T's corollary
+
+#### 2.2.1 FS129-SR2-CLOSURE, the argument
+
+`U` is open, so each `x ∈ U` has a disc in `U` and is a density point of `U`: `U ⊆ Ũ`, and as `U` is open, `U ⊆ int Ũ`. A density point of `U` is a
+limit of points of `U`, so `Ũ ⊆ cl U` and `cl Ũ = cl U`. FS111-M2-INT, applied to `A = U` (an a.e. unit-avoiding set by hypothesis), says that
+`int Ũ` holds no point at distance exactly 1 from `cl Ũ`; so no point of `U` is at distance 1 from a point of `cl U`. ∎ The three in-house statements
+are this with `U` named: FS106-DIAM (iii) ("an open set avoiding distance 1 has `ω(p)` disjoint from it for every `p` in its closure"); FS111-V0-CLOSE
+(`U` the union of the open colour-`j` regions of a D-AEMAP-proper map; V0's own proof is the translation argument, which needs no density); FS116-V5-NE1's
+first clause (`U` the union of the open colour-`c` tiles of a valid fragment). V5-NE1's "in particular" adds FS106-DIAM (i)'s connectedness step: `T`
+is connected, `z ↦ |z − x|` is continuous on it, avoids 1, and takes values near 0 near `x ∈ cl T`, so it stays below 1.
+
+#### 2.2.2 FS129-SR2-HULLSET, the argument
+
+FS111-V0-ID1's proof (`plans/FS111-V0-verification.md` § 2.1): with `|x − y| = 1`, `y ∈ S̃_j`, `d̄_j(x) = θ > 0`, it bounds below the measure of pairs
+`(x′, w)` with `x′ ∈ S_j ∩ B(x, r)` and `x′ + w ∈ S_j ∩ B(y, 2r)`, using only that `y` is a density point of `S_j` and `x` a point of positive upper
+density of `S_j`; the contradiction is with "`S_j`'s monochromatic unit pairs are `Leb ⊗ σ`-null". No other class, no covering, no tightness and no
+normal form enters. So for `A` as stated, `|x − c| ≠ 1` for `c ∈ Ã`, `x ∈ A*`. FS111-C-HULL's first-clause argument (V0 § 2.8) then runs verbatim:
+`{|x − c| : c ∈ C}` is the continuous image of a path-connected set, an interval avoiding 1. For compact `C` the interval is closed, so it lies in
+`[0, 1)` with its maximum below 1, or in `(1, ∞)` with its minimum above 1. ∎
+
+#### 2.2.3 FS129-SR2-SUPK, the argument
+
+TQ-SUP's five inequalities (`plans/FS106-TQ-derivation.md` § 3.2) with 6 replaced by `k`: `µ_k^per ≤ µ_k^tile ≤ µ_k` (the classes only widen);
+`µ_k(ε) ≤ µ_k^tile(ε − 2√2 h)` (Lemma T, which colours each grid square by the least `j` with `|C_j ∩ τ| > 0`, for any number of classes);
+`µ_k^tile(ε) ≤ µ_k^per(ε)` (restriction to a box and Lemma P, which copies a square's colouring on the lattice `(R + 2)ℤ²` whatever its classes);
+`µ_k^tile(ε) ≤ µ_k⁰` (no band pair, so no unit pair); `µ_k⁰ ≤ lim µ_k^tile(ε)` (TQ-REM-i's kept set, class by class, then Lemmas P and T). Every
+function of `ε` is monotone, so the limits exist and the order of limits is safe, as at six. ∎ The filed FS106-EQ is stated "for every k" and its
+(e) rests on SUP; SUPK is the statement that use needs.
+
+#### 2.2.4 FS129-SR2-DISC1TS, the argument
+
+Let `D = B̄(x, 1)`. TS-T gives a point `y` of chromaticity at least 3 with `|y − x| ≤ 1/√2 + ε`; take `ε < 1 − 1/√2`, so `y ∈ D`. In a locally finite
+map, `y` lies in the closures of tiles of at least three colours, hence of at least three tiles, and a point in the closure of three tiles is a vertex
+of the map's boundary graph of degree at least 3 (a point interior to an edge lies in the closures of exactly two tiles). ∎ FS112-DISC1's own route
+(NB2's proof) is a second route to its weaker radius.
+
+### 2.3 The edges inside the lane-R cycles, sorted
+
+The eleven lane-R cycles SR1 left (`data/fs129/index/cycles.md` less SR1's breaks) were read edge by edge: the `uses only:` line of the edge's head
+against the "Rests on it" sentence of its tail (`data/fs129/sr2/cycle_edges.txt`). Same classes as SR1 § 4.1. Edges whose head's `uses only:` names
+the tail are real and not listed.
+
+| from | to | class | reading |
+|---|---|---|---|
+| FS111-C1-PW, FS111-C1-UNIF | each other | false (2) | "card 1's answer, with …": companions; neither's `uses only:` names the other |
+| FS106-EQ | FS106-SUP | false | TQ-SUP's proof (TQ § 3.2) uses Lemmas P, T and REM-i, not EQ; EQ (e) rests on SUP, the true direction |
+| FS121-D1-R2CORNER | FS121-D1-R2SMOOTH, FS121-D1-RUNG2 | reversed (2) | R2CORNER's `uses only:` names both; neither names R2CORNER |
+| FS121-DB1-L4 | FS121-DB1-L1 | reversed | L4 uses L1; L1's `uses only:` reads straddles and FS112-U1's cones |
+| FS121-V5-RAY | FS121-V5-LOC | reversed | RAY uses LOC; LOC reads the definitions, M-PINCH and M-C11 |
+| FS111-M3-FIXCONV | FS111-M2-FIX | false | "the one-way wording of FIX": a scope marker in FIX's not claimed |
+| FS114-CV-EXISTS | FS112-L60 | false | "its chain is intact at L60's boundary": a mention |
+| FS114-CV-EXISTS | FS112-N3-DENSE3 | reversed | "It rests on FS112-N3-DENSE3": CV-EXISTS uses DENSE3 (already an edge) |
+| FS114-CV-EXISTS | FS114-L60-WALK | reversed | L60-WALK audits CV-EXISTS's chain; CV-EXISTS's standing rests on it |
+| FS114-N6-NOQ, FS114-Y5-PINALL | each other | false (2) | "the pinwheel closed from both ends": companions |
+| FS114-N5-GRING | FS114-Y4-RSTOPALL | route | "the bowtie family's exclusion by two independent derivations" |
+| FS114-Y3-RSTOP | FS114-N4-D | false | "the blind convergence at `√3`": a convergence note |
+| FS114-Y3-RSTOP | FS114-Y4-RSTOPALL | real | RSTOPALL uses RSTOP's lemma Y3-R |
+| FS114-Y4-RSTOPALL | FS114-N4-D, FS114-Y3-RSTOP | false (2) | "as members": the members do not use the family |
+| FS111-M2-DISC7 | FS111-M2-HULLC | false | "the semiconvexity no-go in HULLC": a scope marker |
+| FS111-M-COVER-SC | FS111-M2-HULLC | false | an extension note; HULLC is derived from FIX and C-HULL |
+| FS112-BUDGET2 | FS112-NB4P | false | a refuted entry naming its corrected form |
+| FS112-C-ENDS, FS114-CV-HD | FS114-CV-EXISTS | route (2) | FS114-CV's route; CV-EXISTS's statement: "it uses neither CV-HD nor FS112-C-ENDS" |
+
+**Tally:** 23 edges — real 1, route 3, false 13, reversed 6. With SR1's sort applied too: **lane-R cycles 11 → 2** (left: N7-3T ↔ N7-HUB, both empty
+given FS129-OR1-QFREE, SR1 § 5.1; and V5-LENS / Y3-SIX / Y3-TIPS, a second route kept on purpose). **The Lean order shrinks from 197 rows to 171**
+when false and reversed edges are dropped, and **to 160** when route edges are dropped too (the order following first routes); the 26 and 11 rows are
+listed by `tools/fs129_sr2_cycles.py -v`. For FS129-Z1, which re-runs the index: drop these 19 false and reversed edges with SR1's 14, mark the 3 route
+edges with SR1's 6, and decide which closure the Lean order is.
+
+control: fs129-sr2-cycles
+  of: § 2.3 — every sorted edge is in edges.csv; with SR1's and this sort's false and reversed edges dropped, two lane-R cycles remain and the order has 171 rows (160 on first routes)
+  run: cd .. && python3 tools/fs129_sr2_cycles.py
+  expect: SR2 edges sorted: 23 (real 1, route 3, false 13, reversed 6); lane-R cycles 11 -> 2; Lean order 197 -> 171 (false, reversed dropped) -> 160 (route dropped too)
+  fault: cd .. && python3 tools/fs129_sr2_cycles.py --fault
+
+control: fs129-sr2-rows
+  of: the row dump — SR1's § 6.3 list is 151 rows
+  run: cd .. && python3 tools/fs129_sr2_rows.py
+  expect: rows dumped: 151
+  fault: cd .. && python3 tools/fs129_sr2_rows.py --fault
+
+### 2.4 Errata the index does not carry (for FS129-L1, which quotes statements by script)
+
+The index reads each entry, not the dated errata filed after it, and FS129-L1 quotes statements from the entries. Where an erratum governs, the
+backlog must quote it with the entry, or it formalizes a false or superseded form:
+- **FS112-L60** (row 72): FALSE at exactly 60°; the corrected statement is FS114-L60-LE's — `plans/FS112-derivation.md` § Errata and regrades appended
+  at FS-114's close, item 1.
+- **FS112-C-ENDS** (row 71): its residue clause deleted — same section, item 2.
+- **FS112-C-DOUBLE** (row 50), **FS112-N3-BASE** (row 75): regrades — items 3, 5; and item 8: every FS-112 "*Kernel:* stub — with FS-114" reads "with
+  FS-116".
+- **FS114-N2-ENDS** (row 85) and **FS114-N3-JOINT** (row 88): their model lines — the errata of FS116-O1 (2026-09-29) under each entry,
+  `plans/FS114-derivation.md` ll. 255, 277.
+- **FS114-N7-3T** (row 102, SR1's): the erratum of FS116-Z2 under the entry (l. 740), which split FS114-N7-QFREE off it.
