@@ -416,7 +416,77 @@ theorem measurable_r7Col : Measurable r7Col := by
 /-- Every point lies in an up tile of its colour (colours `< 4`) or a down tile of its colour (colours `≥ 4`). -/
 theorem r7Col_mem_tile (z : ℂ) :
     (∃ m n : ℤ, z ∈ r7Up m n ∧ r7Col z = r7UpCol m n) ∨ ∃ m n : ℤ, z ∈ r7Down m n ∧ r7Col z = r7DownCol m n := by
-  sorry
+  have hcol : r7Col z = r7ColTri (triCoord z).1 (triCoord z).2 := rfl
+  set a := (triCoord z).1 with ha
+  set b := (triCoord z).2 with hb
+  have h3 : (√3 : ℝ) ≠ 0 := by positivity
+  have hz : (a : ℂ) + b * e (π / 3) = z := by
+    rw [e_pi_div_three]
+    apply Complex.ext
+    · simp [ha, hb, triCoord]; field_simp; ring
+    · simp [ha, hb, triCoord]; field_simp
+  set m := ⌊a⌋ with hm
+  set n := ⌊b⌋ with hn
+  have hu0 : 0 ≤ a - m := Int.fract_nonneg a
+  have hu1 : a - m < 1 := Int.fract_lt_one a
+  have hv0 : 0 ≤ b - n := Int.fract_nonneg b
+  have hv1 : b - n < 1 := Int.fract_lt_one b
+  set u := a - m with hu
+  set v := b - n with hv
+  have hD : ∀ (P Q p q : ℤ), P = m + p → Q = n + q → dist z (tri P Q) = √(triQ (u - p) (v - q)) := by
+    rintro P Q p q rfl rfl
+    have e1 : z - tri (m + p) (n + q) = ((u - p : ℝ) : ℂ) + ((v - q : ℝ) : ℂ) * e (π / 3) := by
+      rw [← hz, tri, hu, hv]; push_cast; ring
+    rw [dist_eq_norm, e1, Complex.norm_def, normSq_add_mul]
+  have hin : ∀ (P Q p q : ℤ), P = m + p → Q = n + q → triQ (u - p) (v - q) ≤ 1 → z ∈ closedBall (tri P Q) 1 := by
+    intro P Q p q hP hQ h
+    rw [mem_closedBall, hD P Q p q hP hQ]; exact (Real.sqrt_le_sqrt h).trans_eq Real.sqrt_one
+  have hout : ∀ (P Q p q : ℤ), P = m + p → Q = n + q → 1 < triQ (u - p) (v - q) → 1 < dist z (tri P Q) := by
+    intro P Q p q hP hQ h
+    rw [hD P Q p q hP hQ]; exact (Real.lt_sqrt zero_le_one).2 (by rw [one_pow]; exact h)
+  have P1 : triQ (u - 1) v ≤ 1 := by
+    unfold triQ; nlinarith [mul_nonneg hu0 (by linarith : (0 : ℝ) ≤ 2 - u - v), mul_nonneg hv0 (by linarith : (0 : ℝ) ≤ 1 - v)]
+  have P2 : triQ u (v - 1) ≤ 1 := by
+    unfold triQ; nlinarith [mul_nonneg hv0 (by linarith : (0 : ℝ) ≤ 2 - u - v), mul_nonneg hu0 (by linarith : (0 : ℝ) ≤ 1 - u)]
+  simp only [r7ColTri] at hcol
+  by_cases h1 : triQ u v ≤ 1
+  · rw [if_pos h1] at hcol
+    refine Or.inl ⟨m, n, ⟨⟨hin m n 0 0 (by ring) (by ring) (by simpa using h1),
+      hin (m + 1) n 1 0 (by ring) (by ring) (by simpa using P1)⟩,
+      hin m (n + 1) 0 1 (by ring) (by ring) (by simpa using P2)⟩, hcol⟩
+  rw [if_neg h1] at hcol
+  by_cases h2 : triQ (u - 2) v ≤ 1
+  · rw [if_pos h2] at hcol
+    have P3 : triQ (u - 1) (v - 1) ≤ 1 := by unfold triQ at h2 ⊢; nlinarith
+    refine Or.inl ⟨m + 1, n, ⟨⟨hin (m + 1) n 1 0 (by ring) (by ring) (by simpa using P1),
+      hin (m + 1 + 1) n 2 0 (by ring) (by ring) (by simpa using h2)⟩,
+      hin (m + 1) (n + 1) 1 1 (by ring) (by ring) (by simpa using P3)⟩, hcol⟩
+  rw [if_neg h2] at hcol
+  by_cases h3' : triQ u (v - 2) ≤ 1
+  · rw [if_pos h3'] at hcol
+    have P4 : triQ (u - 1) (v - 1) ≤ 1 := by unfold triQ at h3' ⊢; nlinarith
+    refine Or.inl ⟨m, n + 1, ⟨⟨hin m (n + 1) 0 1 (by ring) (by ring) (by simpa using P2),
+      hin (m + 1) (n + 1) 1 1 (by ring) (by ring) (by simpa using P4)⟩,
+      hin m (n + 1 + 1) 0 2 (by ring) (by ring) (by simpa using h3')⟩, hcol⟩
+  rw [if_neg h3'] at hcol
+  have P5 : 1 < u + v := by
+    by_contra h; push Not at h
+    exact h1 (by unfold triQ; nlinarith [mul_nonneg hu0 hv0])
+  refine Or.inr ⟨m, n, ⟨?_, hout m n 0 0 (by ring) (by ring) (by simpa using not_le.1 h1),
+    hout (m + 2) n 2 0 (by ring) (by ring) (by simpa using not_le.1 h2),
+    hout m (n + 2) 0 2 (by ring) (by ring) (by simpa using not_le.1 h3')⟩, hcol⟩
+  -- the down triangle, as a convex combination of its vertices
+  have hmem := (convex_convexHull ℝ ({tri (m + 1) n, tri m (n + 1), tri (m + 1) (n + 1)} : Set ℂ)).sum_mem
+    (t := Finset.univ) (w := ![1 - v, 1 - u, u + v - 1]) (z := ![tri (m + 1) n, tri m (n + 1), tri (m + 1) (n + 1)])
+    (fun i _ => by fin_cases i <;> simp <;> linarith)
+    (by simp [Fin.sum_univ_three]; ring)
+    (fun i _ => by fin_cases i <;> simp <;> exact subset_convexHull ℝ _ (by simp))
+  convert hmem using 1
+  simp only [Fin.sum_univ_three, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.vecHead,
+    Matrix.vecTail, Function.comp, Fin.succ_zero_eq_one, Complex.real_smul]
+  rw [← hz, tri, tri, tri, hu, hv]
+  push_cast
+  ring
 
 /-- Up colours are `< 4`, down colours `≥ 4`: an up tile and a down tile never share a colour. -/
 theorem r7UpCol_ne_r7DownCol (m n m' n' : ℤ) : r7UpCol m n ≠ r7DownCol m' n' := by
