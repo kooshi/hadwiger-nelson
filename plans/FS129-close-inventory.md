@@ -525,3 +525,25 @@ One line per item with its source; no narration. Each line is ticked done or dec
 135. **Launched 2026-10-04 01:58 UTC**: FS129-Z2, the record job, part 2 (`general-purpose`, Opus; `data/fs129/briefs/FS129-Z2-record.md`, gated
      PASS, at `c2bade3a`). Running: the Searcher, FS129-Z1, FS129-Z2 — the cap of three. After both record parts: FS129-L1 (the Clerk) and FS129-P1
      (Poros), then Keryx files the front page and FS-129 is Derived.
+136. **FS129-Z1 reported DONE** (`data/fs129/reports/FS129-Z1.md`; commits `b0269ddc` … `a5c4d125`, nine, all present; ≈476k by the harness).
+     `plans/FS129-derivation.md`: 44 entries (the eight readers' 40 and SR3's 4), merged forms first, 12 superseded forms kept and marked; 16 lost
+     theorems filed in their milestones' derivation files (the eight J45 statements, row 121's inputs, first; FS84-S1b, -S1b-47, -S1d-K, -S1e;
+     X25B-PZ, X25B-L1, X22D-FLK2; HOLE-t), each at its source's grade and minds; 17 dated errata under earlier entries. **Keryx's receipt**:
+     `derive_gate.py all plans/FS129-derivation.md` re-run, exit 0, PASS (0 failures); 44 `derivation:` lines counted; the gates of
+     `plans/FS84-SI-D-derivation.md`, `plans/FS84-S1-derivation.md`, `plans/FS100-derivation.md`, `plans/FS106-derivation.md` re-run, each exit 0;
+     Z1's eight working commits touch 11 earlier files with 376 lines added and 0 deleted (originals standing). The derivation file FS129-Z2
+     drafts from is at `3f35c709`.
+137. **Wording defects for the Lean list** (Z1): FS129-SR1-BENDLE3 omits FS129-OR1-BEND3's tile clause (BENDANY carries it); FS129-SR1-RINGBAND
+     omits FS129-OA1-RINGWIND's periodicity clauses; no merged form drops a hypothesis its source needed. For FS129-L1, with items 116, 126, 131.
+138. **Not filed by Z1, outside its files**: item 59's side-1 remarks, `plans/FS116-local-exclusion.md` § 3.6, `plans/FS116-Y4-construction.md`
+     § 3.3 (item 96), `data/fs129/demand-judged.md` J10 — FS129-Z2's (its brief's touches carry the first four; J10's correction goes to FS129-P1
+     with item 26). FS114-Y5-PIN120 has no entry; its narrowing is inside the erratum under FS114-Y5-PINALL.
+139. **Ruling — no grade moves from verifier records the sources do not count** (Z1's HELD: J46 on J45-N1, -N2, -SI-4, -SI-5; FS84-S1V on S1b-i,
+     S1b-ii blind and S1e non-blind): each lost theorem stays at its source's grade; the verifier records are named in the entries and listed
+     for the Lean backlog, the promotion path under Workflow 3.1 (plan § 7). Alternative: Keryx rules each record against the rules of its
+     time now. Why: the plan says a grade moves only where a second route already on record meets those rules, and judging that for six
+     records is the backlog's or a ruling job's, not a filing's. Confidence: high.
+140. **Held for Kooshi — the prior-art debt** (Z1's HELD): most of FS-129's 44 entries and all 16 lost theorems read prior art "owed" or
+     "partly"; a prior-art gate over about 60 statements is a job of its own. Default: the debt stays recorded as owed in each entry, and a
+     prior-art gate runs before any of these is claimed as new or published (Workflow 3.1's publication rule). Alternative: a prior-art job now,
+     after FS-129 is Derived.
