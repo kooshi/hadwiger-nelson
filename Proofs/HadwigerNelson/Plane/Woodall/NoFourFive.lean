@@ -620,6 +620,40 @@ theorem exists_side_colours_of_not_crossesAt (hP : F.IsPlaneMap) {v : ℂ} {θ :
     · exact absurd ⟨⟨hzi, h⟩, by rw [mem_closedBall, not_le]; exact hgt⟩ hE.2.2
     · exact h
 
+/-- A point of `ω(v)` about which the interior points inside `ω(v)` all have colour `X` lies in the closure of `X`'s class inside `ω(v)`. -/
+theorem mem_closure_inside_of_colour (hP : F.IsPlaneMap) {v Y : ℂ} (hYv : dist Y v = 1) {ρ : ℝ} (hρ : 0 < ρ) {X : Fin k}
+    (hcol : ∀ z ∈ ball Y ρ, z ∈ F.interiorPts → dist z v < 1 → F.col z = X) : Y ∈ closure (F.region X ∩ ball v 1) := by
+  rw [Metric.mem_closure_iff]
+  intro ε hε
+  obtain ⟨-, ⟨zm, hzm, hzmv⟩⟩ := exists_near_sphere_sides v Y hYv (lt_min hε hρ)
+  obtain ⟨y, hy⟩ := exists_mem_interiorPts_of_isOpen hP (isOpen_ball (x := Y) (ε := min ε ρ) |>.inter (isOpen_ball (x := v) (ε := 1)))
+    ⟨zm, mem_ball.mpr hzm, mem_ball.mpr hzmv⟩
+  have hyd : dist y Y < min ε ρ := mem_ball.mp hy.1.1
+  exact ⟨y, ⟨⟨hy.2, hcol y (mem_ball.mpr (lt_of_lt_of_le hyd (min_le_right _ _))) hy.2 (mem_ball.mp hy.1.2)⟩, hy.1.2⟩,
+    by rw [dist_comm]; exact lt_of_lt_of_le hyd (min_le_left _ _)⟩
+
+/-- **The inside colour at a non-crossing point**: at `v + e θ` with at most two colours where no colour crosses, exactly one colour `A` reaches
+`v + e θ` from inside `ω(v)`, and a disc about it has its interior points inside `ω(v)` coloured `A`. -/
+theorem exists_inside_colour (hP : F.IsPlaneMap) {v : ℂ} {θ : ℝ} (h2 : (F.coloursAt (v + e θ)).ncard ≤ 2)
+    (hnc : ∀ X, ¬ F.CrossesAt v X θ) :
+    ∃ A : Fin k, v + e θ ∈ closure (F.region A ∩ ball v 1) ∧ (∀ X, v + e θ ∈ closure (F.region X ∩ ball v 1) → X = A) ∧
+      ∃ r > 0, ∀ z ∈ ball (v + e θ) r, z ∈ F.interiorPts → dist z v < 1 → F.col z = A := by
+  obtain ⟨A, B, hAB, hcols, r, hr, hside⟩ := exists_side_colours_of_not_crossesAt hP h2 hnc
+  have hYv : dist (v + e θ) v = 1 := by rw [dist_eq_norm, add_sub_cancel_left, norm_e]
+  refine ⟨A, ?_, ?_, r, hr, fun z hz hzi hzv => (hside z hz hzi).1 hzv⟩
+  · rw [Metric.mem_closure_iff]
+    intro ε hε
+    obtain ⟨⟨-, -⟩, ⟨zm, hzm, hzmv⟩⟩ := exists_near_sphere_sides v (v + e θ) hYv (lt_min hε hr)
+    obtain ⟨y, hy⟩ := exists_mem_interiorPts_of_isOpen hP (isOpen_ball (x := v + e θ) (ε := min ε r) |>.inter (isOpen_ball (x := v) (ε := 1)))
+      ⟨zm, mem_ball.mpr hzm, mem_ball.mpr hzmv⟩
+    have hyd : dist y (v + e θ) < min ε r := mem_ball.mp hy.1.1
+    refine ⟨y, ⟨?_, hy.1.2⟩, by rw [dist_comm]; exact lt_of_lt_of_le hyd (min_le_left _ _)⟩
+    exact ⟨hy.2, (hside y (mem_ball.mpr (lt_of_lt_of_le hyd (min_le_right _ _))) hy.2).1 (mem_ball.mp hy.1.2)⟩
+  · intro X hX
+    obtain ⟨q, ⟨hq, hqb⟩, hqd⟩ := Metric.mem_closure_iff.mp hX r hr
+    have := (hside q (mem_ball.mpr (by rw [dist_comm]; exact hqd)) hq.1).1 (mem_ball.mp hqb)
+    rw [← this, show F.col q = X from hq.2]
+
 /-- **One colour class along a branch-point-free arc** (E1-COVER (b)–(c), on colour classes; the clopen argument of § 7.3 (a)): in a map of the
 plane, if every point of the open arc `(θ₁, θ₂)` of `ω(v)` carries at most two colours and all the colours crossing `ω(v)` along it are one
 colour, some colour class has every point of the arc in its closure. -/
@@ -627,7 +661,115 @@ theorem exists_closure_colour_of_arc (hP : F.IsPlaneMap) {v : ℂ} {θ₁ θ₂ 
     (hnb : ∀ θ ∈ Ioo θ₁ θ₂, (F.coloursAt (v + e θ)).ncard ≤ 2)
     (hcross : ∀ X X' : Fin k, ∀ θ ∈ Ioo θ₁ θ₂, ∀ θ' ∈ Ioo θ₁ θ₂, F.CrossesAt v X θ → F.CrossesAt v X' θ' → X = X') :
     ∃ X : Fin k, ∀ θ ∈ Ioo θ₁ θ₂, v + e θ ∈ closure (F.region X) := by
-  sorry
+  have hYv : ∀ θ : ℝ, dist (v + e θ) v = 1 := fun θ => by rw [dist_eq_norm, add_sub_cancel_left, norm_e]
+  have hcurve : Continuous fun θ : ℝ => v + e θ := continuous_const.add continuous_e
+  by_cases hcr : ∃ (E : Fin k) (θ₀ : ℝ), θ₀ ∈ Ioo θ₁ θ₂ ∧ F.CrossesAt v E θ₀
+  · -- Case B: one colour `E` crosses somewhere; it crosses everywhere it can, and covers the arc
+    obtain ⟨E, θ₀, hθ₀, hE⟩ := hcr
+    refine ⟨E, ?_⟩
+    set T : Set ℝ := {θ | v + e θ ∈ closure (F.region E)} with hT
+    have hTc : IsClosed T := isClosed_closure.preimage hcurve
+    have hθ₀T : θ₀ ∈ T := closure_mono Set.inter_subset_left hE.1
+    have hopen : ∀ θ ∈ Ioo θ₁ θ₂, θ ∈ T → ∀ᶠ θ' in 𝓝 θ, θ' ∈ T := by
+      intro θ hθ hθT
+      by_contra hcon
+      have hfreq : ∃ᶠ θ' in 𝓝 θ, θ' ∉ T := Filter.not_eventually.mp hcon
+      have hfreq2 : ∃ᶠ θ' in 𝓝 θ, θ' ∉ T ∧ θ' ∈ Ioo θ₁ θ₂ := hfreq.and_eventually (Ioo_mem_nhds hθ.1 hθ.2)
+      set Q : Fin k × Fin k → ℝ → Prop := fun p θ' => p.1 ≠ p.2 ∧ E ≠ p.1 ∧ E ≠ p.2 ∧
+        F.coloursAt (v + e θ') = {p.1, p.2} with hQ
+      have hpair : ∀ θ', θ' ∉ T ∧ θ' ∈ Ioo θ₁ θ₂ → ∃ p, Q p θ' := by
+        rintro θ' ⟨hθ'T, hθ'⟩
+        have hnc' : ∀ X, ¬ F.CrossesAt v X θ' := by
+          intro X hX
+          have hXE := hcross X E θ' hθ' θ₀ hθ₀ hX hE
+          subst hXE
+          exact hθ'T (closure_mono Set.inter_subset_left hX.1)
+        obtain ⟨A, B, hAB, hcols, -⟩ := exists_side_colours_of_not_crossesAt hP (hnb θ' hθ') hnc'
+        refine ⟨(A, B), hAB, ?_, ?_, hcols⟩
+        · intro hEA
+          exact hθ'T (show v + e θ' ∈ closure (F.region E) from by
+            have : E ∈ F.coloursAt (v + e θ') := by rw [hcols]; exact Set.mem_insert_iff.mpr (Or.inl hEA)
+            exact this)
+        · intro hEB
+          exact hθ'T (show v + e θ' ∈ closure (F.region E) from by
+            have : E ∈ F.coloursAt (v + e θ') := by rw [hcols]; exact Set.mem_insert_iff.mpr (Or.inr hEB)
+            exact this)
+      obtain ⟨p, hp⟩ : ∃ p : Fin k × Fin k, ∃ᶠ θ' in 𝓝 θ, θ' ∉ T ∧ θ' ∈ Ioo θ₁ θ₂ ∧ Q p θ' := by
+        by_contra hno
+        have hno' : ∀ p : Fin k × Fin k, ¬ ∃ᶠ θ' in 𝓝 θ, θ' ∉ T ∧ θ' ∈ Ioo θ₁ θ₂ ∧ Q p θ' := fun p h => hno ⟨p, h⟩
+        have hall : ∀ᶠ θ' in 𝓝 θ, ∀ p, ¬ (θ' ∉ T ∧ θ' ∈ Ioo θ₁ θ₂ ∧ Q p θ') := by
+          rw [Filter.eventually_all]
+          intro p
+          exact Filter.not_frequently.mp (hno' p)
+        obtain ⟨θ', h1, h2⟩ := (hfreq2.and_eventually hall).exists
+        obtain ⟨p, hp⟩ := hpair θ' h1
+        exact h2 p ⟨h1.1, h1.2, hp⟩
+      have hclosedA : ∀ X : Fin k, IsClosed {θ' : ℝ | X ∈ F.coloursAt (v + e θ')} := fun X => isClosed_closure.preimage hcurve
+      have hA : θ ∈ {θ' : ℝ | p.1 ∈ F.coloursAt (v + e θ')} :=
+        (hclosedA p.1).mem_of_frequently_of_tendsto (f := id) (b := 𝓝 θ) (hp.mono fun θ' h => by
+          show p.1 ∈ F.coloursAt (v + e θ')
+          rw [h.2.2.2.2.2]; simp) tendsto_id
+      have hB : θ ∈ {θ' : ℝ | p.2 ∈ F.coloursAt (v + e θ')} :=
+        (hclosedA p.2).mem_of_frequently_of_tendsto (f := id) (b := 𝓝 θ) (hp.mono fun θ' h => by
+          show p.2 ∈ F.coloursAt (v + e θ')
+          rw [h.2.2.2.2.2]; simp) tendsto_id
+      obtain ⟨θ', hθ'⟩ := hp.exists
+      obtain ⟨hpq, hEA, hEB, -⟩ := hθ'.2.2
+      have hsub : ({p.1, p.2, E} : Set (Fin k)) ⊆ F.coloursAt (v + e θ) := by
+        intro j hj
+        rcases hj with rfl | rfl | rfl
+        · exact hA
+        · exact hB
+        · exact hθT
+      have h3 : ({p.1, p.2, E} : Set (Fin k)).ncard = 3 :=
+        Set.ncard_eq_three.mpr ⟨p.1, p.2, E, hpq, hEA.symm, hEB.symm, rfl⟩
+      have := Set.ncard_le_ncard hsub (Set.toFinite _)
+      have := hnb θ hθ
+      omega
+    have hpre : IsPreconnected (Ioo θ₁ θ₂) := isPreconnected_Ioo
+    have hsub := hpre.subset_left_of_subset_union (u := interior T) (v := Tᶜ) isOpen_interior hTc.isOpen_compl
+      (disjoint_left.mpr fun x hx hxc => hxc (interior_subset hx))
+      (fun θ hθ => by
+        by_cases hθT : θ ∈ T
+        · exact Or.inl (mem_interior_iff_mem_nhds.mpr (hopen θ hθ hθT))
+        · exact Or.inr hθT)
+      ⟨θ₀, hθ₀, mem_interior_iff_mem_nhds.mpr (hopen θ₀ hθ₀ hθ₀T)⟩
+    exact fun θ hθ => (interior_subset (hsub hθ) : θ ∈ T)
+  · -- Case A: no colour crosses along the arc; the inside colour is locally constant
+    push Not at hcr
+    have hnc : ∀ θ ∈ Ioo θ₁ θ₂, ∀ X, ¬ F.CrossesAt v X θ := fun θ hθ X hX => hcr X θ hθ hX
+    rcases (Ioo θ₁ θ₂).eq_empty_or_nonempty with hemp | ⟨θ₀, hθ₀⟩
+    · exact ⟨F.col 0, by simp [hemp]⟩
+    set S : Fin k → Set ℝ := fun X => {θ | θ ∈ Ioo θ₁ θ₂ ∧ v + e θ ∈ closure (F.region X ∩ ball v 1)} with hS
+    have hSopen : ∀ X, IsOpen (S X) := by
+      intro X
+      rw [isOpen_iff_mem_nhds]
+      rintro θ ⟨hθ, hθX⟩
+      obtain ⟨A, -, huniq, r, hr, hcolA⟩ := exists_inside_colour hP (hnb θ hθ) (hnc θ hθ)
+      have hXA : X = A := huniq X hθX
+      subst hXA
+      have hnear : ∀ᶠ θ' in 𝓝 θ, θ' ∈ Ioo θ₁ θ₂ ∧ dist (v + e θ') (v + e θ) < r / 2 :=
+        Filter.Eventually.and (Ioo_mem_nhds hθ.1 hθ.2) ((hcurve.continuousAt (x := θ)).eventually (Metric.ball_mem_nhds _ (by positivity : (0 : ℝ) < r / 2)))
+      refine hnear.mono fun θ' ⟨hθ', hd⟩ => ⟨hθ', ?_⟩
+      refine mem_closure_inside_of_colour hP (hYv θ') (ρ := r / 2) (by positivity) fun z hz hzi hzv => ?_
+      refine hcolA z (mem_ball.mpr ?_) hzi hzv
+      have := mem_ball.mp hz
+      have := dist_triangle z (v + e θ') (v + e θ)
+      linarith
+    obtain ⟨X₀, hX₀, -⟩ := exists_inside_colour hP (hnb θ₀ hθ₀) (hnc θ₀ hθ₀)
+    have hsub := (isPreconnected_Ioo (a := θ₁) (b := θ₂)).subset_left_of_subset_union (hSopen X₀)
+      (isOpen_iUnion fun X => isOpen_iUnion fun (_ : X ≠ X₀) => hSopen X) ?_ ?_ ⟨θ₀, hθ₀, hθ₀, hX₀⟩
+    · refine ⟨X₀, fun θ hθ => closure_mono Set.inter_subset_left (hsub hθ).2⟩
+    · rw [Set.disjoint_left]
+      intro θ hθX hθw
+      obtain ⟨X, hXne, hθ'⟩ := mem_iUnion₂.mp hθw
+      obtain ⟨A, -, huniq, -⟩ := exists_inside_colour hP (hnb θ hθX.1) (hnc θ hθX.1)
+      exact hXne ((huniq X hθ'.2).trans (huniq X₀ hθX.2).symm)
+    · intro θ hθ
+      obtain ⟨A, hA, -⟩ := exists_inside_colour hP (hnb θ hθ) (hnc θ hθ)
+      by_cases hAX : A = X₀
+      · exact Or.inl ⟨hθ, hAX ▸ hA⟩
+      · exact Or.inr (mem_iUnion₂.mpr ⟨A, hAX, hθ, hA⟩)
 
 /-- **E1-COVER** (`plans/FS131-E1-derivation.md` § 3.4), in E1-GEN6's form and on colour classes: in a valid map of the plane, at a point `v` whose
 picture has positive angles and at most one colour absent from its sectors, no open arc of `ω(v)` of angular length greater than `π/3` has at
