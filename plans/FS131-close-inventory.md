@@ -2068,3 +2068,28 @@ reason by the close.*
      moves serially. Why: IM2 found the machinery reads only `Cone` and wave 3, so the split is clean, costs one checked move, shortens `Moves`' rebuilds, and
      lets two implementers work the moves without sharing a file's growing machinery; serial work leaves wave 4's longest path at about four sessions.
      Confidence: medium-high. IM2's slot → IM3: 1 (I4l) + 1 (I5c) + 1 (KP) + 1 (IM3) = 4.
+280. **FS131-I4l handed back** (Stage 37 SAVED, harness 511k by the task notice; report `fs131-w4`'s `data/fs131/reports/FS131-I4l.md`; commits `efd70aa6`,
+     `d33d0b33` (the merge, made without paths), `54852de9`, `111830c8`, `c8b8b382`, `ea413a23`, `68ca5f0f`). **Done**: `fs131-w4c` merged into `fs131-w4` (item
+     267; only `ARCHITECTURE.md` conflicted, each side's row kept; `scripts/Axioms.lean` keeps both; no statement changed, no duplicate name). **Held, [kernel],
+     the standard three**: FS112-N3-PAIRS (i) `pair_i` — **TRUE**, with ruling 258's `h3` read only at the collinear configuration (children
+     `eq_midpoint_of_dist`, `finite_sphere_inter_sphere_half`, `exists_mem_Ioo_ringPt_not_mem`, `mem_closure_region_of_pseudo`, `finite_not_stripHolds`,
+     `pair_i_of_transversal`); engine 5 `IsHorn.isRingArc_upper`/`_lower` (plan § 13.1 item 5). FS112-N2-FLANK-Q `flankQ_upper`/`flankQ_lower` proved over one
+     child each, the (R2) shadow clause `flankQ_upper_shadow`/`flankQ_lower_shadow` (`sorry`). **Receipt (Keryx)**: the commits exist; `fs131-w4c`'s head
+     `f975677b` is an ancestor of the branch; `build/gate/build/20261004T232508Z-3414461.log` ends "Build completed successfully (5359 jobs)", 26 `sorry` warnings and
+     0 others; `sorry` lines by count `Contact` 3, `UnitArc` 5, `BaseSteps` 1; `axioms-i4l-35.txt` gives `pair_i`, `axioms-i4l-36.txt` and `-37.txt` give engine 5
+     on the standard three, `flankQ_*` on `sorryAx` besides. **Left on the branch (9)**: `Contact`'s three moves (IM3's, on `fs131-w4m`); `UnitArc`'s
+     `bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `nb4p`; `BaseSteps`' `n3_end`. **Ruling 244 (c)'s step (iii) holds** (one mind, on
+     paper, five steps in record Stage 36: no `g` inside `B(N, 2)` near `R₂` by the cusp argument; `R₂` near `S′` in Γ; generic points by the homothety
+     `z ↦ (z + N)/2`; a polar rectangle outside `R₂` all `g`; transversal crossings once `r` is small) — about a session for both mirrors. **Generalizations**:
+     `mem_closure_region_of_pseudo` replaces N3-I's "c′ ≡ {a} near x" by a closed-set fact; engine 5 reads no validity hypothesis; FLANK-Q never reads `hcN`/`hcS`.
+     **Tool defect**: `tools/fs131_k4_decls.py --check` exits 1 on the merged branch, not resolving `theorem _root_.X` (`BranchGerms.frameY_lt_of_mem`,
+     `lt_frameY_of_mem`); I4's `tools/fs131_i4_addrecords.py` now resolves it. **New tool**: `tools/fs131_i4_treedupes.py` (every qualified name in a tree;
+     planted control fired; counts reconcile 7,378 + 7,447 − 7,296 = 7,529). **Question**: `n3_end` carries no `hQR`, so FLANK-Q's (Q)/(R2) dichotomy is not
+     available inside it — check NB3-END item 1 (`plans/FS112-NB3-verification.md` l. 221–243) before planning it. Credit: I4l, for the merge and `pair_i`.
+281. **Rulings on I4l's held items, and its slot.** (a) `flankQ_upper`'s `hcN` and `flankQ_lower`'s `hcS` renamed `_hcN`, `_hcS` (ruling 185's reasons: a binder
+     name is not part of the type). (b) **`tools/fs131_k4_decls.py`** learns to resolve `_root_.` names, with a control, by whichever implementer runs wave 4's
+     gate (touches extended then); alternative weighed: accepting `tools/fs131_i4_addrecords.py --check` in its place — declined, since the gate's plan § 14.4
+     names K4's tool and one checker should hold the list. Confidence: high. (c) **I4l's slot → FS131-I4m** on `fs131-w4`: the six leaves, the shadow clause by I4l's
+     Stage 36 route, `n3_end` after checking the `hQR` question first (message me if NB3-END item 1 needs the dichotomy, since then a hypothesis is missing).
+     Alternative weighed: a parallel MERGE implementer now (item 279) — not yet possible, since its branch must be cut after IM3's `Surgery` split; it takes the
+     next slot that frees after that commit. Confidence: medium-high. In flight: 1 (I5c) + 1 (KP) + 1 (IM3) + 1 (I4m) = 4.
