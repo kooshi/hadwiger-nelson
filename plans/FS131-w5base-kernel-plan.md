@@ -142,3 +142,108 @@ records) are updated.
 ### 3.3 The build
 
 See § 3.4 (filled at the commit that records it).
+
+## Stage 4 — SAVED (partial): the plan per leaf; owed: the obligation pass and the `#check`s
+
+*E easy, M moderate, H hard. Library names below were read in the source; Mathlib names are **not yet confirmed with `#check`** (owed, § 6).*
+
+**A — the pseudo-colouring at a centre `p ∈ B̄(u, 1)`, cubic trichromatic.**
+- A0 `cubic_of_three` — **E** over K5b's child `isCubicTrichromatic_of_three_of_noRep` (wave 5, not yet written) and `BaseHyp`'s `repSet` clause.
+- A1 `pseudo_nonempty` — **M**. If `P_cl(x) ⊆ P_cl(p)`: colours near `x` are colours at `x` (closedness of `closure (region j)`); by the (P) sweep (`Valid` + `ω(p)` through
+  an interior point of a `P_cl(p)`-coloured tile is impossible) `ω(p)` near `x` has no interior point, so it lies in `Γ`. Child **`exists_isRingArc_of_onRingArc`**
+  (K5b's, shared): a sub-arc with constant sides (local finiteness: finitely many arcs, a non-concentric arc meets `ω(p)` twice at most). Its sides lie in
+  `P_cl(x) ⊆ P_cl(p)`: `BothKind p`, then `noBoth` gives four colours or a repeated colour at `p ∈ B̄(u, 2)`, against H.
+- A2 `pseudo_ncard_le_two` — **M**. `c′(x)` all three absent colours ⟹ `#P_cl(x) ≥ 3`; H at `x ∈ B̄(u, 2)` ⟹ exactly 3 ⟹ A0 ⟹ `cor3 hF p x` (covers `B̄(p, 1)`,
+  `B̄(x, 1)` ⊆ `B̄(u, 2)`... `x` may sit at distance 2: `B̄(x, 1) ⊄ B̄(u, 2)` — **check**: `cor3` needs `F.Covers x 1`; `x ∈ ω(p)`, `p ∈ B̄(u, 1)` gives `|x − u| ≤ 2`,
+  so `B̄(x, 1) ⊆ B̄(u, 3)`, not covered. **Repair inside the leaf**: `cor3`'s argument reads only small discs about the rhombus corners and the arcs at `u`, `x`
+  (its docstring: "the class the argument reads: the strips at `q±` and the arcs at `u`, `u′`"); either prove a local `cor3` variant (covers `B̄(p, 1)` and a
+  neighbourhood of `x`), or ask whether `cor3`'s hypothesis can be weakened (a finding for Keryx if needed). Then the corners `q` with `|q − p| = 1` lie in
+  `B̄(u, 2)` and carry four colours, against H.
+- A3 `pseudo_finite` — **M–H**. `Γ ∩ ω(p)` off concentric arcs is finite (compactness + `locallyFinite` + two points per non-concentric arc). A concentric arc's
+  interior points have pseudo-colour exactly one colour: they carry exactly its two side colours (`innerColours ∪ outerColours` at a point of a ring arc), and
+  in/out-contact means exactly one lies in `P_cl(p)`. Inert is excluded by `B.noInert` (`p ∈ B̄(u, 1)`) and both-kind by `noBoth` with H. Children: `coloursAt_eq_sides`
+  (a point inside a ring arc carries exactly its sides), `finite_inter_sphere_of_nonconcentric`.
+- A4 `exists_pseudoCircle` — **M**. `S := {θ | non-singleton at θ, or the germs differ}`, `c θ := g⁻¹` of the germ value (`g`: `ZMod 3 ≃` the absent colours);
+  `locallyConstant` from closedness; `proper` from `pair_i` (`u₁ = u₂ = p`); no swap from `pair_ii` at `(x, σx)` (`htr`: `dist y p = 1 ≠ 2`) with A2 and H (or `bv_nd1`).
+  Pattern: wave 3's `ringCircleColouring` (`Plane/RingBand` l. 1170) and `ring_finite_S`, `ring_locallyConstant`, `ring_proper`.
+
+**B — circle-abstract (no map).**
+- B1 `reduce` — **M–H**. CD Lemma R step 5's six cases over the maximal arcs (finiteness: pick maximal elements of the nested family). Represent `C′.c` as `C.c`
+  overwritten on each maximal span (periodic), `C′.S := C.S \ ⋃ spans`. Children: `maximal_of_nested`, the case lemmas (inherited; open arc vs unchanged; end vs
+  unchanged; open vs closed; end vs end).
+- B2 `select` — **H** (the long circle-abstract leaf). BASE-V § 1a.2–1a.3 over wave 3's `Lift` (`exists_lift`, `D0_mod_ne`, `W_eq`): BV-H1 (the band: `D ∉ 3ℤ`,
+  ±2 jumps only across non-multiples, by no swap), BV-L5 (the running maximum `h′ x = max_{y ≤ x} h y`: a lift of a cyclic colouring with the same kept pairs),
+  BV-C6 (`n ≡ 6, 9, 12 mod 18`; `n = 6` ⟹ the hexagon), BV-P18 (index gap `k + 1`). Children named by BASE-V's ids. Alternative route for Prop. 18: CD § 2.5
+  (Voronov's Prop. 3.3 gap propagation).
+
+**C — the planar core (the hard part; the infrastructure decision is Keryx's, § 5.3).**
+- C1 `retArc_partner` — **M**. `ω(y) ∩ ω(u) = {x, x ± 120°}`, so `r(s)`, `r(t)` lie strictly on opposite sides of `ω(y)` (exact: `dist` to `y` below/above `1`);
+  each tile is connected with points near both ends, so it meets `ω(y)` at an interior point; the (P) sweep gives the colour's absence at `y`.
+- C2 `retArcs_finite` — **E** over A3 (ends are non-singleton points or germ changes, finitely many per period).
+- C3 `retArcs_nested` — **H, planar**. Interleaved ends: the `a₂`-tile and `c₂`-tile of one pair connect a point inside the region bounded by the other pair's
+  tiles to one outside. Needs a separation statement. Route: the finite boundary graph (below), or a direct chord-crossing lemma for the `a|c` boundary.
+- C4 `exists_endpoint` — **H, planar**. Route: the finite boundary graph of `F` in `B̄(u, 1)` (vertices: three-colour points, points of `Γ ∩ ω(u)`, arc ends and
+  crossings; edges: maximal arc pieces). Its `a|c` subgraph has degree 2 at `{a, c}` points inside, 1 at three-colour points and at exits on `ω(u)` (change
+  points), 2 at spikes (R1). Mathlib's handshake lemma on the component of `r(θ)` gives a second odd vertex: a three-colour point (V-in on `ω(u)` by R2, R4) or
+  an exit, which is a returning partner (excluded by `hout`). Children: `boundaryGraph` (finite, from compactness and `locallyFinite`), `degree_ac` (from the
+  sector charts, `Plane/LocalStructure`'s `IsSectorChart`), `exit_isRetArc`.
+- C5 `exists_eleventh` — **GAP** (§ 2.3). Not planned until the deriver answers. With simply connected tiles in `B̄(u, 1)`, the route is: the outer boundary of
+  `R*` (CD § 2.6, Corollary H′ for `R* ⊆ B(u, 1)`) carries two colours of `u` because one tile does not bound it, so a vertex with two colours of `u` lies on it.
+
+**D — refuters and distances.**
+- D1 `endpoint_dist_ge` — **M**. `T₁ ≠ T₂`, since a tile's closure has diameter `≤ 1` (wave 3's `Plane/Diameter`) while `1 < |x₁ − x₂|`. Validity on the connected
+  `T₁ × T₂` ⟹ all cross distances `> 1` or all `< 1` (`IsPreconnected.prod`, IVT on `dist`). Points near `x₁`, `x₂` give `> 1`; closures give `≥ 1`.
+- D2 `vin_antipodal` — **M** (CD Theorem D2 (i)): Lemma H(b) (a tile of colour `i` meeting `B(u, 1)` lies within `1` of `u`'s `i`-tile), and two closed unit discs
+  with centres `2` apart meet only at `u` (`tools/fs110_cd_checks.py` A1's identity).
+- D3 `eleventh_antipodal` — **M** (Theorem D2 (ii)): the cusp points `u + t e⊥` lie outside both discs (`1 + t²`), and the sectors at `u` cover a punctured disc.
+- D4 `cor3_base` — **E–M** over `cor3` (the same covering caveat as A2: `p, p′ ∈ B̄(u, 1)` gives `Covers p 1` ✓).
+- D5 `l3_base` — **H**. A4 at `u₁`, `u₂`; one shared circle-abstract child **`linkage_band`** (BASE-V § 1b.3: the loop `Φ` over the proper arc `Y`, the band
+  from BV-H1, `c₀ = h₁(P) − h₂(P) ∈ 3ℤ` at an intersection point, since the pseudo-colours relative to `u₁` and `u₂` agree when `P_cl(u₁) = P_cl(u₂)`; a jump
+  across `c₀` is a double event), with its map inputs `pair_i` (cross (i)) and `pair_ii`/`bv_nd` (double events, using `linkage_dot_ne_zero`). `bv_l3` should
+  be re-routed through `linkage_band` too (wave 5's implementer).
+- D6 `hex_base` — **E–M**: `C.IsHex` with the germ transfer gives `HexRing u ψ (g ∘ b)` (pseudo-colours at the six points from A2 and the germs); `p17_ua`.
+
+**E — the count, and the assembly.**
+- E1 `eleventh_type` — **E** (`decide` over `Fin 6` after fixing `U` by symmetry, or a direct `Finset` argument).
+- F1 `row134BaseUA` — **M** once A–E land: the order in its docstring. `pair_P'` excludes distance exactly `1`.
+
+**Price, to be re-priced from the first two leaves:** A and D without D5 about one implementer session; B2 and D5 one session each; C3 and C4 are the
+planar core, one to two sessions after its infrastructure; C5 waits on the deriver.
+
+## Stage 5 — SAVED: the handoff (wave 4's plan § 14 form, short)
+
+### 5.1 Where it is, and how the implementer works
+
+Branch `fs131-w5b` (worktree `.claude/worktrees/fs131-w5b`). Modules `Plane/ValidMap/BaseWalk` (19 `sorry` leaves) and `Plane/ValidMap/BaseDense`
+(`row134BaseUA` plus the four moved consumers, as on `fs131-w5`). Build: from inside the worktree, `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`.
+Work order: A0–A4 → D1, D4, D6, E1 → B1 → B2 → D2, D3 → D5 → C1, C2 → (planar core) C3, C4 → F1. C5 waits.
+
+### 5.2 What the implementer may and may not change
+
+It may add children (shared ones in `Chain`/`BaseSteps` foundations, each with a spec example) and change imports, updating `ARCHITECTURE.md`'s Imports
+cell and `scripts/Axioms.lean`. It may not change any statement of § 3.2, the definitions `BaseCtx`, `VIn`, `IsEndpoint`, `IsRetArc`, `Removable`,
+`ChangeWith`, `IsHex`, or any wave-4/5 statement. A statement that fails comes back through Keryx. Watch especially A2's covering caveat (`cor3` at a centre
+`x ∈ ω(p)` needs `B̄(x, 1)`, which `B̄(u, 2)` does not cover).
+
+### 5.3 For Keryx: the planar core, and the landing
+
+The planar core (C3, C4, and C5 once repaired) needs boundary-path topology; Mathlib has no Jordan curve theorem at the pin. This is the same kind of
+work as `cvb_thom_reduced`'s boundary walks (`Plane/ValidMap/MapGraph`). **Recommendation:** one infrastructure job, the finite boundary graph of an
+`ArcMap` in a compact disc with its degree lemma, serving both. **Landing:** `fs131-w5b` merges into `fs131-w5` when Keryx says. Conflicts are append-only
+in `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean`, plus `Dense.lean`'s removed block. `n3_base`, `localDense`, `dense3`, `cv_exists` keep their
+statements and names, in the new module `BaseDense`. Wave 5's implementer works on them there after the merge. Nothing with a `sorry` reaches `main`.
+
+### 5.4 Vacuity carriers
+
+`BaseCtx`: **OUT** (the hypothesis of refutation steps; its emptiness is `row134BaseUA` itself). `IsRetArc`, `IsEndpoint`, `VIn`: OUT (atoms read at
+variable maps). `CircleColouring.Removable`, `IsHex`: OUT (existence is a construction; `hexColouring` is a hexagon). Every leaf is `GENERIC` or a step
+inside the refutation. `eleventh_type` and `endpoint_dist_ge` are unconditional or at a variable map.
+
+## 6. What is left (owed by this job, not done)
+
+1. **The obligation pass** (`debruijn-obligation-modeling`, invoked fresh) over § 3.2's statements. Not run (budget). § 4's decompositions are
+   un-audited by it.
+2. **`#check` confirmation** of the Mathlib names § 4 assumes (handshake lemma, `IsPreconnected.prod`, `Metric` disc lemmas).
+3. **GAP-ELEVEN's resolution** (Keryx and the deriver), then C5's plan.
+4. **A2/D4's covering caveat**: decide between a local `cor3` variant and a hypothesis change to `cor3` (the latter would be a finding).
+5. The skeleton build's result (§ 3.4).
