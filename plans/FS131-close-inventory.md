@@ -561,3 +561,6 @@ reason by the close.*
     `aeMap6`, `aeMap6_of_condition5` and `woodall_thm6`, in the way row 127 holds the main clause over named hypotheses — and FS106-AE-MAP6 stays unheld, recorded as
     GAP. Alternative weighed: (b) now, restating the three theorems before E1 reports. Why: E1 may change what the open statements should say; restating twice costs
     a planner job. Confidence: high. The Woodall implementer (FS131-IW) joins the queue after FS131-I4.
+99. **Brief FS131-I2e, wave 2's fifth implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I2e-wave2.md`, gated PASS): the 16 leaves K2c re-planned
+    into stated children first, then any leaf whose route is complete; leaves `Plane/CoverExamples`, `Arith/PlaceHom`, `Arith/FalconerField` to FS131-K2d if it runs
+    beside (item 94). Launched in the slot W freed. Queue after it: FS131-K2d, FS131-I4, FS131-IW, FS131-LEB. Source: this commit.
