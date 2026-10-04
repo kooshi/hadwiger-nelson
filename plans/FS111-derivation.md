@@ -452,6 +452,8 @@ derivation: FS111-M-PINCH
 
 Rests on it: FS111-M-C11; FS111-M-EXTREME; FS111-M2-HULLC's pinch clause; FS111-M4-LADDER (every interface point of M-PINCH's tangent type); G84.
 
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 4.1, row FS111 l. 442; `plans/FS129-close-inventory.md` items 129, 130):* the not-claimed form "the same without (H1) or (H2) (C-HULL-REG as stated is a GAP there); anything at points of the singular set Σ" is false as a general form: FS111-M-EXTREME (this file) shows the conclusion fails at the extreme points of every component of an honest saturated colouring, each a cusp or a point where (H1) or (H2) fails, and FS111-M-R7 is such a colouring (its up-vertices are M-EXTREME's model). What does hold at Σ, under REG-J′, is FS121-DB1-L3 (no colour occupies two sectors of positive angle; `plans/FS121-derivation.md`). The statement is untouched: the false form is a not-claimed one.
+
 derivation: FS111-M-C11
   statement: if M-PINCH's hypotheses hold at every essential boundary point in N, then ∂_e S_a ∩ N′ (N′ ⋐ N) is a C^{1,1} curve with curvature in
     [−1, 1] and unit-parallel partners on both sides; a single unit arc if any of its points is of the split type

@@ -7,7 +7,7 @@ erratum is present exactly once and that its anchor line still stands; --check -
 memory and must fail.
 
   python3 tools/fs129_z1_errata.py --apply
-  python3 tools/fs129_z1_errata.py --check            expect "errata check: 10 errata, 0 problems"
+  python3 tools/fs129_z1_errata.py --check            expect "errata check: 17 errata, 0 problems"
   python3 tools/fs129_z1_errata.py --check --fault    must report a problem and exit 1
 """
 import sys
@@ -80,10 +80,51 @@ ERRATA = [
 ]
 
 
+S3 = '*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` '
+ERRATA += [
+("FS114", "derivation: FS114-Y5-PINALL", "after", "Rests on it: K1's pinwheel case reduced to E1 and E2",
+ S3 + "§ 1.3 and § 4.3 row 4; `plans/FS129-close-inventory.md` items 127, 130):* the exception \"E1 or E2\" narrows to \"E1, or E2 at two or "
+ "more blades\": FS129-SR3-E2ONE (derived, one mind; `plans/FS129-derivation.md`) shows, by a parity around the four pockets, that E2 at exactly one "
+ "blade with no E1 forces POCKET and CASE, so no such pinwheel exists at radius 1 + ε. FS114-Y5-PIN120's exception \"unless E2 holds at the blade two "
+ "past the 120° tile\" narrows likewise, to that E2 together with E1 or with E2 at a second blade (with E1 the parity is not available). The text "
+ "above stands as filed."),
+("FS114", "derivation: FS114-Y6-E2RED", "after", "Rests on it: the successor's E2 target (S6 alone)",
+ S3 + "§ 1.3 and § 4.3 row 4; `plans/FS129-close-inventory.md` items 127, 130):* the survivor family S6 `(120°, b, 180° − b, 60°)` is empty — "
+ "FS129-SR3-E2ONE: E2 at exactly one blade, with no E1, gives POCKET at `w_c` and CASE at `q_c` — so this entry's not-claimed \"that S6 exists or "
+ "dies\" is answered (it dies), and its \"full wrap of `Λ_c`\" GAP closes in the one-blade case."),
+("FS114", "derivation: FS114-K1", "after", "Rests on it: nothing; it is the successor's opening list",
+ S3 + "§ 1.3 and § 4.3 row 4; `plans/FS129-close-inventory.md` items 127, 130):* the list loses \"E2's survivor S6\" (empty by FS129-SR3-E2ONE) "
+ "and the wrap's E2RED site; E1, and E2 at two or more blades, remain."),
+("FS116", "derivation: FS116-S1-KAPPA", "before", "derivation: ",
+ S3 + "§ 4.1, row FS116 l. 816; `plans/FS129-close-inventory.md` items 129, 130):* the last clause's class — non-Siamese, six colours, a vertex of "
+ "four colours, a ring with no (Q) arc, radius above 1 — is empty by FS129-SR3-QFREE-NS (derived, one mind; `plans/FS129-derivation.md`), which "
+ "FS129-OR1-QFREE did not reach (this entry assumes no simplicity); the GAP at whether an orbit point can end an arc of Γ on ω(p) is moot. The clause "
+ "stands as a step of FS116-S1-QF's second route only."),
+("FS116", "derivation: FS116-C114-LOCAL-F", "after", "§ 1.5). Rests on it: nothing in this file; the successor stubs",
+ S3 + "§ 2.3; `plans/FS129-close-inventory.md` items 125, 130):* the Γ-free type is now excluded at radius 1 + ε in the non-Siamese class with "
+ "simplicity dropped (FS129-SR3-EMPTY-NS, on FS116-V6's route), and so is the (Q)-free type (FS129-SR3-QFREE-NS); both derived, one mind "
+ "(`plans/FS129-derivation.md`). For those two ring types the open remainder of \"the Siamese and non-simple classes\" is the Siamese class."),
+("FS111", "derivation: FS111-M-PINCH", "after", "Rests on it: FS111-M-C11; FS111-M-EXTREME;",
+ S3 + "§ 4.1, row FS111 l. 442; `plans/FS129-close-inventory.md` items 129, 130):* the not-claimed form \"the same without (H1) or (H2) (C-HULL-REG "
+ "as stated is a GAP there); anything at points of the singular set Σ\" is false as a general form: FS111-M-EXTREME (this file) shows the conclusion "
+ "fails at the extreme points of every component of an honest saturated colouring, each a cusp or a point where (H1) or (H2) fails, and FS111-M-R7 is "
+ "such a colouring (its up-vertices are M-EXTREME's model). What does hold at Σ, under REG-J′, is FS121-DB1-L3 (no colour occupies two sectors of "
+ "positive angle; `plans/FS121-derivation.md`). The statement is untouched: the false form is a not-claimed one."),
+("FS112", "**FS112-SIX —", "before", "**FS112-",
+ S3 + "§ 4.1, row FS112 l. 49; `plans/FS129-close-inventory.md` items 129, 130):* the GAP in de Grey's covering step for C-V56 is answered in the "
+ "non-Siamese class: a tile meeting `B(V, 1)` of a colour carried at `V` is within 1 of `V`'s tile of that colour, so it is that tile "
+ "(FS116-V4-DICHOTOMY); FS-112's own NB reduced the step to exactly that (`plans/FS112-NB-verification.md` line 205: \"exactly 'no Siamese partner of "
+ "a tile at `V` lies in `B(V, 1)`'\"), and FS116-N2-SIXRING (non-Siamese) carries the six-colour picture. It stays open in the Siamese class (FS-124's "
+ "case 7). The entry's two clauses are formalized as FS116-N2-FIVERING and FS129-SR1-SIXQ in its place (`plans/FS129-SR1-audit.md` § 6.2 item 3)."),
+]
+
+
 def locate(lines, header, mode, anchor):
     h = next(i for i, ln in enumerate(lines) if ln.startswith(header))
     if mode == "after":
         a = next(i for i in range(h, len(lines)) if lines[i].startswith(anchor))
+        while a + 1 < len(lines) and lines[a + 1].strip():  # to the end of the anchor's paragraph
+            a += 1
         return a + 1, ["", None]
     a = next(i for i in range(h + 1, len(lines)) if lines[i].startswith(anchor))
     return a, [None, ""]
@@ -93,7 +134,8 @@ def apply():
     for f, header, mode, anchor, text in ERRATA:
         p = PLANS / f"{f}-derivation.md"
         s = p.read_text()
-        assert text not in s, f"{f}: already filed"
+        if text in s:
+            continue  # filed by an earlier --apply
         lines = s.split("\n")
         at, shape = locate(lines, header, mode, anchor)
         ins = [text if x is None else x for x in shape]

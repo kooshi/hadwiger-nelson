@@ -248,3 +248,36 @@ that FS129-MR1-DOUBLETIP cannot replace FS116-V6-HUG without losing EMPTY-NS is 
 
 `derive_gate.py all plans/FS129-derivation.md` re-run at this stage: see `data/fs129/z1/gate-all.txt` (overwritten at stage 5). Every file this job
 appended to passes after as it did before, or fails as before only for want of an entry (stages 3–4).
+
+## Stage 6 — SAVED: the brief's amendment — FS129-SR3's entries and its corrections (items 125–130)
+
+**The amendment** (`data/fs129/briefs/FS129-Z1-record.md` § Amendment, 2026-10-03, commit e1bc8738): SR3's four entries are this job's, so the
+derivation file keeps one writer; item 130's corrections that touch derivation files are this job's; the stubs are FS129-Z2's. This supersedes
+§ 5.3 items 1 and 5's SR3 lines.
+
+**Derivation file** (commit **3f35c709**; rebuilt by `tools/fs129_z1_assemble.py` with "SR3" among its readers): 44 entries — SR3's
+FS129-SR3-EMPTY-NS, -QFREE-NS, -OUTERADJ (section 4) and -E2ONE (section 5), each verbatim with its controls; FS129-OR1-QFREE marked superseded by
+FS129-SR3-QFREE-NS (SR3's handoff: "in place of FS129-OR1-QFREE (it drops "simple")"); FS129-SR2-QFCASE's `uses only:`, `grade:` and `handoff:`
+cite QFREE-NS, the "simple at p" step withdrawn, SR2's lines quoted in its prose (items 125, 130); the head section's tables updated.
+`derive_gate.py all`: **PASS**, 44 derived, 28 controls all firing (`data/fs129/z1/gate-all.txt`); `quotes` over the file and all nine reader
+records: PASS, 44 statements verbatim; the assembler's check: "44 entries, 0 problems".
+
+**Item 130's corrections, filed as errata** (by `tools/fs129_z1_errata.py --apply`, now 17 errata; check "17 errata, 0 problems", its planted fault
+firing; `git diff --stat` 14 insertions, 0 deletions in four files):
+
+| # | file, under | correction (source: `plans/FS129-SR3-audit.md`) |
+|---|---|---|
+| 11 | FS114, FS114-Y5-PINALL | exception "E1 or E2" → "E1, or E2 at two or more blades"; FS114-Y5-PIN120's likewise (no entry of that name exists in the file, so it rides here) — § 1.3, § 4.3 row 4 |
+| 12 | FS114, FS114-Y6-E2RED | S6 empty; its not-claimed "that S6 exists or dies" answered; the wrap GAP closes in the one-blade case — § 1.3 |
+| 13 | FS114, FS114-K1 | the list loses S6 and the wrap's E2RED site — § 1.3 |
+| 14 | FS116, FS116-S1-KAPPA | the last clause's class is empty by QFREE-NS; the GAP moot — § 4.1 row l. 816 |
+| 15 | FS116, FS116-C114-LOCAL-F | the Γ-free and (Q)-free types excluded at 1 + ε with simplicity dropped (EMPTY-NS, QFREE-NS); Siamese left — § 2.3 |
+| 16 | FS111, FS111-M-PINCH | its not-claimed general form is false (FS111-M-EXTREME, R7); at Σ under REG-J′, FS121-DB1-L3 — § 4.1 row l. 442 |
+| 17 | FS112, FS112-SIX | the covering-step GAP answered in the non-Siamese class (NB l. 205; FS116-N2-SIXRING); open in the Siamese class — § 4.1 row l. 49 |
+
+Gates after (`data/fs129/z1/gate-errata-<file>.txt`): FS111, FS114, FS116 PASS (as before); FS112 FAIL as before, only "no derivation entry".
+Item 130's two corrections inside FS-129's own entries (QFCASE, QFREE's not-claimed) are in the derivation file; its stub lines (item 133) are
+FS129-Z2's.
+
+**Left for FS129-Z2, revised** (replacing § 5.3 item 1): nothing of SR3's to file. Still Z2's: the Lean-list cautions (items 126, 131 — DOUBLETIP not in
+place of V6-HUG for EMPTY-NS; carried in DOUBLETIP's and EMPTY-NS's prose); the tool defect of item 132 (index README); § 5.3 items 3–6.

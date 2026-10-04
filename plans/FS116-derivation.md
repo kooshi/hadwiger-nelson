@@ -815,6 +815,8 @@ derivation: FS116-S1-KAPPA
 
 Frozen at § 12 with "tiles of exactly one colour absent at p" and "the change points are exactly": TRUE in the ruled reading (B) with κ's change points (item 103); filed in V4's corrected wording (V4, Divergences on KAPPA rows 3–4; item 109). Under § 10's ring change points the last clause is GAP at whether an orbit point can end an arc of Γ on ω(p). Two minds, blind, with item 108's caveat. Rests on it: FS116-S1-PAIR; FS116-S1-LENS.
 
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 4.1, row FS116 l. 816; `plans/FS129-close-inventory.md` items 129, 130):* the last clause's class — non-Siamese, six colours, a vertex of four colours, a ring with no (Q) arc, radius above 1 — is empty by FS129-SR3-QFREE-NS (derived, one mind; `plans/FS129-derivation.md`), which FS129-OR1-QFREE did not reach (this entry assumes no simplicity); the GAP at whether an orbit point can end an arc of Γ on ω(p) is moot. The clause stands as a step of FS116-S1-QF's second route only.
+
 derivation: FS116-S1-PAIR
   statement: in a valid fragment as in FS116-S1-KAPPA, let z be a point with 0 < |z − p| < 2, φ its direction from p and α = arccos(|z − p|/2), so
     that r(φ + α) and r(φ − α) are the ring points at distance 1 from z; if neither φ + α nor φ − α is a change point, no tile of colour κ(φ + α) or
@@ -1882,4 +1884,6 @@ derivation: FS116-C114-LOCAL-F
 Frozen at § 1 and § 6. The milestone's question, filed as GAP at its named cases; the stub's existence form was never worked as a whole, its structural form carried the rounds (`FS116-Z1-close.md` § 2.5). Whether FS-112's bends, run on a fragment, leave a (Q)-free ring with (R2) arcs at all
 — if not, the Γ-free case is the whole (Q)-free case — is the invention signal of inventory item 136, carried to FS-123 unsettled (`FS116-Z2-close.md`
 § 1.5). Rests on it: nothing in this file; the successor stubs (FS-123–FS-125).
+
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 2.3; `plans/FS129-close-inventory.md` items 125, 130):* the Γ-free type is now excluded at radius 1 + ε in the non-Siamese class with simplicity dropped (FS129-SR3-EMPTY-NS, on FS116-V6's route), and so is the (Q)-free type (FS129-SR3-QFREE-NS); both derived, one mind (`plans/FS129-derivation.md`). For those two ring types the open remainder of "the Siamese and non-simple classes" is the Siamese class.
 

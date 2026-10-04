@@ -660,6 +660,8 @@ derivation: FS114-Y5-PINALL
 
 Rests on it: K1's pinwheel case reduced to E1 and E2 (FS114-Y6-E1CAP, FS114-Y6-E2RED); the pinwheel closed from both ends with FS114-N6-NOQ.
 
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 1.3 and § 4.3 row 4; `plans/FS129-close-inventory.md` items 127, 130):* the exception "E1 or E2" narrows to "E1, or E2 at two or more blades": FS129-SR3-E2ONE (derived, one mind; `plans/FS129-derivation.md`) shows, by a parity around the four pockets, that E2 at exactly one blade with no E1 forces POCKET and CASE, so no such pinwheel exists at radius 1 + ε. FS114-Y5-PIN120's exception "unless E2 holds at the blade two past the 120° tile" narrows likewise, to that E2 together with E1 or with E2 at a second blade (with E1 the parity is not available). The text above stands as filed.
+
 derivation: FS114-Y6-E1CAP
   statement: **E1 forces a second 60° arc**: `t_2` borders the whole ring arc from `q_4` to `q_1`; the tactic tile `T_4` borders all of it from outside,
     contains `q_1` and lies in the Reuleaux cap `Reul(q_4, q_1, q_1 + q_4) ∖ B(p, 1)`; `α_4 = 120°` exactly (`φ_3 = φ_1 + 180°`), `α_2 + α_3 = 180°`, CASE
@@ -696,6 +698,8 @@ derivation: FS114-Y6-E2RED
 
 Rests on it: the successor's E2 target (S6 alone); the wrap lemma's third site. The cut to S6 is the one raise of the milestone on a single mind
 (`plans/FS114-C-close.md` stage 2 §2.4).
+
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 1.3 and § 4.3 row 4; `plans/FS129-close-inventory.md` items 127, 130):* the survivor family S6 `(120°, b, 180° − b, 60°)` is empty — FS129-SR3-E2ONE: E2 at exactly one blade, with no E1, gives POCKET at `w_c` and CASE at `q_c` — so this entry's not-claimed "that S6 exists or dies" is answered (it dies), and its "full wrap of `Λ_c`" GAP closes in the one-blade case.
 
 derivation: FS114-Y6-HALF
   statement: in a `(2, 1, 1, 0)` pattern whose two-edge tile `t_1` is a width-1 Reuleaux triangle, with `t_2`'s cone above 60° and `t_4`'s at least 60°,
@@ -812,6 +816,8 @@ derivation: FS114-K1
     `λ_3`, E2RED's full wrap), OC (K1-OPENCAP), non-simple bowties, and the Reuleaux `(2, 1, 1, 0)` on rings with (Q) arcs
 
 Rests on it: nothing; it is the successor's opening list, in the order round 7 would have run it (a blind check of N7-HUB, the wrap lemma, OC, the (Q)-rings).
+
+*Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 1.3 and § 4.3 row 4; `plans/FS129-close-inventory.md` items 127, 130):* the list loses "E2's survivor S6" (empty by FS129-SR3-E2ONE) and the wrap's E2RED site; E1, and E2 at two or more blades, remain.
 
 derivation: FS114-GSD
   statement: GS-D, the global step in DENSE3's form — no valid six-map with unit arcs exists (Q-full's NO), for every valid map, periodic or not
