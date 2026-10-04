@@ -602,3 +602,14 @@ reason by the close.*
      added; the Jordan curve theorem for arc curves priced or routed around by W's collars. A planner pass on `fs131-ww` (FS131-W2; resuming W, ≈ 270k, if it
      is the cheaper reader) takes the Opus slot E1 frees, **after E1's report** (it is still writing the chain corrections). FS131-IW waits for it; I3e's half
      slot goes to FS131-I4. Corrections to row 132 and § The aim stay held until the report (item 88). Credit: E1, by name.
+107. **FS131-E1 done, harness ≈ 490k** (report `data/fs131/reports/FS131-E1.md`; record `plans/FS131-E1-derivation.md`, commits `7ecfc505`, `0f064d8f`, `3f775af7`,
+     `44374550`, `4a1276e6`, checked; derive gate PASS on Keryx's run, four controls each firing on its fault): Q1 and Q2 **excluded** (E1-Q1, E1-Q2), both through
+     E1-NO45 (item 106); E1-MAPS6 [derived, one mind]: maps need six for arc maps, Jordan form owed; E1-GEN6 a generalization (not used). Predictions: Q1, Q2 each
+     "derived — excluded" at 0.75, both met (Brier 0.0625 each; registered after the route was sketched, its § 1.4). **Filed verbatim from its § 4.3** (this
+     commit): FS106-WO and FS106-AE-MAP6 errata (`plans/FS106-derivation.md`), `LEDGER.md` row 132 (three phrases, the milestone list), `CLAUDE.md` § The aim
+     item 4, `BIBLIOGRAPHY.md` read-status of `[Woodall1973]` and `[Townsend2005]`; fact audit `--base 7c7a1513` PASS, `--dupes` run, `tools/bib_audit.py` clean.
+     **Items 88 and 91's correction is discharged for arc maps and stands for Jordan maps.** Wave 9 note: FS111-M2-REDUCE-C and -VM2-EQ5 state their regularity
+     over Jordan arcs — restored only when the arrangement is an arc map (item 89); FS111-M-REDUCE-I's use is restored. Stub to mint: AE-MAP6 for Jordan boundaries
+     (item 89), now with one named obstacle (E1-BAD's count with oscillating edges). Statement defect (minor, E1's): Q2's "every angle > π/3" leaned on step 5 at
+     equality; harmless. Prior-art debt: Reid–Jungreis–Witte 1990, Zaks 1992 (cite Woodall; judged off-topic by title). **Held for Kooshi**: a blind second mind
+     on E1-NO45 before de Bruijn formalizes it, or the kernel as the second check (Workflow 3.1's default). Over its line (490k vs 480k): not a slip.
