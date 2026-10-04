@@ -748,6 +748,36 @@ driver log `data/fs131/i4/build-i4h-stage21.log`): 29 distinct `declaration uses
   small, and a whole declaration has one heartbeat budget. State each inequality as a real-variable lemma with only its hypotheses (here `reul_bound_real`,
   `n2_env_near_core`, `toward_dir45`, `n2_env_away_core`), and use `mul_le_mul…` and `pow_le_pow_iff_left₀` for the steps `nlinarith` would search for.
 
+## Stage 22 — SAVED (FS131-I4i): readback, the as-given build
+
+*FS131-I4i (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4i-wave4.md` on `main`) continues this record from `22820927`.
+Inventory ruling 194: this job takes `BaseSteps` and `UnitArc` only (19 leaves); `Contact` (10 `sorry` lines here, 6 left on `fs131-w4c`) is FS131-IC2's,
+and `Contact.lean` is not edited here except by merging that branch.*
+
+**The brief's six quotations against their sources** (standing rule 3): (1) "**It may**: add children anywhere in the wave's modules — the seven engines and every
+child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. (2) "**What is left
+(19 in this job's files; `Contact`'s are the parallel implementer's, FS131-IC1/IC2 on `fs131-w4c`), in the order I would take it.**" — this record, Stage 21
+(line 734): **matches**. (3) "- *Engine 2*, `ringArcsWithin_of_Γ_subset`, **in `Plane/ValidMap/Basic` under exactly that name** (inventory item 218 (g), the
+coordinator's note to this job): the" — Stage 21 (line 735): **matches as a truncation**. (4) item 194, "194. **Ruling: wave 4 splits by file** (item 191's condition
+met: six leaves a session on wave 4's last two sessions, 39 left). Choice: the next wave-4 implementer" — `plans/FS131-close-inventory.md` on `main` (line 1358):
+**matches as a truncation**. (5) item 177 — same file (line 1229): **matches as a truncation**. (6) item 185 — same file (line 1300): **matches as a truncation**.
+The source heading the brief gives for (2)–(3) is this record's line 720, verbatim. No mismatch.
+
+**What I may change** (§ 14.2, unchanged from Stages 1, 5, 7, 9, 12, 15, 18): add children anywhere in the wave's modules (engines in `Basic`, sorry-free, with spec
+examples; every child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`, wave 1's
+`Plane/Chord`, `Diameter`, `Basic`), statements unchanged; imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then
+`tools/fs131_k4_decls.py --check`); `Plane/ValidMap/Sectors`; wave 4's vacuity carriers at the gate (`AeProperRegions` registered, item 144). **What I may not
+change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s clause 3 in its ruled local form, item 177; `l60_eq_third`'s binder `_hF`, item 185); any definition
+of `Plane/ValidMap/Basic`; the fragments' definitions but for a coordinate slip found against the source tool (a finding); the read-backs' conventions; TS-T's
+Condition-5 clause in its carried form (item 142); no new `axiom`, no `native_decide`; `Contact.lean` (ruling 194) except by merging the parallel branch. Engine 2
+goes in `Plane/ValidMap/Basic` under exactly the name `ringArcsWithin_of_Γ_subset` (item 218 (g)). A leaf that cannot be proved as written goes to Keryx at once.
+No edit while a build of the edited file runs. A merge commit is the one commit made without paths.
+
+**The worktree as given** (`22820927`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — all
+1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T195230Z-1910844.log`; driver log
+`data/fs131/i4/build-i4i-readback.log`). 29 `declaration uses sorry` warnings — BaseSteps 7, Contact 10, UnitArc 12 — and no other warning. This job's scratch
+mirror for `iter.sh`/`chk.sh` is `S=/home/kooshi/scratch-w4i`.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
