@@ -1,0 +1,26 @@
+wrote plans/LEAN-BACKLOG.md (448819 bytes, 259 rows)
+CHECK: FS129-OA1-FALC-RED (superseded) and FS129-SA1-FALC-RED have identical statements (SA1 § 6.3 item 6 names the OA1 statement with the SA1 argument; the backlog row is the SA1 entry)
+CHECK: FS114-N7-3T is named by a do-not-formalize line and by a quote-with-errata line; both are attached
+CHECK: FS116-N2-HEX6 is a SEED row of the order (its handoff names de Bruijn) and a merge line says do not formalize it as stated (the line may name a clause only)
+CHECK: FS116-N2-HEX3 is a SEED row of the order (its handoff names de Bruijn) and a merge line says do not formalize it as stated (the line may name a clause only)
+CHECK: FS116-RING-TRANSFER-C is a SEED row of the order (its handoff names de Bruijn) and a merge line says do not formalize it as stated (the line may name a clause only)
+CHECK: FS116-S1-KAPPA is a SEED row of the order (its handoff names de Bruijn) and a merge line says do not formalize it as stated (the line may name a clause only)
+CHECK: FS116-Y3-NOQ is a SEED row of the order (its handoff names de Bruijn) and a merge line says do not formalize it as stated (the line may name a clause only)
+CHECK: FS116-Y3-TIGHTLENS is a SEED row of the order (its handoff names de Bruijn) and a merge line says do not formalize it as stated (the line may name a clause only)
+CHECK: FS116-Y3-STARFORCE is a SEED row of the order (its handoff names de Bruijn) and a merge line says do not formalize it as stated (the line may name a clause only)
+CHECK: FS116-Y4-SPOKE is a SEED (conditional: handoff begins `none`) row of the order (its handoff names de Bruijn) and a merge line says do not formalize it as stated (the line may name a clause only)
+CHECK: FS111-M-COVER-SC has a row (it is in the Lean order), and its handoff says: none — superseded by FS111-M2-HULLC's fuller form; crosses with it
+CHECK: FS114-N3-DR has a row (it is in the Lean order), and its handoff says: none — superseded by FS114-Y4-RSTOPALL as a statement; its lemmas are relay-results
+CHECK: FS114-N4-D has a row (it is in the Lean order), and its handoff says: none — superseded in scope by FS114-Y4-RSTOPALL; kept as the proof side's route
+CHECK: SA1-6.3 item 6 names FS129-OA1-FALC-RED to formalize, and `plans/FS129-derivation.md` marks FS129-OA1-FALC-RED superseded
+CHECK: 92 order rows carry a stale address (the derivation files gained lines after the index was written); the backlog uses the current lines: plans/FS106-derivation.md: 1 rows, shifts 2..2; plans/FS111-derivation.md: 13 rows, shifts 2..6; plans/FS112-derivation.md: 25 rows, shifts 2..2; plans/FS114-derivation.md: 8 rows, shifts 2..8; plans/FS116-derivation.md: 45 rows, shifts 2..4
+CHECK: the `Rests on it:` prose of FS129-SR1-TWOCIRC names FS129-MR1-DOUBLETIP, but FS129-MR1-DOUBLETIP's `uses only:` does not reach FS129-SR1-TWOCIRC; the order puts FS129-SR1-TWOCIRC before FS129-MR1-DOUBLETIP anyway
+CHECK: the `Rests on it:` prose of FS129-SR3-OUTERADJ names FS129-MR1-DOUBLETIP, but FS129-MR1-DOUBLETIP's `uses only:` does not reach FS129-SR3-OUTERADJ; the order puts FS129-SR3-OUTERADJ before FS129-MR1-DOUBLETIP anyway
+CHECK: the `Rests on it:` prose of FS129-MR1-DOUBLETIP names FS129-SR3-EMPTY-NS and that of FS129-SR3-EMPTY-NS names FS129-MR1-DOUBLETIP; neither `uses only:` reaches the other; no order constraint taken from either
+CHECK: the `Rests on it:` prose of FS129-OR1-LOCALDENSE names FS129-SR2-DISC1TS and that of FS129-SR2-DISC1TS names FS129-OR1-LOCALDENSE; neither `uses only:` reaches the other; no order constraint taken from either
+CHECK: the `Rests on it:` prose of FS129-OR1-QFREE-CLASS names FS129-SR1-BENDANY, but FS129-OR1-QFREE-CLASS's `uses only:` reaches FS129-SR1-BENDANY (the two disagree on the direction); the order follows `uses only:`
+CHECK: the `Rests on it:` prose of FS129-SR2-QFCASE names FS129-SR3-QFREE-NS, but FS129-SR2-QFCASE's `uses only:` reaches FS129-SR3-QFREE-NS (the two disagree on the direction); the order follows `uses only:`
+CHECK: the `Rests on it:` prose of FS129-SR3-OUTERADJ names FS129-SR1-TWOCIRC, but FS129-SR3-OUTERADJ's `uses only:` reaches FS129-SR1-TWOCIRC (the two disagree on the direction); the order follows `uses only:`
+CHECK: the `Rests on it:` prose of FS129-SR3-QFREE-NS names FS129-SR1-BENDANY, but FS129-SR3-QFREE-NS's `uses only:` reaches FS129-SR1-BENDANY (the two disagree on the direction); the order follows `uses only:`
+stats: {'rows': 259, 'order_rows': 178, 'comp_rows': 32, 'left_rows': 26, 'extra_rows': 23, 'merge_notes': 147, 'notes': 28, 'cautions': 54, 'empty_nc': 54, 'empty_gr': 2, 'old_rows': 52}
+RESULT: PASS

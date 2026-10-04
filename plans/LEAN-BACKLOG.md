@@ -1,0 +1,7454 @@
+<!-- the Lean backlog's input | command: python3 tools/fs129_l1_backlog.py | written at commit 7a8821fe25 (inputs clean) | FS129-L1, from data/fs129/index/lean-order-corrected.md, plans/*-derivation.md, data/fs129/l1/merges.csv -->
+
+# The Lean backlog's input
+
+*Written by `tools/fs129_l1_backlog.py` (the Clerk, FS129-L1); every statement, grade, handoff, erratum and merge line below is quoted by that script from the address given, never copied by hand. The check that re-reads this file against its sources is the same script's second half (`--check`). Where a cell is empty the source has no such field, and the count is in § Counts.*
+
+## How to read this file
+
+- **The order** (§ The order) is `data/fs129/index/lean-order-corrected.md`, 178 entries, dependencies first, ties by id; a dependency cycle's members stand together, flagged CYCLE. A row's **role** is the corrected file's word: SEED (an entry whose `handoff:` names de Bruijn), *upstream* (an entry a seed rests on), ROUTE-ONLY (in the closure only through a second route's edge), CYCLE, and *conditional* for the three seeds whose `handoff:` begins "none" and names de Bruijn on a later line (inventory item 13). **Upstream ids** are the order file's `needs` column (the corrected edges, `data/fs129/index/edges-corrected.csv`).
+- **Address**: `plans/<file>:<line>`, the line of the entry's header, checked against the derivation file by the script.
+- **Statement**: for an entry in the Ephodos grammar, its `statement:` field; for an entry in the older grammar (every FS-112 entry among them) there is no such field, and the header's own words are quoted, marked as such. **Not claimed**, **grade**, **minds**, **handoff**: the fields of the entry; the older grammar has no `not claimed:` or `minds:` field (its minds are inside the grade) and its `*Kernel:*` line stands for the handoff. A cell the source lacks is shown empty, never filled from prose.
+- **Dated notes**: every paragraph filed under an entry that begins *Erratum*, *Errata* or *Correction*, every banner *Correction owed* directly above it, and every numbered item of a `## Errata` section whose bold lead names it, is quoted under its statement, with its address. Where such a note and the entry differ, the note governs (plans/FS112-derivation.md's own rule for its section).
+- **Merge notes**: the four audits' lists (SR1 § 6.2, SR2 § 4.3, SA1 § 6.3, SR3 § 5.1) are `data/fs129/l1/merges.csv`, one line each with its address and its text copied by the script and checked against the audit's own lines. A row carries each line that names it, quoted whole, with the way it names the row (*to formalize*; *replaced in whole or in the part the line names*; *do not formalize as stated*; *quote with its errata*; *unchanged*; *named*). A line's status is shown: SR1 item 2 is *amended-by* SR3 item 25 and SR2 item 19 is *replaced-by* SR3 item 23, as the later audit says of each; both lines are quoted, with their status, and neither is applied silently.
+- **Cautions** (§ Cautions) are inventory items, each quoted whole; a row lists the cautions that govern it.
+- **Never formalized as filed**: the twelve superseded entries of `plans/FS129-derivation.md` have no row; § FS-129's compositions lists each with its superseding form.
+
+**Notes of `plans/FS112-derivation.md`'s errata section that name no entry** (quoted by the script; item 8 governs every FS-112 `*Kernel:*` line that reads "stub — with FS-114"):
+
+<!--q SECTION plans/FS112-derivation.md#7-->
+> 7. **Row 135's "Not claimed" line** — "a chain end at a unit arc bounding one horn only" — is walked: at a stuck vertex of `M*` the four horn-arc
+>    conditions are equivalent (FS114-CV-HD, two minds). *Source:* CV §2.4.
+
+<!--q SECTION plans/FS112-derivation.md#8-->
+> 8. **Every "*Kernel:* stub — with FS-114"** above now reads **"stub — with FS-116"**: FS-114 closed undecided (2026-09-28) with D6 (a Lean skeleton of
+>    Q-full's statement) still held for Kooshi, and the NO's successor is FS-116 (`plans/STUB-local-exclusion.md`). *Source:* `plans/FS114-C-close.md` stage 6.
+
+**Merge lines whose status is not `applied`:** SR1-6.2 item 2 (amended-by:SR3-5.1-25); SR2-4.3 item 19 (replaced-by:SR3-5.1-23).
+
+## Cautions
+
+### C13
+<a id="c13"></a>
+**the conditional seeds (item 13)** — `plans/FS129-close-inventory.md:66`. **Rows it governs:** `FS116-Y4-SPOKE`, `TC1-SQRT3-DYADIC`, `TC1-STANDING-FIVE`.
+
+<!--q C13 text-->
+> 13. **Ruling — the Lean order keeps all 78 seeds**, the three `none`-led handoffs that name de Bruijn on a later line (FS116-Y4-SPOKE,
+>     TC1-SQRT3-DYADIC, TC1-STANDING-FIVE) flagged as conditional: each crosses "with" another result or "if" something is formalized. The
+>     backlog session decides; FS129-L1 quotes the handoff text. Alternative: drop them to match the plan's 77. Why: dropping hides a
+>     condition the backlog needs. Confidence: high.
+
+### C109
+<a id="c109"></a>
+**FS89-S0A-2 and its siblings are false as written (item 109)** — `plans/FS129-close-inventory.md:418`. **Rows it governs:** `FS89-S0A-2`, `FS89-S0A-10`, `FS89-CL2`.
+
+<!--q C109 text-->
+> 109. **Held, for the Lean backlog** (SA1's HELD): FS89-S0A-2 is on FS-87's kernel-candidate list and is unprovable as written; if the backlog
+>      takes it before FS129-Z1 files the erratum, its statement is quoted with `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`. FS129-L1 carries this.
+
+### C116
+<a id="c116"></a>
+**the errata the index cannot see (item 116)** — `plans/FS129-close-inventory.md:447`. **Rows it governs:** `FS112-L60`, `FS112-C-ENDS`, `FS112-C-DOUBLE`, `FS112-N3-BASE`, `FS114-N2-ENDS`, `FS114-N3-JOINT`, `FS114-N7-3T`.
+
+<!--q C116 text-->
+> 116. **Correction owed, the backlog's — errata the index cannot see** (SR2 § 2.4): FS129-L1 must quote FS112-L60, FS112-C-ENDS, FS112-C-DOUBLE,
+>      FS112-N3-BASE, FS114-N2-ENDS, FS114-N3-JOINT and FS114-N7-3T together with the errata filed under them, or the backlog formalizes a false or
+>      superseded form. For FS129-L1's brief.
+
+### C118
+<a id="c118"></a>
+**the rows that left the order (item 118)** — `plans/FS129-close-inventory.md:454`. **Rows it governs:** `FS106-COMP`, `FS106-REM`, `FS106-EQ`, `FS111-C-HULL-SO`, `FS111-M2-DISC7`, `FS111-V0-CLEAN`, `FS111-C1-PW`, `FS111-M-COVER-SC`, `FS111-M-HULL2`, `FS121-D4-HOLE`, `FS111-M3-BAND`, `FS111-M3-FIXCONV`, `FS111-M3-HC`, `FS111-M3-IRREG`, `FS121-DB1-L6`, `FS112-BUDGET2`, `FS114-N3-JOINT`, `FS114-Y-EDGE`, `FS114-Y5-PINALL`, `FS114-K1`, `FS121-DB1-L7`, `FS121-V2-EROSION-DIAM`, `FS121-V3-CPI`, `FS121-V2-VT-W`, `FS121-D1-PENCILWIN`, `FS121-D2-PERFIN`.
+
+<!--q C118 text-->
+> 118. **Tool defect, item 99 extended** (SR2): 13 more false and 6 more reversed edges inside lane-R cycles (companion mentions, scope markers,
+>      "members", refuted entries naming their corrected forms, "It rests on X" read backwards), 3 more route edges; with SR1's sort, lane-R cycles
+>      11 → 2 and the Lean order 197 → 171 rows (160 on first routes). For FS129-Z2. **Held for the backlog session** (SR2): the rows that leave the
+>      Lean order — FS106-EQ, -COMP, -REM, FS111-V0-CLEAN, -C1-PW among them — leave because no seed rests on them, "which is not the same as having
+>      no value".
+
+*Each row under § Left the order carries this caution.*
+
+### C126
+<a id="c126"></a>
+**DOUBLETIP is not to replace V6-HUG's colour step (item 126)** — `plans/FS129-close-inventory.md:491`. **Rows it governs:** `FS116-V6-HUG`, `FS116-Y4-EMPTY`, `FS129-MR1-DOUBLETIP`, `FS129-SR3-EMPTY-NS`.
+
+<!--q C126 text-->
+> 126. **Caution for FS129-L1** (SR3): SR1's list item 2, "DOUBLETIP in place of V6-HUG", would lose EMPTY-NS — DOUBLETIP's step 3 uses one cone per
+>      tile at the hubs; keep V6-HUG's own colour step for the Γ-free ring. For FS129-Z2 and FS129-L1.
+
+### C131
+<a id="c131"></a>
+**the same, as a statement defect (item 131)** — `plans/FS129-close-inventory.md:510`. **Rows it governs:** `FS116-V6-HUG`, `FS116-Y4-EMPTY`, `FS129-MR1-DOUBLETIP`, `FS129-SR3-EMPTY-NS`.
+
+<!--q C131 text-->
+> 131. **Statement defect for the Lean list, SR3's L1 item 25** (with item 126): SR1's L1 item 2 ("DOUBLETIP in place of V6-HUG, and of EMPTY's
+>      double-tip step") would confine EMPTY to the simple class; keep V6-HUG's colour step for EMPTY-NS. SR3 asked whether this goes to the backlog
+>      session before FS129-L1's brief: **ruling** — no; FS129-L1 carries it as a line of the backlog's input, which is where the backlog reads.
+>      Alternative: a separate note to the backlog session. Why: one place for the backlog's instructions. Confidence: high.
+
+### C137
+<a id="c137"></a>
+**two merged forms omit a clause of their source (item 137)** — `plans/FS129-close-inventory.md:536`. **Rows it governs:** `FS129-SR1-BENDLE3`, `FS129-OR1-BEND3`, `FS129-SR1-RINGBAND`, `FS129-OA1-RINGWIND`.
+
+<!--q C137 text-->
+> 137. **Wording defects for the Lean list** (Z1): FS129-SR1-BENDLE3 omits FS129-OR1-BEND3's tile clause (BENDANY carries it); FS129-SR1-RINGBAND
+>      omits FS129-OA1-RINGWIND's periodicity clauses; no merged form drops a hypothesis its source needed. For FS129-L1, with items 116, 126, 131.
+
+### C139
+<a id="c139"></a>
+**verifier records named for promotion, not counted (item 139)** — `plans/FS129-close-inventory.md:541`. **Rows it governs:** `J45-N1`, `J45-N2`, `J45-SI-4`, `J45-SI-5`, `FS84-S1-S1e`.
+
+<!--q C139 text-->
+> 139. **Ruling — no grade moves from verifier records the sources do not count** (Z1's HELD: J46 on J45-N1, -N2, -SI-4, -SI-5; FS84-S1V on S1b-i,
+>      S1b-ii blind and S1e non-blind): each lost theorem stays at its source's grade; the verifier records are named in the entries and listed
+>      for the Lean backlog, the promotion path under Workflow 3.1 (plan § 7). Alternative: Keryx rules each record against the rules of its
+>      time now. Why: the plan says a grade moves only where a second route already on record meets those rules, and judging that for six
+>      records is the backlog's or a ruling job's, not a filing's. Confidence: high.
+
+## The order
+
+### 1. FS106-DIAM
+<!--row FS106-DIAM plans/FS106-derivation.md:155-->
+**Address** `plans/FS106-derivation.md:155` · **Role** upstream · **Era** R · **Was** 2 in `lean-order.md` · **Upstream ids** none
+<!--needs FS106-DIAM: -->
+
+<!--q FS106-DIAM statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> A connected set with no two points at distance 1 has diameter ≤ 1; two same-colour regions whose closures meet have union of diameter ≤ 1; an open set avoiding distance 1 has ω(p) disjoint from it for every p in its closure.
+
+<!--q FS106-DIAM not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-DIAM grade-->
+**Grade as filed:**
+> hand; two minds, one blind: V2, SB (L0, L0′)
+
+<!--q FS106-DIAM minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-DIAM handoff-->
+**`*Kernel:*` line as filed:**
+> stub — small, a natural first FS-101 leaf.
+
+<!--q FS106-DIAM merge@SR2-4.3-9-->
+**Merge note — to formalize + replaced in whole or in the part the line names** (SR2-4.3 item 9, `plans/FS129-SR2-audit.md:467-469`; status applied):
+> 9. **FS129-SR2-CLOSURE** (as FS111-M2-INT's corollary for open sets, or by V0-CLOSE's translation argument) in place of **FS106-DIAM (iii)**, **FS111-V0-CLOSE** and **FS116-V5-NE1's first clause**; and **FS106-DIAM (i)** (a connected set with no unit pair has diameter at most 1) once, in place of the connectedness step inside FS116-V5-NE1's "in particular", FS106-TS-C, FS116-V4-DICHOTOMY's "A ~ A" and FS111-V0-CLEAN's diameter step.
+
+### 2. FS106-L
+<!--row FS106-L plans/FS106-derivation.md:160-->
+**Address** `plans/FS106-derivation.md:160` · **Role** upstream · **Era** R · **Was** 3 in `lean-order.md` · **Upstream ids** none
+<!--needs FS106-L: -->
+
+<!--q FS106-L statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Lemma (L): a two-colour change point of a two-coloured open set with no monochrome unit has its unit circle outside the set.
+
+<!--q FS106-L not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-L grade-->
+**Grade as filed:**
+> hand; one mind: V3
+
+<!--q FS106-L minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-L handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+### 3. FS106-SUP
+<!--row FS106-SUP plans/FS106-derivation.md:207-->
+**Address** `plans/FS106-derivation.md:207` · **Role** upstream · **Era** R · **Was** 6 in `lean-order.md` · **Upstream ids** none
+<!--needs FS106-SUP: -->
+
+<!--q FS106-SUP statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> The tight and slack suprema coincide: µ₆⁰ = lim µ₆(ε) = lim µ₆^tile(ε) = lim µ₆^per(ε); moreover µ₆^per(ε) = µ₆(ε) at each ε, and µ₆⁰ and µ₆(ε) are attained (by a stationary family and by almost every sample of it).
+
+<!--q FS106-SUP not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-SUP grade-->
+**Grade as filed:**
+> hand; two minds, one blind: TQ, QB (stronger)
+
+<!--q FS106-SUP minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-SUP handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+<!--q FS106-SUP merge@SR2-4.3-11-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 11, `plans/FS129-SR2-audit.md:472-473`; status applied):
+> 11. **FS129-SR2-SUPK** (every `k`) in place of **FS106-SUP** (six); FS106-EQ's (c) ⟺ (d) as its corollary at the value 1, and **FS106-COMP's first clause** as FS106-EQ's (c) ⟹ (a), stated at every `k`.
+
+### 4. FS106-TS-C
+<!--row FS106-TS-C plans/FS106-derivation.md:143-->
+**Address** `plans/FS106-derivation.md:143` · **Role** upstream · **Era** R · **Was** 7 in `lean-order.md` · **Upstream ids** FS106-DIAM
+<!--needs FS106-TS-C: FS106-DIAM-->
+
+<!--q FS106-TS-C statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> A chain of same-colour regions of an almost-everywhere-proper map whose closures meet in sequence has diameter ≤ 1.
+
+<!--q FS106-TS-C not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-TS-C grade-->
+**Grade as filed:**
+> hand; two minds, one blind: TS, SB (L0′, a different route)
+
+<!--q FS106-TS-C minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-TS-C handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+<!--q FS106-TS-C merge@SR2-4.3-9-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 9, `plans/FS129-SR2-audit.md:467-469`; status applied):
+> 9. **FS129-SR2-CLOSURE** (as FS111-M2-INT's corollary for open sets, or by V0-CLOSE's translation argument) in place of **FS106-DIAM (iii)**, **FS111-V0-CLOSE** and **FS116-V5-NE1's first clause**; and **FS106-DIAM (i)** (a connected set with no unit pair has diameter at most 1) once, in place of the connectedness step inside FS116-V5-NE1's "in particular", FS106-TS-C, FS116-V4-DICHOTOMY's "A ~ A" and FS111-V0-CLEAN's diameter step.
+
+### 5. FS106-TS-T
+<!--row FS106-TS-T plans/FS106-derivation.md:151-->
+**Address** `plans/FS106-derivation.md:151` · **Role** upstream · **Era** R · **Was** 8 in `lean-order.md` · **Upstream ids** FS106-TS-C
+<!--needs FS106-TS-T: FS106-TS-C-->
+
+<!--q FS106-TS-T statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Every point of an almost-everywhere-proper map has a point of chromaticity ≥ 3 within 1/√2 + ε (TS: within 1); with Condition 5 it is trichromatic, with Condition 6 of degree 3 — closing S–V Lemma 4 (a) under Conditions 5–6.
+
+<!--q FS106-TS-T not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-TS-T grade-->
+**Grade as filed:**
+> hand; two minds, one blind: TS (hull growth), SB (Lebesgue's covering theorem, sharper)
+
+<!--q FS106-TS-T minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-TS-T handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+<!--q FS106-TS-T merge@SR2-4.3-12-->
+**Merge note — to formalize** (SR2-4.3 item 12, `plans/FS129-SR2-audit.md:474-474`; status applied):
+> 12. **FS106-TS-T** in place of **FS112-DISC1** (FS129-SR2-DISC1TS).
+
+### 6. FS106-WO
+<!--row FS106-WO plans/FS106-derivation.md:73-->
+**Address** `plans/FS106-derivation.md:73` · **Role** upstream · **Era** R · **Was** 9 in `lean-order.md` · **Upstream ids** FS106-L
+<!--needs FS106-WO: FS106-L-->
+
+<!--q FS106-WO statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> `[Woodall1973]` Thm 6 (maps need six): step 6 is a GAP (it rests on the assertion Townsend's ⅔π counterexample refutes), repaired by Townsend's ⅓π lemma; Woodall's step-4 lemma holds for arcs strictly longer than ⅔π, by lemma (L).
+
+<!--q FS106-WO not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-WO grade-->
+**Grade as filed:**
+> hand; one mind: V3; steps 2, 3, 5, 7 in outline, step 8 unchecked
+
+<!--q FS106-WO minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-WO handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+### 7. FS106-TW
+<!--row FS106-TW plans/FS106-derivation.md:67-->
+**Address** `plans/FS106-derivation.md:67` · **Role** upstream · **Era** R · **Was** 10 in `lean-order.md` · **Upstream ids** FS106-L, FS106-WO
+<!--needs FS106-TW: FS106-L,FS106-WO-->
+
+<!--q FS106-TW statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> `[Townsend1981]` states "Every 5-coloured map in the plane contains a monochrome unit" and a lemma (constant π/3), with no proof of the theorem; the lemma is TRUE. Townsend's 1979 manuscript proves the ⅓π lemma, his Thm 2 and the Corollaries of Thms 3–4 region-only (Thm 4 itself GAP in its generality, petal-shaped sets; its Corollary repaired, sketch), and his Thm 5 (maps need six) is a GAP at simplification (c), which Woodall's steps 2, 3, 5 fill.
+
+<!--q FS106-TW not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-TW grade-->
+**Grade as filed:**
+> hand; "no proof": three readers (V, VB, V3); the lemma one mind in general (V3), two on a one-sided annulus (VB blind); the manuscript one mind (V3); the fill in outline
+
+<!--q FS106-TW minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-TW handoff-->
+**`*Kernel:*` line as filed:**
+> declined until the fill is walked.
+
+### 8. FS106-AE-MAP6
+<!--row FS106-AE-MAP6 plans/FS106-derivation.md:121-->
+**Address** `plans/FS106-derivation.md:121` · **Role** upstream · **Era** R · **Was** 11 in `lean-order.md` · **Upstream ids** FS106-TS-T, FS106-TW
+<!--needs FS106-AE-MAP6: FS106-TS-T,FS106-TW-->
+
+<!--q FS106-AE-MAP6 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> No map-type colouring (Conditions 2–4) with five colours is almost-everywhere proper, modulo Townsend's simplification (c) as filled by Woodall's steps 2, 3, 5; no step uses "boundaries of measure 0", which only identifies D-AEMAP with Leb ⊗ σ-a.e. properness.
+
+<!--q FS106-AE-MAP6 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-AE-MAP6 grade-->
+**Grade as filed:**
+> hand; one mind per link: TS (the reduction to Townsend's annulus lemma), V3 (the lemma and Thms 1–2 region-only); the fill in outline
+
+<!--q FS106-AE-MAP6 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-AE-MAP6 handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+### 9. FS110-N3-CONF
+<!--row FS110-N3-CONF plans/FS110-derivation.md:57-->
+**Address** `plans/FS110-derivation.md:57` · **Role** upstream · **Era** R · **Was** — in `lean-order.md` · **Upstream ids** none
+<!--needs FS110-N3-CONF: -->
+
+<!--q FS110-N3-CONF statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Contacts of a colour on `ω(v)` are in-type or out-type; directions of `c`-sectors lie in `D_c(v)`; compact sets inside `int D_c(v)` are clear near `v`; tangent in- and out-contacts are upward closed.
+
+<!--q FS110-N3-CONF not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS110-N3-CONF grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N3; NB3
+
+<!--q FS110-N3-CONF minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS110-N3-CONF handoff-->
+**`*Kernel:*` line as filed:**
+> with FS110-CLOSURE.
+
+### 10. FS110-N3-DEG
+<!--row FS110-N3-DEG plans/FS110-derivation.md:61-->
+**Address** `plans/FS110-derivation.md:61` · **Role** upstream · **Era** R · **Was** — in `lean-order.md` · **Upstream ids** FS110-N3-CONF
+<!--needs FS110-N3-DEG: FS110-N3-CONF-->
+
+<!--q FS110-N3-DEG statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> `int D_c(v)` is empty only in Woodall's cone: out-type `c`-contacts at both `v ± n`, every `c`-sector a cusp horn along `±a` with bounding curvatures in `(−1, 1)`.
+
+<!--q FS110-N3-DEG not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS110-N3-DEG grade-->
+**Grade as filed:**
+> hand; three minds, two blind: N3; NB3; NB4
+
+<!--q FS110-N3-DEG minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS110-N3-DEG handoff-->
+**`*Kernel:*` line as filed:**
+> with FS110-CLOSURE.
+
+### 11. FS110-N4-SHADOW
+<!--row FS110-N4-SHADOW plans/FS110-derivation.md:70-->
+**Address** `plans/FS110-derivation.md:70` · **Role** upstream · **Era** R · **Was** — in `lean-order.md` · **Upstream ids** none
+<!--needs FS110-N4-SHADOW: -->
+
+<!--q FS110-N4-SHADOW statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> The shadow near `v` of a tile at `N = v + n` beyond an arc tangent to `a` at `N` is one side of the circle through `v` concentric with that arc; curvature `f(λ) = λ/(1 + λ)` going down, `f̃(υ) = υ/(1 − υ)` going up; a horn is shadowed by its flanks only through out-type tiles at `S′` and `N` tangent to `a` (N4-FLANK).
+
+<!--q FS110-N4-SHADOW not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS110-N4-SHADOW grade-->
+**Grade as filed:**
+> hand; four minds, two blind: N4; Y4 as Y4-MU; NB4; YB4
+
+<!--q FS110-N4-SHADOW minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS110-N4-SHADOW handoff-->
+**`*Kernel:*` line as filed:**
+> with FS110-CLOSURE.
+
+### 12. FS110-N4-SHAVE
+<!--row FS110-N4-SHAVE plans/FS110-derivation.md:75-->
+**Address** `plans/FS110-derivation.md:75` · **Role** upstream · **Era** R · **Was** — in `lean-order.md` · **Upstream ids** FS110-N4-SHADOW
+<!--needs FS110-N4-SHAVE: FS110-N4-SHADOW-->
+
+<!--q FS110-N4-SHAVE statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> A horn tip can be recoloured by its two flank colours, valid and keeping Condition 5, unless doubly shadowed (`σ_h < σ_g`); two horns of one colour on one ray merge (N4-RAY).
+
+<!--q FS110-N4-SHAVE not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS110-N4-SHAVE grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N4; NB4
+
+<!--q FS110-N4-SHAVE minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS110-N4-SHAVE handoff-->
+**`*Kernel:*` line as filed:**
+> with FS110-CLOSURE.
+
+### 13. FS110-N4-STUCK
+<!--row FS110-N4-STUCK plans/FS110-derivation.md:80-->
+**Address** `plans/FS110-derivation.md:80` · **Role** upstream · **Era** R · **Was** — in `lean-order.md` · **Upstream ids** FS110-N3-DEG, FS110-N4-SHAVE
+<!--needs FS110-N4-STUCK: FS110-N3-DEG,FS110-N4-SHAVE-->
+
+<!--q FS110-N4-STUCK statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> At a vertex admitting no merge, ray merge or shave, a two-sector colour has exactly two horns `±a`, the vertex has degree 4, and the antipodes carry `P_cl(N) = {c, h, r}`, `P_cl(S′) = {c, g, r′}` with double sectors; in a terminal map a stuck vertex forces stuck vertices at unit spacing along the normal line, bi-infinite (N4-PROP).
+
+<!--q FS110-N4-STUCK not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS110-N4-STUCK grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N4; NB4
+
+<!--q FS110-N4-STUCK minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS110-N4-STUCK handoff-->
+**`*Kernel:*` line as filed:**
+> with FS110-CLOSURE.
+
+### 14. FS110-N4-FIN
+<!--row FS110-N4-FIN plans/FS110-derivation.md:84-->
+**Address** `plans/FS110-derivation.md:84` · **Role** upstream · **Era** R · **Was** — in `lean-order.md` · **Upstream ids** FS110-N4-SHADOW, FS110-N4-STUCK
+<!--needs FS110-N4-FIN: FS110-N4-SHADOW,FS110-N4-STUCK-->
+
+<!--q FS110-N4-FIN statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> No bi-infinite sequence `−1 < λ_k < υ_k < 1` with `λ_k ≤ f(λ_{k+1})` and `f̃(υ_{k−1}) ≤ υ_k`.
+
+<!--q FS110-N4-FIN not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS110-N4-FIN grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N4; NB4
+
+<!--q FS110-N4-FIN minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS110-N4-FIN handoff-->
+**`*Kernel:*` line as filed:**
+> with FS110-CLOSURE — an exact inequality chain, a leaf.
+
+### 15. FS110-W-MERGE
+<!--row FS110-W-MERGE plans/FS110-derivation.md:51-->
+**Address** `plans/FS110-derivation.md:51` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** — in `lean-order.md` · **Upstream ids** FS110-N3-CONF
+<!--needs FS110-W-MERGE: FS110-N3-CONF-->
+
+<!--q FS110-W-MERGE statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Woodall's step 3 almost everywhere for curved arcs: if `int D_c(v)` is nonempty, two non-adjacent `c`-sectors at `v` are joined by recolouring the gap inside `D_c(v)` near `v`; validity and Condition 5 kept, types only shrink.
+
+<!--q FS110-W-MERGE not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS110-W-MERGE grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N3; NB3
+
+<!--q FS110-W-MERGE minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS110-W-MERGE handoff-->
+**`*Kernel:*` line as filed:**
+> with FS110-CLOSURE.
+
+### 16. FS111-C-FILL
+<!--row FS111-C-FILL plans/FS111-derivation.md:252-->
+**Address** `plans/FS111-derivation.md:252` · **Role** SEED · **Era** R · **Was** 12 in `lean-order.md` · **Upstream ids** none
+<!--needs FS111-C-FILL: -->
+
+<!--q FS111-C-FILL statement-->
+**Statement as filed:**
+> if x is j-free with |S̃_j ∩ A_η(x)| = 0, the fill move on B(x, η/2) with colour j keeps the colouring a.e.-proper with k colours
+
+<!--q FS111-C-FILL not_claimed-->
+**Not claimed:**
+> that fills saturate (fills create no contact for the filled colour, FS111-W-FILL-FREE)
+
+<!--q FS111-C-FILL grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-C-FILL minds-->
+**Minds as filed:**
+> 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: the same measure estimate (a third reading, FS111-M § 1.4, sighted of V0)
+
+<!--q FS111-C-FILL handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain: a short measure estimate once D-NF is in Lean
+
+### 17. FS111-C1-UNIF
+<!--row FS111-C1-UNIF plans/FS111-derivation.md:18-->
+**Address** `plans/FS111-derivation.md:18` · **Role** SEED · **Era** R · **Was** 22 in `lean-order.md` · **Upstream ids** FS106-SUP
+<!--needs FS111-C1-UNIF: FS106-SUP-->
+
+<!--q FS111-C1-UNIF statement-->
+**Statement as filed:**
+> 1 − lim_{ε→0} µ₆(ε) = inf_K δ₀(K); hence χ_m⁰(ℝ²) ≥ 7 ⟺ inf_K δ₀(K) > 0
+
+<!--q FS111-C1-UNIF not_claimed-->
+**Not claimed:**
+> any value of inf_K δ₀(K); that δ₀(K) is attained; that δ₀ tends to 0 or not
+
+<!--q FS111-C1-UNIF grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-C1-UNIF minds-->
+**Minds as filed:**
+> 2 — blind to: FS111-P's stages 2 and 5 until V0's verdicts were committed (08c4d8f3); method: V0 rasterised by pixelation with closed cells, P by a density threshold (stage 3b's correction)
+
+<!--q FS111-C1-UNIF handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain (FS-113, FS-101): the statement with µ₆ and 𝓜_K defined; no Lean object for either yet
+
+### 18. FS111-M-R7
+<!--row FS111-M-R7 plans/FS111-derivation.md:347-->
+**Address** `plans/FS111-derivation.md:347` · **Role** SEED · **Era** R · **Was** 14 in `lean-order.md` · **Upstream ids** none
+<!--needs FS111-M-R7: -->
+
+<!--q FS111-M-R7 statement-->
+**Statement as filed:**
+> R7 — Reuleaux triangles of width 1 on the up triangles of the unit triangular lattice Λ, coloured by the four cosets of 2Λ, and the cusped down triangles coloured by the three cosets of M = ⟨(0, √3), (3/2, √3/2)⟩ — is a.e.-proper, tight and saturated (every essential boundary point is a contact point for each of its colours); every boundary is a unit arc centred at a lattice point that carries both its side colours
+
+<!--q FS111-M-R7 not_claimed-->
+**Not claimed:**
+> saturation with partners of positive density (FALSE at the down arcs, FS111-VMW-R7-PPLUS); any six-colour analogue
+
+<!--q FS111-M-R7 grade-->
+**Grade as filed:**
+> computed over: one fundamental domain of Λ, 7 classes, exact in ℚ(√3), with the hand reduction of the plane to it
+
+<!--q FS111-M-R7 minds-->
+**Minds as filed:**
+> 2 — blind to: FS111-M's record until VMW's verdicts were committed (3ea1d5ab); method: M by two distance engines agreeing (its own and the frozen FS112-Y engine), VMW by hand proofs and its own exact certificates
+
+<!--q FS111-M-R7 handoff-->
+**Handoff as filed:**
+> de Bruijn — a periodic tiling in ℚ(√3) with an exact certificate; kernel-checkable now, not urgent (a control object)
+
+### 19. FS111-M-SATC
+<!--row FS111-M-SATC plans/FS111-derivation.md:316-->
+**Address** `plans/FS111-derivation.md:316` · **Role** SEED · **Era** R · **Was** 15 in `lean-order.md` · **Upstream ids** FS111-C-FILL
+<!--needs FS111-M-SATC: FS111-C-FILL-->
+
+<!--q FS111-M-SATC statement-->
+**Statement as filed:**
+> every a.e.-proper k-colouring lies below a maximal admissible cover (k measurable sets with null unit pairs, maximal under inclusion up to null sets, union of full measure), and every maximal cover's supports satisfy ℝ² = int F_j ∪ (F_j + S¹) for each j; a selection from a maximal cover is an a.e.-proper k-colouring
+
+<!--q FS111-M-SATC not_claimed-->
+**Not claimed:**
+> that a selection is saturated (FS111-M2-NOSEL); that the classes are regular (FS111-M3-IRREG)
+
+<!--q FS111-M-SATC grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-M-SATC minds-->
+**Minds as filed:**
+> 1 — FS111-M (FS111-M2-COV re-reads it, sighted)
+
+<!--q FS111-M-SATC handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain: Zorn on admissible covers is short once a.e.-properness is in Lean
+
+### 20. FS111-M2-COV
+<!--row FS111-M2-COV plans/FS111-derivation.md:822-->
+**Address** `plans/FS111-derivation.md:822` · **Role** SEED · **Era** R · **Was** 16 in `lean-order.md` · **Upstream ids** FS111-M-SATC
+<!--needs FS111-M2-COV: FS111-M-SATC-->
+
+<!--q FS111-M2-COV statement-->
+**Statement as filed:**
+> a k-tuple of measurable sets is a maximal admissible cover iff each coordinate is a MUA set and their union has full measure
+
+<!--q FS111-M2-COV not_claimed-->
+**Not claimed:**
+> that a maximal cover's classes are regular (FS111-M3-IRREG) or disjoint (DISC7 has lenses)
+
+<!--q FS111-M2-COV grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-M2-COV minds-->
+**Minds as filed:**
+> 1 — FS111-M2
+
+<!--q FS111-M2-COV handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain, with FS111-M-SATC
+
+### 21. FS111-M2-ZERO
+<!--row FS111-M2-ZERO plans/FS111-derivation.md:839-->
+**Address** `plans/FS111-derivation.md:839` · **Role** SEED · **Era** R · **Was** 18 in `lean-order.md` · **Upstream ids** none
+<!--needs FS111-M2-ZERO: -->
+
+<!--q FS111-M2-ZERO statement-->
+**Statement as filed:**
+> a measurable A is a MUA set iff A = {φ_A = 0} a.e., where φ_A(p) = σ{w ∈ S¹ : p + w ∈ A}: unit-avoiding is φ_A = 0 a.e. on A, maximal is φ_A > 0 a.e. off A (a measurable independent dominating set of the unit-distance graph)
+
+<!--q FS111-M2-ZERO not_claimed-->
+**Not claimed:**
+> that {φ_A = 0} is closed or regular
+
+<!--q FS111-M2-ZERO grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-M2-ZERO minds-->
+**Minds as filed:**
+> 1 — FS111-M2
+
+<!--q FS111-M2-ZERO handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain
+
+### 22. FS111-V0-CLOSE
+<!--row FS111-V0-CLOSE plans/FS111-derivation.md:53-->
+**Address** `plans/FS111-derivation.md:53` · **Role** upstream · **Era** R · **Was** 19 in `lean-order.md` · **Upstream ids** none
+<!--needs FS111-V0-CLOSE: -->
+
+<!--q FS111-V0-CLOSE statement-->
+**Statement as filed:**
+> in a D-AEMAP-proper map, a closure point of a colour-j region is never at distance 1 from an open colour-j point
+
+<!--q FS111-V0-CLOSE not_claimed-->
+**Not claimed:**
+> anything about boundary points of different colours
+
+<!--q FS111-V0-CLOSE grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-V0-CLOSE minds-->
+**Minds as filed:**
+> 1 — FS111-V0
+
+<!--q FS111-V0-CLOSE handoff-->
+**Handoff as filed:**
+> none — a one-line lemma used by FS111-V0-CLEAN and VM2-FACE; crosses with them
+
+<!--q FS111-V0-CLOSE merge@SR2-4.3-9-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 9, `plans/FS129-SR2-audit.md:467-469`; status applied):
+> 9. **FS129-SR2-CLOSURE** (as FS111-M2-INT's corollary for open sets, or by V0-CLOSE's translation argument) in place of **FS106-DIAM (iii)**, **FS111-V0-CLOSE** and **FS116-V5-NE1's first clause**; and **FS106-DIAM (i)** (a connected set with no unit pair has diameter at most 1) once, in place of the connectedness step inside FS116-V5-NE1's "in particular", FS106-TS-C, FS116-V4-DICHOTOMY's "A ~ A" and FS111-V0-CLEAN's diameter step.
+
+### 23. FS111-V0-ID1
+<!--row FS111-V0-ID1 plans/FS111-derivation.md:296-->
+**Address** `plans/FS111-derivation.md:296` · **Role** SEED · **Era** R · **Was** 23 in `lean-order.md` · **Upstream ids** none
+<!--needs FS111-V0-ID1: -->
+
+<!--q FS111-V0-ID1 statement-->
+**Statement as filed:**
+> I-D1 holds for every a.e.-proper measurable colouring: if y ∈ S̃_j and d̄_j(x) > 0 then |x − y| ≠ 1
+
+<!--q FS111-V0-ID1 not_claimed-->
+**Not claimed:**
+> anything at points of density 0
+
+<!--q FS111-V0-ID1 grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-V0-ID1 minds-->
+**Minds as filed:**
+> 1 — FS111-V0 (FS-103's D1 is a second derivation of the tight case; whether V0 saw it first is not recorded, so it is not counted)
+
+<!--q FS111-V0-ID1 handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain
+
+### 24. FS111-C-HULL
+<!--row FS111-C-HULL plans/FS111-derivation.md:267-->
+**Address** `plans/FS111-derivation.md:267` · **Role** SEED · **Era** R · **Was** 24 in `lean-order.md` · **Upstream ids** FS111-V0-ID1
+<!--needs FS111-C-HULL: FS111-V0-ID1-->
+
+<!--q FS111-C-HULL statement-->
+**Statement as filed:**
+> in a tight a.e.-proper k-colouring in D-NF, for C ⊆ S̃_j path-connected and x ∈ A*_j, either |x − c| < 1 for every c ∈ C or |x − c| > 1 for every c ∈ C; the form with sup_{c∈C}|x − c| < 1 or dist(x, C) > 1 holds when C is compact
+
+<!--q FS111-C-HULL not_claimed-->
+**Not claimed:**
+> A*_j ⊆ {x : sup_{c∈C}|x − c| < 1} ∪ {x : dist(x, C) > 1} for non-compact C — refuted (FS111-C-HULL-SO)
+
+<!--q FS111-C-HULL grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-C-HULL minds-->
+**Minds as filed:**
+> 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: the same interval argument; M re-derived it sighted (M-HULL1)
+
+<!--q FS111-C-HULL handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain, with FS111-V0-ID1
+
+<!--q FS111-C-HULL merge@SR2-4.3-10-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 10, `plans/FS129-SR2-audit.md:470-471`; status applied):
+> 10. **FS129-SR2-HULLSET** in place of **FS111-C-HULL** (one measurable set with null unit pairs; no colouring, tightness or normal form). FS111-M-HULL2 over it; FS116-V4-DICHOTOMY's first clause is HULL2's case for two open tiles.
+
+### 25. FS111-M-HALF
+<!--row FS111-M-HALF plans/FS111-derivation.md:555-->
+**Address** `plans/FS111-derivation.md:555` · **Role** upstream · **Era** R · **Was** 26 in `lean-order.md` · **Upstream ids** FS111-C-HULL
+<!--needs FS111-M-HALF: FS111-C-HULL-->
+
+<!--q FS111-M-HALF statement-->
+**Statement as filed:**
+> at a point x saturated for j, every path-connected piece of S̃_j with x in its closure lies in a closed half-plane in every blow-up at x, so has upper density at most 1/2 at x: no colour takes a reflex angle at a saturated point
+
+<!--q FS111-M-HALF not_claimed-->
+**Not claimed:**
+> that the pieces' blow-ups are sectors (a cone structure at x is REG-J′'s content)
+
+<!--q FS111-M-HALF grade-->
+**Grade as filed:**
+> derived from: FS111-C-HULL
+
+<!--q FS111-M-HALF minds-->
+**Minds as filed:**
+> 1 — FS111-M
+
+<!--q FS111-M-HALF handoff-->
+**Handoff as filed:**
+> none — a structural lemma toward REG-J′
+
+### 26. FS111-M-PINCH
+<!--row FS111-M-PINCH plans/FS111-derivation.md:435-->
+**Address** `plans/FS111-derivation.md:435` · **Role** SEED · **Era** R · **Was** 28 in `lean-order.md` · **Upstream ids** FS111-C-HULL, FS111-V0-ID1
+<!--needs FS111-M-PINCH: FS111-C-HULL,FS111-V0-ID1-->
+
+<!--q FS111-M-PINCH statement-->
+**Statement as filed:**
+> at a saturated point x of an honest a.e.-proper colouring with a neighbourhood N in which only two colours a, b have positive measure and each is a.e. one connected open set of density points (H1, H2): either N is split by one unit circle T₁(y) with a inside and b outside or the reverse, y a contact of both colours, or two open unit discs tangent at x from opposite sides lie a.e. in S_a and in S_b; the case (in, in) is impossible; no positive density of the partner is needed
+
+<!--q FS111-M-PINCH not_claimed-->
+**Not claimed:**
+> the same without (H1) or (H2) (C-HULL-REG as stated is a GAP there); anything at points of the singular set Σ
+
+<!--q FS111-M-PINCH grade-->
+**Grade as filed:**
+> derived from: FS111-C-HULL
+
+<!--q FS111-M-PINCH minds-->
+**Minds as filed:**
+> 3 — blind to: each other's records (M and W, competitors; VMW before 3ea1d5ab); method: M by M-HULL1 at density points (no partner density); W with H-DEN applying C-HULL at the partner itself; VMW with one-sidedness (H2′) — its stage-1 GAP at cusp partners withdrawn on reading M's Step 1
+
+<!--q FS111-M-PINCH handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain: the central lemma of route M, with (H1), (H2) stated and its not-claimed line kept
+
+<!--q FS111-M-PINCH note@455-->
+**dated note filed under the entry (`plans/FS111-derivation.md:455`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 4.1, row FS111 l. 442; `plans/FS129-close-inventory.md` items 129, 130):* the not-claimed form "the same without (H1) or (H2) (C-HULL-REG as stated is a GAP there); anything at points of the singular set Σ" is false as a general form: FS111-M-EXTREME (this file) shows the conclusion fails at the extreme points of every component of an honest saturated colouring, each a cusp or a point where (H1) or (H2) fails, and FS111-M-R7 is such a colouring (its up-vertices are M-EXTREME's model). What does hold at Σ, under REG-J′, is FS121-DB1-L3 (no colour occupies two sectors of positive angle; `plans/FS121-derivation.md`). The statement is untouched: the false form is a not-claimed one.
+
+### 27. FS111-M-C11
+<!--row FS111-M-C11 plans/FS111-derivation.md:457-->
+**Address** `plans/FS111-derivation.md:457` · **Role** SEED · **Era** R · **Was** 30 in `lean-order.md` · **Upstream ids** FS111-M-PINCH
+<!--needs FS111-M-C11: FS111-M-PINCH-->
+
+<!--q FS111-M-C11 statement-->
+**Statement as filed:**
+> if M-PINCH's hypotheses hold at every essential boundary point in N, then ∂_e S_a ∩ N′ (N′ ⋐ N) is a C^{1,1} curve with curvature in [−1, 1] and unit-parallel partners on both sides; a single unit arc if any of its points is of the split type
+
+<!--q FS111-M-C11 not_claimed-->
+**Not claimed:**
+> that the curve is a segment or a circular arc (REG-A's missing rung, FS111-M2-INTRAD under REG-J′); "curvature 1 exactly on arcs of kind both" (W-CURV's "exactly", not derived)
+
+<!--q FS111-M-C11 grade-->
+**Grade as filed:**
+> derived from: FS111-M-PINCH
+
+<!--q FS111-M-C11 minds-->
+**Minds as filed:**
+> 3 — blind to: each other's records, as FS111-M-PINCH; method: M from PINCH; W as W-C11 with H-DEN; VMW as VMW-HULL
+
+<!--q FS111-M-C11 handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS111-M-PINCH; the rolling-ball step would need its own formal proof or a Mathlib source
+
+### 28. FS111-M2-INT
+<!--row FS111-M2-INT plans/FS111-derivation.md:856-->
+**Address** `plans/FS111-derivation.md:856` · **Role** SEED · **Era** R · **Was** 31 in `lean-order.md` · **Upstream ids** FS111-V0-ID1
+<!--needs FS111-M2-INT: FS111-V0-ID1-->
+
+<!--q FS111-M2-INT statement-->
+**Statement as filed:**
+> for every a.e. unit-avoiding A, the topological interior of its density set, int Ã, contains no point at distance exactly 1 from cl Ã
+
+<!--q FS111-M2-INT not_claimed-->
+**Not claimed:**
+> the same for the interior of the support F of a set with null unit pairs (a GAP under the topological reading of "regular", VM2 (O2))
+
+<!--q FS111-M2-INT grade-->
+**Grade as filed:**
+> derived from: FS111-V0-ID1
+
+<!--q FS111-M2-INT minds-->
+**Minds as filed:**
+> 2 — blind to: M2's record until VM2's verdicts were committed (00fd646f); method: VM2-INT by the r³ measure of unit pairs between full discs
+
+<!--q FS111-M2-INT handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain
+
+<!--q FS111-M2-INT merge@SR2-4.3-9-->
+**Merge note — named** (SR2-4.3 item 9, `plans/FS129-SR2-audit.md:467-469`; status applied):
+> 9. **FS129-SR2-CLOSURE** (as FS111-M2-INT's corollary for open sets, or by V0-CLOSE's translation argument) in place of **FS106-DIAM (iii)**, **FS111-V0-CLOSE** and **FS116-V5-NE1's first clause**; and **FS106-DIAM (i)** (a connected set with no unit pair has diameter at most 1) once, in place of the connectedness step inside FS116-V5-NE1's "in particular", FS106-TS-C, FS116-V4-DICHOTOMY's "A ~ A" and FS111-V0-CLEAN's diameter step.
+
+### 29. FS111-M2-FIX
+<!--row FS111-M2-FIX plans/FS111-derivation.md:870-->
+**Address** `plans/FS111-derivation.md:870` · **Role** SEED · **Era** R · **Was** 32 in `lean-order.md` · **Upstream ids** FS111-C-HULL, FS111-M2-INT, FS111-M2-ZERO
+<!--needs FS111-M2-FIX: FS111-C-HULL,FS111-M2-INT,FS111-M2-ZERO-->
+
+<!--q FS111-M2-FIX statement-->
+**Statement as filed:**
+> a regular MUA set A satisfies the shadow identity int F = ℝ² ∖ (F + S¹), F = supp A: every unit circle centred in F misses int F, and every component of int F lies inside or outside each such circle
+
+<!--q FS111-M2-FIX not_claimed-->
+**Not claimed:**
+> the converse (a regular set satisfying the identity need not be maximal: FS111-M3-FIXCONV)
+
+<!--q FS111-M2-FIX grade-->
+**Grade as filed:**
+> derived from: FS111-M2-INT, FS111-M2-ZERO
+
+<!--q FS111-M2-FIX minds-->
+**Minds as filed:**
+> 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2 from VM2-INT and maximality (VM2 § 2.2)
+
+<!--q FS111-M2-FIX handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain: the identity route M's cover form rests on
+
+### 30. FS111-M2-HULLC
+<!--row FS111-M2-HULLC plans/FS111-derivation.md:913-->
+**Address** `plans/FS111-derivation.md:913` · **Role** SEED · **Era** R · **Was** 37 in `lean-order.md` · **Upstream ids** FS111-C-HULL, FS111-M-PINCH, FS111-M2-FIX
+<!--needs FS111-M2-HULLC: FS111-C-HULL,FS111-M-PINCH,FS111-M2-FIX-->
+
+<!--q FS111-M2-HULLC statement-->
+**Statement as filed:**
+> in a maximal cover with regular classes, every component of int F_j lies inside or outside every unit circle centred at a point of F_j and has an exterior ball of radius 1 at every boundary point; where the boundary is a graph it is semiconcave with constant 1; each component has finite perimeter; near any point int F ∩ B(x, r) = B(x, r) ∖ ⋃_{p ∈ F_x} T₁(p), and where F_x has finitely many components the boundary lies on the unit parallels (outer and far) of the class's own components; on the pinch set of two classes FS111-M-PINCH and FS111-M-C11 hold verbatim
+
+<!--q FS111-M2-HULLC not_claimed-->
+**Not claimed:**
+> semiconvexity with constant 1 (FALSE: DISC7, curvature 2); the unit-parallel description without "F_x has finitely many components"
+
+<!--q FS111-M2-HULLC grade-->
+**Grade as filed:**
+> derived from: FS111-M2-FIX, FS111-C-HULL
+
+<!--q FS111-M2-HULLC minds-->
+**Minds as filed:**
+> 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2-HULLC (exterior radius 1 per component; M2 used 1/2 for the perimeter argument); VM2 restored the dropped hypothesis of (iv)
+
+<!--q FS111-M2-HULLC handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain; the finite-perimeter step needs Federer 4.5.11 or a Mathlib substitute
+
+<!--q FS111-M2-HULLC merge@SR2-4.3-17-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 17, `plans/FS129-SR2-audit.md:480-480`; status applied):
+> 17. **FS111-M-COVER-SC's semiconcavity** (every maximal cover) in place of **FS111-M2-HULLC's semiconcave clause** (regular classes).
+
+### 31. FS111-V0-RESCALE
+<!--row FS111-V0-RESCALE plans/FS111-derivation.md:175-->
+**Address** `plans/FS111-derivation.md:175` · **Role** SEED · **Era** R · **Was** 38 in `lean-order.md` · **Upstream ids** none
+<!--needs FS111-V0-RESCALE: -->
+
+<!--q FS111-V0-RESCALE statement-->
+**Statement as filed:**
+> if an a.e.-proper measurable k-colouring of ℝ² exists, a tight one exists (rescale by 1 ± ε*, ε* the supremum of the slacks); so a tight a.e.-proper k-colouring exists iff χ_m⁰(ℝ²) ≤ k
+
+<!--q FS111-V0-RESCALE not_claimed-->
+**Not claimed:**
+> that every a.e.-proper colouring is tight
+
+<!--q FS111-V0-RESCALE grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-V0-RESCALE minds-->
+**Minds as filed:**
+> 1 — FS111-V0
+
+<!--q FS111-V0-RESCALE handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain (FS-113): a short lemma with D-SLACK and a.e.-properness defined
+
+### 32. FS111-C-SIX-M
+<!--row FS111-C-SIX-M plans/FS111-derivation.md:207-->
+**Address** `plans/FS111-derivation.md:207` · **Role** upstream · **Era** R · **Was** 39 in `lean-order.md` · **Upstream ids** FS106-AE-MAP6, FS111-V0-RESCALE
+<!--needs FS111-C-SIX-M: FS106-AE-MAP6,FS111-V0-RESCALE-->
+
+<!--q FS111-C-SIX-M statement-->
+**Statement as filed:**
+> FS106-AE-MAP6 ∧ REG-I₅ ⟹ χ_m⁰(ℝ²) ≥ 6; given MR (row 130), χ(ℝ²) ≥ 6
+
+<!--q FS111-C-SIX-M not_claimed-->
+**Not claimed:**
+> REG-I₅; FS106-AE-MAP6 beyond its grade
+
+<!--q FS111-C-SIX-M grade-->
+**Grade as filed:**
+> derived from: FS111-V0-RESCALE
+
+<!--q FS111-C-SIX-M minds-->
+**Minds as filed:**
+> 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: as FS111-C-SEVEN-M
+
+<!--q FS111-C-SIX-M handoff-->
+**Handoff as filed:**
+> none — a composition of open statements; it crosses with them
+
+### 33. FS111-M2-REDUCE-C
+<!--row FS111-M2-REDUCE-C plans/FS111-derivation.md:979-->
+**Address** `plans/FS111-derivation.md:979` · **Role** SEED · **Era** R · **Was** 40 in `lean-order.md` · **Upstream ids** FS106-AE-MAP6, FS111-C-SIX-M, FS111-M-R7, FS111-M-SATC, FS111-M2-COV, FS111-M2-INT, FS111-V0-CLOSE, FS111-V0-RESCALE
+<!--needs FS111-M2-REDUCE-C: FS106-AE-MAP6,FS111-C-SIX-M,FS111-M-R7,FS111-M-SATC,FS111-M2-COV,FS111-M2-INT,FS111-V0-CLOSE,FS111-V0-RESCALE-->
+
+<!--q FS111-M2-REDUCE-C statement-->
+**Statement as filed:**
+> if some maximal k-cover has regular classes whose boundaries form a locally finite plane graph (finitely many Jordan arcs in each bounded set, meeting only at endpoints: REG-J′-C_k), then REG-I_k holds; at k = 5, with FS106-AE-MAP6, χ_m⁰(ℝ²) ≥ 6, hence χ(ℝ²) ≥ 6 given MR
+
+<!--q FS111-M2-REDUCE-C not_claimed-->
+**Not claimed:**
+> REG-J′-C₅ itself; the statement with "a finite union of Jordan arcs" in place of "meeting only at endpoints" (M2 §2.3's wording, MISSTATED); that it makes the five-colour question smaller (FS111-VM2-EQ5)
+
+<!--q FS111-M2-REDUCE-C grade-->
+**Grade as filed:**
+> derived from: FS111-M2-INT, FS111-V0-CLOSE, FS111-V0-RESCALE
+
+<!--q FS111-M2-REDUCE-C minds-->
+**Minds as filed:**
+> 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2-FACE, step by step, adding the island fill and the merged points
+
+<!--q FS111-M2-REDUCE-C handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain and FS106-AE-MAP6's formalization (Townsend's (c), FS-108)
+
+### 34. FS111-W-KB-DIR
+<!--row FS111-W-KB-DIR plans/FS111-derivation.md:683-->
+**Address** `plans/FS111-derivation.md:683` · **Role** upstream · **Era** R · **Was** 41 in `lean-order.md` · **Upstream ids** FS111-M-PINCH
+<!--needs FS111-W-KB-DIR: FS111-M-PINCH-->
+
+<!--q FS111-W-KB-DIR statement-->
+**Statement as filed:**
+> at the centre of a unit arc of kind both in a saturated colouring, the inner colour's sector points toward the arc
+
+<!--q FS111-W-KB-DIR not_claimed-->
+**Not claimed:**
+> anything at an arc of kind in or out
+
+<!--q FS111-W-KB-DIR grade-->
+**Grade as filed:**
+> derived from: FS111-M-PINCH
+
+<!--q FS111-W-KB-DIR minds-->
+**Minds as filed:**
+> 1 — FS111-W
+
+<!--q FS111-W-KB-DIR handoff-->
+**Handoff as filed:**
+> none — a local rule for saturated maps
+
+### 35. FS111-W-NOBEND
+<!--row FS111-W-NOBEND plans/FS111-derivation.md:473-->
+**Address** `plans/FS111-derivation.md:473` · **Role** upstream · **Era** R · **Was** 42 in `lean-order.md` · **Upstream ids** FS111-M-C11
+<!--needs FS111-W-NOBEND: FS111-M-C11-->
+
+<!--q FS111-W-NOBEND statement-->
+**Statement as filed:**
+> a saturated two-colour interface under (H1), (H2) has no bend (corner), and its curvature is at most 1
+
+<!--q FS111-W-NOBEND not_claimed-->
+**Not claimed:**
+> that curvature equals 1 only on arcs of kind both (a case-(i) unit arc about an a-contact with b inside is locally consistent)
+
+<!--q FS111-W-NOBEND grade-->
+**Grade as filed:**
+> derived from: FS111-M-C11
+
+<!--q FS111-W-NOBEND minds-->
+**Minds as filed:**
+> 2 — blind to: W's record until VMW's verdicts were committed; method: W as corollaries of W-C11, VMW from the common form
+
+<!--q FS111-W-NOBEND handoff-->
+**Handoff as filed:**
+> none — a corollary; it crosses with FS111-M-C11
+
+### 36. FS111-W-NOREP
+<!--row FS111-W-NOREP plans/FS111-derivation.md:487-->
+**Address** `plans/FS111-derivation.md:487` · **Role** upstream · **Era** R · **Was** 43 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS111-W-KB-DIR
+<!--needs FS111-W-NOREP: FS111-M-C11,FS111-W-KB-DIR-->
+
+<!--q FS111-W-NOREP statement-->
+**Statement as filed:**
+> at a cone vertex of a saturated map without cusps, no colour occupies two sectors
+
+<!--q FS111-W-NOREP not_claimed-->
+**Not claimed:**
+> the same for general saturated colourings (GAP: (H2) at the partners is not among C11's hypotheses there)
+
+<!--q FS111-W-NOREP grade-->
+**Grade as filed:**
+> derived from: FS111-M-C11
+
+<!--q FS111-W-NOREP minds-->
+**Minds as filed:**
+> 1 — FS111-W (read sighted by VMW, who scoped it to maps)
+
+<!--q FS111-W-NOREP handoff-->
+**Handoff as filed:**
+> none — a lemma inside FS111-W-HULLREG-MAPS; it crosses with it
+
+<!--q FS111-W-NOREP note@501-->
+**dated note filed under the entry (`plans/FS111-derivation.md:501`):**
+> *Correction (2026-10-03, FS-121's close; FS121-DB1 § 3.3 item 2, one mind):* the argument's two cases (`plans/FS111-W-wild.md` § 2.3) do not cover an edge that is a unit arc whose centre carries the repeated colour on the far side of the edge from the sector, where case (i)'s parallel collapses to a point. The statement stands through FS121-DB1-L3's case K+ (`plans/FS121-derivation.md` FS121-DB1-L3, two minds), which also localises it to a point of Σ with cusps allowed.
+
+<!--q FS111-W-NOREP note@503-->
+**dated note filed under the entry (`plans/FS111-derivation.md:503`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR2-audit.md` § 4.1, row 43; `plans/FS129-close-inventory.md` item 117):* the not-claimed line's GAP ("the same for general saturated colourings (GAP: (H2) at the partners is not among C11's hypotheses there)") is answered for honest saturated colourings in D-NF satisfying REG-J′ by FS121-DB1-L3 ("at every point of Σ no colour occupies two sectors of positive angle, whatever cusps are present at the point or elsewhere", two minds); what is left open is saturated colourings that are not honest or do not satisfy REG-J′. FS121-DB1-L3 is formalized in this entry's place (SR2 § 4.3 item 22).
+
+<!--q FS111-W-NOREP merge@SR2-4.3-22-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 22, `plans/FS129-SR2-audit.md:487-487`; status applied):
+> 22. **FS121-DB1-L3** in place of **FS111-W-NOREP**.
+
+### 37. FS111-W-SQ9
+<!--row FS111-W-SQ9 plans/FS111-derivation.md:654-->
+**Address** `plans/FS111-derivation.md:654` · **Role** upstream · **Era** R · **Was** 44 in `lean-order.md` · **Upstream ids** none
+<!--needs FS111-W-SQ9: -->
+
+<!--q FS111-W-SQ9 statement-->
+**Statement as filed:**
+> the colouring of the plane by closed squares of side 1/2, square (i, j) coloured (i mod 3, j mod 3), is a.e.-proper, tight and saturated, also with positive-density partners (every edge faces a same-colour edge at distance exactly 1)
+
+<!--q FS111-W-SQ9 not_claimed-->
+**Not claimed:**
+> saturation below nine colours on square tilings (FS111-W-HEXSAT's hexagonal analogue)
+
+<!--q FS111-W-SQ9 grade-->
+**Grade as filed:**
+> computed over: one period of the square lattice (9 classes), exact rationals
+
+<!--q FS111-W-SQ9 minds-->
+**Minds as filed:**
+> 2 — blind to: W's record until VMW's verdicts were committed; method: W's checker ../tools/fs111_w_check.py, VMW's own certificates
+
+<!--q FS111-W-SQ9 handoff-->
+**Handoff as filed:**
+> none — a control object; exact and periodic, formalizable on demand
+
+### 38. FS111-M2-INTRAD
+<!--row FS111-M2-INTRAD plans/FS111-derivation.md:1013-->
+**Address** `plans/FS111-derivation.md:1013` · **Role** SEED · **Era** R · **Was** 45 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS111-W-SQ9
+<!--needs FS111-M2-INTRAD: FS111-M-C11,FS111-W-SQ9-->
+
+<!--q FS111-M2-INTRAD statement-->
+**Statement as filed:**
+> in an honest saturated colouring whose singular set Σ is locally finite with finitely many interface arcs at each point (REG-J′), the unit parallel of every tangent-type interface arc is again an interface arc, so radii of curvature drop by exactly 1 toward the centre and stop at 1: every interface has integer radius of curvature almost everywhere and is locally a chain of segments and circular arcs, finitely many of each radius
+
+<!--q FS111-M2-INTRAD not_claimed-->
+**Not claimed:**
+> exclusion of large-radius accumulation (radii → ∞: LRA, FS-115's stuck ray); the statement without REG-J′'s finitely-many-arcs clause
+
+<!--q FS111-M2-INTRAD grade-->
+**Grade as filed:**
+> derived from: FS111-M-C11
+
+<!--q FS111-M2-INTRAD minds-->
+**Minds as filed:**
+> 2 — blind to: M2's record until VM2's verdicts were committed; method: (i)–(ii) by two routes; (iii) completed by VM2 alone (VM2-FIN′, one mind), M2's convexity outline having a gap on E_n ∖ E_{n,p}
+
+<!--q FS111-M2-INTRAD handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind FS111-M-PINCH and FS111-M-C11: the link between route M and FS-115
+
+### 39. FS112-A4SIX
+<!--row FS112-A4SIX plans/FS112-derivation.md:63-->
+**Address** `plans/FS112-derivation.md:63` · **Role** upstream · **Era** R · **Was** 47 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-A4SIX: -->
+
+<!--q FS112-A4SIX statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> A four-colour vertex with no covering pair on its unit circle has on that circle arcs of `Γ` centred at it of total length at least 60°, or at least six, one in each of six consecutive 60° windows (C-UA-BUDGET, branch 1).
+
+<!--q FS112-A4SIX not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-A4SIX grade-->
+**Grade as filed:**
+> hand; three minds, one blind: A4; N; NB
+
+<!--q FS112-A4SIX minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-A4SIX handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 40. FS112-BOWTIE
+<!--row FS112-BOWTIE plans/FS112-derivation.md:357-->
+**Address** `plans/FS112-derivation.md:357` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** 48 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-BOWTIE: -->
+
+<!--q FS112-BOWTIE statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> An exact valid local fragment realises a one-vertex stuck chain bounded by unit arcs on both sides: `E = (0, 0)` with three colours, its two horns of colour 2 between `ω(E + n)` and `ω(E − n)`, shadowed by in-type radius-1 sectors of colours 1 and 3 at `E + n` and `E − n`; both neighbours four-coloured, one sector per colour, neither stuck, no MERGE, MERGE-RAY or SHAVE applicable at `E`, `E ± n`; every unit arc's end interior with its neighbourhood coloured.
+
+<!--q FS112-BOWTIE not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-BOWTIE grade-->
+**Grade as filed:**
+> tools, exact; one fragment: YB3; one checker, YB2's tower checker; stuckness exact at the antipodes and at named points
+
+<!--q FS112-BOWTIE minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-BOWTIE handoff-->
+**`*Kernel:*` line as filed:**
+> declined — an exact fragment; FS-115 may promote it.
+
+### 41. FS112-C-DOUBLE
+<!--row FS112-C-DOUBLE plans/FS112-derivation.md:237-->
+**Address** `plans/FS112-derivation.md:237` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** 50 in `lean-order.md` · **Upstream ids** FS112-BOWTIE
+<!--needs FS112-C-DOUBLE: FS112-BOWTIE-->
+**Cautions:** [C116](#c116)
+
+<!--q FS112-C-DOUBLE statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> In a terminal valid map, a stuck vertex `E` all four of whose horn arcs are unit arcs, of `ω(E + n)` above and `ω(E − n)` below, carries an in-type tile of its upper flank colour at `E + n` and of its lower flank colour at `E − n`, and both are (Q) centres with at least four colours.
+
+<!--q FS112-C-DOUBLE not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-C-DOUBLE grade-->
+**Grade as filed:**
+> hand; one mind: FS112-C2, a sketch over FS112-Y3-END-NEEDS's levels with n reversed and FS112-N2-TERM
+
+<!--q FS112-C-DOUBLE minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-C-DOUBLE handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-115.
+
+<!--q FS112-C-DOUBLE note@448-->
+**errata-section item 3 (`plans/FS112-derivation.md:448`):**
+> 3. **FS112-C-DOUBLE and FS112-C-PARTNERS — regrade (upgrade):** two minds, FS112-C (with FS112-C2 for C-DOUBLE) and FS114-CV, blind to the FS112-C
+>    assembly; C-PARTNERS is a corollary of FS112-N3-COR3 (CV-PART). *Source:* `plans/FS114-CV-verification.md` §1.5, §2.4.
+
+<!--q FS112-C-DOUBLE merge@SR2-4.3-QUOTE-->
+**Merge note — quote with its errata** (SR2-4.3 item QUOTE, `plans/FS129-SR2-audit.md:492-493`; status applied):
+> - Quote **FS112-C-ENDS** in its erratum's form (residue deleted), and **FS112-C-DOUBLE**, **FS112-N3-BASE**, **FS114-N2-ENDS**, **FS114-N3-JOINT**, **FS114-N7-3T** with the errata under them (§ 2.4): the backlog quotes entries by script and the index carries no erratum.
+
+### 42. FS112-DISC1
+<!--row FS112-DISC1 plans/FS112-derivation.md:126-->
+**Address** `plans/FS112-derivation.md:126` · **Role** upstream · **Era** R · **Was** 51 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-DISC1: -->
+
+<!--q FS112-DISC1 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Every closed disc of radius 1 of a valid map contains a vertex of degree at least 3.
+
+<!--q FS112-DISC1 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-DISC1 grade-->
+**Grade as filed:**
+> hand; two minds: N2's sketch; NB2's proof
+
+<!--q FS112-DISC1 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-DISC1 handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+<!--q FS112-DISC1 merge@SR2-4.3-12-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 12, `plans/FS129-SR2-audit.md:474-474`; status applied):
+> 12. **FS106-TS-T** in place of **FS112-DISC1** (FS129-SR2-DISC1TS).
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 43. FS112-FLANK
+<!--row FS112-FLANK plans/FS112-derivation.md:99-->
+**Address** `plans/FS112-derivation.md:99` · **Role** upstream · **Era** R · **Was** 52 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-FLANK: -->
+
+<!--q FS112-FLANK statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> N4-FLANK fails when a horn's bounding arc is a unit arc centred at `N` (`κ₊ = 1`) or `S′` (`κ₋ = −1`): an in-type flank tile at the centre is then Siamese with the flank and shadows a band of the horn, and SHAVE's criterion is incomplete there.
+
+<!--q FS112-FLANK not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-FLANK grade-->
+**Grade as filed:**
+> hand; two minds: N, blind to NB; NB sighted, after its stage 1 had "survives"
+
+<!--q FS112-FLANK minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-FLANK handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 44. FS112-ISO
+<!--row FS112-ISO plans/FS112-derivation.md:82-->
+**Address** `plans/FS112-derivation.md:82` · **Role** upstream · **Era** R · **Was** 53 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-ISO: -->
+
+<!--q FS112-ISO statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Isolated inner-colour contacts at `P + 2e_{w₀}` exist locally (an inner-colour tile outside `B̄(P, 2)` but for a corner), and block a first-order away-bend.
+
+<!--q FS112-ISO not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-ISO grade-->
+**Grade as filed:**
+> hand; two minds: NB; N2 conceding
+
+<!--q FS112-ISO minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-ISO handoff-->
+**`*Kernel:*` line as filed:**
+> declined — a local example.
+
+### 45. FS112-LOCK
+<!--row FS112-LOCK plans/FS112-derivation.md:72-->
+**Address** `plans/FS112-derivation.md:72` · **Role** upstream · **Era** R · **Was** 54 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-LOCK: -->
+
+<!--q FS112-LOCK statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> For `w` interior to a unit arc `α ⊂ ω(P)`, a tile of either side colour touches `ω(w)` only at `P`, or — the inner colour only — at `P + 2e_w`, from outside `B(P, 2)`.
+
+<!--q FS112-LOCK not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-LOCK grade-->
+**Grade as filed:**
+> hand; two minds, one blind, different routes: N; NB; the outer colour's exclusion at radius 2 tools exact
+
+<!--q FS112-LOCK minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-LOCK handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 46. FS112-BEND
+<!--row FS112-BEND plans/FS112-derivation.md:77-->
+**Address** `plans/FS112-derivation.md:77` · **Role** upstream · **Era** R · **Was** 55 in `lean-order.md` · **Upstream ids** FS112-LOCK
+<!--needs FS112-BEND: FS112-LOCK-->
+
+<!--q FS112-BEND statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Off its end vertices a unit arc can be bent off radius 1, keeping validity and creating no unit arc: toward `P` unless its outer colour is at `P`; away from `P` unless its inner colour is at `P` or lies along the radius-2 circle.
+
+<!--q FS112-BEND not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-BEND grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N; NB
+
+<!--q FS112-BEND minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-BEND handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+<!--q FS112-BEND merge@SR2-4.3-13-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 13, `plans/FS129-SR2-audit.md:475-475`; status applied):
+> 13. **FS112-N2-BENDS** (or SR1's BENDANY) in place of **FS112-BEND**; **FS112-N2-TERM** in place of **FS112-N2-RED** (RED's procedure as TERM's lemma).
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 47. FS112-N2-BENDS
+<!--row FS112-N2-BENDS plans/FS112-derivation.md:87-->
+**Address** `plans/FS112-derivation.md:87` · **Role** upstream · **Era** R · **Was** 56 in `lean-order.md` · **Upstream ids** FS112-ISO, FS112-LOCK
+<!--needs FS112-N2-BENDS: FS112-ISO,FS112-LOCK-->
+
+<!--q FS112-N2-BENDS statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> A whole unit arc, end vertices included, bends toward its centre whenever its outer colour is absent there, and away whenever its inner colour is absent there and no inner-colour tile touches the radius-2 arc `R₂(ᾱ)`; isolated R2 contacts are cleared by a tangent bend, and only R2 along an arc blocks. Its lemmas: every point `≠ P` of a side-colour tile is within `< 1` of all of `int α` or `> 1` from all of it (N2-SIGN); a lens point's disc leaves the union of unit discs about `ᾱ` only near `P` or near `R₂(ᾱ)` (N2-ENV).
+
+<!--q FS112-N2-BENDS not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N2-BENDS grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N2; NB2; N2-TOWARD by different routes; identities tools exact
+
+<!--q FS112-N2-BENDS minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N2-BENDS handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+<!--q FS112-N2-BENDS merge@SR1-6.2-5-->
+**Merge note — named** (SR1-6.2 item 5, `plans/FS129-SR1-audit.md:546-547`; status applied):
+> 5. **FS129-SR1-BENDANY** and **FS129-SR1-BENDLE3** in place of FS129-OR1-BENDFRAG and FS129-OR1-BEND3, over FS129-OR1-WHOLE and FS112-N2-BENDS, by N2's route at end vertices (§ 2.1), with the connectedness step by quasi-components.
+
+<!--q FS112-N2-BENDS merge@SR2-4.3-13-->
+**Merge note — to formalize** (SR2-4.3 item 13, `plans/FS129-SR2-audit.md:475-475`; status applied):
+> 13. **FS112-N2-BENDS** (or SR1's BENDANY) in place of **FS112-BEND**; **FS112-N2-TERM** in place of **FS112-N2-RED** (RED's procedure as TERM's lemma).
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 48. FS112-N2-FLANK-Q
+<!--row FS112-N2-FLANK-Q plans/FS112-derivation.md:108-->
+**Address** `plans/FS112-derivation.md:108` · **Role** upstream · **Era** R · **Was** 57 in `lean-order.md` · **Upstream ids** FS112-FLANK
+<!--needs FS112-N2-FLANK-Q: FS112-FLANK-->
+
+<!--q FS112-N2-FLANK-Q statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Every horn bound of exactly `±1` sits on a (Q) arc — FLANK's in-type exception, and then both horns' upper arcs form one arc of `ω(N)` through `v` — or on an (R2) arc, whose inner-colour tile along the radius-2 circle is FLANK's out-type tile at the far antipode.
+
+<!--q FS112-N2-FLANK-Q not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N2-FLANK-Q grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N2; NB2, sighted on the one-arc clause
+
+<!--q FS112-N2-FLANK-Q minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N2-FLANK-Q handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 49. FS112-N2-RAY
+<!--row FS112-N2-RAY plans/FS112-derivation.md:112-->
+**Address** `plans/FS112-derivation.md:112` · **Role** upstream · **Era** R · **Was** 58 in `lean-order.md` · **Upstream ids** FS112-FLANK
+<!--needs FS112-N2-RAY: FS112-FLANK-->
+
+<!--q FS112-N2-RAY statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> N4-FIN's application fails at a chain's end; a one-sided stuck chain with `λ_k = −1/(k+1)`, `υ_k = 0` is consistent with N4-FIN; so N4-CONE is a GAP under unit arcs — the extremal chain is the pencil of circles of radius `k + 1` about `P_{−1}` with straight upper arcs, every shadow tight.
+
+<!--q FS112-N2-RAY not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N2-RAY grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N2; NB2; the pencil one mind, NB2; RAY exact
+
+<!--q FS112-N2-RAY minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N2-RAY handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 50. FS112-N3-ANTI
+<!--row FS112-N3-ANTI plans/FS112-derivation.md:153-->
+**Address** `plans/FS112-derivation.md:153` · **Role** upstream · **Era** R · **Was** 59 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-N3-ANTI: -->
+
+<!--q FS112-N3-ANTI statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> CE5, the Antipodal Lemma, survives unit arcs: at a cubic trichromatic vertex no two points of its unit circle at distance 2 are both M-in.
+
+<!--q FS112-N3-ANTI not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N3-ANTI grade-->
+**Grade as filed:**
+> hand; two minds, one blind, different routes: N3; NB3; tools exact, ANTI
+
+<!--q FS112-N3-ANTI minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N3-ANTI handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 51. FS112-N3-FAIL
+<!--row FS112-N3-FAIL plans/FS112-derivation.md:148-->
+**Address** `plans/FS112-derivation.md:148` · **Role** upstream · **Era** R · **Was** 60 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-N3-FAIL: -->
+
+<!--q FS112-N3-FAIL statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> At a cubic trichromatic `u`, CB's D2 strip fails at `q ∈ ω(u)` only when `q` is a leaving centre of `u` (the centre of a unit arc ending at `u`); there the colours of `c(u)` allowed inside `ω(u)` near `q` are exactly the inner colours of those arcs, outside exactly their outer colours.
+
+<!--q FS112-N3-FAIL not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N3-FAIL grade-->
+**Grade as filed:**
+> hand; two minds, one blind, different routes: N3; NB3; tools exact, VOTES; FAIL
+
+<!--q FS112-N3-FAIL minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N3-FAIL handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 52. FS112-N3-NOBOTH
+<!--row FS112-N3-NOBOTH plans/FS112-derivation.md:144-->
+**Address** `plans/FS112-derivation.md:144` · **Role** upstream · **Era** R · **Was** 61 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-N3-NOBOTH: -->
+
+<!--q FS112-N3-NOBOTH statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> The centre of a both-kind unit arc is a vertex with at least four colours or a repeated colour.
+
+<!--q FS112-N3-NOBOTH not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N3-NOBOTH grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N3; NB3; over FS112-U1
+
+<!--q FS112-N3-NOBOTH minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N3-NOBOTH handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 53. FS112-N3-END
+<!--row FS112-N3-END plans/FS112-derivation.md:184-->
+**Address** `plans/FS112-derivation.md:184` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** 62 in `lean-order.md` · **Upstream ids** FS112-N2-FLANK-Q, FS112-N3-NOBOTH
+<!--needs FS112-N3-END: FS112-N2-FLANK-Q,FS112-N3-NOBOTH-->
+
+<!--q FS112-N3-END statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> A stuck chain's end with horn bound `−1` has a vertex one step beyond it carrying at least four colours and a repeated colour, and a both-kind unit arc centred two steps beyond it; or, if an in-type flank tile sits at the other neighbour, both horns' upper arcs lie on that neighbour's unit circle and the chain is the single vertex.
+
+<!--q FS112-N3-END not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N3-END grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N3; NB3
+
+<!--q FS112-N3-END minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N3-END handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 54. FS112-N3-PAIRS
+<!--row FS112-N3-PAIRS plans/FS112-derivation.md:166-->
+**Address** `plans/FS112-derivation.md:166` · **Role** upstream · **Era** R · **Was** 63 in `lean-order.md` · **Upstream ids** FS112-N3-NOBOTH
+<!--needs FS112-N3-PAIRS: FS112-N3-NOBOTH-->
+
+<!--q FS112-N3-PAIRS statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> The base's pair steps survive unit arcs: (i) never fails; (ii) fails only when a point read has at least four colours or its partner is a both-centre; two cubic trichromatic vertices with one multicolour are never at distance 1.
+
+<!--q FS112-N3-PAIRS not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N3-PAIRS grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N3; NB3; (i)'s unconditional form one mind, N3, with NB3's sighted check
+
+<!--q FS112-N3-PAIRS minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N3-PAIRS handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 55. FS112-NB4P
+<!--row FS112-NB4P plans/FS112-derivation.md:55-->
+**Address** `plans/FS112-derivation.md:55` · **Role** upstream · **Era** R · **Was** 64 in `lean-order.md` · **Upstream ids** FS112-A4SIX
+<!--needs FS112-NB4P: FS112-A4SIX-->
+
+<!--q FS112-NB4P statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> NB-4 corrected: at a vertex of exactly four colours, let `(v, y₀)` be a covering pair at a change point of its ring; if no point of `y₀`'s `σ_v`-orbit lies in the closure of an arc of `Γ` on `ω(v)`, and no arc of `Γ` on `ω(y_{k±1})` has `y_k` in its closure, contradiction; the bound on the colours at `y_k` is not needed.
+
+<!--q FS112-NB4P not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-NB4P grade-->
+**Grade as filed:**
+> hand; three minds, one blind: N; NB; Y2
+
+<!--q FS112-NB4P minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-NB4P handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 56. FS112-SIX
+<!--row FS112-SIX plans/FS112-derivation.md:48-->
+**Address** `plans/FS112-derivation.md:48` · **Role** upstream · **Era** R · **Was** 65 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-SIX: -->
+
+<!--q FS112-SIX statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> A vertex with five colours has unit arcs centred at it of total length at least 180°; with six, its whole unit circle lies in `Γ`, every arc of kind both.
+
+<!--q FS112-SIX not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-SIX grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N; NB
+
+<!--q FS112-SIX minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-SIX handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+<!--q FS112-SIX note@53-->
+**dated note filed under the entry (`plans/FS112-derivation.md:53`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 4.1, row FS112 l. 49; `plans/FS129-close-inventory.md` items 129, 130):* the GAP in de Grey's covering step for C-V56 is answered in the non-Siamese class: a tile meeting `B(V, 1)` of a colour carried at `V` is within 1 of `V`'s tile of that colour, so it is that tile (FS116-V4-DICHOTOMY); FS-112's own NB reduced the step to exactly that (`plans/FS112-NB-verification.md` line 205: "exactly 'no Siamese partner of a tile at `V` lies in `B(V, 1)`'"), and FS116-N2-SIXRING (non-Siamese) carries the six-colour picture. It stays open in the Siamese class (FS-124's case 7). The entry's two clauses are formalized as FS116-N2-FIVERING and FS129-SR1-SIXQ in its place (`plans/FS129-SR1-audit.md` § 6.2 item 3).
+
+<!--q FS112-SIX merge@SR1-6.2-3-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 3, `plans/FS129-SR1-audit.md:544-544`; status applied):
+> 3. **FS116-N2-FIVERING** and **FS129-SR1-SIXQ** in place of FS112-SIX.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 57. FS112-U1
+<!--row FS112-U1 plans/FS112-derivation.md:42-->
+**Address** `plans/FS112-derivation.md:42` · **Role** upstream · **Era** R · **Was** 66 in `lean-order.md` · **Upstream ids** none
+<!--needs FS112-U1: -->
+
+<!--q FS112-U1 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> At a unit arc `α ⊂ ω(P)` of angular length `ℓ`, an inner side colour in `P_cl(P)` has its sectors at `P` in the closed cone of width `π − ℓ` facing `α`, an outer one in the closed cone facing away; both side cones hold neither; the outer tile's first-order shadow near `P` contains the open facing cone of width `π + ℓ`.
+
+<!--q FS112-U1 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-U1 grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N; NB
+
+<!--q FS112-U1 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-U1 handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with the NO's map argument (FS-114).
+
+<!--q FS112-U1 merge@SR1-6.2-4-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 4, `plans/FS129-SR1-audit.md:545-545`; status applied):
+> 4. **FS116-V5-U1**'s first three clauses in place of FS112-U1's; U1's shadow clause and V5-U1's four-colour clause as two corollaries.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 58. FS114-BV-HEX
+<!--row FS114-BV-HEX plans/FS114-derivation.md:968-->
+**Address** `plans/FS114-derivation.md:968` · **Role** upstream · **Era** R · **Was** 67 in `lean-order.md` · **Upstream ids** none
+<!--needs FS114-BV-HEX: -->
+
+<!--q FS114-BV-HEX statement-->
+**Statement as filed:**
+> (BV-HEX) Lemma 6's `< 9` branch under H: the regular hexagon of kept points cannot occur at a cubic trichromatic `u` in a valid map (unit arcs allowed) when `x_1, …, x_6` are cubic; no Condition 5, no strip `A(u)`, no unit-arc step; (BV-L3) Lemma 3, a.e., curved, cusps and double cusps at `u₁, u₂`: no two points with the same multicolour at distance in (1, 2) whose unit circles carry proper finite circle colourings in the complementary triple; (BV-ND) NoDouble holds with unit arcs, at cusps; (BV-ND1) BV-ND under the 60° rotation of one circle: two switch points of `ω(u)` at distance 1 with the same pair, switching in opposite senses, are impossible at plain or cubic points; with unit arcs, no strip used
+
+<!--q FS114-BV-HEX not_claimed-->
+**Not claimed:**
+> Lemma 4 at cusps (not landed: a GAP in BASE-V's blind derivation at Prop. 19(b) and the selection; CUSP-BASE's D5 items 1–4, 6 stay at CE's one mind); a downgrade of anything (the regrade is upgrades only)
+
+<!--q FS114-BV-HEX grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-BV-HEX minds-->
+**Minds as filed:**
+> 1 — BASE-V, blind to FS-110's and FS-112's walks of these steps; BV-HEX is CB D5 item 5 in substance (FS-110), with H in place of Condition 5, by a different route
+
+<!--q FS114-BV-HEX handoff-->
+**Handoff as filed:**
+> none — BASE-V's regrade of row 134's base (the ledger draft carries it)
+
+### 59. FS114-CV-HD
+<!--row FS114-CV-HD plans/FS114-derivation.md:57-->
+**Address** `plans/FS114-derivation.md:57` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** 68 in `lean-order.md` · **Upstream ids** FS110-W-MERGE, FS112-U1
+<!--needs FS114-CV-HD: FS110-W-MERGE,FS112-U1-->
+
+<!--q FS114-CV-HD statement-->
+**Statement as filed:**
+> (CV-HD) in `M*`, for a stuck `E`: both upper bounds `1` and no in-type lower-flank tile at `E − n` is impossible; hence `G_N ⇔ H_S ⇔ υ± = 1 ⇔ λ± = −1` (all four horn arcs unit arcs, in-type flank tiles at both antipodes); (CV-CLASS) a stuck vertex of `M*` is a bowtie (CV-HD's four equivalent conditions; both neighbours both-centres with `≥ 4` colours; a one-vertex chain) or has `g` twice at `E − n` and `h` twice at `E + n` (each neighbour stuck or with `≥ 4` colours and a repeated colour); (CV-L0) in a terminal valid map `M*` a stuck vertex centres no unit arc, so `Γ ∩ ω(E)` is finite; (CV-ENDS) FS112-C-ENDS holds with no residue: the point one step beyond every finite end of a stuck chain has at least four colours
+
+<!--q FS114-CV-HD not_claimed-->
+**Not claimed:**
+> that a stuck vertex exists in any valid map; anything about one-sided infinite chains (FS-115's (b′)), which CV-ENDS leaves to N4-FIN
+
+<!--q FS114-CV-HD grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-CV-HD minds-->
+**Minds as filed:**
+> 2 — blind to: each other's records at stage 1 (CVB sighted on Y3-END-NEEDS's levels, an FS-112 input); method: CV one chain through the flank shadows; CVB two branches, the `G_N` branch's merge made explicit
+
+<!--q FS114-CV-HD handoff-->
+**Handoff as filed:**
+> none — a relay-result inside FS-112's chain composition; CV-EXISTS no longer uses it (FS114-CVB-EXISTS's route)
+
+### 60. FS114-CVB-THOM
+<!--row FS114-CVB-THOM plans/FS114-derivation.md:83-->
+**Address** `plans/FS114-derivation.md:83` · **Role** upstream · **Era** R · **Was** 69 in `lean-order.md` · **Upstream ids** none
+<!--needs FS114-CVB-THOM: -->
+
+<!--q FS114-CVB-THOM statement-->
+**Statement as filed:**
+> `[Thomassen1999]`'s steps other than the rainbow step hold for every valid map, Siamese pairs allowed: fill holes, read facial cycles as boundary walks, and replace the count in `int(R)` by local finiteness (finite against infinite); the reduced map graph `H` then has a vertex of degree `≥ 6` (with FS114-CVB-PINCH: in the map graph of a locally finite plane map, `M − x` is connected at a pinched tile and disconnected at a holed one; holes are locally consistent with validity)
+
+<!--q FS114-CVB-THOM not_claimed-->
+**Not claimed:**
+> the rainbow step on valid maps (it fails there: FS114-N114-RD's types (A) and (B)); the 2-separator criterion at pinches, which is a sketch (one mind: CVB)
+
+<!--q FS114-CVB-THOM grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-CVB-THOM minds-->
+**Minds as filed:**
+> 3 — blind to: each other's records (NB and CVB blind; FS114-N's stage 1 against, on the pinch clause); method: NB by treating holes as 1-separators with finite interiors; CVB by filling holes and reading boundary walks; the colour-free repair two minds, both blind
+
+<!--q FS114-CVB-THOM handoff-->
+**Handoff as filed:**
+> none — a relay-result for route T: it says where Thomassen's argument fails on valid maps (only the rainbow step)
+
+### 61. FS114-L60-LE
+<!--row FS114-L60-LE plans/FS114-derivation.md:930-->
+**Address** `plans/FS114-derivation.md:930` · **Role** upstream · **Era** R · **Was** 70 in `lean-order.md` · **Upstream ids** FS106-TS-C
+<!--needs FS114-L60-LE: FS106-TS-C-->
+
+<!--q FS114-L60-LE statement-->
+**Statement as filed:**
+> (L60-LE) a unit arc with constant sides has `ℓ ≤ 60°` (its ends lie in the closure of one tile); (L60-EQ) at `ℓ = 60°` both side tiles lie in the lens `B̄(A, 1) ∩ B̄(B, 1)`: `T_in ⊆ Reul(P, A, B)`, `T_out ⊆ Reul(A, B, C) ∖ B̄(P, 1)`, `C = A + B − P`; at each end their sectors lie in the two corner cones (120° and 60°), which fill exactly the closed half-plane facing the other end, so each end is a vertex carrying a third tile; (L60-REAL) equality is realised, by a valid fragment by formula on a neighbourhood of the closed arc
+
+<!--q FS114-L60-LE not_claimed-->
+**Not claimed:**
+> FS112-L60 as filed ("below 60°": FALSE at exactly 60°, the erratum in `plans/FS112-derivation.md`); the second clause's "ends" reading (FALSE at equality); that the equality case occurs in a valid map
+
+<!--q FS114-L60-LE grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-L60-LE minds-->
+**Minds as filed:**
+> 2 — blind to: nothing of the other's frame for the bound (FS114-L60 was briefed with FS114-N4's record open; N4 found it first) — blind to: the FS112-N and FS112-NB proofs' conclusions at the boundary, which both break at 60° by different steps (L60-PROOFS); method: N4 by the Reuleaux cap tile; L60 by the lens and the corner cones, with a fragment; the inner clause and the ends one mind
+
+<!--q FS114-L60-LE handoff-->
+**Handoff as filed:**
+> none — a correction of an FS-112 lemma, filed with its erratum
+
+<!--q FS114-L60-LE merge@SR2-4.3-14-->
+**Merge note — to formalize** (SR2-4.3 item 14, `plans/FS129-SR2-audit.md:476-476`; status applied):
+> 14. **FS114-L60-LE** in place of **FS112-L60**.
+
+### 62. FS112-L60
+<!--row FS112-L60 plans/FS112-derivation.md:68-->
+**Address** `plans/FS112-derivation.md:68` · **Role** upstream · **Era** R · **Was** 72 in `lean-order.md` · **Upstream ids** FS114-L60-LE
+<!--needs FS112-L60: FS114-L60-LE-->
+**Cautions:** [C116](#c116)
+
+<!--q FS112-L60 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> A unit arc with constant sides has angular length below 60°; along it neither side colour recurs 60° apart.
+
+<!--q FS112-L60 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-L60 grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N; NB; tools exact
+
+<!--q FS112-L60 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-L60 handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+<!--q FS112-L60 note@432-->
+**errata-section item 1 (`plans/FS112-derivation.md:432`):**
+> 1. **FS112-L60 — erratum: FALSE at exactly 60° as stated.** "Below 60°" fails at equality: the Reuleaux cap region is an outer tile along a whole 60° arc of
+>    `ω(P)` with constant sides. **Corrected** (FS114-L60-LE; two minds, FS114-N4 and FS114-L60, the second not blind): *a unit arc with constant sides has
+>    angular length `ℓ ≤ 60°`; at `ℓ = 60°` both side tiles lie in the lens of the arc's ends — the inner in `Reul(P, A, B)`, the outer in the Reuleaux cap
+>    `Reul(A, B, C) ∖ B̄(P, 1)` — and each end is a vertex carrying a third tile*; equality is realised by a fragment by formula. The second clause ("along it
+>    neither side colour recurs 60° apart") holds read at interior points (NB's reading) for every `ℓ`, and is false at equality read at the ends. Both
+>    printed proofs break at 60°, by different steps. **Dependants:** FS112-N2-RED and FS112-N3-COR3, and through COR3 FS112-N3-BASE, FS112-N3-DENSE3 and
+>    FS114-CV-EXISTS, need no strict bound (FS114-L60-WALK, one mind): unaffected. False at equality, with nothing resting on them: NB's C-UA-CHAIN aside
+>    ("α alone, < 60° … at most one point of an orbit"), NB's row 9 "both TRUE", `plans/FS112-N-proof.md` l. 284 ("each < 60°"); the frames "(0°, 60°)" in
+>    NB3-NOBOTH and CVB-L0 read "(0°, 60°]". The frozen tools `tools/fs112_n_arcs.py` and `tools/fs112_n2_checks.py` computed a pair (`10201/10000`) the
+>    equality tile never contains, with their plant at 50°. *Sources:* `plans/FS114-N4-proof.md` §2.6; `plans/FS114-L60-audit.md` §§1.3, 2, 3.4;
+>    `plans/FS114-close-inventory.md` items 67, 74, 75.
+
+<!--q FS112-L60 merge@SR2-4.3-14-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 14, `plans/FS129-SR2-audit.md:476-476`; status applied):
+> 14. **FS114-L60-LE** in place of **FS112-L60**.
+
+<!--q FS112-L60 merge@SR2-4.3-DNF-->
+**Merge note — do not formalize as stated** (SR2-4.3 item DNF, `plans/FS129-SR2-audit.md:490-491`; status applied):
+> - **FS112-L60** (FALSE at exactly 60°; its erratum), **FS112-BUDGET2** (FALSE as stated), **FS111-C-HULL-SO** (refuted) — the last two are in the order only through false edges.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 63. FS112-N2-RED
+<!--row FS112-N2-RED plans/FS112-derivation.md:92-->
+**Address** `plans/FS112-derivation.md:92` · **Role** upstream · **Era** R · **Was** 73 in `lean-order.md` · **Upstream ids** FS112-BEND, FS112-L60, FS112-N2-BENDS
+<!--needs FS112-N2-RED: FS112-BEND,FS112-L60,FS112-N2-BENDS-->
+
+<!--q FS112-N2-RED statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Every valid map has a valid modification by W-MERGE and whole-arc bends, creating no unit arc, in which every unit arc is (Q) or (R2); the procedure terminates with no stubs.
+
+<!--q FS112-N2-RED not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N2-RED grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N2; NB2; over NB-MERGE3, two minds
+
+<!--q FS112-N2-RED minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N2-RED handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+<!--q FS112-N2-RED merge@SR2-4.3-13-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 13, `plans/FS129-SR2-audit.md:475-475`; status applied):
+> 13. **FS112-N2-BENDS** (or SR1's BENDANY) in place of **FS112-BEND**; **FS112-N2-TERM** in place of **FS112-N2-RED** (RED's procedure as TERM's lemma).
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 64. FS112-N2-TERM
+<!--row FS112-N2-TERM plans/FS112-derivation.md:117-->
+**Address** `plans/FS112-derivation.md:117` · **Role** upstream · **Era** R · **Was** 74 in `lean-order.md` · **Upstream ids** FS112-N2-FLANK-Q, FS112-N2-RAY, FS112-N2-RED, FS112-NB4P
+<!--needs FS112-N2-TERM: FS112-N2-FLANK-Q,FS112-N2-RAY,FS112-N2-RED,FS112-NB4P-->
+
+<!--q FS112-N2-TERM statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Every valid map has a valid modification `M*`, creating no unit arc, in which every unit arc is (Q) or (R2); every vertex is cubic, an NB4P exception with at least four colours, or stuck; every stuck vertex lies on a stuck chain along its normal line that is not bi-infinite, each finite end within distance 1 of a (Q) or (R2) arc or an NB4P exception, every horn bound `±1` on it a (Q) or (R2) arc; one-sided infinite chains are a GAP.
+
+<!--q FS112-N2-TERM not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N2-TERM grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N2; NB2
+
+<!--q FS112-N2-TERM minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N2-TERM handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+<!--q FS112-N2-TERM merge@SR2-4.3-13-->
+**Merge note — to formalize** (SR2-4.3 item 13, `plans/FS129-SR2-audit.md:475-475`; status applied):
+> 13. **FS112-N2-BENDS** (or SR1's BENDANY) in place of **FS112-BEND**; **FS112-N2-TERM** in place of **FS112-N2-RED** (RED's procedure as TERM's lemma).
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 65. FS112-C-ENDS
+<!--row FS112-C-ENDS plans/FS112-derivation.md:199-->
+**Address** `plans/FS112-derivation.md:199` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** 71 in `lean-order.md` · **Upstream ids** FS112-C-DOUBLE, FS112-N2-TERM, FS112-N3-END, FS114-CV-HD
+<!--needs FS112-C-ENDS: FS112-C-DOUBLE,FS112-N2-TERM,FS112-N3-END,FS114-CV-HD-->
+**Cautions:** [C116](#c116)
+
+<!--q FS112-C-ENDS statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> In a terminal valid map, the point of the normal line one step beyond each finite end of a stuck chain has at least four colours, except possibly beside a one-vertex chain bounded by unit arcs on both sides but not on all four horn arcs, at a bound on an (R2) arc — a residue not walked.
+
+<!--q FS112-C-ENDS not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-C-ENDS grade-->
+**Grade as filed:**
+> hand; one mind: FS112-C, an assembly, repaired by FS112-C2; its links two minds, one blind, but the arc-through-N count one mind: NB, and FS112-C-DOUBLE one mind
+
+<!--q FS112-C-ENDS minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-C-ENDS handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+<!--q FS112-C-ENDS note@443-->
+**errata-section item 2 (`plans/FS112-derivation.md:443`):**
+> 2. **FS112-C-ENDS — erratum: its residue is empty.** Delete "except possibly beside a one-vertex chain bounded by unit arcs on both sides but not on all
+>    four horn arcs, at a bound on an (R2) arc — a residue not walked". **Corrected:** *In a terminal valid map, the point of the normal line one step beyond
+>    each finite end of a stuck chain has at least four colours.* Grade: [hand; two minds, blind to each other: FS114-CV (CV-ENDS), FS114-CVB (CVB-ENDS)];
+>    the proof's stop "an arc of `ω(v)` through `N`" never occurs (CV-L0). *Sources:* `plans/FS114-CV-verification.md` §§1.4–1.5, 2.4;
+>    `plans/FS114-CVB-verification.md` §1.8; inventory item 46.
+
+<!--q FS112-C-ENDS merge@SR2-4.3-QUOTE-->
+**Merge note — quote with its errata** (SR2-4.3 item QUOTE, `plans/FS129-SR2-audit.md:492-493`; status applied):
+> - Quote **FS112-C-ENDS** in its erratum's form (residue deleted), and **FS112-C-DOUBLE**, **FS112-N3-BASE**, **FS114-N2-ENDS**, **FS114-N3-JOINT**, **FS114-N7-3T** with the errata under them (§ 2.4): the backlog quotes entries by script and the index carries no erratum.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 66. FS112-N3-COR3
+<!--row FS112-N3-COR3 plans/FS112-derivation.md:158-->
+**Address** `plans/FS112-derivation.md:158` · **Role** upstream · **Era** R · **Was** 76 in `lean-order.md` · **Upstream ids** FS112-L60, FS112-N3-FAIL, FS112-N3-NOBOTH
+<!--needs FS112-N3-COR3: FS112-L60,FS112-N3-FAIL,FS112-N3-NOBOTH-->
+
+<!--q FS112-N3-COR3 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> In a valid map, a close complementary pair of cubic trichromatic vertices `u, u′` (disjoint multicolours, `d < 2`) sits on a unit rhombus `u, q₊, u′, q₋` whose other corners are vertices of at least four colours, each a leaving centre of both `u` and `u′`, a unit arc of each leaving centre's circle being both-kind there: T2 is forced at both common unit points.
+
+<!--q FS112-N3-COR3 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N3-COR3 grade-->
+**Grade as filed:**
+> hand; two minds, one blind, different routes: N3; NB3; tools exact, COR3 on 403 + 128 + 336 cases
+
+<!--q FS112-N3-COR3 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N3-COR3 handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 67. FS112-ROTHEX
+<!--row FS112-ROTHEX plans/FS112-derivation.md:193-->
+**Address** `plans/FS112-derivation.md:193` · **Role** upstream · **Era** R · **Was** 78 in `lean-order.md` · **Upstream ids** FS112-N3-COR3
+<!--needs FS112-ROTHEX: FS112-N3-COR3-->
+
+<!--q FS112-ROTHEX statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> FS-110's ring lemmas N2-ROT and N2-HEX survive unit arcs under the base's hypothesis; P17's only unit-arc exception is a both-centre `x₂`; N2-ROT's "no `r`-tile at `x`" rests on FS112-N3-COR3.
+
+<!--q FS112-ROTHEX not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-ROTHEX grade-->
+**Grade as filed:**
+> hand; one mind: NB3, the named check
+
+<!--q FS112-ROTHEX minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-ROTHEX handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 68. FS112-N3-BASE
+<!--row FS112-N3-BASE plans/FS112-derivation.md:171-->
+**Address** `plans/FS112-derivation.md:171` · **Role** upstream · **Era** R · **Was** 75 in `lean-order.md` · **Upstream ids** FS112-N2-BENDS, FS112-N3-ANTI, FS112-N3-COR3, FS112-N3-FAIL, FS112-N3-PAIRS, FS112-ROTHEX, FS114-BV-HEX
+<!--needs FS112-N3-BASE: FS112-N2-BENDS,FS112-N3-ANTI,FS112-N3-COR3,FS112-N3-FAIL,FS112-N3-PAIRS,FS112-ROTHEX,FS114-BV-HEX-->
+**Cautions:** [C116](#c116)
+
+<!--q FS112-N3-BASE statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> In a valid map, if the closed disc of radius 2 about a cubic trichromatic vertex `u` holds no vertex of at least four colours and none with a repeated colour, row 134's base refutes the map near `u` (inert unit arcs centred within 1 of `u` first bent toward their centres).
+
+<!--q FS112-N3-BASE not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N3-BASE grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N3; NB3; over row 134's base at its grade — CB's route with CE's repairs, CUSP-BASE, S–V Lemma 5, Prop. 18 and Lemma 6's `< 9` branch, unre-derived here — and FS112-U1, FS112-N2-BENDS, two minds each
+
+<!--q FS112-N3-BASE minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N3-BASE handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114, over the base's own formalization.
+
+<!--q FS112-N3-BASE note@453-->
+**errata-section item 5 (`plans/FS112-derivation.md:453`):**
+> 5. **FS112-N3-BASE — regrade (upgrades only), from BASE-V.** Its clause "over row 134's base at its grade, unre-derived here" now reads: row 134's base
+>    re-derived by BASE-V — S–V Lemma 5 and Prop. 18 two minds, both blind (with FS110-CD); Lemma 6's `< 9` branch TRUE under H with unit arcs (BV-HEX, one
+>    mind; needs neither Condition 5 nor NB3-NOBOTH); Lemma 3 and Cor. 3 at cusps TRUE (BV-L3, BV-C3); **Lemma 4 at cusps not landed**: CUSP-BASE's D5
+>    items 1–4 and 6 stay at CE's one mind, and they are now the residue both walks share. NB3 §2.3's parenthetical (the `< 9` branch as circle-abstract)
+>    does not hold — BV-HEX reads the map — and CB re-derived Prop. 17; the print's Prop. 18 sketch has one false sentence (FS110-CD's text is exact).
+>    *Sources:* `plans/BASE-V-verification.md` §§1–2, 2.5–2.6; inventory items 11, 12, 14.
+
+<!--q FS112-N3-BASE merge@SR2-4.3-QUOTE-->
+**Merge note — quote with its errata** (SR2-4.3 item QUOTE, `plans/FS129-SR2-audit.md:492-493`; status applied):
+> - Quote **FS112-C-ENDS** in its erratum's form (residue deleted), and **FS112-C-DOUBLE**, **FS112-N3-BASE**, **FS114-N2-ENDS**, **FS114-N3-JOINT**, **FS114-N7-3T** with the errata under them (§ 2.4): the backlog quotes entries by script and the index carries no erratum.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 69. FS112-N3-DENSE3
+<!--row FS112-N3-DENSE3 plans/FS112-derivation.md:178-->
+**Address** `plans/FS112-derivation.md:178` · **Role** upstream · **Era** R · **Was** 77 in `lean-order.md` · **Upstream ids** FS112-DISC1, FS112-N3-BASE, FS112-SIX, FS114-BV-HEX
+<!--needs FS112-N3-DENSE3: FS112-DISC1,FS112-N3-BASE,FS112-SIX,FS114-BV-HEX-->
+
+<!--q FS112-N3-DENSE3 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Every closed disc of radius 3 of every valid map holds a vertex of at least four colours or a vertex with a repeated colour.
+
+<!--q FS112-N3-DENSE3 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-N3-DENSE3 grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N3; NB3; over FS112-N3-BASE and FS112-DISC1
+
+<!--q FS112-N3-DENSE3 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-N3-DENSE3 handoff-->
+**`*Kernel:*` line as filed:**
+> stub — with FS-114.
+
+*Section notes of `plans/FS112-derivation.md` (items 7, 8) govern this row's `*Kernel:*` line: see § How to read this file.*
+
+### 70. FS114-L60-WALK
+<!--row FS114-L60-WALK plans/FS114-derivation.md:951-->
+**Address** `plans/FS114-derivation.md:951` · **Role** upstream · **Era** R · **Was** 80 in `lean-order.md` · **Upstream ids** FS112-N3-NOBOTH, FS114-L60-LE
+<!--needs FS114-L60-WALK: FS112-N3-NOBOTH,FS114-L60-LE-->
+
+<!--q FS114-L60-WALK statement-->
+**Statement as filed:**
+> (L60-WALK) no step of FS112-N2-RED, FS112-N3-COR3, FS112-N3-BASE, FS112-N3-DENSE3 or FS114-CV-EXISTS (with CVB-EXISTS) needs the strict bound; each use of "`< 60°`" in their frames needs `0 < ℓ ≤ 60°` or only `0 < ℓ < 180°`, and the equality case passes every step; two remarks outside the chain are false at equality (NB's C-UA-CHAIN aside, N's ends reading of the second clause) and nothing rests on them; (L60-D5) in N3-BASE's setting, the two ends of a circle-to-circle path (CB D5 item 1) are less than 1 apart
+
+<!--q FS114-L60-WALK not_claimed-->
+**Not claimed:**
+> a blind second mind (the registered L60-P1, p 0.85, and L60-P2, p 0.9, wait for one that never ran)
+
+<!--q FS114-L60-WALK grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-L60-WALK minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS114-L60-WALK handoff-->
+**Handoff as filed:**
+> none — an audit of a chain; its blind second mind is owed before publication
+
+### 71. FS114-CV-EXISTS
+<!--row FS114-CV-EXISTS plans/FS114-derivation.md:26-->
+**Address** `plans/FS114-derivation.md:26` · **Role** SEED · **Era** R · **Was** 79 in `lean-order.md` · **Upstream ids** FS110-N4-FIN, FS110-N4-SHADOW, FS112-C-ENDS, FS112-N2-TERM, FS112-N3-DENSE3, FS114-CV-HD, FS114-L60-WALK
+<!--needs FS114-CV-EXISTS: FS110-N4-FIN,FS110-N4-SHADOW,FS112-C-ENDS,FS112-N2-TERM,FS112-N3-DENSE3,FS114-CV-HD,FS114-L60-WALK-->
+
+<!--q FS114-CV-EXISTS statement-->
+**Statement as filed:**
+> Every valid map has a vertex of at least four colours, in the map itself; the proof passes through `M*`, where with no such vertex every stuck chain would be bi-infinite; it uses neither CV-HD nor FS112-C-ENDS, no ray step and no residue
+
+<!--q FS114-CV-EXISTS not_claimed-->
+**Not claimed:**
+> C114-LOCAL-F (an explicit radius about the four-colour vertex); that four-colour vertices come within any bounded distance of every point (GS-4's density form, which still needs FS-115's (b′) and (b″) for aperiodic maps); anything about maps at a fixed complexity `K` alone
+
+<!--q FS114-CV-EXISTS grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-CV-EXISTS minds-->
+**Minds as filed:**
+> 2 — blind to: each other (FS114-CV blind to the FS112-C assembly; FS114-CVB blind to FS114-CV's record until its stage 1 was committed); method: CV through CV-HD and the closure of C-ENDS's residue; CVB with no four-colour vertex every stuck chain of `M*` is bi-infinite, which N4-FIN forbids — neither CV-HD nor C-ENDS
+
+<!--q FS114-CV-EXISTS handoff-->
+**Handoff as filed:**
+> de Bruijn — deferred with D6 (a Lean skeleton of Q-full's statement, held for Kooshi): the statement verbatim, its not-claimed line, the model's vacuity caveat, and its inputs FS112-N3-DENSE3, FS112-N2-TERM, N4-FIN at their grades
+
+### 72. FS114-N114-RD
+<!--row FS114-N114-RD plans/FS114-derivation.md:108-->
+**Address** `plans/FS114-derivation.md:108` · **Role** upstream · **Era** R · **Was** 81 in `lean-order.md` · **Upstream ids** FS114-CVB-THOM
+<!--needs FS114-N114-RD: FS114-CVB-THOM-->
+
+<!--q FS114-N114-RD statement-->
+**Statement as filed:**
+> **The rainbow deficit.** In a valid map every repeat at a tile `x` is (S) a close pair, or (A) a unit arc of `∂x` shared with one member and centred at a point `q ∈ F ∪ R` where the other member touches `x` at `q` alone, or (B) two members touching `x` only at vertices `p, q ∈ F ∪ R` with `|p − q| = 1 = diam x`; at most one member of a far pair shares an arc with `x`
+
+<!--q FS114-N114-RD not_claimed-->
+**Not claimed:**
+> that type (B) occurs in a valid map (it is realised on fragments only: FS114-N's hexagon by hand, and YB's exact fragment of radius 3/5 for the corrected C114-RAINBOW's third case); the original C114-RAINBOW dichotomy (MISSTATED by four minds)
+
+<!--q FS114-N114-RD grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N114-RD minds-->
+**Minds as filed:**
+> 2 — blind to: NB derived its NB-RD before opening FS114-N's record; method: NB reads the radius `1 + 1/√3` about the tile's centre; the corrected RAINBOW trichotomy (YB, blind to both: "Siamese, or the unit-radius tactic …, or both meet `cl x` only in finite sets at mutual distance exactly 1") is the same statement read on contact sets
+
+<!--q FS114-N114-RD handoff-->
+**Handoff as filed:**
+> none — a relay-result for route T's counts and for C114-RAINBOW's corrected statement
+
+### 73. FS114-N114-EULER
+<!--row FS114-N114-EULER plans/FS114-derivation.md:148-->
+**Address** `plans/FS114-derivation.md:148` · **Role** upstream · **Era** R · **Was** 82 in `lean-order.md` · **Upstream ids** FS114-N114-RD
+<!--needs FS114-N114-EULER: FS114-N114-RD-->
+
+<!--q FS114-N114-EULER statement-->
+**Statement as filed:**
+> On a cellular torus map: `Σ_f (deg_M(f) − (k − 1)) = (7 − k)F + Σ_v (d(v) − 2)(d(v) − 3) − μ`, `μ ≥ 0` counting repeated contacts between one pair of faces (0 when faces meet at most once)
+
+<!--q FS114-N114-EULER not_claimed-->
+**Not claimed:**
+> the identity with `μ` counting only distinct neighbours met twice (it fails: NB-EULER); anything on the plane without averaging
+
+<!--q FS114-N114-EULER grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N114-EULER minds-->
+**Minds as filed:**
+> 2 — blind to: NB derived NB-EULER before opening FS114-N's record; method: NB checked it exactly on 17 torus maps by formula (`tools/fs114_nb_count.py`), N on five (`tools/fs114_n_count.py`)
+
+<!--q FS114-N114-EULER handoff-->
+**Handoff as filed:**
+> none — an identity route T's counts are read from
+
+### 74. FS114-N2-FIVE
+<!--row FS114-N2-FIVE plans/FS114-derivation.md:166-->
+**Address** `plans/FS114-derivation.md:166` · **Role** upstream · **Era** R · **Was** 83 in `lean-order.md` · **Upstream ids** FS114-N114-EULER, FS114-N114-RD
+<!--needs FS114-N2-FIVE: FS114-N114-EULER,FS114-N114-RD-->
+
+<!--q FS114-N2-FIVE statement-->
+**Statement as filed:**
+> C114-FIVE-COUNT: **TRUE** — no non-Siamese valid five-colour map is cellular on a torus with `μ = 0` (`Σ_v p_5(d) ≤ 0` with `p_5 = 3, 4, 9` at `d = 3, 4, 5`). (N2-ABS, NB-ABSENT: on a non-Siamese valid map with `μ = 0`, the tiles meeting `x` at a vertex alone are the (A) partners plus the tiles of colours absent from `x` and its edge-neighbours, at most 3 per absent colour; so `3 s(x) + Σ_{v∈∂x}(d(v) − 3) ≤ 3(k − 1) + A_x`)
+
+<!--q FS114-N2-FIVE not_claimed-->
+**Not claimed:**
+> the five-colour statement for maps with Siamese pairs or `μ > 0`; anything at six colours (FS114-N2-ENDS)
+
+<!--q FS114-N2-FIVE grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N2-FIVE minds-->
+**Minds as filed:**
+> 2 — blind to: NB derived NB-ABSENT and NB-COUNT before opening FS114-N's record; FS114-N2 re-derived them sighted; method: NB's excess count per absent colour, N2's slot accounting
+
+<!--q FS114-N2-FIVE handoff-->
+**Handoff as filed:**
+> none — route T's positive control, a known value by counting
+
+### 75. FS114-N114-ROOM
+<!--row FS114-N114-ROOM plans/FS114-derivation.md:187-->
+**Address** `plans/FS114-derivation.md:187` · **Role** upstream · **Era** R · **Was** 84 in `lean-order.md` · **Upstream ids** FS114-N114-EULER, FS114-N2-FIVE
+<!--needs FS114-N114-ROOM: FS114-N114-EULER,FS114-N2-FIVE-->
+
+<!--q FS114-N114-ROOM statement-->
+**Statement as filed:**
+> At six colours the same count forces type (B) only when `V₄ < 3V₆`: six's room is the degree-4 (four-colour) vertices, `V₄` of it (with NB-COUNT: on a non-Siamese valid map cellular on a torus with `μ = 0` and six colours, `V₄ ≥ 3V₆` and `V₃ ≤ 2V₄ + 5V₅ + 8V₆`)
+
+<!--q FS114-N114-ROOM not_claimed-->
+**Not claimed:**
+> that any map has `V₄ ≥ 3V₆` (no valid map is known); a per-vertex bound (FS114-N2-LEMMAS' VCAP: none can kill)
+
+<!--q FS114-N114-ROOM grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N114-ROOM minds-->
+**Minds as filed:**
+> 2 — blind to: NB derived NB-COUNT before opening FS114-N's record; method: NB by the quadratic `Σ_v [2d² + (2 − 3k)d + 6k − 6] ≤ 0`
+
+<!--q FS114-N114-ROOM handoff-->
+**Handoff as filed:**
+> none — a relay-result for FS114-N2-ENDS
+
+### 76. FS114-N2-ENDS
+<!--row FS114-N2-ENDS plans/FS114-derivation.md:235-->
+**Address** `plans/FS114-derivation.md:235` · **Role** SEED · **Era** R · **Was** 85 in `lean-order.md` · **Upstream ids** FS114-N114-EULER, FS114-N114-RD, FS114-N114-ROOM, FS114-N2-FIVE
+<!--needs FS114-N2-ENDS: FS114-N114-EULER,FS114-N114-RD,FS114-N114-ROOM,FS114-N2-FIVE-->
+**Cautions:** [C116](#c116)
+
+<!--q FS114-N2-ENDS statement-->
+**Statement as filed:**
+> **The count in edge-end form.** With `n(p)` the non-tactic edges at `p`: `Σ_{d=3} n + Σ_{d=4} (n − 2) + Σ_{d=5} n + Σ_{d=6} (n + 6) + 2U = 0`; every tactic edge's end `p` lies at distance exactly 1 from its centre `q ∈ F`, both in the closure of its inner tile (with N2-SLACK: at six colours, exactly `A = E′ − V₄ + 3V₆ + U`, `U = Σ_x (3a(x) − B_x) ≥ 0` the unused absent-colour capacity)
+
+<!--q FS114-N2-ENDS not_claimed-->
+**Not claimed:**
+> that any vertex type is excluded; the kill (K1, K2′); Siamese maps (FS114-N2-LEMMAS' SIAM) and `μ > 0` (GAP-μ)
+
+<!--q FS114-N2-ENDS grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N2-ENDS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS114-N2-ENDS handoff-->
+**Handoff as filed:**
+> de Bruijn — deferred with D6: the identity on a torus map is a finite combinatorial statement, a natural first kernel target once the class is fixed
+
+<!--q FS114-N2-ENDS note@255-->
+**dated note filed under the entry (`plans/FS114-derivation.md:255`):**
+> *Erratum (FS116-O1, 2026-09-29): the model line said the strip's midline vertices have four tactic edges (`n = 0`, charge −2); they have four straight edges (`n = 4`, charge 2) — `data/fs114/fs114-y6/survey.out`, FS114-N's control (`plans/FS114-N-proof.md` l. 299); found by Poros (FS116-P1). The model is now FS114-Y2-BOWTIE's centre; nothing rests on the model line.*
+> Its exact identities are checked by `tools/fs114_n2_count.py`; NB-ARCS (the inequality `A ≥ E′ − V₄ + 3V₆`) is its blind second mind's form.
+
+<!--q FS114-N2-ENDS merge@SR2-4.3-15-->
+**Merge note — to formalize** (SR2-4.3 item 15, `plans/FS129-SR2-audit.md:477-477`; status applied):
+> 15. **FS114-N2-ENDS** in place of **FS114-N3-JOINT's first clause** (one identity: `Σ n = 2N`).
+
+<!--q FS114-N2-ENDS merge@SR2-4.3-QUOTE-->
+**Merge note — quote with its errata** (SR2-4.3 item QUOTE, `plans/FS129-SR2-audit.md:492-493`; status applied):
+> - Quote **FS112-C-ENDS** in its erratum's form (residue deleted), and **FS112-C-DOUBLE**, **FS112-N3-BASE**, **FS114-N2-ENDS**, **FS114-N3-JOINT**, **FS114-N7-3T** with the errata under them (§ 2.4): the backlog quotes entries by script and the index carries no erratum.
+
+### 77. FS114-N3-LOCAL
+<!--row FS114-N3-LOCAL plans/FS114-derivation.md:419-->
+**Address** `plans/FS114-derivation.md:419` · **Role** upstream · **Era** R · **Was** 86 in `lean-order.md` · **Upstream ids** FS112-U1
+<!--needs FS114-N3-LOCAL: FS112-U1-->
+
+<!--q FS114-N3-LOCAL statement-->
+**Statement as filed:**
+> (N3-FACE) Two distinct tiles of one colour at vertices `u, w` with `|u − w| = 1` have their cones in the closed half-planes facing away from each other; one tile at both lies in `B̄(u, 1) ∩ B̄(w, 1)`; (N3-HALF) At a tactic edge at `p` (centre `q`, inner `x`, outer `y`): `x` faces `q`, `y` faces away; every other tile at `p` meeting the open half-plane facing `q` has a colour absent at `q` or contains `q`; at `q` the open half-plane facing `p` meets only `x` and tiles of the two colours absent at `p` (one of each at most); (N3-SEC) Every tile adjacent to a tactic edge at `p` has cone `≤ 180°`; two consecutive tactic edges with the tile between inner to one and outer to the other have it `≥ 60°`; a tile inner to both its edges at `p` (a **lens**) has cone `180° − γ ∈ [120°, 180°]`, `γ ≤ 60°` the angle between the two centres; (N3-FLANK) In the simple class, each branch of `p`'s ring at a tactic centre `q` lies on `Γ` or in a tile of a colour absent at `p`; two such tiles are distinct and of the two different absent colours: `q` is a change point of the ring or an end of a `Γ`-arc of `ω(p)`; (N3-PAIR) If `y` is an edge point between tiles of colours `c, c′` and `y′` carries `c, c′` at distance 1, the edge through `y` is an arc of `ω(y′)`; (N3-ODD) Off `Γ`-arcs of `ω(p)`, every half-open 60° window of the ring of a four-colour vertex holds an odd number of change points
+
+<!--q FS114-N3-LOCAL not_claimed-->
+**Not claimed:**
+> any exclusion by these lemmas alone (K1 is not derivable at radius `1 + ε` from them: FS114-N3's N3-K1)
+
+<!--q FS114-N3-LOCAL grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N3-LOCAL minds-->
+**Minds as filed:**
+> 1 — N3-FACE's substance is FS114-Y4-UPDOWN, derived blind on the other side and re-derived blind by YB3; the others have no blind second mind (no verifier ran on FS114-N3, inventory item 57)
+
+<!--q FS114-N3-LOCAL handoff-->
+**Handoff as filed:**
+> none — local tools for every later round; a blind check of N3-HALF, -SEC, -FLANK, -PAIR, -ODD is owed before the successor files K1
+
+### 78. FS114-N3-DR
+<!--row FS114-N3-DR plans/FS114-derivation.md:443-->
+**Address** `plans/FS114-derivation.md:443` · **Role** upstream · **Era** R · **Was** 87 in `lean-order.md` · **Upstream ids** FS114-N3-LOCAL
+<!--needs FS114-N3-DR: FS114-N3-LOCAL-->
+
+<!--q FS114-N3-DR statement-->
+**Statement as filed:**
+> **The escaping configuration DR**: a degree-4 vertex with two opposite Reuleaux lenses and all four edges tactic forces, at radius `≤ 1 + ε`: partners `c₂, c₄, c₄, c₂` at `a, b, −a, −b`; one tile of `c₃` over `R1`'s cap (so `R1` is inner to three tactic edges), each corner of degree exactly 4; each lune's ring carrying change points at `s, s + 60°` (with N3-CONT: in DR's general member the continuation of each tactic lens arc beyond its end is non-tactic; and N3-DR1: `t₄` reaches the ring at `y′` or `y″`, and `z_a` reaches `y″` or `z_{−b}` reaches `y′`)
+
+<!--q FS114-N3-DR not_claimed-->
+**Not claimed:**
+> that DR exists in a valid map (it does not, on `B̄(p, √3)`: FS114-Y4-RSTOPALL); N3-DR0's written proof (its step 1 fails; the conclusion holds by FS114-N4-D); N3-DR2 at more than one mind
+
+<!--q FS114-N3-DR grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N3-DR minds-->
+**Minds as filed:**
+> 1 — DR's shape was built blind on the other side (FS114-Y2-BOWTIE) and N3-DR1 re-derived blind by NB5 in N5's setting
+
+<!--q FS114-N3-DR handoff-->
+**Handoff as filed:**
+> none — superseded by FS114-Y4-RSTOPALL as a statement; its lemmas are relay-results
+
+<!--q FS114-N3-DR merge@SR2-4.3-16-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 16, `plans/FS129-SR2-audit.md:478-479`; status applied):
+> 16. **FS114-Y4-RSTOPALL** in place of **FS114-N4-D** and **FS114-N3-DR** (both cases; N4-D a second route). FS114-Y3-RSTOP stays separate (Siamese pairs allowed).
+
+### 79. FS114-N4-LEMMAS
+<!--row FS114-N4-LEMMAS plans/FS114-derivation.md:503-->
+**Address** `plans/FS114-derivation.md:503` · **Role** upstream · **Era** R · **Was** 89 in `lean-order.md` · **Upstream ids** FS112-A4SIX, FS112-NB4P, FS112-SIX, FS112-U1, FS114-N3-LOCAL
+<!--needs FS114-N4-LEMMAS: FS112-A4SIX,FS112-NB4P,FS112-SIX,FS112-U1,FS114-N3-LOCAL-->
+
+<!--q FS114-N4-LEMMAS statement-->
+**Statement as filed:**
+> (N4-OWN) A Reuleaux corner of the bowtie never carries the colour of the lune it bounds (`2 ∉ P_cl(q1), P_cl(q3)`; `4 ∉ P_cl(q2), P_cl(q4)`): `ω(q1)` leaves `p` tangent to the `t2 | t3` edge and curves into `t2`; (N4-LENS) If `|u − v| = 1`, a tile meeting the open lens `B(u,1) ∩ B(v,1)` with a colour of `P_cl(u)` is `u`'s tile of that colour; a colour that `u` and `v` carry on different tiles meets no point of the open lens; (N4-TOP) In the degenerate member: the ring tiles `T_R ⊂ B̄(q1,1) ∩ B̄(top,1)`, `T_L ⊂ B̄(q3,1) ∩ B̄(top,1)`; one tile `W` of the far lune's colour fills the outer wedge at `top`, cone exactly `[60°, 120°]`, bordered by arcs of `ω(q1)` and `ω(q3)`; the lune tile reaches `top`, a degree-4 vertex of four colours `{2, 4, 5, 6}` at distance 1 from `p`; (N4-FIVE) with the lune rings free of `Γ`, a corner carries five colours iff its lune's ring is degenerate, and otherwise exactly four `{1, 3, 4, X}`; (N4-ARC) at a five-colour corner `q1`, 120° of unit arcs centred at `q1` lie within radius `√3` of `p`, and FS112-SIX's demand adds nothing beyond N-E0 on the far arc; (N4-A4NB) neither A4SIX nor NB4P gives the bowtie a new constraint
+
+<!--q FS114-N4-LEMMAS not_claimed-->
+**Not claimed:**
+> N4-OPP as N4 stated it (MISSTATED in general: an edge leaving `p` exactly opposite and curving toward `q` with curvature above 1 captures the branch of `ω(q)`; NB4's corrected second-order form holds, and N4-OWN is unaffected); N4-LENS without the non-Siamese hypothesis (FALSE: NB4)
+
+<!--q FS114-N4-LEMMAS grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N4-LEMMAS minds-->
+**Minds as filed:**
+> 2 — blind to: NB4 derived N4-OWN, N4-LENS, N4-FIVE and N4-TOP before opening FS114-N4's record; method: NB4-OWN by E1 at the corner, using only the four edge circles and degree 4 at `p`; N4-ARC and N4-A4NB one mind
+
+<!--q FS114-N4-LEMMAS handoff-->
+**Handoff as filed:**
+> none — relay-results for the bowtie's exclusion
+
+### 80. FS114-N4-D
+<!--row FS114-N4-D plans/FS114-derivation.md:480-->
+**Address** `plans/FS114-derivation.md:480` · **Role** upstream · **Era** R · **Was** 93 in `lean-order.md` · **Upstream ids** FS114-N3-DR, FS114-N3-LOCAL, FS114-N4-LEMMAS
+<!--needs FS114-N4-D: FS114-N3-DR,FS114-N3-LOCAL,FS114-N4-LEMMAS-->
+
+<!--q FS114-N4-D statement-->
+**Statement as filed:**
+> (N4-D) **The degenerate member does not exist at radius `√3`**: no valid fragment on the closed disc of radius `√3` about `p` holds the Reuleaux bowtie with a lune whose ring is free of `Γ` and changes colour once; (N4-G) **The general member does not exist at radius `√3`** (both lune rings `Γ`-free): if the lune tile `t2` reached the change point `y′` nearer `q1`, the partner `z4` would fill the lens `B(q1,1) ∩ B(top,1)` near `P90` while its sector at `q1` starts at `0°`, giving `z4` two points more than 1 apart; by the mirror `t2` cannot reach `y″` either, against N3-DR1 (N4-BOWTIE: no valid fragment, non-Siamese, simple class, on the closed disc of radius `√3` about `p` holds a Reuleaux bowtie whose lune rings are free of `Γ`)
+
+<!--q FS114-N4-D not_claimed-->
+**Not claimed:**
+> lune rings carrying arcs of `ω(p)` (FS114-N5-GRING); maps with Siamese pairs; non-simple bowties
+
+<!--q FS114-N4-D grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N4-D minds-->
+**Minds as filed:**
+> 2 — blind to: NB4 derived N4-D and the reduction of N4-G before opening FS114-N4's record, and checked N4-G's kill step sighted (inventory item 83); method: NB4's N4-D ends at `R* = q1 + top` (no colour for the tile outside `ω(q1)` there), a different last step from N4's diameter `|P90 − P90′| = √3`
+
+<!--q FS114-N4-D handoff-->
+**Handoff as filed:**
+> none — superseded in scope by FS114-Y4-RSTOPALL; kept as the proof side's route
+
+<!--q FS114-N4-D merge@SR2-4.3-16-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 16, `plans/FS129-SR2-audit.md:478-479`; status applied):
+> 16. **FS114-Y4-RSTOPALL** in place of **FS114-N4-D** and **FS114-N3-DR** (both cases; N4-D a second route). FS114-Y3-RSTOP stays separate (Siamese pairs allowed).
+
+### 81. FS114-N5-GRING
+<!--row FS114-N5-GRING plans/FS114-derivation.md:531-->
+**Address** `plans/FS114-derivation.md:531` · **Role** upstream · **Era** R · **Was** 94 in `lean-order.md` · **Upstream ids** FS114-N3-DR, FS114-N3-LOCAL, FS114-N4-D, FS114-N4-LEMMAS
+<!--needs FS114-N5-GRING: FS114-N3-DR,FS114-N3-LOCAL,FS114-N4-D,FS114-N4-LEMMAS-->
+
+<!--q FS114-N5-GRING statement-->
+**Statement as filed:**
+> (N5-ΓRING) **K1-ΓRING reduced**: a Reuleaux bowtie whose lune rings carry arcs of `ω(p)` (non-Siamese, simple class) does not exist on the closed disc of radius 2 about `p` unless a lune is in the residual **(R-V)** of N5-XBAR (one corner carries both absent colours; a (Q) arc `t2 | z4` ends at the lune's ring midpoint): every lune is degenerate (N4-D), general (N4-G), or (R0) (N5-R0), and every pair of lunes not involving (R-V) dies; (NB5-RVKILL) **(R-V) does not exist on `B̄(p, √3)`**: `T ⊂ B̄(P90′, 1)`, `z4 ⊂ B̄(q1, 1)`, and the direction `60°` at `top` between the externally tangent `ω(q1)`, `ω(P90′)` has no colour; no hypothesis on the bottom lune
+
+<!--q FS114-N5-GRING not_claimed-->
+**Not claimed:**
+> N5-RV's "Not excluded: K1-ΓRING is GAP at (R-V)" (FALSE: NB5-RVKILL); N5-BEND's length bound read for (Q) arcs (derived for (R2) arcs only); anything at the pinwheel (N5-PIN0's structure only)
+
+<!--q FS114-N5-GRING grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N5-GRING minds-->
+**Minds as filed:**
+> 2 — blind to: NB5 derived N5-UP, -DEG, -R0, -ΓRING, -BEND, -KAPPA, -XBAR, -SIGHT, -BENDG, -W, -DR1 before opening FS114-N5's record; method: NB5-R0 by a different route (`C ∋ q2` makes `z4` start at `≤ 0°`); **the last step, NB5-RVKILL, is one mind**, and FS114-Y4-RSTOPALL excludes (R-V) independently, blind to both
+
+<!--q FS114-N5-GRING handoff-->
+**Handoff as filed:**
+> none — the proof side's route to FS114-Y4-RSTOPALL's conclusion (NB5-BOWTIE)
+
+### 82. FS114-N6-NOQ
+<!--row FS114-N6-NOQ plans/FS114-derivation.md:621-->
+**Address** `plans/FS114-derivation.md:621` · **Role** upstream · **Era** R · **Was** 97 in `lean-order.md` · **Upstream ids** FS112-U1, FS114-N3-LOCAL, FS114-N5-GRING
+<!--needs FS114-N6-NOQ: FS112-U1,FS114-N3-LOCAL,FS114-N5-GRING-->
+
+<!--q FS114-N6-NOQ statement-->
+**Statement as filed:**
+> **No pinwheel has a ring free of (Q) arcs** (after the bends); in particular none with a `Γ`-free ring, at radius `1 + ε` (with N6-RING60: a four-colour vertex whose ring carries no (Q) arc has ring change points exactly `y + 60°ℤ`, six ring tiles alternating the absent colours, each spanning a closed 60° arc; and N6-CENT: at a non-Siamese degree-4 vertex whose ring carries no (Q) arc, all tactic centres lie in one class mod 60°, so non-Reuleaux lenses need a (Q) arc)
+
+<!--q FS114-N6-NOQ not_claimed-->
+**Not claimed:**
+> pinwheels whose rings carry (Q) arcs (K1-PINQ; N6's "(Q) arcs never start at a centre counter-clockwise" is a GAP, NB6-QSTART); N6-WIN's table sentence and N6-COV as first stated (MISSTATED: each needs `κ` defined just beyond the windows; corrected, NB6); N6-MTP's route
+
+<!--q FS114-N6-NOQ grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N6-NOQ minds-->
+**Minds as filed:**
+> 2 — blind to: NB6 derived NOQ, RING60, KAPPA, CENT, PIN, P60′, ADJ, QOUT, QE1, PIN180 before opening FS114-N6's record; method: NB6-NOQ by RING60, N3-FLANK and its own pinwheel lemma NB6-P60 (the kill the cone `(240°, 300°)` at `q_j`), needing no PIN180
+
+<!--q FS114-N6-NOQ handoff-->
+**Handoff as filed:**
+> none — the proof side's half of the pinwheel's exclusion
+
+### 83. FS114-N7-QOPP
+<!--row FS114-N7-QOPP plans/FS114-derivation.md:793-->
+**Address** `plans/FS114-derivation.md:793` · **Role** upstream · **Era** R · **Was** 99 in `lean-order.md` · **Upstream ids** FS112-U1, FS114-N6-NOQ
+<!--needs FS114-N7-QOPP: FS112-U1,FS114-N6-NOQ-->
+
+<!--q FS114-N7-QOPP statement-->
+**Statement as filed:**
+> (N7-QOPP) Every (Q) arc of a four-colour degree-4 vertex joins opposite tiles (inner `t_i`, outer colour `c_{i+2}`); the other two tiles' colours are absent along it; (N7-FLANK) A tile of `p` with cone `[a, b]` puts its colour at no ring point in `(a ∓ 90°, b ∓ 90°)`; in `W(t) = [b − 90°, a + 90°]` only as itself, in `W̄(t)` only as other tiles; a ring point carries at most two colours of `p`; (N7-CHAIN) Change points propagate by `±60°` until the next point lies on a (Q) arc
+
+<!--q FS114-N7-QOPP not_claimed-->
+**Not claimed:**
+> that (Q) arcs occur; K1 on (Q) rings (a GAP at N7-HUBQ)
+
+<!--q FS114-N7-QOPP grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N7-QOPP minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS114-N7-QOPP handoff-->
+**Handoff as filed:**
+> none — tools for the (Q)-ring cases, the successor's
+
+### 84. FS114-Y2-BOWTIE
+<!--row FS114-Y2-BOWTIE plans/FS114-derivation.md:461-->
+**Address** `plans/FS114-derivation.md:461` · **Role** upstream · **Era** R · **Was** 91 in `lean-order.md` · **Upstream ids** none
+<!--needs FS114-Y2-BOWTIE: -->
+
+<!--q FS114-Y2-BOWTIE statement-->
+**Statement as filed:**
+> **K1's killing test fires as a local statement:** a non-Siamese valid fragment by formula (twenty tiles over `ℚ(√3)`) holds the closed disc of radius `3√3/5 ≈ 1.0392` about a degree-4 vertex `p` of four colours whose **four** edges are tactic — unit arcs about four-colour vertices `q1…q4` at distance 1, each with a tile of the outer tile's colour meeting the inner tile at `q_i` alone. So no argument reading only the closed disc of radius `3√3/5` about the vertex proves K1
+
+<!--q FS114-Y2-BOWTIE not_claimed-->
+**Not claimed:**
+> a disc of radius `√3` or more (the bowtie stops there: FS114-Y3-RSTOP); that the fragment is part of a valid map; five colours at `q_i` as forced in every bowtie (forced only with `top`'s neighbourhood: FS114-Y4-DIAG)
+
+<!--q FS114-Y2-BOWTIE grade-->
+**Grade as filed:**
+> computed over: the fragment's 46 same-colour tile pairs, each checked exactly over `ℚ(√3)` (`data/fs114/fs114-y2/k1.out`)
+
+<!--q FS114-Y2-BOWTIE minds-->
+**Minds as filed:**
+> 2 — blind to: YB2 built its own 20-tile D2-symmetric fragment before opening FS114-Y2's record; method: YB2's checker over towers of square roots and FS114-YB's, two checkers on an independent object
+
+<!--q FS114-Y2-BOWTIE handoff-->
+**Handoff as filed:**
+> none — an exact object checked by exact arithmetic; a kernel certificate is owed only if K1's route is ever published through it
+
+### 85. FS114-Y3-RSTOP
+<!--row FS114-Y3-RSTOP plans/FS114-derivation.md:601-->
+**Address** `plans/FS114-derivation.md:601` · **Role** upstream · **Era** R · **Was** 95 in `lean-order.md` · **Upstream ids** FS112-U1, FS114-Y2-BOWTIE
+<!--needs FS114-Y3-RSTOP: FS112-U1,FS114-Y2-BOWTIE-->
+
+<!--q FS114-Y3-RSTOP statement-->
+**Statement as filed:**
+> **FS114-Y2-BOWTIE stops at `√3`**: no valid fragment (Siamese pairs allowed) that agrees with it near `q1` and `q2` contains a neighbourhood of `r = q1 + e(330°) = (√3, 0)`; so the bowtie extends to no closed disc of radius `√3` or more about `p` (with Y3-R: a map with a Reuleaux bowtie containing a neighbourhood of `r` uses E1 or E2; and Y3-D2: in Y2's symmetry class each `q_i` has exactly five colours and no fragment holds `√3`)
+
+<!--q FS114-Y3-RSTOP not_claimed-->
+**Not claimed:**
+> Y3-FOUR's "so five colours at `q_i` are not forced by the bowtie" (FALSE once `top`'s neighbourhood is in the fragment: YB3-FIVE, Y4-DIAG); Y3-D2 without reading R-T (a GAP at one case: YB2)
+
+<!--q FS114-Y3-RSTOP grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-Y3-RSTOP minds-->
+**Minds as filed:**
+> 2 — blind to: YB2 derived RSTOP, R and D2 before opening FS114-Y3's record; method: YB2 made the germ condition explicit (the stop is the cone `(−60°, 60°)` at `r`) and checked five exact points; Y3's tool 11 of 11 at a named ring point (`tools/fs114_y3_rstop.py`)
+
+<!--q FS114-Y3-RSTOP handoff-->
+**Handoff as filed:**
+> none — a member of FS114-Y4-RSTOPALL
+
+<!--q FS114-Y3-RSTOP note@619-->
+**dated note filed under the entry (`plans/FS114-derivation.md:619`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR2-audit.md` § 2.1, row 95; `plans/FS129-close-inventory.md` item 117):* the handoff's "a member of FS114-Y4-RSTOPALL" holds only on the non-Siamese simple part: this entry allows Siamese pairs (its own statement, for FS114-Y2-BOWTIE), so it is not a case of RSTOPALL, which uses its lemma Y3-R. It stays a separate statement for the Lean backlog (SR2 § 4.3 item 16).
+
+<!--q FS114-Y3-RSTOP merge@SR2-4.3-16-->
+**Merge note — named** (SR2-4.3 item 16, `plans/FS129-SR2-audit.md:478-479`; status applied):
+> 16. **FS114-Y4-RSTOPALL** in place of **FS114-N4-D** and **FS114-N3-DR** (both cases; N4-D a second route). FS114-Y3-RSTOP stays separate (Siamese pairs allowed).
+
+### 86. FS114-Y4-LUNE
+<!--row FS114-Y4-LUNE plans/FS114-derivation.md:554-->
+**Address** `plans/FS114-derivation.md:554` · **Role** upstream · **Era** R · **Was** 92 in `lean-order.md` · **Upstream ids** FS112-U1
+<!--needs FS114-Y4-LUNE: FS112-U1-->
+
+<!--q FS114-Y4-LUNE statement-->
+**Statement as filed:**
+> (Y4-LUNE) In a non-Siamese simple valid map with a Reuleaux bowtie at `p`, the two side tiles of each lune differ in colour: `c(X1) ≠ c(X4)`, `c(X2) ≠ c(X3)`; with SIDES the pattern is diagonal (`c(X1) = c(X3)`, `c(X2) = c(X4)`); (Y4-SIDES) Let `t1 = Reul(p, q1, q2)` be a tile of a valid map; the tile `X1` along its side `p q1` at `q1` and the tile `X2` along its side `p q2` at `q2` (both outside `t1`) are distinct and of different colours, Siamese pairs allowed; in a non-Siamese Reuleaux bowtie `{c(X1), c(X2)} = {5, 6}`; (Y4-UPDOWN) If `|u − v| = 1`, a tile at `u` with a direction `ψ` at `u` with `cos(ψ − arg(v − u)) > 0` has points within `< 1` of `v`, hence of every tile at `v`: in a non-Siamese map its colour is absent at `v` unless it is that tile; (Y4-W) In a non-Siamese simple Reuleaux bowtie the tile along `t1`'s outer side at `q1` and the one at `q2` are one tile `W`, of colour 3 (the colour of `t3`); `W ⊂ B̄(q1, 1) ∩ B̄(q2, 1)`, so its sector is inside `[300°, 360°]` at `q1` and `[0°, 60°]` at `q2`, pointing toward `r` at both
+
+<!--q FS114-Y4-LUNE not_claimed-->
+**Not claimed:**
+> the mirror clause of Y4-W for `t3`'s outer tile as a separate claim (it is Y4-W under the reflection); anything about non-Reuleaux lenses
+
+<!--q FS114-Y4-LUNE grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-Y4-LUNE minds-->
+**Minds as filed:**
+> 2 — blind to: YB3 derived all four before opening FS114-Y4's record; method: different routes at LUNE's frontier and at W's colour steps; LUNE holds without "simple" (YB3); SIDES checked exactly at named points (`tools/fs114_y4_sides.py`)
+
+<!--q FS114-Y4-LUNE handoff-->
+**Handoff as filed:**
+> none — relay-results for FS114-Y4-RSTOPALL
+
+### 87. FS114-Y4-RSTOPALL
+<!--row FS114-Y4-RSTOPALL plans/FS114-derivation.md:577-->
+**Address** `plans/FS114-derivation.md:577` · **Role** SEED · **Era** R · **Was** 96 in `lean-order.md` · **Upstream ids** FS112-U1, FS114-N3-DR, FS114-N5-GRING, FS114-Y3-RSTOP, FS114-Y4-LUNE
+<!--needs FS114-Y4-RSTOPALL: FS112-U1,FS114-N3-DR,FS114-N5-GRING,FS114-Y3-RSTOP,FS114-Y4-LUNE-->
+
+<!--q FS114-Y4-RSTOPALL statement-->
+**Statement as filed:**
+> **No non-Siamese simple valid fragment holding a Reuleaux bowtie at `p` contains neighbourhoods of the closed unit disc about `p` and of `r`**: RSTOP extends to every Reuleaux bowtie, symmetric or not, Γ-free or ΓRING; none holds a closed disc of radius `√3` about `p`. E1, E2 and E0 are all excluded
+
+<!--q FS114-Y4-RSTOPALL not_claimed-->
+**Not claimed:**
+> the pinwheel, the `(2, 1, 1, 0)` patterns, non-Reuleaux lenses, non-simple bowties; maps with Siamese pairs (Y3-RSTOP, the one member, allows them); DIAG step 5's written reason ("`T2 ⊂ [240°, 300°]` points at `bot`" misses a cusp `T2` along 300°; closed by the `X2 | N′` unit arc: YB3-CUSP, exact 5/5)
+
+<!--q FS114-Y4-RSTOPALL grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-Y4-RSTOPALL minds-->
+**Minds as filed:**
+> 3 — blind to: YB3 derived it before opening FS114-Y4's record; the proof side (FS114-N4, FS114-N5, FS114-NB5) derived the same conclusion blind to the construction side; method: YB3 by its own LUNE and DIAG routes; the proof side by sector orders, a lens N4-LENS empties and a diameter (N4-D, N4-G), the up-tile (N5-DEG, N5-R0) and NB5-RVKILL's tangency at `top`, whose last step is one mind
+
+<!--q FS114-Y4-RSTOPALL handoff-->
+**Handoff as filed:**
+> de Bruijn — deferred with D6: the first explicit-radius exclusion of a configuration at a four-colour vertex; what crosses: the statement, the bowtie's definition with reading R-T, the non-Siamese and simple hypotheses
+
+<!--q FS114-Y4-RSTOPALL merge@SR2-4.3-16-->
+**Merge note — to formalize** (SR2-4.3 item 16, `plans/FS129-SR2-audit.md:478-479`; status applied):
+> 16. **FS114-Y4-RSTOPALL** in place of **FS114-N4-D** and **FS114-N3-DR** (both cases; N4-D a second route). FS114-Y3-RSTOP stays separate (Siamese pairs allowed).
+
+### 88. FS114-Y6-HALF
+<!--row FS114-Y6-HALF plans/FS114-derivation.md:704-->
+**Address** `plans/FS114-derivation.md:704` · **Role** upstream · **Era** R · **Was** 100 in `lean-order.md` · **Upstream ids** FS114-Y4-LUNE, FS114-Y4-RSTOPALL
+<!--needs FS114-Y6-HALF: FS114-Y4-LUNE,FS114-Y4-RSTOPALL-->
+
+<!--q FS114-Y6-HALF statement-->
+**Statement as filed:**
+> in a `(2, 1, 1, 0)` pattern whose two-edge tile `t_1` is a width-1 Reuleaux triangle, with `t_2`'s cone above 60° and `t_4`'s at least 60°, FS114-Y4-SIDES, FS114-YB3-D2T and FS114-Y4-W hold unchanged: the side tiles at its corners are 5 and 6, and the tile along its ring arc is one cap tile `W`, of the colour of the tile opposite `t_1` at `p`; the stop at `√3` is **not** inherited, since Y3's germ condition at `r` needs the slivers that FS114-Y4-DIAG derived from the second Reuleaux triangle
+
+<!--q FS114-Y6-HALF not_claimed-->
+**Not claimed:**
+> HALF as FS114-Y6 stated it, with no cone hypothesis (MISSTATED: at `t_2`'s cone 60° `q1 ∈ cl t_2` is forced, and at `t_4`'s below 60° SIDES-2 fails or no map exists, YB5-HALF4); any stop for the half-bowtie
+
+<!--q FS114-Y6-HALF grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-Y6-HALF minds-->
+**Minds as filed:**
+> 2 — blind to: YB5 derived the corrected form before opening FS114-Y6's record; method: YB5 found the two boundary subcases FS114-Y6's statement missed
+
+<!--q FS114-Y6-HALF handoff-->
+**Handoff as filed:**
+> none — a construction target's frame
+
+### 89. FS114-N7-3T
+<!--row FS114-N7-3T plans/FS114-derivation.md:723-->
+**Address** `plans/FS114-derivation.md:723` · **Role** upstream CYCLE · **Era** R · **Was** 102 in `lean-order.md` · **Upstream ids** FS114-N3-LOCAL, FS114-N6-NOQ, FS114-N7-HUB, FS114-Y6-HALF
+<!--needs FS114-N7-3T: FS114-N3-LOCAL,FS114-N6-NOQ,FS114-N7-HUB,FS114-Y6-HALF-->
+**Cautions:** [C116](#c116)
+
+<!--q FS114-N7-3T statement-->
+**Statement as filed:**
+> **Three or more tactic edges at a degree-4 vertex with a (Q)-free ring are excluded at radius `1 + ε`**, except the open-cap family **OC** (`+−+`, a Reuleaux lens beside a `60°` anti-lens; with a fourth tactic edge, the Reuleaux bowtie whose lenses do not border the caps): the `(2, 1, 1, 0)` patterns, the pinwheel, `γ = 0°` and non-Reuleaux lenses, `++−`, `−++` die in every member (with N7-HUB: at a four-colour vertex, non-Siamese and simple, whose ring is (Q)-free after the bends, each of the six change points `y_k` is a vertex of at least four colours: the directions toward `p` there lie in tiles of `p` reaching `y_k`, a tip, which meets `B(y_{k−1},1) ∩ B(y_{k+1},1)`, so its colour is carried at `y_{k±1}` by no other tile, and the outward directions in tiles of `p`'s colours outside `B̄(p,1)` whose `p`-tiles face away)
+
+<!--q FS114-N7-3T not_claimed-->
+**Not claimed:**
+> rings with (Q) arcs (N7-HUBQ, the tip with (Q) arcs allowed, needs the change point's ±60° points free of (Q) arcs — the named GAP); OC (its forced structure N7-OCTB and a route to `√3`, not closed); the pinwheel's E1 and E2 in N7's readings R-E1, R-E2 (GAP; whether R-E2 is the construction side's E2 is not settled, `plans/FS114-C-close.md` stage 2 §2.5)
+
+<!--q FS114-N7-3T grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N7-3T minds-->
+**Minds as filed:**
+> 1 — filed at one mind as the brief rules (inventory item 118); a blind check of N7-HUB (b) and the `+++ b = a + 1` step is the successor's first job
+
+<!--q FS114-N7-3T handoff-->
+**Handoff as filed:**
+> none — owed a blind second mind first; then with K1
+
+<!--q FS114-N7-3T note@746-->
+**dated note filed under the entry (`plans/FS114-derivation.md:746`):**
+> *Erratum (FS116-Z2, 2026-10-03; FS-116's close, `plans/FS116-close-inventory.md` items 29, 32, 39, 71, 110; the entry above stands as filed):*
+> 1. *The model line.* FS114-Y2-BOWTIE's centre ring carries two (Q) arcs, its Reuleaux caps, so the bowtie is not a model of this entry's class
+>    (`data/fs116/n1/ring-survey-bowtie.out`: `[150°, 210°]` inner 3 | outer 1 and `[330°, 30°]` inner 1 | outer 3; `data/fs116/n3/semi.out` l. 18;
+>    FS116-V4's attack on KAPPA, item 8; `plans/FS116-Z1-close.md` § 2.4 F1). The line should read, in FS116-N1's drafted replacement
+>    (`plans/FS116-N1-proof.md` § Hand-back at stage 3, correction 1): `model: none held with a (Q)-free ring at a degree-4 four-colour vertex with three or more tactic edges (FS114-Y2-BOWTIE's centre has four tactic edges, but its ring carries two (Q) arcs, the Reuleaux caps — FS114-N6 § 4); the exclusion's scope is 1 + ε`.
+>    Nothing rests on the model line.
+> 2. *The headline's setting.* Its first sentence omits the setting every step uses — non-Siamese, simple, exactly four colours at `p`, six colours, the
+>    ring after the bends (FS116-V1 § 3.3, § 4.3 row 6). The record's own statement carries it: "At a degree-4 four-colour vertex of a non-Siamese valid
+>    map in the simple class whose ring is (Q)-free after the bends, three tactic edges occur only in the pattern `+−+` (or its mirror `−+−`) with a
+>    Reuleaux lens and a `60°` anti-lens" (`plans/FS114-N7-proof.md` § 2.2). Read the headline in that setting.
+> 3. *`+++`.* The enumerated list omits `+++` (with `e4` not tactic), which the record names first — "Up to rotation and reflection (which reverses the
+>    order and the signs) the sign patterns are `+++`, `++−`, `+−+`, `−++`" (§ 2.2) — and kills at its `b = a + 1` step; the headline covers it
+>    (FS116-V1 § 4.3 row 7; item 29).
+> 4. *The parenthesis is a second claim.* "(with N7-HUB: …)" is N7-HUB, filed below as its own entry, FS114-N7-HUB (FS116-V1 § 3.3; item 32).
+> 5. *The minds line.* The blind check it asked for ran (FS116-V1, 2026-09-29): N7-HUB stands at two minds in the reading FS116-V1 was given (see
+>    FS114-N7-HUB); the per-pattern kills stay **one mind** — FS116-V1's blind verdict "stalls at: the per-pattern kills at radius 1 + ε", its reading of
+>    the `+++`, `b = a + 1` step after its verdict a checking reading (FS116-V1 § 3.4, § 4.3 row 1; items 30, 71).
+> 6. *What FS-116 adds to this class* (pointers; no verdict here changes): FS116-Y4-EMPTY, held (`plans/FS116-derivation.md`), excludes at radius `1 + ε`,
+>    in the non-Siamese simple class at six colours, every vertex of at least four colours whose ring carries no arc of `Γ`. Whether "after the bends"
+>    leaves arcs of `Γ` other than (Q) arcs on the ring of a fragment — so whether this entry's class is empty at `1 + ε` — is the invention signal of
+>    inventory item 136, carried to FS-123 unsettled (`plans/FS116-Z2-close.md` § 1.5).
+
+<!--q FS114-N7-3T merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+<!--q FS114-N7-3T merge@SR2-4.3-QUOTE-->
+**Merge note — quote with its errata** (SR2-4.3 item QUOTE, `plans/FS129-SR2-audit.md:492-493`; status applied):
+> - Quote **FS112-C-ENDS** in its erratum's form (residue deleted), and **FS112-C-DOUBLE**, **FS112-N3-BASE**, **FS114-N2-ENDS**, **FS114-N3-JOINT**, **FS114-N7-3T** with the errata under them (§ 2.4): the backlog quotes entries by script and the index carries no erratum.
+
+### 90. FS114-N7-HUB
+<!--row FS114-N7-HUB plans/FS114-derivation.md:768-->
+**Address** `plans/FS114-derivation.md:768` · **Role** upstream CYCLE · **Era** R · **Was** 103 in `lean-order.md` · **Upstream ids** FS114-N6-NOQ, FS114-N7-3T
+<!--needs FS114-N7-HUB: FS114-N6-NOQ,FS114-N7-3T-->
+
+<!--q FS114-N7-HUB statement-->
+**Statement as filed:**
+> At a four-colour vertex (non-Siamese, simple) whose ring is (Q)-free after the bends, each of the six change points `y_k` is a vertex of at least four colours: the directions toward `p` there lie in tiles of `p` reaching `y_k` (a **tip**, which meets `B(y_{k−1},1) ∩ B(y_{k+1},1)`, so its colour is carried at `y_{k±1}` by no other tile), and the outward directions in tiles of `p`'s colours outside `B̄(p,1)` whose `p`-tiles face away
+
+<!--q FS114-N7-HUB not_claimed-->
+**Not claimed:**
+> rings with (Q) arcs (N7-HUBQ: a tip only at a change point whose `±60°` points have `κ` defined just outside); anything in the Siamese or non-simple class; anything at `k ≥ 7`
+
+<!--q FS114-N7-HUB grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N7-HUB minds-->
+**Minds as filed:**
+> 2 — blind to: N7's record and this file until its verdict's commit (FS116-V1, 894db2d9), though given FS114-N7-3T's statement with this claim inside it and the vetted definitions (`../data/fs116/v1-n7-definitions.md`: the D-frame's shape, N7's setting, the bends on a fragment leaving only (Q) ring arcs), so the second mind is on the ring carrying no arc of Γ near the hubs, and on rings with (R2) arcs the count is one; method: FS116-V1's same-colour dichotomy and the ring's flip at `σ^{±1}y` against N7's CL and ring cones for the tip, the dichotomy against N3-FACE for the outward tile; the same model (Opus 5.5), one prior
+
+<!--q FS114-N7-HUB handoff-->
+**Handoff as filed:**
+> none — a relay-result; true vacuously where the ring carries no arc of Γ (FS116-Y4-EMPTY), and its content, if any, on (Q)-free rings carrying (R2) arcs (FS-123)
+
+<!--q FS114-N7-HUB merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 91. FS116-N1-GERM-R
+<!--row FS116-N1-GERM-R plans/FS116-derivation.md:414-->
+**Address** `plans/FS116-derivation.md:414` · **Role** SEED · **Era** R · **Was** 104 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-N1-GERM-R: -->
+
+<!--q FS116-N1-GERM-R statement-->
+**Statement as filed:**
+> in a valid k-coloured fragment on a closed disc of radius above 1 about a point p, for any k, Siamese pairs allowed, let y = r(ψ) be a point of ω(p), c a colour, and v⁻, v⁺, u⁻, u⁺ the arcs of ω(p) just clockwise and just counter-clockwise of r(ψ − 60°) and r(ψ + 60°); if v⁻ lies in the closure of a tile of colour c, no tile of colour c approaches y along a direction β with β − ψ in (150°, 330°); for v⁺ the interval is (−30°, 150°), for u⁻ (−150°, 30°), and for u⁺ (30°, 210°)
+
+<!--q FS116-N1-GERM-R not_claimed-->
+**Not claimed:**
+> anything about tiles that approach y only along the boundary directions ψ + 150°, ψ + 330°, ψ − 30°, ψ + 30°, ψ + 210°, ψ − 150°; anything when a germ lies on Γ with colour c on neither side
+
+<!--q FS116-N1-GERM-R grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-N1-GERM-R minds-->
+**Minds as filed:**
+> 2 — blind to: N1's record until V3's verdicts (7245b6eb); method: a straddle on T′ × T in two regimes against the monotone ring point (V3 § 4.2); the same model (Opus 5.5), one prior
+
+<!--q FS116-N1-GERM-R handoff-->
+**Handoff as filed:**
+> de Bruijn — the statement with its four open intervals; N-E1 and a monotonicity along the ring; queued behind D6's map type
+
+### 92. FS116-N1-TWIST-D
+<!--row FS116-N1-TWIST-D plans/FS116-derivation.md:108-->
+**Address** `plans/FS116-derivation.md:108` · **Role** SEED · **Era** R · **Was** 105 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-N1-TWIST-D: -->
+
+<!--q FS116-N1-TWIST-D statement-->
+**Statement as filed:**
+> at a vertex p of a valid k-coloured fragment on a closed disc of radius above 1 about p, for any k ≥ 1, Siamese pairs allowed, any degree, the set D of points of ω(p) in the closure of a tile of one of p's colours is closed and lies in the union of the arcs of Γ on ω(p) and finitely many points
+
+<!--q FS116-N1-TWIST-D not_claimed-->
+**Not claimed:**
+> that D is non-empty; that D is contained in the arcs of Γ on ω(p) alone (the strip's P₀ has two isolated points of D, its change points)
+
+<!--q FS116-N1-TWIST-D grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-N1-TWIST-D minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N1-TWIST-D handoff-->
+**Handoff as filed:**
+> de Bruijn — the first clause as stated, with N-E1 and the local finiteness it uses; a small statement once a map type exists in Lean (D6)
+
+<!--q FS116-N1-TWIST-D merge@SR2-4.3-21-->
+**Merge note — to formalize** (SR2-4.3 item 21, `plans/FS129-SR2-audit.md:485-486`; status applied):
+> 21. **FS116-RING-Q-PRIME-S** in place of **FS116-RING-Q-PRIME**; **FS116-N1-TWIST-D** in place of **FS116-RING-TWIST-C's first clause** and of **FS116-V5-RING's first two clauses**.
+
+### 93. FS116-N1-ECHO
+<!--row FS116-N1-ECHO plans/FS116-derivation.md:528-->
+**Address** `plans/FS116-derivation.md:528` · **Role** SEED · **Era** R · **Was** 106 in `lean-order.md` · **Upstream ids** FS116-N1-TWIST-D
+<!--needs FS116-N1-ECHO: FS116-N1-TWIST-D-->
+
+<!--q FS116-N1-ECHO statement-->
+**Statement as filed:**
+> in a valid k-coloured fragment on a closed disc of radius above 2 about a point p, for any k, Siamese pairs allowed, let w be a point of ω(p) whose ring just clockwise and just counter-clockwise of w lies in tiles of one colour X absent at p; if w is an essential boundary point at which the fragment is saturated (each colour of P(w) has a point of its support at distance exactly 1 from w) and X is in w's essential multicolour, the point 2w − p lies in the closure of a tile of colour X
+
+<!--q FS116-N1-ECHO not_claimed-->
+**Not claimed:**
+> anything when X has density 0 at w (a cusp); that the X-tile at 2w − p exists in any fragment of SAT-STRIP's class
+
+<!--q FS116-N1-ECHO grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-N1-ECHO minds-->
+**Minds as filed:**
+> 2 — on the corrected statement (reading B); blind to: N1's record until 7245b6eb; method: FS116-V3-ECHO-ONLY by a straddle against N1's derivative argument; the same model (Opus 5.5), one prior
+
+<!--q FS116-N1-ECHO handoff-->
+**Handoff as filed:**
+> de Bruijn — with N-E1 and saturation read at a point
+
+### 94. FS116-N1-GERM-S
+<!--row FS116-N1-GERM-S plans/FS116-derivation.md:452-->
+**Address** `plans/FS116-derivation.md:452` · **Role** SEED · **Era** R · **Was** 107 in `lean-order.md` · **Upstream ids** FS116-N1-GERM-R, FS116-N1-TWIST-D
+<!--needs FS116-N1-GERM-S: FS116-N1-GERM-R,FS116-N1-TWIST-D-->
+
+<!--q FS116-N1-GERM-S statement-->
+**Statement as filed:**
+> in a valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, Siamese pairs allowed, let y be a change point of the ring, X the colour of the ring just counter-clockwise of y and X̄ the colour just clockwise, and u⁻, u⁺, v⁻, v⁺ the arcs of ω(p) just clockwise and just counter-clockwise of the ring points y + 60° and y − 60°; then p has four colours and no more, X and X̄ are the colours absent at p, and (i) if neither v⁻ nor u⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction to p lies in the cone of a tile of a colour c of p every tile of p of which colour lies in B̄(y, 1); (ii) if neither u⁻ nor v⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction away from p lies in the cone of a tile, not a tile of p, of a colour c of p every tile of p of which colour misses B(y, 1); (iii) if none of the four lies on a (Q) arc, y is a vertex of at least four colours
+
+<!--q FS116-N1-GERM-S not_claimed-->
+**Not claimed:**
+> anything at k ≥ 7; that the tile in (i) is a tile of p (that is RING-GERM, in the non-Siamese class); that a change point with a germ on a (Q) arc has fewer than four colours
+
+<!--q FS116-N1-GERM-S grade-->
+**Grade as filed:**
+> derived from: FS116-N1-GERM-R, FS116-N1-TWIST-D
+
+<!--q FS116-N1-GERM-S minds-->
+**Minds as filed:**
+> 2 — blind to: N1's record until 7245b6eb, given N7-HUB's sketch in § 8 (V3's own caveat: a reader who counts it as given may count one); method: N-E2 against the interval argument, one fact under two names; the same model (Opus 5.5), one prior
+
+<!--q FS116-N1-GERM-S handoff-->
+**Handoff as filed:**
+> de Bruijn — with RING-GERM, the non-Siamese hypothesis dropped and (i), (ii) in their facing form
+
+### 95. FS116-N1-QFREE4
+<!--row FS116-N1-QFREE4 plans/FS116-derivation.md:490-->
+**Address** `plans/FS116-derivation.md:490` · **Role** upstream · **Era** R · **Was** 108 in `lean-order.md` · **Upstream ids** FS116-N1-TWIST-D
+<!--needs FS116-N1-QFREE4: FS116-N1-TWIST-D-->
+
+<!--q FS116-N1-QFREE4 statement-->
+**Statement as filed:**
+> at a vertex p of at least four colours of a valid fragment on a closed disc of radius above 1 about p, Siamese pairs allowed, if the ring carries no (Q) arc then p has four colours and no more
+
+<!--q FS116-N1-QFREE4 not_claimed-->
+**Not claimed:**
+> anything at k ≥ 7; anything when the ring carries a (Q) arc (then p may have five colours)
+
+<!--q FS116-N1-QFREE4 grade-->
+**Grade as filed:**
+> derived from: FS116-N1-TWIST-D
+
+<!--q FS116-N1-QFREE4 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N1-QFREE4 handoff-->
+**Handoff as filed:**
+> none — a two-line step used inside TOUCH's reduction; it crosses to Lean with it
+
+### 96. FS116-N1-TOUCH
+<!--row FS116-N1-TOUCH plans/FS116-derivation.md:507-->
+**Address** `plans/FS116-derivation.md:507` · **Role** SEED · **Era** R · **Was** 109 in `lean-order.md` · **Upstream ids** FS116-N1-GERM-R, FS116-N1-TWIST-D
+<!--needs FS116-N1-TOUCH: FS116-N1-GERM-R,FS116-N1-TWIST-D-->
+
+<!--q FS116-N1-TOUCH statement-->
+**Statement as filed:**
+> in a valid fragment on a closed disc of radius above 1 about a vertex p of four colours and no more, Siamese pairs allowed, let w be a point of ω(p) in the closure of a tile of one of p's colours which is not a change point of the ring and lies on no arc of Γ on ω(p), and suppose none of the four arcs of ω(p) just clockwise and just counter-clockwise of w + 60° and w − 60° lies on a (Q) arc; then the ring just clockwise and just counter-clockwise of w lies in tiles of one colour X absent at p, each of the four arcs lies in the closure of a tile of the other absent colour X̄ and of no tile of colour X, and no tile of colour X̄ has w in its closure
+
+<!--q FS116-N1-TOUCH not_claimed-->
+**Not claimed:**
+> that such a point exists in any fragment of SAT-QFREE's class; anything at k ≥ 7; anything when a germ lies on a (Q) arc
+
+<!--q FS116-N1-TOUCH grade-->
+**Grade as filed:**
+> derived from: FS116-N1-GERM-R, FS116-N1-TWIST-D
+
+<!--q FS116-N1-TOUCH minds-->
+**Minds as filed:**
+> 2 — blind to: N1's record until 7245b6eb; method: the same three steps (a second mind on the information axis only, V3 § 4.2); the same model (Opus 5.5), one prior
+
+<!--q FS116-N1-TOUCH handoff-->
+**Handoff as filed:**
+> de Bruijn — the statement, queued behind D6's map type
+
+<!--q FS116-N1-TOUCH merge@SR2-4.3-20-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 20, `plans/FS129-SR2-audit.md:484-484`; status applied):
+> 20. **FS129-SR2-TOUCHW** in place of **FS116-N1-TOUCH** (its idle hypothesis dropped).
+
+### 97. FS116-N2-FIVERING
+<!--row FS116-N2-FIVERING plans/FS116-derivation.md:655-->
+**Address** `plans/FS116-derivation.md:655` · **Role** upstream · **Era** R · **Was** 110 in `lean-order.md` · **Upstream ids** FS116-N1-TWIST-D
+<!--needs FS116-N2-FIVERING: FS116-N1-TWIST-D-->
+
+<!--q FS116-N2-FIVERING statement-->
+**Statement as filed:**
+> in a valid fragment on a closed disc of radius above 1 about a vertex p of five colours, Siamese pairs allowed, the ring has no change point, and for every θ outside a finite set r(θ) or r(θ + 60°) lies on a (Q) arc; so the (Q) arcs of the ring have total length at least 180° and p has no hub
+
+<!--q FS116-N2-FIVERING not_claimed-->
+**Not claimed:**
+> anything at k ≥ 7; that a five-colour vertex occurs in any fragment
+
+<!--q FS116-N2-FIVERING grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-N2-FIVERING minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N2-FIVERING handoff-->
+**Handoff as filed:**
+> none — a relay-result for the ring-type list; crosses to Lean with TWIST-D
+
+<!--q FS116-N2-FIVERING merge@SR1-6.2-3-->
+**Merge note — to formalize** (SR1-6.2 item 3, `plans/FS129-SR1-audit.md:544-544`; status applied):
+> 3. **FS116-N2-FIVERING** and **FS129-SR1-SIXQ** in place of FS112-SIX.
+
+### 98. FS116-N2-SIXRING
+<!--row FS116-N2-SIXRING plans/FS116-derivation.md:635-->
+**Address** `plans/FS116-derivation.md:635` · **Role** SEED · **Era** R · **Was** 111 in `lean-order.md` · **Upstream ids** FS116-N1-TWIST-D
+<!--needs FS116-N2-SIXRING: FS116-N1-TWIST-D-->
+
+<!--q FS116-N2-SIXRING statement-->
+**Statement as filed:**
+> in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of six colours, the ring lies in Γ and is six consecutive closed 60° arcs Z_i = [α + 60°i, α + 60°(i + 1)], each the whole set of ring points in the closure of one tile t_i of p; t_i lies in the Reuleaux triangle Reul(p, z_i, z_(i+1)) on its arc, with cone at p in [α + 60°i − 30°, α + 60°i + 90°]; every ring arc is a (Q) arc, and every outer tile along a non-degenerate subarc of Z_i has the colour of t_(i+2), t_(i+3) or t_(i+4); the ring has no change point, so p has no hub
+
+<!--q FS116-N2-SIXRING not_claimed-->
+**Not claimed:**
+> that any valid fragment has a six-colour vertex beyond radius 3/2; an exclusion of the type at any radius (FS116-Y2-SIXOFF's family stops below √3; the general type is open); anything in the Siamese class (there an inner tile need not be p's)
+
+<!--q FS116-N2-SIXRING grade-->
+**Grade as filed:**
+> derived from: FS116-N1-TWIST-D
+
+<!--q FS116-N2-SIXRING minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N2-SIXRING handoff-->
+**Handoff as filed:**
+> de Bruijn — with TWIST-D, queued behind D6's map type; a relay-result for any exclusion of six-colour vertices
+
+### 99. FS116-N3-PAIR
+<!--row FS116-N3-PAIR plans/FS116-derivation.md:1398-->
+**Address** `plans/FS116-derivation.md:1398` · **Role** SEED · **Era** R · **Was** 112 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-N3-PAIR: -->
+
+<!--q FS116-N3-PAIR statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, if both germs of one pair at a change point of the ring lie on (Q) arcs and the two arcs have the same pair of colours, then the inner colour of each is the outer colour of the other
+
+<!--q FS116-N3-PAIR not_claimed-->
+**Not claimed:**
+> anything about two (Q) arcs that are not at the germs of one pair; that a full parallel semi-hub occurs at six colours beyond FS114-Y2-BOWTIE
+
+<!--q FS116-N3-PAIR grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-N3-PAIR minds-->
+**Minds as filed:**
+> 2 — blind to: N3's record until 3647075d; method: the same route; the same model (Opus 5.5), one prior
+
+<!--q FS116-N3-PAIR handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS114-N7-QOPP, queued behind D6's map type
+
+### 100. FS116-N3-STAR2
+<!--row FS116-N3-STAR2 plans/FS116-derivation.md:1416-->
+**Address** `plans/FS116-derivation.md:1416` · **Role** SEED · **Era** R · **Was** 113 in `lean-order.md` · **Upstream ids** FS114-N7-QOPP, FS116-N3-PAIR
+<!--needs FS116-N3-STAR2: FS114-N7-QOPP,FS116-N3-PAIR-->
+
+<!--q FS116-N3-STAR2 statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) be a full semi-hub of kind O with (Q) arcs A = [ψ + 60°, ψ + 60° + ℓ] of inner colour a and outer a′ and B = [ψ − 60° − m, ψ − 60°]; if B's colours b (inner) and b′ (outer) are disjoint from a, a′, then ℓ + m ≤ 60° and the tiles of p are, counter-clockwise, t_b, t_a, t_b′, t_a′ with edges t_b|t_a in [ψ + ℓ − 30°, ψ + 30° − m], t_a|t_b′ in [ψ + 30°, ψ + 150°], t_b′|t_a′ in [ψ + 150° + ℓ, ψ + 210° − m] and t_a′|t_b in [ψ + 210°, ψ + 330°]; if B's colours are a′ (inner) and a (outer), then t_a ⊂ [ψ + 30°, ψ + 150°], t_a′ ⊂ [ψ + 210°, ψ + 330°], and the other two tiles' cones contain [ψ − 30°, ψ + 30°] and [ψ + 150°, ψ + 210°]
+
+<!--q FS116-N3-STAR2 not_claimed-->
+**Not claimed:**
+> the windows of a crossed semi-hub of kind T (computed in § 2.3's spirit but not entered); that any star in the windows is realised
+
+<!--q FS116-N3-STAR2 grade-->
+**Grade as filed:**
+> derived from: FS116-N3-PAIR
+
+<!--q FS116-N3-STAR2 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N3-STAR2 handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS114-N7-QOPP
+
+### 101. FS116-O1-SATPIN
+<!--row FS116-O1-SATPIN plans/FS116-derivation.md:54-->
+**Address** `plans/FS116-derivation.md:54` · **Role** SEED · **Era** R · **Was** 114 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS111-M-PINCH
+<!--needs FS116-O1-SATPIN: FS111-M-C11,FS111-M-PINCH-->
+
+<!--q FS116-O1-SATPIN statement-->
+**Statement as filed:**
+> let p be a vertex of at least four colours of a valid k-coloured fragment saturated on a disc about p, every tile at p with a cone of positive angle; each edge e at p (a boundary arc between tiles of two different colours), with side colours a (clockwise) and b (counter-clockwise) and unit normal ν pointing to b's side, is near p of at least one of two types — (split) an arc of the unit circle about a point y of ω(p) at which both a and b have support, a unit arc of kind both; or (tangent) a segment or an arc of radius at least 1 along which every x has x + ν(x) in the closure of colour a and x − ν(x) in the closure of colour b, so that p + ν(p) carries a and p − ν(p) carries b, two antipodal points of ω(p) on the normal to e at p; and every colour of p is carried on ω(p)
+
+<!--q FS116-O1-SATPIN not_claimed-->
+**Not claimed:**
+> anything at a cusp at p; that the split centre y has four colours (FS112-N3-NOBOTH gives four colours or a repeated colour, and FS111-W-NOREP removes the repeat only on cusp-free saturated maps); that any saturated valid six-coloured fragment about a four-colour vertex exists; that the strip's midline configuration is excluded in the class (SAT-STRIP, the claim list); saturation of any held six-colour positive
+
+<!--q FS116-O1-SATPIN grade-->
+**Grade as filed:**
+> derived from: FS111-M-PINCH, FS111-M-C11
+
+<!--q FS116-O1-SATPIN minds-->
+**Minds as filed:**
+> 2 — blind to: the first derivation until 3daaa05c, not to FS111-M-PINCH's case split, which both routes use (item 31's ruling); method: V1's L1–L4, a connected-product interval per contact, the last clause through the edges, against saturation at p (V1 § 4.2); the same model (Opus 5.5), one prior
+
+<!--q FS116-O1-SATPIN handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS111-M-PINCH and FS111-M-C11, queued behind the measurable chain: the statement, its cusp exclusion, and the inner-disc reading of saturation for fragments
+
+### 102. FS116-N1-AXIS
+<!--row FS116-N1-AXIS plans/FS116-derivation.md:571-->
+**Address** `plans/FS116-derivation.md:571` · **Role** SEED · **Era** R · **Was** 115 in `lean-order.md` · **Upstream ids** FS116-N1-GERM-R, FS116-N1-GERM-S, FS116-O1-SATPIN
+<!--needs FS116-N1-AXIS: FS116-N1-GERM-R,FS116-N1-GERM-S,FS116-O1-SATPIN-->
+
+<!--q FS116-N1-AXIS statement-->
+**Statement as filed:**
+> let p be a degree-4 vertex of four colours of a valid fragment on a closed disc of radius above 1 about p, saturated on a disc about p, whose four edges are segments along the four half-axes, with tiles coloured c_I, c_II, c_III, c_IV by quadrant and absent colours X, X̄; then at q_N = p + (0, 1): (a) every tile approaching q_N along a direction below the horizontal has colour X or X̄; (b) a tile of colour c_IV approaches q_N along 0⁺ and one of colour c_III along 180⁻, both above the line y = 1; (c) the arcs of ω(p) just counter-clockwise of r(30°) and just clockwise of r(150°) lie on no (Q) arc; (d) if the arcs just clockwise of r(30°) and just counter-clockwise of r(150°) lie on no (Q) arc, every tile approaching q_N along a direction below the horizontal has one colour, and q_N is not a change point; and at each of the axis points q_E, q_W, q_S, read with the quadrants turned with it
+
+<!--q FS116-N1-AXIS not_claimed-->
+**Not claimed:**
+> anything for four segments not at right angles; anything at k ≥ 7 for (d) (at k = 9 SQ9 fails it); that the axis points are touch points in any fragment saturated on B̄(p, 1); SAT-STRIP
+
+<!--q FS116-N1-AXIS grade-->
+**Grade as filed:**
+> derived from: FS116-N1-GERM-R
+
+<!--q FS116-N1-AXIS minds-->
+**Minds as filed:**
+> 2 — blind to: N1's record until 7245b6eb; method: N-E2 for (a) and saturation's definition for (b), so V3's (b) does not rest on SATPIN (V3 § 4.2); the same model (Opus 5.5), one prior
+
+<!--q FS116-N1-AXIS handoff-->
+**Handoff as filed:**
+> de Bruijn — the statement at q_N with the quarter-turn symmetry; queued behind SATPIN and D6's map type
+
+### 103. FS116-O1-YESLIM
+<!--row FS116-O1-YESLIM plans/FS116-derivation.md:30-->
+**Address** `plans/FS116-derivation.md:30` · **Role** SEED · **Era** R · **Was** 116 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-O1-YESLIM: -->
+
+<!--q FS116-O1-YESLIM statement-->
+**Statement as filed:**
+> for every k ≥ 1, if for every R > 0 some closed disc of radius R carries a valid k-coloured fragment (a map of an open set containing the disc, bounded by segments and circular arcs, k-coloured with no two interior points of one colour at distance exactly 1), then χ_m⁰(ℝ²) ≤ k; at k = 6, then χ(ℝ²) ≤ 6, with no MR
+
+<!--q FS116-O1-YESLIM not_claimed-->
+**Not claimed:**
+> the converse (a measurable a.e.-proper six-colouring gives no fragment: it need not be a map); that the limit colouring is a map, or saturated, or regular; anything about the fragments' centres, so nothing about C114-LOCAL-F's explicitness; χ(ℝ²) ≤ 6 from fragments on discs of one bounded radius
+
+<!--q FS116-O1-YESLIM grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-O1-YESLIM minds-->
+**Minds as filed:**
+> 2 — blind to: the first derivation until V1's verdicts were committed (3daaa05c); method: the Rajchman step by a compact operator and the rounding by a least index (V1 § 4.1 rows 1–2), against dominated convergence and the support rounding; the same model (Opus 5.5), one prior
+
+<!--q FS116-O1-YESLIM handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain (row 131's weak-* step): the statement at every k, its not-claimed line, and the Rajchman lemma it rests on
+
+<!--q FS116-O1-YESLIM merge@SR2-4.3-18-->
+**Merge note — to formalize** (SR2-4.3 item 18, `plans/FS129-SR2-audit.md:481-482`; status applied):
+> 18. **FS106-EQ's (c) ⟹ (a) at every `k`** once (the weak-* step), and **FS116-O1-YESLIM** as its corollary by Lemma P (FS129-SR2-YESLIM-EQ), in place of YESLIM's own weak-* argument.
+
+### 104. FS116-RING-GERM
+<!--row FS116-RING-GERM plans/FS116-derivation.md:175-->
+**Address** `plans/FS116-derivation.md:175` · **Role** SEED · **Era** R · **Was** 117 in `lean-order.md` · **Upstream ids** FS116-N1-TWIST-D
+<!--needs FS116-RING-GERM: FS116-N1-TWIST-D-->
+
+<!--q FS116-RING-GERM statement-->
+**Statement as filed:**
+> in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y be a change point of the ring (the ring off Γ on both sides of y), X the colour of the ring just counter-clockwise of y and X̄ the colour just clockwise, and u⁻, u⁺, v⁻, v⁺ the arcs of ω(p) just clockwise and just counter-clockwise of the ring points y + 60° and y − 60°; then p has four colours and no more, X and X̄ are the colours absent at p, and (i) if neither v⁻ nor u⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction to p lies in the cone of a tile of p; (ii) if neither u⁻ nor v⁺ lies on a (Q) arc, every direction at y in the open cone of 60° about the direction away from p lies in the cone of a tile of a colour of p that is not a tile of p; (iii) if none of the four lies on a (Q) arc, y is a vertex of at least four colours
+
+<!--q FS116-RING-GERM not_claimed-->
+**Not claimed:**
+> anything at k ≥ 7; that a change point with a germ on a (Q) arc has fewer than four colours (the strip's P₂ has four, with u⁺ and v⁻ on (Q) arcs); that the ring's change points are 60° apart (N6-RING60's conclusion, for (Q)-free rings)
+
+<!--q FS116-RING-GERM grade-->
+**Grade as filed:**
+> derived from: FS116-N1-TWIST-D
+
+<!--q FS116-RING-GERM minds-->
+**Minds as filed:**
+> 2 — blind to: N1's argument until 81bfc5cb, given N7-HUB's one-line sketch in the list's § 8 (item 49's caveat); method: colour exclusion at the tiles in the cones (V2) against tile identification (N1), V2 § 4.1 row 1; the same model (Opus 5.5), one prior
+
+<!--q FS116-RING-GERM handoff-->
+**Handoff as filed:**
+> de Bruijn — the statement with its four germs, the six-colour step named, over TWIST-D; queued behind D6's map type
+
+<!--q FS116-RING-GERM merge@SR3-5.1-26-->
+**Merge note — named** (SR3-5.1 item 26, `plans/FS129-SR3-audit.md:402-403`; status applied):
+> 26. **FS129-SR3-OUTERADJ** in place of **FS116-V6-ADJ**, over FS116-RING-GERM (ii), V6-GERM's neighbourhood form and FS129-SR1-TWOCIRC; V6-ADJ's argument is its last step, formalized class-free (two distinct same-colour tiles holding the two lens arcs beyond a unit pair).
+
+### 105. FS116-N2-STAR
+<!--row FS116-N2-STAR plans/FS116-derivation.md:673-->
+**Address** `plans/FS116-derivation.md:673` · **Role** SEED · **Era** R · **Was** 118 in `lean-order.md` · **Upstream ids** FS116-N1-TWIST-D, FS116-RING-GERM
+<!--needs FS116-N2-STAR: FS116-N1-TWIST-D,FS116-RING-GERM-->
+
+<!--q FS116-N2-STAR statement-->
+**Statement as filed:**
+> in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of four colours P, let y = r(ψ) be a change point of the ring, T_y the colours of the tiles of p at y and O_y those of the other tiles at y of colours of P; then C(y) = A(p) ⊔ T_y ⊔ O_y and A(y) = P ∖ (T_y ∪ O_y); every tile of p at y has its cone at p in [ψ − 90°, ψ + 90°], and the tile of p of each colour of O_y in [ψ + 90°, ψ + 270°]; every tile of p whose cone holds ψ + 90° or ψ − 90° in its interior has its colour in A(y); T_y is non-empty when v⁻, u⁺ lie on no (Q) arc and O_y when u⁻, v⁺ do
+
+<!--q FS116-N2-STAR not_claimed-->
+**Not claimed:**
+> anything at k ≥ 7; that T_y or O_y is a single colour (at a hub y has four, five or six colours); anything about the ring of y beyond its branches at p
+
+<!--q FS116-N2-STAR grade-->
+**Grade as filed:**
+> derived from: FS116-RING-GERM
+
+<!--q FS116-N2-STAR minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N2-STAR handoff-->
+**Handoff as filed:**
+> de Bruijn — with RING-GERM, queued behind D6's map type
+
+<!--q FS116-N2-STAR merge@SR1-6.2-2-->
+**Merge note — named** (SR1-6.2 item 2, `plans/FS129-SR1-audit.md:543-543`; status amended-by:SR3-5.1-25):
+> 2. **FS129-MR1-DOUBLETIP** in place of FS116-V6-HUG (and of FS116-Y4-EMPTY's double-tip step on route 2); its `uses only:` may drop FS116-N2-STAR (§ 2.2).
+
+<!--q FS116-N2-STAR merge@SR3-5.1-25-->
+**Merge note — the line that amends SR1-6.2-2, shown because the earlier line names this row** (SR3-5.1 item 25, `plans/FS129-SR3-audit.md:400-401`; status applied):
+> 25. **Amending SR1's item 2**: formalize **FS129-MR1-DOUBLETIP** for the wider ring classes it serves (FS-124), but **not** as EMPTY's double-tip step: its step 3 identifies the flank tile by a cone interval at the hubs, so an EMPTY routed through it holds only in the simple class (§ 2.3, § 4.3 row 3).
+
+### 106. FS116-N2-ANTI
+<!--row FS116-N2-ANTI plans/FS116-derivation.md:714-->
+**Address** `plans/FS116-derivation.md:714` · **Role** SEED · **Era** R · **Was** 119 in `lean-order.md` · **Upstream ids** FS116-N2-STAR
+<!--needs FS116-N2-ANTI: FS116-N2-STAR-->
+
+<!--q FS116-N2-ANTI statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of four colours, let y = r(ψ) and y* = r(ψ + 180°) be hubs of p, and let ψ + 90° and ψ − 90° lie in the interiors of the cones at p of tiles t⁺ and t⁻; then t⁺ ≠ t⁻, A(y) = A(y*) = {c(t⁺), c(t⁻)}, T_y = O_(y*) and O_y = T_(y*), each a single colour, and y and y* have four colours and no more
+
+<!--q FS116-N2-ANTI not_claimed-->
+**Not claimed:**
+> anything when an edge of p leaves at ψ + 90° or ψ − 90° (the strip: there the two missing pairs differ); anything at k ≥ 7
+
+<!--q FS116-N2-ANTI grade-->
+**Grade as filed:**
+> derived from: FS116-N2-STAR
+
+<!--q FS116-N2-ANTI minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N2-ANTI handoff-->
+**Handoff as filed:**
+> de Bruijn — with STAR
+
+### 107. FS116-N2-RECIP
+<!--row FS116-N2-RECIP plans/FS116-derivation.md:694-->
+**Address** `plans/FS116-derivation.md:694` · **Role** SEED · **Era** R · **Was** 120 in `lean-order.md` · **Upstream ids** FS116-N1-TOUCH, FS116-N2-STAR
+<!--needs FS116-N2-RECIP: FS116-N1-TOUCH,FS116-N2-STAR-->
+
+<!--q FS116-N2-RECIP statement-->
+**Statement as filed:**
+> in a non-Siamese valid fragment on a closed disc of radius above 2 about a vertex p of four colours P, let y = r(ψ) be a hub of p with four colours and no more; the points of ω(y) at 60° on either side of p are r(ψ + 60°) and r(ψ − 60°); if p lies on no arc of Γ on ω(y) and the four arcs of ω(y) just clockwise and just counter-clockwise of those two points lie on no (Q) arc of y's ring, then p is a change point of y's ring, its two sides lying in the tiles of p that hold the directions ψ − 90° and ψ + 90°, whose colours are the two colours of A(y)
+
+<!--q FS116-N2-RECIP not_claimed-->
+**Not claimed:**
+> anything when an edge of p runs along ω(y) (then p lies on an arc of Γ on ω(y), a tactic edge centred at y when its sides are y's colours); that the hub has four colours in general; anything at k ≥ 7
+
+<!--q FS116-N2-RECIP grade-->
+**Grade as filed:**
+> derived from: FS116-N2-STAR, FS116-N1-TOUCH
+
+<!--q FS116-N2-RECIP minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N2-RECIP handoff-->
+**Handoff as filed:**
+> de Bruijn — with STAR and TOUCH
+
+### 108. FS116-N2-HEX6
+<!--row FS116-N2-HEX6 plans/FS116-derivation.md:731-->
+**Address** `plans/FS116-derivation.md:731` · **Role** SEED · **Era** R · **Was** 121 in `lean-order.md` · **Upstream ids** FS114-N7-HUB, FS116-N1-QFREE4, FS116-N2-RECIP, FS116-RING-GERM
+<!--needs FS116-N2-HEX6: FS114-N7-HUB,FS116-N1-QFREE4,FS116-N2-RECIP,FS116-RING-GERM-->
+
+<!--q FS116-N2-HEX6 statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours whose ring carries no arc of Γ, the ring's change points include six hubs y_k = r(ψ + 60°k), k in Z/6, and of any four consecutive y_k at least one has a ring carrying an arc of Γ; in particular the six rings are not all free of arcs of Γ
+
+<!--q FS116-N2-HEX6 not_claimed-->
+**Not claimed:**
+> that any Γ-free four-colour vertex exists in a valid six-coloured fragment; anything for rings free of (Q) arcs but carrying other arcs of Γ (N6-RING60's bends would be needed); anything at k ≥ 7; the placed vertices' rings beyond whether they carry an arc of Γ
+
+<!--q FS116-N2-HEX6 grade-->
+**Grade as filed:**
+> derived from: FS116-N2-RECIP
+
+<!--q FS116-N2-HEX6 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N2-HEX6 handoff-->
+**Handoff as filed:**
+> de Bruijn — with RECIP, STAR and TOUCH; a relay-result for D2 (the first shell of a Γ-free vertex holds a hub whose ring carries an arc of Γ)
+
+<!--q FS116-N2-HEX6 merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 109. FS116-N2-HEX3
+<!--row FS116-N2-HEX3 plans/FS116-derivation.md:752-->
+**Address** `plans/FS116-derivation.md:752` · **Role** SEED · **Era** R · **Was** 122 in `lean-order.md` · **Upstream ids** FS116-N2-HEX6
+<!--needs FS116-N2-HEX3: FS116-N2-HEX6-->
+
+<!--q FS116-N2-HEX3 statement-->
+**Statement as filed:**
+> in HEX6's setting, if every y_k has four colours and no more, the set S of k whose y_k has a ring free of arcs of Γ is empty, one hub, or of the form {k, k+1}, {k, k+3}, {k, k+2} or {k, k+1, k+2}; with {k, k+3} the missing pairs of y_k and y_(k+3) are not complementary; with {k, k+2} or {k, k+1, k+2} the four edges of p leave at D_k, D_(k+1), D_(k+3), D_(k+4) (D_m = ψ + 30° + 60°m), y_k and y_(k+2) miss one pair and y_(k+1), y_(k+3), y_(k+4), y_(k+5) the complementary pair
+
+<!--q FS116-N2-HEX3 not_claimed-->
+**Not claimed:**
+> that any S of the list occurs; anything without four colours at every hub (then only HEX6)
+
+<!--q FS116-N2-HEX3 grade-->
+**Grade as filed:**
+> derived from: FS116-N2-HEX6
+
+<!--q FS116-N2-HEX3 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N2-HEX3 handoff-->
+**Handoff as filed:**
+> de Bruijn — with HEX6
+
+<!--q FS116-N2-HEX3 merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 110. FS116-N3-CONE
+<!--row FS116-N3-CONE plans/FS116-derivation.md:1376-->
+**Address** `plans/FS116-derivation.md:1376` · **Role** SEED · **Era** R · **Was** 123 in `lean-order.md` · **Upstream ids** FS112-N3-NOBOTH, FS112-U1, FS116-N1-GERM-R, FS116-RING-GERM
+<!--needs FS116-N3-CONE: FS112-N3-NOBOTH,FS112-U1,FS116-N1-GERM-R,FS116-RING-GERM-->
+
+<!--q FS116-N3-CONE statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, at a change point y = r(ψ) of the ring: u⁻ off (Q) arcs gives R ⊂ B̄(r(ψ + 60°), 1); v⁻ off them gives R ∩ B(r(ψ − 60°), 1) = ∅; v⁺ off them gives R′ ⊂ B̄(r(ψ − 60°), 1); u⁺ off them gives R′ ∩ B(r(ψ + 60°), 1) = ∅; a germ on a (Q) arc bars both colours of that arc from an open half-circle of directions at y — (ψ + 30°, ψ + 210°) for u⁺, (ψ + 150°, ψ + 330°) for v⁻, (ψ − 150°, ψ + 30°) for u⁻, (ψ − 30°, ψ + 150°) for v⁺; and an edge at y between a tile inside B̄(w, 1) and a tile outside B(w, 1) is an arc of ω(w), whose centre w, if it carries both side colours, is a vertex of at least four colours
+
+<!--q FS116-N3-CONE not_claimed-->
+**Not claimed:**
+> anything about a germ on a non-(Q) arc of Γ beyond RING-GERM's Step 1; the Siamese or non-simple class; anything at k ≥ 7
+
+<!--q FS116-N3-CONE grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-N3-CONE minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-N3-CONE handoff-->
+**Handoff as filed:**
+> de Bruijn — with RING-GERM and NOBOTH, queued behind D6's map type: the six half-planes at y and the edge clause
+
+### 111. FS116-N3-CROSS
+<!--row FS116-N3-CROSS plans/FS116-derivation.md:1471-->
+**Address** `plans/FS116-derivation.md:1471` · **Role** SEED · **Era** R · **Was** 124 in `lean-order.md` · **Upstream ids** FS114-N7-QOPP, FS116-N3-CONE, FS116-N3-STAR2, FS116-RING-GERM
+<!--needs FS116-N3-CROSS: FS114-N7-QOPP,FS116-N3-CONE,FS116-N3-STAR2,FS116-RING-GERM-->
+
+<!--q FS116-N3-CROSS statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours, let y = r(ψ) be a crossed full semi-hub of kind O of the ring of p, u⁺ on a (Q) arc of inner colour a and outer colour a′ and v⁻ on one of inner colour b and outer colour b′; then every tile of p at y has a cone at y of zero angle, and the outer colours at y lie in {a′, b′}; if y has four colours and every tile at y a cone of positive angle at y, its outer colours are a′ and b′ and its missing pair is {a, b}, and, unless an edge of p runs along ω(y) at p, p is a change point of the ring of y, that ring being b just counter-clockwise of p and a just clockwise, and p is a semi-hub of kind O of the ring of y
+
+<!--q FS116-N3-CROSS not_claimed-->
+**Not claimed:**
+> that y has four colours; that p is a crossed semi-hub of y's ring; anything about y's ring away from p; anything at k ≥ 7
+
+<!--q FS116-N3-CROSS grade-->
+**Grade as filed:**
+> derived from: FS116-N3-STAR2, FS116-N3-CONE
+
+<!--q FS116-N3-CROSS minds-->
+**Minds as filed:**
+> 2 — on every clause but the last; blind to: N3's record until 3647075d; method: FS116-V5-U1's cones at p (V5 § 3.4); the same model (Opus 5.5), one prior; the last clause 1 and a checking reading (V5's blind verdict was GAP there, its stall closed after reading by N3's step through FS114-N7-QOPP at y, re-derived by V5-U1)
+
+<!--q FS116-N3-CROSS handoff-->
+**Handoff as filed:**
+> de Bruijn — with STAR2 and RING-GERM
+
+### 112. FS116-RING-Q-PRIME
+<!--row FS116-RING-Q-PRIME plans/FS116-derivation.md:201-->
+**Address** `plans/FS116-derivation.md:201` · **Role** SEED · **Era** R · **Was** 125 in `lean-order.md` · **Upstream ids** FS116-RING-GERM
+<!--needs FS116-RING-Q-PRIME: FS116-RING-GERM-->
+
+<!--q FS116-RING-Q-PRIME statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours whose ring carries a (Q) arc, every change point of the ring whose points at ±60° on ω(p) lie on no (Q) arc is a vertex of at least four colours
+
+<!--q FS116-RING-Q-PRIME not_claimed-->
+**Not claimed:**
+> the change points with a point at ±60° on a (Q) arc (RING-Q, GAP); "lie on" read as the open arc (then a ±60° point may end a (Q) arc, as at the strip's P₂, and RING-GERM gives only one of the tip and the outer tile)
+
+<!--q FS116-RING-Q-PRIME grade-->
+**Grade as filed:**
+> derived from: FS116-RING-GERM
+
+<!--q FS116-RING-Q-PRIME minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-RING-Q-PRIME handoff-->
+**Handoff as filed:**
+> de Bruijn — with RING-GERM
+
+<!--q FS116-RING-Q-PRIME merge@SR2-4.3-21-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 21, `plans/FS129-SR2-audit.md:485-486`; status applied):
+> 21. **FS116-RING-Q-PRIME-S** in place of **FS116-RING-Q-PRIME**; **FS116-N1-TWIST-D** in place of **FS116-RING-TWIST-C's first clause** and of **FS116-V5-RING's first two clauses**.
+
+### 113. FS116-RING-Q-PRIME-S
+<!--row FS116-RING-Q-PRIME-S plans/FS116-derivation.md:475-->
+**Address** `plans/FS116-derivation.md:475` · **Role** SEED · **Era** R · **Was** 126 in `lean-order.md` · **Upstream ids** FS116-N1-GERM-S
+<!--needs FS116-RING-Q-PRIME-S: FS116-N1-GERM-S-->
+
+<!--q FS116-RING-Q-PRIME-S statement-->
+**Statement as filed:**
+> in a valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, Siamese pairs allowed, every change point of the ring whose points at ±60° on ω(p) lie on no closed (Q) arc is a vertex of at least four colours
+
+<!--q FS116-RING-Q-PRIME-S not_claimed-->
+**Not claimed:**
+> the change points with a point at ±60° on a (Q) arc (RING-Q, GAP)
+
+<!--q FS116-RING-Q-PRIME-S grade-->
+**Grade as filed:**
+> derived from: FS116-N1-GERM-S
+
+<!--q FS116-RING-Q-PRIME-S minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-RING-Q-PRIME-S handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS116-N1-GERM-S
+
+<!--q FS116-RING-Q-PRIME-S merge@SR2-4.3-21-->
+**Merge note — to formalize** (SR2-4.3 item 21, `plans/FS129-SR2-audit.md:485-486`; status applied):
+> 21. **FS116-RING-Q-PRIME-S** in place of **FS116-RING-Q-PRIME**; **FS116-N1-TWIST-D** in place of **FS116-RING-TWIST-C's first clause** and of **FS116-V5-RING's first two clauses**.
+
+### 114. FS116-RING-TWIST-C
+<!--row FS116-RING-TWIST-C plans/FS116-derivation.md:129-->
+**Address** `plans/FS116-derivation.md:129` · **Role** SEED · **Era** R · **Was** 127 in `lean-order.md` · **Upstream ids** FS116-N1-TWIST-D
+<!--needs FS116-RING-TWIST-C: FS116-N1-TWIST-D-->
+
+<!--q FS116-RING-TWIST-C statement-->
+**Statement as filed:**
+> at a vertex p of at least four colours of a valid fragment on a closed disc of radius above 1 about p (Siamese pairs allowed, any degree), the set D of points of ω(p) in the closure of a tile of one of p's colours is closed and lies in the union of the arcs of Γ on ω(p) and finitely many points; and for every half-open 60° window W of ω(p) with W ∪ σ(W) disjoint from D: p has four colours and no more; off a finite set, every point of W ∪ σ(W) lies in the closures of tiles of a single colour, one of the two colours absent at p, and this colour differs at θ and at θ + 60° for θ in W; every edge on ω(p) meeting W ∪ σ(W) in an arc has one colour on both sides; W holds an odd number of colour changes — points of W at which that colour differs on the two sides — each lying in the closures of tiles of the two absent colours and of no other colour; every change point in W is a colour change, and a colour change in W that is not a change point lies on an edge on ω(p) with one colour on both sides; so W holds an odd number of change points when no such arc meets W, in particular in every non-Siamese simple fragment
+
+<!--q FS116-RING-TWIST-C not_claimed-->
+**Not claimed:**
+> anything at k ≥ 7; that any fragment of the class has a qualifying window (no held fragment has one: the strip's and the disk's D-free arcs are at most 60° and 87.83°); the parity of change points when a seam meets W (FS116-N1-TWIST-LIT: then it can fail)
+
+<!--q FS116-RING-TWIST-C grade-->
+**Grade as filed:**
+> derived from: FS116-N1-TWIST-D
+
+<!--q FS116-RING-TWIST-C minds-->
+**Minds as filed:**
+> 2 — blind to: N1's argument until V2's verdicts (81bfc5cb); method: the same route in substance (V2 § 4.2); the same model (Opus 5.5), one prior
+
+<!--q FS116-RING-TWIST-C handoff-->
+**Handoff as filed:**
+> de Bruijn — the statement, its six-colour step L2 named, and TWIST-LIT's slit as the reason the counting word is colour changes
+
+<!--q FS116-RING-TWIST-C merge@SR2-4.3-21-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 21, `plans/FS129-SR2-audit.md:485-486`; status applied):
+> 21. **FS116-RING-Q-PRIME-S** in place of **FS116-RING-Q-PRIME**; **FS116-N1-TWIST-D** in place of **FS116-RING-TWIST-C's first clause** and of **FS116-V5-RING's first two clauses**.
+
+### 115. FS116-RING-TRANSFER-C
+<!--row FS116-RING-TRANSFER-C plans/FS116-derivation.md:769-->
+**Address** `plans/FS116-derivation.md:769` · **Role** SEED · **Era** R · **Was** 128 in `lean-order.md` · **Upstream ids** FS116-N1-TWIST-D, FS116-N2-ANTI, FS116-N2-FIVERING, FS116-N2-HEX6, FS116-N2-RECIP, FS116-N2-SIXRING, FS116-N2-STAR, FS116-RING-GERM, FS116-RING-TWIST-C
+<!--needs FS116-RING-TRANSFER-C: FS116-N1-TWIST-D,FS116-N2-ANTI,FS116-N2-FIVERING,FS116-N2-HEX6,FS116-N2-RECIP,FS116-N2-SIXRING,FS116-N2-STAR,FS116-RING-GERM,FS116-RING-TWIST-C-->
+
+<!--q FS116-RING-TRANSFER-C statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours: a ring of five or six colours has no change point and places no vertex through RING-GERM, the six-colour ring being six 60° (Q) arcs, one per tile of p, each tile in the Reuleaux triangle on its arc; a ring of four colours places its hubs, and at each hub y = r(ψ) the ring of p and the tiles of p holding the directions ψ + 90° and ψ − 90° determine the colours of y as the absent pair of p, the tip colours and the outer colours, and the pair missing at y, which contains the colour of every tile of p holding ψ ± 90° inside its cone; when y has four colours and its ring meets no (Q) arc at the points r(ψ ± 60°) and no arc of Γ at p, p is a change point of y's ring between the two colours missing at y; two antipodal hubs whose flanking directions lie inside tiles of p miss the same pair and exchange tip and outer colour; and a ring free of arcs of Γ has, among any four consecutive of its six hubs, one whose ring carries an arc of Γ
+
+<!--q FS116-RING-TRANSFER-C not_claimed-->
+**Not claimed:**
+> that the ring type of p alone determines any of this (the star is an input); anything about the arcs of Γ on the placed vertex's ring outside B̄(p, 1); the recurrence of types with (Q) arcs (RING-TRANSFER-Q, GAP); that the rule is the same at k = 7 (every step spends six: two absent colours)
+
+<!--q FS116-RING-TRANSFER-C grade-->
+**Grade as filed:**
+> derived from: FS116-N2-STAR, FS116-N2-RECIP, FS116-N2-ANTI, FS116-N2-HEX6, FS116-N2-SIXRING, FS116-N2-FIVERING
+
+<!--q FS116-RING-TRANSFER-C minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-RING-TRANSFER-C handoff-->
+**Handoff as filed:**
+> de Bruijn — deferred with D6's map type, after a blind second mind on STAR, RECIP, ANTI and HEX6
+
+<!--q FS116-RING-TRANSFER-C merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 116. FS116-S1-CLUSTER
+<!--row FS116-S1-CLUSTER plans/FS116-derivation.md:838-->
+**Address** `plans/FS116-derivation.md:838` · **Role** SEED · **Era** R · **Was** 129 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-S1-CLUSTER: -->
+
+<!--q FS116-S1-CLUSTER statement-->
+**Statement as filed:**
+> in a valid k-coloured fragment, for any k, Siamese pairs allowed, let 𝒯 be a finite family of tiles of one colour c the union of whose closures is connected, and U a tile of colour c; if some point of that union is at distance below 1 from some point of cl U, every point of the union is at distance at most 1 from every point of cl U
+
+<!--q FS116-S1-CLUSTER not_claimed-->
+**Not claimed:**
+> anything for an infinite family; that the tiles of 𝒯 are pairwise near
+
+<!--q FS116-S1-CLUSTER grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-S1-CLUSTER minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-S1-CLUSTER handoff-->
+**Handoff as filed:**
+> de Bruijn — a short lemma on connected families of open sets; it crosses with RUNG
+
+<!--q FS116-S1-CLUSTER merge@SR2-4.3-19-->
+**Merge note — named** (SR2-4.3 item 19, `plans/FS129-SR2-audit.md:483-483`; status replaced-by:SR3-5.1-23):
+> 19. **FS129-OR1-QFREE** in place of **FS116-S1-QF** (FS129-SR2-QFCASE); S1-QF's route (S1-LENS, S1-EXIT, S1-CLUSTER) is then a second route.
+
+<!--q FS116-S1-CLUSTER merge@SR3-5.1-23-->
+**Merge note — named** (SR3-5.1 item 23, `plans/FS129-SR3-audit.md:395-397`; status applied):
+> 23. **FS129-SR3-QFREE-NS** in place of **FS129-OR1-QFREE** and **FS116-S1-QF** — S1-QF is its direct case (non-Siamese, six colours, a four-colour vertex, a (Q)-free ring; no "simple at `p`" step needed); S1-QF's own route (S1-LENS, S1-EXIT, S1-CLUSTER; V4-OUTER, S1-KAPPA's last clause) is a second route. This replaces SR2's item 19 (FS129-OR1-QFREE in place of S1-QF).
+
+### 117. FS116-S1-EXIT
+<!--row FS116-S1-EXIT plans/FS116-derivation.md:906-->
+**Address** `plans/FS116-derivation.md:906` · **Role** SEED · **Era** R · **Was** 130 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-S1-EXIT: -->
+
+<!--q FS116-S1-EXIT statement-->
+**Statement as filed:**
+> let 30° < b < 90° and −90° < a < −30°, y_b = e(b), y_a = e(a), y_3 = e(b + 60°), y_5 = e(a − 60°) and Λ = B(y_a, 1) ∩ B(y_b, 1); let γ on [0, t_e] be a C¹ curve with γ(0) = 0, γ(t) in Λ for 0 < t < t_e and γ(t_e) in ∂Λ other than 0, with left unit normal ν; if at t_e |γ + ν − y_3| ≤ 1, |γ − ν − y_5| ≤ 1, |γ − y_3| ≥ 1 and |γ − y_5| ≥ 1, then γ(t_e) + ν(t_e) = y_b or γ(t_e) − ν(t_e) = y_a
+
+<!--q FS116-S1-EXIT not_claimed-->
+**Not claimed:**
+> anything about colourings (it is a lemma on curves and four points); that such a curve exists
+
+<!--q FS116-S1-EXIT grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-S1-EXIT minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-S1-EXIT handoff-->
+**Handoff as filed:**
+> de Bruijn — an elementary plane-geometry lemma; mechanical
+
+<!--q FS116-S1-EXIT merge@SR2-4.3-19-->
+**Merge note — named** (SR2-4.3 item 19, `plans/FS129-SR2-audit.md:483-483`; status replaced-by:SR3-5.1-23):
+> 19. **FS129-OR1-QFREE** in place of **FS116-S1-QF** (FS129-SR2-QFCASE); S1-QF's route (S1-LENS, S1-EXIT, S1-CLUSTER) is then a second route.
+
+<!--q FS116-S1-EXIT merge@SR3-5.1-23-->
+**Merge note — named** (SR3-5.1 item 23, `plans/FS129-SR3-audit.md:395-397`; status applied):
+> 23. **FS129-SR3-QFREE-NS** in place of **FS129-OR1-QFREE** and **FS116-S1-QF** — S1-QF is its direct case (non-Siamese, six colours, a four-colour vertex, a (Q)-free ring; no "simple at `p`" step needed); S1-QF's own route (S1-LENS, S1-EXIT, S1-CLUSTER; V4-OUTER, S1-KAPPA's last clause) is a second route. This replaces SR2's item 19 (FS129-OR1-QFREE in place of S1-QF).
+
+### 118. FS116-S1-RUNG
+<!--row FS116-S1-RUNG plans/FS116-derivation.md:856-->
+**Address** `plans/FS116-derivation.md:856` · **Role** SEED · **Era** R · **Was** 131 in `lean-order.md` · **Upstream ids** FS116-O1-SATPIN, FS116-S1-CLUSTER
+<!--needs FS116-S1-RUNG: FS116-O1-SATPIN,FS116-S1-CLUSTER-->
+
+<!--q FS116-S1-RUNG statement-->
+**Statement as filed:**
+> let p be a degree-4 vertex of four colours of a valid fragment whose four edges are segments along the four half-axes, with tiles coloured c_I, c_II, c_III, c_IV by quadrant, and suppose the fragment saturated at every point of the east edge's first segment [p, p + (ℓ, 0)], 0 < ℓ ≤ L_E; if a tile of colour c_IV has a point w in its closure with |w − q_N| < 1, q_N = p + (0, 1), then |w − p − (s, 1)| ≤ 1 for every s in [0, ℓ]; and the same at each edge and axis point, turned and reflected with the quadrants; in particular a contact of c_IV at r(φ), 90° < φ < 150°, gives ℓ ≤ cos φ + √(sin φ (2 − sin φ)), which at φ = 120° is FS116-Y1-STRIPCEIL's x* = √(√3 − 3/4) − 1/2
+
+<!--q FS116-S1-RUNG not_claimed-->
+**Not claimed:**
+> anything at a partner point where the edge is not saturated; anything for edges that are not segments; that a contact exists in quadrant II in any fragment of SAT-STRIP's class (FS116-S1-LENS supplies one where the ring carries no (Q) arc)
+
+<!--q FS116-S1-RUNG grade-->
+**Grade as filed:**
+> derived from: FS116-O1-SATPIN, FS116-S1-CLUSTER
+
+<!--q FS116-S1-RUNG minds-->
+**Minds as filed:**
+> 2 — blind to: S1's record until 48534b7c, with item 108's caveat; method: FS116-V4-PARTNER (saturation at the edge point) against SATPIN's tangent clause, FS116-V4-MEET against CLUSTER; the same model (Opus 5.5), one prior
+
+<!--q FS116-S1-RUNG handoff-->
+**Handoff as filed:**
+> de Bruijn — with SATPIN; a rung-and-contact lemma
+
+### 119. FS116-V4-CHORD
+<!--row FS116-V4-CHORD plans/FS116-derivation.md:956-->
+**Address** `plans/FS116-derivation.md:956` · **Role** upstream · **Era** R · **Was** 132 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-V4-CHORD: -->
+
+<!--q FS116-V4-CHORD statement-->
+**Statement as filed:**
+> two points r(α), r(β) of a unit circle about p, at angular separation δ = |α − β| ∈ [0°, 180°], are at distance 2 sin(δ/2); so the distance is 1 at δ = 60°, below 1 for δ < 60° and above 1 for 60° < δ ≤ 180°; and for β > α the chord from r(α) to r(β) points in the direction (α + β)/2 + 90°
+
+<!--q FS116-V4-CHORD not_claimed-->
+**Not claimed:**
+> anything about circles of other radii
+
+<!--q FS116-V4-CHORD grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V4-CHORD minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V4-CHORD handoff-->
+**Handoff as filed:**
+> none — a relay-result for stage 2
+
+### 120. FS116-V4-DICHOTOMY
+<!--row FS116-V4-DICHOTOMY plans/FS116-derivation.md:972-->
+**Address** `plans/FS116-derivation.md:972` · **Role** upstream · **Era** R · **Was** 133 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-V4-DICHOTOMY: -->
+
+<!--q FS116-V4-DICHOTOMY statement-->
+**Statement as filed:**
+> in a valid k-coloured fragment, for tiles A, B of one colour (A = B allowed), either every point of A is at distance below 1 from every point of B (write A ~ B) or every point of A is at distance above 1 from every point of B (A ⊥ B); A ~ A, so the closure of a tile has diameter at most 1; if points z ∈ cl A, z′ ∈ cl B have |z − z′| < 1 then A ~ B, and if |z − z′| > 1 then A ⊥ B; in a non-Siamese fragment A ~ B forces A = B
+
+<!--q FS116-V4-DICHOTOMY not_claimed-->
+**Not claimed:**
+> anything for tiles of different colours
+
+<!--q FS116-V4-DICHOTOMY grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V4-DICHOTOMY minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V4-DICHOTOMY handoff-->
+**Handoff as filed:**
+> none — a relay-result for KAPPA, RUNG and QF
+
+<!--q FS116-V4-DICHOTOMY merge@SR2-4.3-9-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 9, `plans/FS129-SR2-audit.md:467-469`; status applied):
+> 9. **FS129-SR2-CLOSURE** (as FS111-M2-INT's corollary for open sets, or by V0-CLOSE's translation argument) in place of **FS106-DIAM (iii)**, **FS111-V0-CLOSE** and **FS116-V5-NE1's first clause**; and **FS106-DIAM (i)** (a connected set with no unit pair has diameter at most 1) once, in place of the connectedness step inside FS116-V5-NE1's "in particular", FS106-TS-C, FS116-V4-DICHOTOMY's "A ~ A" and FS111-V0-CLEAN's diameter step.
+
+<!--q FS116-V4-DICHOTOMY merge@SR2-4.3-10-->
+**Merge note — named** (SR2-4.3 item 10, `plans/FS129-SR2-audit.md:470-471`; status applied):
+> 10. **FS129-SR2-HULLSET** in place of **FS111-C-HULL** (one measurable set with null unit pairs; no colouring, tightness or normal form). FS111-M-HULL2 over it; FS116-V4-DICHOTOMY's first clause is HULL2's case for two open tiles.
+
+### 121. FS116-V4-MEET
+<!--row FS116-V4-MEET plans/FS116-derivation.md:988-->
+**Address** `plans/FS116-derivation.md:988` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** 134 in `lean-order.md` · **Upstream ids** FS116-V4-DICHOTOMY
+<!--needs FS116-V4-MEET: FS116-V4-DICHOTOMY-->
+
+<!--q FS116-V4-MEET statement-->
+**Statement as filed:**
+> if tiles A, B of one colour have a common closure point z, then for every tile T of that colour, T ~ A holds if and only if T ~ B
+
+<!--q FS116-V4-MEET not_claimed-->
+**Not claimed:**
+> anything when cl A and cl B are disjoint
+
+<!--q FS116-V4-MEET grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V4-MEET minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V4-MEET handoff-->
+**Handoff as filed:**
+> none — RUNG's Siamese case rests on it
+
+### 122. FS116-V4-OUTER
+<!--row FS116-V4-OUTER plans/FS116-derivation.md:1037-->
+**Address** `plans/FS116-derivation.md:1037` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** 135 in `lean-order.md` · **Upstream ids** FS116-V4-CHORD, FS116-V4-DICHOTOMY
+<!--needs FS116-V4-OUTER: FS116-V4-CHORD,FS116-V4-DICHOTOMY-->
+
+<!--q FS116-V4-OUTER statement-->
+**Statement as filed:**
+> in a non-Siamese valid fragment on a disc of radius above 1 about a degree-4 vertex p of four colours whose four edges are segments at right angles and whose ring carries no (Q) arc, at each of κ's change points c in an open quadrant, the directions within 30° of the outward direction at c lie in one tile, not a tile of p, of the colour of the quadrant tile opposite to c's quadrant
+
+<!--q FS116-V4-OUTER not_claimed-->
+**Not claimed:**
+> anything at a change point on an axis; anything for crosses not at right angles (there the colour of the tile above the far edge can qualify as well: § Attack on QF)
+
+<!--q FS116-V4-OUTER grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V4-OUTER minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V4-OUTER handoff-->
+**Handoff as filed:**
+> none — QF rests on it
+
+<!--q FS116-V4-OUTER merge@SR3-5.1-23-->
+**Merge note — named** (SR3-5.1 item 23, `plans/FS129-SR3-audit.md:395-397`; status applied):
+> 23. **FS129-SR3-QFREE-NS** in place of **FS129-OR1-QFREE** and **FS116-S1-QF** — S1-QF is its direct case (non-Siamese, six colours, a four-colour vertex, a (Q)-free ring; no "simple at `p`" step needed); S1-QF's own route (S1-LENS, S1-EXIT, S1-CLUSTER; V4-OUTER, S1-KAPPA's last clause) is a second route. This replaces SR2's item 19 (FS129-OR1-QFREE in place of S1-QF).
+
+### 123. FS116-V4-PARTNER
+<!--row FS116-V4-PARTNER plans/FS116-derivation.md:1020-->
+**Address** `plans/FS116-derivation.md:1020` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** 136 in `lean-order.md` · **Upstream ids** FS116-V4-DICHOTOMY
+<!--needs FS116-V4-PARTNER: FS116-V4-DICHOTOMY-->
+
+<!--q FS116-V4-PARTNER statement-->
+**Statement as filed:**
+> let x be an interior point of a segment edge of a valid k-coloured fragment from a point p, of direction u and first-segment length L, with tile T_a on its clockwise side and T_b on its counter-clockwise side, and ν = u turned by +90°; if the fragment is saturated at x, then x + ν lies in the closure of a tile of T_a's colour and x − ν in the closure of a tile of T_b's colour, and every tile of T_a's colour other than T_a whose closure meets ω(x) is far from T_a (⊥)
+
+<!--q FS116-V4-PARTNER not_claimed-->
+**Not claimed:**
+> anything when the edge is curved; anything at p itself or at the segment's far end (closure gives those points of supp only)
+
+<!--q FS116-V4-PARTNER grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V4-PARTNER minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V4-PARTNER handoff-->
+**Handoff as filed:**
+> none — RUNG and QF rest on it
+
+### 124. FS116-V4-TWIST
+<!--row FS116-V4-TWIST plans/FS116-derivation.md:1003-->
+**Address** `plans/FS116-derivation.md:1003` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** 137 in `lean-order.md` · **Upstream ids** FS116-V4-CHORD, FS116-V4-DICHOTOMY
+<!--needs FS116-V4-TWIST: FS116-V4-CHORD,FS116-V4-DICHOTOMY-->
+
+<!--q FS116-V4-TWIST statement-->
+**Statement as filed:**
+> at a point p of a valid k-coloured fragment on a disc of radius above 1 about p, for any k, Siamese pairs allowed, no colour has a tile whose closure holds a germ g of ω(p) and a tile (the same or another) whose closure holds σg or σ⁻¹g; and a point of ω(p) inside a tile has that tile's colour absent at p when p is a vertex
+
+<!--q FS116-V4-TWIST not_claimed-->
+**Not claimed:**
+> anything about germs lying on Γ with the colour on neither side
+
+<!--q FS116-V4-TWIST grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V4-TWIST minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V4-TWIST handoff-->
+**Handoff as filed:**
+> none — KAPPA rests on it
+
+### 125. FS116-S1-KAPPA
+<!--row FS116-S1-KAPPA plans/FS116-derivation.md:795-->
+**Address** `plans/FS116-derivation.md:795` · **Role** SEED · **Era** R · **Was** 138 in `lean-order.md` · **Upstream ids** FS116-V4-CHORD, FS116-V4-DICHOTOMY, FS116-V4-MEET, FS116-V4-OUTER, FS116-V4-PARTNER, FS116-V4-TWIST
+<!--needs FS116-S1-KAPPA: FS116-V4-CHORD,FS116-V4-DICHOTOMY,FS116-V4-MEET,FS116-V4-OUTER,FS116-V4-PARTNER,FS116-V4-TWIST-->
+
+<!--q FS116-S1-KAPPA statement-->
+**Statement as filed:**
+> at a vertex p of four colours and no more of a valid fragment on a closed disc of radius above 1 about p, Siamese pairs allowed, whose ring carries no (Q) arc, every germ of ω(p) (an arc just clockwise or just counter-clockwise of a ring point) lies in the closure of tiles of exactly one of the two colours absent at p, κ, and the germ 60° on carries the other; so κ's change points form a finite non-empty set invariant under the rotation by 60° about p, each half-open 60° window of ω(p) holds an odd number of them, and antipodal germs carry different colours; in a non-Siamese fragment κ's change points are exactly y + 60°ℤ for one ring point y
+
+<!--q FS116-S1-KAPPA not_claimed-->
+**Not claimed:**
+> anything when the ring carries a (Q) arc; anything at k ≥ 7 (at k = 9 SQ9's r(45°) and r(225°) carry one colour); that any vertex of the class exists at six colours
+
+<!--q FS116-S1-KAPPA grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-S1-KAPPA minds-->
+**Minds as filed:**
+> 2 — blind to: S1's record until V4's verdicts (48534b7c), told by its brief that a decided result rests on it (items 107, 108); method: three ring points and FS116-V4-DICHOTOMY against N-E1 at w (V4, Divergences on KAPPA row 1); the same model (Opus 5.5), one prior
+
+<!--q FS116-S1-KAPPA handoff-->
+**Handoff as filed:**
+> de Bruijn — with N-E1 and the germ convention; queued behind D6's map type
+
+<!--q FS116-S1-KAPPA note@818-->
+**dated note filed under the entry (`plans/FS116-derivation.md:818`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 4.1, row FS116 l. 816; `plans/FS129-close-inventory.md` items 129, 130):* the last clause's class — non-Siamese, six colours, a vertex of four colours, a ring with no (Q) arc, radius above 1 — is empty by FS129-SR3-QFREE-NS (derived, one mind; `plans/FS129-derivation.md`), which FS129-OR1-QFREE did not reach (this entry assumes no simplicity); the GAP at whether an orbit point can end an arc of Γ on ω(p) is moot. The clause stands as a step of FS116-S1-QF's second route only.
+
+<!--q FS116-S1-KAPPA merge@SR3-5.1-23-->
+**Merge note — named** (SR3-5.1 item 23, `plans/FS129-SR3-audit.md:395-397`; status applied):
+> 23. **FS129-SR3-QFREE-NS** in place of **FS129-OR1-QFREE** and **FS116-S1-QF** — S1-QF is its direct case (non-Siamese, six colours, a four-colour vertex, a (Q)-free ring; no "simple at `p`" step needed); S1-QF's own route (S1-LENS, S1-EXIT, S1-CLUSTER; V4-OUTER, S1-KAPPA's last clause) is a second route. This replaces SR2's item 19 (FS129-OR1-QFREE in place of S1-QF).
+
+<!--q FS116-S1-KAPPA merge@SR3-5.1-DNF-2-->
+**Merge note — do not formalize as stated** (SR3-5.1 item DNF-2, `plans/FS129-SR3-audit.md:410-411`; status applied):
+> - **FS116-S1-KAPPA's last clause** except as a step of S1-QF's second route: its class (non-Siamese, (Q)-free ring) is empty by FS129-SR3-QFREE-NS, and its GAP under reading L is moot.
+
+### 126. FS116-S1-PAIR
+<!--row FS116-S1-PAIR plans/FS116-derivation.md:820-->
+**Address** `plans/FS116-derivation.md:820` · **Role** SEED · **Era** R · **Was** 139 in `lean-order.md` · **Upstream ids** FS116-S1-KAPPA
+<!--needs FS116-S1-PAIR: FS116-S1-KAPPA-->
+
+<!--q FS116-S1-PAIR statement-->
+**Statement as filed:**
+> in a valid fragment as in FS116-S1-KAPPA, let z be a point with 0 < |z − p| < 2, φ its direction from p and α = arccos(|z − p|/2), so that r(φ + α) and r(φ − α) are the ring points at distance 1 from z; if neither φ + α nor φ − α is a change point, no tile of colour κ(φ + α) or κ(φ − α) has z in its closure; in particular where κ(φ + α) ≠ κ(φ − α) only colours of p are carried at z
+
+<!--q FS116-S1-PAIR not_claimed-->
+**Not claimed:**
+> anything at a point whose ring point is a change point; which colours of p are carried
+
+<!--q FS116-S1-PAIR grade-->
+**Grade as filed:**
+> derived from: FS116-S1-KAPPA
+
+<!--q FS116-S1-PAIR minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-S1-PAIR handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS116-S1-KAPPA
+
+### 127. FS116-S1-LENS
+<!--row FS116-S1-LENS plans/FS116-derivation.md:884-->
+**Address** `plans/FS116-derivation.md:884` · **Role** SEED · **Era** R · **Was** 140 in `lean-order.md` · **Upstream ids** FS116-N1-AXIS, FS116-N1-GERM-S, FS116-S1-KAPPA, FS116-S1-PAIR
+<!--needs FS116-S1-LENS: FS116-N1-AXIS,FS116-N1-GERM-S,FS116-S1-KAPPA,FS116-S1-PAIR-->
+
+<!--q FS116-S1-LENS statement-->
+**Statement as filed:**
+> let p be a degree-4 vertex of four colours of a non-Siamese valid fragment on a closed disc of radius above 1 about p whose four edges are segments along the four half-axes and whose ring carries no (Q) arc; then no change point of κ lies on an axis; the least change point c_− and the greatest c_+ in (−90°, 90°) satisfy −90° < c_− < −30° and 30° < c_+ < 90°; the open lens Λ = B(r(c_−), 1) ∩ B(r(c_+), 1) meets no tile but T_I and T_IV; and r(c_+ + 60°) and r(c_− − 60°) are change points in the open quadrants II and III at distance below 1 from q_N and q_S, each holding in its closure an outward tile, of colour c_IV and c_I, while T_IV misses B(r(c_+ + 60°), 1) and T_I misses B(r(c_− − 60°), 1)
+
+<!--q FS116-S1-LENS not_claimed-->
+**Not claimed:**
+> rings with (Q) arcs; Siamese fragments (a tile Siamese-near T_II or T_III may meet Λ); crosses not at right angles; saturation is not used
+
+<!--q FS116-S1-LENS grade-->
+**Grade as filed:**
+> derived from: FS116-S1-KAPPA, FS116-S1-PAIR, FS116-N1-GERM-S, FS116-N1-AXIS
+
+<!--q FS116-S1-LENS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-S1-LENS handoff-->
+**Handoff as filed:**
+> de Bruijn — with KAPPA, PAIR and GERM-S; queued behind D6's map type
+
+<!--q FS116-S1-LENS merge@SR2-4.3-19-->
+**Merge note — named** (SR2-4.3 item 19, `plans/FS129-SR2-audit.md:483-483`; status replaced-by:SR3-5.1-23):
+> 19. **FS129-OR1-QFREE** in place of **FS116-S1-QF** (FS129-SR2-QFCASE); S1-QF's route (S1-LENS, S1-EXIT, S1-CLUSTER) is then a second route.
+
+<!--q FS116-S1-LENS merge@SR3-5.1-23-->
+**Merge note — named** (SR3-5.1 item 23, `plans/FS129-SR3-audit.md:395-397`; status applied):
+> 23. **FS129-SR3-QFREE-NS** in place of **FS129-OR1-QFREE** and **FS116-S1-QF** — S1-QF is its direct case (non-Siamese, six colours, a four-colour vertex, a (Q)-free ring; no "simple at `p`" step needed); S1-QF's own route (S1-LENS, S1-EXIT, S1-CLUSTER; V4-OUTER, S1-KAPPA's last clause) is a second route. This replaces SR2's item 19 (FS129-OR1-QFREE in place of S1-QF).
+
+### 128. FS116-S1-QF
+<!--row FS116-S1-QF plans/FS116-derivation.md:933-->
+**Address** `plans/FS116-derivation.md:933` · **Role** SEED · **Era** R · **Was** 141 in `lean-order.md` · **Upstream ids** FS111-W-NOBEND, FS116-O1-SATPIN, FS116-S1-CLUSTER, FS116-S1-EXIT, FS116-S1-LENS
+<!--needs FS116-S1-QF: FS111-W-NOBEND,FS116-O1-SATPIN,FS116-S1-CLUSTER,FS116-S1-EXIT,FS116-S1-LENS-->
+
+<!--q FS116-S1-QF statement-->
+**Statement as filed:**
+> no non-Siamese valid fragment on B̄(p, 2), saturated on B̄(p, 1), whose ring ω(p) carries no (Q) arc, has at p a degree-4 vertex of four colours whose four edges are segments at right angles
+
+<!--q FS116-S1-QF not_claimed-->
+**Not claimed:**
+> SAT-STRIP itself (rings with (Q) arcs, Siamese fragments, crosses not at right angles stay open: § 2.5's G1–G3); anything at k ≥ 7 (at k = 9 SQ9 meets every other hypothesis); that the class is non-empty at six colours without the cross
+
+<!--q FS116-S1-QF grade-->
+**Grade as filed:**
+> derived from: FS116-S1-LENS, FS116-S1-EXIT, FS116-S1-CLUSTER, FS116-O1-SATPIN
+
+<!--q FS116-S1-QF minds-->
+**Minds as filed:**
+> 1 — and a second derivation by a different route (FS116-V4 § 2.4: the rung tiles cross in the crescent B(q, 1) ∖ B̄(p, 1), by Jordan), whose brief told it the first's verdict (item 107), so it is not counted as a blind second mind (items 108, 115); a blind second mind is owed
+
+<!--q FS116-S1-QF handoff-->
+**Handoff as filed:**
+> de Bruijn — the composition of LENS, EXIT and CLUSTER, queued behind SATPIN, M-PINCH and D6's map type
+
+<!--q FS116-S1-QF merge@SR2-4.3-19-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 19, `plans/FS129-SR2-audit.md:483-483`; status replaced-by:SR3-5.1-23):
+> 19. **FS129-OR1-QFREE** in place of **FS116-S1-QF** (FS129-SR2-QFCASE); S1-QF's route (S1-LENS, S1-EXIT, S1-CLUSTER) is then a second route.
+
+<!--q FS116-S1-QF merge@SR3-5.1-23-->
+**Merge note — replaced in whole or in the part the line names** (SR3-5.1 item 23, `plans/FS129-SR3-audit.md:395-397`; status applied):
+> 23. **FS129-SR3-QFREE-NS** in place of **FS129-OR1-QFREE** and **FS116-S1-QF** — S1-QF is its direct case (non-Siamese, six colours, a four-colour vertex, a (Q)-free ring; no "simple at `p`" step needed); S1-QF's own route (S1-LENS, S1-EXIT, S1-CLUSTER; V4-OUTER, S1-KAPPA's last clause) is a second route. This replaces SR2's item 19 (FS129-OR1-QFREE in place of S1-QF).
+
+### 129. FS116-V5-NE1
+<!--row FS116-V5-NE1 plans/FS116-derivation.md:1258-->
+**Address** `plans/FS116-derivation.md:1258` · **Role** upstream · **Era** R · **Was** 142 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-V5-NE1: -->
+
+<!--q FS116-V5-NE1 statement-->
+**Statement as filed:**
+> in a valid k-coloured fragment, for any k, Siamese pairs allowed, if a point x lies in the closure of a tile of colour c, then no point z interior to a tile of colour c has |z − x| = 1; in particular every tile T lies in B(x, 1) for every x in cl T, so cl T lies in B̄(x, 1) and T has diameter at most 1
+
+<!--q FS116-V5-NE1 not_claimed-->
+**Not claimed:**
+> that T lies in the open disc B(x, 1) when x is a closure point of another tile of T's colour (only that z ∉ ω(x)); anything about points of Γ
+
+<!--q FS116-V5-NE1 grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V5-NE1 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V5-NE1 handoff-->
+**Handoff as filed:**
+> none — a relay-result for the stages that follow
+
+<!--q FS116-V5-NE1 merge@SR2-4.3-9-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 9, `plans/FS129-SR2-audit.md:467-469`; status applied):
+> 9. **FS129-SR2-CLOSURE** (as FS111-M2-INT's corollary for open sets, or by V0-CLOSE's translation argument) in place of **FS106-DIAM (iii)**, **FS111-V0-CLOSE** and **FS116-V5-NE1's first clause**; and **FS106-DIAM (i)** (a connected set with no unit pair has diameter at most 1) once, in place of the connectedness step inside FS116-V5-NE1's "in particular", FS106-TS-C, FS116-V4-DICHOTOMY's "A ~ A" and FS111-V0-CLEAN's diameter step.
+
+### 130. FS116-V5-OUT
+<!--row FS116-V5-OUT plans/FS116-derivation.md:1316-->
+**Address** `plans/FS116-derivation.md:1316` · **Role** upstream · **Era** R · **Was** 143 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-V5-OUT: -->
+
+<!--q FS116-V5-OUT statement-->
+**Statement as filed:**
+> in V5-RING's setting, let y = r(ψ) be a ring point and O a tile of colour c ∈ P, not a tile of p, with points y + s e(γ) for arbitrarily small s > 0 along a direction γ with cos(γ − ψ) > 0; then the cone at p of p's tile of colour c lies in the closed half-plane of directions [ψ + 90°, ψ + 270°]
+
+<!--q FS116-V5-OUT not_claimed-->
+**Not claimed:**
+> anything about the boundary directions ψ ± 90° of that cone (second order); anything when cos(γ − ψ) ≤ 0
+
+<!--q FS116-V5-OUT grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V5-OUT minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V5-OUT handoff-->
+**Handoff as filed:**
+> none — a relay-result for NBTIP, TIGHTLENS and STARFORCE
+
+### 131. FS116-V5-OUT2
+<!--row FS116-V5-OUT2 plans/FS116-derivation.md:1556-->
+**Address** `plans/FS116-derivation.md:1556` · **Role** upstream · **Era** R · **Was** 144 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-V5-OUT2: -->
+
+<!--q FS116-V5-OUT2 statement-->
+**Statement as filed:**
+> in V5-QCOL's setting (or V5-RING's), if an outer tile of colour c has a ring point r(θ) in its closure, then p's tile of colour c has its cone at p in [θ + 90°, θ + 270°]
+
+<!--q FS116-V5-OUT2 not_claimed-->
+**Not claimed:**
+> anything about the boundary directions of that cone
+
+<!--q FS116-V5-OUT2 grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V5-OUT2 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V5-OUT2 handoff-->
+**Handoff as filed:**
+> none — a relay-result for CROSS
+
+### 132. FS116-V5-QCOL
+<!--row FS116-V5-QCOL plans/FS116-derivation.md:1520-->
+**Address** `plans/FS116-derivation.md:1520` · **Role** upstream · **Era** R · **Was** 145 in `lean-order.md` · **Upstream ids** FS116-V5-NE1
+<!--needs FS116-V5-QCOL: FS116-V5-NE1-->
+
+<!--q FS116-V5-QCOL statement-->
+**Statement as filed:**
+> in this setting p has exactly four colours and X, X̄ are the two absent; a germ that lies on no (Q) arc "carries" an absent colour — the ring colour there if the germ is off Γ, else an absent side colour of the arc of Γ on ω(p) it lies on — namely X at u⁻ and v⁻ and X̄ at u⁺ and v⁺, and the hub's partner point (u or v) lies in the closure of a tile of that colour; a germ on a (Q) arc lies on an arc of ω(p) whose inner tile is p's tile of the inner colour and whose outer tile is not a tile of p; the two germs of one pair never lie on one (Q) arc, and a (Q) arc holding u⁺ (v⁻) and not u⁻ (v⁺) ends at u (v)
+
+<!--q FS116-V5-QCOL not_claimed-->
+**Not claimed:**
+> that a germ off (Q) lies off Γ; anything at k ≥ 7
+
+<!--q FS116-V5-QCOL grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V5-QCOL minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V5-QCOL handoff-->
+**Handoff as filed:**
+> none — a relay-result for SEMI, PAIR, CROSS
+
+### 133. FS116-V5-RING
+<!--row FS116-V5-RING plans/FS116-derivation.md:1275-->
+**Address** `plans/FS116-derivation.md:1275` · **Role** upstream · **Era** R · **Was** 146 in `lean-order.md` · **Upstream ids** FS116-V5-NE1
+<!--needs FS116-V5-RING: FS116-V5-NE1-->
+
+<!--q FS116-V5-RING statement-->
+**Statement as filed:**
+> at a point p of a valid six-coloured fragment on a closed disc of radius above 1 about p, non-Siamese, with at least four colours at p and Γ ∩ ω(p) containing no arc: Γ ∩ ω(p) is finite; every point of ω(p) off Γ is interior to a tile of one of the colours absent at p; p has exactly four colours, so exactly two are absent, X and X̄; the ring colour c satisfies c(θ + 60°) ≠ c(θ) off Γ; every tile T meeting ω(p) at r(θ₀) meets it only inside the open arc (θ₀ − 60°, θ₀ + 60°); two ring points off Γ of one colour less than 60° apart lie in one tile; and the change points are exactly y + 60°ℤ for one ring point y
+
+<!--q FS116-V5-RING not_claimed-->
+**Not claimed:**
+> anything with Siamese pairs (the step "one tile" fails there); anything at k ≥ 7; that the ring tile over an arc between consecutive change points touches no other ring point
+
+<!--q FS116-V5-RING grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V5-RING minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V5-RING handoff-->
+**Handoff as filed:**
+> none — a relay-result for SIX and everything after it
+
+<!--q FS116-V5-RING merge@SR2-4.3-21-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 21, `plans/FS129-SR2-audit.md:485-486`; status applied):
+> 21. **FS116-RING-Q-PRIME-S** in place of **FS116-RING-Q-PRIME**; **FS116-N1-TWIST-D** in place of **FS116-RING-TWIST-C's first clause** and of **FS116-V5-RING's first two clauses**.
+
+### 134. FS116-V5-GERM
+<!--row FS116-V5-GERM plans/FS116-derivation.md:1296-->
+**Address** `plans/FS116-derivation.md:1296` · **Role** upstream · **Era** R · **Was** 147 in `lean-order.md` · **Upstream ids** FS116-V5-NE1, FS116-V5-RING
+<!--needs FS116-V5-GERM: FS116-V5-NE1,FS116-V5-RING-->
+
+<!--q FS116-V5-GERM statement-->
+**Statement as filed:**
+> in V5-RING's setting, let y = r(ψ) be a change point, X₊ the ring colour just counter-clockwise of y and X₋ the one just clockwise; for β − ψ in each open interval below, every point y + t e(β′) with t > 0 small and β′ near β that is off Γ lies in a tile of the colours named: (−30°, 30°) a colour of p, on a tile that is not a tile of p (an outer tile); (30°, 90°) X₊ or an outer tile; (90°, 150°) X₊ or a tile of p; (150°, 210°) a tile of p; (210°, 270°) X₋ or a tile of p; (270°, 330°) X₋ or an outer tile; at y there is exactly one tile of colour X₊, the ring tile R₊ over the ring arc counter-clockwise of y, and one of X₋, R₋; so y is a vertex whose tiles, counter-clockwise, are outer tiles (covering ψ + (−30°, 30°)), R₊ (containing ψ + 90°), tiles of p (covering ψ + (150°, 210°)), R₋ (containing ψ + 270°), no tile colour being both a tip colour and an outer colour
+
+<!--q FS116-V5-GERM not_claimed-->
+**Not claimed:**
+> anything at the six boundary directions ψ + 30°k (second order decides there); anything when a germ lies on Γ
+
+<!--q FS116-V5-GERM grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V5-GERM minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V5-GERM handoff-->
+**Handoff as filed:**
+> none — a relay-result for TIPS onward
+
+### 135. FS116-V5-TIPSET
+<!--row FS116-V5-TIPSET plans/FS116-derivation.md:1334-->
+**Address** `plans/FS116-derivation.md:1334` · **Role** upstream · **Era** R · **Was** 148 in `lean-order.md` · **Upstream ids** FS116-V5-NE1
+<!--needs FS116-V5-TIPSET: FS116-V5-NE1-->
+
+<!--q FS116-V5-TIPSET statement-->
+**Statement as filed:**
+> in V5-RING's setting with the change points at y_k = e(60°k), let a tile T of p be a tip at y_k (y_k ∈ cl T); then cl T lies in B̄(y_k, 1) ∩ B̄(p, 1), its cone at p lies in [60°k − 90°, 60°k + 90°] and its cone at y_k in [60°k + 90°, 60°k + 270°]; T is a tip at no hub other than y_{k±1}, and at y_k and y_{k+1} only if its cone at p lies in [60°k − 30°, 60°k + 90°]; a tip at y_k and a tip at y_{k+3} have closures meeting only at p
+
+<!--q FS116-V5-TIPSET not_claimed-->
+**Not claimed:**
+> that every hub has a tip (that is V5-GERM's (150°, 210°) clause); anything about tiles of p tipping no hub
+
+<!--q FS116-V5-TIPSET grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V5-TIPSET minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V5-TIPSET handoff-->
+**Handoff as filed:**
+> none — a relay-result for TIPS
+
+### 136. FS116-V5-LENS
+<!--row FS116-V5-LENS plans/FS116-derivation.md:1351-->
+**Address** `plans/FS116-derivation.md:1351` · **Role** upstream CYCLE ROUTE-ONLY · **Era** R · **Was** 149 in `lean-order.md` · **Upstream ids** FS116-V5-GERM, FS116-V5-NE1, FS116-V5-OUT, FS116-V5-RING, FS116-V5-TIPSET, FS116-Y3-TIPS
+<!--needs FS116-V5-LENS: FS116-V5-GERM,FS116-V5-NE1,FS116-V5-OUT,FS116-V5-RING,FS116-V5-TIPSET,FS116-Y3-TIPS-->
+
+<!--q FS116-V5-LENS statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours whose ring carries no arc of Γ, labelled as FS116-Y3-TIPS, at the lens L_1 (hubs y_1, y_2, far vertex q_1 = √3 e(90°)): (a) every interior point of L_1 off Γ has colour X̄, 2 or 4; (b) no tile of colour X̄ has q_1 in its closure, and no tile of colour 4 with points in L_1 does; (c) every point of L_1 near q_1 lies in one tile Z of colour 2 or on Γ; (d) y_1 carries an outer tile of colour 4, its outer colours are 4 alone or 4 and 2, and in the second case the 2-tile is Z and comes after the 4-tile counter-clockwise from the ring tile R_{0,1}; (e) δ_4 = −30°; and, by the reflection in the line at 30° and the half-turn, the same at L_5 (δ_1 = 90°, Z of colour 2 at q_5, y_0's outer colours 3 alone or 2 then 3), at L_4 (δ_2 = 150°, colour 1 at q_4, y_4's outer colours 3 alone or 3 then 1) and at L_2 (δ_3 = 270°, colour 1 at q_2, y_3's outer colours 4 alone or 1 then 4)
+
+<!--q FS116-V5-LENS not_claimed-->
+**Not claimed:**
+> that any fragment of the class exists; anything below radius √3; anything in the Siamese or non-simple class; anything at k ≥ 7
+
+<!--q FS116-V5-LENS grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V5-LENS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V5-LENS handoff-->
+**Handoff as filed:**
+> Keryx — V5-LENS proves more than FS116-Y3-TIGHTLENS states (each lens forces its first disjunct); the divergence table at stage 4 compares routes
+
+### 137. FS116-Y3-SIX
+<!--row FS116-Y3-SIX plans/FS116-derivation.md:1076-->
+**Address** `plans/FS116-derivation.md:1076` · **Role** SEED CYCLE · **Era** R · **Was** 150 in `lean-order.md` · **Upstream ids** FS116-N1-QFREE4, FS116-RING-GERM, FS116-RING-TWIST-C, FS116-V5-GERM, FS116-V5-LENS, FS116-V5-NE1, FS116-V5-OUT, FS116-V5-RING, FS116-V5-TIPSET
+<!--needs FS116-Y3-SIX: FS116-N1-QFREE4,FS116-RING-GERM,FS116-RING-TWIST-C,FS116-V5-GERM,FS116-V5-LENS,FS116-V5-NE1,FS116-V5-OUT,FS116-V5-RING,FS116-V5-TIPSET-->
+
+<!--q FS116-Y3-SIX statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, the ring has exactly six change points, 60° apart, each a hub, and p has exactly four tiles
+
+<!--q FS116-Y3-SIX not_claimed-->
+**Not claimed:**
+> anything in the Siamese class (there RING-GERM's tip is GERM-S's tile, not necessarily a tile of p, and the count is not run); anything at k ≥ 7 (SQ9 at k = 9 has twelve); that any such fragment exists
+
+<!--q FS116-Y3-SIX grade-->
+**Grade as filed:**
+> derived from: FS116-RING-TWIST-C, FS116-RING-GERM, FS116-N1-QFREE4
+
+<!--q FS116-Y3-SIX minds-->
+**Minds as filed:**
+> 2 — blind to: Y3's record until V5's verdicts (320a3b53); method: FS116-V5-RING (non-Siamese against a tile's 60° reach; no simplicity) against Y3's tip count; the same model (Opus 5.5), one prior
+
+<!--q FS116-Y3-SIX handoff-->
+**Handoff as filed:**
+> de Bruijn — with RING-TWIST-C and RING-GERM, queued behind D6's map type
+
+### 138. FS116-Y3-TIPS
+<!--row FS116-Y3-TIPS plans/FS116-derivation.md:1097-->
+**Address** `plans/FS116-derivation.md:1097` · **Role** SEED CYCLE · **Era** R · **Was** 151 in `lean-order.md` · **Upstream ids** FS116-RING-GERM, FS116-Y3-SIX
+<!--needs FS116-Y3-TIPS: FS116-RING-GERM,FS116-Y3-SIX-->
+
+<!--q FS116-Y3-TIPS statement-->
+**Statement as filed:**
+> in FS116-Y3-SIX's setting, with the hubs y_k = e(60k), each hub has exactly one tip, the tips of antipodal hubs are opposite tiles of p, and up to rotation of the labels the four tiles of p, counter-clockwise, are T1 tipping y_0 and y_1 (cone at p in [−30°, 90°]), T3 tipping y_2 (in [30°, 210°]), T2 tipping y_3 and y_4 (in [150°, 270°]) and T4 tipping y_5 (in [210°, 30°])
+
+<!--q FS116-Y3-TIPS not_claimed-->
+**Not claimed:**
+> anything in the Siamese or non-simple class; that the cones fill their ranges (each δ is free in its interval); that any such fragment exists
+
+<!--q FS116-Y3-TIPS grade-->
+**Grade as filed:**
+> derived from: FS116-Y3-SIX, FS116-RING-GERM
+
+<!--q FS116-Y3-TIPS minds-->
+**Minds as filed:**
+> 2 — blind to: Y3's record until 320a3b53; method: the same argument (V5 § 4.1); the same model (Opus 5.5), one prior
+
+<!--q FS116-Y3-TIPS handoff-->
+**Handoff as filed:**
+> de Bruijn — with SIX; a relay-result for any exclusion of the Γ-free type
+
+### 139. FS116-V5-U1
+<!--row FS116-V5-U1 plans/FS116-derivation.md:1538-->
+**Address** `plans/FS116-derivation.md:1538` · **Role** upstream · **Era** R · **Was** 152 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-V5-U1: -->
+
+<!--q FS116-V5-U1 statement-->
+**Statement as filed:**
+> let A be an arc of Γ on ω(z), of angular extent [θ₁, θ₂] about z, θ₂ − θ₁ = ℓ > 0, with inner side colour c and outer side colour c′; a tile of colour c with z in its closure has its cone at z in the closed cone [θ₂ − 90°, θ₁ + 90°] facing A; one of colour c′ has it in the closed cone [θ₂ + 90°, θ₁ + 270°] facing away; the two open side cones (θ₁ − 90°, θ₂ − 90°) and (θ₁ + 90°, θ₂ + 90°) hold neither colour; so if z carries both c and c′ (A is both-kind), the side cones hold two further colours and, in a non-Siamese simple fragment, z has at least four colours
+
+<!--q FS116-V5-U1 not_claimed-->
+**Not claimed:**
+> anything when ℓ = 0; anything about tiles at z of other colours
+
+<!--q FS116-V5-U1 grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V5-U1 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V5-U1 handoff-->
+**Handoff as filed:**
+> none — a relay-result
+
+<!--q FS116-V5-U1 merge@SR1-6.2-4-->
+**Merge note — to formalize** (SR1-6.2 item 4, `plans/FS129-SR1-audit.md:545-545`; status applied):
+> 4. **FS116-V5-U1**'s first three clauses in place of FS112-U1's; U1's shadow clause and V5-U1's four-colour clause as two corollaries.
+
+### 140. FS116-V5-DICHO
+<!--row FS116-V5-DICHO plans/FS116-derivation.md:1572-->
+**Address** `plans/FS116-derivation.md:1572` · **Role** upstream ROUTE-ONLY · **Era** R · **Was** 153 in `lean-order.md` · **Upstream ids** FS116-V5-NE1, FS116-V5-QCOL, FS116-V5-U1
+<!--needs FS116-V5-DICHO: FS116-V5-NE1,FS116-V5-QCOL,FS116-V5-U1-->
+
+<!--q FS116-V5-DICHO statement-->
+**Statement as filed:**
+> in V5-QCOL's setting, if both germs of one pair at y lie on (Q) arcs A₁, A₂ with colour pairs Π₁, Π₂, then Π₁ = Π₂ (and then the inner colour of each is the outer colour of the other) or Π₁ ∩ Π₂ = ∅
+
+<!--q FS116-V5-DICHO not_claimed-->
+**Not claimed:**
+> that either case occurs
+
+<!--q FS116-V5-DICHO grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V5-DICHO minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V5-DICHO handoff-->
+**Handoff as filed:**
+> none — § 13's note asks that the dichotomy be checked, not given; here it is derived for every degree
+
+### 141. FS116-N3-SEMI
+<!--row FS116-N3-SEMI plans/FS116-derivation.md:1438-->
+**Address** `plans/FS116-derivation.md:1438` · **Role** SEED · **Era** R · **Was** 154 in `lean-order.md` · **Upstream ids** FS116-N2-STAR, FS116-N3-CONE, FS116-N3-PAIR, FS116-N3-STAR2, FS116-RING-GERM, FS116-V5-DICHO, FS116-V5-OUT2, FS116-V5-QCOL, FS116-V5-U1
+<!--needs FS116-N3-SEMI: FS116-N2-STAR,FS116-N3-CONE,FS116-N3-PAIR,FS116-N3-STAR2,FS116-RING-GERM,FS116-V5-DICHO,FS116-V5-OUT2,FS116-V5-QCOL,FS116-V5-U1-->
+
+<!--q FS116-N3-SEMI statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) be a semi-hub of the ring of p; then y is a vertex of at least four colours, or y is a vertex of exactly three colours one of whose edges at y is an arc of the unit circle about r(ψ + 60°) or about r(ψ − 60°) whose two side colours are both carried at that centre, which is then a vertex of at least four colours, or y is a full parallel semi-hub of exactly three colours — the two absent at p and the colour of the tile of p whose cone holds ψ + 180° (kind O) or ψ (kind T) in its interior
+
+<!--q FS116-N3-SEMI not_claimed-->
+**Not claimed:**
+> that a semi-hub has four colours; that the third alternative occurs, or that it is excluded; anything at a closed change point (the disk's corner, FS116-N1-QDISK); Siamese or non-simple fragments; anything at k ≥ 7
+
+<!--q FS116-N3-SEMI grade-->
+**Grade as filed:**
+> derived from: FS116-N3-CONE, FS116-N3-STAR2, FS116-N3-PAIR
+
+<!--q FS116-N3-SEMI minds-->
+**Minds as filed:**
+> 2 — blind to: N3's record until V5's verdicts (3647075d); method: FS116-V5-U1 for the centre's four colours and FS116-V5-DICHO for crossed-or-parallel, against FS112-N3-NOBOTH and FS114-N7-QOPP (V5 § 4.1); the same model (Opus 5.5), one prior
+
+<!--q FS116-N3-SEMI handoff-->
+**Handoff as filed:**
+> de Bruijn — with RING-GERM, NOBOTH and STAR, after a blind second mind; a relay-result for D2 (every semi-hub but the parallel three-colour one places a vertex of at least four colours on ω(p))
+
+### 142. FS116-RING-TRANSFER-QC
+<!--row FS116-RING-TRANSFER-QC plans/FS116-derivation.md:1494-->
+**Address** `plans/FS116-derivation.md:1494` · **Role** SEED · **Era** R · **Was** 155 in `lean-order.md` · **Upstream ids** FS112-N3-NOBOTH, FS114-N7-QOPP, FS116-N1-GERM-R, FS116-N2-STAR, FS116-N3-CONE, FS116-N3-CROSS, FS116-N3-PAIR, FS116-N3-SEMI, FS116-N3-STAR2, FS116-RING-GERM
+<!--needs FS116-RING-TRANSFER-QC: FS112-N3-NOBOTH,FS114-N7-QOPP,FS116-N1-GERM-R,FS116-N2-STAR,FS116-N3-CONE,FS116-N3-CROSS,FS116-N3-PAIR,FS116-N3-SEMI,FS116-N3-STAR2,FS116-RING-GERM-->
+
+<!--q FS116-RING-TRANSFER-QC statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of four colours: at a semi-hub y = r(ψ) of p's ring a vertex of at least four colours lies at y, at r(ψ + 60°) or at r(ψ − 60°), unless y is a full parallel semi-hub of three colours, which are then the two absent at p and the colour of the tile of p holding ψ + 180° (kind O) or ψ (kind T) in its cone's interior; when the (Q) arcs at a semi-hub's other pair join the same two opposite tiles of p their inner colours are swapped; at a full semi-hub of kind O the four edges of p lie in FS116-N3-STAR2's windows; and at a crossed full semi-hub of kind O whose (Q) arcs have inner colours a, b and outer a′, b′, every tip has a cone of zero angle and the outer colours lie in {a′, b′}, and if y has four colours with cones of positive angle its missing pair is {a, b} and p — unless an edge of p runs along ω(y) — is a change point of y's ring, b counter-clockwise and a clockwise of it, and a semi-hub of kind O of that ring
+
+<!--q FS116-RING-TRANSFER-QC not_claimed-->
+**Not claimed:**
+> anything at a closed change point; that the parallel three-colour semi-hub is excluded or occurs (SEMI-PAR3, GAP); that p is a crossed semi-hub of y's ring; anything about y's ring outside B̄(p, 1); that the rule is the same at k = 7 (RING-GERM's Step 1 and C(y) = A(p) ⊔ T_y ⊔ O_y spend six)
+
+<!--q FS116-RING-TRANSFER-QC grade-->
+**Grade as filed:**
+> derived from: FS116-N3-SEMI, FS116-N3-CROSS, FS116-N3-PAIR, FS116-N3-STAR2
+
+<!--q FS116-RING-TRANSFER-QC minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-RING-TRANSFER-QC handoff-->
+**Handoff as filed:**
+> de Bruijn — deferred with D6's map type, after a blind second mind on SEMI, PAIR, STAR2 and CROSS
+
+### 143. FS116-V6-HUBS
+<!--row FS116-V6-HUBS plans/FS116-derivation.md:1772-->
+**Address** `plans/FS116-derivation.md:1772` · **Role** upstream · **Era** R · **Was** 156 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-V6-HUBS: -->
+
+<!--q FS116-V6-HUBS statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, m = 1: the change points are y_k = r(ψ₀ + 60°k), six of them; a tile of p tips at most two, and two only if consecutive
+
+<!--q FS116-V6-HUBS not_claimed-->
+**Not claimed:**
+> anything in the Siamese class; anything at k ≥ 7 (SQ9 at k = 9 meets every other hypothesis with twelve points of Γ on its ring, control v6-sq9); that any such fragment exists
+
+<!--q FS116-V6-HUBS grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V6-HUBS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V6-HUBS handoff-->
+**Handoff as filed:**
+> none — a step of FS116-V6's route to FS116-Y4-EMPTY; it travels with EMPTY's handoff
+
+<!--q FS116-V6-HUBS merge@SR3-5.1-24-->
+**Merge note — named** (SR3-5.1 item 24, `plans/FS129-SR3-audit.md:398-399`; status applied):
+> 24. **FS129-SR3-EMPTY-NS** in place of **FS116-Y4-EMPTY**, proved on **FS116-V6's route**: V6-HUBS, V6-HUG *with its own colour step* (V6-GERM), V6-ANTI, and V6-COUNT with its last step on sectors (§ 2.1). FS116-Y4-OBST and FS129-OR1-QFREE-CLASS's hypothesis at the non-Siamese class follow.
+
+### 144. FS116-V6-ANTI
+<!--row FS116-V6-ANTI plans/FS116-derivation.md:1836-->
+**Address** `plans/FS116-derivation.md:1836` · **Role** upstream · **Era** R · **Was** 157 in `lean-order.md` · **Upstream ids** FS116-V6-HUBS
+<!--needs FS116-V6-ANTI: FS116-V6-HUBS-->
+
+<!--q FS116-V6-ANTI statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, with its change points y_k (FS116-V6-HUBS), a tile tipping y_k and a tile tipping y_(k+3) share no edge at p
+
+<!--q FS116-V6-ANTI not_claimed-->
+**Not claimed:**
+> that the four tiles at p form a cycle of shared edges (that is simplicity, V6-COUNT's last step); anything at k ≥ 7
+
+<!--q FS116-V6-ANTI grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V6-ANTI minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V6-ANTI handoff-->
+**Handoff as filed:**
+> none — a step of FS116-V6's route; with EMPTY
+
+<!--q FS116-V6-ANTI merge@SR3-5.1-24-->
+**Merge note — named** (SR3-5.1 item 24, `plans/FS129-SR3-audit.md:398-399`; status applied):
+> 24. **FS129-SR3-EMPTY-NS** in place of **FS116-Y4-EMPTY**, proved on **FS116-V6's route**: V6-HUBS, V6-HUG *with its own colour step* (V6-GERM), V6-ANTI, and V6-COUNT with its last step on sectors (§ 2.1). FS116-Y4-OBST and FS129-OR1-QFREE-CLASS's hypothesis at the non-Siamese class follow.
+
+### 145. FS116-V6-HUG
+<!--row FS116-V6-HUG plans/FS116-derivation.md:1790-->
+**Address** `plans/FS116-derivation.md:1790` · **Role** SEED · **Era** R · **Was** 158 in `lean-order.md` · **Upstream ids** FS116-V6-HUBS
+<!--needs FS116-V6-HUG: FS116-V6-HUBS-->
+**Cautions:** [C126](#c126), [C131](#c131)
+
+<!--q FS116-V6-HUG statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, with its change points y_k = e(60°k) (FS116-V6-HUBS), no tile T of p tips both y_0 and y_1 while being the only tip at each
+
+<!--q FS116-V6-HUG not_claimed-->
+**Not claimed:**
+> anything about a tile tipping two adjacent hubs with a second tip at either; anything in the Siamese class (non-Siamese gives the uniqueness of the tip and of the two X̄-tiles; V6: "Validity alone kills it here; non-Siamese was used only for the uniqueness of R⁻, R⁺ and of the tip"); anything at k ≥ 7
+
+<!--q FS116-V6-HUG grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V6-HUG minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V6-HUG handoff-->
+**Handoff as filed:**
+> de Bruijn — the pinning of the two edges to ω(y_1) and ω(y_0) and the trigonometric identity, a short kernel target, with EMPTY
+
+<!--q FS116-V6-HUG merge@SR1-6.2-1-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 1, `plans/FS129-SR1-audit.md:541-542`; status applied):
+> 1. **FS129-SR1-TWOCIRC** once, in place of the identity steps inside FS114-Y5-PXKILL, FS116-V6-HUG, FS116-V6-ADJ and FS116-Y4-FLANK (each keeps its own pinning of two tiles).
+
+<!--q FS116-V6-HUG merge@SR1-6.2-2-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 2, `plans/FS129-SR1-audit.md:543-543`; status amended-by:SR3-5.1-25):
+> 2. **FS129-MR1-DOUBLETIP** in place of FS116-V6-HUG (and of FS116-Y4-EMPTY's double-tip step on route 2); its `uses only:` may drop FS116-N2-STAR (§ 2.2).
+
+<!--q FS116-V6-HUG merge@SR3-5.1-24-->
+**Merge note — named** (SR3-5.1 item 24, `plans/FS129-SR3-audit.md:398-399`; status applied):
+> 24. **FS129-SR3-EMPTY-NS** in place of **FS116-Y4-EMPTY**, proved on **FS116-V6's route**: V6-HUBS, V6-HUG *with its own colour step* (V6-GERM), V6-ANTI, and V6-COUNT with its last step on sectors (§ 2.1). FS116-Y4-OBST and FS129-OR1-QFREE-CLASS's hypothesis at the non-Siamese class follow.
+
+<!--q FS116-V6-HUG merge@SR3-5.1-25-->
+**Merge note — the line that amends SR1-6.2-2, shown because the earlier line names this row** (SR3-5.1 item 25, `plans/FS129-SR3-audit.md:400-401`; status applied):
+> 25. **Amending SR1's item 2**: formalize **FS129-MR1-DOUBLETIP** for the wider ring classes it serves (FS-124), but **not** as EMPTY's double-tip step: its step 3 identifies the flank tile by a cone interval at the hubs, so an EMPTY routed through it holds only in the simple class (§ 2.3, § 4.3 row 3).
+
+### 146. FS116-V6-COUNT
+<!--row FS116-V6-COUNT plans/FS116-derivation.md:1819-->
+**Address** `plans/FS116-derivation.md:1819` · **Role** upstream · **Era** R · **Was** 159 in `lean-order.md` · **Upstream ids** FS116-V6-ANTI, FS116-V6-HUBS, FS116-V6-HUG
+<!--needs FS116-V6-COUNT: FS116-V6-ANTI,FS116-V6-HUBS,FS116-V6-HUG-->
+
+<!--q FS116-V6-COUNT statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, with V6-HUG, the tips force two antipodal doubly-tipped hubs and four double tiles: M = 4, s = 2, each hub of S has exactly two tips, and every tip at a hub of S is a double tile; the two hubs of S are antipodal, y_k and y_(k+3), each tipped by two of the four tiles
+
+<!--q FS116-V6-COUNT not_claimed-->
+**Not claimed:**
+> the contradiction (FS116-V6-ANTI and simplicity finish it); anything in the Siamese class; anything at k ≥ 7
+
+<!--q FS116-V6-COUNT grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V6-COUNT minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V6-COUNT handoff-->
+**Handoff as filed:**
+> none — a step of FS116-V6's route; with EMPTY
+
+<!--q FS116-V6-COUNT merge@SR3-5.1-24-->
+**Merge note — named** (SR3-5.1 item 24, `plans/FS129-SR3-audit.md:398-399`; status applied):
+> 24. **FS129-SR3-EMPTY-NS** in place of **FS116-Y4-EMPTY**, proved on **FS116-V6's route**: V6-HUBS, V6-HUG *with its own colour step* (V6-GERM), V6-ANTI, and V6-COUNT with its last step on sectors (§ 2.1). FS116-Y4-OBST and FS129-OR1-QFREE-CLASS's hypothesis at the non-Siamese class follow.
+
+### 147. FS116-Y2-SIXFRAG
+<!--row FS116-Y2-SIXFRAG plans/FS116-derivation.md:365-->
+**Address** `plans/FS116-derivation.md:365` · **Role** SEED · **Era** R · **Was** 160 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-Y2-SIXFRAG: -->
+
+<!--q FS116-Y2-SIXFRAG statement-->
+**Statement as filed:**
+> the unit sector flower S_j (colour j), the six lenses Q_j between e(60j − 30°) and e(60j + 30°) outside ω(p) (colour j + 2) and the six gap tiles G_j at e(60j + 30°) (colour j + 4), all cut at |x| = 3/2, form a valid non-Siamese six-coloured fragment holding B̄(p, R) for every R < 3/2, in which p is a vertex of six colours whose ring lies in Γ and all of whose ring arcs are (Q) arcs
+
+<!--q FS116-Y2-SIXFRAG not_claimed-->
+**Not claimed:**
+> any R ≥ 3/2 in this form (at 8/5 each G_j exceeds diameter 1: the plant); that the fragment extends; Y-QRING (3/2 < φ²/√2); that a vertex of six colours occurs in any valid map
+
+<!--q FS116-Y2-SIXFRAG grade-->
+**Grade as filed:**
+> computed over: the 18 tiles of the fragment and their 36 same-colour pairs, exact in Q(√3, √7)
+
+<!--q FS116-Y2-SIXFRAG minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-Y2-SIXFRAG handoff-->
+**Handoff as filed:**
+> de Bruijn — an exact fragment in Q(√3, √7) with its pair certificate, a control object for any local exclusion that claims six-colour vertices; not urgent
+
+### 148. FS116-Y3-HUBCOL
+<!--row FS116-Y3-HUBCOL plans/FS116-derivation.md:1116-->
+**Address** `plans/FS116-derivation.md:1116` · **Role** upstream · **Era** R · **Was** 161 in `lean-order.md` · **Upstream ids** FS116-N2-STAR, FS116-RING-GERM, FS116-Y3-TIPS
+<!--needs FS116-Y3-HUBCOL: FS116-N2-STAR,FS116-RING-GERM,FS116-Y3-TIPS-->
+
+<!--q FS116-Y3-HUBCOL statement-->
+**Statement as filed:**
+> in FS116-Y3-TIPS's labelling, each hub's colours are X, X̄, its tip's colour and a non-empty set of outer colours drawn from the list of § 2.3 (y_0: 2, and 3 only if δ_1 = 90°; y_1: 2, and 4 only if δ_4 = −30°; y_2: 4, and 2 only if δ_2 = 210°, 1 only if δ_1 = 30°; y_3: 1, and 4 only if δ_3 = 270°; y_4: 1, and 3 only if δ_2 = 150°; y_5: 3, and 1 only if δ_4 = 30°, 2 only if δ_3 = 210°); when every δ is interior to its range, y_0, y_1, y_3, y_4 carry {1, 2, X, X̄} and y_2, y_5 carry {3, 4, X, X̄}
+
+<!--q FS116-Y3-HUBCOL not_claimed-->
+**Not claimed:**
+> that an outer colour the list allows occurs (the boundary values of δ are necessary for the extra outer colours, not sufficient); anything about the hubs' rings beyond their colours
+
+<!--q FS116-Y3-HUBCOL grade-->
+**Grade as filed:**
+> derived from: FS116-Y3-TIPS, FS116-N2-STAR
+
+<!--q FS116-Y3-HUBCOL minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-Y3-HUBCOL handoff-->
+**Handoff as filed:**
+> none — a relay-result for § 3 and the families
+
+<!--q FS116-Y3-HUBCOL merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 149. FS116-Y3-NBTIP
+<!--row FS116-Y3-NBTIP plans/FS116-derivation.md:1214-->
+**Address** `plans/FS116-derivation.md:1214` · **Role** upstream · **Era** R · **Was** 162 in `lean-order.md` · **Upstream ids** FS116-N2-STAR, FS116-RING-GERM, FS116-Y3-TIPS
+<!--needs FS116-Y3-NBTIP: FS116-N2-STAR,FS116-RING-GERM,FS116-Y3-TIPS-->
+
+<!--q FS116-Y3-NBTIP statement-->
+**Statement as filed:**
+> in FS116-Y3-TIPS's setting, the tip of each hub meets the open unit disc about each of the two neighbouring hubs; so no hub has a neighbour's tip colour as an outer colour, and the only outer colour of y_2 is 4 and of y_5 is 3
+
+<!--q FS116-Y3-NBTIP not_claimed-->
+**Not claimed:**
+> anything about outer tiles of other colours; anything outside the Γ-free class (there consecutive change points need not be 60° apart)
+
+<!--q FS116-Y3-NBTIP grade-->
+**Grade as filed:**
+> derived from: FS116-Y3-TIPS, FS116-N2-STAR
+
+<!--q FS116-Y3-NBTIP minds-->
+**Minds as filed:**
+> 1 — and a checking reading by FS116-V5 (blind to Y3's record until 320a3b53, but its route and conclusion were N7-HUB's outline in the list's § 8)
+
+<!--q FS116-Y3-NBTIP handoff-->
+**Handoff as filed:**
+> none — a relay-result for STARFORCE
+
+<!--q FS116-Y3-NBTIP merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 150. FS116-Y3-NOQ
+<!--row FS116-Y3-NOQ plans/FS116-derivation.md:1152-->
+**Address** `plans/FS116-derivation.md:1152` · **Role** SEED · **Era** R · **Was** 163 in `lean-order.md` · **Upstream ids** FS116-RING-GERM, FS116-Y3-SIX
+<!--needs FS116-Y3-NOQ: FS116-RING-GERM,FS116-Y3-SIX-->
+
+<!--q FS116-Y3-NOQ statement-->
+**Statement as filed:**
+> in FS116-Y3-TIPS's setting, at a hub y_k, no tile adjacent at y_k to the ring tile over the arc from y_(k−1) to y_k lies in B̄(q_k, 1), and no tile adjacent at y_k to the ring tile over the arc from y_k to y_(k+1) lies in B̄(q_(k−1), 1), where q_k = y_k + y_(k+1); in particular the clockwise-most outer tile at y_k does not have q_k in its closure, the counter-clockwise-most does not have q_(k−1), and an only outer tile has neither
+
+<!--q FS116-Y3-NOQ not_claimed-->
+**Not claimed:**
+> anything at change points of rings carrying arcs of Γ (there a ring tile need not reach the next change point); anything about outer tiles adjacent to neither ring tile
+
+<!--q FS116-Y3-NOQ grade-->
+**Grade as filed:**
+> derived from: FS116-Y3-SIX
+
+<!--q FS116-Y3-NOQ minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-Y3-NOQ handoff-->
+**Handoff as filed:**
+> de Bruijn — with SIX and TIPS; a relay-result for any exclusion of the Γ-free type
+
+<!--q FS116-Y3-NOQ merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 151. FS116-Y3-TIGHT
+<!--row FS116-Y3-TIGHT plans/FS116-derivation.md:1134-->
+**Address** `plans/FS116-derivation.md:1134` · **Role** upstream · **Era** R · **Was** 164 in `lean-order.md` · **Upstream ids** FS116-RING-GERM, FS116-Y3-TIPS
+<!--needs FS116-Y3-TIGHT: FS116-RING-GERM,FS116-Y3-TIPS-->
+
+<!--q FS116-Y3-TIGHT statement-->
+**Statement as filed:**
+> in FS116-Y3-TIPS's labelling, the ring tile clockwise of y_0 does not have q_5 = √3 e(330°) in its closure, the ring tile counter-clockwise of y_1 not q_1, the one counter-clockwise of y_3 not q_2, the one clockwise of y_4 not q_4; at y_0 and y_1 the tip T1's cone has the endpoint 210°, at y_3 and y_4 the tip T2's the endpoint 30°, each along an edge inside the unit disc about the double tip's other hub
+
+<!--q FS116-Y3-TIGHT not_claimed-->
+**Not claimed:**
+> anything about the ring tiles over the double tips' arcs (between y_0, y_1 and between y_3, y_4); that the four ring tiles named do not reach beyond their hubs' discs
+
+<!--q FS116-Y3-TIGHT grade-->
+**Grade as filed:**
+> derived from: FS116-Y3-TIPS
+
+<!--q FS116-Y3-TIGHT minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-Y3-TIGHT handoff-->
+**Handoff as filed:**
+> none — a relay-result for § 3 and the families
+
+<!--q FS116-Y3-TIGHT merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 152. FS116-Y3-LENS
+<!--row FS116-Y3-LENS plans/FS116-derivation.md:1172-->
+**Address** `plans/FS116-derivation.md:1172` · **Role** upstream · **Era** R · **Was** 165 in `lean-order.md` · **Upstream ids** FS116-Y3-NOQ, FS116-Y3-TIGHT, FS116-Y3-TIPS
+<!--needs FS116-Y3-LENS: FS116-Y3-NOQ,FS116-Y3-TIGHT,FS116-Y3-TIPS-->
+
+<!--q FS116-Y3-LENS statement-->
+**Statement as filed:**
+> in FS116-Y3-TIPS's labelling, for k in {1, 2, 4, 5} and every point x close enough to q_k inside B(y_k, 1) ∩ B(y_(k+1), 1), every colour at x is a colour of p other than the tip colours of y_k and y_(k+1); and if it is a colour of y_k (of y_(k+1)), that hub's tile of that colour has q_k in its closure
+
+<!--q FS116-Y3-LENS not_claimed-->
+**Not claimed:**
+> anything at q_0 or q_3 (beside the double tips, where the ring tile may reach the far vertex); anything at points of the lens away from q_k
+
+<!--q FS116-Y3-LENS grade-->
+**Grade as filed:**
+> derived from: FS116-Y3-TIPS, FS116-Y3-TIGHT, FS116-Y3-NOQ
+
+<!--q FS116-Y3-LENS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-Y3-LENS handoff-->
+**Handoff as filed:**
+> none — a relay-result for TIGHTLENS
+
+<!--q FS116-Y3-LENS merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 153. FS116-Y3-TIGHTLENS
+<!--row FS116-Y3-TIGHTLENS plans/FS116-derivation.md:1191-->
+**Address** `plans/FS116-derivation.md:1191` · **Role** SEED · **Era** R · **Was** 166 in `lean-order.md` · **Upstream ids** FS116-Y3-HUBCOL, FS116-Y3-LENS, FS116-Y3-NOQ
+<!--needs FS116-Y3-TIGHTLENS: FS116-Y3-HUBCOL,FS116-Y3-LENS,FS116-Y3-NOQ-->
+
+<!--q FS116-Y3-TIGHTLENS statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours whose ring carries no arc of Γ, labelled as FS116-Y3-TIPS, the edges of p satisfy (Q1) δ_4 = −30° or δ_1 = 30° or δ_2 = 210°; (Q2) δ_3 = 270° or δ_1 = 30° or δ_2 = 210°; (Q4) δ_2 = 150° or δ_4 = 30° or δ_3 = 210°; (Q5) δ_1 = 90° or δ_4 = 30° or δ_3 = 210° — for each lens beside a single tip, the tip of one of its two hubs is tight at p for that hub; so at least two edges of p lie along flanking directions of hubs, and no such fragment has a generic star
+
+<!--q FS116-Y3-TIGHTLENS not_claimed-->
+**Not claimed:**
+> that any star satisfying (Q1)–(Q5) occurs; anything below radius √3 (a generic star there is neither excluded nor built); anything in the Siamese or non-simple class; anything at k ≥ 7 (a third absent colour survives near q_k)
+
+<!--q FS116-Y3-TIGHTLENS grade-->
+**Grade as filed:**
+> derived from: FS116-Y3-LENS, FS116-Y3-NOQ, FS116-Y3-HUBCOL
+
+<!--q FS116-Y3-TIGHTLENS minds-->
+**Minds as filed:**
+> 2 — blind to: Y3's record until 320a3b53; method: FS116-V5-LENS (the lens corner at the far vertex) against Y3's NOQ and TIGHT straddles; the same model (Opus 5.5), one prior
+
+<!--q FS116-Y3-TIGHTLENS handoff-->
+**Handoff as filed:**
+> de Bruijn — with NOQ, LENS, TIPS and SIX, after a blind second mind; the generic star's exclusion at √3 is a relay-result for D2's case list
+
+<!--q FS116-Y3-TIGHTLENS merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 154. FS116-Y3-STARFORCE
+<!--row FS116-Y3-STARFORCE plans/FS116-derivation.md:1233-->
+**Address** `plans/FS116-derivation.md:1233` · **Role** SEED · **Era** R · **Was** 167 in `lean-order.md` · **Upstream ids** FS116-Y3-HUBCOL, FS116-Y3-LENS, FS116-Y3-NBTIP, FS116-Y3-NOQ, FS116-Y3-TIGHTLENS
+<!--needs FS116-Y3-STARFORCE: FS116-Y3-HUBCOL,FS116-Y3-LENS,FS116-Y3-NBTIP,FS116-Y3-NOQ,FS116-Y3-TIGHTLENS-->
+
+<!--q FS116-Y3-STARFORCE statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours whose ring carries no arc of Γ, labelled as FS116-Y3-TIPS, the edges of p are δ_1 = 90°, δ_2 = 150°, δ_3 = 270°, δ_4 = −30° (FS116-N2-HEX3's star); 3 is an outer colour of y_0 and of y_4, and 4 of y_1 and of y_3; each of these four hubs has that outer colour alone or two outer tiles, counter-clockwise 2, 3 at y_0; 4, 2 at y_1; 1, 4 at y_3; 3, 1 at y_4; and near q_1, q_5 the lens points carry colour 2, near q_2, q_4 colour 1
+
+<!--q FS116-Y3-STARFORCE not_claimed-->
+**Not claimed:**
+> that any such fragment exists, at any radius; anything below radius √3; anything in the Siamese or non-simple class; anything at k ≥ 7
+
+<!--q FS116-Y3-STARFORCE grade-->
+**Grade as filed:**
+> derived from: FS116-Y3-TIGHTLENS, FS116-Y3-NBTIP, FS116-Y3-HUBCOL
+
+<!--q FS116-Y3-STARFORCE minds-->
+**Minds as filed:**
+> 2 — blind to: Y3's record until 320a3b53; method: FS116-V5-LENS with its images under the reflection at 30° and the half-turn, against Y3 § 3.2 rerun with NBTIP; the same model (Opus 5.5), one prior
+
+<!--q FS116-Y3-STARFORCE handoff-->
+**Handoff as filed:**
+> de Bruijn — with NOQ, LENS, NBTIP, TIPS and SIX, after a blind second mind; a relay-result for D2: the Γ-free type's case list is one star
+
+<!--q FS116-Y3-STARFORCE merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 155. FS116-Y4-FLANK
+<!--row FS116-Y4-FLANK plans/FS116-derivation.md:1686-->
+**Address** `plans/FS116-derivation.md:1686` · **Role** SEED · **Era** R · **Was** 168 in `lean-order.md` · **Upstream ids** none
+<!--needs FS116-Y4-FLANK: -->
+
+<!--q FS116-Y4-FLANK statement-->
+**Statement as filed:**
+> let t be a tile of a valid fragment, Siamese pairs allowed, on a closed disc of radius above 1 about a point p, and let y = r(ψ) and y′ = r(ψ + 60°) be points of ω(p) in the closure of t such that the cone of t at y contains the open cone (ψ + 150°, ψ + 210°) and its cone at y′ contains (ψ + 210°, ψ + 270°); then t's cone at y ends at ψ + 210° and its cone at y′ begins at ψ + 210°, and if a is the tile bordering t at y along t's edge leaving y in the direction ψ + 210°, and b the tile bordering t at y′ along t's edge leaving y′ in the direction ψ + 210°, some point of the closure of a and some point of the closure of b are at distance below 1
+
+<!--q FS116-Y4-FLANK not_claimed-->
+**Not claimed:**
+> anything about the colours of a and b; that a ≠ b; that the cones contain the open cones (an input, here from RING-GERM (i))
+
+<!--q FS116-Y4-FLANK grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-Y4-FLANK minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-Y4-FLANK handoff-->
+**Handoff as filed:**
+> de Bruijn — a short lemma about two arcs inside two unit discs, after a blind second mind
+
+<!--q FS116-Y4-FLANK merge@SR1-6.2-1-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 1, `plans/FS129-SR1-audit.md:541-542`; status applied):
+> 1. **FS129-SR1-TWOCIRC** once, in place of the identity steps inside FS114-Y5-PXKILL, FS116-V6-HUG, FS116-V6-ADJ and FS116-Y4-FLANK (each keeps its own pinning of two tiles).
+
+### 156. FS116-Y4-EMPTY
+<!--row FS116-Y4-EMPTY plans/FS116-derivation.md:1714-->
+**Address** `plans/FS116-derivation.md:1714` · **Role** SEED · **Era** R · **Was** 169 in `lean-order.md` · **Upstream ids** FS116-N2-STAR, FS116-RING-GERM, FS116-V6-ANTI, FS116-V6-COUNT, FS116-V6-HUBS, FS116-V6-HUG, FS116-Y3-SIX, FS116-Y3-TIPS, FS116-Y4-FLANK
+<!--needs FS116-Y4-EMPTY: FS116-N2-STAR,FS116-RING-GERM,FS116-V6-ANTI,FS116-V6-COUNT,FS116-V6-HUBS,FS116-V6-HUG,FS116-Y3-SIX,FS116-Y3-TIPS,FS116-Y4-FLANK-->
+**Cautions:** [C126](#c126), [C131](#c131)
+
+<!--q FS116-Y4-EMPTY statement-->
+**Statement as filed:**
+> no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no arc of Γ
+
+<!--q FS116-Y4-EMPTY not_claimed-->
+**Not claimed:**
+> anything for rings carrying an arc of Γ that is not a (Q) arc (the (Q)-free rings of FS114-N6-RING60 after the bends, with (R2) arcs); anything in the Siamese or non-simple class; anything at k ≥ 7 (with three absent colours the flank tiles need not share a colour)
+
+<!--q FS116-Y4-EMPTY grade-->
+**Grade as filed:**
+> derived from: FS116-Y4-FLANK, FS116-Y3-SIX, FS116-Y3-TIPS, FS116-RING-GERM
+
+<!--q FS116-Y4-EMPTY minds-->
+**Minds as filed:**
+> 2 — blind to: FS116-Y4's record until its verdict's commit (2429e200), though given the frozen list with round 3's construction-side statements and their setting (§ 14), route-shaped and unused; method: a different route at the count (FS116-V6-COUNT and -ANTI in place of FS116-Y3-TIPS) and at the flank step (FS116-V6-HUG's exact identity in place of FS116-Y4-FLANK's curvature bound); the same model (Opus 5.5), one prior
+
+<!--q FS116-Y4-EMPTY handoff-->
+**Handoff as filed:**
+> de Bruijn — by either route, the first with FLANK, SIX, TIPS and RING-GERM, or FS116-V6's (FS116-V6-HUBS, -HUG, -COUNT, -ANTI, hand, using no statement of the frozen list), the shorter; for D2, the Γ-free ring type removed from C114-LOCAL-F's case list at 1 + ε
+
+<!--q FS116-Y4-EMPTY note@1749-->
+**dated note filed under the entry (`plans/FS116-derivation.md:1749`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR1-audit.md` § 2.3; `plans/FS129-close-inventory.md` item 96):* the not-claimed line's "rings carrying an arc of Γ that is not a (Q) arc (the (Q)-free rings of FS114-N6-RING60 after the bends, with (R2) arcs)" are now reached in the non-Siamese simple class by FS129-OR1-QFREE (derived, one mind; `plans/FS129-derivation.md`): no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex of at least four colours has a ring carrying no (Q) arc. FS129-SR3 (`plans/FS129-SR3-audit.md` § Stage 2 — SAVED: item (d); derived, one mind; FS129-Z2 files its entries) derives this entry and QFREE with "simple" dropped on FS116-V6's route (FS129-SR3-EMPTY-NS, FS129-SR3-QFREE-NS), which reaches the not-claimed line's non-simple class as well; FS116-Y4's own route uses simplicity.
+
+<!--q FS116-Y4-EMPTY merge@SR1-6.2-2-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 2, `plans/FS129-SR1-audit.md:543-543`; status amended-by:SR3-5.1-25):
+> 2. **FS129-MR1-DOUBLETIP** in place of FS116-V6-HUG (and of FS116-Y4-EMPTY's double-tip step on route 2); its `uses only:` may drop FS116-N2-STAR (§ 2.2).
+
+<!--q FS116-Y4-EMPTY merge@SR3-5.1-24-->
+**Merge note — replaced in whole or in the part the line names** (SR3-5.1 item 24, `plans/FS129-SR3-audit.md:398-399`; status applied):
+> 24. **FS129-SR3-EMPTY-NS** in place of **FS116-Y4-EMPTY**, proved on **FS116-V6's route**: V6-HUBS, V6-HUG *with its own colour step* (V6-GERM), V6-ANTI, and V6-COUNT with its last step on sectors (§ 2.1). FS116-Y4-OBST and FS129-OR1-QFREE-CLASS's hypothesis at the non-Siamese class follow.
+
+<!--q FS116-Y4-EMPTY merge@SR3-5.1-25-->
+**Merge note — named by the amending line** (SR3-5.1 item 25, `plans/FS129-SR3-audit.md:400-401`; status applied):
+> 25. **Amending SR1's item 2**: formalize **FS129-MR1-DOUBLETIP** for the wider ring classes it serves (FS-124), but **not** as EMPTY's double-tip step: its step 3 identifies the flank tile by a cone interval at the hubs, so an EMPTY routed through it holds only in the simple class (§ 2.3, § 4.3 row 3).
+
+### 157. FS116-Y4-SYM
+<!--row FS116-Y4-SYM plans/FS116-derivation.md:1627-->
+**Address** `plans/FS116-derivation.md:1627` · **Role** upstream · **Era** R · **Was** 170 in `lean-order.md` · **Upstream ids** FS116-Y3-TIPS
+<!--needs FS116-Y4-SYM: FS116-Y3-TIPS-->
+
+<!--q FS116-Y4-SYM statement-->
+**Statement as filed:**
+> let F be a fragment of the HEX3 class on B̄(p, R), R ≥ √3; then σ_30(F), with the colours 3 and 4 exchanged, and σ_120(F), with the colours 1 and 2 exchanged and X and X̄ exchanged, are fragments of the HEX3 class on B̄(p, R) with the same labels — σ_30 fixing T1 and T2 and exchanging T3 and T4, σ_120 exchanging T1 and T2 and fixing T3 and T4 — so every statement of this record about F at a point z holds at σ(z) with the colours so exchanged
+
+<!--q FS116-Y4-SYM not_claimed-->
+**Not claimed:**
+> that any fragment of the class is symmetric; anything about stars other than HEX3's
+
+<!--q FS116-Y4-SYM grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-Y4-SYM minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-Y4-SYM handoff-->
+**Handoff as filed:**
+> none — a bookkeeping lemma for the casework of this record
+
+<!--q FS116-Y4-SYM merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 158. FS116-Y4-SPOKE
+<!--row FS116-Y4-SPOKE plans/FS116-derivation.md:1647-->
+**Address** `plans/FS116-derivation.md:1647` · **Role** SEED (conditional: handoff begins `none`) · **Era** R · **Was** 171 in `lean-order.md` · **Upstream ids** FS116-RING-GERM, FS116-Y3-NBTIP, FS116-Y3-NOQ, FS116-Y3-STARFORCE, FS116-Y4-SYM
+<!--needs FS116-Y4-SPOKE: FS116-RING-GERM,FS116-Y3-NBTIP,FS116-Y3-NOQ,FS116-Y3-STARFORCE,FS116-Y4-SYM-->
+**Cautions:** [C13](#c13)
+
+<!--q FS116-Y4-SPOKE statement-->
+**Statement as filed:**
+> in a fragment of the HEX3 class on a closed disc of radius above 2 about p, the outer tile O_2 of y_2 (colour 4) has 2y_2 in its closure, lies in B̄(y_2, 1) ∩ B̄(2y_2, 1), and contains every point of some neighbourhood of 2y_2 that lies in B(y_2, 1) and off Γ; every tile with a point of that neighbourhood outside B̄(y_2, 1) in its closure has colour 3, X or X̄; so near 2y_2 the circle ω(y_2) lies in Γ, with inner colour 4; and the same at y_5 and 2y_5 with 3 and 4 exchanged
+
+<!--q FS116-Y4-SPOKE not_claimed-->
+**Not claimed:**
+> that the outer colour at 2y_2 is 3 (X and X̄ are not excluded there when the ring tiles' cones at y_2 do not meet the outer side of the ring); anything below radius 2; anything at the double-tip hubs; anything at k ≥ 7 (a seventh colour survives inside ω(y_2) near 2y_2)
+
+<!--q FS116-Y4-SPOKE grade-->
+**Grade as filed:**
+> derived from: FS116-Y3-STARFORCE, FS116-Y3-NBTIP, FS116-RING-GERM, FS116-Y4-SYM
+
+<!--q FS116-Y4-SPOKE minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-Y4-SPOKE handoff-->
+**Handoff as filed:**
+> none — a relay-result for the obstruction or the construction of this record; with STARFORCE, after its blind check, a candidate for de Bruijn
+
+<!--q FS116-Y4-SPOKE merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### 159. FS121-C1-BOUND
+<!--row FS121-C1-BOUND plans/FS121-derivation.md:710-->
+**Address** `plans/FS121-derivation.md:710` · **Role** SEED · **Era** R · **Was** 172 in `lean-order.md` · **Upstream ids** none
+<!--needs FS121-C1-BOUND: -->
+
+<!--q FS121-C1-BOUND statement-->
+**Statement as filed:**
+> in a locally finite map colouring, a point x of F_i ∖ S_i is i-bound if and only if it lies on the outer unit parallel or on the far level of a connected component of F_i
+
+<!--q FS121-C1-BOUND not_claimed-->
+**Not claimed:**
+> which of the two levels; that the component is unique; anything at points of S_i
+
+<!--q FS121-C1-BOUND grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-C1-BOUND minds-->
+**Minds as filed:**
+> 2 — blind to: FS121-C1's record until V4's verdicts were committed (0dde4982); method: a switch point over the local finiteness of faces (V4-SWITCH, V4-LF), against a two-line perturbation (C1)
+
+<!--q FS121-C1-BOUND handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain (FS-113): a short lemma on closed connected sets and one perturbation
+
+### 160. FS121-C1-SAT
+<!--row FS121-C1-SAT plans/FS121-derivation.md:751-->
+**Address** `plans/FS121-derivation.md:751` · **Role** SEED · **Era** R · **Was** 175 in `lean-order.md` · **Upstream ids** FS121-C1-BOUND
+<!--needs FS121-C1-SAT: FS121-C1-BOUND-->
+
+<!--q FS121-C1-SAT statement-->
+**Statement as filed:**
+> for every k, a locally finite map colouring with k colours whose edges are finite chains of segments and circular arcs, and whose classes form an honest saturated colouring, is a member of 𝒫_k under every total order of its colours; so C121-NOPAR implies that no honest saturated six-colouring is a.e. equal to a locally finite map colouring whose edges are finite chains of segments and circular arcs
+
+<!--q FS121-C1-SAT not_claimed-->
+**Not claimed:**
+> the converse (a member of 𝒫_k need not be saturated); anything for edges that are not finite chains
+
+<!--q FS121-C1-SAT grade-->
+**Grade as filed:**
+> derived from: FS121-C1-BOUND
+
+<!--q FS121-C1-SAT minds-->
+**Minds as filed:**
+> 2 — blind to: FS121-C1's record until 0dde4982; method: the same route (one mind on the method axis)
+
+<!--q FS121-C1-SAT handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind FS121-C1-BOUND and the saturated-colouring definitions (FS-113)
+
+### 161. FS121-D1-XCORNER
+<!--row FS121-D1-XCORNER plans/FS121-derivation.md:228-->
+**Address** `plans/FS121-derivation.md:228` · **Role** upstream · **Era** R · **Was** 176 in `lean-order.md` · **Upstream ids** none
+<!--needs FS121-D1-XCORNER: -->
+
+<!--q FS121-D1-XCORNER statement-->
+**Statement as filed:**
+> at a convex corner z of angle θ in (0, π) whose two edges are straight, the inner unit parallels of the two edges meet at the point at distance 1/sin(θ/2) from z on the bisector, the image of the points at distance cot(θ/2) from z along each edge
+
+<!--q FS121-D1-XCORNER not_claimed-->
+**Not claimed:**
+> anything about colourings (a statement about lines)
+
+<!--q FS121-D1-XCORNER grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-D1-XCORNER minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-D1-XCORNER handoff-->
+**Handoff as filed:**
+> none — elementary; it crosses with FS121-D1-EROSION
+
+### 162. FS121-D2-EXT
+<!--row FS121-D2-EXT plans/FS121-derivation.md:607-->
+**Address** `plans/FS121-derivation.md:607` · **Role** SEED · **Era** R · **Was** 177 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS111-M2-INTRAD
+<!--needs FS121-D2-EXT: FS111-M-C11,FS111-M2-INTRAD-->
+
+<!--q FS121-D2-EXT statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′, let a be a point of an interface arc, not in Σ, at which the arc passes from a circular piece γ of radius n ≥ 3 and centre z to a piece not on γ's circle, and let L be the normal line at a; then for every integer k with 1 ≤ k ≤ n − 2, and for every integer k ≤ −1, no arc of the circle ∂B(z, n − k) that lies on the far side of L from γ and has an end on L lies in the closure of the interface set
+
+<!--q FS121-D2-EXT not_claimed-->
+**Not claimed:**
+> anything about a continuation past L along another curve; anything when a is a point of Σ; the unit rung, n − k = 1
+
+<!--q FS121-D2-EXT grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-D2-EXT minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-D2-EXT handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind FS111-M-PINCH, FS111-M-C11 and FS111-M2-INTRAD; its geometric core is elementary
+
+### 163. FS121-D2-THIN
+<!--row FS121-D2-THIN plans/FS121-derivation.md:632-->
+**Address** `plans/FS121-derivation.md:632` · **Role** upstream · **Era** R · **Was** 178 in `lean-order.md` · **Upstream ids** FS111-M2-INTRAD, FS121-D2-EXT
+<!--needs FS121-D2-THIN: FS111-M2-INTRAD,FS121-D2-EXT-->
+
+<!--q FS121-D2-THIN statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′, if interface pieces whose radii tend to infinity accumulate at a point, then for every integer r ≥ 2 the colouring has infinitely many radius-r arcs — maximal arcs of circles of radius r contained in the closure of the interface set — whose angular windows tend to 0
+
+<!--q FS121-D2-THIN not_claimed-->
+**Not claimed:**
+> that the thin arcs lie in a bounded set; the converse; anything at r = 1; accumulations by segment pieces (the argument takes circular pieces; V5 § 3.3 supplies the segment case at one mind, over M2-INTRAD's per-radius finiteness)
+
+<!--q FS121-D2-THIN grade-->
+**Grade as filed:**
+> derived from: FS121-D2-EXT
+
+<!--q FS121-D2-THIN minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-D2-THIN handoff-->
+**Handoff as filed:**
+> none — a necessary condition on an uninhabited class; it crosses with FS121-D2-SYM
+
+### 164. FS121-D3-FALLSAT
+<!--row FS121-D3-FALLSAT plans/FS121-derivation.md:498-->
+**Address** `plans/FS121-derivation.md:498` · **Role** SEED · **Era** R · **Was** 179 in `lean-order.md` · **Upstream ids** FS111-C-FILL
+<!--needs FS121-D3-FALLSAT: FS111-C-FILL-->
+
+<!--q FS121-D3-FALLSAT statement-->
+**Statement as filed:**
+> every partition of the plane, up to a null set, into k measurable sets each maximal among measurable sets with null unit pairs (a measurable idomatic partition of the unit-distance graph, the classes of a measurable fall colouring) is an honest saturated a.e.-proper k-colouring
+
+<!--q FS121-D3-FALLSAT not_claimed-->
+**Not claimed:**
+> the converse — a saturated honest colouring need not be idomatic (FS121-D3-SWAP1D); that any idomatic partition exists with fewer than seven classes
+
+<!--q FS121-D3-FALLSAT grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-D3-FALLSAT minds-->
+**Minds as filed:**
+> 2 — blind to: D3 § 2.1 until dea603eb; method: the same small-ball argument, reached independently (one mind on the method axis)
+
+<!--q FS121-D3-FALLSAT handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain (FS-113)
+
+### 165. FS121-D3-GRUNDY
+<!--row FS121-D3-GRUNDY plans/FS121-derivation.md:516-->
+**Address** `plans/FS121-derivation.md:516` · **Role** SEED · **Era** R · **Was** 174 in `lean-order.md` · **Upstream ids** FS111-M-SATC, FS111-M2-ZERO
+<!--needs FS121-D3-GRUNDY: FS111-M-SATC,FS111-M2-ZERO-->
+
+<!--q FS121-D3-GRUNDY statement-->
+**Statement as filed:**
+> every a.e.-proper k-colouring (S_1, …, S_k) of the plane can be modified, keeping it a.e.-proper with k colours and never raising a point's colour index, into a measurable Grundy colouring (A_1, …, A_k): A_1 is a MUA set, each A_m is maximal among sets with null unit pairs inside the complement of A_1 ∪ … ∪ A_(m−1) that contain S_m minus that union, every point of the support of A_m is at distance exactly 1 from the support of A_i for every i < m, and so at every essential boundary point x every colour of P(x) other than the largest is bound at x
+
+<!--q FS121-D3-GRUNDY not_claimed-->
+**Not claimed:**
+> that the colour max P(x) is bound (the output need not be saturated); uniqueness; that the output lies above f in any order; any regularity of the classes; that a saturated input stays saturated
+
+<!--q FS121-D3-GRUNDY grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-D3-GRUNDY minds-->
+**Minds as filed:**
+> 2 — blind to: D3 § 2.2 until dea603eb; method: exhaustion (dependent choice) and a ball added at a support point (V3), against Zorn and a positive-density limit (D3)
+
+<!--q FS121-D3-GRUNDY handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind the measurable chain; its dependent-choice route matters to a ZF + DC audit (Soifer's Open AC Problem 62.14)
+
+### 166. FS121-C1-GMAP
+<!--row FS121-C1-GMAP plans/FS121-derivation.md:732-->
+**Address** `plans/FS121-derivation.md:732` · **Role** SEED · **Era** R · **Was** 173 in `lean-order.md` · **Upstream ids** FS121-C1-BOUND, FS121-D3-GRUNDY
+<!--needs FS121-C1-GMAP: FS121-C1-BOUND,FS121-D3-GRUNDY-->
+
+<!--q FS121-C1-GMAP statement-->
+**Statement as filed:**
+> (i) for every k, a Grundy-bound k-colouring that is a.e. equal to a locally finite map colouring makes that map colouring a member of 𝒫_k under the order 1 < 2 < … < k; (ii) G-FIN₆ and C121-NOPAR together imply χ_m⁰(ℝ²) ≥ 7, and given C121-NOPAR, G-FIN₆ holds if and only if χ_m⁰(ℝ²) ≥ 7
+
+<!--q FS121-C1-GMAP not_claimed-->
+**Not claimed:**
+> G-FIN₆; that a Grundy-bound colouring of a map colouring is again a map colouring
+
+<!--q FS121-C1-GMAP grade-->
+**Grade as filed:**
+> derived from: FS121-C1-BOUND
+
+<!--q FS121-C1-GMAP minds-->
+**Minds as filed:**
+> 2 — blind to: FS121-C1's record until 0dde4982; method: the same route (one mind on the method axis), V4 writing out R7's Grundy-boundness
+
+<!--q FS121-C1-GMAP handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS121-D3-GRUNDY, once map colourings and supports are in Lean
+
+### 167. FS121-D4-FACE
+<!--row FS121-D4-FACE plans/FS121-derivation.md:908-->
+**Address** `plans/FS121-derivation.md:908` · **Role** SEED · **Era** R · **Was** 180 in `lean-order.md` · **Upstream ids** none
+<!--needs FS121-D4-FACE: -->
+
+<!--q FS121-D4-FACE statement-->
+**Statement as filed:**
+> in an a.e.-proper measurable colouring, let x be a point, e a unit vector and e⊥ a unit vector orthogonal to it; if the open half-box {x − s e + t e⊥ : 0 < s < ε, |t| < ε} and the open box {x + s e + t e⊥ : g < s < g + ε′, |t| < ρ} both lie almost everywhere in one class S_c, with ε, ε′ > 0 and 0 < 2g < ρ², then no point of supp S_c is at distance exactly 1 from x; so in a saturated colouring the colour c has density 1 at x
+
+<!--q FS121-D4-FACE not_claimed-->
+**Not claimed:**
+> the same with a curved near side (a tangent unit disc admits the in-contact x − e); the margin below ρ² ≥ 2g − g² (FALSE there, FS121-V5-FACE-SHARP); anything at an x where c has density 1; honesty, D-NF, REG-J′ (none is used)
+
+<!--q FS121-D4-FACE grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-D4-FACE minds-->
+**Minds as filed:**
+> 2 — blind to: D4 §§ 2.1–2.2 until V5's verdicts were committed (4ed402c6); method: a Fubini pair lemma and a crossing criterion with the exact corner (V5), against the sagitta bound and a shrinking ε′ (D4)
+
+<!--q FS121-D4-FACE handoff-->
+**Handoff as filed:**
+> de Bruijn — a short measure-theoretic lemma (Fubini on Leb ⊗ σ, one trigonometric bound); it crosses with the measurable chain
+
+<!--q FS121-D4-FACE merge@SR1-6.2-6-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 6, `plans/FS129-SR1-audit.md:548-548`; status applied):
+> 6. **FS121-V5-FACE-SHARP**'s form in place of FS121-D4-FACE's hypothesis `2g < ρ²`.
+
+### 168. FS121-DB1-L3
+<!--row FS121-DB1-L3 plans/FS121-derivation.md:143-->
+**Address** `plans/FS121-derivation.md:143` · **Role** SEED · **Era** R · **Was** 181 in `lean-order.md` · **Upstream ids** FS111-C-HULL, FS111-M-C11, FS111-M-PINCH
+<!--needs FS121-DB1-L3: FS111-C-HULL,FS111-M-C11,FS111-M-PINCH-->
+
+<!--q FS121-DB1-L3 statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′, at every point of Σ no colour occupies two sectors of positive angle, whatever cusps are present at the point or elsewhere
+
+<!--q FS121-DB1-L3 not_claimed-->
+**Not claimed:**
+> that a colour cannot occupy a sector and a cusp, or two cusps, at one point (the first is FS121-V2-SECTOR); anything without REG-J′
+
+<!--q FS121-DB1-L3 grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-DB1-L3 minds-->
+**Minds as filed:**
+> 2 — blind to: each other's records (DB1 § 2.3 opened by V2 only after f537b8c9); method: a straddle with a tangent/unit-arc case split and exact cusp checks (DB1), against the component lemma at contacts inherited as limits along the edges (V2)
+
+<!--q FS121-DB1-L3 handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind FS111-M-PINCH, FS111-M-C11 and the measurable chain
+
+<!--q FS121-DB1-L3 merge@SR2-4.3-22-->
+**Merge note — to formalize** (SR2-4.3 item 22, `plans/FS129-SR2-audit.md:487-487`; status applied):
+> 22. **FS121-DB1-L3** in place of **FS111-W-NOREP**.
+
+### 169. FS121-O1-ENDS
+<!--row FS121-O1-ENDS plans/FS121-derivation.md:20-->
+**Address** `plans/FS121-derivation.md:20` · **Role** SEED · **Era** R · **Was** 183 in `lean-order.md` · **Upstream ids** FS111-C-HULL, FS111-M-HALF, FS111-M-PINCH, FS111-M2-INTRAD, FS111-W-NOREP, FS112-N3-NOBOTH, FS121-DB1-L3
+<!--needs FS121-O1-ENDS: FS111-C-HULL,FS111-M-HALF,FS111-M-PINCH,FS111-M2-INTRAD,FS111-W-NOREP,FS112-N3-NOBOTH,FS121-DB1-L3-->
+
+<!--q FS121-O1-ENDS statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′, the chain of unit parallels of an interface arc of finite radius ends, off a null set of normals, at a unit arc J_1 whose centre z carries J_1's outer colour; either z also carries J_1's inner colour — J_1 is of kind both and z is a vertex with at least four colours or a repeated colour, at least four when no colour at z has density 0, so J_1 is (Q) — or it does not — J_1 is (R2), and z is a point of Σ carrying at least three colours counted by sector — the outer colour and at least two further sectors of positive angle — and at least three distinct colours when no colour at z has density 0
+
+<!--q FS121-O1-ENDS not_claimed-->
+**Not claimed:**
+> that every chain ends at a (Q) arc; that an (R2) end exists in any saturated colouring; that an (R2) centre has four colours; that the centre has four colours of positive density (FALSE at R7: |P(z)| = 3 with six colours carried)
+
+<!--q FS121-O1-ENDS grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-O1-ENDS minds-->
+**Minds as filed:**
+> 2 — blind to: FS121-O1's § 3.2–3.4 until its verdicts were committed (43bb6385); method: DB1 reads the local fan REG-J′ gives and counts colours by properness straddles (DB1-L1, L3–L5), O1 transfers NOBOTH and cites W-NOREP
+
+<!--q FS121-O1-ENDS handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind FS111-M-PINCH, FS111-M2-INTRAD and the measurable chain (FS-113)
+
+### 170. FS121-O1-OUT
+<!--row FS121-O1-OUT plans/FS121-derivation.md:44-->
+**Address** `plans/FS121-derivation.md:44` · **Role** SEED · **Era** R · **Was** 191 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS111-M-PINCH, FS111-M2-INTRAD
+<!--needs FS121-O1-OUT: FS111-M-C11,FS111-M-PINCH,FS111-M2-INTRAD-->
+
+<!--q FS121-O1-OUT statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′, the unit parallel away from the centre of every tangent-type interface arc of radius n (n a positive integer, or infinite for a segment) is, off Σ, a tangent-type interface arc of radius n + 1; so every curved interface of tangent type lies in a one-sided infinite family of concentric interface arcs of radii n, n + 1, n + 2, … over one angular window
+
+<!--q FS121-O1-OUT not_claimed-->
+**Not claimed:**
+> that a saturated colouring with a curved tangent interface exists at any k (none is held); the same for split arcs (FALSE at R7, exact: ../tools/fs121_db1_r7parallel.py)
+
+<!--q FS121-O1-OUT grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-O1-OUT minds-->
+**Minds as filed:**
+> 2 — blind to: FS121-O1's § 3.3 until 43bb6385; method: the same held step, DB1 adding the radial images of points of Σ and the attack at R7
+
+<!--q FS121-O1-OUT handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS111-M2-INTRAD, queued behind the measurable chain
+
+### 171. FS121-V2-SECTOR
+<!--row FS121-V2-SECTOR plans/FS121-derivation.md:450-->
+**Address** `plans/FS121-derivation.md:450` · **Role** SEED · **Era** R · **Was** 186 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS111-M-PINCH, FS121-DB1-L3
+<!--needs FS121-V2-SECTOR: FS111-M-C11,FS111-M-PINCH,FS121-DB1-L3-->
+
+<!--q FS121-V2-SECTOR statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′, at every point of Σ, a colour that occupies a sector of positive angle occupies no other region there, of positive or of zero angle
+
+<!--q FS121-V2-SECTOR not_claimed-->
+**Not claimed:**
+> that a colour cannot occupy two zero-angle regions at one point (they are collinear, FS121-V3-CUSP); anything without REG-J′; that the point itself is saturated (not used)
+
+<!--q FS121-V2-SECTOR grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-V2-SECTOR minds-->
+**Minds as filed:**
+> 2 — blind to: V2 § 2.3 until V3's verdicts were committed (dea603eb; V3 was relayed two definition lines of V2's record, no route); method: limits of the edge contacts sorted by two disc tests, Lemmas C and D (V3), against a per-arc case split with Lemma H (V2)
+
+<!--q FS121-V2-SECTOR handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind FS111-M-PINCH, FS111-M-C11 and the measurable chain
+
+### 172. FS121-D1-VT
+<!--row FS121-D1-VT plans/FS121-derivation.md:243-->
+**Address** `plans/FS121-derivation.md:243` · **Role** SEED · **Era** R · **Was** 188 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS111-M-PINCH, FS111-M2-INTRAD, FS121-V2-SECTOR
+<!--needs FS121-D1-VT: FS111-M-C11,FS111-M-PINCH,FS111-M2-INTRAD,FS121-V2-SECTOR-->
+
+<!--q FS121-D1-VT statement-->
+**Statement as filed:**
+> in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, let I be a tangent-type interface arc between colours a and b with no sub-arc of radius 1 curving toward b, and L its unit parallel on b's side, which carries a on its far side; at the image Y on L of any interior point of I, no interface arc ends at Y from the far side of L
+
+<!--q FS121-D1-VT not_claimed-->
+**Not claimed:**
+> anything at the image of an endpoint of I; anything when I has a sub-arc of radius 1 curving toward b (L has a corner: FS121-V2-VT-W); anything with cusps
+
+<!--q FS121-D1-VT grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-D1-VT minds-->
+**Minds as filed:**
+> 2 — blind to: FS121-D1's § 2.1 until V2's verdicts were committed (f537b8c9); method: F2–F3 at points of L then FS121-V2-SECTOR at Y (V2), against FS111-W-NOREP at Y (D1); both pass the zero-angle case through FS121-V2-SECTOR
+
+<!--q FS121-D1-VT handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind FS111-M-PINCH, FS111-M2-INTRAD and the measurable chain: the statement with its no-radius-1 clause
+
+<!--q FS121-D1-VT merge@SR1-6.2-7-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 7, `plans/FS129-SR1-audit.md:549-549`; status applied):
+> 7. **FS121-V2-VT-W** in place of FS121-D1-VT, if its corner case is consumed.
+
+### 173. FS121-D1-EROSION
+<!--row FS121-D1-EROSION plans/FS121-derivation.md:288-->
+**Address** `plans/FS121-derivation.md:288` · **Role** SEED · **Era** R · **Was** 189 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS121-D1-VT, FS121-D1-XCORNER
+<!--needs FS121-D1-EROSION: FS111-M-C11,FS121-D1-VT,FS121-D1-XCORNER-->
+
+<!--q FS121-D1-EROSION statement-->
+**Statement as filed:**
+> in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, if a colour's sector at a point z has angle θ in (0, π) and both its edges begin with maximal straight pieces of the colour's tile boundary of lengths L₁ and L₂, then min(L₁, L₂) ≤ cot(θ/2), or each of the two pieces has a point of Σ at distance cot(θ/2) from z
+
+<!--q FS121-D1-EROSION not_claimed-->
+**Not claimed:**
+> anything for curved edges; anything at θ ≥ π; anything with cusps; content at θ ≤ 2π/3, where the first disjunct holds in every a.e.-proper colouring (FS121-V2-EROSION-DIAM)
+
+<!--q FS121-D1-EROSION grade-->
+**Grade as filed:**
+> derived from: FS121-D1-VT, FS121-D1-XCORNER
+
+<!--q FS121-D1-EROSION minds-->
+**Minds as filed:**
+> 2 — blind to: FS121-D1's §§ 1.3, 2.2 until f537b8c9; method: the same crossing (named in the statement, so given), VT applied through different lemmas, V2's for the straight branch alone
+
+<!--q FS121-D1-EROSION handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS121-D1-VT, queued behind the measurable chain
+
+### 174. FS121-V5-LOC
+<!--row FS121-V5-LOC plans/FS121-derivation.md:1092-->
+**Address** `plans/FS121-derivation.md:1092` · **Role** upstream · **Era** R · **Was** 192 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS111-M-PINCH
+<!--needs FS121-V5-LOC: FS111-M-C11,FS111-M-PINCH-->
+
+<!--q FS121-V5-LOC statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′ with interface set 𝓘: (i) cl 𝓘 ∖ Σ ⊆ 𝓘, and no point of 𝓘 is a density point of any class; (ii) each y ∈ cl 𝓘 ∖ Σ has a ball missing Σ in which cl 𝓘 is the graph of a C^{1,1} function over the tangent line at y; (iii) a circular or straight arc of positive length in cl 𝓘 is, at its points off Σ and its ends, interior to a piece on its own circle or line, of tangent type when its radius is not 1
+
+<!--q FS121-V5-LOC not_claimed-->
+**Not claimed:**
+> anything at points of Σ
+
+<!--q FS121-V5-LOC grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-V5-LOC minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-V5-LOC handoff-->
+**Handoff as filed:**
+> none — local lemmas consumed by FS121-V5-RAY
+
+### 175. FS121-V5-RAY
+<!--row FS121-V5-RAY plans/FS121-derivation.md:1109-->
+**Address** `plans/FS121-derivation.md:1109` · **Role** SEED · **Era** R · **Was** 193 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS121-V5-LOC
+<!--needs FS121-V5-RAY: FS111-M-C11,FS121-V5-LOC-->
+
+<!--q FS121-V5-RAY statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′, let C_n ⊆ cl 𝓘 be arcs of circles of radii R_n → ∞, or segments, no two sharing a sub-arc of positive length, with points p_n ∈ C_n, p_n → x₀, from which C_n continues for arclength at least λ > 0 with unit tangent u_n → u; then Σ contains the open segment (x₀, x₀ + λu), so Σ is not locally finite
+
+<!--q FS121-V5-RAY not_claimed-->
+**Not claimed:**
+> anything for arcs of bounded radius
+
+<!--q FS121-V5-RAY grade-->
+**Grade as filed:**
+> derived from: FS121-V5-LOC
+
+<!--q FS121-V5-RAY minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-V5-RAY handoff-->
+**Handoff as filed:**
+> de Bruijn — a self-contained lemma over FS111-M-C11 that both routes to FS121-D2-SYM can rest on (item 79)
+
+### 176. FS121-D2-SYM
+<!--row FS121-D2-SYM plans/FS121-derivation.md:656-->
+**Address** `plans/FS121-derivation.md:656` · **Role** SEED · **Era** R · **Was** 195 in `lean-order.md` · **Upstream ids** FS111-M-C11, FS111-M2-INTRAD, FS121-D2-EXT, FS121-D2-THIN, FS121-O1-OUT, FS121-V5-RAY
+<!--needs FS121-D2-SYM: FS111-M-C11,FS111-M2-INTRAD,FS121-D2-EXT,FS121-D2-THIN,FS121-O1-OUT,FS121-V5-RAY-->
+
+<!--q FS121-D2-SYM statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, if for some integer r ≥ 2 the angular windows of its radius-r arcs are bounded below by a positive constant — in particular if it is invariant under a group of isometries of the plane, each mapping the partition to itself up to a permutation of the colours, with a compact set whose images cover the plane, such as a doubly periodic colouring — then ¬LRA holds
+
+<!--q FS121-D2-SYM not_claimed-->
+**Not claimed:**
+> ¬LRA without such a bound (C121-NOLRA's open step); that a tight colouring can be taken symmetric; anything from a bound at r = 1
+
+<!--q FS121-D2-SYM grade-->
+**Grade as filed:**
+> derived from: FS121-D2-THIN
+
+<!--q FS121-D2-SYM minds-->
+**Minds as filed:**
+> 2 — blind to: D2 § 2 until V5's verdict was committed (ab25bbdc; V5 was relayed four header definitions of D2's record); method: the window carried back out to the piece's radius by FS121-O1-OUT, then a segment in Σ by FS121-V5-RAY (V5), against window transport stopped at junction normals by FS121-D2-EXT (D2)
+
+<!--q FS121-D2-SYM handoff-->
+**Handoff as filed:**
+> de Bruijn — queued behind FS111-M2-INTRAD and the measurable chain (FS-113); V5's route needs only FS121-V5-RAY beyond held inputs
+
+### 177. TC1-SQRT3-DYADIC
+<!--row TC1-SQRT3-DYADIC plans/TC1-derivation.md:8-->
+**Address** `plans/TC1-derivation.md:8` · **Role** SEED (conditional: handoff begins `none`) · **Era** A · **Was** 196 in `lean-order.md` · **Upstream ids** none
+<!--needs TC1-SQRT3-DYADIC: -->
+**Cautions:** [C13](#c13)
+
+<!--q TC1-SQRT3-DYADIC statement-->
+**Statement as filed:**
+> for a number field F with √3 ∈ F and i ∉ F, no place of F above 2 is ramified in F(i)/F, and a place w above 2 splits in F(i) if and only if its residue degree f(w|2) is even; when it does not split it is inert, of norm 2^f with f odd
+
+<!--q TC1-SQRT3-DYADIC not_claimed-->
+**Not claimed:**
+> anything for F without √3 — ℚ(ζ₇)⁺'s one place above 2 is ramified in F(i) (TC1-FIELDS)
+
+<!--q TC1-SQRT3-DYADIC grade-->
+**Grade as filed:**
+> hand
+
+<!--q TC1-SQRT3-DYADIC minds-->
+**Minds as filed:**
+> 1
+
+<!--q TC1-SQRT3-DYADIC handoff-->
+**Handoff as filed:**
+> none — a two-line local lemma that scopes G56's exclusion; it crosses to de Bruijn with that exclusion if it is formalized
+
+<!--q TC1-SQRT3-DYADIC merge@SA1-6.3-7-->
+**Merge note — replaced in whole or in the part the line names** (SA1-6.3 item 7, `plans/FS129-SA1-audit.md:735-735`; status applied):
+> 7. **FS129-SA1-SQRT3-LOCAL** in place of TC1-SQRT3-DYADIC (a conditional seed, as filed).
+
+### 178. TC1-STANDING-FIVE
+<!--row TC1-STANDING-FIVE plans/TC1-derivation.md:60-->
+**Address** `plans/TC1-derivation.md:60` · **Role** SEED (conditional: handoff begins `none`) · **Era** A · **Was** 197 in `lean-order.md` · **Upstream ids** TC1-SQRT3-DYADIC
+<!--needs TC1-STANDING-FIVE: TC1-SQRT3-DYADIC-->
+**Cautions:** [C13](#c13)
+
+<!--q TC1-STANDING-FIVE statement-->
+**Statement as filed:**
+> F = K·E₇, with K = ℚ(√3,√11) and E₇ the degree-7 subfield of ℚ(ζ₂₉), is a totally real field of degree 28 containing K; its two places above 2 are inert in F(i), each of norm 128, and none of its places has a usable residue field of size at most 47; so L(F) ≥ 7, and given MR, χ(F²) ≥ 5
+
+<!--q TC1-STANDING-FIVE not_claimed-->
+**Not claimed:**
+> any value of χ(F²); that it is the smallest such field — ℚ(√3)·E₇, degree 14, has the same dyadic data and no small usable residue field, but does not contain K
+
+<!--q TC1-STANDING-FIVE grade-->
+**Grade as filed:**
+> derived from: TC1-SQRT3-DYADIC
+
+<!--q TC1-STANDING-FIVE minds-->
+**Minds as filed:**
+> 1
+
+<!--q TC1-STANDING-FIVE handoff-->
+**Handoff as filed:**
+> none — conditional on MR (row 120, [hand]); it crosses to de Bruijn only with row 123's chain
+
+<!--q TC1-STANDING-FIVE merge@SA1-6.3-UNCHANGED-->
+**Merge note — unchanged** (SA1-6.3 item UNCHANGED, `plans/FS129-SA1-audit.md:747-747`; status applied):
+> **Unchanged:** FS129-OA1-NOPERLAW (handoff none); TC1-STANDING-FIVE (a conditional seed).
+
+## FS-129's compositions
+
+Every non-superseded entry of `plans/FS129-derivation.md` not in the order (32 entries), dependencies first, ties by id. **Upstream ids** are the full ids in the entry's `uses only:` and in a `derived from:` grade (the corrected edges do not cover these entries: the index predates them). The entry's `uses only:` is quoted so the reader can see what the ids were read from.
+
+### C1. FS129-OA1-NOPERLAW
+<!--row FS129-OA1-NOPERLAW plans/FS129-derivation.md:301-->
+**Address** `plans/FS129-derivation.md:301` · **Role** FS-129 composition · **Upstream ids** none
+<!--needs FS129-OA1-NOPERLAW: -->
+
+<!--q FS129-OA1-NOPERLAW statement-->
+**Statement as filed:**
+> for a stationary random colouring c of ℝ², continuous in probability and proper almost surely on every unit pair, the set Z of vectors x with c(0) = c(x) almost surely is a discrete subgroup of ℝ²; if the law of c is rotation-invariant, Z = {0}
+
+<!--q FS129-OA1-NOPERLAW not_claimed-->
+**Not claimed:**
+> anything about pairs forced with probability below 1, or about near-forcing at a scale; that rotation-averaging preserves every property a route needs (it preserves stationarity, continuity in probability and almost-sure properness, which is all this statement uses)
+
+<!--q FS129-OA1-NOPERLAW grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS129-OA1-NOPERLAW minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-OA1-NOPERLAW handoff-->
+**Handoff as filed:**
+> none — a relay-result recorded for FS-104's route (b); it enters no proof in this record
+
+<!--q FS129-OA1-NOPERLAW uses_only-->
+**Uses only:**
+> continuity in probability (x ↦ P(c(0) ≠ c(x)) is continuous, so Z is closed); stationarity (Z is a subgroup: c(x) = c(x + y) a.s. is the shift of c(0) = c(y)); properness on unit pairs (Z misses the unit circle); that a closed subgroup of ℝ² that is not discrete contains a line through 0
+
+<!--q FS129-OA1-NOPERLAW merge@SA1-6.3-UNCHANGED-->
+**Merge note — unchanged** (SA1-6.3 item UNCHANGED, `plans/FS129-SA1-audit.md:747-747`; status applied):
+> **Unchanged:** FS129-OA1-NOPERLAW (handoff none); TC1-STANDING-FIVE (a conditional seed).
+
+### C2. FS129-OR1-LOCALDENSE
+<!--row FS129-OR1-LOCALDENSE plans/FS129-derivation.md:968-->
+**Address** `plans/FS129-derivation.md:968` · **Role** FS-129 composition · **Upstream ids** FS112-DISC1, FS112-N3-BASE
+<!--needs FS129-OR1-LOCALDENSE: FS112-DISC1,FS112-N3-BASE-->
+
+<!--q FS129-OR1-LOCALDENSE statement-->
+**Statement as filed:**
+> every valid six-coloured fragment on a closed disc B̄(x, 3) has, in B̄(x, 3), a vertex of at least four colours or a vertex with a repeated colour
+
+<!--q FS129-OR1-LOCALDENSE not_claimed-->
+**Not claimed:**
+> that the class is inhabited (no fragment on a disc of radius 3 is held); that the vertex found has at least four colours (it may have a repeated colour instead); anything below radius 3; that FS112-N3-BASE's own inputs (row 134's base, BASE-V's residue: CUSP-BASE's D5 items 1–4, 6 at one mind) are stronger than their grade
+
+<!--q FS129-OR1-LOCALDENSE grade-->
+**Grade as filed:**
+> derived from: FS112-DISC1, FS112-N3-BASE
+
+<!--q FS129-OR1-LOCALDENSE minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-OR1-LOCALDENSE handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS112-N3-DENSE3's module (FS-114's stub), stated on fragments
+
+<!--q FS129-OR1-LOCALDENSE uses_only-->
+**Uses only:**
+> FS112-DISC1 (a closed disc of radius 1 holds a vertex of degree at least 3), read on a fragment: its argument nests tiles surrounding x, each of diameter at most 1 and so inside B̄(x, 1); FS112-N3-BASE, read on a fragment: if B̄(u, 2) about a cubic trichromatic vertex u holds no vertex of at least four colours and none with a repeated colour, the base derives a contradiction from the colours of points of B̄(u, 2) alone, after N2-TOWARD bends of inert unit arcs centred in B̄(u, 1) (NB3's walk: "every point whose colours it reads lies in B̄(u, 2)"; "C-LOCAL: radius 2 about u")
+
+### C3. FS129-OR1-DISCF-NS
+<!--row FS129-OR1-DISCF-NS plans/FS129-derivation.md:990-->
+**Address** `plans/FS129-derivation.md:990` · **Role** FS-129 composition · **Upstream ids** FS116-V4-DICHOTOMY, FS129-OR1-LOCALDENSE
+<!--needs FS129-OR1-DISCF-NS: FS116-V4-DICHOTOMY,FS129-OR1-LOCALDENSE-->
+
+<!--q FS129-OR1-DISCF-NS statement-->
+**Statement as filed:**
+> if for some R > 0 no non-Siamese simple valid six-coloured fragment exists on a closed disc of radius R about a vertex of at least four colours, then no non-Siamese simple valid six-coloured fragment exists on any closed disc of radius R + 3
+
+<!--q FS129-OR1-DISCF-NS not_claimed-->
+**Not claimed:**
+> the Siamese or non-simple form (there LOCAL-DENSE's repeated-colour alternative is not covered by C114-LOCAL-F); the hypothesis itself (C114-LOCAL-F in the non-Siamese simple class, open — FS-124)
+
+<!--q FS129-OR1-DISCF-NS grade-->
+**Grade as filed:**
+> derived from: FS129-OR1-LOCALDENSE, FS116-V4-DICHOTOMY
+
+<!--q FS129-OR1-DISCF-NS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-OR1-DISCF-NS handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS129-OR1-LOCALDENSE
+
+<!--q FS129-OR1-DISCF-NS uses_only-->
+**Uses only:**
+> FS129-OR1-LOCALDENSE; that a non-Siamese simple fragment has no vertex with a repeated colour (two tiles of one colour at a vertex are near, FS116-V4-DICHOTOMY; one tile twice at a vertex has a closure that meets itself); that a fragment on a disc is a fragment on every smaller disc inside it
+
+### C4. FS129-OR1-TOP5
+<!--row FS129-OR1-TOP5 plans/FS129-derivation.md:1008-->
+**Address** `plans/FS129-derivation.md:1008` · **Role** FS-129 composition · **Upstream ids** FS106-AE-MAP6, FS111-M-REDUCE-I, FS111-V0-RESCALE
+<!--needs FS129-OR1-TOP5: FS106-AE-MAP6,FS111-M-REDUCE-I,FS111-V0-RESCALE-->
+
+<!--q FS129-OR1-TOP5 statement-->
+**Statement as filed:**
+> if REG-J′₅ holds — FS111-M-REDUCE-I's regularity hypothesis at five colours, a saturated colouring whose singular set Σ is locally finite with finitely many interface arcs at each point of Σ — then the honest existence form of C-SAT-T at five (every tight a.e.-proper five-colouring can be modified, keeping it a.e.-proper with five colours, into an honest saturated one; FS121-SAT6's k = 5 clause) holds if and only if χ_m⁰(ℝ²) ≥ 6, the forward direction at FS106-AE-MAP6's grade (modulo Townsend's simplification (c))
+
+<!--q FS129-OR1-TOP5 not_claimed-->
+**Not claimed:**
+> REG-J′₅ (FS121-REGJ at five, open — FS-127's LAT); the honest existence form at five; the equivalence without REG-J′₅; the forward direction beyond FS106-AE-MAP6's grade; anything at six (FS121-D3-EQ)
+
+<!--q FS129-OR1-TOP5 grade-->
+**Grade as filed:**
+> derived from: FS111-M-REDUCE-I, FS111-V0-RESCALE
+
+<!--q FS129-OR1-TOP5 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-OR1-TOP5 handoff-->
+**Handoff as filed:**
+> de Bruijn — the statement as a corollary of FS111-M-REDUCE-I's module, over FS106-AE-MAP6 as an imported hypothesis
+
+<!--q FS129-OR1-TOP5 uses_only-->
+**Uses only:**
+> FS111-M-REDUCE-I ("with FS106-AE-MAP6, χ_m⁰(ℝ²) ≥ 6 follows from those two statements at k = 5"); FS111-V0-RESCALE (a tight a.e.-proper k-colouring exists if and only if χ_m⁰(ℝ²) ≤ k); vacuity
+
+### C5. FS129-OR1-WHOLE
+<!--row FS129-OR1-WHOLE plans/FS129-derivation.md:577-->
+**Address** `plans/FS129-derivation.md:577` · **Role** FS-129 composition · **Upstream ids** FS116-V4-DICHOTOMY, FS116-V5-NE1
+<!--needs FS129-OR1-WHOLE: FS116-V4-DICHOTOMY,FS116-V5-NE1-->
+
+<!--q FS129-OR1-WHOLE statement-->
+**Statement as filed:**
+> let F be a valid k-coloured fragment on a closed disc B̄(p, r) about a point p, r > 1, a map of an open set V, and let 1 < ρ ≤ r; let 𝒯_ρ be the tiles of F that meet the open disc B(p, ρ), and F_ρ the map of the open set U_ρ = V ∩ int ⋃_{T ∈ 𝒯_ρ} cl T whose tiles are the tiles of 𝒯_ρ with their colours; then F_ρ is a valid k-coloured fragment on B̄(p, ρ′) for every ρ′ < ρ, each of its tiles is a tile of F with the same closure, the tiles of F_ρ having p in their closure are those of F, and F_ρ is non-Siamese if F is and simple if F is; and if moreover ρ ≤ √3, then for every arc α of Γ on ω(p) of positive length whose inner side is one tile, of colour c, no tile of F_ρ of colour c has a point of R₂(ᾱ) = {p + 2u : p + u ∈ ᾱ} in its closure
+
+<!--q FS129-OR1-WHOLE not_claimed-->
+**Not claimed:**
+> that the round restriction — the components of B(p, ρ) ∖ Γ — keeps non-Siamese or simple (it need not: § Control: fs129-or1-cut); anything about witness tiles when ρ > √3; simplicity read with closures taken relative to U_ρ (the statement reads them in the plane, as `data/fs116/claims.md` § 0 does)
+
+<!--q FS129-OR1-WHOLE grade-->
+**Grade as filed:**
+> derived from: FS116-V4-DICHOTOMY, FS116-V5-NE1
+
+<!--q FS129-OR1-WHOLE minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-OR1-WHOLE handoff-->
+**Handoff as filed:**
+> de Bruijn — the statement and its not claimed, with V4-DICHOTOMY and V5-NE1 as its inputs; the identity is one line of algebra
+
+<!--q FS129-OR1-WHOLE uses_only-->
+**Uses only:**
+> FS116-V4-DICHOTOMY (closure points at distance below 1 make two same-colour tiles near, above 1 far; non-Siamese means distinct same-colour tiles are far); FS116-V5-NE1 (a tile lies in B(z, 1) for every z in its closure); the parallelogram identity; local finiteness of Γ; the definitions of tile (a component of the open set minus Γ), Siamese and simple (`data/fs116/claims.md` § 0)
+
+<!--q FS129-OR1-WHOLE merge@SR1-6.2-5-->
+**Merge note — named** (SR1-6.2 item 5, `plans/FS129-SR1-audit.md:546-547`; status applied):
+> 5. **FS129-SR1-BENDANY** and **FS129-SR1-BENDLE3** in place of FS129-OR1-BENDFRAG and FS129-OR1-BEND3, over FS129-OR1-WHOLE and FS112-N2-BENDS, by N2's route at end vertices (§ 2.1), with the connectedness step by quasi-components.
+
+### C6. FS129-SA1-FALC-FAN
+<!--row FS129-SA1-FALC-FAN plans/FS129-derivation.md:145-->
+**Address** `plans/FS129-derivation.md:145` · **Role** FS-129 composition · **Upstream ids** none
+<!--needs FS129-SA1-FALC-FAN: -->
+
+<!--q FS129-SA1-FALC-FAN statement-->
+**Statement as filed:**
+> let k ≥ 3, let H be a finite graph with vertices a ≠ t, t not adjacent to a, forming a Falconer fan at k colours (every proper k-colouring of H − a in which N(a) avoids two distinct colours c₁, c₂ gives t one of c₁, c₂), and let ρ : H → T be a graph homomorphism; then (A) for every proper k-colouring C of T and every colour γ absent from N_T[ρ(a)], C(ρ(t)) ∈ {C(ρ(a)), γ}, and every colour absent from N_T[ρ(t)] lies in {C(ρ(a)), γ}; (B) every proper (k − 1)-colouring of T gives ρ(a) and ρ(t) one colour, and leaves none of its k − 1 colours absent from N_T[ρ(t)]
+
+<!--q FS129-SA1-FALC-FAN not_claimed-->
+**Not claimed:**
+> that any Falconer fan at five colours exists (none is known; at four colours the unit rhombus is one); the converse — a pair that every (k − 1)-colouring of every target identifies need not be a fan (Harder's 8/3 pair over K, FS129-MA2-FALC-DICHO's not-claimed line); anything about k-colourings of T with no colour absent from N_T[ρ(a)]
+
+<!--q FS129-SA1-FALC-FAN grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS129-SA1-FALC-FAN minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SA1-FALC-FAN handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize in place of FS129-MA1-FALC-T and FS129-MA2-FALC-GAP4: one lemma beside `not_fan_of_fanGap` (`FanGap.lean`) for `Fan H′ k t [a₁, a₂]`, H′ the doubled-apex graph, parametric in k and T; the colouring of H′ is C∘ρ off the apex, C(ρ(a)) at a₁ and γ at a₂ (not a pullback along a homomorphism, since a₁, a₂ are adjacent)
+
+<!--q FS129-SA1-FALC-FAN uses_only-->
+**Uses only:**
+> (A) that C∘ρ restricted to H − a is a proper k-colouring in which N(a) avoids C(ρ(a)) and γ, because ρ(N(a)) ⊆ N_T(ρ(a)) — so the gap is used only on ρ(N_H[a]); the fan's definition with {c₁, c₂} = {C(ρ(a)), γ}; row 66's single-vertex repaint at t, legal since t ∉ N(a) and ρ(N(t)) ⊆ N_T(ρ(t)); (B) a proper (k − 1)-colouring read as a k-colouring whose k-th colour is absent everywhere, then (A) with γ that colour
+
+<!--q FS129-SA1-FALC-FAN merge@SA1-6.3-3-->
+**Merge note — to formalize** (SA1-6.3 item 3, `plans/FS129-SA1-audit.md:729-729`; status applied):
+> 3. **FS129-SA1-FALC-FAN** in place of FS129-MA1-FALC-T and FS129-MA2-FALC-GAP4.
+
+<!--q FS129-SA1-FALC-FAN merge@SA1-6.3-5-->
+**Merge note — named** (SA1-6.3 item 5, `plans/FS129-SA1-audit.md:731-732`; status applied):
+> 5. **FS129-SA1-FALC-RES** in place of FS129-OA1-FALC-11, FS129-MA1-FALC-19 and FS129-MA2-FALC-HOSTS clause (i); HOSTS clauses (ii)–(iv) as filed, from FALC-FAN (B) and DICHO-K.
+
+### C7. FS129-SA1-FALC-DICHO-K
+<!--row FS129-SA1-FALC-DICHO-K plans/FS129-derivation.md:178-->
+**Address** `plans/FS129-derivation.md:178` · **Role** FS-129 composition · **Upstream ids** FS129-SA1-FALC-FAN
+<!--needs FS129-SA1-FALC-DICHO-K: FS129-SA1-FALC-FAN-->
+
+<!--q FS129-SA1-FALC-DICHO-K statement-->
+**Statement as filed:**
+> let k ≥ 3 and let H, a, t be a Falconer fan at k colours as in FS129-SA1-FALC-FAN; then χ(H) ≥ k − 1, and if χ(H) = k − 1, every proper (k − 1)-colouring of H gives a and t one colour
+
+<!--q FS129-SA1-FALC-DICHO-K not_claimed-->
+**Not claimed:**
+> that any fan at five colours exists; the converse — a pair forced equal at k − 1 colours need not be a fan at k (Harder's 745-point graph forces its pair at distance 8/3 at four colours over K and is no fan at five with that apex and tip, since 8/3 is a unit at K's primes of residue field 𝔽₁₁, FS129-SA1-FALC-RES); anything about a fan with χ(H) ≥ k beyond the bound
+
+<!--q FS129-SA1-FALC-DICHO-K grade-->
+**Grade as filed:**
+> derived from: FS129-SA1-FALC-FAN
+
+<!--q FS129-SA1-FALC-DICHO-K minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SA1-FALC-DICHO-K handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize in place of FS129-MA2-FALC-DICHO: two lines over FS129-SA1-FALC-FAN's lemma, `Fan H′ k t [a₁, a₂]` with `H.Colorable (k − 1)` giving `Forces H (k − 1) a t`
+
+<!--q FS129-SA1-FALC-DICHO-K uses_only-->
+**Uses only:**
+> FS129-SA1-FALC-FAN (B) with T = K_m and ρ a proper m-colouring of H for m = χ(H) ≤ k − 2 (K_m's proper (k − 1)-colouring leaves colour k − 1 absent everywhere, against (B)); and with T = H, ρ the identity
+
+<!--q FS129-SA1-FALC-DICHO-K merge@SA1-6.3-4-->
+**Merge note — to formalize** (SA1-6.3 item 4, `plans/FS129-SA1-audit.md:730-730`; status applied):
+> 4. **FS129-SA1-FALC-DICHO-K** in place of FS129-MA2-FALC-DICHO.
+
+<!--q FS129-SA1-FALC-DICHO-K merge@SA1-6.3-5-->
+**Merge note — named** (SA1-6.3 item 5, `plans/FS129-SA1-audit.md:731-732`; status applied):
+> 5. **FS129-SA1-FALC-RES** in place of FS129-OA1-FALC-11, FS129-MA1-FALC-19 and FS129-MA2-FALC-HOSTS clause (i); HOSTS clauses (ii)–(iv) as filed, from FALC-FAN (B) and DICHO-K.
+
+### C8. FS129-SA1-FALC-RED
+<!--row FS129-SA1-FALC-RED plans/FS129-derivation.md:237-->
+**Address** `plans/FS129-derivation.md:237` · **Role** FS-129 composition · **Upstream ids** none
+<!--needs FS129-SA1-FALC-RED: -->
+
+<!--q FS129-SA1-FALC-RED statement-->
+**Statement as filed:**
+> if a finite unit-distance graph H ⊂ ℝ² has a Falconer fan at k colours with apex a and tip t, |t − a| = r > 1/2, and arcsin(1/(2r))/π irrational, then every cover of ℝ² by k measurable sets has two points at distance 1 inside one of the sets, so χ_m(ℝ²) ≥ k + 1 for Falconer's everywhere-proper measurable chromatic number
+
+<!--q FS129-SA1-FALC-RED not_claimed-->
+**Not claimed:**
+> the almost-everywhere form (χ_m⁰, the target given MR) — it needs Lemma 3 with a positive-measure set of translations, which the 1981 text does not supply; that any Falconer fan at five colours exists; anything for χ(ℝ²) without MR; Lemma 1 in the form "for every e ∈ E, almost every rotation about e" (false in general: a null E may hold a circle about e)
+
+<!--q FS129-SA1-FALC-RED grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS129-SA1-FALC-RED minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SA1-FALC-RED handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize FS129-OA1-FALC-RED's statement from this entry's argument, behind the measurable chain (FS-113), importing `[Falconer1981]` Lemma 1 in the paper's form only (the motion is the lemma's), Lemmas 2–4 as `plans/FS129-MA1-audit.md` § 2.1 transcribes them
+
+<!--q FS129-SA1-FALC-RED uses_only-->
+**Uses only:**
+> `[Falconer1981]` as `plans/FS129-MA1-audit.md` § 2.1 transcribes it from the page images — Lemma 1 in the paper's form (for a non-empty null set E, a countable configuration C and a point x ∈ C, a rigid motion p, chosen by the lemma, with p(x) ∈ E and, for almost every rotation ρ about p(x), ρ(p(C)) ∩ E = {p(x)}); Lemma 2(i) applied to a class of positive measure and positive co-measure, for E ≠ ∅ and E null; the null-set sentence (E is the union of the classes' metrical boundaries, for disjoint classes); FS103-M's D2 (a point of E lies in at least two metrical boundaries, `plans/FS103-M-derivation.md` line 252); Lemma 3; Lemma 4, with Lemma 2(ii); the cover made disjoint first
+
+<!--q FS129-SA1-FALC-RED merge@SA1-6.3-6-->
+**Merge note — to formalize** (SA1-6.3 item 6, `plans/FS129-SA1-audit.md:733-734`; status applied):
+> 6. **FS129-OA1-FALC-RED's statement from FS129-SA1-FALC-RED's argument**, importing `[Falconer1981]` Lemma 1 in the paper's form only (the motion is the lemma's; never "for every e ∈ E, almost every rotation about e").
+
+### C9. FS129-SA1-NOAFF-K
+<!--row FS129-SA1-NOAFF-K plans/FS129-derivation.md:85-->
+**Address** `plans/FS129-derivation.md:85` · **Role** FS-129 composition · **Upstream ids** none
+<!--needs FS129-SA1-NOAFF-K: -->
+
+<!--q FS129-SA1-NOAFF-K statement-->
+**Statement as filed:**
+> let k ≥ 2, let ρ : G → T be a graph homomorphism, and let φ_v : Fin k → ℝ (v a vertex of G) be functions, all but finitely many identically zero, such that Σ_v φ_v(C(v)) takes one value b on every proper k-colouring C of G; then φ_u is constant for every vertex u of G such that some proper k-colouring of T leaves a colour absent from the closed neighbourhood of ρ(u); and if every vertex of T has such a colouring, every φ_v is constant and b is the sum of their values
+
+<!--q FS129-SA1-NOAFF-K not_claimed-->
+**Not claimed:**
+> inequalities (three- and four-point positivity, FS-104 route (c)'s format (ii)); identities in which one term depends on the colours of two or more vertices jointly (degree two or more in the simplex embedding — row 66's separated pairs are such and need a shared gap); anything at a vertex whose image is gapped in no colouring of T; for the indicator embedding e_{C(v)}, that a_v = 0 (only that a_v is a multiple of the all-ones vector)
+
+<!--q FS129-SA1-NOAFF-K grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS129-SA1-NOAFF-K minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SA1-NOAFF-K handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize in place of FS129-OA1-NOLIN5, FS129-MA1-NOAFF5 and MA2's k = 4 note: a lemma beside `Slack.forces_iff_of_hom` (`FanGap.lean`), for `f : G →g P`, `φ : V →₀ (Fin k → ℝ)` and a `FanGap C (f u) γ`, concluding `φ u` constant; the slack corollary by `Slack`; `Slack.forces_iff_of_hom`'s forward direction is its two-vertex case
+
+<!--q FS129-SA1-NOAFF-K uses_only-->
+**Uses only:**
+> for u with a gap γ at ρ(u) in a proper k-colouring C of T, that π∘C∘ρ is a proper k-colouring of G for every permutation π of the colours, and so is its repaint at u alone with π(γ) (u's neighbours map into N_T(ρ(u)), which π∘C keeps off π(γ)) — row 66's `repaintAt`; that the two colourings differ only at u, so φ_u(π(C(ρ(u)))) = φ_u(π(γ)); that (π(C(ρ(u))), π(γ)) runs over every ordered pair of distinct colours; for b, that C∘ρ is one proper colouring of G
+
+<!--q FS129-SA1-NOAFF-K merge@SA1-6.3-1-->
+**Merge note — to formalize** (SA1-6.3 item 1, `plans/FS129-SA1-audit.md:724-726`; status applied):
+> 1. **FS129-SA1-NOAFF-K** (with its field corollary **FS129-SA1-NOAFF-FIELDS**) in place of FS129-OA1-NOLIN5, FS129-MA1-NOAFF5, MA2's k = 4 note (`plans/FS129-MA2-audit.md` § 2.3) and FS84-S1e (`plans/FS84-S1-derivation.md` § 4.2); `Slack.forces_iff_of_hom` (row 66, kernel) is its two-vertex case.
+
+### C10. FS129-SA1-PLACE-HOM
+<!--row FS129-SA1-PLACE-HOM plans/FS129-derivation.md:59-->
+**Address** `plans/FS129-derivation.md:59` · **Role** FS-129 composition · **Upstream ids** none
+<!--needs FS129-SA1-PLACE-HOM: -->
+
+<!--q FS129-SA1-PLACE-HOM statement-->
+**Statement as filed:**
+> let F ⊆ ℝ be a number field with a usable prime 𝔭 of residue field 𝔽_q, and let E = F(t₁, …, t_n) ⊂ ℝ with t₁, …, t_n algebraically independent over F (n ≥ 0); then there are a subring V ⊆ E holding both coordinates of every unit vector of E² and a ring homomorphism φ : V → 𝔽_q that restricts to reduction mod 𝔭 on the local ring 𝒪_{F,𝔭}; so the unit-distance graph on E² has a graph homomorphism into Γ_q, given on each coset x₀ + V² by x ↦ φ(x − x₀)
+
+<!--q FS129-SA1-PLACE-HOM not_claimed-->
+**Not claimed:**
+> any finitely generated E ⊂ ℝ that is not purely transcendental over a number field (G63's Remark-1 caution; a place of such an E lands in an uncontrolled residue field); a homomorphism onto Γ_q (only into); that V is a valuation ring
+
+<!--q FS129-SA1-PLACE-HOM grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS129-SA1-PLACE-HOM minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SA1-PLACE-HOM handoff-->
+**Handoff as filed:**
+> de Bruijn — the homomorphism behind `unitQuadrance_colorable_of_valuationSubring` (`Transcendental.lean`, via `cosetResidue`), iterated n times and composed with the residue map at 𝔭; every field statement of this family is formalized through it
+
+<!--q FS129-SA1-PLACE-HOM uses_only-->
+**Uses only:**
+> for n = 0, V = 𝒪_{F,𝔭} and φ the reduction (a unit vector of F is 𝔭-integral, because −1 is not a square in 𝔽_q — the valuation lemma `mem_valuationSubring_of_sq_add_sq_eq_one`); for n ≥ 1, by induction, V_n = {x in the valuation ring of t_n ↦ 0 on F(t₁, …, t_{n−1})(t_n) : x(t_n = 0) ∈ V_{n−1}} and φ_n = φ_{n−1} ∘ (evaluation at t_n = 0) — a unit vector of E_n has coordinates in that valuation ring because its residue field F(t₁, …, t_{n−1}) ⊂ ℝ has no square root of −1 (G63, the same valuation lemma), and its value at t_n = 0 is a unit vector of E_{n−1}, in V_{n−1}² by induction; that a ring homomorphism takes a unit vector to a vector of quadrance 1, which is non-zero and adjacent to 0 in Γ_q; the coset step of `unitQuadrance_colorable_of_subring`
+
+<!--q FS129-SA1-PLACE-HOM merge@SA1-6.3-2-->
+**Merge note — to formalize** (SA1-6.3 item 2, `plans/FS129-SA1-audit.md:727-728`; status applied):
+> 2. **FS129-SA1-PLACE-HOM**, once, as the homomorphism every field statement of the family goes through (the coset map behind `unitQuadrance_colorable_of_valuationSubring`, iterated, composed with the residue map).
+
+### C11. FS129-SA1-FALC-RES
+<!--row FS129-SA1-FALC-RES plans/FS129-derivation.md:197-->
+**Address** `plans/FS129-derivation.md:197` · **Role** FS-129 composition · **Upstream ids** FS129-SA1-FALC-DICHO-K, FS129-SA1-FALC-FAN, FS129-SA1-PLACE-HOM
+<!--needs FS129-SA1-FALC-RES: FS129-SA1-FALC-DICHO-K,FS129-SA1-FALC-FAN,FS129-SA1-PLACE-HOM-->
+
+<!--q FS129-SA1-FALC-RES statement-->
+**Statement as filed:**
+> let F ⊆ ℝ be a number field, E = F(t₁, …, t_n) ⊂ ℝ with t₁, …, t_n algebraically independent over F (n ≥ 0), and H ⊂ E² a finite connected unit-distance graph with apex a and tip t forming a Falconer fan at five colours; then (i) χ(F²) ≥ 4, and F has no usable prime of residue field 𝔽₇; (ii) for every usable prime 𝔭 of F of residue field 𝔽₁₁ or 𝔽₁₉, with V and φ as in FS129-SA1-PLACE-HOM at 𝔭, t − a has coordinates in V and φ(t − a) = 0
+
+<!--q FS129-SA1-FALC-RES not_claimed-->
+**Not claimed:**
+> that any fan at five colours exists; the case φ(t − a) = 0 excluded (no held colouring has a vertex with two gap colours; the Searcher's queue rows 1 and 4); fields whose only four-colourable residue targets are dyadic inert U_Q with Q ∈ {4, 8, 16} (queue row 5); fields with L(F) ≥ 5 beyond clause (ii); the almost-everywhere form
+
+<!--q FS129-SA1-FALC-RES grade-->
+**Grade as filed:**
+> derived from: FS129-SA1-FALC-FAN, FS129-SA1-FALC-DICHO-K, FS129-SA1-PLACE-HOM
+
+<!--q FS129-SA1-FALC-RES minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SA1-FALC-RES handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize in place of FS129-OA1-FALC-11, FS129-MA1-FALC-19 and FS129-MA2-FALC-HOSTS clause (i): FALC-FAN's lemma through PLACE-HOM, with the two orbit facts as `decide` over 2 × 121 × 24 colourings of Γ₁₁ and 40 × 361 of Γ₁₉, beside `Instances/FanGap11.lean` and `Instances/FanGap19.lean`; HOSTS clauses (ii)–(iv) stay as filed, re-pointed to FALC-FAN (B) and DICHO-K
+
+<!--q FS129-SA1-FALC-RES uses_only-->
+**Uses only:**
+> FS129-SA1-FALC-DICHO-K (χ(H) ≥ 4) and χ(E²) = χ(F²) (row 104, iterated) for χ(F²) ≥ 4; FS129-SA1-FALC-FAN (B) at T = Γ₇ through FS129-SA1-PLACE-HOM, with the kernel's gapped `circ7Table` colouring moved by a translation of Γ₇ to put its gap at ρ(t) (control FS129-MA2-G7GAP); FS129-SA1-FALC-FAN (A) at T = Γ₁₁ and Γ₁₉ through PLACE-HOM, translated so that ρ(a) = 0, with the two exact orbit facts — for every w ≠ 0 in 𝔽_q², some colouring in the orbit of the held tables under Γ_q's point group and translations, with a gap γ at 0, has C(w) ∉ {C(0), γ} or a gap at w outside {C(0), γ} (controls FS129-SA1-ORBIT11, FS129-SA1-ORBIT19, re-running pass 1's and pass 2's tools); that H connected puts t − a in V² (a sum of unit vectors)
+
+<!--q FS129-SA1-FALC-RES merge@SA1-6.3-5-->
+**Merge note — to formalize** (SA1-6.3 item 5, `plans/FS129-SA1-audit.md:731-732`; status applied):
+> 5. **FS129-SA1-FALC-RES** in place of FS129-OA1-FALC-11, FS129-MA1-FALC-19 and FS129-MA2-FALC-HOSTS clause (i); HOSTS clauses (ii)–(iv) as filed, from FALC-FAN (B) and DICHO-K.
+
+### C12. FS129-MA2-FALC-HOSTS
+<!--row FS129-MA2-FALC-HOSTS plans/FS129-derivation.md:262-->
+**Address** `plans/FS129-derivation.md:262` · **Role** FS-129 composition · **Upstream ids** FS129-SA1-FALC-DICHO-K, FS129-SA1-FALC-FAN, FS129-SA1-FALC-RES (the `uses only:` names FS129-MA1-FALC-19, FS129-MA2-FALC-DICHO, FS129-MA2-FALC-GAP4; a superseded form there is read as the form its handoff names)
+<!--needs FS129-MA2-FALC-HOSTS: FS129-SA1-FALC-DICHO-K,FS129-SA1-FALC-FAN,FS129-SA1-FALC-RES-->
+
+<!--q FS129-MA2-FALC-HOSTS statement-->
+**Statement as filed:**
+> let H ⊂ F² be a finite connected unit-distance graph over a real number field F, with apex a and tip t forming a Falconer fan at five colours; then (i) F has no usable prime of residue field 𝔽₃ or 𝔽₇ and no place above 2 ramified in F(i); (ii) if H is drawn in a lattice Λ with its complete unit-vector set U and some finite quotient Cay(Λ/NΛ, U mod N) has a proper four-colouring with a colour absent from a closed neighbourhood, there is no such H; (iii) if H is drawn in de Grey's lattice, t − a ∈ 8Λ; (iv) if F is ℚ(√59), ℚ(√83) or ℚ(√131), then t − a ∈ R ∩ 𝔓⁴ (R = ℤ[U_F], 𝔓 the dyadic prime) and every four-colouring of F² is periodic
+
+<!--q FS129-MA2-FALC-HOSTS not_claimed-->
+**Not claimed:**
+> that any fan exists in the planes (iii) and (iv) leave open; anything over K beyond MA1's (FS129-OA1-FALC-11 at the primes of residue field 𝔽₁₁, and row 59's dyadic law, already confine t − a there); the fields whose only four-colourable residue targets are dyadic inert U_Q with Q ∈ {4, 8, 16} — whether those targets have a gapped four-colouring is not decided (a search request); fields with L(F) ≥ 5, where H may be five-chromatic and nothing here applies
+
+<!--q FS129-MA2-FALC-HOSTS grade-->
+**Grade as filed:**
+> derived from: FS129-MA2-FALC-GAP4, FS129-MA2-FALC-DICHO
+
+<!--q FS129-MA2-FALC-HOSTS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-MA2-FALC-HOSTS handoff-->
+**Handoff as filed:**
+> de Bruijn — clauses (ii)–(iv) as filed, over FS129-SA1-FALC-FAN (B) and FS129-SA1-FALC-DICHO-K in place of FS129-MA2-FALC-GAP4 and -DICHO (SA1 § 6.3 item 5); clause (i) is superseded by FS129-SA1-FALC-RES (i) and is not formalized from this entry (FS129-Z1, 2026-10-03); the reader's handoff, verbatim: "de Bruijn — (i) over `finitePlane7` and `PlaneRotation`'s residue homomorphism; (iii) and (iv) wait on rows 78 and 88's Lean forms"
+
+<!--q FS129-MA2-FALC-HOSTS uses_only-->
+**Uses only:**
+> FS129-MA2-FALC-GAP4 and FS129-MA2-FALC-DICHO; for (i), the residue map at a usable prime 𝔭 as a homomorphism of H, translated to put a vertex at 0, into Γ_q (FS129-MA1-FALC-19's step: −1 a non-square in 𝔽_q), the kernel's gapped proper four-colouring of Γ₇ (`circ7Table` along `projAlong (1, 2)`, `Instances/PlaneFreedom.lean`; control FS129-MA2-G7GAP) moved by a translation of Γ₇ to put its gap at the tip's image, χ(Γ₃) = 3, and a place above 2 ramified in F(i) giving χ(F²) ≤ 2 (G35); for (ii), the quotient map Λ → Λ/NΛ and the quotient's translations; for (iii), row 78 (`F = P = 8Λ` on de Grey's lattice); for (iv), row 88 (`F(R) ∈ {0, P(R)}`, `P(R) = R ∩ 𝔓⁴`) and that H connected puts t − a in R
+
+<!--q FS129-MA2-FALC-HOSTS merge@SA1-6.3-5-->
+**Merge note — replaced in whole or in the part the line names** (SA1-6.3 item 5, `plans/FS129-SA1-audit.md:731-732`; status applied):
+> 5. **FS129-SA1-FALC-RES** in place of FS129-OA1-FALC-11, FS129-MA1-FALC-19 and FS129-MA2-FALC-HOSTS clause (i); HOSTS clauses (ii)–(iv) as filed, from FALC-FAN (B) and DICHO-K.
+
+### C13. FS129-SA1-NOAFF-FIELDS
+<!--row FS129-SA1-NOAFF-FIELDS plans/FS129-derivation.md:121-->
+**Address** `plans/FS129-derivation.md:121` · **Role** FS-129 composition · **Upstream ids** FS129-SA1-NOAFF-K, FS129-SA1-PLACE-HOM
+<!--needs FS129-SA1-NOAFF-FIELDS: FS129-SA1-NOAFF-K,FS129-SA1-PLACE-HOM-->
+
+<!--q FS129-SA1-NOAFF-FIELDS statement-->
+**Statement as filed:**
+> let F ⊆ ℝ be a number field, E = F(t₁, …, t_n) ⊂ ℝ with t₁, …, t_n algebraically independent over F (n ≥ 0), and H ⊂ E² a finite unit-distance graph; suppose k = 5 and F has a usable prime of residue field 𝔽₁₁ or 𝔽₁₉ or χ(F²) ≤ 4, or k = 4 and F has a usable prime of residue field 𝔽₇ or χ(F²) ≤ 3; then for every family of functions φ_v : Fin k → ℝ (v a vertex of H) with Σ_v φ_v(C(v)) taking one value on every proper k-colouring C of H, every φ_v is constant
+
+<!--q FS129-SA1-NOAFF-FIELDS not_claimed-->
+**Not claimed:**
+> fields with no usable prime of residue field 𝔽₇, 𝔽₁₁ or 𝔽₁₉ and χ(F²) ≥ k (K at k = 4 among them — its primes above 7 have residue field 𝔽₄₉, and K's plane carries four-colour forced pairs, hence identities); inequalities; k ≥ 6
+
+<!--q FS129-SA1-NOAFF-FIELDS grade-->
+**Grade as filed:**
+> derived from: FS129-SA1-NOAFF-K, FS129-SA1-PLACE-HOM
+
+<!--q FS129-SA1-NOAFF-FIELDS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SA1-NOAFF-FIELDS handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize in place of FS129-OA1-NOLIN5's and FS129-MA1-NOAFF5's field readings: NOAFF-K composed with PLACE-HOM and the three kernel slack facts
+
+<!--q FS129-SA1-NOAFF-FIELDS uses_only-->
+**Uses only:**
+> FS129-SA1-NOAFF-K (its slack clause); FS129-SA1-PLACE-HOM (H into Γ_q); slackness of Γ₁₁ and Γ₁₉ at five (kernel: `finitePlane11_slack`, `finitePlane19_slack`) and of Γ₇ at four (the kernel's `circ7Table` is proper with a gapped vertex, and Γ₇ is a Cayley graph, `slack_addCayley_of_fanGap`; control FS129-SA1-NOAFF4's first line, FS129-MA2-G7GAP); χ(E²) = χ(F²) (row 104, kernel at d = 2, iterated n times), so H maps into K_{k−1}, which is slack at k
+
+<!--q FS129-SA1-NOAFF-FIELDS merge@SA1-6.3-1-->
+**Merge note — to formalize** (SA1-6.3 item 1, `plans/FS129-SA1-audit.md:724-726`; status applied):
+> 1. **FS129-SA1-NOAFF-K** (with its field corollary **FS129-SA1-NOAFF-FIELDS**) in place of FS129-OA1-NOLIN5, FS129-MA1-NOAFF5, MA2's k = 4 note (`plans/FS129-MA2-audit.md` § 2.3) and FS84-S1e (`plans/FS84-S1-derivation.md` § 4.2); `Slack.forces_iff_of_hom` (row 66, kernel) is its two-vertex case.
+
+### C14. FS129-SA1-SQRT3-LOCAL
+<!--row FS129-SA1-SQRT3-LOCAL plans/FS129-derivation.md:321-->
+**Address** `plans/FS129-derivation.md:321` · **Role** FS-129 composition · **Upstream ids** none
+<!--needs FS129-SA1-SQRT3-LOCAL: -->
+
+<!--q FS129-SA1-SQRT3-LOCAL statement-->
+**Statement as filed:**
+> for a number field F and a place w of F above 2 at which 3 is a square in the completion F_w, w is unramified in F(i)/F, and w splits in F(i) if and only if its residue degree f(w|2) is even; when it does not split it is inert, of norm 2^f with f = f(w|2) odd
+
+<!--q FS129-SA1-SQRT3-LOCAL not_claimed-->
+**Not claimed:**
+> anything at a dyadic place where 3 is not a square — ℚ(ζ₇)⁺'s one place above 2 is ramified in F(i) (TC1-FIELDS); at ℚ(√7)'s, i ∈ F_w and w splits with f = 1; anything about the places of F not above 2
+
+<!--q FS129-SA1-SQRT3-LOCAL grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS129-SA1-SQRT3-LOCAL minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SA1-SQRT3-LOCAL handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize in place of TC1-SQRT3-DYADIC, as a conditional seed like it: one local lemma; it crosses with G56's dyadic exclusion if that is formalized
+
+<!--q FS129-SA1-SQRT3-LOCAL uses_only-->
+**Uses only:**
+> √−3 generates ℚ₄ = ℚ₂(ζ₃), the unramified quadratic extension of ℚ₂; F_w(i) = F_w(√−3) when 3 is a square in F_w (i = √−3/√3); a compositum with an unramified extension is unramified over the smaller field; ℚ₄ ⊆ F_w when 2 divides f(w|2), and not otherwise
+
+<!--q FS129-SA1-SQRT3-LOCAL merge@SA1-6.3-7-->
+**Merge note — to formalize** (SA1-6.3 item 7, `plans/FS129-SA1-audit.md:735-735`; status applied):
+> 7. **FS129-SA1-SQRT3-LOCAL** in place of TC1-SQRT3-DYADIC (a conditional seed, as filed).
+
+### C15. FS129-SR1-BENDANY
+<!--row FS129-SR1-BENDANY plans/FS129-derivation.md:614-->
+**Address** `plans/FS129-derivation.md:614` · **Role** FS-129 composition · **Upstream ids** FS112-N2-BENDS, FS116-V4-DICHOTOMY, FS129-OR1-WHOLE
+<!--needs FS129-SR1-BENDANY: FS112-N2-BENDS,FS116-V4-DICHOTOMY,FS129-OR1-WHOLE-->
+
+<!--q FS129-SR1-BENDANY statement-->
+**Statement as filed:**
+> let F be a valid k-coloured fragment, for any k ≥ 1, on a closed disc B̄(p, r), r > 1, about a point p, and let 1 < ρ′ < min(r, √3); then there is a valid k-coloured fragment F″ on B̄(p, ρ′), with the same colours carried at p as in F, whose arcs of Γ on ω(p) are exactly the arcs of Γ on ω(p) in F both of whose side colours are carried at p, so that Γ ∩ ω(p) in F″ is those arcs and finitely many points; its tiles are the tiles of F meeting B(p, min(r, √3)), each unchanged except the two side tiles of each other ring arc, which differ from F's only inside lenses, as thin as wished, along that arc; and F″ is non-Siamese if F is, and simple if F is
+
+<!--q FS129-SR1-BENDANY not_claimed-->
+**Not claimed:**
+> anything at radius √3 or more (an (R2) arc's witness can be seen there); that F″ keeps saturation; anything about the rings of other points; that an arc with both side colours at p can be removed
+
+<!--q FS129-SR1-BENDANY grade-->
+**Grade as filed:**
+> derived from: FS129-OR1-WHOLE, FS112-N2-BENDS
+
+<!--q FS129-SR1-BENDANY minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR1-BENDANY handoff-->
+**Handoff as filed:**
+> de Bruijn — in place of FS129-OR1-BENDFRAG and the bend half of FS129-OR1-BEND3: one module, the bends on a whole-tile fragment below √3, over FS112-N2-BENDS as an imported hypothesis until FS-112's module lands, following N2's route at the end vertices
+
+<!--q FS129-SR1-BENDANY uses_only-->
+**Uses only:**
+> FS129-OR1-WHOLE at ρ = min(r, √3) (stated for any k); FS112-N2-BENDS (N2-TOWARD, N2-AWAY) read on a fragment by N2's route (§ 2.1 of this record), in which no colour count is spent (`plans/FS112-NB2-verification.md` § 1.5: six "nowhere in N2-RAY, TOWARD, AWAY, TAN, RED, SIGN, ENV"); FS116-V4-DICHOTOMY (any k), for non-Siamese after each bend
+
+<!--q FS129-SR1-BENDANY merge@SR1-6.2-5-->
+**Merge note — to formalize** (SR1-6.2 item 5, `plans/FS129-SR1-audit.md:546-547`; status applied):
+> 5. **FS129-SR1-BENDANY** and **FS129-SR1-BENDLE3** in place of FS129-OR1-BENDFRAG and FS129-OR1-BEND3, over FS129-OR1-WHOLE and FS112-N2-BENDS, by N2's route at end vertices (§ 2.1), with the connectedness step by quasi-components.
+
+<!--q FS129-SR1-BENDANY merge@SR2-4.3-13-->
+**Merge note — to formalize** (SR2-4.3 item 13, `plans/FS129-SR2-audit.md:475-475`; status applied):
+> 13. **FS112-N2-BENDS** (or SR1's BENDANY) in place of **FS112-BEND**; **FS112-N2-TERM** in place of **FS112-N2-RED** (RED's procedure as TERM's lemma).
+
+### C16. FS129-OR1-QFREE-CLASS
+<!--row FS129-OR1-QFREE-CLASS plans/FS129-derivation.md:658-->
+**Address** `plans/FS129-derivation.md:658` · **Role** FS-129 composition · **Upstream ids** FS129-SR1-BENDANY (the `uses only:` names FS129-OR1-BENDFRAG; a superseded form there is read as the form its handoff names)
+<!--needs FS129-OR1-QFREE-CLASS: FS129-SR1-BENDANY-->
+
+<!--q FS129-OR1-QFREE-CLASS statement-->
+**Statement as filed:**
+> for each of the four classes of valid six-coloured fragments — all of them, the non-Siamese ones, the simple ones, the non-Siamese simple ones — if for every r > 1 no fragment of the class on B̄(p, r) about a vertex p of at least four colours has a ring carrying no arc of Γ, then for every r > 1 no fragment of the class on B̄(p, r) about a vertex p of at least four colours has a ring carrying no (Q) arc
+
+<!--q FS129-OR1-QFREE-CLASS not_claimed-->
+**Not claimed:**
+> the hypothesis for the Siamese or the non-simple classes (FS-123's question 3, open); anything for rings carrying a (Q) arc
+
+<!--q FS129-OR1-QFREE-CLASS grade-->
+**Grade as filed:**
+> derived from: FS129-OR1-BENDFRAG
+
+<!--q FS129-OR1-QFREE-CLASS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-OR1-QFREE-CLASS handoff-->
+**Handoff as filed:**
+> de Bruijn — with FS129-OR1-BENDFRAG, as the bridge that turns any Γ-free exclusion into a (Q)-free one
+
+<!--q FS129-OR1-QFREE-CLASS uses_only-->
+**Uses only:**
+> FS129-OR1-BENDFRAG (its fragment F″ is in F's class, on a disc of radius above 1, with p's colours, and its ring's arcs of Γ are F's (Q) ring arcs)
+
+<!--q FS129-OR1-QFREE-CLASS merge@SR3-5.1-24-->
+**Merge note — named** (SR3-5.1 item 24, `plans/FS129-SR3-audit.md:398-399`; status applied):
+> 24. **FS129-SR3-EMPTY-NS** in place of **FS116-Y4-EMPTY**, proved on **FS116-V6's route**: V6-HUBS, V6-HUG *with its own colour step* (V6-GERM), V6-ANTI, and V6-COUNT with its last step on sectors (§ 2.1). FS116-Y4-OBST and FS129-OR1-QFREE-CLASS's hypothesis at the non-Siamese class follow.
+
+### C17. FS129-SR1-BENDLE3
+<!--row FS129-SR1-BENDLE3 plans/FS129-derivation.md:639-->
+**Address** `plans/FS129-derivation.md:639` · **Role** FS-129 composition · **Upstream ids** FS116-V5-U1, FS129-SR1-BENDANY
+<!--needs FS129-SR1-BENDLE3: FS116-V5-U1,FS129-SR1-BENDANY-->
+**Cautions:** [C137](#c137)
+
+<!--q FS129-SR1-BENDLE3 statement-->
+**Statement as filed:**
+> let F be a non-Siamese simple valid k-coloured fragment, for any k ≥ 1, on a closed disc B̄(p, r), r > 1, about a point p carrying at most three colours, and let 1 < ρ′ < min(r, √3); then there is a non-Siamese simple valid k-coloured fragment on B̄(p, ρ′), with the same colours carried at p, whose ring carries no arc of Γ
+
+<!--q FS129-SR1-BENDLE3 not_claimed-->
+**Not claimed:**
+> anything at a point of four or more colours (there BENDANY keeps the arcs with both side colours at p: the (Q) arcs at k = 6); the Siamese or non-simple classes
+
+<!--q FS129-SR1-BENDLE3 grade-->
+**Grade as filed:**
+> derived from: FS129-SR1-BENDANY, FS116-V5-U1
+
+<!--q FS129-SR1-BENDLE3 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR1-BENDLE3 handoff-->
+**Handoff as filed:**
+> de Bruijn — in place of FS129-OR1-BEND3, with BENDANY
+
+<!--q FS129-SR1-BENDLE3 uses_only-->
+**Uses only:**
+> FS129-SR1-BENDANY; FS116-V5-U1's last clause (in a non-Siamese simple fragment a centre carrying both side colours of an arc of Γ on its unit circle carries at least four colours; its argument reads validity, one tile per colour at a point and one cone per tile at a vertex, at any k)
+
+<!--q FS129-SR1-BENDLE3 merge@SR1-6.2-5-->
+**Merge note — to formalize** (SR1-6.2 item 5, `plans/FS129-SR1-audit.md:546-547`; status applied):
+> 5. **FS129-SR1-BENDANY** and **FS129-SR1-BENDLE3** in place of FS129-OR1-BENDFRAG and FS129-OR1-BEND3, over FS129-OR1-WHOLE and FS112-N2-BENDS, by N2's route at end vertices (§ 2.1), with the connectedness step by quasi-components.
+
+### C18. FS129-SR1-RINGBAND
+<!--row FS129-SR1-RINGBAND plans/FS129-derivation.md:933-->
+**Address** `plans/FS129-derivation.md:933` · **Role** FS-129 composition · **Upstream ids** FS110-N2-RING
+<!--needs FS129-SR1-RINGBAND: FS110-N2-RING-->
+**Cautions:** [C137](#c137)
+
+<!--q FS129-SR1-RINGBAND statement-->
+**Statement as filed:**
+> let c colour the circle by ℤ/3, defined and locally constant off a finite set Σ of change points, with c(θ) ≠ c(θ + 60°) wherever both are defined; lift c to c̃, changing by +1 or −1 at each change point, and put W = (c̃(θ + 360°) − c̃(θ))/3; for θ with no point θ + 60°j in Σ put D_j(θ) = c̃(θ + 60°(j + 1)) − c̃(θ + 60°j), m_j(θ) = ⌊D_j(θ)/3⌋, n₂(θ) = #{j : D_j(θ) ≡ 2 (mod 3)} and h(θ) = (1/3) Σ_{j=0..5} d(c(θ + 60°j), c(θ + 60°(j + 1))), with d(x, y) = ±1 as y = x ± 1 (FS129-OA1-RINGWIND's W); then (i) h(θ) = (6 − 2n₂(θ))/3, a value in {−2, 0, 2}; (ii) W = m_0(θ) + m_1(θ) + … + m_5(θ) + 3 − h(θ)/2; (iii) h changes across θ₀ only if Σ holds two points θ₀ + 60°j and θ₀ + 60°(j + 1); (iv) if no point of Σ is a swap point (a change point x with c(x + 60°−) = c(x+) and c(x + 60°+) = c(x−), or the same with −60°), all m_j(θ) equal one integer M, W is 6M + 2, 6M + 3 or 6M + 4, and W = 6M + 3 unless Σ is invariant under the rotation by 60°; (v) if no two points of Σ are 60° apart, h is 0 everywhere and W = 6M + 3
+
+<!--q FS129-SR1-RINGBAND not_claimed-->
+**Not claimed:**
+> anything about tiles or maps (the circle colouring is the input; FS110-N2-RING's setting — a three-colour vertex whose ring carries no arc of Γ, coloured by its three absent colours — supplies one); that h is constant across two change points 60° apart (the swap moves it, row 132 and G71)
+
+<!--q FS129-SR1-RINGBAND grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS129-SR1-RINGBAND minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR1-RINGBAND handoff-->
+**Handoff as filed:**
+> none — FS110-N2-RING and -Y3-GP are declined for the kernel and RINGWIND crosses nowhere; if any of the three is formalized, this lemma is formalized once in their place
+
+<!--q FS129-SR1-RINGBAND uses_only-->
+**Uses only:**
+> c(θ) ≠ c(θ + 60°), so no D_j is ≡ 0 (mod 3); that Σ is finite; at an event, the change of D_j is Δ_{j+1} − Δ_j (Δ_j the step crossed at the hexagon's j-th point, 0 if none), so the changes sum to zero; FS110-N2-RING's band step (D_0 leaves {3M + 1, 3M + 2} only by a jump of ±2, which needs a swap)
+
+<!--q FS129-SR1-RINGBAND merge@SR1-6.2-8-->
+**Merge note — to formalize** (SR1-6.2 item 8, `plans/FS129-SR1-audit.md:550-550`; status applied):
+> 8. **FS129-SR1-RINGBAND** in place of FS110-N2-RING, FS110-Y3-GP and FS129-OA1-RINGWIND, should any of them be formalized.
+
+### C19. FS129-SR1-SIXQ
+<!--row FS129-SR1-SIXQ plans/FS129-derivation.md:913-->
+**Address** `plans/FS129-derivation.md:913` · **Role** FS-129 composition · **Upstream ids** FS116-N1-TWIST-D
+<!--needs FS129-SR1-SIXQ: FS116-N1-TWIST-D-->
+
+<!--q FS129-SR1-SIXQ statement-->
+**Statement as filed:**
+> let F be a valid k-coloured fragment, for any k ≥ 1, Siamese pairs allowed, on a closed disc of radius above 1 about a point p at which all k colours are carried; then ω(p) lies in Γ, and both side colours of every arc of Γ on ω(p) are carried at p; so at k = 6, when p carries six colours, every arc of Γ on ω(p) is a (Q) arc
+
+<!--q FS129-SR1-SIXQ not_claimed-->
+**Not claimed:**
+> FS116-N2-SIXRING's structure (six 60° arcs, each the ring points of one tile; it needs non-Siamese); anything when a colour is absent at p (five colours: FS116-N2-FIVERING); that a fragment with a six-colour vertex exists beyond radius 3/2
+
+<!--q FS129-SR1-SIXQ grade-->
+**Grade as filed:**
+> derived from: FS116-N1-TWIST-D
+
+<!--q FS129-SR1-SIXQ minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR1-SIXQ handoff-->
+**Handoff as filed:**
+> de Bruijn — with TWIST-D, in place of FS112-SIX's six-colour clause; FS112-SIX's five-colour clause is FS116-N2-FIVERING's last clause in a weaker form, so FIVERING is formalized in its place
+
+<!--q FS129-SR1-SIXQ uses_only-->
+**Uses only:**
+> FS116-N1-TWIST-D (the ring points in the closure of a tile of one of p's colours form a closed set lying in the union of the arcs of Γ on ω(p) and finitely many points); that every point of the fragment's open set lies in the closure of a tile (Γ, a locally finite union of arcs, has empty interior); the definition of (Q) (both side colours and at least four colours at the centre)
+
+<!--q FS129-SR1-SIXQ merge@SR1-6.2-3-->
+**Merge note — to formalize** (SR1-6.2 item 3, `plans/FS129-SR1-audit.md:544-544`; status applied):
+> 3. **FS116-N2-FIVERING** and **FS129-SR1-SIXQ** in place of FS112-SIX.
+
+### C20. FS129-SR1-TWOCIRC
+<!--row FS129-SR1-TWOCIRC plans/FS129-derivation.md:837-->
+**Address** `plans/FS129-derivation.md:837` · **Role** FS-129 composition · **Upstream ids** none
+<!--needs FS129-SR1-TWOCIRC: -->
+
+<!--q FS129-SR1-TWOCIRC statement-->
+**Statement as filed:**
+> let y₀ and y₁ be points of the plane with |y₀ − y₁| = 1, and p a point with |p − y₀| = |p − y₁| = 1; for real s, t let a(s) be the point of ω(y₀) reached from y₁ by turning through the angle s about y₀ toward p, and b(t) the point of ω(y₁) reached from y₀ by turning through the angle t about y₁ toward p; then |a(s) − b(t)|² − 1 = −8 sin(s/2) sin(t/2) cos((s + t)/2) = 2(1 − cos s)(1 − cos t) − 2 sin s sin t, and for 0 < s, t < 180° the distance |a(s) − b(t)| is below 1 when s + t < 180°, equal to 1 when s + t = 180°, and above 1 when s + t > 180°
+
+<!--q FS129-SR1-TWOCIRC not_claimed-->
+**Not claimed:**
+> anything about tiles — each use (FS114-Y5-PXKILL, FS116-V6-HUG, FS116-V6-ADJ, FS116-Y4-FLANK) adds its own pinning of two tiles to the two circles; anything for s or t outside (0°, 180°)
+
+<!--q FS129-SR1-TWOCIRC grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS129-SR1-TWOCIRC minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR1-TWOCIRC handoff-->
+**Handoff as filed:**
+> de Bruijn — one lemma, proved once and consumed by FS114-Y5-PXKILL, FS116-V6-ADJ, FS116-Y4-FLANK and (through FS129-MR1-DOUBLETIP) FS116-V6-HUG; the statement and its not claimed
+
+<!--q FS129-SR1-TWOCIRC uses_only-->
+**Uses only:**
+> a congruence taking (y₀, y₁, p) to (e(0°), e(60°), 0), which keeps "toward p"; there a(s) = y₀ + e(120° + s) and b(t) = y₁ + e(300° − t); the half-angle formulas
+
+<!--q FS129-SR1-TWOCIRC merge@SR1-6.2-1-->
+**Merge note — to formalize** (SR1-6.2 item 1, `plans/FS129-SR1-audit.md:541-542`; status applied):
+> 1. **FS129-SR1-TWOCIRC** once, in place of the identity steps inside FS114-Y5-PXKILL, FS116-V6-HUG, FS116-V6-ADJ and FS116-Y4-FLANK (each keeps its own pinning of two tiles).
+
+<!--q FS129-SR1-TWOCIRC merge@SR3-5.1-26-->
+**Merge note — named** (SR3-5.1 item 26, `plans/FS129-SR3-audit.md:402-403`; status applied):
+> 26. **FS129-SR3-OUTERADJ** in place of **FS116-V6-ADJ**, over FS116-RING-GERM (ii), V6-GERM's neighbourhood form and FS129-SR1-TWOCIRC; V6-ADJ's argument is its last step, formalized class-free (two distinct same-colour tiles holding the two lens arcs beyond a unit pair).
+
+### C21. FS129-SR2-CLOSURE
+<!--row FS129-SR2-CLOSURE plans/FS129-derivation.md:1029-->
+**Address** `plans/FS129-derivation.md:1029` · **Role** FS-129 composition · **Upstream ids** FS111-M2-INT
+<!--needs FS129-SR2-CLOSURE: FS111-M2-INT-->
+
+<!--q FS129-SR2-CLOSURE statement-->
+**Statement as filed:**
+> let U ⊆ ℝ² be open, with (Leb ⊗ σ){(x, w) ∈ U × S¹ : x + w ∈ U} = 0; then no point of U is at distance exactly 1 from a point of cl U
+
+<!--q FS129-SR2-CLOSURE not_claimed-->
+**Not claimed:**
+> anything for a point of cl U against another point of cl U (two boundary points may be at distance 1: the hexagonal seven-colouring's opposite vertices, FS111-C-HULL-SO's object); anything for sets that are not open (that is FS111-M2-INT itself)
+
+<!--q FS129-SR2-CLOSURE grade-->
+**Grade as filed:**
+> derived from: FS111-M2-INT
+
+<!--q FS129-SR2-CLOSURE minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR2-CLOSURE handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize once, as FS111-M2-INT's corollary for open sets (or by V0-CLOSE's translation argument directly), in place of FS106-DIAM (iii), FS111-V0-CLOSE and FS116-V5-NE1's first clause; the statement and its not claimed
+
+<!--q FS129-SR2-CLOSURE uses_only-->
+**Uses only:**
+> FS111-M2-INT with A = U; that every point of an open set is a Lebesgue density point of it, so U ⊆ int Ũ; that every density point of U lies in cl U, so cl Ũ = cl U
+
+<!--q FS129-SR2-CLOSURE merge@SR2-4.3-9-->
+**Merge note — to formalize** (SR2-4.3 item 9, `plans/FS129-SR2-audit.md:467-469`; status applied):
+> 9. **FS129-SR2-CLOSURE** (as FS111-M2-INT's corollary for open sets, or by V0-CLOSE's translation argument) in place of **FS106-DIAM (iii)**, **FS111-V0-CLOSE** and **FS116-V5-NE1's first clause**; and **FS106-DIAM (i)** (a connected set with no unit pair has diameter at most 1) once, in place of the connectedness step inside FS116-V5-NE1's "in particular", FS106-TS-C, FS116-V4-DICHOTOMY's "A ~ A" and FS111-V0-CLEAN's diameter step.
+
+### C22. FS129-SR2-DISC1TS
+<!--row FS129-SR2-DISC1TS plans/FS129-derivation.md:1084-->
+**Address** `plans/FS129-derivation.md:1084` · **Role** FS-129 composition · **Upstream ids** FS106-TS-T
+<!--needs FS129-SR2-DISC1TS: FS106-TS-T-->
+
+<!--q FS129-SR2-DISC1TS statement-->
+**Statement as filed:**
+> every closed disc of radius 1 of a valid map contains a vertex of degree at least 3 (FS112-DISC1's statement), as a case of FS106-TS-T
+
+<!--q FS129-SR2-DISC1TS not_claimed-->
+**Not claimed:**
+> anything sharper than TS-T's radius 1/√2 + ε; the trichromatic or cubic forms TS-T gives under Conditions 5 or 6
+
+<!--q FS129-SR2-DISC1TS grade-->
+**Grade as filed:**
+> derived from: FS106-TS-T
+
+<!--q FS129-SR2-DISC1TS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR2-DISC1TS handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize FS106-TS-T in place of FS112-DISC1; DISC1's consumers (FS112-N2-DENSE, -N3-DENSE3) read it as TS-T's corollary
+
+<!--q FS129-SR2-DISC1TS uses_only-->
+**Uses only:**
+> FS106-TS-T (every point of an almost-everywhere-proper map has a point of chromaticity at least 3 within 1/√2 + ε); that a valid map is an almost-everywhere-proper map in TS-T's sense (FS-112's definition: a locally finite map by open connected tiles, no two interior points of one colour at distance 1); that in a locally finite map a point in the closures of tiles of three colours is a vertex where at least three tiles meet
+
+<!--q FS129-SR2-DISC1TS merge@SR2-4.3-12-->
+**Merge note — named** (SR2-4.3 item 12, `plans/FS129-SR2-audit.md:474-474`; status applied):
+> 12. **FS106-TS-T** in place of **FS112-DISC1** (FS129-SR2-DISC1TS).
+
+### C23. FS129-SR2-HULLSET
+<!--row FS129-SR2-HULLSET plans/FS129-derivation.md:1047-->
+**Address** `plans/FS129-derivation.md:1047` · **Role** FS-129 composition · **Upstream ids** FS111-V0-ID1
+<!--needs FS129-SR2-HULLSET: FS111-V0-ID1-->
+
+<!--q FS129-SR2-HULLSET statement-->
+**Statement as filed:**
+> let A ⊆ ℝ² be measurable with (Leb ⊗ σ){(x, w) : x ∈ A, x + w ∈ A} = 0, Ã its Lebesgue density points and A* = {x : d̄_A(x) > 0}; for every path-connected C ⊆ Ã and every x ∈ A*, either |x − c| < 1 for every c ∈ C or |x − c| > 1 for every c ∈ C; when C is compact, either sup_{c∈C}|x − c| < 1 or dist(x, C) > 1
+
+<!--q FS129-SR2-HULLSET not_claimed-->
+**Not claimed:**
+> A* ⊆ {x : sup_{c∈C}|x − c| < 1} ∪ {x : dist(x, C) > 1} for non-compact C (FALSE: FS111-C-HULL-SO); anything at points of density 0
+
+<!--q FS129-SR2-HULLSET grade-->
+**Grade as filed:**
+> derived from: FS111-V0-ID1
+
+<!--q FS129-SR2-HULLSET minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR2-HULLSET handoff-->
+**Handoff as filed:**
+> de Bruijn — in place of FS111-C-HULL: one measurable set, no colouring, no tightness, no normal form; C-HULL is its case S_j = A
+
+<!--q FS129-SR2-HULLSET uses_only-->
+**Uses only:**
+> FS111-V0-ID1's argument, which reads only that A's own unit pairs are null; continuity of c ↦ |x − c| on a path-connected C; a continuous function on a compact set attains its bounds
+
+<!--q FS129-SR2-HULLSET merge@SR2-4.3-10-->
+**Merge note — to formalize** (SR2-4.3 item 10, `plans/FS129-SR2-audit.md:470-471`; status applied):
+> 10. **FS129-SR2-HULLSET** in place of **FS111-C-HULL** (one measurable set with null unit pairs; no colouring, tightness or normal form). FS111-M-HULL2 over it; FS116-V4-DICHOTOMY's first clause is HULL2's case for two open tiles.
+
+### C24. FS129-SR2-SUPK
+<!--row FS129-SR2-SUPK plans/FS129-derivation.md:1065-->
+**Address** `plans/FS129-derivation.md:1065` · **Role** FS-129 composition · **Upstream ids** FS106-SUP
+<!--needs FS129-SR2-SUPK: FS106-SUP-->
+
+<!--q FS129-SR2-SUPK statement-->
+**Statement as filed:**
+> for every k ≥ 1, µ_k⁰ = lim_{ε→0} µ_k(ε) = lim_{ε→0} µ_k^tile(ε) = lim_{ε→0} µ_k^per(ε), with µ_k⁰, µ_k(ε), µ_k^tile(ε), µ_k^per(ε) defined as FS106-SUP defines them at six (the suprema of the upper densities covered by a.e.-proper, band-proper, band-proper tiled, and band-proper periodic tiled partial k-colourings)
+
+<!--q FS129-SR2-SUPK not_claimed-->
+**Not claimed:**
+> SUP's second clause (µ^per(ε) = µ(ε) at each ε, and attainment) at every k — QB's stronger form was not read here; any value of µ_k⁰
+
+<!--q FS129-SR2-SUPK grade-->
+**Grade as filed:**
+> derived from: FS106-SUP
+
+<!--q FS129-SR2-SUPK minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR2-SUPK handoff-->
+**Handoff as filed:**
+> de Bruijn — in place of FS106-SUP; then FS106-EQ's (e) has its input as stated, and EQ's (c) ⟺ (d) is SUPK at the value 1
+
+<!--q FS129-SR2-SUPK uses_only-->
+**Uses only:**
+> FS106-SUP's argument (plans/FS106-TQ-derivation.md § 3.2) and its Lemmas P and T (§ 3.1) and TQ-REM-i, none of which reads the number of classes: Lemma P copies a colouring of a square, Lemma T colours each grid square by the least class meeting it in positive measure, REM-i keeps points class by class
+
+<!--q FS129-SR2-SUPK merge@SR2-4.3-11-->
+**Merge note — to formalize** (SR2-4.3 item 11, `plans/FS129-SR2-audit.md:472-473`; status applied):
+> 11. **FS129-SR2-SUPK** (every `k`) in place of **FS106-SUP** (six); FS106-EQ's (c) ⟺ (d) as its corollary at the value 1, and **FS106-COMP's first clause** as FS106-EQ's (c) ⟹ (a), stated at every `k`.
+
+### C25. FS129-SR2-TOUCHW
+<!--row FS129-SR2-TOUCHW plans/FS129-derivation.md:1120-->
+**Address** `plans/FS129-derivation.md:1120` · **Role** FS-129 composition · **Upstream ids** FS116-N1-GERM-R, FS116-N1-TOUCH, FS116-N1-TWIST-D
+<!--needs FS129-SR2-TOUCHW: FS116-N1-GERM-R,FS116-N1-TOUCH,FS116-N1-TWIST-D-->
+
+<!--q FS129-SR2-TOUCHW statement-->
+**Statement as filed:**
+> in a valid fragment on a closed disc of radius above 1 about a vertex p of four colours and no more, Siamese pairs allowed, let w be a point of ω(p) which is not a change point of the ring and lies on no arc of Γ on ω(p), and suppose none of the four arcs of ω(p) just clockwise and just counter-clockwise of w + 60° and w − 60° lies on a (Q) arc; then the ring just clockwise and just counter-clockwise of w lies in tiles of one colour X absent at p, each of the four arcs lies in the closure of a tile of the other absent colour X̄ and of no tile of colour X, and no tile of colour X̄ has w in its closure
+
+<!--q FS129-SR2-TOUCHW not_claimed-->
+**Not claimed:**
+> anything at k ≥ 7; anything when a germ lies on a (Q) arc; that such a point exists in any fragment of SAT-QFREE's class
+
+<!--q FS129-SR2-TOUCHW grade-->
+**Grade as filed:**
+> derived from: FS116-N1-TOUCH
+
+<!--q FS129-SR2-TOUCHW minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR2-TOUCHW handoff-->
+**Handoff as filed:**
+> de Bruijn — in place of FS116-N1-TOUCH; FS116-N2-RECIP's use of TOUCH reads it
+
+<!--q FS129-SR2-TOUCHW uses_only-->
+**Uses only:**
+> FS116-N1-TOUCH's argument (plans/FS116-N1-proof.md § 4.2), in which the hypothesis "w in the closure of a tile of one of p's colours" is idle (FS116-V3 § 3.1: TRUE with it idle; § 4.4's uses-only note); FS116-N1-TWIST-D; N-E1; FS116-N1-GERM-R with c = X̄ at all four germs; six colours
+
+<!--q FS129-SR2-TOUCHW merge@SR2-4.3-20-->
+**Merge note — to formalize** (SR2-4.3 item 20, `plans/FS129-SR2-audit.md:484-484`; status applied):
+> 20. **FS129-SR2-TOUCHW** in place of **FS116-N1-TOUCH** (its idle hypothesis dropped).
+
+### C26. FS129-SR2-YESLIM-EQ
+<!--row FS129-SR2-YESLIM-EQ plans/FS129-derivation.md:1102-->
+**Address** `plans/FS129-derivation.md:1102` · **Role** FS-129 composition · **Upstream ids** FS106-COMP, FS106-EQ
+<!--needs FS129-SR2-YESLIM-EQ: FS106-COMP,FS106-EQ-->
+
+<!--q FS129-SR2-YESLIM-EQ statement-->
+**Statement as filed:**
+> for every k ≥ 1, if for every R > 0 some closed disc of radius R carries a valid k-coloured fragment, then χ_m⁰(ℝ²) ≤ k (FS116-O1-YESLIM's first clause), as a corollary of FS106-EQ's implication (c) ⟹ (a) at k
+
+<!--q FS129-SR2-YESLIM-EQ not_claimed-->
+**Not claimed:**
+> YESLIM's clause at six with no MR (that is row 130's χ(ℝ²) ≤ χ_m⁰(ℝ²), unchanged); anything about a single fragment of bounded radius
+
+<!--q FS129-SR2-YESLIM-EQ grade-->
+**Grade as filed:**
+> derived from: FS106-EQ
+
+<!--q FS129-SR2-YESLIM-EQ minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR2-YESLIM-EQ handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize FS106-EQ's (c) ⟹ (a) once at every k (the weak-* step), and YESLIM as this two-line corollary in place of its own weak-* argument
+
+<!--q FS129-SR2-YESLIM-EQ uses_only-->
+**Uses only:**
+> FS106-EQ (c) ⟹ (a) at k — if for every δ > 0 there are k disjoint measurable classes with Leb ⊗ σ-null monochromatic unit pairs whose union has upper density at least 1 − δ, then χ_m⁰(ℝ²) ≤ k (FS106-COMP's first clause, stated by EQ at every k); Lemma P of plans/FS106-TQ-derivation.md § 3.1 in its Leb ⊗ σ-null form; that a fragment's tile boundaries are Lebesgue-null and its colour classes have no unit pair between interior points
+
+<!--q FS129-SR2-YESLIM-EQ merge@SR2-4.3-18-->
+**Merge note — named** (SR2-4.3 item 18, `plans/FS129-SR2-audit.md:481-482`; status applied):
+> 18. **FS106-EQ's (c) ⟹ (a) at every `k`** once (the weak-* step), and **FS116-O1-YESLIM** as its corollary by Lemma P (FS129-SR2-YESLIM-EQ), in place of YESLIM's own weak-* argument.
+
+### C27. FS129-SR3-E2ONE
+<!--row FS129-SR3-E2ONE plans/FS129-derivation.md:874-->
+**Address** `plans/FS129-derivation.md:874` · **Role** FS-129 composition · **Upstream ids** FS114-Y5-PINALL, FS114-Y6-E2RED
+<!--needs FS129-SR3-E2ONE: FS114-Y5-PINALL,FS114-Y6-E2RED-->
+
+<!--q FS129-SR3-E2ONE statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid fragment containing a neighbourhood of the closed unit disc about p, with a pinwheel at p, no edge at p of length 60° (no E1) and E2 at exactly one blade t_{c+1}, the pocket colours satisfy m_{c−1} ≠ m_c; hence POCKET at w_c and CASE at q_c hold, and no such pinwheel exists at radius 1 + ε; in particular FS114-Y6-E2RED's survivor family S6, (120°, b, 180° − b, 60°), has no member
+
+<!--q FS129-SR3-E2ONE not_claimed-->
+**Not claimed:**
+> E2 at two or more blades (two broken ALTs leave the parity free: plant --fault-two); E1, with or without E2 (E1 breaks MU at its edge, so not every pocket colour is defined, and the residues E1-Z, E1-60, E1-ν, E1{1,2}, E1{1,4} stand); E1CAP's wrap at λ_3; anything in the Siamese or non-simple class
+
+<!--q FS129-SR3-E2ONE grade-->
+**Grade as filed:**
+> derived from: FS114-Y5-PINALL, FS114-Y6-E2RED
+
+<!--q FS129-SR3-E2ONE minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR3-E2ONE handoff-->
+**Handoff as filed:**
+> de Bruijn — the parity step as a corollary of ALT at three pairs; with it FS114-Y5-PINALL is formalized with the exception "E1, or E2 at two or more blades", and S6 leaves FS114-K1's case list
+
+<!--q FS129-SR3-E2ONE uses_only-->
+**Uses only:**
+> FS114-Y5-ALT at the three pairs (μ_c, μ_{c+1}), (μ_{c+1}, μ_{c+2}), (μ_{c+2}, μ_{c+3}) — each needs only all edges below 60° and no E2 at t_{c+2}, t_{c+3}, t_c respectively; that each pocket colour m_j is one of the two colours absent at p (FS114-Y5-MU's setting: pocket tiles lie inside B(p, 1) and are not tiles of p); FS114-Y6-E2RED's chain clause (E2 at t_{c+1} breaks only ALT(μ_{c−1}, μ_c), which only POCKET at w_c reads, which only CASE at q_c reads — two readings, FS114-Y6's and YB5's blind one); FS114-Y5-PINALL's chain outside E1 and E2 (POCKET, CASE, REDUCE, PIN120-60, PXKILL), whose use of "no E2" is ALT alone (YB4 item 11, YB5 item 6)
+
+<!--q FS129-SR3-E2ONE merge@SR3-5.1-27-->
+**Merge note — to formalize** (SR3-5.1 item 27, `plans/FS129-SR3-audit.md:404-406`; status applied):
+> 27. **FS114-Y5-PINALL with FS129-SR3-E2ONE**: formalize PINALL with the exception "E1, or E2 at two or more blades"; FS114-Y5-PIN120's exception narrowed to E2 at the blade two past the `120°` tile *together with* E1 or a second E2; **FS114-Y6-E2RED**'s survivor clause read as "no survivor at a single blade" (S6 empty).
+
+### C28. FS129-SR3-EMPTY-NS
+<!--row FS129-SR3-EMPTY-NS plans/FS129-derivation.md:675-->
+**Address** `plans/FS129-derivation.md:675` · **Role** FS-129 composition · **Upstream ids** FS116-Y4-EMPTY
+<!--needs FS129-SR3-EMPTY-NS: FS116-Y4-EMPTY-->
+**Cautions:** [C126](#c126), [C131](#c131)
+
+<!--q FS129-SR3-EMPTY-NS statement-->
+**Statement as filed:**
+> no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no arc of Γ
+
+<!--q FS129-SR3-EMPTY-NS not_claimed-->
+**Not claimed:**
+> anything in the Siamese class (V6-RING's one tile per colour at p, V6-TIP's tip and V6-HUG's uniqueness of the tip and of R⁻, R⁺ read non-Siamese); anything at k ≥ 7 (V6-RING and V6-TIP spend six); that FS116-Y4's own route carries the non-simple class (it reads one cone per tile at a double-tipped hub)
+
+<!--q FS129-SR3-EMPTY-NS grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS129-SR3-EMPTY-NS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR3-EMPTY-NS handoff-->
+**Handoff as filed:**
+> de Bruijn — in place of FS116-Y4-EMPTY, on V6's route: V6-HUG's own colour step (V6-GERM, the Γ-free ring's germs all off Γ), not FS129-MR1-DOUBLETIP's cone step, and V6-COUNT's last step on sectors as here
+
+<!--q FS129-SR3-EMPTY-NS uses_only-->
+**Uses only:**
+> FS116-V6's route to FS116-Y4-EMPTY (`plans/FS116-V6-verification.md` § 2.2) — V6-DIAM, V6-E1, V6-DICH, V6-RING, V6-WIN, V6-GERM, V6-TIP, V6-HUBS, V6-HUG (its colour step through V6-GERM), V6-ANTI and V6-COUNT's count — none of which reads simplicity (§ 2.1); V6-COUNT's last step read on sectors: every tile of p owns a sector at p, and two cyclically consecutive sectors of the two tipper groups share an edge, against V6-ANTI
+
+<!--q FS129-SR3-EMPTY-NS merge@SR3-5.1-24-->
+**Merge note — to formalize** (SR3-5.1 item 24, `plans/FS129-SR3-audit.md:398-399`; status applied):
+> 24. **FS129-SR3-EMPTY-NS** in place of **FS116-Y4-EMPTY**, proved on **FS116-V6's route**: V6-HUBS, V6-HUG *with its own colour step* (V6-GERM), V6-ANTI, and V6-COUNT with its last step on sectors (§ 2.1). FS116-Y4-OBST and FS129-OR1-QFREE-CLASS's hypothesis at the non-Siamese class follow.
+
+### C29. FS129-SR3-OUTERADJ
+<!--row FS129-SR3-OUTERADJ plans/FS129-derivation.md:795-->
+**Address** `plans/FS129-derivation.md:795` · **Role** FS-129 composition · **Upstream ids** FS116-N1-GERM-R, FS116-RING-GERM, FS116-V4-DICHOTOMY, FS129-SR1-TWOCIRC
+<!--needs FS129-SR3-OUTERADJ: FS116-N1-GERM-R,FS116-RING-GERM,FS116-V4-DICHOTOMY,FS129-SR1-TWOCIRC-->
+
+<!--q FS129-SR3-OUTERADJ statement-->
+**Statement as filed:**
+> in a non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) and y′ = r(ψ + 60°) be change points of the ring such that neither the arc of ω(p) just counter-clockwise of r(ψ − 60°) nor the arc just clockwise of r(ψ + 120°) lies on a (Q) arc; then no colour of p is at once the only colour carried at y by a tile that is not a tile of p and the only colour carried at y′ by a tile that is not a tile of p
+
+<!--q FS129-SR3-OUTERADJ not_claimed-->
+**Not claimed:**
+> anything when y or y′ carries two or more outer colours (the tile beyond the outer tile may then be outer and unpinned: tangent segments stay exactly 1 apart, plant --fault-tangent); anything when the arc just counter-clockwise of r(ψ − 60°) or just clockwise of r(ψ + 120°) lies on a (Q) arc (RING-GERM (ii) is then unavailable); the Siamese class; anything at k ≥ 7 (a third absent colour leaves the tile beyond unpinned, plant --fault-seven); that y or y′ has a single tip
+
+<!--q FS129-SR3-OUTERADJ grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS129-SR3-OUTERADJ minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR3-OUTERADJ handoff-->
+**Handoff as filed:**
+> de Bruijn — the statement and its not claimed, over RING-GERM (ii), V6-GERM's neighbourhood form and TWOCIRC; it carries FS116-V6-ADJ's argument as its last step, so V6-ADJ is formalized class-free (two distinct same-colour tiles holding the two lens arcs beyond a unit pair) or not at all
+
+<!--q FS129-SR3-OUTERADJ uses_only-->
+**Uses only:**
+> FS116-RING-GERM (ii) at y (outer pair u⁻, v⁺) and at y′ (u′⁻, v′⁺) — u⁻ (the ring just clockwise of y′) and v′⁺ (just counter-clockwise of y) are off Γ because y′ and y are change points, the other two by hypothesis — and its first clause (p has four colours, X and X̄ absent); V6-GERM's neighbourhood form at y from the germs u⁻ (colour X) and u⁺ (colour X̄), and at y′ from v′⁺ (X) and v′⁻ (X̄), all off Γ (the argument of FS116-N1-GERM-R, which reads only N-E1 and the germs' colours); the germs' colours from validity (ring points 60° apart differ, two absent colours); non-Siamese (one tile per colour at a point; distinct tiles of one colour have no closure points below 1 apart, FS116-V4-DICHOTOMY); the diameter bound; FS129-SR1-TWOCIRC at the mirror apex y + y′ − p; six colours, spent in RING-GERM and in the colour of the tile beyond the outer tile
+
+<!--q FS129-SR3-OUTERADJ merge@SR3-5.1-26-->
+**Merge note — to formalize** (SR3-5.1 item 26, `plans/FS129-SR3-audit.md:402-403`; status applied):
+> 26. **FS129-SR3-OUTERADJ** in place of **FS116-V6-ADJ**, over FS116-RING-GERM (ii), V6-GERM's neighbourhood form and FS129-SR1-TWOCIRC; V6-ADJ's argument is its last step, formalized class-free (two distinct same-colour tiles holding the two lens arcs beyond a unit pair).
+
+### C30. FS129-MR1-DOUBLETIP
+<!--row FS129-MR1-DOUBLETIP plans/FS129-derivation.md:750-->
+**Address** `plans/FS129-derivation.md:750` · **Role** FS-129 composition · **Upstream ids** FS116-RING-GERM, FS116-V4-DICHOTOMY, FS116-V4-TWIST, FS116-Y4-FLANK · **Also placed after** FS129-SR1-TWOCIRC, FS129-SR3-OUTERADJ (their `Rests on it:` prose names this entry)
+<!--needs FS129-MR1-DOUBLETIP: FS116-RING-GERM,FS116-V4-DICHOTOMY,FS116-V4-TWIST,FS116-Y4-FLANK-->
+<!--after FS129-MR1-DOUBLETIP: FS129-SR1-TWOCIRC,FS129-SR3-OUTERADJ-->
+**Cautions:** [C126](#c126), [C131](#c131)
+
+<!--q FS129-MR1-DOUBLETIP statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) and y′ = r(ψ + 60°) be change points of the ring of p such that neither the arc of ω(p) just clockwise of r(ψ − 60°) nor the arc just counter-clockwise of r(ψ + 120°) lies on a (Q) arc; then no tile of p is at once the only tile of p whose closure holds y and the only tile of p whose closure holds y′
+
+<!--q FS129-MR1-DOUBLETIP not_claimed-->
+**Not claimed:**
+> anything when the arc just clockwise of r(ψ − 60°) or just counter-clockwise of r(ψ + 120°) lies on a (Q) arc; that y or y′ has a single tip in general (two tips at either are not excluded); SEMI-PAR3 (its points y ± 60° lie at (Q) arc ends, not change points); the Siamese or non-simple class; anything at k ≥ 7 (three absent colours: the flank tiles' colours may differ, control fs129-mr1-doubletip's plant)
+
+<!--q FS129-MR1-DOUBLETIP grade-->
+**Grade as filed:**
+> derived from: FS116-Y4-FLANK, FS116-RING-GERM, FS116-V4-TWIST, FS116-V4-DICHOTOMY
+
+<!--q FS129-MR1-DOUBLETIP minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-MR1-DOUBLETIP handoff-->
+**Handoff as filed:**
+> de Bruijn — the statement and its not claimed, over FS116-Y4-FLANK and RING-GERM (i); it carries FS116-V6-HUG as its Γ-free instance, so the kernel module should prove this form once and V6-HUG from it
+
+<!--q FS129-MR1-DOUBLETIP uses_only-->
+**Uses only:**
+> FS116-RING-GERM (i) at y and at y′ (the open cone of 60° about the direction to p lies in cones of tiles of p when neither germ of the tip pair lies on a (Q) arc); FS116-Y4-FLANK (colour-free, Siamese allowed); FS116-V4-TWIST (germs 60° apart carry different colours; a ring point inside a tile has an absent colour); FS116-V4-DICHOTOMY; non-Siamese (one tile of each colour at a point; an outer tile misses B(p, 1)); simple (one cone per tile at a vertex)
+
+<!--q FS129-MR1-DOUBLETIP merge@SR1-6.2-2-->
+**Merge note — to formalize** (SR1-6.2 item 2, `plans/FS129-SR1-audit.md:543-543`; status amended-by:SR3-5.1-25):
+> 2. **FS129-MR1-DOUBLETIP** in place of FS116-V6-HUG (and of FS116-Y4-EMPTY's double-tip step on route 2); its `uses only:` may drop FS116-N2-STAR (§ 2.2).
+
+<!--q FS129-MR1-DOUBLETIP merge@SR3-5.1-25-->
+**Merge note — to formalize, as amended** (SR3-5.1 item 25, `plans/FS129-SR3-audit.md:400-401`; status applied):
+> 25. **Amending SR1's item 2**: formalize **FS129-MR1-DOUBLETIP** for the wider ring classes it serves (FS-124), but **not** as EMPTY's double-tip step: its step 3 identifies the flank tile by a cone interval at the hubs, so an EMPTY routed through it holds only in the simple class (§ 2.3, § 4.3 row 3).
+
+### C31. FS129-SR3-QFREE-NS
+<!--row FS129-SR3-QFREE-NS plans/FS129-derivation.md:710-->
+**Address** `plans/FS129-derivation.md:710` · **Role** FS-129 composition · **Upstream ids** FS129-OR1-QFREE-CLASS, FS129-SR1-BENDANY, FS129-SR3-EMPTY-NS (the `uses only:` names FS129-OR1-BENDFRAG, FS129-OR1-QFREE-CLASS, FS129-SR1-BENDANY, FS129-SR3-EMPTY-NS; a superseded form there is read as the form its handoff names)
+<!--needs FS129-SR3-QFREE-NS: FS129-OR1-QFREE-CLASS,FS129-SR1-BENDANY,FS129-SR3-EMPTY-NS-->
+
+<!--q FS129-SR3-QFREE-NS statement-->
+**Statement as filed:**
+> no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no (Q) arc
+
+<!--q FS129-SR3-QFREE-NS not_claimed-->
+**Not claimed:**
+> anything in the Siamese class (FS-123's question 3); anything at k ≥ 7; anything for rings that carry a (Q) arc (FS-124); that a vertex with a (Q) ring dies at any radius
+
+<!--q FS129-SR3-QFREE-NS grade-->
+**Grade as filed:**
+> derived from: FS129-SR3-EMPTY-NS, FS129-OR1-QFREE-CLASS
+
+<!--q FS129-SR3-QFREE-NS minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR3-QFREE-NS handoff-->
+**Handoff as filed:**
+> de Bruijn — in place of FS129-OR1-QFREE (it drops "simple"), over FS129-SR3-EMPTY-NS and FS129-SR1-BENDANY; FS116-S1-QF is then its case with no "simple at p" step
+
+<!--q FS129-SR3-QFREE-NS uses_only-->
+**Uses only:**
+> FS129-SR3-EMPTY-NS (for every r > 1); FS129-OR1-QFREE-CLASS at the class of non-Siamese fragments, through FS129-OR1-BENDFRAG (or FS129-SR1-BENDANY), whose fragment keeps non-Siamese, p's colours and its tiles at p, and whose validity reads no simplicity (§ 2.1)
+
+<!--q FS129-SR3-QFREE-NS merge@SR3-5.1-23-->
+**Merge note — to formalize** (SR3-5.1 item 23, `plans/FS129-SR3-audit.md:395-397`; status applied):
+> 23. **FS129-SR3-QFREE-NS** in place of **FS129-OR1-QFREE** and **FS116-S1-QF** — S1-QF is its direct case (non-Siamese, six colours, a four-colour vertex, a (Q)-free ring; no "simple at `p`" step needed); S1-QF's own route (S1-LENS, S1-EXIT, S1-CLUSTER; V4-OUTER, S1-KAPPA's last clause) is a second route. This replaces SR2's item 19 (FS129-OR1-QFREE in place of S1-QF).
+
+### C32. FS129-SR2-QFCASE
+<!--row FS129-SR2-QFCASE plans/FS129-derivation.md:730-->
+**Address** `plans/FS129-derivation.md:730` · **Role** FS-129 composition · **Upstream ids** FS129-SR3-QFREE-NS
+<!--needs FS129-SR2-QFCASE: FS129-SR3-QFREE-NS-->
+
+<!--q FS129-SR2-QFCASE statement-->
+**Statement as filed:**
+> FS116-S1-QF's statement — no non-Siamese valid fragment on B̄(p, 2), saturated on B̄(p, 1), whose ring ω(p) carries no (Q) arc, has at p a degree-4 vertex of four colours whose four edges are segments at right angles — is a case of FS129-OR1-QFREE
+
+<!--q FS129-SR2-QFCASE not_claimed-->
+**Not claimed:**
+> anything for S1-QF in a k-coloured reading with k ≥ 7 (QFREE's limit); anything about saturation's role (QFREE needs none); anything for rings carrying a (Q) arc
+
+<!--q FS129-SR2-QFCASE grade-->
+**Grade as filed:**
+> derived from: FS129-SR3-QFREE-NS
+
+<!--q FS129-SR2-QFCASE minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS129-SR2-QFCASE handoff-->
+**Handoff as filed:**
+> de Bruijn — formalize FS129-SR3-QFREE-NS (over FS129-SR3-EMPTY-NS, on FS116-V6's route, and FS129-SR1-BENDANY) and read S1-QF as its case; S1-QF's own route (LENS, EXIT, CLUSTER) is then a second route
+
+<!--q FS129-SR2-QFCASE uses_only-->
+**Uses only:**
+> FS129-SR3-QFREE-NS (S1-QF's class — non-Siamese, valid, six colours, radius 2 > 1, a degree-4 vertex of four colours, a ring carrying no (Q) arc — lies inside its class; no simplicity is read); that radius 2 is above 1; FS-116's "valid fragment", six-coloured unless "k-coloured" is written
+
+### Superseded forms (no row; never the thing to formalize)
+
+| id | address | handoff as filed (names the superseding form) | named by a merge line |
+|---|---|---|---|
+| FS129-MA1-FALC-19 | `plans/FS129-derivation.md:517` | none — superseded by FS129-SA1-FALC-RES (FS129-Z1, 2026-10-03; SA1 § 6.3 item 5), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — the orbit fact is a `decide` over 40 × 361 colourings of a 361-vertex graph beside `Instances/FanGap19.lean`" | SA1-6.3 item 5 |
+| FS129-MA1-FALC-T | `plans/FS129-derivation.md:417` | none — superseded by FS129-SA1-FALC-FAN (FS129-Z1, 2026-10-03; SA1 § 6.3 item 3), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — a lemma beside `not_fan_of_fanGap`, for `Fan H′ 5 t [a₁, a₂]` with H′ the doubled-apex graph" | SA1-6.3 item 3 |
+| FS129-MA1-NOAFF5 | `plans/FS129-derivation.md:386` | none — superseded by FS129-SA1-NOAFF-K (FS129-Z1, 2026-10-03; SA1 § 6.3 item 1), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — beside `Slack.forces_iff_of_hom`: for each vertex u and each colour permutation π, the pulled-back colouring π∘C∘ρ and its repaint at u give ⟨a_u, f(π γ) − f(π C(ρ u))⟩ = 0" | SA1-6.3 item 1 |
+| FS129-MA2-FALC-DICHO | `plans/FS129-derivation.md:469` | none — superseded by FS129-SA1-FALC-DICHO-K (FS129-Z1, 2026-10-03; SA1 § 6.3 item 4), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — two lines over FS129-MA1-FALC-T's lemma: `Fan H 5 t [a₁, a₂]` with `H.Colorable 4` gives `Forces H 4 a t`" | SA1-6.3 item 4 |
+| FS129-MA2-FALC-GAP4 | `plans/FS129-derivation.md:441` | none — superseded by FS129-SA1-FALC-FAN (FS129-Z1, 2026-10-03; SA1 § 6.3 item 3), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — a lemma beside `not_fan_of_fanGap` (`FanGap.lean`), for `Fan H′ 5 t [a₁, a₂]` with H′ the doubled-apex graph and a `T.Coloring (Fin 4)` with `FanGap C (ρ t) γ`" | SA1-6.3 item 3 |
+| FS129-OA1-FALC-11 | `plans/FS129-derivation.md:489` | none — superseded by FS129-SA1-FALC-RES (FS129-Z1, 2026-10-03; SA1 § 6.3 item 5), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — the orbit fact is a `decide` over 2 × 121 × 24 colourings of a 121-vertex graph, beside `Instances/FanGap11.lean`" | SA1-6.3 item 5 |
+| FS129-OA1-FALC-RED | `plans/FS129-derivation.md:551` | none — superseded by FS129-SA1-FALC-RED (FS129-Z1, 2026-10-03; the same statement, argued in Falconer's p. 188 order: SA1 § 6.3 item 6, inventory items 67, 106), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — behind the measurable chain (FS-113), with Lemmas 1–4 imported from `[Falconer1981]` as a documented assumption" | SA1-6.3 item 6 |
+| FS129-OA1-NOLIN5 | `plans/FS129-derivation.md:357` | none — superseded by FS129-SA1-NOAFF-K with FS129-SA1-NOAFF-FIELDS (FS129-Z1, 2026-10-03; SA1 § 6.3 item 1), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — a short corollary of `Slack.forces_iff_of_hom`'s proof: for each vertex u, the pulled-back colouring and its repaint at u differ only at u, so c_u (f(γ) − f(C(ρu))) = 0" | SA1-6.3 item 1 |
+| FS129-OA1-RINGWIND | `plans/FS129-derivation.md:1210` | none — superseded by FS129-SR1-RINGBAND (FS129-Z1, 2026-10-03; SR1 § 6.2 item 8; neither crosses unless one of the family is formalized), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "none — a relay-result handed to FS-124's opening and to lane R (FS129-OR1) for J2; it enters no proof here" | SR1-6.2 item 8 |
+| FS129-OR1-BEND3 | `plans/FS129-derivation.md:1186` | none — superseded by FS129-SR1-BENDANY with FS129-SR1-BENDLE3 (FS129-Z1, 2026-10-03; SR1 § 6.2 item 5), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — with FS129-OR1-BENDFRAG (one module: the bends on a whole-tile fragment below √3)" | SR1-6.2 item 5 |
+| FS129-OR1-BENDFRAG | `plans/FS129-derivation.md:1160` | none — superseded by FS129-SR1-BENDANY (FS129-Z1, 2026-10-03; SR1 § 6.2 item 5), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — the statement and its not claimed, over FS112-N2-BENDS as an imported hypothesis until FS-112's module lands" | SR1-6.2 item 5 |
+| FS129-OR1-QFREE | `plans/FS129-derivation.md:1142` | none — superseded by FS129-SR3-QFREE-NS (FS129-Z1, 2026-10-03; the same statement with "simple" dropped: SR3 § 2.2, inventory items 125, 128), which de Bruijn formalizes once in its place; the reader's handoff, verbatim: "de Bruijn — the statement and its not claimed, over FS116-Y4-EMPTY (FS-116's module) and FS129-OR1-BENDFRAG" | SR1-6.2 item DNF; SR2-4.3 item 19; SR3-5.1 item 23 |
+
+## Left the order
+
+The entries of `data/fs129/index/lean-order.md` that `lean-order-corrected.md` no longer holds (26). **Leaving means no seed rests on the entry along the corrected edges, which is not the same as having no value** (inventory item 118, caution C118). *Why*: the shortest path in `edges.csv` (as IX1 wrote it) from the entry to a seed, each edge marked with its fate in `edges-dropped.csv`; the README of the corrections (`data/fs129/index/README-corrections.md` § 2) says more of three of them.
+
+### L1. FS106-COMP
+<!--row FS106-COMP plans/FS106-derivation.md:229-->
+**Address** `plans/FS106-derivation.md:229` · **Role in `lean-order.md`** upstream · **Was** 1 · **Why it left** in edges.csv as IX1 wrote it: FS106-COMP → FS106-EQ [kept]; FS106-EQ → FS106-SUP [dropped: false, sorted by SR2]; FS106-SUP → FS111-C1-UNIF [kept]
+**Cautions:** [C118](#c118)
+
+<!--q FS106-COMP statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> If for every δ > 0 six disjoint measurable classes with Leb ⊗ σ-null unit pairs have union of upper density ≥ 1 − δ, then χ_CP(ℝ²) ≤ 6 and χ_m⁰(ℝ²) ≤ 6; and "µ₆(ε) < 1 for every ε > 0" is equivalent to `[Voronov2023]` Thm 1.1 (Euclidean norm, six colours).
+
+<!--q FS106-COMP not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-COMP grade-->
+**Grade as filed:**
+> hand; the first two minds, one blind: TQ, QB; the equivalence one mind: QB
+
+<!--q FS106-COMP minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-COMP handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+<!--q FS106-COMP merge@SR2-4.3-11-->
+**Merge note — named** (SR2-4.3 item 11, `plans/FS129-SR2-audit.md:472-473`; status applied):
+> 11. **FS129-SR2-SUPK** (every `k`) in place of **FS106-SUP** (six); FS106-EQ's (c) ⟺ (d) as its corollary at the value 1, and **FS106-COMP's first clause** as FS106-EQ's (c) ⟹ (a), stated at every `k`.
+
+### L4. FS106-REM
+<!--row FS106-REM plans/FS106-derivation.md:225-->
+**Address** `plans/FS106-derivation.md:225` · **Role in `lean-order.md`** upstream · **Was** 4 · **Why it left** in edges.csv as IX1 wrote it: FS106-REM → FS106-EQ [kept]; FS106-EQ → FS106-SUP [dropped: false, sorted by SR2]; FS106-SUP → FS111-C1-UNIF [kept]
+**Cautions:** [C118](#c118)
+
+<!--q FS106-REM statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> Kept points (balls of radii ε/2 and 2ε at least 1 − η full of one tight class; any η < 1/(1 + 4π), QB's η = 1/10) of one colour are never at distance in [1 − ε, 1 + ε], for every ε > 0, in every almost-everywhere-proper measurable partial colouring; for a CP colouring P(0 is not kept at scale ε) → 0; the uniform form of the latter is FALSE (the zigzag colouring).
+
+<!--q FS106-REM not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-REM grade-->
+**Grade as filed:**
+> hand; two minds, one blind: TQ, QB; the uniform form's falsity one mind (TQ)
+
+<!--q FS106-REM minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-REM handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+### L5. FS106-EQ
+<!--row FS106-EQ plans/FS106-derivation.md:197-->
+**Address** `plans/FS106-derivation.md:197` · **Role in `lean-order.md`** upstream CYCLE · **Was** 5 · **Why it left** in edges.csv as IX1 wrote it: FS106-EQ → FS106-SUP [dropped: false, sorted by SR2]; FS106-SUP → FS111-C1-UNIF [kept]
+**Cautions:** [C118](#c118)
+
+<!--q FS106-EQ statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> For every k, with no MR and no Voronov: χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k ⟺ µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1 ⟺ for every δ > 0 there are ε > 0 and a periodic partial k-colouring by half-open grid squares with no monochromatic pair at any distance in [1 − ε, 1 + ε], leaving density ≤ δ uncovered. At k = 6: χ_m⁰(ℝ²) ≥ 7 ⟺ lim_{ε→0} µ₆(ε) < 1, so `[SokolovVoronov2025]` §9's hypothesis "µ∗₆ < 1" (read uniformly in ε) is equivalent to χ_m⁰ = 7.
+
+<!--q FS106-EQ not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS106-EQ grade-->
+**Grade as filed:**
+> hand; two minds, one blind: TQ, QB by a different route at (c) ⟹ (a); (a) ⟺ (b) is row 130's
+
+<!--q FS106-EQ minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS106-EQ handoff-->
+**`*Kernel:*` line as filed:**
+> stub — after row 130's M1 enters FS-101.
+
+<!--q FS106-EQ note@205-->
+**dated note filed under the entry (`plans/FS106-derivation.md:205`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR2-audit.md` § 2.1 row 5 and § 2.2.3; `plans/FS129-close-inventory.md` item 117):* this entry is stated "for every k", and its periodic grid-square clause rests on FS106-SUP, which is stated at six only. The input at every k is FS129-SR2-SUPK (`plans/FS129-derivation.md`: FS106-SUP's argument, which reads no number of classes, at every k; derived, one mind). Read EQ's every-k form as citing SUPK; EQ's (c) ⟺ (d) is SUPK read at the value 1. No statement changes.
+
+<!--q FS106-EQ merge@SR2-4.3-11-->
+**Merge note — named** (SR2-4.3 item 11, `plans/FS129-SR2-audit.md:472-473`; status applied):
+> 11. **FS129-SR2-SUPK** (every `k`) in place of **FS106-SUP** (six); FS106-EQ's (c) ⟺ (d) as its corollary at the value 1, and **FS106-COMP's first clause** as FS106-EQ's (c) ⟹ (a), stated at every `k`.
+
+<!--q FS106-EQ merge@SR2-4.3-18-->
+**Merge note — to formalize** (SR2-4.3 item 18, `plans/FS129-SR2-audit.md:481-482`; status applied):
+> 18. **FS106-EQ's (c) ⟹ (a) at every `k`** once (the weak-* step), and **FS116-O1-YESLIM** as its corollary by Lemma P (FS129-SR2-YESLIM-EQ), in place of YESLIM's own weak-* argument.
+
+### L13. FS111-C-HULL-SO
+<!--row FS111-C-HULL-SO plans/FS111-derivation.md:282-->
+**Address** `plans/FS111-derivation.md:282` · **Role in `lean-order.md`** upstream · **Was** 13 · **Why it left** in edges.csv as IX1 wrote it: FS111-C-HULL-SO → FS111-C-HULL [dropped: false, sorted by SR1]
+**Cautions:** [C118](#c118)
+<!--q FS111-C-HULL-SO readme@28-->
+**`README-corrections.md:28` names it:**
+> | "the longest chain of dependents has 13 edges, from FS111-V0-ID1 or FS111-C-HULL-SO to FS121-Z1-NOCURVED" | inventory item 18; `roots.md` ranks 1–2 | the longest chain has **10** edges, from FS112-U1 or FS112-A4SIX to FS116-C114-LOCAL-F (`roots-corrected.md` ranks 1–2); FS111-V0-ID1's longest chain has 9 (rank 3), and it is still the top hub (83 transitive dependents) |
+
+<!--q FS111-C-HULL-SO readme@29-->
+**`README-corrections.md:29` names it:**
+> | FS111-C-HULL-SO is the rank-2 root and rank-2 hub, 78 dependents | `roots.md`, `hubs.md` | **0** dependents: its one edge (to FS111-C-HULL) is false — "the corrected form is …" from a refuted entry (FS129-SR1 § 4.1) |
+
+<!--q FS111-C-HULL-SO statement-->
+**Statement as filed:**
+> the claim list's "so": A*_j ⊆ {x : sup_{c∈C}|x − c| < 1} ∪ {x : dist(x, C) > 1} for every path-connected C ⊆ S̃_j
+
+<!--q FS111-C-HULL-SO not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS111-C-HULL-SO grade-->
+**Grade as filed:** *(empty in the source — no such field)*
+
+<!--q FS111-C-HULL-SO minds-->
+**Minds as filed:** *(empty in the source — no such field)*
+
+<!--q FS111-C-HULL-SO handoff-->
+**Handoff as filed:** *(empty in the source — no such field)*
+
+<!--q FS111-C-HULL-SO merge@SR2-4.3-DNF-->
+**Merge note — do not formalize as stated** (SR2-4.3 item DNF, `plans/FS129-SR2-audit.md:490-491`; status applied):
+> - **FS112-L60** (FALSE at exactly 60°; its erratum), **FS112-BUDGET2** (FALSE as stated), **FS111-C-HULL-SO** (refuted) — the last two are in the order only through false edges.
+
+### L17. FS111-M2-DISC7
+<!--row FS111-M2-DISC7 plans/FS111-derivation.md:887-->
+**Address** `plans/FS111-derivation.md:887` · **Role in `lean-order.md`** upstream · **Was** 17 · **Why it left** in edges.csv as IX1 wrote it: FS111-M2-DISC7 → FS111-M2-HULLC [dropped: false, sorted by SR2]
+**Cautions:** [C118](#c118)
+
+<!--q FS111-M2-DISC7 statement-->
+**Statement as filed:**
+> the circumscribed discs of the tight hexagonal seven-colouring (radius 1/2, centred at the hexagon centres, coloured as the hexagons) form a maximal admissible seven-cover with regular classes whose overlaps (lenses) have positive measure; each class has density 2π/(21√3), the seven summing to Kershner's thinnest-covering density 2π/(3√3)
+
+<!--q FS111-M2-DISC7 not_claimed-->
+**Not claimed:**
+> that its selections are saturated (FS111-M2-NOSEL); curvature of class boundaries ≤ 1 (it is 2)
+
+<!--q FS111-M2-DISC7 grade-->
+**Grade as filed:**
+> computed over: one period of the hexagonal lattice, 7 discs, exact rational bounds in ℚ(√3)
+
+<!--q FS111-M2-DISC7 minds-->
+**Minds as filed:**
+> 2 — blind to: M2's record until VM2's verdicts were committed; method: M2 by hand and a 2,173-point exact grid, VM2 by exact bounds at every point (VM2-DISC7-EXACT)
+
+<!--q FS111-M2-DISC7 handoff-->
+**Handoff as filed:**
+> none — a control object; exact and periodic, formalizable on demand
+
+### L20. FS111-V0-CLEAN
+<!--row FS111-V0-CLEAN plans/FS111-derivation.md:37-->
+**Address** `plans/FS111-derivation.md:37` · **Role in `lean-order.md`** upstream · **Was** 20 · **Why it left** in edges.csv as IX1 wrote it: FS111-V0-CLEAN → FS111-C1-PW [kept]; FS111-C1-PW → FS111-C1-UNIF [dropped: false, sorted by SR2]
+**Cautions:** [C118](#c118)
+
+<!--q FS111-V0-CLEAN statement-->
+**Statement as filed:**
+> the limit tiling W-EQ-K produces (a full tight a.e.-proper six-colouring by closed tiles of complexity at most K) can be cleaned — equal colours merged, slits and degree-2 vertices erased, islands filled — into an S–V map-type colouring (Conditions 2–4) bounded by segments and circular arcs, a.e.-proper (D-AEMAP), with at most six colours
+
+<!--q FS111-V0-CLEAN not_claimed-->
+**Not claimed:**
+> that the cleaned map has no unit arcs (row 134 or FS-114 decides which NO applies)
+
+<!--q FS111-V0-CLEAN grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-V0-CLEAN minds-->
+**Minds as filed:**
+> 1 — FS111-V0
+
+<!--q FS111-V0-CLEAN handoff-->
+**Handoff as filed:**
+> none — a routine cleaning step inside FS111-C1-PW; it crosses with that entry if the chain is formalized
+
+<!--q FS111-V0-CLEAN merge@SR2-4.3-9-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 9, `plans/FS129-SR2-audit.md:467-469`; status applied):
+> 9. **FS129-SR2-CLOSURE** (as FS111-M2-INT's corollary for open sets, or by V0-CLOSE's translation argument) in place of **FS106-DIAM (iii)**, **FS111-V0-CLOSE** and **FS116-V5-NE1's first clause**; and **FS106-DIAM (i)** (a connected set with no unit pair has diameter at most 1) once, in place of the connectedness step inside FS116-V5-NE1's "in particular", FS106-TS-C, FS116-V4-DICHOTOMY's "A ~ A" and FS111-V0-CLEAN's diameter step.
+
+### L21. FS111-C1-PW
+<!--row FS111-C1-PW plans/FS111-derivation.md:67-->
+**Address** `plans/FS111-derivation.md:67` · **Role in `lean-order.md`** upstream CYCLE · **Was** 21 · **Why it left** in edges.csv as IX1 wrote it: FS111-C1-PW → FS111-C1-UNIF [dropped: false, sorted by SR2]
+**Cautions:** [C118](#c118)
+
+<!--q FS111-C1-PW statement-->
+**Statement as filed:**
+> Q-NO ⟹ δ₀(K) > 0 for every K
+
+<!--q FS111-C1-PW not_claimed-->
+**Not claimed:**
+> any lower bound on δ₀(K) uniform in K; FS-114's NO itself
+
+<!--q FS111-C1-PW grade-->
+**Grade as filed:**
+> derived from: FS111-V0-CLEAN
+
+<!--q FS111-C1-PW minds-->
+**Minds as filed:**
+> 2 — blind to: FS111-P's stage 2 until V0's verdicts were committed; method: V0 made the cleaning step explicit (V0-CLEAN)
+
+<!--q FS111-C1-PW handoff-->
+**Handoff as filed:**
+> none — conditional on FS-114's NO, which is open; it crosses with the NO if the NO lands
+
+### L25. FS111-M-COVER-SC
+<!--row FS111-M-COVER-SC plans/FS111-derivation.md:538-->
+**Address** `plans/FS111-derivation.md:538` · **Role in `lean-order.md`** upstream · **Was** 25 · **Why it left** in edges.csv as IX1 wrote it: FS111-M-COVER-SC → FS111-M2-HULLC [dropped: false, sorted by SR2]
+**Cautions:** [C118](#c118)
+
+<!--q FS111-M-COVER-SC statement-->
+**Statement as filed:**
+> in a maximal cover, at every boundary point of F_a each adjacent path-connected piece of F̃_a lies in an enclosing unit disc or outside an exterior one; where ∂F_a is locally the graph of a continuous function with F_a below it, that function is semiconcave with constant 1
+
+<!--q FS111-M-COVER-SC not_claimed-->
+**Not claimed:**
+> semiconvexity (FALSE on covers: DISC7, curvature 2)
+
+<!--q FS111-M-COVER-SC grade-->
+**Grade as filed:**
+> derived from: FS111-M-SATC, FS111-C-HULL
+
+<!--q FS111-M-COVER-SC minds-->
+**Minds as filed:**
+> 1 — FS111-M (FS111-M2-HULLC extends it, sighted; VM2 blind on HULLC)
+
+<!--q FS111-M-COVER-SC handoff-->
+**Handoff as filed:**
+> none — superseded by FS111-M2-HULLC's fuller form; crosses with it
+
+<!--q FS111-M-COVER-SC note@553-->
+**dated note filed under the entry (`plans/FS111-derivation.md:553`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR2-audit.md` § 2.1, rows 25 and 37; `plans/FS129-close-inventory.md` item 117):* the handoff's "superseded by FS111-M2-HULLC's fuller form" is wrong: HULLC adds "with regular classes", while this entry's semiconcavity holds on every maximal cover (it uses FS111-M-SATC and C-HULL only). Formalize this entry's semiconcavity in place of HULLC's semiconcave clause (SR2 § 4.3 item 17); the edge from this entry into HULLC is not a use. C-HULL is itself a case of FS129-SR2-HULLSET (`plans/FS129-derivation.md`).
+
+<!--q FS111-M-COVER-SC merge@SR2-4.3-17-->
+**Merge note — to formalize** (SR2-4.3 item 17, `plans/FS129-SR2-audit.md:480-480`; status applied):
+> 17. **FS111-M-COVER-SC's semiconcavity** (every maximal cover) in place of **FS111-M2-HULLC's semiconcave clause** (regular classes).
+
+### L27. FS111-M-HULL2
+<!--row FS111-M-HULL2 plans/FS111-derivation.md:585-->
+**Address** `plans/FS111-derivation.md:585` · **Role in `lean-order.md`** upstream · **Was** 27 · **Why it left** in edges.csv as IX1 wrote it: FS111-M-HULL2 → FS121-D1-PENCILWIN [kept]; FS121-D1-PENCILWIN → FS121-O1-OUT [dropped: false, sorted by SR1]
+**Cautions:** [C118](#c118)
+<!--q FS111-M-HULL2 readme@31-->
+**`README-corrections.md:31` names it:**
+> | FS111-M-HULL2 rank-4 root and hub (63 dependents) | `roots.md`, `hubs.md` | it left both top-100 lists and the Lean order: its 63 came through the false cycle {FS111-M-PINCH, FS121-D4-HOLE} |
+
+<!--q FS111-M-HULL2 statement-->
+**Statement as filed:**
+> two path-connected pieces of one class of an a.e.-proper colouring have all cross distances < 1 or all > 1
+
+<!--q FS111-M-HULL2 not_claimed-->
+**Not claimed:**
+> that "near" (all < 1) is transitive (that is tight block structure, FS111-M-BLOCK-EQ)
+
+<!--q FS111-M-HULL2 grade-->
+**Grade as filed:**
+> derived from: FS111-C-HULL
+
+<!--q FS111-M-HULL2 minds-->
+**Minds as filed:**
+> 2 — blind to: M's record until VMW's verdicts were committed; method: VMW's component form in VMW-BLOCK-EQ ("linked or apart")
+
+<!--q FS111-M-HULL2 handoff-->
+**Handoff as filed:**
+> none — a lemma inside FS111-M-BLOCK-EQ
+
+<!--q FS111-M-HULL2 merge@SR2-4.3-10-->
+**Merge note — named** (SR2-4.3 item 10, `plans/FS129-SR2-audit.md:470-471`; status applied):
+> 10. **FS129-SR2-HULLSET** in place of **FS111-C-HULL** (one measurable set with null unit pairs; no colouring, tightness or normal form). FS111-M-HULL2 over it; FS116-V4-DICHOTOMY's first clause is HULL2's case for two open tiles.
+
+### L29. FS121-D4-HOLE
+<!--row FS121-D4-HOLE plans/FS121-derivation.md:951-->
+**Address** `plans/FS121-derivation.md:951` · **Role in `lean-order.md`** upstream CYCLE · **Was** 29 · **Why it left** in edges.csv as IX1 wrote it: FS121-D4-HOLE → FS111-M-PINCH [dropped: false, sorted by SR1]
+**Cautions:** [C118](#c118)
+<!--q FS121-D4-HOLE readme@30-->
+**`README-corrections.md:30` names it:**
+> | FS121-D4-HOLE has 60 (or 61) transitive dependents and tops `vacuity.md` | inventory items 35, 99; `vacuity.md` § 1; `hubs.md` rank 6 | **0**: its one edge (to FS111-M-PINCH) is false — "it crosses with FS111-M-PINCH" (FS129-SR1 § 4.1). The top of `vacuity-corrected.md` is FS116-N1-QFREE4 (19), unchanged |
+
+<!--q FS121-D4-HOLE readme@31-->
+**`README-corrections.md:31` names it:**
+> | FS111-M-HULL2 rank-4 root and hub (63 dependents) | `roots.md`, `hubs.md` | it left both top-100 lists and the Lean order: its 63 came through the false cycle {FS111-M-PINCH, FS121-D4-HOLE} |
+
+<!--q FS121-D4-HOLE statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF, if a region D (a component of the interior of the density set of one colour) has a bounded complementary component K of its closure, then every point of ∂K lies in Σ; so Σ contains a non-degenerate continuum, and a colouring whose Σ is locally finite has no region with a hole
+
+<!--q FS121-D4-HOLE not_claimed-->
+**Not claimed:**
+> that a region with a hole exists or not; anything about unbounded complementary components; REG-J′ (unused)
+
+<!--q FS121-D4-HOLE grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-D4-HOLE minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-D4-HOLE handoff-->
+**Handoff as filed:**
+> none — a structural no-go between open statements; it crosses with FS111-M-PINCH
+
+### L33. FS111-M3-BAND
+<!--row FS111-M3-BAND plans/FS111-derivation.md:1261-->
+**Address** `plans/FS111-derivation.md:1261` · **Role in `lean-order.md`** upstream CYCLE · **Was** 33 · **Why it left** in edges.csv as IX1 wrote it: FS111-M3-BAND → FS111-M3-HC [kept]; FS111-M3-HC → FS111-M3-IRREG [kept]; FS111-M3-IRREG → FS111-M3-FIXCONV [kept]; FS111-M3-FIXCONV → FS111-M2-FIX [dropped: false, sorted by SR2]
+**Cautions:** [C118](#c118)
+
+<!--q FS111-M3-BAND statement-->
+**Statement as filed:**
+> a flat side of a block of diameter ≤ 1 in a MUA set needs material of its class at distance exactly 1 over the middle half of the side; a band of length λ excludes its own horns out to λ and is unit-free only if λ ≤ 1; a side of length 1 with its band at distance 1 is excluded exactly by an apex at depth √3/2, tight at one point
+
+<!--q FS111-M3-BAND not_claimed-->
+**Not claimed:**
+> anything about curved sides (constant-width blocks carry no band)
+
+<!--q FS111-M3-BAND grade-->
+**Grade as filed:**
+> derived from: FS111-M2-FIX
+
+<!--q FS111-M3-BAND minds-->
+**Minds as filed:**
+> 1 — FS111-M3
+
+<!--q FS111-M3-BAND handoff-->
+**Handoff as filed:**
+> none — design facts for HC
+
+### L34. FS111-M3-FIXCONV
+<!--row FS111-M3-FIXCONV plans/FS111-derivation.md:1247-->
+**Address** `plans/FS111-derivation.md:1247` · **Role in `lean-order.md`** upstream CYCLE · **Was** 34 · **Why it left** in edges.csv as IX1 wrote it: FS111-M3-FIXCONV → FS111-M2-FIX [dropped: false, sorted by SR2]
+**Cautions:** [C118](#c118)
+
+<!--q FS111-M3-FIXCONV statement-->
+**Statement as filed:**
+> the converse of FS111-M2-FIX fails: F_f is regular with int F = ℝ² ∖ (F + S¹) and its interior is not maximal
+
+<!--q FS111-M3-FIXCONV not_claimed-->
+**Not claimed:**
+> anything about maximal sets
+
+<!--q FS111-M3-FIXCONV grade-->
+**Grade as filed:**
+> derived from: FS111-M3-IRREG
+
+<!--q FS111-M3-FIXCONV minds-->
+**Minds as filed:**
+> 1 — FS111-M3
+
+<!--q FS111-M3-FIXCONV handoff-->
+**Handoff as filed:**
+> none — a scope marker for FS111-M2-FIX
+
+### L35. FS111-M3-HC
+<!--row FS111-M3-HC plans/FS111-derivation.md:1135-->
+**Address** `plans/FS111-derivation.md:1135` · **Role in `lean-order.md`** upstream CYCLE · **Was** 35 · **Why it left** in edges.csv as IX1 wrote it: FS111-M3-HC → FS111-M3-IRREG [kept]; FS111-M3-IRREG → FS111-M3-FIXCONV [kept]; FS111-M3-FIXCONV → FS111-M2-FIX [dropped: false, sorted by SR2]
+**Cautions:** [C118](#c118)
+
+<!--q FS111-M3-HC statement-->
+**Statement as filed:**
+> the honeycomb class HC — equilateral triangles of side 1 at the vertices of a honeycomb of edge 2 + √3/3, pointing at the face centres; on each edge a band of length 1 at distance 1 from both facing sides, of thickness in [0, g] vanishing exactly on a closed null set Z ∋ ±1/2; discs of radius 1/2 at the face centres — is a regular MUA set satisfying FS111-M2-FIX, for every gap function with (G1)'s bounds; with Z a Cantor set (HC_K) each band has one interior component per gap
+
+<!--q FS111-M3-HC not_claimed-->
+**Not claimed:**
+> that HC_K is a class of any partition (FS111-M4-HC: it fits none with an ordinary ladder through three rungs); any colour count
+
+<!--q FS111-M3-HC grade-->
+**Grade as filed:**
+> computed over: the critical configurations of one period of the honeycomb, exact in ℚ(√3), with the hand reduction to them
+
+<!--q FS111-M3-HC minds-->
+**Minds as filed:**
+> 1 — FS111-M3 (../tools/fs111_m3_honey.py: six checks, five plants firing)
+
+<!--q FS111-M3-HC handoff-->
+**Handoff as filed:**
+> none — a counterexample to a universal form; exact, formalizable on demand
+
+### L36. FS111-M3-IRREG
+<!--row FS111-M3-IRREG plans/FS111-derivation.md:1231-->
+**Address** `plans/FS111-derivation.md:1231` · **Role in `lean-order.md`** upstream CYCLE · **Was** 36 · **Why it left** in edges.csv as IX1 wrote it: FS111-M3-IRREG → FS111-M3-FIXCONV [kept]; FS111-M3-FIXCONV → FS111-M2-FIX [dropped: false, sorted by SR2]
+**Cautions:** [C118](#c118)
+
+<!--q FS111-M3-IRREG statement-->
+**Statement as filed:**
+> with a fat Cantor set Z_f, A_f = int HC(g_f) is unit-avoiding, regular and satisfies the shadow identity, but is not maximal, and every MUA set containing it has |∂ supp| > 0; so "every MUA set is regular" (MUA-REG-U) is false
+
+<!--q FS111-M3-IRREG not_claimed-->
+**Not claimed:**
+> that no maximal cover can be modified into one with regular classes (MUA-REG-P is open)
+
+<!--q FS111-M3-IRREG grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS111-M3-IRREG minds-->
+**Minds as filed:**
+> 1 — FS111-M3
+
+<!--q FS111-M3-IRREG handoff-->
+**Handoff as filed:**
+> none — a no-go for a universal form
+
+### L46. FS121-DB1-L6
+<!--row FS121-DB1-L6 plans/FS121-derivation.md:192-->
+**Address** `plans/FS121-derivation.md:192` · **Role in `lean-order.md`** upstream CYCLE · **Was** 46 · **Why it left** in edges.csv as IX1 wrote it: FS121-DB1-L6 → FS111-M2-INTRAD [dropped: false, sorted by SR1]
+**Cautions:** [C118](#c118)
+
+<!--q FS121-DB1-L6 statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′, the chain of unit parallels of an interface arc of finite radius toward its centre ends, off finitely many normals, at a unit arc whose centre carries that arc's outer colour
+
+<!--q FS121-DB1-L6 not_claimed-->
+**Not claimed:**
+> which kind the last arc is (FS121-O1-ENDS)
+
+<!--q FS121-DB1-L6 grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-DB1-L6 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-DB1-L6 handoff-->
+**Handoff as filed:**
+> none — a re-derivation inside C121-ENDS's verification; it crosses with FS111-M2-INTRAD
+
+### L49. FS112-BUDGET2
+<!--row FS112-BUDGET2 plans/FS112-derivation.md:294-->
+**Address** `plans/FS112-derivation.md:294` · **Role in `lean-order.md`** upstream · **Was** 49 · **Why it left** in edges.csv as IX1 wrote it: FS112-BUDGET2 → FS112-NB4P [dropped: false, sorted by SR2]; FS112-NB4P → FS112-N2-TERM [kept]; FS112-N2-TERM → FS114-CV-EXISTS [kept]
+**Cautions:** [C118](#c118)
+
+<!--q FS112-BUDGET2 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> C-UA-BUDGET's second branch ("the arcs sit on `ω(σ_v^{±1}y)` through `y`, centred at ring points, not at `v`") is FALSE in both senses: in the union sense at the strip's `P_1`, whose arcs all lie on its own circle; in the disjoint sense at the disk's `A_0`, where a complementary ring point at about 209° lies on no arc of `Γ`.
+
+<!--q FS112-BUDGET2 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS112-BUDGET2 grade-->
+**Grade as filed:**
+> tools, exact; the union sense two minds, one blind: Y; YB; the disjoint sense one: Y2
+
+<!--q FS112-BUDGET2 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS112-BUDGET2 handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+<!--q FS112-BUDGET2 merge@SR2-4.3-DNF-->
+**Merge note — do not formalize as stated** (SR2-4.3 item DNF, `plans/FS129-SR2-audit.md:490-491`; status applied):
+> - **FS112-L60** (FALSE at exactly 60°; its erratum), **FS112-BUDGET2** (FALSE as stated), **FS111-C-HULL-SO** (refuted) — the last two are in the order only through false edges.
+
+### L88. FS114-N3-JOINT
+<!--row FS114-N3-JOINT plans/FS114-derivation.md:258-->
+**Address** `plans/FS114-derivation.md:258` · **Role in `lean-order.md`** upstream · **Was** 88 · **Why it left** in edges.csv as IX1 wrote it: FS114-N3-JOINT → FS114-K1 [kept]; FS114-K1 → FS114-N7-HUB [dropped: false, sorted by SR1]; FS114-N7-HUB → FS116-N2-HEX6 [kept]
+**Cautions:** [C116](#c116), [C118](#c118)
+
+<!--q FS114-N3-JOINT statement-->
+**Statement as filed:**
+> Route T's count restated: `N + U + 3V₆ = V₄` (non-tactic edges); the non-Siamese simple torus NO ⟸ a fractional assignment giving every degree-4 vertex two units among non-tactic edge-ends (its own or free ones within radius `R`), `U`, and six units per degree-6 vertex, with a unit unused in every disc of radius `R₀` (K1 ∧ K2-loc is the own-ends case) (with N2-KILL: the torus NO, non-Siamese, `μ = 0`, follows from K1 and K2; and N3-PAY: DR vertices pay, from their four continuation ends)
+
+<!--q FS114-N3-JOINT not_claimed-->
+**Not claimed:**
+> the assignment's existence (K1′, the payment of the deficient patterns other than DR, and K2′, a unit unused per disc, are open); the Siamese class; `μ > 0`
+
+<!--q FS114-N3-JOINT grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-N3-JOINT minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS114-N3-JOINT handoff-->
+**Handoff as filed:**
+> none — a reduction; the kill it names is the successor's
+
+<!--q FS114-N3-JOINT note@277-->
+**dated note filed under the entry (`plans/FS114-derivation.md:277`):**
+> *Erratum (FS116-O1, 2026-09-29): the model line changed with FS114-N2-ENDS's (see the erratum there); filed by Keryx.*
+
+<!--q FS114-N3-JOINT merge@SR2-4.3-15-->
+**Merge note — replaced in whole or in the part the line names** (SR2-4.3 item 15, `plans/FS129-SR2-audit.md:477-477`; status applied):
+> 15. **FS114-N2-ENDS** in place of **FS114-N3-JOINT's first clause** (one identity: `Σ n = 2N`).
+
+<!--q FS114-N3-JOINT merge@SR2-4.3-QUOTE-->
+**Merge note — quote with its errata** (SR2-4.3 item QUOTE, `plans/FS129-SR2-audit.md:492-493`; status applied):
+> - Quote **FS112-C-ENDS** in its erratum's form (residue deleted), and **FS112-C-DOUBLE**, **FS112-N3-BASE**, **FS114-N2-ENDS**, **FS114-N3-JOINT**, **FS114-N7-3T** with the errata under them (§ 2.4): the backlog quotes entries by script and the index carries no erratum.
+
+### L90. FS114-Y-EDGE
+<!--row FS114-Y-EDGE plans/FS114-derivation.md:130-->
+**Address** `plans/FS114-derivation.md:130` · **Role in `lean-order.md`** upstream · **Was** 90 · **Why it left** in edges.csv as IX1 wrote it: FS114-Y-EDGE → FS114-Y5-PINALL [kept]; FS114-Y5-PINALL → FS114-K1 [kept]; FS114-K1 → FS114-N7-HUB [dropped: false, sorted by SR1]; FS114-N7-HUB → FS116-N2-HEX6 [kept]
+**Cautions:** [C118](#c118)
+
+<!--q FS114-Y-EDGE statement-->
+**Statement as filed:**
+> C114-EDGE-RAINBOW TRUE: in a valid map, two faces of one colour that each share a boundary arc of positive length with a face `x` (either may be `x`) are Siamese; so a face with six or more edge-neighbours forces a Siamese pair (Sirgedas's "Degree 6 isn't possible with only 6 colors", for non-Siamese maps)
+
+<!--q FS114-Y-EDGE not_claimed-->
+**Not claimed:**
+> the statement under the narrower gloss "the two meet at a vertex" (FALSE: YB); any bound on repeats through vertex contacts
+
+<!--q FS114-Y-EDGE grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-Y-EDGE minds-->
+**Minds as filed:**
+> 4 — blind to: FS114-N and FS114-Y blind to each other; NB and YB blind to their sides' records; method: four derivations of one short argument; FS114-Y5-RAINBOW its non-Siamese form, re-derived blind by YB4
+
+<!--q FS114-Y-EDGE handoff-->
+**Handoff as filed:**
+> none — a relay-result for route T and the pinwheel lemmas (FS114-Y5-PINALL uses its non-Siamese form)
+
+### L98. FS114-Y5-PINALL
+<!--row FS114-Y5-PINALL plans/FS114-derivation.md:642-->
+**Address** `plans/FS114-derivation.md:642` · **Role in `lean-order.md`** upstream CYCLE · **Was** 98 · **Why it left** in edges.csv as IX1 wrote it: FS114-Y5-PINALL → FS114-K1 [kept]; FS114-K1 → FS114-N7-HUB [dropped: false, sorted by SR1]; FS114-N7-HUB → FS116-N2-HEX6 [kept]
+**Cautions:** [C118](#c118)
+
+<!--q FS114-Y5-PINALL statement-->
+**Statement as filed:**
+> **no non-Siamese simple valid fragment containing a neighbourhood of the closed unit disc about `p` holds a pinwheel at `p`**, except possibly under E1 (an edge at `p` of length exactly `60°`) or E2 (a blade's counter-clockwise side a unit arc centred at its clockwise edge end)
+
+<!--q FS114-Y5-PINALL not_claimed-->
+**Not claimed:**
+> E1 and E2 (exactly the cases the chain misses: YB4); Y5-PX's clause "`λ_k = α_k − 60°`" (a GAP: the pocket tile can wrap round `t_{k+1}`'s ring end — YB4-WRAP; CASE survives); Y5-PIN120-60's and Y5-PIN120's no-exception claims (GAPs at named E1 subcases, YB4)
+
+<!--q FS114-Y5-PINALL grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-Y5-PINALL minds-->
+**Minds as filed:**
+> 2 — blind to: YB4 derived the twelve statements before opening FS114-Y5's record; method: YB4-2ND finds PXKILL's contradiction only at second order, from the arcs' curvature; its exact `ℚ(√3)` checker 53 of 53 as registered; the side's checks 31 of 31 and 11 of 11
+
+<!--q FS114-Y5-PINALL handoff-->
+**Handoff as filed:**
+> none — a local exclusion with two named exceptions; filed with them
+
+<!--q FS114-Y5-PINALL note@663-->
+**dated note filed under the entry (`plans/FS114-derivation.md:663`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 1.3 and § 4.3 row 4; `plans/FS129-close-inventory.md` items 127, 130):* the exception "E1 or E2" narrows to "E1, or E2 at two or more blades": FS129-SR3-E2ONE (derived, one mind; `plans/FS129-derivation.md`) shows, by a parity around the four pockets, that E2 at exactly one blade with no E1 forces POCKET and CASE, so no such pinwheel exists at radius 1 + ε. FS114-Y5-PIN120's exception "unless E2 holds at the blade two past the 120° tile" narrows likewise, to that E2 together with E1 or with E2 at a second blade (with E1 the parity is not available). The text above stands as filed.
+
+<!--q FS114-Y5-PINALL merge@SR3-5.1-27-->
+**Merge note — to formalize** (SR3-5.1 item 27, `plans/FS129-SR3-audit.md:404-406`; status applied):
+> 27. **FS114-Y5-PINALL with FS129-SR3-E2ONE**: formalize PINALL with the exception "E1, or E2 at two or more blades"; FS114-Y5-PIN120's exception narrowed to E2 at the blade two past the `120°` tile *together with* E1 or a second E2; **FS114-Y6-E2RED**'s survivor clause read as "no survivor at a single blade" (S6 empty).
+
+### L101. FS114-K1
+<!--row FS114-K1 plans/FS114-derivation.md:810-->
+**Address** `plans/FS114-derivation.md:810` · **Role in `lean-order.md`** upstream CYCLE · **Was** 101 · **Why it left** in edges.csv as IX1 wrote it: FS114-K1 → FS114-N7-HUB [dropped: false, sorted by SR1]; FS114-N7-HUB → FS116-N2-HEX6 [kept]
+**Cautions:** [C118](#c118)
+
+<!--q FS114-K1 statement-->
+**Statement as filed:**
+> K1 in its local form — no valid fragment, non-Siamese and simple, on a disc of explicit radius about a degree-4 four-colour vertex with three or four tactic edges
+
+<!--q FS114-K1 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS114-K1 grade-->
+**Grade as filed:** *(empty in the source — no such field)*
+
+<!--q FS114-K1 minds-->
+**Minds as filed:** *(empty in the source — no such field)*
+
+<!--q FS114-K1 handoff-->
+**Handoff as filed:** *(empty in the source — no such field)*
+
+<!--q FS114-K1 note@820-->
+**dated note filed under the entry (`plans/FS114-derivation.md:820`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 1.3 and § 4.3 row 4; `plans/FS129-close-inventory.md` items 127, 130):* the list loses "E2's survivor S6" (empty by FS129-SR3-E2ONE) and the wrap's E2RED site; E1, and E2 at two or more blades, remain.
+
+### L182. FS121-DB1-L7
+<!--row FS121-DB1-L7 plans/FS121-derivation.md:207-->
+**Address** `plans/FS121-derivation.md:207` · **Role in `lean-order.md`** upstream · **Was** 182 · **Why it left** in edges.csv as IX1 wrote it: FS121-DB1-L7 → FS121-O1-OUT [dropped: false, sorted by SR1]
+**Cautions:** [C118](#c118)
+
+<!--q FS121-DB1-L7 statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF, the unit parallel away from the centre of a tangent-type interface arc is, at every point off Σ, a tangent-type interface of radius one more; REG-J′ is not used
+
+<!--q FS121-DB1-L7 not_claimed-->
+**Not claimed:**
+> the family over the whole window (that uses REG-J′, FS121-O1-OUT); the same for split arcs (FALSE at R7)
+
+<!--q FS121-DB1-L7 grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-DB1-L7 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-DB1-L7 handoff-->
+**Handoff as filed:**
+> none — it crosses with FS121-O1-OUT
+
+### L184. FS121-V2-EROSION-DIAM
+<!--row FS121-V2-EROSION-DIAM plans/FS121-derivation.md:308-->
+**Address** `plans/FS121-derivation.md:308` · **Role in `lean-order.md`** upstream · **Was** 184 · **Why it left** in edges.csv as IX1 wrote it: FS121-V2-EROSION-DIAM → FS121-D1-EROSION [dropped: false, sorted by SR1]
+**Cautions:** [C118](#c118)
+
+<!--q FS121-V2-EROSION-DIAM statement-->
+**Statement as filed:**
+> in every a.e.-proper colouring, if a colour's sector at z has angle θ in (0, π) and both its edges begin with straight pieces of the boundary of one component of that colour, of lengths L₁ and L₂, then min(L₁, L₂) ≤ 1/(2 sin(θ/2)); so for θ ≤ 2π/3, min(L₁, L₂) ≤ cot(θ/2)
+
+<!--q FS121-V2-EROSION-DIAM not_claimed-->
+**Not claimed:**
+> anything for θ in (2π/3, π)
+
+<!--q FS121-V2-EROSION-DIAM grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-V2-EROSION-DIAM minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-V2-EROSION-DIAM handoff-->
+**Handoff as filed:**
+> none — it places FS121-D1-EROSION's content
+
+### L185. FS121-V3-CPI
+<!--row FS121-V3-CPI plans/FS121-derivation.md:469-->
+**Address** `plans/FS121-derivation.md:469` · **Role in `lean-order.md`** upstream · **Was** 185 · **Why it left** in edges.csv as IX1 wrote it: FS121-V3-CPI → FS121-V2-SECTOR [dropped: false, sorted by SR1]
+**Cautions:** [C118](#c118)
+
+<!--q FS121-V3-CPI statement-->
+**Statement as filed:**
+> in an honest saturated colouring in D-NF satisfying REG-J′, at a point of Σ every region of positive angle has angle at most π
+
+<!--q FS121-V3-CPI not_claimed-->
+**Not claimed:**
+> anything about zero-angle regions
+
+<!--q FS121-V3-CPI grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-V3-CPI minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-V3-CPI handoff-->
+**Handoff as filed:**
+> none — a corollary inside FS121-V2-SECTOR's verification
+
+### L187. FS121-V2-VT-W
+<!--row FS121-V2-VT-W plans/FS121-derivation.md:267-->
+**Address** `plans/FS121-derivation.md:267` · **Role in `lean-order.md`** upstream · **Was** 187 · **Why it left** in edges.csv as IX1 wrote it: FS121-V2-VT-W → FS121-D1-VT [dropped: false, sorted by SR1]
+**Cautions:** [C118](#c118)
+
+<!--q FS121-V2-VT-W statement-->
+**Statement as filed:**
+> in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, let I be a tangent-type interface arc between colours a and b, ν its normal into b, and x₀ an interior point of I that is not in the closure of a sub-arc of I of radius 1 curving toward b ending at an endpoint of I; let Y = x₀ + ν(x₀), P the closure of the radius-1 sub-arc of I curving toward b that contains x₀ in its closure if there is one and {x₀} otherwise, and L_Y the image under x ↦ x + ν(x) of a neighbourhood of P in I — a C¹ arc through Y when P = {x₀}, two branches meeting at Y at a corner otherwise; then no interface arc other than L_Y's branches ends at Y in the a-side region that L_Y bounds at Y (its far side, or the wedge between its branches)
+
+<!--q FS121-V2-VT-W not_claimed-->
+**Not claimed:**
+> anything at a point where a has density 0 (the double horn is not excluded); anything at the image of an endpoint of I; anything on L_Y's near side
+
+<!--q FS121-V2-VT-W grade-->
+**Grade as filed:**
+> derived from: FS121-V2-SECTOR
+
+<!--q FS121-V2-VT-W minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-V2-VT-W handoff-->
+**Handoff as filed:**
+> none — the wider form of FS121-D1-VT; it crosses with it if the corner case is consumed
+
+<!--q FS121-V2-VT-W merge@SR1-6.2-7-->
+**Merge note — to formalize** (SR1-6.2 item 7, `plans/FS129-SR1-audit.md:549-549`; status applied):
+> 7. **FS121-V2-VT-W** in place of FS121-D1-VT, if its corner case is consumed.
+
+### L190. FS121-D1-PENCILWIN
+<!--row FS121-D1-PENCILWIN plans/FS121-derivation.md:389-->
+**Address** `plans/FS121-derivation.md:389` · **Role in `lean-order.md`** upstream CYCLE · **Was** 190 · **Why it left** in edges.csv as IX1 wrote it: FS121-D1-PENCILWIN → FS121-O1-OUT [dropped: false, sorted by SR1]
+**Cautions:** [C118](#c118)
+
+<!--q FS121-D1-PENCILWIN statement-->
+**Statement as filed:**
+> in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, a tangent-type interface arc of finite radius n ≥ 2 about z whose chain of unit parallels ends at a single unit arc lies in a pencil whose rungs of radius at least 2 share one window, of angular width ℓ with 4 sin(ℓ/2) ≤ 1
+
+<!--q FS121-D1-PENCILWIN not_claimed-->
+**Not claimed:**
+> any bound when the chain's inner end is broken by points of Σ; that such a pencil exists (C121-CURVED)
+
+<!--q FS121-D1-PENCILWIN grade-->
+**Grade as filed:**
+> derived from: FS121-D1-VT
+
+<!--q FS121-D1-PENCILWIN minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-D1-PENCILWIN handoff-->
+**Handoff as filed:**
+> none — a necessary condition on an uninhabited object; it crosses with FS121-O1-OUT if a curved inhabitant lands
+
+### L194. FS121-D2-PERFIN
+<!--row FS121-D2-PERFIN plans/FS121-derivation.md:679-->
+**Address** `plans/FS121-derivation.md:679` · **Role in `lean-order.md`** upstream CYCLE · **Was** 194 · **Why it left** in edges.csv as IX1 wrote it: FS121-D2-PERFIN → FS121-D2-SYM [dropped: reversed, sorted by SR1]
+**Cautions:** [C118](#c118)
+
+<!--q FS121-D2-PERFIN statement-->
+**Statement as filed:**
+> in a doubly periodic honest saturated colouring in D-NF satisfying REG-J′, with any number of colours, the interfaces carry only finitely many radii of curvature
+
+<!--q FS121-D2-PERFIN not_claimed-->
+**Not claimed:**
+> anything for colourings that are not periodic; that a tight colouring can be taken periodic
+
+<!--q FS121-D2-PERFIN grade-->
+**Grade as filed:**
+> derived from: FS121-D2-SYM
+
+<!--q FS121-D2-PERFIN minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-D2-PERFIN handoff-->
+**Handoff as filed:**
+> none — it removes a hypothesis from C121-PER's periodic clause; it crosses with FS121-D2-SYM
+
+## Named by a merge line or a caution, not in the order
+
+Entries the audits' lists or the cautions name — to formalize, to replace, or as upstream the closure misses — that are in none of the sections above. Quoted so that the backlog session has the form each merge line points to. Their `Named by` lines are addresses; nothing here is a ruling (the superseded forms are not listed; see above).
+
+### ASTRA-2026-09-14-T10
+<!--row ASTRA-2026-09-14-T10 plans/ASTRA-2026-09-14-derivation.md:55-->
+**Address** `plans/ASTRA-2026-09-14-derivation.md:55` · **Role** not in the order · **Named by** SA1-6.3 item 8
+
+<!--q ASTRA-2026-09-14-T10 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> The distance-2 host sentence.
+
+<!--q ASTRA-2026-09-14-T10 pre_proof-->
+**Text between the header and `*Proof:*`:**
+> For any real `F ⊇ K`: if some finite unit-distance graph over `F` has a proper five-colouring in which two points at distance 2 are properly separated (`Separated` at distance 2, five colours), then transporting an isometric copy of that graph onto each of the 892 length-2 edges of `[ExooIsmailescu2019]`'s 426-vertex `{1,2}`-graph (2,009 unit edges, six-chromatic as a two-distance graph) and discarding the length-2 edges gives a unit-distance graph over `F` needing at least six colours — one distance-2 gadget suffices, where the hex-shell host (row 43, G26) needs two (a `√3` gadget and a distance-2 gadget).
+
+<!--q ASTRA-2026-09-14-T10 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q ASTRA-2026-09-14-T10 grade-->
+**Grade as filed:**
+> derived; GPT Astra's statement, from held lemmas
+
+<!--q ASTRA-2026-09-14-T10 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q ASTRA-2026-09-14-T10 handoff-->
+**`*Kernel:*` line as filed:**
+> stub (FS-49 — `six_le_chromaticNumber_plane_of_separated_two`, blocked on a kernel certificate of the `{1,2}` graph itself, priced at ~50M hints and deferred, row 44).
+
+<!--q ASTRA-2026-09-14-T10 note@57-->
+**dated note filed under the entry (`plans/ASTRA-2026-09-14-derivation.md:57`):**
+> *Erratum (2026-10-03, FS129-SA1; `plans/FS129-close-inventory.md` item 69):* read the hypothesis as "two points at distance 2 that receive different colours in every proper five-colouring of the graph (`Separated` at distance 2, five colours)". The hypothesis is empty over every `F ⊇ K` with a usable prime of residue field `𝔽₁₁` (row 66, `Separated ↔ Adj`) and over every `F` with `χ(F²) ≤ 4`; the sentence has content only over fields with `χ(F²) ≥ 5` and no such prime — K(√7) the first. *(Filed 2026-10-03 by FS129-Z1, verbatim from `plans/FS129-SA1-audit.md` § 3.2's draft; inventory item 108. T10's text above stands as written; if FS-49 is formalized, its hypothesis is `Separated`, every colouring.)*
+
+<!--q ASTRA-2026-09-14-T10 merge@SA1-6.3-8-->
+**Merge note — do not formalize as stated** (SA1-6.3 item 8, `plans/FS129-SA1-audit.md:738-740`; status applied):
+> 8. **ASTRA-2026-09-14-T10** — its hypothesis is empty over every `F ⊇ K` with a usable prime of residue field 𝔽₁₁ or with `χ(F²) ≤ 4` (§ 3.2), and its sentence ("has a proper five-colouring in which two points at distance 2 are properly separated") is weaker than the `Separated` it means and false as read; if FS-49 is formalized, its hypothesis is `Separated` (every colouring), never instantiated over those fields.
+
+### FS110-N2-RING
+<!--row FS110-N2-RING plans/FS110-derivation.md:214-->
+**Address** `plans/FS110-derivation.md:214` · **Role** not in the order · **Named by** SR1-6.2 item 8
+
+<!--q FS110-N2-RING statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> At a three-colour vertex whose unit circle carries no arc of `Γ` the ring has a winding `W`; `|W| ≤ 1` forces a swap point.
+
+<!--q FS110-N2-RING not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS110-N2-RING grade-->
+**Grade as filed:**
+> hand; two minds, one blind: N2; NB
+
+<!--q FS110-N2-RING minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS110-N2-RING handoff-->
+**`*Kernel:*` line as filed:**
+> declined — off the headline's path.
+
+<!--q FS110-N2-RING merge@SR1-6.2-8-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 8, `plans/FS129-SR1-audit.md:550-550`; status applied):
+> 8. **FS129-SR1-RINGBAND** in place of FS110-N2-RING, FS110-Y3-GP and FS129-OA1-RINGWIND, should any of them be formalized.
+
+### FS110-Y3-GP
+<!--row FS110-Y3-GP plans/FS110-derivation.md:241-->
+**Address** `plans/FS110-derivation.md:241` · **Role** not in the order · **Named by** SR1-6.2 item 8
+
+<!--q FS110-Y3-GP statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> A ring with no two change points exactly 60° apart winds `W ≡ 3 (mod 6)`; so `|W| ≤ 2` needs two change points at distance exactly 1.
+
+<!--q FS110-Y3-GP not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS110-Y3-GP grade-->
+**Grade as filed:**
+> hand and tools; two minds, one blind: Y3; YB3; the weaker hypothesis one mind: YB3
+
+<!--q FS110-Y3-GP minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS110-Y3-GP handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+<!--q FS110-Y3-GP merge@SR1-6.2-8-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 8, `plans/FS129-SR1-audit.md:550-550`; status applied):
+> 8. **FS129-SR1-RINGBAND** in place of FS110-N2-RING, FS110-Y3-GP and FS129-OA1-RINGWIND, should any of them be formalized.
+
+### FS114-Y6-E2RED
+<!--row FS114-Y6-E2RED plans/FS114-derivation.md:683-->
+**Address** `plans/FS114-derivation.md:683` · **Role** not in the order · **Named by** SR3-5.1 item 27; SR3-5.1 item DNF-1
+
+<!--q FS114-Y6-E2RED statement-->
+**Statement as filed:**
+> E2 at one blade `t_{c+1}` (no E1) breaks only ALT(`μ_{c−1}`, `μ_c`), hence only POCKET at `w_c` and CASE at `q_c`; `P_x` is still excluded (FS114-Y5-PXKILL at `k = c + 1`); **the only E2 survivor family is S6 `(120°, b, 180° − b, 60°)`**, FS114-Y5-PIN120's own exception: S1 `(a, b, 180 − b, 180 − a)` dies to PXKILL at `k = c + 1`, S2–S5 to YB5-E2-60 (E2 at a blade of cone 60° holds only with E1 at one of its two edges), S5 also by YB5-CONE180 (every pinwheel cone is below 180°)
+
+<!--q FS114-Y6-E2RED not_claimed-->
+**Not claimed:**
+> that S6 exists or dies; FS114-Y6's "all short of the tangent" (a GAP: a full wrap of `Λ_c`, YB5); E2 at two or more blades; E2 with E1
+
+<!--q FS114-Y6-E2RED grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS114-Y6-E2RED minds-->
+**Minds as filed:**
+> 1 — the chain from E2 to S1–S6 is two minds (FS114-Y6; YB5 blind), the cut from S1–S6 to S6 is YB5's alone
+
+<!--q FS114-Y6-E2RED handoff-->
+**Handoff as filed:**
+> none — a reduction of an exception
+
+<!--q FS114-Y6-E2RED note@702-->
+**dated note filed under the entry (`plans/FS114-derivation.md:702`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SR3-audit.md` § 1.3 and § 4.3 row 4; `plans/FS129-close-inventory.md` items 127, 130):* the survivor family S6 `(120°, b, 180° − b, 60°)` is empty — FS129-SR3-E2ONE: E2 at exactly one blade, with no E1, gives POCKET at `w_c` and CASE at `q_c` — so this entry's not-claimed "that S6 exists or dies" is answered (it dies), and its "full wrap of `Λ_c`" GAP closes in the one-blade case.
+
+<!--q FS114-Y6-E2RED merge@SR3-5.1-27-->
+**Merge note — named** (SR3-5.1 item 27, `plans/FS129-SR3-audit.md:404-406`; status applied):
+> 27. **FS114-Y5-PINALL with FS129-SR3-E2ONE**: formalize PINALL with the exception "E1, or E2 at two or more blades"; FS114-Y5-PIN120's exception narrowed to E2 at the blade two past the `120°` tile *together with* E1 or a second E2; **FS114-Y6-E2RED**'s survivor clause read as "no survivor at a single blade" (S6 empty).
+
+<!--q FS114-Y6-E2RED merge@SR3-5.1-DNF-1-->
+**Merge note — do not formalize as stated** (SR3-5.1 item DNF-1, `plans/FS129-SR3-audit.md:409-409`; status applied):
+> - **FS114-Y6-E2RED's** "the only E2 survivor family is S6" as a live case (S6 is empty: E2ONE); its chain clause stands.
+
+### FS116-V1-FRAME
+<!--row FS116-V1-FRAME plans/FS116-derivation.md:84-->
+**Address** `plans/FS116-derivation.md:84` · **Role** not in the order · **Named by** SR1-6.2 item DNF
+
+<!--q FS116-V1-FRAME statement-->
+**Statement as filed:**
+> at a degree-4 vertex p of four colours, every tile at p with a cone of positive angle, of a non-Siamese simple valid fragment on an open set containing B̄(p, 1) whose ring ω(p) carries no arc of Γ, the ring has exactly six change points, 60° apart, and the centre of every tactic edge at p is a change point of the ring
+
+<!--q FS116-V1-FRAME not_claimed-->
+**Not claimed:**
+> anything with Siamese pairs or non-simple tiles; anything at k ≥ 7; that any such vertex exists (FS116-Y4-EMPTY excludes the class at six colours, held)
+
+<!--q FS116-V1-FRAME grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V1-FRAME minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V1-FRAME handoff-->
+**Handoff as filed:**
+> none — FS116-Y4-EMPTY (held) leaves it vacuous; it carried N7-HUB's second mind to FS-114's filing (FS114-N7-HUB, FS116-Z2's erratum)
+
+<!--q FS116-V1-FRAME merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### FS116-V6-ADJ
+<!--row FS116-V6-ADJ plans/FS116-derivation.md:1851-->
+**Address** `plans/FS116-derivation.md:1851` · **Role** not in the order · **Named by** SR1-6.2 item 1; SR1-6.2 item DNF; SR3-5.1 item 26
+
+<!--q FS116-V6-ADJ statement-->
+**Statement as filed:**
+> in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries no arc of Γ, outer tiles of one colour at adjacent hubs cannot both hug the lens arcs beyond their hubs (ω(y_1) beyond y_0, ω(y_0) beyond y_1)
+
+<!--q FS116-V6-ADJ not_claimed-->
+**Not claimed:**
+> anything FS116-Y4-EMPTY needs (it is not used there); anything at k ≥ 7
+
+<!--q FS116-V6-ADJ grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS116-V6-ADJ minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-V6-ADJ handoff-->
+**Handoff as filed:**
+> none — not needed by EMPTY
+
+<!--q FS116-V6-ADJ merge@SR1-6.2-1-->
+**Merge note — replaced in whole or in the part the line names** (SR1-6.2 item 1, `plans/FS129-SR1-audit.md:541-542`; status applied):
+> 1. **FS129-SR1-TWOCIRC** once, in place of the identity steps inside FS114-Y5-PXKILL, FS116-V6-HUG, FS116-V6-ADJ and FS116-Y4-FLANK (each keeps its own pinning of two tiles).
+
+<!--q FS116-V6-ADJ merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+<!--q FS116-V6-ADJ merge@SR3-5.1-26-->
+**Merge note — replaced in whole or in the part the line names** (SR3-5.1 item 26, `plans/FS129-SR3-audit.md:402-403`; status applied):
+> 26. **FS129-SR3-OUTERADJ** in place of **FS116-V6-ADJ**, over FS116-RING-GERM (ii), V6-GERM's neighbourhood form and FS129-SR1-TWOCIRC; V6-ADJ's argument is its last step, formalized class-free (two distinct same-colour tiles holding the two lens arcs beyond a unit pair).
+
+### FS116-Y4-OBST
+<!--row FS116-Y4-OBST plans/FS116-derivation.md:1751-->
+**Address** `plans/FS116-derivation.md:1751` · **Role** not in the order · **Named by** SR3-5.1 item 24
+
+<!--q FS116-Y4-OBST statement-->
+**Statement as filed:**
+> for every R > 1, no fragment of the HEX3 class exists on the closed disc of radius R about p
+
+<!--q FS116-Y4-OBST not_claimed-->
+**Not claimed:**
+> anything outside the non-Siamese simple Γ-free class
+
+<!--q FS116-Y4-OBST grade-->
+**Grade as filed:**
+> derived from: FS116-Y4-EMPTY
+
+<!--q FS116-Y4-OBST minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-Y4-OBST handoff-->
+**Handoff as filed:**
+> none — the brief's answer; it rides on EMPTY's handoff
+
+<!--q FS116-Y4-OBST merge@SR3-5.1-24-->
+**Merge note — named** (SR3-5.1 item 24, `plans/FS129-SR3-audit.md:398-399`; status applied):
+> 24. **FS129-SR3-EMPTY-NS** in place of **FS116-Y4-EMPTY**, proved on **FS116-V6's route**: V6-HUBS, V6-HUG *with its own colour step* (V6-GERM), V6-ANTI, and V6-COUNT with its last step on sectors (§ 2.1). FS116-Y4-OBST and FS129-OR1-QFREE-CLASS's hypothesis at the non-Siamese class follow.
+
+### FS116-Y4-Q1
+<!--row FS116-Y4-Q1 plans/FS116-derivation.md:1668-->
+**Address** `plans/FS116-derivation.md:1668` · **Role** not in the order · **Named by** SR1-6.2 item DNF
+
+<!--q FS116-Y4-Q1 statement-->
+**Statement as filed:**
+> in a fragment of the HEX3 class on a closed disc of radius above 2 about p, for every point x = q_1 + s·e(χ) of some neighbourhood of q_1, colours 4 and X̄ are absent at x; X is absent when χ lies in (150°, 390°); 3 is absent when χ lies in (150°, 330°); 1 is absent when χ lies in (210°, 390°); and the points with χ in (210°, 330°) are in Z_1 (colour 2)
+
+<!--q FS116-Y4-Q1 not_claimed-->
+**Not claimed:**
+> which of the remaining colours occur; that 3 is absent for χ in (−30°, 150°) (§ 3 reads when it is)
+
+<!--q FS116-Y4-Q1 grade-->
+**Grade as filed:**
+> derived from: FS116-Y4-SPOKE, FS116-Y3-STARFORCE
+
+<!--q FS116-Y4-Q1 minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS116-Y4-Q1 handoff-->
+**Handoff as filed:**
+> none — a relay-result for § 3
+
+<!--q FS116-Y4-Q1 merge@SR1-6.2-DNF-->
+**Merge note — do not formalize as stated** (SR1-6.2 item DNF, `plans/FS129-SR1-audit.md:552-554`; status applied):
+> **Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE, -Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour clause.
+
+### FS121-V5-FACE-SHARP
+<!--row FS121-V5-FACE-SHARP plans/FS121-derivation.md:1055-->
+**Address** `plans/FS121-derivation.md:1055` · **Role** not in the order · **Named by** SR1-6.2 item 6
+
+<!--q FS121-V5-FACE-SHARP statement-->
+**Statement as filed:**
+> in FS121-D4-FACE's setting, the first clause holds whenever ρ² ≥ 2g − g², that is (1 − g)² + ρ² ≥ 1, and fails for some colouring whenever ρ² < 2g − g²
+
+<!--q FS121-V5-FACE-SHARP not_claimed-->
+**Not claimed:**
+> anything about curved near sides
+
+<!--q FS121-V5-FACE-SHARP grade-->
+**Grade as filed:**
+> hand
+
+<!--q FS121-V5-FACE-SHARP minds-->
+**Minds as filed:**
+> 1
+
+<!--q FS121-V5-FACE-SHARP handoff-->
+**Handoff as filed:**
+> none — it sharpens a held lemma's margin
+
+<!--q FS121-V5-FACE-SHARP merge@SR1-6.2-6-->
+**Merge note — to formalize** (SR1-6.2 item 6, `plans/FS129-SR1-audit.md:548-548`; status applied):
+> 6. **FS121-V5-FACE-SHARP**'s form in place of FS121-D4-FACE's hypothesis `2g < ρ²`.
+
+### FS84-S1-S1e
+<!--row FS84-S1-S1e plans/FS84-S1-derivation.md:455-->
+**Address** `plans/FS84-S1-derivation.md:455` · **Role** not in the order · **Named by** SA1-6.3 item 1; inventory item 139
+**Cautions:** [C139](#c139)
+
+<!--q FS84-S1-S1e statement-->
+**Statement as filed:**
+> linear tetrahedral identities are class-balance statements; none exists on a lattice with one gapped four-colouring; G75's mechanism is vacuous without `√3` — as § 4.2 states it, verbatim: "**S1e.** Let `g = Σ_j 1[c = j]·t_j` be a four-colouring read on the regular tetrahedron (`Σ t_j = 0`). (i) A linear identity `Σ_{x∈P} a_x g(x) = κ` valid for every proper four-colouring `c` of a lattice graph `Γ` has `κ = 0` and says exactly that **every colour class has the same `a`-weight on `P`** in every colouring. (ii) If some proper four-colouring of `Γ` has a gap (a vertex whose closed neighbourhood misses a colour), then **no non-trivial such identity exists on `Γ`**. (iii) Over ℚ(√47) (and every field without `√3`) `Γ` has no triangles of any side, so G75's `√3`-triple mechanism is vacuous."
+
+<!--q FS84-S1-S1e not_claimed-->
+**Not claimed:**
+> (i) for a `Γ` that is not four-colourable — there every identity holds vacuously, so "`κ = 0`" fails as worded (FS84-S1V's row S1V-8: "(i) holds once `Γ` is assumed four-colourable"); identities of degree two or more; anything over a field with `√3`
+
+<!--q FS84-S1-S1e grade-->
+**Grade as filed:**
+> hand — the row's grade, "hand; one derivation"
+
+<!--q FS84-S1-S1e minds-->
+**Minds as filed:**
+> 1 — J31's derivation; FS84-S1V read S1e non-blind (row S1V-8: (ii) and (iii) hold as stated, (i) once `Γ` is four-colourable, also with matrix coefficients); a checking reading, not counted
+
+<!--q FS84-S1-S1e handoff-->
+**Handoff as filed:**
+> de Bruijn — through FS129-SA1-NOAFF-K, which formalizes (ii) at every `k` in its place (`plans/FS129-SA1-audit.md` § 6.3 item 1); (i) and (iii) are not needed apart from it
+
+<!--q FS84-S1-S1e merge@SA1-6.3-1-->
+**Merge note — replaced in whole or in the part the line names** (SA1-6.3 item 1, `plans/FS129-SA1-audit.md:724-726`; status applied):
+> 1. **FS129-SA1-NOAFF-K** (with its field corollary **FS129-SA1-NOAFF-FIELDS**) in place of FS129-OA1-NOLIN5, FS129-MA1-NOAFF5, MA2's k = 4 note (`plans/FS129-MA2-audit.md` § 2.3) and FS84-S1e (`plans/FS84-S1-derivation.md` § 4.2); `Slack.forces_iff_of_hom` (row 66, kernel) is its two-vertex case.
+
+### FS89-CL2
+<!--row FS89-CL2 plans/FS89-derivation.md:328-->
+**Address** `plans/FS89-derivation.md:328` · **Role** not in the order · **Named by** SA1-6.3 item 9; inventory item 109
+**Cautions:** [C109](#c109)
+
+<!--q FS89-CL2 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> For every subfield `F ⊆ ℝ`: `Θ₄(R_F) ⊆ T₁₆₈ + A` and `Θ₅(R_F) ⊆ T + A`; every four- or five-colour character colouring of any real field's plane is a torsion character plus an archimedean one.
+
+<!--q FS89-CL2 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS89-CL2 grade-->
+**Grade as filed:**
+> hand; a composition: S0A-10 and S0A-3 (verifier G; N₀ twice) with D2-T1 and D5-T2 — no new step
+
+<!--q FS89-CL2 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS89-CL2 handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+<!--q FS89-CL2 note@332-->
+**dated note filed under the entry (`plans/FS89-derivation.md:332`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SA1-audit.md` § 3.1; `plans/FS129-close-inventory.md` item 108):* the correction banner above this entry covers FS89-S0A-2 and FS89-S0A-10 as well: they state the field clause with the same Notation's `A`, and are false as written for the same reason (ℚ(√3), band 1/4). The repair is the one line filed under the Notation (`A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`), and it makes all three true. Nothing downstream inherits the falsity: CL3–CL5 read both real places (`plans/FS91-S1D-character.md` § 4.4). For the Lean backlog: S0A-2's kernel line names it a candidate for FS-87's list; formalized from the Notation as written it is unprovable (inventory item 109).
+
+<!--q FS89-CL2 note@326-->
+**banner directly above the entry (`plans/FS89-derivation.md:326`):**
+> > **Correction owed (2026-09-25 crunch):** see `plans/FS91-S0V2-SWm-second-reading.md` §3.4 (J03a-9) and `plans/FS91-S1D-character.md` §4.4 (J07-14); carried in `plans/FS91-close-inventory.md` rows 61, 69, 78. Not applied here; the close rewrites this entry.
+
+<!--q FS89-CL2 note@32-->
+**erratum named by inventory item 109 (not positioned under the entry) (`plans/FS89-derivation.md:32`):**
+> *Erratum (2026-10-03, FS129-SA1, from FS91-J03a-9 and FS91-J07-14; `plans/FS91-close-inventory.md` rows 61, 69, 78):* over `R_F` with `F ≠ ℚ`, read `A` as `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`, the archimedean characters of every place of `F(i)`; `λ_e(x) = Re(ē x)` at one embedding is its case `F = ℚ`. With the one-embedding reading FS89-S0A-2, FS89-S0A-10 and FS89-CL2 are false (ℚ(√3), band 1/4: `τ + Re(ē σ₂(·))`); with `A(R_F)` they hold, and every proof step in this file already reads every real place (FS91-J07-14). *(Filed 2026-10-03 by FS129-Z1, verbatim from `plans/FS129-SA1-audit.md` § 3.1's draft; `plans/FS129-close-inventory.md` item 108. The Notation above stands as written.)*
+
+<!--q FS89-CL2 merge@SA1-6.3-9-->
+**Merge note — do not formalize as stated** (SA1-6.3 item 9, `plans/FS129-SA1-audit.md:741-742`; status applied):
+> 9. **FS89-S0A-2, FS89-S0A-10, FS89-CL2 with the Notation's `A` (`λ_e`, one embedding)** — false as written (§ 3.1); formalize only with `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`. S0A-2's kernel line names it a candidate for FS-87's list.
+
+### FS89-S0A-10
+<!--row FS89-S0A-10 plans/FS89-derivation.md:93-->
+**Address** `plans/FS89-derivation.md:93` · **Role** not in the order · **Named by** SA1-6.3 item 9; inventory item 109
+**Cautions:** [C109](#c109)
+
+<!--q FS89-S0A-10 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> The equivalence: `Θ_k(ℤ[U_ℚ]) ⊆ T + A` ⟺ `Θ_k(R_F) ⊆ T + A` for every subfield `F ⊆ ℝ`, every band; the rational statement is the uniform statement at its hardest-looking instance, not a lemma on the way to it.
+
+<!--q FS89-S0A-10 pre_proof-->
+**Text between the header and `*Proof:*`:**
+> ⟸ is `F = ℚ`; ⟹ is S0A-2 with the order bound (automatic at four colours by S0A-3; finite, not computed, at five).
+
+<!--q FS89-S0A-10 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS89-S0A-10 grade-->
+**Grade as filed:**
+> hand; verifier G
+
+<!--q FS89-S0A-10 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS89-S0A-10 handoff-->
+**`*Kernel:*` line as filed:**
+> declined.
+
+<!--q FS89-S0A-10 note@91-->
+**banner directly above the entry (`plans/FS89-derivation.md:91`):**
+> > **Correction owed (2026-09-25 crunch):** see `plans/FS91-S1D-six.md` stage 6 (J08-11) and J08's "Proposed edits"; carried in `plans/FS91-close-inventory.md` row 85. Not applied here; the close rewrites this entry.
+
+<!--q FS89-S0A-10 note@32-->
+**erratum named by inventory item 109 (not positioned under the entry) (`plans/FS89-derivation.md:32`):**
+> *Erratum (2026-10-03, FS129-SA1, from FS91-J03a-9 and FS91-J07-14; `plans/FS91-close-inventory.md` rows 61, 69, 78):* over `R_F` with `F ≠ ℚ`, read `A` as `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`, the archimedean characters of every place of `F(i)`; `λ_e(x) = Re(ē x)` at one embedding is its case `F = ℚ`. With the one-embedding reading FS89-S0A-2, FS89-S0A-10 and FS89-CL2 are false (ℚ(√3), band 1/4: `τ + Re(ē σ₂(·))`); with `A(R_F)` they hold, and every proof step in this file already reads every real place (FS91-J07-14). *(Filed 2026-10-03 by FS129-Z1, verbatim from `plans/FS129-SA1-audit.md` § 3.1's draft; `plans/FS129-close-inventory.md` item 108. The Notation above stands as written.)*
+
+<!--q FS89-S0A-10 note@332-->
+**erratum named by inventory item 109 (not positioned under the entry) (`plans/FS89-derivation.md:332`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SA1-audit.md` § 3.1; `plans/FS129-close-inventory.md` item 108):* the correction banner above this entry covers FS89-S0A-2 and FS89-S0A-10 as well: they state the field clause with the same Notation's `A`, and are false as written for the same reason (ℚ(√3), band 1/4). The repair is the one line filed under the Notation (`A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`), and it makes all three true. Nothing downstream inherits the falsity: CL3–CL5 read both real places (`plans/FS91-S1D-character.md` § 4.4). For the Lean backlog: S0A-2's kernel line names it a candidate for FS-87's list; formalized from the Notation as written it is unprovable (inventory item 109).
+
+<!--q FS89-S0A-10 merge@SA1-6.3-9-->
+**Merge note — do not formalize as stated** (SA1-6.3 item 9, `plans/FS129-SA1-audit.md:741-742`; status applied):
+> 9. **FS89-S0A-2, FS89-S0A-10, FS89-CL2 with the Notation's `A` (`λ_e`, one embedding)** — false as written (§ 3.1); formalize only with `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`. S0A-2's kernel line names it a candidate for FS-87's list.
+
+### FS89-S0A-2
+<!--row FS89-S0A-2 plans/FS89-derivation.md:49-->
+**Address** `plans/FS89-derivation.md:49` · **Role** not in the order · **Named by** SA1-6.3 item 9; inventory item 109
+**Cautions:** [C109](#c109)
+
+<!--q FS89-S0A-2 statement-->
+**Statement as filed (the header's own words; the entry has no `statement:` field):**
+> G1, the gluing: `Θ_k(ℤ[U_ℚ]) ⊆ T_N + A` ⟹ `Θ_k(R_F) ⊆ T_N + A` for every subfield `F ⊆ ℝ`, at every band; the lift `lim 5^k·(small rep of Nθ(x/5^k))` is one real functional, and the gluing reads only `ℤ[1/5]` in each layer, never the band.
+
+<!--q FS89-S0A-2 not_claimed-->
+**Not claimed:** *(empty in the source — no such field)*
+
+<!--q FS89-S0A-2 grade-->
+**Grade as filed:**
+> hand; verifier G blind; the route is the advisor's sketch, closed
+
+<!--q FS89-S0A-2 minds-->
+**Minds as filed (older grammar: inside the grade):** *(empty in the source — no such field)*
+
+<!--q FS89-S0A-2 handoff-->
+**`*Kernel:*` line as filed:**
+> stub (a candidate for FS-87's list: short, and the conduit from `Q` to every field).
+
+<!--q FS89-S0A-2 note@32-->
+**erratum named by inventory item 109 (not positioned under the entry) (`plans/FS89-derivation.md:32`):**
+> *Erratum (2026-10-03, FS129-SA1, from FS91-J03a-9 and FS91-J07-14; `plans/FS91-close-inventory.md` rows 61, 69, 78):* over `R_F` with `F ≠ ℚ`, read `A` as `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`, the archimedean characters of every place of `F(i)`; `λ_e(x) = Re(ē x)` at one embedding is its case `F = ℚ`. With the one-embedding reading FS89-S0A-2, FS89-S0A-10 and FS89-CL2 are false (ℚ(√3), band 1/4: `τ + Re(ē σ₂(·))`); with `A(R_F)` they hold, and every proof step in this file already reads every real place (FS91-J07-14). *(Filed 2026-10-03 by FS129-Z1, verbatim from `plans/FS129-SA1-audit.md` § 3.1's draft; `plans/FS129-close-inventory.md` item 108. The Notation above stands as written.)*
+
+<!--q FS89-S0A-2 note@332-->
+**erratum named by inventory item 109 (not positioned under the entry) (`plans/FS89-derivation.md:332`):**
+> *Erratum (2026-10-03, FS129-Z1, from `plans/FS129-SA1-audit.md` § 3.1; `plans/FS129-close-inventory.md` item 108):* the correction banner above this entry covers FS89-S0A-2 and FS89-S0A-10 as well: they state the field clause with the same Notation's `A`, and are false as written for the same reason (ℚ(√3), band 1/4). The repair is the one line filed under the Notation (`A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`), and it makes all three true. Nothing downstream inherits the falsity: CL3–CL5 read both real places (`plans/FS91-S1D-character.md` § 4.4). For the Lean backlog: S0A-2's kernel line names it a candidate for FS-87's list; formalized from the Notation as written it is unprovable (inventory item 109).
+
+<!--q FS89-S0A-2 merge@SA1-6.3-9-->
+**Merge note — do not formalize as stated** (SA1-6.3 item 9, `plans/FS129-SA1-audit.md:741-742`; status applied):
+> 9. **FS89-S0A-2, FS89-S0A-10, FS89-CL2 with the Notation's `A` (`λ_e`, one embedding)** — false as written (§ 3.1); formalize only with `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`. S0A-2's kernel line names it a candidate for FS-87's list.
+
+### J45-N1
+<!--row J45-N1 plans/FS84-SI-D-derivation.md:419-->
+**Address** `plans/FS84-SI-D-derivation.md:419` · **Role** not in the order · **Named by** SA1 § 6.3 'Upstream missing from the backlog's closure' (plans/FS129-SA1-audit.md:744-745); inventory item 139
+**Cautions:** [C139](#c139)
+
+<!--q J45-N1 statement-->
+**Statement as filed:**
+> `E_S = T + A + Fin_S` is exactly the group of characters continuous for `R → R̂_prof × (L⊗ℝ) × ∏_{v∈S} L_v`; `R` is dense there; `E_S` is a proper dense σ-compact subgroup, Haar-null, `U`-invariant, Borel-isomorphic to the dual group
+
+<!--q J45-N1 not_claimed-->
+**Not claimed:**
+> Lemma R or Lemma C (neither is used); that `E_S` is J28D's `G_S`-continuity group in general — the two agree when every torsion character is stable-continuous (§ 1.2; the Remark after Lemma N2)
+
+<!--q J45-N1 grade-->
+**Grade as filed:**
+> hand
+
+<!--q J45-N1 minds-->
+**Minds as filed:**
+> 1 — J45's derivation; FS100-Q47's grade counts a blind second derivation by J46 (J46-1), not counted here
+
+<!--q J45-N1 handoff-->
+**Handoff as filed:**
+> de Bruijn — an input of FS100-Q47 (row 121); FS129-SA1 § 6.3 lists it among the statements upstream of FS100-Q47 with no entry
+
+### J45-N2
+<!--row J45-N2 plans/FS84-SI-D-derivation.md:439-->
+**Address** `plans/FS84-SI-D-derivation.md:439` · **Role** not in the order · **Named by** SA1 § 6.3 'Upstream missing from the backlog's closure' (plans/FS129-SA1-audit.md:744-745); inventory item 139
+**Cautions:** [C139](#c139)
+
+<!--q J45-N2 statement-->
+**Statement as filed:**
+> the vectors of `L²(μ)` with spectral measure on `E_S` are `L²(𝒜_S)` for a translation-invariant σ-algebra, and `Π(E_S) = E[·|𝒜_S]`
+
+<!--q J45-N2 not_claimed-->
+**Not claimed:**
+> anything about which `μ` has its spectrum on `E_S`; the same with `E = ⋃_S E_S` read as one factor — equality there gives a colouring measurable for `⋁_S 𝒜_S`, not for a single `𝒜_S` (§ 2.2, "What SI-5 means")
+
+<!--q J45-N2 grade-->
+**Grade as filed:**
+> hand
+
+<!--q J45-N2 minds-->
+**Minds as filed:**
+> 1 — J45's derivation; FS100-Q47's grade counts a blind second derivation by J46 (J46-1), not counted here
+
+<!--q J45-N2 handoff-->
+**Handoff as filed:**
+> de Bruijn — with J45-N1, an input of FS100-Q47 (row 121)
+
+### J45-SI-4
+<!--row J45-SI-4 plans/FS84-SI-D-derivation.md:456-->
+**Address** `plans/FS84-SI-D-derivation.md:456` · **Role** not in the order · **Named by** SA1 § 6.3 'Upstream missing from the backlog's closure' (plans/FS129-SA1-audit.md:744-745); inventory item 139
+**Cautions:** [C139](#c139)
+
+<!--q J45-SI-4 statement-->
+**Statement as filed:**
+> equality at every `u` ⟹ every selection from the supports is an `𝒜_S`-measurable equivariant proper four-colouring
+
+<!--q J45-SI-4 not_claimed-->
+**Not claimed:**
+> the converse, SI's "⟸" (a GAP at "an `𝒜_S`-measurable proper colouring forces adjacent supports apart"; over a (G2) field equivalent to universal equality, J45-SI-5); that the selection is `c` itself
+
+<!--q J45-SI-4 grade-->
+**Grade as filed:**
+> hand
+
+<!--q J45-SI-4 minds-->
+**Minds as filed:**
+> 1 — J45's derivation; J46 derived the min-support selection blind (J46-3, `plans/FS84-SI-V-verification.md`'s divergence table, row "SI ⟹"), not counted here
+
+<!--q J45-SI-4 handoff-->
+**Handoff as filed:**
+> de Bruijn — FS129-SA1 § 4.2: "A⁺ is SI-4 with N2 (FS100-K0)"; an input of FS100-Q47 (row 121)
+
+### J45-SI-5
+<!--row J45-SI-5 plans/FS84-SI-D-derivation.md:473-->
+**Address** `plans/FS84-SI-D-derivation.md:473` · **Role** not in the order · **Named by** SA1 § 6.3 'Upstream missing from the backlog's closure' (plans/FS129-SA1-audit.md:744-745); inventory item 139
+**Cautions:** [C139](#c139)
+
+<!--q J45-SI-5 statement-->
+**Statement as filed:**
+> under (G2), "`𝒜_S` carries a proper colouring ⟹ equality" holds for every `μ` over `F` iff every `μ` over `F` has equality at `S`
+
+<!--q J45-SI-5 not_claimed-->
+**Not claimed:**
+> that either side holds — over a (G2) field, ℚ(√11) among them, both are open, which is why SI's "⟸" is a GAP; anything over a field without (G2)
+
+<!--q J45-SI-5 grade-->
+**Grade as filed:**
+> hand
+
+<!--q J45-SI-5 minds-->
+**Minds as filed:**
+> 1 — J45's derivation; J46 re-derived it from J45's statement (J46-11, "hand; from J45's statement"), a sighted reading, not counted here
+
+<!--q J45-SI-5 handoff-->
+**Handoff as filed:**
+> de Bruijn — FS129-SA1 § 6.3 lists it among the statements upstream of FS100-Q47 with no entry; it scopes SI's "⟸"
+
+### J45-SI-C
+<!--row J45-SI-C plans/FS84-SI-D-derivation.md:507-->
+**Address** `plans/FS84-SI-D-derivation.md:507` · **Role** not in the order · **Named by** SA1 § 6.3 'Upstream missing from the backlog's closure' (plans/FS129-SA1-audit.md:744-745)
+
+<!--q J45-SI-C statement-->
+**Statement as filed:**
+> F2's noisy colourings over ℚ(√11) satisfy SI with equality at every `u` and `S`, with `σ_μ(R̂ ∖ E) > 0`
+
+<!--q J45-SI-C not_claimed-->
+**Not claimed:**
+> that every four-colouring over ℚ(√11) has equality (open: J45-SI-5's equivalent); anything over ℚ(√47)
+
+<!--q J45-SI-C grade-->
+**Grade as filed:**
+> hand — the row's grade is "[hand + tools exact]": the tool's items (2)–(4), exact over `Γ₇`'s 49 vertices and 392 directed edges, its two plants firing (§ 2.3)
+
+<!--q J45-SI-C minds-->
+**Minds as filed:**
+> 1 — J45's derivation; J46's control (J46-9, "TRUE under 'a.s. proper'") fixed the hypothesis, not the example, and is not counted here
+
+<!--q J45-SI-C handoff-->
+**Handoff as filed:**
+> de Bruijn — FS129-SA1 § 6.3 lists it among the statements upstream of FS100-Q47 with no entry; its finite facts are a `decide` over `Γ₇`
+
+### J45-SI-J
+<!--row J45-SI-J plans/FS84-SI-D-derivation.md:491-->
+**Address** `plans/FS84-SI-D-derivation.md:491` · **Role** not in the order · **Named by** SA1 § 6.3 'Upstream missing from the backlog's closure' (plans/FS129-SA1-audit.md:744-745)
+
+<!--q J45-SI-J statement-->
+**Statement as filed:**
+> the `E_S`-factor of an independent product of a finite translation system, a Bernoulli process and `c₂` is `σ(Φ) ∨ 𝒜_S(c₂)`
+
+<!--q J45-SI-J not_claimed-->
+**Not claimed:**
+> anything for a dependent product, or for noise that is not Bernoulli
+
+<!--q J45-SI-J grade-->
+**Grade as filed:**
+> hand
+
+<!--q J45-SI-J minds-->
+**Minds as filed:**
+> 1 — J45's derivation; J46 re-derived it with SI-5 (J46-11), not counted here
+
+<!--q J45-SI-J handoff-->
+**Handoff as filed:**
+> de Bruijn — with J45-SI-5 and J45-SI-C, which use it
+
+### J45-SP-if
+<!--row J45-SP-if plans/FS84-SI-D-derivation.md:539-->
+**Address** `plans/FS84-SI-D-derivation.md:539` · **Role** not in the order · **Named by** SA1 § 6.3 'Upstream missing from the backlog's closure' (plans/FS129-SA1-audit.md:744-745)
+
+<!--q J45-SP-if statement-->
+**Statement as filed:**
+> SP's "if" (positive measures; complex with `|ν|(E) = 0`) — Lemma SP-if (§ 4.2), verbatim: "If some finite positive `U`-invariant `ν` with `ν(E) = 0` is not a multiple of Haar, then some finite positive `U`-invariant `τ` has `τ(E) = 0` and `∫ Re χ(1) dτ < 0`."
+
+<!--q J45-SP-if not_claimed-->
+**Not claimed:**
+> the literal value reading for signed measures, under which the hypothesis always holds and "if" would assert the open sign problem itself (§ 4.2, Readings); that a non-Haar `E`-null invariant measure exists
+
+<!--q J45-SP-if grade-->
+**Grade as filed:**
+> hand
+
+<!--q J45-SP-if minds-->
+**Minds as filed:**
+> 1 — J45's derivation (the row: "[hand]")
+
+<!--q J45-SP-if handoff-->
+**Handoff as filed:**
+> de Bruijn — FS129-SA1 § 6.3 lists it among the statements upstream of FS100-Q47 with no entry; with SP-Cor's chain (FS100-SPC, FS100-K0b)
+
+### J45-SP-oi
+<!--row J45-SP-oi plans/FS84-SI-D-derivation.md:523-->
+**Address** `plans/FS84-SI-D-derivation.md:523` · **Role** not in the order · **Named by** SA1 § 6.3 'Upstream missing from the backlog's closure' (plans/FS129-SA1-audit.md:744-745)
+
+<!--q J45-SP-oi statement-->
+**Statement as filed:**
+> SP's "only if" — Lemma SP-only-if (§ 4.2), verbatim: "If a finite positive `U`-invariant `τ` has `τ(E) = 0` and `∫ Re χ(1) dτ < 0`, then `τ` itself is a `U`-invariant finite measure with `τ(E) = 0` that is not a multiple of Haar"
+
+<!--q J45-SP-oi not_claimed-->
+**Not claimed:**
+> SP's "if" (J45-SP-if); that such a `τ` exists (the open sign problem the Poros record's F5 names)
+
+<!--q J45-SP-oi grade-->
+**Grade as filed:**
+> hand
+
+<!--q J45-SP-oi minds-->
+**Minds as filed:**
+> 1 — J45's derivation (the row: "[hand]", § 5.1 "one line")
+
+<!--q J45-SP-oi handoff-->
+**Handoff as filed:**
+> de Bruijn — FS103-F-*'s grade names it (`plans/FS103-derivation.md` line 72); with SP-Cor's chain (FS100-SPC, FS100-K0b, row 123)
+
+### X25B-L1
+<!--row X25B-L1 plans/FS100-derivation.md:418-->
+**Address** `plans/FS100-derivation.md:418` · **Role** not in the order · **Named by** SA1 § 6.3 'Upstream missing from the backlog's closure' (plans/FS129-SA1-audit.md:744-745)
+
+<!--q X25B-L1 statement-->
+**Statement as filed:**
+> a profinite factor's stationary ratio in a product is at most the supremum over its finite levels (fibre shares above `1/2` form an a.e.-independent set)
+
+<!--q X25B-L1 not_claimed-->
+**Not claimed:**
+> equality; anything for a factor that is not a compact group with open subgroups shrinking to 0
+
+<!--q X25B-L1 grade-->
+**Grade as filed:**
+> hand — the line's grade, "[hand; one mind]"
+
+<!--q X25B-L1 minds-->
+**Minds as filed:**
+> 1 — X25B's derivation
+
+<!--q X25B-L1 handoff-->
+**Handoff as filed:**
+> de Bruijn — FS103-F-FRAC's grade names it ("X25B-L1/PZ/T or C14.1–C14.3", `plans/FS103-derivation.md` line 72); it crosses only if the backlog takes that route
+
+### X25B-PZ
+<!--row X25B-PZ plans/FS100-derivation.md:399-->
+**Address** `plans/FS100-derivation.md:399` · **Role** not in the order · **Named by** SA1 § 6.3 'Upstream missing from the backlog's closure' (plans/FS129-SA1-audit.md:744-745)
+
+<!--q X25B-PZ statement-->
+**Statement as filed:**
+> the stationary ratio of a categorical product of two LCA Cayley graphs is at most the larger factor's (Zhang 2012 §2's argument, measure form)
+
+<!--q X25B-PZ not_claimed-->
+**Not claimed:**
+> equality of the ratios; anything for graphs that are not Cayley graphs of LCA groups
+
+<!--q X25B-PZ grade-->
+**Grade as filed:**
+> hand — the line's grade, "[hand; one mind; the finite case is `[Zhang2012]` Thm 1.8's ratio half]"
+
+<!--q X25B-PZ minds-->
+**Minds as filed:**
+> 1 — X25B's derivation
+
+<!--q X25B-PZ handoff-->
+**Handoff as filed:**
+> de Bruijn — FS103-F-FRAC's grade names it ("X25B-L1/PZ/T or C14.1–C14.3", `plans/FS103-derivation.md` line 72) beside the held alternative FS86-Cx-C14's C14.1–C14.3; it crosses only if the backlog takes that route
+
+## Counts
+
+<!--count rows=259 order=178 comps=32 left=26 extras=23 merge_notes=147 notes=28 cautions=54-->
+- **Rows**: 259 in all — 178 in § The order, 32 in § FS-129's compositions, 26 in § Left the order, 23 in the last section. Every row's statement is quoted: 259 statement blocks (an older-grammar entry's is its header's words).
+- **The order's rows by role**: SEED 75, SEED (conditional) 3, upstream 100; of them 12 marked ROUTE-ONLY and 5 marked CYCLE (a mark can sit beside SEED or upstream).
+- **Merge lines**: 42 in `data/fs129/l1/merges.csv` (40 with status applied, 2 amended or replaced by a later line, both shown); 147 merge notes attached to rows (one per line per row it names).
+- **Dated notes attached** (errata, corrections, banners, errata-section items): 28, across the rows above; the 17 errata FS129-Z1 and SA1 filed are all found (the script fails if not 17) and each is attached to the row it sits under, or is listed in `data/fs129/l1/README.md` § Coverage if its entry is not a row.
+- **Cautions attached**: 54 (row, item) pairs over 8 items.
+- **Cells left empty because the source has none**: 54 rows with no *not claimed* line (52 rows are in the older grammar, which has no such field); 2 with no grade.
+- **Ids a merge line or caution names that have no row** (superseded forms excluded, listed above): none.
