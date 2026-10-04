@@ -450,3 +450,45 @@ proved as written goes to Keryx.
 
 **Build as given** at `59976a11`: OK — all 1739 modules up to date, 4 modules with warnings, 91 warnings, every one `declaration uses 'sorry'`
 (`build/gate/build/20261004T142103Z-4106167.log`).
+
+## Stage 14 — SAVED (FS131-I2h): `main` merged; Dyadic, YesLimit and DISC7 closed; eleven Slack leaves; 91 → 67
+
+**`main` merged now, not at the landing** (`28f26bc1`): wave 3's `Plane/LocalMap` and `Plane/LocalStructure` already hold `ArcMap.isOpen_region`,
+`Arc.isClosed_carrier` and `Arc.volume_carrier`, which YesLimit's children need; proving them again under new names would have been duplicate facts
+(item 142). Conflicts: `Proofs.lean` (both sides' imports kept) and `scripts/Axioms.lean` (main's `libraryAxioms` line kept). **The two collisions**
+renamed on wave 2's side: `Plane.dist_rot` (FalconerReduction) → `dist_add_e_mul`, `Plane.eq_norm_mul_e_arg` (Cover) → `self_eq_norm_mul_e_arg`,
+every use and record renamed (wave 3's own records of its `dist_rot`, `eq_norm_mul_e_arg` untouched). **The IMPORTED move** (T3's procedure, step 2–3):
+`#eval AxiomAudit.declareImport ``HadwigerNelson.Plane.falconer_lemma2_nonempty` added under the IMPORTED banner, and the four records
+`falconer_reduction`, `le_chiM_of_falconerFan`, `exists_mem_falconerE`, `fan_tip_ae_mem` moved below it; `ARCHITECTURE.md` § Trust already names
+`Plane.falconer_lemma2_nonempty`. Not yet checked by `axioms.sh` (it fails on the remaining `sorry` by design). Build of the merge: OK, 446 of 446
+batches, 25 modules rebuilt, every warning `declaration uses 'sorry'` (`build/gate/build/20261004T143159Z-4137400.log`).
+
+**Closed** (statements untouched; children stated before use, recorded in `scripts/Axioms.lean` block "FS131-I2h"):
+- `Arith/Dyadic` (4 → 0): `dyadicConclusion_of_minpoly` — Kummer–Dedekind through `normalizedFactors`: the reduced minimal polynomial is
+  `X² + X + 1`, separable so squarefree, so `P𝓞_L`'s factors are distinct (`ramificationIdx = count = 1`); their number is the number of factors of
+  `X² + X + 1` over `𝓞_F/P` (`Multiset.card_map`), at most `[L:F] = 2` (`Ideal.card_primesOverFinset_le_finrank`), one iff irreducible iff
+  `¬ 3 ∣ 2^f − 1` iff `f` odd; the inertia degree `2` in the inert case from `Ideal.sum_ramification_inertia`. New child
+  `three_dvd_two_pow_sub_one_iff`. Then `dyadicConclusion_of_coeffs`, `sqrt3_local_of_congr` (`d = 1`, `δ = 1 + t`, `4t = s² − 3`), `sqrt3_local`.
+  **So FS129-SA1-SQRT3-LOCAL and TC1-SQRT3-DYADIC are sorry-free**, on item 134's hypotheses.
+- `Plane/Slack` (39 → 26): `unitPairsNull_iff_pairMass`, `dist_gridPoint_lt`, `measurable_eval_gridPoint`, `CPColouring.law_ne_shift`,
+  `CPColouring.exists_unif`, `bandNull_unitPairsNull`, `mu_le_muZero`, `tendsto_mu`, `tendsto_muTile`, `tendsto_muPer` (each a squeeze between
+  `eventually_le_muPer` and `mu_le_muZero`, children still `sorry`), `chiM0_le_chiCP` (from the modification children, still `sorry`),
+  `upperDensity_of_periodic` and `upperDensity_periodize` — both through one new squeeze, `upperDensity_of_tiling` (translates of a bounded window of
+  positive area tiling the plane, the set invariant under them: the windows inside `B(0, R)` cover `B(0, R − δ)`), with the new children
+  `measurableSet_squareWin`, `volume_squareWin`, `volume_ball_div_volume_ball`, `tendsto_sq_add_div`, `parallelogram_tiling` (coordinates in the
+  basis `v₁, v₂`: measurable, positive area, diameter `≤ ‖v₁‖ + ‖v₂‖`, translates covering once), and two supporting definitions `parallelogram`,
+  `latticePt` (spec example beside them).
+- `Plane/YesLimit` (4 → 0): `ArcMap.measurableSet_region_inter` (wave 3's `isOpen_region`), `ArcMap.volume_ball_diff_region`
+  (`measure_null_of_locally_null`, wave 3's `Arc.volume_carrier`), `ArcMap.bandFree_region`, `muZero_eq_one_of_fragments` (the window of side `ℓ`
+  inscribed in `B(p, ℓ)`, periodized at `ℓ + 2`, density `ℓ²/(ℓ + 2)² → 1`). New import `Plane/LocalStructure` (ARCHITECTURE.md's Imports cell).
+  FS116-O1-YESLIM now waits only on Slack's `chiM0_le_iff_muZero_eq_one`.
+- `Plane/CoverExamples` (44 → 41): `disc7_periodic`, `disc7_linearIndependent` (moved above its first use), `volume_disc7_cell` (one disc per cell
+  by the tiling and the colour-class discs' `√21/2` separation; the covolume `21√3/8` by `addHaar_image_linearMap`). **So FS111-M2-DISC7 is
+  sorry-free** (`disc7_upperDensity` included).
+
+**Iteration**: a private overlay of the worktree's oleans in the session scratch (`ol/`, Slack's olean compiled into it), `lean` with the overlay first on
+`LEAN_PATH` — never evidence; the stage's build follows.
+
+**Re-pricing** (the brief's ask, from the first two hard children): `dyadicConclusion_of_minpoly` about 25k tokens and `upperDensity_of_tiling` with
+its two instances about 30k — K2c's table priced the Dyadic engine and the periodic density at about 40k each at the Sonnet rate. The easy Slack leaves
+ran at 2–4k each. The rate holds near a third of the table, as I2f measured.
