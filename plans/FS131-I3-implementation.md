@@ -358,6 +358,56 @@ there), inside the interior points because the arcs in polar form (`sixArcs_pola
 half-sextant) force the only lens side meeting a piece to be one of its own, at distance exactly `1` where the piece is strict. Rotating that set back puts
 both points in one component, so the tiles are equal.
 
+## Stage 10 — SAVED (FS131-I3h): the gate on the merged branch; wave 3's carriers registered
+
+**Merge.** `main` (`9df42b80`) merged into `fs131-w3` (`d698c58d`): one conflict, `ARCHITECTURE.md`'s module rows (wave 3's nine and LEB's two, both kept);
+`Proofs.lean` and `scripts/Axioms.lean` merged clean (one `=== PURCHASED ===` banner). Three predecessor logs staged but never committed
+(`data/fs131/i3/build-g1.log`, `build-stage1.log`, `build-stage4.log`) blocked the merge; unstaged, left untracked as their siblings are.
+
+**The vacuity step** (T1's procedure, on T2's `scripts/Vacuity.lean`; commit `094f00d4`). IN: `ArcMap.IsRingArc`, `ArcMap.IsQArc`, `ArcMap.IsChangePoint`,
+`ArcMap.IsHub` — each refutable at a concrete map (`halfPlane2`: its ring carries no arc of `Γ`, and `r(90°) = i` is off its `Γ`); controls 21–36 in
+`scripts/vacuity-controls.lean` (a closed refutation, the `VACUOUS` statement it kills, a `GENERIC` variable map, an `UNKNOWN` `sixFrag` instance nothing
+decides), twelve `expect` lines in `scripts/vacuity.sh`. OUT, reasons written beside the list: `CircleColouring` (a construction), `CircleColouring.Lift`
+(`exists_lift` inhabits it for every colouring), `IsTile`/`TileOf`/`GermIn` (set variables only), `IsEssBoundary`/`SaturatedAt` (a concrete refutation is a density
+computation the library makes only in an `example`; their one consumer takes a variable map). This goes past the planner's recommendation (IN for three) by
+`IsQArc`, which the procedure's own criterion puts IN.
+
+**The gate** (Lean source of commit `094f00d4`; the later commits `4fe0d83a`, `182c3452` touch only `ARCHITECTURE.md` and `data/`):
+* build: `data/fs131/i3/build-h-gate.log` = `build/gate/build/20261004T134135Z-3923244.log` — "build: OK — 441 of 441 batches, 6 module(s) rebuilt, 0 module(s) with
+  warnings". Zero `sorry` in the nine modules (grep) and none on the audited surface.
+* axioms: `data/fs131/i3/axioms-h-gate.log` = `build/gate/axioms/20261004T135108Z-4008434.log` — "axioms: OK — 1794 clean, 11 axiom-free, 5 declared purchase(s)"
+  over 1,810 records; `sorryAx` occurs 0 times in the receipt; the five purchases are the pre-existing Moser-spindle ones; every one of wave 3's 502 records
+  reads `[propext, Classical.choice, Quot.sound]` or fewer. The digest flags `CLAUDE.md` § Trust ledger stale (1292 → 1794): a draft below.
+* vacuity: `--self-test` `data/fs131/i3/vacuity-h-selftest.log` (`build/gate/vacuity-self-test/20261004T135123Z-4008940.log`): every control fired, the twelve new
+  ones included, the silent ones silent. Scan `data/fs131/i3/vacuity-h-gate.log` (`build/gate/vacuity/20261004T135228Z-4010703.log`): "vacuity: OK",
+  `declarations=8385 refutations-skipped=57 sites=459`, `vacuous=0 stale=0 declared=3 witnessed=21 generic=433 unknown=2` (the baseline's two). **Reconciled
+  against `CLAUDE.md`'s 7673 / 45 / 357 / 17 / 335**: declarations +712 (wave 3's declarations, now on `main`'s side of the count); refutations-skipped +12 (wave 3's
+  theorems concluding `False`); sites +102 = witnessed +4 (`halfPlane2_isChangePoint`, `quadRing_isQArc`, `quadRing_isRingArc`, `sixFrag_isRingArc`: the newly
+  tracked carriers, each witnessed by its own theorem) + generic +98 (wave 3's theorems at a variable map: `Valid`, `NonSiamese`, `Simple` tracked since T1, and the
+  four new carriers); vacuous, stale, declared, unknown unchanged.
+* `tools/check_architecture.py`: exit 0, "RESULT: PASS" (`data/fs131/i3/arch-h.log`) after correcting two Imports cells (`Plane/LocalStructure` gained `Plane/Chord`,
+  `Plane/Lens` imports `Plane/Chord` not `Plane/Basic`: I3c's move of the `e` lemmas, never mirrored).
+* `tools/fs131_qa1_dupes.py` (item 142; self-test OK): 6 names in two bodies' own files (`data/fs131/i3/dupes-h.log`), four touching wave 3, none of them this
+  job's: `dist_rot` (w3 `SixFragment` / w2 `FalconerReduction`), `eq_norm_mul_e_arg` (w3 `SixFragment` / w2 `Cover`), `e_add_int_mul_two_pi` (w3 `SixFragment` / ww
+  `Woodall/NoFourFive`), `e_mul_conj_e` (w3 `Chord` / ww `Woodall/Collar`). Wave 3 lands first, so w2 and ww rename or import.
+
+**Negative controls, each watched red.** Build: this session's readback build of `93ca3468` reported "1 module(s) with warnings" with the two `declaration uses
+sorry` lines (the gate's warning count fires on exactly what it guards). Axioms: a planted `theorem fs131_i3h_planted_sorry : (1 : ℕ) = 2 := sorry` with its record
+in the CLEAN section gave "FAIL: sorryAx on the audited surface", naming it (`data/fs131/i3/axioms-h-plant.log`); reverted, `git diff` empty. Vacuity: the
+self-test is the control suite, and the twelve new controls fired. Architecture: red on the two stale Imports cells above, naming both modules, before the fix.
+
+## Theorems this phase proved (FS131-I3h)
+
+Axioms read from the gate's saved audit log `build/gate/axioms/20261004T135108Z-4008434.log` (copy `data/fs131/i3/axioms-h-gate.log`); statements as the skeleton
+gave them, read against FS116-Y2-SIXFRAG in `plans/FS131-w3-kernel-plan.md` § 5.2 ("a valid non-Siamese fragment … whose three diameters are below 1 and whose three
+cross distances are above 1"):
+- **FS116-Y2-SIXFRAG, validity** — `HadwigerNelson.Plane.sixFrag_valid` (`sixFrag.Valid`: no two interior points of one colour at distance exactly `1`): `[propext,
+  Classical.choice, Quot.sound]`.
+- **FS116-Y2-SIXFRAG, non-Siamese** — `HadwigerNelson.Plane.sixFrag_nonSiamese` (`sixFrag.NonSiamese`: two distinct tiles of one colour have a pair at distance at
+  least `1`): `[propext, Classical.choice, Quot.sound]`.
+- And with them, now read from the gate log rather than scratch: every row theorem listed by Stages 1–7 above (the whole of wave 3: 502 records, 0 `sorryAx`, all
+  on the standard three or fewer), `sixFrag` itself, `sixQ_inhabited`, `ringQPrimeS`, `four_of_bothKind_simple` (with `hnc`, item 112's form).
+
 ## Theorems this phase proved (FS131-I3f)
 
 Scratch audit only, not the gate; statements as the skeleton gave them. **FS116-Y2-SIXFRAG**, one clause: `HadwigerNelson.Plane.sixCol_locallyConstant` (`[propext, Classical.choice, Quot.sound]` expected; to be read from the gate log), so `sixFrag` itself is now free of its own `sorry`.
@@ -383,7 +433,19 @@ statements as the skeleton gave them (none changed). Read against `plans/FS131-w
 
 ## Drafts for the front page
 
-None yet: 4 `sorry` remain, so the gate has not run. (The build above is the iteration check, not the gate.)
+From the gate run above (wave 3 landed; FS131-I3h, 2026-10-04):
+1. **`CLAUDE.md` § Trust ledger**, replacing "current audit reads 1292 clean and 5 declared purchases (and 11 axiom-free; 1,308 records at Lebesgue's covering
+   theorem's landing, FS131-LEB, 2026-10-04)" with: "current audit reads 1794 clean and 5 declared purchases (and 11 axiom-free; 1,810 records at FS-131 wave 3's
+   landing, FS131-I3h, 2026-10-04)". (If another branch lands first, its records add to both numbers.)
+2. **`CLAUDE.md` § The gate**, replacing "`declarations=7673 refutations-skipped=45 sites=357`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=335 unknown=2`"
+   with "`declarations=8385 refutations-skipped=57 sites=459`, `vacuous=0 stale=0 declared=3 witnessed=21 generic=433 unknown=2`".
+3. **`scripts/vacuity-baseline.txt`'s header**, replacing "#   declarations=7673  refutations-skipped=45  sites=357" and "#   vacuous=0 stale=0 declared=3
+   witnessed=17 generic=335 unknown=2" with "#   declarations=8385  refutations-skipped=57  sites=459" and "#   vacuous=0 stale=0 declared=3 witnessed=21
+   generic=433 unknown=2". The baseline's two entries are unchanged.
+4. **`CLAUDE.md` § Frontier, "What the kernel holds, beyond the interval"**, after "**FS-101's first slot** — `χ(ℚ(√47)²) ≤ 5`, and the main clause through five over
+   named hypotheses (row 127);": "**FS-131 wave 3** — the local geometry of arc maps and the ring rows of FS-116 and FS-129, Siamese allowed (the tiles, the germ
+   dichotomy, GERM-R, GERM-S, QFREE4, FIVERING, TOUCHW, ECHO, V5-U1's cones, FLANK, RINGBAND, EXIT), and FS116-Y2-SIXFRAG's six-colour fragment, valid and
+   non-Siamese, on the standard three axioms;". Nothing for `LEDGER.md` (rows are regraded at the milestone's filing).
 
 ## Build
 
