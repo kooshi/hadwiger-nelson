@@ -52,7 +52,31 @@ theorem not_falconerFan_five_of_fanGap (Λ : AddSubgroup ℂ) {A : Type*} [AddCo
     (hψ : ∀ u : Λ, ‖(u : ℂ)‖ = 1 → ψ u ≠ 0) (C : (addCayley (ψ '' {u : Λ | ‖(u : ℂ)‖ = 1})).Coloring (Fin 4))
     {w : A} {γ : Fin 4} (hgap : FanGap C w γ) (V : Finset ℂ) (hV : (V : Set ℂ) ⊆ Λ) {a b : ℂ} (ha : a ∈ V)
     (hb : b ∈ V) : ¬ FalconerFan (udOn V) 5 ⟨a, ha⟩ ⟨b, hb⟩ := by
-  sorry
+  intro hfan
+  let ρ : udOn V →g addCayley (ψ '' {u : Λ | ‖(u : ℂ)‖ = 1}) :=
+    { toFun := fun v => ψ ⟨v.1, hV v.2⟩
+      map_rel' := by
+        intro x y h
+        have hd : dist (x : ℂ) (y : ℂ) = 1 := h
+        have hxy : (⟨(y : ℂ), hV y.2⟩ : Λ) - ⟨(x : ℂ), hV x.2⟩ ∈ {u : Λ | ‖(u : ℂ)‖ = 1} := by
+          show ‖(y : ℂ) - x‖ = 1
+          rw [← dist_eq_norm, dist_comm]; exact hd
+        rw [addCayley_adj]
+        have hne := hψ _ hxy
+        refine ⟨fun heq => hne ?_, Or.inl ?_⟩
+        · rw [map_sub, heq, sub_self]
+        · rw [show -ψ ⟨(x : ℂ), hV x.2⟩ + ψ ⟨(y : ℂ), hV y.2⟩ = ψ (⟨(y : ℂ), hV y.2⟩ - ⟨(x : ℂ), hV x.2⟩) by
+            rw [map_sub]; abel]
+          exact ⟨_, hxy, rfl⟩ }
+  have hB := (falconerFan_hom (by norm_num) hfan ρ).2
+  let tb : (V : Set ℂ) := ⟨b, hb⟩
+  have hg := FanGap.translate hgap (w - ρ tb)
+  have hg' : FanGap (C.comap (addCayleyTranslate _ (w - ρ tb))) (ρ tb) γ := by
+    simpa using hg
+  obtain ⟨x, hx, hxc⟩ := (hB (C.comap (addCayleyTranslate _ (w - ρ tb)))).2 γ
+  rcases hx with rfl | hadj
+  · exact hg'.1 hxc.symm
+  · exact hg'.2 x hadj hxc
 
 /-- **FS129-MA2-FALC-HOSTS**, clause (iii), over row 78's half (`hR78`, named): if `H` is drawn in a lattice on which every
 difference identified by all four-colourings lies in `8Λ`, then the tip minus the apex is in `8Λ`. -/
@@ -61,7 +85,11 @@ theorem falconerFan_five_mem_eight (Λ : AddSubgroup ℂ)
       ∃ w ∈ Λ, (y : ℂ) - x = 8 * w)
     (V : Finset ℂ) (hV : (V : Set ℂ) ⊆ Λ) {a b : ℂ} (ha : a ∈ V) (hb : b ∈ V)
     (hfan : FalconerFan (udOn V) 5 ⟨a, ha⟩ ⟨b, hb⟩) : ∃ w ∈ Λ, b - a = 8 * w := by
-  sorry
+  let ρ : udOn V →g (unitDistance ℂ).induce (Λ : Set ℂ) :=
+    { toFun := fun v => ⟨v.1, hV v.2⟩
+      map_rel' := fun h => h }
+  have hB := (falconerFan_hom (by norm_num) hfan ρ).2
+  exact hR78 ⟨a, hV ha⟩ ⟨b, hV hb⟩ (fun C => (hB C).1)
 
 /-- **FS129-MA2-FALC-HOSTS**, clause (iv), over row 88's frame (`hR88`, `hR88per`, named): for a connected `H ⊂ F²` with a
 fan at five colours and an additive group `R` holding every unit vector of `F²`, whose forced set (the differences every
@@ -77,6 +105,49 @@ theorem falconerFan_five_mem_P (F : Subfield ℝ) (R : AddSubgroup ℂ)
         ∀ h : (x : ℂ) + v ∈ R, C x = C ⟨_, h⟩} = P → Per)
     (V : Finset ℂ) (hV : (V : Set ℂ) ⊆ planeOver F) (hconn : (udOn V).Connected) {a b : ℂ} (ha : a ∈ V) (hb : b ∈ V)
     (hfan : FalconerFan (udOn V) 5 ⟨a, ha⟩ ⟨b, hb⟩) : b - a ∈ P ∧ Per := by
-  sorry
+  have hstep : ∀ u v : (V : Set ℂ), (udOn V).Adj u v → (u : ℂ) - a ∈ R → (v : ℂ) - a ∈ R := by
+    intro u v h hu
+    have hd : dist (u : ℂ) (v : ℂ) = 1 := h
+    have : (v : ℂ) - u ∈ R := hRU _ ⟨by simpa using F.sub_mem (hV v.2).1 (hV u.2).1, by simpa using F.sub_mem (hV v.2).2 (hV u.2).2⟩
+      (by rw [← dist_eq_norm, dist_comm]; exact hd)
+    have := R.add_mem hu this
+    simpa using this
+  have hwalk : ∀ (u v : (V : Set ℂ)) (w : (udOn V).Walk u v), (u : ℂ) - a ∈ R → (v : ℂ) - a ∈ R := by
+    intro u v w
+    induction w with
+    | nil => exact id
+    | cons h _ ih => exact fun hu => ih (hstep _ _ h hu)
+  have hmem : ∀ v : (V : Set ℂ), (v : ℂ) - a ∈ R := by
+    intro v
+    obtain ⟨w⟩ := hconn.preconnected ⟨a, ha⟩ v
+    exact hwalk _ _ w (by simp)
+  -- the homomorphism to the unit-distance graph on `R`, `v ↦ v - a`
+  let ρ : udOn V →g (unitDistance ℂ).induce (R : Set ℂ) :=
+    { toFun := fun v => ⟨(v : ℂ) - a, hmem v⟩
+      map_rel' := by
+        intro x y h
+        have hd : dist (x : ℂ) (y : ℂ) = 1 := h
+        show dist ((x : ℂ) - a) ((y : ℂ) - a) = 1
+        rw [dist_sub_right]; exact hd }
+  have hB := (falconerFan_hom (by norm_num) hfan ρ).2
+  have hforced : b - a ∈ {v : ℂ | ∀ C : ((unitDistance ℂ).induce (R : Set ℂ)).Coloring (Fin 4), ∀ x : R,
+        ∀ h : (x : ℂ) + v ∈ R, C x = C ⟨_, h⟩} := by
+    intro C x h
+    let T : ((unitDistance ℂ).induce (R : Set ℂ)) →g ((unitDistance ℂ).induce (R : Set ℂ)) :=
+      { toFun := fun y => ⟨(y : ℂ) + x, R.add_mem y.2 x.2⟩
+        map_rel' := by
+          intro y z hyz
+          have hd : dist (y : ℂ) (z : ℂ) = 1 := hyz
+          show dist ((y : ℂ) + x) ((z : ℂ) + x) = 1
+          rw [dist_add_right]; exact hd }
+    have h1 := (hB (C.comap T)).1
+    have e1 : T (ρ ⟨a, ha⟩) = x := Subtype.ext (by simp [T, ρ])
+    have e2 : T (ρ ⟨b, hb⟩) = ⟨(x : ℂ) + (b - a), h⟩ := Subtype.ext (by simp [T, ρ, add_comm])
+    have h1' : C (T (ρ ⟨a, ha⟩)) = C (T (ρ ⟨b, hb⟩)) := h1
+    rwa [e1, e2] at h1'
+  have hba : b - a ≠ 0 := sub_ne_zero.2 (fun h => hfan.1 (Subtype.ext h.symm))
+  rcases hR88 with h0 | hP
+  · exact absurd (by simpa using (h0 ▸ hforced : b - a ∈ ({0} : Set ℂ))) hba
+  · exact ⟨hP ▸ hforced, hR88per hP⟩
 
 end HadwigerNelson.Arith

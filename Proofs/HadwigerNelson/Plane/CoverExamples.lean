@@ -441,12 +441,6 @@ theorem fatZ_spec : IsClosed fatZ ∧ fatZ ⊆ Icc (-1 / 2) (1 / 2) ∧ interior
 /-- `fatZ` is closed (spec, sorry-free). -/
 example : IsClosed fatZ := isClosed_Icc.sdiff (isOpen_iUnion fun _ => isOpen_ball)
 
-/-- Every MUA-candidate extends to a MUA set: a measurable set with null unit pairs lies below a MUA set up to null sets
-(the one-class form of FS111-M-SATC's first clause; a supporting lemma). -/
-theorem exists_isMUA_ae_le {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) :
-    ∃ A' : Set ℂ, IsMUA A' ∧ A ≤ᵐ[volume] A' := by
-  sorry
-
 /-- **FS111-M3-IRREG**, at the class its argument reads (wider: any closed `Z ⊆ [−1/2, 1/2]` with empty interior and positive
 length holding `±1/2`, any `g` with (G1)'s bounds; the row's Smith–Volterra–Cantor `Z_f` is one): `A = int HC(g)` is
 unit-avoiding (no two points at distance `1`), regular (`cl A = HC`, `|HC ∖ A| = 0`, `|∂HC| = 0`) and satisfies the shadow

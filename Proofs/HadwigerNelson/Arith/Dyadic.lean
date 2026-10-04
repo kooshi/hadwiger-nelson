@@ -46,6 +46,16 @@ theorem sqrt3_local (hdeg : Module.finrank F L = 2) (hi : ∃ ι : L, ι ^ 2 = -
 /-- **TC1-SQRT3-DYADIC** (merged): if `√3 ∈ F` and `i ∉ F`, every place of `F` above `2` satisfies the conclusion. -/
 theorem sqrt3_dyadic (hdeg : Module.finrank F L = 2) (hi : ∃ ι : L, ι ^ 2 = -1) (h3 : ∃ r : F, r ^ 2 = 3)
     (P : HeightOneSpectrum (𝓞 F)) (h2 : (2 : 𝓞 F) ∈ P.asIdeal) : DyadicSqrt3Conclusion L P := by
-  sorry
+  obtain ⟨r, hr⟩ := h3
+  have hint : IsIntegral ℤ r := by
+    refine ⟨Polynomial.X ^ 2 - Polynomial.C 3, Polynomial.monic_X_pow_sub_C _ (by norm_num), ?_⟩
+    simp [hr]
+  obtain ⟨s, hs⟩ : ∃ s : 𝓞 F, (s : F) = r := ⟨⟨r, hint⟩, rfl⟩
+  refine sqrt3_local_of_congr hdeg hi P h2 ⟨s, ?_⟩
+  have hs' : algebraMap (𝓞 F) F s = r := hs
+  have h0 : s ^ 2 - 3 = 0 := by
+    apply FaithfulSMul.algebraMap_injective (𝓞 F) F
+    rw [map_sub, map_pow, hs', hr, map_zero, map_ofNat, sub_self]
+  rw [h0]; exact Ideal.zero_mem _
 
 end HadwigerNelson.Arith

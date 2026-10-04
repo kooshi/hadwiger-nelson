@@ -1,6 +1,8 @@
 import Proofs.HadwigerNelson.Plane.AeColouring
 import Proofs.HadwigerNelson.Plane.UnitAvoiding
 import Mathlib.MeasureTheory.Function.Floor
+import Mathlib.MeasureTheory.Measure.Support
+import Mathlib.MeasureTheory.Covering.BesicovitchVectorSpace
 
 /-!
 # Families of colour classes: covers, maximal covers, selections, saturation (FS-131 wave 2's foundation)
@@ -227,5 +229,254 @@ example (x : ℂ) : ¬ IsContactFor ∅ x := by
     exact zero_ne_one (tendsto_nhds_unique tendsto_const_nhds h)
   rw [this, closure_empty] at hy
   exact hy
+
+/-! ## Shared children of wave 2 (FS131-I2): a.e. invariance and exhaustion -/
+
+/-- Null sets of the first factor pull back to null unit-pair sets: `{(x,θ) | x + e θ ∈ N}` is null for null `N`. -/
+theorem volume_prod_shift_null {N : Set ℂ} (hN : volume N = 0) :
+    (volume.prod arcLength) {q : ℂ × ℝ | q.1 + e q.2 ∈ N} = 0 := by
+  obtain ⟨N', hNN', hN'm, hN'0⟩ : ∃ N' ⊇ N, MeasurableSet N' ∧ volume N' = 0 :=
+    ⟨toMeasurable volume N, subset_toMeasurable _ _, measurableSet_toMeasurable _ _, by rwa [measure_toMeasurable]⟩
+  have hm : MeasurableSet {q : ℂ × ℝ | q.1 + e q.2 ∈ N'} :=
+    (measurable_fst.add (continuous_e.measurable.comp measurable_snd)) hN'm
+  refine measure_mono_null (t := {q : ℂ × ℝ | q.1 + e q.2 ∈ N'}) (fun q hq => hNN' hq) ?_
+  rw [Measure.prod_apply_symm hm]
+  have : ∀ θ : ℝ, volume ((fun x : ℂ => (x, θ)) ⁻¹' {q : ℂ × ℝ | q.1 + e q.2 ∈ N'}) = 0 := by
+    intro θ
+    have : (fun x : ℂ => (x, θ)) ⁻¹' {q : ℂ × ℝ | q.1 + e q.2 ∈ N'} = (fun x => x + e θ) ⁻¹' N' := rfl
+    rw [this, measure_preimage_add_right]; exact hN'0
+  rw [lintegral_congr this]; simp
+
+/-- **`UnitPairsNull` is invariant under a.e. equality.** -/
+theorem UnitPairsNull.congr_ae {A B : Set ℂ} (hA : UnitPairsNull A) (h : A =ᵐ[volume] B) : UnitPairsNull B := by
+  set N : Set ℂ := {x | ¬ (x ∈ A ↔ x ∈ B)} with hNdef
+  have hN : volume N = 0 := ae_iff.mp (Filter.eventuallyEq_set.mp h)
+  have h1 : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ N} = 0 := by
+    have : {q : ℂ × ℝ | q.1 ∈ N} = N ×ˢ univ := by ext q; simp
+    rw [this, Measure.prod_prod, hN, zero_mul]
+  have h2 := volume_prod_shift_null hN
+  refine measure_mono_null (t := unitPairSet A ∪ {q : ℂ × ℝ | q.1 ∈ N} ∪ {q : ℂ × ℝ | q.1 + e q.2 ∈ N}) ?_
+    (measure_union_null (measure_union_null hA h1) h2)
+  rintro q ⟨hq1, hq2⟩
+  by_cases a1 : q.1 ∈ A
+  · by_cases a2 : q.1 + e q.2 ∈ A
+    · exact Or.inl (Or.inl ⟨a1, a2⟩)
+    · exact Or.inr (show ¬ (q.1 + e q.2 ∈ A ↔ q.1 + e q.2 ∈ B) from fun hh => a2 (hh.mpr hq2))
+  · exact Or.inl (Or.inr (show ¬ (q.1 ∈ A ↔ q.1 ∈ B) from fun hh => a1 (hh.mpr hq1)))
+
+/-- **Measure-maximizing exhaustion.** For a predicate `P` on measurable sets that respects a.e. equality and is closed
+under increasing countable unions, every `P`-set lies a.e. below an a.e.-maximal one. -/
+theorem exists_ae_maximal {α : Type*} [MeasurableSpace α] (μ : Measure α) [SFinite μ] (P : Set α → Prop)
+    (hmeas : ∀ B, P B → MeasurableSet B) (hcongr : ∀ B B', P B → MeasurableSet B' → B =ᵐ[μ] B' → P B')
+    (hunion : ∀ D : ℕ → Set α, Monotone D → (∀ n, P (D n)) → P (⋃ n, D n)) {A : Set α} (hA : P A) :
+    ∃ U, P U ∧ A ≤ᵐ[μ] U ∧ ∀ D, P D → U ≤ᵐ[μ] D → D ≤ᵐ[μ] U := by
+  classical
+  obtain ⟨ν, hνfin, hμν, hνμ⟩ := exists_isFiniteMeasure_absolutelyContinuous μ
+  have hae : ∀ {s t : Set α}, s ≤ᵐ[μ] t → s ≤ᵐ[ν] t := fun h => hνμ.ae_le h
+  have hae' : ∀ {s t : Set α}, s ≤ᵐ[ν] t → s ≤ᵐ[μ] t := fun h => hμν.ae_le h
+  -- the supremum of `ν` over `P`-sets above `B`
+  let s : Set α → ENNReal := fun B => ⨆ (D : Set α) (_ : P D ∧ B ≤ᵐ[μ] D), ν D
+  have hs_top : ∀ B, s B ≠ ⊤ := fun B =>
+    ne_top_of_le_ne_top (measure_ne_top ν univ) (iSup₂_le fun D _ => measure_mono (subset_univ _))
+  -- the step: a `P`-set above `B` almost attaining the supremum
+  have step : ∀ (B : Set α) (_ : P B) (n : ℕ), ∃ D, P D ∧ B ≤ᵐ[μ] D ∧ s B < ν D + (1 / (n + 1 : ℕ) : ENNReal) := by
+    intro B hB n
+    have hpos : (0 : ENNReal) < (1 / (n + 1 : ℕ) : ENNReal) := by simp
+    by_cases h0 : s B = 0
+    · exact ⟨B, hB, EventuallyLE.rfl, by rw [h0]; exact lt_of_lt_of_le hpos le_add_self⟩
+    · have h1 : s B - (1 / (n + 1 : ℕ) : ENNReal) < s B := ENNReal.sub_lt_self (hs_top B) h0 hpos.ne'
+      have h2 : s B - (1 / (n + 1 : ℕ) : ENNReal) < ⨆ (D : Set α) (_ : P D ∧ B ≤ᵐ[μ] D), ν D := h1
+      obtain ⟨D, hD⟩ := lt_iSup_iff.1 h2
+      obtain ⟨hD2, hD1⟩ := lt_iSup_iff.1 hD
+      refine ⟨D, hD2.1, hD2.2, ?_⟩
+      by_cases hc : (1 / (n + 1 : ℕ) : ENNReal) ≤ s B
+      · exact (ENNReal.sub_lt_iff_lt_right (by simp) hc).1 hD1
+      · exact lt_of_lt_of_le (not_le.1 hc) le_add_self
+  let nxt : ℕ → {B : Set α // P B} → {B : Set α // P B} := fun n B =>
+    ⟨(step B.1 B.2 n).choose ∪ B.1, hcongr _ _ (step B.1 B.2 n).choose_spec.1
+      ((hmeas _ (step B.1 B.2 n).choose_spec.1).union (hmeas _ B.2))
+      (union_ae_eq_left_iff_ae_subset.2 (step B.1 B.2 n).choose_spec.2.1).symm⟩
+  let seq : ℕ → {B : Set α // P B} := fun n => Nat.rec ⟨A, hA⟩ nxt n
+  have hseq0 : seq 0 = ⟨A, hA⟩ := rfl
+  have hseqS : ∀ n, seq (n + 1) = nxt n (seq n) := fun n => rfl
+  have hmono : Monotone (fun n => (seq n).1) :=
+    monotone_nat_of_le_succ fun n => by rw [hseqS]; exact subset_union_right
+  set U : Set α := ⋃ n, (seq n).1 with hU
+  have hPU : P U := hunion _ hmono fun n => (seq n).2
+  have hsub : ∀ n, (seq n).1 ⊆ U := fun n => subset_iUnion (fun n => (seq n).1) n
+  refine ⟨U, hPU, Eventually.of_forall fun x hx => mem_iUnion.2 ⟨0, hx⟩, fun D hD hUD => ?_⟩
+  have hbound : ∀ n : ℕ, ν D ≤ ν U + (1 / (n + 1 : ℕ) : ENNReal) := by
+    intro n
+    have hn : (seq n).1 ≤ᵐ[μ] D := hUD.mono fun y hy hyn => hy (hsub n hyn)
+    have h1 : ν D ≤ s (seq n).1 :=
+      le_iSup₂ (f := fun (D : Set α) (_ : P D ∧ (seq n).1 ≤ᵐ[μ] D) => ν D) D ⟨hD, hn⟩
+    have h2 := (step (seq n).1 (seq n).2 n).choose_spec.2.2
+    have h3 : ν (step (seq n).1 (seq n).2 n).choose ≤ ν U :=
+      measure_mono (fun x hx => mem_iUnion.2 ⟨n + 1, by rw [hseqS]; exact Or.inl hx⟩)
+    exact h1.trans (h2.le.trans (add_le_add h3 le_rfl))
+  have hle : ν D ≤ ν U := by
+    refine ENNReal.le_of_forall_pos_le_add fun ε hε _ => ?_
+    obtain ⟨n, hn⟩ := ENNReal.exists_inv_nat_lt (a := (ε : ENNReal)) (by simpa using hε.ne')
+    refine (hbound n).trans (add_le_add le_rfl ?_)
+    calc (1 / (n + 1 : ℕ) : ENNReal) ≤ (n : ENNReal)⁻¹ := by
+          rw [one_div]; exact ENNReal.inv_le_inv.2 (by exact_mod_cast Nat.le_succ n)
+      _ ≤ ε := hn.le
+  have hUm : MeasurableSet U := hmeas U hPU
+  have hDm : MeasurableSet D := hmeas D hD
+  have hUD' : ν U = ν (U ∩ D) := measure_congr (by
+    rw [Filter.eventuallyEq_set]
+    filter_upwards [hae hUD] with x hx
+    exact ⟨fun h => ⟨h, hx h⟩, fun h => h.1⟩)
+  have hsplit := measure_inter_add_sdiff (μ := ν) D hUm
+  have hfin : ν U ≠ ⊤ := measure_ne_top ν U
+  have hz : ν (D \ U) = 0 := by
+    have : ν (D \ U) + ν U ≤ 0 + ν U := by
+      calc ν (D \ U) + ν U = ν (D \ U) + ν (U ∩ D) := by rw [← hUD']
+        _ = ν D := by rw [add_comm, inter_comm, hsplit]
+        _ ≤ ν U := hle
+        _ = 0 + ν U := (zero_add _).symm
+    exact le_antisymm (ENNReal.le_of_add_le_add_right hfin this) bot_le
+  have : D \ U =ᵐ[ν] (∅ : Set α) := by rw [ae_eq_empty]; exact hz
+  exact hae' (by
+    filter_upwards [measure_eq_zero_iff_ae_notMem.1 hz] with x hx hxD
+    by_contra hxU
+    exact hx ⟨hxD, hxU⟩)
+
+/-- **One MUA set above a measurable set with null unit pairs** (the one-class form of FS111-M-SATC's first clause). -/
+theorem exists_isMUA_ae_le {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) :
+    ∃ A' : Set ℂ, IsMUA A' ∧ A ≤ᵐ[volume] A' := by
+  have hu : ∀ D : ℕ → Set ℂ, Monotone D → (∀ n, MeasurableSet (D n) ∧ UnitPairsNull (D n)) →
+      MeasurableSet (⋃ n, D n) ∧ UnitPairsNull (⋃ n, D n) := by
+    intro D hD hP
+    refine ⟨MeasurableSet.iUnion fun n => (hP n).1, ?_⟩
+    have : unitPairSet (⋃ n, D n) = ⋃ n, unitPairSet (D n) := by
+      ext ⟨x, θ⟩
+      simp only [unitPairSet, mem_setOf_eq, mem_iUnion]
+      constructor
+      · rintro ⟨⟨m, hm⟩, ⟨n, hn⟩⟩
+        exact ⟨max m n, hD (le_max_left _ _) hm, hD (le_max_right _ _) hn⟩
+      · rintro ⟨n, h1, h2⟩
+        exact ⟨⟨n, h1⟩, ⟨n, h2⟩⟩
+    rw [UnitPairsNull, this]
+    exact measure_iUnion_null fun n => (hP n).2
+  obtain ⟨U, ⟨hUm, hUn⟩, hAU, hmax⟩ := exists_ae_maximal (volume : Measure ℂ)
+    (fun B : Set ℂ => MeasurableSet B ∧ UnitPairsNull B) (fun B h => h.1)
+    (fun B B' hB hB' hBB' => ⟨hB', hB.2.congr_ae hBB'⟩) hu (A := A) ⟨hA, hnull⟩
+  exact ⟨U, ⟨hUm, hUn, fun B hBm hBn hUB => hmax B ⟨hBm, hBn⟩ hUB⟩, hAU⟩
+
+/-- The essential support is the support of the restricted measure. -/
+theorem essSupport_eq_support (A : Set ℂ) : essSupport A = (volume.restrict A).support := by
+  ext x
+  rw [Metric.nhds_basis_ball.mem_measureSupport]
+  simp only [essSupport, mem_setOf_eq, gt_iff_lt]
+  refine forall_congr' fun r => forall_congr' fun _ => ?_
+  rw [Measure.restrict_apply measurableSet_ball, inter_comm]
+
+/-- The essential support is closed. -/
+theorem isClosed_essSupport (A : Set ℂ) : IsClosed (essSupport A) := by
+  rw [essSupport_eq_support]; exact Measure.isClosed_support
+
+/-- The part of a set off its essential support is null. -/
+theorem volume_diff_essSupport (A : Set ℂ) : volume (A \ essSupport A) = 0 := by
+  have h := Measure.measure_compl_support (μ := volume.restrict A)
+  rw [← essSupport_eq_support, Measure.restrict_apply (isClosed_essSupport A).isOpen_compl.measurableSet] at h
+  rwa [sdiff_eq, inter_comm]
+
+/-- The essential support is monotone for `≤ᵐ`. -/
+theorem essSupport_mono_ae {A B : Set ℂ} (h : A ≤ᵐ[volume] B) : essSupport A ⊆ essSupport B := by
+  intro x hx r hr
+  have := hx r hr
+  refine lt_of_lt_of_le this (measure_mono_ae ?_)
+  filter_upwards [h] with y hy hy' using ⟨hy hy'.1, hy'.2⟩
+
+/-- A closed set missing the unit circle about `z` misses a whole annulus about `z`. -/
+theorem exists_annulus_subset_compl {F : Set ℂ} (hF : IsClosed F) {z : ℂ} (h : ∀ y ∈ F, dist z y ≠ 1) :
+    ∃ δ, 0 < δ ∧ δ < 1 / 2 ∧ ∀ w, |dist w z - 1| < δ → w ∉ F := by
+  obtain ⟨δ, hδ, hsub⟩ := (isCompact_sphere z 1).exists_thickening_subset_open hF.isOpen_compl
+    (fun y hy hyF => h y hyF (by rw [mem_sphere] at hy; rw [dist_comm]; exact hy))
+  refine ⟨min δ (1 / 4), lt_min hδ (by norm_num), lt_of_le_of_lt (min_le_right _ _) (by norm_num), fun w hw hwF => ?_⟩
+  have hw1 : |dist w z - 1| < 1 / 4 := lt_of_lt_of_le hw (min_le_right _ _)
+  have hwz : w ≠ z := by
+    rintro rfl; simp at hw1; norm_num [abs_of_nonneg] at hw1
+  have hpos : 0 < dist w z := dist_pos.2 hwz
+  -- the radial projection of `w` to the circle
+  set y : ℂ := z + (w - z) / ((dist w z : ℝ) : ℂ) with hy
+  have hyS : y ∈ sphere z 1 := by
+    rw [mem_sphere, dist_eq_norm, hy, add_sub_cancel_left, norm_div, Complex.norm_real, Real.norm_of_nonneg hpos.le,
+      ← dist_eq_norm, div_self hpos.ne']
+  have hdist : dist w y < min δ (1 / 4) := by
+    have h1 : w - y = (w - z) * (((dist w z - 1) / dist w z : ℝ) : ℂ) := by
+      have hne : ((dist w z : ℝ) : ℂ) ≠ 0 := by exact_mod_cast hpos.ne'
+      rw [hy]; push_cast; field_simp; ring
+    have h2 : dist w y = |dist w z - 1| := by
+      rw [dist_eq_norm, h1, norm_mul, Complex.norm_real, ← dist_eq_norm, Real.norm_eq_abs, abs_div,
+        abs_of_pos hpos]
+      field_simp
+    rw [h2]; exact hw
+  exact (hsub (mem_thickening_iff.2 ⟨y, hyS, lt_of_lt_of_le hdist (min_le_left _ _)⟩)) hwF
+
+/-- Almost every point of `A` is a density point of `A` (Lebesgue density, `A` arbitrary). -/
+theorem ae_restrict_mem_densitySet (A : Set ℂ) : ∀ᵐ x ∂(volume.restrict A), x ∈ densitySet A :=
+  Besicovitch.ae_tendsto_measure_inter_div volume A
+
+/-- A measurable set differs from its density set by a null set (one half: `A ∖ Ã` is null). -/
+theorem volume_diff_densitySet {A : Set ℂ} (hA : MeasurableSet A) : volume (A \ densitySet A) = 0 := by
+  have := (ae_restrict_iff' hA).1 (ae_restrict_mem_densitySet A)
+  rw [measure_eq_zero_iff_ae_notMem]
+  filter_upwards [this] with y hy hyA
+  exact hyA.2 (hy hyA.1)
+
+/-- A set with a null part in every small ball about `x` has upper density `0` at `x`. -/
+theorem upperDensityAt_eq_zero_of_null {A : Set ℂ} {x : ℂ} {r₀ : ℝ} (hr₀ : 0 < r₀)
+    (h : ∀ r, 0 < r → r ≤ r₀ → volume (A ∩ closedBall x r) = 0) : upperDensityAt A x = 0 := by
+  have : densityRatio A x =ᶠ[𝓝[>] 0] fun _ => 0 := by
+    filter_upwards [Ioo_mem_nhdsGT hr₀] with r hr
+    rw [densityRatio, h r hr.1 hr.2.le, ENNReal.zero_div]
+  rw [upperDensityAt, limsup_congr this, limsup_const]
+
+/-- The support of `A` is the closure of its density set. -/
+theorem essSupport_eq_closure_densitySet (A : Set ℂ) : essSupport A = closure (densitySet A) := by
+  apply subset_antisymm
+  · intro x hx
+    rw [Metric.mem_closure_iff]
+    intro ε hε
+    have hpos := hx ε hε
+    have hae := ae_restrict_mem_densitySet A
+    have hne : volume.restrict A (ball x ε) ≠ 0 := by
+      rw [Measure.restrict_apply measurableSet_ball, inter_comm]; exact hpos.ne'
+    have hne' : ¬ ∀ᵐ y ∂(volume.restrict A), y ∉ ball x ε := by
+      intro h
+      exact hne (measure_eq_zero_iff_ae_notMem.2 h)
+    by_contra hcon
+    push Not at hcon
+    apply hne'
+    filter_upwards [hae] with y hy hyb
+    have := hcon y hy
+    rw [mem_ball, dist_comm] at hyb
+    linarith
+  · refine closure_minimal (fun x hx r hr => ?_) (isClosed_essSupport A)
+    have h1 : ∀ᶠ s in 𝓝[>] (0 : ℝ), 0 < volume (A ∩ closedBall x s) := by
+      have := hx.eventually (lt_mem_nhds (zero_lt_one' ENNReal))
+      filter_upwards [this] with s hs
+      rw [densityRatio, ENNReal.div_pos_iff] at hs
+      exact pos_iff_ne_zero.2 hs.1
+    obtain ⟨s, hs, hs0⟩ := (h1.and (Ioo_mem_nhdsGT hr)).exists
+    exact lt_of_lt_of_le hs (measure_mono (inter_subset_inter_right _
+      (closedBall_subset_ball hs0.2)))
+
+/-- An open set lying a.e. inside `A` lies in the density set of `A`. -/
+theorem subset_densitySet_of_isOpen_ae_subset {U A : Set ℂ} (hU : IsOpen U) (h : U ≤ᵐ[volume] A) :
+    U ⊆ densitySet A := by
+  intro x hx
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hU x hx
+  refine tendsto_const_nhds.congr' ?_
+  have : Ioo 0 ε ∈ 𝓝[>] (0 : ℝ) := Ioo_mem_nhdsGT hε
+  filter_upwards [this] with r hr
+  have hsub : closedBall x r ⊆ U := fun y hy => hball (lt_of_le_of_lt (mem_closedBall.mp hy) hr.2)
+  have hAe : volume (A ∩ closedBall x r) = volume (closedBall x r) := by
+    refine le_antisymm (measure_mono inter_subset_right) (measure_mono_ae ?_)
+    filter_upwards [h] with y hy hyb using ⟨hy (hsub hyb), hyb⟩
+  rw [densityRatio, hAe]
+  exact (ENNReal.div_self (measure_closedBall_pos volume x hr.1).ne' measure_closedBall_lt_top.ne).symm
 
 end HadwigerNelson.Plane
