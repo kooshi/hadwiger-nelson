@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.Basic
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
 
 /-!
 # Chords of unit circles, two unit circles, and the corner of two lines (FS-131 wave 1)
@@ -63,6 +64,16 @@ theorem dist_ringPt_ringPt (p : ℂ) {α β : ℝ} (hδ : |α - β| ≤ π) :
       exact abs_of_nonpos (Real.sin_nonpos_of_nonpos_of_neg_pi_le (by linarith)
         (by rw [abs_of_nonpos h] at hδ; linarith))
   rw [abs_mul, abs_two, hsin]
+
+/-- Unit vectors are `1`-Lipschitz in the angle: `|e θ − e θ₀| ≤ |θ − θ₀|`. -/
+theorem norm_e_sub_e_le (θ θ₀ : ℝ) : ‖e θ - e θ₀‖ ≤ |θ - θ₀| := by
+  have h := ringPt_sub_ringPt 0 θ₀ θ
+  simp only [ringPt, zero_add] at h
+  rw [h, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_mul, abs_two]
+  have := Real.abs_sin_le_abs (x := (θ - θ₀) / 2)
+  have h2 : |(θ - θ₀) / 2| = |θ - θ₀| / 2 := by rw [abs_div, abs_two]
+  rw [h2] at this
+  linarith
 
 /-- **FS116-V4-CHORD**, the three regimes: at separation `δ ∈ [0, π]` the distance is `1` exactly at `δ = π/3`, below
 `1` for `δ < π/3`, above `1` for `π/3 < δ`. -/
