@@ -215,3 +215,95 @@ read at the shell's points; WHOLE's identity reads a tile through it.
 distance 2 is read — FS116-N1-ECHO and -V3-ECHO-ONLY (`2w − p`), FS116-Y4-SPOKE (`2y_2`) — need the witness to be present (their conclusions are about
 the point at distance 2), where the identity says only when it cannot be seen; their discs are of radius above 2 by statement. Searched: the
 statements naming `2w`, `2y`, `2u`, `R₂(`, "radius 2", "√3".
+
+## Stage 3 — SAVED: mechanism 2 (the bends) and pass 1's leads
+
+### Mechanism 2 — the bends, in BEND3's generality
+
+**What it is.** FS112-N2-BENDS' whole-arc moves (N2-TOWARD, N2-AWAY, with N2-TAN's horn lenses) remove an arc of `Γ` on a unit circle `ω(q)` whenever
+one of its side colours is absent at `q`, keeping validity, non-Siamese, simplicity and `q`'s colours, on the whole-tile restriction of radius at most
+`√3` about `q` (FS129-OR1-WHOLE, -BENDFRAG, -BEND3; inventory item 61). **Kind of input:** a modification lemma — it turns a hypothesis "the ring of
+`q` carries no arc of `Γ`" into "the ring of `q` carries no arc whose two side colours are both at `q`", at no cost in radius below `√3`.
+
+**Used at** (by id): FS112-N2-RED (maps: every unit arc (Q) or (R2)), FS112-N2-TERM, FS112-N3-BASE (inert arcs bent toward their centres),
+FS114-N5-BEND and -N5-BENDG, FS114-N6-NOQ, -N7-HUB and -N7-3T ("after the bends"), FS129-OR1-BENDFRAG, -BEND3, -QFREE-CLASS, -QFREE, -LOCALDENSE.
+
+**Where it bears and was not applied.** I searched the statements for every hypothesis of the form "the ring (unit circle) of a point carries no arc
+of `Γ`" or "is free of `Γ`", in both eras' words ("Γ-free", "no arc of `Γ`", "free of arcs", "purely rotating", "six-arc ring", "Condition 5" where it
+is used as "no unit arc on this circle"):
+1. **A generalization, for pass 3 (not derived: no consumer found).** At a point of at most three colours in the non-Siamese simple class every arc of
+   `Γ` on its unit circle has a side colour absent at the centre — at an interior point trivially, at an edge point because a half-plane sector does
+   not fit FS116-V5-U1's facing cone of width `180° − ℓ`, at a three-colour vertex by FS129-OR1-BEND3's first paragraph. So the bends make the ring of
+   **any** point of at most three colours free of `Γ` below `√3`. No held exclusion reads the ring of an interior or edge point under a Γ-free
+   hypothesis, so this has no site yet.
+2. **Near miss — FS110-P17 and FS110-Y3-SIX** ("no vertex with exactly three sectors has a purely rotating ring"; "no vertex of degree 3 with three
+   essential sectors has a six-arc ring in a tight six-map in `𝓜_K` under Condition 5"). BEND3 supplies their ring hypothesis on fragments with unit
+   arcs; the hypothesis that may fail is Condition 5 used elsewhere in their proofs (N2-HEX "needs TS-C against bichromatic rotation points",
+   `plans/FS110-derivation.md` FS110-N2-ROT) — unchecked here. Both are "off the headline's path".
+3. **Near miss — FS116-N2-RECIP** ("if `p` lies on no arc of `Γ` on `ω(y)` …"). Bending at `y` would remove such an arc, but `p` lies on it: a bend
+   moves the boundary at a named point of the bent arc. The hypothesis that fails is BENDFRAG's not-claimed line ("bending `p`'s ring and a ring
+   point's ring together is not claimed").
+4. **Pass 1's leads, FS110-A3-HOLE and FS110-N2-SWAP** — answered below; the bends are not what they lack.
+
+### The leads of pass 1 (`plans/FS129-close-inventory.md` item 62; the brief's item (4))
+
+**(a) FS110-A3-HOLE and FS110-N2-SWAP: is their reading radius inside `√3`? Yes — and the bends are not what closes them.**
+- *A3-HOLE* is A2-V56 / N2-V4: "a vertex `v` with `ω(v)` carrying no arc of `Γ` has `|P_cl(v)| ≤ 4`, and at `|P_cl(v)| = 4` some `y ∈ ω(v)` makes
+  `(v, y)` a covering pair at distance 1; with arcs of `Γ` on `ω(v)` both steps are a GAP" (`plans/FS110-N-proof.md` l. 291). It reads `B̄(v, 1 + ε)`.
+  **Its first step is held, stronger, under another name:** FS116-N1-QFREE4, "if the ring carries no (Q) arc then `p` has four colours and no more",
+  Siamese pairs allowed — so the GAP branch is exactly the rings carrying a (Q) arc, which no bend removes; and there the step is **false on fragments**:
+  FS116-Y2-SIXFRAG holds a six-colour vertex on every disc of radius below `3/2`. **Its second step** needs a *covering* pair, whose types are disjoint
+  (`data/fs110/claims.md` l. 29); at a change point `y` of a four-colour vertex's ring, FS116-N2-STAR gives `C(y) = A(p) ⊔ T_y ⊔ O_y`, so `(p, y)` covers
+  only when `T_y = O_y = ∅` — a change point of exactly two colours. RING-GERM (iii) and FS116-N3-SEMI make hubs and semi-hubs vertices of at least
+  three colours, so such a point is a closed change point; FS116-N1-QDISK's corner change point ("an edge point of two colours") is one. A miss of
+  citation, not of work: FS-110's GAP was answered at FS-116 and nobody linked them. Off the headline's path; nothing to derive.
+- *N2-SWAP*'s exceptions are "the boundary runs along `ω(σx)` at `x` or along `ω(x)`" and the four-colour case at `x`
+  (`plans/FS110-NB-verification.md` § 2.5). At a three-colour `x`, BEND3 removes arcs of `ω(x)`, but `u` lies on `ω(x)` and the arc along `ω(σx)`
+  passes through `x` itself: both exceptions are two rings at once, BENDFRAG's not-claimed case (near miss 3 above). The four-colour case is A3-HOLE's
+  second step. Null for the bends.
+
+**(b) FS-112's stuck ray and FS-121's tangent pencils are one object — a merge for pass 3, and what it newly gives.** FS112-N2-RAY's extremal chain
+is "the pencil of circles of radius `k + 1` about `P_{−1}`", FS112-N3-CHAINS makes the horn at `P_k` need radius at least `k + 1`, and FS121-O1-OUT makes
+every tangent-type arc of radius `n` the start of arcs of radii `n + 1, n + 2, …` over one window: a one-sided unit-spaced concentric pencil, in a valid
+map and in an honest saturated colouring. The two periodicity kills are one lemma: FS112-N3-PER / -Y3-R1 ("a doubly periodic map has no one-sided chain")
+and FS121-D2-PERFIN with -O1-PER and -V5-SYM-CPT (finitely many radii, so no curved tangent interface). **What the merge would newly give** (not derived):
+FS121-D2-SYM needs less than periodicity — "the angular windows of its radius-`r` arcs are bounded below" — and a transfer of that hypothesis to FS-112
+would bear on FS112-N3-PER's GAP N3-ALPH (non-periodic maps with finitely many arc classes). FS-115, where that GAP lives, is demoted; its live bearing
+(¬LRA) is FS-126's. A candidate for pass 3's weaker-hypothesis list.
+
+**(c) FS111-M4-CUT and FS121-D4-FACE are one sagitta.** CUT's `β(u) ≤ n − (n² − (u − z)²)^{1/2}` is the sagitta of a circle of radius `n`; FACE's sharp
+condition `(1 − g)² + ρ² ≥ 1` (FS121-V5-FACE-SHARP) is `g ≥ 1 − (1 − ρ²)^{1/2}`, the sagitta at radius 1. One law, read on a rung at radius `n` and on a
+facing piece at radius 1. **What the merge newly gives:** a candidate sharpness for CUT by FACE-SHARP's construction (not derived); LAT's open case
+(pieces shrinking faster than the square root of their gaps) is where both are idle, as pass 1 said. Merge for pass 3.
+
+**(d) Lane A's question, "compute the winding jump at (u, p, v) on ω(y)" — computed, conditionally; it does not close SEMI-PAR3.** Setting: SEMI-PAR3,
+kind O (`plans/FS116-N3-proof.md` § 3.2), `p = 0`, `y = e(0°)`, `u = e(60°)`, `v = e(−60°)`, colours of `p`: `f` (`t_front`), `a` (`t_a`), `c`
+(`t_back`), `a′` (`t_{a′}`); `ω(y)` is coloured off `Γ` by `y`'s absent colours `{a, a′, f}`, properly at `60°` (V4-TWIST at `y`). On `ω(y)`, `u`, `p`,
+`v` sit at angles `120°, 180°, 240°`; the same hexagon's other points are `y + e(300°)`, `2y` and `y + e(60°)` (radius `√3`, `2`, `√3` about `p`). The
+germ colours each have two candidates, read off the tiles at each point and the absent set: at `u`, outer (`120°−`) `a′` (`O_A`) or an outer `f`-tile,
+inner (`120°+`) `a` (`t_a`) or `f` (`t_front` reaching `u`); at `p`, `a` or `f` above, `f` or `a′` below; at `v`, inner `a′` or `f`, outer `a` or `f`.
+`data/fs129/mr1/jump_explore.py` (an exploration over every assignment, not a control) gives:
+- **When each (Q) arc's own side tiles hold `ω(y)`'s germs at its end** (`u`: `a′` then `a`; `v`: `a′` then `a`): **the jump is 0 in all 8 consistent
+  assignments, and `ω(y)` is forced to carry `f`, `t_front`'s colour, at both `y + e(60°)` and `y + e(300°)`** (the far germs at `2y` take `a` or `a′`).
+- A jump of `±2` occurs in 12 assignments, each with an `f`-coloured tile holding a germ of `ω(y)` at `u` or at `v`.
+So a non-zero jump needs `t_front` (or another `f`-tile) at `u` or `v`; otherwise the triple changes together and the winding route reads only `f` at the
+two radius-`√3` points. *A pointer, not derived:* those two `f`-tiles are far from `t_front` (`|y ± … − p| = √3`), so by V4-DICHOTOMY `t_front` avoids the
+lenses `B(y + e(±60°), 1) ∩ B(p, 1)`, whose tangent cones at `y` cover `(90°, 150°)` and `(210°, 270°)`: `t_front` can approach `y` only inside the tip
+cone `(150°, 210°)` — the cone kind O leaves to `R | R′`. This reads a fragment of radius `√3 + ε` about `p`, not SEMI-PAR3's `1 + ε`, and rests on the
+germ assignment, which is not derived. For FS-124's SEMI-PAR3 opening.
+
+**(e) The coordinator's relay from lane A (FS129-MA1, received during this stage, folded in before its commit).**
+1. *G71 is two mechanisms; the height on a curve is lane R's.* Lane A (`plans/FS129-MA1-audit.md` § 5.2): "the lattice height (`Θ₃`, three-colourability
+   of abelian Cayley graphs; lane A, row 79) and the height on a curve (row 132's index of density traces, FS-110's ring winding, FS129-OA1-RINGWIND), which
+   lane R uses and owns in practice." Accepted: I treat the height on a curve as a lane-R mechanism in this pass. Its held forms are FS110-N2-RING,
+   -Y3-GP, -N2-TRANS, -FLIP (FS-110's winding), FS106-IND and -IND-X (Voronov's index of density traces, failing by 2 where a unit-arc interface faces a
+   bowtie) and FS129-OA1-RINGWIND (the per-hexagon normalisation); its new use in this pass is lead (d) above, and pass 1's BEND3 supplies its Γ-free
+   hypothesis at three-colour vertices on fragments.
+2. *FS106-BIKE's GAP* — "The bicycle `T₁(u) ∪ T₁(v)`, `1 < |u − v| < 2`, with the single distance 1 needs three colours …; whether three suffice by
+   finitely many arcs is open". The ring winding bears: each circle's colouring is three-coloured and proper at `60°`, so it has a winding; by FS110-Y3-GP a
+   circle with no two change points `60°` apart winds `W ≡ 3 (mod 6)`, so `|W| ≥ 3`, and FS110-Y-BIKE-3C already kills that class's minimal member (the
+   six-arc three-cycle ring, at every `d` whose cross curve meets no grid vertex). **The hypothesis that is missing** for a composition: a coupling of the
+   two circles' windings through the cross edges (points at distance 1 across), which no held result states — FS110-N2-TRANS transports a winding along a
+   map's edge, not across a bicycle's cross curve. Not derived. Its bearing: the bicycle is the end of `[Voronov2023]` Lemma 6.1's branch (i), whose
+   route lane A records closed (row 133); FS-122's step 2 asks what replaces the bicycle's swap at unbounded complexity, so a three-colour bicycle by
+   finitely many arcs would matter there only as an obstruction's shape — noted for FS-122, unchecked.
