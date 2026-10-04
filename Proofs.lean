@@ -164,6 +164,15 @@ import Proofs.HadwigerNelson.Plane.Chord
 import Proofs.HadwigerNelson.Plane.Cover
 import Proofs.HadwigerNelson.Plane.Suprema
 import Proofs.HadwigerNelson.Plane.CPColouring
+import Proofs.HadwigerNelson.Plane.MaximalCover
+import Proofs.HadwigerNelson.Plane.Slack
+import Proofs.HadwigerNelson.Plane.Stationary
+import Proofs.HadwigerNelson.Plane.FalconerReduction
+import Proofs.HadwigerNelson.Plane.YesLimit
+import Proofs.HadwigerNelson.Plane.CoverExamples
+import Proofs.HadwigerNelson.Arith.PlaceHom
+import Proofs.HadwigerNelson.Arith.FalconerField
+import Proofs.HadwigerNelson.Arith.Dyadic
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 

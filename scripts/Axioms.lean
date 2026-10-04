@@ -1913,6 +1913,59 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.measurable_rotCol
 #print axioms HadwigerNelson.Plane.chiCP_le
 
+/-! ## FS-131 wave 2 — covers, suprema, the equivalence, Falconer's reduction, place homomorphisms (skeleton until its implementer lands it) -/
+
+#print axioms HadwigerNelson.Plane.AeColouring.exists_fill
+#print axioms HadwigerNelson.Plane.AeColouring.exists_isMaximalCover
+#print axioms HadwigerNelson.Plane.IsMaximalCover.interior_union_unitShadow
+#print axioms HadwigerNelson.Plane.IsAdmissible.exists_aeColouring
+#print axioms HadwigerNelson.Plane.isMaximalCover_iff
+#print axioms HadwigerNelson.Plane.IsRegularMUA.interior_eq_compl_unitShadow
+#print axioms HadwigerNelson.Plane.IsRegularMUA.component_side
+#print axioms HadwigerNelson.Plane.IsMaximalCover.enclosing_or_exterior
+#print axioms HadwigerNelson.Plane.IsMaximalCover.curvatureLeOne
+#print axioms HadwigerNelson.Plane.IsMaximalCover.semiconcaveWith
+#print axioms HadwigerNelson.Plane.AeColouring.exists_grundy
+#print axioms HadwigerNelson.Plane.AeColouring.exists_tight
+#print axioms HadwigerNelson.Plane.exists_tight_iff_chiM0_le
+#print axioms HadwigerNelson.Plane.tendsto_mu
+#print axioms HadwigerNelson.Plane.tendsto_muTile
+#print axioms HadwigerNelson.Plane.tendsto_muPer
+#print axioms HadwigerNelson.Plane.chiM0_le_chiCP
+#print axioms HadwigerNelson.Plane.chiM0_le_iff_muZero_eq_one
+#print axioms HadwigerNelson.Plane.chiM0_le_iff_chiCP_le
+#print axioms HadwigerNelson.Plane.muZero_eq_one_iff_tendsto
+#print axioms HadwigerNelson.Plane.chiM0_le_iff_periodic
+#print axioms HadwigerNelson.Plane.seven_le_chiM0_iff
+#print axioms HadwigerNelson.Plane.forall_mu_six_lt_one_iff
+#print axioms HadwigerNelson.Plane.keptAt_band
+#print axioms HadwigerNelson.Plane.CPColouring.tendsto_not_kept
+#print axioms HadwigerNelson.Plane.exists_not_uniform_kept
+#print axioms HadwigerNelson.Plane.face
+#print axioms HadwigerNelson.Plane.face_densitySet
+#print axioms HadwigerNelson.Plane.exists_face_fails
+#print axioms HadwigerNelson.Plane.nonempty_cpColouring_nine
+#print axioms HadwigerNelson.Plane.CPColouring.exists_discrete_forcedSet
+#print axioms HadwigerNelson.Plane.CPColouring.forcedSet_eq_zero
+#print axioms HadwigerNelson.Plane.twoCircle_preimage_null
+#print axioms HadwigerNelson.Plane.falconer_lemma1
+#print axioms HadwigerNelson.Plane.falconer_reduction
+#print axioms HadwigerNelson.Plane.le_chiM_of_falconerFan
+#print axioms HadwigerNelson.Plane.chromaticNumber_plane_le_chiM0
+#print axioms HadwigerNelson.Plane.chiM0_le_of_fragments
+#print axioms HadwigerNelson.Plane.chromaticNumber_plane_le_six_of_fragments
+#print axioms HadwigerNelson.Plane.sq9_tight_saturated
+#print axioms HadwigerNelson.Arith.exists_placeHom
+#print axioms HadwigerNelson.Arith.noAffine_fields
+#print axioms HadwigerNelson.Arith.falconerFan_five_field
+#print axioms HadwigerNelson.Arith.falconerFan_five_placeHom
+#print axioms HadwigerNelson.Arith.not_falconerFan_five_of_fanGap
+#print axioms HadwigerNelson.Arith.falconerFan_five_mem_eight
+#print axioms HadwigerNelson.Arith.falconerFan_five_mem_P
+#print axioms HadwigerNelson.Arith.sqrt3_local_of_congr
+#print axioms HadwigerNelson.Arith.sqrt3_local
+#print axioms HadwigerNelson.Arith.sqrt3_dyadic
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
