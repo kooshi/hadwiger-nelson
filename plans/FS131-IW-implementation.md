@@ -74,7 +74,7 @@ notes for the planner: (i) `exists_parabola_region` and `absent_at_normal` carry
 
 `aeMap6_merged` proved and moved after `aeMap6_normal`; `finRotate_ne_symm` added (`n ≥ 3`: the rotation has no 2-cycle). `tools/fs131_w2_decls.py --check`: 115
 theorems, 115 records. The build of stage 2's tree: OK, 444 of 444, 8 m 47 s, `build/gate/build/20261004T123605Z-3530781.log` (`data/fs131/iw-build1.log`;
-`Collar` and `NoFourFive` built with no warning; every warning of `Steps` is `declaration uses 'sorry'`). The build of stage 3's tree: `data/fs131/iw-build2.log`.
+`Collar` and `NoFourFive` built with no warning; every warning of `Steps` is `declaration uses 'sorry'`). The build of stage 3's tree: **OK — 444 of 444, 2 modules rebuilt, 12 with warnings, 8 m 8 s, exit 0** (`build/gate/build/20261004T125346Z-3674506.log`, `data/fs131/iw-build2.log`); the only warnings in the four Woodall modules are `declaration uses 'sorry'` in `Steps` (four leaves).
 
 ## Drafts for the front page
 
