@@ -4,6 +4,10 @@ import Proofs.HadwigerNelson.Plane.FalconerReduction
 import Mathlib.MeasureTheory.Measure.Lebesgue.VolumeOfBalls
 import Mathlib.MeasureTheory.Measure.ContinuousPreimage
 import Mathlib.MeasureTheory.Measure.Decomposition.RadonNikodym
+import Mathlib.Analysis.Normed.Module.WeakDual
+import Mathlib.Analysis.InnerProductSpace.Dual
+import Mathlib.MeasureTheory.Function.L2Space
+import Mathlib.MeasureTheory.Measure.SeparableMeasure
 
 /-!
 # Rescaling, the suprema's limits, the equivalence, kept points, the face lemma (FS-131 wave 2)
@@ -1686,6 +1690,74 @@ theorem CPColouring.lintegral_ball_ne (c : CPColouring k) {ct : (ℂ → Fin k) 
 def WeakStarTendsto (g : ℕ → ℂ → ℝ) (F : ℂ → ℝ) : Prop :=
   ∀ φ : ℂ → ℝ, Integrable φ → Tendsto (fun m => ∫ x, g m x * φ x) atTop (𝓝 (∫ x, F x * φ x))
 
+/-- **Weak sequential compactness in `L²(μ)`** (`μ` finite): `[0, 1]`-valued measurable families have a common subsequence
+converging weakly in `L²(μ)`, against every square-integrable test function (sequential Banach–Alaoglu on
+`Fin k → L²(μ)`, separable, and the Riesz representation). -/
+theorem exists_L2_weak_subseq {μ : Measure ℂ} [IsFiniteMeasure μ] (g : ℕ → Fin k → ℂ → ℝ)
+    (hg : ∀ m j, Measurable (g m j)) (h01 : ∀ m j x, 0 ≤ g m j x ∧ g m j x ≤ 1) :
+    ∃ (σ : ℕ → ℕ) (F : Fin k → ℂ → ℝ), StrictMono σ ∧ (∀ j, Measurable (F j)) ∧ (∀ j, MemLp (F j) 2 μ) ∧
+      ∀ j (ψ : ℂ → ℝ), MemLp ψ 2 μ →
+        Tendsto (fun m => ∫ x, g (σ m) j x * ψ x ∂μ) atTop (𝓝 (∫ x, F j x * ψ x ∂μ)) := by
+  classical
+  haveI : Fact ((2 : ENNReal) ≠ ⊤) := ⟨ENNReal.ofNat_ne_top⟩
+  have hmem : ∀ m j, MemLp (g m j) 2 μ := fun m j =>
+    MemLp.of_bound (hg m j).aestronglyMeasurable 1 (Eventually.of_forall fun x => by
+      rw [Real.norm_eq_abs, abs_le]; constructor <;> linarith [(h01 m j x).1, (h01 m j x).2])
+  set u : ℕ → Fin k → Lp ℝ 2 μ := fun m j => (hmem m j).toLp with hudef
+  set c : ℝ := (measureUnivNNReal μ : ℝ) ^ (2 : ENNReal).toReal⁻¹ * 1 with hc
+  have hc0 : 0 ≤ c := by positivity
+  have hu : ∀ m j, ‖u m j‖ ≤ c := fun m j => Lp.norm_le_of_ae_bound zero_le_one (by
+    filter_upwards [(hmem m j).coeFn_toLp] with x hx
+    rw [hx, Real.norm_eq_abs, abs_le]; constructor <;> linarith [(h01 m j x).1, (h01 m j x).2])
+  set Λ : ℕ → StrongDual ℝ (Fin k → Lp ℝ 2 μ) := fun m =>
+    ∑ j, (innerSL ℝ (u m j)).comp (ContinuousLinearMap.proj j) with hΛdef
+  have hΛ : ∀ m ψ, Λ m ψ = ∑ j, inner ℝ (u m j) (ψ j) := by
+    intro m ψ; simp [hΛdef]
+  have hΛn : ∀ m, ‖Λ m‖ ≤ k * c := by
+    intro m
+    refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun ψ => ?_
+    rw [hΛ]
+    calc ‖∑ j, inner ℝ (u m j) (ψ j)‖ ≤ ∑ j, ‖inner ℝ (u m j) (ψ j)‖ := norm_sum_le _ _
+      _ ≤ ∑ _j : Fin k, c * ‖ψ‖ := by
+          refine Finset.sum_le_sum fun j _ => ?_
+          refine (norm_inner_le_norm _ _).trans ?_
+          exact mul_le_mul (hu m j) (norm_le_pi_norm ψ j) (norm_nonneg _) hc0
+      _ = k * c * ‖ψ‖ := by simp [mul_assoc]
+  obtain ⟨a, -, σ, hσ, hlim⟩ := WeakDual.isSeqCompact_closedBall ℝ (Fin k → Lp ℝ 2 μ) 0 (k * c)
+    (x := fun m => StrongDual.toWeakDual (Λ m)) (fun m => by
+      simpa [mem_closedBall, dist_zero_right] using hΛn m)
+  set Fj : Fin k → Lp ℝ 2 μ := fun j => (InnerProductSpace.toDual ℝ (Lp ℝ 2 μ)).symm
+    ((WeakDual.toStrongDual a).comp (ContinuousLinearMap.single ℝ (fun _ : Fin k => Lp ℝ 2 μ) j)) with hFj
+  have hconv : ∀ j (ψ : Lp ℝ 2 μ), Tendsto (fun m => inner ℝ (u (σ m) j) ψ) atTop (𝓝 (inner ℝ (Fj j) ψ)) := by
+    intro j ψ
+    have h1 := ((WeakDual.eval_continuous (Pi.single j ψ)).tendsto a).comp hlim
+    have e1 : ∀ m, ((fun x : WeakDual ℝ (Fin k → Lp ℝ 2 μ) => x (Pi.single j ψ)) ∘
+        ((fun m => StrongDual.toWeakDual (Λ m)) ∘ σ)) m = inner ℝ (u (σ m) j) ψ := by
+      intro m
+      simp only [Function.comp_apply]
+      show Λ (σ m) (Pi.single j ψ) = _
+      rw [hΛ, Finset.sum_eq_single j]
+      · simp
+      · intro i _ hij; simp [Pi.single_eq_of_ne hij]
+      · simp
+    have e2 : a (Pi.single j ψ) = inner ℝ (Fj j) ψ := by
+      rw [hFj, InnerProductSpace.toDual_symm_apply]
+      rfl
+    rw [← e2]
+    exact h1.congr e1
+  refine ⟨σ, fun j => Fj j, hσ, fun j => (Lp.stronglyMeasurable _).measurable, fun j => Lp.memLp _, fun j ψ hψ => ?_⟩
+  have e3 : ∀ (v : Lp ℝ 2 μ) (f : ℂ → ℝ), (v : ℂ → ℝ) =ᵐ[μ] f →
+      inner ℝ v hψ.toLp = ∫ x, f x * ψ x ∂μ := by
+    intro v f hvf
+    rw [L2.inner_def]
+    refine integral_congr_ae ?_
+    filter_upwards [hvf, hψ.coeFn_toLp] with x h1 h2
+    rw [h1, h2]; simp [mul_comm]
+  have := hconv j hψ.toLp
+  rw [e3 (Fj j) _ (ae_eq_refl _)] at this
+  refine this.congr fun m => ?_
+  exact e3 _ _ (hmem (σ m) j).coeFn_toLp
+
 /-- **Weak-* sequential compactness** of `[0, 1]`-valued families (Hilbert weak compactness in `L²(B(0, n))`,
 `WeakDual.isSeqCompact_closedBall` through `InnerProductSpace.toDual`, then a diagonal over `n` and density of `L² ∩ L¹`
 in `L¹`). -/
@@ -1693,7 +1765,183 @@ theorem exists_weakStar_subseq (g : ℕ → Fin k → ℂ → ℝ) (hg : ∀ m j
     (h01 : ∀ m j x, 0 ≤ g m j x ∧ g m j x ≤ 1) :
     ∃ (σ : ℕ → ℕ) (F : Fin k → ℂ → ℝ), StrictMono σ ∧ (∀ j, Measurable (F j)) ∧
       (∀ j, ∀ᵐ x ∂volume, 0 ≤ F j x ∧ F j x ≤ 1) ∧ ∀ j, WeakStarTendsto (fun m => g (σ m) j) (F j) := by
-  sorry
+  -- the weight `w = (1 + ‖x‖)^{-3}` and the finite measure `μ = w · Leb`
+  set w : ℂ → ℝ := fun x => (1 + ‖x‖) ^ (-3 : ℝ) with hwdef
+  have hwpos : ∀ x, 0 < w x := fun x => Real.rpow_pos_of_pos (by positivity) _
+  have hwint : Integrable w := integrable_one_add_norm (by rw [Complex.finrank_real_complex]; norm_num)
+  have hwm : Measurable w := by
+    have : Continuous w := Continuous.rpow_const (continuous_const.add continuous_norm) fun x => Or.inl (by positivity)
+    exact this.measurable
+  set w' : ℂ → NNReal := fun x => (w x).toNNReal with hw'def
+  have hw'm : Measurable w' := hwm.real_toNNReal
+  set μ : Measure ℂ := volume.withDensity fun x => (w' x : ENNReal) with hμdef
+  haveI : IsFiniteMeasure μ := isFiniteMeasure_withDensity (by
+    have := hwint.lintegral_lt_top
+    simpa [hw'def, ENNReal.ofReal] using this.ne)
+  have hint : ∀ f : ℂ → ℝ, ∫ x, f x ∂μ = ∫ x, w x * f x := by
+    intro f
+    rw [hμdef, integral_withDensity_eq_integral_smul hw'm]
+    congr 1; ext x
+    rw [NNReal.smul_def, smul_eq_mul, hw'def, Real.coe_toNNReal _ (hwpos x).le]
+  have hac : volume ≪ μ := withDensity_absolutelyContinuous' hw'm.coe_nnreal_ennreal.aemeasurable
+    (Eventually.of_forall fun x => by simp [hw'def, hwpos x])
+  obtain ⟨σ, F, hσ, hFm, hFL, hlim⟩ := exists_L2_weak_subseq (μ := μ) g hg h01
+  -- `0 ≤ F ≤ 1` almost everywhere
+  have hbd01 : ∀ j, ∀ᵐ x ∂μ, 0 ≤ F j x ∧ F j x ≤ 1 := by
+    intro j
+    have hFi : Integrable (F j) μ := (hFL j).integrable one_le_two
+    have hind : ∀ S : Set ℂ, MeasurableSet S → MemLp (S.indicator (1 : ℂ → ℝ)) 2 μ := fun S hS =>
+      MemLp.of_bound ((measurable_const.indicator hS).aestronglyMeasurable) 1
+        (Eventually.of_forall fun x => by
+          by_cases hx : x ∈ S <;> simp [hx])
+    have hlimS : ∀ S : Set ℂ, MeasurableSet S →
+        Tendsto (fun m => ∫ x in S, g (σ m) j x ∂μ) atTop (𝓝 (∫ x in S, F j x ∂μ)) := by
+      intro S hS
+      have := hlim j _ (hind S hS)
+      have e : ∀ u : ℂ → ℝ, ∫ x, u x * S.indicator 1 x ∂μ = ∫ x in S, u x ∂μ := by
+        intro u; rw [← integral_indicator hS]; congr 1; ext x; by_cases hx : x ∈ S <;> simp [hx]
+      simpa only [e] using this
+    have hS0 : MeasurableSet {x | F j x < 0} := measurableSet_lt (hFm j) measurable_const
+    have hS1 : MeasurableSet {x | 1 < F j x} := measurableSet_lt measurable_const (hFm j)
+    have h0 : μ {x | F j x < 0} = 0 := by
+      have hge : 0 ≤ ∫ x in {x | F j x < 0}, F j x ∂μ :=
+        ge_of_tendsto (hlimS _ hS0) (Eventually.of_forall fun m => setIntegral_nonneg hS0 fun x _ => (h01 _ j x).1)
+      have hle : ∫ x in {x | F j x < 0}, -F j x ∂μ = 0 := by
+        refine le_antisymm ?_ (setIntegral_nonneg hS0 fun x hx => by simp only [mem_setOf_eq] at hx; linarith)
+        rw [integral_neg]; linarith
+      have hae := (setIntegral_eq_zero_iff_of_nonneg_ae ((ae_restrict_iff' hS0).2 (Eventually.of_forall
+        fun x hx => by simp only [mem_setOf_eq] at hx; simp only [Pi.zero_apply, Pi.neg_apply]; linarith)) hFi.neg.integrableOn).1 hle
+      have h' : ∀ᵐ x ∂μ, x ∉ {x | F j x < 0} := by
+        filter_upwards [(ae_restrict_iff' hS0).1 hae] with x hx hxS
+        have := hx hxS
+        simp only [Pi.zero_apply, Pi.neg_apply, neg_eq_zero] at hxS this
+        linarith
+      simpa using ae_iff.1 h'
+    have h1 : μ {x | 1 < F j x} = 0 := by
+      have hS1fin : μ {x | 1 < F j x} ≠ ⊤ := measure_ne_top _ _
+      have hle0 : ∫ x in {x | 1 < F j x}, F j x ∂μ ≤ μ.real {x | 1 < F j x} := by
+        refine le_of_tendsto (hlimS _ hS1) (Eventually.of_forall fun m => ?_)
+        calc ∫ x in {x | 1 < F j x}, g (σ m) j x ∂μ ≤ ∫ x in {x | 1 < F j x}, (1 : ℝ) ∂μ :=
+              setIntegral_mono_on (((MemLp.of_bound (hg (σ m) j).aestronglyMeasurable 1 (Eventually.of_forall fun x => by rw [Real.norm_eq_abs, abs_le]; constructor <;> linarith [(h01 (σ m) j x).1, (h01 (σ m) j x).2])).integrable one_le_two).integrableOn) (integrableOn_const hS1fin) hS1
+                (fun x _ => (h01 _ j x).2)
+          _ = _ := by simp
+      have hFi1 : IntegrableOn (fun x => F j x - 1) {x | 1 < F j x} μ := (hFi.sub (integrable_const 1)).integrableOn
+      have hz : ∫ x in {x | 1 < F j x}, (F j x - 1) ∂μ = 0 := by
+        refine le_antisymm ?_ (setIntegral_nonneg hS1 fun x hx => by simp only [mem_setOf_eq] at hx; linarith)
+        rw [integral_sub hFi.integrableOn (integrableOn_const hS1fin), setIntegral_const, smul_eq_mul, mul_one]
+        linarith
+      have hae := (setIntegral_eq_zero_iff_of_nonneg_ae ((ae_restrict_iff' hS1).2 (Eventually.of_forall
+        fun x hx => by simp only [mem_setOf_eq] at hx; simp only [Pi.zero_apply]; linarith)) hFi1).1 hz
+      have h' : ∀ᵐ x ∂μ, x ∉ {x | 1 < F j x} := by
+        filter_upwards [(ae_restrict_iff' hS1).1 hae] with x hx hxS
+        have := hx hxS
+        simp only [Pi.zero_apply] at hxS this
+        linarith
+      simpa using ae_iff.1 h'
+    have a0 : ∀ᵐ x ∂μ, 0 ≤ F j x := ae_iff.2 (by simpa [not_le] using h0)
+    have a1 : ∀ᵐ x ∂μ, F j x ≤ 1 := ae_iff.2 (by simpa [not_le] using h1)
+    filter_upwards [a0, a1] with x h0x h1x
+    exact ⟨h0x, h1x⟩
+  refine ⟨σ, F, hσ, hFm, fun j => hac.ae_le (hbd01 j), fun j φ hφ => ?_⟩
+  have hFb : ∀ᵐ x ∂volume, |F j x| ≤ 1 := by
+    filter_upwards [hac.ae_le (hbd01 j)] with x hx
+    rw [abs_le]; constructor <;> linarith [hx.1, hx.2]
+  have hgb : ∀ m x, |g (σ m) j x| ≤ 1 := fun m x => by
+    rw [abs_le]; constructor <;> linarith [(h01 (σ m) j x).1, (h01 (σ m) j x).2]
+  set φ' := hφ.1.mk φ with hφ'def
+  have hφφ' : φ =ᵐ[volume] φ' := hφ.1.ae_eq_mk
+  have hφ'm : Measurable φ' := hφ.1.stronglyMeasurable_mk.measurable
+  have hφ'i : Integrable φ' := hφ.congr hφφ'
+  have eg : ∀ u : ℂ → ℝ, ∫ x, u x * φ x = ∫ x, u x * φ' x := fun u =>
+    integral_congr_ae (by filter_upwards [hφφ'] with x hx; rw [hx])
+  show Tendsto (fun m => ∫ x, g (σ m) j x * φ x) atTop (𝓝 (∫ x, F j x * φ x))
+  simp only [eg]
+  -- the truncations
+  set T : ℕ → Set ℂ := fun N => {x | ‖x‖ < N ∧ |φ' x| ≤ N} with hTdef
+  have hTm : ∀ N, MeasurableSet (T N) := fun N =>
+    (measurableSet_lt continuous_norm.measurable measurable_const).inter
+      (measurableSet_le (continuous_abs.measurable.comp hφ'm) measurable_const)
+  set φN : ℕ → ℂ → ℝ := fun N => (T N).indicator φ' with hφNdef
+  have hφNm : ∀ N, Measurable (φN N) := fun N => hφ'm.indicator (hTm N)
+  have hφNi : ∀ N, Integrable (φN N) := fun N => hφ'i.indicator (hTm N)
+  have hdiff : Tendsto (fun N => ∫ x, |φ' x - φN N x|) atTop (𝓝 0) := by
+    have := tendsto_integral_of_dominated_convergence (F := fun N x => |φ' x - φN N x|) (f := fun _ => 0)
+      (fun x => |φ' x|) (fun N => (continuous_abs.measurable.comp (hφ'm.sub (hφNm N))).aestronglyMeasurable)
+      hφ'i.abs (fun N => Eventually.of_forall fun x => by
+        rw [Real.norm_eq_abs, abs_abs]
+        by_cases hx : x ∈ T N
+        · simp [hφNdef, hx]
+        · simp [hφNdef, hx])
+      (Eventually.of_forall fun x => by
+        obtain ⟨N₀, hN₀⟩ := exists_nat_gt (max ‖x‖ |φ' x|)
+        refine tendsto_const_nhds.congr' ?_
+        filter_upwards [eventually_ge_atTop N₀] with N hN
+        have hN' : (N₀ : ℝ) ≤ N := by exact_mod_cast hN
+        have hx : x ∈ T N := ⟨by linarith [le_max_left ‖x‖ |φ' x|], by linarith [le_max_right ‖x‖ |φ' x|]⟩
+        simp [hφNdef, hx])
+    simpa using this
+  -- each truncation divided by the weight is a bounded test function in `L²(μ)`
+  have hψ : ∀ N : ℕ, MemLp (fun x => φN N x / w x) 2 μ := by
+    intro N
+    refine MemLp.of_bound ((hφNm N).div hwm).aestronglyMeasurable ((N : ℝ) * (1 + N) ^ 3)
+      (Eventually.of_forall fun x => ?_)
+    rw [Real.norm_eq_abs]
+    by_cases hx : x ∈ T N
+    · obtain ⟨hx1, hx2⟩ := hx
+      have hw1 : 1 / w x = (1 + ‖x‖) ^ 3 := by
+        rw [hwdef]; simp only
+        rw [Real.rpow_neg (by positivity), one_div, inv_inv]
+        norm_cast
+      have hφx : φN N x = φ' x := by simp [hφNdef, T, hx1, hx2]
+      rw [hφx, div_eq_mul_one_div, hw1, abs_mul, abs_of_nonneg (by positivity : (0 : ℝ) ≤ (1 + ‖x‖) ^ 3)]
+      have : (1 + ‖x‖) ^ 3 ≤ (1 + (N : ℝ)) ^ 3 := by gcongr
+      calc |φ' x| * (1 + ‖x‖) ^ 3 ≤ N * (1 + (N : ℝ)) ^ 3 := by
+            exact mul_le_mul hx2 this (by positivity) (by positivity)
+        _ = _ := rfl
+    · have : φN N x = 0 := by simp [hφNdef, hx]
+      rw [this, zero_div, abs_zero]; positivity
+  have hconvN : ∀ N : ℕ, Tendsto (fun m => ∫ x, g (σ m) j x * φN N x) atTop (𝓝 (∫ x, F j x * φN N x)) := by
+    intro N
+    have := hlim j _ (hψ N)
+    have e : ∀ u : ℂ → ℝ, ∫ x, u x * (φN N x / w x) ∂μ = ∫ x, u x * φN N x := by
+      intro u; rw [hint]; congr 1; ext x
+      have := (hwpos x).ne'
+      field_simp
+    simpa only [e] using this
+  -- `ε/3`
+  rw [Metric.tendsto_atTop]
+  intro ε hε
+  obtain ⟨N, hN⟩ := (Metric.tendsto_atTop.1 hdiff) (ε / 3) (by positivity)
+  obtain ⟨M, hM⟩ := (Metric.tendsto_atTop.1 (hconvN N)) (ε / 3) (by positivity)
+  refine ⟨M, fun m hm => ?_⟩
+  have hNN := hN N le_rfl
+  have hMM := hM m hm
+  rw [Real.dist_eq, sub_zero, abs_of_nonneg (integral_nonneg fun x => abs_nonneg _)] at hNN
+  rw [Real.dist_eq] at hMM ⊢
+  have hdi : Integrable (fun x => |φ' x - φN N x|) := (hφ'i.sub (hφNi N)).abs
+  have bnd : ∀ u : ℂ → ℝ, Measurable u → (∀ᵐ x ∂volume, |u x| ≤ 1) →
+      |(∫ x, u x * φ' x) - ∫ x, u x * φN N x| ≤ ∫ x, |φ' x - φN N x| := by
+    intro u hu hu1
+    have hu1' : ∀ᵐ x ∂volume, ‖u x‖ ≤ 1 := by simpa [Real.norm_eq_abs] using hu1
+    have i1 : Integrable (fun x => u x * φ' x) := hφ'i.bdd_mul hu.aestronglyMeasurable hu1'
+    have i2 : Integrable (fun x => u x * φN N x) := (hφNi N).bdd_mul hu.aestronglyMeasurable hu1'
+    have e : (∫ x, u x * φ' x) - ∫ x, u x * φN N x = ∫ x, (u x * φ' x - u x * φN N x) := (integral_sub i1 i2).symm
+    rw [e, ← Real.norm_eq_abs]
+    refine norm_integral_le_of_norm_le hdi ?_
+    filter_upwards [hu1] with x hx
+    rw [Real.norm_eq_abs, ← mul_sub, abs_mul]
+    exact mul_le_of_le_one_left (abs_nonneg _) hx
+  have b1 := bnd _ (hg (σ m) j) (Eventually.of_forall (hgb m))
+  have b2 : |(∫ x, F j x * φN N x) - ∫ x, F j x * φ' x| ≤ ∫ x, |φ' x - φN N x| := by
+    rw [abs_sub_comm]; exact bnd _ (hFm j) hFb
+  calc |(∫ x, g (σ m) j x * φ' x) - ∫ x, F j x * φ' x|
+      ≤ |(∫ x, g (σ m) j x * φ' x) - ∫ x, g (σ m) j x * φN N x| +
+        |(∫ x, g (σ m) j x * φN N x) - ∫ x, F j x * φN N x| + |(∫ x, F j x * φN N x) - ∫ x, F j x * φ' x| := by
+        have := abs_sub_le (∫ x, g (σ m) j x * φ' x) (∫ x, g (σ m) j x * φN N x) (∫ x, F j x * φ' x)
+        have := abs_sub_le (∫ x, g (σ m) j x * φN N x) (∫ x, F j x * φN N x) (∫ x, F j x * φ' x)
+        linarith
+    _ < ε / 3 + ε / 3 + ε / 3 := by linarith
+    _ = ε := by ring
 
 /-- The convolution `u ⋆ κ` (in the form `x ↦ ∫ u(x + w) κ(w) dw`) of an a.e.-bounded measurable `u` with an integrable kernel:
 a.e.-strongly measurable, bounded by `‖κ‖₁` everywhere, and equal to `∫ u(y) κ(y − x) dy`. -/

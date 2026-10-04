@@ -3083,6 +3083,7 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 -- FS131-I2j: children added by the tenth wave-2 implementer
 #print axioms HadwigerNelson.Plane.exists_ball_diff_le_avg
 #print axioms HadwigerNelson.Plane.conv_props
+#print axioms HadwigerNelson.Plane.exists_L2_weak_subseq
 
 #eval IO.println "=== PURCHASED ==="
 
