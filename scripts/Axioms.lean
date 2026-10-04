@@ -2749,6 +2749,22 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.angleIcc_half_turn
+#print axioms HadwigerNelson.Plane.ArcMap.norm_rot_sub
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_eq_rot
+#print axioms HadwigerNelson.Plane.ArcMap.mem_ringArc_of_lens
+#print axioms HadwigerNelson.Plane.ArcMap.l60_cap_mem_closedBall
+#print axioms HadwigerNelson.Plane.ArcMap.l60_cap_general
+#print axioms HadwigerNelson.Plane.ArcMap.dist_le_one_of_touch
+#print axioms HadwigerNelson.Plane.ArcMap.l60_tile_dist_ne_one
+#print axioms HadwigerNelson.Plane.ArcMap.l60_side_tile
+#print axioms HadwigerNelson.Plane.ArcMap.cos_nonpos_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.mem_angleIcc_of_two_cos
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_ringArc_diff_finite
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_subset_Γ_of_finite
+#print axioms HadwigerNelson.Plane.ArcMap.ringArcsWithin_of_Γ_subset
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_sector_of_mem_coneAt_region
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_region_nonempty
 #print axioms HadwigerNelson.Plane.ArcMap.n2_env_away_height
 #print axioms HadwigerNelson.Plane.ArcMap.n2_env_away_core
 #print axioms HadwigerNelson.Plane.ArcMap.eq_polar_of_frameX_pos

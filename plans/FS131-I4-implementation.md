@@ -793,6 +793,52 @@ rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T195613Z-
 29 distinct `declaration uses sorry` (BaseSteps 7, Contact 10, UnitArc 12), no other warning. **For the merge with `fs131-w4c`**: if FS131-IC2
 writes its own copy, `tools/fs131_qa1_dupes.py` decides; this one's hypotheses are the plan's.
 
+## Stage 24 — SAVED (FS131-I4i): `l60_le`, `noBoth`, `l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners` — engine 6 not needed; 14 `sorry` left in `BaseSteps` and `UnitArc`
+
+**L60 needs no chain (engine 6 is not written).** The crossing engine `Valid.dist_lt_or_gt_of_isPreconnected` on the open arc, which lies in the
+closure of each side colour's class, does all of L60-LE and L60-EQ: a point of a side colour's class within `1` of one interior point of the arc is
+within `1` of every interior point (and, by continuity, `≤ 1` of the ends). Route notes against the plan (§ 13.1 engine 6, § 13.5): its H
+child is replaced by these short arguments, so the plan's critical path through engine 6 is gone.
+- **`l60_le`**: if `ℓ > 60°`, two interior points of the arc `t ∈ (60°, min(ℓ, 180°))` apart are more than `1` apart (`dist_ringPt_ringPt_cmp_one`); an
+  outer-class point near the first is within `1` of the second — contradiction.
+- **`l60_eq_inner` / `l60_eq_outer`**: a side tile touching the open arc lies in `B(touch point, 1)` (`IsTile.subset_ball`), so within `1` of the closed
+  arc (`dist_le_one_of_touch`); the lens of the ends meets `ω(P)` only in the arc (`mem_ringArc_of_lens`, rotating `mem_l60_arc0` by `norm_rot_sub`), which
+  lies in `Γ`, so the tile misses `ω(P)` and, being connected, stays on its side (`IsPreconnected.subset_left_of_subset_union`); outside, the closed cap
+  `B̄(A,1) ∩ B̄(B,1) ∖ B̄(P,1) ⊆ B̄(C,1)` (`l60_cap_mem_closedBall`, the closed form of I4h's `l60_cap_mem_ball`, rotated by `l60_cap_general`).
+- **`l60_eq_corners`**: over the two containments, `cos_nonneg_of_mem_coneAt` (wave 3) and its new mirror `cos_nonpos_of_mem_coneAt` at the centre and the
+  other end, and `mem_angleIcc_of_two_cos` (two closed half-turns `0 < a₂ − a₁ < π` meet in `[a₂ − 90°, a₁ + 90°]`, by
+  `sin(a₂ − a₁) cos(β − θ) = sin(a₂ − θ) cos(β − a₁) + sin(θ − a₁) cos(β − a₂)` into `mem_angleIcc_of_cos_nonneg`). The outer cone at each end reads `B̄(P, 1)`'s
+  complement and the other end's disc; `C` is not needed for the cones.
+- **`noBoth`**: § 4.19's route in the sector chart. The side colours differ (`disj_lifts`), the side cones hold colours `d₁`, `d₂ ∉ {c, c'}`
+  (`ringArc_sideCone_other`); at most three colours forces `d₁ = d₂ = d`; in the chart (`localSectors`, a germ since two colours) each of the two side
+  directions lies in the cone of a `d`-sector (`IsSectorChart.exists_sector_of_mem_coneAt_region`, new in `Sectors`); one sector holding both would hold a
+  half-turn in its open interval (`angleIcc_half_turn`), hence the inner or the outer colour's direction (`coneAt_region_nonempty`, new in `Sectors`),
+  against `BranchGerms.Mono.disjoint`; so `d` has two sectors at every radius `≤ r₀` — a repeated colour.
+
+**Moves and imports.** `l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners` (statements and docstrings verbatim, checked by script against `3f7ea033`) now sit
+after the `l60Frag` helpers they read (`mem_l60_arc0`), under a new heading "L60-EQ: the containments and the corner cones"; `l60_eq_third` is unmoved.
+`UnitArc` now imports `Plane/ValidMap/Sectors` (no cycle; `ARCHITECTURE.md`'s Imports cell updated, `tools/check_architecture.py` PASS).
+
+**Axioms** (`data/fs131/i4/axioms-i4i-24.lean` → `axioms-i4i-24.txt`, against this stage's build's oleans, not a gate log): the five leaves, engine 2 and its
+two children, `l60_eq_third` (no longer over `sorry`: wave 3's statements it reads are proved since `main`'s merge), and 13 further children — 22 records, all
+`[propext, Classical.choice, Quot.sound]`, no `sorryAx`. **Records**: `tools/fs131_i4_addrecords.py` — 426 names, 16 added, 0 missing;
+`tools/fs131_k4_decls.py --check` exit 0. **No statement changed**, no new axiom, no `native_decide`. Build: "build: OK — 444 of 444 batches, 5 module(s)
+rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T201515Z-2044743.log`; driver log `data/fs131/i4/build-i4i-stage24.log`): 24 distinct
+`declaration uses sorry` (BaseSteps 7, Contact 10, UnitArc 7), no other warning.
+
+**Re-pricing**: engine 2 (planned M) and the five leaves (planned M, M, M over an H engine, M, M) cost about 90k tokens together, two iteration passes each;
+reading for the structure the crossing engine already gives was the saving.
+
+**What is left (14 in this job's files), in the order I would take it.**
+- `pair_P'` (BaseSteps) is the nearest: at `dist u u' = 1`, every interior point near `u` has a colour of `c(u) = c(u')`, so by N-E1 (`ne1_region`) `ω(u')`
+  near `u` lies in `Γ`; the work is a sub-arc of `ω(u')` from `u` with constant sides (a chart branch at `u` equal to `ω(u')`, by
+  `Arc.finite_inter_sphere_or_eq_circ`, and its two adjacent sectors), then `noBoth` at `u'` against degree 3 with three colours.
+- `a4six` over engine 7 (`exists_coveringPoint_of_window`) and `exists_shift_avoiding`; then `flankQ_upper`/`flankQ_lower` over engine 5.
+- The bends (engines 1–3 and the clearness; N2-ENV is sorry-free); `nb4p` (re-read FS110-NB-4 first).
+- `BaseSteps`' `pair_i`, `pair_ii`, `fail_leavingCentre`, `fail_colours`, `anti` read S–V's votes at a cubic trichromatic vertex: each needs the three
+  germs at `u` from its chart (degree 3) and the second-order vote of a branch against `ω(q)`; a shared child "the germs of a cubic trichromatic
+  vertex and their votes" is the first thing to state. `n3_end` last, after `fs131-w4c` merges (`woodallCone`, `exists_merge`).
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -892,3 +938,17 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   `ArcMap.sq_norm_sub_ofReal_mul_e`, `ArcMap.n2_env_near_core`, `ArcMap.n2_env_near_away_core`, `ArcMap.n2_env_data`, `ArcMap.toward_dir45`,
   `ArcMap.n2_env_toward_beside`, `ArcMap.n2_env_toward_core`, `ArcMap.frame_polar_add`, `ArcMap.exists_dir_of_within`, `ArcMap.n2_env_away_height`,
   `ArcMap.n2_env_away_core`, `ArcMap.n2_env_away_end`, `ArcMap.eq_polar_of_frameX_pos`.
+
+## Theorems this phase proved (FS131-I4i's; axioms from `#print axioms` against the stage-24 build's oleans, `data/fs131/i4/axioms-i4i-24.txt`, not a gate log)
+
+- FS114-L60-LE, its first clause: `HadwigerNelson.Plane.ArcMap.l60_le` — `[propext, Classical.choice, Quot.sound]`. Read against § 3.2: same statement (a unit arc
+  with constant sides has `θ₂ − θ₁ ≤ π/3`).
+- FS112-N3-NOBOTH: `ArcMap.noBoth` — the standard three. Read against § 3.2: same statement, with the domain hypothesis (the centre of a both-kind unit arc, in the
+  domain, carries at least four colours or a repeated colour).
+- FS114-L60-LE, L60-EQ: `ArcMap.l60_eq_inner`, `ArcMap.l60_eq_outer`, `ArcMap.l60_eq_corners` — the standard three each. Read against § 12.2: same statements
+  (inner tiles in `Reul(P, A, B)`; outer tiles in `Reul(A, B, C) ∖ B̄(P, 1)`; the four corner cones). `ArcMap.l60_eq_third` (I4e's) now reads the standard three.
+- Engine 2: `ArcMap.ringArcsWithin_of_Γ_subset` — the standard three (no row; the moves' "no unit arc created" clause).
+- Children (no row), the standard three: `ArcMap.mem_closure_ringArc_diff_finite`, `ArcMap.ringArc_subset_Γ_of_finite` (Basic);
+  `ArcMap.IsSectorChart.exists_sector_of_mem_coneAt_region`, `ArcMap.coneAt_region_nonempty` (Sectors); `ArcMap.angleIcc_half_turn`, `ArcMap.norm_rot_sub`,
+  `ArcMap.ringPt_eq_rot`, `ArcMap.mem_ringArc_of_lens`, `ArcMap.l60_cap_mem_closedBall`, `ArcMap.l60_cap_general`, `ArcMap.dist_le_one_of_touch`,
+  `ArcMap.l60_tile_dist_ne_one`, `ArcMap.l60_side_tile`, `ArcMap.cos_nonpos_of_mem_coneAt`, `ArcMap.mem_angleIcc_of_two_cos` (UnitArc).

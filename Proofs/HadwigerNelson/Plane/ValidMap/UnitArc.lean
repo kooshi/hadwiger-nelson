@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Basic
 import Mathlib.Analysis.Real.Pi.Bounds
 import Proofs.HadwigerNelson.Plane.RingGerm
+import Proofs.HadwigerNelson.Plane.ValidMap.Sectors
 
 /-!
 # The unit-arc calculus (FS-112), first rows
@@ -443,13 +444,169 @@ theorem n2_sign (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' d : Fin k} (h
 /-- **FS114-L60-LE**, its first clause: a unit arc with constant sides has angular length at most `60°` (its ends lie in the
 closure of the outer colour's tiles along it, a chain of diameter at most `1`). -/
 theorem l60_le (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c') : θ₂ - θ₁ ≤ π / 3 := by
-  sorry
+  -- the open arc lies in the closure of the outer class; an outer point near one interior point of the arc is within `1` of
+  -- every interior point (the crossing engine), and two interior points more than `60°` apart are more than `1` apart
+  by_contra hlt
+  push Not at hlt
+  have hπ := Real.pi_pos
+  have hmin : π / 3 < min (θ₂ - θ₁) π := lt_min hlt (by linarith)
+  set t := (π / 3 + min (θ₂ - θ₁) π) / 2 with ht
+  have ht1 : π / 3 < t := by linarith
+  have htℓ : t < θ₂ - θ₁ := by linarith [min_le_left (θ₂ - θ₁) π]
+  have htπ : t ≤ π := by linarith [min_le_right (θ₂ - θ₁) π]
+  set θ := θ₁ + (θ₂ - θ₁ - t) / 2 with hθ
+  have hθm : θ ∈ Ioo θ₁ θ₂ := ⟨by linarith, by linarith⟩
+  have hφm : θ + t ∈ Ioo θ₁ θ₂ := ⟨by linarith, by linarith⟩
+  have habs : |θ - (θ + t)| = t := by rw [show θ - (θ + t) = -t by ring, abs_neg, abs_of_pos (by linarith)]
+  have hfar : 1 < dist (ringPt P θ) (ringPt P (θ + t)) :=
+    ((dist_ringPt_ringPt_cmp_one P (by rw [habs]; exact htπ)).2.2).mpr (by rw [habs]; exact ht1)
+  have hcl : ∀ φ ∈ Ioo θ₁ θ₂, ringPt P φ ∈ closure (F.region c') := by
+    intro φ hφ
+    have : c' ∈ F.outerColours P (ringPt P φ) := by rw [(hA.2.2 φ hφ).2]; rfl
+    exact closure_mono sdiff_subset this
+  obtain ⟨z, hz, hzd⟩ := Metric.mem_closure_iff.mp (hcl θ hθm)
+    (min (dist (ringPt P θ) (ringPt P (θ + t)) - 1) 1) (lt_min (by linarith) one_pos)
+  have hcont : Continuous fun φ : ℝ => ringPt P φ := by unfold ringPt e; fun_prop
+  have hS : IsPreconnected ((fun φ : ℝ => ringPt P φ) '' Ioo θ₁ θ₂) := isPreconnected_Ioo.image _ hcont.continuousOn
+  rcases hF.dist_lt_or_gt_of_isPreconnected hz hS (by rintro _ ⟨φ, hφ, rfl⟩; exact hcl φ hφ) with h | h
+  · have h1 := h _ ⟨θ + t, hφm, rfl⟩
+    have := dist_triangle (ringPt P θ) z (ringPt P (θ + t))
+    linarith [min_le_left (dist (ringPt P θ) (ringPt P (θ + t)) - 1) 1]
+  · have h1 := h _ ⟨θ, hθm, rfl⟩
+    rw [dist_comm] at h1
+    linarith [min_le_right (dist (ringPt P θ) (ringPt P (θ + t)) - 1) 1]
+
+/-- Two points `x`, `x + π` of an angular interval of length at most one turn: one of the two open half-turns between them lies in its
+open interior. -/
+theorem angleIcc_half_turn {a b x : ℝ} (hb : b ≤ a + 2 * π) (h1 : x ∈ angleIcc a b) (h2 : x + π ∈ angleIcc a b) :
+    (∀ y, x < y → y < x + π → y ∈ angleIoo a b) ∨ ∀ y, x + π < y → y < x + 2 * π → y ∈ angleIoo a b := by
+  have hπ := Real.pi_pos
+  obtain ⟨m₁, h11, h12⟩ := mem_iUnion.mp h1
+  obtain ⟨m₂, h21, h22⟩ := mem_iUnion.mp h2
+  have hk1 : (m₁ : ℝ) < m₂ + 1 := by
+    by_contra hc; push Not at hc
+    nlinarith [mul_le_mul_of_nonneg_left hc (by positivity : (0 : ℝ) ≤ 2 * π)]
+  have hk2 : (m₂ : ℝ) < m₁ + 2 := by
+    by_contra hc; push Not at hc
+    nlinarith [mul_le_mul_of_nonneg_left hc (by positivity : (0 : ℝ) ≤ 2 * π)]
+  have hk1' : m₁ < m₂ + 1 := by exact_mod_cast hk1
+  have hk2' : m₂ < m₁ + 2 := by exact_mod_cast hk2
+  rcases (show m₂ = m₁ ∨ m₂ = m₁ + 1 by omega) with h | h
+  · left
+    subst h
+    intro y hy1 hy2
+    exact mem_iUnion.mpr ⟨m₂, by linarith, by linarith⟩
+  · right
+    subst h
+    intro y hy1 hy2
+    push_cast at h21 h22
+    exact mem_iUnion.mpr ⟨m₁ + 1, by push_cast; linarith, by push_cast; linarith⟩
 
 /-- **FS112-N3-NOBOTH**: the centre of a both-kind unit arc, a point of the domain, carries at least four colours or a repeated
 colour. (`P ∈ F.dom` is the hypothesis FS116-V5-U1's last clauses need, wave 3's finding.) -/
 theorem noBoth (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} (hP : P ∈ F.dom) (hA : F.BothKind P θ₁ θ₂) :
     4 ≤ (F.coloursAt P).ncard ∨ F.HasRepeatedColour P := by
-  sorry
+  obtain ⟨c, c', hR, hc, hc'⟩ := hA
+  have hπ := Real.pi_pos
+  have h12 : θ₁ < θ₂ := hR.1
+  have hfac := ringArc_cone_inner hF hR
+  have haway := ringArc_cone_outer hF hR
+  obtain ⟨γ, hγ⟩ := coneAt_region_nonempty hc
+  obtain ⟨γ', hγ'⟩ := coneAt_region_nonempty hc'
+  -- the two side colours differ: their cones face the arc and face away
+  have hcc' : c ≠ c' := by
+    rintro rfl
+    obtain ⟨i, hi1, hi2⟩ := mem_iUnion.mp (hfac hγ)
+    obtain ⟨j, hj1, hj2⟩ := mem_iUnion.mp (haway hγ)
+    exact disj_lifts h12 i j ⟨hi1, hi2⟩ ⟨hj1, hj2⟩
+  -- the two side cones hold colours other than `c`, `c'`
+  obtain ⟨d₁, hd₁c, hd₁c', hd₁⟩ := F.ringArc_sideCone_other hF hP hR (β := (θ₁ + θ₂) / 2 - π / 2)
+    (Or.inl (Ioo_subset_angleIoo _ _ ⟨by linarith, by linarith⟩))
+  obtain ⟨d₂, hd₂c, hd₂c', hd₂⟩ := F.ringArc_sideCone_other hF hP hR (β := (θ₁ + θ₂) / 2 + π / 2)
+    (Or.inr (Ioo_subset_angleIoo _ _ ⟨by linarith, by linarith⟩))
+  by_cases h4 : 4 ≤ (F.coloursAt P).ncard
+  · exact Or.inl h4
+  right
+  -- at most three colours: the two side cones carry one colour `d`
+  have hd : d₁ = d₂ := by
+    by_contra hne
+    apply h4
+    have hd₁z : d₁ ∈ F.coloursAt P := mem_closure_of_mem_coneAt hd₁
+    have hd₂z : d₂ ∈ F.coloursAt P := mem_closure_of_mem_coneAt hd₂
+    classical
+    have hcard : ({c, c', d₁, d₂} : Finset (Fin k)).card = 4 := by
+      rw [Finset.card_insert_of_notMem, Finset.card_insert_of_notMem, Finset.card_pair hne]
+      · simp [Ne.symm hd₁c', Ne.symm hd₂c']
+      · simp [hcc', Ne.symm hd₁c, Ne.symm hd₂c]
+    have hsub : (↑({c, c', d₁, d₂} : Finset (Fin k)) : Set (Fin k)) ⊆ F.coloursAt P := by
+      intro x hx
+      simp only [Finset.coe_insert, Finset.coe_singleton, mem_insert_iff, mem_singleton_iff] at hx
+      rcases hx with rfl | rfl | rfl | rfl <;> assumption
+    have := Set.ncard_le_ncard hsub (Set.toFinite _)
+    rwa [Set.ncard_coe_finset, hcard] at this
+  subst hd
+  -- the sector chart at `P`; it has a germ, since `P` carries two colours
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hP
+  have hn : 0 < n := by
+    by_contra h0
+    have hn0 : n = 0 := by omega
+    have hle := hC.ncard_coloursAt_le
+    rw [hn0] at hle
+    have h2 : 2 ≤ (F.coloursAt P).ncard := by
+      have hs : ({c, c'} : Set (Fin k)) ⊆ F.coloursAt P := by
+        intro x hx
+        rcases hx with rfl | rfl
+        · exact hc
+        · exact hc'
+      have := Set.ncard_le_ncard hs (Set.toFinite _)
+      rwa [Set.ncard_pair hcc'] at this
+    have h1 : max 0 1 = 1 := rfl
+    rw [h1] at hle
+    omega
+  refine ⟨d₁, ?_⟩
+  filter_upwards [Ioc_mem_nhdsGT hC.pos] with r hr
+  have hM := hC.sorted.mono
+  obtain ⟨i₁, hi₁, hs₁⟩ := hC.exists_sector_of_mem_coneAt_region hn hr hd₁
+  obtain ⟨i₂, hi₂, hs₂⟩ := hC.exists_sector_of_mem_coneAt_region hn hr hd₂
+  have hsec : ∀ i, G.sector P r i ⊆ F.region d₁ → G.sector P r i ∈ F.sectorsOf P r d₁ := fun i hi =>
+    ⟨(hC.isSector_iff hn hr).mpr ⟨i, rfl⟩, fun z hz => (hi hz).2⟩
+  -- a sector of another colour `e` at a direction `δ` strictly inside sector `i₁`'s interval is impossible
+  have hno : ∀ {e : Fin k} {δ : ℝ}, e ≠ d₁ → δ ∈ coneAt (F.region e) P →
+      δ ∉ angleIoo (G.β i₁) (G.nextβ i₁) := by
+    intro e δ hne hδ hδo
+    obtain ⟨j, hδj, hsj⟩ := hC.exists_sector_of_mem_coneAt_region hn hr hδ
+    have hji : i₁ ≠ j := by
+      rintro rfl
+      obtain ⟨z, hz⟩ := hC.sector_nonempty hr i₁
+      exact hne ((hsj hz).2.symm.trans (hs₁ hz).2)
+    rw [hC.cone r hr j] at hδj
+    exact disjoint_left.mp (hM.disjoint hji) hδj hδo
+  by_cases hii : i₁ = i₂
+  · exfalso
+    subst hii
+    rw [hC.cone r hr i₁] at hi₁ hi₂
+    rcases angleIcc_half_turn (hM.nextβ_le_add i₁) hi₁
+        (by rwa [show (θ₁ + θ₂) / 2 - π / 2 + π = (θ₁ + θ₂) / 2 + π / 2 by ring]) with hcase | hcase
+    · -- the facing half-turn: the inner colour's direction
+      obtain ⟨l, hl1, hl2⟩ := mem_iUnion.mp (hfac hγ)
+      refine hno (Ne.symm hd₁c) hγ ?_
+      obtain ⟨q, hq1, hq2⟩ := mem_iUnion.mp (hcase (γ - 2 * π * l) (by linarith) (by linarith))
+      exact mem_iUnion.mpr ⟨q + l, by push_cast; linarith, by push_cast; linarith⟩
+    · -- the away half-turn: the outer colour's direction
+      obtain ⟨l, hl1, hl2⟩ := mem_iUnion.mp (haway hγ')
+      refine hno (Ne.symm hd₁c') hγ' ?_
+      obtain ⟨q, hq1, hq2⟩ := mem_iUnion.mp (hcase (γ' - 2 * π * l) (by linarith) (by linarith))
+      exact mem_iUnion.mpr ⟨q + l, by push_cast; linarith, by push_cast; linarith⟩
+  · -- two distinct sectors of the colour `d`
+    have hne : G.sector P r i₁ ≠ G.sector P r i₂ := by
+      intro h
+      obtain ⟨z, hz⟩ := hC.sector_nonempty hr i₁
+      exact disjoint_left.mp (hC.disjoint r hr i₁ i₂ hii) hz (h ▸ hz)
+    calc (2 : ℕ∞) = ({G.sector P r i₁, G.sector P r i₂} : Set (Set ℂ)).encard := (encard_pair hne).symm
+      _ ≤ _ := encard_le_encard (by
+          rintro S (rfl | rfl)
+          · exact hsec i₁ hs₁
+          · exact hsec i₂ hs₂)
 
 /-! ## FS112-U1, its shadow clause -/
 
@@ -575,32 +732,6 @@ theorem u1_shadow {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc
 /-- `Reul(X, Y, Z)`: the intersection of the closed unit discs about `X`, `Y`, `Z` (a Reuleaux triangle of width `1` when the three
 points are pairwise `1` apart). -/
 def reul (X Y Z : ℂ) : Set ℂ := closedBall X 1 ∩ closedBall Y 1 ∩ closedBall Z 1
-
-/-- **FS114-L60-LE**, L60-EQ, the inner side: at `ℓ = 60°` every tile of the inner colour touching the open arc from inside lies in
-`Reul(P, A, B)` (`A`, `B` the arc's ends). -/
-theorem l60_eq_inner (hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c')
-    {T : Set ℂ} (hT : F.TileOf c T) (htouch : ∃ θ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P θ ∈ closure (T ∩ ball P 1)) :
-    T ⊆ reul P (ringPt P θ₁) (ringPt P (θ₁ + π / 3)) := by
-  sorry
-
-/-- **FS114-L60-LE**, L60-EQ, the outer side: at `ℓ = 60°` every tile of the outer colour touching the open arc from outside lies in
-the Reuleaux cap `Reul(A, B, C) ∖ B̄(P, 1)`, `C = A + B − P`. -/
-theorem l60_eq_outer (hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c')
-    {T : Set ℂ} (hT : F.TileOf c' T) (htouch : ∃ θ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P θ ∈ closure (T \ closedBall P 1)) :
-    T ⊆ reul (ringPt P θ₁) (ringPt P (θ₁ + π / 3)) (ringPt P θ₁ + ringPt P (θ₁ + π / 3) - P) \ closedBall P 1 := by
-  sorry
-
-/-- **FS114-L60-LE**, L60-EQ at the ends: such inner tiles approach the end `A = r(θ₁)` only within the corner cone
-`[θ₁ + 90°, θ₁ + 210°]` (120°) and outer ones within `[θ₁ + 30°, θ₁ + 90°]` (60°) — together the closed half-plane facing the other end;
-at `B = r(θ₁ + 60°)` the mirror cones `[θ₁ + 210°, θ₁ + 330°]` and `[θ₁ − 30°, θ₁ + 30°]`. -/
-theorem l60_eq_corners (hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c') :
-    (∀ T, F.TileOf c T → (∃ θ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P θ ∈ closure (T ∩ ball P 1)) →
-      coneAt T (ringPt P θ₁) ⊆ angleIcc (θ₁ + π / 2) (θ₁ + 7 * π / 6) ∧
-        coneAt T (ringPt P (θ₁ + π / 3)) ⊆ angleIcc (θ₁ + 7 * π / 6) (θ₁ + 11 * π / 6)) ∧
-    ∀ T, F.TileOf c' T → (∃ θ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P θ ∈ closure (T \ closedBall P 1)) →
-      coneAt T (ringPt P θ₁) ⊆ angleIcc (θ₁ + π / 6) (θ₁ + π / 2) ∧
-        coneAt T (ringPt P (θ₁ + π / 3)) ⊆ angleIcc (θ₁ - π / 6) (θ₁ + π / 6) := by
-  sorry
 
 /-- **FS114-L60-LE**, L60-EQ, "each end is a vertex carrying a third tile": at each end some tile approaches from the open half-plane
 facing away from the other end (so it is neither an inner nor an outer tile of the arc, by `l60_eq_corners`). -/
@@ -1008,6 +1139,281 @@ theorem l60_cap_mem_ball {x : ℂ} (h1 : ‖x - 1‖ < 1) (h2 : ‖x - e (π / 3
     simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.one_re, Complex.one_im, er, ei]
     nlinarith
   nlinarith [norm_nonneg (x - (1 + e (π / 3)))]
+
+/-! ### L60-EQ: the containments and the corner cones, over the crossing engine (no chain needed) -/
+
+/-- Rotating about `P` by `−θ` is an isometry: `‖(z − P) ē(θ) − w‖ = ‖z − (P + w e(θ))‖`. -/
+theorem norm_rot_sub (P z w : ℂ) (θ : ℝ) : ‖(z - P) * starRingEnd ℂ (e θ) - w‖ = ‖z - (P + w * e θ)‖ := by
+  have hce := conj_e_mul_e θ
+  have : z - (P + w * e θ) = ((z - P) * starRingEnd ℂ (e θ) - w) * e θ := by
+    calc z - (P + w * e θ) = (z - P) * (e θ * starRingEnd ℂ (e θ)) - w * e θ := by rw [hce]; ring
+      _ = _ := by ring
+  rw [this, norm_mul, norm_e, mul_one]
+
+/-- `ringPt P θ = P + 1 · e θ` and `ringPt P (θ + π/3) = P + e(π/3) e θ`, the two ends in the rotated frame. -/
+theorem ringPt_eq_rot (P : ℂ) (θ : ℝ) : ringPt P θ = P + 1 * e θ ∧ ringPt P (θ + π / 3) = P + e (π / 3) * e θ := by
+  refine ⟨by rw [ringPt, one_mul], ?_⟩
+  rw [ringPt, show θ + π / 3 = π / 3 + θ by ring, e_add]
+
+/-- **The lens of a `60°` arc's ends meets `ω(P)` in the arc**: a point of `ω(P)` within `1` of both ends lies on `r([θ₁, θ₁ + 60°])`. -/
+theorem mem_ringArc_of_lens {P z : ℂ} {θ₁ : ℝ} (h0 : dist z P = 1) (h1 : dist z (ringPt P θ₁) ≤ 1)
+    (h2 : dist z (ringPt P (θ₁ + π / 3)) ≤ 1) : z ∈ ringArc P θ₁ (θ₁ + π / 3) := by
+  set x := (z - P) * starRingEnd ℂ (e θ₁) with hx
+  obtain ⟨hA, hB⟩ := ringPt_eq_rot P θ₁
+  have hx0 : ‖x‖ = 1 := by
+    have := norm_rot_sub P z 0 θ₁
+    rw [sub_zero, zero_mul, add_zero, ← dist_eq_norm, h0] at this; exact this
+  have hx1 : ‖x - 1‖ ≤ 1 := by rw [norm_rot_sub, ← hA, ← dist_eq_norm]; exact h1
+  have hx2 : ‖x - e (π / 3)‖ ≤ 1 := by rw [norm_rot_sub, ← hB, ← dist_eq_norm]; exact h2
+  obtain ⟨φ, hφ, hφx⟩ := mem_l60_arc0 hx0 hx1 hx2
+  have hce := conj_e_mul_e θ₁
+  refine ⟨θ₁ + φ, ⟨by linarith [hφ.1], by linarith [hφ.2]⟩, ?_⟩
+  have hφx' : e φ = x := by simpa using hφx
+  rw [ringPt, e_add, mul_comm (e θ₁), hφx', hx]
+  calc P + (z - P) * starRingEnd ℂ (e θ₁) * e θ₁ = P + (z - P) * (e θ₁ * starRingEnd ℂ (e θ₁)) := by ring
+    _ = z := by rw [hce]; ring
+
+/-- The cap of the closed lens outside `B̄(0, 1)` lies in `B̄(C, 1)`, `C = 1 + e 60°` (the closed form of `l60_cap_mem_ball`). -/
+theorem l60_cap_mem_closedBall {x : ℂ} (h1 : ‖x - 1‖ ≤ 1) (h2 : ‖x - e (π / 3)‖ ≤ 1) (h0 : 1 < ‖x‖) :
+    ‖x - (1 + e (π / 3))‖ ≤ 1 := by
+  obtain ⟨er, ei⟩ := e_pi_div_three_re_im
+  have hs3 : √3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have hs3p : 0 < √3 := by positivity
+  have q1 : ‖x - 1‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (x - 1)]
+  have q2 : ‖x - e (π / 3)‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (x - e (π / 3))]
+  have q0 : 1 < ‖x‖ ^ 2 := by nlinarith
+  rw [sq_norm_eq_re_im] at q1 q2 q0
+  simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, er, ei] at q1 q2
+  have g1 : 0 ≤ 2 * x.re - (x.re ^ 2 + x.im ^ 2) := by nlinarith
+  have g2 : 0 ≤ x.re + √3 * x.im - (x.re ^ 2 + x.im ^ 2) := by nlinarith
+  have g3 : 0 < x.re ^ 2 + x.im ^ 2 - 1 := by linarith
+  have hT : 0 ≤ 3 * x.re + √3 * x.im - (x.re ^ 2 + x.im ^ 2) - 2 := by
+    nlinarith [mul_nonneg g1 g2, mul_nonneg g1 g3.le, mul_nonneg g2 g3.le, sq_nonneg (x.re - 3 / 2), sq_nonneg (x.im - √3 / 2),
+      sq_nonneg (√3 * x.re - x.im)]
+  have : ‖x - (1 + e (π / 3))‖ ^ 2 ≤ 1 := by
+    rw [sq_norm_eq_re_im]
+    simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.one_re, Complex.one_im, er, ei]
+    nlinarith
+  nlinarith [norm_nonneg (x - (1 + e (π / 3)))]
+
+/-- The cap at a general `60°` arc: a point within `1` of both ends and outside `B̄(P, 1)` is within `1` of `C = A + B − P`. -/
+theorem l60_cap_general {P z : ℂ} {θ₁ : ℝ} (h1 : dist z (ringPt P θ₁) ≤ 1) (h2 : dist z (ringPt P (θ₁ + π / 3)) ≤ 1)
+    (h0 : 1 < dist z P) : dist z (ringPt P θ₁ + ringPt P (θ₁ + π / 3) - P) ≤ 1 := by
+  obtain ⟨hA, hB⟩ := ringPt_eq_rot P θ₁
+  have hx0 : 1 < ‖(z - P) * starRingEnd ℂ (e θ₁)‖ := by
+    have := norm_rot_sub P z 0 θ₁
+    rw [sub_zero, zero_mul, add_zero, ← dist_eq_norm] at this; rw [this]; exact h0
+  have hx1 : ‖(z - P) * starRingEnd ℂ (e θ₁) - 1‖ ≤ 1 := by rw [norm_rot_sub, ← hA, ← dist_eq_norm]; exact h1
+  have hx2 : ‖(z - P) * starRingEnd ℂ (e θ₁) - e (π / 3)‖ ≤ 1 := by rw [norm_rot_sub, ← hB, ← dist_eq_norm]; exact h2
+  have h := l60_cap_mem_closedBall hx1 hx2 hx0
+  rw [norm_rot_sub] at h
+  have heq : ringPt P θ₁ + ringPt P (θ₁ + π / 3) - P = P + (1 + e (π / 3)) * e θ₁ := by rw [hA, hB]; ring
+  rw [dist_eq_norm, heq]; exact h
+
+/-- **A tile touching an arc of `Γ` on `ω(P)` from a side whose colour has the open arc in its closure lies within `1` of the whole closed
+arc**: it lies in the open unit disc about the touching point, so (the crossing engine along the open arc) within `1` of every interior
+point of the arc, and by continuity within `1` of the ends. -/
+theorem dist_le_one_of_touch (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂) {d : Fin k}
+    (hd : ∀ φ ∈ Ioo θ₁ θ₂, ringPt P φ ∈ closure (F.region d)) {T : Set ℂ} (hT : F.TileOf d T) {θ : ℝ}
+    (hθ : θ ∈ Ioo θ₁ θ₂) (hθT : ringPt P θ ∈ closure T) : ∀ z ∈ T, ∀ φ ∈ Icc θ₁ θ₂, dist z (ringPt P φ) ≤ 1 := by
+  intro z hz φ hφ
+  have hzθ : dist z (ringPt P θ) < 1 := hT.1.subset_ball hF hθT hz
+  have hcont : Continuous fun φ : ℝ => ringPt P φ := by unfold ringPt e; fun_prop
+  have hS : IsPreconnected ((fun φ : ℝ => ringPt P φ) '' Ioo θ₁ θ₂) := isPreconnected_Ioo.image _ hcont.continuousOn
+  have hopen : ∀ φ ∈ Ioo θ₁ θ₂, dist z (ringPt P φ) < 1 := by
+    rcases hF.dist_lt_or_gt_of_isPreconnected (hT.subset_region hz) hS
+        (by rintro _ ⟨φ, hφ, rfl⟩; exact hd φ hφ) with h | h
+    · exact fun φ hφ => h _ ⟨φ, hφ, rfl⟩
+    · exact absurd (h _ ⟨θ, hθ, rfl⟩) (not_lt.mpr hzθ.le)
+  have hcl : IsClosed {φ : ℝ | dist z (ringPt P φ) ≤ 1} := isClosed_le (continuous_const.dist hcont) continuous_const
+  have hsub : Icc θ₁ θ₂ ⊆ {φ : ℝ | dist z (ringPt P φ) ≤ 1} := by
+    rw [← closure_Ioo h12.ne]
+    exact closure_minimal (fun φ hφ => (hopen φ hφ).le) hcl
+  exact hsub hφ
+
+/-- A tile within `1` of both ends of a `60°` arc of `Γ` on `ω(P)` misses `ω(P)` (the arc is the lens's trace on `ω(P)` and lies in
+`Γ`). -/
+theorem l60_tile_dist_ne_one {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c') {T : Set ℂ}
+    (hT : F.IsTile T) (hlens : ∀ z ∈ T, dist z (ringPt P θ₁) ≤ 1 ∧ dist z (ringPt P (θ₁ + π / 3)) ≤ 1) :
+    ∀ z ∈ T, dist z P ≠ 1 := by
+  intro z hz h
+  have hΓ := hA.2.1 (mem_ringArc_of_lens h (hlens z hz).1 (hlens z hz).2)
+  exact (hT.subset_interiorPts hz).2 hΓ.2
+
+/-- The ends' lens for a side tile of a `60°` arc: the side colour has the open arc in its closure, the tile touches it, so the tile lies
+within `1` of both ends and misses `ω(P)`. -/
+theorem l60_side_tile {P : ℂ} {θ₁ : ℝ} {c c' d : Fin k} (hF : F.Valid) (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c')
+    (hd : ∀ φ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P φ ∈ closure (F.region d)) {T : Set ℂ} (hT : F.TileOf d T) {θ : ℝ}
+    (hθ : θ ∈ Ioo θ₁ (θ₁ + π / 3)) (hθT : ringPt P θ ∈ closure T) :
+    (∀ z ∈ T, dist z (ringPt P θ₁) ≤ 1 ∧ dist z (ringPt P (θ₁ + π / 3)) ≤ 1) ∧ ∀ z ∈ T, dist z P ≠ 1 := by
+  have h12 : θ₁ < θ₁ + π / 3 := by linarith [Real.pi_pos]
+  have hle := dist_le_one_of_touch hF h12 hd hT hθ hθT
+  have hends : ∀ z ∈ T, dist z (ringPt P θ₁) ≤ 1 ∧ dist z (ringPt P (θ₁ + π / 3)) ≤ 1 := fun z hz =>
+    ⟨hle z hz θ₁ ⟨le_rfl, h12.le⟩, hle z hz _ ⟨h12.le, le_rfl⟩⟩
+  exact ⟨hends, l60_tile_dist_ne_one hA hT.1 hends⟩
+
+/-- **FS114-L60-LE**, L60-EQ, the inner side: at `ℓ = 60°` every tile of the inner colour touching the open arc from inside lies in
+`Reul(P, A, B)` (`A`, `B` the arc's ends). -/
+theorem l60_eq_inner (hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c')
+    {T : Set ℂ} (hT : F.TileOf c T) (htouch : ∃ θ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P θ ∈ closure (T ∩ ball P 1)) :
+    T ⊆ reul P (ringPt P θ₁) (ringPt P (θ₁ + π / 3)) := by
+  obtain ⟨θ, hθ, hθT⟩ := htouch
+  have hd : ∀ φ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P φ ∈ closure (F.region c) := by
+    intro φ hφ
+    have : c ∈ F.innerColours P (ringPt P φ) := by rw [(hA.2.2 φ hφ).1]; rfl
+    exact closure_mono inter_subset_left this
+  obtain ⟨hends, hsph⟩ := l60_side_tile hF hA hd hT hθ (closure_mono inter_subset_left hθT)
+  -- `T` is connected, misses `ω(P)`, and meets `B(P, 1)`
+  have hne : (T ∩ ball P 1).Nonempty := by
+    obtain ⟨w, hw, -⟩ := Metric.mem_closure_iff.mp hθT 1 one_pos
+    exact ⟨w, hw⟩
+  have hTin : T ⊆ ball P 1 := by
+    refine hT.1.isPreconnected.subset_left_of_subset_union isOpen_ball (isOpen_compl_iff.mpr isClosed_closedBall)
+      (Set.disjoint_left.mpr fun w hw hw' => hw' (ball_subset_closedBall hw)) (fun w hw => ?_) hne
+    rcases lt_trichotomy (dist w P) 1 with h | h | h
+    · exact Or.inl h
+    · exact absurd h (hsph w hw)
+    · exact Or.inr (by rw [mem_compl_iff, mem_closedBall, not_le]; exact h)
+  intro z hz
+  exact ⟨⟨ball_subset_closedBall (hTin hz), (hends z hz).1⟩, (hends z hz).2⟩
+
+/-- **FS114-L60-LE**, L60-EQ, the outer side: at `ℓ = 60°` every tile of the outer colour touching the open arc from outside lies in
+the Reuleaux cap `Reul(A, B, C) ∖ B̄(P, 1)`, `C = A + B − P`. -/
+theorem l60_eq_outer (hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c')
+    {T : Set ℂ} (hT : F.TileOf c' T) (htouch : ∃ θ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P θ ∈ closure (T \ closedBall P 1)) :
+    T ⊆ reul (ringPt P θ₁) (ringPt P (θ₁ + π / 3)) (ringPt P θ₁ + ringPt P (θ₁ + π / 3) - P) \ closedBall P 1 := by
+  obtain ⟨θ, hθ, hθT⟩ := htouch
+  have hd : ∀ φ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P φ ∈ closure (F.region c') := by
+    intro φ hφ
+    have : c' ∈ F.outerColours P (ringPt P φ) := by rw [(hA.2.2 φ hφ).2]; rfl
+    exact closure_mono sdiff_subset this
+  obtain ⟨hends, hsph⟩ := l60_side_tile hF hA hd hT hθ (closure_mono sdiff_subset hθT)
+  have hne : (T ∩ (closedBall P 1)ᶜ).Nonempty := by
+    obtain ⟨w, hw, -⟩ := Metric.mem_closure_iff.mp hθT 1 one_pos
+    exact ⟨w, hw.1, hw.2⟩
+  have hTout : T ⊆ (closedBall P 1)ᶜ := by
+    refine hT.1.isPreconnected.subset_left_of_subset_union (isOpen_compl_iff.mpr isClosed_closedBall) isOpen_ball
+      (Set.disjoint_left.mpr fun w hw hw' => hw (ball_subset_closedBall hw')) (fun w hw => ?_) hne
+    rcases lt_trichotomy (dist w P) 1 with h | h | h
+    · exact Or.inr h
+    · exact absurd h (hsph w hw)
+    · exact Or.inl (by rw [mem_compl_iff, mem_closedBall, not_le]; exact h)
+  intro z hz
+  have hzP : 1 < dist z P := by have := hTout hz; rwa [mem_compl_iff, mem_closedBall, not_le] at this
+  exact ⟨⟨⟨(hends z hz).1, (hends z hz).2⟩, l60_cap_general (hends z hz).1 (hends z hz).2 hzP⟩, hTout hz⟩
+
+/-- The mirror of `cos_nonneg_of_mem_coneAt`: a set outside `B(y + e γ, 1)` approaches `y` only along directions with `cos(β − γ) ≤ 0`. -/
+theorem cos_nonpos_of_mem_coneAt {S : Set ℂ} {y : ℂ} {γ : ℝ} (hS : ∀ z ∈ S, 1 ≤ dist z (y + e γ)) {β : ℝ}
+    (hβ : β ∈ coneAt S y) : Real.cos (β - γ) ≤ 0 := by
+  by_contra hpos
+  push Not at hpos
+  obtain ⟨z, hzS, hzy, hzd, hdir⟩ := hβ (Real.cos (β - γ) / 2) (by linarith)
+  have hw0 : z - y ≠ 0 := sub_ne_zero.mpr hzy
+  have hn0 : 0 < ‖z - y‖ := norm_pos_iff.mpr hw0
+  have hz1 : 1 ≤ ‖(z - y) - e γ‖ := by
+    have := hS z hzS
+    rwa [dist_eq_norm, show z - (y + e γ) = (z - y) - e γ by ring] at this
+  have hsq : 2 * ((z - y) * (starRingEnd ℂ) (e γ)).re ≤ ‖z - y‖ ^ 2 := by
+    have h1 : 1 ≤ ‖(z - y) - e γ‖ ^ 2 := by nlinarith
+    rw [Complex.sq_norm, Complex.normSq_apply] at h1
+    have h2 : ‖z - y‖ ^ 2 = (z - y).re ^ 2 + (z - y).im ^ 2 := by rw [Complex.sq_norm, Complex.normSq_apply]; ring
+    have h4 : (e γ).re ^ 2 + (e γ).im ^ 2 = 1 := by rw [re_e, im_e]; exact Real.cos_sq_add_sin_sq γ
+    simp only [Complex.sub_re, Complex.sub_im] at h1
+    simp only [Complex.mul_re, Complex.conj_re, Complex.conj_im, Complex.sub_re, Complex.sub_im]
+    simp only [Complex.sub_re, Complex.sub_im] at h2
+    nlinarith [h1, h2, h4]
+  have hdre : ((z - y) / (‖z - y‖ : ℂ) * (starRingEnd ℂ) (e γ)).re ≤ ‖z - y‖ / 2 := by
+    rw [div_mul_eq_mul_div, Complex.div_ofReal_re, div_le_iff₀ hn0]; nlinarith
+  have hre : (e β * (starRingEnd ℂ) (e γ)).re = Real.cos (β - γ) := re_e_mul_conj_e β γ
+  have hdiff : (e β * (starRingEnd ℂ) (e γ)).re - ((z - y) / (‖z - y‖ : ℂ) * (starRingEnd ℂ) (e γ)).re
+      ≤ ‖(z - y) / (‖z - y‖ : ℂ) - e β‖ := by
+    rw [← Complex.sub_re, ← sub_mul]
+    calc _ ≤ ‖(e β - (z - y) / (‖z - y‖ : ℂ)) * (starRingEnd ℂ) (e γ)‖ := Complex.re_le_norm _
+      _ = ‖(z - y) / (‖z - y‖ : ℂ) - e β‖ := by rw [norm_mul, Complex.norm_conj, norm_e, mul_one, norm_sub_rev]
+  rw [hre] at hdiff
+  have hnd : ‖z - y‖ < Real.cos (β - γ) / 2 := by rw [← dist_eq_norm]; exact hzd
+  linarith
+
+/-- Two closed half-turns `cos(β − a₁) ≥ 0`, `cos(β − a₂) ≥ 0` with `0 < a₂ − a₁ < π` meet in `[a₂ − 90°, a₁ + 90°]` (every direction
+between `a₁` and `a₂` is then within `90°` of `β`: `sin(a₂ − a₁) cos(β − θ) = sin(a₂ − θ) cos(β − a₁) + sin(θ − a₁) cos(β − a₂)`). -/
+theorem mem_angleIcc_of_two_cos {a₁ a₂ β : ℝ} (h12 : a₁ < a₂) (h2 : a₂ - a₁ < π) (c1 : 0 ≤ Real.cos (β - a₁))
+    (c2 : 0 ≤ Real.cos (β - a₂)) : β ∈ angleIcc (a₂ - π / 2) (a₁ + π / 2) := by
+  refine mem_angleIcc_of_cos_nonneg h12 fun θ hθ => ?_
+  have hid : Real.sin (a₂ - a₁) * Real.cos (β - θ) =
+      Real.sin (a₂ - θ) * Real.cos (β - a₁) + Real.sin (θ - a₁) * Real.cos (β - a₂) := by
+    simp only [Real.sin_sub, Real.cos_sub]; ring
+  have hs : 0 < Real.sin (a₂ - a₁) := Real.sin_pos_of_pos_of_lt_pi (by linarith) h2
+  have hs1 : 0 ≤ Real.sin (a₂ - θ) := Real.sin_nonneg_of_nonneg_of_le_pi (by linarith [hθ.2]) (by linarith [hθ.1])
+  have hs2 : 0 ≤ Real.sin (θ - a₁) := Real.sin_nonneg_of_nonneg_of_le_pi (by linarith [hθ.1]) (by linarith [hθ.2])
+  have : 0 ≤ Real.sin (a₂ - a₁) * Real.cos (β - θ) := by rw [hid]; positivity
+  by_contra hneg
+  push Not at hneg
+  nlinarith [mul_neg_of_pos_of_neg hs hneg]
+
+/-- **FS114-L60-LE**, L60-EQ at the ends: such inner tiles approach the end `A = r(θ₁)` only within the corner cone
+`[θ₁ + 90°, θ₁ + 210°]` (120°) and outer ones within `[θ₁ + 30°, θ₁ + 90°]` (60°) — together the closed half-plane facing the other end;
+at `B = r(θ₁ + 60°)` the mirror cones `[θ₁ + 210°, θ₁ + 330°]` and `[θ₁ − 30°, θ₁ + 30°]`. -/
+theorem l60_eq_corners (hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c') :
+    (∀ T, F.TileOf c T → (∃ θ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P θ ∈ closure (T ∩ ball P 1)) →
+      coneAt T (ringPt P θ₁) ⊆ angleIcc (θ₁ + π / 2) (θ₁ + 7 * π / 6) ∧
+        coneAt T (ringPt P (θ₁ + π / 3)) ⊆ angleIcc (θ₁ + 7 * π / 6) (θ₁ + 11 * π / 6)) ∧
+    ∀ T, F.TileOf c' T → (∃ θ ∈ Ioo θ₁ (θ₁ + π / 3), ringPt P θ ∈ closure (T \ closedBall P 1)) →
+      coneAt T (ringPt P θ₁) ⊆ angleIcc (θ₁ + π / 6) (θ₁ + π / 2) ∧
+        coneAt T (ringPt P (θ₁ + π / 3)) ⊆ angleIcc (θ₁ - π / 6) (θ₁ + π / 6) := by
+  have hπ := Real.pi_pos
+  -- the centre and the other end, seen from each end
+  have hAP : ringPt P θ₁ + e (θ₁ + π) = P := by rw [ringPt, e_add_pi]; ring
+  have hBP : ringPt P (θ₁ + π / 3) + e (θ₁ + 4 * π / 3) = P := by
+    rw [ringPt, show θ₁ + 4 * π / 3 = (θ₁ + π / 3) + π by ring, e_add_pi]; ring
+  have hBA : ringPt P (θ₁ + π / 3) + e (θ₁ - π / 3) = ringPt P θ₁ := by
+    rw [← ringPt_sub_ringPt_plus_third P θ₁]; ring
+  have hAB : ringPt P θ₁ + e (θ₁ + 2 * π / 3) = ringPt P (θ₁ + π / 3) := by
+    have h := ringPt_sub_ringPt_plus_third P θ₁
+    rw [show θ₁ + 2 * π / 3 = (θ₁ - π / 3) + π by ring, e_add_pi, ← h]; ring
+  refine ⟨fun T hT htouch => ?_, fun T hT htouch => ?_⟩
+  · have hsub := l60_eq_inner hF hA hT htouch
+    have hTP : T ⊆ closedBall (ringPt P θ₁ + e (θ₁ + π)) 1 := by rw [hAP]; exact fun z hz => (hsub hz).1.1
+    have hTB : T ⊆ closedBall (ringPt P θ₁ + e (θ₁ + 2 * π / 3)) 1 := by rw [hAB]; exact fun z hz => (hsub hz).2
+    have hTP' : T ⊆ closedBall (ringPt P (θ₁ + π / 3) + e (θ₁ + 4 * π / 3)) 1 := by
+      rw [hBP]; exact fun z hz => (hsub hz).1.1
+    have hTA' : T ⊆ closedBall (ringPt P (θ₁ + π / 3) + e (θ₁ - π / 3)) 1 := by
+      rw [hBA]; exact fun z hz => (hsub hz).1.2
+    refine ⟨fun β hβ => ?_, fun β hβ => ?_⟩
+    · have h := mem_angleIcc_of_two_cos (a₁ := θ₁ + 2 * π / 3) (a₂ := θ₁ + π) (by linarith) (by linarith)
+        (cos_nonneg_of_mem_coneAt hTB hβ) (cos_nonneg_of_mem_coneAt hTP hβ)
+      convert h using 2
+      all_goals ring
+    · have c1 := cos_nonneg_of_mem_coneAt hTA' hβ
+      have c1' : 0 ≤ Real.cos (β - (θ₁ + 5 * π / 3)) := by
+        rw [show β - (θ₁ + 5 * π / 3) = β - (θ₁ - π / 3) - 2 * π by ring, Real.cos_sub_two_pi]; exact c1
+      have h := mem_angleIcc_of_two_cos (a₁ := θ₁ + 4 * π / 3) (a₂ := θ₁ + 5 * π / 3) (by linarith) (by linarith)
+        (cos_nonneg_of_mem_coneAt hTP' hβ) c1'
+      convert h using 2
+      all_goals ring
+  · have hsub := l60_eq_outer hF hA hT htouch
+    have hfar : ∀ z ∈ T, 1 < dist z P := fun z hz => by
+      have := (hsub hz).2; rwa [mem_closedBall, not_le] at this
+    have hTP : ∀ z ∈ T, 1 ≤ dist z (ringPt P θ₁ + e (θ₁ + π)) := fun z hz => by rw [hAP]; exact (hfar z hz).le
+    have hTP' : ∀ z ∈ T, 1 ≤ dist z (ringPt P (θ₁ + π / 3) + e (θ₁ + 4 * π / 3)) := fun z hz => by
+      rw [hBP]; exact (hfar z hz).le
+    have hTB : T ⊆ closedBall (ringPt P θ₁ + e (θ₁ + 2 * π / 3)) 1 := by rw [hAB]; exact fun z hz => (hsub hz).1.1.2
+    have hTA' : T ⊆ closedBall (ringPt P (θ₁ + π / 3) + e (θ₁ - π / 3)) 1 := by
+      rw [hBA]; exact fun z hz => (hsub hz).1.1.1
+    refine ⟨fun β hβ => ?_, fun β hβ => ?_⟩
+    · have c0 := cos_nonpos_of_mem_coneAt hTP hβ
+      have c0' : 0 ≤ Real.cos (β - θ₁) := by
+        rw [show β - (θ₁ + π) = (β - θ₁) - π by ring, Real.cos_sub_pi] at c0; linarith
+      have h := mem_angleIcc_of_two_cos (a₁ := θ₁) (a₂ := θ₁ + 2 * π / 3) (by linarith) (by linarith) c0'
+        (cos_nonneg_of_mem_coneAt hTB hβ)
+      convert h using 2
+      all_goals ring
+    · have c0 := cos_nonpos_of_mem_coneAt hTP' hβ
+      have c0' : 0 ≤ Real.cos (β - (θ₁ + π / 3)) := by
+        rw [show β - (θ₁ + 4 * π / 3) = (β - (θ₁ + π / 3)) - π by ring, Real.cos_sub_pi] at c0; linarith
+      have h := mem_angleIcc_of_two_cos (a₁ := θ₁ - π / 3) (a₂ := θ₁ + π / 3) (by linarith) (by linarith)
+        (cos_nonneg_of_mem_coneAt hTA' hβ) c0'
+      convert h using 2
+      all_goals ring
 
 /-- The interior points of `l60Frag` by colour: `0` in the open Reuleaux triangle on `0`, `1`, `e 60°`; `1` in the open one on `1`,
 `e 60°`, `C`; `2` in `B(1, 1/4)`; `3` in `B(e 60°, 1/4)`. -/

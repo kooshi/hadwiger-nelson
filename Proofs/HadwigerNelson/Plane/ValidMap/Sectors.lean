@@ -295,6 +295,33 @@ theorem IsSectorChart.isSector_cone_or_horn {n : ℕ} {G : BranchGerms n} {v : �
       rw [← heq]
       exact sectorBetween_eq_hornSet v _ _ _ r h1 h2
 
+/-- **A direction of a colour class at a chart's point is a direction of one of the chart's sectors of that colour**: the class
+near `v` is the union of its sectors (`cover`), and the cone of a finite union is the union of the cones. -/
+theorem IsSectorChart.exists_sector_of_mem_coneAt_region {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀ : ℝ}
+    (hC : F.IsSectorChart G v r₀) (hn : 0 < n) {r : ℝ} (hr : r ∈ Ioc 0 r₀) {d : Fin k} {β : ℝ}
+    (hβ : β ∈ coneAt (F.region d) v) : ∃ i, β ∈ coneAt (G.sector v r i) v ∧ G.sector v r i ⊆ F.region d := by
+  have h1 := coneAt_inter_ball hr.1 hβ
+  have hsub : F.region d ∩ ball v r ⊆ ⋃ i ∈ {i : Fin n | (G.sector v r i ∩ F.region d).Nonempty}, G.sector v r i := by
+    rintro z ⟨hz, hzb⟩
+    have : z ∈ ball v r ∩ F.interiorPts := ⟨hzb, hz.1⟩
+    rw [hC.cover r hr hn] at this
+    obtain ⟨i, hi⟩ := mem_iUnion.mp this
+    exact mem_iUnion₂.mpr ⟨i, ⟨z, hi, hz⟩, hi⟩
+  obtain ⟨i, ⟨z, hzi, hzd⟩, hβi⟩ := coneAt_biUnion_finite (Set.toFinite _) _ (coneAt_mono hsub v h1)
+  refine ⟨i, hβi, fun w hw => ⟨hC.sector_subset_interiorPts hn hr i hw, ?_⟩⟩
+  have := (hC.isPreconnected r hr i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hr i)) hw hzi
+  show F.col w = d
+  rw [this]; exact hzd.2
+
+/-- A colour carried at `v` approaches `v` along some direction. -/
+theorem coneAt_region_nonempty {v : ℂ} {c : Fin k} (hc : c ∈ F.coloursAt v) : (coneAt (F.region c) v).Nonempty := by
+  by_cases hv : v ∈ F.region c
+  · exact ⟨0, mem_coneAt_of_mem_isOpen (F.isOpen_region c) hv 0⟩
+  · apply coneAt_nonempty
+    intro ε hε
+    obtain ⟨z, hz, hzd⟩ := Metric.mem_closure_iff.mp hc ε hε
+    exact ⟨z, hz, fun h => hv (h ▸ hz), by rw [dist_comm]; exact hzd⟩
+
 /-! ## A two-tile simple map: `halfDisc` (FS131-QA2's QA2-3) -/
 
 /-- **An open bounded convex non-empty set is a Jordan domain**: Mathlib's gauge rescaling (`exists_homeomorph_image_interior_closure_
