@@ -23,8 +23,8 @@ that judge the milestone, written before any job).*
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
 | wave 2 (28 rows) | 91 lines left; the axiom gate repaired for its import (T3, item 160); **FS131-I2h (Opus) running** to the landing | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | **LANDED on `main`** (item 157; gated commit `0fdacddb`): held in the kernel, 502 records on the standard three; `localSectors` follows on `fs131-w3b` (FS131-I3i) | — |
-| wave 4 (25 rows) | 32 of 86 proved (I4, I4b; items 125, 143); two plan routes owed (`lemmaL`, `lock` clause 1); ~20 leaves wait on `localSectors`; **next: an Opus implementer when a whole slot frees** | `.claude/worktrees/fs131-w4` |
-| Woodall's chain (FS106-WO, -TW, -AE-MAP6) | step 3 repaired by E3 as NiceAt on a ball (item 161); **FS131-W3 re-planning** on it; then an implementer | `.claude/worktrees/fs131-ww` |
+| wave 4 (25 rows) | 32 of 86 proved; **FS131-I4c (Opus) running** (item 168); tell it when `localSectors` lands on `main` | `.claude/worktrees/fs131-w4` |
+| Woodall's chain (FS106-WO, -TW, -AE-MAP6) | re-planned on NiceAt (W3, item 167): chain re-proved as compositions; 18 `Merge` leaves + 5 inhabitant leaves left, none needing `localSectors`; **next: FS131-IWc (Opus)**, 1,100–1,800 lines | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
 | Lebesgue's covering theorem (FS131-LEB) | **LANDED on `main`** (item 151; `33471a75`): held in the kernel, standard three; wave 4 discharges its `sorry` in one line | `Proofs/HadwigerNelson/Topology/` |
 | waves 5–10 (124 rows) | not started; wave 5 carries C-DOUBLE + Y3-END-NEEDS (item 69) and FLANK-Q's discharge (item 79); wave 9 bound by item 89's note and item 96's vacuity rule | plan § 7 |
@@ -40,7 +40,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 
 | job | model | brief | reports to |
 |---|---|---|---|
-| FS131-W3 (Woodall's chain re-planned on E3's NiceAt repair; item 162) | Opus (planner) | `data/fs131/briefs/FS131-W3-woodall-nice.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-W3.md` |
+| FS131-I4c (wave 4 on Opus: merge main, LEB discharge, leaves, the bridge after `localSectors` lands, plan gaps; item 168) | Opus | `data/fs131/briefs/FS131-I4c-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4c.md` |
 | FS131-I2h (wave 2 on Opus: 91 lines, the owed items, the gate, the landing; item 162) | Opus | `data/fs131/briefs/FS131-I2h-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2h.md` |
 | FS131-I3i (`localSectors`, the separation lemma, `four_of_bothKind_simple` without `hnc`; on `fs131-w3b`; item 157) | Opus | `data/fs131/briefs/FS131-I3i-localsectors.md` | its branch's `data/fs131/reports/FS131-I3i.md` |
 
@@ -60,7 +60,7 @@ its record's last SAVED stage with a fresh agent on the same brief.
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
 5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
-   **Queue for whole Opus slots, in order**: wave 4's Opus implementer (I4c: `lebesgue_covering_square`'s one-line discharge, the two plan gaps, `localSectors`
+   **Queue for whole Opus slots, in order**: Woodall's implementer FS131-IWc (§ 15.3's order of `plans/FS131-W-kernel-plan.md` on `fs131-ww`) — then wave 2/4 successors as needed. (Old queue note:) wave 4's Opus implementer (I4c: `lebesgue_covering_square`'s one-line discharge, the two plan gaps, `localSectors`
    once I3h states it, `AeProperRegions` as a vacuity carrier) — wave 2's Opus implementer (I2h: QA1's docstrings and FALC-HOSTS (iv) docstring, `CPColouring`
    as a vacuity carrier, T3 before its gate). QA1 done (item 144, grade B+).
    FS131-I4 launched in I2e's half slot (item 115); I3e's half slot, when it frees, goes to FS131-IW once W2 has re-planned, else a wave-2 or wave-4 Sonnet successor.
