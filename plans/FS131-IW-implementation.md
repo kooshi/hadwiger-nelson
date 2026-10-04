@@ -525,8 +525,8 @@ rewritten (proved, sorry-free; the IWd children named); `tools/check_architectur
 8 m 45 s, exit 0 (`build/gate/build/20261004T172813Z-1058816.log`; driver log `data/fs131/iwd/build3.log`; `grep Woodall … | grep -ic warning` → 0).
 Axioms: `data/fs131/iwd/axioms-iteration.txt` (iteration, never evidence; see the table above). Scratch: `data/fs131/iwd/scratch/C.lean`.
 
-**Re-pricing, for the record.** IWc priced the three leaves at 900–1,300 lines with children; they took about 1,330 lines (leaf A ≈ 560 with its
-infrastructure, B ≈ 560, C ≈ 210), each elaborating after two to six rounds.
+**Re-pricing, for the record.** IWc priced the three leaves at 900–1,300 lines with children; `Merge` grew by 1,576 lines (1,139 → 2,715,
+docstrings included), each leaf elaborating after two to six rounds: the price held, a little high on the leaves and low on their children.
 
 ## Stage 17 — SAVED (FS131-IWd): where I stop
 
