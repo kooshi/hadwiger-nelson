@@ -330,3 +330,59 @@ decide three colours by `Θ₃` or by a residue target already: applied. In lane
 cross edges "by finitely many arcs" — the winding is the natural invariant (each ring's `W` jumps only where its change points pair at 60°; cross
 edges couple the two), and it was not tried there; not derived, because the route it served is closed (§ 3.1 item 3). **Bears unapplied: one site
 (FS106-BIKE), on a closed route; otherwise lane R's, and relayed.**
+
+## Stage 4 — SAVED (two hubs read for cross-era bearing; the seventeen grokkings no entry mentions)
+
+*Read for this stage: G55, G56, G81 (bodies); the seventeen bodies below; `LEDGER.md` rows 34, 35; the era-R statements grepped for polygonal,
+cell-constant, triangular lattice, brick, finer than.*
+
+### 4.1 G55 — the unit-vector ring and the chain theorem
+
+**What it is.** A finite graph over `F` forcing a pair at difference `δ` equal at `k` colours makes every `k`-colouring of `F²` periodic under the ideal
+`δ ℤ[U_F]`; a forced group invariant under the unit vectors is an ideal (row 111: so `0` or everything). **Kind:** an ideal-closure argument on
+forced differences. **Used:** the index's 13 mentions (ASTRA-T7, FS38-L3, FS54-T2, FS58-T3, FS73-T10, FS79-T2, FS79-T40, FS86-B1-LR, FS86-V2, FS91-J02-A21p,
+FS91-J02-T3, FS91-J07-4, M53-T14).
+
+**Where it bears and was not applied — a miss of the listed kind (no rounds spent), already derived.** FS-104's route (b), "a forced pair whose
+distance moves continuously" (`plans/STUB-cp-plane-six.md` l. 66), was carried as an open route from FS-103's close while row 111's ideal argument
+was held; its real-place form, FS129-OA1-NOPERLAW (pass 1), empties the route's literal reading in four lines (a stationary CP colouring's pairs forced
+in law form a closed subgroup missing the unit circle, hence discrete, hence `{0}` under rotations). Nothing more to derive. **One composition checked
+and declined:** FS129-MA1-FALC-T clause (2) with G55's chain theorem over K says a Falconer fan's `t − a` would have to be a non-unit at a stable prime
+(else `1/(t − a) ∈ ℤ[U_K]` and `χ(K²) > 4`); FS129-OA1-FALC-11 (`t ≡ a` at both primes of residue field 𝔽₁₁) and the residue colouring's law (row 59:
+equal colours iff positive valuation at the dyadic prime) already give more, so it adds nothing.
+
+### 4.2 G56 — the window for six (and G81, lane R's, read for the meeting point)
+
+**What it is.** Over the residue fields a number field can have, a six-chromatic plane can live only at `q ∈ {23, 27, 31, 43, 47}` or `U₆₄`; every field
+containing K is excluded from the window by reciprocity. **Kind:** a finite list of finite targets and a field-listing rule. **Used:** the index's 20
+mentions (FS100-CLS, -G27, -X28D-CP3, FS53-T1/T2/T4, FS54-T2/T8, FS66-T6, FS86-CL2, -VD-7, -VD-10, FS91-J02-T2/T3, -J07-11, -J08-2, TC1-DEGREE-BELOW-12,
+-SQRT3-DYADIC, -STANDING-FIVE, -STANDING-FOUR).
+
+**Cross-era: null, with the reason.** The regularity era reaches the arithmetic only through the collapse field ℚ(√635087), where every stable place is
+6-thick (G81: `λ*_v < 1/5`), and 6-thickness forbids a six-colourable target by the ratio bound (`α/n ≤ λ*/(1 + λ*) < 1/6`), so no window member
+could bound that field from above even if decided. Within lane A it is applied wherever a field is listed (the Do is followed in every listing read).
+
+### 4.3 The seventeen lane-A grokkings no entry mentions by number
+
+| G | mechanism (one line) | kind | verdict, with what was read |
+|---|---|---|---|
+| G5 | de Grey's graph is a 1-sum; a compulsion of the whole is a half's or the cross edge's | a decomposition of a finite witness | **null** — no open step in either era reads a 1-sum; finite witnesses for six are out (`CLAUDE.md` § Publication) |
+| G6 | containment of a certified object is not causation | a witness-design method | **null** — same reason |
+| G8 | the direction group closing the 1581's edge directions | a group-word factorisation | **null for the answer**; its own open item (Heule-510/553's six out-of-group direction classes as words in `α = (√5 + i√11)/4`) is an exact factorisation, unrun — housekeeping, not a search |
+| G10 | the 1581's forcing is distributed | a measured null | **null** |
+| G11 | the Moser spindle is not necessary for five (Voronov et al., Haugland) | a construction route: land a forced pair, then spindle | **null** — the route needs a forced pair at five colours; over 5-sealed fields there is none (row 66), and the one 6-open arena holds none (G31); FS129-MA1-FALC-T asks less than a forced pair, which is where any new construction would aim |
+| G15 | every known five-forcing argument is a class-level pigeonhole composed with a kill web | the shape of a χ ≥ k argument | **applied under another name**: route M's NO is exactly this shape — every tight six-map has a four-colour vertex (rows 135, 137: the pigeonhole; G91, "the ring is the pigeonhole") and one local exclusion kills it (C114-LOCAL-F: the kill web). Recorded so the record job can cross-reference G15 in G83/G91; no composition |
+| G17 | sub-rung compulsions have small carriers; globality only at the top rung | a measured pattern | **null** |
+| G18 | certify components, compose in the kernel | a method | **applied** in the kernel lane generally; no audit site |
+| G19 | no pattern class fires at five on swept fabric; inside K none can (Theorem B) | a measured null with a theorem half | **null** — class sweeps for finite witnesses are out |
+| G20 | the brick seven-colouring is boundary-tight by force | a tight colouring as a model | **applied** in lane R (FS111-W-HEXSAT: no recolouring of the brick seven-colouring's tiling is saturated) |
+| G22 | cell-constant and polygonal colourings need seven; a six-colouring's classes are non-polygonal | a no-go on colouring shapes | **applied** in lane R through the same source (FS106-SV2, FS106-AE-POLY, FS107-W-POLY; `[SokolovVoronov2025]`); FS-116's valid fragments have curved arcs and are no cell-constant colouring, so rows 34–35 do not reach them |
+| G25 | a six-forcer's kills cost five-forcer grade | a pricing reading | **null** — finite witnesses for six are out |
+| G28 | forcing sits outside the smallest non-edge classes | a sweep method | **null** |
+| G33 | counterexample-guided growth toward a forced pair | a search method | **null** (a search, rule 5) |
+| G39 | a forced pair at `χ(G)` colours confines the critical set to the pair's common neighbourhood | a criticality lemma | **null, with the reason**: its consumers would be forced pairs at the top rung; FS129-MA1-FALC-T's fans live in five-colourable graphs, below the top rung, where G39 says nothing |
+| G77 | a band character exists iff a residue target has one (existence, not classification) | a character-colouring reduction | **null, with the reason**: at the real place a non-trivial character sends the unit circle onto a neighbourhood of 0, so no band character colours ℝ²; G77 is the field-level statement only |
+| G78 | rank-one inheritance is "countable ⟹ finite"; Kempe moves cannot see a frozen wall | a one-dimensional subshift view | **null, with the reason**: the regularity era's one-dimensional objects (a ring of 60° hexagons, FS121-D3-SWAP1D's circle) are compact and checked by finite twist enumeration (FS116-RING-TWIST-C, FS121-D3-SWAP1D's exact control); G78's frozen-tail theorem concerns bi-infinite lines |
+
+**Tally:** of the seventeen, none bears where it was not applied (MA1-E9 registered 0.2); three are applied in lane R or the kernel lane under their
+sources (G18, G20, G22), and one is the shape of route M's NO under another name (G15).
