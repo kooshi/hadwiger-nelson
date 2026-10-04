@@ -21,7 +21,7 @@ that judge the milestone, written before any job).*
 | job | state | where |
 |---|---|---|
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
-| wave 2 (28 rows) | the Opus trial (I2f, item 129) closed 37 lines and five rows; 117 `sorry` lines left; **FS131-I2g running** | `.claude/worktrees/fs131-w2` |
+| wave 2 (28 rows) | 91 `sorry` lines left (I2g, item 148); FALC-RED sorry-free over the declared import; **FS131-T3 must land before wave 2's gate**; next: an Opus implementer | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | 94 of 96 proved (I3–I3g, items 131, 145, 147); **FS131-I3h (Opus) running**: two leaves, gate, landing, then `localSectors` | `.claude/worktrees/fs131-w3` |
 | wave 4 (25 rows) | 32 of 86 proved (I4, I4b; items 125, 143); two plan routes owed (`lemmaL`, `lock` clause 1); ~20 leaves wait on `localSectors`; **next: an Opus implementer when a whole slot frees** | `.claude/worktrees/fs131-w4` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | re-planned by W2 with **no open leaf** (item 124); E1-BAD erratum filed; **FS131-IW running**; lands after waves 3–4 and LEB | `.claude/worktrees/fs131-ww` |
@@ -36,14 +36,13 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 0.5 + 0.5 + 1 + 1 = 3 of 3)
+## 3. Running now (slots used: 0.5 + 1 + 1 = 2.5 of 3 — the free half waits for a whole Opus slot)
 
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-IW (Woodall's chain implementer; item 128) | Sonnet | `data/fs131/briefs/FS131-IW-woodall.md` | its branch's (`fs131-ww`) `data/fs131/reports/FS131-IW.md` |
 | FS131-I3h (wave 3 on **Opus**: last two leaves, the gate, the landing; then `localSectors` on `fs131-w3b`; item 147) | Opus | `data/fs131/briefs/FS131-I3h-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3h.md` |
 | FS131-LEB (Lebesgue's covering theorem, own branch `fs131-leb`; item 141) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-LEB-lebesgue.md` | its branch's `data/fs131/reports/FS131-LEB.md` |
-| FS131-I2g (wave 2, seventh implementer; item 130) | Sonnet | `data/fs131/briefs/FS131-I2g-wave2.md` | its branch's (`fs131-w2`) `data/fs131/reports/FS131-I2g.md` |
 
 
 **Implementers are Opus from now on** (Kooshi, item 137): the four Sonnet implementers above finish on Sonnet; each successor launches with `model: "opus"` (the agent file says so too) and counts one slot.
