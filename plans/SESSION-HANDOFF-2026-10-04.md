@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-04 by Keryx at Kooshi's word ("Please update the handoff, and I'll compact."). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–103 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–183 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
 > **Latest (written at the context limit, 2026-10-04 late):** inventory items run to **183**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157),
@@ -21,9 +21,8 @@ that judge the milestone, written before any job).*
 2. **The milestone**: FS-131, the Lean backlog (`plans/STUB-lean-backlog.md`; input `plans/LEAN-BACKLOG.md`, 259 rows). Plan: `plans/FS131-kernel-plan.md`
    (dispositions `data/fs131/k1/dispositions.csv`, checker `tools/fs131_k1_dispositions.py`; ten waves, § 7.1; gate design § 7.5 — nothing with a `sorry` on
    `main`, a branch and worktree per wave, land by merging `main` in and fast-forwarding at a green gate).
-3. **Staffing (Kooshi, 2026-10-04)**: three Opus-agent slots; a Sonnet agent counts half (`.claude/output-styles/keryx.md` § Staffing). He also authorized
-   **one Opus-implementer trial** (item 103): run `debruijn-implementer` with the Agent tool's `model: "opus"` as wave 2's next implementer after FS131-I2e, and
-   compare leaves closed per session against I2–I2e (items 49, 58, 70, 82).
+3. **Staffing (Kooshi, 2026-10-04)**: three Opus-agent slots; a Sonnet agent counts half (`.claude/output-styles/keryx.md` § Staffing). All implementers are Opus
+   since the trial (items 129, 137).
 4. **Worktree recipe** (Kooshi's): `.lake/packages` symlinked to the main tree's, `.lake/build` copied with `cp -a`; never symlink the build. Up to two 40 GiB
    builds across trees when `scripts/slot.py` admits them (ruling 5).
 
@@ -56,7 +55,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | FS131-I2j (wave 2 on Opus: 46 lines, the carriers, the gate, the landing; item 183) | Opus | `data/fs131/briefs/FS131-I2j-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2j.md` |
 
 
-**Implementers are Opus from now on** (Kooshi, item 137): the four Sonnet implementers above finish on Sonnet; each successor launches with `model: "opus"` (the agent file says so too) and counts one slot.
+**Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.
 
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. A notification arrives when each hands back; if the session restarted, resume a job from
@@ -64,24 +63,22 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 ## 4. Next, in order
 
-1. ~~Fill the free slot~~ — done: FS131-K2d launched (item 104). The next free slot (a half when I3e hands back): FS131-IW or FS131-I4 (Sonnet), briefs derived
-   from the nearest earlier brief by script, gated with `python3 .claude/skills/keryx/scripts/brief_gate.py all`.
-2. (done) The Opus-implementer trial scored (item 129); Kooshi moved every implementer to Opus (item 137).
-3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
-4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
-5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
-   **Queue for whole Opus slots, in order**: Woodall's implementer FS131-IWc (§ 15.3's order of `plans/FS131-W-kernel-plan.md` on `fs131-ww`) — then wave 2/4 successors as needed. (Old queue note:) wave 4's Opus implementer (I4c: `lebesgue_covering_square`'s one-line discharge, the two plan gaps, `localSectors`
-   once I3h states it, `AeProperRegions` as a vacuity carrier) — wave 2's Opus implementer (I2h: QA1's docstrings and FALC-HOSTS (iv) docstring, `CPColouring`
-   as a vacuity carrier, T3 before its gate). QA1 done (item 144, grade B+).
-   FS131-I4 launched in I2e's half slot (item 115); I3e's half slot, when it frees, goes to FS131-IW once W2 has re-planned, else a wave-2 or wave-4 Sonnet successor.
-   FS131-E2 done (items 139–140): the cusp case holds in the simple class; the skeleton's loose form was false (the monster); errata filed. Queued: an Ephodos
-   job on `exists_not_uniform_kept`'s fringe colouring only if wave 2's implementer cannot find a proper formula (item 118).
-6. **(done) On E1's report**: file its verdicts; if a GAP closes, tell the Woodall implementer; file the row 132 / § The aim corrections per the verdict (W's drafts, plan
-   § 5) and the FS106 errata through the record job.
-7. **On a landing** (wave 3 is closest): read the worktree's `build/gate/*/latest`, the axioms digest (`scripts/gate_report.py axioms <log> <prev> CLAUDE.md`),
-   read one statement back, file the counts (`CLAUDE.md` § Trust ledger line and § The gate counts line; `scripts/vacuity-baseline.txt` header lines 25–26),
-   log the receipt. The second of waves 2 and 3 to land merges the first's vacuity carriers. **Before the gate on a merged branch**: run `tools/fs131_qa1_dupes.py`; the later-landing branch renames or deletes its colliding
-   names (item 142: six known — `framePt`, `dist_rot`, `eq_norm_mul_e_arg`, `e_add_int_mul_two_pi`, `e_mul_conj_e`, `abs_dot_le`).
+1. **On each hand-back** (I2j, I4e, IWd): review by artifact (build log, `sorry` count, axioms print from a saved log), log the inventory item, and if work
+   remains brief an Opus successor by script from the job's own last brief (`data/fs131/briefs/`), gate it with
+   `python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>` (full worktree paths in source lines; no § inside a heading address), launch with
+   `model: "opus"`.
+2. **On a landing**: before the gate on the merged branch, `tools/fs131_qa1_dupes.py` (the later branch renames or deletes colliding names); then read the
+   worktree's `build/gate/*/latest` and the axioms digest (`scripts/gate_report.py axioms <log> <prev> CLAUDE.md`), read one statement back, file the counts
+   (`CLAUDE.md` § Trust ledger sentence and § The gate counts line; `scripts/vacuity-baseline.txt` header lines 25–26; a `GATE_CHANGES` entry in
+   `tools/claude_md_fact_audit.py`), run the fact audit with `--base` the last `CLAUDE.md` commit, then commit and log the receipt. The second of waves 2 and 4
+   to land merges the first's vacuity carriers. Woodall (IWd) lands after wave 4 and deletes its identical copies of `abs_dot_le`, `dot_add_left`, `dot_e_e`,
+   `isOpen_shadow`, and adds QA2-1's brick-map model (item 172).
+3. **When a slot frees with waves 2 and 4 near landing**: wave 5's planner (Opus `debruijn`) — reads wave 4's plan § 14.5 first; carries C-DOUBLE +
+   Y3-END-NEEDS (item 69) and FLANK-Q's discharge (item 79); `Row134Base` needs its stub (item 17 (b)).
+4. **Queued, conditional**: an Ephodos job on `exists_not_uniform_kept`'s fringe colouring only if wave 2's implementer cannot find a proper formula (item 118).
+5. **At the milestone's filing**: the Frontier clauses (I3h's and I3i's drafts), the rows regraded to [kernel], the Proof Atlas update, `ARCHITECTURE.md` § 3's
+   stale prose counts, the `LEAN.md` pattern line for `threeSectorDisc` adversaries (at Woodall's landing). Optional stub: Woodall's horn-only form everywhere
+   (no consumer).
 
 ## 5. Process notes that saved slips
 
