@@ -2156,6 +2156,74 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.nb4p
 #print axioms HadwigerNelson.Plane.ArcMap.flank_incomplete_bowtie
 
+/-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
+
+#print axioms HadwigerNelson.Plane.n4_fin_u_nonpos
+#print axioms HadwigerNelson.Plane.rayLower_neg
+#print axioms HadwigerNelson.Plane.rayLower_eq_curvDown
+#print axioms HadwigerNelson.Plane.frameX_add_smul
+#print axioms HadwigerNelson.Plane.rayPt_continuousAt
+#print axioms HadwigerNelson.Plane.dist_rayPt
+#print axioms HadwigerNelson.Plane.dist_rayPt_center
+#print axioms HadwigerNelson.Plane.frameX_rayPt
+#print axioms HadwigerNelson.Plane.norm_C_sub_z
+#print axioms HadwigerNelson.Plane.shadow_inside
+#print axioms HadwigerNelson.Plane.shadow_outside
+#print axioms HadwigerNelson.Plane.dot_div_ofReal
+#print axioms HadwigerNelson.Plane.norm_sub_sq_eq_dot
+#print axioms HadwigerNelson.Plane.abs_dot_le
+#print axioms HadwigerNelson.Plane.dot_sub
+#print axioms HadwigerNelson.Plane.dot_nonneg_of_coneAt_subset
+#print axioms HadwigerNelson.Plane.dot_nonpos_of_coneAt_subset
+#print axioms HadwigerNelson.Plane.frameX_framePt
+#print axioms HadwigerNelson.Plane.frameY_framePt
+#print axioms HadwigerNelson.Plane.tanHeight_hornPt
+#print axioms HadwigerNelson.Plane.eventually_hornPt_pos
+#print axioms HadwigerNelson.Plane.eventually_hornPt_neg
+#print axioms HadwigerNelson.Plane.exists_mem_hornSet_aboveBelow
+#print axioms HadwigerNelson.Plane.brickCorner_re
+#print axioms HadwigerNelson.Plane.brickCorner_im
+#print axioms HadwigerNelson.Plane.eventually_floor_eq
+#print axioms HadwigerNelson.Plane.sevenBrick_h
+#print axioms HadwigerNelson.Plane.sevenBrick_w
+#print axioms HadwigerNelson.Plane.sevenBrick_s
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.of_agreesOff
+#print axioms HadwigerNelson.Plane.e_add_pi_div_two
+#print axioms HadwigerNelson.Plane.frame_normSq
+#print axioms HadwigerNelson.Plane.sq_dist_normalPt
+#print axioms HadwigerNelson.Plane.sq_dist_N
+#print axioms HadwigerNelson.Plane.sq_dist_S
+#print axioms HadwigerNelson.Plane.lt_iff_sq_lt_sq'
+#print axioms HadwigerNelson.Plane.tanAbove_one_iff
+#print axioms HadwigerNelson.Plane.tanBelow_one_iff
+#print axioms HadwigerNelson.Plane.tanAbove_neg_one_iff
+#print axioms HadwigerNelson.Plane.tanBelow_neg_one_iff
+#print axioms HadwigerNelson.Plane.tanHeight_eq_of_ne_zero
+#print axioms HadwigerNelson.Plane.tanAbove_iff_of_pos
+#print axioms HadwigerNelson.Plane.tanBelow_iff_of_pos
+#print axioms HadwigerNelson.Plane.conj_e_mul_e
+#print axioms HadwigerNelson.Plane.frameX_sub
+#print axioms HadwigerNelson.Plane.frameY_sub
+#print axioms HadwigerNelson.Plane.sq_dist_frame
+#print axioms HadwigerNelson.Plane.frameX_add_normal
+#print axioms HadwigerNelson.Plane.frameY_add_normal
+#print axioms HadwigerNelson.Plane.frameX_self
+#print axioms HadwigerNelson.Plane.frameY_self
+#print axioms HadwigerNelson.Plane.frameX_N
+#print axioms HadwigerNelson.Plane.frameY_N
+#print axioms HadwigerNelson.Plane.frameX_S
+#print axioms HadwigerNelson.Plane.frameY_S
+#print axioms HadwigerNelson.Plane.tanAbove_iff_of_neg
+#print axioms HadwigerNelson.Plane.tanBelow_iff_of_neg
+#print axioms HadwigerNelson.Plane.inv_curvUp
+#print axioms HadwigerNelson.Plane.inv_curvDown
+#print axioms HadwigerNelson.Plane.frameX_base_N
+#print axioms HadwigerNelson.Plane.frameY_base_N
+#print axioms HadwigerNelson.Plane.frameX_base_S
+#print axioms HadwigerNelson.Plane.frameY_base_S
+#print axioms HadwigerNelson.Plane.frameX_normalPt
+#print axioms HadwigerNelson.Plane.inv_curvDown_eq
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

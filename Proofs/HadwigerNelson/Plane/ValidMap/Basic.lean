@@ -514,7 +514,7 @@ theorem frameX_normalPt (v : ℂ) (α c : ℝ) : frameX v α (v + (c : ℂ) * e 
   rw [this]
 
 /-- `1/f(μ) = 1 + 1/μ`: the concentric circle through `v` has radius `1 + 1/μ` where the arc at `N` has radius `1/μ`. -/
-theorem inv_curvDown_eq {μ : ℝ} (h0 : μ ≠ 0) (h1 : 1 + μ ≠ 0) : 1 / curvDown μ = 1 + 1 / μ := by
+theorem inv_curvDown_eq {μ : ℝ} (h0 : μ ≠ 0) (_h1 : 1 + μ ≠ 0) : 1 / curvDown μ = 1 + 1 / μ := by
   unfold curvDown; field_simp; ring
 
 /-- Spec: the frame algebra at `α = 0`, `v = 0`: `2i` (frame `(0, 2)`) lies on `ω(N)`'s arc, so it is not above it, and `i/2`
