@@ -2312,6 +2312,40 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.hc_free_pos
 #print axioms HadwigerNelson.Plane.hc_free_subset_nowhereDense
 #print axioms HadwigerNelson.Plane.frontier_essSupport_pos
+-- FS131-I2e: wave 2 proved children and leaves
+#print axioms HadwigerNelson.Plane.densityRatio_add_compl
+#print axioms HadwigerNelson.Plane.densitySet_disjoint_compl
+#print axioms HadwigerNelson.Plane.arcLength_eq_window
+#print axioms HadwigerNelson.Plane.arcLength_ge_of_Ioo
+#print axioms HadwigerNelson.Plane.arcLength_le_of_subset_Ioo
+#print axioms HadwigerNelson.Plane.norm_sq_e_sub
+#print axioms HadwigerNelson.Plane.measurableSet_angles
+#print axioms HadwigerNelson.Plane.pairs_eq_lintegral
+#print axioms HadwigerNelson.Plane.tendsto_densityRatio_of_notMem_essClosure
+#print axioms HadwigerNelson.Plane.volume_ball_ofReal
+#print axioms HadwigerNelson.Plane.ae_eq_densitySet
+#print axioms HadwigerNelson.Plane.keptBall_of_le
+#print axioms HadwigerNelson.Plane.arcLength_pos_of_isOpen
+#print axioms HadwigerNelson.Plane.e_mul_e_neg
+#print axioms HadwigerNelson.Plane.isOpen_rotImage
+#print axioms HadwigerNelson.Plane.convex_combo_mem
+#print axioms HadwigerNelson.Plane.exists_circle_point_halfBox
+#print axioms HadwigerNelson.Plane.exists_frame_sides
+#print axioms HadwigerNelson.Plane.frame_coords
+#print axioms HadwigerNelson.Plane.exists_far_point
+#print axioms HadwigerNelson.Plane.exists_phi_of_dist_eq_one
+#print axioms HadwigerNelson.Plane.norm_sq_re_im
+#print axioms HadwigerNelson.Plane.dist_framePt_sq
+#print axioms HadwigerNelson.Plane.unitPairsNull_iUnion_of_monotone
+#print axioms HadwigerNelson.Plane.measurableSet_grundyS
+#print axioms HadwigerNelson.Plane.unitPairsNull_grundyS
+#print axioms HadwigerNelson.Plane.measurableSet_grundyTaken
+#print axioms HadwigerNelson.Plane.isOpen_faceQ
+#print axioms HadwigerNelson.Plane.sq_lt_of_abs_lt'
+#print axioms HadwigerNelson.Plane.abs_sub_lt_of_abs_lt
+#print axioms HadwigerNelson.Plane.real_no_unit
+#print axioms HadwigerNelson.Plane.frame_dist_sq
+#print axioms HadwigerNelson.Plane.mem_faceFailClass_iff
 
 #eval IO.println "=== PURCHASED ==="
 
