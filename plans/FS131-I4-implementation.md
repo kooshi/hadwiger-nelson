@@ -1239,6 +1239,38 @@ with warnings, 9m57s", exit 0 (`build/gate/build/20261004T230630Z-3278350.log`; 
 `declaration uses sorry` — Contact 3, UnitArc 5 (`bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower`, `nb4p`), BaseSteps 1 — and no other
 warning.
 
+## Stage 37 — SAVED (FS131-I4l): engine 5 (lower), and `flankQ_lower` proved over its (R2) shadow child; 9 `sorry` left on the branch (Contact 3, UnitArc 5, BaseSteps 1), and the handoff
+
+**The mirror, proved directly** (plan § 13.3 (c)): `normalPt_sub_add_eq_framePt` (`S′ + ρ e(α + π/2 − t)` at frame `(ρ sin t, −(1 − ρ cos t))`),
+`ArcMap.IsHorn.isRingArc_lower` (a horn `IsHorn v α (−1) κ₂ c` with a lower flank `h` is bounded by an arc of `Γ` on `ω(S′)` ending at `v`, inner `h`,
+outer `c` — the bound `n3_end`'s horn has), and `flankQ_lower` over the child **`flankQ_lower_shadow`** (`sorry`; the hypotheses of
+`flankQ_upper_shadow` with `N ↔ S′`: `radiusTwoArc S′ θ₁ (α + π/2) ⊆ closure (region h)` ⟹ `h` shadows the horn near `v`). (Q): the `h`-tile at `S′`
+is Siamese with the flank (flank points inside `B(S′, 1)`), so in `B(v, 1)`. (R2): `N = S′ + 2e(α + π/2)` is `R₂`'s point at `v`; flank points have
+`frameY < 0`, so are farther than `1` from `N`, and an `h`-tile at `N` is unit-far from them: out-type. `hcS` unread, as `hcN` above.
+
+**What is left (6 in this job's files): UnitArc `bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `nb4p`; BaseSteps `n3_end`.**
+`pair_i` is proved; `flankQ_upper`, `flankQ_lower` are proved over their shadow children.
+- **`flankQ_upper_shadow`, `flankQ_lower_shadow`**: Stage 36's five steps (the cusp, `R₂` in `Γ`, generic points by the homothety `z ↦ (z + N)/2` and
+  `Arc.finite_inter_sphere_or_eq_circ`, the polar rectangle, the crossing). Write the homothety of arcs and the clean-ball lemma once, generically in the
+  centre, and both mirrors use them; the cusp and the crossing are per side. Price: a session for both.
+- **`n3_end`**: unblocked by the merge (`woodallCone`, `exists_merge`, and now `IsHorn.isRingArc_lower` for its horn's lower arc on `ω(v − n)`); reads
+  `exists_merge`'s vertex clause `F'.coloursAt v ⊆ F.coloursAt v` only (inventory items 268–269). NB3-END's items 1–5 (`plans/FS112-NB3-verification.md`
+  l. 221–243) are its route; `n3_end` carries no `hQR`, so FLANK-Q's conclusions are not available to it as stated — read item 1 against that first.
+- **The bends, `nb4p`**: as Stage 24 left them.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 621 names, 3 added; `--check` exit 0. **Statements**: `tools/fs131_i4_stmts.py c8b8b382 …UnitArc.lean`
+123 old, 126 new, 3 added, 0 changed, exit 0; against `d391f480` (the job's start): `UnitArc` 6 added, 0 changed; `BaseSteps` 6 added, 0 changed;
+`Contact` 150 added, 1 changed (`stuck_structure`, IC5's, ruling 252), allowed. **Duplicates**: `tools/fs131_i4_treedupes.py` — 7,541 declarations
+(7,529 + the 12 added), the same 3 pre-existing repeats. **Axioms** (`data/fs131/i4/axioms-i4l-37.txt`, this stage's oleans, not a gate log):
+`normalPt_sub_add_eq_framePt`, `IsHorn.isRingArc_lower` the standard three; `flankQ_lower` reads `sorryAx` through `flankQ_lower_shadow` only. No
+`native_decide`, no axiom, no import changed in this job. **Build**: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings,
+9m52s", exit 0 (`build/gate/build/20261004T232508Z-3414461.log`; driver log `data/fs131/i4/build-i4l-stage37.log`): 9 distinct `declaration uses sorry` —
+Contact 3 (the moves), UnitArc 5 (`bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `nb4p`), BaseSteps 1 (`n3_end`) — and no
+other warning.
+
+**Re-pricing** (this job, about 250k tokens of work after the readback): the merge and its checks about 40k; `pair_i` about 60k (one pass of children,
+one of the core, both nearly first-time clean); engine 5 and the two FLANK-Q assemblies about 70k, the mirror a third of the first side.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -1382,3 +1414,15 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
 - FS112-N3-PAIRS (ii): `ArcMap.pair_ii` — the standard three. Read against § 8.2: same statement; binders `h₂`, `hc₂`, `hy` renamed `_h₂`, `_hc₂`, `_hy` (accepted).
 - Children (no row), the standard three: `ArcMap.stripHolds_of_two_branches`, `ArcMap.IsSectorChart.exists_isRingArc_of_along`, `ArcMap.exists_along_of_side`,
   `ArcMap.exists_colour_near`, `ArcMap.closure_sector_subset_of_side`, `ArcMap.exists_side_germs_of_transversal`, `ArcMap.half_colour_or_bothKind`.
+
+## Theorems this phase proved (FS131-I4l's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4l-*.txt`, not a gate log)
+
+- FS112-N3-PAIRS (i): `HadwigerNelson.Plane.ArcMap.pair_i` — `[propext, Classical.choice, Quot.sound]`. Read against § 8.2 and the row as amended by
+  ruling 258: same statement (cubic trichromatic `u₁`, `u₂` covering their unit discs, `|u₁ − u₂| < 3`, a unit pair `x ∈ ω(u₁)`, `y ∈ ω(u₂)` with
+  `c′(x) = c′(y) = {a}`: impossible); `h3` is read exactly at the collinear configuration.
+- Children (no row), the standard three: `HadwigerNelson.Plane.eq_midpoint_of_dist`, `finite_sphere_inter_sphere_half`, `exists_mem_Ioo_ringPt_not_mem`;
+  `ArcMap.mem_closure_region_of_pseudo`, `ArcMap.finite_not_stripHolds`, `ArcMap.pair_i_of_transversal` (BaseSteps).
+- Engine 5: `HadwigerNelson.Plane.ArcMap.IsHorn.isRingArc_upper`, `ArcMap.IsHorn.isRingArc_lower` — the standard three each (no row; plan § 13.1 item 5).
+  Children: `normalPt_add_eq_framePt`, `normalPt_sub_add_eq_framePt` — the standard three (UnitArc).
+- FS112-N2-FLANK-Q, the upper and lower bounds: `ArcMap.flankQ_upper`, `ArcMap.flankQ_lower` — `[propext, sorryAx, Classical.choice, Quot.sound]`
+  **(over sorry: `flankQ_upper_shadow`, `flankQ_lower_shadow`, their (R2) shadow clauses)**. Read against § 12.2: same statements.

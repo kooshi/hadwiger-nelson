@@ -2750,6 +2750,9 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.normalPt_sub_add_eq_framePt
+#print axioms HadwigerNelson.Plane.ArcMap.IsHorn.isRingArc_lower
+#print axioms HadwigerNelson.Plane.ArcMap.flankQ_lower_shadow
 #print axioms HadwigerNelson.Plane.normalPt_add_eq_framePt
 #print axioms HadwigerNelson.Plane.ArcMap.IsHorn.isRingArc_upper
 #print axioms HadwigerNelson.Plane.ArcMap.flankQ_upper_shadow
