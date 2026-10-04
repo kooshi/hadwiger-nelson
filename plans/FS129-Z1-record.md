@@ -197,3 +197,54 @@ entry" — an erratum is prose, not an entry; reported, not repaired.
 **Not filed here, outside this job's files** (for FS129-Z2 or the coordinator): item 59's side-1 remarks (`plans/FS114-NB5-verification.md` § 1b.3,
 `plans/FS114-NB6-verification.md` § 1b.0, `plans/FS114-N7-proof.md` lines 88–89) and `plans/FS116-local-exclusion.md` § 3.6; item 96's
 `plans/FS116-Y4-construction.md` § 3.3; item 59's `data/fs129/demand-judged.md` J10 line. None is a derivation file.
+
+## Stage 5 — SAVED: the worklist closed, what is left for FS129-Z2, the hand-back
+
+### 5.1 SR3's answer, folded in (after stage 2's text was saved)
+
+The coordinator relayed FS129-SR3's answer to this job's QFCASE message (`plans/FS129-SR3-audit.md` § Stage 2 — SAVED: item (d), commit 2160c171):
+on FS116-V6's route the chain under FS129-OR1-QFREE never uses "simple", and SR3 derived FS129-SR3-EMPTY-NS and FS129-SR3-QFREE-NS (one mind).
+So FS129-SR2-QFCASE stands, read as citing QFREE-NS, and item 117's correction to OR1 § J3 stands. `plans/FS129-derivation.md`'s note under QFCASE
+and its head section say so (rebuilt at commit 7c388842; entry lint PASS); stage 2's bullet above is superseded by this paragraph. SR3's caution
+that FS129-MR1-DOUBLETIP cannot replace FS116-V6-HUG without losing EMPTY-NS is in DOUBLETIP's prose and in § 5.3.
+
+### 5.2 Every inventory line routed to FS129-Z1
+
+| item | what | done here, or declined and why |
+|---|---|---|
+| 23, 39, 47, 57, 64, 73, 84, 92, 114 | score the registered expectations (Poros's A1–A7; the lanes') | **left for FS129-Z2** (its brief: the scored predictions) |
+| 28, 42 | `plans/STUB-cp-plane-six.md` lines 53, 55, 87 (the collapse held; Falconer held and read) | **left for FS129-Z2** (stubs) |
+| 45, 72, 84, 92, 113 (prior art) | prior-art debts of the compositions | **declined**: kept "owed" as each reader measured it (this brief's Done means 1); a search over some 25 statements is a job of its own — held for the coordinator |
+| 58 | `plans/STUB-forced-pair.md` line 37 holds under Condition 5 only | **left for FS129-Z2** (stub bearing line) and FS129-P1 |
+| 59 | side-1 remarks; `plans/FS116-local-exclusion.md` § 3.6; J10's line | **declined here**: none is a derivation file (outside this job's touches); for FS129-Z2 or the coordinator |
+| 60, 80, 82, 87, 101; 117's FS-125 line | stubs to re-aim, bearing lines | **left for FS129-Z2**; DOUBLETIP's pruning role (82) and HOSTS (iv) ↔ row 88 (87) are named in the entries' prose |
+| 67, 106 | FALC-RED's argument in Falconer's p. 188 order | **done**: FS129-OA1-FALC-RED marked superseded by FS129-SA1-FALC-RED (same statement) |
+| 69, 89, 108 | ASTRA-T10; FS89 Notation (CL2, S0A-2, S0A-10); FS100-T1's grade line | **done**: errata 1–4 (stage 4) |
+| 77, 90, 99, 111 | index corrections (false and reversed edges, prefixes, README notes) | **left for FS129-Z2** (its brief: the index corrections) |
+| 78 | FS110-A3-HOLE's link | **done**: erratum 6 |
+| 96 | FS116-Y4-EMPTY's not-claimed line; `plans/FS116-Y4-construction.md` § 3.3 | **done** for the derivation file (erratum 10); the construction record is outside this job's files — for FS129-Z2 or the coordinator |
+| 97, 106, 115 | pass 3's merged forms in place of what they merge | **done**: stage 2 (seven merged forms, eleven superseded entries marked; no hypothesis dropped) |
+| 100 | DOUBLETIP's `uses only:`; RINGWIND's prior art | **done**: both fields corrected in `plans/FS129-derivation.md`, originals quoted |
+| 109 | S0A-2 quoted with the repaired Notation | **done** by erratum 1–2; FS129-L1 still carries the warning |
+| 110, 113 | the fifteen lost theorems and X22D-FLK2 | **done**: stage 3, sixteen entries, J45 first |
+| 117 | COVER-SC's handoff; EQ → SUPK; RSTOP's membership; NOREP's GAP; OR1 § J3 | **done**: errata 5, 7, 8, 9; § J3's correction recorded under FS129-SR2-QFCASE (it stands, by SR3) — OR1's record itself is not this job's file |
+
+### 5.3 Left for FS129-Z2
+
+1. File FS129-SR3's entries (EMPTY-NS, QFREE-NS and the rest of SR3's record) into `plans/FS129-derivation.md`: add them to `ORDER` and `PROSE` in
+   `tools/fs129_z1_assemble.py` (it reads the readers' records listed in `READERS`; add "SR3") and re-run it — its check keeps every statement
+   verbatim. With QFREE-NS filed, FS129-OR1-QFREE's and QFCASE's prose can name it as the stronger form.
+2. **The Lean list (SR3's caution):** SR1 § 6.2 item 2, "DOUBLETIP in place of V6-HUG", would lose FS129-SR3-EMPTY-NS, because DOUBLETIP's step 3
+   uses one cone per tile at the hubs; FS116-V6-HUG's own colour step is kept for the Γ-free ring. For FS129-L1's input.
+3. Three wording notes for the Lean list: FS129-SR1-BENDLE3 should conclude with BENDANY's tile clause (or FS129-OR1-BEND3's is lost);
+   FS129-SR1-RINGBAND does not restate RINGWIND's periodicity clauses; QFREE and the bends are formalized on FS116-V6's route.
+4. The index (items 77, 90, 99, 111, 118) and its where-else column; the stubs (items 28, 42, 58, 60, 80, 82, 87, 101, 117's FS-125 line); the scored
+   predictions (§ 5.2's first row); the front-page drafts — ledger rows, Frontier lines, grokking instances — from `plans/FS129-derivation.md`.
+5. The non-derivation files of items 59 and 96 (§ 5.2).
+6. The prior-art debts, if the coordinator assigns them (25 entries in `plans/FS129-derivation.md` and the sixteen filed in stage 3 read "owed" or
+   "partly").
+
+### 5.4 Final gates
+
+`derive_gate.py all plans/FS129-derivation.md` re-run at this stage: see `data/fs129/z1/gate-all.txt` (overwritten at stage 5). Every file this job
+appended to passes after as it did before, or fails as before only for want of an entry (stages 3–4).
