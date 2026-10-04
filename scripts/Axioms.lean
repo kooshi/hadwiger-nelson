@@ -2948,6 +2948,28 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.row134BaseUA
 #print axioms HadwigerNelson.Plane.not_row134BaseUA_seven
 
+/-! ## FS-131 wave 5 (job FS131-KB) — the base's skeleton: row134BaseUA's leaves (BaseWalk) (sorry until the base's implementer lands it) -/
+
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce
+#print axioms HadwigerNelson.Plane.CircleColouring.select
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.cubic_of_three
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.pseudo_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.pseudo_ncard_le_two
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.pseudo_finite
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.exists_pseudoCircle
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.retArc_partner
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_finite
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_nested
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.exists_endpoint
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.exists_eleventh
+#print axioms HadwigerNelson.Plane.ArcMap.endpoint_dist_ge
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.vin_antipodal
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.eleventh_antipodal
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.cor3_base
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.l3_base
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.hex_base
+#print axioms HadwigerNelson.Plane.ArcMap.eleventh_type
+
 /-! ## FS-131 wave 5 (job FS131-K5b) — the skeleton's last three rows: ROTHEX, BV-HEX (HexRing), CVB-THOM (MapGraph) (sorry until wave 5's implementer lands it) -/
 
 #print axioms HadwigerNelson.Plane.Side.sign_flip
