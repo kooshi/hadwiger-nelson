@@ -469,3 +469,12 @@ reason by the close.*
     Alternative weighed: a fifth Sonnet implementer on the same plan. Why: two implementers stopped early on the same hard leaves; the gap is in the plan's
     granularity, which is a planner's work, not more implementer attempts. Confidence: medium-high. Launched in the slot I2d freed; FS131-W and FS131-LEB wait for
     the next planner slot after FS131-K4c. Source: this commit.
+84. **FS131-K4c done, harness ≈ 465k** (report on its branch; `fs131-w4` at `f620977c`, checked): wave 4 fully planned — the nine unit-arc items stated (fragments
+    `l60Frag`, `isoFrag`), both modeling passes over the whole wave, a plan per leaf (86 `sorry` leaves; seven engines; about 35 easy, 35 moderate, 16 hard; K4's
+    `l60_le` route corrected to interior points), the implementer's handoff (§ 14), and the wave-5 notes (§ 14.5: FLANK-Q's discharge, the moves' new form,
+    C-DOUBLE's reading, N3-END's chain clause, L60-WALK, the outside-backlog hypotheses). Recommended wave-4 vacuity carriers in § 14.3 (the implementer records
+    the call). Readings recorded: L60-EQ's third tile; the bends as "the arc is removed as an arc of ω(P)". Record slip (K4c's own): Stage 9 cites Lebesgue's
+    ruling as item 65; it is 66.
+85. **Brief FS131-W, Woodall's chain** (`debruijn`, Opus; `data/fs131/briefs/FS131-W-woodall.md`, gated PASS, the three rows quoted from the backlog): worktree
+    `.claude/worktrees/fs131-ww` made by Keryx with the recipe, branched at wave 4's full skeleton `f620977c`. Launched in the slot K4c freed (items 75, 83).
+    Queued next: FS131-I4 (wave 4's implementer) and FS131-LEB, as slots free. Source: this commit.
