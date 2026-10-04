@@ -2161,6 +2161,9 @@ No native evaluation. -/
 
 /-! ## FS-131 wave 3 (job FS131-I3c) — the implementer's added children and the rows' leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.mem_angleIcc_of_cos_nonneg_single
+#print axioms HadwigerNelson.Plane.ArcMap.cos_nonneg_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.isClosed_coneAt
 #print axioms HadwigerNelson.Plane.ArcMap.e_sigma_half
 #print axioms HadwigerNelson.Plane.ArcMap.initialPiece_cases
 #print axioms HadwigerNelson.Plane.ArcMap.sq_norm_pieceB

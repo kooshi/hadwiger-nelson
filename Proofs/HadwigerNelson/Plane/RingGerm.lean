@@ -1212,6 +1212,91 @@ theorem four_of_bothKind_simple (hF : F.Valid) (hN : F.NonSiamese) (hS : F.Simpl
 
 /-! ## FS116-Y4-FLANK (any valid map; the covering hypothesis is idle) -/
 
+/-- Cosine nonnegative against one angle `γ` puts `β` in the angular interval `[γ − 90°, γ + 90°]`. -/
+theorem mem_angleIcc_of_cos_nonneg_single {γ β : ℝ} (h : 0 ≤ Real.cos (β - γ)) :
+    β ∈ angleIcc (γ - π / 2) (γ + π / 2) := by
+  have hπ := Real.pi_pos
+  set m : ℤ := round ((β - γ) / (2 * π)) with hm
+  set β₀ := β - 2 * π * m with hβ₀
+  have hcos : Real.cos (β₀ - γ) = Real.cos (β - γ) := by
+    rw [hβ₀, show β - 2 * π * m - γ = (β - γ) - m * (2 * π) by ring, Real.cos_sub_int_mul_two_pi]
+  have hr : |(β - γ) / (2 * π) - m| ≤ 1 / 2 := abs_sub_round _
+  have hβ₀θ : |β₀ - γ| ≤ π := by
+    have : β₀ - γ = 2 * π * ((β - γ) / (2 * π) - m) := by
+      rw [hβ₀]; field_simp; ring
+    rw [this, abs_mul, abs_of_pos (by positivity : 0 < 2 * π)]
+    nlinarith [abs_nonneg ((β - γ) / (2 * π) - m)]
+  have hβ₀1 : |β₀ - γ| ≤ π / 2 := by
+    by_contra hgt
+    push Not at hgt
+    rcases le_or_gt 0 (β₀ - γ) with hpos | hneg
+    · rw [abs_of_nonneg hpos] at hgt hβ₀θ
+      have := Real.cos_neg_of_pi_div_two_lt_of_lt hgt (by linarith)
+      linarith
+    · rw [abs_of_neg hneg] at hgt hβ₀θ
+      have := Real.cos_neg_of_pi_div_two_lt_of_lt (x := γ - β₀) (by linarith) (by linarith)
+      rw [← Real.cos_neg, neg_sub] at hcos
+      linarith
+  obtain ⟨h1, h2⟩ := abs_le.mp hβ₀1
+  exact mem_iUnion.mpr ⟨m, by linarith, by linarith⟩
+
+/-- **The tangent cone of a unit disc at a boundary point**: a set inside `B̄(y + e γ, 1)` approaches `y` only along directions
+`β` with `cos(β − γ) ≥ 0`. -/
+theorem cos_nonneg_of_mem_coneAt {S : Set ℂ} {y : ℂ} {γ : ℝ} (hS : S ⊆ closedBall (y + e γ) 1) {β : ℝ}
+    (hβ : β ∈ coneAt S y) : 0 ≤ Real.cos (β - γ) := by
+  by_contra hneg
+  push Not at hneg
+  obtain ⟨z, hzS, hzy, -, hdir⟩ := hβ (-Real.cos (β - γ)) (by linarith)
+  set w := z - y with hw
+  set n := ‖w‖ with hn
+  have hw0 : w ≠ 0 := sub_ne_zero.mpr hzy
+  have hn0 : 0 < n := norm_pos_iff.mpr hw0
+  have hz1 : ‖w - e γ‖ ≤ 1 := by
+    have := mem_closedBall.mp (hS hzS)
+    rwa [dist_eq_norm, show z - (y + e γ) = w - e γ by rw [hw]; ring] at this
+  have hsq : n ^ 2 ≤ 2 * (w * (starRingEnd ℂ) (e γ)).re := by
+    have h1 : ‖w - e γ‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (w - e γ)]
+    rw [Complex.sq_norm, Complex.normSq_apply] at h1
+    have h2 : n ^ 2 = w.re ^ 2 + w.im ^ 2 := by
+      rw [hn, Complex.sq_norm, Complex.normSq_apply]; ring
+    have h3 := e_eq γ
+    have h4 : (e γ).re ^ 2 + (e γ).im ^ 2 = 1 := by
+      rw [re_e, im_e]; exact Real.cos_sq_add_sin_sq γ
+    simp only [Complex.sub_re, Complex.sub_im] at h1
+    simp only [Complex.mul_re, Complex.conj_re, Complex.conj_im]
+    nlinarith [h1, h2, h4]
+  have hdre : 0 ≤ (w / (n : ℂ) * (starRingEnd ℂ) (e γ)).re := by
+    rw [div_mul_eq_mul_div, Complex.div_ofReal_re]
+    exact div_nonneg (by nlinarith [sq_nonneg n]) hn0.le
+  have hre : (e β * (starRingEnd ℂ) (e γ)).re = Real.cos (β - γ) := re_e_mul_conj_e β γ
+  have hdiff : (w / (n : ℂ) * (starRingEnd ℂ) (e γ)).re - (e β * (starRingEnd ℂ) (e γ)).re
+      ≤ ‖w / (n : ℂ) - e β‖ := by
+    have : (w / (n : ℂ) * (starRingEnd ℂ) (e γ)).re - (e β * (starRingEnd ℂ) (e γ)).re
+        = ((w / (n : ℂ) - e β) * (starRingEnd ℂ) (e γ)).re := by simp [sub_mul]
+    rw [this]
+    calc _ ≤ ‖(w / (n : ℂ) - e β) * (starRingEnd ℂ) (e γ)‖ := Complex.re_le_norm _
+      _ = ‖w / (n : ℂ) - e β‖ := by rw [norm_mul, Complex.norm_conj, norm_e, mul_one]
+  rw [hre] at hdiff
+  have hdir' : ‖w / (n : ℂ) - e β‖ < -Real.cos (β - γ) := hdir
+  linarith
+
+/-- The cone of a set at a point is a closed set of angles. -/
+theorem isClosed_coneAt (S : Set ℂ) (y : ℂ) : IsClosed (coneAt S y) := by
+  rw [← isOpen_compl_iff, Metric.isOpen_iff]
+  intro β hβ
+  simp only [mem_compl_iff, coneAt, mem_setOf_eq, not_forall, not_exists, not_and, not_lt] at hβ
+  obtain ⟨ε, hε, hnone⟩ := hβ
+  refine ⟨ε / 2, half_pos hε, fun β' hβ' => ?_⟩
+  simp only [mem_compl_iff, coneAt, mem_setOf_eq, not_forall, not_exists, not_and, not_lt]
+  refine ⟨ε / 2, half_pos hε, fun z hzS hzy hzd => ?_⟩
+  have h1 := hnone z hzS hzy (by linarith [hzd])
+  have h2 : ‖e β' - e β‖ ≤ |β' - β| := norm_e_sub_e_le β' β
+  rw [mem_ball, Real.dist_eq] at hβ'
+  have h3 : ‖(z - y) / (‖z - y‖ : ℂ) - e β‖ ≤ ‖(z - y) / (‖z - y‖ : ℂ) - e β'‖ + ‖e β' - e β‖ := by
+    calc _ = ‖((z - y) / (‖z - y‖ : ℂ) - e β') + (e β' - e β)‖ := by ring_nf
+      _ ≤ _ := norm_add_le _ _
+  linarith
+
 /-- **FS116-Y4-FLANK**, the cones: let `t` be a tile with `y = r(ψ)` and `y' = r(ψ + 60°)` in its closure, its cone at `y`
 containing `(ψ + 150°, ψ + 210°)` and its cone at `y'` containing `(ψ + 210°, ψ + 270°)`; then its cone at `y` lies in
 `[ψ + 30°, ψ + 210°]` and holds `ψ + 210°` (it ends there), and its cone at `y'` lies in `[ψ + 210°, ψ + 390°]` and holds
@@ -1222,7 +1307,36 @@ theorem flank_cone (hF : F.Valid) {t : Set ℂ} (ht : F.IsTile t) {p : ℂ} {ψ 
     coneAt t (ringPt p ψ) ⊆ angleIcc (ψ + π / 6) (ψ + 7 * π / 6) ∧ ψ + 7 * π / 6 ∈ coneAt t (ringPt p ψ) ∧
       coneAt t (ringPt p (ψ + π / 3)) ⊆ angleIcc (ψ + 7 * π / 6) (ψ + 13 * π / 6) ∧
       ψ + 7 * π / 6 ∈ coneAt t (ringPt p (ψ + π / 3)) := by
-  sorry
+  have hπ := Real.pi_pos
+  have hyy' : ringPt p (ψ + π / 3) = ringPt p ψ + e (ψ + 2 * π / 3) := by
+    have h := ringPt_sub_ringPt_plus_third p ψ
+    have h2 : e (ψ + 2 * π / 3) = - e (ψ - π / 3) := by
+      have : ψ + 2 * π / 3 = (ψ - π / 3) + π := by ring
+      rw [this, e_add, e_pi]; ring
+    rw [h2, ← h]; ring
+  have hty' : t ⊆ closedBall (ringPt p (ψ + π / 3)) 1 :=
+    subset_closure.trans (ht.closure_subset_closedBall hF hy')
+  have hty : t ⊆ closedBall (ringPt p ψ) 1 := subset_closure.trans (ht.closure_subset_closedBall hF hy)
+  have hy1 : t ⊆ closedBall (ringPt p ψ + e (ψ + 2 * π / 3)) 1 := by rw [← hyy']; exact hty'
+  have hy2 : t ⊆ closedBall (ringPt p (ψ + π / 3) + e (ψ + 2 * π / 3 + π)) 1 := by
+    have : ringPt p (ψ + π / 3) + e (ψ + 2 * π / 3 + π) = ringPt p ψ := by
+      rw [e_add, e_pi, hyy']; ring
+    rw [this]; exact hty
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro β hβ
+    have h := mem_angleIcc_of_cos_nonneg_single (cos_nonneg_of_mem_coneAt hy1 hβ)
+    convert h using 2 <;> ring
+  · have : closure (Ioo (ψ + 5 * π / 6) (ψ + 7 * π / 6)) ⊆ coneAt t (ringPt p ψ) :=
+      closure_minimal hcy (isClosed_coneAt t _)
+    rw [closure_Ioo (by linarith)] at this
+    exact this ⟨by linarith, le_rfl⟩
+  · intro β hβ
+    have h := mem_angleIcc_of_cos_nonneg_single (cos_nonneg_of_mem_coneAt hy2 hβ)
+    convert h using 2 <;> ring
+  · have : closure (Ioo (ψ + 7 * π / 6) (ψ + 3 * π / 2)) ⊆ coneAt t (ringPt p (ψ + π / 3)) :=
+      closure_minimal hcy' (isClosed_coneAt t _)
+    rw [closure_Ioo (by linarith)] at this
+    exact this ⟨le_rfl, by linarith⟩
 
 /-- **FS116-Y4-FLANK**, the edges exist: at `y` (in the domain) under the cone hypotheses, `t`'s edge leaving `y` in the
 direction `ψ + 210°` is an initial piece of an arc of the map lying in `cl t`; likewise at `y'`. -/
