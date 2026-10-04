@@ -457,3 +457,6 @@ reason by the close.*
     colours" read as "exactly two colours absent" (G-A4SIX); the bends in one shape (`bend_away`, N2-AWAY with N2-TAN; FS112-BEND's two cases special cases).
     Reading (no defect): L60-EQ's "each end is a vertex carrying a third tile" as some tile approaching each end from the open half-plane facing away from the
     other end. All nine items stated (K4c's message; commit to follow).
+81. **Wave 4 fully stated** (K4c, `fs131-w4` at `df041d0a`, checked): every row but Woodall's three (FS131-W) and C-DOUBLE (wave 5); build green, only `sorry`
+    warnings; 97 declarations listed, 0 missing; architecture check passing. Leaf plans, the obligation-modeling pass and the handoff follow. FS131-W may branch
+    from `df041d0a` (it holds FS106-L and FS106-TS-T, stated at `f2a09351`).
