@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Terminal
+import Proofs.HadwigerNelson.Plane.ValidMap.HexRing
 
 /-!
 # Density: discs of radius 1 and 3, row 134's base with unit arcs, a four-colour vertex in every valid map
@@ -7,7 +8,7 @@ Wave 5's skeleton (`plans/FS131-w5-kernel-plan.md` § 3). Rows: **FS129-SR2-DISC
 `disc1ts_degree`; the fragment form FS129-OR1-LOCALDENSE reads, `disc1_local`), **FS112-N3-COR3** (`cor3`), **FS112-N3-BASE**
 (`n3_base`), **FS129-OR1-LOCALDENSE** (`localDense`), **FS112-N3-DENSE3** (`dense3`), **FS114-CV-EXISTS** (`cv_exists`), and the
 seven-colour control of `Row134BaseUA` (`not_row134BaseUA_seven`). `Row134BaseUA` (the foundation, `Plane/ValidMap/Chain`) is wave 5's
-intermediate statement of the base, proved here as `row134BaseUA` (FS112-N3-BASE's walk; inventory item 197). Still to be stated by the successor planner: FS112-ROTHEX, FS114-BV-HEX, FS114-CVB-THOM (plan § 5).
+intermediate statement of the base, proved here as `row134BaseUA` (FS112-N3-BASE's walk; inventory item 197). FS112-ROTHEX and FS114-BV-HEX, which the walk reads, are stated in `Plane/ValidMap/HexRing`; FS114-CVB-THOM in `Plane/ValidMap/MapGraph` (plan § 8).
 -/
 
 namespace HadwigerNelson.Plane

@@ -1,0 +1,251 @@
+import Proofs.HadwigerNelson.Plane.ValidMap.Chain
+import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
+import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
+import Proofs.HadwigerNelson.Plane.LocalStructure
+
+/-!
+# The ring of a cubic trichromatic vertex under the base's hypothesis: N2-ROT, N2-HEX, Prop. 17, BV-HEX's four clauses
+
+Wave 5's skeleton (`plans/FS131-w5-kernel-plan.md` § 8), the two rows the walk `row134BaseUA` reads at its Prop. 17 and Lemma 3 steps
+(FS112-N3-BASE's table, `plans/FS112-NB3-verification.md` § 1.4 N3-BASE steps 8, 10). The ring `ω(u)` of a cubic trichromatic `u` is read
+through CB's **pseudo-colour** `c′(z) = P_cl(z) ∖ P_cl(u)` (`pseudoColours`), which is a single colour on a germ of `ω(u)` whether the germ
+runs through a tile or along an in- or out-contact arc of `Γ` — so the ring lemmas are stated with unit arcs allowed, with no ring
+colouring object:
+
+* `GermPseudo u θ s a` — the germ of `ω(u)` on side `s` of `r(θ)` has pseudo-colour `{a}`;
+* `HexRing u ψ b` — the six-point rotating configuration: `x_j = r(ψ + 60°j)`, `c′(x_j) = {b j, b (j+1)}`, the germ just before `x_j`
+  pseudo-coloured `b j`, just after `b (j+1)` (`b : ZMod 3 → Fin k` injective). It is BV-HEX's "regular hexagon of kept points" and the
+  germ-level form of FS-110's "purely rotating ring" (every change point of type (A+, A−));
+* `RingProper u` — BV-L3's "proper finite circle colouring": finitely many points of `ω(u)` on `Γ`, and property (ii) at `60°` pairs;
+* `DoubleEvent u₁ φ u₂ χ α β` — BV-ND's double event on the unit-distance linkage, read at one configuration through the two germs.
+
+Rows: **FS112-ROTHEX** (`rot_noThird`, `rot_out`, `rot_in`, `hex_regular`, `p17_ua`) and **FS114-BV-HEX** (`bv_hex`, `bv_l3`, `bv_nd`,
+`bv_nd1`, with BV-ND's step 1 as `linkage_dot_ne_zero`).
+-/
+
+namespace HadwigerNelson.Plane
+
+open Complex Real Set Filter Topology Metric
+
+/-- The other side of a ring point. -/
+def Side.flip : Side → Side
+  | .cw => .ccw
+  | .ccw => .cw
+
+@[simp] theorem Side.sign_flip (s : Side) : s.flip.sign = -s.sign := by
+  cases s <;> simp [Side.flip, Side.sign]
+
+namespace ArcMap
+
+variable {k : ℕ} (F : ArcMap k)
+
+/-! ## The vocabulary -/
+
+/-- **The germ of `ω(u)` on side `s` of `r(θ)` has pseudo-colour `{a}`** relative to `u`: at each of its points the colours not carried
+at `u` are exactly `a` (the germ runs through a tile of colour `a ∉ P_cl(u)`, or along an arc of `Γ` with one side colour in `P_cl(u)`
+and the other `a`). -/
+def GermPseudo (u : ℂ) (θ : ℝ) (s : Side) (a : Fin k) : Prop :=
+  GermIn u θ s {z | F.pseudoColours u z = {a}}
+
+/-- **The six-point rotating configuration** at `u` from the angle `ψ`, coloured cyclically by `b` (BV-HEX's "regular hexagon of kept
+points", `plans/BASE-V-verification.md` § 1a.4; the germ form of FS110-N2-HEX's "purely rotating ring"): `b` is injective, and for
+`j < 6` the point `x_j = r(ψ + 60°j)` has pseudo-colour `{b j, b (j + 1)}`, the germ of `ω(u)` just before it (clockwise) pseudo-colour
+`b j` and just after it `b (j + 1)`. Every `x_j` is then a change point of type (A+, A−) in FS110-N2-ROT's table. -/
+def HexRing (u : ℂ) (ψ : ℝ) (b : ZMod 3 → Fin k) : Prop :=
+  Function.Injective b ∧ ∀ j : ℕ, j < 6 →
+    F.pseudoColours u (ringPt u (ψ + j * (π / 3))) = {b j, b (j + 1)} ∧
+      F.GermPseudo u (ψ + j * (π / 3)) .cw (b j) ∧ F.GermPseudo u (ψ + j * (π / 3)) .ccw (b (j + 1))
+
+/-- **The ring of `u` is a proper finite circle colouring** (BV-L3's hypothesis, `plans/BASE-V-verification.md` § 1b.3, read on the map):
+`ω(u)` meets `Γ` in finitely many points, and no two change points of `ω(u)` at distance `1` switch between the same pair of colours
+(property (ii)). Property (i) — two points of `ω(u)` off `Γ` at distance `1` have different colours — is validity. -/
+def RingProper (u : ℂ) : Prop :=
+  (F.Γ ∩ sphere u 1).Finite ∧
+    ∀ ψ ψ' X X' Y Y', dist (ringPt u ψ) (ringPt u ψ') = 1 → F.IsChangePoint u ψ X X' → F.IsChangePoint u ψ' Y Y' →
+      ({X, X'} : Set (Fin k)) ≠ {Y, Y'}
+
+/-- **A double event** (BV-ND, `plans/BASE-V-verification.md` § 1b.2) at `x₀ = r_{u₁}(φ)`, `y₀ = r_{u₂}(χ)` with `|x₀ − y₀| = 1`: in the
+sense of the unit-distance linkage in which both points advance with positive component along `e = x₀ − y₀` (sides `s₁`, `s₂`; the
+velocity of `r_u(θ)` on side `s` is `s · i e(θ)`), the colour along `ω(u₁)` switches `α → β` at `x₀` and the colour along `ω(u₂)` switches
+`β → α` at `y₀` (each read on the germs, which lie in tiles). The positivity of both components is BV-ND's `μ ≠ 0`; for `1 < |u₁ − u₂| < 2`
+it holds at every configuration (`linkage_dot_ne_zero`). -/
+def DoubleEvent (u₁ : ℂ) (φ : ℝ) (u₂ : ℂ) (χ : ℝ) (α β : Fin k) : Prop :=
+  dist (ringPt u₁ φ) (ringPt u₂ χ) = 1 ∧ α ≠ β ∧ ∃ s₁ s₂ : Side,
+    0 < dot ((s₁.sign : ℂ) * (I * e φ)) (ringPt u₁ φ - ringPt u₂ χ) ∧
+    0 < dot ((s₂.sign : ℂ) * (I * e χ)) (ringPt u₁ φ - ringPt u₂ χ) ∧
+    GermIn u₁ φ s₁.flip (F.region α) ∧ GermIn u₁ φ s₁ (F.region β) ∧
+    GermIn u₂ χ s₂.flip (F.region β) ∧ GermIn u₂ χ s₂ (F.region α)
+
+end ArcMap
+
+/-! ### Spec examples -/
+
+section Spec
+
+open ArcMap
+
+/-- On the one-colour plane a pseudo-colour is never a singleton, so no germ carries one (a spec example for `GermPseudo`). -/
+example (j : Fin 2) (u : ℂ) (θ : ℝ) (s : Side) (a : Fin 2) : ¬ (ArcMap.const univ isOpen_univ j).GermPseudo u θ s a := by
+  rintro ⟨δ, hδ, hsub⟩
+  have hz := hsub ⟨δ / 2, ⟨by linarith, by linarith⟩, rfl⟩
+  simp only [mem_setOf_eq, ArcMap.pseudoColours, const_univ_coloursAt, sdiff_self] at hz
+  exact (Set.singleton_ne_empty a) hz.symm
+
+/-- **Adversary**: the one-colour plane carries no six-point rotating configuration (a spec example for `HexRing`). -/
+example (j : Fin 2) (u : ℂ) (ψ : ℝ) (b : ZMod 3 → Fin 2) : ¬ (ArcMap.const univ isOpen_univ j).HexRing u ψ b := by
+  rintro ⟨hb, h⟩
+  have := (h 0 (by norm_num)).1
+  simp only [ArcMap.pseudoColours, const_univ_coloursAt, sdiff_self] at this
+  exact (Set.insert_nonempty _ _).ne_empty this.symm
+
+/-- The one-colour plane's rings are proper: no point of any ring lies on `Γ` and there are no change points (a spec example for
+`RingProper`). -/
+example (j : Fin 2) (u : ℂ) : (ArcMap.const univ isOpen_univ j).RingProper u := by
+  refine ⟨by simp [ArcMap.Γ, ArcMap.const], ?_⟩
+  intro ψ ψ' X X' Y Y' _ hcp
+  exact absurd hcp.1 (by simp [ArcMap.Γ, ArcMap.const])
+
+/-- **Adversary**: the one-colour plane has no double event (both germs of a switch would need two colours). -/
+example (j : Fin 2) (u₁ u₂ : ℂ) (φ χ : ℝ) (α β : Fin 2) :
+    ¬ (ArcMap.const univ isOpen_univ j).DoubleEvent u₁ φ u₂ χ α β := by
+  rintro ⟨-, hαβ, s₁, -, -, -, ⟨δ, hδ, hα⟩, ⟨δ', hδ', hβ⟩, -⟩
+  have h1 := hα ⟨min δ δ' / 2, ⟨by positivity, by linarith [min_le_left δ δ']⟩, rfl⟩
+  have h2 := hβ ⟨min δ δ' / 2, ⟨by positivity, by linarith [min_le_right δ δ']⟩, rfl⟩
+  simp only [ArcMap.region, mem_inter_iff, mem_preimage, mem_singleton_iff, ArcMap.const] at h1 h2
+  exact hαβ (h1.2.symm.trans h2.2)
+
+end Spec
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-! ## FS112-ROTHEX: FS-110's ring lemmas with unit arcs under the base's hypothesis -/
+
+/-- **FS112-ROTHEX, N2-ROT's "no `r`-tile at `x`"** (FS110-N2-ROT, `plans/FS110-N-proof.md` l. 393; with unit arcs, NB3 § 1.4 N3-BASE step
+10): in a valid six-coloured fragment covering `B̄(u, 2)` about a cubic trichromatic `u` under the base's hypothesis, a change point
+`x = r(ψ)` of the pseudo-colouring of `ω(u)` (pseudo-colour `p` just before, `q ≠ p` just after) carries no third pseudo-colour. The
+proof rests on FS112-N3-COR3 (`cor3`): a third pseudo-colour makes `(u, x)` a close complementary pair at distance `1` (or `x` a point of
+at least four colours), whose rhombus corners carry four colours inside `B̄(u, 2)`. Six colours are spent (`P_cl(u) ∪ {p, q, r}` is all
+of them). Inhabitant of the change-point hypotheses on a map: none under the base's hypothesis is expected (the base refutes it); the
+statement is a step inside `row134BaseUA`'s proof (`GENERIC`). -/
+theorem rot_noThird {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
+    {ψ : ℝ} {p q : Fin 6} (hpq : p ≠ q) (hp : F.GermPseudo u ψ .cw p) (hq : F.GermPseudo u ψ .ccw q) :
+    F.pseudoColours u (ringPt u ψ) = {p, q} := by
+  sorry
+
+/-- **FS112-ROTHEX, N2-ROT's outward row (A+, A−)**: at a change point `x = r(ψ)` (`p` before, `q` after) with `c(σx−) = q` (A+) and
+`c(σ⁻¹x+) = p` (A−), `σ` the rotation by `60°` about `u`, the point `x` carries `p`, `q` and one colour `g` of `P_cl(u)`; `g` fills the
+**outward cone** at `x` — the points near `x` outside both `B̄(σx, 1)` and `B̄(σ⁻¹x, 1)`, the directions `(−30°, 30°)` about the outward
+radial; every `g`-tile at `x` misses `B̄(u, 1)`; and `u`'s `g`-sector lies in the closed half-plane away from `x` (its tangent cone at `u`
+has non-positive component along `x − u`). Under the base's hypothesis, unit arcs allowed (N2-ROT uses N-E2 only). A step inside
+`row134BaseUA`'s proof (`GENERIC`). -/
+theorem rot_out {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
+    {ψ : ℝ} {p q : Fin 6} (hpq : p ≠ q) (hp : F.GermPseudo u ψ .cw p) (hq : F.GermPseudo u ψ .ccw q)
+    (hAp : F.GermPseudo u (ψ + π / 3) .cw q) (hAm : F.GermPseudo u (ψ - π / 3) .ccw p) :
+    ∃ g ∈ F.coloursAt u, F.coloursAt (ringPt u ψ) = {p, q, g} ∧
+      (∃ ρ > 0, ∀ z ∈ F.interiorPts ∩ ball (ringPt u ψ) ρ,
+        1 < dist z (ringPt u (ψ + π / 3)) → 1 < dist z (ringPt u (ψ - π / 3)) → F.col z = g) ∧
+      (∀ T, F.TileOf g T → ringPt u ψ ∈ closure T → Disjoint T (closedBall u 1)) ∧
+      ∀ β ∈ coneAt (F.region g) u, dot (e β) (ringPt u ψ - u) ≤ 0 := by
+  sorry
+
+/-- **FS112-ROTHEX, N2-ROT's inward row (B+, B−)**: at a change point `x = r(ψ)` with `c(σx+) = p` (B+) and `c(σ⁻¹x−) = q` (B−), the point
+`x` carries `p`, `q` and one colour `g` of `P_cl(u)`; `g` fills the **inward cone** at `x` — the points near `x` inside both `B(σx, 1)` and
+`B(σ⁻¹x, 1)`, the directions `(150°, 210°)`; every `g`-tile at `x` lies in `B(u, 1)`; and `u`'s `g`-sector lies in the closed half-plane
+toward `x`. Under the base's hypothesis, unit arcs allowed. A step inside `row134BaseUA`'s proof (`GENERIC`). -/
+theorem rot_in {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
+    {ψ : ℝ} {p q : Fin 6} (hpq : p ≠ q) (hp : F.GermPseudo u ψ .cw p) (hq : F.GermPseudo u ψ .ccw q)
+    (hBp : F.GermPseudo u (ψ + π / 3) .ccw p) (hBm : F.GermPseudo u (ψ - π / 3) .cw q) :
+    ∃ g ∈ F.coloursAt u, F.coloursAt (ringPt u ψ) = {p, q, g} ∧
+      (∃ ρ > 0, ∀ z ∈ F.interiorPts ∩ ball (ringPt u ψ) ρ,
+        dist z (ringPt u (ψ + π / 3)) < 1 → dist z (ringPt u (ψ - π / 3)) < 1 → F.col z = g) ∧
+      (∀ T, F.TileOf g T → ringPt u ψ ∈ closure T → T ⊆ ball u 1) ∧
+      ∀ β ∈ coneAt (F.region g) u, 0 ≤ dot (e β) (ringPt u ψ - u) := by
+  sorry
+
+/-- **FS112-ROTHEX, N2-HEX** (FS110-N2-HEX, `plans/FS110-N-proof.md` § 4.4, "sector geometry at `u`"): at a cubic trichromatic `u`, if each of
+the six points `x_j = r(ψ + 60°j)` is *served* — some sector of `u` lies in the closed half-plane away from `x_j` — then `u` is **regular**
+(its three sectors have angle `120°`, their bounding directions `ψ + 30° + 60° j₀ + 120° j`, each sector centred between the antipodes of two
+consecutive `x_j`), **or** `u` is a **double cusp whose two horns are antipodal** (two of its tangent cones single opposite directions,
+the third colour filling the rest). The second disjunct is not in FS110-N2-HEX's text: its count ("a sector of angle `α` serves at most
+`⌊(180° − α)/60°⌋ + 1` of the six points") gives `4 + 4 + 0` at the angles `(0°, 0°, 360°)`, which it never lists, and two antipodal
+horns serve all six (finding F-HEXCUSP, plan § 8.4). Pure sector geometry: it reads only the tangent cones of `u`'s three sectors. The
+hypothesis `hserve` is what N2-ROT's outward row supplies at a purely rotating ring (`rot_out`). Model of the hypotheses: the regular
+vertex of the hexagonal tiling (any map with a vertex of three `120°` sectors). -/
+theorem hex_regular {u : ℂ} (hu0 : u ∈ F.dom) (hu : F.IsCubicTrichromatic u) {ψ : ℝ}
+    (hserve : ∀ j : ℕ, j < 6 → ∃ g ∈ F.coloursAt u, ∀ β ∈ coneAt (F.region g) u, dot (e β) (e (ψ + j * (π / 3))) ≤ 0) :
+    (∃ j₀ : ℕ, j₀ < 2 ∧ ∀ g ∈ F.coloursAt u, ∃ j : ℕ, j < 3 ∧
+      coneAt (F.region g) u = angleIcc (ψ + π / 6 + j₀ * (π / 3) + j * (2 * π / 3))
+        (ψ + π / 6 + j₀ * (π / 3) + (j + 1) * (2 * π / 3))) ∨
+    ∃ g₁ ∈ F.coloursAt u, ∃ g₂ ∈ F.coloursAt u, g₁ ≠ g₂ ∧ ∃ β,
+      coneAt (F.region g₁) u = angleIcc β β ∧ coneAt (F.region g₂) u = angleIcc (β + π) (β + π) := by
+  sorry
+
+/-- **FS112-ROTHEX, Prop. 17 with unit arcs** (`[SokolovVoronov2025]` Prop. 17; FS110-N3-P17's route, `plans/FS110-N-proof.md` § 2.4;
+NB3 § 1.4 N3-BASE step 10): in a valid six-coloured fragment covering `B̄(u, 2)` about a cubic trichromatic `u` under the base's
+hypothesis, the six-point rotating configuration does not occur. The row's "P17's only unit-arc exception is a both-centre `x₂`" is the
+proof's content on FS110-N3-P17's route: its one Condition-5 step ("the arc … leaves `x₁` tangent to `ω(x₂)` with curvature `≠ 1`") fails
+only on a unit arc of `ω(x₂)` with sides `q` and `g`, both carried at `x₂` — a both-centre, excluded by FS112-N3-NOBOTH (`noBoth`) and the
+base's hypothesis. A second route is FS114-BV-HEX (`bv_hex`, which needs neither N2-ROT, N2-HEX nor NOBOTH). A refutation: no model
+expected. -/
+theorem p17_ua {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
+    {ψ : ℝ} {b : ZMod 3 → Fin 6} (hR : F.HexRing u ψ b) : False := by
+  sorry
+
+/-! ## FS114-BV-HEX: Lemma 6's `< 9` branch under H, Lemma 3 at cusps, NoDouble with unit arcs -/
+
+/-- **FS114-BV-HEX, (BV-HEX)** (`plans/BASE-V-verification.md` § 1a.4, steps 1–6): at a cubic trichromatic `u` of a valid map (unit arcs
+allowed, no Condition 5, no strip), the six-point rotating configuration ("the regular hexagon of kept points" of Lemma 6's `< 9` branch)
+cannot occur when none of its six points carries four colours or a repeated colour (so each is cubic trichromatic: the row's "when
+`x_1, …, x_6` are cubic"). Stated at every `k` and with the base's hypothesis read only at the six points, on a fragment covering `B̄(u, 1)`
+— the class the argument reads (no step spends six colours: the cone colours lie in `P_cl(u)` because `c′(x_j)` is exactly
+`{b j, b (j+1)}`); a widening, reported (G-BVHEX). Cusps and double cusps at `u` are covered (step 6's count with horn angles `0`). A
+refutation: no model expected. -/
+theorem bv_hex (hF : F.Valid) {u : ℂ} (hc : F.Covers u 1) (hu : F.IsCubicTrichromatic u) {ψ : ℝ} {b : ZMod 3 → Fin k}
+    (hR : F.HexRing u ψ b) (hH : ∀ j : ℕ, j < 6 → ringPt u (ψ + j * (π / 3)) ∉ F.fourSet ∪ F.repSet) : False := by
+  sorry
+
+/-- **FS114-BV-HEX, (BV-L3)** (`[SokolovVoronov2025]` Lemma 3, `plans/BASE-V-verification.md` § 1b.3): no two points `u₁`, `u₂` of one
+three-colour multicolour at distance in `(1, 2)` have rings that are proper finite circle colourings (in the complementary triple, which at
+six colours is the absent colours). Read at the class the argument reads: nothing about the sectors at `u₁`, `u₂` (cusps, double cusps,
+any degree); the double-event points' adjacency (BV-ND's hypothesis) supplied by the base's hypothesis on the two circles — narrower than
+BV-ND's adjacency, which also admits degree-4 bichromatic points (reported, N-BVL3). A refutation: no model expected. -/
+theorem bv_l3 {F : ArcMap 6} (hF : F.Valid) {u₁ u₂ : ℂ} (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1)
+    (h3 : (F.coloursAt u₁).ncard = 3) (hsame : F.coloursAt u₁ = F.coloursAt u₂) (ht : 1 < dist u₁ u₂) (ht' : dist u₁ u₂ < 2)
+    (hR₁ : F.RingProper u₁) (hR₂ : F.RingProper u₂)
+    (hH : ∀ x, (dist x u₁ = 1 ∨ dist x u₂ = 1) → x ∉ F.fourSet ∪ F.repSet) : False := by
+  sorry
+
+/-- **BV-ND's step 1** (`plans/BASE-V-verification.md` § 1b.2): on the unit-distance linkage of `ω(u₁)` and `ω(u₂)` with
+`|u₁ − u₂| ∉ {1, 3}`, both points move with non-zero component along `e = x₀ − y₀` — so every switch of both colours at one configuration
+is a `DoubleEvent` in one of its two senses. The input `bv_nd`'s consumers (BV-L3's step 4) use to read a `±2` jump as a double event. -/
+theorem linkage_dot_ne_zero {u₁ u₂ : ℂ} (ht : dist u₁ u₂ ≠ 1 ∧ dist u₁ u₂ ≠ 3) {φ χ : ℝ}
+    (h1 : dist (ringPt u₁ φ) (ringPt u₂ χ) = 1) :
+    dot (I * e φ) (ringPt u₁ φ - ringPt u₂ χ) ≠ 0 ∨ dot (I * e χ) (ringPt u₁ φ - ringPt u₂ χ) ≠ 0 := by
+  sorry
+
+/-- **FS114-BV-HEX, (BV-ND)** (NoDouble, `plans/BASE-V-verification.md` § 1b.2): no double event at two points neither of which carries four
+colours or a repeated colour (so the two sectors each circle passes between are adjacent) — **with unit arcs**, at cusps. Read at every
+`k` and for any centres: the event's definition carries BV-ND's `μ ≠ 0`, which is where `1 < |u₁ − u₂| < 2` entered (step 1,
+`linkage_dot_ne_zero`); steps 2–4 read neither. A widening, reported (G-BVND), whose instance `u₁ = u₂` is BV-ND1. A refutation: no model
+expected. -/
+theorem bv_nd (hF : F.Valid) {u₁ u₂ : ℂ} {φ χ : ℝ} {α β : Fin k} (hx : ringPt u₁ φ ∈ F.dom) (hy : ringPt u₂ χ ∈ F.dom)
+    (hD : F.DoubleEvent u₁ φ u₂ χ α β) (hH : ringPt u₁ φ ∉ F.fourSet ∪ F.repSet ∧ ringPt u₂ χ ∉ F.fourSet ∪ F.repSet) :
+    False := by
+  sorry
+
+/-- **FS114-BV-HEX, (BV-ND1)** (`plans/BASE-V-verification.md` § 2.3): BV-ND under the `60°` rotation of one circle — two points `x₀ = r(φ)`,
+`σx₀ = r(φ + 60°)` of `ω(u)` switching between the same pair of colours in opposite senses (`α → β` at `x₀`, `β → α` at `σx₀`, both read
+counter-clockwise: a swap) are impossible at points with no four colours and no repeated colour; with unit arcs, no strip used. So BV-H1's
+input (ii) holds under H with no Condition 5. A refutation: no model expected. -/
+theorem bv_nd1 (hF : F.Valid) {u : ℂ} {φ : ℝ} {α β : Fin k} (hαβ : α ≠ β) (hx : ringPt u φ ∈ F.dom)
+    (hy : ringPt u (φ + π / 3) ∈ F.dom)
+    (h1 : GermIn u φ .cw (F.region α)) (h2 : GermIn u φ .ccw (F.region β))
+    (h3 : GermIn u (φ + π / 3) .cw (F.region β)) (h4 : GermIn u (φ + π / 3) .ccw (F.region α))
+    (hH : ringPt u φ ∉ F.fourSet ∪ F.repSet ∧ ringPt u (φ + π / 3) ∉ F.fourSet ∪ F.repSet) : False := by
+  sorry
+
+end ArcMap
+
+end HadwigerNelson.Plane

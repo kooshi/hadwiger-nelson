@@ -6,7 +6,8 @@
 
 ## Theorems this phase proved
 
-None: a planning job. Every row of wave 5 is stated with `sorry` at its leaves; the foundation's definitions carry spec examples only.
+None: a planning job. Every row of wave 5 is stated with `sorry` at its leaves; the foundation's definitions carry spec examples only. FS131-K5b
+(stages 7–10): none either — the new vocabulary's spec examples and `Side.sign_flip` (a one-line `simp` lemma) are proved, no row.
 
 ## Stage 1 — SAVED: the readback
 
@@ -309,3 +310,222 @@ warning `declaration uses sorry`), exit 0 (`build/gate/build/20261004T182304Z-14
 `debruijn-obligation-modeling` pass over every wave-5 statement with § 4's Mathlib names confirmed by `#check` and § 4 extended to the new rows; § 14's
 handoff in wave 4's form. **Not mine (§ 5.1 item 0):** `row134BaseUA`'s leaves, FS131-KB's; I note for KB where ROTHEX or BV-HEX as stated changes
 what § 4 assumes of the walk.
+
+## Stage 8 — SAVED: the last three rows stated (§ 5.1 items 1–3)
+
+### 8.1 The skeleton added
+
+| module | rows | declarations (`sorry` leaves) |
+|---|---|---|
+| `Plane/ValidMap/HexRing` (new; imported by `Dense` for the walk) | FS112-ROTHEX, FS114-BV-HEX | `rot_noThird`, `rot_out`, `rot_in`, `hex_regular`, `p17_ua`, `bv_hex`, `bv_l3`, `linkage_dot_ne_zero`, `bv_nd`, `bv_nd1` — 10 |
+| `Plane/ValidMap/MapGraph` (new; wave 7's `RouteT` will import it) | FS114-CVB-THOM (+ CVB-PINCH) | `Thomassen.lemma1`, `Thomassen.triLattice_hyps`, `cvb_thom_reduced`, `cvb_thom`, `cvb_pinch_connected`, `cvb_hole_disconnected`, `exists_holed_valid_fragment` — 7 |
+
+Vocabulary, every definition with a spec example (each would fail on drift; adversaries on the one-colour plane): `Side.flip` (`Side.sign_flip`,
+proved), `GermPseudo`, `HexRing`, `RingProper`, `DoubleEvent`; `Thomassen.LocallyHamiltonian`, `offTwo`, `twoSepInterior`, `IsTwoSep`,
+`IsMaximalTwoSep`, `reducedVerts`, `reduced`, `triLattice` (spec example proved), `mapGraph` (spec example proved: the one-colour plane has no
+edge), `IsHoleOf` (adversary proved), `fill`, `IsOuterTile`, `filledGraph`.
+
+**The modeling decision (one, for both rows of `HexRing`).** The ring of `u` is read through CB's pseudo-colour `c′(z) = P_cl(z) ∖ P_cl(u)` on
+germs (`GermPseudo`), never through a ring-colouring object: on a germ of `ω(u)` the pseudo-colour is one colour whether the germ crosses a tile
+or runs along an in- or out-contact arc of `Γ`, which is exactly NB3's "whether `ω(u)` runs through a tile or along an in/out arc of `Γ` there".
+So unit arcs on `ω(u)` need no case. Wave 3's `ringCircleColouring` (no ring arcs) is the bridge BV-L3's band lemma uses, since `RingProper`
+(finitely many points of `ω(u)` on `Γ`) excludes ring arcs. **One configuration predicate serves both rows**: `HexRing u ψ b` (six points
+`x_j = r(ψ + 60°j)`, `c′(x_j) = {b j, b(j+1)}`, the germ before `x_j` pseudo-coloured `b j`, after `b(j+1)`) is BV-HEX's "regular hexagon of
+kept points" and the germ form of N2-HEX's "purely rotating ring" (each `x_j` is (A+, A−)). **Refused:** a `Fin 6`-indexed point family
+(`ringPt u (ψ + jπ/3)` is the family); the purely rotating ring as whole-arc colours (P17's argument reads only the germs, so the germ form is
+the wider true statement); pseudo-colourings as `CircleColouring`s in the statements (they exist only without ring arcs).
+
+**CVB-THOM's decision.** Graph theory on Mathlib's `SimpleGraph`, the planar content isolated in two map-level theorems. `int(M, x, y)` is CVB's
+graph-theoretic replacement (the finite components of `M − x − y`), so `H` is a pure function of a graph; `mapGraph` and `filledGraph` are on
+`F`'s own tiles (`IsTile`). **Thomassen's Lemma 1 is formalized, not imported** (brief, "what is yours"): it is a page of counting over distance
+layers in pure graph theory (`[Thomassen1999]` p. 850–851, read in full from `library/papers/Thomassen-1999-…txt`, ll. 60–99), on the
+hour-of-agent-work line, and `LEAN.md` says "when unsure, formalize"; no `axiom` and no § Trust line. `LocallyHamiltonian` is Thomassen's own
+words ("`G` has a cycle with vertex set `D₁(x)`"), not Mathlib's `IsHamiltonian` of the induced neighbourhood, which differs at one-vertex
+neighbourhoods (`Fintype.card ≠ 1 →`).
+
+### 8.2 Read-backs (each formal statement against its row, `data/fs131/k5/rows.md`)
+
+| row | declarations | read-back |
+|---|---|---|
+| **FS112-ROTHEX** | `rot_noThird`, `rot_out`, `rot_in`, `hex_regular`, `p17_ua` | Row: "FS-110's ring lemmas N2-ROT and N2-HEX survive unit arcs under the base's hypothesis; P17's only unit-arc exception is a both-centre `x₂`; N2-ROT's 'no `r`-tile at `x`' rests on FS112-N3-COR3." Formal: on a valid six-coloured fragment covering `B̄(u, 2)`, `u` cubic trichromatic, `BaseHyp u` (H): (N2-ROT) at a change point `x = r(ψ)` of the pseudo-colouring (`p` before, `q ≠ p` after) — `c′(x) = {p, q}` ("no `r`-tile", its proof through `cor3`); the outward row (A+, A−) — `P_cl(x) = {p, q, g}`, `g ∈ P_cl(u)` fills the outward cone (points near `x` outside `B̄(σx, 1)` and `B̄(σ⁻¹x, 1)`: N2-ROT's `(−30°, 30°)`), every `g`-tile at `x` misses `B̄(u, 1)`, `u`'s `g`-sector in the closed half-plane away from `x` (tangent cone `coneAt`); the inward row (B+, B−) mirrored. N2-ROT's swap rows ("(A+, B+) or (A−, B−) is a swap") and "every other pattern forces nothing" are definitions and non-claims, not stated. (N2-HEX) `hex_regular`: each `x_j` served ⟹ regular (`120°` sectors, bounding directions `ψ + 30° + 60°j₀ + 120°j`) **or an antipodal double cusp** — the disjunct is not in N2-HEX's words: **a correction owed** (F-HEXCUSP, § 8.4). Pure sector geometry, every `k`, no validity. (P17) `p17_ua`: `HexRing` impossible under H; the both-centre exception is the proof's content on N3-P17's route (docstring). **Same, with F-HEXCUSP's disjunct; P17 widened** to the germ form |
+| **FS114-BV-HEX** (BV-HEX) | `bv_hex` | Row: "Lemma 6's `< 9` branch under H: the regular hexagon of kept points cannot occur at a cubic trichromatic `u` in a valid map (unit arcs allowed) when `x_1, …, x_6` are cubic; no Condition 5, no strip `A(u)`, no unit-arc step." Formal: valid fragment covering `B̄(u, 1)`, `u` cubic trichromatic, `HexRing u ψ b`, no `x_j` in `F(M) ∪ R(M)` (with three colours at `x_j` from step 2, that is "cubic") ⟹ `False`. **Widened** (G-BVHEX): every `k`, H only at the six points, `B̄(u, 1)` |
+| (BV-L3) | `bv_l3` | Row: "Lemma 3, a.e., curved, cusps and double cusps at `u₁, u₂`: no two points with the same multicolour at distance in (1, 2) whose unit circles carry proper finite circle colourings in the complementary triple." Formal: six colours, `P_cl(u₁) = P_cl(u₂)` of three colours, `1 < |u₁ − u₂| < 2`, `RingProper` at both, fragments covering `B̄(u_i, 1)`, H on both circles ⟹ `False`. No sector hypothesis at `u_i` (cusps, double cusps, any degree). **Narrowed** (N-BVL3): H on the circles in place of BV-ND's adjacency (which also admits degree-4 bichromatic points); the walk supplies H |
+| (BV-ND) | `bv_nd`, `linkage_dot_ne_zero` | Row: "NoDouble holds with unit arcs, at cusps." Formal: no `DoubleEvent` at two points of the domain outside `F(M) ∪ R(M)`; every `k`, any centres. `linkage_dot_ne_zero` is BV-ND's step 1 (`μ ≠ 0` for `|u₁ − u₂| ∉ {1, 3}`). **Widened** (G-BVND): the event's definition carries `μ ≠ 0`, where `1 < t < 2` entered |
+| (BV-ND1) | `bv_nd1` | Row: "BV-ND under the 60° rotation of one circle: two switch points of `ω(u)` at distance 1 with the same pair, switching in opposite senses, are impossible at plain or cubic points; with unit arcs, no strip used." Formal: `x₀ = r(φ)`, `σx₀ = r(φ + 60°)`, germs `α | β` at `x₀` and `β | α` at `σx₀` (counter-clockwise), both outside `F(M) ∪ R(M)` ⟹ `False`. "Plain or cubic" read as "no four colours, no repeated colour" (at most three sectors). **Same** |
+| **FS114-CVB-THOM** | `cvb_thom_reduced`, `cvb_thom`, `Thomassen.lemma1` | Row: "Thomassen's steps other than the rainbow step hold for every valid map, Siamese pairs allowed: fill holes, read facial cycles as boundary walks, replace the count in `int(R)` by local finiteness; the reduced map graph `H` then has a vertex of degree `≥ 6`." Formal: valid plane map, every `k` ⟹ `H := reduced (filledGraph F)` is connected, locally finite, locally Hamiltonian, infinite (`cvb_thom_reduced`), and some vertex has `H`-degree `≥ 6` (`cvb_thom`, via `lemma1`). The steps (fill, boundary walks, local finiteness) are the proof's. Not claimed: the rainbow step; the 2-separator criterion at pinches beyond a sketch. **Same** (colour-free: validity enters through the tiles' diameter) |
+| (CVB-PINCH) | `cvb_pinch_connected`, `cvb_hole_disconnected`, `exists_holed_valid_fragment` | Row: "in the map graph of a locally finite plane map, `M − x` is connected at a pinched tile and disconnected at a holed one; holes are locally consistent with validity." Formal: valid plane map; no hole ⟹ `M − x` connected (**widened** to every hole-free tile, pinched or not); a hole ⟹ `M − x` disconnected; a valid six-coloured fragment covering `B̄(0, 1/2)` with a holed tile (CVB B1's annulus). The row's "locally finite plane map" read as a valid plane map (the row's own class; colour-free in fact) |
+
+### 8.3 Inhabitants and vacuity of the new statements
+
+`hex_regular`: GENERIC (its hypotheses are met at any regular vertex; no instance is in the library yet — the implementer may add the hexagonal
+tiling's vertex, optional). `lemma1`: `triLattice_hyps` (a leaf: locally finite, connected, locally Hamiltonian, infinite). `cvb_thom_reduced`,
+`cvb_thom`, `cvb_pinch_connected`: `sevenBrickMap` at `k = 7` (`sevenBrickMap_valid`; plane). `cvb_hole_disconnected`: GENERIC on plane maps
+(no valid plane map with a holed tile is known; its local configuration is `exists_holed_valid_fragment`). `rot_*`, `p17_ua`: steps inside
+`row134BaseUA` under H, refuted configurations (`p17_ua` concludes `False`); `rot_noThird`, `rot_out`, `rot_in` GENERIC. `bv_hex`, `bv_l3`,
+`bv_nd`, `bv_nd1` conclude `False` (refutations, skipped by the scan); `linkage_dot_ne_zero` is unconditional geometry.
+
+### 8.4 Findings (sent to Keryx, 2026-10-04, mid-job)
+
+- **F-HEXCUSP — correction owed** to FS110-N2-HEX as FS112-ROTHEX carries it: N2-HEX's count omits the angles `(0°, 0°, 360°)`; a cubic
+  trichromatic double cusp with antipodal horns serves all six points (each horn serves the four antipodes in its closed half-plane window), so
+  "a purely rotating ring forces `u` regular" fails for that input. H does not exclude such a vertex. Consumers unaffected: FS110-N3-P17 reads
+  only "two consecutive rotation points served by one sector" (true at the double cusp), and BV-HEX's count closes at cusps.
+- **G-BVHEX — generalization**: BV-HEX at every `k`, H at the six points only, on `B̄(u, 1)`; and a second, shorter route for ROTHEX's P17 clause
+  (no N2-ROT, N2-HEX or NOBOTH). The implementer builds `p17_ua` from `bv_hex`.
+- **G-BVND — generalization**: BV-ND for any two centres once the event carries `μ ≠ 0`; BV-ND1 is its `u₁ = u₂` instance.
+- **N-BVL3 — a narrowing, reported**: `bv_l3` takes H on the circles for BV-ND's adjacency.
+- **For KB** (the base's planner): the walk's step 10 (Prop. 17) is one citation of `p17_ua` (or `bv_hex`), and step 8's Lemma 3 at cusps is
+  `bv_l3`, whose `RingProper` inputs are the walk's own steps 2–4 (finiteness, (ii) via `bv_nd1`/`pair_ii`). § 4's assumption that ROTHEX
+  supplies N2-ROT's table to the walk is not needed: nothing in the walk reads N2-ROT except through P17.
+
+## Stage 9 — SAVED: the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh) and § 4 extended
+
+### 9.1 What the pass decided, statement by statement
+
+*For each wave-5 statement: is it the statement its proof derives from; the recursion or decomposition; the children; any hypothesis the proof
+needs that the statement lacks. No statement of §§ 3, 8 changes; every gap below is closed by a named child the implementer adds.*
+
+| statement | verdict | decomposition and children (new names are the implementer's to add) |
+|---|---|---|
+| `stuck_structure_ua` | derives | Case split on the colours at `v`. **The two-colour case** (both gaps of `c`'s horns one colour) is not in § 4's route: it is closed by SHAVE — a horn flanked on both sides by one colour is shaved into it (FS110-N § 2.3 (ii), S–V Prop. 7's flank argument), against `IsStuck`. Child `shaveAvailable_of_flanks_eq`. Then § 4 leaf 1 |
+| `exists_red`, `exists_terminal` | derive | The measure is the locally finite count (N2-RED's arcs not (Q)/(R2); N4-TERM's `Φ`), descending per move inside a ball; the limit by local eventual constancy. Children as § 4 leaves 2–3. **Clause 3 needs the axis to propagate along a run** (below) |
+| `c_ends`, `exists_terminal` clause 3, `cv_exists` | derive, **given one child** | The run is defined by chain vertices of any axis (R-CHAIN), but `cv_class` at the end vertex speaks of its own axis. Child **`stuckAlong_of_run`**: in a terminal map, if `v` is stuck along `e α` with at most three colours and `v + n` is a chain vertex, then `v + n` is stuck along `e α` or `e (α + π)` (the cone colour alternates, the axis does not: NB3 § 1.4 N3-END items 2–3, the two `g`-tiles at `P_{−1}` being horns along `±a`). Induction on `j` along the run gives every run vertex the axis `±α`. **M–H; the one structural lemma the chain rows share** |
+| `cv_l0` | derives | `OnRingArc` reads any arc of `Γ` on `ω(E)`; QROnly reads constant-sided ones. Child `exists_isRingArc_of_onRingArc` (a sub-arc with constant sides, by local finiteness). Finiteness: compactness of `ω(E)` and at most two points per non-concentric arc |
+| `cv_hd_main`, `cv_hd`, `cv_class`, `y3_end_needs`, `c_double`, `n3_end_chain` | derive | As § 4 leaves 6–12. **Name correction to § 4 leaves 3 and 11:** `IsHorn.isRingArc_upper` does not exist; the horn arc's ring-arc fact is `flankQ_upper`'s conclusion (`IsRingArc (v + n) (α − π/2) θ₂ g c`), reached through `flankQ_upper_of_qrOnly` / `_lower_` |
+| `disc1ts`, `disc1ts_degree`, `disc1_local` | derive | § 4 leaves 14–16 |
+| `cor3` | derives | § 4 leaf 17; `u ≠ u′` from disjoint non-empty multicolours |
+| `n3_base`, `localDense` | derive | Child **`isCubicTrichromatic_of_three_of_noRep`**: three colours and no repeated colour give degree `3` (sector chart: each carried colour one sector). Also used by `rot_noThird` and `bv_hex` |
+| `dense3`, `cv_exists`, `not_row134BaseUA_seven` | derive | § 4 |
+| `rot_noThird` | derives | `cor3` at `(u, x)`: a third pseudo-colour makes `P_cl(x)` the complement (or four colours, against H); `x` cubic by the child above; the rhombus corners lie on `ω(u)`, so in `B̄(u, 2)` with four colours, against H. Child `germPseudo_mem_coloursAt` (the germ's colour is at `x`) |
+| `rot_out`, `rot_in` | derive | N-E2 from wave 3 (`Valid.cone_re_nonneg_of_germ`, `_nonpos_`) at `σ^{±1}x` for the allowed sets of `p` and `q`; `rot_noThird` for "one colour `g`"; `not_mem_coloursAt_of_mem_sphere` for the tile's side of `ω(u)`; uniqueness of the `g`-tile at `x` from one `g`-sector |
+| `hex_regular` | derives **with F-HEXCUSP's disjunct** | Child `coneAt_of_cubic`: the three tangent cones of a cubic trichromatic vertex are closed angular intervals `angleIcc β_i β_{i+1}`, contiguous, total `2π` (from the sector chart; `Simple.coneAt_eq_angleIcc` is the simple-map analogue). Then finite real arithmetic: a cone of angle `a` serves the antipodes within `π/2 − a/2` of its centre |
+| `p17_ua` | derives | `bv_hex` with `hH` from `BaseHyp` (each `x_j ∈ ω(u) ⊆ B̄(u, 2)`). **E** |
+| `bv_hex` | derives | BASE-V § 1a.4 steps 1–6 as six children: `hex_step1_side` (colour `b(j+1)` near `x_j` inside `B̄(x_{j+1}, 1)`, by connectedness of a tile), `hex_cone` (the cone `K_j` holds one colour `c_j ∈ P_cl(u)`), `hex_translate` (`x_j + st`, `x_{j+1} + st` exactly `1` apart ⟹ `c_j ≠ c_{j+1}`), `hex_polar` (`c_j`'s cone at `u` in `{d · n_j ≤ 0}`), `hex_count` (the count with `L_c = π − θ_c`; horns `θ = 0`). Exact identities from `tools/base_v_hexagon.py` |
+| `bv_l3` | derives | BASE-V § 1b.3: `ringCircleColouring` (no ring arcs, from `RingProper`'s finiteness), `exists_lift`, the band lemma (`ringband_*`, BV-H1 needs (ii) from `RingProper`), the loop `Φ` parametrized by `y` on the proper arc `Y`, the jump at `c₀ ∈ 3ℤ` read as a `DoubleEvent` (`linkage_dot_ne_zero`, then `bv_nd`). **H** — the loop's single-valued lift is the long child |
+| `linkage_dot_ne_zero` | derives | `x₀ − u₁ = s₁e`, `y₀ − u₂ = s₂e` give `|u₁ − u₂| ∈ {1, 3}`. **E** |
+| `bv_nd`, `bv_nd1` | derive | BASE-V § 1b.2 steps 2–4 (interval of distances avoiding `1`, then the edge directions); `bv_nd1` is `bv_nd` at `u₁ = u₂`, `χ = φ + π/3`, both forward sides clockwise (computed: `dot(i e φ, e(φ − π/3)) = cos 150° < 0`) |
+| `Thomassen.lemma1` | derives | By contradiction: all degrees `≤ 5`; a vertex `x` of maximum degree; cases `3, 4, 5` on the layers `D₁ … D₄` (Mathlib's `SimpleGraph.dist`, `Connected.exists_walk_length_eq_dist`); a vertex's neighbourhood cycle gives it `≥ 3` neighbours (`Walk.IsCircuit.three_le_length`) and each neighbour two common neighbours. Children `three_le_degree`, `layer_bound_deg4`, `layer_bound_deg5`, `card_le_twelve`. **M** (about 300 lines) |
+| `cvb_thom_reduced` | derives, **the wave's planar core** | CVB B2 steps 1–3 over Thomassen pp. 851–852: children `filledGraph_locallyFinite`, `filledGraph_connected`, `filledGraph_infinite` (tiles of diameter `≤ 1` cover the plane), `boundaryWalk` (the closed boundary walk of a filled tile and its local connectivity), `twoSep_iff_repeat` ("`M − x − y` is connected unless `y` appears twice"), `maximalTwoSep_exists`, `reduced_locallyHamiltonian`. **H**; Mathlib has no Jordan curve theorem at the pin (not found by grep), so the boundary-walk step is built from the arcs' local structure (`LocalStructure`'s sector charts) — the implementer measures it from its first two children and reports, and may split it into its own job (Keryx's call) |
+| `cvb_thom` | derives | `cvb_thom_reduced` and `lemma1` (`13 ≤ ENat.card` from infiniteness). **E** |
+| `cvb_pinch_connected`, `cvb_hole_disconnected` | derive | B1: bays are bounded components touching the outer boundary at a pinch (connected through tiles at the pinch point); a hole separates (disjoint closures). **M** each |
+| `exists_holed_valid_fragment` | derives | The annulus fragment as an explicit `ArcMap 6` (circles of radii `1/4`, `1/2`, four radial segments to `0.55`), validity by diameters `< 1` per tile and distinct colours across tiles. **M** (like wave 4's `bowtie`) |
+
+### 9.2 § 4 extended: the plan per new leaf (Mathlib names confirmed by `#check` at the pin, `data/fs131/k5/K5bChecks.lean`, exit 0)
+
+Confirmed Mathlib names: `SimpleGraph.Walk.IsCycle`, `Walk.support`, `Walk.IsCircuit.three_le_length`, `Walk.IsCycle.isCircuit`, `Walk.IsCycle.support_nodup`,
+`SimpleGraph.Connected`, `Connected.preconnected`, `SimpleGraph.induce`, `connectedComponentMk`, `ConnectedComponent.supp`, `neighborSet`, `Reachable`,
+`Walk.toPath`, `SimpleGraph.dist`, `Reachable.exists_walk_length_eq_dist`, `ENat.card`, `Set.encard`, `Set.encard_le_card`, `Set.Finite.encard_lt_top`,
+`Set.encard_union_le`, `Set.ncard_le_ncard`, `Bornology.IsBounded`, `connectedComponentIn`, `IsPreconnected.subset_connectedComponentIn`,
+`isPreconnected_connectedComponentIn`, `IsOpen.connectedComponentIn`, `Metric.isBounded_iff_subset_closedBall`, `Metric.isCompact_of_isClosed_isBounded`,
+`IsPreconnected.constant`, `connectedComponentIn_univ`, `PreconnectedSpace.connectedComponent_eq_univ`, `Set.Finite.subset`, `Set.Finite.biUnion`,
+`isCompact_closedBall`, `IsCompact.elim_finite_subcover`. (A first try named `Walk.IsCycle.three_le_length`, which does not exist at the pin; the
+lemma is `IsCircuit.three_le_length` through `IsCycle.isCircuit`.) The library names § 4 cites were checked by grep: all exist except
+`IsHorn.isRingArc_upper` (above).
+
+Leaves 23–39 (E easy, M moderate, H hard), continuing § 4's numbering:
+23. `rot_noThird` — M. 24. `rot_out` — M. 25. `rot_in` — M (mirror of 24). 26. `hex_regular` — M (sector chart, then arithmetic). 27. `p17_ua` — E.
+28. `bv_hex` — M–H (six children, § 9.1). 29. `bv_l3` — H. 30. `linkage_dot_ne_zero` — E. 31. `bv_nd` — M. 32. `bv_nd1` — E over 31.
+33. `Thomassen.lemma1` — M. 34. `triLattice_hyps` — M (the hexagon walks by `decide` on `ℤ × ℤ` differences; infinite by an injection of `ℕ`).
+35. `cvb_thom_reduced` — **H, the hardest leaf of the three rows**. 36. `cvb_thom` — E. 37. `cvb_pinch_connected` — M. 38. `cvb_hole_disconnected` — M.
+39. `exists_holed_valid_fragment` — M.
+**Price, to be scored:** leaves 23–34 and 36–39 about one implementer session; leaf 35 one to two sessions on its own (planar topology, no Jordan
+curve theorem in Mathlib). With § 4's 23 leaves (two sessions), wave 5 short of the base is three to four sessions.
+
+## Stage 10 — SAVED: the handoff to wave 5's implementer (the form of wave 4's plan § 14)
+
+### 10.1 Where it is, and how the implementer works
+
+**Branch `fs131-w5`** (worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5`; `.lake/packages` a symlink to the main tree's, `.lake/build`
+its own copy — never replace it with a symlink), on wave 4's branch as FS131-I4e left it (`9a8de899`). Wave 5 is **five modules**: the foundation
+`Plane/ValidMap/Chain`, sorry-free, and four skeleton modules — `Plane/ValidMap/Terminal` (14 `sorry` leaves), `Plane/ValidMap/Dense` (10),
+`Plane/ValidMap/HexRing` (10), `Plane/ValidMap/MapGraph` (7) — **41 declarations using `sorry`**, all 13 rows stated. The build is green with only
+`sorry` warnings (§ 10.5). `Proofs.lean`, `ARCHITECTURE.md` (`tools/check_architecture.py` exit 0) and `scripts/Axioms.lean` (three wave-5 sections:
+K5's foundation and skeleton, K5b's last three rows) are updated.
+
+**The one leaf the implementer does not prove: `row134BaseUA`** (`Dense`), whose leaves FS131-KB lays out (inventory item 199 (a)). Its consumers
+(`n3_base`, and through it `localDense`, `dense3`, `cv_exists`) cite it once each and are proved now over that citation; when KB's plan lands, the
+base gains children and nothing else changes — unless KB's plan names outside pieces as hypotheses (item 197), which then become hypotheses of
+`row134BaseUA` and of the four consumers (a statement change scheduled since stage 6, KB's to make through Keryx).
+
+**The build**: from inside the worktree, `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`;
+never `lake build`; on exit 75 wait ten minutes and retry. For iteration, `lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false`, never as
+evidence; dependents against scratch oleans as wave 4's § 14.1 describes.
+
+**Wave 4 is not landed**: its implementer (FS131-I4g) is proving its leaves on `fs131-w4`. Wave 5 cites wave 4's statements as committed on
+`9a8de899`; they gain children but never change. Merge `fs131-w4` into `fs131-w5` when wave 4 lands, or earlier to use its proofs, resolving the
+append-only lines of `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean`.
+
+**The plan to work from**: § 4 (leaves 1–22, K5's) and § 9 (the pass's children, and leaves 23–39). The read-backs (§§ 3.2, 8.2) say what each
+statement means. **Order**, cheapest re-pricing first: the shared children (`isCubicTrichromatic_of_three_of_noRep`, `germPseudo_mem_coloursAt`,
+`exists_isRingArc_of_onRingArc`, `Side`/germ lemmas) → `linkage_dot_ne_zero`, `flankQ_*_of_qrOnly`, `p17_ua`-over-`bv_hex` wiring, `cvb_thom`-over-`lemma1`
+wiring (each E: re-price the wave from these) → `Thomassen.lemma1`, `triLattice_hyps` (pure graph theory, independent of every map lemma) →
+`bv_nd`, `bv_nd1`, `bv_hex` (its six children), `rot_noThird`, `rot_out`, `rot_in`, `hex_regular` → `disc1ts`, `disc1ts_degree`, `disc1_local`, `cor3` →
+`stuck_structure_ua` (with `shaveAvailable_of_flanks_eq`), `stuckAlong_of_run`, `cv_l0`, `y3_end_needs`, `cv_hd_main`, `cv_hd`, `cv_class`, `c_ends`,
+`c_double`, `n3_end_chain` → `sevenBrickMap_isTerminalMap`, `not_row134BaseUA_seven` → `exists_red`, `exists_terminal` (the limit construction) →
+`n3_base`, `localDense`, `dense3`, `cv_exists` → `bv_l3` → `exists_holed_valid_fragment`, `cvb_pinch_connected`, `cvb_hole_disconnected` →
+`cvb_thom_reduced` last (the planar core: report its price from its first two children; Keryx may split it into its own job).
+
+### 10.2 What the implementer may and may not change
+
+**It may**: add children anywhere in the wave's modules — every child §§ 4, 9.1 name is an expected addition, and the shared ones may go to the
+foundation `Plane/ValidMap/Chain` or to wave 3–4's foundation modules (`Plane/ValidMap/Basic`, `Plane/LocalMap`, `Plane/LocalStructure`, `Plane/RingGerm`,
+`Plane/RingBand`), statements unchanged, each with a spec example; strengthened forms of wave 4's moves as **new lemmas** (`IsModification` of each move:
+"every point of at least four colours after the move had them before"); change imports (updating `ARCHITECTURE.md`'s Imports cell and adding each new
+record to `scripts/Axioms.lean`).
+
+**It may not**: change any statement of §§ 3.2, 8.2 (the row theorems, their hypotheses and conclusions), any definition of `Chain`, `HexRing`'s or
+`MapGraph`'s vocabulary (`GermPseudo`, `HexRing`, `RingProper`, `DoubleEvent`, `LocallyHamiltonian`, `twoSepInterior`, `IsTwoSep`, `IsMaximalTwoSep`,
+`reducedVerts`, `reduced`, `mapGraph`, `IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`), or the read-back conventions. A statement that cannot be proved
+as written comes back through Keryx with the stuck goal or the counterexample — a finding, never a quiet edit. **Watch in particular**: `stuckAlong_of_run`
+(if the axis does not propagate, `c_ends`'s statement must change); `cvb_thom_reduced`'s boundary walks at pinches (if `F`'s own tiles, with arcs carrying
+one colour on both sides, break the walk, the statement needs CVB's normalisation "every edge separates two colours" — report, do not add it).
+
+### 10.3 The vacuity scan's carriers and the inhabitants
+
+- `F.Valid`, `F.IsPlaneMap`: `sevenBrickMap_valid`, `sevenBrickMap_isPlaneMap`; they inhabit `exists_red`, `disc1ts`, `disc1ts_degree`, `cvb_thom_reduced`,
+  `cvb_thom`, `cvb_pinch_connected` at `k = 7`. `disc1_local`: `sevenBrickMap`.
+- `IsTerminalMap`: `sevenBrickMap_isTerminalMap` (leaf 13, `k = 7`). `QROnly`: `const_qrOnly`. `IsModification`: `IsModification.refl` (conclusions only).
+- Stuck-vertex hypotheses (`stuck_structure_ua`, `cv_*`, `c_double`, `y3_end_needs`, `n3_end_chain`, `c_ends`): the bowtie at `0` on a fragment; on terminal
+  plane maps no model is known — `GENERIC` (FS-115's question), as wave 4's `stuck_chain` and `n3_end`.
+- Base-hypothesis statements (`rot_noThird`, `rot_out`, `rot_in`, `cor3`, `localDense`, `dense3`, `cv_exists`, `exists_terminal`): `GENERIC` (no valid
+  six-coloured fragment of radius 2–3 and no valid six-map of the plane is known). Refutations, skipped by the scan: `cv_hd_main`, `y3_end_needs`, `n3_base`,
+  `p17_ua`, `bv_hex`, `bv_l3`, `bv_nd`, `bv_nd1`, `row134BaseUA` (through `Row134BaseUA`'s `→ False`).
+- `hex_regular`: `GENERIC` (the hexagonal-tiling vertex would inhabit it; optional). `Thomassen.lemma1`: `triLattice_hyps`. `cvb_hole_disconnected`: `GENERIC`
+  on plane maps; local configuration `exists_holed_valid_fragment`.
+- `Row134BaseUA`'s control: `not_row134BaseUA_seven` (its seven-colour form is false).
+
+**Carriers for `scripts/Vacuity.lean`** (the planner's recommendation; the implementer records the decision): **IN** for `IsTerminalMap` and `QROnly`
+(refutable on a map with an inert unit arc; inhabited by `sevenBrickMap_isTerminalMap`, `const_qrOnly`), `HexRing` (refuted on the one-colour plane, a spec
+example; no inhabitant is expected anywhere — so IN only as a refuted carrier, its theorems conclude `False`), `RingProper` (inhabited by the one-colour
+plane, a spec example; refutable on any map with a ring arc), `LocallyHamiltonian` (inhabited by `triLattice`; refuted by a path); **OUT** for
+`IsModification` (a conclusion), `BaseHyp`, `NoInertNear` (hypotheses of refutations), `DoubleEvent`, `GermPseudo` (atoms of refutations), `IsHoleOf`
+(existence is a construction, `exists_holed_valid_fragment`).
+
+### 10.4 How the wave lands
+
+1. Every `sorry` of the four skeleton modules gone except `row134BaseUA`'s (until KB's plan and its implementation land); the full gate green on one
+   commit in the worktree: `./scripts/build.sh` with zero warnings, `./scripts/axioms.sh` clean (the wave's records and every added child on the standard
+   three or fewer; no `native_decide`; **no `axiom`** — Thomassen's Lemma 1 is formalized, § 8.1), `./scripts/vacuity.sh` and `--self-test` green with every
+   change in `sites` and the verdict counts explained, `tools/check_architecture.py` exit 0.
+2. `main` (with wave 4 landed) merged into `fs131-w5`; the gate re-run on the merged commit.
+3. The branch fast-forwarded onto `main` (Keryx's step). Nothing with a `sorry` reaches `main`: if `row134BaseUA` is not proved when the rest is, the
+   wave waits, or Keryx splits it (the consumers of `row134BaseUA` then wait with it).
+4. The implementer's record lists every statement proved against the read-backs — "same statement" or the finding.
+
+### 10.5 Notes for the base's planner (FS131-KB) and for wave 6's
+
+- **KB**: (1) the walk's step 10 (Prop. 17) is `p17_ua` (or `bv_hex` with H at the six points); N2-ROT's table (`rot_*`) is available but the walk needs it
+  only on N3-P17's route, which this plan does not build. (2) Step 8's Lemma 3 at cusps is `bv_l3`; its inputs `RingProper u_i` are the walk's own steps
+  2–4 (finiteness of `ω(u_i) ∩ Γ` after the pre-bend, property (ii) via `bv_nd1` or `pair_ii`) — and `RingProper` excludes ring arcs on `ω(u_i)`: if the
+  walk meets `u_i` whose ring carries an in- or out-contact arc, `bv_l3` does not apply as stated, and the walk needs either a ring-arc-tolerant Lemma 3
+  (BASE-V did not derive one: "the strip … not replaced by H") or a reason the pigeonhole vertices' rings carry none — **a question for KB to settle first**.
+  (3) § 2.2's question on `NoInertNear` (item 199 (b)) is KB's. (4) No piece of `[SokolovVoronov2025]` enters ROTHEX or BV-HEX by statement.
+- **Wave 6/7**: `Plane/ValidMap/MapGraph` is FS114-N114-RD's upstream (wave 7, `Plane/RouteT`); N114-RD reads a tile of `H`-degree at least `6` and its
+  repeats — `cvb_thom` gives an outer tile of the filled map, so a consumer needing the unfilled map's neighbours goes through `IsOuterTile` and `fill`.
+
+### 10.6 The build of stages 8–10
+
+`./scripts/build.sh` (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 445 of 445 batches, 4 modules rebuilt, 7 modules with warnings, every warning
+`declaration uses sorry`**, exit 0 (`build/gate/build/20261004T183935Z-1476479.log`; driver log `data/fs131/k5/build-k5b-stage8.log`).
+`tools/check_architecture.py`: PASS, exit 0 (two rows added, `HexRing` and `MapGraph`; `Dense`'s Imports cell gains `HexRing`). `scripts/Axioms.lean`:
+section "FS-131 wave 5 (job FS131-K5b)", 18 records.

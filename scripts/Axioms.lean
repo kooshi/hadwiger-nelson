@@ -2948,6 +2948,27 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.row134BaseUA
 #print axioms HadwigerNelson.Plane.not_row134BaseUA_seven
 
+/-! ## FS-131 wave 5 (job FS131-K5b) — the skeleton's last three rows: ROTHEX, BV-HEX (HexRing), CVB-THOM (MapGraph) (sorry until wave 5's implementer lands it) -/
+
+#print axioms HadwigerNelson.Plane.Side.sign_flip
+#print axioms HadwigerNelson.Plane.ArcMap.rot_noThird
+#print axioms HadwigerNelson.Plane.ArcMap.rot_out
+#print axioms HadwigerNelson.Plane.ArcMap.rot_in
+#print axioms HadwigerNelson.Plane.ArcMap.hex_regular
+#print axioms HadwigerNelson.Plane.ArcMap.p17_ua
+#print axioms HadwigerNelson.Plane.ArcMap.bv_hex
+#print axioms HadwigerNelson.Plane.ArcMap.bv_l3
+#print axioms HadwigerNelson.Plane.ArcMap.linkage_dot_ne_zero
+#print axioms HadwigerNelson.Plane.ArcMap.bv_nd
+#print axioms HadwigerNelson.Plane.ArcMap.bv_nd1
+#print axioms HadwigerNelson.Thomassen.lemma1
+#print axioms HadwigerNelson.Thomassen.triLattice_hyps
+#print axioms HadwigerNelson.Plane.ArcMap.cvb_thom_reduced
+#print axioms HadwigerNelson.Plane.ArcMap.cvb_thom
+#print axioms HadwigerNelson.Plane.ArcMap.cvb_pinch_connected
+#print axioms HadwigerNelson.Plane.ArcMap.cvb_hole_disconnected
+#print axioms HadwigerNelson.Plane.exists_holed_valid_fragment
+
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 
 #print axioms HadwigerNelson.Plane.dot_e_e
