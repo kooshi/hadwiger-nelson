@@ -666,3 +666,15 @@ One line per item with its source; no narration. Each line is ticked done or dec
 166. **Launched 2026-10-04 03:00 UTC**: FS129-F1, the front-page filing (`clerk`, Sonnet; `data/fs129/briefs/FS129-F1-front-page.md`, gated PASS, at
      `ae80d9af`), on branch `fs129-filing` in worktree `/home/kooshi/source/lean-dir-fs129-close`. The only agent running. Keryx's ruled merges are
      listed in its manifest (the open-milestones line naming FS-124; three re-aimed names; "Rows 1–154"; the stubs' title names; G1–G92).
+167. **FS129-F1 reported STAGE 4 SAVED** (branch `fs129-filing`, last commit `39d2dadf`; record in the worktree, `data/fs129/f1/README.md`): items 1–8
+     filed verbatim by script; bib audit, derive gate, architecture and identities checks pass; sizes CLAUDE.md 51,126, SKILL.md 170,280. Two
+     gates fail: the fact audit (11 tokens) and the atlas checker (4 facts, three of them already failing on `main`). **Keryx's receipt**: each of
+     the 10 FRONTIER-STUBS tokens grepped in the branch's `plans/STUB-*.md` — every one found in at least one stub (P1 re-drafted the summary rows;
+     the facts stayed in the stubs, which the audit does not join); the atlas failures read from `data/fs129/f1/gates/atlas_check.txt`.
+168. **Rulings R1–R7** (dated amendment to F1's brief): ALLOW entries naming each token's stub; atlas quotes re-pointed to current words at current
+     addresses, FS-104's verbal registration re-pointed or removed, the FS123 node renamed; "4–74 | 71 more open stubs"; the FRONTIER-STUBS
+     open-milestones paragraph made current (FS-129 Derived; the Lean backlog next, from `plans/LEAN-BACKLOG.md`); the second dated note given row
+     5's own words; F1's placements accepted. **Slip, the coordinator's**: the brief named P1's open-milestones sentence as if it were the paragraph,
+     and left the paragraph's stale FS-129 clauses unruled until F1 stopped on them.
+169. **Atlas defect on `main`, pre-existing**: three atlas facts (R134, FS124, the "publish" note) already fail the checker on `main` — moved by the
+     Workflow 3.1 rewrite and the FS-116/FS-121 filing. Fixed in F1's branch by R2; the atlas has not been republished since those changes.

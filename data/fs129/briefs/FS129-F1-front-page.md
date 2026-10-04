@@ -107,3 +107,43 @@ it: that is a finding, not a refusal.
 
 You start no agent of your own (`plans/STANDING-RULES.md` rule 1: staffing is Kooshi's budget, and the coordinator can review only work it knows
 exists). Thank you.
+
+## Amendment, 2026-10-03 — the coordinator's rulings on your CHECKs (the only further words you may add)
+
+Thank you: the stops were the right ones. `touches:` now also includes `tools/claude_md_fact_audit.py`, its ALLOW table only. Standing rules
+unchanged — start no agent of your own (rule 1's reason: staffing is Kooshi's, and the coordinator reviews only work it knows exists).
+
+**R1 — the fact audit's 11 tokens.** Every token lost from `plans/FRONTIER-STUBS.md` still lives in a stub file (the coordinator's grep found each
+in at least one `plans/STUB-*.md`): FS129-P1 re-drafted the summary rows and the facts stay in the stubs, which the audit does not join. Add one
+ALLOW entry per token, its reason exactly "FS129-P1 re-drafted the ranked row; the fact stays in `<the stub file that holds it>`", naming the file
+your own grep finds; for `131–141`, the reason "item 31's row range now reads 131–154 (FS-129's rows 149–154)". A token you find in no stub file is
+not allowed: stop and report it. Re-run the audit and `--dupes`.
+
+**R2 — the atlas.** Re-point each failing quote to the current words of the same fact at its current address, verbatim, and list each change in
+your record: R134's second quote to `plans/FRONTIER-STUBS.md` § Open milestones, "with BASE-V beside them (row 134's base re-derived but for Lemma 4
+at cusps)"; FS124's grade words to the line of `plans/STUB-q-ring.md` that now states its standing; the "publish" note to `CLAUDE.md`'s current
+sentence "Nothing is published before it is formalized in Lean, in full." in the section that holds it; FS104's verbal registration to the bearing
+words of FS-104's row in `CLAUDE.md` § Paths forward as filed — or, if that row gives no verbal registration, remove the registration from the node
+and say so (the atlas takes a stub's registration only for that event). The FS123 node's label and plain text: "the (Q)-free ring" reads "the
+Siamese class". Then the checker, its self-test, the palette review, the build, and the DESIGN.md stage section (README step 6).
+
+**R3 — `CLAUDE.md` § Paths forward**: the row "4–73 | 70 more open stubs" reads "4–74 | 71 more open stubs" (FS-130 entered).
+
+**R4 — `plans/FRONTIER-STUBS.md` § Open milestones, its first paragraph**: "**FS-129, the cross-application audit, is Opened**
+(`plans/FS129-cross-application-audit.md`; a special case, unranked)." reads "**FS-129, the cross-application audit, is Derived**
+(`plans/FS129-derivation.md`, 44 entries; rows 149–154; a special case, unranked); it is Closed when its compositions pass the Lean gate, in the
+Lean backlog's session."; and in "**Next, in Kooshi's order** (2026-10-03): **FS-129, the cross-application audit**
+(`plans/STUB-cross-application-audit.md`; a special case, not ranked); then **the Lean backlog**, in a session of its own (the hand results of the
+milestones closed before Workflow 3.1);" the words from "**FS-129, the cross-application audit**" through "not ranked); then " are removed, and
+"(the hand results of the milestones closed before Workflow 3.1)" reads "(the hand results of the milestones closed before Workflow 3.1, from
+`plans/LEAN-BACKLOG.md`)".
+
+**R5 — the second dated note** (under FS129-MA2-FALC-HOSTS): add, as with the first, the queue's own statement of what row 5 decides, verbatim from
+`plans/SEARCH-QUEUE.md` row 5 (its "what it would decide" cell), before the result bullets you quoted.
+
+**R6 — your placement choices** (each dated note after its entry's whole block; the Falconer addition at the cell's end; G92 directly after G91's
+entry; each re-rank banner directly under its title, above any existing banner): accepted as you made them.
+
+**R7 — the brief's two quotations of `.claude/output-styles/keryx.md`**: the coordinator checked both, verbatim; no re-read needed.
+
+Then every gate again, and the report as before, naming the branch's last commit.
