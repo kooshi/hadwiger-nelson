@@ -305,6 +305,7 @@ noncomputable def triCoord (z : ℂ) : ℝ × ℝ := (z.re - z.im / √3, 2 * z.
 /-- The squared norm of `a + b ω`. -/
 def triQ (a b : ℝ) : ℝ := a ^ 2 + a * b + b ^ 2
 
+/-- `e (π/3) = 1/2 + (√3/2) i`. -/
 theorem e_pi_div_three : e (π / 3) = (1 / 2 : ℂ) + ((√3 / 2 : ℝ) : ℂ) * I := by
   rw [e_eq, Real.cos_pi_div_three, Real.sin_pi_div_three]; push_cast; ring
 
@@ -391,6 +392,7 @@ def r7Down (m n : ℤ) : Set ℂ :=
   {z | z ∈ convexHull ℝ {tri (m + 1) n, tri m (n + 1), tri (m + 1) (n + 1)} ∧ 1 < dist z (tri m n) ∧
     1 < dist z (tri (m + 2) n) ∧ 1 < dist z (tri m (n + 2))}
 
+/-- R7 is measurable (floors into a countable type and three quadratic tests). -/
 theorem measurable_r7Col : Measurable r7Col := by
   have hfl1 : Measurable fun p : ℝ × ℝ => ⌊p.1⌋ := Int.measurable_floor.comp measurable_fst
   have hfl2 : Measurable fun p : ℝ × ℝ => ⌊p.2⌋ := Int.measurable_floor.comp measurable_snd
@@ -635,6 +637,7 @@ theorem r7Cls_isMaximalCover : IsMaximalCover r7Cls := by
 
 /-! ### Children of `r7_lowerGraph`: R7 in the frame `(e(π/6), 2π/3)` -/
 
+/-- The lattice coordinates of the frame point `e (π/6) + e (2π/3)(s + t i)`. -/
 theorem triCoord_frame (s t : ℝ) :
     triCoord (e (π / 6) + e (2 * π / 3) * ((s : ℂ) + t * I)) = ((1 - t) / √3 - s, (1 - t) / √3 + s) := by
   have h3 : (√3 : ℝ) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
@@ -648,6 +651,7 @@ theorem triCoord_frame (s t : ℝ) :
   norm_num
   constructor <;> (field_simp; first | ring1 | linear_combination (1 - t) * h3)
 
+/-- In the open cell `(0, 0)`, outside the unit discs about `0`, `2`, `2ω` (lattice norm), R7 has the down colour `4`. -/
 theorem r7ColTri_four {a b : ℝ} (ha : 0 < a) (hb : 0 < b) (ha1 : a < 1) (hb1 : b < 1) (h1 : 1 < triQ a b)
     (h2 : 1 < triQ (a - 2) b) (h3 : 1 < triQ a (b - 2)) : r7ColTri a b = 4 := by
   have e1 : ⌊a⌋ = 0 := Int.floor_eq_zero_iff.2 ⟨ha.le, ha1⟩
@@ -657,11 +661,13 @@ theorem r7ColTri_four {a b : ℝ} (ha : 0 < a) (hb : 0 < b) (ha1 : a < 1) (hb1 :
   rw [if_neg (not_le.2 h1), if_neg (not_le.2 h2), if_neg (not_le.2 h3)]
   rfl
 
+/-- Points of the box `(0.35, 0.51) × (0.65, 0.81)` are at lattice norm more than `1` from `2` and from `2ω`. -/
 theorem triQ_far_gt {a b : ℝ} (ha : 0.35 < a) (ha' : a < 0.51) (hb : 0.65 < b) (hb' : b < 0.81) :
     1 < triQ (a - 2) b ∧ 1 < triQ a (b - 2) := by
   unfold triQ
   constructor <;> nlinarith [mul_pos (sub_pos.2 ha) (sub_pos.2 hb), mul_pos (sub_pos.2 ha') (sub_pos.2 hb')]
 
+/-- The lattice norm along the frame: `triQ (r − s) (r + s) = ρ² + s²` when `r = ρ/√3`. -/
 theorem triQ_frame {r s ρ : ℝ} (hr : r = ρ / √3) : triQ (r - s) (r + s) = ρ ^ 2 + s ^ 2 := by
   have h3 : (√3 : ℝ) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
   have : r ^ 2 * 3 = ρ ^ 2 := by rw [hr, div_pow, h3]; ring
@@ -869,6 +875,7 @@ theorem tri_cover (z : ℂ) : ∃ p q : ℤ, normSq (z - tri p q) ≤ 1 / 3 := b
     · exact key ⌊u₀⌋ (⌊v₀⌋ + 1) (by rw [← hsym]; push_cast; convert h using 2 <;> ring)
     · exact key (⌊u₀⌋ + 1) ⌊v₀⌋ (by rw [← hsym]; push_cast; convert h using 2 <;> ring)
 
+/-- DISC7's classes are measurable. -/
 theorem measurableSet_disc7 (a : Fin 7) : MeasurableSet (disc7 a) := by
   refine MeasurableSet.iUnion fun m => MeasurableSet.iUnion fun n => MeasurableSet.iUnion fun _ => ?_
   exact measurableSet_closedBall

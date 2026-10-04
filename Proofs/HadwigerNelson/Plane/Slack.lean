@@ -51,18 +51,21 @@ theorem volume_ball_ofReal (z : ℂ) {ρ : ℝ} (hρ : 0 ≤ ρ) : volume (ball 
 def IccPairNull (A : Set ℂ) (a b : ℝ) : Prop :=
   (volume.prod volume) {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b} = 0
 
+/-- `BandNull A ε` is `IccPairNull` on the radius band `[1 − ε, 1 + ε]` (by definition). -/
 theorem bandNull_iff_iccPairNull (A : Set ℂ) (ε : ℝ) : BandNull A ε ↔ IccPairNull A (1 - ε) (1 + ε) := Iff.rfl
 
 /-- The mass of the pairs `(x, θ)`, `x ∈ A ∩ B(0, R)`, `x + r e θ ∈ A` (`Leb ⊗ σ`): the unit-pair mass at radius `r`. -/
 noncomputable def pairMass (A : Set ℂ) (R r : ℝ) : ENNReal :=
   (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ A ∩ ball 0 R ∧ q.1 + (r : ℂ) * e q.2 ∈ A}
 
+/-- Null pairs on a radius band are null on every sub-band. -/
 theorem IccPairNull.mono {A : Set ℂ} {a b a' b' : ℝ} (h : IccPairNull A a b) (ha : a ≤ a') (hb : b' ≤ b) :
     IccPairNull A a' b' := by
   exact
   measure_mono_null (fun q (hq : q ∈ {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a' ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b'}) =>
     (⟨hq.1, hq.2.1, ha.trans hq.2.2.1, hq.2.2.2.trans hb⟩ : q ∈ {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b})) h
 
+/-- Null pairs on two adjacent radius bands are null on their union. -/
 theorem IccPairNull.union {A : Set ℂ} {a b c : ℝ} (h1 : IccPairNull A a b) (h2 : IccPairNull A b c) :
     IccPairNull A a c := by
   refine measure_mono_null (t := {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b} ∪
@@ -118,6 +121,7 @@ theorem iccPairNull_of_forall_lt {A : Set ℂ} {a b : ℝ} (h : ∀ a', a < a' �
       refine measure_mono_null (fun q hq => ?_) (measure_empty (μ := volume.prod volume))
       exact absurd (hq.2.2.1.trans hq.2.2.2) (not_le.2 this)
 
+/-- Null unit pairs is the vanishing of the unit-radius pair mass over every disc about the origin. -/
 theorem unitPairsNull_iff_pairMass {A : Set ℂ} : UnitPairsNull A ↔ ∀ R : ℝ, pairMass A R 1 = 0 := by
   constructor
   · intro h R
@@ -502,6 +506,7 @@ theorem bandNull_unitPairsNull {A : Set ℂ} (hA : MeasurableSet A) {ε : ℝ} (
   have hP := pairMass_eq_zero_of_iccPairNull hA (by linarith) (by linarith) hI
   exact unitPairsNull_iff_pairMass.2 fun R => hP R 1 ⟨by linarith, by linarith⟩
 
+/-- `µ_k(ε) ≤ µ_k⁰` for `0 < ε < 1`: a band-null family has null unit pairs (`bandNull_unitPairsNull`). -/
 theorem mu_le_muZero (k : ℕ) {ε : ℝ} (hε0 : 0 < ε) (hε1 : ε < 1) : mu k ε ≤ muZero k := by
   refine iSup₂_le fun C hC => le_iSup₂_of_le (f := fun C (_ : IsPartialColouring C ∧ ∀ j, UnitPairsNull (C j)) =>
     upperDensity (⋃ j, C j)) C ⟨hC.1, fun j => bandNull_unitPairsNull (hC.1.1 j) hε0 hε1 (hC.2 j)⟩ le_rfl
@@ -515,10 +520,12 @@ theorem bandNull_of_bandFree {A : Set ℂ} {ε : ℝ} (h : BandFree A ε) : Band
     rcases h _ hx _ hy with h3 | h3 <;> linarith
   rw [BandNull, this, measure_empty]
 
+/-- `µ_k^tile(ε) ≤ µ_k(ε)`: band-free classes are band-null. -/
 theorem muTile_le_mu (k : ℕ) (ε : ℝ) : muTile k ε ≤ mu k ε := by
   refine iSup_le fun C => iSup_le fun h => ?_
   exact le_iSup₂_of_le C ⟨h.1, fun j => bandNull_of_bandFree (h.2.2 j)⟩ le_rfl
 
+/-- `µ_k^per(ε) ≤ µ_k^tile(ε)`: a periodic tiled family is a tiled family. -/
 theorem muPer_le_muTile (k : ℕ) (ε : ℝ) : muPer k ε ≤ muTile k ε := by
   refine iSup_le fun C => iSup_le fun h => ?_
   exact le_iSup₂_of_le C ⟨h.1, h.2.1, h.2.2.2⟩ le_rfl
@@ -620,6 +627,7 @@ theorem keptAt_of_dist_le {A : Set ℂ} {η ε : ℝ} (hε : 0 < ε) (hη : 0 �
 /-- The periodization of `T` with period `L` in both coordinates. -/
 def periodize (T : Set ℂ) (L : ℝ) : Set ℂ := {x | ∃ m n : ℤ, x - ((m * L : ℝ) + (n * L : ℝ) * I) ∈ T}
 
+/-- A periodized set is periodic with its period. -/
 theorem isPeriodicSet_periodize (T : Set ℂ) (L : ℝ) : IsPeriodicSet L (periodize T L) := by
   intro x
   constructor
@@ -634,16 +642,20 @@ theorem isPeriodicSet_periodize (T : Set ℂ) (L : ℝ) : IsPeriodicSet L (perio
     · rintro ⟨m, n, h⟩
       exact ⟨m, n + 1, by convert h using 1; push_cast; ring⟩
 
+/-- Periodizing a measurable set gives a measurable set (a countable union of translates). -/
 theorem measurableSet_periodize {T : Set ℂ} (hT : MeasurableSet T) (L : ℝ) : MeasurableSet (periodize T L) := by
   have : periodize T L = ⋃ (m : ℤ) (n : ℤ), (fun x : ℂ => x - (((m * L : ℝ) : ℂ) + ((n * L : ℝ) : ℂ) * I)) ⁻¹' T := by
     ext x; simp [periodize]
   rw [this]
   exact MeasurableSet.iUnion fun m => MeasurableSet.iUnion fun n => (measurable_id.sub_const _) hT
 
+/-- The real part of the lattice shift `mL + (nL) i`. -/
 theorem shift_re (m n : ℤ) (L : ℝ) : (((m * L : ℝ) : ℂ) + ((n * L : ℝ) : ℂ) * I).re = m * L := by simp
 
+/-- The imaginary part of the lattice shift `mL + (nL) i`. -/
 theorem shift_im (m n : ℤ) (L : ℝ) : (((m * L : ℝ) : ℂ) + ((n * L : ℝ) : ℂ) * I).im = n * L := by simp
 
+/-- Periodizing a union of `h`-grid cells at a period `N h` keeps it a union of `h`-grid cells. -/
 theorem isGridUnion_periodize {T : Set ℂ} {h : ℝ} (hh : 0 < h) {N : ℕ} (hT : IsGridUnion h T) :
     IsGridUnion h (periodize T (N * h)) := by
   intro x ⟨m, n, hx⟩ y hy
@@ -696,6 +708,7 @@ theorem bandFree_periodize {T : Set ℂ} {z : ℂ} {ℓ ε : ℝ} (hT : T ⊆ sq
     rw [dist_eq_norm, ← norm_neg, neg_sub]
     linarith
 
+/-- Disjoint sets inside one window of side `ℓ` stay disjoint when periodized at period `ℓ + 2`. -/
 theorem disjoint_periodize {T T' : Set ℂ} {z : ℂ} {ℓ : ℝ} (hT : T ⊆ squareWin z ℓ) (hT' : T' ⊆ squareWin z ℓ)
     (h : Disjoint T T') : Disjoint (periodize T (ℓ + 2)) (periodize T' (ℓ + 2)) := by
   rw [Set.disjoint_left]
@@ -723,6 +736,7 @@ theorem disjoint_periodize {T T' : Set ℂ} {z : ℂ} {ℓ : ℝ} (hT : T ⊆ sq
   subst hm; subst hn
   exact Set.disjoint_left.1 h hx hx'
 
+/-- Periodization commutes with unions. -/
 theorem iUnion_periodize {T : Fin k → Set ℂ} (L : ℝ) : ⋃ j, periodize (T j) L = periodize (⋃ j, T j) L := by
   ext x
   simp only [periodize, mem_iUnion, mem_setOf_eq]
@@ -966,6 +980,7 @@ theorem upperDensity_of_periodic {v₁ v₂ : ℂ} (hv : LinearIndependent ℝ !
     simp only [latticePt]
     rw [← add_assoc, h2, h1]
 
+/-- A set inside a window of side `ℓ`, periodized at `ℓ + 2`, has upper density its area over `(ℓ + 2)²`. -/
 theorem upperDensity_periodize {T : Set ℂ} (hT : MeasurableSet T) {z : ℂ} {ℓ : ℝ} (hℓ : 0 < ℓ)
     (hTw : T ⊆ squareWin z ℓ) : upperDensity (periodize T (ℓ + 2)) = volume T / ENNReal.ofReal ((ℓ + 2) ^ 2) := by
   set L := ℓ + 2 with hLdef
@@ -1207,6 +1222,7 @@ theorem CPColouring.exists_unif (c : CPColouring k) {δ : ENNReal} (hδ : 0 < δ
 /-- The lower-left corner of the grid cell of side `h` containing `x`. -/
 noncomputable def gridPoint (h : ℝ) (x : ℂ) : ℂ := ((h * ⌊x.re / h⌋ : ℝ) : ℂ) + ((h * ⌊x.im / h⌋ : ℝ) : ℂ) * I
 
+/-- The grid point of `x` at mesh `h` lies within `2h` of `x`. -/
 theorem dist_gridPoint_lt {h : ℝ} (hh : 0 < h) (x : ℂ) : dist (gridPoint h x) x < 2 * h := by
   have h1 : ∀ t : ℝ, |h * ⌊t / h⌋ - t| < h := by
     intro t
@@ -1530,6 +1546,7 @@ theorem exists_selection {F : Fin k → ℂ → ℝ} (hF : ∀ j, Measurable (F 
         have : ∑ j, F j x ≤ 0 := Finset.sum_nonpos fun j _ => h j
         linarith
 
+/-- Band-nullity is invariant under translation. -/
 theorem bandNull_preimage_add {A : Set ℂ} {ε : ℝ} (h : BandNull A ε) (v : ℂ) : BandNull ((· + v) ⁻¹' A) ε := by
   let E : ℂ × ℂ ≃ᵐ ℂ × ℂ := MeasurableEquiv.prodCongr (MeasurableEquiv.addRight v) (MeasurableEquiv.addRight v)
   have hE : MeasurePreserving E (volume.prod volume) (volume.prod volume) :=
@@ -1540,6 +1557,7 @@ theorem bandNull_preimage_add {A : Set ℂ} {ε : ℝ} (h : BandNull A ε) (v : 
       Equiv.prodCongr_apply, MeasurableEquiv.addRight, Equiv.coe_addRight, Prod.map_apply, dist_add_right]
   rw [BandNull, this, hE.measure_preimage_equiv]; exact h
 
+/-- Null unit pairs is invariant under translation. -/
 theorem unitPairsNull_preimage_add {A : Set ℂ} (h : UnitPairsNull A) (v : ℂ) : UnitPairsNull ((· + v) ⁻¹' A) := by
   have hmp : MeasurePreserving (fun q : ℂ × ℝ => (q.1 + v, q.2)) (volume.prod arcLength) (volume.prod arcLength) :=
     (measurePreserving_add_right volume v).prod (MeasurePreserving.id _)
@@ -1575,6 +1593,7 @@ theorem arcLength_pos_of_isOpen {U : Set ℂ} (hU : IsOpen U) {u : ℂ} (h : ∃
   refine lt_of_lt_of_le ?_ (measure_mono hsub)
   rw [Real.volume_Ioo]; simp [hδ'0]
 
+/-- `e θ · e (−θ) = 1`. -/
 theorem e_mul_e_neg (θ : ℝ) : e θ * e (-θ) = 1 := by
   rw [← e_add, add_neg_cancel]; simp [e]
 
@@ -1599,6 +1618,7 @@ theorem isOpen_rotImage (x : ℂ) (θ : ℝ) {W : Set ℂ} (hW : IsOpen W) : IsO
 /-- The point `x + e θ (−s + t i)` of the half-box frame. -/
 noncomputable def framePt (x : ℂ) (θ s t : ℝ) : ℂ := x + e θ * (-s + t * I)
 
+/-- A convex combination of two numbers in `[lo, hi]` lies in `[lo, hi]`. -/
 theorem convex_combo_mem {l a b lo hi : ℝ} (hl : l ∈ Icc (0 : ℝ) 1) (ha : lo ≤ a) (ha' : a ≤ hi) (hb : lo ≤ b)
     (hb' : b ≤ hi) : lo ≤ (1 - l) * a + l * b ∧ (1 - l) * a + l * b ≤ hi := by
   obtain ⟨h0, h1⟩ := hl
@@ -1637,6 +1657,7 @@ theorem exists_circle_point_halfBox {x : ℂ} {θ ε : ℝ} {y' : ℂ} {s₁ t�
   · exact lt_of_le_of_lt hsb.2 (max_lt hs₁' hs₂')
   · exact abs_le.2 ⟨htb.1, htb.2⟩ |>.trans_lt (max_lt ht₁ ht₂)
 
+/-- For a unit vector `(a, b) ≠ (1, 0)`, the box `(0, ε) × (−ε, ε)` meets both sides of the unit circle about `(−a, b)`. -/
 theorem exists_frame_sides {a b ε : ℝ} (hε : 0 < ε) (hab : a ^ 2 + b ^ 2 = 1) (hne : ¬(a = 1 ∧ b = 0)) :
     ∃ s₁ t₁ s₂ t₂ : ℝ, 0 < s₁ ∧ s₁ < ε ∧ |t₁| < ε ∧ 0 < s₂ ∧ s₂ < ε ∧ |t₂| < ε ∧
       (s₁ + a) ^ 2 + (t₁ - b) ^ 2 < 1 ∧ 1 < (s₂ + a) ^ 2 + (t₂ - b) ^ 2 := by
@@ -1699,6 +1720,7 @@ theorem frame_coords {x y : ℂ} (θ : ℝ) (hxy : dist x y = 1) :
     rw [h1, Complex.normSq_apply] at this
     nlinarith
 
+/-- Under `2g − g² ≤ ρ²` the box `(g, g + ε′) × (−ρ, ρ)` meets the unit circle about `(1 + u, v)` (`0 ≤ u < g`, `|v| < ρ`, `(u, v) ≠ 0`). -/
 theorem exists_far_point {g ε' ρ u v : ℝ} (hg : 0 < g) (hg1 : g < 1) (hε' : 0 < ε') (hρ : 0 < ρ)
     (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2) (hu0 : 0 ≤ u) (hug : u < g) (hvρ : |v| < ρ) (hne : ¬(u = 0 ∧ v = 0)) :
     ∃ σ τ : ℝ, g < σ ∧ σ < g + ε' ∧ |τ| < ρ ∧ (σ - (1 + u)) ^ 2 + (τ - v) ^ 2 = 1 := by
@@ -1760,14 +1782,17 @@ theorem exists_far_point {g ε' ρ u v : ℝ} (hg : 0 < g) (hg1 : g < 1) (hε' :
     · have : (g + δ - (1 + u)) ^ 2 = (h - 1) ^ 2 := by rw [hh]; ring
       rw [this, show (v + κ - v) ^ 2 = κ ^ 2 by ring, hκ2]; ring
 
+/-- A point at distance `1` from `y′` is `y′ + e φ` for some angle `φ`. -/
 theorem exists_phi_of_dist_eq_one {z y' : ℂ} (h : dist z y' = 1) : ∃ φ : ℝ, y' + e φ = z := by
   have := self_eq_norm_mul_e_arg (z - y')
   rw [← dist_eq_norm, h] at this
   exact ⟨(z - y').arg, by rw [← one_mul (e _)]; simp at this; rw [← this]; ring⟩
 
+/-- `‖a + b i‖² = a² + b²`. -/
 theorem norm_sq_re_im (a b : ℝ) : ‖(a : ℂ) + (b : ℂ) * I‖ ^ 2 = a ^ 2 + b ^ 2 := by
   rw [Complex.sq_norm, Complex.normSq_apply]; simp; ring
 
+/-- The squared distance from `framePt x θ s t` to `x + e θ (a + b i)` is `(s + a)² + (t − b)²`. -/
 theorem dist_framePt_sq (x : ℂ) (θ s t a b : ℝ) :
     dist (framePt x θ s t) (x + e θ * (a + b * I)) ^ 2 = (s + a) ^ 2 + (t - b) ^ 2 := by
   have h : framePt x θ s t - (x + e θ * (a + b * I)) = e θ * ((((-(s + a)) : ℝ) : ℂ) + ((t - b : ℝ) : ℂ) * I) := by
@@ -1822,6 +1847,7 @@ theorem not_unitPairsNull_of_circles_meet {A U N : Set ℂ} (hA : MeasurableSet 
   simp at hu2
   exact hu1.ne' hu2
 
+/-- The half-box is open. -/
 theorem isOpen_halfBox (x : ℂ) (θ ε : ℝ) : IsOpen (halfBox x θ ε) := by
   have hW : IsOpen {w : ℂ | 0 < -w.re ∧ -w.re < ε ∧ |w.im| < ε} := by
     have h1 : IsOpen {w : ℂ | 0 < -w.re} := isOpen_lt continuous_const Complex.continuous_re.neg
@@ -1840,6 +1866,7 @@ theorem isOpen_halfBox (x : ℂ) (θ ε : ℝ) : IsOpen (halfBox x θ ε) := by
       apply Complex.ext <;> simp
   rw [this]; exact isOpen_rotImage x θ hW
 
+/-- The far box is open. -/
 theorem isOpen_farBox (x : ℂ) (θ g ε' ρ : ℝ) : IsOpen (farBox x θ g ε' ρ) := by
   have hW : IsOpen {w : ℂ | g < w.re ∧ w.re < g + ε' ∧ |w.im| < ρ} := by
     have h1 : IsOpen {w : ℂ | g < w.re} := isOpen_lt continuous_const Complex.continuous_re
@@ -1946,6 +1973,7 @@ theorem circles_meet_boxes_at_normal {x : ℂ} {θ ε ε' g ρ : ℝ} (hε : 0 <
 def faceFailClass (x : ℂ) (θ ε g ε' ρ δ : ℝ) : Set ℂ :=
   halfBox x θ ε ∪ farBox x θ g ε' ρ ∪ {z | ∃ s t : ℝ, 1 < s ∧ s < 1 + δ ∧ |t| < δ ∧ z = x + e θ * (s + t * I)}
 
+/-- `|a| < b` gives `a² < b²`. -/
 theorem sq_lt_of_abs_lt' {a b : ℝ} (h : |a| < b) : a ^ 2 < b ^ 2 := by
   have := abs_nonneg a; nlinarith [sq_abs a]
 
@@ -1958,9 +1986,11 @@ def PieceF (g ε' ρ σ τ : ℝ) : Prop := g < σ ∧ σ < g + ε' ∧ |τ| < �
 /-- The `Q` piece, in frame coordinates. -/
 def PieceQ (δ σ τ : ℝ) : Prop := 1 < σ ∧ σ < 1 + δ ∧ |τ| < δ
 
+/-- `|a| < c` and `|b| < d` give `|a − b| < c + d`. -/
 theorem abs_sub_lt_of_abs_lt {a b c d : ℝ} (h1 : |a| < c) (h2 : |b| < d) : |a - b| < c + d :=
   lt_of_le_of_lt (abs_sub _ _) (by linarith)
 
+/-- Under the stated margins no two points of the face-failure pieces `H`, `F`, `Q` are at distance `1` (frame coordinates). -/
 theorem real_no_unit {g ρ ε ε' δ : ℝ} (hg : 0 < g) (hε' : 0 < ε')
     (hHH : 5 * ε ^ 2 < 1) (hFF : ε' ^ 2 + 4 * ρ ^ 2 < 1) (hQQ : 5 * δ ^ 2 < 1)
     (hHF : (g + ε' + ε) ^ 2 + (ρ + ε) ^ 2 < 1) (hFQ : (1 - g + δ) ^ 2 + (ρ + δ) ^ 2 < 1)
@@ -1995,6 +2025,7 @@ theorem real_no_unit {g ρ ε ε' δ : ℝ} (hg : 0 < g) (hε' : 0 < ε')
     have h2 : (τ - τ') ^ 2 < (δ + δ) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
     intro h; nlinarith
 
+/-- Squared distance in a rotated frame is the squared distance of the frame coordinates. -/
 theorem frame_dist_sq (x : ℂ) (θ σ τ σ' τ' : ℝ) :
     dist (x + e θ * ((σ : ℂ) + (τ : ℂ) * I)) (x + e θ * ((σ' : ℂ) + (τ' : ℂ) * I)) ^ 2 =
       (σ - σ') ^ 2 + (τ - τ') ^ 2 := by
@@ -2002,6 +2033,7 @@ theorem frame_dist_sq (x : ℂ) (θ σ τ σ' τ' : ℝ) :
       e θ * (((σ - σ' : ℝ) : ℂ) + ((τ - τ' : ℝ) : ℂ) * I) := by push_cast; ring
   rw [dist_eq_norm, this, norm_mul, norm_e, one_mul, norm_sq_re_im]
 
+/-- A point of the face-failure class has frame coordinates in one of its pieces `H`, `F`, `Q`. -/
 theorem mem_faceFailClass_iff {x : ℂ} {θ ε g ε' ρ δ : ℝ} {z : ℂ} (hz : z ∈ faceFailClass x θ ε g ε' ρ δ) :
     ∃ σ τ : ℝ, z = x + e θ * ((σ : ℂ) + (τ : ℂ) * I) ∧
       (PieceH ε σ τ ∨ PieceF g ε' ρ σ τ ∨ PieceQ δ σ τ) := by
@@ -2121,6 +2153,7 @@ theorem isOpen_faceQ (x : ℂ) (θ δ : ℝ) :
     refine ⟨w.re, w.im, h1, h2, h3, ?_⟩
     congr 2; apply Complex.ext <;> simp
 
+/-- The face-failure class is measurable (it is open). -/
 theorem measurableSet_faceFailClass (x : ℂ) (θ ε g ε' ρ δ : ℝ) : MeasurableSet (faceFailClass x θ ε g ε' ρ δ) := by
   exact (((isOpen_halfBox x θ ε).union (isOpen_farBox x θ g ε' ρ)).union (isOpen_faceQ x θ δ)).measurableSet
 

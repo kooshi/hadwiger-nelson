@@ -61,12 +61,15 @@ def IsSelection (C : Fin k → Set ℂ) (f : ℂ → Fin k) : Prop := Measurable
 /-- The classes of a colouring, as a family. -/
 def AeColouring.cls (c : AeColouring k) (j : Fin k) : Set ℂ := c.col ⁻¹' {j}
 
+/-- The classes of an a.e.-colouring are measurable. -/
 theorem AeColouring.measurableSet_cls (c : AeColouring k) (j : Fin k) : MeasurableSet (c.cls j) :=
   c.measurable (measurableSet_singleton j)
 
+/-- The classes of an a.e.-colouring cover the plane. -/
 theorem AeColouring.iUnion_cls (c : AeColouring k) : ⋃ j, c.cls j = univ :=
   eq_univ_of_forall fun x => mem_iUnion.2 ⟨c.col x, rfl⟩
 
+/-- The classes of an a.e.-colouring are pairwise disjoint. -/
 theorem AeColouring.pairwise_disjoint_cls (c : AeColouring k) : Pairwise (Disjoint on c.cls) :=
   fun _ _ hij => Disjoint.preimage _ (disjoint_singleton.2 hij)
 
@@ -123,6 +126,7 @@ noncomputable def sq9Index (t : ℝ) : ZMod 3 := (⌊2 * t⌋ : ZMod 3)
 /-- `sq9`'s colour: the half-open square `[i/2, (i+1)/2) × [j/2, (j+1)/2)` gets `(i mod 3, j mod 3)`. -/
 noncomputable def sq9Col (z : ℂ) : Fin 9 := finProdFinEquiv (sq9Index z.re, sq9Index z.im)
 
+/-- `sq9Col` is measurable. -/
 theorem measurable_sq9Col : Measurable sq9Col := by
   have h : sq9Col = (fun p : ℤ × ℤ => finProdFinEquiv ((p.1 : ZMod 3), (p.2 : ZMod 3))) ∘
       fun z : ℂ => (⌊2 * z.re⌋, ⌊2 * z.im⌋) := rfl

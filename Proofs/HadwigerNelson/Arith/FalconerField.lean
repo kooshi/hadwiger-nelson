@@ -270,7 +270,12 @@ theorem falconerFan_five_mem_eight (Λ : AddSubgroup ℂ)
 /-- **FS129-MA2-FALC-HOSTS**, clause (iv), over row 88's frame (`hR88`, `hR88per`, named): for a connected `H ⊂ F²` with a
 fan at five colours and an additive group `R` holding every unit vector of `F²`, whose forced set (the differences every
 four-colouring of the unit-distance graph on `R` identifies at every point) is `{0}` or `P`, and is `P` only if every
-four-colouring of `F²` is periodic (`Per`), the tip minus the apex lies in `P` and `Per` holds. -/
+four-colouring of `F²` is periodic (`Per`), the tip minus the apex lies in `P` and `Per` holds.
+
+**What the frame proves, and no more** (`plans/FS131-close-inventory.md` item 144 (d)): only that a fan's `t − a` is a
+non-zero forced difference of `R` — it lies in the forced set of `R`'s unit-distance graph at four colours, which is therefore
+not `{0}` and so is `P` by `hR88`. The fields and `P = R ∩ 𝔓⁴` enter only when the frame is instantiated with row 88's
+hypotheses; nothing here identifies `P`. -/
 theorem falconerFan_five_mem_P (F : Subfield ℝ) (R : AddSubgroup ℂ)
     (hRU : ∀ u ∈ planeOver F, ‖u‖ = 1 → u ∈ R) (P : Set ℂ) (Per : Prop)
     (hR88 : {v : ℂ | ∀ C : ((unitDistance ℂ).induce (R : Set ℂ)).Coloring (Fin 4), ∀ x : R,

@@ -33,9 +33,11 @@ def shiftCol (x : ℂ) (f : ℂ → Fin k) : ℂ → Fin k := fun y => f (y + x)
 /-- The rotation of a colouring by the angle `θ`: `(rotCol θ f) y = f (e θ * y)`. -/
 noncomputable def rotCol (θ : ℝ) (f : ℂ → Fin k) : ℂ → Fin k := fun y => f (e θ * y)
 
+/-- Shifting a colouring is measurable. -/
 theorem measurable_shiftCol (x : ℂ) : Measurable (shiftCol (k := k) x) :=
   measurable_pi_lambda _ fun y => measurable_pi_apply (y + x)
 
+/-- Rotating a colouring is measurable. -/
 theorem measurable_rotCol (θ : ℝ) : Measurable (rotCol (k := k) θ) :=
   measurable_pi_lambda _ fun y => measurable_pi_apply (e θ * y)
 
@@ -60,6 +62,7 @@ def CPColouring.RotationInvariant (c : CPColouring k) : Prop := ∀ θ : ℝ, c.
 /-- `χ_CP(ℝ²)`: the least `k` admitting a CP `k`-colouring (`⊤` if none). -/
 noncomputable def chiCP : ℕ∞ := ⨅ (k : ℕ) (_ : Nonempty (CPColouring k)), (k : ℕ∞)
 
+/-- A CP `k`-colouring gives `χ_CP ≤ k`. -/
 theorem chiCP_le (c : CPColouring k) : chiCP ≤ k := iInf₂_le k ⟨c⟩
 
 /-- No CP colouring with no colours: there is no colouring at all, so no probability measure on colourings. -/

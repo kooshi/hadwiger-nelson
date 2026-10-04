@@ -401,22 +401,26 @@ theorem touch_conditions {φ : ℝ → ℝ} (hφ : ContDiff ℝ 2 φ) {σ τ s�
   rw [(hG2 s₀).deriv] at d2
   constructor <;> nlinarith [d1', d2]
 
+/-- Distance in a rotated frame: `(s, t) ↦ z₀ + e θ (s + t i)` is an isometry from `ℝ²`. -/
 theorem dist_frame (θ : ℝ) (s t σ τ : ℝ) (z₀ : ℂ) :
     dist (z₀ + e θ * ((s : ℂ) + t * I)) (z₀ + e θ * ((σ : ℂ) + τ * I)) = √((s - σ) ^ 2 + (t - τ) ^ 2) := by
   have : z₀ + e θ * ((s : ℂ) + t * I) - (z₀ + e θ * ((σ : ℂ) + τ * I)) =
       e θ * (((s - σ : ℝ) : ℂ) + ((t - τ : ℝ) : ℂ) * I) := by push_cast; ring
   rw [dist_eq_norm, this, norm_mul, norm_e, one_mul, Complex.norm_add_mul_I]
 
+/-- Every point has coordinates in the rotated frame at `z₀` with angle `θ`. -/
 theorem exists_frame_coords (θ : ℝ) (z₀ y : ℂ) : ∃ σ τ : ℝ, y = z₀ + e θ * ((σ : ℂ) + τ * I) := by
   have hne : e θ ≠ 0 := by
     intro h; have := norm_e θ; rw [h, norm_zero] at this; exact zero_ne_one this
   refine ⟨((y - z₀) / e θ).re, ((y - z₀) / e θ).im, ?_⟩
   rw [Complex.re_add_im, mul_div_cancel₀ _ hne]; ring
 
+/-- A continuous function nonpositive on `(0, η₀)` is nonpositive at `0`. -/
 theorem le_zero_of_forall_small {f : ℝ → ℝ} (hf : Continuous f) {η₀ : ℝ} (hη : 0 < η₀)
     (h : ∀ η ∈ Ioo 0 η₀, f η ≤ 0) : f 0 ≤ 0 :=
   le_of_tendsto (hf.tendsto 0 |>.mono_left nhdsWithin_le_nhds) (eventually_of_mem (Ioo_mem_nhdsGT hη) h)
 
+/-- A continuous function nonnegative on `(0, η₀)` is nonnegative at `0`. -/
 theorem ge_zero_of_forall_small {f : ℝ → ℝ} (hf : Continuous f) {η₀ : ℝ} (hη : 0 < η₀)
     (h : ∀ η ∈ Ioo 0 η₀, 0 ≤ f η) : 0 ≤ f 0 :=
   ge_of_tendsto (hf.tendsto 0 |>.mono_left nhdsWithin_le_nhds) (eventually_of_mem (Ioo_mem_nhdsGT hη) h)
@@ -424,6 +428,7 @@ theorem ge_zero_of_forall_small {f : ℝ → ℝ} (hf : Continuous f) {η₀ : �
 /-- The frame map `(s, t) ↦ z₀ + e θ · (s + t i)`. -/
 noncomputable def frameMap (z₀ : ℂ) (θ : ℝ) (s t : ℝ) : ℂ := z₀ + e θ * ((s : ℂ) + t * I)
 
+/-- The frame map is jointly continuous in its two coordinates. -/
 theorem continuous_frameMap (z₀ : ℂ) (θ : ℝ) : Continuous (fun q : ℝ × ℝ => frameMap z₀ θ q.1 q.2) :=
   continuous_const.add (continuous_const.mul ((Complex.continuous_ofReal.comp continuous_fst).add
     ((Complex.continuous_ofReal.comp continuous_snd).mul continuous_const)))
@@ -784,6 +789,7 @@ theorem exists_isMaxIn {T S : Set ℂ} (hT : MeasurableSet T) (hS : MeasurableSe
   have := hmax B (show MeasurableSet B ∧ UnitPairsNull B ∧ B ≤ᵐ[volume] Tᶜ from ⟨hBm, hBn, Eventually.of_forall hBT⟩) hUB
   exact this.trans heq.symm.le
 
+/-- `maxIn T S` satisfies `IsMaxIn T S` (the choice `exists_isMaxIn` provides). -/
 theorem isMaxIn_maxIn {T S : Set ℂ} (hT : MeasurableSet T) (hS : MeasurableSet S) (hSn : UnitPairsNull S)
     (hST : S ⊆ Tᶜ) : IsMaxIn T S (maxIn T S) := by
   have h := exists_isMaxIn hT hS hSn hST
@@ -802,16 +808,19 @@ noncomputable def grundyTaken (c : AeColouring k) : ℕ → Set ℂ
 noncomputable def grundyCls (c : AeColouring k) (m : ℕ) : Set ℂ :=
   maxIn (grundyTaken c m) (grundyS c m \ grundyTaken c m)
 
+/-- The `m`-th Grundy candidate set is measurable. -/
 theorem measurableSet_grundyS (c : AeColouring k) (m : ℕ) : MeasurableSet (grundyS c m) := by
   unfold grundyS; split_ifs with h
   · exact c.measurableSet_cls _
   · exact MeasurableSet.empty
 
+/-- The `m`-th Grundy candidate set has null unit pairs. -/
 theorem unitPairsNull_grundyS (c : AeColouring k) (m : ℕ) : UnitPairsNull (grundyS c m) := by
   unfold grundyS; split_ifs with h
   · exact c.unitPairsNull _
   · exact unitPairsNull_of_dist_lt_one (by simp)
 
+/-- The points taken by the first `m` Grundy steps form a measurable set. -/
 theorem measurableSet_grundyTaken (c : AeColouring k) (m : ℕ) : MeasurableSet (grundyTaken c m) := by
   induction m with
   | zero => exact MeasurableSet.empty
@@ -822,6 +831,7 @@ theorem measurableSet_grundyTaken (c : AeColouring k) (m : ℕ) : MeasurableSet 
     have := isMaxIn_maxIn ih hS hn (fun x hx => hx.2)
     exact ih.union this.2.2.1
 
+/-- The points taken by the first `m` Grundy steps are the union of the first `m` Grundy classes. -/
 theorem grundyTaken_eq (c : AeColouring k) (m : ℕ) : grundyTaken c m = ⋃ i < m, grundyCls c i := by
   induction m with
   | zero => simp [grundyTaken]

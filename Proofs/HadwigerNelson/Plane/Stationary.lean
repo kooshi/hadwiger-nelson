@@ -19,6 +19,7 @@ variable {k : ℕ}
 
 /-! ### The inhabitant's construction: `sq9` under a uniform random translation of the period torus -/
 
+/-- `sq9Index` is periodic with period `3/2`. -/
 theorem sq9Index_periodic : Function.Periodic sq9Index (3 / 2 : ℝ) := by
   intro t
   unfold sq9Index
@@ -33,6 +34,7 @@ local instance : Fact (0 < (3 / 2 : ℝ)) := ⟨by norm_num⟩
 /-- The square index of a point of the circle `ℝ / (3/2)ℤ`. -/
 noncomputable def cIdx (t : AddCircle (3 / 2 : ℝ)) : ZMod 3 := sq9Index (AddCircle.equivIoc (3 / 2 : ℝ) 0 t).1
 
+/-- `cIdx` on the circle `ℝ/(3/2)ℤ` reads `sq9Index` at a representative. -/
 theorem cIdx_coe (a : ℝ) : cIdx (a : AddCircle (3 / 2 : ℝ)) = sq9Index a := by
   unfold cIdx
   have h : (AddCircle.equivIoc (3 / 2 : ℝ) 0 (a : AddCircle (3 / 2 : ℝ))).1 = toIocMod (by norm_num : (0 : ℝ) < 3 / 2) 0 a := by
@@ -51,16 +53,19 @@ abbrev Tor := AddCircle (3 / 2 : ℝ) × AddCircle (3 / 2 : ℝ)
 /-- The point of the torus under `y`. -/
 noncomputable def torPt (y : ℂ) : Tor := ((y.re : ℝ), (y.im : ℝ))
 
+/-- `torPt` is additive. -/
 theorem torPt_add (y z : ℂ) : torPt (y + z) = torPt y + torPt z := by
   simp [torPt]
 
 /-- `sq9`'s colour as a function on the torus. -/
 noncomputable def torCol (t : Tor) : Fin 9 := finProdFinEquiv (cIdx t.1, cIdx t.2)
 
+/-- The torus colouring at the image of `(a, b)` is `sq9Col (a + b i)`. -/
 theorem torCol_coe (a b : ℝ) : torCol (((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) =
     sq9Col ⟨a, b⟩ := by
   simp [torCol, sq9Col, cIdx_coe]
 
+/-- The torus colouring moved by `torPt z` is `sq9Col` moved by `z`. -/
 theorem torCol_pt_add (a b : ℝ) (z : ℂ) :
     torCol ((((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) + torPt z) = sq9Col (⟨a, b⟩ + z) := by
   have : ((((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) + torPt z : Tor) =
@@ -68,17 +73,20 @@ theorem torCol_pt_add (a b : ℝ) (z : ℂ) :
     simp [torPt]
   rw [this, torCol_coe]; rfl
 
+/-- Every point of the torus is the image of a pair of reals. -/
 theorem exists_coe_eq (t : Tor) : ∃ a b : ℝ, t = (((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) := by
   obtain ⟨a, ha⟩ := QuotientAddGroup.mk_surjective t.1
   obtain ⟨b, hb⟩ := QuotientAddGroup.mk_surjective t.2
   exact ⟨a, b, Prod.ext ha.symm hb.symm⟩
 
+/-- `cIdx` is measurable. -/
 theorem measurable_cIdx : Measurable cIdx := by
   have hs : Measurable sq9Index := by
     unfold sq9Index
     exact (measurable_of_countable (fun n : ℤ => (n : ZMod 3))).comp (Int.measurable_floor.comp (measurable_const.mul measurable_id))
   exact hs.comp (measurable_subtype_coe.comp (AddCircle.measurableEquivIoc (3 / 2 : ℝ) 0).measurable)
 
+/-- The torus colouring is measurable. -/
 theorem measurable_torCol : Measurable torCol := by
   have h1 : Measurable fun t : Tor => (cIdx t.1, cIdx t.2) :=
     (measurable_cIdx.comp measurable_fst).prodMk (measurable_cIdx.comp measurable_snd)
@@ -91,13 +99,16 @@ theorem measurable_torCol : Measurable torCol := by
 /-- The random colouring at the torus point `t`: `y ↦ sq9 (y + t)`. -/
 noncomputable def torField (t : Tor) : ℂ → Fin 9 := fun y => torCol (t + torPt y)
 
+/-- The family of plane colourings indexed by the torus is measurable. -/
 theorem measurable_torField : Measurable torField :=
   measurable_pi_lambda _ fun _ => measurable_torCol.comp (measurable_id.add_const _)
 
+/-- Shifting the colouring at `t` by `x` gives the colouring at `t + torPt x`. -/
 theorem torField_shift (x : ℂ) (t : Tor) : shiftCol x (torField t) = torField (t + torPt x) := by
   funext y
   simp only [shiftCol, torField, torPt_add, add_assoc, add_comm (torPt x)]
 
+/-- The torus `(ℝ/(3/2)ℤ)²` has area `(3/2)²`. -/
 theorem volume_tor_univ : (volume : Measure Tor) univ = ENNReal.ofReal (3 / 2) * ENNReal.ofReal (3 / 2) := by
   rw [Measure.volume_eq_prod, ← univ_prod_univ, Measure.prod_prod, AddCircle.measure_univ]
 
@@ -105,6 +116,7 @@ theorem volume_tor_univ : (volume : Measure Tor) univ = ENNReal.ofReal (3 / 2) *
 noncomputable def cpLaw : Measure (ℂ → Fin 9) :=
   (ENNReal.ofReal (3 / 2) * ENNReal.ofReal (3 / 2))⁻¹ • (volume : Measure Tor).map torField
 
+/-- The stationary law of `sq9` is the normalized torus measure pulled back through `torField`. -/
 theorem cpLaw_apply {S : Set (ℂ → Fin 9)} (hS : MeasurableSet S) :
     cpLaw S = (ENNReal.ofReal (3 / 2) * ENNReal.ofReal (3 / 2))⁻¹ * volume (torField ⁻¹' S) := by
   rw [cpLaw, Measure.smul_apply, Measure.map_apply measurable_torField hS, smul_eq_mul]
@@ -112,6 +124,7 @@ theorem cpLaw_apply {S : Set (ℂ → Fin 9)} (hS : MeasurableSet S) :
 instance : (volume : Measure Tor).IsAddLeftInvariant := by
   rw [Measure.volume_eq_prod]; infer_instance
 
+/-- The stationary law of `sq9` is invariant under every translation. -/
 theorem cpLaw_map_shift (x : ℂ) : cpLaw.map (shiftCol x) = cpLaw := by
   rw [cpLaw, Measure.map_smul, Measure.map_map (measurable_shiftCol x) measurable_torField]
   congr 1
@@ -123,6 +136,7 @@ theorem cpLaw_map_shift (x : ℂ) : cpLaw.map (shiftCol x) = cpLaw := by
   rw [this, ← Measure.map_map measurable_torField hm, hmp]
 
 
+/-- Area on the torus is invariant under translation. -/
 theorem vol_tor_shift (v : Tor) {S : Set Tor} (hS : MeasurableSet S) : volume {t : Tor | t + v ∈ S} = volume S := by
   have := (measurePreserving_add_left (volume : Measure Tor) v).measure_preimage hS.nullMeasurableSet
   have e : {t : Tor | t + v ∈ S} = (fun x => v + x) ⁻¹' S := by ext t; simp [add_comm]
@@ -131,6 +145,7 @@ theorem vol_tor_shift (v : Tor) {S : Set Tor} (hS : MeasurableSet S) : volume {t
 /-- The half-integer points of the circle. -/
 def halfPts : Set (AddCircle (3 / 2 : ℝ)) := range fun n : ℤ => (((n : ℝ) / 2 : ℝ) : AddCircle (3 / 2 : ℝ))
 
+/-- The countable set `halfPts` of the circle `ℝ/(3/2)ℤ` is null. -/
 theorem volume_halfPts : volume halfPts = 0 := by
   have hc : halfPts.Countable := countable_range _
   rw [AddCircle.add_projection_respects_measure (3 / 2 : ℝ) 0 hc.measurableSet]
@@ -144,6 +159,7 @@ theorem volume_halfPts : volume halfPts = 0 := by
   simp only [zsmul_eq_mul] at hm
   linarith
 
+/-- Off the half-integers, `sq9Index` is locally constant. -/
 theorem sq9Index_eventually {a : ℝ} (ha : ∀ n : ℤ, 2 * a ≠ n) : ∀ᶠ s in 𝓝 (0 : ℝ), sq9Index (a + s) = sq9Index a := by
   have h1 : (⌊2 * a⌋ : ℝ) < 2 * a := lt_of_le_of_ne (Int.floor_le _) (ha _).symm
   have h2 : 2 * a < ⌊2 * a⌋ + 1 := Int.lt_floor_add_one _
@@ -156,15 +172,18 @@ theorem sq9Index_eventually {a : ℝ} (ha : ∀ n : ℤ, 2 * a ≠ n) : ∀ᶠ s
   unfold sq9Index; rw [this]
 
 
+/-- The stationary law of `sq9` is a probability measure. -/
 theorem isProbabilityMeasure_cpLaw : IsProbabilityMeasure cpLaw := by
   refine ⟨?_⟩
   rw [cpLaw_apply MeasurableSet.univ, preimage_univ, volume_tor_univ]
   exact ENNReal.inv_mul_cancel (by simp) (ENNReal.mul_ne_top ENNReal.ofReal_ne_top ENNReal.ofReal_ne_top)
 
+/-- The colouring at the image of `(a, b)` is `sq9Col` moved by `a + b i`. -/
 theorem torField_eq (a b : ℝ) (z : ℂ) :
     torField (((a : ℝ) : AddCircle (3 / 2 : ℝ)), ((b : ℝ) : AddCircle (3 / 2 : ℝ))) z = sq9Col (⟨a, b⟩ + z) :=
   torCol_pt_add a b z
 
+/-- The stationary law of `sq9` is proper at every unit pair. -/
 theorem cpLaw_proper (x w : ℂ) (hw : ‖w‖ = 1) : cpLaw {f | f x = f (x + w)} = 0 := by
   have hm : MeasurableSet {f : ℂ → Fin 9 | f x = f (x + w)} :=
     measurableSet_eq_fun (measurable_pi_apply x) (measurable_pi_apply _)
@@ -181,9 +200,11 @@ theorem cpLaw_proper (x w : ℂ) (hw : ‖w‖ = 1) : cpLaw {f | f x = f (x + w)
 /-- The torus points where the colour changes under a translation by `d`. -/
 def torChange (d : ℂ) : Set Tor := {t | torCol t ≠ torCol (t + torPt d)}
 
+/-- The torus points whose colour changes under a shift by `d` form a measurable set. -/
 theorem measurableSet_torChange (d : ℂ) : MeasurableSet (torChange d) :=
   (measurableSet_eq_fun measurable_torCol (measurable_torCol.comp (measurable_add_const _))).compl
 
+/-- The area of the torus points whose colour changes under a shift by `d` tends to `0` with `d`. -/
 theorem tendsto_volume_torChange : Tendsto (fun d : ℂ => volume (torChange d)) (𝓝 0) (𝓝 0) := by
   have hnull : (volume : Measure Tor) (halfPts ×ˢ univ ∪ univ ×ˢ halfPts) = 0 := by
     refine measure_union_null ?_ ?_ <;> rw [Measure.volume_eq_prod, Measure.prod_prod]
@@ -213,6 +234,7 @@ theorem tendsto_volume_torChange : Tendsto (fun d : ℂ => volume (torChange d))
     simp only [sq9Col]
     rw [h1, h2]
 
+/-- The stationary law of `sq9` is continuous in probability. -/
 theorem cpLaw_tendsto (x : ℂ) : Tendsto (fun y => cpLaw {f | f x ≠ f y}) (𝓝 x) (𝓝 0) := by
   have hmeas : ∀ y, MeasurableSet {f : ℂ → Fin 9 | f x ≠ f y} := fun y =>
     (measurableSet_eq_fun (measurable_pi_apply x) (measurable_pi_apply y)).compl
@@ -248,6 +270,7 @@ theorem CPColouring.law_shift (c : CPColouring k) (x : ℂ) {s : Set (ℂ → Fi
     c.law (shiftCol x ⁻¹' s) = c.law s := by
   rw [← Measure.map_apply (measurable_shiftCol x) hs, c.map_shift]
 
+/-- `{f | f x = f y}` is measurable. -/
 theorem CPColouring.measurableSet_eq (x y : ℂ) : MeasurableSet {f : ℂ → Fin k | f x = f y} :=
   measurableSet_eq_fun (measurable_pi_apply x) (measurable_pi_apply y)
 
@@ -265,11 +288,13 @@ theorem CPColouring.law_ne_triangle (c : CPColouring k) (a b d : ℂ) :
   simp only [mem_union, mem_setOf_eq, not_or, not_not] at hcon hf
   exact hf (hcon.1.trans hcon.2)
 
+/-- `P(f x ≠ f y) = 1 − P(f x = f y)`. -/
 theorem CPColouring.law_ne_eq (c : CPColouring k) (x y : ℂ) :
     c.law {f | f x ≠ f y} = 1 - c.law {f | f x = f y} := by
   have : {f : ℂ → Fin k | f x ≠ f y} = {f | f x = f y}ᶜ := rfl
   rw [this, prob_compl_eq_one_sub (CPColouring.measurableSet_eq x y)]
 
+/-- The forced set of a CP colouring is closed. -/
 theorem CPColouring.isClosed_forcedSet (c : CPColouring k) : IsClosed c.forcedSet := by
   rw [← isOpen_compl_iff, isOpen_iff_mem_nhds]
   intro x hx
@@ -288,6 +313,7 @@ theorem CPColouring.isClosed_forcedSet (c : CPColouring k) : IsClosed c.forcedSe
   rw [h0, zero_add, h2] at h1
   exact absurd (lt_of_le_of_lt h1 hy) (lt_irrefl _)
 
+/-- `P(f a = f b) = 1` exactly when `f a = f b` almost surely. -/
 theorem CPColouring.law_eq_one_iff (c : CPColouring k) (a b : ℂ) :
     c.law {f | f a = f b} = 1 ↔ ∀ᵐ f ∂c.law, f a = f b := by
   rw [ae_iff]

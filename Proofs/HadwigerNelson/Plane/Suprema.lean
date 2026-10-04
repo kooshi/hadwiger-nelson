@@ -96,9 +96,11 @@ def AeColouring.Tight (c : AeColouring k) : Prop := ∀ ε > 0, ¬ c.HasSlack ε
 
 /-! ## Basic facts the spec examples use -/
 
+/-- A disc of positive radius has nonzero area. -/
 theorem volume_ball_ne_zero {R : ℝ} (hR : 0 < R) : volume (ball (0 : ℂ) R) ≠ 0 :=
   (measure_ball_pos volume 0 hR).ne'
 
+/-- The plane has upper density `1`. -/
 theorem upperDensity_univ : upperDensity univ = 1 := by
   rw [upperDensity]
   have : (fun R : ℝ => volume (univ ∩ ball (0 : ℂ) R) / volume (ball (0 : ℂ) R)) =ᶠ[atTop] fun _ => 1 := by
@@ -107,6 +109,7 @@ theorem upperDensity_univ : upperDensity univ = 1 := by
     exact ENNReal.div_self (volume_ball_ne_zero hR) measure_ball_lt_top.ne
   rw [limsup_congr this, limsup_const]
 
+/-- The empty set has upper density `0`. -/
 theorem upperDensity_empty : upperDensity ∅ = 0 := by
   simp [upperDensity]
 
