@@ -94,3 +94,14 @@ exit 75 wait ten minutes and retry. `lake env lean` is for iteration only, never
 it with a symlink — two trees compiling into one build race on the same compiled files.
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+
+## Amendment, 2026-10-04 — the axiom self-test's controls (inventory item 260)
+
+Your tool finding is logged as inventory item 259 and ruled in item 260, whose first line is:
+
+> 260. **Ruling on item 259: I2n applies its fix on `fs131-w2`.** Choice: accept I2n's four edits to `scripts/axioms-controls.txt` — (1)/(2) counts and digest
+> — source: plans/FS131-close-inventory.md
+
+Your touches gain `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w2/scripts/axioms-controls.txt`, for those four edits only. You start no agents of your
+own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

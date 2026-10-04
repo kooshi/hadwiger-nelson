@@ -1852,3 +1852,17 @@ reason by the close.*
      implementer is told to discharge `dist y u₁ ≠ 2`. Confidence: medium — what would change it: the tangent case resisting the perturbation. **Erratum owed** to
      FS112-N3-PAIRS ("(i)'s unconditional form"): drafted by I4k in its report, filed at the milestone's filing. **Wave 5's next brief** carries the new hypothesis
      (`l3_base` discharges it from `ht'`). `pair_ii`'s renames `_h₂`, `_hc₂`, `_hy` accepted (ruling 185's reasons: a binder name is not part of the type).
+259. **Tool finding — the axiom gate's self-test is tied to `main`'s state** (FS131-I2n, by message, 2026-10-04). `scripts/axioms.sh --self-test` fails 4 of 23
+     controls on `fs131-w2` because `scripts/axioms-controls.txt` (FS131-T3, `a09b2254`) was written for a library with no declared import, and wave 2 is the first
+     branch carrying one (`falconer_lemma2_nonempty`, four IMPORTED records); the gate itself is green at `b0d18832` ("OK — 2450 clean, 11 axiom-free, 4 imported,
+     5 declared purchase(s)", 2470 records). Receipt (Keryx): `fs131-w2`'s `data/fs131/i2n/axioms-selftest.log` ends "axioms self-test: FAIL — 4 of 23 control(s)
+     did not behave as designed", and `banner_dropped`'s unforeseen lines are the four falconer records outside the banners and the stale declaration — state, not
+     the plant mechanism. **Tool defect owed**: the `baseline` and `imported_declared` controls hard-code counts (`imported=0 declared=0 library=0`), so every new
+     import or library axiom breaks them again; they should read the expected counts from the shipped run. Owner: a tooling job after the milestone's waves land
+     (or the next implementer whose branch adds an import).
+260. **Ruling on item 259: I2n applies its fix on `fs131-w2`.** Choice: accept I2n's four edits to `scripts/axioms-controls.txt` — (1)/(2) counts and digest
+     texts set to the shipped state (4/1/1, 5/2/2); (3) `## drop-output LIBRARY AXIOM t3c_unaudited`; (4) `## expect FAIL outside-banners falconer_reduction` and
+     `## expect FAIL stale-declaration falconer_lemma2_nonempty` — each shown red before and green after; touches extended to that file. Alternative weighed: a
+     separate T3-owner job for the file, wave 2 landing without it. Why: T3 is finished; a self-test landing red on `main` would hide the next real failure, and
+     I2n's edits keep each control's intent and two-sidedness; the deeper fix (item 259's owed defect) is not needed to land. Confidence: high. **At wave 4's
+     landing** (the second of waves 2 and 4 to land), whoever merges re-runs the self-test, since wave 4's counts differ.
