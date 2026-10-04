@@ -83,3 +83,12 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with the flags § 7.1 gives) is for iteration only, never evidence. The worktree's `.lake/build` is its
 own copy; never replace it with a symlink — two trees compiling into one build race on the same compiled files.
 
+
+## Amendment 2026-10-04 (Keryx) — the cusp case of `four_of_bothKind`, ruled
+
+Your finding is ruled as `plans/FS131-close-inventory.md` item 112. Two statements in `.claude/worktrees/fs131-w3/Proofs/HadwigerNelson/Plane/RingGerm.lean` change, and only these:
+`four_of_bothKind`'s `hint` takes `β₁ < β₂` in place of `β₁ ≤ β₂` (non-degenerate interval cones); `four_of_bothKind_simple` takes one added hypothesis
+saying that no tile with `z` in its closure has a cone reduced to one direction (no cusp at `z`) — its Lean form is yours, chosen so that it feeds the
+strict `hint`. Update both docstrings to say so, and record the change in your record with the item number. The cusp case itself (does the four-colour
+clause hold with a cusp at `z`, or is there a valid fragment where it fails) goes to a later deriver; you need not settle it. Everything else in this brief
+stands, and you still start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
