@@ -77,3 +77,10 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 ./scripts/build.sh`; never `lake build`. Up to two builds from different worktrees may run at once when the slot admits them (inventory ruling 5); on
 exit 75 wait ten minutes and retry. `lake env lean` (with the flags § 7.1 gives) is for iteration only, never evidence. The worktree's `.lake/build` is its
 own copy; never replace it with a symlink — two trees compiling into one build race on the same compiled files.
+
+## Amendment 2026-10-04 (Keryx)
+
+FS131-T2 has landed on `main` (`66f679a6`), so § The vacuity step's wait is over: merge `main` when you reach that step, then register wave 3's carriers.
+Wave 2's implementer, FS131-I2, launched beside you in `.claude/worktrees/fs131-w2`, will register wave 2's carriers in the same `trackedProps` list on its
+own branch: whichever wave lands second merges the other's entries, keeping both. You still start no agents of your own (standing rule 1: delegation is
+one level deep, because Keryx can only review work it knows exists). Your touches are unchanged.

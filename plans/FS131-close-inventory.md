@@ -276,3 +276,6 @@ reason by the close.*
     dense Z of positive length; DISC7's lens clause for every two classes. Corrections owed (record job): FS111-M3-BAND's § 1.5 sentence on horn points holds
     only at λ = 1 (`band_excludes_horn` states the window); SUPK's not-claimed line (item 34); FACE's sharp entry (item 37). FACE at `g < 2` recorded as a
     reading with its killing test, not stated (per item 37).
+45. **Brief FS131-I2, wave 2's implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I2-wave2.md`), gated PASS: merge `main` first (the branch
+    sits on wave 1's skeleton); wave 2's carriers under T1's procedure; whichever of waves 2 and 3 lands second merges the other's carrier entries. FS131-I3's
+    brief amended the same day (T2 landed; the shared list). Source: this commit.
