@@ -716,3 +716,41 @@ the others continue.
 
 **Build as given** at `f5e83938`: OK — all 1750 modules up to date, nothing built, 2 modules with warnings, 46 warnings, every one `declaration uses
 'sorry'` (`build/gate/build/20261004T163524Z-786167.log`).
+
+## Stage 20 — SAVED (FS131-I2j): SUPK's lower bound and five of the compactness block; Slack 12 → 4; the build is green; 38 `sorry` left
+
+**Closed** (statements untouched; children stated before use, each with its `scripts/Axioms.lean` record in block "FS131-I2j"):
+- `exists_squareWin_dense` — by contradiction: if every `ℓ`-grid square held less than `dℓ²` of `S`, the squares inside `B(0, R + 2ℓ)` cover
+  `S ∩ B(0, R)` and are disjoint, so `|S ∩ B(0, R)| ≤ d · |B(0, R + 2ℓ)|` and `d̄(S) ≤ d`. (Moved below `tendsto_sq_add_div`, which it uses.)
+- `exists_tiled_kept` — `T j` the preimage under the cell index `x ↦ (⌊re/h⌋, ⌊im/h⌋)` of the cells in the window meeting the
+  `η/2`-kept set of class `j` and of no smaller class (`Nat.find`); cells have diameter `≤ h√2`, so `keptAt_of_dist_le`.
+- `eventually_le_muPer` — the assembly of the docstring with one simplification: `µ_k^per(ε)` grows as `ε` shrinks (band-freeness is
+  monotone), so one scale `ε₀` suffices. A family with density above `b > a > d`, a window of side `ℓ` with `a(ℓ+2)² ≤ ((a+b)/2)ℓ²`,
+  almost every point of `S` kept at every `ε < 1/(n+1)` for some `n` (continuity from below of the outer measure on the increasing
+  sets `G n`, no measurability needed), `ε₀ = 1/(2(n+1))`, pixels `1/M`, `keptAt_band` at `η = 1/20`, `periodize` at `ℓ + 2`.
+  `keptAt_band` was moved up beside its two cases. **So `tendsto_mu`, `tendsto_muTile`, `tendsto_muPer` (FS129-SR2-SUPK) are
+  sorry-free.**
+- `exists_twoCircle_density` — the Radon–Nikodym derivative of the law of `e φ − e θ` (absolutely continuous by
+  `twoCircle_preimage_null` after `θ ↦ θ + π`). New imports in `Plane/Slack`: `Plane/FalconerReduction` (ARCHITECTURE.md's Imports cell
+  updated), Mathlib's `RadonNikodym`, `WeakDual`, `InnerProductSpace.Dual`, `L2Space`, `SeparableMeasure`.
+- `exists_translates_small_hole` — new child `exists_ball_diff_le_avg` (Tonelli and the first moment method: some disc of radius `r` about
+  a point of `B(0, R − r)` misses `S` in at most `|B_r| · |B_R ∖ S| / |B_{R−r}|`); at `r = m + 1` and hole fraction `η/(4πr²)` the hole in
+  `B(0, m + 1)` is at most `1/(m + 1)`.
+- `ae_sum_eq_one_of_weakStar` — no a priori bound on `F` is needed: on each piece `B(0, n) ∩ {|F j| ≤ M ∀ j} ∩ {±(∑F − 1) > 0}` the
+  indicator is a test function, `∫_B ∑F = |B|` by disjointness and the vanishing holes, so the piece is null.
+- `convForm_tendsto` — new child `conv_props` (the convolution is a.e.-strongly measurable, bounded by `‖κ‖₁`, and `∫ u(y) κ(y − x) dy`);
+  pointwise convergence by weak-*, dominated convergence on the ball for the diagonal term, weak-* against `1_B (F ⋆ κ)` for the cross term.
+- `exists_weakStar_subseq` — new child `exists_L2_weak_subseq` (any finite `μ`: sequential Banach–Alaoglu, `WeakDual.isSeqCompact_closedBall`,
+  on `Fin k → L²(μ)`, separable by `Lp.SecondCountableTopology`, the functional `ψ ↦ ∑ ⟪u_m j, ψ j⟫`, and Riesz per coordinate); then
+  `μ = (1 + ‖x‖)^{-3} · Leb` (finite, `integrable_one_add_norm`), `0 ≤ F ≤ 1` by testing on `{F < 0}` and `{F > 1}`, and a volume-integrable
+  `φ` handled by truncations `1_{‖x‖<N, |φ|≤N} φ`, which divided by the weight are bounded, with an `ε/3` argument.
+
+**Build** at `830d8ac5`: `./scripts/build.sh` under the slot, OK — 446 of 446 batches, 4 modules rebuilt, 38 warnings, every one
+`declaration uses 'sorry'` (`build/gate/build/20261004T170059Z-890668.log`).
+
+**Re-pricing** (from the first two hard children, as the brief asks): `exists_squareWin_dense` about 6k tokens, `eventually_le_muPer` about
+12k — a fifth of the plan's table (40k each). The compactness children: `exists_L2_weak_subseq` and the weighted step together about 25k
+against the table's 50k; `convForm_tendsto` 6k against 30k.
+
+**Still `sorry`** (38): `Plane/Slack` 4 — `integral_circleAvg_sq`, `unitForm_tendsto` (the Rajchman step), and the two assemblies
+`chiM0_le_iff_muZero_eq_one`, `exists_bandNull_aeCover_of_mu_eq_one` (every child of the latter is now proved); `Plane/CoverExamples` 34.
