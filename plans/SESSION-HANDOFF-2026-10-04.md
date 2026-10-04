@@ -36,13 +36,14 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 0.5 + 0.5 + 1 + 1 = 3 of 3)
+## 3. Running now (slots used: 0.5 + 0.5 + 1 + 1 = 3 of 3, plus EXT-HN1 in Kooshi's special slot)
 
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-I2e (wave 2, fifth implementer) | Sonnet | `data/fs131/briefs/FS131-I2e-wave2.md` | its branch's `data/fs131/reports/FS131-I2e.md` |
 | FS131-I3e (wave 3, last nine, gate, landing) | Sonnet | `data/fs131/briefs/FS131-I3e-wave3.md` | its branch's `data/fs131/reports/FS131-I3e.md` |
-| FS131-E1 (maps-six GAPs) | Opus (Ephodos) | `data/fs131/briefs/FS131-E1-maps-six-gaps.md` | `data/fs131/reports/FS131-E1.md` |
+| FS131-W2 (Woodall's chain re-planned on E1-NO45; item 109) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-W2-woodall-replan.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-W2.md` |
+| EXT-HN1 (audit of an outside repository; item 108) | Opus (de Bruijn) | `data/external/briefs/EXT-HN1-outside-claim.md` | `data/external/reports/EXT-HN1.md` |
 | FS131-K2d (wave 2's last 18 leaves: children; item 104) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-K2d-wave2-children.md` | its branch's (`fs131-w2d`, worktree `.claude/worktrees/fs131-w2d`) `data/fs131/reports/FS131-K2d.md` |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. A notification arrives when each hands back; if the session restarted, resume a job from
@@ -55,9 +56,9 @@ its record's last SAVED stage with a fresh agent on the same brief.
 2. When I2e hands back: the **Opus-implementer trial** on wave 2 (item 103); its first step merges `fs131-w2d` (K2d's branch) into `fs131-w2`.
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
-5. **E1's mid-flight finding (item 106)**: E1-NO45 bypasses both GAPs for arc maps [hand, one mind]; on E1's report, its Opus slot goes to a Woodall re-plan
-   (FS131-W2, resuming W if cheaper) before FS131-IW; I3e's half slot goes to FS131-I4.
-6. **On E1's report**: file its verdicts; if a GAP closes, tell the Woodall implementer; file the row 132 / § The aim corrections per the verdict (W's drafts, plan
+5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
+   I3e's half slot goes to FS131-I4; FS131-IW waits for W2.
+6. **(done) On E1's report**: file its verdicts; if a GAP closes, tell the Woodall implementer; file the row 132 / § The aim corrections per the verdict (W's drafts, plan
    § 5) and the FS106 errata through the record job.
 7. **On a landing** (wave 3 is closest): read the worktree's `build/gate/*/latest`, the axioms digest (`scripts/gate_report.py axioms <log> <prev> CLAUDE.md`),
    read one statement back, file the counts (`CLAUDE.md` § Trust ledger line and § The gate counts line; `scripts/vacuity-baseline.txt` header lines 25–26),
