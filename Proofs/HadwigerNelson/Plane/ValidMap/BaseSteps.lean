@@ -346,10 +346,429 @@ theorem bowtieArcs_locallyFinite : ∀ x ∈ interior (closure bowtieTiles), ∃
   have hfin : bowtieArcs.Finite := by unfold bowtieArcs; exact List.finite_toSet _
   exact hfin.subset fun a ha => ha.1
 
+/-! ### The bowtie's colour is locally constant (FS131-I4f): each tile's closure adds only boundary pieces -/
+
+/-- A point `p + t (q − p)`, `t ∈ [0, 1]`, given by its coordinates, lies on the segment `[p, q]`. -/
+theorem mem_segment_of_coords {p q z : ℂ} (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1) (hre : z.re = p.re + t * (q.re - p.re))
+    (him : z.im = p.im + t * (q.im - p.im)) : z ∈ segment ℝ p q := by
+  refine ⟨1 - t, t, by linarith, ht0, by ring, ?_⟩
+  apply Complex.ext
+  · simp only [Complex.add_re, Complex.smul_re, smul_eq_mul, hre]; ring
+  · simp only [Complex.add_im, Complex.smul_im, smul_eq_mul, him]; ring
+
+/-- A segment of the bowtie's list carries the points `p + t (q − p)`, `t ∈ [0, 1]`. -/
+theorem mem_bowtieArcs_seg {p q z : ℂ} (ha : Arc.seg p q ∈ bowtieArcs) (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1)
+    (hre : z.re = p.re + t * (q.re - p.re)) (him : z.im = p.im + t * (q.im - p.im)) :
+    z ∈ ⋃ a ∈ bowtieArcs, a.carrier :=
+  mem_iUnion₂.mpr ⟨_, ha, mem_segment_of_coords t ht0 ht1 hre him⟩
+
+/-- A point of `ω(i)` below `i` with `|re z| ≤ 5/13` lies on the bowtie's arc of `ω(i)`. -/
+theorem mem_bowtieArcN_of {z : ℂ} (h1 : ‖z - I‖ = 1) (hre : |z.re| ≤ 5 / 13) (him : z.im ≤ 1) :
+    z ∈ ⋃ a ∈ bowtieArcs, a.carrier := by
+  refine mem_iUnion₂.mpr ⟨Arc.circ I 1 (3 * π / 2 - bowtieAngle) (3 * π / 2 + bowtieAngle), by simp [bowtieArcs], ?_⟩
+  have hsq : z.re ^ 2 + (z.im - 1) ^ 2 = 1 := by
+    have h2 : ‖z - I‖ ^ 2 = 1 := by rw [h1]; norm_num
+    rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply] at h2
+    simp only [Complex.sub_re, Complex.sub_im, Complex.I_re, Complex.I_im, sub_zero] at h2
+    nlinarith
+  have hx1 : -1 ≤ z.re := by linarith [(abs_le.mp hre).1]
+  have hx2 : z.re ≤ 1 := by linarith [(abs_le.mp hre).2]
+  have hsin : Real.sin (Real.arcsin z.re) = z.re := Real.sin_arcsin hx1 hx2
+  have hcos : Real.cos (Real.arcsin z.re) = 1 - z.im := by
+    rw [Real.cos_arcsin, show 1 - z.re ^ 2 = (1 - z.im) ^ 2 by nlinarith]
+    exact Real.sqrt_sq (by linarith)
+  have hl : -bowtieAngle ≤ Real.arcsin z.re := by
+    unfold bowtieAngle; rw [← Real.arcsin_neg]; exact Real.arcsin_le_arcsin (by linarith [(abs_le.mp hre).1])
+  have hu : Real.arcsin z.re ≤ bowtieAngle := Real.arcsin_le_arcsin (by linarith [(abs_le.mp hre).2])
+  refine ⟨3 * π / 2 + Real.arcsin z.re, ⟨by linarith, by linarith⟩, ?_⟩
+  have h3 : 3 * π / 2 + Real.arcsin z.re = (Real.arcsin z.re - π / 2) + 2 * π := by ring
+  apply Complex.ext
+  · simp only [Complex.add_re, Complex.I_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, re_e, im_e, h3,
+      Real.cos_add_two_pi, Real.sin_add_two_pi, Real.cos_sub_pi_div_two, Real.sin_sub_pi_div_two, hsin]
+    ring
+  · simp only [Complex.add_im, Complex.I_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, re_e, im_e, h3,
+      Real.cos_add_two_pi, Real.sin_add_two_pi, Real.cos_sub_pi_div_two, Real.sin_sub_pi_div_two, hcos]
+    ring
+
+/-- A point of `ω(−i)` above `−i` with `|re z| ≤ 5/13` lies on the bowtie's arc of `ω(−i)`. -/
+theorem mem_bowtieArcS_of {z : ℂ} (h1 : ‖z + I‖ = 1) (hre : |z.re| ≤ 5 / 13) (him : -1 ≤ z.im) :
+    z ∈ ⋃ a ∈ bowtieArcs, a.carrier := by
+  refine mem_iUnion₂.mpr ⟨Arc.circ (-I) 1 (π / 2 - bowtieAngle) (π / 2 + bowtieAngle), by simp [bowtieArcs], ?_⟩
+  have hsq : z.re ^ 2 + (z.im + 1) ^ 2 = 1 := by
+    have h2 : ‖z + I‖ ^ 2 = 1 := by rw [h1]; norm_num
+    rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply] at h2
+    simp only [Complex.add_re, Complex.add_im, Complex.I_re, Complex.I_im, add_zero] at h2
+    nlinarith
+  have hx1 : -1 ≤ z.re := by linarith [(abs_le.mp hre).1]
+  have hx2 : z.re ≤ 1 := by linarith [(abs_le.mp hre).2]
+  have hsin : Real.sin (Real.arcsin z.re) = z.re := Real.sin_arcsin hx1 hx2
+  have hcos : Real.cos (Real.arcsin z.re) = 1 + z.im := by
+    rw [Real.cos_arcsin, show 1 - z.re ^ 2 = (1 + z.im) ^ 2 by nlinarith]
+    exact Real.sqrt_sq (by linarith)
+  have hl : -bowtieAngle ≤ Real.arcsin z.re := by
+    unfold bowtieAngle; rw [← Real.arcsin_neg]; exact Real.arcsin_le_arcsin (by linarith [(abs_le.mp hre).1])
+  have hu : Real.arcsin z.re ≤ bowtieAngle := Real.arcsin_le_arcsin (by linarith [(abs_le.mp hre).2])
+  refine ⟨π / 2 - Real.arcsin z.re, ⟨by linarith, by linarith⟩, ?_⟩
+  apply Complex.ext
+  · simp only [Complex.add_re, Complex.neg_re, Complex.I_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, re_e,
+      im_e, Real.cos_pi_div_two_sub, Real.sin_pi_div_two_sub, hsin]
+    ring
+  · simp only [Complex.add_im, Complex.neg_im, Complex.I_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, re_e,
+      im_e, Real.cos_pi_div_two_sub, Real.sin_pi_div_two_sub, hcos]
+    ring
+
+/-- `‖z − i‖² = re² + (im − 1)²`. -/
+theorem norm_sub_I_sq (z : ℂ) : ‖z - I‖ ^ 2 = z.re ^ 2 + (z.im - 1) ^ 2 := by
+  rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]; simp; ring
+
+/-- `‖z + i‖² = re² + (im + 1)²`. -/
+theorem norm_add_I_sq (z : ℂ) : ‖z + I‖ ^ 2 = z.re ^ 2 + (z.im + 1) ^ 2 := by
+  rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]; simp; ring
+
+/-- The closure of `G` adds only boundary pieces: its arc of `ω(i)` and its two edges through `i`. -/
+theorem closure_bowtieG_subset : closure bowtieG ⊆ bowtieG ∪ ⋃ a ∈ bowtieArcs, a.carrier := by
+  have hcl : closure bowtieG ⊆ {z : ℂ | ‖z - I‖ ≤ 1} ∩ {z | 12 * |z.re| ≤ 5 * (1 - z.im)} :=
+    closure_minimal (fun z hz => ⟨hz.1.le, hz.2.2.le⟩)
+      ((isClosed_le (by fun_prop) continuous_const).inter (isClosed_le (by fun_prop) (by fun_prop)))
+  intro z hz
+  obtain ⟨h1, h2⟩ := hcl hz
+  simp only [mem_setOf_eq] at h1 h2
+  by_cases hG : z ∈ bowtieG
+  · exact Or.inl hG
+  right
+  have hsq := norm_sub_I_sq z
+  have hn := norm_nonneg (z - I)
+  have ha := abs_nonneg z.re
+  have hsa := sq_abs z.re
+  have him : z.im ≤ 1 := by linarith
+  have hre : |z.re| ≤ 5 / 13 := by nlinarith
+  rcases h1.lt_or_eq with h1 | h1
+  · have h2' : 12 * |z.re| = 5 * (1 - z.im) := by
+      by_contra hne
+      have h2s := lt_of_le_of_ne h2 hne
+      exact hG ⟨h1, by linarith, h2s⟩
+    rcases le_or_gt 0 z.re with hr | hr
+    · rw [abs_of_nonneg hr] at h2' hre
+      exact mem_bowtieArcs_seg (p := pt (5/13) (1/13)) (q := I) (by simp [bowtieArcs]) (1 - 13 * z.re / 5)
+        (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+    · rw [abs_of_neg hr] at h2' hre
+      exact mem_bowtieArcs_seg (p := I) (q := pt (-5/13) (1/13)) (by simp [bowtieArcs]) (-13 * z.re / 5)
+        (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · exact mem_bowtieArcN_of h1 hre him
+
+/-- The closure of `H` adds only boundary pieces (the mirror of `G`). -/
+theorem closure_bowtieH_subset : closure bowtieH ⊆ bowtieH ∪ ⋃ a ∈ bowtieArcs, a.carrier := by
+  have hcl : closure bowtieH ⊆ {z : ℂ | ‖z + I‖ ≤ 1} ∩ {z | 12 * |z.re| ≤ 5 * (1 + z.im)} :=
+    closure_minimal (fun z hz => ⟨hz.1.le, hz.2.2.le⟩)
+      ((isClosed_le (by fun_prop) continuous_const).inter (isClosed_le (by fun_prop) (by fun_prop)))
+  intro z hz
+  obtain ⟨h1, h2⟩ := hcl hz
+  simp only [mem_setOf_eq] at h1 h2
+  by_cases hH : z ∈ bowtieH
+  · exact Or.inl hH
+  right
+  have hsq := norm_add_I_sq z
+  have hn := norm_nonneg (z + I)
+  have ha := abs_nonneg z.re
+  have hsa := sq_abs z.re
+  have him : -1 ≤ z.im := by linarith
+  have hre : |z.re| ≤ 5 / 13 := by nlinarith
+  rcases h1.lt_or_eq with h1 | h1
+  · have h2' : 12 * |z.re| = 5 * (1 + z.im) := by
+      by_contra hne
+      have h2s := lt_of_le_of_ne h2 hne
+      exact hH ⟨h1, by linarith, h2s⟩
+    rcases le_or_gt 0 z.re with hr | hr
+    · rw [abs_of_nonneg hr] at h2' hre
+      exact mem_bowtieArcs_seg (p := -I) (q := pt (5/13) (-1/13)) (by simp [bowtieArcs]) (13 * z.re / 5)
+        (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+    · rw [abs_of_neg hr] at h2' hre
+      exact mem_bowtieArcs_seg (p := pt (-5/13) (-1/13)) (q := -I) (by simp [bowtieArcs]) (1 + 13 * z.re / 5)
+        (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · exact mem_bowtieArcS_of h1 hre him
+
+
+/-- The closure of `C` adds only boundary pieces: the arcs of `ω(±i)` and the closing segments at `re = ±5/13`. -/
+theorem closure_bowtieC_subset : closure bowtieC ⊆ bowtieC ∪ ⋃ a ∈ bowtieArcs, a.carrier := by
+  have hcl : closure bowtieC ⊆ {z : ℂ | |z.re| ≤ 5 / 13} ∩ {z | |z.im| ≤ 1 / 13} ∩ {z | 1 ≤ ‖z - I‖} ∩ {z | 1 ≤ ‖z + I‖} :=
+    closure_minimal (fun z hz => ⟨⟨⟨hz.2.1.le, hz.2.2.1.le⟩, hz.2.2.2.1.le⟩, hz.2.2.2.2.le⟩)
+      ((((isClosed_le (by fun_prop) continuous_const).inter (isClosed_le (by fun_prop) continuous_const)).inter
+        (isClosed_le continuous_const (by fun_prop))).inter (isClosed_le continuous_const (by fun_prop)))
+  intro z hz
+  obtain ⟨⟨⟨h1, h2⟩, h3⟩, h4⟩ := hcl hz
+  simp only [mem_setOf_eq] at h1 h2 h3 h4
+  by_cases hC : z ∈ bowtieC
+  · exact Or.inl hC
+  right
+  have h2' := abs_le.mp h2
+  rcases h3.lt_or_eq with h3 | h3
+  swap
+  · exact mem_bowtieArcN_of h3.symm h1 (by linarith)
+  rcases h4.lt_or_eq with h4 | h4
+  swap
+  · exact mem_bowtieArcS_of h4.symm h1 (by linarith)
+  have hsN := norm_sub_I_sq z
+  have hsS := norm_add_I_sq z
+  have hsa := sq_abs z.re
+  rcases h1.lt_or_eq with h1 | h1
+  · exfalso
+    have him : |z.im| < 1 / 13 := by
+      rcases h2.lt_or_eq with h | h
+      · exact h
+      · exfalso
+        rcases abs_eq (by norm_num : (0:ℝ) ≤ 1 / 13) |>.mp h with h' | h'
+        · rw [h'] at hsN; nlinarith [abs_nonneg z.re]
+        · rw [h'] at hsS; nlinarith [abs_nonneg z.re]
+    have hre : z.re ≠ 0 := by
+      intro h0
+      rw [h0] at hsN hsS
+      have him' := abs_lt.mp him
+      have e3 := (one_lt_sq_iff₀ (norm_nonneg _)).mpr h3
+      have e4 := (one_lt_sq_iff₀ (norm_nonneg _)).mpr h4
+      nlinarith
+    exact hC ⟨hre, h1, him, h3, h4⟩
+  · rcases abs_eq (by norm_num : (0:ℝ) ≤ 5 / 13) |>.mp h1 with h' | h'
+    · exact mem_bowtieArcs_seg (p := pt (5/13) (1/13)) (q := pt (5/13) (-1/13)) (by simp [bowtieArcs])
+        ((1 / 13 - z.im) * 13 / 2) (by linarith) (by linarith) (by simp [pt]; linarith) (by simp [pt]; ring)
+    · exact mem_bowtieArcs_seg (p := pt (-5/13) (-1/13)) (q := pt (-5/13) (1/13)) (by simp [bowtieArcs])
+        ((z.im + 1 / 13) * 13 / 2) (by linarith) (by linarith) (by simp [pt]; linarith) (by simp [pt]; ring)
+
+/-- The closure of `CN` adds only its three edges. -/
+theorem closure_bowtieCN_subset : closure bowtieCN ⊆ bowtieCN ∪ ⋃ a ∈ bowtieArcs, a.carrier := by
+  have hcl : closure bowtieCN ⊆ {z : ℂ | |z.re| ≤ z.im - 1} ∩ {z | z.im ≤ 7 / 5} :=
+    closure_minimal (fun z hz => ⟨hz.1.le, hz.2.le⟩)
+      ((isClosed_le (by fun_prop) (by fun_prop)).inter (isClosed_le (by fun_prop) continuous_const))
+  intro z hz
+  obtain ⟨h1, h2⟩ := hcl hz
+  simp only [mem_setOf_eq] at h1 h2
+  by_cases hC : z ∈ bowtieCN
+  · exact Or.inl hC
+  right
+  have ha := abs_nonneg z.re
+  rcases h2.lt_or_eq with h2 | h2
+  · have h1' : |z.re| = z.im - 1 := by
+      by_contra hne; exact hC ⟨lt_of_le_of_ne h1 hne, h2⟩
+    rcases le_or_gt 0 z.re with hr | hr
+    · rw [abs_of_nonneg hr] at h1'
+      exact mem_bowtieArcs_seg (p := I) (q := pt (2/5) (7/5)) (by simp [bowtieArcs]) (5 / 2 * z.re)
+        (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+    · rw [abs_of_neg hr] at h1'
+      exact mem_bowtieArcs_seg (p := pt (-2/5) (7/5)) (q := I) (by simp [bowtieArcs]) (1 + 5 / 2 * z.re)
+        (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · have h1' := abs_le.mp (show |z.re| ≤ 2 / 5 by linarith)
+    exact mem_bowtieArcs_seg (p := pt (2/5) (7/5)) (q := pt (-2/5) (7/5)) (by simp [bowtieArcs]) ((2 / 5 - z.re) * 5 / 4)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+
+/-- The closure of `CS` adds only its three edges. -/
+theorem closure_bowtieCS_subset : closure bowtieCS ⊆ bowtieCS ∪ ⋃ a ∈ bowtieArcs, a.carrier := by
+  have hcl : closure bowtieCS ⊆ {z : ℂ | |z.re| ≤ -1 - z.im} ∩ {z | -7 / 5 ≤ z.im} :=
+    closure_minimal (fun z hz => ⟨hz.1.le, hz.2.le⟩)
+      ((isClosed_le (by fun_prop) (by fun_prop)).inter (isClosed_le continuous_const (by fun_prop)))
+  intro z hz
+  obtain ⟨h1, h2⟩ := hcl hz
+  simp only [mem_setOf_eq] at h1 h2
+  by_cases hC : z ∈ bowtieCS
+  · exact Or.inl hC
+  right
+  have ha := abs_nonneg z.re
+  rcases h2.lt_or_eq with h2 | h2
+  · have h1' : |z.re| = -1 - z.im := by
+      by_contra hne; exact hC ⟨lt_of_le_of_ne h1 hne, h2⟩
+    rcases le_or_gt 0 z.re with hr | hr
+    · rw [abs_of_nonneg hr] at h1'
+      exact mem_bowtieArcs_seg (p := pt (2/5) (-7/5)) (q := -I) (by simp [bowtieArcs]) (1 - 5 / 2 * z.re)
+        (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+    · rw [abs_of_neg hr] at h1'
+      exact mem_bowtieArcs_seg (p := -I) (q := pt (-2/5) (-7/5)) (by simp [bowtieArcs]) (-5 / 2 * z.re)
+        (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · have h1' := abs_le.mp (show |z.re| ≤ 2 / 5 by linarith)
+    exact mem_bowtieArcs_seg (p := pt (-2/5) (-7/5)) (q := pt (2/5) (-7/5)) (by simp [bowtieArcs]) ((z.re + 2 / 5) * 5 / 4)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+
+
+/-- A point of the closure of `X σ` outside it lies on one of the four edges, in the coordinate `u = σ re`. -/
+theorem bowtieX_closure_cases (σ : ℝ) {z : ℂ} (hz : z ∈ closure (bowtieX σ)) (hX : z ∉ bowtieX σ) :
+    (12 * (σ * z.re) + 5 * (z.im - 1) = 0 ∧ 0 ≤ σ * z.re ∧ σ * z.re ≤ 2 / 13) ∨
+      (z.im - 1 = σ * z.re ∧ 0 ≤ σ * z.re ∧ σ * z.re ≤ 2 / 5) ∨ (σ * z.re = 2 / 5 ∧ 41 / 65 ≤ z.im ∧ z.im ≤ 7 / 5) ∨
+      (z.im = 41 / 65 ∧ 2 / 13 ≤ σ * z.re ∧ σ * z.re ≤ 2 / 5) := by
+  have hcl : closure (bowtieX σ) ⊆ {z : ℂ | 0 ≤ 12 * (σ * z.re) + 5 * (z.im - 1)} ∩ {z | z.im - 1 ≤ σ * z.re} ∩
+      {z | σ * z.re ≤ 2 / 5} ∩ {z | 41 / 65 ≤ z.im} :=
+    closure_minimal (fun z hz => ⟨⟨⟨hz.1.le, hz.2.1.le⟩, hz.2.2.1.le⟩, hz.2.2.2.le⟩)
+      ((((isClosed_le continuous_const (by fun_prop)).inter (isClosed_le (by fun_prop) (by fun_prop))).inter
+        (isClosed_le (by fun_prop) continuous_const)).inter (isClosed_le continuous_const (by fun_prop)))
+  obtain ⟨⟨⟨h1, h2⟩, h3⟩, h4⟩ := hcl hz
+  simp only [mem_setOf_eq] at h1 h2 h3 h4
+  rcases h1.lt_or_eq with h1 | h1
+  · rcases h2.lt_or_eq with h2 | h2
+    · rcases h3.lt_or_eq with h3 | h3
+      · rcases h4.lt_or_eq with h4 | h4
+        · exact absurd ⟨h1, h2, h3, h4⟩ hX
+        · right; right; right; exact ⟨h4.symm, by linarith, h3.le⟩
+      · right; right; left; exact ⟨h3, h4, by linarith⟩
+    · right; left; exact ⟨h2, by linarith, h3⟩
+  · left; exact ⟨h1.symm, by linarith, by linarith⟩
+
+/-- A point of the closure of `Y σ` outside it lies on one of the four edges, in the coordinate `u = σ re`. -/
+theorem bowtieY_closure_cases (σ : ℝ) {z : ℂ} (hz : z ∈ closure (bowtieY σ)) (hY : z ∉ bowtieY σ) :
+    (12 * (σ * z.re) - 5 * (z.im + 1) = 0 ∧ 0 ≤ σ * z.re ∧ σ * z.re ≤ 2 / 13) ∨
+      (-z.im - 1 = σ * z.re ∧ 0 ≤ σ * z.re ∧ σ * z.re ≤ 2 / 5) ∨ (σ * z.re = 2 / 5 ∧ -7 / 5 ≤ z.im ∧ z.im ≤ -41 / 65) ∨
+      (z.im = -41 / 65 ∧ 2 / 13 ≤ σ * z.re ∧ σ * z.re ≤ 2 / 5) := by
+  have hcl : closure (bowtieY σ) ⊆ {z : ℂ | 0 ≤ 12 * (σ * z.re) - 5 * (z.im + 1)} ∩ {z | -z.im - 1 ≤ σ * z.re} ∩
+      {z | σ * z.re ≤ 2 / 5} ∩ {z | z.im ≤ -41 / 65} :=
+    closure_minimal (fun z hz => ⟨⟨⟨hz.1.le, hz.2.1.le⟩, hz.2.2.1.le⟩, hz.2.2.2.le⟩)
+      ((((isClosed_le continuous_const (by fun_prop)).inter (isClosed_le (by fun_prop) (by fun_prop))).inter
+        (isClosed_le (by fun_prop) continuous_const)).inter (isClosed_le (by fun_prop) continuous_const))
+  obtain ⟨⟨⟨h1, h2⟩, h3⟩, h4⟩ := hcl hz
+  simp only [mem_setOf_eq] at h1 h2 h3 h4
+  rcases h1.lt_or_eq with h1 | h1
+  · rcases h2.lt_or_eq with h2 | h2
+    · rcases h3.lt_or_eq with h3 | h3
+      · rcases h4.lt_or_eq with h4 | h4
+        · exact absurd ⟨h1, h2, h3, h4⟩ hY
+        · right; right; right; exact ⟨h4, by linarith, h3.le⟩
+      · right; right; left; exact ⟨h3, by linarith, h4⟩
+    · right; left; exact ⟨h2, by linarith, h3⟩
+  · left; exact ⟨h1.symm, by linarith, by linarith⟩
+
+/-- The closure of `XR` adds only its four edges. -/
+theorem closure_bowtieX_one_subset : closure (bowtieX 1) ⊆ bowtieX 1 ∪ ⋃ a ∈ bowtieArcs, a.carrier := by
+  intro z hz
+  by_cases hX : z ∈ bowtieX 1
+  · exact Or.inl hX
+  right
+  rcases bowtieX_closure_cases 1 hz hX with ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ <;>
+    simp only [one_mul] at h1 h2 h3
+  · exact mem_bowtieArcs_seg (p := pt (5/13) (1/13)) (q := I) (by simp [bowtieArcs]) (1 - 13 * z.re / 5)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · exact mem_bowtieArcs_seg (p := I) (q := pt (2/5) (7/5)) (by simp [bowtieArcs]) (5 / 2 * z.re)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · exact mem_bowtieArcs_seg (p := pt (2/5) (41/65)) (q := pt (2/5) (7/5)) (by simp [bowtieArcs]) ((z.im - 41 / 65) * 65 / 50)
+      (by linarith) (by linarith) (by simp [pt]; linarith) (by simp [pt]; ring)
+  · exact mem_bowtieArcs_seg (p := pt (2/13) (41/65)) (q := pt (2/5) (41/65)) (by simp [bowtieArcs]) ((z.re - 2 / 13) * 65 / 16)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+
+/-- The closure of `XL` adds only its four edges. -/
+theorem closure_bowtieX_neg_one_subset : closure (bowtieX (-1)) ⊆ bowtieX (-1) ∪ ⋃ a ∈ bowtieArcs, a.carrier := by
+  intro z hz
+  by_cases hX : z ∈ bowtieX (-1)
+  · exact Or.inl hX
+  right
+  rcases bowtieX_closure_cases (-1) hz hX with ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ <;>
+    simp only [neg_one_mul] at h1 h2 h3
+  · exact mem_bowtieArcs_seg (p := I) (q := pt (-5/13) (1/13)) (by simp [bowtieArcs]) (-13 * z.re / 5)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · exact mem_bowtieArcs_seg (p := pt (-2/5) (7/5)) (q := I) (by simp [bowtieArcs]) (1 + 5 / 2 * z.re)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · exact mem_bowtieArcs_seg (p := pt (-2/5) (41/65)) (q := pt (-2/5) (7/5)) (by simp [bowtieArcs]) ((z.im - 41 / 65) * 65 / 50)
+      (by linarith) (by linarith) (by simp [pt]; linarith) (by simp [pt]; ring)
+  · exact mem_bowtieArcs_seg (p := pt (-2/13) (41/65)) (q := pt (-2/5) (41/65)) (by simp [bowtieArcs]) ((-z.re - 2 / 13) * 65 / 16)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+
+/-- The closure of `YR` adds only its four edges. -/
+theorem closure_bowtieY_one_subset : closure (bowtieY 1) ⊆ bowtieY 1 ∪ ⋃ a ∈ bowtieArcs, a.carrier := by
+  intro z hz
+  by_cases hY : z ∈ bowtieY 1
+  · exact Or.inl hY
+  right
+  rcases bowtieY_closure_cases 1 hz hY with ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ <;>
+    simp only [one_mul] at h1 h2 h3
+  · exact mem_bowtieArcs_seg (p := -I) (q := pt (5/13) (-1/13)) (by simp [bowtieArcs]) (13 * z.re / 5)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · exact mem_bowtieArcs_seg (p := pt (2/5) (-7/5)) (q := -I) (by simp [bowtieArcs]) (1 - 5 / 2 * z.re)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · exact mem_bowtieArcs_seg (p := pt (2/5) (-41/65)) (q := pt (2/5) (-7/5)) (by simp [bowtieArcs]) ((-41 / 65 - z.im) * 65 / 50)
+      (by linarith) (by linarith) (by simp [pt]; linarith) (by simp [pt]; ring)
+  · exact mem_bowtieArcs_seg (p := pt (2/13) (-41/65)) (q := pt (2/5) (-41/65)) (by simp [bowtieArcs]) ((z.re - 2 / 13) * 65 / 16)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+
+/-- The closure of `YL` adds only its four edges. -/
+theorem closure_bowtieY_neg_one_subset : closure (bowtieY (-1)) ⊆ bowtieY (-1) ∪ ⋃ a ∈ bowtieArcs, a.carrier := by
+  intro z hz
+  by_cases hY : z ∈ bowtieY (-1)
+  · exact Or.inl hY
+  right
+  rcases bowtieY_closure_cases (-1) hz hY with ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ <;>
+    simp only [neg_one_mul] at h1 h2 h3
+  · exact mem_bowtieArcs_seg (p := pt (-5/13) (-1/13)) (q := -I) (by simp [bowtieArcs]) (1 + 13 * z.re / 5)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · exact mem_bowtieArcs_seg (p := -I) (q := pt (-2/5) (-7/5)) (by simp [bowtieArcs]) (-5 / 2 * z.re)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+  · exact mem_bowtieArcs_seg (p := pt (-2/5) (-41/65)) (q := pt (-2/5) (-7/5)) (by simp [bowtieArcs]) ((-41 / 65 - z.im) * 65 / 50)
+      (by linarith) (by linarith) (by simp [pt]; linarith) (by simp [pt]; ring)
+  · exact mem_bowtieArcs_seg (p := pt (-2/13) (-41/65)) (q := pt (-2/5) (-41/65)) (by simp [bowtieArcs]) ((-z.re - 2 / 13) * 65 / 16)
+      (by linarith) (by linarith) (by simp [pt]; ring) (by simp [pt]; linarith)
+
+/-- Membership in an open set is eventually constant near a point off `A`, when the set's closure adds only points of `A`. -/
+theorem eventually_mem_iff_of_closure_subset {U A : Set ℂ} (hU : IsOpen U) (h : closure U ⊆ U ∪ A) {x : ℂ} (hx : x ∉ A) :
+    ∀ᶠ y in 𝓝 x, (y ∈ U ↔ x ∈ U) := by
+  by_cases hxU : x ∈ U
+  · filter_upwards [hU.mem_nhds hxU] with y hy
+    exact iff_of_true hy hxU
+  · have hc : x ∉ closure U := fun hc => (h hc).elim hxU hx
+    filter_upwards [isClosed_closure.isOpen_compl.mem_nhds hc] with y hy
+    exact iff_of_false (fun h' => hy (subset_closure h')) hxU
+
+/-- The bowtie's colour depends only on membership in its nine tiles `G`, `C`, `CN`, `CS`, `H`, `X±`, `Y±`. -/
+theorem bowtieCol_eq_of_iff {x y : ℂ} (hG : y ∈ bowtieG ↔ x ∈ bowtieG) (hC : y ∈ bowtieC ↔ x ∈ bowtieC)
+    (hCN : y ∈ bowtieCN ↔ x ∈ bowtieCN) (hCS : y ∈ bowtieCS ↔ x ∈ bowtieCS) (hH : y ∈ bowtieH ↔ x ∈ bowtieH)
+    (hX1 : y ∈ bowtieX 1 ↔ x ∈ bowtieX 1) (hY1 : y ∈ bowtieY 1 ↔ x ∈ bowtieY 1)
+    (hX2 : y ∈ bowtieX (-1) ↔ x ∈ bowtieX (-1)) (hY2 : y ∈ bowtieY (-1) ↔ x ∈ bowtieY (-1)) :
+    bowtieCol y = bowtieCol x := by
+  classical
+  unfold bowtieCol
+  simp only [mem_union, hG, hC, hCN, hCS, hH, hX1, hY1, hX2, hY2]
+
+/-- `G` is open. -/
+theorem isOpen_bowtieG : IsOpen bowtieG := by
+  unfold bowtieG
+  refine (isOpen_lt ?_ ?_).and ((isOpen_lt ?_ ?_).and (isOpen_lt ?_ ?_)) <;> fun_prop
+
+/-- `H` is open. -/
+theorem isOpen_bowtieH : IsOpen bowtieH := by
+  unfold bowtieH
+  refine (isOpen_lt ?_ ?_).and ((isOpen_lt ?_ ?_).and (isOpen_lt ?_ ?_)) <;> fun_prop
+
+/-- `C` is open. -/
+theorem isOpen_bowtieC : IsOpen bowtieC := by
+  unfold bowtieC
+  refine (isOpen_ne_fun ?_ ?_).and ((isOpen_lt ?_ ?_).and ((isOpen_lt ?_ ?_).and ((isOpen_lt ?_ ?_).and
+    (isOpen_lt ?_ ?_)))) <;> fun_prop
+
+/-- `CN` is open. -/
+theorem isOpen_bowtieCN : IsOpen bowtieCN := by
+  unfold bowtieCN
+  refine (isOpen_lt ?_ ?_).and (isOpen_lt ?_ ?_) <;> fun_prop
+
+/-- `CS` is open. -/
+theorem isOpen_bowtieCS : IsOpen bowtieCS := by
+  unfold bowtieCS
+  refine (isOpen_lt ?_ ?_).and (isOpen_lt ?_ ?_) <;> fun_prop
+
+/-- `X σ` is open. -/
+theorem isOpen_bowtieX (σ : ℝ) : IsOpen (bowtieX σ) := by
+  unfold bowtieX
+  refine (isOpen_lt ?_ ?_).and ((isOpen_lt ?_ ?_).and ((isOpen_lt ?_ ?_).and (isOpen_lt ?_ ?_))) <;> fun_prop
+
+/-- `Y σ` is open. -/
+theorem isOpen_bowtieY (σ : ℝ) : IsOpen (bowtieY σ) := by
+  unfold bowtieY
+  refine (isOpen_lt ?_ ?_).and ((isOpen_lt ?_ ?_).and ((isOpen_lt ?_ ?_).and (isOpen_lt ?_ ?_))) <;> fun_prop
+
 /-- The bowtie's colour is locally constant off its boundary pieces, inside its domain. -/
 theorem bowtieCol_locallyConstant : ∀ x ∈ interior (closure bowtieTiles), x ∉ ⋃ a ∈ bowtieArcs, a.carrier →
     ∀ᶠ y in 𝓝 x, bowtieCol y = bowtieCol x := by
-  sorry
+  intro x _ hx
+  filter_upwards [eventually_mem_iff_of_closure_subset isOpen_bowtieG closure_bowtieG_subset hx,
+    eventually_mem_iff_of_closure_subset isOpen_bowtieC closure_bowtieC_subset hx,
+    eventually_mem_iff_of_closure_subset isOpen_bowtieCN closure_bowtieCN_subset hx,
+    eventually_mem_iff_of_closure_subset isOpen_bowtieCS closure_bowtieCS_subset hx,
+    eventually_mem_iff_of_closure_subset isOpen_bowtieH closure_bowtieH_subset hx,
+    eventually_mem_iff_of_closure_subset (isOpen_bowtieX 1) closure_bowtieX_one_subset hx,
+    eventually_mem_iff_of_closure_subset (isOpen_bowtieY 1) closure_bowtieY_one_subset hx,
+    eventually_mem_iff_of_closure_subset (isOpen_bowtieX (-1)) closure_bowtieX_neg_one_subset hx,
+    eventually_mem_iff_of_closure_subset (isOpen_bowtieY (-1)) closure_bowtieY_neg_one_subset hx]
+    with y h1 h2 h3 h4 h5 h6 h7 h8 h9
+  exact bowtieCol_eq_of_iff h1 h2 h3 h4 h5 h6 h7 h8 h9
 
 /-- **FS112-BOWTIE's fragment**: the map of the interior of the closure of its tiles. -/
 noncomputable def bowtie : ArcMap 6 where
@@ -725,9 +1144,257 @@ theorem cuspPiece_subset_bowtie_region {r : ℝ} (hr : r ≤ 1 / 13) :
   exact ⟨fun z hz => ⟨hint 2 z hz, (bowtieCol_cuspPiece hr).2.2.1 hz⟩,
     fun z hz => ⟨hint 3 z hz, (bowtieCol_cuspPiece hr).2.2.2 hz⟩⟩
 
+/-! ### The bowtie is valid (FS131-I4f): YB3's same-colour pairs, by colour class -/
+
+/-- `dist x y = 1` in coordinates. -/
+theorem sq_coords_of_dist_eq_one {x y : ℂ} (h : dist x y = 1) : (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 = 1 := by
+  rw [Complex.dist_eq_re_im] at h
+  have h0 : 0 ≤ (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 := by positivity
+  have := Real.sq_sqrt h0
+  rw [h] at this; linarith
+
+/-- Two points of the sector `G` are less than `1` apart: its half-angle `arcsin (5/13)` is below `30°`. -/
+theorem dist_lt_one_of_mem_bowtieG {x y : ℂ} (hx : x ∈ bowtieG) (hy : y ∈ bowtieG) : (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 < 1 := by
+  obtain ⟨hx1, -, hx3⟩ := hx
+  obtain ⟨hy1, -, hy3⟩ := hy
+  have nx := norm_sub_I_sq x
+  have ny := norm_sub_I_sq y
+  have ex : ‖x - I‖ ^ 2 < 1 := by nlinarith [norm_nonneg (x - I)]
+  have ey : ‖y - I‖ ^ 2 < 1 := by nlinarith [norm_nonneg (y - I)]
+  set p := 1 - x.im with hp
+  set q := 1 - y.im with hq
+  have hp0 : 0 < p := by linarith [abs_nonneg x.re]
+  have hq0 : 0 < q := by linarith [abs_nonneg y.re]
+  have hax : x.re ^ 2 * 144 < 25 * p ^ 2 := by
+    have : (12 * |x.re|) ^ 2 < (5 * p) ^ 2 := by
+      apply pow_lt_pow_left₀ hx3 (by positivity) (by norm_num)
+    nlinarith [sq_abs x.re]
+  have hay : y.re ^ 2 * 144 < 25 * q ^ 2 := by
+    have : (12 * |y.re|) ^ 2 < (5 * q) ^ 2 := by
+      apply pow_lt_pow_left₀ hy3 (by positivity) (by norm_num)
+    nlinarith [sq_abs y.re]
+  set ra := x.re ^ 2 + p ^ 2 with hra
+  set rb := y.re ^ 2 + q ^ 2 with hrb
+  have hra1 : ra < 1 := by rw [hra, hp]; nlinarith
+  have hrb1 : rb < 1 := by rw [hrb, hq]; nlinarith
+  have hpa : 144 * ra ≤ 169 * p ^ 2 := by nlinarith
+  have hqb : 144 * rb ≤ 169 * q ^ 2 := by nlinarith
+  have hxy : -(2 * (x.re * y.re)) ≤ 50 / 144 * (p * q) := by
+    have h1 : |x.re| * 12 ≤ 5 * p := by linarith
+    have h2 : |y.re| * 12 ≤ 5 * q := by linarith
+    have h3 : |x.re| * |y.re| * 144 ≤ 25 * (p * q) := by
+      nlinarith [abs_nonneg x.re, abs_nonneg y.re]
+    have h4 : -(x.re * y.re) ≤ |x.re| * |y.re| := by rw [← abs_mul]; exact neg_le_abs _
+    linarith
+  have hD : (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 = ra + rb - 2 * (x.re * y.re) - 2 * (p * q) := by
+    rw [hra, hrb, hp, hq]; ring
+  rw [hD]
+  have hra0 : 0 ≤ ra := by positivity
+  have hrb0 : 0 ≤ rb := by positivity
+  rcases le_total ra rb with h | h
+  · have hm : 144 * ra ≤ 169 * (p * q) := by
+      have hpp : 144 * ra ≤ 169 * p ^ 2 := hpa
+      have hqq : 144 * ra ≤ 169 * q ^ 2 := by linarith
+      by_contra hc
+      push Not at hc
+      have hpq0 : 0 ≤ p * q := by positivity
+      have : (169 * (p * q)) ^ 2 < (144 * ra) ^ 2 := by
+        apply pow_lt_pow_left₀ hc (by positivity) (by norm_num)
+      nlinarith [mul_le_mul hpp hqq (by positivity) (by positivity)]
+    linarith
+  · have hm : 144 * rb ≤ 169 * (p * q) := by
+      have hqq : 144 * rb ≤ 169 * q ^ 2 := hqb
+      have hpp : 144 * rb ≤ 169 * p ^ 2 := by linarith
+      by_contra hc
+      push Not at hc
+      have hpq0 : 0 ≤ p * q := by positivity
+      have : (169 * (p * q)) ^ 2 < (144 * rb) ^ 2 := by
+        apply pow_lt_pow_left₀ hc (by positivity) (by norm_num)
+      nlinarith [mul_le_mul hpp hqq (by positivity) (by positivity)]
+    linarith
+
+/-- `H` is the mirror of `G` under conjugation. -/
+theorem conj_mem_bowtieG_of_mem_bowtieH {z : ℂ} (hz : z ∈ bowtieH) : (starRingEnd ℂ) z ∈ bowtieG := by
+  obtain ⟨h1, h2, h3⟩ := hz
+  have hn : ‖(starRingEnd ℂ) z - I‖ = ‖z + I‖ := by
+    rw [← Complex.norm_conj, map_sub, Complex.conj_conj, Complex.conj_I, sub_neg_eq_add]
+  refine ⟨by rw [hn]; exact h1, ?_, ?_⟩
+  · simp only [Complex.conj_im]; linarith
+  · simp only [Complex.conj_re, Complex.conj_im]; linarith
+
+/-- Two points of `H` are less than `1` apart. -/
+theorem dist_lt_one_of_mem_bowtieH {x y : ℂ} (hx : x ∈ bowtieH) (hy : y ∈ bowtieH) : (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 < 1 := by
+  have := dist_lt_one_of_mem_bowtieG (conj_mem_bowtieG_of_mem_bowtieH hx) (conj_mem_bowtieG_of_mem_bowtieH hy)
+  simp only [Complex.conj_re, Complex.conj_im] at this
+  nlinarith
+
+
+/-- `C` is its own mirror under conjugation (the two circle conditions swap). -/
+theorem conj_mem_bowtieC {z : ℂ} (hz : z ∈ bowtieC) : (starRingEnd ℂ) z ∈ bowtieC := by
+  obtain ⟨h1, h2, h3, h4, h5⟩ := hz
+  have hn1 : ‖(starRingEnd ℂ) z - I‖ = ‖z + I‖ := by
+    rw [← Complex.norm_conj, map_sub, Complex.conj_conj, Complex.conj_I, sub_neg_eq_add]
+  have hn2 : ‖(starRingEnd ℂ) z + I‖ = ‖z - I‖ := by
+    rw [← Complex.norm_conj, map_add, Complex.conj_conj, Complex.conj_I, ← sub_eq_add_neg]
+  refine ⟨by simpa using h1, by simpa using h2, by simpa using h3, by rw [hn1]; exact h5, by rw [hn2]; exact h4⟩
+
+/-- `CS` is the mirror of `CN` under conjugation. -/
+theorem conj_mem_bowtieCN_of_mem_bowtieCS {z : ℂ} (hz : z ∈ bowtieCS) : (starRingEnd ℂ) z ∈ bowtieCN := by
+  obtain ⟨h1, h2⟩ := hz
+  exact ⟨by simp only [Complex.conj_re, Complex.conj_im]; linarith, by simp only [Complex.conj_im]; linarith⟩
+
+/-- A point of `C` and a point of `CN` are more than `1` apart: `CN` lies in the upward cone at `i`, `C` below `i` outside `ω(i)`. -/
+theorem one_lt_of_mem_bowtieC_CN {x y : ℂ} (hx : x ∈ bowtieC) (hy : y ∈ bowtieCN) : 1 < (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 := by
+  obtain ⟨-, hx2, hx3, hx4, -⟩ := hx
+  obtain ⟨hy1, -⟩ := hy
+  have nx := norm_sub_I_sq x
+  have e4 := (one_lt_sq_iff₀ (norm_nonneg _)).mpr hx4
+  have hb : x.im - 1 < -12 / 13 := by linarith [(abs_lt.mp hx3).2]
+  have hd : 0 < y.im - 1 := by linarith [abs_nonneg y.re]
+  have h1 : x.re * y.re ≤ |x.re| * |y.re| := by rw [← abs_mul]; exact le_abs_self _
+  have h2 : |x.re| * |y.re| ≤ 5 / 13 * |y.re| := mul_le_mul_of_nonneg_right hx2.le (abs_nonneg _)
+  have h3 : (x.im - 1) * (y.im - 1) < -12 / 13 * (y.im - 1) := mul_lt_mul_of_pos_right hb hd
+  have h5 : (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 =
+      (x.re ^ 2 + (x.im - 1) ^ 2) - 2 * (x.re * y.re + (x.im - 1) * (y.im - 1)) + (y.re ^ 2 + (y.im - 1) ^ 2) := by ring
+  nlinarith [sq_nonneg y.re, sq_nonneg (y.im - 1)]
+
+/-- Two points of colour `1` are never at distance `1`. -/
+theorem sq_ne_one_of_bowtie_one {x y : ℂ} (hx : x ∈ bowtieC ∪ bowtieCN ∪ bowtieCS) (hy : y ∈ bowtieC ∪ bowtieCN ∪ bowtieCS) :
+    (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 ≠ 1 := by
+  have hCC : ∀ {x y : ℂ}, x ∈ bowtieC → y ∈ bowtieC → (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 < 1 := by
+    intro x y hx hy
+    obtain ⟨-, a2, a3, -, -⟩ := hx
+    obtain ⟨-, b2, b3, -, -⟩ := hy
+    have := abs_lt.mp a2; have := abs_lt.mp a3; have := abs_lt.mp b2; have := abs_lt.mp b3
+    nlinarith
+  have hNN : ∀ {x y : ℂ}, x ∈ bowtieCN → y ∈ bowtieCN → (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 < 1 := by
+    intro x y hx hy
+    obtain ⟨a1, a2⟩ := hx
+    obtain ⟨b1, b2⟩ := hy
+    have := abs_lt.mp a1; have := abs_lt.mp b1
+    nlinarith [abs_nonneg x.re, abs_nonneg y.re]
+  have hCS : ∀ {x y : ℂ}, x ∈ bowtieC → y ∈ bowtieCS → 1 < (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 := by
+    intro x y hx hy
+    have := one_lt_of_mem_bowtieC_CN (conj_mem_bowtieC hx) (conj_mem_bowtieCN_of_mem_bowtieCS hy)
+    simp only [Complex.conj_re, Complex.conj_im] at this
+    nlinarith
+  have hSS : ∀ {x y : ℂ}, x ∈ bowtieCS → y ∈ bowtieCS → (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 < 1 := by
+    intro x y hx hy
+    have := hNN (conj_mem_bowtieCN_of_mem_bowtieCS hx) (conj_mem_bowtieCN_of_mem_bowtieCS hy)
+    simp only [Complex.conj_re, Complex.conj_im] at this
+    nlinarith
+  have hNS : ∀ {x y : ℂ}, x ∈ bowtieCN → y ∈ bowtieCS → 1 < (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 := by
+    intro x y hx hy
+    obtain ⟨a1, -⟩ := hx
+    obtain ⟨b1, -⟩ := hy
+    nlinarith [abs_nonneg x.re, abs_nonneg y.re, sq_nonneg (x.re - y.re)]
+  rcases hx with (hx | hx) | hx <;> rcases hy with (hy | hy) | hy
+  · exact (hCC hx hy).ne
+  · exact (one_lt_of_mem_bowtieC_CN hx hy).ne'
+  · exact (hCS hx hy).ne'
+  · have := one_lt_of_mem_bowtieC_CN hy hx; intro h; nlinarith
+  · exact (hNN hx hy).ne
+  · exact (hNS hx hy).ne'
+  · have := hCS hy hx; intro h; nlinarith
+  · have := hNS hy hx; intro h; nlinarith
+  · exact (hSS hx hy).ne
+
+/-- Two points of colour `3` (`σ = 1`) or `4` (`σ = −1`) are never at distance `1`. -/
+theorem sq_ne_one_of_bowtie_XY {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) {x y : ℂ} (hx : x ∈ bowtieX σ ∪ bowtieY σ)
+    (hy : y ∈ bowtieX σ ∪ bowtieY σ) : (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 ≠ 1 := by
+  have hs : (x.re - y.re) ^ 2 = (σ * x.re - σ * y.re) ^ 2 := by rcases hσ with rfl | rfl <;> ring
+  rw [hs]
+  rcases hx with ⟨a1, a2, a3, a4⟩ | ⟨a1, a2, a3, a4⟩ <;> rcases hy with ⟨b1, b2, b3, b4⟩ | ⟨b1, b2, b3, b4⟩
+  · have : 0 < σ * x.re := by linarith
+    have : 0 < σ * y.re := by linarith
+    nlinarith
+  · nlinarith [sq_nonneg (σ * x.re - σ * y.re)]
+  · nlinarith [sq_nonneg (σ * x.re - σ * y.re)]
+  · have : 0 < σ * x.re := by linarith
+    have : 0 < σ * y.re := by linarith
+    nlinarith
+
+/-- `Z±` lie in the box `|re| < 113/260`, `|im| < 11/65`, and so do their closures. -/
+theorem closure_bowtieZ_subset {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) :
+    closure (bowtieZ σ) ⊆ {z : ℂ | |z.re| ≤ 113 / 260} ∩ {z | |z.im| ≤ 11 / 65} := by
+  refine closure_minimal (fun z hz => ⟨?_, hz.2.2.1.le⟩)
+    ((isClosed_le (by fun_prop) continuous_const).inter (isClosed_le (by fun_prop) continuous_const))
+  obtain ⟨h1, h2, -, -⟩ := hz
+  show |z.re| ≤ 113 / 260
+  rcases hσ with rfl | rfl
+  · rw [abs_le]; constructor <;> linarith
+  · rw [abs_le]; constructor <;> linarith
+
+/-- An interior point of the bowtie lies in one of its nine open tiles `G`, `C`, `CN`, `CS`, `H`, `X±`, `Y±`, or in the closure of `Z±`
+(each of the nine tiles' closures adds only boundary pieces). -/
+theorem bowtie_interiorPts_cases {x : ℂ} (hx : x ∈ bowtie.interiorPts) :
+    x ∈ bowtieG ∨ x ∈ bowtieC ∨ x ∈ bowtieCN ∨ x ∈ bowtieCS ∨ x ∈ bowtieH ∨ x ∈ bowtieX 1 ∨ x ∈ bowtieY 1 ∨
+      x ∈ bowtieX (-1) ∨ x ∈ bowtieY (-1) ∨ x ∈ closure (bowtieZ 1) ∨ x ∈ closure (bowtieZ (-1)) := by
+  obtain ⟨hd, hA⟩ := hx
+  have hA' : x ∉ ⋃ a ∈ bowtieArcs, a.carrier := hA
+  have hcl : x ∈ closure bowtieTiles := interior_subset hd
+  simp only [bowtieTiles, closure_union, mem_union] at hcl
+  have k : ∀ {U : Set ℂ}, closure U ⊆ U ∪ ⋃ a ∈ bowtieArcs, a.carrier → x ∈ closure U → x ∈ U :=
+    fun h hU => (h hU).resolve_right hA'
+  rcases hcl with ((((((((((h | h) | h) | h) | h) | h) | h) | h) | h) | h) | h)
+  · exact Or.inl (k closure_bowtieG_subset h)
+  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl (k closure_bowtieH_subset h)))))
+  · exact Or.inr (Or.inl (k closure_bowtieC_subset h))
+  · exact Or.inr (Or.inr (Or.inl (k closure_bowtieCN_subset h)))
+  · exact Or.inr (Or.inr (Or.inr (Or.inl (k closure_bowtieCS_subset h))))
+  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl (k closure_bowtieX_one_subset h))))))
+  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl (k closure_bowtieX_neg_one_subset h))))))))
+  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl (k closure_bowtieY_one_subset h)))))))
+  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl (k closure_bowtieY_neg_one_subset h)))))))))
+  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h)))))))))
+  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h)))))))))
+
+/-- The tiles each colour of the bowtie comes from (read off `bowtieCol`'s if-chain). -/
+theorem bowtieCol_cases (x : ℂ) :
+    (bowtieCol x = 0 → x ∈ bowtieG) ∧ (bowtieCol x = 1 → x ∈ bowtieC ∪ bowtieCN ∪ bowtieCS) ∧
+      (bowtieCol x = 2 → x ∈ bowtieH) ∧ (bowtieCol x = 3 → x ∈ bowtieX 1 ∪ bowtieY 1) ∧
+      (bowtieCol x = 4 → x ∈ bowtieX (-1) ∪ bowtieY (-1)) ∧
+      (bowtieCol x = 5 → x ∉ bowtieG ∧ x ∉ bowtieC ∪ bowtieCN ∪ bowtieCS ∧ x ∉ bowtieH ∧ x ∉ bowtieX 1 ∪ bowtieY 1 ∧
+        x ∉ bowtieX (-1) ∪ bowtieY (-1)) := by
+  classical
+  unfold bowtieCol
+  split_ifs <;> simp_all
+
 /-- **FS112-BOWTIE**: the fragment is valid (YB3: 21 of 21 same-colour tile pairs, exact). -/
 theorem bowtie_valid : bowtie.Valid := by
-  sorry
+  intro x hx y hy hxy hcol
+  have hd := sq_coords_of_dist_eq_one hxy
+  have hc : bowtieCol x = bowtieCol y := hcol
+  obtain ⟨c0, c1, c2, c3, c4, -⟩ := bowtieCol_cases x
+  obtain ⟨d0, d1, d2, d3, d4, -⟩ := bowtieCol_cases y
+  have hbox : ∀ {z : ℂ}, z ∈ bowtie.interiorPts → bowtieCol z = 5 → |z.re| ≤ 113 / 260 ∧ |z.im| ≤ 11 / 65 := by
+    intro z hz h5
+    obtain ⟨n0, n1, n2, n3, n4⟩ := (bowtieCol_cases z).2.2.2.2.2 h5
+    simp only [mem_union, not_or] at n1 n3 n4
+    rcases bowtie_interiorPts_cases hz with h | h | h | h | h | h | h | h | h | h | h
+    · exact absurd h n0
+    · exact absurd h n1.1.1
+    · exact absurd h n1.1.2
+    · exact absurd h n1.2
+    · exact absurd h n2
+    · exact absurd h n3.1
+    · exact absurd h n3.2
+    · exact absurd h n4.1
+    · exact absurd h n4.2
+    · exact closure_bowtieZ_subset (Or.inl rfl) h
+    · exact closure_bowtieZ_subset (Or.inr rfl) h
+  generalize hj : bowtieCol y = j at hc
+  fin_cases j
+  · exact (dist_lt_one_of_mem_bowtieG (c0 hc) (d0 hj)).ne hd
+  · exact sq_ne_one_of_bowtie_one (c1 hc) (d1 hj) hd
+  · exact (dist_lt_one_of_mem_bowtieH (c2 hc) (d2 hj)).ne hd
+  · exact sq_ne_one_of_bowtie_XY (Or.inl rfl) (c3 hc) (d3 hj) hd
+  · exact sq_ne_one_of_bowtie_XY (Or.inr rfl) (c4 hc) (d4 hj) hd
+  · obtain ⟨a1, a2⟩ := hbox hx hc
+    obtain ⟨b1, b2⟩ := hbox hy hj
+    have := abs_le.mp a1; have := abs_le.mp a2; have := abs_le.mp b1; have := abs_le.mp b2
+    nlinarith
+
 
 /-- `E = 0`, `N = i`, `S = −i` lie in the fragment's domain. -/
 theorem bowtie_mem_dom : (0 : ℂ) ∈ bowtie.dom ∧ I ∈ bowtie.dom ∧ -I ∈ bowtie.dom :=
@@ -838,13 +1505,211 @@ theorem bowtie_flanks : bowtie.IsFlankAbove 0 0 1 0 ∧ bowtie.IsFlankBelow 0 0 
     rw [tanBelow_neg_one_iff, e_pi_add_pi_div_two, zero_sub, neg_neg] at h4
     exact (cuspPiece_subset_bowtie_region hr.2).1 ⟨mem_ball.mpr h1, mem_ball.mpr h4⟩
 
+/-! ### The bowtie near `N = i` and `S′ = −i`: classes `0` and `2` there, and the shadows of the horns (FS131-I4f) -/
+
+/-- A point of a segment `[a, b]` is `a + t (b − a)` for some `t ∈ [0, 1]`, in coordinates. -/
+theorem coords_of_mem_segment {a b z : ℂ} (hz : z ∈ segment ℝ a b) :
+    ∃ t : ℝ, 0 ≤ t ∧ t ≤ 1 ∧ z.re = a.re + t * (b.re - a.re) ∧ z.im = a.im + t * (b.im - a.im) := by
+  obtain ⟨s, t, hs, ht, hst, rfl⟩ := hz
+  have hs' : s = 1 - t := by linarith
+  subst hs'
+  refine ⟨t, ht, by linarith, ?_, ?_⟩
+  · simp only [Complex.add_re, Complex.smul_re, smul_eq_mul]; ring
+  · simp only [Complex.add_im, Complex.smul_im, smul_eq_mul]; ring
+
+/-- Within `1/10` of `N = i`, strictly inside `G`'s cone, a point lies on no boundary piece of the bowtie (the pieces near `i` are
+`G`'s two edges and `CN`'s two edges through `i`). -/
+theorem not_mem_bowtieArcs_near_I {z : ℂ} (hz : ‖z - I‖ < 1 / 10) (h1 : 12 * |z.re| < 5 * (1 - z.im)) :
+    z ∉ ⋃ a ∈ bowtieArcs, a.carrier := by
+  have hre : |z.re| < 1 / 10 := by
+    have := Complex.abs_re_le_norm (z - I); simp only [Complex.sub_re, Complex.I_re, sub_zero] at this; linarith
+  have him : |z.im - 1| < 1 / 10 := by
+    have := Complex.abs_im_le_norm (z - I); simp only [Complex.sub_im, Complex.I_im] at this; linarith
+  have hr1 := abs_lt.mp hre
+  have hi1 := abs_lt.mp him
+  have ha1 := le_abs_self z.re
+  have ha2 := neg_le_abs z.re
+  intro h
+  obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp h
+  simp only [bowtieArcs, mem_setOf_eq, List.mem_cons, List.not_mem_nil, or_false] at ha
+  rcases ha with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl |
+    rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
+  · obtain ⟨θ, -, rfl⟩ := hza; simp at hz; norm_num at hz
+  · obtain ⟨θ, -, rfl⟩ := hza
+    simp only [Complex.add_im, Complex.neg_im, Complex.I_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, re_e, im_e,
+      one_mul, zero_mul, add_zero] at hi1
+    linarith [Real.sin_le_one θ]
+  all_goals obtain ⟨t, ht0, ht1, hre', him'⟩ := coords_of_mem_segment hza
+  all_goals simp only [pt, Complex.I_re, Complex.I_im, Complex.neg_re, Complex.neg_im] at hre' him'
+  all_goals linarith
+
+/-- Within `1/10` of `S′ = −i`, strictly inside `H`'s cone, a point lies on no boundary piece of the bowtie. -/
+theorem not_mem_bowtieArcs_near_negI {z : ℂ} (hz : ‖z + I‖ < 1 / 10) (h1 : 12 * |z.re| < 5 * (1 + z.im)) :
+    z ∉ ⋃ a ∈ bowtieArcs, a.carrier := by
+  have hre : |z.re| < 1 / 10 := by
+    have := Complex.abs_re_le_norm (z + I); simp only [Complex.add_re, Complex.I_re, add_zero] at this; linarith
+  have him : |z.im + 1| < 1 / 10 := by
+    have := Complex.abs_im_le_norm (z + I); simp only [Complex.add_im, Complex.I_im] at this; linarith
+  have hr1 := abs_lt.mp hre
+  have hi1 := abs_lt.mp him
+  have ha1 := le_abs_self z.re
+  have ha2 := neg_le_abs z.re
+  intro h
+  obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp h
+  simp only [bowtieArcs, mem_setOf_eq, List.mem_cons, List.not_mem_nil, or_false] at ha
+  rcases ha with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl |
+    rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
+  · obtain ⟨θ, -, rfl⟩ := hza
+    simp only [Complex.add_im, Complex.I_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, re_e, im_e,
+      one_mul, zero_mul, add_zero] at hi1
+    linarith [Real.neg_one_le_sin θ]
+  · obtain ⟨θ, -, rfl⟩ := hza; simp at hz; norm_num at hz
+  all_goals obtain ⟨t, ht0, ht1, hre', him'⟩ := coords_of_mem_segment hza
+  all_goals simp only [pt, Complex.I_re, Complex.I_im, Complex.neg_re, Complex.neg_im] at hre' him'
+  all_goals linarith
+
+/-- Each open tile of the bowtie lies in its domain. -/
+theorem subset_bowtie_dom {U : Set ℂ} (hU : IsOpen U) (h : U ⊆ bowtieTiles) : U ⊆ bowtie.dom :=
+  interior_maximal (h.trans subset_closure) hU
+
+/-- `G` lies in the open unit disc about `E = 0`. -/
+theorem bowtieG_subset_ball : bowtieG ⊆ ball 0 1 := by
+  intro z ⟨h1, h2, h3⟩
+  rw [mem_ball_zero_iff]
+  have hs := norm_sub_I_sq z
+  have e1 : ‖z - I‖ ^ 2 < 1 := by nlinarith [norm_nonneg (z - I)]
+  have him : 0 < z.im := by nlinarith
+  have hax : z.re ^ 2 * 144 < 25 * (1 - z.im) ^ 2 := by
+    have : (12 * |z.re|) ^ 2 < (5 * (1 - z.im)) ^ 2 := pow_lt_pow_left₀ h3 (by positivity) (by norm_num)
+    nlinarith [sq_abs z.re]
+  have hn : ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := by rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]; ring
+  have : ‖z‖ ^ 2 < 1 := by nlinarith
+  nlinarith [norm_nonneg z]
+
+/-- `H` lies in the open unit disc about `E = 0`. -/
+theorem bowtieH_subset_ball : bowtieH ⊆ ball 0 1 := by
+  intro z hz
+  have := bowtieG_subset_ball (conj_mem_bowtieG_of_mem_bowtieH hz)
+  rwa [mem_ball_zero_iff, Complex.norm_conj, ← mem_ball_zero_iff] at this
+
+/-- A point of `G` within `1/10` of `i` is a point of the bowtie's class `0`. -/
+theorem mem_bowtie_region_zero {z : ℂ} (hz : z ∈ bowtieG) (hI : ‖z - I‖ < 1 / 10) : z ∈ bowtie.region 0 :=
+  ⟨⟨subset_bowtie_dom isOpen_bowtieG subset_bowtieTiles.1 hz, not_mem_bowtieArcs_near_I hI hz.2.2⟩, bowtieCol_of_mem_G hz⟩
+
+/-- A point of `H` within `1/10` of `−i` is a point of the bowtie's class `2`. -/
+theorem mem_bowtie_region_two {z : ℂ} (hz : z ∈ bowtieH) (hI : ‖z + I‖ < 1 / 10) : z ∈ bowtie.region 2 :=
+  ⟨⟨subset_bowtie_dom isOpen_bowtieH subset_bowtieTiles.2.1 hz, not_mem_bowtieArcs_near_negI hI hz.2.2⟩, bowtieCol_of_mem_H hz⟩
+
+/-- `i` is in the closure of the class `0` (the points `i − t i` of `G`), `−i` in the closure of the class `2`. -/
+theorem I_mem_closure_bowtie_region : I ∈ closure (bowtie.region 0) ∧ -I ∈ closure (bowtie.region 2) := by
+  constructor
+  · rw [Metric.mem_closure_iff]
+    intro ε hε
+    set t : ℝ := min (ε / 2) (1 / 20) with ht
+    have ht0 : 0 < t := lt_min (by linarith) (by norm_num)
+    have ht1 : t ≤ 1 / 20 := min_le_right _ _
+    have ht2 : t ≤ ε / 2 := min_le_left _ _
+    have hn : ‖((1 - t : ℝ) : ℂ) * I - I‖ = t := by
+      rw [show ((1 - t : ℝ) : ℂ) * I - I = ((-t : ℝ) : ℂ) * I by push_cast; ring, norm_mul, Complex.norm_I, mul_one,
+        Complex.norm_real, Real.norm_eq_abs, abs_neg, abs_of_pos ht0]
+    have hG : ((1 - t : ℝ) : ℂ) * I ∈ bowtieG := by
+      refine ⟨by rw [hn]; linarith, ?_, ?_⟩ <;> simp <;> linarith
+    refine ⟨_, mem_bowtie_region_zero hG (by rw [hn]; linarith), ?_⟩
+    rw [dist_comm, dist_eq_norm, hn]; linarith
+  · rw [Metric.mem_closure_iff]
+    intro ε hε
+    set t : ℝ := min (ε / 2) (1 / 20) with ht
+    have ht0 : 0 < t := lt_min (by linarith) (by norm_num)
+    have ht1 : t ≤ 1 / 20 := min_le_right _ _
+    have ht2 : t ≤ ε / 2 := min_le_left _ _
+    have hn : ‖((t - 1 : ℝ) : ℂ) * I + I‖ = t := by
+      rw [show ((t - 1 : ℝ) : ℂ) * I + I = ((t : ℝ) : ℂ) * I by push_cast; ring, norm_mul, Complex.norm_I, mul_one,
+        Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
+    have hH : ((t - 1 : ℝ) : ℂ) * I ∈ bowtieH := by
+      refine ⟨by rw [hn]; linarith, ?_, ?_⟩ <;> simp <;> linarith
+    refine ⟨_, mem_bowtie_region_two hH (by rw [hn]; linarith), ?_⟩
+    rw [dist_comm, dist_eq_norm, sub_neg_eq_add, hn]; linarith
+
+/-- Near `E = 0`, a point outside `ω(i)` sees a point of the class `0` at distance exactly `1`: the point of `G` toward `i`. -/
+theorem mem_shadow_bowtie_region_zero {z : ℂ} (hz : ‖z‖ < 1 / 20) (h1 : 1 < ‖z - I‖) : z ∈ shadow (bowtie.region 0) := by
+  set d := ‖z - I‖ with hd
+  have hd0 : 0 < d := by linarith
+  set y : ℂ := z + ((1 / d : ℝ) : ℂ) * (I - z) with hy
+  have hf0 : 0 < 1 - 1 / d := by rw [sub_pos, div_lt_one hd0]; exact h1
+  have hdz : d < 1 + 1 / 20 := by
+    have := norm_sub_le z I; rw [Complex.norm_I] at this; linarith
+  have hdist : dist z y = 1 := by
+    rw [dist_eq_norm, hy, sub_add_cancel_left, norm_neg, norm_mul, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos (by positivity), norm_sub_rev, ← hd]
+    field_simp
+  have hyI : y - I = ((1 - 1 / d : ℝ) : ℂ) * (z - I) := by rw [hy]; push_cast; ring
+  have hnyI : ‖y - I‖ = d - 1 := by
+    rw [hyI, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hf0, ← hd]; field_simp
+  have hre : |z.re| < 1 / 20 := (Complex.abs_re_le_norm z).trans_lt hz
+  have him : |z.im| < 1 / 20 := (Complex.abs_im_le_norm z).trans_lt hz
+  have hyre : y.re = (1 - 1 / d) * z.re := by rw [hy]; simp; ring
+  have hyim : 1 - y.im = (1 - 1 / d) * (1 - z.im) := by rw [hy]; simp; ring
+  have hz1 : 0 < 1 - z.im := by linarith [(abs_lt.mp him).2]
+  have hcone : 12 * |y.re| < 5 * (1 - y.im) := by
+    rw [hyre, hyim, abs_mul, abs_of_pos hf0]
+    have : 12 * |z.re| < 5 * (1 - z.im) := by linarith [(abs_lt.mp him).2]
+    nlinarith
+  have hy1 : y.im < 1 := by nlinarith
+  exact ⟨y, mem_bowtie_region_zero ⟨by rw [hnyI]; linarith, hy1, hcone⟩ (by rw [hnyI]; linarith), hdist⟩
+
+/-- Near `E = 0`, a point outside `ω(−i)` sees a point of the class `2` at distance exactly `1`: the point of `H` toward `−i`. -/
+theorem mem_shadow_bowtie_region_two {z : ℂ} (hz : ‖z‖ < 1 / 20) (h1 : 1 < ‖z + I‖) : z ∈ shadow (bowtie.region 2) := by
+  set d := ‖z + I‖ with hd
+  have hd0 : 0 < d := by linarith
+  set y : ℂ := z + ((1 / d : ℝ) : ℂ) * (-I - z) with hy
+  have hf0 : 0 < 1 - 1 / d := by rw [sub_pos, div_lt_one hd0]; exact h1
+  have hdz : d < 1 + 1 / 20 := by
+    have := norm_add_le z I; rw [Complex.norm_I] at this; linarith
+  have hdist : dist z y = 1 := by
+    rw [dist_eq_norm, hy, sub_add_cancel_left, norm_neg, norm_mul, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos (by positivity), show -I - z = -(z + I) by ring, norm_neg, ← hd]
+    field_simp
+  have hyI : y + I = ((1 - 1 / d : ℝ) : ℂ) * (z + I) := by rw [hy]; push_cast; ring
+  have hnyI : ‖y + I‖ = d - 1 := by
+    rw [hyI, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hf0, ← hd]; field_simp
+  have hre : |z.re| < 1 / 20 := (Complex.abs_re_le_norm z).trans_lt hz
+  have him : |z.im| < 1 / 20 := (Complex.abs_im_le_norm z).trans_lt hz
+  have hyre : y.re = (1 - 1 / d) * z.re := by rw [hy]; simp; ring
+  have hyim : 1 + y.im = (1 - 1 / d) * (1 + z.im) := by rw [hy]; simp; ring
+  have hz1 : 0 < 1 + z.im := by linarith [(abs_lt.mp him).1]
+  have hcone : 12 * |y.re| < 5 * (1 + y.im) := by
+    rw [hyre, hyim, abs_mul, abs_of_pos hf0]
+    have : 12 * |z.re| < 5 * (1 + z.im) := by linarith [(abs_lt.mp him).1]
+    nlinarith
+  have hy1 : -1 < y.im := by nlinarith
+  exact ⟨y, mem_bowtie_region_two ⟨by rw [hnyI]; linarith, hy1, hcone⟩ (by rw [hnyI]; linarith), hdist⟩
+
 /-- **Shadowed** by its flanks: each horn lies, near `E`, in the shadow of both flank colours. -/
 theorem bowtie_doublyShadowed : bowtie.DoublyShadowed 0 0 (-1) 1 0 2 ∧ bowtie.DoublyShadowed 0 π (-1) 1 2 0 := by
-  sorry
+  have h20 : (0 : ℝ) < 1 / 20 := by norm_num
+  have hN : e (0 + π / 2) = I := by rw [zero_add, e_pi_div_two]
+  refine ⟨⟨-1, 1, le_rfl, by norm_num, le_rfl, ?_⟩, ⟨-1, 1, le_rfl, by norm_num, le_rfl, ?_⟩⟩
+  · filter_upwards [Ioc_mem_nhdsGT h20] with r hr
+    rintro z ⟨h0, -, h3, h4⟩
+    rw [tanAbove_neg_one_iff, hN, zero_sub, dist_eq_norm, sub_neg_eq_add] at h3
+    rw [tanBelow_one_iff, hN, zero_add, dist_eq_norm] at h4
+    rw [dist_zero_right] at h0
+    exact ⟨mem_shadow_bowtie_region_zero (by linarith [hr.2]) h4, mem_shadow_bowtie_region_two (by linarith [hr.2]) h3⟩
+  · filter_upwards [Ioc_mem_nhdsGT h20] with r hr
+    rintro z ⟨h0, -, h3, h4⟩
+    rw [tanAbove_neg_one_iff, e_pi_add_pi_div_two, zero_sub, neg_neg, dist_eq_norm] at h3
+    rw [tanBelow_one_iff, e_pi_add_pi_div_two, zero_add, dist_eq_norm, sub_neg_eq_add] at h4
+    rw [dist_zero_right] at h0
+    exact ⟨mem_shadow_bowtie_region_two (by linarith [hr.2]) h4, mem_shadow_bowtie_region_zero (by linarith [hr.2]) h3⟩
 
 /-- The flank sectors are **in-type** radius-1 sectors at `N` and `S`: contacts of colours `0` at `N` and `2` at `S`, in-type. -/
 theorem bowtie_inType : (bowtie.IsContact 0 0 I ∧ bowtie.InType 0 0 I) ∧ (bowtie.IsContact 0 2 (-I) ∧ bowtie.InType 0 2 (-I)) := by
-  sorry
+  have hc := bowtie_coloursAt_zero.1
+  refine ⟨⟨⟨by rw [hc]; simp, by simp, I_mem_closure_bowtie_region.1⟩, ?_⟩, ⟨⟨by rw [hc]; simp, by simp, I_mem_closure_bowtie_region.2⟩, ?_⟩⟩
+  · rintro T ⟨⟨x, hx, rfl⟩, hcol⟩ - z hz
+    exact bowtieG_subset_ball ((bowtieCol_cases z).1 (hcol hz))
+  · rintro T ⟨⟨x, hx, rfl⟩, hcol⟩ - z hz
+    exact bowtieH_subset_ball ((bowtieCol_cases z).2.2.1 (hcol hz))
 
 /-- **Both neighbours four-coloured, one sector per colour**: `P_cl(N) = {0, 1, 3, 4}`, `P_cl(S) = {2, 1, 3, 4}`. -/
 theorem bowtie_neighbours : bowtie.coloursAt I = {0, 1, 3, 4} ∧ bowtie.coloursAt (-I) = {2, 1, 3, 4} ∧

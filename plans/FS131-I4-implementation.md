@@ -462,6 +462,42 @@ No edit while a build of the edited file runs. A merge commit is the one commit 
 for the slot: "build: OK — all 1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T170918Z-955682.log`;
 driver log `data/fs131/i4/build-i4f-readback.log`). 45 `declaration uses sorry` warnings — BaseSteps 16, Contact 10, UnitArc 19 — and no other warning.
 
+## Stage 13 — SAVED (FS131-I4f): `bowtieCol_locallyConstant`, `bowtie_valid`, `bowtie_doublyShadowed`, `bowtie_inType`; 41 `sorry` left
+
+**`bowtieCol_locallyConstant` proved** (`BaseSteps`), with no disjointness of tiles and no work on `Z±`: `bowtieCol` reads only membership in the nine open
+tiles `G`, `C`, `CN`, `CS`, `H`, `X±`, `Y±` (`bowtieCol_eq_of_iff`), and membership in an open set `U` is eventually constant near a point off a set `A`
+whenever `closure U ⊆ U ∪ A` (`eventually_mem_iff_of_closure_subset`). So the leaf is nine closure lemmas, `closure T ⊆ T ∪ ⋃ bowtieArcs` — each by
+`closure_minimal` onto the non-strict inequalities, then the equality case put on a listed piece: a segment by explicit coordinates
+(`mem_bowtieArcs_seg`, over `mem_segment_of_coords`), an arc of `ω(±i)` by `mem_bowtieArcN_of`/`mem_bowtieArcS_of` (I4e's `mem_bowtieArc_N/S` with the
+hypothesis `‖z‖ < 1/13` weakened to `|re z| ≤ 5/13` and the side of the centre). `C`'s case `re z = 0` is the point `0`, on the arc of `ω(i)`; `X σ`, `Y σ` go
+through `bowtieX_closure_cases`/`bowtieY_closure_cases` in the coordinate `u = σ re`. The route I4e planned (each tile's colour under the if-chain, then a domain
+point in one tile) was not needed. Re-pricing: about 25k tokens, two passes (one `classical` missing for `ite`'s instance under `simp`, one `IsOpen` stated through
+`unfold … ; refine … <;> fun_prop`).
+
+**`bowtie_valid` proved** (YB3's pairs, by colour class): an interior point lies in one of the nine tiles or in `closure Z±` (`bowtie_interiorPts_cases`, from
+the nine closure lemmas), and each colour comes from fixed tiles (`bowtieCol_cases`, by `split_ifs`). Colour `0`: two points of `G` are less than `1` apart
+(`dist_lt_one_of_mem_bowtieG`: with `p = 1 − im`, `|re| < 5p/12` gives `|a₁b₁| ≤ (25/144)pq`; for `ra ≤ rb`, `pq ≥ (144/169)ra`, so the squared distance is at most
+`rb − (69/169)ra < 1`). Colour `2`: `H` is `G`'s mirror under conjugation. Colour `1`: `C–C`, `CN–CN`, `CS–CS` by boxes; `C–CN` more than `1` apart (`CN` in the
+upward cone at `i`, `C` below `i` outside `ω(i)`: `(z − i)·(w − i) < 0`), `C–CS` by conjugation; `CN–CS` by height. Colours `3`, `4`: `X σ`, `Y σ` boxes, `X–Y` by
+height (`82/65 > 1`). Colour `5`: both points in the box `|re| ≤ 113/260`, `|im| ≤ 11/65` of `closure Z±`, squared distance at most `14705/16900 < 1`.
+
+**`bowtie_inType` proved**: the contacts at `N = i` (colour `0`) and `S′ = −i` (colour `2`) — `i ∈ closure(region 0)` by the points `(1 − t) i` of `G`, which lie
+on no boundary piece (`not_mem_bowtieArcs_near_I`: within `1/10` of `i` only `G`'s and `CN`'s edges through `i` are near, and a point strictly inside `G`'s cone
+is on neither; all 30 pieces checked, each segment by `coords_of_mem_segment` and `linarith`); in-type because every tile of colour `0` lies in `G ⊆ B(0, 1)`
+(`bowtieG_subset_ball`), of colour `2` in `H ⊆ B(0, 1)`. **`bowtie_doublyShadowed` proved** with the whole horn (`s₁ = −1`, `s₂ = 1`): for `‖z‖ < 1/20` outside
+`ω(i)`, the point `y = z + (i − z)/‖z − i‖` is at distance exactly `1` from `z`, in `G` within `1/20` of `i`, so in the class `0`
+(`mem_shadow_bowtie_region_zero`); the mirror at `−i` for the class `2`.
+
+**Axioms** (`#print axioms` against this stage's build's oleans, `data/fs131/i4/axioms-i4f.txt`, not a gate log): the four leaves and their children the standard
+three — and with `bowtieCol_locallyConstant` proved, the structure `bowtie` is sorry-free, so I4e's `bowtie_isHorn`, `bowtie_flanks`, `bowtie_coloursAt_zero`,
+`bowtie_mem_dom` now read `[propext, Classical.choice, Quot.sound]` too.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 323 names, 49 added, 0 missing (negative control: `bowtie_valid`'s line deleted, `--check` exit 1 naming it;
+restored, exit 0); `tools/fs131_k4_decls.py --check` 241 names, 0 missing. **No statement changed, no new axiom, no `native_decide`.** Build: "build: OK — 444 of
+444 batches, 2 module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T172502Z-1035280.log`; driver log
+`data/fs131/i4/build-i4f-stage13.log`): 41 distinct `declaration uses sorry` (BaseSteps 12, Contact 10, UnitArc 19), no other warning. (A first launch of this
+build was stopped by its PID while it still waited for the slot, before it read any file, so that the edits could be finished first; nothing was built by it.)
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
