@@ -21,8 +21,8 @@ that judge the milestone, written before any job).*
 | job | state | where |
 |---|---|---|
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
-| wave 2 (28 rows) | 91 lines left; the axiom gate repaired for its import (T3, item 160); **FS131-I2h (Opus) running** to the landing | `.claude/worktrees/fs131-w2` |
-| wave 3 (20 rows + 6 merged) | **LANDED on `main`** (item 157; gated commit `0fdacddb`): held in the kernel, 502 records on the standard three; `localSectors` follows on `fs131-w3b` (FS131-I3i) | — |
+| wave 2 (28 rows) | 53 lines left (I2h, item 169); dyadic rows and DISC7 held in the kernel on the branch; **FS131-I2i (Opus) running** to the landing | `.claude/worktrees/fs131-w2` |
+| wave 3 (20 rows + 6 merged) | **LANDED** (item 157); `localSectors` and the cusp-free four-colour clause **LANDED** too (item 171, `0131aa59`) | — |
 | wave 4 (25 rows) | 32 of 86 proved; **FS131-I4c (Opus) running** (item 168); tell it when `localSectors` lands on `main` | `.claude/worktrees/fs131-w4` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | re-planned on NiceAt (W3, item 167): chain re-proved as compositions; 18 `Merge` leaves + 5 inhabitant leaves left, none needing `localSectors`; **next: FS131-IWc (Opus)**, 1,100–1,800 lines | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
@@ -36,18 +36,17 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 1 + 1 + 1 = 3 of 3, all Opus; plus FS131-QA2 in Kooshi's special slot)
+## 3. Running now (slots used: 1 + 1 + 1 = 3 of 3, all Opus)
 
 | job | model | brief | reports to |
 |---|---|---|---|
+| FS131-IWc (Woodall's localized step 3: `Merge`'s 18 leaves and 5 inhabitants; QA2-1 before the landing; item 170) | Opus | `data/fs131/briefs/FS131-IWc-woodall-merge.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-IWc.md` |
 | FS131-I4c (wave 4 on Opus: merge main, LEB discharge, leaves, the bridge after `localSectors` lands, plan gaps; item 168) | Opus | `data/fs131/briefs/FS131-I4c-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4c.md` |
-| FS131-I2h (wave 2 on Opus: 91 lines, the owed items, the gate, the landing; item 162) | Opus | `data/fs131/briefs/FS131-I2h-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2h.md` |
-| FS131-I3i (`localSectors`, the separation lemma, `four_of_bothKind_simple` without `hnc`; on `fs131-w3b`; item 157) | Opus | `data/fs131/briefs/FS131-I3i-localsectors.md` | its branch's `data/fs131/reports/FS131-I3i.md` |
+| FS131-I2i (wave 2 on Opus: 53 lines, the owed items, the gate, the landing; item 174) | Opus | `data/fs131/briefs/FS131-I2i-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2i.md` |
 
 
 **Implementers are Opus from now on** (Kooshi, item 137): the four Sonnet implementers above finish on Sonnet; each successor launches with `model: "opus"` (the agent file says so too) and counts one slot.
 
-| FS131-QA2 (impossible-assumption audit, read-only; items 165–166) | Opus (special slot) | `data/fs131/briefs/FS131-QA2-impossible-assumptions.md` | `data/fs131/reports/FS131-QA2.md` |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. A notification arrives when each hands back; if the session restarted, resume a job from
 its record's last SAVED stage with a fresh agent on the same brief.
