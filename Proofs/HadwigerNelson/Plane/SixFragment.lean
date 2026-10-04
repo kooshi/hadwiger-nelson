@@ -127,7 +127,23 @@ theorem sixFrag_coloursAt_zero : sixFrag.coloursAt 0 = univ := by
 
 /-- **FS116-Y2-SIXFRAG**, the ring lies in `Γ`. -/
 theorem sixFrag_sphere_subset_Γ : sphere (0 : ℂ) 1 ⊆ sixFrag.Γ := by
-  sorry
+  intro x hx
+  have hn : ‖x‖ = 1 := by simpa using hx
+  have hxe : x = e (Complex.arg x) := by
+    have := Complex.norm_mul_exp_arg_mul_I x
+    rw [hn, Complex.ofReal_one, one_mul] at this
+    exact this.symm
+  refine ⟨by simp [sixFrag, hn]; norm_num, ?_⟩
+  refine mem_iUnion₂.mpr ⟨.circ 0 1 0 (2 * π), by simp [sixFrag, sixArcs], ?_⟩
+  have hπ := Real.pi_pos
+  by_cases h0 : 0 ≤ Complex.arg x
+  · refine ⟨Complex.arg x, ⟨h0, by linarith [Complex.arg_le_pi x]⟩, ?_⟩
+    show (0 : ℂ) + 1 * e (Complex.arg x) = x
+    rw [zero_add, one_mul]; exact hxe.symm
+  · push Not at h0
+    refine ⟨Complex.arg x + 2 * π, ⟨by linarith [Complex.neg_pi_lt_arg x], by linarith⟩, ?_⟩
+    show (0 : ℂ) + 1 * e (Complex.arg x + 2 * π) = x
+    rw [zero_add, one_mul, e_add_two_pi]; exact hxe.symm
 
 /-- **FS116-Y2-SIXFRAG**, every arc of `Γ` on `ω(0)` (with constant sides) is a (Q) arc. -/
 theorem sixFrag_isQArc {θ₁ θ₂ : ℝ} {c c' : Fin 6} (h : sixFrag.IsRingArc 0 θ₁ θ₂ c c') :

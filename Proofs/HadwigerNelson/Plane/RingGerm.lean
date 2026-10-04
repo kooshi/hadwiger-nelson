@@ -483,7 +483,7 @@ theorem IsChangePoint.ncard_add_two_le (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X X'
 /-- **FS116-N1-GERM-S**, the count: at a change point `y = r(ψ)` of the ring of a vertex `p` of at least four colours with at
 most two colours absent, exactly two are absent — `X` (the ring's colour just counter-clockwise of `y`) and `X'` (`X̄`, just
 clockwise). At `k = 6`: "`p` has four colours and no more, `X` and `X̄` are the colours absent at `p`". -/
-theorem germS_absent (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
+theorem germS_absent (hF : F.Valid) {p : ℂ} (_hp : F.Covers p 1) (_h4 : 4 ≤ (F.coloursAt p).ncard)
     (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X') :
     (F.coloursAt p).ncard + 2 = k ∧ (F.coloursAt p)ᶜ = {X, X'} := by
   have hle := hy.ncard_add_two_le hF
@@ -550,7 +550,7 @@ theorem qfree4 (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.colou
 
 /-- **FS116-N2-FIVERING**, first clause (and FS116-RING-TRANSFER-C's "a ring of five colours has no change point"): the ring
 of a vertex of at least four colours with exactly one colour absent has no change point. -/
-theorem fiveRing_no_changePoint (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
+theorem fiveRing_no_changePoint (hF : F.Valid) {p : ℂ} (_hp : F.Covers p 1) (_h4 : 4 ≤ (F.coloursAt p).ncard)
     (hk : (F.coloursAt p).ncard + 1 = k) (ψ : ℝ) (X X' : Fin k) : ¬ F.IsChangePoint p ψ X X' := by
   intro hy
   have := hy.ncard_add_two_le hF
@@ -768,7 +768,7 @@ theorem echo_of_mem_closure (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X : Fin k} (hcw
 /-- **FS116-N1-ECHO**, the row's form (reading (B)): if `w` is an essential boundary point at which the map is saturated and
 `X` is in `w`'s essential multicolour, `2w − p` lies in the closure of the class of `X`. -/
 theorem echo (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X : Fin k} (hcw : GermIn p ψ .cw (F.region X))
-    (hccw : GermIn p ψ .ccw (F.region X)) (hX : X ∉ F.coloursAt p) (hess : F.IsEssBoundary (ringPt p ψ))
+    (hccw : GermIn p ψ .ccw (F.region X)) (hX : X ∉ F.coloursAt p) (_hess : F.IsEssBoundary (ringPt p ψ))
     (hsat : F.SaturatedAt (ringPt p ψ)) (hXw : X ∈ F.essColours (ringPt p ψ)) :
     X ∈ F.coloursAt (2 * ringPt p ψ - p) := by
   obtain ⟨x, hx, h1⟩ := hsat X hXw
