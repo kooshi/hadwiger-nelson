@@ -223,3 +223,14 @@ reason by the close.*
     the stronger lemma. Confidence: medium-high (one mind for the every-k route; the kernel decides). Correction owed: an erratum on SUPK's not-claimed
     line (the value-1 a.e.-cover form holds at every k and COMP reads it), and on the merge line `data/fs129/l1/merges.csv` / `plans/FS129-SR2-audit.md`
     § 4.3 that put SUPK in SUP's place — for the record job.
+35. **Item 30 done — FS131-T1** (report `data/fs131/reports/FS131-T1.md`, commit `49c3abb8`): the vacuity scan tracks `AeColouring` and `ArcMap.Valid`,
+    `NonSiamese`, `Simple` (each structure's in-or-out call argued in `trackedProps`' docstring, with a four-step note for a later wave's carriers); a new
+    filter skips a structure's machine-written API at site-making; `--self-test` plants 14 controls. Keryx's receipt: the main tree's scan log
+    (`build/gate/vacuity/20261004T062713Z-1619534.log`) reads sites 280, generic 258, all else unchanged — one new site,
+    `HadwigerNelson.Plane.chiM0_le :: AeColouring k`; the final self-test (`data/fs131/t1/selftest-3.log`) ends "every control fired". Filed from T1's drafts:
+    `CLAUDE.md` § The gate and `scripts/vacuity-baseline.txt`'s header (sites 280, generic 258; both digests "match"), `LEAN.md` § The gate's control count
+    ("fourteen"). Held: control 10 uses `AeColouring 3` — retarget it if the library ever refutes that instance.
+36. **Tool defect — a theorem concluding `≠` or `¬` is skipped as a refutation** (T1): the reducing telescope turns the conclusion into `… → False`, so such a
+    theorem makes no site, and over a concrete empty carrier it would be silent — wider than `LEAN.md` § The gate's law, which skips declarations concluding
+    `False`. Pre-existing. Job FS131-T2 (`data/fs131/briefs/FS131-T2-vacuity-negations.md`, `debruijn-implementer`, Sonnet, main tree), gated PASS; before
+    wave 2 lands.
