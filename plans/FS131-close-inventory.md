@@ -1573,3 +1573,9 @@ reason by the close.*
 219. **Brief FS131-IC2, wave 4's second `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC2-contact.md`, derived by script from IC1's, title line fixed,
      gated PASS): `Contact`'s 6 on `fs131-w4c`, no merge or gate of its own. Launched in IC1's slot. Note: IC1 prices each of the 6 at about a session, so
      `Contact` (not `BaseSteps`/`UnitArc`) is now wave 4's long pole.
+220. **Claim list and brief FS131-E4, the deriver on GAP-ELEVEN** (Ephodos, Opus; `data/fs131/claims-E4.md`, every source copied by script;
+     `data/fs131/briefs/FS131-E4-eleventh-point.md`, gated PASS): Q1 the enclosure case under the base's hypotheses (exclusion or exact configuration), Q2 the
+     count without the eleventh point, Q3 the repair and its cost, Q4 whether rows 134, 135, 137 as filed read the local base. Launched in KB's slot: 1 (I2m) +
+     1 (I4h) + 1 (IC2) + 1 (E4) = 4. **Announcement rule for E4's verdict** (written before its report): a configuration counts as realized only if it is given
+     exactly and its validity and the base's hypotheses are checked by exact arithmetic with a red control; a derivation counts as one mind; any change to a filed
+     row is reported to Kooshi with its mind count, and filed only at the milestone's filing.
