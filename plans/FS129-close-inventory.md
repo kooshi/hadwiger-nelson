@@ -581,3 +581,32 @@ One line per item with its source; no narration. Each line is ticked done or dec
      (the re-rank; `poros`, Opus; `data/fs129/briefs/FS129-P1-rerank.md`), both gated PASS, at `fc9a4ac1`. Running: the Searcher, L1, P1 — the cap of
      three. When both report: Keryx files the front page from Z2's drafts and P1's re-rank (the filing, by the Clerk as pen if large), and FS-129 is
      Derived.
+149. **The day's Searcher reported DONE** (`data/search/2026-10-03/report.md`; record `plans/SEARCH-2026-10-03.md`; ≈284k by the harness). Row 1:
+     **yes** — Γ₁₁ has a proper five-colouring whose closed neighbourhood at (0, 0) shows three colours (SEARCH-1003-G11-DG [cert]); by its
+     requester's reading ("A yes empties FALC-11's exception (t ≡ a)", `plans/SEARCH-QUEUE.md` row 1), FS129-OA1-FALC-11's exception is empty.
+     Row 5: U₄ yes (SEARCH-1003-U4-GAP [cert]; by FS129-MA2-FALC-GAP4, no five-colour Falconer fan over a field with a dyadic place inert in F(i)
+     of norm 4); U₈ no and U₁₆ no (SEARCH-1003-U8-NOGAP, -U16-NOGAP [cert: LRAT, cake_lpr]; GAP4 does not apply at norms 8, 16, so FALC-HOSTS's
+     open fields stay open there); U₁₆ is slack yet gap-free at four colours — G54's middle case, seen before only at row 87's Cay(Λ/16Λ, U)
+     [tools]. Row 2 moot; row 3 not run (held). **Keryx's receipt**: an independent script rebuilt Γ₁₁ from its definition and checked the row-1
+     colouring — 0 improper pairs, (0, 0)'s closed neighbourhood shows 3 colours, a planted recolouring gives 6 improper pairs; `cake_lpr` re-run
+     on `data/search/2026-10-03/row5/uq3-k4-g1-plain.cnf` with its LRAT — "s VERIFIED UNSAT", exit 0.
+150. **Ruling — queue row 4 (Γ₁₉ with a double gap) dropped**: 940 of 1,024 cubes refuted with verified proofs, 84 unknown, none SAT; its
+     continuation costs hours of all cores and 30–60 GB more proof (`plans/SEARCH-2026-10-03.md` § 5). Alternative: run the continuation.
+     Why: its requester rated it low priority (no field with a residue-𝔽₁₉ prime contains √3), and the likely answer, no, changes no result;
+     FS129-MA1-FALC-19 keeps its exception as filed. Confidence: high.
+151. **Held for Kooshi — 46 GB of partial proofs** at `data/search/2026-10-03/row4/cubes-s10-pass1/*.lrat.gz`, uncommitted. Keryx added a
+     path-specific line to `.gitignore` so no `git add` takes them (a blanket `*.lrat.gz` would also hide row 5's committed certificates).
+     Default: kept on disk, ignored. Alternative: delete them (they certify the 940 refuted cubes of a dropped request). Deletion is not
+     reversible, so it waits for his word.
+152. **Filed by Keryx from the Searcher's drafts** (§ 5): `RUNNING.md` § Toolchain — `cake_lpr` moved out of "Not installed" (built at
+     `~/source/cake_lpr/cake_lpr`, 2026-09-24); `plans/SEARCH-QUEUE.md` fates for rows 1, 2, 4, 5.
+153. **For the front page's filing** (FS-129's): FS129-OA1-FALC-11's exception is empty by SEARCH-1003-G11-DG (item 149) — a dated note under the
+     entry in `plans/FS129-derivation.md`, quoting row 1's own reading; and SEARCH-1003-U4-GAP's consequence by GAP4 under FS129-MA2-FALC-HOSTS.
+     The filing's pen adds them from the Searcher's record § 2.3–2.4, verbatim.
+154. **Tool defects** (the Searcher): `tools/portfolio.sh` line 7 (`D=$(mktemp -d)`) writes its eight configurations' ASCII LRAT proofs to `/tmp`,
+     which is RAM here (on Γ₁₉, cadical wrote 1.1 GB in 136 s) — correction owed, for a tooling job (`debruijn-implementer`); `.gitignore`
+     covered `*.lrat` but not `*.lrat.gz` (item 151's line covers the one directory). **Statement defect**: queue row 2's wording did not pin what
+     it decides (moot). **Slip**, self-reported: the first row-4/row-5 launch ran without a slot (stopped by process group, relaunched under
+     `scripts/slot.py`). **Question for Ephodos**: what makes U₁₆ gap-free while slack — do its four-colourings pull back from a tight quotient, as
+     row 87's do? For a future stub line (FS-129's filing carries it to FS129-P1's re-rank if it lands in time, else the next record job).
+     **The Searcher's registration**: E1, E3, E4 met; E5 (U₁₆ yes, 0.7) and E6 missed; E2 unscored.
