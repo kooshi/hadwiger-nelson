@@ -167,3 +167,13 @@ From the gate above (FS131-I3i, 2026-10-04; if another branch lands first, its r
    its two germs), one sector per Jordan tile and the separated interval (FS131-E2-SECT, -ONESECT, -SEP), and FS116-V5-U1's four-colour clause in the
    simple class with cusps (FS131-E2-U1-CUSP),". Nothing for `LEDGER.md` (rows are regraded at the milestone's filing); there FS131-E2-SECT, -ONESECT,
    -SEP and -U1-CUSP move from [hand]/[derived] to [kernel].
+
+## Stage 4 — SAVED: the landing
+
+`origin/main` moved after stage 3 (`f833838a`: QA2, W3, I4c briefs; plans, data and `tools/fs131_qa2_census.py` only, no `Proofs/` or `scripts/` change);
+merged again as `746a7b80`, and the gate re-run there: build "all 1737 modules already up to date, nothing built, 0 module(s) with warnings"
+(`data/fs131/i3i/build-gate2.log`, `build/gate/build/20261004T152357Z-336277.log`); axioms "OK — 1856 clean, 11 axiom-free, 0 imported, 5 declared
+purchase(s)" (`data/fs131/i3i/axioms-gate2.log`, `build/gate/axioms/20261004T152427Z-338905.log`); vacuity "OK", counts as stage 3
+(`data/fs131/i3i/vacuity-gate2.log`, `build/gate/vacuity/20261004T152430Z-339294.log`); `check_architecture` PASS (`data/fs131/i3i/arch2.log`). Then
+`origin/main` fast-forwarded to this branch by `git push origin HEAD:main` (the commit carrying this stage and the report). The main tree's local `main`
+was not touched.
