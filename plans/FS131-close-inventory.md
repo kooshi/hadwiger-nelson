@@ -1579,3 +1579,17 @@ reason by the close.*
      1 (I4h) + 1 (IC2) + 1 (E4) = 4. **Announcement rule for E4's verdict** (written before its report): a configuration counts as realized only if it is given
      exactly and its validity and the base's hypotheses are checked by exact arithmetic with a red control; a derivation counts as one mind; any change to a filed
      row is reported to Kooshi with its mind count, and filed only at the milestone's filing.
+221. **FS131-I4h handed back at stage 21, harness ≈ 440k** (report `data/fs131/reports/FS131-I4h.md` on `fs131-w4`; branch at `22820927`, checked): its files 24 →
+     19 (BaseSteps 7, UnitArc 12). **[kernel] on the branch, standard three**: FS114-L60-LE's L60-REAL (`ArcMap.l60_real`: the fragment valid, the arc `r([0, 60°])`
+     of `ω(0)` an arc of Γ with constant sides 0 inside, 1 outside, a neighbourhood of it in the domain) and **FS112-N2-BENDS's N2-ENV sorry-free** —
+     `n2_env_toward` (ψ = min(1, r/9)), `n2_env_away` (ψ = min(1/2, r/4)), `n2_env_near` (ψ = (1 − cos(ℓ/2))/π), `n2_env_near_away` — with 31 children (a general
+     Reuleaux diameter bound `dist_le_one_of_mem_reul`, the lens estimate `lens_dot_ge`, the sine gap `sin_add_sin_sub_sin_ge`). Keryx's receipts: build log
+     `build/gate/build/20261004T193948Z-1860590.log` (w4) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `sorry` lines by count
+     Contact 10 (IC2's, on `fs131-w4c`), UnitArc 12, BaseSteps 7; `data/fs131/i4/axioms-i4h-*.txt` print the five on the standard three. Route notes: N2-ENV
+     near is a lens estimate (I4f's correction confirmed); `n2_env_away` works on the whole arc with an end frame at each end. **Tool defect repaired** (I4h's):
+     `data/fs131/i4/iter.sh`, `chk.sh` had a hard-coded scratch mirror two parallel implementers would share; now read from `S`. Honest gap: L60-REAL's probe tool
+     `tools/fs114_l60_check.py FRAG` not re-run (the proof covers every pair class). Engine 2 not reached (item 218 (g) carried). **Technique filed** to
+     `LEAN.md` § Searching — Lean: `nlinarith` heartbeats in a large context — state each inequality as a small real-variable lemma.
+222. **Brief FS131-I4i, wave 4's ninth implementer** (Opus; `data/fs131/briefs/FS131-I4i-wave4.md`, derived by script from I4h's — source headings checked to name
+     real headings after the rename — gated PASS): `UnitArc` and `BaseSteps`' 19 in Stage 21's order (engine 2 first). Launched in I4h's slot: 1 (I2m) + 1 (IC2)
+     + 1 (E4) + 1 (I4i) = 4.
