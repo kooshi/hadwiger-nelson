@@ -935,7 +935,30 @@ theorem fiveRing_no_changePoint (hF : F.Valid) {p : ℂ} (_hp : F.Covers p 1) (_
 theorem fiveRing_finite_off_Q (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
     (hk : (F.coloursAt p).ncard + 1 = k) :
     {θ | θ ∈ Ico 0 (2 * π) ∧ ¬ F.OnQArc p (ringPt p θ) ∧ ¬ F.OnQArc p (ringPt p (θ + π / 3))}.Finite := by
-  sorry
+  have hπ := Real.pi_pos
+  have hex : ∃ X, X ∉ F.coloursAt p := by
+    by_contra hno
+    push Not at hno
+    have : F.coloursAt p = univ := eq_univ_of_forall hno
+    have h := Set.ncard_univ (Fin k)
+    rw [this, Set.ncard_univ, Nat.card_eq_fintype_card, Fintype.card_fin] at hk
+    omega
+  obtain ⟨X, hX⟩ := hex
+  have hab : ∀ d, d ∉ F.coloursAt p → d = X := fun d hd => absent_subsingleton (by omega) d X hd hX
+  refine ((finite_not_regular hp (4 * π)).union ((finite_not_regular hp (4 * π)).image
+    (fun θ => θ - π / 3))).subset ?_
+  rintro θ ⟨hθ, hQ, hQ'⟩
+  by_contra hnot
+  simp only [mem_union, mem_image, not_or, not_exists, not_and] at hnot
+  have h1 : F.RegularAt p θ := by
+    by_contra h
+    exact hnot.1 ⟨⟨hθ.1, by linarith [hθ.2]⟩, h⟩
+  have h2 : F.RegularAt p (θ + π / 3) := by
+    by_contra h
+    exact hnot.2 (θ + π / 3) ⟨⟨by linarith [hθ.1], by linarith [hθ.2]⟩, h⟩ (by ring)
+  have c1 := carries_absent hF hp h4 hab hQ h1
+  have c2 := carries_absent hF hp h4 hab hQ' h2
+  exact c1.2 1 (Or.inl rfl) (by simpa using c2.1)
 
 /-- **FS116-N2-FIVERING** (and FS112-SIX's five-colour clause): the (Q) arcs of the ring have total length at least `180°`
 (arc-length of the set of angles in `[0, 2π)` whose ring point lies on a closed (Q) arc). -/
