@@ -631,3 +631,70 @@ again (K2c priced the modification at 25k, the fringe colouring at 70k).
 `eventually_le_muPer` (SUPK's lower bound); the compactness block `exists_weakStar_subseq`, `convForm_tendsto`, `exists_twoCircle_density`,
 `integral_circleAvg_sq`, `unitForm_tendsto`, `exists_translates_small_hole`, `ae_sum_eq_one_of_weakStar`, `chiM0_le_iff_muZero_eq_one`,
 `exists_bandNull_aeCover_of_mu_eq_one`. CoverExamples — unchanged from Stage 15's list.
+
+## Stage 18 — SAVED (FS131-I2i): the owed docstrings; builds green; handoff — 46 `sorry` left
+
+**Builds** (`./scripts/build.sh` under the slot, `MEMMAX=40G BATCH=4`): at `50a034b9` OK, 446 of 446 batches, 4 modules rebuilt, 46 warnings, every
+one `declaration uses 'sorry'` (`build/gate/build/20261004T155659Z-500816.log`); after the docstring pass at `91a0a02a` OK, 11 modules rebuilt, 46
+warnings, all `sorry` (`build/gate/build/20261004T161336Z-632794.log`); at `aeab5813` (the last Lean commit) OK, 4 modules rebuilt, 46 warnings, all `sorry` (`build/gate/build/20261004T162337Z-697910.log`).
+
+**Axioms**, printed from the built library at `50a034b9` with `lake env lean data/fs131/i2/i2i-axioms.lean` (not `scripts/axioms.sh`, which fails
+on the remaining `sorry` by design): `data/fs131/i2/i2i-axioms.txt`, 26 records. Every declaration of this session and every row it closes reads
+the standard three. Negative control in the same file: `eventually_le_muPer` and `tendsto_mu` (SUPK's lower bound still open) print `sorryAx` —
+the check can fire.
+
+**Owed items done** (inventory item 144 (d)):
+- **Docstrings for the wave-2 theorems that lacked them**: 86 (QA1 counted 84 at its commit), listed by the new tool `tools/fs131_i2_docs.py`
+  (wave 2's ten modules and three foundation modules, as this brief's `touches:` names them, parsed by `fs131_qa1_decls.parse`, unedited),
+  inserted by `data/fs131/i2/i2i_add_docstrings.py` from `data/fs131/i2/i2i-docs-before.txt`, each read against its statement. **The tool
+  fails before and passes after**: exit 1 with 86 listed at `50a034b9`, exit 0 with 0 listed at `91a0a02a`; its `--self-test` plants an
+  undocumented theorem beside a documented one and passes only if exactly the first is listed. (`tools/fs131_qa1_quality.py` was run once
+  for its counts; it rewrote `data/fs131/qa1/quality.json`, another job's file, which was restored with `git checkout` and not committed.)
+- **FALC-HOSTS (iv)'s docstring** (`falconerFan_five_mem_P`, `Arith/FalconerField.lean`): now says the frame proves only that a fan's `t − a`
+  is a non-zero forced difference of `R` (in the forced set, which is then not `{0}`, so `P` by `hR88`), the fields and `P = R ∩ 𝔓⁴` entering
+  only on instantiation — checked against the proof (`hforced`, `hba`).
+- `exists_not_uniform_kept`'s docstring names the witness proved (the stripe colouring) beside the row's zigzag colouring.
+
+**Not done, owed before the gate**: wave 2's vacuity carriers. A recommendation for whoever runs the gate (decided by reading, not run): **IN**
+`CPColouring` — a type whose emptiness is a theorem (`IsEmpty (CPColouring 0)`, `IsEmpty (CPColouring 1)` in `Plane/CPColouring`; inhabited at
+`9` by `nonempty_cpColouring_nine`), exactly `AeColouring`'s shape; **OUT, by T1's set-variable rule** `IsPartialColouring`, `IsAdmissible`,
+`IsAeCover`, `IsMaximalCover`, `IsTiled`, `IsPeriodic`, `IsMaxIn` — predicates of a family or set variable, `GENERIC` at every site, unless a
+theorem of the `¬ P` shape at a concrete instance exists (then IN, as wave 3 did for `IsRingArc`). Each IN carrier needs its control in
+`scripts/vacuity-controls.lean` and the counts reconciled by a run — none of that was done here.
+
+**Still `sorry`** (46): `Plane/Slack` 12 — `exists_squareWin_dense`, `exists_tiled_kept`, `eventually_le_muPer` (SUPK's lower bound: the window
+average, the pixelation, the assembly; the three limits `tendsto_mu`, `tendsto_muTile`, `tendsto_muPer` wait only on these); the compactness block
+`exists_weakStar_subseq`, `convForm_tendsto`, `exists_twoCircle_density`, `integral_circleAvg_sq`, `unitForm_tendsto`,
+`exists_translates_small_hole`, `ae_sum_eq_one_of_weakStar`, and its assemblies `chiM0_le_iff_muZero_eq_one` (FS116-O1-YESLIM's last wait),
+`exists_bandNull_aeCover_of_mu_eq_one`. `Plane/CoverExamples` 34 — R7 8, (G1) 4, HC/IRREG 22, as Stage 15 lists them.
+
+**For the next implementer.** (1) Cheapest next: the (G1) children (route in Stage 15; `g′ = uv(v − u)/2` on a gap, `|g″| ≤ 1/2`, `g′ = 0` on `Z`;
+for the lower parabola use monotonicity of `h(s) = g(s) − g(σ) − g′(σ)(s − σ) + (s − σ)²/4` on `[σ, 1/2]` and `[−1/2, σ]` —
+`monotoneOn_of_deriv_nonneg` — instead of an integral Taylor bound), `exists_near_hcFace`, then `exists_squareWin_dense` (average over the
+`ℓ`-grid squares meeting `B(0, R)`; `volume_squareWin` and the tiling squeeze of Stage 14 are in place). (2) The compactness block is the hard
+remainder: weak-* compactness of `[0, 1]`-valued families and the Rajchman step. (3) Iteration: `lake env lean -DautoImplicit=false` on a
+scratch file importing the built `Plane/Slack` (seconds), then on the module in place (about 15 s).
+
+**Re-pricing, overall**: about 180k tokens of this session went to proofs for 7 leaves and 12 children (Slack 19 → 12) — the modification and its
+a.e. properness 12k, the Markov assembly 6k, the stripe colouring 20k, translation continuity 10k, the polar change of variables 25k, the
+density-point leaf 6k — and about 40k to the docstring pass, the tool and the builds.
+
+## Theorems this phase proved (FS131-I2i, additions)
+
+Axioms read from `data/fs131/i2/i2i-axioms.txt` (printed from the built library at `50a034b9`; the gate was not run). Each read against its
+docstring, which carries the row.
+- `HadwigerNelson.Plane.exists_not_uniform_kept` — `[propext, Classical.choice, Quot.sound]` — FS106-REM, third clause (ruling item 63's `η < 1`):
+  some measurable colouring proper at every unit pair has, at every scale, a unit square of non-kept points (here: all of it).
+- `HadwigerNelson.Plane.CPColouring.tendsto_not_kept` — the standard three — FS106-REM, second clause. **FS106-REM is sorry-free.**
+- `HadwigerNelson.Plane.chiM0_le_chiCP` — the standard three — FS106-EQ's easy direction (`χ_m⁰ ≤ χ_CP`), now through proved children.
+- `HadwigerNelson.Plane.AeColouring.exists_tight`, `exists_tight_iff_chiM0_le` — the standard three — FS111-V0-RESCALE. **Sorry-free.**
+- Children and leaves, each the standard three: `CPColouring.exists_modification`, `CPColouring.ae_unitPairsNull_of_modification`,
+  `CPColouring.law_ge_ball_ne_le`, `continuous_pairMass`, `tendsto_measure_inter_of_symmDiff`, `ae_pairMass_eq_zero`, `arcLength_eq_volume_Ioo`,
+  `lintegral_Ioo_angle_le`, `AeColouring.exists_pos_not_iccPairNull`, `volume_floor_emod_le`, `volume_floor_mul_emod_le`, `measurable_stripeIdx`,
+  `volume_box_stripe_le`, `measurable_stripeCol`, `stripeCol_ne_of_dist_eq_one`; and through them `pairMass_eq_zero_of_iccPairNull`,
+  `bandNull_unitPairsNull`, `mu_le_muZero`.
+
+## Drafts for the front page (FS131-I2i)
+
+None: the gate was not run (46 `sorry` remain in wave 2's modules), so no count in `CLAUDE.md` § The gate or § Trust ledger moves, and no
+ledger row is regraded.
