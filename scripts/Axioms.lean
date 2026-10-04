@@ -3191,6 +3191,50 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.isCubicTrichromatic_of_three_of_noRep
 #print axioms HadwigerNelson.Thomassen.triLattice_adj
 
+/-! ## FS-131 wave 5 (job FS131-I5c) — wave 5's third implementer: the brick infrastructure, the seven-colour inhabitants -/
+
+#print axioms HadwigerNelson.Plane.mem_brickCell
+#print axioms HadwigerNelson.Plane.isOpen_brickCell
+#print axioms HadwigerNelson.Plane.convex_brickCell
+#print axioms HadwigerNelson.Plane.closure_brickCell
+#print axioms HadwigerNelson.Plane.mem_closure_brickCell
+#print axioms HadwigerNelson.Plane.brickCell_eq_of_mem
+#print axioms HadwigerNelson.Plane.disjoint_brickCell
+#print axioms HadwigerNelson.Plane.brickCell_eq_of_mem_closure
+#print axioms HadwigerNelson.Plane.sevenBrick_floor_bounds
+#print axioms HadwigerNelson.Plane.sevenBrick_mem_interiorPts
+#print axioms HadwigerNelson.Plane.sevenBrick_grid_of_not_mem
+#print axioms HadwigerNelson.Plane.sevenBrick_grid_of_not_mem_interiorPts
+#print axioms HadwigerNelson.Plane.sevenBrick_col_val
+#print axioms HadwigerNelson.Plane.sevenBrick_dvd_of_col_eq
+#print axioms HadwigerNelson.Plane.brickCell_pair
+#print axioms HadwigerNelson.Plane.brickCell_eq_of_closure
+#print axioms HadwigerNelson.Plane.sevenBrick_interiorPts_inter_ball
+#print axioms HadwigerNelson.Plane.sevenBrick_component
+#print axioms HadwigerNelson.Plane.sevenBrick_isSector_iff
+#print axioms HadwigerNelson.Plane.sevenBrick_sector_data
+#print axioms HadwigerNelson.Plane.sevenBrick_sectorsOf_subsingleton
+#print axioms HadwigerNelson.Plane.sevenBrick_encard_sectorsOf_le
+#print axioms HadwigerNelson.Plane.sevenBrick_not_hasRepeatedColour
+#print axioms HadwigerNelson.Plane.sevenBrick_not_mergeAvailable
+#print axioms HadwigerNelson.Plane.sevenBrick_isTile_iff
+#print axioms HadwigerNelson.Plane.encard_brickCellsAt_le
+#print axioms HadwigerNelson.Plane.sevenBrick_encard_sectors_le
+#print axioms HadwigerNelson.Plane.sevenBrick_ncard_coloursAt_le
+#print axioms HadwigerNelson.Plane.countable_setOf_sin_eq
+#print axioms HadwigerNelson.Plane.countable_setOf_cos_eq
+#print axioms HadwigerNelson.Plane.countable_circle_grid
+#print axioms HadwigerNelson.Plane.branchPt_re_im
+#print axioms HadwigerNelson.Plane.sevenBrick_branch_false
+#print axioms HadwigerNelson.Plane.sevenBrick_not_isHorn
+#print axioms HadwigerNelson.Plane.sevenBrick_ringArc_not_subset
+#print axioms HadwigerNelson.Plane.sevenBrick_not_isRingArc
+#print axioms HadwigerNelson.Plane.isPreconnected_compl_reProdIm_Icc
+#print axioms HadwigerNelson.Plane.sevenBrick_not_isBounded_component
+#print axioms HadwigerNelson.Plane.sevenBrick_unenclosedC
+#print axioms HadwigerNelson.Plane.sevenBrick_baseHyp
+#print axioms HadwigerNelson.Plane.sevenBrick_noInertNear
+
 /-! ## FS-131 wave 5 (job FS131-I5b) — wave 5's second implementer: Lemma 1's children, the holed fragment -/
 
 #print axioms HadwigerNelson.Thomassen.LocallyHamiltonian.exists_two_common

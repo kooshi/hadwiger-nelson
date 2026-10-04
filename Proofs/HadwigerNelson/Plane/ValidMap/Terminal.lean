@@ -2,6 +2,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.Chain
 import Proofs.HadwigerNelson.Plane.ValidMap.Contact
 import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
+import Proofs.HadwigerNelson.Plane.ValidMap.BrickMap
 
 /-!
 # The terminal modification `M*` and the stuck chains' ends (FS112-N2-TERM, -C-ENDS, -C-DOUBLE, FS114-CV-HD)
@@ -52,8 +53,11 @@ variable {k : ℕ} {F : ArcMap k}
 in `[−1, 1]`", `plans/FS114-CVB-verification.md` § 1.3). Not a backlog row (FS112-WALK is declined, a verdict table): a supporting lemma
 of wave 5. At a stuck vertex `v` of a valid map with at most three colours there, the colour `c` with two or more sectors has exactly two,
 cusp horns along `±e α` with bounding curvatures in `[−1, 1]`, out-type `c`-contacts at `v ± n`; `P_cl(v) = {c, g, h}` with degree `4`,
-the interior points near `v` above the axis of colour `g` or `c` and below it of colour `h` or `c`, `g` the upper flank and `h` the lower
-flank of both horns. Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_isStuck`, `bowtie_coloursAt_zero`). -/
+the interior points near `v` above the parabola `frameY = ‖z − v‖²/2` of colour `g` and below `frameY = −‖z − v‖²/2` of colour `h` (the sides
+clause in inventory item 252's form (b), the point form outside the parabola: both horns, of curvatures in `[−1, 1]`, lie in
+`|frameY| ≤ ‖z − v‖²/2`, so "the side off the horns is filled by `g` above and `h` below", as the derivation's (ii) says), `g` the upper flank
+and `h` the lower flank of both horns (the flank conjuncts, kept beside it by the same ruling). Inhabitant of the hypotheses: `bowtie` at `0`
+(`bowtie_isStuck`, `bowtie_coloursAt_zero`). -/
 theorem stuck_structure_ua (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hst : F.IsStuck v)
     (h3 : (F.coloursAt v).ncard ≤ 3) {c : Fin k} {m : ℕ} (hm : 2 ≤ m) (hc : F.HasSectors v c m) :
     ∃ α κ₁ κ₂ κ₃ κ₄ : ℝ, ∃ g h : Fin k,
@@ -61,7 +65,7 @@ theorem stuck_structure_ua (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hst : F
       F.HasSectors v c 2 ∧ F.HasDegree v 4 ∧ F.coloursAt v = {c, g, h} ∧ g ≠ h ∧ g ≠ c ∧ h ≠ c ∧
       F.IsFlankAbove v α κ₂ g ∧ F.IsFlankBelow v α κ₁ h ∧ F.IsFlankAbove v (α + π) κ₄ h ∧ F.IsFlankBelow v (α + π) κ₃ g ∧
       (∀ᶠ ρ in 𝓝[>] (0 : ℝ), ∀ z ∈ F.interiorPts ∩ ball v ρ,
-        (0 < frameY v α z → F.col z = g ∨ F.col z = c) ∧ (frameY v α z < 0 → F.col z = h ∨ F.col z = c)) ∧
+        (‖z - v‖ ^ 2 / 2 < frameY v α z → F.col z = g) ∧ (frameY v α z < -(‖z - v‖ ^ 2 / 2) → F.col z = h)) ∧
       (F.IsContact v c (v + e (α + π / 2)) ∧ F.OutType v c (v + e (α + π / 2))) ∧
       (F.IsContact v c (v - e (α + π / 2)) ∧ F.OutType v c (v - e (α + π / 2))) := by
   sorry
@@ -235,7 +239,10 @@ end ArcMap
 the seven-brick map is valid, of the plane, has no horn and no point of a repeated colour (so no move is available anywhere: `Terminal`),
 and no arc of `Γ` on any unit circle (so `QROnly` holds vacuously in its arcs' sense — every constant-sided unit arc, of which there are
 none, is (Q) or (R2)). -/
-theorem sevenBrickMap_isTerminalMap : sevenBrickMap.IsTerminalMap := by
-  sorry
+theorem sevenBrickMap_isTerminalMap : sevenBrickMap.IsTerminalMap :=
+  ⟨sevenBrickMap_valid, sevenBrickMap_isPlaneMap,
+    fun v _ => ⟨sevenBrick_not_mergeAvailable v, fun ⟨_, _, _, _, _, _, _, H, _⟩ => sevenBrick_not_isHorn H,
+      fun ⟨_, _, _, _, _, _, _, H, _⟩ => sevenBrick_not_isHorn H⟩,
+    fun _ _ _ _ _ h => absurd h sevenBrick_not_isRingArc⟩
 
 end HadwigerNelson.Plane

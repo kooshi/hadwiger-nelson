@@ -71,7 +71,8 @@ open rectangles, whose closures have connected, unbounded complements: `Unenclos
 are load-bearing, and the hypothesis is not true for a reason that ignores the colour count. -/
 theorem not_row134BaseUA_seven :
     ¬ ∀ (F : ArcMap 7) (u : ℂ), F.Valid → F.Covers u 2 → F.IsCubicTrichromatic u → F.BaseHyp u → F.NoInertNear u →
-      F.UnenclosedC u → False := by
-  sorry
+      F.UnenclosedC u → False := fun h =>
+  h sevenBrickMap 0 sevenBrickMap_valid (fun _ _ => mem_univ _) sevenBrick_corner_isCubicTrichromatic (sevenBrick_baseHyp 0)
+    (sevenBrick_noInertNear 0) (sevenBrick_unenclosedC 0)
 
 end HadwigerNelson.Plane
