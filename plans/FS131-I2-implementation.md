@@ -754,3 +754,67 @@ against the table's 50k; `convForm_tendsto` 6k against 30k.
 
 **Still `sorry`** (38): `Plane/Slack` 4 — `integral_circleAvg_sq`, `unitForm_tendsto` (the Rajchman step), and the two assemblies
 `chiM0_le_iff_muZero_eq_one`, `exists_bandNull_aeCover_of_mu_eq_one` (every child of the latter is now proved); `Plane/CoverExamples` 34.
+
+## Stage 21 — SAVED (FS131-I2j): the two compactness assemblies; Slack 4 → 2; the build is green; handoff — 36 `sorry` left
+
+**Closed** (statements untouched):
+- `exists_bandNull_aeCover_of_mu_eq_one` — translates with vanishing holes (`P` = band-null classes, `bandNull_preimage_add`), the weak-*
+  limit, `∑F = 1`; the band form of each translate is zero (a.e. slice of the band pair set is null), so by `convForm_tendsto` with the
+  annulus kernel the band form of each `F j` is zero, and being non-negative, `F j · (F j ⋆ κ) = 0` a.e.; selection `c`, classes `c⁻¹{j}`:
+  for a.e. `x` of class `j`, `F j x > 0`, so `F j(x + w) = 0` for a.e. `w` in the annulus, and the band slice lies in two null sets.
+  `hε` is idle (no sign of `ε` is read). **So FS106-COMP (`forall_mu_six_lt_one_iff`) is sorry-free.**
+- `chiM0_le_iff_muZero_eq_one` — ⟹: `exists_tight_iff_chiM0_le` gives an `AeColouring k`, then `one_le_muZero`, `muZero_le_one`. ⟸: the same
+  compactness argument with the unit form (`unitForm_tendsto`) in place of the band form; new child `ae_arcLength_null` (a null set meets
+  almost every unit circle in an arc-null set — Fubini on `(x, θ) ↦ x + e θ`), used three times because a planar null set can hold a whole
+  circle. The assembly is complete; it waits only on `unitForm_tendsto`, so `chiM0_le_iff_periodic`, `seven_le_chiM0_iff` and YESLIM's
+  `chiM0_le_of_fragments` still print `sorryAx` through it.
+
+**Build** at `dcd0668e`: `./scripts/build.sh` under the slot, OK — 446 of 446 batches, 4 modules rebuilt, 36 warnings, every one `declaration uses
+'sorry'` (`build/gate/build/20261004T171540Z-968137.log`). `tools/check_architecture.py`: PASS (Slack's new import).
+
+**Axioms**, printed from the built library with `lake env lean data/fs131/i2/i2j-axioms.lean` (not `scripts/axioms.sh`, which fails on the
+remaining `sorry` by design): `data/fs131/i2/i2j-axioms.txt`, 20 records. Every declaration this session closed reads the standard three.
+Negative control in the same file: `integral_circleAvg_sq`, `unitForm_tendsto` and `chiM0_le_iff_muZero_eq_one` print `sorryAx` — the
+check can fire.
+
+**Not done, owed before the gate**: wave 2's vacuity carriers (Stage 18's recommendation stands: `CPColouring` IN, the family and set predicates
+OUT by T1's set-variable rule; a control per IN carrier, counts reconciled by a run).
+
+**Still `sorry`** (36): `Plane/Slack` 2 — `integral_circleAvg_sq` and `unitForm_tendsto` (the Rajchman step); `Plane/CoverExamples` 34 — R7 8
+(`r7Col_mem_tile`, `r7Up_unitPair`, `r7Up_sep`, `r7Down_dist_ne_one`, `r7_boundary_lattice`, `r7_boundary_offLattice`, `r7_phi_pos_up`,
+`r7_phi_pos_down`), (G1) 4 (`hcGap_eq_of_gap`, `differentiable_hcGap`, `hcGap_bounds`, `hcGap_lowerParabola`), HC/IRREG 22 (`hcUpTri_frame`
+onward, § 17's list).
+
+**For the next implementer.** (1) `integral_circleAvg_sq`: `(∫_θ f)² = ∫∫ f(θ) f(φ)` on `arcLength ⊗ arcLength` (`integral_prod_mul`), swap with
+`x` (the integrand is bounded by `4 · 1_{B(0, R+1)}(x)`), translate `y = x + e θ` so the inner integral is `G(e φ − e θ)` with
+`G(w) = ∫ h(y) h(y + w) dy`, push `arcLength ⊗ arcLength` forward to `ρ · Leb` (equal on measurable sets by `hρN`; `Measure.ext`), then
+`integral_withDensity_eq_integral_smul` and one more Fubini (`|h(y) h(y+w) ρ(w)| ≤ 4 · 1_{B_R}(y) ρ(w)`). (2) `unitForm_tendsto`: truncate
+`g_m`, `F` to `B(0, R + 1)` (still weak-* convergent); `‖T(g_m − F)‖²_{L²} = ⟨h_m, h_m ⋆ ρ⟩` by `integral_circleAvg_sq`, which tends to `0` by
+`convForm_tendsto` (diagonal term) and weak-* (the two cross terms, the second after `w ↦ −w`, `ρ` even); then
+`|U(g_m) − U(F)| ≤ |∫_{B_R} g_m (T g_m − T F)| + |∫_{B_R} (g_m − F) T F|`, Cauchy–Schwarz on the first, weak-* on the second. (3) The cheapest
+CoverExamples leaves remain Stage 18's: the (G1) children and `exists_near_hcFace`. (4) Iteration as before: a scratch file importing the built
+module (`lake env lean -DautoImplicit=false`, seconds), the proof pasted in, then the module in place (about 17 s). Beware `∫ x, A - ∫ x, B`:
+the first binder swallows the subtraction; write `(∫ x, A) - ∫ x, B`.
+
+**Re-pricing, overall**: about 320k tokens this session (harness count from the launch figure), of which about 230k to proofs: 10 leaves and
+5 new children (Slack 12 → 2) — SUPK's three about 25k, the compactness children about 120k with `exists_weakStar_subseq` the largest
+(about 35k with its child), the two assemblies about 50k — and about 40k to readback, three builds, the axiom print and this record.
+
+## Theorems this phase proved (FS131-I2j, additions)
+
+Axioms read from `data/fs131/i2/i2j-axioms.txt` (printed from the built library at `dcd0668e`; the gate was not run). Each read against its
+docstring, which carries the row.
+- `HadwigerNelson.Plane.tendsto_mu`, `tendsto_muTile`, `tendsto_muPer` — `[propext, Classical.choice, Quot.sound]` — FS129-SR2-SUPK (carrying
+  FS106-SUP's first clause): `µ_k(ε)`, `µ_k^tile(ε)`, `µ_k^per(ε)` tend to `µ_k⁰` as `ε → 0⁺`. **Sorry-free.** With them
+  `muZero_eq_one_iff_tendsto` (FS106-EQ (c) ⟺ (d)).
+- `HadwigerNelson.Plane.exists_bandNull_aeCover_of_mu_eq_one` — the standard three — FS106-SUP's attainment clause at `µ_k(ε) = 1`: some partial
+  `k`-colouring with band-null classes covers almost every point; and through it `forall_mu_six_lt_one_iff` (FS106-COMP), the standard three.
+- Leaves and children, each the standard three: `exists_squareWin_dense`, `exists_tiled_kept`, `eventually_le_muPer`, `exists_twoCircle_density`,
+  `exists_ball_diff_le_avg` (new), `exists_translates_small_hole`, `ae_sum_eq_one_of_weakStar`, `conv_props` (new), `convForm_tendsto`,
+  `exists_L2_weak_subseq` (new), `exists_weakStar_subseq`, `ae_arcLength_null` (new).
+- `HadwigerNelson.Plane.chiM0_le_iff_muZero_eq_one` — proved from its children, but prints `sorryAx` through `unitForm_tendsto`; not counted.
+
+## Drafts for the front page (FS131-I2j)
+
+None: the gate was not run (36 `sorry` remain in wave 2's modules), so no count in `CLAUDE.md` § The gate or § Trust ledger moves, and no ledger
+row is regraded.
