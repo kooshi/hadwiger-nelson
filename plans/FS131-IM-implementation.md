@@ -16,6 +16,104 @@ Kernel-checked in this job's build (`build/gate/build/20261004T220917Z-2800792.l
 - `HadwigerNelson.Plane.germArc_isUnitArc_iff` — [kernel], the standard three
 - `HadwigerNelson.Plane.ArcMap.isClear_of_mem_closure` — [kernel], the standard three
 
+FS131-IM2's, kernel-checked in its stage-6 build (`build/gate/build/20261004T231602Z-3342967.log`), axioms printed against that build's oleans
+(`data/fs131/im/axioms-stage6.txt`), all in `Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean` — the moves' machinery and the cut (§ 6.2), each
+reading `[propext, Classical.choice, Quot.sound]` (`HadwigerNelson.Plane.BranchGerms.next_injective`: `[propext, Quot.sound]`):
+
+- `HadwigerNelson.Plane.BranchGerms.Sorted.κ_ne` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.exists_germDir_ne_of_ne` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.eventually_ord` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.BranchGerms.mem_closure_sector` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.BranchGerms.next_injective` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.coloursAt_subset_of_mem_interiorPts` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.branchPt_mem_Γ` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_branchPt_eq` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.eq_of_branchPt_eq` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.BranchGerms.closure_sector_cases` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.eq_or_next_eq_of_mem_closure` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.eq_of_mem_closure_of_mem` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.coloursAt_subset_image` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.ncard_coloursAt_le_two` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.Arc.continuous_pt` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.Arc.carrier_eq_image` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.Arc.carrier_sub` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.Arc.nondegenerate_sub` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.Arc.param_spec` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.Arc.finite_outer` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.norm_e_sub_e_eq` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.le_abs_sin_iff` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.abs_sin_le_of` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.Arc.outer_spec` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.finite_arcs_through` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.trimArcs_spec` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.trimArcs_disjoint_ball` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.surgery_mem_arcs_iff_of_not_mem` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.surgery_mem_arcs_iff_of_mem` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.surgery_agreesOff` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.surgery_ringArcsWithin` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.surgery_condition5` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.surgery_hlc_of` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.isOpen_hornSet` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.isPreconnected_hornSet` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.hornSet_eq_empty` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.eq_branchPt_of_tanHeight_eq_zero` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.isClear_col` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.encard_sectorsOf_of_partition` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.encard_sectorsOf` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.finite_inter_sphere_of_subset_Γ` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.carrier_circ_full'` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.BranchGerms.e_nextβ` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_branchPt_mem_sector_after` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_branchPt_mem_sector_before` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.col_eq_of_flankAbove` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.col_eq_of_flankBelow` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.branchPt_mem_closure_sector_after` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.branchPt_mem_closure_sector_before` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_ball_subset_of_branchPt` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.exists_near` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.eventually_small` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.mem_dom` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.Small.lt_r₀` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.Small.mem_Ioc` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.Small.curv` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.hcol₀` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.carrier_germ` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.mem_carrier_germ_iff` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.mem_interiorPts_iff` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.mem_Γ` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.circ_nondegenerate` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.newArcs_nondegenerate` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.newArcs_finite` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.newArcs_subset_closedBall` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.sphere_subset_newArcs` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.germ_subset_Γ` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.newArcs_unit` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.newArcs_condition5` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.mem_newArcs_iff` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.move_dom` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.move_col` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.mem_move_interiorPts_iff` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.mem_move_interiorPts_iff_of_not_mem` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.not_mem_move_interiorPts_of_sphere` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.move_agreesOff` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.move_ringArcsWithin` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.move_condition5` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.move_valid` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.move_coloursAt_self` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.move_coloursAt_sphere` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.cutCol_of_mem` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.cutCol_of_not_mem` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.norm_of_mem_cutSet` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.cutSet_subset_ball` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.ne_of_mem_cutSet` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.not_mem_interiorPts_of_mem_cutSet` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.cutSet_subset_closure` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.closure_cutSet_subset` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.mem_interiorPts_or_cutSet` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.cut_hlc` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.cut_hasSectors` — [kernel], the standard three or fewer
+- `HadwigerNelson.Plane.ArcMap.Near.exists_cut` — [kernel], the standard three or fewer
+
 None of the three moves is proved: `exists_shave_aux`, `exists_rayMerge_aux`, `exists_merge_aux` read `sorryAx` besides the standard three.
 
 ## Stage 1 — SAVED: the readback, the as-given build, what I may and may not change
@@ -260,3 +358,86 @@ name and unchanged.
 **The build** (under the slot, as in § 4.2): **OK**, 445 of 445 batches, 4 modules rebuilt (`Cone` 22 s, `Moves`, `Contact`, `Proofs`); warnings only
 `declaration uses 'sorry'` — `Contact` 4 (the three moves and `stuck_structure`), `Moves` 3, `BaseSteps` 7, `UnitArc` 17 (unchanged); none in `Cone`.
 Log `build/gate/build/20261004T222948Z-2949144.log`; terminal output `data/fs131/im/build-stage5.log`.
+
+## Stage 6 — SAVED: item 269 applied; SHAVE's machinery and the cut proved; the three moves still open
+
+### 6.1 Item 269 (`exists_merge`'s colour clause), applied before MERGE
+
+Both copies — `Contact`'s `exists_merge` and `Moves`' `exists_merge_aux` — now carry `F'.coloursAt v ⊆ F.coloursAt v` in place of
+`(∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x)`, and `exists_merge`'s docstring says "`v` gains no colour" (commit `de8842c6`). The change
+is a ruled amendment table, `tools/fs131_im_amend.py` (each old text must occur exactly once), applied by both IM tools on top of d4f946ae:
+`tools/fs131_im_move_cone.py --check` holds `Contact` to d4f946ae minus the moved ranges plus the import, the reopening and the amendments;
+`tools/fs131_im_statements.py --check` holds both `Moves`' `…_aux` and the working `Contact`'s three statements to d4f946ae's plus the amendments
+(PASS, diffs empty). **Controls watched** (`data/fs131/im/amend-control.txt`): `Contact`'s new clause changed to `⊂` made both tools exit 1
+naming `exists_merge`/`Contact`; an amendment whose old text is absent raises. Build of that commit: **OK**, 3 modules rebuilt (`Moves`,
+`Contact`, `Proofs`), warnings only `sorry` (log `build/gate/build/20261004T225708Z-3205523.log`, terminal `data/fs131/im/build-item269.log`).
+I agree with item 268's finding: inside the recoloured gap points change colour by design.
+
+### 6.2 What is proved (all in `Moves`, before the three `…_aux`; 93 theorems, listed under "Theorems this phase proved")
+
+One surgery serves the three moves, and the cut is its first instance:
+
+- **The chart near its point.** `BranchGerms.Sorted.κ_ne` (distinct indices of a sorted chart are distinct germs), `exists_germDir_ne_of_ne`
+  (different germs never meet at one small distance; LocalStructure's `exists_germDir_ne` without normalisation),
+  `IsSectorChart.eventually_ord` (**below some `s₀ ≤ r₀` the germs are apart and ordered** — the chart structure records neither);
+  `BranchGerms.mem_closure_sector` (a sector's closure in polar form, by compactness) and `closure_sector_cases`;
+  `IsSectorChart.ncard_coloursAt_le_two` (**at most two colours at a point of the punctured ball** below `s₀`; IM1's child (3)), with
+  `coloursAt_subset_image`, `eq_or_next_eq_of_mem_closure`, `eq_of_mem_closure_of_mem`, `exists_branchPt_eq`, `branchPt_mem_Γ`,
+  `coloursAt_subset_of_mem_interiorPts`; `col_eq_of_flankAbove`/`_flankBelow` (**the flank colour is the adjacent sector's colour**) via
+  `exists_branchPt_mem_sector_after`/`_before`; `branchPt_mem_closure_sector_after`/`_before`; `exists_ball_subset_of_branchPt` (**near a
+  branch point only the two sectors beside its germ and the branch itself**).
+- **The outer pieces** (IM1's child (1)): `Arc.pt`, `Arc.params`, `Arc.sub`, `Arc.param`, `Arc.outerIv`, `Arc.outer`, and `Arc.outer_spec`: for an
+  arc through `v`, at most two non-degenerate sub-arcs outside `B(v, ρ)` covering the arc off `B̄(v, ρ)` (segments by the affine parameter;
+  circles by the chord `‖e θ − e θ'‖ = 2|sin((θ − θ')/2)|`, `norm_e_sub_e_eq`, and `δ = 2 arcsin(ρ/2R)`, which clamps at `π` so no case on
+  `ρ` against `2R` is needed).
+- **The surgery** (IM1's child (2)): `ArcMap.trimArcs`, `trimArcs_spec`, `trimArcs_disjoint_ball` (in a good ball), `ArcMap.surgery` (the map,
+  local constancy as a hypothesis), and its transfer lemmas `surgery_agreesOff`, `surgery_ringArcsWithin` (engine 2 with the non-unit new arcs),
+  `surgery_condition5`, `surgery_hlc_of` (local constancy off the closed ball is `F`'s), `surgery_mem_arcs_iff_of_mem/_of_not_mem`.
+- **Horns as sets and counting**: `isOpen_hornSet`, `isPreconnected_hornSet` (a two-germ chart's sector), `hornSet_eq_empty`,
+  `eq_branchPt_of_tanHeight_eq_zero` (a point on the tangent arc of curvature `σ` is a branch point), `isClear_col`,
+  `encard_sectorsOf_of_partition` (sectors of colour `c` from a partition with possibly empty pieces), `IsSectorChart.encard_sectorsOf`,
+  `finite_inter_sphere_of_subset_Γ`, `carrier_circ_full'`.
+- **The near data and the generic move**: `ArcMap.Near` (chart, ordered radius `s₀`, good radius `ρ₀`, sector colours; `exists_near`), `Near.Small`,
+  `Near.newArcs` (kept germs' arcs, extra arcs, the circle `∂B(v, ρ)`), `Near.move`, and `move_valid`, `move_agreesOff`, `move_ringArcsWithin`,
+  `move_condition5`, `move_coloursAt_self` (`v` gains no colour), `move_coloursAt_sphere` (colours on the circle), `mem_move_interiorPts_iff`.
+- **The cut** — `Near.exists_cut`: if the sectors `p` and `j = next p` beside germ `j` both have colour `c`, cutting `j`'s branch inside
+  `B(v, ρ)` gives a valid map agreeing with `F` off `B̄(v, ρ)`, creating no unit arc, keeping Condition 5, with one `c`-sector fewer at `v`, no
+  new colour at `v`, and **at most two** colours at each point of `∂B(v, ρ)`; with `cut_hlc` (local constancy) and `cut_hasSectors` (the
+  count, the merged piece open by `exists_ball_subset_of_branchPt` and connected through the branch).
+
+### 6.3 What is left, in order, and the price
+
+**SHAVE (`exists_shave_aux`)**, three cases on the flank colours (one fewer than § 3.2's table: when `g = c` or `h = c` no recolouring is
+needed at all, so `hclear` is not read there):
+1. `g = c`: `exists_cut` at `p = i₀` (the horn's chart index, `IsSectorChart.index_of_isSector_hornSet`), `j = next i₀`; `col i₀ = c` from the
+   horn, `col (next i₀) = g` by `col_eq_of_flankAbove` (`e (β (next i₀)) = e α` by `BranchGerms.e_nextβ`, `κ (next i₀) = κ₂` by `nextκ_eq`);
+   `p ≠ next p` since `nextβ i₀ = β i₀` (a one-germ chart has `nextβ = β + 2π`); `{i | col i = c}.encard = n + 1` from `hn` by
+   `IsSectorChart.encard_sectorsOf`; `ρ` from `Near.eventually_small`. About 60 lines of glue.
+2. `h = c` (and `g ≠ c`): `exists_cut` at `p` with `next p = i₀`, `col p = h` by `col_eq_of_flankBelow`. Same glue.
+3. `g ≠ c`, `h ≠ c`: `Near.move` with all germs kept, `E = {germArc v α σ ρ | κ₁ < σ < κ₂}`, the tip `hornSet v α κ₁ κ₂ ρ` recoloured `g` above
+   `σ` and `h` below; pieces at radius `r`: the chart sectors `≠ i₀` and `hornSet v α σ κ₂ r`, `hornSet v α κ₁ σ r` (open, connected,
+   possibly empty — the partition lemma allows it); clearness from `hclear` at `ρ`; local constancy in the tip by `eq_branchPt_of_tanHeight_eq_zero`
+   and off it by `not_mem_interiorPts_of_mem_closure_sector`; colours at `v`: `g`, `h` are `F`'s there (the flank bands); on the circle,
+   `move_coloursAt_sphere` with `R` the tip, `C = {g, h}`, and `closure_sector_cases` at the horn's sector (`F`'s colours there `⊆ {c, g, h}`).
+   About half a session.
+
+**RAY (`exists_rayMerge_aux`)**: its first conjunct (clearness of the gap) is IM1's § 3.3 frame algebra, untouched; the merge is `exists_cut`
+generalised from one germ to a run `next p, …, nextᵗ p` with the run's inner sectors recoloured `c` (merging `H₁` with the nearest `c`-horn
+above it, item 262 (a)). About 1.5 sessions. **MERGE (`exists_merge_aux`)**: the run cut again, in a gap of `D_c(v)`, but **without** the full
+circle (a rim point with one colour on both sides would be a repeated colour), so its rim arcs and the local constancy on the circle need their
+own children, and the `D_c(v′)` clause FS110's argument. About two sessions. **Re-priced** from this stage: the machinery (93 theorems) took
+one session; IM1's "three sessions for SHAVE" was high, since the cut cases need no recolouring.
+
+**The shared machinery settles into a module of its own**: everything from `/-! ## The chart near its point` through `Near.exists_cut` reads
+only `Cone` and wave 3, and could become `Plane/ValidMap/Surgery`, upstream of `Moves`; RAY and MERGE could then run in parallel downstream of it
+(brief § What is yours to decide).
+
+### 6.4 The build and the axioms of this stage
+
+Under the slot, as in § 4.2: **OK**, 445 of 445 batches, 2 modules rebuilt (`Moves` 8.4 s, `Proofs`); warnings only `declaration uses 'sorry'` —
+`Moves` exactly 3 (the three `…_aux`), `Contact` 4, `BaseSteps` 7, `UnitArc` 17 (unchanged). Log `build/gate/build/20261004T231602Z-3342967.log`;
+terminal output `data/fs131/im/build-stage6.log`. **Axioms**, printed against that build's oleans (`lake env lean data/fs131/im/AxiomsIM2.lean`,
+`data/fs131/im/axioms-stage6.txt`, 96 records): the 93 new theorems read `[propext, Classical.choice, Quot.sound]` or fewer
+(`BranchGerms.next_injective`: `[propext, Quot.sound]`); the three `…_aux` read `sorryAx` besides. No `axiom`, no `native_decide`. The 93
+records are added to `scripts/Axioms.lean`'s FS131-IM1 block (names in `data/fs131/im/im2-names.txt`). The working file
+`data/fs131/im/scratch2/S1.lean`, now in `Moves`, is removed.
