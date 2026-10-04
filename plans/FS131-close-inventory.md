@@ -727,3 +727,7 @@ reason by the close.*
      sub-minute `lake env lean` runs outside `scripts/slot.py`. Tool note: in a sandbox with a toolchain's `bin` first on `PATH`, `LEAN_CC=clang` finds the
      toolchain's broken clang — give `/usr/bin/clang`. **Held, default keep**: the Mathlib harness at `~/.cache/ext-hn1/` (7.6 GB, outside the repository) stays
      for re-checks until the issue is answered, then is deleted. The special slot closes with this job.
+123. **The EXT-HN1 Mathlib harness deleted** (Kooshi, 2026-10-04: *"You can delete the audit build. I don't think that author will have anything to say worth
+     8GB of space."*): `~/.cache/ext-hn1/` (7.6 GB; build logs and the Mathlib v4.28.0 harness, no running process using it) removed. The audit's evidence stays in
+     `data/external/hn1/` (the outside file, the audit module, the harness lakefile and manifest, every log); a re-check re-fetches Mathlib's cache. Item 122's
+     held line closed.
