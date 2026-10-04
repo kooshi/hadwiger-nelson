@@ -242,6 +242,40 @@ The leaves that remain are all either engine-3 (`finite_tiles_near` and its two 
 | `SixFragment` (3) | `sixCol_locallyConstant`, `sixFrag_valid`, `sixFrag_nonSiamese` | unchanged from Stage 3. Note for `sixFrag_valid`: the three colour-`0` tiles are `S_0` (angles `(0°, 60°)`, `r < 1`), `Q_4` (angles about `240°`, in the lens) and `G_2` (angles in `[120°, 180°)`, outside the lens of its index); `S_0`–`Q_4` is easy (angular gap `≥ 150°`, `r ≥ 1`: `|x − y|² ≥ r² + s² + √3 rs > 1`); `S_0`–`G_2` is not (the `60°` angular gap alone gives only `1 − s + s² < 1`; the lens exclusion is what keeps `G_2` away from `e(120°)`) |
 | `RingGerm` (3) | `germS_four`, `four_of_bothKind`, `flank_edge_exists` | `germS_four`: see Findings (it waits on `mem_coloursAt_iff_exists_tileOf`). `four_of_bothKind`: needs `coneAt_region_eq_biUnion` and the disjoint-interiors of cones of distinct tiles (which has a route without sectors: the cone of `Γ` at `x` is finite mod `2π`, so for a generic direction a small convex sector lies in `interiorPts` and hence in one tile). `flank_edge_exists`: the end direction of a tile's cone is a tangent of an arc through `y` (sectors) |
 
+## Stage 5 — SAVED (FS131-I3e): the engine-3 leaves, germS_four; 5 leaves left
+
+Branch `fs131-w3`, commits after `dbf34f37`. **9 `sorry` declarations at the start, 5 now** (`SixFragment` 3, `RingGerm` 2: `four_of_bothKind`, `flank_edge_exists`).
+Build of the stage-5 commit (before the statement repair below): `build/gate/build/20261004T110435Z-2915550.log`, "build: OK", warnings only `declaration uses sorry`.
+Axioms of the proved declarations read by `#print axioms` over the scratch oleans (iteration, not the gate): all `[propext, Classical.choice, Quot.sound]`.
+
+* **`finite_tiles_near`** (and `mem_coloursAt_iff_exists_tileOf`, `coneAt_region_eq_biUnion`, both short on it). No sector engine. Route: a *good radius* `GoodAt x ρ₀`
+  (ball in the domain, finitely many arcs meet it, all through `x`, circles among them of diameter above `ρ₀`, distinct full curves through `x` meet inside only at `x`);
+  each arc through `x` lies on a full curve `curveAt x κ b` (`κ = 0` a line, `κ = 1` the circle about `x + b`), `curve_inter` the algebra of two curves.
+  Farthest-point lemma `GoodAt.not_tile_subset_ball`: a tile inside `B(x, ρ)` has a farthest point `z` of its closure; off `Γ` the tile continues, on `Γ` the local lemma
+  `exists_farther` (radial step outside the circle or off the line; inside the disc the step `(β − s)p + s b`, a direction entering the disc and leaving the circle about `x`,
+  inside the convex ball-meets-ball) gives a segment off the one curve through `z` to a farther point of the tile. Then every tile meeting `B(x, r)` meets `S(x, ρ)`, and
+  `GoodAt.finite_tiles_sphere` (the circle minus the finitely many points of `Γ` falls into finitely many arcs, `finite_image_of_locConst`). `exists_ball_finite` moved
+  earlier in `LocalStructure` (position only).
+* **`germS_four`**: the inward colour of `germS_inward` and the outward colour of `germS_outward` differ (a tile in `B̄(y,1)` missing `B(y,1)` lies in a sphere, which holds
+  no open set), and with `X, X'` that is four. `germS_four` and `ringQPrimeS` moved after `germS_outward` (positions only).
+* **Statement finding, ruled (inventory item 112)**: `four_of_bothKind`'s `hint` now takes `β₁ < β₂` (a cusp tile has a one-direction cone, and the plan's disjoint-interiors route
+  fails there); `four_of_bothKind_simple` gains `hnc : ∀ T, F.IsTile T → z ∈ closure T → ∀ β, coneAt T z ≠ angleIcc β β`, which feeds the strict `hint`
+  (that proof is done). Both docstrings say so. `four_of_bothKind` itself is still `sorry`: it needs the disjoint-interior lemma for distinct tiles' cones (a generic direction
+  has a small convex sector in `interiorPts`; with `GoodAt`, the directions where `Γ` has a branch are the finitely many tangent directions `arg b ± π/2` of the curves through `z`).
+
+### What is left (5)
+
+| module | leaves | route |
+|---|---|---|
+| `SixFragment` (3) | `sixCol_locallyConstant`, `sixFrag_valid`, `sixFrag_nonSiamese` | Findings of this stage. `locallyConstant`: cases `‖x‖ < 1` (arg off the integers, as `x` is off the segments), `‖x‖ > 1` (sector/round constant off integer resp. half-integer rays; on the half-integer rays both lens tests are strictly false, `r² − r + 1 > 1`; on the negative axis the round is `3` mod 6 on both sides and `InSixLens` is `6`-periodic in its index; off these, a point with the lens test false and `dist = 1` lies on a lens side). `valid`: no arc condition is needed for the pair bounds except `‖x‖ ≠ 1` and `‖x‖ < 3/2`. Rotation by `60°` shifts `sixCol` by `1` (`arg` wraps by `2πn`, `floor` and `round` shift by `1 + 6n`, `InSixLens` is `6`-periodic in the index), so reduce to colour `0`: `S_0` (`‖·‖ < 1`, arg in `[0°, 60°)`), `Q_4` (lens at `240°`, `‖·‖ ≥ 1`), `G_2` (arg in `[120°, 180°)`, outside the lens of its round). The `S_0`–`G_2` pair: `dist² = s² + r² − 2 s r cos δ`, `δ ∈ (60°, 90°)` forces `β < 150°` and the gap condition `r ≥ 2 sin β`, so `r sin δ ≥ 2 sin β sin(β − 60°) = 1/2 − cos(2β − 60°) > 1`. Diameter `< 1` of `Q_4 ∩ {‖·‖ ≥ 1}`: that set lies in the Reuleaux triangle on `e(−30°), e(30°), √3`; a Cartesian reduction `3(P + Q − 1) ≤ 2(P + u)(Q + v) − 6uv` with `4u² + 2Pu + P² − 3P < 0` is a candidate for `nlinarith`. **`sixFrag_nonSiamese` also needs each of `S_0`, `Q_4`, `G_2` (cut at `3/2`) to be connected** (else two tiles of one region are a Siamese pair): `Q_4` is `{1 < r < min(3/2, 2cos(φ − a), 2cos(φ − b))}`, a convex set in `(r, φ)`; `G_2` is `{max(1, h(φ)) ≤ r < 3/2}` over an angular interval. The plan's "M on the same pair lemmas" misses this. |
+| `RingGerm` (2) | `four_of_bothKind`, `flank_edge_exists` | `four_of_bothKind`: above. `flank_edge_exists`: the cone of `t` at `y` ends at `δ = ψ + 210°` (`flank_cone`), so `δ` is a branch direction of an arc through `y` (else a sector about `δ` lies in `interiorPts`, in one tile, and the cone passes `δ`); the arc piece and `B ⊆ closure t` need the regions between consecutive branches at `y` (local sectors), which `GoodAt` supports: branches are initial pieces of the curves through `y`. |
+
+## Theorems this phase proved (FS131-I3e)
+
+Declarations `HadwigerNelson.Plane.ArcMap.*` unless marked; all `[propext, Classical.choice, Quot.sound]` (scratch `#print axioms`; the gate log is still to be read); statements as the skeleton gave them.
+- **Engine 3 (`plans/FS131-w3-kernel-plan.md` § 6)** — `finite_tiles_near`, `mem_coloursAt_iff_exists_tileOf`, `coneAt_region_eq_biUnion` (children, `HadwigerNelson.Plane.*`: `curveAt`, `curve_inter`, `exists_farther`, `farther_in`, `farther_out`, `finite_curve_inter_sphere`, `finite_image_of_locConst`, `spherePt`, `Arc.curveData`, `Arc.curve`, `Arc.carrier_subset_curve`; `ArcMap.GoodAt`, `exists_goodAt`, `GoodAt.not_tile_subset_ball`, `GoodAt.finite_tiles_sphere`, `region_inter_ball_subset`; `coneAt_biUnion_finite`, `coneAt_inter_ball`).
+- **FS116-N1-GERM-S (iii)** — `germS_four`, and so `ringQPrimeS` (FS116-RING-Q-PRIME-S) is now sorry-free.
+
 ## Theorems this phase proved (FS131-I3d)
 
 All on `[propext, Classical.choice, Quot.sound]`, read from `build/gate/axioms/20261004T102246Z-2733747.log` (build `build/gate/build/20261004T101422Z-2686823.log`); declarations are `HadwigerNelson.Plane.ArcMap.*` unless marked;
@@ -257,7 +291,7 @@ statements as the skeleton gave them (none changed). Read against `plans/FS131-w
 
 ## Drafts for the front page
 
-None yet: 16 `sorry` remain, so the gate has not run. (The build above is the iteration check, not the gate.)
+None yet: 5 `sorry` remain, so the gate has not run. (The build above is the iteration check, not the gate.)
 
 ## Build
 

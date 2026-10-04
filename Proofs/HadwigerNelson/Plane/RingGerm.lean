@@ -2240,22 +2240,28 @@ theorem ringArc_sideCone_other (hF : F.Valid) {z : ℂ} (hz : z ∈ F.dom) {θ�
 
 /-- **FS116-V5-U1**, the four-colour clause at the class it reads: if `z` (in the domain) carries both side colours of an arc
 of `Γ` on `ω(z)` (the arc is both-kind), each colour has at most one tile with `z` in its closure, and each such tile's cone
-at `z` is one closed angular interval, then `z` carries at least four colours. -/
+at `z` is one closed angular interval of positive length (`β₁ < β₂`: no cusp at `z`; inventory item 112), then `z` carries at
+least four colours. -/
 theorem four_of_bothKind (hF : F.Valid) {z : ℂ} (hz : z ∈ F.dom) {θ₁ θ₂ : ℝ} {c c' : Fin k}
     (hA : F.IsRingArc z θ₁ θ₂ c c') (hc : c ∈ F.coloursAt z) (hc' : c' ∈ F.coloursAt z)
     (hone : ∀ d T T', F.TileOf d T → F.TileOf d T' → z ∈ closure T → z ∈ closure T' → T = T')
-    (hint : ∀ T, F.IsTile T → z ∈ closure T → ∃ β₁ β₂, β₁ ≤ β₂ ∧ β₂ ≤ β₁ + 2 * π ∧ coneAt T z = angleIcc β₁ β₂) :
+    (hint : ∀ T, F.IsTile T → z ∈ closure T → ∃ β₁ β₂, β₁ < β₂ ∧ β₂ ≤ β₁ + 2 * π ∧ coneAt T z = angleIcc β₁ β₂) :
     4 ≤ (F.coloursAt z).ncard := by
   sorry
 
 /-- **FS116-V5-U1**, the row's four-colour clause: in a non-Siamese simple map, a point `z` of the domain carrying both side
-colours of an arc of `Γ` on `ω(z)` carries at least four colours. -/
+colours of an arc of `Γ` on `ω(z)` carries at least four colours, provided no tile with `z` in its closure has a cone reduced to
+one direction (`hnc`: no cusp at `z`; inventory item 112). -/
 theorem four_of_bothKind_simple (hF : F.Valid) (hN : F.NonSiamese) (hS : F.Simple) {z : ℂ} (hz : z ∈ F.dom)
     {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc z θ₁ θ₂ c c') (hc : c ∈ F.coloursAt z)
-    (hc' : c' ∈ F.coloursAt z) : 4 ≤ (F.coloursAt z).ncard := by
+    (hc' : c' ∈ F.coloursAt z) (hnc : ∀ T, F.IsTile T → z ∈ closure T → ∀ β, coneAt T z ≠ angleIcc β β) :
+    4 ≤ (F.coloursAt z).ncard := by
   refine four_of_bothKind hF hz hA hc hc' (fun d T T' hT hT' hzT hzT' => ?_)
-    (fun T hT hzT => hS.coneAt_eq_angleIcc hT hz hzT)
-  exact hN.eq_of_unitNear hT hT' (unitNear_of_mem_closure hF hT hT' hzT hzT' (by simp))
+    (fun T hT hzT => ?_)
+  · exact hN.eq_of_unitNear hT hT' (unitNear_of_mem_closure hF hT hT' hzT hzT' (by simp))
+  · obtain ⟨β₁, β₂, h1, h2, h3⟩ := hS.coneAt_eq_angleIcc hT hz hzT
+    refine ⟨β₁, β₂, lt_of_le_of_ne h1 fun h => hnc T hT hzT β₁ ?_, h2, h3⟩
+    rw [h3, h]
 
 /-! ## FS116-Y4-FLANK (any valid map; the covering hypothesis is idle) -/
 
