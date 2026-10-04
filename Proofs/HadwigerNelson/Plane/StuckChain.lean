@@ -15,18 +15,6 @@ namespace HadwigerNelson.Plane
 
 open Complex Real Set
 
-/-- `1/f̃(υ) = 1/υ − 1`: the upward map shortens the reciprocal curvature by one (the engine of FIN's upward half). -/
-theorem inv_curvUp {u : ℝ} (hu0 : u ≠ 0) : 1 / curvUp u = 1 / u - 1 := by
-  unfold curvUp
-  rw [one_div_div]
-  field_simp
-
-/-- `1/f(λ) = 1/λ + 1`: the downward map lengthens the reciprocal curvature by one (the engine of FIN's downward half). -/
-theorem inv_curvDown {l : ℝ} (hl0 : l ≠ 0) (hl1 : 1 + l ≠ 0) : 1 / curvDown l = 1 / l + 1 := by
-  unfold curvDown
-  rw [one_div_div]
-  field_simp
-
 /-- **FIN, upward half**: under FIN's inequalities every `υ_k` is `≤ 0` — a positive `υ_m` would give `1/υ_{m+j} ≤ 1/υ_m − j`
 (`inv_curvUp`) and `υ_{m+j} > 0`, impossible for `j > 1/υ_m`. -/
 theorem n4_fin_u_nonpos (l u : ℤ → ℝ)

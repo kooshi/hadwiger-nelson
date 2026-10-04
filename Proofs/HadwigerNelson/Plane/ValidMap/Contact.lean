@@ -22,6 +22,123 @@ namespace HadwigerNelson.Plane
 
 open Complex Real Set Filter Topology Metric
 
+/-- `frameX` is real-linear along a displacement. -/
+theorem frameX_add_smul (v : ℂ) (α s : ℝ) (z u : ℂ) :
+    frameX v α (z + (s : ℂ) * u) = frameX v α z + s * ((u * starRingEnd ℂ (e α)).re) := by
+  unfold frameX
+  have : (z + (s : ℂ) * u - v) * starRingEnd ℂ (e α) = (z - v) * starRingEnd ℂ (e α) + (s : ℂ) * (u * starRingEnd ℂ (e α)) := by ring
+  rw [this, Complex.add_re, Complex.re_ofReal_mul]
+
+/-- The ray point of `z` toward (`s = 1`) or away from (`s = −1`) `C`, at unit distance. -/
+noncomputable def rayPt (C z : ℂ) (s : ℝ) : ℂ := z + ((s / ‖C - z‖ : ℝ) : ℂ) * (C - z)
+
+/-- The ray point is continuous at `v` when `C ≠ v`. -/
+theorem rayPt_continuousAt {C v : ℂ} (hne : C ≠ v) (s : ℝ) : ContinuousAt (fun z => rayPt C z s) v := by
+  unfold rayPt
+  have hn : ‖C - v‖ ≠ 0 := norm_ne_zero_iff.mpr (sub_ne_zero.mpr hne)
+  fun_prop (disch := exact hn)
+
+/-- The ray point is at distance `1` from `z`. -/
+theorem dist_rayPt (C z : ℂ) (hz : z ≠ C) (s : ℝ) (hs : |s| = 1) : dist z (rayPt C z s) = 1 := by
+  unfold rayPt
+  have hr : 0 < ‖C - z‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hz.symm)
+  rw [dist_eq_norm, sub_add_cancel_left, norm_neg, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_div, hs,
+    abs_of_pos hr]
+  field_simp
+
+/-- The ray point is at distance `|s − ‖C − z‖|` from the centre. -/
+theorem dist_rayPt_center (C z : ℂ) (hz : z ≠ C) (s : ℝ) :
+    dist (rayPt C z s) C = |s - ‖C - z‖| := by
+  unfold rayPt
+  have hr : 0 < ‖C - z‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hz.symm)
+  have : z + ((s / ‖C - z‖ : ℝ) : ℂ) * (C - z) - C = (((s / ‖C - z‖ - 1 : ℝ)) : ℂ) * (C - z) := by
+    push_cast; ring
+  rw [dist_eq_norm, this, norm_mul, Complex.norm_real, Real.norm_eq_abs]
+  have : |s / ‖C - z‖ - 1| * ‖C - z‖ = |s - ‖C - z‖| := by
+    rw [← abs_of_pos hr, ← abs_mul, abs_of_pos hr]
+    congr 1; field_simp
+  exact this
+
+/-- The `x` coordinate of the ray point: `x_z + (s/r)(x_C − x_z)`. -/
+theorem frameX_rayPt (v : ℂ) (α : ℝ) (C z : ℂ) (s : ℝ) :
+    frameX v α (rayPt C z s) = frameX v α z + (s / ‖C - z‖) * (frameX v α C - frameX v α z) := by
+  unfold rayPt
+  rw [frameX_add_smul, frameX_sub]
+
+/-- `‖C − z‖ = dist z C`. -/
+theorem norm_C_sub_z (C z : ℂ) : ‖C - z‖ = dist z C := by rw [dist_comm, dist_eq_norm]
+
+/-- **The shadow of a set inside a disc, from below** (`N4-SHADOW`'s engine, inside case): if `T` lies in `B(C, ρ)` near
+`P = v + (C − v)/‖C − v‖`, with `‖C − v‖ = ρ + 1`, the points `z` near `v` (`x_z > 0`) in its shadow are exactly those in
+`B(C, ρ + 1)`. -/
+theorem shadow_inside {v C P : ℂ} {α ρ δ : ℝ} (hρ : 0 < ρ) (hC : ‖C - v‖ = ρ + 1) (hP : rayPt C v 1 = P)
+    (hxP : ∀ y, frameX P α y = frameX v α y) (hxC : frameX v α C = 0) (hδ : 0 < δ) :
+    ∃ ε > 0, ∀ z, dist z v < ε → 0 < frameX v α z →
+      (z ∈ shadow {y | dist y P < δ ∧ 0 < frameX P α y ∧ dist y C < ρ} ↔ dist z C < ρ + 1) := by
+  have hne : C ≠ v := fun h => by rw [h, sub_self, norm_zero] at hC; linarith
+  obtain ⟨ε₁, hε₁, hcont⟩ := Metric.continuousAt_iff.mp (rayPt_continuousAt hne 1) δ hδ
+  refine ⟨min ε₁ ρ, lt_min hε₁ hρ, fun z hz hx => ?_⟩
+  have hz1 : dist z v < ε₁ := lt_of_lt_of_le hz (min_le_left _ _)
+  have hz2 : dist z v < ρ := lt_of_lt_of_le hz (min_le_right _ _)
+  constructor
+  · rintro ⟨y, ⟨-, -, hyC⟩, hzy⟩
+    calc dist z C ≤ dist z y + dist y C := dist_triangle _ _ _
+      _ < 1 + ρ := by rw [hzy]; linarith
+      _ = ρ + 1 := by ring
+  · intro hzC
+    have hr1 : 1 < ‖C - z‖ := by
+      have : ‖C - v‖ - ‖z - v‖ ≤ ‖C - z‖ := by
+        have := norm_sub_norm_le (C - v) (z - v)
+        have e : C - v - (z - v) = C - z := by ring
+        rw [e] at this
+        linarith [norm_sub_norm_le (C - v) (z - v), norm_sub_rev (C - v) (z - v)]
+      rw [dist_eq_norm] at hz2
+      linarith
+    have hzne : z ≠ C := fun h => by rw [h, sub_self, norm_zero] at hr1; linarith
+    have hrpos : 0 < ‖C - z‖ := by linarith
+    refine ⟨rayPt C z 1, ⟨?_, ?_, ?_⟩, dist_rayPt C z hzne 1 (by simp)⟩
+    · have := hcont hz1
+      rwa [hP] at this
+    · rw [hxP, frameX_rayPt, hxC]
+      have : 0 < (1 / ‖C - z‖) := by positivity
+      have h1 : 1 / ‖C - z‖ < 1 := by rw [div_lt_one hrpos]; exact hr1
+      nlinarith
+    · rw [dist_rayPt_center C z hzne]
+      rw [norm_C_sub_z] at hr1 ⊢
+      rw [abs_of_nonpos (by linarith)]
+      linarith
+
+/-- **The shadow of a set outside a disc** (`N4-SHADOW`'s engine, outside case): if `T` lies outside `B̄(C, ρ)` near
+`P = v − (C − v)/‖C − v‖`, with `‖C − v‖ = ρ − 1` and `ρ > 1`, the points `z` near `v` (`x_z > 0`) in its shadow are exactly
+those outside `B̄(C, ρ − 1)`. -/
+theorem shadow_outside {v C P : ℂ} {α ρ δ : ℝ} (hρ : 1 < ρ) (hC : ‖C - v‖ = ρ - 1) (hP : rayPt C v (-1) = P)
+    (hxP : ∀ y, frameX P α y = frameX v α y) (hxC : frameX v α C = 0) (hδ : 0 < δ) :
+    ∃ ε > 0, ∀ z, dist z v < ε → 0 < frameX v α z →
+      (z ∈ shadow {y | dist y P < δ ∧ 0 < frameX P α y ∧ ρ < dist y C} ↔ ρ - 1 < dist z C) := by
+  have hne : C ≠ v := fun h => by rw [h, sub_self, norm_zero] at hC; linarith
+  obtain ⟨ε₁, hε₁, hcont⟩ := Metric.continuousAt_iff.mp (rayPt_continuousAt hne (-1)) δ hδ
+  refine ⟨ε₁, hε₁, fun z hz hx => ?_⟩
+  constructor
+  · rintro ⟨y, ⟨-, -, hyC⟩, hzy⟩
+    have : dist y C ≤ dist y z + dist z C := dist_triangle _ _ _
+    rw [dist_comm y z, hzy] at this
+    linarith
+  · intro hzC
+    have hrpos : 0 < ‖C - z‖ := by rw [norm_C_sub_z]; linarith
+    have hzne : z ≠ C := fun h => by rw [h, sub_self, norm_zero] at hrpos; linarith
+    refine ⟨rayPt C z (-1), ⟨?_, ?_, ?_⟩, dist_rayPt C z hzne (-1) (by simp)⟩
+    · have := hcont hz
+      rwa [hP] at this
+    · rw [hxP, frameX_rayPt, hxC]
+      have : 0 < (1 / ‖C - z‖) := by positivity
+      have e : -1 / ‖C - z‖ * (0 - frameX v α z) = frameX v α z * (1 / ‖C - z‖) := by ring
+      rw [e]
+      nlinarith
+    · rw [dist_rayPt_center C z hzne]
+      rw [norm_C_sub_z] at hrpos ⊢
+      rw [abs_of_nonpos (by linarith)]
+      linarith
+
 /-- The far side, near `N`, of an arc tangent to `e α` at `N` with upward curvature `μ`, on the `+a` side: the points of
 `B(N, δ)` with positive `a`-coordinate above the arc. -/
 def farSideAbove (N : ℂ) (α μ δ : ℝ) : Set ℂ := {z | dist z N < δ ∧ 0 < frameX N α z ∧ TanAbove N α μ z}
@@ -35,14 +152,188 @@ of curvature `f(μ) = μ/(1 + μ)`. -/
 theorem shadow_farSide_above (v : ℂ) (α : ℝ) {μ δ : ℝ} (hμ : -1 < μ) (hδ : 0 < δ) :
     ∃ ε > 0, ∀ z, dist z v < ε → 0 < frameX v α z →
       (z ∈ shadow (farSideAbove (v + e (α + π / 2)) α μ δ) ↔ TanAbove v α (curvDown μ) z) := by
-  sorry
+  have h1 : 1 + μ ≠ 0 := by linarith
+  rcases lt_trichotomy μ 0 with hneg | rfl | hpos
+  · -- `μ < 0`: the far side lies outside the circle `Σ`; its shadow is the outside of the concentric circle
+    have hf : curvDown μ < 0 := by unfold curvDown; exact div_neg_of_neg_of_pos hneg (by linarith)
+    have hf' : 1 / curvDown μ = 1 + 1 / μ := inv_curvDown_eq hneg.ne h1
+    have hμ1 : 1 / μ < -1 := by rw [div_lt_iff_of_neg hneg]; linarith
+    set C : ℂ := v + ((1 / curvDown μ : ℝ) : ℂ) * e (α + π / 2) with hCdef
+    have hCn : ‖C - v‖ = -(1 / μ) - 1 := by
+      rw [hCdef, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, hf',
+        abs_of_neg (by linarith)]
+      ring
+    have hP : rayPt C v (-1) = v + e (α + π / 2) := by
+      have hCv : C - v = ((1 / curvDown μ : ℝ) : ℂ) * e (α + π / 2) := by rw [hCdef]; ring
+      unfold rayPt
+      rw [hCn, hCv]
+      have : ((-1 / (-(1 / μ) - 1) : ℝ) : ℂ) * ((1 / curvDown μ : ℝ) : ℂ) = 1 := by
+        rw [← Complex.ofReal_mul, hf']
+        have : (-(1 / μ) - 1) ≠ 0 := by linarith
+        have h2 : 1 + 1 / μ ≠ 0 := by linarith
+        rw [Complex.ofReal_eq_one]; field_simp; ring
+      calc v + ((-1 / (-(1 / μ) - 1) : ℝ) : ℂ) * (((1 / curvDown μ : ℝ) : ℂ) * e (α + π / 2))
+          = v + (((-1 / (-(1 / μ) - 1) : ℝ) : ℂ) * ((1 / curvDown μ : ℝ) : ℂ)) * e (α + π / 2) := by ring
+        _ = _ := by rw [this, one_mul]
+    have hCeq : v + e (α + π / 2) + ((1 / μ : ℝ) : ℂ) * e (α + π / 2) = C := by
+      rw [hCdef, hf']; push_cast; ring
+    have hT : farSideAbove (v + e (α + π / 2)) α μ δ =
+        {y | dist y (v + e (α + π / 2)) < δ ∧ 0 < frameX (v + e (α + π / 2)) α y ∧ -(1 / μ) < dist y C} := by
+      ext y
+      simp only [farSideAbove, mem_setOf_eq]
+      rw [tanAbove_iff_of_neg (v + e (α + π / 2)) α hneg y, hCeq]
+    obtain ⟨ε, hε, H⟩ := shadow_outside (v := v) (C := C) (P := v + e (α + π / 2)) (α := α) (ρ := -(1 / μ)) (δ := δ)
+      (by linarith) hCn hP (frameX_base_N v α) (frameX_normalPt v α _) hδ
+    refine ⟨ε, hε, fun z hz hx => ?_⟩
+    rw [hT, H z hz hx, tanAbove_iff_of_neg v α hf z, ← hCdef, hf']
+    have : -(1 + 1 / μ) = -(1 / μ) - 1 := by ring
+    rw [this]
+  · -- `μ = 0`: the far side is the half-plane above the line through `N`
+    refine ⟨δ, hδ, fun z hz hx => ?_⟩
+    have hf0 : curvDown 0 = 0 := by simp [curvDown]
+    rw [hf0]
+    have hTA : ∀ y, TanAbove (v + e (α + π / 2)) α 0 y ↔ 1 < frameY v α y := by
+      intro y; unfold TanAbove tanHeight; rw [frameY_base_N]; constructor <;> intro h <;> nlinarith
+    have hTA0 : TanAbove v α 0 z ↔ 0 < frameY v α z := by unfold TanAbove tanHeight; constructor <;> intro h <;> nlinarith
+    rw [hTA0]
+    constructor
+    · rintro ⟨y, ⟨-, -, hy⟩, hzy⟩
+      rw [hTA] at hy
+      have hsq := sq_dist_frame v α z y
+      rw [hzy] at hsq
+      nlinarith [sq_nonneg (frameX v α z - frameX v α y), sq_nonneg (frameY v α z - frameY v α y + 1)]
+    · intro hy
+      refine ⟨z + ((1 : ℝ) : ℂ) * e (α + π / 2), ⟨?_, ?_, ?_⟩, ?_⟩
+      · have : z + ((1 : ℝ) : ℂ) * e (α + π / 2) - (v + e (α + π / 2)) = z - v := by push_cast; ring
+        rw [dist_eq_norm, this, ← dist_eq_norm]; exact hz
+      · rw [frameX_base_N, frameX_add_normal]; exact hx
+      · rw [hTA, frameY_add_normal]; linarith
+      · rw [dist_eq_norm]; simp
+  · -- `μ > 0`: the far side lies inside the circle `Σ`; its shadow is the inside of the concentric circle
+    have hf : 0 < curvDown μ := by unfold curvDown; positivity
+    have hf' : 1 / curvDown μ = 1 + 1 / μ := inv_curvDown_eq hpos.ne' h1
+    have hμ : 0 < 1 / μ := by positivity
+    set C : ℂ := v + ((1 / curvDown μ : ℝ) : ℂ) * e (α + π / 2) with hCdef
+    have hCn : ‖C - v‖ = 1 / μ + 1 := by
+      rw [hCdef, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, hf',
+        abs_of_pos (by linarith)]
+      ring
+    have hP : rayPt C v 1 = v + e (α + π / 2) := by
+      have hCv : C - v = ((1 / curvDown μ : ℝ) : ℂ) * e (α + π / 2) := by rw [hCdef]; ring
+      unfold rayPt
+      rw [hCn, hCv]
+      have : ((1 / (1 / μ + 1) : ℝ) : ℂ) * ((1 / curvDown μ : ℝ) : ℂ) = 1 := by
+        rw [← Complex.ofReal_mul, hf']
+        have : (1 / μ + 1) ≠ 0 := by linarith
+        rw [Complex.ofReal_eq_one]; field_simp; ring
+      calc v + ((1 / (1 / μ + 1) : ℝ) : ℂ) * (((1 / curvDown μ : ℝ) : ℂ) * e (α + π / 2))
+          = v + (((1 / (1 / μ + 1) : ℝ) : ℂ) * ((1 / curvDown μ : ℝ) : ℂ)) * e (α + π / 2) := by ring
+        _ = _ := by rw [this, one_mul]
+    have hCeq : v + e (α + π / 2) + ((1 / μ : ℝ) : ℂ) * e (α + π / 2) = C := by
+      rw [hCdef, hf']; push_cast; ring
+    have hT : farSideAbove (v + e (α + π / 2)) α μ δ =
+        {y | dist y (v + e (α + π / 2)) < δ ∧ 0 < frameX (v + e (α + π / 2)) α y ∧ dist y C < 1 / μ} := by
+      ext y
+      simp only [farSideAbove, mem_setOf_eq]
+      rw [tanAbove_iff_of_pos (v + e (α + π / 2)) α hpos y, hCeq]
+    obtain ⟨ε, hε, H⟩ := shadow_inside (v := v) (C := C) (P := v + e (α + π / 2)) (α := α) (ρ := 1 / μ) (δ := δ)
+      hμ hCn hP (frameX_base_N v α) (frameX_normalPt v α _) hδ
+    refine ⟨ε, hε, fun z hz hx => ?_⟩
+    rw [hT, H z hz hx, tanAbove_iff_of_pos v α hf z, ← hCdef, hf']
+    have : 1 + 1 / μ = 1 / μ + 1 := by ring
+    rw [this]
 
 /-- **FS110-N4-SHADOW**, going up (the mirror at `S′ = v − n`): an arc of upward curvature `υ < 1` shadows, from below, exactly
 the points below the concentric circle of curvature `f̃(υ) = υ/(1 − υ)`. -/
 theorem shadow_farSide_below (v : ℂ) (α : ℝ) {υ δ : ℝ} (hυ : υ < 1) (hδ : 0 < δ) :
     ∃ ε > 0, ∀ z, dist z v < ε → 0 < frameX v α z →
       (z ∈ shadow (farSideBelow (v - e (α + π / 2)) α υ δ) ↔ TanBelow v α (curvUp υ) z) := by
-  sorry
+  have h1 : 1 - υ ≠ 0 := by linarith
+  rcases lt_trichotomy υ 0 with hneg | rfl | hpos
+  · -- `υ < 0`: the far side lies inside a circle; its shadow is the inside of the concentric circle
+    have hυ1 : 1 / υ < 0 := by rw [one_div]; exact inv_lt_zero.mpr hneg
+    have hf' : 1 / curvUp υ = 1 / υ - 1 := inv_curvUp hneg.ne
+    have hf : curvUp υ < 0 := by unfold curvUp; exact div_neg_of_neg_of_pos hneg (by linarith)
+    set C : ℂ := v + ((1 / curvUp υ : ℝ) : ℂ) * e (α + π / 2) with hCdef
+    have hCn : ‖C - v‖ = -(1 / υ) + 1 := by
+      rw [hCdef, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, hf',
+        abs_of_neg (by linarith)]
+      ring
+    have hP : rayPt C v 1 = v - e (α + π / 2) := by
+      have hCv : C - v = ((1 / curvUp υ : ℝ) : ℂ) * e (α + π / 2) := by rw [hCdef]; ring
+      unfold rayPt
+      rw [hCn, hCv]
+      have : ((1 / (-(1 / υ) + 1) : ℝ) : ℂ) * ((1 / curvUp υ : ℝ) : ℂ) = -1 := by
+        rw [← Complex.ofReal_mul, hf']
+        have : (-(1 / υ) + 1) ≠ 0 := by linarith
+        rw [show (-1 : ℂ) = ((-1 : ℝ) : ℂ) by simp, Complex.ofReal_inj]; field_simp; ring
+      calc v + ((1 / (-(1 / υ) + 1) : ℝ) : ℂ) * (((1 / curvUp υ : ℝ) : ℂ) * e (α + π / 2))
+          = v + (((1 / (-(1 / υ) + 1) : ℝ) : ℂ) * ((1 / curvUp υ : ℝ) : ℂ)) * e (α + π / 2) := by ring
+        _ = _ := by rw [this]; ring
+    have hCeq : v - e (α + π / 2) + ((1 / υ : ℝ) : ℂ) * e (α + π / 2) = C := by
+      rw [hCdef, hf']; push_cast; ring
+    have hT : farSideBelow (v - e (α + π / 2)) α υ δ =
+        {y | dist y (v - e (α + π / 2)) < δ ∧ 0 < frameX (v - e (α + π / 2)) α y ∧ dist y C < -(1 / υ)} := by
+      ext y
+      simp only [farSideBelow, mem_setOf_eq]
+      rw [tanBelow_iff_of_neg (v - e (α + π / 2)) α hneg y, hCeq]
+    obtain ⟨ε, hε, H⟩ := shadow_inside (v := v) (C := C) (P := v - e (α + π / 2)) (α := α) (ρ := -(1 / υ)) (δ := δ)
+      (by linarith) hCn hP (frameX_base_S v α) (frameX_normalPt v α _) hδ
+    refine ⟨ε, hε, fun z hz hx => ?_⟩
+    rw [hT, H z hz hx, tanBelow_iff_of_neg v α hf z, ← hCdef, hf']
+    have : -(1 / υ - 1) = -(1 / υ) + 1 := by ring
+    rw [this]
+  · -- `υ = 0`: the far side is the half-plane below the line through `S′`
+    refine ⟨δ, hδ, fun z hz hx => ?_⟩
+    have hf0 : curvUp 0 = 0 := by simp [curvUp]
+    rw [hf0]
+    have hTB : ∀ y, TanBelow (v - e (α + π / 2)) α 0 y ↔ frameY v α y < -1 := by
+      intro y; unfold TanBelow tanHeight; rw [frameY_base_S]; constructor <;> intro h <;> nlinarith
+    have hTB0 : TanBelow v α 0 z ↔ frameY v α z < 0 := by unfold TanBelow tanHeight; constructor <;> intro h <;> nlinarith
+    rw [hTB0]
+    constructor
+    · rintro ⟨y, ⟨-, -, hy⟩, hzy⟩
+      rw [hTB] at hy
+      have hsq := sq_dist_frame v α z y
+      rw [hzy] at hsq
+      nlinarith [sq_nonneg (frameX v α z - frameX v α y), sq_nonneg (frameY v α z - frameY v α y - 1)]
+    · intro hy
+      refine ⟨z + ((-1 : ℝ) : ℂ) * e (α + π / 2), ⟨?_, ?_, ?_⟩, ?_⟩
+      · have : z + ((-1 : ℝ) : ℂ) * e (α + π / 2) - (v - e (α + π / 2)) = z - v := by push_cast; ring
+        rw [dist_eq_norm, this, ← dist_eq_norm]; exact hz
+      · rw [frameX_base_S, frameX_add_normal]; exact hx
+      · rw [hTB, frameY_add_normal]; linarith
+      · rw [dist_eq_norm]; simp
+  · -- `υ > 0`: the far side lies outside a circle; its shadow is the outside of the concentric circle
+    have hυ : 1 < 1 / υ := by rw [lt_div_iff₀ hpos]; linarith
+    have hf' : 1 / curvUp υ = 1 / υ - 1 := inv_curvUp hpos.ne'
+    have hf : 0 < curvUp υ := by unfold curvUp; exact div_pos hpos (by linarith)
+    set C : ℂ := v + ((1 / curvUp υ : ℝ) : ℂ) * e (α + π / 2) with hCdef
+    have hCn : ‖C - v‖ = 1 / υ - 1 := by
+      rw [hCdef, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, hf',
+        abs_of_pos (by linarith)]
+    have hP : rayPt C v (-1) = v - e (α + π / 2) := by
+      have hCv : C - v = ((1 / curvUp υ : ℝ) : ℂ) * e (α + π / 2) := by rw [hCdef]; ring
+      unfold rayPt
+      rw [hCn, hCv]
+      have : ((-1 / (1 / υ - 1) : ℝ) : ℂ) * ((1 / curvUp υ : ℝ) : ℂ) = -1 := by
+        rw [← Complex.ofReal_mul, hf']
+        have : (1 / υ - 1) ≠ 0 := by linarith
+        rw [show (-1 : ℂ) = ((-1 : ℝ) : ℂ) by simp, Complex.ofReal_inj]; field_simp
+      calc v + ((-1 / (1 / υ - 1) : ℝ) : ℂ) * (((1 / curvUp υ : ℝ) : ℂ) * e (α + π / 2))
+          = v + (((-1 / (1 / υ - 1) : ℝ) : ℂ) * ((1 / curvUp υ : ℝ) : ℂ)) * e (α + π / 2) := by ring
+        _ = _ := by rw [this]; ring
+    have hCeq : v - e (α + π / 2) + ((1 / υ : ℝ) : ℂ) * e (α + π / 2) = C := by
+      rw [hCdef, hf']; push_cast; ring
+    have hT : farSideBelow (v - e (α + π / 2)) α υ δ =
+        {y | dist y (v - e (α + π / 2)) < δ ∧ 0 < frameX (v - e (α + π / 2)) α y ∧ 1 / υ < dist y C} := by
+      ext y
+      simp only [farSideBelow, mem_setOf_eq]
+      rw [tanBelow_iff_of_pos (v - e (α + π / 2)) α hpos y, hCeq]
+    obtain ⟨ε, hε, H⟩ := shadow_outside (v := v) (C := C) (P := v - e (α + π / 2)) (α := α) (ρ := 1 / υ) (δ := δ)
+      hυ hCn hP (frameX_base_S v α) (frameX_normalPt v α _) hδ
+    refine ⟨ε, hε, fun z hz hx => ?_⟩
+    rw [hT, H z hz hx, tanBelow_iff_of_pos v α hf z, ← hCdef, hf']
 
 /-- `dot` is real-bilinear: scaling the first argument by a real number. -/
 theorem dot_div_ofReal (a b : ℂ) (r : ℝ) : dot (a / (r : ℂ)) b = dot a b / r := by

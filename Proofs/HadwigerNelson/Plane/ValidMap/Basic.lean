@@ -443,6 +443,80 @@ theorem frameX_S (v : ℂ) (α : ℝ) : frameX v α (v - e (α + π / 2)) = 0 :=
 theorem frameY_S (v : ℂ) (α : ℝ) : frameY v α (v - e (α + π / 2)) = -1 := by
   have := frameY_add_normal v α (-1) v; simp at this; rw [sub_eq_add_neg, this, frameY_self]; ring
 
+/-- For `κ < 0`, above the arc of curvature `κ` is outside the circle of radius `−1/κ` about `v + n/κ`. -/
+theorem tanAbove_iff_of_neg (v : ℂ) (α : ℝ) {κ : ℝ} (hκ : κ < 0) (z : ℂ) :
+    TanAbove v α κ z ↔ -(1 / κ) < dist z (v + ((1 / κ : ℝ) : ℂ) * e (α + π / 2)) := by
+  have h := sq_dist_normalPt v α (1 / κ) z
+  have hc : 0 < -(1 / κ) := by have : 1 / κ < 0 := by rw [one_div]; exact inv_lt_zero.mpr hκ
+                               linarith
+  rw [lt_iff_sq_lt_sq' hc.le dist_nonneg, dist_eq_norm, h]
+  unfold TanAbove
+  rw [tanHeight_eq_of_ne_zero hκ.ne]
+  have : 0 < -(κ / 2) := by linarith
+  constructor <;> intro h <;> nlinarith [h]
+
+/-- For `κ < 0`, below the arc of curvature `κ` is inside the circle of radius `−1/κ` about `v + n/κ`. -/
+theorem tanBelow_iff_of_neg (v : ℂ) (α : ℝ) {κ : ℝ} (hκ : κ < 0) (z : ℂ) :
+    TanBelow v α κ z ↔ dist z (v + ((1 / κ : ℝ) : ℂ) * e (α + π / 2)) < -(1 / κ) := by
+  have h := sq_dist_normalPt v α (1 / κ) z
+  have hc : 0 < -(1 / κ) := by have : 1 / κ < 0 := by rw [one_div]; exact inv_lt_zero.mpr hκ
+                               linarith
+  rw [lt_iff_sq_lt_sq' dist_nonneg hc.le, dist_eq_norm, h]
+  unfold TanBelow
+  rw [tanHeight_eq_of_ne_zero hκ.ne]
+  have : 0 < -(κ / 2) := by linarith
+  constructor <;> intro h <;> nlinarith [h]
+
+/-- `1/f̃(υ) = 1/υ − 1`: the upward map shortens the reciprocal curvature by one (the engine of FIN's upward half). -/
+theorem inv_curvUp {u : ℝ} (hu0 : u ≠ 0) : 1 / curvUp u = 1 / u - 1 := by
+  unfold curvUp
+  rw [one_div_div]
+  field_simp
+
+/-- `1/f(λ) = 1/λ + 1`: the downward map lengthens the reciprocal curvature by one (the engine of FIN's downward half). -/
+theorem inv_curvDown {l : ℝ} (hl0 : l ≠ 0) (hl1 : 1 + l ≠ 0) : 1 / curvDown l = 1 / l + 1 := by
+  unfold curvDown
+  rw [one_div_div]
+  field_simp
+
+/-- The `x` coordinate is the same in the frames at `v` and at `N = v + n`. -/
+theorem frameX_base_N (v : ℂ) (α : ℝ) (y : ℂ) : frameX (v + e (α + π / 2)) α y = frameX v α y := by
+  have := frameX_sub v α y (v + e (α + π / 2))
+  rw [frameX_N] at this
+  unfold frameX at this ⊢
+  linarith [this]
+
+/-- The `y` coordinate in the frame at `N` is `y − 1`. -/
+theorem frameY_base_N (v : ℂ) (α : ℝ) (y : ℂ) : frameY (v + e (α + π / 2)) α y = frameY v α y - 1 := by
+  have := frameY_sub v α y (v + e (α + π / 2))
+  rw [frameY_N] at this
+  unfold frameY at this ⊢
+  linarith [this]
+
+/-- The `x` coordinate is the same in the frames at `v` and at `S′ = v − n`. -/
+theorem frameX_base_S (v : ℂ) (α : ℝ) (y : ℂ) : frameX (v - e (α + π / 2)) α y = frameX v α y := by
+  have := frameX_sub v α y (v - e (α + π / 2))
+  rw [frameX_S] at this
+  unfold frameX at this ⊢
+  linarith [this]
+
+/-- The `y` coordinate in the frame at `S′` is `y + 1`. -/
+theorem frameY_base_S (v : ℂ) (α : ℝ) (y : ℂ) : frameY (v - e (α + π / 2)) α y = frameY v α y + 1 := by
+  have := frameY_sub v α y (v - e (α + π / 2))
+  rw [frameY_S] at this
+  unfold frameY at this ⊢
+  linarith [this]
+
+/-- Points of the normal line have `x = 0`. -/
+theorem frameX_normalPt (v : ℂ) (α c : ℝ) : frameX v α (v + (c : ℂ) * e (α + π / 2)) = 0 := by
+  have := frameX_add_normal v α c v
+  rw [frameX_self] at this
+  rw [this]
+
+/-- `1/f(μ) = 1 + 1/μ`: the concentric circle through `v` has radius `1 + 1/μ` where the arc at `N` has radius `1/μ`. -/
+theorem inv_curvDown_eq {μ : ℝ} (h0 : μ ≠ 0) (h1 : 1 + μ ≠ 0) : 1 / curvDown μ = 1 + 1 / μ := by
+  unfold curvDown; field_simp; ring
+
 /-- Spec: the frame algebra at `α = 0`, `v = 0`: `2i` (frame `(0, 2)`) lies on `ω(N)`'s arc, so it is not above it, and `i/2`
 is. -/
 example : ¬ TanAbove 0 0 1 (2 * I) ∧ TanAbove 0 0 1 (I / 2) := by
