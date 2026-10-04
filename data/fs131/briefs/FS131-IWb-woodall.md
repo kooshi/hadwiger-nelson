@@ -89,3 +89,8 @@ saying so and the item number. Then re-route the three proofs that read it — E
 through the cone clause, as you proposed, with no statement change; do this first, so the definition change never leaves the build red. Then go on with the
 child lemma, `step5_lt`, `step6`, and `exists_sectorsAt` on wave 3's engine. Record every change in your record with the item number. Everything else in this
 brief stands, and you still start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2026-10-04 (Keryx) — item 154 refined
+
+Ruled as `plans/FS131-close-inventory.md` item 155: the fifth clause of `SectorsAt` is **replaced by `v ∈ F.dom`** at the same position, not deleted; the three
+readers re-route through the cone clause with `hv` from it. Everything else in the previous amendment stands.

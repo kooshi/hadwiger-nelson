@@ -1006,3 +1006,10 @@ reason by the close.*
      may edit that one definition and re-route those three proofs. Alternative weighed: weaken it to `⊆ closure (F.region (c i))`. Why not: it keeps nothing
      the readers need once they go through the cone clause, and it makes `exists_sectorsAt` need the colours along each tangent branch. Confidence:
      medium-high — if a re-route fails, it comes back. Credit IWb: a definition defect found before anything was built on its false leaf.
+155. **Item 154 refined — clause 5 replaced by `v ∈ F.dom`, not deleted** (FS131-IWb, message 2026-10-04): with the clause simply dropped, E1-RAY
+     (`SectorsAt.collarAt_shadow_inner_of_mem` / `_outer_of_mem`) is false, because its re-route through wave 3's `coneAt_region_eq_biUnion` needs the point in
+     the domain. Counterexample: `v = 0 ∉ dom`, colour 0 on radial pieces `⋃ₘ annSector 0 2^(−2m−1) 2^(−2m) a b` with gaps accumulating at 0, colour 1 on the
+     open sector `(b, a + 2π)`, no arcs — the picture `n = 2` meets every other clause, and the inner collar falls in a radial gap infinitely often. **Ruling**:
+     clause 5 becomes `v ∈ F.dom` at the same position (no projection moves; true wherever `exists_sectorsAt` produces a picture, since `hP` makes the domain the
+     plane; `const_sectorsAt` still holds), and the three readers re-route as item 154 says, with `hv` from the new clause. Alternative: drop it and add `v ∈ F.dom`
+     as a hypothesis to E1-RAY and its callers. Why not: a hypothesis on every caller where one clause carries it once. Confidence: high. Credit IWb.
