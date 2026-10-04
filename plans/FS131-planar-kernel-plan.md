@@ -230,7 +230,7 @@ Branch `fs131-w5p`, worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs1
 its own copy — never a symlink). Build from inside the worktree: `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
 ./scripts/build.sh`; iterate with `lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false <file>` under a small slot (8 GiB).
 
-**Modules and leaves.** `Plane/PlaneTopology` (8 `sorry` leaves), `Plane/ValidMap/MapTopology` (17), `Plane/ValidMap/MapGraph` (FS131-KP's: `not_isHoleOf_chain`,
+**Modules and leaves.** `Plane/PlaneTopology` (8 `sorry` leaves), `Plane/ValidMap/MapTopology` (15), `Plane/ValidMap/MapGraph` (FS131-KP's: `not_isHoleOf_chain`,
 `isHoleOf_cluster`, `reduced_props_of_planarLike`, `filledGraph_locallyFinite`, `_connected`, `_infinite`, `_rings`, `_oneInf`, and the in-proof
 joints of `cvb_pinch_connected`, `cvb_hole_disconnected`), `Plane/ValidMap/BaseWalk` (`retArcs_not_interleaved`, `retArcs_not_abut`,
 `endpoint_of_far_end`; the three leaves themselves are now reductions), `Plane/ValidMap/BaseDense` (two joints in `exists_unenclosed_or_bad`).
@@ -275,3 +275,20 @@ append-only files. Nothing with a `sorry` reaches `main`; the branch lands with 
   fixed-point theorem at the pin."
 - **CVB's frame erratum** (Keryx has it, item 277): "a boundary component of `x`" presumes no phantom arcs; `ArcMap` reads the closure's
   complement.
+
+## Stage 6 — SAVED: the skeleton builds
+
+- **Stage 2's tree** (the as-given build, admitted after stage 2's edit): **OK, 446 of 446, 8 modules rebuilt, exit 0**
+  (`build/gate/build/20261004T231630Z-3347186.log`; driver log `data/fs131/kp/build-stage2.log`).
+- **The skeleton, first build: FAIL** on `MapGraph` only — `IsRing`'s and `TwiceApart`'s index binders had no types (`LT ?m` stuck), so
+  `IsRing` did not elaborate and its uses failed (`build/gate/build/20261004T233450Z-3489014.log`; `data/fs131/kp/build-stage4.log`). Binders
+  annotated (`ℕ`, `V`); `MapGraph` and `BaseWalk` then iterate clean.
+- **The skeleton, rebuilt: OK — 446 of 446 batches, 3 modules rebuilt, 11 with warnings, every warning `declaration uses 'sorry'`, exit 0**
+  (`build/gate/build/20261004T234604Z-3574873.log`; `data/fs131/kp/build-stage4b.log`). `tools/check_architecture.py`: PASS (exit 0).
+  `scripts/Axioms.lean`: block "FS-131 wave 5 (job FS131-KP)", 35 records.
+
+**This job's `sorry` declarations:** `PlaneTopology` 8, `MapTopology` 15, `MapGraph` 10 (`not_isHoleOf_chain`, `isHoleOf_cluster`,
+`reduced_props_of_planarLike`, `filledGraph_locallyFinite`, `_connected`, `_infinite`, `_rings`, `_oneInf`, and the in-proof joints of
+`cvb_pinch_connected`, `cvb_hole_disconnected`), `BaseWalk` 3 new children, `BaseDense` 1 (`exists_unenclosed_or_bad`'s joints). Of the seven
+leaves, four are now `sorry`-free reductions (`cvb_thom_reduced`, `retArcs_nested`, `exists_endpoint`, `exists_eleventh`), and three carry
+in-proof joints (`cvb_pinch_connected`, `cvb_hole_disconnected`, `exists_unenclosed_or_bad`).
