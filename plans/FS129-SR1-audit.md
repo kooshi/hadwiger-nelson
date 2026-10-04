@@ -499,3 +499,85 @@ colourings (FS-126, FS-127); valid maps of the plane (the NO). Dependents are re
 lists were built before Y4-EMPTY, and Y4-EMPTY's routes use few of them). The one "empty" whose dependent uses a non-vacuous part is N2-HEX6 →
 RING-TRANSFER-C; no non-contradiction use of an empty class reaches a result outside its own class (registered P = 0.30 that one would matter: not met,
 except RING-TRANSFER-C's clause, which is in the same class).
+
+## Stage 6 — SAVED: the sweep of lane R's Lean order, as far as this agent reached; the list for FS129-L1; hand-back
+
+### 6.1 The sweep (brief § Done means 4) — partial
+
+One line per Lean-order result this pass reached (by row of `data/fs129/index/lean-order.md`); **every other lane-R row is unswept, for FS129-SR2**.
+
+| row | id | line |
+|---|---|---|
+| 28 | FS111-M-PINCH | unchanged; drop FS121-D4-HOLE from its `needs` (a false edge, § 4.1) |
+| 29 | FS121-D4-HOLE | unchanged (a no-go); no dependents |
+| 46 | FS121-DB1-L6 | unchanged; not an input of FS111-M2-INTRAD (§ 4.1) |
+| 56 | FS112-N2-BENDS | unchanged; its fragment reading holds by N2's route (§ 2.1) — the Lean module follows N2's route at end vertices |
+| 65 | FS112-SIX | merge: FS116-N2-FIVERING (five colours, stronger) and FS129-SR1-SIXQ (six colours) in its place |
+| 66 | FS112-U1 | merge with FS116-V5-U1 (row 152): one statement in its first three clauses |
+| 101–103 | FS114-K1, -N7-3T, -N7-HUB | K1 is not an input of N7-HUB (§ 4.1); N7-HUB and N7-3T **empty** given FS129-OR1-QFREE (§ 5.1) — do not formalize as stated |
+| 108 | FS116-N1-QFREE4 | unchanged (a no-go in contrapositive form, not vacuous) |
+| 110, 111 | FS116-N2-FIVERING, -N2-SIXRING | unchanged; FIVERING replaces FS112-SIX's five-colour clause |
+| 121, 122 | FS116-N2-HEX6, -N2-HEX3 | **empty** (§ 5.1) — do not formalize as stated |
+| 128 | FS116-RING-TRANSFER-C | its four-colour clause inherits HEX6's emptiness; the rest unchanged |
+| 138 | FS116-S1-KAPPA | unchanged; the four V4 lemmas are its second route's, not its inputs (§ 4.1) |
+| 149–151 | FS116-V5-LENS, -Y3-SIX, -Y3-TIPS | V5-LENS is a route edge into Y3-SIX (§ 4.1); Y3-SIX, Y3-TIPS unchanged (steps of Y4-EMPTY) |
+| 152 | FS116-V5-U1 | merge with FS112-U1 (row 66) |
+| 158 | FS116-V6-HUG | a case of FS129-MR1-DOUBLETIP — formalize DOUBLETIP in its place; its identity is FS129-SR1-TWOCIRC |
+| 161–167 | FS116-Y3-HUBCOL, -NBTIP, -NOQ, -TIGHT, -LENS, -TIGHTLENS, -STARFORCE | **empty** (§ 5.1) — do not formalize as stated |
+| 168 | FS116-Y4-FLANK | unchanged; its model is TWOCIRC's diagonal |
+| 169 | FS116-Y4-EMPTY | unchanged; route 2 takes DOUBLETIP in place of V6-HUG |
+| 170, 171 | FS116-Y4-SYM, -Y4-SPOKE | **empty** — do not formalize as stated |
+| 173, 174 | FS121-C1-GMAP, -D3-GRUNDY | no cycle: GMAP is not an input of GRUNDY (§ 4.1) |
+| 180 | FS121-D4-FACE | **stated in a stronger form already held**: FS121-V5-FACE-SHARP (`ρ² ≥ 2g − g²`, sharp; one mind) — formalize the sharp form, D4-FACE (two minds) its corollary |
+| 185, 186 | FS121-V3-CPI, -V2-SECTOR | CPI is not an input of SECTOR (§ 4.1) |
+| 187, 188 | FS121-V2-VT-W, -D1-VT | **stated in a stronger form already held**: VT-W is VT's wider form (one mind; VT two minds); formalize VT-W in VT's place if its corner case is consumed, as VT-W's own handoff says |
+| 184, 189 | FS121-V2-EROSION-DIAM, -D1-EROSION | EROSION-DIAM is not an input of EROSION (§ 4.1) |
+| 190, 191 | FS121-D1-PENCILWIN, -O1-OUT | no cycle (§ 4.1); O1-OUT inhabited by SQ9 (§ 5.1) |
+| 194, 195 | FS121-D2-PERFIN, -D2-SYM | no cycle: PERFIN is derived from SYM (§ 4.1) |
+
+### 6.2 For FS129-L1 (the Lean backlog's input)
+
+**Formalize X in place of A, B, C:**
+1. **FS129-SR1-TWOCIRC** once, in place of the identity steps inside FS114-Y5-PXKILL, FS116-V6-HUG, FS116-V6-ADJ and FS116-Y4-FLANK (each keeps its own
+   pinning of two tiles).
+2. **FS129-MR1-DOUBLETIP** in place of FS116-V6-HUG (and of FS116-Y4-EMPTY's double-tip step on route 2); its `uses only:` may drop FS116-N2-STAR (§ 2.2).
+3. **FS116-N2-FIVERING** and **FS129-SR1-SIXQ** in place of FS112-SIX.
+4. **FS116-V5-U1**'s first three clauses in place of FS112-U1's; U1's shadow clause and V5-U1's four-colour clause as two corollaries.
+5. **FS129-SR1-BENDANY** and **FS129-SR1-BENDLE3** in place of FS129-OR1-BENDFRAG and FS129-OR1-BEND3, over FS129-OR1-WHOLE and FS112-N2-BENDS, by
+   N2's route at end vertices (§ 2.1), with the connectedness step by quasi-components.
+6. **FS121-V5-FACE-SHARP**'s form in place of FS121-D4-FACE's hypothesis `2g < ρ²`.
+7. **FS121-V2-VT-W** in place of FS121-D1-VT, if its corner case is consumed.
+8. **FS129-SR1-RINGBAND** in place of FS110-N2-RING, FS110-Y3-GP and FS129-OA1-RINGWIND, should any of them be formalized.
+
+**Do not formalize as stated (empty):** FS116-Y3-NOQ, -Y3-TIGHT, -Y3-HUBCOL, -Y3-LENS, -Y3-NBTIP, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SYM, -Y4-SPOKE,
+-Y4-Q1, -V6-ADJ, -V1-FRAME, -N2-HEX6, -N2-HEX3; FS114-N7-HUB (empty given FS129-OR1-QFREE) and with it FS114-N7-3T; FS116-RING-TRANSFER-C's four-colour
+clause.
+
+**Index corrections the order needs** (§ 4.1): drop 12 false edges and the 2 reversed ones; the cycles M-PINCH ↔ D4-HOLE, INTRAD ↔ DB1-L6,
+GMAP ↔ GRUNDY, PENCILWIN ↔ O1-OUT, PERFIN ↔ D2-SYM and N2-AVG / N2-LEMMAS / ROUTE-T disappear, K1 leaves N7-3T ↔ N7-HUB.
+
+### 6.3 What FS129-SR2 takes over
+
+The sweep's remaining lane-R rows (most of rows 1–27, 30–45, 47–64, 67–100, 104–107, 109, 112–120, 123–127, 129–137, 139–148, 153–157, 159, 160,
+172, 175–179, 181–183, 192, 193); item 63 (`open-steps.md` § 3 beyond FS-110, scoped to the Lean order); item 81's three leads (§ 4.2); a wider
+V6-ADJ (the analogue of DOUBLETIP); and the stall of group 5 (an O1-OUT analogue for valid maps).
+
+### 6.4 Registered expectations, scored
+
+| registered | outcome |
+|---|---|
+| named merge groups confirmed one statement or a case: 5 of 7 | **3 of 7** (groups 2, 3, 7; group 1 is four statements over one lemma, with one case relation; 4, 5, 6 are not one statement) — below |
+| further merges in the sweep: 8 | sweep partial: 2 "stronger form held" (FACE-SHARP, VT-W) and item 61's merge — scored by SR2 |
+| hypotheses weakened, derived: 3 | 2 (BENDANY: any `k`, any centre; SIXQ: any `k`, Siamese allowed) and one refinement (RINGBAND (iv)) |
+| vacuity 38 / 7 / 6 / 4 (hyp / no-go / empty / inhabited) | 35 / 4 / 15 / 1 |
+| an empty class inherited where it matters, P = 0.30 | not met (only RING-TRANSFER-C's own-class clause) |
+| bends' disagreement settled by WHOLE, P = 0.55 | **yes** — the sides are about a map and a fragment; WHOLE carries side 1 with the restriction repaired |
+| attack on QFREE's chain succeeds, P = 0.15 | **no** |
+| attack on DOUBLETIP succeeds, P = 0.15 | **no** |
+| a repair narrower than the composition, P = 0.25 | no (two notes for Lean and one narrowed uses-only line, no repair to a statement) |
+| a held result found false, P = 0.22 | **no** |
+| real share of the "nothing" edges: 30 % | 23 % (46 % with second routes) |
+| reach the end of the vacuity sort, P = 0.6 | **yes** |
+
+Brier on the seven binary predictions (disagreement settled 0.55 → 1; QFREE attack 0.15 → 0; DOUBLETIP attack 0.15 → 0; repair 0.25 → 0; false result
+0.22 → 0; vacuity sort finished 0.6 → 1; inherited 0.30 → 0): (0.2025 + 0.0225 + 0.0225 + 0.0625 + 0.0484 + 0.16 + 0.09) / 7 = **0.087**.
