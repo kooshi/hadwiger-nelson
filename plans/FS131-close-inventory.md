@@ -435,3 +435,12 @@ reason by the close.*
 76. **Brief FS131-K4c, wave 4's third planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K4c-wave4.md`), gated PASS: the nine unit-arc items of K4b's Stage 9,
     the domain- and obligation-modeling passes over the whole wave (neither K4 nor K4b ran them over its additions), every leaf's plan, the handoff. Source: this
     commit.
+77. **Skeleton defect fixed in-wave by its planner — K4's `exists_shave`** (FS131-K4c, message 2026-10-04; `Plane/ValidMap/Contact`): it concluded `F'.Condition5` for
+    any horn curvatures, false when `κ₂ > 1` and the clear split curvature is σ = 1 (the new boundary is then an arc of ω(N), a unit arc). Fixed by
+    `−1 ≤ κ₁` and `κ₂ ≤ 1`, which every consumer already has (`woodallCone` gives [−1, 1], `stuck_structure` gives (−1, 1)); σ = ±1 then puts the split on
+    the horn's own arc (FS112-WALK row 7). No other statement read the old form. Accepted (a planner's correction of its own wave's skeleton, reported at once).
+78. **Generalization G-MOVES-UA** (K4c): the three moves (merge, ray-merge, shave) hold with unit arcs; `exists_shave` and `exists_rayMerge` drop Condition 5
+    (ray-merge's bounds become `−1 ≤ κ₁`, `κ₄ ≤ 1`, FS112-WALK W3), and all three conclude `F'.RingArcsWithin F` — no new unit arc, a new foundation definition
+    (every point on an arc of Γ on some ω(p) in F' was on one in F, same centre) replacing the vacuous-with-unit-arcs `F.Condition5 → F'.Condition5`. **For wave
+    5's planner**: FS112-N2-RED and -N2-TERM read the moves in this form ("creating no unit arc"). Also new: `AgreesOff F' F U` (the moves' shared clause, meaning
+    unchanged) and `IsCoveringPair` in the union sense.
