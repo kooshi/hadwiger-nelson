@@ -765,3 +765,52 @@ never symlink it). On top of stage 10's state and the implementers' stages 1–6
   `ARCHITECTURE.md` § Trust; `scripts/axioms.sh` must be taught the name — a change Keryx owns, `LEAN.md` § Trust ledger); `./scripts/vacuity.sh`
   and `--self-test` green with the counts reconciled (inhabitants as stage 10; `upperHalfPlane_falconer_hyp` models the import);
   `tools/check_architecture.py` exit 0; then merge `main`, re-run, fast-forward.
+
+## Stage 14 — SAVED: the readback (FS131-K2d)
+
+*Job FS131-K2d, de Bruijn (Opus 5.5), launched 2026-10-04 to state the children of wave 2's last 18 leaves (brief
+`data/fs131/briefs/FS131-K2d-wave2-children.md`, with `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building), in the worktree
+`.claude/worktrees/fs131-w2d` (branch `fs131-w2d`, from `fs131-w2` at `29082313`). Resuming per standing rule 2: stages 1–13 are saved
+(K2, K2b, K2c); this job numbers its stages from 14 and redoes none. Theorems this job proves are listed under "Theorems this phase proved"
+at the end of its last stage.*
+
+### 14.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (each `>` block, minus its `— source:` line, as an exact substring of the file the source names):
+
+| # | quotation (opening words) | source | result |
+|---|---|---|---|
+| 1 | "RESULT: GAP at a planning step — 18 leaves (lane A's 4, CoverExamples' 13, exists_not_uniform_kept) …" | `.claude/worktrees/fs131-w2/data/fs131/reports/FS131-K2c.md` | exact |
+| 2 | "\| `hc_isRegularMUA`, `hc_band_components`, `hc_irreg` \| stage 7.4 and 9.2's named children \| ◇ …" | this record § 12.2 | exact |
+| 3 | "- **May**: prove any child or leaf; add further children …" | this record § 13 | exact |
+
+**One finding about the brief**: its list of the leaves in `Plane/CoverExamples` names 14 declarations, `fatZ_spec` among them, but
+`fatZ_spec` is **proved** at `29082313` (sorry-free since K2b's commit `344a9081` stated and proved it; it has no `sorry` line). The leaves
+in the three files are 13 + 2 + 2 = **17**, as the brief's own count says, and 18 with `exists_not_uniform_kept`. Nothing to do.
+
+### 14.2 The 18 leaves at `29082313` (lines that are exactly `sorry`, by script) with their ◇ children (§ 12.2, names verbatim)
+
+| module | leaf | ◇ children named by K2c |
+|---|---|---|
+| `Plane/CoverExamples` | `sq9_saturated_both` | `sq9_essClosure_subset`, `sq9_square_subset_densitySet`, `sq9_essBoundary_on_edge`, `sq9_partner` |
+| | `r7_aeColouring` | `measurable_r7Col`, `r7Col_add_period`, `r7_sameColour_unit_mem_sphere`, `unitPairsNull_of_first_mem_null`, `volume_iUnion_sphere_null` |
+| | `r7Cls_saturated` | — (assembly from `exists_ne_mem_essClosure`, `r7_boundary`, `essSupport_eq_closure_densitySet`) |
+| | `r7_boundary` | `r7_lattice_essClosure`, `r7_two_up_colours`, `r7_offLattice_arc`, `r7_arc_centre_colours` (✓ `essClosure_subset_essSupport`) |
+| | `r7Cls_isMaximalCover` | `r7_phi_pos` |
+| | `disc7_isMaximalCover` | `disc7Col_eq_dist_ge`, `disc7_dist_eq_one_mem_sphere`, `measurableSet_disc7`, `disc7_cover`, `disc7_colour_cover`, `phi_closedBall_pos` |
+| | `disc7_isRegularMUA` | `essSupport_disc7`, `volume_frontier_disc7` |
+| | `disc7_upperDensity` | `disc7_periodic`, `volume_disc7_cell` |
+| | `IsMUA.add_normal_mem_essSupport` | `exists_shadow_point`, `circle_meets_halfBox_of_ne` (with `IsMUA.interior_union_unitShadow`, `subset_densitySet_of_isOpen_ae_subset`, both held) |
+| | `g1Bounds_hcGap` | `hcGap_gap_formula`, `hcGap_deriv`, `hcGap_lowerParabola` |
+| | `hc_isRegularMUA`, `hc_band_components`, `hc_irreg` | `hcBandTop_spec`, `hcUp_slivers`, `hc_unitAvoiding`, `hc_sausage_cover`, `hc_lemmaNL`, `hc_exclusion`, `hc_ae_phi_pos`; for IRREG the bulge-crossing `\|E\| > 0` and Baire on `(Z − ρ) ∪ (Z + ρ)` |
+| `Arith/PlaceHom` | `exists_placeHom` | `placeHom_step`, `pureTranscendental_snoc`, `placeHom_base`, `exists_hom_of_isPlaceHom` |
+| | `noAffine_fields` | `chromaticNumber_planeOver_pureTranscendental_eq`, `ringEquivZMod_of_card`, `slack_complete`, `slack_gamma7` |
+| `Arith/FalconerField` | `falconerFan_five_field`, `falconerFan_five_placeHom` | `not_falconerFan_of_colorable`, `tip_mem_of_hom`, `gamma7_orbit`, `gamma11_orbit`, `gamma19_orbit`, `sub_mem_of_connected` |
+| `Plane/Slack` (FS131-I2e's) | `exists_not_uniform_kept` | ◇ "the colouring by formula (a definition), its measurability and properness, the non-kept band per scale" (no names) |
+
+### 14.3 The worktree builds as given
+
+`/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree,
+2026-10-04: **OK** — 443 of 443 batches, 3 modules rebuilt, 9 modules with warnings, 8 m 54 s (`build/gate/build/20261004T104203Z-2786032.log`).
+Every warning is `declaration uses 'sorry'` except two deprecations in FS131-I2e's `Plane/MaximalCover` (`Set.diff_subset` at lines 821
+and 846; for the implementer, not this job).
