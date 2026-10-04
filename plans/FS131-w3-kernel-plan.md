@@ -407,3 +407,179 @@ With `z ∈ F.dom` the row's argument goes through (every direction of a side co
 formal statements `ringArc_sideCone_other`, `four_of_bothKind`, `four_of_bothKind_simple` carry `hz : z ∈ F.dom`. The derivation's setting (a
 fragment about a vertex, `z` the vertex) always has `z` in the domain, so no consumer is affected; FS112-U1's merged clauses (the first three)
 need no such hypothesis.
+
+## Stage 6 — SAVED: the leaf plans and the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh)
+
+### 6.1 What the pass found: three statements from which most leaves derive
+
+The pass read each leaf for the statement its proof derives from, and found that the ring rows are not twenty arguments but three engines
+and their instances. Each engine is a child the implementer states first, in the module named.
+
+1. **The crossing engine** (`Plane/Tiles`, child `Valid.dist_lt_or_gt_of_isPreconnected`): in a valid map, for `z ∈ region c` and any
+   preconnected `S ⊆ closure (region c)`, every point of `S` is nearer than `1` to `z` or every point is farther (`ne1_region` makes `1`
+   unattainable; wave 1's `preconnected_dist_lt_or_gt`, `Plane/DensityPoints`, does the rest). Every "N-E1 against a curve" step of the
+   derivations is this lemma at a germ, a radial segment or an arc through a point: **TWIST**'s first clause (a point of the class near a point
+   of `g`, against the arc `σg`), **GERM-R** (`z = y + h`, against the germ), **ECHO**'s engine (a point of the class near `x`, against the arc
+   of `ω(p)` through `w`), **V5-U1**'s cones (`z + h`, against a radial segment of the inner or outer side), **TOUCHW**'s `X`-clause. Each of
+   these leaves then reduces to a *pure-geometry* child — exhibit two points of the curve on either side of distance `1` — which is exact
+   arithmetic on unit circles (wave 1's `dist_ringPt_ringPt_cmp_one`, `ringPt_sub_ringPt`, `norm_e_sub_e_le`).
+2. **One point in the closure of one tile** (`Plane/LocalStructure`, child `mem_closure_tile`: every point of the domain lies in the closure of
+   some tile): a ray from `x` avoiding the finitely many arcs near `x` (each meets a ray from `x` in finitely many points unless it is a
+   segment on that ray; finitely many directions excluded) is an interval of interior points, so lies in one tile. **Re-pricing**: K3 put
+   OR1-WHOLE's covering clause on `finite_tiles_near` (H); it needs only this (M) — for `y` near a point of `B̄(p, ρ′)`, the tile whose
+   closure holds `y` is open with `y ∈ ball p ρ` in its closure, so it meets `B(p, ρ)`. `exists_mem_coloursAt` follows too.
+3. **The sector structure at a point** (`Plane/LocalStructure`, child `localSectors`): for `x ∈ dom` there are `r > 0` and finitely many
+   branches — continuous injective curves `b : [0, r) → ℂ`, `b 0 = x`, `‖b s − x‖ = s`, pairwise disjoint on `(0, r)`, each with a tangent
+   direction — whose union is `Γ ∩ ball x r` (minus nothing, plus `x` when `x ∈ Γ`), and the components of `ball x r \ (Γ ∪ {x})` are the open
+   polar sectors between angularly consecutive branches (each path-connected: a polar rectangle). `finite_tiles_near` (a tile meeting
+   `ball x r` contains a sector), `coneAt_region_eq_biUnion` (the cone of a finite union), `Simple.coneAt_eq_angleIcc` (a Jordan boundary
+   has exactly two branches at each of its points, and the tile is the sector between them), `germ_dichotomy` (the branches cross `ω(p)` at
+   finitely many points) and `flank_edge_exists` (the cone's end direction is a branch's tangent) are corollaries. K3 priced the first and third
+   H separately; they share this one H statement, and each is M on top of it.
+
+**Measures for the burn-down.** No leaf recurses: every proof is a finite composition, so the measure is the leaf count (§ 5.1: 96 `sorry`
+leaves) and each turn replaces a leaf by stated children. The one quantity-shaped argument is RINGBAND's band step (the jumps of `D₀(θ)`
+across the finitely many events of a period), an induction on the sorted event list of `S ∩ [θ₀, θ₀ + 2π)` (`Set.Finite.toFinset` sorted;
+`Finset.induction_on` over the events crossed).
+
+**Smells read.** (a) The four GERM-R clauses are one argument under the reflection `θ ↦ 2ψ − θ` — state the geometric child once, parametric in
+the sign `σ = ±1` of `±60°` and the side `s`, and instantiate four times (transporting the whole map by conjugation would be heavier).
+(b) GERM-S, RING-Q-PRIME-S, TOUCHW, QFREE4 and FIVERING each re-derive "a ring point off `Γ` carries a colour absent at `p`" — that is
+`not_mem_coloursAt_of_mem_sphere`, cited, never re-proved. (c) `ringband_iv`'s `M` is quantified over all good `θ`: the band step must be an
+invariant of the whole period (all `m_j(θ) = m₀(θ + jπ/3)` and `m₀` constant across events), not a per-`θ` fact — the statement was checked to
+carry it (§ 5.2).
+
+### 6.2 The plan per leaf
+
+Mathlib names confirmed with `#check` at the pin (`v4.32.0`, scratch file 2026-10-04): `IsCompact.exists_cthickening_subset_open`,
+`cthickening_closedBall`, `Set.Finite.isClosed_biUnion`, `Set.Finite.closure_biUnion`, `IsPreconnected.subset_connectedComponentIn`,
+`connectedComponentIn_subset`, `IsOpen.connectedComponentIn`, `IsPreconnected.image`, `IsPreconnected.Icc_subset`, `intermediate_value_Icc`,
+`intermediate_value_Icc'`, `Real.cos_pos_of_mem_Ioo`, `Real.cos_nonneg_of_mem_Icc`, `HasDerivWithinAt.norm_sq`,
+`IsLocalMaxOn.hasFDerivWithinAt_nonpos`, `mem_posTangentConeAt_of_segment_subset`, `Complex.arg_ofReal_of_nonneg`, `Int.floor_eq_iff`,
+`round_eq`, `ZMod.intCast_zmod_eq_zero_iff_dvd`, `ZMod.intCast_cast`, `MeasureTheory.measure_union_le`, `MeasureTheory.Measure.restrict_apply`,
+`Real.volume_Ico`, `Complex.dist_eq`, `Complex.sq_norm`, `Complex.normSq_apply`, `Metric.mem_closure_iff`, `mem_closure_iff_nhds`,
+`Finite.exists_infinite_fiber`, `Set.Finite.biUnion`, `interior_mono`, `IsOpen.subset_interior_iff`, `frontier_inter_subset`,
+`Complex.norm_exp_ofReal_mul_I`, `ContDiffOn.continuousOn`, `Set.ncard_le_ncard`, `Set.ncard_pair`, `Set.ncard_add_ncard_compl`,
+`Set.Finite.isClosed`, `IsCompact.elim_finite_subcover`, `isCompact_sphere`. (Not at the pin, so not to be cited:
+`IsLocalMaxOn.hasDerivWithinAt_nonpos`, `closure_biUnion_of_finite`.) Wave 1's, cited: `dist_ne_one_of_mem_of_mem_closure` (CLOSURE),
+`dist_lt_one_of_isPreconnected`, `dist_lt_one_of_forall_dist_ne_one`, `preconnected_dist_lt_or_gt`, `hull2`, `subset_densitySet_of_isOpen`,
+`dist_ringPt_ringPt`, `dist_ringPt_ringPt_cmp_one`, `ringPt_sub_ringPt`, `norm_e_sub_e_le`, `twoCirc_identity`, `twoCirc_cmp_one`,
+`ae_arcLength_shift_pi` (UnitAvoiding; its proof is the template for a shift by `π/3`).
+
+Difficulty: E easy, M moderate, H hard. Dependency order within each module is the order below.
+
+**`Plane/LocalStructure`**
+| leaf | route | children | grade |
+|---|---|---|---|
+| `Arc.finite_inter_sphere_or_eq_circ` | segment: `‖a + t(b − a) − p‖² = 1` is a quadratic in `t` with leading coefficient `‖b − a‖² > 0`, ≤ 2 roots; `circ c ρ`: `c = p, ρ = 1` is the second disjunct, `c = p, ρ ≠ 1` empty, `c ≠ p`: `A cos θ + B sin θ = C`, `(A, B) ≠ 0`, finitely many roots on `[θ₀, θ₁]` (length ≤ 2π) | `quadratic_roots_finite`, `trig_linear_roots_finite` | M |
+| `covers_one_iff` | `IsCompact.exists_cthickening_subset_open` on `closedBall p 1`, `cthickening_closedBall` | — | E |
+| `finite_ringΓ_off_ringArc` | cover the compact ring by finitely many `locallyFinite` neighbourhoods (`IsCompact.elim_finite_subcover`); arcs not on `ω(p)` contribute finitely many points; a point on an arc `circ p 1 θ₀ θ₁` of `Γ` is `OnRingArc` (a short sub-arc lies in `dom`, open) | `onRingArc_of_mem_circ` | M |
+| `dense_interiorPts` | arc carriers are null (a segment lies in a line, an arc in a circle: `Metric.sphere` is null for `volume` on `ℂ`), so near `x` the finitely many arcs have empty interior together | `Arc.volume_carrier`, `interior_carrier_eq_empty` | E–M |
+| `exists_mem_coloursAt` | `closure interiorPts = ⋃ c, closure (region c)` (finite union, `Set.Finite.closure_biUnion`) | — | E |
+| `mem_closure_tile` (child, new) | engine 2 above | `exists_ray_avoiding_arcs` | M |
+| `localSectors` (child, new) | engine 3 above: arcs through `x` only (`locallyFinite` + closed arcs at positive distance); each has ≤ 2 branches, graphs over the radius for small `r`; distinct branches meet only at `x` for small `r` (two distinct circles or lines meet in ≤ 2 points); sort by angle; polar sectors path-connected | `arcs_near_pass_through`, `Arc.branches`, `branches_disjoint`, `sector_isPathConnected` | **H, the wave's hardest leaf** |
+| `finite_tiles_near` | a tile meeting `ball x r` contains a sector (or the punctured ball); ≤ #sectors tiles | — | M on `localSectors` |
+| `mem_coloursAt_iff_exists_tileOf` | (←) `mem_coloursAt_of_tileOf`; (→) closure of a finite union of tiles near `x` | — | E on `finite_tiles_near` |
+| `coneAt_region_eq_biUnion` | the cone is local (`coneAt (S ∩ ball x r) x = coneAt S x`) and of a finite union is the union | `coneAt_inter_ball`, `coneAt_union` | M |
+| `exists_mem_coneAt_region` | points `zₙ ∈ interiorPts` within `1/n²` of `x + e(β)/n` (`dense_interiorPts`); `Finite.exists_infinite_fiber` on their colours | — | M |
+| `germ_dichotomy` | branches cross `ω(p)` finitely often (`Arc.finite_inter_sphere_or_eq_circ`); a short germ avoids the crossings: inside one tile, or on an arc `circ p 1` with a strip on each side free of `Γ`, each side one tile | `strip_free_of_Γ` | M on `localSectors` |
+| `Simple.coneAt_eq_angleIcc` | a Jordan boundary meets a small ball in exactly two branches at each of its points (`IsJordanDomain` transported: a point of a circle has a neighbourhood that is an interval); the tile is the sector between them | `jordan_two_branches` | H on `localSectors` |
+
+**`Plane/SixFragment`** (each by exact arithmetic in `ℚ(√3, √7)`; rotation by `60°` maps colour `j` to `j + 1`, so validity is checked for colour 0)
+| leaf | route | grade |
+|---|---|---|
+| `sixArcs_nondegenerate` | 19 arcs, each by `norm_num` on `e (jπ/3) ≠ 0` and the angle inequalities | E |
+| `sixArcs_locallyFinite` | `sixArcs` is finite (a finite union of images of `Fin 6`): take `t = univ` | E |
+| `sixCol_locallyConstant` | case split on `‖x‖ < 1`, `‖x‖ > 1`; off the arcs, `arg x / (π/3)` avoids the integers where the floor is read and the half-integers where the round is read (rays `60°j` in the disc are segments, outside lie in lenses; rays `60°j + 30°` outside lie in gaps; `arg`'s cut at `π` is a ray `60°·3`); the lens test is open off the lens sides | M–H (bookkeeping) |
+| spec examples (3 open) | `Complex.arg` of `6/5`, `(6/5)e(π/6)`, `(1/2)e(7π/6)`; `round (1/2) = 1`; exact distances | E |
+| `sixFrag_valid` | `sixCol x = sixCol y`, `dist x y = 1` ⟹ False: rotate to colour 0; the three tiles of colour 0 (`S_0`, `Q_4`, `G_2`): within each all distances `< 1`, across them all `> 1` (the derivation's 36 pairs, by symmetry 6) | H (exact plane geometry, six region pairs) |
+| `sixFrag_nonSiamese` | distinct tiles of one colour are the cross pairs above, all distances `> 1` | M on the same pair lemmas |
+| `sixFrag_coloursAt_zero` | sector `S_j` approaches `0` (points `t e(60°j + 30°)`, `t → 0`) | E |
+| `sixFrag_sphere_subset_Γ` | the unit circle is an arc, `sphere 0 1 ⊆ ball 0 (3/2)` | E |
+| `sixFrag_isQArc` | every colour is at `0` and `6 ≥ 4`: `IsQArc` from `IsRingArc` and `sixFrag_coloursAt_zero` | E |
+| `sixFrag_isRingArc` | inner side of `r((0, π/6))` in `S_0` (colour 0), outer in `Q_0` (colour 2) — `quadRing_isRingArc`'s template | M |
+
+**`Plane/Tiles`**
+| leaf | route | grade |
+|---|---|---|
+| `Valid.unitPairsNull_region` | `unitPairSet (region c) = ∅` (a pair is two interior points of one colour at distance `‖e θ‖ = 1`) | E |
+| `ne1_region` | CLOSURE at `U = region c` (`isOpen_region`) | E |
+| `IsTile.subset_ball` | `dist_lt_one_of_isPreconnected` at `T`, external point `x`, `ne1_region` | E |
+| `IsTile.closure_subset_closedBall`, `IsTile.dist_lt_one`, `IsTile.dist_le_one_of_mem_closure` | closure of a ball; `x ∈ T ⊆ cl T`; continuity | E |
+| `Valid.dist_lt_or_gt_of_isPreconnected` (child, new: engine 1) | `preconnected_dist_lt_or_gt` + `ne1_region` | E |
+| `unitNear_or_unitFar` | `hull2` at `A = region c` (`P = A ⊆ {d̄ > 0}`, `Q = B ⊆ densitySet`), or engine 1 twice | E |
+| `unitNear_of_mem_closure`, `unitFar_of_mem_closure` | the dichotomy, and closure of a strict bound | E |
+| `NonSiamese.eq_of_unitNear` | `by_contra`: a Siamese pair | E |
+| `unitNear_iff_of_mem_closure_inter` | `T ~ A` ⟹ `dist t z ≤ 1`, `≠ 1` (`ne1_region`) ⟹ `< 1` ⟹ `T ~ B`; symmetric | E |
+| `cluster` | near/far tiles of `𝒯` give two closed sets covering the preconnected union (`isPreconnected_closed_iff`); a common point is at distance exactly `1` from every point of `U` (≤ and ≥), against `ne1_region` | E–M |
+| `Valid.wholeRestrict` | interior points shrink, colour unchanged | E |
+| `wholeRestrict_covers` | engine 2 (`mem_closure_tile`) | M |
+| `isTile_wholeRestrict_iff` | a tile of `F` meeting `B(p, ρ)` is open and inside the union of closures, so inside `wholeDom`; a component of `interiorPts F_ρ` lies in a tile `T` of `F`, which meets a closure `cl T′` with `T′` meeting `B(p, ρ)`, so `T = T′` | M |
+| `isTile_wholeRestrict_of_mem_closure`, `NonSiamese.wholeRestrict`, `Simple.wholeRestrict` | transport through the iff (same sets, same colour, same closures in `ℂ`) | E |
+| `not_mem_closure_wholeRestrict_of_inner` | `w ∈ T′ ∩ B(p, ρ)`, `T′ ⊆ B(p + 2e θ, 1)` (`IsTile.subset_ball`); parallelogram `‖w − (p + e θ)‖² = (‖w − p‖² + ‖w − p − 2e θ‖²)/2 − 1 < 1`; a point of `T` near `p + e θ` within `1` of `w`; so `T ~ T′`, against a point of `T ∩ B(p, 1)` more than `1` from `p + 2e θ` | M |
+| `not_mem_closure_wholeRestrict_R₂` | the hypothesis of the pointwise form at each `θ ∈ [θ₁, θ₂]` (points `p + (1 − η)e θ′`, `θ′ → θ` inside) | E–M |
+
+**`Plane/RingGerm`**
+| leaf | route | grade |
+|---|---|---|
+| `not_germIn_closure_rotate` | engine 1: `z ∈ region c` within `ε` of `r(θ + s t₀)`; on `σg` the distance from `z` crosses `1` at `t₀` (chord at `60° ± s(t − t₀)`: `dist_ringPt_ringPt_cmp_one`), so for `ε` small `σg` has points on both sides | M |
+| `not_mem_coloursAt_of_mem_sphere` | `ne1_region` at `x = p`, `dist z p = 1` | E |
+| `isClosed_ringD` | sphere ∩ finite union of closures | E |
+| `ringD_subset_Γ` | a point of `ringD` off `Γ` is interior, in `region (col x)` only; then `col x ∈ coloursAt p`, against `not_mem_coloursAt_of_mem_sphere` | E |
+| `finite_ringD_off_ringArc` | `ringD_subset_Γ`, `finite_ringΓ_off_ringArc` | E |
+| `germR_*` (four) | engine 1 against the germ at `r(ψ + σπ/3)`, side `s`; the geometric child `germR_geom σ s` (stated once): for `β` strictly inside the interval and `h → 0` along `β`, the germ has points nearer and farther than `1` from `y + h` — the first-order computation of § 4 made exact (`‖y + h − r(φ)‖² − 1` at `φ = ψ + σπ/3` has the sign of `−cos(β − ψ − σπ/3…)` up to `O(‖h‖²)`, and at the germ's far end the chord exceeds `1`) | M each on one H geometric child |
+| `germS_absent` | the germs at `y` lie in `region X`, `region X′` (ring points off `Γ`): `not_mem_coloursAt_of_mem_sphere`; `Set.ncard` arithmetic over `Fin k` (`Set.ncard_add_ncard_compl`, `Set.ncard_pair`) | E |
+| `germS_inward`, `germS_outward`, `germS_four` | transcribe `plans/FS116-N1-proof.md` § 4.1 (GERM-S, RING-GERM without non-Siamese): step 1 (a germ at `ψ ± 60°` not on a (Q) arc lies, by `germ_dichotomy`, in one class or on a ring arc not both-kind; carrying no `X′` and only absent colours it carries `X`); then GERM-R at the germs bounds which colours approach `y` in the window; `exists_mem_coneAt_region` gives a colour per direction; engine 1 places the tiles of `p` (in `B̄(y, 1)` / missing `B(y, 1)`); (iii) from (i) and (ii) and the two germs at `y` (`X`, `X′`) | **H** (the derivation's case split, three leaves) |
+| `ringQPrimeS` | `germS_four`, with "a (Q) arc whose closed arc holds the point holds one of its germs" (child `germOnQ_of_onQArc`) | E–M |
+| `qfree4` | transcribe § 4.2's argument (TWIST-D, N-E1, "a ring arc of `Γ` excludes its side colours `60°` away" — child `ringArc_excludes_sides`) | M–H |
+| `fiveRing_no_changePoint` | a change point forces two absent colours (`germS_absent`'s first half at any `k`) | E |
+| `fiveRing_finite_off_Q` | transcribe FS116-N2-FIVERING's argument (`plans/FS116-derivation.md:655`'s address): off `finite_ringΓ_off_ringArc`'s exceptions, a ring point off a (Q) arc and its `60°` partner off one force a second absent colour | M–H |
+| `fiveRing_length` | `[0, 2π) ⊆ Q ∪ (Q − π/3) ∪ finite`, so `2π ≤ 2·arcLength Q` by the shift-invariance of `arcLength` on periodic sets (template: `ae_arcLength_shift_pi`) | M |
+| `fiveRing_no_hub` | a hub is a change point | E |
+| `sixQ_sphere_subset_Γ` | a ring point off `Γ` is interior, in some `region c`, and `c ∈ univ = coloursAt p`, against `not_mem_coloursAt_of_mem_sphere` | E |
+| `sixQ_isQArc` | `IsQArc` from the arc, `hall`, `ncard univ = k ≥ 4` | E |
+| `touchW` | transcribe FS116-N1-TOUCH's argument (`plans/FS116-N1-proof.md` § 4.2): the germs at `w` lie in classes (off `Γ`, not change point, `germ_dichotomy`), one colour `X`, absent; GERM-R with `c = X′` at all four germs; the `X`-clause by engine 1 (each of the four germs is at distance `1`, point by point, from the matching germ at `w` in `region X`) | H |
+| `echo_unique` | engine 1 against the arc of `ω(p)` through `w` (the two germs and `w`): the distance from `z ∈ region X` near `x` has nonzero derivative along the arc unless `x − w ∥ e(ψ)`, i.e. `x ∈ {p, 2w − p}`; `p` is excluded by `X ∉ coloursAt p` | M |
+| `echo_of_mem_closure`, `echo` | `echo_unique`; `essSupport ⊆ closure` (a point every ball about which meets the class in positive measure) | E |
+| `ringArc_cone_inner`, `ringArc_cone_outer` | engine 1 against a short radial segment of the inner (outer) side at an angle of the arc where `h` faces away (toward) | M |
+| `ringArc_sideCone_inner`, `ringArc_sideCone_outer` | the side cones meet neither closed cone (angle arithmetic on `angleIcc`, `angleIoo`) | E |
+| `ringArc_sideCone_other` | `exists_mem_coneAt_region` (needs `z ∈ dom`) and the two previous | E |
+| `four_of_bothKind` | one tile per colour, interval cones: a colour in both side cones would have an interval cone containing a facing cone, overlapping `c`'s or `c′`'s tile's cone in an interval — disjoint open tiles have cones with disjoint interiors at a point of the domain (child `coneAt_interiors_disjoint`, on `localSectors`) | M–H |
+| `four_of_bothKind_simple` | `NonSiamese` ⟹ one tile per colour at `z` (two tiles of one colour with a common closure point are near: `unitNear_of_mem_closure`, then `eq_of_unitNear`); `Simple.coneAt_eq_angleIcc` | E on its parents |
+| `flank_cone` | `t ⊆ B̄(y′, 1) ∩ B̄(y, 1)` (`IsTile.subset_ball`); the tangent cone of a closed unit disc at a boundary point (child `coneAt_subset_of_subset_closedBall`, § 4's first-order check); the end direction by closedness of the cone (child `isClosed_coneAt`) | M |
+| `flank_edge_exists` | the end direction of `t`'s cone is a branch's tangent (`localSectors`) | M on `localSectors` |
+| `flank_initialPieces` | § 4's shorter route: a piece of radius below `1` (or a segment, or curving away) inside `B̄(y′, 1)`… the segment and the outward arc leave the disc (so are excluded), an inward arc of radius `< 1` has a point strictly inside `B(y′, 1)`, paired with `y′ ∈ B′`; both of radius `1`: `twoCirc_cmp_one` at equal turns | M |
+| `flank` | `flank_initialPieces`, `subset_closure` | E |
+
+**`Plane/Lens`**
+| leaf | route | grade |
+|---|---|---|
+| `exit_lens` | on `ω(y_b)`: `g = ‖γ − y_b‖²` has a local max on `Iic t_e` at `t_e` (`hin`), so `g′(t_e) ≥ 0` (`HasDerivWithinAt.norm_sq`, `IsLocalMaxOn.hasFDerivWithinAt_nonpos` with `−1 ∈ posTangentConeAt (Iic t_e) t_e` by `mem_posTangentConeAt_of_segment_subset`); the heading window `[τ − π, τ]`; the feasible arc for `y_3` is `[τ, τ + w]`, `w ≤ 2π/3` (§ 4's identities, exact); mirror on `ω(y_a)` | M–H (angle bookkeeping) |
+| `exit_lens_row` | `exit_lens` with `γ′ = derivWithin …` (`ContDiffOn` gives `HasDerivWithinAt` on `Icc 0 t_e`, restricted to `Iic`-side), `hin` from the interval | E–M |
+
+**`Plane/RingBand`**
+| leaf | route | grade |
+|---|---|---|
+| `exists_lift` | sort `S ∩ [0, 2π)`; define `f` cell by cell with steps `±1` lifting `c`'s changes; extend by `f(θ + 2π) = f(θ) + 3W₀` | M |
+| `ringband_i` | each step `≡ D_j (mod 3) ∈ {1, 2}` (`proper`); `hSum = (6 − n₂) − n₂`; `Σ D_j = f(θ + 2π) − f(θ) ≡ 0`, so `n₂ ≡ 0 (mod 3)` | E–M |
+| `ringband_ii` | `Σ D_j = 3 Σ m_j + (6 − n₂) + 2n₂`; telescoping; `3 ∣` from `cast_eq` and `periodic` | E–M |
+| `W_eq` | `θ ↦ f(θ + 2π) − f(θ)` is locally constant off `S` and its jumps at `x` and `x + 2π` agree (same colour change, `\|jump\| ≤ 1`); finitely many events | M |
+| `ringband_iii` | near `θ₀`, only hexagon vertices in `S` can change; a lone change at vertex `j` turns `x → y` with both neighbours the third colour `z` (properness), and `z → x → z`, `z → y → z` both contribute `0` (RINGWIND's uses-only) | M |
+| `ringband_iv` | the band step (FS110-N2-RING): `D₀` leaves `{3M + 1, 3M + 2}` only by a jump of `±2`, which needs a swap; induction over the events of a period (§ 6.1); then (ii) | M–H |
+| `ringband_v` | no `60°` pair ⟹ no swap (a swap at `x` needs `x ± 60° ∈ S`) and no jump of `h` ((iii)); `h` constant with `n₂ ≡ 0` and the event-sum zero ⟹ `h = 0` | M |
+| `ringband_vi_periodic` | reindex the hexagon sum (`Finset.sum_range_succ`, `periodic`) | E |
+| `ringband_vi_noJump` | jumps of `h` over one period sum to zero (periodicity), and only `θ₀`'s class can jump ((iii)) | M |
+| `exists_swap_of_abs_W_le_one`, `W_mod_six`, `exists_pair_of_abs_W_le_two` | (iv), (v), and `W_eq` (good `θ` exist: `S` finite per period) | E |
+| `ring_finite_S`, `ring_locallyConstant`, `ring_proper` | `finite_ringΓ_off_ringArc` with no ring arcs; interior points; validity + `not_mem_coloursAt_of_mem_sphere` + injectivity | E |
+
+### 6.3 Re-pricing
+
+From the leaves, not from a table: of the 96 leaves (and the new children named above), **about 55 are E** (most a few lines on a cited lemma), **about 30 M**, and **eight H**:
+`localSectors`, `Simple.coneAt_eq_angleIcc`, `sixFrag_valid`, `germR_geom`, `germS_inward`/`germS_outward`/`germS_four` (one argument),
+`touchW`. Against K3's design the price moved down twice — OR1-WHOLE's covering clause leaves `finite_tiles_near` (engine 2), and the five
+"N-E1 against a curve" rows share engine 1 — and up once: the sector structure is one H statement that four corollaries rest on, so it is the
+critical path and goes first. Order for the implementer: `Tiles`' E leaves and engine 1 (they unblock everything) → `LocalStructure`'s
+`mem_closure_tile`, `dense_interiorPts`, `finite_inter_sphere`, `finite_ringΓ_off_ringArc` → `localSectors` and its corollaries →
+`RingGerm` (E leaves, then GERM-R, ECHO, U1, FLANK, then GERM-S, TOUCHW, QFREE4, FIVERING) → `Lens` → `RingBand` → `SixFragment` (independent;
+can run in parallel with anything). The repository's own measured ratio (`CLAUDE.md` § What compute actually helps: kernel phases re-priced
+five to thirty times lower once begun) says these grades are priced high; re-price from the first two leaves.
