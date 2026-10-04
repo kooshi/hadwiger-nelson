@@ -42,7 +42,6 @@ put(1, P + "Closure", "FS129-SR2-CLOSURE")
 put(1, P + "DensityPoints", "FS111-V0-ID1", "FS129-SR2-HULLSET", "FS111-M-HULL2", "FS111-M2-INT")
 put(1, P + "UnitAvoiding", "FS111-M2-ZERO")
 put(1, P + "Chord", "FS116-V4-CHORD", "FS129-SR1-TWOCIRC", "FS121-D1-XCORNER")
-put(1, P + "RingBand", "FS129-SR1-RINGBAND")
 put(1, A + "NoAffine", "FS129-SA1-NOAFF-K")
 put(1, A + "FalconerFan", "FS129-SA1-FALC-FAN", "FS129-SA1-FALC-DICHO-K")
 # wave 2
@@ -57,15 +56,18 @@ put(2, P + "FalconerReduction", "FS129-SA1-FALC-RED")
 put(2, A + "PlaceHom", "FS129-SA1-PLACE-HOM", "FS129-SA1-NOAFF-FIELDS")
 put(2, A + "FalconerField", "FS129-SA1-FALC-RES", "FS129-MA2-FALC-HOSTS")
 put(2, A + "Dyadic", "FS129-SA1-SQRT3-LOCAL")
+# FS116-O1-YESLIM moved from wave 3 to wave 2 (plans/FS131-close-inventory.md ruling 6; FS131-K2): it rests only on wave-2 rows
+# (FS106-EQ; FS106-COMP through its merged FS129-SR2-YESLIM-EQ) and on N-EASY, and nothing rests on it.
+put(2, P + "YesLimit", "FS116-O1-YESLIM")
 # wave 3
 put(3, P + "Tiles", "FS116-V5-NE1", "FS116-V4-DICHOTOMY", "FS116-V4-MEET", "FS116-V4-TWIST", "FS116-S1-CLUSTER",
     "FS129-OR1-WHOLE")
 put(3, P + "Lens", "FS116-S1-EXIT")
+put(3, P + "RingBand", "FS129-SR1-RINGBAND")
 put(3, P + "RingGerm", "FS116-N1-TWIST-D", "FS116-N1-GERM-R", "FS116-N1-ECHO", "FS116-N1-GERM-S", "FS116-N1-QFREE4",
     "FS129-SR2-TOUCHW", "FS116-RING-Q-PRIME-S", "FS116-N2-FIVERING", "FS129-SR1-SIXQ", "FS116-V5-U1",
     "FS116-Y4-FLANK")
 put(3, P + "SixFragment", "FS116-Y2-SIXFRAG")
-put(3, P + "YesLimit", "FS116-O1-YESLIM")
 # wave 4
 put(4, P + "ValidMap/Contact", "FS110-N3-CONF", "FS110-N3-DEG", "FS110-W-MERGE", "FS110-N4-SHADOW",
     "FS110-N4-SHAVE", "FS110-N4-STUCK")
@@ -200,7 +202,7 @@ NOTE = {
     "FS129-OR1-TOP5": ("FS111-M-REDUCE-I, which it uses, is not a backlog row: formalized beside it in wave 9 as a supporting lemma (finding sent to Keryx)", PLAN, True),
     "FS129-SR3-EMPTY-NS": ("proved on FS116-V6's route (SR3 item 24); carries FS116-Y4-EMPTY and FS116-Y4-OBST", SR3, False),
     "FS129-SR3-QFREE-NS": ("carries FS116-S1-QF and FS129-SR2-QFCASE (SR3 item 23)", SR3, False),
-    "FS116-O1-YESLIM": ("its first clause by FS129-SR2-YESLIM-EQ's route (SR2 item 18); its k = 6 clause needs chi(R^2) <= chi_m0(R^2) (row 130's free half, FS-103's N-EASY), formalized in wave 2 as a supporting lemma", SR2 + ":481", False),
+    "FS116-O1-YESLIM": ("its first clause by FS129-SR2-YESLIM-EQ's route (SR2 item 18); its k = 6 clause needs chi(R^2) <= chi_m0(R^2) (row 130's free half, FS-103's N-EASY), formalized in wave 2 as a supporting lemma; moved from wave 3 to wave 2 by ruling 6", SR2 + ":481", False),
 }
 
 # Upstream edges the backlog does not record (rows outside § The order carry no 'needs'), and edge notes.

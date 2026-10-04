@@ -50,6 +50,17 @@ reason by the close.*
    `cp -a` (4.4 GB, 2026-10-03), because two trees compiling different edits into one symlinked build race on the same `.olean` paths. One Lean
    build at a time across all trees, under `scripts/slot.py`. The opening job runs alone, in the main tree.
 
+5. **Builds from different worktrees may run at once when the slot admits them.** Choice: up to two Lean builds at a time across trees, each under
+   `scripts/slot.py --mem 40` (its ledger admits reservations up to 90 GiB and refuses a third). Alternative weighed: the opening plan's "one Lean build
+   at a time across all trees" (§ 6.1, § 7.5). Why: RAM is the constraint the rule protects, the slot enforces it with a hard cap per job, and the
+   one-at-a-time rule dates from 60 GB builds (`plans/CRUNCH-2026-09-25-queue.md` § 1.6); with three jobs in three trees, strict serialization would idle
+   two of them. Confidence: medium-high; a thrash or an OOM kill reverts it.
+6. **FS116-O1-YESLIM moves from wave 3 to wave 2.** Choice: wave 2's planner states and plans it beside N-EASY. Alternative weighed: leave it in wave 3
+   and let wave 3 wait for wave 2's landing. Why: it rests only on wave-2 rows (FS106-EQ; FS106-COMP through its merged FS129-SR2-YESLIM-EQ) and on
+   N-EASY, which the opening plan put in wave 2 for it, and nothing rests on it — the one edge between waves 2 and 3 (checked by script over
+   `data/fs131/k1/rows.json` and the CSV), so after the move the two waves are independent, as § 7.1 meant. Wave 2's planner is the table's one
+   writer while waves 2 and 3 plan. Confidence: high.
+
 ## Registered expectations
 
 - Keryx's priors (the coordinator's, not a lane's, not scored as a lane's): the hard part is the foundation — planar maps, tiles, arcs, vertices
@@ -90,3 +101,47 @@ reason by the close.*
 9. **Prior-art debt** (K1; a listing only, not read): GitHub `decalion89/chromatic-number-of-the-plane` v1.1.0 claims Lean 4 proofs of χ(ℚ(√2,√3)²) = 4
    and of Fischer's χ(ℚ(√3,√11)²) = 4 — our ledger rows 103 and 57, whose kernel proofs `CLAUDE.md` § Publication lists as ours. Owed: a reading of
    the repository (what it proves, on which axioms, its dates) before any write-up claims those kernel proofs. For Kooshi to know.
+10. **The foundation landed on `main`** (FS131-K1 stage 5, `3ec3b6c2`: Plane/Basic, UnitPairs, AeColouring, ArcMap). Keryx's receipt: the saved gate
+    logs read — build 438/438 batches green (`build/gate/build/20261004T043057Z-1091664.log`); axioms digest 1,273 records, 1,257 clean, 11 axiom-free,
+    5 declared purchases (`build/gate/axioms/20261004T043951Z-1129351.log`); vacuity declarations=7557, refutations-skipped=314, sites 279 unchanged
+    (`build/gate/vacuity/20261004T044008Z-1129846.log`). Filed (K1's drafts): `CLAUDE.md` § Trust ledger and § The gate, and
+    `scripts/vacuity-baseline.txt`'s header; both digests then read "match". The declaration delta 7438 → 7557 includes other jobs' since 2026-09-26.
+11. **Wave 1's skeleton** (K1 stage 6): branch `fs131-w1` at `3358a401`, worktree `.claude/worktrees/fs131-w1` (packages symlinked, build copied —
+    checked), 7 modules, 14 rows, 28 `sorry` leaves; plan `plans/FS131-kernel-plan.md` § 6 (`fa50d0a9`), § 6.1 the implementer's handoff.
+    FS129-SR1-RINGBAND moved to wave 3 (ring vocabulary).
+12. **Generalizations** (K1, at the wave-1 read-backs; the skeleton states the stronger forms): G1 FS129-SR2-HULLSET and FS111-M-HULL2 hold for
+    preconnected pieces, not only path-connected; G2 FS106-DIAM (i)/(ii) and FS106-TS-C give distance < 1 between every two points; G3 FS129-SA1-FALC-FAN
+    and -FALC-DICHO-K need no finiteness of H; G4 DICHO-K's second clause needs no hypothesis on χ(H). No Ephodos job runs; for the record job's
+    errata at the close (the derivation entries state the narrower forms). Method note for every wave: "diameter ≤ 1" is stated pointwise, since
+    `Metric.diam` is 0 on unbounded sets.
+13. **FS131-K1 done** (report `data/fs131/reports/FS131-K1.md`; harness 526k by the task count — past the replacement line, so no resume): the plan
+    complete through § 7 (ten waves; three outside-backlog hypotheses by name — `Row134Base`, `Row130Collapse`, `Row123Chain`, § 7.4; the gate design,
+    § 7.5; a draft bearing for the stub, § 7.6). Its held items: a question for Ephodos before wave 7 or 8 (does "simple" for a fragment require tiles
+    crossing the domain's boundary to be Jordan domains? § 7.3 item 2); a stub to mint (`Row134Base` in Lean, FS-110's repaired base, as its own
+    planner-and-implementer job, § 7.4); predictions scored so far (E9 waves 10, inside [6, 14]; E10 205/25/29/0; E6, E7 met; E4 not met — a named
+    hypothesis, not an axiom; E5 never arose; E3 not met in wave 1).
+14. **Brief FS131-I1, wave 1's implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I1-wave1.md`): gated PASS after one rewording
+    (a backticked file extension read as a path). Worktree `.claude/worktrees/fs131-w1`, branch `fs131-w1` at `3358a401`. Source: this commit.
+15. **Waves 2 and 3 planned in parallel** (pipelined beside wave 1's implementer; Kooshi's cap of three agents): worktrees `.claude/worktrees/fs131-w2`
+    and `fs131-w3` made by Keryx with the recipe (packages symlinked, build copied), both branched at `3358a401`. Briefs FS131-K2
+    (`data/fs131/briefs/FS131-K2-wave2.md`, 28 rows with YESLIM) and FS131-K3 (`data/fs131/briefs/FS131-K3-wave3.md`, 20 rows), each gated PASS.
+    Source: this commit.
+16. **The stub's bearing filed** from K1's draft (`plans/FS131-kernel-plan.md` § 7.6), verbatim, in `plans/STUB-lean-backlog.md` § Bearing on the answer.
+17. **Held, with defaults** (from K1's report): (a) the question for Ephodos — does "simple" for a fragment require tiles crossing the domain's boundary
+    to be Jordan domains? — default: an Ephodos job briefed before wave 7's planner, from K1's § 7.3 item 2; (b) the stub to mint, `Row134Base` in Lean
+    (FS-110's repaired base, S–V Cor. 1 a.e.) as its own planner-and-implementer job — default: written before wave 5's planner, from K1's § 7.4.
+18. **Statement defect — FS111-M-COVER-SC's second clause is false as written** (FS131-K2, message 2026-10-04): "that function is semiconcave with
+    constant 1" fails wherever a boundary piece is a unit arc with its class outside the arc's disc — the lower arc `c − √(1 − t²)` has second derivative
+    `(1 − t²)^(−3/2)`, equal to 1 only at `t = 0` (Keryx's receipt: sympy, `v'' = (1 − t²)^(−3/2)`, 1 at 0, `8√3/9` at 1/2). Counterexample: R7, a maximal
+    cover (FS111-VMW-R7-MAX). The error is in the argument's reading (`plans/FS111-M-regularity.md` § 3.4, "the exterior disc's lower arc, `+1`"). The
+    same clause stands in **FS111-M2-HULLC** (wave 6; two minds, and its own `model:` line names R7) and in SR2 item 17's merged form. Unaffected: the
+    first clause (an enclosing or exterior unit disc per adjacent piece); ledger row 140's word "semiconcave", which carries no constant; the not-claimed
+    semiconvexity. Correction owed: errata under both entries in `plans/FS111-derivation.md` and their `LEDGER.md` § B index lines (1295, 1318), drafted
+    by the milestone's record job, filed by Keryx.
+19. **Ruling — the corrected form** of FS111-M-COVER-SC's second clause (and of FS111-M2-HULLC's, at wave 6): curvature at most 1 in the viscosity sense —
+    where `∂F_a` is locally the graph of `u` with `F_a` below, `u` is touched from above at each point by a unit arc or a concave arc, so
+    `u'' ≤ (1 + u'²)^(3/2)` in the viscosity sense — stated as the row, with its corollary that `u` is semiconcave with constant `(1 + L²)^(3/2)` on any
+    interval where it is `L`-Lipschitz (so every consumer that needs only "semiconcave" keeps it). Alternative weighed: the corollary alone as the row,
+    or semiconcavity with every constant `C > 1` near each point. Why: the curvature form is the strongest true statement the argument reaches, is
+    frame-free, and implies both others. Confidence: medium-high — one mind for the corrected form, and the kernel decides. Wave 6's planner restates
+    HULLC the same way; a consumer that reads the constant 1 is a finding at that wave.
