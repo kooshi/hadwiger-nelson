@@ -1774,3 +1774,7 @@ reason by the close.*
      and splitting the moves off takes about three sessions off wave 4's longest path (item 236), while pausing wave 5 for one slot-turn costs it about one;
      I5b also stopped below its line with its remaining leaves gated on unbuilt infrastructure. Confidence: medium — the fact that would change it: wave 2's landing
      slipping by several sessions, which would leave wave 5 idle too long.
+248. **Brief FS131-IM1, wave 4's moves** (Opus; `data/fs131/briefs/FS131-IM1-moves.md`, gated PASS): `exists_shave`, `exists_rayMerge`, `exists_merge` as `…_aux` under
+     their exact statements in a new module `Plane/ValidMap/Moves` upstream of `Contact`, on `fs131-w4m` (from `fs131-w4c` at `d4f946ae`, IC4's stage 11;
+     `.lake/build` copied from `fs131-w5b`); engine 2's hunk brought over first; no edit to `Contact`, no merge, no gate. Launched in I5b's slot (item 247 (c)):
+     1 (I2n) + 1 (I4k) + 1 (IC4) + 1 (IM1) = 4. IC4 told the moves are taken.
