@@ -4,9 +4,9 @@
 reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–183 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written at the context limit, 2026-10-04 late):** inventory items run to **202**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157),
+> **Latest (written at the context limit, 2026-10-04 late):** inventory items run to **206**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157),
 > Lebesgue's covering theorem (151), `localSectors` + the separation lemma + `four_of_bothKind_simple` without `hnc` (171); the axiom gate repaired with an IMPORTED
-> section (160). **Running (3 Opus slots)**: FS131-I2l (wave 2, 23 lines in CoverExamples → carriers, gate, landing; item 202), FS131-I4g (wave 4's `BaseSteps` + `UnitArc`, 29 of its 39; item 195 — `Contact`'s 10 reserved for a parallel implementer in the next free slot, item 194), FS131-K5b (wave 5's second planner: ROTHEX, BV-HEX,
+> section (160). **Running (3 Opus slots)**: FS131-I2l (wave 2, 23 lines in CoverExamples → carriers, gate, landing; item 202), FS131-I4h (wave 4's `BaseSteps` + `UnitArc`, 24 of its 34; item 206 — `Contact`'s 10 reserved for a parallel implementer, item 194), FS131-K5b (wave 5's second planner: ROTHEX, BV-HEX,
 > CVB-THOM, the obligation pass, the handoff; worktree `fs131-w5`; item 200). Woodall is sorry-free bar wave 4's statements (item 190) and idle until wave 4 lands. Agent ids in scratch `agents.txt`. **On each hand-back**: check the
 > build log, `sorry` count and axioms print; log; brief a successor by script from the previous brief (all implementers Opus, `model: "opus"`); gate; launch.
 > **On a landing**: read the gate logs, file counts (`CLAUDE.md` § Trust ledger three-count sentence, § The gate, `scripts/vacuity-baseline.txt`, `GATE_CHANGES` in
@@ -33,7 +33,7 @@ that judge the milestone, written before any job).*
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
 | wave 2 (28 rows) | 23 lines left, all CoverExamples (item 201: `Plane/Slack` sorry-free; `χ_m⁰ ≤ k ⟺ µ_k⁰ = 1` and `7 ≤ χ_m⁰ ⟺ sup µ₆ < 1` on the standard three, branch only); **FS131-I2l (Opus) running** to the landing | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | **LANDED** (item 157); `localSectors` and the cusp-free four-colour clause **LANDED** too (item 171, `0131aa59`) | — |
-| wave 4 (25 rows) | 47 of 86 proved (item 193: the bowtie fragment sorry-free); **split by file** (item 194): **FS131-I4g (Opus) running** on `BaseSteps` + `UnitArc`; `Contact` (10) waits for the next free slot (its own worktree off `fs131-w4`, its own record) | `.claude/worktrees/fs131-w4` |
+| wave 4 (25 rows) | 52 of 86 proved (item 204: the bowtie complete, `u1_shadow`, L60's fragment); **split by file** (item 194): **FS131-I4h (Opus) running** on `BaseSteps` + `UnitArc`; `Contact` (10) waits for the next free slot (its own worktree off `fs131-w4`, its own record) | `.claude/worktrees/fs131-w4` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | **all five Woodall modules sorry-free** (item 190); the chain theorems wait only on wave 4's statements; **idle** — after wave 4 lands, one Opus job: merge `main`, delete the identical copies, QA2-1's merged `sevenBrickMap`, gate, landing | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
 | Lebesgue's covering theorem (FS131-LEB) | **LANDED on `main`** (item 151; `33471a75`): held in the kernel, standard three; wave 4 discharges its `sorry` in one line | `Proofs/HadwigerNelson/Topology/` |
@@ -51,7 +51,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-K5b (wave 5's second planner: three rows, the obligation pass, the handoff; item 200) | Opus | `data/fs131/briefs/FS131-K5b-wave5.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-K5b.md` |
-| FS131-I4g (wave 4 on Opus: the bowtie's moves, `UnitArc`, `BaseSteps`; not `Contact`; item 195) | Opus | `data/fs131/briefs/FS131-I4g-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4g.md` |
+| FS131-I4h (wave 4 on Opus: `UnitArc`, `BaseSteps`; not `Contact`; item 206) | Opus | `data/fs131/briefs/FS131-I4h-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4h.md` |
 | FS131-I2l (wave 2 on Opus: 23 lines, the carriers, the gate, the landing; item 202) | Opus | `data/fs131/briefs/FS131-I2l-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2l.md` |
 
 
@@ -63,7 +63,7 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 ## 4. Next, in order
 
-1. **On each hand-back** (I2l, I4g, K5b): review by artifact (build log, `sorry` count, axioms print from a saved log), log the inventory item, and if work
+1. **On each hand-back** (I2l, I4h, K5b): review by artifact (build log, `sorry` count, axioms print from a saved log), log the inventory item, and if work
    remains brief an Opus successor by script from the job's own last brief (`data/fs131/briefs/`), gate it with
    `python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>` (full worktree paths in source lines; no § inside a heading address), launch with
    `model: "opus"`.
@@ -75,7 +75,8 @@ its record's last SAVED stage with a fresh agent on the same brief.
    `isOpen_shadow`, and adds QA2-1's brick-map model (item 172).
 3. **Wave 5**: foundation + 10 of 13 rows stated (item 198); **the base `row134BaseUA` is ours in full** (no outside hypothesis; item 197–199); FS131-K5b
    running (item 200). Queue for slots that free when a lane ends (item 199 (c)): **FS131-KB** (the base's planner, after K5b; input K5's
-   `data/fs131/k5/STUB-row134-base-lean.md` on `fs131-w5`), wave 5's implementer (after K5b's handoff), wave 4's `Contact` implementer (item 194). **When wave 4 lands**: brief the Woodall landing job (item 190's list).
+   `data/fs131/k5/STUB-row134-base-lean.md` on `fs131-w5`), wave 5's implementer (after K5b's handoff), wave 4's `Contact` implementer (item 194). **Order revised (item 205)**: K5b's slot goes to `Contact` first,
+   since wave 4 is now the slower path (five leaves a session). **When wave 4 lands**: brief the Woodall landing job (item 190's list).
 4. **Queued, conditional**: an Ephodos job on `exists_not_uniform_kept`'s fringe colouring only if wave 2's implementer cannot find a proper formula (item 118).
 5. **At the milestone's filing**: the Frontier clauses (I3h's and I3i's drafts), the rows regraded to [kernel], the Proof Atlas update, `ARCHITECTURE.md` § 3's
    stale prose counts, the `LEAN.md` pattern line for `threeSectorDisc` adversaries (at Woodall's landing). Optional stub: Woodall's horn-only form everywhere
@@ -89,6 +90,9 @@ its record's last SAVED stage with a fresh agent on the same brief.
 - Every implementer so far has handed back at 300k–490k with leaves left: brief successors from the shared record's last stage.
 
 ## 6. Held for Kooshi, with defaults
+
+- **A fourth Opus slot** for the backlog's duration (item 205): would run wave 4's `Contact` implementer now. Default: no; the queue runs as lanes end.
+  Recommendation: yes (medium). Raise at his next check-in.
 
 - The GitHub repository `decalion89/chromatic-number-of-the-plane` (release v1.1.0; claims Lean proofs of rows 103 and 57; item 9) — Kooshi is reading it; the
   record holds its name from a search listing only, and the same pass saw an unread Zenodo record claiming a formal verification that the plane is
