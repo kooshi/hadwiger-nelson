@@ -205,3 +205,118 @@ no line; `--check --fault` alters one note in memory — "note present 0 times �
 | `plans/FS116-local-exclusion.md` | § 3.6, the sharper form's bullet | LOCAL-DENSE held at `r = 3` (possibly vacuous); "the same question" only in the non-Siamese simple class (DISCF-NS); elsewhere DISC-F needs besides an exclusion about repeated-colour vertices or GS-4's density form (OR1 § J19) |
 
 `git diff --numstat` on the five: lines added only (one note each, and a blank line around the two plain-paragraph notes), 0 deleted.
+
+## Stage 6 — SAVED: every registered prediction, scored
+
+**Sources**: Poros `plans/POROS-2026-10-03-fs129-card.md` § 1.2 (A1–A7; D1–D4 scored there, § 2.1); OA1 § 1.3 with § 4.2; OR1 § Stage 1 with
+§ Registered expectations, scored; MA1 § 1.3 with § 5.3; MA2 § 1.3 with § 4.3; MR1 § Stage 1 with § Registered expectations, scored; SA1 § 1.3 with
+§ 6.4; SR1 § Stage 1 with § 6.4; SR2 § Stage 1 with § 4.4; SR3 § 1.1 (`data/fs129/sr3/expectations.md`) with § 5.2 — each `plans/FS129-<job>-audit.md`.
+Outcomes are read from the records; where a reader scored its own, I checked the outcome against its sections and kept it unless noted. Brier is
+`(p − outcome)²` on binary predictions, by `tools/fs129_z2_scores.py` (its `--fault` flips Poros A6 and the card's Brier moves 0.3742 → 0.3408 — it
+fires). A count is scored against its registered value and interval.
+
+| registrant | prediction | registered | outcome | score |
+|---|---|---|---|---|
+| Poros | A1 a pass-1 composition closes a step | expected 1 (0–3); P(≥ 1) = 0.45 | 1 outright (J1, FS-123 q. 1, OR1) and half of J19 (LOCAL-DENSE) | met; Brier 0.3025 |
+| Poros | A2 steps shortened | expected 5 (2–9); P(≥ 3) = 0.6 | pass 1 alone: 10 distinct steps (OA1: J12, J13; OR1: J2, J3, J7, J10, J15, J17, J23, and J19's DISC-F half) | at the top of the interval; Brier 0.16 |
+| Poros | A3 share null in both lanes | 0.7 (0.5–0.85) | 12 of 24 = 0.50 (OR1 non-null J1, J2, J3, J7, J10, J15, J17, J19, J23; OA1 non-null J2, J12, J13; J18 moot) | at the interval's lower edge |
+| Poros | A4 item 31's open list or the top three changes | P = 0.2 | **yes** — "(Q)-free rings with (R2) arcs", open in item 31, are closed in the non-Siamese class (FS129-OR1-QFREE, FS129-SR3-QFREE-NS; one mind); FS-123's first question answered | Brier 0.64 |
+| Poros | A5 lane A shortens a regularity-era step from a result its stub does not cite | P = 0.35 | **yes, by its letter** — J12 and J13 (FS-104 routes (c), (0)/(b)) shortened from row 66 and the kernel's Γ₁₁ tables, which `plans/STUB-cp-plane-six.md` does not cite (inventory item 39); Poros's prior on where named FS-104 first | Brier 0.4225 |
+| Poros | A6 pass 2 yields more compositions than pass 1 | P = 0.6 | **no** — pass 1: 13 entries (OA1 5, OR1 8); pass 2: 7 (MA1 3, MA2 3, MR1 1) | Brier 0.36 |
+| Poros | A7 another FS116-Y4-type miss | P = 0.6 | **no, strictly** — MA1 0, MA2 0, MR1 "0 strictly"; near kin recorded: 3 citation or re-derivation misses (MR1), FS84-S1e re-derived uncited (SA1), CLOSURE proved three times (SR2), 3 GAPs answered elsewhere unlinked (SR3 § 4.1) | Brier 0.36 |
+| Poros | the card's hunch: at least a third of the steps need a kind of input no held result delivers (falsifier: more than two thirds get one) | hunch | not scorable as kept: the readers did not mark "needs a new kind of input" per step; held results bore on 11 of 24 steps, so the falsifier did not fire | — |
+| Poros | J2 `semipar3-reads-a-height` (0.35); J17 `skeleton-carries-a-syntheme` (0.5) | hunches | SEMI-PAR3 undecided (FS-110's winding found as the height's home, OR1 § J2; MR1's exploration not derived); the syntheme not worked | not scorable |
+| **Poros, six binary** | | | | **Brier 0.374** (1 of 6 on the side registered) |
+| OA1 | E1 closes | 0; P(≥ 1) = 0.10 | 0 | Brier 0.01 |
+| OA1 | E2 shortened | 1.5; P(≥ 1) = 0.55; P(≥ 3) = 0.15 | 2 (J12, J13) | above expected; Brier 0.2025 and 0.0225 |
+| OA1 | E3 nulls | about 85 % | 21 of 24 = 88 % | met |
+| OA1 | E4 lane moves the bearing | P = 0.07 | no | Brier 0.0049 |
+| OA1 | E5 = Poros A5 | P = 0.30 | yes (as A5) | Brier 0.49 |
+| OA1 | E6 a held result false | P = 0.03 | no | Brier 0.0009 |
+| OA1 | E7 a composition outside the list | 1; P(≥ 1) = 0.5 | 1 (FALC-RED as a general statement) | Brier 0.25 |
+| OA1 | E8 merges, new stubs | 0; 0.3 | 0; 0 | met |
+| OA1 | E9 J4 yields | P = 0.3 | no | Brier 0.09 |
+| **OA1, eight binary** | | | | **Brier 0.134** |
+| OR1 | closes | 0; P(≥ 1) = 0.15 | 1½ (J1; J19's half) | below; Brier 0.7225 |
+| OR1 | shortened or reduced | 4 (2–7) | 7 | at the top |
+| OR1 | nulls | 17 (13–21) | 14 | in range |
+| OR1 | compositions | 3 (1–6) | 8 | above |
+| OR1 | compositions outside the list | 1 (0–3) | 0 (two leads) | in range |
+| OR1 | new stubs | 1 (0–2) | 0 (four re-aims) | in range |
+| OR1 | J10 a lane-R result bears | 0.35 | yes (TOP5) | Brier 0.4225 |
+| OR1 | J15 the collision stands | 0.40 | no | Brier 0.16 |
+| OR1 | lane moves the bearing | 0.12 | yes (FS-123's step) | Brier 0.7744 |
+| OR1 | a held result false | 0.04 | no | Brier 0.0016 |
+| **OR1, five binary** | | | | **Brier 0.416** |
+| MA1 | E1 mechanisms reached | 22 (12–35) | 23 | met |
+| MA1 | E2 bearing unapplied | 6; P(≥ 3) = 0.6 | 3 | below expected; Brier 0.16 |
+| MA1 | E3 compositions | 4 (1–8) | 3 | in range |
+| MA1 | E4 Y4-kind misses | 1.5; P(≥ 1) = 0.55 | 0 | Brier 0.3025 |
+| MA1 | E5 Falconer differs materially | 0.15 | no | Brier 0.0225 |
+| MA1 | E6 bearing changes | 0.06 | no | Brier 0.0036 |
+| MA1 | E7 a held result false | 0.03 | no | Brier 0.0009 |
+| MA1 | E8 new cross-era sites | 1; P(≥ 1) = 0.45 | 0 (two deepenings) | Brier 0.2025 |
+| MA1 | E9 share of the seventeen unmentioned bearing | 0.2 | 0 of 17 | below |
+| **MA1, six binary** | | | | **Brier 0.115** |
+| MA2 | E1 mechanisms reached | 28 (15–47) | 49 | above |
+| MA2 | E2 bearing unapplied | 6; P(≥ 3) = 0.65 | 10 | above; Brier 0.1225 |
+| MA2 | E3 compositions | 3 (0–7) | 3 | met |
+| MA2 | E4 Y4-kind misses | 0.7; P(≥ 1) = 0.4 | 0 | Brier 0.16 |
+| MA2 | E5 new cross-era sites | 0.6; P(≥ 1) = 0.35 | 0 | Brier 0.1225 |
+| MA2 | E6 bearing changes | 0.05 | no | Brier 0.0025 |
+| MA2 | E7 a held result false | 0.03 | no | Brier 0.0009 |
+| MA2 | E8 share of nulls from retired methods | 0.3 | 14 of 49 ≈ 0.29 | met |
+| MA2 | E9 a root yields a travelling strengthening | 0.2 | no | Brier 0.04 |
+| **MA2, six binary** | | | | **Brier 0.075** |
+| MR1 | mechanisms worked | about 16 | 17 | met |
+| MR1 | bearing unapplied | 6 (3–9) | 8 | in range |
+| MR1 | compositions | 4 (2–8) | 1 (DOUBLETIP) | below |
+| MR1 | Y4-kind misses | 2 (0–4) | 0 strictly; 3 citation or re-derivation misses | in range strictly |
+| MR1 | nulls | 5 (2–9) | 5 | met |
+| MR1 | G83's straddle bears on an unapplied held step | 0.55 | yes | Brier 0.2025 |
+| MR1 | the bends shorten an FS-110 GAP | 0.45 | no | Brier 0.2025 |
+| MR1 | V6-HUG's identity closes or empties a held open step | 0.20 | partly (a configuration of FS-124, not a named step) | left out of Brier |
+| MR1 | a held result false | 0.04 | no | Brier 0.0016 |
+| MR1 | this pass changes the bearing | 0.10 | no | Brier 0.01 |
+| **MR1, four binary** | | | | **Brier 0.104** |
+| SA1 | E1 merges with an entry | 3 | 5 | above |
+| SA1 | E2 merge lines | 10 | 17 | above |
+| SA1 | E3 weakenings derived | 2 | 2 | met |
+| SA1 | E4 results sorted empty | 2 | 1 | below |
+| SA1 | E5 disagreeing records beyond the two | 2 | 2 | met |
+| SA1 | E6 lost theorems of the 68 | 5 | 14 (15 with X25B-PZ) | above |
+| SA1 | E7 lane-A "nothing" edges; share false | 6; half | 9; 8 false, 1 reversed | above |
+| SA1 | E8 a held result false beyond FS89-CL2 | 0.12 | no in content (wording defects only) | Brier 0.0144 |
+| SA1 | E9 an attack on a lane-A composition succeeds | 0.10 | no | Brier 0.01 |
+| **SA1, two binary** | | | | **Brier 0.012** |
+| SR1 | merge groups one statement or a case | 5 of 7 | 3 of 7 | below |
+| SR1 | weakenings derived | 3 | 2 and a refinement | below |
+| SR1 | vacuity hyp / no-go / empty / inhabited | 38 / 7 / 6 / 4 | 35 / 4 / 15 / 1 | empties above |
+| SR1 | real share of "nothing" edges | 30 % | 23 % (46 % with routes) | below |
+| SR1 | seven binary (disagreement settled 0.55 yes; QFREE attack 0.15 no; DOUBLETIP attack 0.15 no; narrower repair 0.25 no; held false 0.22 no; vacuity finished 0.6 yes; inherited 0.30 no) | | | **Brier 0.087** (its own, re-computed) |
+| SR2 | merges | 8 (3–15) | 18 | above |
+| SR2 | weakenings | 2 (0–5) | 4 | in range |
+| SR2 | vacuity misses | 2 (0–6) | 0 | in range |
+| SR2 | disagreeing records | 3 (1–8) | 6 | in range |
+| SR2 | item 63 answered elsewhere | 4 (1–10) | 1 (8 lines unread; SR3 read them: 3 more) | low |
+| SR2 | item 81's three leads and (e) | 0.30, 0.45, 0.10; 0.15/0.15 | not reached by SR2 (SR3 took leads 1–2: lead 1 landed, E2ONE; lead 2 landed, OUTERADJ; lead 3 and (e) went to stubs, unworked) | unscored (SR2's) |
+| SR2 | two binary (held false 0.12 no; sweep finished 0.55 yes) | | | **Brier 0.108** |
+| SR3 | (a) residues killed | 0.5 (0–2) | 1 (S6) | in range |
+| SR3 | (c) answered elsewhere / in place / open | 2 / 2 / 4 | 3 / 3 / 3 | in range |
+| SR3 | merges; weakenings; records that disagree | 2; 1; 2 | 3; 3; 5 | above on each |
+| SR3 | vacuity additions | 0 | 0 | met |
+| SR3 | six binary ((a) kill 0.30 yes; (b) wider V6-ADJ 0.40 yes; (c) false 0.10 no; false 0.08 no; reach all 0.75 yes; (d) simple at `p` alone 0.40 yes) | | | **Brier 0.215** (its own, re-computed) |
+| **lane A (OA1, MA1, MA2, SA1), 22 binary** | | | | **Brier 0.102** |
+| **lane R (OR1, MR1, SR1, SR2, SR3), 24 binary** | | | | **Brier 0.192** |
+| **all readers, 46 binary** | | | | **Brier 0.149** |
+
+**Keryx's priors, noted beside (not scored as a lane's)** — "most of the yield is housekeeping — merges, weaker hypotheses, disagreeing records; a
+hit from the arithmetic era on the measurable question is unlikely and would be the most surprising find" (inventory, Registered expectations): the
+yield's bulk was indeed merges, weakenings, lost theorems and disagreeing records (SR2 18 merges, SA1 17 merge lines and 15 lost theorems, SR3 5
+disagreements); but one result moved the bearing (FS-123's question 1), and the "unlikely" arithmetic-era hit happened (J12, J13, at one mind).
+
+**Reading the scores** (G21's instrument, not a verdict on anyone): the misses run one way where they are large — the probability that a held result
+reaches further, or that a step closes, was priced low and landed (OR1's closes and bearing, SR3's three "reach further" questions, Poros's A4 and A5);
+the predictions of misses of the FS116-Y4 kind and of new cross-era sites were priced high and did not land (Poros A7, MA1 E4/E8, MA2 E4/E5). This is
+the counter-priors' measured direction (`CLAUDE.md` § Counter-priors). Lane R's Brier is twice lane A's because its two largest misses (OR1's close and
+bearing) are the audit's two largest results.
