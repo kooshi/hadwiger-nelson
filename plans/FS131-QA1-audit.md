@@ -161,3 +161,130 @@ Wave 3's seven statement changes in the shared skeleton files since waves 4 and 
 `germS_absent`, `fiveRing_no_changePoint`, `echo`, `four_of_bothKind`, `four_of_bothKind_simple`) are **used by neither** wave 4's nor
 Woodall's own files (checked by name over their own files), so wave 3's fill will not break them semantically; the merge risk is the six
 names above and the append-only files (Stage 4).
+
+## Stage 4 — SAVED (trust)
+
+*Refs: `fs131-w2` `1375ed07`, `fs131-w3` `5537611a`, `fs131-w4` `6bd00949`, `fs131-ww` `dde6642e` (implementers commit as this
+audit reads; a later tip may differ).*
+
+### 4.1 Every `axiom`, `native_decide`, `implemented_by`, `extern`, `unsafe`, `opaque`, `maxHeartbeats` in the four branches
+
+Exactly **one** `axiom` (`fs131-w2` `Plane/FalconerReduction.lean:290`, `falconer_lemma2_nonempty`) and **none** of the others —
+no native evaluation, no raised heartbeat budget anywhere in ≈ 30,000 lines. `decide +kernel` appears only where the plan prices it
+(`Instances/FalconerOrbit`, 2–4 s).
+
+**`falconer_lemma2_nonempty`, read against `[Falconer1981]` Lemma 2 (i) as its docstring quotes it** ("a measurable `S` with `v(S) > 0` and
+`v(ℝ² ∖ S) > 0` has a nonempty metrical boundary — a point where the density of `S` fails to exist or exists with a value other than `0`
+or `1`"): the Lean `∃ x, x ∉ densitySet S ∧ x ∉ densitySet Sᶜ` is that statement, since for measurable `S` the density ratio of `Sᶜ`
+is `1` minus that of `S` (closed balls), so "not density `1` for `Sᶜ`" is "not density `0` for `S`". It is a true theorem (the density
+topology on `ℝ²` is connected), so it cannot make the theory inconsistent. The four items: docstring key, lemma and page ✓;
+read-back cited in `plans/FS131-w2-kernel-plan.md` § 12 (not re-read here); model `upperHalfPlane_falconer_hyp` in the same file ✓;
+`ARCHITECTURE.md` § Trust line ✓ (`fs131-w2:ARCHITECTURE.md:644`). **Used as declared**: exactly once, in `exists_mem_falconerE`, which
+feeds `falconer_reduction` (still `sorry`) and through it `le_chiM_of_falconerFan`; nothing else in any branch depends on it.
+
+**A gate gap the import exposes (B).** `scripts/axioms.sh` and `scripts/gate_report.py` know two banners, CLEAN and PURCHASED, and
+PURCHASED fails any entry without a native axiom ("stale ledger entry", `scripts/axioms.sh:101`). CLEAN is **not** checked to be
+exactly the standard three: only native axioms and `sorryAx` fail there. So when `falconer_reduction` is proved,
+`le_chiM_of_falconerFan` will be audited under CLEAN with `[propext, Classical.choice, Quot.sound, falconer_lemma2_nonempty]`, counted
+among "N clean" in `CLAUDE.md` § Trust ledger, and shown only as a separate axiom-set line in the digest — visible to a careful reader,
+failing nothing, and miscounted. LEAN.md's ledger says an imported axiom is an *explicit purchase*; the scripts have no place for one.
+Fix before wave 2 lands (the planner of the gate, with Keryx's word): a third banner (IMPORTED) whose records must carry exactly the
+standard three plus axioms named in a declared list, and a CLEAN check that every CLEAN record's axioms are a subset of the standard
+three.
+
+### 4.2 The named hypotheses
+
+| hypothesis | where | used as declared? |
+|---|---|---|
+| `Row130M1 : ∀ k, chiM0 ≤ k → chiCP ≤ k` | w2 `Plane/Slack.lean:1145` | yes — one explicit argument, of `chiM0_le_iff_chiCP_le` only; the easy direction `chiM0_le_chiCP` takes none (still `sorry`) |
+| `Voronov11` | w2 `Plane/Slack.lean:1227` | yes — never assumed; it is one side of the proved equivalence `forall_mu_six_lt_one_iff` |
+| `hR78` | w2 `Arith/FalconerField.lean:260` | yes — an argument of `falconerFan_five_mem_eight`, a property of the arbitrary `Λ` |
+| `hR88`, `hR88per` | w2 `Arith/FalconerField.lean:276,280` | as declared, but see Stage 3 row 10: with `P` and `Per` free they are not row 88's statement, only a frame row 88 instantiates |
+| **`h3 : ∀ x, (F.coloursAt x).ncard ≤ 3`** | w4 `Plane/SVMap.lean:348,357` | **an unlisted named hypothesis**: it stands in for the row's Condition 5 in TS-T's last two clauses (Stage 3 row 18; messaged) |
+
+No theorem in any branch assumes a hand result silently: every outside fact sampled enters as an argument whose name or docstring
+says what it is, except that `h3` is not on the brief's list.
+
+### 4.3 The vacuity gate's carriers (B)
+
+Main's `scripts/Vacuity.lean` now tracks `AeColouring` and `ArcMap.Valid`/`NonSiamese`/`Simple` (the I1/T1 fix). It does not
+track **`CPColouring`** (wave 2's foundation proves `IsEmpty (CPColouring 1)` — exactly the case the AeColouring fix was for) or
+**`AeProperRegions`** (wave 4's `Plane/SVMap`; `AeProperRegions 0` and `AeProperRegions 1` are empty — a dense open class contains a unit
+pair), so a theorem over `(c : CPColouring 1)` or `(R : AeProperRegions 1)` would read clean. Neither branch's own `Vacuity.lean`
+names them (`fs131-w3`/`-w4`/`-ww` predate the AeColouring fix and will inherit it at merge). Fix: add both carriers before waves 2 and 4
+land (whoever holds `scripts/Vacuity.lean`), with a planted control each.
+
+### 4.4 Other trust notes
+
+- `lebesgue_covering_square` (`fs131-w4` `Plane/SVMap.lean:253`) is a `theorem … := sorry` standing for an outside theorem, "disposition
+  owed": it must become a proof or an `axiom` with the four items before TS-T's first clause can land. It is the only outside theorem in
+  the branches not yet disposed.
+- Every declaration in all five bodies is public (zero `private` in 2,258 declarations). Not a trust issue, but it is why helper names
+  collide across branches (Stage 3.2) and why every helper is a permanent API.
+
+## Stage 5 — SAVED (code quality, measured)
+
+Instrument: `tools/fs131_qa1_quality.py` (self-test plants a line set with a nonterminal `simp`, a terminal one, a bullet, a
+`simp only`, a term-mode `by simp` and an attribute line `@[simp]`; **negative control watched**: the first version read `@[simp]` on a
+declaration line as a tactic and flagged `Plane/Basic.lean:49`; the control now holds the attribute case and fails if the strip is
+removed). Output: `data/fs131/qa1/quality.json`. Counts are own files per body.
+
+| measure | w1 | w2 | w3 | K4 skel. | w4 | ww |
+|---|---|---|---|---|---|---|
+| declarations (dump) | 133 | 560 | 513 | — | 510* | 542* |
+| theorem length median / p90 / max (lines) | 7 / 35 / 89 | 6 / 40 / 148 | 10 / 45 / 133 | — | 4 / 17 / 288 | 4 / 15 / 137 |
+| public non-example declarations without a docstring | 1 | **84** | 0 | 0 | 1 | 7 |
+| non-terminal bare `simp` (heuristic) | 8 | 20 | 23 | 0 | 6 | 15 |
+| `nlinarith` calls | 15 | 139 | 177 | — | 69* | 56* |
+| `have _ := h` (idle-hypothesis linter workaround) | 0 | 7 | 2 | 0 | 4 | 2 |
+| theorem binders named `_h…` (idle hypotheses in a statement) | 0 | 0 | 5 | 0 | 1 | 0 |
+| `TODO`/`FIXME`/`wip`/`#eval`/`#check`/`dbg_trace` in code | 0 | 0 | 0 | 0 | 0 | 0 |
+| `sorry` occurrences (own files) | 0 | 119 | 5 | — | ≈ 54 | ≈ 20 |
+| largest module (lines) | `ArcMap` 376 | `CoverExamples` 1,954 | `RingGerm` 2,595 | `ValidMap/Basic` 396 | `ValidMap/UnitArc` 1,047 | `Woodall/NoFourFive` 1,455 |
+
+(* the w4 and ww dumps include the shared skeleton files.)
+
+What the numbers say, with instances:
+
+1. **Brittleness is low.** 72 non-terminal bare `simp` in ≈ 30,000 lines; no `simp_all` spine (4 in all); no heartbeat raises; no
+   native evaluation; `decide` only on small finite goals. Mid-proof `simp` sites to convert to `simp only` (`simp?`) before publication
+   — e.g. `fs131-w3` `Plane/Chord.lean:32` (`simp [-Complex.ofReal_cos, -Complex.ofReal_sin]` then `ring`), `fs131-w2`
+   `Arith/Dyadic.lean:57,95`, `Plane/Cover.lean:231`, `fs131-ww` `Woodall/Collar.lean:308,413`; the full list is in `quality.json`.
+   `nlinarith` is the heaviest automation (≈ 450 calls); it is the likeliest thing to break at a Mathlib bump and the first place to look
+   if a bump slows a build.
+2. **Proof length is healthy, with a handful of long concrete proofs**: `fs131-w4` `ValidMap/UnitArc.lean:543` `iso` (288 lines, an
+   explicit fragment checked clause by clause), `SVMap.lean:46` `not_lemmaL_of_not_mem` (151), `fs131-w2` `MaximalCover.lean:434`
+   `IsMaximalCover.curvatureLeOne` (148), `fs131-ww` `Woodall/Collar.lean:622` `not_woodall_step4_two_thirds` (137), `fs131-w3`
+   `LocalStructure.lean:2312` `germ_dichotomy` (133), `RingGerm.lean:1442` `echo_unique` (129). Each would read better split into
+   named `have`-lemmas; none is a soup of anonymous automation.
+3. **Duplication across waves**: six name collisions (Stage 3.2, messaged), and the same facts under different names —
+   `ne1_region` (w3 `Tiles.lean:52`) and `not_mem_coloursAt_of_dist_eq_one` (ww `Woodall/NoFourFive.lean:549`) are one statement in
+   contrapositive; `dot_sub` (w4 `ValidMap/Contact.lean:356`) and `dot_sub_left` (ww `Woodall/Collar.lean:397`); `e`-periodicity three
+   ways (`e_add_two_pi` w1, `e_add_int_mul_two_pi` twice with different argument orders); `unitShadow`/`shadow`,
+   `essMulticolour`/`essColours`, `multicolour`/`coloursAt` (Stage 2 D2–D3). Sector lemmas were the predicted hot spot: w4's
+   `IsSector`/`HasDegree` and Woodall's `SectorsAt` are two models of "the sectors at a point" (connected components of `B(v, r)` off
+   `Γ` against an ordered direction list with cones); `SectorsAt.coloursAt_eq` and `exists_sectorsAt` (ww `Woodall/Steps`, `sorry`)
+   are where they must be bridged, and no lemma yet relates `SectorsAt`'s `n` to `HasDegree`.
+4. **A home-made inner product.** `dot d u := (d * conj u).re` (K4 `ValidMap/Basic.lean:72`) is Mathlib's real inner product on `ℂ`
+   (`Complex.inner`: `⟪w, z⟫_ℝ = (conj w * z).re`), and both w4 and ww re-prove its algebra (`abs_dot_le` is
+   `abs_real_inner_le_norm`). The first thing a Mathlib reviewer would ask to replace.
+5. **Idle hypotheses kept for fidelity, silenced by hand.** 15 `have _ := h` and 6 `_h…` binders keep a row's hypothesis in a
+   statement whose proof does not read it; the docstrings say so honestly. Two are clumsy: `fs131-w3` `Plane/Lens.lean:218`
+   (`have _ := And.intro (Ne.symm (Ne.symm hne)) (And.intro h3' h5')`) and `:289`. The clean shape, already used for `exit_lens_row` and
+   `qfree4`, is the general theorem without the idle hypothesis plus a `_row` corollary with them.
+6. **Docstrings**: waves 1, 3, 4 and the K4 skeleton are at ≈ 100 %; **wave 2 has 84 public theorems without one** (`Slack` 31,
+   `Stationary` 26, `MaximalCover` 10). `linter.missingDocs` does not check theorems, so the build is silent about it. Every
+   definition in every body has one.
+7. **Names.** Defs and structures follow Mathlib's casing. Row theorems carry row mnemonics (`ringband_iii`, `germR_vMinus`, `a4six`,
+   `nb4p`, `pair_P'`, `l60_eq_third`, `qfree4`, `iso`, `lock`, `anti`, `face`, `echo`, `flank`), each with a docstring naming its
+   row; workable in this repository, a rename pass before anything goes upstream. All public, in one namespace `HadwigerNelson.Plane`.
+8. **Module sizes against `ARCHITECTURE.md`**: four modules exceed Mathlib's 1,500-line style limit — `RingGerm` 2,595,
+   `LocalStructure` 2,466, `CoverExamples` 1,954, `Slack` 1,501 (and `Woodall/NoFourFive` at 1,455 and growing). The map's labels lag
+   the code: wave 3's rows still say "skeleton" for modules now 95 % proved, and `scripts/Axioms.lean` section headers say "skeleton
+   until its implementer lands it".
+9. **Merge mechanics.** All four branches insert at the same line of `scripts/Axioms.lean` (1889), `Proofs.lean` (161) and
+   `ARCHITECTURE.md` (534): every merge after the first conflicts there. Waves 4 and Woodall both carry wave 3's skeleton rows and the K4
+   rows, with differing text (w4's `ValidMap/UnitArc` row imports `Plane/RingGerm`, Woodall's does not), so "keep both sides" duplicates
+   module rows and `#print axioms` lines. Wave 3's seven statement changes in shared skeleton files are used by neither wave 4 nor
+   Woodall (checked), so the semantic risk is the six names of Stage 3.2.
+10. **Dead or WIP code: none found.** No `TODO`, no debug output, no commented-out proofs left in code in any body.
