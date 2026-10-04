@@ -755,6 +755,89 @@ theorem zero_mem_closure_region {j : ℤ} (hj1 : -3 ≤ j) (hj2 : j ≤ 2) :
   · rw [dist_zero_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg ht0.le]
     linarith [min_le_right (1 / 2 : ℝ) (ε / 2)]
 
+/-! ## WIP-BEGIN -/
+/-- `e θ ≠ 0`. -/
+theorem e_ne_zero' (θ : ℝ) : e θ ≠ 0 := fun h => by
+  have := norm_e θ; rw [h] at this; simp at this
+
+/-- Left multiplication by `a` scales distances by `‖a‖`. -/
+theorem dist_rot_left (a x y : ℂ) : dist (a * x) (a * y) = ‖a‖ * dist x y := by
+  rw [Complex.dist_eq, Complex.dist_eq, ← mul_sub, norm_mul]
+
+/-- `e a = e b` forces `a = b + 2π n`. -/
+theorem exists_int_of_e_eq_e {a b : ℝ} (h : e a = e b) : ∃ n : ℤ, a = b + n * (2 * π) := by
+  unfold e at h
+  obtain ⟨n, hn⟩ := Complex.exp_eq_exp_iff_exists_int.mp h
+  refine ⟨n, ?_⟩
+  have := congrArg Complex.im hn
+  simp only [Complex.mul_im, Complex.ofReal_re, Complex.I_im, Complex.ofReal_im, Complex.I_re, Complex.add_im,
+    Complex.intCast_re, Complex.intCast_im] at this
+  simp at this
+  linarith
+
+/-- Rotating by `60° k` moves the argument by `60° k` plus whole turns. -/
+theorem arg_rot {x : ℂ} (hx : x ≠ 0) (k : ℤ) :
+    ∃ n : ℤ, Complex.arg (e (k * (π / 3)) * x) = Complex.arg x + k * (π / 3) + n * (2 * π) := by
+  have hn : ‖e (k * (π / 3)) * x‖ = ‖x‖ := by rw [norm_mul, norm_e, one_mul]
+  have h1 := eq_norm_mul_e_arg (x := e (k * (π / 3)) * x)
+  have h2 := eq_norm_mul_e_arg (x := x)
+  rw [hn] at h1
+  have hxn : (‖x‖ : ℂ) ≠ 0 := by exact_mod_cast (norm_ne_zero_iff.mpr hx)
+  have h3 : e (Complex.arg (e (k * (π / 3)) * x)) = e (Complex.arg x + k * (π / 3)) := by
+    have : (‖x‖ : ℂ) * e (Complex.arg (e (k * (π / 3)) * x)) = (‖x‖ : ℂ) * e (Complex.arg x + k * (π / 3)) := by
+      rw [← h1, e_add]
+      conv_lhs => rw [h2]
+      ring
+    exact mul_left_cancel₀ hxn this
+  obtain ⟨n, hn'⟩ := exists_int_of_e_eq_e h3
+  exact ⟨n, hn'⟩
+
+/-- The lens test rotates with the index. -/
+theorem inSixLens_rot (k m : ℤ) (x : ℂ) : InSixLens (m + k) (e (k * (π / 3)) * x) ↔ InSixLens m x := by
+  unfold InSixLens
+  have h1 : e (((m + k : ℤ) : ℝ) * (π / 3) - π / 6) = e (k * (π / 3)) * e (m * (π / 3) - π / 6) := by
+    rw [← e_add]; congr 1; push_cast; ring
+  have h2 : e (((m + k : ℤ) : ℝ) * (π / 3) + π / 6) = e (k * (π / 3)) * e (m * (π / 3) + π / 6) := by
+    rw [← e_add]; congr 1; push_cast; ring
+  rw [h1, h2, dist_rot_left, dist_rot_left, norm_e, one_mul, one_mul]
+
+/-- **Rotation by `60° k` adds `k` to the colour.** -/
+theorem sixCol_rot (k : ℤ) {x : ℂ} (hx : x ≠ 0) :
+    sixCol (e (k * (π / 3)) * x) = ((show ZMod 6 from sixCol x) + ((k : ℤ) : ZMod 6) : ZMod 6) := by
+  have hπ := Real.pi_pos
+  have hy0 : e (k * (π / 3)) * x ≠ 0 := mul_ne_zero (e_ne_zero' _) hx
+  have hn : ‖e (k * (π / 3)) * x‖ = ‖x‖ := by rw [norm_mul, norm_e, one_mul]
+  obtain ⟨n, hnarg⟩ := arg_rot hx k
+  have hfl : ⌊Complex.arg (e (k * (π / 3)) * x) / (π / 3)⌋ = ⌊Complex.arg x / (π / 3)⌋ + k + 6 * n := by
+    rw [hnarg]
+    have : (Complex.arg x + k * (π / 3) + n * (2 * π)) / (π / 3) = Complex.arg x / (π / 3) + ((k + 6 * n : ℤ) : ℝ) := by
+      push_cast; field_simp; ring
+    rw [this, Int.floor_add_intCast]; ring
+  have hsec : sixSector (e (k * (π / 3)) * x) = sixSector x + (k : ZMod 6) := by
+    unfold sixSector
+    rw [hfl]; push_cast
+    have : (6 : ZMod 6) = 0 := by decide
+    rw [this, zero_mul, add_zero]
+  by_cases h1 : ‖x‖ < 1
+  · have h1' : ‖e (k * (π / 3)) * x‖ < 1 := by rw [hn]; exact h1
+    simp only [sixCol, h1', if_true, h1]
+    exact hsec
+  · have h1' : ¬ ‖e (k * (π / 3)) * x‖ < 1 := by rw [hn]; exact h1
+    by_cases hL : ∃ m : ℤ, InSixLens m x
+    · obtain ⟨m, hm⟩ := hL
+      have hx1 : 1 ≤ ‖x‖ := not_lt.mp h1
+      have hy1 : 1 ≤ ‖e (k * (π / 3)) * x‖ := by rw [hn]; exact hx1
+      rw [sixCol_of_lens hy1 ((inSixLens_rot k m x).mpr hm), sixCol_of_lens hx1 hm]
+      push_cast; ring_nf
+    · push Not at hL
+      have hL' : ∀ m : ℤ, ¬ InSixLens m (e (k * (π / 3)) * x) := by
+        intro m hm
+        exact hL (m - k) ((inSixLens_rot k (m - k) x).mp (by simpa using hm))
+      simp only [sixCol, h1, h1', if_false, hL _, hL' _]
+      rw [hsec]; ring_nf
+
+/-! ## WIP-END -/
+
 /-- **FS116-Y2-SIXFRAG**, validity: no two interior points of one colour are at distance exactly `1`. Colour `0` (and every
 other, by the rotation by `60°`) is carried by `S_0`, `Q_4`, `G_2`: three diameters below `1`, three cross distances above
 `1`, exact in `ℚ(√3, √7)` (the cut points of the lenses have cosine `3/4`). -/
