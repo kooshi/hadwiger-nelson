@@ -1119,3 +1119,15 @@ reason by the close.*
      Lean for simple maps, cusps included, once the gate reads it). Build green, 0 warnings; scratch axioms the standard three. Exported for wave 4:
      `isSectorChart_of`, `BranchGerms.dir_lt_nextDir`, `Mono.disjoint`, `exists_angle`, `Mono.not_mem_angleIoo`, `coneAt_sector`, `sector_nonempty`, inhabitant
      `halfDisc_sectorChart`. Keryx's receipt: the commit exists on `origin`, and the theorems read at that commit. Next: its gate and landing. Relayed to FS131-W3.
+164. **FS131-W3 mid-job: Woodall's chain restated on E3's repair and re-proved** (message 2026-10-04; `fs131-ww` at `89a4aad0`): E3's drafts applied verbatim —
+     `NiceAt`, `WoodallMerged K`, `WoodallNormal K` (∃-forms); `NiceAt.normal`, **`false_of_four_le_sectors`** (now with `hN : WoodallNormal (sphere v 1)`),
+     `aeMap6_normal`, `aeMap6_merged` (over `closedBall 0 3`) and `aeMap6` **proved** on the satisfiable definitions; non-degenerate inhabitants (`threeSectorDisc`,
+     a valid disc of three `2π/3` sectors, in both forms on the whole plane; `halfDisc`) and **phantom adversaries** (`threeSectorDisc_not_forall_merged`,
+     `_not_forall_normal`: the old ∀-forms fail there); `exists_sectorsAt` and `exists_three_le_sectors` out of the chain. `main` merged (`6e681acb`, wave 3 and LEB):
+     collisions resolved (`e_mul_conj_e` deleted as identical; `e_add_int_mul_two_pi` renamed `e_add_two_pi_mul_int`). **None of E3-BALL's children needs
+     `localSectors`**: wave 3's landed `GoodAt` engine supplies every local fact (thin cones off finitely many directions; in a good ball only the centre
+     carries three colours, so three-colour points are finite on compacts; the NiceAt picture chart-free; the merge an `ArcMap.recolour` of an open annular
+     sector). **Generalization of E3-W**: "ω(v) misses S" is automatic (wave 1's `dist_ne_one_of_mem_of_mem_closure`), and the segments need only lie in the
+     closure — `clear_wedge` in the new `Plane/Woodall/Merge` (skeleton, `sorry` leaves). No statement defect. Keryx's receipt: the two commits exist on
+     `origin`; `false_of_four_le_sectors`, `aeMap6_merged`, `aeMap6` and the inhabitants read at `89a4aad0`. **With this, item 150's check on E1-NO45 is restored
+     on real definitions, modulo its citations** (E3-BALL's leaves and the cited unlanded statements) — the withdrawal of item 158 stands for the old form.
