@@ -4600,10 +4600,13 @@ theorem isSectorChart_of {n : ℕ} (G : BranchGerms n) {v : ℂ} {r₀ : ℝ} (p
 
 end ArcMap
 
-/-- **`localSectors`**: every point of the domain has a sector chart. The germs are those of the finitely many arcs through
-`v` in a good ball (`GoodAt`), each line or circle contributing the branches it covers; the radius stays below every far
-end of those arcs and below every distance at which two distinct germs' branches meet. -/
-theorem localSectors {v : ℂ} (hv : v ∈ F.dom) : ∃ r₀, ∃ n, ∃ G : BranchGerms n, F.IsSectorChart G v r₀ := by
+/-- **`localSectors`, with its disjointness** (FS131-I4k; inventory item 244 (b)): every point of the domain has a sector chart
+whose distinct germs' branches never meet at one distance below the chart's radius. The germs are those of the finitely many arcs
+through `v` in a good ball (`GoodAt`), each line or circle contributing the branches it covers; the radius stays below every far
+end of those arcs and below every distance at which two distinct germs' branches meet. `IsSectorChart` does not carry the
+disjointness; consumers that need an arc of `Γ` near a branch point to lie on that branch alone read it here. -/
+theorem localSectors_disj {v : ℂ} (hv : v ∈ F.dom) : ∃ r₀, ∃ n, ∃ G : BranchGerms n, F.IsSectorChart G v r₀ ∧
+    ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s) := by
   have hπ := Real.pi_pos
   obtain ⟨ρ₀, hG⟩ := F.exists_goodAt hv
   set 𝒜 := {a | a ∈ F.arcs ∧ (a.carrier ∩ ball v ρ₀).Nonempty} with h𝒜def
@@ -4694,7 +4697,12 @@ theorem localSectors {v : ℂ} (hv : v ∈ F.dom) : ∃ r₀, ∃ n, ∃ G : Bra
     obtain ⟨i, hi⟩ := h1
     exact ⟨i, by rw [← hfdef] at hi; rw [hi]; rfl⟩
   have hfC : ∀ i, ofLex (f i) ∈ C := fun i => (hfG₀ i).1
-  refine ⟨r₀, S.card, G, F.isSectorChart_of G hr₀ hsub ?_ ?_ ?_ ?_ ?_⟩
+  have hdisj : ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s) := by
+    -- distinct germs never meet at one distance
+    intro i j hij s hs
+    have hne : ofLex (f i) ≠ ofLex (f j) := fun h => hij (f.injective (by simpa using h))
+    exact hr₃ _ (hfC i) _ (hfC j) hne s ⟨hs.1, hs.2.trans_le le_rfl⟩
+  refine ⟨r₀, S.card, G, F.isSectorChart_of G hr₀ hsub ?_ ?_ ?_ ?_ hdisj, hdisj⟩
   · -- sorted
     have hlex : ∀ i j : Fin S.card, i < j → G.β i < G.β j ∨ (G.β i = G.β j ∧ G.κ i < G.κ j) :=
       fun i j hij => Prod.Lex.lt_iff.mp (f.strictMono hij)
@@ -4753,10 +4761,11 @@ theorem localSectors {v : ℂ} (hv : v ∈ F.dom) : ∃ r₀, ∃ n, ∃ G : Bra
         have := norm_branchPt_sub v (G.β i) (G.κ i) hs.1.le
         rw [mem_singleton_iff.mp h, sub_self, norm_zero] at this
         exact hs.1.ne this
-  · -- distinct germs never meet at one distance
-    intro i j hij s hs
-    have hne : ofLex (f i) ≠ ofLex (f j) := fun h => hij (f.injective (by simpa using h))
-    exact hr₃ _ (hfC i) _ (hfC j) hne s ⟨hs.1, hs.2.trans_le le_rfl⟩
+
+/-- **`localSectors`**: every point of the domain has a sector chart (`localSectors_disj` without its disjointness clause). -/
+theorem localSectors {v : ℂ} (hv : v ∈ F.dom) : ∃ r₀, ∃ n, ∃ G : BranchGerms n, F.IsSectorChart G v r₀ := by
+  obtain ⟨r₀, n, G, hC, -⟩ := localSectors_disj F hv
+  exact ⟨r₀, n, G, hC⟩
 
 /-! ### One sector per Jordan tile, and the separated interval -/
 

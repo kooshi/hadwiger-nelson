@@ -4,7 +4,7 @@
 # with the scratch first on LEAN_PATH, so dependents can be checked against edited modules.
 set -e
 W=/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w4
-S=/home/kooshi/scratch-w4
+S=${S:-/home/kooshi/scratch-w4}
 cd $W
 source scripts/dev-env.sh
 if [ ! -d $S/lib/lean/Proofs ]; then mkdir -p $S/lib/lean; cp -rs $W/.lake/build/lib/lean/Proofs $S/lib/lean/Proofs; fi

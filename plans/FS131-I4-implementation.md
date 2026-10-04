@@ -436,6 +436,761 @@ axiom, no `native_decide`.** Build: "build: OK — 444 of 444 batches, 2 module(
   `nb4p`.
 - *Contact* (10) and the base's steps (BaseSteps' seven) as Stage 8 lists them.
 
+## Stage 12 — SAVED (FS131-I4f): readback, the as-given build
+
+*FS131-I4f (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4f-wave4.md` on `main`) continues this record from `9a8de899`.*
+
+**The brief's quotations against their sources** (standing rule 3). The brief says "four quotations"; it carries five, all checked: (1) "**It may**: add
+children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md`
+§ 14.2 (line 887): **matches as a truncation**. (2) "**What is left (45), in the order I would take it.**" — this record, Stage 11 (line 422): **matches**. (3) "- *The
+bowtie* (BaseSteps, 9): `bowtieCol_locallyConstant` first — every bowtie theorem reads `sorryAx` through it. Route: for each of the 11 tiles, its colour" — Stage 11
+(line 423): **matches as a truncation**. (4) item 177, "177. **FS131-I4d mid-job, on `ArcMap.lock`** … `IsRingArc`'s" — `plans/FS131-close-inventory.md` on `main`
+(line 1229): **matches as a truncation**. (5) item 185, "185. **Ruling: `l60_eq_third`'s binder `hF` → `_hF` accepted** … silence the linter" — same file (line 1300):
+**matches as a truncation**. The only mismatch is the count ("four" for five), a finding about the brief's prose, not about any quotation.
+
+**What I may change** (§ 14.2, unchanged from Stages 1, 5, 7, 9): add children anywhere in the wave's modules (the seven engines in `Basic`, sorry-free, with spec
+examples; every child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`, wave 1's
+`Plane/Chord`, `Diameter`, `Basic`), statements unchanged; imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then
+`tools/fs131_k4_decls.py --check`); `Plane/ValidMap/Sectors` (the bridge module); wave 4's vacuity carriers at the gate (`AeProperRegions` registered, item 144).
+**What I may not change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s clause 3 stays in its ruled local form, item 177; `l60_eq_third`'s binder `_hF` is
+accepted, item 185); any definition of `Plane/ValidMap/Basic`; the fragments' definitions (`bowtie*`, `l60*`, `isoY`, `isoFrag`, `sevenBrick*`) but for a coordinate
+slip found against the source tool (a finding); the read-backs' conventions; TS-T's Condition-5 clause stays in its carried form (item 142); no new `axiom`, no
+`native_decide`. A leaf that cannot be proved as written goes to Keryx at once with the declaration, the reason and the counterexample or the missing hypothesis.
+No edit while a build of the edited file runs. A merge commit is the one commit made without paths.
+
+**The worktree as given** (`9a8de899`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`), queued about 10 minutes
+for the slot: "build: OK — all 1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T170918Z-955682.log`;
+driver log `data/fs131/i4/build-i4f-readback.log`). 45 `declaration uses sorry` warnings — BaseSteps 16, Contact 10, UnitArc 19 — and no other warning.
+
+## Stage 13 — SAVED (FS131-I4f): `bowtieCol_locallyConstant`, `bowtie_valid`, `bowtie_doublyShadowed`, `bowtie_inType`; 41 `sorry` left
+
+**`bowtieCol_locallyConstant` proved** (`BaseSteps`), with no disjointness of tiles and no work on `Z±`: `bowtieCol` reads only membership in the nine open
+tiles `G`, `C`, `CN`, `CS`, `H`, `X±`, `Y±` (`bowtieCol_eq_of_iff`), and membership in an open set `U` is eventually constant near a point off a set `A`
+whenever `closure U ⊆ U ∪ A` (`eventually_mem_iff_of_closure_subset`). So the leaf is nine closure lemmas, `closure T ⊆ T ∪ ⋃ bowtieArcs` — each by
+`closure_minimal` onto the non-strict inequalities, then the equality case put on a listed piece: a segment by explicit coordinates
+(`mem_bowtieArcs_seg`, over `mem_segment_of_coords`), an arc of `ω(±i)` by `mem_bowtieArcN_of`/`mem_bowtieArcS_of` (I4e's `mem_bowtieArc_N/S` with the
+hypothesis `‖z‖ < 1/13` weakened to `|re z| ≤ 5/13` and the side of the centre). `C`'s case `re z = 0` is the point `0`, on the arc of `ω(i)`; `X σ`, `Y σ` go
+through `bowtieX_closure_cases`/`bowtieY_closure_cases` in the coordinate `u = σ re`. The route I4e planned (each tile's colour under the if-chain, then a domain
+point in one tile) was not needed. Re-pricing: about 25k tokens, two passes (one `classical` missing for `ite`'s instance under `simp`, one `IsOpen` stated through
+`unfold … ; refine … <;> fun_prop`).
+
+**`bowtie_valid` proved** (YB3's pairs, by colour class): an interior point lies in one of the nine tiles or in `closure Z±` (`bowtie_interiorPts_cases`, from
+the nine closure lemmas), and each colour comes from fixed tiles (`bowtieCol_cases`, by `split_ifs`). Colour `0`: two points of `G` are less than `1` apart
+(`dist_lt_one_of_mem_bowtieG`: with `p = 1 − im`, `|re| < 5p/12` gives `|a₁b₁| ≤ (25/144)pq`; for `ra ≤ rb`, `pq ≥ (144/169)ra`, so the squared distance is at most
+`rb − (69/169)ra < 1`). Colour `2`: `H` is `G`'s mirror under conjugation. Colour `1`: `C–C`, `CN–CN`, `CS–CS` by boxes; `C–CN` more than `1` apart (`CN` in the
+upward cone at `i`, `C` below `i` outside `ω(i)`: `(z − i)·(w − i) < 0`), `C–CS` by conjugation; `CN–CS` by height. Colours `3`, `4`: `X σ`, `Y σ` boxes, `X–Y` by
+height (`82/65 > 1`). Colour `5`: both points in the box `|re| ≤ 113/260`, `|im| ≤ 11/65` of `closure Z±`, squared distance at most `14705/16900 < 1`.
+
+**`bowtie_inType` proved**: the contacts at `N = i` (colour `0`) and `S′ = −i` (colour `2`) — `i ∈ closure(region 0)` by the points `(1 − t) i` of `G`, which lie
+on no boundary piece (`not_mem_bowtieArcs_near_I`: within `1/10` of `i` only `G`'s and `CN`'s edges through `i` are near, and a point strictly inside `G`'s cone
+is on neither; all 30 pieces checked, each segment by `coords_of_mem_segment` and `linarith`); in-type because every tile of colour `0` lies in `G ⊆ B(0, 1)`
+(`bowtieG_subset_ball`), of colour `2` in `H ⊆ B(0, 1)`. **`bowtie_doublyShadowed` proved** with the whole horn (`s₁ = −1`, `s₂ = 1`): for `‖z‖ < 1/20` outside
+`ω(i)`, the point `y = z + (i − z)/‖z − i‖` is at distance exactly `1` from `z`, in `G` within `1/20` of `i`, so in the class `0`
+(`mem_shadow_bowtie_region_zero`); the mirror at `−i` for the class `2`.
+
+**Axioms** (`#print axioms` against this stage's build's oleans, `data/fs131/i4/axioms-i4f.txt`, not a gate log): the four leaves and their children the standard
+three — and with `bowtieCol_locallyConstant` proved, the structure `bowtie` is sorry-free, so I4e's `bowtie_isHorn`, `bowtie_flanks`, `bowtie_coloursAt_zero`,
+`bowtie_mem_dom` now read `[propext, Classical.choice, Quot.sound]` too.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 323 names, 49 added, 0 missing (negative control: `bowtie_valid`'s line deleted, `--check` exit 1 naming it;
+restored, exit 0); `tools/fs131_k4_decls.py --check` 241 names, 0 missing. **No statement changed, no new axiom, no `native_decide`.** Build: "build: OK — 444 of
+444 batches, 2 module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T172502Z-1035280.log`; driver log
+`data/fs131/i4/build-i4f-stage13.log`): 41 distinct `declaration uses sorry` (BaseSteps 12, Contact 10, UnitArc 19), no other warning. (A first launch of this
+build was stopped by its PID while it still waited for the slot, before it read any file, so that the edits could be finished first; nothing was built by it.)
+
+## Stage 14 — SAVED (FS131-I4f): `bowtie_unitArcEnds`, `bowtie_neighbours`; 39 `sorry` left, and the handoff
+
+**`bowtie_unitArcEnds` proved**: the two unit arcs' ends are `(±5/13, ±1/13)` (`bowtie_arc_ends`, from `sin(arcsin 5/13) = 5/13`, `cos = 12/13`), and each is in the
+domain by I4e's density pattern with a circle and two lines (`interior_sphere_union_lines`, `subset_closure_of_diff_subset`): off `ω(i)`, `x = 5/13` and
+`12x + 5y = 5`, the ball of radius `1/100` about `(5/13, 1/13)` lies in `G ∪ C ∪ ZR` (`bowtie_dom_end_pp`; `ZR` there is `x > 5/13` or `12x + 5y > 5`; outside
+`ω(i)` with `x < 5/13` the point has `y < 1/13`, so it is in `C`); the three mirrors `_np`, `_pn`, `_nn` likewise. Every other boundary piece is a segment, so
+the hypothesis `a = .circ p 1 θ₀ θ₁` is refuted by `simp`.
+
+**`bowtie_neighbours` proved**, through one general lemma, `coloursAt_hasSectors_of_tiles` (any `ArcMap`): if near `v` the interior points are cut by `n` disjoint
+convex open sets, each holding `v` in its closure and of one colour `c i`, `c` injective, then `P_cl(v) = range c` and each colour has exactly one sector (over
+`isSector_iff_of_partition`); `coloursAt_hasSectors_of_four_tiles` is its four-named-tiles form. At `i` the four tiles are `G`, `CN`, `XR`, `XL`
+(`bowtie_partition_I`, for `r ≤ 1/10`: an interior point there is in one of them by `bowtie_interiorPts_cases` and the heights of the others; conversely each
+is in the domain and off every piece, by `mem_bowtieArcs_near_I` — within `1/10` of `i` a point of a piece is on one of the four edges through `i`), with colours
+`0, 1, 3, 4` (`bowtieCol_of_mem_CN_CS`, `bowtieCol_of_mem_XY`), convex (`convex_bowtie_tiles`, each tile a disc and half-planes, `convex_halfPlane`), and `i`
+in each closure along a ray (`mem_closure_of_ray`: `−i`, `i`, `1`, `−1`). At `−i` the mirror: `H`, `CS`, `YR`, `YL`, colours `2, 1, 3, 4`.
+
+**Axioms** (`data/fs131/i4/axioms-i4f.txt`, against this stage's build's oleans, not a gate log): `bowtie_unitArcEnds`, `bowtie_neighbours` and their children the
+standard three; no line of the file reads `sorryAx`. **Records**: `tools/fs131_i4_addrecords.py` — 341 names, 18 added, 0 missing; `tools/fs131_k4_decls.py
+--check` 259 names, 0 missing. **No statement changed, no new axiom, no `native_decide`.** Build: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s)
+with warnings", exit 0 (`build/gate/build/20261004T174227Z-1140038.log`; driver log `data/fs131/i4/build-i4f-stage14.log`): 39 distinct `declaration uses sorry`
+(BaseSteps 10, Contact 10, UnitArc 19), no other warning.
+
+**Re-pricing** (from the six bowtie leaves): each concrete-geometry leaf cost 10–25k tokens once its engine existed; the engines that the rest reuse are
+`coords_of_mem_segment` (a point of a segment by its parameter — every "not on a boundary piece" check becomes 30 cases closed by `linarith`), the near-point
+cases lemmas at `i`, `−i`, the closure lemmas of the nine tiles, and `coloursAt_hasSectors_of_tiles`.
+
+**What is left (39), in the order I would take it.**
+- *The bowtie's moves* (BaseSteps, 3): `bowtie_isStuck`, `bowtie_terminalOn`, `flank_incomplete_bowtie`. The easy halves: `¬ IsStuck (±i)` and `¬ MergeAvailable (±i)`
+  — by `bowtie_neighbours` every colour has one sector there, and a colour not carried has none (a sector's closure holds the vertex, so its colour is carried);
+  `¬ RayAvailable (±i)` — two disjoint horns of one colour would be two sectors of it. `flank_incomplete_bowtie`'s first clause: the contacts of `0` at `i` and
+  `2` at `−i` are in-type (`bowtie_inType`) through a tile meeting `G` near `i` (the segment `(1 − t) i` is connected and in the interior points), so not out-type;
+  `0` is no contact at `−i` (`region 0 ⊆ G ⊆ {im > 0}`), `2` none at `i`. The hard half, one engine for all three: **a horn at `E = 0` is one of the two cusp horns,
+  and its flanks are `G` and `H`** — a horn set is a sector, so for small `r` it is one of `cuspPiece r i` (`bowtie_partition`, `isSector_iff_of_partition`); it is not
+  a disc part (`cuspPiece r 2` contains points at angle `45°` at every radius, which a horn set between two tangent circles does not for small `r`); a flank band is
+  open, non-empty, disjoint from the horn and on the horn's side of `0`, so it lies in a disc part, colour `0` or `2`. Then `¬ ShaveAvailable 0`: every horn point is
+  in `shadow(region 0) ∩ shadow(region 2)` (`mem_shadow_bowtie_region_zero/two`), so neither flank colour is clear there. `¬ RayAvailable 0`: two disjoint colour-`1`
+  horns along one `α` are the two cusp horns, one holding `t > 0` and one `−t`, both in `{frameX 0 α > 0}` — `t cos α > 0` and `−t cos α > 0`. `¬ MergeAvailable 0`:
+  only colour `1` has two sectors; its contacts on `ω(0)` include `±i` (`CN`, `CS` near `±i`, from the partitions), both out-type (a tile of colour `1` is preconnected
+  inside the separated open sets `C`, `CN`, `CS`, so inside one; holding `i` in its closure it is in `CN`, outside `B̄(0, 1)`), so the allowed cone is in `{im d = 0}`,
+  with empty interior. At `±i`, `¬ ShaveAvailable` needs that no horn set is one of the four angular tiles (same 45°-type argument).
+- *UnitArc* (19), *Contact* (10) and the base's steps (BaseSteps' seven: `pair_i`, `pair_ii`, `pair_P'`, `fail_leavingCentre`, `fail_colours`, `anti`, `n3_end`)
+  as Stage 11 and Stage 8 list them. `n2_env_near` is not "one identity": it needs every point of the lens `B̄(A, 1) ∩ B̄(B, 1)` within `< 1` of a toward lens point
+  near the arc, with the profile `s ≤ ψ·Δ(φ)` doing the work near the ends — a real estimate.
+
+## Stage 15 — SAVED (FS131-I4g): readback, the as-given build
+
+*FS131-I4g (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4g-wave4.md` on `main`) continues this record from `8a184ec1`.
+Inventory ruling 194: this job takes `BaseSteps` and `UnitArc` only (29 leaves); `Contact` (10) is a parallel implementer's, and `Contact.lean` is not edited here.*
+
+**The brief's six quotations against their sources** (standing rule 3): (1) "**It may**: add children anywhere in the wave's modules — the seven engines and every
+child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. (2) "**What is left
+(39), in the order I would take it.**" — this record, Stage 14 (line 527): **matches**. (3) "- *The bowtie's moves* (BaseSteps, 3): `bowtie_isStuck`,
+`bowtie_terminalOn`, `flank_incomplete_bowtie`. The easy halves: `¬ IsStuck (±i)` and `¬ MergeAvailable (±i)`" — Stage 14 (line 528): **matches as a truncation**.
+(4) item 194, "194. **Ruling: wave 4 splits by file** … Choice: the next wave-4 implementer" — `plans/FS131-close-inventory.md` on `main` (line 1358): **matches as a
+truncation**. (5) item 177, "177. **FS131-I4d mid-job, on `ArcMap.lock`** … `IsRingArc`'s" — same file (line 1229): **matches as a truncation**. (6) item 185,
+"185. **Ruling: `l60_eq_third`'s binder `hF` → `_hF` accepted** … silence the linter" — same file (line 1300): **matches as a truncation**. The source heading
+the brief gives for (2)–(3) ("## Stage 14 — SAVED (FS131-I4f): `bowtie_unitArcEnds`, `bowtie_neighbours`; 39 `sorry` left, and the handoff") is this record's
+line 501, verbatim. No mismatch.
+
+**What I may change** (§ 14.2, unchanged from Stages 1, 5, 7, 9, 12): add children anywhere in the wave's modules (engines in `Basic`, sorry-free, with spec
+examples; every child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`, wave 1's
+`Plane/Chord`, `Diameter`, `Basic`), statements unchanged; imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then
+`tools/fs131_k4_decls.py --check`); `Plane/ValidMap/Sectors`; wave 4's vacuity carriers at the gate (`AeProperRegions` registered, item 144). **What I may not
+change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s clause 3 in its ruled local form, item 177; `l60_eq_third`'s binder `_hF`, item 185); any definition
+of `Plane/ValidMap/Basic`; the fragments' definitions but for a coordinate slip found against the source tool (a finding); the read-backs' conventions; TS-T's
+Condition-5 clause in its carried form (item 142); no new `axiom`, no `native_decide`; `Contact.lean` (ruling 194) except by merging the parallel branch. A leaf
+that cannot be proved as written goes to Keryx at once. No edit while a build of the edited file runs. A merge commit is the one commit made without paths.
+
+**The worktree as given** (`8a184ec1`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — all
+1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T175529Z-1222267.log`; driver log
+`data/fs131/i4/build-i4g-readback.log`). 39 `declaration uses sorry` warnings — BaseSteps 10, Contact 10, UnitArc 19 — and no other warning.
+
+## Stage 16 — SAVED (FS131-I4g): the bowtie's moves (`bowtie_isStuck`, `bowtie_terminalOn`, `flank_incomplete_bowtie`) and `u1_shadow`; 25 `sorry` left in `BaseSteps` and `UnitArc`
+
+**The bowtie's moves, through one engine: a horn is tangent to its axis.** `eventually_ray_not_mem_hornSet` — a ray `v + t d` with `d` off `±e α` leaves
+every horn set at `v` along `e α` for small `t` (in the frame, `κ₁ t N/2 < Im(d ē(α)) < κ₂ t N/2`); so two non-parallel rays are never both in a horn set
+(`eventually_not_two_rays_hornSet`), and a horn set holding a whole unit ray points along it (`eq_e_of_ray_subset_hornSet`). A sector absorbs every preconnected
+set of interior points it meets (`IsSector.subset_of_isPreconnected`), so a horn set that is a sector misses every convex set holding two non-parallel rays
+(`IsSector.disjoint_of_rays`). **At `±i`**: the four tiles there (`G`, `CN`, `X±` at `i`; `H`, `CS`, `Y±` at `−i`) each hold two such rays, so **no horn at `±i`**
+(`bowtie_not_isHorn_I/negI`) — no MERGE-RAY, no SHAVE — and every colour has at most one sector (`bowtie_hasSectors_le_one`, from `bowtie_neighbours` and
+`HasSectors.eq_zero_of_not_mem`), so no MERGE and not stuck. **At `E = 0`**: the disc parts hold two rays each, so a horn set meets only the cusp horns, holds the
+right one with `e α = 1` or the left with `e α = −1`, and lies outside `ω(±i)` (`bowtie_hornSet_zero`). No MERGE: only colour `1` has two sectors
+(`bowtie_hasSectors_zero_two`), its tiles lie in `C`, `CN` or `CS` (`bowtie_tileOf_one`), so its contacts `±i` are out-type (`bowtie_outType_one`) and its allowed
+cone lies in the line `im d = 0`. No MERGE-RAY: two disjoint horn sets along one axis would hold the same cusp horn. No SHAVE: a flank point is on the horn's side
+(`frameX > 0`) and off the horn, so in a disc part (`bowtie_flank_colour`): `g, h ∈ {0, 2}`, and every horn point is in both shadows (I4f's
+`mem_shadow_bowtie_region_zero/two`). `flank_incomplete_bowtie`'s first clause: at `i` (colour `0`) and `−i` (colour `2`) the in-type contact's tile is not
+out-type; `0` is not carried at `−i`, `2` not at `i` (`bowtie_neighbours`). `BaseSteps` now imports `Plane/ValidMap/UnitArc` (for `exists_mem_hornSet_aboveBelow`,
+the flank point; `n3_end` will need UnitArc's FLANK and `noBoth` too); `ARCHITECTURE.md`'s Imports cell updated, `tools/check_architecture.py` PASS.
+
+**`u1_shadow` proved** (no validity read): pick `θ ∈ (θ₁, θ₂)` within `90°` of `β` (the midpoint of `(max θ₁ (β − 90°), min θ₂ (β + 90°))`), `w = r(θ)`; the outer patch
+`ball w δ₁ \ B̄(P, 1) ⊆ cl(region c')` (wave 3's `side_ball_subset_closure`), a ball about `w` in the domain, and the finitely many arcs near `w`. A centre
+`P + t e(β)` lies on the ray at one parameter (`rayParam`, with `rayParam_circ` and a spec example), so for small `t > 0` no arc near `w` is a unit arc about
+`z = P + t e(β)`; the point `z + e θ = w + t e(β)` is outside `B̄(P, 1)` (`|t e(β) + e θ|² = 1 + t² + 2t cos(β − θ)`), an injective arc of `ω(z)` about it lies in
+the patch, it meets the nearby arcs in finitely many points (`Arc.finite_inter_sphere_or_eq_circ`), and any other of its points is an interior point of colour `c'`
+(`col_eq_of_mem_closure_region`) within `ε` of the arc, at distance `1` from `z`.
+
+**Axioms** (`#print axioms` against this stage's build's oleans, `data/fs131/i4/axioms-i4g.lean` → `axioms-i4g.txt`, not a gate log): the four leaves and their 28
+children, `[propext, Classical.choice, Quot.sound]`. **Records**: `tools/fs131_i4_addrecords.py` — 369 names, 28 added, 0 missing; `tools/fs131_k4_decls.py --check`
+286 names, 0 missing. **No statement changed, no new axiom, no `native_decide`.** Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with
+warnings", exit 0 (`build/gate/build/20261004T181925Z-1381684.log`; driver log `data/fs131/i4/build-i4g-stage16.log`): 35 distinct `declaration uses sorry`
+(BaseSteps 7, Contact 10, UnitArc 18), no other warning. (`u1_shadow` was inserted into `UnitArc` while the build waited for the slot, before it read any file; no
+edit was made during the build.)
+
+**Re-pricing.** The three bowtie moves cost about 70k tokens with their engine (most of it the ray engine and the tile rays, each elaborated on the first or second
+pass); `u1_shadow` (planned M) about 25k, two passes. The ray engine is general (any `ArcMap`, any horn) and serves `n3_end` and wave 5.
+
+## Stage 17 — SAVED (FS131-I4g): `l60Col_locallyConstant` (so `l60Frag` is sorry-free); 24 `sorry` left in `BaseSteps` and `UnitArc`, and the handoff
+
+**`l60Col_locallyConstant` proved.** The colouring reads three tests (in the lens `L`, `‖z‖ < 1`, `dist z 1 < 1/4`), so off the arcs each is locally constant: a
+point of `L` off the arcs has `‖x − 1‖ < 1` and `‖x − e 60°‖ < 1` (a point of `ω(1)` in `B̄(e 60°, 1)` is on the side `1 + e([60°, 180°])`, `mem_l60_arc1`; of
+`ω(e 60°)` in `B̄(1, 1)` on `e 60° + e([240°, 360°])`, `mem_l60_arc2`) and `‖x‖ ≠ 1` (`ω(0) ∩ L` is the arc `r([0, 60°])`, `mem_l60_arc0`); off `L`, `L` is closed
+and `dist x 1 ≠ 1/4` (`mem_carrier_circ_full`). Each arc lemma is `arg` with a whole-turn shift (`mem_carrier_circ_of_arg`) and one cosine bound
+(`cos_arg_sub`; `cos x ≥ 1/2` on `[−π, π]` gives `|x| ≤ π/3`, `abs_le_pi_div_three_of_cos`; `cos x ≤ −1/2` gives `|x| ≥ 2π/3`, `two_pi_div_three_le_abs_of_cos`).
+The domain hypothesis is not read. With it the structure `l60Frag` is sorry-free (its `locallyConstant` field).
+
+**Axioms** (`data/fs131/i4/axioms-i4g-17.lean` → `axioms-i4g-17.txt`, against this stage's build's oleans, not a gate log): the leaf and its ten children, the
+standard three. **Records**: `tools/fs131_i4_addrecords.py` — 379 names, 10 added, 0 missing. **No statement changed** (against `8a184ec1` the only lines removed
+from `UnitArc` and `BaseSteps` are five `sorry`s), no new axiom, no `native_decide`. Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s)
+with warnings", exit 0 (`build/gate/build/20261004T182956Z-1435730.log`; driver log `data/fs131/i4/build-i4g-stage17.log`): 34 distinct `declaration uses sorry`
+(BaseSteps 7, Contact 10, UnitArc 17), no other warning.
+
+**What is left (24 in this job's files; `Contact`'s 10 are the parallel implementer's), in the order I would take it.**
+- `l60_real` (UnitArc): `l60Frag` is now a sorry-free `ArcMap`; left are validity by the four classes (`Reul(0, A, B)` and the cap: constant width `1`, so interior
+  pairs are `< 1` apart; the two discs of diameter `1/2`; cross-class pairs need nothing), `IsRingArc 0 0 (π/3) 0 1` (sides near an open-arc point: inside
+  `B(0, 1)` the lens's colour `0`, outside colour `1`; the arc lies in `Γ` and the domain), and the thickening (`IsCompact.exists_thickening_subset_open` on the
+  closed arc inside the open domain). Check the classes against `tools/fs114_l60_check.py` first. This stage's arc lemmas (`mem_l60_arc0/1/2`) serve the `Γ` side.
+- `noBoth`: `c ≠ c′` is forced (`ringArc_cone_inner/outer` put the cones of `c` and `c′` at `P` in disjoint angle intervals, and a carried colour has a non-empty
+  cone, `coneAt_nonempty`); `ringArc_sideCone_other` gives `d, d′ ∉ {c, c′}` in the two open side cones; `d ≠ d′` gives four colours. The work is `d = d′`: two
+  sectors of `d` at `P`, separated by the `c`- and `c′`-directions — through the sector chart (`localSectors`, `IsSectorChart`; a sector's cone is the interval
+  between consecutive germs or a horn), not a one-line step.
+- The rest as Stage 11 lists them: the four `n2_env_*` (`n2_env_near` needs the lens estimate, Stage 14), engine 6 and `l60_le`, `l60_eq_inner/outer/corners`,
+  `flankQ_upper/lower` (engine 5), engine 7 and `a4six`, engine 3 and the three bends, `nb4p` (re-read FS110-NB-4 first); `BaseSteps`' `pair_i`, `pair_ii`,
+  `pair_P'`, `fail_leavingCentre`, `fail_colours`, `anti` (N3's proofs; read the derivation per leaf) and `n3_end` last — it needs `Contact`'s `woodallCone` and
+  `exists_merge`, so `BaseSteps` must import `Plane/ValidMap/Contact` after the parallel branch merges.
+- The ray engine of Stage 16 (`eventually_ray_not_mem_hornSet`, `eventually_not_two_rays_hornSet`, `eq_e_of_ray_subset_hornSet`, `IsSector.disjoint_of_rays`) is
+  general and lives in `BaseSteps`; if `UnitArc` or `Contact` needs it (`flankQ_*`, engine 5, `woodallCone`), move it to `Plane/ValidMap/Basic` — a move, no
+  statement change.
+
+## Stage 18 — SAVED (FS131-I4h): readback, the as-given build
+
+*FS131-I4h (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4h-wave4.md` on `main`) continues this record from `68f34f18`.
+Inventory ruling 194: this job takes `BaseSteps` and `UnitArc` only (24 leaves); `Contact` (10) is a parallel implementer's, and `Contact.lean` is not edited here.*
+
+**The brief's six quotations against their sources** (standing rule 3): (1) "**It may**: add children anywhere in the wave's modules — the seven engines and every
+child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. (2) "**What is left
+(24 in this job's files; `Contact`'s 10 are the parallel implementer's), in the order I would take it.**" — this record, Stage 17 (line 622): **matches**. (3) "- `l60_real`
+(UnitArc): `l60Frag` is now a sorry-free `ArcMap`; left are validity by the four classes (`Reul(0, A, B)` and the cap: constant width `1`, so interior" — Stage 17
+(line 623): **matches as a truncation**. (4) item 194, "194. **Ruling: wave 4 splits by file** (item 191's condition met: six leaves a session on wave 4's last two
+sessions, 39 left). Choice: the next wave-4 implementer" — `plans/FS131-close-inventory.md` on `main` (line 1358): **matches as a truncation**. (5) item 177, "177.
+**FS131-I4d mid-job, on `ArcMap.lock`** (FS112-LOCK; `fs131-w4`, `Plane/ValidMap/UnitArc.lean`): (1) **clause 1 closes with no N-E2** — `IsRingArc`'s" — same file
+(line 1229): **matches as a truncation**. (6) item 185, "185. **Ruling: `l60_eq_third`'s binder `hF` → `_hF` accepted** (I4e's held question). Choice: accept.
+Alternative weighed: restore `hF` and silence the linter" — same file (line 1300): **matches as a truncation**. The source heading the brief gives for (2)–(3) is
+this record's line 607, verbatim. No mismatch.
+
+**What I may change** (§ 14.2, unchanged from Stages 1, 5, 7, 9, 12, 15): add children anywhere in the wave's modules (engines in `Basic`, sorry-free, with spec
+examples; every child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`, wave 1's
+`Plane/Chord`, `Diameter`, `Basic`), statements unchanged; imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then
+`tools/fs131_k4_decls.py --check`); `Plane/ValidMap/Sectors`; wave 4's vacuity carriers at the gate (`AeProperRegions` registered, item 144). **What I may not
+change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s clause 3 in its ruled local form, item 177; `l60_eq_third`'s binder `_hF`, item 185); any definition
+of `Plane/ValidMap/Basic`; the fragments' definitions but for a coordinate slip found against the source tool (a finding); the read-backs' conventions; TS-T's
+Condition-5 clause in its carried form (item 142); no new `axiom`, no `native_decide`; `Contact.lean` (ruling 194) except by merging the parallel branch. A leaf
+that cannot be proved as written goes to Keryx at once. No edit while a build of the edited file runs. A merge commit is the one commit made without paths.
+
+**The worktree as given** (`68f34f18`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — all
+1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T184245Z-1494706.log`; driver log
+`data/fs131/i4/build-i4h-readback.log`). 34 `declaration uses sorry` warnings — BaseSteps 7, Contact 10, UnitArc 17 — and no other warning.
+
+## Stage 19 — SAVED (FS131-I4h): `l60_real`; 23 `sorry` left in `BaseSteps` and `UnitArc`
+
+**`l60_real` proved**, by its three clauses. *Validity* by the four classes (`l60_interior_cases`): an interior point of colour `0` lies in the open Reuleaux
+triangle on `0`, `1`, `e 60°`; of colour `1` in the open one on `1`, `e 60°`, `C = 1 + e 60°` (the cap `L ∖ B̄(0, 1)` lies in `B(C, 1)`, `l60_cap_mem_ball`, one
+`nlinarith` certificate over the products of the three constraints); of colour `2` in `B(1, 1/4)`, of `3` in `B(e 60°, 1/4)`. **A Reuleaux triangle has diameter
+`1`** (`dist_le_one_of_mem_reul`, general `X`, `Y`, `Z` pairwise `1` apart): for `d = p − q` some vertex `V` has `±d` in the cone spanned by the other two from `V`
+(six cases on the signs of `d`'s Cramer coordinates in the basis `Y − X`, `Z − X`, `eq_cramer`), and then `|d| ≤ 1` by the vertex bound
+(`norm_sub_le_one_of_cone`, through `reul_bound_real`: `|q − W|² ≤ 1 = |W − V|²` gives `2(q − V)·(W − V) ≥ |q − V|²`, so `d·(q − V) ≥ 0` and
+`|d|² ≤ d·(p − V) ≤ |d|`); strictly inside, `< 1` (`dist_lt_one_of_mem_reul`, by pushing `p` outward along `p − q`). *The ring arc* (`l60Frag_isRingArc`): the
+closed arc lies in the domain (`ringArc_l60_subset_dom`: its interior points in the open lens, its ends in the small open discs, by
+`dist_ringPt_ringPt_cmp_one`), on the arc `.circ 0 1 0 (π/3)`; at an interior point the open lens `O` is a neighbourhood on which the colour is `0` inside
+`B(0, 1)` and `1` outside `B̄(0, 1)`, so the sides are `{0}` and `{1}` (one inclusion by `mem_closure_iff` against `O`, the other by
+`l60_closure_subset_region`: an open part of the domain of one colour is, up to closure, in that colour's class, by `dense_interiorPts` and
+`IsOpen.inter_closure`). *The thickening*: `IsCompact.exists_thickening_subset_open`. Checked against `tools/fs114_l60_check.py` FRAG: not re-run — the proof is the
+check (every pair class is proved, not probed).
+
+**Axioms** (`data/fs131/i4/axioms-i4h-19.lean` → `axioms-i4h-19.txt`, against this stage's build's oleans, not a gate log): the leaf and its 15 children, the standard
+three. **Records**: `tools/fs131_i4_addrecords.py` — 394 names, 15 added, 0 missing. **No statement changed** (the only line removed from `UnitArc` is one `sorry`),
+no new axiom, no `native_decide`. Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings", exit 0
+(`build/gate/build/20261004T190217Z-1602361.log`; driver log `data/fs131/i4/build-i4h-stage19.log`): 33 distinct `declaration uses sorry` (BaseSteps 7, Contact 10,
+UnitArc 16), no other warning. The iteration scripts `data/fs131/i4/iter.sh`, `chk.sh` now take the scratch mirror from `S` (default unchanged), so two implementers
+do not share one mirror; this job's is `/home/kooshi/scratch-w4h`.
+
+**Re-pricing**: `l60_real` (planned M–H) cost about 45k tokens, five passes, most of them on `nlinarith` heartbeats — a real-coordinate core lemma per inequality
+is the cure that worked.
+
+## Stage 20 — SAVED (FS131-I4h): N2-ENV's `n2_env_near`, `n2_env_near_away`, `n2_env_toward`; 20 `sorry` left in `BaseSteps` and `UnitArc`
+
+**The near clauses — one lens estimate, not one identity** (I4f's Stage-14 note confirmed). For `q = p − P` in the lens `B̄(e θ₁, 1) ∩ B̄(e θ₂, 1)`:
+`|q|² ≤ 2 q·e θᵢ` at each end, and `sin(θ₂ − φ) e θ₁ + sin(φ − θ₁) e θ₂ = sin ℓ · e φ` (`sin_mul_e_add_sin_mul_e`), so
+`sin ℓ · (q·e φ) ≥ (sin a + sin b)|q|²/2` (`lens_dot_ge`; `a = φ − θ₁`, `b = θ₂ − φ`). The sine gap `sin a + sin b − sin ℓ = sin a (1 − cos b) + sin b (1 − cos a)
+≥ (2/π) min(a, b) (1 − cos(ℓ/2))` (`sin_add_sin_sub_sin_ge`, Jordan's `Real.mul_le_sin`) makes the profile linear in `Δ = min(a, b)`: **toward near**, with
+`ψ = (1 − cos(ℓ/2))/π`, `(1 − s)(sin a + sin b) ≥ sin ℓ`, so `|q − (1 − s)e φ|² ≤ (1 − s)² < 1` (`n2_env_near_core`); **away near** off `B(P, r)`, with
+`ψ = min(1, c r²)/3`, `c = (1 − cos(ℓ/2))/π`: `|q − (1 + s)e φ|² ≤ (1 + s)² − (2cΔ + s) r² < 1` (`n2_env_near_away_core`). Shared: `n2_env_data`,
+`sq_norm_sub_ofReal_mul_e`.
+
+**`n2_env_toward`**, with `ψ = min(1, r/9)`, in the frame of `φ` (`x = frameX P φ p`, `y = frameY P φ p`; `frame_polar_add` puts `P + ρ e(φ + t)` at
+`(ρ cos t, ρ sin t)`), on the symmetric sub-arc `[φ − Δ, φ + Δ]`: a point in the arc's directions (`|y| cos Δ ≤ x sin Δ`) is covered by the ring point in its own
+direction (`exists_dir_of_within`, through `arctan(y/x)`) since `0 < |p − P| ≤ 2 − s`; off them, on the side `y ≥ 0` (the other by `y ↦ −y`, `t = −Δ`), the end
+condition at `φ + Δ` and the disc give `x² + y² ≤ 72ψ² < r²` (`n2_env_toward_core`): behind (`x ≤ 0`) `|x| ≤ s`, `y sin Δ ≤ 2s`; beside (`x > 0`,
+`n2_env_toward_beside`) the direction is at least `45°` off `φ` (`toward_dir45`: `(ρ² − 2(1 − s)x)ρ² − (4U² − 4(1 − s)Ux) = (ρ² − 2U)(ρ² + 2U − 2(1 − s)x) ≥ 0`
+with `U = x cos Δ + y sin Δ ≥ x`, so `2Ux ≤ ρ²`, `x ≤ y`), and then `y (sin Δ − (1 − cos Δ)) ≤ U − x ≤ s`, `sin Δ − (1 − cos Δ) ≥ Δ/6`.
+
+**Axioms** (`data/fs131/i4/axioms-i4h-20.lean` → `axioms-i4h-20.txt`, against this stage's build's oleans, not a gate log): the three leaves and their 12 children, the
+standard three. **Records**: `tools/fs131_i4_addrecords.py` — 406 names, 12 added, 0 missing. **No statement changed** (the only lines removed from `UnitArc` are
+three `sorry`s; `n2_env_toward`'s unused binder `h12` is referenced by `have _ := h12`, the file's existing pattern, not renamed). No new axiom, no `native_decide`.
+Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T191331Z-1651956.log`; driver log
+`data/fs131/i4/build-i4h-stage20.log`): 30 distinct `declaration uses sorry` (BaseSteps 7, Contact 10, UnitArc 13), no other warning.
+
+**Re-pricing**: the three leaves (planned M–H each) cost about 60k tokens together. Every failure was `nlinarith` heartbeats in a large context, cured by a
+real-variable core lemma per inequality and explicit `mul_le_mul` steps.
+
+## Stage 21 — SAVED (FS131-I4h): `n2_env_away` (so N2-ENV is sorry-free); 19 `sorry` left in `BaseSteps` and `UnitArc`, and the handoff
+
+**`n2_env_away` proved**, with `ψ = min(1/2, r/4)`, on the whole arc (not a symmetric sub-arc: an away point beyond `φ + Δ` but inside the arc's directions is
+covered only near `R₂`, so the reduction the toward bend uses loses there). In the frame of `φ`, the disc and the condition at `θ = φ` give `x ≥ 1 + s/2`, so
+`|p − P|² ≥ 2 + s`; `p = P + ρ e(φ + t)` with `|t| < 90°` (`eq_polar_of_frameX_pos`, through `arctan(y/x)`). **In the arc's directions** (`−a ≤ t ≤ b`) the
+condition at `φ + t` gives `ρ ≥ 2`, so `p` is within `ρ − 2 ≤ s < r` of `P + 2e(φ + t) ∈ R₂(ᾱ)`. **Beyond `θ₂`** (`t > b`), in the end's frame: `Y sin b ≤ s`
+(`n2_env_away_height`), so `Y ≤ 2ψ`, `X ≥ 1`, and the end condition `(X − 1)² + Y² ≥ 1` gives `X ≥ 2 − Y²`, so `p` is within `√12 ψ < r` of `P + 2e θ₂`
+(`n2_env_away_core`, `n2_env_away_end`). Beyond `θ₁`, the mirror (`Y ↦ −Y`).
+
+**Axioms** (`data/fs131/i4/axioms-i4h-21.lean` → `axioms-i4h-21.txt`, against this stage's build's oleans, not a gate log): the leaf and its four children, the standard
+three. **Records**: `tools/fs131_i4_addrecords.py` — 410 names, 4 added, 0 missing. **No statement changed** (one `sorry` removed; `h12` referenced by
+`have _ := h12`). Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T193948Z-1860590.log`;
+driver log `data/fs131/i4/build-i4h-stage21.log`): 29 distinct `declaration uses sorry` (BaseSteps 7, Contact 10, UnitArc 12), no other warning.
+
+**What is left (19 in this job's files; `Contact`'s are the parallel implementer's, FS131-IC1/IC2 on `fs131-w4c`), in the order I would take it.**
+- *Engine 2*, `ringArcsWithin_of_Γ_subset`, **in `Plane/ValidMap/Basic` under exactly that name** (inventory item 218 (g), the coordinator's note to this job): the
+  bends and `Contact`'s three moves both need it; whichever implementer reaches it first writes it, and `tools/fs131_qa1_dupes.py` deletes an identical copy at the
+  merge. This job did not reach it.
+- *Engine 6* (`IsRingArc.side_dist_le_one`) and `l60_le`, `l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners`. This stage's Reuleaux lemmas are general
+  (`dist_le_one_of_mem_reul`, `dist_lt_one_of_mem_reul`, the vertex bound `norm_sub_le_one_of_cone`) and the lens estimate `lens_dot_ge` (`B̄(A, 1) ∩ B̄(B, 1)` against
+  directions between the ends) is the trigonometric half of L60-EQ's `L ∩ ω(P) = ᾱ` child.
+- *The bends* (`bend_toward`, `bend_away`, `bend_away_whole` over it): N2-ENV is now sorry-free (all four, with explicit profiles: toward `ψ = min(1, r/9)`,
+  away `ψ = min(1/2, r/4)`, near `(1 − cos(ℓ/2))/π`, near-away `min(1, c r²)/3`); left are engines 1–3 and the clearness.
+- `noBoth` (the sector chart: two sectors of `d` at `P` separated by the `c`- and `c′`-directions); `flankQ_upper`/`flankQ_lower` (engine 5; Contact's
+  `woodallCone` is now proved on `fs131-w4c`); engine 7 and `a4six`; `nb4p` (re-read FS110-NB-4 first).
+- `BaseSteps`' `pair_i`, `pair_ii`, `pair_P'`, `fail_leavingCentre`, `fail_colours`, `anti` (N3's proofs; read the derivation per leaf), and `n3_end` last, after
+  `fs131-w4c` merges (it needs `woodallCone` and `exists_merge`).
+- **Technique**, measured on all five leaves of this job: `nlinarith` in a declaration with a large context runs out of heartbeats even when the certificate is
+  small, and a whole declaration has one heartbeat budget. State each inequality as a real-variable lemma with only its hypotheses (here `reul_bound_real`,
+  `n2_env_near_core`, `toward_dir45`, `n2_env_away_core`), and use `mul_le_mul…` and `pow_le_pow_iff_left₀` for the steps `nlinarith` would search for.
+
+## Stage 22 — SAVED (FS131-I4i): readback, the as-given build
+
+*FS131-I4i (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4i-wave4.md` on `main`) continues this record from `22820927`.
+Inventory ruling 194: this job takes `BaseSteps` and `UnitArc` only (19 leaves); `Contact` (10 `sorry` lines here, 6 left on `fs131-w4c`) is FS131-IC2's,
+and `Contact.lean` is not edited here except by merging that branch.*
+
+**The brief's six quotations against their sources** (standing rule 3): (1) "**It may**: add children anywhere in the wave's modules — the seven engines and every
+child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. (2) "**What is left
+(19 in this job's files; `Contact`'s are the parallel implementer's, FS131-IC1/IC2 on `fs131-w4c`), in the order I would take it.**" — this record, Stage 21
+(line 734): **matches**. (3) "- *Engine 2*, `ringArcsWithin_of_Γ_subset`, **in `Plane/ValidMap/Basic` under exactly that name** (inventory item 218 (g), the
+coordinator's note to this job): the" — Stage 21 (line 735): **matches as a truncation**. (4) item 194, "194. **Ruling: wave 4 splits by file** (item 191's condition
+met: six leaves a session on wave 4's last two sessions, 39 left). Choice: the next wave-4 implementer" — `plans/FS131-close-inventory.md` on `main` (line 1358):
+**matches as a truncation**. (5) item 177 — same file (line 1229): **matches as a truncation**. (6) item 185 — same file (line 1300): **matches as a truncation**.
+The source heading the brief gives for (2)–(3) is this record's line 720, verbatim. No mismatch.
+
+**What I may change** (§ 14.2, unchanged from Stages 1, 5, 7, 9, 12, 15, 18): add children anywhere in the wave's modules (engines in `Basic`, sorry-free, with spec
+examples; every child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`, wave 1's
+`Plane/Chord`, `Diameter`, `Basic`), statements unchanged; imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then
+`tools/fs131_k4_decls.py --check`); `Plane/ValidMap/Sectors`; wave 4's vacuity carriers at the gate (`AeProperRegions` registered, item 144). **What I may not
+change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s clause 3 in its ruled local form, item 177; `l60_eq_third`'s binder `_hF`, item 185); any definition
+of `Plane/ValidMap/Basic`; the fragments' definitions but for a coordinate slip found against the source tool (a finding); the read-backs' conventions; TS-T's
+Condition-5 clause in its carried form (item 142); no new `axiom`, no `native_decide`; `Contact.lean` (ruling 194) except by merging the parallel branch. Engine 2
+goes in `Plane/ValidMap/Basic` under exactly the name `ringArcsWithin_of_Γ_subset` (item 218 (g)). A leaf that cannot be proved as written goes to Keryx at once.
+No edit while a build of the edited file runs. A merge commit is the one commit made without paths.
+
+**The worktree as given** (`22820927`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — all
+1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T195230Z-1910844.log`; driver log
+`data/fs131/i4/build-i4i-readback.log`). 29 `declaration uses sorry` warnings — BaseSteps 7, Contact 10, UnitArc 12 — and no other warning. This job's scratch
+mirror for `iter.sh`/`chk.sh` is `S=/home/kooshi/scratch-w4i`.
+
+## Stage 23 — SAVED (FS131-I4i): engine 2 (`ringArcsWithin_of_Γ_subset`, in `Plane/ValidMap/Basic`); 19 `sorry` left in `BaseSteps` and `UnitArc`
+
+**Engine 2 written, under exactly the name item 218 (g) fixes**, in `Plane/ValidMap/Basic` § Engines 1–2:
+`ringArcsWithin_of_Γ_subset (hdom : F'.dom = F.dom) {A' : Set Arc} (hnd : ∀ a ∈ A', a.Nondegenerate) (hlf : ∀ x ∈ F.dom, ∃ t ∈ 𝓝 x,
+{a | a ∈ A' ∧ (a.carrier ∩ t).Nonempty}.Finite) (hunit : ∀ a ∈ A', ¬ a.IsUnitArc) (hΓ : F'.Γ ⊆ F.Γ ∪ ⋃ a ∈ A', a.carrier) :
+F'.RingArcsWithin F` — the plan's § 13.1 form, with `A'`'s non-degeneracy and local finiteness (on `F.dom`) as explicit hypotheses. Proof: a
+sub-arc of `ω(p)` in `F'.Γ` is compact, so meets finitely many `A'`-arcs, each (non-degenerate, not a unit arc) in finitely many points of
+`ω(p)` (`Arc.finite_inter_sphere_or_eq_circ`); off that finite set it lies in `F.Γ`; children `mem_closure_ringArc_diff_finite` (a point of a
+positive-length sub-arc is a limit of its points off a finite set) and `ringArc_subset_Γ_of_finite` (`Γ` is closed in the domain). Spec
+example: `segPlane` (one segment) creates no unit arc over the arc-free plane, through the engine; `unitArcPlane` is the existing adversary.
+Iteration-checked with `data/fs131/i4/errs.sh` (`S=/home/kooshi/scratch-w4i`), then the build: "build: OK — 444 of 444 batches, 8 module(s)
+rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T195613Z-1925227.log`; driver log `data/fs131/i4/build-i4i-engine2.log`):
+29 distinct `declaration uses sorry` (BaseSteps 7, Contact 10, UnitArc 12), no other warning. **For the merge with `fs131-w4c`**: if FS131-IC2
+writes its own copy, `tools/fs131_qa1_dupes.py` decides; this one's hypotheses are the plan's.
+
+## Stage 24 — SAVED (FS131-I4i): `l60_le`, `noBoth`, `l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners` — engine 6 not needed; 14 `sorry` left in `BaseSteps` and `UnitArc`
+
+**L60 needs no chain (engine 6 is not written).** The crossing engine `Valid.dist_lt_or_gt_of_isPreconnected` on the open arc, which lies in the
+closure of each side colour's class, does all of L60-LE and L60-EQ: a point of a side colour's class within `1` of one interior point of the arc is
+within `1` of every interior point (and, by continuity, `≤ 1` of the ends). Route notes against the plan (§ 13.1 engine 6, § 13.5): its H
+child is replaced by these short arguments, so the plan's critical path through engine 6 is gone.
+- **`l60_le`**: if `ℓ > 60°`, two interior points of the arc `t ∈ (60°, min(ℓ, 180°))` apart are more than `1` apart (`dist_ringPt_ringPt_cmp_one`); an
+  outer-class point near the first is within `1` of the second — contradiction.
+- **`l60_eq_inner` / `l60_eq_outer`**: a side tile touching the open arc lies in `B(touch point, 1)` (`IsTile.subset_ball`), so within `1` of the closed
+  arc (`dist_le_one_of_touch`); the lens of the ends meets `ω(P)` only in the arc (`mem_ringArc_of_lens`, rotating `mem_l60_arc0` by `norm_rot_sub`), which
+  lies in `Γ`, so the tile misses `ω(P)` and, being connected, stays on its side (`IsPreconnected.subset_left_of_subset_union`); outside, the closed cap
+  `B̄(A,1) ∩ B̄(B,1) ∖ B̄(P,1) ⊆ B̄(C,1)` (`l60_cap_mem_closedBall`, the closed form of I4h's `l60_cap_mem_ball`, rotated by `l60_cap_general`).
+- **`l60_eq_corners`**: over the two containments, `cos_nonneg_of_mem_coneAt` (wave 3) and its new mirror `cos_nonpos_of_mem_coneAt` at the centre and the
+  other end, and `mem_angleIcc_of_two_cos` (two closed half-turns `0 < a₂ − a₁ < π` meet in `[a₂ − 90°, a₁ + 90°]`, by
+  `sin(a₂ − a₁) cos(β − θ) = sin(a₂ − θ) cos(β − a₁) + sin(θ − a₁) cos(β − a₂)` into `mem_angleIcc_of_cos_nonneg`). The outer cone at each end reads `B̄(P, 1)`'s
+  complement and the other end's disc; `C` is not needed for the cones.
+- **`noBoth`**: § 4.19's route in the sector chart. The side colours differ (`disj_lifts`), the side cones hold colours `d₁`, `d₂ ∉ {c, c'}`
+  (`ringArc_sideCone_other`); at most three colours forces `d₁ = d₂ = d`; in the chart (`localSectors`, a germ since two colours) each of the two side
+  directions lies in the cone of a `d`-sector (`IsSectorChart.exists_sector_of_mem_coneAt_region`, new in `Sectors`); one sector holding both would hold a
+  half-turn in its open interval (`angleIcc_half_turn`), hence the inner or the outer colour's direction (`coneAt_region_nonempty`, new in `Sectors`),
+  against `BranchGerms.Mono.disjoint`; so `d` has two sectors at every radius `≤ r₀` — a repeated colour.
+
+**Moves and imports.** `l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners` (statements and docstrings verbatim, checked by script against `3f7ea033`) now sit
+after the `l60Frag` helpers they read (`mem_l60_arc0`), under a new heading "L60-EQ: the containments and the corner cones"; `l60_eq_third` is unmoved.
+`UnitArc` now imports `Plane/ValidMap/Sectors` (no cycle; `ARCHITECTURE.md`'s Imports cell updated, `tools/check_architecture.py` PASS).
+
+**Axioms** (`data/fs131/i4/axioms-i4i-24.lean` → `axioms-i4i-24.txt`, against this stage's build's oleans, not a gate log): the five leaves, engine 2 and its
+two children, `l60_eq_third` (no longer over `sorry`: wave 3's statements it reads are proved since `main`'s merge), and 13 further children — 22 records, all
+`[propext, Classical.choice, Quot.sound]`, no `sorryAx`. **Records**: `tools/fs131_i4_addrecords.py` — 426 names, 16 added, 0 missing;
+`tools/fs131_k4_decls.py --check` exit 0. **No statement changed**, no new axiom, no `native_decide`. Build: "build: OK — 444 of 444 batches, 5 module(s)
+rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T201515Z-2044743.log`; driver log `data/fs131/i4/build-i4i-stage24.log`): 24 distinct
+`declaration uses sorry` (BaseSteps 7, Contact 10, UnitArc 7), no other warning.
+
+**Re-pricing**: engine 2 (planned M) and the five leaves (planned M, M, M over an H engine, M, M) cost about 90k tokens together, two iteration passes each;
+reading for the structure the crossing engine already gives was the saving.
+
+**What is left (14 in this job's files), in the order I would take it.**
+- `pair_P'` (BaseSteps) is the nearest: at `dist u u' = 1`, every interior point near `u` has a colour of `c(u) = c(u')`, so by N-E1 (`ne1_region`) `ω(u')`
+  near `u` lies in `Γ`; the work is a sub-arc of `ω(u')` from `u` with constant sides (a chart branch at `u` equal to `ω(u')`, by
+  `Arc.finite_inter_sphere_or_eq_circ`, and its two adjacent sectors), then `noBoth` at `u'` against degree 3 with three colours.
+- `a4six` over engine 7 (`exists_coveringPoint_of_window`) and `exists_shift_avoiding`; then `flankQ_upper`/`flankQ_lower` over engine 5.
+- The bends (engines 1–3 and the clearness; N2-ENV is sorry-free); `nb4p` (re-read FS110-NB-4 first).
+- `BaseSteps`' `pair_i`, `pair_ii`, `fail_leavingCentre`, `fail_colours`, `anti` read S–V's votes at a cubic trichromatic vertex: each needs the three
+  germs at `u` from its chart (degree 3) and the second-order vote of a branch against `ω(q)`; a shared child "the germs of a cubic trichromatic
+  vertex and their votes" is the first thing to state. `n3_end` last, after `fs131-w4c` merges (`woodallCone`, `exists_merge`).
+
+## Stage 25 — SAVED (FS131-I4j): readback, the as-given build
+
+*FS131-I4j (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4j-wave4.md` on `main`) continues this record from `e16f5b2c`.
+Inventory ruling 194: this job takes `BaseSteps` and `UnitArc` only (14 leaves); `Contact` (10 `sorry` lines here) is FS131-IC3's on `fs131-w4c`, and
+`Contact.lean` is not edited here except by merging that branch.*
+
+**The brief's six quotations against their sources** (standing rule 3): (1) "**It may**: add children anywhere in the wave's modules — the seven engines and every
+child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. (2) "**What is left
+(14 in this job's files), in the order I would take it.**" — this record, Stage 24 (line 832): **matches**. (3) "- `pair_P'` (BaseSteps) is the nearest: at
+`dist u u' = 1`, every interior point near `u` has a colour of `c(u) = c(u')`, so by N-E1 (`ne1_region`) `ω(u')`" — Stage 24 (line 833): **matches as a truncation**.
+(4) item 194 — `plans/FS131-close-inventory.md` on `main` (line 1358): **matches as a truncation**. (5) item 177 — same file (line 1229): **matches as a truncation**.
+(6) item 185 — same file (line 1300): **matches as a truncation**. The source heading the brief gives for (2)–(3) is this record's Stage 24 heading, verbatim.
+No mismatch.
+
+**What I may change** (§ 14.2, unchanged since Stage 1): add children anywhere in the wave's modules (engines in `Basic`, sorry-free, with spec examples; every
+child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`, wave 1's `Plane/Chord`,
+`Diameter`, `Basic`), statements unchanged; imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then
+`tools/fs131_k4_decls.py --check`); `Plane/ValidMap/Sectors`; wave 4's vacuity carriers at the gate (`AeProperRegions` registered, item 144). **What I may not
+change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s clause 3 in its ruled local form, item 177; `l60_eq_third`'s binder `_hF`, item 185); any definition
+of `Plane/ValidMap/Basic`; the fragments' definitions but for a coordinate slip found against the source tool (a finding); the read-backs' conventions; TS-T's
+Condition-5 clause in its carried form (item 142); no new `axiom`, no `native_decide`; `Contact.lean` (ruling 194) except by merging the parallel branch. A leaf
+that cannot be proved as written goes to Keryx at once. No edit while a build of the edited file runs. A merge commit is the one commit made without paths.
+
+**The worktree as given** (`e16f5b2c`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — all
+1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T202813Z-2139606.log`; driver log
+`data/fs131/i4/build-i4j-readback.log`). 24 `declaration uses sorry` warnings — BaseSteps 7, Contact 10, UnitArc 7 — and no other warning. This job's scratch
+mirror for `iter.sh`/`chk.sh`/`errs.sh` is `S=/home/kooshi/scratch-w4j`.
+
+## Stage 26 — SAVED (FS131-I4j): the ring-arc engine and `pair_P'`; 13 `sorry` left in `BaseSteps` and `UnitArc`
+
+**A ring arc inside every arc of `Γ` on a ring** (new children in `UnitArc`, section "Ring arcs from clean arcs of `Γ`", right after `noBoth`): every leaf
+that must produce an `IsRingArc` (`pair_P'`, `pair_ii`, `fail_leavingCentre`, `flankQ_*`, `n3_end`) needs the side colours of an arc of `Γ` on `ω(p)`
+to be constant, and nothing in waves 1–3 gave them. Two statements carry it:
+- `isRingArc_of_clean` (**engine A**): a closed sub-arc of positive length of `ω(p)` in `Γ`, each of whose interior points has a ball in the domain in which
+  every point of an arc lies on `ω(p)`, is an `IsRingArc`. Near `x = r(θ)` the inner side `B(x, δ) ∩ B(p, 1)` is convex; the outer side
+  `B(x, δ) ∖ B̄(p, 1)` is joined to `p + (1 + δ/2) e(θ)` by a segment that stays outside (`outside_segment`, over the real inequality
+  `outside_segment_real`, `δ ≤ 1/2`); both are interior points, so one colour each; the colour is locally constant in `θ`, so constant on `(θ₁, θ₂)`
+  (`IsPreconnected.constant` with the discrete topology on `Fin k`).
+- `exists_clean_subArc` (**engine B**): inside any sub-arc of positive length there is a clean one (finitely many arcs near one point; those not on `ω(p)`
+  meet it finitely, `Arc.finite_inter_sphere_or_eq_circ`; a point off them, `mem_closure_ringArc_diff_finite`, and a ball missing their carriers).
+  Combined: `exists_isRingArc_of_subset_Γ` — a closed sub-arc of `ω(p)` in `Γ` contains a sub-arc with constant sides.
+Engine A takes local cleanliness as a hypothesis so that the consumers needing an arc **ending at a vertex** (`fail_leavingCentre`, engine 5) can supply it
+from the vertex's sector chart (distinct branches never meet in the punctured ball) instead of from engine B.
+
+**`pair_P'` (FS112-N3-PAIRS, N3-P′) proved.** Children in `BaseSteps` (new section before N3-PAIRS): `exists_ball_col_mem_coloursAt` (from `localSectors`: near a
+point of the domain every interior point carries a colour of the point) and `IsCubicTrichromatic.not_hasRepeatedColour` (three sectors, three colours, so
+the sector-to-colour map is injective, `Finset.card_image_iff`). The proof is the row's: at `dist u u' = 1`, `ω(u')` near `u` lies in `Γ` (an interior point
+there would carry a colour of `c(u) = c(u')` at distance `1` from `u'`, N-E1); the engine gives a sub-arc with constant sides, both side colours colours
+of `u`, hence of `u'`: both-kind at `u'`, so `noBoth` gives four colours (against `ncard = 3`) or a repeated colour (against the child).
+**Binder rename, held for the coordinator**: the hypothesis that `u` is cubic trichromatic is not used (the proof reads only `u'`'s three colours and
+three sectors, and `c(u) = c(u')`), so the binder `h` is now `_h` — the same rename as ruling 185's for `l60_eq_third`; the statement's type is unchanged
+(diff against `e16f5b2c`: the one `-`/`+` pair is the binder).
+
+**Records**: `tools/fs131_i4_addrecords.py` — 439 names, 13 added; `tools/fs131_k4_decls.py --check` exit 0. **Axioms** (`data/fs131/i4/axioms-i4j-26.lean` →
+`axioms-i4j-26.txt`, against this stage's build's oleans, not a gate log): 14 records (the 13 children and `pair_P'`), all `[propext, Classical.choice,
+Quot.sound]`. **No statement changed** (but the binder above), no new axiom, no `native_decide`, no new import. Build: "build: OK — 444 of 444 batches, 3
+module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T204412Z-2240985.log`; driver log `data/fs131/i4/build-i4j-stage26.log`):
+23 distinct `declaration uses sorry` (BaseSteps 6, Contact 10, UnitArc 7), no other warning.
+
+**Re-pricing** (from this first leaf): the engine (planned nowhere; the plan's engine 5 assumed the ring arc would come from the horn's sectors) and
+`pair_P'` cost about 60k tokens with one iteration pass each; the engine is the reusable part.
+
+## Stage 27 — SAVED (FS131-I4j): `a4six` (engine 7 and the shift); 12 `sorry` left in `BaseSteps` and `UnitArc`
+
+**`a4six` (FS112-A4SIX) proved**, on the plan's route (§ 13.5) with four new children in `UnitArc` just before it:
+- `exists_shift_avoiding`: a measurable set of angles whose part in `[0, 2π)` has measure below `π/3` misses all six points `x + j·60°` of some `x`
+  (else `[0, π/3)` is covered by six translates of its pieces in the six windows: `measure_biUnion_finset_le`, `measure_preimage_add_right`,
+  `measure_biUnion_finset` on the disjoint windows).
+- `isClosed_Γ_inter_sphere` (finitely many compact arcs meet a covered ring), so the angles of `Γ` on `ω(v)` are a closed, hence measurable, set;
+  `countable_ringPt_preimage` (`e_eq_e_iff`), so the angles of the finitely many points of `Γ ∩ ω(v)` on no arc of `Γ` (wave 3's
+  `finite_ringΓ_off_ringArc`) are null, and `arcLength {θ | OnRingArc}` below `π/3` bounds them all.
+- `exists_coveringPoint_of_window` (**engine 7**): on a window whose interior points carry only `a`, `b`, with ends of colours `a`, `b` and no positive-length
+  arc of `Γ` strictly inside, some point carries both — every window point is a limit of interior window points (an open sub-interval not in `Γ`), so the
+  window is the union of the closed sets "carries `a`" and "carries `b`", and `isPreconnected_closed_iff` on `Icc`. The plan's sorted-list induction is not needed.
+Then: the six window ends are interior points (one turn on is `x` again), of colours in the two absent at `v` (N-E1), consecutive ends `60°` apart are a unit pair
+so of different colours; a window with no arc of `Γ` gives a point carrying both absent colours, a covering pair with `v`, against `hno`. `hab` is not read.
+(`open MeasureTheory in` precedes the three declarations that use `volume`; no statement changed — checked by script against `e16f5b2c`, 102 statements.)
+
+**Records**: 4 added (443 names); `tools/fs131_k4_decls.py --check` exit 0. **Axioms** (`data/fs131/i4/axioms-i4j-27.txt`, against this stage's oleans): the four
+children and `a4six`, all `[propext, Classical.choice, Quot.sound]`. Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings",
+exit 0 (`build/gate/build/20261004T205905Z-2360618.log`; driver log `data/fs131/i4/build-i4j-stage27.log`): 22 distinct `declaration uses sorry` (BaseSteps 6,
+Contact 10, UnitArc 6), no other warning. Cost: about 25k tokens, one iteration pass.
+
+## Stage 28 — SAVED (FS131-I4j): `bend_away_whole` over `bend_away`; 11 `sorry` left in `BaseSteps` and `UnitArc`, and the handoff
+
+**`bend_away_whole` reduced to `bend_away`** (plan § 13.5: "E over `bend_away` (`r2Contacts` empty)"): an interval `[a, b] ⊆ C₂(ᾱ)` would put
+`P + 2e(a) ∈ R₂(ᾱ)` in the closure of the inner class, against `hR2`. Its axioms read `sorryAx` through `bend_away` (`data/fs131/i4/axioms-i4j-28.txt`);
+the leaf's own `sorry` is gone. Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings", exit 0
+(`build/gate/build/20261004T210939Z-2417914.log`; driver log `data/fs131/i4/build-i4j-stage28.log`): 21 distinct `declaration uses sorry` (BaseSteps 6,
+Contact 10, UnitArc 5), no other warning. `tools/fs131_k4_decls.py --check` exit 0 (no new declaration).
+
+**What is left (11 in this job's files: UnitArc `bend_toward`, `bend_away`, `flankQ_upper`, `flankQ_lower`, `nb4p`; BaseSteps `pair_i`, `pair_ii`,
+`fail_leavingCentre`, `fail_colours`, `anti`, `n3_end`), in the order I would take it.** Routes below are worked out on paper, not written in Lean.
+- **`fail_leavingCentre`** (S–V Prop. 10's place, by votes). (a) A new `localSectors_disj` in `Plane/LocalStructure`: `localSectors`' proof already establishes
+  that distinct germs never meet at one distance (its last bullet, `hr₃`) and hands it to `isSectorChart_of`; return it as a second conjunct and make
+  `localSectors` its corollary (statement unchanged) — `IsSectorChart` does not carry it, and the cleanliness in (e) needs it. Editing `LocalStructure`
+  rebuilds every plane module (price one long build). (b) The vote, a child: for an interior point `z` and a sector `i` of the chart at `u` bounded by a germ
+  whose branch point `b` (at radius `δ`) has `|z − u| < 1 < |z − b|` (or `>`/`<` mirrored), the sector — preconnected, `u` and `b` in its closure (`b` because
+  the sector's angular slice at radius `δ` opens just above the germ's direction, `dir_lt_nextDir`) — holds a point at distance exactly `1` from `z`, so
+  `col z` is not the sector's colour. (c) At a cubic trichromatic `u` there are three germs and three sectors of the three colours (as in
+  `IsCubicTrichromatic.not_hasRepeatedColour`); two distinct germs bound all three sectors, so two germs voting the same way give `StripHolds` on that side.
+  Hence `¬ StripHolds u q` forces, for every `δ ∈ (0, r₀)`, a germ point `bp_k(δ) ∈ ω(q)`. (d) Four values of `δ`, three germs: one germ `k` has two zeros
+  `s₁ ≠ s₂` of `cos(A + arcsin(κs/2)) + s/2` (`A = β_k − arg(u − q)`); squaring, `cos²A = s²(κ² − 2κ sin A + 1)/4 = s²((κ − sin A)² + cos²A)/4` at two values of
+  `s`, so `cos A = 0`, `κ = sin A = ±1`, and then the whole branch is on `ω(q)`: `bp_k(s) = ringPt q (ψ ± 2 arcsin(s/2))`, `ψ = arg(u − q)` (two circles through `u`
+  meeting twice more are one). (e) `isRingArc_of_clean` (Stage 26) on `ringArc q ψ (ψ + τ)` or `ringArc q (ψ − τ) ψ`, `τ < 2 arcsin(r₀/2)`, cleanliness from (a)
+  (a branch point at radius `s` is at positive distance from every other branch: a compact middle range of radii, and the radius gap outside it); `u ∈ Γ` by the
+  chart's `mem_Γ`.
+- **`fail_colours`** over the same votes, plus which sector beside the `ω(q)`-branch lies inside `B(q, 1)` (the other two germs vote one in and one out at a
+  generic `δ`; the third colour is excluded on both sides). Then **`pair_i`, `pair_ii`** (N3-I, N3-II over the votes and `noBoth`, as `pair_P'` did) and
+  **`anti`** (N3-ANTI: each germ casts an in-vote at `u + e` or `u − e`, against a budget of one per M-in point).
+- **`flankQ_upper` / `flankQ_lower`.** Engine 5 through `isRingArc_of_clean`: near an arc point `x = N + e(α − π/2 + t)`, `t` small, the open set
+  `O = {dist(·, v) < r, frameX > 0, TanAbove κ₁, TanBelow κ′}` holds `x` (frame coordinates `(sin t, 1 − cos t)`, `tanHeight κ = (1 − κ)(1 − cos t)`); `O ∩ B(N, 1)`
+  lies in the flank (`g`) and `O ∖ B̄(N, 1)` in the horn (`c`), so an arc point of `F` in `O` is on `ω(N)`; arc points (and `v`) are not interior (a child: an
+  interior point of `B(v, r)` in the closure of a sector and off it would join the sector's component). (Q) branch: the `g`-tile at `N`
+  (`mem_coloursAt_iff_exists_tileOf`) is near the flank tile (`unitNear_or_unitFar`; a flank point is within `1` of `N`), so inside `B̄(v, 1)`, and `ne1_region`
+  at `v` makes it `B(v, 1)`. (R2) branch: `S′ = N + 2e(α − π/2) ∈ R₂`; out-type by the far branch of `unitNear_or_unitFar` (flank points are farther than `1`
+  from `S′`) and `ne1_region` at `v`. **The shadow clause is the one place the formal (R2) is weaker than the derivation's reading**: `IsR2Arc` gives only
+  `R₂ ⊆ cl(region g)`, while N4-SHADOW reads a `g`-tile filling the far side below `R₂`. My reading (one mind, not formalized): it still follows — (i) `g` avoids
+  the thin cusp just inside `B(N, 2)` above `R₂` near `S′` (a `g`-point there has its unit partner, on the segment toward `N`, inside the flank: a `g`–`g` unit
+  pair), so the points of `R₂` near `S′` are not interior, hence on `Γ`; (ii) by the chart at `S′` and the two-zeros algebra of (d) (curvature `1/2`), `R₂` near
+  `S′` is a germ `(α, 1/2)` of that chart; (iii) the sector clockwise next to it (outside `B̄(N, 2)`) is `g` (the `R₂` points are in the closure of `g`'s class,
+  the other adjacent sector lies in the forbidden cusp); (iv) for a horn point `z` near `v`, `ω(z)` crosses `R₂` transversally at an angle inside the open arc
+  (offset `≈ √ε` from `arg(z − N)`, `ε = dist(z, N) − 1 < (1 − κ₁)x²/2`; the upper crossing always qualifies) and just before that crossing runs through the
+  `g`-sector: a `g`-point at distance `1`. If (iii) fails (a cusp sector of another colour below `R₂`), the clause needs a hypothesis — that is where to look.
+- The bends and `nb4p` as Stage 24 left them; `n3_end` after `fs131-w4c` merges (`woodallCone`, `exists_merge`).
+
+**Re-pricing** (three leaves and a reduction this session, about 120k tokens of work): the leaves with a ready engine cost 25–60k each; the ring-arc engine
+was the reusable cost. The base's five (`pair_i`, `pair_ii`, `fail_*`, `anti`) share (a)–(d) above, priced at one session for (a)–(e) plus
+`fail_leavingCentre`, then about one leaf per 40k.
+
+## Stage 29 — SAVED (FS131-I4k): readback, the as-given build
+
+*FS131-I4k (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4k-wave4.md` on `main`) continues this record from `cd0fe492`.
+Inventory ruling 194: this job takes `BaseSteps` and `UnitArc` only (11 leaves); `Contact` (10 `sorry` lines) is FS131-IC4's on `fs131-w4c`, and
+`Contact.lean` is not edited here except by merging that branch.*
+
+**The brief's quotations against their sources** (standing rule 3). The brief says "six"; it carries seven quotation blocks: (1) "**It may**: add children
+anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md`
+§ 14.2 (line 887): **matches as a truncation**. (2) "**What is left (11 in this job's files: UnitArc `bend_toward`, `bend_away`, `flankQ_upper`, `flankQ_lower`,
+`nb4p`; BaseSteps `pair_i`, `pair_ii`," — this record, Stage 28 (line 933): **matches as a truncation**. (3) "- **`fail_leavingCentre`** (S–V Prop. 10's place,
+by votes). (a) A new `localSectors_disj` in `Plane/LocalStructure`: `localSectors`' proof already establishes" — Stage 28 (line 935): **matches as a truncation**.
+(4) item 194 — `plans/FS131-close-inventory.md` on `main` (line 1358): **matches as a truncation**. (5) item 244 — same file (line 1751): **matches as a
+truncation**; its continuation (ruling (b), `localSectors_disj` in `Plane/LocalStructure` with `localSectors` re-derived, statement unchanged; (c) run Stage 28's
+step (iii) and report at once if it fails) is as the brief summarizes it. (6) item 177 — same file (line 1229): **matches as a truncation**. (7) item 185 —
+same file (line 1300): **matches as a truncation**. The source headings the brief gives for (2)–(3) are this record's Stage 28 heading, verbatim. No
+mismatch but the count (seven blocks, not six).
+
+**What I may change** (§ 14.2, unchanged since Stage 1, with ruling 244 (b)): add children anywhere in the wave's modules (engines in `Basic`, sorry-free, with
+spec examples; every child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`,
+wave 1's `Plane/Chord`, `Diameter`, `Basic`), statements unchanged; in `Plane/LocalStructure`, the new `localSectors_disj` with `localSectors` re-derived from it
+(statement unchanged); imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then `tools/fs131_k4_decls.py --check`);
+wave 4's vacuity carriers at the gate (`AeProperRegions` registered, item 144). **What I may not change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s
+clause 3 in its ruled local form, item 177; `l60_eq_third`'s binder `_hF`, item 185; `pair_P'`'s `_h`, item 244 (a)); any definition of `Plane/ValidMap/Basic`;
+the fragments' definitions but for a coordinate slip found against the source tool (a finding); the read-backs' conventions; TS-T's Condition-5 clause in its
+carried form (item 142); no new `axiom`, no `native_decide`; `Contact.lean` (ruling 194) except by merging the parallel branch. A leaf that cannot be proved
+as written goes to Keryx at once. No edit while a build of the edited file runs. A merge commit is the one commit made without paths.
+
+**The worktree as given** (`cd0fe492`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — all
+1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T212339Z-2513792.log`; driver log
+`data/fs131/i4/build-i4k-readback.log`). 21 `declaration uses sorry` warnings — BaseSteps 6, Contact 10, UnitArc 5 — and no other warning. This job's scratch
+mirror for `iter.sh`/`chk.sh`/`errs.sh` is `S=/home/kooshi/scratch-w4k`.
+
+## Stage 30 — SAVED (FS131-I4k): `localSectors_disj` and `fail_leavingCentre`; 10 `sorry` left in `BaseSteps` and `UnitArc`
+
+**`localSectors_disj`** (`Plane/LocalStructure`, ruling 244 (b)): `localSectors`' proof already built the disjointness (`hr₃`) and handed it to
+`isSectorChart_of`; it is now a named `have` returned as a second conjunct, and `localSectors` is its corollary — statement unchanged (the `theorem` line
+is identical, checked by `git diff`; the docstring moved to the new theorem). Cost of the rebuild: LocalStructure 34 s, the whole build 11 min.
+
+**`fail_leavingCentre` (FS112-N3-FAIL, the place) proved**, on Stage 28's route (a)–(e), with children in a new `BaseSteps` section "The germs of a cubic
+trichromatic vertex and their votes" (before N3-FAIL):
+- `IsCubicTrichromatic.chart`: three germs (degree 3 forces `n = 3`), the disjointness, three sectors of three distinct colours that are all of `c(u)`.
+- `BranchGerms.mem_closure_sector_of_lt`: a germ's branch point lies in the closure of the sectors on both sides of it (`image_closure_subset_closure_image`).
+- `BranchGerms.fin3_adj` (`decide`): two distinct germs of three bound every sector.
+- `exists_branch_on_circle_of_not_stripHolds` (**the vote**): where the strip fails, at every radius some germ's branch point is on `ω(q)` — two germs
+  strictly outside bar every colour of `u` from the inner side (the crossing engine on the closed sector, which reaches from `u`, inside `ω(z)`, to the
+  branch point, outside), two inside bar the outer side.
+- `germ_eq_of_two_on_circle` (**the two-zeros algebra**) over `sq_dist_branchPt` and the real lemma `germ_circle_real`: with `y = (u − q) conj e(β) = p + ir`,
+  `|b(s) − q| = 1` reads `4p² = s²(p²κ² + (1 + rκ)²)`, so two radii give `p = 0`, `rκ = −1`: `κ = ±1` and `e β = iκ(u − q)`.
+- `branchPt_two_sin`: such a germ's branch point at distance `2 sin(t/2)` is `q + (u − q) e(κt)` — the branch is `ω(q)`.
+- `IsSectorChart.exists_ball_branch` (over `localSectors_disj`): a small ball about a branch point meets the arcs only on its own branch — the cleanliness
+  `isRingArc_of_clean` (Stage 26's engine A) asks for.
+Then four radii and three germs give one germ on `ω(q)` at two radii (pigeonhole), the arc of `ω(q)` from `u` along it lies in `Γ` and is clean, and engine A
+makes it a ring arc ending at `u`. Hypotheses read: `hF` (the crossing), `hu`, `hc` (only `u ∈ dom`), `hq`, `hs`. Read against § 8.2 and the row: same
+statement (where the strip fails at `q ∈ ω(u)`, `q` is the centre of an arc of `Γ` on `ω(q)` with constant sides ending at `u`).
+
+**Records**: `tools/fs131_i4_addrecords.py` — 452 names, 9 added; `localSectors_disj` added by hand beside `localSectors` in wave 3's block;
+`tools/fs131_k4_decls.py --check` exit 0. **Axioms** (`data/fs131/i4/axioms-i4k-30.lean` → `axioms-i4k-30.txt`, against this stage's build's oleans, not a gate
+log): all twelve `[propext, Classical.choice, Quot.sound]`, `fin3_adj` none. **No statement changed**, no new axiom, no `native_decide`, no new import. Build:
+"build: OK — 444 of 444 batches, 12 module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T213942Z-2609986.log`; driver log
+`data/fs131/i4/build-i4k-stage30.log`): 20 distinct `declaration uses sorry` (BaseSteps 5, Contact 10, UnitArc 5), no other warning.
+
+**Re-pricing** (first hard leaf): about 70k tokens including the readback; three iteration passes on a scratch file importing `BaseSteps` (compiling only
+`LocalStructure` into the scratch mirror: a purely additive change leaves its dependents' oleans loadable, iteration only).
+
+## Stage 31 — SAVED (FS131-I4k): `fail_colours`, `anti`, `pair_ii`; `pair_i` held (a GAP, ruled); 7 `sorry` left in `BaseSteps` and `UnitArc`
+
+**The vote, refactored** (children in the same section, now moved before N3-PAIRS so that `pair_ii` can read them): `stripHolds_of_two_branches` (two germs
+with branch points strictly on one side of `ω(q)` at one radius make the strip hold) with `exists_branch_on_circle_of_not_stripHolds` over it;
+`IsSectorChart.exists_isRingArc_of_along` (the arc of `Γ` along a germ tangent to `ω(q)`, ending at `u`, its interior points that germ's branch points —
+`fail_leavingCentre`'s tail, now shared); `exists_along_of_side` (if both bounding germs of a sector stay weakly on one side of `ω(q)`, one lies along it:
+off that each meets `ω(q)` at one radius at most, so at some radius both are strictly on one side); `closure_sector_subset_of_side` (**the crossing at a
+vertex**: a colour of `u` approaching `x` from inside `ω(u)` confines its sector's closure to `B̄(x, 1)`, from outside to `{1 ≤ dist · x}`);
+`exists_colour_near` (finitely many colours: a colour of `u` occurring near `q` on one side for every `ε` approaches `q` on that side).
+
+**`fail_colours` (FS112-N3-FAIL, the colours) proved.** (1), (3) from `¬ StripHolds` by `exists_colour_near`. (2): a colour `f i` of `u` inside at `q` confines
+sector `i` to `B̄(q, 1)`, hence (open) to `B(q, 1)`; of its two bounding germs one lies along `ω(q)` (`exists_along_of_side`, the outer strip would hold
+otherwise); the arc along it has a branch point of that germ, in the closure of sector `i`, as an interior point, so `f i` is its inner colour. (4) mirrors it.
+Read against § 8.2 and the row: same statement (the row's "exactly" read as the proof's "only", as the docstring says).
+
+**`anti` (FS112-N3-ANTI) proved**, with no second-order formula: `u` is the midpoint of the antipodes, so `|b − x|² + |b − y|² = 2|b − u|² + 2` puts every
+branch point at a positive radius beyond `ω(x)` or beyond `ω(y)`; two of the three germs are beyond the same one, they bound all three sectors, and the sector
+of the M-in colour there is confined to its closed disc (`closure_sector_subset_of_side`). The strip is not read. Same statement.
+
+**`pair_ii` (FS112-N3-PAIRS (ii)) proved**, with neither the strip nor N3-FAIL: `exists_side_germs_of_transversal` (with `ζ = (x − u₁) conj(x − y) = P + iQ`,
+`|ringPt y (φ₀ + t) − u₁|² = 1 + 2(1 − P)(1 − cos t) + 2Q sin t`, and `htr` is `Q ≠ 0`) gives a half of `ω(y)` strictly inside `ω(u₁)` and one strictly outside;
+`half_colour_or_bothKind` on each: an interior point of the half has a colour outside `{a, b}` (N-E1 at `y`), else the half is in `Γ` and a constant-sides
+sub-arc has side colours in `{a, b}` (both-kind at `y`, the second disjunct) or one outside. So `x` carries a colour `d₁` of `u₁` from inside and `d₂` from
+outside, distinct (one sector would lie on `ω(x)`, `interior_sphere`), and `{a, b, d₁, d₂}` are four colours at `x`. **Binders renamed**: `h₂`, `hc₂`, `hy`
+are unread, now `_h₂`, `_hc₂`, `_hy` (accepted by the coordinator mid-job, ruling 185's reason). Read against § 8.2: same statement.
+
+**`pair_i` held — a GAP in N3-I, sent to the coordinator and ruled.** The derivation's step "a failure at `(x, y)` would recur at nearby unit pairs" fails
+when `(x, y)` is an isolated unit pair of `ω(u₁) × ω(u₂)`: `|u₁ − u₂| = 3`, `u₁, x, y, u₂` collinear at spacing `1` (then `ω(y)` is tangent to `ω(u₁)` at
+`x` from outside, and CB's strip argument reaches only an outer strip). A local picture (`u₁ = 0, x = 1, y = 2, u₂ = 3`, both strips holding on the inner
+side, colour `a` inside each) shows no contradiction; no full counterexample was built. **Ruling (inventory item 258)**: `pair_i` gains `(h3 : dist u₁ u₂ < 3)`.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 459 names, 7 added; `tools/fs131_k4_decls.py --check` exit 0. **Statements**: new `tools/fs131_i4_stmts.py`
+(every theorem's text up to `:=` against a revision): against `cd0fe492`, 141 old, 157 new, 16 added, 0 removed, 1 changed — `pair_ii`'s binders,
+allowed; its plant (`fail_leavingCentre`'s hypothesis `¬ StripHolds` edited to `StripHolds`) fired `CHANGED fail_leavingCentre`, exit 1, and the restored file
+reads exit 0. **Axioms** (`data/fs131/i4/axioms-i4k-31.txt`, this stage's oleans, not a gate log): the three leaves, `fail_leavingCentre` and the eight new
+children, all `[propext, Classical.choice, Quot.sound]`. Build: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings", exit 0
+(`build/gate/build/20261004T215858Z-2731754.log`; driver log `data/fs131/i4/build-i4k-stage31.log`): 17 distinct `declaration uses sorry` (BaseSteps 2,
+Contact 10, UnitArc 5), no other warning. Cost: about 60k tokens for the three leaves and the refactor, two iteration passes.
+
+## Stage 32 — SAVED (FS131-I4k): `pair_i` gains `h3 : dist u₁ u₂ < 3` (ruling 258); 7 `sorry` left in `BaseSteps` and `UnitArc`, and the handoff
+
+**The statement change, as ruled** (inventory item 258; the brief's amendment of 2026-10-04): `pair_i` takes `(h3 : dist u₁ u₂ < 3)` after `hc₂`, and its
+docstring names it in place of "no transversality hypothesis". `tools/fs131_i4_stmts.py ff32b839 … --allow pair_i`: 157 statements, 1 changed (`pair_i`,
+allowed), exit 0. The axioms record is by name and unchanged. Build: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings", exit 0
+(`build/gate/build/20261004T221211Z-2818124.log`; driver log `data/fs131/i4/build-i4k-stage32.log`): 17 distinct `declaration uses sorry` (BaseSteps 2,
+Contact 10, UnitArc 5), no other warning.
+
+**The coordinator's inference (item 258), checked on paper (one mind, not formalized)**: the critical points of `|x′ − y′|` on `ω(u₁) × ω(u₂)` are the four
+configurations with `x′`, `y′` on the line through `u₁`, `u₂`, of values `d − 2, d, d, d + 2` (`d = |u₁ − u₂|`, `d > 0`; for `d = 0` the level set `|x′ − y′| = 1`
+is a smooth curve). The value `1` is critical only at `d = 3` (the minimum: an isolated pair, the GAP) and at `d = 1` (two saddles: the level set is two crossing
+curves, still not isolated). So for `d < 3` every unit pair has unit pairs `(x′, y′) → (x, y)`, `(x′, y′) ≠ (x, y)`. Tangency at `x′` (`|y′ − u₁| = 2`) needs
+`y′ ∈ ω(u₂) ∩ sphere(u₁, 2)`, at most two points; the strip fails at no more than three points of `ω(u₁)` (each fail point `q` has a germ of `u₁` with `e β = iκ(u₁ − q)`,
+`exists_branch_on_circle_of_not_stripHolds` and `germ_eq_of_two_on_circle`, so `q` is fixed by the germ). Confirmed: the perturbation covers tangent pairs.
+
+**What is left (7 in this job's files: UnitArc `bend_toward`, `bend_away`, `flankQ_upper`, `flankQ_lower`, `nb4p`; BaseSteps `pair_i`, `n3_end`).**
+- **`pair_i`** (with `h3`), the route: (1) `y ≠ u₁` (`a ∈ c(y)`, `a ∉ c(u₁)`) and `x ≠ u₂`. (2) **The strip case**: if `StripHolds u₁ x` on a side `σ` that `ω(y)`
+  enters near `x` (transversal: `exists_side_germs_of_transversal` gives both sides; tangent from outside: only `σ` = outside), every interior point there has
+  colour `a` (the strip, `exists_ball_col_mem_coloursAt`, `c′(x) = {a}`), so a ball `O` about a point `m` of `ω(y)` on side `σ` lies in `closure (region a)` (interior
+  points are dense: grep wave 3 for its density lemma), and `Valid.dist_ne_one_of_isOpen_subset_closure` with `y ∈ closure (region a)`, `dist y m = 1` is the
+  contradiction. (3) **Otherwise perturb**: `c′ ≡ {a}` on `ω(u₁)` near `x` (`coloursAt x′ ⊆ coloursAt x` near `x`, from `exists_ball_col_mem_coloursAt`;
+  `c′(x′) ≠ ∅` by `noBoth` as in `pair_P'`) and on `ω(u₂)` near `y`; choose a unit pair `(x′, y′)` near `(x, y)` (the paragraph above; the intermediate value
+  theorem along `ω(u₂)` against `ω(x′)`, using `exists_side_germs_of_transversal` at `y` when `|x − u₂| ≠ 2`, or along `ω(u₁)` against `ω(y′)` otherwise) with `x′`
+  not a fail point and `|y′ − u₁| ≠ 2`, then (2). Price: about one session.
+- **`n3_end`** after `fs131-w4c` merges (`woodallCone`, `exists_merge`), as I4g and Stage 28 said.
+- **`flankQ_*`, the bends, `nb4p`**: as Stage 28 left them. `flankQ_*` can now use `IsSectorChart.exists_isRingArc_of_along`'s pattern (an arc of `Γ` along a
+  chart germ tangent to a unit circle) at `v` with `q = N` or `S′`, if the horn's bounding arc is a germ of `v`'s chart; the (R2) shadow reading (ruling 244 (c))
+  is not yet run — run Stage 28's step (iii) first and message the coordinator at once if it fails.
+
+**Re-pricing** (this session, about 130k tokens of work after the readback): four leaves and a statement repair; the shared vertex children (the chart, the vote,
+the arc along a germ, the crossing at a vertex) made `fail_colours`, `anti` and `pair_ii` cost about 20k each once `fail_leavingCentre` had paid for them.
+
+## Stage 33 — SAVED (FS131-I4l): readback, the as-given build
+
+*FS131-I4l (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4l-wave4.md` on `main`) continues this record from `d391f480`. Its
+first job is inventory item 267's merge of `fs131-w4c` (at `f975677b`) into this branch; then `n3_end`, `UnitArc`'s five and `pair_i`. `Contact.lean` is
+not edited here except by that merge.*
+
+**The brief's quotations against their sources** (standing rule 3). Five blocks: (1) "**What is left (7 in this job's files: UnitArc `bend_toward`,
+`bend_away`, `flankQ_upper`, `flankQ_lower`, `nb4p`; BaseSteps `pair_i`, `n3_end`).**" — this record, Stage 32 (its heading as the brief gives it, verbatim):
+**matches exactly**. (2) "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the
+engines in the" — `plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. (3) item 267 — `plans/FS131-close-inventory.md` on `main`
+(line 1940): **matches as a truncation**. (4) item 258 — same file (line 1845): **matches as a truncation**. (5) item 266 — same file (line 1927): **matches as a
+truncation**. Items 257 and 264 read in full; 264's critical-point argument is the one Stage 32 records. No mismatch.
+
+**The merge's scope, checked before merging** (`git diff --name-only 68f34f18` on each side; `68f34f18` is the merge base): the two sides share exactly
+`ARCHITECTURE.md` and `scripts/Axioms.lean`, as item 267 says; `fs131-w4c` adds `Contact.lean`, its record `plans/FS131-IC-implementation.md`, its reports,
+`tools/fs131_ic*_addrecords.py` and `data/fs131/ic/`.
+
+**The worktree as given** (`d391f480`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`), admitted after
+one wait: "build: OK — all 1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T223506Z-2998291.log`;
+driver log `data/fs131/i4/build-i4l-readback.log`). 17 `declaration uses sorry` warnings — Contact 10, UnitArc 5, BaseSteps 2 — and no other warning.
+
+## Stage 34 — SAVED (FS131-I4l): `fs131-w4c` merged (inventory item 267); 10 `sorry` left on the branch (Contact 3, UnitArc 5, BaseSteps 2)
+
+**The merge** (`d33d0b33`, `git merge fs131-w4c` at `f975677b`; the one commit of this job made without paths, as its message says). Conflicts:
+`ARCHITECTURE.md` only — the `Contact` row taken from `fs131-w4c` (IC1's children, Imports `Plane/ValidMap/Basic`, `Plane/Tiles`, `Plane/SVMap`), the `UnitArc`
+row from `fs131-w4` (Imports with `Plane/ValidMap/Sectors`); every other row was already common. `scripts/Axioms.lean` merged without conflict, and every line
+of both sides is kept: base 3,050 lines, `fs131-w4` 3,131, `fs131-w4c` 3,215, merged 3,296 = 3,050 + 81 + 165, each line's multiplicity checked against
+base + (ours − base) + (theirs − base), 0 mismatches. No other file changed on both sides. `Contact.lean` is `fs131-w4c`'s byte for byte.
+
+**Checks.**
+- **Statements** (`tools/fs131_i4_stmts.py`, every wave-4 and supporting module): against `d391f480`, `Contact` 30 old / 180 new, 1 changed — `stuck_structure`,
+  ruling 252's sides clause (IC5's), allowed: exit 0 with `--allow stuck_structure`; `UnitArc`, `BaseSteps`, `Basic`, `Sectors`, `LocalStructure`,
+  `StuckChain`, `SVMap` 0 changed. Against `f975677b`, `BaseSteps` 3 changed — `pair_i` (ruling 258), `pair_ii` and `pair_P'` (binder renames, rulings 258 and
+  244 (a)), allowed: exit 0 with `--allow`; every other module 0 changed. So the merge changed no statement: each module equals one parent's.
+- **Duplicate names.** `tools/fs131_qa1_dupes.py` (`data/fs131/i4/dupes-i4l.log`, run on the merge commit): the same six names as I4d's
+  `dupes-i4d.log` (`abs_dot_le`, `dot_add_left`, `dot_e_e`, `isOpen_shadow` against `fs131-ww`; `framePt` against `fs131-w2`; `conj_e`, wave 1's) — nothing new.
+  QA1's tool compares bodies and skips a name repeated inside one body, which after a merge is exactly the case to check, so a new tool,
+  `tools/fs131_i4_treedupes.py`, scans every qualified name in the tree (QA1's `qualified_decls`, imported): merged tree 7,529 declarations, the merge base
+  `68f34f18` 7,296, `d391f480` 7,378, `f975677b` 7,447 — 7,378 + 7,447 − 7,296 = 7,529, nothing lost or doubled — and the same 3 repeats in all four
+  (`conj_e` in `Chord`/`SixFragment`, and `bindings`, `with`: prose read as declarations), none new. Planted control: a synthetic file redeclaring
+  `ArcMap.pair_i` fires `REPEAT HadwigerNelson.Plane.ArcMap.pair_i`, exit 1 (`data/fs131/i4/treedupes-i4l-merge.log` holds all five runs).
+- **Records.** `tools/check_architecture.py`: PASS, exit 0. `tools/fs131_k4_decls.py --check`: exit 1, 522 names, 2 "missing" —
+  `…ArcMap._root_.HadwigerNelson.Plane.BranchGerms.frameY_lt_of_mem` and `…lt_frameY_of_mem`: K4's tool does not resolve `_root_.` (a **tool defect**, not
+  mine to edit); both records are present under their resolved names (`scripts/Axioms.lean` lines 3230, 3239), and with `._root_.` resolved all 522 names
+  are recorded (0 missing). The Contact lane's own `tools/fs131_ic*_addrecords.py` reads `_root_.` names as written.
+
+**Build** of the merge: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings, 8m48s", exit 0
+(`build/gate/build/20261004T223841Z-3027842.log`; driver log `data/fs131/i4/build-i4l-merge.log`): 10 distinct `declaration uses sorry` — `Contact` 3
+(l. 4064, 4078, 4094: `exists_shave`, `exists_rayMerge`, `exists_merge`), `UnitArc` 5, `BaseSteps` 2 — and no other warning, as the brief expected.
+
+## Stage 35 — SAVED (FS131-I4l): `pair_i` (FS112-N3-PAIRS (i), with ruling 258's `h3`) proved; 9 `sorry` left on the branch (Contact 3, UnitArc 5, BaseSteps 1)
+
+**`pair_i` proved** on Stage 32's route, with one simplification found on the way: the perturbed partner needs no pseudo-colour of its own, because
+**every point of `ω(u)` near a point whose pseudo-colour is `{a}` lies in the closure of `a`'s class** (`mem_closure_region_of_pseudo`). Children, in a new
+`BaseSteps` section "Moving a unit pair along two unit circles", before N3-PAIRS:
+- `eq_midpoint_of_dist` (Apollonius: `|x − u| = |x − y| = 1`, `|y − u| = 2` ⟹ `x = (u + y)/2`), `finite_sphere_inter_sphere_half` (a unit circle meets a
+  circle of radius `1/2` finitely: wave 3's `Arc.finite_inter_sphere_or_eq_circ` on `circ m (1/2) (−π) π`), `exists_mem_Ioo_ringPt_not_mem` (an open
+  interval of angles has one whose ring point avoids a countable set: `countable_ringPt_preimage` and Lebesgue measure).
+- `mem_closure_region_of_pseudo`: an interior point of `ω(u)` near `y` has a colour of `y` that `u` does not carry (N-E1 at `u`), so `a`; a sub-arc of
+  `ω(u)` in `Γ` holds a ring arc with constant sides whose two side colours are colours of `y`, both carried at `u` only if both-kind — NOBOTH, against
+  `u` cubic trichromatic — so one is `a`; such points are dense on `ω(u)` near `y`, and `closure (region a)` is closed.
+- `finite_not_stripHolds`: the strip fails at three points of `ω(u)` at most — each is `u + I κ e(β)` for a germ of the chart with `κ = ±1` (four radii,
+  `exists_branch_on_circle_of_not_stripHolds`, `germ_eq_of_two_on_circle`, as in `fail_leavingCentre`).
+- `pair_i_of_transversal` (the case `|x − u₂| ≠ 2`): `ω(x)` crosses `ω(u₂)` transversally at `y` (`exists_side_germs_of_transversal`); pick `x′ ∈ ω(u₁)`
+  within `η` of `x` off the finitely many fail points and off `ω(u₁) ∩ sphere((u₁ + u₂)/2, 1/2)` (the `x′` whose partner could be tangent:
+  `|y′ − u₁| = 2` forces `x′ = (u₁ + y′)/2`); the intermediate value theorem along `ω(u₂)` near `y` gives `y′` with `|x′ − y′| = 1`, `y′ ≠ u₁`,
+  `|y′ − u₁| ≠ 2`, `y′ ∈ closure (region a)`. The strip holds at `x′` on a side `O` (open); every interior point of `O` near `x` has colour `a`, so
+  `O ⊆ closure (region a)` (`dense_interiorPts`, `IsOpen.inter_closure`); `ω(y′)` crosses `ω(u₁)` transversally at `x′` and enters `O` at a point at
+  distance `1` from `y′`, against `Valid.dist_ne_one_of_isOpen_subset_closure`.
+- `pair_i` itself: if `|x − u₂| = 2`, then `|y − u₁| ≠ 2` (both would make `u₁, x, y, u₂` collinear at spacing `1`, `|u₁ − u₂| = 3`, against `h3` —
+  exactly ruling 258's case), and `pair_i_of_transversal` applies with the roles of `(u₁, x)` and `(u₂, y)` exchanged. **`h3` is read exactly there.**
+Read against § 8.2 and the row as amended by ruling 258: same statement.
+
+**Tools.** `tools/fs131_i4_addrecords.py` now resolves `theorem _root_.X` to `X` (it read `fs131_k4_decls.py`'s unresolved names and would have
+written two bogus records after the merge); `--check` before the fix listed the two `_root_` names and the six new ones, after it the six only; `--plant`
+fires (615 of 615 missing); after adding, `--check` exit 0 (615 names, 0 missing). Statements: `tools/fs131_i4_stmts.py 54852de9 …BaseSteps.lean`
+157 old, 163 new, 6 added, 0 changed, exit 0. **Axioms** (`data/fs131/i4/axioms-i4l-35.txt`, against this stage's build's oleans, not a gate log):
+`pair_i` and the six children, all `[propext, Classical.choice, Quot.sound]`. No new import, no `native_decide`, no axiom.
+
+**Build**: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings, 9m20s", exit 0
+(`build/gate/build/20261004T225128Z-3105601.log`; driver log `data/fs131/i4/build-i4l-stage35.log`): 9 distinct `declaration uses sorry` — Contact 3,
+UnitArc 5, BaseSteps 1 (`n3_end`) — and no other warning.
+
+**For `n3_end`, the coordinator's amendment (inventory items 268–269, by message mid-job)**: `exists_merge`'s clause
+`∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x` is unsatisfiable and becomes `F'.coloursAt v ⊆ F.coloursAt v` on `fs131-w4m`; a proof of `n3_end`
+reads only that vertex instance.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -483,3 +1238,99 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   § 8.2: same statement (`E`, `N`, `S′` in the fragment's domain). Children `ArcMap.interior_line_eq_empty`, `ArcMap.isClosed_line`, `ArcMap.dense_compl_four_lines`,
   `ArcMap.subset_bowtieTiles`, `ArcMap.ball_I_subset_closure_bowtieTiles`, `ArcMap.ball_negI_subset_closure_bowtieTiles` — the standard three.
 
+## Theorems this phase proved (FS131-I4f's; axioms from `#print axioms` against the stage-13 and stage-14 builds' oleans, `data/fs131/i4/axioms-i4f.txt`, not a gate log)
+
+- FS112-BOWTIE's fragment: `HadwigerNelson.Plane.bowtieCol_locallyConstant` — `[propext, Classical.choice, Quot.sound]`. Read against § 8.2: same statement (the
+  bowtie's colour locally constant off its boundary pieces, in its domain). With it the structure `bowtie` is sorry-free, so `ArcMap.bowtie_isHorn`,
+  `ArcMap.bowtie_flanks`, `ArcMap.bowtie_coloursAt_zero`, `ArcMap.bowtie_mem_dom` (I4e's) read the standard three.
+- FS112-BOWTIE: `ArcMap.bowtie_valid` — the standard three. Same statement (no two interior points of one colour at distance exactly `1`; YB3's pairs).
+- FS112-BOWTIE: `ArcMap.bowtie_doublyShadowed` — the standard three. Same statement (both horns, near `E`, in the shadows of both flank colours; the band is the
+  whole horn, `s₁ = −1`, `s₂ = 1`).
+- FS112-BOWTIE: `ArcMap.bowtie_inType` — the standard three. Same statement (contacts of `0` at `i` and `2` at `−i`, in-type).
+- FS112-BOWTIE: `ArcMap.bowtie_unitArcEnds` — the standard three. Same statement (both ends of both unit arcs in the domain).
+- FS112-BOWTIE: `ArcMap.bowtie_neighbours` — the standard three. Same statement (`P_cl(i) = {0, 1, 3, 4}`, `P_cl(−i) = {2, 1, 3, 4}`, one sector per colour).
+- Children (no row), the standard three: `ArcMap.coloursAt_hasSectors_of_tiles` (general: colours and single sectors from a convex tile partition),
+  `ArcMap.coloursAt_hasSectors_of_four_tiles`, `ArcMap.coords_of_mem_segment`, `mem_segment_of_coords`, `ArcMap.mem_closure_of_ray`, `ArcMap.convex_halfPlane`,
+  `eventually_mem_iff_of_closure_subset`, `ArcMap.subset_closure_of_diff_subset`, and the bowtie's: the nine `closure_bowtie*_subset`, `bowtieCol_eq_of_iff`,
+  `bowtieCol_cases`, `bowtie_interiorPts_cases`, `dist_lt_one_of_mem_bowtieG/H`, `sq_ne_one_of_bowtie_one/XY`, `not_mem_bowtieArcs_near_I/negI`,
+  `mem_bowtieArcs_near_I/negI`, `bowtie_partition_I/negI`, `convex_bowtie_tiles`, `bowtie_arc_ends`, `bowtie_dom_end_pp/np/pn/nn`,
+  `mem_shadow_bowtie_region_zero/two`, `I_mem_closure_bowtie_region` (records in `scripts/Axioms.lean`, FS131-I4 block).
+
+## Theorems this phase proved (FS131-I4g's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4g.txt`, not a gate log)
+
+- FS112-BOWTIE: `HadwigerNelson.Plane.ArcMap.bowtie_isStuck` — `[propext, Classical.choice, Quot.sound]`. Read against § 8.2: same statement (`E` stuck; `±i` not).
+- FS112-BOWTIE: `ArcMap.bowtie_terminalOn` — the standard three. Same statement (no MERGE, MERGE-RAY or SHAVE at `0`, `i`, `−i`).
+- FS112-FLANK, its last clause: `ArcMap.flank_incomplete_bowtie` — the standard three. Same statement (no out-type contact of `0` or `2` at `±i`; no SHAVE at `E`).
+- FS112-U1, the shadow clause: `ArcMap.u1_shadow` — the standard three. Read against § 12.2: same statement (for `β` in the open facing cone and `ε > 0`, the points
+  `P + t e(β)`, small `t > 0`, are at distance `1` from the outer colour's class outside `B̄(P, 1)` within `ε` of the arc; no validity read).
+- Children (no row), the standard three: the ray engine `ArcMap.eventually_ray_not_mem_hornSet`, `ArcMap.eventually_not_two_rays_hornSet`,
+  `ArcMap.eq_e_of_ray_subset_hornSet`, `ArcMap.frame_ray`, `ArcMap.tanBelow_tanAbove_false`; sectors `ArcMap.IsSector.subset`, `.nonempty`,
+  `.subset_of_isPreconnected`, `.disjoint_of_rays`, `ArcMap.HasSectors.eq`, `.eq_zero_of_not_mem`; `ArcMap.ray_mem_ball`, `ray_coords`, `im_pt_mul_conj_pt`,
+  `norm_ray_sub_lt_one`; the bowtie's `bowtie_not_isHorn_I/negI`, `bowtie_hornSet_zero`, `bowtie_hasSectors_zero_two`, `bowtie_tileOf_one`, `bowtie_outType_one`,
+  `bowtie_not_merge_zero`, `bowtie_not_ray_zero`, `bowtie_flank_colour`, `bowtie_not_shave_zero`, `bowtie_hasSectors_le_one`, `bowtie_terminal_pm_I`; and
+  `ArcMap.rayParam_circ` (UnitArc).
+- FS114-L60-LE, L60-REAL's fragment: `ArcMap.l60Col_locallyConstant` — the standard three. Read against § 12.2: same statement (the colouring locally constant off
+  the five arcs, in the domain); with it the structure `l60Frag` is sorry-free. Children, the standard three: `ArcMap.mem_carrier_circ_of_arg`,
+  `ArcMap.mem_carrier_circ_full`, `ArcMap.mem_l60_arc0/1/2`, `ArcMap.cos_arg_sub`, `ArcMap.abs_le_pi_div_three_of_cos`, `ArcMap.two_pi_div_three_le_abs_of_cos`,
+  `ArcMap.sq_norm_sub_eq`, `ArcMap.e_pi_div_three_re_im`.
+
+## Theorems this phase proved (FS131-I4h's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4h-19/20/21.txt`, not a gate log)
+
+- FS114-L60-LE, L60-REAL: `HadwigerNelson.Plane.ArcMap.l60_real` — `[propext, Classical.choice, Quot.sound]`. Read against § 12.2: same statement (`l60Frag` valid;
+  `r([0, 60°])` of `ω(0)` an arc of `Γ` with constant sides, inner `0`, outer `1`; a thickening of the closed arc in the domain). Inhabits `IsRingArc` at `ℓ = 60°`.
+- FS112-N2-BENDS, N2-ENV toward: `ArcMap.n2_env_toward` — the standard three. Same statement (for `0 < ℓ ≤ 60°`, `r > 0`, some profile `ψ > 0` with the uncovered
+  part of `B̄(P + (1 − s)e φ, 1)` inside `B(P, r)` for `0 < s ≤ ψ Δ(φ)`).
+- FS112-N2-BENDS, N2-ENV away: `ArcMap.n2_env_away` — the standard three. Same statement (the uncovered part of `B̄(P + (1 + s)e φ, 1)` within `r` of `R₂(ᾱ)`).
+- FS112-N2-BENDS, N2-ENV near (toward): `ArcMap.n2_env_near` — the standard three. Same statement (the lens of the ends within `< 1` of every toward lens point).
+- FS112-N2-BENDS, N2-ENV near (away): `ArcMap.n2_env_near_away` — the standard three. Same statement (the lens off `B(P, r)` within `< 1` of every away lens point).
+- Children (no row), the standard three: the Reuleaux triangle `ArcMap.dist_le_one_of_mem_reul`, `ArcMap.dist_lt_one_of_mem_reul`, `ArcMap.norm_sub_le_one_of_cone`,
+  `ArcMap.reul_bound_real`, `ArcMap.eq_cramer`, `ArcMap.sq_norm_eq_re_im`; L60-REAL's `ArcMap.l60Frag_valid`, `ArcMap.l60Frag_isRingArc`,
+  `ArcMap.norm_e_pi_div_three_sub_one`, `ArcMap.l60_interior_lens`, `ArcMap.l60_cap_mem_ball`, `ArcMap.l60_interior_cases`, `ArcMap.l60_openLens_subset_dom`,
+  `ArcMap.l60_closure_subset_region`, `ArcMap.ringArc_l60_subset_dom`; N2-ENV's `ArcMap.sin_add_sin_sub_sin_ge`, `ArcMap.sin_mul_e_add_sin_mul_e`, `ArcMap.lens_dot_ge`,
+  `ArcMap.sq_norm_sub_ofReal_mul_e`, `ArcMap.n2_env_near_core`, `ArcMap.n2_env_near_away_core`, `ArcMap.n2_env_data`, `ArcMap.toward_dir45`,
+  `ArcMap.n2_env_toward_beside`, `ArcMap.n2_env_toward_core`, `ArcMap.frame_polar_add`, `ArcMap.exists_dir_of_within`, `ArcMap.n2_env_away_height`,
+  `ArcMap.n2_env_away_core`, `ArcMap.n2_env_away_end`, `ArcMap.eq_polar_of_frameX_pos`.
+
+## Theorems this phase proved (FS131-I4i's; axioms from `#print axioms` against the stage-24 build's oleans, `data/fs131/i4/axioms-i4i-24.txt`, not a gate log)
+
+- FS114-L60-LE, its first clause: `HadwigerNelson.Plane.ArcMap.l60_le` — `[propext, Classical.choice, Quot.sound]`. Read against § 3.2: same statement (a unit arc
+  with constant sides has `θ₂ − θ₁ ≤ π/3`).
+- FS112-N3-NOBOTH: `ArcMap.noBoth` — the standard three. Read against § 3.2: same statement, with the domain hypothesis (the centre of a both-kind unit arc, in the
+  domain, carries at least four colours or a repeated colour).
+- FS114-L60-LE, L60-EQ: `ArcMap.l60_eq_inner`, `ArcMap.l60_eq_outer`, `ArcMap.l60_eq_corners` — the standard three each. Read against § 12.2: same statements
+  (inner tiles in `Reul(P, A, B)`; outer tiles in `Reul(A, B, C) ∖ B̄(P, 1)`; the four corner cones). `ArcMap.l60_eq_third` (I4e's) now reads the standard three.
+- Engine 2: `ArcMap.ringArcsWithin_of_Γ_subset` — the standard three (no row; the moves' "no unit arc created" clause).
+- Children (no row), the standard three: `ArcMap.mem_closure_ringArc_diff_finite`, `ArcMap.ringArc_subset_Γ_of_finite` (Basic);
+  `ArcMap.IsSectorChart.exists_sector_of_mem_coneAt_region`, `ArcMap.coneAt_region_nonempty` (Sectors); `ArcMap.angleIcc_half_turn`, `ArcMap.norm_rot_sub`,
+  `ArcMap.ringPt_eq_rot`, `ArcMap.mem_ringArc_of_lens`, `ArcMap.l60_cap_mem_closedBall`, `ArcMap.l60_cap_general`, `ArcMap.dist_le_one_of_touch`,
+  `ArcMap.l60_tile_dist_ne_one`, `ArcMap.l60_side_tile`, `ArcMap.cos_nonpos_of_mem_coneAt`, `ArcMap.mem_angleIcc_of_two_cos` (UnitArc).
+
+## Theorems this phase proved (FS131-I4j's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4j-*.txt`, not a gate log)
+
+- FS112-N3-PAIRS, N3-P′: `HadwigerNelson.Plane.ArcMap.pair_P'` — `[propext, Classical.choice, Quot.sound]`. Read against § 8.2 and the row: same statement (two
+  cubic trichromatic vertices of the domain with one multicolour are never at distance `1`); the binder of the unused hypothesis at `u` renamed `_h`.
+- Children (no row), the standard three: the ring-arc engine `ArcMap.isRingArc_of_clean`, `ArcMap.exists_clean_subArc`, `ArcMap.exists_isRingArc_of_subset_Γ`,
+  `ArcMap.outside_segment`, `ArcMap.outside_segment_real`, `ArcMap.dist_ringPt_radial`, `ArcMap.dist_radial_centre`, `ArcMap.carrier_circ_subset_sphere`,
+  `ArcMap.ringArc_subset_ringArc`, `ArcMap.dist_ringPt_ringPt_le`, `ArcMap.ringPt_arg_sub` (UnitArc); `ArcMap.exists_ball_col_mem_coloursAt`,
+  `ArcMap.IsCubicTrichromatic.not_hasRepeatedColour` (BaseSteps).
+- FS112-A4SIX: `ArcMap.a4six` — the standard three. Read against § 12.2: same statement (exactly two colours absent at `v`, no covering pair on `ω(v)` ⟹ arcs of `Γ`
+  on `ω(v)` of total length `≥ 60°`, or one strictly inside each of six consecutive open `60°` windows).
+- Children (no row), the standard three: engine 7 `ArcMap.exists_coveringPoint_of_window`, `ArcMap.exists_shift_avoiding`, `ArcMap.isClosed_Γ_inter_sphere`,
+  `ArcMap.countable_ringPt_preimage` (UnitArc).
+- FS112-N2-BENDS, the away bend as the row states it: `ArcMap.bend_away_whole` — `[propext, sorryAx, Classical.choice, Quot.sound]` **(over sorry:
+  `bend_away`)**. Same statement; the proof is the reduction to `bend_away`.
+
+## Theorems this phase proved (FS131-I4k's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4k-*.txt`, not a gate log)
+
+- FS112-N3-FAIL, the place: `HadwigerNelson.Plane.ArcMap.fail_leavingCentre` — `[propext, Classical.choice, Quot.sound]`. Read against § 8.2 and the row: same
+  statement (at a cubic trichromatic `u` covering `B̄(u, 1)`, the strip fails at `q ∈ ω(u)` only when `q` is a leaving centre of `u`).
+- `HadwigerNelson.Plane.localSectors_disj` (wave 3's module; ruling 244 (b)) — the standard three; `localSectors` re-derived from it, statement unchanged.
+- Children (no row), the standard three: `BranchGerms.mem_closure_sector_of_lt`, `sq_dist_branchPt`, `germ_circle_real`, `germ_eq_of_two_on_circle`,
+  `branchPt_two_sin`, `ArcMap.IsCubicTrichromatic.chart`, `ArcMap.IsSectorChart.exists_ball_branch`, `ArcMap.exists_branch_on_circle_of_not_stripHolds`;
+  `BranchGerms.fin3_adj` (no axioms, `decide`).
+- FS112-N3-FAIL, the colours: `ArcMap.fail_colours` — the standard three. Read against § 8.2: same statement.
+- FS112-N3-ANTI: `ArcMap.anti` — the standard three. Read against § 8.2 and the row: same statement (at a cubic trichromatic `u`, no two points of `ω(u)` at
+  distance `2` are both M-in).
+- FS112-N3-PAIRS (ii): `ArcMap.pair_ii` — the standard three. Read against § 8.2: same statement; binders `h₂`, `hc₂`, `hy` renamed `_h₂`, `_hc₂`, `_hy` (accepted).
+- Children (no row), the standard three: `ArcMap.stripHolds_of_two_branches`, `ArcMap.IsSectorChart.exists_isRingArc_of_along`, `ArcMap.exists_along_of_side`,
+  `ArcMap.exists_colour_near`, `ArcMap.closure_sector_subset_of_side`, `ArcMap.exists_side_germs_of_transversal`, `ArcMap.half_colour_or_bothKind`.

@@ -1,0 +1,7 @@
+'HadwigerNelson.Plane.ArcMap.pair_i' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.pair_i_of_transversal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.mem_closure_region_of_pseudo' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.finite_not_stripHolds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.eq_midpoint_of_dist' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.finite_sphere_inter_sphere_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_mem_Ioo_ringPt_not_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
