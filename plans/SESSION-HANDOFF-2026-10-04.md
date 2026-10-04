@@ -4,6 +4,17 @@
 reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–103 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
+> **Latest (written at the context limit, 2026-10-04 late):** inventory items run to **183**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157),
+> Lebesgue's covering theorem (151), `localSectors` + the separation lemma + `four_of_bothKind_simple` without `hnc` (171); the axiom gate repaired with an IMPORTED
+> section (160). **Running (3 Opus slots)**: FS131-I2j (wave 2, 46 lines → landing; item 183), FS131-I4e (wave 4, 50 left; item 179), FS131-IWd (Woodall's last 3
+> `Merge` leaves, then after wave 4 lands: merge, QA2-1 brick model, gate, landing; item 181). Agent ids in scratch `agents.txt`. **On each hand-back**: check the
+> build log, `sorry` count and axioms print; log; brief a successor by script from the previous brief (all implementers Opus, `model: "opus"`); gate; launch.
+> **On a landing**: read the gate logs, file counts (`CLAUDE.md` § Trust ledger three-count sentence, § The gate, `scripts/vacuity-baseline.txt`, `GATE_CHANGES` in
+> `tools/claude_md_fact_audit.py`), run `gate_report.py` and the fact audit **before** committing. Woodall lands after wave 4 (and deletes its identical copies of
+> `abs_dot_le`, `dot_add_left`, `dot_e_e`, `isOpen_shadow`). Kooshi has nothing pending; he approved Opus implementers (137) and the QA2 audit (165, done: 172).
+> The Frontier clauses for waves 1/3 and `localSectors` are held for the milestone's filing with the rows' regrading. Waves 5–10 not started (wave 5's planner next
+> after a slot frees and waves 2/4 are near landing).
+
 ## 1. Read first
 
 1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow` and says **Workflow 3.1**.
