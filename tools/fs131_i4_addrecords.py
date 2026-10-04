@@ -19,6 +19,8 @@ for line in ((ROOT / "Proofs/HadwigerNelson/Plane/ValidMap/Basic.lean").read_tex
     mo = re.match(r"theorem (\S+)", line)
     if mo: basic.append(".".join([n for n in ns if n != "HadwigerNelson.Plane"] + [mo.group(1)]).replace("HadwigerNelson.Plane.", ""))
 names += ["HadwigerNelson.Plane." + n if not n.startswith("HadwigerNelson.") else n for n in basic]
+# a declaration written `theorem _root_.X` inside a namespace is `X` (FS131-I4l: `fs131_k4_decls.py` keeps the prefix)
+names = [re.sub(r"^.*\._root_\.", "", n) for n in names]
 missing = [n for n in names if (f"#print axioms {n}\n" not in ax) or "--plant" in sys.argv]
 print(f"{len(names)} names, {len(missing)} missing")
 if "--check" in sys.argv:

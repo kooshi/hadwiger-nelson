@@ -1154,6 +1154,43 @@ base + (ours − base) + (theirs − base), 0 mismatches. No other file changed 
 (`build/gate/build/20261004T223841Z-3027842.log`; driver log `data/fs131/i4/build-i4l-merge.log`): 10 distinct `declaration uses sorry` — `Contact` 3
 (l. 4064, 4078, 4094: `exists_shave`, `exists_rayMerge`, `exists_merge`), `UnitArc` 5, `BaseSteps` 2 — and no other warning, as the brief expected.
 
+## Stage 35 — SAVED (FS131-I4l): `pair_i` (FS112-N3-PAIRS (i), with ruling 258's `h3`) proved; 9 `sorry` left on the branch (Contact 3, UnitArc 5, BaseSteps 1)
+
+**`pair_i` proved** on Stage 32's route, with one simplification found on the way: the perturbed partner needs no pseudo-colour of its own, because
+**every point of `ω(u)` near a point whose pseudo-colour is `{a}` lies in the closure of `a`'s class** (`mem_closure_region_of_pseudo`). Children, in a new
+`BaseSteps` section "Moving a unit pair along two unit circles", before N3-PAIRS:
+- `eq_midpoint_of_dist` (Apollonius: `|x − u| = |x − y| = 1`, `|y − u| = 2` ⟹ `x = (u + y)/2`), `finite_sphere_inter_sphere_half` (a unit circle meets a
+  circle of radius `1/2` finitely: wave 3's `Arc.finite_inter_sphere_or_eq_circ` on `circ m (1/2) (−π) π`), `exists_mem_Ioo_ringPt_not_mem` (an open
+  interval of angles has one whose ring point avoids a countable set: `countable_ringPt_preimage` and Lebesgue measure).
+- `mem_closure_region_of_pseudo`: an interior point of `ω(u)` near `y` has a colour of `y` that `u` does not carry (N-E1 at `u`), so `a`; a sub-arc of
+  `ω(u)` in `Γ` holds a ring arc with constant sides whose two side colours are colours of `y`, both carried at `u` only if both-kind — NOBOTH, against
+  `u` cubic trichromatic — so one is `a`; such points are dense on `ω(u)` near `y`, and `closure (region a)` is closed.
+- `finite_not_stripHolds`: the strip fails at three points of `ω(u)` at most — each is `u + I κ e(β)` for a germ of the chart with `κ = ±1` (four radii,
+  `exists_branch_on_circle_of_not_stripHolds`, `germ_eq_of_two_on_circle`, as in `fail_leavingCentre`).
+- `pair_i_of_transversal` (the case `|x − u₂| ≠ 2`): `ω(x)` crosses `ω(u₂)` transversally at `y` (`exists_side_germs_of_transversal`); pick `x′ ∈ ω(u₁)`
+  within `η` of `x` off the finitely many fail points and off `ω(u₁) ∩ sphere((u₁ + u₂)/2, 1/2)` (the `x′` whose partner could be tangent:
+  `|y′ − u₁| = 2` forces `x′ = (u₁ + y′)/2`); the intermediate value theorem along `ω(u₂)` near `y` gives `y′` with `|x′ − y′| = 1`, `y′ ≠ u₁`,
+  `|y′ − u₁| ≠ 2`, `y′ ∈ closure (region a)`. The strip holds at `x′` on a side `O` (open); every interior point of `O` near `x` has colour `a`, so
+  `O ⊆ closure (region a)` (`dense_interiorPts`, `IsOpen.inter_closure`); `ω(y′)` crosses `ω(u₁)` transversally at `x′` and enters `O` at a point at
+  distance `1` from `y′`, against `Valid.dist_ne_one_of_isOpen_subset_closure`.
+- `pair_i` itself: if `|x − u₂| = 2`, then `|y − u₁| ≠ 2` (both would make `u₁, x, y, u₂` collinear at spacing `1`, `|u₁ − u₂| = 3`, against `h3` —
+  exactly ruling 258's case), and `pair_i_of_transversal` applies with the roles of `(u₁, x)` and `(u₂, y)` exchanged. **`h3` is read exactly there.**
+Read against § 8.2 and the row as amended by ruling 258: same statement.
+
+**Tools.** `tools/fs131_i4_addrecords.py` now resolves `theorem _root_.X` to `X` (it read `fs131_k4_decls.py`'s unresolved names and would have
+written two bogus records after the merge); `--check` before the fix listed the two `_root_` names and the six new ones, after it the six only; `--plant`
+fires (615 of 615 missing); after adding, `--check` exit 0 (615 names, 0 missing). Statements: `tools/fs131_i4_stmts.py 54852de9 …BaseSteps.lean`
+157 old, 163 new, 6 added, 0 changed, exit 0. **Axioms** (`data/fs131/i4/axioms-i4l-35.txt`, against this stage's build's oleans, not a gate log):
+`pair_i` and the six children, all `[propext, Classical.choice, Quot.sound]`. No new import, no `native_decide`, no axiom.
+
+**Build**: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings, 9m20s", exit 0
+(`build/gate/build/20261004T225128Z-3105601.log`; driver log `data/fs131/i4/build-i4l-stage35.log`): 9 distinct `declaration uses sorry` — Contact 3,
+UnitArc 5, BaseSteps 1 (`n3_end`) — and no other warning.
+
+**For `n3_end`, the coordinator's amendment (inventory items 268–269, by message mid-job)**: `exists_merge`'s clause
+`∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x` is unsatisfiable and becomes `F'.coloursAt v ⊆ F.coloursAt v` on `fs131-w4m`; a proof of `n3_end`
+reads only that vertex instance.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
