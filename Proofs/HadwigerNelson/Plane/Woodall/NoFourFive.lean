@@ -26,12 +26,14 @@ map in normal form (`ArcMap.false_of_four_le_sectors`, `Plane/Woodall/Steps`). I
   from the colour of one tangent parabola, of curvature `1/2` (`ArcMap.SectorsAt.exists_parabola_region`), and its collar
   (`collarAt_shadow_of_parabola`).
 
-E1-NOBRANCH is `ArcMap.exists_three_le_sectors` (`Plane/Woodall/Steps`, over wave 4's `ts_t`): the Jordan curve theorem is not needed (§ 7.5).
+E1-NOBRANCH's conclusion is read from wave 4's `ts_t` inside `aeMap6_normal` (`Plane/Woodall/Steps`; FS131-W3 § 13): the Jordan curve theorem is
+not needed (§ 7.5).
 
 **Inhabitants.** `ArcMap.CrossesAt` has its spec example and adversary below. The `SectorsAt` hypotheses with no validity are inhabited by
 `ArcMap.const_sectorsAt` (one sector); those over a valid map of the plane with a picture of two or three sectors by `sevenBrickMap`
-(`sevenBrickMap_valid`, `sevenBrickMap_isPlaneMap`, `Plane/SVMap`) at a brick corner (three sectors of angles `π`, `π/2`, `π/2`), its picture by
-`exists_sectorsAt`; E1-COVER concludes `False` (a refutation).
+(`sevenBrickMap_valid`, `sevenBrickMap_isPlaneMap`, `Plane/SVMap`) at a brick corner (three sectors of angles `π`, `π/2`, `π/2`), its picture to be
+exhibited by the local data (`niceAt_of_dirColourAt`, `Plane/Woodall/Merge`; `exists_sectorsAt` left the chain, FS131-W3); a valid map with a
+three-sector picture is `threeSectorDisc` (`threeSectorDisc_sectorsAt`, `Plane/Woodall/Basic`); E1-COVER concludes `False` (a refutation).
 -/
 
 namespace HadwigerNelson.Plane

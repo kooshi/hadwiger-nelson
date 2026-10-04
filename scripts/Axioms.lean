@@ -2369,9 +2369,6 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.coneAt_univ
 #print axioms HadwigerNelson.Plane.ArcMap.const_sectorsAt
 #print axioms HadwigerNelson.Plane.ArcMap.sectorsAt_one_colour
-#print axioms HadwigerNelson.Plane.ArcMap.const_woodallNormal
-#print axioms HadwigerNelson.Plane.ArcMap.const_woodallMerged
-#print axioms HadwigerNelson.Plane.ArcMap.not_woodallNormal_of_repeat
 
 /-! ## FS-131 Woodall's chain (job FS131-W, re-planned by FS131-W2) — the skeleton: Townsend's π/3 lemma, Woodall's step-4 lemma, maps need six over arc maps (sorry until the chain's implementer lands it; no open leaf: FS131-E1's E1-NO45 replaces steps 7–8 and step 5's equality case) -/
 
@@ -2390,13 +2387,10 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.collarAt_shadow_inner
 #print axioms HadwigerNelson.Plane.ArcMap.col_not_mem_of_mem_shadow
 #print axioms HadwigerNelson.Plane.ArcMap.subset_closure_of_subset_shadow
-#print axioms HadwigerNelson.Plane.ArcMap.exists_sectorsAt
 #print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.coloursAt_eq
-#print axioms HadwigerNelson.Plane.ArcMap.exists_woodallMerged
 #print axioms HadwigerNelson.Plane.ArcMap.step5_lt
 #print axioms HadwigerNelson.Plane.ArcMap.aeMap6_merged
 #print axioms HadwigerNelson.Plane.ArcMap.step6
-#print axioms HadwigerNelson.Plane.ArcMap.exists_three_le_sectors
 #print axioms HadwigerNelson.Plane.ArcMap.aeMap6_normal
 #print axioms HadwigerNelson.Plane.ArcMap.aeMap6
 #print axioms HadwigerNelson.Plane.ArcMap.aeMap6_of_condition5
@@ -2503,6 +2497,44 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.exists_two_cover_of_three_le_card
 #print axioms HadwigerNelson.Plane.ArcMap.collarAt_closure_of_forall_shadow
 #print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_opposite
+
+/-! ## FS-131 Woodall's chain (job FS131-W3) — the ∃-forms' inhabitants (two and three colours), the phantom adversary, NiceAt.normal (FS131-E3 § 4.1; sorry at four inhabitant leaves until the chain's implementer lands them) -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.threeCol_locallyConstant
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_valid
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_ncard_coloursAt_le_two
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_woodallMerged
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_woodallNormal
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_forall_merged
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_forall_normal
+#print axioms HadwigerNelson.Plane.halfDisc_sectorsAt
+#print axioms HadwigerNelson.Plane.halfDisc_niceAt
+#print axioms HadwigerNelson.Plane.ArcMap.NiceAt.normal
+
+/-! ## FS-131 Woodall's merge (job FS131-W3) — step 3 localized: E3-W, recolouring, the merge at a wedge, locality, the local data, E3-NICE, E3-BALL (sorry until the chain's implementer lands them) -/
+
+#print axioms HadwigerNelson.Plane.clear_wedge
+#print axioms HadwigerNelson.Plane.wedgeArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.frontier_annSector_subset
+#print axioms HadwigerNelson.Plane.ArcMap.recolour_isPlaneMap
+#print axioms HadwigerNelson.Plane.ArcMap.interiorPts_recolour_subset
+#print axioms HadwigerNelson.Plane.ArcMap.recolour_valid
+#print axioms HadwigerNelson.Plane.ArcMap.recolour_condition5
+#print axioms HadwigerNelson.Plane.ArcMap.recolour_region_diff
+#print axioms HadwigerNelson.Plane.ArcMap.wedgeMerge_valid
+#print axioms HadwigerNelson.Plane.ArcMap.wedgeMerge_condition5
+#print axioms HadwigerNelson.Plane.ArcMap.wedgeMerge_region_diff
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_congr
+#print axioms HadwigerNelson.Plane.ArcMap.niceAt_congr
+#print axioms HadwigerNelson.Plane.ArcMap.exists_dirColourAt
+#print axioms HadwigerNelson.Plane.ArcMap.GoodAt.ncard_coloursAt_le_two
+#print axioms HadwigerNelson.Plane.ArcMap.finite_three_le_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.niceAt_of_dirColourAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_merge_at
+#print axioms HadwigerNelson.Plane.ArcMap.exists_woodallMerged
 
 /-! ## FS-131 wave 3 (job FS131-I3b) — the implementer's added children (every one a theorem the rows rest on) -/
 

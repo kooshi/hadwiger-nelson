@@ -15,12 +15,15 @@ on one arc map, one two-constructor type.
   point equal to the union of its closed sectors (inventory item 155: no clause asks a sector to avoid the arcs, so a sector may be merged across
   an arc between two sides of one colour). It is Woodall's "regions at a vertex
   `P`" after his steps 1–2: adjacent regions of one colour are one sector (step 1), and every edge has a direction (step 2; automatic for arcs).
-* **Woodall's normal forms.** `ArcMap.WoodallMerged`: a colour repeated at a point sits on zero-angle sectors only (the conclusion of his step 3:
-  "if two of the regions are in the same set, then each of them subtends angle 0 at P"); `ArcMap.WoodallNormal`: at every point of three or more
-  sectors the colours are distinct and every angle is at least `π/3` (his step 3, and step 5 in its strict form — FS131-E1's normal form (N1)–(N2),
-  `plans/FS131-E1-derivation.md` § 3.0; the restored chain reads no angle equal to `π/3`).
+* **Woodall's normal forms, ∃-forms on a set** (FS131-E3, inventory items 158, 161). `ArcMap.NiceAt v`: some picture at `v` gives
+  its positive-angle sectors distinct colours and puts every horn between distinct colours; `ArcMap.WoodallMerged K`: every point of `K`
+  of three or more colours is `NiceAt` (his step 3, in the form the chain reads); `ArcMap.WoodallNormal K`: every such point has a picture
+  with distinct colours and every angle at least `π/3` (steps 3 and 5, strict step 5 only — FS131-E1's (N1)–(N2)). The ∀-over-pictures
+  forms they replace were unsatisfiable on every valid plane map: `SectorsAt` admits phantom horns (E3-PHANTOM).
 
-Spec examples and inhabitants below; the one-colour plane is the inhabitant of both normal forms and of `SectorsAt` (at every point, `n = 1`).
+Spec examples and inhabitants below. The inhabitants of the ∃-forms exercise every clause: `halfDisc.NiceAt 0` (two colours) and
+`threeSectorDisc`, a disc cut into three sectors of angle `2π/3`, valid, in both forms on the whole plane (its centre is its one point of
+three colours); the adversaries show the old ∀-forms fail there, on a phantom picture.
 -/
 
 namespace HadwigerNelson.Plane
@@ -69,17 +72,28 @@ def SectorsAt (v : ℂ) (n : ℕ) (d : Fin (n + 1) → ℝ) (c : Fin n → Fin k
     v ∈ F.dom ∧
     ∀ j : Fin k, coneAt (F.region j) v = ⋃ i ∈ {i : Fin n | c i = j}, angleIcc (d i.castSucc) (d i.succ)
 
-/-- **Woodall's step 3, its conclusion**: at every point, a colour carried by two sectors is carried by zero-angle sectors only ("if two of
-the regions are in the same set, then each of them subtends angle 0 at P", `[Woodall1973]` p. 197). -/
-def WoodallMerged : Prop :=
-  ∀ v n d c, F.SectorsAt v n d c → ∀ i j : Fin n, i ≠ j → c i = c j →
-    d i.castSucc = d i.succ ∧ d j.castSucc = d j.succ
+/-- **Woodall's step 3, in the form the chain reads** (FS131-E3, `plans/FS131-E3-derivation.md` § 4.1): some picture at `v` gives its
+positive-angle sectors distinct colours and puts every zero-angle sector (horn) between sectors of distinct colours. An ∃-form: `SectorsAt`
+reads only cones, so it admits **phantom horns** (at a boundary direction between `A` and `B`, insert a `B`-horn then an `A`-horn), and a
+∀-over-pictures form fails at every point of two or more colours (E3-PHANTOM, inventory item 158; the adversaries
+`threeSectorDisc_not_forall_merged`, `threeSectorDisc_not_forall_normal`). -/
+def NiceAt (v : ℂ) : Prop :=
+  ∃ n d c, F.SectorsAt v n d c ∧
+    (∀ i j : Fin n, i ≠ j → c i = c j → d i.castSucc = d i.succ ∨ d j.castSucc = d j.succ) ∧
+    ∀ i : Fin n, d i.castSucc = d i.succ → c ((finRotate n).symm i) ≠ c (finRotate n i)
 
-/-- **Woodall's normal form** (step 3, and step 5 in its strict form): at every point of three or more sectors the colours are distinct and
-every sector subtends an angle of at least `π/3` — FS131-E1's (N1) on colours and (N2) (`plans/FS131-E1-derivation.md` § 3.0). Strict step 5
-(`step5_lt`) excludes angles below `π/3` only; the angle `π/3` itself is not excluded, and the restored chain never needs it to be. -/
-def WoodallNormal : Prop :=
-  ∀ v n d c, F.SectorsAt v n d c → 3 ≤ n → Function.Injective c ∧ ∀ i : Fin n, π / 3 ≤ d i.succ - d i.castSucc
+/-- **Woodall's step 3, its conclusion on a set** (∃-form, FS131-E3): every point of `K` carrying three or more colours is `NiceAt`.
+Woodall's own conclusion ("if two of the regions are in the same set, then each of them subtends angle 0 at P", `[Woodall1973]` p. 197) is
+the stronger horn-only form, not needed by the chain (inventory item 161 (b)). -/
+def WoodallMerged (K : Set ℂ) : Prop := ∀ v ∈ K, 3 ≤ (F.coloursAt v).ncard → F.NiceAt v
+
+/-- **Woodall's normal form on a set** (∃-form, FS131-E3; step 3, and step 5 in its strict form): every point of `K` carrying three or
+more colours has a picture with distinct colours and every angle at least `π/3` — FS131-E1's (N1) on colours and (N2)
+(`plans/FS131-E1-derivation.md` § 3.0). Strict step 5 (`step5_lt`) excludes angles below `π/3` only; the restored chain never reads the
+angle `π/3` itself. -/
+def WoodallNormal (K : Set ℂ) : Prop :=
+  ∀ v ∈ K, 3 ≤ (F.coloursAt v).ncard →
+    ∃ n d c, F.SectorsAt v n d c ∧ Function.Injective c ∧ ∀ i : Fin n, π / 3 ≤ d i.succ - d i.castSucc
 
 end ArcMap
 
@@ -174,26 +188,133 @@ theorem const_sectorsAt (v : ℂ) :
     have h1 : (![0, 2 * π] : Fin 2 → ℝ) (Fin.succ (0 : Fin 1)) = 2 * π := rfl
     rw [h0, h1, angleIcc_zero_two_pi]; trivial
 
-/-- The one-colour plane is in Woodall's normal form (vacuously: no point has three sectors). -/
-theorem const_woodallNormal : (ArcMap.const univ isOpen_univ (0 : Fin 1)).WoodallNormal := by
-  intro v n d c h hn
-  have := sectorsAt_one_colour h
-  omega
+/-! ## Inhabitants of the ∃-forms at points of two and three colours, and the phantom adversary (FS131-E3 § 4.1) -/
 
-/-- The one-colour plane satisfies Woodall's step-3 conclusion (vacuously: no colour is carried twice). -/
-theorem const_woodallMerged : (ArcMap.const univ isOpen_univ (0 : Fin 1)).WoodallMerged := by
-  intro v n d c h i j hij _
-  have := sectorsAt_one_colour h
-  exact absurd (Fin.ext (by omega : (i : ℕ) = j)) hij
+/-- The colour of `threeSectorDisc`: colour `j` on the directions `(2πj/3, 2π(j+1)/3)`, read through the angle `π + arg(−z) ∈ (0, 2π]`,
+which is continuous off the closed positive real axis (one of the three cuts). -/
+noncomputable def threeCol (z : ℂ) : Fin 3 :=
+  if π + Complex.arg (-z) < 2 * π / 3 then 0 else if π + Complex.arg (-z) < 4 * π / 3 then 1 else 2
 
-/-- **Adversary for `WoodallNormal`**: a picture of three sectors with a repeated colour is excluded by it — so `WoodallNormal` fails for any
-map carrying such a picture. -/
-theorem not_woodallNormal_of_repeat {k : ℕ} {F : ArcMap k} {v : ℂ} {d : Fin 4 → ℝ} {c : Fin 3 → Fin k}
-    (h : F.SectorsAt v 3 d c) (hrep : c 0 = c 2) : ¬ F.WoodallNormal := by
-  intro hN
-  have := (hN v 3 d c h le_rfl).1 hrep
+/-- The cuts of `threeSectorDisc`: the segments from `0` to `e(2πj/3)/2`, `j = 0, 1, 2`. -/
+noncomputable def threeCuts : Set Arc :=
+  {Arc.seg 0 (e 0 / 2), Arc.seg 0 (e (2 * π / 3) / 2), Arc.seg 0 (e (4 * π / 3) / 2)}
+
+/-- `threeCol` is locally constant off the cuts in the disc of radius `1/3`. -/
+theorem threeCol_locallyConstant : ∀ x ∈ ball (0 : ℂ) (1 / 3), x ∉ ⋃ a ∈ threeCuts, a.carrier →
+    ∀ᶠ y in 𝓝 x, threeCol y = threeCol x := by
+  sorry
+
+/-- **A disc cut into three sectors** (FS131-E3's inhabitant): the disc of radius `1/3` cut by the three segments from `0` in the directions
+`2πj/3`, colour `j` on the open sector of directions `(2πj/3, 2π(j+1)/3)`. Its centre carries three colours, every other point at most two. -/
+noncomputable def threeSectorDisc : ArcMap 3 where
+  dom := ball 0 (1 / 3)
+  isOpen_dom := isOpen_ball
+  arcs := threeCuts
+  nondegenerate := by
+    have h : ∀ θ : ℝ, (0 : ℂ) ≠ e θ / 2 := fun θ h => by
+      have := congrArg norm h
+      rw [norm_zero, norm_div, norm_e] at this
+      norm_num at this
+    intro a ha
+    simp only [threeCuts, mem_insert_iff, mem_singleton_iff] at ha
+    rcases ha with rfl | rfl | rfl <;> exact h _
+  locallyFinite := fun _ _ => ⟨univ, univ_mem, ((((finite_singleton _).insert _).insert _).subset fun _ ha => ha.1)⟩
+  col := threeCol
+  locallyConstant := threeCol_locallyConstant
+
+/-- `threeSectorDisc` is valid: its domain has diameter `2/3 < 1`. -/
+theorem threeSectorDisc_valid : threeSectorDisc.Valid := by
+  intro x hx y hy hd
+  have hx' : ‖x‖ < 1 / 3 := by
+    have h : x ∈ ball (0 : ℂ) (1 / 3) := hx.1
+    simpa using h
+  have hy' : ‖y‖ < 1 / 3 := by
+    have h : y ∈ ball (0 : ℂ) (1 / 3) := hy.1
+    simpa using h
+  have : dist x y < 1 := by rw [dist_eq_norm]; linarith [norm_sub_le x y]
+  exact absurd hd this.ne
+
+/-- The picture of `threeSectorDisc` at its centre: three sectors of angle `2π/3`, colours `0, 1, 2`. -/
+theorem threeSectorDisc_sectorsAt :
+    threeSectorDisc.SectorsAt 0 3 ![0, 2 * π / 3, 4 * π / 3, 2 * π] ![0, 1, 2] := by
+  sorry
+
+/-- **The phantom picture** (E3-PHANTOM): a `1`-horn then a `0`-horn inserted at the direction `2π/3` — every clause of `SectorsAt` still
+holds (the cones are unchanged), and colour `0` now sits on a sector of positive angle and on a horn. -/
+theorem threeSectorDisc_phantom :
+    threeSectorDisc.SectorsAt 0 5 ![0, 2 * π / 3, 2 * π / 3, 2 * π / 3, 4 * π / 3, 2 * π] ![0, 1, 0, 1, 2] := by
+  sorry
+
+/-- Every point of `threeSectorDisc` other than the centre carries at most two colours. -/
+theorem threeSectorDisc_ncard_coloursAt_le_two {w : ℂ} (hw : w ≠ 0) : (threeSectorDisc.coloursAt w).ncard ≤ 2 := by
+  sorry
+
+/-- The centre of `threeSectorDisc` is `NiceAt` (no horn; distinct colours). -/
+theorem threeSectorDisc_niceAt : threeSectorDisc.NiceAt 0 := by
+  refine ⟨3, _, _, threeSectorDisc_sectorsAt, ?_, ?_⟩
+  · intro i j hij hc
+    exfalso
+    fin_cases i <;> fin_cases j <;> simp_all
+  · intro i hi
+    exfalso
+    have hπ := Real.pi_pos
+    fin_cases i <;> simp at hi <;> linarith
+
+/-- **Inhabitant of `WoodallMerged`** at a point of three colours: `threeSectorDisc` is merged on the whole plane. -/
+theorem threeSectorDisc_woodallMerged : threeSectorDisc.WoodallMerged univ := by
+  intro v _ hv
+  by_cases h0 : v = 0
+  · subst h0; exact threeSectorDisc_niceAt
+  · have := threeSectorDisc_ncard_coloursAt_le_two h0; omega
+
+/-- **Inhabitant of `WoodallNormal`** at a point of three colours: `threeSectorDisc` is in normal form on the whole plane (angles `2π/3`). -/
+theorem threeSectorDisc_woodallNormal : threeSectorDisc.WoodallNormal univ := by
+  intro v _ hv
+  by_cases h0 : v = 0
+  · subst h0
+    refine ⟨3, _, _, threeSectorDisc_sectorsAt, ?_, ?_⟩
+    · intro i j hij
+      fin_cases i <;> fin_cases j <;> simp_all
+    · have hπ := Real.pi_pos
+      intro i
+      fin_cases i <;> simp <;> linarith
+  · have := threeSectorDisc_ncard_coloursAt_le_two h0; omega
+
+/-- **Adversary — the old ∀-form of `WoodallMerged` fails on a valid map** (FS131-E3, inventory item 158): "at every point, a colour carried by
+two sectors is carried by horns only", quantified over every picture, is refuted by the phantom picture at the centre of `threeSectorDisc`. -/
+theorem threeSectorDisc_not_forall_merged :
+    ¬ ∀ v n d c, threeSectorDisc.SectorsAt v n d c → ∀ i j : Fin n, i ≠ j → c i = c j →
+      d i.castSucc = d i.succ ∧ d j.castSucc = d j.succ := by
+  intro h
+  have h1 := (h 0 5 _ _ threeSectorDisc_phantom 0 2 (by decide) rfl).1
+  have h2 : (0 : ℝ) = 2 * π / 3 := h1
+  linarith [Real.pi_pos]
+
+/-- **Adversary — the old ∀-form of `WoodallNormal` fails on a valid map**: "every picture of three or more sectors has distinct colours" is
+refuted by the same phantom picture. -/
+theorem threeSectorDisc_not_forall_normal :
+    ¬ ∀ v n d c, threeSectorDisc.SectorsAt v n d c → 3 ≤ n → Function.Injective c := by
+  intro h
+  have := h 0 5 _ _ threeSectorDisc_phantom (by norm_num)
+    (show (![0, 1, 0, 1, 2] : Fin 5 → Fin 3) 0 = ![0, 1, 0, 1, 2] 2 from rfl)
   exact absurd this (by decide)
 
 end ArcMap
+
+/-- The picture of `halfDisc` at its centre: the upper half (colour `1`) over `[0, π]`, the lower (colour `0`) over `[π, 2π]`. -/
+theorem halfDisc_sectorsAt : halfDisc.SectorsAt 0 2 ![0, π, 2 * π] ![1, 0] := by
+  sorry
+
+/-- **Inhabitant of `NiceAt`** at a point of two colours: the centre of `halfDisc`. -/
+theorem halfDisc_niceAt : halfDisc.NiceAt 0 := by
+  refine ⟨2, _, _, halfDisc_sectorsAt, ?_, ?_⟩
+  · intro i j hij hc
+    exfalso
+    fin_cases i <;> fin_cases j <;> simp_all
+  · intro i hi
+    exfalso
+    have hπ := Real.pi_pos
+    fin_cases i <;> simp at hi
+    linarith
 
 end HadwigerNelson.Plane

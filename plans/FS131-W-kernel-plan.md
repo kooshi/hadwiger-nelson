@@ -909,3 +909,66 @@ engine (`ArcMap.GoodAt`, `exists_goodAt`, `GoodAt.exists_local_curve`, `GoodAt.e
 - **Build**: OK — 445 of 445 batches, 23 modules rebuilt, 6 with warnings (wave 4's five skeleton modules and `Woodall/Steps`), 10 m 3 s,
   exit 0 (`build/gate/build/20261004T142757Z-4118450.log`; driver log `data/fs131/w3/build-stage12.log`). `tools/fs131_w2_decls.py --check`:
   127 theorems, 127 records, 0 missing, 0 stale; `tools/check_architecture.py`: PASS.
+
+## Stage 13 — SAVED: E3's drafts applied; the small adaptations proved; the inhabitants and the phantom adversary
+
+### 13.1 The drafts, as applied (`plans/FS131-E3-derivation.md` § 4.1)
+
+Every draft elaborated on the first build, verbatim in its statement:
+
+| draft | where | state |
+|---|---|---|
+| `NiceAt`, `WoodallMerged (K : Set ℂ)`, `WoodallNormal (K : Set ℂ)` | `Woodall/Basic`, replacing the ∀-forms | definitions, E3's text; docstrings name the defect and the adversaries |
+| `exists_woodallMerged (hF) (hP) (R : ℝ)` | **moved** to the new `Woodall/Merge` (§ 14), E3's statement | `sorry` (E3-BALL; children § 14) |
+| `NiceAt.normal` | `Woodall/Steps` | **proved** (E3's note: a horn has distinct neighbours, so `step5_lt` kills it; then `NiceAt`'s second clause gives injectivity, `step5_lt` the angles) |
+| `false_of_four_le_sectors … (hc) (hang) (hN : F.WoodallNormal (sphere v 1))` | `Woodall/Steps` | **re-proved**: the auxiliary point `v + e θ'` lies on `sphere v 1` and carries exactly three colours, so `hN` hands it a normal picture with `n′ = 3`; `exists_sectorsAt` no longer read |
+| `aeMap6_normal (hN : F.WoodallNormal (closedBall 0 3))` | `Woodall/Steps` | **proved**: `ts_t hF hP 0 one_pos` gives `‖v‖ < 1/√2 + 1 < 2`; `step6` at `n = 3`, `false_of_four_le_sectors` at `n ≥ 4` with `hN` on `sphere v 1 ⊆ closedBall 0 3` (`norm_le_norm_add_norm_sub'`) |
+| `aeMap6_merged (hM : F.WoodallMerged (closedBall 0 3))` | `Woodall/Steps` | **proved**: `aeMap6_normal` with `NiceAt.normal` pointwise (one line) |
+| `aeMap6` | `Woodall/Steps` | E3's body verbatim (`exists_woodallMerged hF hP 3`) |
+| inhabitants `halfDisc.NiceAt 0`, `threeSectorDisc : ArcMap 3`, its `WoodallMerged univ`, `WoodallNormal univ`, the phantom picture | `Woodall/Basic` | below |
+
+**Representation choices within the drafts** (no statement changed; told to Keryx in the report):
+- `threeSectorDisc`'s colour is given by formula, `threeCol z` = the sector of `π + arg(−z) ∈ (0, 2π]` (continuous off the closed positive real
+  axis, which is the cut at angle `0`); its cuts `threeCuts` are E3's three segments to `e(2πj/3)/2`.
+- The adversary is two theorems stating the old ∀-forms inline and refuting them on the phantom picture (`threeSectorDisc_not_forall_merged`,
+  `threeSectorDisc_not_forall_normal`): the old definitions no longer exist, so the adversary names their text.
+- `NiceAt.normal` concludes a non-`False` statement over valid five-coloured plane maps, an empty domain by `aeMap6` (the rule of § 3.1). Its
+  docstring carries `VACUITY DECLARED:` with that reason; the vacuity scan does not track `ArcMap` binders, so the marker is read by people, not
+  checked. Its argument is exercised on `threeSectorDisc` (`threeSectorDisc_niceAt`, `threeSectorDisc_woodallNormal`).
+
+### 13.2 The inhabitants and the adversary (`LEAN.md` § The gate's inhabitant rule: every clause exercised)
+
+| declaration | state | what it exercises |
+|---|---|---|
+| `threeCol`, `threeCuts`, `threeSectorDisc` | defined (nondegeneracy, local finiteness proved) | a valid map with a point of three colours |
+| `threeCol_locallyConstant` | `sorry` (leaf T1) | the colour is locally constant off the cuts |
+| `threeSectorDisc_valid` | **proved** (diameter `2/3 < 1`) | `Valid` |
+| `threeSectorDisc_sectorsAt` (`n = 3`, `d = ![0, 2π/3, 4π/3, 2π]`, `c = ![0, 1, 2]`) | `sorry` (leaf T2) | a three-sector picture of a valid map |
+| `threeSectorDisc_phantom` (`n = 5`, `![0, 2π/3, 2π/3, 2π/3, 4π/3, 2π]`, `![0, 1, 0, 1, 2]`) | `sorry` (leaf T3) | E3-PHANTOM's insertion on a valid map |
+| `threeSectorDisc_ncard_coloursAt_le_two` | `sorry` (leaf T4) | the centre is the one point of three colours |
+| `threeSectorDisc_niceAt`, `_woodallMerged` (on `univ`), `_woodallNormal` (on `univ`) | **proved** from T2, T4 | every clause of the ∃-forms, at a point of three colours |
+| `threeSectorDisc_not_forall_merged`, `_not_forall_normal` | **proved** from T3 | the old ∀-forms fail on a valid map — item 158's defect, now a test |
+| `halfDisc_sectorsAt` (`![0, π, 2π]`, `![1, 0]`) | `sorry` (leaf T5) | — |
+| `halfDisc_niceAt` | **proved** from T5 | `NiceAt` at a point of two colours |
+
+The degenerate inhabitants `const_woodallNormal`, `const_woodallMerged` (one colour: no clause bites) and the ∀-form adversary
+`not_woodallNormal_of_repeat` are removed; `const_sectorsAt` stays (it inhabits `SectorsAt`, whose clauses do bite at `n = 1`).
+
+### 13.3 `exists_sectorsAt` and `exists_three_le_sectors`: removed from the chain and the module
+
+Decision: **removed**. Reason: no consumer is left — the chain reads pictures only through `NiceAt` and `WoodallNormal`, which supply their
+own (E3's proof notes), and the vertex comes from `ts_t` inside `aeMap6_normal`. `exists_sectorsAt` was the chain's largest unproved leaf
+(priced H, 600–900 lines, IWb's stage-6 route); its work reappears, smaller, as `niceAt_of_dirColourAt` (§ 14), which builds the one picture the
+merge needs. Should a general picture theorem be wanted, it is `exists_dirColourAt` plus the picture construction without the run and poke
+hypotheses. Alternative weighed: keep it as an unconsumed lemma — a `sorry` with no reader is debt with no purpose. `NoFourFive`'s module
+docstring re-pointed; their records removed.
+
+### 13.4 Build and tools
+
+`./scripts/build.sh` under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 445 of 445 batches, 6 modules rebuilt, 7 with warnings** (wave 4's five
+skeleton modules, `Woodall/Basic`, `Woodall/Merge`; every Woodall warning `declaration uses 'sorry'`; `Woodall/Steps` now has no `sorry` of its
+own), 8 m 59 s, exit 0 (`build/gate/build/20261004T144319Z-33249.log`; driver log `data/fs131/w3/build-stage13a.log`).
+`tools/fs131_w2_decls.py --check`: 134 theorems, 134 records, 0 missing, 0 stale (its four modules). **`tools/fs131_w3_decls.py`** (new; the five
+modules, both section prefixes): `--check` 153 theorems, 153 records, 0 missing, 0 stale, exit 0; `--plant` (drops `exists_merge_at`, re-adds the
+removed `exists_sectorsAt` as a record): FIRED both ways, exit 0. `tools/check_architecture.py`: PASS (a `Woodall/Merge` row; `Basic` and
+`Steps` rows rewritten).

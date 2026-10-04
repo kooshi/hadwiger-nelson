@@ -1,4 +1,4 @@
-import Proofs.HadwigerNelson.Plane.Woodall.NoFourFive
+import Proofs.HadwigerNelson.Plane.Woodall.Merge
 
 /-!
 # Maps need six, almost everywhere: Woodall's Theorem 6 as repaired and restored (FS106-AE-MAP6, FS106-WO)
@@ -7,16 +7,19 @@ FS131-W's skeleton (`plans/FS131-W-kernel-plan.md` § 3), re-planned by FS131-W2
 (`plans/FS131-E1-derivation.md` § 3.8, E1-MAPS6), over arc maps (inventory item 89: the general Jordan form owed). A five-coloured arc map of the
 plane, **valid** (D-AEMAP: no two interior points of one colour at distance exactly `1`; boundaries carry no colour), does not exist.
 
-The chain, region-only, on the picture at a point (`ArcMap.SectorsAt`):
-* `exists_sectorsAt`: every point of a map of the plane has a picture (Woodall's steps 1–2 are free for arcs);
-* **step 3** (`exists_woodallMerged`): a valid map can be recoloured, near its vertices, into one whose repeated colours sit on zero-angle sectors
-  only (a modification; it keeps validity, the plane, and Condition 5);
-* **strict step 5** (`step5_lt`): no sector of angle `< π/3` between two neighbours of distinct colours, so a merged map is in normal form, angles
-  `≥ π/3` (inside `aeMap6_merged`) — no angle equal to `π/3` is ever read (FS131-E1's E1-Q1);
+The chain, region-only, on the picture at a point (`ArcMap.SectorsAt`), re-planned by FS131-W3 (§§ 11–15) on FS131-E3's ∃-forms
+(`plans/FS131-E3-derivation.md` § 4.1):
+* **step 3** (`exists_woodallMerged`, `Plane/Woodall/Merge`, E3-BALL): a valid map can be modified, by finitely many merges in `closedBall 0 R`,
+  into one in which every point of the ball of three or more colours is `NiceAt` (a modification; it keeps validity, the plane, and
+  Condition 5);
+* **strict step 5** (`step5_lt`): no sector of angle `< π/3` between two neighbours of distinct colours, so a `NiceAt` picture is a normal one,
+  angles `≥ π/3` (`NiceAt.normal`) — no angle equal to `π/3` is ever read (FS131-E1's E1-Q1);
 * **step 6** (`step6`, by Townsend's `π/3` lemma `townsend_lemma`): no point of three sectors in normal form;
 * **E1-NO45** (`false_of_four_le_sectors`, from `Plane/Woodall/NoFourFive`): no point of four or five sectors in normal form, with at most five
-  colours — in place of Woodall's steps 7–8, whose printed forms have GAPs (FS131-W § 1.4: F1, F2);
-* **E1-NOBRANCH**: a point of at least three sectors exists (`exists_three_le_sectors`, from FS106-TS-T, `ArcMap.ts_t`; no Jordan curve theorem).
+  colours, its auxiliary point's normal picture read from `WoodallNormal (sphere v 1)` — in place of Woodall's steps 7–8, whose printed forms
+  have GAPs (FS131-W § 1.4: F1, F2);
+* **a vertex** (E1-NOBRANCH's conclusion): `ts_t` (FS106-TS-T) gives a point of three or more colours within `1/√2 + 1 < 2` of `0`, so
+  inside `closedBall 0 3` with its unit circle (E3-CHAIN; no Jordan curve theorem).
 
 **The rows.** FS106-AE-MAP6 is `ArcMap.aeMap6`, with `ArcMap.aeMap6_of_condition5` its corollary under Condition 5; FS106-WO's Theorem 6 is
 `woodall_thm6` (everywhere-proper sets divisible into regions, a corollary), its step-4 lemma `woodall_step4` (`Plane/Woodall/Collar`); FS106-TW is
@@ -100,12 +103,6 @@ variable {k : ℕ} {F : ArcMap k}
 
 /-! ## The picture at a point -/
 
-/-- **Every point of a map of the plane has a picture**: finitely many arcs pass near `v`, each leaves `v` in a direction (segments and circular
-arcs have tangents); the sectors between consecutive directions (two tangent arcs bounding a horn), with adjacent sectors of one colour
-merged, are the picture. -/
-theorem exists_sectorsAt (hP : F.IsPlaneMap) (v : ℂ) : ∃ n d c, F.SectorsAt v n d c := by
-  sorry
-
 /-- **A point in the closure of a set is approached along some direction** (compactness of the circle of directions). -/
 theorem coneAt_nonempty_of_mem_closure_region (j : Fin k) {v : ℂ} (hv : v ∈ closure (F.region j)) :
     (coneAt (F.region j) v).Nonempty := by
@@ -178,17 +175,6 @@ theorem SectorsAt.coloursAt_eq {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c 
       rw [h.2.2.2.2.2]
       exact mem_iUnion₂.mpr ⟨i, rfl, mem_iUnion.mpr ⟨0, by simp [h.2.1 (Fin.castSucc_le_succ i)]⟩⟩
     exact mem_closure_of_mem_coneAt hcone
-
-/-! ## Woodall's step 3: merging repeated colours at a vertex (a modification) -/
-
-/-- **Woodall's step 3** (`[Woodall1973]` p. 197): a valid map of the plane can be recoloured near its vertices — two sectors of one colour at
-`P` are joined across a run of sectors of angle `< π` between them (every unit circle through a point of the run near `P`, except those through
-`P`, passes through one of the two; the run is clear for their colour), and two horns in Woodall's cone fill it — into a valid map of the plane
-whose repeated colours sit on zero-angle sectors only. The new boundary arcs are circles of small radius about the vertices, so Condition 5 is
-kept. -/
-theorem exists_woodallMerged (hF : F.Valid) (hP : F.IsPlaneMap) :
-    ∃ F' : ArcMap k, F'.Valid ∧ F'.IsPlaneMap ∧ F'.WoodallMerged ∧ (F.Condition5 → F'.Condition5) := by
-  sorry
 
 /-! ## Woodall's step 5, strict: every angle at least `π/3` -/
 
@@ -450,15 +436,41 @@ theorem step6 (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {d : F
   exact townsend_lemma (F.isOpen_region X) (F.isOpen_region Y) (hF.region_dist_ne_one X) (hF.region_dist_ne_one Y)
     (u := v) hKfin hcollar hseed
 
+/-- **Steps 3 and 5 give the normal form** (FS131-E3's `NiceAt.normal`): at a point of three or more colours, a `NiceAt` picture has no horn (a horn
+sits between distinct colours and dies by `step5_lt`), so its colours are distinct (`NiceAt`'s second clause), and every angle is at least `π/3`
+(`step5_lt`, strict step 5 only). VACUITY DECLARED: its hypotheses — a valid map of the plane with at most five colours — are unsatisfiable by
+`aeMap6`, the refutation this lemma is a step of; it is stated for the chain's `aeMap6_merged`, never as a structure lemma, and its argument is
+exercised on `threeSectorDisc` (`threeSectorDisc_niceAt`, `threeSectorDisc_woodallNormal`). -/
+theorem NiceAt.normal (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} (h : F.NiceAt v)
+    (h3 : 3 ≤ (F.coloursAt v).ncard) :
+    ∃ n d c, F.SectorsAt v n d c ∧ Function.Injective c ∧ ∀ i : Fin n, π / 3 ≤ d i.succ - d i.castSucc := by
+  obtain ⟨n, d, c, hS, h2, h3'⟩ := h
+  have hn3 : 3 ≤ n := by
+    rw [hS.coloursAt_eq] at h3
+    have hrange : (range c).ncard ≤ n := by
+      rw [← Nat.card_coe_set_eq]; simpa using Finite.card_range_le c
+    omega
+  have hpos : ∀ i : Fin n, d i.castSucc ≠ d i.succ := fun i hi =>
+    step5_lt hk hF hP hS hn3 i (by rw [hi, sub_self]; positivity) (h3' i hi).symm
+  have hinj : Function.Injective c := fun i j hij => by
+    by_contra hne
+    rcases h2 i j hne hij with h | h
+    · exact hpos i h
+    · exact hpos j h
+  refine ⟨n, d, c, hS, hinj, fun i => ?_⟩
+  by_contra hlt
+  push Not at hlt
+  exact step5_lt hk hF hP hS hn3 i hlt (fun heq => finRotate_ne_symm hn3 i (hinj heq))
+
 /-- **E1-NO45** (`plans/FS131-E1-derivation.md` § 3.6): in a valid map of the plane with at most five colours in normal form, no point has a
 picture of four or more sectors (so of four or five: the colours are distinct). Angles `≥ π/3` at four or five sectors are `≤ π`; E1-BAD
 (`SectorsAt.exists_two_absent`) leaves at most five angles at which a point of `ω(v)` may keep all but one of `v`'s colours; an arc of length `2π/5`
 avoids them (`exists_Ioo_avoiding`), and by E1-COVER (`SectorsAt.false_of_ncard_le_two_on_arc`, at most one colour absent from `v`) it holds a point
-of three or more colours; that point lacks two of `v`'s colours, so it carries exactly three, its picture has three sectors in normal form, and
-`step6` excludes it. Replaces Woodall's steps 7–8 (FS131-E1's E1-Q2) and step 5's equality case (E1-Q1). -/
-theorem false_of_four_le_sectors (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) (hN : F.WoodallNormal) {v : ℂ} {n : ℕ}
-    {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c) (hn : 4 ≤ n) : False := by
-  obtain ⟨hc, hang⟩ := hN v n d c h (by omega)
+of three or more colours; that point lacks two of `v`'s colours, so it carries exactly three, its normal picture (from `hN`, FS131-E3) has three
+sectors, and `step6` excludes it. Replaces Woodall's steps 7–8 (FS131-E1's E1-Q2) and step 5's equality case (E1-Q1). -/
+theorem false_of_four_le_sectors (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {n : ℕ}
+    {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c) (hn : 4 ≤ n) (hc : Function.Injective c)
+    (hang : ∀ i : Fin n, π / 3 ≤ d i.succ - d i.castSucc) (hN : F.WoodallNormal (sphere v 1)) : False := by
   have hpi := Real.pi_pos
   have hnk : n ≤ k := by simpa using Fintype.card_le_of_injective c hc
   have hpos : ∀ i : Fin n, 0 < d i.succ - d i.castSucc := fun i => by linarith [hang i]
@@ -505,119 +517,54 @@ theorem false_of_four_le_sectors (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMa
     rw [Set.ncard_coe_finset, Finset.card_erase_of_mem (Finset.mem_erase.mpr ⟨hij.symm, Finset.mem_univ _⟩),
       Finset.card_erase_of_mem (Finset.mem_univ _), Finset.card_univ, Fintype.card_fin] at h1
     omega
-  -- its picture has three sectors in normal form
-  obtain ⟨n', d', c', h'⟩ := exists_sectorsAt hP (v + e θ')
+  -- its normal picture, from `hN` (the point lies on `ω(v)`): three sectors
+  have hmem : v + e θ' ∈ sphere v 1 := by rw [mem_sphere, dist_eq_norm, add_sub_cancel_left, norm_e]
+  obtain ⟨n', d', c', h', hinj', hang'⟩ := hN (v + e θ') hmem hθ'3
   have hcol := h'.coloursAt_eq
-  have hrange : (range c').ncard ≤ n' := by
-    rw [← Nat.card_coe_set_eq]; simpa using Finite.card_range_le c'
-  have hn'3 : 3 ≤ n' := by rw [hcol] at hθ'3; omega
-  obtain ⟨hinj', hang'⟩ := hN (v + e θ') n' d' c' h' hn'3
   have hrn : (range c').ncard = n' := by
     rw [← Set.image_univ, Set.ncard_image_of_injective _ hinj', Set.ncard_univ]; simp
+  have hn'3 : 3 ≤ n' := by rw [← hrn, ← hcol]; exact hθ'3
   have hn'le : n' ≤ 3 := by rw [← hrn, ← hcol]; exact hnc
   obtain rfl : n' = 3 := by omega
   exact step6 hk hF hP h' hinj' hang'
 
-/-! ## A vertex exists -/
-
-/-- **A point of at least three sectors** — FS131-E1's **E1-NOBRANCH** (`plans/FS131-E1-derivation.md` § 3.7), in a stronger form (any `k`, no
-(N1)), and without its Jordan curve theorem (FS131-W2 § 7.5): FS106-TS-T (`ts_t`, over Lebesgue's covering theorem) gives a point carrying at
-least three colours; its picture has at least three sectors. Woodall's "no vertices at all … is clearly impossible", in the form his map
-conditions do not give for arc maps. -/
-theorem exists_three_le_sectors (hF : F.Valid) (hP : F.IsPlaneMap) :
-    ∃ v n d c, F.SectorsAt v n d c ∧ 3 ≤ n := by
-  obtain ⟨x, -, hx3⟩ := ts_t hF hP 0 (ε := 1) one_pos
-  obtain ⟨n, d, c, h⟩ := exists_sectorsAt hP x
-  refine ⟨x, n, d, c, h, ?_⟩
-  have hrange : (range c).ncard ≤ n := by
-    rw [← Nat.card_coe_set_eq]; simpa using Finite.card_range_le c
-  rw [h.coloursAt_eq] at hx3
-  omega
-
 /-! ## The theorems -/
 
-/-- **Maps in Woodall's normal form need six** (FS131-E1's E1-MAPS6): a valid map of the plane with at most five colours in normal form does not
-exist (a point of `n ≥ 3` sectors, `exists_three_le_sectors`, has `n ≤ 5` distinct colours; `step6` at three, `false_of_four_le_sectors` at four
-and five). -/
-theorem aeMap6_normal (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) (hN : F.WoodallNormal) : False := by
-  obtain ⟨v, n, d, c, hS, h3⟩ := exists_three_le_sectors hF hP
-  obtain ⟨hinj, hang⟩ := hN v n d c hS h3
+/-- **Maps in Woodall's normal form on `closedBall 0 3` need six** (FS131-E1's E1-MAPS6, localized by FS131-E3's E3-CHAIN): a valid map of the
+plane with at most five colours in normal form at every point of `closedBall 0 3` of three or more colours does not exist. `ts_t` gives a point
+`v` of three or more colours with `‖v‖ < 1/√2 + 1 < 2`; its normal picture has `3 ≤ n ≤ 5` distinct colours; `step6` at three,
+`false_of_four_le_sectors` at four and five, its auxiliary points on `ω(v) ⊆ closedBall 0 3`. -/
+theorem aeMap6_normal (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) (hN : F.WoodallNormal (closedBall 0 3)) : False := by
+  obtain ⟨v, hv, hv3⟩ := ts_t hF hP 0 (ε := 1) one_pos
+  have hs : 1 / Real.sqrt 2 < 1 := by
+    rw [div_lt_one (Real.sqrt_pos.mpr two_pos)]
+    exact (Real.lt_sqrt zero_le_one).mpr (by norm_num)
+  have hv2 : ‖v‖ < 2 := by rw [dist_zero_right] at hv; linarith
+  obtain ⟨n, d, c, hS, hinj, hang⟩ := hN v (by rw [mem_closedBall, dist_zero_right]; linarith) hv3
   have hnk : n ≤ k := by simpa using Fintype.card_le_of_injective c hinj
+  have hrn : (range c).ncard = n := by
+    rw [← Set.image_univ, Set.ncard_image_of_injective _ hinj, Set.ncard_univ]; simp
+  have hn3 : 3 ≤ n := by rw [← hrn, ← hS.coloursAt_eq]; exact hv3
   by_cases h4 : 4 ≤ n
-  · exact false_of_four_le_sectors hk hF hP hN hS h4
+  · refine false_of_four_le_sectors hk hF hP hS h4 hinj hang fun w hw hw3 => hN w ?_ hw3
+    rw [mem_sphere, dist_eq_norm] at hw
+    rw [mem_closedBall, dist_zero_right]
+    linarith [norm_le_norm_add_norm_sub' w v]
   · obtain rfl : n = 3 := by omega
     exact step6 hk hF hP hS hinj hang
 
-open Fin.NatCast in
-/-- **Steps 3 and 5 give the normal form, so a merged map does not exist**: in a valid map of the plane with at most five colours whose repeated
-colours sit on horns only, every point of three or more sectors has distinct colours (a horn between two neighbours of distinct colours dies
-by `step5_lt`; a horn between two of one colour has horns for neighbours, and the chain of horns ends at a sector of positive angle) and every
-angle at least `π/3` (`step5_lt`, strict step 5 only); `aeMap6_normal` finishes. Stated with conclusion `False`, not `WoodallNormal`: its domain
-is empty (by this very chain), so the intermediate normal-form statement would be vacuous. -/
-theorem aeMap6_merged (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) (hM : F.WoodallMerged) : False := by
-  have hN : F.WoodallNormal := by
-    intro v n d c h hn3
-    have hlast := h.2.2.1
-    have hmono := h.2.1
-    have hw0 : ∀ i : Fin n, 0 ≤ d i.succ - d i.castSucc := fun i => sub_nonneg.mpr (hmono (Fin.castSucc_le_succ i))
-    -- a repeated colour sits on horns, and a horn dies: every sector has positive width
-    have hpos : ∀ i : Fin n, 0 < d i.succ - d i.castSucc := by
-      by_contra hcon
-      push Not at hcon
-      obtain ⟨i₀, hi₀⟩ := hcon
-      have hz : ∀ i : Fin n, d i.succ - d i.castSucc = 0 → d (finRotate n i).succ - d (finRotate n i).castSucc = 0 ∨
-          ∃ j : Fin n, d j.succ - d j.castSucc = 0 ∧ 0 < d (finRotate n j).succ - d (finRotate n j).castSucc := by
-        intro i hi
-        rcases (hw0 (finRotate n i)).eq_or_lt with h0 | h0
-        · exact Or.inl h0.symm
-        · exact Or.inr ⟨i, hi, h0⟩
-      obtain ⟨j, hj0, hjp⟩ : ∃ j : Fin n, d j.succ - d j.castSucc = 0 ∧ 0 < d (finRotate n j).succ - d (finRotate n j).castSucc := by
-        by_contra hno
-        push Not at hno
-        have hall : ∀ i : Fin n, d i.succ - d i.castSucc = 0 := by
-          obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
-          have hstep : ∀ i : Fin (m + 1), d i.succ - d i.castSucc = 0 → d (i + 1).succ - d (i + 1).castSucc = 0 := by
-            intro i hi
-            rw [← finRotate_apply]
-            exact le_antisymm (hno i hi) (hw0 _)
-          have hind : ∀ q : ℕ, d (i₀ + (q : Fin (m + 1))).succ - d (i₀ + (q : Fin (m + 1))).castSucc = 0 := by
-            intro q
-            induction q with
-            | zero => simpa using le_antisymm hi₀ (hw0 i₀)
-            | succ q ih =>
-              have := hstep _ ih
-              rwa [Nat.cast_succ, ← add_assoc]
-          intro i
-          have := hind (i - i₀).val
-          rwa [Fin.cast_val_eq_self, add_sub_cancel] at this
-        have hs := sum_width hlast
-        rw [Finset.sum_eq_zero fun i _ => hall i] at hs
-        linarith [Real.pi_pos]
-      -- the next sector's colour is not repeated, so it differs from the previous sector's
-      have hnr : ∀ l : Fin n, l ≠ finRotate n j → c l ≠ c (finRotate n j) := by
-        intro l hl hcl
-        have := (hM v n d c h l (finRotate n j) hl hcl).2
-        linarith [this]
-      refine step5_lt hk hF hP h hn3 j (by rw [hj0]; positivity) ?_
-      exact fun heq => hnr _ (finRotate_ne_symm hn3 j).symm heq.symm
-    have hinj : Function.Injective c := by
-      intro i j hij
-      by_contra hne
-      have := (hM v n d c h i j hne hij).1
-      linarith [hpos i]
-    refine ⟨hinj, fun i => ?_⟩
-    by_contra hlt
-    push Not at hlt
-    exact step5_lt hk hF hP h hn3 i hlt (fun heq => finRotate_ne_symm hn3 i (hinj heq))
-  exact aeMap6_normal hk hF hP hN
-
+/-- **Steps 3 and 5 give the normal form, so a merged map does not exist** (FS131-E3's `aeMap6_merged`): `NiceAt.normal` at every point of
+`closedBall 0 3` of three or more colours, then `aeMap6_normal`. -/
+theorem aeMap6_merged (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) (hM : F.WoodallMerged (closedBall 0 3)) : False :=
+  aeMap6_normal hk hF hP fun v hv h3 => (hM v hv h3).normal hk hF hP h3
 
 /-- **FS106-AE-MAP6** (arc maps): no map of the plane bounded by a locally finite family of segments and circular arcs, coloured with at most
 five colours, is almost-everywhere proper (no two interior points of one colour at distance exactly `1`; boundary points carry no colour).
-"Boundaries of measure 0" is not used (the row's last clause). The chain: steps 1–3, strict step 5, step 6, E1-NO45, E1-NOBRANCH (FS131-E1's
-E1-MAPS6); no step reads an angle equal to `π/3`, and nothing of Woodall's steps 7–8 is used. -/
+"Boundaries of measure 0" is not used (the row's last clause). The chain: steps 1–2 (free for arcs), step 3 localized to `closedBall 0 3`
+(`exists_woodallMerged`, FS131-E3's E3-BALL), strict step 5, step 6, E1-NO45, and a vertex from FS106-TS-T (FS131-E1's E1-MAPS6, E3-CHAIN);
+no step reads an angle equal to `π/3`, and nothing of Woodall's steps 7–8 is used. -/
 theorem aeMap6 (F : ArcMap k) (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) : False := by
-  obtain ⟨F', hv, hp, hM, -⟩ := exists_woodallMerged hF hP
+  obtain ⟨F', hv, hp, hM, -⟩ := exists_woodallMerged hF hP 3
   exact aeMap6_merged hk hv hp hM
 
 /-- **FS106-AE-MAP6 under Condition 5** (no boundary meets a unit circle in infinitely many points): a corollary of `aeMap6`, Condition 5 unused
