@@ -80,3 +80,12 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 several trees are building today, so on exit 75 wait ten minutes and retry. `lake env lean` (with § 9.5's flags) is for iteration only, never evidence.
 The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`. You start no agents of your own
 (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2026-10-04 (Keryx) — `SectorsAt`'s fifth clause, ruled
+
+Your finding is ruled as `plans/FS131-close-inventory.md` item 154. You may change exactly one definition: drop the fifth clause of `SectorsAt` in
+`.claude/worktrees/fs131-ww/Proofs/HadwigerNelson/Plane/Woodall/Basic.lean` (the `annSector … ⊆ F.region (c i)` clause, line 66), with its docstring
+saying so and the item number. Then re-route the three proofs that read it — E1-RAY inner and outer and E1-BAD's interior case in `Plane/Woodall/NoFourFive` —
+through the cone clause, as you proposed, with no statement change; do this first, so the definition change never leaves the build red. Then go on with the
+child lemma, `step5_lt`, `step6`, and `exists_sectorsAt` on wave 3's engine. Record every change in your record with the item number. Everything else in this
+brief stands, and you still start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

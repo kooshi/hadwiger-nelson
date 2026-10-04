@@ -993,3 +993,16 @@ reason by the close.*
      `scripts/gate_report.py` counting it; controls watched firing; the procedure by which a wave declares an import; drafts for the Trust ledger sentence.
      **Scope change from item 144 (b)**: the vacuity half (`CPColouring`, `AeProperRegions`) is not T3's — those carriers exist only on waves 2 and 4's branches,
      so each wave registers them at its own landing (added to their next briefs). Launched in LEB's slot: 1 (I3h) + 1 (IWb) + 1 (T3) = 3.
+154. **Statement defect — a definition: `SectorsAt`'s fifth clause makes `exists_sectorsAt` false** (FS131-IWb, message 2026-10-04; `fs131-ww` at `a731f352`,
+     `Plane/Woodall/Basic.lean` line 66, `Plane/Woodall/Steps` `exists_sectorsAt (hP : F.IsPlaneMap) (v : ℂ) : ∃ n d c, F.SectorsAt v n d c`): the clause
+     `annSector v 0 r (d i + δ) (d (i+1) − δ) ⊆ F.region (c i)` fails for a sector merged across an arc between two same-coloured sides. Smallest counterexample:
+     one colour, one segment `Arc.seg (−1) 1`, `v = 0` — no picture (`n ≥ 2` needs adjacent colours to differ; at `n = 1` the open range of length `3π/2` holds a
+     direction of the segment, whose points are not interior). The same happens in a valid map (the hexagonal seven-colouring with a slit inside a hexagon, at
+     the slit's midpoint) and at three-colour points with a split class — where the consumers (E1-NO45, `exists_three_le_sectors`) apply it. Keryx's receipt: the
+     clause and the theorem's hypotheses read at those lines. **Ruling**: drop clause 5 from `SectorsAt`. Only three proofs read it (E1-RAY inner and outer,
+     `NoFourFive` 692 and 706; E1-BAD's interior case `not_mem_coloursAt_of_mem_Ioo`, 1088), each re-proved from the cone clause — E1-RAY through wave 3's
+     `coneAt_region_eq_biUnion` and a preconnected tile (the connected-piece child lemma), E1-BAD's interior case by inner and outer collars and the robust kill —
+     with no statement change; `exists_sectorsAt` then follows from wave 3's engine (`GoodAt.exists_wedge`) without `localSectors` (priced H, 600–900 lines). FS131-IWb
+     may edit that one definition and re-route those three proofs. Alternative weighed: weaken it to `⊆ closure (F.region (c i))`. Why not: it keeps nothing
+     the readers need once they go through the cone clause, and it makes `exists_sectorsAt` need the colours along each tangent branch. Confidence:
+     medium-high — if a re-route fails, it comes back. Credit IWb: a definition defect found before anything was built on its false leaf.
