@@ -523,3 +523,8 @@ log and the axioms print against its oleans are Stage 11's (`build/gate/build/20
    out-type `c`-contact of `N` — and one in the `+a` stack below the tangent `h`-sector would shadow `H₊`, by `sector_shadow_N`'s mechanism applied to `c`, against validity).
    The mirror at `S′` in the frame `α + π`.
 Price: about two sessions; (iv)'s two-sector clause is most of it, (ii)'s degree count next.
+
+**The coordinator's ruling, received after the hand-back** (inventory items 236 and 247 (c)): the three moves now belong to FS131-IM1, on branch `fs131-w4m` from this branch's
+`d4f946ae`, in a new module `Plane/ValidMap/Moves` upstream of `Contact`, proved as `…_aux` lemmas under their exact statements; `Contact.lean`'s three move leaves stay
+`sorry` here and become one-line citations at the merge, on Keryx's word. This job left them untouched, as the ruling asks. The remaining work on this branch is `stuck_structure`
+(Stage 12's route); where it needs a move's conclusion it uses the move's statement as it stands in `Contact` — the route above needs none.
