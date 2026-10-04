@@ -567,3 +567,10 @@ reason by the close.*
 100. **Skeleton slip — `arcLength_bigBall_ge` false at R = 1** (FS131-I2e, message 2026-10-04; `Plane/Cover`, a child K2c stated): at `R = 1`, `u = z`, every
      `u + e θ` lies at distance exactly 1 from `z`, outside the open ball, so the arc length is 0 (Keryx's receipt: that observation). Its only consumer,
      `not_keptAt_of_half_lt`, has `R = 2ε > 1`. **Ruling: `(hR : 1 < R)`.** Alternative: none live. Confidence: high.
+101. **FS131-I3d handed back at stage 4, harness ≈ 473k** (report on its branch; `fs131-w3` at `dbf34f37`, checked): seven leaves — `Simple.coneAt_eq_angleIcc` (interval
+     cones, with no sector structure), `qfree4`, `fiveRing_finite_off_Q`, `fiveRing_length`, `touchW` (carrying FS116-N1-TOUCH), `germS_inward`, `germS_outward` — each
+     on the standard three axioms in `build/gate/axioms/20261004T102246Z-2733747.log` (worktree); 87 of 96; 9 left. Correction to the plan (§§ 6.1–6.2): the sector
+     engine is needed only for `finite_tiles_near` and its two corollaries (and through them `four_of_bothKind`, `germS_four`). Generalization:
+     `IsJordanDomain.coneAt_eq_angleIcc` for any open set with Jordan-domain structure at a point. Slip (I3d's): a stale `scripts/Axioms.lean` record removed.
+102. **Order changed** (Keryx): FS131-I3e (wave 3's fifth implementer, `data/fs131/briefs/FS131-I3e-wave3.md`, gated PASS) takes the slot I3d freed, ahead of FS131-K2d.
+     Why: wave 3 is nine leaves from the second landing. Queue after it: K2d, I4, IW, LEB. Source: this commit.
