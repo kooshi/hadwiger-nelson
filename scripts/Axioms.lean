@@ -3227,6 +3227,38 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.hcFrame_mem_hcDownTri
 #print axioms HadwigerNelson.Plane.hcFrame_mem_hcSeg
 #print axioms HadwigerNelson.Plane.abs_half_sign
+#print axioms HadwigerNelson.Plane.hc_lemmaNL_band
+#print axioms HadwigerNelson.Plane.hc_lemmaNL_lt
+#print axioms HadwigerNelson.Plane.exists_dist_eq_one_of_star
+#print axioms HadwigerNelson.Plane.G1Bounds.sub_le
+#print axioms HadwigerNelson.Plane.hcUpO_star
+#print axioms HadwigerNelson.Plane.mem_hcN0_of_frame
+#print axioms HadwigerNelson.Plane.volume_hcNframe
+#print axioms HadwigerNelson.Plane.volume_hcN0
+#print axioms HadwigerNelson.Plane.volume_hcKZ
+#print axioms HadwigerNelson.Plane.hcFrame_mem_closure_band
+#print axioms HadwigerNelson.Plane.hcKZ_subset
+#print axioms HadwigerNelson.Plane.isClosed_unitShadow
+#print axioms HadwigerNelson.Plane.dist_hcFrame_right
+#print axioms HadwigerNelson.Plane.hcFrame_combo
+#print axioms HadwigerNelson.Plane.hcBlock_subset_hcSet
+#print axioms HadwigerNelson.Plane.hcUpO_subset_interior
+#print axioms HadwigerNelson.Plane.hcBand_subset_interior
+#print axioms HadwigerNelson.Plane.interior_hcDownTri_subset
+#print axioms HadwigerNelson.Plane.G1Bounds.eq_zero_of_mem
+#print axioms HadwigerNelson.Plane.hcFrame_corner_mem_hcUp
+#print axioms HadwigerNelson.Plane.hcFrame_apex_mem_hcUp
+#print axioms HadwigerNelson.Plane.hc_seg_exclusion
+#print axioms HadwigerNelson.Plane.hc_c0
+#print axioms HadwigerNelson.Plane.hc_c0_end
+#print axioms HadwigerNelson.Plane.hc_c0_end'
+#print axioms HadwigerNelson.Plane.hc_se_lift
+#print axioms HadwigerNelson.Plane.hcDownTri_interior_star
+#print axioms HadwigerNelson.Plane.hc_se_slab
+#print axioms HadwigerNelson.Plane.hc_se_corner
+#print axioms HadwigerNelson.Plane.hc_se_up
+#print axioms HadwigerNelson.Plane.hc_se_face
+#print axioms HadwigerNelson.Plane.hc_strict_exclusion
 
 #eval IO.println "=== PURCHASED ==="
 
