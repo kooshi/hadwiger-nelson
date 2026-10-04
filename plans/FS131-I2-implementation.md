@@ -1382,3 +1382,9 @@ named in the list.
 
 Then `origin/main` fast-forwarded to this branch by `git push origin HEAD:main` (the commit carrying this stage and the report). The main tree's local
 `main` was not touched. The untracked `build-i2*.log` files at the worktree's root stay uncommitted.
+
+**Addendum at the push.** `origin/main` moved once more (`6b8fce2b`: inventory items 268–269 and two briefs, `plans/` and `data/fs131/briefs/` only);
+merged as `54d408c6`, no file under `Proofs/`, `scripts/`, `tools/`, `ARCHITECTURE.md`, `Proofs.lean` or the toolchain changed (`git diff --stat`, 0 lines),
+and the build reads "all 1750 modules already up to date, nothing built, 0 module(s) with warnings" (`build/gate/build/20261004T225532Z-3162433.log`,
+`data/fs131/i2n/build-gate4.out`), so the axiom and vacuity receipts of `40f4b4ef` describe this commit's library and audit files unchanged.
+
