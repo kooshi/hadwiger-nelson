@@ -690,3 +690,22 @@ reason by the close.*
 119. **Brief FS131-I2f, the Opus-implementer trial** (`debruijn-implementer` with `model: "opus"`, item 103; `data/fs131/briefs/FS131-I2f-wave2.md`, gated
      PASS): every remaining wave-2 leaf and child (154 `sorry` lines at `ddc5b5c8`), the gate, the landing; its record counts what it closes, for comparison
      with I2–I2e (items 49, 58, 70, 82, 114). Launched in K2d's Opus slot: slots 0.5 (I3f) + 0.5 (I4) + 1 (W2) + 1 (I2f) = 3, plus EXT-HN1.
+120. **FS131-W2 mid-flight findings** (message 2026-10-04, reading E1's argument line by line as its formalizer; to be carried in its record's stage 7):
+     (1) **Argument step of E1-BAD false** (`plans/FS131-E1-derivation.md` § 3.5, "Counting": "only for the one of these two on s's side"): `P = 0`, a sector `s` of
+     angle π bounded by the two arc-ends at `P` of the circle of radius 1/2 about `(0, −1/2)`, `s` outside it — both `Y₊ = (0, 1)` and `Y₋ = (0, −1)` have both
+     branches of `ω(Y)` at `P` in `s`. Keryx's receipt: `tools/fs131_w2_bad_pi.py` (worktree `fs131-ww`) prints `both_exceptional=True`, `--fault` (radius 2)
+     `False`; and by hand `|w − (0, −½)|² = sin²t + (cos t − ½)² = 5/4 − cos t > 1/4` for `t ≠ 0`. **E1-BAD's statement survives as a total count** (at most
+     edges + π-sectors), and so does E1-NO45: the two points are the normals `P + e(a ± π/2)` of the π-sector's edges, which already hold any unit-arc
+     centres of those edges, so at most `k` exceptional points [W2's argument, one mind]. Control e1-count bounds correctly for the wrong reason. **Correction
+     owed**: § 3.5's argument (no statement change) — an erratum in E1's record, filed from W2's stage 7 when committed. Rows 132 and § The aim item 4 stand.
+     (2) **W's definitions differ from E1's (N1)/(N2)** (E1's § 3.0 caveat): W's `ArcMap` allows an arc between two tiles of one colour and several arcs
+     leaving a point in one direction, so "(N1) per sector" and "(N2)" are not expressible in `WoodallNormal`; two steps read them (E1-COVER (c); E1-BAD's
+     one-per-edge). W2 absorbs both with no added hypothesis: E1-COVER closed with a colour class in place of a region (a clopen argument on the arc, and a
+     new lemma — a connected subset of the closure of an open set with no unit pair has diameter at most 1, from wave 1's
+     `dist_ne_one_of_mem_of_mem_closure`), and E1-BAD's edge case by a second-order lemma (along the circles of curvature `κ` tangent to an edge, at least one
+     of the two normals carries a collar in both adjacent colours' shadows). The formal E1-NO45 needs only `WoodallNormal` with angles weakened to `≥ π/3`.
+     (3) **Generalization** (W2's): E1-COVER holds for any valid map, any number of colours, at a point whose picture has positive angles and at most one colour
+     absent (E1-GEN6's form); the arc-map form is read only at `P` and its edges — **for the Jordan-boundaries stub** (item 107): the obstacle is local to the
+     vertices of three, four and five sectors. (4) **The Jordan curve theorem is not needed**: E1-NOBRANCH's conclusion is W's `exists_three_le_sectors`, from
+     wave 4's `ArcMap.ts_t` (FS106-TS-T), which rests on `lebesgue_covering_square` (FS131-LEB, item 66) — so Woodall's chain lands after LEB, like wave 4.
+     Queue for the next Opus slot, by bearing: FS131-E2 (the cusp case — it may touch frontier hand results), then FS131-LEB (it blocks wave 4 and Woodall's chain).
