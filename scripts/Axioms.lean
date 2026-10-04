@@ -2350,6 +2350,8 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 -- FS131-I2f: children added by the sixth wave-2 implementer
 #print axioms HadwigerNelson.Plane.upperDensityAt_pos_of_balls
 #print axioms HadwigerNelson.Plane.sq9_openSq_subset
+#print axioms HadwigerNelson.Plane.triQ_cover_tri
+#print axioms HadwigerNelson.Plane.tri_cover
 
 #eval IO.println "=== PURCHASED ==="
 

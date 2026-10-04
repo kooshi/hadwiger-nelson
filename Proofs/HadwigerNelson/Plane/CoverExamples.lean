@@ -790,8 +790,62 @@ example : (0 : ℂ) ∈ disc7 0 :=
 
 /-! ### FS131-K2d: children of DISC7's leaves (plan § 16) -/
 
+/-- **The triangular lattice's covering radius is `1/√3`**, on the lower triangle: one of its three vertices is within `1/√3`
+(the Voronoi split `2u + v ≤ 1`, `u + 2v ≤ 1`). A child of `disc7_cover` (FS131-I2f). -/
+theorem triQ_cover_tri {u v : ℝ} (hu : 0 ≤ u) (hv : 0 ≤ v) (huv : u + v ≤ 1) :
+    triQ u v ≤ 1 / 3 ∨ triQ (u - 1) v ≤ 1 / 3 ∨ triQ u (v - 1) ≤ 1 / 3 := by
+  unfold triQ
+  by_cases h0 : 2 * u + v ≤ 1 ∧ u + 2 * v ≤ 1
+  · left
+    nlinarith [mul_nonneg (sub_nonneg.2 h0.1) hu, mul_nonneg (sub_nonneg.2 h0.2) hv]
+  · by_cases huv' : v ≤ u
+    · right; left
+      have h1 : 1 ≤ 2 * u + v := by
+        by_contra h; push Not at h; exact h0 ⟨h.le, by linarith⟩
+      nlinarith [mul_nonneg (sub_nonneg.2 h1) (sub_nonneg.2 huv'), mul_nonneg (sub_nonneg.2 huv) hv,
+        mul_nonneg (sub_nonneg.2 h1) hv, mul_nonneg (sub_nonneg.2 huv) (sub_nonneg.2 huv'),
+        mul_nonneg (sub_nonneg.2 h1) (sub_nonneg.2 huv)]
+    · right; right
+      push Not at huv'
+      have h1 : 1 ≤ u + 2 * v := by
+        by_contra h; push Not at h; exact h0 ⟨by linarith, h.le⟩
+      nlinarith [mul_nonneg (sub_nonneg.2 h1) (sub_nonneg.2 huv'.le), mul_nonneg (sub_nonneg.2 huv) hu,
+        mul_nonneg (sub_nonneg.2 h1) hu, mul_nonneg (sub_nonneg.2 huv) (sub_nonneg.2 huv'.le),
+        mul_nonneg (sub_nonneg.2 h1) (sub_nonneg.2 huv)]
+
+/-- **Every point is within `1/√3` of the unit triangular lattice** (FS131-I2f). -/
+theorem tri_cover (z : ℂ) : ∃ p q : ℤ, normSq (z - tri p q) ≤ 1 / 3 := by
+  have h3 : (√3 : ℝ) ≠ 0 := by positivity
+  set u₀ : ℝ := z.re - z.im / √3
+  set v₀ : ℝ := 2 * z.im / √3
+  have hz : ∀ p q : ℤ, z - tri p q = ((u₀ - p : ℝ) : ℂ) + ((v₀ - q : ℝ) : ℂ) * e (π / 3) := by
+    intro p q
+    rw [tri, e_pi_div_three]
+    apply Complex.ext <;> simp [u₀, v₀] <;> field_simp
+    ring_nf
+  have key : ∀ p q : ℤ, triQ (u₀ - p) (v₀ - q) ≤ 1 / 3 → ∃ p q : ℤ, normSq (z - tri p q) ≤ 1 / 3 :=
+    fun p q h => ⟨p, q, by rw [hz, normSq_add_mul]; exact h⟩
+  have fu := Int.floor_le u₀
+  have fu' := Int.lt_floor_add_one u₀
+  have fv := Int.floor_le v₀
+  have fv' := Int.lt_floor_add_one v₀
+  set u := u₀ - ⌊u₀⌋
+  set v := v₀ - ⌊v₀⌋
+  by_cases hs : u + v ≤ 1
+  · rcases triQ_cover_tri (by linarith) (by linarith) hs with h | h | h
+    · exact key ⌊u₀⌋ ⌊v₀⌋ h
+    · exact key (⌊u₀⌋ + 1) ⌊v₀⌋ (by push_cast; convert h using 2; ring)
+    · exact key ⌊u₀⌋ (⌊v₀⌋ + 1) (by push_cast; convert h using 2; ring)
+  · push Not at hs
+    have hsym : ∀ a b : ℝ, triQ (-a) (-b) = triQ a b := fun a b => by unfold triQ; ring
+    rcases triQ_cover_tri (u := 1 - u) (v := 1 - v) (by linarith) (by linarith) (by linarith) with h | h | h
+    · exact key (⌊u₀⌋ + 1) (⌊v₀⌋ + 1) (by rw [← hsym]; push_cast; convert h using 2 <;> ring)
+    · exact key ⌊u₀⌋ (⌊v₀⌋ + 1) (by rw [← hsym]; push_cast; convert h using 2 <;> ring)
+    · exact key (⌊u₀⌋ + 1) ⌊v₀⌋ (by rw [← hsym]; push_cast; convert h using 2 <;> ring)
+
 theorem measurableSet_disc7 (a : Fin 7) : MeasurableSet (disc7 a) := by
-  sorry
+  refine MeasurableSet.iUnion fun m => MeasurableSet.iUnion fun n => MeasurableSet.iUnion fun _ => ?_
+  exact measurableSet_closedBall
 
 /-- Same-colour centres are at least `√21/2` apart (`triQ ≥ 7` on the index-7 sublattice `{m + 3n ≡ 0 (mod 7)}`). -/
 theorem disc7Col_eq_dist_ge {m n m' n' : ℤ} (hc : disc7Col m n = disc7Col m' n') (hne : (m, n) ≠ (m', n')) :
@@ -806,7 +860,16 @@ theorem disc7_unitPair_mem_sphere {a : Fin 7} {x y : ℂ} (hx : x ∈ disc7 a) (
 
 /-- The discs cover the plane (the centre lattice's covering radius is `1/2`). -/
 theorem disc7_cover (z : ℂ) : ∃ m n : ℤ, dist z (disc7Centre m n) ≤ 1 / 2 := by
-  sorry
+  have h3 : (√3 / 2 : ℝ) ≠ 0 := by positivity
+  obtain ⟨p, q, h⟩ := tri_cover (z / ((√3 / 2 : ℝ) : ℂ))
+  refine ⟨p, q, ?_⟩
+  have e1 : z - disc7Centre p q = ((√3 / 2 : ℝ) : ℂ) * (z / ((√3 / 2 : ℝ) : ℂ) - tri p q) := by
+    rw [disc7Centre]; field_simp
+  rw [dist_eq_norm, e1, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by positivity)]
+  have hn : ‖z / ((√3 / 2 : ℝ) : ℂ) - tri p q‖ ^ 2 ≤ 1 / 3 := by rw [Complex.sq_norm]; exact h
+  have hs : (√3 / 2) ^ 2 = (3 / 4 : ℝ) := by rw [div_pow, Real.sq_sqrt (by norm_num)]; norm_num
+  nlinarith [norm_nonneg (z / ((√3 / 2 : ℝ) : ℂ) - tri p q), Real.sqrt_nonneg 3,
+    sq_nonneg (√3 / 2 * ‖z / ((√3 / 2 : ℝ) : ℂ) - tri p q‖ - 1 / 2)]
 
 /-- Every point is within `√7/2` of a centre of each colour (the colour lattice's covering radius). -/
 theorem disc7_colour_near (a : Fin 7) (z : ℂ) : ∃ m n : ℤ, disc7Col m n = a ∧ dist z (disc7Centre m n) ≤ √7 / 2 := by
