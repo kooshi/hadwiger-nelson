@@ -1821,12 +1821,23 @@ def hcSeg (m n : ℤ) (j : Fin 3) : Set ℂ := (fun s => hcFrame m n j s 1) '' I
 /-- The edge frame is an isometry from `ℝ²`. -/
 theorem dist_hcFrame (m n : ℤ) (j : Fin 3) (s t s' t' : ℝ) :
     dist (hcFrame m n j s t) (hcFrame m n j s' t') = √((s - s') ^ 2 + (t - t') ^ 2) := by
-  sorry
+  rw [dist_eq_norm, hcFrame, hcFrame, add_sub_add_left_eq_sub, ← sub_mul, norm_mul, norm_e, mul_one]
+  have : ((hcL - √3 / 6 - t : ℝ) : ℂ) - (s : ℂ) * I - (((hcL - √3 / 6 - t' : ℝ) : ℂ) - (s' : ℂ) * I) =
+      ((t' - t : ℝ) : ℂ) + ((-(s - s') : ℝ) : ℂ) * I := by push_cast; ring
+  rw [this, Complex.norm_add_mul_I]
+  congr 1; ring
 
 /-- `hcFrameS`, `hcFrameT` invert the frame. -/
 theorem hcFrame_coords (m n : ℤ) (j : Fin 3) (s t : ℝ) :
     hcFrameS m n j (hcFrame m n j s t) = s ∧ hcFrameT m n j (hcFrame m n j s t) = t := by
-  sorry
+  have he : e (2 * π * ((j : ℕ) : ℝ) / 3) ≠ 0 := by
+    intro h; have := norm_e (2 * π * ((j : ℕ) : ℝ) / 3); rw [h, norm_zero] at this; norm_num at this
+  have hq : (hcFrame m n j s t - hcUpC m n) / e (2 * π * ((j : ℕ) : ℝ) / 3) =
+      ((hcL - √3 / 6 - t : ℝ) : ℂ) - (s : ℂ) * I := by
+    rw [hcFrame, add_sub_cancel_left, mul_div_assoc, div_self he, mul_one]
+  refine ⟨?_, ?_⟩
+  · rw [hcFrameS, hq]; simp
+  · rw [hcFrameT, hq]; simp
 
 /-- The up triangle in each of its edge frames: `|s| ≤ 1/2`, `2 ≤ t ≤ 2 + √3/2`. -/
 theorem hcUpTri_frame {m n : ℤ} {z : ℂ} (hz : z ∈ hcUpTri m n) (j : Fin 3) :
@@ -1921,11 +1932,50 @@ theorem hc_ae_phi_pos {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2)
 /-- An open set with no two points at distance `1` meets no unit circle about its closure (perturb the far end into the set). -/
 theorem subset_compl_unitShadow_closure {U : Set ℂ} (hU : IsOpen U) (h : ∀ x ∈ U, ∀ y ∈ U, dist x y ≠ 1) :
     U ⊆ (unitShadow (closure U))ᶜ := by
-  sorry
+  rintro x hx ⟨y, hy, hxy⟩
+  obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp hU x hx
+  obtain ⟨w, hwU, hwy⟩ := Metric.mem_closure_iff.1 hy (min δ (1 / 2)) (lt_min hδ (by norm_num))
+  have hwy' : dist y w < δ := lt_of_lt_of_le hwy (min_le_left _ _)
+  have hwy2 : dist y w < 1 / 2 := lt_of_lt_of_le hwy (min_le_right _ _)
+  set d := dist x w with hd
+  have hd1 : |d - 1| < δ := by
+    have h1 := dist_triangle x y w
+    have h2 := dist_triangle x w y
+    rw [dist_comm w y] at h2
+    rw [abs_lt]; constructor <;> linarith
+  have hd0 : 0 < d := by
+    have h2 := dist_triangle x w y
+    rw [dist_comm w y] at h2
+    linarith
+  set x' : ℂ := w + ((1 / d : ℝ) : ℂ) * (x - w) with hx'
+  have hx'w : dist x' w = 1 := by
+    rw [dist_eq_norm, hx', add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos (by positivity), ← dist_eq_norm, ← hd]
+    field_simp
+  have hx'x : dist x' x < δ := by
+    have : x' - x = ((1 / d - 1 : ℝ) : ℂ) * (x - w) := by rw [hx']; push_cast; ring
+    rw [dist_eq_norm, this, norm_mul, Complex.norm_real, Real.norm_eq_abs, ← dist_eq_norm, ← hd]
+    have : |1 / d - 1| * d = |d - 1| := by
+      have e : (1 / d - 1) * d = -(d - 1) := by field_simp; ring
+      rw [← abs_neg (d - 1), ← e, abs_mul, abs_of_pos hd0]
+    linarith
+  exact h x' (hball (by rw [mem_ball]; exact hx'x)) w hwU hx'w
 
 /-- The support of an open set is its closure. -/
 theorem essSupport_of_isOpen {U : Set ℂ} (hU : IsOpen U) : essSupport U = closure U := by
-  sorry
+  ext x
+  constructor
+  · intro hx
+    rw [Metric.mem_closure_iff]
+    intro r hr
+    obtain ⟨y, hyU, hyb⟩ := nonempty_of_measure_ne_zero (hx r hr).ne'
+    refine ⟨y, hyU, ?_⟩
+    rw [mem_ball, dist_comm] at hyb
+    exact hyb
+  · intro hx r hr
+    obtain ⟨y, hyU, hd⟩ := Metric.mem_closure_iff.1 hx r hr
+    have hyb : y ∈ ball x r := by rw [mem_ball, dist_comm]; exact hd
+    exact (hU.inter isOpen_ball).measure_pos volume ⟨y, hyU, hyb⟩
 
 /-- The band over one gap is connected and separated from the bands over other gaps (§ 2.2 (G3): vertical fibres over a
 connected base; an empty fibre at each point of `Z`). -/
