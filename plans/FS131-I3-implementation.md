@@ -270,6 +270,44 @@ Axioms of the proved declarations read by `#print axioms` over the scratch olean
 | `SixFragment` (3) | `sixCol_locallyConstant`, `sixFrag_valid`, `sixFrag_nonSiamese` | Findings of this stage. `locallyConstant`: cases `‖x‖ < 1` (arg off the integers, as `x` is off the segments), `‖x‖ > 1` (sector/round constant off integer resp. half-integer rays; on the half-integer rays both lens tests are strictly false, `r² − r + 1 > 1`; on the negative axis the round is `3` mod 6 on both sides and `InSixLens` is `6`-periodic in its index; off these, a point with the lens test false and `dist = 1` lies on a lens side). `valid`: no arc condition is needed for the pair bounds except `‖x‖ ≠ 1` and `‖x‖ < 3/2`. Rotation by `60°` shifts `sixCol` by `1` (`arg` wraps by `2πn`, `floor` and `round` shift by `1 + 6n`, `InSixLens` is `6`-periodic in the index), so reduce to colour `0`: `S_0` (`‖·‖ < 1`, arg in `[0°, 60°)`), `Q_4` (lens at `240°`, `‖·‖ ≥ 1`), `G_2` (arg in `[120°, 180°)`, outside the lens of its round). The `S_0`–`G_2` pair: `dist² = s² + r² − 2 s r cos δ`, `δ ∈ (60°, 90°)` forces `β < 150°` and the gap condition `r ≥ 2 sin β`, so `r sin δ ≥ 2 sin β sin(β − 60°) = 1/2 − cos(2β − 60°) > 1`. Diameter `< 1` of `Q_4 ∩ {‖·‖ ≥ 1}`: that set lies in the Reuleaux triangle on `e(−30°), e(30°), √3`; a Cartesian reduction `3(P + Q − 1) ≤ 2(P + u)(Q + v) − 6uv` with `4u² + 2Pu + P² − 3P < 0` is a candidate for `nlinarith`. **`sixFrag_nonSiamese` also needs each of `S_0`, `Q_4`, `G_2` (cut at `3/2`) to be connected** (else two tiles of one region are a Siamese pair): `Q_4` is `{1 < r < min(3/2, 2cos(φ − a), 2cos(φ − b))}`, a convex set in `(r, φ)`; `G_2` is `{max(1, h(φ)) ≤ r < 3/2}` over an angular interval. The plan's "M on the same pair lemmas" misses this. |
 | `RingGerm` (2) | `four_of_bothKind`, `flank_edge_exists` | `four_of_bothKind`: above. `flank_edge_exists`: the cone of `t` at `y` ends at `δ = ψ + 210°` (`flank_cone`), so `δ` is a branch direction of an arc through `y` (else a sector about `δ` lies in `interiorPts`, in one tile, and the cone passes `δ`); the arc piece and `B ⊆ closure t` need the regions between consecutive branches at `y` (local sectors), which `GoodAt` supports: branches are initial pieces of the curves through `y`. |
 
+## Stage 6 — SAVED (FS131-I3f): readback; `sixCol_locallyConstant` proved; rotation lemmas; routes for the other four
+
+**Readback.** Both brief quotations match their sources (plan § 7.2 "It may: add lemmas..."; this record's Stage 5 "9 sorry declarations at the start, 5 now"). The branch was `4f7b949d`; it builds
+(`build/gate/build/20261004T111604Z-3008927.log`: "build: OK", exactly 5 `declaration uses sorry` warnings, so item 112's `RingGerm` statements compile). I may add children anywhere in the
+wave's modules and foundation lemmas; I may not change a § 5 statement or a definition of `LocalMap`, `CircleColouring`, `SixFragment`; no axiom, no `native_decide`.
+Open at this stage: 4 `sorry`: `sixFrag_valid`, `sixFrag_nonSiamese`, `four_of_bothKind`, `flank_edge_exists`. (`LocalStructure`'s docstring slip is not yet fixed: do it last.)
+
+**Proved: `sixCol_locallyConstant`** (statement unchanged). Route, different from I3e's table: the lens formulation. For `‖x‖ ≥ 1`, `sixCol x` is `m + 2` if `x` lies in *some* lens `m`
+(`sixCol_of_lens`, via `sixRound_of_lens`: a lens point outside the open disc has round index `m + 6k`), else `⌊arg/60°⌋ + 4`. Lenses are open, so no round-discontinuity analysis is needed.
+Off every lens, `exists_one_lt_dist_of_not_lens` says some lens distance exceeds 1 unless the point is on a lens side (`mem_arcs_of_lens_boundary₁/₂`, from `lens_boundary_core`: a
+point on the circle about `e(-30°)`, outside the unit disc and in the closed disc about `e(30°)`, is `e(-30°) + e(ψ)`, `ψ ∈ [30°, 90°]`; transported to every index by rotation and to the second family by conjugation).
+`eventually_floor_arg` handles floors; integer `arg/60°` outside the disc forces a lens (`r < 3/2 < √3`), so the floor is read only off the negative axis.
+Children (all `HadwigerNelson.Plane.*`, in `SixFragment`): `e_add_int_mul_two_pi`, `inSixLens_add_six`, `dist_polar_lt_one_iff`, `dist_polar_eq_one_iff`, `eq_norm_mul_e_arg`,
+`exists_int_abs_lt_of_half_lt_cos`, `sixRound_of_lens`, `sixCol_of_lens`, `e_pi_div_six`, `e_neg_pi_div_six`, `re_nonneg_aux`, `lens_boundary_core`, `exists_fin_six_rep`, `mem_arcs_side₁/₂`,
+`e_zero`, `conj_e`, `dist_rot`, `mem_arcs_of_norm_eq_one`, `mem_arcs_radial`, `inSixLens_reduce`, `exists_one_lt_dist_of_not_lens`, `eventually_floor_arg`; `dist_polar_sq`, `arg_polar`, `norm_polar` moved up (positions only).
+Also proved, for the rest of `sixFrag_valid`/`sixFrag_nonSiamese`: `exists_int_of_e_eq_e`, `arg_rot`, `inSixLens_rot`, `sixCol_rot` (rotation by `60° k` adds `k` to the colour), `e_ne_zero'`, `dist_rot_left`.
+Axioms: scratch only (`lake env lean`), not the gate; the stage build log is `data/fs131/i3/build-stage6b.log`.
+
+**Routes derived for the four open leaves (worked out, not yet written).**
+* `sixFrag_valid`. Rotate to colour 0 with `sixCol_rot` (`k = -c`); `mem_arcs_rot` (rotation by `60° k` preserves `⋃ arcs`, from `mem_arcs_radial`, `mem_arcs_of_norm_eq_one`, `mem_arcs_side₁/₂` at the shifted index) makes interior points rotate to interior points.
+  Classify interior colour-0 points as `S` (`r<1`, `arg ∈ (0,60°)`), `Q` (`1<r<3/2`, in lens `-2`: `dist x e(-150°)<1`, `dist x e(-90°)<1`), `G` (`1<r<3/2`, `arg ∈ (120°,180°)`, `dist x e(90°)>1`, `dist x e(210°)>1`); strictness from `exists_one_lt_dist_of_not_lens` and the radial arcs.
+  Pairs, all with non-strict bounds (then openness of the pieces upgrades `≤ 1`/`≥ 1` to `≠ 1`: move one point toward/away from the other):
+  `SS`: polar, `r²+s²-2rs·cos > r²+s²-rs`, `(1-r²)(1-s²)>0`. `SQ`: `cos(φ-φ') ≤ 0`. `SG`: `|x-y| ≥ ⟨y-x,n⟩`, `n = e(150°)` for `arg y < 150°` (`2 sinβ cos(150°-β) = 1/2 + sin(2β-150°) ≥ 1`), `n = ŷ` otherwise.
+  `QG`: `⟨x-c, y-c⟩ ≤ 0` at `c = e(210°)`, so `|x-y| ≥ |y-c| ≥ 1`: from `Q` get `w=x-c` with `w₂ ≤ 0`, `√3 w₁ ≥ w₂`; from `G` get `u=y-c` with `u₁ ≤ 0` (`4 sinβ |cosβ| = 2|sin 2β| ≥ √3`) and `√3u₂+u₁ ≥ 0` (uses `t < 3/2 < √3`).
+  `GG`: `dist² ≤ (r-r')²+2rr'(1-cos(u+u'))`, `sin u < 0.32` from `sin(u+30°) < 3/4`, corners `(1.5,1.5)`: `0.92`. `QQ` (the hard one): with `u=|φ|`, `r ≤ 2cos(u+30°)`, show `r²+r'²-2rr'cos(u+u') ≤ 1`: convexity in `r, r'` reduces to four corners; `(1,1)`, `(1,L')` are `cos` monotonicity;
+  `(L,L')` is `2 + 4cos(σ+60°)cosδ - 2cos(2σ-60°) ≤ 0` with `σ = α+β`, `δ = α-β`, `|δ| ≤ min(σ-60°, 120°-σ)` (equality along `σ ≥ 90°`, `1 - 2sin(2σ-30°) ≤ 0` for `σ ≤ 90°`).
+  nlinarith alone fails on `QQ` and on the sector cross lemma (tried; the LP certificate finder `tools/fs131_i3_cert.py` found none at product degree 3 either: squares are needed).
+* `sixFrag_nonSiamese`. Pieces `P_c = rot^c P_0` of the three colour-0 pieces; `P` open, connected, in `interiorPts`, equal to a tile (connected-in-interior and meets a tile); two tiles in different pieces have a far pair (`1/2·e(30°)`, `6/5·e(-120°)`, `6/5·e(150°)` give `≥ 1` distances), in one piece they are equal.
+  Connectedness: `S` convex; `Q`, `G` as images of `J × (0,1)` under `(φ,s) ↦ (ℓ(φ)+s(u(φ)-ℓ(φ))) e(φ)` (`J` ord-connected: `G`'s `{ℓ<3/2}` by monotonicity of `2 sin φ`, `2cos(φ-210°)`).
+* `four_of_bothKind`. Needs `c ≠ c'` (from the two cone inclusions of `IsRingArc`, disjoint mod `2π` since `ℓ>0`), then the disjoint-interior lemma: for distinct tiles at `z ∈ dom`, `coneAt T z` and `coneAt T' z` share no open interval. Route: for a direction `β` not tangent to any arc curve through `z`
+  (`⟨e β, b_a⟩ ≠ 0` for `(κ_a, b_a) = a.curveData z`, finitely many bad `β` mod `π`), the sector `{z + s e(β'), |β'-β|<η, 0<s<ρ}` misses every `curveAt z κ b` (for `κ s = 2⟨e β', b⟩` has no small solution), is convex, lies in `interiorPts` (`GoodAt`), hence in one tile, which then contains every tile meeting it.
+  Then the four colours `c, c', d₁, d₂` (`d₁ ≠ d₂` since a common interval cone would contain the cone of `c` or of `c'`).
+* `flank_edge_exists`. Same sector machinery: if no arc through `y` leaves in direction `δ`, a sector about `δ` is interior and in `t`, contradicting `cone ⊆ [ψ+30°, ψ+210°]`; then the arc piece and `B ⊆ closure t` from the neighbouring sector. **`localSectors` (inventory item 126) is not stated and not needed by this route** as far as it goes (it uses `GoodAt`, `curveAt` and a generic-direction sector lemma instead); wave 4's implementer should state it after wave 3 lands.
+
+## Theorems this phase proved (FS131-I3f)
+
+Scratch audit only, not the gate; statements as the skeleton gave them. **FS116-Y2-SIXFRAG**, one clause: `HadwigerNelson.Plane.sixCol_locallyConstant` (`[propext, Classical.choice, Quot.sound]` expected; to be read from the gate log), so `sixFrag` itself is now free of its own `sorry`.
+
 ## Theorems this phase proved (FS131-I3e)
 
 Declarations `HadwigerNelson.Plane.ArcMap.*` unless marked; all `[propext, Classical.choice, Quot.sound]` (scratch `#print axioms`; the gate log is still to be read); statements as the skeleton gave them.
@@ -291,7 +329,7 @@ statements as the skeleton gave them (none changed). Read against `plans/FS131-w
 
 ## Drafts for the front page
 
-None yet: 5 `sorry` remain, so the gate has not run. (The build above is the iteration check, not the gate.)
+None yet: 4 `sorry` remain, so the gate has not run. (The build above is the iteration check, not the gate.)
 
 ## Build
 
