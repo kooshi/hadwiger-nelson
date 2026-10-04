@@ -4591,13 +4591,305 @@ theorem exists_near_hcFace (z : ℂ) : ∃ m n : ℤ, dist z (hcFace m n) ≤ hc
     _ ≤ hcL * 1 := mul_le_mul_of_nonneg_left hx hL.le
     _ = hcL := mul_one _
 
+/-- **The up triangle in one edge frame**: `t ≥ 2` and `√3 |s| ≤ 2 + √3/2 − t`. -/
+theorem mem_hcUpTri_iff_frame {m n : ℤ} (j : Fin 3) {z : ℂ} :
+    z ∈ hcUpTri m n ↔ 2 ≤ hcFrameT m n j z ∧ √3 * |hcFrameS m n j z| ≤ 2 + √3 / 2 - hcFrameT m n j z := by
+  have h3 : √3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have h3p : 0 < √3 := by positivity
+  rw [mem_hcUpTri_iff, Fin.forall_fin_succ, Fin.forall_fin_succ, Fin.forall_fin_one]
+  obtain ⟨⟨T0, S0⟩, ⟨T1, S1⟩, ⟨T2, S2⟩⟩ := hcFrame_explicit m n z
+  simp only [Fin.succ_zero_eq_one, Fin.succ_one_eq_two]
+  rw [T0, T1, T2]
+  have key : ∀ x c : ℝ, √3 * |x| ≤ c ↔ √3 * x ≤ c ∧ -(√3 * x) ≤ c := fun x c => by
+    constructor
+    · intro h; exact ⟨by nlinarith [le_abs_self x], by nlinarith [neg_abs_le x]⟩
+    · rintro ⟨h1, h2⟩; rcases abs_cases x with ⟨h, -⟩ | ⟨h, -⟩ <;> rw [h] <;> linarith
+  fin_cases j <;> simp only [Fin.zero_eta, Fin.mk_one, Fin.reduceFinMk, Fin.isValue]
+  · rw [T0, S0, key]
+    constructor
+    · rintro ⟨h0, h1, h2⟩; refine ⟨h0, ⟨?_, ?_⟩⟩ <;> nlinarith
+    · rintro ⟨h0, h1, h2⟩; refine ⟨h0, ?_, ?_⟩ <;> nlinarith
+  · rw [T1, S1, key]
+    constructor
+    · rintro ⟨h0, h1, h2⟩; refine ⟨h1, ⟨?_, ?_⟩⟩ <;> nlinarith
+    · rintro ⟨h1, h2, h3'⟩; refine ⟨?_, h1, ?_⟩ <;> nlinarith
+  · rw [T2, S2, key]
+    constructor
+    · rintro ⟨h0, h1, h2⟩; refine ⟨h2, ⟨?_, ?_⟩⟩ <;> nlinarith
+    · rintro ⟨h2, h4, h5⟩; refine ⟨?_, ?_, h2⟩ <;> nlinarith
+
+/-- **The down triangle across edge `j`, in that edge's frame**: `t ≤ 0` and `√3 |s| ≤ √3/2 + t`. -/
+theorem mem_hcDownTri_iff_frame {m n : ℤ} (j : Fin 3) {z : ℂ} :
+    z ∈ hcDownTri (hcDn m n j).1 (hcDn m n j).2 ↔ hcFrameT m n j z ≤ 0 ∧ √3 * |hcFrameS m n j z| ≤ √3 / 2 + hcFrameT m n j z := by
+  rw [mem_hcDownTri_iff, mem_hcUpTri_iff_frame j, (hcFrame_dn m n j z).1, (hcFrame_dn m n j z).2, abs_neg]
+  constructor
+  · rintro ⟨h1, h2⟩; exact ⟨by linarith, by linarith⟩
+  · rintro ⟨h1, h2⟩; exact ⟨by linarith, by linarith⟩
+
+/-- The up centroids around a face centre: `O + L`, `O + L e(2π/3)`, `O + L e(4π/3)`. -/
+theorem hcUpC_around (m n : ℤ) :
+    hcUpC m n = hcFace m n + ((hcL : ℝ) : ℂ) ∧
+      hcUpC (m - 1) (n + 1) = hcFace m n + ((-(hcL / 2) : ℝ) : ℂ) + ((hcL * √3 / 2 : ℝ) : ℂ) * I ∧
+      hcUpC (m - 1) n = hcFace m n + ((-(hcL / 2) : ℝ) : ℂ) + ((-(hcL * √3 / 2)) : ℝ) * I := by
+  have hω := e_pi_div_three
+  refine ⟨rfl, ?_, ?_⟩
+  · rw [hcUpC, hcFace_eq_tri, hcFace_eq_tri, tri, tri, hω]
+    push_cast
+    ring
+  · rw [hcUpC, hcFace_eq_tri, hcFace_eq_tri, tri, tri, hω]
+    push_cast
+    ring
+
+/-- **The six edge frames around a face**, in Cartesian coordinates `(x, y) = z − O`: the edges `(m, n, 1)` (at 30°),
+`(m − 1, n + 1, 0)` (90°), `(m − 1, n + 1, 2)` (150°), `(m − 1, n, 1)` (210°), `(m − 1, n, 0)` (270°), `(m, n, 2)` (330°). -/
+theorem hcFrame_face (m n : ℤ) (z : ℂ) :
+    (hcFrameT m n 1 z = 1 + (z - hcFace m n).re / 2 - √3 / 2 * (z - hcFace m n).im ∧
+      hcFrameS m n 1 z = √3 / 2 * (z - hcFace m n).re + (z - hcFace m n).im / 2 - (√3 + 1 / 2)) ∧
+    (hcFrameT m n 2 z = 1 + (z - hcFace m n).re / 2 + √3 / 2 * (z - hcFace m n).im ∧
+      hcFrameS m n 2 z = -(√3 / 2 * (z - hcFace m n).re) + (z - hcFace m n).im / 2 + (√3 + 1 / 2)) ∧
+    (hcFrameT (m - 1) (n + 1) 0 z = 1 - (z - hcFace m n).re ∧
+      hcFrameS (m - 1) (n + 1) 0 z = -(z - hcFace m n).im + (√3 + 1 / 2)) ∧
+    (hcFrameT (m - 1) (n + 1) 2 z = 1 + (z - hcFace m n).re / 2 + √3 / 2 * (z - hcFace m n).im ∧
+      hcFrameS (m - 1) (n + 1) 2 z = -(√3 / 2 * (z - hcFace m n).re) + (z - hcFace m n).im / 2 - (√3 + 1 / 2)) ∧
+    (hcFrameT (m - 1) n 1 z = 1 + (z - hcFace m n).re / 2 - √3 / 2 * (z - hcFace m n).im ∧
+      hcFrameS (m - 1) n 1 z = √3 / 2 * (z - hcFace m n).re + (z - hcFace m n).im / 2 + (√3 + 1 / 2)) ∧
+    (hcFrameT (m - 1) n 0 z = 1 - (z - hcFace m n).re ∧
+      hcFrameS (m - 1) n 0 z = -(z - hcFace m n).im - (√3 + 1 / 2)) := by
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  obtain ⟨o1, o2, o3⟩ := hcUpC_around m n
+  set x := (z - hcFace m n).re
+  set y := (z - hcFace m n).im
+  have r1 : (z - hcUpC m n).re = x - hcL ∧ (z - hcUpC m n).im = y := by
+    rw [o1]; constructor <;> simp [x, y]; ring
+  have r2 : (z - hcUpC (m - 1) (n + 1)).re = x + hcL / 2 ∧ (z - hcUpC (m - 1) (n + 1)).im = y - hcL * √3 / 2 := by
+    rw [o2]; constructor <;> simp [x, y] <;> ring
+  have r3 : (z - hcUpC (m - 1) n).re = x + hcL / 2 ∧ (z - hcUpC (m - 1) n).im = y + hcL * √3 / 2 := by
+    rw [o3]; constructor <;> simp [x, y] <;> ring
+  obtain ⟨-, ⟨T1, S1⟩, ⟨T2, S2⟩⟩ := hcFrame_explicit m n z
+  obtain ⟨⟨T0', S0'⟩, -, ⟨T2', S2'⟩⟩ := hcFrame_explicit (m - 1) (n + 1) z
+  obtain ⟨⟨T0'', S0''⟩, ⟨T1'', S1''⟩, -⟩ := hcFrame_explicit (m - 1) n z
+  simp only [r1.1, r1.2] at T1 S1 T2 S2
+  simp only [r2.1, r2.2] at T0' S0' T2' S2'
+  simp only [r3.1, r3.2] at T0'' S0'' T1'' S1''
+  unfold hcL at *
+  have h3' : √3 * √3 * √3 = 3 * √3 := by rw [h3]
+  refine ⟨⟨?_, ?_⟩, ⟨?_, ?_⟩, ⟨?_, ?_⟩, ⟨?_, ?_⟩, ⟨?_, ?_⟩, ⟨?_, ?_⟩⟩
+  · rw [T1]; linarith
+  · rw [S1]; linarith
+  · rw [T2]; linarith
+  · rw [S2]; linarith
+  · rw [T0']; linarith
+  · rw [S0']; linarith
+  · rw [T2']; linarith
+  · rw [S2']; linarith
+  · rw [T1'']; linarith
+  · rw [S1'']; linarith
+  · rw [T0'']; linarith
+  · rw [S0'']; linarith
+
+/-- `√3 |v| ≤ u` from its two linear halves. -/
+theorem sqrt3_mul_abs_le {v u : ℝ} (h1 : √3 * v ≤ u) (h2 : -(√3 * v) ≤ u) : √3 * |v| ≤ u := by
+  rcases abs_cases v with ⟨h, -⟩ | ⟨h, -⟩ <;> rw [h] <;> linarith
+
+/-- **The six cones about a face**: every point lies in the 60° cone about one of the six edge directions at its face
+centre, read in that edge's frame (`O = (ε(√3 + 1/2), 1)`, the cone `√3 |t − 1| ≤ √3 + 1/2 − ε s`). -/
+theorem hc_face_cone (m n : ℤ) (z : ℂ) : ∃ (m' n' : ℤ) (j : Fin 3) (ε : ℝ), (ε = 1 ∨ ε = -1) ∧
+    hcFrame m' n' j (ε * (√3 + 1 / 2)) 1 = hcFace m n ∧
+    √3 * |hcFrameT m' n' j z - 1| ≤ √3 + 1 / 2 - ε * hcFrameS m' n' j z := by
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have h3p : 0 < √3 := by positivity
+  obtain ⟨⟨T1, S1⟩, ⟨T2, S2⟩, ⟨T3, S3⟩, ⟨T4, S4⟩, ⟨T5, S5⟩, ⟨T6, S6⟩⟩ := hcFrame_face m n z
+  obtain ⟨⟨O1, P1⟩, ⟨O2, P2⟩, ⟨O3, P3⟩, ⟨O4, P4⟩, ⟨O5, P5⟩, ⟨O6, P6⟩⟩ := hcFrame_face m n (hcFace m n)
+  simp only [sub_self, zero_re, zero_im, zero_div, mul_zero, add_zero, sub_zero, neg_zero, zero_add] at O1 P1 O2 P2 O3 P3 O4 P4 O5 P5 O6 P6
+  have face : ∀ {a b : ℤ} {k : Fin 3} {ε : ℝ}, hcFrameS a b k (hcFace m n) = ε * (√3 + 1 / 2) →
+      hcFrameT a b k (hcFace m n) = 1 → hcFrame a b k (ε * (√3 + 1 / 2)) 1 = hcFace m n := by
+    intro a b k ε hs ht
+    rw [← hs, ← ht]; exact hcFrame_hcFrameST a b k _
+  set x := (z - hcFace m n).re
+  set y := (z - hcFace m n).im
+  have hx3 : √3 * (√3 * x) = 3 * x := by rw [← mul_assoc, h3]
+  have hy3 : √3 * (√3 * y) = 3 * y := by rw [← mul_assoc, h3]
+  clear_value x y
+  rcases le_or_gt 0 y with hy | hy
+  · rcases le_or_gt y (√3 * x) with hx | hx
+    · refine ⟨m, n, 1, -1, Or.inr rfl, face (by rw [P1]; ring) O1, ?_⟩
+      rw [T1, S1]; apply sqrt3_mul_abs_le <;> linarith
+    · rcases le_or_gt (-y) (√3 * x) with hx' | hx'
+      · refine ⟨m - 1, n + 1, 0, 1, Or.inl rfl, face (by rw [P3]; ring) O3, ?_⟩
+        rw [T3, S3]; apply sqrt3_mul_abs_le <;> linarith
+      · refine ⟨m - 1, n + 1, 2, -1, Or.inr rfl, face (by rw [P4]; ring) O4, ?_⟩
+        rw [T4, S4]; apply sqrt3_mul_abs_le <;> linarith
+  · rcases le_or_gt 0 (√3 * x + y) with hx | hx
+    · refine ⟨m, n, 2, 1, Or.inl rfl, face (by rw [P2]; ring) O2, ?_⟩
+      rw [T2, S2]; apply sqrt3_mul_abs_le <;> linarith
+    · rcases le_or_gt (√3 * x) y with hx' | hx'
+      · refine ⟨m - 1, n, 1, 1, Or.inl rfl, face (by rw [P5]; ring) O5, ?_⟩
+        rw [T5, S5]; apply sqrt3_mul_abs_le <;> linarith
+      · refine ⟨m - 1, n, 0, -1, Or.inr rfl, face (by rw [P6]; ring) O6, ?_⟩
+        rw [T6, S6]; apply sqrt3_mul_abs_le <;> linarith
+
+/-- The real inequality behind the cone's triangle cases: in the cone `√3 a ≤ u` within `L` of the face, beyond the band
+(`a > 1`), the point is inside the triangle (`√3 |c − u| ≤ 1 + √3/2 − a`, `c = √3 + 1/2`). -/
+theorem hc_cone_tri_aux {u a : ℝ} (hcone : √3 * a ≤ u) (hL : u ^ 2 + a ^ 2 ≤ hcL ^ 2) (ha : 1 < a) :
+    √3 * |√3 + 1 / 2 - u| ≤ 1 + √3 / 2 - a := by
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have h3p : 0 < √3 := by positivity
+  have h17 : (1.7 : ℝ) < √3 := by nlinarith
+  have h18 : √3 < 1.8 := by nlinarith
+  have hu : 3 * a ≤ √3 * u := by nlinarith
+  have hL2 : hcL ^ 2 = 13 / 3 + 4 * √3 / 3 := by unfold hcL; ring_nf; rw [Real.sq_sqrt (by norm_num)]; ring
+  have h2 : √3 * u + a ≤ 4 + √3 := by
+    nlinarith [sq_nonneg (u - √3 * a), sq_nonneg (√3 * u + a - (4 + √3))]
+  apply sqrt3_mul_abs_le <;> nlinarith
+
+/-- **B1 in a cone**: inside the 60° cone of an edge about a face, within `L` of the face, a point is within `3/2` of the
+face, in the up or the down triangle, in the edge's slab `|s| ≤ 1/2, 0 ≤ t ≤ 2`, or strictly within `1` of a near corner
+`(ε/2, τ)`, `τ ∈ {0, 1, 2}` (a vertex of a triangle or an end of the segment), on the face's side `ε s > 1/2`. -/
+theorem hc_cone_cover {m n : ℤ} {j : Fin 3} {ε : ℝ} (hε : ε = 1 ∨ ε = -1) {z : ℂ}
+    (hcone : √3 * |hcFrameT m n j z - 1| ≤ √3 + 1 / 2 - ε * hcFrameS m n j z)
+    (hL : dist z (hcFrame m n j (ε * (√3 + 1 / 2)) 1) ≤ hcL) :
+    dist z (hcFrame m n j (ε * (√3 + 1 / 2)) 1) ≤ 3 / 2 ∨ z ∈ hcUpTri m n ∨
+      z ∈ hcDownTri (hcDn m n j).1 (hcDn m n j).2 ∨
+      (|hcFrameS m n j z| ≤ 1 / 2 ∧ 0 ≤ hcFrameT m n j z ∧ hcFrameT m n j z ≤ 2) ∨
+      (1 / 2 < ε * hcFrameS m n j z ∧ ∃ τ : ℝ, (τ = 0 ∨ τ = 1 ∨ τ = 2) ∧ dist z (hcFrame m n j (ε / 2) τ) < 1) := by
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have h3p : 0 < √3 := by positivity
+  have h17 : (1.7 : ℝ) < √3 := by nlinarith
+  have h18 : √3 < 1.8 := by nlinarith
+  have hε2 : ε * ε = 1 := by rcases hε with rfl | rfl <;> norm_num
+  have hdist : ∀ a b : ℝ, dist z (hcFrame m n j a b) = √((hcFrameS m n j z - a) ^ 2 + (hcFrameT m n j z - b) ^ 2) := by
+    intro a b
+    rw [dist_eq_hcFrame m n j, (hcFrame_coords m n j a b).1, (hcFrame_coords m n j a b).2]
+  rw [hdist] at hL ⊢
+  set s := hcFrameS m n j z with hs
+  set t := hcFrameT m n j z with ht
+  set u := √3 + 1 / 2 - ε * s with hu
+  have hsu : (s - ε * (√3 + 1 / 2)) ^ 2 = u ^ 2 := by
+    have : s - ε * (√3 + 1 / 2) = -ε * u := by rw [hu]; linear_combination (-s) * hε2
+    rw [this]; linear_combination u ^ 2 * hε2
+  rw [hsu] at hL ⊢
+  have hL0 : 0 ≤ hcL := by unfold hcL; positivity
+  have hL2 : u ^ 2 + (t - 1) ^ 2 ≤ hcL ^ 2 := by
+    have := (Real.sqrt_le_left hL0).1 hL; linarith
+  have hu0 : 0 ≤ u := le_trans (by positivity) hcone
+  have hv3 : 3 * (t - 1) ^ 2 ≤ u ^ 2 := by
+    have h1 : (√3 * |t - 1|) ^ 2 ≤ u ^ 2 := pow_le_pow_left₀ (by positivity) hcone 2
+    rw [mul_pow, Real.sq_sqrt (by norm_num), sq_abs] at h1; exact h1
+  rcases le_or_gt (u ^ 2 + (t - 1) ^ 2) (9 / 4) with hd | hd
+  · left
+    exact Real.sqrt_le_iff.2 ⟨by norm_num, by linarith⟩
+  have hu1 : 27 / 16 < u ^ 2 := by linarith
+  have hLu : u ≤ hcL := (pow_le_pow_iff_left₀ hu0 hL0 two_ne_zero).1 (by nlinarith [sq_nonneg (t - 1)])
+  have hLv : hcL < √3 + 1 := by unfold hcL; linarith
+  have hu3 : 3 * √3 / 4 < u := by
+    by_contra h
+    push Not at h
+    have := pow_le_pow_left₀ hu0 h 2
+    rw [div_pow, mul_pow, Real.sq_sqrt (by norm_num)] at this
+    linarith
+  rcases le_or_gt |t - 1| 1 with hv | hv
+  · rcases le_or_gt |s| (1 / 2) with hs1 | hs1
+    · right; right; right; left
+      exact ⟨hs1, by linarith [neg_abs_le (t - 1)], by linarith [le_abs_self (t - 1)]⟩
+    · right; right; right; right
+      have hes : |ε * s| = |s| := by rw [abs_mul]; rcases hε with rfl | rfl <;> simp
+      have hes1 : 1 / 2 < ε * s := by
+        rcases abs_cases (ε * s) with ⟨h, -⟩ | ⟨h, -⟩
+        · rw [← hes, h] at hs1; exact hs1
+        · rw [← hes, h] at hs1; linarith
+      refine ⟨hes1, ?_⟩
+      have hw : (s - ε / 2) ^ 2 < 3 / 16 := by
+        have e1 : (s - ε / 2) ^ 2 = (√3 - u) ^ 2 := by
+          rw [hu]; linear_combination (1 / 4 - s ^ 2) * hε2
+        have hp : 0 ≤ √3 - u := by linarith
+        have hl : √3 - u < √3 / 4 := by linarith
+        rw [e1]
+        have := pow_lt_pow_left₀ hl hp two_ne_zero
+        rw [div_pow, Real.sq_sqrt (by norm_num)] at this
+        linarith
+      have key : ∀ τ : ℝ, -(1 / 2) ≤ t - τ → t - τ ≤ 1 / 2 → dist z (hcFrame m n j (ε / 2) τ) < 1 := by
+        intro τ h1 h2
+        have := sq_le_sq' h1 h2
+        rw [hdist]
+        exact (Real.sqrt_lt' one_pos).2 (by linarith)
+      obtain ⟨hv1, hv2⟩ := abs_le.1 hv
+      rcases le_or_gt (t - 1) (-1 / 2) with h1 | h1
+      · exact ⟨0, Or.inl rfl, key 0 (by linarith) (by linarith)⟩
+      · rcases le_or_gt (t - 1) (1 / 2) with h2 | h2
+        · exact ⟨1, Or.inr (Or.inl rfl), key 1 (by linarith) (by linarith)⟩
+        · exact ⟨2, Or.inr (Or.inr rfl), key 2 (by linarith) (by linarith)⟩
+  · have hes : |s| = |√3 + 1 / 2 - u| := by
+      rw [hu, show √3 + 1 / 2 - (√3 + 1 / 2 - ε * s) = ε * s by ring, abs_mul]
+      rcases hε with rfl | rfl <;> simp
+    have hcone' : √3 * |t - 1| ≤ u := hcone
+    have hL' : u ^ 2 + |t - 1| ^ 2 ≤ hcL ^ 2 := by rw [sq_abs]; exact hL2
+    have htri := hc_cone_tri_aux hcone' hL' hv
+    rw [← hes] at htri
+    rcases abs_cases (t - 1) with ⟨h, h'⟩ | ⟨h, h'⟩
+    · right; left
+      rw [h] at htri hv
+      exact (mem_hcUpTri_iff_frame j).2 ⟨by linarith, by linarith⟩
+    · right; right; left
+      rw [h] at htri hv
+      exact (mem_hcDownTri_iff_frame j).2 ⟨by linarith, by linarith⟩
+
+/-- **B1, refined**: every point is within `3/2` of a face centre, or in an up or a down triangle, or in an edge's slab
+`|s| ≤ 1/2, 0 ≤ t ≤ 2`, or strictly within `1` of a corner `(ε/2, τ)` of an edge's frame on the side `ε s > 1/2`. -/
+theorem hc_cover (z : ℂ) : (∃ m n : ℤ, dist z (hcFace m n) ≤ 3 / 2) ∨ ∃ (m n : ℤ) (j : Fin 3),
+    z ∈ hcUpTri m n ∨ z ∈ hcDownTri (hcDn m n j).1 (hcDn m n j).2 ∨
+      (|hcFrameS m n j z| ≤ 1 / 2 ∧ 0 ≤ hcFrameT m n j z ∧ hcFrameT m n j z ≤ 2) ∨
+      ∃ ε : ℝ, (ε = 1 ∨ ε = -1) ∧ 1 / 2 < ε * hcFrameS m n j z ∧
+        ∃ τ : ℝ, (τ = 0 ∨ τ = 1 ∨ τ = 2) ∧ dist z (hcFrame m n j (ε / 2) τ) < 1 := by
+  obtain ⟨m, n, hO⟩ := exists_near_hcFace z
+  obtain ⟨m', n', j, ε, hε, hface, hcone⟩ := hc_face_cone m n z
+  rw [← hface] at hO
+  rcases hc_cone_cover hε hcone hO with h | h | h | h | ⟨h1, h2⟩
+  · exact Or.inl ⟨m, n, hface ▸ h⟩
+  · exact Or.inr ⟨m', n', j, Or.inl h⟩
+  · exact Or.inr ⟨m', n', j, Or.inr (Or.inl h)⟩
+  · exact Or.inr ⟨m', n', j, Or.inr (Or.inr (Or.inl h))⟩
+  · exact Or.inr ⟨m', n', j, Or.inr (Or.inr (Or.inr ⟨ε, hε, h1, h2⟩))⟩
+
+/-- The up triangle's side `t = 2`, `|s| ≤ 1/2`, in each of its frames. -/
+theorem hcFrame_mem_hcUpTri {m n : ℤ} (j : Fin 3) {s : ℝ} (hs : |s| ≤ 1 / 2) : hcFrame m n j s 2 ∈ hcUpTri m n := by
+  rw [mem_hcUpTri_iff_frame j, (hcFrame_coords m n j s 2).1, (hcFrame_coords m n j s 2).2]
+  exact ⟨le_rfl, by nlinarith [Real.sqrt_nonneg 3]⟩
+
+/-- The down triangle's side `t = 0`, `|s| ≤ 1/2`, in the frame of the edge it faces. -/
+theorem hcFrame_mem_hcDownTri {m n : ℤ} (j : Fin 3) {s : ℝ} (hs : |s| ≤ 1 / 2) :
+    hcFrame m n j s 0 ∈ hcDownTri (hcDn m n j).1 (hcDn m n j).2 := by
+  rw [mem_hcDownTri_iff_frame j, (hcFrame_coords m n j s 0).1, (hcFrame_coords m n j s 0).2]
+  exact ⟨le_rfl, by nlinarith [Real.sqrt_nonneg 3]⟩
+
+/-- The segment's points in its frame. -/
+theorem hcFrame_mem_hcSeg {m n : ℤ} (j : Fin 3) {s : ℝ} (hs : |s| ≤ 1 / 2) : hcFrame m n j s 1 ∈ hcSeg m n j :=
+  ⟨s, ⟨by linarith [neg_abs_le s], by linarith [le_abs_self s]⟩, rfl⟩
+
+/-- `|ε/2| = 1/2` for `ε = ±1`. -/
+theorem abs_half_sign {ε : ℝ} (hε : ε = 1 ∨ ε = -1) : |ε / 2| = 1 / 2 := by
+  rcases hε with rfl | rfl <;> norm_num
+
 /-- **B1, the sausage cover (flat skeleton)**: every point is within `1` of a flat triangle or a segment, or within `3/2` of a face
 centre — the fundamental triangle `O C M` with H3's quadrilateral `Q ⊆ B̄(v, 1) ∪ B̄(e, 1)`, carried around each face by the 60°
 rotations (`exists_near_hcFace`). -/
 theorem hc_sausage_cover (z : ℂ) :
     (∃ m n : ℤ, infDist z (hcDownTri m n) ≤ 1) ∨ (∃ m n : ℤ, infDist z (hcUpTri m n) ≤ 1) ∨
       (∃ (m n : ℤ) (j : Fin 3), infDist z (hcSeg m n j) ≤ 1) ∨ ∃ m n : ℤ, dist z (hcFace m n) ≤ 3 / 2 := by
-  sorry
+  rcases hc_cover z with ⟨m, n, h⟩ | ⟨m, n, j, h | h | h | ⟨ε, hε, -, τ, hτ, hd⟩⟩
+  · exact Or.inr (Or.inr (Or.inr ⟨m, n, h⟩))
+  · exact Or.inr (Or.inl ⟨m, n, by rw [infDist_zero_of_mem h]; exact zero_le_one⟩)
+  · exact Or.inl ⟨_, _, by rw [infDist_zero_of_mem h]; exact zero_le_one⟩
+  · refine Or.inr (Or.inr (Or.inl ⟨m, n, j, ?_⟩))
+    obtain ⟨hs, ht0, ht2⟩ := h
+    refine (infDist_le_dist_of_mem (hcFrame_mem_hcSeg j hs)).trans ?_
+    rw [dist_eq_hcFrame m n j, (hcFrame_coords m n j _ 1).1, (hcFrame_coords m n j _ 1).2, sub_self]
+    refine Real.sqrt_le_iff.2 ⟨zero_le_one, ?_⟩
+    nlinarith
+  · have hs := (abs_half_sign hε).le
+    rcases hτ with rfl | rfl | rfl
+    · exact Or.inl ⟨_, _, (infDist_le_dist_of_mem (hcFrame_mem_hcDownTri j hs)).trans hd.le⟩
+    · exact Or.inr (Or.inr (Or.inl ⟨m, n, j, (infDist_le_dist_of_mem (hcFrame_mem_hcSeg j hs)).trans hd.le⟩))
+    · exact Or.inr (Or.inl ⟨m, n, (infDist_le_dist_of_mem (hcFrame_mem_hcUpTri j hs)).trans hd.le⟩)
 
 /-- **Lemma NL**: a sliver point `(s, t)`, `2 < t ≤ 2 + g(s)`, is at distance `1` from a point of `cl Λ_e` (of `Λ_e` when
 `t < 2 + g(s)`) — the exterior disc of radius `5/4`, H5's constants. -/
@@ -4857,7 +5149,56 @@ ends, and `K_e = ⋃_{c ∈ Z} T₁((c, 1))`, nowhere dense by Baire on `(Z − 
 theorem hc_free_subset_nowhereDense {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) :
     ∃ K : Set ℂ, IsClosed K ∧ interior K = ∅ ∧ {z | z ∉ hcSet g ∧ phi (interior (hcSet g)) z = 0} ⊆ K := by
-  sorry
+  set A := interior (hcSet g) with hA
+  have hAo : IsOpen A := isOpen_interior
+  refine ⟨{z | ∀ θ : ℝ, z + e θ ∉ A} ∩ Aᶜ, ?_, ?_, ?_⟩
+  · refine IsClosed.inter ?_ hAo.isClosed_compl
+    have : {z | ∀ θ : ℝ, z + e θ ∉ A} = ⋂ θ : ℝ, (fun z => z + e θ) ⁻¹' Aᶜ := by ext; simp
+    rw [this]
+    exact isClosed_iInter fun θ => hAo.isClosed_compl.preimage (continuous_id.add continuous_const)
+  · refine eq_empty_iff_forall_notMem.2 fun z hz => ?_
+    obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.1 isOpen_interior z hz
+    have hzK := interior_subset hz
+    obtain ⟨y, hyH, hzy⟩ := hc_exclusion hZc hZs hZi hl hr hg hzK.2
+    rw [← closure_interior_hcSet hZc hZs hZi hl hr hg] at hyH
+    obtain ⟨w, hwA, hwy⟩ := Metric.mem_closure_iff.1 hyH (min δ (1 / 2)) (lt_min hδ (by norm_num))
+    have hwy' : dist y w < δ := lt_of_lt_of_le hwy (min_le_left _ _)
+    have hwy2 : dist y w < 1 / 2 := lt_of_lt_of_le hwy (min_le_right _ _)
+    set d := dist z w with hd
+    have hd1 : |d - 1| < δ := by
+      have h1 := dist_triangle z y w
+      have h2 := dist_triangle z w y
+      rw [dist_comm w y] at h2
+      rw [abs_lt]; constructor <;> linarith
+    have hd0 : 0 < d := by
+      have h2 := dist_triangle z w y
+      rw [dist_comm w y] at h2
+      linarith
+    set z' : ℂ := w + ((1 / d : ℝ) : ℂ) * (z - w) with hz'
+    have hz'w : dist z' w = 1 := by
+      rw [dist_eq_norm, hz', add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs,
+        abs_of_pos (by positivity), ← dist_eq_norm, ← hd]
+      field_simp
+    have hz'z : dist z' z < δ := by
+      have : z' - z = ((1 / d - 1 : ℝ) : ℂ) * (z - w) := by rw [hz']; push_cast; ring
+      rw [dist_eq_norm, this, norm_mul, Complex.norm_real, Real.norm_eq_abs, ← dist_eq_norm, ← hd]
+      have : |1 / d - 1| * d = |d - 1| := by
+        have e : (1 / d - 1) * d = -(d - 1) := by field_simp; ring
+        rw [← abs_neg (d - 1), ← e, abs_mul, abs_of_pos hd0]
+      linarith
+    have hK := interior_subset (hball (by rw [mem_ball]; exact hz'z))
+    have hα : z' + e (Complex.arg (w - z')) = w := by
+      have h := self_eq_norm_mul_e_arg (w - z')
+      rw [← dist_eq_norm, dist_comm, hz'w, ofReal_one, one_mul] at h
+      rw [← h]; ring
+    exact hK.1 (Complex.arg (w - z')) (by rw [hα]; exact hwA)
+  · rintro z ⟨hzH, hphi⟩
+    refine ⟨fun θ hθ => ?_, fun hzA => hzH (interior_subset hzA)⟩
+    have hd : dist z (z + e θ) = 1 := by
+      rw [dist_eq_norm, sub_add_cancel_left, norm_neg, norm_e]
+    have := phi_pos_of_mem_open hAo.measurableSet hAo subset_rfl hθ hd
+    rw [hphi] at this
+    exact lt_irrefl _ this
 
 /-- **IRREG (3), general**: a set `A′` whose part outside a closed `F` has positive measure and lies a.e. in a closed nowhere
 dense `K` has a support whose frontier has positive measure (density points of `A′ ∖ F` are boundary points of `supp A′`). -/

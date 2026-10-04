@@ -3213,6 +3213,21 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.dist_le_one_of_mem_closure_band
 #print axioms HadwigerNelson.Plane.hcBlock_dist_le_one
 
+-- FS131-I2n: children added by the fourteenth wave-2 implementer
+#print axioms HadwigerNelson.Plane.mem_hcUpTri_iff_frame
+#print axioms HadwigerNelson.Plane.mem_hcDownTri_iff_frame
+#print axioms HadwigerNelson.Plane.hcUpC_around
+#print axioms HadwigerNelson.Plane.hcFrame_face
+#print axioms HadwigerNelson.Plane.sqrt3_mul_abs_le
+#print axioms HadwigerNelson.Plane.hc_face_cone
+#print axioms HadwigerNelson.Plane.hc_cone_tri_aux
+#print axioms HadwigerNelson.Plane.hc_cone_cover
+#print axioms HadwigerNelson.Plane.hc_cover
+#print axioms HadwigerNelson.Plane.hcFrame_mem_hcUpTri
+#print axioms HadwigerNelson.Plane.hcFrame_mem_hcDownTri
+#print axioms HadwigerNelson.Plane.hcFrame_mem_hcSeg
+#print axioms HadwigerNelson.Plane.abs_half_sign
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
