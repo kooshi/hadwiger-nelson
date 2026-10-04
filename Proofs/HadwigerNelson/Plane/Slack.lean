@@ -533,13 +533,6 @@ theorem muPer_le_muTile (k : ℕ) (ε : ℝ) : muPer k ε ≤ muTile k ε := by
 /-- The half-open square window `[z, z + ℓ)²`. -/
 def squareWin (z : ℂ) (ℓ : ℝ) : Set ℂ := {w | z.re ≤ w.re ∧ w.re < z.re + ℓ ∧ z.im ≤ w.im ∧ w.im < z.im + ℓ}
 
-/-- **The window lemma**: a set of upper density above `d` fills some `ℓ`-grid square of side `ℓ` to at least `d`, for
-every integer side `ℓ` (average over the grid squares meeting a large ball `B(0, R)`; `ℓ/R → 0`). -/
-theorem exists_squareWin_dense {S : Set ℂ} (hS : MeasurableSet S) {d : ℝ} (hd : ENNReal.ofReal d < upperDensity S)
-    (ℓ : ℕ) (hℓ : 0 < ℓ) :
-    ∃ p q : ℤ, ENNReal.ofReal (d * (ℓ : ℝ) ^ 2) ≤ volume (S ∩ squareWin ((ℓ * p : ℝ) + (ℓ * q : ℝ) * I) ℓ) := by
-  sorry
-
 /-- Almost every point of a measurable set is kept at every small scale (Lebesgue density: `ae_restrict_mem_densitySet`,
 with `volume_densitySet_diff` and `volume_diff_densitySet`). -/
 theorem ae_eventually_keptAt {A : Set ℂ} (hA : MeasurableSet A) {η : ℝ} (hη : 0 < η) :
@@ -781,6 +774,89 @@ theorem tendsto_sq_add_div (c : ℝ) : Tendsto (fun R : ℝ => ENNReal.ofReal ((
   filter_upwards [eventually_gt_atTop 0] with R hR
   congr 1
   field_simp
+
+/-- **The window lemma**: a set of upper density above `d` fills some `ℓ`-grid square of side `ℓ` to at least `d`, for
+every integer side `ℓ` (average over the grid squares meeting a large ball `B(0, R)`; `ℓ/R → 0`). -/
+theorem exists_squareWin_dense {S : Set ℂ} (hS : MeasurableSet S) {d : ℝ} (hd : ENNReal.ofReal d < upperDensity S)
+    (ℓ : ℕ) (hℓ : 0 < ℓ) :
+    ∃ p q : ℤ, ENNReal.ofReal (d * (ℓ : ℝ) ^ 2) ≤ volume (S ∩ squareWin ((ℓ * p : ℝ) + (ℓ * q : ℝ) * I) ℓ) := by
+  have _ := hS -- idle: the window bound needs no measurability (outer measure suffices)
+  by_contra hcon
+  push Not at hcon
+  have hd0 : 0 ≤ d := by
+    by_contra h
+    push Not at h
+    have h0 := hcon 0 0
+    rw [ENNReal.ofReal_of_nonpos (by nlinarith [sq_nonneg (ℓ : ℝ)])] at h0
+    exact absurd h0 (not_lt.2 bot_le)
+  have hl : (0 : ℝ) < ℓ := by exact_mod_cast hℓ
+  set W : ℤ × ℤ → Set ℂ := fun pq => squareWin ((ℓ * pq.1 : ℝ) + (ℓ * pq.2 : ℝ) * I) ℓ with hW
+  have hWm : ∀ pq, MeasurableSet (W pq) := fun pq => measurableSet_squareWin _ _
+  have hWv : ∀ pq, volume (W pq) = ENNReal.ofReal ((ℓ : ℝ) ^ 2) := fun pq => volume_squareWin _ hl.le
+  have hWS : ∀ pq, volume (S ∩ W pq) ≤ ENNReal.ofReal d * volume (W pq) := by
+    intro pq
+    rw [hWv, ← ENNReal.ofReal_mul hd0]
+    exact (hcon pq.1 pq.2).le
+  have hmemW : ∀ x : ℂ, x ∈ W (⌊x.re / ℓ⌋, ⌊x.im / ℓ⌋) := by
+    intro x
+    have a1 := Int.floor_le (x.re / ℓ)
+    have a2 := Int.lt_floor_add_one (x.re / ℓ)
+    have a3 := Int.floor_le (x.im / ℓ)
+    have a4 := Int.lt_floor_add_one (x.im / ℓ)
+    rw [le_div_iff₀ hl] at a1 a3
+    rw [div_lt_iff₀ hl] at a2 a4
+    simp only [hW, squareWin, mem_setOf_eq, Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im]
+    refine ⟨?_, ?_, ?_, ?_⟩ <;> nlinarith
+  have hdistW : ∀ pq, ∀ x ∈ W pq, ∀ y ∈ W pq, dist x y < 2 * ℓ := by
+    intro pq x hx y hy
+    simp only [hW, squareWin, mem_setOf_eq, Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im] at hx hy
+    rw [dist_eq_norm]
+    calc ‖x - y‖ ≤ |(x - y).re| + |(x - y).im| := Complex.norm_le_abs_re_add_abs_im _
+      _ < ℓ + ℓ := by
+          refine add_lt_add ?_ ?_ <;> rw [abs_lt] <;> simp only [Complex.sub_re, Complex.sub_im] <;>
+            constructor <;> linarith
+      _ = 2 * ℓ := by ring
+  have hdisj : ∀ pq pq' x, x ∈ W pq → x ∈ W pq' → pq = pq' := by
+    have hfl : ∀ (a : ℝ) (m : ℤ), (ℓ : ℝ) * m ≤ a → a < ℓ * m + ℓ → m = ⌊a / ℓ⌋ := by
+      intro a m h1 h2
+      symm; rw [Int.floor_eq_iff, le_div_iff₀ hl, div_lt_iff₀ hl]; constructor <;> linarith
+    intro pq pq' x hx hx'
+    simp only [hW, squareWin, mem_setOf_eq, Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im] at hx hx'
+    simp only [mul_zero, sub_zero, mul_one, zero_add, add_zero] at hx hx'
+    exact Prod.ext ((hfl _ _ hx.1 hx.2.1).trans (hfl _ _ hx'.1 hx'.2.1).symm)
+      ((hfl _ _ hx.2.2.1 hx.2.2.2).trans (hfl _ _ hx'.2.2.1 hx'.2.2.2).symm)
+  have hbound : ∀ R, volume (S ∩ ball 0 R) ≤ ENNReal.ofReal d * volume (ball (0 : ℂ) (R + 2 * ℓ)) := by
+    intro R
+    set I' : Set (ℤ × ℤ) := {pq | W pq ⊆ ball 0 (R + 2 * ℓ)} with hI'
+    have hcount : I'.Countable := Set.to_countable _
+    have hsub : S ∩ ball 0 R ⊆ ⋃ pq ∈ I', S ∩ W pq := by
+      intro x hx
+      refine mem_iUnion₂.2 ⟨(⌊x.re / ℓ⌋, ⌊x.im / ℓ⌋), fun y hy => ?_, hx.1, hmemW x⟩
+      have := hdistW _ y hy x (hmemW x)
+      have hx2 := mem_ball.1 hx.2
+      rw [mem_ball]
+      linarith [dist_triangle y x 0]
+    calc volume (S ∩ ball 0 R) ≤ volume (⋃ pq ∈ I', S ∩ W pq) := measure_mono hsub
+      _ ≤ ∑' pq : I', volume (S ∩ W pq) := measure_biUnion_le _ hcount _
+      _ ≤ ∑' pq : I', ENNReal.ofReal d * volume (W pq) := ENNReal.tsum_le_tsum fun pq => hWS pq
+      _ = ENNReal.ofReal d * volume (⋃ pq ∈ I', W pq) := by
+          rw [ENNReal.tsum_mul_left, measure_biUnion hcount (fun pq _ pq' _ hne =>
+            Set.disjoint_left.2 fun x hx hx' => hne (hdisj pq pq' x hx hx')) (fun pq _ => hWm pq)]
+      _ ≤ _ := by gcongr; exact iUnion₂_subset fun pq hpq => hpq
+  have hlim : Tendsto (fun R : ℝ => ENNReal.ofReal d * ENNReal.ofReal (((R + 2 * ℓ) / R) ^ 2)) atTop
+      (𝓝 (ENNReal.ofReal d * 1)) :=
+    ENNReal.Tendsto.const_mul (tendsto_sq_add_div (2 * ℓ)) (Or.inr ENNReal.ofReal_ne_top)
+  rw [mul_one] at hlim
+  have hle : upperDensity S ≤ ENNReal.ofReal d := by
+    rw [upperDensity, ← hlim.limsup_eq]
+    refine limsup_le_limsup ?_
+    filter_upwards [eventually_gt_atTop 0] with R hR
+    rw [← volume_ball_div_volume_ball (by positivity) hR, ← mul_div_assoc]
+    exact ENNReal.div_le_div_right (hbound R) _
+  exact absurd hd (not_lt.2 hle)
 
 /-- **Upper density from a tiling** (the squeeze both periodic densities read): if the translates `g + D`, `g ∈ G`, of a
 measurable set `D` of diameter at most `δ` and positive area tile the plane, and `S` is measurable and invariant under each
@@ -1075,15 +1151,77 @@ theorem exists_tiled_kept {C : Fin k → Set ℂ} {η ε h : ℝ} (hh : 0 < h) (
     ∃ T : Fin k → Set ℂ, IsPartialColouring T ∧ (∀ j, IsGridUnion h (T j)) ∧
       (∀ j, T j ⊆ squareWin ((p * h : ℝ) + (q * h : ℝ) * I) (N * h)) ∧ (∀ j, T j ⊆ {x | KeptAt (C j) η ε x}) ∧
       squareWin ((p * h : ℝ) + (q * h : ℝ) * I) (N * h) ∩ ⋃ j, {x | KeptAt (C j) (η / 2) ε x} ⊆ ⋃ j, T j := by
-  sorry
-
-/-- **SUPK's lower bound** (FS106-TQ § 3.2, by windows instead of Lemma T): every value below `µ_k⁰` is eventually below
-`µ_k^per(ε)`. Assembly: a family with null unit pairs of density `> d`; `exists_squareWin_dense` at an integer side `ℓ`;
-`ae_eventually_keptAt` and dominated convergence on the window at `η = 1/20`; `exists_tiled_kept` at `h = 1/N`;
-`keptAt_band` (band-free); `periodize` at period `ℓ + 2` (`bandFree_periodize`, `isGridUnion_periodize`,
-`upperDensity_periodize`); `ℓ²/(ℓ + 2)² → 1`. -/
-theorem eventually_le_muPer (k : ℕ) {d : ENNReal} (hd : d < muZero k) : ∀ᶠ ε in 𝓝[>] (0 : ℝ), d ≤ muPer k ε := by
-  sorry
+  classical
+  set f : ℂ → ℤ × ℤ := fun y => (⌊y.re / h⌋, ⌊y.im / h⌋) with hf
+  have hfm : Measurable f :=
+    ((Int.measurable_floor.comp (Complex.measurable_re.div_const h))).prodMk
+      (Int.measurable_floor.comp (Complex.measurable_im.div_const h))
+  set K : Fin k → ℤ × ℤ → Prop := fun i c => ∃ x, f x = c ∧ KeptAt (C i) (η / 2) ε x with hK
+  set A : Fin k → Set (ℤ × ℤ) := fun j => {c | p ≤ c.1 ∧ c.1 < p + N ∧ q ≤ c.2 ∧ c.2 < q + N ∧ K j c ∧
+    ∀ i < j, ¬ K i c} with hA
+  have hwin : ∀ y : ℂ, y ∈ squareWin ((p * h : ℝ) + (q * h : ℝ) * I) (N * h) ↔
+      p ≤ (f y).1 ∧ (f y).1 < p + N ∧ q ≤ (f y).2 ∧ (f y).2 < q + N := by
+    intro y
+    simp only [squareWin, mem_setOf_eq, hf, Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, mul_zero, sub_zero, mul_one, zero_add, add_zero]
+    rw [Int.le_floor, Int.floor_lt, Int.le_floor, Int.floor_lt, le_div_iff₀ hh, div_lt_iff₀ hh, le_div_iff₀ hh,
+      div_lt_iff₀ hh]
+    push_cast
+    constructor
+    · rintro ⟨h1, h2, h3, h4⟩; refine ⟨by linarith, by linarith, by linarith, by linarith⟩
+    · rintro ⟨h1, h2, h3, h4⟩; refine ⟨by linarith, by linarith, by linarith, by linarith⟩
+  have hcell : ∀ x y : ℂ, f x = f y → dist x y ≤ h * √2 := by
+    intro x y hxy
+    simp only [hf, Prod.mk.injEq] at hxy
+    have hre : |x.re - y.re| < h := by
+      have a1 := Int.floor_le (x.re / h); have a2 := Int.lt_floor_add_one (x.re / h)
+      have a3 := Int.floor_le (y.re / h); have a4 := Int.lt_floor_add_one (y.re / h)
+      rw [hxy.1] at a1 a2
+      rw [le_div_iff₀ hh] at a1 a3; rw [div_lt_iff₀ hh] at a2 a4
+      rw [abs_lt]; constructor <;> nlinarith
+    have him : |x.im - y.im| < h := by
+      have a1 := Int.floor_le (x.im / h); have a2 := Int.lt_floor_add_one (x.im / h)
+      have a3 := Int.floor_le (y.im / h); have a4 := Int.lt_floor_add_one (y.im / h)
+      rw [hxy.2] at a1 a2
+      rw [le_div_iff₀ hh] at a1 a3; rw [div_lt_iff₀ hh] at a2 a4
+      rw [abs_lt]; constructor <;> nlinarith
+    rw [Complex.dist_eq_re_im, show h * √2 = √(h ^ 2 + h ^ 2) by
+      rw [← two_mul, Real.sqrt_mul' _ (sq_nonneg h), Real.sqrt_sq hh.le, mul_comm]]
+    refine Real.sqrt_le_sqrt ?_
+    have h1 := sq_lt_sq' (abs_lt.1 hre).1 (abs_lt.1 hre).2
+    have h2 := sq_lt_sq' (abs_lt.1 him).1 (abs_lt.1 him).2
+    linarith
+  refine ⟨fun j => f ⁻¹' A j, ⟨fun j => hfm (Set.to_countable _).measurableSet, ?_⟩, ?_, ?_, ?_, ?_⟩
+  · intro i j hij
+    refine Set.disjoint_left.2 fun y hi hj => ?_
+    simp only [mem_preimage, hA, mem_setOf_eq] at hi hj
+    rcases lt_or_gt_of_ne hij with h' | h'
+    · exact hj.2.2.2.2.2 i h' hi.2.2.2.2.1
+    · exact hi.2.2.2.2.2 j h' hj.2.2.2.2.1
+  · intro j x hx z hz
+    have hfz : f z = f x := by
+      simp only [gridCell, mem_setOf_eq] at hz
+      simp only [hf, hz.1, hz.2]
+    simp only [mem_preimage] at hx ⊢
+    rwa [hfz]
+  · intro j y hy
+    simp only [mem_preimage, hA, mem_setOf_eq] at hy
+    exact (hwin y).2 ⟨hy.1, hy.2.1, hy.2.2.1, hy.2.2.2.1⟩
+  · intro j y hy
+    simp only [mem_preimage, hA, mem_setOf_eq] at hy
+    obtain ⟨x, hxy, hx⟩ := hy.2.2.2.2.1
+    exact keptAt_of_dist_le hε hη hη1 hx ((hcell x y hxy).trans hhε)
+  · rintro y ⟨hyw, hyk⟩
+    obtain ⟨j₀, hj₀⟩ := mem_iUnion.1 hyk
+    have hex : ∃ n : ℕ, ∃ hn : n < k, K ⟨n, hn⟩ (f y) := ⟨j₀.val, j₀.isLt, y, rfl, by simpa using hj₀⟩
+    set n := Nat.find hex with hn
+    obtain ⟨hnk, hKn⟩ := Nat.find_spec hex
+    refine mem_iUnion.2 ⟨⟨n, hnk⟩, ?_⟩
+    simp only [mem_preimage, hA, mem_setOf_eq]
+    obtain ⟨w1, w2, w3, w4⟩ := (hwin y).1 hyw
+    refine ⟨w1, w2, w3, w4, hKn, fun i hi hKi => ?_⟩
+    have := Nat.find_min hex (show i.val < n from hi)
+    exact this ⟨i.isLt, hKi⟩
 
 /-! ### `keptAt_band`: the two cases -/
 
@@ -1195,6 +1333,137 @@ theorem not_keptAt_of_half_lt {A : Set ℂ} (hA : MeasurableSet A) (hnull : Unit
     ENNReal.ofReal_le_ofReal_iff (by positivity)] at hmain
   have hq : 0 < (2 * ε) ^ 2 * Real.pi := by positivity
   nlinarith [mul_pos hq hpi]
+
+/-- **FS106-REM**, first clause (one class, G92): for a measurable `A` with null unit pairs, any `η < 1/(1 + 4π)` and every
+`ε > 0`, two points kept at scale `ε` are never at a distance in `[1 − ε, 1 + ε]`. (The row reads kept points of one
+colour of a partial colouring; membership of the points in `A` is not used — a generalization.) -/
+theorem keptAt_band {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {η : ℝ} (hη0 : 0 ≤ η)
+    (hη : η < 1 / (1 + 4 * Real.pi)) {ε : ℝ} (hε : 0 < ε) {x y : ℂ} (hx : KeptAt A η ε x) (hy : KeptAt A η ε y) :
+    dist x y < 1 - ε ∨ 1 + ε < dist x y := by
+  rcases le_or_gt ε (1 / 2) with h | h
+  · exact keptAt_band_le_half hA hnull hη0 hη hε h hx hy
+  · exfalso
+    have h4 : η < 1 / 4 := lt_of_lt_of_le hη (by
+      apply one_div_le_one_div_of_le (by norm_num); linarith [Real.pi_gt_three])
+    exact not_keptAt_of_half_lt hA hnull hη0 h4 h x hx
+
+/-- **SUPK's lower bound** (FS106-TQ § 3.2, by windows instead of Lemma T): every value below `µ_k⁰` is eventually below
+`µ_k^per(ε)`. Assembly: a family with null unit pairs of density `> d`; `exists_squareWin_dense` at an integer side `ℓ`;
+`ae_eventually_keptAt` and dominated convergence on the window at `η = 1/20`; `exists_tiled_kept` at `h = 1/N`;
+`keptAt_band` (band-free); `periodize` at period `ℓ + 2` (`bandFree_periodize`, `isGridUnion_periodize`,
+`upperDensity_periodize`); `ℓ²/(ℓ + 2)² → 1`. -/
+theorem eventually_le_muPer (k : ℕ) {d : ENNReal} (hd : d < muZero k) : ∀ᶠ ε in 𝓝[>] (0 : ℝ), d ≤ muPer k ε := by
+  obtain ⟨C, hC⟩ := lt_iSup_iff.1 hd
+  obtain ⟨⟨hCp, hCn⟩, hCd⟩ := lt_iSup_iff.1 hC
+  set S := ⋃ j, C j with hSdef
+  have hSm : MeasurableSet S := MeasurableSet.iUnion hCp.1
+  obtain ⟨b, hb0, hdb, hbS⟩ := ENNReal.lt_iff_exists_real_btwn.1 hCd
+  obtain ⟨a, ha0, hda, hab⟩ := ENNReal.lt_iff_exists_real_btwn.1 hdb
+  have hab' : a < b := (ENNReal.ofReal_lt_ofReal_iff_of_nonneg ha0).1 hab
+  set c := (a + b) / 2 with hc
+  -- the window's side
+  set ℓ : ℕ := ⌈8 * a / (c - a)⌉₊ + 1 with hℓdef
+  have hℓ : 0 < ℓ := Nat.succ_pos _
+  have hℓr : (1 : ℝ) ≤ ℓ := by exact_mod_cast hℓ
+  have hℓc : 8 * a ≤ (c - a) * ℓ := by
+    have h1 : 8 * a / (c - a) ≤ ℓ := by
+      rw [hℓdef]; push_cast; linarith [Nat.le_ceil (8 * a / (c - a))]
+    rw [div_le_iff₀ (by rw [hc]; linarith)] at h1
+    linarith
+  have hℓa : a * ((ℓ : ℝ) + 2) ^ 2 ≤ c * (ℓ : ℝ) ^ 2 := by nlinarith
+  obtain ⟨p, q, hW⟩ := exists_squareWin_dense hSm hbS ℓ hℓ
+  set W := squareWin ((ℓ * p : ℝ) + (ℓ * q : ℝ) * I) ℓ with hWdef
+  -- almost every point of `S` is eventually kept for its class
+  set η : ℝ := 1 / 20 with hη
+  have hη0 : 0 < η := by norm_num
+  have hae : ∀ᵐ x ∂volume, ∀ j, x ∈ C j → ∀ᶠ ε in 𝓝[>] (0 : ℝ), KeptAt (C j) (η / 2) ε x :=
+    ae_all_iff.2 fun j => (ae_restrict_iff' (hCp.1 j)).1 (ae_eventually_keptAt (hCp.1 j) (by positivity))
+  set G : ℕ → Set ℂ := fun n => {x | x ∈ S ∩ W ∧ ∃ j, ∀ ε ∈ Ioo (0 : ℝ) (1 / ((n : ℝ) + 1)), KeptAt (C j) (η / 2) ε x}
+    with hG
+  have hGmono : Monotone G := by
+    intro n m hnm x ⟨hx, j, hj⟩
+    refine ⟨hx, j, fun ε hε => hj ε ⟨hε.1, hε.2.trans_le ?_⟩⟩
+    have : (n : ℝ) ≤ m := by exact_mod_cast hnm
+    exact one_div_le_one_div_of_le (by positivity) (by linarith)
+  have hSW : volume (S ∩ W) ≤ volume (⋃ n, G n) := by
+    refine measure_mono_ae ?_
+    filter_upwards [hae] with x hx hxSW
+    obtain ⟨j, hj⟩ := mem_iUnion.1 hxSW.1
+    obtain ⟨t, ht, hts⟩ := (nhdsGT_basis (0 : ℝ)).eventually_iff.1 (hx j hj)
+    obtain ⟨n, hn⟩ := exists_nat_one_div_lt ht
+    exact mem_iUnion.2 ⟨n, hxSW, j, fun ε hε => hts ⟨hε.1, hε.2.trans hn⟩⟩
+  rw [hGmono.measure_iUnion] at hSW
+  have hcb : ENNReal.ofReal (c * (ℓ : ℝ) ^ 2) < volume (S ∩ W) := by
+    refine lt_of_lt_of_le ?_ hW
+    have : (0 : ℝ) < (ℓ : ℝ) ^ 2 := by positivity
+    rw [ENNReal.ofReal_lt_ofReal_iff (mul_pos (by linarith) this)]
+    nlinarith
+  obtain ⟨n, hn⟩ := lt_iSup_iff.1 (hcb.trans_le hSW)
+  -- the scale
+  set ε₀ : ℝ := 1 / (2 * ((n : ℝ) + 1)) with hε₀
+  have hε₀0 : 0 < ε₀ := by positivity
+  have hε₀n : ε₀ < 1 / ((n : ℝ) + 1) := by
+    rw [hε₀]; exact one_div_lt_one_div_of_lt (by positivity) (by linarith [(by positivity : (0 : ℝ) ≤ n)])
+  have hε₀1 : ε₀ < 1 := by
+    refine hε₀n.trans_le ?_
+    rw [div_le_one (by positivity)]; linarith [(by positivity : (0 : ℝ) ≤ n)]
+  -- the pixel
+  set M : ℕ := ⌈12 * √2 / (η * ε₀)⌉₊ + 1 with hMdef
+  have hM : (0 : ℝ) < M := by positivity
+  have hMh : (1 / (M : ℝ)) * √2 ≤ η * ε₀ / 12 := by
+    have h1 : 12 * √2 / (η * ε₀) ≤ M := by
+      rw [hMdef]; push_cast; linarith [Nat.le_ceil (12 * √2 / (η * ε₀))]
+    rw [div_le_iff₀ (by positivity)] at h1
+    rw [one_div_mul_eq_div, div_le_iff₀ hM]
+    calc √2 = 12 * √2 / 12 := by ring
+      _ ≤ (M * (η * ε₀)) / 12 := by gcongr
+      _ = η * ε₀ / 12 * (M : ℝ) := by ring
+  obtain ⟨T, hTp, hTg, hTw, hTk, hTc⟩ := exists_tiled_kept (C := C) (one_div_pos.2 hM) hMh hη0.le (by norm_num)
+    hε₀0 ((ℓ : ℤ) * M * p) ((ℓ : ℤ) * M * q) (ℓ * M)
+  have e1 : ((((ℓ : ℤ) * M * p : ℤ) : ℝ) * (1 / (M : ℝ))) = (ℓ : ℝ) * p := by push_cast; field_simp
+  have e2 : ((((ℓ : ℤ) * M * q : ℤ) : ℝ) * (1 / (M : ℝ))) = (ℓ : ℝ) * q := by push_cast; field_simp
+  have e3 : (((ℓ * M : ℕ) : ℝ) * (1 / (M : ℝ))) = (ℓ : ℝ) := by push_cast; field_simp
+  rw [e1, e2, e3] at hTw hTc
+  -- band-free
+  have hπ : η < 1 / (1 + 4 * Real.pi) := by
+    rw [hη, div_lt_div_iff₀ (by norm_num) (by positivity)]
+    linarith [Real.pi_lt_four]
+  have hTb : ∀ j, BandFree (T j) ε₀ := fun j x hx y hy =>
+    keptAt_band (hCp.1 j) (hCn j) hη0.le hπ hε₀0 (hTk j hx) (hTk j hy)
+  -- periodize
+  set T' : Fin k → Set ℂ := fun j => periodize (T j) ((ℓ : ℝ) + 2) with hT'
+  have hT'p : IsPartialColouring T' :=
+    ⟨fun j => measurableSet_periodize (hTp.1 j) _, fun i j hij => disjoint_periodize (hTw i) (hTw j) (hTp.2 hij)⟩
+  have hT't : IsTiled T' := by
+    refine ⟨1 / (M : ℝ), one_div_pos.2 hM, fun j => ?_⟩
+    have : ((ℓ : ℝ) + 2) = (((ℓ + 2) * M : ℕ) : ℝ) * (1 / (M : ℝ)) := by
+      push_cast; field_simp
+    simp only [hT']
+    rw [this]
+    exact isGridUnion_periodize (one_div_pos.2 hM) (hTg j)
+  have hT'per : IsPeriodic T' := ⟨(ℓ : ℝ) + 2, by positivity, fun j => isPeriodicSet_periodize _ _⟩
+  have hUw : (⋃ j, T j) ⊆ W := iUnion_subset hTw
+  have hUm : MeasurableSet (⋃ j, T j) := MeasurableSet.iUnion hTp.1
+  have hdens : ENNReal.ofReal a ≤ upperDensity (⋃ j, T' j) := by
+    simp only [hT']
+    rw [iUnion_periodize, upperDensity_periodize hUm (by positivity) hUw]
+    have hG : G n ⊆ ⋃ j, T j := by
+      rintro x ⟨⟨hxS, hxW⟩, j, hj⟩
+      exact hTc ⟨hxW, mem_iUnion.2 ⟨j, hj ε₀ ⟨hε₀0, hε₀n⟩⟩⟩
+    calc ENNReal.ofReal a ≤ ENNReal.ofReal (c * (ℓ : ℝ) ^ 2 / ((ℓ : ℝ) + 2) ^ 2) := by
+          rw [ENNReal.ofReal_le_ofReal_iff (by positivity), le_div_iff₀ (by positivity)]
+          exact hℓa
+      _ = ENNReal.ofReal (c * (ℓ : ℝ) ^ 2) / ENNReal.ofReal (((ℓ : ℝ) + 2) ^ 2) :=
+          ENNReal.ofReal_div_of_pos (by positivity)
+      _ ≤ _ := by gcongr; exact hn.le.trans (measure_mono hG)
+  filter_upwards [Ioc_mem_nhdsGT hε₀0] with ε hε
+  refine hda.le.trans (hdens.trans (le_iSup₂_of_le (f := fun C (_ : IsPartialColouring C ∧ IsTiled C ∧ IsPeriodic C ∧
+    ∀ j, BandFree (C j) ε) => upperDensity (⋃ j, C j)) T' ⟨hT'p, hT't, hT'per, fun j => ?_⟩ le_rfl))
+  intro x hx y hy
+  rcases bandFree_periodize (hTw j) hε₀1 (hTb j) x hx y hy with h | h
+  · left; linarith [hε.2]
+  · right; linarith [hε.2]
+
 
 /-! ### CP colourings: a jointly measurable modification (`chiM0_le_chiCP`, `CPColouring.tendsto_not_kept`) -/
 
@@ -2498,19 +2767,6 @@ theorem mu_lt_of_voronov11 (hV : Voronov11) {ε : ℝ} (hε : 0 < ε) : mu 6 ε 
 /-- **FS106-COMP**, second clause: "`µ₆(ε) < 1` for every `ε > 0`" is equivalent to `[Voronov2023]` Thm 1.1. -/
 theorem forall_mu_six_lt_one_iff : (∀ ε > (0 : ℝ), mu 6 ε < 1) ↔ Voronov11 := by
   exact ⟨voronov11_of_forall_mu_lt, fun hV ε hε => mu_lt_of_voronov11 hV hε⟩
-
-/-- **FS106-REM**, first clause (one class, G92): for a measurable `A` with null unit pairs, any `η < 1/(1 + 4π)` and every
-`ε > 0`, two points kept at scale `ε` are never at a distance in `[1 − ε, 1 + ε]`. (The row reads kept points of one
-colour of a partial colouring; membership of the points in `A` is not used — a generalization.) -/
-theorem keptAt_band {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {η : ℝ} (hη0 : 0 ≤ η)
-    (hη : η < 1 / (1 + 4 * Real.pi)) {ε : ℝ} (hε : 0 < ε) {x y : ℂ} (hx : KeptAt A η ε x) (hy : KeptAt A η ε y) :
-    dist x y < 1 - ε ∨ 1 + ε < dist x y := by
-  rcases le_or_gt ε (1 / 2) with h | h
-  · exact keptAt_band_le_half hA hnull hη0 hη hε h hx hy
-  · exfalso
-    have h4 : η < 1 / 4 := lt_of_lt_of_le hη (by
-      apply one_div_le_one_div_of_le (by norm_num); linarith [Real.pi_gt_three])
-    exact not_keptAt_of_half_lt hA hnull hη0 h4 h x hx
 
 /-- **Markov at one radius**: if `P(f y ≠ f 0) ≤ δ` on `B(0, ρ)`, the realisations whose disagreement with the origin fills at
 least the fraction `η` of `B(0, ρ)` have probability at most `δ / η` (`CPColouring.lintegral_ball_ne` and
