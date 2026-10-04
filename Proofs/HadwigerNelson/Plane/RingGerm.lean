@@ -52,8 +52,8 @@ theorem not_germIn_closure_rotate (hF : F.Valid) (p : ℂ) (θ : ℝ) (s : Side)
 /-- **FS116-V4-TWIST**, second clause ("when `p` is a vertex" is idle): a point of `ω(p)` inside a tile of colour `c` has `c`
 absent at `p`. -/
 theorem not_mem_coloursAt_of_mem_sphere (hF : F.Valid) {p z : ℂ} (hz : z ∈ sphere p 1) {c : Fin k}
-    (hzc : z ∈ F.region c) : c ∉ F.coloursAt p := by
-  sorry
+    (hzc : z ∈ F.region c) : c ∉ F.coloursAt p := fun hc =>
+  ne1_region hF hc hzc (mem_sphere.mp hz)
 
 /-! ## FS116-N1-TWIST-D -/
 
@@ -63,16 +63,36 @@ def ringD (F : ArcMap k) (p : ℂ) : Set ℂ := {x | x ∈ sphere p 1 ∧ ∃ c 
 
 /-- **FS116-N1-TWIST-D**, `D` is closed. -/
 theorem isClosed_ringD (p : ℂ) : IsClosed (F.ringD p) := by
-  sorry
+  have : F.ringD p = sphere p 1 ∩ ⋃ c ∈ F.coloursAt p, closure (F.region c) := by
+    ext x; simp [ringD]
+  rw [this]
+  exact isClosed_sphere.inter ((Set.toFinite _).isClosed_biUnion fun c _ => isClosed_closure)
+
+/-- A point of the domain off `Γ` is an interior point. -/
+theorem mem_interiorPts_of_notMem_Γ {x : ℂ} (hx : x ∈ F.dom) (hΓ : x ∉ F.Γ) : x ∈ F.interiorPts :=
+  ⟨hx, fun h => hΓ ⟨hx, h⟩⟩
+
+/-- A point of the closure of one class that is interior has that class's colour. -/
+theorem col_eq_of_mem_closure_region {x : ℂ} (hx : x ∈ F.interiorPts) {c : Fin k}
+    (hc : x ∈ closure (F.region c)) : F.col x = c := by
+  obtain ⟨y, hy, hyc⟩ := mem_closure_iff.mp hc (F.region (F.col x)) (F.isOpen_region _) ⟨hx, rfl⟩
+  exact ((hyc.2 : F.col y = c).symm.trans hy.2).symm
 
 /-- **FS116-N1-TWIST-D** ("vertex" idle; any point `p`): `D` lies in `Γ`. -/
 theorem ringD_subset_Γ (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) : F.ringD p ⊆ F.Γ := by
-  sorry
+  rintro x ⟨hxs, c, hc, hxc⟩
+  by_contra hΓ
+  have hxd : x ∈ F.dom := hp (sphere_subset_closedBall hxs)
+  have hxI := F.mem_interiorPts_of_notMem_Γ hxd hΓ
+  have hcol := F.col_eq_of_mem_closure_region hxI hxc
+  subst hcol
+  exact not_mem_coloursAt_of_mem_sphere hF hxs ⟨hxI, rfl⟩ hc
 
 /-- **FS116-N1-TWIST-D**: `D` lies in the union of the arcs of `Γ` on `ω(p)` and finitely many points. -/
 theorem finite_ringD_off_ringArc (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) :
-    (F.ringD p \ {x | F.OnRingArc p x}).Finite := by
-  sorry
+    (F.ringD p \ {x | F.OnRingArc p x}).Finite :=
+  (F.finite_ringΓ_off_ringArc hp).subset fun _ hx =>
+    ⟨⟨F.ringD_subset_Γ hF hp hx.1, hx.1.1⟩, hx.2⟩
 
 /-! ## FS116-N1-GERM-R (any valid map: the covering hypothesis is idle) -/
 
@@ -103,13 +123,50 @@ theorem germR_uPlus (hF : F.Valid) {p : ℂ} {ψ : ℝ} {c : Fin k}
 
 /-! ## FS116-N1-GERM-S (at every `k` with at most two colours absent at `p`; the row is `k = 6`) -/
 
+/-- A germ of `ω(p)` (on either side) has a point in any set it lies in; a point of `ω(p)`. -/
+theorem GermIn.exists_mem_sphere {p : ℂ} {θ : ℝ} {s : Side} {S : Set ℂ} (h : GermIn p θ s S) :
+    ∃ z ∈ S, z ∈ sphere p 1 := by
+  obtain ⟨δ, hδ, hsub⟩ := h
+  have hmem : ringPt p (θ + s.sign * (δ / 2)) ∈ germ p θ s δ :=
+    ⟨δ / 2, ⟨half_pos hδ, by linarith⟩, rfl⟩
+  exact ⟨_, hsub hmem, ringPt_mem_sphere _ _⟩
+
+/-- The two colours of a change point are absent at `p`. -/
+theorem IsChangePoint.not_mem_coloursAt (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X X' : Fin k}
+    (hy : F.IsChangePoint p ψ X X') : X ∉ F.coloursAt p ∧ X' ∉ F.coloursAt p := by
+  obtain ⟨-, -, hX, hX'⟩ := hy
+  obtain ⟨z, hz, hzs⟩ := GermIn.exists_mem_sphere hX
+  obtain ⟨z', hz', hzs'⟩ := GermIn.exists_mem_sphere hX'
+  exact ⟨not_mem_coloursAt_of_mem_sphere hF hzs hz, not_mem_coloursAt_of_mem_sphere hF hzs' hz'⟩
+
+/-- The count of absent colours: a change point leaves at least two colours absent. -/
+theorem IsChangePoint.ncard_add_two_le (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X X' : Fin k}
+    (hy : F.IsChangePoint p ψ X X') : (F.coloursAt p).ncard + 2 ≤ k := by
+  obtain ⟨h1, h2⟩ := hy.not_mem_coloursAt hF
+  have hsub : ({X, X'} : Set (Fin k)) ⊆ (F.coloursAt p)ᶜ := by
+    rintro _ (rfl | rfl) <;> assumption
+  have hc := Set.ncard_le_ncard hsub (Set.toFinite _)
+  rw [Set.ncard_pair hy.2.1] at hc
+  have := Set.ncard_add_ncard_compl (F.coloursAt p)
+  rw [Nat.card_eq_fintype_card, Fintype.card_fin] at this
+  omega
+
 /-- **FS116-N1-GERM-S**, the count: at a change point `y = r(ψ)` of the ring of a vertex `p` of at least four colours with at
 most two colours absent, exactly two are absent — `X` (the ring's colour just counter-clockwise of `y`) and `X'` (`X̄`, just
 clockwise). At `k = 6`: "`p` has four colours and no more, `X` and `X̄` are the colours absent at `p`". -/
 theorem germS_absent (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
     (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X') :
     (F.coloursAt p).ncard + 2 = k ∧ (F.coloursAt p)ᶜ = {X, X'} := by
-  sorry
+  have hle := hy.ncard_add_two_le hF
+  refine ⟨by omega, ?_⟩
+  obtain ⟨h1, h2⟩ := hy.not_mem_coloursAt hF
+  have hsub : ({X, X'} : Set (Fin k)) ⊆ (F.coloursAt p)ᶜ := by
+    rintro _ (rfl | rfl) <;> assumption
+  have hcard := Set.ncard_add_ncard_compl (F.coloursAt p)
+  rw [Nat.card_eq_fintype_card, Fintype.card_fin] at hcard
+  refine (Set.eq_of_subset_of_ncard_le hsub ?_ (Set.toFinite _)).symm
+  rw [Set.ncard_pair hy.2.1]
+  omega
 
 /-- **FS116-N1-GERM-S** (i): if neither `v⁻` nor `u⁺` lies on a (Q) arc, every direction at `y` in the open `60°` cone about
 the direction to `p` lies in the cone of a colour `c` of `p` every tile of `p` of which colour lies in `B̄(y, 1)`. -/
@@ -166,7 +223,9 @@ theorem qfree4 (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.colou
 of a vertex of at least four colours with exactly one colour absent has no change point. -/
 theorem fiveRing_no_changePoint (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
     (hk : (F.coloursAt p).ncard + 1 = k) (ψ : ℝ) (X X' : Fin k) : ¬ F.IsChangePoint p ψ X X' := by
-  sorry
+  intro hy
+  have := hy.ncard_add_two_le hF
+  omega
 
 /-- **FS116-N2-FIVERING**: for every `θ` outside a finite set, `r(θ)` or `r(θ + 60°)` lies on a (Q) arc. -/
 theorem fiveRing_finite_off_Q (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
@@ -183,7 +242,8 @@ theorem fiveRing_length (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤
 /-- **FS116-N2-FIVERING**, last clause (and FS116-RING-TRANSFER-C's "places no vertex through RING-GERM"): `p` has no hub. -/
 theorem fiveRing_no_hub (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
     (hk : (F.coloursAt p).ncard + 1 = k) (ψ : ℝ) : ¬ F.IsHub p ψ := by
-  sorry
+  rintro ⟨⟨X, X', hy⟩, -⟩
+  exact fiveRing_no_changePoint hF hp h4 hk ψ X X' hy
 
 /-! ## FS129-SR1-SIXQ -/
 
@@ -191,7 +251,10 @@ theorem fiveRing_no_hub (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤
 covered ring, `ω(p)` lies in `Γ`. -/
 theorem sixQ_sphere_subset_Γ (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (hall : F.coloursAt p = univ) :
     sphere p 1 ⊆ F.Γ := by
-  sorry
+  intro z hz
+  by_contra hΓ
+  have hzI := F.mem_interiorPts_of_notMem_Γ (hp (sphere_subset_closedBall hz)) hΓ
+  exact not_mem_coloursAt_of_mem_sphere hF hz ⟨hzI, rfl⟩ (by rw [hall]; exact mem_univ _)
 
 /-- **FS129-SR1-SIXQ**: both side colours of every arc of `Γ` on `ω(p)` are carried at `p`. -/
 theorem sixQ_sides {p : ℂ} (hall : F.coloursAt p = univ) {θ₁ θ₂ : ℝ} {c c' : Fin k} (_hA : F.IsRingArc p θ₁ θ₂ c c') :
@@ -202,7 +265,9 @@ theorem sixQ_sides {p : ℂ} (hall : F.coloursAt p = univ) {θ₁ θ₂ : ℝ} {
 `p` carries all colours, every arc of `Γ` on `ω(p)` is a (Q) arc. -/
 theorem sixQ_isQArc (hk : 4 ≤ k) {p : ℂ} (hall : F.coloursAt p = univ) {θ₁ θ₂ : ℝ} {c c' : Fin k}
     (h : F.IsRingArc p θ₁ θ₂ c c') : F.IsQArc p θ₁ θ₂ := by
-  sorry
+  refine ⟨c, c', h, by rw [hall]; exact mem_univ _, by rw [hall]; exact mem_univ _, ?_⟩
+  rw [hall, Set.ncard_univ, Nat.card_eq_fintype_card, Fintype.card_fin]
+  exact hk
 
 /-- SIXQ's hypotheses are inhabited by FS116-Y2-SIXFRAG: a valid six-coloured fragment covering `B̄(0, 1)` with all six
 colours at `0`, and an arc of `Γ` on `ω(0)`. -/
@@ -235,14 +300,16 @@ colour `X` absent at `p`, the only point of the closure of the class of `X` at d
 theorem echo_unique (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X : Fin k} (hcw : GermIn p ψ .cw (F.region X))
     (hccw : GermIn p ψ .ccw (F.region X)) (hX : X ∉ F.coloursAt p) {x : ℂ} (hx : x ∈ closure (F.region X))
     (h1 : dist x (ringPt p ψ) = 1) : x = 2 * ringPt p ψ - p := by
-  sorry
+  sorry -- ECHO ENGINE (to do)
 
 /-- **FS116-N1-ECHO** at the class its argument reads: some point of the closure of the class of `X` at distance `1` from `w`
 puts `2w − p` in that closure. -/
 theorem echo_of_mem_closure (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X : Fin k} (hcw : GermIn p ψ .cw (F.region X))
     (hccw : GermIn p ψ .ccw (F.region X)) (hX : X ∉ F.coloursAt p)
     (hpt : ∃ x ∈ closure (F.region X), dist x (ringPt p ψ) = 1) : X ∈ F.coloursAt (2 * ringPt p ψ - p) := by
-  sorry
+  obtain ⟨x, hx, h1⟩ := hpt
+  have := echo_unique hF hcw hccw hX hx h1
+  rw [← this]; exact hx
 
 /-- **FS116-N1-ECHO**, the row's form (reading (B)): if `w` is an essential boundary point at which the map is saturated and
 `X` is in `w`'s essential multicolour, `2w − p` lies in the closure of the class of `X`. -/
@@ -250,7 +317,13 @@ theorem echo (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X : Fin k} (hcw : GermIn p ψ 
     (hccw : GermIn p ψ .ccw (F.region X)) (hX : X ∉ F.coloursAt p) (hess : F.IsEssBoundary (ringPt p ψ))
     (hsat : F.SaturatedAt (ringPt p ψ)) (hXw : X ∈ F.essColours (ringPt p ψ)) :
     X ∈ F.coloursAt (2 * ringPt p ψ - p) := by
-  sorry
+  obtain ⟨x, hx, h1⟩ := hsat X hXw
+  refine echo_of_mem_closure hF hcw hccw hX ⟨x, ?_, h1⟩
+  rw [Metric.mem_closure_iff]
+  intro ε hε
+  have hpos := hx ε hε
+  obtain ⟨z, hz⟩ := MeasureTheory.nonempty_of_measure_ne_zero hpos.ne'
+  exact ⟨z, hz.1, by rw [dist_comm]; exact hz.2⟩
 
 /-! ## FS116-V5-U1 (any valid map) -/
 
