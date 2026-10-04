@@ -276,3 +276,44 @@ sections are read; FS106-TS-T's Condition-5 clause is item 142 and is not re-rep
 **Tally (29 rows)**: same 15, stronger 8, weaker 6 — and all six weaker ones are known and ruled (TS-T item 142; N4-SHADOW's mechanism
 clause; N4-STUCK and N3-FAIL and N3-END and FLANK-Q by K4b/K4c's filed findings). **No new statement defect; no statement says other
 than its row.**
+
+## Stage 5 — SAVED: the verdict
+
+### 5.1 In plain words
+
+I checked **106 definitions** that the backlog's Lean takes as hypotheses (every one in the census; the two carried propositions
+`Row130M1` and `Voronov11` apart, which are true-or-false statements, not predicates), across `main`, `fs131-w2`, `fs131-w4`, `fs131-ww`
+and `fs131-w3b`, the 24 refutation-shaped theorems first. **None is unsatisfiable on real objects, and none fails at the kind of point its
+theorems talk about** — the class of item 158 (a condition over every presentation, broken by phantom pictures) does not recur anywhere.
+**99 have a real instance named in the library or proved to exist everywhere** (correction to §3.2's estimate, recounted row by row:
+U 14, N 63, S 15 — inhabitant exists but its proof is `sorry` — H 7, D 5); for the other seven I state one by hand in §3.1.
+
+What I did find is one recurring weakness, five times: **a hypothesis whose only exhibited model lives where the theorem's other
+hypotheses fail.** That is exactly the hole item 158 came through, and the gate cannot see it. Wave 4's 29 skeleton rows read against
+their statements hold up: 15 same, 8 stronger, 6 weaker — and all six weaker ones were already filed and ruled. No new statement defect.
+
+### 5.2 The findings, ranked, each with its fix and who should make it
+
+| rank | finding | fix | who |
+|---|---|---|---|
+| 1 | **QA2-1. Woodall's chain has no plane-map model of its normal forms.** `aeMap6_normal`, `aeMap6_merged`, `false_of_four_le_sectors` assume `Valid ∧ IsPlaneMap ∧ WoodallNormal/WoodallMerged …`; the inhabitants (`threeSectorDisc_woodallNormal/Merged`) are on a disc of radius `1/3`, where `IsPlaneMap` fails. The repaired definitions are right (§2.2: the brick map satisfies both at every point of three colours) but nothing in the library shows the conjunction is satisfiable. | add `sevenBrickMap.WoodallNormal univ` and `sevenBrickMap.WoodallMerged univ` (every point of three colours is a T-junction with three sectors `π/2, π/2, π` of distinct colours — `tools/fs131_qa2_brick.py`), or at least `∃ F : ArcMap 7, F.Valid ∧ F.IsPlaneMap ∧ F.WoodallNormal (closedBall 0 3) ∧ ∃ v ∈ closedBall 0 3, 3 ≤ (F.coloursAt v).ncard` | the next Woodall implementer, after `fs131-ww` merges wave 4's `sevenBrickMap` (its fields are proved only on `fs131-w4`) |
+| 2 | **QA2-2. `IsCubicTrichromatic` has no inhabitant at all**, and `MIn`'s only one is the one-colour plane (where no point is cubic trichromatic). Six wave-4 theorems assume it; `pair_i` and `anti` conclude `False`, so the vacuity scan skips them. | `sevenBrickMap` at a brick corner `u`: `HasDegree u 3`, three colours, `Covers u 1`; and `MIn u x` at the far corner `x` of an upper cell (distance exactly `1`, the 3–4–5 diagonal) — a model of `anti`'s hypotheses but the antipodal second point (the brick's two M-in corners are `8/5` apart) | wave 4's implementer (BaseSteps) |
+| 3 | **QA2-4. No horn is proved anywhere.** `IsHorn`, `IsFlankAbove/Below`, `InType`, `HasSectors … 2`, `HasRepeatedColour`, `DoublyShadowed`, `IsStuck` — about twenty theorems — have only the bowtie as a model, and every `bowtie_*` clause is `sorry`. The definitions read right (`hornSet` is exactly a component for small `r`). | prove the `bowtie_*` leaves early (they are also FS112-BOWTIE's row); or, cheaper, a two-colour cusp fragment as an `IsHorn` model | wave 4's implementer |
+| 4 | **QA2-5. The stuck vertex under Condition 5 has no model, and none is expected.** `stuck_structure` and `stuck_chain` assume `IsStuck ∧ Condition5`; the only stuck vertex known (the bowtie) is bounded by unit arcs and fails Condition 5 by design. With `n4_fin`, `stuck_chain`'s hypotheses are refuted (FS-110's route to row 134): these are steps of a refutation, harmless if declared. `n3_end` (`Terminal ∧ IsStuck ∧ IsPlaneMap`) has only a fragment candidate. | a docstring line on `stuck_chain` ("no model expected: with `n4_fin` this configuration is refuted, row 134"); a planner's sentence whether a local Condition-5 stuck vertex (`stuck_structure`) and a plane terminal map with a stuck vertex (`n3_end`) are expected to exist — if not, the same declaration; if so, a model owed | wave 4's planner, then its implementer; the existence question, if wanted, to the deriver |
+| 5 | **QA2-3. `Simple`'s only inhabitant is a one-tile disc**, where its second clause (distinct tiles' closures meet preconnectedly) is vacuous. | `halfDisc.Simple`: two Jordan half-discs whose closures meet in a diameter | whoever next touches `Plane/ArcMap` (w3b's landing or wave 4's) |
+| 6 | Minor: no named inhabitant of `IsR2Arc`, `NoAffFieldHyp`, `CPColouring.RotationInvariant`, `PairPos`, `OffDirs`, `Arc.OnRing`; `IsAdmissible` satisfied only by empty classes implicitly. Hand instances in §3.1. | add when each consumer is proved | the implementer proving the consumer |
+
+Also noted, not a finding: `main` holds no plane map (`sevenBrickMap` is on `fs131-w4`), so wave 3's landed theorems that assume
+`IsPlaneMap` get their model only when wave 4 lands.
+
+### 5.3 A draft for `LEAN.md` § The gate (Keryx's file; slot: the inhabitant rule's sentence ending "and the gate stays green.")
+
+Append: "**The inhabitant satisfies every hypothesis the theorem does not refute, at once, at a parameter the refutation leaves alive** —
+for a refutation at `k ≤ 5` colours, a model at `k = 7` on a plane map; a model of one hypothesis on an object where another fails (a
+disc for a theorem about plane maps) is not a model of the theorem. Where none is expected (a step inside a proof by contradiction), the
+docstring says so with the theorem that refutes the configuration."
+
+### 5.4 Tools
+
+`tools/fs131_qa2_census.py` (self-test, 15 controls, two watched faults) and `tools/fs131_qa2_brick.py` (two watched faults: shear `0`,
+colour `(c + r) mod 7`). Outputs in `data/fs131/qa2/`.
