@@ -444,3 +444,16 @@ reason by the close.*
     (every point on an arc of Γ on some ω(p) in F' was on one in F, same centre) replacing the vacuous-with-unit-arcs `F.Condition5 → F'.Condition5`. **For wave
     5's planner**: FS112-N2-RED and -N2-TERM read the moves in this form ("creating no unit arc"). Also new: `AgreesOff F' F U` (the moves' shared clause, meaning
     unchanged) and `IsCoveringPair` in the union sense.
+79. **Ruling — FS112-N2-FLANK-Q stays in wave 4 over a named hypothesis, discharged in wave 5** (K4c, message 2026-10-04): its proof (`plans/FS112-N-proof.md` stage
+    N2-4) reads the bends' terminality — FS112-N2-RED's conclusion, FS112-N2-TERM's clause 1, a wave-5 row; the table's edge is missing (as for C-DOUBLE, item 69).
+    The opposite edge (N2-TERM's clause 3 cites FLANK-Q) makes no cycle, since N2-RED does not read FLANK-Q. K4c's statements `flankQ_upper`, `flankQ_lower`,
+    `flankQ_both` take `hQR` (every arc of Γ on ω(N) with constant sides is (Q) or (R2)) and prove the row's content. **Wave 5's planner owes the discharged
+    form**: the unconditional FLANK-Q, from N2-TERM's clause 1 — FLANK-Q is held only when that lands (the Closed rule's item 3 allows a backlog row as a
+    hypothesis only until its own row lands). Alternative weighed: move FLANK-Q to wave 5 (item 69's way). Why: everything else it reads is in wave 4, and the
+    conditional form is what N2-TERM's clause 3 needs anyway. Confidence: high.
+80. **Generalizations** (K4c): U1's shadow clause needs no validity and holds for the outer class's points near the arc (G-U1); FLANK's shadow needs no map — any
+    preconnected set inside `B(v, 1)` with N in its closure shadows every point near v of a horn with upper curvature ≤ 1, the whole horn
+    (`inType_shadows_horn`), and "SHAVE's criterion is incomplete" is witnessed by the bowtie (`flank_incomplete_bowtie`) (G-FLANK); FS112-A4SIX at every k, "four
+    colours" read as "exactly two colours absent" (G-A4SIX); the bends in one shape (`bend_away`, N2-AWAY with N2-TAN; FS112-BEND's two cases special cases).
+    Reading (no defect): L60-EQ's "each end is a vertex carrying a third tile" as some tile approaching each end from the open half-plane facing away from the
+    other end. All nine items stated (K4c's message; commit to follow).
