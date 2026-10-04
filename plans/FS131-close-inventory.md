@@ -780,3 +780,18 @@ reason by the close.*
      `data/fs131/briefs/FS131-I4b-wave4.md`, both gated PASS; I4b carries item 126's `localSectors` ruling and item 125's two plan corrections and the cusp note).
      Launched in I2f's Opus slot as two half slots: 0.5 (I3f) + 0.5 (IW) + 1 (E2) + 0.5 (I2g) + 0.5 (I4b) = 3. FS131-LEB stays queued: it blocks only the
      landings of wave 4 and Woodall's chain, both far from their last leaf.
+131. **FS131-I3f handed back at stage 6, harness ≈ 415k** (report on its branch; `fs131-w3` at `5537611a`, checked): `sixCol_locallyConstant` (FS116-Y2-SIXFRAG's
+     clause) proved on a lens formulation; rotation lemmas (`sixCol_rot`, `arg_rot`, `inSixLens_rot`, general-index arc membership) for the rest; item 112's
+     `RingGerm` edits confirmed in a real build. Keryx's receipt: build log `build/gate/build/20261004T115020Z-3251979.log` (w3) "Build completed successfully
+     (5348 jobs)", exactly four distinct `declaration uses sorry` warnings (`RingGerm` 2245, 2379; `SixFragment` 844, 849); no process left running in the tree.
+     Four leaves left, each large: `sixFrag_valid` (~800 lines of pair geometry; the QQ pair hard), `sixFrag_nonSiamese` (~400), `four_of_bothKind` and
+     `flank_edge_exists` (a sector engine each). Tool: `tools/fs131_i3_cert.py`, an LP certificate finder Lean re-checks (no certificate at degree 3 for QQ or
+     the sector cross lemma). Slip (I3f's): `LocalStructure`'s docstring still unfixed. It did not state `localSectors`.
+132. **Ruling — `localSectors` is wave 3's after all, stated by FS131-I3g** (supersedes item 126's fallback): the two `RingGerm` leaves each need a sector engine,
+     and wave 4 needs one for six leaves; one engine, stated as wave 3's plan § 6.1 item 3 specifies it and proved on I3e's `GoodAt` machinery, serves all
+     three. Alternative weighed: leave it to wave 4's implementer after wave 3 lands (item 126) and let I3g build its own engines for the two leaves. Why not:
+     three engines where one is planned, and wave 4 would wait for wave 3's landing to get it. FS131-I4b is told to iterate against it once I3g commits it
+     (via `w3snap.sh`) and not to state its own. Confidence: high.
+133. **Brief FS131-I3g, wave 3's seventh implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I3g-wave3.md`, gated PASS): `localSectors` first,
+     messaged on commit; then `four_of_bothKind`, `flank_edge_exists`, and the `SixFragment` leaves as context allows. Launched in I3f's half slot: 0.5 (IW) +
+     0.5 (I2g) + 0.5 (I4b) + 0.5 (I3g) + 1 (E2) = 3. Kooshi's model decision (item 129) would apply to the next wave-3 successor.
