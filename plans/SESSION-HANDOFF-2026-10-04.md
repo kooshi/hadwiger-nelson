@@ -36,24 +36,23 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 0.5 + 0.5 + 1 = 2 of 3)
+## 3. Running now (slots used: 0.5 + 0.5 + 1 + 1 = 3 of 3)
 
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-I2e (wave 2, fifth implementer) | Sonnet | `data/fs131/briefs/FS131-I2e-wave2.md` | its branch's `data/fs131/reports/FS131-I2e.md` |
 | FS131-I3e (wave 3, last nine, gate, landing) | Sonnet | `data/fs131/briefs/FS131-I3e-wave3.md` | its branch's `data/fs131/reports/FS131-I3e.md` |
 | FS131-E1 (maps-six GAPs) | Opus (Ephodos) | `data/fs131/briefs/FS131-E1-maps-six-gaps.md` | `data/fs131/reports/FS131-E1.md` |
+| FS131-K2d (wave 2's last 18 leaves: children; item 104) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-K2d-wave2-children.md` | its branch's (`fs131-w2d`, worktree `.claude/worktrees/fs131-w2d`) `data/fs131/reports/FS131-K2d.md` |
 
 Agent ids are in this session's scratch (`agents.txt`), never in a file. A notification arrives when each hands back; if the session restarted, resume a job from
 its record's last SAVED stage with a fresh agent on the same brief.
 
 ## 4. Next, in order
 
-1. **Fill the free slot now** (one Opus slot, or two Sonnet): FS131-K2d (Opus planner: children for wave 2's 18 unchilded leaves, after reading FS111-M3 §§ 2.2–2.4;
-   in its own worktree branched from `fs131-w2`, touching only `Plane/CoverExamples`, `Arith/PlaceHom`, `Arith/FalconerField` while I2e runs — item 94), **or**
-   FS131-I4 + FS131-IW (Sonnet: wave 4's implementer from § 14; Woodall's chain implementer, its proved leaves only, item 98). Briefs are derived from the
-   nearest earlier brief by script (the pattern of every brief in `data/fs131/briefs/`), gated with `python3 .claude/skills/keryx/scripts/brief_gate.py all`.
-2. When I2e hands back: the **Opus-implementer trial** on wave 2 (item 103).
+1. ~~Fill the free slot~~ — done: FS131-K2d launched (item 104). The next free slot (a half when I3e hands back): FS131-IW or FS131-I4 (Sonnet), briefs derived
+   from the nearest earlier brief by script, gated with `python3 .claude/skills/keryx/scripts/brief_gate.py all`.
+2. When I2e hands back: the **Opus-implementer trial** on wave 2 (item 103); its first step merges `fs131-w2d` (K2d's branch) into `fs131-w2`.
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
 5. **On E1's report**: file its verdicts; if a GAP closes, tell the Woodall implementer; file the row 132 / § The aim corrections per the verdict (W's drafts, plan
