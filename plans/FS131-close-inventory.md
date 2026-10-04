@@ -988,3 +988,8 @@ reason by the close.*
      rule requires to go (the old values are in git: `47a6ad6a`); nothing else lost, no pointer dangling, the PROTECTED regions intact; `--dupes` unchanged.
      Slip (Keryx's): the filing was committed in the same command that ran the audit, before its output was read; the result was read after and is as above.
      Audits run before the commit from now on.
+153. **Brief FS131-T3, the axiom gate** (`debruijn-implementer`, Opus, project tooling on `main`; `data/fs131/briefs/FS131-T3-axiom-gate.md`, gated PASS): CLEAN checked
+     as a subset of the standard three; an IMPORTED section for records resting on a declared outside theorem, the declared list in one documented place;
+     `scripts/gate_report.py` counting it; controls watched firing; the procedure by which a wave declares an import; drafts for the Trust ledger sentence.
+     **Scope change from item 144 (b)**: the vacuity half (`CPColouring`, `AeProperRegions`) is not T3's — those carriers exist only on waves 2 and 4's branches,
+     so each wave registers them at its own landing (added to their next briefs). Launched in LEB's slot: 1 (I3h) + 1 (IWb) + 1 (T3) = 3.
