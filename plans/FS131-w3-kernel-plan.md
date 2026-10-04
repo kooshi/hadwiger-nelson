@@ -283,3 +283,19 @@ RINGBAND carries RINGWIND's periodicity clauses as clause (vi).
 worktree: **OK — 440 of 440 batches, 12 modules rebuilt, 0 modules with warnings**, 8 m 15 s, exit 0 (`build/gate/build/20261004T060833Z-1516785.log`
 in the worktree; driver log `data/fs131/k3b/build-stage1.log`). Wave 1's seven modules are sorry-free on the merged tree; K3's foundation builds
 clean on top of them.
+
+## Stage 4 — SAVED: the three geometric checks (computer algebra, before the Lean is written)
+
+`tools/fs131_k3b_checks.py` (sympy 1.14; exact symbolic identities, exact sign reasoning on the parameter boxes, concrete configurations at
+rational multiples of `π` evaluated exactly or at 60 digits; no search). Output `data/fs131/k3b/checks.out`: **A: PASS; B: PASS; C: PASS**.
+Plants (`--plant A|B|C`, outputs `data/fs131/k3b/checks-plant-*.out`): each fires — A (the `v⁺` interval's upper end moved to `ψ + 170°`): the
+zero test and the length test fail; B (an arc curving away claimed inside): both radii fail the inside test; C (`y_3` put at `e(b − 60°)`): the
+derivative identity fails, `|x_e − y_3| < 1`, and the feasible arc no longer meets the window in `τ` alone.
+
+| statement | what was checked | result |
+|---|---|---|
+| **FS116-N1-GERM-R**'s four intervals | for `z = y + h`, `y = r(ψ)`, the ring point `r(φ)` at distance 1 from `z` near `ψ ∓ 60°` moves by `dφ = −(∇_z f · h)/(∂f/∂φ)`, `f = \|z − e(φ)\|² − 1`; for each germ (side `s`) the excluded set `{β : s·dφ(β) > 0}` is an open half-circle whose zeros are exactly the stated ends (`ψ + 150°, ψ + 330°` for `v⁻`; `ψ − 30°, ψ + 150°` for `v⁺`; `ψ − 150°, ψ + 30°` for `u⁻`; `ψ + 30°, ψ + 210°` for `u⁺`), positive at the middle (`2/√3`); and at `ψ = 0`, `\|h\| = 1/50`, middle direction, the distance-1 ring point lies on the germ's side, `1.32°` from `r(ψ ∓ 60°)` (first order predicts `1.3232°`) | **TRUE** — the four intervals are exactly the derivation's; the excluded directions are where the distance-1 point moves onto the germ |
+| **FS116-Y4-FLANK** | the first-order tangent cones: of `B̄(y′, 1)` at `y`, exactly `[ψ + 30°, ψ + 210°]`; of `B̄(y, 1)` at `y′`, exactly `[ψ + 210°, ψ + 390°]`; a segment leaving `y` along `ψ + 210°` has `\|seg(s) − y′\|² − 1 = s²` (it leaves the disc); arcs of radius 1 and 1/2 leaving `y` along `ψ + 210°` stay in `B̄(y′, 1)` when curving toward `y′` and leave it when curving away (turn 15°); the two unit arcs (centres `y′` and `y`, TWOCIRC's frame) satisfy `\|a(s) − b(s)\|² − 1 = −8 sin²(s/2) cos s` | **TRUE** — the cone clause follows from `t ⊆ B̄(y′, 1) ∩ B̄(y, 1)` alone; the edge clause needs only that each edge stays in the other unit disc. A shorter route than the row's second-order expansion: if either edge has radius below 1 it meets the other centre's unit circle only at its start, so one of its points is nearer than 1 to `y′` (resp. `y`), itself a point of the other edge (an initial piece contains its start); if both have radius 1, TWOCIRC at equal turns gives `−8 sin²(s/2) cos s < 0` |
+| **FS116-S1-EXIT** | `P = y_b` at the tangent heading `τ = φ + 90°`; `\|y_b − y_3\| = 1`; `d\|P − y_3\|²/dβ` at `τ` equals `−2 cos(φ − b + 150°)` (sympy returns `2 sin(φ − b + 60°)`, the same function); on the box `φ − b + 150° ∈ (330°, 450°)` where `cos > 0`; mirrors `Q = y_a`, `\|y_a − y_5\| = 1`, `2 cos(g − a − 150°)` with `g − a − 150° ∈ (−90°, 30°)`; concrete exit `b = 60°, a = −60°, φ = 270°`: `\|x_e − y_3\| = √2`, the feasible heading arc is `[τ, τ + 90°]` (width `90° ≤ 120°`) and meets the exit window `[τ − 180°, τ]` in `τ` alone | **TRUE** — the derivation's identities and signs hold; the argument reads only the left derivative at `t_e` and `γ ∈ Λ` just before (K3's widening confirmed) |
+
+No check failed, so no message was owed. The FLANK row's shorter route (radius below 1, or TWOCIRC) is the route the leaf plan gives.
