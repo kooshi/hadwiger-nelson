@@ -1665,3 +1665,17 @@ reason by the close.*
      Alternative weighed: send the definition to a deriver. Why: the Lean definition dropped a clause its source states explicitly, so the repair is a faithful
      transcription, not new mathematics; `IsRetArc` is the base skeleton's own vocabulary (not `Chain`'s, `HexRing`'s or `MapGraph`'s, which § 10.2 protects), and
      no row statement changes. Confidence: high. Amendment appended to `data/fs131/briefs/FS131-I5-wave5.md`.
+233. **FS131-I2m handed back at stage 27, harness ≈ 541k** (report `data/fs131/reports/FS131-I2m.md` on `fs131-w2`; branch at `57c26bd0`, checked): CoverExamples 16 →
+     5. **[kernel] on the branch, standard three**: FS111-M3-HC's (G2) `hcUp_slivers` and (G3) `hcBandTop_bounds`, `lt_hcBandTop_iff`, `continuousOn_hcBandTop`,
+     `hcBand_component_iff` (so **FS111-M3-HC's second clause `hc_band_components` is sorry-free**); § 2.3's `hc_band_dist_lt_one` and `hc_unitAvoiding` (no two
+     points of int HC at distance 1); Lemma NL `hc_lemmaNL`; `isClosed_hcSet`, `closure_interior_hcSet`, `volume_frontier_hcSet`; 70 children (the block kit:
+     `hcBlock_sep` — distinct blocks ≥ 1 apart, `hcBlock_dist_le_one`, local finiteness, `volume_graph_eq_zero`). Keryx's receipts: build log
+     `build/gate/build/20261004T203429Z-2166305.log` (w2) "Build completed successfully (5732 jobs)", 5 distinct warnings, all `sorry`, no other kind; CoverExamples
+     5 `sorry` lines by count; `data/fs131/i2/i2m-axioms.txt` prints `hc_band_components`, `hc_unitAvoiding`, `hc_lemmaNL` on the standard three and `hc_irreg`
+     with `sorryAx`. Generalizations for errata: Lemma NL needs no nearest-point argument (an exterior disc directly below at `(s, 2 + g s)`, any `R ≤ 2`, from
+     (G1)'s lower parabola alone); unit-avoidance of int HC needs only block separation ≥ 1 and block diameter ≤ 1. Route (not yet written): IRREG (2) from
+     `hc_exclusion` and `HC = cl int HC` by an annulus argument, no Baire. New import `Mathlib.Analysis.Convex.Measure` (Mathlib, not listed in
+     `ARCHITECTURE.md`'s project-only Imports cell). Seven new definitions with spec examples. Left: `hc_sausage_cover` (B1), `hc_exclusion` (B2), `hc_ae_phi_pos`,
+     `hc_free_pos`, `hc_free_subset_nowhereDense`; the carriers (I2k's two open points); the gate; the landing. **Next**: FS131-I2n (Opus), same slot.
+234. **Brief FS131-I2n, wave 2's fourteenth implementer** (Opus; `data/fs131/briefs/FS131-I2n-wave2.md`, derived by script from I2m's, source headings checked,
+     gated PASS): the last 5 HC/IRREG leaves, the carriers, the gate and the landing. Launched in I2m's slot: 1 (I4j) + 1 (IC3) + 1 (I5) + 1 (I2n) = 4.
