@@ -68,7 +68,8 @@ its record's last SAVED stage with a fresh agent on the same brief.
    § 5) and the FS106 errata through the record job.
 7. **On a landing** (wave 3 is closest): read the worktree's `build/gate/*/latest`, the axioms digest (`scripts/gate_report.py axioms <log> <prev> CLAUDE.md`),
    read one statement back, file the counts (`CLAUDE.md` § Trust ledger line and § The gate counts line; `scripts/vacuity-baseline.txt` header lines 25–26),
-   log the receipt. The second of waves 2 and 3 to land merges the first's vacuity carriers.
+   log the receipt. The second of waves 2 and 3 to land merges the first's vacuity carriers. **Before the gate on a merged branch**: run `tools/fs131_qa1_dupes.py`; the later-landing branch renames or deletes its colliding
+   names (item 142: six known — `framePt`, `dist_rot`, `eq_norm_mul_e_arg`, `e_add_int_mul_two_pi`, `e_mul_conj_e`, `abs_dot_le`).
 
 ## 5. Process notes that saved slips
 

@@ -863,3 +863,20 @@ reason by the close.*
      self-contained module on its own branch `fs131-leb` (worktree `.claude/worktrees/fs131-leb` from `main` at `bbee15f0`; packages symlinked, build copied
      from `main`'s), so it lands on `main` ahead of wave 4 and Woodall's chain; source read and bibliography row proposed (item 66's debt); it may prove leaves
      itself. Launched in E2's Opus slot: 0.5 × 4 (IW, I2g, I4b, I3g) + 1 (LEB) = 3, plus QA1 in the special slot.
+142. **FS131-QA1 mid-job findings** (message 2026-10-04): (1) **Statement says less than its row — FS106-TS-T's Condition-5 and Condition-6 clauses**
+     (`fs131-w4`, `Plane/SVMap.lean`, `ts_t_trichromatic` line 348, `ts_t_degree_three` line 357): the row reads "with Condition 5 it is trichromatic, with
+     Condition 6 of degree 3"; the Lean drops `Condition5` and assumes `h3 : ∀ x, (F.coloursAt x).ncard ≤ 3`, which makes "trichromatic" immediate from
+     TS-T's `≥ 3`. The row's content — Condition 5 ⟹ at most three colours, S–V Lemma 2 almost everywhere (SB § 2.1 A5) — is neither formalized nor on the
+     named-hypothesis list; the docstring cites ruling 53, written for FS110-N4-STUCK, and FS110-NB-4 gives "no vertex of four colours (nor five)" only in a
+     tight six-map in 𝓜_K under Condition 5, narrower than every almost-everywhere-proper map. Keryx's receipt: the two statements and their docstring read at
+     those lines. **Ruling**: TS-T's Condition-5 and -6 clauses are held **over S–V Lemma 2's conclusion** ("every point carries at most three colours"), a
+     carried hypothesis; it joins the named hypotheses (`Row130M1`, `hR78`, `hR88`, `hR88per`, `Voronov11`) for the close, and FS106-TS-T's regrade must say
+     "Condition-5 clause over S–V Lemma 2's conclusion". The statements stay as they are now. **Owed at wave 4's landing**, to a planner: state the clauses
+     with `F.Condition5`, with S–V Lemma 2 (in the class it holds) as a named lemma or an imported `axiom` with `LEAN.md` § Assumptions' four items — or
+     confirm the carried form. Alternative weighed: restate now. Why not: no consumer reads these two clauses yet, and the class S–V Lemma 2 holds in needs a
+     planner's reading first. Confidence: high for the record; the restatement's form is the planner's. Credit QA1.
+     (2) **Six cross-branch name collisions** (`tools/fs131_qa1_dupes.py`, `data/fs131/qa1/dupes.txt`): `Plane.framePt` (w2 `Slack` vs K4's `ValidMap/Basic`,
+     different definitions), `Plane.dist_rot` (w2 vs w3, different statements), `Plane.eq_norm_mul_e_arg` (w2 vs w3), `Plane.e_add_int_mul_two_pi` (w3 vs ww,
+     different forms), `Plane.e_mul_conj_e` (w3 vs ww, identical), `Plane.abs_dot_le` (w4 vs ww, identical). **Ruling**: at every landing merge, after merging
+     `main`, the landing implementer runs `tools/fs131_qa1_dupes.py`; the branch landing later renames its copy (different statements) or deletes it and uses
+     the landed one (identical), before the gate. Added to the landing procedure in the handoff and to every implementer brief from now on. Confidence: high.
