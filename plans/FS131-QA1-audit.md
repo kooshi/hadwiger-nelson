@@ -101,3 +101,63 @@ Findings, each small:
 | D6 | `fs131-w3` `Plane/LocalMap` (module doc) | "a tile of colour `c`" is read as the colour class `F.region c` wherever a row speaks of its closure, cone or germ. For existential uses this is exact by local finiteness (finitely many tiles near a point of the domain; a cone of a finite union is the union of cones); universal uses keep `TileOf` (`InType`, `OutType`, GERM-S's "every tile of `p` of colour `c`"). Checked in the sampled statements of Stage 3 | none — a good, documented ruling |
 | D7 | `fs131-ww` `Plane/Woodall/Basic` `WoodallMerged`, `WoodallNormal` | both quantify over every `SectorsAt` presentation, so at a point with none they say nothing; `ArcMap.exists_sectorsAt` (still `sorry`, `Woodall/Steps`) is what makes them bite. The final theorems' statements do not depend on this, so it is not a fidelity risk, but `exists_sectorsAt` is load-bearing and should be proved before the chain's step lemmas are trusted as meaningful | C: keep `exists_sectorsAt` first in Woodall's order (implementer) |
 | D8 | K4 `Plane/ValidMap/Basic` `IsQArc`, `InContact`, … | the ring-arc kinds do not require the two side colours to differ. Under `Valid` with the side colour carried at the centre a same-colour arc is impossible (the circles about nearby points of that colour sweep the arc's neighbourhood), so nothing is lost; noted so nobody "fixes" it into a hypothesis | none |
+
+## Stage 3 — SAVED
+
+### 3.1 Statement fidelity: twenty statements read against their rows
+
+Each formal statement was read against the row's "Statement as filed", its "Not claimed" line, its errata and merge notes
+(`plans/LEAN-BACKLOG.md`), and the derivation entry where the row is terse, with every definition unfolded to Mathlib's (Stage 2).
+"Proved" means no `sorry` in the declaration's own proof at the committed tip, not its whole dependency cone.
+
+| # | body | row | declaration (`path:line` at tip) | proved | verdict |
+|---|---|---|---|---|---|
+| 1 | w1 | FS111-V0-ID1 | `Plane/DensityPoints.lean:168` `AeColouring.dist_ne_one` | yes | **same** |
+| 2 | w1 | FS129-SR2-CLOSURE | `Plane/Closure.lean:29` `dist_ne_one_of_mem_of_mem_closure` | yes | **same** (open `U`, `UnitPairsNull U` is the row's `(Leb ⊗ σ)` condition read through `arcLength`) |
+| 3 | w1 | FS129-SA1-FALC-DICHO-K | `Arith/FalconerFan.lean:139` `falconerFan_chromaticNumber` | yes | **stronger**: second clause unconditional (the row's `χ(H) = k − 1` is idle, docstring says why) |
+| 4 | w2 | N-EASY | `Plane/YesLimit.lean:104` `chromaticNumber_plane_le_chiM0` | yes (its `exists_motion` proved) | **same**: `(unitDistance ℂ).chromaticNumber ≤ chiM0` |
+| 5 | w2 | FS116-O1-YESLIM | `Plane/YesLimit.lean:139,144` `chiM0_le_of_fragments`, `chromaticNumber_plane_le_six_of_fragments` | own body yes; rests on `muZero_eq_one_of_fragments` (`sorry`) and `chiM0_le_iff_muZero_eq_one` (`sorry`) | **same** (the row's `k ≥ 1` idle; "valid `k`-coloured fragment on a closed disc of radius `R`" is `∃ F p, F.Covers p R ∧ F.Valid`) |
+| 6 | w2 | FS106-EQ | `Plane/Slack.lean` `chiM0_le_iff_muZero_eq_one` (1154), `chiM0_le_iff_chiCP_le` (1158), `muZero_eq_one_iff_tendsto` (1162), `chiM0_le_iff_periodic` (1181), `seven_le_chiM0_iff` (1208) | (c)⟺(d), (e), the six clause proved over `sorry` children; (a)⟺(c) `sorry` | **same**, (a) ⟺ (b) over the named `Row130M1` (ruling 22). `lim_{ε→0} µ₆(ε)` read as `⨆ ε > 0, mu 6 ε` — exact, `µ₆` antitone (proved: `antitone_mu`); "leaving density ≤ δ uncovered" read as covered upper density `≥ 1 − δ` — exact for periodic families |
+| 7 | w2 | FS106-COMP (2nd clause) | `Plane/Slack.lean:1358` `forall_mu_six_lt_one_iff` | yes (both directions' lemmas proved) | **same**, against the named `Voronov11` (D-VPROP: no `f : ℂ → Fin 6` proper on `[1 − ε, 1 + ε]`, no measurability — the proof closes the classes to make them measurable, as it must) |
+| 8 | w2 | FS111-M-COVER-SC (2nd clause) | `Plane/MaximalCover.lean:713` `IsMaximalCover.semiconcaveWith` | yes | **different, by ruling** (items 18–19, 57, 72): constant `(1 + L²)^{3/2}` on `L`-Lipschitz pieces, curvature tested from below; the row's constant `1` is refuted in the library (`not_forall_semiconcaveWith_one` on R7) |
+| 9 | w2 | FS129-MA2-FALC-HOSTS (iii) | `Arith/FalconerField.lean:259` `falconerFan_five_mem_eight` | yes | **stronger form over a hypothesis carrying the row's object** (ruling 22): any lattice `Λ` whose four-colour-forced differences lie in `8Λ` (`hR78`); de Grey's lattice appears nowhere — the row is its instance once the lattice and row 78 are in Lean |
+| 10 | w2 | FS129-MA2-FALC-HOSTS (iv) | `Arith/FalconerField.lean:274` `falconerFan_five_mem_P` | yes | **a frame, weaker than it reads** (ruling 22 accepted the frame; this sharpens what it holds): `P : Set ℂ` and `Per : Prop` are free variables, so `hR88`, `hR88per` are satisfiable by `P := forced set`, `Per := True`, and the kernel content is "a fan's `t − a` is a non-zero forced difference of `R`". The row's fields, `R = ℤ[U_F]`, `P = R ∩ 𝔓⁴` and periodicity appear only when someone instantiates them. Not wrong; must not be filed as "HOSTS (iv) held over row 88" without that sentence. Fix: a docstring line now, and an instance corollary when the rings exist (planner) |
+| 11 | w2 | FS129-OA1-NOPERLAW | `Plane/Stationary.lean:364,388` `CPColouring.exists_discrete_forcedSet`, `CPColouring.forcedSet_eq_zero` | yes | **same** |
+| 12 | w2 | FS121-V5-FACE-SHARP (failure half) | `Plane/Slack.lean:1486` `exists_face_fails` | yes | **same, with ruling 86's two added hypotheses** (`2ρ < 1`, `g² + ρ² < 1`; both shown necessary by counterexamples in the ruling); `g < 1` follows from them |
+| 13 | w3 | FS116-N1-QFREE4 | `Plane/RingGerm.lean:861` `qfree4` | yes | **stronger**: at every `k`, `ncard (coloursAt p) + 2 ≤ k`; at `k = 6` with `h4` exactly the row's "four colours and no more"; it claims something at `k ≥ 7`, where the row's not-claimed line is silent by design (the docstring says the argument reads two absent colours) |
+| 14 | w3 | FS116-RING-Q-PRIME-S | `Plane/RingGerm.lean:1907` `ringQPrimeS` | yes | **same at six, stronger elsewhere**: the added `k ≤ ncard + 2` holds automatically at `k = 6` with four colours at `p` |
+| 15 | w3 | FS129-SR1-RINGBAND (iv), (v) | `Plane/RingBand.lean:936,959` `ringband_iv`, `ringband_v` | yes | **same**: (iv)'s last clause adds "every point of `S` is a genuine change (left and right values differ)" — the row's `Σ` is a set of *change points*, and `CircleColouring.S` may hold idle points, so this restores the row's meaning (ruling 61 for the second conjunct); `Lift.jump` allows `0` at an idle point for the same reason |
+| 16 | w3 | FS116-N1-ECHO | `Plane/RingGerm.lean:1583` `echo` | yes | **stronger hypotheses-wise, class-form conclusion**: no disc hypothesis at all (the row's "radius above 2"); conclusion `X ∈ coloursAt (2w − p)` (closure of the class). With the row's disc, `2w − p` is in the domain and the class reading equals the tile reading (`mem_coloursAt_iff_exists_tileOf`). The hypothesis `_hess : F.IsEssBoundary …` is kept for fidelity and unused (D) |
+| 17 | w3 | FS116-V5-NE1 | `Plane/Tiles.lean:52,65,82,88` `ne1_region`, `IsTile.subset_ball`, `IsTile.closure_subset_closedBall`, `IsTile.dist_lt_one` | yes | **same/stronger** (class closure for the first clause; diameter pointwise and strict) |
+| 18 | w4 | FS106-TS-T | `Plane/SVMap.lean:268,336,348,357` `AeProperRegions.exists_three_le_multicolour`, `ArcMap.ts_t`, `ts_t_trichromatic`, `ts_t_degree_three` | first `sorry`; the rest proved over it | first two clauses **same**; **Condition-5 and Condition-6 clauses weaker than the row** — `Condition5` is replaced by `h3 : ∀ x, ncard (coloursAt x) ≤ 3`, after which "trichromatic" is immediate; the row's Condition 5 ⟹ ≤ 3 colours is neither formalized nor a listed named hypothesis, and NB-4 (the docstring's source) gives it only for tight six-maps in `𝓜_K`, excluding four and five colours, not six. **Messaged to the coordinator** (correction owed) |
+| 19 | w4 | FS112-ISO | `Plane/ValidMap/UnitArc.lean:543` `iso` | yes | **same, witness form**: one explicit valid fragment with every clause; "blocks a first-order away-bend" read as "the radial points beyond the arc's middle are at distance exactly 1 from the inner colour's class" (`¬ IsClear`), which is what blocks a lens from taking that colour — a reasonable reading, stated in the docstring |
+| 20 | ww | FS106-WO (step 4) | `Plane/Woodall/Collar.lean:592` `woodall_step4` | yes | **same** (strictly above `2π/3`), with sharpness proved: `not_woodall_step4_two_thirds` (Townsend's counterexample) shows the `≥` form false, so the hypotheses at the boundary are satisfiable — the best possible non-vacuity evidence for a `False`-concluding lemma |
+| 21 | ww | FS106-TW (the `π/3` lemma) | `Plane/Woodall/Collar.lean:766` `townsend_lemma` | yes | **same**, in the form its proof reads (cut angles finite, a seed arc `> π/3` on one side); the planner's read-back is in `plans/FS131-W-kernel-plan.md` |
+| 22 | ww | E1-SEE | `Plane/Woodall/NoFourFive.lean:549` `not_mem_coloursAt_of_dist_eq_one` | yes | **same** (class form) — and the same fact as wave 3's `ne1_region` in contrapositive (Stage 4) |
+
+**Tally**: 22 statements in 20 rows (21 listed in Stage 1 plus RINGBAND (iv) read beside (v)). Same or stronger: 17. Changed by a
+recorded ruling and correct: 3 (COVER-SC, FACE-SHARP, RINGBAND (iv)). A frame that holds less than it reads, ruled but under-described:
+1 (HOSTS (iv)). **Weaker than its row with no ruling that covers it: 1 (TS-T's Condition-5/6 clauses).**
+
+**The class reading (Stage 2, D6) held up in every sampled ring statement**: existential uses (ECHO's conclusion, GERM-S's cones)
+are exact by local finiteness, universal uses keep tiles (`TileOf` in GERM-S, `InType`, `OutType`).
+
+**Correction to Stage 2, D2**: wave 2 already proves the bridge `essSupport_eq_closure_densitySet` (`Plane/Cover.lean:441`); what is
+missing is that wave 3's `SaturatedAt` and `essColours` are not stated through wave 2's `essMulticolour` and `IsContactFor` (they cannot
+be yet: wave 3 does not import wave 2). The fix at merge is to restate or bridge, not to prove anything new.
+
+### 3.2 Merge collisions (found while reading; the full measurement is Stage 4)
+
+`tools/fs131_qa1_dupes.py` (self-test: namespace tracking; **negative control watched** — with `end` no longer popping the namespace
+stack the self-test fails naming `A.B.bar`) finds six fully qualified names declared in the own files of two branches. Lean refuses the
+second as soon as `Proofs.lean` imports both modules, and four of the six have **different statements** under one name:
+`Plane.framePt` (a `def`: w2 `Plane/Slack.lean:545` `x + e θ (−s + t i)` against K4's `Plane/ValidMap/Basic.lean:44`
+`v + (x + y i) e α`), `Plane.dist_rot` (w2 `FalconerReduction.lean:603` against w3 `SixFragment.lean:349`), `Plane.eq_norm_mul_e_arg`
+(w2 `Cover.lean:487` against w3 `SixFragment.lean:145`), `Plane.e_add_int_mul_two_pi` (w3 `SixFragment.lean:108` against ww
+`Woodall/NoFourFive.lean:294`); identical twice: `Plane.e_mul_conj_e` (w3 `Chord.lean:272`, ww `Woodall/Collar.lean:30`),
+`Plane.abs_dot_le` (w4 `ValidMap/Contact.lean:350`, ww `Woodall/Collar.lean:389`). List: `data/fs131/qa1/dupes.txt`. Messaged.
+
+Wave 3's seven statement changes in the shared skeleton files since waves 4 and Woodall forked (`ringband_iv`, `ringband_vi_periodic`,
+`germS_absent`, `fiveRing_no_changePoint`, `echo`, `four_of_bothKind`, `four_of_bothKind_simple`) are **used by neither** wave 4's nor
+Woodall's own files (checked by name over their own files), so wave 3's fill will not break them semantically; the merge risk is the six
+names above and the append-only files (Stage 4).
