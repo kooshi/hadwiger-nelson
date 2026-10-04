@@ -636,3 +636,21 @@ reason by the close.*
      mind on E1-NO45; FS131-W2's formalization is its check (item 107's held decision, closed). On the outside repositories: *"The other github repo is better,
      but they're far behind us."* (`decalion89/chromatic-number-of-the-plane`, item 105; its prior-art note — an independent Lean formalization of rows 103 and
      57 — stays a debt for `BIBLIOGRAPHY.md` at the close.)
+112. **Statement defect candidate — a cusp breaks `four_of_bothKind`'s route** (FS131-I3e, message 2026-10-04; `Plane/RingGerm`, FS116-V5-U1's four-colour clause):
+     `hint` allows `β₁ = β₂`, so a tile's cone at `z` may be one direction (a cusp between two tangent arcs; `Simple` allows it — a Jordan domain can have a cusp).
+     A cusp `c`-tile in the facing cone, a `d`-tile whose interval cone covers both side cones and the facing cone around the cusp, and a `c′` sector meet every
+     hypothesis with three colours at `z` and no contradiction found locally — a local picture, not a built fragment. The plan's route (a colour in both side
+     cones overlaps `c`'s or `c′`'s tile cone in an interval) needs non-degenerate cones. **Ruling**: `four_of_bothKind`'s `hint` takes `β₁ < β₂`;
+     `four_of_bothKind_simple` takes a hypothesis that no tile with `z` in its closure has a cone of one direction (no cusp at `z`; the Lean form the
+     implementer's). Alternative weighed: hold wave 3's landing until a deriver settles the cusp case. Why not: the repaired forms are weaker, so they cannot be
+     wrong where the originals are right, and a stronger form, if the cusp case holds, is a new theorem later, not a restatement; wave 3 is nine leaves from
+     landing. Confidence: high that the repair is sound; medium that the hand clause fails with cusps. **Correction owed** (to the record job / an Ephodos
+     job, queued as **FS131-E2**: prove the four-colour clause with a cusp at `z`, or build the valid fragment): FS116-V5-U1's four-colour clause is held only
+     with no cusp at `z`; its hand consumers — FS116-V5-DICHO, FS116-V5-CROSS-S, V5's second derivations of FS116-N3-SEMI, -PAIR, -CROSS — inherit the question.
+     **Wave 4 note**: FS112-N3-NOBOTH (`noBoth`, "four colours or a repeated colour") likely has the same cusp case — for wave 4's implementer brief.
+113. **EXT-HN1 build result** (message 2026-10-04; record `plans/EXT-HN1-verification.md` stage 2, commit `02a06d16`): the repository's own build compiles
+     nothing (`lake build` exit 1, "no such file … HadwigerNelson.lean"; `lake env lean` exit 1, "unknown module prefix 'Mathlib'"). In the auditor's harness
+     (TOML lakefile requiring Mathlib v4.28.0, the file unchanged) it builds, `#print axioms` gives the standard three for `outside_headline` and
+     `unit_clique_verified`, lean4checker replays clean with its controls firing. The audit module proves, against their unchanged definitions, on the standard
+     three: `not_outsideDensity_quarter` (the assumed density lemma false at `r = 1/4`), a `OutsideColoring (1/4)` failing `h_safe`, and
+     `outside_headline_hypotheses_never_hold` — for every `r ≥ 0`, no six-colouring of the circle satisfies the hypothesis, so the theorem applies to nothing.
