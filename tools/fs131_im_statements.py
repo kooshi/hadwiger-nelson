@@ -7,12 +7,17 @@
                                                    # conclusion), and print the diff of the statement text (empty when equal)
 
 A statement block runs from `theorem <name>` to the first `:= by` that ends a line. Exit 0 only when all three match.
+The source is d4f946ae's `Contact` with the ruled amendments of `tools/fs131_im_amend.py` applied (FS131-IM2: item 269 changes
+`exists_merge`'s colour clause); `--check` also holds the working `Contact`'s three statements to that source.
 """
 import difflib
 import re
 import subprocess
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import fs131_im_amend  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC_REV = "d4f946ae"
@@ -31,6 +36,7 @@ def main():
         print(__doc__)
         return 2
     src = subprocess.run(["git", "show", f"{SRC_REV}:{CONTACT}"], cwd=ROOT, check=True, capture_output=True, text=True).stdout
+    src = fs131_im_amend.apply(src)  # d4f946ae plus the ruled amendments (item 269)
     bad = 0
     if sys.argv[1] == "--print":
         for n in NAMES:
@@ -41,7 +47,14 @@ def main():
             print(b.replace(f"theorem {n} ", f"theorem {n}_aux ", 1) + "\n")
         return 0
     moves = (ROOT / MOVES).read_text()
+    contact = (ROOT / CONTACT).read_text()
     for n in NAMES:
+        c = block(contact, n)
+        if c != block(src, n):
+            print(f"FAIL: {n}: the working Contact's statement differs from {SRC_REV}'s plus the ruled amendments")
+            bad += 1
+        else:
+            print(f"ok: {n} in the working Contact is {SRC_REV}'s statement plus the ruled amendments")
         s = block(src, n)
         t = block(moves, n + "_aux")
         if s is None or t is None:

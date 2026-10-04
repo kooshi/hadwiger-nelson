@@ -13,6 +13,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import fs131_im_amend  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 SRC_REV = "d4f946ae"
 CONTACT = "Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean"
@@ -122,7 +125,8 @@ def build(lines):
             kept.append(l)
     last_import = max(i for i, l in enumerate(kept) if l.startswith("import "))
     kept.insert(last_import + 1, IMPORT_LINE)
-    return cone, "\n".join(kept)
+    # the ruled amendments (tools/fs131_im_amend.py; item 269), none of them in the moved ranges
+    return cone, fs131_im_amend.apply("\n".join(kept))
 
 
 def check_source(lines):
@@ -187,7 +191,8 @@ def main():
         bad += 1
     else:
         print(f"ok: {CONTACT} is {SRC_REV}'s minus exactly the moved ranges (and their trailing blank lines) plus `{IMPORT_LINE}`"
-              f" and the reopening of `namespace ArcMap` before source line {REOPEN_AT}")
+              f", the reopening of `namespace ArcMap` before source line {REOPEN_AT}, and the {len(fs131_im_amend.AMENDMENTS)} ruled"
+              f" amendments of tools/fs131_im_amend.py")
     if bad:
         print(f"FAIL: {bad} check(s) failed")
         return 1
