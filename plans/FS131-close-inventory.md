@@ -665,3 +665,13 @@ reason by the close.*
      merges `fs131-w2d` first if K2d has handed back. Credit: I2e, for the item-100 slip found and four hard leaves closed.
 115. **Brief FS131-I4, wave 4's first implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I4-wave4.md`, gated PASS; carries item 112's cusp note
      for `noBoth`). Launched in the half slot I2e freed: slots 0.5 (I3e) + 0.5 (I4) + 1 (K2d) + 1 (W2) = 3, plus EXT-HN1 in the special slot.
+116. **FS131-I3e handed back at stage 5, harness ≈ 400k** (report on its branch; `fs131-w3` at `4f7b949d`, checked): `finite_tiles_near`,
+     `mem_coloursAt_iff_exists_tileOf`, `coneAt_region_eq_biUnion` (engine 3, with no sector engine — a "good radius" and a farthest-point lemma) and `germS_four`;
+     `ringQPrimeS` now sorry-free; item 112 applied (`hint` strict; `four_of_bothKind_simple` takes `hnc : ∀ T, F.IsTile T → z ∈ closure T → ∀ β, coneAt T z ≠
+     angleIcc β β`, its proof done). Keryx's receipt: the two statements read at `RingGerm.lean` lines 2248 and 2257; five `sorry` left by count (`SixFragment` 3,
+     `RingGerm` 2); build log `build/gate/build/20261004T110435Z-2915550.log` OK — but it predates the item-112 edit, compiled only in scratch. **Correction
+     owed to the plan** (I3e's): `sixFrag_nonSiamese` needs each of S_0, Q_4, G_2 (cut at 3/2) connected, which the plan's route omits. Slip (I3e's):
+     `LocalStructure`'s module docstring says "Every leaf is sorry". Axioms from scratch `#print axioms`, not a gate log.
+117. **Brief FS131-I3f, wave 3's sixth implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I3f-wave3.md`, derived from I3e's by script, gated
+     PASS): the last five leaves, the gate, the vacuity step, the landing. Launched in I3e's half slot: slots 0.5 (I4) + 0.5 (I3f) + 1 (K2d) + 1 (W2) = 3, plus
+     EXT-HN1 in the special slot.
