@@ -255,6 +255,15 @@ def parse_left(text: str) -> tuple[list[tuple[str, int]], list[str]]:
     return left, joined
 
 
+def readme_lines(idv: str) -> list[tuple[int, str]]:
+    """The table rows of README-corrections.md that name the entry (quoted whole)."""
+    out = []
+    for i, l in enumerate(CORR_README.read_text(encoding="utf-8").splitlines(), 1):
+        if l.startswith("|") and tok_in(idv, l):
+            out.append((i, l))
+    return out
+
+
 def why_left(idv: str, old_ids: set[str], seeds: set[str]) -> str:
     """A shortest path in edges.csv (as IX1 wrote it) from the entry to a seed, each edge marked with its fate in edges-dropped.csv."""
     dropped = {}
@@ -676,7 +685,9 @@ def write_md(model: dict, merges: list[dict]) -> tuple[str, dict]:
         e = entries[idv]
         why = why_left(idv, old_ids, seeds)
         meta = f"**Address** `{e['file']}:{e['line']}` · **Role in `lean-order.md`** {oldrow[idv]['role']} · **Was** {was} · **Why it left** {why}"
-        o.append(render_row(idv, e, f"L{was}. {idv}", meta, merges, sorted(set(caut_of.get(idv, []) + [118]))))
+        rl = readme_lines(idv)
+        extra = "".join(f"<!--q {idv} readme@{ln}-->\n**`README-corrections.md:{ln}` names it:**\n{quote(txt)}\n\n" for ln, txt in rl)
+        o.append(render_row(idv, e, f"L{was}. {idv}", meta, merges, sorted(set(caut_of.get(idv, []) + [118])), extra=extra.rstrip("\n")))
         cnt["left_rows"] = cnt.get("left_rows", 0) + 1
     # ---- extras
     o += ["## Named by a merge line or a caution, not in the order", "",
@@ -899,6 +910,11 @@ def verify(md: str, model: dict, merges: list[dict], extras: list[str]) -> list[
         want_m = {f"merge@{m['list']}-{m['item']}" for m, _ in merge_notes_for(idv, merges)}
         if have_m != want_m:
             fails.append(f"{idv}: merge notes in the file {sorted(have_m)} differ from the lines that name it {sorted(want_m)}")
+    for a, _w in model["left"]:
+        want = dict(readme_lines(a))
+        have = {int(k[1].split("@")[1]): v for k, v in blocks.items() if k[0] == a and k[1].startswith("readme@")}
+        if set(want) != set(have) or any(ws(have[k]) != ws(want[k]) for k in want if k in have):
+            fails.append(f"{a}: the README-corrections lines quoted for it differ from the README's")
     # cautions
     for c in CAUTION_ITEMS:
         _ln, text = inventory_item(c)
@@ -978,6 +994,12 @@ def model_checks(model: dict, merges: list[dict]) -> list[str]:
         CHECKS.append("FS129-OA1-FALC-RED (superseded) and FS129-SA1-FALC-RED have " + ("identical" if ws(a1["statement"]) == ws(a2["statement"]) else "DIFFERENT") +
                       " statements (SA1 § 6.3 item 6 names the OA1 statement with the SA1 argument; the backlog row is the SA1 entry)")
     shown = {r["id"] for r in model["order"]} | {a for a, _ in model["left"]}
+    for r in model["order"]:
+        kinds = {m["kind"] for m, _l in merge_notes_for(r["id"], merges)}
+        if "DO-NOT-FORMALIZE" in kinds and "SEED" in r["role"]:
+            CHECKS.append(f"{r['id']} is a {r['role']} row of the order (its handoff names de Bruijn) and a merge line says do not formalize it as stated (the line may name a clause only)")
+        if "DO-NOT-FORMALIZE" in kinds and "QUOTE-WITH-ERRATA" in kinds:
+            CHECKS.append(f"{r['id']} is named by a do-not-formalize line and by a quote-with-errata line; both are attached")
     for idv in sorted(shown):
         e = entries[idv]
         if e["file"] != FS129_FILE and re.search(r"superseded", e["handoff"]):

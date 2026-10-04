@@ -1,3 +1,5 @@
+*Read `data/fs129/index/README-corrections.md` with this file: it says which of the index's files to cite (the `-corrected` ones), which figures stated about the index are withdrawn, and where its counts are upper bounds (FS129-Z2; pointer added by FS129-L1, inventory item 143).*
+
 # FS129-IX1 — the index: record
 
 *The Clerk, Sonnet 5.5, 2026-10-03. Brief: `data/fs129/briefs/FS129-IX1-index.md`. Script: `tools/fs129_index.py`. Everything below is read from files by that script or by the commands shown; nothing is judged.*
