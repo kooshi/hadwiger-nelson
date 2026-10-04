@@ -2121,6 +2121,9 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.continuous_frameMap
 #print axioms HadwigerNelson.Plane.abs_deriv_le_of_touch_below
 #print axioms HadwigerNelson.Plane.semiconcave_pos
+#print axioms HadwigerNelson.Plane.sq9Col_of_floor
+#print axioms HadwigerNelson.Plane.sq9_not_bandNull
+#print axioms HadwigerNelson.Plane.sq9_tight
 
 #eval IO.println "=== PURCHASED ==="
 

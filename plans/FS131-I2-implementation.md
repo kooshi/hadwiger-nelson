@@ -139,6 +139,53 @@ Axioms not yet read from a saved audit log (gate not run); `scripts/Axioms.lean`
 `nonempty_cpColouring_nine` (FS129-OA1-NOPERLAW's inhabitant), `chiM0_le_iff_periodic` (FS106-EQ (a)⟺(e), conditional on two open leaves),
 `face_densitySet` (FS121-D4-FACE last clause, conditional on `face`), `forall_mu_six_lt_one_iff` (FS106-COMP second clause, ⟸ conditional on the attainment lemma).
 
+## Stage 6 — SAVED (FS131-I2d): four leaves, one ruling applied; the build is green; 34 `sorry` left
+
+**Readback.** Brief's two quotations match `plans/FS131-w2-kernel-plan.md` Stage 10 and Stage 5 above. May not: change any statement, hypothesis or definition's
+meaning (rulings 56, 57, 63, and 72 below are the only authorised changes), no `axiom`, no `native_decide`. `main` has moved (`f3dae3d0`); not merged this
+session (merge at the landing).
+
+**Ruling applied** (Keryx, `plans/FS131-close-inventory.md` item 72, on this job's message): `IsLowerGraphOf`'s first clause is strict, `t < u s` — a point on a
+smooth arc has density `1/2`, so `r7_lowerGraph` was false at `t = u s` (`s = 3/20`, `z₀ = e(π/6)`, `θ = 2π/3`). The docstring carries the item.
+
+**Leaves closed** (cumulative 37 of 71 counting wave-2's earlier 33; 38 → 34 left): `r7_not_bandNull` (open set of band pairs in `U(0,0)`, vertex-to-arc
+direction `e(π/6)`; child `r7ColTri_zero`), `r7_lowerGraph` (δ = 1/20; children `triCoord_frame`, `r7ColTri_four`, `triQ_far_gt`, `triQ_frame`: the frame's lattice
+coordinates are `((1−t)/√3 ∓ s)`, `triQ = (1−t)² + s²`), `IsMaximalCover.curvatureLeOne` (the graph point is a frontier point; `enclosing_or_exterior_contact` on the
+preconnected piece `P`; the touching curve `φ` gives `g(s) = |frame(s, φ s) − y|² − 1 ≤ 0` (or `≥ 0`) with `g(s₀) = 0`; second-derivative test through
+`second_order_of_local_max`, via a `−(c/4)(s−s₀)²` perturbation and Mathlib's `isLocalMin_of_deriv_deriv_pos`; the vertical segment below the graph point fixes
+the sign of `w = u s₀ − τ` in both cases; **the equator configuration is excluded by the first-order condition** `w = 0 ⇒ s₀ = σ ⇒ 0 = 1`; the exterior case ends at
+`√X · (−w) = 1`), `IsMaximalCover.semiconcaveWith` (`semiconcave_pos`: a chord violation of `v = u − K x²/2` is touched from below by the convex parabola
+`ℓ − ε(x−a)(b−x) + const`, min of `g_ε` on `[a,b]`; `abs_deriv_le_of_touch_below` gives `|φ'| ≤ L` from the Lipschitz bound by one-sided slopes).
+**`sq9_tight_saturated`** is split: `sq9_tight` (with `sq9_not_bandNull`, `sq9Col_of_floor`) is proved; the saturation clauses are the one remaining `sorry`
+`sq9_saturated_both` (plan: `essClosure (cls j)` lies in the closed squares of the class by floors; a boundary point off every open square lies on an edge;
+the facing same-class edge is `x ± (1,0)` or `x ± (0,1)`, in `closure (densitySet)` as the closure of an open square; `essSupport ⊆ essClosure` here needs a
+`1/16` ball-in-box density bound, as in `upperDensityAt_pos_of_halfBox`).
+
+**Build**: `./scripts/build.sh` under the slot, OK, 443 of 443, 34 `declaration uses sorry` warnings and no other (`build/gate/build/20261004T085910Z-2325827.log`);
+`tools/check_architecture.py` run. `scripts/Axioms.lean`: 17 records added for the children (the `sq9_saturated_both` child is not recorded: it is `sorry`).
+Gate not run (34 leaves left).
+
+**Findings for the successor.**
+- `IsMUA.add_normal_mem_essSupport` (BAND (1)): route found and costed, not proved. Shadow gives `y_τ ∈ supp A` at distance `1` from `m + τ e` for every
+  `τ ∈ (0, δ)`; the open half-box lies in `Ã` (open, a.e. inside `A`), so `dist_ne_one_of_mem_interior_densitySet` keeps `y_τ` at distance `≠ 1` from every
+  half-box point; a limit `y*` of `y_τ` (compactness, `S` closed) has `|y* − m| = 1`, and the unit circle about `y* = m + e(σ + ρ i)` meets the open half-box
+  (`g(s,t) = s² + t² + 2sσ − 2tρ = 0` on `0 < s < ε`, `|t| < ε`, by the intermediate value theorem on a convex box) unless `(σ,ρ) = (1,0)`. The cases `ρ ≠ 0`,
+  `ρ = 0, σ = −1` need separate witnesses (`ρ = 0`, `σ = −1`: `t = ε/2` and `s` small). About 150 lines.
+- `chiM0_le_chiCP` needs a jointly measurable modification of a process continuous in probability (dyadic approximation); `face` and `keptAt_band` are
+  circle-meets-open-set arguments of the same kind; `sqrt3_local_of_congr`, `falconerFan_five_*`, `exists_placeHom` need Kummer–Dedekind and `decide +kernel`
+  orbit tables (not started).
+- Iteration: `lake env lean -DautoImplicit=false <file>` against the worktree's own oleans works from a scratch file importing the module (9 s for `CoverExamples`);
+  after a statement change in `MaximalCover`, one real build is needed first.
+
+**Re-pricing.** `r7_not_bandNull` 15k tokens, `r7_lowerGraph` 40k (the rebuild after the ruling included), `curvatureLeOne` 70k, `semiconcaveWith` 40k, `sq9_tight` 20k:
+the M leaves ran at 40–70k, as the earlier stages found.
+
+## Theorems this phase proved (FS131-I2d, additions)
+
+Axioms not yet read from a saved audit log (gate not run); `scripts/Axioms.lean` has the records. Declarations: `r7_not_bandNull` (FS111-M-R7 tightness),
+`r7_lowerGraph` (FS111-M-COVER-SC defect witness, with item 72), `IsMaximalCover.curvatureLeOne` (FS111-M-COVER-SC second clause, corrected),
+`IsMaximalCover.semiconcaveWith` (its named corollary), `sq9_tight` (FS111-W-SQ9 tightness; the saturation half open).
+
 ## Drafts for the front page
 
 None: the gate was not run (43 leaves remain). Vacuity carriers for wave 2 are not yet registered.

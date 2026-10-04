@@ -34,10 +34,75 @@ open Complex Real Set MeasureTheory Filter Topology Metric
 
 /-! ## FS111-W-SQ9 -/
 
+/-- `sq9`'s colour on a square, read from the floors. -/
+theorem sq9Col_of_floor {z : ℂ} {n m : ℤ} (h1 : ⌊2 * z.re⌋ = n) (h2 : ⌊2 * z.im⌋ = m) :
+    sq9Col z = finProdFinEquiv ((n : ZMod 3), (m : ZMod 3)) := by
+  simp only [sq9Col, sq9Index, h1, h2]
+
+/-- Squares `(0,0)` and `(3,0)` hold non-null pairs at distances in `[1 − ε, 1 + ε]`, for every `ε > 0`. -/
+theorem sq9_not_bandNull {ε : ℝ} (hε : 0 < ε) : ∃ j, ¬ BandNull (sq9.cls j) ε := by
+  refine ⟨finProdFinEquiv ((0 : ZMod 3), (0 : ZMod 3)), fun hN => ?_⟩
+  set U1 : Set ℂ := {z | 0 < z.re ∧ z.re < 1 / 2 ∧ 0 < z.im ∧ z.im < 1 / 2} with hU1
+  set U2 : Set ℂ := {z | 3 / 2 < z.re ∧ z.re < 2 ∧ 0 < z.im ∧ z.im < 1 / 2} with hU2
+  have hU1o : IsOpen U1 :=
+    (isOpen_lt continuous_const Complex.continuous_re).inter ((isOpen_lt Complex.continuous_re continuous_const).inter
+      ((isOpen_lt continuous_const Complex.continuous_im).inter (isOpen_lt Complex.continuous_im continuous_const)))
+  have hU2o : IsOpen U2 :=
+    (isOpen_lt continuous_const Complex.continuous_re).inter ((isOpen_lt Complex.continuous_re continuous_const).inter
+      ((isOpen_lt continuous_const Complex.continuous_im).inter (isOpen_lt Complex.continuous_im continuous_const)))
+  have hU1c : U1 ⊆ sq9.cls (finProdFinEquiv ((0 : ZMod 3), (0 : ZMod 3))) := by
+    intro z hz
+    show sq9Col z = _
+    rw [sq9Col_of_floor (n := 0) (m := 0) (Int.floor_eq_zero_iff.2 ⟨by linarith [hz.1], by linarith [hz.2.1]⟩)
+      (Int.floor_eq_zero_iff.2 ⟨by linarith [hz.2.2.1], by linarith [hz.2.2.2]⟩)]
+    simp
+  have hU2c : U2 ⊆ sq9.cls (finProdFinEquiv ((0 : ZMod 3), (0 : ZMod 3))) := by
+    intro z hz
+    show sq9Col z = _
+    have h1 : ⌊2 * z.re⌋ = 3 := Int.floor_eq_iff.2 ⟨by push_cast; linarith [hz.1], by push_cast; linarith [hz.2.1]⟩
+    rw [sq9Col_of_floor (n := 3) (m := 0) h1
+      (Int.floor_eq_zero_iff.2 ⟨by linarith [hz.2.2.1], by linarith [hz.2.2.2]⟩)]
+    have : ((3 : ℤ) : ZMod 3) = 0 := by decide
+    rw [this]; simp
+  set ε' : ℝ := min ε (1 / 10) with hε'
+  have hε'0 : 0 < ε' := lt_min hε (by norm_num)
+  have hε'1 : ε' ≤ ε := min_le_left _ _
+  have hε'2 : ε' ≤ 1 / 10 := min_le_right _ _
+  set x0 : ℂ := ⟨1 / 2 - ε' / 8, 1 / 4⟩
+  set y0 : ℂ := ⟨3 / 2 + ε' / 8, 1 / 4⟩
+  have hx0 : x0 ∈ U1 := ⟨by simp [x0]; linarith, by simp [x0]; linarith, by norm_num [x0], by norm_num [x0]⟩
+  have hy0 : y0 ∈ U2 := ⟨by simp [y0]; linarith, by simp [y0]; linarith, by norm_num [y0], by norm_num [y0]⟩
+  have hd : dist x0 y0 = 1 + ε' / 4 := by
+    rw [Complex.dist_eq_re_im]
+    simp only [x0, y0]
+    rw [show (1 / 2 - ε' / 8 - (3 / 2 + ε' / 8)) ^ 2 + ((1 : ℝ) / 4 - 1 / 4) ^ 2 = (1 + ε' / 4) ^ 2 by ring]
+    exact Real.sqrt_sq (by linarith)
+  set P : Set (ℂ × ℂ) := {q | q.1 ∈ U1 ∧ q.2 ∈ U2 ∧ 1 - ε' < dist q.1 q.2 ∧ dist q.1 q.2 < 1 + ε'} with hP
+  have hPo : IsOpen P := by
+    refine IsOpen.inter (hU1o.preimage continuous_fst) (IsOpen.inter (hU2o.preimage continuous_snd)
+      (IsOpen.inter (isOpen_lt continuous_const (continuous_fst.dist continuous_snd))
+        (isOpen_lt (continuous_fst.dist continuous_snd) continuous_const)))
+  have hPn : (x0, y0) ∈ P := ⟨hx0, hy0, by rw [hd]; linarith, by rw [hd]; linarith⟩
+  have hsub : P ⊆ bandPairSet (sq9.cls (finProdFinEquiv ((0 : ZMod 3), (0 : ZMod 3)))) ε := by
+    intro q hq
+    exact ⟨hU1c hq.1, hU2c hq.2.1, by linarith [hq.2.2.1], by linarith [hq.2.2.2]⟩
+  have hpos : 0 < (volume.prod volume) P := hPo.measure_pos _ ⟨_, hPn⟩
+  exact hpos.ne' (measure_mono_null hsub hN)
+
+/-- **FS111-W-SQ9**, tightness. -/
+theorem sq9_tight : sq9.Tight := fun ε hε hs => by
+  obtain ⟨j, hj⟩ := sq9_not_bandNull hε
+  exact hj (hs j)
+
+/-- **FS111-W-SQ9**, saturation clauses (the remaining leaf of `sq9_tight_saturated`): every essential boundary point of a class
+lies on an edge of one of its squares, and the facing same-class square's edge is at distance exactly `1`. -/
+theorem sq9_saturated_both : Saturated sq9.cls ∧ SaturatedPos sq9.cls := by
+  sorry
+
 /-- **FS111-W-SQ9**: the half-square nine-colouring is a.e.-proper (it is `sq9 : AeColouring 9`), tight, saturated, and
 saturated with positive-density partners. -/
-theorem sq9_tight_saturated : sq9.Tight ∧ Saturated sq9.cls ∧ SaturatedPos sq9.cls := by
-  sorry
+theorem sq9_tight_saturated : sq9.Tight ∧ Saturated sq9.cls ∧ SaturatedPos sq9.cls :=
+  ⟨sq9_tight, sq9_saturated_both⟩
 
 /-! ## The triangular lattice -/
 
