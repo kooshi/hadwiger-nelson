@@ -1,0 +1,90 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 8,9
+@ArcMap.exists_goodAt : ∀ {k : ℕ} (F : ArcMap k) {x : ℂ}, x ∈ F.dom → ∃ ρ₀, F.GoodAt x ρ₀
+@ArcMap.GoodAt.exists_wedge : ∀ {k : ℕ} {F : ArcMap k} {y : ℂ} {ρ₀ : ℝ},
+  F.GoodAt y ρ₀ →
+    ∀ {u : ℂ},
+      ‖u‖ = 1 →
+        ∃ m > 0,
+          ∃ N₀ > 0,
+            ∀ N ≥ N₀,
+              Rgn y u N m ⊆ ball y ρ₀ ∧ ∀ w ∈ Rgn y u N m, ∀ a ∈ F.arcs, w ∈ a.carrier → y ∈ a.carrier ∧ Arc.Tang y u a
+@ArcMap.GoodAt.exists_local_curve : ∀ {k : ℕ} {F : ArcMap k} {x : ℂ} {ρ₀ : ℝ},
+  F.GoodAt x ρ₀ →
+    ∀ {z : ℂ},
+      z ∈ ball x ρ₀ →
+        z ≠ x →
+          ∀ {a : Arc},
+            a ∈ F.arcs →
+              z ∈ a.carrier →
+                ∃ δ > 0, ball z δ ⊆ ball x ρ₀ ∧ ∀ y ∈ ball z δ, ∀ a' ∈ F.arcs, y ∈ a'.carrier → y ∈ Arc.curve x a
+@ArcMap.GoodAt.exists_generic_dir : ∀ {k : ℕ} {F : ArcMap k} {y : ℂ} {ρ₀ : ℝ},
+  F.GoodAt y ρ₀ →
+    ∀ {a b : ℝ}, a < b → ∃ β ∈ Ioo a b, ∀ a' ∈ F.arcs, (a'.carrier ∩ ball y ρ₀).Nonempty → ¬Arc.Tang y (e β) a'
+isClosed_coneAt : ∀ (S : Set ℂ) (y : ℂ), IsClosed (coneAt S y)
+@coneAt_inter_ball : ∀ {S : Set ℂ} {y : ℂ} {r : ℝ}, 0 < r → ∀ {β : ℝ}, β ∈ coneAt S y → β ∈ coneAt (S ∩ ball y r) y
+@coneAt_biUnion_finite : ∀ {ι : Type u_1} {s : Set ι},
+  s.Finite → ∀ (T : ι → Set ℂ) {y : ℂ} {β : ℝ}, β ∈ coneAt (⋃ i ∈ s, T i) y → ∃ i ∈ s, β ∈ coneAt (T i) y
+@coneAt_mono : ∀ {S T : Set ℂ}, S ⊆ T → ∀ (y : ℂ), coneAt S y ⊆ coneAt T y
+Arc.finite_inter_sphere_or_eq_circ : ∀ (a : Arc),
+  a.Nondegenerate → ∀ (p : ℂ), (a.carrier ∩ sphere p 1).Finite ∨ ∃ θ₀ θ₁, a = Arc.circ p 1 θ₀ θ₁
+@dist_ne_one_of_mem_of_mem_closure : ∀ {U : Set ℂ},
+  IsOpen U → UnitPairsNull U → ∀ {x y : ℂ}, x ∈ U → y ∈ closure U → dist x y ≠ 1
+@ArcMap.Valid.unitPairsNull_region : ∀ {k : ℕ} {F : ArcMap k}, F.Valid → ∀ (c : Fin k), UnitPairsNull (F.region c)
+@continuousAt_arg : ∀ {x : ℂ}, x ∈ slitPlane → ContinuousAt arg x
+@mem_slitPlane_iff : ∀ {z : ℂ}, z ∈ slitPlane ↔ 0 < z.re ∨ z.im ≠ 0
+@arg_lt_pi_iff : ∀ {z : ℂ}, z.arg < π ↔ 0 ≤ z.re ∨ z.im ≠ 0
+@cos_pos_of_mem_Ioo : ∀ {x : ℝ}, x ∈ Ioo (-(π / 2)) (π / 2) → 0 < Real.cos x
+@cos_le_cos_of_nonneg_of_le_pi : ∀ {x y : ℝ}, 0 ≤ x → y ≤ π → x ≤ y → Real.cos y ≤ Real.cos x
+@frontier_eq_closure_inter_closure : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X},
+  frontier s = closure s ∩ closure sᶜ
+data/fs131/w3/checks.lean:20:8: warning: `closure_diff_interior` has been deprecated: Use `closure_sdiff_interior` instead
+@closure_diff_interior : ∀ {X : Type u_1} [inst : TopologicalSpace X] (s : Set X), closure s \ interior s = frontier s
+@mem_interior_iff_mem_nhds : ∀ {X : Type u_1} [inst : TopologicalSpace X] {x : X} {s : Set X}, x ∈ interior s ↔ s ∈ 𝓝 x
+@IsCompact.elim_finite_subcover : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X} {ι : Type u_2},
+  IsCompact s → ∀ (U : ι → Set X), (∀ (i : ι), IsOpen (U i)) → s ⊆ ⋃ i, U i → ∃ t, s ⊆ ⋃ i ∈ t, U i
+@isCompact_closedBall : ∀ {α : Type u_1} {inst : PseudoMetricSpace α} [self : ProperSpace α] (x : α) (r : ℝ),
+  IsCompact (closedBall x r)
+@Finite.isClosed : ∀ {X : Type u_1} [inst : TopologicalSpace X] [T1Space X] {s : Set X}, s.Finite → IsClosed s
+@ncard_lt_ncard : ∀ {α : Type u_1} {s t : Set α}, s ⊂ t → autoParam t.Finite ncard_lt_ncard._auto_1 → s.ncard < t.ncard
+@Finite.exists_finset_coe : ∀ {α : Type u_1} {s : Set α}, s.Finite → ∃ s', ↑s' = s
+@Finset.strongInduction : {α : Type u_1} →
+  {p : Finset α → Sort u_2} → ((s : Finset α) → ((t : Finset α) → t ⊂ s → p t) → p s) → (s : Finset α) → p s
+@mem_closure_iff_nhds : ∀ {X : Type u_1} [inst : TopologicalSpace X] {x : X} {s : Set X},
+  x ∈ closure s ↔ ∀ t ∈ 𝓝 x, (t ∩ s).Nonempty
+@inter_mem : ∀ {α : Type u_1} {f : Filter α} {s t : Set α}, s ∈ f → t ∈ f → s ∩ t ∈ f
+@IsPreconnected.constant : ∀ {α : Type u_1} [inst : TopologicalSpace α] {Y : Type u_2} [inst_1 : TopologicalSpace Y]
+  [DiscreteTopology Y] {s : Set α},
+  IsPreconnected s → ∀ {f : α → Y}, ContinuousOn f s → ∀ {x y : α}, x ∈ s → y ∈ s → f x = f y
+@isPreconnected_Ioo : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : ConditionallyCompleteLinearOrder α]
+  [OrderTopology α] [DenselyOrdered α] {a b : α}, IsPreconnected (Ioo a b)
+@Convex.isPreconnected : ∀ {E : Type u_1} [inst : AddCommGroup E] [inst_1 : Module ℝ E] [inst_2 : TopologicalSpace E]
+  [ContinuousAdd E] [ContinuousSMul ℝ E] {s : Set E}, Convex ℝ s → IsPreconnected s
+@ArcMap.IsTile.subset_of_preconnected : ∀ {k : ℕ} {F : ArcMap k} {T : Set ℂ},
+  F.IsTile T → ∀ {s : Set ℂ}, IsPreconnected s → s ⊆ F.interiorPts → ∀ {t : ℂ}, t ∈ s → t ∈ T → s ⊆ T
+@ArcMap.IsTile.col_eq : ∀ {k : ℕ} {F : ArcMap k} {T : Set ℂ},
+  F.IsTile T → ∀ {x y : ℂ}, x ∈ T → y ∈ T → F.col x = F.col y
+@isCompact_iff_isClosed_bounded : ∀ {α : Type u_1} {s : Set α} [inst : PseudoMetricSpace α] [T2Space α] [ProperSpace α],
+  IsCompact s ↔ IsClosed s ∧ Bornology.IsBounded s
+@Finite.biUnion : ∀ {α : Type u_1} {ι : Type u_2} {s : Set ι},
+  s.Finite → ∀ {t : ι → Set α}, (∀ i ∈ s, (t i).Finite) → (⋃ i ∈ s, t i).Finite
+Arc.isCompact_carrier : ∀ (a : Arc), IsCompact a.carrier
+@closure_mono : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s t : Set X}, s ⊆ t → closure s ⊆ closure t
+@Finite.of_finite_image : ∀ {α : Type u_1} {β : Type u_2} {s : Set α} {f : α → β},
+  (f '' s).Finite → InjOn f s → s.Finite
+@sin_le : ∀ {x : ℝ}, 0 ≤ x → Real.sin x ≤ x
+norm_mul_exp_arg_mul_I : ∀ (x : ℂ), ↑‖x‖ * cexp (↑x.arg * I) = x
+@toIcoMod_mem_Ico : ∀ {α : Type u_1} [inst : AddCommGroup α] [inst_1 : LinearOrder α] [inst_2 : IsOrderedAddMonoid α]
+  [hα : Archimedean α] {p : α} (hp : 0 < p) (a b : α), toIcoMod hp a b ∈ Ico a (a + p)
+@Finset.exists_max_image : ∀ {α : Type u_1} {β : Type u_2} [inst : LinearOrder α] (s : Finset β) (f : β → α),
+  s.Nonempty → ∃ x ∈ s, ∀ x' ∈ s, f x' ≤ f x
+@ArcMap.isOpen_region : ∀ {k : ℕ} (F : ArcMap k) (j : Fin k), IsOpen (F.region j)
+@ArcMap.dense_interiorPts : ∀ {k : ℕ} (F : ArcMap k), F.dom ⊆ closure F.interiorPts
+isPreconnected_annSector : ∀ (u : ℂ) (r₁ r₂ θ₁ θ₂ : ℝ), IsPreconnected (annSector u r₁ r₂ θ₁ θ₂)
+mem_coneAt_annSector : ∀ (v : ℂ) {r a b γ : ℝ}, 0 < r → γ ∈ Ioo a b → γ ∈ coneAt (annSector v 0 r a b) v
+exists_mem_collar_of_dist_lt : ∀ (u : ℂ) (ψ : ℝ) {h : ℝ},
+  0 < h →
+    ∃ ε > 0,
+      ∀ (z : ℂ),
+        dist z (u + e ψ) < ε →
+          (dist z u < 1 → z ∈ collar u Rim.inner (ψ - h) (ψ + h) h) ∧
+            (1 < dist z u → z ∈ collar u Rim.outer (ψ - h) (ψ + h) h)

@@ -972,3 +972,223 @@ own), 8 m 59 s, exit 0 (`build/gate/build/20261004T144319Z-33249.log`; driver lo
 modules, both section prefixes): `--check` 153 theorems, 153 records, 0 missing, 0 stale, exit 0; `--plant` (drops `exists_merge_at`, re-adds the
 removed `exists_sectorsAt` as a record): FIRED both ways, exit 0. `tools/check_architecture.py`: PASS (a `Woodall/Merge` row; `Basic` and
 `Steps` rows rewritten).
+
+## Stage 14 — SAVED: E3-BALL stated with its children (`Plane/Woodall/Merge`), and the plan per leaf
+
+### 14.1 The shape (the domain-modeling pass, `debruijn-domain-modeling`, invoked fresh at stage 12)
+
+**What the problem is.** E3-BALL is a finite induction whose step is a local surgery: a merge at one point `v`, inside a ball as small as
+wanted, that leaves the rest of the map alone. So it splits into three groups:
+- surgery facts that hold anywhere (a recolouring is an arc map; its validity is a question about the recoloured set alone; the map is unchanged
+  away from the surgery);
+- locality facts (`coloursAt` and `NiceAt` read only a neighbourhood);
+- local structure at a point (finitely many exceptional directions, a colour on each other one; only the centre of a good ball carries three
+  colours).
+
+**What is incidental, and dropped.**
+- *E3's chart sectors as the recoloured set.* The merge recolours the open annular sector `annSector v 0 ρ d₁ d₂` whole. Inside it the run
+  tails already carry `c` and the gap's sectors are exactly what E3 recolours, so the effect is the same, and the definition needs no chart.
+- *A full circle as the new arc.* The new arcs are the wedge's two edges and its outer arc (`wedgeArcs`). The edges lie inside `c`'s cones (both
+  sides `c`), and adding them makes `col` locally constant with no hypothesis: off `frontier W` a point is interior to `W` or to its complement
+  (`ArcMap.recolour`, defined and proved).
+- *E3-W's hypothesis "ω(v) ∩ S = ∅".* The segments put `v` in `closure S`, and wave 1's `dist_ne_one_of_mem_of_mem_closure` gives it; the
+  segments need only lie in `closure S` (`clear_wedge`).
+- *`localSectors`.* The local data E3 takes from a chart is `DirColourAt`: finitely many directions `D`, and off them a thin open cone in one
+  class. Wave 3's landed `GoodAt.exists_wedge` gives it (a wedge about a non-tangent direction meets no arc, is preconnected, so lies in one
+  tile). Inventory item 163 (`localSectors` proved on `fs131-w3b` at `d8a3177f`) arrived after this choice. It is an alternative route for
+  `exists_dirColourAt`, and the more convenient one for `exists_merge_at`'s measure (§ 14.4): its chart indexes the sectors by `Fin n`, so the
+  colour word is native. No statement depends on it.
+
+**Placement.** Nothing is indexed. `recolour` takes the frontier condition as an argument (its locally-constant proof needs it), `wedgeMerge`
+the three facts that make its arcs nondegenerate.
+
+### 14.2 The declarations (`Plane/Woodall/Merge`, imports `Woodall/NoFourFive`; `Woodall/Steps` imports it)
+
+| declaration | kind | state | needs `localSectors`? |
+|---|---|---|---|
+| `OffDirs` | def | — | — |
+| `clear_wedge` (**E3-W**) | region-only | `sorry` | no |
+| `wedgeArcs`, `wedgeArcs_nondegenerate`, `frontier_annSector_subset` | def + 2 leaves | `sorry` ×2 | no |
+| `ArcMap.recolour` | def | **proved** (local finiteness, local constancy) | no |
+| `recolour_isPlaneMap`, `interiorPts_recolour_subset`, `recolour_condition5` | — | **proved** | no |
+| `recolour_valid`, `recolour_region_diff` | — | `sorry` | no |
+| `wedgeMerge` | def | — | no |
+| `wedgeMerge_valid`, `wedgeMerge_condition5`, `wedgeMerge_region_diff` | the new map's validity, Condition 5, agreement off `closedBall v ρ` (plane domain: `recolour_isPlaneMap`; local finiteness: by construction) | `sorry` | no |
+| `coloursAt_congr`, `niceAt_congr` | locality | `sorry` | no |
+| `DirColourAt` (+ spec example, proved) | def | — | no |
+| `exists_dirColourAt` | the local data exists | `sorry` | no (GoodAt); `localSectors` an alternative |
+| `GoodAt.ncard_coloursAt_le_two`, `finite_three_le_coloursAt` | three-colour points finite on compacts | `sorry` | no (GoodAt); `localSectors` an alternative |
+| `niceAt_of_dirColourAt` | the `NiceAt` picture from nice local data | `sorry` | no |
+| `dirColourAt_wedgeMerge` | the data after a merge | `sorry` | no |
+| `wedgeMerge_niceAt` | the crossings a merge creates are `NiceAt` | `sorry` | no |
+| `exists_merge_at` (**E3-NICE**) | the merges at one point | `sorry` | no; `localSectors` convenient (§ 14.4) |
+| `exists_woodallMerged` (**E3-BALL**) | E3's statement | `sorry` | no |
+
+**Read-backs.**
+- `clear_wedge` against E3-W (`plans/FS131-E3-derivation.md` § 3.2, `statement:` line): E3's `S` "with no two points at distance 1" is read as
+  open with null unit pairs (weaker); its "ω(v) ∩ S = ∅" is dropped (implied); its segments "in S" are read as "in closure S" (weaker); the radius
+  and conclusion are the same. **Same, hypotheses weaker.**
+- `exists_merge_at` against E3-NICE (§ 3.3): F′ valid and plane, Condition 5 kept, equal to F off a closed disc of radius `ρ < ε`, NiceAt at
+  every point of the disc with three or more colours. E3 says "`ρ ∈ (0, 1/4)`" and "the arcs of F′ those of F plus finitely many circles"; the
+  formal form gives regions equal off the disc, and the arcs are left free (the chain reads only regions). **Same content, the arc list not
+  stated.**
+- `exists_woodallMerged` against E3-BALL (§ 3.4): **verbatim** E3's § 4.1 draft.
+
+### 14.3 The plan per leaf (E easy, M moderate, H hard; prices for an Opus implementer, re-priced from the first two leaves)
+
+Every name below was confirmed with `#check` at the pin, in this tree after the merge (`data/fs131/w3/checks.lean`, output
+`data/fs131/w3/checks.out`, exit 0).
+
+**`Woodall/Basic`: the inhabitants' leaves**
+
+| leaf | route | names | price |
+|---|---|---|---|
+| T1 `threeCol_locallyConstant` | `x` off the cuts with `‖x‖ < 1/3`: `x ≠ 0`; `-x ∈ slitPlane` (else `x` is on the positive real axis, inside the cut `[0, 1/2]`); `θ(y) = π + arg(−y)` is continuous at `x` (`Complex.continuousAt_arg` composed with negation); `θ(x) ∉ {2π/3, 4π/3}` (else `x = ‖x‖ e(θ)` lies on a cut: `Complex.norm_mul_exp_arg_mul_I`); the strict inequalities defining `threeCol x` hold near `x` | `Complex.continuousAt_arg`, `mem_slitPlane_iff`, `Complex.norm_mul_exp_arg_mul_I` | M |
+| T2 `threeSectorDisc_sectorsAt` | clauses 1–4 by computation; clause 5 `0 ∈ ball`; clause 6: `region j` is the open sector `annSector 0 0 (1/3) (2πj/3) (2π(j+1)/3)` (by T1's description of `threeCol`), and the cone of an open sector at its apex is its closed interval mod `2π`: `⊇` by `mem_coneAt_annSector` and `isClosed_coneAt`, `⊆` because unit directions of the sector's points lie in `e '' Icc` (closed) | `mem_coneAt_annSector`, `isClosed_coneAt`, `angleIcc` | M (a child `coneAt_annSector_eq` is reusable) |
+| T3 `threeSectorDisc_phantom` | T2's clauses with the two horns at `2π/3`: `angleIcc (2π/3) (2π/3) ⊆` both neighbours' intervals, so each colour's union is unchanged | T2 | M− |
+| T4 `threeSectorDisc_ncard_coloursAt_le_two` | `w ≠ 0`: `w` is in the closure of at most two of the three open sectors (their closed angular intervals meet pairwise in one direction each, and in no direction all three); `Set.ncard_le_ncard` against a pair | — | M− |
+| T5 `halfDisc_sectorsAt` | as T2, with `halfDisc_component_upper/lower` (the regions are the open half-discs) | `halfDisc_mem_interiorPts` | M− |
+
+**`Woodall/Merge`**
+
+| leaf | route | names | price |
+|---|---|---|---|
+| `wedgeArcs_nondegenerate` | the segments: `v ≠ v + ρ e(dᵢ)` (`‖ρ e(dᵢ)‖ = ρ > 0`); the arc: `0 < ρ`, `d₁ < d₂ ≤ d₁ + 2π` | `norm_e` | E |
+| `frontier_annSector_subset` | `z ∈ closure W \ W` (`W` open: `isOpen_annSector`): `z = v`, or `z = v + r e φ` with `0 ≤ r ≤ ρ`, `φ ∈ [d₁, d₂]` (closure of the image of `Icc × Icc`, compact), and `r = ρ` or `φ ∈ {d₁, d₂}` | `isOpen_annSector`, `frontier_eq_closure_inter_closure`, `IsCompact.image`, `isCompact_Icc` | M− |
+| `recolour_valid` | `interiorPts_recolour_subset`; cases on `x ∈ W`, `y ∈ W` (the `if`): both in `W` → `hWW`; one in `W` → the other has colour `c`, so lies in `F.region c` → `hWc`; neither → `hF` | `interiorPts_recolour_subset` | E |
+| `recolour_region_diff` | `ext z`; off `⋃ B` the interior points agree, off `closure W ⊇ W` the colours agree | — | E |
+| `clear_wedge` | E3-W's argument (§ 3.2): `v ∈ closure S` (limits of the segments); for `y ∈ S`, `dist z y = 1`: `ω(y)` meets `B(v, r₁)` in the arc `{y + e t}` over an open interval of `t` (`‖y + e t − v‖²` is a constant plus a cosine); the arc avoids the segments (`dist_ne_one_of_mem_of_mem_closure`) and `v` (same lemma, `v ∈ closure S`), so by connectedness stays in the open wedge (the disc minus the two closed segments: the wedge is clopen in it); its endpoints lie on `‖x − v‖ = r₁` with directions in `[d₁, d₂]`; the chord between them is at distance `≥ r₁ cos(α/2)` from `v`, the arc within the sagitta `≤ r₁²` of it; so `‖z − v‖ ≥ r₁ cos(α/2) − r₁² > r₁ cos(α/2)/2` | `dist_ne_one_of_mem_of_mem_closure`, `IsPreconnected.subset_left_of_subset_union`, `isPreconnected_Ioo`, `Real.cos_pos_of_mem_Ioo`; control: `tools/fs131_e3_sagitta.py` (E3's) | M+ (150–250 lines) |
+| `wedgeMerge_valid` | `recolour_valid`: `hWW` from `dist < 2ρ < 1`; `hWc` from `clear_wedge` with `S = F.region c` (`F.isOpen_region`, `hF.unitPairsNull_region`), monotone in the radius (`annSector` grows with `r₂`) | `ArcMap.isOpen_region`, `ArcMap.Valid.unitPairsNull_region` | E |
+| `wedgeMerge_condition5` | `recolour_condition5`; each new arc: `Arc.finite_inter_sphere_or_eq_circ`, the second disjunct impossible (segments are not circles; the arc has radius `ρ < 1`) | `Arc.finite_inter_sphere_or_eq_circ` | E |
+| `wedgeMerge_region_diff` | `recolour_region_diff`; `closure (annSector v 0 ρ d₁ d₂) ∪ ⋃ wedgeArcs ⊆ closedBall v ρ` | `closure_minimal`, `isClosed_closedBall` | E |
+| `coloursAt_congr` | `j ∈ coloursAt w ↔ w ∈ closure (region j)`, and closure membership reads `region j ∩ U` for `U ∈ 𝓝 w` (`mem_closure_iff_nhds` with `Filter.inter_mem`) | `mem_closure_iff_nhds`, `Filter.inter_mem` | E |
+| `niceAt_congr` | a picture transfers: clauses 1–4 are about `d`, `c`; clause 5 is `hdom`; clause 6: `coneAt (region j) w = coneAt (region j ∩ U) w` (`coneAt_mono` one way, `coneAt_inter_ball` with a ball inside `U` the other) | `coneAt_mono`, `coneAt_inter_ball`, `Metric.mem_nhds_iff` | M− |
+| `exists_dirColourAt` | `exists_goodAt` gives `ρ₀`; `D` = for each of the finitely many arcs meeting `ball v ρ₀` (`hG.fin`) the at most two angles `φ` with `a.Tang v (e φ)` (in `[0, 2π)`; the tangency condition is `Re(b · conj(e φ)) = 0` for the arc's curve vector `b ≠ 0`: two antipodal directions); for `φ` off `D`: `GoodAt.exists_wedge` with `u = e φ` gives a wedge `Rgn v (e φ) N m` meeting no arc (every arc there would be tangent to `e φ`), inside `ball v ρ₀ ⊆ dom`, convex hence preconnected, so in one tile (`IsTile.subset_of_preconnected`) of one colour (`IsTile.col_eq`); a truncated cone `annSector v 0 r (φ − r) (φ + r)` lies in the wedge for small `r`; `σ φ` that colour (choice). Alternative with `localSectors` (`fs131-w3b` `d8a3177f`): `D` the germ directions, each truncated cone inside one chart sector (`coneAt_sector`, the `cover` clause) | `ArcMap.exists_goodAt`, `ArcMap.GoodAt.exists_wedge`, `ArcMap.IsTile.subset_of_preconnected`, `ArcMap.IsTile.col_eq`, `Convex.isPreconnected` | M (100–200 lines) |
+| `GoodAt.ncard_coloursAt_le_two` | `z ≠ x` in the good ball: if `z` is off every arc, one colour (open interior point); else `GoodAt.exists_local_curve` gives `δ` with every arc point of `ball z δ` on one full curve `C` (a line or a circle through `x`); `ball z δ \ C` has two components (each convex for a line, the disc's two sides for a circle), each in one tile, so at most two colours | `ArcMap.GoodAt.exists_local_curve`, `ArcMap.IsTile.subset_of_preconnected`, `ArcMap.IsTile.col_eq` | M |
+| `finite_three_le_coloursAt` | cover `K` by the good balls of its points (`exists_goodAt`, `hKd`); a finite subcover (`IsCompact.elim_finite_subcover`); each ball holds at most its centre (`GoodAt.ncard_coloursAt_le_two`), so the set lies in the finite set of centres | `IsCompact.elim_finite_subcover`, `ArcMap.exists_goodAt` | E |
+| `niceAt_of_dirColourAt` | sort `D` mod `2π` (`toIcoMod_mem_Ico`, as `exists_Ioo_avoiding` does); the open arcs between consecutive points carry constant `σ` (overlapping cones force equal colours; `IsPreconnected.constant` on each arc); merge adjacent arcs of one colour into runs; `hrun` makes each colour's runs one arc, so the runs carry distinct colours; the picture: the runs' closures in order, and at each change of colour the horns, one per colour `j ∉ {left, right}` whose cone holds that direction; clause 6: off `D` a colour's cone is read from `σ` (`hD`: points of `region j` near a generic direction lie in its cone, so `j = σ φ`), on `D` it is the runs' endpoints plus the listed horns (`hpoke` rules out a direction inside one colour's run); `NiceAt`'s clauses from distinct run colours and horn lists of distinct colours different from both neighbours | `toIcoMod_mem_Ico`, `IsPreconnected.constant`, `isClosed_coneAt`, `coneAt_biUnion_finite` | **H−** (250–400 lines, the largest combinatorial leaf) |
+| `dirColourAt_wedgeMerge` | for `φ` off `D ∪ {d₁, d₂}`: `F`'s cone about `φ`, shrunk below `ρ` and the angular distance to `d₁, d₂`, either lies in the open wedge (`φ ∈ angleIoo d₁ d₂`: its points are interior points of `F`, off the new arcs, recoloured `c`) or misses `closure W ∪ ⋃ wedgeArcs` (regions unchanged there, `recolour_region_diff`) | `recolour_region_diff`, `interiorPts_recolour_subset` | M− |
+| `wedgeMerge_niceAt` | cases on `w`: strictly inside the wedge, one colour; on an edge, one colour (`hc`, and `F`'s local constancy at the edge's interior points); off the closed wedge, `F` unchanged near `w` and at most two colours (`GoodAt.ncard_coloursAt_le_two`); on the outer arc at an end, one colour (`hc` beyond `ρ`, `ρ < r₁`); on the outer arc inside: the one curve of `F` through `w` (`exists_local_curve`) crosses the circle `‖· − v‖ = ρ` transversally (a circle through `v` of diameter `> ρ₀ > ρ`, `GoodAt.big`, or a segment through `v`), so the local data at `w` has four directions, `c` on the inner half and `g`, `g′` outside; at three colours (`g ≠ g′`, both `≠ c`) `niceAt_of_dirColourAt` (one run each; no horn) | `ArcMap.GoodAt.exists_local_curve`, `GoodAt.ncard_coloursAt_le_two`, `niceAt_of_dirColourAt` | **H−** (200–350) |
+| `exists_merge_at` | the iteration of § 14.4 | the children above | **H** (200–350 on top of its children) |
+| `exists_woodallMerged` | the induction of § 15.1 | `finite_three_le_coloursAt`, `exists_merge_at`, `coloursAt_congr`, `niceAt_congr` | M (60–120) |
+
+### 14.4 `exists_merge_at`: the iteration and its measure
+
+State, carried by the induction: a valid plane map `F_i`, Condition 5 kept, equal to `F` off `closedBall v ρ₁`; radii `ρ₁ > ρ₂ > … > ρ_i`;
+every point `w` with `0 < dist w v ≤ ρ₁` and three or more colours `NiceAt` in `F_i`; local data `(D_i, σ_i)` at `v` for `F_i`. Start: `ρ₁`
+below `ε` and below a good radius of `F` at `v`, so the third clause holds by `GoodAt.ncard_coloursAt_le_two`; data from `exists_dirColourAt`.
+**Step**, while `hrun` or `hpoke` fails for `(D_i, σ_i)`:
+- **(i) a colour `c` on two runs.** The gaps between consecutive `c`-runs sum to less than `2π`, at least two of them, so one gap is shorter
+  than `π`. Choose `d₁` generic in the run before it, near its end, and `d₂` generic in the run after, near its start, with `d₂ − d₁ < π`. Their
+  cones from `hD` put the edges in `F_i.region c` up to some `r₁`.
+- **(ii) a poke at `δ`** (a colour `j ≠ c` whose cone holds `δ`, with `c` on both sides). Use `d₁, d₂ = δ ∓ t` with `t` small.
+
+`ρ_{i+1}` is below `ρ_i`, below `r₁ cos(α/2)/2`, and below a good radius of `F_i` at `v`. Then:
+- `wedgeMerge_valid`, `wedgeMerge_condition5` (`ρ < 1`) and `wedgeMerge_region_diff` keep the first clause;
+- `wedgeMerge_niceAt` and agreement off `closedBall v ρ_{i+1}` keep the third;
+- `dirColourAt_wedgeMerge` gives `(D_{i+1}, σ_{i+1})`.
+
+**Measure**: the number of runs plus the number of pokes `(δ, j)`, both read on the colour word of `(D, σ)`. A step of type (i) merges two
+`c`-runs and removes every run of the gap: runs drop by at least `2`. A step of type (ii) removes the poke `(δ, j)`: inside the wedge `j`'s
+points become `c`, so `δ` leaves `j`'s cone. Neither step adds a poke: the new directions `d₁, d₂` are generic for `F_i` and carry only `c`.
+**End**: `niceAt_of_dirColourAt` at `v`; `ρ := ρ₁`.
+
+The word is easiest to read through a chart that indexes the sectors by `Fin n`: `localSectors` (`fs131-w3b`, item 163, landing next) gives
+one, and the merged map's chart at `v` is the old one with two invisible germs added. Without it, sort `D` as in `niceAt_of_dirColourAt`.
+
+## Stage 15 — SAVED: the obligation-modeling pass (`debruijn-obligation-modeling`, invoked fresh), the handoff
+
+### 15.1 What the pass found
+
+- **E3-BALL's induction needs no radius condition.** It is strong induction on the size of a finite set `S` containing the bad points (points of
+  `closedBall 0 R` with three or more colours and not `NiceAt`), generalized over the map:
+  `∀ S : Finset ℂ, ∀ F, F.Valid → F.IsPlaneMap → {bad points of F} ⊆ ↑S → ∃ F', …`.
+  - *Base* (no bad point): `F' = F`.
+  - *Step*: take a bad `v ∈ S` and apply `exists_merge_at` with any `ε`. A point `w` bad in `F'` is either in `closedBall v ρ` (then `NiceAt`
+    by the merge, so not bad) or outside it. Outside, the regions agree on the open set `(closedBall v ρ)ᶜ` and both domains are `univ`, so
+    `coloursAt_congr` and `niceAt_congr` make `w` bad in `F`, with `w ≠ v`. So the bad points of `F'` lie in `S.erase v`.
+  - *Start*: `S` from `finite_three_le_coloursAt` on `closedBall 0 R` (`isCompact_closedBall`).
+
+  E3's "ρ below the distance to the other points of V" is not needed: points inside the merged ball are handled by the merge's own clause.
+  `exists_merge_at`'s `ε` stays because the iteration of § 14.4 uses it, and it makes the statement stronger.
+- **The crossing child needs the edges in `c`'s class a little beyond `ρ`**, not up to the good radius: a ray at a generic direction can cross a
+  circle branch through `v` inside the good ball. So `wedgeMerge_niceAt` takes `ρ < r₁` and `hc` on `(0, r₁)`. It was stated that way at this
+  stage, along with `dirColourAt_wedgeMerge`, which was found the same way: both were attempted proof steps of `exists_merge_at`, and their goals
+  read back.
+- **Measures**: § 14.4 (runs plus pokes) and the size of `S`. No other recursion.
+- **Prove / test / assume.**
+  - *Prove*: every leaf.
+  - *Test*: the inhabitants T2–T5 make the ∃-forms' clauses bite on a valid map; the phantom adversaries pin item 158; `tools/fs131_w3_decls.py`
+    checks the records both ways; E3's controls (`tools/fs131_e3_sagitta.py`, `tools/fs131_e3_phantom.py`) back E3-W and E3-PHANTOM.
+  - *Assume*: nothing new. The chain's one outside dependency is still `lebesgue_covering_square`, now proved on `main` (FS131-LEB), reached
+    through wave 4's `ts_t`.
+- **Mutation audit** (statement level, by hand).
+  - `clear_wedge` without `hπ`: false (for `d₂ − d₁ ∈ (3π, 4π)`, `cos(α/2) > 0` again while the wedge wraps).
+  - `clear_wedge` without `hseg`: false.
+  - `recolour_valid` without `hWc`: false (recolour a disc next to a class of `c`).
+  - `wedgeMerge_niceAt` without `hG`: false (a second branch crossing the arc at the same point makes four colours, with no picture of the right
+    shape).
+  - `niceAt_of_dirColourAt` without `hpoke`: false (a horn of `j` inside `c`'s run forces `c` onto two positive sectors).
+  - `niceAt_of_dirColourAt` without `hrun`: false (E3-FAKE's `A, B, A, C`).
+
+  Every statement whose hypotheses include `k ≤ 5`, `F.Valid` and `F.IsPlaneMap` concludes `False`, apart from `NiceAt.normal`, which is
+  declared (§ 13.1).
+
+### 15.2 The build of this stage
+
+`./scripts/build.sh` under the slot (40 GiB, 8 cpus, `BATCH=4`), from inside the worktree: **OK — 445 of 445 batches, 3 modules rebuilt, 7 with
+warnings**. Every Woodall warning is `declaration uses 'sorry'`; the five non-Woodall ones are wave 4's skeleton modules. 8 m 24 s, exit 0
+(`build/gate/build/20261004T145720Z-124873.log`; driver log `data/fs131/w3/build-stage15.log`).
+- `tools/fs131_w3_decls.py --check`: 155 theorems, 155 records, 0 missing, 0 stale.
+- `tools/fs131_w2_decls.py --check`: 134, 134, 0, 0.
+- `tools/check_architecture.py`: PASS.
+
+### 15.3 The handoff to the chain's implementer (§ 9.5's form, current; it supersedes § 9.5)
+
+**Where it is.** Branch `fs131-ww`, worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-ww`. `.lake/packages` is a symlink to the main
+tree's; `.lake/build` is the worktree's own copy and must never be replaced with a symlink. `main` was merged at stage 12 (wave 3 and LEB
+landed). The five modules:
+- `Woodall/Basic`: the ∃-forms; 5 inhabitant leaves `sorry`, T1–T5;
+- `Woodall/Collar`: `sorry`-free;
+- `Woodall/NoFourFive`: `sorry`-free;
+- `Woodall/Merge`: new; 18 `sorry` leaves; `recolour` and four small lemmas proved;
+- `Woodall/Steps`: `sorry`-free in its own text.
+
+The chain's remaining `sorryAx` comes from `Merge`, `Basic`'s inhabitants, and wave 4's skeleton (`ts_t`, `lemmaL`, …, on this branch until
+wave 4 lands). The build is green with only `sorry` warnings (§ 15.2).
+
+**The build**: from inside the worktree, `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
+./scripts/build.sh`; never `lake build`. For iteration, `lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false`; never as evidence.
+
+**Dependencies.**
+- Wave 4 (`SVMap`'s `ts_t`, `lemmaL`, …) is a skeleton here; merge `main` when it lands.
+- `localSectors` (`fs131-w3b`, `d8a3177f`, item 163) lands on `main` next. Merge `main` after it lands, never the branch, if `exists_merge_at`'s
+  word is to be read through its chart (§ 14.4).
+- At every merge, run `tools/fs131_qa1_dupes.py` (item 142). `Plane.abs_dot_le` is a known w4/ww collision.
+
+**The order.**
+1. `Merge`'s easy leaves: `wedgeArcs_nondegenerate`, `recolour_valid`, `recolour_region_diff`, `coloursAt_congr`, `niceAt_congr`,
+   `wedgeMerge_condition5`, `wedgeMerge_region_diff`, `frontier_annSector_subset`, then `wedgeMerge_valid` over `clear_wedge`. The first two
+   re-price the module.
+2. `exists_woodallMerged` over its stated children. This is the first composition check.
+3. `GoodAt.ncard_coloursAt_le_two`, `finite_three_le_coloursAt`, `exists_dirColourAt`.
+4. `clear_wedge`.
+5. `niceAt_of_dirColourAt`, `dirColourAt_wedgeMerge`, `wedgeMerge_niceAt`.
+6. `exists_merge_at`.
+7. `Basic`'s T1–T5 (any time; T2 first, its cone-of-a-sector child is reused by T5 and by `exists_dirColourAt`).
+
+**What the implementer may and may not change.**
+- *May*: add children anywhere (the internal state and measure of § 14.4, `coneAt_annSector_eq`, …), supporting lemmas in the foundation modules
+  (statements of other waves unchanged), and imports. Each addition updates `ARCHITECTURE.md` and `scripts/Axioms.lean`, then
+  `tools/fs131_w3_decls.py --check`.
+- *May not*: change any statement or definition of `Woodall/Basic`, `Woodall/Merge`, or the chain theorems of `Woodall/Steps`. A statement that
+  cannot be proved as written comes back through Keryx with the stuck goal or the counterexample.
+
+**Vacuity and inhabitants.**
+- The theorems over valid five-coloured plane maps conclude `False`, except `NiceAt.normal` (declared).
+- `Merge`'s theorems hold for any number of colours, inhabited by `sevenBrickMap`.
+- The ∃-forms are inhabited non-degenerately by `threeSectorDisc` and `halfDisc`; `DirColourAt` has its spec example.
+- No new carrier for `scripts/Vacuity.lean`.
+
+**How the chain lands.** When every leaf is proved and the gate passes, after wave 4 lands, by merging `main` and the implementer's gate. The
+FS106-AE-MAP6 statement (`ArcMap.aeMap6`) and FS106-WO's (`woodall_thm6`) are unchanged by this job.

@@ -20,7 +20,8 @@ every point of `closedBall 0 R` of three or more colours is `NiceAt`.
   Wave 3's wedge lemma (`GoodAt.exists_wedge`) gives it at every point of the domain (`exists_dirColourAt`); the `NiceAt` picture is built from
   it (`niceAt_of_dirColourAt`); in a good ball only the centre carries three colours (`GoodAt.ncard_coloursAt_le_two`), so three-colour points
   are finite on compact sets (`finite_three_le_coloursAt`).
-* **E3-NICE** (`exists_merge_at`): merging at one point until it, and every new point of three colours near it, is `NiceAt`.
+* **E3-NICE** (`exists_merge_at`): merging at one point until it, and every new point of three colours near it, is `NiceAt` — the local data
+  updated by each merge (`dirColourAt_wedgeMerge`), the crossings `NiceAt` (`wedgeMerge_niceAt`).
 * **E3-BALL** (`exists_woodallMerged`): finitely many such merges on `closedBall 0 R`.
 
 No statement here reads `localSectors` (FS131-I3i): wave 3's landed `GoodAt` engine gives every local fact the merge needs (§ 14.3).
@@ -214,6 +215,26 @@ theorem niceAt_of_dirColourAt {v : ℂ} (hv : v ∈ F.dom) {D : Finset ℝ} {σ 
     (hpoke : ∀ δ ∈ D, ∀ j c : Fin k, δ ∈ coneAt (F.region j) v →
       (∃ t > 0, ∀ φ ∈ Ioo (δ - t) (δ + t), OffDirs D φ → σ φ = c) → j = c)
     (h3 : 3 ≤ (F.coloursAt v).ncard) : F.NiceAt v := by
+  sorry
+
+/-- **The local data after a merge at a wedge**: off `D` and the two edge directions, a direction strictly inside the wedge now carries `c`,
+and every other one keeps its colour (for a small enough cone the wedge either contains it or misses it and the new arcs). -/
+theorem dirColourAt_wedgeMerge {v : ℂ} {D : Finset ℝ} {σ : ℝ → Fin k} (hD : F.DirColourAt v D σ) {ρ d₁ d₂ : ℝ} (hρ : 0 < ρ)
+    (hd : d₁ < d₂) (hd2 : d₂ < d₁ + 2 * π) :
+    (F.wedgeMerge v hρ hd hd2.le c).DirColourAt v (insert d₁ (insert d₂ D))
+      (fun φ => by classical exact if φ ∈ angleIoo d₁ d₂ then c else σ φ) := by
+  sorry
+
+/-- **The points a merge at a wedge creates are `NiceAt`** (E3-NICE's crossings): inside a good ball of `F` at `v`, with the two edges in
+`F`'s class of `c` a little beyond the radius `ρ`, every point of `closedBall v ρ` other than `v` that carries three or more colours after the
+merge is `NiceAt` — it is a transversal crossing of the outer arc with a branch through `v`, `c` on the inner half and two other colours outside
+(a three-sector picture); every other such point carries at most two colours. -/
+theorem wedgeMerge_niceAt {v : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt v ρ₀) {ρ d₁ d₂ r₁ : ℝ} (hρ : 0 < ρ) (hρ₀ : ρ < ρ₀) (hd : d₁ < d₂)
+    (hπ : d₂ - d₁ < π) (hρr : ρ < r₁)
+    (hc : ∀ s ∈ Ioo 0 r₁, v + (s : ℂ) * e d₁ ∈ F.region c ∧ v + (s : ℂ) * e d₂ ∈ F.region c)
+    {w : ℂ} (hw : w ∈ closedBall v ρ) (hwv : w ≠ v)
+    (h3 : 3 ≤ ((F.wedgeMerge v hρ hd (by linarith [Real.pi_pos]) c).coloursAt w).ncard) :
+    (F.wedgeMerge v hρ hd (by linarith [Real.pi_pos]) c).NiceAt w := by
   sorry
 
 /-! ## E3-NICE and E3-BALL -/

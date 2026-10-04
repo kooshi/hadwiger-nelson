@@ -2533,6 +2533,8 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.GoodAt.ncard_coloursAt_le_two
 #print axioms HadwigerNelson.Plane.ArcMap.finite_three_le_coloursAt
 #print axioms HadwigerNelson.Plane.ArcMap.niceAt_of_dirColourAt
+#print axioms HadwigerNelson.Plane.ArcMap.dirColourAt_wedgeMerge
+#print axioms HadwigerNelson.Plane.ArcMap.wedgeMerge_niceAt
 #print axioms HadwigerNelson.Plane.ArcMap.exists_merge_at
 #print axioms HadwigerNelson.Plane.ArcMap.exists_woodallMerged
 
