@@ -1825,3 +1825,9 @@ reason by the close.*
      until the merge. Why: two modules declaring the same names cannot both be imported (the library root imports every module), so the copy would break the
      branch's build; a move on one branch with the other branch fenced off those lines merges cleanly. Confidence: medium-high — the fact that would change it:
      IC5 needing to edit a moved lemma (then it messages me first). IM1's brief amended; IC5 told by message.
+255. **Kooshi, 2026-10-04 (verbatim)**, on the definitions audit (interim report's one decision): *"That audit is approved, but no special slot. It must use one of the
+     4, as we have no usage headroom for a fifth."* Ruled (Keryx): the audit, FS131-QA3, takes **the next slot that frees**, ahead of wave 5's next implementer and
+     the planar-infrastructure job — those two build on the very definitions it reads (wave 5's `Chain`, `Terminal`, `Dense`, `HexRing`, `MapGraph`, `BaseWalk`,
+     `BaseDense`), so auditing first saves sessions built on a faulty definition. Alternative weighed: run it after wave 5 resumes. Why: four of today's five
+     definition faults (items 231, 241, 251, and 158 before) cost a session each after an implementer built on them. Confidence: medium-high. Brief written now
+     (`data/fs131/briefs/FS131-QA3-definitions.md`), launched when a slot frees; staffing stays at four.
