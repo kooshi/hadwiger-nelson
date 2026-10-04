@@ -66,3 +66,5 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.ArcMap.exists_merge
 #print axioms HadwigerNelson.Plane.ArcMap.stuck_structure
 #print axioms HadwigerNelson.Plane.ArcMap.stuck_chain
+#print axioms HadwigerNelson.Plane.tanHeight_anti
+#print axioms HadwigerNelson.Plane.hornSet_mono

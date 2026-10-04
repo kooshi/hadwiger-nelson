@@ -1013,6 +1013,16 @@ theorem dist_branchPt_neg_one (v : ℂ) (β : ℝ) {s : ℝ} (hs0 : 0 ≤ s) (hs
   have := dist_nonneg (x := branchPt v β (-1) s) (y := v - e (β + π / 2))
   nlinarith
 
+/-- The height above a tangent circle falls as its curvature grows. -/
+theorem tanHeight_anti {κ κ' : ℝ} (h : κ ≤ κ') (x y : ℝ) : tanHeight κ' x y ≤ tanHeight κ x y := by
+  unfold tanHeight
+  nlinarith [sq_nonneg x, sq_nonneg y]
+
+/-- A horn between curvatures inside `[κ₁, κ₂]` lies in the horn between `κ₁` and `κ₂`. -/
+theorem hornSet_mono {v : ℂ} {α κ₁ κ₂ s₁ s₂ r : ℝ} (h1 : κ₁ ≤ s₁) (h2 : s₂ ≤ κ₂) :
+    hornSet v α s₁ s₂ r ⊆ hornSet v α κ₁ κ₂ r := fun _ ⟨hd, hx, hA, hB⟩ =>
+  ⟨hd, hx, lt_of_lt_of_le hA (tanHeight_anti h1 _ _), lt_of_le_of_lt (tanHeight_anti h2 _ _) hB⟩
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
@@ -1400,7 +1410,24 @@ theorem shaveAvailable_of_not_doublyShadowed (hF : F.Valid) (h5 : F.Condition5) 
     {α κ₁ κ₂ : ℝ} {c g h : Fin k} (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : -1 < κ₁) (h2 : κ₂ < 1)
     (hg : F.IsFlankAbove v α κ₂ g) (hh : F.IsFlankBelow v α κ₁ h) (hgc : g ≠ c) (hhc : h ≠ c)
     (hnot : ¬ F.DoublyShadowed v α κ₁ κ₂ g h) : F.ShaveAvailable v := by
-  sorry
+  obtain ⟨σg, σh, hg1, hg2, hh1, hh2, hev⟩ := flank_shadows hF h5 hv hH h1 h2 hg hh hgc hhc
+  -- not doubly shadowed: the `g`-shadow ends below the `h`-shadow
+  have hle : σg ≤ σh := by
+    by_contra hlt
+    push Not at hlt
+    refine hnot ⟨σh, σg, hh1, hlt, hg2, ?_⟩
+    filter_upwards [hev] with r hr z hz
+    have hz' := hornSet_mono hh1 hg2 hz
+    exact ⟨(hr z hz').1.mpr hz.2.2.2, (hr z hz').2.mpr hz.2.2.1⟩
+  refine ⟨c, g, h, α, κ₁, κ₂, σg, hH, hg, hh, hg1, hg2, ?_⟩
+  filter_upwards [hev] with r hr z hz
+  refine ⟨fun hA y hy hzy => ?_, fun hA y hy hzy => ?_⟩
+  · -- above `σ_g`: outside the `g`-shadow
+    have hB : TanBelow v α σg z := (hr z hz).1.mp ⟨y, hy, hzy⟩
+    exact lt_asymm hA hB
+  · -- not above `σ_g ≤ σ_h`: outside the `h`-shadow
+    have hA' : TanAbove v α σh z := (hr z hz).2.mp ⟨y, hy, hzy⟩
+    exact hA (lt_of_lt_of_le hA' (tanHeight_anti hle _ _))
 
 /-- **FS110-N4-SHAVE**, the move: where SHAVE is available at `v` for a colour `c` with `n ≥ 1` sectors, recolouring the horn's
 tip gives a valid map, agreeing with `F` off a small disc about `v` and creating no unit arc (Condition 5 kept when `F` has it),

@@ -12,7 +12,9 @@ Axioms from `#print axioms` against the stage-2 build's oleans (`data/fs131/ic/a
 - FS110-N3-CONF (iii), N3-CLEAR: `HadwigerNelson.Plane.ArcMap.clear_of_subset_interior_allowedCone` — [kernel] `[propext, Classical.choice, Quot.sound]`.
 - FS110-N3-DEG (unit arcs, curvatures in `[−1, 1]`): `HadwigerNelson.Plane.ArcMap.woodallCone` — [kernel] `[propext, Classical.choice, Quot.sound]`.
 - FS110-N3-DEG as filed (Condition 5, curvatures in `(−1, 1)`): `HadwigerNelson.Plane.ArcMap.woodallCone_strict` — [kernel] `[propext, Classical.choice, Quot.sound]`.
-- 33 children in `Plane/ValidMap/Contact` (listed in Stage 2), each `[propext, Classical.choice, Quot.sound]`; among them
+- FS110-N4-SHAVE's criterion: `HadwigerNelson.Plane.ArcMap.shaveAvailable_of_not_doublyShadowed` — proved **over `flank_shadows`** (still `sorry`):
+  `[propext, sorryAx, Classical.choice, Quot.sound]` until `flank_shadows` lands (stage-3 build, `data/fs131/ic/axioms-stage3.txt`).
+- 35 children in `Plane/ValidMap/Contact` (33 listed in Stage 2; `tanHeight_anti`, `hornSet_mono` in Stage 3), each `[propext, Classical.choice, Quot.sound]`; among them
   `ArcMap.woodall_contacts` (Woodall's out-type contacts at `v ± n` when `int D_c(v) = ∅`) and `interior_nonempty_of_not_mem` (the planar step).
 
 ## Stage 1 — SAVED: the readback, the as-given build
@@ -134,3 +136,23 @@ the derivation (FS110-N § N3-2, § N4-2) and the wave's API cost more than the 
 6. **`stuck_chain`** (M over 5): a step lemma "stuck at `v` with an `α`-horn of a colour with two sectors ⟹ stuck at `v + n` with an `α`-horn" (at `N`,
    `h` has two sectors; terminal gives no move; `woodallCone` at `N` with `v` an out-type `h`-contact of `N` fixes the axis: `e α″ ⊥ (v − N)`), the mirror
    by `α + π` (the other horn from `stuck_structure`), then `Int.induction_on` both ways.
+
+## Stage 3 — SAVED: `shaveAvailable_of_not_doublyShadowed` over `flank_shadows`; 6 `sorry` left in `Contact`, and the hand-back
+
+**Proved over `flank_shadows`'s statement** (its own `sorry` gone; it reads `sorryAx` only through `flank_shadows` until that leaf lands; no statement
+changed): **FS110-N4-SHAVE's criterion, `ArcMap.shaveAvailable_of_not_doublyShadowed`.** From `flank_shadows`' `σ_g`, `σ_h`: if `σ_h < σ_g`, the band
+`hornSet v α σ_h σ_g r` lies in both shadows (`hornSet_mono`), against "not doubly shadowed"; so `σ_g ≤ σ_h`, and `σ = σ_g` splits the horn — above it
+outside the `g`-shadow, not above it outside the `h`-shadow (the height above a tangent circle falls as the curvature grows, `tanHeight_anti`). Children:
+`tanHeight_anti`, `hornSet_mono`. Records: `tools/fs131_ic_addrecords.py --check` 65 names, 0 missing.
+
+**Build of this stage**: `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`; admitted after a wait for other trees'
+builds): "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings, 8m31s", exit 0 (`build/gate/build/20261004T193115Z-1790239.log`;
+driver log `data/fs131/ic/build-stage3.log`). 30 `declaration uses sorry` warnings — `Contact` 6, `UnitArc` and `BaseSteps` 24 (I4h's) — and no other
+warning or error. Nothing was edited while it ran. **Axioms** against its oleans (`data/fs131/ic/axioms-stage3.txt`): 65 theorems of `Contact`; 58 read
+`[propext, Classical.choice, Quot.sound]`; `shaveAvailable_of_not_doublyShadowed` reads `sorryAx` through `flank_shadows`, and the six left read it besides.
+
+**The hand-back.** Proved in this job: 4 of `Contact`'s 10 leaves (`clear_of_subset_interior_allowedCone`, `woodallCone`, `woodallCone_strict` clean;
+`shaveAvailable_of_not_doublyShadowed` over `flank_shadows`) and 35 children. **Left (6):** `flank_shadows`, `exists_shave`, `exists_rayMerge`,
+`exists_merge`, `stuck_structure`, `stuck_chain` — the order and what each needs is Stage 2's list (items 1, 3, 4, 5, 6; item 2 is done). Branch
+`fs131-w4c` is ready for the merge into `fs131-w4` (conflicts expected at the append points of `scripts/Axioms.lean` and `ARCHITECTURE.md` only; my
+records are in their own block headed "FS131-IC1"); I did not merge or run wave 4's gate.
