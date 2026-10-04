@@ -8,7 +8,9 @@ import re, sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 MODS = ["Proofs/HadwigerNelson/Plane/StuckChain.lean", "Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean",
-        "Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean"]
+        "Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean", "Proofs/HadwigerNelson/Plane/SVMap.lean"]
+# Definitions built from `sorry` leaves (FS131-K4b): recorded like theorems, so their axioms are audited when the leaves land.
+DEFS = {"toAeProperRegions", "sevenBrickMap", "sevenBrickRegions"}
 
 
 def names(track=True):
@@ -24,6 +26,9 @@ def names(track=True):
                 ns.pop(); continue
             mo = re.match(r"theorem (\S+)", line)
             if mo:
+                out.append(".".join(ns + [mo.group(1)]))
+            mo = re.match(r"(?:noncomputable )?def (\S+)", line)
+            if mo and mo.group(1) in DEFS:
                 out.append(".".join(ns + [mo.group(1)]))
     return out
 

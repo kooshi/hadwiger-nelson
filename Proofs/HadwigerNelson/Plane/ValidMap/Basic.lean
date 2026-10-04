@@ -204,6 +204,11 @@ def IsR2Arc (p : ℂ) (θ₁ θ₂ : ℝ) : Prop :=
 points"), read on the arcs inside the domain. -/
 def Condition5 : Prop := ∀ a ∈ F.arcs, ∀ p, (a.carrier ∩ F.dom ∩ sphere p 1).Finite
 
+/-- **Condition 6** (`[SokolovVoronov2025]`: "There are no trichromatic vertices of degree greater than 3"), read on an arc map: a
+point carrying exactly three colours has degree at most `3` (its degree is its number of sectors, `HasDegree`). FS106-TS-T's last
+clause (`Plane/SVMap`). -/
+def Condition6 : Prop := ∀ x n, (F.coloursAt x).ncard = 3 → F.HasDegree x n → n ≤ 3
+
 /-- **`𝓜_K`** (FS-107, without periodicity, as for the limit object): circular arcs of radius at least `1/K`, and at most `K`
 arcs meeting the domain inside any unit disc. -/
 def InMK (K : ℕ) : Prop :=
@@ -276,6 +281,23 @@ example (j : Fin 2) :
     (ArcMap.const univ isOpen_univ j).Condition5 ∧ (ArcMap.const univ isOpen_univ j).InMK 0 := by
   refine ⟨fun a ha => by simp [const] at ha, fun a ha => by simp [const] at ha, fun x => ?_⟩
   simp [const]
+
+/-- The one-colour plane satisfies Condition 6: no point carries three colours. -/
+example (j : Fin 2) : (ArcMap.const univ isOpen_univ j).Condition6 := by
+  intro x n h3 _
+  have hsub : (ArcMap.const univ isOpen_univ j).coloursAt x ⊆ {j} := by
+    intro c hc
+    rw [mem_singleton_iff]
+    by_contra hne
+    have hreg : (ArcMap.const univ isOpen_univ j).region c = ∅ := by
+      ext z
+      simp [region, const, interiorPts, Ne.symm hne]
+    have hc' : x ∈ closure ((ArcMap.const univ isOpen_univ j).region c) := hc
+    rw [hreg, closure_empty] at hc'
+    exact hc'
+  have := Set.ncard_le_ncard hsub (Set.finite_singleton j)
+  rw [Set.ncard_singleton] at this
+  omega
 
 /-- `IsContact` reads the carried colour and the closure of its class on `ω(v)`: on the one-colour plane, `1` is a contact
 of the one colour at `0` (validity is not part of the definition). -/

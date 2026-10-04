@@ -2075,6 +2075,29 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.l60_le
 #print axioms HadwigerNelson.Plane.ArcMap.noBoth
 
+/-! ## FS-131 wave 4 (job FS131-K4b) — the skeleton continued: FS106-L, FS106-TS-T, the brick map of the plane (sorry until wave 4's implementer lands it; `lebesgue_covering_square` is an outside theorem whose disposition is owed) -/
+
+#print axioms HadwigerNelson.Plane.lemmaL
+#print axioms HadwigerNelson.Plane.not_lemmaL_of_not_mem
+#print axioms HadwigerNelson.Plane.lebesgue_covering_square
+#print axioms HadwigerNelson.Plane.AeProperRegions.exists_three_le_multicolour
+#print axioms HadwigerNelson.Plane.AeProperRegions.exists_three_le_multicolour_lt_one
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_eq_multicolour
+#print axioms HadwigerNelson.Plane.ArcMap.region_locallyFinite
+#print axioms HadwigerNelson.Plane.ArcMap.dense_iUnion_region
+#print axioms HadwigerNelson.Plane.ArcMap.toAeProperRegions
+#print axioms HadwigerNelson.Plane.ArcMap.ts_t
+#print axioms HadwigerNelson.Plane.ArcMap.exists_hasDegree_of_mem_dom
+#print axioms HadwigerNelson.Plane.ArcMap.ts_t_trichromatic
+#print axioms HadwigerNelson.Plane.ArcMap.ts_t_degree_three
+#print axioms HadwigerNelson.Plane.sevenBrickArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.sevenBrickArcs_locallyFinite
+#print axioms HadwigerNelson.Plane.sevenBrick_color_locallyConstant
+#print axioms HadwigerNelson.Plane.sevenBrickMap
+#print axioms HadwigerNelson.Plane.sevenBrickMap_isPlaneMap
+#print axioms HadwigerNelson.Plane.sevenBrickMap_valid
+#print axioms HadwigerNelson.Plane.sevenBrickRegions
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

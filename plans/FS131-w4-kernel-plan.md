@@ -322,3 +322,86 @@ them); then the base steps with **FS112-BOWTIE** first (the inhabitant of `IsHor
 already up to date, nothing built, 9 modules with warnings** (wave 3's six skeleton modules and K4's three, their `sorry` warnings), exit 0
 (`build/gate/build/20261004T080043Z-2048659.log`; driver log `data/fs131/k4/build-k4b-stage1.log`).
 
+
+## Stage 7 — SAVED (K4b stage 2): FS106-L and FS106-TS-T, the module FS131-W branches from
+
+### 7.1 The module
+
+`Proofs/HadwigerNelson/Plane/SVMap.lean` (imports `Plane/ValidMap/Basic`, `Instances/Seven`), and one foundation addition, `ArcMap.Condition6` in
+`Plane/ValidMap/Basic` (S–V's Condition 6 read on an arc map: a point of exactly three colours has degree at most `3`), with a proved spec example
+(the one-colour plane). Both rows are **region-only** (the FS106 derivation's header: "a step that reads no colour at a boundary point"), so both are
+stated over open colour classes, never over a map's boundaries — the class their arguments read (G92), and the form Woodall's chain (FS131-W) can
+instantiate from whatever structure it gives S–V's map-type colourings (Jordan boundaries are not arc maps; the opening plan's "S–V map-type
+colourings (Conditions 2–6)" are FS131-W's to model, and need only produce `AeProperRegions`).
+
+| declaration | what it is |
+|---|---|
+| `lemmaL` | FS106-L |
+| `not_lemmaL_of_not_mem` | **adversary**: lemma (L) is false without `b ∈ W` (§ 7.3) |
+| `multicolour S x` | D-VMC / S–V Def. 2: `{j | x ∈ closure (S j)}`; spec example and adversary proved; `ArcMap.coloursAt_eq_multicolour` (by `rfl`) |
+| `AeProperRegions k` | D-AEMAP read on regions: open classes `cls j`, no two points of one class at distance `1`, dense union, finitely many components of the classes near each point (S–V's Condition 3 on regions) |
+| `closedSquare`, `lebesgue_covering_square` | **an outside theorem** (§ 7.4) |
+| `AeProperRegions.exists_three_le_multicolour`, `…_lt_one` | FS106-TS-T (SB's `1/√2 + ε`; TS's "within 1", strict) |
+| `ArcMap.region_locallyFinite`, `dense_iUnion_region`, `toAeProperRegions` | a valid map of the plane gives `AeProperRegions` (over wave 3's `finite_tiles_near`, `dense_interiorPts`) |
+| `ArcMap.ts_t`, `exists_hasDegree_of_mem_dom`, `ts_t_trichromatic`, `ts_t_degree_three` | TS-T for arc maps; the vertex step; Condition 5's clause over its conclusion; Condition 6's clause |
+| `brickCorner`, `sevenBrickArcs`, `sevenBrickMap`, `sevenBrickMap_valid` (proved), `sevenBrickMap_isPlaneMap` (proved), `sevenBrickRegions` | **the inhabitant**: M36's brick seven-colouring as a valid arc map of the plane (three field leaves: `sevenBrickArcs_nondegenerate`, `_locallyFinite`, `sevenBrick_color_locallyConstant`) |
+
+### 7.2 The read-backs
+
+| row | read-back |
+|---|---|
+| **FS106-L** | Row: "a two-colour change point of a two-coloured open set with no monochrome unit has its unit circle outside the set"; V3 stage 1's form: "(L) in a 2-coloured open set `W` with no monochrome unit, no point `b` with both colours arbitrarily near has `ω(b) ∩ W ≠ ∅`". Formal (`lemmaL`): `A`, `B`, `W` open, `W ⊆ cl (A ∪ B)` (two-coloured, region-only: boundary points uncoloured), no unit pair inside `A` or inside `B` (no monochrome unit; for open sets the same as `UnitPairsNull`, wave 1's `dist_ne_one_of_mem_of_mem_closure` converts), `b ∈ W ∩ cl A ∩ cl B` ⟹ `Disjoint (sphere b 1) W`. "Change point **of** the set" is read as `b ∈ W` — necessary (§ 7.3). Disjointness of `A` and `B` is not a hypothesis: the argument never reads it (a point at unit distance from a point of `A` is not in `A`, whatever else it is) — a widening, harmless. **Same, with the reading `b ∈ W` fixed** |
+| **FS106-TS-T** | Row: "every point of an almost-everywhere-proper map has a point of chromaticity ≥ 3 within 1/√2 + ε (TS: within 1); with Condition 5 it is trichromatic, with Condition 6 of degree 3 — closing S–V Lemma 4 (a) under Conditions 5–6". Formal: (i) `AeProperRegions.exists_three_le_multicolour` — for every `z` and `ε > 0` a point `x` with `dist x z < 1/√2 + ε` and `3 ≤ ncard (multicolour cls x)` (chromaticity is D-VMC's, the ncard of the multicolour; "almost-everywhere-proper map" is its regions, D-AEMAP); TS's form `…_lt_one` (strict `< 1`, stronger than "within 1"). For arc maps (`ArcMap.ts_t`): a valid map of the plane, `coloursAt` in place of the multicolour (equal by definition). (ii) "with Condition 5 it is trichromatic": SB § 2.5's second half reads Condition 5 only through **S–V Lemma 2 almost everywhere** (SB § 2.1 A5: no point of chromaticity ≥ 4, at six colours) — not a backlog row (finding F-A5, § 7.5); `ts_t_trichromatic` takes its conclusion, "at most three colours at every point", as inventory ruling 53 did for FS110-N4-STUCK, and concludes chromaticity exactly `3` and degree at least `3` (SB: "a trichromatic point is a vertex"). (iii) "with Condition 6 of degree 3": `ts_t_degree_three`, with `Condition6` (no point of exactly three colours has degree above `3`) — degree exactly `3`. "Closing S–V Lemma 4 (a)" is a remark on a text (dropped, as R9 drops verdicts). **Same; the Condition-5 clause over Lemma 2's conclusion** |
+
+Consumers checked against these forms: FS129-SR2-DISC1TS (wave 5; "every closed disc of radius 1 of a valid map contains a vertex of degree at least
+3", not claiming the Condition 5/6 forms) is `ArcMap.ts_t` with `exists_hasDegree_of_mem_dom` — both stated here; FS106-AE-MAP6 (FS131-W, five colours,
+no Condition 5) reads clause (i) only, through its own map structure's `AeProperRegions`.
+
+### 7.3 The reading `b ∈ W` is necessary (the adversary `not_lemmaL_of_not_mem`) [hand, one mind; a planner's check, not a row]
+
+`b = 0`, `q = 1 ∈ ω(0)`; `ε ∈ (0, π/4)`, `r = sin ε / 4`, `ρ = min(sin ε, 1/2)/2`. `C_A = {u : 0 < |u| < ρ, |arg u − π| < π/2 − ε}` (a cone pointing
+away from `q`), `C_B = {v : 0 < |v| < ρ, |arg v| < π/2 − ε}` (toward `q`), `D = B(1, r)`; `A = C_A ∪ (D ∖ B̄(0, 1))`, `B = C_B ∪ (D ∩ B(0, 1))`,
+`W = C_A ∪ C_B ∪ D`. Then `W` is open, `W ⊆ cl (A ∪ B)`, `0 ∈ cl A ∩ cl B`, `0 ∉ W`, `1 ∈ ω(0) ∩ W`. No unit pair in `A`: within each piece the
+diameter is below `1`; across, for `u ∈ C_A`, `w ∈ D ∖ B̄(0, 1)`, `Re(w ū) ≤ |u|(r − (1 − r) sin ε) < 0`, so `|w − u|² > |w|² > 1`. No unit pair in
+`B`: for `v ∈ C_B`, `w ∈ D ∩ B(0, 1)`, `2 Re(w v̄) > |v| sin ε > |v|²`, so `|w − v|² < |w|² < 1`. So K4's draft form (§ 5.2: "`b ∈ cl A ∩ cl B` ⟹
+`ω(b) ∩ W = ∅`", `b` anywhere) is false, and the row's "change point of a two-coloured open set" must be read with `b` in the set; V3's proof reads it
+there (its point `z` is within `O(√s)` of `b` and must be coloured). Not a statement defect of the row — the row's words say "of the set" — but
+FS131-W, which applies (L) in Townsend's annulus and at Woodall's step 4, must apply it at points of the open set.
+
+### 7.4 The outside theorem: Lebesgue's covering theorem for the square
+
+TS-T's first clause is dimension theory: if every point near `z` had at most two colours, the closures of the chain components (each of diameter
+`≤ 1` by wave 1's `dist_lt_one_of_chain`, FS106-TS-C) would cover a square of side above `1` with order two — Lebesgue's covering theorem says they
+cannot. TS's route (the hull growth, walking the outer frontier of a cluster) needs instead that the boundary of the unbounded complementary component
+of a continuum is connected (the plane's unicoherence) — no easier. **Mathlib has neither** (grepped at the pin: no Lebesgue covering theorem, no
+Brouwer fixed point theorem, no Sperner lemma — only Mathlib's homotopy lifting for covering maps, `Topology/Homotopy/Lifting.lean`, from which the
+two-dimensional theorem is a long road). Its formalization is more than an hour of agent work (a combinatorial Sperner or Hex lemma, then a
+Lebesgue-number compactness step), so by `LEAN.md` § Assumptions it is **either an `axiom` with the four items or a separate
+planner-and-implementer job** — Keryx's decision, asked at this stage's commit. The skeleton states it as a `theorem` with `sorry`, so either
+disposition is a one-declaration change; its statement, for the read-back owed under item 2: "a closed square covered by finitely many closed sets
+`F i` none of which meets two opposite sides has a point in three of them" (`closedSquare c s`, `0 < s`, `F : Fin m → Set ℂ` closed, the two
+opposite-sides conditions read on `F i ∩ closedSquare c s`). Source: Hurewicz–Wallman, *Dimension Theory* (Princeton, 1941), Theorem IV 2, the
+`n`-cube with `n + 1` sets — **recalled, not read** (no copy in `~/source/library/`, no `BIBLIOGRAPHY.md` entry; SB § 2.5 cites it with the same
+wording); its classical source is Lebesgue (Math. Ann. 70, 1911). A model of its hypotheses (item 3): the four closed quarter-squares of
+`closedSquare 0 1` — none meets two opposite sides, and their common corner `(1/2, 1/2)` lies in all four (an `example` once the disposition is made).
+
+### 7.5 The build of this stage
+
+`./scripts/build.sh` (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 441 of 441 batches, 6 modules rebuilt, 10 modules with warnings** (wave 3's six, K4's three,
+`Plane/SVMap`; every warning `declaration uses 'sorry'`, no other warning or error beyond the up-to-date probe's expected line), 8 m 13 s, exit 0
+(`build/gate/build/20261004T081431Z-2082832.log`; driver log `data/fs131/k4/build-k4b-stage2.log`). `tools/check_architecture.py`: PASS. `scripts/Axioms.lean`:
+section "FS-131 wave 4 (job FS131-K4b) — the skeleton continued", 20 records; `tools/fs131_k4_decls.py` extended to `Plane/SVMap` and to the three
+definitions built from leaves (`--check`: 45 names, 0 missing; `--plant`: FIRED, 45 missing).
+
+### 7.6 Findings sent to Keryx with this stage's commit
+
+- **F-A5 (backlog completeness, as F-NB4).** FS106-TS-T's Condition-5 clause rests on S–V Lemma 2 almost everywhere (SB § 2.1 A5, "no point of
+  chromaticity ≥ 4" for six colours with Condition 5) — the map-type twin of FS110-NB-4, and no backlog row. Stated over its conclusion
+  (`ts_t_trichromatic`), as ruling 53 did for N4-STUCK; no backlog consumer reads the clause (DISC1TS's not-claimed line excludes it; AE-MAP6 is at
+  five colours without Condition 5).
+- **L-READ (a reading, with a counterexample to the other).** FS106-L holds for change points **in** `W`; at a frontier point it is false (§ 7.3).
+  For FS131-W.
+- **G-L (generalization, small).** Lemma (L) needs no disjointness of the two classes.
+- **OUT-LEB (decision owed).** Lebesgue's covering theorem for the square: an axiom with the four items, or a separate formalization job (§ 7.4).
+  My recommendation: a separate job (it is the plane's dimension theorem, a reusable Mathlib-shaped result, and the only outside theorem the wave
+  needs); the axiom only if that job has not landed when wave 4's gate is otherwise green.
