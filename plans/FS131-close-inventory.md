@@ -208,3 +208,8 @@ reason by the close.*
     `debruijn-implementer`, Sonnet, in the main tree; `data/fs131/briefs/FS131-T1-vacuity-carriers.md`), both gated PASS. **Slip, the coordinator's** (found
     by the gate, twice): each brief first quoted a hand-back message's text as if it were the report file's — the two differ — and named a worktree's file
     by a main-tree path. Fixed by copying each line from its file by script. Rule: quote a report from its file, never from the hand-back. Source: this commit.
+33. **Generalization and sharpening — FS111-M3-BAND's first clause** (FS131-K2b, message 2026-10-04; one mind, the kernel decides): the row needs a block of
+    diameter ≤ 1 and gives material at distance exactly 1 over the middle half of a flat side; the skeleton's `IsMUA.add_normal_mem_essSupport`
+    (`Plane/CoverExamples` on `fs131-w2`) states it for any MUA set at any point `m` where the set fills the half-box behind `m` and its support misses the
+    normal ray up to `δ` — then `m + e θ` lies in the support — so over the whole side (in HC, exactly the segment `σ_e`). The derivation's diameter bound
+    (§ 1.5 fact 1) only kept `z` from excluding itself. No downstream change (BAND's consumer is HC's design). For the record job's errata.
