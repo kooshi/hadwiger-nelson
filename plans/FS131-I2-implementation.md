@@ -233,3 +233,52 @@ form), `twoBall_pairs_ge`, `pairs_le_of_arc`, `exists_ne_mem_essClosure`, `not_u
 ## Drafts for the front page
 
 None: the gate was not run (90 `sorry` remain in the wave-2 modules). Vacuity carriers for wave 2 are not yet registered.
+
+## Stage 8 — SAVED (FS131-I2f, Opus implementer trial): readback; lane A closed (19 children); SQ9 closed (5 children)
+
+**Readback.** Both brief quotations checked by `grep -F` against `plans/FS131-w2-kernel-plan.md`: the "May" line of § 13 (line beginning
+"- **May**: prove any child or leaf; add further children (state each as a lemma before using it, and add its `scripts/Axioms.lean` record);")
+and the "What is left" line of § 18 (line 1070) — both exact. Counts at `ddc5b5c8` by script (lines that are exactly `sorry`): `Plane/Slack` 46,
+`Plane/CoverExamples` 62, `Arith/PlaceHom` 14, `Arith/Dyadic` 12, `Plane/FalconerReduction` 9, `Arith/FalconerField` 5, `Plane/YesLimit` 4,
+`Plane/Cover` 2 — 154, as the brief says. **May**: prove any child or leaf; add further children (each stated as a lemma first, with its
+`scripts/Axioms.lean` record); move declarations within a module; add imports (with `ARCHITECTURE.md`'s Imports cell); supporting definitions.
+**May not**: change any row statement, hypothesis, or definition's meaning (rulings 48, 56, 57, 63, 72, 86, 100 are the authorised changes so far),
+nor any child statement fixed by K2c or K2d; no `axiom` (`falconer_lemma2_nonempty` is the one declared import), no `native_decide`.
+
+**Build as given**: launched at `ddc5b5c8` under the slot (`--mem 40 --cpus 8`, `MEMMAX=40G BATCH=4`); it waited about 20 minutes for admission
+and, by the time it reached `Arith/PlaceHom` and `Arith/FalconerField`, read this session's first edits to those two files (the build reads files
+as it reaches them). **OK** — 443 of 443 batches, 5 modules rebuilt (`Instances/FalconerOrbit`, `Arith/PlaceHom`, `Arith/FalconerField`,
+`Plane/CoverExamples` and one dependent), every warning `declaration uses 'sorry'`, 8 m 35 s (`build/gate/build/20261004T112218Z-3062460.log`).
+So K2d's modules rebuild; the evidence for the proofs below is the gate's build, not this one.
+
+**Iteration**: a private symlink overlay of the worktree's oleans (scratch `i2f/ol`, never evidence), `lean -DautoImplicit=false
+-DrelaxedAutoImplicit=false` with the overlay first on `LEAN_PATH`; `Instances/FalconerOrbit` compiled into it under a 6 GiB slot (4 s).
+
+**Closed** (statements untouched):
+- `Arith/FalconerField` (all 5): `not_falconerFan_of_colorable`, `sub_mem_of_connected`, `exists_hom_apex`, `tip_eq_zero_of_tipFree`,
+  `not_falconerFan_five_of_hom_slack`.
+- `Arith/PlaceHom` (all 14): `pureTranscendental_zero`, `pureTranscendental_succ`, `algebraicIndependent_init_and_transcendental_last`,
+  `exists_valuationSubring_localization` (Mathlib's `Localization.subalgebra.ofField` — its carrier is exactly `{a s⁻¹ : s ∈ 𝔭ᶜ}` — a DVR by
+  `isDiscreteValuationRing_of_dedekind_domain`, then `ValuationSubring.ofSubring`), `exists_residue_localization` (`IsLocalization.lift` of the
+  quotient map; the non-unit clause through `B.valuation`), `placeHom_base` (`Subring.equivMapOfInjective` into `ℝ`; `−1` not a square by
+  `FiniteField.isSquare_neg_one_iff`), `placeHom_step` (`V₁ = (W.comap L).map ι`, `W = (V₀.comap g).map ι`, `φ₁` through two
+  `equivMapOfInjective`s and two `RingHom.restrict`s; constants by `AlgEquiv.commutes`), `exists_hom_of_isPlaceHom` (the coset construction on
+  `{z : z.re, z.im ∈ V}` directly in `ℂ`), `chromaticNumber_planeOver_pureTranscendental_eq`, `nonempty_ringEquiv_zmod_of_card`,
+  `exists_hom_finitePlane_of_card`, `slack_complete`, `exists_hom_slack`, `forall_const_of_hom_slack`.
+  **So lane A's four leaves are sorry-free**: `exists_placeHom` (FS129-SA1-PLACE-HOM), `noAffine_fields` (FS129-SA1-NOAFF-FIELDS),
+  `falconerFan_five_field` and `falconerFan_five_placeHom` (FS129-SA1-FALC-RES (i), (ii)); `Arith/PlaceHom` and `Arith/FalconerField` elaborate
+  with no warning.
+- `Plane/CoverExamples`, SQ9 (all 5): `SaturatedPos.saturated`, `sq9_essClosure_subset` (the colour's closed squares as a `LocallyFinite`
+  family), `sq9Sq_subset_essClosure`, `sq9_mem_edge_of_not_mem_densitySet`, `sq9_partner`. Two new children, stated before use and recorded in
+  `scripts/Axioms.lean` (block "FS131-I2f"): `upperDensityAt_pos_of_balls` (a quarter-radius ball a.e. inside `A` at every small radius gives
+  density ratio `≥ 1/16`), `sq9_openSq_subset`. **So `sq9_saturated_both`, and with it `sq9_tight_saturated` (FS111-W-SQ9), is sorry-free.**
+
+**Count for the trial** (inventory item 103): 24 `sorry`ed children closed (lane A 19, SQ9 5) and 2 children added and proved; 4 + 1 leaves now
+sorry-free from them. 130 lines that are exactly `sorry` remain (`Plane/CoverExamples` 57, `Plane/Slack` 46, `Arith/Dyadic` 12,
+`Plane/FalconerReduction` 9, `Plane/YesLimit` 4, `Plane/Cover` 2).
+
+**Re-pricing** (the first two hard children, as the brief asks): `exists_valuationSubring_localization` and `exists_residue_localization`, priced
+35k and 30k at the Sonnet rate, took about 6k and 9k tokens of this session's context each, one compile-fix round each; `placeHom_step`
+(priced 40k) about 12k with two rounds. Lane A's 19 children took about 55k in all against K2d's 445k Sonnet-rate table; SQ9's five about 20k
+against 85k. On this evidence the Opus rate is roughly a quarter to a sixth of the Sonnet table, the gain largest on plumbing whose Mathlib API
+exists (`Localization.subalgebra.ofField` replaced K2d's planned hand-built residue map).
