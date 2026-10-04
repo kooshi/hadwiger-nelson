@@ -1939,13 +1939,20 @@ No native evaluation. -/
 
 /-! ## FS-131 wave 3 (job FS131-K3b) — the skeleton: local structure, SIXFRAG, tiles, the ring, the lens, RINGBAND (sorry until wave 3's implementer lands it) -/
 
+#print axioms HadwigerNelson.Plane.norm_div_norm_sub_le
 #print axioms HadwigerNelson.Plane.Icc_subset_angleIcc
 #print axioms HadwigerNelson.Plane.Ioo_subset_angleIoo
 #print axioms HadwigerNelson.Plane.Arc.finite_inter_sphere_or_eq_circ
+#print axioms HadwigerNelson.Plane.volume_segment_eq_zero
+#print axioms HadwigerNelson.Plane.Arc.volume_carrier
 #print axioms HadwigerNelson.Plane.ArcMap.covers_one_iff
 #print axioms HadwigerNelson.Plane.ArcMap.finite_ringΓ_off_ringArc
 #print axioms HadwigerNelson.Plane.ArcMap.dense_interiorPts
 #print axioms HadwigerNelson.Plane.ArcMap.exists_mem_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.finite_ray_inter_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.subsingleton_ray_inter_segment
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ray_in_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_tile
 #print axioms HadwigerNelson.Plane.ArcMap.finite_tiles_near
 #print axioms HadwigerNelson.Plane.ArcMap.mem_coloursAt_iff_exists_tileOf
 #print axioms HadwigerNelson.Plane.ArcMap.coneAt_region_eq_biUnion
@@ -1965,18 +1972,22 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.sixFrag_isRingArc
 #print axioms HadwigerNelson.Plane.ArcMap.Valid.unitPairsNull_region
 #print axioms HadwigerNelson.Plane.ArcMap.ne1_region
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.dist_lt_or_gt_of_isPreconnected
 #print axioms HadwigerNelson.Plane.ArcMap.IsTile.subset_ball
 #print axioms HadwigerNelson.Plane.ArcMap.IsTile.closure_subset_closedBall
 #print axioms HadwigerNelson.Plane.ArcMap.IsTile.dist_lt_one
 #print axioms HadwigerNelson.Plane.ArcMap.unitNear_or_unitFar
 #print axioms HadwigerNelson.Plane.ArcMap.IsTile.unitNear_self
 #print axioms HadwigerNelson.Plane.ArcMap.IsTile.dist_le_one_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.UnitNear.dist_le_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.UnitFar.one_le_dist_of_mem_closure
 #print axioms HadwigerNelson.Plane.ArcMap.unitNear_of_mem_closure
 #print axioms HadwigerNelson.Plane.ArcMap.unitFar_of_mem_closure
 #print axioms HadwigerNelson.Plane.ArcMap.NonSiamese.eq_of_unitNear
 #print axioms HadwigerNelson.Plane.ArcMap.unitNear_iff_of_mem_closure_inter
 #print axioms HadwigerNelson.Plane.ArcMap.cluster
 #print axioms HadwigerNelson.Plane.ArcMap.Valid.wholeRestrict
+#print axioms HadwigerNelson.Plane.ArcMap.wholeRestrict_interiorPts
 #print axioms HadwigerNelson.Plane.ArcMap.wholeRestrict_covers
 #print axioms HadwigerNelson.Plane.ArcMap.isTile_wholeRestrict_iff
 #print axioms HadwigerNelson.Plane.ArcMap.isTile_wholeRestrict_of_mem_closure
@@ -1984,19 +1995,38 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.Simple.wholeRestrict
 #print axioms HadwigerNelson.Plane.ArcMap.not_mem_closure_wholeRestrict_of_inner
 #print axioms HadwigerNelson.Plane.ArcMap.not_mem_closure_wholeRestrict_R₂
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.false_of_crossing
+#print axioms HadwigerNelson.Plane.ArcMap.isPreconnected_germ
+#print axioms HadwigerNelson.Plane.ArcMap.dist_ringPt_shift_cmp
+#print axioms HadwigerNelson.Plane.ArcMap.norm_add_sq_eq
+#print axioms HadwigerNelson.Plane.ArcMap.cone_expand
+#print axioms HadwigerNelson.Plane.ArcMap.dist_ringPt_germ_le
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonneg_of_germ
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonpos_of_germ
+#print axioms HadwigerNelson.Plane.ArcMap.e_pi
+#print axioms HadwigerNelson.Plane.ArcMap.re_e_mul_conj_e
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_sub_ringPt_minus_third
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_sub_ringPt_plus_third
 #print axioms HadwigerNelson.Plane.ArcMap.not_germIn_closure_rotate
 #print axioms HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_mem_sphere
 #print axioms HadwigerNelson.Plane.ArcMap.isClosed_ringD
+#print axioms HadwigerNelson.Plane.ArcMap.mem_interiorPts_of_notMem_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.col_eq_of_mem_closure_region
 #print axioms HadwigerNelson.Plane.ArcMap.ringD_subset_Γ
 #print axioms HadwigerNelson.Plane.ArcMap.finite_ringD_off_ringArc
 #print axioms HadwigerNelson.Plane.ArcMap.germR_vMinus
 #print axioms HadwigerNelson.Plane.ArcMap.germR_vPlus
 #print axioms HadwigerNelson.Plane.ArcMap.germR_uMinus
 #print axioms HadwigerNelson.Plane.ArcMap.germR_uPlus
+#print axioms HadwigerNelson.Plane.ArcMap.GermIn.exists_mem_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.IsChangePoint.not_mem_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.IsChangePoint.ncard_add_two_le
 #print axioms HadwigerNelson.Plane.ArcMap.germS_absent
 #print axioms HadwigerNelson.Plane.ArcMap.germS_inward
 #print axioms HadwigerNelson.Plane.ArcMap.germS_outward
 #print axioms HadwigerNelson.Plane.ArcMap.germS_four
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_mem_closure_germ
+#print axioms HadwigerNelson.Plane.ArcMap.onQArc_of_germOnQ
 #print axioms HadwigerNelson.Plane.ArcMap.ringQPrimeS
 #print axioms HadwigerNelson.Plane.ArcMap.qfree4
 #print axioms HadwigerNelson.Plane.ArcMap.fiveRing_no_changePoint
@@ -2011,6 +2041,19 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.echo_unique
 #print axioms HadwigerNelson.Plane.ArcMap.echo_of_mem_closure
 #print axioms HadwigerNelson.Plane.ArcMap.echo
+#print axioms HadwigerNelson.Plane.ArcMap.side_ball_subset_closure
+#print axioms HadwigerNelson.Plane.ArcMap.norm_sub_sq_eq
+#print axioms HadwigerNelson.Plane.ArcMap.norm_sq_sub_radial
+#print axioms HadwigerNelson.Plane.ArcMap.re_mul_conj_e_bound
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.cos_nonneg_of_radial_inner
+#print axioms HadwigerNelson.Plane.ArcMap.outer_near_arith
+#print axioms HadwigerNelson.Plane.ArcMap.outer_far_arith
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.cos_nonpos_of_radial_outer
+#print axioms HadwigerNelson.Plane.ArcMap.mem_angleIcc_of_cos_nonneg
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.radial_inner
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.radial_outer
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_angleIcc_angleIoo_of_le
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_angleIcc_angleIoo_of_le'
 #print axioms HadwigerNelson.Plane.ArcMap.ringArc_cone_inner
 #print axioms HadwigerNelson.Plane.ArcMap.ringArc_cone_outer
 #print axioms HadwigerNelson.Plane.ArcMap.ringArc_sideCone_inner
@@ -2036,13 +2079,12 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.CircleColouring.exists_swap_of_abs_W_le_one
 #print axioms HadwigerNelson.Plane.CircleColouring.W_mod_six
 #print axioms HadwigerNelson.Plane.CircleColouring.exists_pair_of_abs_W_le_two
+#print axioms HadwigerNelson.Plane.ArcMap.e_injOn_Ico
 #print axioms HadwigerNelson.Plane.ArcMap.ring_finite_S
 #print axioms HadwigerNelson.Plane.ArcMap.ring_locallyConstant
 #print axioms HadwigerNelson.Plane.ArcMap.ring_proper
 #print axioms HadwigerNelson.Plane.ArcMap.ringCircleColouring
 #print axioms HadwigerNelson.Plane.ArcMap.exists_swap_of_ring
-
-#eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
 
