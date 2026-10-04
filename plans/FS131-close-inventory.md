@@ -1446,3 +1446,24 @@ reason by the close.*
      centres once the double event is defined at a configuration with both tangential components nonzero, `1 < t < 2` entering only through
      `linkage_dot_ne_zero` (`t ∉ {1, 3}`), BV-ND1 the instance `u₁ = u₂`. Narrowing, no action (N-BVL3): `bv_l3` takes H on both circles; the walk supplies it.
      No ruling needed: the corrected statement is the honest one and no row's consumer changes (Keryx; confidence high).
+204. **FS131-I4g handed back at stage 17, harness ≈ 418k** (report `data/fs131/reports/FS131-I4g.md` on `fs131-w4`; branch at `68f34f18`, checked): its files 29 →
+     24 (BaseSteps 10 → 7, UnitArc 19 → 17); `Contact` untouched (diff against `8a184ec1` empty). **[kernel] on the branch, standard three**: FS112-BOWTIE's
+     `bowtie_isStuck` (E stuck, ±i not), `bowtie_terminalOn` (no MERGE, MERGE-RAY or SHAVE at 0, ±i), FS112-FLANK's last clause `flank_incomplete_bowtie`,
+     FS112-U1's `u1_shadow`, L60-REAL's `l60Col_locallyConstant` (`l60Frag` sorry-free), with 39 children. Keryx's receipts: build log
+     `build/gate/build/20261004T182956Z-1435730.log` (w4) "Build completed successfully (5359 jobs)", 34 distinct warnings, all `sorry`, no other kind; `sorry`
+     lines by count Contact 10, UnitArc 17, BaseSteps 7; `data/fs131/i4/axioms-i4g*.txt` print the five on the standard three. Generalization: the ray engine
+     (`eventually_ray_not_mem_hornSet`, `IsSector.disjoint_of_rays`; any arc map — no horn at a vertex whose sectors are convex tiles, in one line). Route note:
+     `noBoth`'s `c ≠ c′` is forced by wave 3's `ringArc_cone_inner/outer` (not a new hypothesis). Imports: `BaseSteps` now imports `UnitArc` (allowed by § 14.2;
+     `ARCHITECTURE.md` updated, check passes); `n3_end` will need `Contact`'s `woodallCone` and `exists_merge`, so `BaseSteps` imports `Contact` after the
+     `Contact` branch merges — a sequencing point. Slip (I4g's): a waiter's `pgrep -f` fallback self-matched (RUNNING.md's trap); nothing lost. Rate: five
+     wave-4 leaves this session (six, five, five on the last three) — item 199 (c)'s condition ("slower than six a session") is met.
+205. **Held for Kooshi (staffing), default queue**: a fourth Opus slot would run wave 4's `Contact` implementer (item 194) now, in parallel. Measurement: wave 4
+     closes about five leaves a session with 34 left (about seven serial sessions, about five with the split); three jobs wait on slots that free only when a lane
+     ends (wave 4's `Contact`, the base's planner FS131-KB, wave 5's implementer). **Default if he says nothing**: no fourth slot; the queue runs in item 199 (c)'s
+     order as lanes end (K5b's slot next goes to `Contact`, since wave 4 is now the slower path). Raised at his next check-in, not by notification (efficiency,
+     not a blocker). Recommendation: a fourth slot for the backlog's duration (confidence medium).
+206. **Brief FS131-I4h, wave 4's eighth implementer** (Opus; `data/fs131/briefs/FS131-I4h-wave4.md`, derived by script from I4g's, gated PASS): `UnitArc` and
+     `BaseSteps`' 24 in Stage 17's order (`n3_end` after `Contact` merges or last), not `Contact`. Launched in I4g's slot: 1 (I2l) + 1 (K5b) + 1 (I4h) = 3.
+     **Tool defect (the brief gate, a false pass)**: my first draft quoted two Stage-17 lines under source lines naming Stage 14's heading, and the gate passed
+     it — it appears to accept a quotation found anywhere after the named heading, not only within its section. Caught by reading the draft; fixed before launch.
+     Owed: a repro filed in agent-forge (`forge/STATUS.md` under Keryx).
