@@ -64,13 +64,16 @@ def IsEndpoint (F : ArcMap k) (u x : ℂ) (a c : Fin k) (p : ℂ) : Prop :=
   (F.coloursAt p).ncard = 3 ∧ (p ∈ ball u 1 ∨ F.VIn u p) ∧
     ∃ T₁ T₂, F.TileOf a T₁ ∧ F.TileOf c T₂ ∧ x ∈ closure T₁ ∧ x ∈ closure T₂ ∧ p ∈ closure T₁ ∧ p ∈ closure T₂
 
-/-- **A returning pair** of `ω(u)` (FS110-CD Lemma R, path-free): two distinct change points `r(s)`, `r(t)` of the pseudo-colouring of
-`ω(u)`, `s < t < s + 60°`, switching between the same two colours `a`, `c` (with `c` just inside `[s, t]` at both ends and `a` just
-outside), whose `a`-tiles coincide and whose `c`-tiles coincide. -/
+/-- **A returning pair** of `ω(u)` (FS110-CD Lemma R, `plans/FS110-CD-verification.md` § 2.4, l. 200: "a returning pair joined by `β` (an `a|c`
+boundary path in the closed disc)"): two distinct change points `r(s)`, `r(t)` of the pseudo-colouring of `ω(u)`, `s < t < s + 60°`, switching
+between the same two colours `a`, `c` (with `c` just inside `[s, t]` at both ends and `a` just outside), joined by an `a|c` boundary in the
+closed disc — a connected set `K` holding both ends inside the closures of one `a`-tile and one `c`-tile and inside `B̄(u, 1)` (CD's `β`, read
+as a continuum rather than a path). The clause `K` is FS131-I5's repair (inventory items 231–232): without it a single `a|c` boundary crossing
+`ω(u)` at `0°`, `20°`, `40°` makes `[0°, 20°]` and `[20°, 40°]` both returning, abutting at `r(20°)`, and nesting (`retArcs_nested`) fails. -/
 def IsRetArc (F : ArcMap k) (u : ℂ) (s t : ℝ) : Prop :=
   s < t ∧ t < s + π / 3 ∧ ∃ a c, a ≠ c ∧ F.GermPseudo u s .cw a ∧ F.GermPseudo u s .ccw c ∧ F.GermPseudo u t .cw c ∧
-    F.GermPseudo u t .ccw a ∧ ∃ T₁ T₂, F.TileOf a T₁ ∧ F.TileOf c T₂ ∧ ringPt u s ∈ closure T₁ ∧ ringPt u t ∈ closure T₁ ∧
-      ringPt u s ∈ closure T₂ ∧ ringPt u t ∈ closure T₂
+    F.GermPseudo u t .ccw a ∧ ∃ T₁ T₂, F.TileOf a T₁ ∧ F.TileOf c T₂ ∧
+      ∃ K, IsConnected K ∧ ringPt u s ∈ K ∧ ringPt u t ∈ K ∧ K ⊆ closure T₁ ∩ closure T₂ ∩ closedBall u 1
 
 end ArcMap
 
@@ -122,8 +125,9 @@ variable {F : ArcMap 6} {u : ℂ}
 /-- Under H a point of `B̄(u, 2)` with three colours is cubic trichromatic (no repeated colour: one sector per colour; K5b's child
 `isCubicTrichromatic_of_three_of_noRep` with `BaseHyp`). -/
 theorem BaseCtx.cubic_of_three (B : F.BaseCtx u) {x : ℂ} (hx : x ∈ closedBall u 2) (h3 : (F.coloursAt x).ncard = 3) :
-    F.IsCubicTrichromatic x := by
-  sorry
+    F.IsCubicTrichromatic x :=
+  isCubicTrichromatic_of_three_of_noRep (B.covers hx) h3 fun hr =>
+    Set.disjoint_left.mp B.hyp hx (Or.inr ⟨B.covers hx, hr⟩)
 
 /-- **`c′ ≠ ∅`** on `ω(p)` (FS112-N3-3, "the pseudo-colouring"; NB3 step 3): a point of `ω(p)` with no colour outside `P_cl(p)` puts `ω(p)`
 in `Γ` on both sides with both sides' colours in `P_cl(p)` — a both-kind arc centred at `p`, against `noBoth` and H. -/
@@ -156,8 +160,8 @@ theorem BaseCtx.exists_pseudoCircle (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ clos
 
 /-! ## C — the planar core (Prop. 19(b), the reduction's arcs, the eleventh point) -/
 
-/-- **The returning arcs are removable** (FS110-CD Lemma R step 3, path-free): for `x` inside a returning arc and `y = r(x ± 60°)`, `ω(y)`
-crosses `ω(u)` only at `x` within the arc, so it separates its ends; the `a`-tile and the `c`-tile, connected with both ends in their closures,
+/-- **The returning arcs are removable** (FS110-CD Lemma R step 3): for `x` inside a returning arc and `y = r(x ± 60°)`, `ω(y)` crosses `ω(u)`
+only at `x` within the arc, so it separates its ends; the `a`-tile and the `c`-tile, connected with both ends in their closures (through `K`),
 meet `ω(y)`, so neither colour is at `y` (the (P) sweep) and `c′(y)` is the third colour. The colour pattern at the ends is in `IsRetArc`. -/
 theorem BaseCtx.retArc_partner (B : F.BaseCtx u) {s t : ℝ} (hR : F.IsRetArc u s t) {x : ℝ} (hx : x ∈ Ioo s t) {a c : Fin 6}
     (ha : F.GermPseudo u s .cw a) (hc : F.GermPseudo u s .ccw c) (y : ℝ) (hy : y = x + π / 3 ∨ y = x - π / 3) :
@@ -171,13 +175,16 @@ theorem BaseCtx.retArcs_finite (B : F.BaseCtx u) :
 
 /-- **The returning arcs nest or are disjoint** (FS110-CB D5 item 1, "paths do not cross; their arcs nest or are disjoint"; FS110-CD Lemma R
 step 4) — **planar core**: interleaved ends would make the `a`-tile of one pair cross the boundary of the other's tiles away from a
-four-colour point. Planned over the finite boundary graph of the disc (plan § 4, leaf C3). -/
+four-colour point, and abutting ends would need two inner `a|c` germs at one point of `ω(u)` (each point there has at most three colours, one
+sector each, under H, and an `a|c` germ along `ω(u)` is an inert arc, excluded by `NoInertNear`) — the joining continua `K` of `IsRetArc` carry
+this. Planned over the finite boundary graph of the disc (plan § 4, leaf C3). -/
 theorem BaseCtx.retArcs_nested (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t') :
     Disjoint (ringArc u s t) (ringArc u s' t') ∨ ringArc u s t ⊆ ringArc u s' t' ∨ ringArc u s' t' ⊆ ringArc u s t := by
   sorry
 
 /-- **A non-returning change point has an endpoint** (`[SokolovVoronov2025]` Prop. 19(b) as FS110-CD Lemma E and FS110-CE R1–R4 repaired it,
-path-free) — **planar core**: a change point `r(θ)` of the pseudo-colouring of `ω(u)` with pair `{a, c}`, outside every returning arc, has an
+path-free in its conclusion) — **planar core**: a change point `r(θ)` of the pseudo-colouring of `ω(u)` with pair `{a, c}`, outside every returning
+arc (CD's sense: `IsRetArc` carries the joining `a|c` continuum in the closed disc, inventory item 232), has an
 endpoint: the `a|c` boundary from it, continued through spikes, ends at a three-colour point of `B(u, 1)` or at a V-in vertex of `ω(u)`, in the
 closures of the two tiles at `r(θ)`. Planned over the finite boundary graph (the handshake lemma, plan § 4, leaf C4). -/
 theorem BaseCtx.exists_endpoint (B : F.BaseCtx u) {θ : ℝ} {a c : Fin 6} (hac : a ≠ c) (ha : F.GermPseudo u θ .cw a)
@@ -205,7 +212,32 @@ connectedness), so points `p₁`, `p₂` of those closures are at least `1` apar
 theorem endpoint_dist_ge {k : ℕ} {F : ArcMap k} (hF : F.Valid) {a : Fin k} {T₁ T₂ : Set ℂ} (h₁ : F.TileOf a T₁) (h₂ : F.TileOf a T₂)
     {x₁ x₂ p₁ p₂ : ℂ} (hx₁ : x₁ ∈ closure T₁) (hx₂ : x₂ ∈ closure T₂) (hp₁ : p₁ ∈ closure T₁) (hp₂ : p₂ ∈ closure T₂)
     (hx : 1 < dist x₁ x₂) : 1 ≤ dist p₁ p₂ := by
-  sorry
+  -- no pair of the two tiles is at distance `1` (one colour, validity)
+  have hne : ∀ s ∈ T₁, ∀ t ∈ T₂, dist s t ≠ 1 := fun s hs t ht h1 =>
+    hF s (h₁.1.subset_interiorPts hs) t (h₂.1.subset_interiorPts ht) h1 (by rw [h₁.2 hs, h₂.2 ht])
+  -- a pair near `(x₁, x₂)` is farther than `1`
+  set δ := (dist x₁ x₂ - 1) / 2 with hδ
+  have hδ0 : 0 < δ := by rw [hδ]; linarith
+  obtain ⟨s₀, hs₀, hs₀d⟩ := Metric.mem_closure_iff.mp hx₁ δ hδ0
+  obtain ⟨t₀, ht₀, ht₀d⟩ := Metric.mem_closure_iff.mp hx₂ δ hδ0
+  have hfar : 1 < dist s₀ t₀ := by
+    have := dist_triangle4 x₁ s₀ t₀ x₂
+    rw [dist_comm t₀ x₂] at this
+    linarith
+  -- so every pair is farther than `1` (the distances over the connected `T₁ × T₂` form an interval missing `1`)
+  have hpre : IsPreconnected ((fun q : ℂ × ℂ => dist q.1 q.2) '' (T₁ ×ˢ T₂)) :=
+    (h₁.1.isPreconnected.prod h₂.1.isPreconnected).image _ (continuous_fst.dist continuous_snd).continuousOn
+  have hall : ∀ q ∈ T₁ ×ˢ T₂, 1 ≤ dist q.1 q.2 := by
+    rintro ⟨s, t⟩ ⟨hs, ht⟩
+    by_contra hlt
+    push Not at hlt
+    obtain ⟨q, hq, hq1⟩ := hpre.Icc_subset ⟨(s, t), ⟨hs, ht⟩, rfl⟩ ⟨(s₀, t₀), ⟨hs₀, ht₀⟩, rfl⟩ ⟨hlt.le, hfar.le⟩
+    exact hne q.1 hq.1 q.2 hq.2 hq1
+  -- and on the closures
+  have hcl : closure (T₁ ×ˢ T₂) ⊆ {q : ℂ × ℂ | 1 ≤ dist q.1 q.2} :=
+    closure_minimal hall (isClosed_le continuous_const (continuous_fst.dist continuous_snd))
+  rw [closure_prod_eq] at hcl
+  exact hcl (show (p₁, p₂) ∈ closure T₁ ×ˢ closure T₂ from ⟨hp₁, hp₂⟩)
 
 /-- **No two V-in points of one colour of `u` are antipodal** (FS110-CD Theorem D2 (i); FS110-CE's Antipodal Lemma): their tiles of that
 colour lie in `B̄(p, 1) ∩ B̄(p′, 1) = {u}` (Lemma H(b)), against openness. -/
@@ -227,7 +259,16 @@ theorem BaseCtx.eleventh_antipodal (B : F.BaseCtx u) {q p : ℂ} (hq : dist q u 
 theorem BaseCtx.cor3_base (B : F.BaseCtx u) {p p' : ℂ} (hp : p ∈ closedBall u 1) (hp' : p' ∈ closedBall u 1)
     (h : F.IsCubicTrichromatic p) (h' : F.IsCubicTrichromatic p') (hdis : Disjoint (F.coloursAt p) (F.coloursAt p')) :
     2 ≤ dist p p' := by
-  sorry
+  by_contra hlt
+  push Not at hlt
+  have hcov : ∀ {q : ℂ}, q ∈ closedBall u 1 → F.Covers q 1 := fun {q} hq z hz =>
+    B.covers (show z ∈ closedBall u 2 by rw [mem_closedBall] at hq hz ⊢; linarith [dist_triangle z q u])
+  obtain ⟨qp, qm, -, hq⟩ := cor3 B.valid h h' (hcov hp) (hcov hp') hdis hlt
+  obtain ⟨hqp, -, h4, -⟩ := hq qp (by simp)
+  have hqu : qp ∈ closedBall u 2 := by
+    rw [mem_closedBall] at hp ⊢; linarith [dist_triangle qp p u]
+  have hdom : qp ∈ F.dom := B.covers hqu
+  exact Set.disjoint_left.mp B.hyp hqu (Or.inl ⟨hdom, h4⟩)
 
 /-- **Lemma 3 in pseudo-colour form** (`[SokolovVoronov2025]` Lemma 3; BASE-V's BV-L3 route — the unit-distance linkage and the band lemma —
 on the two pseudo-colourings): two cubic trichromatic points of `B̄(u, 1)` with one multicolour are not at distance in `(1, 2)`. Their circles may
@@ -253,7 +294,45 @@ on `Fin 6`. -/
 theorem eleventh_type {U Q : Finset (Fin 6)} (hU : U.card = 3) (hQ : Q.card = 3) (hQU : (Q ∩ U).card = 2)
     (t : Finset (Fin 6) → Fin 3 → Fin 6) (ht : ∀ P, P ⊆ Uᶜ → P.card = 2 → Function.Injective (t P) ∧ ∀ i, t P i ∈ U) :
     ∃ P, P ⊆ Uᶜ ∧ P.card = 2 ∧ ∃ i, Qᶜ = insert (t P i) P := by
-  sorry
+  -- `P` is the two absent colours outside `Q`; `t P` is onto `U`, so it hits the colour of `U` outside `Q`
+  set P := Qᶜ ∩ Uᶜ with hP
+  have hPU : P ⊆ Uᶜ := Finset.inter_subset_right
+  have hunion : (Q ∪ U).card = 4 := by
+    have := Finset.card_union_add_card_inter Q U
+    omega
+  have hPc : P.card = 2 := by
+    have h1 : P = (Q ∪ U)ᶜ := by rw [hP, Finset.compl_union]
+    rw [h1, Finset.card_compl, hunion]; rfl
+  obtain ⟨hinj, hmem⟩ := ht P hPU hPc
+  have hUQ : (U \ Q).card = 1 := by
+    have := Finset.card_sdiff_add_card_inter U Q
+    rw [Finset.inter_comm] at this
+    omega
+  obtain ⟨w, hw⟩ := Finset.card_eq_one.mp hUQ
+  have hwU : w ∈ U := (Finset.mem_sdiff.mp (hw ▸ Finset.mem_singleton_self w)).1
+  have hwQ : w ∉ Q := (Finset.mem_sdiff.mp (hw ▸ Finset.mem_singleton_self w)).2
+  have himg : Finset.univ.image (t P) = U := by
+    apply Finset.eq_of_subset_of_card_le
+    · intro x hx
+      obtain ⟨i, -, rfl⟩ := Finset.mem_image.mp hx
+      exact hmem i
+    · rw [Finset.card_image_of_injective _ hinj, hU]; rfl
+  obtain ⟨i, -, hi⟩ := Finset.mem_image.mp (himg ▸ hwU)
+  refine ⟨P, hPU, hPc, i, ?_⟩
+  rw [hi]
+  ext x
+  simp only [Finset.mem_compl, Finset.mem_insert, hP, Finset.mem_inter]
+  constructor
+  · intro hxQ
+    by_cases hxU : x ∈ U
+    · left
+      have : x ∈ U \ Q := Finset.mem_sdiff.mpr ⟨hxU, hxQ⟩
+      rw [hw] at this
+      exact Finset.mem_singleton.mp this
+    · right; exact ⟨hxQ, hxU⟩
+  · rintro (rfl | ⟨hxQ, -⟩)
+    · exact hwQ
+    · exact hxQ
 
 end ArcMap
 

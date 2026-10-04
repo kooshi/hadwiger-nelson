@@ -120,6 +120,58 @@ namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
 
+/-! ## A shared child: three colours with no repeated colour -/
+
+/-- **Three colours and no repeated colour make a cubic trichromatic vertex** (wave 5's shared child, plan § 9.1, for `n3_base`, `rot_noThird`,
+`bv_hex` and the base's `cubic_of_three`): in a sector chart at `x` every sector's colour is carried at `x`, so with three colours a fourth
+sector would repeat a colour at every radius of the chart; the degree is then exactly `3`. -/
+theorem isCubicTrichromatic_of_three_of_noRep {x : ℂ} (hx : x ∈ F.dom) (h3 : (F.coloursAt x).ncard = 3)
+    (hnr : ¬ F.HasRepeatedColour x) : F.IsCubicTrichromatic x := by
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hx
+  have hle := hC.ncard_coloursAt_le
+  rw [h3] at hle
+  have hn : 0 < n := by
+    by_contra h0
+    push Not at h0
+    have : n = 0 := by omega
+    subst this
+    simp at hle
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  -- the colour of each sector (constant on it, and carried at `x`)
+  choose p hp using fun i => hC.sector_nonempty hr₀ i
+  have hcol : ∀ i, ∀ r ∈ Ioc 0 r₀, ∀ z ∈ G.sector x r i, F.col z = F.col (p i) := fun i r hr z hz =>
+    (hC.isPreconnected r₀ hr₀ i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hr₀ i))
+      (G.sector_mono hr.2 i hz) (hp i)
+  have hmem : ∀ i, F.col (p i) ∈ F.coloursAt x := by
+    intro i
+    have hsub : G.sector x r₀ i ⊆ F.region (F.col (p i)) := fun z hz =>
+      ⟨hC.sector_subset_interiorPts hn hr₀ i hz, hcol i r₀ hr₀ z hz⟩
+    exact closure_mono hsub (hC.mem_closure_sector hr₀ i)
+  -- at most three sectors: a fourth would repeat a colour at every small radius
+  have hn3 : n ≤ 3 := by
+    by_contra h4
+    push Not at h4
+    have hcard : ((F.coloursAt x).toFinite.toFinset).card < (Finset.univ : Finset (Fin n)).card := by
+      rw [← Set.ncard_eq_toFinset_card _ (F.coloursAt x).toFinite, h3, Finset.card_univ, Fintype.card_fin]; exact h4
+    obtain ⟨i, -, j, -, hij, heq⟩ := Finset.exists_ne_map_eq_of_card_lt_of_maps_to hcard
+      (f := fun i => F.col (p i)) (fun i _ => (Set.Finite.mem_toFinset _).mpr (hmem i))
+    apply hnr
+    refine ⟨F.col (p i), ?_⟩
+    filter_upwards [Ioc_mem_nhdsGT hC.pos] with r hr
+    have hi : G.sector x r i ∈ F.sectorsOf x r (F.col (p i)) :=
+      ⟨(hC.isSector_iff hn hr).mpr ⟨i, rfl⟩, fun z hz => hcol i r hr z hz⟩
+    have hj : G.sector x r j ∈ F.sectorsOf x r (F.col (p i)) :=
+      ⟨(hC.isSector_iff hn hr).mpr ⟨j, rfl⟩, fun z hz => (hcol j r hr z hz).trans heq.symm⟩
+    have hne : G.sector x r i ≠ G.sector x r j := by
+      intro h
+      obtain ⟨z, hz⟩ := hC.sector_nonempty hr i
+      exact Set.disjoint_left.mp (hC.disjoint r hr i j hij) hz (h ▸ hz)
+    calc (2 : ℕ∞) = ({G.sector x r i, G.sector x r j} : Set (Set ℂ)).encard := (Set.encard_pair hne).symm
+      _ ≤ (F.sectorsOf x r (F.col (p i))).encard :=
+          Set.encard_le_encard (Set.insert_subset hi (Set.singleton_subset_iff.mpr hj))
+  have hmax : max n 1 = 3 := by omega
+  exact ⟨hmax ▸ hC.hasDegree, h3⟩
+
 /-! ## FS112-ROTHEX: FS-110's ring lemmas with unit arcs under the base's hypothesis -/
 
 /-- **FS112-ROTHEX, N2-ROT's "no `r`-tile at `x`"** (FS110-N2-ROT, `plans/FS110-N-proof.md` l. 393; with unit arcs, NB3 § 1.4 N3-BASE step
@@ -182,17 +234,6 @@ theorem hex_regular {u : ℂ} (hu0 : u ∈ F.dom) (hu : F.IsCubicTrichromatic u)
       coneAt (F.region g₁) u = angleIcc β β ∧ coneAt (F.region g₂) u = angleIcc (β + π) (β + π) := by
   sorry
 
-/-- **FS112-ROTHEX, Prop. 17 with unit arcs** (`[SokolovVoronov2025]` Prop. 17; FS110-N3-P17's route, `plans/FS110-N-proof.md` § 2.4;
-NB3 § 1.4 N3-BASE step 10): in a valid six-coloured fragment covering `B̄(u, 2)` about a cubic trichromatic `u` under the base's
-hypothesis, the six-point rotating configuration does not occur. The row's "P17's only unit-arc exception is a both-centre `x₂`" is the
-proof's content on FS110-N3-P17's route: its one Condition-5 step ("the arc … leaves `x₁` tangent to `ω(x₂)` with curvature `≠ 1`") fails
-only on a unit arc of `ω(x₂)` with sides `q` and `g`, both carried at `x₂` — a both-centre, excluded by FS112-N3-NOBOTH (`noBoth`) and the
-base's hypothesis. A second route is FS114-BV-HEX (`bv_hex`, which needs neither N2-ROT, N2-HEX nor NOBOTH). A refutation: no model
-expected. -/
-theorem p17_ua {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
-    {ψ : ℝ} {b : ZMod 3 → Fin 6} (hR : F.HexRing u ψ b) : False := by
-  sorry
-
 /-! ## FS114-BV-HEX: Lemma 6's `< 9` branch under H, Lemma 3 at cusps, NoDouble with unit arcs -/
 
 /-- **FS114-BV-HEX, (BV-HEX)** (`plans/BASE-V-verification.md` § 1a.4, steps 1–6): at a cubic trichromatic `u` of a valid map (unit arcs
@@ -205,6 +246,18 @@ refutation: no model expected. -/
 theorem bv_hex (hF : F.Valid) {u : ℂ} (hc : F.Covers u 1) (hu : F.IsCubicTrichromatic u) {ψ : ℝ} {b : ZMod 3 → Fin k}
     (hR : F.HexRing u ψ b) (hH : ∀ j : ℕ, j < 6 → ringPt u (ψ + j * (π / 3)) ∉ F.fourSet ∪ F.repSet) : False := by
   sorry
+
+/-- **FS112-ROTHEX, Prop. 17 with unit arcs** (`[SokolovVoronov2025]` Prop. 17; FS110-N3-P17's route, `plans/FS110-N-proof.md` § 2.4;
+NB3 § 1.4 N3-BASE step 10): in a valid six-coloured fragment covering `B̄(u, 2)` about a cubic trichromatic `u` under the base's
+hypothesis, the six-point rotating configuration does not occur. The row's "P17's only unit-arc exception is a both-centre `x₂`" is the
+proof's content on FS110-N3-P17's route: its one Condition-5 step ("the arc … leaves `x₁` tangent to `ω(x₂)` with curvature `≠ 1`") fails
+only on a unit arc of `ω(x₂)` with sides `q` and `g`, both carried at `x₂` — a both-centre, excluded by FS112-N3-NOBOTH (`noBoth`) and the
+base's hypothesis. A second route is FS114-BV-HEX (`bv_hex`, which needs neither N2-ROT, N2-HEX nor NOBOTH). A refutation: no model
+expected. -/
+theorem p17_ua {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
+    {ψ : ℝ} {b : ZMod 3 → Fin 6} (hR : F.HexRing u ψ b) : False :=
+  bv_hex hF (fun z hz => hc (closedBall_subset_closedBall (by norm_num) hz)) hu hR fun j _ hmem =>
+    Set.disjoint_left.mp hH (show ringPt u _ ∈ closedBall u 2 by rw [mem_closedBall, dist_ringPt]; norm_num) hmem
 
 /-- **FS114-BV-HEX, (BV-L3)** (`[SokolovVoronov2025]` Lemma 3, `plans/BASE-V-verification.md` § 1b.3): no two points `u₁`, `u₂` of one
 three-colour multicolour at distance in `(1, 2)` have rings that are proper finite circle colourings (in the complementary triple, which at
@@ -223,7 +276,58 @@ is a `DoubleEvent` in one of its two senses. The input `bv_nd`'s consumers (BV-L
 theorem linkage_dot_ne_zero {u₁ u₂ : ℂ} (ht : dist u₁ u₂ ≠ 1 ∧ dist u₁ u₂ ≠ 3) {φ χ : ℝ}
     (h1 : dist (ringPt u₁ φ) (ringPt u₂ χ) = 1) :
     dot (I * e φ) (ringPt u₁ φ - ringPt u₂ χ) ≠ 0 ∨ dot (I * e χ) (ringPt u₁ φ - ringPt u₂ χ) ≠ 0 := by
-  sorry
+  -- both dots zero put `w = x₀ − y₀` along `e φ` and along `e χ` (`w = l e φ`, `e χ = m w`, `l, m = ±1`), so
+  -- `u₁ − u₂ = w − e φ + e χ = (l − 1 + m l) e φ` has length `1` or `3`
+  by_contra hcon
+  push Not at hcon
+  obtain ⟨hA, hB⟩ := hcon
+  set w := ringPt u₁ φ - ringPt u₂ χ with hw
+  have hw1 : w.re ^ 2 + w.im ^ 2 = 1 := by
+    have : ‖w‖ = 1 := by rw [hw, ← dist_eq_norm]; exact h1
+    have h2 := Complex.sq_norm w
+    rw [this, Complex.normSq_apply] at h2; nlinarith
+  have hφ : (e φ).re ^ 2 + (e φ).im ^ 2 = 1 := by
+    have h2 := Complex.sq_norm (e φ); rw [norm_e, Complex.normSq_apply] at h2; nlinarith
+  have hχ : (e χ).re ^ 2 + (e χ).im ^ 2 = 1 := by
+    have h2 := Complex.sq_norm (e χ); rw [norm_e, Complex.normSq_apply] at h2; nlinarith
+  simp only [dot, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, Complex.conj_re, Complex.conj_im] at hA hB
+  set a := (e φ).re; set b := (e φ).im; set c := (e χ).re; set d := (e χ).im
+  set p := w.re; set q := w.im
+  have hpq : p = (p * a + q * b) * a ∧ q = (p * a + q * b) * b :=
+    ⟨by linear_combination (-b) * hA - p * hφ, by linear_combination a * hA - q * hφ⟩
+  have hpq' : p = (p * c + q * d) * c ∧ q = (p * c + q * d) * d :=
+    ⟨by linear_combination (-d) * hB - p * hχ, by linear_combination c * hB - q * hχ⟩
+  have hl : (p * a + q * b) ^ 2 = 1 := by linear_combination (a^2+b^2) * hw1 + hφ - (a*q - b*p) * hA
+  have hm : (p * c + q * d) ^ 2 = 1 := by linear_combination (c^2+d^2) * hw1 + hχ - (c*q - d*p) * hB
+  have hu : u₁ - u₂ = w - e φ + e χ := by rw [hw]; simp only [ringPt]; ring
+  have hd : dist u₁ u₂ ^ 2 = (p - a + c) ^ 2 + (q - b + d) ^ 2 := by
+    rw [dist_eq_norm, hu, Complex.sq_norm, Complex.normSq_apply]
+    simp only [Complex.add_re, Complex.sub_re, Complex.add_im, Complex.sub_im]; ring
+  have hd0 : 0 ≤ dist u₁ u₂ := dist_nonneg
+  set l := p * a + q * b; set m := p * c + q * d
+  have hl' : l = 1 ∨ l = -1 := by
+    have : (l - 1) * (l + 1) = 0 := by linear_combination hl
+    rcases mul_eq_zero.mp this with h | h
+    · left; linarith
+    · right; linarith
+  have hm' : m = 1 ∨ m = -1 := by
+    have : (m - 1) * (m + 1) = 0 := by linear_combination hm
+    rcases mul_eq_zero.mp this with h | h
+    · left; linarith
+    · right; linarith
+  have hc : c = m * p ∧ d = m * q :=
+    ⟨by linear_combination (-m) * hpq'.1 - c * hm, by linear_combination (-m) * hpq'.2 - d * hm⟩
+  have key : dist u₁ u₂ ^ 2 = 1 ∨ dist u₁ u₂ ^ 2 = 9 := by
+    rw [hd, hc.1, hc.2, hpq.1, hpq.2]
+    rcases hl' with h | h <;> rcases hm' with h' | h' <;> rw [h, h'] <;>
+      [left; left; right; left] <;> first | linear_combination hφ | linear_combination 9 * hφ
+  rcases key with h | h
+  · exact ht.1 (by
+      have : (dist u₁ u₂ - 1) * (dist u₁ u₂ + 1) = 0 := by linear_combination h
+      rcases mul_eq_zero.mp this with h' | h' <;> linarith)
+  · exact ht.2 (by
+      have : (dist u₁ u₂ - 3) * (dist u₁ u₂ + 3) = 0 := by linear_combination h
+      rcases mul_eq_zero.mp this with h' | h' <;> linarith)
 
 /-- **FS114-BV-HEX, (BV-ND)** (NoDouble, `plans/BASE-V-verification.md` § 1b.2): no double event at two points neither of which carries four
 colours or a repeated colour (so the two sectors each circle passes between are adjacent) — **with unit arcs**, at cusps. Read at every
@@ -244,7 +348,30 @@ theorem bv_nd1 (hF : F.Valid) {u : ℂ} {φ : ℝ} {α β : Fin k} (hαβ : α �
     (h1 : GermIn u φ .cw (F.region α)) (h2 : GermIn u φ .ccw (F.region β))
     (h3 : GermIn u (φ + π / 3) .cw (F.region β)) (h4 : GermIn u (φ + π / 3) .ccw (F.region α))
     (hH : ringPt u φ ∉ F.fourSet ∪ F.repSet ∧ ringPt u (φ + π / 3) ∉ F.fourSet ∪ F.repSet) : False := by
-  sorry
+  -- the double event `β → α` at `x₀ = r(φ)` and `α → β` at `σx₀ = r(φ + 60°)`, both read clockwise: `x₀ − σx₀ = e(φ − 60°)`, and both
+  -- clockwise velocities `−i e φ`, `−i e(φ + 60°)` have component `cos 30° > 0` along it
+  have hdiff : ringPt u φ - ringPt u (φ + π / 3) = e (φ - π / 3) := by
+    simp only [ringPt, add_sub_add_left_eq_sub]
+    apply Complex.ext
+    · simp only [Complex.sub_re, re_e, Real.cos_add, Real.cos_sub, Real.cos_pi_div_three, Real.sin_pi_div_three]; ring
+    · simp only [Complex.sub_im, im_e, Real.sin_add, Real.sin_sub, Real.cos_pi_div_three, Real.sin_pi_div_three]; ring
+  have hdot : ∀ θ : ℝ, dot ((Side.cw.sign : ℂ) * (I * e θ)) (e (φ - π / 3)) = -Real.cos (θ + π / 2 - (φ - π / 3)) := by
+    intro θ
+    rw [show ((Side.cw.sign : ℝ) : ℂ) = ((-1 : ℝ) : ℂ) by simp [Side.sign]]
+    rw [dot_ofReal_mul, ← e_add_pi_div_two, dot_e_e]
+    ring
+  have hcos1 : 0 < -Real.cos (φ + π / 2 - (φ - π / 3)) := by
+    rw [show φ + π / 2 - (φ - π / 3) = π - π / 6 by ring, Real.cos_pi_sub, Real.cos_pi_div_six]
+    have := Real.sqrt_nonneg 3; have : 0 < Real.sqrt 3 := by positivity
+    linarith
+  have hcos2 : 0 < -Real.cos (φ + π / 3 + π / 2 - (φ - π / 3)) := by
+    rw [show φ + π / 3 + π / 2 - (φ - π / 3) = π / 6 + π by ring, Real.cos_add_pi, Real.cos_pi_div_six]
+    have : 0 < Real.sqrt 3 := by positivity
+    linarith
+  refine bv_nd hF hx hy ⟨?_, hαβ.symm, Side.cw, Side.cw, ?_, ?_, h2, h1, h4, h3⟩ hH
+  · rw [dist_eq_norm, hdiff, norm_e]
+  · rw [hdiff, hdot]; exact hcos1
+  · rw [hdiff, hdot]; exact hcos2
 
 end ArcMap
 

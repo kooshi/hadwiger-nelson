@@ -77,11 +77,84 @@ def triLattice : SimpleGraph (ℤ × ℤ) where
     simp only [sub_self, Set.mem_insert_iff, Set.mem_singleton_iff, Prod.mk.injEq] at h
     omega⟩
 
+/-- Adjacency in the triangular lattice, as six coordinate cases. -/
+theorem triLattice_adj {p q : ℤ × ℤ} : triLattice.Adj p q ↔
+    (q.1 - p.1 = 1 ∧ q.2 - p.2 = 0) ∨ (q.1 - p.1 = -1 ∧ q.2 - p.2 = 0) ∨ (q.1 - p.1 = 0 ∧ q.2 - p.2 = 1) ∨
+      (q.1 - p.1 = 0 ∧ q.2 - p.2 = -1) ∨ (q.1 - p.1 = 1 ∧ q.2 - p.2 = -1) ∨ (q.1 - p.1 = -1 ∧ q.2 - p.2 = 1) := by
+  simp only [triLattice, Set.mem_insert_iff, Set.mem_singleton_iff, Prod.mk.injEq]
+
 /-- **The inhabitant of `lemma1`'s hypotheses**: the triangular lattice is locally finite, connected and locally Hamiltonian (each
 neighbourhood is a hexagon), and infinite. -/
 theorem triLattice_hyps :
     (∀ x, (triLattice.neighborSet x).Finite) ∧ triLattice.Connected ∧ LocallyHamiltonian triLattice ∧ 13 ≤ ENat.card (ℤ × ℤ) := by
-  sorry
+  set O : Finset (ℤ × ℤ) := {(1, 0), (-1, 0), (0, 1), (0, -1), (1, -1), (-1, 1)} with hO
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · -- the neighbours are `x` plus one of six offsets
+    intro x
+    refine ((O.image fun o => (x.1 + o.1, x.2 + o.2)).finite_toSet).subset ?_
+    intro y hy
+    rw [SimpleGraph.mem_neighborSet, triLattice_adj] at hy
+    simp only [Finset.coe_image, Set.mem_image, Finset.mem_coe, hO, Finset.mem_insert, Finset.mem_singleton]
+    rcases hy with h | h | h | h | h | h <;>
+      [exact ⟨(1, 0), by simp, by ext <;> simp <;> omega⟩; exact ⟨(-1, 0), by simp, by ext <;> simp <;> omega⟩;
+       exact ⟨(0, 1), by simp, by ext <;> simp <;> omega⟩; exact ⟨(0, -1), by simp, by ext <;> simp <;> omega⟩;
+       exact ⟨(1, -1), by simp, by ext <;> simp <;> omega⟩; exact ⟨(-1, 1), by simp, by ext <;> simp <;> omega⟩]
+  · -- connected: every point is reachable from the origin by unit steps
+    have hstep1 : ∀ p : ℤ × ℤ, triLattice.Reachable p (p.1 + 1, p.2) := fun p =>
+      SimpleGraph.Adj.reachable (triLattice_adj.mpr (Or.inl ⟨by simp, by simp⟩))
+    have hstep2 : ∀ p : ℤ × ℤ, triLattice.Reachable p (p.1, p.2 + 1) := fun p =>
+      SimpleGraph.Adj.reachable (triLattice_adj.mpr (Or.inr (Or.inr (Or.inl ⟨by simp, by simp⟩))))
+    have hrow : ∀ (b : ℤ) (a : ℤ), triLattice.Reachable (0, b) (a, b) := by
+      intro b a
+      induction a using Int.induction_on with
+      | zero => rfl
+      | succ n ih => exact ih.trans (hstep1 (n, b))
+      | pred n ih =>
+        refine ih.trans ?_
+        have := hstep1 (-(n : ℤ) - 1, b)
+        simp only [sub_add_cancel] at this
+        exact this.symm
+    have hcol : ∀ b : ℤ, triLattice.Reachable (0, 0) (0, b) := by
+      intro b
+      induction b using Int.induction_on with
+      | zero => rfl
+      | succ n ih => exact ih.trans (hstep2 (0, n))
+      | pred n ih =>
+        refine ih.trans ?_
+        have := hstep2 (0, -(n : ℤ) - 1)
+        simp only [sub_add_cancel] at this
+        exact this.symm
+    refine ⟨fun p q => ?_⟩
+    exact ((hcol p.2).trans (hrow p.2 p.1)).symm.trans ((hcol q.2).trans (hrow q.2 q.1))
+  · -- each neighbourhood is a hexagon
+    intro x
+    set a : ℤ × ℤ := (x.1 + 1, x.2)
+    set b : ℤ × ℤ := (x.1, x.2 + 1)
+    set c : ℤ × ℤ := (x.1 - 1, x.2 + 1)
+    set d : ℤ × ℤ := (x.1 - 1, x.2)
+    set f : ℤ × ℤ := (x.1, x.2 - 1)
+    set g : ℤ × ℤ := (x.1 + 1, x.2 - 1)
+    have hab : triLattice.Adj a b := triLattice_adj.mpr (by simp [a, b])
+    have hbc : triLattice.Adj b c := triLattice_adj.mpr (by simp [b, c])
+    have hcd : triLattice.Adj c d := triLattice_adj.mpr (by simp [c, d])
+    have hdf : triLattice.Adj d f := triLattice_adj.mpr (by simp [d, f])
+    have hfg : triLattice.Adj f g := triLattice_adj.mpr (by simp [f, g])
+    have hga : triLattice.Adj g a := triLattice_adj.mpr (by simp [g, a])
+    let p : triLattice.Walk b a :=
+      .cons hbc (.cons hcd (.cons hdf (.cons hfg (.cons hga .nil))))
+    refine ⟨a, .cons hab p, ?_, ?_⟩
+    · rw [SimpleGraph.Walk.cons_isCycle_iff]
+      constructor
+      · rw [SimpleGraph.Walk.isPath_def]
+        simp [p, a, b, c, d, f, g, Prod.ext_iff]
+        omega
+      · simp [p, a, b, c, d, f, g, Prod.ext_iff]
+        omega
+    · intro y
+      simp only [SimpleGraph.Walk.support_cons, SimpleGraph.Walk.support_nil, p, List.mem_cons, List.not_mem_nil, or_false,
+        triLattice_adj, a, b, c, d, f, g, Prod.ext_iff]
+      omega
+  · rw [ENat.card_eq_top_of_infinite]; exact le_top
 
 /-- A spec example for `triLattice`: `(0, 0)` and `(1, −1)` are adjacent, `(0, 0)` and `(1, 1)` are not. -/
 example : triLattice.Adj (0, 0) (1, -1) ∧ ¬ triLattice.Adj (0, 0) (1, 1) := by
@@ -172,7 +245,8 @@ claimed (it fails on valid maps: FS114-N114-RD's types (A) and (B)). Model of th
 neighbours each). -/
 theorem cvb_thom (hF : F.Valid) (hP : F.IsPlaneMap) :
     ∃ x, 6 ≤ ((Thomassen.reduced F.filledGraph).neighborSet x).encard := by
-  sorry
+  obtain ⟨hc, hfin, hH, hinf⟩ := cvb_thom_reduced hF hP
+  exact Thomassen.lemma1 _ hfin hc hH (by rw [ENat.card_eq_top_of_infinite]; exact le_top)
 
 /-- **FS114-CVB-PINCH, the pinch clause** (B1): in the map graph of a valid map of the plane, removing a tile with no hole leaves the graph
 connected — at a pinched tile (its boundary walk visits a vertex twice) as at a simple one. Read at the class the argument reads (every tile

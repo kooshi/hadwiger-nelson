@@ -2996,6 +2996,8 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Unenclosed.unenclosedC
 #print axioms HadwigerNelson.Plane.ArcMap.exists_preBend
 #print axioms HadwigerNelson.Plane.ArcMap.exists_unenclosed_or_bad
+#print axioms HadwigerNelson.Plane.ArcMap.isCubicTrichromatic_of_three_of_noRep
+#print axioms HadwigerNelson.Thomassen.triLattice_adj
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 

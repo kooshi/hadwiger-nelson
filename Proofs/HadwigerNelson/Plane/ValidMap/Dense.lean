@@ -26,13 +26,20 @@ variable {k : ℕ} {F : ArcMap k}
 three colours — FS106-TS-T's `1/√2 + ε < 1` (`ts_t`). Stronger than FS112-DISC1's "a vertex of degree at least 3" (`disc1ts_degree`).
 Inhabitant: `sevenBrickMap` (valid, of the plane). -/
 theorem disc1ts (hF : F.Valid) (hP : F.IsPlaneMap) (x : ℂ) : ∃ y ∈ closedBall x 1, 3 ≤ (F.coloursAt y).ncard := by
-  sorry
+  have hs : 1 < Real.sqrt 2 := by
+    rw [show (1 : ℝ) = Real.sqrt 1 by simp]; exact Real.sqrt_lt_sqrt (by norm_num) (by norm_num)
+  have hε : 0 < 1 - 1 / Real.sqrt 2 := by
+    rw [sub_pos, div_lt_one (by linarith)]; exact hs
+  obtain ⟨y, hy, h3⟩ := ts_t hF hP x hε
+  exact ⟨y, by rw [mem_closedBall]; linarith, h3⟩
 
 /-- **FS112-DISC1** as FS129-SR2-DISC1TS states it: every closed disc of radius `1` of a valid map of the plane contains a vertex of
 degree at least `3`. -/
 theorem disc1ts_degree (hF : F.Valid) (hP : F.IsPlaneMap) (x : ℂ) :
     ∃ y ∈ closedBall x 1, ∃ n, 3 ≤ n ∧ F.HasDegree y n := by
-  sorry
+  obtain ⟨y, hy, h3⟩ := disc1ts hF hP x
+  obtain ⟨n, hn, hdeg⟩ := exists_hasDegree_of_mem_dom (F := F) (hP ▸ mem_univ y)
+  exact ⟨y, hy, n, h3.trans hn, hdeg⟩
 
 /-- **FS112-DISC1 on a fragment** (FS129-OR1-LOCALDENSE's use: "read on a fragment: its argument nests tiles surrounding `x`, each of
 diameter at most 1 and so inside `B̄(x, 1)`"): a valid fragment covering `B̄(x, 1)` has a point of at least three colours in `B̄(x, 1)`.
