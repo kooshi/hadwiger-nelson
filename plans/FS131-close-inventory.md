@@ -1653,3 +1653,15 @@ reason by the close.*
      `flankQ_upper/lower`, `a4six`, `nb4p`), BaseSteps 7 (`pair_P'` first; the vote leaves need a shared three-germs lemma; `n3_end` after `fs131-w4c` merges).
 230. **Brief FS131-I4j, wave 4's tenth implementer** (Opus; `data/fs131/briefs/FS131-I4j-wave4.md`, derived by script from I4i's, gated PASS; a stale "Where I4f left
      it" corrected by reading): `UnitArc` and `BaseSteps`' 14 in Stage 24's order (`pair_P'` first). Launched in I4i's slot: 1 (I2m) + 1 (IC3) + 1 (I5) + 1 (I4j) = 4.
+231. **FS131-I5 mid-job, a definition defect in KB's skeleton** (message 2026-10-04): `BaseCtx.retArcs_nested` (`Plane/ValidMap/BaseWalk`) cannot be proved by any
+     local route, because KB's path-free `IsRetArc u s t` (one `a`-tile and one `c`-tile with `r(s)`, `r(t)` in both closures, plus the germ pattern) admits
+     returning pairs whose `a|c` boundary returns outside `B̄(u, 1)`. Smallest configuration: one `a`-tile and one `c`-tile (both colours absent at `u`) whose
+     common boundary crosses `ω(u)` at 0°, 20°, 40° (ring `a | c | a | c`): `IsRetArc u 0 20` with `(a, c)` and `IsRetArc u 20 40` with `(c, a)` both hold, the
+     closed arcs meet only at `r(20°)`, and nesting fails; `reduce`'s conclusion fails with abutting arcs, and `exists_endpoint`'s `hout` wrongly excludes `r(40°)`.
+     The statement holds only because `BaseCtx` is empty (that is `row134BaseUA`). Source definition, checked: FS110-CD Lemma R (`plans/FS110-CD-verification.md`
+     § 2.4, l. 200) — "Let `(b, b′)` be a returning pair joined by `β` (an `a|c` boundary path in the closed disc)." Credit: I5.
+232. **Ruling: `IsRetArc` gains CD's β** — some connected `K` with `r(s), r(t) ∈ K ⊆ closure T₁ ∩ closure T₂ ∩ closedBall u 1`. Choice: I5 makes the definition
+     change in `Plane/ValidMap/BaseWalk` (with its docstring citing CD § 2.4 and this item), and nesting follows CD's step 4 (planar-core work, with C3).
+     Alternative weighed: send the definition to a deriver. Why: the Lean definition dropped a clause its source states explicitly, so the repair is a faithful
+     transcription, not new mathematics; `IsRetArc` is the base skeleton's own vocabulary (not `Chain`'s, `HexRing`'s or `MapGraph`'s, which § 10.2 protects), and
+     no row statement changes. Confidence: high. Amendment appended to `data/fs131/briefs/FS131-I5-wave5.md`.

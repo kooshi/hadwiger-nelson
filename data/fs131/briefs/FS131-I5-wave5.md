@@ -91,3 +91,11 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 today, so on exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never
 evidence; if you mirror oleans for iteration, use a scratch directory of your own (wave 4's `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w4/data/fs131/i4/iter.sh` reads it from the variable `S`). The worktree's
 `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`.
+
+## Amendment 2026-10-04 (Keryx) — `IsRetArc` gains CD's β
+
+Your finding on `BaseCtx.retArcs_nested` is logged as `plans/FS131-close-inventory.md` item 231 and ruled in item 232: you may change `IsRetArc`'s definition in
+`Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean` to require CD's β — some connected `K` with `r(s), r(t) ∈ K ⊆ closure T₁ ∩ closure T₂ ∩ closedBall u 1` —
+with its docstring citing `plans/FS110-CD-verification.md` § 2.4 (Lemma R, l. 200) and item 232, and update `retArcs_nested`, `reduce` and `exists_endpoint`'s
+uses to match. Record the change, with the configuration that forced it, in your record. No other definition or statement changes; you still start no agents
+of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
