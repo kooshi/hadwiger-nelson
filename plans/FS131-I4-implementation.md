@@ -665,6 +665,32 @@ that cannot be proved as written goes to Keryx at once. No edit while a build of
 1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T184245Z-1494706.log`; driver log
 `data/fs131/i4/build-i4h-readback.log`). 34 `declaration uses sorry` warnings — BaseSteps 7, Contact 10, UnitArc 17 — and no other warning.
 
+## Stage 19 — SAVED (FS131-I4h): `l60_real`; 23 `sorry` left in `BaseSteps` and `UnitArc`
+
+**`l60_real` proved**, by its three clauses. *Validity* by the four classes (`l60_interior_cases`): an interior point of colour `0` lies in the open Reuleaux
+triangle on `0`, `1`, `e 60°`; of colour `1` in the open one on `1`, `e 60°`, `C = 1 + e 60°` (the cap `L ∖ B̄(0, 1)` lies in `B(C, 1)`, `l60_cap_mem_ball`, one
+`nlinarith` certificate over the products of the three constraints); of colour `2` in `B(1, 1/4)`, of `3` in `B(e 60°, 1/4)`. **A Reuleaux triangle has diameter
+`1`** (`dist_le_one_of_mem_reul`, general `X`, `Y`, `Z` pairwise `1` apart): for `d = p − q` some vertex `V` has `±d` in the cone spanned by the other two from `V`
+(six cases on the signs of `d`'s Cramer coordinates in the basis `Y − X`, `Z − X`, `eq_cramer`), and then `|d| ≤ 1` by the vertex bound
+(`norm_sub_le_one_of_cone`, through `reul_bound_real`: `|q − W|² ≤ 1 = |W − V|²` gives `2(q − V)·(W − V) ≥ |q − V|²`, so `d·(q − V) ≥ 0` and
+`|d|² ≤ d·(p − V) ≤ |d|`); strictly inside, `< 1` (`dist_lt_one_of_mem_reul`, by pushing `p` outward along `p − q`). *The ring arc* (`l60Frag_isRingArc`): the
+closed arc lies in the domain (`ringArc_l60_subset_dom`: its interior points in the open lens, its ends in the small open discs, by
+`dist_ringPt_ringPt_cmp_one`), on the arc `.circ 0 1 0 (π/3)`; at an interior point the open lens `O` is a neighbourhood on which the colour is `0` inside
+`B(0, 1)` and `1` outside `B̄(0, 1)`, so the sides are `{0}` and `{1}` (one inclusion by `mem_closure_iff` against `O`, the other by
+`l60_closure_subset_region`: an open part of the domain of one colour is, up to closure, in that colour's class, by `dense_interiorPts` and
+`IsOpen.inter_closure`). *The thickening*: `IsCompact.exists_thickening_subset_open`. Checked against `tools/fs114_l60_check.py` FRAG: not re-run — the proof is the
+check (every pair class is proved, not probed).
+
+**Axioms** (`data/fs131/i4/axioms-i4h-19.lean` → `axioms-i4h-19.txt`, against this stage's build's oleans, not a gate log): the leaf and its 15 children, the standard
+three. **Records**: `tools/fs131_i4_addrecords.py` — 394 names, 15 added, 0 missing. **No statement changed** (the only line removed from `UnitArc` is one `sorry`),
+no new axiom, no `native_decide`. Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings", exit 0
+(`build/gate/build/20261004T190217Z-1602361.log`; driver log `data/fs131/i4/build-i4h-stage19.log`): 33 distinct `declaration uses sorry` (BaseSteps 7, Contact 10,
+UnitArc 16), no other warning. The iteration scripts `data/fs131/i4/iter.sh`, `chk.sh` now take the scratch mirror from `S` (default unchanged), so two implementers
+do not share one mirror; this job's is `/home/kooshi/scratch-w4h`.
+
+**Re-pricing**: `l60_real` (planned M–H) cost about 45k tokens, five passes, most of them on `nlinarith` heartbeats — a real-coordinate core lemma per inequality
+is the cure that worked.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;

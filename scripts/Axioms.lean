@@ -2749,6 +2749,21 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.reul_bound_real
+#print axioms HadwigerNelson.Plane.ArcMap.sq_norm_eq_re_im
+#print axioms HadwigerNelson.Plane.ArcMap.norm_sub_le_one_of_cone
+#print axioms HadwigerNelson.Plane.ArcMap.eq_cramer
+#print axioms HadwigerNelson.Plane.ArcMap.dist_le_one_of_mem_reul
+#print axioms HadwigerNelson.Plane.ArcMap.dist_lt_one_of_mem_reul
+#print axioms HadwigerNelson.Plane.ArcMap.norm_e_pi_div_three_sub_one
+#print axioms HadwigerNelson.Plane.ArcMap.l60_interior_lens
+#print axioms HadwigerNelson.Plane.ArcMap.l60_cap_mem_ball
+#print axioms HadwigerNelson.Plane.ArcMap.l60_interior_cases
+#print axioms HadwigerNelson.Plane.ArcMap.l60Frag_valid
+#print axioms HadwigerNelson.Plane.ArcMap.l60_openLens_subset_dom
+#print axioms HadwigerNelson.Plane.ArcMap.l60_closure_subset_region
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_l60_subset_dom
+#print axioms HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc
 #print axioms HadwigerNelson.Plane.ArcMap.mem_carrier_circ_of_arg
 #print axioms HadwigerNelson.Plane.ArcMap.abs_le_pi_div_three_of_cos
 #print axioms HadwigerNelson.Plane.ArcMap.two_pi_div_three_le_abs_of_cos

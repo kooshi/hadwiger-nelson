@@ -827,12 +827,361 @@ noncomputable def l60Frag : ArcMap 4 where
   col := l60Col
   locallyConstant := l60Col_locallyConstant
 
+/-- The Reuleaux bound in coordinates: `D = a u + b w` (`a, b ≥ 0`), `Q` with `|Q|² ≤ 2 Q·u` and `|Q|² ≤ 2 Q·w`, and `|D + Q| ≤ 1` give
+`|D| ≤ 1` (`|D|² = D·(D + Q) − D·Q ≤ D·(D + Q) ≤ |D|`). -/
+theorem reul_bound_real {D1 D2 Q1 Q2 u1 u2 w1 w2 a b : ℝ} (ha : 0 ≤ a) (hb : 0 ≤ b) (hre : D1 = a * u1 + b * w1)
+    (him : D2 = a * u2 + b * w2) (hQu : Q1 ^ 2 + Q2 ^ 2 ≤ 2 * (Q1 * u1 + Q2 * u2))
+    (hQw : Q1 ^ 2 + Q2 ^ 2 ≤ 2 * (Q1 * w1 + Q2 * w2)) (hP : (D1 + Q1) ^ 2 + (D2 + Q2) ^ 2 ≤ 1) : D1 ^ 2 + D2 ^ 2 ≤ 1 := by
+  have hDQ : 0 ≤ D1 * Q1 + D2 * Q2 := by
+    have hsplit : D1 * Q1 + D2 * Q2 = a * (Q1 * u1 + Q2 * u2) + b * (Q1 * w1 + Q2 * w2) := by rw [hre, him]; ring
+    rw [hsplit]
+    have h1 : 0 ≤ Q1 * u1 + Q2 * u2 := by nlinarith [sq_nonneg Q1, sq_nonneg Q2]
+    have h2 : 0 ≤ Q1 * w1 + Q2 * w2 := by nlinarith [sq_nonneg Q1, sq_nonneg Q2]
+    exact add_nonneg (mul_nonneg ha h1) (mul_nonneg hb h2)
+  clear hre him hQu hQw
+  have hDD : D1 ^ 2 + D2 ^ 2 ≤ D1 * (D1 + Q1) + D2 * (D2 + Q2) := by linarith
+  have hCS : (D1 * (D1 + Q1) + D2 * (D2 + Q2)) ^ 2 ≤ (D1 ^ 2 + D2 ^ 2) * ((D1 + Q1) ^ 2 + (D2 + Q2) ^ 2) := by
+    nlinarith [sq_nonneg (D1 * (D2 + Q2) - D2 * (D1 + Q1))]
+  by_contra hlt
+  push Not at hlt
+  have h0 : 0 ≤ D1 ^ 2 + D2 ^ 2 := by positivity
+  have h3 : (D1 ^ 2 + D2 ^ 2) ^ 2 ≤ (D1 ^ 2 + D2 ^ 2) * 1 := by
+    calc (D1 ^ 2 + D2 ^ 2) ^ 2 ≤ (D1 * (D1 + Q1) + D2 * (D2 + Q2)) ^ 2 := pow_le_pow_left₀ h0 hDD 2
+      _ ≤ _ := hCS
+      _ ≤ _ := mul_le_mul_of_nonneg_left hP h0
+  nlinarith
+
+/-- `‖z‖² = (re z)² + (im z)²`. -/
+theorem sq_norm_eq_re_im (z : ℂ) : ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := by
+  rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]; ring
+
+/-- The Reuleaux bound at a vertex `V`: if `q ∈ B̄(W₁, 1) ∩ B̄(W₂, 1)` with `|W₁ − V| = |W₂ − V| = 1`, `p ∈ B̄(V, 1)`, and `p − q` is a
+nonnegative combination of `W₁ − V` and `W₂ − V`, then `|p − q| ≤ 1`. -/
+theorem norm_sub_le_one_of_cone {V W₁ W₂ p q : ℂ} (h₁ : ‖W₁ - V‖ = 1) (h₂ : ‖W₂ - V‖ = 1) (hp : ‖p - V‖ ≤ 1)
+    (hq₁ : ‖q - W₁‖ ≤ 1) (hq₂ : ‖q - W₂‖ ≤ 1) {a b : ℝ} (ha : 0 ≤ a) (hb : 0 ≤ b)
+    (hd : p - q = (a : ℂ) * (W₁ - V) + (b : ℂ) * (W₂ - V)) : ‖p - q‖ ≤ 1 := by
+  have e1 := sq_norm_eq_re_im (W₁ - V); rw [h₁] at e1
+  have e2 := sq_norm_eq_re_im (W₂ - V); rw [h₂] at e2
+  have ep : ‖p - V‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (p - V)]
+  have eq1 : ‖q - W₁‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (q - W₁)]
+  have eq2 : ‖q - W₂‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (q - W₂)]
+  rw [sq_norm_eq_re_im] at ep eq1 eq2
+  have hre : p.re - q.re = a * (W₁.re - V.re) + b * (W₂.re - V.re) := by
+    have := congrArg Complex.re hd; simpa using this
+  have him : p.im - q.im = a * (W₁.im - V.im) + b * (W₂.im - V.im) := by
+    have := congrArg Complex.im hd; simpa using this
+  simp only [Complex.sub_re, Complex.sub_im] at e1 e2 ep eq1 eq2
+  have hQu : (q.re - V.re) ^ 2 + (q.im - V.im) ^ 2 ≤
+      2 * ((q.re - V.re) * (W₁.re - V.re) + (q.im - V.im) * (W₁.im - V.im)) := by nlinarith
+  have hQw : (q.re - V.re) ^ 2 + (q.im - V.im) ^ 2 ≤
+      2 * ((q.re - V.re) * (W₂.re - V.re) + (q.im - V.im) * (W₂.im - V.im)) := by nlinarith
+  have hP : ((p.re - q.re) + (q.re - V.re)) ^ 2 + ((p.im - q.im) + (q.im - V.im)) ^ 2 ≤ 1 := by
+    simp only [sub_add_sub_cancel]; exact ep
+  have := reul_bound_real ha hb hre him hQu hQw hP
+  have h2 : ‖p - q‖ ^ 2 ≤ 1 := by rw [sq_norm_eq_re_im]; simpa using this
+  nlinarith [norm_nonneg (p - q)]
+
+/-- `d = a u + b w` by Cramer's rule, for `u`, `w` not parallel. -/
+theorem eq_cramer (d u w : ℂ) (hc : u.re * w.im - u.im * w.re ≠ 0) :
+    d = (((d.re * w.im - d.im * w.re) / (u.re * w.im - u.im * w.re) : ℝ) : ℂ) * u +
+      (((u.re * d.im - u.im * d.re) / (u.re * w.im - u.im * w.re) : ℝ) : ℂ) * w := by
+  have hc' : w.im * u.re - w.re * u.im ≠ 0 := by rwa [show w.im * u.re - w.re * u.im = u.re * w.im - u.im * w.re by ring]
+  apply Complex.ext <;>
+    simp only [Complex.add_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, Complex.add_im, Complex.mul_im, zero_mul,
+      sub_zero, add_zero] <;> field_simp <;> ring
+
+/-- **A Reuleaux triangle has diameter `1`**: for `X`, `Y`, `Z` pairwise `1` apart, any two points of `Reul(X, Y, Z)` are at most `1`
+apart. -/
+theorem dist_le_one_of_mem_reul {X Y Z p q : ℂ} (hXY : ‖Y - X‖ = 1) (hXZ : ‖Z - X‖ = 1) (hYZ : ‖Z - Y‖ = 1)
+    (hp : p ∈ reul X Y Z) (hq : q ∈ reul X Y Z) : dist p q ≤ 1 := by
+  obtain ⟨⟨hpX, hpY⟩, hpZ⟩ := hp
+  obtain ⟨⟨hqX, hqY⟩, hqZ⟩ := hq
+  simp only [mem_closedBall, dist_eq_norm] at hpX hpY hpZ hqX hqY hqZ
+  have hYX : ‖X - Y‖ = 1 := by rw [norm_sub_rev]; exact hXY
+  have hZX : ‖X - Z‖ = 1 := by rw [norm_sub_rev]; exact hXZ
+  have hZY : ‖Y - Z‖ = 1 := by rw [norm_sub_rev]; exact hYZ
+  set u := Y - X with hu
+  set w := Z - X with hw
+  have sq := sq_norm_eq_re_im
+  have hc : u.re * w.im - u.im * w.re ≠ 0 := by
+    have e1 := sq u; rw [hXY] at e1
+    have e2 := sq w; rw [hXZ] at e2
+    have hwu : ‖w - u‖ = 1 := by rw [show w - u = Z - Y by simp [hu, hw]]; exact hYZ
+    have e3 := sq (w - u); rw [hwu] at e3
+    simp only [Complex.sub_re, Complex.sub_im] at e3
+    have hdot : u.re * w.re + u.im * w.im = 1 / 2 := by nlinarith
+    have hlag : (u.re * w.re + u.im * w.im) ^ 2 + (u.re * w.im - u.im * w.re) ^ 2 =
+        (u.re ^ 2 + u.im ^ 2) * (w.re ^ 2 + w.im ^ 2) := by ring
+    intro h0
+    rw [hdot, h0, ← e1, ← e2] at hlag
+    norm_num at hlag
+  set c := u.re * w.im - u.im * w.re
+  set a := ((p - q).re * w.im - (p - q).im * w.re) / c
+  set b := (u.re * (p - q).im - u.im * (p - q).re) / c
+  have hd : p - q = (a : ℂ) * u + (b : ℂ) * w := eq_cramer (p - q) u w hc
+  rw [dist_eq_norm]
+  rcases le_total 0 a with ha | ha <;> rcases le_total 0 b with hb | hb
+  · exact norm_sub_le_one_of_cone hXY hXZ hpX hqY hqZ ha hb hd
+  · rcases le_total 0 (a + b) with hab | hab
+    · -- `q − p = (a + b)(X − Y) + (−b)(Z − Y)`, at `Y`
+      rw [norm_sub_rev]
+      refine norm_sub_le_one_of_cone (V := Y) (W₁ := X) (W₂ := Z) hYX hYZ hqY hpX hpZ hab (neg_nonneg.2 hb) ?_
+      rw [show q - p = -(p - q) by ring, hd]; push_cast; simp only [hu, hw]; ring
+    · -- `p − q = −(a + b)(X − Z) + a (Y − Z)`, at `Z`
+      refine norm_sub_le_one_of_cone (V := Z) (W₁ := X) (W₂ := Y) hZX hZY hpZ hqX hqY (neg_nonneg.2 hab) ha ?_
+      rw [hd]; push_cast; simp only [hu, hw]; ring
+  · rcases le_total 0 (a + b) with hab | hab
+    · -- `q − p = (a + b)(X − Z) + (−a)(Y − Z)`, at `Z`
+      rw [norm_sub_rev]
+      refine norm_sub_le_one_of_cone (V := Z) (W₁ := X) (W₂ := Y) hZX hZY hqZ hpX hpY hab (neg_nonneg.2 ha) ?_
+      rw [show q - p = -(p - q) by ring, hd]; push_cast; simp only [hu, hw]; ring
+    · -- `p − q = −(a + b)(X − Y) + b (Z − Y)`, at `Y`
+      refine norm_sub_le_one_of_cone (V := Y) (W₁ := X) (W₂ := Z) hYX hYZ hpY hqX hqZ (neg_nonneg.2 hab) hb ?_
+      rw [hd]; push_cast; simp only [hu, hw]; ring
+  · rw [norm_sub_rev]
+    refine norm_sub_le_one_of_cone hXY hXZ hqX hpY hpZ (neg_nonneg.2 ha) (neg_nonneg.2 hb) ?_
+    rw [show q - p = -(p - q) by ring, hd]; push_cast; ring
+
+/-- **The open Reuleaux triangle**: a point of `B(X, 1) ∩ B(Y, 1) ∩ B(Z, 1)` is less than `1` from every point of `Reul(X, Y, Z)`. -/
+theorem dist_lt_one_of_mem_reul {X Y Z p q : ℂ} (hXY : ‖Y - X‖ = 1) (hXZ : ‖Z - X‖ = 1) (hYZ : ‖Z - Y‖ = 1)
+    (hp : p ∈ ball X 1 ∩ ball Y 1 ∩ ball Z 1) (hq : q ∈ reul X Y Z) : dist p q < 1 := by
+  have hO : IsOpen (ball X 1 ∩ ball Y 1 ∩ ball Z 1) := (isOpen_ball.inter isOpen_ball).inter isOpen_ball
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hO p hp
+  by_cases hpq : p = q
+  · rw [hpq, dist_self]; norm_num
+  have hn : 0 < ‖p - q‖ := norm_pos_iff.2 (sub_ne_zero.2 hpq)
+  set s := ε / 2 / ‖p - q‖ with hs
+  have hs0 : 0 < s := by positivity
+  set p' := p + (s : ℂ) * (p - q) with hp'
+  have hp'b : p' ∈ ball X 1 ∩ ball Y 1 ∩ ball Z 1 := by
+    apply hball
+    rw [mem_ball, dist_eq_norm, hp', add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hs0, hs,
+      div_mul_cancel₀ _ hn.ne']
+    linarith
+  have hreul : p' ∈ reul X Y Z := by
+    obtain ⟨⟨h1, h2⟩, h3⟩ := hp'b
+    exact ⟨⟨ball_subset_closedBall h1, ball_subset_closedBall h2⟩, ball_subset_closedBall h3⟩
+  have hle := dist_le_one_of_mem_reul hXY hXZ hYZ hreul hq
+  rw [dist_eq_norm, hp', show p + (s : ℂ) * (p - q) - q = ((1 + s : ℝ) : ℂ) * (p - q) by push_cast; ring, norm_mul,
+    Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith)] at hle
+  rw [dist_eq_norm]
+  nlinarith
+
+/-- The three points `0`, `1`, `e 60°` are pairwise `1` apart. -/
+theorem norm_e_pi_div_three_sub_one : ‖e (π / 3) - 1‖ = 1 := by
+  obtain ⟨er, ei⟩ := e_pi_div_three_re_im
+  have hs3 : √3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have h := sq_norm_eq_re_im (e (π / 3) - 1)
+  simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, er, ei] at h
+  have h2 : ‖e (π / 3) - 1‖ ^ 2 = 1 := by rw [h]; nlinarith
+  nlinarith [norm_nonneg (e (π / 3) - 1)]
+
+/-- An interior point of `l60Frag` in the lens is strictly inside both of its discs and off `ω(0)`. -/
+theorem l60_interior_lens {x : ℂ} (hx : x ∈ l60Frag.interiorPts) (hL : x ∈ l60Lens) :
+    ‖x - 1‖ < 1 ∧ ‖x - e (π / 3)‖ < 1 ∧ ‖x‖ ≠ 1 := by
+  have hmem : ∀ a ∈ l60Arcs, x ∉ a.carrier := fun a ha h => hx.2 (mem_iUnion₂.mpr ⟨a, ha, h⟩)
+  obtain ⟨hL1, hL2⟩ := hL
+  rw [mem_closedBall, dist_eq_norm] at hL1 hL2
+  exact ⟨lt_of_le_of_ne hL1 fun h => hmem _ (by simp [l60Arcs]) (mem_l60_arc1 h hL2),
+    lt_of_le_of_ne hL2 fun h => hmem _ (by simp [l60Arcs]) (mem_l60_arc2 h hL1),
+    fun h => hmem _ (by simp [l60Arcs]) (mem_l60_arc0 h hL1 hL2)⟩
+
+/-- The cap of the lens outside `ω(0)` lies in `B(C, 1)`, `C = 1 + e 60°`. -/
+theorem l60_cap_mem_ball {x : ℂ} (h1 : ‖x - 1‖ < 1) (h2 : ‖x - e (π / 3)‖ < 1) (h0 : 1 < ‖x‖) :
+    ‖x - (1 + e (π / 3))‖ < 1 := by
+  obtain ⟨er, ei⟩ := e_pi_div_three_re_im
+  have hs3 : √3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have hs3p : 0 < √3 := by positivity
+  have q1 : ‖x - 1‖ ^ 2 < 1 := by nlinarith [norm_nonneg (x - 1)]
+  have q2 : ‖x - e (π / 3)‖ ^ 2 < 1 := by nlinarith [norm_nonneg (x - e (π / 3))]
+  have q0 : 1 < ‖x‖ ^ 2 := by nlinarith
+  rw [sq_norm_eq_re_im] at q1 q2 q0
+  simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, er, ei] at q1 q2
+  have g1 : 0 < 2 * x.re - (x.re ^ 2 + x.im ^ 2) := by nlinarith
+  have g2 : 0 < x.re + √3 * x.im - (x.re ^ 2 + x.im ^ 2) := by nlinarith
+  have g3 : 0 < x.re ^ 2 + x.im ^ 2 - 1 := by linarith
+  have hT : 0 < 3 * x.re + √3 * x.im - (x.re ^ 2 + x.im ^ 2) - 2 := by
+    nlinarith [mul_pos g1 g2, mul_pos g1 g3, mul_pos g2 g3, sq_nonneg (x.re - 3 / 2), sq_nonneg (x.im - √3 / 2),
+      sq_nonneg (√3 * x.re - x.im)]
+  have : ‖x - (1 + e (π / 3))‖ ^ 2 < 1 := by
+    rw [sq_norm_eq_re_im]
+    simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.one_re, Complex.one_im, er, ei]
+    nlinarith
+  nlinarith [norm_nonneg (x - (1 + e (π / 3)))]
+
+/-- The interior points of `l60Frag` by colour: `0` in the open Reuleaux triangle on `0`, `1`, `e 60°`; `1` in the open one on `1`,
+`e 60°`, `C`; `2` in `B(1, 1/4)`; `3` in `B(e 60°, 1/4)`. -/
+theorem l60_interior_cases {x : ℂ} (hx : x ∈ l60Frag.interiorPts) :
+    (l60Frag.col x = 0 ∧ x ∈ ball 0 1 ∩ ball 1 1 ∩ ball (e (π / 3)) 1) ∨
+      (l60Frag.col x = 1 ∧ x ∈ ball 1 1 ∩ ball (e (π / 3)) 1 ∩ ball (1 + e (π / 3)) 1) ∨
+      (l60Frag.col x = 2 ∧ x ∈ ball 1 (1 / 4)) ∨ (l60Frag.col x = 3 ∧ x ∈ ball (e (π / 3)) (1 / 4)) := by
+  classical
+  have hcol : l60Frag.col x = l60Col x := rfl
+  have hmem : ∀ a ∈ l60Arcs, x ∉ a.carrier := fun a ha h => hx.2 (mem_iUnion₂.mpr ⟨a, ha, h⟩)
+  by_cases hL : x ∈ l60Lens
+  · obtain ⟨h1, h2, h0⟩ := l60_interior_lens hx hL
+    by_cases hn : ‖x‖ < 1
+    · left
+      refine ⟨by rw [hcol]; simp [l60Col, hL, hn], ⟨⟨?_, ?_⟩, ?_⟩⟩ <;> rw [mem_ball, dist_eq_norm] <;> simpa
+    · right; left
+      have hn' : 1 < ‖x‖ := lt_of_le_of_ne (not_lt.mp hn) (Ne.symm h0)
+      refine ⟨by rw [hcol]; simp [l60Col, hL, hn], ⟨⟨?_, ?_⟩, ?_⟩⟩ <;> rw [mem_ball, dist_eq_norm]
+      · exact h1
+      · exact h2
+      · exact l60_cap_mem_ball h1 h2 hn'
+  · right; right
+    have hdom : x ∈ l60Lens ∪ closedBall 1 (1 / 4) ∪ closedBall (e (π / 3)) (1 / 4) := interior_subset hx.1
+    by_cases hd : dist x 1 < 1 / 4
+    · left
+      exact ⟨by rw [hcol]; simp only [l60Col, hL, hd, if_false, if_true], hd⟩
+    · right
+      refine ⟨by rw [hcol]; simp only [l60Col, hL, hd, if_false], ?_⟩
+      rcases hdom with (h | h) | h
+      · exact absurd h hL
+      · exact absurd (lt_of_le_of_ne (mem_closedBall.mp h) fun h' => hmem (.circ 1 (1 / 4) 0 (2 * π)) (by simp [l60Arcs])
+          (mem_carrier_circ_full (c := 1) (ρ := 1 / 4) (by rw [← dist_eq_norm]; exact h'))) hd
+      · exact lt_of_le_of_ne (mem_closedBall.mp h) fun h' => hmem (.circ (e (π / 3)) (1 / 4) 0 (2 * π)) (by simp [l60Arcs])
+          (mem_carrier_circ_full (by rw [← dist_eq_norm]; exact h'))
+
+/-- `l60Frag` is valid. -/
+theorem l60Frag_valid : l60Frag.Valid := by
+  have h01 : ‖(1 : ℂ) - 0‖ = 1 := by simp
+  have h0B : ‖e (π / 3) - 0‖ = 1 := by simp
+  have h1B : ‖e (π / 3) - 1‖ = 1 := norm_e_pi_div_three_sub_one
+  have h1C : ‖1 + e (π / 3) - 1‖ = 1 := by simp
+  have hBC : ‖1 + e (π / 3) - e (π / 3)‖ = 1 := by simp
+  have hreul : ∀ {X Y Z p : ℂ}, p ∈ ball X 1 ∩ ball Y 1 ∩ ball Z 1 → p ∈ reul X Y Z := fun ⟨⟨h1, h2⟩, h3⟩ =>
+    ⟨⟨ball_subset_closedBall h1, ball_subset_closedBall h2⟩, ball_subset_closedBall h3⟩
+  have hhalf : ∀ {x y c : ℂ}, x ∈ ball c (1 / 4) → y ∈ ball c (1 / 4) → dist x y < 1 / 2 := by
+    intro x y c hx hy
+    rw [mem_ball] at hx hy
+    linarith [dist_triangle_right x y c]
+  intro x hx y hy hxy hcol
+  rcases l60_interior_cases hx with ⟨cx, bx⟩ | ⟨cx, bx⟩ | ⟨cx, bx⟩ | ⟨cx, bx⟩ <;>
+    rcases l60_interior_cases hy with ⟨cy, by'⟩ | ⟨cy, by'⟩ | ⟨cy, by'⟩ | ⟨cy, by'⟩ <;>
+    rw [cx, cy] at hcol <;> try exact absurd hcol (by decide)
+  · linarith [dist_lt_one_of_mem_reul h01 h0B h1B bx (hreul by')]
+  · linarith [dist_lt_one_of_mem_reul h1B h1C hBC bx (hreul by')]
+  · linarith [hhalf bx by']
+  · linarith [hhalf bx by']
+
+/-- The open lens `B(1, 1) ∩ B(e 60°, 1)` lies in `l60Dom`. -/
+theorem l60_openLens_subset_dom : ball 1 1 ∩ ball (e (π / 3)) 1 ⊆ l60Dom :=
+  interior_maximal (fun _ ⟨h1, h2⟩ => Or.inl (Or.inl ⟨ball_subset_closedBall h1, ball_subset_closedBall h2⟩))
+    (isOpen_ball.inter isOpen_ball)
+
+/-- An open part of `l60Dom` of one colour is, up to closure, inside that colour's class. -/
+theorem l60_closure_subset_region {U : Set ℂ} (hU : IsOpen U) (hUd : U ⊆ l60Dom) {c : Fin 4} (hc : ∀ w ∈ U, l60Col w = c) :
+    closure U ⊆ closure (l60Frag.region c ∩ U) := by
+  refine closure_minimal (fun u hu => ?_) isClosed_closure
+  have h1 : u ∈ U ∩ closure l60Frag.interiorPts := ⟨hu, l60Frag.dense_interiorPts (hUd hu)⟩
+  exact closure_mono (fun w (hw : w ∈ U ∩ l60Frag.interiorPts) => (⟨⟨hw.2, hc w hw.1⟩, hw.1⟩ : w ∈ l60Frag.region c ∩ U))
+    (hU.inter_closure h1)
+
+/-- The arc `r([0, 60°])` of `ω(0)` lies in `l60Dom`. -/
+theorem ringArc_l60_subset_dom : ringArc 0 0 (π / 3) ⊆ l60Dom := by
+  rintro _ ⟨θ, hθ, rfl⟩
+  have hπ := Real.pi_pos
+  have hO : IsOpen (ball 1 (1 / 4) ∪ ball (e (π / 3)) (1 / 4) ∪ (ball 1 1 ∩ ball (e (π / 3)) 1)) :=
+    (isOpen_ball.union isOpen_ball).union (isOpen_ball.inter isOpen_ball)
+  have hsub : ball 1 (1 / 4) ∪ ball (e (π / 3)) (1 / 4) ∪ (ball 1 1 ∩ ball (e (π / 3)) 1) ⊆ l60Dom := by
+    refine interior_maximal ?_ hO
+    rintro z ((h | h) | ⟨h1, h2⟩)
+    · exact Or.inl (Or.inr (ball_subset_closedBall h))
+    · exact Or.inr (ball_subset_closedBall h)
+    · exact Or.inl (Or.inl ⟨ball_subset_closedBall h1, ball_subset_closedBall h2⟩)
+  apply hsub
+  have hr0 : ringPt 0 0 = 1 := by simp [ringPt, e]
+  have hr60 : ringPt 0 (π / 3) = e (π / 3) := by simp [ringPt]
+  rcases eq_or_lt_of_le hθ.1 with h0 | h0
+  · subst h0; left; left; rw [hr0]; exact mem_ball_self (by norm_num)
+  rcases eq_or_lt_of_le hθ.2 with h1 | h1
+  · subst h1; left; right; rw [hr60]; exact mem_ball_self (by norm_num)
+  right
+  constructor
+  · rw [mem_ball, ← hr0]
+    refine ((dist_ringPt_ringPt_cmp_one 0 (α := θ) (β := 0) (by rw [sub_zero, abs_of_pos h0]; linarith)).2.1).2 ?_
+    rw [sub_zero, abs_of_pos h0]; exact h1
+  · rw [mem_ball, ← hr60]
+    refine ((dist_ringPt_ringPt_cmp_one 0 (α := θ) (β := π / 3) (by rw [abs_of_neg (by linarith)]; linarith)).2.1).2 ?_
+    rw [abs_of_neg (by linarith)]; linarith
+
+/-- **`r([0, 60°])` is an arc of `Γ` of `l60Frag` with constant sides**, inner colour `0`, outer `1`. -/
+theorem l60Frag_isRingArc : l60Frag.IsRingArc 0 0 (π / 3) 0 1 := by
+  classical
+  have hπ := Real.pi_pos
+  set O := ball (1 : ℂ) 1 ∩ ball (e (π / 3)) 1 with hOdef
+  have hO : IsOpen O := isOpen_ball.inter isOpen_ball
+  have hOL : ∀ w ∈ O, w ∈ l60Lens := fun w ⟨h1, h2⟩ => ⟨ball_subset_closedBall h1, ball_subset_closedBall h2⟩
+  refine ⟨by positivity, fun z hz => ⟨ringArc_l60_subset_dom hz, ?_⟩, fun θ hθ => ?_⟩
+  · obtain ⟨θ, hθ, rfl⟩ := hz
+    exact mem_iUnion₂.mpr ⟨.circ 0 1 0 (π / 3), (show _ ∈ l60Arcs by simp [l60Arcs]), θ, hθ, by simp [ringPt]⟩
+  set z := ringPt 0 θ with hz
+  have hzO : z ∈ O := by
+    have hr0 : ringPt 0 0 = 1 := by simp [ringPt, e]
+    have hr60 : ringPt 0 (π / 3) = e (π / 3) := by simp [ringPt]
+    constructor
+    · rw [mem_ball, ← hr0]
+      refine ((dist_ringPt_ringPt_cmp_one 0 (α := θ) (β := 0) (by rw [sub_zero, abs_of_pos hθ.1]; linarith [hθ.2])).2.1).2 ?_
+      rw [sub_zero, abs_of_pos hθ.1]; exact hθ.2
+    · rw [mem_ball, ← hr60]
+      refine ((dist_ringPt_ringPt_cmp_one 0 (α := θ) (β := π / 3)
+        (by rw [abs_of_neg (by linarith [hθ.2])]; linarith [hθ.1])).2.1).2 ?_
+      rw [abs_of_neg (by linarith [hθ.2])]; linarith [hθ.1]
+  have hzn : ‖z‖ = 1 := by simp [hz, ringPt]
+  have hOd : O ⊆ l60Dom := l60_openLens_subset_dom
+  constructor
+  · ext c
+    simp only [innerColours, mem_setOf_eq, mem_singleton_iff]
+    constructor
+    · intro h
+      obtain ⟨w, hwO, hw, hwb⟩ := mem_closure_iff.mp h O hO hzO
+      have : l60Frag.col w = 0 := by
+        show l60Col w = 0
+        rw [mem_ball, dist_zero_right] at hwb
+        simp only [l60Col, hOL w hwO, hwb, if_true]
+      rw [← hw.2, this]
+    · rintro rfl
+      have hU : IsOpen (O ∩ ball 0 1) := hO.inter isOpen_ball
+      have hzU : z ∈ closure (O ∩ ball 0 1) :=
+        hO.inter_closure ⟨hzO, by rw [closure_ball 0 one_ne_zero, mem_closedBall, dist_zero_right, hzn]⟩
+      refine closure_mono (fun w (hw : w ∈ l60Frag.region 0 ∩ (O ∩ ball 0 1)) =>
+        (⟨hw.1, hw.2.2⟩ : w ∈ l60Frag.region 0 ∩ ball 0 1))
+        (l60_closure_subset_region hU (inter_subset_left.trans hOd) (fun w hw => ?_) hzU)
+      have hwb := hw.2
+      rw [mem_ball, dist_zero_right] at hwb
+      simp only [l60Col, hOL w hw.1, hwb, if_true]
+  · ext c
+    simp only [outerColours, mem_setOf_eq, mem_singleton_iff]
+    constructor
+    · intro h
+      obtain ⟨w, hwO, hw, hwb⟩ := mem_closure_iff.mp h O hO hzO
+      have : l60Frag.col w = 1 := by
+        show l60Col w = 1
+        rw [mem_closedBall, dist_zero_right, not_le] at hwb
+        simp only [l60Col, hOL w hwO, not_lt.mpr hwb.le, if_true, if_false]
+      rw [← hw.2, this]
+    · rintro rfl
+      have hU : IsOpen (O ∩ (closedBall 0 1)ᶜ) := hO.inter isClosed_closedBall.isOpen_compl
+      have hzU : z ∈ closure (O ∩ (closedBall 0 1)ᶜ) :=
+        hO.inter_closure ⟨hzO, by
+          rw [closure_compl, interior_closedBall 0 one_ne_zero, mem_compl_iff, mem_ball, dist_zero_right, hzn]; exact lt_irrefl 1⟩
+      refine closure_mono (fun w (hw : w ∈ l60Frag.region 1 ∩ (O ∩ (closedBall 0 1)ᶜ)) =>
+        (⟨hw.1, hw.2.2⟩ : w ∈ l60Frag.region 1 \ closedBall 0 1))
+        (l60_closure_subset_region hU (inter_subset_left.trans hOd) (fun w hw => ?_) hzU)
+      have hwb := hw.2
+      rw [mem_compl_iff, mem_closedBall, dist_zero_right, not_le] at hwb
+      simp only [l60Col, hOL w hw.1, not_lt.mpr hwb.le, if_true, if_false]
+
 /-- **FS114-L60-LE**, L60-REAL: equality is realised by a valid fragment by formula on a neighbourhood of the closed arc — the arc
 `r([0, 60°])` of `ω(0)` is an arc of `Γ` with constant sides (inner colour `0`, outer `1`) of `l60Frag`, which is valid and whose
 domain holds a neighbourhood of the closed arc. -/
 theorem l60_real : l60Frag.Valid ∧ l60Frag.IsRingArc 0 0 (π / 3) 0 1 ∧
     ∃ δ > 0, thickening δ (ringArc 0 0 (π / 3)) ⊆ l60Frag.dom := by
-  sorry
+  refine ⟨l60Frag_valid, l60Frag_isRingArc, ?_⟩
+  have hc : IsCompact (ringArc 0 0 (π / 3)) := isCompact_Icc.image (by unfold ringPt e; fun_prop)
+  obtain ⟨δ, hδ, h⟩ := hc.exists_thickening_subset_open isOpen_l60Dom ringArc_l60_subset_dom
+  exact ⟨δ, hδ, h⟩
 
 /-! ## FS112-N2-BENDS: N2-ENV and the whole-arc bends (FS112-BEND merged) -/
 
