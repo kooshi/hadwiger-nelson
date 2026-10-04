@@ -2022,3 +2022,5 @@ reason by the close.*
      `IsOuterTile`, `filledGraph`, the three `cvb_*` leaves in `MapGraph`, nor `retArcs_nested`, `exists_endpoint`, `exists_eleventh` (`BaseWalk`) or
      `exists_unenclosed_or_bad` (`BaseDense`), so `fs131-w5p` merges back in disjoint hunks. Confidence: medium-high. In flight: 1 (IM2) + 1 (I4l) + 1 (I5c) + 1 (KP)
      = 4.
+275. **Kooshi, 2026-10-04 (verbatim)**, after wave 2's landing notification: *"I just saw the notification and got caught up. Great work so far! You and every
+     agent. I'm very grateful."* Recorded here for every job of this milestone (credit goes in the inventory, never in a message to a finished agent).
