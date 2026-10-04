@@ -65,3 +65,38 @@ opened beyond its header). Scored at the milestone's close.
 | E9 | Waves | median **9**; 80 % interval [6, 14] |
 | E10 | Dispositions | formalize ≈ 195, merged into ≈ 25, excluded ≈ 30, outside theorem ≤ 8 |
 | E11 | The hardest part is the foundation for planar maps and fragments (tiles, closure colours, sectors, rings, germs, change points), not the leaves | 0.8 |
+
+## Stage 2 — SAVED: §G, the grokkings about the kernel, and what the library already holds
+
+### 2.1 The grokkings, read by number
+
+`.claude/skills/grokkings/SKILL.md` was grepped for `Lean`, `kernel phase`, `formaliz`, `vacu`, `gate`, `cost model`, `re-price`, `skeleton`,
+`heartbeat`, `olean`, `Mathlib`, `statement-level` (script in this stage's commit message). **No live grokking is about the kernel, the gate or the
+cost model**: those rules moved to `LEAN.md` (§ The kernel's cost model, § The gate, § Searching — Lean) and the method entries that carried them
+(G30, G46, G49, G50) are retired. The hits on `gate` and `decide` are the field-level gating of G35/G43 and the English verb. What does bear on
+this plan, read in full:
+
+| entry | what it changes here |
+|---|---|
+| **G92** (a held result reaches as far as its argument) | The backlog's merged forms are G92 applied once by the audit. The plan applies it again at the skeleton: every statement is written at the class its argument reads (`k` colours, Siamese allowed) unless the row's own words name the class, and a hypothesis the proof plan never consumes is reported as a generalization (brief: § What leaves your lane), never silently dropped — the implementer may not change a statement. |
+| **G21** (a negative measures its enumeration) | The vacuity gate is this milestone's main defence: every class statement ("no fragment of the class X exists") is a `¬ ∃`, which is never vacuous, but every structure lemma over a class (`∀ F : Fragment …, P F → …`) is a `∀` over a domain that the backlog itself proves empty for many classes (EMPTY-NS, QFREE-NS, OBST). Such rows are excluded, not formalized with `VACUITY DECLARED`, unless a later row consumes them (§ 4). |
+| **G86** (tile counts are blind to Siamese pairs) | "Non-Siamese" and "simple" are predicates on a fragment, never baked into the fragment type: a class is a `Prop` on the one `Fragment` structure, so the Siamese-allowed lemmas (most of FS116-N1, V4, V5) and the class statements share one object. |
+| **G84, G85, G88** (contact; integer radii; curved tangent interfaces) | The saturated-colouring lane (FS111-M*, FS121) is stated over measurable sets and their density sets, not over maps: "honest", "saturated", "D-NF" and "REG-J′" are predicates on a measurable colouring, and the map structure appears only as the hypothesis REG-J′. |
+| **G91** (the ring is the pigeonhole) | The ring `ω(p)`, its points `r(θ) = p + e(θ)`, germs and change points are the central objects of 79 rows (FS116, FS129 lane R); the foundation defines them once, angle-parametrized, so that "60° apart" is `θ + π/3` and the chord lemma FS116-V4-CHORD is the bridge to distance 1. |
+| **G87** (the invention signal) | Logged when found; none yet. |
+
+### 2.2 What this library already holds that the rows reuse
+
+Surveyed from `ARCHITECTURE.md` § 3 and the modules' headers:
+
+- **The plane is `ℂ`.** `UnitDistance.unitDistance ℂ` and `Reduction.chromaticNumber_plane_eq_complex` (`EuclideanSpace ℝ (Fin 2)` ≅ `ℂ`), and
+  `SpectralChain` states its measure theory over `ℂ`. The foundation follows: `ℂ` carries the metric, `volume` (Lebesgue, through
+  `Complex.measureSpace`), rotation by multiplication and `Complex.exp`, so `e(θ) = exp(θ i)` and the 60° rotation is a product.
+- **Finite-graph compulsions** for lane A: `Forcer.Forces`, `Fan.Fan`, `Fan.Separated`, `Palette` (compulsions over any palette),
+  `FanGap.Slack.forces_iff_of_hom` (row 66 — SA1-6.3 item 1 calls it NOAFF-K's two-vertex case), `UnitQuadrance`, `ResidueColouring`
+  (Theorem A, `colorable_of_residue`), `Transcendental` (`unitQuadrance_colorable_of_valuationSubring` — the coset map PLACE-HOM iterates),
+  `UnitRing`, `SquareClass.planeOver`, `SpectralChain` (`fieldI`, `StablePrime`, `localBound`, the usable-prime vocabulary).
+- **Plane geometry**: `Glue.sphere_inter_sphere` (two-circle intersections), `Coupled.reflAcross`, `Limit` (bounded families within ε of
+  unit length force χ — the shape of the slack arguments).
+- **Nothing measure-theoretic about colourings of `ℝ²` exists yet**, and nothing about maps, arcs, tiles or fragments. The foundation for
+  lanes P and M is new.
