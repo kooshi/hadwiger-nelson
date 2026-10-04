@@ -1,0 +1,176 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 30
+entry lint
+  claim FS129-SA1-PLACE-HOM: minds 1
+  claim FS129-SA1-PLACE-HOM: prior art partly
+  claim FS129-SA1-NOAFF-K: minds 1
+  claim FS129-SA1-NOAFF-K: prior art partly
+  claim FS129-SA1-NOAFF-FIELDS: governed by FS129-SA1-NOAFF-K (hand, minds 1)
+  claim FS129-SA1-NOAFF-FIELDS: governed by FS129-SA1-PLACE-HOM (hand, minds 1)
+  claim FS129-SA1-NOAFF-FIELDS: minds 1
+  warn  FS129-derivation.md:117 (FS129-SA1-NOAFF-FIELDS): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-SA1-NOAFF-FIELDS: prior art owed
+  claim FS129-SA1-FALC-FAN: minds 1
+  warn  FS129-derivation.md:141 (FS129-SA1-FALC-FAN): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-SA1-FALC-FAN: prior art owed
+  claim FS129-SA1-FALC-DICHO-K: governed by FS129-SA1-FALC-FAN (hand, minds 1)
+  claim FS129-SA1-FALC-DICHO-K: minds 1
+  warn  FS129-derivation.md:174 (FS129-SA1-FALC-DICHO-K): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-SA1-FALC-DICHO-K: prior art owed
+  claim FS129-SA1-FALC-RES: governed by FS129-SA1-FALC-FAN (hand, minds 1)
+  claim FS129-SA1-FALC-RES: governed by FS129-SA1-FALC-DICHO-K (derived from, minds 1)
+  claim FS129-SA1-FALC-RES: governed by FS129-SA1-PLACE-HOM (hand, minds 1)
+  claim FS129-SA1-FALC-RES: minds 1
+  warn  FS129-derivation.md:193 (FS129-SA1-FALC-RES): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-SA1-FALC-RES: prior art owed
+  claim FS129-SA1-FALC-RED: minds 1
+  claim FS129-SA1-FALC-RED: prior art partly
+  claim FS129-MA2-FALC-HOSTS: governed by FS129-MA2-FALC-GAP4 (hand, minds 1)
+  claim FS129-MA2-FALC-HOSTS: governed by FS129-MA2-FALC-DICHO (hand, minds 1)
+  claim FS129-MA2-FALC-HOSTS: minds 1
+  warn  FS129-derivation.md:258 (FS129-MA2-FALC-HOSTS): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-MA2-FALC-HOSTS: prior art owed
+  claim FS129-OA1-NOPERLAW: minds 1
+  warn  FS129-derivation.md:297 (FS129-OA1-NOPERLAW): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OA1-NOPERLAW: prior art owed
+  claim FS129-SA1-SQRT3-LOCAL: minds 1
+  claim FS129-SA1-SQRT3-LOCAL: prior art partly
+  claim FS129-OA1-NOLIN5: minds 1
+  warn  FS129-derivation.md:353 (FS129-OA1-NOLIN5): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OA1-NOLIN5: prior art owed
+  claim FS129-MA1-NOAFF5: minds 1
+  warn  FS129-derivation.md:382 (FS129-MA1-NOAFF5): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-MA1-NOAFF5: prior art owed
+  claim FS129-MA1-FALC-T: minds 1
+  warn  FS129-derivation.md:413 (FS129-MA1-FALC-T): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-MA1-FALC-T: prior art owed
+  claim FS129-MA2-FALC-GAP4: minds 1
+  warn  FS129-derivation.md:437 (FS129-MA2-FALC-GAP4): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-MA2-FALC-GAP4: prior art owed
+  claim FS129-MA2-FALC-DICHO: minds 1
+  warn  FS129-derivation.md:465 (FS129-MA2-FALC-DICHO): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-MA2-FALC-DICHO: prior art owed
+  claim FS129-OA1-FALC-11: minds 1
+  warn  FS129-derivation.md:485 (FS129-OA1-FALC-11): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OA1-FALC-11: prior art owed
+  claim FS129-MA1-FALC-19: minds 1
+  warn  FS129-derivation.md:513 (FS129-MA1-FALC-19): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-MA1-FALC-19: prior art owed
+  claim FS129-OA1-FALC-RED: minds 1
+  claim FS129-OA1-FALC-RED: prior art partly
+  warn  FS129-derivation.md:573 (FS129-OR1-WHOLE): derived from 'FS116-V4-DICHOTOMY', which is not an entry in these files — its grade cannot be read
+  warn  FS129-derivation.md:573 (FS129-OR1-WHOLE): derived from 'FS116-V5-NE1', which is not an entry in these files — its grade cannot be read
+  claim FS129-OR1-WHOLE: minds 1
+  warn  FS129-derivation.md:573 (FS129-OR1-WHOLE): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OR1-WHOLE: prior art owed
+  claim FS129-SR1-BENDANY: governed by FS129-OR1-WHOLE (derived from, minds 1)
+  warn  FS129-derivation.md:610 (FS129-SR1-BENDANY): derived from 'FS112-N2-BENDS', which is not an entry in these files — its grade cannot be read
+  claim FS129-SR1-BENDANY: minds 1
+  warn  FS129-derivation.md:610 (FS129-SR1-BENDANY): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-SR1-BENDANY: prior art owed
+  claim FS129-SR1-BENDLE3: governed by FS129-SR1-BENDANY (derived from, minds 1)
+  warn  FS129-derivation.md:635 (FS129-SR1-BENDLE3): derived from 'FS116-V5-U1', which is not an entry in these files — its grade cannot be read
+  claim FS129-SR1-BENDLE3: minds 1
+  warn  FS129-derivation.md:635 (FS129-SR1-BENDLE3): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-SR1-BENDLE3: prior art owed
+  claim FS129-OR1-QFREE-CLASS: governed by FS129-OR1-BENDFRAG (derived from, minds 1)
+  claim FS129-OR1-QFREE-CLASS: minds 1
+  warn  FS129-derivation.md:654 (FS129-OR1-QFREE-CLASS): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OR1-QFREE-CLASS: prior art owed
+  warn  FS129-derivation.md:671 (FS129-OR1-QFREE): derived from 'FS116-Y4-EMPTY', which is not an entry in these files — its grade cannot be read
+  claim FS129-OR1-QFREE: governed by FS129-OR1-QFREE-CLASS (derived from, minds 1)
+  claim FS129-OR1-QFREE: minds 1
+  warn  FS129-derivation.md:671 (FS129-OR1-QFREE): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OR1-QFREE: prior art owed
+  claim FS129-SR2-QFCASE: governed by FS129-OR1-QFREE (derived from, minds 1)
+  claim FS129-SR2-QFCASE: minds 1
+  claim FS129-SR2-QFCASE: prior art partly
+  warn  FS129-derivation.md:706 (FS129-MR1-DOUBLETIP): derived from 'FS116-Y4-FLANK', which is not an entry in these files — its grade cannot be read
+  warn  FS129-derivation.md:706 (FS129-MR1-DOUBLETIP): derived from 'FS116-RING-GERM', which is not an entry in these files — its grade cannot be read
+  warn  FS129-derivation.md:706 (FS129-MR1-DOUBLETIP): derived from 'FS116-V4-TWIST', which is not an entry in these files — its grade cannot be read
+  warn  FS129-derivation.md:706 (FS129-MR1-DOUBLETIP): derived from 'FS116-V4-DICHOTOMY', which is not an entry in these files — its grade cannot be read
+  claim FS129-MR1-DOUBLETIP: minds 1
+  warn  FS129-derivation.md:706 (FS129-MR1-DOUBLETIP): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-MR1-DOUBLETIP: prior art owed
+  claim FS129-SR1-TWOCIRC: minds 1
+  claim FS129-SR1-TWOCIRC: prior art partly
+  warn  FS129-derivation.md:788 (FS129-SR1-SIXQ): derived from 'FS116-N1-TWIST-D', which is not an entry in these files — its grade cannot be read
+  claim FS129-SR1-SIXQ: minds 1
+  claim FS129-SR1-SIXQ: prior art partly
+  claim FS129-SR1-RINGBAND: minds 1
+  claim FS129-SR1-RINGBAND: prior art partly
+  warn  FS129-derivation.md:843 (FS129-OR1-LOCALDENSE): derived from 'FS112-DISC1', which is not an entry in these files — its grade cannot be read
+  warn  FS129-derivation.md:843 (FS129-OR1-LOCALDENSE): derived from 'FS112-N3-BASE', which is not an entry in these files — its grade cannot be read
+  claim FS129-OR1-LOCALDENSE: minds 1
+  warn  FS129-derivation.md:843 (FS129-OR1-LOCALDENSE): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OR1-LOCALDENSE: prior art owed
+  claim FS129-OR1-DISCF-NS: governed by FS129-OR1-LOCALDENSE (derived from, minds 1)
+  warn  FS129-derivation.md:865 (FS129-OR1-DISCF-NS): derived from 'FS116-V4-DICHOTOMY', which is not an entry in these files — its grade cannot be read
+  claim FS129-OR1-DISCF-NS: minds 1
+  warn  FS129-derivation.md:865 (FS129-OR1-DISCF-NS): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OR1-DISCF-NS: prior art owed
+  warn  FS129-derivation.md:883 (FS129-OR1-TOP5): derived from 'FS111-M-REDUCE-I', which is not an entry in these files — its grade cannot be read
+  warn  FS129-derivation.md:883 (FS129-OR1-TOP5): derived from 'FS111-V0-RESCALE', which is not an entry in these files — its grade cannot be read
+  claim FS129-OR1-TOP5: minds 1
+  warn  FS129-derivation.md:883 (FS129-OR1-TOP5): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OR1-TOP5: prior art owed
+  warn  FS129-derivation.md:904 (FS129-SR2-CLOSURE): derived from 'FS111-M2-INT', which is not an entry in these files — its grade cannot be read
+  claim FS129-SR2-CLOSURE: minds 1
+  claim FS129-SR2-CLOSURE: prior art partly
+  warn  FS129-derivation.md:922 (FS129-SR2-HULLSET): derived from 'FS111-V0-ID1', which is not an entry in these files — its grade cannot be read
+  claim FS129-SR2-HULLSET: minds 1
+  claim FS129-SR2-HULLSET: prior art partly
+  warn  FS129-derivation.md:940 (FS129-SR2-SUPK): derived from 'FS106-SUP', which is not an entry in these files — its grade cannot be read
+  claim FS129-SR2-SUPK: minds 1
+  claim FS129-SR2-SUPK: prior art partly
+  warn  FS129-derivation.md:959 (FS129-SR2-DISC1TS): derived from 'FS106-TS-T', which is not an entry in these files — its grade cannot be read
+  claim FS129-SR2-DISC1TS: minds 1
+  claim FS129-SR2-DISC1TS: prior art partly
+  warn  FS129-derivation.md:977 (FS129-SR2-YESLIM-EQ): derived from 'FS106-EQ', which is not an entry in these files — its grade cannot be read
+  claim FS129-SR2-YESLIM-EQ: minds 1
+  claim FS129-SR2-YESLIM-EQ: prior art partly
+  warn  FS129-derivation.md:995 (FS129-SR2-TOUCHW): derived from 'FS116-N1-TOUCH', which is not an entry in these files — its grade cannot be read
+  claim FS129-SR2-TOUCHW: minds 1
+  warn  FS129-derivation.md:995 (FS129-SR2-TOUCHW): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-SR2-TOUCHW: prior art owed
+  claim FS129-OR1-BENDFRAG: governed by FS129-OR1-WHOLE (derived from, minds 1)
+  warn  FS129-derivation.md:1017 (FS129-OR1-BENDFRAG): derived from 'FS112-N2-BENDS', which is not an entry in these files — its grade cannot be read
+  claim FS129-OR1-BENDFRAG: minds 1
+  warn  FS129-derivation.md:1017 (FS129-OR1-BENDFRAG): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OR1-BENDFRAG: prior art owed
+  claim FS129-OR1-BEND3: governed by FS129-OR1-WHOLE (derived from, minds 1)
+  warn  FS129-derivation.md:1043 (FS129-OR1-BEND3): derived from 'FS112-N2-BENDS', which is not an entry in these files — its grade cannot be read
+  warn  FS129-derivation.md:1043 (FS129-OR1-BEND3): derived from 'FS116-V5-U1', which is not an entry in these files — its grade cannot be read
+  claim FS129-OR1-BEND3: minds 1
+  warn  FS129-derivation.md:1043 (FS129-OR1-BEND3): prior art owed — novelty unmeasured; a standing finding
+  claim FS129-OR1-BEND3: prior art owed
+  warn  FS129-derivation.md:1067 (FS129-OA1-RINGWIND): 'the only' may be two-way — give the converse an address, or write converse: one-way — <reason>
+  claim FS129-OA1-RINGWIND: minds 1
+  claim FS129-OA1-RINGWIND: prior art partly
+  entries: 40  derived: 40  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    FS129-SA1-NOAFF4: printed 'k=4: dim 21 of 21'; with the fault planted ('' → '--fault-k4') it printed 'k=4: dim 9 of 12' — it fires
+  ok    FS129-SA1-FAN4: printed 'k=4 violations=0'; with the fault planted ('' → '--fault-cycle') it printed 'k=4 violations=3551588' — it fires
+  ok    FS129-SA1-ORBIT11: printed 'W = [(0, 0)]'; with the fault planted ('' → '--fault-gap') it printed 'W = []' — it fires
+  ok    FS129-SA1-ORBIT19: printed 'W = [(0, 0)]'; with the fault planted ('' → '--fault-gap') it printed 'W = []' — it fires
+  ok    FS129-MA2-G7GAP: printed 'proper=True gapped=14/49'; with the fault planted ('' → '--fault') it printed 'proper=False gapped=49/49' — it fires
+  ok    FS129-SA1-SQRT3: printed 'violations=0'; with the fault planted ('' → 'FAULT=1') it printed 'violations=180' — it fires
+  ok    FS129-SA1-SQRT3-CONV: printed 'violations=0'; with the fault planted ('' → '=1 FAULT') it printed 'violations=32' — it fires
+  ok    FS129-OA1-SLACK-ORBIT: printed 'vertices of Gamma_11 gapped in some colouring of the orbit: 121 of 121'; with the fault planted ('' → '--fault-notrans') it printed 'vertices of Gamma_11 gapped in some colo' — it fires
+  ok    FS129-MA1-NOAFF5-DIM: printed 'k=5: dim 28 of 28'; with the fault planted ('' → '--fault') it printed 'k=3: dim 6 of 14' — it fires
+  ok    FS129-MA2-GAPK: printed 'K=4 N=5 violations=0'; with the fault planted ('' → '--fault') it printed 'K=4 N=5 violations=36030' — it fires
+  ok    FS129-OA1-FALC-11-W: printed 'W = [(0, 0)]'; with the fault planted ('' → '--fault-gap') it printed 'W = []' — it fires
+  ok    FS129-MA1-FALC-11-REPLAY: printed 'W = [(0, 0)]'; with the fault planted ('' → '--fault-gap') it printed 'W = []' — it fires
+  ok    FS129-MA1-FALC-19-W: printed 'W = [(0, 0)]'; with the fault planted ('' → '--fault-gap') it printed 'W = []' — it fires
+  ok    fs129-or1-cut: printed 'lens ok; cut ok'; with the fault planted ('' → '--fault-cut') it printed 'lens: ok; cut: bar meets the disc' — it fires
+  ok    fs129-or1-lens: printed 'lens ok; cut ok'; with the fault planted ('' → '--fault') it printed 'lens: sampled point exceeds the bound: 1' — it fires
+  ok    fs129-mr1-doubletip: printed 'colour ok; flank ok; cone ok'; with the fault planted ('' → '--fault-colour') it printed 'colour: 6 assignments with differing fla' — it fires
+  ok    fs129-mr1-doubletip-cone: printed 'colour ok; flank ok; cone ok'; with the fault planted ('' → '--fault-cone') it printed 'colour ok; flank ok; cone: 10979 interva' — it fires
+  ok    fs129-mr1-doubletip-flank: printed 'colour ok; flank ok; cone ok'; with the fault planted ('' → '--fault-flank') it printed 'colour ok; flank: distance at 30 deg is ' — it fires
+  ok    fs129-sr1-twocirc: printed 'twocirc ok'; with the fault planted ('' → '--fault-sign') it printed 'identity (product form): FAIL diagonal a' — it fires
+  ok    fs129-sr1-twocirc-diag: printed 'twocirc ok'; with the fault planted ('' → '--fault-diag') it printed 'diagonal at 0 deg: FAIL' — it fires
+  ok    fs129-sr1-ringband: printed 'ringband ok (101284 rings; no 60-degree pair 44, no swap point 10896, of which rotation-invariant 30)'; with the fault planted ('' → '--fault') it printed 'ring (0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1' — it fires
+  ok    FS129-OA1-RINGWIND-ALL: printed 'violations: 0'; with the fault planted ('' → '--fault') it printed 'violations: 106176' — it fires
+  controls: 22  fired on their faults: 22
+GATE: PASS (0 failures, 50 warnings)
