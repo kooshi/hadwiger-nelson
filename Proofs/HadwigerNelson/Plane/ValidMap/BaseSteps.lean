@@ -309,13 +309,439 @@ theorem pair_P' (hF : F.Valid) {u u' : ℂ} (_h : F.IsCubicTrichromatic u) (h' :
   · rw [h'.2] at h4; norm_num at h4
   · exact h'.not_hasRepeatedColour hu' hrep
 
+end ArcMap
+
+/-! ## The germs of a cubic trichromatic vertex and their votes (FS131-I4k)
+
+Children of FS112-N3-FAIL: the two-zeros algebra of a germ against a unit circle through its base (`germ_eq_of_two_on_circle`,
+`branchPt_two_sin`), the chart of a cubic trichromatic vertex (`IsCubicTrichromatic.chart`), the isolation of a branch near its points
+(`IsSectorChart.exists_ball_branch`, over `localSectors_disj`), and S–V Prop. 10's vote (`exists_branch_on_circle_of_not_stripHolds`). -/
+
+/-- A branch point of a germ lies in the closure of the sector after it and of the sector before it (child): at radius `s` the
+sector's angular slice is the open interval between its two germs' directions, non-empty when the directions are ordered. -/
+theorem BranchGerms.mem_closure_sector_of_lt {n : ℕ} {G : BranchGerms n} {v : ℂ} {r s : ℝ} (hs : s ∈ Ioo 0 r) (i : Fin n)
+    (hlt : G.dir i s < G.nextDir i s) :
+    v + (s : ℂ) * e (G.dir i s) ∈ closure (G.sector v r i) ∧ v + (s : ℂ) * e (G.nextDir i s) ∈ closure (G.sector v r i) := by
+  set f : ℝ → ℂ := fun φ => v + (s : ℂ) * e φ with hf
+  have hfc : Continuous f := by rw [hf]; unfold e; fun_prop
+  have hsub : f '' Ioo (G.dir i s) (G.nextDir i s) ⊆ G.sector v r i := by
+    rintro _ ⟨φ, hφ, rfl⟩; exact ⟨s, hs, φ, hφ, rfl⟩
+  have hcl : f '' Icc (G.dir i s) (G.nextDir i s) ⊆ closure (G.sector v r i) := by
+    rw [← closure_Ioo hlt.ne]
+    exact (image_closure_subset_closure_image hfc).trans (closure_mono hsub)
+  exact ⟨hcl ⟨_, left_mem_Icc.mpr hlt.le, rfl⟩, hcl ⟨_, right_mem_Icc.mpr hlt.le, rfl⟩⟩
+
+/-- Among three germs, two distinct ones bound every sector (child). -/
+theorem BranchGerms.fin3_adj : ∀ i k l : Fin 3, k ≠ l →
+    (i = k ∨ BranchGerms.next i = k) ∨ (i = l ∨ BranchGerms.next i = l) := by decide
+
+/-- The squared distance from `q` of a branch point, in the frame of its germ's direction (child). -/
+theorem sq_dist_branchPt (u q : ℂ) (β κ s : ℝ) : dist (branchPt u β κ s) q ^ 2 =
+    (((u - q) * starRingEnd ℂ (e β)).re + s * Real.cos (Real.arcsin (κ * s / 2))) ^ 2 +
+      (((u - q) * starRingEnd ℂ (e β)).im + s * Real.sin (Real.arcsin (κ * s / 2))) ^ 2 := by
+  set a := Real.arcsin (κ * s / 2)
+  have h1 : (branchPt u β κ s - q) * starRingEnd ℂ (e β) = (u - q) * starRingEnd ℂ (e β) + (s : ℂ) * e a := by
+    rw [branchPt, e_add]
+    have := conj_e_mul_e β
+    linear_combination ((s : ℂ) * e a) * this
+  have h2 : dist (branchPt u β κ s) q = ‖(u - q) * starRingEnd ℂ (e β) + (s : ℂ) * e a‖ := by
+    rw [← h1, norm_mul, Complex.norm_conj, norm_e, mul_one, dist_eq_norm]
+  rw [h2, Complex.sq_norm, Complex.normSq_apply]
+  simp only [Complex.add_re, Complex.add_im, Complex.re_ofReal_mul, Complex.im_ofReal_mul, re_e, im_e]
+  ring
+
+/-- Real algebra for `germ_eq_of_two_on_circle` (child). -/
+theorem germ_circle_real {p r κ s C : ℝ} (hpr : p ^ 2 + r ^ 2 = 1) (hC : C ^ 2 = 1 - (κ * s / 2) ^ 2) (hs : 0 < s)
+    (hd : (p + s * C) ^ 2 + (r + s * (κ * s / 2)) ^ 2 = 1) :
+    4 * p ^ 2 = s ^ 2 * (p ^ 2 * κ ^ 2 + (1 + r * κ) ^ 2) := by
+  have e1 : s * (2 * p * C + s * (1 + r * κ)) = 0 := by linear_combination hd - hpr - s ^ 2 * hC
+  have e2 : 2 * p * C + s * (1 + r * κ) = 0 := (mul_eq_zero.mp e1).resolve_left hs.ne'
+  linear_combination (-4 * p ^ 2) * hC + (2 * p * C - s * (1 + r * κ)) * e2
+
+/-- **A germ with two branch points on a unit circle through its base lies along it** (child, the two-zeros algebra): if the
+germ `(β, κ)` at `u ∈ ω(q)` has branch points on `ω(q)` at two distinct positive distances, its curvature is `±1` and its
+direction is the circle's tangent `e β = i κ (u − q)`. -/
+theorem germ_eq_of_two_on_circle {u q : ℂ} (hq : dist u q = 1) {β κ s₁ s₂ : ℝ} (h1 : 0 < s₁) (h2 : 0 < s₂)
+    (h12 : s₁ ≠ s₂) (hκ1 : |κ| * s₁ ≤ 2) (hκ2 : |κ| * s₂ ≤ 2)
+    (hd1 : dist (branchPt u β κ s₁) q = 1) (hd2 : dist (branchPt u β κ s₂) q = 1) :
+    (κ = 1 ∨ κ = -1) ∧ e β = I * κ * (u - q) := by
+  set y := (u - q) * starRingEnd ℂ (e β) with hy
+  have hpr : y.re ^ 2 + y.im ^ 2 = 1 := by
+    have : ‖y‖ = 1 := by rw [hy, norm_mul, Complex.norm_conj, norm_e, mul_one, ← dist_eq_norm, hq]
+    have h := Complex.sq_norm y
+    rw [this, Complex.normSq_apply] at h
+    nlinarith [h]
+  have key : ∀ s, 0 < s → |κ| * s ≤ 2 → dist (branchPt u β κ s) q = 1 →
+      4 * y.re ^ 2 = s ^ 2 * (y.re ^ 2 * κ ^ 2 + (1 + y.im * κ) ^ 2) := by
+    intro s hs hκ hd
+    have hmem : κ * s / 2 ∈ Icc (-1 : ℝ) 1 := by
+      have : |κ * s / 2| ≤ 1 := by
+        rw [abs_div, abs_mul, abs_of_pos hs, abs_two]; linarith
+      exact ⟨by linarith [neg_abs_le (κ * s / 2)], by linarith [le_abs_self (κ * s / 2)]⟩
+    have hsin : Real.sin (Real.arcsin (κ * s / 2)) = κ * s / 2 := Real.sin_arcsin hmem.1 hmem.2
+    have hC : Real.cos (Real.arcsin (κ * s / 2)) ^ 2 = 1 - (κ * s / 2) ^ 2 := by
+      have := Real.sin_sq_add_cos_sq (Real.arcsin (κ * s / 2))
+      rw [hsin] at this; linarith
+    have hsq := sq_dist_branchPt u q β κ s
+    rw [hd, hsin] at hsq
+    exact germ_circle_real hpr hC hs (by rw [← hy] at hsq; linarith)
+  have k1 := key s₁ h1 hκ1 hd1
+  have k2 := key s₂ h2 hκ2 hd2
+  set M := y.re ^ 2 * κ ^ 2 + (1 + y.im * κ) ^ 2 with hM
+  have hM0 : M = 0 := by
+    have hsq : s₁ ^ 2 ≠ s₂ ^ 2 := by
+      intro h
+      exact h12 (by nlinarith [sq_nonneg (s₁ - s₂), sq_nonneg (s₁ + s₂)])
+    have : (s₁ ^ 2 - s₂ ^ 2) * M = 0 := by linear_combination k2 - k1
+    exact (mul_eq_zero.mp this).resolve_left (sub_ne_zero.mpr hsq)
+  have hp : y.re = 0 := by nlinarith [k1]
+  have hrk : 1 + y.im * κ = 0 := by
+    have : (1 + y.im * κ) ^ 2 = 0 := by rw [hM, hp] at hM0; linarith [hM0]
+    exact pow_eq_zero_iff (two_ne_zero) |>.mp this
+  have hr2 : y.im ^ 2 = 1 := by rw [hp] at hpr; linarith
+  have hκr : κ = -y.im := by nlinarith [hrk, hr2]
+  have hκ2' : κ ^ 2 = 1 := by rw [hκr]; linarith [hr2]
+  refine ⟨?_, ?_⟩
+  · have : (κ - 1) * (κ + 1) = 0 := by linear_combination hκ2'
+    rcases mul_eq_zero.mp this with h | h
+    · left; linarith
+    · right; linarith
+  · -- `y = −i κ`, `u − q = y e β`
+    have hyv : y = -I * κ := by
+      apply Complex.ext
+      · simp [hp]
+      · simp [hκr]
+    have hw : u - q = y * e β := by
+      rw [hy, mul_assoc, mul_comm (starRingEnd ℂ (e β)), conj_e_mul_e, mul_one]
+    rw [hw, hyv]
+    have hk : (κ : ℂ) ^ 2 = 1 := by exact_mod_cast hκ2'
+    linear_combination (-e β) * hk + ((κ : ℂ) ^ 2 * e β) * I_mul_I
+
+/-- **Along the circle** (child): a germ at `u ∈ ω(q)` of curvature `σ = ±1` tangent to `ω(q)` (`e β = i σ (u − q)`) has its branch point
+at distance `2 sin (t/2)` at the ring point `t` along `ω(q)` from `u` in the sense `σ`. -/
+theorem branchPt_two_sin {u q : ℂ} {β σ : ℝ} (hσ : σ = 1 ∨ σ = -1) (hβ : e β = I * σ * (u - q)) {t : ℝ}
+    (ht0 : 0 ≤ t) (htπ : t ≤ π) :
+    branchPt u β σ (2 * Real.sin (t / 2)) = q + (u - q) * e (σ * t) := by
+  have hπ := Real.pi_pos
+  have h1 : Real.arcsin (Real.sin (t / 2)) = t / 2 := Real.arcsin_sin (by linarith) (by linarith)
+  have harc : Real.arcsin (σ * (2 * Real.sin (t / 2)) / 2) = σ * (t / 2) := by
+    rcases hσ with rfl | rfl
+    · rw [show (1 : ℝ) * (2 * Real.sin (t / 2)) / 2 = Real.sin (t / 2) by ring, h1]; ring
+    · rw [show (-1 : ℝ) * (2 * Real.sin (t / 2)) / 2 = -Real.sin (t / 2) by ring, Real.arcsin_neg, h1]; ring
+  rw [branchPt, harc, e_add, hβ]
+  have hσ2 : (σ : ℂ) ^ 2 = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  have hid : 1 + 2 * (Real.sin (t / 2) : ℂ) * (I * σ) * e (σ * (t / 2)) = e (σ * t) := by
+    rw [e_eq, e_eq]
+    have hc : Real.cos (σ * t) = 1 - 2 * Real.sin (t / 2) ^ 2 := by
+      rcases hσ with rfl | rfl
+      · rw [one_mul, show t = 2 * (t / 2) by ring, Real.cos_two_mul, show 2 * (t / 2) / 2 = t / 2 by ring]
+        linarith [Real.sin_sq_add_cos_sq (t / 2)]
+      · rw [show (-1) * t = -(2 * (t / 2)) by ring, Real.cos_neg, Real.cos_two_mul]
+        linarith [Real.sin_sq_add_cos_sq (t / 2)]
+    have hs : Real.sin (σ * t) = σ * (2 * Real.sin (t / 2) * Real.cos (t / 2)) := by
+      rcases hσ with rfl | rfl
+      · rw [one_mul, one_mul, show t = 2 * (t / 2) by ring, Real.sin_two_mul, show 2 * (t / 2) / 2 = t / 2 by ring]
+      · rw [show (-1) * t = -(2 * (t / 2)) by ring, Real.sin_neg, Real.sin_two_mul]; ring
+    have hc' : Real.cos (σ * (t / 2)) = Real.cos (t / 2) := by
+      rcases hσ with rfl | rfl
+      · rw [one_mul]
+      · rw [neg_one_mul, Real.cos_neg]
+    have hs' : Real.sin (σ * (t / 2)) = σ * Real.sin (t / 2) := by
+      rcases hσ with rfl | rfl
+      · rw [one_mul, one_mul]
+      · rw [neg_one_mul, neg_one_mul, Real.sin_neg]
+    rw [hc, hs, hc', hs']
+    set a := Real.sin (t / 2)
+    set b := Real.cos (t / 2)
+    push_cast
+    linear_combination (2 * (a : ℂ) ^ 2 * I ^ 2) * hσ2 + (2 * (a : ℂ) ^ 2) * I_mul_I
+  have : u + ((2 * Real.sin (t / 2) : ℝ) : ℂ) * (I * σ * (u - q) * e (σ * (t / 2))) =
+      q + (u - q) * (1 + 2 * (Real.sin (t / 2) : ℂ) * (I * σ) * e (σ * (t / 2))) := by push_cast; ring
+  rw [this, hid]
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- **The chart of a cubic trichromatic vertex** (child): three germs whose branches never meet at one distance, and three sectors of
+three distinct colours, which are all the colours at the vertex. -/
+theorem IsCubicTrichromatic.chart {u : ℂ} (h : F.IsCubicTrichromatic u) (hu : u ∈ F.dom) :
+    ∃ r₀, ∃ G : BranchGerms 3, F.IsSectorChart G u r₀ ∧
+      (∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) ∧
+      ∃ f : Fin 3 → Fin k, Function.Injective f ∧ (∀ i, G.sector u r₀ i ⊆ F.region (f i)) ∧
+        ∀ c ∈ F.coloursAt u, ∃ i, f i = c := by
+  classical
+  obtain ⟨r₀, n, G, hC, hdisj⟩ := localSectors_disj F hu
+  have hn3 : n = 3 := by
+    obtain ⟨r, hr2, hr3⟩ := (hC.hasDegree.and h.1).exists
+    have : max n 1 = 3 := by exact_mod_cast hr2.symm.trans hr3
+    omega
+  subst hn3
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  have hn : (0 : ℕ) < 3 := by norm_num
+  choose q hq using fun i => hC.sector_nonempty hr₀ i
+  set f : Fin 3 → Fin k := fun i => F.col (q i) with hf
+  have hsec : ∀ i, G.sector u r₀ i ⊆ F.region (f i) := fun i w hw =>
+    ⟨hC.sector_subset_interiorPts hn hr₀ i hw,
+      (hC.isPreconnected r₀ hr₀ i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hr₀ i)) hw (hq i)⟩
+  have hsub : ∀ c ∈ F.coloursAt u, ∃ i, f i = c := by
+    intro c hc
+    obtain ⟨β, hβ⟩ := coneAt_region_nonempty hc
+    obtain ⟨i, -, hi⟩ := hC.exists_sector_of_mem_coneAt_region hn hr₀ hβ
+    exact ⟨i, (hi (hq i)).2⟩
+  have hinj : Function.Injective f := by
+    have hsub' : F.coloursAt u ⊆ ↑(Finset.univ.image f) := fun c hc => by
+      obtain ⟨i, hi⟩ := hsub c hc; rw [Finset.coe_image]; exact ⟨i, by simp, hi⟩
+    have h1 := Set.ncard_le_ncard hsub' (Finset.finite_toSet _)
+    rw [Set.ncard_coe_finset, h.2] at h1
+    have h2 : (Finset.univ.image f).card ≤ 3 := (Finset.card_image_le).trans (by simp)
+    have hcard : (Finset.univ.image f).card = (Finset.univ : Finset (Fin 3)).card := by
+      rw [Finset.card_univ, Fintype.card_fin]; omega
+    intro i j hij
+    exact Finset.card_image_iff.mp hcard (by simp) (by simp) hij
+  exact ⟨r₀, G, hC, hdisj, f, hinj, hsec, hsub⟩
+
+/-- **Near a branch point the arcs are its branch** (child): in a chart whose branches never meet at one distance, a small ball about
+a branch point lies in the domain and meets the arcs only on that point's own branch. -/
+theorem IsSectorChart.exists_ball_branch {n : ℕ} {G : BranchGerms n} {u : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G u r₀)
+    (hdisj : ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) (k₀ : Fin n) {s₀ : ℝ} (hs₀ : s₀ ∈ Ioo 0 r₀) :
+    ∃ δ > 0, ball (branchPt u (G.β k₀) (G.κ k₀) s₀) δ ⊆ F.dom ∧
+      ∀ z ∈ ball (branchPt u (G.β k₀) (G.κ k₀) s₀) δ, z ∈ ⋃ a ∈ F.arcs, a.carrier →
+        ∃ s ∈ Ioo 0 r₀, z = branchPt u (G.β k₀) (G.κ k₀) s := by
+  set b₀ := branchPt u (G.β k₀) (G.κ k₀) s₀ with hb₀
+  have hb₀u : dist b₀ u = s₀ := by rw [hb₀, dist_eq_norm, norm_branchPt_sub _ _ _ hs₀.1.le]
+  have hsep : ∀ j, j ≠ k₀ → ∀ᶠ δ in 𝓝[>] (0 : ℝ), ∀ s ∈ Ioo 0 r₀, δ ≤ dist (branchPt u (G.β j) (G.κ j) s) b₀ := by
+    intro j hj
+    have hne : branchPt u (G.β j) (G.κ j) s₀ ≠ b₀ := by
+      intro h
+      rw [hb₀, branchPt_eq, branchPt_eq] at h
+      exact hdisj j k₀ hj s₀ hs₀ ((polar_eq_iff hs₀.1 hs₀.1).mp h).2
+    set d := dist (branchPt u (G.β j) (G.κ j) s₀) b₀ with hd
+    have hd0 : 0 < d := dist_pos.mpr hne
+    obtain ⟨η, hη, hηc⟩ := Metric.continuous_iff.mp (continuous_branchPt u (G.β j) (G.κ j)) s₀ (d / 2) (half_pos hd0)
+    filter_upwards [Ioo_mem_nhdsGT (lt_min hη (half_pos hd0))] with δ hδ s hs
+    by_contra hlt
+    push Not at hlt
+    have hδη : δ < η := hδ.2.trans_le (min_le_left _ _)
+    have hδd : δ < d / 2 := hδ.2.trans_le (min_le_right _ _)
+    rcases lt_or_ge (dist s s₀) η with h1 | h1
+    · have h2 := hηc s h1
+      have h3 := dist_triangle (branchPt u (G.β j) (G.κ j) s₀) (branchPt u (G.β j) (G.κ j) s) b₀
+      rw [dist_comm (branchPt u (G.β j) (G.κ j) s₀) (branchPt u (G.β j) (G.κ j) s)] at h3
+      linarith
+    · have h2 : |s - s₀| ≤ dist (branchPt u (G.β j) (G.κ j) s) b₀ := by
+        have := abs_norm_sub_norm_le (branchPt u (G.β j) (G.κ j) s - u) (b₀ - u)
+        rw [norm_branchPt_sub _ _ _ hs.1.le, hb₀, norm_branchPt_sub _ _ _ hs₀.1.le] at this
+        rw [dist_eq_norm]; simpa using this
+      rw [Real.dist_eq] at h1
+      linarith
+  have hev : ∀ᶠ δ in 𝓝[>] (0 : ℝ), (0 < δ ∧ δ ≤ min s₀ (r₀ - s₀)) ∧
+      ∀ j, j ≠ k₀ → ∀ s ∈ Ioo 0 r₀, δ ≤ dist (branchPt u (G.β j) (G.κ j) s) b₀ := by
+    refine Filter.Eventually.and ?_ ?_
+    · filter_upwards [Ioo_mem_nhdsGT (lt_min hs₀.1 (sub_pos.mpr hs₀.2))] with δ hδ using ⟨hδ.1, hδ.2.le⟩
+    · refine Filter.eventually_all.mpr fun j => ?_
+      by_cases hj : j = k₀
+      · exact Filter.Eventually.of_forall fun _ h => absurd hj h
+      · exact (hsep j hj).mono fun _ h _ => h
+  obtain ⟨δ, ⟨hδ0, hδm⟩, hδsep⟩ := hev.exists
+  have hball : ∀ z ∈ ball b₀ δ, z ∈ ball u r₀ ∧ z ≠ u := by
+    intro z hz
+    rw [mem_ball] at hz
+    have h1 := dist_triangle z b₀ u
+    have h2 := dist_triangle b₀ z u
+    rw [dist_comm b₀ z] at h2
+    have hm1 := min_le_left s₀ (r₀ - s₀)
+    have hm2 := min_le_right s₀ (r₀ - s₀)
+    refine ⟨by rw [mem_ball]; linarith, ?_⟩
+    rintro rfl
+    rw [dist_comm] at hz
+    linarith
+  refine ⟨δ, hδ0, fun z hz => hC.subdom (hball z hz).1, fun z hz hza => ?_⟩
+  have hmem : z ∈ (F.Γ ∩ ball u r₀) \ {u} :=
+    ⟨⟨⟨hC.subdom (hball z hz).1, hza⟩, (hball z hz).1⟩, (hball z hz).2⟩
+  rw [hC.branches] at hmem
+  obtain ⟨j, s, hs, rfl⟩ := mem_iUnion.mp hmem
+  by_cases hj : j = k₀
+  · subst hj; exact ⟨s, hs, rfl⟩
+  · have := hδsep j hj s hs
+    rw [mem_ball] at hz
+    linarith
+
+/-- **The vote at a cubic trichromatic vertex** (child, S–V Prop. 10's place): where the strip fails at `q`, at every radius below the
+chart's some germ's branch point lies on `ω(q)`. Two germs whose branch points lie beyond `ω(q)` bound all three sectors, so every
+colour of `u` is barred from the inner side near `q` (a sector of colour `c` reaching from `u`, inside `ω(z)`, to a branch point
+outside it holds a point at distance `1` from `z`); two inside bar the outer side. -/
+theorem exists_branch_on_circle_of_not_stripHolds (hF : F.Valid) {u q : ℂ} {r₀ : ℝ} {G : BranchGerms 3}
+    (hC : F.IsSectorChart G u r₀) (hord : ∀ s ∈ Ioo 0 r₀, ∀ i, G.dir i s < G.nextDir i s)
+    {f : Fin 3 → Fin k} (hsec : ∀ i, G.sector u r₀ i ⊆ F.region (f i)) (hcol : ∀ c ∈ F.coloursAt u, ∃ i, f i = c)
+    (hs : ¬ F.StripHolds u q) {s : ℝ} (hs0 : s ∈ Ioo 0 r₀) :
+    ∃ l, dist (branchPt u (G.β l) (G.κ l) s) q = 1 := by
+  by_contra hno
+  push Not at hno
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  have hadj : ∀ i l, (i = l ∨ BranchGerms.next i = l) →
+      branchPt u (G.β l) (G.κ l) s ∈ closure (G.sector u r₀ i) := by
+    rintro i l (rfl | rfl)
+    · exact (BranchGerms.mem_closure_sector_of_lt hs0 i (hord s hs0 i)).1
+    · rw [branchPt_eq]
+      have : e (germDir (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s) = e (G.nextDir i s) :=
+        (G.e_nextDir i s).symm
+      rw [this]; exact (BranchGerms.mem_closure_sector_of_lt hs0 i (hord s hs0 i)).2
+  have hcross : ∀ i z, z ∈ F.region (f i) → ∀ b ∈ closure (G.sector u r₀ i),
+      (dist z u < 1 → dist z b < 1) ∧ (1 < dist z u → 1 < dist z b) := by
+    intro i z hz b hb
+    have hpc : IsPreconnected (closure (G.sector u r₀ i)) := (hC.isPreconnected r₀ hr₀ i).closure
+    have hu := hC.mem_closure_sector hr₀ i
+    rcases hF.dist_lt_or_gt_of_isPreconnected hz hpc (closure_mono (hsec i)) with h | h
+    · exact ⟨fun _ => h b hb, fun h' => absurd (h u hu) (by linarith)⟩
+    · exact ⟨fun h' => absurd (h u hu) (by linarith), fun _ => h b hb⟩
+  set d : Fin 3 → ℝ := fun l => dist (branchPt u (G.β l) (G.κ l) s) q with hd
+  obtain ⟨k₁, k₂, hne, heq⟩ := Fintype.exists_ne_map_eq_of_card_lt (fun l : Fin 3 => decide (d l < 1)) (by simp)
+  have hiff : d k₁ < 1 ↔ d k₂ < 1 := by simpa using heq
+  -- for an interior point `z` of a colour of `u`, some sector of that colour has one of the two branch points in its closure
+  have hpick : ∀ z ∈ F.interiorPts, F.col z ∈ F.coloursAt u → ∃ i l, z ∈ F.region (f i) ∧ (l = k₁ ∨ l = k₂) ∧
+      branchPt u (G.β l) (G.κ l) s ∈ closure (G.sector u r₀ i) := by
+    intro z hz hzc
+    obtain ⟨i, hi⟩ := hcol _ hzc
+    have hzr : z ∈ F.region (f i) := ⟨hz, hi.symm⟩
+    rcases BranchGerms.fin3_adj i k₁ k₂ hne with h | h
+    · exact ⟨i, k₁, hzr, Or.inl rfl, hadj i k₁ h⟩
+    · exact ⟨i, k₂, hzr, Or.inr rfl, hadj i k₂ h⟩
+  apply hs
+  by_cases h1 : d k₁ < 1
+  · have h2 : d k₂ < 1 := hiff.mp h1
+    refine ⟨min (1 - d k₁) (1 - d k₂), lt_min (by linarith) (by linarith), Or.inr ?_⟩
+    rintro z ⟨⟨hzI, hzq⟩, hzu⟩ hzc
+    obtain ⟨i, l, hzr, hl, hb⟩ := hpick z hzI hzc
+    have hzu' : 1 < dist z u := by simpa [mem_closedBall, not_le] using hzu
+    have hgt := (hcross i z hzr _ hb).2 hzu'
+    have htri := dist_triangle z q (branchPt u (G.β l) (G.κ l) s)
+    rw [mem_ball] at hzq
+    rw [dist_comm q] at htri
+    have hdl : d l + dist z q < 1 := by
+      rcases hl with rfl | rfl
+      · linarith [min_le_left (1 - d l) (1 - d k₂)]
+      · linarith [min_le_right (1 - d k₁) (1 - d l)]
+    have : dist (branchPt u (G.β l) (G.κ l) s) q = d l := rfl
+    linarith
+  · have h1' : 1 < d k₁ := lt_of_le_of_ne (not_lt.mp h1) (hno k₁).symm
+    have h2' : 1 < d k₂ := lt_of_le_of_ne (not_lt.mp (fun h => h1 (hiff.mpr h))) (hno k₂).symm
+    refine ⟨min (d k₁ - 1) (d k₂ - 1), lt_min (by linarith) (by linarith), Or.inl ?_⟩
+    rintro z ⟨⟨hzI, hzq⟩, hzu⟩ hzc
+    obtain ⟨i, l, hzr, hl, hb⟩ := hpick z hzI hzc
+    rw [mem_ball] at hzu hzq
+    have hlt := (hcross i z hzr _ hb).1 hzu
+    have htri := dist_triangle (branchPt u (G.β l) (G.κ l) s) z q
+    rw [dist_comm _ z] at htri
+    have hdl : 1 + dist z q < d l := by
+      rcases hl with rfl | rfl
+      · linarith [min_le_left (d l - 1) (d k₂ - 1)]
+      · linarith [min_le_right (d k₁ - 1) (d l - 1)]
+    have : dist (branchPt u (G.β l) (G.κ l) s) q = d l := rfl
+    linarith
+
 /-! ## FS112-N3-FAIL -/
 
 /-- **FS112-N3-FAIL**, the place: at a cubic trichromatic `u`, the strip fails at `q ∈ ω(u)` only when `q` is a leaving centre of
 `u`. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
 theorem fail_leavingCentre (hF : F.Valid) {u q : ℂ} (hu : F.IsCubicTrichromatic u) (hc : F.Covers u 1) (hq : dist q u = 1)
     (hs : ¬ F.StripHolds u q) : F.IsLeavingCentre u q := by
-  sorry
+  have hπ := Real.pi_pos
+  have hud : u ∈ F.dom := hc (mem_closedBall_self zero_le_one)
+  obtain ⟨r₀, G, hC, hdisj, f, -, hsec, hcol⟩ := hu.chart hud
+  have hord := G.dir_lt_nextDir hC.sorted hC.curv hdisj
+  have hr0 := hC.pos
+  -- four radii, three germs: one germ has branch points on `ω(q)` at two radii
+  have hrad : ∀ m : Fin 4, r₀ * ((m : ℝ) + 1) / 5 ∈ Ioo 0 r₀ := fun m => by
+    have hm : (m : ℝ) ≤ 3 := by exact_mod_cast Nat.lt_succ_iff.mp m.isLt
+    refine ⟨by positivity, ?_⟩
+    rw [div_lt_iff₀ (by norm_num)]; nlinarith
+  choose l hl using fun m : Fin 4 => exists_branch_on_circle_of_not_stripHolds hF hC hord hsec hcol hs (hrad m)
+  obtain ⟨m₁, m₂, hm, hlm⟩ := Fintype.exists_ne_map_eq_of_card_lt l (by simp)
+  set k₀ := l m₁ with hk₀
+  have hcurv : ∀ s ∈ Ioo 0 r₀, |G.κ k₀| * s ≤ 2 := fun s hs' =>
+    (mul_le_mul_of_nonneg_left hs'.2.le (abs_nonneg _)).trans (hC.curv k₀).le
+  have hs12 : r₀ * ((m₁ : ℝ) + 1) / 5 ≠ r₀ * ((m₂ : ℝ) + 1) / 5 := by
+    intro h
+    have h' : r₀ * ((m₁ : ℝ) + 1) = r₀ * ((m₂ : ℝ) + 1) := by linarith
+    have h'' := mul_left_cancel₀ hr0.ne' h'
+    apply hm; ext; exact_mod_cast (by linarith : (m₁ : ℝ) = m₂)
+  have hl2 := hl m₂
+  rw [← hlm] at hl2
+  have huq : dist u q = 1 := by rw [dist_comm]; exact hq
+  obtain ⟨hσ, hβ⟩ := germ_eq_of_two_on_circle huq (hrad m₁).1 (hrad m₂).1 hs12 (hcurv _ (hrad m₁)) (hcurv _ (hrad m₂))
+    (hl m₁) hl2
+  set σ := G.κ k₀ with hσdef
+  have hσabs : |σ| = 1 := by rcases hσ with h | h <;> rw [h] <;> norm_num
+  have hr2 : r₀ < 2 := by have := hC.curv k₀; rw [← hσdef, hσabs, one_mul] at this; exact this
+  set ψ := arg (u - q) with hψdef
+  have hψ : ringPt q ψ = u := ringPt_arg_sub huq
+  have heψ : e ψ = u - q := by rw [← hψ, ringPt]; ring
+  -- the branch of `k₀` lies on `ω(q)`
+  have hring : ∀ t, 0 ≤ t → t ≤ π → ringPt q (ψ + σ * t) = branchPt u (G.β k₀) σ (2 * Real.sin (t / 2)) := by
+    intro t ht0 htπ
+    rw [branchPt_two_sin hσ hβ ht0 htπ, ringPt, e_add, heψ]
+  have hon : ∀ s ∈ Ioo 0 r₀, dist (branchPt u (G.β k₀) σ s) q = 1 := by
+    intro s hs'
+    have hs2 : s / 2 ∈ Icc (-1 : ℝ) 1 := ⟨by linarith [hs'.1], by linarith [hs'.2]⟩
+    set t := 2 * Real.arcsin (s / 2) with ht
+    have ht0 : 0 ≤ t := by have := Real.arcsin_nonneg.mpr (by linarith [hs'.1] : (0:ℝ) ≤ s / 2); linarith
+    have htπ : t ≤ π := by have := Real.arcsin_le_pi_div_two (s / 2); linarith
+    have hst : 2 * Real.sin (t / 2) = s := by
+      rw [ht, show 2 * Real.arcsin (s / 2) / 2 = Real.arcsin (s / 2) by ring, Real.sin_arcsin hs2.1 hs2.2]; ring
+    rw [← hst, ← hring t ht0 htπ]
+    exact dist_ringPt q _
+  set τ := min (r₀ / 2) 1 with hτ
+  have hτ0 : 0 < τ := lt_min (by linarith) one_pos
+  have hτr : τ < r₀ := (min_le_left _ _).trans_lt (by linarith)
+  have hτπ : τ < π := (min_le_right _ _).trans_lt (by linarith [Real.pi_gt_three])
+  -- the points of the arc: in `Γ`, and clean inside
+  have hpt : ∀ t, 0 ≤ t → t ≤ τ → ringPt q (ψ + σ * t) ∈ F.Γ ∧ (0 < t → ∃ δ > 0,
+      ball (ringPt q (ψ + σ * t)) δ ⊆ F.dom ∧ ∀ z ∈ ball (ringPt q (ψ + σ * t)) δ, z ∈ ⋃ a ∈ F.arcs, a.carrier → dist z q = 1) := by
+    intro t ht0 htτ
+    have htπ : t ≤ π := htτ.trans hτπ.le
+    refine ⟨?_, fun htpos => ?_⟩
+    · rcases ht0.eq_or_lt with rfl | htpos
+      · rw [mul_zero, add_zero, hψ]; exact hC.mem_Γ.mpr (by norm_num)
+      · rw [hring t ht0 htπ]
+        have hs0 : 0 < 2 * Real.sin (t / 2) := by
+          have := Real.sin_pos_of_pos_of_lt_pi (by linarith : 0 < t / 2) (by linarith); linarith
+        have hsr : 2 * Real.sin (t / 2) < r₀ := by
+          have := Real.sin_le (by linarith : (0:ℝ) ≤ t / 2); linarith
+        have hmem : branchPt u (G.β k₀) (G.κ k₀) (2 * Real.sin (t / 2)) ∈ ⋃ i, branchPt u (G.β i) (G.κ i) '' Ioo 0 r₀ :=
+          mem_iUnion.mpr ⟨k₀, _, ⟨hs0, hsr⟩, rfl⟩
+        rw [← hC.branches] at hmem
+        exact hmem.1.1
+    · have hs0 : 0 < 2 * Real.sin (t / 2) := by
+        have := Real.sin_pos_of_pos_of_lt_pi (by linarith : 0 < t / 2) (by linarith); linarith
+      have hsr : 2 * Real.sin (t / 2) < r₀ := by
+        have := Real.sin_le (by linarith : (0:ℝ) ≤ t / 2); linarith
+      obtain ⟨δ, hδ, hdom, hbr⟩ := hC.exists_ball_branch hdisj k₀ ⟨hs0, hsr⟩
+      rw [hring t ht0 htπ]
+      refine ⟨δ, hδ, hdom, fun z hz hza => ?_⟩
+      obtain ⟨s', hs', rfl⟩ := hbr z hz hza
+      exact hon s' hs'
+  rcases hσ with h1 | h1
+  · -- the arc `[ψ, ψ + τ]`, starting at `u`
+    have hφ : ∀ φ, ψ + σ * (φ - ψ) = φ := fun φ => by rw [h1]; ring
+    have hΓ : ringArc q ψ (ψ + τ) ⊆ F.Γ := by
+      rintro _ ⟨φ, hφm, rfl⟩
+      have := (hpt (φ - ψ) (by linarith [hφm.1]) (by linarith [hφm.2])).1
+      rwa [hφ] at this
+    obtain ⟨c, c', hR⟩ := isRingArc_of_clean (by linarith) hΓ fun θ hθ => by
+      have := (hpt (θ - ψ) (by linarith [hθ.1]) (by linarith [hθ.2])).2 (by linarith [hθ.1])
+      rwa [hφ] at this
+    exact ⟨hq, ψ, ψ + τ, c, c', hR, Or.inl hψ⟩
+  · -- the arc `[ψ − τ, ψ]`, ending at `u`
+    have hφ : ∀ φ, ψ + σ * (ψ - φ) = φ := fun φ => by rw [h1]; ring
+    have hΓ : ringArc q (ψ - τ) ψ ⊆ F.Γ := by
+      rintro _ ⟨φ, hφm, rfl⟩
+      have := (hpt (ψ - φ) (by linarith [hφm.2]) (by linarith [hφm.1])).1
+      rwa [hφ] at this
+    obtain ⟨c, c', hR⟩ := isRingArc_of_clean (by linarith) hΓ fun θ hθ => by
+      have := (hpt (ψ - θ) (by linarith [hθ.2]) (by linarith [hθ.1])).2 (by linarith [hθ.2])
+      rwa [hφ] at this
+    exact ⟨hq, ψ - τ, ψ, c, c', hR, Or.inr hψ⟩
 
 /-- **FS112-N3-FAIL**, the colours: where the strip fails at `q`, the colours of `c(u)` occurring inside `ω(u)` near `q` are among the
 inner colours of the arcs of `ω(q)` leaving `u`, those occurring outside among their outer colours, and each side carries at least one

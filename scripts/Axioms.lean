@@ -2626,6 +2626,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.Arc.branch_mem_of_mem
 #print axioms HadwigerNelson.Plane.ArcMap.isSectorChart_of
 #print axioms HadwigerNelson.Plane.localSectors
+#print axioms HadwigerNelson.Plane.localSectors_disj
 #print axioms HadwigerNelson.Plane.ArcMap.IsTile.eq_of_mem
 #print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.sector_subset_interiorPts
 #print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.sector_nonempty
@@ -2749,6 +2750,15 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.BranchGerms.mem_closure_sector_of_lt
+#print axioms HadwigerNelson.Plane.BranchGerms.fin3_adj
+#print axioms HadwigerNelson.Plane.sq_dist_branchPt
+#print axioms HadwigerNelson.Plane.germ_circle_real
+#print axioms HadwigerNelson.Plane.germ_eq_of_two_on_circle
+#print axioms HadwigerNelson.Plane.branchPt_two_sin
+#print axioms HadwigerNelson.Plane.ArcMap.IsCubicTrichromatic.chart
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_ball_branch
+#print axioms HadwigerNelson.Plane.ArcMap.exists_branch_on_circle_of_not_stripHolds
 #print axioms HadwigerNelson.Plane.ArcMap.exists_shift_avoiding
 #print axioms HadwigerNelson.Plane.ArcMap.isClosed_Γ_inter_sphere
 #print axioms HadwigerNelson.Plane.ArcMap.countable_ringPt_preimage

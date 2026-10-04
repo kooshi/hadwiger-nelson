@@ -1001,6 +1001,38 @@ as written goes to Keryx at once. No edit while a build of the edited file runs.
 `data/fs131/i4/build-i4k-readback.log`). 21 `declaration uses sorry` warnings — BaseSteps 6, Contact 10, UnitArc 5 — and no other warning. This job's scratch
 mirror for `iter.sh`/`chk.sh`/`errs.sh` is `S=/home/kooshi/scratch-w4k`.
 
+## Stage 30 — SAVED (FS131-I4k): `localSectors_disj` and `fail_leavingCentre`; 10 `sorry` left in `BaseSteps` and `UnitArc`
+
+**`localSectors_disj`** (`Plane/LocalStructure`, ruling 244 (b)): `localSectors`' proof already built the disjointness (`hr₃`) and handed it to
+`isSectorChart_of`; it is now a named `have` returned as a second conjunct, and `localSectors` is its corollary — statement unchanged (the `theorem` line
+is identical, checked by `git diff`; the docstring moved to the new theorem). Cost of the rebuild: LocalStructure 34 s, the whole build 11 min.
+
+**`fail_leavingCentre` (FS112-N3-FAIL, the place) proved**, on Stage 28's route (a)–(e), with children in a new `BaseSteps` section "The germs of a cubic
+trichromatic vertex and their votes" (before N3-FAIL):
+- `IsCubicTrichromatic.chart`: three germs (degree 3 forces `n = 3`), the disjointness, three sectors of three distinct colours that are all of `c(u)`.
+- `BranchGerms.mem_closure_sector_of_lt`: a germ's branch point lies in the closure of the sectors on both sides of it (`image_closure_subset_closure_image`).
+- `BranchGerms.fin3_adj` (`decide`): two distinct germs of three bound every sector.
+- `exists_branch_on_circle_of_not_stripHolds` (**the vote**): where the strip fails, at every radius some germ's branch point is on `ω(q)` — two germs
+  strictly outside bar every colour of `u` from the inner side (the crossing engine on the closed sector, which reaches from `u`, inside `ω(z)`, to the
+  branch point, outside), two inside bar the outer side.
+- `germ_eq_of_two_on_circle` (**the two-zeros algebra**) over `sq_dist_branchPt` and the real lemma `germ_circle_real`: with `y = (u − q) conj e(β) = p + ir`,
+  `|b(s) − q| = 1` reads `4p² = s²(p²κ² + (1 + rκ)²)`, so two radii give `p = 0`, `rκ = −1`: `κ = ±1` and `e β = iκ(u − q)`.
+- `branchPt_two_sin`: such a germ's branch point at distance `2 sin(t/2)` is `q + (u − q) e(κt)` — the branch is `ω(q)`.
+- `IsSectorChart.exists_ball_branch` (over `localSectors_disj`): a small ball about a branch point meets the arcs only on its own branch — the cleanliness
+  `isRingArc_of_clean` (Stage 26's engine A) asks for.
+Then four radii and three germs give one germ on `ω(q)` at two radii (pigeonhole), the arc of `ω(q)` from `u` along it lies in `Γ` and is clean, and engine A
+makes it a ring arc ending at `u`. Hypotheses read: `hF` (the crossing), `hu`, `hc` (only `u ∈ dom`), `hq`, `hs`. Read against § 8.2 and the row: same
+statement (where the strip fails at `q ∈ ω(u)`, `q` is the centre of an arc of `Γ` on `ω(q)` with constant sides ending at `u`).
+
+**Records**: `tools/fs131_i4_addrecords.py` — 452 names, 9 added; `localSectors_disj` added by hand beside `localSectors` in wave 3's block;
+`tools/fs131_k4_decls.py --check` exit 0. **Axioms** (`data/fs131/i4/axioms-i4k-30.lean` → `axioms-i4k-30.txt`, against this stage's build's oleans, not a gate
+log): all twelve `[propext, Classical.choice, Quot.sound]`, `fin3_adj` none. **No statement changed**, no new axiom, no `native_decide`, no new import. Build:
+"build: OK — 444 of 444 batches, 12 module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T213942Z-2609986.log`; driver log
+`data/fs131/i4/build-i4k-stage30.log`): 20 distinct `declaration uses sorry` (BaseSteps 5, Contact 10, UnitArc 5), no other warning.
+
+**Re-pricing** (first hard leaf): about 70k tokens including the readback; three iteration passes on a scratch file importing `BaseSteps` (compiling only
+`LocalStructure` into the scratch mirror: a purely additive change leaves its dependents' oleans loadable, iteration only).
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -1129,3 +1161,12 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   `ArcMap.countable_ringPt_preimage` (UnitArc).
 - FS112-N2-BENDS, the away bend as the row states it: `ArcMap.bend_away_whole` — `[propext, sorryAx, Classical.choice, Quot.sound]` **(over sorry:
   `bend_away`)**. Same statement; the proof is the reduction to `bend_away`.
+
+## Theorems this phase proved (FS131-I4k's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4k-*.txt`, not a gate log)
+
+- FS112-N3-FAIL, the place: `HadwigerNelson.Plane.ArcMap.fail_leavingCentre` — `[propext, Classical.choice, Quot.sound]`. Read against § 8.2 and the row: same
+  statement (at a cubic trichromatic `u` covering `B̄(u, 1)`, the strip fails at `q ∈ ω(u)` only when `q` is a leaving centre of `u`).
+- `HadwigerNelson.Plane.localSectors_disj` (wave 3's module; ruling 244 (b)) — the standard three; `localSectors` re-derived from it, statement unchanged.
+- Children (no row), the standard three: `BranchGerms.mem_closure_sector_of_lt`, `sq_dist_branchPt`, `germ_circle_real`, `germ_eq_of_two_on_circle`,
+  `branchPt_two_sin`, `ArcMap.IsCubicTrichromatic.chart`, `ArcMap.IsSectorChart.exists_ball_branch`, `ArcMap.exists_branch_on_circle_of_not_stripHolds`;
+  `BranchGerms.fin3_adj` (no axioms, `decide`).
