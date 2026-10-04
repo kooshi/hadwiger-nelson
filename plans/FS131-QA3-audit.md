@@ -148,3 +148,91 @@ e. **`exists_endpoint`'s `hc`** has a dead disjunct; harmless.
 f. **For item 242's design question** (the planar job): `cvb_pinch_connected` stays true only if the repaired `IsHoleOf` holds at every CVB
    hole (a boundary component disjoint from the outer one), clusters included; `cvb_hole_disconnected` is true only if it holds nowhere else.
    Both directions bind the repair.
+
+## Stage 3 — SAVED: wave 4 (`fs131-w4` at `d391f480`; `Contact` read at `fs131-w4c`'s `f975677b`, IC5's hand-back; `Moves`, `Cone` at `fs131-w4m`'s `fe10562b`, IM2's stage 5)
+
+### 3.1 The finding
+
+**QA3-1. `exists_merge` (FS110-W-MERGE) is false as stated** — sent to Keryx at once (message of 2026-10-04). Its clause
+`(∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x)` (`Contact.lean` l. 4097 on `fs131-w4` and `fs131-w4c`, l. 1482 on `fs131-w4m`; the copy
+`exists_merge_aux`, `Moves.lean` l. 265 on `fs131-w4m`) quantifies over the open disc `B(v, ρ)`, where the merge recolours the gap.
+
+*The argument (exact, by reading).* Let F's `c`-sectors at `v` have closures meeting only at `v` (true whenever no arc of `Γ` through `v` has
+`c` on both sides). Suppose `F'` agrees with `F` off `B̄(v, ρ)` and meets the clause. At a point interior to both maps, `coloursAt` is the
+singleton of the colour, so the clause forces `F'`'s colour to be `F`'s; on `F`'s arcs it forces `F'`'s colour into `F.coloursAt`. Hence
+`F'.region c ∩ B(v, r) ⊆ ⋃ᵢ cl Sᵢ` (the `Sᵢ` F's `c`-sectors). `v` is not `F'`-interior (a neighbourhood of `v` would meet a sector of another
+colour, coloured that colour in `F'` too). A connected component of `F'`'s interior points of colour `c` near `v` lies in `(⋃ cl Sᵢ) ∖ {v}`,
+a disjoint union of the relatively closed `cl Sᵢ ∖ {v}`, so in one of them; and each `Sᵢ` contributes one (its `F'`-interior points keep colour
+`c`). So `F'` has at least `n + 1` sectors of colour `c` at `v`, and `F'.HasSectors v c n` fails. The conclusion is unsatisfiable.
+
+*An instance of the hypotheses* (so the theorem is false, at any `k` large enough): `dom = B(0, 2)`, `v = 0`; inside `B(0, 1/4)` an X of two
+segments, open quadrants I and III of colour `0`, II and IV of colours `1` and `2`; the annulus `1/4 < |z| < 2` cut by a grid of side `1/4`,
+every cell its own colour. Valid (the only repeated colour is `0`, on two quadrants within `1/2` of each other; every tile has diameter below
+`1`); `Covers 0 1`; `HasSectors 0 0 2`; no point of colour `0` within `1/4` of `0` has a point of `ω(0)` in its closure, so `allowedCone 0 0 =
+univ` and `hD` holds with `n = 1`.
+
+*Source.* FS110-W-MERGE (`plans/FS110-N-proof.md` l. 528): "the result is a full a.e.-proper colouring …, **types only shrink**, new vertices are
+cubic with distinct colours, and no other vertex's `D_c` changes" — types are vertices' multicolours; inside the disc the only vertex is `v`
+(`ρ` below the distance to every other vertex, § 2.7's clearance).
+
+*Fix.* `F'.coloursAt v ⊆ F.coloursAt v` in place of the clause — the form `exists_shave` and `exists_rayMerge` already state; off the closed
+disc the inclusion is `AgreesOff`'s, and the rim is the next clause's. **Who:** the moves' implementer (FS131-IM2, `fs131-w4m`) in both copies
+under a ruling, re-running `tools/fs131_im_statements.py`. Nothing proved reads the clause (grep across the five branches). Rank: high — it
+sits on the moves lane, wave 4's longest path, and wave 5's `exists_red`/`exists_terminal` compose the moves.
+
+The other clauses of `exists_merge`, checked: the rim clause (new rim points are corners or cubic with distinct colours: the merged `c`-region
+and an old sector, or the merged region and the two sides of an old arc — at most three colours, none repeated) holds; the `D_c` clause
+(`∀ v' ∉ B̄(v, ρ), allowedCone` unchanged) holds for `ρ` chosen off the finitely many `|v′ − v| − 1` at vertices `v′` whose `c`-sector lies in an
+angle below `π` (at any other point a new contact on the rim would make a gap point unclear, against the merge's clearness).
+
+### 3.2 The definitions, each against its source
+
+| definition | source | adversary tried | verdict |
+|---|---|---|---|
+| `frameX`, `frameY`, `framePt`, `tanHeight`, `TanAbove`, `TanBelow`, `curvDown`, `curvUp`, `dot` (Basic 38–72) | FS110 N4-2's frame and curvature bookkeeping (`f(λ) = λ/(1 + λ)`, `f̃(υ) = υ/(1 − υ)`) | spec examples at `α = 0` (Basic l. 609–632) | M |
+| `hornSet` (Basic 59) | "the rows' `{κ₁x²/2 < y < κ₂x²/2, x > 0}`, exactly" | the exact circle form in place of the second-order one: every boundary arc is a circle or a line, so it is exact | M |
+| `shadow` (Basic 76) | "`Sh(T) = {z : ω(z) ∩ T ≠ ∅}`" (FS110 N4-2) | none | M |
+| `IsClear` (Basic 83) | "`z` may be recoloured `c`" | none | M |
+| `IsSector`, `sectorsOf`, `HasSectors`, `HasDegree`, `HasRepeatedColour`, `IsCubicTrichromatic` (Basic 89–105) | `s_c(v)`, the number of `c`-sectors (FS110 N4-2 setting); "cubic trichromatic": three colours, one sector each | a pinched tile (one tile, two sectors at `v`): counted as a repeated colour, as `s_c(v) ≥ 2` reads it; infinitely many sectors: impossible (local finiteness); a phantom arc: see 2.4 a | M |
+| `IsHorn`, `IsFlankAbove`, `IsFlankBelow` (Basic 109–117) | "`c` has a horn `H` along `+a` at `v`, between arcs of upward curvatures `κ₋ < κ₊`; the tile directly above `H` has colour `g`, directly below `h`" (N4-FLANK's setting) | a flank colour equal to `c`: admitted (the bounding arc is then a phantom arc); in `ShaveAvailable` this makes a shave available trivially, which only strengthens `IsStuck` and `Terminal` (2.4 a), and IM1 found the cases `g = c`, `h = c` provable in `exists_shave` | M |
+| `IsContact`, `InType`, `OutType`, `allowedCone` (Basic 124–137) | N3-CONF: "`w ∈ cl(C_c°) ∩ ω(v)`"; `D_c(v) = ⋂_in {d·e_w ≥ 0} ∩ ⋂_out {d·e_w ≤ 0}` | a contact with tiles of both types: impossible in a valid map (`contact_inType_or_outType`); contact arcs: every point of the arc is a contact, as the source's intersection reads | M |
+| `MergeAvailable`, `RayAvailable`, `ShaveAvailable`, `DoublyShadowed`, `TerminalOn`, `Terminal`, `IsStuck` (Basic 143–174) | W-MERGE's "if `int D_c(v) ≠ ∅`"; N4-RAY's "two `c`-horns along `+a`"; N4-SHAVE; N4-STUCK's hypothesis | MERGE-RAY at unit-arc bounds: the middle region's arcs lie strictly inside `(−1, 1)` (FS112-N-proof row 7, W3), so the precondition is the move's; SHAVE semantic (planner's § 2.2 choice, carries N4-FLANK into `shaveAvailable_of_not_doublyShadowed`) | M |
+| `InContact`, `OutContact`, `BothKind`, `Inert` (Basic 179–190) | `data/fs112/claims.md` § 0: "in-contact — `s_in ∈ P_cl(P)`; out-contact — `s_out ∈ P_cl(P)`; both; inert — neither" (in- and out- not exclusive) | none | M |
+| `radiusTwoArc`, `IsR2Arc` (Basic 193, 197) | "(R2): `P` carries the outer side colour, not the inner, and an inner-colour tile runs along the radius-2 circle about `P` over all of `α`" (`plans/FS112-N-proof.md` l. 243–245) | several inner-colour tiles covering `R₂(ᾱ)` in closure in place of one tile "along" it: admitted; the consumers read only that the far antipode is in the inner colour's closure with out-type tiles (`flankQ_upper`) and that the centre lacks the inner colour (`c_double`) | M-W |
+| `Condition5`, `Condition6` (Basic 205, 210) | S–V's words, read on arcs | presentation dependence (QA1's D5) | M (known D5) |
+| **`InMK`** (Basic 214) | "`𝓜_K`: … at most `K` circular or straight arcs per tile, arc radii at least `1/K`, at most `K` tiles per unit disc" (`plans/FS107-derivation.md` l. 11) | a periodic design with `K` tiles per unit disc each of `K` arcs: in `𝓜_K`, but has up to about `K²` arcs meeting a unit disc, so not `InMK K`; conversely `InMK K` bounds tiles per unit disc only by the arrangement count | **F (minor, QA3-2)**: the class is `𝓜_K` up to `K ↦ O(K²)`; no theorem uses it (one spec example) |
+| `AgreesOff`, `RingArcsWithin`, `IsCoveringPair` (Basic 223–233) | "no unit arc created" (FS112-WALK); covering pair in the union sense (FS110 § 9 item 1) | none | M |
+| `pseudoColours`, `IsLeavingCentre`, `leavingInner`, `leavingOuter` (BaseSteps 37–49) | S–V Def. 7; "the centre of a unit arc with endpoint `u`" | a unit arc of `ω(q)` through `u` (not ending there): its sub-arc ending at `u` makes `q` a leaving centre — the planar-graph sense (an edge through a vertex is two edges ending there) | M |
+| `StripHolds` (BaseSteps 53) | CB D2: "every tile point of `N_e` strictly on side `σ_e` of `Ω` has colour in `{1,2,3}`" (`plans/FS110-CB-verification.md` l. 107–109) | none | M |
+| `MIn` (BaseSteps 58) | CE's AL: "some tile of a colour in `M` has `x` in its closure and has interior points strictly inside `Ω` arbitrarily close to `x`" (`plans/FS110-CE-verification.md` l. 179–180) | the class form: local finiteness puts one tile at `x` | M |
+| `multicolour`, `AeProperRegions`, `closedSquare`, `IsRegion` (SVMap 417–494) | D-VMC, D-AEMAP region-only | overlapping classes allowed (not in the source): only widens, and TS-T is proved over it | M-W |
+| `r2Contacts` (UnitArc 2639) | "`C₂(ᾱ)`" (N2-TAN) | none | M |
+| `reul` (UnitArc 1040) | "`Reul(P, A, B)`" (L60 audit) | none | M |
+| `rayParam`, `rayPt`, `farSideAbove`, `farSideBelow`, `germArc`, `rayLower` | geometric helpers; `germArc`'s carrier proved | — | M |
+| constructions (`bowtie*`, `sevenBrick*`, `brickCorner*`, `cusp*`, `halfDisc*`, `l60*`, `iso*`) | models | QA2 § 3.1 (satisfiability), YB3's exact fragment for the bowtie | sampled, not censused |
+
+**Count: 58 definitions read (constructions apart); 56 match; 1 minor finding (`InMK`); `Condition5`'s known D5.**
+
+### 3.3 The statement clauses that restate a source in a Lean idiom (beyond QA2's stage 4)
+
+QA2 read wave 4's 29 skeleton rows against their statements at `f1f26a8a` (15 same, 8 stronger, 6 weaker, all filed). I re-read them for idiom
+changes, and the statements added since (`Contact`'s and `Moves`'s moves, `stuck_structure` as proved):
+
+| statement | idiom | verdict |
+|---|---|---|
+| `exists_merge`, `exists_merge_aux` | "types only shrink" as a pointwise inclusion over every point off the rim | **F (QA3-1)** |
+| `exists_shave`, `exists_rayMerge` (and `_aux`) | "no colour is added at `v`" as `F'.coloursAt v ⊆ F.coloursAt v`; rim clause; `HasSectors v c n` | M |
+| `bend_toward`, `bend_away`, `bend_away_whole` | "bends" as "removed as an arc of `ω(P)`"; only `c′` (resp. `c`) gains points, inside (resp. outside) the unit disc near the arc | M (the lens near an end may hold a third colour, which only loses points; allowed) |
+| `stuck_structure` (proved, `f975677b`) | the sides clause in items 251–252's form (b); (iv) omits "every tile at `N` meeting `B̄(v, 1)` has colour `r`" and the tangency of `h`'s two sectors | M (K for the sides clause); the omissions only weaken |
+| `stuck_chain` | N4-PROP's "as in N4-STUCK with cone colour `a_k`" read as `IsStuck` | M-W |
+| `woodallCone` | "every `c`-sector is a cusp horn" as "every sector at radius `r` equals some `hornSet … r`", curvatures inside the `∀ r` | M (the curvatures are fixed by `S` for small `r`: shrinking `r` restricts a horn set to a horn set) |
+| `flank_shadows`, `shadow_farSide_*` | N4-FLANK's "below the circle of largest curvature `σ_g`" as an iff on the horn near `v`; "an absent shadow is `σ_g = κ₁`" | M |
+| `lock` | "touches … from outside `B(P, 2)`" as "near `P + 2e(θ)` the tile misses `B(P, 2)`" | M |
+| `n2_sign` | "every point `≠ P` of a side-colour tile" as every point of the side colour's class (interior points) | M (`P` is never an interior point of a side colour in a valid map: its unit circle holds the arc's interior) |
+| `l60_eq_third` | "each end is a vertex carrying a third tile" as "a tile with a cone direction strictly in the open half-plane facing away from the other end" | M (the inner and outer tiles' cones fill exactly the closed facing half-plane, `l60_eq_corners`) |
+| `a4six` | "total length at least 60°" with `arcLength = volume` restricted to `[0, 2π)` | M (the restriction makes the periodic angle set's measure the arc length) |
+| `nb4p` | "in the closure of an arc" as `OnRingArc` (closed arcs) | M (`Γ` is closed in the domain) |
+| `pair_i` | `h3 : dist u₁ u₂ < 3` (ruling 258) | K |
+| `fail_colours` | "exactly" as "only" | M-R (planner's reading, § 8.2) |
+| `lemmaL`, `exists_three_le_multicolour`, `ts_t` | FS106-L, TS-T | M; `ts_t_trichromatic`, `ts_t_degree_three` are item 142's (K) |
+| `n4_fin`, `ray_chain`, `exists_oneSided_chain`, `rayLower_pencil` | FIN's strict bounds (with unit arcs, FS112-END keeps a bi-infinite chain's bounds strict) | M |
