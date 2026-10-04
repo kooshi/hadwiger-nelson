@@ -1,0 +1,17 @@
+{
+ "base": "/home/kooshi/source/lean-dir/data/search/2026-10-03/row4/race-sb/gamma19-k5-g2-sb.cnf",
+ "vars": [
+  322,
+  467,
+  7,
+  1512,
+  1557,
+  1582,
+  1437,
+  92,
+  392,
+  347
+ ],
+ "cubes": 1024,
+ "rule": "cube i = base + units (+v_j if bit j of i else -v_j), appended after the base clauses"
+}
