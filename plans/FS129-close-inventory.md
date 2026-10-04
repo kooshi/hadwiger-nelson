@@ -547,3 +547,31 @@ One line per item with its source; no narration. Each line is ticked done or dec
      "partly"; a prior-art gate over about 60 statements is a job of its own. Default: the debt stays recorded as owed in each entry, and a
      prior-art gate runs before any of these is claimed as new or published (Workflow 3.1's publication rule). Alternative: a prior-art job now,
      after FS-129 is Derived.
+141. **FS129-Z2 reported DONE** (`data/fs129/reports/FS129-Z2.md`; commits `eb922f9f` … `6424635e`, nine, all present; ≈505k by the harness).
+     The index corrected beside its originals (edges 1,330 → 1,315; cycles 45 → 30, 2 in lane R; the Lean order 197 → 178, 166 on first routes, the
+     readers' sorts alone 171; longest chain 13 → 10); the where-else column (97 theorems, 200 sites — lane A 4, lane R 93 — and 28 near misses;
+     `data/fs129/index/where-else.md` lists 6 ledger rows, 23 sites, 13 on row 66); FS-130 minted (`plans/STUB-bicycle-windings.md`, unranked); the
+     O1-OUT-for-valid-maps lead placed in FS-115's bearing section; bearing lines and dated notes in nine open stubs (FS-104, -115, -117, -120, -122,
+     -123, -124, -125, -126); five dated notes on non-derivation records (items 59, 96); every registered prediction scored (Poros's six binary
+     Brier 0.374; the readers' 46 binary Brier 0.149 — lane A 0.102, lane R 0.192); drafts for the front page (`plans/FS129-Z2-record.md` § Drafts
+     for the front page: ledger rows 149–154 and row 121's Where cell; the "Last updated" line, the open-milestones line, item 31, one sentence of
+     the theory paragraph; grokking instances for G49, G83, G87; a proposed G92; one `[Falconer1981]` cell; Proof Atlas nodes QFREE, QPRUNE, TOP5)
+     and FS-123's banner (§ Stage 4). **Keryx's receipt**: `python3 tools/fs129_z2_index.py --check` re-run — "edges 1330 -> 1315 … cycles 30; Lean
+     order 178 (166 on first routes) … FS111-C-HULL-SO dependents 0; FS121-D4-HOLE dependents 0"; the drafts section and the banner read.
+142. **Ruling — Poros's A7 scored "not met", strictly** (Z2 held the definition): A7 as registered is "a held mechanism that bore on a step a
+     milestone worked, and was not applied there" — a step worked for rounds that a held mechanism would have emptied. The near kin (V6-HUG's
+     identity re-derived at FS-116 after FS-114 had it unnamed; FS110-A3-HOLE's GAP answered later without a link back, by a result not yet held
+     at FS-110; FS84-S1e re-derived uncited inside the audit; CLOSURE proved three times) are re-derivations and citation misses: the mechanism was
+     applied, under another name, or was not yet held. Alternative: count them, and A7 flips to met. Why: the registration names the FS116-Y4 kind,
+     and scoring a looser reading after the fact would fit the rule to the reports. Confidence: medium. Both readings recorded.
+143. **Tool defect** (Z2): re-running `tools/fs129_index.py` rewrites `data/fs129/index/theorems.jsonl` and drops `where_else` and `near_misses`;
+     re-run `tools/fs129_z2_whereelse.py` after it (noted in `data/fs129/index/README-corrections.md` § 5). 183 ambiguous prefix candidates stay
+     unresolved, listed. **A pointer from the index's README to `README-corrections.md`**: for FS129-L1 (the Clerk) to add, one line.
+144. **Prior-art debt, new** (Z2): the "2005 exposition" said in `plans/FS103-M-derivation.md` § 1.2 to give Falconer's Lemma 3 with a positive-measure
+     set of translations is identified nowhere in the record; the almost-everywhere form of FS-104 route (0) waits on it. With item 140.
+145. **Search request queued**: C-T-BIKE (`plans/STUB-bicycle-windings.md`) — scan the arc offsets (φ, ψ) of FS106-TS's shared-colour arc pattern at
+     each d ∈ (1, 2); `plans/SEARCH-QUEUE.md` row 6.
+146. **For FS129-P1** (Z2's questions for Poros): rank FS-130; choose a carrier for the map step at five (item 26; drafted as row 154); rank 5's
+     "meet nowhere below the answer" (item 58); Poros's FS-128 card wording (item 43); the demand list's J10 (item 138); a partial counterexample
+     to the §IQ rule — the audit's results came from the card's existence form, step by step, and neither pass-1 reader tallied the steps that
+     need a new kind of input (so the card's hunch — at least a third of the steps need a new kind — went unscored).
