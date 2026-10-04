@@ -166,3 +166,6 @@ reason by the close.*
 23. **Question — does FS106-COMP's ⟸ direction need FS106-SUP's attainment clause?** (K2, § 4.2): SUPK, merged in place of SUP, drops attainment at
     general k (its not-claimed line); if QB § 2.7 reads it, the merged form lost a clause COMP needs. Routed to FS131-K2b, which reads QB § 2.7 and, if
     attainment is used, states it as carried content of SUP's merged row.
+24. **Brief FS131-K2b, wave 2 finished** (`debruijn`, Opus; `data/fs131/briefs/FS131-K2b-wave2-finish.md`): the six example rows, the obligation-modeling
+    pass over all 28, item 23's question, the handoff brought to 28 rows; continues K2's record on `fs131-w2`. Gated PASS after one fix (its quotation's
+    source lives on the branch; the source line now names the worktree's copy). Source: this commit.
