@@ -159,7 +159,7 @@ theorem AeColouring.exists_fill (c : AeColouring k) {j : Fin k} {x : ℂ} {η : 
       have t1 := dist_triangle p x (p + e θ)
       rw [dist_comm x (p + e θ)] at t1
       linarith
-  · exact (c.unitPairsNull i).mono ssdiff_subset
+  · exact (c.unitPairsNull i).mono sdiff_subset
 
 /-- **FS111-M2-COV**: a `k`-tuple of measurable sets is a maximal admissible cover iff each coordinate is a MUA set and
 their union has full measure. -/
