@@ -1086,3 +1086,22 @@ reason by the close.*
      LEB's landing; (1292, 5) → (1794, 5) at wave 3's). Keryx's receipts, read before this commit: `gate_report.py axioms` on
      `build/gate/axioms/20261004T141303Z-4086598.log` — "match (clean, purchases and imported compared)"; fact audit `--base c6f8d56d` — "AUDIT PASSED (0
      failure(s))". Open for the tool's owner (T3's question): `GATE_RE` reads only (clean, purchases), so a change in the imported count alone passes it unseen.
+161. **FS131-E3 done, harness ≈ 470k** (report `data/fs131/reports/FS131-E3.md`; record `plans/FS131-E3-derivation.md`; commits `d21f2998`, `69660332`, `64fa012f`, `81e35157`):
+     **Q1 as stated FALSE** (E3-PHANTOM [hand, one mind]; E3-Q1 [derived]; item 158). **Q1 repaired in the form the chain reads — TRUE** (E3-BALL [derived,
+     one mind]): every valid plane arc map has a valid plane arc map in which every point of `closedBall 0 R` of three or more colours has a picture in
+     **NiceAt** form (positive-angle sectors carry distinct colours; every horn sits between two distinct colours), Condition 5 kept and not required of the
+     input; finitely many merges, each by **E3-W** (Woodall's criterion with an explicit radius, by the sagitta of a unit circle in a small disc: two open ray
+     segments of a unit-pair-free open set less than π apart clear the wedge up to radius `r₁ cos(α/2)/2`) — no contacts on the unit circle, no Condition 5, no
+     Woodall cone. Woodall's horn-only conclusion everywhere: GAP, not needed by the chain (it would need FS110-W-MERGE's contact cone past Condition 5). **Q2: no
+     modification-free route** (E3-FAKE [hand]: at a vertex reading A, B, A, C, Townsend's hypothesis fails on arcs of positive length). The chain needs NiceAt
+     only on `closedBall 0 3`, only at points of three or more colours (E3-CHAIN [derived]); `exists_sectorsAt` drops out of the chain. Lean drafts in its § 4.1
+     (`NiceAt`, `WoodallMerged K`, `WoodallNormal K`; `exists_woodallMerged … (R : ℝ)`, `NiceAt.normal`, `false_of_four_le_sectors` with `hN : WoodallNormal
+     (sphere v 1)`, `aeMap6_normal`, `aeMap6_merged`, `aeMap6`), with non-degenerate inhabitants (`halfDisc.NiceAt 0`, a new `threeSectorDisc : ArcMap 3`) and a
+     phantom-picture adversary that would have caught item 158. Price: 900–1,400 lines once `localSectors` lands, against 1,500–3,000 for the horn-only form.
+     Predictions P1–P4 met. Keryx's receipts: derive gate on the record — "GATE: PASS (0 failures, 3 warnings)", three controls each firing on its fault;
+     `tools/fs131_e3_phantom.py` prints `honest=True:ok merged=True phantom=True:ok phantom_merged=False` (the phantom picture breaks the ∀-form). Slip (E3's):
+     its push published T3's two local commits, unchanged. **Rulings on its held items**: (a) **NiceAt adopted** as the ∃-form of `WoodallMerged` (and
+     `WoodallNormal K`), localized as E3-CHAIN reads — alternative, Woodall's horn-only ∃-form; why: the chain reads NiceAt, it is proved and cheaper, the
+     horn-only form is a GAP; confidence high. (b) Woodall's horn-only conclusion everywhere is **not wanted now** — no consumer; recorded as an optional stub
+     (FS110-W-MERGE past Condition 5) for whoever needs it. **Next**: a planner pass on Woodall's chain (FS131-W3) applies E3's § 4.1 drafts and states E3-BALL's
+     children with leaf plans, then an implementer. Credit E3: a definition defect that made a proved-looking chain vacuous, found before it was relied on.
