@@ -1829,6 +1829,35 @@ the interface, measurability on `R̂`, and the local bound `L(F)` with Mathlib's
 #print axioms HadwigerNelson.SqrtFortySeven.countable_F47
 #print axioms HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain
 
+/-! ## FS-131 (job FS131-K1) — the foundation of the regularity wall's plane
+
+`Plane/Basic.lean`, `Plane/UnitPairs.lean`, `Plane/AeColouring.lean`, `Plane/ArcMap.lean`: directions and ring points,
+sets with null unit pairs and density points, measurable colourings proper at almost every unit pair and `χ_m⁰`, arc maps
+(valid maps and fragments, tiles, `P_cl`, Siamese pairs, simplicity). Definitions and their spec lemmas; no backlog row.
+No native evaluation. -/
+
+#print axioms HadwigerNelson.Plane.norm_e
+#print axioms HadwigerNelson.Plane.e_eq
+#print axioms HadwigerNelson.Plane.e_add
+#print axioms HadwigerNelson.Plane.e_add_two_pi
+#print axioms HadwigerNelson.Plane.dist_ringPt
+#print axioms HadwigerNelson.Plane.ringPt_mem_sphere
+#print axioms HadwigerNelson.Plane.unitPairSet_mono
+#print axioms HadwigerNelson.Plane.UnitPairsNull.mono
+#print axioms HadwigerNelson.Plane.unitPairsNull_of_dist_lt_one
+#print axioms HadwigerNelson.Plane.not_unitPairsNull_ball_two
+#print axioms HadwigerNelson.Plane.densityRatio_univ
+#print axioms HadwigerNelson.Plane.chiM0_le
+#print axioms HadwigerNelson.Plane.ArcMap.interiorPts_of_arcs_empty
+#print axioms HadwigerNelson.Plane.ArcMap.const_interiorPts
+#print axioms HadwigerNelson.Plane.im_eq_zero_of_mem_segment
+#print axioms HadwigerNelson.Plane.mem_segment_of_im_eq_zero
+#print axioms HadwigerNelson.Plane.halfDisc_arcs_union
+#print axioms HadwigerNelson.Plane.halfDisc_mem_interiorPts
+#print axioms HadwigerNelson.Plane.halfDisc_I_mul_mem
+#print axioms HadwigerNelson.Plane.halfDisc_component_upper
+#print axioms HadwigerNelson.Plane.halfDisc_component_lower
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

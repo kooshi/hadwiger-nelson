@@ -244,3 +244,62 @@ other two C116 rows, FS112-L60 and FS114-N7-3T, are excluded). V6-HUG keeps its 
   for a backlog declaration only if the result is inside the backlog — so it is permitted, but formalizing it is cheaper than naming it).
 
 Findings sent to Keryx with this stage: F1 (R1), F2 (R13), and the prior-art debt of § 3.2.
+
+## Stage 5 — SAVED: the foundation (`debruijn-domain-modeling`, invoked fresh)
+
+Keryx ruled R1–R13 as proposed (`plans/FS131-close-inventory.md` items 5–9, commit `17cc301b`), with two conditions now in the CSV's reasons:
+FS116-V6-COUNT keeps its last step in its sector form (SR3 § 2.1: the two tippers of `y_k` and of `y_{k+3}`); TC1-STANDING-FIVE's MR clause takes
+row 123's chain as the named hypothesis `Row123Chain`, from outside the backlog (§ 7.4 lists every such hypothesis).
+
+### 5.1 The model, and why this shape
+
+Four modules under `Proofs/HadwigerNelson/Plane/`, on `main`, sorry-free, in the gate:
+
+| module | holds | the modeling decision |
+|---|---|---|
+| `Plane/Basic` | `e θ = exp(θi)`, `ringPt p θ = p + e θ` (the ring point `r(θ)` of `ω(p) = Metric.sphere p 1`), `arcLength` (Lebesgue on `[0, 2π)`, a finite measure) | **angles are reals**, not `Real.Angle`: the rows reason with intervals of angles (cones `[θ₁, θ₂]`, "just clockwise of `r(ψ)`"), which `ℝ` orders; periodicity is a lemma. `σ` is parametrized by the angle, so every "`Leb ⊗ σ`-null" is a plain `Measure.prod` statement |
+| `Plane/UnitPairs` | `unitPairSet A`, `UnitPairsNull A`, `densityRatio`, `densitySet A` (`Ã`), `upperDensityAt A x` (`d̄_A(x)`), `essSupport A` (`supp A`) | **the primitive is one set, not a colouring** (intrinsic: CLOSURE, HULLSET, ID1, M2-INT, M2-ZERO are each about one class; the audit restated them that way). Density with closed balls, matching `Besicovitch.ae_tendsto_measure_inter_div` exactly, so the Lebesgue density theorem applies with no translation |
+| `Plane/AeColouring` | `AeColouring k` (measurable `ℂ → Fin k`, each fibre `UnitPairsNull`), `chiM0` (`χ_m⁰(ℝ²)` as an `ℕ∞` infimum) | a colouring is a **total function**; covers and partial colourings (µ_k, maximal covers) are wave 2's, over the same `UnitPairsNull`. `χ_m⁰` is `⨅ k, ⨅ (_ : Nonempty (AeColouring k)), k` — `⊤` if no `k` works, never a junk `0` |
+| `Plane/ArcMap` | `Arc` (segment, circular arc; `IsUnitArc`), `ArcMap k` (open `dom`, a locally finite set of nondegenerate arcs, `col : ℂ → Fin k` locally constant off them), `Γ`, `interiorPts`, `region`, `IsTile`, `coloursAt` (`P_cl`), `Valid`, `Covers p R`, `IsPlaneMap`, `Siamese`, `NonSiamese`, `IsJordanDomain`, `Simple` | **one structure for valid maps and fragments** (a valid map is `IsPlaneMap ∧ Valid`; a valid fragment on `B̄(p, R)` is `Covers p R ∧ Valid`); **point-set, not combinatorial**: tiles are connected components (`connectedComponentIn`), `P_cl(x)` is the colours whose region has `x` in its closure, so "a vertex of at least four colours" is `4 ≤ (F.coloursAt p).ncard` with no separate vertex notion; **classes are predicates on the one structure** (G86), so Siamese-allowed lemmas and class statements share their objects. The colour is a function on `ℂ` read only at interior points — extrinsic placement, no subtype of the domain threaded through every lemma |
+
+The incidental structure refused: the derivations' own case split into "maps" (FS-110, FS-112) and "fragments" (FS-114, FS-116) — one object with
+a domain; a combinatorial planar map (vertices, edges, faces), which would need the Jordan curve theorem Mathlib lacks to connect to the rows'
+geometry — the rows never need faces, only components and closures; `Real.Angle`; a separate type per class.
+
+What the next waves add, each in its own module (§ 7): wave 2 the partial colourings, covers, `µ_k`, tight/slack/band-proper, saturated and
+`D-NF`; wave 3 the ring vocabulary (arcs of `Γ` on `ω(p)` with their side colours, (Q), germs, change points) and `isOpen_interiorPts`; wave 4 the
+sectors, degrees, cones and `𝓜_K`; wave 7 the combinatorial torus map for route T.
+
+### 5.2 Validation (the seams)
+
+Every definition has a spec example that fails if it drifts, and every structure a later theorem takes has a named inhabitant or a note naming
+its supplier:
+
+- `e`: `e 0 = 1`; two ring points `60°` apart are at distance exactly `1` (`Real.cos_pi_div_three`, `Real.sin_pi_div_three`). `arcLength univ = 2π`.
+- `UnitPairsNull`: a disc of radius `1/3` has null unit pairs; **adversary** `not_unitPairsNull_ball_two` (a disc of radius 2 does not: the pair
+  set holds `B(0, 1/2) × [0, 2π)`, of positive product measure) — the definition is not trivially satisfied.
+- `densitySet`, `upperDensityAt`, `essSupport`: every point is a density point of `ℂ`, none of `∅` (adversary); `d̄_ℂ ≡ 1`; `x ∈ supp ℂ`,
+  `x ∉ supp ∅`.
+- `AeColouring`, `chiM0`: `IsEmpty (AeColouring 0)`, **adversary** `IsEmpty (AeColouring 1)` (its class is `ℂ`, which holds the disc of radius 2),
+  hence `2 ≤ chiM0`. Inhabitant: none is cheap — any finite full colouring is a theorem; FS111-W-SQ9 (wave 2) supplies one at `k = 9`.
+- `ArcMap`: inhabitants `ArcMap.const` and `halfDisc` (the disc of radius `1/3` cut along the real axis, colour 1 above). A valid fragment
+  (`const` on `B(0, 1/3)`); **adversary**: `const` on `B(0, 1)` is not valid (`±1/2`); `halfDisc.coloursAt 0 = univ` (both colours at the cut's
+  midpoint — checks `Γ`, `interiorPts` and closure colours together); `halfDisc.NonSiamese`; **adversary**: `halfDiscMono` (the same tiles, one
+  colour) has a Siamese pair (`halfDisc_component_upper`, `-_lower` identify the tiles as the two half-discs); `const` on `B(0, 1)` is `Simple`
+  (its tile is the disc, a Jordan domain by `closure_ball`).
+
+### 5.3 The gate on this commit
+
+- `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): **OK** — 438 of 438 batches, 5 modules rebuilt (the four
+  and `Proofs`), **0 modules with warnings**, 8 m 2 s (`build/gate/build/20261004T043057Z-1091664.log`).
+- `./scripts/axioms.sh`: **OK — 1257 clean, 11 axiom-free, 5 declared purchases**; the 21 new records all `[propext, Classical.choice,
+  Quot.sound]` (`build/gate/axioms/20261004T043951Z-1129351.log`).
+- `./scripts/vacuity.sh`: **OK**; sites unchanged (`sites=279 vacuous=0 stale=0 declared=3 witnessed=17 generic=257 unknown=2`); declarations
+  7438 → 7557 and refutations-skipped 313 → 314 since the last recorded run (2026-09-26; the 119 new declarations include other jobs' since then;
+  `not_unitPairsNull_ball_two` is the one new refutation); two new `EVIDENCE EMPTY` lines, the two `IsEmpty (AeColouring _)` instances
+  (`build/gate/vacuity/20261004T044008Z-1129846.log`).
+- `tools/check_architecture.py`: exit 0 — 182 module rows, 0 import mismatches (new § 3.11 and its layer-table row).
+
+**Drafts for Keryx** (files I do not write): `CLAUDE.md` § Trust ledger, "1236 clean" → "1257 clean"; `CLAUDE.md` § The gate,
+`declarations=7438 refutations-skipped=313` → `declarations=7557 refutations-skipped=314` (sites line unchanged); the same two numbers in
+`scripts/vacuity-baseline.txt`'s header.

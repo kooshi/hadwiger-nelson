@@ -217,6 +217,7 @@ The library is **1,698 `.lean` files** under `Proofs/`: 82 theory modules (`Proo
 | § 3.5 Where a compulsion can live | § 3.1 Foundations, § 3.2 SAT and the checker, § 3.3 Colouring theory, § 3.4 Seam-field geometry |
 | § 3.6 Arithmetic colourings and planes | § 3.1 Foundations, § 3.3 Colouring theory, § 3.4 Seam-field geometry, § 3.5 Where a compulsion can live |
 | § 3.7 Cell family and bricks | § 3.1 Foundations |
+| § 3.11 The plane of the regularity wall | Mathlib only |
 | § 3.8 Instances | § 3.1 Foundations, § 3.2 SAT and the checker, § 3.3 Colouring theory, § 3.5 Where a compulsion can live, § 3.6 Arithmetic colourings and planes, § 3.7 Cell family and bricks, § 3.9 generated families |
 
 ### 3.1 Foundations: the statement, graph presentations, exact geometry
@@ -512,6 +513,20 @@ Emitted by `tools/` (untrusted) and never edited by hand. Every `Cnf/` and `Half
 - **Diagnostics are downstream.** None of the `#eval`-only modules is an ancestor of a certificate family, so rewriting one re-checks nothing: `AssemblyDiagnose`, `PackedDiagnose`, `Sat/Diagnose` (imported only by `Instances/DeGrey/Controls`), `ForcerDiagnose`, `CriticalDiagnose`, `NarrowFanDiagnose`, `Instances/CoreSpindle/Diagnose`.
 - **Theory modules that import an instance**, each for a concrete object its proof uses: `FieldWall4` imports `Instances/SpindleBound`, `Pigeonhole` imports `Instances/Triangle`. `FieldWall4` uses the spindle's edge list and the kernel-decided `moserSpindle_not_colorable_three`, not the certificate routes, and axioms are counted per declaration, so the import buys nothing (§ 5).
 - **A dangling citation.** The doc strings of `DistanceGraph` and `Homogeneous` cite `Instances/OneTwo`, the intended home of a certified {1, 2} six-forcer; that certificate was priced and deferred (ledger row 44) and the module does not exist.
+
+### 3.11 The plane of the regularity wall (FS-131)
+
+The foundation the Lean backlog's rows are stated over (`plans/FS131-kernel-plan.md` § 5): the plane `ℂ` with its directions,
+Lebesgue measure and arc-length; one set with null unit pairs and its density points; measurable colourings proper at almost every
+unit pair; and arc maps — valid maps and valid fragments on discs. Point-set throughout: tiles are components, `P_cl` is closure
+colours, classes (`NonSiamese`, `Simple`) are predicates on one structure. Each later wave of FS-131 adds its modules here.
+
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Plane/Basic` | The direction `e θ = exp (θ i)` (`norm_e`, `e_add`, `e_add_two_pi`), the ring point `ringPt p θ = p + e θ` on `ω(p)` (`dist_ringPt`), and arc-length `arcLength` on `[0, 2π)` (a finite measure); spec: two ring points `60°` apart are `1` apart. Mathlib only. | — | — | FS-131 |
+| `Plane/UnitPairs` | `unitPairSet`, `UnitPairsNull` (`(Leb ⊗ σ)`-null unit pairs), `densityRatio`, `densitySet` (`Ã`), `upperDensityAt` (`d̄`), `essSupport` (supp); `unitPairsNull_of_dist_lt_one`, `UnitPairsNull.mono`, and the adversary `not_unitPairsNull_ball_two`. | `Plane/Basic` | — | FS-131 |
+| `Plane/AeColouring` | `AeColouring k` (a measurable `ℂ → Fin k` whose classes have null unit pairs) and `chiM0` (`χ_m⁰(ℝ²)`), `chiM0_le`; no colouring with one colour (`IsEmpty (AeColouring 1)`), so `2 ≤ chiM0`. | `Plane/UnitPairs` | — | FS-131 |
+| `Plane/ArcMap` | `Arc` (segments and circular arcs; `IsUnitArc`), `ArcMap k` (a map of an open set bounded by a locally finite family of arcs, colour locally constant off them) with `Γ`, `interiorPts`, `region`, `IsTile`, `coloursAt` (P_cl), `Valid`, `Covers` (a fragment on `B̄(p, R)`), `IsPlaneMap`, `Siamese`, `NonSiamese`, `IsJordanDomain`, `Simple`; inhabitants `ArcMap.const` and `halfDisc` with spec examples: valid and invalid, `P_cl(0) = {0, 1}`, a non-Siamese map, a Siamese pair (`halfDiscMono`), a simple map. | `Plane/Basic` | — | FS-131 |
 
 ## 4. Roadmap
 

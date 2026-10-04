@@ -144,7 +144,7 @@ FS116-RING-TRANSFER-QC,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalcu
 FS116-V6-HUBS,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,Y,"stated in the non-Siamese class without 'simple' (SR3 item 24's route for EMPTY-NS); a step of EMPTY-NS's proof, VACUITY DECLARED (its class is empty by EMPTY-NS)",plans/FS129-SR3-audit.md
 FS116-V6-ANTI,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,Y,as FS116-V6-HUBS,plans/FS129-SR3-audit.md
 FS116-V6-HUG,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,Y,"with its own colour step (V6-GERM), not DOUBLETIP's (cautions C126, C131); stated in the non-Siamese class without 'simple', as SR3 item 24's route for EMPTY-NS needs",plans/FS129-SR3-audit.md
-FS116-V6-COUNT,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,Y,"as FS116-V6-HUBS, with its last step on sectors (SR3 item 24)",plans/FS129-SR3-audit.md
+FS116-V6-COUNT,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,Y,"as FS116-V6-HUBS, with its last step in its sector form (SR3 § 2.1: the two tippers of y_k and of y_(k+3)), the step SR3 found needs no simplicity (ruling R4's condition, inventory item 5-9)",plans/FS129-SR3-audit.md
 FS116-Y2-SIXFRAG,order,formalize,,,3,Proofs/HadwigerNelson/Plane/SixFragment,,,,,
 FS116-Y3-HUBCOL,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
 FS116-Y3-NBTIP,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
@@ -176,7 +176,7 @@ FS121-V5-LOC,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,
 FS121-V5-RAY,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
 FS121-D2-SYM,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
 TC1-SQRT3-DYADIC,order,merged into,FS129-SA1-SQRT3-LOCAL,,2,Proofs/HadwigerNelson/Arith/Dyadic,,,,"SA1 item 7 (the general local form; a conditional seed, caution C13)",plans/FS129-SA1-audit.md
-TC1-STANDING-FIVE,order,formalize,,,10,Proofs/HadwigerNelson/Arith/StandingFive,,,Y,"conditional seed (C13): its unconditional clauses (the field, its places above 2, no usable residue field of size <= 47, so L(F) >= 7) in wave 10; 'given MR, chi(F^2) >= 5' as an implication from row 123's chain, named as a hypothesis (FS-101's)",plans/FS131-kernel-plan.md
+TC1-STANDING-FIVE,order,formalize,,,10,Proofs/HadwigerNelson/Arith/StandingFive,,,Y,"conditional seed (C13): its unconditional clauses (the field, its places above 2, no usable residue field of size <= 47, so L(F) >= 7) in wave 10; 'given MR, chi(F^2) >= 5' as an implication from row 123's chain, taken as the named hypothesis Row123Chain from outside the backlog (FS-101's slot; ruling R10's condition)",plans/FS131-kernel-plan.md
 FS129-OA1-NOPERLAW,comps,formalize,,,2,Proofs/HadwigerNelson/Plane/Stationary,,,,,
 FS129-OR1-LOCALDENSE,comps,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,,
 FS129-OR1-DISCF-NS,comps,formalize,,,9,Proofs/HadwigerNelson/Plane/Classes,,,,,

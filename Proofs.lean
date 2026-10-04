@@ -152,6 +152,10 @@ import Proofs.HadwigerNelson.ThetaPlane
 import Proofs.HadwigerNelson.Instances.SqrtOneSixSeven
 import Proofs.HadwigerNelson.SpectralChain
 import Proofs.HadwigerNelson.Instances.SqrtFortySeven
+import Proofs.HadwigerNelson.Plane.Basic
+import Proofs.HadwigerNelson.Plane.UnitPairs
+import Proofs.HadwigerNelson.Plane.AeColouring
+import Proofs.HadwigerNelson.Plane.ArcMap
 
 /-!
 # Proofs
