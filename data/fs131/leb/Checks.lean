@@ -1,0 +1,29 @@
+import Mathlib.Analysis.Complex.Basic
+import Mathlib.Topology.MetricSpace.Pseudo.Lemmas
+import Mathlib.Tactic.LinearCombination
+-- FS131-LEB: every Mathlib name the two modules use, confirmed at the pin (v4.32.0).
+-- Run: lake env lean data/fs131/leb/Checks.lean (iteration only; not part of the library).
+#check @lebesgue_number_lemma_of_metric
+#check @IsCompact.reProdIm
+#check @isCompact_Icc
+#check @Complex.mem_reProdIm
+#check @Complex.norm_le_abs_re_add_abs_im
+#check @Complex.dist_eq
+#check @Complex.sub_re
+#check @Complex.sub_im
+#check @Set.Finite.isClosed_biUnion
+#check @Set.toFinite
+#check @IsClosed.isOpen_compl
+#check @exists_nat_gt
+#check @div_lt_iff₀
+#check @div_pos
+#check @mul_le_of_le_one_left
+#check @mul_le_mul_of_nonneg_right
+#check @Metric.mem_ball
+#check @Set.mem_iUnion
+#check @Finset.sum_range_succ
+#check @Finset.sum_congr
+#check @Finset.sum_eq_zero
+#check @Finset.mem_range
+#check @Nat.cast_pos
+#check @Nat.cast_le

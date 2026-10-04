@@ -534,6 +534,8 @@ colours, classes (`NonSiamese`, `Simple`) are predicates on one structure. Each 
 | `Plane/Chord` | **FS-131 wave 1.** `ringPt_sub_ringPt`, `dist_ringPt_ringPt`, `dist_ringPt_ringPt_cmp_one` (FS116-V4-CHORD); `twoCirc_identity`, `twoCirc_cmp_one`, `exists_sign_of_equilateral` (FS129-SR1-TWOCIRC); `xcorner` (FS121-D1-XCORNER). | `Plane/Basic` | — | FS-131 |
 | `Arith/NoAffine` | **FS-131 wave 1.** `noAffine` (FS129-SA1-NOAFF-K, carrying FS84-S1-S1e). Mathlib only. | — | — | FS-131 |
 | `Arith/FalconerFan` | **FS-131 wave 1.** `FalconerFan`, `rhombus`, `rhombus_falconerFan`; `falconerFan_hom` (FS129-SA1-FALC-FAN), `falconerFan_chromaticNumber` (FS129-SA1-FALC-DICHO-K). Mathlib only. | — | — | FS-131 |
+| `Topology/SpernerGrid` | **FS131-LEB.** Sperner's lemma on the triangulated square grid with three labels and the square boundary conditions (`exists_rainbowCell`), by the door-parity count: `door`, `Rainbow`, `RainbowCell`, `rowDoors`; the cell identity `door_cell` and the strip step `rowDoors_succ_eq`. Mathlib only. | — | — | FS-131 |
+| `Topology/LebesgueCovering` | **FS131-LEB.** Lebesgue's covering theorem for a closed rectangle of `ℂ` (`lebesgue_covering_rect`, any finite index type) and for the square, in FS-131 wave 4's words (`closedSquare`, `lebesgue_covering_square`, with the four-quadrant model `quadrant_hypotheses`); the wider form `lebesgue_covering_rect'` (a set meeting the left side may meet both horizontal sides); its three-set (cubical KKM) form `exists_mem_inter_three`, by the Lebesgue number lemma, the grid `gridPt` and the least-index labelling `leastLabel`. Hurewicz–Wallman Thm IV 2, `n = 2`. | `Topology/SpernerGrid` | — | FS-131 |
 
 ## 4. Roadmap
 

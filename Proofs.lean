@@ -163,6 +163,8 @@ import Proofs.HadwigerNelson.Plane.UnitAvoiding
 import Proofs.HadwigerNelson.Plane.Chord
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
+import Proofs.HadwigerNelson.Topology.SpernerGrid
+import Proofs.HadwigerNelson.Topology.LebesgueCovering
 
 /-!
 # Proofs
