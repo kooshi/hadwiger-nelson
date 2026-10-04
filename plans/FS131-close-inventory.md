@@ -1736,3 +1736,22 @@ reason by the close.*
      so `fill` might leave a CVB-hole unfilled; the faithful definition (holes as boundary components, or as clusters of complementary components chained by
      touching closures) is a design question for the job that owns `fill`, `IsOuterTile`, `filledGraph` and `cvb_thom_reduced`, read against
      `plans/FS114-CVB-verification.md` § 1.9. Confidence: medium — the fact that would change it: CVB's consumers never meet a cluster (then I5b's repair suffices).
+243. **FS131-I4j handed back at stage 28, harness ≈ 426k** (report `data/fs131/reports/FS131-I4j.md` on `fs131-w4`; branch at `cd0fe492`, checked): its files 14 → 11
+     (UnitArc 5, BaseSteps 6). **[kernel] on the branch, standard three**: FS112-N3-PAIRS's **N3-P′** `pair_P'` (two cubic trichromatic vertices with one
+     multicolour are never at distance 1), **FS112-A4SIX** `a4six`, the ring-arc engine `isRingArc_of_clean` / `exists_clean_subArc` /
+     `exists_isRingArc_of_subset_Γ`, engine 7 `exists_coveringPoint_of_window`, and helpers; `bend_away_whole` proved over `bend_away` (open). Keryx's receipts:
+     build log `build/gate/build/20261004T210939Z-2417914.log` (w4) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `sorry` lines by count
+     UnitArc 5, BaseSteps 6; `data/fs131/i4/axioms-i4j-26.txt` prints `pair_P'` and `-27.txt` prints `a4six` on the standard three (no `sorryAx` in either);
+     `-28.txt` prints `bend_away_whole` with `sorryAx`. Generalizations: the ring-arc engine supplies `IsRingArc` for `pair_ii`, `fail_leavingCentre`, `flankQ_*`,
+     `n3_end` (the plan's engine 5 assumed horns alone would); engine 7 needs no finiteness of Γ on the window. **Possible statement defect, not confirmed**
+     (one mind's reading, I4j's): `flankQ_upper/lower`'s (R2) shadow clause reads more than `IsR2Arc` gives (`R₂ ⊆ cl(region g)` only); I4j reads that the
+     clause still follows via the chart at S′ (Stage 28 step (iii)) — if that step fails, a hypothesis is missing. **Proposal**: a new theorem `localSectors_disj`
+     in `Plane/LocalStructure` (distinct germs never meet at one distance, which `localSectors`' proof establishes), `localSectors` its corollary, statement
+     unchanged; `fail_leavingCentre` needs it.
+244. **Rulings on I4j's held items.** (a) `pair_P'`'s unused binder `h` → `_h` accepted (ruling 185's reasons: a binder name is not part of the type).
+     Confidence: high. (b) `localSectors_disj` accepted as a new theorem in `Plane/LocalStructure` on `fs131-w4` with `localSectors` re-derived from it, statement
+     unchanged; it lands with wave 4. Alternative: a separate lemma re-proving disjointness outside `LocalStructure`. Why: the fact is already established
+     inside `localSectors`' proof, so exposing it costs one rebuild and duplicates nothing. Confidence: high. (c) The (R2) reading: no ruling — the next
+     implementer runs Stage 28's step (iii) and reports at once if it fails.
+245. **Brief FS131-I4k, wave 4's eleventh implementer** (Opus; `data/fs131/briefs/FS131-I4k-wave4.md`, derived by script from I4j's, `LocalStructure` added to its
+     touches for item 244 (b), gated PASS): `UnitArc` and `BaseSteps`' 11 in Stage 28's order. Launched in I4j's slot: 1 (I2n) + 1 (IC4) + 1 (I5b) + 1 (I4k) = 4.
