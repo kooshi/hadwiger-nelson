@@ -280,3 +280,32 @@ radius 3 and no valid six-map of the plane is known; the rows' own model lines s
 **§ 5.1 gains an item 0**, first in order: lay out `row134BaseUA`'s leaves (CB's route D1–D6 by line, CE's R1–R4, CD's Theorem D2, CUSP-BASE, S–V
 Lemmas 3–6, Props. 10, 17–19, Cor. 3, each Condition-5 use replaced as the table says) — or hand it to its own planner job if Keryx places it so — and
 confirm item 2's list against CB and BASE-V. The obligation pass (§ 5.1 item 4) then covers it.
+
+## Stage 7 — SAVED: FS131-K5b's readback (the second planner resumes here)
+
+*de Bruijn, the planner (FS131-K5b), 2026-10-04. Brief: `data/fs131/briefs/FS131-K5b-wave5.md`. Resuming this record (standing rule 2): its last
+SAVED stage is 6 (`git log -- plans/FS131-w5-kernel-plan.md`: `978bdfd4` stage 1, `4cbece6c` stages 2–6); this job continues at stage 7 and redoes
+nothing saved.*
+
+### 7.1 The brief's quotations against their sources
+
+| quotation in the brief | source | result |
+|---|---|---|
+| "1. **State FS112-ROTHEX** (read `plans/FS110-N-proof.md` l. 374, 393 for N2-ROT and N2-HEX; NB3 §1.4 step 10, §2.2 #7): the two ring lemmas with" | this record § 5.1 item 1 | verbatim (truncated, marked) |
+| "5. **Write § 14's handoff** (the form of wave 4's plan § 14): the vacuity carriers (recommendation: **IN** for `IsTerminalMap` and `QROnly` — refutable on" | § 5.1 item 5 | verbatim (truncated, marked) |
+| "(a) **`row134BaseUA` gets its own planner job inside FS-131 (FS131-KB)**, after wave 5's successor planner has stated ROTHEX and BV-HEX, which the walk" | `plans/FS131-close-inventory.md` item 199 (a) (main tree, l. 1405) | verbatim (truncated, marked) |
+| "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors | verbatim |
+
+No mismatch. The brief's paraphrase of items 2–4 matches § 5.1 items 2–4.
+
+### 7.2 The as-given build
+
+`3f7b5a14` under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1747 modules already up to date, nothing built, 5 modules with warnings** (every
+warning `declaration uses sorry`), exit 0 (`build/gate/build/20261004T182304Z-1409474.log`; driver log `data/fs131/k5/build-k5b-asgiven.log`).
+
+### 7.3 What is mine, and what is not
+
+**Mine (§ 5.1 items 1–5):** state FS112-ROTHEX, FS114-BV-HEX (four clauses) and FS114-CVB-THOM with `sorry` leaves, each read back; the
+`debruijn-obligation-modeling` pass over every wave-5 statement with § 4's Mathlib names confirmed by `#check` and § 4 extended to the new rows; § 14's
+handoff in wave 4's form. **Not mine (§ 5.1 item 0):** `row134BaseUA`'s leaves, FS131-KB's; I note for KB where ROTHEX or BV-HEX as stated changes
+what § 4 assumes of the walk.
