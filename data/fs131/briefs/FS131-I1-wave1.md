@@ -84,3 +84,11 @@ Build only from inside the worktree, with the command § 6.1 gives
 lean <file>` is for iteration only — it does not apply the lakefile's options, so it is never evidence that a module is green. One Lean build at a
 time across all trees on this machine. The worktree's `.lake/packages` is a symlink to the main tree's and its `.lake/build` is its own copy; never
 replace that copy with a symlink, because two trees compiling into one build race on the same compiled files.
+
+## Amendment 2026-10-04 (Keryx)
+
+Two planners now run beside you, in the worktrees `.claude/worktrees/fs131-w2` and `.claude/worktrees/fs131-w3`, and also build under the slot.
+"One Lean build at a time across all trees" above is relaxed by `plans/FS131-close-inventory.md` ruling 5: up to two builds from different worktrees
+may run at once when the slot admits them (its ledger admits up to 90 GiB and makes a third wait). Nothing else changes: build only from inside your
+worktree, under the slot, never `lake build`; on exit 75 wait ten minutes and retry. You still start no agents of your own (standing rule 1: delegation
+is one level deep, because Keryx can only review work it knows exists). Your touches are unchanged.
