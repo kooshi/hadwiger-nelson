@@ -21,7 +21,7 @@ that judge the milestone, written before any job).*
 | job | state | where |
 |---|---|---|
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
-| wave 2 (28 rows) | 53 lines left (I2h, item 169); dyadic rows and DISC7 held in the kernel on the branch; **FS131-I2i (Opus) running** to the landing | `.claude/worktrees/fs131-w2` |
+| wave 2 (28 rows) | 46 lines left (item 182: FS106-REM, V0-RESCALE, `χ_m⁰ ≤ χ_CP` on the branch; docstrings done); **FS131-I2j (Opus) running** to the landing | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | **LANDED** (item 157); `localSectors` and the cusp-free four-colour clause **LANDED** too (item 171, `0131aa59`) | — |
 | wave 4 (25 rows) | 36 of 86 proved (item 178: the bridge, SVMap sorry-free, QA2's inhabitants); `lock` clause 3 ruled local (item 177); **FS131-I4e (Opus) running** | `.claude/worktrees/fs131-w4` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | 3 leaves left (item 180: E3-W, the E3-BALL composition, `Basic` sorry-free); **FS131-IWd (Opus) running**; lands after wave 4 | `.claude/worktrees/fs131-ww` |
@@ -42,7 +42,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 |---|---|---|---|
 | FS131-IWd (Woodall's last three leaves; after wave 4 lands: merge, brick-map model, gate, landing; item 181) | Opus | `data/fs131/briefs/FS131-IWd-woodall-merge.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-IWd.md` |
 | FS131-I4e (wave 4 on Opus: `lock`, the bowtie near E, the rest, linter warnings, the landing; item 179) | Opus | `data/fs131/briefs/FS131-I4e-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4e.md` |
-| FS131-I2i (wave 2 on Opus: 53 lines, the owed items, the gate, the landing; item 174) | Opus | `data/fs131/briefs/FS131-I2i-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2i.md` |
+| FS131-I2j (wave 2 on Opus: 46 lines, the carriers, the gate, the landing; item 183) | Opus | `data/fs131/briefs/FS131-I2j-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2j.md` |
 
 
 **Implementers are Opus from now on** (Kooshi, item 137): the four Sonnet implementers above finish on Sonnet; each successor launches with `model: "opus"` (the agent file says so too) and counts one slot.
