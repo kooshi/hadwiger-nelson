@@ -382,3 +382,56 @@ Each quoted with its address; the argument's verdict beside it; corrections draf
 | 3 | `plans/FS129-SR1-audit.md` § 6.2 item 2: "FS129-MR1-DOUBLETIP in place of FS116-V6-HUG (and of FS116-Y4-EMPTY's double-tip step on route 2)" | this record § 2.3 | both are true theorems; the plan in A would formalize EMPTY only in the simple class (DOUBLETIP's step 3 reads a cone interval at the hubs). Keep V6-HUG's colour step for EMPTY-NS |
 | 4 | `plans/FS114-derivation.md` FS114-Y5-PINALL: "except possibly under E1 … or E2"; FS114-Y6-E2RED: "**the only E2 survivor family is S6**"; FS114-K1: "E2's survivor S6" | this record § 1.2 (FS129-SR3-E2ONE) | E2 at a single blade (no E1) is no exception and S6 is empty; the records' exceptions narrow to E1, or E2 at two or more blades |
 | 5 | `data/fs129/sr2/item63-gap-lines.md` (committed: 31 rows, ids shifted) | `plans/FS129-SR2-audit.md` § 4.1 (27 lines in 24 entries) | B; A is the fault run's output (§ 4.1). The clean list is `data/fs129/sr3/item63-gap-lines-clean.md` |
+
+## Stage 5 — SAVED: additions to the list for FS129-L1; expectations scored; hand-back
+
+### 5.1 Additions to the list for FS129-L1 (the Lean backlog's input; brief § Done means 5)
+
+Read with `plans/FS129-SR1-audit.md` § 6.2 and `plans/FS129-SR2-audit.md` § 4.3, which stand except where item 25 below amends SR1's item 2. Numbering
+continues SR2's.
+
+**Formalize X in place of A, B, C:**
+
+23. **FS129-SR3-QFREE-NS** in place of **FS129-OR1-QFREE** and **FS116-S1-QF** — S1-QF is its direct case (non-Siamese, six colours, a four-colour
+    vertex, a (Q)-free ring; no "simple at `p`" step needed); S1-QF's own route (S1-LENS, S1-EXIT, S1-CLUSTER; V4-OUTER, S1-KAPPA's last clause) is a
+    second route. This replaces SR2's item 19 (FS129-OR1-QFREE in place of S1-QF).
+24. **FS129-SR3-EMPTY-NS** in place of **FS116-Y4-EMPTY**, proved on **FS116-V6's route**: V6-HUBS, V6-HUG *with its own colour step* (V6-GERM), V6-ANTI,
+    and V6-COUNT with its last step on sectors (§ 2.1). FS116-Y4-OBST and FS129-OR1-QFREE-CLASS's hypothesis at the non-Siamese class follow.
+25. **Amending SR1's item 2**: formalize **FS129-MR1-DOUBLETIP** for the wider ring classes it serves (FS-124), but **not** as EMPTY's double-tip step:
+    its step 3 identifies the flank tile by a cone interval at the hubs, so an EMPTY routed through it holds only in the simple class (§ 2.3, § 4.3 row 3).
+26. **FS129-SR3-OUTERADJ** in place of **FS116-V6-ADJ**, over FS116-RING-GERM (ii), V6-GERM's neighbourhood form and FS129-SR1-TWOCIRC; V6-ADJ's argument is
+    its last step, formalized class-free (two distinct same-colour tiles holding the two lens arcs beyond a unit pair).
+27. **FS114-Y5-PINALL with FS129-SR3-E2ONE**: formalize PINALL with the exception "E1, or E2 at two or more blades"; FS114-Y5-PIN120's exception narrowed
+    to E2 at the blade two past the `120°` tile *together with* E1 or a second E2; **FS114-Y6-E2RED**'s survivor clause read as "no survivor at a single
+    blade" (S6 empty).
+
+**Do not formalize as stated:**
+- **FS114-Y6-E2RED's** "the only E2 survivor family is S6" as a live case (S6 is empty: E2ONE); its chain clause stands.
+- **FS116-S1-KAPPA's last clause** except as a step of S1-QF's second route: its class (non-Siamese, (Q)-free ring) is empty by FS129-SR3-QFREE-NS, and its
+  GAP under reading L is moot.
+- No other result this job reached is empty; SR1's and SR2's lists stand.
+
+### 5.2 Registered expectations, scored
+
+| registered (`data/fs129/sr3/expectations.md`, and § 1.1 for (d)) | outcome |
+|---|---|
+| (a) a held result kills a residue, P = 0.30 | **yes** — S6, by FS114-Y5-ALT's parity (not by TWOCIRC, which is null at all three) |
+| (a) residues killed, 0.5 (0–2) | **1** (S6), and one of the wrap's three sites closed with it |
+| (b) a wider V6-ADJ derived, P = 0.40 | **yes** — FS129-SR3-OUTERADJ, and without simplicity |
+| (b) if not derived, stalls at the pinning (0.65) | moot — the pinning is by the ring's germs (V6-GERM) |
+| (c) answered elsewhere with no link back, 2 (0–4) | **3** |
+| (c) answered in place, 2 (0–4) | **3** |
+| (c) open, 4 (2–7) | **3** |
+| (c) a held result shown false, P = 0.10 | **no** |
+| merges, 2 (0–5) | **3** — QFREE-NS ⊇ OR1-QFREE and S1-QF; EMPTY-NS ⊇ Y4-EMPTY; OUTERADJ ⊇ V6-ADJ's use |
+| weakenings derived as entries, 1 (0–3) | **3** — EMPTY-NS and QFREE-NS ("simple" dropped); OUTERADJ (V6-ADJ's class and its "hug" hypothesis dropped) |
+| vacuity additions, 0 (0–2) | **0** new empties; the receipts of `C_Γ`, `C_Q` widened (§ 4.2) |
+| records that disagree, 2 (0–4) | **5** (§ 4.3) — above the range |
+| this job finds a held result false, P = 0.08 | **no** |
+| all named items reached, P = 0.75 | **yes**, with (d) |
+| (d) the chain reads "simple" at `p` alone, P = 0.40 | **yes, and less**: on V6's route it reads it nowhere |
+
+Brier on the six binary predictions ((a) 0.30 → 1; (b) 0.40 → 1; (c) false 0.10 → 0; false 0.08 → 0; reach 0.75 → 1; (d) 0.40 → 1): (0.49 + 0.36 + 0.01 +
+0.0064 + 0.0625 + 0.36)/6 = **0.215**. The misses all lie one way: the three "does a held result reach further?" questions were priced below even and all
+landed — the counter-priors' measured direction. Every landing came from a held result applied around a structure its record read one piece at a time
+(ALT around the cycle of pockets; V6-COUNT's last step around the cycle of sectors; DOUBLETIP's pairs exchanged).
