@@ -678,3 +678,17 @@ One line per item with its source; no narration. Each line is ticked done or dec
      and left the paragraph's stale FS-129 clauses unruled until F1 stopped on them.
 169. **Atlas defect on `main`, pre-existing**: three atlas facts (R134, FS124, the "publish" note) already fail the checker on `main` — moved by the
      Workflow 3.1 rewrite and the FS-116/FS-121 filing. Fixed in F1's branch by R2; the atlas has not been republished since those changes.
+170. **FS129-F1 reported DONE** (branch `fs129-filing`, last commit `a8e6787f`): R1–R7 applied; every gate re-run and passing. **Merged to `main` as
+     `1622cf48` (`--no-ff`) — FS-129 is Derived.** **Keryx's receipt**: the branch's diff read (CLAUDE.md's units, ledger rows 149–154 present);
+     on `main` after the merge, `tools/claude_md_fact_audit.py --base f411553f` exit 0 (CLAUDE.md 51,126 of 80,000; SKILL.md 170,280 of 200,000)
+     and `tools/viz_proof_atlas_check.py` "checked 212, failed 0, errors 0".
+171. **Rulings on F1's last CHECKs**: the ALLOW entry for `plans/FS129-cross-application-audit.md` (R4 replaced the sentence naming it; the file
+     stays) is kept as F1 wrote it; the atlas nodes FS128 and FS120 keep their old labels until the next atlas update (one line each, item 172);
+     `data/rerank-2026-09-27/rk_mirror_check.py` is retired (it prints RETIRED, Workflow 3.1) — not a gate.
+172. **Open — the Proof Atlas republish**: `visualizations/proof-atlas/index.html` is built and checked but not looked at (README step 5's
+     headless look per theme was not done), and the artifact (https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx) has not been republished since
+     before the FS-116/FS-121 filing. Next: the headless look, the FS128/FS120 labels, then Keryx republishes. Not blocking the Lean backlog.
+173. **FS-129's state for the close** (Closed when its compositions pass the Lean gate, in the Lean backlog's session — item 4): every inventory
+     line is ticked done or declined at the close, not at Derived. Held for Kooshi, with defaults: the order of work (item 163; default the Lean
+     backlog, then FS-124); the 46 GB of row-4 proofs (item 151; default kept, ignored); the finite-graph search (`plans/SEARCH-QUEUE.md` row 3;
+     default held); a blind second mind on J1 (item 56; default no); the prior-art debt (item 140; default owed until publication).

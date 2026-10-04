@@ -1,6 +1,6 @@
 # Session handoff — 2026-10-03: FS-129, the cross-application audit, is Opened; its first jobs launch from a fresh session
 
-*Rewritten 2026-10-03 22:38 UTC by Keryx; § 1 items 2–3 rewritten the same evening. Current state only; the day's history is in git, in the close inventories and in
+*Rewritten 2026-10-03 22:38 UTC by Keryx; § 1 items 2–3 rewritten at FS-129's Derived filing, the same night. Current state only; the day's history is in git, in the close inventories and in
 `plans/WORKFLOW3-lane-edits-proposed.md`. A successor arriving with nothing reads this first.*
 
 ## 1. Read first
@@ -8,22 +8,22 @@
 1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow` and says **Workflow 3.1**. If it does not, the
    session's output style predates the refinement: ask Kooshi to restart it before launching anything. **`/clear` is not enough** — it
    reloads `CLAUDE.md` but not the output style (`plans/FS129-close-inventory.md` item 2).
-2. **FS-129, the cross-application audit, is Opened and running** (Kooshi: "You are go for the audit.", 2026-10-03). Read, in order: its
-   plan (`plans/FS129-cross-application-audit.md`; Kooshi's decisions and his note on roots verbatim in § 1), its inventory
-   (`plans/FS129-close-inventory.md`, items 1–74: every result, ruling, receipt and routed item, with sources), and its stub
-   (`plans/STUB-cross-application-audit.md`, with Poros's card).
-3. **Where it stands** (updated 2026-10-03, late evening; the inventory's items 1–114 are the detail):
-   - **Done**: the index (FS129-IX1); the card and demand list (FS129-Q1); lane A's three passes (OA1, MA1, MA2, SA1) — complete; lane R's passes
-     1 and 2 (OR1, MR1) and pass 3's first part (SR1). All results "derived, one mind". Headlines: J1 closed yes (FS129-OR1-QFREE; attacked at its
-     named steps by SR1, the attack failed); the arithmetic era bears on FS-104 through the slack residue planes, merged by SA1 into seven
-     statements; V6-HUG's identity found three times (MR1); 15 lost theorems found (SA1, item 110), eight of them inputs of row 121.
-   - **Running** (ids in Keryx's scratch only): FS129-SR2 (pass 3, lane R, second part; `data/fs129/briefs/FS129-SR2-pass3.md`) and the day's
-     Searcher (`data/search/briefs/SEARCH-2026-10-03.md`; queue rows 1, 2, 4, 5). If either is gone, launch a fresh agent on the same brief.
-   - **Next**: when lane R's pass 3 is complete (SR2, or SR3 from SR2's list), the record job in two parts (FS129-Z1: the derivation file, the
-     lost theorems, the errata; FS129-Z2: the index corrections of items 99 and 111, the stubs, the scored predictions, the front-page drafts),
-     then FS129-L1 and FS129-P1 (plan § 3). The record job's inputs are every "For FS129-Z1" line in the inventory.
-   - **Held for Kooshi**: the finite-graph search for a Falconer fan (`plans/SEARCH-QUEUE.md` row 3; default held); a blind second mind on J1's
-     close (item 56; default no — SR1's attack failed, item 95).
+2. **FS-129, the cross-application audit, is Derived** (merged to `main` as `1622cf48`, 2026-10-03 night). Its record:
+   `plans/FS129-derivation.md` (44 entries, each derived, one mind; 12 superseded forms kept and marked); its inventory
+   `plans/FS129-close-inventory.md` (items 1–173: every result, ruling, receipt and held item, with sources); ledger rows 149–154; the index,
+   corrected, with its where-else column (`data/fs129/index/`); FS-130 minted; the frontier re-ranked by Poros (FS-124 first). No agent is running.
+3. **What runs next**, in Kooshi's order:
+   - **The Lean backlog, in a session of its own**, from `plans/LEAN-BACKLOG.md` (built by FS129-L1: 259 rows — the corrected Lean order, FS-129's
+     compositions, the entries that left the order, and a closing section with row 121's J45 inputs; read its § Cautions first). FS-129 Closes when
+     its compositions pass the Lean gate there; its inventory is ticked at that close. The backlog's de Bruijn lane: `debruijn` (planner) then
+     `debruijn-implementer`.
+   - **Then FS-124, the (Q) ring** — the top of Poros's ranking, its question posed in `plans/STUB-q-ring.md` § The question (Poros, 2026-10-03);
+     Poros's card 2 (a derivation round on whether the map step's rungs at five spend five; `plans/POROS-2026-10-03-fs129-rerank.md` § 2.4) runs at
+     its opening.
+   - **Not blocking**: the Proof Atlas republish (inventory item 172: headless look, two labels, then Keryx republishes to
+     https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx); the Searcher's next day (queue row 6, C-T-BIKE, open; row 3 held).
+   - **Held for Kooshi, with defaults** (inventory item 173): the order above; the 46 GB of row-4 proofs (kept, ignored); the finite-graph
+     search (held); a blind second mind on J1 (no); the prior-art debt (owed until publication).
 4. **Kooshi's order** (2026-10-03): FS-129; then **the Lean backlog**, in a session of its own, from the input FS-129 prepares
    (`plans/LEAN-BACKLOG.md`: the 77 results handed to de Bruijn and what they rest on, in dependency order, with FS-129's merges applied,
    and FS-129's own compositions); then Poros's ranking, whose top is FS-123, the (Q)-free ring.
