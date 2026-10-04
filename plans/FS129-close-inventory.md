@@ -663,3 +663,6 @@ One line per item with its source; no narration. Each line is ticked done or dec
      bearing cell; the re-aimed titles of FS-123 ("the Siamese class"), FS-128 ("the top colour, at five and six") and FS-120 ("the pinch at a
      junction, and the cover route at five"); `CLAUDE.md` § Paths forward's top three. Left to their openings: FS-123's question section (card 3)
      and FS-104's route (e) (in its draft row).
+166. **Launched 2026-10-04 03:00 UTC**: FS129-F1, the front-page filing (`clerk`, Sonnet; `data/fs129/briefs/FS129-F1-front-page.md`, gated PASS, at
+     `ae80d9af`), on branch `fs129-filing` in worktree `/home/kooshi/source/lean-dir-fs129-close`. The only agent running. Keryx's ruled merges are
+     listed in its manifest (the open-milestones line naming FS-124; three re-aimed names; "Rows 1–154"; the stubs' title names; G1–G92).
