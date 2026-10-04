@@ -1,0 +1,1 @@
+wrote data/search/2026-10-04/certs/ts1-phi0-d4_3.json - TS1 at phi = 0, d = 4/3: T1(u) alternating {1,2} from theta = 0; T1(v) by hexagon list-colouring, 60 arcs, 7 cut points recoloured

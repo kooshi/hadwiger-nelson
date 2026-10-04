@@ -279,3 +279,74 @@ reason by the close.*
 45. **Brief FS131-I2, wave 2's implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I2-wave2.md`), gated PASS: merge `main` first (the branch
     sits on wave 1's skeleton); wave 2's carriers under T1's procedure; whichever of waves 2 and 3 lands second merges the other's carrier entries. FS131-I3's
     brief amended the same day (T2 landed; the shared list). Source: this commit.
+46. **Brief FS131-K4, wave 4's planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K4-wave4.md`), gated PASS; worktree `.claude/worktrees/fs131-w4` made by
+    Keryx with the recipe, branched at wave 3's skeleton `05cb0a3e` (wave 4's row edges reach only waves 1 and 4, checked by script; its foundation reads
+    wave 3's vocabulary). The brief names the pattern of waves 2–3 (each planner reached its line; plan for a successor). Source: this commit.
+47. **The day's search deferred, not dropped** (`plans/SEARCH-QUEUE.md` row 6 open; Kooshi's rule: once a day, outside the milestone loop): the three slots go
+    to waves 2 and 3's implementers and wave 4's planner, and two 40 GiB builds already fill most of the slot's 90 GiB. Default: the Searcher launches today in
+    the first slot an implementer frees, with its memory sized against the builds then running.
+48. **Statement defect in wave 2's skeleton — `vesica_apex_exact`** (FS131-I2, message 2026-10-04; `Plane/CoverExamples`, FS111-M3-BAND's third clause, exact
+    half): stated for every `h < √3/2`, it is false for `h ≤ −2` — at `h = −2` the apex is `2i`, and every `z` with `z.im < 1` has `dist z (2i) ≥ 2 − z.im > 1`
+    (Keryx's receipt: that inequality). The row speaks of a depth, so `h ≥ 0` was meant; a formalization slip of the skeleton, not a defect of the derivation.
+    **Ruling: add `(h0 : 0 ≤ h)`.** Alternative weighed: `−2 < h`, the widest form I2 believes true (one mind). Why: the row's own reading, the consumers'
+    range, and no proof owed beyond the row; the wider form, if wanted, is a separate lemma the implementer may add. Confidence: high. No erratum owed on the
+    derivation.
+49. **FS131-I2 handed back at stage 3, harness ≈ 357k by the task count (its own ≈ 400k)** (report on its branch,
+    `.claude/worktrees/fs131-w2/data/fs131/reports/FS131-I2.md`; `fs131-w2` at `0e5febba`, checked): 23 of 71 leaves proved; `main` merged in; real build 443/443
+    with only `sorry` warnings; axioms not audited (gate not run); `vesica_apex_exact` takes `0 ≤ h` per item 48, proved. Shared children sorry-free in
+    `Plane/Cover` (a general measure-exhaustion lemma `exists_ae_maximal`, among others) and `Plane/Suprema`. Generalizations: `UnitPairsNull.congr_ae` and
+    `volume_diff_essSupport` need no measurability. Slip: none of substance. 48 leaves left (13 hard untouched). Successor: FS131-I2b.
+50. **FS131-I3 handed back at stage 1, harness ≈ 436k** (report on its branch, `.claude/worktrees/fs131-w3/data/fs131/reports/FS131-I3.md`; `fs131-w3` at
+    `8a850e85`, checked): 55 of 96 leaves proved, no statement changed; rows with every clause sorry-free — FS116-V5-NE1, -V4-DICHOTOMY, -V4-MEET,
+    -S1-CLUSTER, FS129-OR1-WHOLE, FS116-V4-TWIST, -N1-TWIST-D, -N1-GERM-R, -N1-ECHO (scratch audit only; the gate's log is still to be read); `Plane/Tiles`
+    complete; engines 1 and 2 built, engine 3 (`localSectors`) not started. A real build of its last code commit was left running under the slot
+    (`data/fs131/i3/build-stage1.log` on the branch); I3 may wake to read it. Re-pricing: FS116-N1-GERM-R, priced hard, came out as two half-plane lemmas
+    (the calibration of `CLAUDE.md` § What compute actually helps). 41 leaves left. Successor FS131-I3b, launched once I3's build has finished and I3 has
+    stopped (one writer per branch). Slip (I3's): one commit message (`b45ef041`) lacks the attribution lines.
+51. **Brief SEARCH-2026-10-04** (the Searcher, Opus; `data/search/briefs/SEARCH-2026-10-04.md`), gated PASS: row 6 only (C-T-BIKE), the Searcher's call whether to
+    run it, one hour, at most 8 GiB per run. Launched in the slot I2 freed, per item 47's default. Source: this commit.
+52. **FS131-K4 handed back at stage 5 (partial), harness ≈ 389k** (report on its branch, `.claude/worktrees/fs131-w4/data/fs131/reports/FS131-K4.md`; `fs131-w4` at
+    `d0c56af0`, checked): wave 4's foundation `Plane/ValidMap/Basic` sorry-free (frames with exact curvature, horns, sectors and degree counted with `encard`,
+    contacts and their kinds, shadows, MERGE/SHAVE preconditions, `Terminal`, `IsStuck`, Condition 5, `𝓜_K`); 9 of 29 rows stated (25 `sorry` theorems); no
+    statement defect — the cusp reading the opening plan expected does not arise (a cusp horn is one sector). Generalizations: FS110-N3-CONF and -W-MERGE with
+    unit arcs allowed; FS110-N3-DEG in a non-strict form with curvatures in [−1, 1], the strict form under Condition 5; FS110-N4-SHADOW's concentric clause about
+    a tangent arc's far side alone; FS112-LOCK and the N2-SIGN lemma for whole colour classes. Layout: FS112-N3-NOBOTH sits in `Plane/ValidMap/UnitArc`. Slip
+    (K4's): the obligation-modeling pass not run — owed by the successor over all rows. FS114-L60-WALK's clause L60-D5 carried to wave 5 with FS112-N3-BASE
+    (ruling R8 covers the rest). Successor: FS131-K4b.
+53. **Ruling — FS110-N4-STUCK assumes NB-4's conclusion** (at most three colours at a point), the class its argument reads, as K4 stated it; FS110-NB-4 is not a
+    backlog row. Alternative weighed: add FS110-NB-4 to the backlog now as a supporting lemma. Why: N4-STUCK's own statement needs only the conclusion; a
+    consumer that needs N4-STUCK without the hypothesis (a formal FS110-CLOSURE) formalizes NB-4 beside it, as FS111-M-REDUCE-I was (item 8). Wave 5's planner
+    is told. Confidence: high.
+54. **Ruling — Woodall's chain is its own job, FS131-W**: FS106-WO, FS106-TW and FS106-AE-MAP6 (Woodall's maps-need-six almost everywhere, with Townsend's
+    lemma; their mathematics ours, ruling R9) are planned and implemented on their own branch, from wave 4's skeleton once FS106-L and FS106-TS-T are stated,
+    and land before wave 9 (their only consumers outside the chain: FS111-C-SIX-M, FS111-M2-REDUCE-C, FS129-OR1-TOP5, all wave 9; checked by script). They keep
+    wave 4 in the table; wave 4 lands without them. Alternative weighed: inside wave 4 (K4's question). Why: the proof is a whole theorem, wave 4's planning
+    already outruns one context, and nothing before wave 9 waits on it. Confidence: high.
+55. **Brief FS131-I2b, wave 2's second implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I2b-wave2.md`), gated PASS; continues I2's record
+    on `fs131-w2` from its stage 3 (48 leaves). Launched in the slot K4 freed. Queued next, as slots free: FS131-I3b (once I3 stops) and FS131-K4b. Source: this
+    commit.
+56. **Statement gap — FS111-M-COVER-SC's curvature clause, as skeletoned** (FS131-I2b, message 2026-10-04): `IsMaximalCover.curvatureLeOne` and
+    `semiconcaveWith` (`Plane/MaximalCover`) take `IsLowerGraphOf` on the class's essential support, but the argument (`plans/FS111-M-regularity.md` § 3.4,
+    lines 380–383: "each path-connected piece `P` of `F̃_a` near `x`") applies the enclosing-or-exterior dichotomy to pieces of the density set `F̃_a`, and for a
+    general maximal-cover class the interior of the support need not lie in the density set (it does for regular classes). Not shown false; not derivable as
+    stated. **Ruling: state `IsLowerGraphOf` on the density set** (the region below the graph lies in `densitySet (C a)`) — the class the argument reads (G92).
+    Alternative weighed: add `IsRegularMUA (C a)` (I2b's other proposal). Why: the density-set form keeps the clause for every maximal cover, which is what the
+    row and its derivation claim, and moves the hypothesis to exactly where the argument reads it; R7's use (`r7_lowerGraph`) then shows the region below its
+    arc lies in its class's density set, which holds for its classes (closed sets, the region in the interior). Confidence: medium-high. The record job notes
+    the reading under FS111-M-COVER-SC's erratum (item 18).
+57. **Statement defect in wave 2's skeleton — `CurvatureLeOne` tests from the wrong side** (FS131-I2b, message 2026-10-04): the definition quantifies over every
+    C² `φ` touching `u` from above and concludes `φ'' ≤ (1 + φ'²)^(3/2)` — false for every `u`, since `φ = u + N(s − s₀)²` touches from above with `φ''` unbounded
+    in `N` (Keryx's receipt: that one line); concretely false on R7's lower arc, where `u'' = (1 + u'²)^(3/2)` exactly. The viscosity form of "curvature at most
+    1" tests from below: `φ ≤ u` near `s₀`, `φ(s₀) = u(s₀)`, then `φ ≤ u ≤ ψ` with `ψ` the supporting unit arc gives `φ'' ≤ ψ'' ≤` the bound. A formalization slip
+    in the skeleton's encoding of item 19's ruling (whose words — "touched from above at each point by a unit arc … in the viscosity sense" — name the supporting
+    arc, not the test side). **Ruling: flip `u s ≤ φ s` to `φ s ≤ u s` in `CurvatureLeOne`**; `semiconcaveWith` re-derived from the corrected form. Alternative:
+    none live. Confidence: high. No erratum on the derivation beyond item 18's.
+58. **FS131-I2b handed back at stage 4, harness ≈ 328k** (report on its branch; `fs131-w2` at `23c92109`, checked): five more leaves — `twoCircle_preimage_null`,
+    `falconer_lemma1` (Falconer's Lemma 1, measurable form), `CPColouring.exists_discrete_forcedSet`, `chromaticNumber_plane_le_chiM0` (N-EASY: χ(ℝ²) ≤ χ_m⁰(ℝ²),
+    no MR), `IsMaximalCover.enclosing_or_exterior` (FS111-M-COVER-SC's first clause, without `x ∈ closure P`) — 28 of 71; build 443/443, only `sorry` warnings;
+    items 56 and 57 applied. Open in `curvatureLeOne`: the equator configuration (contact at the exterior disc's equator) gives no supporting arc — routed to
+    the successor with the coordinator's labelled inference (the lower-test set may be empty there) and an instruction to message if the clause is false.
+    Re-pricing: two leaves priced hard came in moderate; about 40k tokens a leaf. 43 left. Successor FS131-I2c (`data/fs131/briefs/FS131-I2c-wave2.md`).
+59. **FS131-I3 stopped** (its background build finished green: `data/fs131/i3/build-stage1.log` on `fs131-w3`, 440/440, "build: OK"; no process in its worktree;
+    no commit since `8a850e85`). Successor FS131-I3b (`data/fs131/briefs/FS131-I3b-wave3.md`), 41 leaves. Both briefs gated PASS; launched together, beside the
+    day's Searcher. FS131-K4b (wave 4's second planner) follows when the Searcher's slot frees. Source: this commit.

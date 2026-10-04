@@ -1,0 +1,12 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+200/1999 d-values (0 resumed) 9s
+400/1999 d-values (0 resumed) 17s
+600/1999 d-values (0 resumed) 24s
+800/1999 d-values (0 resumed) 30s
+1000/1999 d-values (0 resumed) 36s
+1200/1999 d-values (0 resumed) 42s
+1400/1999 d-values (0 resumed) 47s
+1600/1999 d-values (0 resumed) 52s
+1800/1999 d-values (0 resumed) 57s
+1999/1999 d-values (0 resumed) 62s
+SCAN COMPLETE data/search/2026-10-04/scan1
