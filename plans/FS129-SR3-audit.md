@@ -329,3 +329,56 @@ TWOCIRC's last line; it is the outer-side twin of DOUBLETIP, with RING-GERM's tw
 carries `X`, `X̄`, one tip colour and one outer colour), **two adjacent four-colour hubs whose outer germs off the shared arc are free carry different
 outer colours** — and, by DOUBLETIP (its tip germs free), different tips. A pruning rule for case 5's ring types; a line for FS129-Z2's bearing on
 `plans/STUB-q-ring.md`.
+
+## Stage 4 — SAVED: item (c) — item 63's unread GAP lines; the vacuity sort; the records that disagree
+
+### 4.1 Item 63's nine lines (8 entries)
+
+**The list's file is the faulted one.** `data/fs129/sr2/item63-gap-lines.md`, as committed, holds 31 rows with ids shifted by one entry (e.g. l. 442 under
+FS111-M-C11): `tools/fs129_sr2_gaps.py --fault` writes the same output file, and the derive gate runs the fault last. The clean list — SR2's § 4.1 table —
+is regenerated here by SR2's tool with its output redirected and no fault: `data/fs129/sr3/item63-gap-lines-clean.md` (27 lines in 24 entries). A tool
+defect for FS129-Z2; SR2's tool is not mine to edit.
+
+**Read:** each line in its entry, and `plans/FS111-derivation.md` FS111-M-R7, -M-PINCH, -M-C11, -W-NOREP and its correction, -W-HULLREG-MAPS, -M-EXTREME,
+-M-COVER-SC, -M-HALF, -M2-INT, -M2-FIX, -M3-IRREG; `data/fs121/claims.md` § 0 (saturated, honest, (H1), (H2), Σ, REG-J′); `plans/FS121-derivation.md`
+FS121-DB1-L3, -DB1-L4, -D1-VT, -V2-VT-W; `plans/FS111-VM2-verification.md` § 1.4 (O2), § 2.2; `plans/STUB-pinch-at-junction.md` ll. 28–39;
+`plans/STUB-lateral-extent.md` ll. 1–20; `plans/FS112-derivation.md` FS112-SIX, -N3-PAIRS; `plans/FS112-NB-verification.md` l. 205; `plans/FS116-derivation.md`
+FS116-N2-SIXRING, -S1-KAPPA; `plans/FS114-derivation.md` FS114-Y3-RSTOP, -Y4-RSTOPALL, -BV-HEX; `plans/FS114-YB2-verification.md` ll. 150–152, 206–207;
+`plans/FS129-OR1-audit.md` § J22.
+
+| line | entry | the GAP | class | where |
+|---|---|---|---|---|
+| FS111 l. 442 | FS111-M-PINCH | "the same without (H1) or (H2) (C-HULL-REG as stated is a GAP there); anything at points of the singular set Σ" | **answered elsewhere, no link back** — as a general form it is **false**: FS111-M-EXTREME (same file) shows M-PINCH's conclusion fails at the extreme points of every component of an honest saturated colouring, each a cusp or a point where (H1) or (H2) fails, and FS111-M-R7 is such a colouring (saturated, "every essential boundary point is a contact point for each of its colours"; its up-vertices are M-EXTREME's model). What does hold at Σ, under REG-J′, is FS121-DB1-L3 (no colour occupies two sectors of positive angle). Without REG-J′ the structure at Σ is FS-127's question (lateral extent) | M-PINCH's *not claimed* should point to M-EXTREME (the counterexample to the unhypothesized form) and to DB1-L3 |
+| FS111 l. 447 | FS111-M-PINCH | VMW's "stage-1 GAP at cusp partners" | **answered in place** — the same line records it "withdrawn on reading M's Step 1" | — |
+| FS111 l. 853 | FS111-M2-INT | "the same for the interior of the support F of a set with null unit pairs (a GAP under the topological reading of 'regular', VM2 (O2))" | **open**. FS111-M2-FIX (next entry) proves it for regular MUA sets; VM2 (O2) knows no counterexample. **FS111-M3-IRREG does not refute it**: the set maximality must add to `A_f` is nowhere dense, so it adds nothing to `int F`, and its points' unit circles meet the class only at pinch points, boundary points of `F` — no interior point of the support is placed at distance 1 from the support. Its maximal-set form is FS-120's question 3 ("(F1) for irregular MUA sets") | `plans/STUB-pinch-at-junction.md` ll. 38–39 |
+| FS112 l. 49 | FS112-SIX | "De Grey's covering step for C-V56 ('those six tiles must jointly cover a disk of radius 1') is a GAP" | **answered elsewhere, no link back, in the non-Siamese class**: a tile meeting `B(V, 1)` of a colour carried at `V` is within 1 of `V`'s tile of that colour, so it is that tile (FS116-V4-DICHOTOMY); FS-112's own NB reduced the step to exactly that (`plans/FS112-NB-verification.md` l. 205: "exactly 'no Siamese partner of a tile at `V` lies in `B(V, 1)`'"), and FS116-N2-SIXRING (non-Siamese) carries the six-colour picture. **Open in the Siamese class** — FS-124's case 7 | FS112-SIX's entry should cite NB l. 205 and FS116-N2-SIXRING |
+| FS112 l. 165 | FS112-N3-PAIRS | NB3-I's "GAP there" (at mutual both-centres) | **answered in place** — "retracted at stage 2" in the same line | — |
+| FS114 l. 968 | FS114-BV-HEX | "Lemma 4 at cusps (not landed: a GAP in BASE-V's blind derivation at Prop. 19(b) and the selection; CUSP-BASE's D5 items 1–4, 6 stay at CE's one mind)" | **open — an owed second mind, not a frontier question**: FS129-OR1 § J22 found no held second route; every route-M stub names it in its owed-minds line ("row 134's base, Lemma 4 at cusps (BASE-V), before any publication", `plans/STUB-qfree-ring.md` l. 101). Under Workflow 3.1 the kernel module for row 134's base is the promotion path | the Lean backlog |
+| FS114 l. 607 | FS114-Y3-RSTOP | "Y3-D2 without reading R-T (a GAP at one case: YB2)" — YB2's case: an `x`-invariant colour-4 tile spanning `top`'s outside when the edges at `p` need not be tactic | **open, unplaced**: FS114-Y4-RSTOPALL also reads R-T ("the bowtie's definition with reading R-T"); FS114-K1's list reads tactic edges. No held result reads a Reuleaux bowtie with a non-tactic edge. Whether FS-112's bends remove it first (a non-tactic unit edge at `p` has its outer colour absent at its centre, so FS112-N2-BENDS bends it) is not read here | a stub line for FS129-Z2: FS-124's case 6, or FS-117 if the count pays it |
+| FS116 l. 816 | FS116-S1-KAPPA | its last clause ("in a non-Siamese fragment κ's change points are exactly `y + 60°ℤ`") "Under § 10's ring change points … GAP at whether an orbit point can end an arc of Γ on ω(p)" | **answered elsewhere, by this job**: the clause's class — non-Siamese, six colours, a vertex of four colours, a ring with no (Q) arc, radius above 1 — is **empty** by FS129-SR3-QFREE-NS (§ 2.2; FS129-OR1-QFREE did not reach it, KAPPA assuming no simplicity). The GAP is moot | KAPPA's last clause stands as a step of FS116-S1-QF's second route only |
+| FS121 l. 263 | FS121-D1-VT | "TRUE under reading (W), GAP under (B)" at a corner of `L` | **answered in place** — the same paragraph names the wider statement, FS121-V2-VT-W, which carries the corner (two branches meeting at `Y`) | — |
+
+**Tally:** answered elsewhere with no link back **3** (M-PINCH l. 442, FS112-SIX, S1-KAPPA); answered in place **3** (M-PINCH l. 447, N3-PAIRS, D1-VT); open **3**
+(M2-INT — FS-120 q. 3; BV-HEX — an owed mind; Y3-RSTOP's R-T case — unplaced). **No held result is shown false**: l. 442's false form is a *not claimed*
+form, and M3-IRREG does not touch M2-INT.
+
+### 4.2 The vacuity sort: additions (item 36's four headings)
+
+**No new "empty" result.** One receipt changes: SR1's classes `C_Γ` and `C_Q` (`plans/FS129-SR1-audit.md` § 5's rule) were the non-Siamese **simple**
+classes; by FS129-SR3-EMPTY-NS and -QFREE-NS (one mind each) both are empty with "simple" dropped. So the results SR1 filed under "class not known
+empty" because they drop simplicity — V5's second routes in V5-RING's setting (FS116-V5-RING, -V5-GERM, -V5-OUT, -V5-TIPSET; non-Siamese, Γ-free ring, no simplicity) and FS116-V4-OUTER (non-Siamese, (Q)-free ring, no simplicity) — and the last clause
+of FS116-S1-KAPPA are now over empty classes; each is a step of a held no-go's route (Y3-SIX's or S1-QF's), so each stays **hypothetical by design**, and
+nothing passes on. SR1's lead "V5-RING's setting drops simplicity … a lead for J7's non-simple half" is spent: J7's non-simple half, for (Q)-free rings,
+is closed by FS129-SR3-QFREE-NS; the Siamese half stays open.
+
+### 4.3 Records that disagree
+
+Each quoted with its address; the argument's verdict beside it; corrections drafted for FS129-Z2, no record edited.
+
+| # | record A | record B | which the argument supports |
+|---|---|---|---|
+| 1 | `plans/FS129-SR2-audit.md` § 3.2.2: "the fragment is simple at `p` (FS-116's 'simple': one sector per tile at `p`)" | `data/fs116/claims.md` l. 31: "**Simple** … every tile an open disc whose closure meets each other tile's closure in a connected set or not at …" | B defines the word; A's gloss is wrong as a gloss and **idle** as a step: QFCASE stands through FS129-SR3-QFREE-NS (§ 2.3) |
+| 2 | `plans/FS116-V6-verification.md` § 2.2 (Uses only): "simple (one sector per tile at `p`, so the four tiles form a 4-cycle of shared edges — V6-COUNT's last step only)" | this record § 2.1 | the step needs no simplicity: any cyclic order of sectors containing both tipper groups has an edge between the groups (control `fs129-sr3-simple`) |
+| 3 | `plans/FS129-SR1-audit.md` § 6.2 item 2: "FS129-MR1-DOUBLETIP in place of FS116-V6-HUG (and of FS116-Y4-EMPTY's double-tip step on route 2)" | this record § 2.3 | both are true theorems; the plan in A would formalize EMPTY only in the simple class (DOUBLETIP's step 3 reads a cone interval at the hubs). Keep V6-HUG's colour step for EMPTY-NS |
+| 4 | `plans/FS114-derivation.md` FS114-Y5-PINALL: "except possibly under E1 … or E2"; FS114-Y6-E2RED: "**the only E2 survivor family is S6**"; FS114-K1: "E2's survivor S6" | this record § 1.2 (FS129-SR3-E2ONE) | E2 at a single blade (no E1) is no exception and S6 is empty; the records' exceptions narrow to E1, or E2 at two or more blades |
+| 5 | `data/fs129/sr2/item63-gap-lines.md` (committed: 31 rows, ids shifted) | `plans/FS129-SR2-audit.md` § 4.1 (27 lines in 24 entries) | B; A is the fault run's output (§ 4.1). The clean list is `data/fs129/sr3/item63-gap-lines-clean.md` |
