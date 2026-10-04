@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Plane.Suprema
 import Proofs.HadwigerNelson.Plane.CPColouring
 import Mathlib.MeasureTheory.Measure.Lebesgue.VolumeOfBalls
+import Mathlib.MeasureTheory.Measure.ContinuousPreimage
 
 /-!
 # Rescaling, the suprema's limits, the equivalence, kept points, the face lemma (FS-131 wave 2)
@@ -129,11 +130,82 @@ theorem unitPairsNull_iff_pairMass {A : Set ℂ} : UnitPairsNull A ↔ ∀ R : �
     obtain ⟨n, hn⟩ := exists_nat_gt ‖q.1‖
     refine mem_iUnion.2 ⟨n, ⟨hq.1, by simpa using hn⟩, by simpa using hq.2⟩
 
+open scoped symmDiff in
+/-- Measures of `S ∩ X i` converge when `X i` converges to `Y` in measure (`S` of finite measure). -/
+theorem tendsto_measure_inter_of_symmDiff {α ι : Type*} [MeasurableSpace α] {μ : Measure α} {l : Filter ι}
+    {S Y : Set α} {X : ι → Set α} (hS : μ S ≠ ⊤) (h : Tendsto (fun i => μ (X i ∆ Y)) l (𝓝 0)) :
+    Tendsto (fun i => μ (S ∩ X i)) l (𝓝 (μ (S ∩ Y))) := by
+  have hY : μ (S ∩ Y) ≠ ⊤ := ne_top_of_le_ne_top hS (measure_mono inter_subset_left)
+  rw [ENNReal.tendsto_nhds hY]
+  intro ε hε
+  filter_upwards [h (Iic_mem_nhds hε)] with i hi
+  have hd : μ ((S ∩ X i) ∆ (S ∩ Y)) ≤ ε := by
+    rw [← inter_symmDiff_distrib_left]
+    exact (measure_mono inter_subset_right).trans hi
+  have hd' : μ ((S ∩ Y) ∆ (S ∩ X i)) ≤ ε := by rw [symmDiff_comm]; exact hd
+  constructor
+  · have := (le_measure_symmDiff (μ := μ) (s₁ := S ∩ Y) (s₂ := S ∩ X i)).trans hd'
+    rw [tsub_le_iff_right] at this
+    rw [tsub_le_iff_right]
+    rwa [add_comm]
+  · have := (le_measure_symmDiff (μ := μ) (s₁ := S ∩ X i) (s₂ := S ∩ Y)).trans hd
+    rw [tsub_le_iff_right] at this
+    rwa [add_comm] at this
+
 /-- **Continuity of the pair mass in the radius** (I2c's finding): `L¹` continuity of translation
 (`MeasureTheory.Lp.instContinuousVAddDomAddAct`, or `MemLp.exists_hasCompactSupport_eLpNorm_sub_le` and uniform
 continuity), integrated over the angle. -/
 theorem continuous_pairMass {A : Set ℂ} (hA : MeasurableSet A) (R : ℝ) : Continuous (pairMass A R) := by
-  sorry
+  rw [continuous_iff_continuousAt]
+  intro r0
+  set E : ℝ → Set (ℂ × ℝ) := fun r => {q : ℂ × ℝ | q.1 ∈ A ∩ ball 0 R ∧ q.1 + (r : ℂ) * e q.2 ∈ A} with hE
+  have hEm : ∀ r, MeasurableSet (E r) := by
+    intro r
+    refine (measurable_fst (hA.inter measurableSet_ball)).inter ?_
+    exact (measurable_fst.add (measurable_const.mul (continuous_e.measurable.comp measurable_snd))) hA
+  have hpm : ∀ r, pairMass A R r = ∫⁻ θ, volume ((fun x => (x, θ)) ⁻¹' E r) ∂arcLength :=
+    fun r => Measure.prod_apply_symm (hEm r)
+  rw [ContinuousAt, funext hpm]
+  refine tendsto_lintegral_filter_of_dominated_convergence (l := 𝓝 r0) (fun _ => volume (ball (0 : ℂ) R))
+    (Eventually.of_forall fun r => measurable_measure_prodMk_right (hEm r))
+    (Eventually.of_forall fun r => Eventually.of_forall fun θ => measure_mono fun x hx => hx.1.2) ?_ ?_
+  · rw [lintegral_const]
+    exact ENNReal.mul_ne_top measure_ball_lt_top.ne (measure_ne_top _ _)
+  refine Eventually.of_forall fun θ => ?_
+  set A' : Set ℂ := A ∩ ball (0 : ℂ) (R + |r0| + 1) with hA'
+  have hA'm : MeasurableSet A' := hA.inter measurableSet_ball
+  have hA'f : volume A' ≠ ⊤ := ((measure_mono inter_subset_right).trans_lt measure_ball_lt_top).ne
+  set F : C(ℝ, C(ℂ, ℂ)) := ContinuousMap.curry ⟨fun p : ℝ × ℂ => p.2 + (p.1 : ℂ) * e θ, by fun_prop⟩ with hFdef
+  have hF : ∀ r x, F r x = x + (r : ℂ) * e θ := fun r x => rfl
+  have hmp : ∀ r, MeasurePreserving (F r) volume volume := fun r => by
+    have : (F r : ℂ → ℂ) = fun x => x + (r : ℂ) * e θ := funext (hF r)
+    rw [this]; exact measurePreserving_add_right volume _
+  have hsd := tendsto_measure_symmDiff_preimage_nhds_zero (μ := volume) (ν := volume) (F.continuous.tendsto r0)
+    (Eventually.of_forall hmp) (hmp r0) hA'm.nullMeasurableSet hA'f
+  have hslice : ∀ r, |r - r0| < 1 → (fun x => (x, θ)) ⁻¹' E r = (A ∩ ball 0 R) ∩ (F r) ⁻¹' A' := by
+    intro r hr
+    ext x
+    simp only [hE, mem_preimage, mem_setOf_eq, mem_inter_iff, hA', hF, mem_ball, dist_zero_right]
+    constructor
+    · rintro ⟨⟨hx1, hx2⟩, hx3⟩
+      refine ⟨⟨hx1, hx2⟩, hx3, ?_⟩
+      calc ‖x + (r : ℂ) * e θ‖ ≤ ‖x‖ + ‖(r : ℂ) * e θ‖ := norm_add_le _ _
+        _ = ‖x‖ + |r| := by rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs]
+        _ < R + |r0| + 1 := by
+          have := abs_sub_abs_le_abs_sub r r0
+          linarith
+    · rintro ⟨⟨hx1, hx2⟩, hx3, -⟩
+      exact ⟨⟨hx1, hx2⟩, hx3⟩
+  have hev : ∀ᶠ r in 𝓝 r0, |r - r0| < 1 := by
+    have : Ioo (r0 - 1) (r0 + 1) ∈ 𝓝 r0 := Ioo_mem_nhds (by linarith) (by linarith)
+    filter_upwards [this] with r hr
+    rw [abs_lt]; constructor <;> linarith [hr.1, hr.2]
+  have hlim := tendsto_measure_inter_of_symmDiff (S := A ∩ ball (0 : ℂ) R)
+    (((measure_mono inter_subset_right).trans_lt measure_ball_lt_top).ne) hsd
+  rw [hslice r0 (by simp)]
+  refine hlim.congr' ?_
+  filter_upwards [hev] with r hr
+  rw [hslice r hr]
 
 /-- **Polar coordinates for pairs** (`Complex.lintegral_comp_polarCoord_symm` and Tonelli): a radius band null in
 `Leb ⊗ Leb` has null pair mass at almost every radius inside it. -/
