@@ -242,3 +242,16 @@ reason by the close.*
     between `x` and `x + e θ`). Alternative weighed: `g < 2`, which K2b believes true (one mind, unproved). Why: `g < 1` is the derivation's own regime,
     covers the row's original range, and is safe; `g < 2` would be a widening to argue later. `exists_face_fails` is unaffected. Confidence: high.
     Correction owed: an erratum on FS121-V5-FACE-SHARP (its hypothesis needs `g < 1`, or a proof for `1 ≤ g < 2`), for the record job.
+38. **Wave 3's skeleton written** (FS131-K3b stage 5, `5d273f20` on `fs131-w3`, checked): six new modules, 96 `sorry` leaves, build 440/440, architecture
+    check passing; the three geometric checks (FS116-N1-GERM-R's four intervals, FS116-Y4-FLANK, FS116-S1-EXIT) TRUE by computer algebra with planted faults
+    firing (stage 4, `e8daebf9`); read-backs `plans/FS131-w3-kernel-plan.md` § 5.2 on the branch.
+39. **Statement defect — a hidden assumption in FS116-V5-U1's last two clauses** (K3b): "the side cones hold two further colours" and "in a non-Siamese simple
+    fragment, z has at least four colours" need `z` in the fragment's open set; K3b's counterexample is a valid, non-Siamese, simple map with `z = 0` outside
+    its domain where 0 carries two colours and both side cones are empty (§ 5.3). The formal statements carry `hz : z ∈ F.dom`. **Ruling: accepted** — the
+    derivation's setting always has the vertex in the domain, so no consumer changes. Alternative: none live (the clause is false without it). Confidence:
+    high. Correction owed: an erratum on FS116-V5-U1 ("z in the fragment"), for the record job.
+40. **Generalizations** (K3b, § 5.1): FS129-OR1-WHOLE's R₂ clause pointwise (only that `p + e(θ)` is a closure point of `T ∩ B(p, 1)` for a tile `T` of colour
+    c; the arc form a corollary); FS129-SR1-SIXQ's (Q) clause at every `k ≥ 4`; RINGBAND's map bridge (FS110-N2-RING's setting) at every k, needing only a ring
+    with no arc of Γ and a map `Fin k → ZMod 3` injective on the colours absent at p; a shorter route for FS116-Y4-FLANK's edge clause (radius below 1 gives a
+    point inside the other unit disc; both radii 1 is TWOCIRC at equal turns). Re-pricing: OR1-WHOLE's covering clause needs only "every point of the domain
+    lies in the closure of a tile", not `finite_tiles_near`; the local-structure work concentrates in one hard statement, the sector structure at a point.
