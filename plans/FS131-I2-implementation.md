@@ -186,6 +186,50 @@ Axioms not yet read from a saved audit log (gate not run); `scripts/Axioms.lean`
 `r7_lowerGraph` (FS111-M-COVER-SC defect witness, with item 72), `IsMaximalCover.curvatureLeOne` (FS111-M-COVER-SC second clause, corrected),
 `IsMaximalCover.semiconcaveWith` (its named corollary), `sq9_tight` (FS111-W-SQ9 tightness; the saturation half open).
 
+## Stage 7 — SAVED (FS131-I2e): four of the sixteen re-planned leaves, 35 sorries fewer; the build is green; 90 `sorry` left
+
+**Readback.** Both brief quotations match `plans/FS131-w2-kernel-plan.md` Stage 10 (the "May not" sentence) and Stage 13 (the "May" line); the branch built
+as K2c left it (`bdba8ff5`, 1738 modules up to date). May not: change any statement, hypothesis or definition's meaning (rulings 56, 57, 63, 72, 86 and item 100
+below are the only authorised changes), no `axiom`, no `native_decide`. `main` not merged (the landing's job). `Plane/CoverExamples`, `Arith/PlaceHom`,
+`Arith/FalconerField` are FS131-K2d's and were not touched.
+
+**Ruling applied** (Keryx, `plans/FS131-close-inventory.md` item 100, on this job's message): `arcLength_bigBall_ge` takes `(hR : 1 < R)`. At `R = 1`, `u = z`
+the circle about `u` lies on the sphere and misses the open ball, so the arc is `0 < 2π/3`. Its one consumer (`not_keptAt_of_half_lt`, `R = 2ε > 1`) needs the strict form.
+
+**Leaves closed** (of the sixteen): `keptAt_band` (children `keptAt_band_le_half`, `not_keptAt_of_half_lt`; shared Cover children `arcLength_ball_ge`,
+`arcLength_sub_ball_le`, `arcLength_bigBall_ge`, `pairs_le_of_arc`, `twoBall_pairs_ge`, helpers `arcLength_eq_window`, `arcLength_ge_of_Ioo`,
+`arcLength_le_of_subset_Ioo`, `norm_sq_e_sub`, `pairs_eq_lintegral`), `AeColouring.exists_grundy` (children `exists_isMaxIn`, `grundyTaken_eq`,
+`grundyCls_isMaxIn`, `essSupport_subset_unitShadow_of_isMaxIn`, helpers `measurableSet_grundyTaken`, `unitPairsNull_iUnion_of_monotone`), `face`
+(children `not_unitPairsNull_of_circles_meet`, `isOpen_halfBox`, `isOpen_farBox`, `circles_meet_halfBox`, `circles_meet_boxes_at_normal`; the geometry through
+`framePt`, the intermediate value theorem on the half-box, and `exists_far_point`, the explicit far-box point `g + δ` with `δ` chosen from `u` and `ρ|v|/(1 − g)`),
+`exists_face_fails` (children `exists_faceFailClass_noUnitPairs` by a six-way real lemma `real_no_unit`, `exists_aeColouring_of_noUnitPairs`,
+`measurableSet_faceFailClass`, `add_e_mem_essSupport_faceFailClass`). Also closed, children of open leaves: `essClosure_subset_essSupport`, `volume_densitySet_diff`,
+`exists_ne_mem_essClosure`, `IccPairNull.mono`, `IccPairNull.union`, `isPeriodicSet_periodize`, `measurableSet_periodize`, `iUnion_periodize`, `disjoint_periodize`,
+`unitPairsNull_preimage_add`, `bandNull_preimage_add`. `face_densitySet` was already proved from `face`, so it is now unconditional.
+
+**Build**: `./scripts/build.sh` under the slot, OK, 443 of 443, 8 modules with warnings, every warning `declaration uses sorry` (90 declarations),
+`build/gate/build/20261004T105629Z-2873941.log`; `tools/check_architecture.py` PASS. `scripts/Axioms.lean`: 33 records added (block "FS131-I2e"). The 33 were
+printed from the built library: all on `[propext, Classical.choice, Quot.sound]`, no `sorryAx` (`data/fs131/i2/i2e-axioms.txt`). The gate (`axioms.sh`, vacuity)
+was not run: it fails on the 90 remaining `sorry` by design.
+
+**Still `sorry`** (counts of lines that are exactly `sorry`): `Plane/Cover` 2 (`essClosure_dist_ne_one_of_mem_densitySet`, `measurableSet_densitySet`),
+`Plane/Slack` 46, `Plane/FalconerReduction` 9, `Plane/YesLimit` 4, `Plane/CoverExamples` 13, `Arith/PlaceHom` 2, `Arith/FalconerField` 2, `Arith/Dyadic` 12;
+`Plane/MaximalCover` and `Plane/Stationary` none. Of the sixteen, twelve remain: `exists_tight`, the three limits, `chiM0_le_chiCP`, `chiM0_le_iff_muZero_eq_one`,
+`exists_bandNull_aeCover_of_mu_eq_one`, `CPColouring.tendsto_not_kept`, `falconer_reduction`, `chiM0_le_of_fragments` (its child `muZero_eq_one_of_fragments` and
+`chiM0_le_iff_muZero_eq_one` still open), and both Dyadic leaves.
+
+**Re-pricing** (from this session's rates): Cover arcs 45k in all (five lemmas and helpers), `keptAt_band` 25k, `exists_grundy` 60k (the shadow clause 15k, the
+assembly 15k), `face` 85k (the key lemma 20k, the two geometry children 35k and 30k), `exists_face_fails` 45k. The planner's prices held within a factor of two;
+nothing was cheaper than priced. Hand-checked pitfalls for the next implementer: `f =ᵐ[μ] g` on sets parses `∪` into its right side (name the set first);
+`simp` on an `ofReal`/`NNReal.pi` area needs `← NNReal.coe_real_pi, ENNReal.ofReal_coe_nnreal`, never `simp [NNReal.pi]`.
+
+## Theorems this phase proved (FS131-I2e, additions)
+
+Axioms read from `data/fs131/i2/i2e-axioms.txt` (printed from the built library, not from the gate's saved log; the gate was not run): every line below is
+`[propext, Classical.choice, Quot.sound]`. `keptAt_band` (FS106-REM first clause, one class), `AeColouring.exists_grundy` (FS121-D3-GRUNDY), `face`
+(FS121-D4-FACE, with FACE-SHARP's hypothesis), `exists_face_fails` (FS121-V5-FACE-SHARP's failure half, with item 86), `arcLength_bigBall_ge` (item 100's strict
+form), `twoBall_pairs_ge`, `pairs_le_of_arc`, `exists_ne_mem_essClosure`, `not_unitPairsNull_of_circles_meet`. Each read against its docstring, which carries the row.
+
 ## Drafts for the front page
 
-None: the gate was not run (43 leaves remain). Vacuity carriers for wave 2 are not yet registered.
+None: the gate was not run (90 `sorry` remain in the wave-2 modules). Vacuity carriers for wave 2 are not yet registered.
