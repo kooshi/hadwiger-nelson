@@ -6,7 +6,19 @@
 
 ## Theorems this phase proved
 
-None yet (updated at each stage).
+All **[kernel]**, on `[propext, Classical.choice, Quot.sound]` (`scripts/axioms.sh`, § 5), in the worktree's
+`Proofs/HadwigerNelson/Topology/`:
+- `HadwigerNelson.SpernerGrid.exists_rainbowCell` — Sperner's lemma on the triangulated square grid, three labels, square boundary
+  conditions (`SpernerGrid.lean`).
+- `HadwigerNelson.LebesgueCovering.exists_mem_inter_three` — Lebesgue's covering theorem in three-set (cubical KKM) form for a
+  closed rectangle of `ℂ` (`LebesgueCovering.lean`).
+- `HadwigerNelson.LebesgueCovering.lebesgue_covering_rect'` — Lebesgue's covering theorem for a rectangle, `n = 2`, under the wider
+  hypothesis (the top/bottom condition only for sets missing the left side).
+- `HadwigerNelson.LebesgueCovering.lebesgue_covering_rect` — the same under Hurewicz–Wallman's hypothesis, any finite index type.
+- `HadwigerNelson.LebesgueCovering.lebesgue_covering_square` — FS-131 wave 4's statement, verbatim (Hurewicz–Wallman Thm IV 2, `n = 2`).
+- `HadwigerNelson.LebesgueCovering.quadrant_hypotheses` — a model of the square theorem's hypotheses (the four quadrants).
+- Their children (`door_cell`, `rowDoors_succ_eq`, `rowDoors_bottom`, `rowDoors_top`, `leastLabel` lemmas, `gridPt` lemmas,
+  `dist_gridPt_le`, `closedSquare_eq_reProdIm`, …), listed in § 3.3.
 
 ## Stage 1 — SAVED: the readback
 
@@ -23,8 +35,11 @@ None yet (updated at each stage).
 Context the brief does not quote, checked: wave 4's two declarations live in `namespace HadwigerNelson.Plane` (SVMap.lean line 28), so
 their full names are `HadwigerNelson.Plane.closedSquare` and `HadwigerNelson.Plane.lebesgue_covering_square`; SVMap.lean opens
 `Complex Real Set Filter Topology Metric` (line 30). This module therefore uses namespaces that `open Topology` cannot reach
-(`HadwigerNelson.SpernerGrid`, `HadwigerNelson.LebesgueCovering`; a namespace `HadwigerNelson.Topology` would be opened by wave 4's
-`open … Topology …` from inside `HadwigerNelson`, and its `closedSquare` would then be ambiguous with wave 4's).
+(`HadwigerNelson.SpernerGrid`, `HadwigerNelson.LebesgueCovering`). *(Sentence corrected at Stage 5 by measurement,
+`data/fs131/leb/NamespaceShadow.lean`: inside `namespace HadwigerNelson…`, `open Topology` opens `HadwigerNelson.Topology` when that
+namespace exists **and not Mathlib's root `Topology`**, so a namespace of that name would silently strip wave 4's `open … Topology …`
+of Mathlib's scoped notation; the first version of this sentence predicted an ambiguity instead, which the test does not show — the
+current namespace's own `closedSquare` still wins.)*
 
 ### 1.2 The statement, restated
 
@@ -131,11 +146,11 @@ Recorded in § 3.6.
 
 | module | declarations | lines |
 |---|---|---|
-| `Proofs/HadwigerNelson/Topology/SpernerGrid.lean` (namespace `HadwigerNelson.SpernerGrid`; Mathlib only) | `door`, `Rainbow`, `RainbowCell` (with `Decidable` instances), `rowDoors`, `bit`; finite checks `zmod2_add_self`, `zmod2_two`, `door_cell`, `door_eq_zero_of_ne_zero`, `door_eq_zero_of_ne_one`, `door_eq_bit_add_bit`, `Rainbow.exhaust`, `fin3_eq_one`; counts `rowDoors_succ`, `rowDoors_add_rowDoors`, `sum_range_add_succ`, `rowDoors_bottom`, `rowDoors_top`, `rowDoors_succ_eq`; **`exists_rainbowCell`**; spec examples and the one-cell model `oneCell` | ~170 |
-| `Proofs/HadwigerNelson/Topology/LebesgueCovering.lean` (namespace `HadwigerNelson.LebesgueCovering`; imports `SpernerGrid`) | `leastLabel` and its five lemmas; `gridPt` and `gridPt_mem`, `gridPt_re_zero`, `gridPt_re_self`, `gridPt_im_zero`, `gridPt_im_self`, `dist_gridPt_le`; **`exists_mem_inter_three`**; **`lebesgue_covering_rect'`**, **`lebesgue_covering_rect`**; `closedSquare`, `closedSquare_eq_reProdIm`, **`lebesgue_covering_square`**; spec examples; `quadrant`, `quadrant_hypotheses` | ~350 |
+| `Proofs/HadwigerNelson/Topology/SpernerGrid.lean` (namespace `HadwigerNelson.SpernerGrid`; Mathlib only) | `door`, `Rainbow`, `RainbowCell` (with `Decidable` instances), `rowDoors`, `bit`; finite checks `zmod2_add_self`, `zmod2_two`, `door_cell`, `door_eq_zero_of_ne_zero`, `door_eq_zero_of_ne_one`, `door_eq_bit_add_bit`, `Rainbow.exhaust`, `fin3_eq_one`; counts `rowDoors_succ`, `rowDoors_add_rowDoors`, `sum_range_add_succ`, `rowDoors_bottom`, `rowDoors_top`, `rowDoors_succ_eq`; **`exists_rainbowCell`**; spec examples and the one-cell model `oneCell` | 192 |
+| `Proofs/HadwigerNelson/Topology/LebesgueCovering.lean` (namespace `HadwigerNelson.LebesgueCovering`; imports `SpernerGrid`) | `leastLabel` and its five lemmas; `gridPt` and `gridPt_mem`, `gridPt_re_zero`, `gridPt_re_self`, `gridPt_im_zero`, `gridPt_im_self`, `dist_gridPt_le`; **`exists_mem_inter_three`**; **`lebesgue_covering_rect'`**, **`lebesgue_covering_rect`**; `closedSquare`, `closedSquare_eq_reProdIm`, **`lebesgue_covering_square`**; spec examples; `quadrant`, `quadrant_hypotheses` | 357 |
 
-The namespaces avoid `HadwigerNelson.Topology` on purpose (§ 1.1): wave 4's `open … Topology …`, written inside `HadwigerNelson`,
-would open it too, and its `closedSquare` would be ambiguous with wave 4's own.
+The namespaces avoid `HadwigerNelson.Topology` on purpose (§ 1.1, measured): inside `HadwigerNelson`, `open Topology` would open it
+in place of Mathlib's root `Topology`.
 
 **Wave 4's discharge, tested**: `data/fs131/leb/Wave4Bridge.lean` copies wave 4's two declarations verbatim into `namespace
 HadwigerNelson.Plane` with its `open` line and closes the theorem by
@@ -190,7 +205,7 @@ proofs closed in the same sitting as the skeleton elaborated. For a reader, the 
 | `closedSquare_eq_reProdIm`, `lebesgue_covering_square` | `ext; simp [and_assoc]`; `simp only [closedSquare_eq_reProdIm] at …` | `Complex.mem_reProdIm` | one try |
 | `quadrant_hypotheses` | the cover by `le_total` cases with `show` goals; the side conditions by `linarith` on the quadrant's own bounds (a side of length `½` cannot span `[0, 1]`), no evaluation of `![…] i` | `IsClosed.reProdIm` (needs `Mathlib.Analysis.Complex.ReImTopology`) | three tries (`norm_num` does not evaluate `![…] 2`) |
 
-Total: about 520 lines over two modules, closed within this job's budget — the "about an hour of agent work" line of `LEAN.md` §
+Total: 549 lines over two modules, closed within this job's budget — the "about an hour of agent work" line of `LEAN.md` §
 Assumptions was the right side to be on: formalize, never import.
 
 ### 4.2 The handoff (in the form of `plans/FS131-kernel-plan.md` § 6.1)
@@ -213,3 +228,36 @@ Imports cell), and drop the "outside theorem, its disposition owed" sentence fro
 merge `main` into the branch (the append-only lines of `ARCHITECTURE.md` § 3.11, `Proofs.lean`, `scripts/Axioms.lean` are the only
 expected conflicts), re-run the gate, and fast-forward `main`. The two modules import Mathlib only (and each other), so no later wave's
 module can conflict with them.
+
+## Stage 5 — SAVED: the gate
+
+Run by `data/fs131/leb/gate.sh` (from a snapshot copy) on the Lean content of commit `18735b71`, unchanged through this stage
+(`git diff --stat 18735b71 HEAD -- Proofs scripts Proofs.lean ARCHITECTURE.md` is empty). Logs in `data/fs131/leb/gate-*.log`.
+
+| check | result |
+|---|---|
+| `./scripts/build.sh` (slot 40 GiB) | **OK — 440 of 440 batches, 0 modules with warnings** (`build/gate/build/20261004T125203Z-3659161.log`) |
+| zero `sorry` | `grep -rn sorry Proofs/HadwigerNelson/Topology` finds nothing |
+| `./scripts/axioms.sh` | **OK — 1292 clean, 11 axiom-free, 5 declared purchases; 1,308 records**; the seven new records all `[propext, Classical.choice, Quot.sound]`. It flags `CLAUDE.md` § Trust ledger as stale, 1285 → 1292 clean (the seven are this job's) |
+| `./scripts/vacuity.sh` | **OK** — `declarations=7673 refutations-skipped=45`; sites unchanged, `sites=357 vacuous=0 stale=0 declared=3 witnessed=17 generic=335 unknown=2`. It flags the recorded declaration count as stale, 7624 → 7673, in `CLAUDE.md` § The gate and in `scripts/vacuity-baseline.txt`'s header |
+| `./scripts/vacuity.sh --self-test` | **OK** — every control fired, the silent ones stayed silent |
+| `tools/check_architecture.py` | **PASS**, exit 0 |
+| linters | `#lint in Proofs.HadwigerNelson.Topology`: 0 errors in 41 declarations, 14 linters (`data/fs131/leb/lint.out`); the build's own linters (missing docs, unused tactics, unused simp arguments) silent |
+| spec examples | `SpernerGrid`: `door`, `Rainbow`, `bit`, the one-cell model `oneCell` with `RainbowCell` and both door counts; `LebesgueCovering`: `leastLabel`, `gridPt`, `closedSquare`; the model `quadrant_hypotheses` |
+| negative control | the wave-4 bridge with `hLR` planted in `hBT`'s place fails to elaborate (application type mismatch at the last argument), so the bridge checks the hypotheses and not only the conclusion |
+
+**Read aloud against the informal claim.** `lebesgue_covering_square` says: for any `c : ℂ`, `s > 0`, and closed sets `F 0, …, F (m−1)`
+covering the square `[c.re, c.re + s] × [c.im, c.im + s]`, if no `F i` meets (within the square) both the line `re = c.re` and the line
+`re = c.re + s`, and none meets both `im = c.im` and `im = c.im + s`, then some point of the square lies in three of the `F i` with
+pairwise distinct indices. That is Hurewicz–Wallman's Thm IV 2 for `n = 2` (§ 1.2). The model shows the hypotheses are satisfiable.
+
+**Drafts for files this job does not write** (each for the landing, when the counts are computed after merging `main`):
+- `CLAUDE.md` § Trust ledger — the clean count rises by 7 and the record count by 7 (on this branch: 1292 clean, 1,308 records).
+- `CLAUDE.md` § The gate — `declarations=` rises by 49 (on this branch 7673); the site counts do not move.
+- `scripts/vacuity-baseline.txt` — its header's declaration count, likewise.
+- `LEAN.md` § Searching — Lean (or § The package), a new line: *"Never name a namespace `HadwigerNelson.X` after a Mathlib root
+  namespace a module opens (`Topology`, `Set`, `Real`, `Complex`, `Filter`, `Metric`, …): inside `namespace HadwigerNelson…`, `open X`
+  then opens `HadwigerNelson.X` instead of Mathlib's `X`, silently (measured at v4.32.0: `data/fs131/leb/NamespaceShadow.lean` on
+  branch `fs131-leb`). None exists today."* And: *"At the pin `push_neg` is deprecated; write `push Not`."*
+- `ARCHITECTURE.md` § 3's prose counts ("1,698 `.lean` files", "imports 139 modules") were already stale on `main` at `bbee15f0`
+  (1,725 files and 165 imports before this job; 1,727 and 167 after). Not edited here, so that parallel waves' merges do not collide on them.
