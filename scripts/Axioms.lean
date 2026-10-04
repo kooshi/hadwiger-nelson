@@ -3071,6 +3071,21 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.not_mem_interiorPts_of_mem_closure_sector
 #print axioms HadwigerNelson.Plane.ArcMap.false_of_branch_on_sphere
 
+/-! ## FS-131 wave 4, `Contact` (job FS131-IC2) — the second implementer's added children and proved leaves -/
+
+#print axioms HadwigerNelson.Plane.mem_coneAt_hornSet
+#print axioms HadwigerNelson.Plane.e_eq_of_mem_coneAt_hornSet
+#print axioms HadwigerNelson.Plane.dot_neg_left
+#print axioms HadwigerNelson.Plane.ArcMap.IsHorn.congr
+#print axioms HadwigerNelson.Plane.ArcMap.IsHorn.eventually_subset_region
+#print axioms HadwigerNelson.Plane.ArcMap.IsHorn.mem_coneAt_region
+#print axioms HadwigerNelson.Plane.ArcMap.exists_hasSectors
+#print axioms HadwigerNelson.Plane.ArcMap.e_eq_or_of_two_horns
+#print axioms HadwigerNelson.Plane.ArcMap.covers_of_isPlaneMap
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_neighbour
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_flip
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_step
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

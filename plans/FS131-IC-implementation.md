@@ -16,6 +16,12 @@ Axioms from `#print axioms` against the stage-2 build's oleans (`data/fs131/ic/a
   `[propext, sorryAx, Classical.choice, Quot.sound]` until `flank_shadows` lands (stage-3 build, `data/fs131/ic/axioms-stage3.txt`).
 - 35 children in `Plane/ValidMap/Contact` (33 listed in Stage 2; `tanHeight_anti`, `hornSet_mono` in Stage 3), each `[propext, Classical.choice, Quot.sound]`; among them
   `ArcMap.woodall_contacts` (Woodall's out-type contacts at `v ± n` when `int D_c(v) = ∅`) and `interior_nonempty_of_not_mem` (the planar step).
+- FS110-N4-STUCK, N4-PROP (FS131-IC2, Stage 5): `HadwigerNelson.Plane.ArcMap.stuck_chain` — proved **over `stuck_structure`** (still `sorry`):
+  `[propext, sorryAx, Classical.choice, Quot.sound]` until `stuck_structure` lands (stage-5 build, `data/fs131/ic/axioms-ic2-stage5.txt`). Its three step children
+  `ArcMap.stuck_neighbour`, `ArcMap.stuck_flip`, `ArcMap.stuck_step` likewise read `sorryAx` only through `stuck_structure`.
+- 9 children (FS131-IC2, Stage 5), each `[propext, Classical.choice, Quot.sound]`: `mem_coneAt_hornSet`, `e_eq_of_mem_coneAt_hornSet` (a horn approaches its
+  base point exactly along its axis), `dot_neg_left`, `ArcMap.IsHorn.congr`, `ArcMap.IsHorn.eventually_subset_region`, `ArcMap.IsHorn.mem_coneAt_region`,
+  `ArcMap.exists_hasSectors` (every colour has a sector count at a point of the domain), `ArcMap.e_eq_or_of_two_horns`, `ArcMap.covers_of_isPlaneMap`.
 
 ## Stage 1 — SAVED: the readback, the as-given build
 
@@ -188,3 +194,53 @@ OK — all 1744 modules already up to date, nothing built, 3 module(s) with warn
 driver log `data/fs131/ic/build-ic2-readback.log`) — IC1's stage-3 oleans are current. 30 `declaration uses sorry` warnings replayed: `Contact` 6
 (lines 1398, 1437, 1451, 1467, 1483, 1506: `flank_shadows`, `exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure`, `stuck_chain`),
 `UnitArc` 17 and `BaseSteps` 7 (I4h's).
+
+## Stage 5 — SAVED (FS131-IC2 stage 2): `stuck_chain` over `stuck_structure`; 5 `sorry` left in `Contact`
+
+**Proved over `stuck_structure`'s statement** (its own `sorry` gone; no statement changed, no new axiom, no `native_decide`): **FS110-N4-PROP,
+`ArcMap.stuck_chain`**, read against plan § 3.2's row (FS110-N4-STUCK, "N4-PROP for a terminal valid plane map: `IsStuck (v + j n)` for every `j ∈ ℤ`"): same
+statement. Route (N4 § 2.5, the step `k → k + 1`, then induction and the mirror):
+- `stuck_neighbour` (the step's second half): if a colour `h` carried at `v` has eventually at least two sectors at `P = v + e(α + π/2)`, then `P` is stuck
+  (terminal gives no move; `exists_hasSectors` turns "eventually `≥ 2`" into an exact count) and `h` has a horn at `P` along `e α`: `stuck_structure` at `P` gives
+  `h`-horns along `α₁`, `α₁ + π`; both axes lie in `D_h(P)` (`coneAt_subset_allowedCone` over `IsHorn.mem_coneAt_region`), and `v` is an `h`-contact of `P`
+  (in- or out-type, `contact_inType_or_outType`), so `e α₁·(v − P) = 0`, i.e. `sin(α₁ − α) = 0`, and one of the two horns lies along `e α`.
+- `e_eq_or_of_two_horns`: when `c` has exactly two sectors at `v`, horns along `α₀` and `α₀ + π`, any `c`-horn at `v` lies along one of them (three members
+  of a two-element set, the two distinct by their cones; a horn's cone is its axis: `mem_coneAt_hornSet`, `e_eq_of_mem_coneAt_hornSet`).
+- `stuck_step`: `stuck_structure` at `w`, the given horn's axis is `α₀` or `α₀ + π`, so `w + e(α + π/2)` is `N` (colour `h`, clause (iv)) or `S′` (colour `g`, its
+  mirror), and `stuck_neighbour` applies. `stuck_flip`: a horn along `e(α + π)` of the same colour, from the other horn.
+- `stuck_chain`: the invariant "stuck, with a horn along `e α` of a colour with at least two sectors" goes up by `stuck_step` and down by
+  `stuck_flip` → `stuck_step` at `α + π` → `stuck_flip`; `Int.induction_on`.
+
+**Build of this stage**: `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — 444 of 444 batches, 2 module(s)
+rebuilt, 3 module(s) with warnings, 8m38s", exit 0 (`build/gate/build/20261004T195447Z-1915995.log`; driver log `data/fs131/ic/build-ic2-stage5.log`). 29
+distinct `declaration uses sorry` warnings — `Contact` 5 (lines 1628, 1667, 1681, 1697, 1713: `flank_shadows`, `exists_shave`, `exists_rayMerge`,
+`exists_merge`, `stuck_structure`), `UnitArc` 17 and `BaseSteps` 7 (I4h's, as given) — and no other warning or error (the one `error:` line is the
+driver's `lake build --no-build` probe, "target is out-of-date"). Nothing was edited while it ran. **Axioms** against its oleans (`lake env lean
+data/fs131/ic/AxiomsIC2.lean`, `pp.fullNames`; output `data/fs131/ic/axioms-ic2-stage5.txt`; not a gate log): all 77 theorems of `Contact`; 67 read
+`[propext, Classical.choice, Quot.sound]`; 10 read `sorryAx` besides — the five leaves, `shaveAvailable_of_not_doublyShadowed` (through `flank_shadows`), and
+`stuck_neighbour`, `stuck_flip`, `stuck_step`, `stuck_chain` (through `stuck_structure`). **Records**: `tools/fs131_ic2_addrecords.py` (new; IC1's tool with its own
+block, headed "FS131-IC2", in `scripts/Axioms.lean`): 77 names, 12 added, `--check` exit 0; negative control `--plant --check` exit 1 (watched).
+`tools/check_architecture.py`: PASS (no import changed). Names checked against `fs131-w4` (at `ac042f25`), `fs131-w5`, `fs131-w5b` and `main`: no collision.
+
+**Re-pricing** (from this job's first leaf): `stuck_chain` over `stuck_structure` took about 45k of work (IC1's "M over 5" held); the reading of the wave's
+API and the derivation cost more than the proof. The five left are each about a session, as IC1 priced them; nothing in this stage changes that.
+
+**Findings for the successor** (route notes; no statement changes):
+1. **`stuck_structure`'s "one horn per ray" needs SHAVE with `g = c`, not only RAY.** Two `c`-horns along one ray that share their bounding arc (an arc with
+   `c` on both sides; the derivation deletes such arcs WLOG, the formal map need not) are not `RayAvailable` (it needs `κ₂ < κ₃` strictly). They are
+   `ShaveAvailable` instead: the lower horn's upper flank is `c` (`IsFlankAbove v α κ₂ c` from the upper horn), its points are clear for `c` (a valid map), and
+   `σ = κ₁` splits it into an all-upper part — provided the lower horn has *some* lower flank (`IsFlankBelow v α κ₁ h`). So the proof of (i) needs a child
+   **`IsHorn.exists_flanks`**: a horn at a point of the domain has an upper and a lower flank colour. Route: in the chart at `v`, germs along `e α` with
+   curvatures in `(κ₂, κ₂ + δ)` are absent for small `δ` (finitely many germs); germs along other directions stay a positive angle from `α + arcsin(m s/2)` for
+   small `s`; so `hornSet v α κ₂ (κ₂ + δ) r` misses `Γ` for small `r`, lies in the domain, and is preconnected (`BranchGerms.isPreconnected_sector` on a two-germ
+   chart, as `isPreconnected_hornSet_cusp` does), hence in one colour's class. The same child gives (ii)'s flanks `g_±`, `h_±`.
+2. **`woodallCone_strict` gives the horn curvatures per radius** (`∀ᶠ r, ∀ S, ∃ κ₁ κ₂, S = hornSet …`); `IsHorn` needs them fixed. Through the chart they are:
+   a `c`-coloured chart sector whose cone is one direction has `β i = nextβ i` (`IsSectorChart.cone`, `e_eq_of_mem_coneAt_hornSet`), so it is
+   `hornSet v (β i) (κ i) (nextκ i) r` for every `r ≤ r₀` (`sectorBetween_eq_hornSet`), and comparing branch points (`tanHeight_branchPt`) with
+   `woodallCone_strict`'s horn at one radius puts `κ i`, `nextκ i` in `(−1, 1)`. With finding 1 this is `stuck_structure`'s first seven clauses and its
+   two out-type clauses (from `woodallCone_strict`), a sorry-free child I recommend stating first (`stuck_cone`).
+3. `flank_shadows`, the three moves: IC1's Stage 2 list stands (items 1, 3, 4).
+
+**What is left (5)**, in the order I would take it: `stuck_cone` (finding 2, over `IsHorn.exists_flanks`) → `flank_shadows` with N4-FLANK's mechanism as a child
+(IC1's item 1) → `stuck_structure` over both (then `stuck_chain` and its three children are sorry-free) → the three moves (IC1's items 3–4; engine 2
+`ringArcsWithin_of_Γ_subset` is still written nowhere — FS131-I4i on `fs131-w4` has it first on its list).

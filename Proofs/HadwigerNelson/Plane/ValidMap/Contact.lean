@@ -1023,6 +1023,119 @@ theorem hornSet_mono {v : ℂ} {α κ₁ κ₂ s₁ s₂ r : ℝ} (h1 : κ₁ �
     hornSet v α s₁ s₂ r ⊆ hornSet v α κ₁ κ₂ r := fun _ ⟨hd, hx, hA, hB⟩ =>
   ⟨hd, hx, lt_of_lt_of_le hA (tanHeight_anti h1 _ _), lt_of_le_of_lt (tanHeight_anti h2 _ _) hB⟩
 
+/-- **A horn approaches its base point along its axis**: `α ∈ coneAt (hornSet v α κ₁ κ₂ r) v`. -/
+theorem mem_coneAt_hornSet (v : ℂ) (α : ℝ) {κ₁ κ₂ r : ℝ} (hlt : κ₁ < κ₂) (hr : 0 < r) :
+    α ∈ coneAt (hornSet v α κ₁ κ₂ r) v := by
+  intro ε hε
+  set m := (κ₁ + κ₂) / 2 with hm
+  have hm1 : κ₁ < m := by rw [hm]; linarith
+  have hm2 : m < κ₂ := by rw [hm]; linarith
+  have hcont : Continuous fun s : ℝ => ‖e (α + Real.arcsin (m * s / 2)) - e α‖ := by
+    unfold e; fun_prop
+  have h0 : ‖e (α + Real.arcsin (m * 0 / 2)) - e α‖ = 0 := by simp
+  have hev1 : ∀ᶠ s in 𝓝[>] (0 : ℝ), ‖e (α + Real.arcsin (m * s / 2)) - e α‖ < ε := by
+    have hlt : ‖e (α + Real.arcsin (m * 0 / 2)) - e α‖ < ε := by rw [h0]; exact hε
+    exact nhdsWithin_le_nhds ((hcont.tendsto 0).eventually (gt_mem_nhds hlt))
+  have hev2 : ∀ᶠ s in 𝓝[>] (0 : ℝ), s < min r ε ∧ |m| * s < 2 := by
+    have h1 : ∀ᶠ s in 𝓝 (0 : ℝ), s < min r ε := gt_mem_nhds (lt_min hr hε)
+    have h2 : ∀ᶠ s in 𝓝 (0 : ℝ), |m| * s < 2 := by
+      have : Continuous fun s : ℝ => |m| * s := by fun_prop
+      exact (this.tendsto 0).eventually (gt_mem_nhds (by simp))
+    exact nhdsWithin_le_nhds (h1.and h2)
+  obtain ⟨s, ⟨h1, h2, h3⟩, hs0⟩ := ((hev1.and hev2).and self_mem_nhdsWithin).exists
+  have hs0 : (0 : ℝ) < s := hs0
+  refine ⟨branchPt v α m s, branchPt_mem_hornSet v α hm1 hm2 hs0 (lt_of_lt_of_le h2 (min_le_left _ _)) h3, ?_, ?_, ?_⟩
+  · intro h
+    have := norm_branchPt_sub v α m hs0.le
+    rw [h, sub_self, norm_zero] at this
+    exact hs0.ne this
+  · rw [dist_eq_norm, norm_branchPt_sub v α m hs0.le]; exact lt_of_lt_of_le h2 (min_le_right _ _)
+  · rw [norm_branchPt_sub v α m hs0.le, branchPt, add_sub_cancel_left]
+    have hs' : ((s : ℝ) : ℂ) ≠ 0 := by exact_mod_cast hs0.ne'
+    rw [mul_div_cancel_left₀ _ hs']
+    exact h1
+
+/-- **A horn approaches its base point only along its axis**: every direction of `hornSet v α κ₁ κ₂ r` at `v` is `α` (mod `2π`). -/
+theorem e_eq_of_mem_coneAt_hornSet {v : ℂ} {α κ₁ κ₂ r β : ℝ} (hβ : β ∈ coneAt (hornSet v α κ₁ κ₂ r) v) : e β = e α := by
+  set K := |κ₁| + |κ₂| with hK
+  have hK0 : 0 ≤ K := by positivity
+  -- for every `ε`, the two dot products of `e β` with the frame are within `ε`-bounds
+  have hbound : ∀ ε > 0, |dot (e (α + π / 2)) (e β)| ≤ (K / 2 + 1) * ε ∧ -ε ≤ dot (e α) (e β) := by
+    intro ε hε
+    obtain ⟨z, ⟨hzr, hzx, hzA, hzB⟩, hzne, hzd, hdir⟩ := hβ ε hε
+    set a := z - v with ha
+    have hr : 0 < ‖a‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hzne)
+    have hnorm := frame_normSq v α z
+    rw [← ha] at hnorm
+    have hA' : κ₁ * ‖a‖ ^ 2 / 2 < frameY v α z := by
+      have := hzA; unfold TanAbove tanHeight at this; rw [hnorm] at this; linarith
+    have hB' : frameY v α z < κ₂ * ‖a‖ ^ 2 / 2 := by
+      have := hzB; unfold TanBelow tanHeight at this; rw [hnorm] at this; linarith
+    have hy : |frameY v α z| ≤ K * ‖a‖ ^ 2 / 2 := by
+      have hsq := sq_nonneg ‖a‖
+      have h1 : 0 ≤ (κ₁ + |κ₁|) * ‖a‖ ^ 2 := mul_nonneg (by linarith [neg_abs_le κ₁]) hsq
+      have h2 : 0 ≤ (|κ₂| - κ₂) * ‖a‖ ^ 2 := mul_nonneg (by linarith [le_abs_self κ₂]) hsq
+      have h3 : 0 ≤ |κ₂| * ‖a‖ ^ 2 := mul_nonneg (abs_nonneg _) hsq
+      have h4 : 0 ≤ |κ₁| * ‖a‖ ^ 2 := mul_nonneg (abs_nonneg _) hsq
+      have hKe : K * ‖a‖ ^ 2 = |κ₁| * ‖a‖ ^ 2 + |κ₂| * ‖a‖ ^ 2 := by rw [hK]; ring
+      rw [abs_le]; constructor <;> nlinarith
+    have hfy : dot (e (α + π / 2)) (a / (‖a‖ : ℂ)) = frameY v α z / ‖a‖ := by
+      rw [dot_comm', dot_div_ofReal, dot_comm', dot_e_add_pi_div_two_eq_frameY]
+      simp [frameY, ha]
+    have hfx : dot (e α) (a / (‖a‖ : ℂ)) = frameX v α z / ‖a‖ := by
+      rw [dot_comm', dot_div_ofReal, dot_comm', dot_e_eq_frameX]
+      simp [frameX, ha]
+    have hdiff1 : |dot (e (α + π / 2)) (a / (‖a‖ : ℂ) - e β)| ≤ ε := by
+      refine (abs_dot_le _ _).trans ?_
+      rw [norm_e, one_mul]; exact hdir.le
+    have hdiff2 : |dot (e α) (a / (‖a‖ : ℂ) - e β)| ≤ ε := by
+      refine (abs_dot_le _ _).trans ?_
+      rw [norm_e, one_mul]; exact hdir.le
+    rw [dot_comm' (e (α + π / 2)), dot_sub, dot_comm' _ (e (α + π / 2)), dot_comm' (e β), hfy] at hdiff1
+    rw [dot_comm' (e α), dot_sub, dot_comm' _ (e α), dot_comm' (e β), hfx] at hdiff2
+    have hya : |frameY v α z / ‖a‖| ≤ K / 2 * ε := by
+      rw [abs_div, abs_of_pos hr, div_le_iff₀ hr]
+      have hae : ‖a‖ < ε := by rw [ha, ← dist_eq_norm]; exact hzd
+      calc |frameY v α z| ≤ K * ‖a‖ ^ 2 / 2 := hy
+        _ = K / 2 * ‖a‖ * ‖a‖ := by ring
+        _ ≤ K / 2 * ε * ‖a‖ :=
+          mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hae.le (by positivity)) hr.le
+    have hxa : 0 < frameX v α z / ‖a‖ := div_pos hzx hr
+    constructor
+    · have h' := abs_sub_abs_le_abs_sub (dot (e (α + π / 2)) (e β)) (frameY v α z / ‖a‖)
+      rw [abs_sub_comm] at h'
+      have : (K / 2 + 1) * ε = K / 2 * ε + ε := by ring
+      linarith
+    · have := (abs_le.mp hdiff2).2
+      linarith
+  have hsin : Real.sin (β - α) = 0 := by
+    have h : dot (e (α + π / 2)) (e β) = 0 := by
+      by_contra hne
+      have hpos : 0 < |dot (e (α + π / 2)) (e β)| := abs_pos.mpr hne
+      have := (hbound (|dot (e (α + π / 2)) (e β)| / (2 * (K / 2 + 1))) (by positivity)).1
+      have hK1 : 0 < K / 2 + 1 := by positivity
+      have heq : (K / 2 + 1) * (|dot (e (α + π / 2)) (e β)| / (2 * (K / 2 + 1))) =
+          |dot (e (α + π / 2)) (e β)| / 2 := by field_simp
+      linarith
+    rw [dot_e_e] at h
+    rw [show α + π / 2 - β = π / 2 - (β - α) by ring, Real.cos_pi_div_two_sub] at h
+    exact h
+  have hcos : 0 ≤ dot (e α) (e β) := by
+    by_contra hneg
+    rw [not_le] at hneg
+    have := (hbound (-dot (e α) (e β) / 2) (by linarith)).2
+    linarith
+  rcases e_eq_or_of_sin_sub_eq_zero hsin with h | h
+  · exact h
+  · exfalso
+    rw [h, e_add_pi', dot_neg_right, dot_e_e, sub_self, Real.cos_zero] at hcos
+    norm_num at hcos
+
+
+/-- `dot` is negated with its first argument. -/
+theorem dot_neg_left (d u : ℂ) : dot (-d) u = -dot d u := by
+  rw [dot_comm', dot_neg_right, dot_comm']
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
@@ -1389,6 +1502,123 @@ theorem woodallCone_strict (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} {c : Fin
         exact (ne_of_lt hB) this
     · rw [mem_sphere]; exact dist_branchPt_one v β hs.1.le (by linarith [hs.2])
 
+/-- A horn depends on its axis only through `e α`. -/
+theorem IsHorn.congr {v : ℂ} {α α' κ₁ κ₂ : ℝ} {c : Fin k} (h : e α = e α') (hH : F.IsHorn v α κ₁ κ₂ c) :
+    F.IsHorn v α' κ₁ κ₂ c := by
+  obtain ⟨hlt, hev⟩ := hH
+  refine ⟨hlt, ?_⟩
+  filter_upwards [hev] with r hr
+  rw [← hornSet_congr h κ₁ κ₂ r]
+  exact hr
+
+/-- A horn lies, near `v`, in the class of its colour. -/
+theorem IsHorn.eventually_subset_region {v : ℂ} {α κ₁ κ₂ : ℝ} {c : Fin k} (hH : F.IsHorn v α κ₁ κ₂ c) :
+    ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α κ₁ κ₂ r ⊆ F.region c := by
+  filter_upwards [hH.2] with r hr
+  obtain ⟨⟨x, -, hS, -⟩, hcol⟩ := hr
+  intro z hz
+  refine ⟨?_, hcol hz⟩
+  have : z ∈ connectedComponentIn (F.interiorPts ∩ ball v r) x := hS ▸ hz
+  exact (connectedComponentIn_subset _ _ this).1
+
+/-- **A horn's axis is a direction of its colour's class** at `v`. -/
+theorem IsHorn.mem_coneAt_region {v : ℂ} {α κ₁ κ₂ : ℝ} {c : Fin k} (hH : F.IsHorn v α κ₁ κ₂ c) :
+    α ∈ coneAt (F.region c) v := by
+  obtain ⟨r, hr, hr0⟩ := (hH.eventually_subset_region.and self_mem_nhdsWithin).exists
+  exact coneAt_mono hr v (mem_coneAt_hornSet v α hH.1 hr0)
+
+/-- **Every colour has a number of sectors** at a point of the domain (constant for small radii, from the sector chart). -/
+theorem exists_hasSectors {x : ℂ} (hx : x ∈ F.dom) (c : Fin k) : ∃ n : ℕ, F.HasSectors x c n := by
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hx
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · -- the ball is the one sector, of the colour of `x`
+    have hball : ball x r₀ ⊆ F.interiorPts := hC.empty hn
+    have hcolb : ∀ r ∈ Ioc 0 r₀, ∀ z ∈ ball x r, F.col z = F.col x := fun r hr z hz =>
+      (convex_ball x r₀).isPreconnected.constant (F.continuousOn_col.mono hball)
+        (ball_subset_ball hr.2 hz) (mem_ball_self hC.pos)
+    by_cases hcx : F.col x = c
+    · refine ⟨1, ?_⟩
+      filter_upwards [Ioc_mem_nhdsGT hC.pos] with r hr
+      have : F.sectorsOf x r c = {ball x r} := by
+        ext S
+        simp only [sectorsOf, mem_setOf_eq, mem_singleton_iff]
+        rw [hC.isSector_iff_of_zero hn hr]
+        refine ⟨fun h => h.1, ?_⟩
+        rintro rfl
+        exact ⟨rfl, fun z hz => (hcolb r hr z hz).trans hcx⟩
+      rw [this, encard_singleton]; rfl
+    · refine ⟨0, ?_⟩
+      filter_upwards [Ioc_mem_nhdsGT hC.pos] with r hr
+      have : F.sectorsOf x r c = ∅ := by
+        ext S
+        simp only [sectorsOf, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+        intro hS hsub
+        rw [hC.isSector_iff_of_zero hn hr] at hS
+        subst hS
+        exact hcx (hsub (mem_ball_self hr.1))
+      rw [this, encard_empty]; rfl
+  · choose p hp using fun i => hC.sector_nonempty hr₀ i
+    have hmono : ∀ r ∈ Ioc 0 r₀, ∀ i, G.sector x r i ⊆ G.sector x r₀ i := by
+      rintro r hr i z ⟨s, hs, φ, hφ, rfl⟩
+      exact ⟨s, ⟨hs.1, hs.2.trans_le hr.2⟩, φ, hφ, rfl⟩
+    have hcol : ∀ i, ∀ z ∈ G.sector x r₀ i, F.col z = F.col (p i) := fun i z hz =>
+      (hC.isPreconnected r₀ hr₀ i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hr₀ i)) hz (hp i)
+    refine ⟨(Finset.univ.filter fun i => F.col (p i) = c).card, ?_⟩
+    filter_upwards [Ioc_mem_nhdsGT hC.pos] with r hr
+    have hset : F.sectorsOf x r c = (fun i => G.sector x r i) '' ↑(Finset.univ.filter fun i => F.col (p i) = c) := by
+      ext S
+      simp only [sectorsOf, mem_setOf_eq, Finset.coe_filter, Finset.mem_univ, true_and, mem_image]
+      rw [hC.isSector_iff hn hr]
+      constructor
+      · rintro ⟨⟨i, rfl⟩, hsub⟩
+        obtain ⟨q, hq⟩ := hC.sector_nonempty hr i
+        exact ⟨i, by rw [← hcol i q (hmono r hr i hq)]; exact hsub hq, rfl⟩
+      · rintro ⟨i, hi, rfl⟩
+        exact ⟨⟨i, rfl⟩, fun z hz => (hcol i z (hmono r hr i hz)).trans hi⟩
+    rw [hset, (injective_of_disjoint (hC.disjoint r hr) (hC.sector_nonempty hr)).encard_image,
+      Set.encard_coe_eq_coe_finsetCard]
+
+/-- **The axis of a given horn of a two-horn colour** (the step under N4-STUCK (i)): if `c` has exactly two sectors at `v`, horns
+along `α₀` and `α₀ + π`, every `c`-horn at `v` lies along one of them. -/
+theorem e_eq_or_of_two_horns {v : ℂ} {c : Fin k} {α α₀ κ₁ κ₂ κ₁' κ₂' κ₃ κ₄ : ℝ} (hc2 : F.HasSectors v c 2)
+    (hH0 : F.IsHorn v α₀ κ₁' κ₂' c) (hH1 : F.IsHorn v (α₀ + π) κ₃ κ₄ c) (hH : F.IsHorn v α κ₁ κ₂ c) :
+    e α = e α₀ ∨ e α = e (α₀ + π) := by
+  obtain ⟨r, ⟨⟨⟨⟨hs0, hc0⟩, ⟨hs1, hc1⟩⟩, ⟨hs, hcc⟩⟩, h2⟩, hr⟩ :=
+    ((((hH0.2.and hH1.2).and hH.2).and hc2).and self_mem_nhdsWithin).exists
+  have hr0 : (0 : ℝ) < r := hr
+  have hA : hornSet v α₀ κ₁' κ₂' r ∈ F.sectorsOf v r c := ⟨hs0, hc0⟩
+  have hB : hornSet v (α₀ + π) κ₃ κ₄ r ∈ F.sectorsOf v r c := ⟨hs1, hc1⟩
+  have hC : hornSet v α κ₁ κ₂ r ∈ F.sectorsOf v r c := ⟨hs, hcc⟩
+  have hAB : hornSet v α₀ κ₁' κ₂' r ≠ hornSet v (α₀ + π) κ₃ κ₄ r := by
+    intro h
+    have h1 := mem_coneAt_hornSet v α₀ hH0.1 hr0
+    rw [h] at h1
+    have h2 := e_eq_of_mem_coneAt_hornSet h1
+    rw [e_add_pi'] at h2
+    have : e α₀ = 0 := by linear_combination h2 / 2
+    have hn := norm_e α₀
+    rw [this, norm_zero] at hn
+    exact zero_ne_one hn
+  have h2' : (F.sectorsOf v r c).encard = 2 := by rw [h2]; rfl
+  obtain ⟨x, y, -, hset⟩ := Set.encard_eq_two.mp h2'
+  rw [hset] at hA hB hC
+  simp only [mem_insert_iff, mem_singleton_iff] at hA hB hC
+  have hCAB : hornSet v α κ₁ κ₂ r = hornSet v α₀ κ₁' κ₂' r ∨ hornSet v α κ₁ κ₂ r = hornSet v (α₀ + π) κ₃ κ₄ r := by
+    rcases hA with hA | hA <;> rcases hB with hB | hB <;> rcases hC with hC | hC <;>
+      first
+        | exact Or.inl (hC.trans hA.symm)
+        | exact Or.inr (hC.trans hB.symm)
+        | exact absurd (hA.trans hB.symm) hAB
+  have hα := mem_coneAt_hornSet v α hH.1 hr0
+  rcases hCAB with h | h
+  · rw [h] at hα; exact Or.inl (e_eq_of_mem_coneAt_hornSet hα)
+  · rw [h] at hα; exact Or.inr (e_eq_of_mem_coneAt_hornSet hα)
+
+/-- A plane map covers every disc. -/
+theorem covers_of_isPlaneMap (hP : F.IsPlaneMap) (x : ℂ) (R : ℝ) : F.Covers x R := by
+  intro z _; rw [hP]; trivial
+
 /-! ## FS110-N4-SHADOW: N4-FLANK -/
 
 /-- **FS110-N4-SHADOW**, N4-FLANK: for a `c`-horn along `a` with curvatures in `(−1, 1)`, upper flank `g` and lower flank `h`
@@ -1497,6 +1727,91 @@ theorem stuck_structure (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} (hv : F.Cov
       (∀ᶠ ρ in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf (v - e (α + π / 2)) ρ g).encard) := by
   sorry
 
+/-- **The neighbour on the normal line is stuck, with a horn along the same axis** (FS110-N4-PROP's step, its second half): in a
+terminal valid plane map with Condition 5 and at most three colours everywhere, if a colour `h` carried at `v` has at least two
+sectors at `P = v + e(α + π/2)`, then `P` is stuck and `h` has a horn at `P` along `e α`. The axis: `v` is an `h`-contact of `P`,
+and both directions of `h`'s horns at `P` lie in `D_h(P)`, so they are perpendicular to `v − P`. -/
+theorem stuck_neighbour (hF : F.Valid) (h5 : F.Condition5) (hP : F.IsPlaneMap) (hT : F.Terminal)
+    (h3 : ∀ x, (F.coloursAt x).ncard ≤ 3) {v : ℂ} {α : ℝ} {h : Fin k} (hhv : h ∈ F.coloursAt v)
+    (hhN : h ∈ F.coloursAt (v + e (α + π / 2)))
+    (hsec : ∀ᶠ ρ in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf (v + e (α + π / 2)) ρ h).encard) :
+    F.IsStuck (v + e (α + π / 2)) ∧ ∃ m' : ℕ, ∃ κ κ' : ℝ, 2 ≤ m' ∧ F.HasSectors (v + e (α + π / 2)) h m' ∧
+      F.IsHorn (v + e (α + π / 2)) α κ κ' h := by
+  set P := v + e (α + π / 2) with hPdef
+  have hPd : P ∈ F.dom := by rw [hP]; trivial
+  obtain ⟨m', hm'⟩ := exists_hasSectors hPd h
+  have h2 : 2 ≤ m' := by
+    obtain ⟨ρ, h1, h2⟩ := (hsec.and hm').exists
+    rw [h2] at h1
+    exact_mod_cast h1
+  have hstP : F.IsStuck P := by
+    obtain ⟨t1, t2, t3⟩ := hT P (mem_univ _)
+    exact ⟨t1, t2, t3, h, m', h2, hm'⟩
+  obtain ⟨α₁, κ₁, κ₂, κ₃, κ₄, -, -, -, -, hH0, hH1, -⟩ :=
+    stuck_structure hF h5 (covers_of_isPlaneMap hP P 2) (fun x _ => h3 x) hstP h2 hm'
+  have hcov := covers_of_isPlaneMap hP P 1
+  have hvP : v - P = -e (α + π / 2) := by rw [hPdef]; ring
+  have hcont : F.IsContact P h v := by
+    refine ⟨hhN, ?_, hhv⟩
+    rw [dist_eq_norm, hvP, norm_neg, norm_e]
+  have hd1 := coneAt_subset_allowedCone hF hcov hH0.mem_coneAt_region
+  have hd2 := coneAt_subset_allowedCone hF hcov hH1.mem_coneAt_region
+  rw [e_add_pi'] at hd2
+  have hdot : dot (e α₁) (v - P) = 0 := by
+    have hneg : dot (-e α₁) (v - P) = -dot (e α₁) (v - P) := dot_neg_left _ _
+    rcases (contact_inType_or_outType hF hcov hcont).1 with hin | hout
+    · have a1 := (hd1 v hcont).1 hin
+      have a2 := (hd2 v hcont).1 hin
+      rw [hneg] at a2
+      linarith
+    · have a1 := (hd1 v hcont).2 hout
+      have a2 := (hd2 v hcont).2 hout
+      rw [hneg] at a2
+      linarith
+  have hsin : Real.sin (α₁ - α) = 0 := by
+    rw [hvP, dot_neg_right, dot_e_e, show α₁ - (α + π / 2) = (α₁ - α) - π / 2 by ring, Real.cos_sub_pi_div_two] at hdot
+    linarith
+  refine ⟨hstP, m', ?_⟩
+  rcases e_eq_or_of_sin_sub_eq_zero hsin with he | he
+  · exact ⟨κ₁, κ₂, h2, hm', hH0.congr he⟩
+  · refine ⟨κ₃, κ₄, h2, hm', hH1.congr ?_⟩
+    rw [e_add_pi', he, e_add_pi', neg_neg]
+
+/-- **The stuck colour's other horn** (N4-STUCK (i)): at a stuck vertex of such a map, a horn along `e α` of a colour with at least
+two sectors comes with a horn of that colour along `e(α + π)`. -/
+theorem stuck_flip (hF : F.Valid) (h5 : F.Condition5) (hP : F.IsPlaneMap) (h3 : ∀ x, (F.coloursAt x).ncard ≤ 3) {w : ℂ}
+    {α κ₁ κ₂ : ℝ} {c : Fin k} {m : ℕ} (hst : F.IsStuck w) (hm : 2 ≤ m) (hc : F.HasSectors w c m)
+    (hH : F.IsHorn w α κ₁ κ₂ c) : ∃ κ κ' : ℝ, F.IsHorn w (α + π) κ κ' c := by
+  obtain ⟨α₀, κ₁', κ₂', κ₃, κ₄, -, -, -, -, hH0, hH1, -, -, -, -, hc2, -⟩ :=
+    stuck_structure hF h5 (covers_of_isPlaneMap hP w 2) (fun x _ => h3 x) hst hm hc
+  rcases e_eq_or_of_two_horns hc2 hH0 hH1 hH with he | he
+  · exact ⟨κ₃, κ₄, hH1.congr (by rw [e_add_pi', e_add_pi', he])⟩
+  · exact ⟨κ₁', κ₂', hH0.congr (by rw [e_add_pi', he, e_add_pi', neg_neg])⟩
+
+/-- **The step along the normal line** (FS110-N4-PROP's step `k → k + 1`): at a stuck vertex of a terminal valid plane map with
+Condition 5 and at most three colours everywhere, a horn along `e α` of a colour with at least two sectors makes `w + e(α + π/2)`
+stuck, with a horn along `e α` of a colour with at least two sectors there. -/
+theorem stuck_step (hF : F.Valid) (h5 : F.Condition5) (hP : F.IsPlaneMap) (hT : F.Terminal)
+    (h3 : ∀ x, (F.coloursAt x).ncard ≤ 3) {w : ℂ} {α κ₁ κ₂ : ℝ} {c : Fin k} {m : ℕ} (hst : F.IsStuck w) (hm : 2 ≤ m)
+    (hc : F.HasSectors w c m) (hH : F.IsHorn w α κ₁ κ₂ c) :
+    F.IsStuck (w + e (α + π / 2)) ∧ ∃ h : Fin k, ∃ m' : ℕ, ∃ κ κ' : ℝ, 2 ≤ m' ∧ F.HasSectors (w + e (α + π / 2)) h m' ∧
+      F.IsHorn (w + e (α + π / 2)) α κ κ' h := by
+  obtain ⟨α₀, κ₁', κ₂', κ₃, κ₄, g, h, r, r', hH0, hH1, -, -, -, -, hc2, -, hcol, -, -, -, -, -, -, -, -, hcolN, -, hsecN,
+    hcolS, -, hsecS⟩ := stuck_structure hF h5 (covers_of_isPlaneMap hP w 2) (fun x _ => h3 x) hst hm hc
+  rcases e_eq_or_of_two_horns hc2 hH0 hH1 hH with he | he
+  · have hn : e (α + π / 2) = e (α₀ + π / 2) := by rw [e_add, e_add, he]
+    rw [← hn] at hcolN hsecN
+    obtain ⟨hs, m', κ, κ', h2, hm', hH'⟩ := stuck_neighbour hF h5 hP hT h3 (h := h) (by rw [hcol]; simp)
+      (by rw [hcolN]; simp) hsecN
+    exact ⟨hs, h, m', κ, κ', h2, hm', hH'⟩
+  · have hn : e (α + π / 2) = -e (α₀ + π / 2) := by
+      rw [e_add, he, e_add_pi', e_add]; ring
+    have hS : w - e (α₀ + π / 2) = w + e (α + π / 2) := by rw [hn]; ring
+    rw [hS] at hcolS hsecS
+    obtain ⟨hs, m', κ, κ', h2, hm', hH'⟩ := stuck_neighbour hF h5 hP hT h3 (h := g) (by rw [hcol]; simp)
+      (by rw [hcolS]; simp) hsecS
+    exact ⟨hs, g, m', κ, κ', h2, hm', hH'⟩
+
 /-- **FS110-N4-STUCK**, N4-PROP: in a terminal valid map of the plane with Condition 5 and at most three colours at every point,
 a stuck vertex whose stuck colour has a horn along `e α` forces stuck vertices at every point `v + jn`, `j ∈ ℤ`, of its normal
 line. **No model of its hypotheses is expected** (FS131-QA2's QA2-5): it is a step inside FS110-N4-PROP's proof by contradiction — along the
@@ -1507,7 +1822,37 @@ theorem stuck_chain (hF : F.Valid) (h5 : F.Condition5) (hP : F.IsPlaneMap) (hT :
     (h3 : ∀ x, (F.coloursAt x).ncard ≤ 3) {v : ℂ} (hst : F.IsStuck v) {α κ₁ κ₂ : ℝ} {c : Fin k} {m : ℕ} (hm : 2 ≤ m)
     (hc : F.HasSectors v c m) (hH : F.IsHorn v α κ₁ κ₂ c) :
     ∀ j : ℤ, F.IsStuck (v + (j : ℂ) * e (α + π / 2)) := by
-  sorry
+  -- the invariant carried along the normal line
+  let Q : ℂ → Prop := fun w => F.IsStuck w ∧ ∃ c' : Fin k, ∃ m' : ℕ, ∃ κ κ' : ℝ, 2 ≤ m' ∧ F.HasSectors w c' m' ∧
+    F.IsHorn w α κ κ' c'
+  have hup : ∀ w, Q w → Q (w + e (α + π / 2)) := by
+    rintro w ⟨hs, c', m', κ, κ', hm', hc', hH'⟩
+    exact stuck_step hF h5 hP hT h3 hs hm' hc' hH'
+  have hdown : ∀ w, Q w → Q (w - e (α + π / 2)) := by
+    rintro w ⟨hs, c', m', κ, κ', hm', hc', hH'⟩
+    obtain ⟨κa, κb, hHπ⟩ := stuck_flip hF h5 hP h3 hs hm' hc' hH'
+    obtain ⟨hs2, c'', m'', κc, κd, hm'', hc'', hH''⟩ := stuck_step hF h5 hP hT h3 hs hm' hc' hHπ
+    have hn : w + e (α + π + π / 2) = w - e (α + π / 2) := by
+      rw [show α + π + π / 2 = (α + π / 2) + π by ring, e_add_pi']; ring
+    rw [hn] at hs2 hc'' hH''
+    obtain ⟨κe, κf, hH3⟩ := stuck_flip hF h5 hP h3 hs2 hm'' hc'' hH''
+    refine ⟨hs2, c'', m'', κe, κf, hm'', hc'', hH3.congr ?_⟩
+    rw [show α + π + π = α + 2 * π by ring, e_add_two_pi]
+  have key : ∀ j : ℤ, Q (v + (j : ℂ) * e (α + π / 2)) := by
+    intro j
+    refine Int.induction_on j ?_ ?_ ?_
+    · have h0 : v + ((0 : ℤ) : ℂ) * e (α + π / 2) = v := by simp
+      rw [h0]; exact ⟨hst, c, m, κ₁, κ₂, hm, hc, hH⟩
+    · intro i hi
+      have := hup _ hi
+      convert this using 1
+      push_cast; ring
+    · intro i hi
+      have := hdown _ hi
+      convert this using 1
+      push_cast; ring
+  exact fun j => (key j).1
+
 
 end ArcMap
 
