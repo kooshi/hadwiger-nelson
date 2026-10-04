@@ -8,7 +8,12 @@ it bears across the whole corpus, both eras. Writes only this file, `data/fs129/
 
 ## Theorems this phase proved
 
-(Filled at the close of the pass.)
+One composition, **[derived], one mind, kernel pending** (prior art owed; in-house inputs):
+- **FS129-MR1-DOUBLETIP** — in the non-Siamese simple class at six colours, no tile of `p` is the only tip at two change points `60°` apart whose outer
+  tip germs lie on no (Q) arc: FS116-V6-HUG's and FS116-Y4-EMPTY's double-tip kill, at every ring — derived from FS116-Y4-FLANK, FS116-RING-GERM,
+  FS116-N2-STAR, FS116-V4-TWIST, FS116-V4-DICHOTOMY — § Stage 2 (mechanism 1), control `fs129-mr1-doubletip`.
+
+Everything else this pass found is a merge, a near miss with its failing hypothesis named, a citation miss or a null — § Stage 4, table of misses.
 
 ## Stage 1 — SAVED: readback and registered expectations
 
@@ -307,3 +312,128 @@ germ assignment, which is not derived. For FS-124's SEMI-PAR3 opening.
    map's edge, not across a bicycle's cross curve. Not derived. Its bearing: the bicycle is the end of `[Voronov2023]` Lemma 6.1's branch (i), whose
    route lane A records closed (row 133); FS-122's step 2 asks what replaces the bicycle's swap at unbounded complexity, so a three-colour bicycle by
    finitely many arcs would matter there only as an obstruction's shape — noted for FS-122, unchecked.
+
+## Stage 4 — SAVED: the rest of lane R's grokkings by reach, the hubs and roots, the table of misses
+
+*How I read:* each grokking in full (`.claude/skills/grokkings/SKILL.md`), its index line (`data/fs129/index/grokking-uses.md`), and the statements by
+content (`data/fs129/index/statements-R.md`, FS-110 to FS-121), with `data/fs129/index/roots.md` ranks 1–17 and the entries those ranks name.
+
+### Lead (a), completed: FS-112 had already worked A3-HOLE's second step
+FS112-A4SIX: "A four-colour vertex with no covering pair on its unit circle has on that circle arcs of `Γ` centred at it of total length at least
+`60°`, or at least six, one in each of six consecutive `60°` windows (C-UA-BUDGET, branch 1)". That is the unit-arc form of exactly what A3-HOLE left
+open (the four-colour Act One step when `ω(v)` carries arcs of `Γ`). A second citation miss across FS-110 and FS-112, for pass 3.
+
+### G84 — contact is the regularity mechanism (the most mentioned: 10 entries, all FS-111)
+**What:** a saturated or maximal class is carved by unit circles about its own points — at a two-colour interface point, a split unit arc about a centre
+carrying both colours, or a `C^{1,1}` curve with `|κ| ≤ 1` between two tangent unit discs (FS111-M-PINCH). **Kind:** contact at distance exactly 1.
+**Used at:** FS111-M-C11, -M-PINCH, -M-R7, -M2-FIX, -M2-HULLC, -M2-ZERO, -M3-BAND, -M3-HC, -M4-LADDER, -VMW-R7-PPLUS (index); unnamed at FS116-O1-SATPIN,
+which is M-PINCH read at a four-colour vertex of a saturated fragment. **Where it bears, not applied:** FS-125's strip-like class (its G1) through
+FS111-M4-LADDER (a rung is a ladder's first step) — pass 1 found null for J3's G1 and I add nothing. **Near miss, G84 with G89:** every FS-125 kill
+(FS116-S1-QF, -SAT-STRIP, -S1-RUNG) assumes the fragment saturated, i.e. each side colour bound at each edge point; FS121-D3-GRUNDY makes every colour
+but the largest bound for free, and M-PINCH needs both sides bound (pass 1, J10 item 3). **The hypothesis to read, per kill:** which side's binding
+it uses. A kill that reads only the lower colour's binding at every edge would hold for Grundy fragments, which come free — and by FS121-D3-EQ that
+would bypass TOP₆, so I expect every such kill to read the top side somewhere; unchecked here, and the question for FS-125's opening.
+
+### G85 — saturated interfaces have integer radii (FS111-M2-INTRAD)
+**What:** off a locally finite singular set the unit parallel of a tangent-type interface toward its centre is an interface, so radii drop by exactly 1
+and stop at 1. **Kind:** contact at distance exactly 1, walked along the normal. **Used at:** FS111-M2-INTRAD, FS121-O1-OUT, -D1-PENCILWIN, -D2-THIN,
+-D2-SYM. **Where it bears, not applied — FS116-O1-SATPIN's tangent type.** SATPIN leaves a tangent edge at a four-colour vertex `C^{1,1}` with `|κ| ≤ 1`;
+a fragment is bounded by segments and circular arcs by definition, so its singular set is locally finite and INTRAD's one-step argument would make every
+tangent edge a segment or an arc of integer radius, given saturation one unit beyond it toward the centre. With FS121-O1-OUT and FS121-Z1-NOCURVED, FS-125's
+edges at a four-colour vertex would then be split unit arcs, segments, (R2) arcs, or arcs of integer radius at least 2 (FS-126's class). **The
+hypothesis that is unchecked:** INTRAD is stated for honest saturated colourings of the plane satisfying REG-J′; its transfer to a fragment saturated on
+`B̄(p, R − 1)` needs the parallel's saturation inside that disc (a reading radius of about `R ≥ 3` for the walk to stop). Not derived; for FS-125.
+
+### G86 — tile counts are blind to Siamese pairs
+**Used at:** FS114-N2-REFINE, -N2-AVG (N2-FIVE-PLANE, "non-Siamese" in its headline), FS114-ROUTE-T, and pass 1's FS129-OR1-DISCF-NS (whose Siamese form
+needs a distance argument, as G86 says). **Where it bears, not applied: null.** Searched every count-shaped statement (FS114-N114-*, -N2-*, -N3-JOINT,
+-CVB-THOM, -NB-DUAL): each that allows Siamese pairs replaces its count by local finiteness or states the non-Siamese scope.
+
+### G88 — curved tangent interfaces are the honest class's open content at the ends
+**Used at:** FS121-O1-OUT, -D2-INCURVED, -Z1-NOCURVED, -V5-SYM-CPT. **Where it bears:** FS-125 through the edge list above (G85's site) and lead (b)'s
+merge (the stuck ray is its valid-map form). Nothing new to derive.
+
+### G89 — honesty is free; the six-colour content of saturation is the top colour
+**Used at:** FS121-D3-GRUNDY, -D3-FALLSAT, -D3-SWAP1D, -C1-GMAP, -D3-EQ; pass 1's FS129-OR1-TOP5 (its five-colour mirror). **Where it bears, not applied:**
+FS-125's kills, as under G84 — the near miss "which side's binding each kill reads".
+
+### G90 — lateral extent against gap
+**Used at:** FS121-D4-FACE, -V5-FACE-SHARP, -D4-LINE, -D4-TINY16. **Where it bears:** lead (c) (FS111-M4-CUT, one sagitta). Searched FS116-Y1-STRIPCEIL
+(the strip saturates to `√(√3 − 3/4) − 1/2 ≈ 0.491` at most) and FS116-Y1-NOTCH for a sagitta: their bounds come from distances to named stop points, not
+from a piece across a gap. Null beyond (c).
+
+### G91 — the ring is the pigeonhole
+**Used at:** FS116-RING-TWIST-C, -RING-GERM, -N3-SEMI, -Y4-EMPTY and the placing rule (unnamed by number in its own entries). **Where it bears, not
+applied:** its EMPTY kill holds at every pair of adjacent change points with their outer tip germs off (Q) arcs — FS129-MR1-DOUBLETIP (stage 2); its *Do*
+("before building on a ring type's structure lemmas, ask whether the type is inhabited … testing the straddle among the forced pieces first") is what
+DOUBLETIP does for FS-124's ring types. **A merge for pass 3:** FS112-SIX ("A vertex with five colours has unit arcs centred at it of total length at
+least 180°; with six, its whole unit circle lies in `Γ`, every arc of kind both") is the coarse form of FS116-N2-FIVERING's length clause (there the
+arcs are (Q) arcs, and the ring has no change point) and of FS116-N2-SIXRING (six `60°` arcs, one per tile); FS-116 re-derived and sharpened it without
+citing it. And FS112-U1 is FS116-V5-U1, stated twice.
+
+### G81, G82 — the collapse and the stability reading
+G81 (where every place mixes, the field is the plane) has no regularity-era mechanism use: it is the premise of the whole era (rows 128, 130), and its
+sites are FS-104's field form, lane A's. Null for lane R. G82 (price a certificate at its feature's scale) bears on every local kill's band form:
+FS116-V6-HUG's and DOUBLETIP's margins are second order in the edge lengths (stage 2, mechanism 3a item 3) — FS-122's filed datum; nothing new.
+
+### G2, G3 — lane A's by content
+Every era-R mention of "G2" or "G3" in the index is a homonym: FS-106's local labels for S–V's gaps (`[G2]`, `[G3]` in FS106-AE-Q2, -TS-U, FS107-RR,
+-W-TAN) and FS-125's open places G1–G3 (FS116-S1-QF, -SAT-STRIP). G2 (construction grammar: rings of vertices about a rotation centre) and G3 (witness
+radii in ℚ(√33), angles detuned) are readings about finite witness graphs, the arithmetic era's. **They are lane A's mechanisms; the ownership
+ruling's majority count (item 51) was an artefact of the homonyms.** Null in the regularity era: no held fragment's construction is read as a rotated
+copy, and the regularity era's exact fragments (over ℚ(√3), ℚ(√5)) are not witnesses of a field.
+
+### Hubs and roots (`data/fs129/index/roots.md`)
+- **Rank 1, FS111-V0-ID1** ("if `y ∈ S̃_j` and `d̄_j(x) > 0` then `|x − y| ≠ 1`") **is FS116-V5-NE1's measurable form** ("if a point `x` lies in the
+  closure of a tile of colour `c`, then no point `z` interior to a tile of colour `c` has `|z − x| = 1`", rank 11). One root, two eras of the lane; the
+  Lean backlog should prove V0-ID1 once and V5-NE1 as its map corollary (tile-interior points have density 1; closure points lie in `S̃`).
+- **FS111-C-HULL is FS116-V4-DICHOTOMY's measurable form** (path-connected `C ⊆ S̃_j`: all distances below 1 or all above) — the straddle's core, held
+  twice. Same Lean remark.
+- **Rank 2, FS111-C-HULL-SO, is refuted** (its own entry: "Rests on it: nothing; the corrected form is FS111-C-HULL") **and is a root only by an index
+  artefact**: `data/fs129/index/edges.csv` has the edge `FS111-C-HULL-SO,FS111-C-HULL,rests`, read from "the corrected form is FS111-C-HULL" in its
+  Rests-on line. Its 78 transitive dependents are C-HULL's. A tool defect for FS129-Z1 (the index's Rests-on parser).
+- **Rank 5, FS111-M-PINCH** (18 direct dependents) is G84's mechanism; FS116-O1-SATPIN is its local form (G84 above). **Rank 7, FS112-U1** = FS116-V5-U1
+  (G91 above).
+
+### Table of misses (pass 3 and the record job read this first)
+
+| mechanism | site | kind | what it gives | derived |
+|---|---|---|---|---|
+| G83's straddle / V6-HUG's argument | FS-124 ring types with two adjacent change points sharing a sole tip (Y4 § 3.4 neighbour 2; card 2 rank 1) | composition (an instance filed where the class was carried) | the double tip dies at `1 + ε` on every ring when the two outer tip germs are off (Q) arcs | yes — FS129-MR1-DOUBLETIP |
+| V6-HUG's identity | FS114-Y5-PXKILL (FS114-YB4-2ND's exact form) | merge (the identity already used at FS-114, unnamed) | one lemma for PXKILL, V6-HUG, V6-ADJ, FLANK's model | no — pass 3 |
+| G83's straddle | SEMI-PAR3 (J2) | near miss | none at `1 + ε`: no same-colour pair is pinned to two unit circles about a unit pair | no |
+| G83's straddle | the Siamese class (J7) | near miss | the last step survives; "one tile per colour at a change point" fails | no |
+| G83's straddle | FS114-K1's (Q)-ring residues: Y6-E2RED's S6, the wrap, the Reuleaux `(2, 1, 1, 0)` past `√3` | unread | — | no — pass 3 |
+| V6-ADJ's argument | adjacent change points with outer pairs off (Q) | candidate under-reach, as DOUBLETIP | a wider V6-ADJ | no |
+| the bends | points of at most three colours | generalization | Γ-free ring below `√3` at any such point; no consumer | no |
+| the bends | FS110-P17, -Y3-SIX | near miss | their ring hypothesis; Condition 5 elsewhere in their proofs unchecked | no |
+| the bends | FS116-N2-RECIP, FS110-N2-SWAP's exceptions | near miss | two rings at once (BENDFRAG's not-claimed) | no |
+| (none needed) | FS110-A3-HOLE | citation miss | first step = FS116-N1-QFREE4; false with (Q) arcs on fragments (FS116-Y2-SIXFRAG); second step = FS112-A4SIX's branch and a two-colour change point (FS116-N1-QDISK) | no — nothing to derive |
+| stuck ray = tangent pencil | FS112-N3-PER ↔ FS121-D2-PERFIN, -D2-SYM | merge | D2-SYM's window hypothesis transferred toward N3-ALPH | no — pass 3 |
+| one sagitta | FS111-M4-CUT ↔ FS121-D4-FACE | merge | FACE-SHARP's construction as CUT's sharpness | no — pass 3 |
+| height on a curve | SEMI-PAR3's `y`-ring at `(u, p, v)` (lane A's question) | computed | jump 0 under the (Q) arcs' own germs; `±2` only with an `f`-tile at `u` or `v`; forces `f` at `y + e(±60°)` | conditional exploration only |
+| height on a curve | FS106-BIKE | near miss | missing: a coupling of the two circles' windings across the cross curve | no |
+| G84 + G89 | FS-125's kills (S1-QF, SAT-STRIP, S1-RUNG) | near miss | which side's binding each kill reads (Grundy fragments are free) | no — FS-125's opening |
+| G85 | FS116-O1-SATPIN's tangent type | site | tangent edges segments or integer-radius arcs, given saturation one unit beyond | no — FS-125 |
+| G91 | FS116-N2-FIVERING, -SIXRING / FS112-SIX (coarse form); FS116-V5-U1 / FS112-U1 | merge | one statement each, the sharp form kept | no — pass 3 |
+| roots | FS111-V0-ID1 / FS116-V5-NE1; FS111-C-HULL / FS116-V4-DICHOTOMY | merge (Lean economy) | prove the measurable form once | no — Lean backlog |
+| (index) | FS111-C-HULL-SO as rank-2 root | tool defect | the refuted entry roots C-HULL's chain only through a misparsed Rests-on line | — |
+| G2, G3 | regularity era | ownership | lane A's by content; homonym mentions | — |
+
+### Registered expectations, scored (stage 1's table)
+
+| quantity | registered | outcome |
+|---|---|---|
+| mechanisms worked | about 16; 11–16 finished | **17** worked (12 grokkings, the bends, the two closed forms, the leads, the height on a curve from lane A's relay), every one at least to its section |
+| mechanisms bearing somewhere unapplied | 6 (3–9) | **8** by my count (G83, V6-HUG's identity, the bends' generalization, G84+G89, G85, G91, the height on a curve, the roots' merges); in range |
+| compositions derived | 4 (2–8) | **1** (DOUBLETIP). Below range — the other sites were merges, near misses or citation misses, each named |
+| misses of the FS116-Y4 kind | 2 (0–4) | **0 strictly** (no milestone worked a step for rounds that a mechanism would have emptied); **3 citation or re-derivation misses** (A3-HOLE answered at FS-112 and FS-116 unlinked; FIVERING and SIXRING re-deriving FS112-SIX, sharpened, uncited; V6-HUG's identity re-found after PXKILL) and one statement-scope under-reach (V6-HUG) |
+| nulls | 5 (2–9) | **5** (WHOLE's identity, G86, G88, G81, G2/G3 together; G82 and G90 add nothing new) — in range |
+| G83's straddle bears on an unapplied held step | 0.55 | **yes** (DOUBLETIP) |
+| the bends shorten an FS-110 GAP | 0.45 | **no** — A3-HOLE's GAP is the (Q) branch, which no bend removes, and its first step was already held stronger |
+| V6-HUG's identity closes or empties a held open step | 0.20 | **partly** — it empties a configuration of FS-124 (through DOUBLETIP), not one of the list's named open steps |
+| a held result found false | 0.04 | **no** (A2-V56's conclusion is false on fragments with (Q) arcs, but FS-110 stated it for full tight maps and graded that branch a GAP) |
+| this pass changes the bearing on the answer | 0.10 | **no** — DOUBLETIP prunes FS-124's case list; SEMI-PAR3 and the route shapes stand |
+
+The miss runs the other way from pass 1's: I priced compositions high, after pass 1's correction, and the mechanisms mostly met sites as merges and
+near misses. The one composition is the prompting instance's own pattern — an argument filed at a narrower class than it carries.
