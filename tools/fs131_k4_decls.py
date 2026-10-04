@@ -11,7 +11,7 @@ MODS = ["Proofs/HadwigerNelson/Plane/StuckChain.lean", "Proofs/HadwigerNelson/Pl
         "Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean", "Proofs/HadwigerNelson/Plane/SVMap.lean",
         "Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean"]
 # Definitions built from `sorry` leaves (FS131-K4b): recorded like theorems, so their axioms are audited when the leaves land.
-DEFS = {"toAeProperRegions", "sevenBrickMap", "sevenBrickRegions", "bowtie"}
+DEFS = {"toAeProperRegions", "sevenBrickMap", "sevenBrickRegions", "bowtie", "l60Frag", "isoFrag"}
 
 
 def names(track=True):

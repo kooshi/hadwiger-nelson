@@ -2124,6 +2124,38 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.bowtie_terminalOn
 #print axioms HadwigerNelson.Plane.ArcMap.bowtie_unitArcEnds
 
+/-! ## FS-131 wave 4 (job FS131-K4c) — the unit-arc items: U1's shadow, L60-EQ and L60-REAL, N2-ENV and the bends, ISO, FLANK, FLANK-Q, A4SIX, NB4P (sorry until wave 4's implementer lands it) -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.u1_shadow
+#print axioms HadwigerNelson.Plane.ArcMap.l60_eq_inner
+#print axioms HadwigerNelson.Plane.ArcMap.l60_eq_outer
+#print axioms HadwigerNelson.Plane.ArcMap.l60_eq_corners
+#print axioms HadwigerNelson.Plane.ArcMap.l60_eq_third
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_l60Dom
+#print axioms HadwigerNelson.Plane.ArcMap.l60Arcs_nondegenerate
+#print axioms HadwigerNelson.Plane.ArcMap.l60Col_locallyConstant
+#print axioms HadwigerNelson.Plane.ArcMap.l60Frag
+#print axioms HadwigerNelson.Plane.ArcMap.l60_real
+#print axioms HadwigerNelson.Plane.ArcMap.n2_env_toward
+#print axioms HadwigerNelson.Plane.ArcMap.n2_env_away
+#print axioms HadwigerNelson.Plane.ArcMap.n2_env_near
+#print axioms HadwigerNelson.Plane.ArcMap.n2_env_near_away
+#print axioms HadwigerNelson.Plane.ArcMap.bend_toward
+#print axioms HadwigerNelson.Plane.ArcMap.bend_away
+#print axioms HadwigerNelson.Plane.ArcMap.bend_away_whole
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_isoDom
+#print axioms HadwigerNelson.Plane.ArcMap.isoCol_locallyConstant
+#print axioms HadwigerNelson.Plane.ArcMap.isoFrag
+#print axioms HadwigerNelson.Plane.ArcMap.iso
+#print axioms HadwigerNelson.Plane.ArcMap.inType_shadows_horn
+#print axioms HadwigerNelson.Plane.ArcMap.flank_siamese_of_inType
+#print axioms HadwigerNelson.Plane.ArcMap.flankQ_upper
+#print axioms HadwigerNelson.Plane.ArcMap.flankQ_lower
+#print axioms HadwigerNelson.Plane.ArcMap.flankQ_both
+#print axioms HadwigerNelson.Plane.ArcMap.a4six
+#print axioms HadwigerNelson.Plane.ArcMap.nb4p
+#print axioms HadwigerNelson.Plane.ArcMap.flank_incomplete_bowtie
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
