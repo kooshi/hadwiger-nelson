@@ -834,3 +834,18 @@ reason by the close.*
      with ranked findings; read-only everywhere. Keryx's own counts before it (for comparison, not a finding): Lean files changed since `49c3abb8` — w2 13
      files ≈ 7.9k lines, w3 10 ≈ 9.7k, w4 15 ≈ 5.9k, ww 19 ≈ 5.9k (the last two include earlier waves' skeleton files); no `maxHeartbeats` raised and no
      linter switched off in any of them.
+139. **FS131-E2 mid-job finding** (message 2026-10-04; `plans/FS131-E2-derivation.md` stage 2, commit `a8f30705`, derive gate PASS by its report): **Q1 derived**
+     (FS131-E2-U1-CUSP, hand, one mind) — in a non-Siamese **simple** fragment the four-colour clause holds with cusps: I3e's local picture needs one tile on both
+     sides of the cusp, so its closure meets itself at `z` and it is not a Jordan domain. **Q2 derived** (FS131-E2-NOBOTH-CUSP) — NOBOTH's two minds handled the
+     cusp ("a cusp horn included", N3; "a horn inside a γ-sector already splits it", NB3 §1.4): a tile wrapped round a cusp counts as a repeated colour, so wave 4's
+     `noBoth` stands. **The monster, exact** (FS131-E2-MONSTER, `tools/fs131_e2_frag.py`): a valid non-Siamese fragment with a both-kind unit arc at 0, a horn tile
+     with a cusp at 0, one tile on both sides of it, three colours at 0, every hypothesis of `four_of_bothKind` as stated at `05cb0a3e` met — **so that form was
+     false, and item 112's `β₁ < β₂` was needed**; the repaired form is not refuted. **The model** (FS131-E2-MODEL): a simple fragment with a cusp at a both-kind
+     centre and four colours — the case is real. Keryx's receipt: `--variant monster` prints "FRAG ALL OK", `--plant recolour` "FRAG FAIL (3)"; NB3's sentence
+     read at `plans/FS112-NB3-verification.md` §1.4. **Correction owed to item 112**: "held only with no cusp at `z`" is wrong for the simple class — the hand
+     clause stands in full there (one mind); the general class form needs non-degenerate cones (the monster). **Ruling — the strengthening**: `hnc` in
+     `four_of_bothKind_simple` is mathematically unnecessary; E2's separation lemma (`Simple.coneAt_eq_angleIcc_sep`, its § 2.7: a tile's cone is an interval
+     whose open interior no other tile's cone meets), from `localSectors` and the planned `jordan_two_branches`, removes it (§ 2.4's proof shape), and wave 4's
+     `noBoth` needs the same separation. FS131-I3g states the separation lemma beside `localSectors`, and restores `four_of_bothKind_simple`'s `05cb0a3e` statement
+     (no `hnc`) if its budget allows; otherwise wave 3 lands with `hnc` and a successor adds the stronger form after. Alternative weighed: require it before
+     landing. Why not: the two `RingGerm` leaves gate the landing and nothing in Lean consumes the simple form yet. Confidence: high.
