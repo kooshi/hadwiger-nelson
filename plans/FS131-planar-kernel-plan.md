@@ -6,7 +6,8 @@
 
 ## Theorems this phase proved
 
-None so far: a planning job. (Updated at each stage.)
+None new: a planning job. `exists_holed_valid_fragment` (`MapGraph`) was re-proved after `IsHoleOf`'s change, its statement unchanged
+([kernel] at the stage-6 build, no `sorry`); every other declaration of this job is stated with `sorry`.
 
 ## Stage 1 — SAVED: the readback
 
