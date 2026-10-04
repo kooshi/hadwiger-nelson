@@ -2218,6 +2218,69 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.exists_two_absent
 #print axioms HadwigerNelson.Plane.ArcMap.false_of_four_le_sectors
 
+-- FS131-IW: the supporting lemmas of the implementer (children of the leaves above; no statement of the skeleton changed)
+#print axioms HadwigerNelson.Plane.e_mul_conj_e
+#print axioms HadwigerNelson.Plane.eq_add_norm_mul_e
+#print axioms HadwigerNelson.Plane.eventually_abs_arg_lt
+#print axioms HadwigerNelson.Plane.eventually_norm_sub_mem
+#print axioms HadwigerNelson.Plane.Rim.radii_mono
+#print axioms HadwigerNelson.Plane.mem_collar_iff
+#print axioms HadwigerNelson.Plane.exists_pos_le_finset
+#print axioms HadwigerNelson.Plane.dist_polar_pair
+#print axioms HadwigerNelson.Plane.exists_chord_angle
+#print axioms HadwigerNelson.Plane.isOpen_shadow
+#print axioms HadwigerNelson.Plane.false_of_dense_unit_pair
+#print axioms HadwigerNelson.Plane.norm_sq_mul_e_add_e
+#print axioms HadwigerNelson.Plane.dot_eq
+#print axioms HadwigerNelson.Plane.abs_dot_le
+#print axioms HadwigerNelson.Plane.dot_add_left
+#print axioms HadwigerNelson.Plane.dot_sub_left
+#print axioms HadwigerNelson.Plane.dot_sub_right
+#print axioms HadwigerNelson.Plane.dot_real_mul_left
+#print axioms HadwigerNelson.Plane.dot_e_e
+#print axioms HadwigerNelson.Plane.norm_sub_real_mul_e_sq
+#print axioms HadwigerNelson.Plane.mem_shadow_of_preconnected
+#print axioms HadwigerNelson.Plane.dot_cone_bound
+#print axioms HadwigerNelson.Plane.isPreconnected_collar
+#print axioms HadwigerNelson.Plane.eventually_collarAt
+#print axioms HadwigerNelson.Plane.CollarAt.interior
+#print axioms HadwigerNelson.Plane.false_of_changePt_landing
+#print axioms HadwigerNelson.Plane.exists_changePt_band
+#print axioms HadwigerNelson.Plane.false_of_collars_closed
+#print axioms HadwigerNelson.Plane.finite_bad_radii
+#print axioms HadwigerNelson.Plane.dist_sq_polar_one
+#print axioms HadwigerNelson.Plane.dist_sq_polar_polar
+#print axioms HadwigerNelson.Plane.norm_sq_framePt_sub
+#print axioms HadwigerNelson.Plane.e_add_int_mul_two_pi
+#print axioms HadwigerNelson.Plane.one_sub_e_two_mul
+#print axioms HadwigerNelson.Plane.one_sub_e_neg_two_mul
+#print axioms HadwigerNelson.Plane.CollarAt.mono
+#print axioms HadwigerNelson.Plane.shadow_mono
+#print axioms HadwigerNelson.Plane.CollarAt.inter
+#print axioms HadwigerNelson.Plane.prev_succ
+#print axioms HadwigerNelson.Plane.d_prev_succ
+#print axioms HadwigerNelson.Plane.eq_of_edge_mem_angleIcc
+#print axioms HadwigerNelson.Plane.finite_roots_quartic
+#print axioms HadwigerNelson.Plane.framePt_re
+#print axioms HadwigerNelson.Plane.framePt_im
+#print axioms HadwigerNelson.Plane.Arc.finite_inter_parabola
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.eq_of_edge_mem_angleIcc
+#print axioms HadwigerNelson.Plane.sum_width_aux
+#print axioms HadwigerNelson.Plane.sum_width
+#print axioms HadwigerNelson.Plane.width_eq_pi_unique
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_shadow_of_mem_region
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_interiorPts_of_isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.exists_near_sphere_sides
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_inside_of_colour
+#print axioms HadwigerNelson.Plane.ArcMap.exists_inside_colour
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.exists_prev_dir
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_prev_inner
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_prev_outer
+#print axioms HadwigerNelson.Plane.ArcMap.exists_cur_dir
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_cur_inner
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_cur_outer
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_nonempty_of_mem_closure_region
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

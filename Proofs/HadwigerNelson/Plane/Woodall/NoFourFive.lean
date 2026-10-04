@@ -311,6 +311,25 @@ theorem one_sub_e_neg_two_mul (φ : ℝ) : 1 - e (-(2 * φ)) = ((2 * Real.sin φ
   push_cast
   linear_combination (-2 : ℂ) * hsc
 
+/-- Carrying a collar is monotone in the set. -/
+theorem CollarAt.mono {S T : Set ℂ} {u : ℂ} {s : Rim} {θ : ℝ} (h : CollarAt S u s θ) (hST : S ⊆ T) :
+    CollarAt T u s θ := by
+  obtain ⟨h, hh, hsub⟩ := h
+  exact ⟨h, hh, hsub.trans hST⟩
+
+/-- The shadow is monotone in the set. -/
+theorem shadow_mono {S T : Set ℂ} (hST : S ⊆ T) : shadow S ⊆ shadow T :=
+  fun _ ⟨y, hy, hd⟩ => ⟨y, hST hy, hd⟩
+
+/-- Carrying a collar on one side about an angle is stable under intersection. -/
+theorem CollarAt.inter {S T : Set ℂ} {u : ℂ} {s : Rim} {θ : ℝ} (hS : CollarAt S u s θ) (hT : CollarAt T u s θ) :
+    CollarAt (S ∩ T) u s θ := by
+  obtain ⟨h₁, hh₁, hs⟩ := hS
+  obtain ⟨h₂, hh₂, ht⟩ := hT
+  refine ⟨min h₁ h₂, lt_min hh₁ hh₂, fun z hz => ⟨hs ?_, ht ?_⟩⟩
+  · exact collar_subset_collar u s (by linarith [min_le_left h₁ h₂]) (by linarith [min_le_left h₁ h₂]) (min_le_left _ _) hz
+  · exact collar_subset_collar u s (by linarith [min_le_right h₁ h₂]) (by linarith [min_le_right h₁ h₂]) (min_le_right _ _) hz
+
 /-! ## Sector bookkeeping (the `Fin` wrap) and the parabola's meeting with arcs -/
 
 /-- **The previous sector's end is this sector's start**, through the `Fin` wrap: for `i ≠ 0` the sector before `i` ends at `i`'s start; for
@@ -588,16 +607,6 @@ theorem not_mem_coloursAt_of_dist_eq_one (hF : F.Valid) {j : Fin k} {q Y : ℂ} 
 theorem not_mem_shadow_of_mem_region (hF : F.Valid) {j : Fin k} {q : ℂ} (hq : q ∈ F.region j) : q ∉ shadow (F.region j) := by
   rintro ⟨y, hy, hd⟩
   exact hF q hq.1 y hy.1 hd (by rw [show F.col q = j from hq.2, show F.col y = j from hy.2])
-
-/-- Carrying a collar is monotone in the set. -/
-theorem _root_.HadwigerNelson.Plane.CollarAt.mono {S T : Set ℂ} {u : ℂ} {s : Rim} {θ : ℝ} (h : CollarAt S u s θ) (hST : S ⊆ T) :
-    CollarAt T u s θ := by
-  obtain ⟨h, hh, hsub⟩ := h
-  exact ⟨h, hh, hsub.trans hST⟩
-
-/-- The shadow is monotone in the set. -/
-theorem _root_.HadwigerNelson.Plane.shadow_mono {S T : Set ℂ} (hST : S ⊆ T) : shadow S ⊆ shadow T :=
-  fun _ ⟨y, hy, hd⟩ => ⟨y, hST hy, hd⟩
 
 /-- **An open set meets the interior points** (a map of the plane): `Γ` has empty interior. -/
 theorem exists_mem_interiorPts_of_isOpen (hP : F.IsPlaneMap) {U : Set ℂ} (hU : IsOpen U) (hne : U.Nonempty) :
@@ -1214,15 +1223,6 @@ theorem SectorsAt.exists_parabola_region (hP : F.IsPlaneMap) {v : ℂ} {n : ℕ}
   rcases h.eq_of_edge_mem_angleIcc hpos (i := i) (i' := i') hmem with rfl | rfl
   · exact Or.inr hi'.symm
   · exact Or.inl hi'.symm
-
-/-- Carrying a collar on one side about an angle is stable under intersection. -/
-theorem _root_.HadwigerNelson.Plane.CollarAt.inter {S T : Set ℂ} {u : ℂ} {s : Rim} {θ : ℝ} (hS : CollarAt S u s θ) (hT : CollarAt T u s θ) :
-    CollarAt (S ∩ T) u s θ := by
-  obtain ⟨h₁, hh₁, hs⟩ := hS
-  obtain ⟨h₂, hh₂, ht⟩ := hT
-  refine ⟨min h₁ h₂, lt_min hh₁ hh₂, fun z hz => ⟨hs ?_, ht ?_⟩⟩
-  · exact collar_subset_collar u s (by linarith [min_le_left h₁ h₂]) (by linarith [min_le_left h₁ h₂]) (min_le_left _ _) hz
-  · exact collar_subset_collar u s (by linarith [min_le_right h₁ h₂]) (by linarith [min_le_right h₁ h₂]) (min_le_right _ _) hz
 
 /-- A direction just below the end of the sector before `i`, as seen from `d i.castSucc` (mod `2π`): E1-RAY's `γ` for the previous sector. -/
 theorem SectorsAt.exists_prev_dir {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c)
