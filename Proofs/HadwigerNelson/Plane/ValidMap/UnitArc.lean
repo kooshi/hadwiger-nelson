@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Basic
+import Proofs.HadwigerNelson.Plane.RingGerm
 
 /-!
 # The unit-arc calculus (FS-112), first rows
@@ -41,7 +42,30 @@ point of the arc, or farther than `1` from every one. -/
 theorem n2_sign (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' d : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c') (hd : d = c ∨ d = c')
     {z : ℂ} (hz : z ∈ F.region d) :
     (∀ θ ∈ Ioo θ₁ θ₂, dist z (ringPt P θ) < 1) ∨ ∀ θ ∈ Ioo θ₁ θ₂, 1 < dist z (ringPt P θ) := by
-  sorry
+  have hmem : ∀ θ ∈ Ioo θ₁ θ₂, ringPt P θ ∈ closure (F.region d) := by
+    intro θ hθ
+    obtain ⟨hin, hout⟩ := hA.2.2 θ hθ
+    rcases hd with rfl | rfl
+    · have : d ∈ F.innerColours P (ringPt P θ) := by rw [hin]; rfl
+      exact closure_mono inter_subset_left this
+    · have : d ∈ F.outerColours P (ringPt P θ) := by rw [hout]; rfl
+      exact closure_mono sdiff_subset this
+  have hne : ∀ θ ∈ Ioo θ₁ θ₂, dist z (ringPt P θ) ≠ 1 := fun θ hθ => ne1_region hF (hmem θ hθ) hz
+  have hcont : Continuous fun θ : ℝ => dist z (ringPt P θ) := by
+    unfold ringPt e; fun_prop
+  by_cases h : ∀ θ ∈ Ioo θ₁ θ₂, dist z (ringPt P θ) < 1
+  · exact Or.inl h
+  · right
+    push Not at h
+    obtain ⟨a, ha, ha1⟩ := h
+    have ha' : 1 < dist z (ringPt P a) := lt_of_le_of_ne ha1 (Ne.symm (hne a ha))
+    intro b hb
+    by_contra hb1
+    rw [not_lt] at hb1
+    have hb' : dist z (ringPt P b) < 1 := lt_of_le_of_ne hb1 (hne b hb)
+    obtain ⟨c, hc, hc1⟩ := (isPreconnected_Ioo (a := θ₁) (b := θ₂)).intermediate_value hb ha hcont.continuousOn
+      ⟨hb'.le, ha'.le⟩
+    exact hne c hc hc1
 
 /-- **FS114-L60-LE**, its first clause: a unit arc with constant sides has angular length at most `60°` (its ends lie in the
 closure of the outer colour's tiles along it, a chain of diameter at most `1`). -/

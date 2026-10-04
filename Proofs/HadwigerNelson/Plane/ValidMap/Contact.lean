@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Basic
+import Proofs.HadwigerNelson.Plane.Tiles
 
 /-!
 # Contacts, the allowed cone, shadows and the local moves (FS-110's N3–N4 rounds)
@@ -43,6 +44,75 @@ theorem shadow_farSide_below (v : ℂ) (α : ℝ) {υ δ : ℝ} (hυ : υ < 1) (
       (z ∈ shadow (farSideBelow (v - e (α + π / 2)) α υ δ) ↔ TanBelow v α (curvUp υ) z) := by
   sorry
 
+/-- `dot` is real-bilinear: scaling the first argument by a real number. -/
+theorem dot_div_ofReal (a b : ℂ) (r : ℝ) : dot (a / (r : ℂ)) b = dot a b / r := by
+  unfold dot
+  rw [div_mul_eq_mul_div, Complex.div_ofReal_re]
+
+/-- The law of cosines in dot form: `‖a − b‖² = ‖a‖² − 2 a·b + ‖b‖²`. -/
+theorem norm_sub_sq_eq_dot (a b : ℂ) : ‖a - b‖ ^ 2 = ‖a‖ ^ 2 - 2 * dot a b + ‖b‖ ^ 2 := by
+  rw [Complex.sq_norm, Complex.sq_norm, Complex.sq_norm, Complex.normSq_sub]
+  unfold dot
+  ring
+
+/-- `|a·b| ≤ ‖a‖‖b‖`. -/
+theorem abs_dot_le (a b : ℂ) : |dot a b| ≤ ‖a‖ * ‖b‖ := by
+  unfold dot
+  calc |(a * starRingEnd ℂ b).re| ≤ ‖a * starRingEnd ℂ b‖ := Complex.abs_re_le_norm _
+    _ = ‖a‖ * ‖b‖ := by rw [norm_mul, RCLike.norm_conj]
+
+/-- `dot` is additive in its first argument. -/
+theorem dot_sub (a a' b : ℂ) : dot (a - a') b = dot a b - dot a' b := by
+  unfold dot; rw [sub_mul, Complex.sub_re]
+
+/-- A set approaching `v` along `β` and lying in `B̄(w, 1)` (`‖w − v‖ = 1`) approaches it within the half-plane `e β·(w − v) ≥ 0`. -/
+theorem dot_nonneg_of_coneAt_subset {T : Set ℂ} {v w : ℂ} {β : ℝ} (hβ : β ∈ coneAt T v) (hw : dist w v = 1)
+    (hT : ∀ t ∈ T, dist t w ≤ 1) : 0 ≤ dot (e β) (w - v) := by
+  by_contra hneg
+  rw [not_le] at hneg
+  have hb : ‖w - v‖ = 1 := by rw [← dist_eq_norm]; exact hw
+  obtain ⟨z, hzT, hzne, -, hdir⟩ := hβ (-dot (e β) (w - v) / 2) (by linarith)
+  set a := z - v with ha
+  have hr : 0 < ‖a‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hzne)
+  have hzw : ‖a - (w - v)‖ ^ 2 ≤ 1 := by
+    have : a - (w - v) = z - w := by rw [ha]; ring
+    rw [this, ← dist_eq_norm]
+    nlinarith [hT z hzT, dist_nonneg (x := z) (y := w)]
+  rw [norm_sub_sq_eq_dot, hb] at hzw
+  have hdot : 0 < dot a (w - v) := by nlinarith [sq_nonneg ‖a‖]
+  have hu : 0 < dot (a / (‖a‖ : ℂ)) (w - v) := by rw [dot_div_ofReal]; exact div_pos hdot hr
+  have hdiff : |dot (a / (‖a‖ : ℂ) - e β) (w - v)| ≤ -dot (e β) (w - v) / 2 := by
+    refine (abs_dot_le _ _).trans ?_
+    rw [hb, mul_one]; exact hdir.le
+  rw [dot_sub] at hdiff
+  have := (abs_le.mp hdiff).2
+  linarith
+
+/-- The mirror: a set approaching `v` along `β` and lying outside `B(w, 1)` approaches it within `e β·(w − v) ≤ 0`. -/
+theorem dot_nonpos_of_coneAt_subset {T : Set ℂ} {v w : ℂ} {β : ℝ} (hβ : β ∈ coneAt T v) (hw : dist w v = 1)
+    (hT : ∀ t ∈ T, 1 ≤ dist t w) : dot (e β) (w - v) ≤ 0 := by
+  by_contra hpos
+  rw [not_le] at hpos
+  have hb : ‖w - v‖ = 1 := by rw [← dist_eq_norm]; exact hw
+  obtain ⟨z, hzT, hzne, hzd, hdir⟩ := hβ (dot (e β) (w - v) / 2) (by linarith)
+  set a := z - v with ha
+  have hr : 0 < ‖a‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hzne)
+  have hzw : 1 ≤ ‖a - (w - v)‖ ^ 2 := by
+    have : a - (w - v) = z - w := by rw [ha]; ring
+    rw [this, ← dist_eq_norm]
+    nlinarith [hT z hzT]
+  rw [norm_sub_sq_eq_dot, hb] at hzw
+  have hdot : dot a (w - v) ≤ ‖a‖ ^ 2 / 2 := by nlinarith
+  have hu : dot (a / (‖a‖ : ℂ)) (w - v) ≤ ‖a‖ / 2 := by
+    rw [dot_div_ofReal, div_le_iff₀ hr]; nlinarith
+  have hdiff : |dot (a / (‖a‖ : ℂ) - e β) (w - v)| ≤ dot (e β) (w - v) / 2 := by
+    refine (abs_dot_le _ _).trans ?_
+    rw [hb, mul_one]; exact hdir.le
+  rw [dot_sub] at hdiff
+  have := (abs_le.mp hdiff).1
+  have hzd' : ‖a‖ < dot (e β) (w - v) / 2 := by rw [ha, ← dist_eq_norm]; exact hzd
+  linarith
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
@@ -52,13 +122,113 @@ variable {k : ℕ} {F : ArcMap k}
 /-- **FS110-N3-CONF**, (i): every contact of a colour `c ∈ P_cl(v)` on `ω(v)` is in-type or out-type, and not both. -/
 theorem contact_inType_or_outType (hF : F.Valid) {v w : ℂ} {c : Fin k} (hv : F.Covers v 1)
     (hw : F.IsContact v c w) : (F.InType v c w ∨ F.OutType v c w) ∧ ¬ (F.InType v c w ∧ F.OutType v c w) := by
-  sorry
+  obtain ⟨hcv, hwv, hwcl⟩ := hw
+  have hwdom : w ∈ F.dom := hv (by rw [mem_closedBall, hwv])
+  have hvdom : v ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  -- every tile of colour `c` at `w` is inside `B(v,1)` or misses `B̄(v,1)` (N-E1 at `v`, then connectedness)
+  have htype : ∀ T, F.TileOf c T → T ⊆ ball v 1 ∨ Disjoint T (closedBall v 1) := by
+    intro T hT
+    have hsph : ∀ t ∈ T, dist t v ≠ 1 := fun t ht => ne1_region hF hcv (hT.subset_region ht)
+    have hcov : T ⊆ ball v 1 ∪ (closedBall v 1)ᶜ := by
+      intro t ht
+      rcases lt_or_gt_of_ne (hsph t ht) with h | h
+      · exact Or.inl h
+      · exact Or.inr (by simpa [mem_closedBall, not_le] using h)
+    rcases hT.1.isPreconnected.subset_or_subset isOpen_ball isClosed_closedBall.isOpen_compl
+        (by rw [disjoint_left]; intro x hx hx'; exact hx' (ball_subset_closedBall hx)) hcov with h | h
+    · exact Or.inl h
+    · exact Or.inr (disjoint_left.mpr fun x hx hx' => h hx hx')
+  -- a tile at `w` exists
+  obtain ⟨T₀, hT₀, hwT₀⟩ := (F.mem_coloursAt_iff_exists_tileOf hwdom).mp hwcl
+  -- an in-type and an out-type tile cannot both touch `w`
+  have hnot : ∀ T₁ T₂, F.TileOf c T₁ → F.TileOf c T₂ → w ∈ closure T₁ → w ∈ closure T₂ →
+      T₁ ⊆ ball v 1 → Disjoint T₂ (closedBall v 1) → False := by
+    intro T₁ T₂ hT₁ hT₂ hw₁ hw₂ hin hout
+    obtain ⟨T₀, hT₀, hvT₀⟩ := (F.mem_coloursAt_iff_exists_tileOf hvdom).mp hcv
+    obtain ⟨t₁, ht₁⟩ := hT₁.1.nonempty
+    obtain ⟨t₂, ht₂⟩ := hT₂.1.nonempty
+    have hnear : UnitNear T₀ T₁ :=
+      unitNear_of_mem_closure hF hT₀ hT₁ hvT₀ (subset_closure ht₁) (by rw [dist_comm]; exact hin ht₁)
+    have hfar : UnitFar T₀ T₂ := by
+      refine unitFar_of_mem_closure hF hT₀ hT₂ hvT₀ (subset_closure ht₂) ?_
+      have := disjoint_left.mp hout ht₂
+      rw [mem_closedBall, not_le] at this
+      rwa [dist_comm]
+    -- `T₀ ⊆ B̄(w,1)` and `T₀ ∩ B(w,1) = ∅`, so `T₀ ⊆ ω(w)`
+    have h1 : ∀ t ∈ T₀, dist t w ≤ 1 := by
+      intro t ht
+      have hsub : closure T₁ ⊆ closedBall t 1 := by
+        refine closure_minimal (fun x hx => ?_) isClosed_closedBall
+        rw [mem_closedBall, dist_comm]; exact (hnear t ht x hx).le
+      have := mem_closedBall.mp (hsub hw₁)
+      rwa [dist_comm] at this
+    have h2 : ∀ t ∈ T₀, 1 ≤ dist t w := by
+      intro t ht
+      have hge : closure T₂ ⊆ {s | 1 ≤ dist t s} := by
+        refine closure_minimal (fun x hx => ?_) (isClosed_le continuous_const (by fun_prop))
+        exact (hfar t ht x hx).le
+      have := hge hw₂
+      simpa [dist_comm] using this
+    have hsub : T₀ ⊆ sphere w 1 := fun t ht => le_antisymm (h1 t ht) (h2 t ht)
+    have := hT₀.1.isOpen.subset_interior_iff.mpr hsub
+    rw [interior_sphere w one_ne_zero] at this
+    obtain ⟨t, ht⟩ := hT₀.1.nonempty
+    exact this ht
+  refine ⟨?_, fun ⟨hin, hout⟩ => ?_⟩
+  · by_cases hex : ∃ T, F.TileOf c T ∧ w ∈ closure T ∧ T ⊆ ball v 1
+    · obtain ⟨T₁, hT₁, hw₁, hin₁⟩ := hex
+      left
+      intro T hT hwT
+      rcases htype T hT with h | h
+      · exact h
+      · exact (hnot T₁ T hT₁ hT hw₁ hwT hin₁ h).elim
+    · right
+      push Not at hex
+      intro T hT hwT
+      rcases htype T hT with h | h
+      · exact (hex T hT hwT h).elim
+      · exact h
+  · obtain ⟨t, ht⟩ := hT₀.1.nonempty
+    have := hin T₀ hT₀ hwT₀ ht
+    have h' := disjoint_left.mp (hout T₀ hT₀ hwT₀) ht
+    exact h' (ball_subset_closedBall this)
 
 /-- **FS110-N3-CONF**, (ii): the directions along which `c`'s class approaches `v` (the union of its sectors' cones) lie in the
 allowed cone `D_c(v)`. -/
 theorem coneAt_subset_allowedCone (hF : F.Valid) {v : ℂ} {c : Fin k} (hv : F.Covers v 1) {β : ℝ}
     (hβ : β ∈ coneAt (F.region c) v) : e β ∈ F.allowedCone v c := by
-  sorry
+  intro w hw
+  obtain ⟨hcv, hwv, hwcl⟩ := hw
+  have hwdom : w ∈ F.dom := hv (by rw [mem_closedBall, hwv])
+  have hvdom : v ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  rw [F.coneAt_region_eq_biUnion hvdom c] at hβ
+  obtain ⟨T, ⟨hT, hvT⟩, hβT⟩ := mem_iUnion₂.mp hβ
+  obtain ⟨S, hS, hwS⟩ := (F.mem_coloursAt_iff_exists_tileOf hwdom).mp hwcl
+  obtain ⟨s, hs⟩ := hS.1.nonempty
+  constructor
+  · intro hin
+    have hS1 : S ⊆ ball v 1 := hin S hS hwS
+    have hnear : UnitNear T S :=
+      unitNear_of_mem_closure hF hT hS hvT (subset_closure hs) (by rw [dist_comm]; exact hS1 hs)
+    refine dot_nonneg_of_coneAt_subset hβT hwv fun t ht => ?_
+    have hsub : closure S ⊆ closedBall t 1 := by
+      refine closure_minimal (fun x hx => ?_) isClosed_closedBall
+      rw [mem_closedBall, dist_comm]; exact (hnear t ht x hx).le
+    have := mem_closedBall.mp (hsub hwS)
+    rwa [dist_comm] at this
+  · intro hout
+    have hS1 : Disjoint S (closedBall v 1) := hout S hS hwS
+    have hfar : UnitFar T S := by
+      refine unitFar_of_mem_closure hF hT hS hvT (subset_closure hs) ?_
+      have := disjoint_left.mp hS1 hs
+      rw [mem_closedBall, not_le] at this
+      rwa [dist_comm]
+    refine dot_nonpos_of_coneAt_subset hβT hwv fun t ht => ?_
+    have hge : closure S ⊆ {x | 1 ≤ dist t x} := by
+      refine closure_minimal (fun x hx => ?_) (isClosed_le continuous_const (by fun_prop))
+      exact (hfar t ht x hx).le
+    have := hge hwS
+    simpa [dist_comm] using this
 
 /-- **FS110-N3-CONF**, (iii) (N3-CLEAR): a compact set of directions inside the interior of `D_c(v)` is clear for `c` near `v`. -/
 theorem clear_of_subset_interior_allowedCone (hF : F.Valid) {v : ℂ} {c : Fin k} (hv : F.Covers v 1) (hc : c ∈ F.coloursAt v)

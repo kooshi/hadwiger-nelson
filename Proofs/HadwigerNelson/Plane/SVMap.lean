@@ -126,7 +126,13 @@ theorem exists_three_le_multicolour (z : ℂ) {ε : ℝ} (hε : 0 < ε) :
 /-- **FS106-TS-T** in TS's form (`plans/FS106-TS-derivation.md` § 2.4): a point of chromaticity at least `3` within distance `1`
 (strictly). -/
 theorem exists_three_le_multicolour_lt_one (z : ℂ) : ∃ x, dist x z < 1 ∧ 3 ≤ (multicolour R.cls x).ncard := by
-  sorry
+  obtain ⟨x, hx, h3⟩ := R.exists_three_le_multicolour z (ε := 1 / 5) (by norm_num)
+  refine ⟨x, lt_of_lt_of_le hx ?_, h3⟩
+  have h54 : 5 / 4 ≤ Real.sqrt 2 := by
+    nlinarith [Real.sq_sqrt (show (0 : ℝ) ≤ 2 by norm_num), Real.sqrt_nonneg 2]
+  have hs : (0 : ℝ) < Real.sqrt 2 := by linarith
+  have : 1 / Real.sqrt 2 ≤ 4 / 5 := by rw [div_le_iff₀ hs]; linarith
+  linarith
 
 end AeProperRegions
 
@@ -145,11 +151,32 @@ variable {F}
 tiles — so the regions are locally finite (wave 3's `finite_tiles_near`). -/
 theorem region_locallyFinite (hP : F.IsPlaneMap) (x : ℂ) : ∃ t ∈ 𝓝 x,
     {C : Set ℂ | ∃ j, ∃ y ∈ F.region j, C = connectedComponentIn (F.region j) y ∧ (C ∩ t).Nonempty}.Finite := by
-  sorry
+  obtain ⟨r, hr, hfin⟩ := F.finite_tiles_near (hP ▸ mem_univ x)
+  refine ⟨ball x r, ball_mem_nhds x hr, hfin.subset ?_⟩
+  rintro C ⟨j, y, hy, rfl, hne⟩
+  have hT : F.IsTile (connectedComponentIn F.interiorPts y) := ⟨y, hy.1, rfl⟩
+  have hEq : connectedComponentIn (F.region j) y = connectedComponentIn F.interiorPts y := by
+    refine le_antisymm (connectedComponentIn_mono y (F.region_subset_interiorPts j)) ?_
+    refine hT.isPreconnected.subset_connectedComponentIn (mem_connectedComponentIn hy.1) ?_
+    intro z hz
+    refine ⟨hT.subset_interiorPts hz, ?_⟩
+    have := hT.col_eq hz (mem_connectedComponentIn hy.1)
+    rw [mem_preimage, this, hy.2]
+    rfl
+  rw [hEq] at hne ⊢
+  exact ⟨hT, hne⟩
 
 /-- In a map of the plane the colour classes have dense union (wave 3's `dense_interiorPts`). -/
 theorem dense_iUnion_region (hP : F.IsPlaneMap) : Dense (⋃ j, F.region j) := by
-  sorry
+  have hU : (⋃ j, F.region j) = F.interiorPts := by
+    ext z
+    simp only [mem_iUnion]
+    constructor
+    · rintro ⟨j, hj⟩; exact hj.1
+    · intro hz; exact ⟨F.col z, hz, rfl⟩
+  rw [hU, dense_iff_closure_eq, eq_univ_iff_forall]
+  intro x
+  exact F.dense_interiorPts (hP ▸ mem_univ x)
 
 /-- **A valid map of the plane gives the regions of an almost-everywhere-proper map**: its colour classes. -/
 noncomputable def toAeProperRegions (hF : F.Valid) (hP : F.IsPlaneMap) : AeProperRegions k where
@@ -161,8 +188,8 @@ noncomputable def toAeProperRegions (hF : F.Valid) (hP : F.IsPlaneMap) : AePrope
 
 /-- **FS106-TS-T for a valid map of the plane**: a point of at least three colours within `1/√2 + ε` of every point. -/
 theorem ts_t (hF : F.Valid) (hP : F.IsPlaneMap) (z : ℂ) {ε : ℝ} (hε : 0 < ε) :
-    ∃ x, dist x z < 1 / Real.sqrt 2 + ε ∧ 3 ≤ (F.coloursAt x).ncard := by
-  sorry
+    ∃ x, dist x z < 1 / Real.sqrt 2 + ε ∧ 3 ≤ (F.coloursAt x).ncard :=
+  (F.toAeProperRegions hF hP).exists_three_le_multicolour z hε
 
 /-- **TS-T's vertex step**: a point of the domain has a finite degree, at least its number of colours (each colour at the point
 contributes a sector). So a point of chromaticity `≥ 3` is a vertex of degree `≥ 3`. -/
@@ -174,14 +201,20 @@ everywhere under Condition 5 — SB § 2.1 A5, not a backlog row; for arc maps F
 FS110-N4-STUCK), the point TS-T finds is trichromatic, of degree at least `3`. -/
 theorem ts_t_trichromatic (hF : F.Valid) (hP : F.IsPlaneMap) (h3 : ∀ x, (F.coloursAt x).ncard ≤ 3) (z : ℂ) {ε : ℝ}
     (hε : 0 < ε) : ∃ x, dist x z < 1 / Real.sqrt 2 + ε ∧ (F.coloursAt x).ncard = 3 ∧ ∃ n, 3 ≤ n ∧ F.HasDegree x n := by
-  sorry
+  obtain ⟨x, hx, h3x⟩ := ts_t hF hP z hε
+  have heq : (F.coloursAt x).ncard = 3 := le_antisymm (h3 x) h3x
+  obtain ⟨n, hn, hdeg⟩ := exists_hasDegree_of_mem_dom (F := F) (hP ▸ mem_univ x)
+  exact ⟨x, hx, heq, n, heq ▸ hn, hdeg⟩
 
 /-- **FS106-TS-T, Condition 6's clause** (closing S–V Lemma 4 (a) under Conditions 5–6): with at most three colours everywhere and
 Condition 6, the point TS-T finds is a trichromatic vertex of degree exactly `3`. -/
 theorem ts_t_degree_three (hF : F.Valid) (hP : F.IsPlaneMap) (h3 : ∀ x, (F.coloursAt x).ncard ≤ 3) (h6 : F.Condition6)
     (z : ℂ) {ε : ℝ} (hε : 0 < ε) :
     ∃ x, dist x z < 1 / Real.sqrt 2 + ε ∧ (F.coloursAt x).ncard = 3 ∧ F.HasDegree x 3 := by
-  sorry
+  obtain ⟨x, hx, heq, n, hn, hdeg⟩ := ts_t_trichromatic hF hP h3 z hε
+  have hn3 : n ≤ 3 := h6 x n heq hdeg
+  have : n = 3 := le_antisymm hn3 hn
+  exact ⟨x, hx, heq, this ▸ hdeg⟩
 
 end ArcMap
 
@@ -197,7 +230,17 @@ noncomputable def sevenBrickArcs : Set Arc :=
 
 /-- Every cell edge has positive length. -/
 theorem sevenBrickArcs_nondegenerate : ∀ a ∈ sevenBrickArcs, a.Nondegenerate := by
-  sorry
+  intro a ha
+  simp only [sevenBrickArcs, mem_iUnion, mem_insert_iff, mem_singleton_iff] at ha
+  obtain ⟨c, r, rfl | rfl⟩ := ha
+  · intro h
+    have := congrArg Complex.re h
+    simp only [brickCorner, Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.ofReal_im, Complex.I_re,
+      Complex.I_im, mul_zero, sub_zero, zero_mul, add_zero, Int.cast_add, Int.cast_one] at this
+    linarith
+  · intro h
+    have := congrArg Complex.im h
+    simp [brickCorner] at this
 
 /-- Finitely many cell edges meet a neighbourhood of each point. -/
 theorem sevenBrickArcs_locallyFinite : ∀ x ∈ (univ : Set ℂ), ∃ t ∈ 𝓝 x,
