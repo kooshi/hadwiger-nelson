@@ -811,3 +811,14 @@ reason by the close.*
      not private to `RingGerm`, so wave 4 can use them. Alternative weighed: `localSectors` strictly first (item 132). Why not: the two leaves gate wave 3's
      landing and the cheaper route is complete; FS131-I4b has 50-odd leaves that do not need sectors. **Routed**: I ask I4b which shape its six sector-leaves
      need (the plan's branch list, or its own `HasSectors` with directions), and relay the answer to I3g. Confidence: medium-high.
+136. **FS131-I4b's answer on the sector shape** (message 2026-10-04, verbatim in its essentials): "my IsSector/HasSectors alone are not enough; the plan form
+     (branch germs) is what the leaves read." What the six leaves need at `v ∈ dom`: (1) finiteness and stabilisation — for small `r` the set of sectors is
+     finite and its count constant in `r`; (2) description by branches — "for v in dom, some r₀ and a finite list of branch germs (direction + signed curvature,
+     or a segment direction) whose union is the arcs in ball v r₀, such that for r < r₀ the sectors are exactly the regions between consecutive branches", each
+     sector's cone an angle interval, and a one-direction cone's sector equal to a `hornSet` with the bounding curvatures; (3) the disjoint-interiors lemma,
+     convexity near a direction, and the inversion chart "would serve directly". Its bridge lemma, in wave 4's vocabulary: "for v in dom, eventually in r, every
+     S with IsSector v r S either has a cone of nonempty interior, or ∃ β κ₁ κ₂, S = hornSet v β κ₁ κ₂ r with κ₁ < κ₂, and the number of sectors is constant."
+     **Ruling**: FS131-I3g states `localSectors` in wave 3's plan form, in wave 3's vocabulary, with each branch germ carrying its tangent direction and signed
+     curvature (0 for a segment) and the sectors for `r < r₀` the regions between consecutive branches — finiteness and stabilisation included; the bridge
+     lemma, which needs wave 4's `IsSector` and `hornSet` (defined only in wave 4's tree), is a wave-4 child for FS131-I4b or its successor. Alternative: state
+     the bridge in wave 3. Why not: wave 3 cannot see wave 4's definitions. Confidence: high.
