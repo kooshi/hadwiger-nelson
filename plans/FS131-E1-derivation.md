@@ -567,3 +567,74 @@ exceptional points. ∎
 | two arc-ends along `ω(P)` in one direction at `Y` | they would overlap and be one arc-end of the boundary set; not a case |
 | `k = 3` (does the theorem prove too much?) | E1-CROSS leaves two colours to a crossing region, the passage contradiction and the cover both fail (an inside D/E alternation is allowed); `k = 3` is left to step 6, as it must be: the hexagonal seven-colouring has such points at seven colours, and at five step 6 kills them by a different (annulus, ⅓π) argument |
 | six colours (does the theorem prove too much?) | E1-COVER survives as E1-GEN6; the colour count at a good branch point gives four, not three, so no contradiction — consistent with six-colour maps being undecided |
+
+## Stage 4 — SAVED: what the verdicts do to the chain; the corrections owed, drafted
+
+### 4.1 The verdicts
+
+| question | verdict | how | grade |
+|---|---|---|---|
+| Q1 (F1) | **excluded** (E1-Q1) | not by closing step 5 at equality — the opposite arc alone is two-colourable there (Townsend) — but because the point it lives at is excluded: by step 6 at three sectors and by E1-NO45 at four or five | [derived] from E1-NO45 [hand, one mind] and step 6 [hand, one mind] |
+| Q2 (F2) | **excluded** (E1-Q2) | not by completing Woodall's step 7 (the corner `Q` of forms (a), (b) is neither shown impossible nor needed) but by E1-NO45 at four sectors | [derived] from E1-NO45 [hand, one mind] |
+
+Mid-job message sent to the coordinator at stage 3 (2026-10-04, after commit `3f775af7`): the lemma and the restructured chain, for FS131-W.
+
+### 4.2 What each verdict does to the chain
+
+- **FS106-WO** (`[Woodall1973]` Thm 6 repaired): **narrowed and restored.** Narrowed: Woodall's printed steps 5 (at `φ = π/3`) and 7 are GAPs (F1, F2,
+  FS131-W), and V3's "Steps 5 and 7 use strict inequalities and survive" is withdrawn. Restored, for arc maps: Woodall's theorem holds by steps 1–3,
+  strict step 5, step 6 (Townsend's lemma) and E1-NO45 in place of steps 7–8 (E1-MAPS6).
+- **FS106-AE-MAP6**: **restored for arc maps** (E1-MAPS6: steps 1–3 at the grade the claim list gives them, strict step 5, step 6, E1-NO45,
+  E1-NOBRANCH). The Conditions 2–4 (Jordan) form stays owed, as inventory item 89 already records. E1-NO45 reads the arc-map form at three places: an
+  arc-end is inside, outside or along `ω(P)` near a point; two tangent curves meet once; finiteness. With Jordan edges, E1-BAD's count can reach two
+  exceptional points per edge (an edge can oscillate about both unit circles tangent to it), so "at most five" fails as written.
+- **Row 132's "maps need six"** and **`CLAUDE.md` § The aim item 4**: true as recorded only for arc maps, with this repair. W's widened correction (item
+  91: "hold only modulo step 7 in every class, and modulo step 5's equality case with unit arcs") is **discharged for arc maps**. For general Jordan maps
+  it stands as owed.
+- **Route M's reductions** (FS111-C-SIX-M, -C-REG-EQ, -M-REDUCE-I, -M2-REDUCE-C, -VM2-EQ5): each uses FS106-AE-MAP6 "at its grade".
+  - FS111-M-REDUCE-I's maps (saturated colourings whose interfaces off a locally finite `Σ` are segments and arcs of integer radius, rows 140–141) are arc
+    maps, so its use is **restored**, at E1-MAPS6's grade.
+  - FS111-M2-REDUCE-C and FS111-VM2-EQ5 state REG-J′-C_k over Jordan arcs ("finitely many Jordan arcs in each bounded set"). There the use is restored
+    only when the arrangement is an arc map; otherwise it waits on the Jordan form. This is the point inventory item 89 already flagged for wave 9's planner.
+- **W's formal plan** (FS131-W § 1.4 rulings, item 89): AE-MAP6 can be stated unconditionally over `ArcMap` with **no** open leaf for steps 5 or 7.
+  `step5_eq` and `step7` are dropped, and step 8 is not needed. The new leaves are E1-SEE, E1-RAY, E1-CROSS, E1-COVER, E1-BAD, E1-NO45 and E1-NOBRANCH.
+  E1-NOBRANCH needs the Jordan curve theorem for closed curves made of finitely many segments and circular arcs, which Mathlib lacks; it should be priced,
+  or replaced by an argument in W's collar language. The Condition-5 form becomes a corollary.
+
+### 4.3 The corrections owed, drafted (Keryx files them; each names its slot)
+
+1. **`plans/FS106-derivation.md`, under the FS106-WO entry** (a dated erratum below the entry's last line, "the repair's assembly not found in print.
+   *Kernel:* declined."):
+   > *Erratum 2026-10-04 (FS131-W, FS131-E1).* "Steps 5 and 7 use strict inequalities and survive" (V3) is withdrawn. Step 5 reads `φ ≤ ⅓π` on the page
+   > image, and at `φ = π/3` it calls the step-4 lemma at length exactly `2π/3`, which Townsend's counterexample refutes (F1). Step 7's "e must terminate
+   > (which it can do only by meeting a vertex on the unit circle with center P)" fails at a two-colour corner (F2). Both are bypassed for arc maps by
+   > `plans/FS131-E1-derivation.md` E1-NO45 ("in a five-colour almost-everywhere-proper arc map in Woodall's normal form, no point lies on the boundary of
+   > exactly four or exactly five sectors"): Woodall's Thm 6 holds for arc maps by steps 1–3, strict step 5, step 6 and E1-NO45 (E1-MAPS6)
+   > [hand, one mind per link]. The general Jordan form is owed.
+2. **`plans/FS106-derivation.md`, under the FS106-AE-MAP6 entry** (a dated erratum below "*Kernel:* declined."):
+   > *Erratum 2026-10-04 (FS131-E1).* For arc maps (locally finite segments and circular arcs) the statement holds without step 5's equality case and
+   > without Woodall's steps 7–8: `plans/FS131-E1-derivation.md` E1-MAPS6, from steps 1–3, strict step 5, step 6, E1-NO45 and E1-NOBRANCH [derived, one
+   > mind]. The Conditions 2–4 (Jordan-arc) form is owed: E1-NO45 reads the arc-map form at three places.
+3. **`LEDGER.md` row 132** — in the bold statement, replace "maps need six modulo Townsend's simplification (c), which `[Woodall1973]`'s steps 2, 3, 5
+   fill (in outline);" with:
+   > maps need six for arc maps (segments and circular arcs), by `[Woodall1973]`'s steps 1–6, step 6 repaired by Townsend's lemma, and FS131-E1's
+   > E1-NO45 in place of his steps 7–8, whose printed forms have GAPs (FS131-W: step 5 at `φ = π/3`, step 7's terminal corner); for Jordan boundaries,
+   > owed;
+
+   and replace "maps need six by `[Woodall1973]` Thm 6 with its step 6 repaired by Townsend's lemma, and by Townsend's 1979 manuscript with its step (c)
+   filled by Woodall's" with:
+   > `[Woodall1973]` Thm 6's steps 5 (at equality), 6 and 7 have GAPs as printed, and `[Townsend1979ms]` Thm 5 (ii) asserts its cross-cut step; FS131-E1
+   > makes Townsend's degree-4 annulus rigorous and extends it to degree 5 (E1-NO45);
+
+   and in the grade bracket replace "maps-six, Townsend's manuscript and Woodall one mind, the fill in outline;" with "maps-six for arc maps one mind
+   (FS131-E1), Woodall's steps 1–3 in outline;". Add FS131-E1 to the row's milestone list.
+4. **`CLAUDE.md` § The aim, item 4** — replace "Maps need six: `[Woodall1973]` Thm 6 and Townsend's manuscript, each repairing the other (`[Townsend1981]`
+   prints no proof);" with:
+   > Maps need six for arc maps: `[Woodall1973]`'s steps 1–6 (step 6 by Townsend's lemma) and FS131-E1's lemma in place of his steps 7–8, which have
+   > GAPs as printed; for Jordan boundaries, owed (`[Townsend1981]` prints no proof);
+5. **The inventory** (`plans/FS131-close-inventory.md`, after item 91 — Keryx's numbering): a line recording that item 88's and item 91's correction is
+   discharged for arc maps by FS131-E1 (E1-NO45, E1-MAPS6) and stands for Jordan maps.
+6. **`BIBLIOGRAPHY.md`**: no new row. Status updates:
+   - `[Woodall1973]`: "§ 3 page images, pp. 198–199, read (FS131-W, FS131-E1): step 5's `≤`, step 7's strictness note".
+   - `[Townsend2005]`: "pp. 192–193 re-read from renders by FS131-E1: Thm 5 (ii)'s cross-cut and cut-point count asserted; made rigorous in FS131-E1's
+     E1-NO45".
