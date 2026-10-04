@@ -740,11 +740,49 @@ open Classical in
 /-- A chosen maximal set (`S` itself when none exists). -/
 noncomputable def maxIn (T S : Set ℂ) : Set ℂ := if h : ∃ A, IsMaxIn T S A then h.choose else S
 
+/-- Increasing unions of sets with null unit pairs have null unit pairs. -/
+theorem unitPairsNull_iUnion_of_monotone {D : ℕ → Set ℂ} (hD : Monotone D) (hP : ∀ n, UnitPairsNull (D n)) :
+    UnitPairsNull (⋃ n, D n) := by
+  have : unitPairSet (⋃ n, D n) = ⋃ n, unitPairSet (D n) := by
+    ext ⟨x, θ⟩
+    simp only [unitPairSet, mem_setOf_eq, mem_iUnion]
+    constructor
+    · rintro ⟨⟨m, hm⟩, ⟨n, hn⟩⟩
+      exact ⟨max m n, hD (le_max_left _ _) hm, hD (le_max_right _ _) hn⟩
+    · rintro ⟨n, h1, h2⟩
+      exact ⟨⟨n, h1⟩, ⟨n, h2⟩⟩
+  rw [UnitPairsNull, this]
+  exact measure_iUnion_null fun n => hP n
+
 /-- **Relative exhaustion** (`exists_ae_maximal` on measurable null-unit-pair sets a.e. inside `Tᶜ` above `S`, then intersect
 with `Tᶜ` and add `S` back — both null changes). -/
 theorem exists_isMaxIn {T S : Set ℂ} (hT : MeasurableSet T) (hS : MeasurableSet S) (hSn : UnitPairsNull S)
     (hST : S ⊆ Tᶜ) : ∃ A, IsMaxIn T S A := by
-  sorry
+  obtain ⟨U, ⟨hUm, hUn, hUT⟩, hSU, hmax⟩ := exists_ae_maximal (volume : Measure ℂ)
+    (fun B : Set ℂ => MeasurableSet B ∧ UnitPairsNull B ∧ B ≤ᵐ[volume] Tᶜ) (fun B h => h.1)
+    (fun B B' hB hB' hBB' => ⟨hB', hB.2.1.congr_ae hBB', hBB'.symm.le.trans hB.2.2⟩)
+    (fun D hD hP => ⟨MeasurableSet.iUnion fun n => (hP n).1,
+      unitPairsNull_iUnion_of_monotone hD fun n => (hP n).2.1,
+      ae_all_iff.2 (fun n => (hP n).2.2) |>.mono fun x hx hxU => by
+        obtain ⟨n, hn⟩ := mem_iUnion.1 hxU; exact hx n hn⟩) (A := S) ⟨hS, hSn, Eventually.of_forall hST⟩
+  obtain ⟨A', hA'⟩ : ∃ A' : Set ℂ, A' = (U ∩ Tᶜ) ∪ S := ⟨_, rfl⟩
+  have heq : A' =ᵐ[volume] U := by
+    subst hA'
+    refine ae_eq_set.2 ⟨?_, ?_⟩
+    · rw [measure_eq_zero_iff_ae_notMem]
+      filter_upwards [hSU] with x hx ⟨hxs, hxU⟩
+      rcases hxs with h | h
+      · exact hxU h.1
+      · exact hxU (hx h)
+    · rw [measure_eq_zero_iff_ae_notMem]
+      filter_upwards [hUT] with x hx ⟨hxU, hxs⟩
+      exact hxs (Or.inl ⟨hxU, hx hxU⟩)
+  subst hA'
+  refine ⟨(U ∩ Tᶜ) ∪ S, subset_union_right, union_subset inter_subset_right hST,
+    (hUm.inter hT.compl).union hS, hUn.congr_ae heq.symm, fun B hBm hBn hBT hAB => ?_⟩
+  have hUB : U ≤ᵐ[volume] B := heq.symm.le.trans hAB
+  have := hmax B (show MeasurableSet B ∧ UnitPairsNull B ∧ B ≤ᵐ[volume] Tᶜ from ⟨hBm, hBn, Eventually.of_forall hBT⟩) hUB
+  exact this.trans heq.symm.le
 
 theorem isMaxIn_maxIn {T S : Set ℂ} (hT : MeasurableSet T) (hS : MeasurableSet S) (hSn : UnitPairsNull S)
     (hST : S ⊆ Tᶜ) : IsMaxIn T S (maxIn T S) := by
@@ -764,20 +802,98 @@ noncomputable def grundyTaken (c : AeColouring k) : ℕ → Set ℂ
 noncomputable def grundyCls (c : AeColouring k) (m : ℕ) : Set ℂ :=
   maxIn (grundyTaken c m) (grundyS c m \ grundyTaken c m)
 
+theorem measurableSet_grundyS (c : AeColouring k) (m : ℕ) : MeasurableSet (grundyS c m) := by
+  unfold grundyS; split_ifs with h
+  · exact c.measurableSet_cls _
+  · exact MeasurableSet.empty
+
+theorem unitPairsNull_grundyS (c : AeColouring k) (m : ℕ) : UnitPairsNull (grundyS c m) := by
+  unfold grundyS; split_ifs with h
+  · exact c.unitPairsNull _
+  · exact unitPairsNull_of_dist_lt_one (by simp)
+
+theorem measurableSet_grundyTaken (c : AeColouring k) (m : ℕ) : MeasurableSet (grundyTaken c m) := by
+  induction m with
+  | zero => exact MeasurableSet.empty
+  | succ m ih =>
+    have hS : MeasurableSet (grundyS c m \ grundyTaken c m) := (measurableSet_grundyS c m).diff ih
+    have hn : UnitPairsNull (grundyS c m \ grundyTaken c m) :=
+      (unitPairsNull_grundyS c m).mono diff_subset
+    have := isMaxIn_maxIn ih hS hn (fun x hx => hx.2)
+    exact ih.union this.2.2.1
+
 theorem grundyTaken_eq (c : AeColouring k) (m : ℕ) : grundyTaken c m = ⋃ i < m, grundyCls c i := by
-  sorry
+  induction m with
+  | zero => simp [grundyTaken]
+  | succ m ih =>
+    have : grundyTaken c (m + 1) = grundyTaken c m ∪ grundyCls c m := rfl
+    rw [this, ih]
+    ext x
+    simp only [mem_union, mem_iUnion, exists_prop, Nat.lt_succ_iff_lt_or_eq]
+    constructor
+    · rintro (⟨i, hi, hx⟩ | hx)
+      · exact ⟨i, Or.inl hi, hx⟩
+      · exact ⟨m, Or.inr rfl, hx⟩
+    · rintro ⟨i, hi | rfl, hx⟩
+      · exact Or.inl ⟨i, hi, hx⟩
+      · exact Or.inr hx
 
 /-- Every Grundy class is maximal in its place (induction on `m`: the taken set is a finite union of measurable sets). -/
 theorem grundyCls_isMaxIn (c : AeColouring k) (m : ℕ) :
     IsMaxIn (grundyTaken c m) (grundyS c m \ grundyTaken c m) (grundyCls c m) := by
-  sorry
+  exact
+  isMaxIn_maxIn (measurableSet_grundyTaken c m) ((measurableSet_grundyS c m).diff (measurableSet_grundyTaken c m))
+    ((unitPairsNull_grundyS c m).mono diff_subset) (fun x hx => hx.2)
 
 /-- **The shadow clause** (stage 4.2's argument): a measurable set inside the same complement and disjoint from a maximal
 `Aᵢ` has its support in the unit shadow of `supp Aᵢ` — a support point off the shadow has a ball whose unit circles miss
 `supp Aᵢ` (`exists_annulus_subset_compl`), and moving that ball's part into `Aᵢ` contradicts maximality. -/
 theorem essSupport_subset_unitShadow_of_isMaxIn {T S Ai Am : Set ℂ} (hmax : IsMaxIn T S Ai) (hAm : MeasurableSet Am)
     (hdisj : Disjoint Am Ai) (hAmT : Am ⊆ Tᶜ) : essSupport Am ⊆ unitShadow (essSupport Ai) := by
-  sorry
+  obtain ⟨-, hAiT, hAim, hAin, hmaxi⟩ := hmax
+  intro x hx
+  by_contra hxs
+  have hF : ∀ y ∈ essSupport Ai, dist x y ≠ 1 := fun y hy h => hxs ⟨y, hy, h⟩
+  obtain ⟨δ, hδ, hδ2, hann⟩ := exists_annulus_subset_compl (isClosed_essSupport Ai) hF
+  have hpos : 0 < volume (Am ∩ ball x (δ / 2)) := hx (δ / 2) (by positivity)
+  have hkey : ∀ u ∈ ball x (δ / 2), ∀ v, dist v u = 1 → v ∉ essSupport Ai := by
+    intro u hu v hv
+    apply hann
+    have h1 := abs_dist_sub_le x u v
+    rw [dist_comm x v, dist_comm u v, hv] at h1
+    have h2 : dist x u < δ / 2 := by rw [dist_comm]; exact mem_ball.1 hu
+    exact lt_of_le_of_lt h1 (by linarith)
+  have hUv : ∀ (u : ℂ) (θ : ℝ), dist (u + e θ) u = 1 := fun u θ => by simp [dist_eq_norm]
+  set N : Set ℂ := Ai \ essSupport Ai with hN
+  have hN0 : volume N = 0 := volume_diff_essSupport Ai
+  have hBm : MeasurableSet (Ai ∪ (Am ∩ ball x (δ / 2))) := hAim.union (hAm.inter measurableSet_ball)
+  have hAm'n : UnitPairsNull (Am ∩ ball x (δ / 2)) :=
+    unitPairsNull_of_dist_lt_one fun a ha b hb => by
+      have h1 := mem_ball.1 ha.2; have h2 := mem_ball.1 hb.2
+      calc dist a b ≤ dist a x + dist x b := dist_triangle _ _ _
+        _ < 1 := by rw [dist_comm x b]; linarith
+  have hBn : UnitPairsNull (Ai ∪ (Am ∩ ball x (δ / 2))) := by
+    have h1 : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ N} = 0 := by
+      have : {q : ℂ × ℝ | q.1 ∈ N} = N ×ˢ univ := by ext q; simp
+      rw [this, Measure.prod_prod, hN0, zero_mul]
+    have h2 := volume_prod_shift_null hN0
+    refine measure_mono_null (t := unitPairSet Ai ∪ unitPairSet (Am ∩ ball x (δ / 2)) ∪
+      {q : ℂ × ℝ | q.1 ∈ N} ∪ {q : ℂ × ℝ | q.1 + e q.2 ∈ N}) ?_
+      (measure_union_null (measure_union_null (measure_union_null hAin hAm'n) h1) h2)
+    rintro ⟨u, θ⟩ ⟨hu, hv⟩
+    simp only at hu hv
+    rcases hu with hu | hu <;> rcases hv with hv | hv
+    · exact Or.inl (Or.inl (Or.inl ⟨hu, hv⟩))
+    · exact Or.inl (Or.inr ⟨hu, hkey (u + e θ) hv.2 u (by rw [dist_comm]; exact hUv u θ)⟩)
+    · exact Or.inr ⟨hv, hkey u hu.2 (u + e θ) (hUv u θ)⟩
+    · exact Or.inl (Or.inl (Or.inr ⟨hu, hv⟩))
+  have hle := hmaxi _ hBm hBn (union_subset hAiT (inter_subset_left.trans hAmT))
+    (Eventually.of_forall fun y hy => Or.inl hy)
+  have h0 : volume (Am ∩ ball x (δ / 2)) = 0 := by
+    rw [measure_eq_zero_iff_ae_notMem]
+    filter_upwards [hle] with y hy hyA
+    exact (Set.disjoint_left.1 hdisj hyA.1) (hy (Or.inr hyA))
+  exact hpos.ne' h0
 
 /-- **FS121-D3-GRUNDY**: every a.e.-proper `k`-colouring can be modified, keeping it a.e.-proper with `k` colours and never
 raising a point's colour index, into a measurable Grundy colouring `(A_1, …, A_k)`: `A_1` is a MUA set (the case `m = 0`
@@ -791,6 +907,76 @@ theorem AeColouring.exists_grundy (c : AeColouring k) :
           B ≤ᵐ[volume] c'.cls m) ∧
       (∀ m i : Fin k, i < m → essSupport (c'.cls m) ⊆ unitShadow (essSupport (c'.cls i))) ∧
       (∀ x j, x ∈ essBoundary (c'.cls j) → ∀ j' ∈ essMulticolour c'.cls x, j < j' → IsContactFor (c'.cls j) x) := by
-  sorry
+  classical
+  -- every point lies in a Grundy class of index at most its original colour
+  have hex : ∀ x, ∃ i : ℕ, i ≤ (c.col x : ℕ) ∧ x ∈ grundyCls c i := by
+    intro x
+    set m : ℕ := (c.col x : ℕ) with hm
+    have hxS : x ∈ grundyS c m := by
+      have : grundyS c m = c.cls (c.col x) := by simp [grundyS, hm]
+      rw [this]
+      exact rfl
+    by_cases ht : x ∈ grundyTaken c m
+    · rw [grundyTaken_eq] at ht
+      obtain ⟨i, hi, hx⟩ := mem_iUnion₂.1 ht
+      exact ⟨i, hi.le, hx⟩
+    · exact ⟨m, le_rfl, (grundyCls_isMaxIn c m).1 ⟨hxS, ht⟩⟩
+  have hQ : ∀ x, ∃ i : ℕ, x ∈ grundyCls c i := fun x => (hex x).imp fun i hi => hi.2
+  let f : ℂ → ℕ := fun x => Nat.find (hQ x)
+  have hf_spec : ∀ x, x ∈ grundyCls c (f x) := fun x => Nat.find_spec (hQ x)
+  have hf_le : ∀ x, f x ≤ (c.col x : ℕ) := fun x => by
+    obtain ⟨i, hi, hx⟩ := hex x
+    exact (Nat.find_min' (hQ x) hx).trans hi
+  have hf_lt : ∀ x, f x < k := fun x => lt_of_le_of_lt (hf_le x) (c.col x).2
+  have hf_iff : ∀ x (j : ℕ), f x = j ↔ x ∈ grundyCls c j := by
+    intro x j
+    constructor
+    · intro h; rw [← h]; exact hf_spec x
+    · intro hx
+      apply le_antisymm (Nat.find_min' (hQ x) hx)
+      by_contra hlt; push Not at hlt
+      have : x ∈ grundyTaken c j := by
+        rw [grundyTaken_eq]; exact mem_iUnion₂.2 ⟨f x, hlt, hf_spec x⟩
+      exact (grundyCls_isMaxIn c j).2.1 hx this
+  let col : ℂ → Fin k := fun x => ⟨f x, hf_lt x⟩
+  have hfib : ∀ j : Fin k, col ⁻¹' {j} = grundyCls c j := fun j => by
+    ext x
+    simp only [mem_preimage, mem_singleton_iff, col, Fin.ext_iff]
+    exact hf_iff x j
+  have hmeas : Measurable col :=
+    measurable_to_countable' fun j => by rw [hfib]; exact (grundyCls_isMaxIn c j).2.2.1
+  let c' : AeColouring k := ⟨col, hmeas, fun j => by rw [hfib]; exact (grundyCls_isMaxIn c j).2.2.2.1⟩
+  have hcls : ∀ j : Fin k, c'.cls j = grundyCls c j := hfib
+  have hU : ∀ m : Fin k, (⋃ i < m, c'.cls i) = grundyTaken c m := by
+    intro m; rw [grundyTaken_eq]; ext x
+    simp only [mem_iUnion, exists_prop, hcls]
+    constructor
+    · rintro ⟨i, hi, hx⟩; exact ⟨i, hi, hx⟩
+    · rintro ⟨i, hi, hx⟩; exact ⟨⟨i, lt_trans hi m.2⟩, hi, hx⟩
+  have hshadow : ∀ m i : Fin k, i < m → essSupport (c'.cls m) ⊆ unitShadow (essSupport (c'.cls i)) := by
+    intro m i him
+    rw [hcls, hcls]
+    have hi_sub : grundyCls c i ⊆ grundyTaken c m := by
+      intro x hx; rw [grundyTaken_eq]; exact mem_iUnion₂.2 ⟨i, him, hx⟩
+    have hmono : grundyTaken c i ⊆ grundyTaken c m := by
+      intro x hx; rw [grundyTaken_eq] at hx ⊢
+      obtain ⟨l, hl, hx⟩ := mem_iUnion₂.1 hx
+      exact mem_iUnion₂.2 ⟨l, lt_trans hl him, hx⟩
+    have hmm := grundyCls_isMaxIn c m
+    exact essSupport_subset_unitShadow_of_isMaxIn (grundyCls_isMaxIn c i) hmm.2.2.1
+      (Set.disjoint_left.2 fun x hx hxi => hmm.2.1 hx (hi_sub hxi))
+      (fun x hx hxt => hmm.2.1 hx (hmono hxt))
+  refine ⟨c', fun x => ?_, fun m => ?_, hshadow, fun x j hxj j' hj' hjj' => ?_⟩
+  · exact hf_le x
+  · rw [hU m, hcls m]
+    have hmax := grundyCls_isMaxIn c m
+    refine ⟨?_, hmax.2.1, hmax.2.2.2.2⟩
+    have hS : grundyS c m = c.cls m := by simp [grundyS, m.2]
+    intro x hx
+    exact hmax.1 ⟨by rw [hS]; exact hx.1, hx.2⟩
+  · have hx' : x ∈ essSupport (c'.cls j') := essClosure_subset_essSupport _ hj'
+    obtain ⟨y, hy, hd⟩ := hshadow j' j hjj' hx'
+    rw [essSupport_eq_closure_densitySet] at hy
+    exact ⟨y, hy, hd⟩
 
 end HadwigerNelson.Plane
