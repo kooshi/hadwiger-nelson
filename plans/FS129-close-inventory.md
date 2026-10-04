@@ -703,3 +703,9 @@ One line per item with its source; no narration. Each line is ticked done or dec
      inventory and the handoff describe the run, none uses the proofs as a certificate). Deleted the 940 `*.lrat.gz` files in
      `data/search/2026-10-03/row4/cubes-s10-pass1/` (46 GB → 2.5 MB); kept its two tracked files (`cubes.jsonl`, `manifest.json`), its 84 logs, and
      every other search's certificates (rows 1 and 5, which results rest on). The measurement stands in `plans/SEARCH-2026-10-03.md` § 5.
+175. **Item 172 done** (FS129-AT1, `data/fs129/reports/FS129-AT1.md`, commits `0067d10f`, `363590d6`): the FS128 and FS120 labels read their stubs'
+     titles; three marks moved for the lint; the one look per theme taken (`data/fs129/at1/atlas-{light,dark}.png`). Keryx's receipt: the checker
+     re-run (212 checked, 0 failed), the dark screenshot read. Keryx updated the page's eyebrow (`visualizations/proof-atlas/page.tmpl.html` line 283,
+     the filer's slot) to "2026-10-03, after FS-129, the cross-application audit", rebuilt (palette 0 failed), and republished to
+     https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx (Version 6). **Correction owed, the next atlas update**: two page notes still name FS-114's
+     global step and FS-112's close as current (`page.tmpl.html` lines 837 and 987); the zoomed "All labels" state was not looked at (AT1's CHECK).
