@@ -36,7 +36,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 0.5 + 0.5 + 0.5 + 0.5 + 1 = 3 of 3)
+## 3. Running now (slots used: 0.5 + 0.5 + 0.5 + 0.5 + 1 = 3 of 3, plus FS131-QA1 in Kooshi's special slot)
 
 | job | model | brief | reports to |
 |---|---|---|---|
@@ -46,6 +46,10 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | FS131-I2g (wave 2, seventh implementer; item 130) | Sonnet | `data/fs131/briefs/FS131-I2g-wave2.md` | its branch's (`fs131-w2`) `data/fs131/reports/FS131-I2g.md` |
 | FS131-I4b (wave 4, second implementer; item 130) | Sonnet | `data/fs131/briefs/FS131-I4b-wave4.md` | its branch's (`fs131-w4`) `data/fs131/reports/FS131-I4b.md` |
 
+| FS131-QA1 (code-quality audit, read-only; items 137–138) | Opus (special slot) | `data/fs131/briefs/FS131-QA1-quality-audit.md` | `data/fs131/reports/FS131-QA1.md` |
+
+**Implementers are Opus from now on** (Kooshi, item 137): the four Sonnet implementers above finish on Sonnet; each successor launches with `model: "opus"` (the agent file says so too) and counts one slot.
+
 Agent ids are in this session's scratch (`agents.txt`), never in a file. A notification arrives when each hands back; if the session restarted, resume a job from
 its record's last SAVED stage with a fresh agent on the same brief.
 
@@ -53,7 +57,7 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 1. ~~Fill the free slot~~ — done: FS131-K2d launched (item 104). The next free slot (a half when I3e hands back): FS131-IW or FS131-I4 (Sonnet), briefs derived
    from the nearest earlier brief by script, gated with `python3 .claude/skills/keryx/scripts/brief_gate.py all`.
-2. (done) The Opus-implementer trial scored (item 129): about 1.5× the priced work per unit of budget, one session. **Held for Kooshi**: implementers on Opus? Default: Sonnet.
+2. (done) The Opus-implementer trial scored (item 129); Kooshi moved every implementer to Opus (item 137).
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
 5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
