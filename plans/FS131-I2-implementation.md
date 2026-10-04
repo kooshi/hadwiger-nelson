@@ -354,3 +354,21 @@ Axioms read from `data/fs131/i2/i2f-axioms.txt` (printed from the built library 
 ## Drafts for the front page (FS131-I2f)
 
 None: the gate was not run (117 `sorry` remain in wave 2's modules), and wave 2's vacuity carriers are not yet registered.
+
+## Stage 10 — SAVED (FS131-I2g): readback; Dyadic's first nine children; the `ι ∉ F` ruling applied
+
+**Readback.** Both brief quotations checked by `grep -F` against their sources: the "May" line (`plans/FS131-w2-kernel-plan.md` line 754) and "Order by row
+closure per child" (this record, Stage 9) — both exact. **May**: prove any child or leaf; add further children (stated as lemmas first, with their
+`scripts/Axioms.lean` record); add imports; supporting definitions. **May not**: change any row statement, hypothesis or definition's meaning (except as
+ruled below), any child statement fixed by K2c/K2d; no `axiom`, no `native_decide`. **Build as given** at `7c890ed9`: OK, all 1739 modules up to date,
+6 modules with warnings (all `declaration uses 'sorry'`), `build/gate/build/20261004T115929Z-3328870.log`.
+
+**Statement defect found and ruled (inventory item 134).** `Arith/Dyadic`'s `hi : ∃ ι : L, ι ^ 2 = -1` allowed `ι ∈ F`, so `L` was any quadratic extension;
+`sqrt3_dyadic` was false at `F = ℚ(ζ₁₂)`, `L = F(√2)` (e(ℚ(ζ₂₄)/ℚ) = 4, e(ℚ(ζ₁₂)/ℚ) = 2: ramified), and `exists_root_quadratic` at `F = ℚ(i)`,
+`s = 1, d = 2, δ = 2`. Ruled by Keryx: `hi` becomes `∃ ι : L, ι ^ 2 = -1 ∧ ι ∉ Set.range (algebraMap F L)` in exactly `exists_root_quadratic`,
+`dyadicConclusion_of_coeffs`, `sqrt3_local_of_congr`, `sqrt3_local`, `sqrt3_dyadic`; applied, docstrings say so.
+
+**Closed in `Arith/Dyadic`** (statements untouched but for the ruling): `x2x1_separable_irreducible_iff`, `card_quot_eq_two_pow`, `exists_span_four_eq`,
+`exists_sq_sub_three_mem_pow` (completion density by `Valued.mem_nhds` on a ball about the root of radius `v(π^N)`, then `exists_valuation_sub_lt_of_integer`),
+`exists_dyadic_coeffs` (one new child `ideal_le_of_mul_le`, cancellation of a nonzero ideal), `exists_root_quadratic`, `minpoly_eq_of_root`.
+Left in Dyadic: `comap_conductor_sup_eq_top`, `dyadicConclusion_of_minpoly`, and the three assemblies.
