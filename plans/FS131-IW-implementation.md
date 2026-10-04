@@ -257,3 +257,36 @@ right. The hard band is priced from its own first leaves below.
 
 **Left in `Merge` (8)**: `clear_wedge`, `exists_dirColourAt`, `GoodAt.ncard_coloursAt_le_two`, `finite_three_le_coloursAt`, `niceAt_of_dirColourAt`,
 `dirColourAt_wedgeMerge`, `wedgeMerge_niceAt`, `exists_merge_at`; in `Basic` T1–T5.
+
+## Stage 9 — SAVED (FS131-IWc): E3-W (`clear_wedge`), three-colour points finite, the local data
+
+**Build of stage 8's tree**: OK — 445 of 445 batches, 3 modules rebuilt, 7 with warnings, 8 m 39 s, exit 0 (`build/gate/build/20261004T154158Z-412013.log`;
+driver log `data/fs131/iwc/build1.log`); the Woodall warnings are all `declaration uses 'sorry'` (59 lines across the build's replays).
+
+**Proved (statements unchanged)**:
+* **`GoodAt.ncard_coloursAt_le_two`** — off the arcs one colour; on an arc, `GoodAt.exists_local_curve` puts every arc point near `z` on one full curve
+  `curveAt x κ b`, and two preconnected sides of it near `z` carry at most one colour each: for a line, two open half-discs (convex); for a circle about
+  `c = x + b`, two thin annular sectors about `c` (`isPreconnected_annSector`), inside and outside the circle, inside a ball where the curve is the only
+  arc locus. An open set always has a point off the curve (wave 3's `exists_notMem_curveAt`), which carries the colour of one side.
+* **`finite_three_le_coloursAt`** — a finite subcover of good balls (`IsCompact.elim_nhds_subcover`); a point of three colours in a good ball is its centre.
+* **`exists_dirColourAt`** — `D` = the arguments of the finitely many unit vectors tangent at `v` to an arc of a good ball (`finite_perp_circle`); off
+  `D` no such arc is tangent to `e φ`, so wave 3's wedge `Rgn v (e φ) N m` lies in the interior points, is preconnected, so in one tile; a truncated
+  cone `annSector v 0 r (φ − r) (φ + r)`, `r = min (1/2) (1/(2N)) (m/2)`, lies in the wedge; `σ` by `choose!`.
+* **`clear_wedge` (E3-W)**, by E3's sagitta argument made exact: if `dist z y = 1` with `y ∈ S`, the unit circle `p t = y + e t` through `z` leaves the
+  disc `B(v, r₁)` first at `b = inf {t ≥ t_z | ‖p t − v‖ ≥ r₁}` and last at `a = sup {t ≤ t_z | …}`; on `(a, b)` it avoids `v` and the two edges (all in
+  `closure S`, `dist_ne_one_of_mem_of_mem_closure`), so by preconnectedness it stays in the open wedge (`mem_annSector_union_of_ne`,
+  `disjoint_annSector_wedges`), and its ends lie on `‖· − v‖ = r₁` in the closed wedge; `b − a ≤ π` (else two antipodal points in a disc of diameter `< 1`);
+  the chord gives `sin h ≤ r₁` (`h = (b − a)/2`, through `one_sub_e_two_mul`); projecting on the bisector `e((d₁+d₂)/2)`, the sinusoid
+  `K + cos(t − β)` lies above the convex combination of its end values (each `≥ r₁ cos(α/2)`) up to `1 − cos h ≤ sin² h ≤ r₁²`, so
+  `‖z − v‖ ≥ r₁ cos(α/2) − r₁² > r₁ cos(α/2)/2`, against `z` in the small wedge. No sagitta constant is approximated; E3's float control
+  (`tools/fs131_e3_sagitta.py`) is now superseded by the kernel proof of the same bound.
+
+**Children added**: `ArcMap.ncard_coloursAt_le_two_of_sides` (two preconnected sides bound the colours at a point by two), `ArcMap.mem_curveAt_one_iff`,
+`mem_annSector_union_of_ne`, `disjoint_annSector_wedges` (the wedge helpers moved with the stage-8 block before `clear_wedge`, which now cites them; no
+statement moved past a reader). Records added; `tools/fs131_w3_decls.py --check`: 163 theorems, 163 records, 0 missing, 0 stale.
+
+**Re-pricing from the first two hard leaves** (`GoodAt.ncard_coloursAt_le_two`, `clear_wedge`): about 120 and 210 lines, two and five elaboration
+rounds; the plan's M and M+ (150–250) hold. At this rate the four leaves left in `Merge` (`niceAt_of_dirColourAt` H−, `dirColourAt_wedgeMerge` M−,
+`wedgeMerge_niceAt` H−, `exists_merge_at` H) are 900–1,300 lines, more than this job's remaining budget; T1–T5 about 300.
+
+**Left in `Merge` (4)**: `niceAt_of_dirColourAt`, `dirColourAt_wedgeMerge`, `wedgeMerge_niceAt`, `exists_merge_at`; in `Basic` T1–T5.

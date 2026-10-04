@@ -2521,6 +2521,8 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.annSector_mono_r₂
 #print axioms HadwigerNelson.Plane.mem_segment_ray
 #print axioms HadwigerNelson.Plane.closure_annSector_subset
+#print axioms HadwigerNelson.Plane.mem_annSector_union_of_ne
+#print axioms HadwigerNelson.Plane.disjoint_annSector_wedges
 #print axioms HadwigerNelson.Plane.wedgeArcs_nondegenerate
 #print axioms HadwigerNelson.Plane.frontier_annSector_subset
 #print axioms HadwigerNelson.Plane.ArcMap.recolour_isPlaneMap
@@ -2534,6 +2536,8 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.coloursAt_congr
 #print axioms HadwigerNelson.Plane.ArcMap.niceAt_congr
 #print axioms HadwigerNelson.Plane.ArcMap.exists_dirColourAt
+#print axioms HadwigerNelson.Plane.ArcMap.ncard_coloursAt_le_two_of_sides
+#print axioms HadwigerNelson.Plane.ArcMap.mem_curveAt_one_iff
 #print axioms HadwigerNelson.Plane.ArcMap.GoodAt.ncard_coloursAt_le_two
 #print axioms HadwigerNelson.Plane.ArcMap.finite_three_le_coloursAt
 #print axioms HadwigerNelson.Plane.ArcMap.niceAt_of_dirColourAt
