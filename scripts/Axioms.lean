@@ -3077,6 +3077,8 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.measurable_stripeCol
 #print axioms HadwigerNelson.Plane.stripeCol_ne_of_dist_eq_one
 #print axioms HadwigerNelson.Plane.tendsto_measure_inter_of_symmDiff
+#print axioms HadwigerNelson.Plane.arcLength_eq_volume_Ioo
+#print axioms HadwigerNelson.Plane.lintegral_Ioo_angle_le
 
 #eval IO.println "=== PURCHASED ==="
 

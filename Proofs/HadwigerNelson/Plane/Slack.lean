@@ -207,11 +207,148 @@ theorem continuous_pairMass {A : Set ℂ} (hA : MeasurableSet A) (R : ℝ) : Con
   filter_upwards [hev] with r hr
   rw [hslice r hr]
 
+/-- The angle measure of a circle's points in `A`, read on `(−π, π)` about the antipodal angle (`e (θ + π) = −e θ`). -/
+theorem arcLength_eq_volume_Ioo {A : Set ℂ} (hA : MeasurableSet A) (x : ℂ) (r : ℝ) :
+    arcLength {θ | x + (r : ℂ) * e θ ∈ A} = volume ({θ | x - (r : ℂ) * e θ ∈ A} ∩ Ioo (-Real.pi) Real.pi) := by
+  have hS : MeasurableSet {θ : ℝ | x + (r : ℂ) * e θ ∈ A} :=
+    (measurable_const.add (measurable_const.mul continuous_e.measurable)) hA
+  rw [arcLength, Measure.restrict_apply hS]
+  rw [← measure_preimage_add_right volume Real.pi]
+  have hpre : (fun θ => θ + Real.pi) ⁻¹' ({θ | x + (r : ℂ) * e θ ∈ A} ∩ Ico 0 (2 * Real.pi)) =
+      {θ | x - (r : ℂ) * e θ ∈ A} ∩ Ico (-Real.pi) Real.pi := by
+    ext θ
+    simp only [mem_preimage, mem_inter_iff, mem_setOf_eq, mem_Ico, e_add_pi]
+    constructor
+    · rintro ⟨h1, h2, h3⟩; exact ⟨by simpa [sub_eq_add_neg] using h1, by linarith, by linarith⟩
+    · rintro ⟨h1, h2, h3⟩; exact ⟨by simpa [sub_eq_add_neg] using h1, by linarith, by linarith⟩
+  rw [hpre]
+  exact measure_congr (ae_eq_set_inter (ae_eq_refl _) Ioo_ae_eq_Ico.symm)
+
+/-- **Polar coordinates about `x`**: the radius-weighted angle measure of `A`'s points on the circles about `x` with radii in
+`(a, b)` is at most the area of `A` in the closed annulus (`Complex.lintegral_comp_polarCoord_symm`). -/
+theorem lintegral_Ioo_angle_le {A : Set ℂ} (hA : MeasurableSet A) (x : ℂ) {a b : ℝ} (ha : 0 < a) :
+    ∫⁻ r in Ioo a b, ENNReal.ofReal r * volume ({θ | x - (r : ℂ) * e θ ∈ A} ∩ Ioo (-Real.pi) Real.pi) ≤
+      volume {y | y ∈ A ∧ a ≤ dist x y ∧ dist x y ≤ b} := by
+  set W : Set ℂ := {w | x - w ∈ A ∧ a < ‖w‖ ∧ ‖w‖ < b} with hW
+  have hWm : MeasurableSet W :=
+    ((measurable_const.sub measurable_id) hA).inter ((measurableSet_lt measurable_const measurable_norm).inter
+      (measurableSet_lt measurable_norm measurable_const))
+  set f : ℂ → ENNReal := W.indicator 1 with hf
+  have hfm : Measurable f := measurable_one.indicator hWm
+  have hpe : ∀ p : ℝ × ℝ, Complex.polarCoord.symm p = (p.1 : ℂ) * e p.2 := by
+    intro p; rw [Complex.polarCoord_symm_apply, e_eq]
+  have hsl : ∀ r ∈ Ioo a b, ENNReal.ofReal r * volume ({θ | x - (r : ℂ) * e θ ∈ A} ∩ Ioo (-Real.pi) Real.pi) =
+      ∫⁻ θ in Ioo (-Real.pi) Real.pi, ENNReal.ofReal r • f (Complex.polarCoord.symm (r, θ)) := by
+    intro r hr
+    have hr0 : 0 < r := ha.trans hr.1
+    have hθ : MeasurableSet {θ : ℝ | x - (r : ℂ) * e θ ∈ A} :=
+      (measurable_const.sub (measurable_const.mul continuous_e.measurable)) hA
+    have hfe : ∀ θ, f (Complex.polarCoord.symm (r, θ)) = {θ : ℝ | x - (r : ℂ) * e θ ∈ A}.indicator 1 θ := by
+      intro θ
+      have hn : ‖(r : ℂ) * e θ‖ = r := by rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg hr0.le]
+      rw [hpe]
+      simp only [hf, indicator, hW, mem_setOf_eq]
+      have hn1 : a < ‖(r : ℂ) * e θ‖ := by rw [hn]; exact hr.1
+      have hn2 : ‖(r : ℂ) * e θ‖ < b := by rw [hn]; exact hr.2
+      split_ifs with h1 h2 h2
+      · rfl
+      · exact absurd h1.1 h2
+      · exact absurd ⟨h2, hn1, hn2⟩ h1
+      · rfl
+    simp_rw [smul_eq_mul, hfe]
+    rw [lintegral_const_mul _ (measurable_one.indicator hθ), lintegral_indicator_one hθ, Measure.restrict_apply hθ]
+  have hmeas : Measurable fun p : ℝ × ℝ => ENNReal.ofReal p.1 • f (Complex.polarCoord.symm p) :=
+    by
+      have : (fun p : ℝ × ℝ => ENNReal.ofReal p.1 • f (Complex.polarCoord.symm p)) =
+          fun p : ℝ × ℝ => ENNReal.ofReal p.1 • f ((p.1 : ℂ) * e p.2) := funext fun p => by rw [hpe]
+      rw [this]
+      exact (ENNReal.measurable_ofReal.comp measurable_fst).smul (hfm.comp
+        ((continuous_ofReal.comp continuous_fst).mul (continuous_e.comp continuous_snd)).measurable)
+  calc ∫⁻ r in Ioo a b, ENNReal.ofReal r * volume ({θ | x - (r : ℂ) * e θ ∈ A} ∩ Ioo (-Real.pi) Real.pi)
+      = ∫⁻ r in Ioo a b, ∫⁻ θ in Ioo (-Real.pi) Real.pi, ENNReal.ofReal r • f (Complex.polarCoord.symm (r, θ)) :=
+        setLIntegral_congr_fun measurableSet_Ioo hsl
+    _ = ∫⁻ p in Ioo a b ×ˢ Ioo (-Real.pi) Real.pi, ENNReal.ofReal p.1 • f (Complex.polarCoord.symm p) := by
+        rw [Measure.volume_eq_prod, ← Measure.prod_restrict, lintegral_prod _ hmeas.aemeasurable]
+    _ ≤ ∫⁻ p in Complex.polarCoord.target, ENNReal.ofReal p.1 • f (Complex.polarCoord.symm p) := by
+        refine lintegral_mono_set ?_
+        rw [Complex.polarCoord_target]
+        exact prod_mono (fun r hr => ha.trans hr.1) subset_rfl
+    _ = ∫⁻ w, f w := Complex.lintegral_comp_polarCoord_symm f
+    _ = volume W := lintegral_indicator_one hWm
+    _ ≤ volume {y | y ∈ A ∧ a ≤ dist x y ∧ dist x y ≤ b} := by
+        have hpre : W = (fun w => x - w) ⁻¹' {y | y ∈ A ∧ a < dist x y ∧ dist x y < b} := by
+          ext w; simp only [hW, mem_setOf_eq, mem_preimage, dist_eq_norm, sub_sub_cancel]
+        have hm2 : MeasurableSet {y | y ∈ A ∧ a < dist x y ∧ dist x y < b} :=
+          hA.inter ((measurableSet_lt measurable_const (measurable_const.dist measurable_id)).inter
+            (measurableSet_lt (measurable_const.dist measurable_id) measurable_const))
+        rw [hpre, (volume.measurePreserving_sub_left x).measure_preimage hm2.nullMeasurableSet]
+        exact measure_mono fun y hy => ⟨hy.1, hy.2.1.le, hy.2.2.le⟩
+
 /-- **Polar coordinates for pairs** (`Complex.lintegral_comp_polarCoord_symm` and Tonelli): a radius band null in
 `Leb ⊗ Leb` has null pair mass at almost every radius inside it. -/
 theorem ae_pairMass_eq_zero {A : Set ℂ} (hA : MeasurableSet A) {a b : ℝ} (ha : 0 < a) (h : IccPairNull A a b) (R : ℝ) :
     ∀ᵐ r ∂volume, r ∈ Ioo a b → pairMass A R r = 0 := by
-  sorry
+  set J : ℂ × ℝ → ENNReal := fun p => volume ({θ | p.1 - (p.2 : ℂ) * e θ ∈ A} ∩ Ioo (-Real.pi) Real.pi) with hJ
+  have hJm : Measurable J := by
+    have hWm : MeasurableSet {q : (ℂ × ℝ) × ℝ | q.1.1 - (q.1.2 : ℂ) * e q.2 ∈ A ∧ q.2 ∈ Ioo (-Real.pi) Real.pi} :=
+      ((measurable_fst.comp measurable_fst).sub ((continuous_ofReal.measurable.comp (measurable_snd.comp measurable_fst)).mul
+        (continuous_e.measurable.comp measurable_snd)) hA).inter (measurable_snd measurableSet_Ioo)
+    exact measurable_measure_prodMk_left hWm
+  have hpm : ∀ r, pairMass A R r = ∫⁻ x, (A ∩ ball 0 R).indicator (fun x => J (x, r)) x := by
+    intro r
+    have hEm : MeasurableSet {q : ℂ × ℝ | q.1 ∈ A ∩ ball 0 R ∧ q.1 + (r : ℂ) * e q.2 ∈ A} :=
+      (measurable_fst (hA.inter measurableSet_ball)).inter
+        ((measurable_fst.add (measurable_const.mul (continuous_e.measurable.comp measurable_snd))) hA)
+    rw [pairMass, Measure.prod_apply hEm]
+    refine lintegral_congr fun x => ?_
+    by_cases hx : x ∈ A ∩ ball 0 R
+    · rw [indicator_of_mem hx]
+      simp only [hJ]
+      rw [← arcLength_eq_volume_Ioo hA x r]
+      congr 1; ext θ; simp only [mem_preimage, mem_setOf_eq]; exact ⟨fun h => h.2, fun h => ⟨hx, h⟩⟩
+    · rw [indicator_of_notMem hx]
+      exact measure_mono_null (fun θ hθ => hx hθ.1) measure_empty
+  set P : Set (ℂ × ℂ) := {q | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b} with hP
+  have hPm : MeasurableSet P :=
+    (measurable_fst hA).inter ((measurable_snd hA).inter
+      ((measurableSet_le measurable_const (measurable_fst.dist measurable_snd)).inter
+        (measurableSet_le (measurable_fst.dist measurable_snd) measurable_const)))
+  have hG : Measurable fun q : ℝ × ℂ => ENNReal.ofReal q.1 * (A ∩ ball 0 R).indicator (fun x => J (x, q.1)) q.2 := by
+    refine (ENNReal.measurable_ofReal.comp measurable_fst).mul ?_
+    have : (fun q : ℝ × ℂ => (A ∩ ball 0 R).indicator (fun x => J (x, q.1)) q.2) =
+        (Prod.snd ⁻¹' (A ∩ ball 0 R)).indicator (fun q : ℝ × ℂ => J (q.2, q.1)) := by
+      funext q; rfl
+    rw [this]
+    exact (hJm.comp (measurable_snd.prodMk measurable_fst)).indicator (measurable_snd (hA.inter measurableSet_ball))
+  have hint : ∫⁻ r in Ioo a b, ENNReal.ofReal r * pairMass A R r = 0 := by
+    refine le_antisymm ?_ bot_le
+    calc ∫⁻ r in Ioo a b, ENNReal.ofReal r * pairMass A R r
+        = ∫⁻ r in Ioo a b, ∫⁻ x, ENNReal.ofReal r * (A ∩ ball 0 R).indicator (fun x => J (x, r)) x := by
+          refine lintegral_congr fun r => ?_
+          rw [hpm r, lintegral_const_mul]
+          exact (hJm.comp (measurable_id.prodMk measurable_const)).indicator (hA.inter measurableSet_ball)
+      _ = ∫⁻ x, ∫⁻ r in Ioo a b, ENNReal.ofReal r * (A ∩ ball 0 R).indicator (fun x => J (x, r)) x :=
+          lintegral_lintegral_swap hG.aemeasurable
+      _ ≤ ∫⁻ x, volume (Prod.mk x ⁻¹' P) := by
+          refine lintegral_mono fun x => ?_
+          by_cases hx : x ∈ A ∩ ball 0 R
+          · simp only [indicator_of_mem hx]
+            refine (lintegral_Ioo_angle_le hA x ha).trans (le_of_eq ?_)
+            congr 1; ext y; simp [hP, hx.1]
+          · simp only [indicator_of_notMem hx, mul_zero, lintegral_zero]
+            exact bot_le
+      _ = (volume.prod volume) P := (Measure.prod_apply hPm).symm
+      _ = 0 := h
+  have hcm : Measurable fun r => ENNReal.ofReal r * pairMass A R r :=
+    ENNReal.measurable_ofReal.mul (continuous_pairMass hA R).measurable
+  have hae := (lintegral_eq_zero_iff hcm).1 hint
+  rw [Filter.EventuallyEq, ae_restrict_iff' measurableSet_Ioo] at hae
+  filter_upwards [hae] with r hr hrI
+  have h0 := hr hrI
+  simp only [Pi.zero_apply, mul_eq_zero, ENNReal.ofReal_eq_zero] at h0
+  rcases h0 with h0 | h0
+  · exact absurd h0 (not_le.2 (ha.trans hrI.1))
+  · exact h0
 
 /-- From `ae_pairMass_eq_zero` and `continuous_pairMass`: null at every radius of the closed band. -/
 theorem pairMass_eq_zero_of_iccPairNull {A : Set ℂ} (hA : MeasurableSet A) {a b : ℝ} (ha : 0 < a) (hab : a < b)
