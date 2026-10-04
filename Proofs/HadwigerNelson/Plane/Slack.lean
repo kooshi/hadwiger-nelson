@@ -969,13 +969,117 @@ theorem measurable_eval_gridPoint {h : ℝ} (hh : 0 < h) :
 eventual value of `f (gridPoint h_m x)` (measurable fibres: `measurable_to_countable'`). -/
 theorem CPColouring.exists_modification (c : CPColouring k) :
     ∃ ct : (ℂ → Fin k) → ℂ → Fin k, Measurable (Function.uncurry ct) ∧ ∀ x, c.law {f | ct f x ≠ f x} = 0 := by
-  sorry
+  classical
+  rcases Nat.eq_zero_or_pos k with rfl | hk
+  · exact ⟨fun f x => f x, Subsingleton.measurable, fun x => by simp⟩
+  have hsc : ∀ m : ℕ, ∃ h > (0 : ℝ), ∀ x : ℂ, c.law {f | f (gridPoint h x) ≠ f x} < (1 / 2 : ENNReal) ^ m := by
+    intro m
+    obtain ⟨r, hr, hu⟩ := c.exists_unif (δ := (1 / 2 : ENNReal) ^ m) (ENNReal.pow_pos (by norm_num) m)
+    refine ⟨r / 2, by positivity, fun x => hu _ _ ?_⟩
+    have := dist_gridPoint_lt (h := r / 2) (by positivity) x
+    linarith
+  choose hs hs0 hsl using hsc
+  set g : ℕ → (ℂ → Fin k) × ℂ → Fin k := fun m p => p.1 (gridPoint (hs m) p.2) with hg
+  have hgm : ∀ m, Measurable (g m) := fun m => measurable_eval_gridPoint (hs0 m)
+  set E : Fin k → Set ((ℂ → Fin k) × ℂ) := fun j => {p | ∀ᶠ m in atTop, g m p = j} with hE
+  have hEm : ∀ j, MeasurableSet (E j) := by
+    intro j
+    have : E j = ⋃ N : ℕ, ⋂ m : ℕ, ⋂ (_ : N ≤ m), {p | g m p = j} := by
+      ext p; simp [hE, Filter.eventually_atTop]
+    rw [this]
+    exact MeasurableSet.iUnion fun N => MeasurableSet.iInter fun m => MeasurableSet.iInter fun _ =>
+      hgm m (measurableSet_singleton j)
+  have hEu : ∀ p i j, p ∈ E i → p ∈ E j → i = j := by
+    intro p i j hi hj
+    obtain ⟨m, hm1, hm2⟩ := (Filter.Eventually.and hi hj).exists
+    exact hm1.symm.trans hm2
+  set ct : (ℂ → Fin k) → ℂ → Fin k := fun f x =>
+    if h : ∃ j, (f, x) ∈ E j then h.choose else ⟨0, hk⟩ with hct
+  have hct_eq : ∀ p j, p ∈ E j → ct p.1 p.2 = j := by
+    intro p j hj
+    have h : ∃ j, (p.1, p.2) ∈ E j := ⟨j, hj⟩
+    simp only [hct, dif_pos h]
+    exact hEu _ _ _ h.choose_spec hj
+  have hct_ne : ∀ p, (∀ j, p ∉ E j) → ct p.1 p.2 = ⟨0, hk⟩ := by
+    intro p hp
+    simp only [hct]
+    rw [dif_neg]
+    rintro ⟨j, hj⟩
+    exact hp j hj
+  refine ⟨ct, ?_, ?_⟩
+  · refine measurable_to_countable' fun j0 => ?_
+    have : Function.uncurry ct ⁻¹' {j0} = E j0 ∪ ((⋃ i, E i)ᶜ ∩ {_q | (⟨0, hk⟩ : Fin k) = j0}) := by
+      ext q
+      simp only [mem_preimage, mem_singleton_iff, mem_union, mem_inter_iff, mem_compl_iff, mem_iUnion, not_exists,
+        mem_setOf_eq]
+      constructor
+      · intro hq
+        by_cases h : ∃ j, q ∈ E j
+        · obtain ⟨j, hj⟩ := h
+          left
+          have := hct_eq q j hj
+          have hq' : ct q.1 q.2 = j0 := hq
+          rw [this] at hq'
+          rwa [← hq']
+        · right
+          push Not at h
+          refine ⟨h, ?_⟩
+          rw [← hct_ne q h]
+          exact hq
+      · rintro (hq | ⟨hq1, hq2⟩)
+        · exact hct_eq q j0 hq
+        · show ct q.1 q.2 = j0
+          rw [hct_ne q hq1]; exact hq2
+    rw [this]
+    exact (hEm j0).union ((MeasurableSet.iUnion hEm).compl.inter (MeasurableSet.const _))
+  · intro x
+    have hsum : ∑' m, c.law {f | f (gridPoint (hs m) x) ≠ f x} ≠ ⊤ := by
+      refine ne_top_of_le_ne_top (b := ∑' m : ℕ, (1 / 2 : ENNReal) ^ m) ?_
+        (ENNReal.tsum_le_tsum fun m => (hsl m x).le)
+      rw [ENNReal.tsum_geometric]
+      simp
+    apply ae_iff.mp
+    filter_upwards [ae_eventually_notMem hsum] with f hf
+    have : (f, x) ∈ E (f x) := by
+      simp only [hE, mem_setOf_eq, hg]
+      filter_upwards [hf] with m hm
+      simpa using hm
+    exact hct_eq (f, x) (f x) this
+
 
 /-- **Realisations are a.e.-proper** (TQ § 2.3 step 3): Tonelli on `law ⊗ volume ⊗ arcLength` and `c.proper`. -/
 theorem CPColouring.ae_unitPairsNull_of_modification (c : CPColouring k) {ct : (ℂ → Fin k) → ℂ → Fin k}
     (hct : Measurable (Function.uncurry ct)) (hmod : ∀ x, c.law {f | ct f x ≠ f x} = 0) :
     ∀ᵐ f ∂c.law, ∀ j, UnitPairsNull (ct f ⁻¹' {j}) := by
-  sorry
+  set S : Set ((ℂ → Fin k) × (ℂ × ℝ)) := {p | ct p.1 p.2.1 = ct p.1 (p.2.1 + e p.2.2)} with hS
+  have h1 : Measurable fun p : (ℂ → Fin k) × (ℂ × ℝ) => ct p.1 p.2.1 :=
+    hct.comp (measurable_fst.prodMk (measurable_fst.comp measurable_snd))
+  have h2 : Measurable fun p : (ℂ → Fin k) × (ℂ × ℝ) => ct p.1 (p.2.1 + e p.2.2) :=
+    hct.comp (measurable_fst.prodMk ((measurable_fst.comp measurable_snd).add
+      (continuous_e.measurable.comp (measurable_snd.comp measurable_snd))))
+  have hSm : MeasurableSet S := measurableSet_eq_fun h1 h2
+  have hq0 : ∀ q : ℂ × ℝ, c.law ((fun f => (f, q)) ⁻¹' S) = 0 := by
+    intro q
+    have hp := c.proper q.1 (e q.2) (norm_e q.2)
+    refine measure_mono_null ?_ (measure_union_null (measure_union_null hp (hmod q.1)) (hmod (q.1 + e q.2)))
+    intro f hf
+    simp only [mem_preimage, hS, mem_setOf_eq] at hf
+    by_cases h1 : ct f q.1 = f q.1
+    · by_cases h2 : ct f (q.1 + e q.2) = f (q.1 + e q.2)
+      · left; left
+        show f q.1 = f (q.1 + e q.2)
+        rw [← h1, ← h2]; exact hf
+      · right; exact h2
+    · left; right; exact h1
+  have hzero : (c.law.prod (volume.prod arcLength)) S = 0 := by
+    rw [Measure.prod_apply_symm hSm]
+    simp [hq0]
+  rw [Measure.prod_apply hSm] at hzero
+  have := (lintegral_eq_zero_iff (measurable_measure_prodMk_left hSm)).1 hzero
+  filter_upwards [this] with f hf j
+  refine measure_mono_null (fun q hq => ?_) hf
+  show ct f q.1 = ct f (q.1 + e q.2)
+  exact hq.1.trans hq.2.symm
 
 /-- The expected disagreement with the origin over a ball (Tonelli and the modification); with Markov
 (`MeasureTheory.meas_ge_le_lintegral_div`) and `CPColouring.exists_unif` it gives `CPColouring.tendsto_not_kept`. -/
@@ -2097,12 +2201,98 @@ theorem keptAt_band {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull 
       apply one_div_le_one_div_of_le (by norm_num); linarith [Real.pi_gt_three])
     exact not_keptAt_of_half_lt hA hnull hη0 h4 h x hx
 
+/-- **Markov at one radius**: if `P(f y ≠ f 0) ≤ δ` on `B(0, ρ)`, the realisations whose disagreement with the origin fills at
+least the fraction `η` of `B(0, ρ)` have probability at most `δ / η` (`CPColouring.lintegral_ball_ne` and
+`MeasureTheory.meas_ge_le_lintegral_div`). -/
+theorem CPColouring.law_ge_ball_ne_le (c : CPColouring k) {ct : (ℂ → Fin k) → ℂ → Fin k}
+    (hct : Measurable (Function.uncurry ct)) (hmod : ∀ x, c.law {f | ct f x ≠ f x} = 0) {η ρ : ℝ} (hη0 : 0 < η)
+    (hρ : 0 < ρ) {δ : ENNReal} (hδ : ∀ y ∈ ball (0 : ℂ) ρ, c.law {f | f y ≠ f 0} ≤ δ) :
+    c.law {f | ENNReal.ofReal η * volume (ball (0 : ℂ) ρ) ≤ volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0})} ≤
+      δ / ENNReal.ofReal η := by
+  have hV0 : volume (ball (0 : ℂ) ρ) ≠ 0 := (measure_ball_pos volume 0 hρ).ne'
+  have hVt : volume (ball (0 : ℂ) ρ) ≠ ⊤ := measure_ball_lt_top.ne
+  have hη' : ENNReal.ofReal η ≠ 0 := by simpa using hη0
+  have hmeas : Measurable fun f => volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) := by
+    set E : Set ((ℂ → Fin k) × ℂ) := {p | p.2 ∈ ball (0 : ℂ) ρ ∧ ct p.1 p.2 ≠ ct p.1 0}
+    have h0 : Measurable fun p : (ℂ → Fin k) × ℂ => ct p.1 0 := hct.comp (measurable_fst.prodMk measurable_const)
+    have hEm : MeasurableSet E := (measurable_snd measurableSet_ball).inter (measurableSet_eq_fun hct h0).compl
+    exact measurable_measure_prodMk_left hEm
+  refine (meas_ge_le_lintegral_div hmeas.aemeasurable (mul_ne_zero hη' hV0)
+    (ENNReal.mul_ne_top ENNReal.ofReal_ne_top hVt)).trans ?_
+  rw [c.lintegral_ball_ne hct hmod ρ]
+  have hI : ∫⁻ y in ball (0 : ℂ) ρ, c.law {f | f y ≠ f 0} ≤ δ * volume (ball (0 : ℂ) ρ) := by
+    calc _ ≤ ∫⁻ _ in ball (0 : ℂ) ρ, δ := setLIntegral_mono measurable_const hδ
+      _ = δ * volume (ball (0 : ℂ) ρ) := setLIntegral_const _ _
+  calc _ ≤ δ * volume (ball (0 : ℂ) ρ) / (ENNReal.ofReal η * volume (ball (0 : ℂ) ρ)) := by gcongr
+    _ = δ / ENNReal.ofReal η := ENNReal.mul_div_mul_right _ _ hV0 hVt
+
 /-- **FS106-REM**, second clause: for a CP colouring, `P(0 is not kept at scale ε) → 0`, "kept" read in a jointly
 measurable modification `c̃` of the realisations. -/
 theorem CPColouring.tendsto_not_kept (c : CPColouring k) {η : ℝ} (hη0 : 0 < η) :
     ∃ ct : (ℂ → Fin k) → ℂ → Fin k, Measurable (Function.uncurry ct) ∧ (∀ x, c.law {f | ct f x ≠ f x} = 0) ∧
       Tendsto (fun ε => c.law {f | ¬ KeptAt (ct f ⁻¹' {ct f 0}) η ε 0}) (𝓝[>] 0) (𝓝 0) := by
-  sorry
+  obtain ⟨ct, hct, hmod⟩ := c.exists_modification
+  refine ⟨ct, hct, hmod, ?_⟩
+  rcases le_or_gt 1 η with h1 | h1
+  · have hk : ∀ ε f, KeptAt (ct f ⁻¹' {ct f 0}) η ε 0 := by
+      intro ε f ρ _
+      rw [ENNReal.ofReal_of_nonpos (by linarith), zero_mul]; exact bot_le
+    simp only [hk, not_true_eq_false, setOf_false, measure_empty]
+    exact tendsto_const_nhds
+  rw [ENNReal.tendsto_nhds_zero]
+  intro δ hδ
+  obtain ⟨t, ht0, ht, htδ⟩ := ENNReal.lt_iff_exists_real_btwn.1 hδ
+  have ht0' : 0 < t := by simpa using ht
+  set δ' : ENNReal := ENNReal.ofReal (η * t / 2) with hδ'
+  have hδ'0 : 0 < δ' := by rw [hδ', ENNReal.ofReal_pos]; positivity
+  obtain ⟨r, hr, hu⟩ := c.exists_unif hδ'0
+  have hev : Ioo 0 (r / 2) ∈ 𝓝[>] (0 : ℝ) := Ioo_mem_nhdsGT (by positivity)
+  filter_upwards [hev] with ε hε
+  obtain ⟨hε0, hεr⟩ := hε
+  have key : ∀ ρ, 0 < ρ → ρ < r → c.law {f | ENNReal.ofReal η * volume (ball (0 : ℂ) ρ) ≤
+      volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0})} ≤ ENNReal.ofReal (t / 2) := by
+    intro ρ hρ hρr
+    refine (c.law_ge_ball_ne_le hct hmod hη0 hρ (δ := δ') fun y hy => (hu y 0 ?_).le).trans ?_
+    · rw [mem_ball] at hy; linarith
+    · rw [hδ', ← ENNReal.ofReal_div_of_pos hη0]
+      refine le_of_eq (congrArg ENNReal.ofReal ?_)
+      field_simp
+  have hsub : {f | ¬ KeptAt (ct f ⁻¹' {ct f 0}) η ε 0} ⊆
+      {f | ENNReal.ofReal η * volume (ball (0 : ℂ) (ε / 2)) ≤
+        volume (ball (0 : ℂ) (ε / 2) ∩ {y | ct f y ≠ ct f 0})} ∪
+      {f | ENNReal.ofReal η * volume (ball (0 : ℂ) (2 * ε)) ≤
+        volume (ball (0 : ℂ) (2 * ε) ∩ {y | ct f y ≠ ct f 0})} := by
+    intro f hf
+    simp only [KeptAt, not_forall, mem_setOf_eq] at hf
+    obtain ⟨ρ, hρ, hlt⟩ := hf
+    have hA : MeasurableSet (ct f ⁻¹' {ct f 0}) :=
+      (hct.comp (measurable_const.prodMk measurable_id)) (measurableSet_singleton _)
+    have hgoal : ENNReal.ofReal η * volume (ball (0 : ℂ) ρ) ≤ volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) := by
+      have e1 : volume (ball (0 : ℂ) ρ ∩ densitySet (ct f ⁻¹' {ct f 0})) =
+          volume (ball (0 : ℂ) ρ ∩ ct f ⁻¹' {ct f 0}) :=
+        measure_congr (ae_eq_set_inter (ae_eq_refl _) (ae_eq_densitySet hA).symm)
+      have e2 : volume (ball (0 : ℂ) ρ ∩ ct f ⁻¹' {ct f 0}) + volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) =
+          volume (ball (0 : ℂ) ρ) := measure_inter_add_sdiff (ball (0 : ℂ) ρ) hA
+      have e3 : ENNReal.ofReal (1 - η) * volume (ball (0 : ℂ) ρ) + ENNReal.ofReal η * volume (ball (0 : ℂ) ρ) =
+          volume (ball (0 : ℂ) ρ) := by
+        rw [← add_mul, ← ENNReal.ofReal_add (by linarith) hη0.le, sub_add_cancel, ENNReal.ofReal_one, one_mul]
+      rw [e1] at hlt
+      by_contra hcon
+      push Not at hcon hlt
+      have hVt : volume (ball (0 : ℂ) ρ) ≠ ⊤ := measure_ball_lt_top.ne
+      have := ENNReal.add_lt_add hlt hcon
+      rw [e2, e3] at this
+      exact lt_irrefl _ this
+    rcases hρ with rfl | rfl
+    · exact Or.inl hgoal
+    · exact Or.inr hgoal
+  calc c.law {f | ¬ KeptAt (ct f ⁻¹' {ct f 0}) η ε 0}
+      ≤ c.law _ := measure_mono hsub
+    _ ≤ _ + _ := measure_union_le _ _
+    _ ≤ ENNReal.ofReal (t / 2) + ENNReal.ofReal (t / 2) :=
+        add_le_add (key _ (by positivity) (by linarith)) (key _ (by positivity) (by linarith))
+    _ = ENNReal.ofReal t := by rw [← ENNReal.ofReal_add (by positivity) (by positivity)]; ring_nf
+    _ ≤ δ := htδ.le
 
 /-- **FS106-REM**, third clause (ruling `plans/FS131-close-inventory.md` item 63: `η < 1` added, since at `η ≥ 1` every point
 is kept): the uniform form is FALSE — some measurable colouring proper at every unit pair (the

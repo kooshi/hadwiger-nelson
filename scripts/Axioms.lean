@@ -3068,6 +3068,9 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.upperDensity_of_tiling
 #print axioms HadwigerNelson.Plane.parallelogram_tiling
 
+-- FS131-I2i: children added by the ninth wave-2 implementer
+#print axioms HadwigerNelson.Plane.CPColouring.law_ge_ball_ne_le
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
