@@ -330,6 +330,32 @@ Next: `lock` (one engine, three clauses); then the bowtie near `E = 0`, which is
 `|im| ≥ 1/13` on one side), so `bowtie_isHorn`, `bowtie_flanks` and `bowtie_coloursAt_zero` follow the pattern of `cuspFrag_isHorn`; `bowtie_mem_dom` needs
 `B(x, ρ) ⊆ closure bowtieTiles` at `0`, `±i` (a ball minus finitely many lines and circles lies in the tiles, and that complement is dense).
 
+## Stage 9 — SAVED (FS131-I4e): readback, the as-given build
+
+*FS131-I4e (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4e-wave4.md` on `main`) continues this record from `c1255fc5`.*
+
+**The brief's three quotations against their sources** (standing rule 3): (1) "**It may**: add children anywhere in the wave's modules — the seven engines and
+every child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. (2) "**The
+merge** (`05968b36`): `origin/main` at `cff2c33e` (`localSectors` landed, item 171) into `fs131-w4`. One conflict, at the append point of" — this record, Stage 8's
+first paragraph: **matches as a truncation**. (3) "177. **FS131-I4d mid-job, on `ArcMap.lock`** (FS112-LOCK; `fs131-w4`, `Plane/ValidMap/UnitArc.lean`): (1)
+**clause 1 closes with no N-E2** — `IsRingArc`'s" — `plans/FS131-close-inventory.md` on `main`, item 177 (line 1229): **matches as a truncation**; the item's
+ruling (clause 3 local, `∃ δ > 0, Disjoint (T ∩ ball (P + 2e(θ)) δ) (ball P 2)`) reads as the brief summarizes it. One small mismatch in the brief's prose (not a
+quotation): the older linter warnings sit at `UnitArc` lines 236 (unused `hF`), 666 and 706 (`push_cast` does nothing), not "near 234 and 236; 664 and 666".
+
+**What I may change** (§ 14.2, unchanged from Stages 1, 5, 7): add children anywhere in the wave's modules (the seven engines in `Basic`, sorry-free, with spec
+examples; every child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`, wave 1's
+`Plane/Chord`, `Diameter`, `Basic`), statements unchanged; imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then
+`tools/fs131_k4_decls.py --check`); `Plane/ValidMap/Sectors` (the bridge module, mine to extend); wave 4's vacuity carriers at the gate, `AeProperRegions` among
+them (item 144); the four older linter warnings cleared. **What I may not change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s clause 3 is already in
+its ruled local form, item 177); any definition of `Plane/ValidMap/Basic`; the fragments' definitions (`bowtie*`, `l60*`, `isoY`, `isoFrag`, `sevenBrick*`) but
+for a coordinate slip found against the source tool (a finding); the read-backs' conventions; TS-T's Condition-5 clause stays in its carried form (item 142);
+no new `axiom`, no `native_decide`. A leaf that cannot be proved as written goes to Keryx at once with the declaration, the reason and the counterexample or
+the missing hypothesis; if one of `lock`'s consumers (the three bends) needs more than the local clause 3, that is a message too.
+
+**The worktree as given** (`c1255fc5`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — all
+1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T161716Z-654577.log`; driver log
+`data/fs131/i4/build-i4e-readback.log`). 50 `declaration uses sorry` warnings — Contact 10, UnitArc 20, BaseSteps 20 — and the three older linter warnings above.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
