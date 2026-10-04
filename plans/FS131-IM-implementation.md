@@ -229,3 +229,34 @@ The brief's state is as stated: branch head `dbedaf97`, tree clean, Lean sources
 `dbedaf97`, under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK**, all 1746 modules already up to date,
 nothing built; warnings only `declaration uses 'sorry'` — `BaseSteps` 7, `UnitArc` 17, `Contact` 4 (the three moves and `stuck_structure`), `Moves` 3 (the three
 `…_aux`). Log `build/gate/build/20261004T222624Z-2921733.log`; terminal output `data/fs131/im/build-im2-asgiven.log`.
+
+## Stage 5 — SAVED: the second move (item 263), into `Cone`
+
+**The range, by declarations** (inventory item 262 (c)'s lesson): from `e_eq_of_mem_coneAt_hornSet` (its docstring, d4f946ae's l. 1058) through
+`IsSectorChart.index_of_isSector_hornSet` (its last line, l. 2592) — the ruling's "l. 1057–2593" with the blank line on each side. It holds the
+module-doc headings and the `namespace ArcMap`/`variable` lines between (N3-DEG l. 1139–1635, N4-FLANK's mechanism l. 1637–2247, a horn's chart sector
+and its flanks from l. 2249), minus the two single lemmas of the first move that lie inside it (`not_mem_interiorPts_of_mem_closure_sector`, l. 1373–1386;
+`hornSet_mono_radius`, l. 1716–1718; each with its trailing blank line), which stay where IM1 put them. The range ends inside the `namespace ArcMap`
+opened at l. 2322, so `Cone` closes it after the range, and `Contact` reopens `namespace ArcMap` and `variable {k : ℕ} {F : ArcMap k}` before
+`woodallCone_isHorn`'s docstring (l. 2594).
+
+**The tool**: `tools/fs131_im_move_cone.py` extended (`RANGE2`, `HOLES`, `REOPEN`); `--write` generated `Cone.lean` (2607 lines; its module doc now
+names both moves) and the trimmed `Contact.lean` (1644 lines) from `git show d4f946ae:…/Contact.lean`; `--check` passes: every first-move range and the
+second move's three pieces (l. 1058–1372, 1388–1715, 1720–2592) found verbatim, in order, in `Cone`; `Cone` equal to the regenerated text; `Contact` equal
+to d4f946ae's minus exactly the moved ranges (with their trailing blank lines), plus the import line and the reopening. The tool also checks that each
+hole is a first-move range inside the second move's range and that the reopening point is the line after the range's trailing blank line.
+
+**Negative controls, watched** (`data/fs131/im/move-control-im2.txt`): (1) renaming `woodallCone_strict` in `Cone` (inside the second move) made
+`--check` exit 1 naming source l. 1388–1715 and the regenerated text; (2) deleting the reopened `namespace ArcMap` from `Contact` made it exit 1 naming
+`Contact`; (3) a copy of the tool with a hole off its first-move range (`(1716, 1717)`) exits 1 naming the hole. Each restored by `--write`, `--check`
+passing again.
+
+**Other checks**: `tools/fs131_im_statements.py --check` PASS (the three `…_aux` statements equal `Contact`'s, diffs empty); `tools/fs131_k4_decls.py --check`
+exit 0 with its two pre-existing `_root_` parse misses (item 262 (d)); `tools/check_architecture.py`: 209 rows, 0 import mismatches; it exits 1 on
+"purchase ledgers disagree" (its check [5]), which it does identically on the tree before this stage (checked by stashing the stage's edits) — not this
+job's. `ARCHITECTURE.md`'s `Cone` row names the second move. No `private` declaration in the range (item 263); the `scripts/Axioms.lean` records are by
+name and unchanged.
+
+**The build** (under the slot, as in § 4.2): **OK**, 445 of 445 batches, 4 modules rebuilt (`Cone` 22 s, `Moves`, `Contact`, `Proofs`); warnings only
+`declaration uses 'sorry'` — `Contact` 4 (the three moves and `stuck_structure`), `Moves` 3, `BaseSteps` 7, `UnitArc` 17 (unchanged); none in `Cone`.
+Log `build/gate/build/20261004T222948Z-2949144.log`; terminal output `data/fs131/im/build-stage5.log`.
