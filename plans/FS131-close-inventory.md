@@ -1698,3 +1698,27 @@ reason by the close.*
 237. **Brief FS131-IC4, wave 4's fourth `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC4-contact.md`, derived by script from IC3's, gated PASS):
      `stuck_structure` and `flank_shadows` first, the moves only if no parallel implementer has taken them (item 236). Launched in IC3's slot: 1 (I2n) + 1 (I4j) +
      1 (I5) + 1 (IC4) = 4.
+238. **FS131-I5 handed back at stage 6, harness ≈ 442k** (report `data/fs131/reports/FS131-I5.md` on `fs131-w5`; branch at `7b049700`, checked): **`fs131-w5b` merged**
+     (`160b04f6`, no conflicts; `tools/fs131_i5_dupes.py` added — QA1's tool has no wave-5 entry — 0 collisions, controls watched); **E4's repair applied
+     verbatim** (`UnenclosedC`, `Unenclosed` in `Chain`; `Row134BaseUA`, `n3_base`, `not_row134BaseUA_seven` gain it; `BaseCtx.unenclosed`; children
+     `exists_preBend`, `exists_unenclosed_or_bad` stated; `localDense` routed through E4-OUTERMOST); **`IsRetArc` gains CD's β** (items 231–232); **the base's
+     obligation pass**: every `BaseWalk`/`BaseDense` statement derives once the two repairs are in (notes: `exists_endpoint`'s second `hc` disjunct never holds;
+     the assembly calls `hex_base` on the unreduced colouring; `pseudo_ncard_le_two` through `cor3_local`); 29 Mathlib names confirmed (no unicoherence lemma, no
+     Jordan curve theorem). Wave 5: 60 → 46. **[kernel] on the branch, standard three**: `linkage_dot_ne_zero`, `endpoint_dist_ge`, `eleventh_type`,
+     `isCubicTrichromatic_of_three_of_noRep`, `BaseCtx.cubic_of_three`, `disc1ts`, `disc1ts_degree` (FS129-SR2-DISC1TS), `Thomassen.triLattice_hyps`,
+     `triLattice_adj`, `Unenclosed.unenclosedC`; **over open children**: `p17_ua`, `bv_nd1`, `flankQ_upper/lower_of_qrOnly`, `cvb_thom`, `BaseCtx.cor3_base`,
+     `n3_base`, `localDense`, `dense3`. Keryx's receipts: build log `build/gate/build/20261004T205348Z-2322842.log` (w5) "Build completed successfully (5366
+     jobs)", 0 warnings other than `sorry` (91 distinct: wave 5's 46 plus wave 4's 45 at `9a8de899`); `sorry` lines by count Chain 0, Terminal 12, Dense 3, HexRing 7,
+     MapGraph 5, BaseWalk 15, BaseDense 4 (46); `data/fs131/i5/I5Axioms.out` prints `disc1ts`, `linkage_dot_ne_zero`, `triLattice_hyps` on the standard three and
+     `n3_base` with `sorryAx`. Slip (K5's, fixed by I5 outside its block, accepted): the record `HadwigerNelson.Plane.row134BaseUA` named a constant that never
+     existed (`ArcMap.row134BaseUA`); all 72 wave-5 records now resolve. `Thomassen.lemma1`'s proof written out to transcribe from `[Thomassen1999]` pp. 850–851
+     (two shared lemmas (C), (L); 300–400 lines). Not reached: any H leaf, so no re-price; `cvb_thom_reduced` un-priced. Question for a later lane: `cor3_local`'s
+     exact covering hypothesis needs NB3-COR3's argument read.
+239. **Ruling: the planar core goes to the planar-infrastructure job** — `cvb_thom_reduced`, `retArcs_nested`, `exists_endpoint`, `exists_eleventh`,
+     `exists_unenclosed_or_bad`, with the shared planar lemma (the outer frontier of a plane continuum is connected; or the outer face of a connected finite plane
+     graph has connected boundary). Alternative weighed: leave `cvb_thom_reduced` to wave 5's next implementer to price first (item 208 (a)). Why: all five read the
+     same boundary-path topology Mathlib lacks, so one job building it once serves them all, and wave 5's implementers proceed on everything else. Confidence:
+     high. The job is queued after the moves' parallel implementer (item 236), both waiting for slots that free when a lane ends. Wave 5's next implementer,
+     FS131-I5b, skips these five.
+240. **Brief FS131-I5b, wave 5's second implementer** (Opus; `data/fs131/briefs/FS131-I5b-wave5.md`, derived by script from I5's, gated PASS): wave 5's 41 leaves less
+     the planar core, in I5's Stage 6 order (`Thomassen.lemma1` first, its proof planned). Launched in I5's slot: 1 (I2n) + 1 (I4j) + 1 (IC4) + 1 (I5b) = 4.
