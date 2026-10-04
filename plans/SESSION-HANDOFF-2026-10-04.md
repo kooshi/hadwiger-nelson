@@ -57,7 +57,8 @@ its record's last SAVED stage with a fresh agent on the same brief.
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
 5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
-   I3e's half slot goes to FS131-I4; FS131-IW waits for W2.
+   I3e's half slot goes to FS131-I4 (its brief carries item 112's wave-4 note: `noBoth` likely has the same cusp case); FS131-IW waits for W2.
+   Queued for the next free Opus slot: **FS131-E2** (Ephodos) — the four-colour clause of FS116-V5-U1 with a cusp at `z`: prove it or build the fragment (item 112).
 6. **(done) On E1's report**: file its verdicts; if a GAP closes, tell the Woodall implementer; file the row 132 / § The aim corrections per the verdict (W's drafts, plan
    § 5) and the FS106 errata through the record job.
 7. **On a landing** (wave 3 is closest): read the worktree's `build/gate/*/latest`, the axioms digest (`scripts/gate_report.py axioms <log> <prev> CLAUDE.md`),
