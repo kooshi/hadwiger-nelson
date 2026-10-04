@@ -60,9 +60,10 @@ kernel is the second check); the prior-art debt of FS-129's entries (default: ow
 
 ## Bearing on the answer
 
-*Provisional (the coordinator's); de Bruijn's opening rewrites it.* None by itself: it moves no value of χ. It is the promotion path for every
-[hand] result the frontier rests on — row 121's χ(ℚ(√47)²) = 5, FS-129's FS129-SR3-QFREE-NS, FS-116's exclusions — and the bar for publishing any
-of them (`CLAUDE.md` § Publication).
+*Rewritten 2026-10-04 from de Bruijn's opening (`plans/FS131-kernel-plan.md` § 7.6), verbatim:* None by itself: FS-131 moves no value of χ. It is the promotion path for every [hand] result the frontier rests on, and the bar for
+publishing any of them. Its first product is the foundation every regularity-wall statement is now written over (`Proofs/HadwigerNelson/Plane/`);
+the formalization has so far found no statement defect among the rows it has stated (wave 1, 14 rows), four generalizations, and one backlog
+defect (FS114-K1, a gap-verdict entry entered as a row, now excluded).
 
 ## Deliverables
 
