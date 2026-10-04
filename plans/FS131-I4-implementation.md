@@ -405,6 +405,37 @@ M each) took about 35k together, most of it the twelve children that every later
 a domain point off the arcs lies in the closure of one tile, hence in that tile; `bowtie_valid` needs the 21 same-colour tile pairs (G's diameter by the sector's
 angle `2 arcsin(5/13) < 60°`; C–CN by `(z − i)·(a, b) < 0` for `z` below and `(a, b)` in the upward cone; the rest by coordinates).
 
+## Stage 11 — SAVED (FS131-I4e): `bowtie_mem_dom`; 45 `sorry` left, and the handoff
+
+**`bowtie_mem_dom` proved** (`BaseSteps`): `0` by `ball_subset_bowtie_dom` (stage 10); `±i` by the same density argument with the four tile-edge lines through
+each point. Children: `interior_line_eq_empty` (a line `a·re + b·im = c`, `(a, b) ≠ 0`, has empty interior — moving along `(a, b)` changes the left side),
+`isClosed_line`, `dense_compl_four_lines` (four such lines have a dense complement), `subset_bowtieTiles` (each tile in the union),
+`ball_I_subset_closure_bowtieTiles` (off the lines `±12x + 5y = 5`, `x − y = −1`, `x + y = 1`, the ball `B(i, 1/10)` lies in `G ∪ CN ∪ XR ∪ XL`: case on
+`12|x| < 5(1 − y)` (G), `|x| < y − 1` (CN), then the sign of `x`; `x = 0` forces `z = i`, which is on every line), `ball_negI_subset_closure_bowtieTiles` (the
+mirror at `−i` with `H`, `CS`, `YR`, `YL`). Axioms (`data/fs131/i4/axioms-i4e.txt`): the children the standard three; `bowtie_mem_dom` reads `sorryAx` only
+through the structure `bowtie` (stage 10's note).
+
+**Records**: 274 names, 0 missing (`tools/fs131_i4_addrecords.py --check`); `tools/fs131_k4_decls.py --check` 192 names, 0 missing. **No statement changed, no new
+axiom, no `native_decide`.** Build: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings", exit 0
+(`build/gate/build/20261004T165111Z-843230.log`; driver log `data/fs131/i4/build-i4e-stage11.log`): 45 distinct `declaration uses sorry`, no other warning.
+
+**What is left (45), in the order I would take it.**
+- *The bowtie* (BaseSteps, 9): `bowtieCol_locallyConstant` first — every bowtie theorem reads `sorryAx` through it. Route: for each of the 11 tiles, its colour
+  under `bowtieCol`'s if-chain (each tile disjoint from the tiles tested before it; stage 10 did `G`, `C`, `H`) and `frontier T ⊆ ⋃ bowtieArcs` (closure by the
+  non-strict inequalities, then which equality holds puts the point on a listed piece; `Z`'s left edge `x = 9/26` lies inside the excluded closed region, whose
+  slanted edges are sub-segments of `G`'s and `H`'s edges through `(9/26, ±11/65)`); then a domain point off the arcs lies in the closure of one tile (finite union),
+  hence in it, and the colour is constant on that open tile. Then `bowtie_valid` (YB3's pairs: one per colour class of tiles; `G`, `H` by the sector angle
+  `2 arcsin(5/13) < 60°` — for `u, v` in the cone `12|x| < −5y`, `|u − v|² ≤ |u|² + |v|² − (238/169)|u||v| < 1`; `C`–`CN` because `(z − i)·(a, b) < 0` for `z`
+  below and `(a, b)` in the upward cone, so `|z − w| > |z − i| > 1`; `ZR`–`ZL` all `< 1`, `XR`–`YR` all `> 1`; the rest by vertex distances of convex pieces).
+  `bowtie_unitArcEnds` by the stage-11 density argument at `(±5/13, ±1/13)` (the circle and the lines `x = ±5/13`, `12|x| = 5(1 ∓ y)` through each end; around
+  `(5/13, 1/13)` the tiles are `G`, `C`, `Z` — `C` lies below `G`'s edge line there, so `C ∩ Z = ∅`). `bowtie_neighbours`, `bowtie_inType`, `bowtie_isStuck`,
+  `bowtie_doublyShadowed`, `bowtie_terminalOn`, `flank_incomplete_bowtie` need the partition at `±i` (four sectors `G`, `CN`, `XR`, `XL` at `i`) in stage 10's
+  pattern, and the moves' unavailability.
+- *UnitArc* (19): `u1_shadow` (plan § 13.5's route; `lock`'s engine and `side_ball_subset_closure` give the outer patch at `w`), the four `n2_env_*`
+  (one identity each), engine 6 and L60's five, `noBoth`, `flankQ_upper/lower` (engine 5 over `isSector_cone_or_horn`), the bends (engines 1–3), `a4six` (engine 7),
+  `nb4p`.
+- *Contact* (10) and the base's steps (BaseSteps' seven) as Stage 8 lists them.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -448,4 +479,7 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   `ArcMap.ball_subset_bowtie_dom`, `ArcMap.mem_bowtieArcs_iff_of_norm_lt`, `ArcMap.mem_bowtieArc_N`, `ArcMap.mem_bowtieArc_S`, `ArcMap.norm_ge_of_mem_segment_far`,
   `ArcMap.cuspPiece_subset_bowtie`, `ArcMap.bowtieCol_of_mem_G/C/H`, `ArcMap.bowtieCol_cuspPiece`, `ArcMap.hornSet_cusp_pi_eq`, `ArcMap.bowtie_isSector_cuspPiece`,
   `ArcMap.cuspPiece_subset_bowtie_region`, `ArcMap.e_pi_add_pi_div_two`; in `Sectors`, `ArcMap.cuspPiece_data` (the standard three).
+- FS112-BOWTIE: `ArcMap.bowtie_mem_dom` — `[propext, sorryAx, Classical.choice, Quot.sound]` **(over sorry: the structure `bowtie`, as above)**. Read against
+  § 8.2: same statement (`E`, `N`, `S′` in the fragment's domain). Children `ArcMap.interior_line_eq_empty`, `ArcMap.isClosed_line`, `ArcMap.dense_compl_four_lines`,
+  `ArcMap.subset_bowtieTiles`, `ArcMap.ball_I_subset_closure_bowtieTiles`, `ArcMap.ball_negI_subset_closure_bowtieTiles` — the standard three.
 

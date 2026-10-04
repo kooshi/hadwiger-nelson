@@ -539,6 +539,147 @@ theorem ball_subset_bowtie_dom : ball (0 : ℂ) (1 / 13) ⊆ bowtie.dom := by
   · exact Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (h2 hi))))))))))
   · exact Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inr (h3 hi))))))))))
 
+/-- A line `a·re + b·im = c` (`(a, b) ≠ 0`) has empty interior: moving off it along `(a, b)` changes the left side. -/
+theorem interior_line_eq_empty {a b c : ℝ} (h : a ≠ 0 ∨ b ≠ 0) : interior {z : ℂ | a * z.re + b * z.im = c} = ∅ := by
+  rw [Set.eq_empty_iff_forall_notMem]
+  intro z hz
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp isOpen_interior z hz
+  have hab : 0 < a ^ 2 + b ^ 2 := by rcases h with h | h <;> positivity
+  set t : ℝ := ε / (2 * (|a| + |b| + 1)) with ht
+  have hd : 0 < 2 * (|a| + |b| + 1) := by positivity
+  have ht0 : 0 < t := div_pos hε hd
+  set w : ℂ := z + (t : ℂ) * ((a : ℂ) + (b : ℂ) * I) with hw
+  have hwb : w ∈ ball z ε := by
+    rw [mem_ball, dist_eq_norm, hw, add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
+    have h1 : ‖(a : ℂ) + (b : ℂ) * I‖ ≤ |a| + |b| := by
+      refine (norm_add_le _ _).trans ?_
+      rw [norm_mul, Complex.norm_I, mul_one, Complex.norm_real, Complex.norm_real, Real.norm_eq_abs, Real.norm_eq_abs]
+    have h2 : t * (|a| + |b|) < ε := by
+      rw [ht, div_mul_eq_mul_div, div_lt_iff₀ hd]; nlinarith [abs_nonneg a, abs_nonneg b]
+    calc t * ‖(a : ℂ) + (b : ℂ) * I‖ ≤ t * (|a| + |b|) := mul_le_mul_of_nonneg_left h1 ht0.le
+      _ < ε := h2
+  have h1 : a * w.re + b * w.im = c := (interior_subset (hball hwb) : w ∈ {z : ℂ | a * z.re + b * z.im = c})
+  have h0 : a * z.re + b * z.im = c := (interior_subset hz : z ∈ {z : ℂ | a * z.re + b * z.im = c})
+  have hre : w.re = z.re + t * a := by simp [hw]
+  have him : w.im = z.im + t * b := by simp [hw]
+  rw [hre, him] at h1
+  nlinarith [mul_pos ht0 hab]
+
+/-- A line `a·re + b·im = c` is closed. -/
+theorem isClosed_line (a b c : ℝ) : IsClosed {z : ℂ | a * z.re + b * z.im = c} :=
+  isClosed_eq (by fun_prop) continuous_const
+
+/-- Four lines (each `(aᵢ, bᵢ) ≠ 0`) have a union with empty interior, so its complement is dense. -/
+theorem dense_compl_four_lines {a₁ b₁ c₁ a₂ b₂ c₂ a₃ b₃ c₃ a₄ b₄ c₄ : ℝ} (h₁ : a₁ ≠ 0 ∨ b₁ ≠ 0) (h₂ : a₂ ≠ 0 ∨ b₂ ≠ 0)
+    (h₃ : a₃ ≠ 0 ∨ b₃ ≠ 0) (h₄ : a₄ ≠ 0 ∨ b₄ ≠ 0) :
+    Dense ({z : ℂ | a₁ * z.re + b₁ * z.im = c₁} ∪ {z | a₂ * z.re + b₂ * z.im = c₂} ∪ {z | a₃ * z.re + b₃ * z.im = c₃} ∪
+      {z | a₄ * z.re + b₄ * z.im = c₄})ᶜ := by
+  rw [← interior_eq_empty_iff_dense_compl,
+    interior_union_isClosed_of_interior_empty (((isClosed_line _ _ _).union (isClosed_line _ _ _)).union (isClosed_line _ _ _))
+      (interior_line_eq_empty h₄),
+    interior_union_isClosed_of_interior_empty ((isClosed_line _ _ _).union (isClosed_line _ _ _)) (interior_line_eq_empty h₃),
+    interior_union_isClosed_of_interior_empty (isClosed_line _ _ _) (interior_line_eq_empty h₂), interior_line_eq_empty h₁]
+
+/-- Each tile of the bowtie lies in the union of its tiles. -/
+theorem subset_bowtieTiles :
+    bowtieG ⊆ bowtieTiles ∧ bowtieH ⊆ bowtieTiles ∧ bowtieCN ⊆ bowtieTiles ∧ bowtieCS ⊆ bowtieTiles ∧ bowtieX 1 ⊆ bowtieTiles ∧
+      bowtieX (-1) ⊆ bowtieTiles ∧ bowtieY 1 ⊆ bowtieTiles ∧ bowtieY (-1) ⊆ bowtieTiles := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩ <;> intro z hz <;> simp only [bowtieTiles, mem_union] <;> tauto
+
+/-- Near `N = i`, off the four edge lines through `i` (`12x ± 5(y − 1) = 0`... as `±12x + 5y = 5`, and `y − 1 = ±x`), the bowtie's tiles
+`G`, `CN`, `XR`, `XL` cover `B(i, 1/10)`. -/
+theorem ball_I_subset_closure_bowtieTiles : ball I (1 / 10) ⊆ closure bowtieTiles := by
+  have hd := dense_compl_four_lines (a₁ := 12) (b₁ := 5) (c₁ := 5) (a₂ := -12) (b₂ := 5) (c₂ := 5) (a₃ := 1) (b₃ := -1) (c₃ := -1)
+    (a₄ := 1) (b₄ := 1) (c₄ := 1) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  refine (hd.open_subset_closure_inter isOpen_ball).trans (closure_mono ?_)
+  rintro z ⟨hz, hL⟩
+  simp only [mem_compl_iff, mem_union, mem_setOf_eq, not_or] at hL
+  obtain ⟨⟨⟨l1, l2⟩, l3⟩, l4⟩ := hL
+  rw [mem_ball, dist_eq_norm] at hz
+  have hx : |z.re| < 1 / 10 := by
+    have := Complex.abs_re_le_norm (z - I); simp only [Complex.sub_re, Complex.I_re, sub_zero] at this; linarith
+  have hy : |z.im - 1| < 1 / 10 := by
+    have := Complex.abs_im_le_norm (z - I); simp only [Complex.sub_im, Complex.I_im] at this; linarith
+  have hx' := abs_lt.mp hx
+  have hy' := abs_lt.mp hy
+  obtain ⟨tG, -, tCN, -, tXR, tXL, -, -⟩ := subset_bowtieTiles
+  by_cases hG : 12 * |z.re| < 5 * (1 - z.im)
+  · exact tG ⟨by linarith, by linarith [abs_nonneg z.re], hG⟩
+  by_cases hC : |z.re| < z.im - 1
+  · exact tCN ⟨hC, by linarith⟩
+  push Not at hG hC
+  have l1' : 12 * z.re + 5 * z.im ≠ 5 := l1
+  have l2' : -12 * z.re + 5 * z.im ≠ 5 := l2
+  have l3' : 1 * z.re + -1 * z.im ≠ -1 := l3
+  have l4' : 1 * z.re + 1 * z.im ≠ 1 := l4
+  rcases lt_trichotomy z.re 0 with h | h | h
+  · rw [abs_of_neg h] at hG hC
+    refine tXL ⟨?_, ?_, by linarith, by linarith⟩
+    · rcases lt_or_gt_of_ne l2' with h' | h'
+      · exfalso; linarith
+      · linarith
+    · rcases lt_or_gt_of_ne l4' with h' | h'
+      · linarith
+      · exfalso; linarith
+  · exfalso
+    rw [h, abs_zero] at hG hC
+    apply l1'; rw [h]; linarith
+  · rw [abs_of_pos h] at hG hC
+    refine tXR ⟨?_, ?_, by linarith, by linarith⟩
+    · rcases lt_or_gt_of_ne l1' with h' | h'
+      · exfalso; linarith
+      · linarith
+    · rcases lt_or_gt_of_ne l3' with h' | h'
+      · exfalso; linarith
+      · linarith
+
+/-- Near `S′ = −i`, the mirror: `H`, `CS`, `YR`, `YL` cover `B(−i, 1/10)` off the four edge lines through `−i`. -/
+theorem ball_negI_subset_closure_bowtieTiles : ball (-I) (1 / 10) ⊆ closure bowtieTiles := by
+  have hd := dense_compl_four_lines (a₁ := 12) (b₁ := -5) (c₁ := 5) (a₂ := 12) (b₂ := 5) (c₂ := -5) (a₃ := 1) (b₃ := 1) (c₃ := -1)
+    (a₄ := 1) (b₄ := -1) (c₄ := 1) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  refine (hd.open_subset_closure_inter isOpen_ball).trans (closure_mono ?_)
+  rintro z ⟨hz, hL⟩
+  simp only [mem_compl_iff, mem_union, mem_setOf_eq, not_or] at hL
+  obtain ⟨⟨⟨l1, l2⟩, l3⟩, l4⟩ := hL
+  rw [mem_ball, dist_eq_norm, sub_neg_eq_add] at hz
+  have hx : |z.re| < 1 / 10 := by
+    have := Complex.abs_re_le_norm (z + I); simp only [Complex.add_re, Complex.I_re, add_zero] at this; linarith
+  have hy : |z.im + 1| < 1 / 10 := by
+    have := Complex.abs_im_le_norm (z + I); simp only [Complex.add_im, Complex.I_im] at this; linarith
+  have hx' := abs_lt.mp hx
+  have hy' := abs_lt.mp hy
+  have hzI : ‖z + I‖ < 1 := by linarith
+  obtain ⟨-, tH, -, tCS, -, -, tYR, tYL⟩ := subset_bowtieTiles
+  by_cases hH : 12 * |z.re| < 5 * (1 + z.im)
+  · exact tH ⟨hzI, by linarith [abs_nonneg z.re], hH⟩
+  by_cases hC : |z.re| < -1 - z.im
+  · exact tCS ⟨hC, by linarith⟩
+  push Not at hH hC
+  have l1' : 12 * z.re + -5 * z.im ≠ 5 := l1
+  have l2' : 12 * z.re + 5 * z.im ≠ -5 := l2
+  have l3' : 1 * z.re + 1 * z.im ≠ -1 := l3
+  have l4' : 1 * z.re + -1 * z.im ≠ 1 := l4
+  rcases lt_trichotomy z.re 0 with h | h | h
+  · rw [abs_of_neg h] at hH hC
+    refine tYL ⟨?_, ?_, by linarith, by linarith⟩
+    · rcases lt_or_gt_of_ne l2' with h' | h'
+      · linarith
+      · exfalso; linarith
+    · rcases lt_or_gt_of_ne l4' with h' | h'
+      · linarith
+      · exfalso; linarith
+  · exfalso
+    rw [h, abs_zero] at hH hC
+    apply l1'; rw [h]; linarith
+  · rw [abs_of_pos h] at hH hC
+    refine tYR ⟨?_, ?_, by linarith, by linarith⟩
+    · rcases lt_or_gt_of_ne l1' with h' | h'
+      · exfalso; linarith
+      · linarith
+    · rcases lt_or_gt_of_ne l3' with h' | h'
+      · exfalso; linarith
+      · linarith
+
 /-- **The bowtie at `E`**: for `0 < r ≤ 1/13` its interior points in `B(0, r)` are the cusp's four pieces. -/
 theorem bowtie_partition {r : ℝ} (hr : r ≤ 1 / 13) : bowtie.interiorPts ∩ ball 0 r = ⋃ i, cuspPiece r i := by
   rw [← cuspFrag_partition (by linarith : r ≤ 1 / 2)]
@@ -589,8 +730,10 @@ theorem bowtie_valid : bowtie.Valid := by
   sorry
 
 /-- `E = 0`, `N = i`, `S = −i` lie in the fragment's domain. -/
-theorem bowtie_mem_dom : (0 : ℂ) ∈ bowtie.dom ∧ I ∈ bowtie.dom ∧ -I ∈ bowtie.dom := by
-  sorry
+theorem bowtie_mem_dom : (0 : ℂ) ∈ bowtie.dom ∧ I ∈ bowtie.dom ∧ -I ∈ bowtie.dom :=
+  ⟨ball_subset_bowtie_dom (mem_ball_self (by norm_num)),
+    interior_maximal ball_I_subset_closure_bowtieTiles isOpen_ball (mem_ball_self (by norm_num)),
+    interior_maximal ball_negI_subset_closure_bowtieTiles isOpen_ball (mem_ball_self (by norm_num))⟩
 
 /-- `E` carries three colours: `0` (`G`), `1` (the horns), `2` (`H`); the horn colour has two sectors. -/
 theorem bowtie_coloursAt_zero : bowtie.coloursAt 0 = {0, 1, 2} ∧ bowtie.HasSectors 0 1 2 := by

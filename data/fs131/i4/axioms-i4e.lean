@@ -15,3 +15,9 @@ open HadwigerNelson.Plane
 #print axioms ArcMap.ball_subset_bowtie_dom
 #print axioms ArcMap.cuspPiece_data
 #print axioms ArcMap.cuspFrag_isHorn
+#print axioms ArcMap.bowtie_mem_dom
+#print axioms ArcMap.interior_line_eq_empty
+#print axioms ArcMap.dense_compl_four_lines
+#print axioms ArcMap.ball_I_subset_closure_bowtieTiles
+#print axioms ArcMap.ball_negI_subset_closure_bowtieTiles
+#print axioms ArcMap.subset_bowtieTiles

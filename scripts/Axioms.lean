@@ -2749,6 +2749,12 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.interior_line_eq_empty
+#print axioms HadwigerNelson.Plane.ArcMap.isClosed_line
+#print axioms HadwigerNelson.Plane.ArcMap.dense_compl_four_lines
+#print axioms HadwigerNelson.Plane.ArcMap.subset_bowtieTiles
+#print axioms HadwigerNelson.Plane.ArcMap.ball_I_subset_closure_bowtieTiles
+#print axioms HadwigerNelson.Plane.ArcMap.ball_negI_subset_closure_bowtieTiles
 #print axioms HadwigerNelson.Plane.ArcMap.e_pi_add_pi_div_two
 #print axioms HadwigerNelson.Plane.ArcMap.norm_ge_of_mem_segment_far
 #print axioms HadwigerNelson.Plane.ArcMap.mem_bowtieArc_N
