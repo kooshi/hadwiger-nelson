@@ -25,13 +25,13 @@ that judge the milestone, written before any job).*
 | wave 3 (20 rows + 6 merged) | 87 of 96 proved (I3–I3d), all on the standard three axioms in real audit logs; **FS131-I3e running** on the last 9, then the gate and the landing | `.claude/worktrees/fs131-w3` |
 | wave 4 (25 rows) | fully planned (K4–K4c): 86 leaves; implementer handoff § 14; **notes for wave 5 in § 14.5** | `.claude/worktrees/fs131-w4` at `f620977c` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | planned (FS131-W, item 97): 31 leaves, two open in the derivation (`step5_eq`, `step7`); landing form per item 98 | `.claude/worktrees/fs131-ww` at `7aaaf2c4` |
-| the maps-six GAPs (Ephodos) | **FS131-E1 running**; claim list `data/fs131/claims-E1.md` | record `plans/FS131-E1-derivation.md` |
+| the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
 | Lebesgue's covering theorem (FS131-LEB) | queued (item 66) | — |
 | waves 5–10 (124 rows) | not started; wave 5 carries C-DOUBLE + Y3-END-NEEDS (item 69) and FLANK-Q's discharge (item 79); wave 9 bound by item 89's note and item 96's vacuity rule | plan § 7 |
 
 **The finding with bearing** (items 88, 91): the repaired proof of "maps need six" has two GAPs — step 7 open in every class (even with no unit-arc boundaries),
 step 5's equality case open with unit arcs — one mind (W), from the page images. Route M's "χ_m⁰(ℝ²) ≥ 6 at five" (FS111-M2-REDUCE-C and kin) rests on it.
-**Corrections owed, held until E1 reports**: `LEDGER.md` row 132's maps-six clause and `CLAUDE.md` § The aim item 4 (W's drafts: its plan § 5).
+**Corrections filed** from E1's § 4.3 (item 107): row 132, § The aim item 4, FS106 errata — maps need six for arc maps; Jordan form owed.
 
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
