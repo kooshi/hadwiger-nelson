@@ -69,15 +69,15 @@ def reduced : SimpleGraph (reducedVerts G) := G.induce (reducedVerts G)
 (The planar ring lists each repeated neighbour only at its edge contacts — Thomassen's rule — since at a vertex contact the tiles on both
 sides are adjacent and the separation fails.) -/
 def IsRing (x : V) (r : List V) : Prop :=
-  (∀ y, y ∈ r ↔ G.Adj x y) ∧ (∀ i a b, r[i]? = some a → r[(i + 1) % r.length]? = some b → a = b ∨ G.Adj a b) ∧
-    ∀ y i j, i < j → r[i]? = some y → r[j]? = some y → ∀ m n a b, i < m → m < j → (n < i ∨ j < n) →
+  (∀ y, y ∈ r ↔ G.Adj x y) ∧ (∀ (i : ℕ) (a b : V), r[i]? = some a → r[(i + 1) % r.length]? = some b → a = b ∨ G.Adj a b) ∧
+    ∀ (y : V) (i j : ℕ), i < j → r[i]? = some y → r[j]? = some y → ∀ (m n : ℕ) (a b : V), i < m → m < j → (n < i ∨ j < n) →
       r[m]? = some a → r[n]? = some b → ∀ (ha : a ∈ offTwo x y) (hb : b ∈ offTwo x y),
         ¬ (G.induce (offTwo x y)).Reachable ⟨a, ha⟩ ⟨b, hb⟩
 
 /-- `y` appears at two positions of `r` that are not cyclically consecutive (`[Thomassen1999]` p. 851: "`y = xᵢ = xⱼ` for `1 ≤ i < j − 1 <
 k − 1`"). -/
 def TwiceApart (r : List V) (y : V) : Prop :=
-  ∃ i j, i + 1 < j ∧ ¬ (i = 0 ∧ j + 1 = r.length) ∧ r[i]? = some y ∧ r[j]? = some y
+  ∃ i j : ℕ, i + 1 < j ∧ ¬ (i = 0 ∧ j + 1 = r.length) ∧ r[i]? = some y ∧ r[j]? = some y
 
 /-- **The planar properties Thomassen's reduction reads** (FS131-KP plan § 4; CVB B2 steps 1–3): locally finite, connected, infinite; a ring
 at every vertex, with `G − x − y` connected unless `y` appears twice apart in `x`'s ring; and for every pair exactly one infinite component of
