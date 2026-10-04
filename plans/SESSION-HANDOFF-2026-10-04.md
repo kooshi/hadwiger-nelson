@@ -22,7 +22,7 @@ that judge the milestone, written before any job).*
 |---|---|---|
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
 | wave 2 (28 rows) | 37 of 71 leaves proved (I2–I2d); re-planned by K2c (items 92–94): children stated for 16 leaves, 18 still need children; `falconer_lemma2_nonempty` an axiom (item 93); **FS131-I2e running** | `.claude/worktrees/fs131-w2` |
-| wave 3 (20 rows + 6 merged) | 87 of 96 proved (I3–I3d), all on the standard three axioms in real audit logs; **FS131-I3e running** on the last 9, then the gate and the landing | `.claude/worktrees/fs131-w3` |
+| wave 3 (20 rows + 6 merged) | 91 of 96 proved (I3–I3e); item 112's cusp ruling applied; **FS131-I3f running** on the last 5, then the gate and the landing | `.claude/worktrees/fs131-w3` |
 | wave 4 (25 rows) | fully planned (K4–K4c): 86 leaves; implementer handoff § 14; **notes for wave 5 in § 14.5** | `.claude/worktrees/fs131-w4` at `f620977c` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | planned (FS131-W, item 97): 31 leaves, two open in the derivation (`step5_eq`, `step7`); landing form per item 98 | `.claude/worktrees/fs131-ww` at `7aaaf2c4` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
@@ -41,7 +41,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-I4 (wave 4, first implementer; item 115) | Sonnet | `data/fs131/briefs/FS131-I4-wave4.md` | its branch's (`fs131-w4`) `data/fs131/reports/FS131-I4.md` |
-| FS131-I3e (wave 3, last nine, gate, landing) | Sonnet | `data/fs131/briefs/FS131-I3e-wave3.md` | its branch's `data/fs131/reports/FS131-I3e.md` |
+| FS131-I3f (wave 3, last five, gate, landing; item 117) | Sonnet | `data/fs131/briefs/FS131-I3f-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3f.md` |
 | FS131-W2 (Woodall's chain re-planned on E1-NO45; item 109) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-W2-woodall-replan.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-W2.md` |
 | EXT-HN1 (audit of an outside repository; item 108) | Opus (de Bruijn) | `data/external/briefs/EXT-HN1-outside-claim.md` | `data/external/reports/EXT-HN1.md` |
 | FS131-K2d (wave 2's last 18 leaves: children; item 104) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-K2d-wave2-children.md` | its branch's (`fs131-w2d`, worktree `.claude/worktrees/fs131-w2d`) `data/fs131/reports/FS131-K2d.md` |
