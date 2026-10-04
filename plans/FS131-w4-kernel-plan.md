@@ -560,3 +560,60 @@ date, nothing built, 11 modules with warnings** (wave 3's six skeleton modules, 
   `ω(N)`. p ≈ 0.85.
 - **FS112-U1's shadow clause needs no validity** and holds in a form stronger than the class form (the outer class's points near the arc). p ≈ 0.9.
 - **FS112-A4SIX** holds at every `k` with "four colours" read as "exactly two colours absent". p ≈ 0.85.
+
+## Stage 11 — SAVED (K4c stage 2): the domain-modeling pass over the wave (`debruijn-domain-modeling`, invoked fresh)
+
+### 11.1 What the pass read, and the one cut
+
+The whole foundation (`Plane/ValidMap/Basic`: frame, horns, sectors, contacts, shadows, the moves' preconditions, unit-arc kinds,
+Conditions 5–6, `𝓜_K`), K4b's vocabulary (`multicolour`, `AeProperRegions`, the brick map; `pseudoColours`, `IsLeavingCentre`, `leavingInner`,
+`leavingOuter`, `StripHolds`, `MIn`, the bowtie), the statements of the three moves that consume it (`exists_shave`, `exists_rayMerge`,
+`exists_merge`), and what the nine unit-arc items need (Lenses `Reul`, the bent map, the first-order shadow, covering pairs, the `σ_v`-orbit). The cut
+read throughout: which facts belong to the unit-arc world the rows live in (FS-112's maps allow unit arcs, Condition 5 dropped), and which are
+leftovers of FS-110's Condition-5 world that the vocabulary inherited.
+
+### 11.2 What it found, and what changed
+
+| smell | reading | change |
+|---|---|---|
+| the moves' clause "`F'.dom = F.dom ∧ ∀ z ∉ closedBall v ρ, (z ∈ F'.interiorPts ↔ z ∈ F.interiorPts) ∧ F'.col z = F.col z`" written out three times, and needed a fourth and fifth time by the bends | N declarations identical modulo naming: a role unnamed — "a local modification agreeing with `F` off `U`" | **`ArcMap.AgreesOff F' F U`** in the foundation (the same conjunction; no statement's meaning changes); the three moves restated through it; the bends use it with `U` a thickening of the arc. Its lemma surface (region and colours agree off `closure U`) is the implementer's first child |
+| "Condition 5 kept" as the moves' only statement about unit arcs (`F.Condition5 → F'.Condition5`) | an incidental invariant inherited from FS-110: in FS-112's maps Condition 5 is false, so the clause is vacuous exactly where wave 5's N2-RED / N2-TERM uses the moves, whose termination reads "the moves create no unit arc" (FS112-WALK row 4: "'Condition 5 kept' read as 'no unit arc created'") | **`ArcMap.RingArcsWithin F G`** (every point of an arc of `Γ` on some `ω(p)` in `F` lies on one in `G` with the same centre) — presentation-free, over wave 3's `OnRingArc`, never `F.arcs`; all three moves now conclude `F'.RingArcsWithin F`, and keep `F.Condition5 → F'.Condition5` (a corollary, kept for the FS-110 consumers) |
+| `exists_shave` concluded `F'.Condition5` for any horn curvatures | **a statement defect**: with `κ₂ > 1` and the clear split at `σ = 1`, the shave's new boundary is an arc of `ω(N)` — a unit arc — and Condition 5 fails; nothing in the hypotheses excluded it | hypotheses `−1 ≤ κ₁`, `κ₂ ≤ 1` added (every consumer has them: `woodallCone` gives `[−1, 1]`, `stuck_structure` `(−1, 1)`); then `σ = ±1` forces the split onto the horn's own bounding arc and no unit arc is created (FS112-WALK row 7; NB divergence #3). Condition 5 dropped as a hypothesis (it entered only through "kept") — **a widening** |
+| `exists_rayMerge` assumed Condition 5 and `−1 < κ₁`, `κ₄ < 1` | the argument reads only the two inner arcs (FS112-WALK W3: their curvatures lie strictly inside `(−1, 1)` whenever the horns have positive width and `κ₁ ≥ −1`, `κ₄ ≤ 1`) | Condition 5 dropped, bounds `−1 ≤ κ₁`, `κ₄ ≤ 1` — **a widening** |
+| "covering pair" written out as a union of `coloursAt` in A4SIX, NB4P and later waves | the rows' own word, with a fixed meaning (the union sense, FS-110's claim list § 9 item 1) | **`ArcMap.IsCoveringPair u y`** in the foundation |
+| `Reul(X, Y, Z)` | item-local (L60-EQ) | `reul` in `Plane/ValidMap/UnitArc`, beside its one consumer |
+
+Refused, as incidental: a predicate "the bent map of `α`" (the bends are existence statements over `AgreesOff`, `RingArcsWithin` and region
+inclusions, the moves' shape); a definition of the first-order shadow (one row reads it, inline as `∀ᶠ t in 𝓝[>] 0, P + t e β ∈ shadow …`); a
+definition of the `σ_v`-orbit (`ringPt v (ψ + j π/3)` inline); a separate "unit Γ" read from `F.arcs` (presentation-dependent, as wave 3's § 2.2
+refused for ring arcs).
+
+**K4b's vocabulary, read against the cut**: `pseudoColours`, `IsLeavingCentre`, `leavingInner`/`leavingOuter`, `StripHolds`, `MIn` are colour-class
+predicates over wave 3's `IsRingArc` and `coloursAt` — intrinsic, no change. `multicolour`, `AeProperRegions` are region-only (boundaries never read),
+the class TS-T's argument reads — no change. `Condition6` reads degree through `HasDegree` — no change. The bowtie's tiles are a presentation of one
+fragment (its arcs are its own business; every row about it reads `coloursAt`, sectors and horns) — no change.
+
+### 11.3 The seams
+
+- **Unsampled member**: `unitArcPlane` (the plane, one colour, the upper half of `ω(0)` as its only arc) — the first map in the library with a unit
+  arc and a proved `OnRingArc`; `RingArcsWithin` is reflexive, and **adversary**: `unitArcPlane` does not create its unit arc within the arc-free plane.
+- `AgreesOff` reflexive; **adversary**: the one-colour planes of the two colours of `Fin 2` do not agree off `∅`.
+- `IsCoveringPair`: every pair on the one-colour plane over `Fin 1`; **adversary**: none on the one-colour plane over `Fin 2`.
+- **The next lemma, named before looking**: "a move's `F'` has the same `coloursAt` as `F` off `closure U`" states in the existing vocabulary
+  (`AgreesOff` plus `coloursAt`) — the vocabulary earns it.
+
+### 11.4 Findings sent to Keryx at this stage (message of this stage)
+
+- **SHAVE-UA (statement defect, fixed in the wave)**: `exists_shave`'s "Condition 5 kept" could fail for horn curvatures outside `[−1, 1]`; curvature
+  bounds added, which every consumer has.
+- **G-MOVES-UA (generalization)**: `exists_shave` and `exists_rayMerge` hold with unit arcs (Condition 5 dropped; RAY's outer bounds `±1` allowed), and
+  all three moves create no unit arc (`RingArcsWithin`) — the form wave 5's N2-RED / N2-TERM consumes.
+
+### 11.5 The build of this stage
+
+`./scripts/build.sh` (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 442 of 442 batches, 9 modules rebuilt, 11 modules with warnings**, every warning
+`declaration uses 'sorry'` (no other warning or error), 8 m 25 s, exit 0 (`build/gate/build/20261004T085637Z-2311426.log`; driver log
+`data/fs131/k4/build-k4c-stage2.log`). `Basic` stays sorry-free. (The stage-3 edits to `UnitArc` and `BaseSteps` were being written while this build
+ran, so its rebuilt `UnitArc`/`BaseSteps` are not this stage's evidence; Stage 12's build is theirs.) The float probe of N2-ENV's shape, run before the
+statement was written: `tools/fs131_k4c_env_probe.py` (exit 0; the uncovered radii shrink with the profile, 0.40 → 0.096 → 0.018 toward and
+0.22 → 0.052 → 0.011 away, near-clause violations 0; `--plant` with profile slope 3: FIRED) — a probe of a statement's shape, not a proof.

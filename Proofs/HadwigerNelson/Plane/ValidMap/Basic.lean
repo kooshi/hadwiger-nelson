@@ -215,6 +215,23 @@ def InMK (K : ℕ) : Prop :=
   (∀ a ∈ F.arcs, ∀ c ρ θ₀ θ₁, a = .circ c ρ θ₀ θ₁ → 1 / (K : ℝ) ≤ ρ) ∧
     ∀ x, {a | a ∈ F.arcs ∧ (a.carrier ∩ F.dom ∩ ball x 1).Nonempty}.encard ≤ K
 
+/-! ## Local modifications: agreement off a set, and no new unit arc -/
+
+/-- **`F'` agrees with `F` off `U`**: the same domain, and outside `U` the same interior points with the same colours. Every
+local move of the wave (W-MERGE, MERGE-RAY, SHAVE, the whole-arc bends) produces a map agreeing with the old one off a small
+set; off the closure of that set the two maps have the same regions, tiles and colours at every point. -/
+def AgreesOff (F' : ArcMap k) (U : Set ℂ) : Prop :=
+  F'.dom = F.dom ∧ ∀ z ∉ U, (z ∈ F'.interiorPts ↔ z ∈ F.interiorPts) ∧ F'.col z = F.col z
+
+/-- **`F` creates no unit arc over `G`**: every point of an arc of `Γ` on a unit circle `ω(p)` in `F` lies on such an arc of
+`G` with the same centre (FS112-WALK's reading of "Condition 5 kept": "no unit arc created"). Presentation-free: it reads
+`Γ`, never `F.arcs`, as wave 3's `OnRingArc` does; with `G.Condition5` it gives `F.Condition5` back. -/
+def RingArcsWithin (G : ArcMap k) : Prop := ∀ p x, F.OnRingArc p x → G.OnRingArc p x
+
+/-- **A covering pair** `(u, y)` (FS-110's claim list § 0 as corrected at its close, § 9 item 1: the union sense): the colours
+carried at `u` and at `y` together are all the colours. Disjointness is not part of it. -/
+def IsCoveringPair (u y : ℂ) : Prop := F.coloursAt u ∪ F.coloursAt y = univ
+
 end ArcMap
 
 /-! ## Spec examples (each fails if its definition drifts) -/
@@ -308,6 +325,71 @@ example (j : Fin 2) : (ArcMap.const univ isOpen_univ j).IsContact 0 j 1 := by
   · show (0 : ℂ) ∈ closure ((ArcMap.const univ isOpen_univ j).region j)
     rw [hreg, closure_univ]; trivial
   · rw [hreg, closure_univ]; trivial
+
+/-- `AgreesOff` is reflexive: a map agrees with itself off any set. -/
+example (j : Fin 2) (U : Set ℂ) :
+    (ArcMap.const univ isOpen_univ j).AgreesOff (ArcMap.const univ isOpen_univ j) U :=
+  ⟨rfl, fun _ _ => ⟨Iff.rfl, rfl⟩⟩
+
+/-- **Adversary**: the one-colour planes of the two colours of `Fin 2` do not agree off `∅` (their colours differ at `0`). -/
+example : ¬ (ArcMap.const univ isOpen_univ (1 : Fin 2)).AgreesOff (ArcMap.const univ isOpen_univ (0 : Fin 2)) ∅ := by
+  rintro ⟨-, h⟩
+  have := (h 0 (notMem_empty 0)).2
+  simp [const] at this
+
+/-- A map with one unit arc: the plane, one colour, the upper half of `ω(0)` as its only arc. -/
+noncomputable def unitArcPlane : ArcMap 1 where
+  dom := univ
+  isOpen_dom := isOpen_univ
+  arcs := {Arc.circ 0 1 0 π}
+  nondegenerate := by
+    intro a ha
+    rw [mem_singleton_iff] at ha
+    subst ha
+    exact ⟨one_pos, pi_pos, by linarith [pi_pos]⟩
+  locallyFinite := fun _ _ => ⟨univ, univ_mem, (finite_singleton _).subset fun a ha => ha.1⟩
+  col := fun _ => 0
+  locallyConstant := fun _ _ _ => Filter.Eventually.of_forall fun _ => rfl
+
+/-- `RingArcsWithin` is reflexive, and **adversary**: the arc of `unitArcPlane` is a unit arc the arc-free plane does not have,
+so `unitArcPlane` does not create its unit arcs within the one-colour plane. -/
+example : unitArcPlane.RingArcsWithin unitArcPlane ∧
+    ¬ unitArcPlane.RingArcsWithin (ArcMap.const univ isOpen_univ 0) := by
+  refine ⟨fun _ _ h => h, fun h => ?_⟩
+  have hon : unitArcPlane.OnRingArc 0 (ringPt 0 0) := by
+    refine ⟨0, π, pi_pos, ⟨0, ⟨le_rfl, pi_pos.le⟩, rfl⟩, ?_⟩
+    rintro _ ⟨θ, hθ, rfl⟩
+    refine ⟨mem_univ _, mem_biUnion (mem_singleton _) ⟨θ, hθ, ?_⟩⟩
+    simp [ringPt]
+  obtain ⟨θ₁, θ₂, hlt, -, hsub⟩ := h 0 _ hon
+  have hm : ringPt 0 θ₁ ∈ ringArc 0 θ₁ θ₂ := ⟨θ₁, ⟨le_rfl, hlt.le⟩, rfl⟩
+  have := hsub hm
+  simp [Γ, const] at this
+
+/-- On the one-colour plane with one colour, every pair is a covering pair; with two colours (`Fin 2`), none is. -/
+example : (ArcMap.const univ isOpen_univ (0 : Fin 1)).IsCoveringPair 0 1 := by
+  have hreg : (ArcMap.const univ isOpen_univ (0 : Fin 1)).region 0 = univ := by
+    ext z; simp [region, const, interiorPts]
+  ext j
+  fin_cases j
+  simp only [mem_union, mem_univ, iff_true]
+  left
+  show (0 : ℂ) ∈ closure ((ArcMap.const univ isOpen_univ (0 : Fin 1)).region 0)
+  rw [hreg, closure_univ]; trivial
+
+/-- **Adversary**: on the one-colour plane with two colours (`Fin 2`) no pair is a covering pair (the other colour is carried
+nowhere). -/
+example (x y : ℂ) : ¬ (ArcMap.const univ isOpen_univ (0 : Fin 2)).IsCoveringPair x y := by
+  intro h
+  have h1 : (1 : Fin 2) ∈ (ArcMap.const univ isOpen_univ (0 : Fin 2)).coloursAt x ∪
+      (ArcMap.const univ isOpen_univ (0 : Fin 2)).coloursAt y := by
+    rw [h]; trivial
+  have hreg : (ArcMap.const univ isOpen_univ (0 : Fin 2)).region 1 = ∅ := by
+    ext z; simp [region, const, interiorPts]
+  rcases h1 with h1 | h1 <;>
+  · have h1' : _ ∈ closure ((ArcMap.const univ isOpen_univ (0 : Fin 2)).region 1) := h1
+    rw [hreg, closure_empty] at h1'
+    exact h1'
 
 end ArcMap
 

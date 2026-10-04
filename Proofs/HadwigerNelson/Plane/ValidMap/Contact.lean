@@ -133,26 +133,30 @@ theorem shaveAvailable_of_not_doublyShadowed (hF : F.Valid) (h5 : F.Condition5) 
   sorry
 
 /-- **FS110-N4-SHAVE**, the move: where SHAVE is available at `v` for a colour `c` with `n ≥ 1` sectors, recolouring the horn's
-tip gives a valid map with Condition 5, equal to `F` off a small disc about `v`, in which `c` has `n − 1` sectors at `v`, no
-colour is added at `v`, and the new points on the disc's rim carry at most three colours. -/
-theorem exists_shave (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ σ : ℝ} {c g h : Fin k}
-    {n : ℕ} (hn : F.HasSectors v c (n + 1)) (hH : F.IsHorn v α κ₁ κ₂ c) (hg : F.IsFlankAbove v α κ₂ g)
-    (hh : F.IsFlankBelow v α κ₁ h) (hσ₁ : κ₁ ≤ σ) (hσ₂ : σ ≤ κ₂)
+tip gives a valid map, agreeing with `F` off a small disc about `v` and creating no unit arc (Condition 5 kept when `F` has it),
+in which `c` has `n − 1` sectors at `v`, no colour is added at `v`, and the new points on the disc's rim carry at most three
+colours. Unit arcs are allowed (FS112-WALK, row 7: the split circle has curvature `σ ∈ [κ₁, κ₂] ⊆ [−1, 1]`, and `σ = ±1` puts it on
+the horn's own bounding arc); the curvature bounds are what keeps the move from creating a unit arc. -/
+theorem exists_shave (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ σ : ℝ} {c g h : Fin k}
+    {n : ℕ} (hn : F.HasSectors v c (n + 1)) (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1)
+    (hg : F.IsFlankAbove v α κ₂ g) (hh : F.IsFlankBelow v α κ₁ h) (hσ₁ : κ₁ ≤ σ) (hσ₂ : σ ≤ κ₂)
     (hclear : ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ z ∈ hornSet v α κ₁ κ₂ r,
       (TanAbove v α σ z → F.IsClear g z) ∧ (¬ TanAbove v α σ z → F.IsClear h z)) :
-    ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ F'.Condition5 ∧ F'.dom = F.dom ∧
-      (∀ z ∉ closedBall v ρ, (z ∈ F'.interiorPts ↔ z ∈ F.interiorPts) ∧ F'.col z = F.col z) ∧
+    ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (closedBall v ρ) ∧ F'.RingArcsWithin F ∧
+      (F.Condition5 → F'.Condition5) ∧
       F'.HasSectors v c n ∧ F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ sphere v ρ, (F'.coloursAt x).ncard ≤ 3 := by
   sorry
 
 /-- **FS110-N4-SHAVE**, N4-RAY: two `c`-horns along one ray merge — the region between them is `c`-clear near `v`, and
-recolouring it gives a valid map, equal to `F` off a small disc about `v`, in which `c` has one sector fewer at `v`. -/
-theorem exists_rayMerge (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c : Fin k}
+recolouring it gives a valid map, agreeing with `F` off a small disc about `v` and creating no unit arc, in which `c` has one
+sector fewer at `v`. Unit arcs are allowed and the outer bounds may be `±1` (FS112-WALK W3: the region between the horns is bounded
+by their inner arcs, of curvatures strictly inside `(−1, 1)`). -/
+theorem exists_rayMerge (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c : Fin k}
     {n : ℕ} (hn : F.HasSectors v c (n + 1)) (h23 : κ₂ < κ₃) (hH : F.IsHorn v α κ₁ κ₂ c) (hH' : F.IsHorn v α κ₃ κ₄ c)
-    (h1 : -1 < κ₁) (h4 : κ₄ < 1) :
+    (h1 : -1 ≤ κ₁) (h4 : κ₄ ≤ 1) :
     (∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ z ∈ hornSet v α κ₂ κ₃ r, F.IsClear c z) ∧
-    ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ F'.Condition5 ∧ F'.dom = F.dom ∧
-      (∀ z ∉ closedBall v ρ, (z ∈ F'.interiorPts ↔ z ∈ F.interiorPts) ∧ F'.col z = F.col z) ∧
+    ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (closedBall v ρ) ∧ F'.RingArcsWithin F ∧
+      (F.Condition5 → F'.Condition5) ∧
       F'.HasSectors v c n ∧ F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ sphere v ρ, (F'.coloursAt x).ncard ≤ 3 := by
   sorry
 
@@ -161,13 +165,12 @@ theorem exists_rayMerge (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} (hv : F.Cov
 /-- **FS110-W-MERGE**, Woodall's step 3 almost everywhere for curved arcs: if `int D_c(v)` is non-empty and `c` has `n + 1 ≥ 2`
 sectors at `v`, recolouring a gap inside `D_c(v)` near `v` gives a valid map, equal to `F` off a small disc about `v`, in which
 `c` has `n` sectors at `v`, no point off the disc's rim gains a colour, the new points on the rim carry at most three colours
-with none repeated, no other point's allowed cone for `c` changes, and Condition 5 is kept. Condition 5 is not assumed
+with none repeated, no other point's allowed cone for `c` changes, and no unit arc is created (so Condition 5 is kept). Condition 5 is not assumed
 (FS112-WALK). -/
 theorem exists_merge (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)
     (hn : F.HasSectors v c (n + 1)) (hD : (interior (F.allowedCone v c)).Nonempty) :
-    ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ (F.Condition5 → F'.Condition5) ∧ F'.dom = F.dom ∧
-      (∀ z ∉ closedBall v ρ, (z ∈ F'.interiorPts ↔ z ∈ F.interiorPts) ∧ F'.col z = F.col z) ∧
-      F'.HasSectors v c n ∧ (∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x) ∧
+    ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (closedBall v ρ) ∧ F'.RingArcsWithin F ∧
+      (F.Condition5 → F'.Condition5) ∧ F'.HasSectors v c n ∧ (∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x) ∧
       (∀ x ∈ sphere v ρ, (F'.coloursAt x).ncard ≤ 3 ∧ ¬ F'.HasRepeatedColour x) ∧
       ∀ v' ∉ closedBall v ρ, F'.allowedCone v' c = F.allowedCone v' c := by
   sorry
