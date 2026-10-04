@@ -16,20 +16,40 @@ section:
 
 or by hand with `lake env lean scripts/Axioms.lean`.
 
-## The two sections, and why the banners are printed rather than commented
+## The three sections, and why the banners are printed rather than commented
 
 A native purchase shows up as **one long name in the middle of a wall of text** — at v4.32.0
 `native_decide` mints a per-declaration axiom, `foo._native.native_decide.ax_1_1`, and
 `Lean.ofReduceBool` never appears at all. Eyeballing that difference across twenty lines is exactly
 the check that silently stops being run. So the file prints machine-readable banners, the audit
-splits on them, and the rule is mechanical:
+splits on them, and the rule is mechanical — **every axiom a record carries must be one its section
+allows** (`scripts/axioms.sh` checks each record's list as a set, FS131-T3):
 
-* **CLEAN** — every line must be exactly `propext`, `Classical.choice`, `Quot.sound`. Any
-  `native_decide`, `ofReduceBool` or `sorryAx` here fails the gate.
+* **CLEAN** — nothing but `propext`, `Classical.choice`, `Quot.sound`: a subset of the standard three,
+  the empty set included. Any other axiom here fails the gate, and the failure says which kind it is:
+  a native purchase, a declared import (the record belongs under IMPORTED), `sorryAx`, or an axiom
+  nobody declared.
 * **PURCHASED** — these carry a native-evaluation axiom *by design*. Each corresponds to a
   declaration whose docstring opens with "**Trust purchase: native evaluation.**"
   (`grep -rn "Trust purchase" Proofs/` is the source-side ledger), and to an entry in
-  `ARCHITECTURE.md` § 5. `sorryAx` still fails here.
+  `ARCHITECTURE.md` § 5. A record here with no native axiom is a stale entry and fails; besides the
+  standard three and its native axioms it may carry only declared imports. `sorryAx` still fails here.
+* **IMPORTED** — these rest on a **declared outside theorem**: an `axiom` named by an
+  `AxiomAudit.declareImport` line in that section, the one list of them, each with the four items of
+  `LEAN.md` § Assumptions. A record here may carry the standard three and declared imports, nothing
+  else, and must carry at least one declared import. How a wave declares one is written beside the
+  banner, which comes first, just above CLEAN.
+
+Two more kinds of line are printed, and neither is a record: `DECLARED IMPORT <name>` from each
+`declareImport`, and, from `AxiomAudit.libraryAxioms` — the file's last command — every `axiom` the
+library declares (`LIBRARY SUMMARY …`, `LIBRARY AXIOM <name>`), so an axiom whose consumers this file
+never audits still reaches the gate, which fails on any library axiom that is not declared.
+
+**Every axiom is printed by its full name** (`set_option pp.fullNames true`, below). `#print axioms`
+renders an axiom with `MessageData.ofConstName`, which shortens it against the open namespaces, and
+this file opens `HadwigerNelson`: without the option, `HadwigerNelson.Plane.falconer_lemma2_nonempty`
+prints as `Plane.falconer_lemma2_nonempty`, and the declared list and the records would spell one
+axiom two ways.
 
 `moserSpindle_valid` and `deGrey_valid` are the ones to watch in the clean section: both rest on
 kernel *reduction* rather than on a written proof, and both stay inside the standard axiom set.
@@ -38,6 +58,142 @@ bought with no native evaluation at all.
 -/
 
 open HadwigerNelson
+
+set_option pp.fullNames true
+
+/-! ## The audit's own instruments (FS131-T3)
+
+`declareImport` is the one list of imported outside theorems; `libraryAxioms` lists every `axiom` the
+library declares. Both print fixed-prefix lines that `scripts/axioms.sh` parses, and both refuse loudly
+rather than print less: a refusal is an elaboration error, and the gate fails on an audit that does not
+elaborate. -/
+
+namespace AxiomAudit
+
+open Lean Elab Command
+
+/-- `n` is declared in the library — a module under `Proofs` — or in this file. The second clause
+serves the planted controls of `scripts/axioms.sh --self-test`; the audit itself declares no axiom. -/
+def inScope (env : Environment) (n : Name) : Bool :=
+  match env.getModuleIdxFor? n with
+  | none => true
+  | some i => match env.allImportedModuleNames[i.toNat]? with
+    | some m => (`Proofs).isPrefixOf m
+    | none => false
+
+/-- A native-evaluation auxiliary: `native_decide` mints `foo._native.native_decide.ax_N_M` per use.
+These are accounted for by the PURCHASED section and the "**Trust purchase:**" docstrings, not by the
+import list. -/
+def isNativeAux (n : Name) : Bool :=
+  n.components.contains `_native
+
+/-- A bibliography key in this project's form — capitalized letters, a four-digit year, at most one
+lower-case letter: `Falconer1981`, `ShelahSoifer2003b` — the key `LEAN.md` § Assumptions item 1 asks an
+imported theorem's docstring to name. -/
+def isBibKey (k : String) : Bool :=
+  let cs := k.toList
+  let letters := cs.takeWhile Char.isAlpha
+  let rest := cs.drop letters.length
+  let digits := rest.takeWhile Char.isDigit
+  let tail := rest.drop digits.length
+  (cs.head?.map Char.isUpper).getD false && digits.length == 4 &&
+    (tail.isEmpty || (tail.length == 1 && tail.all Char.isLower))
+
+/-- Some bracketed span of `doc` is a bibliography key (`isBibKey`). -/
+def hasBibKey (doc : String) : Bool :=
+  ((doc.splitOn "[").drop 1).any fun piece =>
+    match piece.splitOn "]" with
+    | k :: _ :: _ => isBibKey k
+    | _ => false
+
+example : isBibKey "Falconer1981" ∧ isBibKey "ShelahSoifer2003b" ∧ ¬ isBibKey "Falconer" ∧
+    ¬ isBibKey "falconer1981" ∧ ¬ isBibKey "Falconer1981bc" := by decide
+
+-- `String.splitOn` does not reduce in the kernel, so these two are evaluated, not decided.
+#guard hasBibKey "`[Falconer1981]` Lemma 2 (i), p. 185"
+#guard !hasBibKey "Lemma 2 [i], p. 185"
+
+/-- **Declare an imported outside theorem to the gate.** This is the one list of them; the procedure is
+beside the IMPORTED banner, at the end of this file. Refuses — so the audit does not elaborate and the
+gate fails — unless `n` is an `axiom` declared in the library whose docstring names a bibliography key
+(`LEAN.md` § Assumptions item 1). Prints `DECLARED IMPORT <full name>`. Called as
+`#eval AxiomAudit.declareImport ``Full.Name`: the double backtick elaborates only if the constant
+exists, so a mistyped declaration cannot read as an empty one. -/
+def declareImport (n : Name) : CommandElabM Unit := do
+  let env ← getEnv
+  let some ci := env.find? n | throwError "declareImport: unknown constant {n}"
+  unless ci.isAxiom do
+    throwError "declareImport: {n} is not an `axiom`; only an axiom is an imported outside theorem"
+  unless inScope env n do
+    throwError "declareImport: {n} is not declared in the library (a module under `Proofs`); \
+      an axiom of a dependency is not ours to declare"
+  let some doc ← findDocString? env n
+    | throwError "declareImport: {n} has no docstring; LEAN.md § Assumptions item 1 asks it to name \
+        its bibliography key, section and page"
+  unless hasBibKey doc do
+    throwError "declareImport: {n}'s docstring names no bibliography key of the form [Author2024]; \
+      LEAN.md § Assumptions item 1"
+  logInfo m!"DECLARED IMPORT {n}"
+
+/-- **Every `axiom` the library declares**, except the native-evaluation auxiliaries: a count line
+`LIBRARY SUMMARY axioms=N native=M` (`M` counts the auxiliaries left out), then `LIBRARY AXIOM <full
+name>` per axiom, sorted. `scripts/axioms.sh` fails on a listed axiom that no `declareImport` names, and
+on a count that disagrees with the lines. It must stay the file's last command: an axiom declared after
+it is not seen. -/
+def libraryAxioms : CommandElabM Unit := do
+  let env ← getEnv
+  let (own, native) := env.constants.fold (init := ((#[] : Array Name), (0 : Nat))) fun acc n ci =>
+    if ci.isAxiom && inScope env n then
+      if isNativeAux n then (acc.1, acc.2 + 1) else (acc.1.push n, acc.2)
+    else acc
+  let own := own.qsort (fun a b => a.toString < b.toString)
+  logInfo m!"LIBRARY SUMMARY axioms={own.size} native={native}"
+  for n in own do
+    logInfo m!"LIBRARY AXIOM {n}"
+
+end AxiomAudit
+
+#eval IO.println "=== IMPORTED ==="
+
+/-! ## IMPORTED — records resting on a declared outside theorem (FS131-T3, 2026-10-04)
+
+A record here may carry the standard three and **declared imports**, nothing else, and must carry at
+least one declared import: a record with none belongs under CLEAN (`stale-import`). A declared import
+is an `axiom` named by an `AxiomAudit.declareImport` line in this section — the one list of them. Of the
+four items `LEAN.md` § Assumptions requires of it, the gate checks two: its docstring names a
+bibliography key (item 1; `declareImport` refuses otherwise) and `ARCHITECTURE.md` § Trust names it in
+backticks (item 4; `arch-missing`). Any other axiom fails wherever it appears — under CLEAN, here,
+under PURCHASED — and so does any axiom the library declares without a `declareImport` line, audited or
+not (`undeclared-library-axiom`, from `libraryAxioms`, the file's last command). `main` declares no
+import yet, so this section is empty there.
+
+**Why this section comes first.** The gate reads the sections in any order, but two things do not move:
+PURCHASED stays last, because `tools/check_architecture.py` reads every `#print axioms` after its banner
+as a purchase; and the waves append their CLEAN records just above the PURCHASED banner, so a section
+placed there would meet every landing's merge in the same lines.
+
+**How a wave declares an import, at its landing** (written for wave 2's `falconer_lemma2_nonempty`; the
+same for any later one): (1) check the four items of `LEAN.md` § Assumptions are done — the docstring
+names its bibliography key, section and page; the statement is read back against the paper in the
+planner's record; a model of its hypotheses sits in the same file; and `ARCHITECTURE.md` § Trust has its
+row, naming the axiom in backticks — `` `Plane.falconer_lemma2_nonempty` `` or the full name (the gate
+accepts the name with or without its leading `HadwigerNelson.`); (2) add one line below this comment,
+the FULL name after a double backtick:
+
+```
+#eval AxiomAudit.declareImport ``HadwigerNelson.Plane.falconer_lemma2_nonempty
+```
+
+(3) move every record whose axioms include it from CLEAN to below that line, above the CLEAN banner: run
+`./scripts/axioms.sh`, and each record still under CLEAN that carries the import fails as
+`import-in-clean`, naming itself. For wave 2 at `fs131-w2` `59976a11` these are `falconer_reduction`,
+`le_chiM_of_falconerFan`, `exists_mem_falconerE` and `fan_tip_ae_mem` (`data/fs131/t3/wave_dryrun.sh`,
+run in the wave's worktree before merging, lists them for any later state); (4) run
+`./scripts/axioms.sh --self-test`, then `./scripts/axioms.sh`, and read the digest: it lists the declared
+imports and the IMPORTED records; the clean count falls by exactly the records moved, the imported count
+rises by the same, and nothing else moves; draft `CLAUDE.md` § Trust ledger's sentence with the new
+counts for Keryx. A mistyped name does not elaborate (the double backtick resolves it); an import
+declared that no audited record carries fails as `stale-declaration`. -/
 
 #eval IO.println "=== CLEAN ==="
 
@@ -1910,3 +2066,4 @@ reaches above without them — which is the point of proving it twice. -/
 #print axioms moserSpindle_not_colorable_three_cubes
 #print axioms four_le_chromaticNumber_plane_certified
 
+#eval AxiomAudit.libraryAxioms
