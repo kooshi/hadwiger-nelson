@@ -26,7 +26,7 @@ that judge the milestone, written before any job).*
 | wave 4 (25 rows) | 32 of 86 proved (I4, I4b; items 125, 143); two plan routes owed (`lemmaL`, `lock` clause 1); ~20 leaves wait on `localSectors`; **next: an Opus implementer when a whole slot frees** | `.claude/worktrees/fs131-w4` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | Collar and NoFourFive sorry-free; **E1-NO45 proved in Lean from its citations** (item 150); 4 `Steps` leaves left; **FS131-IWb (Opus) running** | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
-| Lebesgue's covering theorem (FS131-LEB) | **planner running** on its own branch, to land on `main` ahead of wave 4 and Woodall (item 141) | `.claude/worktrees/fs131-leb` |
+| Lebesgue's covering theorem (FS131-LEB) | **LANDED on `main`** (item 151; `33471a75`): held in the kernel, standard three; wave 4 discharges its `sorry` in one line | `Proofs/HadwigerNelson/Topology/` |
 | waves 5–10 (124 rows) | not started; wave 5 carries C-DOUBLE + Y3-END-NEEDS (item 69) and FLANK-Q's discharge (item 79); wave 9 bound by item 89's note and item 96's vacuity rule | plan § 7 |
 
 **The finding with bearing** (items 88, 91): the repaired proof of "maps need six" has two GAPs — step 7 open in every class (even with no unit-arc boundaries),
@@ -36,13 +36,12 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 1 + 1 + 1 = 3 of 3, all Opus)
+## 3. Running now (slots used: 1 + 1 = 2 of 3, all Opus — the free slot goes to FS131-T3, then waves 2 and 4)
 
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-IWb (Woodall's chain on **Opus**: the child lemma, then `step5_lt`, `step6`, `exists_sectorsAt`, `exists_woodallMerged`; item 150) | Opus | `data/fs131/briefs/FS131-IWb-woodall.md` | its branch's (`fs131-ww`) `data/fs131/reports/FS131-IWb.md` |
 | FS131-I3h (wave 3 on **Opus**: last two leaves, the gate, the landing; then `localSectors` on `fs131-w3b`; item 147) | Opus | `data/fs131/briefs/FS131-I3h-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3h.md` |
-| FS131-LEB (Lebesgue's covering theorem, own branch `fs131-leb`; item 141) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-LEB-lebesgue.md` | its branch's `data/fs131/reports/FS131-LEB.md` |
 
 
 **Implementers are Opus from now on** (Kooshi, item 137): the four Sonnet implementers above finish on Sonnet; each successor launches with `model: "opus"` (the agent file says so too) and counts one slot.

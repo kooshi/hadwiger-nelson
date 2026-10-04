@@ -983,3 +983,8 @@ reason by the close.*
      `Proofs.HadwigerNelson.Topology.LebesgueCovering` in `Plane/SVMap` (and its `ARCHITECTURE.md` Imports cell), drop the "disposition owed" sentence, and
      cite the 1948 printing (Thm IV 2, p. 42); ruling 66's axiom fallback retired. Also owed: `ARCHITECTURE.md` § 3's prose counts were already stale on `main`
      (true: 1,725 `.lean` files and 165 imported modules at `bbee15f0`) — for the next filing. Stub, only if a consumer appears: the `n`-cube form.
+152. **The fact audit on item 151's filing** (`tools/claude_md_fact_audit.py --base 47a6ad6a`): six flags, every one a superseded gate count replaced in place —
+     `declarations=7624 refutations-skipped=45 sites=357` (code), `declarations=7624` (chunk), `1285`, `1301`, `7624` (num) — which `CLAUDE.md`'s current-state
+     rule requires to go (the old values are in git: `47a6ad6a`); nothing else lost, no pointer dangling, the PROTECTED regions intact; `--dupes` unchanged.
+     Slip (Keryx's): the filing was committed in the same command that ran the audit, before its output was read; the result was read after and is as above.
+     Audits run before the commit from now on.
