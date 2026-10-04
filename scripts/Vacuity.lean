@@ -223,13 +223,65 @@ Two exclusions are worth their reasons, because both look like obvious additions
   Adding them buys ~100 parametric lines and ~37 lines that are the constructions themselves.
 * **`Forces`, `Separated` and `Fan` ARE here**, and that is a correction. They used to be
   special-cased into `G.Coloring (Fin k)` at every occurrence; see `carrierOf?` for why that is
-  the right move at a conclusion and the wrong question at a binder. -/
+  the right move at a conclusion and the wrong question at a binder.
+
+**The Lean backlog's plane vocabulary (`Proofs/HadwigerNelson/Plane/`), decided structure by structure
+(FS131-T1, 2026-10-04):**
+
+* **`Plane.AeColouring` is IN.** It is a structure, but not a record of data: `AeColouring k` is the
+  measurable analogue of `(unitDistance ℂ).Coloring (Fin k)`, a *type whose emptiness is a theorem*
+  (`IsEmpty (AeColouring 1)`, and the bounds to come), so a binder `(c : AeColouring 1)` is exactly the
+  `core9_plane` shape. Before this entry the scan was blind to it: a planted
+  `theorem (c : AeColouring 1) (x : ℂ) : x = x` raised no site (FS131-I1; reproduced by FS131-T1). A
+  theorem over `AeColouring k` at a variable `k` reads `GENERIC`; at `k = 0, 1` it reads `VACUOUS`
+  (undeclared) or `DECLARED`; at a concrete `k` nothing refutes it reads `UNKNOWN` until a witness
+  (`def c : AeColouring 9`, or `Nonempty`) is proved.
+* **`Plane.ArcMap.Valid`, `ArcMap.NonSiamese`, `ArcMap.Simple` are IN**, as `Prop` carriers like `Forces`:
+  a hypothesis `(h : F.Valid)` about a CONCRETE map is the shape that can be refuted
+  (`¬ (ArcMap.const univ _ 0).Valid`), and `Valid` is the content of "a valid fragment". At a variable `F`
+  they read `GENERIC`, which is correct: the objects whose joint existence is the open question
+  (`∃ F : ArcMap 6, F.IsPlaneMap ∧ F.Valid`) are a conjunction ACROSS binders, which this per-binder scan
+  cannot see, and no check here decides it. Entering them buys the concrete-map case and nothing more.
+* **OUT, with reasons.** `ArcMap k`, `Arc`: data — the lists, sets and a locally-finite proof that `UDCert`
+  is (`ArcMap.const`, `halfDisc` are the inhabitants, written down); tracking the bare type would flag every
+  statement at `ArcMap 0`'s emptiness (a function into `Fin 0`), which is no one's content.
+  `Covers`, `IsPlaneMap`, `IsTile`, `Siamese`, `IsJordanDomain`, `coloursAt`: facts about the domain or its
+  tiles, satisfiable by `const`, never the hidden hypothesis. `UnitPairsNull`, `IsMUA`: predicates of a SET
+  variable, `GENERIC` at every site, with no refutation theorem of the `¬ P` shape to collect; they would add
+  lines and no signal.
+
+* **Wave 3's carriers (FS131-I3h, by the procedure below).** **IN**: `ArcMap.IsRingArc`, `ArcMap.IsQArc`,
+  `ArcMap.IsChangePoint`, `ArcMap.IsHub` — each refutable at a concrete map (`halfPlane2_not_isRingArc`: `halfPlane2`'s
+  ring carries no arc of `Γ`, hence no (Q) arc; `r(90°) = i` is off its `Γ`, so no change point and no hub there), so a
+  theorem taking one at an empty instance is a real defect; controls 21–32. **OUT**: `CircleColouring` (existence is a
+  construction, `hexColouring`); `CircleColouring.Lift` (`exists_lift` inhabits it for every colouring, so its binder is
+  never empty); `IsTile`, `TileOf`, `GermIn` (refutable only at a concrete set, which no theorem fixes: every site is a
+  set variable, `GENERIC`); `IsEssBoundary`, `SaturatedAt` (refuting either at a concrete instance is a density
+  computation the library makes only inside an `example`; their one consumer, in `Plane/RingGerm`, takes them at a
+  variable map; register them when a wave proves such a refutation as a theorem).
+
+**How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
+hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
+its reason, in the `UDCert` / `AeColouring` style — IN iff "does one exist" is a theorem rather than a
+construction, or the predicate can be refuted at a concrete instance; (2) if IN, add its FULL name, namespace
+included (e.g. `HadwigerNelson.Plane.AeCover`), to `trackedProps` below; (3) plant controls in
+`scripts/vacuity-controls.lean` — an empty instance reading `VACUOUS`, a variable instance reading `GENERIC`,
+and for a family whose concrete carrier nothing refutes, one reading `UNKNOWN` — and add their `expect` lines to
+`scripts/vacuity.sh --self-test`; (4) run `./scripts/vacuity.sh --self-test`, then `./scripts/vacuity.sh`, and
+explain every change in `sites` and in the verdict counts against the previous run. A mistyped name is tracked
+by NOTHING and raises no error — step (3)'s control is what catches that. -/
 def trackedProps : List Name :=
   [`HadwigerNelson.Forces, `HadwigerNelson.Separated, `HadwigerNelson.Fan,
    `HadwigerNelson.AdditivelyRigid, `HadwigerNelson.Extends, `HadwigerNelson.IsStress,
    `HadwigerNelson.IsLift, `HadwigerNelson.Aperiodic, `HadwigerNelson.CoincidesAtNonedges,
    `HadwigerNelson.IsAdditive, `HadwigerNelson.Compels, `HadwigerNelson.Realizes,
-   `HadwigerNelson.MonoPair, `HadwigerNelson.CoverAtLeast, `HadwigerNelson.UDCert.CoordsIn]
+   `HadwigerNelson.MonoPair, `HadwigerNelson.CoverAtLeast, `HadwigerNelson.UDCert.CoordsIn,
+   -- the Lean backlog's plane vocabulary (FS131-T1)
+   `HadwigerNelson.Plane.AeColouring, `HadwigerNelson.Plane.ArcMap.Valid,
+   `HadwigerNelson.Plane.ArcMap.NonSiamese, `HadwigerNelson.Plane.ArcMap.Simple,
+   -- wave 3's ring vocabulary (FS131-I3h)
+   `HadwigerNelson.Plane.ArcMap.IsRingArc, `HadwigerNelson.Plane.ArcMap.IsQArc,
+   `HadwigerNelson.Plane.ArcMap.IsChangePoint, `HadwigerNelson.Plane.ArcMap.IsHub]
 
 /-- A carrier or a statement as one line of text, for the report. Called where its binders are still in
 scope: outside the telescope a generic carrier's variables print as `_fvar.N`, whose numbering shifts
@@ -382,26 +434,65 @@ def carrierOf? (e : Expr) : MetaM (Option Expr) := do
   | some n => return if trackedProps.contains n then some e else none
   | none => return none
 
+/-- **Is the stated conclusion a negation?** `¬ P` and `a ≠ b`, read as written (no unfolding): `Not` and
+`Ne` are the two heads whose definitions are `… → False`, which is how a reducing telescope turns them
+into a conclusion `False` (FS131-T2). -/
+def isNegationConcl (concl : Expr) : Bool :=
+  concl.isAppOf ``Not || concl.isAppOf ``Ne
+
+/-- **The refutation test, matched to the law:** a declaration is a refutation only when its *stated*
+conclusion, after its binders, is `False` itself. Two readings differ: the reducing telescope (which sees
+through definitions, to find binders hidden behind them) ends in `False`, and the statement as written
+does not end in a negation.
+
+* `P → False`, written so, is a refutation: the arrow is a stated hypothesis, meant to be empty.
+* `¬ P` and `a ≠ b`, written so, are **not**: they are claims that `P` (that `a = b`) fails, and their
+  other binders are ordinary `∀`-binders over a carrier that may be empty. The arrow the reducing
+  telescope finds in `Not`/`Ne` is dropped from the carriers (it is the claim's own `P`, whose emptiness
+  the theorem proves, and `gather` reads a `¬ P` of tracked `P` as evidence of exactly that), but every
+  *stated* binder is audited.
+* a name that unfolds to `False` through some other definition keeps the old reading: skipped. -/
+def isRefutation (type : Expr) : MetaM Bool :=
+  forallTelescopeReducing type fun _ concl =>
+    if !concl.isConstOf ``False then pure false
+    else forallTelescope type fun _ stated => pure !isNegationConcl stated
+
 /-- Every carrier a declaration's statement commits to: each binder's type, plus the conclusion.
 
-**A refutation is skipped, structurally.** A declaration whose conclusion is `False` says *these
-cannot all hold*: its binders are **meant** to be jointly unsatisfiable, so flagging one for
-emptiness is flagging the theorem for its own content. `isEmpty_coloring_plane_four` is the
-example — a proof that the plane has no four-colouring, whose only binder is a four-colouring of
-the plane. This one rule replaces two ad-hoc mechanisms: a `providers` set threaded through the
-evidence, and the baseline's prose exemption for statements "consumed in order to refute".
+**A refutation is skipped, structurally** — see `isRefutation`: a declaration whose stated conclusion
+is `False` says *these cannot all hold*, so its binders are meant to be jointly unsatisfiable, and flagging
+one for emptiness is flagging the theorem for its own content. `isEmpty_coloring_plane_four` is the
+example — a proof that the plane has no four-colouring, whose only binder is a four-colouring of the
+plane. A conclusion `¬ P` or `a ≠ b` is not `False`: its binders are audited like any other's.
 
 It does **not** blind the check to the case that motivated it: `core9_plane` concludes an `∃`,
 not `False`, and is still flagged. Verified, not assumed. -/
 def carriersOf (type : Expr) : MetaM (Array (Expr × String)) :=
   forallTelescopeReducing type fun xs concl => do
-    if concl.isConstOf ``False then return #[]
+    if ← isRefutation type then return #[]
+    -- a stated negation unfolds to one more binder (the `P` of `P → False`): not a hypothesis anyone wrote
+    let xs ← if concl.isConstOf ``False && xs.size > 0 then
+        (do let stated ← forallTelescope type fun _ c => pure c
+            pure (if isNegationConcl stated then xs.pop else xs))
+      else pure xs
     let mut out : Array Expr := #[]
     for x in xs do
       if let some τ ← carrierOf? (← inferType x) then out := out.push τ
     if let some τ ← carrierOf? concl then out := out.push τ
     -- Each carrier's text is taken HERE, inside the telescope, where its binders still have names.
     (out.filter (!·.hasLooseBVars)).mapM fun τ => do return (τ, ← showCarrier τ)
+
+/-- **Is this declaration generated by a `structure` or `inductive` command?** Constructors, recursors,
+`casesOn`, `noConfusion`, `ctorIdx` and field projections are machine-written API of a type, not statements
+anyone chose: each of them concludes (or binds) the tracked structure at a variable index, so a tracked
+structure of ours would add a dozen `GENERIC` rows — measured on `AeColouring` by FS131-T1: 12 of the first
+run's 13 new rows were these. They are still COUNTED in `declarations=`, and
+skipped only where a site would be made. A declaration the author wrote — a `def c : AeColouring 9`, a
+theorem — is never one of these and is always audited. -/
+def isGeneratedDecl (env : Environment) (n : Name) (ci : ConstantInfo) : Bool :=
+  (match ci with | .ctorInfo _ | .recInfo _ => true | _ => false) ||
+  isAuxRecursor env n || isNoConfusion env n || (env.getProjectionFnInfo? n).isSome ||
+  (match n with | .str _ s => s == "ctorIdx" || s == "noConfusionType" | _ => false)
 
 /-- One audited site: a declaration, one carrier its statement commits to, and the verdict on it. -/
 structure Row where
@@ -437,8 +528,9 @@ def audit : CommandElabM Unit := liftTermElabM do
   for (n, ci) in env.constants.toList do
     if n.isInternal || !isOurs env n then continue
     scanned := scanned + 1
-    if ← (try forallTelescopeReducing ci.type fun _ c => pure (c.isConstOf ``False) catch _ => pure false) then
+    if ← (try isRefutation ci.type catch _ => pure false) then
       refutations := refutations + 1
+    if isGeneratedDecl env n ci then continue
     -- A declaration whose type cannot be telescoped is NOT silently skipped (review 2026-09-13): it is
     -- counted and named, and `vacuity.sh` fails on a nonzero count — a check that cannot run fails loud.
     let carriers ← try carriersOf ci.type catch e => do

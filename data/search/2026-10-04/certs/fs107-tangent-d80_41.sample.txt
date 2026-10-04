@@ -1,0 +1,1 @@
+data/search/2026-10-04/certs/fs107-tangent-d80_41.json: 100000 samples, conflicts 0, skipped near boundaries 0

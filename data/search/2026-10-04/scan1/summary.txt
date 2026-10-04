@@ -1,0 +1,5 @@
+grid {'d0': 1.0005, 'd1': 1.9995, 'nd': 1999, 'nphi': 2400, 'phi0': 0.0, 'phi1': 120.0}; degenerate cells skipped (all) 140
+FS107-2: best signed margin -0.00000 deg at d=1.73300, phi=89.9500; feasible grid points 0 of 4797600
+TS1: least failing measure 0.00000 deg at d=1.30300, phi=0.0000; generically feasible grid points 388784 of 4797600
+TS1 feasible d-range on the grid: (1.303, 1.9995), 1394 of 1999 d-values
+FS107-2 feasible d-range on the grid: None, 0 of 1999 d-values

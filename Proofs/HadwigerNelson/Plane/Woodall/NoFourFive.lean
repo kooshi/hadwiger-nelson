@@ -291,7 +291,7 @@ theorem collarAt_shadow_of_parabola {S : Set ℂ} {v : ℂ} {β κ σ r : ℝ} (
 
 
 /-- `e` has period `2π m` for every integer `m`. -/
-theorem e_add_int_mul_two_pi (θ : ℝ) (m : ℤ) : e (θ + 2 * π * m) = e θ := by
+theorem e_add_two_pi_mul_int (θ : ℝ) (m : ℤ) : e (θ + 2 * π * m) = e θ := by
   have h : e (2 * π * m) = 1 := by
     rw [e, show ((2 * π * m : ℝ) : ℂ) * I = (m : ℂ) * (2 * π * I) by push_cast; ring]
     exact Complex.exp_int_mul_two_pi_mul_I m
@@ -1424,7 +1424,7 @@ theorem SectorsAt.exists_two_absent (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ}
           exact this (by rw [hψ, hσ']; ring)
         have habs := SectorsAt.absent_at_normal hF h hn2 hpos i (hσ i) (hcol i)
         have hψe : v + e ψ = v + e (d i.castSucc + σ i * (π / 2)) := by
-          rw [hψ, ← hσs, e_add_int_mul_two_pi]
+          rw [hψ, ← hσs, e_add_two_pi_mul_int]
         rw [hψe]
         rcases habs with hprev | hcur
         · obtain ⟨ε, hdε, hmε⟩ : ∃ ε : ℤ, d ((finRotate n).symm i).succ = d i.castSucc + 2 * π * ε ∧ (ε = 0 ∨ ε = 1) := by

@@ -26,9 +26,7 @@ open Complex Real Set Filter Topology Metric
 
 /-! ## Annular sectors and collars: geometry -/
 
-/-- Rotation by `e θ` times its conjugate is `1`. -/
-theorem e_mul_conj_e (θ : ℝ) : e θ * starRingEnd ℂ (e θ) = 1 := by
-  rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, norm_e]; simp
+-- `e_mul_conj_e` is `Plane/Chord`'s (landed with wave 3; this branch's identical copy deleted at the merge, inventory item 142).
 
 
 /-- Polar form of `z` about `u`, measured from the direction `θ₀`. -/

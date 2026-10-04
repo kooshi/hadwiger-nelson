@@ -1,0 +1,229 @@
+{
+ "w1": {
+  "counts": {
+   "nonterminal_simp": 8
+  },
+  "hits": {
+   "nonterminal_simp": [
+    "Plane/AeColouring.lean:43",
+    "Plane/ArcMap.lean:358",
+    "Plane/DensityPoints.lean:248",
+    "Plane/Chord.lean:32",
+    "Plane/Chord.lean:239",
+    "Arith/FalconerFan.lean:102",
+    "Arith/FalconerFan.lean:116",
+    "Arith/FalconerFan.lean:132"
+   ]
+  },
+  "sizes": {
+   "Plane/Basic.lean": 84,
+   "Plane/UnitPairs.lean": 203,
+   "Plane/AeColouring.lean": 55,
+   "Plane/ArcMap.lean": 376,
+   "Plane/UnitAvoiding.lean": 186,
+   "Plane/DensityPoints.lean": 274,
+   "Plane/Chord.lean": 260,
+   "Plane/Closure.lean": 35,
+   "Plane/Diameter.lean": 116,
+   "Arith/FalconerFan.lean": 161,
+   "Arith/NoAffine.lean": 114
+  }
+ },
+ "w2": {
+  "counts": {
+   "nonterminal_simp": 20,
+   "linter_workaround": 7,
+   "stale_doc_sorry": 1
+  },
+  "hits": {
+   "nonterminal_simp": [
+    "Arith/Dyadic.lean:57",
+    "Arith/Dyadic.lean:95",
+    "Arith/FalconerField.lean:46",
+    "Plane/Cover.lean:231",
+    "Plane/Cover.lean:259",
+    "Plane/CoverExamples.lean:596",
+    "Plane/CoverExamples.lean:1496",
+    "Plane/FalconerReduction.lean:72",
+    "Plane/FalconerReduction.lean:84",
+    "Plane/FalconerReduction.lean:308",
+    "Plane/FalconerReduction.lean:617",
+    "Plane/MaximalCover.lean:34",
+    "Plane/MaximalCover.lean:131",
+    "Plane/MaximalCover.lean:350",
+    "Plane/MaximalCover.lean:877",
+    "Plane/Slack.lean:677",
+    "Plane/Slack.lean:721",
+    "Plane/Slack.lean:767",
+    "Plane/Stationary.lean:128",
+    "Plane/Stationary.lean:284"
+   ],
+   "linter_workaround": [
+    "Arith/Dyadic.lean:262 have _ := hdeg",
+    "Arith/Dyadic.lean:313 have _ := hdeg",
+    "Arith/FalconerField.lean:162 have _ := hconn",
+    "Arith/FalconerField.lean:189 have _ := ht",
+    "Plane/FalconerReduction.lean:237 have _ := hx",
+    "Plane/MaximalCover.lean:170 have _ := hC",
+    "Plane/MaximalCover.lean:304 have _ := hxP"
+   ],
+   "stale_doc_sorry": [
+    "Plane/CoverExamples.lean:1906 "
+   ]
+  },
+  "sizes": {
+   "Arith/Dyadic.lean": 394,
+   "Arith/FalconerField.lean": 329,
+   "Arith/PlaceHom.lean": 470,
+   "Instances/FalconerOrbit.lean": 118,
+   "Plane/CPColouring.lean": 91,
+   "Plane/Cover.lean": 1040,
+   "Plane/CoverExamples.lean": 1954,
+   "Plane/FalconerReduction.lean": 753,
+   "Plane/MaximalCover.lean": 982,
+   "Plane/Slack.lean": 1501,
+   "Plane/Stationary.lean": 445,
+   "Plane/Suprema.lean": 198,
+   "Plane/YesLimit.lean": 149
+  }
+ },
+ "w3": {
+  "counts": {
+   "nonterminal_simp": 23,
+   "linter_workaround": 2,
+   "unused_binder_in_sig": 5
+  },
+  "hits": {
+   "nonterminal_simp": [
+    "Plane/Chord.lean:32",
+    "Plane/Chord.lean:239",
+    "Plane/Lens.lean:291",
+    "Plane/LocalMapExamples.lean:39",
+    "Plane/LocalMapExamples.lean:44",
+    "Plane/LocalMapExamples.lean:278",
+    "Plane/LocalMapExamples.lean:500",
+    "Plane/LocalMapExamples.lean:523",
+    "Plane/LocalMapExamples.lean:603",
+    "Plane/LocalStructure.lean:105",
+    "Plane/LocalStructure.lean:135",
+    "Plane/LocalStructure.lean:464",
+    "Plane/LocalStructure.lean:645",
+    "Plane/LocalStructure.lean:1243",
+    "Plane/LocalStructure.lean:1468",
+    "Plane/RingGerm.lean:811",
+    "Plane/RingGerm.lean:1886",
+    "Plane/RingGerm.lean:1889",
+    "Plane/SixFragment.lean:394",
+    "Plane/SixFragment.lean:703",
+    "Plane/SixFragment.lean:775",
+    "Plane/SixFragment.lean:937",
+    "Plane/SixFragment.lean:1130"
+   ],
+   "linter_workaround": [
+    "Plane/Lens.lean:218 have _ := And.intro (Ne.symm (Ne.symm hne)) (And.intro h3' h5')",
+    "Plane/Lens.lean:289 have _ := h0"
+   ],
+   "unused_binder_in_sig": [
+    "Plane/RingBand.lean:1010 ringband_vi_periodic",
+    "Plane/RingGerm.lean:486 germS_absent",
+    "Plane/RingGerm.lean:887 fiveRing_no_changePoint",
+    "Plane/RingGerm.lean:1119 sixQ_sides",
+    "Plane/RingGerm.lean:1583 echo"
+   ]
+  },
+  "sizes": {
+   "Plane/Chord.lean": 279,
+   "Plane/CircleColouring.lean": 334,
+   "Plane/Lens.lean": 301,
+   "Plane/LocalMap.lean": 319,
+   "Plane/LocalMapExamples.lean": 613,
+   "Plane/LocalStructure.lean": 2466,
+   "Plane/RingBand.lean": 1189,
+   "Plane/RingGerm.lean": 2595,
+   "Plane/SixFragment.lean": 1144,
+   "Plane/Tiles.lean": 431
+  }
+ },
+ "k4": {
+  "counts": {},
+  "hits": {},
+  "sizes": {
+   "Plane/SVMap.lean": 233,
+   "Plane/StuckChain.lean": 50,
+   "Plane/ValidMap/BaseSteps.lean": 338,
+   "Plane/ValidMap/Basic.lean": 396,
+   "Plane/ValidMap/Contact.lean": 214,
+   "Plane/ValidMap/UnitArc.lean": 366
+  }
+ },
+ "w4": {
+  "counts": {
+   "nonterminal_simp": 6,
+   "unused_binder_in_sig": 1,
+   "linter_workaround": 4
+  },
+  "hits": {
+   "nonterminal_simp": [
+    "Plane/ValidMap/Basic.lean:302",
+    "Plane/ValidMap/Basic.lean:524",
+    "Plane/ValidMap/UnitArc.lean:393",
+    "Plane/ValidMap/UnitArc.lean:718",
+    "Plane/ValidMap/UnitArc.lean:725",
+    "Plane/ValidMap/UnitArc.lean:827"
+   ],
+   "unused_binder_in_sig": [
+    "Plane/ValidMap/Basic.lean:517 inv_curvDown_eq"
+   ],
+   "linter_workaround": [
+    "Plane/ValidMap/UnitArc.lean:870 have _ := hκ'",
+    "Plane/ValidMap/UnitArc.lean:871 have _ := hXv",
+    "Plane/ValidMap/UnitArc.lean:939 have _ := hH",
+    "Plane/ValidMap/UnitArc.lean:940 have _ := hXv"
+   ]
+  },
+  "sizes": {
+   "Plane/SVMap.lean": 574,
+   "Plane/StuckChain.lean": 150,
+   "Plane/ValidMap/BaseSteps.lean": 372,
+   "Plane/ValidMap/Basic.lean": 690,
+   "Plane/ValidMap/Contact.lean": 765,
+   "Plane/ValidMap/UnitArc.lean": 1047
+  }
+ },
+ "ww": {
+  "counts": {
+   "nonterminal_simp": 15,
+   "linter_workaround": 2
+  },
+  "hits": {
+   "nonterminal_simp": [
+    "Plane/Woodall/Collar.lean:308",
+    "Plane/Woodall/Collar.lean:413",
+    "Plane/Woodall/NoFourFive.lean:179",
+    "Plane/Woodall/NoFourFive.lean:332",
+    "Plane/Woodall/NoFourFive.lean:347",
+    "Plane/Woodall/NoFourFive.lean:418",
+    "Plane/Woodall/NoFourFive.lean:423",
+    "Plane/Woodall/NoFourFive.lean:427",
+    "Plane/Woodall/NoFourFive.lean:464",
+    "Plane/Woodall/NoFourFive.lean:465",
+    "Plane/Woodall/NoFourFive.lean:466",
+    "Plane/Woodall/NoFourFive.lean:1060",
+    "Plane/Woodall/NoFourFive.lean:1066",
+    "Plane/Woodall/NoFourFive.lean:1069",
+    "Plane/Woodall/NoFourFive.lean:1074"
+   ],
+   "linter_workaround": [
+    "Plane/Woodall/NoFourFive.lean:1130 have _ := hn",
+    "Plane/Woodall/NoFourFive.lean:1320 have _ := hn"
+   ]
+  },
+  "sizes": {
+   "Plane/Woodall/Basic.lean": 197,
+   "Plane/Woodall/Collar.lean": 941,
+   "Plane/Woodall/NoFourFive.lean": 1455,
+   "Plane/Woodall/Steps.lean": 137
+  }
+ },
+ "sig_dupes": []
+}

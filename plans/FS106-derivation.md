@@ -73,6 +73,7 @@ stage 3–4 (the fill; V3's correction: Woodall's steps 1, 4, 6 checked, 2, 3, 5
 **FS106-WO — `[Woodall1973]` Thm 6 (maps need six): step 6 is a GAP (it rests on the assertion Townsend's ⅔π counterexample refutes), repaired by Townsend's ⅓π lemma; Woodall's step-4 lemma holds for arcs strictly longer than ⅔π, by lemma (L). [hand; one mind: V3; steps 2, 3, 5, 7 in outline, step 8 unchecked]**
 *Proof:* V3 stage 3. *Proof verdict:* as stated. *Rests on it:* FS106-TW's fill; the stub for Woodall's merge. *Prior art:* the gap is
 Townsend's observation (`[Townsend1981]`); the repair's assembly not found in print. *Kernel:* declined.
+*Erratum 2026-10-04 (FS131-W, FS131-E1).* "Steps 5 and 7 use strict inequalities and survive" (V3) is withdrawn. Step 5 reads `φ ≤ ⅓π` on the page image, and at `φ = π/3` it calls the step-4 lemma at length exactly `2π/3`, which Townsend's counterexample refutes (F1). Step 7's "e must terminate (which it can do only by meeting a vertex on the unit circle with center P)" fails at a two-colour corner (F2). Both are bypassed for arc maps by `plans/FS131-E1-derivation.md` E1-NO45 ("in a five-colour almost-everywhere-proper arc map in Woodall's normal form, no point lies on the boundary of exactly four or exactly five sectors"): Woodall's Thm 6 holds for arc maps by steps 1–3, strict step 5, step 6 and E1-NO45 (E1-MAPS6) [hand, one mind per link]. The general Jordan form is owed.
 
 **FS106-TH — `[Thomassen1999]` Thm 1 (nice colourings of the plane need seven) holds in the plane, the count repaired, and for locally finite G it follows from `[Voronov2023]` Thm 1.3 in two lines; niceness is used at two steps and no boundary colour is read. [hand; one mind in full (V3), with a partial reading (TS, the clique step) made before V3 committed]**
 *Proof:* V3 stage 2; TS §3 row C-AE-NICE. *Proof verdict:* TRUE. *Rests on it:* FS106-AE-NICE. *Prior art:* Thomassen's theorem. The OCR's
@@ -122,6 +123,7 @@ declined.
 *Proof:* TS §3 row C-AE-MAP6; V3 stage 1 ("Survival a.e."), stage 3. *Proof verdict:* TRUE modulo the named fill. *Rests on it:* `CLAUDE.md`
 link 4's "maps need six" in its a.e. form. *Prior art:* Woodall 1973 and Townsend (the everywhere form); the a.e. form not found. *Kernel:*
 declined.
+*Erratum 2026-10-04 (FS131-E1).* For arc maps (locally finite segments and circular arcs) the statement holds without step 5's equality case and without Woodall's steps 7–8: `plans/FS131-E1-derivation.md` E1-MAPS6, from steps 1–3, strict step 5, step 6, E1-NO45 and E1-NOBRANCH [derived, one mind]. The Conditions 2–4 (Jordan-arc) form is owed: E1-NO45 reads the arc-map form at three places.
 
 **FS106-AE-FA — `[SokolovVoronov2025]` Thm 1 almost everywhere (map-type, Conditions 5 and 6, six colours) is a GAP at exactly SV-1's step, Prop. 19's fills under Condition 6, plus FS106-AE-POLY's residuals. [hand; one mind: TS]**
 *Proof:* TS §3 row C-AE-FA. *Proof verdict:* GAP, named. *Rests on it:* the Woodall-merge stub. *Prior art:* none. *Kernel:* declined.

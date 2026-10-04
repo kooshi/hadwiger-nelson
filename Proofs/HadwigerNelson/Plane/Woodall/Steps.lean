@@ -153,7 +153,7 @@ theorem coneAt_nonempty_of_mem_closure_region (j : Fin k) {v : ℂ} (hv : v ∈ 
   have heβ₁ : e β₁ = e β₀ := by
     obtain ⟨-, m, hm⟩ := (toIcoMod_eq_iff hp (a := 0) (b := β₀) (c := β₁)).mp rfl
     rw [hm, zsmul_eq_mul]
-    have := e_add_int_mul_two_pi β₁ m
+    have := e_add_two_pi_mul_int β₁ m
     rw [show β₁ + (m : ℝ) * (2 * π) = β₁ + 2 * π * m by ring] at *
     exact this.symm ▸ rfl
   obtain ⟨β, hβt, hβ₁β⟩ := mem_iUnion₂.mp (htcov hβ₁I)

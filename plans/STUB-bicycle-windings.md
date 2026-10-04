@@ -25,8 +25,14 @@ What is held:
   (derived, one mind) is their one lemma: with no swap point `W = 6M + 3` unless the change set is 60°-invariant (FS-129 item 97).
 - **One family fails off grid corners** — FS110-Y-BIKE-3C ([hand; two minds, one blind; GAP at grid-corner passages]): "No six-arc three-cycle colouring of
   each circle colours the bicycle at any `d` in `(1, 2)` whose cross curve meets no grid vertex."
-- **One ansatz fails narrowly**: the pure `π/3`-arc shared-colour ansatz at `d = 1.9`, two windows by hand, branch gap 58.4° and 59.3° against the 60° it
-  needs (`plans/FS107-R-stability.md` § 3.6; "hand arithmetic, not a claim about C-T-BIKE").
+- **Existence holds at nine named `d`, by two families** (`plans/SEARCH-2026-10-04.md`, [cert]): `T₁(u)` alternating 1, 2 on 60° arcs from
+  the ray towards `v`, `T₁(v)` coloured hexagon by hexagon from FS106-TS's lists (`d = 4/3, 3/2, 30/17, 19/10, 99/50`); and FS-107's
+  shared-colour ansatz at its tangent offsets, both circles' boundaries at the intersection point `p`, `p` coloured 2 (`d = 30/17, 24/13,
+  48/25, 80/41`). Measured: the first for every `d ∈ ((√13 − 1)/2, 2)`, the second only on its tangent curve and only for `d ∈ (√3, 2)`;
+  for `d ∈ (1, (√13 − 1)/2]` no colouring with a two-coloured circle (at most four boundaries per 60°, 1° grid) — open there. The
+  shared-colour solutions are grid-corner passages, the case FS110-Y-BIKE-3C's GAP names.
+- **The shared-colour ansatz is tight**: FS-107's two hand windows at `d = 1.9` (branch gap 58.4°, 59.3° against 60°) are near its only
+  solutions, `φ = γ + 60°` (`plans/SEARCH-2026-10-04.md` § 2.3); every other offset fails.
 - **A near miss**: row 1's two-circle theorem needs two concentric circles; the bicycle's are not (`plans/FS129-MA1-audit.md` § 5.1).
 
 **What is missing** (the audit's finding): an invariant that couples the two circles' windings across the cross curve — "an invariant for a

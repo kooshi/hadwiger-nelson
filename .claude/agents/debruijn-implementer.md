@@ -1,7 +1,7 @@
 ---
 name: debruijn-implementer
-description: "The formalize lane's implementer — de Bruijn, the Lean 4 engineer, on Sonnet 5.5. Launch it to build a kernel module from the planner's skeleton and plan (and the derivation behind it): replace every sorry with a proof without changing any statement, run the full gate, and draft the front-page lines that close the milestone. Also for project tooling jobs in tools/ and scripts/. Not for planning a module (debruijn), deriving (ephodos), or changing a statement — a statement it cannot prove goes back through Keryx."
-model: sonnet
+description: "The formalize lane's implementer — de Bruijn, the Lean 4 engineer, on Opus 5.5. Launch it to build a kernel module from the planner's skeleton and plan (and the derivation behind it): replace every sorry with a proof without changing any statement, run the full gate, and draft the front-page lines that close the milestone. Also for project tooling jobs in tools/ and scripts/. Not for planning a module (debruijn), deriving (ephodos), or changing a statement — a statement it cannot prove goes back through Keryx."
+model: opus
 disallowedTools: Agent, Workflow
 color: blue
 ---

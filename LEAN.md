@@ -45,7 +45,13 @@ The audit's counts are recorded in `CLAUDE.md` § Trust ledger, where `scripts/g
 | `propext`, `Classical.choice`, `Quot.sound` | accepted silently |
 | `sorryAx` | the gate fails on it |
 | `<decl>._native.native_decide.ax_N_M` | **explicit purchase, per use**, named in its declaration's docstring and listed in `ARCHITECTURE.md` § Trust |
-| an `axiom` importing an outside theorem | **explicit purchase**, with the four items above |
+| an `axiom` importing an outside theorem | **explicit purchase**, with the four items above; declared to the gate by one `AxiomAudit.declareImport` line in `scripts/Axioms.lean`'s IMPORTED section (the procedure is beside its banner), every record resting on it audited there |
+
+**The audit checks each record's axioms as a set** (`scripts/axioms.sh`): under CLEAN a subset of the standard three; under IMPORTED
+the standard three and declared imports, at least one; under PURCHASED those and native axioms, at least one native. Any other axiom
+fails, and so does any `axiom` the library declares that no `declareImport` names, whether or not an audited record uses it. The
+receipt prints every axiom by its full name (`pp.fullNames`), and its `CLAUDE.md` sentence records three counts: clean, declared
+purchases, imported.
 
 `native_decide` trusts the compiler and this CPU rather than the kernel; soundness theorems are identical either way, only the axiom
 list moves. **Grep for the right name:** at v4.32.0 `native_decide` mints a *per-declaration* axiom; `Lean.ofReduceBool` never appears
@@ -131,6 +137,9 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 
 ## Searching — Lean
 
+- Never name a namespace `HadwigerNelson.X` after a Mathlib root namespace a module opens (`Topology`, `Set`, `Real`, `Complex`, `Filter`, `Metric`, …): inside `namespace HadwigerNelson…`, `open X` then opens `HadwigerNelson.X` instead of Mathlib's `X`, silently (measured at v4.32.0: `data/fs131/leb/NamespaceShadow.lean`). None exists today.
+- At the pin `push_neg` is deprecated; write `push Not`.
+
 - **A failed `exact?` is not an absence.** It proves the shape you asked for was not found; vary the statement (`= true` versus
   `decide (…)`, an iff versus an implication) first. **And Mathlib is not the whole library:** `grep -rn "<name-fragment>" $(lean
   --print-prefix)/src/lean/` searches core. Grep the source before writing a proof, and before writing that something is missing. Grep
@@ -148,19 +157,19 @@ invoked. `lake update` and Mathlib bumps go alone in a labeled commit (they move
 
 ## The gate
 
-Elaboration is the floor: the build green, zero `sorry`, `#print axioms` clean on the public surface (`scripts/axioms.sh`), linters
+Elaboration is the floor: the build green, zero `sorry`, `#print axioms` clean on the public surface (`scripts/axioms.sh`), and `./scripts/axioms.sh --self-test` green (23 planted faults, each watched to fire, two of them partners that must pass), linters
 silent, spec examples passing. On top of that, the statement-level gate, because a formalization that proves the *wrong* theorem is
 the characteristic failure here:
 
 - **`./scripts/vacuity.sh` and `./scripts/vacuity.sh --self-test` are green** — no theorem is a `∀` over an empty domain. Vacuity is
   undecidable, so the check **requires evidence**, as `axioms.sh` requires every purchase to be declared. **The law:** a statement is
   vacuous exactly when some `∀`-binder has an empty domain; `(C : G.Coloring α)` is the dangerous binder, a `Forces` binder is a
-  possible *overclaim* instead, and a declaration concluding `False` is a refutation and is skipped. **Verdicts:** `WITNESSED`
+  possible *overclaim* instead, and a declaration concluding `False` — `False` as stated, so `P → False` is one and `¬ P` and `a ≠ b` are not: their binders are audited like any other's — is a refutation and is skipped. **Verdicts:** `WITNESSED`
   (inhabitant proved); `DECLARED` (deliberate emptiness, named with its reason in the docstring as `VACUITY DECLARED:` and printed every
   run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness not proved), which fail unconditionally before the baseline;
   `GENERIC` (parametric, where **no inhabitant witness can exist** — the caller's obligation); `UNKNOWN` (counted, never silent, and the
   only thing the baseline may hold). The counts and the baseline's two entries are recorded in `CLAUDE.md` § The gate, where
-  `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants seven controls
+  `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants twenty controls
   and watches each fire; the load-bearing one — the same carrier family at an instantiation nothing refutes — must read `UNKNOWN`,
   never `VACUOUS`.
 - **Every gate keeps what it computed — read it before re-running one.** `build.sh`, `axioms.sh`, `vacuity.sh` and `lean4checker.sh`
@@ -168,7 +177,10 @@ the characteristic failure here:
   digest: every count, whether the counts recorded in `CLAUDE.md` still match, every flagged or declared row in full, and every row
   that changed since the previous run (`scripts/gate_report.py`). `regen-check.sh` keeps each step's log in its scratch directory.
 - **Every theorem whose hypothesis is a structure** (a colouring, an embedding, a certificate, a homomorphism) **ships a named
-  inhabitant** in the same file, or a one-line note naming the theorem that supplies one.
+  inhabitant** in the same file, or a one-line note naming the theorem that supplies one. **The inhabitant exercises every clause**: a
+  Prop-valued hypothesis of a theorem concluding `False` is skipped by the vacuity scan, so a degenerate model where a clause is vacuous
+  (a one-colour map for a condition on points of two or more colours) proves nothing — such a hypothesis can be unsatisfiable on every
+  real instance and the gate stays green.
 - Every definition has a `#eval`/`example` that would fail if it drifted.
 - The Moser spindle's non-3-colourability is proved **twice** — by `decide` and through the SAT bridge — so the CNF encoding is
   checked against an independent oracle.

@@ -182,6 +182,8 @@ import Proofs.HadwigerNelson.Plane.Woodall.NoFourFive
 import Proofs.HadwigerNelson.Plane.Woodall.Steps
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
+import Proofs.HadwigerNelson.Topology.SpernerGrid
+import Proofs.HadwigerNelson.Topology.LebesgueCovering
 
 /-!
 # Proofs

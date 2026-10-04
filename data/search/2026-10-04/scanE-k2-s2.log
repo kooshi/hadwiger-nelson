@@ -1,0 +1,13 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 8,9,10,11,12,13,14,15
+d=1.0200: least failing measure 2.2920 at boundaries ((30.0,), 1); feasible patterns 0; first [] [30s]
+d=1.0500: least failing measure 5.7321 at boundaries ((30.0,), 1); feasible patterns 0; first [] [30s]
+d=1.0800: least failing measure 9.1777 at boundaries ((30.0,), 1); feasible patterns 0; first [] [30s]
+d=1.1100: least failing measure 9.6557 at boundaries ((14.0, 36.0, 38.0), 1); feasible patterns 0; first [] [30s]
+d=1.1400: least failing measure 9.1868 at boundaries ((16.0, 20.0, 36.0, 58.0), 1); feasible patterns 0; first [] [30s]
+d=1.1700: least failing measure 6.0920 at boundaries ((36.0, 58.0), 1); feasible patterns 0; first [] [30s]
+d=1.2000: least failing measure 8.8890 at boundaries ((34.0, 58.0), 1); feasible patterns 0; first [] [30s]
+d=1.2300: least failing measure 9.0847 at boundaries ((12.0, 16.0, 36.0, 48.0), 1); feasible patterns 0; first [] [30s]
+d=1.2600: least failing measure 8.7016 at boundaries ((2.0, 6.0, 16.0, 28.0), 1); feasible patterns 0; first [] [43s]
+d=1.2900: least failing measure 10.7881 at boundaries ((6.0, 18.0, 58.0), 1); feasible patterns 0; first [] [43s]
+d=1.3000: least failing measure 9.1058 at boundaries ((2.0, 42.0, 54.0), 1); feasible patterns 0; first [] [44s]
+SCAN-E COMPLETE data/search/2026-10-04/scanE-k2-s2.json

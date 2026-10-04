@@ -893,3 +893,19 @@ At `f73cb1e3`, from inside the worktree, under the slot (40 GiB, 8 cpus, `BATCH=
 12 module(s) with warnings**, 2 s, exit 0 (`build/gate/build/20261004T142136Z-4107546.log`; driver log `data/fs131/w3/build-stage1.log`). The Woodall
 modules' only `sorry`s are `Steps`' two (`exists_sectorsAt` line 106, `exists_woodallMerged` line 189); `Collar` and `NoFourFive` are `sorry`-free in
 their own text and carry `sorryAx` through waves 3–4's skeleton statements on this branch (`LocalStructure`, `SVMap`, `Tiles`, …).
+
+## Stage 12 — SAVED: `main` merged into `fs131-ww` (wave 3 and Lebesgue's covering theorem landed)
+
+The brief allows it ("merge `main` into `fs131-ww` if you want their proofs"); taken because the localized step 3 rests on wave 3's landed
+engine (`ArcMap.GoodAt`, `exists_goodAt`, `GoodAt.exists_local_curve`, `GoodAt.exists_wedge`, `isClosed_coneAt`, `coneAt_inter_ball`,
+§ 14), and because `coneAt_region_eq_biUnion` (read by E1-RAY and E1-BAD's interior case since items 154–155) is now proved.
+
+- **Conflicts**: `ARCHITECTURE.md` (main's six "landed sorry-free" wave-3 rows and two `Topology/*` rows taken; the branch's wave-4 and Woodall
+  rows kept) and `scripts/Axioms.lean` (both sides' appended sections kept, the branch's first).
+- **Name collisions** (inventory item 142): `Plane.e_mul_conj_e` — identical in `Plane/Chord` (main) and `Woodall/Collar`: the branch's copy
+  deleted (Collar imports Chord), its record removed. `Plane.e_add_int_mul_two_pi` — different forms (`SixFragment`'s `θ + k * (2π)` against
+  `NoFourFive`'s `θ + 2π * m`): the branch's renamed **`e_add_two_pi_mul_int`** (three uses, one record). `Plane.abs_dot_le` (w4 vs ww) is
+  wave 4's landing's.
+- **Build**: OK — 445 of 445 batches, 23 modules rebuilt, 6 with warnings (wave 4's five skeleton modules and `Woodall/Steps`), 10 m 3 s,
+  exit 0 (`build/gate/build/20261004T142757Z-4118450.log`; driver log `data/fs131/w3/build-stage12.log`). `tools/fs131_w2_decls.py --check`:
+  127 theorems, 127 records, 0 missing, 0 stale; `tools/check_architecture.py`: PASS.
