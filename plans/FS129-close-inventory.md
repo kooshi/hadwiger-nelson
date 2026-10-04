@@ -285,3 +285,47 @@ One line per item with its source; no narration. Each line is ticked done or dec
     difference, P = 0.15) not met.
 74. **Launched 2026-10-04 00:07 UTC**: FS129-MA2, pass 2, lane A, second part (`general-purpose`, Opus; `data/fs129/briefs/FS129-MA2-pass2.md`,
     gated PASS, at `034cd9e0`). Running: FS129-MR1 and FS129-MA2, two of the cap of three.
+75. **FS129-MR1 reported DONE** (`data/fs129/reports/FS129-MR1.md`; commits `97beb60d`, `20995ea7`, `b8746b68`, `33c5c21e`, `60a18599`, all present;
+    ≈389k by the harness, not continued). **FS129-MR1-DOUBLETIP** (derived, one mind): the double-tip kill of FS116-V6-HUG and FS116-Y4-EMPTY,
+    stated there only for rings with no arc of Γ, holds on every ring of the non-Siamese simple class provided the outer germ of each tip
+    pair lies on no (Q) arc; it answers Poros's card 2 (rank 1) and does not reach SEMI-PAR3. **Kooshi's "where else can we use that
+    identity?"** (`plans/FS116-close-inventory.md` item 142) answered: V6-HUG's identity was already used at FS-114, unnamed — FS114-YB4-2ND's
+    `2(1 − cos s)(1 − cos t) − 2 sin s sin t` for FS114-Y5-PXKILL's pair — so one law found three times (PXKILL, V6-HUG and V6-ADJ, FLANK's
+    least-curved case); its new use is DOUBLETIP. Nulls with named failing hypotheses: WHOLE's identity, the straddle at SEMI-PAR3 and in the
+    Siamese class, the bends at FS110-P17, -Y3-SIX, FS116-N2-RECIP, FS110-N2-SWAP, G86, G88, G81. **Keryx's receipt**: derive gate re-run, exit
+    0, PASS (3 controls fire); the identity `2(1 − cos s)(1 − cos t) − 2 sin s sin t = −8 sin(s/2) sin(t/2) cos((s + t)/2)` checked by sympy
+    (simplify, and 200 random points, max difference 7e-16).
+76. **Where a second reader should attack DOUBLETIP** (MR1's HELD, verbatim): "Its steps 1 and 3 rest on RING-GERM (i) and N2-STAR applied at
+    a change point whose other tip germ is free only because the neighbouring point is a change point." For FS129-SR1 and the Lean backlog.
+77. **Tool defect — "Rests on it: nothing; …" read as edges**: 24 entries whose "Rests on it" paragraph begins "nothing" carry edges from ids
+    the sentence goes on to name (Keryx's count, 2026-10-03, by matching `rests_text` against "nothing|none" with non-empty `rests_ids`). Some
+    are false: FS111-C-HULL-SO → FS111-C-HULL and FS111-M2-DISCK7-AS-PLACED → FS111-M2-DISCK7 ("the corrected form is …", from refuted entries),
+    FS114-K1 and FS114-ROUTE-T (a successor's list). Some may be real ("nothing in this file; FS116-C114-LOCAL-F's (Q)-ring case"). The false
+    C-HULL-SO edge makes a refuted entry `data/fs129/index/roots.md`'s rank-2 root with 78 dependents that are C-HULL's; the true top root is
+    FS111-V0-ID1 (MR1). Judgement, so pass 3 sorts the 24 and FS129-Z1 corrects the index when it adds its column. Found by MR1.
+78. **Correction owed — FS110-A3-HOLE's GAP was answered elsewhere without a link back** (MR1): its first step is FS116-N1-QFREE4 (held,
+    stronger, Siamese allowed), false on fragments with (Q) arcs (FS116-Y2-SIXFRAG); its second step is FS112-A4SIX's branch or a change point of
+    exactly two colours (FS116-N1-QDISK). For FS129-Z1. Source: `plans/FS129-MR1-audit.md` § Stage 3 lead (a), § Stage 4.
+79. **Merges for pass 3, lane R** (MR1): V6-HUG / PXKILL (YB4-2ND) / V6-ADJ / FLANK's model one lemma; FS112-SIX the coarse form of
+    FS116-N2-FIVERING and -SIXRING; FS112-U1 = FS116-V5-U1; FS111-V0-ID1 = FS116-V5-NE1 and FS111-C-HULL = FS116-V4-DICHOTOMY (measurable forms;
+    each proved once in Lean); the stuck ray = the tangent pencil (FS121-D2-SYM's window hypothesis a candidate weakening of FS112-N3-PER, toward
+    its GAP N3-ALPH); FS111-M4-CUT and FS121-D4-FACE one sagitta (FACE-SHARP as CUT's sharpness). Source: record §§ Stage 3 (b), (c), Stage 4.
+80. **For FS-125's and FS-124's openings** (MR1's questions for another lane; for FS129-Z1's stub bearing lines): which side's binding each
+    saturated-fragment kill reads (FS116-S1-QF, -SAT-STRIP, -S1-RUNG) — a kill reading only the lower colour's binding bypasses TOP₆, since Grundy
+    fragments come free (FS121-D3-GRUNDY); whether FS111-M2-INTRAD's one-step parallel argument makes FS116-O1-SATPIN's tangent edges segments or
+    integer-radius arcs; the winding computation at SEMI-PAR3 confines t_front to the tip cone at y, at radius √3 + ε about p, provided a germ
+    assignment not yet derived (`data/fs129/mr1/jump_explore.py`). Lane A's question computed but conditional: jump 0 when the two (Q) arcs'
+    side tiles hold ω(y)'s germs at u and v; ±2 needs an f-coloured tile at u or v.
+81. **Unread, for pass 3, lane R** (MR1): G83's straddle against FS114-K1's residues on (Q) rings (FS114-Y6-E2RED's survivor S6, the wrap, the
+    Reuleaux (2, 1, 1, 0) past √3); V6-ADJ's argument at adjacent change points whose outer pairs are off (Q). FS106-BIKE: FS110-Y3-GP gives
+    |W| ≥ 3 for circles with no two change points 60° apart; a coupling of two circles' windings across the cross curve is missing.
+82. **Stub to re-aim — FS-124** (`plans/STUB-q-ring.md`): add DOUBLETIP as a pruning rule for ring types in case 5 and at hubs and kind-T
+    semi-hubs in case 1; SEMI-PAR3 untouched. For FS129-Z1. **Generalization, not derived**: below √3 the bends free the ring of any point with at
+    most three colours of Γ (non-Siamese simple); no consumer found.
+83. **Ruling corrected — G2 and G3 are lane A's** (MR1's HELD): item 51's majority count came from homonyms (FS-106's [G2], [G3] labels; FS-125's
+    open places G1–G3), so no lane audited them — a coordinator's slip, from a rule that trusted a token count Keryx knew to be an upper bound
+    (item 49's CHECK). Relayed to FS129-MA2 by message, 2026-10-03, to add to its list.
+84. **MR1's scored registration** (record § Stage 4; for FS129-Z1): 1 composition against 4 registered; 0 strict Y4-kind misses against 2, but 3
+    citation or re-derivation misses (the identity found three times; A3-HOLE answered without a link; the double tip stated narrowly); the
+    bends shortening an FS-110 GAP, P = 0.45, no. Poros's card-2 hunch (0.5) met for the configuration, not for SEMI-PAR3. Prior art owed for
+    DOUBLETIP.
