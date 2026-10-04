@@ -67,3 +67,21 @@ Gates (saved in `data/fs129/f1/gates/`; each read by exit status):
   and `external home plans/FRONTIER-STUBS.md lacks num token '0.03'` (the old FS-104 row's "the advisor's prior for six itself ≈ 0.03"). Not repaired:
   restoring a token is a word the manifest does not give.
 - `--dupes` exit 0: 163 runs / 15,161 bytes (main: 154 / 14,287).
+
+## Stage 4 — SAVED: the Proof Atlas (item 9), partly; the build refuses
+
+- Step 1 (checker first, before editing; `gates/atlas_check_step1.txt`): 9 failures. Three are on `main` too (checked in the main tree: R134's "BASE-V stands
+  beside them …" quote, FS124's grade words "The main remaining case set of the six-map NO with unit arcs.", the note "publish"'s quote "Nothing is
+  published before it is formalized in Lean, in full, with no declared purchases"). Six were caused by this filing.
+- Step 3: Z2's nodes QFREE, QPRUNE, TOP5 and edges (GFREE→QFREE, QFREE→LOCALF, QPRUNE→LOCALF) inserted verbatim: nodes before `N("RINGRULE"`, edges before
+  `E("RINGRULE", "LOCALF"`; meta now built="2026-10-03", job="FS129-F1", as_of="FS-129's record". Mechanical re-pointing so the old facts' quotes still
+  stand (quote words only, no new claim): FS123's title quote ("the (Q)-free ring:" -> "the Siamese class:"), FS120's ("the pinch at a junction:" ->
+  "the pinch at a junction, and the cover route at five:"), `FSR(20)` -> `FSR(21)` for FS-59 (3 uses), the BOWTIE→TSMYES edge's row "18" -> "19". The nodes'
+  own labels and plain text (FS123 still reads "the (Q)-free ring") are untouched.
+- Layout (mine to decide): positions provisional in Z2; `data/fs129/f1/place_atlas.py` searched free spots for the three nodes: QFREE (84, 520),
+  QPRUNE (80, 540), TOP5 (162, 434); lint "0 overlaps".
+- Step 5: facts writer exit 0 (89 nodes, 106 edges); checker **exit 1, "checked 212, failed 4"**: the three `main` failures above plus **FS104**:
+  its registered verbal probability "success low, a named no-go the likely product" no longer stands in `CLAUDE.md` § Paths forward item 3 (P1's row
+  replaced it). Palette review exit 0 ("0 failed"), its self-test exit 0; the checker's `--self-test` exit 1 (it runs on the failing real facts); the
+  build **refuses** ("the facts check failed"). `index.html` not rebuilt. Not repaired: each repair is a ruling (below).
+- Step 6 (DESIGN.md stage section; distances) not done: it needs the build.

@@ -304,6 +304,15 @@ N("GFREE", "the Γ-free vertex dies at 1 + ε", "nogo", "A four-colour vertex wh
   "fragment, non-Siamese and simple, on any disc of radius above 1: two routes, the second blind.", B("FS116-Y4-EMPTY"),
   "no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no",
   "derived; held, two minds (the second blind)", at=(51, 495), sector="seven")
+N("QFREE", "the (Q)-free vertex dies at 1 + ε", "nogo", "A four-colour vertex whose unit circle carries no (Q) arc has no valid six-coloured "
+  "fragment, non-Siamese, simple or not, on any disc of radius above 1: FS-112's bends, read on a fragment, leave only (Q) arcs.", L(149),
+  "no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no (Q) arc",
+  "[hand], one mind, kernel pending", at=(84, 520), sector="seven")
+N("QPRUNE", "(Q) rings pruned", "held", "On a four-colour vertex's ring, two change points 60° apart whose far germs lie off (Q) arcs share no sole tip "
+  "and no sole outer colour; one pinwheel residue is empty.", L(150),
+  "The (Q)-ring case list, pruned", "[hand], one mind each, kernel pending", at=(80, 540), sector="seven")
+N("TOP5", "the map step at five", "held", "Given REG-J′₅, the honest five-colour existence form is equivalent to χ_m⁰(ℝ²) ≥ 6.", L(154),
+  "The map step at five, as an equivalence", "[hand], one mind, kernel pending", at=(162, 434), sector="six-up")
 N("RINGRULE", "change points place four-colour vertices", "held", "On the unit circle of a four-colour vertex, every change point off (Q) arcs, and "
   "every semi-hub but one, places another vertex of at least four colours: they propagate until a (Q) arc intervenes.", B("FS116-RING-GERM"),
   "in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y be a change point of the ring",
@@ -314,7 +323,7 @@ N("YESLIM", "the YES needs no map", "held", "Valid six-coloured fragments on dis
   "hand; held, two minds (the second blind)", at=(110, 430), sector="six-up")
 N("FS123", "the (Q)-free ring", "step", "Does a four-colour vertex whose ring carries no (Q) arc survive past 1 + ε? First: do a fragment's bends keep "
   "it in the class the Γ-free exclusion reads?", STUB("STUB-qfree-ring.md"),
-  "the (Q)-free ring: does any four-colour vertex whose ring carries no (Q) arc survive past radius 1 + ε, in any class?",
+  "the Siamese class: does any four-colour vertex whose ring carries no (Q) arc survive past radius 1 + ε, in any class?",
   (STUB("STUB-qfree-ring.md"), "A rung of route M's first half, smaller than the answer; possibly cheap."), at=(31, 377), sector="seven")
 N("FS124", "the (Q) ring", "step", "The rest of the case list: rings with (Q) arcs (SEMI-PAR3, the disk's corner, crossed reciprocity) and vertices of "
   "five or six colours.", STUB("STUB-q-ring.md"),
@@ -344,6 +353,9 @@ N("CAPSTRIP", "the capped strip", "positive", "The strip with each top tile capp
 E("N3DENSE3", "CVEXISTS", "rests", B("FS114-CV-EXISTS"), "over FS112-N3-DENSE3, N2-TERM, N4-FIN")
 E("CVEXISTS", "LOCALF", "rests", L(137), "its NO follows from an explicit radius, uniform in the complexity, about a vertex of at least four colours within which no such map fragment exists")
 E("GFREE", "LOCALF", "context", B("FS116-Y4-EMPTY"), "has a ring carrying no", label="a ring type removed")
+E("GFREE", "QFREE", "rests", L(149), "the exclusion of rings with no arc of the boundary gives the (Q)-free one", label="the bends")
+E("QFREE", "LOCALF", "context", L(149), "FS-123's first question is answered yes", label="the (Q)-free half removed")
+E("QPRUNE", "LOCALF", "context", L(150), "The (Q)-ring case list, pruned", label="pruning rules")
 E("RINGRULE", "LOCALF", "context", B("FS116-RING-GERM"), "let y be a change point of the ring", label="the placing rule")
 E("YESLIM", "UB6", "rests", B("FS116-O1-YESLIM"), "some closed disc of radius R carries a valid k-coloured fragment", label="fragments on every disc")
 E("FS123", "LOCALF", "rests", STUB("STUB-qfree-ring.md"), "the (Q)-free ring", label="its (Q)-free half")
@@ -365,7 +377,7 @@ N("FS121", "the map step", "step", "Route M's third statement. Closed undecided 
   "Decisive at its top, and at its top the answer restated."), at=(57, 270), sector="seven", tier=1)
 N("FS120", "the pinch at a junction", "step", "In a measurable fall colouring, a pinch climbs a short ladder of unit parallels; is its cascade "
   "absorbed where the ladder ends?", STUB("STUB-pinch-at-junction.md"),
-  "the pinch at a junction: can a pinch in a measurable fall colouring of the plane be removed locally", (STUB("STUB-pinch-at-junction.md"),
+  "the pinch at a junction, and the cover route at five: can a pinch in a measurable fall colouring of the plane be removed locally", (STUB("STUB-pinch-at-junction.md"),
   "None alone; it is a colour-generic rung of route M, smaller than the answer."), at=(65, 330), sector="seven")
 N("FS122", "the forced pair", "step", "Route R's third statement: a close complementary pair of fat junctions in every near-colouring; "
   "equivalent to seven (FS111-W-NEG), so its smaller statements are B-RR and a robust junction count.", STUB("STUB-forced-pair.md"),
@@ -406,9 +418,9 @@ N("PL", "PL∃(23, 43)", "question", "Product locality at the places 23 and 43: 
   "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6", (L(125), "Not claimed: anything about six."),
   at=(106, 390), sector="six-low")
 N("FS59", "χ(ℚ(√167)²) ≥ 6", "conclusion", "Six at ℚ(√167), the conjecture's widest gap (≥ 6 predicted, 5 held at [hand], 4 in the "
-  "kernel). Through the plane only: never cheaper than FS-104 (FS-59).", FSR(20),
+  "kernel). Through the plane only: never cheaper than FS-104 (FS-59).", FSR(21),
   "six at ℚ(√167) is rung D plus PL_∃(23, 43)",
-  (FSR(20), "the conjecture's widest gap — predicted ≥ 6 against a proven 5 at [hand] (4 in the kernel, row 119)"),
+  (FSR(21), "the conjecture's widest gap — predicted ≥ 6 against a proven 5 at [hand] (4 in the kernel, row 119)"),
   at=(100, 300), sector="six-low")
 N("R119", "χ(ℚ(√167)²) ≥ 4, kernel", "held", "Four colours at ℚ(√167), in the kernel with no finite graph — the kernel's lower end of "
   "the widest gap.", L(119), "χ(ℚ(√167)²) ≥ 4 in the kernel, with no finite graph",
@@ -535,7 +547,7 @@ E("Y3END", "SRAY", "partial", RSTUB, "That covers every end of a chain of two or
 E("HORNEND", "SRAY", "partial", RSTUB, "a horn bound ±1 on both horns of a stuck vertex of a terminal map occurs only at a one-vertex chain "
   "bounded by unit arcs on both sides", label="a lemma toward it")
 E("BOWTIE", "Y3END", "context", B("FS112-Y3-END-NEEDS"), "FALSE as stated (BOWTIE)", label="refutes it as first stated")
-E("BOWTIE", "TSMYES", "partial", {"file": "plans/FRONTIER-STUBS.md", "row": "18"}, "its fragments (the pencil, BOWTIE) stay local positives a YES could use",
+E("BOWTIE", "TSMYES", "partial", {"file": "plans/FRONTIER-STUBS.md", "row": "19"}, "its fragments (the pencil, BOWTIE) stay local positives a YES could use",
   label="a local fragment, not a map")
 # toward six from below
 E("FS104", "LB6", "rests", PF(3), "a YES gives χ(ℝ²) ≥ 6 given MR (row 128)", label="its YES, given MR")
@@ -545,7 +557,7 @@ E("R129", "LB6", "blocks", L(129), "1/α_loc ≤ 4.36: that route never gives si
 E("R125", "FS59", "rests", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)")
 E("FS104", "FS59", "rests", L(125), "Y has none ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)")
 E("PL", "FS59", "rests", L(125), "PL_∃(23, 43) is exactly the direction missing from χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6")
-E("FS59", "LB6", "rests", FSR(20), "on the answer only through the plane: six at ℚ(√167) gives χ(ℝ²) ≥ 6")
+E("FS59", "LB6", "rests", FSR(21), "on the answer only through the plane: six at ℚ(√167) gives χ(ℝ²) ≥ 6")
 E("SUB", "LB6", "rests", {"file": "Proofs/HadwigerNelson/Bridge.lean", "decl": "chromaticNumber_planeOver_le_plane"},
   "The plane over any real subfield needs at most as many colours as the plane.", faint=True, bus=True)
 E("R119", "FS59", "context", L(119), "The conjecture's widest gap has its kernel lower end here (four; five at [hand], row 123; at least six "
@@ -683,7 +695,7 @@ def build():
             c["address"] = address_str(c["src"], locate(c["src"], c["quote"]))
     for t in NOTES:
         t["address"] = address_str(t["src"], locate(t["src"], t["quote"]))
-    facts = dict(meta=dict(title="Proof Atlas", built="2026-10-03", job="X2", as_of="FS-116's and FS-121's closes",
+    facts = dict(meta=dict(title="Proof Atlas", built="2026-10-03", job="FS129-F1", as_of="FS-129's record",
                            statuses={k: v for k, v in __import__("viz_proof_atlas_common").STATUS_WORDS.items()}),
                  nodes=NODES, edges=EDGES, routes=ROUTES, credence=CREDENCE, notes=NOTES)
     OUT.parent.mkdir(parents=True, exist_ok=True)
