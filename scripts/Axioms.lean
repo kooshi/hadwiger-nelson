@@ -2086,6 +2086,79 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.ringCircleColouring
 #print axioms HadwigerNelson.Plane.ArcMap.exists_swap_of_ring
 
+/-! ## FS-131 wave 3 (job FS131-I3b) — the implementer's added children (every one a theorem the rows rest on) -/
+
+#print axioms HadwigerNelson.Plane.sixArcs_finite
+#print axioms HadwigerNelson.Plane.dist_polar_sq
+#print axioms HadwigerNelson.Plane.arg_polar
+#print axioms HadwigerNelson.Plane.norm_polar
+#print axioms HadwigerNelson.Plane.norm_e_add_e_sq
+#print axioms HadwigerNelson.Plane.one_le_norm_e_add_e
+#print axioms HadwigerNelson.Plane.sixFrag_mem_interiorPts
+#print axioms HadwigerNelson.Plane.sixCol_sector
+#print axioms HadwigerNelson.Plane.zero_mem_closure_region
+#print axioms HadwigerNelson.Plane.norm_e_sub_e_sq
+#print axioms HadwigerNelson.Plane.no_int_lens
+#print axioms HadwigerNelson.Plane.no_int_radial
+#print axioms HadwigerNelson.Plane.norm_e_sub_lens_ne
+#print axioms HadwigerNelson.Plane.sin_eq_zero_of_mem_radial
+#print axioms HadwigerNelson.Plane.e_notMem_lens_union
+#print axioms HadwigerNelson.Plane.dist_polar_same
+#print axioms HadwigerNelson.Plane.sixCol_inner_zero
+#print axioms HadwigerNelson.Plane.sixCol_outer_two
+#print axioms HadwigerNelson.Plane.CircleColouring.mem_S_add_int
+#print axioms HadwigerNelson.Plane.CircleColouring.S_inter_Icc_finite
+#print axioms HadwigerNelson.Plane.CircleColouring.eventually_notMem_S
+#print axioms HadwigerNelson.Plane.CircleColouring.eventually_notMem_S_lt
+#print axioms HadwigerNelson.Plane.CircleColouring.eventually_notMem_S_gt
+#print axioms HadwigerNelson.Plane.CircleColouring.const_on_Ioo
+#print axioms HadwigerNelson.Plane.CircleColouring.const_of_local
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_good_near
+#print axioms HadwigerNelson.Plane.CircleColouring.Good.notMem
+#print axioms HadwigerNelson.Plane.CircleColouring.Good.hex_notMem
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_left_const
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_right_const
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.exists_sides
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.Sides.unique
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.Sides.vals
+#print axioms HadwigerNelson.Plane.CircleColouring.LeftVal.unique
+#print axioms HadwigerNelson.Plane.CircleColouring.RightVal.unique
+#print axioms HadwigerNelson.Plane.CircleColouring.eventually_lt_add
+#print axioms HadwigerNelson.Plane.CircleColouring.eventually_gt_add
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.Sides.periodic
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.W_eq_aux
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.D0_mod_ne
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.D_eq_D0
+#print axioms HadwigerNelson.Plane.CircleColouring.step_cast
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.D_mod_ne_good
+#print axioms HadwigerNelson.Plane.CircleColouring.Lift.hex_summary
+#print axioms HadwigerNelson.Plane.CircleColouring.liftB_fin
+#print axioms HadwigerNelson.Plane.CircleColouring.liftB_add
+#print axioms HadwigerNelson.Plane.CircleColouring.liftB_of_le
+#print axioms HadwigerNelson.Plane.CircleColouring.liftA_sub
+#print axioms HadwigerNelson.Plane.CircleColouring.liftB_empty
+#print axioms HadwigerNelson.Plane.CircleColouring.liftB_single
+#print axioms HadwigerNelson.Plane.CircleColouring.D_eq_sub
+#print axioms HadwigerNelson.Plane.CircleColouring.hex_near
+#print axioms HadwigerNelson.Plane.CircleColouring.m_eq_near
+#print axioms HadwigerNelson.Plane.CircleColouring.h_eq_of_m_eq
+#print axioms HadwigerNelson.Plane.CircleColouring.m_eq_m0
+#print axioms HadwigerNelson.Plane.CircleColouring.D0_near
+#print axioms HadwigerNelson.Plane.CircleColouring.m0_const
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_M
+#print axioms HadwigerNelson.Plane.CircleColouring.D0_eq
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_T0_left
+#print axioms HadwigerNelson.Plane.CircleColouring.exists_T0_right
+#print axioms HadwigerNelson.Plane.CircleColouring.hbig_of_noPair
+#print axioms HadwigerNelson.Plane.CircleColouring.hbig_of_noSwap
+#print axioms HadwigerNelson.Plane.CircleColouring.J_eq_of_rho
+#print axioms HadwigerNelson.Plane.CircleColouring.rho_const
+#print axioms HadwigerNelson.Plane.CircleColouring.jump_ne_of_mem
+#print axioms HadwigerNelson.Plane.CircleColouring.mem_of_jump_ne
+#print axioms HadwigerNelson.Plane.CircleColouring.inv_of_J_eq
+#print axioms HadwigerNelson.Plane.CircleColouring.hSum_shift
+#print axioms HadwigerNelson.Plane.CircleColouring.ringband_iii'
+
 /-! ## M03 — the certificate routes
 
 Each of these evaluates `LRAT.check` by `native_decide`, which is the only thing that can evaluate

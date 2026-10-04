@@ -456,32 +456,36 @@ variable (C)
 
 /-- The integer step of the lift at `x`: the left and right colours' representatives `0, 1, 2` differ by at most two, and a
 difference of `±2` is replaced by the step `∓1` that is congruent to it mod 3. -/
-private noncomputable def liftStep (cl cr : ℝ → ZMod 3) (x : ℝ) : ℤ :=
+noncomputable def liftStep (cl cr : ℝ → ZMod 3) (x : ℝ) : ℤ :=
   if ((cr x).val : ℤ) - (cl x).val = 2 then -1 else if ((cr x).val : ℤ) - (cl x).val = -2 then 1 else 0
 
 /-- The sum of the steps over the change points in `(a, b]`. -/
-private noncomputable def liftB (C : CircleColouring) (cl cr : ℝ → ZMod 3) (a b : ℝ) : ℤ :=
+noncomputable def liftB (C : CircleColouring) (cl cr : ℝ → ZMod 3) (a b : ℝ) : ℤ :=
   ∑ᶠ s ∈ C.S ∩ Ioc a b, liftStep cl cr s
 
 /-- The cumulative step function. -/
-private noncomputable def liftA (C : CircleColouring) (cl cr : ℝ → ZMod 3) (θ : ℝ) : ℤ :=
+noncomputable def liftA (C : CircleColouring) (cl cr : ℝ → ZMod 3) (θ : ℝ) : ℤ :=
   liftB C cl cr 0 θ - liftB C cl cr θ 0
 
-private theorem liftB_fin (C : CircleColouring) (a b : ℝ) : (C.S ∩ Ioc a b).Finite :=
+/-- The change points in `(a, b]` are finitely many. -/
+theorem liftB_fin (C : CircleColouring) (a b : ℝ) : (C.S ∩ Ioc a b).Finite :=
   (C.S_inter_Icc_finite a b).subset (inter_subset_inter_right _ Ioc_subset_Icc_self)
 
-private theorem liftB_add (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b c : ℝ} (hab : a ≤ b) (hbc : b ≤ c) :
+/-- The step sums add along consecutive intervals. -/
+theorem liftB_add (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b c : ℝ} (hab : a ≤ b) (hbc : b ≤ c) :
     liftB C cl cr a c = liftB C cl cr a b + liftB C cl cr b c := by
   unfold liftB
   rw [← finsum_mem_union _ (liftB_fin C a b) (liftB_fin C b c)]
   · rw [← inter_union_distrib_left, Ioc_union_Ioc_eq_Ioc hab hbc]
   · exact Set.disjoint_of_subset (inter_subset_right) (inter_subset_right) (Ioc_disjoint_Ioc_of_le le_rfl)
 
-private theorem liftB_of_le (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b : ℝ} (h : b ≤ a) :
+/-- An empty interval has step sum zero. -/
+theorem liftB_of_le (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b : ℝ} (h : b ≤ a) :
     liftB C cl cr a b = 0 := by
   unfold liftB; rw [Ioc_eq_empty (not_lt.mpr h)]; simp
 
-private theorem liftA_sub (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b : ℝ} (hab : a ≤ b) :
+/-- The cumulative step function increases by the step sum. -/
+theorem liftA_sub (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b : ℝ} (hab : a ≤ b) :
     liftA C cl cr b - liftA C cl cr a = liftB C cl cr a b := by
   unfold liftA
   rcases le_total 0 a with h0 | h0
@@ -499,11 +503,13 @@ private theorem liftA_sub (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b : 
       have e2 := liftB_of_le C cl cr (a := 0) (b := a) h0
       linarith
 
-private theorem liftB_empty (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b : ℝ} (h : C.S ∩ Ioc a b = ∅) :
+/-- No change point in `(a, b]` gives step sum zero. -/
+theorem liftB_empty (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b : ℝ} (h : C.S ∩ Ioc a b = ∅) :
     liftB C cl cr a b = 0 := by
   unfold liftB; rw [h]; simp
 
-private theorem liftB_single (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b x : ℝ} (h : C.S ∩ Ioc a b = {x}) :
+/-- One change point `x` in `(a, b]` gives the step sum `liftStep x`. -/
+theorem liftB_single (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b x : ℝ} (h : C.S ∩ Ioc a b = {x}) :
     liftB C cl cr a b = liftStep cl cr x := by
   unfold liftB; rw [h]; simp
 
