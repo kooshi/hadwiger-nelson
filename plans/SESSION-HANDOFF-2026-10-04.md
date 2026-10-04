@@ -4,9 +4,9 @@
 reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–183 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written at the context limit, 2026-10-04 late):** inventory items run to **230**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157),
+> **Latest (written at the context limit, 2026-10-04 late):** inventory items run to **234**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157),
 > Lebesgue's covering theorem (151), `localSectors` + the separation lemma + `four_of_bothKind_simple` without `hnc` (171); the axiom gate repaired with an IMPORTED
-> section (160). **Running (4 Opus slots — Kooshi granted a fourth for the backlog, item 211)**: FS131-I2m (wave 2, 16 HC/IRREG lines → carriers, gate, landing; item 215), FS131-I4j (wave 4's `BaseSteps` + `UnitArc`, 14 left; item 230), FS131-IC3 (wave 4's `Contact`, 5 leaves, worktree `fs131-w4c`;
+> section (160). **Running (4 Opus slots — Kooshi granted a fourth for the backlog, item 211)**: FS131-I2n (wave 2, the last 5 HC/IRREG lines → carriers, gate, landing; item 234), FS131-I4j (wave 4's `BaseSteps` + `UnitArc`, 14 left; item 230), FS131-IC3 (wave 4's `Contact`, 5 leaves, worktree `fs131-w4c`;
 > item 225), FS131-I5 (wave 5's first implementer, worktree `fs131-w5`; item 228). Woodall is sorry-free bar wave 4's statements (item 190) and idle until wave 4 lands. Agent ids in scratch `agents.txt`. **On each hand-back**: check the
 > build log, `sorry` count and axioms print; log; brief a successor by script from the previous brief (all implementers Opus, `model: "opus"`); gate; launch.
 > **On a landing**: read the gate logs, file counts (`CLAUDE.md` § Trust ledger three-count sentence, § The gate, `scripts/vacuity-baseline.txt`, `GATE_CHANGES` in
@@ -31,7 +31,7 @@ that judge the milestone, written before any job).*
 | job | state | where |
 |---|---|---|
 | foundation, wave 1 (14 rows) | **landed** on `main` (`d59ffcdf`), the only held wave (item 29) | — |
-| wave 2 (28 rows) | 16 lines left, all HC/IRREG (items 201, 214: `Plane/Slack` and R7 sorry-free; `χ_m⁰ ≤ k ⟺ µ_k⁰ = 1` and `7 ≤ χ_m⁰ ⟺ sup µ₆ < 1` on the standard three, branch only); **FS131-I2m (Opus) running** to the landing | `.claude/worktrees/fs131-w2` |
+| wave 2 (28 rows) | 5 lines left, all HC/IRREG (items 201, 214, 233: `Plane/Slack` and R7 sorry-free; `χ_m⁰ ≤ k ⟺ µ_k⁰ = 1` and `7 ≤ χ_m⁰ ⟺ sup µ₆ < 1` on the standard three, branch only); **FS131-I2n (Opus) running** to the landing | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | **LANDED** (item 157); `localSectors` and the cusp-free four-colour clause **LANDED** too (item 171, `0131aa59`) | — |
 | wave 4 (25 rows) | 66 of 86 proved (items 224, 229); **split by file** (item 194): **FS131-I4j** on `BaseSteps` + `UnitArc` (14), **FS131-IC3** on `Contact` (5, `fs131-w4c`) | `.claude/worktrees/fs131-w4` |
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | **all five Woodall modules sorry-free** (item 190); the chain theorems wait only on wave 4's statements; **idle** — after wave 4 lands, one Opus job: merge `main`, delete the identical copies, QA2-1's merged `sevenBrickMap`, gate, landing | `.claude/worktrees/fs131-ww` |
@@ -53,7 +53,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | FS131-IC3 (wave 4's `Contact`: 5 leaves; no merge or gate of its own; item 225) | Opus | `data/fs131/briefs/FS131-IC3-contact.md` | branch `fs131-w4c`'s `data/fs131/reports/FS131-IC3.md` |
 | FS131-I5 (wave 5: merge `fs131-w5b`, E4's repair, the base's obligation pass, the leaves; item 228) | Opus | `data/fs131/briefs/FS131-I5-wave5.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-I5.md` |
 | FS131-I4j (wave 4 on Opus: `UnitArc`, `BaseSteps`; not `Contact`; item 230) | Opus | `data/fs131/briefs/FS131-I4j-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4j.md` |
-| FS131-I2m (wave 2 on Opus: 16 lines, the carriers, the gate, the landing; item 215) | Opus | `data/fs131/briefs/FS131-I2m-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2m.md` |
+| FS131-I2n (wave 2 on Opus: the last 5 lines, the carriers, the gate, the landing; item 234) | Opus | `data/fs131/briefs/FS131-I2n-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2n.md` |
 
 
 **Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.
@@ -64,7 +64,7 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 ## 4. Next, in order
 
-1. **On each hand-back** (I2m, I4j, IC3, I5): review by artifact (build log, `sorry` count, axioms print from a saved log), log the inventory item, and if work
+1. **On each hand-back** (I2n, I4j, IC3, I5): review by artifact (build log, `sorry` count, axioms print from a saved log), log the inventory item, and if work
    remains brief an Opus successor by script from the job's own last brief (`data/fs131/briefs/`), gate it with
    `python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>` (full worktree paths in source lines; no § inside a heading address), launch with
    `model: "opus"`.
