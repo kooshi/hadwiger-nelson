@@ -15,9 +15,10 @@ namespace HadwigerNelson.Plane
 
 open Complex Set MeasureTheory Filter Topology Metric
 
-/-- The engine: on a preconnected set, if no point is at distance `1` from `x ∈ S`, every point is nearer than `1`. -/
-theorem dist_lt_one_of_isPreconnected {S : Set ℂ} (hS : IsPreconnected S) {x : ℂ} (hx : x ∈ S)
-    (h : ∀ s ∈ S, dist x s ≠ 1) : ∀ s ∈ S, dist x s < 1 := by
+/-- The engine: on a preconnected set `S` holding one point `s₀` nearer than `1` to `x`, if no point of `S` is at
+distance exactly `1` from `x`, every point of `S` is nearer than `1` to `x` (`x` need not lie in `S`). -/
+theorem dist_lt_one_of_isPreconnected {S : Set ℂ} (hS : IsPreconnected S) {x s₀ : ℂ} (hs₀ : s₀ ∈ S)
+    (h0 : dist x s₀ < 1) (h : ∀ s ∈ S, dist x s ≠ 1) : ∀ s ∈ S, dist x s < 1 := by
   sorry
 
 /-- **FS106-DIAM (i)**: a connected set with no two points at distance `1` has every two points nearer than `1`

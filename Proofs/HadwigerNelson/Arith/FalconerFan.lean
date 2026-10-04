@@ -44,12 +44,13 @@ theorem falconerFan_hom {V W : Type*} {H : SimpleGraph V} {T : SimpleGraph W} {k
       ∀ δ : Fin (k - 1), ∃ x, (x = ρ t ∨ T.Adj (ρ t) x) ∧ C x = δ) := by
   sorry
 
-/-- **FS129-SA1-FALC-DICHO-K**: a Falconer fan `(H, a, t)` at `k ≥ 3` colours has `χ(H) ≥ k − 1`, and if `χ(H) = k − 1`
-every proper `(k − 1)`-colouring of `H` gives `a` and `t` one colour. -/
+/-- **FS129-SA1-FALC-DICHO-K**: a Falconer fan `(H, a, t)` at `k ≥ 3` colours has `χ(H) ≥ k − 1`, and every proper
+`(k − 1)`-colouring of `H` gives `a` and `t` one colour. (The row conditions the second clause on `χ(H) = k − 1`; that
+hypothesis is idle — a `(k − 1)`-colouring exists only when `χ(H) ≤ k − 1`, and then the first clause gives equality — so
+the clause is stated unconditionally, which implies the row's form.) -/
 theorem falconerFan_chromaticNumber {V : Type*} {H : SimpleGraph V} {k : ℕ} (hk : 3 ≤ k) {a t : V}
     (hfan : FalconerFan H k a t) :
-    ((k - 1 : ℕ) : ℕ∞) ≤ H.chromaticNumber ∧
-      (H.chromaticNumber = ((k - 1 : ℕ) : ℕ∞) → ∀ C : H.Coloring (Fin (k - 1)), C a = C t) := by
+    ((k - 1 : ℕ) : ℕ∞) ≤ H.chromaticNumber ∧ ∀ C : H.Coloring (Fin (k - 1)), C a = C t := by
   sorry
 
 end HadwigerNelson.Arith
