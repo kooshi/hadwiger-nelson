@@ -55,12 +55,34 @@ noncomputable def sixArcs : Set Arc :=
 
 /-- The arcs of `sixArcs` have positive length. -/
 theorem sixArcs_nondegenerate : ∀ a ∈ sixArcs, a.Nondegenerate := by
-  sorry
+  have hπ := Real.pi_pos
+  intro a ha
+  rcases ha with ((ha | ha) | ha) | ha
+  · obtain ⟨j, rfl⟩ := ha
+    show (0 : ℂ) ≠ e _
+    intro h
+    have := norm_e ((j : ℕ) * (π / 3))
+    rw [← h] at this
+    simp at this
+  · rw [mem_singleton_iff] at ha
+    subst ha
+    exact ⟨one_pos, by positivity, le_of_eq (by ring)⟩
+  · obtain ⟨j, rfl⟩ := ha
+    exact ⟨one_pos, by linarith, by linarith⟩
+  · obtain ⟨j, rfl⟩ := ha
+    exact ⟨one_pos, by linarith, by linarith⟩
+
+/-- `sixArcs` is finite. -/
+theorem sixArcs_finite : sixArcs.Finite := by
+  have fin : ∀ f : Fin 6 → Arc, {a | ∃ j : Fin 6, a = f j}.Finite := fun f =>
+    (Set.finite_range f).subset fun a ⟨j, h⟩ => ⟨j, h.symm⟩
+  exact (((fin _).union (Set.finite_singleton _)).union (fin _)).union (fin _)
 
 /-- Finitely many arcs: every point has a neighbourhood meeting finitely many. -/
 theorem sixArcs_locallyFinite : ∀ x ∈ ball (0 : ℂ) (3 / 2), ∃ t ∈ 𝓝 x,
     {a | a ∈ sixArcs ∧ (a.carrier ∩ t).Nonempty}.Finite := by
-  sorry
+  intro x _
+  exact ⟨univ, univ_mem, sixArcs_finite.subset fun a ha => ha.1⟩
 
 /-- `sixCol` is locally constant off the arcs, inside `B(0, 3/2)`: the floor of `arg x / 60°` jumps only on the rays
 `60°j`, which inside the disc are radial segments and outside lie in lenses (where the round is constant); the round
@@ -81,6 +103,23 @@ noncomputable def sixFrag : ArcMap 6 where
   col := sixCol
   locallyConstant := sixCol_locallyConstant
 
+/-- The squared distance from the polar point `r e(φ)` to the unit-circle point `e(θ)`. -/
+theorem dist_polar_sq (r φ θ : ℝ) : dist ((r : ℂ) * e φ) (e θ) ^ 2 = r ^ 2 - 2 * r * Real.cos (φ - θ) + 1 := by
+  rw [Complex.dist_eq, Complex.sq_norm, Complex.normSq_apply]
+  simp only [e_eq, Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.add_re, Complex.add_im,
+    Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+  rw [Real.cos_sub]
+  nlinarith [Real.sin_sq_add_cos_sq φ, Real.sin_sq_add_cos_sq θ]
+
+/-- The argument of a positive multiple of `e(φ)`, for `φ ∈ (−π, π]`. -/
+theorem arg_polar {r φ : ℝ} (hr : 0 < r) (hφ : φ ∈ Ioc (-π) π) : Complex.arg ((r : ℂ) * e φ) = φ := by
+  rw [e, Complex.exp_mul_I]
+  exact Complex.arg_mul_cos_add_sin_mul_I hr hφ
+
+/-- The norm of `r e(φ)`. -/
+theorem norm_polar {r : ℝ} (hr : 0 ≤ r) (φ : ℝ) : ‖(r : ℂ) * e φ‖ = r := by
+  rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg hr]
+
 /-! ## Spec examples of the colour (each fails if `sixCol` drifts) -/
 
 /-- The point `1/2` of the sector `S_0` has colour `0`. -/
@@ -94,15 +133,67 @@ example : sixCol (1 / 2) = 0 := by
 
 /-- The point `6/5` of the lens `Q_0` has colour `2`. -/
 example : sixCol (6 / 5) = 2 := by
-  sorry
+  have hπ := Real.pi_pos
+  have hx : (6 / 5 : ℂ) = ((6 / 5 : ℝ) : ℂ) * e 0 := by simp [e]
+  have hn : ¬ ‖(6 / 5 : ℂ)‖ < 1 := by rw [hx, norm_polar (by norm_num)]; norm_num
+  have harg : Complex.arg (6 / 5 : ℂ) = 0 := by
+    rw [hx, arg_polar (by norm_num) ⟨by linarith, hπ.le⟩]
+  have hr : sixRound (6 / 5) = 0 := by simp [sixRound, harg]
+  have hl : InSixLens (sixRound (6 / 5)) (6 / 5) := by
+    rw [hr]
+    have hs3 : Real.sqrt 3 > 1.7 := by
+      rw [gt_iff_lt, Real.lt_sqrt (by norm_num)]; norm_num
+    have c := Real.cos_pi_div_six
+    constructor
+    · refine lt_of_pow_lt_pow_left₀ 2 (by norm_num) ?_
+      rw [hx, dist_polar_sq]
+      simp only [Int.cast_zero, zero_mul, zero_sub, Real.cos_neg] at *
+      rw [c]; nlinarith
+    · refine lt_of_pow_lt_pow_left₀ 2 (by norm_num) ?_
+      rw [hx, dist_polar_sq]
+      simp only [Int.cast_zero, zero_mul, zero_add]
+      rw [show (0 : ℝ) - π / 6 = -(π / 6) by ring, Real.cos_neg, c]; nlinarith
+  simp only [sixCol, hn, if_false]
+  rw [if_pos hl, hr]
+  rfl
 
 /-- The point `(6/5) e(30°)` of the gap tile `G_0` has colour `4`. -/
 example : sixCol ((6 / 5 : ℂ) * e (π / 6)) = 4 := by
-  sorry
+  have hπ := Real.pi_pos
+  have hx : ((6 / 5 : ℂ) * e (π / 6)) = ((6 / 5 : ℝ) : ℂ) * e (π / 6) := by push_cast; ring
+  have hn : ¬ ‖((6 / 5 : ℂ) * e (π / 6))‖ < 1 := by rw [hx, norm_polar (by norm_num)]; norm_num
+  have harg : Complex.arg ((6 / 5 : ℂ) * e (π / 6)) = π / 6 := by
+    rw [hx, arg_polar (by norm_num) ⟨by linarith, by linarith⟩]
+  have hr : sixRound ((6 / 5 : ℂ) * e (π / 6)) = 1 := by
+    rw [sixRound, harg, show π / 6 / (π / 3) = (1 : ℝ) / 2 by field_simp; ring, round_eq]
+    norm_num
+  have hfl : ⌊π / 6 / (π / 3)⌋ = 0 := by
+    rw [show π / 6 / (π / 3) = (1 : ℝ) / 2 by field_simp; ring]
+    exact Int.floor_eq_zero_iff.mpr ⟨by norm_num, by norm_num⟩
+  have hl : ¬ InSixLens (sixRound ((6 / 5 : ℂ) * e (π / 6))) ((6 / 5 : ℂ) * e (π / 6)) := by
+    rw [hr]
+    rintro ⟨-, h2⟩
+    have := dist_polar_sq (6 / 5) (π / 6) (((1 : ℤ) : ℝ) * (π / 3) + π / 6)
+    rw [← hx] at this
+    have h3 : π / 6 - (((1 : ℤ) : ℝ) * (π / 3) + π / 6) = -(π / 3) := by push_cast; ring
+    rw [h3, Real.cos_neg, Real.cos_pi_div_three] at this
+    nlinarith [dist_nonneg (x := (6 / 5 : ℂ) * e (π / 6)) (y := e (((1 : ℤ) : ℝ) * (π / 3) + π / 6))]
+  simp only [sixCol, hn, if_false, hl, sixSector, harg, hfl]
+  decide
 
 /-- The point `(1/2) e(210°)` of the sector `S_3` (an angle with negative `arg`) has colour `3`. -/
 example : sixCol ((1 / 2 : ℂ) * e (7 * π / 6)) = 3 := by
-  sorry
+  have hπ := Real.pi_pos
+  have hx : ((1 / 2 : ℂ) * e (7 * π / 6)) = ((1 / 2 : ℝ) : ℂ) * e (-(5 * π / 6)) := by
+    rw [show 7 * π / 6 = -(5 * π / 6) + 2 * π by ring, e_add_two_pi]; push_cast; ring
+  have hn : ‖((1 / 2 : ℂ) * e (7 * π / 6))‖ < 1 := by rw [hx, norm_polar (by norm_num)]; norm_num
+  have harg : Complex.arg ((1 / 2 : ℂ) * e (7 * π / 6)) = -(5 * π / 6) := by
+    rw [hx, arg_polar (by norm_num) ⟨by linarith, by linarith⟩]
+  have hfl : ⌊-(5 * π / 6) / (π / 3)⌋ = -3 := by
+    rw [show -(5 * π / 6) / (π / 3) = (-5 : ℝ) / 2 by field_simp; ring]
+    exact Int.floor_eq_iff.mpr ⟨by norm_num, by norm_num⟩
+  simp only [sixCol, hn, if_true, sixSector, harg, hfl]
+  decide
 
 /-! ## The row: FS116-Y2-SIXFRAG -/
 
