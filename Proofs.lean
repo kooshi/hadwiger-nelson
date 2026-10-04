@@ -164,6 +164,12 @@ import Proofs.HadwigerNelson.Plane.Chord
 import Proofs.HadwigerNelson.Plane.LocalMap
 import Proofs.HadwigerNelson.Plane.LocalMapExamples
 import Proofs.HadwigerNelson.Plane.CircleColouring
+import Proofs.HadwigerNelson.Plane.LocalStructure
+import Proofs.HadwigerNelson.Plane.SixFragment
+import Proofs.HadwigerNelson.Plane.Tiles
+import Proofs.HadwigerNelson.Plane.RingGerm
+import Proofs.HadwigerNelson.Plane.Lens
+import Proofs.HadwigerNelson.Plane.RingBand
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 
