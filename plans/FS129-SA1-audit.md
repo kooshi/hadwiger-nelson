@@ -586,3 +586,68 @@ J01-3 → J01-2. **Others of the same kind outside the nine**: the two correctin
 name CL2 as the thing corrected, not as a user — false, with "Rests on it" text that does not begin "nothing", so neither matcher caught them; and
 four lane-A records whose "Rests on it" holds "none" or "nothing" mid-sentence (FS50-T2, FS66-L6, FS91-J08-5, MASCOT-T1) carry **real** edges — the
 word is part of the content ("nothing it emits is believed", "none at 7 three-colourable", "carries none at all", "none at 2 or 4").
+
+## Stage 5 — SAVED (the vacuity sort: lane A's flagged results, passes 1–2's compositions, and the older record read at its hubs, roots and Lean order)
+
+*Read for this stage: `data/fs129/index/vacuity.md` (all of its lists, by era); `data/fs129/index/hubs.md` and `roots.md` (the lane-A rows);
+the statements of the 25 lane-A results listed in § 5.3 (index records, read against their files where a hypothesis was in doubt);
+`plans/TC1-derivation.md` in full.*
+
+### 5.1 Lane A's flagged results in the index: none
+
+Every entry `data/fs129/index/vacuity.md` flags is lane R's: the 55 `none-known` results (FS114, FS116, FS121), the two borderline ones
+(FS116-N1-QFREE4, FS121-O1-OUT) and the 16 `named` ones matching the looser pattern (FS111, FS114, FS116, FS121). Lane A's block-format
+entries are TC1's four, each with a `model:` line naming an object (K, ℚ(√3)·ℚ(ζ₇)⁺, F = K·E₇ itself). **So the index flags no lane-A result**;
+lane A's vacuity question lives in the 817 older-format entries, which carry no `model:` field (§ 5.3), and in the passes' new compositions (§ 5.2).
+
+### 5.2 The lane-A compositions of passes 1–3 and the records of item (b), sorted (none is in the index, which predates them)
+
+| result | heading | object, reason, or dependents |
+|---|---|---|
+| FS129-OA1-NOLIN5, FS129-MA1-NOAFF5 | inhabited | the spindle without its tip edge over ℚ(√3), into Γ₁₁ (FS129-MA1-NOAFF5-DIM: 28 of 28) |
+| FS129-SA1-NOAFF-K, -NOAFF-FIELDS | inhabited | the same graph into Γ₃'s triangle at four colours (FS129-SA1-NOAFF4: 21 of 21); ℚ(√11) for the field clause |
+| FS129-SA1-PLACE-HOM | inhabited | ℚ(√3, π) with the prime above 11 |
+| FS129-OA1-FALC-RED, FS129-SA1-FALC-RED | inhabited | k = 4, the unit rhombus — Falconer's own Theorem 2 |
+| FS129-MA1-FALC-T, FS129-MA2-FALC-GAP4, -FALC-DICHO, FS129-OA1-FALC-11, FS129-MA1-FALC-19 (all at five colours) | hypothetical by design | each constrains a Falconer fan at five colours, a candidate whose existence is the open question (it would give `χ_m(ℝ²) ≥ 6`); no member is known and none is shown impossible. They are filters for the Searcher's held row 3; nothing else rests on them. **Their merged forms move them to "inhabited"**: FS129-SA1-FALC-FAN and -FALC-DICHO-K hold at every `k` and are inhabited at `k = 4` by the rhombus (FS129-SA1-FAN4) — which is the case for stating them at every `k` before Lean |
+| FS129-SA1-FALC-RES (ii), FS129-MA2-FALC-HOSTS (iii)–(iv) | hypothetical by design | the same candidate, over the named fields and lattices |
+| FS129-SA1-FALC-RES (i), FS129-MA2-FALC-HOSTS (i)–(ii) | a no-go | "no fan at five colours over these fields / in these lattices" — the statement is that a class is empty |
+| FS129-OA1-NOPERLAW | inhabited | the hexagonal seven-colouring under a random translation of its period torus (its model line) |
+| FS129-OA1-RINGWIND | inhabited | its control's rings (FS129-OA1-RINGWIND-ALL) |
+| FS89-CL2, FS89-S0A-2, FS89-S0A-10 (with the corrected `A`) | inhabited | `τ + Re(ē σ₂(·))` over ℚ(√3) is a member of `Θ₄(R_F)` (§ 3.1) |
+| **ASTRA-2026-09-14-T10, on the sub-scope F ⊇ K with a usable prime of residue field 𝔽₁₁ or with χ(F²) ≤ 4** | **empty** | row 66's `Separated ↔ Adj` (resp. a four-colouring read with five colours) leaves no five-colour virtual edge at distance 2 (§ 3.2). **Dependents**: none by id (`data/fs129/index/edges.csv` has no edge from T10); its kernel stub FS-49 (`six_le_chromaticNumber_plane_of_separated_two`) is not in the Lean order and inherits nothing if stated over ℝ² or a general `F`. On the rest of its scope (K(√7) and other fields with `χ(F²) ≥ 5` and no usable 𝔽₁₁ prime) its hypothesis is G26's design target: hypothetical by design |
+
+### 5.3 The older record's vacuity, read: lane A's hubs, roots and Lean-order results (item (e))
+
+Lane A's hubs and roots (`data/fs129/index/hubs.md` top 100 and `roots.md` top 100, era A; MA2: G76's band-character chains, FS-89 and FS-91)
+and lane A's two Lean-order results, with the deepest root chain's links. **None is empty.**
+
+| result | heading | object (address) |
+|---|---|---|
+| FS89-S0B-C1 (hub 36, root 21) | inhabited | a positive control: the `L`-layer and orbit models' pieces at depths 1–6 (29, 157, … at four colours), `data/fs89/` |
+| FS89-S0B-T1, FS89-D0-T1 (orbit models) | inhabited | `θ₂` (parity) and the corners lie in `Θ_β(U₅)`, `Θ_β(U_S)` at `β ≤ 1/4`; an isomorphism of models holds with or without members |
+| FS89-D1-L5, -D1-C1, -D1-C2 (the chain's middle) | inhabited | the corner characters (`2x = θ₂`), isolated points of `Θ₄(R₆₅)` (D1-C1 itself) |
+| FS89-D2-T1 (RQ₄) | inhabited | `Θ₄(Q)` = 13 discs and 16 points (its own statement, with S1V-5) |
+| FS89-CL3 (the chain's end) | inhabited | the dyadic pullback characters `λ_D∘ρ_D` of ℚ(√59), ℚ(√83), ℚ(√131) (FS91-J07-12) |
+| FS89-CL4, FS89-CL5 | a no-go | `Θ₄(R_{ℚ(√47)}) = ∅`, `Θ₅(R_{ℚ(√167)}) = ∅` |
+| FS89-S0A-3 (Lemma N₀) | inhabited | the 29 torsion characters of `Θ₄(Q)` ("each occurs") |
+| FS89-S0A-4 (level collapse) | inhabited | the torsion characters of `Θ₄(Q)`; C9's character at ℚ(√11) |
+| FS89-PA-B1, FS91-J01-1 (ℱ-flow) | inhabited | `(R̂_S, U_S)`, `S = {5}` or `{5, 13}` |
+| FS91-J01-2 (PA-B2) | inhabited | the finite orbit `{θ₂}`, a `U_S`-minimal closed set inside `T + A` |
+| **FS91-J01-3** (hub 96, root 45) | **hypothetical by design** | "a case-1 minimal set in `Θ_β`" is the object of a proof by contradiction: by J01-2, a case-1 minimal set is all of `R̂_S`, never inside `Θ_β`; the lemma's role is "`MS_β(S)` … without Berend". Its root rank is an artifact of a false edge (§ 4.3); nothing inherits from it |
+| FS91-J01-4 (Lemma SW, one digit) | inhabited | its counterexample offset at `k = 10`, `p = 5` and the cases `k < 2p` |
+| FS91-J01-5 (Lemma SW-m), FS91-J01-6, FS91-J01-7 | inhabited | `Θ_k(R_S)`'s torsion characters (non-empty at every band `≤ 1/4` by parity; J08-10's 173 at band 1/6) |
+| FS91-J08-9, FS91-J08-10 | inhabited | `Θ₆(Q)`'s 18 types, 173 torsion characters |
+| FS91-J10-L1, FS91-J10-L2 | inhabited | every real number field (ℚ(√3)); weak approximation |
+| M56-T1 (hub 81) | inhabited | the spindle's points with Fischer's additive four-colouring into ℤ/4 (exponent 4) |
+| FS66-L3 (root 100) | inhabited | the indicator vector of any independent set of `Γ_p` is a feasible fibre-share vector |
+| TC1-SQRT3-DYADIC (Lean order 196) | inhabited | K = ℚ(√3,√11) (its model line) |
+| TC1-STANDING-FIVE (Lean order 197) | inhabited | F = K·E₇ itself; its "given MR" clause is conditional, not vacuous |
+
+**Unsorted:** the other 792 of lane A's 817 older-format entries carry no `model:` field and were not read for vacuity here. The reading above
+suggests where the risk sits: statements of the form "every member of `Θ_k(R_F)` …" over a field where `Θ_k(R_F)` is empty hold vacuously (CL4's
+and CL5's fields at their bands), so an older entry quantifying over `Θ₄(R_{ℚ(√47)})` or `Θ₅(R_{ℚ(√167)})` would be the first place to look.
+
+### 5.4 What passes vacuity on
+
+Only "empty" passes vacuity to dependents, and the only lane-A "empty" sort is ASTRA-T10 on its 𝔽₁₁-or-four-colourable sub-scope, with **no
+dependents**. **No lane-A result rests on a vacuous one.**
