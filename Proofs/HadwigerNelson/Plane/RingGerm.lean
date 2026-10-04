@@ -497,16 +497,6 @@ theorem germS_absent (hF : F.Valid) {p : ℂ} (_hp : F.Covers p 1) (_h4 : 4 ≤ 
   rw [Set.ncard_pair hy.2.1]
   omega
 
-/-- **FS116-N1-GERM-S** (iii): if none of the four germs at `ψ ± 60°` lies on a (Q) arc, `y` is a vertex of at least four
-colours. -/
-theorem germS_four (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
-    (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X')
-    (hq : ∀ s, ¬ F.GermOnQ p (ψ + π / 3) s ∧ ¬ F.GermOnQ p (ψ - π / 3) s) :
-    4 ≤ (F.coloursAt (ringPt p ψ)).ncard := by
-  sorry
-
-/-! ## FS116-RING-Q-PRIME-S -/
-
 /-- The base point of a germ lies in the closure of the germ. -/
 theorem ringPt_mem_closure_germ (p : ℂ) (θ : ℝ) (s : Side) {δ : ℝ} (hδ : 0 < δ) :
     ringPt p θ ∈ closure (germ p θ s δ) := by
@@ -527,15 +517,6 @@ theorem onQArc_of_germOnQ {p : ℂ} {θ : ℝ} {s : Side} (h : F.GermOnQ p θ s)
     have hcont : Continuous (ringPt p) := by unfold ringPt e; fun_prop
     exact (isCompact_Icc.image hcont).isClosed
   exact hc.closure_subset_iff.mpr hsub (ringPt_mem_closure_germ p θ s hδ)
-
-/-- **FS116-RING-Q-PRIME-S** (carrying FS116-RING-Q-PRIME; at every `k` with at most two colours absent): a change point of
-the ring of a vertex of at least four colours whose points at `±60°` lie on no closed (Q) arc is a vertex of at least four
-colours. -/
-theorem ringQPrimeS (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
-    (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X')
-    (hu : ¬ F.OnQArc p (ringPt p (ψ + π / 3))) (hv : ¬ F.OnQArc p (ringPt p (ψ - π / 3))) :
-    4 ≤ (F.coloursAt (ringPt p ψ)).ncard :=
-  germS_four hF hp h4 hk hy fun _ => ⟨fun hg => hu (onQArc_of_germOnQ hg), fun hg => hv (onQArc_of_germOnQ hg)⟩
 
 /-! ## FS116-N1-QFREE4 (at every `k`) -/
 
@@ -1862,6 +1843,72 @@ theorem germS_outward (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (
     Real.cos_pos_of_mem_Ioo ⟨by linarith [hβ.1], by linarith [hβ.2]⟩
   obtain ⟨h1, h2⟩ := outward_of_cone hF hcos hc
   exact ⟨c, hcp, h1, h2⟩
+
+/-- **FS116-N1-GERM-S** (iii): if none of the four germs at `ψ ± 60°` lies on a (Q) arc, `y` is a vertex of at least four
+colours. -/
+theorem germS_four (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
+    (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X')
+    (hq : ∀ s, ¬ F.GermOnQ p (ψ + π / 3) s ∧ ¬ F.GermOnQ p (ψ - π / 3) s) :
+    4 ≤ (F.coloursAt (ringPt p ψ)).ncard := by
+  have hπ := Real.pi_pos
+  have hdom : ringPt p ψ ∈ F.dom := hp (by simp [mem_closedBall, ringPt, dist_eq_norm])
+  have hpd : p ∈ F.dom := hp (by simp)
+  obtain ⟨-, hcompl⟩ := germS_absent hF hp h4 hk hy
+  -- the inward and outward colours
+  obtain ⟨cin, hcin, hcone_in, hin⟩ := germS_inward hF hp h4 hk hy (hq .cw).2 (hq .ccw).1 (ψ + π)
+    ⟨by linarith, by linarith⟩
+  obtain ⟨cout, hcout, hcone_out, hout⟩ := germS_outward hF hp h4 hk hy (hq .cw).1 (hq .ccw).2 ψ
+    ⟨by linarith, by linarith⟩
+  have hne : cin ≠ cout := by
+    intro h
+    subst h
+    obtain ⟨A, hA, hpA⟩ := (F.mem_coloursAt_iff_exists_tileOf hpd).mp hcin
+    have h1 := hin A hA hpA
+    have h2 := hout A hA hpA
+    have hsub : A ⊆ sphere (ringPt p ψ) 1 := fun z hz => by
+      rw [mem_sphere_iff_norm, ← dist_eq_norm]
+      exact le_antisymm (mem_closedBall.mp (h1 hz)) (not_lt.mp fun hlt => Set.disjoint_left.mp h2 hz hlt)
+    obtain ⟨z, hz⟩ := hA.1.nonempty
+    have : A ⊆ interior (sphere (ringPt p ψ) 1) := interior_maximal hsub hA.1.isOpen
+    rw [interior_sphere'] at this
+    exact this hz
+  -- the two colours of the change point
+  have hXy : X ∈ F.coloursAt (ringPt p ψ) := by
+    obtain ⟨δ, hδ, hg⟩ := hy.2.2.1
+    exact closure_mono (hg.trans (fun z hz => hz)) (ringPt_mem_closure_germ p ψ .ccw hδ)
+  have hX'y : X' ∈ F.coloursAt (ringPt p ψ) := by
+    obtain ⟨δ, hδ, hg⟩ := hy.2.2.2
+    exact closure_mono (hg.trans (fun z hz => hz)) (ringPt_mem_closure_germ p ψ .cw hδ)
+  have hcin_y : cin ∈ F.coloursAt (ringPt p ψ) := mem_closure_of_mem_coneAt hcone_in
+  have hcout_y : cout ∈ F.coloursAt (ringPt p ψ) :=
+    closure_mono Set.sdiff_subset (mem_closure_of_mem_coneAt hcone_out)
+  have hXp : X ∉ F.coloursAt p := by
+    have : X ∈ (F.coloursAt p)ᶜ := by rw [hcompl]; simp
+    exact this
+  have hX'p : X' ∉ F.coloursAt p := by
+    have : X' ∈ (F.coloursAt p)ᶜ := by rw [hcompl]; simp
+    exact this
+  have hsub : ({X, X', cin, cout} : Set (Fin k)) ⊆ F.coloursAt (ringPt p ψ) := by
+    rintro _ (rfl | rfl | rfl | rfl) <;> assumption
+  have hcard : ({X, X', cin, cout} : Set (Fin k)).ncard = 4 := by
+    rw [Set.ncard_insert_of_notMem, Set.ncard_insert_of_notMem, Set.ncard_pair hne]
+    · simp only [mem_insert_iff, mem_singleton_iff, not_or]
+      exact ⟨fun h => hX'p (h ▸ hcin), fun h => hX'p (h ▸ hcout)⟩
+    · simp only [mem_insert_iff, mem_singleton_iff, not_or]
+      refine ⟨hy.2.1, fun h => hXp (h ▸ hcin), fun h => hXp (h ▸ hcout)⟩
+  calc 4 = ({X, X', cin, cout} : Set (Fin k)).ncard := hcard.symm
+    _ ≤ _ := Set.ncard_le_ncard hsub (Set.toFinite _)
+
+/-! ## FS116-RING-Q-PRIME-S -/
+
+/-- **FS116-RING-Q-PRIME-S** (carrying FS116-RING-Q-PRIME; at every `k` with at most two colours absent): a change point of
+the ring of a vertex of at least four colours whose points at `±60°` lie on no closed (Q) arc is a vertex of at least four
+colours. -/
+theorem ringQPrimeS (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
+    (hk : k ≤ (F.coloursAt p).ncard + 2) {ψ : ℝ} {X X' : Fin k} (hy : F.IsChangePoint p ψ X X')
+    (hu : ¬ F.OnQArc p (ringPt p (ψ + π / 3))) (hv : ¬ F.OnQArc p (ringPt p (ψ - π / 3))) :
+    4 ≤ (F.coloursAt (ringPt p ψ)).ncard :=
+  germS_four hF hp h4 hk hy fun _ => ⟨fun hg => hu (onQArc_of_germOnQ hg), fun hg => hv (onQArc_of_germOnQ hg)⟩
 
 /-- **The radial lemma, inner side** (child of FS116-V5-U1): if the radial segment `z + t e θ`, `t ∈ (1 − η₀, 1)`, lies in
 the closure of the class of `c`, the class approaches `z` only along directions `β` with `cos(β − θ) ≥ 0`. -/
