@@ -1104,6 +1104,27 @@ curves, still not isolated). So for `d < 3` every unit pair has unit pairs `(x�
 **Re-pricing** (this session, about 130k tokens of work after the readback): four leaves and a statement repair; the shared vertex children (the chart, the vote,
 the arc along a germ, the crossing at a vertex) made `fail_colours`, `anti` and `pair_ii` cost about 20k each once `fail_leavingCentre` had paid for them.
 
+## Stage 33 — SAVED (FS131-I4l): readback, the as-given build
+
+*FS131-I4l (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4l-wave4.md` on `main`) continues this record from `d391f480`. Its
+first job is inventory item 267's merge of `fs131-w4c` (at `f975677b`) into this branch; then `n3_end`, `UnitArc`'s five and `pair_i`. `Contact.lean` is
+not edited here except by that merge.*
+
+**The brief's quotations against their sources** (standing rule 3). Five blocks: (1) "**What is left (7 in this job's files: UnitArc `bend_toward`,
+`bend_away`, `flankQ_upper`, `flankQ_lower`, `nb4p`; BaseSteps `pair_i`, `n3_end`).**" — this record, Stage 32 (its heading as the brief gives it, verbatim):
+**matches exactly**. (2) "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the
+engines in the" — `plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. (3) item 267 — `plans/FS131-close-inventory.md` on `main`
+(line 1940): **matches as a truncation**. (4) item 258 — same file (line 1845): **matches as a truncation**. (5) item 266 — same file (line 1927): **matches as a
+truncation**. Items 257 and 264 read in full; 264's critical-point argument is the one Stage 32 records. No mismatch.
+
+**The merge's scope, checked before merging** (`git diff --name-only 68f34f18` on each side; `68f34f18` is the merge base): the two sides share exactly
+`ARCHITECTURE.md` and `scripts/Axioms.lean`, as item 267 says; `fs131-w4c` adds `Contact.lean`, its record `plans/FS131-IC-implementation.md`, its reports,
+`tools/fs131_ic*_addrecords.py` and `data/fs131/ic/`.
+
+**The worktree as given** (`d391f480`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`), admitted after
+one wait: "build: OK — all 1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T223506Z-2998291.log`;
+driver log `data/fs131/i4/build-i4l-readback.log`). 17 `declaration uses sorry` warnings — Contact 10, UnitArc 5, BaseSteps 2 — and no other warning.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
