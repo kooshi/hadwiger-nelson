@@ -12,6 +12,10 @@ with its § Amendment, 2026-10-03 (commit `520b2a0c`, item (d)). Plan: `plans/FS
 - **FS129-SR3-E2ONE** — a pinwheel with E2 at exactly one blade and no E1 is excluded at radius `1 + ε` as if outside E2: the three available ALTs
   force the fourth pocket pair to alternate; so FS114-Y6-E2RED's survivor S6 is empty and FS114-Y5-PINALL's E2 exception narrows to E2 at two or more
   blades — derived from FS114-Y5-PINALL, FS114-Y6-E2RED — § 1.2.
+- **FS129-SR3-EMPTY-NS** — FS116-Y4-EMPTY with "simple" dropped: no non-Siamese valid six-coloured fragment about a vertex of at least four
+  colours has a Γ-free ring (FS116-V6's route reads no simplicity once V6-COUNT's last step is read on sectors) — hand — § 2.2.
+- **FS129-SR3-QFREE-NS** — FS129-OR1-QFREE with "simple" dropped (no non-Siamese fragment of that kind has a (Q)-free ring); FS116-S1-QF is its case
+  with no "simple at p" step — derived from FS129-SR3-EMPTY-NS, FS129-OR1-QFREE-CLASS — § 2.2.
 
 ## Stage 1 — SAVED: readback, registered expectations, item (a)
 
@@ -145,3 +149,98 @@ survivor S6" and the wrap's E2RED site.
   HALF re-derives it); both side colours are carried at `p`, which has four colours, so **that arc is a (Q) arc**. Every Reuleaux `(2, 1, 1, 0)` in HALF's
   class therefore has a (Q) ring, FS114-N7-3T's (Q)-free exclusion never reached it, and FS114-K1's residue "the Reuleaux `(2, 1, 1, 0)` on rings with (Q)
   arcs" is the whole HALF class — a line for FS-124's case 6, not an entry (it restates HALF and the definition of (Q)).
+
+## Stage 2 — SAVED: item (d) — what "simple" FS129-OR1-QFREE's chain reads
+
+**Read:** `plans/FS129-OR1-audit.md` § J1 (FS129-OR1-WHOLE, -BENDFRAG, -QFREE-CLASS, -QFREE, their arguments); `plans/FS129-SR1-audit.md` § 3.3
+(FS129-SR1-BENDANY, -BENDLE3); `plans/FS129-SR2-audit.md` FS129-SR2-QFCASE and § 3.2.2; `plans/FS116-derivation.md` FS116-Y4-FLANK, -Y4-EMPTY, -V6-HUBS,
+-V6-HUG, -V6-COUNT, -V6-ANTI, -V6-ADJ, -V4-DICHOTOMY, -V5-NE1, -RING-GERM, and the statements and `uses only:` lines of -Y3-SIX, -Y3-TIPS, -N2-STAR;
+`plans/FS116-V6-verification.md` §§ 1.2, 2.2, 2.3 in full; `plans/FS116-Y4-construction.md` § 3.2 in full; `data/fs116/claims.md` § 0's **Simple** and the
+notation paragraph (l. 183: "**Simple**: § 0's; a tile's cone at a vertex is one closed interval of directions").
+
+### 2.1 Step by step
+
+"Simple" (global, `data/fs116/claims.md` § 0) is used, if at all, in one of two local forms: **at `p`** (one sector per tile of `p`) or **at a ring point**
+(one cone per tile at a change point). For each step of the chain:
+
+| step | where it reads "simple" | how read |
+|---|---|---|
+| FS129-OR1-WHOLE | nowhere in its validity, non-Siamese or no-witness clauses; its clause "simple if `F` is" only *keeps* the property (closures unchanged) | the argument, steps 1–3 |
+| FS129-OR1-BENDFRAG / FS129-SR1-BENDANY | nowhere in validity (N2-TOWARD, N2-AWAY read on a fragment: tiles near `α`, `P`, `R₂(ᾱ)`), nor in keeping non-Siamese (V4-DICHOTOMY); the clause "simple if `F` is" only keeps it (the crescent). Every tile of `p` and its cone at `p` are unchanged: WHOLE keeps the tiles at `p` with their closures, and each bend changes a tile only inside a thin lens along a ring arc, near radius 1 (BENDANY's statement says so) | the arguments; BENDANY's locality clause |
+| FS129-OR1-QFREE-CLASS | nowhere: it is stated for all four classes, non-Siamese-only among them | statement and argument |
+| FS116-V4-DICHOTOMY, FS116-V5-NE1 (WHOLE's inputs) | nowhere | `uses only:` lines |
+| FS116-Y4-EMPTY, **Y4's own route** | **at `p`** in FS116-Y3-SIX ("non-Siamese and simple (four tiles)") and FS116-Y3-TIPS ("two tiles adjacent at `p` share a non-degenerate boundary curve from `p`"), by their `uses only:` lines; **at the double-tipped hub `y_k`** in EMPTY's own step "a cone (an interval) holding `ψ_k + 90°` and `ψ_k + 210°` contains the tip's cone … or the outer cone" (`plans/FS116-Y4-construction.md` § 3.2) — the identification of the flank tile `a` with the ring tile `R′`. RING-GERM, FLANK and N2-STAR read none | § 3.2 in full; SIX's and TIPS's arguments not opened |
+| FS116-Y4-EMPTY, **FS116-V6's route** | V6's own `uses only:` says "simple … — V6-COUNT's last step only", at `p`. Re-read here step by step: V6-RING, -WIN, -GERM, -TIP, -HUBS, -ANTI read none; **V6-HUG reads none** — its "sector at `y_0`" of the only tip `T` ends at `210°` whatever `T`'s other sectors (all of `T`'s directions lie in `[30°, 210°]` since `T ⊂ B̄(y_1)`; no other tile has a sector, even of zero angle, inside `(150°, 210°)`, or it would be a second tip by V6-TIP's argument), and the tile `R⁻` after it is identified **by colour through V6-GERM**, not by a cone interval; **V6-COUNT** reads none up to its last step | `plans/FS116-V6-verification.md` § 2.2 in full |
+| **V6-COUNT's last step** | V6 reads it as "one sector per tile: simple", to form a 4-cycle of shared edges at `p`. **It needs no simplicity**: the four tiles of `p` split into the two tippers of `y_k` and the two of `y_{k+3}` (disjoint, since `B̄(y_k) ∩ B̄(y_{k+3}) = {p}`); every tile of `p` owns at least one sector at `p` (local finiteness: a small disc about `p` minus the edges through `p` is finitely many curvilinear sectors, each inside one tile); so in the cyclic order of sectors some sector of one group is followed by a sector of the other, and the two tiles share the edge between them — against V6-ANTI | control `fs129-sr3-simple` |
+
+So **outcome (i), and more**: on V6's route the whole chain reads "simple" nowhere — not even at `p`. On Y4's own route it reads it at `p` and at a hub. The
+weakening the amendment asks for (QFREE with "simple at `p`") holds, and so does the stronger one with "simple" dropped; both are filed as one entry each,
+the stronger.
+
+### 2.2 The entries
+
+derivation: FS129-SR3-EMPTY-NS
+  statement: no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying
+    no arc of Γ
+  uses only: FS116-V6's route to FS116-Y4-EMPTY (`plans/FS116-V6-verification.md` § 2.2) — V6-DIAM, V6-E1, V6-DICH, V6-RING, V6-WIN, V6-GERM, V6-TIP,
+    V6-HUBS, V6-HUG (its colour step through V6-GERM), V6-ANTI and V6-COUNT's count — none of which reads simplicity (§ 2.1); V6-COUNT's last step read on
+    sectors: every tile of p owns a sector at p, and two cyclically consecutive sectors of the two tipper groups share an edge, against V6-ANTI
+  not claimed: anything in the Siamese class (V6-RING's one tile per colour at p, V6-TIP's tip and V6-HUG's uniqueness of the tip and of R⁻, R⁺ read
+    non-Siamese); anything at k ≥ 7 (V6-RING and V6-TIP spend six); that FS116-Y4's own route carries the non-simple class (it reads one cone per tile at
+    a double-tipped hub)
+  converse: one-way — a non-existence
+  argument: § 2.1 Step by step
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none can exist (a non-existence); with the ring condition dropped the class is inhabited — FS114-Y2-BOWTIE, non-Siamese, about a degree-4
+    vertex of four colours, its ring carrying two (Q) arcs; the count and the sector step are control fs129-sr3-simple
+  prior art: partly: FS116-Y4-EMPTY (held, two routes, the simple class); FS116-V6 left the non-simple class undecided ("whether the conclusion survives
+    without them I did not decide", `plans/FS116-V6-verification.md` § 2.3 item 4); no outside search — owed
+  handoff: de Bruijn — in place of FS116-Y4-EMPTY, on V6's route: V6-HUG's own colour step (V6-GERM, the Γ-free ring's germs all off Γ), not
+    FS129-MR1-DOUBLETIP's cone step, and V6-COUNT's last step on sectors as here
+
+control: fs129-sr3-simple
+  of: FS129-SR3-EMPTY-NS — V6-COUNT's count (three antipodal two-path patterns, disjoint tipper groups) and its last step on sectors, any number per tile
+  run: python3 ../tools/fs129_sr3_simple.py
+  expect: simple: count ok; sectors ok
+  fault: python3 ../tools/fs129_sr3_simple.py --fault-sector
+
+control: fs129-sr3-simple-hug
+  of: FS129-SR3-EMPTY-NS — the count reads V6-HUG: without it single-edge paths survive
+  run: python3 ../tools/fs129_sr3_simple.py
+  expect: simple: count ok; sectors ok
+  fault: python3 ../tools/fs129_sr3_simple.py --fault-hug
+
+derivation: FS129-SR3-QFREE-NS
+  statement: no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying
+    no (Q) arc
+  uses only: FS129-SR3-EMPTY-NS (for every r > 1); FS129-OR1-QFREE-CLASS at the class of non-Siamese fragments, through FS129-OR1-BENDFRAG (or
+    FS129-SR1-BENDANY), whose fragment keeps non-Siamese, p's colours and its tiles at p, and whose validity reads no simplicity (§ 2.1)
+  not claimed: anything in the Siamese class (FS-123's question 3); anything at k ≥ 7; anything for rings that carry a (Q) arc (FS-124); that a vertex
+    with a (Q) ring dies at any radius
+  converse: one-way — a non-existence
+  argument: FS129-OR1-audit.md § Argument for FS129-OR1-QFREE-CLASS
+  verdict: derived
+  grade: derived from: FS129-SR3-EMPTY-NS, FS129-OR1-QFREE-CLASS
+  minds: 1
+  model: FS114-Y2-BOWTIE, non-Siamese, on B̄(p, 3√3/5) about a degree-4 vertex of four colours — its ring carries two (Q) arcs, so the class is inhabited
+    and the statement's alternative holds there
+  prior art: owed — in-house
+  handoff: de Bruijn — in place of FS129-OR1-QFREE (it drops "simple"), over FS129-SR3-EMPTY-NS and FS129-SR1-BENDANY; FS116-S1-QF is then its case
+    with no "simple at p" step
+
+### 2.3 What it does to the records (drafted for FS129-Z2; nothing here edits them)
+
+- **FS129-SR2-QFCASE stands**, and needs less than its argument says: S1-QF's class (non-Siamese, not assumed simple) lies inside FS129-SR3-QFREE-NS's,
+  so the step "the fragment is simple at `p`" (`plans/FS129-SR2-audit.md` § 3.2.2) is idle; its `uses only:` should read FS129-SR3-QFREE-NS in place of
+  FS129-OR1-QFREE. The record job's defect (the amendment) is real as a gloss — FS-116's "simple" is global — and harmless to the conclusion.
+- **Item 117's correction ("S1-QF has no non-simple remainder") stands.** SR2's line for FS129-L1, "formalize QFREE in place of S1-QF", becomes
+  "formalize FS129-SR3-QFREE-NS in place of FS116-S1-QF and FS129-OR1-QFREE".
+- **The non-simple class of FS-123 and FS-124's case 7 shrinks**: for (Q)-free rings it is closed in the non-Siamese class; what stays open there is the
+  Siamese class. FS129-OR1-QFREE's *not claimed* "the Siamese or non-simple classes" and FS116-C114-LOCAL-F's Γ-free line ("the non-Siamese simple class")
+  narrow accordingly.
+- **A caution for the backlog, against SR1's list item 2** (`plans/FS129-SR1-audit.md` § 6.2: "FS129-MR1-DOUBLETIP in place of FS116-V6-HUG (and of
+  FS116-Y4-EMPTY's double-tip step on route 2)"): DOUBLETIP identifies its flank tile by a cone interval at `y` and `y′` (its step 3: "`R`'s cone — one
+  interval (simple)"), so an EMPTY formalized through DOUBLETIP needs simplicity at the hubs and does not give FS129-SR3-EMPTY-NS. V6-HUG's own step (by
+  colour, through V6-GERM) does. Formalize V6-HUG's argument for the Γ-free ring, and DOUBLETIP for the wider ring classes it serves.
