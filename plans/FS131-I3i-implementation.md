@@ -160,8 +160,10 @@ From the gate above (FS131-I3i, 2026-10-04; if another branch lands first, its r
 3. **`scripts/vacuity-baseline.txt`'s header**, replacing "#   declarations=8385  refutations-skipped=57  sites=459" and "#   vacuous=0 stale=0
    declared=3 witnessed=21 generic=433 unknown=2" with "#   declarations=8500  refutations-skipped=57  sites=460" and "#   vacuous=0 stale=0 declared=3
    witnessed=21 generic=434 unknown=2". The baseline's two entries are unchanged.
-4. **`CLAUDE.md` § Frontier, "What the kernel holds, beyond the interval"**, in the FS-131 wave 3 clause, after "and FS116-Y2-SIXFRAG's six-colour fragment,
-   valid and non-Siamese," (if that clause is filed as I3h drafted it): "the sector structure at a point of an arc map (`localSectors`: finitely many branch
-   germs, the interior points near the point the sectors between consecutive germs, each with the cone of its two germs), one sector per Jordan tile and the
-   separated interval (FS131-E2-SECT, -ONESECT, -SEP), and FS116-V5-U1's four-colour clause in the simple class with cusps (FS131-E2-U1-CUSP),". Nothing
-   for `LEDGER.md` (rows are regraded at the milestone's filing); FS131-E2-SECT, -ONESECT, -SEP and -U1-CUSP move from [hand]/[derived] to [kernel] there.
+4. **`CLAUDE.md` § Frontier, "What the kernel holds, beyond the interval"** — I3h's draft 4 (its record, "Drafts for the front page") is not filed yet;
+   it inserts the wave-3 clause after "**FS-101's first slot** — `χ(ℚ(√47)²) ≤ 5`, and the main clause through five over named hypotheses (row 127);".
+   In that clause, after its words "and FS116-Y2-SIXFRAG's six-colour fragment, valid and non-Siamese,", insert: "the sector structure at a point of an
+   arc map (`localSectors`: finitely many branch germs, the interior points near the point the sectors between consecutive germs, each with the cone of
+   its two germs), one sector per Jordan tile and the separated interval (FS131-E2-SECT, -ONESECT, -SEP), and FS116-V5-U1's four-colour clause in the
+   simple class with cusps (FS131-E2-U1-CUSP),". Nothing for `LEDGER.md` (rows are regraded at the milestone's filing); there FS131-E2-SECT, -ONESECT,
+   -SEP and -U1-CUSP move from [hand]/[derived] to [kernel].
