@@ -934,3 +934,14 @@ reason by the close.*
      lemma (and `four_of_bothKind_simple` without `hnc`) on `fs131-w3b` from the landed `main`. Ordered ahead of FS131-T3 and wave 4's Opus implementer: wave 3 is
      the nearest landing, and T3's gate fix concerns imported axioms, which wave 3 has none of. Launched in the whole slot I3g and I4b freed: 0.5 (IW) + 0.5
      (I2g) + 1 (LEB) + 1 (I3h) = 3.
+148. **FS131-I2g handed back at stage 12, harness ≈ 457k** (report on its branch; `fs131-w2` at `59976a11`, checked): 26 `sorry` lines closed (117 → 91).
+     **FS129-SA1-FALC-RED sorry-free** — `falconer_reduction` and `le_chiM_of_falconerFan`, on the standard three plus the declared import
+     `falconer_lemma2_nonempty` (informally: a Falconer fan with irrational angle at `k` colours makes every cover of the plane by `k` measurable sets carry a
+     unit pair in one set, so `χ_m(ℝ²) ≥ k + 1`); `Plane/Cover` and `Plane/FalconerReduction` sorry-free; eight Dyadic children (incl. `comap_conductor_sup_eq_top`
+     by a 2×2 trace system, no `Algebra.discr`) and seven Slack leaves; item 134 applied in its five declarations. Keryx's receipt: build log
+     `build/gate/build/20261004T124458Z-3603574.log` (w2) "Build completed successfully (5619 jobs)", 91 distinct `sorry` warnings, 91 `sorry` lines by count;
+     `data/fs131/i2/i2g-axioms.txt` prints `falconer_reduction` with the declared import beside the standard three. **This is the first record that QA1's gate
+     defect (item 144 (b)) would misfile** — `le_chiM_of_falconerFan` sits in the CLEAN block and the CLEAN check does not reject the import — so FS131-T3 must
+     land before wave 2's gate. Left: Slack 39, CoverExamples 44, Dyadic 4 (`dyadicConclusion_of_minpoly`, the Kummer–Dedekind engine, the hard one), YesLimit 4
+     (waits on `chiM0_le_iff_muZero_eq_one`). Recipe: `QuasiMeasurePreserving.ae` times out unless `(p := …)` is explicit. Its re-pricing: about a third of
+     K2c's table at the Sonnet rate. The half slot it freed waits for a whole one (implementers are Opus).
