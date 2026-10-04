@@ -39,4 +39,34 @@ if it does, the check is flagging theorems for their own content. -/
 theorem planted_refutation (C : (unitDistance ℂ).Coloring (Fin 4)) : False :=
   (isEmpty_coloring_plane_four).false C
 
+/-- CONTROL 8 — the FS131-T1 carrier: a structure whose emptiness is a theorem
+(`IsEmpty (AeColouring 1)`). Before `AeColouring` was tracked this raised no row at all. `VACUOUS`. -/
+theorem planted_vacuous_ae (_c : Plane.AeColouring 1) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 9 — the same family at a variable `k`: parametric, nothing to witness. `GENERIC`. -/
+theorem planted_generic_ae {k : ℕ} (_c : Plane.AeColouring k) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 10 — the same family at an instantiation nothing refutes. `UNKNOWN`, never `VACUOUS`: the
+load-bearing half of the pair. (If the library ever proves `AeColouring 3` empty, retarget this at the
+least `k` still unresolved.) -/
+theorem planted_unknown_ae (_c : Plane.AeColouring 3) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 11 — an `ArcMap` predicate the library REFUTES at a concrete map: one colour on the whole
+plane has two interior points at distance 1. The refutation is the evidence. -/
+theorem planted_not_valid :
+    ¬ (Plane.ArcMap.const (k := 1) Set.univ isOpen_univ 0).Valid := fun h => by
+  have h1 := h 0 (by simp) 1 (by simp) (by simp)
+  exact h1 rfl
+
+/-- CONTROL 12 — and the statement it must kill. `VACUOUS`. -/
+theorem planted_vacuous_valid
+    (_h : (Plane.ArcMap.const (k := 1) Set.univ isOpen_univ 0).Valid) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 13 — `Valid` at a variable map: `GENERIC`, the correct reading of every "let `F` be a valid map". -/
+theorem planted_generic_valid {k : ℕ} (F : Plane.ArcMap k) (_h : F.Valid) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 14 — a declaration the AUTHOR wrote that concludes a tracked structure must still be audited:
+`isGeneratedDecl` skips the machine-written API of a structure and nothing else. `UNKNOWN`. -/
+def planted_ae_def (c : Plane.AeColouring 3) : Plane.AeColouring 3 := c
+
 end HadwigerNelson

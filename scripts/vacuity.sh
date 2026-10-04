@@ -60,7 +60,7 @@ kept() { echo "    full output: ${GATE_LOG#"${REPO}"/}"; }
 # 2026-09-09 this gate's controls could not be run at all — `scripts/Vacuity.lean`'s header says
 # how — so they are now a flag rather than a memory.
 #
-# Seven planted declarations, in `scripts/vacuity-controls.lean`, spliced into a COPY of the audit
+# Fourteen planted declarations, in `scripts/vacuity-controls.lean`, spliced into a COPY of the audit
 # (never the file itself, which must stay editable while a run is in flight).
 # ---------------------------------------------------------------------------------------------
 if [[ "${1:-}" == "--self-test" ]]; then
@@ -93,6 +93,16 @@ if [[ "${1:-}" == "--self-test" ]]; then
       fails=$((fails+1))
     fi
   }
+  # `GENERIC` is never in the FLAGGED list (nobody can discharge it), so it is read from the SITE rows.
+  expect_site() {  # expect_site <verdict> <declaration> <what it proves>
+    if grep -qE "^SITE $1 HadwigerNelson\.$2 ::" <<< "${OUT}"; then
+      echo "    ok    SITE $1 $2 — $3"
+    else
+      echo "    FAIL  expected 'SITE $1 $2' and it is absent — $3"
+      grep -E "^(SITE )?[A-Z]+ HadwigerNelson\.$2( |\$)" <<< "${OUT}" | sed 's/^/            got: /'
+      fails=$((fails+1))
+    fi
+  }
   # Any verdict row counts, the per-site `SITE` rows included: a planted refutation that produced even
   # a `GENERIC` row has been audited against the emptiness it proves.
   silent() {  # silent <declaration> <what it proves>
@@ -105,11 +115,18 @@ if [[ "${1:-}" == "--self-test" ]]; then
     fi
   }
 
-  echo "==> vacuity self-test: seven planted defects, each watched to fire"
+  echo "==> vacuity self-test: fourteen planted defects, each watched to fire"
   expect VACUOUS planted_vacuous_coloring "the core9_plane shape: a colouring type the library proves empty"
   expect VACUOUS planted_vacuous_prop     "a tracked Prop hypothesis the library refutes"
   expect VACUOUS planted_vacuous_forces   "a Forces hypothesis refuted by a theorem in the same run"
   expect UNKNOWN planted_unknown_prop     "THE LOAD-BEARING ONE: same family, an instantiation nothing refutes"
+  expect VACUOUS planted_vacuous_ae       "AeColouring 1: a structure whose emptiness is a theorem (FS131-T1's defect)"
+  expect_site GENERIC planted_generic_ae     "AeColouring k at a variable k: parametric"
+  expect UNKNOWN planted_unknown_ae       "AeColouring at a k nothing refutes: the load-bearing half for the new family"
+  expect VACUOUS planted_vacuous_valid    "ArcMap.Valid at a concrete map the library refutes"
+  expect_site GENERIC planted_generic_valid   "ArcMap.Valid at a variable map: parametric"
+  expect UNKNOWN planted_ae_def           "a user-written def concluding a tracked structure is still audited (the generated-API filter is narrow)"
+  silent planted_not_valid                "the ArcMap refutation is never audited against the emptiness it proves"
   expect STALE   planted_stale            "a VACUITY DECLARED: annotation whose claim is false"
   silent planted_refutation               "a refutation's binders are meant to be empty"
   silent planted_not_forces               "the evidence itself is never audited against the emptiness it proves"
@@ -120,7 +137,7 @@ if [[ "${1:-}" == "--self-test" ]]; then
     kept
     exit 1
   fi
-  echo "==> vacuity self-test: OK — every control fired, and the two silent ones stayed silent."
+  echo "==> vacuity self-test: OK — every control fired, and the silent ones stayed silent."
   kept
   exit 0
 fi
