@@ -362,6 +362,37 @@ theorem _root_.HadwigerNelson.Plane.CollarAt.mono {S T : Set ℂ} {u : ℂ} {s :
 theorem _root_.HadwigerNelson.Plane.shadow_mono {S T : Set ℂ} (hST : S ⊆ T) : shadow S ⊆ shadow T :=
   fun _ ⟨y, hy, hd⟩ => ⟨y, hST hy, hd⟩
 
+/-- **An open set meets the interior points** (a map of the plane): `Γ` has empty interior. -/
+theorem exists_mem_interiorPts_of_isOpen (hP : F.IsPlaneMap) {U : Set ℂ} (hU : IsOpen U) (hne : U.Nonempty) :
+    (U ∩ F.interiorPts).Nonempty := by
+  obtain ⟨z, hz⟩ := hne
+  obtain ⟨ε, hε, hεU⟩ := Metric.isOpen_iff.mp hU z hz
+  obtain ⟨y, hy, hd⟩ := Metric.mem_closure_iff.mp (F.dense_interiorPts (by rw [hP]; trivial) : z ∈ closure F.interiorPts) ε hε
+  exact ⟨y, hεU (by rw [Metric.mem_ball, dist_comm]; exact hd), hy⟩
+
+/-- **Both sides of a unit circle are near each of its points**: every point of `ω(v)` is a limit of points inside and of points outside. -/
+theorem exists_near_sphere_sides (v z : ℂ) (hz : dist z v = 1) {ε : ℝ} (hε : 0 < ε) :
+    (∃ z', dist z' z < ε ∧ 1 < dist z' v) ∧ ∃ z', dist z' z < ε ∧ dist z' v < 1 := by
+  set t := min (1 / 2) (ε / 2) with ht
+  have ht0 : 0 < t := lt_min (by norm_num) (by positivity)
+  have ht1 : t ≤ 1 / 2 := min_le_left _ _
+  have ht2 : t ≤ ε / 2 := min_le_right _ _
+  have hz1 : ‖z - v‖ = 1 := by rw [← dist_eq_norm]; exact hz
+  have hd : ∀ s : ℝ, dist (v + (1 + s) * (z - v)) z = |s| ∧ dist (v + (1 + (s : ℂ)) * (z - v)) v = |1 + s| := by
+    intro s
+    constructor
+    · rw [dist_eq_norm, show v + (1 + (s : ℂ)) * (z - v) - z = (s : ℂ) * (z - v) by ring, norm_mul, hz1, mul_one,
+        Complex.norm_real, Real.norm_eq_abs]
+    · rw [dist_eq_norm, add_sub_cancel_left, norm_mul, hz1, mul_one,
+        show (1 : ℂ) + (s : ℂ) = ((1 + s : ℝ) : ℂ) by push_cast; ring, Complex.norm_real, Real.norm_eq_abs]
+  constructor
+  · refine ⟨v + (1 + (t : ℂ)) * (z - v), ?_, ?_⟩
+    · rw [(hd t).1, abs_of_pos ht0]; linarith
+    · rw [(hd t).2, abs_of_pos (by linarith)]; linarith
+  · refine ⟨v + (1 + ((-t : ℝ) : ℂ)) * (z - v), ?_, ?_⟩
+    · rw [(hd (-t)).1, abs_neg, abs_of_pos ht0]; linarith
+    · rw [(hd (-t)).2, abs_of_pos (by linarith)]; linarith
+
 /-- **E1-SEE, robust form** (the kill at a normal, § 7.3 (b)): if both an inner and an outer collar about `ψ` lie in the shadow of `j`'s class,
 the point `v + e ψ` does not carry `j` — `j`'s class misses both collars (validity), hence a disc about `v + e ψ` (`exists_mem_collar_of_dist_lt`;
 a point of the class on `ω(v)` has a disc in the class, meeting the inner collar). -/
@@ -487,7 +518,107 @@ theorem exists_side_colours_of_not_crossesAt (hP : F.IsPlaneMap) {v : ℂ} {θ :
     (hnc : ∀ X, ¬ F.CrossesAt v X θ) :
     ∃ A B : Fin k, A ≠ B ∧ F.coloursAt (v + e θ) = {A, B} ∧ ∃ r > 0, ∀ z ∈ ball (v + e θ) r, z ∈ F.interiorPts →
       (dist z v < 1 → F.col z = A) ∧ (1 < dist z v → F.col z = B) ∧ dist z v ≠ 1 := by
-  sorry
+  set Y := v + e θ with hY
+  have hYv : dist Y v = 1 := by rw [hY, dist_eq_norm, add_sub_cancel_left, norm_e]
+  -- an interior point near `Y` on a given open side exists
+  have hside : ∀ δ > 0, (∃ z, z ∈ ball Y δ ∩ ball v 1 ∩ F.interiorPts) ∧
+      ∃ z, z ∈ ball Y δ ∩ (closedBall v 1)ᶜ ∩ F.interiorPts := by
+    intro δ hδ
+    obtain ⟨⟨zp, hzp, hzpv⟩, ⟨zm, hzm, hzmv⟩⟩ := exists_near_sphere_sides v Y hYv hδ
+    constructor
+    · obtain ⟨y, hy⟩ := exists_mem_interiorPts_of_isOpen hP (isOpen_ball.inter isOpen_ball)
+        ⟨zm, mem_ball.mpr hzm, mem_ball.mpr hzmv⟩
+      exact ⟨y, hy⟩
+    · obtain ⟨y, hy⟩ := exists_mem_interiorPts_of_isOpen hP (isOpen_ball.inter isClosed_closedBall.isOpen_compl)
+        ⟨zp, mem_ball.mpr hzp, by rw [Set.mem_compl_iff, mem_closedBall, not_le]; exact hzpv⟩
+      exact ⟨y, hy⟩
+  -- the colours reaching `Y` from inside and from outside
+  set Cin : Set (Fin k) := {j | Y ∈ closure (F.region j ∩ ball v 1)} with hCin
+  set Cout : Set (Fin k) := {j | Y ∈ closure (F.region j \ closedBall v 1)} with hCout
+  have hCin_ne : Cin.Nonempty := by
+    by_contra hemp
+    rw [Set.not_nonempty_iff_eq_empty] at hemp
+    have hev : ∀ᶠ z in 𝓝 Y, ∀ j : Fin k, z ∉ F.region j ∩ ball v 1 := by
+      rw [Filter.eventually_all]
+      intro j
+      have hj : Y ∉ closure (F.region j ∩ ball v 1) := fun h => by
+        have : j ∈ Cin := h
+        rw [hemp] at this; exact this
+      exact Filter.mem_of_superset (isClosed_closure.isOpen_compl.mem_nhds hj) fun z hz hzS => hz (subset_closure hzS)
+    obtain ⟨δ, hδ, hball⟩ := Metric.eventually_nhds_iff.mp hev
+    obtain ⟨⟨z, hz⟩, -⟩ := hside δ hδ
+    exact hball hz.1.1 (F.col z) ⟨⟨hz.2, rfl⟩, hz.1.2⟩
+  have hCout_ne : Cout.Nonempty := by
+    by_contra hemp
+    rw [Set.not_nonempty_iff_eq_empty] at hemp
+    have hev : ∀ᶠ z in 𝓝 Y, ∀ j : Fin k, z ∉ F.region j \ closedBall v 1 := by
+      rw [Filter.eventually_all]
+      intro j
+      have hj : Y ∉ closure (F.region j \ closedBall v 1) := fun h => by
+        have : j ∈ Cout := h
+        rw [hemp] at this; exact this
+      exact Filter.mem_of_superset (isClosed_closure.isOpen_compl.mem_nhds hj) fun z hz hzS => hz (subset_closure hzS)
+    obtain ⟨δ, hδ, hball⟩ := Metric.eventually_nhds_iff.mp hev
+    obtain ⟨-, ⟨z, hz⟩⟩ := hside δ hδ
+    exact hball hz.1.1 (F.col z) ⟨⟨hz.2, rfl⟩, hz.1.2⟩
+  obtain ⟨A, hA⟩ := hCin_ne
+  obtain ⟨B, hB⟩ := hCout_ne
+  have hdisj : ∀ j, j ∈ Cin → j ∉ Cout := fun j h1 h2 => hnc j ⟨h1, h2⟩
+  have hAB : A ≠ B := fun h => hdisj A hA (h ▸ hB)
+  have hAcol : A ∈ F.coloursAt Y := closure_mono Set.inter_subset_left hA
+  have hBcol : B ∈ F.coloursAt Y := closure_mono Set.sdiff_subset hB
+  have hpair : ({A, B} : Set (Fin k)) ⊆ F.coloursAt Y := by
+    intro j hj
+    rcases hj with rfl | rfl
+    · exact hAcol
+    · exact hBcol
+  have hcols : F.coloursAt Y = {A, B} :=
+    (Set.eq_of_subset_of_ncard_le hpair (by rw [Set.ncard_pair hAB]; exact h2) (Set.toFinite _)).symm
+  have hBin : B ∉ Cin := fun h => hdisj B h hB
+  have hAout : A ∉ Cout := hdisj A hA
+  -- a disc about `Y` carrying only these colours, `B` never inside and `A` never outside
+  have hev : ∀ᶠ z in 𝓝 Y, (∀ j : Fin k, j ∉ ({A, B} : Set (Fin k)) → z ∉ F.region j) ∧
+      z ∉ F.region B ∩ ball v 1 ∧ z ∉ F.region A \ closedBall v 1 := by
+    refine (Filter.eventually_all.mpr fun j => ?_).and ((?_ : ∀ᶠ z in 𝓝 Y, z ∉ F.region B ∩ ball v 1).and
+      (?_ : ∀ᶠ z in 𝓝 Y, z ∉ F.region A \ closedBall v 1)) |>.mono fun z hz => ⟨hz.1, hz.2.1, hz.2.2⟩
+    · by_cases hj : j ∈ ({A, B} : Set (Fin k))
+      · exact Filter.Eventually.of_forall fun z hz => absurd hj hz
+      · have hj' : Y ∉ closure (F.region j) := fun h => hj (by rw [← hcols]; exact h)
+        exact Filter.mem_of_superset (isClosed_closure.isOpen_compl.mem_nhds hj') fun z hz _ hzS => hz (subset_closure hzS)
+    · exact Filter.mem_of_superset (isClosed_closure.isOpen_compl.mem_nhds hBin) fun z hz hzS => hz (subset_closure hzS)
+    · exact Filter.mem_of_superset (isClosed_closure.isOpen_compl.mem_nhds hAout) fun z hz hzS => hz (subset_closure hzS)
+  obtain ⟨r, hr, hb⟩ := Metric.eventually_nhds_iff.mp hev
+  have hcolAB : ∀ z ∈ ball Y r, z ∈ F.interiorPts → F.col z = A ∨ F.col z = B := by
+    intro z hz hzi
+    by_contra hcon
+    push Not at hcon
+    exact (hb (mem_ball.mp hz)).1 (F.col z) (by simp [hcon.1, hcon.2]) ⟨hzi, rfl⟩
+  refine ⟨A, B, hAB, hcols, r, hr, fun z hz hzi => ?_⟩
+  have hE := hb (mem_ball.mp hz)
+  have hnot1 : dist z v ≠ 1 := by
+    intro h1
+    obtain ⟨r', hr', hball'⟩ := Metric.isOpen_iff.mp (F.isOpen_region (F.col z)) z ⟨hzi, rfl⟩
+    set r'' := min r' (r - dist z Y) with hr''
+    have hr''0 : 0 < r'' := lt_min hr' (by have := mem_ball.mp hz; linarith)
+    obtain ⟨⟨zp, hzp, hzpv⟩, ⟨zm, hzm, hzmv⟩⟩ := exists_near_sphere_sides v z h1 hr''0
+    have hzpY : dist zp Y < r := by
+      have := dist_triangle zp z Y; have := min_le_right r' (r - dist z Y); linarith
+    have hzmY : dist zm Y < r := by
+      have := dist_triangle zm z Y; have := min_le_right r' (r - dist z Y); linarith
+    rcases hcolAB z hz hzi with hA' | hB'
+    · have hzpR : zp ∈ F.region (F.col z) := hball' (by rw [mem_ball]; exact lt_of_lt_of_le hzp (min_le_left _ _))
+      rw [hA'] at hzpR
+      exact (hb hzpY).2.2 ⟨hzpR, by rw [mem_closedBall, not_le]; exact hzpv⟩
+    · have hzmR : zm ∈ F.region (F.col z) := hball' (by rw [mem_ball]; exact lt_of_lt_of_le hzm (min_le_left _ _))
+      rw [hB'] at hzmR
+      exact (hb hzmY).2.1 ⟨hzmR, mem_ball.mpr hzmv⟩
+  refine ⟨fun hlt => ?_, fun hgt => ?_, hnot1⟩
+  · rcases hcolAB z hz hzi with h | h
+    · exact h
+    · exact absurd ⟨⟨hzi, h⟩, mem_ball.mpr hlt⟩ hE.2.1
+  · rcases hcolAB z hz hzi with h | h
+    · exact absurd ⟨⟨hzi, h⟩, by rw [mem_closedBall, not_le]; exact hgt⟩ hE.2.2
+    · exact h
 
 /-- **One colour class along a branch-point-free arc** (E1-COVER (b)–(c), on colour classes; the clopen argument of § 7.3 (a)): in a map of the
 plane, if every point of the open arc `(θ₁, θ₂)` of `ω(v)` carries at most two colours and all the colours crossing `ω(v)` along it are one
