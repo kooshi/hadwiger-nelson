@@ -1386,3 +1386,34 @@ reason by the close.*
      hypothesis. Confidence: high on the principle; medium on the residual's size — the fact that would change the shape: if the walk reads S–V's proofs
      throughout, the residual is S–V Cor. 1's whole argument; that is still to be placed inside FS-131 (a wave-5b planner), and the stub then covers nothing.
      F-WALK5, R-CDOUBLE, R-CHAIN and R-MOD accepted as stated (confidence high). Amendment appended to `data/fs131/briefs/FS131-K5-wave5.md`.
+198. **FS131-K5 handed back at stage 6 (partial), harness ≈ 455k** (report `data/fs131/reports/FS131-K5.md` on `fs131-w5`; branch at `3f7b5a14`, checked):
+     **the foundation `Plane/ValidMap/Chain` sorry-free** (`StuckAlong`, `IsChainVertex`, `stuckRun` and three lemmas; `fourSet` = F(M), `repSet` = R(M);
+     `QROnly`, `IsTerminalMap`; `IsModification` with refl/trans; `BaseHyp`, `NoInertNear`; `Row134BaseUA`), a spec example each on the one-colour plane;
+     **the skeleton: 10 of 13 rows stated, 24 `sorry` leaves** (`Terminal` 14: `exists_red`, `exists_terminal`, FLANK-Q unconditional, CV-HD's four, `c_ends`,
+     `c_double`, `stuck_structure_ua`, `y3_end_needs`, `n3_end_chain`, the inhabitant `sevenBrickMap_isTerminalMap`; `Dense` 10: DISC1TS's three, `cor3`,
+     `row134BaseUA` as one leaf, `n3_base`, `localDense`, `dense3`, `cv_exists` with no hypothesis, the control `not_row134BaseUA_seven`), each read back in plan
+     § 3.2. Keryx's receipts: build log `build/gate/build/20261004T181052Z-1316464.log` (w5) "Build completed successfully (5362 jobs)", 0 warnings other than
+     `sorry`; `sorry` lines by count Chain 0, Terminal 14, Dense 10; `Row134BaseUA`'s Lean text read (`∀ F u, Valid → Covers u 2 → IsCubicTrichromatic u →
+     BaseHyp u → NoInertNear u → False`). **F-BASE's residual** (item 197's question): on FS112-N3-BASE's table every piece of `[SokolovVoronov2025]` is read
+     inside a proof, none by statement — **the whole base is ours to formalize** (unconfirmed against FS110-CB, -CD, -CE, -CC and BASE-V; a pure
+     circle-colouring lemma cited without re-proof would be the one by-statement kind). The stub draft (`data/fs131/k5/STUB-row134-base-lean.md` on
+     `fs131-w5`) now covers nothing outside and serves as the brief's input for an in-milestone planner job (40–60 leaves estimated). Slip (K5's): the
+     stage-1 "as given" build already included its new files. Not yet stated: FS112-ROTHEX, FS114-BV-HEX (four clauses), FS114-CVB-THOM; owed: the obligation
+     pass, `#check` of Mathlib names, `row134BaseUA`'s leaves (plan § 5.1 items 0–5). **Correction owed** to `plans/FS131-kernel-plan.md` § 7.1 and § 7.4:
+     `Row134Base` is no longer a named outside hypothesis (item 197; this item), at the milestone's filing.
+199. **Rulings on K5's held items** (four parts each).
+     (a) **`row134BaseUA` gets its own planner job inside FS-131 (FS131-KB)**, after wave 5's successor planner has stated ROTHEX and BV-HEX, which the walk
+     reads. Alternative weighed: give the base's leaves to the successor planner too. Why: K5 estimates 40–60 leaves, and the successor already has three rows,
+     the obligation pass and the handoff — one context would not hold both. Confidence: high. Item 17 (b)'s stub is **declined**: nothing stays outside (item
+     198), so there is no future milestone to stub; K5's draft is KB's input.
+     (b) **`NoInertNear` (exclude only inert arcs not ending at `u`?) is the base planner's call**, since `Row134BaseUA` is an intermediate of ours and the
+     change alters no row's words; KB reports it. Alternative weighed: rule it now. Why: it turns on whether the walk needs `u` fixed, which only the base's
+     planner will read. Confidence: high.
+     (c) **The free slot goes to wave 5's successor planner (FS131-K5b), revising item 194**: `Contact` waits for a slot that frees when a lane ends (wave 2's
+     landing, or a planner's). Alternative weighed: item 194's order (the `Contact` implementer now). Why: a slot frees only when a lane ends, since every
+     implementer's hand-back is followed by a successor in the same slot; wave 5's planning is upstream of its 13 rows and the base, while `Contact` shortens
+     wave 4 by about a session and a half, which gates only the landings. Confidence: medium — the fact that would change it: wave 4's remaining leaves
+     proving slower than six a session, making wave 4 the milestone's longest path.
+200. **Brief FS131-K5b, wave 5's second planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K5b-wave5.md`, derived by script from K5's, gated PASS): K5's
+     § 5.1 items 1–5 — ROTHEX, BV-HEX's four clauses, CVB-THOM stated; the obligation pass with `#check`; the handoff in wave 4's § 14 form. Not item 0 (the
+     base, FS131-KB's). Launched in K5's slot (item 199 (c)): 1 (I2k) + 1 (I4g) + 1 (K5b) = 3.
