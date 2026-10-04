@@ -3162,6 +3162,42 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.shadow_of_tangent_sector_N
 #print axioms HadwigerNelson.Plane.ArcMap.flank_shadow_h
 
+/-! ## FS-131 wave 4, `Contact` (job FS131-IC5) — the fifth implementer's added children and proved leaves -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.flank_shadow_g_chart
+#print axioms HadwigerNelson.Plane.ArcMap.flank_shadow_h_chart
+#print axioms HadwigerNelson.Plane.BranchGerms.exists_mem_angleIcc
+#print axioms HadwigerNelson.Plane.frameX_add_pi
+#print axioms HadwigerNelson.Plane.sub_e_add_pi_add
+#print axioms HadwigerNelson.Plane.add_e_add_pi_add
+#print axioms HadwigerNelson.Plane.curvDown_lt_curvDown
+#print axioms HadwigerNelson.Plane.curvUp_lt_curvUp
+#print axioms HadwigerNelson.Plane.sin_nonpos_of_not_mem_angleIoo
+#print axioms HadwigerNelson.Plane.exists_dist_lt_one_of_coneAt
+#print axioms HadwigerNelson.Plane.BranchGerms.branchPt_mem_sector
+#print axioms HadwigerNelson.Plane.ArcMap.IsSector.mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.IsSector.subset_region
+#print axioms HadwigerNelson.Plane.ArcMap.IsSector.col_mem_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_sector_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.eventually_one_le_sectorsOf
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tile_dir
+#print axioms HadwigerNelson.Plane.ArcMap.false_of_all_outType
+#print axioms HadwigerNelson.Plane.ArcMap.region_far_of_outType
+#print axioms HadwigerNelson.Plane.ArcMap.eventually_col_mem_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.outType_N_of_flankAbove
+#print axioms HadwigerNelson.Plane.ArcMap.outType_S_of_flankBelow
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.neg_one_lt_of_outType_N
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.lt_one_of_outType_S
+#print axioms HadwigerNelson.Plane.ArcMap.IsFlankAbove.congr
+#print axioms HadwigerNelson.Plane.ArcMap.IsFlankBelow.congr
+#print axioms HadwigerNelson.Plane.ArcMap.DoublyShadowed.congr
+#print axioms HadwigerNelson.Plane.ArcMap.false_of_third_point
+#print axioms HadwigerNelson.Plane.ArcMap.flank_ne_of_doublyShadowed
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_pole_N
+#print axioms HadwigerNelson.Plane.ArcMap.hasDegree_of_three_colours
+#print axioms HadwigerNelson.Plane.ArcMap.add_e_ne_sub_e
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_structure_flanks
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
