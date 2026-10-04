@@ -479,4 +479,10 @@ theorem subset_densitySet_of_isOpen_ae_subset {U A : Set ℂ} (hU : IsOpen U) (h
   rw [densityRatio, hAe]
   exact (ENNReal.div_self (measure_closedBall_pos volume x hr.1).ne' measure_closedBall_lt_top.ne).symm
 
+/-- `d = ‖d‖ · e (arg d)`. -/
+theorem eq_norm_mul_e_arg (d : ℂ) : d = (‖d‖ : ℂ) * e (Complex.arg d) := by
+  unfold e
+  exact (Complex.norm_mul_exp_arg_mul_I d).symm
+
+
 end HadwigerNelson.Plane

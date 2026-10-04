@@ -182,11 +182,6 @@ theorem twoCircle_preimage_null (z₀ : ℂ) {r₁ r₂ : ℝ} (h₁ : 0 < r₁)
       Complex.measurableEquivRealProd.symm ⁻¹' (twoCircleMap z₀ r₁ r₂ ⁻¹' N) := rfl
   rw [e1, this, h3]
 
-/-- `d = ‖d‖ · e (arg d)`. -/
-theorem eq_norm_mul_e_arg (d : ℂ) : d = (‖d‖ : ℂ) * e (Complex.arg d) := by
-  unfold e
-  exact (Complex.norm_mul_exp_arg_mul_I d).symm
-
 /-- The doubly-rotated slice: for a measurable null `E`, almost every `θ` has a null set of `φ` with
 `p₀ + e θ d₀ + e φ d₁ ∈ E` (nonzero `d₀, d₁`). -/
 theorem slice_slice_null {E : Set ℂ} (hEm : MeasurableSet E) (hE0 : volume E = 0) (p₀ : ℂ) {d₀ d₁ : ℂ}
