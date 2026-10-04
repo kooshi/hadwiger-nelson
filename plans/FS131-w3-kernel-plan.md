@@ -583,3 +583,60 @@ critical path and goes first. Order for the implementer: `Tiles`' E leaves and e
 `RingGerm` (E leaves, then GERM-R, ECHO, U1, FLANK, then GERM-S, TOUCHW, QFREE4, FIVERING) → `Lens` → `RingBand` → `SixFragment` (independent;
 can run in parallel with anything). The repository's own measured ratio (`CLAUDE.md` § What compute actually helps: kernel phases re-priced
 five to thirty times lower once begun) says these grades are priced high; re-price from the first two leaves.
+
+## Stage 7 — SAVED: the handoff to wave 3's implementer (the form of `plans/FS131-kernel-plan.md` § 6.1)
+
+### 7.1 Where it is, and how the implementer works
+
+**Branch `fs131-w3`, head `c5bf59b2`** (pushed; this section's commit follows it), worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w3`
+(its `.lake/packages` a symlink to the main tree's, its `.lake/build` its own copy — never replace it with a symlink). `main` (`da5303b4`, wave 1
+landed) is merged in (`4b363881`). Wave 3 is **nine modules**: K3's foundation, sorry-free (`Plane/LocalMap`, `Plane/LocalMapExamples`,
+`Plane/CircleColouring`), and this job's six skeleton modules (`Plane/LocalStructure`, `Plane/SixFragment`, `Plane/Tiles`, `Plane/RingGerm`,
+`Plane/Lens`, `Plane/RingBand`) with **96 declarations using `sorry`**. The build is green with only those warnings
+(`build/gate/build/20261004T062815Z-1624137.log` in the worktree). `Proofs.lean`, `ARCHITECTURE.md` § 3.11 (nine rows; `tools/check_architecture.py`
+PASS) and `scripts/Axioms.lean` (45 foundation records clean, 102 skeleton records listed by `tools/fs131_k3b_decls.py`) are already updated, so
+the wave lands by fast-forward once its gate is green.
+
+**The build**: from inside the worktree, `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`;
+never `lake build`. Up to two builds from different worktrees may run at once when the slot admits them (inventory ruling 5); on exit 75 wait ten
+minutes and retry. For iteration, `lake env lean` with `-DautoImplicit=false -DrelaxedAutoImplicit=false` (the lakefile's options are not applied
+otherwise); a new module's dependents can be iterated against scratch oleans (`lean -o <scratch>/Proofs/…/X.olean`, with the worktree's
+`.lake/build/lib/lean/Proofs` mirrored into the scratch by `cp -rs` and the scratch first on `LEAN_PATH`) — never as evidence, and never writing
+`-o` onto a mirrored (symlinked) existing module.
+
+**The plan to work from**: § 6 (the three engines first; the leaf table per module; the order in § 6.3). The read-backs (§ 5.2) say what each
+statement means; the stage-4 checks (`tools/fs131_k3b_checks.py`) are the computer-algebra form of GERM-R's, FLANK's and EXIT's geometry.
+
+### 7.2 What the implementer may and may not change
+
+**It may**: add lemmas (children) anywhere in the wave's modules — the three engines (`Valid.dist_lt_or_gt_of_isPreconnected`, `mem_closure_tile`,
+`localSectors`) and every child § 6.2 names are expected additions; add supporting lemmas to the foundation modules (`Plane/LocalMap`, `Plane/ArcMap`,
+`Plane/UnitPairs`, `Plane/Basic`, and wave 1's `Plane/Chord`, `Plane/DensityPoints` — e.g. a periodic shift lemma for `arcLength` beside
+`ae_arcLength_shift_pi`); change imports (updating `ARCHITECTURE.md`'s Imports cell, and adding each new record to `scripts/Axioms.lean`); prove the
+three open SIXFRAG spec examples.
+
+**It may not**: change any statement of § 5 (the row theorems, their hypotheses and conclusions), any definition of `Plane/LocalMap`,
+`Plane/CircleColouring` or `Plane/SixFragment` (`sixCol`, `sixArcs`), or the read-back conventions (§ 5.2's opening paragraph). A statement that
+cannot be proved as written — a missing hypothesis, a false clause — comes back to the planner through Keryx with the counterexample or the stuck
+goal; it is a finding, never a quiet edit. In particular `hz : z ∈ F.dom` in V5-U1's last clauses is already the corrected form (§ 5.3).
+
+**The vacuity scan** (FS131-T1, landed on `main` as `49c3abb8`, so in this worktree only after the next merge from `main`) now tracks
+`ArcMap.Valid`, `ArcMap.NonSiamese` and `ArcMap.Simple` as carriers. Every wave-3 theorem takes them at a variable map, so they should read
+`GENERIC`; `sixFrag_valid` and `sixFrag_nonSiamese` are their inhabitant at a concrete map. Wave 3 adds predicates a theorem takes as a hypothesis
+— `ArcMap.IsTile`, `ArcMap.TileOf`, `ArcMap.IsRingArc`, `ArcMap.IsQArc`, `ArcMap.IsChangePoint`, `ArcMap.IsHub`, `ArcMap.SaturatedAt`,
+`ArcMap.IsEssBoundary`, `GermIn`, and the structures `CircleColouring`, `CircleColouring.Lift`: decide each IN or OUT by `scripts/Vacuity.lean`'s
+procedure ("How a later wave registers its carriers"). The planner's recommendation: IN for `IsRingArc`, `IsChangePoint`, `IsHub` (each refutable
+at a concrete map: `halfPlane2_not_isRingArc`, and `quadRing` has no change point), with controls; OUT for `CircleColouring` (existence is a
+construction, `hexColouring`) and for `IsTile`/`TileOf`/`GermIn` (refutable only at a concrete set, which no theorem fixes); `Lift` OUT
+(`exists_lift` makes it always inhabited). This is the implementer's decision to record; it changes no statement.
+
+### 7.3 How the wave lands
+
+1. Every `sorry` of the six modules gone; the full gate green on one commit in the worktree: `./scripts/build.sh` with zero warnings;
+   `./scripts/axioms.sh` clean — the 102 skeleton records and every added child read `[propext, Classical.choice, Quot.sound]` (or fewer); no
+   `native_decide`, no axiom; `./scripts/vacuity.sh` and `--self-test` green, every change in `sites` and the verdict counts explained;
+   `tools/check_architecture.py` exit 0; `python3 tools/fs131_k3b_decls.py --check` exit 0 (re-run after adding records).
+2. `main` merged into `fs131-w3` (resolve the append-only lines of `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean`, keeping both sides);
+   the gate re-run on the merged commit.
+3. The branch fast-forwarded onto `main` (Keryx's step, after reading the saved gate logs). Nothing with a `sorry` reaches `main`.
+4. The implementer's record lists every statement it proved, with its declaration, against § 5.2's read-back — "same statement" or the finding.
