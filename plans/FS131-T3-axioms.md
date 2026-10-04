@@ -211,3 +211,53 @@ At the coordinator's word, the work was committed (`a09b2254`, WIP) and `origin/
   predates wave 3's landing, and the draft below carries the merged counts. Log `build/gate/axioms/20261004T141303Z-4086598.log`.
 - `./scripts/axioms.sh --self-test`: OK, 23 of 23; log `build/gate/axioms-self-test/20261004T141316Z-4087072.log`.
 - `tools/check_architecture.py`: PASS.
+
+## Stage 3 — SAVED
+
+## Drafts for the front page
+
+Keryx files these; this job edits none of the files named. The counts are the merged state's (`main` at `0db64494`'s tree, wave 3
+landed): `build/gate/axioms/20261004T141303Z-4086598.log`.
+
+**1. `CLAUDE.md` § Trust ledger — replaces its first paragraph**, the words from "Audited at every milestone with `#print axioms`" through
+"Rung B holds none.":
+
+> Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/axioms.sh`, which checks each record's axioms
+> as a set); the current audit reads 1794 clean and 5 declared purchases, and 0 imported (and 11 axiom-free; 1,810 records at wave 3's
+> landing with FS131-T3's gate repair, 2026-10-04), each purchase listed in `ARCHITECTURE.md` § Trust; an imported record rests on a
+> declared outside theorem (`LEAN.md` § Trust ledger). Rung B holds none.
+
+Checked: `scripts/gate_report.py axioms` on that log, against a copy of `CLAUDE.md` holding this paragraph, reads "match (clean, purchases
+and imported compared)"; `tools/claude_md_fact_audit.py`'s `GATE_RE` still reads its prefix, as `('1794', '5')`. **That tool will fail
+the filing** on the count change (1292, 5) → (1794, 5) unless `GATE_CHANGES` holds it; a draft entry, in its form:
+`(("1292", "5"), ("1794", "5")): "wave 3's landing, gated with FS131-T3's repair (build/gate/axioms/20261004T141303Z-4086598.log): 1,810 records, 1,794 clean, 11 axiom-free, 0 imported, 5 purchases"`.
+(If (1292, 5) was never itself registered, the entry from whatever the previous filing's pair was is the one needed; the tool names it.)
+Its `GATE_RE` reads only (clean, purchases), so a change in the imported count alone would pass it unnoticed: a question for that tool's
+owner, below.
+
+**2. `LEAN.md` § Trust ledger — the table's last row**, replacing
+"| an `axiom` importing an outside theorem | **explicit purchase**, with the four items above |" with:
+
+> | an `axiom` importing an outside theorem | **explicit purchase**, with the four items above; declared to the gate by one `AxiomAudit.declareImport` line in `scripts/Axioms.lean`'s IMPORTED section (the procedure is beside its banner), every record resting on it audited there |
+
+and a paragraph **after the table**, before "`native_decide` trusts the compiler":
+
+> **The audit checks each record's axioms as a set** (`scripts/axioms.sh`): under CLEAN a subset of the standard three; under IMPORTED
+> the standard three and declared imports, at least one; under PURCHASED those and native axioms, at least one native. Any other axiom
+> fails, and so does any `axiom` the library declares that no `declareImport` names, whether or not an audited record uses it. The
+> receipt prints every axiom by its full name (`pp.fullNames`), and its `CLAUDE.md` sentence records three counts: clean, declared
+> purchases, imported.
+
+**3. `LEAN.md` § The gate — the item** "`#print axioms` clean on the public surface (`scripts/axioms.sh`)" becomes:
+
+> `#print axioms` clean on the public surface (`scripts/axioms.sh`), and `./scripts/axioms.sh --self-test` green (23 planted faults,
+> each watched to fire, two of them partners that must pass)
+
+**4. For wave 2's landing implementer** (its brief, not a front-page file): follow the procedure beside the IMPORTED banner in
+`scripts/Axioms.lean`; at `fs131-w2` `59976a11` the records to move are `falconer_reduction`, `le_chiM_of_falconerFan`,
+`exists_mem_falconerE`, `fan_tip_ae_mem`, and `data/fs131/t3/wave_dryrun.sh .claude/worktrees/fs131-w2
+HadwigerNelson.Plane.falconer_lemma2_nonempty` lists them for any later state. Its `ARCHITECTURE.md` § Trust row already passes the gate's
+check. After landing, `CLAUDE.md`'s sentence reads "…, and 4 imported" (or however many records were moved), and the clean count falls by
+the same number.
+
+No ledger row, Frontier line or Proof Atlas grade moves: this job changes what the gate accepts, not what is proved.
