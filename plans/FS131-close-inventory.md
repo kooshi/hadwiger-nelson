@@ -859,3 +859,107 @@ reason by the close.*
      FS129-SR1-BENDLE3 ("one sector per tile", not "one cone per tile"). **For wave 4** (relayed with the `localSectors` commit): `noBoth`'s proof must run on
      `IsSector` sectors with SECT's separation, not on tile cones; formal consumers of `four_of_bothKind_simple` (C17, FS129-SR1-BENDLE3; DICHO and SEMI if they route
      through it) inherit `hnc` until it is dropped (item 139's ruling).
+141. **Brief FS131-LEB, Lebesgue's covering theorem for the square** (`debruijn` planner, Opus; `data/fs131/briefs/FS131-LEB-lebesgue.md`, gated PASS): a
+     self-contained module on its own branch `fs131-leb` (worktree `.claude/worktrees/fs131-leb` from `main` at `bbee15f0`; packages symlinked, build copied
+     from `main`'s), so it lands on `main` ahead of wave 4 and Woodall's chain; source read and bibliography row proposed (item 66's debt); it may prove leaves
+     itself. Launched in E2's Opus slot: 0.5 × 4 (IW, I2g, I4b, I3g) + 1 (LEB) = 3, plus QA1 in the special slot.
+142. **FS131-QA1 mid-job findings** (message 2026-10-04): (1) **Statement says less than its row — FS106-TS-T's Condition-5 and Condition-6 clauses**
+     (`fs131-w4`, `Plane/SVMap.lean`, `ts_t_trichromatic` line 348, `ts_t_degree_three` line 357): the row reads "with Condition 5 it is trichromatic, with
+     Condition 6 of degree 3"; the Lean drops `Condition5` and assumes `h3 : ∀ x, (F.coloursAt x).ncard ≤ 3`, which makes "trichromatic" immediate from
+     TS-T's `≥ 3`. The row's content — Condition 5 ⟹ at most three colours, S–V Lemma 2 almost everywhere (SB § 2.1 A5) — is neither formalized nor on the
+     named-hypothesis list; the docstring cites ruling 53, written for FS110-N4-STUCK, and FS110-NB-4 gives "no vertex of four colours (nor five)" only in a
+     tight six-map in 𝓜_K under Condition 5, narrower than every almost-everywhere-proper map. Keryx's receipt: the two statements and their docstring read at
+     those lines. **Ruling**: TS-T's Condition-5 and -6 clauses are held **over S–V Lemma 2's conclusion** ("every point carries at most three colours"), a
+     carried hypothesis; it joins the named hypotheses (`Row130M1`, `hR78`, `hR88`, `hR88per`, `Voronov11`) for the close, and FS106-TS-T's regrade must say
+     "Condition-5 clause over S–V Lemma 2's conclusion". The statements stay as they are now. **Owed at wave 4's landing**, to a planner: state the clauses
+     with `F.Condition5`, with S–V Lemma 2 (in the class it holds) as a named lemma or an imported `axiom` with `LEAN.md` § Assumptions' four items — or
+     confirm the carried form. Alternative weighed: restate now. Why not: no consumer reads these two clauses yet, and the class S–V Lemma 2 holds in needs a
+     planner's reading first. Confidence: high for the record; the restatement's form is the planner's. Credit QA1.
+     (2) **Six cross-branch name collisions** (`tools/fs131_qa1_dupes.py`, `data/fs131/qa1/dupes.txt`): `Plane.framePt` (w2 `Slack` vs K4's `ValidMap/Basic`,
+     different definitions), `Plane.dist_rot` (w2 vs w3, different statements), `Plane.eq_norm_mul_e_arg` (w2 vs w3), `Plane.e_add_int_mul_two_pi` (w3 vs ww,
+     different forms), `Plane.e_mul_conj_e` (w3 vs ww, identical), `Plane.abs_dot_le` (w4 vs ww, identical). **Ruling**: at every landing merge, after merging
+     `main`, the landing implementer runs `tools/fs131_qa1_dupes.py`; the branch landing later renames its copy (different statements) or deletes it and uses
+     the landed one (identical), before the gate. Added to the landing procedure in the handoff and to every implementer brief from now on. Confidence: high.
+143. **FS131-I4b handed back at stage 4, harness ≈ 320k** (report on its branch; `fs131-w4` at `f1f26a8a`, checked): six leaves — FS112-ISO (`ArcMap.iso`, all eight
+     clauses, and `isoCol_locallyConstant`), `l60_eq_third` (over two wave-3 `sorry`s, so `sorryAx` until wave 3 lands), FS106-L's adversary
+     `not_lemmaL_of_not_mem`, `bowtieArcs_nondegenerate`, `bowtieArcs_locallyFinite`; 54 left. Keryx's receipt: `data/fs131/i4/build-i4b-stage4b.log` (w4) "build:
+     OK — 442 of 442 batches", exit 0; 54 `sorry` by count (BaseSteps 20, UnitArc 20, Contact 10, SVMap 4). **Corrections owed to wave 4's plan** (for the next
+     wave-4 job): `lemmaL`'s sweep route (§ 13.5) is incomplete — the sweeps are open with `S_A ⊆ cl B`, `S_B ⊆ cl A`, but the contradiction needs `S_A ∩ S_B ≠ ∅`,
+     a two-dimensional covering step the plan does not state; `lock` clause 1 (§ 4.17) needs N-E2 between the outer tile at `w` and a second tile of colour
+     `c′` to exclude `P + 2e(θ)` — validity at `w` alone does not. Tool defect (I4b's): the scratch mirror's `chk.sh` can elaborate a name the real build
+     lacks (`Real.pi_gt_three`); every stage ends with a real build. About 20 of the 54 wait on `localSectors` (item 132). Pace: about six leaves per 250k at
+     this difficulty on Sonnet. **Next on wave 4**: an Opus implementer (item 137), when a whole slot is free — the half slot I4b freed stays empty until then.
+144. **FS131-QA1 done, harness ≈ 380k** (report `data/fs131/reports/FS131-QA1.md`; record `plans/FS131-QA1-audit.md`; commits `1905567e`, `bbee15f0`, `e7a91c31`, `2153ea8e`,
+     `ce54a729`, `b27070a2`, checked): **overall B+** — statement fidelity and trust A−, engineering hygiene B. Fidelity sampled on 22 statements across 20 rows
+     in all five bodies: 17 the same as their row or stronger; 3 changed by recorded rulings and right (COVER-SC, FACE-SHARP, RINGBAND (iv)); 1 a frame that
+     holds less than it reads (FALC-HOSTS (iv)); 1 weaker with no ruling (TS-T's Condition-5/6 clauses — ruled at item 142). Definitions: no trap; every carrier
+     with an example and a counter-example; eight small findings (D1–D8). Trust: one axiom in ≈ 30,000 lines, read back, four items done, used once as
+     declared; no `native_decide`, no raised heartbeats; the named hypotheses used as declared. Quality: low brittleness (72 mid-proof bare `simp`), median
+     proof 4–10 lines, six long concrete proofs (129–288 lines), no dead or WIP code, docstrings ≈ 100 % but for 84 wave-2 theorems; all 2,258 declarations
+     public in one namespace — the cause of the name collisions. Wave 3's seven skeleton statement changes break nothing in wave 4 or Woodall's chain.
+     Keryx's receipt: `scripts/axioms.sh` lines 86–104 read — the CLEAN section is checked only for `native_decide` and `sorryAx`, so a CLEAN record carrying an
+     imported axiom would pass (the tool defect is real); FALC-HOSTS (iv)'s docstring read at `Arith/FalconerField.lean` 270–274.
+     **Rulings on its held items**: (a) TS-T — item 142. (b) **The two gate defects** — the axiom gate's CLEAN section gets a subset check (the standard three
+     only) and an IMPORTED category for declared outside theorems; the vacuity scan tracks `CPColouring` and `AeProperRegions` (empty at `k ≤ 1`, as
+     `AeColouring` was) — one project-tooling job, **FS131-T3** (Opus implementer, on `main`), queued for the next whole slot, to land before wave 2 or 4 does.
+     (c) **Merge order**: by readiness (wave 3 is nearest), each landing implementer resolving the append points and running the duplicate tool (item 142);
+     not a fixed order. (d) **Corrections owed to wave 2, before it lands**: FALC-HOSTS (iv)'s docstring says the frame proves only "a fan's `t − a` is a
+     non-zero forced difference of `R`", the fields and `P = R ∩ 𝔓⁴` entering only on instantiation (and its ledger line at the close); docstrings for the 84
+     wave-2 theorems (`tools/fs131_qa1_quality.py` checks; `linter.missingDocs` does not check theorems) — both in wave 2's next brief. (e) **Before
+     publication** (D-class): the duplicated vocabulary across branches (`unitShadow`/`shadow`, `essMulticolour`/`essColours`, `IsContactFor`/`SaturatedAt`,
+     `ne1_region`/`not_mem_coloursAt_of_dist_eq_one`, `dot_sub`/`dot_sub_left`) unified, and the home-made `dot` replaced by Mathlib's real inner product on `ℂ`;
+     helper lemmas made `private` or namespaced. **Held for Kooshi**: a second audit pass over the statements no implementer has reached (wave 2's 13 `sorry`
+     row theorems, wave 4's 113 skeleton statements); default, not run — each implementer reads its statements back as it reaches them. Tools kept:
+     `tools/fs131_qa1_decls.py`, `tools/fs131_qa1_dupes.py`, `tools/fs131_qa1_quality.py`, each with a self-test and a watched control. Credit QA1.
+145. **FS131-I3g mid-job** (message 2026-10-04; commit `81608c71` on `fs131-w3`): `four_of_bothKind` and `flank_edge_exists` **proved** (scratch axioms: the standard
+     three); the inversion engine public at the end of `Plane/LocalStructure` as item 135 required (`Rgn`/`levD`/`invC` chart, `isPreconnected_Rgn_lev`,
+     `GoodAt.exists_wedge`, `coneAt_interiors_disjoint`, `exists_initialPiece_of_cone`, `Arc.exists_initialPiece_of_approach`). Left: `sixFrag_valid`,
+     `sixFrag_nonSiamese`, then `localSectors` (branch form) and `Simple.coneAt_eq_angleIcc_sep`; I3g takes `localSectors` next, while its engine is fresh, and
+     the `SixFragment` leaves after if budget allows. Accepted without a message: wave 4 has no implementer running, and the engine is the cheaper thing for
+     this context to finish. Keryx's receipt: the commit exists; `sorry` lines by count — `RingGerm` 0, `SixFragment` 2, `LocalStructure` 0.
+146. **FS131-LEB mid-job: Lebesgue's covering theorem for the square proved in full** (message 2026-10-04; branch `fs131-leb`): no `sorry`, build green, standard
+     three axioms by its report; the gate running. Modules `Topology/SpernerGrid` (Sperner's lemma on a triangulated grid, a mod-2 door count) and
+     `Topology/LebesgueCovering` (Lebesgue number lemma, grid, least-index labelling; Hurewicz–Wallman's grouping, Thm IV 2, pp. 42–44 of the 1948 edition, read
+     from an archive.org scan), namespace `HadwigerNelson.LebesgueCovering` (chosen so wave 4's `open … Topology` cannot make `closedSquare` ambiguous). Wave 4's
+     `sorry` discharges in one line, tested against a verbatim copy (`data/fs131/leb/Wave4Bridge.lean`). Generalizations proved: any closed rectangle and any
+     finite index type (`lebesgue_covering_rect`); the cubical KKM three-set form (`exists_mem_inter_three`); read off the proof, not stated: the top/bottom
+     hypothesis is needed only for sets missing the left side. No statement defect; wave 4's statement true and not vacuous. **The landing is a ruling of
+     mine** (its brief, Done means 6), on the gate's saved logs at its report.
+147. **FS131-I3g handed back at stage 7, harness ≈ 425k** (report on its branch; `fs131-w3` at `93ca3468`, checked): `four_of_bothKind` and `flank_edge_exists` proved,
+     statements unchanged (item 145); the inversion engine public (`coneAt_interiors_disjoint`, `GoodAt.exists_wedge` — wave 4 can use it directly —,
+     `isPreconnected_Rgn_lev`, `exists_initialPiece_of_cone`, `Arc.exists_initialPiece_of_approach`); 110 audit records added. Keryx's receipt: build log
+     `build/gate/build/20261004T124303Z-3587986.log` (w3) "Build completed successfully (5348 jobs)", exactly two `sorry` warnings (`SixFragment` 844, 849);
+     `tools/fs131_k3b_decls.py --check` "400 names, 0 missing". Not started (budget): `localSectors`, the separation lemma. **Brief FS131-I3h**, wave 3's first Opus
+     implementer (`data/fs131/briefs/FS131-I3h-wave3.md`, gated PASS): the two `SixFragment` leaves, the gate, the landing; then `localSectors` and the separation
+     lemma (and `four_of_bothKind_simple` without `hnc`) on `fs131-w3b` from the landed `main`. Ordered ahead of FS131-T3 and wave 4's Opus implementer: wave 3 is
+     the nearest landing, and T3's gate fix concerns imported axioms, which wave 3 has none of. Launched in the whole slot I3g and I4b freed: 0.5 (IW) + 0.5
+     (I2g) + 1 (LEB) + 1 (I3h) = 3.
+148. **FS131-I2g handed back at stage 12, harness ≈ 457k** (report on its branch; `fs131-w2` at `59976a11`, checked): 26 `sorry` lines closed (117 → 91).
+     **FS129-SA1-FALC-RED sorry-free** — `falconer_reduction` and `le_chiM_of_falconerFan`, on the standard three plus the declared import
+     `falconer_lemma2_nonempty` (informally: a Falconer fan with irrational angle at `k` colours makes every cover of the plane by `k` measurable sets carry a
+     unit pair in one set, so `χ_m(ℝ²) ≥ k + 1`); `Plane/Cover` and `Plane/FalconerReduction` sorry-free; eight Dyadic children (incl. `comap_conductor_sup_eq_top`
+     by a 2×2 trace system, no `Algebra.discr`) and seven Slack leaves; item 134 applied in its five declarations. Keryx's receipt: build log
+     `build/gate/build/20261004T124458Z-3603574.log` (w2) "Build completed successfully (5619 jobs)", 91 distinct `sorry` warnings, 91 `sorry` lines by count;
+     `data/fs131/i2/i2g-axioms.txt` prints `falconer_reduction` with the declared import beside the standard three. **This is the first record that QA1's gate
+     defect (item 144 (b)) would misfile** — `le_chiM_of_falconerFan` sits in the CLEAN block and the CLEAN check does not reject the import — so FS131-T3 must
+     land before wave 2's gate. Left: Slack 39, CoverExamples 44, Dyadic 4 (`dyadicConclusion_of_minpoly`, the Kummer–Dedekind engine, the hard one), YesLimit 4
+     (waits on `chiM0_le_iff_muZero_eq_one`). Recipe: `QuasiMeasurePreserving.ae` times out unless `(p := …)` is explicit. Its re-pricing: about a third of
+     K2c's table at the Sonnet rate. The half slot it freed waits for a whole one (implementers are Opus).
+149. **A stray wait loop stopped** (Keryx): FS131-I2g left a shell loop in `fs131-w2` (PID 3517281, 28 min) waiting for its build log's **last** line to contain
+     "build: "; the build finished OK at 07:36 (`build/gate/build/20261004T122644Z-3444226.log`) but printed that word on the second-to-last line, so the
+     loop would never end, and on ending it would have resumed I2g past its hand-back. Killed by PID; it forfeits nothing (a `sleep 10` poll, no work). Lesson
+     for briefs: a wait loop matches the build's result line anywhere in the log's tail, not only its last line.
+150. **FS131-IW handed back at stage 3, harness ≈ 537k** (report on its branch; `fs131-ww` at `a731f352`, checked): `Plane/Woodall/Collar` (15) and
+     `Plane/Woodall/NoFourFive` (20) **sorry-free**; in `Steps`, `SectorsAt.coloursAt_eq`, `exists_three_le_sectors`, **`false_of_four_le_sectors` (E1-NO45)**,
+     `aeMap6_merged`, `aeMap6_normal`, `aeMap6`, `aeMap6_of_condition5`, `woodall_thm6` proved; 4 left (`exists_sectorsAt`, `exists_woodallMerged`, `step5_lt`,
+     `step6`). **E1-NO45's argument closed in Lean as planned, from its citations** (`step6`, `exists_sectorsAt`, and three unlanded statements: `lemmaL`,
+     `ArcMap.dense_interiorPts`, `ArcMap.Valid.unitPairsNull_region`) — E1-BAD's count, E1-COVER on colour classes, the refined second-order lemma, the avoiding
+     arc, the three-colour point: **the check item 111 asked for, done for the argument; its citations are the open part.** Townsend's π/3 lemma and Woodall's
+     strict step-4 lemma (with the 2π/3 sharpness example) and engines A–D proved, over `lemmaL`. No statement defect. Keryx's receipt: build log
+     `build/gate/build/20261004T125346Z-3674506.log` (ww) "Build completed successfully (5346 jobs)"; `sorry` lines Collar 0, NoFourFive 0, Steps 4;
+     `tools/fs131_w2_decls.py --check` "115 theorems, 115 records; 0 missing, 0 stale"; the iteration axiom summary lists 90 of 115 records clean, E1-NO45 among
+     those carrying `sorryAx` through its citations. **Plan gap**: `step5_lt` and `step6` need a preconnected piece of a colour class approaching the point along
+     a cone direction (a horn included) — a child lemma, not a statement change. Order fix (IW's): `aeMap6_merged` moved after `aeMap6_normal`. Slip (IW's): its
+     first build was not "as given". Over its line (537k): not a slip. **Brief FS131-IWb** (Opus; `data/fs131/briefs/FS131-IWb-woodall.md`, gated PASS): the
+     child lemma, then the four leaves. Launched in the whole slot I2g and IW freed, ahead of T3 and waves 2 and 4 by bearing (route M's link, nearest
+     completion): 1 (LEB) + 1 (I3h) + 1 (IWb) = 3.
