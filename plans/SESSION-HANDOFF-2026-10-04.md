@@ -91,7 +91,8 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 ## 6. Held for Kooshi, with defaults
 
-- **A fourth Opus slot** for the backlog's duration (item 205): would run wave 4's `Contact` implementer now. Default: no; the queue runs as lanes end.
+- **A fourth Opus slot** for the backlog's duration (item 205): `Contact` now has a slot (item 209), so a fourth would run the base's planner FS131-KB
+  or wave 5's implementer now. Default: no; the queue runs as lanes end.
   Recommendation: yes (medium). Raise at his next check-in.
 
 - The GitHub repository `decalion89/chromatic-number-of-the-plane` (release v1.1.0; claims Lean proofs of rows 103 and 57; item 9) — Kooshi is reading it; the

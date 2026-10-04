@@ -1491,3 +1491,5 @@ reason by the close.*
      (from `fs131-w4` at `68f34f18`; `.lake/build` copied from `fs131-w5`), own record `plans/FS131-IC-implementation.md`; no merge and no gate of its own (the
      second of IC1 and I4h to finish merges, on Keryx's word). Launched in K5b's slot: 1 (I2l) + 1 (I4h) + 1 (IC1) = 3. Queue: FS131-KB (the base's planner),
      wave 5's implementer.
+210. **Item 205 updated**: `Contact` took K5b's slot (item 209), so the fourth slot, if Kooshi grants it, would run the base's planner FS131-KB (or wave 5's
+     implementer) now instead. Default and recommendation unchanged.
