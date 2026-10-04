@@ -74,11 +74,12 @@ its record's last SAVED stage with a fresh agent on the same brief.
    `tools/claude_md_fact_audit.py`), run the fact audit with `--base` the last `CLAUDE.md` commit, then commit and log the receipt. The second of waves 2 and 4
    to land merges the first's vacuity carriers. Woodall (IWd) lands after wave 4 and deletes its identical copies of `abs_dot_le`, `dot_add_left`, `dot_e_e`,
    `isOpen_shadow`, and adds QA2-1's brick-map model (item 172).
-3. **Wave 5 is planned but for the base** (items 198, 207: 41 `sorry` leaves; handoff plan § 10 on `fs131-w5`); **the base `row134BaseUA` is ours in full**
-   (items 197–199). **Wave 4's merge**: the second of FS131-I4h and FS131-IC1 to finish merges `fs131-w4c` into `fs131-w4` and runs the gate, on Keryx's word
-   (item 209). **The base is planned** (item 216) and **GAP-ELEVEN repaired** (items 226–227: `UnenclosedC` on `Row134BaseUA` and `n3_base`; rows 134, 137 stand;
-   row 135's base clause corrected at the filing). **FS131-I5 running** (item 228). Queue for the next slot that frees on `fs131-w5` (plan § 10; not `row134BaseUA` or its four consumers, which are
-   KB's on `fs131-w5b`; prices `cvb_thom_reduced` first, item 208), then the **planar-infrastructure job** (item 218 (c)). **At the filing**: `LEDGER.md` rows 135, 137, 134 from E4 § 5.4 items 1–3 (item 227). **When wave 4 lands**: brief the Woodall landing job (item 190's list).
+3. **Wave 5**: planned (items 198, 207, 216) and **GAP-ELEVEN repaired** (items 226–227: `UnenclosedC` on `Row134BaseUA` and `n3_base`; rows 134, 137
+   stand; row 135's base clause corrected at the filing). **FS131-I5 running** on `fs131-w5` (item 228: merge `fs131-w5b`, E4's repair, the base's obligation
+   pass, the leaves; prices `cvb_thom_reduced` first, item 208). **Wave 4's merge**: the second of FS131-I4i and FS131-IC3 to finish merges `fs131-w4c` into
+   `fs131-w4` and runs the gate, on Keryx's word (item 209). **Queue for the next slot that frees when a lane ends**: the planar-infrastructure job (item
+   218 (c); the outer-frontier lemma E4 needs joins it, item 227). **At the filing**: `LEDGER.md` rows 135, 137, 134 from E4 § 5.4 items 1–3 (item 227).
+   **When wave 4 lands**: brief the Woodall landing job (item 190's list).
 4. **Queued, conditional**: an Ephodos job on `exists_not_uniform_kept`'s fringe colouring only if wave 2's implementer cannot find a proper formula (item 118).
 5. **At the milestone's filing**: the Frontier clauses (I3h's and I3i's drafts), the rows regraded to [kernel], the Proof Atlas update, `ARCHITECTURE.md` § 3's
    stale prose counts, the `LEAN.md` pattern line for `threeSectorDisc` adversaries (at Woodall's landing). Optional stub: Woodall's horn-only form everywhere
