@@ -155,12 +155,12 @@ the characteristic failure here:
 - **`./scripts/vacuity.sh` and `./scripts/vacuity.sh --self-test` are green** — no theorem is a `∀` over an empty domain. Vacuity is
   undecidable, so the check **requires evidence**, as `axioms.sh` requires every purchase to be declared. **The law:** a statement is
   vacuous exactly when some `∀`-binder has an empty domain; `(C : G.Coloring α)` is the dangerous binder, a `Forces` binder is a
-  possible *overclaim* instead, and a declaration concluding `False` is a refutation and is skipped. **Verdicts:** `WITNESSED`
+  possible *overclaim* instead, and a declaration concluding `False` — `False` as stated, so `P → False` is one and `¬ P` and `a ≠ b` are not: their binders are audited like any other's — is a refutation and is skipped. **Verdicts:** `WITNESSED`
   (inhabitant proved); `DECLARED` (deliberate emptiness, named with its reason in the docstring as `VACUITY DECLARED:` and printed every
   run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness not proved), which fail unconditionally before the baseline;
   `GENERIC` (parametric, where **no inhabitant witness can exist** — the caller's obligation); `UNKNOWN` (counted, never silent, and the
   only thing the baseline may hold). The counts and the baseline's two entries are recorded in `CLAUDE.md` § The gate, where
-  `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants fourteen controls
+  `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants twenty controls
   and watches each fire; the load-bearing one — the same carrier family at an instantiation nothing refutes — must read `UNKNOWN`,
   never `VACUOUS`.
 - **Every gate keeps what it computed — read it before re-running one.** `build.sh`, `axioms.sh`, `vacuity.sh` and `lean4checker.sh`

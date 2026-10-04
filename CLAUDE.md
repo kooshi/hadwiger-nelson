@@ -499,7 +499,7 @@ The Lean gate — the build, zero `sorry`, the axiom audit, linters, spec exampl
 `LEAN.md` § The gate. Its recorded state stays here, where `scripts/gate_report.py`
 reads it. The vacuity scan's **counts** — a silent change in them is this gate's own failure mode (declarations are the library's;
 the audit's own are not counted):
-`declarations=7624 refutations-skipped=319 sites=280`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=258 unknown=2`.
+`declarations=7624 refutations-skipped=45 sites=357`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=335 unknown=2`.
 The baseline's two entries, `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
 
 What follows binds every mind that builds an instrument, not only the kernel lane.

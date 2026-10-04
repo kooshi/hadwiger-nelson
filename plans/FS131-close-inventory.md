@@ -262,3 +262,17 @@ reason by the close.*
     carriers — goes to the implementer under T1's procedure.
 42. **Brief FS131-I3, wave 3's implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I3-wave3.md`), gated PASS: the vacuity step last,
     after FS131-T2's commit is on `main` (both edit `scripts/Vacuity.lean`). Source: this commit.
+43. **Item 36 done — FS131-T2** (report `data/fs131/reports/FS131-T2.md`, commit `66f679a6`): a declaration is skipped as a refutation only when its stated
+    conclusion is `False`; a stated `≠` or `¬ P` is audited (its own unfolded binder dropped, with the reason in `isRefutation`'s docstring). Keryx's receipt:
+    the main tree's scan (`build/gate/vacuity/latest`) reads refutations-skipped 45, sites 357, generic 335, vacuous 0, unknown 2; T2's last self-test ends
+    "every control fired" (20 controls). 274 declarations stopped being skipped; 55 of them make 77 new sites, all GENERIC (`data/fs131/t2/site-diff.txt`).
+    Filed from T2's drafts: `CLAUDE.md` § The gate and `scripts/vacuity-baseline.txt`'s header (both digests "match"); `LEAN.md` § The gate's law sentence (T2's
+    clause, verbatim) and control count ("twenty"). T2's note that `CLAUDE.md` still held 7438/313/279 was its launch snapshot (memory: subagents see the
+    parent's loaded `CLAUDE.md`); the file on disk held T1's counts.
+44. **FS131-K2b done** (report on its branch, `.claude/worktrees/fs131-w2/data/fs131/reports/FS131-K2b.md`; `fs131-w2` at `41c66271`, commits checked): all 28
+    rows of wave 2 stated; 71 `sorry` leaves; build 443/443 with only `sorry` warnings; the six examples defined by formula with spec examples; the literal
+    second clause of FS111-M-COVER-SC refuted on R7 in the skeleton (`not_forall_semiconcaveWith_one`); obligation pass (13 hard, 43 moderate, 15 easy; three
+    to five implementer sessions); handoff § 10. Further generalizations (§ 7.3): HC's component clause at every closed null Z; IRREG for every closed nowhere
+    dense Z of positive length; DISC7's lens clause for every two classes. Corrections owed (record job): FS111-M3-BAND's § 1.5 sentence on horn points holds
+    only at λ = 1 (`band_excludes_horn` states the window); SUPK's not-claimed line (item 34); FACE's sharp entry (item 37). FACE at `g < 2` recorded as a
+    reading with its killing test, not stated (per item 37).
