@@ -1125,6 +1125,35 @@ truncation**. Items 257 and 264 read in full; 264's critical-point argument is t
 one wait: "build: OK — all 1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T223506Z-2998291.log`;
 driver log `data/fs131/i4/build-i4l-readback.log`). 17 `declaration uses sorry` warnings — Contact 10, UnitArc 5, BaseSteps 2 — and no other warning.
 
+## Stage 34 — SAVED (FS131-I4l): `fs131-w4c` merged (inventory item 267); 10 `sorry` left on the branch (Contact 3, UnitArc 5, BaseSteps 2)
+
+**The merge** (`d33d0b33`, `git merge fs131-w4c` at `f975677b`; the one commit of this job made without paths, as its message says). Conflicts:
+`ARCHITECTURE.md` only — the `Contact` row taken from `fs131-w4c` (IC1's children, Imports `Plane/ValidMap/Basic`, `Plane/Tiles`, `Plane/SVMap`), the `UnitArc`
+row from `fs131-w4` (Imports with `Plane/ValidMap/Sectors`); every other row was already common. `scripts/Axioms.lean` merged without conflict, and every line
+of both sides is kept: base 3,050 lines, `fs131-w4` 3,131, `fs131-w4c` 3,215, merged 3,296 = 3,050 + 81 + 165, each line's multiplicity checked against
+base + (ours − base) + (theirs − base), 0 mismatches. No other file changed on both sides. `Contact.lean` is `fs131-w4c`'s byte for byte.
+
+**Checks.**
+- **Statements** (`tools/fs131_i4_stmts.py`, every wave-4 and supporting module): against `d391f480`, `Contact` 30 old / 180 new, 1 changed — `stuck_structure`,
+  ruling 252's sides clause (IC5's), allowed: exit 0 with `--allow stuck_structure`; `UnitArc`, `BaseSteps`, `Basic`, `Sectors`, `LocalStructure`,
+  `StuckChain`, `SVMap` 0 changed. Against `f975677b`, `BaseSteps` 3 changed — `pair_i` (ruling 258), `pair_ii` and `pair_P'` (binder renames, rulings 258 and
+  244 (a)), allowed: exit 0 with `--allow`; every other module 0 changed. So the merge changed no statement: each module equals one parent's.
+- **Duplicate names.** `tools/fs131_qa1_dupes.py` (`data/fs131/i4/dupes-i4l.log`, run on the merge commit): the same six names as I4d's
+  `dupes-i4d.log` (`abs_dot_le`, `dot_add_left`, `dot_e_e`, `isOpen_shadow` against `fs131-ww`; `framePt` against `fs131-w2`; `conj_e`, wave 1's) — nothing new.
+  QA1's tool compares bodies and skips a name repeated inside one body, which after a merge is exactly the case to check, so a new tool,
+  `tools/fs131_i4_treedupes.py`, scans every qualified name in the tree (QA1's `qualified_decls`, imported): merged tree 7,529 declarations, the merge base
+  `68f34f18` 7,296, `d391f480` 7,378, `f975677b` 7,447 — 7,378 + 7,447 − 7,296 = 7,529, nothing lost or doubled — and the same 3 repeats in all four
+  (`conj_e` in `Chord`/`SixFragment`, and `bindings`, `with`: prose read as declarations), none new. Planted control: a synthetic file redeclaring
+  `ArcMap.pair_i` fires `REPEAT HadwigerNelson.Plane.ArcMap.pair_i`, exit 1 (`data/fs131/i4/treedupes-i4l-merge.log` holds all five runs).
+- **Records.** `tools/check_architecture.py`: PASS, exit 0. `tools/fs131_k4_decls.py --check`: exit 1, 522 names, 2 "missing" —
+  `…ArcMap._root_.HadwigerNelson.Plane.BranchGerms.frameY_lt_of_mem` and `…lt_frameY_of_mem`: K4's tool does not resolve `_root_.` (a **tool defect**, not
+  mine to edit); both records are present under their resolved names (`scripts/Axioms.lean` lines 3230, 3239), and with `._root_.` resolved all 522 names
+  are recorded (0 missing). The Contact lane's own `tools/fs131_ic*_addrecords.py` reads `_root_.` names as written.
+
+**Build** of the merge: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings, 8m48s", exit 0
+(`build/gate/build/20261004T223841Z-3027842.log`; driver log `data/fs131/i4/build-i4l-merge.log`): 10 distinct `declaration uses sorry` — `Contact` 3
+(l. 4064, 4078, 4094: `exists_shave`, `exists_rayMerge`, `exists_merge`), `UnitArc` 5, `BaseSteps` 2 — and no other warning, as the brief expected.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
