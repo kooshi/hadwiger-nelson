@@ -1990,3 +1990,12 @@ reason by the close.*
      landing**: `HadwigerNelson.Plane.framePt` is declared in wave 2's `Plane/Slack` l. 2800 and in wave 4's `Plane/ValidMap/Basic` l. 44 — wave 4 renames
      (`data/fs131/i2n/dupes.log`). The second of waves 2 and 4 to land merges the first's vacuity carriers (handoff § 4). Wave 2's worktree `fs131-w2` joins the
      removal list after its cited gate logs are rescued.
+272. **Wave 2's slot → wave 5's third implementer, FS131-I5c, on `fs131-w5`; it merges `fs131-w4` once that branch holds the `Contact` lane.** Choice: I5c works
+     wave 5's 44 leaves (I5b's Stage 8: `Terminal` 12, `Dense` 3, `HexRing` 7, `MapGraph` 3, `BaseWalk` 15, `BaseDense` 4) less the planar job's seven (items 239,
+     242, 247 (b)), in I5b's four infrastructures (Stage 8's re-pricing: the brick map's point classification; sector-chart geometry; the stuck structure; the
+     limit constructions); its first code stage merges `origin/fs131-w4` as soon as it contains `f975677b` (FS131-I4l's merge of the `Contact` lane, item 267), so
+     wave 5 reads the proved `stuck_structure` (form (b), item 252; form (a) as `stuck_structure_flanks`) and `pair_i` with `h3` (item 258), and applies ruling 252 to
+     `stuck_structure_ua`; until then it works the brick map and sector-chart leaves. Alternative weighed: the planar-infrastructure job first (it repairs
+     `IsHoleOf`, item 242). Why: the stuck structure carries about nine of wave 5's leaves and is proved on wave 4 now, while the planar job's seven leaves feed
+     only `cvb_*` and the eleventh-point chain; QA3's audit of wave 5's definitions found no new defect so far (item 268). Confidence: medium-high. In flight:
+     1 (IM2) + 1 (QA3) + 1 (I4l) + 1 (I5c) = 4. The planar job takes the next slot.
