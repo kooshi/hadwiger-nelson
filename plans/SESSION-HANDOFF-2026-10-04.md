@@ -4,10 +4,10 @@
 reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–183 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written at the context limit, 2026-10-04 late):** inventory items run to **195**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157),
+> **Latest (written at the context limit, 2026-10-04 late):** inventory items run to **200**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157),
 > Lebesgue's covering theorem (151), `localSectors` + the separation lemma + `four_of_bothKind_simple` without `hnc` (171); the axiom gate repaired with an IMPORTED
-> section (160). **Running (3 Opus slots)**: FS131-I2k (wave 2, 36 lines → landing; item 189), FS131-I4g (wave 4's `BaseSteps` + `UnitArc`, 29 of its 39; item 195 — `Contact`'s 10 reserved for a parallel implementer in the next free slot, item 194), FS131-K5 (wave 5's planner, worktree
-> `fs131-w5`; item 192). Woodall is sorry-free bar wave 4's statements (item 190) and idle until wave 4 lands. Agent ids in scratch `agents.txt`. **On each hand-back**: check the
+> section (160). **Running (3 Opus slots)**: FS131-I2k (wave 2, 36 lines → landing; item 189), FS131-I4g (wave 4's `BaseSteps` + `UnitArc`, 29 of its 39; item 195 — `Contact`'s 10 reserved for a parallel implementer in the next free slot, item 194), FS131-K5b (wave 5's second planner: ROTHEX, BV-HEX,
+> CVB-THOM, the obligation pass, the handoff; worktree `fs131-w5`; item 200). Woodall is sorry-free bar wave 4's statements (item 190) and idle until wave 4 lands. Agent ids in scratch `agents.txt`. **On each hand-back**: check the
 > build log, `sorry` count and axioms print; log; brief a successor by script from the previous brief (all implementers Opus, `model: "opus"`); gate; launch.
 > **On a landing**: read the gate logs, file counts (`CLAUDE.md` § Trust ledger three-count sentence, § The gate, `scripts/vacuity-baseline.txt`, `GATE_CHANGES` in
 > `tools/claude_md_fact_audit.py`), run `gate_report.py` and the fact audit **before** committing. Woodall lands after wave 4 (and deletes its identical copies of
@@ -50,7 +50,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 
 | job | model | brief | reports to |
 |---|---|---|---|
-| FS131-K5 (wave 5's planner: foundation, skeleton, leaf plans, handoff, `Row134Base` stub draft; item 192) | Opus | `data/fs131/briefs/FS131-K5-wave5.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-K5.md` |
+| FS131-K5b (wave 5's second planner: three rows, the obligation pass, the handoff; item 200) | Opus | `data/fs131/briefs/FS131-K5b-wave5.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-K5b.md` |
 | FS131-I4g (wave 4 on Opus: the bowtie's moves, `UnitArc`, `BaseSteps`; not `Contact`; item 195) | Opus | `data/fs131/briefs/FS131-I4g-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4g.md` |
 | FS131-I2k (wave 2 on Opus: 36 lines, the carriers, the gate, the landing; item 189) | Opus | `data/fs131/briefs/FS131-I2k-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2k.md` |
 
@@ -63,7 +63,7 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 ## 4. Next, in order
 
-1. **On each hand-back** (I2k, I4g, K5): review by artifact (build log, `sorry` count, axioms print from a saved log), log the inventory item, and if work
+1. **On each hand-back** (I2k, I4g, K5b): review by artifact (build log, `sorry` count, axioms print from a saved log), log the inventory item, and if work
    remains brief an Opus successor by script from the job's own last brief (`data/fs131/briefs/`), gate it with
    `python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>` (full worktree paths in source lines; no § inside a heading address), launch with
    `model: "opus"`.
@@ -73,9 +73,9 @@ its record's last SAVED stage with a fresh agent on the same brief.
    `tools/claude_md_fact_audit.py`), run the fact audit with `--base` the last `CLAUDE.md` commit, then commit and log the receipt. The second of waves 2 and 4
    to land merges the first's vacuity carriers. Woodall (IWd) lands after wave 4 and deletes its identical copies of `abs_dot_le`, `dot_add_left`, `dot_e_e`,
    `isOpen_shadow`, and adds QA2-1's brick-map model (item 172).
-3. **The next free slot** goes to wave 4's `Contact` implementer (item 194: worktree off `fs131-w4` by the recipe, own record file, merged before the gate).
-   **Wave 5's planner FS131-K5 is running** (item 192); on its report, file its `Row134Base` stub draft into `plans/` and brief wave 5's implementer (or a
-   successor planner). **When wave 4 lands**: brief the Woodall landing job (item 190's list).
+3. **Wave 5**: foundation + 10 of 13 rows stated (item 198); **the base `row134BaseUA` is ours in full** (no outside hypothesis; item 197–199); FS131-K5b
+   running (item 200). Queue for slots that free when a lane ends (item 199 (c)): **FS131-KB** (the base's planner, after K5b; input K5's
+   `data/fs131/k5/STUB-row134-base-lean.md` on `fs131-w5`), wave 5's implementer (after K5b's handoff), wave 4's `Contact` implementer (item 194). **When wave 4 lands**: brief the Woodall landing job (item 190's list).
 4. **Queued, conditional**: an Ephodos job on `exists_not_uniform_kept`'s fringe colouring only if wave 2's implementer cannot find a proper formula (item 118).
 5. **At the milestone's filing**: the Frontier clauses (I3h's and I3i's drafts), the rows regraded to [kernel], the Proof Atlas update, `ARCHITECTURE.md` § 3's
    stale prose counts, the `LEAN.md` pattern line for `threeSectorDisc` adversaries (at Woodall's landing). Optional stub: Woodall's horn-only form everywhere
