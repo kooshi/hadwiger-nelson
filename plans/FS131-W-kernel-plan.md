@@ -1202,3 +1202,8 @@ wave 4 lands). The build is green with only `sorry` warnings (§ 15.2).
 
 **How the chain lands.** When every leaf is proved and the gate passes, after wave 4 lands, by merging `main` and the implementer's gate. The
 FS106-AE-MAP6 statement (`ArcMap.aeMap6`) and FS106-WO's (`woodall_thm6`) are unchanged by this job.
+
+## Stage 16 — SAVED: the report
+
+The report is `data/fs131/reports/FS131-W3.md` (standing rule 11's form); its text is the job's hand-back. Drafts for Keryx's files: none beyond
+the report's held items (a `LEAN.md` § The gate line naming `threeSectorDisc`'s phantom adversaries as the pattern for item 158's lesson).
