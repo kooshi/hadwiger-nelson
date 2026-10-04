@@ -324,3 +324,67 @@ covers `B̄(v, 2)` and `BaseHyp v` holds; E4-N3BASE-UN at `v` is a contradiction
 `B̄(x, 1)` directly, and the right one.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: Q1 and Q2 — the homes tested, and the stalls stated
+
+### Q1 and Q2 — the homes tested
+
+**Q1, attacked as the brief invites.** (a) *A distance bound inside the hole*: inside the hole every distance is below 1 (the enclosing tile has
+diameter at most 1, the hole lies in its convex hull), so validity says nothing there; the enclosure model realises it. (b) *`NoInertNear` read at the
+enclosing tile's boundary*: the enclosing tile's boundary need carry no unit arc at all; the model's has none. (c) *`BaseHyp` at the hole*: the hole's
+vertices are cubic of `u`'s multicolour (the model's `u`, `u′`) and the rim's are cubic with one colour of `u` (the model's three), none bad. (d) *Lemma H
+across the enclosing tile*: Lemma H constrains tiles of one colour against `u`'s tile of that colour; the enclosing tile and the tiles in its hole have
+different colours or satisfy it trivially (all within distance below 1). So every hypothesis of `BaseCtx` that reads only `B̄(u, 0.34)` holds in the model
+with `u` enclosed (control `fs131-e4-model`). An exclusion has to read the map out to `ω(u)`, where the only machinery held is the base's; and with
+E4-N3BASE-UN in hand, "`BaseCtx` forbids enclosure" and "`BaseCtx` is empty" are the same statement. Q1's remaining step is the base at an enclosed `u`.
+
+**Q2, four homes.**
+1. *The types* — killed. Nine endpoint types occupy nine distinct classes, none `u`'s; each eleventh-point type shares its class with exactly one
+   endpoint type; nine distinct endpoints and `u` are not forced to collide (`fs131-e4-count`). The count needs a tenth point in the nine endpoint classes.
+2. *The parity of the `C|C` arcs* (the handshake lemma) — gives a point, kills nothing. The arcs of `Γ` with colours of `u` on both sides, inside
+   `R*`, form a finite graph whose vertices of odd degree are exactly the points of `u`'s multicolour (degree 3) and the points of the eleventh point's type
+   (degree 1). So when no eleventh point exists, `u`'s component of that graph holds a second point `u′` of `u`'s multicolour, inside `B(u, 1)` [a sketch, one
+   mind; the enclosure model's `u′ = (−1/10, 0)` is its instance]. `u′` is in `u`'s class, and same-multicolour pairs are refuted only at distance in
+   `[1, 2]` (`pair_P'`, `l3_base`, `vin_antipodal`); `|u − u′| < 1`. Nothing collides.
+3. *Hole-filling* (`[Voronov2023]` Observation 2.2) — killed: filling the enclosing tile's hole recolours `u`'s other tiles, and `u` is no longer a vertex.
+4. *A second base vertex* (the outermost tile's rim, E4-OUTERMOST) — killed at a fixed `u`: its disc `B̄(v, 2)` leaves `B̄(u, 2)` unless `v = u`, and
+   `BaseHyp u` says nothing outside. It is Q3's route, at the consumer.
+
+**What a surviving enclosure must carry** (read off the walk; one mind; the stall's description, not a theorem). For no two selected endpoints to share a
+multicolour, each absent pair's three endpoints need three distinct colours of `u`, so endpoints must lie on tiles of all three colours of `u`; an endpoint
+on a tile of `u`'s component lies on its outer frontier (its absent-coloured tiles reach `ω(u)`; a degenerate case, an endpoint whose absent-coloured tile lies inside `B(u, 1)` along an out-contact unit arc of `ω(u)`, is not sorted here), which the enclosing tile alone borders, so those with
+the other two colours lie on tiles of `u`'s colours *not* chained to `u` — blobs of their own in `B(u, 1)`, each, if no eleventh point exists, bordered on
+its outer frontier by one tile. Two endpoints of distinct pairs closer than 1 share an absent colour whose tiles then lie within 1 of each other, so their
+circle points are within 1; two endpoints of one pair are at least 1 apart (`endpoint_dist_ge`). These constraints are consistent on the circle (three
+windows of width below 60° about three directions 120° apart serve), so they refute nothing by themselves.
+
+derivation: E4-Q1
+  statement: in the base's context at u (BaseCtx F u), no tile of a colour of u has a tile at u in a bounded component of the complement of its closure
+  uses only: nothing yet — no argument closes
+  not claimed: that the enclosure case occurs under BaseCtx; that any filed row is false
+  argument: § Q1 and Q2 — the homes tested
+  verdict: stalls at: every hypothesis of BaseCtx read inside B̄(u, 0.34) holds in the enclosure model, so an exclusion must read ω(u) and beyond; given
+    E4-N3BASE-UN the statement is equivalent to BaseCtx being empty (Row134BaseUA), so its remaining step is the base at an enclosed u
+  grade: hand
+  minds: 1
+  model: the enclosure model (tools/fs131_e4_enclosure_model.py): valid, u = (1/10, 0) cubic trichromatic, no bad point, no unit arc, u's tiles R_5, R_6 in
+    the hole of the annulus R_4 — every hypothesis read inside B̄(u, 0.34) holds and the statement fails there; no fragment covering B̄(u, 2) is held
+  prior art: none to measure — a question of this walk's; FS114-CVB § 1.9's annulus fragment is the same observation for holed tiles in general
+  handoff: none — a stated stall; the repair (E4-N3BASE-UN with E4-LOCALDENSE) carries the filed consumers without it
+
+derivation: E4-Q2
+  statement: in the base's context at u, if a tile of a colour of u encloses a tile at u, then two of the walk's selected endpoints share a multicolour, or
+    some point of B̄(u, 1) has the eleventh point's type with its tiles of u's colours in B(u, 1)
+  uses only: nothing yet — no argument closes
+  not claimed: the converse; that a configuration with nine distinct endpoint types exists
+  argument: § Q1 and Q2 — the homes tested
+  verdict: stalls at: the nine selected endpoints may take nine distinct multicolours — this needs tiles of all three colours of u, not chained to u but for
+    the enclosing tile's colour, each carrying one selected endpoint of each absent pair, and no lemma held refutes it; types alone never collide, the
+    parity of the C|C arcs supplies only a second point of u's multicolour inside B(u, 1), and hole-filling destroys u
+  grade: hand
+  minds: 1
+  model: none — the hypothesis BaseCtx with enclosure is not inhabited by any held object (the enclosure model covers B̄(u, 0.34) only)
+  prior art: none to measure — the walk's own count
+  handoff: none — a stated stall; its smallest open form, for the next mind: can an enclosed u have its nine selected endpoints of nine distinct multicolours?
+
+## Stage 4 — SAVED
