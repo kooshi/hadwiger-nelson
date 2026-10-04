@@ -145,3 +145,27 @@ reason by the close.*
     or semiconcavity with every constant `C > 1` near each point. Why: the curvature form is the strongest true statement the argument reaches, is
     frame-free, and implies both others. Confidence: medium-high — one mind for the corrected form, and the kernel decides. Wave 6's planner restates
     HULLC the same way; a consumer that reads the constant 1 is a finding at that wave.
+20. **FS131-K2 handed back at stage 4 (partial), harness ≈ 494k** (report `data/fs131/reports/FS131-K2.md`; branch `fs131-w2` at `3620923c`, commits
+    checked): wave 2's foundation sorry-free (Plane/Cover, Suprema, CPColouring; 17 records on the standard three); 22 of 28 rows stated (48 `sorry`
+    leaves), read back (§ 4.1); no outside theorem as an axiom (de Bruijn–Erdős in Mathlib as `nonempty_hom_of_forall_finite_subgraph_hom`;
+    `[Falconer1981]` Lemma 1 formalized here through one two-circle lemma, K2's own derivation, one mind); `sq9 : AeColouring 9` inhabited with no
+    `sorry` — the first kernel inhabitant of the measurable colouring class. Left: six example rows (FS111-M-R7, -M2-DISC7, -M3-BAND, -M3-HC,
+    -M3-FIXCONV, -M3-IRREG; definitions sketched § 4.4) and the fresh obligation-modeling pass. Successor: FS131-K2b.
+21. **Generalizations** (K2, § 4.1; the skeleton states the wider forms): FS111-M-SATC (iii) needs no maximality; FS106-REM (i) and FS121-D4-FACE hold for
+    one measurable set with null unit pairs (REM's kept points need not lie in the set); FS129-MA2-FALC-HOSTS (ii) for any additive image of Λ sending no
+    unit vector to 0, connectedness unused; FS129-SA1-SQRT3-LOCAL for any number field with `i ∉ F` (on `s² ≡ 3 (mod 4P)`); FS129-SA1-FALC-RES (ii) for
+    every pair with PLACE-HOM's properties; FS116-O1-YESLIM and FS129-SR2-SUPK at every k; FS111-M-COVER-SC's first clause for preconnected pieces. A
+    shorter route proposed (FS106-EQ (c) ⟹ (a): a union bound over finitely many integer radii in place of the weak (1,1) inequality; K2's reading,
+    unproved). For the record job's errata.
+22. **Ruling — two more named hypotheses from outside the backlog accepted**: `Row130M1` (FS-103's M1, χ_m⁰ ≤ k ⟹ χ_CP ≤ k) in FS106-EQ's χ_CP clause,
+    the easy direction `chiM0_le_chiCP` formalized with none; and rows 78 and 88 (`hR78`, `hR88`, `hR88per`) in FS129-MA2-FALC-HOSTS (iii)–(iv), stated
+    over any lattice or ring with those properties because de Grey's lattice and the three fields' rings are not in the library. Alternative weighed:
+    hold those clauses until the objects and M1 are formalized. Why: the Closed rule's item 3 allows named hypotheses from outside the backlog, and the
+    wider statements are what the kernel can check now. Confidence: high. **Stub to mint**: FS-103's M1 in Lean (the stationary limit of translates,
+    Krylov–Bogolyubov, the Rajchman step), which discharges `Row130M1` — with K1's `Row134Base` stub (item 17 (b)).
+23. **Question — does FS106-COMP's ⟸ direction need FS106-SUP's attainment clause?** (K2, § 4.2): SUPK, merged in place of SUP, drops attainment at
+    general k (its not-claimed line); if QB § 2.7 reads it, the merged form lost a clause COMP needs. Routed to FS131-K2b, which reads QB § 2.7 and, if
+    attainment is used, states it as carried content of SUP's merged row.
+24. **Brief FS131-K2b, wave 2 finished** (`debruijn`, Opus; `data/fs131/briefs/FS131-K2b-wave2-finish.md`): the six example rows, the obligation-modeling
+    pass over all 28, item 23's question, the handoff brought to 28 rows; continues K2's record on `fs131-w2`. Gated PASS after one fix (its quotation's
+    source lives on the branch; the source line now names the worktree's copy). Source: this commit.
