@@ -460,3 +460,12 @@ reason by the close.*
 81. **Wave 4 fully stated** (K4c, `fs131-w4` at `df041d0a`, checked): every row but Woodall's three (FS131-W) and C-DOUBLE (wave 5); build green, only `sorry`
     warnings; 97 declarations listed, 0 missing; architecture check passing. Leaf plans, the obligation-modeling pass and the handoff follow. FS131-W may branch
     from `df041d0a` (it holds FS106-L and FS106-TS-T, stated at `f2a09351`).
+82. **FS131-I2d handed back at stage 6, harness ≈ 294k** (report on its branch; `fs131-w2` at `3bd6cf52`, checked; build log ends "Build completed successfully"):
+    four leaves closed and one split — `r7_not_bandNull`, `r7_lowerGraph` (item 72 applied), **`IsMaximalCover.curvatureLeOne` and `semiconcaveWith`** (FS111-M-COVER-SC's
+    corrected second clause and its corollary; the equator configuration excluded by first-order touching), `sq9_tight` — 37 of 71, 34 `sorry` left, mostly
+    hard. I2d stopped early, judging no remaining leaf would close in its budget (the second implementer in a row to do so).
+83. **Ruling — a re-planning job before a fifth implementer on wave 2**: FS131-K2c (`debruijn`, Opus; `data/fs131/briefs/FS131-K2c-wave2-replan.md`, gated PASS)
+    decomposes the 34 leaves into children an implementer can close, confirms routes with `#check`, decides each outside theorem, and writes the handoff.
+    Alternative weighed: a fifth Sonnet implementer on the same plan. Why: two implementers stopped early on the same hard leaves; the gap is in the plan's
+    granularity, which is a planner's work, not more implementer attempts. Confidence: medium-high. Launched in the slot I2d freed; FS131-W and FS131-LEB wait for
+    the next planner slot after FS131-K4c. Source: this commit.
