@@ -1285,3 +1285,21 @@ reason by the close.*
      **Next**: FS131-I2j (Opus).
 183. **Brief FS131-I2j, wave 2's tenth implementer** (Opus; `data/fs131/briefs/FS131-I2j-wave2.md`, gated PASS): the 46 lines, the vacuity carriers, the gate and the
      landing. Launched in I2i's slot: 1 (I4e) + 1 (IWd) + 1 (I2j) = 3.
+184. **FS131-I4e handed back at stage 11, harness ≈ 389k** (report `data/fs131/reports/FS131-I4e.md` on `fs131-w4`; branch at `9a8de899`, checked): 50 → 45.
+     **[kernel], standard three**: **FS112-LOCK** (`ArcMap.lock`) — clauses 1–2 as the row, clause 3 in item 177's local form; one new engine
+     (`ArcMap.Valid.dist_ne_one_of_isOpen_subset_closure`: a point in the closure of a class is never at distance 1 from an open set inside that closure, by wave
+     3's crossing engine), reusable by `u1_shadow` and the bends; none of the three bends needed more than the local clause 3. **Over `sorry`** (through the
+     structure field `bowtieCol_locallyConstant`): FS112-BOWTIE at `E` — `bowtie_isHorn`, `bowtie_flanks`, `bowtie_coloursAt_zero`, `bowtie_mem_dom`, and the
+     partition `bowtie_partition` (r ≤ 1/13); `cuspFrag_isHorn`'s data factored as `cuspPiece_data`, statement unchanged; `interior_line_eq_empty`,
+     `dense_compl_four_lines`. `UnitArc`'s three old linter warnings cleared. Keryx's receipts: build log `build/gate/build/20261004T165111Z-843230.log` (w4)
+     "Build completed successfully (5359 jobs)", 0 warnings other than `declaration uses sorry`; `sorry` lines by count Contact 10, UnitArc 19, BaseSteps 16
+     (`Packed.lean`'s one hit is a docstring, as on `main`); `data/fs131/i4/axioms-i4e.txt` prints `ArcMap.lock` on `[propext, Classical.choice, Quot.sound]`;
+     `lock`'s statement read against the row's three clauses. Re-pricing: `lock` ≈ 25k (planned M), the three bowtie-at-E leaves ≈ 35k, `bowtie_mem_dom` ≈ 15k;
+     `bowtieCol_locallyConstant` (11 tiles) and `bowtie_valid` (21 pairs) heavier. Slips (I4e's): a build read a half-edited `BaseSteps` (rebuilt clean); my brief's
+     warning line numbers were off (236, 666, 706 at `c1255fc5`). **Next**: FS131-I4f (Opus), `bowtieCol_locallyConstant` first.
+185. **Ruling: `l60_eq_third`'s binder `hF` → `_hF` accepted** (I4e's held question). Choice: accept. Alternative weighed: restore `hF` and silence the linter
+     another way (an `omit`-style restructure or a local `set_option linter.unusedVariables false`). Why: a binder name is not part of a theorem's type, so the
+     statement is unchanged, and the underscore records truthfully that the proof never uses validity; a linter option hides that, and the build is green either
+     way. Confidence: high. A generalization for errata (no statement change now): L60-EQ's third tile holds with no `F.Valid` hypothesis.
+186. **Brief FS131-I4f, wave 4's sixth implementer** (Opus; `data/fs131/briefs/FS131-I4f-wave4.md`, derived by script from I4e's, gated PASS): `bowtieCol_locallyConstant`
+     first, then the bowtie and the rest in Stage 11's order, the gate and the landing. Launched in I4e's slot: 1 (I2j) + 1 (IWd) + 1 (I4f) = 3.
