@@ -2072,6 +2072,42 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.AeColouring.exists_motion
 #print axioms HadwigerNelson.Plane.IsMaximalCover.enclosing_or_exterior_contact
 
+#print axioms HadwigerNelson.Plane.disc7_nbr
+#print axioms HadwigerNelson.Plane.lens_pos
+#print axioms HadwigerNelson.Plane.norm_tri_sub
+#print axioms HadwigerNelson.Plane.unitPairsNull_of_bandFree
+#print axioms HadwigerNelson.Plane.upperDensityAt_pos_of_halfBox
+#print axioms HadwigerNelson.Plane.bandNull_of_bandFree
+#print axioms HadwigerNelson.Plane.voronov11_of_forall_mu_lt
+#print axioms HadwigerNelson.Plane.mu_lt_of_voronov11
+#print axioms HadwigerNelson.Plane.sq9Index_periodic
+#print axioms HadwigerNelson.Plane.cIdx
+#print axioms HadwigerNelson.Plane.cIdx_coe
+#print axioms HadwigerNelson.Plane.torPt_add
+#print axioms HadwigerNelson.Plane.torCol_coe
+#print axioms HadwigerNelson.Plane.torCol_pt_add
+#print axioms HadwigerNelson.Plane.exists_coe_eq
+#print axioms HadwigerNelson.Plane.measurable_cIdx
+#print axioms HadwigerNelson.Plane.measurable_torCol
+#print axioms HadwigerNelson.Plane.torField
+#print axioms HadwigerNelson.Plane.measurable_torField
+#print axioms HadwigerNelson.Plane.torField_shift
+#print axioms HadwigerNelson.Plane.volume_tor_univ
+#print axioms HadwigerNelson.Plane.cpLaw
+#print axioms HadwigerNelson.Plane.cpLaw_apply
+#print axioms HadwigerNelson.Plane.cpLaw_map_shift
+#print axioms HadwigerNelson.Plane.vol_tor_shift
+#print axioms HadwigerNelson.Plane.halfPts
+#print axioms HadwigerNelson.Plane.volume_halfPts
+#print axioms HadwigerNelson.Plane.sq9Index_eventually
+#print axioms HadwigerNelson.Plane.isProbabilityMeasure_cpLaw
+#print axioms HadwigerNelson.Plane.torField_eq
+#print axioms HadwigerNelson.Plane.cpLaw_proper
+#print axioms HadwigerNelson.Plane.torChange
+#print axioms HadwigerNelson.Plane.measurableSet_torChange
+#print axioms HadwigerNelson.Plane.tendsto_volume_torChange
+#print axioms HadwigerNelson.Plane.cpLaw_tendsto
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -104,6 +104,41 @@ mass at radius `r` to pass from `BandNull` to `UnitPairsNull`).
 **Re-pricing**: the five leaves cost 40k tokens each on average (`twoCircle_preimage_null` and `falconer_lemma1` were M, not H); the Mathlib local-inverse API
 (`ContDiffAt.toOpenPartialHomeomorph`, `addHaar_image_eq_zero_of_differentiableOn_of_addHaar_eq_zero`) carried the hard part.
 
+## Stage 5 — SAVED (FS131-I2c): five leaves, one ruling applied, `main` merged; 38 leaves left
+
+**Readback.** Brief's quotations match Stage 10 of `plans/FS131-w2-kernel-plan.md` and Stage 4 above. May not: change any statement, hypothesis or
+definition's meaning (except the rulings: 56, 57, and 63 below), no `axiom`, no `native_decide`. `main` merged (`211b4c7e`), no conflicts.
+
+**Ruling applied** (Keryx, `plans/FS131-close-inventory.md` item 63): `exists_not_uniform_kept` gains `(hη : η < 1)`; at `η ≥ 1` `KeptAt` is vacuous
+(`ofReal (1 − η) = 0`), no point is non-kept, and `m ≤ volume ∅` is false. Still `sorry`. **Item 64** (route note, no statement change): `sqrt3_local`
+cannot go through `sqrt3_local_of_congr`, whose congruence `s² − 3 ∈ (4)·P` is global (all primes over `2`); a local square gives it at `P` only. Build a
+P-local Kummer–Dedekind child (`s² − 3 ∈ P^(2e+1)`) and derive both.
+
+**Leaves closed** (cumulative 33 of 71): `disc7_lens` (children `disc7_nbr`, `lens_pos`, `norm_tri_sub`), `nonempty_cpColouring_nine` (the torus
+`(ℝ/(3/2)ℤ)²` with Haar measure, `sq9` read through `equivIoc`; children `torCol`, `torField`, `cpLaw`, `cpLaw_map_shift`, `cpLaw_proper`,
+`cpLaw_tendsto` by dominated convergence off the null half-integer grid), `chiM0_le_iff_periodic` (⟸ needs no `tendsto_muPer`; ⟹ uses
+`tendsto_muPer` and `chiM0_le_iff_muZero_eq_one`, both still `sorry`), `face_densitySet` (from `face`, still `sorry`; child `upperDensityAt_pos_of_halfBox`),
+`forall_mu_six_lt_one_iff` (⟹ unconditional through closures of the classes; ⟸ through `exists_bandNull_aeCover_of_mu_eq_one`, still `sorry`;
+children `voronov11_of_forall_mu_lt`, `mu_lt_of_voronov11`, `bandNull_of_bandFree`). Four of the five depend on other open leaves (derived closures).
+
+**Build**: `./scripts/build.sh` under the slot, OK, 443 of 443, only `declaration uses sorry` (38 warnings), `build/gate/build/20261004T081144Z-2067541.log`.
+`scripts/Axioms.lean`: 35 records added for the children. Gate not run (38 leaves left).
+
+**Assessment of the rest** (for a fourth implementer): `exists_tight` and `exists_bandNull…` need continuity in `r` of the unit-pair mass (a convolution
+`1_A ⋆ 1_{−A}` argument) — the endpoint of the slack range is a 3-dimensional null statement the 4-dimensional `BandNull` does not give; `curvatureLeOne`:
+the equator configuration is excluded in both cases (a lower-graph piece `P` has points on both sides of `s₀`, and a vertical-tangent disc admits only one
+side; in the exterior case the slice `(u−δ, u]` has fixed length while the forbidden strip has half-width `~√(2|s−s₀|)`), the remaining work is the
+second-derivative comparison of a touching `C²` pair and the arc formulas; `keptAt_band` needs a lower bound on the arc of `S(u,1)` in `B(y,2ε)` and the
+exchange identity `∫ arc{θ : u+eθ ∈ N} du = 2π|N|`. `sq9_tight_saturated`: tightness is an explicit rectangle product near the corner `(1/2, 3/2)`; saturation is a density computation on a union of squares.
+
+**Re-pricing**: the five closed leaves cost 40–60k tokens each; the derived closures were cheap (about 20k each), the CP inhabitant the dearest (about 90k).
+
+## Theorems this phase proved (FS131-I2c, additions)
+
+Axioms not yet read from a saved audit log (gate not run); `scripts/Axioms.lean` has the records. Declarations: `disc7_lens` (FS111-M2-DISC7),
+`nonempty_cpColouring_nine` (FS129-OA1-NOPERLAW's inhabitant), `chiM0_le_iff_periodic` (FS106-EQ (a)⟺(e), conditional on two open leaves),
+`face_densitySet` (FS121-D4-FACE last clause, conditional on `face`), `forall_mu_six_lt_one_iff` (FS106-COMP second clause, ⟸ conditional on the attainment lemma).
+
 ## Drafts for the front page
 
 None: the gate was not run (43 leaves remain). Vacuity carriers for wave 2 are not yet registered.

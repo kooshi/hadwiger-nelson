@@ -166,9 +166,127 @@ theorem exists_bandNull_aeCover_of_mu_eq_one {k : ℕ} {ε : ℝ} (hε : 0 < ε)
     ∃ C : Fin k → Set ℂ, IsPartialColouring C ∧ (∀ j, BandNull (C j) ε) ∧ ∀ᵐ x ∂volume, ∃ j, x ∈ C j := by
   sorry
 
+/-- A band-free class is band-null. -/
+theorem bandNull_of_bandFree {A : Set ℂ} {ε : ℝ} (h : BandFree A ε) : BandNull A ε := by
+  have : bandPairSet A ε = ∅ := by
+    ext q
+    simp only [bandPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+    intro hx hy h1 h2
+    rcases h _ hx _ hy with h3 | h3 <;> linarith
+  rw [BandNull, this, measure_empty]
+
+open Classical in
+/-- COMP, `⟹`: if `µ₆(ε) < 1` for every `ε > 0`, no six-colouring is proper on a band (the closures of the colour
+classes, made disjoint, are a band-free partial colouring covering everything, so `µ₆(ε/2) = 1`). -/
+theorem voronov11_of_forall_mu_lt (H : ∀ ε > (0 : ℝ), mu 6 ε < 1) : Voronov11 := by
+  intro ε hε ⟨f, hf⟩
+  set cl : Fin 6 → Set ℂ := fun j => closure (f ⁻¹' {j}) with hcl
+  have h1 : ∀ j, ∀ x ∈ cl j, ∀ y ∈ cl j, dist x y ≤ 1 - ε ∨ 1 + ε ≤ dist x y := by
+    intro j x hx y hy
+    by_contra hcon
+    push Not at hcon
+    have hxy : (x, y) ∈ closure ((f ⁻¹' {j}) ×ˢ (f ⁻¹' {j})) := by
+      rw [closure_prod_eq]; exact ⟨hx, hy⟩
+    have hopen : IsOpen {q : ℂ × ℂ | 1 - ε < dist q.1 q.2 ∧ dist q.1 q.2 < 1 + ε} :=
+      (isOpen_lt continuous_const (continuous_fst.dist continuous_snd)).inter
+        (isOpen_lt (continuous_fst.dist continuous_snd) continuous_const)
+    have hmem : (x, y) ∈ {q : ℂ × ℂ | 1 - ε < dist q.1 q.2 ∧ dist q.1 q.2 < 1 + ε} := ⟨hcon.1, hcon.2⟩
+    obtain ⟨q, hq1, hq2⟩ := mem_closure_iff.1 hxy _ hopen hmem
+    exact hf q.1 q.2 hq1.1.le hq1.2.le (by rw [mem_prod] at hq2; exact (hq2.1.trans hq2.2.symm))
+  set C : Fin 6 → Set ℂ := fun j => cl j \ ⋃ i < j, cl i with hC
+  have hCm : ∀ j, MeasurableSet (C j) := fun j =>
+    isClosed_closure.measurableSet.diff (MeasurableSet.biUnion (countable_univ.mono (subset_univ _))
+      fun i _ => isClosed_closure.measurableSet)
+  have hcov : ⋃ j, C j = univ := by
+    refine eq_univ_of_forall fun x => ?_
+    have hne : (Finset.univ.filter fun j => x ∈ cl j).Nonempty := ⟨f x, by simp [hcl]; exact subset_closure rfl⟩
+    set j0 := (Finset.univ.filter fun j => x ∈ cl j).min' hne
+    have hj0 : x ∈ cl j0 := by
+      have := Finset.min'_mem _ hne; simpa using this
+    refine mem_iUnion.2 ⟨j0, hj0, ?_⟩
+    simp only [mem_iUnion, not_exists]
+    intro i hi hxi
+    have : j0 ≤ i := Finset.min'_le _ i (by simpa using hxi)
+    exact absurd hi (not_lt.2 this)
+  have hdis : Pairwise (Function.onFun Disjoint C) := by
+    intro i j hij
+    wlog h : i < j generalizing i j
+    · exact (this hij.symm (lt_of_le_of_ne (not_lt.1 h) hij.symm)).symm
+    refine disjoint_left.2 fun x hxi hxj => hxj.2 (mem_iUnion₂.2 ⟨i, h, hxi.1⟩)
+  have hfree : ∀ j, BandFree (C j) (ε / 2) := by
+    intro j x hx y hy
+    rcases h1 j x hx.1 y hy.1 with h | h
+    · left; linarith
+    · right; linarith
+  have hle : (1 : ENNReal) ≤ mu 6 (ε / 2) := by
+    calc (1 : ENNReal) = upperDensity (⋃ j, C j) := by rw [hcov, upperDensity_univ]
+      _ ≤ mu 6 (ε / 2) := le_iSup₂ (f := fun C (_ : IsPartialColouring C ∧ ∀ j, BandNull (C j) (ε / 2)) =>
+          upperDensity (⋃ j, C j)) C ⟨⟨hCm, hdis⟩, fun j => bandNull_of_bandFree (hfree j)⟩
+  exact absurd (H (ε / 2) (by linarith)) (not_lt.2 hle)
+
+
+open Classical in
+/-- COMP, `⟸`, through the attainment lemma: the supports of the classes of an a.e.-covering band-null partial colouring
+cover the plane, and the least index of a support containing `x` is a six-colouring proper on `[1 − ε/2, 1 + ε/2]`. -/
+theorem mu_lt_of_voronov11 (hV : Voronov11) {ε : ℝ} (hε : 0 < ε) : mu 6 ε < 1 := by
+  by_contra hcon
+  have h1 : mu 6 ε = 1 := le_antisymm (mu_le_one 6 ε) (not_lt.1 hcon)
+  obtain ⟨C, hCp, hband, hae⟩ := exists_bandNull_aeCover_of_mu_eq_one hε h1
+  -- the supports cover the plane
+  have hcl : IsClosed (⋃ j, essSupport (C j)) := isClosed_iUnion_of_finite fun j => isClosed_essSupport _
+  have hfull : ⋃ j, essSupport (C j) = univ := by
+    by_contra hne
+    have hopen : IsOpen (⋃ j, essSupport (C j))ᶜ := hcl.isOpen_compl
+    have hnonempty : (⋃ j, essSupport (C j))ᶜ.Nonempty := by
+      rwa [nonempty_iff_ne_empty, Ne, compl_empty_iff]
+    have hpos := hopen.measure_pos volume hnonempty
+    refine hpos.ne' (measure_mono_null (t := {x | ¬ ∃ j, x ∈ C j} ∪ ⋃ j, C j \ essSupport (C j)) ?_ ?_)
+    · intro x hx
+      by_cases hx' : ∃ j, x ∈ C j
+      · obtain ⟨j, hj⟩ := hx'
+        right
+        refine mem_iUnion.2 ⟨j, hj, fun hs => hx (mem_iUnion.2 ⟨j, hs⟩)⟩
+      · exact Or.inl hx'
+    · exact measure_union_null (by simpa [ae_iff] using hae)
+        (measure_iUnion_null fun j => volume_diff_essSupport (C j))
+  set f : ℂ → Fin 6 := fun x => if h : ∃ j, x ∈ essSupport (C j) then Classical.choose h else 0 with hf
+  have hfs : ∀ x, x ∈ essSupport (C (f x)) := by
+    intro x
+    have h : ∃ j, x ∈ essSupport (C j) := by
+      have : x ∈ ⋃ j, essSupport (C j) := by rw [hfull]; trivial
+      simpa using this
+    simp only [hf, dif_pos h]
+    exact Classical.choose_spec h
+  refine hV (ε / 2) (by linarith) ⟨f, fun x y h1 h2 hxy => ?_⟩
+  set j := f x
+  have hy : y ∈ essSupport (C j) := by rw [hxy]; exact hfs y
+  have hx : x ∈ essSupport (C j) := hfs x
+  refine absurd (hband j) ?_
+  unfold BandNull
+  set r : ℝ := ε / 4 with hr4
+  have hr : 0 < r := by positivity
+  have hsub : (C j ∩ ball x r) ×ˢ (C j ∩ ball y r) ⊆ bandPairSet (C j) ε := by
+    rintro ⟨a, b⟩ ⟨⟨ha, hax⟩, hb, hby⟩
+    rw [mem_ball] at hax hby
+    refine ⟨ha, hb, ?_, ?_⟩
+    · show 1 - ε ≤ dist a b
+      have t1 := dist_triangle4 x a b y
+      rw [dist_comm x a] at t1
+      simp only at hax hby
+      linarith [hr4]
+    · show dist a b ≤ 1 + ε
+      have t1 := dist_triangle4 a x y b
+      rw [dist_comm y b] at t1
+      simp only at hax hby
+      linarith [hr4]
+  have hpos : 0 < (volume.prod volume) ((C j ∩ ball x r) ×ˢ (C j ∩ ball y r)) := by
+    rw [Measure.prod_prod]
+    exact ENNReal.mul_pos (hx r hr).ne' (hy r hr).ne'
+  exact fun h0 => hpos.ne' (measure_mono_null hsub h0)
+
 /-- **FS106-COMP**, second clause: "`µ₆(ε) < 1` for every `ε > 0`" is equivalent to `[Voronov2023]` Thm 1.1. -/
 theorem forall_mu_six_lt_one_iff : (∀ ε > (0 : ℝ), mu 6 ε < 1) ↔ Voronov11 := by
-  sorry
+  exact ⟨voronov11_of_forall_mu_lt, fun hV ε hε => mu_lt_of_voronov11 hV hε⟩
 
 /-- `x` is **kept** at scale `ε` for the class `A` with threshold `η`: the balls of radii `ε/2` and `2ε` about `x` are at
 least `1 − η` full of `Ã` (FS106-TQ § 2.2). -/
@@ -190,10 +308,11 @@ theorem CPColouring.tendsto_not_kept (c : CPColouring k) {η : ℝ} (hη0 : 0 < 
       Tendsto (fun ε => c.law {f | ¬ KeptAt (ct f ⁻¹' {ct f 0}) η ε 0}) (𝓝[>] 0) (𝓝 0) := by
   sorry
 
-/-- **FS106-REM**, third clause: the uniform form is FALSE — some measurable colouring proper at every unit pair (the
+/-- **FS106-REM**, third clause (ruling `plans/FS131-close-inventory.md` item 63: `η < 1` added, since at `η ≥ 1` every point
+is kept): the uniform form is FALSE — some measurable colouring proper at every unit pair (the
 zigzag colouring, FS106-TQ's control C2) has, at every `ε`, translates of the unit square holding non-kept points of
 measure bounded below. -/
-theorem exists_not_uniform_kept {η : ℝ} (hη0 : 0 < η) :
+theorem exists_not_uniform_kept {η : ℝ} (hη0 : 0 < η) (hη : η < 1) :
     ∃ (k : ℕ) (f : ℂ → Fin k), Measurable f ∧ (∀ x y, dist x y = 1 → f x ≠ f y) ∧ ∃ m > (0 : ENNReal),
       ∀ ε > (0 : ℝ), ∃ z : ℂ, m ≤ volume {x | x - z ∈ {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧ 0 ≤ w.im ∧ w.im ≤ 1} ∧
         ¬ KeptAt (f ⁻¹' {f x}) η ε x} := by
