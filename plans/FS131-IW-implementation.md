@@ -86,3 +86,28 @@ FS106-TW, FS106-AE-MAP6 and the E1-NO45 row stay [hand] until `Steps` is sorry-f
 `data/fs131/iw/iter.sh` (iteration elaboration, never evidence), `data/fs131/iw/scratch/run.sh` and the scratch files `t*.lean` (the leaves as first developed),
 `data/fs131/iw/axioms-iteration*.txt`. `tools/fs131_w2_decls.py --check`: 114 theorems, 114 records, 0 missing, 0 stale; `--plant` fires both ways.
 `tools/check_architecture.py`: PASS (the `Plane/Chord` import of `Collar` added to its row).
+
+## Stage 4 — SAVED (FS131-IWb): the readback
+
+*Brief `data/fs131/briefs/FS131-IWb-woodall.md` (on `main`); the second implementer on this chain, de Bruijn on Opus 5.5; branch `fs131-ww` at `a731f352`.*
+
+**The brief's three quotations** match their sources verbatim: the § 9.5 line "waves unchanged), and imports (updating `ARCHITECTURE.md`, `scripts/Axioms.lean`,
+then `tools/fs131_w2_decls.py --check`). It may not change any" (`plans/FS131-W-kernel-plan.md` line 827, inside § 9.5, read whole); Stage 3's opening line (this
+record, line 75); Stage 2's "Plan gap found at `step5_lt`" paragraph (this record, line 58). **The build as given** (`a731f352`, before any edit): OK, all 1745
+modules already up to date (IW's final build was of this tree; `a731f352` added scratch files only), 12 modules with warnings, the four `sorry` warnings in
+`Steps` at lines 55, 138, 147, 160 (`exists_sectorsAt`, `exists_woodallMerged`, `step5_lt`, `step6`); `build/gate/build/20261004T131326Z-3756794.log`, driver log
+`data/fs131/iwb/build0.log`.
+
+**What I may change**: children anywhere in the four Woodall modules (in `Basic` and `NoFourFive` children only); supporting lemmas in the foundation modules
+(statements of other waves unchanged); imports (with `ARCHITECTURE.md`, `scripts/Axioms.lean`, `tools/fs131_w2_decls.py --check`); `Proofs.lean`. **What I may
+not**: any statement of § 3.1's table kept by § 8.4, any statement of §§ 8.4–8.5, any definition of `Plane/Woodall/Basic` or `Plane/Woodall/NoFourFive`, any new
+`axiom`, any `native_decide`; nothing with a `sorry` reaches `main`.
+
+**Statement defect found at once, messaged to the coordinator (2026-10-04)**: `ArcMap.exists_sectorsAt` is false as stated. `SectorsAt`'s fifth clause
+(`annSector v 0 r (d i.castSucc + δ) (d i.succ − δ) ⊆ F.region (c i)` for every `δ > 0`) cannot hold for a sector merged across an arc between two same-coloured
+sides, and clause 4 forces the merge. Smallest counterexample: `k = 1`, `F = {dom := univ, arcs := {Arc.seg (−1) 1}, col := fun _ => 0}`, `v = 0`. Here `n ≥ 2`
+violates clause 4 in `Fin 1`; at `n = 1`, clause 5 at `δ = π/4` needs an open angle range of length `3π/2`, which holds a multiple of `π`, so the annular sector
+holds a point of the segment, which is not an interior point. The same happens at points of three or more colours where a class is split by an arc (a hexagonal
+7-colouring with one slit is a valid plane map with no picture at the slit's midpoint). Proposed fix, the planner's call: drop clause 5 or weaken it to `⊆ closure
+(F.region (c i))`. Its only readers, E1-RAY (inner, outer) and E1-BAD's interior case, re-prove from the cone equation through the connected-piece child below.
+`exists_sectorsAt` is held until the ruling.
