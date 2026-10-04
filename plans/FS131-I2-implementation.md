@@ -372,3 +372,13 @@ ruled below), any child statement fixed by K2c/K2d; no `axiom`, no `native_decid
 `exists_sq_sub_three_mem_pow` (completion density by `Valued.mem_nhds` on a ball about the root of radius `v(π^N)`, then `exists_valuation_sub_lt_of_integer`),
 `exists_dyadic_coeffs` (one new child `ideal_le_of_mul_le`, cancellation of a nonzero ideal), `exists_root_quadratic`, `minpoly_eq_of_root`.
 Left in Dyadic: `comap_conductor_sup_eq_top`, `dyadicConclusion_of_minpoly`, and the three assemblies.
+
+## Stage 11 — SAVED (FS131-I2g): `Plane/Cover` and `Plane/FalconerReduction` sorry-free (compiled with `lake env lean`, build pending)
+
+**Closed**: `Plane/Cover`'s two leaves — `essClosure_dist_ne_one_of_mem_densitySet` (from `twoBall_pairs_ge`: for `dist x y = 1`,
+`densityRatio A x (r/4) ≤ 16π · densityRatio Aᶜ y (2r)`, then a squeeze) and `measurableSet_densitySet` (the density set read along rational radii,
+`densitySet_iff_rat`; Tonelli for the centre-measurability) — and all nine of `Plane/FalconerReduction`: `upperHalfPlane_falconer_hyp`,
+`densitySet_dist_ne_one`, `exists_mem_falconerE`, `two_classes_of_mem_falconerE`, `dist_circle_rotate`, `not_rotate_ae_eq_compl` (the ergodic rotation on
+`AddCircle (2π)` through `AddCircle.ergodic_add_right`), `falconer_lemma4`, `fan_tip_ae_mem`, `falconer_reduction`. 16 children added, each stated before
+use and recorded in `scripts/Axioms.lean` block "FS131-I2g". New imports in `Plane/Cover` (`Lebesgue.VolumeOfBalls`) and `Plane/FalconerReduction`
+(`Dynamics.Ergodic.AddCircleAdd`, `Dynamics.Ergodic.Function`). Not yet built through `build.sh`: Cover's edit rebuilds every wave-2 dependent.

@@ -2354,6 +2354,25 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.tri_cover
 #print axioms HadwigerNelson.Plane.isClosed_disc7
 
+-- FS131-I2g: children added by the seventh wave-2 implementer
+#print axioms HadwigerNelson.Arith.ideal_le_of_mul_le
+#print axioms HadwigerNelson.Plane.volume_closedBall_ofReal
+#print axioms HadwigerNelson.Plane.densityRatio_le_of_unit_dist
+#print axioms HadwigerNelson.Plane.tendsto_mul_nhdsGT
+#print axioms HadwigerNelson.Plane.tendsto_densityRatio_compl_of_mem
+#print axioms HadwigerNelson.Plane.mem_densitySet_of_tendsto_compl
+#print axioms HadwigerNelson.Plane.measurable_densityRatio_centre
+#print axioms HadwigerNelson.Plane.densitySet_iff_rat
+#print axioms HadwigerNelson.Plane.sum_densityRatio_eq_one
+#print axioms HadwigerNelson.Plane.exists_mem_essClosure_of_cover
+#print axioms HadwigerNelson.Plane.densityRatio_le_one
+#print axioms HadwigerNelson.Plane.densitySet_mono
+#print axioms HadwigerNelson.Plane.exists_unit_pair_of_conull
+#print axioms HadwigerNelson.Plane.ae_arcLength_shift
+#print axioms HadwigerNelson.Plane.densitySet_disjoint
+#print axioms HadwigerNelson.Plane.unitPairsNull_of_no_unit_pair
+#print axioms HadwigerNelson.Plane.dist_rot
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

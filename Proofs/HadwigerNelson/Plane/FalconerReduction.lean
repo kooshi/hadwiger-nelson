@@ -6,6 +6,8 @@ import Mathlib.MeasureTheory.Function.Jacobian
 import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
 import Mathlib.MeasureTheory.Measure.Lebesgue.Complex
+import Mathlib.Dynamics.Ergodic.AddCircleAdd
+import Mathlib.Dynamics.Ergodic.Function
 
 /-!
 # Falconer's reduction: a Falconer fan with an irrational angle gives `χ_m(ℝ²) ≥ k + 1` (FS-131 wave 2)
@@ -292,39 +294,261 @@ axiom falconer_lemma2_nonempty {S : Set ℂ} (hS : MeasurableSet S) (h1 : volume
 and its complement have positive (indeed infinite) measure. -/
 theorem upperHalfPlane_falconer_hyp :
     MeasurableSet {z : ℂ | 0 < z.im} ∧ volume {z : ℂ | 0 < z.im} ≠ 0 ∧ volume {z : ℂ | 0 < z.im}ᶜ ≠ 0 := by
-  sorry
+  have ho : IsOpen {z : ℂ | 0 < z.im} := isOpen_lt continuous_const Complex.continuous_im
+  refine ⟨ho.measurableSet, ?_, ?_⟩
+  · refine (ho.measure_pos volume ⟨I, ?_⟩).ne'
+    simp
+  · refine (measure_pos_of_superset (s := ball (-2 * I : ℂ) 1) ?_ ?_ |>.ne')
+    · intro z hz
+      have := abs_im_le_norm (z - (-2 * I))
+      have h1 : ‖z - (-2 * I)‖ < 1 := by simpa [dist_eq_norm] using hz
+      simp only [mem_compl_iff, mem_setOf_eq, not_lt]
+      have h2 : |(z - (-2 * I)).im| < 1 := lt_of_le_of_lt this h1
+      have h3 := (abs_lt.1 h2).2
+      simp at h3
+      linarith
+    · exact (measure_ball_pos volume _ one_pos).ne'
 
 /-- Two density points of a measurable class with no unit pair are not at distance `1` (Lemma 3's core,
 `essClosure_dist_ne_one_of_mem_densitySet`, since a density point has positive upper density; a set with no unit pair has
 null unit pairs). -/
 theorem densitySet_dist_ne_one {S : Set ℂ} (hS : MeasurableSet S) (hno : ∀ x ∈ S, ∀ y ∈ S, dist x y ≠ 1)
     {x y : ℂ} (hx : x ∈ densitySet S) (hy : y ∈ densitySet S) : dist x y ≠ 1 := by
-  sorry
+  have hnull : UnitPairsNull S := by
+    have : unitPairSet S = ∅ := by
+      ext ⟨z, θ⟩
+      simp only [unitPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+      intro h1 h2
+      refine hno _ h1 _ h2 ?_
+      rw [dist_eq_norm, sub_add_cancel_left, norm_neg, norm_e]
+    rw [UnitPairsNull, this, measure_empty]
+  have hx' : x ∈ essClosure S := by
+    have : upperDensityAt S x = 1 := hx.limsup_eq
+    show 0 < upperDensityAt S x
+    rw [this]; exact one_pos
+  exact essClosure_dist_ne_one_of_mem_densitySet hS hnull hx' hy
+
+/-- The density ratio is at most `1`. -/
+theorem densityRatio_le_one (A : Set ℂ) (x : ℂ) {r : ℝ} (hr : 0 < r) : densityRatio A x r ≤ 1 := by
+  have hB : volume (closedBall x r) ≠ 0 := (measure_closedBall_pos volume x hr).ne'
+  have hB' : volume (closedBall x r) ≠ ⊤ := measure_closedBall_lt_top.ne
+  rw [densityRatio]
+  exact (ENNReal.div_le_div_right (measure_mono inter_subset_right) _).trans (ENNReal.div_self hB hB').le
+
+/-- Density sets are monotone. -/
+theorem densitySet_mono {A B : Set ℂ} (h : A ⊆ B) : densitySet A ⊆ densitySet B := by
+  intro x hx
+  refine tendsto_of_tendsto_of_tendsto_of_le_of_le' hx tendsto_const_nhds ?_ ?_
+  · filter_upwards [self_mem_nhdsWithin] with r hr
+    exact ENNReal.div_le_div_right (measure_mono (inter_subset_inter_left _ h)) _
+  · filter_upwards [self_mem_nhdsWithin] with r hr
+    exact densityRatio_le_one B x hr
+
+/-- A conull measurable set contains a unit pair. -/
+theorem exists_unit_pair_of_conull {S : Set ℂ} (h0 : volume Sᶜ = 0) :
+    ∃ x ∈ S, ∃ y ∈ S, dist x y = 1 := by
+  have h1 : volume ((fun x : ℂ => x + 1) ⁻¹' Sᶜ) = 0 := by rw [measure_preimage_add_right]; exact h0
+  have : (Sᶜ ∪ (fun x : ℂ => x + 1) ⁻¹' Sᶜ) ≠ univ := by
+    intro h
+    have : volume (univ : Set ℂ) = 0 := by rw [← h]; exact measure_union_null h0 h1
+    exact (by simp : volume (univ : Set ℂ) ≠ 0) this
+  obtain ⟨x, hx⟩ : ∃ x, x ∉ Sᶜ ∪ (fun x : ℂ => x + 1) ⁻¹' Sᶜ := by
+    by_contra h; push Not at h; exact this (eq_univ_of_forall h)
+  simp only [mem_union, mem_compl_iff, mem_preimage, not_or, not_not] at hx
+  exact ⟨x, hx.1, x + 1, hx.2, by simp⟩
 
 /-- **`E` is nonempty** for a disjoint measurable cover none of whose classes holds a unit pair (`falconer_lemma2_nonempty`
 on a class of positive measure and positive co-measure; if none exists one class is co-null and holds a unit pair). -/
 theorem exists_mem_falconerE {k : ℕ} {S : Fin k → Set ℂ} (hS : ∀ j, MeasurableSet (S j))
     (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = univ) (hno : ∀ j, ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1) :
     ∃ x : ℂ, ∀ j, x ∉ densitySet (S j) := by
-  sorry
+  obtain ⟨j, hj⟩ : ∃ j, volume (S j) ≠ 0 := by
+    by_contra h; push Not at h
+    have : volume (univ : Set ℂ) = 0 := by
+      rw [← hcov]; exact measure_iUnion_null h
+    exact (by simp : volume (univ : Set ℂ) ≠ 0) this
+  have hj' : volume (S j)ᶜ ≠ 0 := by
+    intro h0
+    obtain ⟨x, hx, y, hy, hxy⟩ := exists_unit_pair_of_conull h0
+    exact hno j x hx y hy hxy
+  obtain ⟨x, hx1, hx2⟩ := falconer_lemma2_nonempty (hS j) hj hj'
+  refine ⟨x, fun i hi => ?_⟩
+  by_cases hij : i = j
+  · subst hij; exact hx1 hi
+  · exact hx2 (densitySet_mono (fun z hz hzj => (Set.disjoint_left.1 (hd hij) hz) hzj) hi)
+
+/-- In a finite disjoint measurable cover the density ratios of the classes at a point sum to `1`. -/
+theorem sum_densityRatio_eq_one {k : ℕ} {C : Fin k → Set ℂ} (hm : ∀ j, MeasurableSet (C j))
+    (hd : Pairwise (Function.onFun Disjoint C)) (hcov : ⋃ j, C j = univ) (x : ℂ) {r : ℝ} (hr : 0 < r) :
+    ∑ b, densityRatio (C b) x r = 1 := by
+  have hB : volume (closedBall x r) ≠ 0 := (measure_closedBall_pos volume x hr).ne'
+  have hB' : volume (closedBall x r) ≠ ⊤ := measure_closedBall_lt_top.ne
+  simp only [densityRatio, div_eq_mul_inv, ← Finset.sum_mul]
+  have : ∑ b, volume (C b ∩ closedBall x r) = volume (closedBall x r) := by
+    have h := measure_iUnion (μ := volume) (f := fun b => C b ∩ closedBall x r)
+      (fun i j hij => (hd hij).mono inter_subset_left inter_subset_left)
+      (fun b => (hm b).inter measurableSet_closedBall)
+    rw [tsum_fintype, ← iUnion_inter, hcov, univ_inter] at h
+    exact h.symm
+  rw [this, ENNReal.mul_inv_cancel hB hB']
+
+/-- Some class of a finite disjoint measurable cover has positive upper density at every point. -/
+theorem exists_mem_essClosure_of_cover {k : ℕ} {C : Fin k → Set ℂ} (hm : ∀ j, MeasurableSet (C j))
+    (hd : Pairwise (Function.onFun Disjoint C)) (hcov : ⋃ j, C j = univ) (x : ℂ) :
+    ∃ b, x ∈ essClosure (C b) := by
+  by_contra hcon
+  push Not at hcon
+  have hS : Tendsto (fun r => ∑ b, densityRatio (C b) x r) (𝓝[>] 0) (𝓝 0) := by
+    have := tendsto_finsetSum Finset.univ (fun b _ => tendsto_densityRatio_of_notMem_essClosure (hcon b))
+    simpa using this
+  have h1 : Tendsto (fun r => ∑ b, densityRatio (C b) x r) (𝓝[>] 0) (𝓝 1) :=
+    tendsto_const_nhds.congr' (by
+      filter_upwards [self_mem_nhdsWithin] with r hr
+      exact (sum_densityRatio_eq_one hm hd hcov x hr).symm)
+  have := tendsto_nhds_unique hS h1
+  exact zero_ne_one this
 
 /-- **D2**: at a point of `E`, two classes of a disjoint measurable cover have positive upper density
 (`exists_ne_mem_essClosure` twice, from the class with positive upper density). -/
 theorem two_classes_of_mem_falconerE {k : ℕ} {S : Fin k → Set ℂ} (hS : ∀ j, MeasurableSet (S j))
     (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = univ) {x : ℂ} (hx : ∀ j, x ∉ densitySet (S j)) :
     ∃ i j, i ≠ j ∧ x ∈ essClosure (S i) ∧ x ∈ essClosure (S j) := by
-  sorry
+  obtain ⟨i, hi⟩ := exists_mem_essClosure_of_cover hS hd hcov x
+  obtain ⟨j, hji, hj⟩ := exists_ne_mem_essClosure hS hd hcov (a := i) (x := x) ⟨hi, hx i⟩
+  exact ⟨i, j, hji.symm, hi, hj⟩
 
 /-- Points at distance `1` on the circle of radius `r > 1/2` are `β = 2 arcsin(1/(2r))` apart in angle. -/
 theorem dist_circle_rotate {c : ℂ} {r : ℝ} (hr : 1 / 2 < r) (θ : ℝ) :
     dist (c + r * e θ) (c + r * e (θ + 2 * Real.arcsin (1 / (2 * r)))) = 1 := by
-  sorry
+  have hr0 : 0 < r := by linarith
+  set x := 1 / (2 * r) with hx
+  have hx0 : 0 < x := by positivity
+  have hx1 : x ≤ 1 := by rw [hx, div_le_one (by positivity)]; linarith
+  set β := 2 * Real.arcsin x with hβ
+  have hcos : Real.cos β = 1 - 2 * x ^ 2 := by
+    rw [hβ, Real.cos_two_mul, Real.cos_sq', Real.sin_arcsin (by linarith) hx1]; ring
+  have hsq := norm_sq_e_sub θ 1 (θ + β)
+  rw [Complex.ofReal_one, one_mul] at hsq
+  have hc : Real.cos (θ - (θ + β)) = 1 - 2 * x ^ 2 := by
+    rw [show θ - (θ + β) = -β by ring, Real.cos_neg, hcos]
+  rw [hc] at hsq
+  have hn : ‖e θ - e (θ + β)‖ = 2 * x := by
+    have h2 : ‖e θ - e (θ + β)‖ ^ 2 = (2 * x) ^ 2 := by rw [hsq]; ring
+    exact (pow_left_inj₀ (norm_nonneg _) (by positivity) (by norm_num : (2:ℕ) ≠ 0)).mp h2
+  rw [dist_eq_norm, show c + (r : ℂ) * e θ - (c + (r : ℂ) * e (θ + β)) = (r : ℂ) * (e θ - e (θ + β)) by ring,
+    norm_mul, hn, Complex.norm_real, Real.norm_of_nonneg hr0.le, hx]
+  field_simp
 
 /-- **The irrational rotation** (`AddCircle.ergodic_add_left`): no measurable `A ⊆ ℝ` of angles, `2π`-periodic, has
 `A + β` a.e. equal to its complement when `β/π` is irrational (`A + 2β =ᵐ A` forces `A` null or co-null). -/
 theorem not_rotate_ae_eq_compl {A : Set ℝ} (hA : MeasurableSet A) (hper : ∀ θ, θ + 2 * Real.pi ∈ A ↔ θ ∈ A) {β : ℝ}
     (hβ : Irrational (β / Real.pi)) (h : ∀ᵐ θ ∂arcLength, (θ + β ∈ A ↔ θ ∉ A)) : False := by
-  sorry
+  haveI : Fact (0 < 2 * Real.pi) := ⟨by positivity⟩
+  set T := 2 * Real.pi with hT
+  -- the indicator, as a periodic function
+  set P : ℝ → ℝ := A.indicator 1 with hP
+  have hPper : Function.Periodic P T := by
+    intro θ
+    by_cases hθ : θ ∈ A
+    · simp [hP, hθ, (hper θ).2 hθ]
+    · have : θ + T ∉ A := fun h' => hθ ((hper θ).1 h')
+      simp [hP, hθ, this]
+  set g : AddCircle T → ℝ := fun t => P (AddCircle.equivIoc T 0 t).1 with hg
+  have hgm : Measurable g :=
+    (measurable_const.indicator hA).comp (measurable_subtype_coe.comp (AddCircle.measurableEquivIoc T 0).measurable)
+  have hgcoe : ∀ a : ℝ, g (a : AddCircle T) = P a := by
+    intro a
+    have : (AddCircle.equivIoc T 0 (a : AddCircle T)).1 = toIocMod (by positivity : (0 : ℝ) < T) 0 a := rfl
+    rw [hg]; dsimp only
+    rw [this, toIocMod]
+    exact hPper.sub_zsmul_eq _
+  set b : AddCircle T := (β : AddCircle T) with hb
+  have hmp := AddCircle.measurePreserving_mk T 0
+  have h' : ∀ᵐ θ ∂(volume.restrict (Ioc 0 (0 + T))), (θ + β ∈ A ↔ θ ∉ A) := by
+    have e1 : (volume : Measure ℝ).restrict (Ico 0 T) = volume.restrict (Ioc 0 (0 + T)) := by
+      rw [zero_add]; exact Measure.restrict_congr_set Ico_ae_eq_Ioc
+    have : arcLength = volume.restrict (Ioc 0 (0 + T)) := by rw [arcLength, ← e1]
+    rwa [this] at h
+  have hset : MeasurableSet {t : AddCircle T | g (t + b) = 1 - g t} :=
+    measurableSet_eq_fun (hgm.comp (measurable_add_const b)) (measurable_const.sub hgm)
+  have S1 : ∀ᵐ t ∂(volume : Measure (AddCircle T)), g (t + b) = 1 - g t := by
+    rw [← hmp.map_eq]
+    refine (ae_map_iff hmp.measurable.aemeasurable hset).mpr ?_
+    filter_upwards [h'] with θ hQ
+    have e1 : ((θ : AddCircle T) + b) = ((θ + β : ℝ) : AddCircle T) := by rw [hb]; rfl
+    show g ((θ : AddCircle T) + b) = 1 - g θ
+    rw [e1, hgcoe, hgcoe]
+    by_cases hθ : θ ∈ A
+    · have : θ + β ∉ A := fun h2 => (hQ.1 h2) hθ
+      simp [hP, hθ, this]
+    · have : θ + β ∈ A := hQ.2 hθ
+      simp [hP, hθ, this]
+  have hord : addOrderOf (b + b) = 0 := by
+    have hbb : b + b = ((2 * β : ℝ) : AddCircle T) := by rw [hb, show (2 * β) = β + β by ring, AddCircle.coe_add]
+    have hirr2 : Irrational ((2 * β) / T) := by
+      have : (2 * β) / T = β / Real.pi := by rw [hT]; field_simp
+      rw [this]; exact hβ
+    rw [hbb]
+    exact AddCircle.denseRange_zsmul_iff.mp (AddCircle.denseRange_zsmul_coe_iff.mpr hirr2)
+  have herg : Ergodic (· + (b + b)) (volume : Measure (AddCircle T)) := AddCircle.ergodic_add_right.mpr hord
+  have S1' : ∀ᵐ t ∂(volume : Measure (AddCircle T)), g (t + b + b) = 1 - g (t + b) :=
+    (measurePreserving_add_right (volume : Measure (AddCircle T)) b).quasiMeasurePreserving.ae
+      (p := fun t => g (t + b) = 1 - g t) S1
+  have hinv : (g ∘ (· + (b + b))) =ᵐ[volume] g := by
+    filter_upwards [S1, S1'] with t h1 h2
+    simp only [Function.comp, ← add_assoc]
+    rw [h2, h1]; ring
+  obtain ⟨c, hc⟩ := herg.ae_eq_const_of_ae_eq_comp₀ hgm.nullMeasurable hinv
+  have hc' : ∀ᵐ t ∂(volume : Measure (AddCircle T)), g (t + b) = c :=
+    (measurePreserving_add_right (volume : Measure (AddCircle T)) b).quasiMeasurePreserving.ae
+      (p := fun t => g t = c) hc
+  have h01 : ∀ t, g t = 0 ∨ g t = 1 := by
+    intro t; simp only [hg, hP]; by_cases hx : (AddCircle.equivIoc T 0 t).1 ∈ A <;> simp [hx]
+  obtain ⟨t, h1, h2, h3⟩ := (hc.and (hc'.and S1)).exists
+  simp only [Function.const_apply] at h1 h2
+  rcases h01 t with h | h <;> rw [h] at h1 <;> subst h1 <;> rw [h2] at h3 <;> norm_num [h] at h3
+
+/-- **A periodic property holds almost everywhere on the circle after any shift** (`2π`-periodic `Q`; `arcLength`
+is Lebesgue measure on `[0, 2π)`, and translates of `[0, 2π)` by `2πℤ` cover `ℝ`). -/
+theorem ae_arcLength_shift {Q : ℝ → Prop} (hQ : ∀ θ, Q (θ + 2 * Real.pi) ↔ Q θ) (h : ∀ᵐ θ ∂arcLength, Q θ) (β : ℝ) :
+    ∀ᵐ θ ∂arcLength, Q (θ + β) := by
+  set T := 2 * Real.pi with hT
+  have hT0 : 0 < T := by positivity
+  have hZ : ∀ (k : ℤ) θ, Q (θ + k * T) ↔ Q θ := by
+    intro k θ
+    have hp : Function.Periodic (fun θ => Q θ) T := fun θ => propext (hQ θ)
+    exact (propext_iff.mp (hp.int_mul k θ)).symm.trans Iff.rfl |>.symm
+  have h1 : volume {θ : ℝ | θ ∈ Ico 0 T ∧ ¬ Q θ} = 0 := by
+    rw [arcLength, ae_restrict_iff' measurableSet_Ico] at h
+    simpa [ae_iff, hT, and_assoc] using h
+  have h2 : volume {θ : ℝ | ¬ Q θ} = 0 := by
+    refine measure_mono_null (t := ⋃ k : ℤ, (fun θ : ℝ => θ + k * T) ⁻¹' {θ : ℝ | θ ∈ Ico 0 T ∧ ¬ Q θ}) ?_ ?_
+    · intro θ hθ
+      refine mem_iUnion.2 ⟨-⌊θ / T⌋, ?_⟩
+      simp only [mem_preimage, mem_setOf_eq]
+      have hfl := Int.floor_le (θ / T)
+      have hfl2 := Int.lt_floor_add_one (θ / T)
+      refine ⟨⟨?_, ?_⟩, ?_⟩
+      · push_cast
+        have : (⌊θ / T⌋ : ℝ) * T ≤ θ := by rwa [le_div_iff₀ hT0] at hfl
+        linarith
+      · push_cast
+        have : θ < ((⌊θ / T⌋ : ℝ) + 1) * T := by rwa [div_lt_iff₀ hT0] at hfl2
+        linarith
+      · rwa [hZ]
+    · refine measure_iUnion_null fun k => ?_
+      rw [measure_preimage_add_right]; exact h1
+  have h3 : volume {θ : ℝ | ¬ Q (θ + β)} = 0 := by
+    have := measure_preimage_add_right (volume : Measure ℝ) β {θ : ℝ | ¬ Q θ}
+    rw [h2] at this
+    exact this
+  have : arcLength ≪ volume := Measure.restrict_le_self.absolutelyContinuous
+  exact this (by simpa [ae_iff] using h3) |> fun h => by simpa [ae_iff] using h
+
+/-- Density sets of disjoint measurable sets are disjoint. -/
+theorem densitySet_disjoint {S₁ S₂ : Set ℂ} (h₁ : MeasurableSet S₁) (hd : Disjoint S₁ S₂) {x : ℂ}
+    (hx : x ∈ densitySet S₁) : x ∉ densitySet S₂ := fun h2 =>
+  densitySet_disjoint_compl h₁ hx (densitySet_mono (fun _ hz hz1 => Set.disjoint_left.1 hd hz1 hz) h2)
 
 /-- **`[Falconer1981]` Lemma 4, measurable form**: if almost every point of the circle of radius `r > 1/2` about `c` lies in
 the density set of one of two disjoint measurable classes with no unit pair, and `arcsin(1/(2r))/π` is irrational, then
@@ -333,7 +557,51 @@ theorem falconer_lemma4 {S₁ S₂ : Set ℂ} (h₁ : MeasurableSet S₁) (h₂ 
     (hno₁ : ∀ x ∈ S₁, ∀ y ∈ S₁, dist x y ≠ 1) (hno₂ : ∀ x ∈ S₂, ∀ y ∈ S₂, dist x y ≠ 1) {c : ℂ} {r : ℝ}
     (hr : 1 / 2 < r) (hirr : Irrational (Real.arcsin (1 / (2 * r)) / Real.pi))
     (hae : ∀ᵐ θ ∂arcLength, c + r * e θ ∈ densitySet S₁ ∪ densitySet S₂) : False := by
-  sorry
+  set β := 2 * Real.arcsin (1 / (2 * r)) with hβ
+  set D₁ := densitySet S₁
+  set D₂ := densitySet S₂
+  set A : Set ℝ := {θ | c + r * e θ ∈ D₁} with hA
+  have hcont : Continuous fun θ : ℝ => c + (r : ℂ) * e θ := continuous_const.add (continuous_const.mul continuous_e)
+  have hAm : MeasurableSet A := hcont.measurable (measurableSet_densitySet h₁)
+  have hper : ∀ θ, θ + 2 * Real.pi ∈ A ↔ θ ∈ A := by
+    intro θ; simp only [hA, mem_setOf_eq, e_add_two_pi]
+  have hirr2 : Irrational (β / Real.pi) := by
+    have : β / Real.pi = 2 * (Real.arcsin (1 / (2 * r)) / Real.pi) := by rw [hβ]; ring
+    rw [this]; exact hirr.ratCast_mul (q := 2) (by norm_num) |> fun h => by simpa using h
+  have hQ : ∀ θ, (c + r * e (θ + 2 * Real.pi) ∈ D₁ ∪ D₂) ↔ (c + r * e θ ∈ D₁ ∪ D₂) := by
+    intro θ; simp only [e_add_two_pi]
+  have hae2 := ae_arcLength_shift hQ hae β
+  refine not_rotate_ae_eq_compl hAm hper hirr2 ?_
+  filter_upwards [hae, hae2] with θ h1 h2
+  have hdist := dist_circle_rotate (c := c) hr θ
+  simp only [hA, mem_setOf_eq]
+  rcases h1 with h1 | h1
+  · -- the point is in `D₁`; the rotated point must be in `D₂`
+    have h2' : c + r * e (θ + β) ∈ D₂ := by
+      rcases h2 with h2 | h2
+      · exact absurd hdist (densitySet_dist_ne_one h₁ hno₁ h1 h2)
+      · exact h2
+    exact ⟨fun h => absurd h (densitySet_disjoint h₂ hd.symm h2'), fun h => absurd h1 h⟩
+  · have h1' : c + r * e θ ∉ D₁ := densitySet_disjoint h₂ hd.symm h1
+    have h2' : c + r * e (θ + β) ∈ D₁ := by
+      rcases h2 with h2 | h2
+      · exact h2
+      · exact absurd hdist (densitySet_dist_ne_one h₂ hno₂ h1 h2)
+    exact ⟨fun _ => h1', fun _ => h2'⟩
+
+/-- A set with no unit pair has null unit pairs. -/
+theorem unitPairsNull_of_no_unit_pair {S : Set ℂ} (hno : ∀ x ∈ S, ∀ y ∈ S, dist x y ≠ 1) : UnitPairsNull S := by
+  have : unitPairSet S = ∅ := by
+    ext ⟨z, θ⟩
+    simp only [unitPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+    intro h1 h2
+    refine hno _ h1 _ h2 ?_
+    rw [dist_eq_norm, sub_add_cancel_left, norm_neg, norm_e]
+  rw [UnitPairsNull, this, measure_empty]
+
+/-- A rotation about a point is an isometry: `dist (p + e θ * y) (p + e θ * z) = dist y z`. -/
+theorem dist_rot (p : ℂ) (θ : ℝ) (y z : ℂ) : dist (p + e θ * y) (p + e θ * z) = dist y z := by
+  rw [dist_eq_norm, dist_eq_norm, show p + e θ * y - (p + e θ * z) = e θ * (y - z) by ring, norm_mul, norm_e, one_mul]
 
 /-- **The placement and the fan** (MA1 § 2.2): for a disjoint measurable cover with no monochromatic unit pair, a Falconer
 fan places its tip's circle about the apex almost everywhere in two density sets. -/
@@ -343,7 +611,86 @@ theorem fan_tip_ae_mem {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht
     (hno : ∀ j, ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1) :
     ∃ (c : ℂ) (i j : Fin k), i ≠ j ∧
       ∀ᵐ θ ∂arcLength, c + (dist t a : ℝ) * e θ ∈ densitySet (S i) ∪ densitySet (S j) := by
-  sorry
+  classical
+  set E : Set ℂ := {x | ∀ j, x ∉ densitySet (S j)} with hE
+  have hEm : MeasurableSet E := by
+    have : E = ⋂ j, (densitySet (S j))ᶜ := by ext; simp [hE]
+    rw [this]; exact MeasurableSet.iInter fun j => (measurableSet_densitySet (hS j)).compl
+  have hE0 : volume E = 0 := by
+    refine measure_mono_null (t := ⋃ j, S j \ densitySet (S j)) ?_
+      (measure_iUnion_null fun j => volume_diff_densitySet (hS j))
+    intro x hx
+    have : x ∈ ⋃ j, S j := hcov ▸ mem_univ x
+    obtain ⟨j, hj⟩ := mem_iUnion.1 this
+    exact mem_iUnion.2 ⟨j, hj, hx j⟩
+  have hEne : E.Nonempty := exists_mem_falconerE hS hd hcov hno
+  obtain ⟨v, hvE, hθ⟩ := falconer_lemma1 hEm hEne hE0 (C := (V : Set ℂ)) V.countable_toSet ha
+  obtain ⟨i, j, hij, hi, hj⟩ := two_classes_of_mem_falconerE hS hd hcov (x := a + v) hvE
+  obtain ⟨hat, hnadj, hF⟩ := hfan
+  have hta : t ≠ a := fun h => hat (Subtype.ext h.symm)
+  set r := dist t a with hr
+  set α := Complex.arg (t - a) with hα
+  have hQ : ∀ θ, (a + v + (r : ℂ) * e (θ + 2 * Real.pi) ∈ densitySet (S i) ∪ densitySet (S j)) ↔
+      (a + v + (r : ℂ) * e θ ∈ densitySet (S i) ∪ densitySet (S j)) := by
+    intro θ; simp only [e_add_two_pi]
+  refine ⟨a + v, i, j, hij, ?_⟩
+  -- the property after rotating by `θ`, then shifting back by `α`
+  have key : ∀ᵐ θ ∂arcLength, a + v + (r : ℂ) * e (θ + α) ∈ densitySet (S i) ∪ densitySet (S j) := by
+    filter_upwards [hθ] with θ hθ'
+    set q : ℂ → ℂ := fun y => a + v + e θ * (y - a) with hq
+    have hex : ∀ w : ↥{w : ↥(V : Set ℂ) | w ≠ ⟨a, ha⟩}, ∃ l, q w.1.1 ∈ densitySet (S l) := by
+      intro w
+      have hne : w.1.1 ≠ a := fun h => w.2 (Subtype.ext h)
+      by_contra hcon
+      push Not at hcon
+      exact hne (hθ' w.1.1 w.1.2 hcon)
+    choose f hf using hex
+    have hrot : ∀ y z : ℂ, dist (q y) (q z) = dist y z := fun y z => by
+      simp only [hq]
+      rw [show a + v + e θ * (y - a) = (a + v) + e θ * (y - a) from rfl]
+      rw [dist_rot (a + v) θ (y - a) (z - a), dist_eq_norm, dist_eq_norm]; congr 1; ring
+    let C' : ((unitDistance ℂ).induce (V : Set ℂ)).induce {w : ↥(V : Set ℂ) | w ≠ ⟨a, ha⟩} |>.Coloring (Fin k) :=
+      SimpleGraph.Coloring.mk f (by
+        intro u w huw hfe
+        have h1 : dist u.1.1 w.1.1 = 1 := unitDistance_adj.1 huw
+        have h2 := hf u
+        have h3 := hf w
+        rw [hfe] at h2
+        exact densitySet_dist_ne_one (hS _) (hno _) h2 h3 (by rw [hrot]; exact h1))
+    have hav : ∀ w (hw : w ≠ (⟨a, ha⟩ : ↥(V : Set ℂ))), ((unitDistance ℂ).induce (V : Set ℂ)).Adj ⟨a, ha⟩ w →
+        C' ⟨w, hw⟩ ≠ i ∧ C' ⟨w, hw⟩ ≠ j := by
+      intro w hw hadj
+      have h1 : dist a w.1 = 1 := unitDistance_adj.1 hadj
+      have h2 := hf ⟨w, hw⟩
+      have hpq : dist (a + v) (q w.1) = 1 := by
+        have := hrot a w.1
+        have hq0 : q a = a + v := by simp [hq]
+        rw [hq0] at this; rw [this]; exact h1
+      constructor
+      · intro hc
+        change f ⟨w, hw⟩ = i at hc
+        rw [hc] at h2
+        exact essClosure_dist_ne_one_of_mem_densitySet (hS i) (unitPairsNull_of_no_unit_pair (hno i)) hi h2 hpq
+      · intro hc
+        change f ⟨w, hw⟩ = j at hc
+        rw [hc] at h2
+        exact essClosure_dist_ne_one_of_mem_densitySet (hS j) (unitPairsNull_of_no_unit_pair (hno j)) hj h2 hpq
+    have hta' : (⟨t, ht⟩ : ↥(V : Set ℂ)) ≠ ⟨a, ha⟩ := fun h => hta (congrArg Subtype.val h)
+    have hres := hF C' i j hij hav hta'
+    have hft := hf ⟨⟨t, ht⟩, hta'⟩
+    have hqt : q t = a + v + (r : ℂ) * e (θ + α) := by
+      have h0 := eq_norm_mul_e_arg (t - a)
+      have hrn : (r : ℂ) = ‖t - a‖ := by rw [hr, dist_eq_norm]
+      simp only [hq]
+      rw [e_add, ← mul_assoc, hrn, mul_comm (‖t - a‖ : ℂ) (e θ), mul_assoc, ← h0]
+    rw [← hqt]
+    rcases hres with h | h
+    · exact Or.inl (h ▸ hft)
+    · exact Or.inr (h ▸ hft)
+  have h2 := ae_arcLength_shift (Q := fun θ => a + v + (r : ℂ) * e (θ + α) ∈ densitySet (S i) ∪ densitySet (S j))
+    (by intro θ; simp only [show θ + 2 * Real.pi + α = (θ + α) + 2 * Real.pi by ring, e_add_two_pi]) key (-α)
+  filter_upwards [h2] with θ h
+  simpa using h
 
 /-- **FS129-SA1-FALC-RED**: if a finite unit-distance graph `H ⊂ ℝ²` has a Falconer fan at `k` colours with apex `a` and
 tip `t`, `|t − a| = r > 1/2` and `arcsin(1/(2r))/π` irrational, then every cover of the plane by `k` measurable sets has
@@ -353,7 +700,29 @@ theorem falconer_reduction {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V)
     (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)) (S : Fin k → Set ℂ)
     (hS : ∀ j, MeasurableSet (S j)) (hcov : ⋃ j, S j = univ) :
     ∃ j, ∃ x ∈ S j, ∃ y ∈ S j, dist x y = 1 := by
-  sorry
+  by_contra hcon
+  push Not at hcon
+  set S' : Fin k → Set ℂ := fun j => S j \ ⋃ i ∈ {i : Fin k | i < j}, S i with hS'
+  have hS'm : ∀ j, MeasurableSet (S' j) := fun j =>
+    (hS j).diff (MeasurableSet.biUnion (Set.to_countable _) fun i _ => hS i)
+  have hS'sub : ∀ j, S' j ⊆ S j := fun j => Set.sdiff_subset
+  have hd' : Pairwise (Function.onFun Disjoint S') := by
+    intro i j hij
+    rcases lt_or_gt_of_ne hij with h | h
+    · refine Set.disjoint_left.2 fun x hxi hxj => hxj.2 (mem_iUnion₂.2 ⟨i, h, hS'sub i hxi⟩)
+    · refine Set.disjoint_left.2 fun x hxi hxj => hxi.2 (mem_iUnion₂.2 ⟨j, h, hS'sub j hxj⟩)
+  have hcov' : ⋃ j, S' j = univ := by
+    refine eq_univ_of_forall fun x => ?_
+    have : x ∈ ⋃ j, S j := hcov ▸ mem_univ x
+    obtain ⟨j, hj⟩ := mem_iUnion.1 this
+    obtain ⟨j₀, hj₀, hmin⟩ := WellFounded.has_min wellFounded_lt {j : Fin k | x ∈ S j} ⟨j, hj⟩
+    refine mem_iUnion.2 ⟨j₀, hj₀, fun hx => ?_⟩
+    obtain ⟨i, hi, hxi⟩ := mem_iUnion₂.1 hx
+    exact hmin i hxi hi
+  have hno' : ∀ j, ∀ x ∈ S' j, ∀ y ∈ S' j, dist x y ≠ 1 := fun j x hx y hy =>
+    hcon j x (hS'sub j hx) y (hS'sub j hy)
+  obtain ⟨c, i, j, hij, hae⟩ := fan_tip_ae_mem V ha ht hfan hS'm hd' hcov' hno'
+  exact falconer_lemma4 (hS'm i) (hS'm j) (hd' hij) (hno' i) (hno' j) hr hirr hae
 
 /-- **FS129-SA1-FALC-RED**, its conclusion for Falconer's chromatic number: `χ_m(ℝ²) ≥ k + 1`. -/
 theorem le_chiM_of_falconerFan {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V)

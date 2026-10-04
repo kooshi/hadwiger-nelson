@@ -5,6 +5,7 @@ import Mathlib.MeasureTheory.Measure.Support
 import Mathlib.MeasureTheory.Covering.BesicovitchVectorSpace
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
 import Mathlib.Analysis.Real.Pi.Bounds
+import Mathlib.MeasureTheory.Measure.Lebesgue.VolumeOfBalls
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
 
 /-!
@@ -801,17 +802,199 @@ theorem twoBall_pairs_ge {A : Set ℂ} (hA : MeasurableSet A) {x y : ℂ} {r : �
         refine le_trans (measure_mono fun θ hθ => ?_) h0
         exact hθ.2
 
+/-- The area of a closed disc, in `ofReal` form. -/
+theorem volume_closedBall_ofReal (z : ℂ) {ρ : ℝ} (hρ : 0 ≤ ρ) :
+    volume (closedBall z ρ) = ENNReal.ofReal (ρ ^ 2 * Real.pi) := by
+  rw [Complex.volume_closedBall, ENNReal.ofReal_mul (sq_nonneg ρ), ENNReal.ofReal_pow hρ, ← NNReal.coe_real_pi,
+    ENNReal.ofReal_coe_nnreal]
+
+/-- **Lemma 3's inequality** (from `twoBall_pairs_ge`): for a measurable `A` with null unit pairs and `x`, `y` at distance exactly `1`, `densityRatio A x (r/4) ≤ 16π · densityRatio Aᶜ y (2r)` for `0 < r ≤ 1/2`. -/
+theorem densityRatio_le_of_unit_dist {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {x y : ℂ}
+    (hxy : dist x y = 1) {r : ℝ} (hr : 0 < r) (hr2 : r ≤ 1 / 2) :
+    densityRatio A x (r / 4) ≤ ENNReal.ofReal (16 * Real.pi) * densityRatio Aᶜ y (2 * r) := by
+  have hd : |dist x y - 1| ≤ r := by rw [hxy]; simpa using hr.le
+  have h2 := twoBall_pairs_ge hA hr hr2 hd
+  have hp : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ A ∩ ball x (r / 2) ∧ q.1 + e q.2 ∈ A ∩ ball y (2 * r)} = 0 :=
+    measure_mono_null (t := unitPairSet A) (fun q hq => ⟨hq.1.1, hq.2.1⟩) (show (volume.prod arcLength) (unitPairSet A) = 0 from hnull)
+  rw [hp, zero_add] at h2
+  have hV : volume (A ∩ closedBall x (r / 4)) ≤ volume (A ∩ ball x (r / 2)) :=
+    measure_mono (inter_subset_inter_right _ (closedBall_subset_ball (by linarith)))
+  have hW : volume (ball y (2 * r) \ A) ≤ volume (Aᶜ ∩ closedBall y (2 * r)) :=
+    measure_mono (fun z hz => ⟨hz.2, ball_subset_closedBall hz.1⟩)
+  have h3 : ENNReal.ofReal (2 * r) * volume (A ∩ closedBall x (r / 4)) ≤
+      ENNReal.ofReal (Real.pi * r / 2) * volume (Aᶜ ∩ closedBall y (2 * r)) :=
+    (mul_le_mul_right hV _).trans (h2.trans (mul_le_mul_right hW _))
+  have h4 : volume (A ∩ closedBall x (r / 4)) ≤ ENNReal.ofReal (Real.pi / 4) * volume (Aᶜ ∩ closedBall y (2 * r)) := by
+    have := mul_le_mul_right h3 (ENNReal.ofReal (1 / (2 * r)))
+    rw [← mul_assoc, ← mul_assoc, ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity)] at this
+    have e1 : 1 / (2 * r) * (2 * r) = 1 := by field_simp
+    have e2 : 1 / (2 * r) * (Real.pi * r / 2) = Real.pi / 4 := by field_simp; ring
+    rw [e1, e2, ENNReal.ofReal_one, one_mul] at this
+    exact this
+  unfold densityRatio
+  apply ENNReal.div_le_of_le_mul
+  rw [volume_closedBall_ofReal _ (by positivity), volume_closedBall_ofReal _ (by positivity)]
+  have e3 : ENNReal.ofReal (16 * Real.pi) * (volume (Aᶜ ∩ closedBall y (2 * r)) / ENNReal.ofReal ((2 * r) ^ 2 * Real.pi))
+      * ENNReal.ofReal ((r / 4) ^ 2 * Real.pi) = ENNReal.ofReal (Real.pi / 4) * volume (Aᶜ ∩ closedBall y (2 * r)) := by
+    have hc2 : ENNReal.ofReal ((2 * r) ^ 2 * Real.pi) ≠ 0 := by
+      simpa using (by positivity : 0 < (2 * r) ^ 2 * Real.pi)
+    have hc2' : ENNReal.ofReal ((2 * r) ^ 2 * Real.pi) ≠ ⊤ := ENNReal.ofReal_ne_top
+    set W := volume (Aᶜ ∩ closedBall y (2 * r))
+    have : ENNReal.ofReal (16 * Real.pi) * ENNReal.ofReal ((r / 4) ^ 2 * Real.pi) =
+        ENNReal.ofReal (Real.pi / 4) * ENNReal.ofReal ((2 * r) ^ 2 * Real.pi) := by
+      rw [← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity)]
+      congr 1; ring
+    calc ENNReal.ofReal (16 * Real.pi) * (W / ENNReal.ofReal ((2 * r) ^ 2 * Real.pi)) * ENNReal.ofReal ((r / 4) ^ 2 * Real.pi)
+        = (ENNReal.ofReal (16 * Real.pi) * ENNReal.ofReal ((r / 4) ^ 2 * Real.pi)) * (W / ENNReal.ofReal ((2 * r) ^ 2 * Real.pi)) := by ring
+      _ = ENNReal.ofReal (Real.pi / 4) * (ENNReal.ofReal ((2 * r) ^ 2 * Real.pi) * (W / ENNReal.ofReal ((2 * r) ^ 2 * Real.pi))) := by
+        rw [this, mul_assoc]
+      _ = ENNReal.ofReal (Real.pi / 4) * W := by
+        rw [mul_comm (ENNReal.ofReal _) (W / _), ENNReal.div_mul_cancel hc2 hc2']
+  rw [e3]; exact h4
+
+/-- Scaling by a positive constant maps `𝓝[>] 0` to itself. -/
+theorem tendsto_mul_nhdsGT (c : ℝ) (hc : 0 < c) : Tendsto (fun r : ℝ => c * r) (𝓝[>] 0) (𝓝[>] 0) := by
+  refine tendsto_nhdsWithin_iff.2 ⟨?_, ?_⟩
+  · have : Tendsto (fun r : ℝ => c * r) (𝓝 0) (𝓝 (c * 0)) := (continuous_const.mul continuous_id).tendsto 0
+    rw [mul_zero] at this
+    exact this.mono_left nhdsWithin_le_nhds
+  · filter_upwards [self_mem_nhdsWithin] with r hr using mul_pos hc hr
+
 /-- **Lemma 3's core** (`[Falconer1981]` Lemma 3, measurable form): for a measurable `A` with null unit pairs, a point
 where `A` has positive upper density is never at distance exactly `1` from a density point of `A`. From `twoBall_pairs_ge`
 at small `r` (the hole at the density point is `o(r²)`, the mass at the other point `≥ c r²` along a sequence). -/
 theorem essClosure_dist_ne_one_of_mem_densitySet {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A)
     {x y : ℂ} (hx : x ∈ essClosure A) (hy : y ∈ densitySet A) : dist x y ≠ 1 := by
-  sorry
+  intro h1
+  have hc : Tendsto (densityRatio Aᶜ y) (𝓝[>] 0) (𝓝 0) := by
+    have := ENNReal.Tendsto.sub (tendsto_const_nhds (x := (1 : ENNReal))) hy (Or.inl ENNReal.one_ne_top)
+    rw [tsub_self] at this
+    refine this.congr' ?_
+    filter_upwards [self_mem_nhdsWithin] with r hr
+    have hs := densityRatio_add_compl hA y hr
+    have hne : densityRatio A y r ≠ ⊤ := by
+      intro htop; rw [htop, top_add] at hs; exact ENNReal.top_ne_one hs
+    exact (ENNReal.eq_sub_of_add_eq hne (by rw [add_comm]; exact hs)).symm
+  have hc2 : Tendsto (fun r : ℝ => densityRatio Aᶜ y (2 * r)) (𝓝[>] 0) (𝓝 0) :=
+    hc.comp (tendsto_mul_nhdsGT 2 (by norm_num))
+  have hK : Tendsto (fun r : ℝ => ENNReal.ofReal (16 * Real.pi) * densityRatio Aᶜ y (2 * r)) (𝓝[>] 0) (𝓝 0) := by
+    have := ENNReal.Tendsto.const_mul hc2 (Or.inr (ENNReal.ofReal_ne_top (r := 16 * Real.pi)))
+    rwa [mul_zero] at this
+  have hF : Tendsto (fun r : ℝ => densityRatio A x (r / 4)) (𝓝[>] 0) (𝓝 0) := by
+    refine tendsto_of_tendsto_of_tendsto_of_le_of_le' tendsto_const_nhds hK (Eventually.of_forall fun _ => bot_le) ?_
+    filter_upwards [Ioo_mem_nhdsGT (by norm_num : (0:ℝ) < 1 / 2)] with r hr
+    exact densityRatio_le_of_unit_dist hA hnull h1 hr.1 hr.2.le
+  have hG : Tendsto (densityRatio A x) (𝓝[>] 0) (𝓝 0) := by
+    have := hF.comp (tendsto_mul_nhdsGT 4 (by norm_num))
+    refine this.congr (fun r => ?_)
+    simp only [Function.comp]
+    congr 1; ring
+  have : upperDensityAt A x = 0 := hG.limsup_eq
+  exact absurd this (ne_of_gt hx)
+
+/-- At a density point of a measurable `A` the density of the complement tends to `0`. -/
+theorem tendsto_densityRatio_compl_of_mem {A : Set ℂ} (hA : MeasurableSet A) {y : ℂ} (hy : y ∈ densitySet A) :
+    Tendsto (densityRatio Aᶜ y) (𝓝[>] 0) (𝓝 0) := by
+  have := ENNReal.Tendsto.sub (tendsto_const_nhds (x := (1 : ENNReal))) hy (Or.inl ENNReal.one_ne_top)
+  rw [tsub_self] at this
+  refine this.congr' ?_
+  filter_upwards [self_mem_nhdsWithin] with r hr
+  have hs := densityRatio_add_compl hA y hr
+  have hne : densityRatio A y r ≠ ⊤ := by
+    intro htop; rw [htop, top_add] at hs; exact ENNReal.top_ne_one hs
+  exact (ENNReal.eq_sub_of_add_eq hne (by rw [add_comm]; exact hs)).symm
+
+/-- The converse: complement density `0` makes a density point. -/
+theorem mem_densitySet_of_tendsto_compl {A : Set ℂ} (hA : MeasurableSet A) {y : ℂ}
+    (hy : Tendsto (densityRatio Aᶜ y) (𝓝[>] 0) (𝓝 0)) : y ∈ densitySet A := by
+  have := ENNReal.Tendsto.sub (tendsto_const_nhds (x := (1 : ENNReal))) hy (Or.inl ENNReal.one_ne_top)
+  rw [tsub_zero] at this
+  refine this.congr' ?_
+  filter_upwards [self_mem_nhdsWithin] with r hr
+  have hs := densityRatio_add_compl hA y hr
+  have hne : densityRatio Aᶜ y r ≠ ⊤ := by
+    intro htop; rw [htop, add_top] at hs; exact ENNReal.top_ne_one hs
+  exact (ENNReal.eq_sub_of_add_eq hne hs).symm
+
+/-- For a fixed radius, the density ratio of a measurable set is measurable in the centre (Tonelli). -/
+theorem measurable_densityRatio_centre {B : Set ℂ} (hB : MeasurableSet B) (q : ℝ) :
+    Measurable fun x : ℂ => densityRatio B x q := by
+  have hs : MeasurableSet {p : ℂ × ℂ | p.2 ∈ B ∧ dist p.2 p.1 ≤ q} :=
+    (measurable_snd hB).inter (measurableSet_le (continuous_snd.dist continuous_fst).measurable measurable_const)
+  have h1 : Measurable fun x : ℂ => volume (B ∩ closedBall x q) := by
+    have := measurable_measure_prodMk_left (ν := (volume : Measure ℂ)) hs
+    have e : (fun x : ℂ => volume (B ∩ closedBall x q)) =
+        fun x : ℂ => (volume : Measure ℂ) (Prod.mk x ⁻¹' {p : ℂ × ℂ | p.2 ∈ B ∧ dist p.2 p.1 ≤ q}) := by
+      funext x; congr 1
+    rw [e]; exact this
+  simp only [densityRatio, Complex.volume_closedBall]
+  exact h1.div_const _
+
+/-- The density set read along rational radii (`r ↦ |Aᶜ ∩ B̄(x, r)|` is monotone, and `|B̄(x, q)| ≤ 4|B̄(x, r)|` for `r < q < 2r`). -/
+theorem densitySet_iff_rat {A : Set ℂ} (hA : MeasurableSet A) (x : ℂ) :
+    x ∈ densitySet A ↔ ∀ n : ℕ, ∃ m : ℕ, ∀ q : ℚ, 0 < (q : ℝ) → (q : ℝ) < 1 / (m + 1) →
+      densityRatio Aᶜ x q ≤ ((n : ENNReal) + 1)⁻¹ := by
+  constructor
+  · intro hx n
+    have hc := tendsto_densityRatio_compl_of_mem hA hx
+    have h1 := ENNReal.tendsto_nhds_zero.1 hc ((n + 1 : ENNReal)⁻¹) (by simp)
+    obtain ⟨u, hu, hsub⟩ := mem_nhdsGT_iff_exists_Ioo_subset.1 h1
+    obtain ⟨m, hm⟩ := exists_nat_one_div_lt (show (0 : ℝ) < u from hu)
+    refine ⟨m, fun q hq hq1 => hsub ⟨hq, hq1.trans hm⟩⟩
+  · intro h
+    refine mem_densitySet_of_tendsto_compl hA ?_
+    rw [ENNReal.tendsto_nhds_zero]
+    intro ε hε
+    obtain ⟨n, hn⟩ := ENNReal.exists_inv_nat_lt (a := ε / 4) (by simpa using hε.ne')
+    obtain ⟨m, hm⟩ := h n
+    have hu : Set.Ioo (0 : ℝ) (1 / (2 * ((m : ℝ) + 1))) ∈ 𝓝[>] (0 : ℝ) := Ioo_mem_nhdsGT (by positivity)
+    filter_upwards [hu] with r hr
+    obtain ⟨q, hq1, hq2⟩ := exists_rat_btwn (show r < 2 * r by linarith [hr.1])
+    have hq0 : (0 : ℝ) < q := hr.1.trans hq1
+    have hqm : (q : ℝ) < 1 / ((m : ℝ) + 1) := by
+      have := hr.2
+      have h2 : 2 * r < 1 / ((m : ℝ) + 1) := by
+        rw [lt_div_iff₀ (by positivity)] at this ⊢
+        nlinarith
+      linarith
+    have h3 := hm q hq0 hqm
+    -- the comparison of volumes
+    have hcr : volume (closedBall x r) = ENNReal.ofReal (r ^ 2 * Real.pi) := volume_closedBall_ofReal x hr.1.le
+    have hcq : volume (closedBall x q) = ENNReal.ofReal ((q : ℝ) ^ 2 * Real.pi) := volume_closedBall_ofReal x hq0.le
+    have hmono : volume (Aᶜ ∩ closedBall x r) ≤ volume (Aᶜ ∩ closedBall x q) :=
+      measure_mono (inter_subset_inter_right _ (closedBall_subset_closedBall hq1.le))
+    have hVq : volume (Aᶜ ∩ closedBall x q) = densityRatio Aᶜ x q * volume (closedBall x q) := by
+      rw [densityRatio, ENNReal.div_mul_cancel]
+      · rw [hcq]; simpa using (by positivity : 0 < (q : ℝ) ^ 2 * Real.pi)
+      · rw [hcq]; exact ENNReal.ofReal_ne_top
+    have hcmp : volume (closedBall x q) ≤ 4 * volume (closedBall x r) := by
+      rw [hcq, hcr, show (4 : ENNReal) = ENNReal.ofReal 4 by simp, ← ENNReal.ofReal_mul (by norm_num)]
+      refine ENNReal.ofReal_le_ofReal ?_
+      have : (q : ℝ) ^ 2 ≤ 4 * r ^ 2 := by nlinarith [hr.1]
+      nlinarith [Real.pi_pos]
+    rw [densityRatio]
+    apply ENNReal.div_le_of_le_mul
+    calc volume (Aᶜ ∩ closedBall x r) ≤ densityRatio Aᶜ x q * volume (closedBall x q) := hVq ▸ hmono
+      _ ≤ ((n : ENNReal) + 1)⁻¹ * (4 * volume (closedBall x r)) := mul_le_mul' h3 hcmp
+      _ ≤ ε * volume (closedBall x r) := by
+        rw [← mul_assoc]
+        refine mul_le_mul' ?_ le_rfl
+        have h4 : ((n : ENNReal) + 1)⁻¹ ≤ ε / 4 := by
+          refine le_trans ?_ hn.le
+          exact ENNReal.inv_le_inv.2 (by simp)
+        exact (ENNReal.le_div_iff_mul_le (Or.inl (by norm_num)) (Or.inl (by norm_num))).1 h4
 
 /-- Measurable sets have measurable density sets (`[Falconer1981]` Lemma 2 (ii); `r ↦ densityRatio A x r` is continuous on
 `r > 0` and `x ↦ densityRatio A x r` continuous, so the limit is read along rational radii). -/
 theorem measurableSet_densitySet {A : Set ℂ} (hA : MeasurableSet A) : MeasurableSet (densitySet A) := by
-  sorry
+  have : densitySet A = ⋂ n : ℕ, ⋃ m : ℕ, ⋂ q : ℚ, ⋂ (_ : 0 < (q : ℝ) ∧ (q : ℝ) < 1 / (m + 1)),
+      {x : ℂ | densityRatio Aᶜ x q ≤ ((n : ENNReal) + 1)⁻¹} := by
+    ext x
+    simp only [densitySet_iff_rat hA x, mem_iInter, mem_iUnion, mem_setOf_eq, and_imp]
+  rw [this]
+  refine MeasurableSet.iInter fun n => MeasurableSet.iUnion fun m => MeasurableSet.iInter fun q =>
+    MeasurableSet.iInter fun _ => ?_
+  exact measurableSet_le (measurable_densityRatio_centre hA.compl q) measurable_const
 
 /-- A point outside the essential closure has density ratio tending to `0`. -/
 theorem tendsto_densityRatio_of_notMem_essClosure {A : Set ℂ} {x : ℂ} (h : x ∉ essClosure A) :
