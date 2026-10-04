@@ -525,3 +525,23 @@ reason by the close.*
     FS106-WO's strict step-4 lemma, the ⅔π adversary, steps 3, 5 (strict), 6 and 8. Retractions counted: W, one (item 88's Condition-5 clause and step 8). The
     correction owed (item 88) widens: row 132's "maps need six" and `CLAUDE.md` § The aim item 4 hold only modulo step 7 in every class, and modulo step 5's
     equality case with unit arcs — pending FS131-E1.
+92. **FS131-K2c done, harness ≈ 427k** (report on its branch; `fs131-w2` at `bdba8ff5`): all 34 leaves re-planned (§ 12.2); children stated for 16 (all 12 in
+    `Plane/Slack`, `falconer_reduction`, `chiM0_le_of_fragments` — now proved from its child — `exists_grundy`, both Dyadic leaves): 94 new theorems (2 proved),
+    12 definitions; build green. Item 86 applied, with K2c's construction for the ruled form [hand, one mind]. Routes: a Fourier-free Rajchman step
+    (`‖Th‖² = ⟨h, h ⋆ ρ⟩`); SUPK's lower bound by square windows; `tendsto_not_kept` by Markov; SQRT3-LOCAL through a P-local generator (item 64 repaired).
+    GAP at a planning step: 18 leaves have routes but no stated children (lane A's 4, CoverExamples' 13, `exists_not_uniform_kept`); HC and IRREG need
+    FS111-M3 §§ 2.2–2.4 read first. Slip (K2c's): a commit subject says 18 where 16 is true.
+93. **Ruling — `[Falconer1981]` Lemma 2 (i) enters wave 2 as an axiom** (`falconer_lemma2_nonempty`, `Plane/FalconerReduction`, with the four items of `LEAN.md`
+    § Assumptions done by K2c: docstring, read-back, model `upperHalfPlane_falconer_hyp`, `ARCHITECTURE.md` § Trust row). Alternative weighed: hold
+    `falconer_reduction` back until a formalization job lands. Why: a published lemma (its proof Croft's Lemma 4, which we do not hold) is allowed as an axiom
+    for a milestone (Kooshi, 2026-10-03, `LEAN.md` § Assumptions); its classical form, the connectedness of the density topology, is a formalization job worth
+    doing before publication. Wave 2's landing then reads 6 declared purchases; `scripts/axioms.sh` learns the name at the landing (the implementer's). **Stub to
+    mint**: formalize `falconer_lemma2_nonempty` (density topology connected) before publication. **Bibliography debt**: Croft (Falconer's ref. [1]) — title and
+    venue to read off `[Falconer1981]` p. 189; not held. Confidence: high.
+94. **Wave 2's next two jobs, sequenced** (K2c's second decision): FS131-I2e (implementer, on the 16 leaves whose children are stated; handoff § 13) and FS131-K2d
+    (planner: children for the other 18, after the FS111-M3 reading) take the next free slots in that order; if they run together, K2d works in its own worktree
+    branched from `fs131-w2`, touching only `Plane/CoverExamples`, `Arith/PlaceHom` and `Arith/FalconerField` (one writer per file; `exists_not_uniform_kept`
+    left to a later stage), and merges back. The queue after FS131-E1: I2e, K2d, I4, LEB.
+95. **Brief FS131-E1, the maps-six GAPs** (`ephodos`, Opus; `data/fs131/briefs/FS131-E1-maps-six-gaps.md`, gated PASS); claim list `data/fs131/claims-E1.md`
+    (W's § 1.6, copied verbatim by script). Points the deriver at `[Townsend2005]` (held, read in full 2026-09-27) as the published proof to read first.
+    Launched in the slot K2c freed (item 90). Source: this commit.
