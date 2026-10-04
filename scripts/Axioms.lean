@@ -2159,8 +2159,6 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.CircleColouring.hSum_shift
 #print axioms HadwigerNelson.Plane.CircleColouring.ringband_iii'
 
-#eval IO.println "=== PURCHASED ==="
-
 /-! ## FS-131 wave 3 (job FS131-I3c) — the implementer's added children and the rows' leaves -/
 
 #print axioms HadwigerNelson.Plane.lens_stepA
@@ -2174,6 +2172,8 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.deriv_nonneg_of_leftmax
 #print axioms HadwigerNelson.Plane.re_conj_mul_nonneg_of_exit
 #print axioms HadwigerNelson.Plane.im_leftNormal_mul_conj
+
+#eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
 
