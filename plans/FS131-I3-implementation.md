@@ -190,9 +190,9 @@ splitting the lemma, were needed to stay under the heartbeat limit) plus a 40-li
 independent of it): about 450 lines — the polar chart `Φ(ρ, ψ) = p + ρ e(ψ)` replaces every connectedness argument for the two sides. `flank_initialPieces` (M): the two TWOCIRC-style
 cases collapse to `‖σρ(e(σt)−1) − 1‖² = 1 + 2ρ(ρ+σ)(1 − cos t)`; about 140 lines. `flank_cone` (M): about 120 lines. The H leaves left are the three engine-3 leaves, `Simple.coneAt_eq_angleIcc`, and the SixFragment trio.
 
-## Stage 4 — SAVED (FS131-I3d): Simple.coneAt_eq_angleIcc, qfree4, fiveRing_finite_off_Q, fiveRing_length, touchW; 11 leaves left
+## Stage 4 — SAVED (FS131-I3d): Simple.coneAt_eq_angleIcc, qfree4, the two FIVERING leaves, touchW, germS_inward and germS_outward; 9 leaves left
 
-Branch `fs131-w3`, commits after `98f4b279` (I3c's head). **16 `sorry` declarations at the start, 11 now** (`LocalStructure` 3, `SixFragment` 3, `RingGerm` 5).
+Branch `fs131-w3`, commits after `98f4b279` (I3c's head). **16 `sorry` declarations at the start, 9 now** (`LocalStructure` 3, `SixFragment` 3, `RingGerm` 3). Build `build/gate/build/20261004T101422Z-2686823.log` ("build: OK", warnings only `declaration uses sorry`); audit `build/gate/axioms/20261004T102246Z-2733747.log` (copy `data/fs131/i3/axioms-stage4.out`) fails only on `sorryAx` of the 9 open leaves and their dependents; every declaration proved in this stage reads `[propext, Classical.choice, Quot.sound]`.
 Readback: both quotations of the brief match their sources (plan § 7.2 "It may" paragraph; this record's Stage 3 first table row); branch as I3c left it
 (`98f4b279`). Scratch iteration: `/home/kooshi/scratch-fs131` (a `cp -rs` mirror of the worktree's `.lake/build/lib/lean/Proofs`; `it.sh Plane/X` compiles a module into it,
 `c.sh file.lean` checks a scratch file against it) — never evidence.
@@ -221,6 +221,9 @@ Readback: both quotations of the brief match their sources (plan § 7.2 "It may"
 * **`fiveRing_length` goes through the open angles `qOpen`** (interior to a (Q) arc): `qOpen` is open, periodic, inside the (Q) set, and every regular angle on a closed (Q) arc is in it
   (`qOpen_of_regular`: the constant-side arc through a regular angle has the (Q) arc's colours), so the cover `[0, 2π) ⊆ qOpen ∪ (qOpen − 60°) ∪ finite` and the measure
   of a periodic measurable set under a shift (`arcLength_preimage_add_periodic`) give `2π ≤ 2 · arcLength (qOpen)`. The set of (Q) angles itself need not be measurable.
+* **GERM-S (i) and (ii)** are `changePoint_germs`/`changePoint_germs_out` (the four germs at a change point carry `X`, `X'` as the row says: the TWIST rotation and `germ_absent_class`), GERM-R's four direction sets to place the colour (`germR_*`), and two
+  tile lemmas (`tile_subset_closedBall_of_cone`, `outward_of_cone`: a class approaching `y` along a direction facing `p` puts the tiles of `p` in `B̄(y, 1)`, one facing away keeps them out of `B(y, 1)`; the crossing lemma `Valid.dist_lt_or_gt_of_isPreconnected` at a point of the class near `y`). `germS_four` needs one more thing, a tile of colour `c` with `p` in its closure for each colour `c` of `p`
+  (`mem_coloursAt_iff_exists_tileOf`, i.e. `finite_tiles_near`): then the inward colour and the outward colour differ (a tile in `B̄(y, 1)` missing `B(y, 1)` lies in a sphere, which holds no open set), and with `X`, `X'` at `y` that is four.
 * **TOUCHW** is `germ_absent_class` (a germ off (Q) arcs not in the closure of `X`'s class lies in the closure of the other absent colour `X'`'s class and misses `X`'s:
   the dichotomy, `IsRingArc.exists_germ_interior`, `IsRingArc.eq_of_mem_closure`) four times, the TWIST rotation for "not `X`", and
   `not_mem_closure_of_four_germs` (GERM-R's four direction sets cover every direction) for "`X'` not carried at `w`".
@@ -228,7 +231,7 @@ Readback: both quotations of the brief match their sources (plan § 7.2 "It may"
 ### Re-pricing (first hard leaves of this job)
 
 `Simple.coneAt_eq_angleIcc` (priced H on `localSectors`): about 330 lines, no sectors. `qfree4` (M–H): about 330 lines in five reusable lemmas (the crossing at a side ~110 lines, regular germs and
-finiteness ~150). `fiveRing_finite_off_Q` (M–H): 30 lines on those. `fiveRing_length` (M): 220 lines, the measure layer being most of it. `touchW` (H): about 330 lines in six lemmas.
+finiteness ~150). `fiveRing_finite_off_Q` (M–H): 30 lines on those. `fiveRing_length` (M): 220 lines, the measure layer being most of it. `touchW` (H): about 330 lines in six lemmas. `germS_inward` and `germS_outward` (H, one argument): about 250 lines in five lemmas, on the TOUCHW machinery.
 The leaves that remain are all either engine-3 (`finite_tiles_near` and its two corollaries, `flank_edge_exists`, `four_of_bothKind`), the `germS_*` trio, or the SixFragment trio.
 
 ### What is left (11)
@@ -237,7 +240,20 @@ The leaves that remain are all either engine-3 (`finite_tiles_near` and its two 
 |---|---|---|
 | `LocalStructure` (3) | `finite_tiles_near`, `mem_coloursAt_iff_exists_tileOf`, `coneAt_region_eq_biUnion` | the route in Findings above; the other two are short on the first (closure of a finite union; the cone of a finite union and its locality) |
 | `SixFragment` (3) | `sixCol_locallyConstant`, `sixFrag_valid`, `sixFrag_nonSiamese` | unchanged from Stage 3. Note for `sixFrag_valid`: the three colour-`0` tiles are `S_0` (angles `(0°, 60°)`, `r < 1`), `Q_4` (angles about `240°`, in the lens) and `G_2` (angles in `[120°, 180°)`, outside the lens of its index); `S_0`–`Q_4` is easy (angular gap `≥ 150°`, `r ≥ 1`: `|x − y|² ≥ r² + s² + √3 rs > 1`); `S_0`–`G_2` is not (the `60°` angular gap alone gives only `1 − s + s² < 1`; the lens exclusion is what keeps `G_2` away from `e(120°)`) |
-| `RingGerm` (5) | `germS_inward`, `germS_outward`, `germS_four`, `four_of_bothKind`, `flank_edge_exists` | `germS_*`: `germ_absent_class` and `not_mem_closure_of_four_germs` are the machinery TOUCHW used; the new step is the inward and outward cones (§ 4.1 (i), (ii) of `plans/FS116-N1-proof.md`). `four_of_bothKind`: needs `coneAt_region_eq_biUnion` and the disjoint-interiors of cones of distinct tiles (which has a route without sectors: the cone of `Γ` at `x` is finite mod `2π`, so for a generic direction a small convex sector lies in `interiorPts` and hence in one tile). `flank_edge_exists`: the end direction of a tile's cone is a tangent of an arc through `y` (sectors) |
+| `RingGerm` (3) | `germS_four`, `four_of_bothKind`, `flank_edge_exists` | `germS_four`: see Findings (it waits on `mem_coloursAt_iff_exists_tileOf`). `four_of_bothKind`: needs `coneAt_region_eq_biUnion` and the disjoint-interiors of cones of distinct tiles (which has a route without sectors: the cone of `Γ` at `x` is finite mod `2π`, so for a generic direction a small convex sector lies in `interiorPts` and hence in one tile). `flank_edge_exists`: the end direction of a tile's cone is a tangent of an arc through `y` (sectors) |
+
+## Theorems this phase proved (FS131-I3d)
+
+All on `[propext, Classical.choice, Quot.sound]`, read from `build/gate/axioms/20261004T102246Z-2733747.log` (build `build/gate/build/20261004T101422Z-2686823.log`); declarations are `HadwigerNelson.Plane.ArcMap.*` unless marked;
+statements as the skeleton gave them (none changed). Read against `plans/FS131-w3-kernel-plan.md` § 5.2.
+
+- **FS116-V5-U1 (interval cones)** — `Simple.coneAt_eq_angleIcc` (children, `HadwigerNelson.Plane.*`: `IsJordanDomain.local_connected`, `IsJordanDomain.coneAt_eq_angleIcc`, `arg_side`, `arg_near`, `mem_e_of_arg` as `mul_e_of_arg`, `exists_angleIcc_of_no_gap`, `exists_shift_Ico`, `periodic_int`, `mem_coneAt_of_mem_isOpen`, `coneAt_nonempty`; `isClosed_coneAt` moved here from `RingGerm`). Same statement.
+- **FS116-N1-QFREE4** — `qfree4` (children: `Valid.not_mem_closure_of_side`, `IsRingArc.not_mem_closure_third`, `dist_ringPt_third`, `RegularAt`, `carries_absent`, `subsingleton_e_eq`, `isOpen_regularAt`, `exists_regular_germ`, `finite_not_regular`, `absent_subsingleton`, `exists_regular_pair`). Same.
+- **FS116-N2-FIVERING** — `fiveRing_finite_off_Q`, `fiveRing_length` (children: `qOpen`, `qOpen_subset`, `isOpen_qOpen`, `qOpen_periodic`, `qOpen_of_regular`, `arcLength_apply`, `arcLength_preimage_add_periodic`). Same.
+- **FS129-SR2-TOUCHW** — `touchW` (children: `exists_near_of_mem_closure_isOpen`, `not_mem_closure_of_four_germs`, `exists_germ_interior`, `IsRingArc.ringArc_subset_closure`, `IsRingArc.eq_of_mem_closure`, `germ_absent_class`, `mem_ringArc_of_germIn`). Same.
+- **FS116-N1-GERM-S (i), (ii)** — `germS_inward`, `germS_outward` (children: `changePoint_germs`, `changePoint_germs_out`, `tile_subset_closedBall_of_cone`, `outward_of_cone`). Same.
+
+`side_ball_subset_closure` moved earlier in `RingGerm` (before the QFREE4 block); `germS_inward`, `germS_outward` now stand after `re_mul_conj_e_bound` (positions only).
 
 ## Drafts for the front page
 
