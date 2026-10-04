@@ -960,11 +960,184 @@ theorem fiveRing_finite_off_Q (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 :
   have c2 := carries_absent hF hp h4 hab hQ' h2
   exact c1.2 1 (Or.inl rfl) (by simpa using c2.1)
 
+/-- The angles interior to the open interval of some (Q) arc of the ring of `p`. -/
+def qOpen (F : ArcMap k) (p : ℂ) : Set ℝ := {θ | ∃ θ₁ θ₂, F.IsQArc p θ₁ θ₂ ∧ ∃ φ ∈ Ioo θ₁ θ₂, e φ = e θ}
+
+/-- Angles interior to a (Q) arc are on a closed (Q) arc. -/
+theorem qOpen_subset (F : ArcMap k) (p : ℂ) : qOpen F p ⊆ {θ | F.OnQArc p (ringPt p θ)} := by
+  rintro θ ⟨θ₁, θ₂, hQ, φ, hφ, he⟩
+  exact ⟨θ₁, θ₂, hQ, φ, Ioo_subset_Icc_self hφ, by simp [ringPt, he]⟩
+
+/-- `qOpen` is open. -/
+theorem isOpen_qOpen (F : ArcMap k) (p : ℂ) : IsOpen (qOpen F p) := by
+  rw [isOpen_iff_mem_nhds]
+  rintro θ ⟨θ₁, θ₂, hQ, φ, hφ, heφ⟩
+  have : Ioo (θ - (φ - θ₁)) (θ + (θ₂ - φ)) ∈ 𝓝 θ :=
+    Ioo_mem_nhds (by linarith [hφ.1]) (by linarith [hφ.2])
+  filter_upwards [this] with θ' hθ'
+  refine ⟨θ₁, θ₂, hQ, φ + (θ' - θ), ⟨by linarith [hθ'.1], by linarith [hθ'.2]⟩, ?_⟩
+  rw [e_add, heφ, ← e_add]; congr 1; ring
+
+/-- `qOpen` is `2π`-periodic. -/
+theorem qOpen_periodic (F : ArcMap k) (p : ℂ) (θ : ℝ) : θ + 2 * π ∈ qOpen F p ↔ θ ∈ qOpen F p := by
+  simp only [qOpen, mem_setOf_eq, e_add_two_pi]
+
+/-- **A regular angle on a closed (Q) arc is interior to a (Q) arc**: the arc of constant sides through a regular angle has
+the colours of any (Q) arc that reaches the angle, so is (Q) itself. -/
+theorem qOpen_of_regular {p : ℂ} {θ : ℝ} (hreg : F.RegularAt p θ) (hQ : F.OnQArc p (ringPt p θ)) :
+    θ ∈ qOpen F p := by
+  obtain ⟨θ₁, θ₂, hq, ψ, hψ, hψe⟩ := hQ
+  obtain ⟨c₁, c₁', hA₁, hc₁, hc₁', h4⟩ := hq
+  rcases hreg with hΓ | ⟨θ₁', θ₂', c₀, c₀', hA₀, φ₀, hφ₀, heφ₀⟩
+  · exact absurd (hA₁.2.1 ⟨ψ, hψ, hψe⟩) (by simpa [ringPt] using hΓ)
+  · have hψθ : e ψ = e θ := by simpa [ringPt] using hψe
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp (heφ₀.trans hψθ.symm)
+    set η := min (φ₀ - θ₁') (θ₂' - φ₀) with hη
+    have hη0 : 0 < η := lt_min (by linarith [hφ₀.1]) (by linarith [hφ₀.2])
+    have hcl : ψ ∈ closure (Ioo θ₁ θ₂) := by rw [closure_Ioo hA₁.1.ne]; exact hψ
+    obtain ⟨ψ', hψ', hd⟩ := Metric.mem_closure_iff.mp hcl η hη0
+    rw [Real.dist_eq, abs_lt] at hd
+    have hφ' : ψ' + n * (2 * π) ∈ Ioo θ₁' θ₂' := by
+      have h1 := min_le_left (φ₀ - θ₁') (θ₂' - φ₀)
+      have h2 := min_le_right (φ₀ - θ₁') (θ₂' - φ₀)
+      constructor <;> linarith [hd.1, hd.2]
+    have hring : ringPt p (ψ' + n * (2 * π)) = ringPt p ψ' := by
+      have : e (ψ' + n * (2 * π)) = e ψ' := by
+        rw [e_eq_e_iff]; exact ⟨n, rfl⟩
+      simp only [ringPt, this]
+    have hin₁ := (hA₁.2.2 ψ' hψ').1
+    have hin₀ := (hA₀.2.2 _ hφ').1
+    have hout₁ := (hA₁.2.2 ψ' hψ').2
+    have hout₀ := (hA₀.2.2 _ hφ').2
+    rw [hring] at hin₀ hout₀
+    have hcc : c₀ = c₁ := by
+      have : c₀ ∈ F.innerColours p (ringPt p ψ') := by rw [hin₀]; rfl
+      rw [hin₁] at this; exact this
+    have hcc' : c₀' = c₁' := by
+      have : c₀' ∈ F.outerColours p (ringPt p ψ') := by rw [hout₀]; rfl
+      rw [hout₁] at this; exact this
+    exact ⟨θ₁', θ₂', ⟨c₀, c₀', hA₀, hcc ▸ hc₁, hcc' ▸ hc₁', h4⟩, φ₀, hφ₀, heφ₀⟩
+
+end ArcMap
+
+open MeasureTheory in
+/-- Arc-length of a set equals the Lebesgue measure of its part in `[0, 2π)`. -/
+theorem arcLength_apply (A : Set ℝ) : arcLength A = volume (A ∩ Ico 0 (2 * π)) := by
+  rw [arcLength, Measure.restrict_apply' measurableSet_Ico]
+
+open MeasureTheory in
+/-- **Arc-length is invariant under a shift, on measurable `2π`-periodic sets.** -/
+theorem arcLength_preimage_add_periodic {O : Set ℝ} (hO : MeasurableSet O) (hper : ∀ θ, θ + 2 * π ∈ O ↔ θ ∈ O)
+    {c : ℝ} (hc : 0 ≤ c) (hc2 : c ≤ 2 * π) : arcLength ((fun θ => θ + c) ⁻¹' O) = arcLength O := by
+  have hπ := Real.pi_pos
+  rw [arcLength_apply, arcLength_apply]
+  have h1 : ((fun θ => θ + c) ⁻¹' O) ∩ Ico 0 (2 * π) = (fun θ => θ + c) ⁻¹' (O ∩ Ico c (2 * π + c)) := by
+    ext θ; simp only [mem_inter_iff, mem_preimage, mem_Ico]
+    constructor
+    · rintro ⟨h, h0, h2⟩; exact ⟨h, by linarith, by linarith⟩
+    · rintro ⟨h, h0, h2⟩; exact ⟨h, by linarith, by linarith⟩
+  rw [h1, measure_preimage_add_right]
+  have hsplit : O ∩ Ico c (2 * π + c) = (O ∩ Ico c (2 * π)) ∪ (O ∩ Ico (2 * π) (2 * π + c)) := by
+    ext θ; simp only [mem_inter_iff, mem_union, mem_Ico]
+    constructor
+    · rintro ⟨h, h0, h2⟩
+      by_cases hθ : θ < 2 * π
+      · exact Or.inl ⟨h, h0, hθ⟩
+      · exact Or.inr ⟨h, not_lt.mp hθ, h2⟩
+    · rintro (⟨h, h0, h2⟩ | ⟨h, h0, h2⟩)
+      · exact ⟨h, h0, by linarith⟩
+      · exact ⟨h, by linarith, h2⟩
+  have hdisj1 : Disjoint (O ∩ Ico c (2 * π)) (O ∩ Ico (2 * π) (2 * π + c)) := by
+    rw [Set.disjoint_left]
+    rintro θ ⟨-, -, h2⟩ ⟨-, h0, -⟩
+    linarith
+  have hsplit0 : O ∩ Ico 0 (2 * π) = (O ∩ Ico 0 c) ∪ (O ∩ Ico c (2 * π)) := by
+    ext θ; simp only [mem_inter_iff, mem_union, mem_Ico]
+    constructor
+    · rintro ⟨h, h0, h2⟩
+      by_cases hθ : θ < c
+      · exact Or.inl ⟨h, h0, hθ⟩
+      · exact Or.inr ⟨h, not_lt.mp hθ, h2⟩
+    · rintro (⟨h, h0, h2⟩ | ⟨h, h0, h2⟩)
+      · exact ⟨h, h0, by linarith⟩
+      · exact ⟨h, by linarith, h2⟩
+  have hdisj0 : Disjoint (O ∩ Ico 0 c) (O ∩ Ico c (2 * π)) := by
+    rw [Set.disjoint_left]
+    rintro θ ⟨-, -, h2⟩ ⟨-, h0, -⟩
+    linarith
+  have hshift : volume (O ∩ Ico (2 * π) (2 * π + c)) = volume (O ∩ Ico 0 c) := by
+    rw [← measure_preimage_add_right volume (2 * π) (O ∩ Ico (2 * π) (2 * π + c))]
+    congr 1
+    ext θ; simp only [mem_inter_iff, mem_preimage, mem_Ico]
+    rw [hper θ]
+    constructor
+    · rintro ⟨h, h0, h2⟩; exact ⟨h, by linarith, by linarith⟩
+    · rintro ⟨h, h0, h2⟩; exact ⟨h, by linarith, by linarith⟩
+  rw [hsplit, measure_union hdisj1 (hO.inter measurableSet_Ico), hshift, hsplit0,
+    measure_union hdisj0 (hO.inter measurableSet_Ico), add_comm]
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+open MeasureTheory in
 /-- **FS116-N2-FIVERING** (and FS112-SIX's five-colour clause): the (Q) arcs of the ring have total length at least `180°`
 (arc-length of the set of angles in `[0, 2π)` whose ring point lies on a closed (Q) arc). -/
 theorem fiveRing_length (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
     (hk : (F.coloursAt p).ncard + 1 = k) : ENNReal.ofReal π ≤ arcLength {θ | F.OnQArc p (ringPt p θ)} := by
-  sorry
+  have hπ := Real.pi_pos
+  set O := qOpen F p with hOdef
+  have hOm : MeasurableSet O := (isOpen_qOpen F p).measurableSet
+  have hOper : ∀ θ, θ + 2 * π ∈ O ↔ θ ∈ O := qOpen_periodic F p
+  set A : Set ℝ := (fun θ => θ + π / 3) ⁻¹' O with hA
+  set E : Set ℝ := {θ | θ ∈ Ico 0 (2 * π) ∧ ¬ F.OnQArc p (ringPt p θ) ∧ ¬ F.OnQArc p (ringPt p (θ + π / 3))} ∪
+    ({θ | θ ∈ Icc 0 (4 * π) ∧ ¬ F.RegularAt p θ} ∪ (fun θ => θ - π / 3) '' {θ | θ ∈ Icc 0 (4 * π) ∧ ¬ F.RegularAt p θ})
+    with hE
+  have hEfin : E.Finite :=
+    (F.fiveRing_finite_off_Q hF hp h4 hk).union ((finite_not_regular hp _).union ((finite_not_regular hp _).image _))
+  have hcover : Ico 0 (2 * π) ⊆ O ∪ A ∪ E := by
+    intro θ hθ
+    by_cases hθE : θ ∈ E
+    · exact Or.inr hθE
+    · left
+      have h1 : F.RegularAt p θ := by
+        by_contra h
+        exact hθE (Or.inr (Or.inl ⟨⟨hθ.1, by linarith [hθ.2]⟩, h⟩))
+      have h2 : F.RegularAt p (θ + π / 3) := by
+        by_contra h
+        exact hθE (Or.inr (Or.inr ⟨θ + π / 3, ⟨⟨by linarith [hθ.1], by linarith [hθ.2]⟩, h⟩, by ring⟩))
+      by_cases hQ : F.OnQArc p (ringPt p θ)
+      · exact Or.inl (qOpen_of_regular h1 hQ)
+      · by_cases hQ' : F.OnQArc p (ringPt p (θ + π / 3))
+        · exact Or.inr (qOpen_of_regular h2 hQ')
+        · exact absurd (Or.inl ⟨hθ, hQ, hQ'⟩) hθE
+  have hμE : arcLength E = 0 := by
+    rw [arcLength_apply]
+    exact (hEfin.subset inter_subset_left).measure_zero _
+  have hμA : arcLength A = arcLength O :=
+    arcLength_preimage_add_periodic hOm hOper (by positivity) (by linarith)
+  have hμuniv : arcLength univ = ENNReal.ofReal (2 * π) := by
+    rw [arcLength_apply, univ_inter, Real.volume_Ico, sub_zero]
+  have hle : arcLength univ ≤ arcLength O + arcLength A + arcLength E := by
+    have hsub : (univ : Set ℝ) ⊆ (O ∪ A ∪ E) ∪ (Ico 0 (2 * π))ᶜ := by
+      intro θ _
+      by_cases hθ : θ ∈ Ico 0 (2 * π)
+      · exact Or.inl (hcover hθ)
+      · exact Or.inr hθ
+    calc arcLength univ ≤ arcLength ((O ∪ A ∪ E) ∪ (Ico 0 (2 * π))ᶜ) := measure_mono hsub
+      _ ≤ arcLength (O ∪ A ∪ E) + arcLength (Ico 0 (2 * π))ᶜ := measure_union_le _ _
+      _ = arcLength (O ∪ A ∪ E) := by
+        rw [arcLength_apply (Ico 0 (2 * π))ᶜ, compl_inter_self, measure_empty, add_zero]
+      _ ≤ arcLength (O ∪ A) + arcLength E := measure_union_le _ _
+      _ ≤ arcLength O + arcLength A + arcLength E := by gcongr; exact measure_union_le _ _
+  rw [hμuniv, hμE, hμA, add_zero] at hle
+  have h2 : ENNReal.ofReal (2 * π) = 2 * ENNReal.ofReal π := by
+    rw [ENNReal.ofReal_mul (by norm_num), ENNReal.ofReal_ofNat]
+  rw [h2, ← two_mul] at hle
+  have hle2 : ENNReal.ofReal π ≤ arcLength O := by
+    have := (ENNReal.mul_le_mul_iff_right (by norm_num : (2 : ENNReal) ≠ 0) (by norm_num : (2 : ENNReal) ≠ ⊤)).mp hle
+    exact this
+  exact hle2.trans (measure_mono (qOpen_subset F p))
 
 /-- **FS116-N2-FIVERING**, last clause (and FS116-RING-TRANSFER-C's "places no vertex through RING-GERM"): `p` has no hub. -/
 theorem fiveRing_no_hub (hF : F.Valid) {p : ℂ} (hp : F.Covers p 1) (h4 : 4 ≤ (F.coloursAt p).ncard)
