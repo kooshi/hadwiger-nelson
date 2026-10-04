@@ -1172,3 +1172,7 @@ reason by the close.*
      names (item 142's point); confidence high. Owed before wave 2's gate (carried to the next brief): QA1's docstrings, FALC-HOSTS (iv)'s docstring, wave 2's
      vacuity carriers (`CPColouring`, `AeCover`, maximal covers, partial colourings). Re-pricing: Opus at about 25–30k on leaves K2c priced 40k at the Sonnet
      rate. Cheapest next leaves named in its stage 15.
+170. **Brief FS131-IWc, Woodall's localized step 3** (`debruijn-implementer`, Opus; `data/fs131/briefs/FS131-IWc-woodall-merge.md`, gated PASS): `Plane/Woodall/Merge`'s 18
+     leaves and `Basic`'s five inhabitant leaves in § 15.3's order (the composition `exists_woodallMerged` first among the hard ones), `NiceAt.normal` made private
+     first (item 167 (b)); the gate waits for wave 4. Launched in I2h's slot: 1 (I3i) + 1 (I4c) + 1 (IWc) = 3, plus QA2. Wave 2's next Opus implementer (I2i)
+     queued for the next slot.
