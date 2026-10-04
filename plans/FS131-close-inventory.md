@@ -587,3 +587,6 @@ reason by the close.*
      I2e's). Worktree `.claude/worktrees/fs131-w2d`, branch `fs131-w2d` from `fs131-w2` at `29082313`; `.lake/packages` symlinked, `.lake/build` copied from
      `fs131-w2`'s (no build running there at the copy). K2d merges `fs131-w2` into its branch at the end; the merge back into `fs131-w2` is the next implementer's
      first step. Launched in the free slot (handoff § 4 item 1): slots 0.5 + 0.5 + 1 + 1 = 3. Queue after it: the Opus-implementer trial (after I2e), I4, IW, LEB.
+105. **The two listings' addresses** (item 9; recovered from the web-search results returned to FS131-K1 on 2026-10-03, at Kooshi's request): the Zenodo record,
+     "The Hadwiger-Nelson Problem: (title removed)",
+     an outside record; the GitHub release, https://github.com/decalion89/chromatic-number-of-the-plane/releases/tag/v1.1.0. Neither read here.

@@ -72,7 +72,8 @@ its record's last SAVED stage with a fresh agent on the same brief.
 
 - The GitHub repository `decalion89/chromatic-number-of-the-plane` (release v1.1.0; claims Lean proofs of rows 103 and 57; item 9) — Kooshi is reading it; the
   record holds its name from a search listing only, and the same pass saw an unread Zenodo record claiming a formal verification that the plane is
-  seven-chromatic (`plans/FS131-kernel-plan.md` § 3.2).
+  seven-chromatic (`plans/FS131-kernel-plan.md` § 3.2). Addresses (item 105): an outside record and
+  https://github.com/decalion89/chromatic-number-of-the-plane/releases/tag/v1.1.0 — Kooshi investigating both.
 - From FS-129: the order (backlog, then FS-124 — stands); the finite-graph search (held); a blind second mind on FS129-OR1-QFREE (none); FS-129 closes when its 32
   compositions pass (spread across waves).
 - The Proof Atlas: two stale page notes and the zoomed labels (item 4), at the next atlas update.
