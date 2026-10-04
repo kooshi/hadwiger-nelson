@@ -3070,6 +3070,12 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 
 -- FS131-I2i: children added by the ninth wave-2 implementer
 #print axioms HadwigerNelson.Plane.CPColouring.law_ge_ball_ne_le
+#print axioms HadwigerNelson.Plane.volume_floor_emod_le
+#print axioms HadwigerNelson.Plane.volume_floor_mul_emod_le
+#print axioms HadwigerNelson.Plane.measurable_stripeIdx
+#print axioms HadwigerNelson.Plane.volume_box_stripe_le
+#print axioms HadwigerNelson.Plane.measurable_stripeCol
+#print axioms HadwigerNelson.Plane.stripeCol_ne_of_dist_eq_one
 
 #eval IO.println "=== PURCHASED ==="
 

@@ -2294,6 +2294,216 @@ theorem CPColouring.tendsto_not_kept (c : CPColouring k) {η : ℝ} (hη0 : 0 < 
     _ = ENNReal.ofReal t := by rw [← ENNReal.ofReal_add (by positivity) (by positivity)]; ring_nf
     _ ≤ δ := htδ.le
 
+/-! ### `exists_not_uniform_kept`: the stripe colouring
+
+A route simpler than the plan's fringe colouring (§ 17.1; the implementer's choice): squares of side `1/2` coloured mod `4`
+in each coordinate make every colouring that refines them proper at every unit pair, and inside them stripes of width
+`1/(⌊y.im⌋₊ + 1)` in `N` colours cycle, so high enough up every ball meets its own colour in about `1/N` of its area. -/
+
+/-- Integer stripes of one residue mod `N` meet an open interval of length `K` in measure at most `K/N + 2`. -/
+theorem volume_floor_emod_le {N : ℕ} (hN : 0 < N) (c0 : ℤ) (b : ℝ) {K : ℝ} (hK : 0 ≤ K) :
+    volume {w : ℝ | w ∈ Ioo b (b + K) ∧ ⌊w⌋ % (N : ℤ) = c0} ≤ ENNReal.ofReal (K / N + 2) := by
+  have hNz : (0 : ℤ) < N := by exact_mod_cast hN
+  have hNr : (0 : ℝ) < N := by exact_mod_cast hN
+  set p : ℤ := ⌊b⌋
+  set n0 : ℤ := p + (c0 - p) % (N : ℤ)
+  set J : ℕ := ⌊K / N⌋₊ + 2
+  have hsub : {w : ℝ | w ∈ Ioo b (b + K) ∧ ⌊w⌋ % (N : ℤ) = c0} ⊆
+      ⋃ m ∈ Finset.range J, Ico ((n0 + m * N : ℤ) : ℝ) ((n0 + m * N : ℤ) + 1) := by
+    rintro w ⟨⟨hw1, hw2⟩, hwc⟩
+    set n := ⌊w⌋ with hn
+    have hpn : p ≤ n := Int.floor_mono hw1.le
+    set d := n - p with hd
+    have hd0 : 0 ≤ d := by omega
+    have hdK : (d : ℝ) < K + 1 := by
+      have h1 : (n : ℝ) ≤ w := Int.floor_le w
+      have h2 : b < (p : ℝ) + 1 := Int.lt_floor_add_one b
+      have : (d : ℝ) = n - p := by push_cast [hd]; ring
+      linarith
+    have hr : (c0 - p) % (N : ℤ) = d % N := by
+      rw [← hwc, hd, Int.sub_emod, Int.emod_emod, ← Int.sub_emod]
+    have hdecomp : d = d % N + N * (d / N) := (Int.emod_add_mul_ediv d N).symm
+    have hq0 : 0 ≤ d / N := Int.ediv_nonneg hd0 hNz.le
+    set m : ℕ := (d / N).toNat with hm
+    have hmq : (m : ℤ) = d / N := Int.toNat_of_nonneg hq0
+    have hnm : n = n0 + m * N := by
+      simp only [n0, hr, hmq]; rw [hd] at hdecomp ⊢; linarith
+    have hmJ : m < J := by
+      have h1 : (m : ℝ) * N ≤ d := by
+        have : (m : ℤ) * N ≤ d := by
+          rw [hmq]; have := Int.emod_nonneg d hNz.ne'; linarith [mul_comm (N : ℤ) (d / N)]
+        exact_mod_cast this
+      have h2 : (m : ℝ) < K / N + 1 := by
+        have h3 : (m : ℝ) < (K + 1) / N := by rw [lt_div_iff₀ hNr]; linarith
+        have h4 : (K + 1) / N ≤ K / N + 1 := by
+          rw [add_div]
+          have : (1 : ℝ) / N ≤ 1 := by rw [div_le_one hNr]; exact_mod_cast hN
+          linarith
+        linarith
+      have h5 : K / N < (⌊K / N⌋₊ : ℝ) + 1 := Nat.lt_floor_add_one _
+      have h6 : (m : ℝ) < (J : ℝ) := by simp only [J]; push_cast; linarith
+      exact_mod_cast h6
+    refine mem_iUnion₂.2 ⟨m, Finset.mem_range.2 hmJ, ?_⟩
+    rw [← hnm]
+    exact ⟨Int.floor_le w, Int.lt_floor_add_one w⟩
+  refine (measure_mono hsub).trans ((measure_biUnion_finset_le _ _).trans ?_)
+  simp only [Real.volume_Ico, add_sub_cancel_left, ENNReal.ofReal_one, Finset.sum_const, Finset.card_range,
+    nsmul_eq_mul, mul_one]
+  rw [← ENNReal.ofReal_natCast]
+  refine ENNReal.ofReal_le_ofReal ?_
+  simp only [J]; push_cast
+  have := Nat.floor_le (div_nonneg hK hNr.le)
+  linarith
+
+/-- Scaled stripes: width `1/M`, one residue mod `N`, in an open interval of length `L`. -/
+theorem volume_floor_mul_emod_le {N : ℕ} (hN : 0 < N) (c0 : ℤ) (a : ℝ) {L M : ℝ} (hL : 0 ≤ L) (hM : 0 < M) :
+    volume {u : ℝ | u ∈ Ioo a (a + L) ∧ ⌊u * M⌋ % (N : ℤ) = c0} ≤ ENNReal.ofReal (L / N + 2 / M) := by
+  have heq : {u : ℝ | u ∈ Ioo a (a + L) ∧ ⌊u * M⌋ % (N : ℤ) = c0} =
+      (fun u => u * M) ⁻¹' {w : ℝ | w ∈ Ioo (a * M) (a * M + L * M) ∧ ⌊w⌋ % (N : ℤ) = c0} := by
+    ext u
+    simp only [mem_setOf_eq, mem_preimage, mem_Ioo]
+    constructor
+    · rintro ⟨⟨h1, h2⟩, h3⟩; exact ⟨⟨by nlinarith, by nlinarith⟩, h3⟩
+    · rintro ⟨⟨h1, h2⟩, h3⟩
+      refine ⟨⟨?_, ?_⟩, h3⟩
+      · by_contra h; push Not at h; nlinarith
+      · by_contra h; push Not at h; nlinarith
+  rw [heq, Real.volume_preimage_mul_right hM.ne']
+  calc ENNReal.ofReal |M⁻¹| * volume _ ≤ ENNReal.ofReal M⁻¹ * ENNReal.ofReal (L * M / N + 2) := by
+        rw [abs_of_pos (inv_pos.2 hM)]
+        exact mul_le_mul_right (volume_floor_emod_le hN c0 (a * M) (mul_nonneg hL hM.le)) _
+    _ = ENNReal.ofReal (L / N + 2 / M) := by
+        rw [← ENNReal.ofReal_mul (inv_nonneg.2 hM.le)]
+        congr 1
+        field_simp
+
+/-- Row-dependent stripes: the stripe index of `y` in the row at height `y.im`, width `1/(⌊y.im⌋₊ + 1)`. -/
+noncomputable def stripeIdx (y : ℂ) : ℤ := ⌊y.re * ((⌊y.im⌋₊ : ℝ) + 1)⌋
+
+/-- The stripe index is measurable (floors of measurable maps). -/
+theorem measurable_stripeIdx : Measurable stripeIdx := by
+  unfold stripeIdx
+  have h : Measurable fun y : ℂ => ((⌊y.im⌋₊ : ℕ) : ℝ) :=
+    (measurable_of_countable _).comp (Nat.measurable_floor.comp Complex.measurable_im)
+  exact Int.measurable_floor.comp (Complex.measurable_re.mul (h.add measurable_const))
+
+/-- A box of half-side `ρ` about `x` meets one stripe residue mod `N` in measure at most `2ρ (2ρ/N + 2/M)` when every row
+meeting the box has stripe width at most `1/M`. -/
+theorem volume_box_stripe_le {N : ℕ} (hN : 0 < N) (c0 : ℤ) (x : ℂ) {ρ M : ℝ} (hρ : 0 < ρ) (hM : 0 < M)
+    (hrow : ∀ v : ℝ, |v - x.im| < ρ → M ≤ (⌊v⌋₊ : ℝ) + 1) :
+    volume {y : ℂ | |y.re - x.re| < ρ ∧ |y.im - x.im| < ρ ∧ stripeIdx y % (N : ℤ) = c0} ≤
+      ENNReal.ofReal (2 * ρ) * ENNReal.ofReal (2 * ρ / N + 2 / M) := by
+  set T : Set (ℝ × ℝ) := {q | |q.1 - x.re| < ρ ∧ |q.2 - x.im| < ρ ∧ ⌊q.1 * ((⌊q.2⌋₊ : ℝ) + 1)⌋ % (N : ℤ) = c0}
+    with hT
+  have hpre : {y : ℂ | |y.re - x.re| < ρ ∧ |y.im - x.im| < ρ ∧ stripeIdx y % (N : ℤ) = c0} =
+      measurableEquivRealProd ⁻¹' T := by ext y; rfl
+  have hf : Measurable fun q : ℝ × ℝ => ⌊q.1 * ((⌊q.2⌋₊ : ℝ) + 1)⌋ :=
+    Int.measurable_floor.comp (measurable_fst.mul
+      (((measurable_of_countable (fun n : ℕ => (n : ℝ))).comp (Nat.measurable_floor.comp measurable_snd)).add
+        measurable_const))
+  have hm1 : Measurable fun q : ℝ × ℝ => |q.1 - x.re| := continuous_abs.measurable.comp (measurable_fst.sub_const _)
+  have hm2 : Measurable fun q : ℝ × ℝ => |q.2 - x.im| := continuous_abs.measurable.comp (measurable_snd.sub_const _)
+  have hTm : MeasurableSet T := by
+    have hc : Measurable fun _ : ℝ × ℝ => ρ := measurable_const
+    have := (measurableSet_lt hm1 hc).inter ((measurableSet_lt hm2 hc).inter
+      (((measurable_of_countable (fun n : ℤ => n % (N : ℤ))).comp hf) (measurableSet_singleton c0)))
+    exact this
+  rw [hpre, Complex.volume_preserving_equiv_real_prod.measure_preimage hTm.nullMeasurableSet, Measure.volume_eq_prod,
+    Measure.prod_apply_symm hTm]
+  calc ∫⁻ v, volume ((fun u => (u, v)) ⁻¹' T) ≤
+        ∫⁻ v, (Ioo (x.im - ρ) (x.im + ρ)).indicator (fun _ => ENNReal.ofReal (2 * ρ / N + 2 / M)) v := by
+        refine lintegral_mono fun v => ?_
+        by_cases hv : v ∈ Ioo (x.im - ρ) (x.im + ρ)
+        · rw [indicator_of_mem hv]
+          have hv' : |v - x.im| < ρ := by rw [abs_lt]; constructor <;> linarith [hv.1, hv.2]
+          have hMv : 0 < (⌊v⌋₊ : ℝ) + 1 := by positivity
+          calc volume ((fun u => (u, v)) ⁻¹' T) ≤ volume {u : ℝ | u ∈ Ioo (x.re - ρ) (x.re - ρ + 2 * ρ) ∧
+                ⌊u * ((⌊v⌋₊ : ℝ) + 1)⌋ % (N : ℤ) = c0} := by
+                refine measure_mono fun u hu => ?_
+                obtain ⟨h1, -, h3⟩ := hu
+                rw [abs_lt] at h1
+                exact ⟨⟨by linarith [h1.1], by linarith [h1.2]⟩, h3⟩
+            _ ≤ ENNReal.ofReal (2 * ρ / N + 2 / ((⌊v⌋₊ : ℝ) + 1)) :=
+                volume_floor_mul_emod_le hN c0 _ (by positivity) hMv
+            _ ≤ ENNReal.ofReal (2 * ρ / N + 2 / M) := by
+                refine ENNReal.ofReal_le_ofReal ?_
+                have h4 : 2 / ((⌊v⌋₊ : ℝ) + 1) ≤ 2 / M := div_le_div_of_nonneg_left (by norm_num) hM (hrow v hv')
+                linarith
+        · rw [indicator_of_notMem hv]
+          refine (measure_mono_null (fun u hu => ?_) measure_empty).le
+          obtain ⟨-, h2, -⟩ := hu
+          rw [abs_lt] at h2
+          exact hv ⟨by linarith [h2.1], by linarith [h2.2]⟩
+    _ = ENNReal.ofReal (2 * ρ / N + 2 / M) * volume (Ioo (x.im - ρ) (x.im + ρ)) :=
+        lintegral_indicator_const measurableSet_Ioo _
+    _ = _ := by rw [Real.volume_Ioo, mul_comm]; congr 2; ring
+
+/-- **The stripe colouring** with `n + 1` stripe colours: squares of side `1/2` coloured mod `4` in each coordinate (two
+squares of one colour are at least `3/2` apart, and a square has diameter `√2/2 < 1`), each row striped by `stripeIdx`
+mod `n + 1` (stripes of width `1/(⌊y.im⌋₊ + 1)`, finer as the row rises). -/
+noncomputable def stripeCol (n : ℕ) (y : ℂ) : Fin 4 × Fin 4 × Fin (n + 1) :=
+  (⟨(⌊2 * y.re⌋ % 4).toNat, by omega⟩, ⟨(⌊2 * y.im⌋ % 4).toNat, by omega⟩,
+    ⟨(stripeIdx y % ((n + 1 : ℕ) : ℤ)).toNat, (Int.toNat_lt' (Nat.succ_pos n)).2
+      (Int.emod_lt_of_pos _ (by positivity))⟩)
+
+/-- The origin has colour `(0, 0, 0)`; the point `3/4 + (3/2) i` has colour `(1, 3, 1)` with two stripe colours (stripe index
+`⌊(3/4) · 2⌋ = 1`). -/
+example : stripeCol 1 0 = (0, 0, 0) ∧ stripeCol 1 ((3 / 4 : ℝ) + (3 / 2 : ℝ) * I) = (1, 3, 1) := by
+  constructor
+  · simp [stripeCol, stripeIdx]
+  · have h1 : ⌊(3 / 2 : ℝ)⌋₊ = 1 := by rw [Nat.floor_eq_iff (by norm_num)]; norm_num
+    have h2 : ⌊(3 / 4 : ℝ) * ((1 : ℕ) + 1)⌋ = 1 := by rw [Int.floor_eq_iff]; norm_num
+    simp [stripeCol, stripeIdx]
+    norm_num
+    refine ⟨rfl, ?_⟩
+    rw [h1, h2]
+    rfl
+
+/-- The stripe colouring is measurable (each coordinate factors through a floor into a countable type). -/
+theorem measurable_stripeCol (n : ℕ) : Measurable (stripeCol n) := by
+  unfold stripeCol
+  refine Measurable.prodMk ?_ (Measurable.prodMk ?_ ?_)
+  · exact (measurable_of_countable (fun m : ℤ => (⟨(m % 4).toNat, by omega⟩ : Fin 4))).comp
+      (Int.measurable_floor.comp (Complex.measurable_re.const_mul 2))
+  · exact (measurable_of_countable (fun m : ℤ => (⟨(m % 4).toNat, by omega⟩ : Fin 4))).comp
+      (Int.measurable_floor.comp (Complex.measurable_im.const_mul 2))
+  · exact (measurable_of_countable (fun m : ℤ => (⟨(m % ((n + 1 : ℕ) : ℤ)).toNat,
+      (Int.toNat_lt' (Nat.succ_pos n)).2 (Int.emod_lt_of_pos _ (by positivity))⟩ : Fin (n + 1)))).comp
+      measurable_stripeIdx
+
+/-- **The stripe colouring is proper at every unit pair**: one colour mod `4` in both coordinates and distance at most `1`
+force one square of side `1/2`, whose diameter is `√2/2 < 1`. -/
+theorem stripeCol_ne_of_dist_eq_one (n : ℕ) {x y : ℂ} (h : dist x y = 1) : stripeCol n x ≠ stripeCol n y := by
+  intro hc
+  have key : ∀ a b : ℝ, |a - b| ≤ 1 → (⌊2 * a⌋ % 4).toNat = (⌊2 * b⌋ % 4).toNat → |a - b| < 1 / 2 := by
+    intro a b hab he
+    have e1 := Int.floor_le (2 * a); have e2 := Int.lt_floor_add_one (2 * a)
+    have e3 := Int.floor_le (2 * b); have e4 := Int.lt_floor_add_one (2 * b)
+    rw [abs_le] at hab
+    have hd1 : ((⌊2 * a⌋ - ⌊2 * b⌋ : ℤ) : ℝ) < 3 := by push_cast; linarith
+    have hd2 : (-3 : ℝ) < ((⌊2 * a⌋ - ⌊2 * b⌋ : ℤ) : ℝ) := by push_cast; linarith
+    have hd1' : ⌊2 * a⌋ - ⌊2 * b⌋ < 3 := by exact_mod_cast hd1
+    have hd2' : -3 < ⌊2 * a⌋ - ⌊2 * b⌋ := by exact_mod_cast hd2
+    have heq : ⌊2 * a⌋ = ⌊2 * b⌋ := by omega
+    have := Int.abs_sub_lt_one_of_floor_eq_floor heq
+    rw [abs_lt] at this ⊢
+    constructor <;> linarith [this.1, this.2]
+  have h1 : (⌊2 * x.re⌋ % 4).toNat = (⌊2 * y.re⌋ % 4).toNat := by
+    have := congrArg (fun p => (p.1 : ℕ)) hc; simpa [stripeCol] using this
+  have h2 : (⌊2 * x.im⌋ % 4).toNat = (⌊2 * y.im⌋ % 4).toNat := by
+    have := congrArg (fun p => (p.2.1 : ℕ)) hc; simpa [stripeCol] using this
+  have hd : dist x y = √((x.re - y.re) ^ 2 + (x.im - y.im) ^ 2) := Complex.dist_eq_re_im x y
+  have hsq : (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 = 1 := by
+    have := congrArg (· ^ 2) (hd.symm.trans h)
+    simpa [Real.sq_sqrt (by positivity : (0 : ℝ) ≤ (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2)] using this
+  have hre : |x.re - y.re| ≤ 1 := by
+    rw [abs_le]; constructor <;> nlinarith [sq_nonneg (x.im - y.im)]
+  have him : |x.im - y.im| ≤ 1 := by
+    rw [abs_le]; constructor <;> nlinarith [sq_nonneg (x.re - y.re)]
+  have r1 := abs_lt.1 (key _ _ hre h1)
+  have r2 := abs_lt.1 (key _ _ him h2)
+  nlinarith [r1.1, r1.2, r2.1, r2.2]
+
 /-- **FS106-REM**, third clause (ruling `plans/FS131-close-inventory.md` item 63: `η < 1` added, since at `η ≥ 1` every point
 is kept): the uniform form is FALSE — some measurable colouring proper at every unit pair (the
 zigzag colouring, FS106-TQ's control C2) has, at every `ε`, translates of the unit square holding non-kept points of
@@ -2302,7 +2512,87 @@ theorem exists_not_uniform_kept {η : ℝ} (hη0 : 0 < η) (hη : η < 1) :
     ∃ (k : ℕ) (f : ℂ → Fin k), Measurable f ∧ (∀ x y, dist x y = 1 → f x ≠ f y) ∧ ∃ m > (0 : ENNReal),
       ∀ ε > (0 : ℝ), ∃ z : ℂ, m ≤ volume {x | x - z ∈ {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧ 0 ≤ w.im ∧ w.im ≤ 1} ∧
         ¬ KeptAt (f ⁻¹' {f x}) η ε x} := by
-  sorry
+  have hη1 : 0 < 1 - η := by linarith
+  set n : ℕ := ⌈4 / (1 - η)⌉₊ with hn
+  have hN : (4 : ℝ) / ((n + 1 : ℕ) : ℝ) ≤ 1 - η := by
+    have h4 : 4 / (1 - η) ≤ n := Nat.le_ceil _
+    rw [div_le_iff₀ hη1] at h4
+    rw [div_le_iff₀ (by positivity)]
+    push_cast
+    nlinarith
+  set Q : Set ℂ := {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧ 0 ≤ w.im ∧ w.im ≤ 1} with hQ
+  set eqv := Fintype.equivFin (Fin 4 × Fin 4 × Fin (n + 1))
+  refine ⟨Fintype.card (Fin 4 × Fin 4 × Fin (n + 1)), fun y => eqv (stripeCol n y),
+    (measurable_of_countable _).comp (measurable_stripeCol n),
+    fun x y h hc => stripeCol_ne_of_dist_eq_one n h (eqv.injective hc), volume Q, ?_, ?_⟩
+  · have hsub : ball ((1 / 2 : ℂ) + (1 / 2 : ℂ) * I) (1 / 2) ⊆ Q := by
+      intro w hw
+      rw [mem_ball, dist_eq_norm] at hw
+      have h1 := Complex.abs_re_le_norm (w - ((1 / 2 : ℂ) + (1 / 2 : ℂ) * I))
+      have h2 := Complex.abs_im_le_norm (w - ((1 / 2 : ℂ) + (1 / 2 : ℂ) * I))
+      simp only [sub_re, add_re, mul_re, I_re, I_im, sub_im, add_im, mul_im] at h1 h2
+      norm_num at h1 h2
+      rw [abs_le'] at h1 h2
+      exact ⟨by linarith [h1.1, h1.2], by linarith [h1.1, h1.2], by linarith [h2.1, h2.2], by linarith [h2.1, h2.2]⟩
+    exact (measure_ball_pos volume _ (by norm_num)).trans_le (measure_mono hsub)
+  intro ε hε
+  set ρ : ℝ := ε / 2 with hρdef
+  have hρ : 0 < ρ := by positivity
+  set M : ℝ := 4 / ((1 - η) * ρ) with hMdef
+  have hM : 0 < M := by positivity
+  set Y : ℝ := ρ + M + 1 with hY
+  have not_kept : ∀ x, x - (Y : ℂ) * I ∈ Q → ¬ KeptAt ((fun y => eqv (stripeCol n y)) ⁻¹' {eqv (stripeCol n x)}) η ε x := by
+    intro x hx hk
+    have hxim : Y ≤ x.im := by
+      have := hx.2.2.1
+      simp only [sub_im, mul_im, ofReal_re, I_im, ofReal_im, I_re] at this
+      linarith
+    have hA : (fun y => eqv (stripeCol n y)) ⁻¹' {eqv (stripeCol n x)} = stripeCol n ⁻¹' {stripeCol n x} := by
+      ext y; simp [eqv.injective.eq_iff]
+    rw [hA] at hk
+    have hAm : MeasurableSet (stripeCol n ⁻¹' {stripeCol n x}) := measurable_stripeCol n (measurableSet_singleton _)
+    have h1 := hk ρ (Or.inl rfl)
+    rw [measure_congr (ae_eq_set_inter (ae_eq_refl _) (ae_eq_densitySet hAm).symm)] at h1
+    set c0 : ℤ := stripeIdx x % ((n + 1 : ℕ) : ℤ)
+    have hsub : ball x ρ ∩ stripeCol n ⁻¹' {stripeCol n x} ⊆
+        {y : ℂ | |y.re - x.re| < ρ ∧ |y.im - x.im| < ρ ∧ stripeIdx y % ((n + 1 : ℕ) : ℤ) = c0} := by
+      rintro y ⟨hy1, hy2⟩
+      rw [mem_ball, dist_eq_norm] at hy1
+      refine ⟨?_, ?_, ?_⟩
+      · have := Complex.abs_re_le_norm (y - x); rw [sub_re] at this; linarith
+      · have := Complex.abs_im_le_norm (y - x); rw [sub_im] at this; linarith
+      · have h3 := congrArg (fun p => (p.2.2 : ℕ)) (show stripeCol n y = stripeCol n x from hy2)
+        simp only [stripeCol] at h3
+        have hNz : (0 : ℤ) < ((n + 1 : ℕ) : ℤ) := by positivity
+        have e1 := Int.emod_nonneg (stripeIdx y) hNz.ne'
+        have e2 := Int.emod_nonneg (stripeIdx x) hNz.ne'
+        simp only [c0]
+        omega
+    have hrow : ∀ v : ℝ, |v - x.im| < ρ → M ≤ (⌊v⌋₊ : ℝ) + 1 := by
+      intro v hv
+      rw [abs_lt] at hv
+      have := Nat.lt_floor_add_one v
+      linarith [hv.1]
+    have hb := volume_box_stripe_le (Nat.succ_pos n) c0 x hρ hM hrow
+    have hlt : ENNReal.ofReal (2 * ρ) * ENNReal.ofReal (2 * ρ / ((n + 1 : ℕ) : ℝ) + 2 / M) <
+        ENNReal.ofReal (1 - η) * volume (ball x ρ) := by
+      rw [volume_ball_ofReal x hρ.le, ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul hη1.le]
+      refine (ENNReal.ofReal_lt_ofReal_iff (by positivity)).2 ?_
+      have h2M : 2 / M = (1 - η) * ρ / 2 := by rw [hMdef]; field_simp; ring
+      have hNle : 2 * ρ / ((n + 1 : ℕ) : ℝ) ≤ (1 - η) * ρ / 2 := by
+        have : 2 * ρ / ((n + 1 : ℕ) : ℝ) = ρ / 2 * (4 / ((n + 1 : ℕ) : ℝ)) := by ring
+        rw [this]
+        nlinarith
+      rw [h2M]
+      nlinarith [Real.pi_gt_three, mul_pos hη1 (mul_pos hρ hρ)]
+    exact absurd (h1.trans ((measure_mono hsub).trans hb)) (not_le.2 hlt)
+  refine ⟨(Y : ℂ) * I, le_of_eq ?_⟩
+  have hall : {x | x - (Y : ℂ) * I ∈ Q ∧ ¬ KeptAt ((fun y => eqv (stripeCol n y)) ⁻¹' {eqv (stripeCol n x)}) η ε x} =
+      (fun x => x + -((Y : ℂ) * I)) ⁻¹' Q := by
+    ext x
+    simp only [mem_setOf_eq, mem_preimage, ← sub_eq_add_neg]
+    exact ⟨fun h => h.1, fun h => ⟨h, not_kept x h⟩⟩
+  rw [hall, measure_preimage_add_right]
 
 /-- **FS121-D4-FACE** with **FS121-V5-FACE-SHARP**'s hypothesis `ρ² ≥ 2g − g²` (SR1 item 6), one class (G92: the argument
 reads only `A`'s own unit pairs): if the half-box and the far box lie almost everywhere in `A`, no point of `supp A` is at
