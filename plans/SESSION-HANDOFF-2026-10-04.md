@@ -4,17 +4,16 @@
 reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–265 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (2026-10-04, late evening):** inventory items run to **274**. **Landed on `main`, held in the kernel**: wave 1, **wave 2 (item 270; counts filed, item 271)**, wave 3 (item 157), Lebesgue's covering
+> **Latest (2026-10-04, late evening):** inventory items run to **279**. **Landed on `main`, held in the kernel**: wave 1, **wave 2 (item 270; counts filed, item 271)**, wave 3 (item 157), Lebesgue's covering
 > theorem (151), `localSectors` (171); the axiom gate's IMPORTED section (160). **Staffing**: four Opus slots for the backlog (item 211; no fifth, item 255).
 > **Running (4)**: **FS131-I5c** (wave 5 on `fs131-w5`: merges `fs131-w4` once it holds the `Contact` lane, applies ruling 252 to `stuck_structure_ua`, 37
-> leaves; item 272), **FS131-I4l** (on `fs131-w4`: merges the finished `Contact` lane `fs131-w4c` in first, item 267, then `n3_end`, `UnitArc`'s five, `pair_i`; IC5 proved `stuck_structure`, item 266), **FS131-IM2** (wave 4's
-> moves on `fs131-w4m`: the second prefix move into `Cone`, item 263, then SHAVE, RAY, MERGE; items 261–263), **FS131-KP** (the planar planner on a new branch `fs131-w5p`: `IsHoleOf`'s
-> repair, the shared plane-topology lemmas, the seven planar leaves' skeleton; item 274). QA3 done: 97 of 99 definitions match, the other two known (item 273). **Next slot**: the planar implementer once KP's plan is in, or a wave-4 or wave-5 successor, whichever frees first. **Wave 4's moves are its longest path** (about seven to eight sessions, item 261); once SHAVE's
-> machinery lands, weigh RAY and MERGE in parallel. **Wave 4's merge** (item 267): `fs131-w4c` → `fs131-w4` now (I4l); when IM2's line is done, `fs131-w4m` → `fs131-w4` (the three moves
+> leaves; item 272), **FS131-I4l** (on `fs131-w4`: merges the finished `Contact` lane `fs131-w4c` in first, item 267, then `n3_end`, `UnitArc`'s five, `pair_i`; IC5 proved `stuck_structure`, item 266), **FS131-IM3** (wave 4's
+> moves on `fs131-w4m`: the machinery into a new `Plane/ValidMap/Surgery`, then SHAVE's three cases, RAY, MERGE; items 278–279; IM2 proved the 93-theorem machinery and the cut), **FS131-KP** (the planar planner on a new branch `fs131-w5p`: `IsHoleOf`'s
+> repair, the shared plane-topology lemmas, the seven planar leaves' skeleton; item 274). QA3 done: 97 of 99 definitions match, the other two known (item 273). **Next slot**: the planar implementer once KP's plan is in, or a wave-4 or wave-5 successor, whichever frees first. **Wave 4's moves are its longest path** (about seven to eight sessions, item 261); when a second slot frees, MERGE may go to a parallel implementer on its own branch cut after the split (item 279). **Wave 4's merge** (item 267): `fs131-w4c` → `fs131-w4` now (I4l); when IM2's line is done, `fs131-w4m` → `fs131-w4` (the three moves
 > become citations; keep `localSectors_disj` in wave 3's `LocalStructure`, item 264), the gate (re-run the axiom self-test, item 260;
-> vacuity notes on `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N`, items 252, 266), the landing; then Woodall's landing job (item 190). **Held for the filing**: wave 2's drafts 5–7 (Frontier clause, 28 rows to regrade, atlas grades; item 271); rows 134/135/137 from E4 § 5.4 (item
+> vacuity notes on `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N`, items 252, 266), the landing; then Woodall's landing job (item 190). **Held for the filing**: CVB's frame erratum (phantom arcs, item 277); wave 2's drafts 5–7 (Frontier clause, 28 rows to regrade, atlas grades; item 271); rows 134/135/137 from E4 § 5.4 (item
 > 227); errata to FS112-N3-PAIRS (I4k's draft, item 264) and N4-RAY's route (item 262 (a)); the Frontier clauses; the Proof Atlas; the stale `ARCHITECTURE.md`
-> prose counts; `InMK`'s restatement if still unconsumed (item 274 (a)); the finished worktrees' removal after rescuing their cited gate logs. **Tool defects owed**: `scripts/vacuity.sh`'s "twenty" banner (item 271); the brief gate passes a quotation under a wrong §
+> prose counts; `InMK`'s restatement if still unconsumed (item 274 (a)); the finished worktrees' removal after rescuing their cited gate logs. **Tool defects owed**: `tools/check_architecture.py` fails check [5] on the wave-4 branches (item 278, for wave 4's landing); `scripts/vacuity.sh`'s "twenty" banner (item 271); the brief gate passes a quotation under a wrong §
 > heading (items 206, 215); the axiom self-test's hard-coded counts (item 259); `tools/fs131_k4_decls.py`'s `_root_` names (item 262 (d)). **On each hand-back**:
 > check the build log, `sorry` count and axioms print; log; brief a successor by script from the previous brief (Opus), gate, launch. **On a landing**: read the
 > gate logs, file counts (`CLAUDE.md` § Trust ledger, § The gate, `scripts/vacuity-baseline.txt`, `GATE_CHANGES`), run `gate_report.py` and the fact audit
@@ -57,7 +56,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-I4l (wave 4 on `fs131-w4`: merge `fs131-w4c`, then `n3_end`, `UnitArc`'s five, `pair_i`; items 264, 266–267) | Opus | `data/fs131/briefs/FS131-I4l-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4l.md` |
-| FS131-IM2 (wave 4's moves: the second prefix move into `Cone`, then SHAVE, RAY, MERGE; items 261–263) | Opus | `data/fs131/briefs/FS131-IM2-moves.md` | branch `fs131-w4m`'s `data/fs131/reports/FS131-IM2.md` |
+| FS131-IM3 (wave 4's moves: the `Surgery` split, then SHAVE, RAY, MERGE; items 278–279) | Opus | `data/fs131/briefs/FS131-IM3-moves.md` | branch `fs131-w4m`'s `data/fs131/reports/FS131-IM3.md` |
 | FS131-KP (the planar planner: `IsHoleOf`, the plane-topology lemmas, the seven planar leaves; item 274) | Opus | `data/fs131/briefs/FS131-KP-planar.md` | branch `fs131-w5p`'s `data/fs131/reports/FS131-KP.md` |
 | FS131-I5c (wave 5 on `fs131-w5`: the `fs131-w4` merge, `stuck_structure_ua`, 37 leaves; item 272) | Opus | `data/fs131/briefs/FS131-I5c-wave5.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-I5c.md` |
 
