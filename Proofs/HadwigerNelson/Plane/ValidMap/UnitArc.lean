@@ -95,6 +95,40 @@ theorem exists_mem_hornSet_aboveBelow (v : ℂ) (α : ℝ) {κ₁ κ₂ s m r : 
   · intro h; unfold TanAbove; rw [hX, hY, tanHeight_hornPt]; exact mul_pos hpos (ht3.1 h)
   · intro h; unfold TanBelow; rw [hX, hY, tanHeight_hornPt]; exact mul_neg_of_pos_of_neg hpos (ht3.2 h)
 
+/-- A direction `β` with `e β · u < 0` exists for every `u ≠ 0` (the direction of `−u`). -/
+theorem exists_dir_dot_neg {u : ℂ} (hu : u ≠ 0) : ∃ β : ℝ, dot (e β) u < 0 := by
+  refine ⟨Complex.arg (-u), ?_⟩
+  have hn : (‖-u‖ : ℂ) * e (Complex.arg (-u)) = -u := by
+    simpa [e] using Complex.norm_mul_exp_arg_mul_I (-u)
+  have hpos : 0 < ‖u‖ := norm_pos_iff.2 hu
+  have he : e (Complex.arg (-u)) = (-u) / (‖u‖ : ℂ) := by
+    rw [norm_neg] at hn
+    have : (‖u‖ : ℂ) ≠ 0 := by exact_mod_cast hpos.ne'
+    field_simp
+    rw [mul_comm]; exact hn
+  unfold dot
+  rw [he, div_mul_eq_mul_div, neg_mul, Complex.mul_conj, Complex.normSq_eq_norm_sq]
+  have : ((-(((‖u‖ ^ 2 : ℝ) : ℂ)) / (‖u‖ : ℂ))).re = -‖u‖ := by
+    rw [← Complex.ofReal_neg, ← Complex.ofReal_div, Complex.ofReal_re]
+    field_simp
+  rw [this]; linarith
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- At a point of the domain, some tile approaches in a direction `β` with `e β · u < 0`, for any `u ≠ 0`. -/
+theorem exists_tile_cone_dot_neg {A u : ℂ} (hA : A ∈ F.dom) (hu : u ≠ 0) :
+    ∃ T, F.IsTile T ∧ ∃ β ∈ coneAt T A, dot (e β) u < 0 := by
+  obtain ⟨β, hβ⟩ := exists_dir_dot_neg hu
+  obtain ⟨c, hc⟩ := F.exists_mem_coneAt_region hA β
+  rw [F.coneAt_region_eq_biUnion hA c] at hc
+  simp only [mem_iUnion, mem_setOf_eq] at hc
+  obtain ⟨T, ⟨hT, -⟩, hβT⟩ := hc
+  exact ⟨T, hT.1, β, hβT, hβ⟩
+
+end ArcMap
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
@@ -199,7 +233,15 @@ facing away from the other end (so it is neither an inner nor an outer tile of t
 theorem l60_eq_third (hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c') :
     (∃ T, F.IsTile T ∧ ∃ β ∈ coneAt T (ringPt P θ₁), dot (e β) (ringPt P (θ₁ + π / 3) - ringPt P θ₁) < 0) ∧
       ∃ T, F.IsTile T ∧ ∃ β ∈ coneAt T (ringPt P (θ₁ + π / 3)), dot (e β) (ringPt P θ₁ - ringPt P (θ₁ + π / 3)) < 0 := by
-  sorry
+  have hπ := Real.pi_gt_three
+  have hd1 : dist (ringPt P θ₁) (ringPt P (θ₁ + π / 3)) = 1 :=
+    ((dist_ringPt_ringPt_cmp_one P (α := θ₁) (β := θ₁ + π / 3) (by
+      rw [show θ₁ - (θ₁ + π / 3) = -(π / 3) by ring, abs_neg, abs_of_pos (by positivity)]; linarith)).1).2
+      (by rw [show θ₁ - (θ₁ + π / 3) = -(π / 3) by ring, abs_neg, abs_of_pos (by positivity)])
+  have hne : ringPt P θ₁ ≠ ringPt P (θ₁ + π / 3) := fun h => by rw [h, dist_self] at hd1; norm_num at hd1
+  have hAdom : ringPt P θ₁ ∈ F.dom := (hA.2.1 ⟨θ₁, ⟨le_refl _, by linarith⟩, rfl⟩).1
+  have hBdom : ringPt P (θ₁ + π / 3) ∈ F.dom := (hA.2.1 ⟨θ₁ + π / 3, ⟨by linarith, le_refl _⟩, rfl⟩).1
+  exact ⟨exists_tile_cone_dot_neg hAdom (sub_ne_zero.2 hne.symm), exists_tile_cone_dot_neg hBdom (sub_ne_zero.2 hne)⟩
 
 /-- The lens of the 60° arc `r([0, 60°])` of `ω(0)`: `L = B̄(1, 1) ∩ B̄(e 60°, 1)` (`plans/FS114-L60-audit.md` § 1.3). -/
 noncomputable def l60Lens : Set ℂ := closedBall 1 1 ∩ closedBall (e (π / 3)) 1

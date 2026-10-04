@@ -47,7 +47,153 @@ theorem not_lemmaL_of_not_mem :
     ¬ ∀ (A B W : Set ℂ) (b : ℂ), IsOpen A → IsOpen B → IsOpen W → W ⊆ closure (A ∪ B) →
       (∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1) → (∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) → b ∈ closure A → b ∈ closure B →
       Disjoint (sphere b 1) W := by
-  sorry
+  intro h
+  have hdist : ∀ x y : ℂ, dist x y ^ 2 = (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 := by
+    intro x y
+    rw [Complex.dist_eq, Complex.sq_norm, Complex.normSq_apply]; simp; ring
+  have hne : ∀ x y : ℂ, (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 ≠ 1 → dist x y ≠ 1 := by
+    intro x y hxy hd; apply hxy; rw [← hdist, hd]; norm_num
+  have hlt : ∀ x y : ℂ, (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 < 1 → dist x y ≠ 1 := by
+    intro x y hxy; exact hne x y hxy.ne
+  have hgt : ∀ x y : ℂ, 1 < (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 → dist x y ≠ 1 := by
+    intro x y hxy; exact hne x y hxy.ne'
+  -- the sets
+  set A0 : Set ℂ := {z | z.re < 0 ∧ 2 * |z.im| < -z.re ∧ z.re ^ 2 + z.im ^ 2 < 1 / 16} with hA0
+  set B0 : Set ℂ := {z | 0 < z.re ∧ 2 * |z.im| < z.re ∧ z.re ^ 2 + z.im ^ 2 < 1 / 16} with hB0
+  set A1 : Set ℂ := {z | (z.re - 1) ^ 2 + z.im ^ 2 < 1 / 100 ∧ 1 < z.re ^ 2 + z.im ^ 2} with hA1
+  set B1 : Set ℂ := {z | (z.re - 1) ^ 2 + z.im ^ 2 < 1 / 100 ∧ z.re ^ 2 + z.im ^ 2 < 1} with hB1
+  set W : Set ℂ := {z | (z.re - 1) ^ 2 + z.im ^ 2 < 1 / 100} with hW
+  have lt_open : ∀ f g : ℂ → ℝ, Continuous f → Continuous g → IsOpen {z : ℂ | f z < g z} :=
+    fun f g hf hg => isOpen_lt hf hg
+  have cre : Continuous fun z : ℂ => z.re := Complex.continuous_re
+  have cim : Continuous fun z : ℂ => z.im := Complex.continuous_im
+  have cq : Continuous fun z : ℂ => z.re ^ 2 + z.im ^ 2 := by fun_prop
+  have cd : Continuous fun z : ℂ => (z.re - 1) ^ 2 + z.im ^ 2 := by fun_prop
+  have cabs : Continuous fun z : ℂ => 2 * |z.im| := by fun_prop
+  have cneg : Continuous fun z : ℂ => -z.re := by fun_prop
+  have cc : ∀ c : ℝ, Continuous fun _ : ℂ => c := fun c => continuous_const
+  have oA0 : IsOpen A0 := (lt_open _ _ cre (cc 0)).inter ((lt_open _ _ cabs cneg).inter (lt_open _ _ cq (cc _)))
+  have oB0 : IsOpen B0 := (lt_open _ _ (cc 0) cre).inter ((lt_open _ _ cabs cre).inter (lt_open _ _ cq (cc _)))
+  have oA1 : IsOpen A1 := (lt_open _ _ cd (cc _)).inter (lt_open _ _ (cc 1) cq)
+  have oB1 : IsOpen B1 := (lt_open _ _ cd (cc _)).inter (lt_open _ _ cq (cc 1))
+  have oW : IsOpen W := lt_open _ _ cd (cc _)
+  -- unit-freeness
+  have uA0 : ∀ x ∈ A0, ∀ y ∈ A0, dist x y ≠ 1 := by
+    rintro x ⟨hx1, hx2, hx3⟩ y ⟨hy1, hy2, hy3⟩
+    apply hlt
+    nlinarith [sq_nonneg (x.re + y.re), sq_nonneg (x.im + y.im), sq_nonneg (x.re - y.re), sq_nonneg (x.im - y.im)]
+  have uB0 : ∀ x ∈ B0, ∀ y ∈ B0, dist x y ≠ 1 := by
+    rintro x ⟨hx1, hx2, hx3⟩ y ⟨hy1, hy2, hy3⟩
+    apply hlt
+    nlinarith [sq_nonneg (x.re + y.re), sq_nonneg (x.im + y.im), sq_nonneg (x.re - y.re), sq_nonneg (x.im - y.im)]
+  have uA1 : ∀ x ∈ A1, ∀ y ∈ A1, dist x y ≠ 1 := by
+    rintro x ⟨hx1, hx2⟩ y ⟨hy1, hy2⟩
+    apply hlt
+    nlinarith [sq_nonneg (x.re + y.re - 2), sq_nonneg (x.im + y.im), sq_nonneg (x.re - y.re), sq_nonneg (x.im - y.im)]
+  have uB1 : ∀ x ∈ B1, ∀ y ∈ B1, dist x y ≠ 1 := by
+    rintro x ⟨hx1, hx2⟩ y ⟨hy1, hy2⟩
+    apply hlt
+    nlinarith [sq_nonneg (x.re + y.re - 2), sq_nonneg (x.im + y.im), sq_nonneg (x.re - y.re), sq_nonneg (x.im - y.im)]
+  have uA01 : ∀ x ∈ A0, ∀ y ∈ A1, dist x y ≠ 1 := by
+    rintro x ⟨hx1, hx2, hx3⟩ y ⟨hy1, hy2⟩
+    apply hgt
+    have hyre : 9 / 10 < y.re := by nlinarith [sq_nonneg y.im]
+    have hyim : |y.im| < 1 / 10 := by
+      rw [abs_lt]; constructor <;> nlinarith [sq_nonneg (y.re - 1), sq_nonneg y.im]
+    have hxim := abs_nonneg x.im
+    have hcross : y.re * x.re + y.im * x.im ≤ 0 := by
+      have h1 : y.im * x.im ≤ |y.im| * |x.im| := by
+        calc y.im * x.im ≤ |y.im * x.im| := le_abs_self _
+          _ = _ := abs_mul _ _
+      have h2 : |y.im| * |x.im| ≤ (1 / 10) * (-x.re / 2) := by
+        apply mul_le_mul hyim.le (by linarith) (abs_nonneg _) (by norm_num)
+      nlinarith
+    nlinarith [sq_nonneg x.re, sq_nonneg x.im]
+  have uB01 : ∀ x ∈ B0, ∀ y ∈ B1, dist x y ≠ 1 := by
+    rintro x ⟨hx1, hx2, hx3⟩ y ⟨hy1, hy2⟩
+    apply hlt
+    have hyre : 9 / 10 < y.re := by nlinarith [sq_nonneg y.im]
+    have hyim : |y.im| < 1 / 10 := by
+      rw [abs_lt]; constructor <;> nlinarith [sq_nonneg (y.re - 1), sq_nonneg y.im]
+    have hcross : (17 / 20) * x.re ≤ y.re * x.re + y.im * x.im := by
+      have h1 : -(|y.im| * |x.im|) ≤ y.im * x.im := by
+        calc -(|y.im| * |x.im|) = -|y.im * x.im| := by rw [abs_mul]
+          _ ≤ _ := neg_abs_le _
+      have h2 : |y.im| * |x.im| ≤ (1 / 10) * (x.re / 2) := by
+        apply mul_le_mul hyim.le (by linarith) (abs_nonneg _) (by norm_num)
+      nlinarith
+    have hxre : x.re < 1 / 4 := by nlinarith [sq_nonneg x.im]
+    have hxsq : x.re ^ 2 + x.im ^ 2 ≤ (5 / 4) * x.re ^ 2 := by
+      have : x.im ^ 2 ≤ (x.re / 2) ^ 2 := by
+        have := abs_nonneg x.im
+        nlinarith [sq_abs x.im]
+      nlinarith
+    nlinarith [sq_nonneg x.re, mul_pos hx1 hx1]
+  have hAu : ∀ x ∈ A0 ∪ A1, ∀ y ∈ A0 ∪ A1, dist x y ≠ 1 := by
+    rintro x (hx | hx) y (hy | hy)
+    · exact uA0 x hx y hy
+    · exact uA01 x hx y hy
+    · rw [dist_comm]; exact uA01 y hy x hx
+    · exact uA1 x hx y hy
+  have hBu : ∀ x ∈ B0 ∪ B1, ∀ y ∈ B0 ∪ B1, dist x y ≠ 1 := by
+    rintro x (hx | hx) y (hy | hy)
+    · exact uB0 x hx y hy
+    · exact uB01 x hx y hy
+    · rw [dist_comm]; exact uB01 y hy x hx
+    · exact uB1 x hx y hy
+  -- the change point
+  have h0A : (0 : ℂ) ∈ closure (A0 ∪ A1) := by
+    refine Metric.mem_closure_iff.2 fun δ hδ => ?_
+    set t : ℝ := min (δ / 2) (1 / 8) with ht
+    have ht0 : 0 < t := lt_min (by linarith) (by norm_num)
+    have ht1 : t ≤ 1 / 8 := min_le_right _ _
+    have htδ : t < δ := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+    refine ⟨((-t : ℝ) : ℂ), Or.inl ⟨by simpa using ht0, by simpa using ht0, by simp; nlinarith⟩, ?_⟩
+    rw [dist_zero_left, Complex.norm_real, Real.norm_eq_abs, abs_neg, abs_of_pos ht0]; exact htδ
+  have h0B : (0 : ℂ) ∈ closure (B0 ∪ B1) := by
+    refine Metric.mem_closure_iff.2 fun δ hδ => ?_
+    set t : ℝ := min (δ / 2) (1 / 8) with ht
+    have ht0 : 0 < t := lt_min (by linarith) (by norm_num)
+    have ht1 : t ≤ 1 / 8 := min_le_right _ _
+    have htδ : t < δ := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+    refine ⟨((t : ℝ) : ℂ), Or.inl ⟨by simpa using ht0, by simpa using ht0, by simp; nlinarith⟩, ?_⟩
+    rw [dist_zero_left, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]; exact htδ
+  -- W lies in the closure
+  have hWcl : W ⊆ closure ((A0 ∪ A1) ∪ (B0 ∪ B1)) := by
+    intro z hz
+    have hzW : (z.re - 1) ^ 2 + z.im ^ 2 < 1 / 100 := hz
+    by_cases hq : z.re ^ 2 + z.im ^ 2 = 1
+    · refine Metric.mem_closure_iff.2 fun δ hδ => ?_
+      obtain ⟨d, hd⟩ : ∃ d : ℝ, d = (z.re - 1) ^ 2 + z.im ^ 2 := ⟨_, rfl⟩
+      rw [← hd] at hzW
+      obtain ⟨t, ht⟩ : ∃ t : ℝ, t = min (δ / 4) ((1 / 100 - d) / 4) := ⟨_, rfl⟩
+      have ht0 : 0 < t := by rw [ht]; exact lt_min (by linarith) (by linarith)
+      have ht1 : t ≤ (1 / 100 - d) / 4 := by rw [ht]; exact min_le_right _ _
+      have ht2 : t ≤ δ / 4 := by rw [ht]; exact min_le_left _ _
+      have hd0 : 0 ≤ d := by rw [hd]; positivity
+      refine ⟨((1 + t : ℝ) : ℂ) * z, Or.inl (Or.inr ⟨?_, ?_⟩), ?_⟩
+      · simp only [Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero, add_zero]
+        have h1 : ((1 + t) * z.re - 1) ^ 2 + ((1 + t) * z.im) ^ 2 = (1 + t) * d + t ^ 2 := by
+          rw [hd]; linear_combination (t * (1 + t)) * hq
+        have h2 : t * (d + t) ≤ t * 1 := mul_le_mul_of_nonneg_left (by linarith) ht0.le
+        rw [h1]; nlinarith
+      · simp only [Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero, add_zero]
+        have h1 : ((1 + t) * z.re) ^ 2 + ((1 + t) * z.im) ^ 2 = (1 + t) ^ 2 := by linear_combination (1 + t) ^ 2 * hq
+        rw [h1]; nlinarith
+      · rw [dist_eq_norm, show z - ((1 + t : ℝ) : ℂ) * z = -((t : ℂ) * z) by push_cast; ring, norm_neg, norm_mul,
+          Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
+        have hz1 : ‖z‖ = 1 := by
+          have : ‖z‖ ^ 2 = 1 := by rw [Complex.sq_norm, Complex.normSq_apply]; linarith
+          nlinarith [norm_nonneg z]
+        rw [hz1]; linarith
+    · apply subset_closure
+      rcases lt_or_gt_of_ne hq with h | h
+      · exact Or.inr (Or.inr ⟨hzW, h⟩)
+      · exact Or.inl (Or.inr ⟨hzW, h⟩)
+  have := h (A0 ∪ A1) (B0 ∪ B1) W 0 (oA0.union oA1) (oB0.union oB1) oW hWcl hAu hBu h0A h0B
+  refine Set.disjoint_left.1 this (show (1 : ℂ) ∈ sphere (0 : ℂ) 1 by simp) ?_
+  show ((1 : ℂ).re - 1) ^ 2 + (1 : ℂ).im ^ 2 < 1 / 100
+  simp
 
 /-! ## The regions of an almost-everywhere-proper map, and the multicolour -/
 
