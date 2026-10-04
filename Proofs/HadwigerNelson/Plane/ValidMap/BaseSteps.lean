@@ -363,6 +363,227 @@ noncomputable def bowtie : ArcMap 6 where
 
 namespace ArcMap
 
+/-! ### The bowtie near `E = 0`: the cusp fragment's partition (FS131-I4e)
+
+Within `1/13` of `E = 0` the bowtie's arcs are its two unit arcs alone (each of its 28 segments lies in a half-plane `re ≥ 1/13`,
+`re ≤ −1/13`, `im ≥ 1/13` or `im ≤ −1/13`), so its interior points there are the cusp fragment's (`Plane/ValidMap/Sectors`): the two
+horns (colour `1`), the part of `G` (colour `0`) and the part of `H` (colour `2`). -/
+
+/-- `e (π + π/2) = −i`: the normal of the frame along `e π`. -/
+theorem e_pi_add_pi_div_two : e (π + π / 2) = -I := by
+  rw [e_eq, Real.cos_add_pi_div_two, Real.sin_add_pi_div_two, Real.sin_pi, Real.cos_pi]; simp
+
+/-- A segment with both ends in one of the half-planes `re ≥ 1/13`, `re ≤ −1/13`, `im ≥ 1/13`, `im ≤ −1/13` misses `B(0, 1/13)`. -/
+theorem norm_ge_of_mem_segment_far {a b z : ℂ}
+    (h : (1 / 13 ≤ a.re ∧ 1 / 13 ≤ b.re) ∨ (a.re ≤ -1 / 13 ∧ b.re ≤ -1 / 13) ∨ (1 / 13 ≤ a.im ∧ 1 / 13 ≤ b.im) ∨
+      (a.im ≤ -1 / 13 ∧ b.im ≤ -1 / 13)) (hz : z ∈ segment ℝ a b) : 1 / 13 ≤ ‖z‖ := by
+  have hre := Complex.abs_re_le_norm z
+  have him := Complex.abs_im_le_norm z
+  rcases h with ⟨ha, hb⟩ | ⟨ha, hb⟩ | ⟨ha, hb⟩ | ⟨ha, hb⟩
+  · have : 1 / 13 ≤ z.re := (convex_halfSpace_re_ge (1 / 13)).segment_subset ha hb hz
+    linarith [le_abs_self z.re]
+  · have : z.re ≤ -1 / 13 := (convex_halfSpace_re_le (-1 / 13)).segment_subset ha hb hz
+    linarith [neg_le_abs z.re]
+  · have : 1 / 13 ≤ z.im := (convex_halfSpace_im_ge (1 / 13)).segment_subset ha hb hz
+    linarith [le_abs_self z.im]
+  · have : z.im ≤ -1 / 13 := (convex_halfSpace_im_le (-1 / 13)).segment_subset ha hb hz
+    linarith [neg_le_abs z.im]
+
+/-- A point of `ω(i)` within `1/13` of `0` lies on the bowtie's arc of `ω(i)`, at the angle `3π/2 + arcsin (re z)`. -/
+theorem mem_bowtieArc_N {z : ℂ} (hz : ‖z‖ < 1 / 13) (h1 : ‖z - I‖ = 1) :
+    z ∈ (Arc.circ I 1 (3 * π / 2 - bowtieAngle) (3 * π / 2 + bowtieAngle)).carrier := by
+  have hre : |z.re| < 1 / 13 := (Complex.abs_re_le_norm z).trans_lt hz
+  have him : |z.im| < 1 / 13 := (Complex.abs_im_le_norm z).trans_lt hz
+  have hsq : z.re ^ 2 + (z.im - 1) ^ 2 = 1 := by
+    have h2 : ‖z - I‖ ^ 2 = 1 := by rw [h1]; norm_num
+    rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply] at h2
+    simp only [Complex.sub_re, Complex.sub_im, Complex.I_re, Complex.I_im, sub_zero] at h2
+    nlinarith
+  have hx1 : -1 ≤ z.re := by linarith [(abs_lt.mp hre).1]
+  have hx2 : z.re ≤ 1 := by linarith [(abs_lt.mp hre).2]
+  have hsin : Real.sin (Real.arcsin z.re) = z.re := Real.sin_arcsin hx1 hx2
+  have hcos : Real.cos (Real.arcsin z.re) = 1 - z.im := by
+    rw [Real.cos_arcsin, show 1 - z.re ^ 2 = (1 - z.im) ^ 2 by nlinarith]
+    exact Real.sqrt_sq (by linarith [(abs_lt.mp him).2])
+  have hl : -bowtieAngle ≤ Real.arcsin z.re := by
+    unfold bowtieAngle; rw [← Real.arcsin_neg]; exact Real.arcsin_le_arcsin (by linarith [(abs_lt.mp hre).1])
+  have hu : Real.arcsin z.re ≤ bowtieAngle := Real.arcsin_le_arcsin (by linarith [(abs_lt.mp hre).2])
+  refine ⟨3 * π / 2 + Real.arcsin z.re, ⟨by linarith, by linarith⟩, ?_⟩
+  have h3 : 3 * π / 2 + Real.arcsin z.re = (Real.arcsin z.re - π / 2) + 2 * π := by ring
+  apply Complex.ext
+  · simp only [Complex.add_re, Complex.I_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, re_e, im_e, h3,
+      Real.cos_add_two_pi, Real.sin_add_two_pi, Real.cos_sub_pi_div_two, Real.sin_sub_pi_div_two, hsin]
+    ring
+  · simp only [Complex.add_im, Complex.I_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, re_e, im_e, h3,
+      Real.cos_add_two_pi, Real.sin_add_two_pi, Real.cos_sub_pi_div_two, Real.sin_sub_pi_div_two, hcos]
+    ring
+
+/-- A point of `ω(−i)` within `1/13` of `0` lies on the bowtie's arc of `ω(−i)`, at the angle `π/2 − arcsin (re z)`. -/
+theorem mem_bowtieArc_S {z : ℂ} (hz : ‖z‖ < 1 / 13) (h1 : ‖z + I‖ = 1) :
+    z ∈ (Arc.circ (-I) 1 (π / 2 - bowtieAngle) (π / 2 + bowtieAngle)).carrier := by
+  have hre : |z.re| < 1 / 13 := (Complex.abs_re_le_norm z).trans_lt hz
+  have him : |z.im| < 1 / 13 := (Complex.abs_im_le_norm z).trans_lt hz
+  have hsq : z.re ^ 2 + (z.im + 1) ^ 2 = 1 := by
+    have h2 : ‖z + I‖ ^ 2 = 1 := by rw [h1]; norm_num
+    rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply] at h2
+    simp only [Complex.add_re, Complex.add_im, Complex.I_re, Complex.I_im, add_zero] at h2
+    nlinarith
+  have hx1 : -1 ≤ z.re := by linarith [(abs_lt.mp hre).1]
+  have hx2 : z.re ≤ 1 := by linarith [(abs_lt.mp hre).2]
+  have hsin : Real.sin (Real.arcsin z.re) = z.re := Real.sin_arcsin hx1 hx2
+  have hcos : Real.cos (Real.arcsin z.re) = 1 + z.im := by
+    rw [Real.cos_arcsin, show 1 - z.re ^ 2 = (1 + z.im) ^ 2 by nlinarith]
+    exact Real.sqrt_sq (by linarith [(abs_lt.mp him).1])
+  have hl : -bowtieAngle ≤ Real.arcsin z.re := by
+    unfold bowtieAngle; rw [← Real.arcsin_neg]; exact Real.arcsin_le_arcsin (by linarith [(abs_lt.mp hre).1])
+  have hu : Real.arcsin z.re ≤ bowtieAngle := Real.arcsin_le_arcsin (by linarith [(abs_lt.mp hre).2])
+  refine ⟨π / 2 - Real.arcsin z.re, ⟨by linarith, by linarith⟩, ?_⟩
+  apply Complex.ext
+  · simp only [Complex.add_re, Complex.neg_re, Complex.I_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, re_e,
+      im_e, Real.cos_pi_div_two_sub, Real.sin_pi_div_two_sub, hsin]
+    ring
+  · simp only [Complex.add_im, Complex.neg_im, Complex.I_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, re_e,
+      im_e, Real.cos_pi_div_two_sub, Real.sin_pi_div_two_sub, hcos]
+    ring
+
+/-- Within `1/13` of `0` a point lies on a boundary piece of the bowtie exactly when it lies on `ω(i)` or `ω(−i)`. -/
+theorem mem_bowtieArcs_iff_of_norm_lt {z : ℂ} (hz : ‖z‖ < 1 / 13) :
+    z ∈ ⋃ a ∈ bowtieArcs, a.carrier ↔ ‖z - I‖ = 1 ∨ ‖z + I‖ = 1 := by
+  constructor
+  · intro h
+    obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp h
+    simp only [bowtieArcs, mem_setOf_eq, List.mem_cons, List.not_mem_nil, or_false] at ha
+    rcases ha with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl |
+      rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
+    · left; obtain ⟨θ, -, rfl⟩ := hza; simp
+    · right; obtain ⟨θ, -, rfl⟩ := hza; simp
+    all_goals exact absurd (norm_ge_of_mem_segment_far (by norm_num [pt]) hza) (not_le.mpr hz)
+  · rintro (h | h)
+    · exact mem_iUnion₂.mpr ⟨_, by simp [bowtieArcs], mem_bowtieArc_N hz h⟩
+    · exact mem_iUnion₂.mpr ⟨_, by simp [bowtieArcs], mem_bowtieArc_S hz h⟩
+
+/-- The cusp's pieces at radius `r ≤ 1/13` lie in the bowtie's tiles: the horns in `C`, the upper disc's part in `G`, the lower's in `H`. -/
+theorem cuspPiece_subset_bowtie {r : ℝ} (hr : r ≤ 1 / 13) :
+    cuspPiece r 0 ⊆ bowtieC ∧ cuspPiece r 1 ⊆ bowtieC ∧ cuspPiece r 2 ⊆ bowtieG ∧ cuspPiece r 3 ⊆ bowtieH := by
+  have hb : ∀ z : ℂ, ‖z‖ < r → |z.re| < 1 / 13 ∧ |z.im| < 1 / 13 := fun z hz =>
+    ⟨(Complex.abs_re_le_norm z).trans_lt (hz.trans_le hr), (Complex.abs_im_le_norm z).trans_lt (hz.trans_le hr)⟩
+  refine ⟨fun z hz => ?_, fun z hz => ?_, fun z hz => ?_, fun z hz => ?_⟩
+  · obtain ⟨h0, h1, h2, h3⟩ := (hornSet_cusp_iff r z).mp hz
+    obtain ⟨hre, him⟩ := hb z h0
+    exact ⟨h1.ne', by linarith, him, h3, h2⟩
+  · obtain ⟨h0, h1, h2, h3⟩ := mem_cuspPiece_one.mp hz
+    obtain ⟨hre, him⟩ := hb z h0
+    exact ⟨h1.ne, by linarith, him, h3, h2⟩
+  · obtain ⟨h0, h1⟩ := hz
+    rw [mem_ball_zero_iff] at h0; rw [mem_ball, dist_eq_norm] at h1
+    obtain ⟨hre, him⟩ := hb z h0
+    exact ⟨h1, by linarith [(abs_lt.mp him).2], by linarith [(abs_lt.mp him).2]⟩
+  · obtain ⟨h0, h1⟩ := hz
+    rw [mem_ball_zero_iff] at h0; rw [mem_ball, dist_eq_norm, sub_neg_eq_add] at h1
+    obtain ⟨hre, him⟩ := hb z h0
+    exact ⟨h1, by linarith [(abs_lt.mp him).1], by linarith [(abs_lt.mp him).1]⟩
+
+/-- The bowtie's colour on `G` is `0`. -/
+theorem bowtieCol_of_mem_G {z : ℂ} (hz : z ∈ bowtieG) : bowtieCol z = 0 := by
+  unfold bowtieCol; rw [if_pos hz]
+
+/-- The bowtie's colour on `C` is `1` (`C` lies outside the unit disc about `i`, so off `G`). -/
+theorem bowtieCol_of_mem_C {z : ℂ} (hz : z ∈ bowtieC) : bowtieCol z = 1 := by
+  have hG : z ∉ bowtieG := fun h => by linarith [h.1, hz.2.2.2.1]
+  unfold bowtieCol; rw [if_neg hG, if_pos (show z ∈ bowtieC ∪ bowtieCN ∪ bowtieCS from Or.inl (Or.inl hz))]
+
+/-- The bowtie's colour on `H` is `2` (`H` misses `G`, `C`, `CN`, `CS`). -/
+theorem bowtieCol_of_mem_H {z : ℂ} (hz : z ∈ bowtieH) : bowtieCol z = 2 := by
+  obtain ⟨h1, h2, h3⟩ := hz
+  have hsum := norm_sub_I_sq_add z
+  have hG : z ∉ bowtieG := fun h => by nlinarith [h.1, norm_nonneg z, norm_nonneg (z - I), norm_nonneg (z + I)]
+  have him : z.im < 0 := by
+    have : |(z + I).im| < 1 := (Complex.abs_im_le_norm _).trans_lt h1
+    simp only [Complex.add_im, Complex.I_im] at this
+    linarith [(abs_lt.mp this).2]
+  have hC : z ∉ bowtieC ∪ bowtieCN ∪ bowtieCS := by
+    rintro ((h | h) | h)
+    · linarith [h.2.2.2.2]
+    · linarith [h.1, abs_nonneg z.re]
+    · linarith [h.1, abs_nonneg z.re]
+  unfold bowtieCol; rw [if_neg hG, if_neg hC, if_pos (show z ∈ bowtieH from ⟨h1, h2, h3⟩)]
+
+/-- The bowtie's colours on the cusp's pieces at `r ≤ 1/13`: `1` on the horns, `0` on the upper disc's part, `2` on the lower's. -/
+theorem bowtieCol_cuspPiece {r : ℝ} (hr : r ≤ 1 / 13) {z : ℂ} :
+    (z ∈ cuspPiece r 0 → bowtieCol z = 1) ∧ (z ∈ cuspPiece r 1 → bowtieCol z = 1) ∧ (z ∈ cuspPiece r 2 → bowtieCol z = 0) ∧
+      (z ∈ cuspPiece r 3 → bowtieCol z = 2) := by
+  obtain ⟨h0, h1, h2, h3⟩ := cuspPiece_subset_bowtie hr
+  exact ⟨fun h => bowtieCol_of_mem_C (h0 h), fun h => bowtieCol_of_mem_C (h1 h), fun h => bowtieCol_of_mem_G (h2 h),
+    fun h => bowtieCol_of_mem_H (h3 h)⟩
+
+/-- `B(0, 1/13)` lies in the bowtie's domain: off the two unit circles (a closed set with empty interior) its points lie in the cusp's
+pieces, hence in the tiles. -/
+theorem ball_subset_bowtie_dom : ball (0 : ℂ) (1 / 13) ⊆ bowtie.dom := by
+  refine interior_maximal ?_ isOpen_ball
+  have hint : interior (sphere I 1 ∪ sphere (-I) 1) = ∅ := by
+    rw [interior_union_isClosed_of_interior_empty isClosed_sphere (interior_sphere _ one_ne_zero), interior_sphere _ one_ne_zero]
+  have hd : Dense (sphere I 1 ∪ sphere (-I) 1)ᶜ := interior_eq_empty_iff_dense_compl.mp hint
+  refine (hd.open_subset_closure_inter isOpen_ball).trans (closure_mono ?_)
+  rintro z ⟨hz, hS⟩
+  rw [mem_ball_zero_iff] at hz
+  simp only [mem_compl_iff, mem_union, mem_sphere_iff_norm, sub_neg_eq_add, not_or] at hS
+  have hI : z ∈ cuspFrag.interiorPts ∩ ball 0 (1 / 13) :=
+    ⟨cuspFrag_mem_interiorPts.mpr ⟨by linarith, hS.1, hS.2⟩, mem_ball_zero_iff.mpr hz⟩
+  rw [cuspFrag_partition (by norm_num), mem_iUnion] at hI
+  obtain ⟨i, hi⟩ := hI
+  obtain ⟨h0, h1, h2, h3⟩ := cuspPiece_subset_bowtie (r := 1 / 13) le_rfl
+  simp only [bowtieTiles, mem_union]
+  fin_cases i
+  · exact Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inr (h0 hi)))))))))
+  · exact Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inr (h1 hi)))))))))
+  · exact Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (h2 hi))))))))))
+  · exact Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inl (Or.inr (h3 hi))))))))))
+
+/-- **The bowtie at `E`**: for `0 < r ≤ 1/13` its interior points in `B(0, r)` are the cusp's four pieces. -/
+theorem bowtie_partition {r : ℝ} (hr : r ≤ 1 / 13) : bowtie.interiorPts ∩ ball 0 r = ⋃ i, cuspPiece r i := by
+  rw [← cuspFrag_partition (by linarith : r ≤ 1 / 2)]
+  ext z
+  simp only [mem_inter_iff, mem_ball_zero_iff]
+  constructor
+  · rintro ⟨⟨-, hΓ⟩, hz⟩
+    refine ⟨cuspFrag_mem_interiorPts.mpr ⟨by linarith, fun h => ?_, fun h => ?_⟩, hz⟩
+    · exact hΓ ((mem_bowtieArcs_iff_of_norm_lt (by linarith)).mpr (Or.inl h))
+    · exact hΓ ((mem_bowtieArcs_iff_of_norm_lt (by linarith)).mpr (Or.inr h))
+  · rintro ⟨hI, hz⟩
+    obtain ⟨-, h1, h2⟩ := cuspFrag_mem_interiorPts.mp hI
+    refine ⟨⟨ball_subset_bowtie_dom (mem_ball_zero_iff.mpr (by linarith)), fun h => ?_⟩, hz⟩
+    rcases (mem_bowtieArcs_iff_of_norm_lt (by linarith)).mp h with h | h
+    exacts [h1 h, h2 h]
+
+/-- The horn along `e π` at `0` with bounding curvatures `−1`, `1` is the cusp's left horn. -/
+theorem hornSet_cusp_pi_eq (r : ℝ) : hornSet 0 π (-1) 1 r = cuspPiece r 1 := by
+  ext z
+  show _ ↔ z ∈ (fun z => -(starRingEnd ℂ z)) '' hornSet 0 0 (-1) 1 r
+  rw [mem_cuspPiece_one]
+  have hfx : frameX 0 π z = -z.re := by
+    simp [frameX, e_eq, Real.cos_pi, Real.sin_pi]
+  simp only [hornSet, tanAbove_neg_one_iff, tanBelow_one_iff, mem_setOf_eq, hfx, e_pi_add_pi_div_two, dist_eq_norm,
+    sub_zero, zero_add, sub_neg_eq_add]
+  constructor
+  · rintro ⟨h1, h2, h3, h4⟩; exact ⟨h1, by linarith, h4, h3⟩
+  · rintro ⟨h1, h2, h3, h4⟩; exact ⟨h1, by linarith, h4, h3⟩
+
+/-- For `0 < r ≤ 1/13`, each of the cusp's pieces is a sector of the bowtie at `0`. -/
+theorem bowtie_isSector_cuspPiece {r : ℝ} (hr0 : 0 < r) (hr : r ≤ 1 / 13) (i : Fin 4) :
+    bowtie.IsSector 0 r (cuspPiece r i) := by
+  obtain ⟨ho, hp, hd, hn, hc⟩ := cuspPiece_data hr0 (by linarith)
+  exact (isSector_iff_of_partition (bowtie_partition hr) ho hp hd hn hc).mpr ⟨i, rfl⟩
+
+/-- For `r ≤ 1/13`, the cusp's disc parts are inside the bowtie's classes `0` (upper) and `2` (lower). -/
+theorem cuspPiece_subset_bowtie_region {r : ℝ} (hr : r ≤ 1 / 13) :
+    cuspPiece r 2 ⊆ bowtie.region 0 ∧ cuspPiece r 3 ⊆ bowtie.region 2 := by
+  have hU := bowtie_partition hr
+  have hint : ∀ i, ∀ z ∈ cuspPiece r i, z ∈ bowtie.interiorPts := fun i z hz => by
+    have : z ∈ bowtie.interiorPts ∩ ball 0 r := by rw [hU]; exact mem_iUnion.mpr ⟨i, hz⟩
+    exact this.1
+  exact ⟨fun z hz => ⟨hint 2 z hz, (bowtieCol_cuspPiece hr).2.2.1 hz⟩,
+    fun z hz => ⟨hint 3 z hz, (bowtieCol_cuspPiece hr).2.2.2 hz⟩⟩
+
 /-- **FS112-BOWTIE**: the fragment is valid (YB3: 21 of 21 same-colour tile pairs, exact). -/
 theorem bowtie_valid : bowtie.Valid := by
   sorry
@@ -373,17 +594,106 @@ theorem bowtie_mem_dom : (0 : ℂ) ∈ bowtie.dom ∧ I ∈ bowtie.dom ∧ -I �
 
 /-- `E` carries three colours: `0` (`G`), `1` (the horns), `2` (`H`); the horn colour has two sectors. -/
 theorem bowtie_coloursAt_zero : bowtie.coloursAt 0 = {0, 1, 2} ∧ bowtie.HasSectors 0 1 2 := by
-  sorry
+  have h13 : (0 : ℝ) < 1 / 13 := by norm_num
+  refine ⟨?_, ?_⟩
+  · obtain ⟨-, -, -, -, hc⟩ := cuspPiece_data h13 (by norm_num)
+    have hU := bowtie_partition (r := 1 / 13) le_rfl
+    have hcol0 : ∀ z, z ∈ cuspPiece (1 / 13) 0 → bowtieCol z = 1 := fun z => (bowtieCol_cuspPiece (r := 1 / 13) le_rfl (z := z)).1
+    have hcol1 : ∀ z, z ∈ cuspPiece (1 / 13) 1 → bowtieCol z = 1 := fun z => (bowtieCol_cuspPiece (r := 1 / 13) le_rfl (z := z)).2.1
+    have hcol2 : ∀ z, z ∈ cuspPiece (1 / 13) 2 → bowtieCol z = 0 := fun z => (bowtieCol_cuspPiece (r := 1 / 13) le_rfl (z := z)).2.2.1
+    have hcol3 : ∀ z, z ∈ cuspPiece (1 / 13) 3 → bowtieCol z = 2 := fun z => (bowtieCol_cuspPiece (r := 1 / 13) le_rfl (z := z)).2.2.2
+    have hint : ∀ i, ∀ z ∈ cuspPiece (1 / 13) i, z ∈ bowtie.interiorPts := fun i z hz => by
+      have : z ∈ bowtie.interiorPts ∩ ball 0 (1 / 13) := by rw [hU]; exact mem_iUnion.mpr ⟨i, hz⟩
+      exact this.1
+    ext j
+    simp only [mem_insert_iff, mem_singleton_iff]
+    constructor
+    · intro hj
+      obtain ⟨z, ⟨hzI, hzc⟩, hz⟩ := Metric.mem_closure_iff.mp hj (1 / 13) h13
+      have hzc' : bowtieCol z = j := hzc
+      have hzU : z ∈ bowtie.interiorPts ∩ ball 0 (1 / 13) := ⟨hzI, by rw [mem_ball, dist_comm]; exact hz⟩
+      rw [hU, mem_iUnion] at hzU
+      obtain ⟨i, hi⟩ := hzU
+      fin_cases i
+      · exact Or.inr (Or.inl (hzc'.symm.trans (hcol0 z hi)))
+      · exact Or.inr (Or.inl (hzc'.symm.trans (hcol1 z hi)))
+      · exact Or.inl (hzc'.symm.trans (hcol2 z hi))
+      · exact Or.inr (Or.inr (hzc'.symm.trans (hcol3 z hi)))
+    · rintro (rfl | rfl | rfl)
+      · show (0 : ℂ) ∈ closure (bowtie.region 0)
+        exact closure_mono (cuspPiece_subset_bowtie_region (r := 1 / 13) le_rfl).1 (hc 2)
+      · show (0 : ℂ) ∈ closure (bowtie.region 1)
+        exact closure_mono (show cuspPiece (1 / 13) 0 ⊆ bowtie.region 1 from fun z hz => ⟨hint 0 z hz, hcol0 z hz⟩) (hc 0)
+      · show (0 : ℂ) ∈ closure (bowtie.region 2)
+        exact closure_mono (cuspPiece_subset_bowtie_region (r := 1 / 13) le_rfl).2 (hc 3)
+  · filter_upwards [Ioc_mem_nhdsGT h13] with r hr
+    obtain ⟨ho, hp, hd, hn, hc⟩ := cuspPiece_data hr.1 (by linarith [hr.2])
+    have hU := bowtie_partition hr.2
+    have hcol0 : ∀ z, z ∈ cuspPiece r 0 → bowtieCol z = 1 := fun z => (bowtieCol_cuspPiece hr.2 (z := z)).1
+    have hcol1 : ∀ z, z ∈ cuspPiece r 1 → bowtieCol z = 1 := fun z => (bowtieCol_cuspPiece hr.2 (z := z)).2.1
+    have hcol2 : ∀ z, z ∈ cuspPiece r 2 → bowtieCol z = 0 := fun z => (bowtieCol_cuspPiece hr.2 (z := z)).2.2.1
+    have hcol3 : ∀ z, z ∈ cuspPiece r 3 → bowtieCol z = 2 := fun z => (bowtieCol_cuspPiece hr.2 (z := z)).2.2.2
+    have hsec : bowtie.sectorsOf 0 r 1 = {cuspPiece r 0, cuspPiece r 1} := by
+      ext S
+      simp only [ArcMap.sectorsOf, mem_setOf_eq, mem_insert_iff, mem_singleton_iff]
+      rw [isSector_iff_of_partition hU ho hp hd hn hc]
+      constructor
+      · rintro ⟨⟨i, rfl⟩, hS⟩
+        fin_cases i
+        · exact Or.inl rfl
+        · exact Or.inr rfl
+        · exfalso
+          obtain ⟨z, hz⟩ := hn 2
+          have h1 : bowtieCol z = 1 := hS hz
+          rw [hcol2 z hz] at h1
+          exact absurd h1 (by decide)
+        · exfalso
+          obtain ⟨z, hz⟩ := hn 3
+          have h1 : bowtieCol z = 1 := hS hz
+          rw [hcol3 z hz] at h1
+          exact absurd h1 (by decide)
+      · rintro (rfl | rfl)
+        · exact ⟨⟨0, rfl⟩, fun z hz => hcol0 z hz⟩
+        · exact ⟨⟨1, rfl⟩, fun z hz => hcol1 z hz⟩
+    rw [hsec, Set.encard_pair]
+    · rfl
+    · intro h
+      obtain ⟨z, hz⟩ := hn 0
+      exact Set.disjoint_left.mp (hd 0 1 (by decide)) hz (h ▸ hz)
 
 /-- **The horns**: colour `1` along `±a` (`a = e 0`), each between `ω(S)` (curvature `−1` in its frame) and `ω(N)` (curvature `1`) —
 bounded by unit arcs on both sides. -/
 theorem bowtie_isHorn : bowtie.IsHorn 0 0 (-1) 1 1 ∧ bowtie.IsHorn 0 π (-1) 1 1 := by
-  sorry
+  have h13 : (0 : ℝ) < 1 / 13 := by norm_num
+  refine ⟨⟨by norm_num, ?_⟩, ⟨by norm_num, ?_⟩⟩
+  · filter_upwards [Ioc_mem_nhdsGT h13] with r hr
+    exact ⟨bowtie_isSector_cuspPiece hr.1 hr.2 0, fun z hz => (bowtieCol_cuspPiece hr.2).1 hz⟩
+  · filter_upwards [Ioc_mem_nhdsGT h13] with r hr
+    rw [hornSet_cusp_pi_eq]
+    exact ⟨bowtie_isSector_cuspPiece hr.1 hr.2 1, fun z hz => (bowtieCol_cuspPiece hr.2).2.1 hz⟩
 
 /-- The horns' flanks: `G` (colour `0`) above and `H` (colour `2`) below (in the frame along `π`, `H` above and `G` below). -/
 theorem bowtie_flanks : bowtie.IsFlankAbove 0 0 1 0 ∧ bowtie.IsFlankBelow 0 0 (-1) 2 ∧
     bowtie.IsFlankAbove 0 π 1 2 ∧ bowtie.IsFlankBelow 0 π (-1) 0 := by
-  sorry
+  have h13 : (0 : ℝ) < 1 / 13 := by norm_num
+  have hN : e (0 + π / 2) = I := by rw [zero_add, e_pi_div_two]
+  refine ⟨⟨2, by norm_num, ?_⟩, ⟨-2, by norm_num, ?_⟩, ⟨2, by norm_num, ?_⟩, ⟨-2, by norm_num, ?_⟩⟩
+  · filter_upwards [Ioc_mem_nhdsGT h13] with r hr
+    rintro z ⟨h1, -, h3, -⟩
+    rw [tanAbove_one_iff, hN, zero_add] at h3
+    exact (cuspPiece_subset_bowtie_region hr.2).1 ⟨mem_ball.mpr h1, mem_ball.mpr h3⟩
+  · filter_upwards [Ioc_mem_nhdsGT h13] with r hr
+    rintro z ⟨h1, -, -, h4⟩
+    rw [tanBelow_neg_one_iff, hN, zero_sub] at h4
+    exact (cuspPiece_subset_bowtie_region hr.2).2 ⟨mem_ball.mpr h1, mem_ball.mpr h4⟩
+  · filter_upwards [Ioc_mem_nhdsGT h13] with r hr
+    rintro z ⟨h1, -, h3, -⟩
+    rw [tanAbove_one_iff, e_pi_add_pi_div_two, zero_add] at h3
+    exact (cuspPiece_subset_bowtie_region hr.2).2 ⟨mem_ball.mpr h1, mem_ball.mpr h3⟩
+  · filter_upwards [Ioc_mem_nhdsGT h13] with r hr
+    rintro z ⟨h1, -, -, h4⟩
+    rw [tanBelow_neg_one_iff, e_pi_add_pi_div_two, zero_sub, neg_neg] at h4
+    exact (cuspPiece_subset_bowtie_region hr.2).1 ⟨mem_ball.mpr h1, mem_ball.mpr h4⟩
 
 /-- **Shadowed** by its flanks: each horn lies, near `E`, in the shadow of both flank colours. -/
 theorem bowtie_doublyShadowed : bowtie.DoublyShadowed 0 0 (-1) 1 0 2 ∧ bowtie.DoublyShadowed 0 π (-1) 1 2 0 := by

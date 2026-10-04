@@ -2749,6 +2749,29 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.e_pi_add_pi_div_two
+#print axioms HadwigerNelson.Plane.ArcMap.norm_ge_of_mem_segment_far
+#print axioms HadwigerNelson.Plane.ArcMap.mem_bowtieArc_N
+#print axioms HadwigerNelson.Plane.ArcMap.mem_bowtieArc_S
+#print axioms HadwigerNelson.Plane.ArcMap.mem_bowtieArcs_iff_of_norm_lt
+#print axioms HadwigerNelson.Plane.ArcMap.cuspPiece_subset_bowtie
+#print axioms HadwigerNelson.Plane.ArcMap.bowtieCol_of_mem_G
+#print axioms HadwigerNelson.Plane.ArcMap.bowtieCol_of_mem_C
+#print axioms HadwigerNelson.Plane.ArcMap.bowtieCol_of_mem_H
+#print axioms HadwigerNelson.Plane.ArcMap.bowtieCol_cuspPiece
+#print axioms HadwigerNelson.Plane.ArcMap.ball_subset_bowtie_dom
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_partition
+#print axioms HadwigerNelson.Plane.ArcMap.hornSet_cusp_pi_eq
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_isSector_cuspPiece
+#print axioms HadwigerNelson.Plane.ArcMap.cuspPiece_subset_bowtie_region
+#print axioms HadwigerNelson.Plane.ArcMap.cuspPiece_data
+#print axioms HadwigerNelson.Plane.sq_norm_one_add_mul_e_sub_one
+#print axioms HadwigerNelson.Plane.re_lt_one_of_norm_eq_one
+#print axioms HadwigerNelson.Plane.norm_e_sub_one_le
+#print axioms HadwigerNelson.Plane.exists_e_outside
+#print axioms HadwigerNelson.Plane.exists_e_inside
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.dist_ne_one_of_isOpen_subset_closure
+#print axioms HadwigerNelson.Plane.ArcMap.unit_circle_turn
 #print axioms HadwigerNelson.Plane.ArcMap.carrier_circ_full
 #print axioms HadwigerNelson.Plane.ArcMap.norm_sub_I_sq_add
 #print axioms HadwigerNelson.Plane.ArcMap.cuspFrag_mem_interiorPts

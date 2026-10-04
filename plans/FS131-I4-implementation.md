@@ -356,6 +356,55 @@ the missing hypothesis; if one of `lock`'s consumers (the three bends) needs mor
 1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T161716Z-654577.log`; driver log
 `data/fs131/i4/build-i4e-readback.log`). 50 `declaration uses sorry` warnings — Contact 10, UnitArc 20, BaseSteps 20 — and the three older linter warnings above.
 
+## Stage 10 — SAVED (FS131-I4e): `lock` (three clauses, one engine), the bowtie at `E` (three leaves), `UnitArc`'s linter warnings cleared; 46 `sorry` left
+
+**`lock` (FS112-LOCK) proved** (`UnitArc`), statement as ruled (item 177), no consumer needed more than the local clause 3 (it has none in the library). The
+engine is one child, `Valid.dist_ne_one_of_isOpen_subset_closure`: *a point `a` of the closure of the class of `d` is never at distance `1` from a point `q`
+of an open set `O ⊆ closure (region d)* — a short radial segment through `q` toward and away from `a`, inside `O`, crosses `ω(a)`, and wave 3's crossing engine
+`Valid.false_of_crossing` refutes it. No finite-arc or centre-avoiding argument is needed (I4d's route perturbed `z` off unit-arc centres; the crossing engine
+makes that unnecessary). The open sets are wave 3's `side_ball_subset_closure` patches at `w = r(θ)`: `ball w ε \ B̄(P, 1) ⊆ cl(region c')` (from
+`outerColours P w = {c'}`) and `ball w ε ∩ B(P, 1) ⊆ cl(region c)` (from `innerColours P w = {c}`). The point `q`: for `y ∈ ω(w)`, `q = w + (w − y)(e s − 1)` is on
+`ω(y)`, `|q − w| = |e s − 1|`, `|q − P| = |1 + ζ(e s − 1)|` with `ζ = conj(w − P)(w − y)` (`unit_circle_turn`), and
+`|1 + ζ(e s − 1)|² = 1 + 2(1 − cos s)(1 − Re ζ) − 2 Im ζ sin s` (`sq_norm_one_add_mul_e_sub_one`). Clause 1 (`y ≠ P` ⟺ `ζ ≠ 1`, so `Re ζ < 1`): the sign of `s`
+against `Im ζ` makes the square `> 1` (`exists_e_outside`). Clause 2 (`y ∉ {P, P + 2e(θ)}` ⟺ `ζ ≠ ±1` ⟺ `Im ζ ≠ 0`, transversality): `s = ±min(ε/2, 1, |Im ζ|/4)`
+makes it `< 1` (`exists_e_inside`; `1 − cos s ≤ s²/2`, Jordan's `sin s ≥ 2s/π`). Clause 3: for `t ∈ T` within `δ = min(ε/4, 1)` of `P + 2e(θ)` and inside
+`B(P, 2)`, the point `q = t + (P − t)/|P − t|` of `ω(t)` has `|q − P| = |t − P| − 1 < 1` and `|q − w| ≤ 3|t − (P + 2e(θ))| < ε`, so it lies in the inner patch,
+against the engine with `a = t`. Children: `sq_norm_one_add_mul_e_sub_one`, `re_lt_one_of_norm_eq_one`, `norm_e_sub_one_le`, `exists_e_outside`,
+`exists_e_inside` (top level), `Valid.dist_ne_one_of_isOpen_subset_closure`, `unit_circle_turn` (`ArcMap`). Elaborated on the third pass (two linear-combination
+coefficient slips, one `abs_le` for `abs_lt`).
+
+**The bowtie at `E = 0`** (`BaseSteps`): `bowtie_isHorn`, `bowtie_flanks`, `bowtie_coloursAt_zero` proved by the cusp pattern, as I4d planned. Within `1/13`
+of `0` the bowtie's interior points are `cuspFrag`'s: `mem_bowtieArcs_iff_of_norm_lt` (a point of `B(0, 1/13)` is on a boundary piece iff it is on `ω(i)` or
+`ω(−i)`: each of the 28 segments lies in a half-plane `re ≥ 1/13`, `re ≤ −1/13`, `im ≥ 1/13` or `im ≤ −1/13` — `norm_ge_of_mem_segment_far`, each case closed
+by `norm_num [pt]` — and a point of `ω(±i)` there lies on the unit arc at angle `3π/2 + arcsin(re z)`, resp. `π/2 − arcsin(re z)`: `mem_bowtieArc_N`,
+`mem_bowtieArc_S`), and `B(0, 1/13) ⊆ bowtie.dom` (`ball_subset_bowtie_dom`: the two unit circles are closed with empty interior, so their complement is dense,
+and off them the ball lies in `G ∪ H ∪ C` — `cuspPiece_subset_bowtie`). So `bowtie_partition`: for `r ≤ 1/13`, `bowtie.interiorPts ∩ B(0, r)` is the four
+`cuspPiece r i`; colours `1, 1, 0, 2` on them (`bowtieCol_of_mem_C/G/H`, `bowtieCol_cuspPiece`); each piece a sector (`bowtie_isSector_cuspPiece`); the horn along
+`e π` is the left piece (`hornSet_cusp_pi_eq`, with `e_pi_add_pi_div_two`); the flanks' horn sets lie in the disc parts (`cuspPiece_subset_bowtie_region`).
+`HasSectors 0 1 2`: the colour-`1` sectors are exactly the two horns (`Set.encard_pair`). In `Plane/ValidMap/Sectors`, `cuspFrag_isHorn`'s partition data is
+now the lemma `cuspPiece_data` (open, preconnected, disjoint, non-empty, `0` in each closure), and `cuspFrag_isHorn` reads it (statement unchanged).
+
+**Linter warnings.** `UnitArc`'s three older warnings are cleared: two `push_cast` that did nothing removed; `l60_eq_third`'s unused validity hypothesis is now the
+binder `_hF` (its type, so the statement, is unchanged; it records that the proof does not read validity) — say if a binder rename counts as a statement edit
+and I will restore `hF` with a different fix.
+
+**Axioms** (`#print axioms` against this stage's build's oleans, `data/fs131/i4/axioms-i4e.txt`, not a gate log): `lock` and its seven children, `cuspPiece_data`,
+`cuspFrag_isHorn`, `l60_eq_third` — the standard three. The bowtie's theorems read `sorryAx`, only because the structure `bowtie` carries
+`bowtieCol_locallyConstant` (still `sorry`) in its `locallyConstant` field; every bowtie theorem will read clean once that leaf lands.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 268 names, 0 missing; `tools/fs131_k4_decls.py --check` — 186 names, 0 missing. No import changed. **No statement changed,
+no new axiom, no `native_decide`.** Build of this stage: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings", exit 0
+(`build/gate/build/20261004T163756Z-794707.log`; driver log `data/fs131/i4/build-i4e-stage10.log`): 46 distinct `declaration uses sorry` (Contact 10,
+UnitArc 19, BaseSteps 17), no other warning. (An earlier build of this stage, `build-i4e-lock.log`, failed because I edited `BaseSteps` while it ran and it
+compiled a half-edited file; no edit was made during the stage's build.)
+
+**Re-pricing.** `lock` (planned M) took about 25k tokens: one engine child and one unit-circle computation, three passes. The bowtie's three leaves at `E` (planned
+M each) took about 35k together, most of it the twelve children that every later bowtie leaf at `E` reuses. The rest of the bowtie is heavier: `bowtie_mem_dom` at
+`±i` and `bowtie_unitArcEnds` at `(±5/13, ±1/13)` need the same density argument with four lines (resp. a circle and lines) through each point;
+`bowtieCol_locallyConstant` needs, for each of the 11 tiles, its colour under the if-chain (disjointness from earlier tiles) and `frontier T ⊆ ⋃ arcs` — then
+a domain point off the arcs lies in the closure of one tile, hence in that tile; `bowtie_valid` needs the 21 same-colour tile pairs (G's diameter by the sector's
+angle `2 arcsin(5/13) < 60°`; C–CN by `(z − i)·(a, b) < 0` for `z` below and `(a, b)` in the upward cone; the rest by coordinates).
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -387,3 +436,16 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   `sectorBetween_eq_hornSet`, `ArcMap.isSector_iff_of_partition`, `ArcMap.encard_sectors_of_partition` — children, no row.
 - Inhabitants (QA2): `sevenBrick_corner_isCubicTrichromatic`, `sevenBrick_corner_mIn`, `ArcMap.halfDisc_simple`, `ArcMap.halfDisc_two_tiles`,
   `ArcMap.cuspFrag_isHorn`, `ArcMap.cuspFrag_valid`, `ArcMap.isJordanDomain_of_convex`.
+
+## Theorems this phase proved (FS131-I4e's; axioms from `#print axioms` against the stage-10 build's oleans, `data/fs131/i4/axioms-i4e.txt`, not a gate log)
+
+- FS112-LOCK: `HadwigerNelson.Plane.ArcMap.lock` — `[propext, Classical.choice, Quot.sound]`. Read against the row (`plans/FS112-derivation.md` l. 72) and item
+  177's ruling: same statement (clauses 1–2 as the row; clause 3 in the ruled local form). Its engine `ArcMap.Valid.dist_ne_one_of_isOpen_subset_closure` and
+  `ArcMap.unit_circle_turn`, `exists_e_outside`, `exists_e_inside`, `sq_norm_one_add_mul_e_sub_one`, `re_lt_one_of_norm_eq_one`, `norm_e_sub_one_le` — children, the standard three.
+- FS112-BOWTIE at `E`: `ArcMap.bowtie_isHorn`, `ArcMap.bowtie_flanks`, `ArcMap.bowtie_coloursAt_zero` — `[propext, sorryAx, Classical.choice, Quot.sound]`
+  **(over sorry: the structure `bowtie`'s `locallyConstant` field is `bowtieCol_locallyConstant`, still `sorry`)**. Read against § 8.2: same statements (two horns
+  of colour `1` along `±1` between `ω(−i)` and `ω(i)`; flanks `0` above, `2` below; `P_cl(E) = {0, 1, 2}`, two colour-`1` sectors). Children: `ArcMap.bowtie_partition`,
+  `ArcMap.ball_subset_bowtie_dom`, `ArcMap.mem_bowtieArcs_iff_of_norm_lt`, `ArcMap.mem_bowtieArc_N`, `ArcMap.mem_bowtieArc_S`, `ArcMap.norm_ge_of_mem_segment_far`,
+  `ArcMap.cuspPiece_subset_bowtie`, `ArcMap.bowtieCol_of_mem_G/C/H`, `ArcMap.bowtieCol_cuspPiece`, `ArcMap.hornSet_cusp_pi_eq`, `ArcMap.bowtie_isSector_cuspPiece`,
+  `ArcMap.cuspPiece_subset_bowtie_region`, `ArcMap.e_pi_add_pi_div_two`; in `Sectors`, `ArcMap.cuspPiece_data` (the standard three).
+

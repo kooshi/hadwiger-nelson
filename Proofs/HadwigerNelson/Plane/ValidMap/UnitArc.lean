@@ -114,6 +114,120 @@ theorem exists_dir_dot_neg {u : ℂ} (hu : u ≠ 0) : ∃ β : ℝ, dot (e β) u
     field_simp
   rw [this]; linarith
 
+/-- Turning a unit vector by `e s`: for `‖ζ‖ = 1`, `‖1 + ζ (e s − 1)‖² = 1 + 2 (1 − cos s)(1 − Re ζ) − 2 Im ζ sin s`. -/
+theorem sq_norm_one_add_mul_e_sub_one {ζ : ℂ} (hζ : ‖ζ‖ = 1) (s : ℝ) :
+    ‖1 + ζ * (e s - 1)‖ ^ 2 = 1 + 2 * (1 - Real.cos s) * (1 - ζ.re) - 2 * ζ.im * Real.sin s := by
+  have h1 : ζ.re * ζ.re + ζ.im * ζ.im = 1 := by
+    have := congrArg (· ^ 2) hζ
+    simpa only [Complex.sq_norm, Complex.normSq_apply, one_pow] using this
+  have h2 := Real.cos_sq_add_sin_sq s
+  rw [Complex.sq_norm, Complex.normSq_apply]
+  simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.sub_re, Complex.sub_im,
+    Complex.one_re, Complex.one_im, re_e, im_e]
+  linear_combination (Real.cos s ^ 2 + Real.sin s ^ 2 - 2 * Real.cos s + 1) * h1 + h2
+
+/-- A unit `ζ ≠ 1` has real part below `1`. -/
+theorem re_lt_one_of_norm_eq_one {ζ : ℂ} (hζ : ‖ζ‖ = 1) (h1 : ζ ≠ 1) : ζ.re < 1 := by
+  have hn : ζ.re * ζ.re + ζ.im * ζ.im = 1 := by
+    have := congrArg (· ^ 2) hζ
+    simpa only [Complex.sq_norm, Complex.normSq_apply, one_pow] using this
+  by_contra h
+  push Not at h
+  have him : ζ.im = 0 := by nlinarith [mul_self_nonneg ζ.im]
+  have hre : ζ.re = 1 := by nlinarith [mul_self_nonneg ζ.im]
+  exact h1 (Complex.ext (by simp [hre]) (by simp [him]))
+
+/-- `‖e s − 1‖ ≤ |s|`. -/
+theorem norm_e_sub_one_le (s : ℝ) : ‖e s - 1‖ ≤ |s| := by
+  simpa [show e 0 = 1 by simp [e]] using norm_e_sub_e_le s 0
+
+/-- **Off the centre, a unit circle through `w` leaves the closed disc of `ω(P)`**: for `‖ζ‖ = 1`, `ζ ≠ 1`, some turn `e s`
+within `ε` of `1` puts `1 + ζ (e s − 1)` strictly outside the unit circle. -/
+theorem exists_e_outside {ζ : ℂ} (hζ : ‖ζ‖ = 1) (h1 : ζ ≠ 1) {ε : ℝ} (hε : 0 < ε) :
+    ∃ s, ‖e s - 1‖ < ε ∧ 1 < ‖1 + ζ * (e s - 1)‖ := by
+  have hπ := Real.pi_gt_three
+  set s₀ := min (ε / 2) 1 with hs₀
+  have hs0 : 0 < s₀ := lt_min (half_pos hε) one_pos
+  have hs1 : s₀ ≤ 1 := min_le_right _ _
+  have hs2 : s₀ < ε := lt_of_le_of_lt (min_le_left _ _) (half_lt_self hε)
+  have hsin : 0 < Real.sin s₀ := Real.sin_pos_of_pos_of_lt_pi hs0 (by linarith)
+  have hcos : Real.cos s₀ < 1 := by
+    have := Real.cos_sq_add_sin_sq s₀
+    have hc1 := Real.cos_le_one s₀
+    by_contra h
+    push Not at h
+    nlinarith [mul_pos hsin hsin]
+  have hre := re_lt_one_of_norm_eq_one hζ h1
+  set s : ℝ := if 0 < ζ.im then -s₀ else s₀ with hsdef
+  have habs : |s| = s₀ := by
+    rw [hsdef]; split_ifs <;> simp [abs_of_pos hs0]
+  have hcs : Real.cos s = Real.cos s₀ := by rw [hsdef]; split_ifs <;> simp [Real.cos_neg]
+  have hterm : 0 ≤ -(ζ.im * Real.sin s) := by
+    rw [hsdef]; split_ifs with h
+    · rw [Real.sin_neg]; nlinarith
+    · push Not at h; nlinarith
+  refine ⟨s, lt_of_le_of_lt (norm_e_sub_one_le s) (by rw [habs]; exact hs2), ?_⟩
+  have hsq := sq_norm_one_add_mul_e_sub_one hζ s
+  rw [hcs] at hsq
+  have : 1 < ‖1 + ζ * (e s - 1)‖ ^ 2 := by
+    rw [hsq]; nlinarith [mul_pos (sub_pos.mpr hcos) (sub_pos.mpr hre)]
+  nlinarith [norm_nonneg (1 + ζ * (e s - 1))]
+
+/-- **Off both centres, a unit circle through `w` enters the open disc of `ω(P)`**: for `‖ζ‖ = 1`, `ζ ≠ ±1` (transversality),
+some turn `e s` within `ε` of `1` puts `1 + ζ (e s − 1)` strictly inside the unit circle. -/
+theorem exists_e_inside {ζ : ℂ} (hζ : ‖ζ‖ = 1) (h1 : ζ ≠ 1) (h2 : ζ ≠ -1) {ε : ℝ} (hε : 0 < ε) :
+    ∃ s, ‖e s - 1‖ < ε ∧ ‖1 + ζ * (e s - 1)‖ < 1 := by
+  have hπ := Real.pi_gt_three
+  have hπ4 := Real.pi_lt_four
+  have hn : ζ.re * ζ.re + ζ.im * ζ.im = 1 := by
+    have := congrArg (· ^ 2) hζ
+    simpa only [Complex.sq_norm, Complex.normSq_apply, one_pow] using this
+  have hb : ζ.im ≠ 0 := by
+    intro hb
+    have : ζ.re = 1 ∨ ζ.re = -1 := by
+      have : (ζ.re - 1) * (ζ.re + 1) = 0 := by rw [hb] at hn; nlinarith
+      rcases mul_eq_zero.mp this with h | h
+      · left; linarith
+      · right; linarith
+    rcases this with h | h
+    · exact h1 (Complex.ext (by simp [h]) (by simp [hb]))
+    · exact h2 (Complex.ext (by simp [h]) (by simp [hb]))
+  have hbpos : 0 < |ζ.im| := abs_pos.mpr hb
+  have hb1 : |ζ.im| ≤ 1 := by
+    rw [abs_le]; constructor <;> nlinarith [mul_self_nonneg ζ.re, mul_self_nonneg (ζ.im + 1), mul_self_nonneg (ζ.im - 1)]
+  have hre1 : -1 ≤ ζ.re := by nlinarith [mul_self_nonneg ζ.im, mul_self_nonneg (ζ.re + 1)]
+  set s₀ := min (min (ε / 2) 1) (|ζ.im| / 4) with hs₀
+  have hs0 : 0 < s₀ := lt_min (lt_min (half_pos hε) one_pos) (by positivity)
+  have hs1 : s₀ ≤ 1 := (min_le_left _ _).trans (min_le_right _ _)
+  have hs2 : s₀ < ε := lt_of_le_of_lt ((min_le_left _ _).trans (min_le_left _ _)) (half_lt_self hε)
+  have hs3 : s₀ ≤ |ζ.im| / 4 := min_le_right _ _
+  have hsin : 2 / π * s₀ ≤ Real.sin s₀ := Real.mul_le_sin hs0.le (by linarith)
+  have hsin' : s₀ / 2 ≤ Real.sin s₀ := by
+    have : s₀ / 2 ≤ 2 / π * s₀ := by
+      rw [div_mul_eq_mul_div, le_div_iff₀ (by linarith)]; nlinarith
+    linarith
+  have hcos : 1 - s₀ ^ 2 / 2 ≤ Real.cos s₀ := Real.one_sub_sq_div_two_le_cos
+  set s : ℝ := if 0 < ζ.im then s₀ else -s₀ with hsdef
+  have habs : |s| = s₀ := by
+    rw [hsdef]; split_ifs <;> simp [abs_of_pos hs0]
+  have hcs : Real.cos s = Real.cos s₀ := by rw [hsdef]; split_ifs <;> simp [Real.cos_neg]
+  have hterm : ζ.im * Real.sin s = |ζ.im| * Real.sin s₀ := by
+    rw [hsdef]; split_ifs with h
+    · rw [abs_of_pos h]
+    · push Not at h
+      rw [abs_of_neg (lt_of_le_of_ne h hb), Real.sin_neg]; ring
+  refine ⟨s, lt_of_le_of_lt (norm_e_sub_one_le s) (by rw [habs]; exact hs2), ?_⟩
+  have hsq := sq_norm_one_add_mul_e_sub_one hζ s
+  rw [hcs, mul_assoc 2 ζ.im, hterm] at hsq
+  have : ‖1 + ζ * (e s - 1)‖ ^ 2 < 1 := by
+    rw [hsq]
+    have h1c : 1 - Real.cos s₀ ≤ s₀ ^ 2 / 2 := by linarith
+    have h1c' : 0 ≤ 1 - Real.cos s₀ := by linarith [Real.cos_le_one s₀]
+    have hre2 : 1 - ζ.re ≤ 2 := by linarith
+    have : 2 * (1 - Real.cos s₀) * (1 - ζ.re) ≤ 2 * s₀ ^ 2 := by nlinarith
+    nlinarith [mul_le_mul_of_nonneg_left hsin' hbpos.le]
+  nlinarith [norm_nonneg (1 + ζ * (e s - 1))]
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
@@ -134,6 +248,55 @@ namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
 
+/-- **No class point at unit distance from an open patch of its own closure** (the engine of FS112-LOCK): a point of the
+closure of the class of `d` is at distance `≠ 1` from every point of an open set lying in that closure — otherwise a short
+radial segment through the point, inside the open set, crosses the unit circle about it (wave 3's crossing engine). -/
+theorem Valid.dist_ne_one_of_isOpen_subset_closure (hF : F.Valid) {d : Fin k} {a q : ℂ} {O : Set ℂ}
+    (ha : a ∈ closure (F.region d)) (hO : IsOpen O) (hOd : O ⊆ closure (F.region d)) (hq : q ∈ O) :
+    dist a q ≠ 1 := by
+  intro h1
+  obtain ⟨η, hη, hball⟩ := Metric.isOpen_iff.mp hO q hq
+  set τ : ℝ := min (η / 2) (1 / 2) with hτ
+  have hτ0 : 0 < τ := lt_min (half_pos hη) (by norm_num)
+  have hτη : τ < η := lt_of_le_of_lt (min_le_left _ _) (half_lt_self hη)
+  have hτ1 : τ < 1 := lt_of_le_of_lt (min_le_right _ _) (by norm_num)
+  have haq : ‖a - q‖ = 1 := by rw [← dist_eq_norm]; exact h1
+  set u := q + (τ : ℂ) * (a - q) with hu
+  set v := q - (τ : ℂ) * (a - q) with hv
+  have hub : u ∈ ball q η := by
+    rw [mem_ball, dist_eq_norm, show u - q = (τ : ℂ) * (a - q) by rw [hu]; ring, norm_mul, haq, Complex.norm_real,
+      Real.norm_eq_abs, abs_of_pos hτ0, mul_one]
+    exact hτη
+  have hvb : v ∈ ball q η := by
+    rw [mem_ball, dist_eq_norm, show v - q = -((τ : ℂ) * (a - q)) by rw [hv]; ring, norm_neg, norm_mul, haq,
+      Complex.norm_real, Real.norm_eq_abs, abs_of_pos hτ0, mul_one]
+    exact hτη
+  have hS : segment ℝ u v ⊆ closure (F.region d) :=
+    ((convex_ball q η).segment_subset hub hvb).trans (hball.trans hOd)
+  refine hF.false_of_crossing ha (convex_segment u v).isPreconnected hS (left_mem_segment ℝ u v)
+    (right_mem_segment ℝ u v) ?_ ?_
+  · rw [dist_eq_norm, show a - u = ((1 - τ : ℝ) : ℂ) * (a - q) by rw [hu]; push_cast; ring, norm_mul, haq,
+      Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith), mul_one]
+    linarith
+  · rw [dist_eq_norm, show a - v = ((1 + τ : ℝ) : ℂ) * (a - q) by rw [hv]; push_cast; ring, norm_mul, haq,
+      Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith), mul_one]
+    linarith
+
+/-- The unit circle about `y ∈ ω(w)`, turned at `w` by `e s`: the point `q = w + (w − y)(e s − 1)` lies on `ω(y)`, at distance
+`‖e s − 1‖` from `w`, and at distance `‖1 + ζ (e s − 1)‖` from `P` when `‖w − P‖ = 1`, `ζ = conj(w − P)(w − y)`. -/
+theorem unit_circle_turn {P w y : ℂ} (hwP : ‖w - P‖ = 1) (hy : ‖w - y‖ = 1) (s : ℝ) :
+    dist y (w + (w - y) * (e s - 1)) = 1 ∧ ‖w + (w - y) * (e s - 1) - w‖ = ‖e s - 1‖ ∧
+      ‖w + (w - y) * (e s - 1) - P‖ = ‖1 + (starRingEnd ℂ (w - P) * (w - y)) * (e s - 1)‖ := by
+  have hu : (w - P) * starRingEnd ℂ (w - P) = 1 := by
+    rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, hwP]; norm_num
+  refine ⟨?_, ?_, ?_⟩
+  · rw [dist_eq_norm, show y - (w + (w - y) * (e s - 1)) = -((w - y) * e s) by ring, norm_neg, norm_mul, hy, norm_e,
+      one_mul]
+  · rw [add_sub_cancel_left, norm_mul, hy, one_mul]
+  · have : w + (w - y) * (e s - 1) - P = (w - P) * (1 + (starRingEnd ℂ (w - P) * (w - y)) * (e s - 1)) := by
+      linear_combination (-(w - y) * (e s - 1)) * hu
+    rw [this, norm_mul, hwP, one_mul]
+
 /-- **FS112-LOCK**: for `w = r(θ)` interior to a unit arc of `ω(P)`, a tile of the outer colour touches `ω(w)` only at `P`; a
 tile of the inner colour only at `P` or at `P + 2e(θ)`, and a tile of the inner colour touching at `P + 2e(θ)` approaches it from outside
 `B(P, 2)`: near `P + 2e(θ)` it misses `B(P, 2)` (the row's "from outside `B(P, 2)`", `plans/FS112-derivation.md` l. 72; the whole-tile form
@@ -143,7 +306,109 @@ theorem lock (hF : F.Valid) {P : ℂ} {θ₁ θ₂ θ : ℝ} {c c' : Fin k} (hA 
     closure (F.region c') ∩ sphere (ringPt P θ) 1 ⊆ {P} ∧
       closure (F.region c) ∩ sphere (ringPt P θ) 1 ⊆ {P, P + 2 * e θ} ∧
       ∀ T, F.TileOf c T → P + 2 * e θ ∈ closure T → ∃ δ > 0, Disjoint (T ∩ ball (P + 2 * e θ) δ) (ball P 2) := by
-  sorry
+  set w := ringPt P θ with hw
+  have hwd : w ∈ F.dom := (hA.2.1 ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩).1
+  obtain ⟨hin, hout⟩ := hA.2.2 θ hθ
+  obtain ⟨εi, hεi, hballi⟩ := F.side_ball_subset_closure (O := ball P 1) isOpen_ball hwd (c := c) fun d hd => by
+    have : d ∈ F.innerColours P w := hd
+    rw [hin] at this; exact this
+  obtain ⟨εo, hεo, hballo⟩ := F.side_ball_subset_closure (O := (closedBall P 1)ᶜ) isClosed_closedBall.isOpen_compl hwd
+    (c := c') fun d hd => by
+    have : d ∈ F.outerColours P w := by
+      show w ∈ closure (F.region d \ closedBall P 1)
+      rwa [Set.sdiff_eq]
+    rw [hout] at this; exact this
+  have hwP : ‖w - P‖ = 1 := by rw [hw, ringPt, add_sub_cancel_left, norm_e]
+  have hwe : w - P = e θ := by rw [hw, ringPt, add_sub_cancel_left]
+  -- `ζ` for a point `y ∈ ω(w)`
+  have hζn : ∀ y, ‖w - y‖ = 1 → ‖starRingEnd ℂ (w - P) * (w - y)‖ = 1 := fun y hy => by
+    rw [norm_mul, Complex.norm_conj, hwP, hy, one_mul]
+  have hζ1 : ∀ y, y ≠ P → starRingEnd ℂ (w - P) * (w - y) ≠ 1 := by
+    intro y hyP h
+    apply hyP
+    have hu : (w - P) * starRingEnd ℂ (w - P) = 1 := by
+      rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, hwP]; norm_num
+    have : w - y = w - P := by linear_combination -(w - y) * hu + (w - P) * h
+    linear_combination -this
+  have hζ2 : ∀ y, y ≠ P + 2 * e θ → starRingEnd ℂ (w - P) * (w - y) ≠ -1 := by
+    intro y hyP h
+    apply hyP
+    have hu : (w - P) * starRingEnd ℂ (w - P) = 1 := by
+      rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, hwP]; norm_num
+    have : w - y = -(w - P) := by linear_combination -(w - y) * hu + (w - P) * h
+    rw [← hwe]; linear_combination -this
+  refine ⟨?_, ?_, ?_⟩
+  · -- clause 1: the outer colour
+    rintro y ⟨hy, hyw⟩
+    rw [mem_sphere, dist_comm, dist_eq_norm] at hyw
+    rw [mem_singleton_iff]
+    by_contra hyP
+    obtain ⟨s, hs, hout'⟩ := exists_e_outside (hζn y hyw) (hζ1 y hyP) hεo
+    obtain ⟨hq1, hqw, hqP⟩ := unit_circle_turn hwP hyw s
+    refine hF.dist_ne_one_of_isOpen_subset_closure hy (isOpen_ball.inter isClosed_closedBall.isOpen_compl) hballo ⟨?_, ?_⟩ hq1
+    · rw [mem_ball, dist_eq_norm, hqw]; exact hs
+    · rw [mem_compl_iff, mem_closedBall, dist_eq_norm, hqP, not_le]; exact hout'
+  · -- clause 2: the inner colour
+    rintro y ⟨hy, hyw⟩
+    rw [mem_sphere, dist_comm, dist_eq_norm] at hyw
+    by_contra hyP
+    simp only [mem_insert_iff, mem_singleton_iff, not_or] at hyP
+    obtain ⟨s, hs, hin'⟩ := exists_e_inside (hζn y hyw) (hζ1 y hyP.1) (hζ2 y hyP.2) hεi
+    obtain ⟨hq1, hqw, hqP⟩ := unit_circle_turn hwP hyw s
+    refine hF.dist_ne_one_of_isOpen_subset_closure hy (isOpen_ball.inter isOpen_ball) hballi ⟨?_, ?_⟩ hq1
+    · rw [mem_ball, dist_eq_norm, hqw]; exact hs
+    · rw [mem_ball, dist_eq_norm, hqP]; exact hin'
+  · -- clause 3: an inner tile near `P + 2e(θ)` stays outside `B(P, 2)`
+    intro T hT _
+    set y := P + 2 * e θ with hy
+    refine ⟨min (εi / 4) 1, lt_min (by linarith) one_pos, ?_⟩
+    rw [Set.disjoint_left]
+    rintro t ⟨htT, htδ⟩ htP
+    rw [mem_ball, dist_eq_norm] at htδ htP
+    have htδ1 : ‖t - y‖ < εi / 4 := lt_of_lt_of_le htδ (min_le_left _ _)
+    have htδ2 : ‖t - y‖ < 1 := lt_of_lt_of_le htδ (min_le_right _ _)
+    have hyP : ‖y - P‖ = 2 := by rw [hy, add_sub_cancel_left, norm_mul, norm_e]; norm_num
+    set r := ‖t - P‖ with hr
+    have hrd : |2 - r| ≤ ‖t - y‖ := by
+      rw [← hyP, norm_sub_rev t y]
+      calc |‖y - P‖ - ‖t - P‖| ≤ ‖(y - P) - (t - P)‖ := abs_norm_sub_norm_le _ _
+        _ = ‖y - t‖ := by congr 1; ring
+    have hr1 : 1 < r := by have := (abs_lt.mp (lt_of_le_of_lt hrd htδ2)).2; linarith
+    have hr0 : (r : ℂ) ≠ 0 := by exact_mod_cast (by linarith : r ≠ 0)
+    set q := t + (P - t) / (r : ℂ) with hq
+    have hq1 : dist t q = 1 := by
+      rw [dist_eq_norm, hq, show t - (t + (P - t) / (r : ℂ)) = (t - P) / (r : ℂ) by ring, norm_div, Complex.norm_real,
+        Real.norm_eq_abs, abs_of_pos (by linarith), ← hr, div_self (by linarith)]
+    have hqP : ‖q - P‖ = r - 1 := by
+      rw [hq, show t + (P - t) / (r : ℂ) - P = (t - P) * (((r - 1) / r : ℝ) : ℂ) by push_cast; field_simp; ring,
+        norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by apply div_pos <;> linarith), ← hr]
+      field_simp
+    have hv : ‖t - P - (r : ℂ) * e θ‖ ≤ 2 * ‖t - y‖ := by
+      calc ‖t - P - (r : ℂ) * e θ‖ = ‖(t - y) + ((2 - r : ℝ) : ℂ) * e θ‖ := by
+              congr 1; rw [hy]; push_cast; ring
+        _ ≤ ‖t - y‖ + |2 - r| := by
+              refine (norm_add_le _ _).trans ?_
+              rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs]
+        _ ≤ 2 * ‖t - y‖ := by linarith
+    have hqw : ‖q - w‖ < εi := by
+      have heq : q - w = (((r - 1) / r : ℝ) : ℂ) * (t - P - (r : ℂ) * e θ) + ((r - 2 : ℝ) : ℂ) * e θ := by
+        rw [hq, hw, ringPt]; push_cast; field_simp; ring
+      rw [heq]
+      have hc : (r - 1) / r < 1 := by rw [div_lt_one (by linarith)]; linarith
+      have hc0 : 0 < (r - 1) / r := div_pos (by linarith) (by linarith)
+      calc ‖(((r - 1) / r : ℝ) : ℂ) * (t - P - (r : ℂ) * e θ) + ((r - 2 : ℝ) : ℂ) * e θ‖
+          ≤ (r - 1) / r * ‖t - P - (r : ℂ) * e θ‖ + |r - 2| := by
+            refine (norm_add_le _ _).trans ?_
+            rw [norm_mul, norm_mul, norm_e, mul_one, Complex.norm_real, Complex.norm_real, Real.norm_eq_abs,
+              Real.norm_eq_abs, abs_of_pos hc0]
+        _ ≤ 1 * (2 * ‖t - y‖) + ‖t - y‖ := by
+            have := mul_le_mul hc.le hv (norm_nonneg _) zero_le_one
+            rw [abs_sub_comm]; linarith
+        _ < εi := by linarith
+    refine hF.dist_ne_one_of_isOpen_subset_closure (subset_closure (hT.subset_region htT)) (isOpen_ball.inter isOpen_ball) hballi
+      ⟨?_, ?_⟩ hq1
+    · rw [mem_ball, dist_eq_norm]; exact hqw
+    · rw [mem_ball, dist_eq_norm, hqP]; linarith
 
 /-- **FS112-N2-BENDS**, its lemma N2-SIGN: every interior point of a side colour's class is within `< 1` of every interior
 point of the arc, or farther than `1` from every one. -/
@@ -233,9 +498,10 @@ theorem l60_eq_corners (hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA
 
 /-- **FS114-L60-LE**, L60-EQ, "each end is a vertex carrying a third tile": at each end some tile approaches from the open half-plane
 facing away from the other end (so it is neither an inner nor an outer tile of the arc, by `l60_eq_corners`). -/
-theorem l60_eq_third (hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c') :
+theorem l60_eq_third (_hF : F.Valid) {P : ℂ} {θ₁ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ (θ₁ + π / 3) c c') :
     (∃ T, F.IsTile T ∧ ∃ β ∈ coneAt T (ringPt P θ₁), dot (e β) (ringPt P (θ₁ + π / 3) - ringPt P θ₁) < 0) ∧
       ∃ T, F.IsTile T ∧ ∃ β ∈ coneAt T (ringPt P (θ₁ + π / 3)), dot (e β) (ringPt P θ₁ - ringPt P (θ₁ + π / 3)) < 0 := by
+  -- validity is not read (the binder `_hF`): the third tile comes from the domain alone
   have hπ := Real.pi_gt_three
   have hd1 : dist (ringPt P θ₁) (ringPt P (θ₁ + π / 3)) = 1 :=
     ((dist_ringPt_ringPt_cmp_one P (α := θ₁) (β := θ₁ + π / 3) (by
@@ -663,7 +929,7 @@ theorem iso : isoFrag.Valid ∧ isoFrag.IsRingArc 0 (-(1 / 8)) (1 / 8) 0 1 ∧ (
             left; rw [hne1, abs_of_pos (by linarith)]; linarith
           · rw [mem_ball, dist_zero_right, hne1, abs_of_pos (by linarith)]; linarith
           · rw [dist_eq_norm]
-            have : ringPt 0 θ - ((1 + -t : ℝ) : ℂ) * e θ = (t : ℂ) * e θ := by simp [ringPt]; push_cast; ring
+            have : ringPt 0 θ - ((1 + -t : ℝ) : ℂ) * e θ = (t : ℂ) * e θ := by simp [ringPt]; ring
             rw [this, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]; simp [e]; exact htδ
       · ext c
         simp only [mem_singleton_iff, outerColours, mem_setOf_eq]
@@ -703,7 +969,7 @@ theorem iso : isoFrag.Valid ∧ isoFrag.IsRingArc 0 (-(1 / 8)) (1 / 8) 0 1 ∧ (
             fin_cases c <;> simp
           · rw [mem_closedBall, dist_zero_right, hnb]; intro h; linarith
           · rw [dist_eq_norm]
-            have : ringPt 0 θ - ((1 + t : ℝ) : ℂ) * e θ = -((t : ℂ) * e θ) := by simp [ringPt]; push_cast; ring
+            have : ringPt 0 θ - ((1 + t : ℝ) : ℂ) * e θ = -((t : ℂ) * e θ) := by simp [ringPt]; ring
             rw [this, norm_neg, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]; simp [e]; exact htδ
   have h0 : (0 : Fin 2) ∉ isoFrag.coloursAt 0 := fun h => by
     have := hclosfar 0 0 h

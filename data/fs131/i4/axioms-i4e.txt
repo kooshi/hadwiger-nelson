@@ -1,0 +1,16 @@
+'HadwigerNelson.Plane.ArcMap.lock' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Valid.dist_ne_one_of_isOpen_subset_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.unit_circle_turn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_e_outside' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_e_inside' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sq_norm_one_add_mul_e_sub_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.l60_eq_third' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.bowtie_isHorn' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.bowtie_flanks' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.bowtie_coloursAt_zero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.bowtie_partition' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ball_subset_bowtie_dom' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cuspPiece_data' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn' depends on axioms: [propext, Classical.choice, Quot.sound]

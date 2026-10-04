@@ -608,12 +608,13 @@ theorem cuspFrag_partition {r : ℝ} (hr : r ≤ 1 / 2) : cuspFrag.interiorPts �
       refine ⟨⟨by linarith, fun h1 => ?_, h2.ne⟩, hz⟩
       nlinarith [norm_nonneg z, norm_nonneg (z + I)]
 
-/-- **A proved horn** (FS131-QA2's QA2-4): in the cusp fragment, colour `1` has a horn at `0` along `e 0` with bounding curvatures
-`−1` (the arc of `ω(−i)`) and `1` (the arc of `ω(i)`). -/
-theorem cuspFrag_isHorn : cuspFrag.IsHorn 0 0 (-1) 1 1 := by
-  refine ⟨by norm_num, ?_⟩
-  filter_upwards [Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 2 by norm_num)] with r hr
-  have hU := cuspFrag_partition hr.2
+/-- The four pieces at the cusp, for `0 < r ≤ 1/2`: open, preconnected, pairwise disjoint, non-empty, each with `0` in its
+closure — the hypotheses of `isSector_iff_of_partition` for any map whose interior points near `0` are the cusp's (`cuspFrag`;
+the bowtie, `Plane/ValidMap/BaseSteps`). -/
+theorem cuspPiece_data {r : ℝ} (hr0 : 0 < r) (hr : r ≤ 1 / 2) :
+    (∀ i, IsOpen (cuspPiece r i)) ∧ (∀ i, IsPreconnected (cuspPiece r i)) ∧
+      (∀ i j, i ≠ j → Disjoint (cuspPiece r i) (cuspPiece r j)) ∧ (∀ i, (cuspPiece r i).Nonempty) ∧
+      ∀ i, (0 : ℂ) ∈ closure (cuspPiece r i) := by
   -- representatives `t, −t, t i, −t i`
   have hrep : ∀ t : ℝ, 0 < t → t < r → (t : ℂ) ∈ cuspPiece r 0 ∧ -(t : ℂ) ∈ cuspPiece r 1 ∧
       (t : ℂ) * I ∈ cuspPiece r 2 ∧ -((t : ℂ) * I) ∈ cuspPiece r 3 := by
@@ -638,67 +639,74 @@ theorem cuspFrag_isHorn : cuspFrag.IsHorn 0 0 (-1) 1 1 := by
     · show (t : ℂ) * I ∈ ball 0 r ∩ ball I 1
       refine ⟨mem_ball_zero_iff.mpr (by rw [hnI]; exact htr), ?_⟩
       rw [mem_ball, dist_eq_norm, show (t : ℂ) * I - I = ((t - 1 : ℝ) : ℂ) * I by push_cast; ring, norm_mul,
-        Complex.norm_I, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_neg (by linarith [hr.2])]
+        Complex.norm_I, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_neg (by linarith [hr])]
       linarith
     · show -((t : ℂ) * I) ∈ ball 0 r ∩ ball (-I) 1
       refine ⟨mem_ball_zero_iff.mpr (by rw [norm_neg, hnI]; exact htr), ?_⟩
       rw [mem_ball, dist_eq_norm, show -((t : ℂ) * I) - -I = ((1 - t : ℝ) : ℂ) * I by push_cast; ring, norm_mul,
-        Complex.norm_I, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith [hr.2])]
+        Complex.norm_I, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith [hr])]
       linarith
   have hnorms : ∀ t : ℝ, 0 < t → ‖(t : ℂ)‖ = t ∧ ‖-(t : ℂ)‖ = t ∧ ‖(t : ℂ) * I‖ = t ∧ ‖-((t : ℂ) * I)‖ = t := by
     intro t ht
     have hn : ‖(t : ℂ)‖ = t := by rw [Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht]
     refine ⟨hn, by rw [norm_neg, hn], by rw [norm_mul, Complex.norm_I, mul_one, hn], by
       rw [norm_neg, norm_mul, Complex.norm_I, mul_one, hn]⟩
-  have hsec : cuspFrag.IsSector 0 r (cuspPiece r 0) := by
-    refine (isSector_iff_of_partition hU (fun i => ?_) (fun i => ?_) (fun i j hij => ?_)
-      (fun i => ?_) (fun i => ?_)).mpr ⟨0, rfl⟩
-    · fin_cases i
-      · exact isOpen_hornSet_cusp r
-      · show IsOpen {z | z ∈ (fun z => -(starRingEnd ℂ z)) '' hornSet 0 0 (-1) 1 r}
-        have : {z | z ∈ (fun z => -(starRingEnd ℂ z)) '' hornSet 0 0 (-1) 1 r} =
-            {z : ℂ | ‖z‖ < r} ∩ {z | z.re < 0} ∩ {z | 1 < ‖z + I‖} ∩ {z | 1 < ‖z - I‖} := by
-          ext z; rw [mem_setOf_eq, mem_cuspPiece_one]; simp only [mem_inter_iff, mem_setOf_eq, and_assoc]
-        rw [this]
-        exact (((isOpen_lt (by fun_prop) continuous_const).inter (isOpen_lt Complex.continuous_re continuous_const)).inter
-          (isOpen_lt continuous_const (by fun_prop))).inter (isOpen_lt continuous_const (by fun_prop))
-      · exact isOpen_ball.inter isOpen_ball
-      · exact isOpen_ball.inter isOpen_ball
-    · fin_cases i
-      · exact isPreconnected_hornSet_cusp hr.2
-      · exact (isPreconnected_hornSet_cusp hr.2).image _ (by fun_prop)
-      · exact ((convex_ball _ _).inter (convex_ball _ _)).isPreconnected
-      · exact ((convex_ball _ _).inter (convex_ball _ _)).isPreconnected
-    · rw [disjoint_left]
-      intro z hzi hzj
-      have hsum := norm_sub_I_sq_add z
-      have key : ∀ i, z ∈ cuspPiece r i → (i = 0 → 0 < z.re ∧ 1 < ‖z + I‖ ∧ 1 < ‖z - I‖) ∧
-          (i = 1 → z.re < 0 ∧ 1 < ‖z + I‖ ∧ 1 < ‖z - I‖) ∧ (i = 2 → ‖z - I‖ < 1) ∧ (i = 3 → ‖z + I‖ < 1) := by
-        intro i hi
-        fin_cases i
-        · exact ⟨fun _ => ((hornSet_cusp_iff r z).mp hi).2, by simp, by simp, by simp⟩
-        · exact ⟨by simp, fun _ => (mem_cuspPiece_one.mp hi).2, by simp, by simp⟩
-        · exact ⟨by simp, by simp, fun _ => by have := hi.2; rwa [mem_ball, dist_eq_norm] at this, by simp⟩
-        · exact ⟨by simp, by simp, by simp, fun _ => by
-            have := hi.2; rwa [mem_ball, dist_eq_norm, sub_neg_eq_add] at this⟩
-      have ki := key i hzi
-      have kj := key j hzj
-      fin_cases i <;> fin_cases j <;> simp at hij ki kj <;> nlinarith [norm_nonneg z, norm_nonneg (z - I), norm_nonneg (z + I)]
-    · obtain ⟨h0, h1, h2, h3⟩ := hrep (r / 2) (by linarith [hr.1]) (by linarith [hr.1])
+  refine ⟨fun i => ?_, fun i => ?_, fun i j hij => ?_, fun i => ?_, fun i => ?_⟩
+  · fin_cases i
+    · exact isOpen_hornSet_cusp r
+    · show IsOpen {z | z ∈ (fun z => -(starRingEnd ℂ z)) '' hornSet 0 0 (-1) 1 r}
+      have : {z | z ∈ (fun z => -(starRingEnd ℂ z)) '' hornSet 0 0 (-1) 1 r} =
+          {z : ℂ | ‖z‖ < r} ∩ {z | z.re < 0} ∩ {z | 1 < ‖z + I‖} ∩ {z | 1 < ‖z - I‖} := by
+        ext z; rw [mem_setOf_eq, mem_cuspPiece_one]; simp only [mem_inter_iff, mem_setOf_eq, and_assoc]
+      rw [this]
+      exact (((isOpen_lt (by fun_prop) continuous_const).inter (isOpen_lt Complex.continuous_re continuous_const)).inter
+        (isOpen_lt continuous_const (by fun_prop))).inter (isOpen_lt continuous_const (by fun_prop))
+    · exact isOpen_ball.inter isOpen_ball
+    · exact isOpen_ball.inter isOpen_ball
+  · fin_cases i
+    · exact isPreconnected_hornSet_cusp hr
+    · exact (isPreconnected_hornSet_cusp hr).image _ (by fun_prop)
+    · exact ((convex_ball _ _).inter (convex_ball _ _)).isPreconnected
+    · exact ((convex_ball _ _).inter (convex_ball _ _)).isPreconnected
+  · rw [disjoint_left]
+    intro z hzi hzj
+    have hsum := norm_sub_I_sq_add z
+    have key : ∀ i, z ∈ cuspPiece r i → (i = 0 → 0 < z.re ∧ 1 < ‖z + I‖ ∧ 1 < ‖z - I‖) ∧
+        (i = 1 → z.re < 0 ∧ 1 < ‖z + I‖ ∧ 1 < ‖z - I‖) ∧ (i = 2 → ‖z - I‖ < 1) ∧ (i = 3 → ‖z + I‖ < 1) := by
+      intro i hi
       fin_cases i
-      exacts [⟨_, h0⟩, ⟨_, h1⟩, ⟨_, h2⟩, ⟨_, h3⟩]
-    · rw [Metric.mem_closure_iff]
-      intro ε hε
-      set t := min (ε / 2) (r / 2) with ht
-      have ht0 : 0 < t := lt_min (by linarith) (by linarith [hr.1])
-      have htε : t < ε := by linarith [min_le_left (ε / 2) (r / 2)]
-      obtain ⟨h0, h1, h2, h3⟩ := hrep t ht0 (by linarith [min_le_right (ε / 2) (r / 2), hr.1])
-      obtain ⟨n0, n1, n2, n3⟩ := hnorms t ht0
-      fin_cases i
-      · exact ⟨_, h0, by rw [dist_zero_left, n0]; exact htε⟩
-      · exact ⟨_, h1, by rw [dist_zero_left, n1]; exact htε⟩
-      · exact ⟨_, h2, by rw [dist_zero_left, n2]; exact htε⟩
-      · exact ⟨_, h3, by rw [dist_zero_left, n3]; exact htε⟩
+      · exact ⟨fun _ => ((hornSet_cusp_iff r z).mp hi).2, by simp, by simp, by simp⟩
+      · exact ⟨by simp, fun _ => (mem_cuspPiece_one.mp hi).2, by simp, by simp⟩
+      · exact ⟨by simp, by simp, fun _ => by have := hi.2; rwa [mem_ball, dist_eq_norm] at this, by simp⟩
+      · exact ⟨by simp, by simp, by simp, fun _ => by
+          have := hi.2; rwa [mem_ball, dist_eq_norm, sub_neg_eq_add] at this⟩
+    have ki := key i hzi
+    have kj := key j hzj
+    fin_cases i <;> fin_cases j <;> simp at hij ki kj <;> nlinarith [norm_nonneg z, norm_nonneg (z - I), norm_nonneg (z + I)]
+  · obtain ⟨h0, h1, h2, h3⟩ := hrep (r / 2) (by linarith [hr0]) (by linarith [hr0])
+    fin_cases i
+    exacts [⟨_, h0⟩, ⟨_, h1⟩, ⟨_, h2⟩, ⟨_, h3⟩]
+  · rw [Metric.mem_closure_iff]
+    intro ε hε
+    set t := min (ε / 2) (r / 2) with ht
+    have ht0 : 0 < t := lt_min (by linarith) (by linarith [hr0])
+    have htε : t < ε := by linarith [min_le_left (ε / 2) (r / 2)]
+    obtain ⟨h0, h1, h2, h3⟩ := hrep t ht0 (by linarith [min_le_right (ε / 2) (r / 2), hr0])
+    obtain ⟨n0, n1, n2, n3⟩ := hnorms t ht0
+    fin_cases i
+    · exact ⟨_, h0, by rw [dist_zero_left, n0]; exact htε⟩
+    · exact ⟨_, h1, by rw [dist_zero_left, n1]; exact htε⟩
+    · exact ⟨_, h2, by rw [dist_zero_left, n2]; exact htε⟩
+    · exact ⟨_, h3, by rw [dist_zero_left, n3]; exact htε⟩
+
+/-- **A proved horn** (FS131-QA2's QA2-4): in the cusp fragment, colour `1` has a horn at `0` along `e 0` with bounding curvatures
+`−1` (the arc of `ω(−i)`) and `1` (the arc of `ω(i)`). -/
+theorem cuspFrag_isHorn : cuspFrag.IsHorn 0 0 (-1) 1 1 := by
+  refine ⟨by norm_num, ?_⟩
+  filter_upwards [Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 2 by norm_num)] with r hr
+  obtain ⟨ho, hp, hd, hn, hc⟩ := cuspPiece_data hr.1 hr.2
+  have hsec : cuspFrag.IsSector 0 r (cuspPiece r 0) :=
+    (isSector_iff_of_partition (cuspFrag_partition hr.2) ho hp hd hn hc).mpr ⟨0, rfl⟩
   refine ⟨hsec, fun z hz => ?_⟩
   obtain ⟨-, -, h2, h1⟩ := (hornSet_cusp_iff r z).mp hz
   show cuspCol z = 1
