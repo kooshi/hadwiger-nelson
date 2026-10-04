@@ -2910,6 +2910,44 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.frameX_normalPt
 #print axioms HadwigerNelson.Plane.inv_curvDown_eq
 
+/-! ## FS-131 wave 5 (job FS131-K5) — the foundation: stuck runs, F(M) and R(M), modifications, terminal maps, Row134BaseUA -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.zero_mem_stuckRun_iff
+#print axioms HadwigerNelson.Plane.ArcMap.mem_stuckRun_of_between
+#print axioms HadwigerNelson.Plane.ArcMap.isChainVertex_of_mem_stuckRun
+#print axioms HadwigerNelson.Plane.ArcMap.mem_stuckRun_add_pi
+#print axioms HadwigerNelson.Plane.ArcMap.IsModification.refl
+#print axioms HadwigerNelson.Plane.ArcMap.IsModification.trans
+#print axioms HadwigerNelson.Plane.const_coloursAt_subset
+#print axioms HadwigerNelson.Plane.const_qrOnly
+
+/-! ## FS-131 wave 5 (job FS131-K5) — the skeleton: M*, the chains' ends, density (sorry until wave 5's implementer lands it) -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_structure_ua
+#print axioms HadwigerNelson.Plane.ArcMap.exists_red
+#print axioms HadwigerNelson.Plane.ArcMap.exists_terminal
+#print axioms HadwigerNelson.Plane.ArcMap.flankQ_upper_of_qrOnly
+#print axioms HadwigerNelson.Plane.ArcMap.flankQ_lower_of_qrOnly
+#print axioms HadwigerNelson.Plane.ArcMap.cv_l0
+#print axioms HadwigerNelson.Plane.ArcMap.cv_hd_main
+#print axioms HadwigerNelson.Plane.ArcMap.cv_hd
+#print axioms HadwigerNelson.Plane.ArcMap.cv_class
+#print axioms HadwigerNelson.Plane.ArcMap.y3_end_needs
+#print axioms HadwigerNelson.Plane.ArcMap.c_ends
+#print axioms HadwigerNelson.Plane.ArcMap.c_double
+#print axioms HadwigerNelson.Plane.ArcMap.n3_end_chain
+#print axioms HadwigerNelson.Plane.ArcMap.disc1ts
+#print axioms HadwigerNelson.Plane.ArcMap.disc1ts_degree
+#print axioms HadwigerNelson.Plane.ArcMap.disc1_local
+#print axioms HadwigerNelson.Plane.ArcMap.cor3
+#print axioms HadwigerNelson.Plane.ArcMap.n3_base
+#print axioms HadwigerNelson.Plane.ArcMap.localDense
+#print axioms HadwigerNelson.Plane.ArcMap.dense3
+#print axioms HadwigerNelson.Plane.ArcMap.cv_exists
+#print axioms HadwigerNelson.Plane.sevenBrickMap_isTerminalMap
+#print axioms HadwigerNelson.Plane.row134BaseUA
+#print axioms HadwigerNelson.Plane.not_row134BaseUA_seven
+
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 
 #print axioms HadwigerNelson.Plane.dot_e_e
