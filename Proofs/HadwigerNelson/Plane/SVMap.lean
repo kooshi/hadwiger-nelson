@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Basic
 import Proofs.HadwigerNelson.Instances.Seven
 import Proofs.HadwigerNelson.Topology.LebesgueCovering
+import Proofs.HadwigerNelson.Plane.Diameter
 
 /-!
 # Almost-everywhere-proper maps, region-only: lemma (L) and TS-T (FS-106)
@@ -31,14 +32,228 @@ open Complex Real Set Filter Topology Metric
 
 /-! ## FS106-L -/
 
+/-- `e α · e β = cos (α − β)` (the real dot product of two unit vectors). -/
+theorem dot_e_e (α β : ℝ) : dot (e α) (e β) = Real.cos (α - β) := by
+  unfold dot
+  rw [conj_e, ← e_add, e_eq, Complex.add_re, Complex.ofReal_re, Complex.mul_I_re, Complex.ofReal_im, neg_zero, add_zero,
+    sub_eq_add_neg]
+
+/-- The dot product is real-linear in its first argument: scaling. -/
+theorem dot_ofReal_mul (t : ℝ) (d u : ℂ) : dot ((t : ℂ) * d) u = t * dot d u := by
+  unfold dot; rw [mul_assoc, Complex.re_ofReal_mul]
+
+/-- The dot product is additive in its first argument. -/
+theorem dot_add_left (d d' u : ℂ) : dot (d + d') u = dot d u + dot d' u := by
+  unfold dot; rw [add_mul, Complex.add_re]
+
+/-- Against a unit vector the dot product is at most the norm. -/
+theorem abs_dot_e_le (d : ℂ) (θ : ℝ) : |dot d (e θ)| ≤ ‖d‖ := by
+  unfold dot
+  calc |(d * starRingEnd ℂ (e θ)).re| ≤ ‖d * starRingEnd ℂ (e θ)‖ := Complex.abs_re_le_norm _
+    _ = ‖d‖ := by rw [norm_mul, RCLike.norm_conj, norm_e, mul_one]
+
+/-- `|p + e θ − w|² = 1 − 2 (w − p)·e θ + |w − p|²`. -/
+theorem dist_add_e_sq (p w : ℂ) (θ : ℝ) : dist (p + e θ) w ^ 2 = 1 - 2 * dot (w - p) (e θ) + ‖w - p‖ ^ 2 := by
+  have hu : (e θ).re ^ 2 + (e θ).im ^ 2 = 1 := by
+    have h := Complex.sq_norm (e θ)
+    rw [norm_e, Complex.normSq_apply] at h
+    nlinarith [h]
+  rw [dist_eq_norm, Complex.sq_norm, Complex.sq_norm, Complex.normSq_apply, Complex.normSq_apply]
+  unfold dot
+  simp only [Complex.add_re, Complex.add_im, Complex.sub_re, Complex.sub_im, Complex.mul_re,
+    Complex.conj_re, Complex.conj_im]
+  linear_combination hu
+
+/-- **A unit circle through `p` meets `ω(w)` near the direction `θ₀`**: if `(w − p)·e θ` crosses `|w − p|²/2` between `θ₀ − δ'` and
+`θ₀ + δ'`, some `θ` in between has `|p + e θ − w| = 1` (the intermediate value theorem). -/
+theorem exists_dist_add_e_eq_one {p w : ℂ} {θ₀ δ' : ℝ} (hδ' : 0 ≤ δ')
+    (h1 : ‖w - p‖ ^ 2 / 2 < dot (w - p) (e (θ₀ + δ'))) (h2 : dot (w - p) (e (θ₀ - δ')) < ‖w - p‖ ^ 2 / 2) :
+    ∃ θ ∈ Icc (θ₀ - δ') (θ₀ + δ'), dist (p + e θ) w = 1 := by
+  have hcont : ContinuousOn (fun θ => dot (w - p) (e θ)) (Icc (θ₀ - δ') (θ₀ + δ')) := by
+    unfold dot e; fun_prop
+  obtain ⟨θ, hθ, hval⟩ := intermediate_value_Icc (by linarith) hcont ⟨h2.le, h1.le⟩
+  refine ⟨θ, hθ, ?_⟩
+  have h := dist_add_e_sq p w θ
+  simp only at hval
+  rw [hval] at h
+  have h' : dist (p + e θ) w ^ 2 = 1 := by rw [h]; ring
+  have := dist_nonneg (x := p + e θ) (y := w)
+  nlinarith [h']
+
+/-- **The geometric step of FS106-L** (the two-dimensional step the sweep route needs, FS131-I4c): for `q ∈ ω(b)` and any `δ`, `η > 0`,
+any two points `a`, `a'` close enough to `b` have a common point `w` within `η` of `b` lying on a unit circle about a point `c` of
+`ω(a)` and on one about a point `c'` of `ω(a')`, with `c`, `c'` within `δ` of `q`. (`w = a + t·i(q − b)`, `t = sin δ'/2`; each `c` by the
+intermediate value theorem on `ω(·)` near the direction of `q − b`.) -/
+theorem exists_double_unit_circle {b q : ℂ} (hq : dist q b = 1) {δ η : ℝ} (hδ : 0 < δ) (hη : 0 < η) :
+    ∃ ε > 0, ∀ a a' : ℂ, dist a b < ε → dist a' b < ε → ∃ w ∈ ball b η, ∃ c ∈ ball q δ, ∃ c' ∈ ball q δ,
+      dist w c = 1 ∧ dist c a = 1 ∧ dist w c' = 1 ∧ dist c' a' = 1 := by
+  set θ₀ := Complex.arg (q - b) with hθ₀
+  have hqb : q = b + e θ₀ := by
+    have h := Complex.norm_mul_exp_arg_mul_I (q - b)
+    rw [← dist_eq_norm, hq, Complex.ofReal_one, one_mul] at h
+    rw [show e θ₀ = q - b from h]; ring
+  set δ' := min (min (δ / 2) η) 1 with hδ'_def
+  have hδ'pos : 0 < δ' := lt_min (lt_min (by linarith) hη) one_pos
+  have hδ'δ : δ' ≤ δ / 2 := (min_le_left _ _).trans (min_le_left _ _)
+  have hδ'η : δ' ≤ η := (min_le_left _ _).trans (min_le_right _ _)
+  have hδ'1 : δ' ≤ 1 := min_le_right _ _
+  set s := Real.sin δ' with hs_def
+  have hs : 0 < s := Real.sin_pos_of_pos_of_lt_pi hδ'pos (by linarith [Real.two_le_pi])
+  have hsδ : s ≤ δ' := Real.sin_le hδ'pos.le
+  set t := s / 2 with ht_def
+  have ht : 0 < t := by positivity
+  set ε := min (s ^ 2 / 32) (min (δ / 4) (η / 4)) with hε_def
+  have hε1 : ε ≤ s ^ 2 / 32 := min_le_left _ _
+  have hε2 : ε ≤ δ / 4 := (min_le_right _ _).trans (min_le_left _ _)
+  have hε3 : ε ≤ η / 4 := (min_le_right _ _).trans (min_le_right _ _)
+  refine ⟨ε, by positivity, fun a a' ha ha' => ?_⟩
+  set n := e (θ₀ + π / 2) with hn
+  set w := a + (t : ℂ) * n with hw
+  have hdot_n : ∀ φ, dot n (e (θ₀ + φ)) = Real.sin φ := by
+    intro φ; rw [hn, dot_e_e, show θ₀ + π / 2 - (θ₀ + φ) = π / 2 - φ by ring, Real.cos_pi_div_two_sub]
+  have hdot_n' : dot n (e (θ₀ - δ')) = -s := by
+    rw [sub_eq_add_neg, hdot_n, Real.sin_neg]
+  -- the circle step, for any centre `p` near `b`
+  have key : ∀ p : ℂ, dist p b < δ / 2 → ‖w - p‖ ^ 2 / 2 < dot (w - p) (e (θ₀ + δ')) →
+      dot (w - p) (e (θ₀ - δ')) < ‖w - p‖ ^ 2 / 2 → ∃ c ∈ ball q δ, dist w c = 1 ∧ dist c p = 1 := by
+    intro p hp h1 h2
+    obtain ⟨θ, hθ, hd⟩ := exists_dist_add_e_eq_one hδ'pos.le h1 h2
+    refine ⟨p + e θ, ?_, by rw [dist_comm]; exact hd, by rw [dist_comm, dist_self_add_right, norm_e]⟩
+    have hθ' : |θ - θ₀| ≤ δ' := abs_le.mpr ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+    rw [mem_ball, hqb, dist_eq_norm]
+    calc ‖p + e θ - (b + e θ₀)‖ = ‖(p - b) + (e θ - e θ₀)‖ := by ring_nf
+      _ ≤ ‖p - b‖ + ‖e θ - e θ₀‖ := norm_add_le _ _
+      _ ≤ dist p b + |θ - θ₀| := by rw [dist_eq_norm]; exact add_le_add le_rfl (norm_e_sub_e_le θ θ₀)
+      _ < δ / 2 + δ' := by linarith
+      _ ≤ δ := by linarith
+  have hwa : w - a = (t : ℂ) * n := by rw [hw]; ring
+  have hnn : ‖n‖ = 1 := norm_e _
+  have hnorm_tn : ‖(t : ℂ) * n‖ = t := by rw [norm_mul, hnn, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht]
+  -- the circle about a point of `ω(a)`
+  obtain ⟨c, hc, hwc, hca⟩ := key a (by linarith [hε2]) (by
+      rw [hwa, hnorm_tn, dot_ofReal_mul, hdot_n, ht_def]; nlinarith)
+    (by rw [hwa, hnorm_tn, dot_ofReal_mul, hdot_n']; nlinarith)
+  -- the circle about a point of `ω(a')`
+  set e₀ := a - a' with he₀
+  have he₀n : ‖e₀‖ < 2 * ε := by
+    rw [he₀]
+    calc ‖a - a'‖ = dist a a' := (dist_eq_norm _ _).symm
+      _ ≤ dist a b + dist a' b := dist_triangle_right _ _ _
+      _ < ε + ε := add_lt_add ha ha'
+      _ = 2 * ε := by ring
+  have hwa' : w - a' = (t : ℂ) * n + e₀ := by rw [hw, he₀]; ring
+  have hnorm' : ‖w - a'‖ ≤ t + ‖e₀‖ := by rw [hwa']; exact (norm_add_le _ _).trans (by rw [hnorm_tn])
+  have hs1 : s ≤ 1 := Real.sin_le_one _
+  have he₀s : ‖e₀‖ < s ^ 2 / 16 := by linarith
+  have hsq : ‖w - a'‖ ^ 2 ≤ (t + ‖e₀‖) ^ 2 := pow_le_pow_left₀ (norm_nonneg _) hnorm' 2
+  have hd1 := (abs_le.mp (abs_dot_e_le e₀ (θ₀ + δ'))).1
+  have hd2 := (abs_le.mp (abs_dot_e_le e₀ (θ₀ - δ'))).2
+  have hen := norm_nonneg e₀
+  have hs2 : 0 < s ^ 2 := by positivity
+  have hts : t * s = s ^ 2 / 2 := by rw [ht_def]; ring
+  have hsq2 : ‖(t : ℂ) * n + e₀‖ ^ 2 ≤ 81 * s ^ 2 / 256 := by
+    have h9 : t + ‖e₀‖ ≤ 9 * s / 16 := by rw [ht_def]; nlinarith
+    rw [hwa'] at hsq
+    calc ‖(t : ℂ) * n + e₀‖ ^ 2 ≤ (t + ‖e₀‖) ^ 2 := hsq
+      _ ≤ (9 * s / 16) ^ 2 := pow_le_pow_left₀ (by positivity) h9 2
+      _ = 81 * s ^ 2 / 256 := by ring
+  obtain ⟨c', hc', hwc', hca'⟩ := key a' (by linarith [hε2, dist_nonneg (x := a') (y := b)])
+    (by
+      rw [hwa', dot_add_left, dot_ofReal_mul, hdot_n, ← hs_def]
+      linarith)
+    (by
+      rw [hwa', dot_add_left, dot_ofReal_mul, hdot_n']
+      have hts' : t * -s = -(s ^ 2 / 2) := by rw [mul_neg, hts]
+      nlinarith [sq_nonneg ‖(t : ℂ) * n + e₀‖])
+  refine ⟨w, ?_, c, hc, c', hc', hwc, hca, hwc', hca'⟩
+  rw [mem_ball, hw, dist_eq_norm]
+  calc ‖a + (t : ℂ) * n - b‖ = ‖(a - b) + (t : ℂ) * n‖ := by ring_nf
+    _ ≤ ‖a - b‖ + ‖(t : ℂ) * n‖ := norm_add_le _ _
+    _ = dist a b + t := by rw [hnorm_tn, dist_eq_norm]
+    _ < η := by linarith
+
+/-- The shadow of an open set is open: moving a point of the shadow moves its witness with it. -/
+theorem isOpen_shadow {O : Set ℂ} (hO : IsOpen O) : IsOpen (shadow O) := by
+  rw [Metric.isOpen_iff]
+  rintro z ⟨y, hy, hzy⟩
+  obtain ⟨ρ, hρ, hball⟩ := Metric.isOpen_iff.mp hO y hy
+  refine ⟨ρ, hρ, fun z' hz' => ⟨y + (z' - z), hball ?_, ?_⟩⟩
+  · rw [mem_ball, dist_eq_norm, show y + (z' - z) - y = z' - z by ring, ← dist_eq_norm]; exact hz'
+  · rw [dist_eq_norm, show z' - (y + (z' - z)) = z - y by ring, ← dist_eq_norm, hzy]
+
+/-- No point of a set with no unit pair lies in the shadow of a part of it. -/
+theorem disjoint_shadow {A O : Set ℂ} (hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1) (hO : O ⊆ A) : Disjoint (shadow O) A := by
+  rw [disjoint_left]
+  rintro z ⟨y, hy, hzy⟩ hz
+  exact hAu z hz y (hO hy) hzy
+
+/-- A dense part of `V` has a shadow dense in `V`'s shadow. -/
+theorem shadow_subset_closure_shadow {V S : Set ℂ} (h : V ⊆ closure S) : shadow V ⊆ closure (shadow S) := by
+  rintro z ⟨y, hy, hzy⟩
+  rw [Metric.mem_closure_iff]
+  intro ε hε
+  obtain ⟨y', hy', hyy'⟩ := Metric.mem_closure_iff.mp (h hy) ε hε
+  refine ⟨z + (y' - y), ⟨y', hy', ?_⟩, ?_⟩
+  · rw [dist_eq_norm, show z + (y' - y) - y' = z - y by ring, ← dist_eq_norm, hzy]
+  · rw [dist_eq_norm, show z - (z + (y' - y)) = y - y' by ring, ← dist_eq_norm]; exact hyy'
+
 /-- **FS106-L** (lemma (L), `plans/FS106-V-verification.md` V3 stage 1, region-only): in a two-coloured open set `W` with no
 monochrome unit — `W ⊆ cl (A ∪ B)` for open classes `A`, `B`, no two points of one class at distance exactly `1` — a two-colour
 change point `b` of `W` (a point of `W` with both colours arbitrarily near) has its unit circle outside `W`. (Disjointness of `A` and
-`B` is not read.) -/
+`B` is not read.) The proof (FS131-I4c, closing the plan's sweep route): for `q ∈ ω(b) ∩ W`, the open sets `V_A = Sh(A) ∩ B(q, δ)`
+and `V_B = Sh(B) ∩ B(q, δ)` miss `A` and `B`, so `B` is dense in `V_A` and `A` in `V_B`; their shadows' dense parts `Sh(V_A ∩ B)`,
+`Sh(V_B ∩ A)` miss `B` and `A`; and a point `w` near `b` in both `Sh(V_A)` and `Sh(V_B)` (`exists_double_unit_circle`) gives a
+non-empty open subset of `W` missing `A ∪ B`. -/
 theorem lemmaL {A B W : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hW : IsOpen W) (hWAB : W ⊆ closure (A ∪ B))
     (hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1) (hBu : ∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) {b : ℂ} (hbW : b ∈ W)
     (hbA : b ∈ closure A) (hbB : b ∈ closure B) : Disjoint (sphere b 1) W := by
-  sorry
+  rw [disjoint_left]
+  intro q hq hqW
+  rw [mem_sphere] at hq
+  obtain ⟨δ, hδ, hδW⟩ := Metric.isOpen_iff.mp hW q hqW
+  obtain ⟨η, hη, hηW⟩ := Metric.isOpen_iff.mp hW b hbW
+  -- an open subset of `W` missing a class is in the closure of the other
+  have hdense : ∀ {V X Y : Set ℂ}, IsOpen V → V ⊆ W → Disjoint V X → (X ∪ Y = A ∪ B) → V ⊆ closure (V ∩ Y) := by
+    intro V X Y hV hVW hVX hXY z hz
+    have h1 := hV.inter_closure ⟨hz, hWAB (hVW hz)⟩
+    rw [← hXY, inter_union_distrib_left, disjoint_iff_inter_eq_empty.mp hVX, empty_union] at h1
+    exact h1
+  set VA := shadow A ∩ ball q δ with hVA
+  set VB := shadow B ∩ ball q δ with hVB
+  have hVAo : IsOpen VA := (isOpen_shadow hA).inter isOpen_ball
+  have hVBo : IsOpen VB := (isOpen_shadow hB).inter isOpen_ball
+  have hVAd : VA ⊆ closure (VA ∩ B) :=
+    hdense hVAo (inter_subset_right.trans hδW) ((disjoint_shadow hAu subset_rfl).mono_left inter_subset_left) rfl
+  have hVBd : VB ⊆ closure (VB ∩ A) :=
+    hdense hVBo (inter_subset_right.trans hδW) ((disjoint_shadow hBu subset_rfl).mono_left inter_subset_left)
+      (union_comm B A)
+  -- a point near `b` in both shadows
+  obtain ⟨ε, hε, hgeo⟩ := exists_double_unit_circle (b := b) (q := q) hq hδ hη
+  obtain ⟨a, ha, hab⟩ := Metric.mem_closure_iff.mp hbA ε hε
+  obtain ⟨a', ha', hab'⟩ := Metric.mem_closure_iff.mp hbB ε hε
+  obtain ⟨w, hw, c, hc, c', hc', hwc, hca, hwc', hca'⟩ :=
+    hgeo a a' (by rw [dist_comm]; exact hab) (by rw [dist_comm]; exact hab')
+  have hcVA : c ∈ VA := ⟨⟨a, ha, hca⟩, hc⟩
+  have hc'VB : c' ∈ VB := ⟨⟨a', ha', hca'⟩, hc'⟩
+  set N := shadow VA ∩ shadow VB ∩ ball b η with hN
+  have hNo : IsOpen N := ((isOpen_shadow hVAo).inter (isOpen_shadow hVBo)).inter isOpen_ball
+  have hwN : w ∈ N := ⟨⟨⟨c, hcVA, hwc⟩, ⟨c', hc'VB, hwc'⟩⟩, hw⟩
+  set SA := shadow (VA ∩ B) with hSA
+  set SB := shadow (VB ∩ A) with hSB
+  have hSAo : IsOpen SA := isOpen_shadow (hVAo.inter hB)
+  have hSBo : IsOpen SB := isOpen_shadow (hVBo.inter hA)
+  have hSAB : Disjoint SA B := disjoint_shadow hBu inter_subset_right
+  have hSBA : Disjoint SB A := disjoint_shadow hAu inter_subset_right
+  have hSAcl : shadow VA ⊆ closure SA := shadow_subset_closure_shadow hVAd
+  have hSBcl : shadow VB ⊆ closure SB := shadow_subset_closure_shadow hVBd
+  -- `N ∩ SA ∩ SB` is a non-empty open subset of `W` missing `A ∪ B`
+  obtain ⟨x, hxN, hxSA⟩ := mem_closure_iff.mp (hSAcl hwN.1.1) N hNo hwN
+  obtain ⟨y, ⟨hyN, hySA⟩, hySB⟩ := mem_closure_iff.mp (hSBcl hxN.1.2) (N ∩ SA) (hNo.inter hSAo) ⟨hxN, hxSA⟩
+  obtain ⟨z, ⟨⟨-, hzSA⟩, hzSB⟩, hzAB⟩ := mem_closure_iff.mp (hWAB (hηW hyN.2)) (N ∩ SA ∩ SB)
+    ((hNo.inter hSAo).inter hSBo) ⟨⟨hyN, hySA⟩, hySB⟩
+  rcases hzAB with hzA | hzB
+  · exact disjoint_left.mp hSBA hzSB hzA
+  · exact disjoint_left.mp hSAB hzSA hzB
 
 /-- **Adversary for FS106-L's reading**: the change point must lie in `W`. With `b = 0` on the frontier of `W`, `A` a thin cone at
 `0` pointing away from `1` together with the part of `B(1, r)` outside `B̄(0, 1)`, and `B` the opposite cone together with the part of
@@ -263,11 +478,240 @@ namespace AeProperRegions
 
 variable {k : ℕ} (R : AeProperRegions k)
 
+/-- No class of an almost-everywhere-proper map has a unit pair, so its unit pairs are null (the measure form wave 1's chain lemma
+reads). -/
+theorem unitPairsNull_cls (j : Fin k) : UnitPairsNull (R.cls j) := by
+  have h : unitPairSet (R.cls j) = ∅ := by
+    ext q
+    simp only [unitPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+    intro h1 h2
+    exact R.dist_ne_one j _ h1 _ h2 (by rw [dist_self_add_right, norm_e])
+  unfold UnitPairsNull
+  rw [h, MeasureTheory.measure_empty]
+
+/-- **A region** of `R`: a pair `(j, C)` with `C` a connected component of the class `cls j` (pairs, since two classes may share a
+component as a set). -/
+def IsRegion (q : Fin k × Set ℂ) : Prop := ∃ y ∈ R.cls q.1, q.2 = connectedComponentIn (R.cls q.1) y
+
+variable {R}
+
+theorem IsRegion.subset {q : Fin k × Set ℂ} (h : R.IsRegion q) : q.2 ⊆ R.cls q.1 := by
+  obtain ⟨y, -, hq⟩ := h; rw [hq]; exact connectedComponentIn_subset _ _
+
+theorem IsRegion.isPreconnected {q : Fin k × Set ℂ} (h : R.IsRegion q) : IsPreconnected q.2 := by
+  obtain ⟨y, -, hq⟩ := h; rw [hq]; exact isPreconnected_connectedComponentIn
+
+/-- One link of a chain of regions of one colour (wave 1's `chain_step`): a point of the class within `1` of all of a region is
+within `1` of all of any region of the same colour whose closure meets the first one's. -/
+theorem IsRegion.chain_step {j : Fin k} {C C' : Set ℂ} (h : R.IsRegion (j, C)) (h' : R.IsRegion (j, C'))
+    (hmeet : (closure C ∩ closure C').Nonempty) {x : ℂ} (hx : x ∈ R.cls j) (hnear : ∀ s ∈ C, dist x s < 1) :
+    ∀ s ∈ C', dist x s < 1 :=
+  Plane.chain_step (R.isOpen_cls j) (R.unitPairsNull_cls j) h.subset h'.subset h'.isPreconnected hx hnear hmeet
+
+/-- A region has every two points nearer than `1` (wave 1's FS106-DIAM (i)). -/
+theorem IsRegion.dist_lt_one {q : Fin k × Set ℂ} (h : R.IsRegion q) : ∀ x ∈ q.2, ∀ y ∈ q.2, dist x y < 1 :=
+  dist_lt_one_of_forall_dist_ne_one h.isPreconnected fun x hx y hy =>
+    R.dist_ne_one q.1 x (h.subset hx) y (h.subset hy)
+
+variable (R)
+
 /-- **FS106-TS-T** (SB's form, `plans/FS106-SB-verification.md` § 2.5): every point `z` of an almost-everywhere-proper map has a point
-of chromaticity at least `3` within `1/√2 + ε`, for every `ε > 0`. -/
+of chromaticity at least `3` within `1/√2 + ε`, for every `ε > 0`. SB's route: the closures of the chain classes of regions (same
+colour, closures meeting in sequence) that meet a closed square of side `1 + ε` about `z` are finitely many closed sets of diameter at
+most `1` covering it, none meeting two opposite sides; Lebesgue's covering theorem puts a point in three of them, and two classes
+of one colour whose closures meet are one class, so the three have three colours. -/
 theorem exists_three_le_multicolour (z : ℂ) {ε : ℝ} (hε : 0 < ε) :
     ∃ x, dist x z < 1 / Real.sqrt 2 + ε ∧ 3 ≤ (multicolour R.cls x).ncard := by
-  sorry
+  classical
+  -- the square of side `s = 1 + ε` centred at `z`
+  set s : ℝ := 1 + ε with hs_def
+  have hs : 0 < s := by linarith
+  set c : ℂ := z - ((s / 2 : ℝ) : ℂ) - ((s / 2 : ℝ) : ℂ) * I with hc_def
+  have hcre : c.re = z.re - s / 2 := by simp [hc_def]
+  have hcim : c.im = z.im - s / 2 := by simp [hc_def]
+  set Q := closedSquare c s with hQ
+  have hdistQ : ∀ p ∈ Q, dist p z ^ 2 ≤ s ^ 2 / 2 := by
+    rintro p ⟨h1, h2, h3, h4⟩
+    rw [Complex.dist_eq, Complex.sq_norm, Complex.normSq_apply]
+    simp only [Complex.sub_re, Complex.sub_im]
+    rw [hcre] at h1 h2; rw [hcim] at h3 h4
+    nlinarith
+  have hQclosed : IsClosed Q := by
+    have hre := Complex.continuous_re
+    have him := Complex.continuous_im
+    exact ((isClosed_le continuous_const hre).inter ((isClosed_le hre continuous_const).inter
+      ((isClosed_le continuous_const him).inter (isClosed_le him continuous_const))))
+  have hQbdd : Bornology.IsBounded Q := by
+    refine (Metric.isBounded_closedBall (x := z) (r := s)).subset fun p hp => ?_
+    rw [mem_closedBall]
+    have h := hdistQ p hp
+    nlinarith [dist_nonneg (x := p) (y := z)]
+  have hQc : IsCompact Q := Metric.isCompact_of_isClosed_isBounded hQclosed hQbdd
+  -- a finite open cover of the square by neighbourhoods meeting finitely many regions
+  choose t ht htf using R.locallyFinite
+  obtain ⟨u, -, hcover⟩ := hQc.elim_nhds_subcover (fun x => interior (t x)) (fun x _ => interior_mem_nhds.mpr (ht x))
+  set U := ⋃ x ∈ u, interior (t x) with hU
+  have hUo : IsOpen U := isOpen_biUnion fun _ _ => isOpen_interior
+  -- the regions meeting `U`: finitely many
+  set 𝒞 : Set (Fin k × Set ℂ) := {q | R.IsRegion q ∧ (q.2 ∩ U).Nonempty} with h𝒞
+  have h𝒞f : 𝒞.Finite := by
+    have hA : (⋃ x ∈ u, {C : Set ℂ | ∃ j, ∃ y ∈ R.cls j, C = connectedComponentIn (R.cls j) y ∧ (C ∩ t x).Nonempty}).Finite :=
+      u.finite_toSet.biUnion fun x _ => htf x
+    refine ((Set.finite_univ (α := Fin k)).prod hA).subset ?_
+    rintro ⟨j, C⟩ ⟨⟨y, hy, hC⟩, w, hwC, hwU⟩
+    simp only [hU, mem_iUnion] at hwU
+    obtain ⟨x, hx, hw⟩ := hwU
+    refine ⟨mem_univ _, ?_⟩
+    simp only [mem_iUnion, mem_setOf_eq]
+    exact ⟨x, hx, j, y, hy, hC, w, hwC, interior_subset hw⟩
+  haveI : Finite 𝒞 := h𝒞f.to_subtype
+  -- the chain relation on those regions, and the closed set of each class
+  let r : 𝒞 → 𝒞 → Prop := fun a b => a.1.1 = b.1.1 ∧ (closure a.1.2 ∩ closure b.1.2).Nonempty
+  let Fc : 𝒞 → Set ℂ := fun a => ⋃ b ∈ {b : 𝒞 | Relation.EqvGen r a b}, closure b.1.2
+  have hcol : ∀ a b, Relation.EqvGen r a b → a.1.1 = b.1.1 := by
+    intro a b h
+    induction h with
+    | rel x y h => exact h.1
+    | refl => rfl
+    | symm x y _ ih => exact ih.symm
+    | trans x y w _ _ ih1 ih2 => exact ih1.trans ih2
+  have hFc_eq : ∀ a b, Relation.EqvGen r a b → Fc a = Fc b := by
+    intro a b h
+    ext p
+    simp only [Fc, mem_iUnion, mem_setOf_eq, exists_prop]
+    constructor
+    · rintro ⟨b', hb', hp⟩; exact ⟨b', Relation.EqvGen.trans _ _ _ (Relation.EqvGen.symm _ _ h) hb', hp⟩
+    · rintro ⟨b', hb', hp⟩; exact ⟨b', Relation.EqvGen.trans _ _ _ h hb', hp⟩
+  -- along a chain, "within `1` of a whole region" passes from region to region
+  have hpass : ∀ a b, Relation.EqvGen r a b → ∀ x ∈ R.cls a.1.1,
+      ((∀ y ∈ a.1.2, dist x y < 1) ↔ ∀ y ∈ b.1.2, dist x y < 1) := by
+    intro a b h
+    induction h with
+    | rel a b h =>
+      intro x hx
+      have ha : R.IsRegion (a.1.1, a.1.2) := a.2.1
+      have hb : R.IsRegion (a.1.1, b.1.2) := by rw [h.1]; exact b.2.1
+      exact ⟨fun H => ha.chain_step hb h.2 hx H,
+        fun H => hb.chain_step ha (by rw [inter_comm]; exact h.2) hx H⟩
+    | refl => intro x _; exact Iff.rfl
+    | symm a b hab ih =>
+      intro x hx
+      rw [← hcol a b hab] at hx
+      exact (ih x hx).symm
+    | trans a b w hab _ ih1 ih2 =>
+      intro x hx
+      have hx' : x ∈ R.cls b.1.1 := by rw [← hcol a b hab]; exact hx
+      exact (ih1 x hx).trans (ih2 x hx')
+  have hdiam : ∀ a, ∀ p ∈ Fc a, ∀ q ∈ Fc a, dist p q ≤ 1 := by
+    intro a p hp q hq
+    simp only [Fc, mem_iUnion, mem_setOf_eq, exists_prop] at hp hq
+    obtain ⟨b, hb, hpb⟩ := hp
+    obtain ⟨b', hb', hqb'⟩ := hq
+    have hbb' : Relation.EqvGen r b b' := Relation.EqvGen.trans _ _ _ (Relation.EqvGen.symm _ _ hb) hb'
+    have hnear : ∀ x ∈ b.1.2, ∀ y ∈ b'.1.2, dist x y < 1 := fun x hx =>
+      (hpass b b' hbb' x (b.2.1.subset hx)).mp fun y hy => b.2.1.dist_lt_one x hx y hy
+    have h1 : ∀ x ∈ b.1.2, closure b'.1.2 ⊆ closedBall x 1 := fun x hx =>
+      closure_minimal (fun y hy => by rw [mem_closedBall, dist_comm]; exact (hnear x hx y hy).le) isClosed_closedBall
+    have h2 : closure b.1.2 ⊆ closedBall q 1 :=
+      closure_minimal (fun x hx => by rw [mem_closedBall, dist_comm]; exact h1 x hx hqb') isClosed_closedBall
+    have := h2 hpb
+    rwa [mem_closedBall] at this
+  have hFc_closed : ∀ a, IsClosed (Fc a) := fun a =>
+    Set.Finite.isClosed_biUnion (Set.toFinite _) fun _ _ => isClosed_closure
+  -- every point of the square lies in the closure of a region meeting `U`
+  have hcovFc : ∀ p ∈ Q, ∃ a, p ∈ Fc a := by
+    intro p hp
+    have hpU : p ∈ U := hcover hp
+    set N := interior (t p) ∩ U with hN
+    have hNo : IsOpen N := isOpen_interior.inter hUo
+    have hpN : p ∈ N := ⟨mem_interior_iff_mem_nhds.mpr (ht p), hpU⟩
+    set 𝒟 : Set (Fin k × Set ℂ) := {q | R.IsRegion q ∧ (q.2 ∩ N).Nonempty} with h𝒟
+    have h𝒟f : 𝒟.Finite := by
+      refine ((Set.finite_univ (α := Fin k)).prod (htf p)).subset ?_
+      rintro ⟨j, C⟩ ⟨⟨y, hy, hC⟩, w, hwC, hwN⟩
+      exact ⟨mem_univ _, j, y, hy, hC, w, hwC, interior_subset hwN.1⟩
+    have hsub : N ∩ ⋃ j, R.cls j ⊆ ⋃ q ∈ 𝒟, q.2 := by
+      rintro y ⟨hyN, hy⟩
+      obtain ⟨j, hj⟩ := mem_iUnion.mp hy
+      refine mem_biUnion (x := (j, connectedComponentIn (R.cls j) y)) ⟨⟨y, hj, rfl⟩, y, ?_, hyN⟩ ?_ <;>
+        exact mem_connectedComponentIn hj
+    have hpcl : p ∈ closure (⋃ q ∈ 𝒟, q.2) := closure_mono hsub (hNo.inter_closure ⟨hpN, R.dense p⟩)
+    rw [h𝒟f.closure_biUnion] at hpcl
+    obtain ⟨q, ⟨hqR, w, hwq, hwN⟩, hpq⟩ := mem_iUnion₂.mp hpcl
+    refine ⟨⟨q, hqR, w, hwq, hwN.2⟩, ?_⟩
+    simp only [Fc, mem_iUnion, mem_setOf_eq, exists_prop]
+    exact ⟨_, Relation.EqvGen.refl _, hpq⟩
+  -- the distinct class sets, enumerated
+  obtain ⟨m, ⟨eqv⟩⟩ := Finite.exists_equiv_fin (range Fc)
+  set G : Fin m → Set ℂ := fun i => (eqv.symm i).1 with hG
+  have hGinj : Function.Injective G := fun i j h => eqv.symm.injective (Subtype.ext h)
+  have hGrange : ∀ i, ∃ a, G i = Fc a := fun i => by
+    obtain ⟨a, ha⟩ := (eqv.symm i).2; exact ⟨a, ha.symm⟩
+  have hGof : ∀ a, ∃ i, G i = Fc a := fun a =>
+    ⟨eqv ⟨Fc a, a, rfl⟩, by simp [hG]⟩
+  have hside : ∀ i, ∀ p ∈ G i, ∀ q ∈ G i, |p.re - q.re| ≤ 1 ∧ |p.im - q.im| ≤ 1 := by
+    intro i p hp q hq
+    obtain ⟨a, ha⟩ := hGrange i
+    rw [ha] at hp hq
+    have hd := hdiam a p hp q hq
+    rw [Complex.dist_eq] at hd
+    exact ⟨by have := Complex.abs_re_le_norm (p - q); rw [Complex.sub_re] at this; linarith,
+      by have := Complex.abs_im_le_norm (p - q); rw [Complex.sub_im] at this; linarith⟩
+  obtain ⟨p, hpQ, i, j, l, hij, hil, hjl, hpi, hpj, hpl⟩ := lebesgue_covering_square c hs G
+    (fun i => by obtain ⟨a, ha⟩ := hGrange i; rw [ha]; exact hFc_closed a)
+    (fun p hp => by
+      obtain ⟨a, ha⟩ := hcovFc p hp
+      obtain ⟨i, hi⟩ := hGof a
+      exact mem_iUnion.mpr ⟨i, hi ▸ ha⟩)
+    (fun i ⟨⟨z1, ⟨hz1, _⟩, h1⟩, ⟨z2, ⟨hz2, _⟩, h2⟩⟩ => by
+      have := (hside i z1 hz1 z2 hz2).1
+      rw [h1, h2, show c.re - (c.re + s) = -s by ring, abs_neg, abs_of_pos hs] at this
+      linarith)
+    (fun i ⟨⟨z1, ⟨hz1, _⟩, h1⟩, ⟨z2, ⟨hz2, _⟩, h2⟩⟩ => by
+      have := (hside i z1 hz1 z2 hz2).2
+      rw [h1, h2, show c.im - (c.im + s) = -s by ring, abs_neg, abs_of_pos hs] at this
+      linarith)
+  refine ⟨p, ?_, ?_⟩
+  · -- the square lies within `1/√2 + ε` of `z`
+    have h2 : (0 : ℝ) < Real.sqrt 2 := Real.sqrt_pos.mpr (by norm_num)
+    have h22 : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
+    have hlt2 : Real.sqrt 2 < 2 := by nlinarith
+    have hinv : (1 / Real.sqrt 2) ^ 2 = 1 / 2 := by rw [div_pow, h22]; norm_num
+    have hhalf : 1 / 2 < 1 / Real.sqrt 2 := by rw [div_lt_div_iff₀ (by norm_num) h2]; linarith
+    have key : dist p z ^ 2 < (1 / Real.sqrt 2 + ε) ^ 2 := by
+      have := hdistQ p hpQ
+      rw [hs_def] at this
+      nlinarith
+    exact lt_of_pow_lt_pow_left₀ 2 (by positivity) key
+  · -- three classes at `p`, of three colours
+    obtain ⟨ai, hai⟩ := hGrange i
+    obtain ⟨aj, haj⟩ := hGrange j
+    obtain ⟨al, hal⟩ := hGrange l
+    rw [hai] at hpi; rw [haj] at hpj; rw [hal] at hpl
+    simp only [Fc, mem_iUnion, mem_setOf_eq, exists_prop] at hpi hpj hpl
+    obtain ⟨bi, hbi, hpbi⟩ := hpi
+    obtain ⟨bj, hbj, hpbj⟩ := hpj
+    obtain ⟨bl, hbl, hpbl⟩ := hpl
+    have hne : ∀ {i j : Fin m} {ai aj bi bj : 𝒞}, i ≠ j → G i = Fc ai → G j = Fc aj → Relation.EqvGen r ai bi →
+        Relation.EqvGen r aj bj → p ∈ closure bi.1.2 → p ∈ closure bj.1.2 → bi.1.1 ≠ bj.1.1 := by
+      intro i j ai aj bi bj hij hai haj hbi hbj hpi hpj heq
+      apply hij
+      apply hGinj
+      rw [hai, haj]
+      apply hFc_eq
+      exact Relation.EqvGen.trans _ _ _ hbi (Relation.EqvGen.trans _ _ _ (Relation.EqvGen.rel _ _ ⟨heq, p, hpi, hpj⟩)
+        (Relation.EqvGen.symm _ _ hbj))
+    have hm : ∀ b : 𝒞, p ∈ closure b.1.2 → b.1.1 ∈ multicolour R.cls p := fun b hb =>
+      closure_mono b.2.1.subset hb
+    have h3 : ({bi.1.1, bj.1.1, bl.1.1} : Set (Fin k)).ncard = 3 :=
+      Set.ncard_eq_three.mpr ⟨_, _, _, hne hij hai haj hbi hbj hpbi hpbj, hne hil hai hal hbi hbl hpbi hpbl,
+        hne hjl haj hal hbj hbl hpbj hpbl, rfl⟩
+    rw [← h3]
+    refine Set.ncard_le_ncard ?_ (Set.toFinite _)
+    rintro x (rfl | rfl | rfl)
+    · exact hm bi hpbi
+    · exact hm bj hpbj
+    · exact hm bl hpbl
 
 /-- **FS106-TS-T** in TS's form (`plans/FS106-TS-derivation.md` § 2.4): a point of chromaticity at least `3` within distance `1`
 (strictly). -/

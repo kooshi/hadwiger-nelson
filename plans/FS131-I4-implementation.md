@@ -171,6 +171,58 @@ that cannot be proved as written goes to Keryx at once with the declaration, the
 `data/fs131/i4/build-i4c-readback.log`). The ten are the `sorry`-bearing modules: wave 3's six skeletons as of `05cb0a3e` and wave 4's four (`StuckChain` is
 sorry-free). 54 `sorry` declarations: Contact 10, UnitArc 20, BaseSteps 20, SVMap 4.
 
+## Stage 6 — SAVED (FS131-I4c): `main` merged, Lebesgue discharged, FS106-L and TS-T's first clause proved; 51 `sorry` left
+
+**The merge** (`52fe62fd`): `origin/main` (waves 1 and 3 landed, FS131-LEB) into `fs131-w4`. Conflicts at the append points only — `ARCHITECTURE.md` (`main`'s
+landed wave-3 rows and LEB's two rows, then wave 4's) and `scripts/Axioms.lean` (both blocks; no duplicate record). `tools/fs131_qa1_dupes.py`
+(`data/fs131/i4/dupes-i4c.log`): no collision with `main`; `abs_dot_le` collides with `fs131-ww` only. This stage adds two more names that `fs131-ww`'s
+`Plane/Woodall/Collar` also declares with the same statement, `isOpen_shadow` and `dot_add_left` (`HadwigerNelson.Plane`): under item 142 the branch landing
+later deletes its identical copy. Build of the merge: "build: OK — 443 of 443 batches, 19 module(s) rebuilt, 4 module(s) with warnings", exit 0
+(`build/gate/build/20261004T151814Z-292722.log`; driver log `data/fs131/i4/build-i4c-merge.log`) — the four are wave 4's `sorry` modules; wave 3 is sorry-free.
+
+**Proved this stage (3 leaves; 54 → 51):**
+- `lebesgue_covering_square` — one line, `LebesgueCovering.lebesgue_covering_square c hs F hF hcov hLR hBT` (inventory item 151); `Plane/SVMap` imports
+  `Topology/LebesgueCovering`; docstring cites `[HurewiczWallman1948]` Thm IV 2, p. 42, and the "disposition owed" sentence is gone (module docstring and
+  `ARCHITECTURE.md` row likewise).
+- `AeProperRegions.exists_three_le_multicolour` (FS106-TS-T, SB's form) — I4b's route, written: regions as pairs `(j, C)` (`IsRegion`; two classes may share a
+  component as a set), the regions meeting a finite open cover `U` of the square of side `1 + ε` about `z` (compactness and `locallyFinite`), the chain classes
+  (`Relation.EqvGen` of "same colour, closures meet") on that finite set, `Fc a` the union of a class's closures (closed, finite union), every point of the
+  square in some `Fc a` (density plus local finiteness at the point), diameter `≤ 1` per class (wave 1's `chain_step` passed along the `EqvGen` induction,
+  with `unitPairsNull_cls`), the distinct class sets enumerated by `Finite.exists_equiv_fin`, Lebesgue at side `1 + ε > 1`, and three classes at the point
+  with three colours (two of one colour whose closures meet are one class). Children: `unitPairsNull_cls`, `IsRegion`, `IsRegion.subset`,
+  `IsRegion.isPreconnected`, `IsRegion.chain_step`, `IsRegion.dist_lt_one`. Import added: `Plane/Diameter`.
+- `lemmaL` (FS106-L) — **plan gap closed (item 143)**. The sweep route needs no two-dimensional covering argument, only one explicit point. For `q ∈ ω(b) ∩ W`:
+  `V_A = Sh(A) ∩ B(q, δ)` is open and misses `A`, so `V_A ⊆ cl(V_A ∩ B)` (it lies in `W ⊆ cl(A ∪ B)`), likewise `V_B ⊆ cl(V_B ∩ A)`; `Sh(V_A ∩ B)` is open, misses
+  `B` and is dense in `Sh(V_A)` (`shadow_subset_closure_shadow`), likewise `Sh(V_B ∩ A)`; so a point `w ∈ B(b, η) ⊆ W` lying in `Sh(V_A) ∩ Sh(V_B)` gives a
+  non-empty open subset of `W` missing `A ∪ B` — contradiction. The point (`exists_double_unit_circle`): `a ∈ A`, `a' ∈ B` within `ε` of `b`, `w = a + t·i(q − b)`
+  with `t = sin δ'/2`, and on each of `ω(a)`, `ω(a')` a point within `δ` of `q` at unit distance from `w`, by the intermediate value theorem on
+  `θ ↦ (w − p)·e(θ) − |w − p|²/2` over `[θ₀ − δ', θ₀ + δ']` (`exists_dist_add_e_eq_one`), `θ₀ = arg(q − b)`. Children: `dot_e_e`, `dot_ofReal_mul`,
+  `dot_add_left`, `abs_dot_e_le`, `dist_add_e_sq`, `exists_dist_add_e_eq_one`, `exists_double_unit_circle`, `isOpen_shadow`, `disjoint_shadow`,
+  `shadow_subset_closure_shadow`. `b ∈ W` is used exactly where the adversary `not_lemmaL_of_not_mem` says it must be (`w ∈ B(b, η) ⊆ W`).
+
+**No statement changed, no new axiom, no `native_decide`.** The 15 new theorems' records are in `scripts/Axioms.lean` (section "FS-131 wave 4 (job FS131-I4c)");
+`tools/fs131_k4_decls.py --check`: 150 names, 0 missing; `tools/check_architecture.py`: PASS (the `Plane/SVMap` row's Imports cell gains
+`Topology/LebesgueCovering`, `Plane/Diameter`). Build of this stage: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 4 module(s) with warnings", exit 0
+(`build/gate/build/20261004T152838Z-359462.log`; driver log `data/fs131/i4/build-i4c-stage6.log`). Axioms printed against that build's oleans
+(`data/fs131/i4/axioms-i4c-stage6.txt`).
+
+**Re-pricing** (from these leaves): `exists_three_le_multicolour` (planned M) ≈ 230 lines and `lemmaL` with its geometric step ≈ 200 lines; each elaborated on
+the second try. On Opus a planned-M leaf with a fixed route costs about 15–25k tokens; the cost sits in reading the plan and the derivation.
+
+**What is left (51), and what the next session does first:**
+- **Merge `main` again** (`localSectors` landed at `0131aa59`, the coordinator's message; inventory item 171 lists its exports), then the bridge (item 136):
+  for `v ∈ dom` and `r ≤ r₀`, every `IsSector v r S` is one of the chart's sectors (`n > 0`: they are open, preconnected, disjoint and cover
+  `ball v r ∩ interiorPts`, so each non-empty one is a component; `n = 0`: the ball), `HasDegree v (max n 1)`, and a one-direction cone's sector equals a
+  `hornSet`. First consumer: `exists_hasDegree_of_mem_dom` (each colour at `v` is a sector's colour, sectors are monochromatic, so `ncard (coloursAt v) ≤`
+  the degree) — it closes `ts_t_trichromatic`, `ts_t_degree_three` and `Plane/SVMap`.
+- **The coordinator's four QA2 items** (FS131-QA2, item 172; before the gate, no statement changes): (1) an inhabitant of `IsCubicTrichromatic` and a
+  non-degenerate one of `MIn` — `sevenBrickMap` at a brick corner (T-junction, angles `π/2, π/2, π`, three colours; `tools/fs131_qa2_brick.py`,
+  `plans/FS131-QA2-audit.md` § 2.2); (2) an `IsHorn` model — the `bowtie_*` leaves early, or a two-colour cusp fragment; (3) `halfDisc.Simple`; (4)
+  `stuck_chain`'s docstring declares that no model is expected (`n4_fin` refutes the configuration), naming the refuting theorem.
+- **`lock` clause 1** (item 143's second gap): not worked out this stage.
+- **Before the gate**: `AeProperRegions` as a vacuity carrier (empty at `k ≤ 1`, item 144); TS-T's Condition-5 clause kept in its carried form (item 142).
+- The other leaves as Stage 4 lists them: Contact 10, UnitArc 20, BaseSteps 20.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -182,3 +234,14 @@ sorry-free). 54 `sorry` declarations: Contact 10, UnitArc 20, BaseSteps 20, SVMa
 ## Drafts for the front page
 
 None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_covering_square`).
+
+## Theorems this phase proved (FS131-I4c's; axioms from `#print axioms` against the stage-6 build's oleans, `data/fs131/i4/axioms-i4c-stage6.txt`, not a gate log)
+
+- FS106-L: `HadwigerNelson.Plane.lemmaL` — `[propext, Classical.choice, Quot.sound]`. Read against the row and § 7.2's read-back: same statement (change point
+  `b ∈ W`; `A`, `B` open, no unit pair in either, `W ⊆ cl(A ∪ B)` ⟹ `ω(b) ∩ W = ∅`; disjointness of `A`, `B` not read). Its geometric step
+  `exists_double_unit_circle` — the standard three.
+- FS106-TS-T, clause (i): `HadwigerNelson.Plane.AeProperRegions.exists_three_le_multicolour` — `[propext, Classical.choice, Quot.sound]`; with it
+  `exists_three_le_multicolour_lt_one` and `ArcMap.ts_t` are sorry-free (the standard three). Same statement (a point of chromaticity `≥ 3` within `1/√2 + ε` of
+  every point of an almost-everywhere-proper map's regions). `ts_t_trichromatic`, `ts_t_degree_three` still read `sorryAx`, through `exists_hasDegree_of_mem_dom`.
+- Lebesgue's covering theorem for the square: `HadwigerNelson.Plane.lebesgue_covering_square` — `[propext, Classical.choice, Quot.sound]`, by FS131-LEB's theorem.
+

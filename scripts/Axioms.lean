@@ -2758,6 +2758,24 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.frameX_normalPt
 #print axioms HadwigerNelson.Plane.inv_curvDown_eq
 
+/-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
+
+#print axioms HadwigerNelson.Plane.dot_e_e
+#print axioms HadwigerNelson.Plane.dot_ofReal_mul
+#print axioms HadwigerNelson.Plane.dot_add_left
+#print axioms HadwigerNelson.Plane.abs_dot_e_le
+#print axioms HadwigerNelson.Plane.dist_add_e_sq
+#print axioms HadwigerNelson.Plane.exists_dist_add_e_eq_one
+#print axioms HadwigerNelson.Plane.exists_double_unit_circle
+#print axioms HadwigerNelson.Plane.isOpen_shadow
+#print axioms HadwigerNelson.Plane.disjoint_shadow
+#print axioms HadwigerNelson.Plane.shadow_subset_closure_shadow
+#print axioms HadwigerNelson.Plane.AeProperRegions.unitPairsNull_cls
+#print axioms HadwigerNelson.Plane.AeProperRegions.IsRegion.subset
+#print axioms HadwigerNelson.Plane.AeProperRegions.IsRegion.isPreconnected
+#print axioms HadwigerNelson.Plane.AeProperRegions.IsRegion.chain_step
+#print axioms HadwigerNelson.Plane.AeProperRegions.IsRegion.dist_lt_one
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
