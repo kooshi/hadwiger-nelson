@@ -1786,13 +1786,132 @@ example (g : ℝ → ℝ) : (0 : ℂ) ∈ hcSet g :=
 /-- On a gap `(a, b)` of `Z` (`a, b ∈ Z`, no point of `Z` strictly between), `hcGap Z` is `(s − a)²(b − s)²/4`. -/
 theorem hcGap_eq_of_gap {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) {a b s : ℝ} (ha : a ∈ Z)
     (hb : b ∈ Z) (hab : ∀ z ∈ Z, z ∉ Ioo a b) (hs : s ∈ Ioo a b) : hcGap Z s = (s - a) ^ 2 * (b - s) ^ 2 / 4 := by
-  sorry
+  have _ := hZc -- idle: the gap's ends are given
+  have hsZ : s ∉ Z := fun h => hab s h hs
+  have hsI : s ∈ Icc (-1 / 2 : ℝ) (1 / 2) := ⟨(hZs ha).1.trans hs.1.le, hs.2.le.trans (hZs hb).2⟩
+  have h1 : sSup (Z ∩ Iic s) = a := by
+    refine IsGreatest.csSup_eq ⟨⟨ha, hs.1.le⟩, fun z hz => ?_⟩
+    by_contra h
+    exact hab z hz.1 ⟨lt_of_not_ge h, lt_of_le_of_lt hz.2 hs.2⟩
+  have h2 : sInf (Z ∩ Ici s) = b := by
+    refine IsLeast.csInf_eq ⟨⟨hb, hs.2.le⟩, fun z hz => ?_⟩
+    by_contra h
+    exact hab z hz.1 ⟨lt_of_lt_of_le hs.1 hz.2, lt_of_not_ge h⟩
+  rw [hcGap, if_pos ⟨hsI, hsZ⟩, h1, h2]
+
+/-- Every point of `[−1/2, 1/2]` off `Z` lies in a gap of `Z`. -/
+theorem hcGap_exists_gap {Z : Set ℝ} (hZc : IsClosed Z) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {s : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) (hsZ : s ∉ Z) :
+    ∃ a b, a ∈ Z ∧ b ∈ Z ∧ (∀ z ∈ Z, z ∉ Ioo a b) ∧ s ∈ Ioo a b := by
+  have hA : sSup (Z ∩ Iic s) ∈ Z ∩ Iic s :=
+    (hZc.inter (isClosed_Iic (a := s))).csSup_mem ⟨_, hl, hs.1⟩ (bddAbove_Iic.mono inter_subset_right)
+  have hB : sInf (Z ∩ Ici s) ∈ Z ∩ Ici s :=
+    (hZc.inter (isClosed_Ici (a := s))).csInf_mem ⟨_, hr, hs.2⟩ (bddBelow_Ici.mono inter_subset_right)
+  refine ⟨_, _, hA.1, hB.1, fun z hz hzI => ?_, ⟨lt_of_le_of_ne hA.2 fun h => hsZ (h ▸ hA.1),
+    lt_of_le_of_ne hB.2 fun h => hsZ (h.symm ▸ hB.1)⟩⟩
+  rcases le_total z s with h | h
+  · exact absurd (le_csSup (bddAbove_Iic.mono inter_subset_right) ⟨hz, h⟩) (not_le.2 hzI.1)
+  · exact absurd (csInf_le (bddBelow_Ici.mono inter_subset_right) ⟨hz, h⟩) (not_le.2 hzI.2)
+
+/-- On a gap, `hcGap Z` has the polynomial's derivative `(s − a)(b − s)(a + b − 2s)/2`. -/
+theorem hasDerivAt_hcGap_of_gap {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) {a b s : ℝ}
+    (ha : a ∈ Z) (hb : b ∈ Z) (hab : ∀ z ∈ Z, z ∉ Ioo a b) (hs : s ∈ Ioo a b) :
+    HasDerivAt (hcGap Z) ((s - a) * (b - s) * (a + b - 2 * s) / 2) s := by
+  have hp : HasDerivAt (fun t : ℝ => (t - a) ^ 2 * (b - t) ^ 2 / 4) ((s - a) * (b - s) * (a + b - 2 * s) / 2) s := by
+    have hq : HasDerivAt (fun t : ℝ => (t - a) * (b - t)) (1 * (b - s) + (s - a) * (-1)) s :=
+      ((hasDerivAt_id' s).sub_const a).mul ((hasDerivAt_id' s).const_sub b)
+    have hf : (fun t : ℝ => (t - a) ^ 2 * (b - t) ^ 2 / 4) = fun t => (t - a) * (b - t) * ((t - a) * (b - t)) / 4 := by
+      funext t; ring
+    rw [hf]
+    exact ((hq.mul hq).div_const 4).congr_deriv (by ring)
+  refine hp.congr_of_eventuallyEq ?_
+  filter_upwards [Ioo_mem_nhds hs.1 hs.2] with t ht
+  exact hcGap_eq_of_gap hZc hZs ha hb hab ht
+
+/-- Near a point `z` of `Z`, `|hcGap Z t| ≤ (t − z)²/4` (gaps have width at most `1`). -/
+theorem abs_hcGap_le_sq {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {z : ℝ} (hz : z ∈ Z) (t : ℝ) : |hcGap Z t| ≤ (t - z) ^ 2 / 4 := by
+  by_cases ht : t ∈ Icc (-1 / 2 : ℝ) (1 / 2) ∧ t ∉ Z
+  · obtain ⟨a, b, ha, hb, hab, hta⟩ := hcGap_exists_gap hZc hl hr ht.1 ht.2
+    rw [hcGap_eq_of_gap hZc hZs ha hb hab hta]
+    have hb1 := (hZs hb).2
+    have ha1 := (hZs ha).1
+    rw [abs_of_nonneg (by positivity)]
+    have hzab := hab z hz
+    rw [mem_Ioo, not_and_or, not_lt, not_lt] at hzab
+    rcases hzab with h | h
+    · have e1 : (t - a) ^ 2 ≤ (t - z) ^ 2 := by nlinarith [hta.1]
+      have e2 : (b - t) ^ 2 ≤ 1 := by nlinarith [hta.1, hta.2]
+      have := mul_le_mul e1 e2 (sq_nonneg _) (sq_nonneg _)
+      linarith
+    · have e1 : (b - t) ^ 2 ≤ (t - z) ^ 2 := by nlinarith [hta.2]
+      have e2 : (t - a) ^ 2 ≤ 1 := by nlinarith [hta.1, hta.2]
+      have := mul_le_mul e2 e1 (sq_nonneg _) zero_le_one
+      linarith
+  · rw [hcGap, if_neg ht, abs_zero]; positivity
+
+/-- At a point of `Z`, `hcGap Z` has derivative `0`. -/
+theorem hasDerivAt_hcGap_of_mem {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2))
+    (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {z : ℝ} (hz : z ∈ Z) : HasDerivAt (hcGap Z) 0 z := by
+  rw [hasDerivAt_iff_isLittleO_nhds_zero]
+  have h0 : hcGap Z z = 0 := by rw [hcGap, if_neg (fun h => h.2 hz)]
+  refine Asymptotics.IsBigO.trans_isLittleO (g := fun h : ℝ => h ^ 2) ?_ (Asymptotics.isLittleO_pow_id one_lt_two)
+  refine Asymptotics.IsBigO.of_bound (1 / 4) (Eventually.of_forall fun h => ?_)
+  rw [h0, smul_zero, sub_zero, sub_zero, Real.norm_eq_abs, Real.norm_eq_abs, abs_of_nonneg (sq_nonneg h)]
+  have := abs_hcGap_le_sq hZc hZs hl hr hz (z + h)
+  rw [add_sub_cancel_left] at this
+  linarith
 
 /-- `hcGap Z` is differentiable on `ℝ`, with `|g′| ≤ dist(·, Z)/2` on `[−1/2, 1/2]` (`g′ = 0` on `Z` because `g ≤ dist²/4`). -/
 theorem differentiable_hcGap {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) :
     Differentiable ℝ (hcGap Z) ∧ ∀ s ∈ Icc (-1 / 2 : ℝ) (1 / 2), |deriv (hcGap Z) s| ≤ infDist s Z / 2 := by
-  sorry
+  have hne : Z.Nonempty := ⟨_, hl⟩
+  refine ⟨fun s => ?_, fun s hs => ?_⟩
+  · by_cases hsI : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)
+    · by_cases hsZ : s ∈ Z
+      · exact (hasDerivAt_hcGap_of_mem hZc hZs hl hr hsZ).differentiableAt
+      · obtain ⟨a, b, ha, hb, hab, hsab⟩ := hcGap_exists_gap hZc hl hr hsI hsZ
+        exact (hasDerivAt_hcGap_of_gap hZc hZs ha hb hab hsab).differentiableAt
+    · have hU : (Icc (-1 / 2 : ℝ) (1 / 2))ᶜ ∈ 𝓝 s := isClosed_Icc.isOpen_compl.mem_nhds hsI
+      refine ((hasDerivAt_const s (0 : ℝ)).congr_of_eventuallyEq ?_).differentiableAt
+      filter_upwards [hU] with t ht
+      rw [hcGap, if_neg fun h => ht h.1]
+  · by_cases hsZ : s ∈ Z
+    · rw [(hasDerivAt_hcGap_of_mem hZc hZs hl hr hsZ).deriv, abs_zero]
+      exact div_nonneg infDist_nonneg two_pos.le
+    · obtain ⟨a, b, ha, hb, hab, hsab⟩ := hcGap_exists_gap hZc hl hr hs hsZ
+      rw [(hasDerivAt_hcGap_of_gap hZc hZs ha hb hab hsab).deriv]
+      have ha1 := (hZs ha).1
+      have hb1 := (hZs hb).2
+      have hx : 0 < s - a := by linarith [hsab.1]
+      have hy : 0 < b - s := by linarith [hsab.2]
+      have hdist : min (s - a) (b - s) ≤ infDist s Z := by
+        refine (le_infDist hne).2 fun z hz => ?_
+        have hzab := hab z hz
+        rw [mem_Ioo, not_and_or, not_lt, not_lt] at hzab
+        rw [Real.dist_eq]
+        rcases hzab with h | h
+        · exact (min_le_left _ _).trans (by rw [abs_of_nonneg (by linarith)]; linarith)
+        · exact (min_le_right _ _).trans (by rw [abs_of_nonpos (by linarith)]; linarith)
+      refine le_trans ?_ (div_le_div_of_nonneg_right hdist two_pos.le)
+      rw [abs_div, abs_two, abs_mul, abs_mul, abs_of_pos hx, abs_of_pos hy]
+      have hc : |a + b - 2 * s| ≤ 1 := abs_le.2 ⟨by linarith, by linarith⟩
+      rcases le_total (s - a) (b - s) with h | h
+      · rw [min_eq_left h]
+        have : (b - s) * |a + b - 2 * s| ≤ 1 := by
+          have := mul_le_mul (show b - s ≤ 1 by linarith) hc (abs_nonneg _) zero_le_one
+          linarith
+        have := mul_le_mul_of_nonneg_left this hx.le
+        rw [div_le_div_iff_of_pos_right two_pos]
+        nlinarith
+      · rw [min_eq_right h]
+        have : (s - a) * |a + b - 2 * s| ≤ 1 := by
+          have := mul_le_mul (show s - a ≤ 1 by linarith) hc (abs_nonneg _) zero_le_one
+          linarith
+        have := mul_le_mul_of_nonneg_left this hy.le
+        rw [div_le_div_iff_of_pos_right two_pos]
+        nlinarith
 
 /-- (G1)'s pointwise bounds on `[−1/2, 1/2]`: `0 ≤ g ≤ dist²/4`, `g ≤ 1/64`, `|g′| ≤ 1/8`, `g > 0` off `Z` (gaps have width
 `≤ 1`). -/
@@ -1800,14 +1919,150 @@ theorem hcGap_bounds {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) 
     (hr : (1 / 2 : ℝ) ∈ Z) :
     ∀ s ∈ Icc (-1 / 2 : ℝ) (1 / 2), 0 ≤ hcGap Z s ∧ hcGap Z s ≤ infDist s Z ^ 2 / 4 ∧ hcGap Z s ≤ 1 / 64 ∧
       |deriv (hcGap Z) s| ≤ 1 / 8 ∧ (s ∉ Z → 0 < hcGap Z s) := by
-  sorry
+  intro s hs
+  have hne : Z.Nonempty := ⟨_, hl⟩
+  by_cases hsZ : s ∈ Z
+  · have h0 : hcGap Z s = 0 := by rw [hcGap, if_neg (fun h => h.2 hsZ)]
+    rw [h0, infDist_zero_of_mem hsZ, (hasDerivAt_hcGap_of_mem hZc hZs hl hr hsZ).deriv]
+    exact ⟨le_rfl, by norm_num, by norm_num, by norm_num, fun h => absurd hsZ h⟩
+  · obtain ⟨a, b, ha, hb, hab, hsab⟩ := hcGap_exists_gap hZc hl hr hs hsZ
+    rw [hcGap_eq_of_gap hZc hZs ha hb hab hsab, (hasDerivAt_hcGap_of_gap hZc hZs ha hb hab hsab).deriv]
+    have ha1 := (hZs ha).1
+    have hb1 := (hZs hb).2
+    have hx : 0 < s - a := by linarith [hsab.1]
+    have hy : 0 < b - s := by linarith [hsab.2]
+    have hdist : min (s - a) (b - s) ≤ infDist s Z := by
+      refine (le_infDist hne).2 fun z hz => ?_
+      have hzab := hab z hz
+      rw [mem_Ioo, not_and_or, not_lt, not_lt] at hzab
+      rw [Real.dist_eq]
+      rcases hzab with h | h
+      · exact (min_le_left _ _).trans (by rw [abs_of_nonneg (by linarith)]; linarith)
+      · exact (min_le_right _ _).trans (by rw [abs_of_nonpos (by linarith)]; linarith)
+    have hm0 : 0 ≤ (s - a) * (b - s) := by positivity
+    have h4 : (s - a) * (b - s) ≤ 1 / 4 := by nlinarith [sq_nonneg ((s - a) - (b - s))]
+    refine ⟨by positivity, ?_, ?_, ?_, fun _ => by positivity⟩
+    · have hm : (s - a) * (b - s) ≤ min (s - a) (b - s) := by
+        rcases le_total (s - a) (b - s) with h | h
+        · rw [min_eq_left h]; nlinarith [mul_le_mul_of_nonneg_left (show b - s ≤ 1 by linarith) hx.le]
+        · rw [min_eq_right h]; nlinarith [mul_le_mul_of_nonneg_left (show s - a ≤ 1 by linarith) hy.le]
+      have := pow_le_pow_left₀ hm0 (hm.trans hdist) 2
+      have e : (s - a) ^ 2 * (b - s) ^ 2 = ((s - a) * (b - s)) ^ 2 := by ring
+      rw [e]; linarith
+    · have := mul_le_mul h4 h4 hm0 (by norm_num)
+      have e : (s - a) ^ 2 * (b - s) ^ 2 = ((s - a) * (b - s)) * ((s - a) * (b - s)) := by ring
+      rw [e]; linarith
+    · rw [abs_div, abs_two, abs_mul, abs_mul, abs_of_pos hx, abs_of_pos hy]
+      have hc : |a + b - 2 * s| ≤ 1 := abs_le.2 ⟨by linarith, by linarith⟩
+      have := mul_le_mul h4 hc (abs_nonneg _) (by norm_num)
+      linarith
+
+/-- `|g′(t)| ≤ |t − z|/2` for `t ∈ [−1/2, 1/2]` and `z ∈ Z`. -/
+theorem abs_deriv_hcGap_le {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {t z : ℝ} (ht : t ∈ Icc (-1 / 2 : ℝ) (1 / 2)) (hz : z ∈ Z) :
+    |deriv (hcGap Z) t| ≤ |t - z| / 2 := by
+  by_cases htZ : t ∈ Z
+  · rw [(hasDerivAt_hcGap_of_mem hZc hZs hl hr htZ).deriv, abs_zero]; positivity
+  · obtain ⟨a, b, ha, hb, hab, htab⟩ := hcGap_exists_gap hZc hl hr ht htZ
+    rw [(hasDerivAt_hcGap_of_gap hZc hZs ha hb hab htab).deriv]
+    have ha1 := (hZs ha).1
+    have hb1 := (hZs hb).2
+    have hx : 0 < t - a := by linarith [htab.1]
+    have hy : 0 < b - t := by linarith [htab.2]
+    have hc : |a + b - 2 * t| ≤ 1 := abs_le.2 ⟨by linarith, by linarith⟩
+    have hzab := hab z hz
+    rw [mem_Ioo, not_and_or, not_lt, not_lt] at hzab
+    rw [abs_div, abs_two, abs_mul, abs_mul, abs_of_pos hx, abs_of_pos hy, div_le_div_iff_of_pos_right two_pos]
+    rcases hzab with h | h
+    · have h1 : (b - t) * |a + b - 2 * t| ≤ 1 := by
+        have := mul_le_mul (show b - t ≤ 1 by linarith) hc (abs_nonneg _) zero_le_one; linarith
+      have h2 : t - a ≤ |t - z| := by rw [abs_of_nonneg (by linarith)]; linarith
+      nlinarith [mul_le_mul_of_nonneg_left h1 hx.le]
+    · have h1 : (t - a) * |a + b - 2 * t| ≤ 1 := by
+        have := mul_le_mul (show t - a ≤ 1 by linarith) hc (abs_nonneg _) zero_le_one; linarith
+      have h2 : b - t ≤ |t - z| := by rw [abs_of_nonpos (by linarith)]; linarith
+      nlinarith [mul_le_mul_of_nonneg_left h1 hy.le]
+
+/-- `g′` is `1/2`-Lipschitz on `[−1/2, 1/2]`: on one gap `|g″| ≤ 1/2`, across a point of `Z` the two bounds add. -/
+theorem abs_deriv_hcGap_sub_le {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2))
+    (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {s σ : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2))
+    (hσ : σ ∈ Icc (-1 / 2 : ℝ) (1 / 2)) : |deriv (hcGap Z) s - deriv (hcGap Z) σ| ≤ |s - σ| / 2 := by
+  wlog hle : σ ≤ s generalizing s σ
+  · have := this hσ hs (le_of_not_ge hle); rwa [abs_sub_comm, abs_sub_comm σ] at this
+  by_cases hz : ∃ z ∈ Z, z ∈ Icc σ s
+  · obtain ⟨z, hz, hzI⟩ := hz
+    have h1 := abs_deriv_hcGap_le hZc hZs hl hr hs hz
+    have h2 := abs_deriv_hcGap_le hZc hZs hl hr hσ hz
+    rw [abs_of_nonneg (sub_nonneg.2 hzI.2)] at h1
+    rw [abs_of_nonpos (sub_nonpos.2 hzI.1)] at h2
+    rw [abs_of_nonneg (sub_nonneg.2 hle)]
+    calc _ ≤ |deriv (hcGap Z) s| + |deriv (hcGap Z) σ| := abs_sub _ _
+      _ ≤ _ := by linarith
+  · push Not at hz
+    have hsZ : s ∉ Z := fun h => hz s h ⟨hle, le_rfl⟩
+    obtain ⟨a, b, ha, hb, hab, hsab⟩ := hcGap_exists_gap hZc hl hr hs hsZ
+    have hσab : σ ∈ Ioo a b := ⟨lt_of_not_ge fun h => hz a ha ⟨h, hsab.1.le⟩, lt_of_le_of_lt hle hsab.2⟩
+    rw [(hasDerivAt_hcGap_of_gap hZc hZs ha hb hab hsab).deriv,
+      (hasDerivAt_hcGap_of_gap hZc hZs ha hb hab hσab).deriv]
+    have ha1 := (hZs ha).1
+    have hb1 := (hZs hb).2
+    have hpoly : ∀ u v w : ℝ, 0 ≤ u → u ≤ w → 0 ≤ v → v ≤ w → w ≤ 1 →
+        |w ^ 2 - 3 * (u + v) * w + 2 * (u ^ 2 + u * v + v ^ 2)| ≤ 1 := by
+      intro u v w hu huw hv hvw hw1
+      rw [abs_le]; constructor
+      · nlinarith [sq_nonneg (w - u - v), sq_nonneg (u - v), mul_nonneg (le_trans hu huw) (sub_nonneg.2 hw1)]
+      · nlinarith [mul_nonneg hu (sub_nonneg.2 huw), mul_nonneg hv (sub_nonneg.2 hvw), mul_nonneg hu (sub_nonneg.2 hvw),
+          mul_nonneg hv (sub_nonneg.2 huw), mul_nonneg (le_trans hu huw) (sub_nonneg.2 hw1)]
+    have key : (s - a) * (b - s) * (a + b - 2 * s) / 2 - (σ - a) * (b - σ) * (a + b - 2 * σ) / 2 =
+        (s - σ) * ((b - a) ^ 2 - 3 * ((s - a) + (σ - a)) * (b - a) +
+          2 * ((s - a) ^ 2 + (s - a) * (σ - a) + (σ - a) ^ 2)) / 2 := by ring
+    rw [key, abs_div, abs_two, abs_mul, div_le_div_iff_of_pos_right two_pos]
+    have hf := hpoly (s - a) (σ - a) (b - a) (by linarith [hsab.1]) (by linarith [hsab.2]) (by linarith [hσab.1])
+      (by linarith [hσab.2]) (by linarith)
+    calc |s - σ| * _ ≤ |s - σ| * 1 := mul_le_mul_of_nonneg_left hf (abs_nonneg _)
+      _ = |s - σ| := mul_one _
 
 /-- The lower-parabola bound: `g′` is `1/2`-Lipschitz on `[−1/2, 1/2]` (`|g″| ≤ 1/2` on gaps, `g′ = 0` on `Z`), then Taylor. -/
 theorem hcGap_lowerParabola {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) :
     ∀ s ∈ Icc (-1 / 2 : ℝ) (1 / 2), ∀ σ ∈ Icc (-1 / 2 : ℝ) (1 / 2),
       hcGap Z σ + deriv (hcGap Z) σ * (s - σ) - (s - σ) ^ 2 / 4 ≤ hcGap Z s := by
-  sorry
+  intro s hs σ hσ
+  have hd := (differentiable_hcGap hZc hZs hl hr).1
+  set g := hcGap Z with hg
+  set h : ℝ → ℝ := fun t => g t - g σ - deriv g σ * (t - σ) + (t - σ) * (t - σ) / 4 with hh
+  have hhd : ∀ t, HasDerivAt h (deriv g t - deriv g σ + (t - σ) / 2) t := by
+    intro t
+    have h1 := ((hd t).hasDerivAt.sub_const (g σ)).sub (((hasDerivAt_id' t).sub_const σ).const_mul (deriv g σ))
+    have h2 := (((hasDerivAt_id' t).sub_const σ).mul ((hasDerivAt_id' t).sub_const σ)).div_const 4
+    exact (h1.add h2).congr_deriv (by ring)
+  have hcont : Continuous h := continuous_iff_continuousAt.2 fun t => (hhd t).continuousAt
+  have hdiff : Differentiable ℝ h := fun t => (hhd t).differentiableAt
+  have hσ0 : h σ = 0 := by simp only [hh]; ring
+  have hlip := fun t (ht : t ∈ Icc (-1 / 2 : ℝ) (1 / 2)) => abs_deriv_hcGap_sub_le hZc hZs hl hr ht hσ
+  have hfin : 0 ≤ h s := by
+    rcases le_total σ s with hle | hle
+    · have hmono : MonotoneOn h (Icc σ (1 / 2)) := by
+        refine monotoneOn_of_deriv_nonneg (convex_Icc _ _) hcont.continuousOn hdiff.differentiableOn fun x hx => ?_
+        rw [interior_Icc] at hx
+        rw [(hhd x).deriv]
+        have := hlip x ⟨by linarith [hσ.1, hx.1], hx.2.le⟩
+        rw [abs_of_nonneg (by linarith [hx.1] : (0 : ℝ) ≤ x - σ)] at this
+        linarith [(abs_le.1 this).1]
+      have := hmono ⟨le_rfl, hσ.2⟩ ⟨hle, hs.2⟩ hle
+      linarith
+    · have hanti : AntitoneOn h (Icc (-1 / 2) σ) := by
+        refine antitoneOn_of_deriv_nonpos (convex_Icc _ _) hcont.continuousOn hdiff.differentiableOn fun x hx => ?_
+        rw [interior_Icc] at hx
+        rw [(hhd x).deriv]
+        have := hlip x ⟨hx.1.le, by linarith [hσ.2, hx.2]⟩
+        rw [abs_of_nonpos (by linarith [hx.2] : x - σ ≤ 0)] at this
+        linarith [(abs_le.1 this).2]
+      have := hanti ⟨hs.1, hle⟩ ⟨hσ.1, le_rfl⟩ hle
+      linarith
+  have e : (s - σ) ^ 2 = (s - σ) * (s - σ) := sq _
+  simp only [hh] at hfin
+  rw [e]; linarith
 
 /-- `(G1)` holds for § 1.6's formula on every closed `Z ⊆ [−1/2, 1/2]` holding `±1/2` (the gaps have width at most `1`). -/
 theorem g1Bounds_hcGap {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hl : (-1 / 2 : ℝ) ∈ Z)

@@ -3086,6 +3086,14 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.exists_L2_weak_subseq
 #print axioms HadwigerNelson.Plane.ae_arcLength_null
 
+-- FS131-I2k: children added by the eleventh wave-2 implementer
+#print axioms HadwigerNelson.Plane.hcGap_exists_gap
+#print axioms HadwigerNelson.Plane.hasDerivAt_hcGap_of_gap
+#print axioms HadwigerNelson.Plane.abs_hcGap_le_sq
+#print axioms HadwigerNelson.Plane.hasDerivAt_hcGap_of_mem
+#print axioms HadwigerNelson.Plane.abs_deriv_hcGap_le
+#print axioms HadwigerNelson.Plane.abs_deriv_hcGap_sub_le
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
