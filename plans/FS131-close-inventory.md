@@ -1596,3 +1596,17 @@ reason by the close.*
 223. **Engine 2 written once** (item 218 (g)): FS131-I4i wrote `ringArcsWithin_of_Γ_subset` in `Plane/ValidMap/Basic` on `fs131-w4` (`3f7ea033`, Basic.lean only,
      112 lines; checked by `git show --stat`); Keryx relayed to FS131-IC2 to bring that exact hunk onto `fs131-w4c` if needed before the merge, so the copies are
      identical.
+224. **FS131-IC2 handed back at stage 6, harness ≈ 351k** (report `data/fs131/reports/FS131-IC2.md` on `fs131-w4c`; branch at `c7249cc7`, checked): `Contact` 6 → 5.
+     **Over `stuck_structure`'s statement** (open): FS110-N4-STUCK's N4-PROP `ArcMap.stuck_chain` (`IsStuck (v + j n)` for every `j ∈ ℤ`, read against plan
+     § 3.2) and three step children (`stuck_neighbour`, `stuck_flip`, `stuck_step`). **[kernel] on the branch, standard three**: 10 children
+     (`e_eq_of_mem_coneAt_hornSet` — a horn approaches its base point exactly along its axis; `exists_hasSectors`; `shaveAvailable_of_adjacent_horns`; …). Keryx's
+     receipts: build log `build/gate/build/20261004T200630Z-1991775.log` (w4c) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `Contact`
+     5 `sorry` lines by count; `data/fs131/ic/axioms-ic2-stage6.txt` prints `stuck_chain` with `sorryAx`, `exists_hasSectors` and
+     `shaveAvailable_of_adjacent_horns` on the standard three. **Corrections owed** (route notes, no statement change, to wave 4's plan § 13.5 and § 4 item 14):
+     "no RAY ⟹ one horn per ray" misses two `c`-horns on one ray sharing an arc with `c` on both sides — SHAVE with upper flank `c` covers it (`RayAvailable`
+     needs `κ₂ < κ₃` strictly); `woodallCone_strict` gives horn curvatures per radius while `IsHorn` needs them fixed — the sector chart supplies them. Next
+     children named: `IsHorn.exists_flanks`, `stuck_cone`. Engine 2 not brought over (no move worked yet). Left: `flank_shadows`, `exists_shave`,
+     `exists_rayMerge`, `exists_merge`, `stuck_structure` — about a session each (IC1's estimate stands). **Next**: FS131-IC3 (Opus), same slot.
+225. **Brief FS131-IC3, wave 4's third `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC3-contact.md`, derived by script from IC2's, gated PASS): `Contact`'s
+     5 on `fs131-w4c` (`stuck_cone` and `IsHorn.exists_flanks` first, per IC2), engine 2 brought over verbatim when needed. Launched in IC2's slot: 1 (I2m) + 1
+     (I4i) + 1 (E4) + 1 (IC3) = 4.
