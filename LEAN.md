@@ -131,6 +131,9 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 
 ## Searching — Lean
 
+- Never name a namespace `HadwigerNelson.X` after a Mathlib root namespace a module opens (`Topology`, `Set`, `Real`, `Complex`, `Filter`, `Metric`, …): inside `namespace HadwigerNelson…`, `open X` then opens `HadwigerNelson.X` instead of Mathlib's `X`, silently (measured at v4.32.0: `data/fs131/leb/NamespaceShadow.lean`). None exists today.
+- At the pin `push_neg` is deprecated; write `push Not`.
+
 - **A failed `exact?` is not an absence.** It proves the shape you asked for was not found; vary the statement (`= true` versus
   `decide (…)`, an iff versus an implication) first. **And Mathlib is not the whole library:** `grep -rn "<name-fragment>" $(lean
   --print-prefix)/src/lean/` searches core. Grep the source before writing a proof, and before writing that something is missing. Grep

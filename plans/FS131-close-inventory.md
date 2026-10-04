@@ -963,3 +963,23 @@ reason by the close.*
      first build was not "as given". Over its line (537k): not a slip. **Brief FS131-IWb** (Opus; `data/fs131/briefs/FS131-IWb-woodall.md`, gated PASS): the
      child lemma, then the four leaves. Launched in the whole slot I2g and IW freed, ahead of T3 and waves 2 and 4 by bearing (route M's link, nearest
      completion): 1 (LEB) + 1 (I3h) + 1 (IWb) = 3.
+151. **FS131-LEB done and LANDED on `main`** (report `data/fs131/reports/FS131-LEB.md`; record `plans/FS131-LEB-kernel-plan.md`): **Lebesgue's covering theorem for
+     the square held in the kernel** — `HadwigerNelson.LebesgueCovering.lebesgue_covering_square`, wave 4's statement verbatim, on `[propext, Classical.choice,
+     Quot.sound]` — with `lebesgue_covering_rect` (any rectangle, any finite index type), `lebesgue_covering_rect'` (a set touching the left side may run bottom
+     to top; strictly wider — wave 4's hypotheses force four sets), `exists_mem_inter_three` (the cubical KKM form), Sperner's lemma on the triangulated grid
+     (`HadwigerNelson.SpernerGrid.exists_rainbowCell`, a mod-2 door count) and a model of the hypotheses (`quadrant_hypotheses`); 549 lines, two modules
+     `Topology/SpernerGrid`, `Topology/LebesgueCovering`. The planner proved it outright. **Landing (Keryx's ruling, its brief's Done means 6)**: the gate green on
+     `18735b71`'s Lean content (build 440/440 with no warning, axioms OK 1292 clean, vacuity OK, self-test OK, architecture PASS, `#lint` 0 errors, the wave-4
+     bridge's planted fault failing to elaborate); `main` (`f20f7d46`, no Lean change since `bbee15f0`) merged in (`44009804`), the gate re-run on the merged
+     commit — build "all 1728 modules already up to date … 0 module(s) with warnings", "axioms: OK — 1292 clean, 11 axiom-free, 5 declared purchase(s)",
+     "vacuity: OK", "vacuity self-test: OK", architecture PASS, no `sorry` (`data/fs131/leb/gate.status` all 0) — logs committed (`33471a75`); `main`
+     fast-forwarded to `33471a75` and pushed. Keryx's receipts: every log above read; the statement read at `Topology/LebesgueCovering.lean` line 300 against
+     wave 4's `Plane/SVMap` statement (identical); `gate_report.py` — CLAUDE.md § Trust ledger "match (clean and purchases compared)", the baseline header and
+     CLAUDE.md § The gate "match (9 of 9 compared)" after filing. **Filed** (this commit): CLAUDE.md § Trust ledger (1292 clean, 5 declared purchases, 11
+     axiom-free, 1,308 records) and § The gate (`declarations=7673`; the site counts unchanged); `scripts/vacuity-baseline.txt` header; `BIBLIOGRAPHY.md` rows
+     `[HurewiczWallman1948]` and `[VanderWoude2023]` (both fetched into `~/source/library/pdf/`, title pages and page counts checked: 184 and 30 pp.) — item 66's
+     prior-art debt closed; `LEAN.md` § Searching — Lean, two lines (the `HadwigerNelson.X` namespace-shadow trap; `push_neg` deprecated at the pin). **For
+     wave 4's next implementer**: discharge `lebesgue_covering_square` with `:= LebesgueCovering.lebesgue_covering_square c hs F hF hcov hLR hBT`, import
+     `Proofs.HadwigerNelson.Topology.LebesgueCovering` in `Plane/SVMap` (and its `ARCHITECTURE.md` Imports cell), drop the "disposition owed" sentence, and
+     cite the 1948 printing (Thm IV 2, p. 42); ruling 66's axiom fallback retired. Also owed: `ARCHITECTURE.md` § 3's prose counts were already stale on `main`
+     (true: 1,725 `.lean` files and 165 imported modules at `bbee15f0`) — for the next filing. Stub, only if a consumer appears: the `n`-cube form.

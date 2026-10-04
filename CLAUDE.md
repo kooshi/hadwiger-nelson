@@ -446,7 +446,7 @@ One reduction plus two certified computations, and why nothing in `tools/` is tr
 ## Trust ledger
 
 Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/axioms.sh`); the
-current audit reads 1285 clean and 5 declared purchases (and 11 axiom-free; 1,301 records at FS-131 wave 1's landing, 2026-10-04), each listed in `ARCHITECTURE.md` § Trust. Rung B
+current audit reads 1292 clean and 5 declared purchases (and 11 axiom-free; 1,308 records at Lebesgue's covering theorem's landing, FS131-LEB, 2026-10-04), each listed in `ARCHITECTURE.md` § Trust. Rung B
 holds none.
 
 What the audit accepts and what it buys — the ledger's entries, `native_decide`'s per-declaration axioms, an imported theorem's four
@@ -500,7 +500,7 @@ The Lean gate — the build, zero `sorry`, the axiom audit, linters, spec exampl
 `LEAN.md` § The gate. Its recorded state stays here, where `scripts/gate_report.py`
 reads it. The vacuity scan's **counts** — a silent change in them is this gate's own failure mode (declarations are the library's;
 the audit's own are not counted):
-`declarations=7624 refutations-skipped=45 sites=357`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=335 unknown=2`.
+`declarations=7673 refutations-skipped=45 sites=357`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=335 unknown=2`.
 The baseline's two entries, `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
 
 What follows binds every mind that builds an instrument, not only the kernel lane.
