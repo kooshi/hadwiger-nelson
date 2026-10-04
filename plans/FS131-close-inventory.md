@@ -949,3 +949,17 @@ reason by the close.*
      "build: "; the build finished OK at 07:36 (`build/gate/build/20261004T122644Z-3444226.log`) but printed that word on the second-to-last line, so the
      loop would never end, and on ending it would have resumed I2g past its hand-back. Killed by PID; it forfeits nothing (a `sleep 10` poll, no work). Lesson
      for briefs: a wait loop matches the build's result line anywhere in the log's tail, not only its last line.
+150. **FS131-IW handed back at stage 3, harness ≈ 537k** (report on its branch; `fs131-ww` at `a731f352`, checked): `Plane/Woodall/Collar` (15) and
+     `Plane/Woodall/NoFourFive` (20) **sorry-free**; in `Steps`, `SectorsAt.coloursAt_eq`, `exists_three_le_sectors`, **`false_of_four_le_sectors` (E1-NO45)**,
+     `aeMap6_merged`, `aeMap6_normal`, `aeMap6`, `aeMap6_of_condition5`, `woodall_thm6` proved; 4 left (`exists_sectorsAt`, `exists_woodallMerged`, `step5_lt`,
+     `step6`). **E1-NO45's argument closed in Lean as planned, from its citations** (`step6`, `exists_sectorsAt`, and three unlanded statements: `lemmaL`,
+     `ArcMap.dense_interiorPts`, `ArcMap.Valid.unitPairsNull_region`) — E1-BAD's count, E1-COVER on colour classes, the refined second-order lemma, the avoiding
+     arc, the three-colour point: **the check item 111 asked for, done for the argument; its citations are the open part.** Townsend's π/3 lemma and Woodall's
+     strict step-4 lemma (with the 2π/3 sharpness example) and engines A–D proved, over `lemmaL`. No statement defect. Keryx's receipt: build log
+     `build/gate/build/20261004T125346Z-3674506.log` (ww) "Build completed successfully (5346 jobs)"; `sorry` lines Collar 0, NoFourFive 0, Steps 4;
+     `tools/fs131_w2_decls.py --check` "115 theorems, 115 records; 0 missing, 0 stale"; the iteration axiom summary lists 90 of 115 records clean, E1-NO45 among
+     those carrying `sorryAx` through its citations. **Plan gap**: `step5_lt` and `step6` need a preconnected piece of a colour class approaching the point along
+     a cone direction (a horn included) — a child lemma, not a statement change. Order fix (IW's): `aeMap6_merged` moved after `aeMap6_normal`. Slip (IW's): its
+     first build was not "as given". Over its line (537k): not a slip. **Brief FS131-IWb** (Opus; `data/fs131/briefs/FS131-IWb-woodall.md`, gated PASS): the
+     child lemma, then the four leaves. Launched in the whole slot I2g and IW freed, ahead of T3 and waves 2 and 4 by bearing (route M's link, nearest
+     completion): 1 (LEB) + 1 (I3h) + 1 (IWb) = 3.
