@@ -41,6 +41,16 @@ declarations, read against `plans/FS131-w3-kernel-plan.md` § 5.2 (every stateme
 - **FS116-Y2-SIXFRAG**, partial (FS131-I3b) — `sixArcs_nondegenerate`, `sixArcs_locallyFinite`, the three spec examples, `sixFrag_coloursAt_zero`,
   `sixFrag_isQArc`, `sixFrag_isRingArc`. Their axiom lists still read `sorryAx` for the declarations that mention `sixFrag` (its `locallyConstant`
   field is the open `sixCol_locallyConstant`); the proof terms themselves use no other sorry.
+- **FS116-S1-EXIT** (FS131-I3c; axioms `[propext, Classical.choice, Quot.sound]` read from `build/gate/axioms/20261004T092614Z-2442823.log`, build
+  `build/gate/build/20261004T091636Z-2402026.log`) — `exit_lens`, `exit_lens_row` (both `HadwigerNelson.Plane`), children `lens_stepA`, `lens_stepB`, `lens_core`,
+  `deriv_nonneg_of_leftmax`, `re_conj_mul_nonneg_of_exit`, `im_leftNormal_mul_conj`. Same statements as § 5.2; hypotheses `hne`, `h3'`, `h5'` (and the row's `h0`) are idle
+  (the lens itself pins the exit's side), read once so the unused-variable linter stays silent.
+- **Germ dichotomy** (FS131-I3c; same log) — `ArcMap.germ_dichotomy` with children `exists_ball_finite`, `finite_nonring_inter_sphere`, `exists_ball_onRing`,
+  `exists_sides_nbhd`, `sides_const`, `polar_nbhd`, `exists_germ_subset_ringArc` and the angle/germ lemmas (`e_eq_e_iff`, `e_ne_one`, `dist_lt_of_mem_germ`,
+  `ringPt_notMem_germ`, `isPreconnected_germ`). Same statement.
+- **FS116-Y4-FLANK**, three of four (FS131-I3c; same log) — `ArcMap.flank_initialPieces`, `ArcMap.flank_cone` (children `initialPiece_cases`, `sq_norm_pieceB`,
+  `sq_norm_pieceB'`, `cos_nonneg_of_mem_coneAt`, `isClosed_coneAt`, `mem_angleIcc_of_cos_nonneg_single`) and `ArcMap.flank` (its audit line reads the standard three);
+  `flank_edge_exists` is open. Same statements.
 
 **Reduced to a sorry'd parent, so not yet sorry-free**: `ringQPrimeS` (on `germS_four`), `flank` (on `flank_initialPieces`),
 `four_of_bothKind_simple` (on `four_of_bothKind` and `Simple.coneAt_eq_angleIcc`). These three are finished arguments; they close when
@@ -144,12 +154,49 @@ preconnected `I` is constant on `T ∩ I`: the removable-discontinuity trick, no
   `const_of_local`) of about 250 lines plus short instances; `exists_lift` about 100 lines. The remaining 21 are the H leaves of § 6.3 minus
   `sixFrag_isRingArc`; `sixFrag_isRingArc` (M) took about 150 lines (closed set of lens arcs, `Real.cos_eq_cos_iff`).
 
+## Stage 3 — SAVED (FS131-I3c): Lens, germ_dichotomy, FLANK's geometry and cones; the build; 16 leaves left
+
+Branch `fs131-w3`, commits after `3012c049` (I3b's head). **21 `sorry` declarations at the start, 16 now.** Build `build/gate/build/20261004T091636Z-2402026.log`:
+"build: OK", warnings only `declaration uses sorry` (this job's own code adds none); audit `build/gate/axioms/20261004T092614Z-2442823.log` fails only on
+`sorryAx` of the open leaves and their dependents, every proved declaration above reads the standard three. Readback: both quotations of the brief match their sources
+(plan § 7.2 "It may" paragraph and this record's Stage 2 table). Scratch scripts: `data/fs131/i3/iter.sh` (builds a module into the scratch olean tree), `data/fs131/i3/chk.sh`
+(checks a module against it), `tools/fs131_i3_addrecords.py` (adds the missing `#print axioms` records above the `=== PURCHASED ===` banner; it has a `--plant`/`--dry` control).
+**Moved**: `re_e`, `im_e`, `sq_norm_eq`, `e_mul_conj_e`, `conj_e` live in `Plane/Chord` (imported now by `Lens` and `LocalStructure`).
+
+### What is left (16)
+
+| module | leaves | route (from this job's reading) |
+|---|---|---|
+| `LocalStructure` (4) | `finite_tiles_near`, `mem_coloursAt_iff_exists_tileOf`, `coneAt_region_eq_biUnion`, `Simple.coneAt_eq_angleIcc` | engine 3. **Shape found, not built**: for small `r` only arcs through `x` meet `B(x, 2r)`, pairwise meeting only at `x` (finitely many pairs of distinct circles or lines, at most two common points each), distance from `x` strictly monotone along each branch (`2ρ|sin((φ−φ₀)/2)|` on a circle, linear on a segment). Then no tile lies inside `B(x, ρ₀)`: the farthest point `z*` of its closure from `x` lies on one arc, which crosses `sphere(x, |z*−x|)`, so the tile has a side of `ball(z*, ε) ∖ Γ` with points beyond `|z*−x|`. Each tile meeting `B(x, r)` therefore meets `sphere(x, ρ₀)`, and `sphere(x, ρ₀) ∖ Γ` has at most `2·#arcs` arcs, each in one tile. `Simple.coneAt_eq_angleIcc` then goes through the Jordan chart (`h(ball 0 1 ∩ ball z₀ s)` is convex, so one sector) and the cone of a sector. |
+| `SixFragment` (3) | `sixCol_locallyConstant`, `sixFrag_valid`, `sixFrag_nonSiamese` | **first build `sixCol (e(π/3) x) = sixCol x + 1` for `x ≠ 0`** (arg shifts by `π/3 − 2πk`, floor and round by `1 − 6k`, the lens test is rotation-covariant). It (a) reduces validity to colour `0` by rotating both points, (b) handles `arg`'s cut at `π` in local constancy (apply the rotation by `−1`, which moves the cut to the positive axis, where `arg` is continuous). Annulus facts used: a point of the ray `60°j` with `1 < ‖x‖ < 3/2` lies strictly inside the lens (`r² − √3 r < 0`); at `arg = 60°j + 30°` the point is outside both lenses (`r² − r + 1 > 1`). Colour `0` is `S_0`, `Q_4`, `G_2`; `Q_4` minus the unit disc lies in a Reuleaux triangle of width `1`, so its diameter is below `1` strictly on the open set. |
+| `RingGerm` (9) | `germS_inward`, `germS_outward`, `germS_four`, `qfree4`, `fiveRing_finite_off_Q`, `fiveRing_length`, `touchW`, `four_of_bothKind`, `flank_edge_exists` | `germ_dichotomy` is now proved, so `qfree4`, `fiveRing_finite_off_Q`, `fiveRing_length` need one more child and a finiteness lemma (below). The others as in Stage 2. |
+
+### A finding on FIVERING and QFREE4 (for the next implementer, not a statement defect)
+
+`fiveRing_finite_off_Q`'s "finite" cannot be improved to "empty" by the germ dichotomy alone: two boundary points of one class may be at distance exactly `1` (a tile of diameter `1`, a Reuleaux
+triangle). The derivation's step needs an *interior* point of the absent colour `X` at one of the two ring points, or the crossing lemma (`Valid.false_of_crossing`) on a connected set of
+`closure (region X)` holding points nearer and farther than `1` from the other point. For a ring arc with constant sides that set is a segment: **outer side**, `u = p + (1+h)e(φ)` and
+`v = u + i h e(φ)` (distances to `r(φ + 60°)` with squares `1 + h + h²` and `1 + h + h² − √3 h + h²`, so `1 + h + h² > 1` and `< 1` for `0 < h < (√3 − 1)/2`); **inner side**, `u = p + (1−h)e(φ)` and
+`v = u − i h e(φ)`; the segment lies on one side of `ω(p)` and inside the ball where the side colour is constant, and a ball ∖ the other side is a subset of the closure of the side colour's class
+(Γ has empty interior, `dense_interiorPts`). The exceptional set is `Z = {θ | r(θ) ∈ Γ ∧ no IsRingArc p θ₁ θ₂ c c' with θ₁ < θ < θ₂}`: its complement is open (off `Γ`, or an open interval of angles), and
+at each of its points both germs are off `Γ` or inside a ring arc whose open sub-arc is out of `Z`, so `Z` is discrete and closed, hence finite on `[0, 2π]`. For that, expose from `germ_dichotomy`'s proof the
+sub-arc `[θ, θ+δ']` (resp. `[θ−δ', θ]`) it constructs, whose open part consists of angles `θ + sign·u`, `0 < u < δ'` (the proof builds exactly this; only the statement forgets it).
+`fiveRing_length`: `[0, 2π) ⊆ Q ∪ (Q − π/3) ∪ finite`, then `ae_arcLength_shift_pi`'s template for a shift by `π/3`.
+
+### Re-pricing (first hard leaves of this job)
+
+`exit_lens` (priced M–H): about 230 lines in two real-algebra lemmas (the frame of `e b` makes the lens and the `y₃` conditions explicit; `nlinarith only` with named hypotheses, and
+splitting the lemma, were needed to stay under the heartbeat limit) plus a 40-line complex layer; case 2 by complex conjugation, no second proof. `germ_dichotomy` (priced M on `localSectors`, actually
+independent of it): about 450 lines — the polar chart `Φ(ρ, ψ) = p + ρ e(ψ)` replaces every connectedness argument for the two sides. `flank_initialPieces` (M): the two TWOCIRC-style
+cases collapse to `‖σρ(e(σt)−1) − 1‖² = 1 + 2ρ(ρ+σ)(1 − cos t)`; about 140 lines. `flank_cone` (M): about 120 lines. The H leaves left are the three engine-3 leaves, `Simple.coneAt_eq_angleIcc`, and the SixFragment trio.
+
+## Drafts for the front page
+
+None yet: 16 `sorry` remain, so the gate has not run. (The build above is the iteration check, not the gate.)
+
 ## Build
 
 See `data/fs131/i3/build-stage1.log` for the build of the commit this record sits on (started under the slot; the state of that run is in the
 report). The expected result is green with exactly the `declaration uses 'sorry'` warnings of the 41 open leaves and nothing else.
 
-## Drafts for the front page
 
-None yet: the gate has not run (21 `sorry` remain). The counts for `CLAUDE.md` § The gate and § Trust ledger and `scripts/vacuity-baseline.txt`'s
-header are drafted at the milestone's gate.
