@@ -3061,6 +3061,12 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 
 -- FS131-I2h: children added by the eighth wave-2 implementer
 #print axioms HadwigerNelson.Arith.three_dvd_two_pow_sub_one_iff
+#print axioms HadwigerNelson.Plane.measurableSet_squareWin
+#print axioms HadwigerNelson.Plane.volume_squareWin
+#print axioms HadwigerNelson.Plane.volume_ball_div_volume_ball
+#print axioms HadwigerNelson.Plane.tendsto_sq_add_div
+#print axioms HadwigerNelson.Plane.upperDensity_of_tiling
+#print axioms HadwigerNelson.Plane.parallelogram_tiling
 
 #eval IO.println "=== PURCHASED ==="
 

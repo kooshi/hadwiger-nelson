@@ -361,6 +361,205 @@ theorem iUnion_periodize {T : Fin k → Set ℂ} (L : ℝ) : ⋃ j, periodize (T
   · rintro ⟨j, m, n, h⟩; exact ⟨m, n, j, h⟩
   · rintro ⟨m, n, j, h⟩; exact ⟨j, m, n, h⟩
 
+/-- The half-open window is measurable. -/
+theorem measurableSet_squareWin (z : ℂ) (ℓ : ℝ) : MeasurableSet (squareWin z ℓ) := by
+  simp only [squareWin, Set.setOf_and]
+  exact (measurableSet_le measurable_const Complex.measurable_re).inter
+    ((measurableSet_lt Complex.measurable_re measurable_const).inter
+      ((measurableSet_le measurable_const Complex.measurable_im).inter
+        (measurableSet_lt Complex.measurable_im measurable_const)))
+
+/-- The half-open window of side `ℓ ≥ 0` has area `ℓ²`. -/
+theorem volume_squareWin (z : ℂ) {ℓ : ℝ} (hℓ : 0 ≤ ℓ) : volume (squareWin z ℓ) = ENNReal.ofReal (ℓ ^ 2) := by
+  have : squareWin z ℓ = Complex.measurableEquivRealProd ⁻¹' (Ico z.re (z.re + ℓ) ×ˢ Ico z.im (z.im + ℓ)) := by
+    ext w
+    simp [squareWin, Complex.measurableEquivRealProd, and_assoc]
+  rw [this, Complex.volume_preserving_equiv_real_prod.measure_preimage
+      (measurableSet_Ico.prod measurableSet_Ico).nullMeasurableSet,
+    Measure.volume_eq_prod, Measure.prod_prod, Real.volume_Ico, Real.volume_Ico, ← ENNReal.ofReal_mul (by linarith)]
+  congr 1; ring
+
+/-- The ratio of the areas of two discs about the origin. -/
+theorem volume_ball_div_volume_ball {r R : ℝ} (hr : 0 ≤ r) (hR : 0 < R) :
+    volume (ball (0 : ℂ) r) / volume (ball (0 : ℂ) R) = ENNReal.ofReal ((r / R) ^ 2) := by
+  rw [volume_ball_ofReal 0 hr, volume_ball_ofReal 0 hR.le, ← ENNReal.ofReal_div_of_pos (by positivity)]
+  congr 1
+  field_simp
+
+/-- `((R + c)/R)² → 1` as `R → ∞`. -/
+theorem tendsto_sq_add_div (c : ℝ) : Tendsto (fun R : ℝ => ENNReal.ofReal (((R + c) / R) ^ 2)) atTop (𝓝 1) := by
+  rw [← ENNReal.ofReal_one]
+  refine ENNReal.tendsto_ofReal ?_
+  have h0 : Tendsto (fun R : ℝ => c / R) atTop (𝓝 0) := tendsto_const_nhds.div_atTop tendsto_id
+  have h : Tendsto (fun R : ℝ => 1 + c / R) atTop (𝓝 1) := by
+    simpa using (tendsto_const_nhds (x := (1 : ℝ))).add h0
+  have h2 : Tendsto (fun R : ℝ => (1 + c / R) ^ 2) atTop (𝓝 1) := by simpa using h.pow 2
+  refine h2.congr' ?_
+  filter_upwards [eventually_gt_atTop 0] with R hR
+  congr 1
+  field_simp
+
+/-- **Upper density from a tiling** (the squeeze both periodic densities read): if the translates `g + D`, `g ∈ G`, of a
+measurable set `D` of diameter at most `δ` and positive area tile the plane, and `S` is measurable and invariant under each
+`g ∈ G`, then `d̄(S) = |S ∩ D| / |D|` — the windows inside `B(0, R)` cover `B(0, R − δ)`, and a window holds `S` in that ratio. -/
+theorem upperDensity_of_tiling {D S : Set ℂ} {G : Set ℂ} (hG : G.Countable) (hD : MeasurableSet D) (hS : MeasurableSet S)
+    {δ : ℝ} (hδ : ∀ x ∈ D, ∀ y ∈ D, dist x y ≤ δ) (hD0 : volume D ≠ 0)
+    (hdisj : ∀ g ∈ G, ∀ g' ∈ G, ∀ x, x - g ∈ D → x - g' ∈ D → g = g')
+    (hcov : ∀ x, ∃ g ∈ G, x - g ∈ D) (hper : ∀ g ∈ G, ∀ x, x + g ∈ S ↔ x ∈ S) :
+    upperDensity S = volume (S ∩ D) / volume D := by
+  obtain ⟨x₀, hx₀⟩ : D.Nonempty := nonempty_of_measure_ne_zero hD0
+  have hδ0 : 0 ≤ δ := le_trans dist_nonneg (hδ x₀ hx₀ x₀ hx₀)
+  have hDtop : volume D ≠ ⊤ := by
+    refine ne_top_of_le_ne_top (measure_closedBall_lt_top (x := x₀) (r := δ)).ne (measure_mono fun y hy => ?_)
+    rw [mem_closedBall]; exact hδ y hy x₀ hx₀
+  set ρ := volume (S ∩ D) / volume D with hρ
+  have hρtop : ρ ≠ ⊤ := ENNReal.div_ne_top (measure_ne_top_of_subset inter_subset_right hDtop) hD0
+  set Dg : ℂ → Set ℂ := fun g => (fun x => x - g) ⁻¹' D with hDg
+  have hDgm : ∀ g, MeasurableSet (Dg g) := fun g => (measurable_id.sub_const g) hD
+  have hvolDg : ∀ g, volume (Dg g) = volume D := fun g => by
+    simp only [hDg, sub_eq_add_neg]; exact measure_preimage_add_right _ _ _
+  have hvolSDg : ∀ g ∈ G, volume (S ∩ Dg g) = ρ * volume D := by
+    intro g hg
+    have : S ∩ Dg g = (fun x => x - g) ⁻¹' (S ∩ D) := by
+      ext x
+      simp only [hDg, mem_inter_iff, mem_preimage]
+      have e := hper g hg (x - g)
+      rw [sub_add_cancel] at e
+      exact ⟨fun h => ⟨e.1 h.1, h.2⟩, fun h => ⟨e.2 h.1, h.2⟩⟩
+    rw [this, hρ, ENNReal.div_mul_cancel hD0 hDtop]
+    simp only [sub_eq_add_neg]; exact measure_preimage_add_right _ _ _
+  -- the windows inside a ball
+  set U : ℝ → Set ℂ := fun R => ⋃ g ∈ {g | g ∈ G ∧ Dg g ⊆ ball 0 R}, Dg g with hU
+  have hpd : ∀ R, ({g | g ∈ G ∧ Dg g ⊆ ball 0 R} : Set ℂ).PairwiseDisjoint Dg := by
+    intro R g hg g' hg' hne
+    refine Set.disjoint_left.2 fun x hx hx' => hne (hdisj g hg.1 g' hg'.1 x hx hx')
+  have hcount : ∀ R, ({g | g ∈ G ∧ Dg g ⊆ ball 0 R} : Set ℂ).Countable := fun R => hG.mono fun g hg => hg.1
+  have hSU : ∀ R, volume (S ∩ U R) = ρ * volume (U R) := by
+    intro R
+    rw [hU, inter_iUnion₂, measure_biUnion (hcount R) (fun g hg g' hg' hne => (hpd R hg hg' hne).mono inter_subset_right
+      inter_subset_right) (fun g _ => hS.inter (hDgm g)), measure_biUnion (hcount R) (hpd R) (fun g _ => hDgm g),
+      ← ENNReal.tsum_mul_left]
+    refine tsum_congr fun g => ?_
+    rw [hvolSDg g g.2.1, hvolDg]
+  have hUsub : ∀ R, U R ⊆ ball 0 R := fun R => iUnion₂_subset fun g hg => hg.2
+  have hUsup : ∀ R, ball 0 (R - δ) ⊆ U R := by
+    intro R x hx
+    obtain ⟨g, hg, hxg⟩ := hcov x
+    refine mem_iUnion₂.2 ⟨g, ⟨hg, fun y hy => ?_⟩, hxg⟩
+    have h1 : dist y x ≤ δ := by
+      have := hδ _ hy _ hxg
+      rwa [dist_sub_right] at this
+    rw [mem_ball] at hx ⊢
+    linarith [dist_triangle y x 0]
+  -- the squeeze
+  have hlo : ∀ R, ρ * volume (ball (0 : ℂ) (R - δ)) ≤ volume (S ∩ ball 0 R) := fun R =>
+    calc ρ * volume (ball (0 : ℂ) (R - δ)) ≤ ρ * volume (U R) := by gcongr; exact hUsup R
+      _ = volume (S ∩ U R) := (hSU R).symm
+      _ ≤ _ := measure_mono (inter_subset_inter_right _ (hUsub R))
+  have hhi : ∀ R, volume (S ∩ ball 0 R) ≤ ρ * volume (ball (0 : ℂ) (R + δ)) := fun R =>
+    calc volume (S ∩ ball 0 R) ≤ volume (S ∩ U (R + δ)) := by
+          refine measure_mono (inter_subset_inter_right _ ?_)
+          have := hUsup (R + δ); rwa [add_sub_cancel_right] at this
+      _ = ρ * volume (U (R + δ)) := hSU _
+      _ ≤ _ := by gcongr; exact hUsub _
+  have hT : Tendsto (fun R : ℝ => volume (S ∩ ball 0 R) / volume (ball (0 : ℂ) R)) atTop (𝓝 ρ) := by
+    have h1 : Tendsto (fun R : ℝ => ρ * ENNReal.ofReal (((R + -δ) / R) ^ 2)) atTop (𝓝 (ρ * 1)) :=
+      ENNReal.Tendsto.const_mul (tendsto_sq_add_div (-δ)) (Or.inr hρtop)
+    have h2 : Tendsto (fun R : ℝ => ρ * ENNReal.ofReal (((R + δ) / R) ^ 2)) atTop (𝓝 (ρ * 1)) :=
+      ENNReal.Tendsto.const_mul (tendsto_sq_add_div δ) (Or.inr hρtop)
+    rw [mul_one] at h1 h2
+    refine tendsto_of_tendsto_of_tendsto_of_le_of_le' h1 h2 ?_ ?_
+    · filter_upwards [eventually_gt_atTop δ] with R hR
+      have hR0 : 0 < R := lt_of_le_of_lt hδ0 hR
+      rw [← sub_eq_add_neg, ← volume_ball_div_volume_ball (by linarith) hR0, ← mul_div_assoc]
+      exact ENNReal.div_le_div_right (hlo R) _
+    · filter_upwards [eventually_gt_atTop δ] with R hR
+      have hR0 : 0 < R := lt_of_le_of_lt hδ0 hR
+      rw [← volume_ball_div_volume_ball (by linarith) hR0, ← mul_div_assoc]
+      exact ENNReal.div_le_div_right (hhi R) _
+  exact hT.limsup_eq
+
+/-- The half-open parallelogram `{s v₁ + t v₂ : s, t ∈ [0, 1)}`. -/
+def parallelogram (v₁ v₂ : ℂ) : Set ℂ :=
+  {x | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧ x = s * v₁ + t * v₂}
+
+/-- The lattice point `m v₁ + n v₂`. -/
+noncomputable def latticePt (v₁ v₂ : ℂ) (mn : ℤ × ℤ) : ℂ := ((mn.1 : ℝ) : ℂ) * v₁ + ((mn.2 : ℝ) : ℂ) * v₂
+
+/-- **The lattice tiling by half-open parallelograms** (coordinates in the basis `v₁, v₂`): the parallelogram is measurable,
+of positive area and diameter at most `‖v₁‖ + ‖v₂‖`, and its lattice translates cover the plane, each point once. -/
+theorem parallelogram_tiling {v₁ v₂ : ℂ} (hv : LinearIndependent ℝ ![v₁, v₂]) :
+    MeasurableSet (parallelogram v₁ v₂) ∧ volume (parallelogram v₁ v₂) ≠ 0 ∧
+      (∀ x ∈ parallelogram v₁ v₂, ∀ y ∈ parallelogram v₁ v₂, dist x y ≤ ‖v₁‖ + ‖v₂‖) ∧
+      (∀ x, ∃ mn, x - latticePt v₁ v₂ mn ∈ parallelogram v₁ v₂) ∧
+      ∀ mn mn' x, x - latticePt v₁ v₂ mn ∈ parallelogram v₁ v₂ → x - latticePt v₁ v₂ mn' ∈ parallelogram v₁ v₂ →
+        mn = mn' := by
+  set b := basisOfLinearIndependentOfCardEqFinrank hv (by simp [Complex.finrank_real_complex]) with hb
+  have hb0 : b 0 = v₁ := by simp [hb]
+  have hb1 : b 1 = v₂ := by simp [hb]
+  set φ := b.equivFun with hφ
+  have hsymm : ∀ f : Fin 2 → ℝ, φ.symm f = (f 0 : ℂ) * v₁ + (f 1 : ℂ) * v₂ := by
+    intro f
+    rw [hφ, b.equivFun_symm_apply, Fin.sum_univ_two, hb0, hb1, Complex.real_smul, Complex.real_smul]
+  have hφst : ∀ s t : ℝ, φ ((s : ℂ) * v₁ + (t : ℂ) * v₂) = ![s, t] := by
+    intro s t
+    rw [show (s : ℂ) * v₁ + (t : ℂ) * v₂ = φ.symm ![s, t] by rw [hsymm]; simp, LinearEquiv.apply_symm_apply]
+  have hxφ : ∀ x : ℂ, x = (φ x 0 : ℂ) * v₁ + (φ x 1 : ℂ) * v₂ := by
+    intro x; rw [← hsymm, LinearEquiv.symm_apply_apply]
+  have hφc : Continuous φ := LinearMap.continuous_of_finiteDimensional φ.toLinearMap
+  have hDφ : parallelogram v₁ v₂ = {x | φ x 0 ∈ Ico (0 : ℝ) 1 ∧ φ x 1 ∈ Ico (0 : ℝ) 1} := by
+    ext x
+    constructor
+    · rintro ⟨s, t, hs, ht, rfl⟩
+      rw [mem_setOf_eq, hφst]; exact ⟨hs, ht⟩
+    · rintro ⟨h0, h1⟩
+      exact ⟨_, _, h0, h1, hxφ x⟩
+  have hφg : ∀ x mn, φ (x - latticePt v₁ v₂ mn) = ![φ x 0 - mn.1, φ x 1 - mn.2] := by
+    intro x mn
+    rw [map_sub, latticePt, hφst]
+    ext i; fin_cases i <;> simp
+  have hfl : ∀ (a : ℝ) (m : ℤ), a - m ∈ Ico (0 : ℝ) 1 → m = ⌊a⌋ := by
+    intro a m ⟨h1, h2⟩
+    symm; rw [Int.floor_eq_iff]; constructor <;> linarith
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · rw [hDφ]
+    exact (measurableSet_Ico.preimage ((continuous_apply 0).comp hφc).measurable).inter
+      (measurableSet_Ico.preimage ((continuous_apply 1).comp hφc).measurable)
+  · have hO : IsOpen {x : ℂ | φ x 0 ∈ Ioo (0 : ℝ) 1 ∧ φ x 1 ∈ Ioo (0 : ℝ) 1} :=
+      (isOpen_Ioo.preimage ((continuous_apply 0).comp hφc)).inter (isOpen_Ioo.preimage ((continuous_apply 1).comp hφc))
+    have hne : ((1 / 2 : ℝ) : ℂ) * v₁ + ((1 / 2 : ℝ) : ℂ) * v₂ ∈
+        {x : ℂ | φ x 0 ∈ Ioo (0 : ℝ) 1 ∧ φ x 1 ∈ Ioo (0 : ℝ) 1} := by
+      rw [mem_setOf_eq, hφst]; norm_num
+    refine (lt_of_lt_of_le (hO.measure_pos volume ⟨_, hne⟩) (measure_mono ?_)).ne'
+    rw [hDφ]
+    exact fun x hx => ⟨Ioo_subset_Ico_self hx.1, Ioo_subset_Ico_self hx.2⟩
+  · rintro x ⟨s, t, hs, ht, rfl⟩ y ⟨s', t', hs', ht', rfl⟩
+    have e : (s : ℂ) * v₁ + t * v₂ - (s' * v₁ + t' * v₂) = ((s - s' : ℝ) : ℂ) * v₁ + ((t - t' : ℝ) : ℂ) * v₂ := by
+      push_cast; ring
+    rw [dist_eq_norm, e]
+    refine (norm_add_le _ _).trans ?_
+    rw [norm_mul, norm_mul, Complex.norm_real, Complex.norm_real, Real.norm_eq_abs, Real.norm_eq_abs]
+    have h1 : |s - s'| ≤ 1 := by rw [abs_le]; constructor <;> linarith [hs.1, hs.2, hs'.1, hs'.2]
+    have h2 : |t - t'| ≤ 1 := by rw [abs_le]; constructor <;> linarith [ht.1, ht.2, ht'.1, ht'.2]
+    have := mul_le_mul_of_nonneg_right h1 (norm_nonneg v₁)
+    have := mul_le_mul_of_nonneg_right h2 (norm_nonneg v₂)
+    linarith
+  · intro x
+    refine ⟨(⌊φ x 0⌋, ⌊φ x 1⌋), ?_⟩
+    rw [hDφ, mem_setOf_eq, hφg]
+    simp only [Matrix.cons_val_zero, Matrix.cons_val_one]
+    exact ⟨⟨by linarith [Int.floor_le (φ x 0)], by linarith [Int.lt_floor_add_one (φ x 0)]⟩,
+      ⟨by linarith [Int.floor_le (φ x 1)], by linarith [Int.lt_floor_add_one (φ x 1)]⟩⟩
+  · intro mn mn' x hx hx'
+    rw [hDφ, mem_setOf_eq, hφg] at hx hx'
+    simp only [Matrix.cons_val_zero, Matrix.cons_val_one] at hx hx'
+    exact Prod.ext ((hfl _ _ hx.1).trans (hfl _ _ hx'.1).symm) ((hfl _ _ hx.2).trans (hfl _ _ hx'.2).symm)
+
+/-- The unit square's parallelogram holds its centre and not its far corner; lattice points are integer combinations. -/
+example : ((1 / 2 : ℝ) : ℂ) * 1 + ((1 / 2 : ℝ) : ℂ) * I ∈ parallelogram 1 I ∧ latticePt 1 I (2, 3) = 2 + 3 * I := by
+  refine ⟨⟨1 / 2, 1 / 2, by norm_num, by norm_num, rfl⟩, ?_⟩
+  simp [latticePt]
+
 /-- **The density of a lattice-periodic set** (stage 9.2's `upperDensity_of_periodic`): for an `ℝ`-basis `v₁, v₂` and a
 measurable `S` invariant under `ℤv₁ + ℤv₂`, `d̄(S) = |S ∩ D| / |D|` with `D = {s v₁ + t v₂ : s, t ∈ [0, 1)}` (count the
 translates of `D` inside and meeting `B(0, R)`; `ZLattice.covolume.tendsto_card_div_pow`). Carries DISC7's density and
@@ -369,11 +568,120 @@ theorem upperDensity_of_periodic {v₁ v₂ : ℂ} (hv : LinearIndependent ℝ !
     (hper : ∀ x, (x + v₁ ∈ S ↔ x ∈ S) ∧ (x + v₂ ∈ S ↔ x ∈ S)) :
     upperDensity S = volume (S ∩ {x | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧ x = s * v₁ + t * v₂}) /
       volume {x : ℂ | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧ x = s * v₁ + t * v₂} := by
-  sorry
+  obtain ⟨hDm, hD0, hδ, hcov, hdisj⟩ := parallelogram_tiling hv
+  have hshift : ∀ (v : ℂ), (∀ x, x + v ∈ S ↔ x ∈ S) → ∀ (m : ℤ) x, x + ((m : ℝ) : ℂ) * v ∈ S ↔ x ∈ S := by
+    intro v hv0 m
+    induction m using Int.induction_on with
+    | zero => intro x; simp
+    | succ m ih =>
+      intro x
+      calc x + (((m + 1 : ℤ) : ℝ) : ℂ) * v ∈ S ↔ (x + v) + (((m : ℤ) : ℝ) : ℂ) * v ∈ S := by
+            rw [show x + (((m + 1 : ℤ) : ℝ) : ℂ) * v = (x + v) + (((m : ℤ) : ℝ) : ℂ) * v by push_cast; ring]
+        _ ↔ x ∈ S := by rw [ih, hv0]
+    | pred m ih =>
+      intro x
+      calc x + (((-(m : ℤ) - 1 : ℤ) : ℝ) : ℂ) * v ∈ S
+          ↔ x + (((-(m : ℤ) - 1 : ℤ) : ℝ) : ℂ) * v + v ∈ S := (hv0 _).symm
+        _ ↔ x + (((-(m : ℤ) : ℤ) : ℝ) : ℂ) * v ∈ S := by
+            rw [show x + (((-(m : ℤ) - 1 : ℤ) : ℝ) : ℂ) * v + v = x + (((-(m : ℤ) : ℤ) : ℝ) : ℂ) * v by push_cast; ring]
+        _ ↔ x ∈ S := ih x
+  refine upperDensity_of_tiling (G := Set.range (latticePt v₁ v₂)) (Set.countable_range _) hDm hS hδ hD0 ?_ ?_ ?_
+  · rintro _ ⟨mn, rfl⟩ _ ⟨mn', rfl⟩ x hx hx'
+    rw [hdisj mn mn' x hx hx']
+  · intro x
+    obtain ⟨mn, h⟩ := hcov x
+    exact ⟨_, ⟨mn, rfl⟩, h⟩
+  · rintro _ ⟨⟨m, n⟩, rfl⟩ x
+    have h1 := hshift v₁ (fun x => (hper x).1) m
+    have h2 := hshift v₂ (fun x => (hper x).2) n
+    simp only [latticePt]
+    rw [← add_assoc, h2, h1]
 
 theorem upperDensity_periodize {T : Set ℂ} (hT : MeasurableSet T) {z : ℂ} {ℓ : ℝ} (hℓ : 0 < ℓ)
     (hTw : T ⊆ squareWin z ℓ) : upperDensity (periodize T (ℓ + 2)) = volume T / ENNReal.ofReal ((ℓ + 2) ^ 2) := by
-  sorry
+  set L := ℓ + 2 with hLdef
+  have hL : 0 < L := by linarith
+  set g : ℤ × ℤ → ℂ := fun mn => ((mn.1 * L : ℝ) : ℂ) + ((mn.2 * L : ℝ) : ℂ) * I with hg
+  have hgre : ∀ mn, (g mn).re = mn.1 * L := fun mn => by simp [hg]
+  have hgim : ∀ mn, (g mn).im = mn.2 * L := fun mn => by simp [hg]
+  have hfl : ∀ (a b : ℝ) (m : ℤ), a ≤ b - m * L → b - m * L < a + L → m = ⌊(b - a) / L⌋ := by
+    intro a b m h1 h2
+    symm; rw [Int.floor_eq_iff]
+    constructor
+    · rw [le_div_iff₀ hL]; linarith
+    · rw [div_lt_iff₀ hL]; linarith
+  have hT' : MeasurableSet (periodize T L) := measurableSet_periodize hT L
+  have key := upperDensity_of_tiling (D := squareWin z L) (S := periodize T L) (G := Set.range g) (δ := 2 * L)
+    (Set.countable_range g) (measurableSet_squareWin z L) hT'
+    (fun x hx y hy => by
+      obtain ⟨h1, h2, h3, h4⟩ := hx
+      obtain ⟨h5, h6, h7, h8⟩ := hy
+      rw [dist_eq_norm]
+      calc ‖x - y‖ ≤ |(x - y).re| + |(x - y).im| := Complex.norm_le_abs_re_add_abs_im _
+        _ ≤ L + L := by
+          refine add_le_add ?_ ?_ <;> rw [abs_le] <;> simp only [Complex.sub_re, Complex.sub_im] <;>
+            constructor <;> linarith
+        _ = 2 * L := by ring)
+    (by rw [volume_squareWin z hL.le]; simp; positivity)
+    (by
+      rintro _ ⟨mn, rfl⟩ _ ⟨mn', rfl⟩ x ⟨h1, h2, h3, h4⟩ ⟨h5, h6, h7, h8⟩
+      simp only [Complex.sub_re, Complex.sub_im, hgre, hgim] at h1 h2 h3 h4 h5 h6 h7 h8
+      have e1 := hfl _ _ _ h1 h2
+      have e2 := hfl _ _ _ h3 h4
+      have e3 := hfl _ _ _ h5 h6
+      have e4 := hfl _ _ _ h7 h8
+      have : mn = mn' := Prod.ext (e1.trans e3.symm) (e2.trans e4.symm)
+      rw [this])
+    (fun x => by
+      refine ⟨g (⌊(x.re - z.re) / L⌋, ⌊(x.im - z.im) / L⌋), ⟨_, rfl⟩, ?_⟩
+      have a1 := Int.floor_le ((x.re - z.re) / L)
+      have a2 := Int.lt_floor_add_one ((x.re - z.re) / L)
+      have a3 := Int.floor_le ((x.im - z.im) / L)
+      have a4 := Int.lt_floor_add_one ((x.im - z.im) / L)
+      rw [le_div_iff₀ hL] at a1 a3
+      rw [div_lt_iff₀ hL] at a2 a4
+      refine ⟨?_, ?_, ?_, ?_⟩ <;> simp only [Complex.sub_re, Complex.sub_im, hgre, hgim] <;> nlinarith)
+    (by
+      rintro _ ⟨⟨m, n⟩, rfl⟩ x
+      constructor
+      · rintro ⟨m', n', h⟩
+        refine ⟨m' - m, n' - n, ?_⟩
+        convert h using 1; simp only [hg]; push_cast; ring
+      · rintro ⟨m', n', h⟩
+        refine ⟨m' + m, n' + n, ?_⟩
+        convert h using 1; simp only [hg]; push_cast; ring)
+  have hSD : periodize T L ∩ squareWin z L = T := by
+    ext x
+    constructor
+    · rintro ⟨⟨m, n, hx⟩, hxD⟩
+      have hw := hTw hx
+      obtain ⟨h1, h2, h3, h4⟩ := hw
+      obtain ⟨h5, h6, h7, h8⟩ := hxD
+      simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.ofReal_re,
+        Complex.ofReal_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im] at h1 h2 h3 h4
+      have hm : m = 0 := by
+        have e1 : (m : ℝ) * L < L := by nlinarith
+        have e2 : -L < (m : ℝ) * L := by nlinarith
+        have : (m : ℝ) < 1 := by nlinarith
+        have : (-1 : ℝ) < m := by nlinarith
+        have : m < 1 := by exact_mod_cast ‹(m : ℝ) < 1›
+        have : -1 < m := by exact_mod_cast ‹(-1 : ℝ) < m›
+        omega
+      have hn : n = 0 := by
+        have e1 : (n : ℝ) * L < L := by nlinarith
+        have e2 : -L < (n : ℝ) * L := by nlinarith
+        have : (n : ℝ) < 1 := by nlinarith
+        have : (-1 : ℝ) < n := by nlinarith
+        have : n < 1 := by exact_mod_cast ‹(n : ℝ) < 1›
+        have : -1 < n := by exact_mod_cast ‹(-1 : ℝ) < n›
+        omega
+      subst hm; subst hn
+      simpa using hx
+    · intro hx
+      refine ⟨⟨0, 0, by simpa using hx⟩, ?_⟩
+      obtain ⟨h1, h2, h3, h4⟩ := hTw hx
+      exact ⟨h1, by linarith, h3, by linarith⟩
+  rw [key, hSD, volume_squareWin z hL.le]
 
 /-- **Inner pixelation of the kept sets**: in a window of `N × N` cells of side `h` (`h√2 ≤ ηε/12`), the cells meeting the
 `η/2`-kept set of some class, each given its least such class, are a tiled partial colouring inside the window whose
