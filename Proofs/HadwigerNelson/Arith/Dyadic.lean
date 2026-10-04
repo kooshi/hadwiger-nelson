@@ -42,7 +42,7 @@ def DyadicSqrt3Conclusion (L : Type*) [Field L] [NumberField L] [Algebra F L] (P
       (P.asIdeal.primesOver (𝓞 L)).ncard = 1 ∧ (∀ Q ∈ P.asIdeal.primesOver (𝓞 L), Ideal.inertiaDeg Q (𝓞 F) = 2) ∧
         Odd (Ideal.inertiaDeg P.asIdeal ℤ) ∧ Nat.card (𝓞 F ⧸ P.asIdeal) = 2 ^ Ideal.inertiaDeg P.asIdeal ℤ)
 
-/-! ## FS131-K2c: children (each `sorry`ed; plan `plans/FS131-w2-kernel-plan.md` § 12)
+/-! ## FS131-K2c: children (each proved; plan `plans/FS131-w2-kernel-plan.md` § 12)
 
 The route is **P-local** (inventory item 64): a generator `γ = d(−1 + s ι)/2` of `L/F`, integral everywhere because `d`
 absorbs the other dyadic primes (`d ∈ I`, `span {4} = P^a I`), whose minimal polynomial `X² + dX + δ` reduces to `X² + X + 1`

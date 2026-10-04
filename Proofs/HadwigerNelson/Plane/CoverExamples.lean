@@ -5832,13 +5832,463 @@ theorem hcBand_component_iff {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (
         have hne : hcBandTop g m n j s₂ - 1 ≠ 0 := by linarith
         congr 1; field_simp; ring
 
+/-- The down triangle across edge `(0, 0, 0)` in that edge's frame: the convex hull of `(0, −√3/2)`, `(−1/2, 0)`, `(1/2, 0)`. -/
+theorem hcDownTri_one_neg_one :
+    hcDownTri 1 (-1) = convexHull ℝ {hcFrame 0 0 0 0 (-(√3 / 2)), hcFrame 0 0 0 (-1 / 2) 0, hcFrame 0 0 0 (1 / 2) 0} := by
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have h3p : (√3 : ℝ) ≠ 0 := by positivity
+  have h3c : (√3 : ℂ) ≠ 0 := by exact_mod_cast h3p
+  have hD : hcDownC 1 (-1) = hcUpC 0 0 + hcL := by
+    have := hcDownC_dn 0 0 0
+    rw [hc_w_omega.1, mul_one] at this
+    exact this
+  have hw0 : e (2 * π * (((0 : Fin 3) : ℕ) : ℝ) / 3) = 1 := hc_w_omega.1
+  have e0 : e 0 = 1 := by simp [e]
+  have e2 : e (2 * π / 3) = ((-1 / 2 : ℝ) : ℂ) + ((√3 / 2 : ℝ) : ℂ) * I := by
+    have := hc_w_explicit 1
+    simp only [Fin.isValue, Fin.val_one, Nat.cast_one, mul_one, Matrix.cons_val_one, Matrix.cons_val_zero] at this
+    rw [this]; push_cast; ring
+  have e4 : e (4 * π / 3) = ((-1 / 2 : ℝ) : ℂ) + ((-(√3 / 2) : ℝ) : ℂ) * I := by
+    have := hc_w_explicit 2
+    simp only [Fin.isValue, Matrix.cons_val] at this
+    have h2 : (((2 : Fin 3) : ℕ) : ℝ) = 2 := by norm_num
+    rw [show 4 * π / 3 = 2 * π * (((2 : Fin 3) : ℕ) : ℝ) / 3 by rw [h2]; ring, this]; push_cast; ring
+  unfold hcDownTri
+  congr 1
+  simp only [hcFrame, hw0, mul_one, hD, e0, e2, e4]
+  have v1 : hcUpC 0 0 + ↑hcL + 1 / ↑√3 = hcUpC 0 0 + (↑(hcL - √3 / 6 - -(√3 / 2)) - ↑(0 : ℝ) * I) := by
+    push_cast; field_simp; ring_nf; rw [show (√3 : ℂ) ^ 2 = 3 by norm_cast; exact Real.sq_sqrt (by norm_num)]; ring
+  have v2 : hcUpC 0 0 + ↑hcL + (↑(-1 / 2 : ℝ) + ↑(√3 / 2) * I) / ↑√3 =
+      hcUpC 0 0 + (↑(hcL - √3 / 6 - 0) - ↑(-1 / 2 : ℝ) * I) := by
+    push_cast; field_simp; ring_nf; rw [show (√3 : ℂ) ^ 2 = 3 by norm_cast; exact Real.sq_sqrt (by norm_num)]; ring
+  have v3 : hcUpC 0 0 + ↑hcL + (↑(-1 / 2 : ℝ) + ↑(-(√3 / 2)) * I) / ↑√3 =
+      hcUpC 0 0 + (↑(hcL - √3 / 6 - 0) - ↑(1 / 2 : ℝ) * I) := by
+    push_cast; field_simp; ring_nf; rw [show (√3 : ℂ) ^ 2 = 3 by norm_cast; exact Real.sq_sqrt (by norm_num)]; ring
+  rw [v1, v2, v3]
+
+/-- The frames of the down triangle `(1, −1)`'s other two edges, read in the frame of edge `(0, 0, 0)`:
+`t = −t₀/2 − √3/4 ± (√3/2) s₀` — negative on the slab `|s₀| < 1/2`, `t₀ > 0`. -/
+theorem hcFrame_dn000_others (z : ℂ) :
+    hcFrameT 1 (-1) 1 z = -(hcFrameT 0 0 0 z) / 2 - √3 / 4 + √3 / 2 * hcFrameS 0 0 0 z ∧
+      hcFrameT 1 0 2 z = -(hcFrameT 0 0 0 z) / 2 - √3 / 4 - √3 / 2 * hcFrameS 0 0 0 z := by
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have h3' : √3 * √3 * √3 = 3 * √3 := by rw [h3]
+  obtain ⟨⟨A1, -⟩, -, ⟨A3, B3⟩, -⟩ := hcFrame_face 1 (-1) z
+  obtain ⟨-, ⟨C2, -⟩, -, -, -, ⟨C6, D6⟩⟩ := hcFrame_face 1 0 z
+  norm_num at A3 B3 C6 D6
+  simp only [Complex.sub_re, Complex.sub_im] at A1 C2
+  constructor
+  · rw [A1, A3, B3]; linarith
+  · rw [C2, C6, D6]; linarith
+
+/-- **Near the down triangle's facing side, only two blocks are within `1`**: for `z = (s, t)` in the frame of edge `(0, 0, 0)`,
+`|s| < 1/2`, `0 < t < 1/20`, every point of HC within `1` of `z` is in the down triangle `(1, −1)` or in the closed band of the
+edge — the far blocks are beyond `(L/2)√3 − 3/5 − 0.61 > 1`, and the other two bands of the triangle lie at `t ≥ 1` in frames
+where `z` has `t < 0`. -/
+theorem hc_free_near {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅)
+    (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) {s t : ℝ} (hs : |s| < 1 / 2)
+    (ht0 : 0 < t) (ht : t < 1 / 20) {w : ℂ} (hw : w ∈ hcSet g) (hd : dist (hcFrame 0 0 0 s t) w ≤ 1) :
+    w ∈ hcDownTri 1 (-1) ∨ w ∈ closure (hcBand g 0 0 0) := by
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have h17 : (1.7 : ℝ) < √3 := by nlinarith [Real.sqrt_nonneg 3]
+  have h18 : √3 < 1.8 := by nlinarith [Real.sqrt_nonneg 3]
+  set z := hcFrame 0 0 0 s t with hz
+  have hzs : hcFrameS 0 0 0 z = s := (hcFrame_coords 0 0 0 s t).1
+  have hzt : hcFrameT 0 0 0 z = t := (hcFrame_coords 0 0 0 s t).2
+  rw [hcSet_eq_iUnion, mem_iUnion] at hw
+  obtain ⟨⟨m', n', k'⟩, hwB⟩ := hw
+  -- a band of the triangle's other edges: `z` is at `t < 0` in its frame
+  have hother : ∀ {a b : ℤ} {k : Fin 3}, hcFrameT a b k z < 0 → w ∈ closure (hcBand g a b k) → False := by
+    intro a b k hzk hwk
+    have h1 := one_le_hcFrameT_of_mem_closure_band hwk
+    have h2 := abs_sub_hcFrameT_le a b k w z
+    rw [dist_comm] at h2
+    linarith [le_abs_self (hcFrameT a b k w - hcFrameT a b k z)]
+  obtain ⟨O1, O2⟩ := hcFrame_dn000_others z
+  rw [hzs, hzt] at O1 O2
+  have hsa := abs_lt.1 hs
+  by_cases hQ : (hcCA 1 (-1) 0 - hcCA m' n' k') ^ 2 + (hcCA 1 (-1) 0 - hcCA m' n' k') * (hcCB 1 (-1) 0 - hcCB m' n' k') +
+      (hcCB 1 (-1) 0 - hcCB m' n' k') ^ 2 < 3
+  · rcases hcC_near hQ with ⟨rfl, rfl, rfl⟩ | hfl | hfl
+    · exact Or.inl hwB
+    · unfold hcFlank at hfl
+      rcases hfl with ⟨h, -⟩ | ⟨-, ⟨rfl, h1, h2⟩ | ⟨rfl, h1, h2⟩ | ⟨rfl, h1, h2⟩⟩
+      · exact absurd h (by decide)
+      · obtain rfl : m' = 0 := by omega
+        obtain rfl : n' = 0 := by omega
+        exact Or.inr hwB
+      · subst h1; subst h2
+        exact (hother (k := 1) (by rw [O1]; nlinarith) hwB).elim
+      · subst h1
+        obtain rfl : n' = 0 := by omega
+        exact (hother (k := 2) (by rw [O2]; nlinarith) hwB).elim
+    · unfold hcFlank at hfl
+      rcases hfl with ⟨-, -, -, h⟩ | ⟨-, h⟩
+      · rcases h with h | h | h <;> exact absurd h (by decide)
+      · rcases h with ⟨h, -⟩ | ⟨h, -⟩ | ⟨h, -⟩ <;> exact absurd h (by decide)
+  · exfalso
+    push Not at hQ
+    have hL0 : 0 < hcL / 2 := by unfold hcL; positivity
+    have hcc : dist (hcCentre 1 (-1) 0) (hcCentre m' n' k') =
+        hcL / 2 * √(triQ ((hcCA 1 (-1) 0 : ℝ) - hcCA m' n' k') ((hcCB 1 (-1) 0 : ℝ) - hcCB m' n' k')) := by
+      rw [hcCentre, hcCentre, dist_eq_norm, ← mul_sub, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hL0,
+        ← dist_eq_norm, dist_tri]
+    have hQr : (3 : ℝ) ≤ triQ ((hcCA 1 (-1) 0 : ℝ) - hcCA m' n' k') ((hcCB 1 (-1) 0 : ℝ) - hcCB m' n' k') := by
+      have : (((hcCA 1 (-1) 0 - hcCA m' n' k') ^ 2 + (hcCA 1 (-1) 0 - hcCA m' n' k') * (hcCB 1 (-1) 0 - hcCB m' n' k') +
+          (hcCB 1 (-1) 0 - hcCB m' n' k') ^ 2 : ℤ) : ℝ) =
+          triQ ((hcCA 1 (-1) 0 : ℝ) - hcCA m' n' k') ((hcCB 1 (-1) 0 : ℝ) - hcCB m' n' k') := by
+        unfold triQ; push_cast; ring
+      rw [← this]; exact_mod_cast hQ
+    have hsq := Real.sqrt_le_sqrt hQr
+    have hq' := hcBlock_subset_ball hZc hZs hZi hl hr hg m' n' k' hwB
+    rw [mem_closedBall] at hq'
+    have hL : hcL / 2 * √3 = √3 + 1 / 2 := by unfold hcL; nlinarith
+    have hfar : √3 + 1 / 2 ≤ dist (hcCentre 1 (-1) 0) (hcCentre m' n' k') := by
+      rw [hcc, ← hL]; exact mul_le_mul_of_nonneg_left hsq hL0.le
+    -- `z` is within `0.61` of the triangle's centre `(0, −√3/6)`
+    have hC : hcCentre 1 (-1) 0 = hcFrame 0 0 0 0 (-(√3 / 6)) := by
+      rw [(hcCentre_eq 1 (-1)).1]
+      have := hcDownC_dn 0 0 0
+      rw [hc_w_omega.1, mul_one] at this
+      change hcDownC 1 (-1) = _ at this
+      rw [this, hcFrame, hc_w_omega.1, mul_one]
+      push_cast; ring
+    have hzc : dist z (hcCentre 1 (-1) 0) < 61 / 100 := by
+      rw [hC, dist_hcFrame_right, hzs, hzt, Real.sqrt_lt' (by norm_num)]
+      have : s ^ 2 < 1 / 4 := by nlinarith
+      nlinarith
+    have htri := dist_triangle4 (hcCentre 1 (-1) 0) z w (hcCentre m' n' k')
+    rw [dist_comm (hcCentre 1 (-1) 0) z] at htri
+    have h173 : (1.73 : ℝ) < √3 := by nlinarith [Real.sqrt_nonneg 3]
+    linarith
+
+/-- The closed band lies in `|s| ≤ 1/2`, `t ≤ 1 + g(s)` of its frame. -/
+theorem closure_hcBand_subset_frame {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅)
+    (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) :
+    closure (hcBand g m n j) ⊆ {w | |hcFrameS m n j w| ≤ 1 / 2 ∧ hcFrameT m n j w ≤ 1 + g (hcFrameS m n j w)} := by
+  refine closure_minimal ?_ ((isClosed_le (continuous_abs.comp (continuous_hcFrameS m n j)) continuous_const).inter
+    (isClosed_le (continuous_hcFrameT m n j) (continuous_const.add (hg.1.continuous.comp (continuous_hcFrameS m n j)))))
+  rintro _ ⟨s, t, hs, ht, ht', rfl⟩
+  rw [mem_setOf_eq, (hcFrame_coords m n j s t).1, (hcFrame_coords m n j s t).2]
+  have hsI : s ∈ Icc (-1 / 2 : ℝ) (1 / 2) := ⟨by linarith [neg_abs_le s], by linarith [le_abs_self s]⟩
+  exact ⟨hs.le, by linarith [(hcBandTop_bounds hZc hZs hZi hl hr hg m n j hsI).2.1]⟩
+
+/-- **The arc passes above the band** (FS111-M3 § 4.2 (1)): for `0 < t < 1` and `r² = 2t − t²` with both crossings `s ± r` in `Z`,
+the only points of the closed band on the unit circle about `(s, t)` are the crossings `(s ± r, 1)` — between them the circle's
+height above `1` is at least `t·d/r` (concavity), the band's at most `d²/4` (G1), `d` the distance to the nearer crossing. -/
+theorem hc_free_arc {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅)
+    (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) {s t ρ : ℝ} (ht0 : 0 < t) (ht1 : t < 1)
+    (hρ0 : 0 < ρ) (hρ : ρ ^ 2 = 2 * t - t ^ 2) (hZ1 : s - ρ ∈ Z) (hZ2 : s + ρ ∈ Z) {w : ℂ}
+    (hw : w ∈ closure (hcBand g 0 0 0)) (hd : dist (hcFrame 0 0 0 s t) w = 1) :
+    w = hcFrame 0 0 0 (s - ρ) 1 ∨ w = hcFrame 0 0 0 (s + ρ) 1 := by
+  obtain ⟨hws, hwt⟩ := closure_hcBand_subset_frame hZc hZs hZi hl hr hg 0 0 0 hw
+  have hw1 := one_le_hcFrameT_of_mem_closure_band hw
+  have hwe := hcFrame_hcFrameST 0 0 0 w
+  set s' := hcFrameS 0 0 0 w
+  set t' := hcFrameT 0 0 0 w
+  have hdist : (s - s') ^ 2 + (t - t') ^ 2 = 1 := by
+    rw [dist_eq_hcFrame 0 0 0, (hcFrame_coords 0 0 0 s t).1, (hcFrame_coords 0 0 0 s t).2, Real.sqrt_eq_one] at hd
+    exact hd
+  have hs'I : s' ∈ Icc (-1 / 2 : ℝ) (1 / 2) := ⟨by linarith [neg_abs_le s'], by linarith [le_abs_self s']⟩
+  set u := |s' - s| with hu
+  have hu0 : 0 ≤ u := abs_nonneg _
+  have hu2 : u ^ 2 = (s' - s) ^ 2 := sq_abs _
+  have htt : 1 - t ≤ t' - t := by linarith
+  have hu_le : u ≤ ρ := by
+    refine (pow_le_pow_iff_left₀ hu0 hρ0.le two_ne_zero).1 ?_
+    nlinarith
+  have hkey : 1 - t * u / ρ ≤ t' - t := by
+    by_contra h
+    push Not at h
+    have hq : t * u / ρ ≤ t := by
+      rw [div_le_iff₀ hρ0]; nlinarith
+    have h1 : (t' - t) ^ 2 < (1 - t * u / ρ) ^ 2 := pow_lt_pow_left₀ h (by linarith) two_ne_zero
+    have e1 : (1 - t * u / ρ) ^ 2 * ρ ^ 2 = (ρ - t * u) ^ 2 := by field_simp
+    have h2 : (t' - t) ^ 2 * ρ ^ 2 < (ρ - t * u) ^ 2 := by rw [← e1]; exact mul_lt_mul_of_pos_right h1 (by positivity)
+    have h3 : (t' - t) ^ 2 = 1 - u ^ 2 := by nlinarith
+    rw [h3] at h2
+    nlinarith [mul_nonneg hu0 (sub_nonneg.2 hu_le), mul_pos ht0 hρ0]
+  have hinf : infDist s' Z ≤ ρ - u := by
+    rcases le_total s s' with h | h
+    · have hu' : u = s' - s := abs_of_nonneg (sub_nonneg.2 h)
+      refine (infDist_le_dist_of_mem hZ2).trans (le_of_eq ?_)
+      rw [Real.dist_eq, abs_of_nonpos (by linarith), hu']; ring
+    · have hu' : u = s - s' := by rw [hu, abs_sub_comm]; exact abs_of_nonneg (sub_nonneg.2 h)
+      refine (infDist_le_dist_of_mem hZ1).trans (le_of_eq ?_)
+      rw [Real.dist_eq, abs_of_nonneg (by linarith), hu']; ring
+  have hg1 := (hg.2.1 s' hs'I).2.1
+  have hinf0 : 0 ≤ infDist s' Z := infDist_nonneg
+  have hg2 : g s' ≤ (ρ - u) ^ 2 / 4 := by
+    have := pow_le_pow_left₀ hinf0 hinf 2
+    linarith
+  have hfin : (ρ - u) * (4 * t - ρ * (ρ - u)) ≤ 0 := by
+    have : t * (ρ - u) / ρ ≤ (ρ - u) ^ 2 / 4 := by
+      have : t * (ρ - u) / ρ = t - t * u / ρ := by field_simp
+      rw [this]; linarith
+    rw [div_le_iff₀ hρ0] at this
+    nlinarith
+  have hρu : u = ρ := by
+    by_contra hne
+    have hlt : u < ρ := lt_of_le_of_ne hu_le hne
+    have : 0 < 4 * t - ρ * (ρ - u) := by nlinarith [mul_le_mul_of_nonneg_left (show ρ - u ≤ ρ by linarith) hρ0.le]
+    nlinarith [mul_pos (sub_pos.2 hlt) this]
+  have ht'1 : t' = 1 := by
+    have h3 : (t' - t) ^ 2 = (1 - t) ^ 2 := by nlinarith
+    have := (pow_left_inj₀ (by linarith) (by linarith) two_ne_zero).1 h3
+    linarith
+  rw [← hwe, ht'1]
+  rcases abs_cases (s' - s) with ⟨h, -⟩ | ⟨h, -⟩
+  · right; congr 1; linarith
+  · left; congr 1; linarith
+
+/-- The directions in which the unit circle about `z` reaches a given point form a countable set (`θ₀ + 2πℤ`). -/
+theorem countable_setOf_add_e_eq (z P : ℂ) : {θ : ℝ | z + e θ = P}.Countable := by
+  rcases eq_empty_or_nonempty {θ : ℝ | z + e θ = P} with h | ⟨θ₀, hθ₀⟩
+  · rw [h]; exact countable_empty
+  refine (countable_range fun n : ℤ => θ₀ + n * (2 * π)).mono fun θ hθ => ?_
+  have he : e θ = e θ₀ := by
+    have h1 : z + e θ = P := hθ
+    have h2 : z + e θ₀ = P := hθ₀
+    linear_combination h1 - h2
+  obtain ⟨n, hn⟩ := Complex.exp_eq_exp_iff_exists_int.1 he
+  refine ⟨n, ?_⟩
+  have := congrArg Complex.im hn
+  simp at this
+  linarith
+
+/-- **A free point** (FS111-M3 § 4.2 (1)): with both crossings `s ± ρ` in `Z` and the down triangle strictly inside the unit circle,
+the point `(s, t)` of edge `(0, 0, 0)`'s frame is outside HC and its unit circle meets `int HC` in no arc (only at the two
+crossings, if anywhere). -/
+theorem hc_free_mem {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅)
+    (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) {s t ρ : ℝ} (hs : |s| < 1 / 2)
+    (ht0 : 0 < t) (ht : t < 1 / 20) (hρ0 : 0 < ρ) (hρ : ρ ^ 2 = 2 * t - t ^ 2) (hZ1 : s - ρ ∈ Z) (hZ2 : s + ρ ∈ Z)
+    (hv1 : (s - 1 / 2) ^ 2 + t ^ 2 < 1) (hv2 : (s + 1 / 2) ^ 2 + t ^ 2 < 1) (hv3 : s ^ 2 + (t + √3 / 2) ^ 2 < 1) :
+    hcFrame 0 0 0 s t ∈ {z | z ∉ hcSet g ∧ phi (interior (hcSet g)) z = 0} := by
+  set z := hcFrame 0 0 0 s t with hz
+  have hzt : hcFrameT 0 0 0 z = t := (hcFrame_coords 0 0 0 s t).2
+  have hT : hcDownTri 1 (-1) ⊆ ball z 1 := by
+    rw [hcDownTri_one_neg_one]
+    refine convexHull_min ?_ (convex_ball z 1)
+    have key : ∀ a b : ℝ, (a - s) ^ 2 + (b - t) ^ 2 < 1 → hcFrame 0 0 0 a b ∈ ball z 1 := by
+      intro a b h
+      rw [mem_ball, dist_hcFrame]; exact (Real.sqrt_lt' one_pos).2 (by linarith)
+    intro v hv
+    simp only [mem_insert_iff, mem_singleton_iff] at hv
+    rcases hv with rfl | rfl | rfl
+    · exact key _ _ (by nlinarith)
+    · exact key _ _ (by nlinarith)
+    · exact key _ _ (by nlinarith)
+  constructor
+  · intro hzH
+    rcases hc_free_near hZc hZs hZi hl hr hg hs ht0 ht hzH (by rw [dist_self]; exact zero_le_one) with h | h
+    · change z ∈ hcDownTri (hcDn 0 0 0).1 (hcDn 0 0 0).2 at h
+      have := ((mem_hcDownTri_iff_frame 0).1 h).1
+      linarith
+    · have := one_le_hcFrameT_of_mem_closure_band h
+      linarith
+  · have hsub : {θ : ℝ | z + e θ ∈ interior (hcSet g)} ⊆
+        {θ : ℝ | z + e θ = hcFrame 0 0 0 (s - ρ) 1} ∪ {θ : ℝ | z + e θ = hcFrame 0 0 0 (s + ρ) 1} := by
+      intro θ hθ
+      have hd : dist z (z + e θ) = 1 := by rw [dist_eq_norm, sub_add_cancel_left, norm_neg, norm_e]
+      rcases hc_free_near hZc hZs hZi hl hr hg hs ht0 ht (interior_subset hθ) hd.le with h | h
+      · have := hT h
+        rw [mem_ball, dist_comm, hd] at this
+        exact absurd this (lt_irrefl _)
+      · exact hc_free_arc hZc hZs hZi hl hr hg ht0 (by linarith) hρ0 hρ hZ1 hZ2 h hd
+    refine le_antisymm ?_ (by positivity)
+    calc phi (interior (hcSet g)) z ≤ volume ({θ : ℝ | z + e θ = hcFrame 0 0 0 (s - ρ) 1} ∪
+          {θ : ℝ | z + e θ = hcFrame 0 0 0 (s + ρ) 1}) :=
+        (measure_mono hsub).trans (Measure.restrict_le_self _)
+      _ = 0 := ((countable_setOf_add_e_eq _ _).union (countable_setOf_add_e_eq _ _)).measure_zero volume
+
+/-- **A Lebesgue density point of `Z` inside `(−1/2, 1/2)`**: near it, `Z` misses at most an eighth of each small closed ball. -/
+theorem exists_density_point {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZpos : 0 < volume Z) :
+    ∃ p ∈ Z, |p| < 1 / 2 ∧ ∃ ρ₀ > 0, ∀ ρ, 0 < ρ → ρ < ρ₀ → volume (closedBall p ρ \ Z) ≤ ENNReal.ofReal (ρ / 4) := by
+  set Z' := Z ∩ Ioo (-1 / 2 : ℝ) (1 / 2) with hZ'
+  have hZ'm : MeasurableSet Z' := hZc.measurableSet.inter measurableSet_Ioo
+  have hZ'pos : 0 < volume Z' := by
+    have hsub : Z ⊆ Z' ∪ {-1 / 2, 1 / 2} := by
+      intro x hx
+      by_cases h1 : x = -1 / 2
+      · exact Or.inr (Or.inl h1)
+      by_cases h2 : x = 1 / 2
+      · exact Or.inr (Or.inr h2)
+      exact Or.inl ⟨hx, lt_of_le_of_ne (hZs hx).1 (Ne.symm h1), lt_of_le_of_ne (hZs hx).2 h2⟩
+    have h0 : volume ({-1 / 2, 1 / 2} : Set ℝ) = 0 := ((finite_singleton _).insert _).measure_zero _
+    have := (measure_mono hsub).trans (measure_union_le (μ := volume) Z' ({-1 / 2, 1 / 2} : Set ℝ))
+    rw [h0, add_zero] at this
+    exact lt_of_lt_of_le hZpos this
+  have hae := Besicovitch.ae_tendsto_measure_inter_div (volume : Measure ℝ) Z
+  have hae' := ae_restrict_of_ae_restrict_of_subset (inter_subset_left : Z' ⊆ Z) hae
+  have hmem : ∀ᵐ x ∂volume.restrict Z', x ∈ Z' := ae_restrict_mem hZ'm
+  haveI : (ae (volume.restrict Z')).NeBot := ae_neBot.2 (by rw [Ne, Measure.restrict_eq_zero]; exact hZ'pos.ne')
+  obtain ⟨p, hp, ⟨hpZ, hpI⟩⟩ := (hae'.and hmem).exists
+  refine ⟨p, hpZ, abs_lt.2 ⟨by linarith [hpI.1], hpI.2⟩, ?_⟩
+  have hev := hp.eventually (lt_mem_nhds (show (7 / 8 : ENNReal) < 1 by
+    rw [ENNReal.div_lt_iff (by norm_num) (by norm_num)]; norm_num))
+  obtain ⟨ρ₀, hρ₀, hsub⟩ := mem_nhdsGT_iff_exists_Ioo_subset.1 hev
+  refine ⟨ρ₀, hρ₀, fun ρ hρ0 hρ => ?_⟩
+  have hr := hsub ⟨hρ0, hρ⟩
+  simp only [mem_setOf_eq] at hr
+  rw [Real.volume_closedBall] at hr
+  have hB : (ENNReal.ofReal (2 * ρ)) ≠ 0 := by simp; linarith
+  rw [ENNReal.lt_div_iff_mul_lt (Or.inl hB) (Or.inl ENNReal.ofReal_ne_top)] at hr
+  have h78 : (7 / 8 : ENNReal) * ENNReal.ofReal (2 * ρ) = ENNReal.ofReal (7 * ρ / 4) := by
+    rw [show (7 / 8 : ENNReal) = ENNReal.ofReal (7 / 8) by
+      rw [ENNReal.ofReal_div_of_pos (by norm_num)]; simp, ← ENNReal.ofReal_mul (by norm_num)]
+    congr 1; ring
+  rw [h78] at hr
+  have hsum := measure_sdiff_add_inter (μ := volume) (closedBall p ρ) hZc.measurableSet
+  rw [Real.volume_closedBall, inter_comm] at hsum
+  by_contra hcon
+  push Not at hcon
+  have := ENNReal.add_lt_add hcon hr
+  rw [hsum, ← ENNReal.ofReal_add (by linarith) (by linarith)] at this
+  exact absurd this (by rw [show ρ / 4 + 7 * ρ / 4 = 2 * ρ by ring]; exact lt_irrefl _)
+
+/-- **The slice**: near a density point, `{s : |s − p| < h, s ∓ ρ ∈ Z}` has measure at least `h` for every `0 < ρ < h` (each
+translate of `Z` misses at most `h/2` of the interval). -/
+theorem hc_free_slice {Z : Set ℝ} {p h ρ : ℝ} (hh : 0 < h) (hρ0 : 0 ≤ ρ) (hρh : ρ < h)
+    (hdens : volume (closedBall p (2 * h) \ Z) ≤ ENNReal.ofReal (h / 2)) :
+    ENNReal.ofReal h ≤ volume {s : ℝ | |s - p| < h ∧ s - ρ ∈ Z ∧ s + ρ ∈ Z} := by
+  set I := Ioo (p - h) (p + h)
+  have hI : volume I = ENNReal.ofReal (2 * h) := by rw [Real.volume_Ioo]; congr 1; ring
+  have h1 : volume (I ∩ {s | s - ρ ∉ Z}) ≤ ENNReal.ofReal (h / 2) := by
+    refine le_trans (measure_mono (t := (fun s => s + (-ρ)) ⁻¹' (closedBall p (2 * h) \ Z)) ?_) ?_
+    · rintro s ⟨⟨hs1, hs2⟩, hsZ⟩
+      refine ⟨?_, by simpa [sub_eq_add_neg] using hsZ⟩
+      rw [mem_closedBall, Real.dist_eq, abs_le]; constructor <;> linarith
+    · rw [measure_preimage_add_right]; exact hdens
+  have h2 : volume (I ∩ {s | s + ρ ∉ Z}) ≤ ENNReal.ofReal (h / 2) := by
+    refine le_trans (measure_mono (t := (fun s => s + ρ) ⁻¹' (closedBall p (2 * h) \ Z)) ?_) ?_
+    · rintro s ⟨⟨hs1, hs2⟩, hsZ⟩
+      refine ⟨?_, hsZ⟩
+      rw [mem_closedBall, Real.dist_eq, abs_le]; constructor <;> linarith
+    · rw [measure_preimage_add_right]; exact hdens
+  have hcov : I ⊆ {s : ℝ | |s - p| < h ∧ s - ρ ∈ Z ∧ s + ρ ∈ Z} ∪ (I ∩ {s | s - ρ ∉ Z}) ∪ (I ∩ {s | s + ρ ∉ Z}) := by
+    intro s hs
+    by_cases ha : s - ρ ∈ Z
+    · by_cases hb : s + ρ ∈ Z
+      · exact Or.inl (Or.inl ⟨abs_lt.2 ⟨by linarith [hs.1], by linarith [hs.2]⟩, ha, hb⟩)
+      · exact Or.inr ⟨hs, hb⟩
+    · exact Or.inl (Or.inr ⟨hs, ha⟩)
+  have hle := (measure_mono (μ := volume) hcov).trans ((measure_union_le (μ := volume) _ _).trans
+    (add_le_add (measure_union_le (μ := volume) _ _) le_rfl))
+  rw [hI] at hle
+  have hle' : ENNReal.ofReal h + (ENNReal.ofReal (h / 2) + ENNReal.ofReal (h / 2)) ≤
+      volume {s : ℝ | |s - p| < h ∧ s - ρ ∈ Z ∧ s + ρ ∈ Z} + (ENNReal.ofReal (h / 2) + ENNReal.ofReal (h / 2)) := by
+    rw [← ENNReal.ofReal_add (by linarith) (by linarith), ← ENNReal.ofReal_add (by linarith) (by linarith),
+      show h + (h / 2 + h / 2) = 2 * h by ring]
+    calc ENNReal.ofReal (2 * h) ≤ _ := hle
+      _ ≤ _ := by
+        rw [add_assoc]
+        exact add_le_add le_rfl ((add_le_add h1 h2).trans (ENNReal.ofReal_add (by linarith) (by linarith)).symm.le)
+  exact (ENNReal.add_le_add_iff_right (by simp)).1 hle'
+
+/-- The parameter set of free points is measurable. -/
+theorem measurableSet_hcFreeParam {Z : Set ℝ} (hZc : IsClosed Z) (p h t₁ : ℝ) :
+    MeasurableSet {q : ℝ × ℝ | |q.1 - p| < h ∧ 0 < q.2 ∧ q.2 < t₁ ∧ q.1 - √(2 * q.2 - q.2 ^ 2) ∈ Z ∧
+      q.1 + √(2 * q.2 - q.2 ^ 2) ∈ Z} := by
+  have hr : Continuous fun q : ℝ × ℝ => √(2 * q.2 - q.2 ^ 2) := Real.continuous_sqrt.comp (by fun_prop)
+  refine (measurableSet_lt (continuous_abs.comp (continuous_fst.sub continuous_const)).measurable measurable_const).inter
+    ((measurableSet_lt measurable_const measurable_snd).inter ((measurableSet_lt measurable_snd measurable_const).inter
+    ((hZc.preimage (continuous_fst.sub hr)).measurableSet.inter (hZc.preimage (continuous_fst.add hr)).measurableSet)))
+
+/-- The parameter set of free points: `|s − p| < h`, `0 < t < t₁`, both crossings `s ∓ √(2t − t²)` in `Z`. -/
+theorem hc_free_param_pos {Z : Set ℝ} (hZc : IsClosed Z) {p h t₁ : ℝ} (hh : 0 < h) (ht₁ : 0 < t₁) (ht₁h : t₁ ≤ h ^ 2 / 2)
+    (ht₁1 : t₁ ≤ 1) (hdens : volume (closedBall p (2 * h) \ Z) ≤ ENNReal.ofReal (h / 2)) :
+    0 < volume {q : ℝ × ℝ | |q.1 - p| < h ∧ 0 < q.2 ∧ q.2 < t₁ ∧ q.1 - √(2 * q.2 - q.2 ^ 2) ∈ Z ∧
+      q.1 + √(2 * q.2 - q.2 ^ 2) ∈ Z} := by
+  set A := {q : ℝ × ℝ | |q.1 - p| < h ∧ 0 < q.2 ∧ q.2 < t₁ ∧ q.1 - √(2 * q.2 - q.2 ^ 2) ∈ Z ∧
+      q.1 + √(2 * q.2 - q.2 ^ 2) ∈ Z} with hA
+  have hAm : MeasurableSet A := measurableSet_hcFreeParam hZc p h t₁
+  rw [Measure.volume_eq_prod, Measure.prod_apply_symm hAm]
+  have hslice : ∀ y ∈ Ioo 0 t₁, ENNReal.ofReal h ≤ volume ((fun x => (x, y)) ⁻¹' A) := by
+    intro y hy
+    have hr2 : 0 ≤ 2 * y - y ^ 2 := by nlinarith [hy.1, hy.2]
+    have hr : √(2 * y - y ^ 2) < h := by
+      rw [Real.sqrt_lt' hh]; nlinarith [hy.1, hy.2]
+    refine (hc_free_slice hh (Real.sqrt_nonneg _) hr hdens).trans (measure_mono ?_)
+    rintro x ⟨h1, h2, h3⟩
+    exact ⟨h1, hy.1, hy.2, h2, h3⟩
+  calc (0 : ENNReal) < ENNReal.ofReal h * volume (Ioo 0 t₁) := by
+        rw [Real.volume_Ioo]; exact ENNReal.mul_pos (by simp [hh]) (by simp [ht₁])
+    _ = ∫⁻ y, (Ioo 0 t₁).indicator (fun _ => ENNReal.ofReal h) y := (lintegral_indicator_const measurableSet_Ioo _).symm
+    _ ≤ ∫⁻ y, volume ((fun x => (x, y)) ⁻¹' A) := by
+        refine lintegral_mono fun y => ?_
+        by_cases hy : y ∈ Ioo 0 t₁
+        · rw [indicator_of_mem hy]; exact hslice y hy
+        · rw [indicator_of_notMem hy]; positivity
+
+/-- The frame of edge `(0, 0, 0)` read as coordinates is measure-preserving (`w₀ = 1`: a reflection, a swap, a translation). -/
+theorem measurePreserving_hcFrame000 :
+    MeasurePreserving (fun z : ℂ => (hcFrameS 0 0 0 z, hcFrameT 0 0 0 z)) volume volume := by
+  set C := hcUpC 0 0
+  set K := hcL - √3 / 6 + C.re
+  have hfun : (fun z : ℂ => (hcFrameS 0 0 0 z, hcFrameT 0 0 0 z)) =
+      (Prod.swap ∘ Prod.map (fun x : ℝ => K - x) (fun y : ℝ => C.im - y)) ∘ Complex.measurableEquivRealProd := by
+    funext z
+    simp only [hcFrameS, hcFrameT, hc_w_omega.1, div_one, Function.comp_apply, Prod.map_apply, Prod.swap_prod_mk,
+      Complex.measurableEquivRealProd_apply, Complex.sub_re, Complex.sub_im, K]
+    ext <;> simp only <;> ring
+  rw [hfun]
+  refine MeasurePreserving.comp ?_ Complex.volume_preserving_equiv_real_prod
+  rw [Measure.volume_eq_prod]
+  exact (Measure.measurePreserving_swap).comp ((volume.measurePreserving_sub_left K).prod
+    (volume.measurePreserving_sub_left C.im))
+
+/-- The numeric conditions on a free point near a density point `p`, with margin `m = (1/2 − |p|)/2`. -/
+theorem hc_free_numeric {s t m : ℝ} (hm : 0 < m) (hm4 : m ≤ 1 / 4) (hs : |s| < 1 / 2 - m) (ht0 : 0 < t) (ht : t < m / 4) :
+    (s - 1 / 2) ^ 2 + t ^ 2 < 1 ∧ (s + 1 / 2) ^ 2 + t ^ 2 < 1 ∧ s ^ 2 + (t + √3 / 2) ^ 2 < 1 := by
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have h18 : √3 < 1.8 := by nlinarith [Real.sqrt_nonneg 3]
+  have h17 : (1.7 : ℝ) < √3 := by nlinarith [Real.sqrt_nonneg 3]
+  obtain ⟨hs1, hs2⟩ := abs_lt.1 hs
+  have ht2 : t ^ 2 < m ^ 2 / 16 := by nlinarith
+  refine ⟨by nlinarith, by nlinarith, ?_⟩
+  have hs3 : s ^ 2 < (1 / 2 - m) ^ 2 := by nlinarith
+  nlinarith
+
 /-- **IRREG (1), `|E| > 0`**: with `Z` of positive length, the bulge points whose unit circle crosses `t = 1` at two points of
 `Z` see no point of `int HC` (the arc passes above the band: `t·d/r > d²/4`), and they have positive measure (density points of
 `Z × Z` through the local diffeomorphism `(s, t) ↦ (s + r, s − r)`). -/
 theorem hc_free_pos {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
     (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (hZpos : 0 < volume Z) :
     0 < volume {z | z ∉ hcSet g ∧ phi (interior (hcSet g)) z = 0} := by
-  sorry
+  obtain ⟨p, -, hp, ρ₀, hρ₀, hdens⟩ := exists_density_point hZc hZs hZpos
+  set m₀ := (1 / 2 - |p|) / 2 with hm₀def
+  have hm₀ : 0 < m₀ := by rw [hm₀def]; linarith
+  have hm₀4 : m₀ ≤ 1 / 4 := by rw [hm₀def]; linarith [abs_nonneg p]
+  set h := min (ρ₀ / 4) m₀ with hhdef
+  have hh : 0 < h := lt_min (by linarith) hm₀
+  have hhm : h ≤ m₀ := min_le_right _ _
+  have hhρ : h ≤ ρ₀ / 4 := min_le_left _ _
+  have hd := hdens (2 * h) (by linarith) (by linarith)
+  rw [show 2 * h / 4 = h / 2 by ring] at hd
+  set t₁ := min (1 / 20) (min (m₀ / 4) (h ^ 2 / 2)) with ht₁def
+  have ht₁ : 0 < t₁ := lt_min (by norm_num) (lt_min (by linarith) (by positivity))
+  have ht₁a : t₁ ≤ 1 / 20 := min_le_left _ _
+  have ht₁b : t₁ ≤ m₀ / 4 := (min_le_right _ _).trans (min_le_left _ _)
+  have ht₁c : t₁ ≤ h ^ 2 / 2 := (min_le_right _ _).trans (min_le_right _ _)
+  have hA := hc_free_param_pos hZc hh ht₁ ht₁c (by linarith) hd
+  set A := {q : ℝ × ℝ | |q.1 - p| < h ∧ 0 < q.2 ∧ q.2 < t₁ ∧ q.1 - √(2 * q.2 - q.2 ^ 2) ∈ Z ∧
+      q.1 + √(2 * q.2 - q.2 ^ 2) ∈ Z}
+  refine lt_of_lt_of_le hA ?_
+  calc volume A = volume ((fun z : ℂ => (hcFrameS 0 0 0 z, hcFrameT 0 0 0 z)) ⁻¹' A) :=
+        (measurePreserving_hcFrame000.measure_preimage (measurableSet_hcFreeParam hZc p h t₁).nullMeasurableSet).symm
+    _ ≤ _ := by
+        refine measure_mono fun z hz => ?_
+        obtain ⟨h1, h2, h3, h4, h5⟩ := hz
+        set s := hcFrameS 0 0 0 z
+        set t := hcFrameT 0 0 0 z
+        have hs : |s| < 1 / 2 - m₀ := by
+          have := abs_sub_abs_le_abs_sub s p
+          rw [hm₀def] at hhm ⊢; linarith
+        have hr2 : 0 < 2 * t - t ^ 2 := by nlinarith
+        obtain ⟨hv1, hv2, hv3⟩ := hc_free_numeric hm₀ hm₀4 hs h2 (by linarith)
+        have := hc_free_mem hZc hZs hZi hl hr hg (by linarith [abs_nonneg s] : |s| < 1 / 2) h2 (by linarith)
+          (Real.sqrt_pos.2 hr2) (Real.sq_sqrt hr2.le) h4 h5 hv1 hv2 hv3
+        rwa [hcFrame_hcFrameST] at this
 
 /-- **IRREG (2)**: the free points lie in a closed nowhere dense set (null level sets, flat side lines, the circles about `σ_e`'s
 ends, and `K_e = ⋃_{c ∈ Z} T₁((c, 1))`, nowhere dense by Baire on `(Z − ρ) ∪ (Z + ρ)`). -/

@@ -567,7 +567,7 @@ theorem pairs_eq_lintegral {U B : Set ℂ} (hU : MeasurableSet U) (hB : Measurab
 
 /-! ## FS131-K2c: shared children — arcs of unit circles in balls, and the two-ball pair bound
 
-Each `sorry`ed; plan `plans/FS131-w2-kernel-plan.md` § 12. They carry `keptAt_band` (`Plane/Slack`) and Lemma 3 of
+Each proved; plan `plans/FS131-w2-kernel-plan.md` § 12. They carry `keptAt_band` (`Plane/Slack`) and Lemma 3 of
 `falconer_reduction` (`Plane/FalconerReduction`, through `essClosure_dist_ne_one_of_mem_densitySet`). -/
 
 /-- Positive upper density at `x` puts `x` in the support. -/

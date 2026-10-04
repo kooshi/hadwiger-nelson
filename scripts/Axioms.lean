@@ -3259,6 +3259,19 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.hc_se_up
 #print axioms HadwigerNelson.Plane.hc_se_face
 #print axioms HadwigerNelson.Plane.hc_strict_exclusion
+#print axioms HadwigerNelson.Plane.hcDownTri_one_neg_one
+#print axioms HadwigerNelson.Plane.hcFrame_dn000_others
+#print axioms HadwigerNelson.Plane.hc_free_near
+#print axioms HadwigerNelson.Plane.closure_hcBand_subset_frame
+#print axioms HadwigerNelson.Plane.hc_free_arc
+#print axioms HadwigerNelson.Plane.countable_setOf_add_e_eq
+#print axioms HadwigerNelson.Plane.hc_free_mem
+#print axioms HadwigerNelson.Plane.exists_density_point
+#print axioms HadwigerNelson.Plane.hc_free_slice
+#print axioms HadwigerNelson.Plane.measurableSet_hcFreeParam
+#print axioms HadwigerNelson.Plane.hc_free_param_pos
+#print axioms HadwigerNelson.Plane.measurePreserving_hcFrame000
+#print axioms HadwigerNelson.Plane.hc_free_numeric
 
 #eval IO.println "=== PURCHASED ==="
 

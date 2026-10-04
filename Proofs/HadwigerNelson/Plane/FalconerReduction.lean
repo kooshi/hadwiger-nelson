@@ -271,7 +271,7 @@ theorem falconer_lemma1 {E : Set ℂ} (hEm : MeasurableSet E) (hE : E.Nonempty) 
     exact slice_slice_null hEm hE0 p₀ (sub_ne_zero.2 hy₀x.symm.symm) (sub_ne_zero.2 hy.2)
   exact hpos (nonpos_iff_eq_zero.1 ((Measure.le_iff'.1 Measure.restrict_le_self _).trans hnull.le))
 
-/-! ## FS131-K2c: Lemmas 2–4 and the assembly (each `sorry`ed but the import; plan `plans/FS131-w2-kernel-plan.md` § 12)
+/-! ## FS131-K2c: Lemmas 2–4 and the assembly (each proved but the import, `falconer_lemma2_nonempty`; plan `plans/FS131-w2-kernel-plan.md` § 12)
 
 FS129-MA1 § 2.2's order: disjointify the cover; `E` (the points that are density points of no class) is null, measurable
 and — by `[Falconer1981]` Lemma 2 (i), imported below — nonempty; `falconer_lemma1` places the apex at a point of `E` with

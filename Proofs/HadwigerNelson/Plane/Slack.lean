@@ -43,8 +43,8 @@ def farBox (x : ℂ) (θ g ε' ρ : ℝ) : Set ℂ :=
 
 /-! ## FS131-K2c: children of the remaining leaves
 
-Each child is `sorry`ed and priced in `plans/FS131-w2-kernel-plan.md` § 12 (route, Mathlib names confirmed with `#check`, order).
-A leaf whose proof is still `sorry` is closed from its children by the assembly the plan describes. -/
+Each child was stated and priced in `plans/FS131-w2-kernel-plan.md` § 12 (route, Mathlib names confirmed with `#check`, order),
+and each leaf is closed from its children by the assembly the plan describes. -/
 
 /-- The area of a disc, in `ofReal` form. -/
 theorem volume_ball_ofReal (z : ℂ) {ρ : ℝ} (hρ : 0 ≤ ρ) : volume (ball z ρ) = ENNReal.ofReal (ρ ^ 2 * Real.pi) := by

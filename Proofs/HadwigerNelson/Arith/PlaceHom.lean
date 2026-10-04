@@ -38,7 +38,7 @@ def IsPlaceHom (F : Subfield ℝ) (𝔭 : Ideal (𝓞 F)) (E : Subfield ℝ) (V 
 
 /-! ## FS131-K2d: children of `exists_placeHom` and `noAffine_fields`
 
-Each child is `sorry`ed and priced in `plans/FS131-w2-kernel-plan.md` § 15 (route, Mathlib names confirmed with `#check`, order).
+Each child was stated and priced in `plans/FS131-w2-kernel-plan.md` § 15 (route, Mathlib names confirmed with `#check`, order); all are proved.
 `exists_placeHom` is induction on `n` **generalizing the base field** (stage 9.3): the base is the localization of `𝓞 F` at `𝔭`
 inside `F ⊆ ℝ`, the step is evaluation at `t = 0` (`zeroPlace`, `evalZero`), and the homomorphism is the coset construction of
 `unitQuadrance_colorable_of_subring`. -/
