@@ -859,3 +859,7 @@ reason by the close.*
      FS129-SR1-BENDLE3 ("one sector per tile", not "one cone per tile"). **For wave 4** (relayed with the `localSectors` commit): `noBoth`'s proof must run on
      `IsSector` sectors with SECT's separation, not on tile cones; formal consumers of `four_of_bothKind_simple` (C17, FS129-SR1-BENDLE3; DICHO and SEMI if they route
      through it) inherit `hnc` until it is dropped (item 139's ruling).
+141. **Brief FS131-LEB, Lebesgue's covering theorem for the square** (`debruijn` planner, Opus; `data/fs131/briefs/FS131-LEB-lebesgue.md`, gated PASS): a
+     self-contained module on its own branch `fs131-leb` (worktree `.claude/worktrees/fs131-leb` from `main` at `bbee15f0`; packages symlinked, build copied
+     from `main`'s), so it lands on `main` ahead of wave 4 and Woodall's chain; source read and bibliography row proposed (item 66's debt); it may prove leaves
+     itself. Launched in E2's Opus slot: 0.5 × 4 (IW, I2g, I4b, I3g) + 1 (LEB) = 3, plus QA1 in the special slot.
