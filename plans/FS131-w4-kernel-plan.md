@@ -513,3 +513,50 @@ wave 3's § 7 form.
 
 **The implementer's rules** stand as K4's § 5.3 says: children anywhere in the wave's modules and supporting lemmas in the foundation modules (wave 3's
 included, statements unchanged); no statement changes — a needed change comes back through Keryx; nothing with a `sorry` reaches `main`.
+
+## Stage 10 — SAVED (K4c stage 1): the readback
+
+*Continued by FS131-K4c (de Bruijn, the planner, Opus 5.5; brief `data/fs131/briefs/FS131-K4c-wave4.md`) from `daac5779`. K4c's stages are numbered
+on from K4b's (K4c's stage 1 is Stage 10), so every stage number in this record stays unique.*
+
+### 10.1 The brief's quotations against their sources (standing rule 3)
+
+| quotation in the brief | source | result |
+|---|---|---|
+| "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors | **matches**, a prefix of the source's run (it continues "Your predecessor formalized …") |
+| "3. **States every row at the class its argument reads** (G92), reports each widening to Keryx as a generalization, and reads each statement back in" | `plans/FS131-kernel-plan.md` § 7.3 item 3 | **matches as a truncation**: the source item ends "… reads each statement back in its record against the row."; nothing changed |
+| "K4b reached its context line here (brief: hand back before about 480k). **Stated in wave 4 so far: 17 of the 28 rows now in the wave** (C-DOUBLE moved" | this record § Stage 9, its first sentence | **matches as a truncation**: the source continues "… to wave 5; Woodall's three are FS131-W's): …"; nothing changed |
+
+The brief's other statements of fact, checked: Stage 9's table lists nine items (counted) — **yes**; inventory items 53 (N4-STUCK over NB-4's conclusion),
+54 (Woodall's chain is FS131-W), 66 (Lebesgue's covering theorem is FS131-LEB, `lebesgue_covering_square` a `sorry`ed theorem meanwhile), 67 (FS106-L at a
+change point in the open set), 68 (TS-T's Condition-5 clause over S–V Lemma 2's conclusion), 69 (C-DOUBLE to wave 5) and 74 (K4b's narrowings) read on
+`main` as the brief summarizes them — **yes**. **One slip in this record, not the brief's:** Stage 9 cites Lebesgue's ruling as "item 65"; it is item 66
+(65 logs K4b's stage 2). Corrected here; Stage 9 is left as filed.
+
+### 10.2 What is mine: the nine items, the rulings, the passes
+
+The nine (Stage 9's table), in the order I take them: **FS112-U1**'s shadow clause; **FS114-L60-LE**'s clauses L60-EQ and L60-REAL; **FS112-N2-BENDS**'s
+bends with **FS112-BEND** merged into them, and its lemma **N2-ENV**; **FS112-ISO**; **FS112-FLANK**; **FS112-N2-FLANK-Q**; **FS112-A4SIX**; **FS112-NB4P**.
+Each row's whole backlog section is in `data/fs131/k4/rows.md` (byte for byte). Rulings in force: items 53, 67, 68; the narrowings of item 74 (N3-END's
+"the chain is the single vertex" in wave 5; N3-FAIL's "exactly" read as "only"); R8 (FS114-L60-WALK checked at wave 5; its clause L60-D5 with FS112-N3-BASE);
+C-DOUBLE in wave 5 (item 69); Woodall's three rows FS131-W's (item 54); Lebesgue's theorem FS131-LEB's (item 66). **Owed over the whole wave:** the
+`debruijn-domain-modeling` pass (K4b's additions included: § 7.1's `Condition6`, `multicolour`, `AeProperRegions`, the brick map; § 8.1's `pseudoColours`,
+`IsLeavingCentre`, `StripHolds`, `MIn`, the bowtie) and the `debruijn-obligation-modeling` pass (all leaves, K4's § 4 and K4b's Stage 9 sketches included),
+then the implementer's handoff.
+
+### 10.3 The worktree builds as K4b left it
+
+`./scripts/build.sh` in the worktree at `daac5779` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): **OK — all 1741 modules already up to
+date, nothing built, 11 modules with warnings** (wave 3's six skeleton modules, K4's three, K4b's two; every warning `declaration uses 'sorry'`), exit 0
+(`build/gate/build/20261004T084054Z-2272655.log`; driver log `data/fs131/k4/build-k4c-stage1.log`).
+
+### 10.4 Registered before the statements (scored at Stage 12)
+
+- **FS112-N2-FLANK-Q reads N2-TERM's terminality.** Its derivation (`plans/FS112-N-proof.md` stage N2-4) says "in a terminal map (N2-RED plus W-MERGE,
+  RAY, SHAVE …) a both arc is (Q)" and "out-only and, terminal, (R2)" — the bends' terminality, a wave-5 row's conclusion, the edge C-DOUBLE missed
+  (item 69). Expectation: stated in wave 4 over N2-RED's conclusion at `N` as a named hypothesis (every arc of `Γ` on `ω(N)` with constant sides is (Q)
+  or (R2)), the content left being which of the two and what each gives. p ≈ 0.8.
+- **FS112-FLANK needs no validity for its shadow clause**: any connected set inside `B(v, 1)` touching `N` shadows every horn point near `v` below
+  `ω(N)`. p ≈ 0.85.
+- **FS112-U1's shadow clause needs no validity** and holds in a form stronger than the class form (the outer class's points near the arc). p ≈ 0.9.
+- **FS112-A4SIX** holds at every `k` with "four colours" read as "exactly two colours absent". p ≈ 0.85.
