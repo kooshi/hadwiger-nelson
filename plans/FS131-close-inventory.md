@@ -305,3 +305,20 @@ reason by the close.*
     stopped (one writer per branch). Slip (I3's): one commit message (`b45ef041`) lacks the attribution lines.
 51. **Brief SEARCH-2026-10-04** (the Searcher, Opus; `data/search/briefs/SEARCH-2026-10-04.md`), gated PASS: row 6 only (C-T-BIKE), the Searcher's call whether to
     run it, one hour, at most 8 GiB per run. Launched in the slot I2 freed, per item 47's default. Source: this commit.
+52. **FS131-K4 handed back at stage 5 (partial), harness ≈ 389k** (report on its branch, `.claude/worktrees/fs131-w4/data/fs131/reports/FS131-K4.md`; `fs131-w4` at
+    `d0c56af0`, checked): wave 4's foundation `Plane/ValidMap/Basic` sorry-free (frames with exact curvature, horns, sectors and degree counted with `encard`,
+    contacts and their kinds, shadows, MERGE/SHAVE preconditions, `Terminal`, `IsStuck`, Condition 5, `𝓜_K`); 9 of 29 rows stated (25 `sorry` theorems); no
+    statement defect — the cusp reading the opening plan expected does not arise (a cusp horn is one sector). Generalizations: FS110-N3-CONF and -W-MERGE with
+    unit arcs allowed; FS110-N3-DEG in a non-strict form with curvatures in [−1, 1], the strict form under Condition 5; FS110-N4-SHADOW's concentric clause about
+    a tangent arc's far side alone; FS112-LOCK and the N2-SIGN lemma for whole colour classes. Layout: FS112-N3-NOBOTH sits in `Plane/ValidMap/UnitArc`. Slip
+    (K4's): the obligation-modeling pass not run — owed by the successor over all rows. FS114-L60-WALK's clause L60-D5 carried to wave 5 with FS112-N3-BASE
+    (ruling R8 covers the rest). Successor: FS131-K4b.
+53. **Ruling — FS110-N4-STUCK assumes NB-4's conclusion** (at most three colours at a point), the class its argument reads, as K4 stated it; FS110-NB-4 is not a
+    backlog row. Alternative weighed: add FS110-NB-4 to the backlog now as a supporting lemma. Why: N4-STUCK's own statement needs only the conclusion; a
+    consumer that needs N4-STUCK without the hypothesis (a formal FS110-CLOSURE) formalizes NB-4 beside it, as FS111-M-REDUCE-I was (item 8). Wave 5's planner
+    is told. Confidence: high.
+54. **Ruling — Woodall's chain is its own job, FS131-W**: FS106-WO, FS106-TW and FS106-AE-MAP6 (Woodall's maps-need-six almost everywhere, with Townsend's
+    lemma; their mathematics ours, ruling R9) are planned and implemented on their own branch, from wave 4's skeleton once FS106-L and FS106-TS-T are stated,
+    and land before wave 9 (their only consumers outside the chain: FS111-C-SIX-M, FS111-M2-REDUCE-C, FS129-OR1-TOP5, all wave 9; checked by script). They keep
+    wave 4 in the table; wave 4 lands without them. Alternative weighed: inside wave 4 (K4's question). Why: the proof is a whole theorem, wave 4's planning
+    already outruns one context, and nothing before wave 9 waits on it. Confidence: high.
