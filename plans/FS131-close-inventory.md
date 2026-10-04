@@ -1593,3 +1593,6 @@ reason by the close.*
 222. **Brief FS131-I4i, wave 4's ninth implementer** (Opus; `data/fs131/briefs/FS131-I4i-wave4.md`, derived by script from I4h's — source headings checked to name
      real headings after the rename — gated PASS): `UnitArc` and `BaseSteps`' 19 in Stage 21's order (engine 2 first). Launched in I4h's slot: 1 (I2m) + 1 (IC2)
      + 1 (E4) + 1 (I4i) = 4.
+223. **Engine 2 written once** (item 218 (g)): FS131-I4i wrote `ringArcsWithin_of_Γ_subset` in `Plane/ValidMap/Basic` on `fs131-w4` (`3f7ea033`, Basic.lean only,
+     112 lines; checked by `git show --stat`); Keryx relayed to FS131-IC2 to bring that exact hunk onto `fs131-w4c` if needed before the merge, so the copies are
+     identical.
