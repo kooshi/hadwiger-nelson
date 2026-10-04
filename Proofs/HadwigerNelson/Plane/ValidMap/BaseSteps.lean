@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Basic
+import Proofs.HadwigerNelson.Plane.SVMap
 import Proofs.HadwigerNelson.Plane.LocalMapExamples
 
 /-!
@@ -117,6 +118,59 @@ example (j : Fin 2) : ¬ (ArcMap.const univ isOpen_univ j).IsLeavingCentre 1 0 :
   have := hsub ⟨θ₁, ⟨le_refl _, hlt.le⟩, rfl⟩
   simp [ArcMap.Γ, ArcMap.const] at this
 
+/-! ### The brick corner: a cubic trichromatic vertex with an M-in point (FS131-QA2's QA2-2) -/
+
+/-- **An M-in point at the brick corner**: the far corner `x = 4/5 + 3/5 i` of the upper right cell at the corner `0` of `sevenBrickMap`
+is at distance exactly `1` (3–4–5) and lies in the closure of that cell's part inside `ω(0)` — colour `0`, carried at `0`. With
+`sevenBrick_corner_isCubicTrichromatic` this exercises `anti`'s hypotheses `IsCubicTrichromatic u ∧ MIn u x` on a valid map of the plane
+at `k = 7`; the second, antipodal M-in point is the clause `anti` refutes (the brick's two M-in points `±4/5 + 3/5 i` are `8/5` apart). -/
+theorem sevenBrick_corner_mIn :
+    dist (((4 / 5 : ℝ) : ℂ) + ((3 / 5 : ℝ) : ℂ) * I) 0 = 1 ∧ sevenBrickMap.MIn 0 (((4 / 5 : ℝ) : ℂ) + ((3 / 5 : ℝ) : ℂ) * I) := by
+  set x : ℂ := ((4 / 5 : ℝ) : ℂ) + ((3 / 5 : ℝ) : ℂ) * I with hx
+  have hxre : x.re = 4 / 5 := by simp [hx]
+  have hxim : x.im = 3 / 5 := by simp [hx]
+  have hnx : ‖x‖ = 1 := by
+    rw [← Real.sqrt_sq (norm_nonneg x), ← Complex.normSq_eq_norm_sq, Complex.normSq_apply, hxre, hxim]
+    norm_num
+  refine ⟨by rw [dist_zero_right, hnx], 0, by rw [sevenBrick_corner_coloursAt]; simp, ?_⟩
+  rw [Metric.mem_closure_iff]
+  intro ε hε
+  set t : ℝ := min (ε / 2) (1 / 4) with ht
+  have ht0 : 0 < t := lt_min (by linarith) (by norm_num)
+  have ht1 : t ≤ 1 / 4 := min_le_right _ _
+  set z : ℂ := ((1 - t : ℝ) : ℂ) * x with hz
+  have hzre : z.re = 4 / 5 * (1 - t) := by rw [hz, Complex.re_ofReal_mul, hxre]; ring
+  have hzim : z.im = 3 / 5 * (1 - t) := by rw [hz, Complex.im_ofReal_mul, hxim]; ring
+  have hfl : ⌊z.im / (3 / 5)⌋ = 0 := by
+    rw [Int.floor_eq_iff, hzim]; push_cast; rw [zero_add]
+    constructor
+    · apply div_nonneg <;> linarith
+    · rw [div_lt_one (by norm_num)]; linarith
+  have hnot : ∀ n : ℤ, 1 - t ≠ n := by
+    intro n hn
+    rcases lt_or_ge 0 n with hn0 | hn0
+    · have : (1 : ℝ) ≤ n := by exact_mod_cast hn0
+      linarith
+    · have : (n : ℝ) ≤ 0 := by exact_mod_cast hn0
+      linarith
+  have hzint : z ∈ sevenBrickMap.interiorPts := by
+    refine ⟨mem_univ z, not_mem_sevenBrickArcs (fun n hn => hnot n ?_) (fun n hn => hnot n ?_)⟩
+    · rw [hzim] at hn; linarith
+    · rw [hfl, hzre] at hn; push_cast at hn; linarith
+  have hzcol : sevenBrickMap.col z = 0 := by
+    rw [sevenBrick_color_eq (c := 0) (r := 0) hfl]
+    · decide
+    · rw [Int.floor_eq_iff, hzre]; push_cast; rw [zero_add]; simp only [mul_zero, sub_zero]
+      constructor
+      · apply div_nonneg <;> linarith
+      · rw [div_lt_one (by norm_num)]; linarith
+  have hnz : ‖z‖ = 1 - t := by
+    rw [hz, norm_mul, hnx, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith)]
+  refine ⟨z, ⟨⟨hzint, hzcol⟩, by rw [mem_ball_zero_iff, hnz]; linarith⟩, ?_⟩
+  have : x - z = ((t : ℝ) : ℂ) * x := by rw [hz]; push_cast; ring
+  rw [dist_eq_norm, this, norm_mul, hnx, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
+  linarith [min_le_left (ε / 2) (1 / 4)]
+
 end Spec
 
 namespace ArcMap
@@ -126,14 +180,14 @@ variable {k : ℕ} {F : ArcMap k}
 /-! ## FS112-N3-PAIRS -/
 
 /-- **FS112-N3-PAIRS** (i), N3-I (CB's (i) never fails): for cubic trichromatic `u₁`, `u₂` and a unit pair `x ∈ ω(u₁)`,
-`y ∈ ω(u₂)`, the pseudo-colours `c′(x) = c′(y) = {a}` are impossible (no transversality hypothesis; `u₁ = u₂` allowed). -/
+`y ∈ ω(u₂)`, the pseudo-colours `c′(x) = c′(y) = {a}` are impossible (no transversality hypothesis; `u₁ = u₂` allowed). Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
 theorem pair_i (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromatic u₁) (h₂ : F.IsCubicTrichromatic u₂)
     (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1) (hx : dist x u₁ = 1) (hy : dist y u₂ = 1) (hxy : dist x y = 1) {a : Fin k}
     (hax : F.pseudoColours u₁ x = {a}) (hay : F.pseudoColours u₂ y = {a}) : False := by
   sorry
 
 /-- **FS112-N3-PAIRS** (ii), N3-II: for a unit pair `x ∈ ω(u₁)`, `y ∈ ω(u₂)` with `c′(x) = c′(y) = {a, b}` and `ω(y)` transversal
-to `ω(u₁)` at `x` (`y ≠ u₁`, `|y − u₁| ≠ 2`), `x` carries at least four colours or `y` is the centre of a both-kind unit arc. -/
+to `ω(u₁)` at `x` (`y ≠ u₁`, `|y − u₁| ≠ 2`), `x` carries at least four colours or `y` is the centre of a both-kind unit arc. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
 theorem pair_ii (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromatic u₁) (h₂ : F.IsCubicTrichromatic u₂)
     (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1) (hx : dist x u₁ = 1) (hy : dist y u₂ = 1) (hxy : dist x y = 1)
     (htr : y ≠ u₁ ∧ dist y u₁ ≠ 2) {a b : Fin k} (hab : a ≠ b) (hax : F.pseudoColours u₁ x = {a, b})
@@ -141,7 +195,7 @@ theorem pair_ii (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromat
     4 ≤ (F.coloursAt x).ncard ∨ ∃ θ₁ θ₂, F.BothKind y θ₁ θ₂ := by
   sorry
 
-/-- **FS112-N3-PAIRS**, N3-P′: two cubic trichromatic vertices with one multicolour are never at distance `1`. -/
+/-- **FS112-N3-PAIRS**, N3-P′: two cubic trichromatic vertices with one multicolour are never at distance `1`. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
 theorem pair_P' (hF : F.Valid) {u u' : ℂ} (h : F.IsCubicTrichromatic u) (h' : F.IsCubicTrichromatic u') (hu : u ∈ F.dom)
     (hu' : u' ∈ F.dom) (hcol : F.coloursAt u = F.coloursAt u') : dist u u' ≠ 1 := by
   sorry
@@ -149,7 +203,7 @@ theorem pair_P' (hF : F.Valid) {u u' : ℂ} (h : F.IsCubicTrichromatic u) (h' : 
 /-! ## FS112-N3-FAIL -/
 
 /-- **FS112-N3-FAIL**, the place: at a cubic trichromatic `u`, the strip fails at `q ∈ ω(u)` only when `q` is a leaving centre of
-`u`. -/
+`u`. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
 theorem fail_leavingCentre (hF : F.Valid) {u q : ℂ} (hu : F.IsCubicTrichromatic u) (hc : F.Covers u 1) (hq : dist q u = 1)
     (hs : ¬ F.StripHolds u q) : F.IsLeavingCentre u q := by
   sorry
@@ -166,7 +220,7 @@ theorem fail_colours (hF : F.Valid) {u q : ℂ} (hu : F.IsCubicTrichromatic u) (
 /-! ## FS112-N3-ANTI -/
 
 /-- **FS112-N3-ANTI** (CE5, the Antipodal Lemma, with unit arcs): at a cubic trichromatic `u`, no two points of `ω(u)` at distance `2`
-are both M-in. -/
+are both M-in. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). With one M-in point: `sevenBrick_corner_mIn` (the antipodal second is the refuted clause). -/
 theorem anti (hF : F.Valid) {u x y : ℂ} (hu : F.IsCubicTrichromatic u) (hc : F.Covers u 1) (hx : dist x u = 1)
     (hy : dist y u = 1) (hxy : dist x y = 2) (h1 : F.MIn u x) (h2 : F.MIn u y) : False := by
   sorry

@@ -1,0 +1,12 @@
+'HadwigerNelson.Plane.ArcMap.exists_hasDegree_of_mem_dom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ts_t_trichromatic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ts_t_degree_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.isSector_cone_or_horn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.hasDegree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sectorBetween_eq_hornSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sevenBrick_corner_isCubicTrichromatic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sevenBrick_corner_mIn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.halfDisc_simple' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn' depends on axioms: [propext, Classical.choice, Quot.sound]

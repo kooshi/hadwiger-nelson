@@ -135,12 +135,14 @@ namespace ArcMap
 variable {k : ℕ} {F : ArcMap k}
 
 /-- **FS112-LOCK**: for `w = r(θ)` interior to a unit arc of `ω(P)`, a tile of the outer colour touches `ω(w)` only at `P`; a
-tile of the inner colour only at `P` or at `P + 2e(θ)`, and a tile of the inner colour touching at `P + 2e(θ)` lies outside
-`B(P, 2)`. (Class form for the touching sets: no point of either class's closure on `ω(w)` elsewhere.) -/
+tile of the inner colour only at `P` or at `P + 2e(θ)`, and a tile of the inner colour touching at `P + 2e(θ)` approaches it from outside
+`B(P, 2)`: near `P + 2e(θ)` it misses `B(P, 2)` (the row's "from outside `B(P, 2)`", `plans/FS112-derivation.md` l. 72; the whole-tile form
+`Disjoint T (ball P 2)` first stated here was stronger than the row and fails for short arcs — inventory item 177, FS131-I4d's
+counter-configuration). (Class form for the touching sets: no point of either class's closure on `ω(w)` elsewhere.) -/
 theorem lock (hF : F.Valid) {P : ℂ} {θ₁ θ₂ θ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c') (hθ : θ ∈ Ioo θ₁ θ₂) :
     closure (F.region c') ∩ sphere (ringPt P θ) 1 ⊆ {P} ∧
       closure (F.region c) ∩ sphere (ringPt P θ) 1 ⊆ {P, P + 2 * e θ} ∧
-      ∀ T, F.TileOf c T → P + 2 * e θ ∈ closure T → Disjoint T (ball P 2) := by
+      ∀ T, F.TileOf c T → P + 2 * e θ ∈ closure T → ∃ δ > 0, Disjoint (T ∩ ball (P + 2 * e θ) δ) (ball P 2) := by
   sorry
 
 /-- **FS112-N2-BENDS**, its lemma N2-SIGN: every interior point of a side colour's class is within `< 1` of every interior

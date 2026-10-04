@@ -1,4 +1,4 @@
-import Proofs.HadwigerNelson.Plane.ValidMap.Basic
+import Proofs.HadwigerNelson.Plane.ValidMap.Sectors
 import Proofs.HadwigerNelson.Instances.Seven
 import Proofs.HadwigerNelson.Topology.LebesgueCovering
 import Proofs.HadwigerNelson.Plane.Diameter
@@ -783,8 +783,8 @@ theorem ts_t (hF : F.Valid) (hP : F.IsPlaneMap) (z : ℂ) {ε : ℝ} (hε : 0 < 
 
 /-- **TS-T's vertex step**: a point of the domain has a finite degree, at least its number of colours (each colour at the point
 contributes a sector). So a point of chromaticity `≥ 3` is a vertex of degree `≥ 3`. -/
-theorem exists_hasDegree_of_mem_dom {x : ℂ} (hx : x ∈ F.dom) : ∃ n, (F.coloursAt x).ncard ≤ n ∧ F.HasDegree x n := by
-  sorry
+theorem exists_hasDegree_of_mem_dom {x : ℂ} (hx : x ∈ F.dom) : ∃ n, (F.coloursAt x).ncard ≤ n ∧ F.HasDegree x n :=
+  exists_hasDegree_of_chart hx
 
 /-- **FS106-TS-T, Condition 5's clause**, over its conclusion: where every point carries at most three colours (S–V Lemma 2 almost
 everywhere under Condition 5 — SB § 2.1 A5, not a backlog row; for arc maps FS110-NB-4's conclusion, as inventory ruling 53 states
@@ -1010,6 +1010,330 @@ theorem sevenBrickMap_isPlaneMap : sevenBrickMap.IsPlaneMap := rfl
 /-- `sevenBrickMap` is valid: the brick colouring is proper at every unit pair (`Brick.avoids`, M36). -/
 theorem sevenBrickMap_valid : sevenBrickMap.Valid := fun x _ y _ hxy =>
   sevenBrick.avoids (List.mem_singleton.mpr rfl) sevenBrick_check (by rw [hxy]; simp)
+
+/-! ## The brick corner: a cubic trichromatic vertex, with an M-in point (FS131-QA2's QA2-2)
+
+At the corner `0 = brickCorner 0 0` three cells meet in a T: the upper right cell `(0, 0)` (colour `0`), the upper left `(−1, 0)`
+(colour `6`), and the lower `(0, −1)` (colour `4`), whose top edge runs through `0`. So `0` has degree `3` and three colours
+(`tools/fs131_qa2_brick.py`, check 1–2), and the far corner `4/5 + 3/5 i` of the upper right cell is at distance exactly `1` (3–4–5),
+an M-in point of `0` (check 3). -/
+
+/-- A point is on no cell edge when its height is not a multiple of `3/5` and its sheared abscissa `re − (2/5)⌊im/(3/5)⌋` is not a
+multiple of `4/5`. -/
+theorem not_mem_sevenBrickArcs {z : ℂ} (hrow : ∀ n : ℤ, z.im ≠ 3 / 5 * n)
+    (hcol : ∀ n : ℤ, z.re - 2 / 5 * ⌊z.im / (3 / 5)⌋ ≠ 4 / 5 * n) : z ∉ ⋃ a ∈ sevenBrickArcs, a.carrier := by
+  simp only [mem_iUnion, exists_prop, not_exists, not_and]
+  intro a ha hz
+  simp only [sevenBrickArcs, mem_iUnion, mem_insert_iff, mem_singleton_iff] at ha
+  obtain ⟨c, r, rfl | rfl⟩ := ha
+  · obtain ⟨s, t, -, -, hst, rfl⟩ := hz
+    apply hrow r
+    simp only [Complex.add_im, Complex.smul_im, smul_eq_mul, brickCorner_im]
+    linear_combination (3 / 5 * (r : ℝ)) * hst
+  · obtain ⟨s, t, hs, ht, hst, rfl⟩ := hz
+    set z := s • brickCorner c r + t • (brickCorner c r + ((3 / 5 : ℝ) : ℂ) * I) with hz
+    have him : z.im = 3 / 5 * r + 3 / 5 * t := by
+      simp only [hz, Complex.add_im, Complex.smul_im, smul_eq_mul, brickCorner_im, Complex.mul_im, Complex.ofReal_re,
+        Complex.ofReal_im, Complex.I_re, Complex.I_im]
+      linear_combination (3 / 5 * (r : ℝ)) * hst
+    have hre : z.re = 2 / 5 * r + 4 / 5 * c := by
+      simp only [hz, Complex.add_re, Complex.smul_re, smul_eq_mul, brickCorner_re, Complex.mul_re, Complex.ofReal_re,
+        Complex.ofReal_im, Complex.I_re, Complex.I_im]
+      linear_combination (2 / 5 * (r : ℝ) + 4 / 5 * c) * hst
+    rcases eq_or_lt_of_le ht with ht0 | ht0
+    · exact hrow r (by rw [him, ← ht0]; ring)
+    rcases eq_or_lt_of_le (show t ≤ 1 by linarith) with ht1 | ht1
+    · exact hrow (r + 1) (by rw [him, ht1]; push_cast; ring)
+    have hfl : ⌊z.im / (3 / 5)⌋ = r := by
+      rw [Int.floor_eq_iff, him]
+      constructor <;> · field_simp; linarith
+    apply hcol c
+    rw [hfl, hre]; ring
+
+/-- A horizontal cell edge holds the points of its line between its ends. -/
+theorem mem_sevenBrickArcs_of_bottom {c r : ℤ} {z : ℂ} (him : z.im = 3 / 5 * r)
+    (hlo : 2 / 5 * r + 4 / 5 * c ≤ z.re) (hhi : z.re ≤ 2 / 5 * r + 4 / 5 * (c + 1)) : z ∈ ⋃ a ∈ sevenBrickArcs, a.carrier := by
+  refine mem_iUnion₂.mpr ⟨Arc.seg (brickCorner c r) (brickCorner (c + 1) r), ?_, ?_⟩
+  · simp only [sevenBrickArcs, mem_iUnion, mem_insert_iff, mem_singleton_iff]; exact ⟨c, r, Or.inl rfl⟩
+  · set t := (z.re - (2 / 5 * r + 4 / 5 * c)) / (4 / 5) with ht
+    have ht0 : 0 ≤ t := by rw [ht]; apply div_nonneg <;> linarith
+    have ht1 : t ≤ 1 := by rw [ht, div_le_one (by norm_num)]; linarith
+    refine ⟨1 - t, t, by linarith, ht0, by ring, ?_⟩
+    apply Complex.ext
+    · simp only [Complex.add_re, Complex.smul_re, smul_eq_mul, brickCorner_re]; push_cast; rw [ht]; field_simp; ring
+    · simp only [Complex.add_im, Complex.smul_im, smul_eq_mul, brickCorner_im, him]; ring
+
+/-- A vertical cell edge holds the points of its line between its ends. -/
+theorem mem_sevenBrickArcs_of_left {c r : ℤ} {z : ℂ} (hre : z.re = 2 / 5 * r + 4 / 5 * c)
+    (hlo : 3 / 5 * r ≤ z.im) (hhi : z.im ≤ 3 / 5 * r + 3 / 5) : z ∈ ⋃ a ∈ sevenBrickArcs, a.carrier := by
+  refine mem_iUnion₂.mpr ⟨Arc.seg (brickCorner c r) (brickCorner c r + ((3 / 5 : ℝ) : ℂ) * I), ?_, ?_⟩
+  · simp only [sevenBrickArcs, mem_iUnion, mem_insert_iff, mem_singleton_iff]; exact ⟨c, r, Or.inr rfl⟩
+  · set t := (z.im - 3 / 5 * r) / (3 / 5) with ht
+    have ht0 : 0 ≤ t := by rw [ht]; apply div_nonneg <;> linarith
+    have ht1 : t ≤ 1 := by rw [ht, div_le_one (by norm_num)]; linarith
+    refine ⟨1 - t, t, by linarith, ht0, by ring, ?_⟩
+    apply Complex.ext
+    · simp only [Complex.add_re, Complex.smul_re, smul_eq_mul, brickCorner_re, Complex.mul_re, Complex.ofReal_re,
+        Complex.ofReal_im, Complex.I_re, Complex.I_im, hre]; ring
+    · simp only [Complex.add_im, Complex.smul_im, smul_eq_mul, brickCorner_im, Complex.mul_im, Complex.ofReal_re,
+        Complex.ofReal_im, Complex.I_re, Complex.I_im]; rw [ht]; field_simp; ring
+
+/-- The three cells at the corner `0`, within `ρ`: upper right (colour `0`), upper left (colour `6`), lower (colour `4`). -/
+def brickCornerSector (ρ : ℝ) : Fin 3 → Set ℂ :=
+  ![ball 0 ρ ∩ {z | 0 < z.re} ∩ {z | 0 < z.im}, ball 0 ρ ∩ {z | z.re < 0} ∩ {z | 0 < z.im}, ball 0 ρ ∩ {z | z.im < 0}]
+
+theorem mem_brickCornerSector_iUnion {ρ : ℝ} {z : ℂ} : z ∈ ⋃ i, brickCornerSector ρ i ↔
+    (z ∈ ball 0 ρ ∧ 0 < z.re ∧ 0 < z.im) ∨ (z ∈ ball 0 ρ ∧ z.re < 0 ∧ 0 < z.im) ∨ (z ∈ ball 0 ρ ∧ z.im < 0) := by
+  rw [mem_iUnion]
+  constructor
+  · rintro ⟨i, hi⟩
+    fin_cases i
+    · exact Or.inl ⟨hi.1.1, hi.1.2, hi.2⟩
+    · exact Or.inr (Or.inl ⟨hi.1.1, hi.1.2, hi.2⟩)
+    · exact Or.inr (Or.inr ⟨hi.1, hi.2⟩)
+  · rintro (⟨h1, h2, h3⟩ | ⟨h1, h2, h3⟩ | ⟨h1, h2⟩)
+    · exact ⟨0, ⟨h1, h2⟩, h3⟩
+    · exact ⟨1, ⟨h1, h2⟩, h3⟩
+    · exact ⟨2, h1, h2⟩
+
+theorem brickCornerSector_subset_ball (ρ : ℝ) (i : Fin 3) : brickCornerSector ρ i ⊆ ball 0 ρ := by
+  fin_cases i
+  · exact fun z h => h.1.1
+  · exact fun z h => h.1.1
+  · exact fun z h => h.1
+
+/-- Points of a ball of radius at most `1/5` about `0` have both coordinates below `1/5` in size. -/
+theorem abs_re_im_lt_of_mem_ball {ρ : ℝ} (hρ : ρ ≤ 1 / 5) {z : ℂ} (hz : z ∈ ball (0 : ℂ) ρ) :
+    |z.re| < 1 / 5 ∧ |z.im| < 1 / 5 := by
+  rw [mem_ball_zero_iff] at hz
+  exact ⟨(Complex.abs_re_le_norm z).trans_lt (hz.trans_le hρ), (Complex.abs_im_le_norm z).trans_lt (hz.trans_le hρ)⟩
+
+/-- **The interior points near the corner are the three cells**: for `0 < ρ ≤ 1/5` the interior points of `B(0, ρ)` are the three
+corner sectors — the edges there are the horizontal line and the vertical half-line up from `0`. -/
+theorem sevenBrick_corner_interior {ρ : ℝ} (hρ : ρ ≤ 1 / 5) :
+    sevenBrickMap.interiorPts ∩ ball 0 ρ = ⋃ i, brickCornerSector ρ i := by
+  have hint : ∀ z, z ∈ sevenBrickMap.interiorPts ↔ z ∉ ⋃ a ∈ sevenBrickArcs, a.carrier := fun z =>
+    ⟨fun h => h.2, fun h => ⟨mem_univ z, h⟩⟩
+  ext z
+  rw [mem_inter_iff, hint, mem_brickCornerSector_iUnion]
+  constructor
+  · rintro ⟨hz, hb⟩
+    obtain ⟨hre, him⟩ := abs_re_im_lt_of_mem_ball hρ hb
+    rcases lt_trichotomy z.im 0 with h | h | h
+    · exact Or.inr (Or.inr ⟨hb, h⟩)
+    · exfalso
+      rcases le_or_gt 0 z.re with h0 | h0
+      · exact hz (mem_sevenBrickArcs_of_bottom (c := 0) (r := 0) (by rw [h]; simp) (by simpa using h0)
+          (by push_cast; linarith [(abs_lt.mp hre).2]))
+      · exact hz (mem_sevenBrickArcs_of_bottom (c := -1) (r := 0) (by rw [h]; simp)
+          (by push_cast; linarith [(abs_lt.mp hre).1]) (by push_cast; linarith))
+    · rcases lt_trichotomy z.re 0 with h' | h' | h'
+      · exact Or.inr (Or.inl ⟨hb, h', h⟩)
+      · exfalso
+        exact hz (mem_sevenBrickArcs_of_left (c := 0) (r := 0) (by rw [h']; simp) (by simpa using h.le)
+          (by push_cast; linarith [(abs_lt.mp him).2]))
+      · exact Or.inl ⟨hb, h', h⟩
+  · have hupper : ∀ z : ℂ, z ∈ ball (0 : ℂ) ρ → 0 < z.im → z.re ≠ 0 → z ∉ ⋃ a ∈ sevenBrickArcs, a.carrier := by
+      intro z hb him0 hre0
+      obtain ⟨hre, him⟩ := abs_re_im_lt_of_mem_ball hρ hb
+      have hfl : ⌊z.im / (3 / 5)⌋ = 0 := by
+        rw [Int.floor_eq_iff]; push_cast; rw [zero_add]
+        constructor
+        · exact div_nonneg him0.le (by norm_num)
+        · rw [div_lt_one (by norm_num)]; linarith [(abs_lt.mp him).2]
+      refine not_mem_sevenBrickArcs (fun n hn => ?_) (fun n hn => ?_)
+      · rcases lt_or_ge 0 n with hn0 | hn0
+        · have : (1 : ℝ) ≤ n := by exact_mod_cast hn0
+          linarith [(abs_lt.mp him).2]
+        · have : (n : ℝ) ≤ 0 := by exact_mod_cast hn0
+          linarith
+      · rw [hfl] at hn; push_cast at hn
+        rcases lt_trichotomy n 0 with hn0 | hn0 | hn0
+        · have : (n : ℝ) ≤ -1 := by exact_mod_cast Int.le_sub_one_of_lt hn0
+          linarith [(abs_lt.mp hre).1]
+        · rw [hn0] at hn; push_cast at hn; exact hre0 (by linarith)
+        · have : (1 : ℝ) ≤ n := by exact_mod_cast hn0
+          linarith [(abs_lt.mp hre).2]
+    rintro (⟨hb, hre, him⟩ | ⟨hb, hre, him⟩ | ⟨hb, him⟩)
+    · exact ⟨hupper z hb him hre.ne', hb⟩
+    · exact ⟨hupper z hb him hre.ne, hb⟩
+    · refine ⟨?_, hb⟩
+      obtain ⟨hre, him'⟩ := abs_re_im_lt_of_mem_ball hρ hb
+      have hfl : ⌊z.im / (3 / 5)⌋ = -1 := by
+        rw [Int.floor_eq_iff]; push_cast
+        constructor
+        · rw [le_div_iff₀ (by norm_num)]; linarith [(abs_lt.mp him').1]
+        · rw [div_lt_iff₀ (by norm_num)]; linarith
+      refine not_mem_sevenBrickArcs (fun n hn => ?_) (fun n hn => ?_)
+      · rcases lt_or_ge n 0 with hn0 | hn0
+        · have : (n : ℝ) ≤ -1 := by exact_mod_cast Int.le_sub_one_of_lt hn0
+          linarith [(abs_lt.mp him').1]
+        · have : (0 : ℝ) ≤ n := by exact_mod_cast hn0
+          linarith
+      · rw [hfl] at hn; push_cast at hn
+        rcases lt_or_ge 0 n with hn0 | hn0
+        · have : (1 : ℝ) ≤ n := by exact_mod_cast hn0
+          linarith [(abs_lt.mp hre).2]
+        · have : (n : ℝ) ≤ 0 := by exact_mod_cast hn0
+          linarith [(abs_lt.mp hre).1]
+
+/-- The corner sectors' representatives `t(1 + i)`, `t(−1 + i)`, `−t i`, for `0 < t`. -/
+noncomputable def brickCornerPt (t : ℝ) : Fin 3 → ℂ := ![(t : ℂ) + (t : ℂ) * I, -(t : ℂ) + (t : ℂ) * I, -((t : ℂ) * I)]
+
+theorem brickCornerPt_mem {ρ t : ℝ} (ht : 0 < t) (htρ : 2 * t < ρ) (i : Fin 3) : brickCornerPt t i ∈ brickCornerSector ρ i := by
+  have hn : ∀ a b : ℝ, |a| ≤ t → |b| ≤ t → ‖(a : ℂ) + (b : ℂ) * I‖ < ρ := by
+    intro a b ha hb
+    calc ‖(a : ℂ) + (b : ℂ) * I‖ ≤ ‖(a : ℂ)‖ + ‖(b : ℂ) * I‖ := norm_add_le _ _
+      _ = |a| + |b| := by rw [norm_mul, Complex.norm_I, mul_one, Complex.norm_real, Complex.norm_real, Real.norm_eq_abs,
+          Real.norm_eq_abs]
+      _ < ρ := by linarith
+  fin_cases i
+  · refine ⟨⟨mem_ball_zero_iff.mpr (hn t t (abs_of_pos ht).le (abs_of_pos ht).le), by simp [brickCornerPt, ht]⟩, by
+      simp [brickCornerPt, ht]⟩
+  · refine ⟨⟨mem_ball_zero_iff.mpr ?_, by simp [brickCornerPt, ht]⟩, by simp [brickCornerPt, ht]⟩
+    have := hn (-t) t (by rw [abs_neg, abs_of_pos ht]) (abs_of_pos ht).le
+    simpa [brickCornerPt] using this
+  · refine ⟨mem_ball_zero_iff.mpr ?_, by simp [brickCornerPt, ht]⟩
+    have := hn 0 (-t) (by simp; exact ht.le) (by rw [abs_neg, abs_of_pos ht])
+    simpa [brickCornerPt] using this
+
+/-- **The brick corner has degree `3`**: for every `ρ ≤ 1/5` its sectors are the three cells. -/
+theorem sevenBrick_corner_hasDegree : sevenBrickMap.HasDegree 0 3 := by
+  filter_upwards [Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 5 by norm_num)] with ρ hρ
+  refine ArcMap.encard_sectors_of_partition (sevenBrick_corner_interior hρ.2) (fun i => ?_) (fun i => ?_)
+    (fun i j hij => ?_) (fun i => ⟨_, brickCornerPt_mem (t := ρ / 4) (by linarith [hρ.1]) (by linarith [hρ.1]) i⟩)
+    (fun i => ?_)
+  · fin_cases i
+    · exact (isOpen_ball.inter (isOpen_lt continuous_const Complex.continuous_re)).inter
+        (isOpen_lt continuous_const Complex.continuous_im)
+    · exact (isOpen_ball.inter (isOpen_lt Complex.continuous_re continuous_const)).inter
+        (isOpen_lt continuous_const Complex.continuous_im)
+    · exact isOpen_ball.inter (isOpen_lt Complex.continuous_im continuous_const)
+  · fin_cases i
+    · exact (((convex_ball _ _).inter (convex_halfSpace_re_gt 0)).inter (convex_halfSpace_im_gt 0)).isPreconnected
+    · exact (((convex_ball _ _).inter (convex_halfSpace_re_lt 0)).inter (convex_halfSpace_im_gt 0)).isPreconnected
+    · exact ((convex_ball _ _).inter (convex_halfSpace_im_lt 0)).isPreconnected
+  · rw [disjoint_left]
+    intro z hzi hzj
+    fin_cases i <;> fin_cases j <;> simp_all [brickCornerSector] <;> linarith
+  · rw [Metric.mem_closure_iff]
+    intro ε hε
+    set t := min (ε / 4) (ρ / 4) with ht
+    have ht0 : 0 < t := lt_min (by linarith) (by linarith [hρ.1])
+    refine ⟨brickCornerPt t i, brickCornerPt_mem ht0 (by linarith [min_le_right (ε / 4) (ρ / 4), hρ.1]) i, ?_⟩
+    have hmem := brickCornerPt_mem (ρ := ε) ht0 (by linarith [min_le_left (ε / 4) (ρ / 4)]) i
+    have hb : brickCornerPt t i ∈ ball (0 : ℂ) ε := brickCornerSector_subset_ball ε i hmem
+    rw [dist_comm]; exact hb
+
+/-- The brick colour of a point of a cell: column `c`, row `r` (both read by the floors). -/
+theorem sevenBrick_color_eq {z : ℂ} {c r : ℤ} (hr : ⌊z.im / (3 / 5)⌋ = r) (hc : ⌊(z.re - 2 / 5 * r) / (4 / 5)⌋ = c) :
+    sevenBrickMap.col z = sevenBrick.table (zmodIdx 7 (by norm_num) c) (zmodIdx 7 (by norm_num) r) := by
+  have hrow : sevenBrick.row z = r := by
+    show ⌊z.im / ((sevenBrick.h : ℚ) : ℝ)⌋ = r
+    rw [sevenBrick_h]; exact hr
+  have hcol : sevenBrick.col z = c := by
+    show ⌊(z.re - ((sevenBrick.s : ℚ) : ℝ) * sevenBrick.row z) / ((sevenBrick.w : ℚ) : ℝ)⌋ = c
+    rw [sevenBrick_s, sevenBrick_w, hrow]; exact hc
+  show sevenBrick.color z = _
+  unfold Brick.color
+  rw [hcol, hrow]; rfl
+
+/-- The colours of the three corner cells: `0`, `6`, `4`. -/
+theorem sevenBrick_corner_col {ρ : ℝ} (hρ : ρ ≤ 1 / 5) {z : ℂ} :
+    (z ∈ brickCornerSector ρ 0 → sevenBrickMap.col z = 0) ∧ (z ∈ brickCornerSector ρ 1 → sevenBrickMap.col z = 6) ∧
+      (z ∈ brickCornerSector ρ 2 → sevenBrickMap.col z = 4) := by
+  refine ⟨fun hz => ?_, fun hz => ?_, fun hz => ?_⟩
+  · obtain ⟨⟨hb, hre⟩, him⟩ := hz
+    have hre : 0 < z.re := hre
+    have him : 0 < z.im := him
+    obtain ⟨hre', him'⟩ := abs_re_im_lt_of_mem_ball hρ hb
+    rw [sevenBrick_color_eq (c := 0) (r := 0)]
+    · decide
+    · rw [Int.floor_eq_iff]; push_cast; rw [zero_add]; constructor
+      · exact div_nonneg him.le (by norm_num)
+      · rw [div_lt_one (by norm_num)]; linarith [(abs_lt.mp him').2]
+    · rw [Int.floor_eq_iff]; push_cast; rw [zero_add]; simp only [mul_zero, sub_zero]; constructor
+      · exact div_nonneg hre.le (by norm_num)
+      · rw [div_lt_one (by norm_num)]; linarith [(abs_lt.mp hre').2]
+  · obtain ⟨⟨hb, hre⟩, him⟩ := hz
+    have hre : z.re < 0 := hre
+    have him : 0 < z.im := him
+    obtain ⟨hre', him'⟩ := abs_re_im_lt_of_mem_ball hρ hb
+    rw [sevenBrick_color_eq (c := -1) (r := 0)]
+    · decide
+    · rw [Int.floor_eq_iff]; push_cast; rw [zero_add]; constructor
+      · exact div_nonneg him.le (by norm_num)
+      · rw [div_lt_one (by norm_num)]; linarith [(abs_lt.mp him').2]
+    · rw [Int.floor_eq_iff]; push_cast; simp only [mul_zero, sub_zero]; constructor
+      · rw [le_div_iff₀ (by norm_num)]; linarith [(abs_lt.mp hre').1]
+      · rw [div_lt_iff₀ (by norm_num)]; linarith
+  · obtain ⟨hb, him⟩ := hz
+    have him : z.im < 0 := him
+    obtain ⟨hre', him'⟩ := abs_re_im_lt_of_mem_ball hρ hb
+    rw [sevenBrick_color_eq (c := 0) (r := -1)]
+    · decide
+    · rw [Int.floor_eq_iff]; push_cast; constructor
+      · rw [le_div_iff₀ (by norm_num)]; linarith [(abs_lt.mp him').1]
+      · rw [div_lt_iff₀ (by norm_num)]; linarith
+    · rw [Int.floor_eq_iff]; push_cast; constructor
+      · rw [le_div_iff₀ (by norm_num)]; linarith [(abs_lt.mp hre').1]
+      · rw [div_lt_iff₀ (by norm_num)]; linarith [(abs_lt.mp hre').2]
+
+/-- **The brick corner carries three colours**: `P_cl(0) = {0, 6, 4}`. -/
+theorem sevenBrick_corner_coloursAt : sevenBrickMap.coloursAt 0 = {0, 6, 4} := by
+  have h5 : (1 / 5 : ℝ) ≤ 1 / 5 := le_rfl
+  have hU := sevenBrick_corner_interior h5
+  ext j
+  simp only [mem_insert_iff, mem_singleton_iff]
+  constructor
+  · intro hj
+    obtain ⟨z, hz, hzd⟩ := Metric.mem_closure_iff.mp hj (1 / 5) (by norm_num)
+    have hzU : z ∈ sevenBrickMap.interiorPts ∩ ball 0 (1 / 5) := ⟨hz.1, by rw [mem_ball, dist_comm]; exact hzd⟩
+    rw [hU] at hzU
+    obtain ⟨i, hi⟩ := mem_iUnion.mp hzU
+    have hzj : sevenBrickMap.col z = j := hz.2
+    obtain ⟨h0, h1, h2⟩ := sevenBrick_corner_col h5 (z := z)
+    fin_cases i
+    · left; rw [← hzj]; exact h0 hi
+    · right; left; rw [← hzj]; exact h1 hi
+    · right; right; rw [← hzj]; exact h2 hi
+  · have key : ∀ i : Fin 3, sevenBrickMap.col (brickCornerPt (1 / 40) i) ∈ sevenBrickMap.coloursAt 0 := by
+      intro i
+      rw [ArcMap.coloursAt, mem_setOf_eq, Metric.mem_closure_iff]
+      intro ε hε
+      set t := min (ε / 4) (1 / 40) with ht
+      have ht0 : 0 < t := lt_min (by linarith) (by norm_num)
+      have hmem := brickCornerPt_mem (ρ := 1 / 5) ht0 (by linarith [min_le_right (ε / 4) (1 / 40)]) i
+      have hmem' := brickCornerPt_mem (ρ := 1 / 5) (t := 1 / 40) (by norm_num) (by norm_num) i
+      have hint : brickCornerPt t i ∈ sevenBrickMap.interiorPts := by
+        have : brickCornerPt t i ∈ ⋃ i, brickCornerSector (1 / 5) i := mem_iUnion.mpr ⟨i, hmem⟩
+        rw [← hU] at this; exact this.1
+      have hball := brickCornerPt_mem (ρ := ε) ht0 (by linarith [min_le_left (ε / 4) (1 / 40)]) i
+      obtain ⟨h0, h1, h2⟩ := sevenBrick_corner_col h5 (z := brickCornerPt t i)
+      obtain ⟨h0', h1', h2'⟩ := sevenBrick_corner_col h5 (z := brickCornerPt (1 / 40) i)
+      refine ⟨brickCornerPt t i, ⟨hint, ?_⟩, ?_⟩
+      · show sevenBrickMap.col _ = sevenBrickMap.col _
+        fin_cases i
+        · rw [h0 hmem, h0' hmem']
+        · rw [h1 hmem, h1' hmem']
+        · rw [h2 hmem, h2' hmem']
+      · rw [dist_comm]; exact brickCornerSector_subset_ball ε i hball
+    obtain ⟨h0, h1, h2⟩ := sevenBrick_corner_col h5 (z := brickCornerPt (1 / 40) 0)
+    rintro (rfl | rfl | rfl)
+    · have := key 0
+      rwa [h0 (brickCornerPt_mem (by norm_num) (by norm_num) 0)] at this
+    · have := key 1
+      rwa [(sevenBrick_corner_col h5).2.1 (brickCornerPt_mem (by norm_num) (by norm_num) 1)] at this
+    · have := key 2
+      rwa [(sevenBrick_corner_col h5).2.2 (brickCornerPt_mem (by norm_num) (by norm_num) 2)] at this
+
+/-- **The brick corner is a cubic trichromatic vertex** (FS131-QA2's QA2-2): the inhabitant of `IsCubicTrichromatic` on a valid map of
+the plane at `k = 7`, for `pair_i`, `pair_ii`, `pair_P'`, `fail_*`, `anti`. -/
+theorem sevenBrick_corner_isCubicTrichromatic : sevenBrickMap.IsCubicTrichromatic 0 := by
+  refine ⟨sevenBrick_corner_hasDegree, ?_⟩
+  rw [sevenBrick_corner_coloursAt]
+  rw [ncard_insert_of_notMem (by decide), ncard_insert_of_notMem (by decide), ncard_singleton]
+
 
 /-- The regions of an almost-everywhere-proper map exist: `sevenBrickMap`'s (the inhabitant of `AeProperRegions`). -/
 noncomputable def sevenBrickRegions : AeProperRegions 7 :=

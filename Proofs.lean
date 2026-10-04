@@ -171,6 +171,7 @@ import Proofs.HadwigerNelson.Plane.RingGerm
 import Proofs.HadwigerNelson.Plane.Lens
 import Proofs.HadwigerNelson.Plane.RingBand
 import Proofs.HadwigerNelson.Plane.ValidMap.Basic
+import Proofs.HadwigerNelson.Plane.ValidMap.Sectors
 import Proofs.HadwigerNelson.Plane.StuckChain
 import Proofs.HadwigerNelson.Plane.ValidMap.Contact
 import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc

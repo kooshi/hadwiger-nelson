@@ -248,6 +248,88 @@ found against the source tool (a finding); the read-backs' conventions; TS-T's C
 1743 modules already up to date, nothing built, 4 module(s) with warnings", exit 0 (`build/gate/build/20261004T154037Z-407415.log`; driver log
 `data/fs131/i4/build-i4d-readback.log`). The four are wave 4's `sorry` modules. 51 `sorry` declarations: Contact 10, UnitArc 20, BaseSteps 20, SVMap 1.
 
+## Stage 8 — SAVED (FS131-I4d): `main` merged, the bridge to `localSectors`, `exists_hasDegree_of_mem_dom`, QA2's items 2–5, `lock` ruled; 50 `sorry` left
+
+**The merge** (`05968b36`): `origin/main` at `cff2c33e` (`localSectors` landed, item 171) into `fs131-w4`. One conflict, at the append point of
+`scripts/Axioms.lean` (main's I3i block kept first, wave 4's after; no record duplicated). `tools/fs131_qa1_dupes.py` (`data/fs131/i4/dupes-i4d.log`):
+no collision with `main`; the three known collisions with `fs131-ww` (`abs_dot_le`, `dot_add_left`, `isOpen_shadow`, plus `dot_e_e`, all identical
+statements) stand for whichever branch lands second (item 142). Build of the merge: "build: OK — 444 of 444 batches, 11 module(s) rebuilt, 4 module(s)
+with warnings", exit 0 (`build/gate/build/20261004T154138Z-409752.log`; driver log `data/fs131/i4/build-i4d-merge.log`).
+
+**The bridge (inventory item 136)**, a new wave-4 module `Plane/ValidMap/Sectors` (imports `Plane/ValidMap/Basic`; `Plane/SVMap` now imports it):
+- `isSector_iff_of_partition`, `encard_sectors_of_partition` — if the interior points of `B(v, r)` are a union of open, preconnected, pairwise
+  disjoint, non-empty sets with `v` in each closure, the sectors at radius `r` are exactly those sets (and there are as many as pieces). The general
+  form, used both for charts and for concrete maps.
+- `IsSectorChart.isSector_iff` (`n > 0`: the chart's sectors), `…_of_zero` (`n = 0`: the ball), `encard_sectors`, `hasDegree` (`v` has degree `max n 1`,
+  constant for `r ≤ r₀` — item 136's "the number of sectors is constant"), `ncard_coloursAt_le` (every colour at `v` is a sector's colour),
+  `exists_hasDegree_of_chart`.
+- `sectorBetween_eq_hornSet` — the sector between two germs of one direction `β` is `hornSet v β κ₁ κ₂ r` exactly (`|κᵢ| r ≤ 2`); with it item 136's
+  dichotomy `IsSectorChart.isSector_cone_or_horn`: every sector at `r ≤ r₀` has a cone with non-empty interior or is a horn `hornSet v β κ₁ κ₂ r`, `κ₁ < κ₂`.
+  (Children: `connectedComponentIn_eq_of_iUnion`, `frame_polar`, `tanHeight_polar`, `half_curv_mem_Icc`, `coneAt_ball_self`, `IsSectorChart.curv_next`,
+  `mem_closure_sector`, `injective_of_disjoint`.)
+- **Leaf proved**: `exists_hasDegree_of_mem_dom` (SVMap) `:= exists_hasDegree_of_chart hx`. So `ts_t_trichromatic`, `ts_t_degree_three` are sorry-free and
+  **`Plane/SVMap` has no `sorry`** (50 left: Contact 10, UnitArc 20, BaseSteps 20).
+
+**QA2's items (item 172), no statement changed:**
+- **QA2-2** — `sevenBrick_corner_isCubicTrichromatic : sevenBrickMap.IsCubicTrichromatic 0` (SVMap): at `0 = brickCorner 0 0` the interior points of
+  `B(0, ρ)`, `ρ ≤ 1/5`, are the three cells (`sevenBrick_corner_interior`: the edges there are the line `im = 0` and the half-line `re = 0, im ≥ 0`), so
+  degree `3` (`sevenBrick_corner_hasDegree`, through `encard_sectors_of_partition`), and `P_cl(0) = {0, 6, 4}` (`sevenBrick_corner_coloursAt`; colours
+  `(column + 3·row) mod 7` of cells `(0,0)`, `(−1,0)`, `(0,−1)`). And `sevenBrick_corner_mIn` (BaseSteps, which now imports SVMap): `x = 4/5 + 3/5 i`
+  is at distance exactly `1` and M-in at `0` (colour `0`). Together they exercise `pair_i`, `pair_ii`, `pair_P'`, `fail_*`, `anti`'s hypotheses on a valid
+  plane map at `k = 7` (each docstring names them). Children: `not_mem_sevenBrickArcs`, `mem_sevenBrickArcs_of_bottom`, `…_of_left`,
+  `abs_re_im_lt_of_mem_ball`, `mem_brickCornerSector_iUnion`, `brickCornerSector_subset_ball`, `brickCornerPt_mem`, `sevenBrick_color_eq`,
+  `sevenBrick_corner_col`. Agrees with `tools/fs131_qa2_brick.py`'s checks 1–3 (same cells, colours, distance).
+- **QA2-3** — `halfDisc_simple : halfDisc.Simple` with `halfDisc_two_tiles` (two distinct tiles, so the second clause is exercised): the tiles are the
+  open half-discs (`halfDisc_isTile`), each a Jordan domain by `isJordanDomain_of_convex` (an open bounded convex non-empty set; Mathlib's
+  `exists_homeomorph_image_interior_closure_frontier_eq_unitBall`), and the closures meet in a convex set.
+- **QA2-4** — `cuspFrag_isHorn : cuspFrag.IsHorn 0 0 (-1) 1 1`, the library's first proved horn: `cuspFrag : ArcMap 2` on `B(0, 1/2)`, arcs the unit circles
+  about `±i`, colour `1` outside both unit discs; `cuspFrag_valid`; for `r ≤ 1/2` the interior points of `B(0, r)` are the two horns and the two discs'
+  parts (`cuspFrag_partition`), and the horn along `e 0` is a sector of colour `1` (`isSector_iff_of_partition`; its preconnectedness from wave 3's
+  `isPreconnected_sector` and `sectorBetween_eq_hornSet`). The bowtie's own horn leaves stay open.
+- **QA2-5** — `stuck_chain`'s docstring now says no model of its hypotheses is expected and names `n4_fin` as the refutation (a step inside N4-PROP's
+  proof by contradiction), in `LEAN.md` § The gate's form ("Where none is expected … the docstring says so with the theorem that refutes the
+  configuration") — not `VACUITY DECLARED:`, since the emptiness is not proved in Lean.
+
+**`lock` (item 143's second gap) — sent to Keryx by message at this stage.** Clause 1 needs no N-E2: `IsRingArc`'s constant-sides clause holds **at
+`w` itself** (`θ ∈ Ioo θ₁ θ₂`), so `outerColours P w = {c'}` and near `w` outside `B̄(P, 1)` every interior point is `c'`. For `y ∈ cl(region c')` with
+`|y − w| = 1` and `y ≠ P`, `ω(y)` has points strictly outside `B̄(P, 1)` arbitrarily near `w` (`u = w − P`, `d = w − y`: `y ≠ P` iff `d ≠ u`, and then
+`u·e(ψ) > u·d` for `ψ` near `arg d`); a `z'' ∈ region c'` near `y` that is not the centre of one of the finitely many unit arcs near `w` has on `ω(z'')` an
+interior point there (wave 3's `Arc.finite_inter_sphere_or_eq_circ`), of colour `c'`, at distance `1` — against `Valid`. Clause 2 the same on the inner side
+(`y ∉ {P, P + 2e(θ)}` is transversality). **Clause 3 looks false as a global statement** for a short arc: `P = 0`, arc `r([−0.01, 0.01])`, inner tile
+`{0.9 < |z| < 1, |arg z| < 0.01}` (colour `c`), `T = B(m, 1/2) ∖ ⋃_{|φ| ≤ 0.01} B̄(e(φ), 1)` with `m = (2 + 1.95 e(0.3))/2` (colour `c`, connected, diameter
+`< 1`, `2 ∈ cl T`, `1.95 e(0.3) ∈ T ∩ B(0, 2)`), cross distances to the inner tile `> 1` (float sample minimum 1.0024 — a sanity check, not exact). The
+local form (near `P + 2e(θ)`) holds. **Ruled** (item 177, the brief's amendment): clauses 1–2 by this route; clause 3 **restated locally**, as the row reads
+("from outside `B(P, 2)`"): `∀ T, F.TileOf c T → P + 2 * e θ ∈ closure T → ∃ δ > 0, Disjoint (T ∩ ball (P + 2 * e θ) δ) (ball P 2)` — the one statement
+change of this stage, made on the ruling, docstring citing item 177; `lock` has no consumer in the library. **`lock` is left `sorry`**, its route written for
+the successor: one engine serves all three clauses — *if `z ∈ region d`, `O` is an open subset of `dom` on which every interior point has colour `d`, and
+`ω(z)` meets `O` at a point near which no arc of `F` lies on `ω(z)`, then `F` is not valid* (an arc of `ω(z)` in `O` has only finitely many points on `Γ`, by
+`locallyFinite` and `Arc.finite_inter_sphere_or_eq_circ`; any other point is an interior `d`-point at distance `1` from `z`). Clause 1: `O = ball w ε \ B̄(P, 1)`
+with `ε` from `outerColours P w = {c'}`, `z ∈ region c'` near `y` off the finitely many unit-arc centres near `w`, the meeting point from `u·e(ψ) > u·d`.
+Clause 2: `O = ball w ε ∩ B(P, 1)` from `innerColours P w = {c}`, the meeting point from transversality (`y ∉ {P, P + 2e(θ)}`). Clause 3: for `t ∈ T`
+with `|t − y| < δ` and `|t − P| < 2`, the point `t + (P − t)/|P − t|` of `ω(t)` lies in `B(P, 1)` within `(2 − |t − P|) + |e(arg(t − P)) − e(θ)|` of `w`, so in
+clause 2's `O`; perturb `t` inside the open set `T ∩ ball y δ ∩ ball P 2` off the unit-arc centres.
+
+**Tools.** `tools/fs131_i4_addrecords.py` now reads `Plane/ValidMap/Sectors` too and has `--check` (planted: `--plant --check` exit 1; clean exit 0);
+`data/fs131/i4/errs.sh` (compact error digest over `iter.sh`, iteration only). Records: 245 names, 0 missing; `tools/fs131_k4_decls.py --check` 164 names,
+0 missing; `tools/check_architecture.py` PASS (new row `Plane/ValidMap/Sectors`; SVMap's Imports cell `Plane/ValidMap/Sectors, …`; BaseSteps' gains
+`Plane/SVMap`). **No statement changed but `lock`'s clause 3 (ruled, item 177); no new axiom, no `native_decide`.** Build of this stage: "build: OK — 444 of 444
+batches, 6 module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T160421Z-559067.log`; driver log
+`data/fs131/i4/build-i4d-stage8.log`): 50 `declaration uses sorry` warnings, and three linter warnings in `UnitArc` older than this stage (l. 236 unused
+`hF`, ll. 666, 706 `push_cast` does nothing) that the gate's zero-warning count will need cleared. `Sectors`, `SVMap` build with no warning. Axioms printed
+against that build's oleans (`data/fs131/i4/axioms-i4d.txt`): every new theorem the standard three.
+
+**What is left (50) and the order I would take it.** Contact 10: `clear_of_subset_interior_allowedCone`, `woodallCone`, `woodallCone_strict` (now has
+`isSector_cone_or_horn` — every `c`-sector with empty-interior allowed cone is a horn), `flank_shadows`, `shaveAvailable_of_not_doublyShadowed`, `exists_shave`,
+`exists_rayMerge`, `exists_merge`, `stuck_structure`, `stuck_chain`. UnitArc 20: `lock` (route above), `l60_le`, `noBoth`, `u1_shadow`, `l60_eq_inner`,
+`l60_eq_outer`, `l60_eq_corners`, `l60Col_locallyConstant`, `l60_real`, `n2_env_toward`, `n2_env_away`, `n2_env_near`, `n2_env_near_away`, `bend_toward`,
+`bend_away`, `bend_away_whole`, `flankQ_upper`, `flankQ_lower`, `a4six`, `nb4p`. BaseSteps 20: `pair_i`, `pair_ii`, `pair_P'`, `fail_leavingCentre`,
+`fail_colours`, `anti`, `n3_end`, `bowtieCol_locallyConstant`, `bowtie_valid`, `bowtie_mem_dom`, `bowtie_coloursAt_zero`, `bowtie_isHorn`, `bowtie_flanks`,
+`bowtie_doublyShadowed`, `bowtie_inType`, `bowtie_neighbours`, `bowtie_isStuck`, `bowtie_terminalOn`, `bowtie_unitArcEnds`, `flank_incomplete_bowtie`.
+Next: `lock` (one engine, three clauses); then the bowtie near `E = 0`, which is `cuspFrag`'s partition again — near `0` the bowtie's tiles are
+`G ∩ ball`, `H ∩ ball` and the horns, its arcs there only the two unit arcs (every one of its 28 segments has both ends with `|re| ≥ 1/13` or
+`|im| ≥ 1/13` on one side), so `bowtie_isHorn`, `bowtie_flanks` and `bowtie_coloursAt_zero` follow the pattern of `cuspFrag_isHorn`; `bowtie_mem_dom` needs
+`B(x, ρ) ⊆ closure bowtieTiles` at `0`, `±i` (a ball minus finitely many lines and circles lies in the tiles, and that complement is dense).
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -270,3 +352,12 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   every point of an almost-everywhere-proper map's regions). `ts_t_trichromatic`, `ts_t_degree_three` still read `sorryAx`, through `exists_hasDegree_of_mem_dom`.
 - Lebesgue's covering theorem for the square: `HadwigerNelson.Plane.lebesgue_covering_square` — `[propext, Classical.choice, Quot.sound]`, by FS131-LEB's theorem.
 
+## Theorems this phase proved (FS131-I4d's; axioms from `#print axioms` against the stage-8 build's oleans, not a gate log)
+
+- FS106-TS-T's vertex step: `HadwigerNelson.Plane.ArcMap.exists_hasDegree_of_mem_dom` — read against § 7.2: same statement (a point of the domain has a
+  finite degree at least its number of colours). With it `ts_t_trichromatic`, `ts_t_degree_three` (TS-T's Condition-5/6 clauses in their carried form,
+  item 142) are sorry-free.
+- The bridge (item 136): `ArcMap.IsSectorChart.isSector_iff`, `…_of_zero`, `…hasDegree`, `…ncard_coloursAt_le`, `…isSector_cone_or_horn`,
+  `sectorBetween_eq_hornSet`, `ArcMap.isSector_iff_of_partition`, `ArcMap.encard_sectors_of_partition` — children, no row.
+- Inhabitants (QA2): `sevenBrick_corner_isCubicTrichromatic`, `sevenBrick_corner_mIn`, `ArcMap.halfDisc_simple`, `ArcMap.halfDisc_two_tiles`,
+  `ArcMap.cuspFrag_isHorn`, `ArcMap.cuspFrag_valid`, `ArcMap.isJordanDomain_of_convex`.
