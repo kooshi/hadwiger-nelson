@@ -867,6 +867,40 @@ that cannot be proved as written goes to Keryx at once. No edit while a build of
 `data/fs131/i4/build-i4j-readback.log`). 24 `declaration uses sorry` warnings — BaseSteps 7, Contact 10, UnitArc 7 — and no other warning. This job's scratch
 mirror for `iter.sh`/`chk.sh`/`errs.sh` is `S=/home/kooshi/scratch-w4j`.
 
+## Stage 26 — SAVED (FS131-I4j): the ring-arc engine and `pair_P'`; 13 `sorry` left in `BaseSteps` and `UnitArc`
+
+**A ring arc inside every arc of `Γ` on a ring** (new children in `UnitArc`, section "Ring arcs from clean arcs of `Γ`", right after `noBoth`): every leaf
+that must produce an `IsRingArc` (`pair_P'`, `pair_ii`, `fail_leavingCentre`, `flankQ_*`, `n3_end`) needs the side colours of an arc of `Γ` on `ω(p)`
+to be constant, and nothing in waves 1–3 gave them. Two statements carry it:
+- `isRingArc_of_clean` (**engine A**): a closed sub-arc of positive length of `ω(p)` in `Γ`, each of whose interior points has a ball in the domain in which
+  every point of an arc lies on `ω(p)`, is an `IsRingArc`. Near `x = r(θ)` the inner side `B(x, δ) ∩ B(p, 1)` is convex; the outer side
+  `B(x, δ) ∖ B̄(p, 1)` is joined to `p + (1 + δ/2) e(θ)` by a segment that stays outside (`outside_segment`, over the real inequality
+  `outside_segment_real`, `δ ≤ 1/2`); both are interior points, so one colour each; the colour is locally constant in `θ`, so constant on `(θ₁, θ₂)`
+  (`IsPreconnected.constant` with the discrete topology on `Fin k`).
+- `exists_clean_subArc` (**engine B**): inside any sub-arc of positive length there is a clean one (finitely many arcs near one point; those not on `ω(p)`
+  meet it finitely, `Arc.finite_inter_sphere_or_eq_circ`; a point off them, `mem_closure_ringArc_diff_finite`, and a ball missing their carriers).
+  Combined: `exists_isRingArc_of_subset_Γ` — a closed sub-arc of `ω(p)` in `Γ` contains a sub-arc with constant sides.
+Engine A takes local cleanliness as a hypothesis so that the consumers needing an arc **ending at a vertex** (`fail_leavingCentre`, engine 5) can supply it
+from the vertex's sector chart (distinct branches never meet in the punctured ball) instead of from engine B.
+
+**`pair_P'` (FS112-N3-PAIRS, N3-P′) proved.** Children in `BaseSteps` (new section before N3-PAIRS): `exists_ball_col_mem_coloursAt` (from `localSectors`: near a
+point of the domain every interior point carries a colour of the point) and `IsCubicTrichromatic.not_hasRepeatedColour` (three sectors, three colours, so
+the sector-to-colour map is injective, `Finset.card_image_iff`). The proof is the row's: at `dist u u' = 1`, `ω(u')` near `u` lies in `Γ` (an interior point
+there would carry a colour of `c(u) = c(u')` at distance `1` from `u'`, N-E1); the engine gives a sub-arc with constant sides, both side colours colours
+of `u`, hence of `u'`: both-kind at `u'`, so `noBoth` gives four colours (against `ncard = 3`) or a repeated colour (against the child).
+**Binder rename, held for the coordinator**: the hypothesis that `u` is cubic trichromatic is not used (the proof reads only `u'`'s three colours and
+three sectors, and `c(u) = c(u')`), so the binder `h` is now `_h` — the same rename as ruling 185's for `l60_eq_third`; the statement's type is unchanged
+(diff against `e16f5b2c`: the one `-`/`+` pair is the binder).
+
+**Records**: `tools/fs131_i4_addrecords.py` — 439 names, 13 added; `tools/fs131_k4_decls.py --check` exit 0. **Axioms** (`data/fs131/i4/axioms-i4j-26.lean` →
+`axioms-i4j-26.txt`, against this stage's build's oleans, not a gate log): 14 records (the 13 children and `pair_P'`), all `[propext, Classical.choice,
+Quot.sound]`. **No statement changed** (but the binder above), no new axiom, no `native_decide`, no new import. Build: "build: OK — 444 of 444 batches, 3
+module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T204412Z-2240985.log`; driver log `data/fs131/i4/build-i4j-stage26.log`):
+23 distinct `declaration uses sorry` (BaseSteps 6, Contact 10, UnitArc 7), no other warning.
+
+**Re-pricing** (from this first leaf): the engine (planned nowhere; the plan's engine 5 assumed the ring arc would come from the horn's sectors) and
+`pair_P'` cost about 60k tokens with one iteration pass each; the engine is the reusable part.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -980,3 +1014,12 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   `ArcMap.IsSectorChart.exists_sector_of_mem_coneAt_region`, `ArcMap.coneAt_region_nonempty` (Sectors); `ArcMap.angleIcc_half_turn`, `ArcMap.norm_rot_sub`,
   `ArcMap.ringPt_eq_rot`, `ArcMap.mem_ringArc_of_lens`, `ArcMap.l60_cap_mem_closedBall`, `ArcMap.l60_cap_general`, `ArcMap.dist_le_one_of_touch`,
   `ArcMap.l60_tile_dist_ne_one`, `ArcMap.l60_side_tile`, `ArcMap.cos_nonpos_of_mem_coneAt`, `ArcMap.mem_angleIcc_of_two_cos` (UnitArc).
+
+## Theorems this phase proved (FS131-I4j's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4j-*.txt`, not a gate log)
+
+- FS112-N3-PAIRS, N3-P′: `HadwigerNelson.Plane.ArcMap.pair_P'` — `[propext, Classical.choice, Quot.sound]`. Read against § 8.2 and the row: same statement (two
+  cubic trichromatic vertices of the domain with one multicolour are never at distance `1`); the binder of the unused hypothesis at `u` renamed `_h`.
+- Children (no row), the standard three: the ring-arc engine `ArcMap.isRingArc_of_clean`, `ArcMap.exists_clean_subArc`, `ArcMap.exists_isRingArc_of_subset_Γ`,
+  `ArcMap.outside_segment`, `ArcMap.outside_segment_real`, `ArcMap.dist_ringPt_radial`, `ArcMap.dist_radial_centre`, `ArcMap.carrier_circ_subset_sphere`,
+  `ArcMap.ringArc_subset_ringArc`, `ArcMap.dist_ringPt_ringPt_le`, `ArcMap.ringPt_arg_sub` (UnitArc); `ArcMap.exists_ball_col_mem_coloursAt`,
+  `ArcMap.IsCubicTrichromatic.not_hasRepeatedColour` (BaseSteps).

@@ -178,6 +178,73 @@ namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
 
+/-! ## The colours near a vertex, and a cubic trichromatic vertex's sectors -/
+
+/-- **Near a point of the domain every interior point carries a colour of the point** (child, from `localSectors`: the interior points
+of a small ball are the sectors, each with the point in its closure). -/
+theorem exists_ball_col_mem_coloursAt {x : ℂ} (hx : x ∈ F.dom) :
+    ∃ r > 0, ball x r ⊆ F.dom ∧ ∀ z ∈ F.interiorPts ∩ ball x r, F.col z ∈ F.coloursAt x := by
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hx
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  refine ⟨r₀, hC.pos, hC.subdom, fun z hz => ?_⟩
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · have hball : ball x r₀ ⊆ F.interiorPts := hC.empty hn
+    have hxI : x ∈ F.interiorPts := hball (mem_ball_self hC.pos)
+    have : F.col z = F.col x :=
+      (convex_ball x r₀).isPreconnected.constant (F.continuousOn_col.mono hball) hz.2 (mem_ball_self hC.pos)
+    rw [this]
+    exact subset_closure ⟨hxI, rfl⟩
+  · have hz' : z ∈ ⋃ i, G.sector x r₀ i := by rw [← hC.cover r₀ hr₀ hn]; exact ⟨hz.2, hz.1⟩
+    obtain ⟨i, hi⟩ := mem_iUnion.mp hz'
+    have hsub : G.sector x r₀ i ⊆ F.region (F.col z) := fun w hw =>
+      ⟨hC.sector_subset_interiorPts hn hr₀ i hw,
+        (hC.isPreconnected r₀ hr₀ i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hr₀ i)) hw hi⟩
+    exact closure_mono hsub (hC.mem_closure_sector hr₀ i)
+
+/-- **A cubic trichromatic vertex carries no repeated colour** (child): its three sectors carry its three colours, one each. -/
+theorem IsCubicTrichromatic.not_hasRepeatedColour {u : ℂ} (h : F.IsCubicTrichromatic u) (hu : u ∈ F.dom) :
+    ¬ F.HasRepeatedColour u := by
+  classical
+  rintro ⟨c, hc⟩
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hu
+  have hI : ∀ᶠ r in 𝓝[>] (0 : ℝ), r ∈ Ioc 0 r₀ := Ioc_mem_nhdsGT hC.pos
+  obtain ⟨r, hr1, hr2, hr3, hr⟩ := (hI.and (hC.hasDegree.and (h.1.and hc))).exists
+  have hrI : r ∈ Ioc 0 r₀ := hr1
+  have hn3 : max n 1 = 3 := by
+    have := hr2.symm.trans hr3
+    exact_mod_cast this
+  have hn : 0 < n := by omega
+  have hn' : n = 3 := by omega
+  choose q hq using fun i => hC.sector_nonempty hrI i
+  set f : Fin n → Fin k := fun i => F.col (q i) with hf
+  have hcolsec : ∀ i, ∀ w ∈ G.sector u r i, F.col w = f i := fun i w hw =>
+    (hC.isPreconnected r hrI i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hrI i)) hw (hq i)
+  -- every colour at `u` is a sector's colour
+  have hsub : F.coloursAt u ⊆ ↑(Finset.univ.image f) := by
+    intro j hj
+    obtain ⟨β, hβ⟩ := coneAt_region_nonempty hj
+    obtain ⟨i, -, hi⟩ := hC.exists_sector_of_mem_coneAt_region hn hrI hβ
+    have : f i = j := ((hcolsec i (q i) (hq i)).symm.trans (hi (hq i)).2 : F.col (q i) = j)
+    rw [Finset.coe_image]
+    exact ⟨i, by simp, this⟩
+  have hcard : (Finset.univ.image f).card = (Finset.univ : Finset (Fin n)).card := by
+    have h1 := Set.ncard_le_ncard hsub (Finset.finite_toSet _)
+    rw [Set.ncard_coe_finset, h.2] at h1
+    have h2 := Finset.card_image_le (s := (Finset.univ : Finset (Fin n))) (f := f)
+    rw [Finset.card_univ, Fintype.card_fin] at h2 ⊢
+    omega
+  have hinj : Set.InjOn f (Finset.univ : Finset (Fin n)) := Finset.card_image_iff.mp hcard
+  have hle : (F.sectorsOf u r c).encard ≤ 1 := by
+    rw [Set.encard_le_one_iff]
+    rintro S S' ⟨hS, hSc⟩ ⟨hS', hSc'⟩
+    obtain ⟨i, rfl⟩ := (hC.isSector_iff hn hrI).mp hS
+    obtain ⟨i', rfl⟩ := (hC.isSector_iff hn hrI).mp hS'
+    have hfi : f i = c := (hcolsec i (q i) (hq i)).symm.trans (hSc (hq i))
+    have hfi' : f i' = c := (hcolsec i' (q i') (hq i')).symm.trans (hSc' (hq i'))
+    rw [hinj (by simp) (by simp) (hfi.trans hfi'.symm)]
+  have := hr.trans hle
+  norm_num at this
+
 /-! ## FS112-N3-PAIRS -/
 
 /-- **FS112-N3-PAIRS** (i), N3-I (CB's (i) never fails): for cubic trichromatic `u₁`, `u₂` and a unit pair `x ∈ ω(u₁)`,
@@ -197,9 +264,50 @@ theorem pair_ii (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromat
   sorry
 
 /-- **FS112-N3-PAIRS**, N3-P′: two cubic trichromatic vertices with one multicolour are never at distance `1`. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
-theorem pair_P' (hF : F.Valid) {u u' : ℂ} (h : F.IsCubicTrichromatic u) (h' : F.IsCubicTrichromatic u') (hu : u ∈ F.dom)
+theorem pair_P' (hF : F.Valid) {u u' : ℂ} (_h : F.IsCubicTrichromatic u) (h' : F.IsCubicTrichromatic u') (hu : u ∈ F.dom)
     (hu' : u' ∈ F.dom) (hcol : F.coloursAt u = F.coloursAt u') : dist u u' ≠ 1 := by
-  sorry
+  intro hd
+  obtain ⟨r, hr, hrdom, hrcol⟩ := F.exists_ball_col_mem_coloursAt hu
+  set θu := arg (u - u') with hθu
+  have hu_eq : ringPt u' θu = u := ringPt_arg_sub hd
+  -- `ω(u')` near `u` lies in `Γ`: an interior point there would carry a colour of `u'` at distance `1` from it (N-E1)
+  have hnear : ∀ φ, |φ - θu| < r → ringPt u' φ ∈ ball u r := fun φ hφ => by
+    rw [mem_ball, ← hu_eq]; exact (dist_ringPt_ringPt_le u' φ θu).trans_lt hφ
+  have hΓ : ringArc u' θu (θu + r / 2) ⊆ F.Γ := by
+    rintro _ ⟨φ, hφ, rfl⟩
+    have hb := hnear φ (by rw [abs_lt]; constructor <;> linarith [hφ.1, hφ.2])
+    have hdom := hrdom hb
+    refine ⟨hdom, ?_⟩
+    by_contra hnot
+    have hI : ringPt u' φ ∈ F.interiorPts := ⟨hdom, hnot⟩
+    have hc := hrcol _ ⟨hI, hb⟩
+    rw [hcol] at hc
+    exact ne1_region hF hc ⟨hI, rfl⟩ (dist_ringPt u' φ)
+  obtain ⟨a, b, c, c', ha, hab, hb, hR⟩ := exists_isRingArc_of_subset_Γ (by linarith) hΓ
+  -- the side colours are colours of `u`, hence of `u'`
+  set m := (a + b) / 2 with hm
+  have hmI : m ∈ Ioo a b := ⟨by linarith, by linarith⟩
+  have hmb : dist (ringPt u' m) u < r / 2 + r / 4 := by
+    rw [← hu_eq]
+    have := dist_ringPt_ringPt_le u' m θu
+    have : |m - θu| ≤ r / 2 := abs_le.mpr ⟨by linarith, by linarith⟩
+    linarith
+  have hside : ∀ j, ringPt u' m ∈ closure (F.region j) → j ∈ F.coloursAt u' := by
+    intro j hj
+    obtain ⟨z, hz, hzd⟩ := Metric.mem_closure_iff.mp hj (r / 4) (by linarith)
+    have hzb : z ∈ ball u r := by
+      rw [mem_ball]; linarith [dist_triangle z (ringPt u' m) u, dist_comm z (ringPt u' m)]
+    have hzj : F.col z = j := hz.2
+    rw [← hcol, ← hzj]; exact hrcol z ⟨hz.1, hzb⟩
+  have hc : c ∈ F.coloursAt u' := by
+    have : c ∈ F.innerColours u' (ringPt u' m) := by rw [(hR.2.2 m hmI).1]; rfl
+    exact hside c (closure_mono inter_subset_left this)
+  have hc' : c' ∈ F.coloursAt u' := by
+    have : c' ∈ F.outerColours u' (ringPt u' m) := by rw [(hR.2.2 m hmI).2]; rfl
+    exact hside c' (closure_mono sdiff_subset this)
+  rcases noBoth hF hu' ⟨c, c', hR, hc, hc'⟩ with h4 | hrep
+  · rw [h'.2] at h4; norm_num at h4
+  · exact h'.not_hasRepeatedColour hu' hrep
 
 /-! ## FS112-N3-FAIL -/
 

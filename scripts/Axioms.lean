@@ -2749,6 +2749,19 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.outside_segment_real
+#print axioms HadwigerNelson.Plane.ArcMap.outside_segment
+#print axioms HadwigerNelson.Plane.ArcMap.dist_ringPt_radial
+#print axioms HadwigerNelson.Plane.ArcMap.dist_radial_centre
+#print axioms HadwigerNelson.Plane.ArcMap.isRingArc_of_clean
+#print axioms HadwigerNelson.Plane.ArcMap.carrier_circ_subset_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_subset_ringArc
+#print axioms HadwigerNelson.Plane.ArcMap.exists_clean_subArc
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isRingArc_of_subset_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.dist_ringPt_ringPt_le
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_arg_sub
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_col_mem_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.IsCubicTrichromatic.not_hasRepeatedColour
 #print axioms HadwigerNelson.Plane.ArcMap.angleIcc_half_turn
 #print axioms HadwigerNelson.Plane.ArcMap.norm_rot_sub
 #print axioms HadwigerNelson.Plane.ArcMap.ringPt_eq_rot
