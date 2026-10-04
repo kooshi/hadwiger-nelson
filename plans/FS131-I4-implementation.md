@@ -143,6 +143,34 @@ Every stage therefore ends with a real `./scripts/build.sh`.
   `ReflTransGen` classes of diameter `< 1` by `chain_step` induction, class closures locally finite hence closed (`LocallyFinite.isClosed_iUnion`), finitely many classes meet
   the square (compactness), side `1 + ε` against `1/√2 + ε`, three classes at the Lebesgue point have three distinct colours (two classes of one colour with closures meeting would coincide).
 
+## Stage 5 — SAVED (FS131-I4c): readback, the as-given build
+
+*FS131-I4c (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4c-wave4.md`) continues this record from `f1f26a8a`.*
+
+**The brief's three quotations against their sources** (standing rule 3): (1) "**It may**: add children anywhere in the wave's modules — the seven
+engines and every child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md` § 14.2, line 887: **matches as a
+truncation** (the source continues "… foundation `Plane/ValidMap/Basic` where § 13.1 puts them, …"). (2) "**Readback (brief FS131-I4b).** The four quotations
+(§ 14.2 "It may", ruling 126, the Wave 4 note, the Stage 3 "Where it stands") match their sources;" — this record, Stage 4's first sentence: **matches as a
+truncation**. (3) "163. **FS131-I3i mid-job: `localSectors` proved** (message 2026-10-04; `fs131-w3b` at `d8a3177f`, pushed), in I3h's drafted shape
+unchanged — `HadwigerNelson.Plane.localSectors" — `plans/FS131-close-inventory.md` on `main`, item 163: **matches as a truncation** (the source continues
+with the signature `(F) {v} (hv : v ∈ F.dom) : ∃ r₀ n G, F.IsSectorChart G v r₀` and the exports). The inventory items the brief cites (136, 142, 143, 144,
+151) read on `main` as the brief summarizes them.
+
+**What I may change** (§ 14.2, unchanged from Stage 1): add children anywhere in the wave's modules (the seven engines, sorry-free, in `Basic` with spec
+examples, and every child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`,
+wave 1's `Plane/Chord`, `Diameter`, `Basic`), statements unchanged; imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`,
+then `tools/fs131_k4_decls.py --check`); and, from this brief: discharge `lebesgue_covering_square` from `main` (inventory item 151); the bridge from
+`localSectors`' `IsSectorChart` to wave 4's `IsSector`/`hornSet` (item 136) as a wave-4 child; a new wave-4 module for it if needed; the vacuity carriers at the
+gate (wave 4's only), `AeProperRegions` among them (item 144). **What I may not change**: any statement of §§ 3.2, 7.2, 8.2, 12.2; any definition of
+`Plane/ValidMap/Basic`; the fragments' definitions (`bowtie*`, `l60*`, `isoY`, `isoFrag`, `sevenBrick*`) but for a coordinate slip found against the source
+tool (a finding); the read-backs' conventions; TS-T's Condition-5 clause stays in its carried form (item 142); no new `axiom`, no `native_decide`. A leaf
+that cannot be proved as written goes to Keryx at once with the declaration, the reason and the counterexample or missing hypothesis.
+
+**The worktree as given** (`f1f26a8a`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — all
+1741 modules already up to date, nothing built, 10 module(s) with warnings", exit 0 (`build/gate/build/20261004T151446Z-265642.log`; driver log
+`data/fs131/i4/build-i4c-readback.log`). The ten are the `sorry`-bearing modules: wave 3's six skeletons as of `05cb0a3e` and wave 4's four (`StuckChain` is
+sorry-free). 54 `sorry` declarations: Contact 10, UnitArc 20, BaseSteps 20, SVMap 4.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
