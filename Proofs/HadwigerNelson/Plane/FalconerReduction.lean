@@ -50,6 +50,26 @@ theorem falconer_reduction {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V)
 theorem le_chiM_of_falconerFan {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V)
     (hfan : FalconerFan ((unitDistance ℂ).induce (V : Set ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) (hr : 1 / 2 < dist t a)
     (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)) : ((k + 1 : ℕ) : ℕ∞) ≤ chiM := by
-  sorry
+  refine le_iInf₂ fun k' ⟨f, hfm, hfp⟩ => ?_
+  by_contra hlt
+  have hk : k' ≤ k := by
+    have : (k' : ℕ∞) < ((k + 1 : ℕ) : ℕ∞) := not_le.1 hlt
+    have := Nat.lt_succ_iff.1 (by exact_mod_cast this)
+    exact this
+  classical
+  let S : Fin k → Set ℂ := fun j => if h : (j : ℕ) < k' then f ⁻¹' {⟨j, h⟩} else ∅
+  have hSm : ∀ j, MeasurableSet (S j) := fun j => by
+    by_cases h : (j : ℕ) < k'
+    · simp only [S, dif_pos h]; exact hfm (measurableSet_singleton _)
+    · simp only [S, dif_neg h]; exact MeasurableSet.empty
+  have hcov : ⋃ j, S j = univ := by
+    refine eq_univ_of_forall fun z => mem_iUnion.2 ⟨⟨(f z : ℕ), lt_of_lt_of_le (f z).isLt hk⟩, ?_⟩
+    simp only [S, dif_pos (f z).isLt]
+    simp
+  obtain ⟨j, x, hx, y, hy, hxy⟩ := falconer_reduction V ha ht hfan hr hirr S hSm hcov
+  by_cases h : (j : ℕ) < k'
+  · simp only [S, dif_pos h, mem_preimage, mem_singleton_iff] at hx hy
+    exact hfp x y hxy (hx.trans hy.symm)
+  · simp [S, dif_neg h] at hx
 
 end HadwigerNelson.Plane

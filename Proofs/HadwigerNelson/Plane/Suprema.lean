@@ -120,6 +120,35 @@ theorem one_le_muZero (c : AeColouring k) : 1 ≤ muZero k := by
     _ ≤ muZero k := le_iSup₂ (f := fun C (_ : IsPartialColouring C ∧ ∀ j, UnitPairsNull (C j)) =>
           upperDensity (⋃ j, C j)) c.cls ⟨c.isPartialColouring, c.unitPairsNull⟩
 
+/-! ## Shared children of wave 2 (FS131-I2) -/
+
+/-- Upper density is at most `1`. -/
+theorem upperDensity_le_one (S : Set ℂ) : upperDensity S ≤ 1 := by
+  refine limsup_le_of_le (by isBoundedDefault) ?_
+  filter_upwards [eventually_gt_atTop 0] with R hR
+  calc volume (S ∩ ball (0 : ℂ) R) / volume (ball (0 : ℂ) R) ≤ volume (ball (0 : ℂ) R) / volume (ball (0 : ℂ) R) :=
+        ENNReal.div_le_div_right (measure_mono inter_subset_right) _
+    _ = 1 := ENNReal.div_self (volume_ball_ne_zero hR) measure_ball_lt_top.ne
+
+/-- `µ_k(ε)` is at most `1`. -/
+theorem mu_le_one (k : ℕ) (ε : ℝ) : mu k ε ≤ 1 :=
+  iSup₂_le fun _ _ => upperDensity_le_one _
+
+/-- `µ_k` is antitone in `ε`: a wider forbidden band is a stronger condition. -/
+theorem antitone_mu (k : ℕ) : Antitone (mu k) := by
+  intro ε ε' hle
+  refine iSup₂_le fun C hC => le_iSup₂ (f := fun C (_ : IsPartialColouring C ∧ ∀ j, BandNull (C j) ε) =>
+    upperDensity (⋃ j, C j)) C ⟨hC.1, fun j => ?_⟩
+  unfold BandNull
+  refine measure_mono_null (s := bandPairSet (C j) ε) (t := bandPairSet (C j) ε')
+    (fun q hq => ⟨hq.1, hq.2.1, ?_, ?_⟩) (hC.2 j)
+  · linarith [hq.2.2.1]
+  · linarith [hq.2.2.2]
+
+/-- `µ_k⁰` is at most `1`. -/
+theorem muZero_le_one (k : ℕ) : muZero k ≤ 1 :=
+  iSup₂_le fun _ _ => upperDensity_le_one _
+
 /-! ## Spec examples -/
 
 /-- **Adversary** for `upperDensity`: a bounded set has upper density `0` (the limit is at `R → ∞`, not `R → 0`). -/

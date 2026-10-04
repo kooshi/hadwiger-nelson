@@ -26,7 +26,38 @@ theorem AeColouring.exists_tight (c : AeColouring k) : ∃ c' : AeColouring k, c
 
 /-- **FS111-V0-RESCALE**, second clause: a tight a.e.-proper `k`-colouring exists iff `χ_m⁰(ℝ²) ≤ k`. -/
 theorem exists_tight_iff_chiM0_le : (∃ c : AeColouring k, c.Tight) ↔ chiM0 ≤ k := by
-  sorry
+  constructor
+  · rintro ⟨c, -⟩; exact chiM0_le c
+  · intro h
+    have hm : ∃ m ≤ k, Nonempty (AeColouring m) := by
+      by_contra hcon
+      push Not at hcon
+      have : ((k + 1 : ℕ) : ℕ∞) ≤ chiM0 := by
+        refine le_iInf₂ fun m ⟨c⟩ => ?_
+        have : k < m := by
+          by_contra hmk
+          exact (hcon m (not_lt.1 hmk)).false c
+        exact_mod_cast this
+      have h2 := this.trans h
+      have : k + 1 ≤ k := by exact_mod_cast h2
+      omega
+    obtain ⟨m, hmk, ⟨c⟩⟩ := hm
+    obtain ⟨c', -⟩ : ∃ c' : AeColouring k, True := by
+      refine ⟨⟨fun z => Fin.castLE hmk (c.col z), ?_, fun j => ?_⟩, trivial⟩
+      · exact (measurable_of_finite (Fin.castLE hmk)).comp c.measurable
+      · by_cases hj : ∃ j', Fin.castLE hmk j' = j
+        · obtain ⟨j', rfl⟩ := hj
+          have : (fun z => Fin.castLE hmk (c.col z)) ⁻¹' {Fin.castLE hmk j'} = c.col ⁻¹' {j'} := by
+            ext z; simp [(Fin.castLE_injective hmk).eq_iff]
+          rw [this]; exact c.unitPairsNull j'
+        · have : (fun z => Fin.castLE hmk (c.col z)) ⁻¹' {j} = ∅ := by
+            ext z; simp only [mem_preimage, mem_singleton_iff, mem_empty_iff_false, iff_false]
+            exact fun h => hj ⟨_, h⟩
+          rw [this]
+          have : UnitPairsNull (∅ : Set ℂ) := by
+            rw [UnitPairsNull, show unitPairSet (∅ : Set ℂ) = ∅ by ext q; simp [unitPairSet], measure_empty]
+          exact this
+    exact AeColouring.exists_tight c'
 
 /-- **FS129-SR2-SUPK** (carrying FS106-SUP's first clause, at every `k`): `µ_k⁰ = lim_{ε→0} µ_k(ε)`. -/
 theorem tendsto_mu (k : ℕ) : Tendsto (mu k) (𝓝[>] 0) (𝓝 (muZero k)) := by
@@ -59,7 +90,9 @@ theorem chiM0_le_iff_chiCP_le (hM1 : Row130M1) (k : ℕ) : chiM0 ≤ k ↔ chiCP
 
 /-- **FS106-EQ**, (c) ⟺ (d) (SUPK at the value `1`): `µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1`. -/
 theorem muZero_eq_one_iff_tendsto (k : ℕ) : muZero k = 1 ↔ Tendsto (mu k) (𝓝[>] 0) (𝓝 1) := by
-  sorry
+  constructor
+  · intro h; rw [← h]; exact tendsto_mu k
+  · intro h; exact tendsto_nhds_unique (tendsto_mu k) h |>.symm ▸ rfl
 
 /-- **FS106-EQ**, (a) ⟺ (e): `χ_m⁰(ℝ²) ≤ k` iff for every `δ > 0` there are `ε > 0` and a periodic partial `k`-colouring by
 half-open grid squares with no monochromatic pair at any distance in `[1 − ε, 1 + ε]`, covering upper density at least
@@ -72,7 +105,20 @@ theorem chiM0_le_iff_periodic (k : ℕ) :
 /-- **FS106-EQ**, at `k = 6`: `χ_m⁰(ℝ²) ≥ 7 ⟺ lim_{ε→0} µ₆(ε) < 1` (the limit is the supremum over `ε > 0`, `µ₆` being
 antitone). -/
 theorem seven_le_chiM0_iff : 7 ≤ chiM0 ↔ (⨆ ε > (0 : ℝ), mu 6 ε) < 1 := by
-  sorry
+  have hlim : muZero 6 = ⨆ ε > (0 : ℝ), mu 6 ε := by
+    have h1 := (antitone_mu 6).tendsto_nhdsGT 0
+    rw [sSup_image] at h1
+    exact tendsto_nhds_unique (tendsto_mu 6) h1
+  have hle : (⨆ ε > (0 : ℝ), mu 6 ε) ≤ 1 := iSup₂_le fun ε _ => mu_le_one 6 ε
+  have h7 : (7 : ℕ∞) ≤ chiM0 ↔ ¬ chiM0 ≤ 6 := by
+    rw [not_le]
+    have := ENat.add_one_le_iff (m := 6) (n := chiM0) (by decide)
+    rwa [show (6 : ℕ∞) + 1 = 7 by norm_num] at this
+  have h6 : chiM0 ≤ 6 ↔ muZero 6 = 1 := by exact_mod_cast chiM0_le_iff_muZero_eq_one 6
+  rw [h7, h6, hlim]
+  constructor
+  · intro h; exact lt_of_le_of_ne hle h
+  · intro h h1; exact h.ne h1
 
 /-- `[Voronov2023]` Thm 1.1 (Euclidean norm, six colours), as a statement: for every `ε > 0` no six-colouring of the plane
 is proper for the forbidden interval `[1 − ε, 1 + ε]` (D-VPROP). Named here, not imported (FS106-COMP's clause is an

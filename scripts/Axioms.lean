@@ -2027,6 +2027,27 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Arith.sqrt3_local
 #print axioms HadwigerNelson.Arith.sqrt3_dyadic
 
+/-! ## FS-131 wave 2 — children stated by the implementer (FS131-I2) -/
+
+#print axioms HadwigerNelson.Plane.volume_prod_shift_null
+#print axioms HadwigerNelson.Plane.UnitPairsNull.congr_ae
+#print axioms HadwigerNelson.Plane.exists_ae_maximal
+#print axioms HadwigerNelson.Plane.essSupport_eq_support
+#print axioms HadwigerNelson.Plane.isClosed_essSupport
+#print axioms HadwigerNelson.Plane.volume_diff_essSupport
+#print axioms HadwigerNelson.Plane.essSupport_mono_ae
+#print axioms HadwigerNelson.Plane.exists_annulus_subset_compl
+#print axioms HadwigerNelson.Plane.IsMUA.interior_union_unitShadow
+#print axioms HadwigerNelson.Plane.ae_restrict_mem_densitySet
+#print axioms HadwigerNelson.Plane.volume_diff_densitySet
+#print axioms HadwigerNelson.Plane.upperDensityAt_eq_zero_of_null
+#print axioms HadwigerNelson.Plane.essSupport_eq_closure_densitySet
+#print axioms HadwigerNelson.Plane.subset_densitySet_of_isOpen_ae_subset
+#print axioms HadwigerNelson.Plane.upperDensity_le_one
+#print axioms HadwigerNelson.Plane.mu_le_one
+#print axioms HadwigerNelson.Plane.antitone_mu
+#print axioms HadwigerNelson.Plane.muZero_le_one
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
@@ -2040,4 +2061,3 @@ reaches above without them — which is the point of proving it twice. -/
 #print axioms moserSpindleCubes_unsat
 #print axioms moserSpindle_not_colorable_three_cubes
 #print axioms four_le_chromaticNumber_plane_certified
-
