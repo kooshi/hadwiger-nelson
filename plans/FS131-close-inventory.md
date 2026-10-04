@@ -1417,3 +1417,21 @@ reason by the close.*
 200. **Brief FS131-K5b, wave 5's second planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K5b-wave5.md`, derived by script from K5's, gated PASS): K5's
      § 5.1 items 1–5 — ROTHEX, BV-HEX's four clauses, CVB-THOM stated; the obligation pass with `#check`; the handoff in wave 4's § 14 form. Not item 0 (the
      base, FS131-KB's). Launched in K5's slot (item 199 (c)): 1 (I2k) + 1 (I4g) + 1 (K5b) = 3.
+201. **FS131-I2k handed back at stage 23, harness ≈ 398k** (report `data/fs131/reports/FS131-I2k.md` on `fs131-w2`; branch at `1cc25e27`, checked): 36 → 23.
+     **`Plane/Slack` sorry-free.** **[kernel] on the branch, standard three** (not yet the gate): `integral_circleAvg_sq`, `unitForm_tendsto` (the Rajchman
+     step; needs neither Cauchy–Schwarz nor `ρ` even — dominated convergence), and through them **FS106-EQ (a) ⟺ (c), `chiM0_le_iff_muZero_eq_one`
+     (`χ_m⁰(ℝ²) ≤ k ⟺ µ_k⁰ = 1`, every `k`)**, `chiM0_le_iff_periodic`, **`seven_le_chiM0_iff` (`7 ≤ χ_m⁰ ⟺ ⨆_{ε>0} µ₆(ε) < 1` — row 131's equivalence)** and
+     FS116-O1-YESLIM's `chiM0_le_of_fragments`; (G1) for § 1.6's gap (`hcGap_eq_of_gap`, `differentiable_hcGap`, `hcGap_bounds`, `hcGap_lowerParabola`, six
+     children; so `g1Bounds_hcGap`, `hcZ0_spec` sorry-free), `exists_near_hcFace`, `hcUpTri_frame`, `frontier_essSupport_pos` (FS111-M3-IRREG (3), general
+     form), `r7Col_mem_tile`; `hc_band_components`, `hc_isRegularMUA`, `hc_irreg` assembled over 16 open HC children. Keryx's receipts: build log
+     `build/gate/build/20261004T181256Z-1328058.log` (w2, the newest) "Build completed successfully (5732 jobs)", 23 distinct warnings, all `declaration uses
+     sorry`, no other kind; `sorry` lines by count Slack 0, CoverExamples 23; `data/fs131/i2/i2k-axioms.txt` prints `unitForm_tendsto`,
+     `integral_circleAvg_sq`, `chiM0_le_iff_muZero_eq_one`, `seven_le_chiM0_iff`, `chiM0_le_of_fragments` on the standard three and `hc_irreg` with `sorryAx`;
+     the two headline statements read against FS106-EQ (`Plane/Slack.lean` l. 3485, 3645). Generalization: `integral_circleAvg_sq` needs no `ρ ≥ 0`
+     (a.e. from `hρN`). Re-pricing: the block cost about a quarter of K2d's table. Slip (I2k's): the build at `e74a5e98` read a half-edited CoverExamples —
+     not evidence; clean builds at `0ad70eba`, `925a8bd5`. **Carrier question for the gate** (to I2l): `IsEmpty (CPColouring 0)`, `IsEmpty (CPColouring 1)` are
+     `instance`s — check that the vacuity scan takes an instance as evidence, else add theorem forms; `SemiconcaveWith` has a concrete refutation
+     (`not_semiconcaveWith_one_lowerArc`), so a candidate for IN under T1's refutation clause; survey in Stage 23 "Not done". Left: CoverExamples 23 (R7 7,
+     HC/IRREG 16), the carriers, the gate, the landing. **Next**: FS131-I2l (Opus).
+202. **Brief FS131-I2l, wave 2's twelfth implementer** (Opus; `data/fs131/briefs/FS131-I2l-wave2.md`, derived by script from I2k's, gated PASS): CoverExamples' 23,
+     the carriers (with item 201's two points), the gate and the landing. Launched in I2k's slot: 1 (I4g) + 1 (K5b) + 1 (I2l) = 3.
