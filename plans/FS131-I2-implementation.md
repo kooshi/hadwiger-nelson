@@ -1287,3 +1287,85 @@ hypotheses, whose tracking would add undischargeable `UNKNOWN` sites). Controls 
   ['Plane/Slack']", exit 1 (`data/fs131/i2n/arch-plant.log`); reverted, exit 0.
 - axioms — the self-test is the plant suite: its `sorry` control ("FAIL sorry CLEAN 't3c_sorry' carries sorryAx") and 22 others fired.
 - vacuity — the self-test is the control suite; every control fired, the three new `VACUOUS` ones among them.
+
+## Stage 31 — SAVED (FS131-I2n): `origin/main` merged; the gate re-run on the merge
+
+**Correction to Stage 30's reconciliation**: the second new witnessed site is `finitePlane7QuotColoring :: (finitePlane 7).Coloring (Fin 4)`
+(wave 2's `Instances/FalconerOrbit`), beside `sq9 :: AeColouring 9` — read by diffing the scan's `WITNESSED` rows.
+
+**Merge.** `origin/main` (`7427f450`…: wave 3's `localSectors` (FS131-I3i) in `Plane/LocalStructure` and `Plane/RingGerm`, its 62 records, its
+`Vacuity.lean` entry, the baseline header, briefs and plans) merged as `630beea1`. One conflict, in `scripts/Axioms.lean` (both sides appended a CLEAN
+block above the PURCHASED banner): both kept, wave 2's first. `scripts/Vacuity.lean` merged by itself with both carrier entries. (A merge commit cannot
+be a commit by path; it was committed whole after `git add` of the resolved file and the dupes log.) `tools/fs131_qa1_dupes.py` after the merge
+(`data/fs131/i2n/dupes.log`): 6 names in two bodies' own files; the one involving wave 2 is `HadwigerNelson.Plane.framePt` (`Plane/Slack:2800`) against
+wave 4's skeleton (`Plane/ValidMap/Basic:44`, bodies k4/w4) — not on `main`, so no collision at this landing; whichever of the two lands second renames.
+
+**The gate on `630beea1`** (every log read):
+- **build** — "OK — 446 of 446 batches, 6 module(s) rebuilt, 0 module(s) with warnings" (`grep -c warning:` = 0) — the merged wave-3 modules, their
+  dependents, and `Plane/YesLimit` restored after the build control (`build/gate/build/20261004T223742Z-3020944.log`, copy `build-gate2.log`).
+  No `sorry` term in `Proofs/`.
+- **axioms** — "OK — 2512 clean, 11 axiom-free, 4 imported, 5 declared purchase(s)" over 2532 records; **reconciled**: 2450 + 62 = 2512 clean, the 62
+  added rows being exactly I3i's records (the digest's `+` list); imported, purchases, axiom-free unchanged; the four IMPORTED records carry
+  `falconer_lemma2_nonempty` only (`axioms-gate2.log`; full `build/gate/axioms/20261004T224728Z-3095228.log`, copy `axioms-gate2-full.log`).
+  `tools/fs131_i2n_row_axioms.py` on it: 64 row declarations, identical to stage 30 (`row-axioms2.txt`).
+- **axioms self-test** — 23 of 23, OK (`build/gate/axioms-self-test/20261004T224905Z-3098517.log`, `axioms-selftest2.log`).
+- **vacuity** — "vacuity: OK", `declarations=9376 refutations-skipped=64 sites=516`, `vacuous=0 stale=0 declared=3 witnessed=23 generic=488
+  unknown=2` (`vacuity-gate2.log`; full `build/gate/vacuity/20261004T224739Z-3095769.log`, copy `vacuity-gate2-full.log`). **Reconciled**: against
+  stage 30's run, declarations +115 and sites/generic +1 (`ArcMap.Simple.coneAt_eq_angleIcc_sep :: F.Simple`) — exactly I3i's reconciliation; against
+  `main`'s recorded 8500 / 57 / 460 / 21 / 434, declarations +876, refutations-skipped +7, witnessed +2 (`sq9`, `finitePlane7QuotColoring`),
+  generic +54 (the 19 `CPColouring k` sites among them), sites +56 — wave 2's.
+- **vacuity self-test** — 38 controls, OK (`build/gate/vacuity-self-test/20261004T225031Z-3104146.log`, `vacuity-selftest2.log`).
+- **architecture** — exit 0, "RESULT: PASS" (`arch2.log`).
+
+## Theorems this phase proved (FS131-I2n, additions)
+
+Axioms read from `data/fs131/i2n/axioms-gate2-full.log` (`scripts/axioms.sh` on `630beea1`, the gate). Each read against its docstring, which carries
+the row.
+- `HadwigerNelson.Plane.hc_sausage_cover` — `[propext, Classical.choice, Quot.sound]` — FS111-M3 § 2.4's B1: every point is within `1` of a flat
+  triangle or a segment, or within `3/2` of a face centre.
+- `HadwigerNelson.Plane.hc_exclusion` — the standard three — B2: every point outside `int HC` is at distance `1` from HC.
+- `HadwigerNelson.Plane.hc_ae_phi_pos` — the standard three — § 2.4: with `Z` null, almost every point off `int HC` has `φ > 0`.
+- `HadwigerNelson.Plane.hc_free_pos` — the standard three — FS111-M3-IRREG (1): with `Z` of positive length, the free set has positive measure.
+- `HadwigerNelson.Plane.hc_free_subset_nowhereDense` — the standard three — FS111-M3-IRREG (2): the free set lies in a closed nowhere dense set.
+- With them, each the standard three and sorry-free for the first time: `hc_isRegularMUA` (FS111-M3-HC, first clause), `hc_irreg` (FS111-M3-IRREG),
+  `not_forall_isRegularMUA` (MUA-REG-U false), `not_forall_fix_converse` (FS111-M3-FIXCONV).
+- `HadwigerNelson.Plane.hc_strict_exclusion` — the standard three — the strict exclusion (every point off `int HC` in `N₀`, in `K_Z`, or at distance
+  `1` from `int HC`); `hc_cover` (B1 refined), `hc_face_cone`, `hc_cone_cover`, `mem_hcUpTri_iff_frame`, `mem_hcDownTri_iff_frame`,
+  `exists_dist_eq_one_of_star`, `hcUpO_star`, `volume_hcN0`, `volume_hcKZ`, `isClosed_unitShadow`, `hc_seg_exclusion`, `hc_lemmaNL_band`,
+  `hc_lemmaNL_lt`, `hc_free_near`, `hc_free_arc`, `hc_free_mem`, `exists_density_point`, `measurePreserving_hcFrame000` — each the standard three;
+  and 44 further children, each the standard three, listed in `scripts/Axioms.lean` block "FS131-I2n".
+
+**Wave 2 in the kernel**: every one of its 28 rows' declarations (64, `data/fs131/i2n/row-axioms2.txt`) reads the standard three, but
+`falconer_reduction` and `le_chiM_of_falconerFan` (FS129-SA1-FALC-RED), which rest also on `falconer_lemma2_nonempty`, `[Falconer1981]` Lemma 2 (i),
+p. 185, the one declared import.
+
+## Drafts for the front page (FS131-I2n)
+
+From the gate on `630beea1` (if `main` moves with Lean before the landing, its records and declarations add to these numbers):
+1. **`CLAUDE.md` § Trust ledger**, replacing "the current audit reads 1856 clean and 5 declared purchases, and 0 imported (and 11 axiom-free; 1,872
+   records at the landing of `localSectors` (FS131-I3i), after wave 3's and FS131-T3's gate repair, 2026-10-04)" with "the current audit reads 2512
+   clean and 5 declared purchases, and 4 imported (and 11 axiom-free; 2,532 records at wave 2's landing, FS131-I2n, 2026-10-04)". The imported count
+   rises from 0: the four records resting on `falconer_lemma2_nonempty`.
+2. **`CLAUDE.md` § The gate**, replacing "`declarations=8500 refutations-skipped=57 sites=460`, `vacuous=0 stale=0 declared=3 witnessed=21 generic=434
+   unknown=2`" with "`declarations=9376 refutations-skipped=64 sites=516`, `vacuous=0 stale=0 declared=3 witnessed=23 generic=488 unknown=2`".
+3. **`scripts/vacuity-baseline.txt`'s header**, replacing "#   declarations=8500  refutations-skipped=57  sites=460" and "#   vacuous=0 stale=0
+   declared=3 witnessed=21 generic=434 unknown=2" with "#   declarations=9376  refutations-skipped=64  sites=516" and "#   vacuous=0 stale=0 declared=3
+   witnessed=23 generic=488 unknown=2". The baseline's two entries are unchanged.
+4. **`LEAN.md` § The gate**, replacing "`--self-test` plants twenty controls and watches each fire" with "`--self-test` plants thirty-eight controls and
+   watches each fire" (32 before this job; `scripts/vacuity.sh`'s own banner still says "twenty planted defects").
+5. **`CLAUDE.md` § Frontier, "What the kernel holds, beyond the interval"**, after "**FS-101's first slot** — `χ(ℚ(√47)²) ≤ 5`, and the main clause
+   through five over named hypotheses (row 127);", insert: "**FS-131 wave 2, the measurable collapse's Lean side** — `χ(ℝ²) ≤ χ_m⁰(ℝ²)` with no MR
+   (N-EASY, row 130), FS106-EQ's equivalences `χ_m⁰ ≤ k ⟺ µ_k⁰ = 1 ⟺` periodic slack near-colourings and `7 ≤ χ_m⁰ ⟺ sup_ε µ₆(ε) < 1`, with
+   `χ_CP ≤ k` over FS-103's M1 named (row 131), fragments at every radius give `χ(ℝ²) ≤ k` (YESLIM, row 145), Falconer's reduction over one declared
+   import (row 152), the maximal-cover toolkit — the fill, saturated maximal covers, Grundy's modification, the face lemma (rows 140, 143, 144) — and the
+   example classes R7, SQ9, DISC7, the honeycomb class HC (a regular MUA set at every null `Z`, with one band component per gap) and the fat pinch
+   whose every maximal completion is irregular (rows 140–141), with the place homomorphism, NOAFF-FIELDS and the dyadic `√3` (rows 151–152);".
+6. **`LEDGER.md`** — no edit drafted here: rows are regraded at the milestone's filing (I3i's practice). The rows wave 2 now holds in the kernel, by
+   their backlog tags (declarations in `data/fs131/i2n/row-axioms2.txt`): FS111-C-FILL, FS111-M-SATC, FS111-M2-COV, FS111-M2-FIX, FS111-M-COVER-SC
+   (with the stated defect `not_forall_semiconcaveWith_one`), FS121-D3-GRUNDY, FS111-V0-RESCALE, FS129-SR2-SUPK, FS106-EQ (its (a) ⟺ (b) over the
+   named hypothesis `Row130M1`, FS-103's M1), FS106-COMP (with `Voronov11`, `[Voronov2023]` Thm 1.1's form, as the equivalence's right side),
+   FS106-REM, FS121-D4-FACE, FS121-V5-FACE-SHARP, FS129-OA1-NOPERLAW, FS129-SA1-FALC-RED (over `falconer_lemma2_nonempty`, `[Falconer1981]` Lemma 2 (i),
+   the one import), FS116-O1-YESLIM, FS129-SA1-PLACE-HOM, FS129-SA1-NOAFF-FIELDS, FS129-SA1-FALC-RES, FS129-MA2-FALC-HOSTS (clauses (iii), (iv) over
+   the named halves `hR78`, `hR88`, `hR88per` of rows 78 and 88), FS129-SA1-SQRT3-LOCAL, FS111-W-SQ9, FS111-M-R7, FS111-M2-DISC7, FS111-M3-BAND,
+   FS111-M3-HC, FS111-M3-IRREG, FS111-M3-FIXCONV. All other axioms: the standard three.
+7. **Proof Atlas** — grade changes for the rows above, [hand]/[tools]/[derived] → [kernel], at the filing.
