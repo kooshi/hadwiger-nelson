@@ -2107,6 +2107,20 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.measurableSet_torChange
 #print axioms HadwigerNelson.Plane.tendsto_volume_torChange
 #print axioms HadwigerNelson.Plane.cpLaw_tendsto
+#print axioms HadwigerNelson.Plane.r7ColTri_zero
+#print axioms HadwigerNelson.Plane.triCoord_frame
+#print axioms HadwigerNelson.Plane.r7ColTri_four
+#print axioms HadwigerNelson.Plane.triQ_far_gt
+#print axioms HadwigerNelson.Plane.triQ_frame
+#print axioms HadwigerNelson.Plane.second_order_of_local_max
+#print axioms HadwigerNelson.Plane.touch_conditions
+#print axioms HadwigerNelson.Plane.dist_frame
+#print axioms HadwigerNelson.Plane.exists_frame_coords
+#print axioms HadwigerNelson.Plane.le_zero_of_forall_small
+#print axioms HadwigerNelson.Plane.ge_zero_of_forall_small
+#print axioms HadwigerNelson.Plane.continuous_frameMap
+#print axioms HadwigerNelson.Plane.abs_deriv_le_of_touch_below
+#print axioms HadwigerNelson.Plane.semiconcave_pos
 
 #eval IO.println "=== PURCHASED ==="
 
