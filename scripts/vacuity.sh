@@ -60,7 +60,7 @@ kept() { echo "    full output: ${GATE_LOG#"${REPO}"/}"; }
 # 2026-09-09 this gate's controls could not be run at all — `scripts/Vacuity.lean`'s header says
 # how — so they are now a flag rather than a memory.
 #
-# Fourteen planted declarations, in `scripts/vacuity-controls.lean`, spliced into a COPY of the audit
+# Twenty planted declarations, in `scripts/vacuity-controls.lean`, spliced into a COPY of the audit
 # (never the file itself, which must stay editable while a run is in flight).
 # ---------------------------------------------------------------------------------------------
 if [[ "${1:-}" == "--self-test" ]]; then
@@ -115,7 +115,7 @@ if [[ "${1:-}" == "--self-test" ]]; then
     fi
   }
 
-  echo "==> vacuity self-test: fourteen planted defects, each watched to fire"
+  echo "==> vacuity self-test: twenty planted defects, each watched to fire"
   expect VACUOUS planted_vacuous_coloring "the core9_plane shape: a colouring type the library proves empty"
   expect VACUOUS planted_vacuous_prop     "a tracked Prop hypothesis the library refutes"
   expect VACUOUS planted_vacuous_forces   "a Forces hypothesis refuted by a theorem in the same run"
@@ -130,6 +130,12 @@ if [[ "${1:-}" == "--self-test" ]]; then
   expect STALE   planted_stale            "a VACUITY DECLARED: annotation whose claim is false"
   silent planted_refutation               "a refutation's binders are meant to be empty"
   silent planted_not_forces               "the evidence itself is never audited against the emptiness it proves"
+  expect VACUOUS planted_vacuous_ne       "a conclusion x ≠ y over AeColouring 1: a stated negation is not a refutation (FS131-T2's defect)"
+  expect VACUOUS planted_vacuous_not      "a conclusion ¬ P over AeColouring 1: the same"
+  expect_site GENERIC planted_generic_ne  "the ≠ shape at a variable k: parametric"
+  expect_site GENERIC planted_generic_not "the ¬ shape at a variable k: parametric"
+  expect UNKNOWN planted_unknown_ne       "the ≠ shape at a k nothing refutes: the load-bearing half"
+  silent planted_arrow_false              "a genuine refutation P → False over the empty carrier stays skipped"
 
   if [[ "${fails}" -gt 0 ]]; then
     echo "==> vacuity self-test: FAIL — ${fails} control(s) did not behave as designed."

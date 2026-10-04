@@ -421,20 +421,47 @@ def carrierOf? (e : Expr) : MetaM (Option Expr) := do
   | some n => return if trackedProps.contains n then some e else none
   | none => return none
 
+/-- **Is the stated conclusion a negation?** `¬ P` and `a ≠ b`, read as written (no unfolding): `Not` and
+`Ne` are the two heads whose definitions are `… → False`, which is how a reducing telescope turns them
+into a conclusion `False` (FS131-T2). -/
+def isNegationConcl (concl : Expr) : Bool :=
+  concl.isAppOf ``Not || concl.isAppOf ``Ne
+
+/-- **The refutation test, matched to the law:** a declaration is a refutation only when its *stated*
+conclusion, after its binders, is `False` itself. Two readings differ: the reducing telescope (which sees
+through definitions, to find binders hidden behind them) ends in `False`, and the statement as written
+does not end in a negation.
+
+* `P → False`, written so, is a refutation: the arrow is a stated hypothesis, meant to be empty.
+* `¬ P` and `a ≠ b`, written so, are **not**: they are claims that `P` (that `a = b`) fails, and their
+  other binders are ordinary `∀`-binders over a carrier that may be empty. The arrow the reducing
+  telescope finds in `Not`/`Ne` is dropped from the carriers (it is the claim's own `P`, whose emptiness
+  the theorem proves, and `gather` reads a `¬ P` of tracked `P` as evidence of exactly that), but every
+  *stated* binder is audited.
+* a name that unfolds to `False` through some other definition keeps the old reading: skipped. -/
+def isRefutation (type : Expr) : MetaM Bool :=
+  forallTelescopeReducing type fun _ concl =>
+    if !concl.isConstOf ``False then pure false
+    else forallTelescope type fun _ stated => pure !isNegationConcl stated
+
 /-- Every carrier a declaration's statement commits to: each binder's type, plus the conclusion.
 
-**A refutation is skipped, structurally.** A declaration whose conclusion is `False` says *these
-cannot all hold*: its binders are **meant** to be jointly unsatisfiable, so flagging one for
-emptiness is flagging the theorem for its own content. `isEmpty_coloring_plane_four` is the
-example — a proof that the plane has no four-colouring, whose only binder is a four-colouring of
-the plane. This one rule replaces two ad-hoc mechanisms: a `providers` set threaded through the
-evidence, and the baseline's prose exemption for statements "consumed in order to refute".
+**A refutation is skipped, structurally** — see `isRefutation`: a declaration whose stated conclusion
+is `False` says *these cannot all hold*, so its binders are meant to be jointly unsatisfiable, and flagging
+one for emptiness is flagging the theorem for its own content. `isEmpty_coloring_plane_four` is the
+example — a proof that the plane has no four-colouring, whose only binder is a four-colouring of the
+plane. A conclusion `¬ P` or `a ≠ b` is not `False`: its binders are audited like any other's.
 
 It does **not** blind the check to the case that motivated it: `core9_plane` concludes an `∃`,
 not `False`, and is still flagged. Verified, not assumed. -/
 def carriersOf (type : Expr) : MetaM (Array (Expr × String)) :=
   forallTelescopeReducing type fun xs concl => do
-    if concl.isConstOf ``False then return #[]
+    if ← isRefutation type then return #[]
+    -- a stated negation unfolds to one more binder (the `P` of `P → False`): not a hypothesis anyone wrote
+    let xs ← if concl.isConstOf ``False && xs.size > 0 then
+        (do let stated ← forallTelescope type fun _ c => pure c
+            pure (if isNegationConcl stated then xs.pop else xs))
+      else pure xs
     let mut out : Array Expr := #[]
     for x in xs do
       if let some τ ← carrierOf? (← inferType x) then out := out.push τ
@@ -488,7 +515,7 @@ def audit : CommandElabM Unit := liftTermElabM do
   for (n, ci) in env.constants.toList do
     if n.isInternal || !isOurs env n then continue
     scanned := scanned + 1
-    if ← (try forallTelescopeReducing ci.type fun _ c => pure (c.isConstOf ``False) catch _ => pure false) then
+    if ← (try isRefutation ci.type catch _ => pure false) then
       refutations := refutations + 1
     if isGeneratedDecl env n ci then continue
     -- A declaration whose type cannot be telescoped is NOT silently skipped (review 2026-09-13): it is

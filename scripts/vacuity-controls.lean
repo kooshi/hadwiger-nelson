@@ -69,4 +69,30 @@ theorem planted_generic_valid {k : ℕ} (F : Plane.ArcMap k) (_h : F.Valid) : (1
 `isGeneratedDecl` skips the machine-written API of a structure and nothing else. `UNKNOWN`. -/
 def planted_ae_def (c : Plane.AeColouring 3) : Plane.AeColouring 3 := c
 
+/-- CONTROL 15 — FS131-T2's defect: a conclusion `≠` is `… → False` under a reducing telescope, and was
+read as a refutation, so the empty carrier of its binder raised no row. A stated `≠` is not `False`: audited. `VACUOUS`. -/
+theorem planted_vacuous_ne (_c : Plane.AeColouring 1) (x y : ℂ) (h : x = y + 1) : x ≠ y :=
+  fun hxy => by subst hxy; simpa using congrArg (fun z => z - x) h
+
+/-- CONTROL 16 — the same with a conclusion `¬ P` written as such. `VACUOUS`. -/
+theorem planted_vacuous_not (_c : Plane.AeColouring 1) (x : ℂ) : ¬ (x = x + 1) := fun h => by
+  simpa using congrArg (fun z => z - x) h
+
+/-- CONTROL 17 — the `≠` shape at a variable `k`: parametric. `GENERIC`. -/
+theorem planted_generic_ne {k : ℕ} (_c : Plane.AeColouring k) (x y : ℂ) (h : x = y + 1) : x ≠ y :=
+  fun hxy => by subst hxy; simpa using congrArg (fun z => z - x) h
+
+/-- CONTROL 18 — the `¬ P` shape at a variable `k`: parametric. `GENERIC`. -/
+theorem planted_generic_not {k : ℕ} (_c : Plane.AeColouring k) (x : ℂ) : ¬ (x = x + 1) := fun h => by
+  simpa using congrArg (fun z => z - x) h
+
+/-- CONTROL 19 — a refutation written `P → False` over the same empty carrier: the stated conclusion is
+`False`, so it stays skipped (a genuine refutation is not audited against the emptiness it proves). No row. -/
+theorem planted_arrow_false (_c : Plane.AeColouring 1) (x : ℂ) (h : x = x + 1) : False := by
+  simpa using congrArg (fun z => z - x) h
+
+/-- CONTROL 20 — the `≠` shape at an instantiation nothing refutes: `UNKNOWN`, never `VACUOUS` (load-bearing). -/
+theorem planted_unknown_ne (_c : Plane.AeColouring 3) (x y : ℂ) (h : x = y + 1) : x ≠ y :=
+  fun hxy => by subst hxy; simpa using congrArg (fun z => z - x) h
+
 end HadwigerNelson
