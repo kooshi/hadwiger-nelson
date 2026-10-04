@@ -273,3 +273,34 @@ names, 1 added, `--check` exit 0.
 sorry-free children. **Left (5)**: `flank_shadows`, `exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure` — the order and what each needs is Stage 5's
 "What is left" (with IC1's Stage 2 items 1, 3, 4). Branch `fs131-w4c` is ready for the merge into `fs131-w4` (my records in their own block headed "FS131-IC2"
 in `scripts/Axioms.lean`, after IC1's; no import or `ARCHITECTURE.md` change in this job). I did not merge or run wave 4's gate.
+
+## Stage 7 — SAVED (FS131-IC3 stage 1): the readback, the as-given build
+
+Implementer: de Bruijn on Opus 5.5 (job FS131-IC3), resuming this record at its last SAVED stage (Stage 6, commit `95105d9b`; the report
+`c7249cc7` follows it — `git log -- plans/FS131-IC-implementation.md` agrees). Brief `data/fs131/briefs/FS131-IC3-contact.md` (on `main`).
+
+**The brief's four quotations against their sources** (standing rule 3):
+1. "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the"
+   — `.claude/worktrees/fs131-w4/plans/FS131-w4-kernel-plan.md` § 14.2, line 887: **matches as a truncation** (this tree's copy is identical, `diff` empty).
+2. "**What is left (5)**, in the order I would take it: `stuck_cone` (finding 2, over `IsHorn.exists_flanks`) → `flank_shadows` with N4-FLANK's mechanism as a
+   child" — this record, Stage 5, line 246: **matches as a truncation**.
+3. "1. **`stuck_structure`'s "one horn per ray" needs SHAVE with `g = c`, not only RAY.** Two `c`-horns along one ray that share their bounding arc (an arc with"
+   — this record, Stage 5, line 231: **matches as a truncation**.
+4. "194. **Ruling: wave 4 splits by file** (item 191's condition met: six leaves a session on wave 4's last two sessions, 39 left). Choice: the next wave-4
+   implementer" — `plans/FS131-close-inventory.md` on `main`, line 1358: **matches as a truncation**.
+No slip found in the brief.
+
+**What I may change** (plan § 14.2, the brief's `touches`): add children anywhere in `Contact`, in a new module of my own (`Plane/ValidMap/ContactAux`,
+imported by `Contact`) and in the foundation `Plane/ValidMap/Basic` (additions only, statements unchanged); engine 2 (`ringArcsWithin_of_Γ_subset`) only as
+the exact hunk of `fs131-w4`'s `3f7ea033`, applied by `git apply`; `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean` (my own block, headed
+"FS131-IC3"), this record, `tools/fs131_ic_*.py`, `data/fs131/ic/`, `data/fs131/reports/FS131-IC3.md`. **What I may not change**: any statement of plan
+§§ 3.2, 7.2 (the five leaves' hypotheses and conclusions; `stuck_structure`'s Condition 5 and three-colour hypotheses stay named hypotheses), any definition
+of `Basic`, the read-back conventions; `UnitArc`, `BaseSteps`, `SVMap`, `StuckChain` (FS131-I4i's, on `fs131-w4`); no new `axiom`, no `native_decide`; no
+merge into `fs131-w4`, no wave-4 gate, no push to `main`. A leaf that cannot be proved as written goes to Keryx at once (declaration, reason,
+counterexample or missing hypothesis), and I go on with the others.
+
+**The worktree as given** (`c7249cc7`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build:
+OK — all 1744 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0 (`build/gate/build/20261004T202040Z-2089578.log`; driver
+log `data/fs131/ic/build-ic3-readback.log`) — IC2's stage-6 oleans are current. 29 distinct `declaration uses sorry` warnings replayed: `Contact` 5
+(lines 1641, 1680, 1694, 1710, 1726: `flank_shadows`, `exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure`), `UnitArc` 22 and `BaseSteps` 7
+(as given on this branch; FS131-I4i's progress on `fs131-w4` is not merged here).
