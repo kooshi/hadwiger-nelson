@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.Suprema
 import Proofs.HadwigerNelson.Plane.CPColouring
+import Mathlib.MeasureTheory.Measure.Lebesgue.VolumeOfBalls
 
 /-!
 # Rescaling, the suprema's limits, the equivalence, kept points, the face lemma (FS-131 wave 2)
@@ -199,18 +200,119 @@ theorem eventually_le_muPer (k : ℕ) {d : ENNReal} (hd : d < muZero k) : ∀ᶠ
 
 /-! ### `keptAt_band`: the two cases -/
 
+/-- The area of a disc, in `ofReal` form. -/
+theorem volume_ball_ofReal (z : ℂ) {ρ : ℝ} (hρ : 0 ≤ ρ) : volume (ball z ρ) = ENNReal.ofReal (ρ ^ 2 * Real.pi) := by
+  rw [Complex.volume_ball, ENNReal.ofReal_mul (sq_nonneg ρ), ENNReal.ofReal_pow hρ, ← NNReal.coe_real_pi,
+    ENNReal.ofReal_coe_nnreal]
+
+/-- A measurable set equals its density set up to a null set. -/
+theorem ae_eq_densitySet {A : Set ℂ} (hA : MeasurableSet A) : A =ᵐ[volume] densitySet A :=
+  ae_eq_set.2 ⟨volume_diff_densitySet hA, volume_densitySet_diff hA⟩
+
+/-- The kept-ball inequality read for `A` itself, and the hole bound it gives. -/
+theorem keptBall_of_le {A : Set ℂ} (hA : MeasurableSet A) {x : ℂ} {ρ η : ℝ} (hη0 : 0 ≤ η) (hη1 : η ≤ 1)
+    (h : ENNReal.ofReal (1 - η) * volume (ball x ρ) ≤ volume (ball x ρ ∩ densitySet A)) :
+    ENNReal.ofReal (1 - η) * volume (ball x ρ) ≤ volume (ball x ρ ∩ A) ∧
+      volume (ball x ρ \ A) ≤ ENNReal.ofReal η * volume (ball x ρ) := by
+  have h1 : volume (ball x ρ ∩ A) = volume (ball x ρ ∩ densitySet A) :=
+    measure_congr (ae_eq_set_inter (ae_eq_refl _) (ae_eq_densitySet hA))
+  rw [← h1] at h
+  refine ⟨h, ?_⟩
+  have hsplit := measure_inter_add_sdiff (μ := volume) (ball x ρ) hA
+  have hfin : volume (ball x ρ) ≠ ⊤ := measure_ball_lt_top.ne
+  have hsum : ENNReal.ofReal (1 - η) * volume (ball x ρ) + ENNReal.ofReal η * volume (ball x ρ) = volume (ball x ρ) := by
+    rw [← add_mul, ← ENNReal.ofReal_add (by linarith) hη0]; simp
+  have hc : ENNReal.ofReal (1 - η) * volume (ball x ρ) ≠ ⊤ := ENNReal.mul_ne_top ENNReal.ofReal_ne_top hfin
+  rw [← ENNReal.add_le_add_iff_left hc, hsum]
+  calc _ ≤ volume (ball x ρ ∩ A) + volume (ball x ρ \ A) := by gcongr
+    _ = _ := hsplit
+
 /-- `keptAt_band` at `ε ≤ 1/2` (FS106-TQ § 2.2): `twoBall_pairs_ge` at `r = ε` on `Ã` (null unit pairs by
 `UnitPairsNull.congr_ae`) gives unit-pair mass `≥ ε³(π(1 − η)/2 − 2π²η) > 0`, since `η < 1/(1 + 4π)`. -/
 theorem keptAt_band_le_half {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {η : ℝ} (hη0 : 0 ≤ η)
     (hη : η < 1 / (1 + 4 * Real.pi)) {ε : ℝ} (hε : 0 < ε) (hε2 : ε ≤ 1 / 2) {x y : ℂ} (hx : KeptAt A η ε x)
     (hy : KeptAt A η ε y) : dist x y < 1 - ε ∨ 1 + ε < dist x y := by
-  sorry
+  by_contra hcon
+  push Not at hcon
+  have habs : |dist x y - 1| ≤ ε := abs_le.2 ⟨by linarith [hcon.1], by linarith [hcon.2]⟩
+  have hp := twoBall_pairs_ge hA hε hε2 habs
+  have hpi := Real.pi_pos
+  have hη1 : η ≤ 1 := by
+    have : 1 / (1 + 4 * Real.pi) ≤ 1 := by rw [div_le_one (by positivity)]; linarith
+    linarith
+  have hz : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ A ∩ ball x (ε / 2) ∧ q.1 + e q.2 ∈ A ∩ ball y (2 * ε)} = 0 :=
+    measure_mono_null (fun q hq => (⟨hq.1.1, hq.2.1⟩ : q ∈ unitPairSet A)) hnull
+  rw [hz, zero_add] at hp
+  obtain ⟨hx1, -⟩ := keptBall_of_le hA hη0 hη1 (hx (ε / 2) (by simp))
+  obtain ⟨-, hy2⟩ := keptBall_of_le hA hη0 hη1 (hy (2 * ε) (by simp))
+  have hv1 := fun (z : ℂ) (ρ : ℝ) (h : 0 ≤ ρ) => volume_ball_ofReal z h
+  have hmain : ENNReal.ofReal (2 * ε) * (ENNReal.ofReal (1 - η) * ENNReal.ofReal ((ε / 2) ^ 2 * Real.pi)) ≤
+      ENNReal.ofReal (Real.pi * ε / 2) * (ENNReal.ofReal η * ENNReal.ofReal ((2 * ε) ^ 2 * Real.pi)) := by
+    rw [hv1 x _ (by positivity)] at hx1
+    rw [hv1 y _ (by positivity)] at hy2
+    calc _ ≤ ENNReal.ofReal (2 * ε) * volume (A ∩ ball x (ε / 2)) := by
+          rw [inter_comm]; gcongr
+      _ ≤ _ := hp
+      _ ≤ _ := by gcongr
+  rw [← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity),
+    ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity),
+    ENNReal.ofReal_le_ofReal_iff (by positivity)] at hmain
+  have hε3 : 0 < ε ^ 3 := by positivity
+  have : η * (1 + 4 * Real.pi) < 1 := by
+    rwa [lt_div_iff₀ (by positivity)] at hη
+  nlinarith [mul_pos hε3 hpi, mul_pos (mul_pos hε3 hpi) hpi]
 
 /-- At `ε > 1/2` no point is kept: `B(x, 2ε)` has radius `> 1`, `arcLength_bigBall_ge` gives its pairs mass `≥ (2π/3)|B|`,
 and filling `1 − η` of it with `Ã` leaves unit-pair mass `≥ ((2π/3)(1 − η) − 2πη)|B| > 0` for `η < 1/4`. -/
 theorem not_keptAt_of_half_lt {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {η : ℝ} (hη0 : 0 ≤ η)
     (hη : η < 1 / 4) {ε : ℝ} (hε : 1 / 2 < ε) (x : ℂ) : ¬ KeptAt A η ε x := by
-  sorry
+  intro hk
+  have hpi := Real.pi_pos
+  have hη1 : η ≤ 1 := by linarith
+  obtain ⟨hx1, hx2⟩ := keptBall_of_le hA hη0 hη1 (hk (2 * ε) (by simp))
+  set B := ball x (2 * ε) with hB
+  set U := A ∩ B with hU
+  have hUm : MeasurableSet U := hA.inter measurableSet_ball
+  have hBm : MeasurableSet B := measurableSet_ball
+  have hN : MeasurableSet (B \ A) := hBm.diff hA
+  have hlow : ENNReal.ofReal (2 * Real.pi / 3) * volume U ≤
+      (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B} := by
+    rw [pairs_eq_lintegral hUm hBm]
+    calc _ = ∫⁻ u in U, ENNReal.ofReal (2 * Real.pi / 3) := by
+          rw [lintegral_const, Measure.restrict_apply_univ, mul_comm]
+      _ ≤ _ := setLIntegral_mono' hUm fun u hu =>
+          arcLength_bigBall_ge (by linarith) hu.2
+  have hup : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B} ≤
+      ENNReal.ofReal (2 * Real.pi) * volume (B \ A) := by
+    have hsub : {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B} ⊆
+        {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ A} ∪ {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B \ A} := by
+      intro q hq
+      by_cases h : q.1 + e q.2 ∈ A
+      · exact Or.inl ⟨hq.1, h⟩
+      · exact Or.inr ⟨hq.1, hq.2, h⟩
+    have h0 : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ A} = 0 :=
+      measure_mono_null (fun q hq => (⟨hq.1.1, hq.2⟩ : q ∈ unitPairSet A)) hnull
+    have h1 : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B \ A} ≤
+        ENNReal.ofReal (2 * Real.pi) * volume (B \ A) :=
+      pairs_le_of_arc hUm hN fun v => by
+        calc arcLength {θ | v - e θ ∈ U} ≤ arcLength univ := measure_mono (subset_univ _)
+          _ = _ := by simp [arcLength, Real.volume_Ico]
+    calc _ ≤ _ := measure_mono hsub
+      _ ≤ _ := measure_union_le _ _
+      _ ≤ 0 + _ := by rw [h0]; gcongr
+      _ = _ := zero_add _
+  have hv1 : volume B = ENNReal.ofReal ((2 * ε) ^ 2 * Real.pi) := volume_ball_ofReal x (by positivity)
+  have hmain : ENNReal.ofReal (2 * Real.pi / 3) * (ENNReal.ofReal (1 - η) * volume B) ≤
+      ENNReal.ofReal (2 * Real.pi) * (ENNReal.ofReal η * volume B) := by
+    calc _ ≤ ENNReal.ofReal (2 * Real.pi / 3) * volume U := by
+          rw [hU, inter_comm]; gcongr
+      _ ≤ _ := hlow.trans hup
+      _ ≤ _ := by gcongr
+  rw [hv1, ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity),
+    ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity),
+    ENNReal.ofReal_le_ofReal_iff (by positivity)] at hmain
+  have hq : 0 < (2 * ε) ^ 2 * Real.pi := by positivity
+  nlinarith [mul_pos hq hpi]
 
 /-! ### CP colourings: a jointly measurable modification (`chiM0_le_chiCP`, `CPColouring.tendsto_not_kept`) -/
 
@@ -666,7 +768,12 @@ colour of a partial colouring; membership of the points in `A` is not used — a
 theorem keptAt_band {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {η : ℝ} (hη0 : 0 ≤ η)
     (hη : η < 1 / (1 + 4 * Real.pi)) {ε : ℝ} (hε : 0 < ε) {x y : ℂ} (hx : KeptAt A η ε x) (hy : KeptAt A η ε y) :
     dist x y < 1 - ε ∨ 1 + ε < dist x y := by
-  sorry
+  rcases le_or_gt ε (1 / 2) with h | h
+  · exact keptAt_band_le_half hA hnull hη0 hη hε h hx hy
+  · exfalso
+    have h4 : η < 1 / 4 := lt_of_lt_of_le hη (by
+      apply one_div_le_one_div_of_le (by norm_num); linarith [Real.pi_gt_three])
+    exact not_keptAt_of_half_lt hA hnull hη0 h4 h x hx
 
 /-- **FS106-REM**, second clause: for a CP colouring, `P(0 is not kept at scale ε) → 0`, "kept" read in a jointly
 measurable modification `c̃` of the realisations. -/
