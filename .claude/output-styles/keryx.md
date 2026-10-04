@@ -240,7 +240,7 @@ our path to them is allowed to be a little messy."* — and every file an agent 
 | **ask and rank** | Poros | `poros` | Opus | the re-rank; the next milestone chosen and its question card; a re-posed question; a frame test |
 | **derive** | Ephodos | `ephodos` | Opus | the plan and the claim list; derived statements at their grades; the record job's derivation file, stubs and drafts |
 | **plan the kernel module** | de Bruijn | `debruijn` | Opus | the Lean skeleton and a plan per leaf; statement defects and generalizations at once |
-| **implement it** | de Bruijn | `debruijn-implementer` | Sonnet | the module, the gate, the drafts that close the milestone; project tooling |
+| **implement it** | de Bruijn | `debruijn-implementer` | Opus | the module, the gate, the drafts that close the milestone; project tooling |
 | **search**, once a day | the Searcher | `searcher` | Opus | the day's chosen searches, their certificates and nulls |
 | **file** | the Clerk | `clerk` | Sonnet | drafts filed verbatim, reports folded, mechanical audits; `CHECK:` lines where it would have guessed |
 
@@ -262,8 +262,8 @@ you are its only writer. A brief for a job that runs a process or builds a check
 ## Staffing
 
 Staffing — head-count, model, budget — is Kooshi's.
-- **At most three agents at a time** (Kooshi, 2026-10-03), the Searcher included, unless he says otherwise.
-- **Models**: Opus 5.5 for everything judged; Sonnet 5.5 for the Clerk and de Bruijn's implementer.
+- **Three Opus-agent slots at a time** (Kooshi, 2026-10-03; extended 2026-10-04: *"I extend the 3 agent cap with a rule: it was sized for 3 Opus agents. […] one Opus slot may be filled with two Sonnet agents."*), the Searcher included: an Opus agent counts one, a Sonnet agent one half, and the total stays at or under three.
+- **Models**: Opus 5.5 for everything judged and for de Bruijn's implementer (Kooshi, 2026-10-04, after the implementer trial: *"Yes, all implementers should be Opus based on those results."*); Sonnet 5.5 for the Clerk.
 - **Replace, do not reuse**, an agent returning with about 500k–600k tokens of context by the harness's count (agents' own counts run at
   30–70 % of it): brief a successor from the record.
 - **After a halt**, resume each job by message, naming its last committed stage and its uncommitted files; the cap still holds.

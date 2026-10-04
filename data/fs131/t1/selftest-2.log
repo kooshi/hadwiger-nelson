@@ -1,0 +1,21 @@
+slot: admitted vacuity.sh: mem 20 GiB (hard cap), cpus 0,1,2,3
+==> vacuity-self-test: this run's full output: build/gate/vacuity-self-test/20261004T062148Z-1592938.log
+    control run: === SCANNED === declarations=7639 refutations-skipped=322
+    control run: === TOTALS === sites=294 vacuous=5 stale=1 declared=3 witnessed=17 generic=262 unknown=6 untelescoped=0
+==> vacuity self-test: fourteen planted defects, each watched to fire
+    ok    VACUOUS planted_vacuous_coloring — the core9_plane shape: a colouring type the library proves empty
+    ok    VACUOUS planted_vacuous_prop — a tracked Prop hypothesis the library refutes
+    ok    VACUOUS planted_vacuous_forces — a Forces hypothesis refuted by a theorem in the same run
+    ok    UNKNOWN planted_unknown_prop — THE LOAD-BEARING ONE: same family, an instantiation nothing refutes
+    ok    VACUOUS planted_vacuous_ae — AeColouring 1: a structure whose emptiness is a theorem (FS131-T1's defect)
+    ok    SITE GENERIC planted_generic_ae — AeColouring k at a variable k: parametric
+    ok    UNKNOWN planted_unknown_ae — AeColouring at a k nothing refutes: the load-bearing half for the new family
+    ok    VACUOUS planted_vacuous_valid — ArcMap.Valid at a concrete map the library refutes
+    ok    SITE GENERIC planted_generic_valid — ArcMap.Valid at a variable map: parametric
+    ok    UNKNOWN planted_ae_def — a user-written def concluding a tracked structure is still audited (the generated-API filter is narrow)
+    ok    (no row) planted_not_valid — the ArcMap refutation is never audited against the emptiness it proves
+    ok    STALE planted_stale — a VACUITY DECLARED: annotation whose claim is false
+    ok    (no row) planted_refutation — a refutation's binders are meant to be empty
+    ok    (no row) planted_not_forces — the evidence itself is never audited against the emptiness it proves
+==> vacuity self-test: OK — every control fired, and the silent ones stayed silent.
+    full output: build/gate/vacuity-self-test/20261004T062148Z-1592938.log

@@ -39,7 +39,7 @@ FS111-W-SQ9,order,formalize,,,2,Proofs/HadwigerNelson/Plane/CoverExamples,,,,,
 FS111-M2-INTRAD,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Pinch,,,,,
 FS112-A4SIX,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,
 FS112-BOWTIE,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps,,,,,
-FS112-C-DOUBLE,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps,,,,"with its errata, caution C116",plans/FS129-SR2-audit.md
+FS112-C-DOUBLE,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Terminal,FS112-N2-TERM,,,"with its errata, caution C116; moved from wave 4 to wave 5 beside FS112-N2-TERM and FS112-C-ENDS by inventory item 69 (plans/FS131-close-inventory.md): its proof reads N2-TERM's terminal map M* and FS112-Y3-END-NEEDS as corrected, the latter a wave-5 supporting lemma",plans/FS129-SR2-audit.md
 FS112-DISC1,order,merged into,FS129-SR2-DISC1TS,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,"SR2 item 12 names TS-T in place of DISC1 through FS129-SR2-DISC1TS; DISC1TS is DISC1's statement as TS-T's corollary, so DISC1 merges into DISC1TS (its consumers LOCALDENSE, N3-DENSE3 cite it)",plans/FS129-SR2-audit.md:474
 FS112-FLANK,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,
 FS112-ISO,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,

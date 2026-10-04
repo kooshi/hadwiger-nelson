@@ -1,0 +1,2 @@
+d = 48/25; {'cut_points': 27, 'cells': 27, 'pairs_checked': 60, 'exact_zero_tests': 57}
+ACCEPT: no monochromatic unit pair in the bicycle under this colouring

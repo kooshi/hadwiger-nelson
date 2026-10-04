@@ -1,0 +1,38 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 16,17
+@lebesgue_number_lemma_of_metric : ∀ {α : Type u_1} [inst : PseudoMetricSpace α] {s : Set α} {ι : Sort u_2}
+  {c : ι → Set α}, IsCompact s → (∀ (i : ι), IsOpen (c i)) → s ⊆ ⋃ i, c i → ∃ δ > 0, ∀ x ∈ s, ∃ i, Metric.ball x δ ⊆ c i
+@IsCompact.reProdIm : ∀ {s t : Set ℝ}, IsCompact s → IsCompact t → IsCompact (s ×ℂ t)
+@isCompact_Icc : ∀ {α : Type u_1} {inst : TopologicalSpace α} {inst_1 : Preorder α} [self : CompactIccSpace α]
+  {a b : α}, IsCompact (Set.Icc a b)
+@Complex.mem_reProdIm : ∀ {z : ℂ} {s t : Set ℝ}, z ∈ s ×ℂ t ↔ z.re ∈ s ∧ z.im ∈ t
+Complex.norm_le_abs_re_add_abs_im : ∀ (z : ℂ), ‖z‖ ≤ |z.re| + |z.im|
+Complex.dist_eq : ∀ (z w : ℂ), dist z w = ‖z - w‖
+Complex.sub_re : ∀ (z w : ℂ), (z - w).re = z.re - w.re
+Complex.sub_im : ∀ (z w : ℂ), (z - w).im = z.im - w.im
+@Set.Finite.isClosed_biUnion : ∀ {X : Type u_1} {α : Type u_2} [inst : TopologicalSpace X] {s : Set α} {f : α → Set X},
+  s.Finite → (∀ i ∈ s, IsClosed (f i)) → IsClosed (⋃ i ∈ s, f i)
+@Set.toFinite : ∀ {α : Type u_1} (s : Set α) [Finite ↑s], s.Finite
+@IsClosed.isOpen_compl : ∀ {X : Type u_1} {inst : TopologicalSpace X} {s : Set X} [self : IsClosed s], IsOpen sᶜ
+@exists_nat_gt : ∀ {R : Type u_1} [inst : Semiring R] [inst_1 : PartialOrder R] [IsStrictOrderedRing R] [Archimedean R]
+  (x : R), ∃ n, x < ↑n
+@div_lt_iff₀ : ∀ {G₀ : Type u_1} [inst : GroupWithZero G₀] [inst_1 : PartialOrder G₀] [MulPosReflectLT G₀] {a b c : G₀},
+  0 < c → (b / c < a ↔ b < a * c)
+@div_pos : ∀ {G₀ : Type u_1} [inst : GroupWithZero G₀] [inst_1 : PartialOrder G₀] [PosMulReflectLT G₀] {a b : G₀},
+  0 < a → 0 < b → 0 < a / b
+@mul_le_of_le_one_left : ∀ {α : Type u_1} [inst : MulOneClass α] [inst_1 : Zero α] {a b : α} [inst_2 : Preorder α]
+  [MulPosMono α], 0 ≤ b → a ≤ 1 → a * b ≤ b
+@mul_le_mul_of_nonneg_right : ∀ {α : Type u_1} [inst : Mul α] [inst_1 : Zero α] [inst_2 : Preorder α] {a b c : α}
+  [MulPosMono α], b ≤ c → 0 ≤ a → b * a ≤ c * a
+@Metric.mem_ball : ∀ {α : Type u_1} [inst : PseudoMetricSpace α] {x y : α} {ε : ℝ}, y ∈ Metric.ball x ε ↔ dist y x < ε
+@Set.mem_iUnion : ∀ {α : Type u_1} {ι : Sort u_2} {x : α} {s : ι → Set α}, x ∈ ⋃ i, s i ↔ ∃ i, x ∈ s i
+@Finset.sum_range_succ : ∀ {M : Type u_1} [inst : AddCommMonoid M] (f : ℕ → M) (n : ℕ),
+  ∑ x ∈ Finset.range (n + 1), f x = ∑ x ∈ Finset.range n, f x + f n
+@Finset.sum_congr : ∀ {ι : Type u_1} {M : Type u_2} {s₁ s₂ : Finset ι} [inst : AddCommMonoid M] {f g : ι → M},
+  s₁ = s₂ → (∀ x ∈ s₂, f x = g x) → s₁.sum f = s₂.sum g
+@Finset.sum_eq_zero : ∀ {ι : Type u_1} {M : Type u_2} {s : Finset ι} [inst : AddCommMonoid M] {f : ι → M},
+  (∀ x ∈ s, f x = 0) → ∑ x ∈ s, f x = 0
+@Finset.mem_range : ∀ {n m : ℕ}, m ∈ Finset.range n ↔ m < n
+@Nat.cast_pos : ∀ {α : Type u_1} [inst : Semiring α] [inst_1 : PartialOrder α] [IsOrderedRing α] [Nontrivial α] {n : ℕ},
+  0 < ↑n ↔ 0 < n
+@Nat.cast_le : ∀ {α : Type u_1} [inst : AddMonoidWithOne α] [inst_1 : PartialOrder α] [AddLeftMono α] [ZeroLEOneClass α]
+  [CharZero α] {m n : ℕ}, ↑m ≤ ↑n ↔ m ≤ n

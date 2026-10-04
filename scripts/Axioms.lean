@@ -1888,6 +1888,13 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Arith.rhombus_falconerFan
 #print axioms HadwigerNelson.Arith.falconerFan_hom
 #print axioms HadwigerNelson.Arith.falconerFan_chromaticNumber
+#print axioms HadwigerNelson.SpernerGrid.exists_rainbowCell
+#print axioms HadwigerNelson.LebesgueCovering.exists_mem_inter_three
+#print axioms HadwigerNelson.LebesgueCovering.lebesgue_covering_rect'
+#print axioms HadwigerNelson.LebesgueCovering.lebesgue_covering_rect
+#print axioms HadwigerNelson.LebesgueCovering.closedSquare_eq_reProdIm
+#print axioms HadwigerNelson.LebesgueCovering.lebesgue_covering_square
+#print axioms HadwigerNelson.LebesgueCovering.quadrant_hypotheses
 
 /-! ## FS-131 wave 3 (job FS131-K3) — the foundation: the local geometry of an arc map, the ring vocabulary, RINGBAND's circle colourings -/
 

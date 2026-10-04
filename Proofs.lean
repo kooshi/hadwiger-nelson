@@ -172,6 +172,8 @@ import Proofs.HadwigerNelson.Plane.Lens
 import Proofs.HadwigerNelson.Plane.RingBand
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
+import Proofs.HadwigerNelson.Topology.SpernerGrid
+import Proofs.HadwigerNelson.Topology.LebesgueCovering
 
 /-!
 # Proofs
