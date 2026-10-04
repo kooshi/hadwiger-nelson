@@ -285,3 +285,9 @@ reason by the close.*
 47. **The day's search deferred, not dropped** (`plans/SEARCH-QUEUE.md` row 6 open; Kooshi's rule: once a day, outside the milestone loop): the three slots go
     to waves 2 and 3's implementers and wave 4's planner, and two 40 GiB builds already fill most of the slot's 90 GiB. Default: the Searcher launches today in
     the first slot an implementer frees, with its memory sized against the builds then running.
+48. **Statement defect in wave 2's skeleton — `vesica_apex_exact`** (FS131-I2, message 2026-10-04; `Plane/CoverExamples`, FS111-M3-BAND's third clause, exact
+    half): stated for every `h < √3/2`, it is false for `h ≤ −2` — at `h = −2` the apex is `2i`, and every `z` with `z.im < 1` has `dist z (2i) ≥ 2 − z.im > 1`
+    (Keryx's receipt: that inequality). The row speaks of a depth, so `h ≥ 0` was meant; a formalization slip of the skeleton, not a defect of the derivation.
+    **Ruling: add `(h0 : 0 ≤ h)`.** Alternative weighed: `−2 < h`, the widest form I2 believes true (one mind). Why: the row's own reading, the consumers'
+    range, and no proof owed beyond the row; the wider form, if wanted, is a separate lemma the implementer may add. Confidence: high. No erratum owed on the
+    derivation.
