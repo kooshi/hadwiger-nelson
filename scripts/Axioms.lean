@@ -2515,6 +2515,8 @@ No native evaluation. -/
 
 /-! ## FS-131 Woodall's chain (job FS131-IWc) — the inhabitants' children: polar coordinates about `0`, the cone of an open sector at its apex, the regions of `threeSectorDisc` and `halfDisc` -/
 
+#print axioms HadwigerNelson.Plane.norm_real_mul_e
+#print axioms HadwigerNelson.Plane.closure_annSector_subset
 #print axioms HadwigerNelson.Plane.eq_of_e_eq_of_mem_Ioc
 #print axioms HadwigerNelson.Plane.coneAt_annSector_eq
 #print axioms HadwigerNelson.Plane.eq_norm_mul_e_pi_add_arg
@@ -2535,11 +2537,9 @@ No native evaluation. -/
 /-! ## FS-131 Woodall's merge (job FS131-W3) — step 3 localized: E3-W, recolouring, the merge at a wedge, locality, the local data, E3-NICE, E3-BALL (sorry until the chain's implementer lands them) -/
 
 #print axioms HadwigerNelson.Plane.clear_wedge
-#print axioms HadwigerNelson.Plane.norm_real_mul_e
 #print axioms HadwigerNelson.Plane.annSector_subset_ball
 #print axioms HadwigerNelson.Plane.annSector_mono_r₂
 #print axioms HadwigerNelson.Plane.mem_segment_ray
-#print axioms HadwigerNelson.Plane.closure_annSector_subset
 #print axioms HadwigerNelson.Plane.mem_annSector_union_of_ne
 #print axioms HadwigerNelson.Plane.disjoint_annSector_wedges
 #print axioms HadwigerNelson.Plane.wedgeArcs_subset_polar

@@ -9,7 +9,7 @@ oleans), the whole print in `data/fs131/iw/axioms-iteration.txt` and its split i
 (waves 3–4 and FS131-LEB have not landed): this is **not gate evidence**. A `sorryAx` below is never this job's: it comes through a cited, unlanded
 statement (`lemmaL`; `ArcMap.dense_interiorPts`; `ArcMap.Valid.unitPairsNull_region`) or through one of the five leaves left (stage 2).
 The FS131-IWc rows (stages 7–11) are from `data/fs131/iwc/axioms-iteration.txt` (`lake env lean` on a copy of `Merge` with the prints appended,
-`data/fs131/iwc/scratch/ax.lean`; never evidence); since the stage-12 merge of `main` (wave 3 landed) every IWc theorem but `exists_woodallMerged`
+`data/fs131/iwc/scratch/ax.lean`; never evidence); since FS131-W3's merge of `main` (wave 3 landed; kernel plan § 12) every IWc theorem but `exists_woodallMerged`
 prints the standard three alone.
 
 | declaration | read against | axioms |
@@ -394,3 +394,22 @@ are `c` on the inner side and `F`'s two side colours `g, g′` outside, and at t
 angle `π`; `g`, `g′` between the tangent of `C` and the circle's tangents), no horn. The work is the three cone identities at `w` for curvilinear
 sectors (bounded by a circle and a line or circle crossing transversally): each cone is the closed interval between the two tangent directions.
 `ArcMap.ncard_coloursAt_le_two_of_sides` (proved) is the counting half; the cones need a curvilinear analogue of `coneAt_annSector_eq`.
+
+**Build of stage 11's tree**: OK — 445 of 445 batches, 3 modules rebuilt, 6 with warnings (wave 4's five skeleton modules and `Woodall/Merge`), 8 m 37 s,
+exit 0 (`build/gate/build/20261004T161928Z-665717.log`; driver log `data/fs131/iwc/build4.log`); the only Woodall warnings are `Merge`'s three
+`declaration uses 'sorry'`. Two records (`norm_real_mul_e`, `closure_annSector_subset`) moved to the IWc chain section with their declarations, so the
+frozen `tools/fs131_w2_decls.py --check` (four modules) passes too: 151 theorems, 151 records; `tools/fs131_w3_decls.py --check`: 188, 188, 0, 0.
+
+## Stage 12 — SAVED (FS131-IWc): where I stop
+
+`sorry` leaves by module: `Basic` 0, `Collar` 0, `NoFourFive` 0, `Steps` 0, **`Merge` 3** — `niceAt_of_dirColourAt`, `wedgeMerge_niceAt`,
+`exists_merge_at` (routes in stage 11). Of the brief's 23 leaves, 20 are proved (15 of `Merge`'s 18, all five of `Basic`'s), each on the standard three
+axioms by the iteration print; `exists_woodallMerged` cites `exists_merge_at` and so carries `sorryAx` until it lands. Not done, and why: the three
+leaves are H−, H−, H (900–1,300 lines with their children at this job's rate), past this job's budget; Keryx's amendment (a plane-map model of the
+normal forms, `sevenBrickMap.WoodallNormal univ` or an `ArcMap 7` in normal form on `closedBall 0 3`) waits for wave 4's `sevenBrickMap` on this
+branch; the gate and the landing wait for wave 4.
+
+## Drafts for the front page
+
+None: no milestone state moved (the gate has not run; `Merge` keeps three `sorry` leaves). Slot, when the chain's gate runs: `CLAUDE.md` § The gate
+and § Trust ledger get the counts, and the FS106-WO, FS106-TW, FS106-AE-MAP6 and E1-NO45 ledger rows are regraded then.
