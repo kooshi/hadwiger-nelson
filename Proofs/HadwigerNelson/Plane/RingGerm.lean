@@ -629,7 +629,132 @@ colour `X` absent at `p`, the only point of the closure of the class of `X` at d
 theorem echo_unique (hF : F.Valid) {p : ℂ} {ψ : ℝ} {X : Fin k} (hcw : GermIn p ψ .cw (F.region X))
     (hccw : GermIn p ψ .ccw (F.region X)) (hX : X ∉ F.coloursAt p) {x : ℂ} (hx : x ∈ closure (F.region X))
     (h1 : dist x (ringPt p ψ) = 1) : x = 2 * ringPt p ψ - p := by
-  sorry -- ECHO ENGINE (to do)
+  set B : ℂ := (x - p) * (starRingEnd ℂ) (e ψ) with hB
+  have hconj : (starRingEnd ℂ) (e ψ) * e ψ = 1 := by
+    rw [mul_comm, Complex.mul_conj, Complex.normSq_eq_norm_sq, norm_e]; simp
+  have hxp : x - p = B * e ψ := by rw [hB, mul_assoc, hconj, mul_one]
+  have hB1 : ‖B - 1‖ = 1 := by
+    have : x - ringPt p ψ = (B - 1) * e ψ := by
+      simp only [ringPt]; rw [sub_mul, one_mul, ← hxp]; ring
+    rw [dist_eq_norm, this, norm_mul, norm_e, mul_one] at h1
+    exact h1
+  have hdist : ∀ τ : ℝ, ‖x - ringPt p (ψ + τ)‖ = ‖B - e τ‖ := by
+    intro τ
+    have : x - ringPt p (ψ + τ) = (B - e τ) * e ψ := by
+      simp only [ringPt]; rw [e_add, sub_mul, ← hxp]; ring
+    rw [this, norm_mul, norm_e, mul_one]
+  have hcirc : (B.re - 1) ^ 2 + B.im ^ 2 = 1 := by
+    have h := congrArg (· ^ 2) hB1
+    simp only [Complex.sq_norm, Complex.normSq_apply, Complex.sub_re, Complex.one_re, Complex.sub_im,
+      Complex.one_im] at h
+    nlinarith [h]
+  have hg : ∀ τ : ℝ, ‖B - e τ‖ ^ 2 - 1 = -2 * (B.re * (Real.cos τ - 1) + B.im * Real.sin τ) := by
+    intro τ
+    have h1' := hcirc
+    rw [Complex.sq_norm, Complex.normSq_apply, e_eq]
+    simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
+      Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+    nlinarith [Real.sin_sq_add_cos_sq τ]
+  by_cases hb2 : B.im = 0
+  · -- the radial case
+    have hb1 : B.re = 0 ∨ B.re = 2 := by
+      have := hcirc
+      rw [hb2] at this
+      have h2 : B.re * (B.re - 2) = 0 := by nlinarith [this]
+      rcases mul_eq_zero.mp h2 with h | h
+      · exact Or.inl h
+      · exact Or.inr (by linarith)
+    rcases hb1 with h0 | h2
+    · exfalso
+      have hBz : B = 0 := Complex.ext (by simpa using h0) (by simpa using hb2)
+      have hxp0 : x = p := by rw [hBz, zero_mul] at hxp; exact sub_eq_zero.mp hxp
+      apply hX
+      show p ∈ closure (F.region X)
+      rw [← hxp0]; exact hx
+    · have hBz : B = 2 := Complex.ext (by simpa using h2) (by simpa using hb2)
+      rw [hBz] at hxp
+      simp only [ringPt]
+      linear_combination hxp
+  · exfalso
+    obtain ⟨δ₁, hδ₁, hsub₁⟩ := hcw
+    obtain ⟨δ₂, hδ₂, hsub₂⟩ := hccw
+    set δ := min δ₁ δ₂ with hδ
+    have hδ0 : 0 < δ := lt_min hδ₁ hδ₂
+    have hSsub : (fun τ : ℝ => ringPt p (ψ + τ)) '' Ioo (-δ) δ ⊆ closure (F.region X) := by
+      rintro _ ⟨τ, hτ, rfl⟩
+      show ringPt p (ψ + τ) ∈ closure (F.region X)
+      rcases lt_trichotomy τ 0 with hneg | hzero | hpos
+      · refine subset_closure (hsub₁ ?_)
+        refine ⟨-τ, ⟨by linarith, by linarith [hτ.1, min_le_left δ₁ δ₂]⟩, ?_⟩
+        simp [Side.sign]
+      · rw [hzero, add_zero]
+        rw [Metric.mem_closure_iff]
+        intro ε hε
+        set t := min (ε / 2) (δ₂ / 2) with ht
+        have ht0 : 0 < t := lt_min (by linarith) (by linarith)
+        have hmem : ringPt p (ψ + Side.sign .ccw * t) ∈ F.region X :=
+          hsub₂ ⟨t, ⟨ht0, lt_of_le_of_lt (min_le_right _ _) (by linarith)⟩, rfl⟩
+        refine ⟨_, hmem, ?_⟩
+        have := dist_ringPt_germ_le p ψ .ccw ht0.le
+        have : t ≤ ε / 2 := min_le_left _ _
+        linarith [dist_ringPt_germ_le p ψ .ccw ht0.le]
+      · refine subset_closure (hsub₂ ?_)
+        exact ⟨τ, ⟨hpos, by linarith [hτ.2, min_le_right δ₁ δ₂]⟩, by simp [Side.sign]⟩
+    have hSc : IsPreconnected ((fun τ : ℝ => ringPt p (ψ + τ)) '' Ioo (-δ) δ) := by
+      have hc : Continuous fun τ : ℝ => ringPt p (ψ + τ) := by unfold ringPt e; fun_prop
+      exact isPreconnected_Ioo.image _ hc.continuousOn
+    set s := min (min 1 (|B.im| / 4)) (δ / 2) with hs
+    have hs0 : 0 < s := lt_min (lt_min one_pos (by positivity)) (by linarith)
+    have hs1 : s ≤ 1 := (min_le_left _ _).trans (min_le_left _ _)
+    have hs2 : s ≤ |B.im| / 4 := (min_le_left _ _).trans (min_le_right _ _)
+    have hs3 : s ≤ δ / 2 := min_le_right _ _
+    have hBn : ‖B‖ ≤ 2 := by
+      have := norm_le_norm_add_norm_sub' B 1
+      calc ‖B‖ ≤ ‖B - 1‖ + ‖(1 : ℂ)‖ := by simpa using norm_sub_norm_le B 1 |> fun _ => (by
+            have := norm_add_le (B - 1) 1; simpa using this)
+        _ = 2 := by rw [hB1]; norm_num
+    have hb1 : |B.re| ≤ 2 := (Complex.abs_re_le_norm B).trans hBn
+    have hcos : |Real.cos s - 1| ≤ s ^ 2 / 2 := by
+      have h1 := Real.one_sub_sq_div_two_le_cos (x := s)
+      have h2 := Real.cos_le_one s
+      rw [abs_le]; constructor <;> linarith
+    have hsin : s / 2 ≤ Real.sin s := by
+      have h := Real.mul_le_sin hs0.le (by linarith [Real.pi_gt_three] : s ≤ π / 2)
+      have h4 : π ≤ 4 := Real.pi_le_four
+      have : s / 2 ≤ 2 / π * s := by
+        rw [div_mul_eq_mul_div, le_div_iff₀ Real.pi_pos]; nlinarith
+      linarith
+    have hsin0 : 0 < Real.sin s := lt_of_lt_of_le (by linarith) hsin
+    have hk : |B.re * (Real.cos s - 1)| < |B.im * Real.sin s| := by
+      rw [abs_mul, abs_mul, abs_of_pos hsin0]
+      have hb2' : 0 < |B.im| := abs_pos.mpr hb2
+      calc |B.re| * |Real.cos s - 1| ≤ 2 * (s ^ 2 / 2) := by gcongr
+        _ = s ^ 2 := by ring
+        _ < |B.im| * (s / 2) := by nlinarith
+        _ ≤ |B.im| * Real.sin s := by gcongr
+    have hu_mem : ringPt p (ψ + s) ∈ (fun τ : ℝ => ringPt p (ψ + τ)) '' Ioo (-δ) δ :=
+      ⟨s, ⟨by linarith, by linarith⟩, rfl⟩
+    have hv_mem : ringPt p (ψ + (-s)) ∈ (fun τ : ℝ => ringPt p (ψ + τ)) '' Ioo (-δ) δ :=
+      ⟨-s, ⟨by linarith, by linarith⟩, rfl⟩
+    have hgs := hg s
+    have hgm : ‖B - e (-s)‖ ^ 2 - 1 = -2 * (B.re * (Real.cos s - 1) - B.im * Real.sin s) := by
+      rw [hg (-s), Real.cos_neg, Real.sin_neg]; ring
+    have hdu : dist x (ringPt p (ψ + s)) = ‖B - e s‖ := by rw [dist_eq_norm, hdist]
+    have hdv : dist x (ringPt p (ψ + (-s))) = ‖B - e (-s)‖ := by rw [dist_eq_norm, hdist]
+    have hlt : ∀ r : ℝ, 0 ≤ r → r ^ 2 - 1 < 0 → r < 1 := fun r hr h => by nlinarith
+    have hgt : ∀ r : ℝ, 0 ≤ r → 0 < r ^ 2 - 1 → 1 < r := fun r hr h => by nlinarith
+    rcases lt_or_gt_of_ne hb2 with hneg | hpos
+    · -- B.im < 0 : the point at ψ - s is nearer, ψ + s is farther
+      have hm : B.im * Real.sin s < 0 := mul_neg_of_neg_of_pos hneg hsin0
+      have hk' := abs_lt.mp hk
+      rw [abs_of_neg hm] at hk'
+      refine hF.false_of_crossing hx hSc hSsub hv_mem hu_mem (hdv ▸ hlt _ (norm_nonneg _) (by linarith [hgm, hk'.1, hk'.2]))
+        (hdu ▸ hgt _ (norm_nonneg _) (by linarith [hgs, hk'.1, hk'.2]))
+    · have hm : 0 < B.im * Real.sin s := mul_pos hpos hsin0
+      have hk' := abs_lt.mp hk
+      rw [abs_of_pos hm] at hk'
+      refine hF.false_of_crossing hx hSc hSsub hu_mem hv_mem (hdu ▸ hlt _ (norm_nonneg _) (by linarith [hgs, hk'.1, hk'.2]))
+        (hdv ▸ hgt _ (norm_nonneg _) (by linarith [hgm, hk'.1, hk'.2]))
 
 /-- **FS116-N1-ECHO** at the class its argument reads: some point of the closure of the class of `X` at distance `1` from `w`
 puts `2w − p` in that closure. -/
