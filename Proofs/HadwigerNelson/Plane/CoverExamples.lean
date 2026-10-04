@@ -2410,7 +2410,33 @@ theorem hc_isRegularMUA {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 
     (hl : (-1 / 2 : ℝ) ∈ Z) (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) :
     IsRegularMUA (interior (hcSet g)) ∧ essSupport (interior (hcSet g)) = hcSet g ∧
       interior (hcSet g) = (unitShadow (hcSet g))ᶜ := by
-  sorry
+  have hZi : interior Z = ∅ := Measure.interior_eq_empty_of_null hZ0
+  have hAo : IsOpen (interior (hcSet g)) := isOpen_interior
+  have hav := hc_unitAvoiding hZc hZs hZi hl hr hg
+  have hnull : UnitPairsNull (interior (hcSet g)) := by
+    have : unitPairSet (interior (hcSet g)) = ∅ := by
+      ext ⟨x, θ⟩
+      simp only [unitPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+      intro hx hy
+      exact hav _ hy _ hx (by rw [dist_eq_norm, add_sub_cancel_left, norm_e])
+    rw [UnitPairsNull, this, measure_empty]
+  have hMUA : IsMUA (interior (hcSet g)) :=
+    (isMUA_iff_ae_phi_pos hAo.measurableSet hnull).2 (hc_ae_phi_pos hZc hZs hZi hl hr hg hZ0)
+  have hci := closure_interior_hcSet hZc hZs hZi hl hr hg
+  have hsupp : essSupport (interior (hcSet g)) = hcSet g := by rw [essSupport_of_isOpen hAo, hci]
+  have hcl := isClosed_hcSet hZc hZs hZi hl hr hg
+  have hfr := volume_frontier_hcSet hZc hZs hZi hl hr hg
+  refine ⟨⟨hMUA, ?_, ?_⟩, hsupp, ?_⟩
+  · rw [hsupp]
+    refine measure_mono_null (fun z hz => ?_) hfr
+    rw [hcl.frontier_eq]; exact hz
+  · rw [hsupp]; exact hfr
+  · apply Subset.antisymm
+    · have := subset_compl_unitShadow_closure hAo hav
+      rwa [hci] at this
+    · intro z hz
+      by_contra hzA
+      exact hz (hc_exclusion hZc hZs hZi hl hr hg hzA)
 
 /-- **FS111-M3-HC**, second clause, at every `Z` (wider: the row says "with `Z` a Cantor set"; the argument reads only that `g`
 vanishes exactly on `Z`): each band has one component per gap — two of its points lie in one component iff no point of `Z` lies
@@ -2535,7 +2561,66 @@ theorem hc_irreg {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 /
       volume (hcSet g \ interior (hcSet g)) = 0 ∧ volume (frontier (hcSet g)) = 0 ∧
       interior (hcSet g) = (unitShadow (hcSet g))ᶜ ∧ ¬ IsMUA (interior (hcSet g)) ∧
       ∀ A' : Set ℂ, IsMUA A' → interior (hcSet g) ≤ᵐ[volume] A' → 0 < volume (frontier (essSupport A')) := by
-  sorry
+  have hAo : IsOpen (interior (hcSet g)) := isOpen_interior
+  have hAm : MeasurableSet (interior (hcSet g)) := hAo.measurableSet
+  have hav := hc_unitAvoiding hZc hZs hZi hl hr hg
+  have hci := closure_interior_hcSet hZc hZs hZi hl hr hg
+  have hcl := isClosed_hcSet hZc hZs hZi hl hr hg
+  have hfr := volume_frontier_hcSet hZc hZs hZi hl hr hg
+  have hdiff : volume (hcSet g \ interior (hcSet g)) = 0 := by rw [← hcl.frontier_eq]; exact hfr
+  have hnullA : UnitPairsNull (interior (hcSet g)) := by
+    have : unitPairSet (interior (hcSet g)) = ∅ := by
+      ext ⟨x, θ⟩
+      simp only [unitPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+      intro hx hy
+      exact hav _ hy _ hx (by rw [dist_eq_norm, add_sub_cancel_left, norm_e])
+    rw [UnitPairsNull, this, measure_empty]
+  have hshadow : interior (hcSet g) = (unitShadow (hcSet g))ᶜ := by
+    apply Subset.antisymm
+    · have := subset_compl_unitShadow_closure hAo hav
+      rwa [hci] at this
+    · intro z hz
+      by_contra hzA
+      exact hz (hc_exclusion hZc hZs hZi hl hr hg hzA)
+  have hEpos := hc_free_pos hZc hZs hZi hl hr hg hZpos
+  have hnotMUA : ¬ IsMUA (interior (hcSet g)) := by
+    intro hM
+    have h := (isMUA_iff_ae_phi_pos hAm hnullA).1 hM
+    rw [ae_iff, Measure.restrict_apply' hAm.compl] at h
+    have hsub : {z | z ∉ hcSet g ∧ phi (interior (hcSet g)) z = 0} ⊆
+        {p | ¬ 0 < phi (interior (hcSet g)) p} ∩ (interior (hcSet g))ᶜ := by
+      intro z hz
+      refine ⟨?_, fun hzA => hz.1 (interior_subset hzA)⟩
+      simp only [mem_setOf_eq, not_lt, nonpos_iff_eq_zero]; exact hz.2
+    exact hEpos.ne' (measure_mono_null hsub h)
+  refine ⟨hav, hci, hdiff, hfr, hshadow, hnotMUA, fun A' hA' hle => ?_⟩
+  obtain ⟨K, hKc, hKi, hEK⟩ := hc_free_subset_nowhereDense hZc hZs hZi hl hr hg
+  have hA'm := hA'.1
+  have hphi' : ∀ᵐ z ∂volume, z ∈ A' → phi A' z = 0 :=
+    (ae_restrict_iff' hA'm).1 ((unitPairsNull_iff_ae_phi_eq_zero hA'm).1 hA'.2.1)
+  have hsub0 : volume (interior (hcSet g) \ A') = 0 := ae_le_set.1 hle
+  have hphiA : ∀ᵐ z ∂volume, phi (interior (hcSet g)) z ≤ phi A' z := by
+    filter_upwards [ae_arcLength_null (hAm.diff hA'm) hsub0] with z hz
+    calc phi (interior (hcSet g)) z ≤ arcLength ({θ | z + e θ ∈ A'} ∪ {θ | z + e θ ∈ interior (hcSet g) \ A'}) :=
+          measure_mono fun θ hθ => by
+            by_cases h : z + e θ ∈ A'
+            · exact Or.inl h
+            · exact Or.inr ⟨hθ, h⟩
+      _ ≤ phi A' z := (measure_union_le _ _).trans_eq (by rw [hz, add_zero]; rfl)
+  have hA'E : A' \ hcSet g ≤ᵐ[volume] K := by
+    filter_upwards [hphi', hphiA] with z h1 h2
+    intro hz
+    exact hEK ⟨hz.2, le_antisymm (h2.trans (h1 hz.1).le) zero_le⟩
+  have hpos : 0 < volume (A' \ hcSet g) := by
+    refine pos_iff_ne_zero.2 fun h0 => hnotMUA ?_
+    have hA'A : A' ≤ᵐ[volume] interior (hcSet g) := by
+      rw [ae_le_set]
+      refine measure_mono_null (fun z hz => ?_) (measure_union_null h0 hdiff)
+      by_cases h : z ∈ hcSet g
+      · exact Or.inr ⟨h, hz.2⟩
+      · exact Or.inl ⟨hz.1, h⟩
+    exact ⟨hAm, hnullA, fun B hB hBn hAB => (hA'.2.2 B hB hBn (hA'A.trans hAB)).trans hA'A⟩
+  exact frontier_essSupport_pos hcl hKc hKi hpos hA'E
 
 /-- **FS111-M3-IRREG**, its conclusion: "every MUA set is regular" (MUA-REG-U) is false. -/
 theorem not_forall_isRegularMUA : ¬ ∀ A : Set ℂ, IsMUA A → IsRegularMUA A := by
