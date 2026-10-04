@@ -259,7 +259,44 @@ theorem exists_squareWin_dense {S : Set ℂ} (hS : MeasurableSet S) {d : ℝ} (h
 with `volume_densitySet_diff` and `volume_diff_densitySet`). -/
 theorem ae_eventually_keptAt {A : Set ℂ} (hA : MeasurableSet A) {η : ℝ} (hη : 0 < η) :
     ∀ᵐ x ∂(volume.restrict A), ∀ᶠ ε in 𝓝[>] (0 : ℝ), KeptAt A η ε x := by
-  sorry
+  filter_upwards [ae_restrict_mem_densitySet A] with x hx
+  have hlt : ENNReal.ofReal (1 - η) < 1 := by rw [ENNReal.ofReal_lt_one]; linarith
+  have hev : ∀ᶠ r in 𝓝[>] (0 : ℝ), ENNReal.ofReal (1 - η) < densityRatio A x r := hx.eventually (lt_mem_nhds hlt)
+  have hsc : ∀ c : ℝ, 0 < c → Tendsto (fun ε : ℝ => c * ε) (𝓝[>] 0) (𝓝[>] 0) := by
+    intro c hc
+    refine tendsto_nhdsWithin_of_tendsto_nhds_of_eventually_within _ ?_ ?_
+    · have : Tendsto (fun ε : ℝ => c * ε) (𝓝 0) (𝓝 (c * 0)) := (continuous_const.mul continuous_id).tendsto 0
+      rw [mul_zero] at this
+      exact this.mono_left nhdsWithin_le_nhds
+    · filter_upwards [self_mem_nhdsWithin] with ε hε
+      exact mul_pos hc hε
+  filter_upwards [(hsc (1 / 2) (by norm_num)).eventually hev, (hsc 2 (by norm_num)).eventually hev, self_mem_nhdsWithin]
+    with ε he1 he2 hε0
+  intro ρ hρ
+  have hε0' : (0 : ℝ) < ε := hε0
+  have hρ0 : 0 < ρ := by rcases hρ with rfl | rfl <;> positivity
+  have hd : ENNReal.ofReal (1 - η) < densityRatio A x ρ := by
+    rcases hρ with rfl | rfl
+    · simpa [div_eq_inv_mul] using he1
+    · exact he2
+  have e1 : volume (ball x ρ) = volume (closedBall x ρ) := by rw [Complex.volume_ball, Complex.volume_closedBall]
+  have e2 : volume (ball x ρ ∩ densitySet A) = volume (A ∩ closedBall x ρ) := by
+    rw [measure_congr (ae_eq_set_inter (ae_eq_refl (ball x ρ)) (ae_eq_set.2 ⟨volume_diff_densitySet hA, volume_densitySet_diff hA⟩).symm), inter_comm]
+    refine le_antisymm (measure_mono (inter_subset_inter_right _ ball_subset_closedBall)) ?_
+    calc volume (A ∩ closedBall x ρ) ≤ volume (A ∩ ball x ρ ∪ sphere x ρ) := by
+          refine measure_mono fun y hy => ?_
+          by_cases h : y ∈ ball x ρ
+          · exact Or.inl ⟨hy.1, h⟩
+          · right
+            rw [mem_sphere]
+            rw [mem_ball, not_lt] at h
+            exact le_antisymm (mem_closedBall.1 hy.2) h
+      _ ≤ volume (A ∩ ball x ρ) + volume (sphere x ρ) := measure_union_le _ _
+      _ = volume (A ∩ ball x ρ) := by rw [Measure.addHaar_sphere volume x ρ, add_zero]
+  rw [e1, e2]
+  have hpos : volume (closedBall x ρ) ≠ 0 := (measure_closedBall_pos volume x hρ0).ne'
+  have hfin : volume (closedBall x ρ) ≠ ⊤ := measure_closedBall_lt_top.ne
+  exact (ENNReal.le_div_iff_mul_le (Or.inl hpos) (Or.inl hfin)).1 hd.le
 
 /-- Keeping is robust: kept at threshold `η/2` gives kept at `η` within `ηε/12` (`ball x ρ ⊆ ball x' (ρ + d)`, so the
 lost area is at most `π(2ρd + d²) ≤ 3πρd`). -/
@@ -945,7 +982,34 @@ theorem CPColouring.ae_unitPairsNull_of_modification (c : CPColouring k) {ct : (
 theorem CPColouring.lintegral_ball_ne (c : CPColouring k) {ct : (ℂ → Fin k) → ℂ → Fin k}
     (hct : Measurable (Function.uncurry ct)) (hmod : ∀ x, c.law {f | ct f x ≠ f x} = 0) (ρ : ℝ) :
     ∫⁻ f, volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) ∂c.law = ∫⁻ y in ball (0 : ℂ) ρ, c.law {f | f y ≠ f 0} := by
-  sorry
+  set E : Set ((ℂ → Fin k) × ℂ) := {p | p.2 ∈ ball (0 : ℂ) ρ ∧ ct p.1 p.2 ≠ ct p.1 0} with hE
+  have h0 : Measurable fun p : (ℂ → Fin k) × ℂ => ct p.1 0 := hct.comp (measurable_fst.prodMk measurable_const)
+  have hEm : MeasurableSet E :=
+    (measurable_snd measurableSet_ball).inter (measurableSet_eq_fun hct h0).compl
+  have hL : ∫⁻ f, volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) ∂c.law = (c.law.prod volume) E := by
+    rw [Measure.prod_apply hEm]
+    rfl
+  rw [hL, Measure.prod_apply_symm hEm, ← lintegral_indicator measurableSet_ball]
+  refine lintegral_congr fun y => ?_
+  by_cases hy : y ∈ ball (0 : ℂ) ρ
+  · rw [indicator_of_mem hy]
+    have hae : (fun f : ℂ → Fin k => (f, y)) ⁻¹' E =ᵐ[c.law] {f | f y ≠ f 0} := by
+      have h1 : ∀ᵐ f ∂c.law, ct f y = f y := by
+        rw [ae_iff]; simpa using hmod y
+      have h2 : ∀ᵐ f ∂c.law, ct f 0 = f 0 := by
+        rw [ae_iff]; simpa using hmod 0
+      filter_upwards [h1, h2] with f hf1 hf2
+      show ((f, y) ∈ E) = (f y ≠ f 0)
+      simp only [hE, mem_setOf_eq]
+      rw [hf1, hf2]
+      exact propext ⟨fun h => h.2, fun h => ⟨hy, h⟩⟩
+    exact measure_congr hae
+  · rw [indicator_of_notMem hy]
+    have : (fun f : ℂ → Fin k => (f, y)) ⁻¹' E = ∅ := by
+      ext f
+      simp only [hE, mem_preimage, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+      exact fun h => absurd h hy
+    rw [this, measure_empty]
 
 /-! ### The compactness argument (`exists_bandNull_aeCover_of_mu_eq_one`, `chiM0_le_iff_muZero_eq_one`) -/
 
