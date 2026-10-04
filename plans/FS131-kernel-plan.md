@@ -100,3 +100,57 @@ Surveyed from `ARCHITECTURE.md` § 3 and the modules' headers:
   unit length force χ — the shape of the slack arguments).
 - **Nothing measure-theoretic about colourings of `ℝ²` exists yet**, and nothing about maps, arcs, tiles or fragments. The foundation for
   lanes P and M is new.
+
+## Stage 3 — SAVED: §PA, the prior-art gate for the formalization
+
+### 3.1 Mathlib's coverage of the objects the rows are stated over (grepped at the pin, `v4.32.0`)
+
+| object | in Mathlib? | where / what the foundation does |
+|---|---|---|
+| the plane, unit circles, rotations | yes | `ℂ` (normed, `InnerProductSpace ℝ ℂ`), `Metric.sphere`, `Complex.exp`, `Complex.abs`; the library's plane (§ 2.2) |
+| Lebesgue measure on the plane | yes | `Complex.measureSpace`, `Complex.volume_preserving_equiv_real_prod` (`MeasureTheory/Measure/Lebesgue/Complex.lean`) |
+| arc-length on the unit circle, `Leb ⊗ σ` | partly | `AddCircle`'s Haar measure exists (`Analysis/Fourier/AddCircle.lean`); the foundation parametrizes `σ` by the angle on `[0, 2π)` with `volume.restrict (Ico 0 (2π))`, which is `σ` up to the constant `1` and makes every "null for `Leb ⊗ σ`" statement a plain product-measure statement (`Measure.prod`) |
+| Lebesgue density points | yes, as a theorem | `Besicovitch.ae_tendsto_measure_inter_div` (`MeasureTheory/Covering/Besicovitch.lean:1105`; ℂ is a finite-dimensional real normed space, so `Besicovitch`'s covering instance applies); no `IsDensityPoint` definition — the foundation defines `densitySet A` (the points of density 1) and `upperDensityAt A x` (`limsup` of the ball ratio) |
+| upper density of a set in the plane (µ_k, the slack suprema) | no | defined in the foundation's lane-P module of the wave that needs it (wave P2), as the `limsup` of `volume (A ∩ ball 0 R) / volume (ball 0 R)` |
+| path-connectedness, connectedness, components, closures | yes | `IsPathConnected`, `IsConnected`, `connectedComponentIn`, `closure` |
+| Steinhaus (`A − A` contains a neighbourhood of 0) | yes | `MeasureTheory.Measure.div_mem_nhds_one_of_haar_pos` (additive form generated) |
+| Zorn (maximal covers) | yes | `zorn_le`, `zorn_le_nonempty` |
+| weak-* compactness (FS106-EQ (c) ⟹ (a), YESLIM) | yes | `WeakDual.isCompact_polar` (Banach–Alaoglu) |
+| compactness of probability measures (SUPK's attainment, stationary families) | yes | `MeasureTheory/Measure/Prokhorov.lean:167`, `CompactSpace (ProbabilityMeasure E)` for compact `E` |
+| de Bruijn–Erdős | yes, as Rado selection | `Combinatorics/Compactness.lean`: `Finset.rado_selection`, `Set.Finite.rado_selection`; de Bruijn–Erdős is a corollary of under an hour — **formalized here**, not imported |
+| closed subgroups of `ℝ²` (NOPERLAW: not discrete ⟹ contains a line) | no (only `ℝ`'s dense-or-cyclic) | formalized here (wave A2) |
+| number fields: ramification at 2, residue degrees, Kummer–Dedekind | yes | `Ideal.ramificationIdx`, `Ideal.inertiaDeg`, `NumberTheory/KummerDedekind.lean`, `NumberTheory/NumberField/Ideal/KummerDedekind.lean` — SQRT3-LOCAL's route (`F(i) = F(√−3) = F(ζ₃)`, `x² + x + 1` separable mod 2) is formalized here |
+| locally finite maps bounded by segments and circular arcs, tiles, sectors | **no** | the foundation's lane-M model (§ 5), point-set: a closed boundary set that is a locally finite union of arcs, tiles = components of its complement in the domain |
+| planar graphs, faces, Euler's formula (plane or torus) | **no** (`eulerCharacteristic`, `Euler` formula: no hits) | route T's count (FS114-N114-EULER and its consumers) is stated over a combinatorial torus map; the bridge from a doubly periodic valid map to a cellular torus map is an outside theorem candidate (§ 3.3) |
+| the Jordan curve theorem | **no** (no hit for `Jordan curve`) | avoided: every foundation notion is point-set (components, closures); rows whose statements need it (FS114-CVB-THOM's facial cycles, FS121-D4-HOLE's bounded complementary component is point-set and does not) are flagged at their wave |
+| semiconcave functions, `C^{1,1}` curves | no `semiconcave`; `ContDiff`, `LipschitzWith` yes | defined at the wave that needs them (P4), as a `LipschitzWith` derivative and a supporting-paraboloid inequality |
+
+### 3.2 Formalizations in print
+
+One web search (2026-10-03, "Lean formalization Hadwiger-Nelson measurable chromatic number plane Falconer"; listings only, nothing read):
+no formalization of measurable colourings, density arguments, or planar maps of the plane was found. Two listings: a Zenodo record claiming a
+formal verification that the plane is seven-chromatic (not read; the claim is the open problem, and nothing in this plan rests on it), and a
+GitHub repository `decalion89/chromatic-number-of-the-plane` (release v1.1.0) whose listing says it holds Lean 4 proofs of χ(ℚ(√2,√3)²) = 4 and of
+Fischer's χ(ℚ(√3,√11)²) = 4 — the content of ledger rows 103 and 57, already in this kernel. **Prior-art debt** (listing only, not read):
+those two kernel results have an independent Lean formalization in print; for Keryx to route to `BIBLIOGRAPHY.md` and the claim list.
+
+### 3.3 The outside theorems the rows rest on: formalize, axiom, or separate job
+
+| theorem | rows | decision | why |
+|---|---|---|---|
+| Lebesgue density, Fubini–Tonelli, Steinhaus, Zorn, Banach–Alaoglu, Prokhorov | lane P throughout | **Mathlib** | § 3.1 |
+| de Bruijn–Erdős | FS106-EQ, FS116-O1-YESLIM, FS129-OR1-TOP5's consumers | **formalize** (wave P2) | Rado selection is in Mathlib |
+| closed non-discrete subgroups of `ℝ²` contain a line | FS129-OA1-NOPERLAW | **formalize** (wave A2) | classical, an hour or two |
+| Krylov–Bogolyubov for `ℤ²` on a compact space (stationary families exist) | FS129-SR2-SUPK's attainment clause | **formalize** (wave P2) | Følner averages plus Prokhorov compactness |
+| `[Falconer1981]` Lemma 1, in the paper's form only (SA1-6.3 item 6) | FS129-SA1-FALC-RED | **decide at wave A2's planning job**, after reading the lemma (held: `library/papers/falconer-1981-…pdf`, read in full by FS103-M) | formalize if under an hour (it is a density argument), else an axiom with the four items |
+| the base of row 134 (`[SokolovVoronov2025]` Cor. 1, almost everywhere, curved cubic maps, no `d = 2` exception; with Lemma 5, Prop. 18, Lemma 6's `< 9` branch, CUSP-BASE) | FS112-N3-BASE and through it N3-DENSE3, FS114-CV-EXISTS, FS129-OR1-LOCALDENSE | **explicit hypothesis** `Row134Base`, never an axiom; its formalization is a **separate planner-and-implementer job** (stub to mint: FS-110's module) | the printed proof needed repair here (FS110-CB, -CD, -CE), so the statement used is ours, not the paper's; an axiom would import a statement no paper prints. It is outside the backlog (not a row), so inventory item 3 permits it as a named hypothesis at the close |
+| measure rigidity (`[EinsiedlerLindenstrauss2022]` Thm 1.3) and row 130 | FS111-C-SIX-M's and FS111-M2-REDUCE-C's "hence χ(ℝ²) ≥ 6" clauses | **explicit hypothesis**: row 130's conclusion `χ(ℝ²) = χ_m⁰(ℝ²)` as a named `Prop` | row 130 is our hand result over MR; MR itself enters nowhere in this milestone (FS-113 holds it) |
+| Euler's formula for cellular maps on the torus, and the passage from a doubly periodic valid map to one | FS114-N114-EULER, -N2-FIVE, -N114-ROOM, -N2-ENDS, -N3-JOINT | **combinatorial maps here; the passage a separate job or an axiom, decided at wave M5's planning** | the count is algebra on a combinatorial torus map (a rotation system with `V − E + F = 0`); the topological passage needs the Jordan–Schoenflies machinery Mathlib lacks; Euler's formula for surfaces is classical and would carry the four items if imported |
+| `[Woodall1973]` Thm 6, `[Townsend1981]`'s lemma, `[Thomassen1999]`'s steps | FS106-WO, -TW, -AE-MAP6, FS114-CVB-THOM | **formalize the mathematics, as ours** | the rows' mathematical content is the repaired statement; the verdicts on the printed texts ("step 6 is a GAP") are not statements a kernel checks (§ 4) |
+| `[Voronov2023]` Thm 1.1 | FS106-COMP's second clause | **no import**: the equivalence names Voronov's statement as a `Prop` | the clause is an equivalence, not a use |
+
+**FS-101 and FS-113.** This milestone absorbs **neither**. FS-113 (measure rigidity in full) is a formalization project of its own and no backlog
+row needs MR as an input (rows needing row 130 take its conclusion as a named hypothesis). FS-101's route (Markov–Kakutani, the upper half,
+Herglotz–Bochner, then its step 4) is its own; the eight J45 rows of § Named are FS-101's step-4 interfaces N1/N2 and their neighbours, and they
+are disposed *formalize* in this milestone's last arithmetic wave (A4) **stated against `SpectralChain`'s existing objects**, so that FS-101 consumes
+them by name. If Kooshi prefers FS-101 to formalize them in its own order, A4 moves to FS-101 unchanged (a ruling, § 4.4).
