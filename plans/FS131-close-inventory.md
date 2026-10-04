@@ -1206,3 +1206,6 @@ reason by the close.*
      `LEAN.md` § The gate's inhabitant rule extended verbatim from its § 5.3 (this commit): the inhabitant satisfies every hypothesis the theorem does not refute,
      at once, at a parameter the refutation leaves alive. Keryx's receipt: the brick claim's distance — a 3–4–5 diagonal is exactly 1 in units where the
      cell's sides are 3/5 and 4/5 — and the tool's existence and planted faults per its record. Credit QA2.
+173. **Item 172's brick receipt completed after it was written** (Keryx's order slip: the line was logged before the check ran): `sevenBrick := cosetBrick 3 (4/5)
+     (3/5) (2/5)` (`Instances/Seven.lean` line 75 on `fs131-w4`), so a cell's diagonal is `√((4/5)² + (3/5)²) = 1`; `tools/fs131_qa2_brick.py` prints "brick check:
+     OK (0 failures; shear 2/5)". The QA2 items went to FS131-I4c by message and by amendment to its brief; QA2-1 to FS131-IWc's brief by amendment (a landing item).

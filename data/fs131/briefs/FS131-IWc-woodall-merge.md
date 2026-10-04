@@ -70,3 +70,11 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 several trees are building today, so on exit 75 wait ten minutes and retry. `lake env lean` (with § 9.5's flags) is for iteration only, never evidence.
 The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`. You start no agents of your own
 (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2026-10-04 (Keryx) — a plane-map model of the normal forms, before the landing
+
+From FS131-QA2 (`plans/FS131-close-inventory.md` item 172, QA2-1): Woodall's normal forms are modelled only on a disc of radius 1/3, never on a plane map.
+Before the chain's gate, once `fs131-ww` has merged wave 4's `sevenBrickMap` (its fields are proved on `fs131-w4`), add the plane-map model — `sevenBrickMap.WoodallNormal
+univ` (with `WoodallMerged univ`), or an `ArcMap 7` that is valid, a plane map, in normal form on `closedBall 0 3` and with a point of three colours there; the
+audit's T-junction at a brick corner is the witness (`plans/FS131-QA2-audit.md` § 2.2). No statement changes. You still start no agents of your own (standing
+rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
