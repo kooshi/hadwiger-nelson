@@ -132,16 +132,19 @@ def farBox (x : ℂ) (θ g ε' ρ : ℝ) : Set ℂ :=
 
 /-- **FS121-D4-FACE** with **FS121-V5-FACE-SHARP**'s hypothesis `ρ² ≥ 2g − g²` (SR1 item 6), one class (G92: the argument
 reads only `A`'s own unit pairs): if the half-box and the far box lie almost everywhere in `A`, no point of `supp A` is at
-distance exactly `1` from `x`. -/
+distance exactly `1` from `x`. The far box lies between `x` and `x + e` (`g < 1`; ruling, `plans/FS131-close-inventory.md` item
+37: for `g > 2` the sharp hypothesis holds for every `ρ` and the clause is false — a far box beyond `x + 2e` meets no unit circle
+about the points near `x + e`). -/
 theorem face {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {x : ℂ} {θ ε ε' g ρ : ℝ} (hε : 0 < ε)
-    (hε' : 0 < ε') (hg : 0 < g) (hρ : 0 < ρ) (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2)
+    (hε' : 0 < ε') (hg : 0 < g) (hg1 : g < 1) (hρ : 0 < ρ) (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2)
     (hhalf : volume (halfBox x θ ε \ A) = 0) (hfar : volume (farBox x θ g ε' ρ \ A) = 0) :
     ∀ y ∈ essSupport A, dist x y ≠ 1 := by
   sorry
 
-/-- **FS121-D4-FACE**, last clause: so in a saturated colouring the colour has density `1` at `x`. -/
+/-- **FS121-D4-FACE**, last clause: so in a saturated colouring the colour has density `1` at `x` (`g < 1`, ruling item 37). -/
 theorem face_densitySet {C : Fin k → Set ℂ} (hadm : IsAdmissible C) (hsat : Saturated C) {j : Fin k} {x : ℂ}
-    {θ ε ε' g ρ : ℝ} (hε : 0 < ε) (hε' : 0 < ε') (hg : 0 < g) (hρ : 0 < ρ) (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2)
+    {θ ε ε' g ρ : ℝ} (hε : 0 < ε) (hε' : 0 < ε') (hg : 0 < g) (hg1 : g < 1) (hρ : 0 < ρ)
+    (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2)
     (hhalf : volume (halfBox x θ ε \ C j) = 0) (hfar : volume (farBox x θ g ε' ρ \ C j) = 0) :
     x ∈ densitySet (C j) := by
   sorry

@@ -11,6 +11,11 @@ merged into them in `data/fs131/k2/rows-wave2.md` (main tree; written and checke
 None. A planning job: definitions, spec examples and inhabitants (sanity checks of definitions, listed under the stage that adds them), statements with
 `sorry` at every leaf, and plans.
 
+FS131-K2b (stages 6–10): none either — the six rows' objects, spec examples, and five theorems closed from their leaves (`exists_r7`,
+`not_forall_semiconcaveWith_one`, `disc7_sum_upperDensity`, `not_forall_isRegularMUA`, `not_forall_fix_converse`) plus `hcZ0_spec`; every
+row-level claim is a `sorry` leaf. Hand arguments in this record (one mind, not theorems of the kernel): BAND (1)'s general form (§ 7.3),
+the value-1 attainment by compactness (§ 8), FACE's counterexample at `g > 2` (§ 9.1).
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -490,3 +495,120 @@ pixelated by **cell corners** (cell `Q` gets `f` of its lower-left corner) into 
 **The gate on stages 7–8**: `./scripts/build.sh` under the slot (`--mem 40 --cpus 8`, `MEMMAX=40G BATCH=4`): **OK** — 443 of 443 batches,
 5 modules rebuilt (`Plane/Slack`, `Plane/YesLimit`, `Plane/CoverExamples`, `Proofs`), every warning `declaration uses 'sorry'`, 8 m 40 s
 (`build/gate/build/20261004T062108Z-1588600.log`; its replay prefix lists the pre-edit line numbers too). `tools/check_architecture.py` PASS.
+
+## Stage 9 — SAVED: the obligation-modeling pass over all 28 rows, and the re-pricing
+
+*`debruijn-obligation-modeling`, invoked fresh, over the whole skeleton (71 leaves). It changed one statement, by ruling (9.1), and no other;
+it adds named children (9.2), strengthens three inductions (9.3), corrects three leaf plans (9.4), and re-prices (9.5).*
+
+### 9.1 A false clause found, and ruled: FS121-D4-FACE at `g > 2`
+
+`face` as K2 stated it (V5-FACE-SHARP's `2g − g² ≤ ρ²` in place of the row's `0 < 2g < ρ²`) is **false for every `g > 2`**, where the
+hypothesis holds for every `ρ`. Counterexample (`g = 3`, `ρ = ε′ = 1/10`, small `ε`, `r`, `y = x + e θ`): `A = halfBox x θ ε ∪
+B(y + r e θ, r) ∪ farBox x θ 3 ε′ ρ` has no unit pairs at all (each piece has diameter `< 1`; across pieces the `e`-component of the difference
+exceeds `1`), both boxes lie in `A`, and `y ∈ supp A` with `|x − y| = 1`. The row's own form had no such case: null unit pairs force `ρ ≤ 1/2`
+(a box of half-width `ρ > 1/2` holds unit pairs), hence `g < 1/8`; the sharp form with `ρ ≤ 1/2` admits `g ≤ 1 − √3/2` or `g ≥ 1 + √3/2`.
+**Ruling** (Keryx, `plans/FS131-close-inventory.md` item 37): `(hg1 : g < 1)` added to `face` and `face_densitySet` — the derivation's
+regime (the far box between `x` and `x + e`, V5's `(1 − g)² + ρ² ≥ 1`). **Generalization to argue later, at its grade**: the clause at
+`g < 2` [reading, one mind: the corner condition still makes the far box meet the unit circles about the points near `x + e`; killing test, a
+counterexample with `1 + √3/2 ≤ g < 2`, `ρ ≤ 1/2`]. Not stated.
+
+### 9.2 The obligation graph: shared children (the implementer states each once, in the module named)
+
+| child | module | carries |
+|---|---|---|
+| `unitPairsNull_congr_ae` (K2) | `Plane/Cover` | SATC (iii), C-FILL, COV, R7's and DISC7's a.e. classes |
+| `essSupport_eq_closure_densitySet` (K2) | `Plane/Cover` | FIX, COVER-SC, BAND (1), HC (`supp (int HC) = HC`) |
+| `densitySet_of_open_ae_subset` (an open set a.e. inside `A` lies in `Ã`) | `Plane/Cover` | BAND (1), FACE, `face_densitySet` |
+| **`exists_isMUA_ae_le`** (stated, a leaf) — the one exhaustion | `Plane/CoverExamples` (move to `Plane/MaximalCover` if wanted; a move, not a statement change) | `exists_isMaximalCover` = coordinatewise exhaustion of `c.cls j` + `isMaximalCover_iff` (now E, was M); IRREG's completion; GRUNDY's per-colour step |
+| **`IsMUA.interior_union_unitShadow`** — SATC (ii) for one MUA set | `Plane/MaximalCover` | `IsMaximalCover.interior_union_unitShadow` (E via COV), FIX's `⊇`, BAND (1) |
+| `isMUA_iff_ae_phi_pos` (wave 1, M2-ZERO) | `Plane/UnitAvoiding` | the maximality of DISC7, R7, HC (`φ > 0` a.e. off the class) |
+| `dist_ne_one_of_mem_interior_densitySet` (wave 1, M2-INT) | `Plane/DensityPoints` | FIX's `⊆`, BAND (1), `component_side` |
+| `upperDensity_le_one`, `antitone_mu` | `Plane/Suprema` | SUPK, `seven_le_chiM0_iff`, COMP |
+| **`upperDensity_of_periodic`** (a set invariant under a lattice with bounded fundamental domain `D` has density `|S ∩ D|/|D|`) | `Plane/Suprema` | DISC7's density, Lemma P, `chiM0_le_iff_periodic`, YESLIM |
+| **`gridCell_cross_dist`** (points of two cells of side `h` have distances within `2√2h` of each other's) | `Plane/Suprema` | Lemma T (pixelation by least index) and COMP's ⟹ (pixelation by cell corners) |
+| **`exists_weakStar_window_limit`** (from families of density `≥ 1 − δ_m`, translates with small hole in `B(x_m, r_m)` and a weak-* limit `F`, `ΣF = 1` a.e.) | `Plane/Slack` | `chiM0_le_iff_muZero_eq_one` ⟸ and `exists_bandNull_aeCover_of_mu_eq_one` |
+| `bandForm_continuous` (`∫_B f (f ∗ k)` weak-* continuous for `k ∈ L¹`) | `Plane/Slack` | the attainment lemma directly; with `σ ⋆ σ ∈ L¹` (from `twoCircle_preimage_null`) the Rajchman step |
+| `twoCircle_preimage_null` (stated, K2) | `Plane/FalconerReduction` | `falconer_lemma1`, the Rajchman step |
+| `colouring_of_bandNull_aeCover` (D4: `min{j : x ∈ supp C_j}`) | `Plane/Slack` | COMP's ⟸ |
+| `hcBandTop_spec`, `hcUp_slivers`, `hc_unitAvoiding`, `hc_sausage_cover`, `hc_lemmaNL`, `hc_exclusion` (stated with `interior Z = ∅`, never `volume Z = 0`) and `hc_ae_phi_pos` (nullity) | `Plane/CoverExamples` | HC's two leaves and IRREG's clause (1) — the split is § 4.2 (1)'s "nullity entered only in the almost-everywhere step" |
+| `r7_essClosure_classify`, `r7_arc_centre_colours` | `Plane/CoverExamples` | `r7Cls_saturated`, `r7_boundary`, `r7Cls_isMaximalCover` |
+
+### 9.3 Inductions that need their statement strengthened (the IH, named before the first tactic)
+
+- `exists_grundy`: induct on `m ≤ k` (ℕ, not `Fin`), the IH carrying the whole prefix — classes `A_0, …, A_{m−1}` with clauses (i)–(iv) for
+  indices `< m` and `S_i ∖ ⋃_{i′<i} A_{i′} ⊆ A_i`; the colouring is read off at `m = k` (`x ↦ min {i : x ∈ A_i}`, defined since `S_{c x}` holds
+  `x` unless an earlier class does — which also gives "never raising"). Clause (v) (bound at boundary points) is proved after the induction,
+  from (iv) at contacts. Proving each `A_m` alone leaves the shadow clause's earlier classes outside the IH.
+- `exists_placeHom`: induct on `n` **generalizing the base**: for any subfield `E₀ ⊆ ℝ`, subring `V₀ ⊆ E₀` holding both coordinates of every
+  unit vector of `E₀²`, and `φ₀ : V₀ →+* 𝔽_q` extending reduction mod `𝔭`, and `t` transcendental over `E₀`, there are `V₁ ⊆ E₀(t)` and
+  `φ₁` with the same properties extending `φ₀` (evaluation at `t = 0` on the `V₀`-regular functions; `zeroPlace`, `evalZero`). The base `V₀ =
+  𝒪_{F,𝔭}` needs `mem_valuationSubring_of_sq_add_sq_eq_one` (`−1` is not a square mod a usable prime). Inducting on the theorem as stated
+  gives an IH over `F` alone, which the step cannot use.
+- `exists_isMUA_ae_le` (and through it SATC (i)): no induction — a measure-maximizing sequence `B_n` among admissible sets above `A`, the
+  union of a countable cofinal subfamily; its "termination" is the monotone bound `volume (B ∩ ball 0 R) ≤ π R²` per radius, diagonalized.
+
+### 9.4 Leaf plans corrected
+
+- `forall_mu_six_lt_one_iff` (H → M): stage 8's route — ⟸ by `exists_bandNull_aeCover_of_mu_eq_one` and D4, ⟹ by corner pixelation.
+- `IsMaximalCover.enclosing_or_exterior`: its `y` is unconstrained in the statement (as the row is worded); the proof produces a contact
+  `y ∈ supp (C a)`, which `curvatureLeOne` reads. The implementer proves the stronger child `enclosing_or_exterior_contact` (with
+  `y ∈ essSupport (C a)`) and derives the statement from it.
+- `face`, `face_densitySet`: with `hg1`, K2's plan stands (the half-box alone excludes every unit-distance direction but `+e`, whose circle is
+  tangent to the half-box's face; the far box's corner reaches the unit circles about the points near `x + e` exactly when
+  `(1 − g)² + ρ² ≥ 1`). `face_densitySet` (E): `face` makes `x` no contact point, saturation then puts `x ∉ ∂_e`, and the half-box puts
+  `x ∈ A*`, so `x ∈ Ã`.
+- Closures available now from siblings (E, first after their parents): `muZero_eq_one_iff_tendsto` (`tendsto_mu`, uniqueness of limits on
+  `𝓝[>] 0`), `seven_le_chiM0_iff` (`chiM0_le_iff_muZero_eq_one 6`, `tendsto_mu`, `antitone_mu`, `upperDensity_le_one`),
+  `exists_tight_iff_chiM0_le` (`exists_tight`, `chiM0_le`, padding by `Fin.castLE`), `le_chiM_of_falconerFan` (fibres of a colouring are a
+  cover), `sqrt3_dyadic` (`s = √3`), `forcedSet_eq_zero`, `IsMaximalCover.interior_union_unitShadow`, `exists_isMaximalCover`.
+
+### 9.5 The re-pricing (71 leaves; to be re-priced again from the implementer's first two, per `CLAUDE.md` § What compute actually helps)
+
+| price | leaves |
+|---|---|
+| **H** (13) | `twoCircle_preimage_null`; `chiM0_le_iff_muZero_eq_one` (window limit, Rajchman step, rounding); `tendsto_mu` (Lemmas P, T, kept points; `tendsto_muTile`, `tendsto_muPer` then M); `exists_grundy`; `falconer_reduction`; `exists_placeHom`; `sqrt3_local_of_congr`; `falconerFan_five_field`, `falconerFan_five_placeHom` (`decide +kernel` orbit facts, price from the first); `r7_aeColouring` (the finite case table); `r7Cls_saturated` (the classification); `hc_isRegularMUA`; `hc_irreg` |
+| **M** (43) | `sq9_tight_saturated` and the rest of MaximalCover, Slack, FalconerReduction, Stationary, YesLimit, Arith; DISC7's four; `r7_boundary`, `r7Cls_isMaximalCover`, `r7_lowerGraph`; BAND (1), `vesica_apex`; `g1Bounds_hcGap`, `hc_band_components`, `fatZ_spec`, `exists_isMUA_ae_le`; the attainment lemma |
+| **E** (15) | the eight closures of 9.4, `r7_not_bandNull`, `not_semiconcaveWith_one_lowerArc`, `band_excludes_horn`, `le_one_of_band_unitFree`, `vesica_apex_exact`, `noAffine_fields`' field cases once `noAffine` lands, `face_densitySet` |
+
+**Sessions**: the 13 H leaves are each hours of agent work and mostly independent (the HC/IRREG pair and the R7 pair share children, the
+Slack H leaves share the window limit and the two-circle lemma); the wave is three to five implementer sessions, or one per lane with two
+implementers in parallel (lane P's examples are independent of lane P's analysis). W4 (not one session, 0.8) stands.
+
+## Stage 10 — SAVED: where it is, and how the implementer works (stage 5 brought to all 28 rows)
+
+**Branch `fs131-w2`** in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w2` (`.lake/packages` symlinked, `.lake/build` its own copy — never
+symlink it). Base: wave 1's skeleton `3358a401`; on top, K2's foundation (stage 2) and skeleton (stage 4), and this job's six rows, the
+attainment lemma and the FACE ruling (stages 7–9). **All 28 rows are stated**, each read back (§ 4.1 for K2's 22, § 7.3 for the six) and
+planned (§§ 4.2, 7.4, corrected by §§ 8 and 9).
+
+**The leaves: 71** — `Plane/MaximalCover` 11, `Plane/Slack` 18, `Plane/Stationary` 3, `Plane/FalconerReduction` 4, `Plane/YesLimit` 2,
+`Plane/CoverExamples` 23, `Arith/PlaceHom` 2, `Arith/FalconerField` 5, `Arith/Dyadic` 3 (lines that are exactly `sorry`). Theorems already
+closed from leaves: `chiM0_le_iff_chiCP_le`, `chromaticNumber_plane_le_six_of_fragments`, `exists_r7`, `not_forall_semiconcaveWith_one`,
+`disc7_sum_upperDensity`, `hcZ0_spec`, `not_forall_isRegularMUA`, `not_forall_fix_converse`. Objects and spec examples are sorry-free.
+
+- **Builds**: from inside the worktree, `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
+  ./scripts/build.sh`; never `lake build`; up to two such builds across trees (ruling 5); exit 75 → wait ten minutes. `lake env lean -DautoImplicit=false
+  <file>` for iteration only, never as evidence; an iteration `-o` olean must be deleted before the real build.
+- **The implementer may** add children anywhere in the wave's modules and supporting lemmas in the foundation (`Plane/Cover`, `Plane/Suprema`,
+  `Plane/CPColouring`), state the shared children of § 9.2 where named, move `exists_isMUA_ae_le` to `Plane/MaximalCover` (a move), change
+  imports (updating `ARCHITECTURE.md`'s Imports cell), import library modules, and add `scripts/Axioms.lean` records for its children.
+  **It may not** change any statement, add or drop a hypothesis, or change a definition's meaning (`r7Col`, `disc7`, `hcSet`, `G1Bounds`,
+  `hcGap`, `fatZ`, the foundation's); a needed change comes back through Keryx as a ruling (as FACE's did). `Row130M1`, `hR78`, `hR88`,
+  `hR88per` are named hypotheses from outside the backlog and stay hypotheses; `Voronov11` is a named proposition, never assumed.
+- **Order** (the obligation graph, § 9.2): (1) the foundation's shared children and the one-MUA-set lemmas (`exists_isMUA_ae_le`,
+  `IsMUA.interior_union_unitShadow`, `isMaximalCover_iff`), then MaximalCover (SATC, COV, FIX, C-FILL, COVER-SC, GRUNDY); (2) the examples, in
+  parallel with (3): BAND (E–M first), DISC7, R7, then HC and IRREG through `hc_*` children; (3) Slack: RESCALE, `keptAt_band`, Lemmas P, T,
+  SUPK, the window limit and the attainment lemma, COMP, `twoCircle_preimage_null` and the Rajchman step, EQ, REM, FACE (un-deferred by the
+  ruling); then YesLimit, FalconerReduction, Stationary; (4) lane A (PlaceHom before FalconerField; Dyadic independent) in parallel with all of
+  it. Wave 1's leaves cited by name (`isMUA_iff_ae_phi_pos`, `dist_ne_one_of_mem_interior_densitySet`, `hullset`, `ArcMap`, `noAffine`) land
+  from `fs131-w1`: merge `main` into this branch when wave 1 lands, before the gate.
+- **The gate for landing**: build with no warning; `scripts/axioms.sh` clean (every wave-2 record the standard three, no purchase, no axiom);
+  `./scripts/vacuity.sh` and `--self-test` green with the counts reconciled — inhabitants: `sq9` (`AeColouring`, covers, partial colourings),
+  `nonempty_cpColouring_nine`, `exists_isMaximalCover` (maximal covers; R7's and DISC7's classes too), `hcZ0_spec` (HC's hypotheses),
+  `fatZ_spec` with `g1Bounds_hcGap` (IRREG's), DISC7's classes (`IsRegularMUA`); FALC-RES and HOSTS over a possibly empty domain read
+  `GENERIC`/`UNKNOWN`, never `VACUITY DECLARED`; `tools/check_architecture.py` exit 0; then merge `main`, re-run, fast-forward.
+
+**Build log of the handoff** (after the FACE ruling): `./scripts/build.sh` under the slot (`--mem 40 --cpus 8`, `MEMMAX=40G BATCH=4`): **OK** —
+443 of 443 batches, 4 modules rebuilt (`Plane/Slack` and its dependents), 16 modules with warnings, every warning `declaration uses 'sorry'`
+(wave 1's 28 and wave 2's), 8 m 42 s (`build/gate/build/20261004T063203Z-1649043.log`). `tools/check_architecture.py` PASS (stage 7).
