@@ -1303,3 +1303,21 @@ reason by the close.*
      way. Confidence: high. A generalization for errata (no statement change now): L60-EQ's third tile holds with no `F.Valid` hypothesis.
 186. **Brief FS131-I4f, wave 4's sixth implementer** (Opus; `data/fs131/briefs/FS131-I4f-wave4.md`, derived by script from I4e's, gated PASS): `bowtieCol_locallyConstant`
      first, then the bowtie and the rest in Stage 11's order, the gate and the landing. Launched in I4e's slot: 1 (I2j) + 1 (IWd) + 1 (I4f) = 3.
+187. **FS131-I2j handed back at stage 21, harness ≈ 397k** (report `data/fs131/reports/FS131-I2j.md` on `fs131-w2`; branch at `9e32ab1d`, checked): 46 → 36.
+     **[kernel], standard three**: **FS129-SR2-SUPK** (`tendsto_mu`, `tendsto_muTile`, `tendsto_muPer`: µ_k(ε), µ_k^tile(ε), µ_k^per(ε) → µ_k⁰ as ε → 0⁺) and with
+     it `muZero_eq_one_iff_tendsto` (FS106-EQ (c) ⟺ (d)); **FS106-SUP's attainment clause** (`exists_bandNull_aeCover_of_mu_eq_one`) and through it **FS106-COMP**
+     (`forall_mu_six_lt_one_iff`: (∀ ε > 0, µ₆(ε) < 1) ⟺ Voronov11); the compactness children `exists_twoCircle_density`, `exists_translates_small_hole`,
+     `ae_sum_eq_one_of_weakStar`, `convForm_tendsto`, `exists_weakStar_subseq` and five new children. **Assembled, over `sorry`** (through `unitForm_tendsto`):
+     `chiM0_le_iff_muZero_eq_one` (FS106-EQ (a) ⟺ (c)), `chiM0_le_iff_periodic`, `seven_le_chiM0_iff`, YESLIM's `chiM0_le_of_fragments`. Keryx's receipts: build log
+     `build/gate/build/20261004T171540Z-968137.log` (w2) "Build completed successfully (5732 jobs)", 36 distinct warnings (each printed twice), all `declaration uses
+     sorry`; `sorry` lines by count Slack 2, CoverExamples 34; `data/fs131/i2/i2j-axioms.txt` prints the three `tendsto_*`, `exists_bandNull_aeCover_of_mu_eq_one`
+     and `muZero_eq_one_iff_tendsto` on the standard three and `chiM0_le_iff_muZero_eq_one` with `sorryAx`. Generalizations for errata: `hε` unused in
+     `exists_bandNull_aeCover_of_mu_eq_one` (kept, `have _ := hε`); `ae_sum_eq_one_of_weakStar` needs no bound on the limit; `exists_squareWin_dense`'s measurability
+     unused; `eventually_le_muPer` needs one scale (µ_k^per grows as ε shrinks). Re-pricing: SUPK's lower bound ≈ 25k (plan 115k), `exists_weakStar_subseq` ≈ 35k
+     (plan 50k), `convForm_tendsto` ≈ 6k (plan 30k). `Plane/Slack` now imports `Plane/FalconerReduction` and five Mathlib modules; `ARCHITECTURE.md` updated,
+     `check_architecture.py` passes. Left: Slack 2 (`integral_circleAvg_sq`, `unitForm_tendsto` — routes in Stage 21), CoverExamples 34; the carriers (Stage 18's
+     recommendation stands), the gate, the landing. **Next**: FS131-I2k (Opus).
+188. **Slip (Keryx's): I2j's brief carried a stale amendment** — item 134's Dyadic `hi` change, copied forward from an earlier brief, had already been applied by
+     FS131-I2g (record Stage 10). I2j checked all five declarations and changed nothing (credit: I2j). Fix: I2k's brief drops the amendment.
+189. **Brief FS131-I2k, wave 2's eleventh implementer** (Opus; `data/fs131/briefs/FS131-I2k-wave2.md`, derived by script from I2j's, stale amendment dropped,
+     gated PASS): Slack's two leaves, CoverExamples' 34, the carriers, the gate and the landing. Launched in I2j's slot: 1 (I4f) + 1 (IWd) + 1 (I2k) = 3.
