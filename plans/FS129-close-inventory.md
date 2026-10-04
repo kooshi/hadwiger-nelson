@@ -469,3 +469,6 @@ One line per item with its source; no narration. Each line is ticked done or dec
 122. **SR2's registration** (record § 4.4): merges 18 against 8; weakenings 4 against 2; disagreements 6 against 3; vacuity additions 0 against 2;
      two binary predictions, Brier 0.108. Prior art: TOUCHW owed, the rest partly in-house. Slip, self-reported: stage 1 committed with the gate
      failing on "no derivation entry" (registration only), disclosed.
+123. **Launched 2026-10-04 01:21 UTC**: FS129-SR3 (pass 3, lane R, last items; `data/fs129/briefs/FS129-SR3-pass3.md`) and FS129-Z1 (the record job,
+     part 1; `data/fs129/briefs/FS129-Z1-record.md`), both `general-purpose`, Opus, gated PASS, at `dae18a6b`. Running: the Searcher, SR3, Z1 —
+     the cap of three.
