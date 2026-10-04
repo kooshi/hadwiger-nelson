@@ -542,22 +542,6 @@ while `build.sh` runs; editing the module is not.
 **Re-pricing, overall**: about 300k tokens of this session went to proofs, merging and builds for 38 lines and 12 new children; the easy leaves at
 2–5k, the hard children (Kummer–Dedekind, the tiling squeeze, the disc-per-cell count) at 25–35k.
 
-## Stage 16 — SAVED (FS131-I2i, Opus): readback; the branch builds as given
-
-**Readback.** Both brief quotations checked by `grep -F` against their sources: the "May" line (`plans/FS131-w2-kernel-plan.md` line 754, § Stage 13) and
-"**Closed since Stage 14** (statements untouched):" (this record, Stage 15, line 498) — both exact. Counts at `e8237b4b` by script (lines that are exactly
-`sorry`): `Plane/Slack` 19, `Plane/CoverExamples` 34 — 53, as the brief says; no other wave-2 module holds one.
-
-**May**: prove any child or leaf; add further children (each stated as a lemma before use, with its `scripts/Axioms.lean` record); move declarations within
-a module; add imports (with `ARCHITECTURE.md`'s Imports cell); add supporting definitions (the fringe colouring of `exists_not_uniform_kept`); register wave 2's
-vacuity carriers under FS131-T1's procedure, each with a control; docstrings (item 144 (d), FALC-HOSTS (iv)'s on `falconerFan_five_mem_P`). **May not**: change
-any row statement, hypothesis or definition's meaning (the rulings 48, 56, 57, 63, 72, 86, 100, 134 are the authorised changes; item 134's Dyadic repair is
-kept), nor any child statement fixed by K2c or K2d; no new `axiom` (`falconer_lemma2_nonempty` is the one declared import), no `native_decide`. A leaf that
-cannot be proved as written goes to Keryx at once, and the others continue.
-
-**Build as given** at `e8237b4b`: OK — all 1750 modules up to date, nothing built, 2 modules with warnings, 53 warnings, every one `declaration uses 'sorry'`
-(`build/gate/build/20261004T153021Z-369432.log`).
-
 ## Theorems this phase proved (FS131-I2h, additions)
 
 Axioms read from `data/fs131/i2/i2h-axioms.txt` (printed from the built library at `a0865f7d`; the gate was not run). Each read against its docstring,
@@ -586,3 +570,64 @@ which carries the row.
 ## Drafts for the front page (FS131-I2h)
 
 None: the gate was not run (53 `sorry` remain in wave 2's modules), so no count moves.
+
+## Stage 16 — SAVED (FS131-I2i, Opus): readback; the branch builds as given
+
+**Readback.** Both brief quotations checked by `grep -F` against their sources: the "May" line (`plans/FS131-w2-kernel-plan.md` line 754, § Stage 13) and
+"**Closed since Stage 14** (statements untouched):" (this record, Stage 15, line 498) — both exact. Counts at `e8237b4b` by script (lines that are exactly
+`sorry`): `Plane/Slack` 19, `Plane/CoverExamples` 34 — 53, as the brief says; no other wave-2 module holds one.
+
+**May**: prove any child or leaf; add further children (each stated as a lemma before use, with its `scripts/Axioms.lean` record); move declarations within
+a module; add imports (with `ARCHITECTURE.md`'s Imports cell); add supporting definitions (the fringe colouring of `exists_not_uniform_kept`); register wave 2's
+vacuity carriers under FS131-T1's procedure, each with a control; docstrings (item 144 (d), FALC-HOSTS (iv)'s on `falconerFan_five_mem_P`). **May not**: change
+any row statement, hypothesis or definition's meaning (the rulings 48, 56, 57, 63, 72, 86, 100, 134 are the authorised changes; item 134's Dyadic repair is
+kept), nor any child statement fixed by K2c or K2d; no new `axiom` (`falconer_lemma2_nonempty` is the one declared import), no `native_decide`. A leaf that
+cannot be proved as written goes to Keryx at once, and the others continue.
+
+**Build as given** at `e8237b4b`: OK — all 1750 modules up to date, nothing built, 2 modules with warnings, 53 warnings, every one `declaration uses 'sorry'`
+(`build/gate/build/20261004T153021Z-369432.log`).
+
+## Stage 17 — SAVED (FS131-I2i): the modification, REM's second and third clauses, `exists_tight`'s three children; Slack 19 → 12
+
+(Stage 16 moved here from above I2h's theorem list, where it was first inserted, so the stages read in order.)
+
+**Closed** (statements untouched; children stated before use, each with its `scripts/Axioms.lean` record in block "FS131-I2i"):
+- `CPColouring.exists_modification` — scales `h_m` from `exists_unif` at `2^{−m}`, `ct f x` the eventual value of `f (gridPoint h_m x)` (else
+  colour `0`; `k = 0` is vacuous), fibres measurable through `measurable_to_countable'`, the modification a.s. at each `x` by
+  `ae_eventually_notMem` (Borel–Cantelli, `∑ 2^{−m} < ∞`).
+- `CPColouring.ae_unitPairsNull_of_modification` — the set `{(f, x, θ) : ct f x = ct f (x + e θ)}` has `law ⊗ volume ⊗ arcLength`-measure `0`
+  (each slice in `f` null by `c.proper` and the modification at `x` and `x + e θ`), so almost every slice in `(x, θ)` is null.
+- `CPColouring.tendsto_not_kept` — new child `CPColouring.law_ge_ball_ne_le` (Markov at one radius on `lintegral_ball_ne`); not kept at
+  `ρ ∈ {ε/2, 2ε}` puts the disagreement at `η` of the ball (`ofReal (1 − η) + ofReal η = 1`); at `η ≥ 1` every point is kept.
+  **So `chiM0_le_chiCP` and FS106-REM's second clause are sorry-free.**
+- `exists_not_uniform_kept` — **a route other than the plan's fringe colouring** (§ 17.1; "the implementer may take either"): the
+  *stripe colouring* `stripeCol n` (new definitions `stripeIdx`, `stripeCol`, spec example beside them): squares of side `1/2` coloured
+  `(⌊2 re⌋ mod 4, ⌊2 im⌋ mod 4)` — any refinement of it is proper at every unit pair (`stripeCol_ne_of_dist_eq_one`: one colour mod `4` in both
+  coordinates and distance `≤ 1` force one square, diameter `√2/2`) — refined by stripes `⌊re · (⌊im⌋₊ + 1)⌋ mod (n + 1)`, finer as rows
+  rise. With `n = ⌈4/(1 − η)⌉₊`, every point of the unit square at height `Y = ε/2 + 8/((1 − η)ε) + 1` is non-kept at radius `ε/2`: its colour
+  class meets the ball in at most `2ρ(2ρ/N + 2/M) ≤ 2(1 − η)ρ² < (1 − η)πρ²` (children `volume_floor_emod_le`, `volume_floor_mul_emod_le`,
+  `volume_box_stripe_le`, `measurable_stripeIdx`, `measurable_stripeCol`), so `m` is the unit square's area. The fringe-to-fringe pairs the
+  plan left open do not arise: properness comes from the coarse squares alone. **So FS106-REM is sorry-free (all three clauses).**
+- `continuous_pairMass` — new child `tendsto_measure_inter_of_symmDiff`; Mathlib's `tendsto_measure_symmDiff_preimage_nhds_zero` on the
+  translations `x ↦ x + r e θ` (a continuous family in the compact-open topology, `ContinuousMap.curry`), applied to `A ∩ B(0, R + |r₀| + 1)`,
+  then dominated convergence in `θ` (`tendsto_lintegral_filter_of_dominated_convergence`, bound `vol B(0, R)`). New Mathlib import
+  `Mathlib.MeasureTheory.Measure.ContinuousPreimage` in `Plane/Slack`.
+- `ae_pairMass_eq_zero` — new children `arcLength_eq_volume_Ioo` (the angle read on `(−π, π)` about the antipode, `e (θ + π) = −e θ`) and
+  `lintegral_Ioo_angle_le` (polar coordinates about `x`, `Complex.lintegral_comp_polarCoord_symm`: `∫_{(a,b)} r · |{θ : x − r e θ ∈ A}| dr ≤
+  |A ∩ annulus|`); then `∫_{(a,b)} r · pairMass(r) dr ≤ (vol ⊗ vol)(pairs at distance in [a, b]) = 0` by Tonelli
+  (`lintegral_lintegral_swap`), and `r > a > 0`.
+- `AeColouring.exists_pos_not_iccPairNull` — a class of positive measure, a density point `x` of it, `r < 1/2` with density `> 1/2` in
+  `B̄(x, r)`; then `vol(A₁)² ≤ vol(A₁) · π(r/4)²` if the pairs at distance in `[r/4, 1]` were null, against `vol(A₁) > πr²/2`.
+  **So `exists_tight` (FS111-V0-RESCALE) and `bandNull_unitPairsNull` are sorry-free in body and children.**
+
+**Iteration**: `lake env lean -DautoImplicit=false` on scratch files importing the built `Plane/Slack`, then on `Plane/Slack.lean` in place
+(about 15 s); never evidence — the stage's build follows.
+
+**Re-pricing** (the brief's ask, from the first two hard children): the modification with its a.e. properness about 12k tokens, the polar
+change of variables (`ae_pairMass_eq_zero` with two children) about 25k, the stripe colouring about 20k. Near a third of the plan's table
+again (K2c priced the modification at 25k, the fringe colouring at 70k).
+
+**Still `sorry`** (lines exactly `sorry`; 46 = Slack 12 + CoverExamples 34): Slack — `exists_squareWin_dense`, `exists_tiled_kept`,
+`eventually_le_muPer` (SUPK's lower bound); the compactness block `exists_weakStar_subseq`, `convForm_tendsto`, `exists_twoCircle_density`,
+`integral_circleAvg_sq`, `unitForm_tendsto`, `exists_translates_small_hole`, `ae_sum_eq_one_of_weakStar`, `chiM0_le_iff_muZero_eq_one`,
+`exists_bandNull_aeCover_of_mu_eq_one`. CoverExamples — unchanged from Stage 15's list.
