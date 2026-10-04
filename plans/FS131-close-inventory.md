@@ -492,3 +492,25 @@ reason by the close.*
     in the record's Stage 3. Routes found: engine 3 without a sector parametrization; `sixCol (e(π/3)·x) = sixCol x + 1` for SixFragment; the sub-arc and the
     finiteness of Z for `qfree4` and FIVERING. Note for the merge: five helper lemmas moved into wave 1's `Plane/Chord`. Successor FS131-I3d
     (`data/fs131/briefs/FS131-I3d-wave3.md`, gated PASS), launched in the slot I3c freed. Source: this commit.
+88. **Finding — two GAPs in the repaired chain of "maps need six" (FS106-WO, FS106-AE-MAP6), with unit-arc boundaries allowed** (FS131-W, message 2026-10-04, stage 1;
+    one mind, before any skeleton; the page images of `[Woodall1973]` p. 198 read). **F1**: Woodall's step 5 reads "φ ≤ ⅓π" and "π − φ ≥ ⅔π" (the OCR the record's
+    verifier V3 used — `plans/FS106-V-verification.md` stage 3, "Steps 5 and 7 use strict inequalities and survive" — lost the signs), so at φ = π/3 step 5 calls
+    step 4's lemma at length exactly 2π/3, where Townsend's counterexample refutes it and the repair proves only lengths above 2π/3; it closes by one-sided collars
+    unless both edges of the region are unit arcs centred at the arc's ends — Townsend's configuration, which nothing in the record excludes. **F2**: Woodall's
+    step 7 (and 8) says the D|E edge "must terminate … only by meeting a vertex on the unit circle with center P" — false without Condition 5: the edge may meet
+    ω(P) at Q and continue along it, so Q is a two-colour corner and step 6 never applies; W checked the scenario against lemma (L), TS-U and the sector
+    constraints and found no contradiction. **F3**: TS's reduction to Townsend's printed lemma works only at a good degree-3 vertex; reaching one is Woodall's case
+    analysis, where F1 and F2 sit. **Under Condition 5 both vanish and the chain closes as written.** Grade: GAP at named steps, one mind; not a refutation.
+    **Bearing**: FS111-M-REDUCE-I, -M2-REDUCE-C and -VM2-EQ5 (`plans/FS111-derivation.md` lines 208–222, 618) use FS106-AE-MAP6 for the maps route M's regularity
+    produces, whose interfaces are segments and arcs of integer radius (rows 140–141) — unit arcs included; so route M's "χ_m⁰(ℝ²) ≥ 6 at five" (FS-104's route (e))
+    rests on F1 and F2 being closed. **Correction owed, pending the deriver** (not filed now — a GAP at one mind, routed): `LEDGER.md` row 132's "maps need six"
+    clause and `CLAUDE.md` § The aim item 4's "Maps need six: `[Woodall1973]` Thm 6 and Townsend's manuscript, each repairing the other".
+89. **Ruling — W's representation (F4)**: (a) state FS106-AE-MAP6 and Woodall's Thm 6 over wave 3–4's `ArcMap` (locally finite boundaries of segments and circular
+    arcs, region-only validity), the class route M's regularity produces; the general Jordan-arc form (the row's "Conditions 2–4") recorded as owed. Alternative
+    weighed: (b) general Jordan maps with the Jordan curve and θ-curve theorems and accessibility as outside theorems or a job. Why: Mathlib has none of that
+    topology, the consumers' maps are arc maps, and the F1/F2 question is the same in either class. **For wave 9's planner**: FS111-M2-REDUCE-C composes AE-MAP6
+    with REG-J′-C_k, stated over Jordan arcs; over `ArcMap` its interfaces must be segments and arcs. Confidence: high. **W's plan meanwhile, accepted**: formalize
+    what holds (FS106-TW in a collar form; FS106-WO's step-4 lemma, strict; Townsend's ⅔π counterexample as an adversary), and state AE-MAP6 twice — unconditional,
+    with F1's and F2's leaves marked open for the deriver, and under Condition 5, which the chain proves.
+90. **Routed — F1 and F2 to an Ephodos job** (FS131-E1, queued for the first free slot): close each GAP or exhibit the configuration (a five-colour arc map,
+    almost-everywhere proper, with unit-arc boundaries at Townsend's configuration or with an edge continuing along ω(P)), from W's record and the papers.
