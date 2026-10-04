@@ -590,3 +590,15 @@ reason by the close.*
 105. **The two listings' addresses** (item 9; recovered from the web-search results returned to FS131-K1 on 2026-10-03, at Kooshi's request): the Zenodo record,
      "The Hadwiger-Nelson Problem: (title removed)",
      an outside record; the GitHub release, https://github.com/decalion89/chromatic-number-of-the-plane/releases/tag/v1.1.0. Neither read here.
+106. **FS131-E1 mid-flight finding** (message 2026-10-04; record `plans/FS131-E1-derivation.md` § 3, commit `3f775af7`): **E1-NO45** — "in a five-colour
+     almost-everywhere-proper arc map in Woodall's normal form, no point lies on the boundary of exactly four or exactly five sectors" [hand, one mind] —
+     Townsend 2005 Thm 5 (ii) made rigorous, through E1-CROSS, E1-COVER (≥ 6 branch points on ω(P)), E1-BAD (≤ 5 exceptional points, given strict step 5) and
+     step 6. With **E1-NOBRANCH** (some branch point exists; needs the Jordan curve theorem for segment-and-arc curves, which Mathlib lacks — item 89) it gives
+     **E1-MAPS6** [derived, one mind]: maps need six for arc maps, almost everywhere, reading neither step 5 at equality nor steps 7–8. F1 and F2 are
+     **bypassed, not closed** (its *not claimed*). Not claimed: the Jordan-arc form (D-SV Conditions 2–4). Caveats for the formal statement: (N1) per sector;
+     the arc-map form read at three places. Keryx's receipt: control e1-count run — `k=4: tuples=12341 max_points=5 …; fewer_than_six_everywhere=True`, as its
+     expect line; `--fault` gives `fewer_than_six_everywhere=False`; the angle bound (k = 4: at most 2π − π = π; k = 5: at most 2π/3) checked by hand.
+     **Routing**: the Woodall chain's plan changes — leaves `step5_eq`, `step7` (and step 8) dropped; E1-SEE, -RAY, -CROSS, -COVER, -BAD, -NO45, -NOBRANCH
+     added; the Jordan curve theorem for arc curves priced or routed around by W's collars. A planner pass on `fs131-ww` (FS131-W2; resuming W, ≈ 270k, if it
+     is the cheaper reader) takes the Opus slot E1 frees, **after E1's report** (it is still writing the chain corrections). FS131-IW waits for it; I3e's half
+     slot goes to FS131-I4. Corrections to row 132 and § The aim stay held until the report (item 88). Credit: E1, by name.
