@@ -1610,3 +1610,29 @@ reason by the close.*
 225. **Brief FS131-IC3, wave 4's third `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC3-contact.md`, derived by script from IC2's, gated PASS): `Contact`'s
      5 on `fs131-w4c` (`stuck_cone` and `IsHorn.exists_flanks` first, per IC2), engine 2 brought over verbatim when needed. Launched in IC2's slot: 1 (I2m) + 1
      (I4i) + 1 (E4) + 1 (IC3) = 4.
+226. **FS131-E4 done, harness ≈ 480k** (report `data/fs131/reports/FS131-E4.md`; record `plans/FS131-E4-derivation.md`; commits `fffe465f` … `e2928a7b`, checked;
+     derive gate PASS, 0 failures, 3 "prior art owed" warnings, both tool controls fire). **Q1 (enclosure under `BaseCtx`) — GAP, stalls** (E4-Q1): every
+     hypothesis read inside `B̄(u, 0.34)` holds in an exact enclosure model (`tools/fs131_e4_enclosure_model.py`), so no local exclusion exists; no configuration
+     on `B̄(u, 2)` exhibited. **Q2 (the count without the eleventh point) — GAP, stalls** (E4-Q2): types alone never force a collision (`tools/fs131_e4_count.py`);
+     smallest open form: can an enclosed `u` have its nine selected endpoints of nine distinct multicolours? **Derived [hand], one mind each**: **E4-RIM** — the
+     eleventh point exists at any `u` no tile of one of `u`'s colours encloses (`UnenclosedC u`; prior art `[Voronov2023]` Lemma 6.1 under 1-connectedness);
+     **E4-OUTERMOST** — within 1 of any point of a valid fragment there is a bad point or a cubic trichromatic vertex no tile encloses (any `k`); **E4-N3BASE-UN**
+     — FS112-N3-BASE with `UnenclosedC u` added (over the walk's other steps at their grade); E4-BEND-UN (the pre-bend keeps it; a sketch at the collar push);
+     **E4-LOCALDENSE** [derived] — `localDense`'s statement, radius 3, re-proved over E4-OUTERMOST and E4-N3BASE-UN. **Q3**: repair (b) at radius 3 — only
+     `Row134BaseUA` and `n3_base` gain `F.UnenclosedC u` (`BaseCtx` a field); `localDense`, `dense3`, `cv_exists` keep their statements; (c) dominated; the Lean text
+     drafted in record § 5.2 (with `exists_unenclosed_or_bad` and four children; one planar lemma — the outer frontier of a plane continuum is connected — not in
+     Mathlib). **Q4**: row 134 rests on the hole-filled global form (FS110-CLOSURE → COR1-NOD2, CB D5 item 6) — **stands**; row 135's headline (DENSE3) ran the base
+     at FS112-DISC1's vertex, which may be enclosed — **headline stands with the repaired proof; its base clause as filed is a GAP at an enclosed vertex**; row 137
+     — **stands** (rests on DENSE3's statement). Predictions scored: repairs met (P4 0.80, P5 0.85), closures not (P1 0.15, P2 0.02, P3 0.10); mean Brier 0.019.
+     Keryx's receipts: derive gate run (PASS); the drafted Lean text and the § 5.4 drafts read in full. Slip (E4's, self-caught): a line citation corrected
+     before commit.
+227. **Ruling: repair (b) adopted as drafted** (E4 § 5.2). Choice: `UnenclosedC` on `Row134BaseUA` and `n3_base`, `BaseCtx.unenclosed`, `localDense`'s proof
+     through `exists_unenclosed_or_bad`, no radius change; the base at an enclosed vertex (E4-Q2's open form) left open. Alternative weighed: hold the statements
+     until the grid search (search queue 7) decides E4-Q1 at a resolution. Why: every consumer's statement survives under (b), so nothing waits on the open
+     case, and the kernel will check E4-RIM and E4-OUTERMOST (one mind each) when they are formalized. Confidence: high. **Filed now**: E4's errata 4 and 5,
+     verbatim, under FS112-N3-BASE (`plans/FS112-derivation.md`) and FS129-OR1-LOCALDENSE (`plans/FS129-derivation.md`); search request 7 in
+     `plans/SEARCH-QUEUE.md`. **Filed at the milestone's filing** (item 220's rule): `LEDGER.md` rows 135 (base clause and grade bracket), 137 (grade bracket),
+     134 (optional precision) from E4 § 5.4 items 1–3. **Applied by wave 5's implementer** as its first step after merging `fs131-w5b`: E4 § 5.2's Lean change.
+     The planar lemma joins the planar-infrastructure job (item 218 (c)). Optional stub (is `Row134BaseUA` true without `UnenclosedC`?): declined for now — no
+     filed headline needs it; the search request carries the question. Prior-art debt: E4-OUTERMOST, E4-BEND-UN, E4-LOCALDENSE owed (in-house); bibliography read
+     status for `[Voronov2023]` Obs. 2.2, Lemma 6.1 and `[SokolovVoronov2025]` pp. 27–28 (re-read first-hand 2026-10-04) to note at the filing.

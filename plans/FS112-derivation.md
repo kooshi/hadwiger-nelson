@@ -175,6 +175,8 @@ dependency (NB3 §2.2 #7). **The residue both walks share is row 134's base, unr
 (R2) centres and three-colour unit-arc centres never save the base. *Rests on it:* FS112-N3-DENSE3. *Prior art:* S–V Cor. 1 (row 134's base, curved and
 almost everywhere); not found in print with unit arcs. *Kernel:* stub — with FS-114, over the base's own formalization.
 
+*Erratum (2026-10-04, FS131-E4).* The walk's eleventh-point step (N3 stage N3-3, l. 789–791) shows where the point lies, not that it exists; at a vertex enclosed by a tile of one of its colours inside `B(u, 1)` its existence is open (`plans/FS131-E4-derivation.md` E4-Q1, E4-Q2). The entry holds as stated with the added hypothesis 'no tile of a colour of `u` has a tile at `u` in a hole' (E4-N3BASE-UN, over E4-RIM); FS112-N3-DENSE3's statement holds, its vertex taken on the outermost tile's rim (E4-OUTERMOST, E4-LOCALDENSE) in place of FS112-DISC1's.
+
 **FS112-N3-DENSE3 — Every closed disc of radius 3 of every valid map holds a vertex of at least four colours or a vertex with a repeated colour. [hand; two minds, one blind: N3; NB3; over FS112-N3-BASE and FS112-DISC1]**
 *Proof:* a closed unit disc holds a vertex of degree at least 3 (FS112-DISC1); if it is cubic trichromatic, FS112-N3-BASE puts one of the two kinds
 within 2 of it (N3 stage N3-3; NB3-DENSE3). Moves never add a colour or a sector to an existing point, so no terminal modification is needed.
