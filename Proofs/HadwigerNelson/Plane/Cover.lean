@@ -485,4 +485,71 @@ theorem eq_norm_mul_e_arg (d : ℂ) : d = (‖d‖ : ℂ) * e (Complex.arg d) :=
   exact (Complex.norm_mul_exp_arg_mul_I d).symm
 
 
+
+/-! ## FS131-K2c: shared children — arcs of unit circles in balls, and the two-ball pair bound
+
+Each `sorry`ed; plan `plans/FS131-w2-kernel-plan.md` § 12. They carry `keptAt_band` (`Plane/Slack`) and Lemma 3 of
+`falconer_reduction` (`Plane/FalconerReduction`, through `essClosure_dist_ne_one_of_mem_densitySet`). -/
+
+/-- Positive upper density at `x` puts `x` in the support. -/
+theorem essClosure_subset_essSupport (A : Set ℂ) : essClosure A ⊆ essSupport A := by
+  sorry
+
+/-- A measurable set differs from its density set by a null set (the other half of `volume_diff_densitySet`). -/
+theorem volume_densitySet_diff {A : Set ℂ} (hA : MeasurableSet A) : volume (densitySet A \ A) = 0 := by
+  sorry
+
+/-- **The chord lemma** (FS106-TQ § 2.2): for `ε ≤ 1/2` and `|x − y| = 1 + t` with `|t| ≤ 3ε/2`, the unit circle about `x`
+meets `B(y, 2ε)` in an arc of length at least `2ε`. -/
+theorem arcLength_ball_ge {x y : ℂ} {ε t : ℝ} (hε : 0 < ε) (hε2 : ε ≤ 1 / 2) (ht : |t| ≤ 3 * ε / 2)
+    (hd : dist x y = 1 + t) : ENNReal.ofReal (2 * ε) ≤ arcLength {θ | x + e θ ∈ ball y (2 * ε)} := by
+  sorry
+
+/-- A unit circle meets a ball of radius `ρ ≤ 1` in an arc of length at most `πρ` (written for the directions `v − e θ`,
+the form the exchange bound reads). -/
+theorem arcLength_sub_ball_le (v z : ℂ) {ρ : ℝ} (hρ : 0 < ρ) (hρ1 : ρ ≤ 1) :
+    arcLength {θ | v - e θ ∈ ball z ρ} ≤ ENNReal.ofReal (Real.pi * ρ) := by
+  sorry
+
+/-- A point of a ball of radius `R ≥ 1` sees at least a third of its unit circle inside the ball. -/
+theorem arcLength_bigBall_ge {u z : ℂ} {R : ℝ} (hR : 1 ≤ R) (hu : u ∈ ball z R) :
+    ENNReal.ofReal (2 * Real.pi / 3) ≤ arcLength {θ | u + e θ ∈ ball z R} := by
+  sorry
+
+/-- **The exchange bound** (FS106-TQ's (EX), Tonelli in the other order): the pairs `(u, θ)` with `u ∈ U`, `u + e θ ∈ N`
+have mass at most `M · |N|` when every `v` sees `U` through an arc of length at most `M`. -/
+theorem pairs_le_of_arc {U N : Set ℂ} (hU : MeasurableSet U) (hN : MeasurableSet N) {M : ENNReal}
+    (hM : ∀ v : ℂ, arcLength {θ | v - e θ ∈ U} ≤ M) :
+    (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ N} ≤ M * volume N := by
+  sorry
+
+/-- **The two-ball pair bound** (good pairs minus bad pairs, FS106-TQ § 2.2 in one inequality): for `r ≤ 1/2` and
+`|dist x y − 1| ≤ r`, the unit pairs of `A` from `B(x, r/2)` into `B(y, 2r)`, plus `πr/2` times the hole of `A` in `B(y, 2r)`,
+are at least `2r · |A ∩ B(x, r/2)|`. Children: `arcLength_ball_ge` (at `ε = r`), `arcLength_sub_ball_le` (at `ρ = r/2`),
+`pairs_le_of_arc`. -/
+theorem twoBall_pairs_ge {A : Set ℂ} (hA : MeasurableSet A) {x y : ℂ} {r : ℝ} (hr : 0 < r) (hr2 : r ≤ 1 / 2)
+    (hd : |dist x y - 1| ≤ r) :
+    ENNReal.ofReal (2 * r) * volume (A ∩ ball x (r / 2)) ≤
+      (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ A ∩ ball x (r / 2) ∧ q.1 + e q.2 ∈ A ∩ ball y (2 * r)} +
+        ENNReal.ofReal (Real.pi * r / 2) * volume (ball y (2 * r) \ A) := by
+  sorry
+
+/-- **Lemma 3's core** (`[Falconer1981]` Lemma 3, measurable form): for a measurable `A` with null unit pairs, a point
+where `A` has positive upper density is never at distance exactly `1` from a density point of `A`. From `twoBall_pairs_ge`
+at small `r` (the hole at the density point is `o(r²)`, the mass at the other point `≥ c r²` along a sequence). -/
+theorem essClosure_dist_ne_one_of_mem_densitySet {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A)
+    {x y : ℂ} (hx : x ∈ essClosure A) (hy : y ∈ densitySet A) : dist x y ≠ 1 := by
+  sorry
+
+/-- Measurable sets have measurable density sets (`[Falconer1981]` Lemma 2 (ii); `r ↦ densityRatio A x r` is continuous on
+`r > 0` and `x ↦ densityRatio A x r` continuous, so the limit is read along rational radii). -/
+theorem measurableSet_densitySet {A : Set ℂ} (hA : MeasurableSet A) : MeasurableSet (densitySet A) := by
+  sorry
+
+/-- In a finite disjoint measurable cover, a point of the essential boundary of one class lies in the essential closure
+of another (the densities of the classes sum to `1`). -/
+theorem exists_ne_mem_essClosure {C : Fin k → Set ℂ} (hm : ∀ j, MeasurableSet (C j)) (hd : Pairwise (Disjoint on C))
+    (hcov : ⋃ j, C j = univ) {a : Fin k} {x : ℂ} (hx : x ∈ essBoundary (C a)) : ∃ b ≠ a, x ∈ essClosure (C b) := by
+  sorry
+
 end HadwigerNelson.Plane

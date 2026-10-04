@@ -636,6 +636,12 @@ They are kept as cross-checks of the encoder: `four_le_chromaticNumber_plane` pr
 refutation of rung B and beyond goes through `maskCheck_sound`, whose hypotheses are closed `Bool`s the
 kernel decides, and the audit's only purchases are these five.
 
+### Imported outside theorems (declared purchases, `LEAN.md` § Assumptions)
+
+| Axiom | Paper | Consumer | Why |
+|---|---|---|---|
+| `Plane.falconer_lemma2_nonempty` (`Plane/FalconerReduction`) | `[Falconer1981]` Lemma 2 (i), p. 185 (its proof Croft's, unheld; equivalently the density topology on `ℝ²` is connected) | `falconer_reduction` (FS129-SA1-FALC-RED) and `le_chiM_of_falconerFan`, once proved | FS131-K2c: no proof in hand, more than an hour to formalize; read-back and model in `plans/FS131-w2-kernel-plan.md` § 12; to be formalized before publication by its own planner-and-implementer job |
+
 **Two ledgers, compared by the gate.** Each purchasing declaration's doc string opens with
 `**Trust purchase: native evaluation.**` — the source-side ledger, `grep -rn "Trust purchase" Proofs/` —
 and each is audited under the `PURCHASED` banner in `scripts/Axioms.lean`, the environment-side ledger.

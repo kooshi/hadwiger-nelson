@@ -724,6 +724,61 @@ theorem IsMaximalCover.semiconcaveWith {C : Fin k → Set ℂ} (hC : IsMaximalCo
   · simp only [add_zero, sub_zero]; norm_num; linarith
   · exact semiconcave_pos hu hcur hL hpos hsh hsmh
 
+/-! ## FS131-K2c: the Grundy construction (children of `exists_grundy`; plan `plans/FS131-w2-kernel-plan.md` § 12)
+
+Stage 9.3's induction made structural: `grundyTaken c m` is what the first `m` classes took, and class `m` is the maximal
+admissible set inside the rest containing what `c` gave colour `m` there (`maxIn`, by `exists_ae_maximal`). The colouring is
+the least index of a class containing the point. -/
+
+/-- `A` is maximal inside `Tᶜ` above `S`: it contains `S`, lies in `Tᶜ`, is measurable with null unit pairs, and no such set
+inside `Tᶜ` exceeds it up to null sets. -/
+def IsMaxIn (T S A : Set ℂ) : Prop :=
+  S ⊆ A ∧ A ⊆ Tᶜ ∧ MeasurableSet A ∧ UnitPairsNull A ∧
+    ∀ B : Set ℂ, MeasurableSet B → UnitPairsNull B → B ⊆ Tᶜ → A ≤ᵐ[volume] B → B ≤ᵐ[volume] A
+
+open Classical in
+/-- A chosen maximal set (`S` itself when none exists). -/
+noncomputable def maxIn (T S : Set ℂ) : Set ℂ := if h : ∃ A, IsMaxIn T S A then h.choose else S
+
+/-- **Relative exhaustion** (`exists_ae_maximal` on measurable null-unit-pair sets a.e. inside `Tᶜ` above `S`, then intersect
+with `Tᶜ` and add `S` back — both null changes). -/
+theorem exists_isMaxIn {T S : Set ℂ} (hT : MeasurableSet T) (hS : MeasurableSet S) (hSn : UnitPairsNull S)
+    (hST : S ⊆ Tᶜ) : ∃ A, IsMaxIn T S A := by
+  sorry
+
+theorem isMaxIn_maxIn {T S : Set ℂ} (hT : MeasurableSet T) (hS : MeasurableSet S) (hSn : UnitPairsNull S)
+    (hST : S ⊆ Tᶜ) : IsMaxIn T S (maxIn T S) := by
+  have h := exists_isMaxIn hT hS hSn hST
+  simp only [maxIn, dif_pos h]
+  exact h.choose_spec
+
+/-- The class `c` assigns index `m` (empty past `k`). -/
+def grundyS (c : AeColouring k) (m : ℕ) : Set ℂ := if h : m < k then c.cls ⟨m, h⟩ else ∅
+
+/-- What the first `m` Grundy classes took. -/
+noncomputable def grundyTaken (c : AeColouring k) : ℕ → Set ℂ
+  | 0 => ∅
+  | m + 1 => grundyTaken c m ∪ maxIn (grundyTaken c m) (grundyS c m \ grundyTaken c m)
+
+/-- The `m`-th Grundy class. -/
+noncomputable def grundyCls (c : AeColouring k) (m : ℕ) : Set ℂ :=
+  maxIn (grundyTaken c m) (grundyS c m \ grundyTaken c m)
+
+theorem grundyTaken_eq (c : AeColouring k) (m : ℕ) : grundyTaken c m = ⋃ i < m, grundyCls c i := by
+  sorry
+
+/-- Every Grundy class is maximal in its place (induction on `m`: the taken set is a finite union of measurable sets). -/
+theorem grundyCls_isMaxIn (c : AeColouring k) (m : ℕ) :
+    IsMaxIn (grundyTaken c m) (grundyS c m \ grundyTaken c m) (grundyCls c m) := by
+  sorry
+
+/-- **The shadow clause** (stage 4.2's argument): a measurable set inside the same complement and disjoint from a maximal
+`Aᵢ` has its support in the unit shadow of `supp Aᵢ` — a support point off the shadow has a ball whose unit circles miss
+`supp Aᵢ` (`exists_annulus_subset_compl`), and moving that ball's part into `Aᵢ` contradicts maximality. -/
+theorem essSupport_subset_unitShadow_of_isMaxIn {T S Ai Am : Set ℂ} (hmax : IsMaxIn T S Ai) (hAm : MeasurableSet Am)
+    (hdisj : Disjoint Am Ai) (hAmT : Am ⊆ Tᶜ) : essSupport Am ⊆ unitShadow (essSupport Ai) := by
+  sorry
+
 /-- **FS121-D3-GRUNDY**: every a.e.-proper `k`-colouring can be modified, keeping it a.e.-proper with `k` colours and never
 raising a point's colour index, into a measurable Grundy colouring `(A_1, …, A_k)`: `A_1` is a MUA set (the case `m = 0`
 below), each `A_m` contains `S_m` minus the earlier classes and is maximal among measurable sets with null unit pairs inside

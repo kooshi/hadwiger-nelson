@@ -269,6 +269,82 @@ theorem falconer_lemma1 {E : Set ℂ} (hEm : MeasurableSet E) (hE : E.Nonempty) 
     exact slice_slice_null hEm hE0 p₀ (sub_ne_zero.2 hy₀x.symm.symm) (sub_ne_zero.2 hy.2)
   exact hpos (nonpos_iff_eq_zero.1 ((Measure.le_iff'.1 Measure.restrict_le_self _).trans hnull.le))
 
+/-! ## FS131-K2c: Lemmas 2–4 and the assembly (each `sorry`ed but the import; plan `plans/FS131-w2-kernel-plan.md` § 12)
+
+FS129-MA1 § 2.2's order: disjointify the cover; `E` (the points that are density points of no class) is null, measurable
+and — by `[Falconer1981]` Lemma 2 (i), imported below — nonempty; `falconer_lemma1` places the apex at a point of `E` with
+almost every rotation sending every other vertex into some class's density set; two classes are present at the apex (D2);
+the density-set colouring of `H − a` is proper and avoids those two classes on `N(a)` (Lemma 3,
+`essClosure_dist_ne_one_of_mem_densitySet`); the fan puts the tip's circle a.e. in the two density sets; Lemma 4 (an
+irrational rotation) refutes that. -/
+
+/-- **`[Falconer1981]` Lemma 2 (i), p. 185 — imported** (`LEAN.md` § Assumptions; a declared purchase,
+`ARCHITECTURE.md` § Trust): a measurable `S ⊆ ℝ²` with `v(S) > 0` and `v(ℝ² ∖ S) > 0` has a nonempty metrical boundary — a
+point where the density of `S` fails to exist or exists with a value other than `0` or `1`. Here: a point that is neither a
+density point of `S` nor of `Sᶜ` (for measurable `S` the density of `Sᶜ` is `1` minus that of `S`). The paper's proof is
+Croft's (its ref. [1], Lemma 4, unheld); equivalently, the density topology on `ℝ²` is connected. Read-back and model:
+`plans/FS131-w2-kernel-plan.md` § 12; the model is `upperHalfPlane_falconer_hyp` below. To be formalized before
+publication (a separate planner-and-implementer job). -/
+axiom falconer_lemma2_nonempty {S : Set ℂ} (hS : MeasurableSet S) (h1 : volume S ≠ 0) (h2 : volume Sᶜ ≠ 0) :
+    ∃ x : ℂ, x ∉ densitySet S ∧ x ∉ densitySet Sᶜ
+
+/-- **Model of the import's hypotheses** (`LEAN.md` § Assumptions, item 3): the open upper half-plane is measurable, and it
+and its complement have positive (indeed infinite) measure. -/
+theorem upperHalfPlane_falconer_hyp :
+    MeasurableSet {z : ℂ | 0 < z.im} ∧ volume {z : ℂ | 0 < z.im} ≠ 0 ∧ volume {z : ℂ | 0 < z.im}ᶜ ≠ 0 := by
+  sorry
+
+/-- Two density points of a measurable class with no unit pair are not at distance `1` (Lemma 3's core,
+`essClosure_dist_ne_one_of_mem_densitySet`, since a density point has positive upper density; a set with no unit pair has
+null unit pairs). -/
+theorem densitySet_dist_ne_one {S : Set ℂ} (hS : MeasurableSet S) (hno : ∀ x ∈ S, ∀ y ∈ S, dist x y ≠ 1)
+    {x y : ℂ} (hx : x ∈ densitySet S) (hy : y ∈ densitySet S) : dist x y ≠ 1 := by
+  sorry
+
+/-- **`E` is nonempty** for a disjoint measurable cover none of whose classes holds a unit pair (`falconer_lemma2_nonempty`
+on a class of positive measure and positive co-measure; if none exists one class is co-null and holds a unit pair). -/
+theorem exists_mem_falconerE {k : ℕ} {S : Fin k → Set ℂ} (hS : ∀ j, MeasurableSet (S j))
+    (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = univ) (hno : ∀ j, ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1) :
+    ∃ x : ℂ, ∀ j, x ∉ densitySet (S j) := by
+  sorry
+
+/-- **D2**: at a point of `E`, two classes of a disjoint measurable cover have positive upper density
+(`exists_ne_mem_essClosure` twice, from the class with positive upper density). -/
+theorem two_classes_of_mem_falconerE {k : ℕ} {S : Fin k → Set ℂ} (hS : ∀ j, MeasurableSet (S j))
+    (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = univ) {x : ℂ} (hx : ∀ j, x ∉ densitySet (S j)) :
+    ∃ i j, i ≠ j ∧ x ∈ essClosure (S i) ∧ x ∈ essClosure (S j) := by
+  sorry
+
+/-- Points at distance `1` on the circle of radius `r > 1/2` are `β = 2 arcsin(1/(2r))` apart in angle. -/
+theorem dist_circle_rotate {c : ℂ} {r : ℝ} (hr : 1 / 2 < r) (θ : ℝ) :
+    dist (c + r * e θ) (c + r * e (θ + 2 * Real.arcsin (1 / (2 * r)))) = 1 := by
+  sorry
+
+/-- **The irrational rotation** (`AddCircle.ergodic_add_left`): no measurable `A ⊆ ℝ` of angles, `2π`-periodic, has
+`A + β` a.e. equal to its complement when `β/π` is irrational (`A + 2β =ᵐ A` forces `A` null or co-null). -/
+theorem not_rotate_ae_eq_compl {A : Set ℝ} (hA : MeasurableSet A) (hper : ∀ θ, θ + 2 * Real.pi ∈ A ↔ θ ∈ A) {β : ℝ}
+    (hβ : Irrational (β / Real.pi)) (h : ∀ᵐ θ ∂arcLength, (θ + β ∈ A ↔ θ ∉ A)) : False := by
+  sorry
+
+/-- **`[Falconer1981]` Lemma 4, measurable form**: if almost every point of the circle of radius `r > 1/2` about `c` lies in
+the density set of one of two disjoint measurable classes with no unit pair, and `arcsin(1/(2r))/π` is irrational, then
+`False` (`dist_circle_rotate`, `densitySet_dist_ne_one`, `not_rotate_ae_eq_compl`). -/
+theorem falconer_lemma4 {S₁ S₂ : Set ℂ} (h₁ : MeasurableSet S₁) (h₂ : MeasurableSet S₂) (hd : Disjoint S₁ S₂)
+    (hno₁ : ∀ x ∈ S₁, ∀ y ∈ S₁, dist x y ≠ 1) (hno₂ : ∀ x ∈ S₂, ∀ y ∈ S₂, dist x y ≠ 1) {c : ℂ} {r : ℝ}
+    (hr : 1 / 2 < r) (hirr : Irrational (Real.arcsin (1 / (2 * r)) / Real.pi))
+    (hae : ∀ᵐ θ ∂arcLength, c + r * e θ ∈ densitySet S₁ ∪ densitySet S₂) : False := by
+  sorry
+
+/-- **The placement and the fan** (MA1 § 2.2): for a disjoint measurable cover with no monochromatic unit pair, a Falconer
+fan places its tip's circle about the apex almost everywhere in two density sets. -/
+theorem fan_tip_ae_mem {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V)
+    (hfan : FalconerFan ((unitDistance ℂ).induce (V : Set ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) {S : Fin k → Set ℂ}
+    (hS : ∀ j, MeasurableSet (S j)) (hd : Pairwise (Function.onFun Disjoint S)) (hcov : ⋃ j, S j = univ)
+    (hno : ∀ j, ∀ x ∈ S j, ∀ y ∈ S j, dist x y ≠ 1) :
+    ∃ (c : ℂ) (i j : Fin k), i ≠ j ∧
+      ∀ᵐ θ ∂arcLength, c + (dist t a : ℝ) * e θ ∈ densitySet (S i) ∪ densitySet (S j) := by
+  sorry
+
 /-- **FS129-SA1-FALC-RED**: if a finite unit-distance graph `H ⊂ ℝ²` has a Falconer fan at `k` colours with apex `a` and
 tip `t`, `|t − a| = r > 1/2` and `arcsin(1/(2r))/π` irrational, then every cover of the plane by `k` measurable sets has
 two points at distance `1` inside one of the sets. -/

@@ -109,11 +109,36 @@ theorem chromaticNumber_plane_le_chiM0 : (unitDistance ℂ).chromaticNumber ≤ 
   exact ⟨SimpleGraph.Coloring.mk (fun z => c.col (e θ * (z : ℂ) + v)) fun {a b} hab =>
     hmot a a.2 b b.2 (G'.adj_sub hab)⟩
 
+/-! ## FS131-K2c: children of `chiM0_le_of_fragments` (plan `plans/FS131-w2-kernel-plan.md` § 12) -/
+
+/-- A fragment's colour regions meet the disc it covers in measurable sets (the interior points form an open set: the arcs
+are locally finite and closed inside the domain, and the colour is locally constant there). -/
+theorem ArcMap.measurableSet_region_inter {k : ℕ} (F : ArcMap k) {p : ℂ} {R : ℝ} (h : F.Covers p R) (j : Fin k) :
+    MeasurableSet (F.region j ∩ ball p R) := by
+  sorry
+
+/-- The arcs meeting the covered disc are finitely many (local finiteness on a compact set), each null, so the regions fill
+the disc up to a null set. -/
+theorem ArcMap.volume_ball_diff_region {k : ℕ} (F : ArcMap k) {p : ℂ} {R : ℝ} (h : F.Covers p R) :
+    volume (ball p R \ ⋃ j, F.region j) = 0 := by
+  sorry
+
+/-- A valid map's regions have no unit pair (`BandFree` at `ε = 0`). -/
+theorem ArcMap.bandFree_region {k : ℕ} (F : ArcMap k) (hv : F.Valid) (j : Fin k) : BandFree (F.region j) 0 := by
+  sorry
+
+/-- **Fragments at every radius fill `µ_k⁰`**: the regions on the window inscribed in the disc, periodized at side `ℓ + 2`
+(`periodize`, `bandFree_periodize` at `ε = 0`, `unitPairsNull_of_bandFree`, `upperDensity_periodize`), cover density
+`ℓ²/(ℓ + 2)² → 1`. -/
+theorem muZero_eq_one_of_fragments {k : ℕ} (h : ∀ R > (0 : ℝ), ∃ (F : ArcMap k) (p : ℂ), F.Covers p R ∧ F.Valid) :
+    muZero k = 1 := by
+  sorry
+
 /-- **FS116-O1-YESLIM**, first clause, at every `k` (the row's `k ≥ 1` is idle: an `ArcMap 0` colours nothing): if every
 radius `R > 0` has a closed disc carrying a valid `k`-coloured fragment, then `χ_m⁰(ℝ²) ≤ k`. -/
 theorem chiM0_le_of_fragments {k : ℕ} (h : ∀ R > (0 : ℝ), ∃ (F : ArcMap k) (p : ℂ), F.Covers p R ∧ F.Valid) :
-    chiM0 ≤ k := by
-  sorry
+    chiM0 ≤ k :=
+  (chiM0_le_iff_muZero_eq_one k).2 (muZero_eq_one_of_fragments h)
 
 /-- **FS116-O1-YESLIM**, second clause: at `k = 6`, then `χ(ℝ²) ≤ 6`, with no MR. -/
 theorem chromaticNumber_plane_le_six_of_fragments

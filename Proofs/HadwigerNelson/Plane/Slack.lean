@@ -20,6 +20,378 @@ open Complex Set MeasureTheory Filter Topology Metric
 
 variable {k : ℕ}
 
+/-- `x` is **kept** at scale `ε` for the class `A` with threshold `η`: the balls of radii `ε/2` and `2ε` about `x` are at
+least `1 − η` full of `Ã` (FS106-TQ § 2.2). -/
+def KeptAt (A : Set ℂ) (η ε : ℝ) (x : ℂ) : Prop :=
+  ∀ ρ ∈ ({ε / 2, 2 * ε} : Set ℝ), ENNReal.ofReal (1 - η) * volume (ball x ρ) ≤ volume (ball x ρ ∩ densitySet A)
+
+/-- The open half-box `{x − s e + t e⊥ : 0 < s < ε, |t| < ε}`, `e = e θ`, `e⊥ = i e θ`. -/
+def halfBox (x : ℂ) (θ ε : ℝ) : Set ℂ :=
+  {z | ∃ s t : ℝ, 0 < s ∧ s < ε ∧ |t| < ε ∧ z = x + e θ * (-s + t * I)}
+
+/-- The open far box `{x + s e + t e⊥ : g < s < g + ε′, |t| < ρ}`. -/
+def farBox (x : ℂ) (θ g ε' ρ : ℝ) : Set ℂ :=
+  {z | ∃ s t : ℝ, g < s ∧ s < g + ε' ∧ |t| < ρ ∧ z = x + e θ * (s + t * I)}
+
+/-! ## FS131-K2c: children of the remaining leaves
+
+Each child is `sorry`ed and priced in `plans/FS131-w2-kernel-plan.md` § 12 (route, Mathlib names confirmed with `#check`, order).
+A leaf whose proof is still `sorry` is closed from its children by the assembly the plan describes. -/
+
+/-! ### Radius bands and the pair mass at one radius (`exists_tight`, SUPK's upper bound) -/
+
+/-- The pairs of `A` at a distance in `[a, b]` are `Leb ⊗ Leb`-null (the radius form of `BandNull`). -/
+def IccPairNull (A : Set ℂ) (a b : ℝ) : Prop :=
+  (volume.prod volume) {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b} = 0
+
+theorem bandNull_iff_iccPairNull (A : Set ℂ) (ε : ℝ) : BandNull A ε ↔ IccPairNull A (1 - ε) (1 + ε) := Iff.rfl
+
+/-- The mass of the pairs `(x, θ)`, `x ∈ A ∩ B(0, R)`, `x + r e θ ∈ A` (`Leb ⊗ σ`): the unit-pair mass at radius `r`. -/
+noncomputable def pairMass (A : Set ℂ) (R r : ℝ) : ENNReal :=
+  (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ A ∩ ball 0 R ∧ q.1 + (r : ℂ) * e q.2 ∈ A}
+
+theorem IccPairNull.mono {A : Set ℂ} {a b a' b' : ℝ} (h : IccPairNull A a b) (ha : a ≤ a') (hb : b' ≤ b) :
+    IccPairNull A a' b' := by
+  sorry
+
+theorem IccPairNull.union {A : Set ℂ} {a b c : ℝ} (h1 : IccPairNull A a b) (h2 : IccPairNull A b c) :
+    IccPairNull A a c := by
+  sorry
+
+/-- The pairs at one exact distance are `Leb ⊗ Leb`-null (a circle is null in each slice). -/
+theorem volume_prod_dist_eq_null (r : ℝ) : (volume.prod volume) {q : ℂ × ℂ | dist q.1 q.2 = r} = 0 := by
+  sorry
+
+/-- Null on `[a', b]` for every `a' > a` gives null on `[a, b]` (a countable union and one null sphere). -/
+theorem iccPairNull_of_forall_lt {A : Set ℂ} {a b : ℝ} (h : ∀ a', a < a' → a' ≤ b → IccPairNull A a' b) :
+    IccPairNull A a b := by
+  sorry
+
+theorem unitPairsNull_iff_pairMass {A : Set ℂ} : UnitPairsNull A ↔ ∀ R : ℝ, pairMass A R 1 = 0 := by
+  sorry
+
+/-- **Continuity of the pair mass in the radius** (I2c's finding): `L¹` continuity of translation
+(`MeasureTheory.Lp.instContinuousVAddDomAddAct`, or `MemLp.exists_hasCompactSupport_eLpNorm_sub_le` and uniform
+continuity), integrated over the angle. -/
+theorem continuous_pairMass {A : Set ℂ} (hA : MeasurableSet A) (R : ℝ) : Continuous (pairMass A R) := by
+  sorry
+
+/-- **Polar coordinates for pairs** (`Complex.lintegral_comp_polarCoord_symm` and Tonelli): a radius band null in
+`Leb ⊗ Leb` has null pair mass at almost every radius inside it. -/
+theorem ae_pairMass_eq_zero {A : Set ℂ} (hA : MeasurableSet A) {a b : ℝ} (ha : 0 < a) (h : IccPairNull A a b) (R : ℝ) :
+    ∀ᵐ r ∂volume, r ∈ Ioo a b → pairMass A R r = 0 := by
+  sorry
+
+/-- From `ae_pairMass_eq_zero` and `continuous_pairMass`: null at every radius of the closed band. -/
+theorem pairMass_eq_zero_of_iccPairNull {A : Set ℂ} (hA : MeasurableSet A) {a b : ℝ} (ha : 0 < a) (hab : a < b)
+    (h : IccPairNull A a b) (R : ℝ) : ∀ r ∈ Icc a b, pairMass A R r = 0 := by
+  sorry
+
+/-- Rescaling by `s`: radius bands of `x ↦ A (s x)` are radius bands of `A` scaled by `s` (volume scales by `s⁴`). -/
+theorem iccPairNull_preimage_mul {A : Set ℂ} {s a b : ℝ} (hs : 0 < s) :
+    IccPairNull ((fun x : ℂ => (s : ℂ) * x) ⁻¹' A) a b ↔ IccPairNull A (s * a) (s * b) := by
+  sorry
+
+/-- The rescaled colouring `x ↦ c (s x)` is an `AeColouring` when `c`'s pair mass at radius `s` vanishes. -/
+theorem AeColouring.exists_rescale (c : AeColouring k) {s : ℝ} (hs : 0 < s)
+    (h : ∀ j R, pairMass (c.cls j) R s = 0) : ∃ c' : AeColouring k, ∀ x, c'.col x = c.col ((s : ℂ) * x) := by
+  sorry
+
+/-- A class of positive measure has non-null pairs at distances in `[a, 1]` for some `a > 0` (a density point `x` and
+`r ≤ 1/2` with density `≥ 9/10` in `B(x, r)` give positive mass to pairs at distance in `[r/2, 2r]`). -/
+theorem AeColouring.exists_pos_not_iccPairNull (c : AeColouring k) : ∃ a > 0, ∃ j, ¬ IccPairNull (c.cls j) a 1 := by
+  sorry
+
+/-! ### SUPK: the upper bounds, windows, kept points, periodization -/
+
+/-- A band-null measurable class (`0 < ε < 1`) has null unit pairs (`pairMass_eq_zero_of_iccPairNull` at `r = 1`). -/
+theorem bandNull_unitPairsNull {A : Set ℂ} (hA : MeasurableSet A) {ε : ℝ} (hε0 : 0 < ε) (hε1 : ε < 1)
+    (h : BandNull A ε) : UnitPairsNull A := by
+  sorry
+
+theorem mu_le_muZero (k : ℕ) {ε : ℝ} (hε0 : 0 < ε) (hε1 : ε < 1) : mu k ε ≤ muZero k := by
+  sorry
+
+theorem muTile_le_mu (k : ℕ) (ε : ℝ) : muTile k ε ≤ mu k ε := by
+  sorry
+
+theorem muPer_le_muTile (k : ℕ) (ε : ℝ) : muPer k ε ≤ muTile k ε := by
+  sorry
+
+/-- The half-open square window `[z, z + ℓ)²`. -/
+def squareWin (z : ℂ) (ℓ : ℝ) : Set ℂ := {w | z.re ≤ w.re ∧ w.re < z.re + ℓ ∧ z.im ≤ w.im ∧ w.im < z.im + ℓ}
+
+/-- **The window lemma**: a set of upper density above `d` fills some `ℓ`-grid square of side `ℓ` to at least `d`, for
+every integer side `ℓ` (average over the grid squares meeting a large ball `B(0, R)`; `ℓ/R → 0`). -/
+theorem exists_squareWin_dense {S : Set ℂ} (hS : MeasurableSet S) {d : ℝ} (hd : ENNReal.ofReal d < upperDensity S)
+    (ℓ : ℕ) (hℓ : 0 < ℓ) :
+    ∃ p q : ℤ, ENNReal.ofReal (d * (ℓ : ℝ) ^ 2) ≤ volume (S ∩ squareWin ((ℓ * p : ℝ) + (ℓ * q : ℝ) * I) ℓ) := by
+  sorry
+
+/-- Almost every point of a measurable set is kept at every small scale (Lebesgue density: `ae_restrict_mem_densitySet`,
+with `volume_densitySet_diff` and `volume_diff_densitySet`). -/
+theorem ae_eventually_keptAt {A : Set ℂ} (hA : MeasurableSet A) {η : ℝ} (hη : 0 < η) :
+    ∀ᵐ x ∂(volume.restrict A), ∀ᶠ ε in 𝓝[>] (0 : ℝ), KeptAt A η ε x := by
+  sorry
+
+/-- Keeping is robust: kept at threshold `η/2` gives kept at `η` within `ηε/12` (`ball x ρ ⊆ ball x' (ρ + d)`, so the
+lost area is at most `π(2ρd + d²) ≤ 3πρd`). -/
+theorem keptAt_of_dist_le {A : Set ℂ} {η ε : ℝ} (hε : 0 < ε) (hη : 0 ≤ η) (hη1 : η ≤ 1) {x x' : ℂ}
+    (hx : KeptAt A (η / 2) ε x) (hd : dist x x' ≤ η * ε / 12) : KeptAt A η ε x' := by
+  sorry
+
+/-- The periodization of `T` with period `L` in both coordinates. -/
+def periodize (T : Set ℂ) (L : ℝ) : Set ℂ := {x | ∃ m n : ℤ, x - ((m * L : ℝ) + (n * L : ℝ) * I) ∈ T}
+
+theorem isPeriodicSet_periodize (T : Set ℂ) (L : ℝ) : IsPeriodicSet L (periodize T L) := by
+  sorry
+
+theorem measurableSet_periodize {T : Set ℂ} (hT : MeasurableSet T) (L : ℝ) : MeasurableSet (periodize T L) := by
+  sorry
+
+theorem isGridUnion_periodize {T : Set ℂ} {h : ℝ} (hh : 0 < h) {N : ℕ} (hT : IsGridUnion h T) :
+    IsGridUnion h (periodize T (N * h)) := by
+  sorry
+
+/-- Copies of a window of side `ℓ` at period `ℓ + 2` are `2` apart, beyond every band distance when `ε < 1`. -/
+theorem bandFree_periodize {T : Set ℂ} {z : ℂ} {ℓ ε : ℝ} (hT : T ⊆ squareWin z ℓ) (hε : ε < 1) (h : BandFree T ε) :
+    BandFree (periodize T (ℓ + 2)) ε := by
+  sorry
+
+theorem disjoint_periodize {T T' : Set ℂ} {z : ℂ} {ℓ : ℝ} (hT : T ⊆ squareWin z ℓ) (hT' : T' ⊆ squareWin z ℓ)
+    (h : Disjoint T T') : Disjoint (periodize T (ℓ + 2)) (periodize T' (ℓ + 2)) := by
+  sorry
+
+theorem iUnion_periodize {T : Fin k → Set ℂ} (L : ℝ) : ⋃ j, periodize (T j) L = periodize (⋃ j, T j) L := by
+  sorry
+
+/-- **The density of a lattice-periodic set** (stage 9.2's `upperDensity_of_periodic`): for an `ℝ`-basis `v₁, v₂` and a
+measurable `S` invariant under `ℤv₁ + ℤv₂`, `d̄(S) = |S ∩ D| / |D|` with `D = {s v₁ + t v₂ : s, t ∈ [0, 1)}` (count the
+translates of `D` inside and meeting `B(0, R)`; `ZLattice.covolume.tendsto_card_div_pow`). Carries DISC7's density and
+`upperDensity_periodize`. -/
+theorem upperDensity_of_periodic {v₁ v₂ : ℂ} (hv : LinearIndependent ℝ ![v₁, v₂]) {S : Set ℂ} (hS : MeasurableSet S)
+    (hper : ∀ x, (x + v₁ ∈ S ↔ x ∈ S) ∧ (x + v₂ ∈ S ↔ x ∈ S)) :
+    upperDensity S = volume (S ∩ {x | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧ x = s * v₁ + t * v₂}) /
+      volume {x : ℂ | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧ x = s * v₁ + t * v₂} := by
+  sorry
+
+theorem upperDensity_periodize {T : Set ℂ} (hT : MeasurableSet T) {z : ℂ} {ℓ : ℝ} (hℓ : 0 < ℓ)
+    (hTw : T ⊆ squareWin z ℓ) : upperDensity (periodize T (ℓ + 2)) = volume T / ENNReal.ofReal ((ℓ + 2) ^ 2) := by
+  sorry
+
+/-- **Inner pixelation of the kept sets**: in a window of `N × N` cells of side `h` (`h√2 ≤ ηε/12`), the cells meeting the
+`η/2`-kept set of some class, each given its least such class, are a tiled partial colouring inside the window whose
+classes lie in the `η`-kept sets (`keptAt_of_dist_le`) and which covers the window's `η/2`-kept points. -/
+theorem exists_tiled_kept {C : Fin k → Set ℂ} {η ε h : ℝ} (hh : 0 < h) (hhε : h * √2 ≤ η * ε / 12) (hη : 0 ≤ η)
+    (hη1 : η ≤ 1) (hε : 0 < ε) (p q : ℤ) (N : ℕ) :
+    ∃ T : Fin k → Set ℂ, IsPartialColouring T ∧ (∀ j, IsGridUnion h (T j)) ∧
+      (∀ j, T j ⊆ squareWin ((p * h : ℝ) + (q * h : ℝ) * I) (N * h)) ∧ (∀ j, T j ⊆ {x | KeptAt (C j) η ε x}) ∧
+      squareWin ((p * h : ℝ) + (q * h : ℝ) * I) (N * h) ∩ ⋃ j, {x | KeptAt (C j) (η / 2) ε x} ⊆ ⋃ j, T j := by
+  sorry
+
+/-- **SUPK's lower bound** (FS106-TQ § 3.2, by windows instead of Lemma T): every value below `µ_k⁰` is eventually below
+`µ_k^per(ε)`. Assembly: a family with null unit pairs of density `> d`; `exists_squareWin_dense` at an integer side `ℓ`;
+`ae_eventually_keptAt` and dominated convergence on the window at `η = 1/20`; `exists_tiled_kept` at `h = 1/N`;
+`keptAt_band` (band-free); `periodize` at period `ℓ + 2` (`bandFree_periodize`, `isGridUnion_periodize`,
+`upperDensity_periodize`); `ℓ²/(ℓ + 2)² → 1`. -/
+theorem eventually_le_muPer (k : ℕ) {d : ENNReal} (hd : d < muZero k) : ∀ᶠ ε in 𝓝[>] (0 : ℝ), d ≤ muPer k ε := by
+  sorry
+
+/-! ### `keptAt_band`: the two cases -/
+
+/-- `keptAt_band` at `ε ≤ 1/2` (FS106-TQ § 2.2): `twoBall_pairs_ge` at `r = ε` on `Ã` (null unit pairs by
+`UnitPairsNull.congr_ae`) gives unit-pair mass `≥ ε³(π(1 − η)/2 − 2π²η) > 0`, since `η < 1/(1 + 4π)`. -/
+theorem keptAt_band_le_half {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {η : ℝ} (hη0 : 0 ≤ η)
+    (hη : η < 1 / (1 + 4 * Real.pi)) {ε : ℝ} (hε : 0 < ε) (hε2 : ε ≤ 1 / 2) {x y : ℂ} (hx : KeptAt A η ε x)
+    (hy : KeptAt A η ε y) : dist x y < 1 - ε ∨ 1 + ε < dist x y := by
+  sorry
+
+/-- At `ε > 1/2` no point is kept: `B(x, 2ε)` has radius `> 1`, `arcLength_bigBall_ge` gives its pairs mass `≥ (2π/3)|B|`,
+and filling `1 − η` of it with `Ã` leaves unit-pair mass `≥ ((2π/3)(1 − η) − 2πη)|B| > 0` for `η < 1/4`. -/
+theorem not_keptAt_of_half_lt {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {η : ℝ} (hη0 : 0 ≤ η)
+    (hη : η < 1 / 4) {ε : ℝ} (hε : 1 / 2 < ε) (x : ℂ) : ¬ KeptAt A η ε x := by
+  sorry
+
+/-! ### CP colourings: a jointly measurable modification (`chiM0_le_chiCP`, `CPColouring.tendsto_not_kept`) -/
+
+/-- Stationarity moves a pair to the origin. -/
+theorem CPColouring.law_ne_shift (c : CPColouring k) (x y : ℂ) :
+    c.law {f | f x ≠ f y} = c.law {f | f 0 ≠ f (y - x)} := by
+  sorry
+
+/-- **Uniform continuity in probability** (stationarity and `tendsto_ne` at `0`). -/
+theorem CPColouring.exists_unif (c : CPColouring k) {δ : ENNReal} (hδ : 0 < δ) :
+    ∃ r > (0 : ℝ), ∀ x y : ℂ, dist x y < r → c.law {f | f x ≠ f y} < δ := by
+  sorry
+
+/-- The lower-left corner of the grid cell of side `h` containing `x`. -/
+noncomputable def gridPoint (h : ℝ) (x : ℂ) : ℂ := ((h * ⌊x.re / h⌋ : ℝ) : ℂ) + ((h * ⌊x.im / h⌋ : ℝ) : ℂ) * I
+
+theorem dist_gridPoint_lt {h : ℝ} (hh : 0 < h) (x : ℂ) : dist (gridPoint h x) x < 2 * h := by
+  sorry
+
+/-- `(f, x) ↦ f (gridPoint h x)` is jointly measurable (`gridPoint h` takes countably many values on measurable cells). -/
+theorem measurable_eval_gridPoint {h : ℝ} (hh : 0 < h) :
+    Measurable fun p : (ℂ → Fin k) × ℂ => p.1 (gridPoint h p.2) := by
+  sorry
+
+/-- **The modification** (FS106-TQ § 2.3 step 1): scales `h_m` with `P(f x ≠ f (gridPoint h_m x)) ≤ 2^{−m}`
+(`CPColouring.exists_unif`), Borel–Cantelli (`MeasureTheory.measure_limsup_atTop_eq_zero`) at each `x`, and `ct f x` the
+eventual value of `f (gridPoint h_m x)` (measurable fibres: `measurable_to_countable'`). -/
+theorem CPColouring.exists_modification (c : CPColouring k) :
+    ∃ ct : (ℂ → Fin k) → ℂ → Fin k, Measurable (Function.uncurry ct) ∧ ∀ x, c.law {f | ct f x ≠ f x} = 0 := by
+  sorry
+
+/-- **Realisations are a.e.-proper** (TQ § 2.3 step 3): Tonelli on `law ⊗ volume ⊗ arcLength` and `c.proper`. -/
+theorem CPColouring.ae_unitPairsNull_of_modification (c : CPColouring k) {ct : (ℂ → Fin k) → ℂ → Fin k}
+    (hct : Measurable (Function.uncurry ct)) (hmod : ∀ x, c.law {f | ct f x ≠ f x} = 0) :
+    ∀ᵐ f ∂c.law, ∀ j, UnitPairsNull (ct f ⁻¹' {j}) := by
+  sorry
+
+/-- The expected disagreement with the origin over a ball (Tonelli and the modification); with Markov
+(`MeasureTheory.meas_ge_le_lintegral_div`) and `CPColouring.exists_unif` it gives `CPColouring.tendsto_not_kept`. -/
+theorem CPColouring.lintegral_ball_ne (c : CPColouring k) {ct : (ℂ → Fin k) → ℂ → Fin k}
+    (hct : Measurable (Function.uncurry ct)) (hmod : ∀ x, c.law {f | ct f x ≠ f x} = 0) (ρ : ℝ) :
+    ∫⁻ f, volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) ∂c.law = ∫⁻ y in ball (0 : ℂ) ρ, c.law {f | f y ≠ f 0} := by
+  sorry
+
+/-! ### The compactness argument (`exists_bandNull_aeCover_of_mu_eq_one`, `chiM0_le_iff_muZero_eq_one`) -/
+
+/-- Weak-* convergence in `L^∞` against integrable test functions. -/
+def WeakStarTendsto (g : ℕ → ℂ → ℝ) (F : ℂ → ℝ) : Prop :=
+  ∀ φ : ℂ → ℝ, Integrable φ → Tendsto (fun m => ∫ x, g m x * φ x) atTop (𝓝 (∫ x, F x * φ x))
+
+/-- **Weak-* sequential compactness** of `[0, 1]`-valued families (Hilbert weak compactness in `L²(B(0, n))`,
+`WeakDual.isSeqCompact_closedBall` through `InnerProductSpace.toDual`, then a diagonal over `n` and density of `L² ∩ L¹`
+in `L¹`). -/
+theorem exists_weakStar_subseq (g : ℕ → Fin k → ℂ → ℝ) (hg : ∀ m j, Measurable (g m j))
+    (h01 : ∀ m j x, 0 ≤ g m j x ∧ g m j x ≤ 1) :
+    ∃ (σ : ℕ → ℕ) (F : Fin k → ℂ → ℝ), StrictMono σ ∧ (∀ j, Measurable (F j)) ∧
+      (∀ j, ∀ᵐ x ∂volume, 0 ≤ F j x ∧ F j x ≤ 1) ∧ ∀ j, WeakStarTendsto (fun m => g (σ m) j) (F j) := by
+  sorry
+
+/-- **Convolution forms with an integrable kernel are weak-* continuous on bounded families** (no decay needed — QB § 2.3:
+`g_m ∗ κ → F ∗ κ` pointwise and boundedly, then dominated convergence on the ball). -/
+theorem convForm_tendsto {g : ℕ → ℂ → ℝ} {F : ℂ → ℝ} (hg : ∀ m, Measurable (g m)) (hb : ∀ m x, |g m x| ≤ 1)
+    (hFm : Measurable F) (hF : ∀ᵐ x ∂volume, |F x| ≤ 1) (hw : WeakStarTendsto g F) {κ : ℂ → ℝ} (hκ : Integrable κ)
+    (R : ℝ) :
+    Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * ∫ w, g m (x + w) * κ w) atTop
+      (𝓝 (∫ x in ball (0 : ℂ) R, F x * ∫ w, F (x + w) * κ w)) := by
+  sorry
+
+/-- The law of `e φ − e θ` under `arcLength ⊗ arcLength` is absolutely continuous (`twoCircle_preimage_null` at
+`r₁ = r₂ = 1`, `e φ − e θ = e φ + e (θ + π)`). Stated with its density, for `integral_circleAvg_sq`. -/
+theorem exists_twoCircle_density : ∃ ρ : ℂ → ℝ, Integrable ρ ∧ (∀ w, 0 ≤ ρ w) ∧
+    ∀ N : Set ℂ, MeasurableSet N →
+      (arcLength.prod arcLength) {p : ℝ × ℝ | e p.2 - e p.1 ∈ N} = ENNReal.ofReal (∫ w in N, ρ w) := by
+  sorry
+
+/-- **`T*T` has an integrable kernel** (Fubini): for bounded measurable `h` supported in a ball,
+`∫ |∫_θ h(x + e θ)|² dx = ∫ h(y) ∫ h(y + w) ρ(w) dw dy` with `ρ` the two-circle density. -/
+theorem integral_circleAvg_sq {ρ : ℂ → ℝ} (hρ : Integrable ρ)
+    (hρN : ∀ N : Set ℂ, MeasurableSet N →
+      (arcLength.prod arcLength) {p : ℝ × ℝ | e p.2 - e p.1 ∈ N} = ENNReal.ofReal (∫ w in N, ρ w))
+    {h : ℂ → ℝ} (hh : Measurable h) (hb : ∀ x, |h x| ≤ 2) {R : ℝ} (hs : ∀ x, R < ‖x‖ → h x = 0) :
+    ∫ x, (∫ θ in Ico 0 (2 * Real.pi), h (x + e θ)) ^ 2 = ∫ y, h y * ∫ w, h (y + w) * ρ w := by
+  sorry
+
+/-- **The Rajchman step, Fourier-free**: the unit form is weak-* continuous on `[0, 1]`-valued families supported in a fixed
+ball (`integral_circleAvg_sq` and `convForm_tendsto` at `κ = ρ` make `T g_m → T F` in `L²`). -/
+theorem unitForm_tendsto {g : ℕ → ℂ → ℝ} {F : ℂ → ℝ} (hg : ∀ m, Measurable (g m)) (h01 : ∀ m x, 0 ≤ g m x ∧ g m x ≤ 1)
+    (hFm : Measurable F) (hF : ∀ᵐ x ∂volume, 0 ≤ F x ∧ F x ≤ 1) (hw : WeakStarTendsto g F) (R : ℝ) :
+    Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * ∫ θ in Ico 0 (2 * Real.pi), g m (x + e θ)) atTop
+      (𝓝 (∫ x in ball (0 : ℂ) R, F x * ∫ θ in Ico 0 (2 * Real.pi), F (x + e θ))) := by
+  sorry
+
+/-- **Translates with vanishing holes**: if partial colourings with a translation-invariant class property reach upper
+density `1`, translates of them leave holes tending to `0` in every ball (`upperDensity` at origin-centred balls, an
+averaging over centres in `B(0, R − r)`). -/
+theorem exists_translates_small_hole {P : (Fin k → Set ℂ) → Prop}
+    (hP : ∀ C (v : ℂ), P C → P fun j => (· + v) ⁻¹' C j)
+    (h : (⨆ (C : Fin k → Set ℂ) (_ : IsPartialColouring C ∧ P C), upperDensity (⋃ j, C j)) = 1) :
+    ∃ C : ℕ → Fin k → Set ℂ, (∀ m, IsPartialColouring (C m) ∧ P (C m)) ∧
+      ∀ R : ℝ, Tendsto (fun m => volume (ball (0 : ℂ) R \ ⋃ j, C m j)) atTop (𝓝 0) := by
+  sorry
+
+/-- The weak-* limit of the indicator families of `exists_translates_small_hole` sums to `1` almost everywhere. -/
+theorem ae_sum_eq_one_of_weakStar {C : ℕ → Fin k → Set ℂ} (hC : ∀ m, IsPartialColouring (C m))
+    (hhole : ∀ R : ℝ, Tendsto (fun m => volume (ball (0 : ℂ) R \ ⋃ j, C m j)) atTop (𝓝 0)) {F : Fin k → ℂ → ℝ}
+    (hFm : ∀ j, Measurable (F j)) (hw : ∀ j, WeakStarTendsto (fun m => (C m j).indicator 1) (F j)) :
+    ∀ᵐ x ∂volume, ∑ j, F j x = 1 := by
+  sorry
+
+/-- **Selection**: from weights summing to `1`, a measurable colour of positive weight (argmax over `Fin k`). -/
+theorem exists_selection {F : Fin k → ℂ → ℝ} (hF : ∀ j, Measurable (F j)) (hsum : ∀ᵐ x ∂volume, ∑ j, F j x = 1)
+    (hpos : ∀ j, ∀ᵐ x ∂volume, 0 ≤ F j x) : ∃ c : ℂ → Fin k, Measurable c ∧ ∀ᵐ x ∂volume, 0 < F (c x) x := by
+  sorry
+
+theorem bandNull_preimage_add {A : Set ℂ} {ε : ℝ} (h : BandNull A ε) (v : ℂ) : BandNull ((· + v) ⁻¹' A) ε := by
+  sorry
+
+theorem unitPairsNull_preimage_add {A : Set ℂ} (h : UnitPairsNull A) (v : ℂ) : UnitPairsNull ((· + v) ⁻¹' A) := by
+  sorry
+
+/-! ### `exists_face_fails` (ruling, inventory item 86): the explicit class -/
+
+/-- FACE-SHARP's failure class: the half-box, the far box and a box `Q` just beyond `x + e θ`. -/
+def faceFailClass (x : ℂ) (θ ε g ε' ρ δ : ℝ) : Set ℂ :=
+  halfBox x θ ε ∪ farBox x θ g ε' ρ ∪ {z | ∃ s t : ℝ, 1 < s ∧ s < 1 + δ ∧ |t| < δ ∧ z = x + e θ * (s + t * I)}
+
+/-- **No unit pair at all** in the failure class, for small `ε, ε', δ`: each piece has diameter `< 1` (`2ρ < 1`);
+half-box to far box `< 1` (`g² + ρ² < 1`); far box to `Q` `< 1` (`(1 − g)² + ρ² < 1`, i.e. `ρ² < 2g − g²`); half-box to
+`Q` `> 1`. -/
+theorem exists_faceFailClass_noUnitPairs {g ρ : ℝ} (hg : 0 < g) (hρ : 0 < ρ) (hlt : ρ ^ 2 < 2 * g - g ^ 2)
+    (hρ2 : 2 * ρ < 1) (hgρ : g ^ 2 + ρ ^ 2 < 1) (x : ℂ) (θ : ℝ) :
+    ∃ ε ε' δ : ℝ, 0 < ε ∧ 0 < ε' ∧ 0 < δ ∧
+      ∀ z ∈ faceFailClass x θ ε g ε' ρ δ, ∀ w ∈ faceFailClass x θ ε g ε' ρ δ, dist z w ≠ 1 := by
+  sorry
+
+/-- A measurable set with no unit pair is one class of an `AeColouring 10` (the rest coloured by `sq9`). -/
+theorem exists_aeColouring_of_noUnitPairs {D : Set ℂ} (hD : MeasurableSet D) (h : ∀ z ∈ D, ∀ w ∈ D, dist z w ≠ 1) :
+    ∃ c : AeColouring 10, c.cls 9 = D := by
+  sorry
+
+theorem measurableSet_faceFailClass (x : ℂ) (θ ε g ε' ρ δ : ℝ) : MeasurableSet (faceFailClass x θ ε g ε' ρ δ) := by
+  sorry
+
+/-- `x + e θ` is in the support of the failure class (every ball about it meets `Q` in an open set). -/
+theorem add_e_mem_essSupport_faceFailClass (x : ℂ) (θ ε g ε' ρ : ℝ) {δ : ℝ} (hδ : 0 < δ) :
+    x + e θ ∈ essSupport (faceFailClass x θ ε g ε' ρ δ) := by
+  sorry
+
+/-! ### `face`: circles about the points near `y` meet the boxes -/
+
+/-- **The face key lemma** (I2b): an open `U` lying a.e. in a measurable `A`, a support point `y` of `A`, and every unit
+circle about the points of a ball about `y` (off a null set) meeting `U`, contradict null unit pairs (Tonelli: the pairs
+from `A ∩ B(y, r)` into `U ∩ A` have positive mass, each circle meeting the open `U` in a positive arc). -/
+theorem not_unitPairsNull_of_circles_meet {A U N : Set ℂ} (hA : MeasurableSet A) (hU : IsOpen U)
+    (hUA : volume (U \ A) = 0) {y : ℂ} (hy : y ∈ essSupport A) {r : ℝ} (hr : 0 < r) (hN : volume N = 0)
+    (hmeet : ∀ y' ∈ ball y r, y' ∉ N → ∃ φ : ℝ, y' + e φ ∈ U) : ¬ UnitPairsNull A := by
+  sorry
+
+theorem isOpen_halfBox (x : ℂ) (θ ε : ℝ) : IsOpen (halfBox x θ ε) := by
+  sorry
+
+theorem isOpen_farBox (x : ℂ) (θ g ε' ρ : ℝ) : IsOpen (farBox x θ g ε' ρ) := by
+  sorry
+
+/-- **The face geometry**, away from the normal: for `dist x y = 1`, `y ≠ x + e θ`, the unit circles about the points near
+`y` cross the face of the half-box into it (the circle about `y` passes through `x` with a tangent not along the face, or
+with its curvature towards the half-box when `y = x − e θ`). -/
+theorem circles_meet_halfBox {x y : ℂ} {θ ε : ℝ} (hε : 0 < ε) (hxy : dist x y = 1) (hy : y ≠ x + e θ) :
+    ∃ r > (0 : ℝ), ∀ y' ∈ ball y r, ∃ φ : ℝ, y' + e φ ∈ halfBox x θ ε := by
+  sorry
+
+/-- **The face geometry at the normal** (I2b's case split, item 37's regime): for `y = x + e θ`, circles about `y'` nearer
+than `1` along `e θ` meet the half-box, farther ones (and those at the same height off the normal) meet the far box by the
+corner condition `(1 − g)² + ρ² ≥ 1`; the exceptional set is the one point `y`. -/
+theorem circles_meet_boxes_at_normal {x : ℂ} {θ ε ε' g ρ : ℝ} (hε : 0 < ε) (hε' : 0 < ε') (hg : 0 < g) (hg1 : g < 1)
+    (hρ : 0 < ρ) (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2) :
+    ∃ r > (0 : ℝ), ∀ y' ∈ ball (x + e θ) r, y' ≠ x + e θ →
+      ∃ φ : ℝ, y' + e φ ∈ halfBox x θ ε ∪ farBox x θ g ε' ρ := by
+  sorry
+
+
 /-- **FS111-V0-RESCALE**: if an a.e.-proper measurable `k`-colouring exists, a tight one exists. -/
 theorem AeColouring.exists_tight (c : AeColouring k) : ∃ c' : AeColouring k, c'.Tight := by
   sorry
@@ -288,11 +660,6 @@ theorem mu_lt_of_voronov11 (hV : Voronov11) {ε : ℝ} (hε : 0 < ε) : mu 6 ε 
 theorem forall_mu_six_lt_one_iff : (∀ ε > (0 : ℝ), mu 6 ε < 1) ↔ Voronov11 := by
   exact ⟨voronov11_of_forall_mu_lt, fun hV ε hε => mu_lt_of_voronov11 hV hε⟩
 
-/-- `x` is **kept** at scale `ε` for the class `A` with threshold `η`: the balls of radii `ε/2` and `2ε` about `x` are at
-least `1 − η` full of `Ã` (FS106-TQ § 2.2). -/
-def KeptAt (A : Set ℂ) (η ε : ℝ) (x : ℂ) : Prop :=
-  ∀ ρ ∈ ({ε / 2, 2 * ε} : Set ℝ), ENNReal.ofReal (1 - η) * volume (ball x ρ) ≤ volume (ball x ρ ∩ densitySet A)
-
 /-- **FS106-REM**, first clause (one class, G92): for a measurable `A` with null unit pairs, any `η < 1/(1 + 4π)` and every
 `ε > 0`, two points kept at scale `ε` are never at a distance in `[1 − ε, 1 + ε]`. (The row reads kept points of one
 colour of a partial colouring; membership of the points in `A` is not used — a generalization.) -/
@@ -317,14 +684,6 @@ theorem exists_not_uniform_kept {η : ℝ} (hη0 : 0 < η) (hη : η < 1) :
       ∀ ε > (0 : ℝ), ∃ z : ℂ, m ≤ volume {x | x - z ∈ {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧ 0 ≤ w.im ∧ w.im ≤ 1} ∧
         ¬ KeptAt (f ⁻¹' {f x}) η ε x} := by
   sorry
-
-/-- The open half-box `{x − s e + t e⊥ : 0 < s < ε, |t| < ε}`, `e = e θ`, `e⊥ = i e θ`. -/
-def halfBox (x : ℂ) (θ ε : ℝ) : Set ℂ :=
-  {z | ∃ s t : ℝ, 0 < s ∧ s < ε ∧ |t| < ε ∧ z = x + e θ * (-s + t * I)}
-
-/-- The open far box `{x + s e + t e⊥ : g < s < g + ε′, |t| < ρ}`. -/
-def farBox (x : ℂ) (θ g ε' ρ : ℝ) : Set ℂ :=
-  {z | ∃ s t : ℝ, g < s ∧ s < g + ε' ∧ |t| < ρ ∧ z = x + e θ * (s + t * I)}
 
 /-- **FS121-D4-FACE** with **FS121-V5-FACE-SHARP**'s hypothesis `ρ² ≥ 2g − g²` (SR1 item 6), one class (G92: the argument
 reads only `A`'s own unit pairs): if the half-box and the far box lie almost everywhere in `A`, no point of `supp A` is at
@@ -408,8 +767,11 @@ theorem face_densitySet {C : Fin k → Set ℂ} (hadm : IsAdmissible C) (hsat : 
   exact face hA.1 hA.2 hε hε' hg hg1 hρ hsharp hhalf hfar y hy hxy
 
 /-- **FS121-V5-FACE-SHARP**, its failure half: whenever `ρ² < 2g − g²` the first clause fails for some a.e.-proper colouring
-(V5 § 2.2's explicit colouring at `g = 1/10`, `ρ = 2/5`, generalized). -/
-theorem exists_face_fails {g ρ : ℝ} (hg : 0 < g) (hρ : 0 < ρ) (hlt : ρ ^ 2 < 2 * g - g ^ 2) :
+(V5 § 2.2's explicit colouring at `g = 1/10`, `ρ = 2/5`, generalized). Ruling, `plans/FS131-close-inventory.md` item 86:
+`2ρ < 1` and `g² + ρ² < 1` added — outside them the far box holds unit pairs, or the half-box and far box together do, so no
+class of an a.e.-proper colouring holds both (counterexamples `g = 1, ρ = 9/10` and `g = 19/20, ρ = 9/20`). -/
+theorem exists_face_fails {g ρ : ℝ} (hg : 0 < g) (hρ : 0 < ρ) (hlt : ρ ^ 2 < 2 * g - g ^ 2) (hρ2 : 2 * ρ < 1)
+    (hgρ : g ^ 2 + ρ ^ 2 < 1) :
     ∃ (k : ℕ) (c : AeColouring k) (j : Fin k) (x : ℂ) (θ ε ε' : ℝ), 0 < ε ∧ 0 < ε' ∧
       volume (halfBox x θ ε \ c.cls j) = 0 ∧ volume (farBox x θ g ε' ρ \ c.cls j) = 0 ∧
       ∃ y ∈ essSupport (c.cls j), dist x y = 1 := by

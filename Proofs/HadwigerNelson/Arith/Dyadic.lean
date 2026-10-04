@@ -2,6 +2,7 @@ import Mathlib.NumberTheory.NumberField.Basic
 import Mathlib.RingTheory.RamificationInertia.Ramification
 import Mathlib.RingTheory.RamificationInertia.Inertia
 import Mathlib.RingTheory.DedekindDomain.AdicValuation
+import Mathlib.RingTheory.Conductor
 
 /-!
 # Dyadic places where `3` is a square: unramified in `F(i)`, split iff the residue degree is even (FS-131 wave 2)
@@ -30,6 +31,90 @@ def DyadicSqrt3Conclusion (L : Type*) [Field L] [NumberField L] [Algebra F L] (P
     ((P.asIdeal.primesOver (𝓞 L)).ncard ≠ 2 →
       (P.asIdeal.primesOver (𝓞 L)).ncard = 1 ∧ (∀ Q ∈ P.asIdeal.primesOver (𝓞 L), Ideal.inertiaDeg Q (𝓞 F) = 2) ∧
         Odd (Ideal.inertiaDeg P.asIdeal ℤ) ∧ Nat.card (𝓞 F ⧸ P.asIdeal) = 2 ^ Ideal.inertiaDeg P.asIdeal ℤ)
+
+/-! ## FS131-K2c: children (each `sorry`ed; plan `plans/FS131-w2-kernel-plan.md` § 12)
+
+The route is **P-local** (inventory item 64): a generator `γ = d(−1 + s ι)/2` of `L/F`, integral everywhere because `d`
+absorbs the other dyadic primes (`d ∈ I`, `span {4} = P^a I`), whose minimal polynomial `X² + dX + δ` reduces to `X² + X + 1`
+mod `P` and whose discriminant `−d²s²` is a `P`-unit; Kummer–Dedekind needs the conductor prime to `P` only. Both leaves are
+the assembly of these. -/
+
+open Polynomial in
+/-- `X² + X + 1` over a finite field of characteristic `2` is separable, and irreducible iff `3 ∤ |K| − 1`. -/
+theorem x2x1_separable_irreducible_iff {K : Type*} [Field K] [Fintype K] [CharP K 2] :
+    (X ^ 2 + X + 1 : K[X]).Separable ∧ (Irreducible (X ^ 2 + X + 1 : K[X]) ↔ ¬ 3 ∣ Fintype.card K - 1) := by
+  sorry
+
+/-- The residue field at a dyadic prime has `2 ^ f` elements (`Ideal.absNorm_eq_pow_inertiaDeg`). -/
+theorem card_quot_eq_two_pow (P : HeightOneSpectrum (𝓞 F)) (h2 : (2 : 𝓞 F) ∈ P.asIdeal) :
+    Nat.card (𝓞 F ⧸ P.asIdeal) = 2 ^ Ideal.inertiaDeg P.asIdeal ℤ := by
+  sorry
+
+/-- `span {4} = P^a · I` with `I ⊄ P` (`Ideal.eq_prime_pow_mul_coprime`). -/
+theorem exists_span_four_eq (P : HeightOneSpectrum (𝓞 F)) :
+    ∃ (a : ℕ) (I : Ideal (𝓞 F)), Ideal.span {(4 : 𝓞 F)} = P.asIdeal ^ a * I ∧ ¬ I ≤ P.asIdeal := by
+  sorry
+
+/-- **The local square, approximated** (density of `𝓞 F` in the completion's integers): `3` a square in `F_P` gives
+`s ∈ 𝓞 F` with `s² − 3 ∈ P^N`, for every `N`. -/
+theorem exists_sq_sub_three_mem_pow (P : HeightOneSpectrum (𝓞 F)) (h3 : IsSquare (3 : P.adicCompletion F)) (N : ℕ) :
+    ∃ s : 𝓞 F, s ^ 2 - 3 ∈ P.asIdeal ^ N := by
+  sorry
+
+/-- **The generator's coefficients** (CRT and cancellation in the Dedekind domain): from `s² − 3 ∈ P^(a+1)`, pick `d ∈ I`
+with `d ≡ 1 (mod P)` (`I ⊔ P = ⊤`); then `4 ∣ d²(1 + s²)`, and `δ = d²(1 + s²)/4 ≡ 1 (mod P)` by
+`4(δ − 1) = (d² − 1)(1 + s²) + (s² − 3) ∈ P^(a+1)`. -/
+theorem exists_dyadic_coeffs (P : HeightOneSpectrum (𝓞 F)) (h2 : (2 : 𝓞 F) ∈ P.asIdeal) {a : ℕ} {I : Ideal (𝓞 F)}
+    (h4 : Ideal.span {(4 : 𝓞 F)} = P.asIdeal ^ a * I) (hI : ¬ I ≤ P.asIdeal) {s : 𝓞 F}
+    (hs : s ^ 2 - 3 ∈ P.asIdeal ^ (a + 1)) :
+    ∃ s d δ : 𝓞 F, 4 * δ = d ^ 2 * (1 + s ^ 2) ∧ d - 1 ∈ P.asIdeal ∧ δ - 1 ∈ P.asIdeal ∧ s ∉ P.asIdeal := by
+  sorry
+
+/-- The root `γ = d(−1 + s ι)/2 ∈ 𝓞 L` of `X² + dX + δ` (integral as a root of a monic polynomial over `𝓞 F`), not in `F`
+since `s ι ∉ F`. -/
+theorem exists_root_quadratic (hdeg : Module.finrank F L = 2) (hi : ∃ ι : L, ι ^ 2 = -1) {s d δ : 𝓞 F}
+    (hδ : 4 * δ = d ^ 2 * (1 + s ^ 2)) (hd0 : d ≠ 0) (hs0 : s ≠ 0) :
+    ∃ γ : 𝓞 L, γ ^ 2 + algebraMap (𝓞 F) (𝓞 L) d * γ + algebraMap (𝓞 F) (𝓞 L) δ = 0 ∧
+      (γ : L) ∉ Set.range (algebraMap F L) := by
+  sorry
+
+open Polynomial in
+/-- A root of `X² + dX + δ` outside `F` has that minimal polynomial over `𝓞 F` (`minpoly.eq_of_irreducible_of_monic`;
+`𝓞 F` integrally closed). -/
+theorem minpoly_eq_of_root (hdeg : Module.finrank F L = 2) {d δ : 𝓞 F} {γ : 𝓞 L}
+    (hroot : γ ^ 2 + algebraMap (𝓞 F) (𝓞 L) d * γ + algebraMap (𝓞 F) (𝓞 L) δ = 0)
+    (hnot : (γ : L) ∉ Set.range (algebraMap F L)) : minpoly (𝓞 F) γ = X ^ 2 + C d * X + C δ := by
+  sorry
+
+/-- **The conductor is prime to `P`** (`Algebra.discr_mul_isIntegral_mem_adjoin`: the discriminant `d² − 4δ = −d²s²` of the
+power basis `1, γ` lies in the conductor, and it is a `P`-unit). -/
+theorem comap_conductor_sup_eq_top (hdeg : Module.finrank F L = 2) (P : HeightOneSpectrum (𝓞 F)) {s d δ : 𝓞 F}
+    (hδ : 4 * δ = d ^ 2 * (1 + s ^ 2)) (hd : d - 1 ∈ P.asIdeal) (hs : s ∉ P.asIdeal) {γ : 𝓞 L}
+    (hroot : γ ^ 2 + algebraMap (𝓞 F) (𝓞 L) d * γ + algebraMap (𝓞 F) (𝓞 L) δ = 0)
+    (hnot : (γ : L) ∉ Set.range (algebraMap F L)) :
+    (conductor (𝓞 F) γ).comap (algebraMap (𝓞 F) (𝓞 L)) ⊔ P.asIdeal = ⊤ := by
+  sorry
+
+open Polynomial in
+/-- **Kummer–Dedekind at `P`** (`KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map`,
+`KummerDedekind.emultiplicity_factors_map_eq_emultiplicity`, `Ideal.sum_ramification_inertia`): the minimal polynomial reduces
+to `X² + X + 1`, separable (so every prime over `P` is unramified), split iff `3 ∣ 2^f − 1` iff `f` even, else irreducible
+(one prime, inertia `2`); with `card_quot_eq_two_pow`. -/
+theorem dyadicConclusion_of_minpoly (hdeg : Module.finrank F L = 2) (P : HeightOneSpectrum (𝓞 F))
+    (h2 : (2 : 𝓞 F) ∈ P.asIdeal) {d δ : 𝓞 F} (hd : d - 1 ∈ P.asIdeal) (hδ1 : δ - 1 ∈ P.asIdeal) {γ : 𝓞 L}
+    (hmin : minpoly (𝓞 F) γ = X ^ 2 + C d * X + C δ)
+    (hcond : (conductor (𝓞 F) γ).comap (algebraMap (𝓞 F) (𝓞 L)) ⊔ P.asIdeal = ⊤) :
+    DyadicSqrt3Conclusion L P := by
+  sorry
+
+/-- **The P-local engine**: the coefficients of `exists_dyadic_coeffs` give the conclusion (`exists_root_quadratic`,
+`minpoly_eq_of_root`, `comap_conductor_sup_eq_top`, `dyadicConclusion_of_minpoly`). Both leaves are its cases: the congruence
+at `d = 1`, `δ = 1 + (s² − 3)/4`; the local square through `exists_span_four_eq`, `exists_sq_sub_three_mem_pow` at
+`N = a + 1`, `exists_dyadic_coeffs`. -/
+theorem dyadicConclusion_of_coeffs (hdeg : Module.finrank F L = 2) (hi : ∃ ι : L, ι ^ 2 = -1)
+    (P : HeightOneSpectrum (𝓞 F)) (h2 : (2 : 𝓞 F) ∈ P.asIdeal) {s d δ : 𝓞 F} (hδ : 4 * δ = d ^ 2 * (1 + s ^ 2))
+    (hd : d - 1 ∈ P.asIdeal) (hδ1 : δ - 1 ∈ P.asIdeal) (hs : s ∉ P.asIdeal) : DyadicSqrt3Conclusion L P := by
+  sorry
 
 /-- **SQRT3-LOCAL from the congruence**: if `s² − 3 ∈ 4P` for some `s ∈ 𝓞 F`, the dyadic prime `P` satisfies the conclusion. -/
 theorem sqrt3_local_of_congr (hdeg : Module.finrank F L = 2) (hi : ∃ ι : L, ι ^ 2 = -1) (P : HeightOneSpectrum (𝓞 F))
