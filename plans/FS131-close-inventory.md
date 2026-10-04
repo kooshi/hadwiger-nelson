@@ -1435,3 +1435,14 @@ reason by the close.*
      HC/IRREG 16), the carriers, the gate, the landing. **Next**: FS131-I2l (Opus).
 202. **Brief FS131-I2l, wave 2's twelfth implementer** (Opus; `data/fs131/briefs/FS131-I2l-wave2.md`, derived by script from I2k's, gated PASS): CoverExamples' 23,
      the carriers (with item 201's two points), the gate and the landing. Launched in I2k's slot: 1 (I4g) + 1 (K5b) + 1 (I2l) = 3.
+203. **FS131-K5b mid-job, while stating ROTHEX and BV-HEX** (message 2026-10-04; record `plans/FS131-w5-kernel-plan.md` § 8 on `fs131-w5`): **correction owed
+     (F-HEXCUSP)** to FS110-N2-HEX as FS112-ROTHEX carries it ("a purely rotating ring forces `u` regular", `plans/FS110-N-proof.md` § 4.4): the count
+     "a sector of angle α serves at most ⌊(180° − α)/60°⌋ + 1 of the six points" gives 4 + 4 + 0 at angles (0°, 0°, 360°), a case N2-HEX never lists — a cubic
+     trichromatic **antipodal double cusp** serves all six points, and H allows it; the Lean statement `hex_regular` (`Plane/ValidMap/HexRing`) concludes
+     "regular or an antipodal double cusp". No consumer affected as far as K5b sees: FS110-N3-P17 reads only "two consecutive rotation points served by one
+     sector" (a horn serves four consecutive points), and BV-HEX handles cusps directly (§ 1a.4 step 6). Errata line owed to FS-110's record at the filing.
+     **Generalizations for errata**: G-BVHEX — BV-HEX at every `k`, on a fragment covering `B̄(u, 1)`, with H read only at the six points `x_j` (stated so as
+     `bv_hex`), and a second, shorter route to ROTHEX's Prop. 17 clause with no N2-ROT, N2-HEX or NOBOTH (`p17_ua` from `bv_hex`); G-BVND — BV-ND for any two
+     centres once the double event is defined at a configuration with both tangential components nonzero, `1 < t < 2` entering only through
+     `linkage_dot_ne_zero` (`t ∉ {1, 3}`), BV-ND1 the instance `u₁ = u₂`. Narrowing, no action (N-BVL3): `bv_l3` takes H on both circles; the walk supplies it.
+     No ruling needed: the corrected statement is the honest one and no row's consumer changes (Keryx; confidence high).
