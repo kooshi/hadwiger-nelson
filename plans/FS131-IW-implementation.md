@@ -436,3 +436,29 @@ in the foundation modules (statements of other waves unchanged), imports, `Proof
 landing before wave 4 is on `main` (at this stage it is not: `origin/main` at `b8b478a6`, `fs131-w4` at `89ab1ab7`).
 
 Iteration script: `data/fs131/iwd/run.sh` (`lake env lean` with the lakefile's options against the built oleans, read only; never evidence).
+
+## Stage 14 — SAVED (FS131-IWd): `niceAt_of_dirColourAt` proved
+
+**Proved (statement unchanged)**: `niceAt_of_dirColourAt`, by stage 11's route made concrete. The picture's sectors are the elements of a finite
+set of pairs (direction, rank) sorted lexicographically (`Finset.orderEmbOfFin` on `Lex (ℝ × ℕ)`): for each change point `q` of the colour in a window
+`[θ₀, θ₀ + 2π)` starting off `D`, one pair `(q, j)` per horn colour `j` (rank `j < k`: a colour whose cone holds `q`, other than the colours just
+before and just after `q`) and one pair `(q, k)` for the run starting at `q`. Adjacent sectors differ, two runs never share a colour (`hrun`, through
+the change point inside each of the two arcs between them), a horn sits between distinct colours, and the cone clause holds (a direction lies in a
+run, half-open on the right; at a non-change direction only the run's colour approaches, by `hpoke`). With no change point the picture is one
+sector. `h3` is not used (the statement carries it; the constant case is a one-sector picture).
+
+**Children added** (`Merge`; the side colours are read off `σ`, no `localSectors`): at the top, after `OffDirs` — `offDirs_add_int`,
+`exists_offDirs_punctured` (the directions of `D` are isolated mod `2π`), `exists_offDirs_Ioo`, `mem_closure_offDirs_Ioo`, `finRotate_val`, the
+definitions `isoRad`, `rightCol`, `leftCol` (the colours just counter-clockwise and just clockwise of a direction) with `isoRad_pos`,
+`offDirs_of_isoRad`; before the leaf, in a section `DirColour` — `DirColourAt.mem_coneAt`, `eq_of_mem_coneAt`, `eq_of_near`, `eq_add_int`,
+`eq_of_Ioo`, `eq_rightCol`, `eq_leftCol`, `rightCol_eq_of`, `leftCol_eq_of`, `rightCol_of_offDirs`, `rightCol_add_int`, `leftCol_add_int`,
+`rightCol_mem_coneAt`, `leftCol_mem_coneAt`, `not_offDirs_of_ne`, `const_of_noChange` (between two directions with no change of colour strictly
+between, the colour is constant), `noChange_of_const`. **Moved, unchanged**: `mem_coneAt_inter_annSector` (from IWc's "Cones after a merge" block to
+just before these, which read it). Records: a section "FS-131 Woodall's merge (job FS131-IWd)" in `scripts/Axioms.lean`, written by
+`tools/fs131_iw_add_records.py` (not a check: it appends what `tools/fs131_w3_decls.py` reports missing); `tools/fs131_w3_decls.py --check`: 212
+theorems, 212 records, 0 missing, 0 stale; `--plant`: FIRED both ways, exit 0. No new name is declared on `origin/main`, `fs131-w2`, `fs131-w4` or
+`fs131-w3b` (`git grep`).
+
+**Build of this stage**: OK — 445 of 445 batches, 3 modules rebuilt, 6 with warnings (wave 4's five skeleton modules and `Woodall/Merge`), 8 m 46 s,
+exit 0 (`build/gate/build/20261004T170025Z-886887.log`; driver log `data/fs131/iwd/build1.log`); the only Woodall warnings are `Merge`'s two
+`declaration uses 'sorry'` (`wedgeMerge_niceAt`, `exists_merge_at`). Scratch: `data/fs131/iwd/scratch/A.lean` (the leaf as developed, iteration only).

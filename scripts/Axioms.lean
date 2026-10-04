@@ -2574,6 +2574,34 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.exists_merge_at
 #print axioms HadwigerNelson.Plane.ArcMap.exists_woodallMerged
 
+/-! ## FS-131 Woodall's merge (job FS131-IWd) — the picture from the local data (side colours, runs, horns), the crossings a merge creates, E3-NICE's measure -/
+
+#print axioms HadwigerNelson.Plane.offDirs_add_int
+#print axioms HadwigerNelson.Plane.exists_offDirs_punctured
+#print axioms HadwigerNelson.Plane.exists_offDirs_Ioo
+#print axioms HadwigerNelson.Plane.mem_closure_offDirs_Ioo
+#print axioms HadwigerNelson.Plane.finRotate_val
+#print axioms HadwigerNelson.Plane.isoRad_pos
+#print axioms HadwigerNelson.Plane.offDirs_of_isoRad
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.eq_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.eq_of_near
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.eq_add_int
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.eq_of_Ioo
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.eq_rightCol
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.eq_leftCol
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.rightCol_eq_of
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.leftCol_eq_of
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.rightCol_of_offDirs
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.rightCol_add_int
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.leftCol_add_int
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.rightCol_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.leftCol_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.not_offDirs_of_ne
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.const_of_noChange
+#print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.noChange_of_const
+
+
 /-! ## FS-131 wave 3 (job FS131-I3b) — the implementer's added children (every one a theorem the rows rest on) -/
 
 #print axioms HadwigerNelson.Plane.sixArcs_finite
