@@ -81,6 +81,91 @@ theorem densityRatio_univ (x : ℂ) {r : ℝ} (hr : 0 < r) : densityRatio univ x
   rw [densityRatio, univ_inter]
   exact ENNReal.div_self (measure_closedBall_pos volume x hr).ne' measure_closedBall_lt_top.ne
 
+/-! ## Measurability and Tonelli (supporting lemmas for FS-131 wave 1) -/
+
+/-- `e` is continuous. -/
+theorem continuous_e : Continuous e :=
+  Complex.continuous_exp.comp (Complex.continuous_ofReal.mul continuous_const)
+
+/-- `e (θ + π) = − e θ`. -/
+theorem e_add_pi (θ : ℝ) : e (θ + π) = - e θ := by
+  rw [e_add, e_eq π]; simp
+
+/-- The pairs `(x, θ)` with `x ∈ S` and `x + e θ ∈ T`; the unit pairs of `A` are `pairSet A A`. -/
+def pairSet (S T : Set ℂ) : Set (ℂ × ℝ) := {q | q.1 ∈ S ∧ q.1 + e q.2 ∈ T}
+
+/-- The unit pairs of `A` are the pairs from `A` to `A`. -/
+theorem unitPairSet_eq_pairSet (A : Set ℂ) : unitPairSet A = pairSet A A := rfl
+
+/-- Pairs between measurable sets form a measurable set. -/
+theorem measurableSet_pairSet {S T : Set ℂ} (hS : MeasurableSet S) (hT : MeasurableSet T) :
+    MeasurableSet (pairSet S T) := by
+  have h2 : Measurable fun q : ℂ × ℝ => q.1 + e q.2 :=
+    measurable_fst.add (continuous_e.measurable.comp measurable_snd)
+  exact (measurable_fst hS).inter (h2 hT)
+
+/-- The unit pairs of a measurable set form a measurable set. -/
+theorem measurableSet_unitPairSet {A : Set ℂ} (hA : MeasurableSet A) :
+    MeasurableSet (unitPairSet A) := measurableSet_pairSet hA hA
+
+/-- The direction set `{θ | p + e θ ∈ A}` has measurable arc-length in `p`. -/
+theorem measurable_arcLength_slice {A : Set ℂ} (hA : MeasurableSet A) :
+    Measurable fun p : ℂ => arcLength {θ | p + e θ ∈ A} := by
+  have h2 : Measurable fun q : ℂ × ℝ => q.1 + e q.2 :=
+    measurable_fst.add (continuous_e.measurable.comp measurable_snd)
+  exact measurable_measure_prodMk_left (ν := arcLength) (s := {q : ℂ × ℝ | q.1 + e q.2 ∈ A}) (h2 hA)
+
+/-- Tonelli in the point: the mass of the pairs from `S` to `T` is the integral over `S` of the arc-length of
+the directions landing in `T`. -/
+theorem pairSet_measure_eq_lintegral {S T : Set ℂ} (hS : MeasurableSet S) (hT : MeasurableSet T) :
+    (volume.prod arcLength) (pairSet S T) = ∫⁻ p in S, arcLength {θ | p + e θ ∈ T} := by
+  rw [Measure.prod_apply (measurableSet_pairSet hS hT), ← lintegral_indicator hS]
+  refine lintegral_congr fun p => ?_
+  by_cases hp : p ∈ S
+  · simp only [indicator_of_mem hp]
+    congr 1
+    ext θ; simp [pairSet, hp]
+  · simp only [indicator_of_notMem hp]
+    have : Prod.mk p ⁻¹' pairSet S T = ∅ := by
+      ext θ; simp [pairSet, hp]
+    rw [this, measure_empty]
+
+/-- Tonelli in the direction: the pairs from `S` to `T` are null iff for almost every direction `θ` the points
+`x ∈ S` with `x + e θ ∈ T` are null. -/
+theorem pairSet_null_iff_ae_slice {S T : Set ℂ} (hS : MeasurableSet S) (hT : MeasurableSet T) :
+    (volume.prod arcLength) (pairSet S T) = 0 ↔
+      ∀ᵐ θ ∂arcLength, volume {x : ℂ | x ∈ S ∧ x + e θ ∈ T} = 0 := by
+  have hm : MeasurableSet (Prod.swap ⁻¹' pairSet S T) :=
+    measurable_swap (measurableSet_pairSet hS hT)
+  have h1 : (arcLength.prod volume) (Prod.swap ⁻¹' pairSet S T) = (volume.prod arcLength) (pairSet S T) :=
+    (Measure.measurePreserving_swap (μ := arcLength) (ν := volume)).measure_preimage
+      (measurableSet_pairSet hS hT).nullMeasurableSet
+  rw [← h1, Measure.measure_prod_null hm]
+  constructor
+  · intro h
+    filter_upwards [h] with θ hθ
+    simpa [pairSet] using hθ
+  · intro h
+    filter_upwards [h] with θ hθ
+    simpa [pairSet] using hθ
+
+/-- A measurable `A` has null unit pairs iff almost every direction has a null set of unit pairs. -/
+theorem unitPairsNull_iff_ae_slice {A : Set ℂ} (hA : MeasurableSet A) :
+    UnitPairsNull A ↔ ∀ᵐ θ ∂arcLength, volume {x : ℂ | x ∈ A ∧ x + e θ ∈ A} = 0 :=
+  pairSet_null_iff_ae_slice hA hA
+
+/-- Tonelli in the point, for the unit pairs. -/
+theorem unitPairs_measure_eq_lintegral {A : Set ℂ} (hA : MeasurableSet A) :
+    (volume.prod arcLength) (unitPairSet A) = ∫⁻ p in A, arcLength {θ | p + e θ ∈ A} :=
+  pairSet_measure_eq_lintegral hA hA
+
+/-- Translating by `e θ` swaps the two ends of a slice, at the opposite direction. -/
+theorem volume_slice_swap (S T : Set ℂ) (θ : ℝ) :
+    volume {x : ℂ | x ∈ S ∧ x + e θ ∈ T} = volume {x : ℂ | x ∈ T ∧ x + e (θ + π) ∈ S} := by
+  have : {x : ℂ | x ∈ S ∧ x + e θ ∈ T} = (fun x => x + e θ) ⁻¹' {x : ℂ | x ∈ T ∧ x + e (θ + π) ∈ S} := by
+    ext x; simp [e_add_pi, and_comm]
+  rw [this, measure_preimage_add_right]
+
 /-! ## Spec examples -/
 
 /-- A small disc has null unit pairs. -/
