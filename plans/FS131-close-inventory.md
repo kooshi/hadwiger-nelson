@@ -417,3 +417,18 @@ reason by the close.*
     `s = 3/20`, `t = u s`, `z₀ = e(π/6)`, `θ = 2π/3`). Item 56 ruled "the region below the graph"; the encoding took the closed region. **Ruling: make the first
     clause strict, `t < u s`** — the open region below the graph, the pieces `P` of `F̃_a` the derivation's dichotomy reads (with `x ∈ cl P`). `curvatureLeOne` and
     `semiconcaveWith` are proved with the strict form. Alternative: none live. Confidence: high. Slip, shared: the coordinator's ruling did not say "open".
+73. **FS131-I3b handed back at stage 2, harness ≈ 414k** (report on its branch; `fs131-w3` at `3012c049`, checked): **FS129-SR1-RINGBAND proved in full** — twelve
+    leaves, axioms exactly the standard three in a real audit log (Keryx's receipt: `ringband_iv`, `W_mod_six`, `exists_pair_of_abs_W_le_two` read from
+    `build/gate/axioms/20261004T083504Z-2241407.log` in the worktree); item 61 applied; SixFragment's easy half; build 440/440, only `sorry` warnings. Its
+    `scripts/Axioms.lean` had lost the `=== PURCHASED ===` banner on the branch — restored (recheck at the merge). Generalization: in (iv)/(v), one good θ with
+    `h ≠ 0` forces equal jumps at x and x + 60° (`J_eq_of_rho`, `inv_of_J_eq`). 21 left; successor FS131-I3c (`data/fs131/briefs/FS131-I3c-wave3.md`, gated PASS).
+74. **FS131-K4b handed back at stage 3 (partial), harness ≈ 472k** (report on its branch; `fs131-w4` at `daac5779`, checked): six more rows stated — FS106-L
+    (`lemmaL`, b in W), FS106-TS-T (three clauses, region-only and for arc maps), FS112-BOWTIE (an exact fragment, the wave's inhabitant of `IsHorn`,
+    `IsStuck`, `TerminalOn`; the implementer checks each tile against `tools/fs112_yb3_frags.py`), FS112-N3-PAIRS, -N3-FAIL, -N3-ANTI, -N3-END; C-DOUBLE moved
+    (`4ebc6b3c` on main, checker green). No defect. Generalization G-PAIRS: N3-PAIRS (i)–(ii) for fragments covering `B̄(u_i, 1)`. Narrowings recorded: N3-END's
+    "the chain is the single vertex" not stated (needs wave 5's stuck-chain vocabulary; no consumer in waves 4–5); N3-FAIL's "exactly" read as "only" plus
+    nonemptiness. Proposed bibliography row: Hurewicz–Wallman, *Dimension Theory* (Princeton 1941), Thm IV 2, and Lebesgue (Math. Ann. 70, 1911) — not held,
+    recalled not read; for FS131-LEB's planner to read and confirm before filing. Left: nine unit-arc items, the obligation-modeling pass, the handoff.
+75. **Order of planner launches** (Keryx): FS131-K4c (wave 4's plan finished) before FS131-W and FS131-LEB. Why: wave 4's implementer and wave 5's planner both wait
+    on wave 4's full skeleton; W and LEB are needed only at wave 9 and at wave 4's gate. Supersedes item 71's "W and LEB take the next planner slots". Confidence:
+    medium-high. Source: this commit.
