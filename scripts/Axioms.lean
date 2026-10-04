@@ -2161,6 +2161,20 @@ No native evaluation. -/
 
 #eval IO.println "=== PURCHASED ==="
 
+/-! ## FS-131 wave 3 (job FS131-I3c) — the implementer's added children and the rows' leaves -/
+
+#print axioms HadwigerNelson.Plane.lens_stepA
+#print axioms HadwigerNelson.Plane.lens_stepB
+#print axioms HadwigerNelson.Plane.re_e
+#print axioms HadwigerNelson.Plane.im_e
+#print axioms HadwigerNelson.Plane.sq_norm_eq
+#print axioms HadwigerNelson.Plane.e_mul_conj_e
+#print axioms HadwigerNelson.Plane.conj_e
+#print axioms HadwigerNelson.Plane.lens_core
+#print axioms HadwigerNelson.Plane.deriv_nonneg_of_leftmax
+#print axioms HadwigerNelson.Plane.re_conj_mul_nonneg_of_exit
+#print axioms HadwigerNelson.Plane.im_leftNormal_mul_conj
+
 /-! ## M03 — the certificate routes
 
 Each of these evaluates `LRAT.check` by `native_decide`, which is the only thing that can evaluate
