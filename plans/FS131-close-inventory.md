@@ -1924,3 +1924,25 @@ reason by the close.*
      waits for wave 2's slot; I4k's successor now). Why: wave 4 lands only when its moves do (about seven to eight sessions, item 261), so the I4 lane's six
      provable leaves are off the longest path and lose nothing by waiting one slot-turn, while QA3 audits the definitions wave 5 will build on (item 255's reason).
      Confidence: medium-high. In flight: 1 (I2n) + 1 (IC5) + 1 (IM2) + 1 (QA3) = 4.
+266. **FS131-IC5 handed back, done** (harness ≈ 510k; report `fs131-w4c`'s `data/fs131/reports/FS131-IC5.md`; commits `9988cbb8`, `f3a5c724`, `f975677b`).
+     **Held, [kernel], the standard three**: FS110-N4-STUCK `stuck_structure` (the sides clause in ruling 252's form (b), docstring rewritten), FS110-N4-PROP
+     `stuck_chain` with `stuck_neighbour`, `stuck_flip`, `stuck_step`, and ruling 252's form (a) as `stuck_structure_flanks` (which `stuck_structure` cites), with 33
+     children (`stuck_pole_N`, `flank_ne_of_doublyShadowed`, `flank_shadow_g_chart`/`_h_chart` — the old proofs moved, old statements unchanged and citing them —
+     `false_of_third_point`, `false_of_all_outType`, `region_far_of_outType`, `hasDegree_of_three_colours`). **`Contact` now has 3 `sorry`, the three moves**
+     (FS131-IM2's). **Receipt (Keryx)**: the commits exist; `build/gate/build/20261004T222053Z-2888227.log` ends "Build completed successfully (5359 jobs)", 95
+     `sorry` warnings and 0 others (the branch's own copies of `UnitArc` 17 and `BaseSteps` 7 predate I4's work); `sorry` lines by count `Contact` 3;
+     `data/fs131/ic/axioms-ic5-stage14.txt` gives the four named theorems `[propext, Classical.choice, Quot.sound]` and exactly 3 records on `sorryAx`; the first
+     hunk against `d4f946ae` is at l. 3252. **Generalization**: `region_far_of_outType` — a colour out-type at `w ∈ ω(v)` stays outside `B(w, 1)` near `v`, by one
+     intermediate-value argument along one tile, no Condition 5, no chart. **For the gate**: `stuck_structure_flanks` and `stuck_pole_N` carry structure
+     hypotheses with no model in the library (the one stuck fragment held, the bowtie, has unit arcs and fails Condition 5), as their docstrings say — the vacuity
+     scan's treatment is the merging implementer's call (item 252's note). **Slips (Keryx's, a pattern)**: IC5's brief said "four quotations" for five, and I4k's
+     "six" for seven — briefs no longer state a count of quotations. Credit: IC5 found the sides clause's defect (item 251) and proved both of ruling 252's forms.
+267. **Ruling: `fs131-w4c` merges into `fs131-w4` now, as the I4 lane's successor's first stage; the moves branch merges into `fs131-w4` later.** Choice: FS131-I4l
+     merges `fs131-w4c` (at `f975677b`) into `fs131-w4`, resolving the only two files both sides changed since `68f34f18` — `scripts/Axioms.lean` and
+     `ARCHITECTURE.md`, each by keeping both sides' additions (Keryx, `git diff --name-only` against the merge base) — checks with `tools/fs131_qa1_dupes.py` and
+     `tools/fs131_i4_stmts.py`, builds, and then proves `n3_end` (which needs `Contact`'s `woodallCone` and `exists_merge`; it may cite `exists_merge` while that is
+     still `sorry`), `UnitArc`'s five and `pair_i`. `fs131-w4m` (IM2) later merges into `fs131-w4` instead of `fs131-w4c`; its Contact hunks (the prefix deletion,
+     d4f946ae l. 26–2593) stay disjoint from IC5's (l. 3249 and below). Alternative weighed: item 236's order, merging `fs131-w4m` into `fs131-w4c` first and then
+     `fs131-w4c` into `fs131-w4` at the end. Why: the `Contact` lane is finished apart from the moves, `n3_end` waits only on this merge, and one branch carrying
+     everything but the moves leaves a single merge for the end. Confidence: medium-high — what would change it: a conflict beyond those two files (then I4l stops
+     and messages me). IC5's slot → I4l: 1 (I2n) + 1 (IM2) + 1 (QA3) + 1 (I4l) = 4.
