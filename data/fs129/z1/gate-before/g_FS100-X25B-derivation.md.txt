@@ -1,0 +1,7 @@
+entry lint
+  FAIL  no derivation entry — a result that lives only in prose has not been stated
+quotes
+  statements named in more than one place: 0
+controls
+  controls: 0  fired on their faults: 0
+GATE: FAIL (1 failure, 0 warnings)

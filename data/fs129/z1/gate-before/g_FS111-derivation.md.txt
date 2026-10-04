@@ -1,0 +1,239 @@
+entry lint
+  claim FS111-C1-UNIF: minds 2 — blind to: FS111-P's stages 2 and 5 until V0's verdicts were committed (08c4d8f3); method: V0 rasterised by pixelation with closed cells, P by a density threshold (stage 3b's correction)
+  claim FS111-C1-UNIF: prior art partly
+  claim FS111-V0-CLEAN: minds 1 — FS111-V0
+  claim FS111-V0-CLEAN: prior art partly
+  claim FS111-V0-CLOSE: minds 1 — FS111-V0
+  warn  FS111-derivation.md:53 (FS111-V0-CLOSE): prior art owed — novelty unmeasured; a standing finding
+  claim FS111-V0-CLOSE: prior art owed
+  claim FS111-C1-PW: governed by FS111-V0-CLEAN (hand, minds 1)
+  claim FS111-C1-PW: minds 2 — blind to: FS111-P's stage 2 until V0's verdicts were committed; method: V0 made the cleaning step explicit (V0-CLEAN)
+  claim FS111-C1-PW: prior art new, 2 counted queries
+  claim FS111-V0-WIGGLE: minds 1 — FS111-V0
+  claim FS111-V0-WIGGLE: prior art new, 2 counted queries
+  claim FS111-V0-WIG7: minds 1 — FS111-V0
+  claim FS111-V0-WIG7: prior art new, 2 counted queries
+  claim FS111-V0-FLIT: governed by FS111-V0-WIGGLE (hand, minds 1)
+  claim FS111-V0-FLIT: minds 1 — FS111-V0
+  claim FS111-V0-FLIT: prior art new, 2 counted queries
+  claim FS111-C1-FALS: governed by FS111-V0-WIGGLE (hand, minds 1)
+  claim FS111-C1-FALS: governed by FS111-V0-WIG7 (hand, minds 1)
+  claim FS111-C1-FALS: minds 2 — blind to: FS111-P's stage 2 until V0's verdicts were committed; method: P argued at the level of the notions, V0 by the two objects
+  claim FS111-C1-FALS: prior art new, 2 counted queries
+  claim FS111-V0-BRIDGE: governed by FS111-C1-PW (derived from, minds 2)
+  claim FS111-V0-BRIDGE: minds 1 — FS111-V0
+  claim FS111-V0-BRIDGE: prior art new, 2 counted queries
+  claim FS111-C1-GAP: governed by FS111-C1-UNIF (hand, minds 2)
+  claim FS111-C1-GAP: governed by FS111-C1-PW (derived from, minds 2)
+  claim FS111-C1-GAP: governed by FS111-V0-WIGGLE (hand, minds 1)
+  claim FS111-C1-GAP: governed by FS111-V0-WIG7 (hand, minds 1)
+  claim FS111-C1-GAP: minds 1 — FS111-V0 (the corrected statement; the gap's location is two minds, P and V0 blind)
+  claim FS111-C1-GAP: prior art new, 2 counted queries
+  claim FS111-V0-RESCALE: minds 1 — FS111-V0
+  claim FS111-V0-RESCALE: prior art new, 2 counted queries
+  claim FS111-C-SEVEN-M: governed by FS111-V0-RESCALE (hand, minds 1)
+  claim FS111-C-SEVEN-M: minds 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: V0 supplied the rescaling step P had cited to a definition
+  claim FS111-C-SEVEN-M: prior art new, 2 counted queries
+  claim FS111-C-SIX-M: governed by FS111-V0-RESCALE (hand, minds 1)
+  claim FS111-C-SIX-M: minds 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: as FS111-C-SEVEN-M
+  claim FS111-C-SIX-M: prior art new, 2 counted queries
+  claim FS111-C-REG-EQ: governed by FS111-C-SEVEN-M (derived from, minds 2)
+  claim FS111-C-REG-EQ: governed by FS111-C-SIX-M (derived from, minds 2)
+  claim FS111-C-REG-EQ: minds 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: the same vacuity, reached independently
+  claim FS111-C-REG-EQ: prior art new, 2 counted queries
+  claim FS111-C1-ROUTES: governed by FS111-C-SEVEN-M (derived from, minds 2)
+  claim FS111-C1-ROUTES: minds 2 — blind to: FS111-P's stage 2 until V0's verdicts were committed; method: V0 re-read (R) through the pixelation of FS111-C1-UNIF
+  claim FS111-C1-ROUTES: prior art new, 2 counted queries
+  claim FS111-C-FILL: minds 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: the same measure estimate (a third reading, FS111-M § 1.4, sighted of V0)
+  claim FS111-C-FILL: prior art partly
+  claim FS111-C-HULL: minds 2 — blind to: FS111-P's stage 5 until V0's verdicts were committed; method: the same interval argument; M re-derived it sighted (M-HULL1)
+  claim FS111-C-HULL: prior art partly
+  claim FS111-V0-ID1: minds 1 — FS111-V0 (FS-103's D1 is a second derivation of the tight case; whether V0 saw it first is not recorded, so it is not counted)
+  claim FS111-V0-ID1: prior art partly
+  claim FS111-M-SATC: minds 1 — FS111-M (FS111-M2-COV re-reads it, sighted)
+  claim FS111-M-SATC: prior art new, 2 counted queries
+  claim FS111-M-SLACKFREE: minds 1 — FS111-M
+  claim FS111-M-SLACKFREE: prior art new, 2 counted queries
+  claim FS111-M-R7: minds 2 — blind to: FS111-M's record until VMW's verdicts were committed (3ea1d5ab); method: M by two distance engines agreeing (its own and the frozen FS112-Y engine), VMW by hand proofs and its own exact certificates
+  claim FS111-M-R7: prior art partly, 1 counted queries
+  claim FS111-VMW-R7-MAX: minds 1 — FS111-VMW (an exact grid of 144 points, 0 exceptions, as a check)
+  claim FS111-VMW-R7-MAX: prior art partly
+  claim FS111-VMW-R7-PPLUS: minds 1 — FS111-VMW
+  claim FS111-VMW-R7-PPLUS: prior art new, 2 counted queries
+  claim FS111-M-R7-FORCE: minds 1 — FS111-M
+  claim FS111-M-R7-FORCE: prior art new, 2 counted queries
+  claim FS111-M-DEADLOCK: minds 1 — FS111-M (agreeing with W's HEXSAT (2), HEX7-RIGID and FILL-FREE and with VMW's calibration: three instruments)
+  claim FS111-M-DEADLOCK: prior art new, 2 counted queries
+  claim FS111-M-PINCH: governed by FS111-C-HULL (hand, minds 2)
+  claim FS111-M-PINCH: minds 3 — blind to: each other's records (M and W, competitors; VMW before 3ea1d5ab); method: M by M-HULL1 at density points (no partner density); W with H-DEN applying C-HULL at the partner itself; VMW with one-sidedness (H2′) — its stage-1 GAP at cusp partners withdrawn on reading M's Step 1
+  claim FS111-M-PINCH: prior art partly, 1 counted queries
+  claim FS111-M-C11: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS111-M-C11: minds 3 — blind to: each other's records, as FS111-M-PINCH; method: M from PINCH; W as W-C11 with H-DEN; VMW as VMW-HULL
+  claim FS111-M-C11: prior art partly, 1 counted queries
+  claim FS111-W-NOBEND: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-W-NOBEND: minds 2 — blind to: W's record until VMW's verdicts were committed; method: W as corollaries of W-C11, VMW from the common form
+  claim FS111-W-NOBEND: prior art partly
+  claim FS111-W-NOREP: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-W-NOREP: minds 1 — FS111-W (read sighted by VMW, who scoped it to maps)
+  claim FS111-W-NOREP: prior art new, 2 counted queries
+  claim FS111-W-HULLREG-MAPS: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-W-HULLREG-MAPS: governed by FS111-W-NOBEND (derived from, minds 2)
+  claim FS111-W-HULLREG-MAPS: governed by FS111-W-NOREP (derived from, minds 1)
+  claim FS111-W-HULLREG-MAPS: minds 1 — FS111-W (VMW agrees on the class, D9)
+  claim FS111-W-HULLREG-MAPS: prior art partly
+  claim FS111-M-EXTREME: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS111-M-EXTREME: minds 1 — FS111-M (read and checked sighted by VMW, D4)
+  claim FS111-M-EXTREME: prior art new, 2 counted queries
+  claim FS111-M-COVER-SC: governed by FS111-M-SATC (hand, minds 1)
+  claim FS111-M-COVER-SC: governed by FS111-C-HULL (hand, minds 2)
+  claim FS111-M-COVER-SC: minds 1 — FS111-M (FS111-M2-HULLC extends it, sighted; VM2 blind on HULLC)
+  claim FS111-M-COVER-SC: prior art partly
+  claim FS111-M-HALF: governed by FS111-C-HULL (hand, minds 2)
+  claim FS111-M-HALF: minds 1 — FS111-M
+  claim FS111-M-HALF: prior art new, 2 counted queries
+  claim FS111-M-POLAR: governed by FS111-M-HALF (derived from, minds 1)
+  claim FS111-M-POLAR: minds 1 — FS111-M
+  claim FS111-M-POLAR: prior art new, 2 counted queries
+  claim FS111-M-HULL2: governed by FS111-C-HULL (hand, minds 2)
+  claim FS111-M-HULL2: minds 2 — blind to: M's record until VMW's verdicts were committed; method: VMW's component form in VMW-BLOCK-EQ ("linked or apart")
+  claim FS111-M-HULL2: prior art partly
+  claim FS111-M-BLOCK-EQ: governed by FS111-M-HULL2 (derived from, minds 2)
+  claim FS111-M-BLOCK-EQ: minds 2 — blind to: M's record until VMW's verdicts were committed; method: VMW's route adds that tight block structure coincides with Cohen–Mani's
+  claim FS111-M-BLOCK-EQ: prior art partly
+  claim FS111-M-REDUCE-I: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-M-REDUCE-I: governed by FS111-V0-RESCALE (hand, minds 1)
+  claim FS111-M-REDUCE-I: minds 2 — blind to: M's record until VMW's verdicts were committed; method: VMW derived the chain from the brief's paraphrase and located its one missing step at the clause M's statement contains
+  claim FS111-M-REDUCE-I: prior art new, 2 counted queries
+  claim FS111-W-NEG: governed by FS111-V0-RESCALE (hand, minds 1)
+  claim FS111-W-NEG: minds 2 — blind to: W's record until VMW's verdicts were committed; method: W periodises the inscribed square, VMW cites row 131's disc form
+  claim FS111-W-NEG: prior art new, 2 counted queries
+  claim FS111-W-SQ9: minds 2 — blind to: W's record until VMW's verdicts were committed; method: W's checker ../tools/fs111_w_check.py, VMW's own certificates
+  claim FS111-W-SQ9: prior art new, 2 counted queries
+  claim FS111-W-HEX9: minds 2 — blind to: W's record until VMW's verdicts were committed; method: W's checker, VMW's certificates
+  claim FS111-W-HEX9: prior art new, 2 counted queries
+  claim FS111-W-KB-DIR: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS111-W-KB-DIR: minds 1 — FS111-W
+  claim FS111-W-KB-DIR: prior art new, 2 counted queries
+  claim FS111-W-LADDER: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS111-W-LADDER: minds 1 — FS111-W (FS111-M4-LADDER is the same mechanism for curved layers, derived sighted)
+  claim FS111-W-LADDER: prior art new, 2 counted queries
+  claim FS111-W-HEXSAT: governed by FS111-W-LADDER (derived from, minds 1)
+  claim FS111-W-HEXSAT: governed by FS111-W-HEX9 (computed over, minds 2)
+  claim FS111-W-HEXSAT: minds 1 — FS111-W
+  claim FS111-W-HEXSAT: prior art new, 2 counted queries
+  claim FS111-W-FILL-FREE: governed by FS111-C-FILL (hand, minds 2)
+  claim FS111-W-FILL-FREE: minds 1 — FS111-W
+  claim FS111-W-FILL-FREE: prior art new, 2 counted queries
+  claim FS111-W-HEX7-RIGID: minds 1 — FS111-W (its free-colour map sampled exactly, ../tools/fs111_w_hex7_free.py)
+  claim FS111-W-HEX7-RIGID: prior art new, 2 counted queries
+  claim FS111-W-DECO-B: minds 2 — blind to: W's record until VMW's verdicts were committed; method: two objects (VMW's squares at offsets 8/100–9/100, dmin √3/2 + 16/100), three engines agreeing on W's
+  claim FS111-W-DECO-B: prior art new, 2 counted queries
+  claim FS111-W-HX-PAIRS: minds 1 — FS111-W
+  claim FS111-W-HX-PAIRS: prior art new, 2 counted queries
+  claim FS111-W-SEA-PACK: minds 1 — FS111-W
+  claim FS111-W-SEA-PACK: prior art new, 2 counted queries
+  claim FS111-M2-COV: minds 1 — FS111-M2
+  claim FS111-M2-COV: prior art new, 2 counted queries
+  claim FS111-M2-ZERO: minds 1 — FS111-M2
+  claim FS111-M2-ZERO: prior art partly, 2 counted queries
+  claim FS111-M2-INT: governed by FS111-V0-ID1 (hand, minds 1)
+  claim FS111-M2-INT: minds 2 — blind to: M2's record until VM2's verdicts were committed (00fd646f); method: VM2-INT by the r³ measure of unit pairs between full discs
+  claim FS111-M2-INT: prior art new, 2 counted queries
+  claim FS111-M2-FIX: governed by FS111-M2-INT (derived from, minds 2)
+  claim FS111-M2-FIX: governed by FS111-M2-ZERO (hand, minds 1)
+  claim FS111-M2-FIX: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2 from VM2-INT and maximality (VM2 § 2.2)
+  claim FS111-M2-FIX: prior art new, 2 counted queries
+  claim FS111-M2-DISC7: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: M2 by hand and a 2,173-point exact grid, VM2 by exact bounds at every point (VM2-DISC7-EXACT)
+  claim FS111-M2-DISC7: prior art partly, 1 counted queries
+  claim FS111-M2-HULLC: governed by FS111-M2-FIX (derived from, minds 2)
+  claim FS111-M2-HULLC: governed by FS111-C-HULL (hand, minds 2)
+  claim FS111-M2-HULLC: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2-HULLC (exterior radius 1 per component; M2 used 1/2 for the perimeter argument); VM2 restored the dropped hypothesis of (iv)
+  claim FS111-M2-HULLC: prior art partly, 1 counted queries
+  claim FS111-M2-EXTREME-C: governed by FS111-M2-DISC7 (computed over, minds 2)
+  claim FS111-M2-EXTREME-C: minds 1 — FS111-M2 (the object checked exactly by VM2)
+  claim FS111-M2-EXTREME-C: prior art new, 2 counted queries
+  claim FS111-M2-SELCOMP: governed by FS111-M2-INT (derived from, minds 2)
+  claim FS111-M2-SELCOMP: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2-SEL by the same contact argument, reached independently
+  claim FS111-M2-SELCOMP: prior art new, 2 counted queries
+  claim FS111-M2-NOSEL: governed by FS111-M2-SELCOMP (derived from, minds 2)
+  claim FS111-M2-NOSEL: governed by FS111-M2-DISC7 (computed over, minds 2)
+  claim FS111-M2-NOSEL: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2 by exact bounds (and for DISCK7 too)
+  claim FS111-M2-NOSEL: prior art new, 2 counted queries
+  claim FS111-M2-REDUCE-C: governed by FS111-M2-INT (derived from, minds 2)
+  claim FS111-M2-REDUCE-C: governed by FS111-V0-CLOSE (hand, minds 1)
+  claim FS111-M2-REDUCE-C: governed by FS111-V0-RESCALE (hand, minds 1)
+  claim FS111-M2-REDUCE-C: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2-FACE, step by step, adding the island fill and the merged points
+  claim FS111-M2-REDUCE-C: prior art new, 2 counted queries
+  claim FS111-VM2-EQ5: governed by FS111-M2-REDUCE-C (derived from, minds 2)
+  claim FS111-VM2-EQ5: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: M2 states it (§ 2.3, § 3.2), VM2 derives it as (O1)
+  claim FS111-VM2-EQ5: prior art new, 2 counted queries
+  claim FS111-M2-INTRAD: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-M2-INTRAD: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: (i)–(ii) by two routes; (iii) completed by VM2 alone (VM2-FIN′, one mind), M2's convexity outline having a gap on E_n ∖ E_{n,p}
+  claim FS111-M2-INTRAD: prior art new, 2 counted queries
+  claim FS111-M2-REDUCE-A: governed by FS111-M2-INTRAD (derived from, minds 2)
+  claim FS111-M2-REDUCE-A: governed by FS111-M-REDUCE-I (derived from, minds 2)
+  claim FS111-M2-REDUCE-A: governed by FS111-C-SEVEN-M (derived from, minds 2)
+  claim FS111-M2-REDUCE-A: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: VM2 noticed the C-SAT-T conjunct is implied by REG-J′'s saturated hypothesis and dropped it
+  claim FS111-M2-REDUCE-A: prior art new, 2 counted queries
+  claim FS111-M2-DISCK7: minds 2 — blind to: M2's record until VM2's verdicts were committed; method: M2's hand argument and body checks, VM2's exact rebuild in the corrected orientation
+  claim FS111-M2-DISCK7: prior art partly, 1 counted queries
+  claim FS111-M2-KERSHNER: minds 1 — FS111-M2
+  claim FS111-M2-KERSHNER: prior art partly
+  claim FS111-VM2-STRIP-MID: minds 1 — FS111-VM2
+  claim FS111-VM2-STRIP-MID: prior art partly
+  claim FS111-M3-VAC: governed by FS111-M2-FIX (derived from, minds 2)
+  claim FS111-M3-VAC: minds 1 — FS111-M3
+  claim FS111-M3-VAC: prior art new, 2 counted queries
+  claim FS111-M3-HC: minds 1 — FS111-M3 (../tools/fs111_m3_honey.py: six checks, five plants firing)
+  claim FS111-M3-HC: prior art new, 2 counted queries
+  claim FS111-M3-FIN-U: governed by FS111-M3-HC (computed over, minds 1)
+  claim FS111-M3-FIN-U: minds 1 — FS111-M3
+  claim FS111-M3-FIN-U: prior art new, 2 counted queries
+  claim FS111-M3-D3: governed by FS111-M3-HC (computed over, minds 1)
+  claim FS111-M3-D3: minds 1 — FS111-M3
+  claim FS111-M3-D3: prior art new, 2 counted queries
+  claim FS111-M3-MOVE: governed by FS111-M3-HC (computed over, minds 1)
+  claim FS111-M3-MOVE: minds 1 — FS111-M3 (exact checks by ../tools/fs111_m3_honey.py)
+  claim FS111-M3-MOVE: prior art new, 2 counted queries
+  claim FS111-M3-COVER: governed by FS111-M3-MOVE (derived from, minds 1)
+  claim FS111-M3-COVER: governed by FS111-M2-COV (hand, minds 1)
+  claim FS111-M3-COVER: minds 1 — FS111-M3
+  claim FS111-M3-COVER: prior art new, 2 counted queries
+  claim FS111-M3-CASCADE: governed by FS111-M2-ZERO (hand, minds 1)
+  claim FS111-M3-CASCADE: governed by FS111-M2-COV (hand, minds 1)
+  claim FS111-M3-CASCADE: minds 1 — FS111-M3
+  claim FS111-M3-CASCADE: prior art new, 2 counted queries
+  claim FS111-M3-IRREG: minds 1 — FS111-M3
+  claim FS111-M3-IRREG: prior art new, 2 counted queries
+  claim FS111-M3-FIXCONV: governed by FS111-M3-IRREG (hand, minds 1)
+  claim FS111-M3-FIXCONV: minds 1 — FS111-M3
+  claim FS111-M3-FIXCONV: prior art new, 2 counted queries
+  claim FS111-M3-BAND: governed by FS111-M2-FIX (derived from, minds 2)
+  claim FS111-M3-BAND: minds 1 — FS111-M3
+  claim FS111-M3-BAND: prior art new, 2 counted queries
+  claim FS111-M4-LADDER: governed by FS111-M-PINCH (derived from, minds 3)
+  claim FS111-M4-LADDER: governed by FS111-M-C11 (derived from, minds 3)
+  claim FS111-M4-LADDER: governed by FS111-M2-SELCOMP (derived from, minds 2)
+  claim FS111-M4-LADDER: minds 1 — FS111-M4
+  claim FS111-M4-LADDER: prior art new, 2 counted queries
+  claim FS111-M4-CUT: governed by FS111-M4-LADDER (derived from, minds 1)
+  claim FS111-M4-CUT: governed by FS111-M2-FIX (derived from, minds 2)
+  claim FS111-M4-CUT: minds 1 — FS111-M4
+  claim FS111-M4-CUT: prior art partly, 2 counted queries
+  claim FS111-M4-HC: minds 1 — FS111-M4 (../tools/fs111_m4_rungs.py: four checks, four plants)
+  claim FS111-M4-HC: prior art new, 2 counted queries
+  claim FS111-M4-MOVE: governed by FS111-M4-LADDER (derived from, minds 1)
+  claim FS111-M4-MOVE: governed by FS111-M4-CUT (derived from, minds 1)
+  claim FS111-M4-MOVE: minds 1 — FS111-M4
+  claim FS111-M4-MOVE: prior art new, 2 counted queries
+  entries: 85  derived: 78  stalled, gapped or refuted: 7
+quotes
+  statements named in more than one place: 0
+controls
+  ok    FS111-C-HULL-SO-EXACT: printed '0'; with the fault planted ('' → '--plant vertex') it printed '1' — it fires
+  ok    FS111-M-R7-EXACT: printed '0'; with the fault planted ('' → '--plant down_mod2') it printed '1' — it fires
+  ok    FS111-W-DECO-B-EXACT: printed '=> ALL HOLD'; with the fault planted ('' → '--plant bigsq') it printed "fails ['P'] -> FIRES FOR ITS OWN REASON" — it fires
+  ok    FS111-M2-DISC7-EXACT: printed 'ALL PASS (plant = None)'; with the fault planted ('' → '--plant lat4') it printed 'ALL FAIL (plant = lat4)' — it fires
+  ok    FS111-M2-DISCK7-ORIENT: printed 'ALL PASS (plant = None)'; with the fault planted ('' → '--object disck7-m2') it printed 'ALL FAIL (object = disck7-m2, plant = No' — it fires
+  controls: 5  fired on their faults: 5
+GATE: PASS (0 failures, 1 warning)
