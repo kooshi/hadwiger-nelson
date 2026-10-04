@@ -285,8 +285,9 @@ I checked **106 definitions** that the backlog's Lean takes as hypotheses (every
 `Row130M1` and `Voronov11` apart, which are true-or-false statements, not predicates), across `main`, `fs131-w2`, `fs131-w4`, `fs131-ww`
 and `fs131-w3b`, the 24 refutation-shaped theorems first. **None is unsatisfiable on real objects, and none fails at the kind of point its
 theorems talk about** — the class of item 158 (a condition over every presentation, broken by phantom pictures) does not recur anywhere.
-**99 have a real instance named in the library or proved to exist everywhere** (correction to §3.2's estimate, recounted row by row:
-U 14, N 63, S 15 — inhabitant exists but its proof is `sorry` — H 7, D 5); for the other seven I state one by hand in §3.1.
+Recounted row by row (this replaces §3.2's estimate "U 14, N 63, S 11, H 8, D 5"): **77 have a proved, non-degenerate instance in the
+library** (14 of them proved to exist at every point of their kind), **15 have one whose proof is still `sorry`**, **5 have only a
+degenerate one**, and **7 have none named** — for those I state one by hand in §3.1.
 
 What I did find is one recurring weakness, five times: **a hypothesis whose only exhibited model lives where the theorem's other
 hypotheses fail.** That is exactly the hole item 158 came through, and the gate cannot see it. Wave 4's 29 skeleton rows read against
