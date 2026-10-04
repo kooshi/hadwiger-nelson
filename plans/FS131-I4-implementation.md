@@ -691,6 +691,32 @@ do not share one mirror; this job's is `/home/kooshi/scratch-w4h`.
 **Re-pricing**: `l60_real` (planned M–H) cost about 45k tokens, five passes, most of them on `nlinarith` heartbeats — a real-coordinate core lemma per inequality
 is the cure that worked.
 
+## Stage 20 — SAVED (FS131-I4h): N2-ENV's `n2_env_near`, `n2_env_near_away`, `n2_env_toward`; 20 `sorry` left in `BaseSteps` and `UnitArc`
+
+**The near clauses — one lens estimate, not one identity** (I4f's Stage-14 note confirmed). For `q = p − P` in the lens `B̄(e θ₁, 1) ∩ B̄(e θ₂, 1)`:
+`|q|² ≤ 2 q·e θᵢ` at each end, and `sin(θ₂ − φ) e θ₁ + sin(φ − θ₁) e θ₂ = sin ℓ · e φ` (`sin_mul_e_add_sin_mul_e`), so
+`sin ℓ · (q·e φ) ≥ (sin a + sin b)|q|²/2` (`lens_dot_ge`; `a = φ − θ₁`, `b = θ₂ − φ`). The sine gap `sin a + sin b − sin ℓ = sin a (1 − cos b) + sin b (1 − cos a)
+≥ (2/π) min(a, b) (1 − cos(ℓ/2))` (`sin_add_sin_sub_sin_ge`, Jordan's `Real.mul_le_sin`) makes the profile linear in `Δ = min(a, b)`: **toward near**, with
+`ψ = (1 − cos(ℓ/2))/π`, `(1 − s)(sin a + sin b) ≥ sin ℓ`, so `|q − (1 − s)e φ|² ≤ (1 − s)² < 1` (`n2_env_near_core`); **away near** off `B(P, r)`, with
+`ψ = min(1, c r²)/3`, `c = (1 − cos(ℓ/2))/π`: `|q − (1 + s)e φ|² ≤ (1 + s)² − (2cΔ + s) r² < 1` (`n2_env_near_away_core`). Shared: `n2_env_data`,
+`sq_norm_sub_ofReal_mul_e`.
+
+**`n2_env_toward`**, with `ψ = min(1, r/9)`, in the frame of `φ` (`x = frameX P φ p`, `y = frameY P φ p`; `frame_polar_add` puts `P + ρ e(φ + t)` at
+`(ρ cos t, ρ sin t)`), on the symmetric sub-arc `[φ − Δ, φ + Δ]`: a point in the arc's directions (`|y| cos Δ ≤ x sin Δ`) is covered by the ring point in its own
+direction (`exists_dir_of_within`, through `arctan(y/x)`) since `0 < |p − P| ≤ 2 − s`; off them, on the side `y ≥ 0` (the other by `y ↦ −y`, `t = −Δ`), the end
+condition at `φ + Δ` and the disc give `x² + y² ≤ 72ψ² < r²` (`n2_env_toward_core`): behind (`x ≤ 0`) `|x| ≤ s`, `y sin Δ ≤ 2s`; beside (`x > 0`,
+`n2_env_toward_beside`) the direction is at least `45°` off `φ` (`toward_dir45`: `(ρ² − 2(1 − s)x)ρ² − (4U² − 4(1 − s)Ux) = (ρ² − 2U)(ρ² + 2U − 2(1 − s)x) ≥ 0`
+with `U = x cos Δ + y sin Δ ≥ x`, so `2Ux ≤ ρ²`, `x ≤ y`), and then `y (sin Δ − (1 − cos Δ)) ≤ U − x ≤ s`, `sin Δ − (1 − cos Δ) ≥ Δ/6`.
+
+**Axioms** (`data/fs131/i4/axioms-i4h-20.lean` → `axioms-i4h-20.txt`, against this stage's build's oleans, not a gate log): the three leaves and their 12 children, the
+standard three. **Records**: `tools/fs131_i4_addrecords.py` — 406 names, 12 added, 0 missing. **No statement changed** (the only lines removed from `UnitArc` are
+three `sorry`s; `n2_env_toward`'s unused binder `h12` is referenced by `have _ := h12`, the file's existing pattern, not renamed). No new axiom, no `native_decide`.
+Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T191331Z-1651956.log`; driver log
+`data/fs131/i4/build-i4h-stage20.log`): 30 distinct `declaration uses sorry` (BaseSteps 7, Contact 10, UnitArc 13), no other warning.
+
+**Re-pricing**: the three leaves (planned M–H each) cost about 60k tokens together. Every failure was `nlinarith` heartbeats in a large context, cured by a
+real-variable core lemma per inequality and explicit `mul_le_mul` steps.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;

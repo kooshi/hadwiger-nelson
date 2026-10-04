@@ -1185,13 +1185,391 @@ theorem l60_real : l60Frag.Valid ∧ l60Frag.IsRingArc 0 0 (π / 3) 0 1 ∧
 
 /-! ## FS112-N2-BENDS: N2-ENV and the whole-arc bends (FS112-BEND merged) -/
 
+/-- N2-ENV's sine gap: for `a, b > 0` with `a + b = ℓ ≤ 60°`, `sin a + sin b − sin ℓ ≥ (2/π) min(a, b) (1 − cos(ℓ/2))`. -/
+theorem sin_add_sin_sub_sin_ge {a b : ℝ} (ha : 0 < a) (hb : 0 < b) (hℓ : a + b ≤ π / 3) :
+    2 / π * min a b * (1 - Real.cos ((a + b) / 2)) ≤ Real.sin a + Real.sin b - Real.sin (a + b) := by
+  have hπ := Real.pi_pos
+  have hid : Real.sin a + Real.sin b - Real.sin (a + b) =
+      Real.sin a * (1 - Real.cos b) + Real.sin b * (1 - Real.cos a) := by rw [Real.sin_add]; ring
+  rw [hid]
+  have hsa : 0 ≤ Real.sin a := Real.sin_nonneg_of_nonneg_of_le_pi ha.le (by linarith)
+  have hsb : 0 ≤ Real.sin b := Real.sin_nonneg_of_nonneg_of_le_pi hb.le (by linarith)
+  have hca : 0 ≤ 1 - Real.cos a := by linarith [Real.cos_le_one a]
+  have hcb : 0 ≤ 1 - Real.cos b := by linarith [Real.cos_le_one b]
+  have hc0 : 0 ≤ 1 - Real.cos ((a + b) / 2) := by linarith [Real.cos_le_one ((a + b) / 2)]
+  have hmin : 0 ≤ min a b := le_min ha.le hb.le
+  -- `sin x ≥ (2/π) x` on `[0, π/2]`, and `cos` decreases on `[0, π]`
+  have hJ : ∀ x, 0 ≤ x → x ≤ π / 2 → 2 / π * x ≤ Real.sin x := fun x h0 h1 => Real.mul_le_sin h0 h1
+  rcases le_total a b with hle | hle
+  · rw [min_eq_left hle]
+    have hcos : Real.cos b ≤ Real.cos ((a + b) / 2) :=
+      Real.cos_le_cos_of_nonneg_of_le_pi (by linarith) (by linarith) (by linarith)
+    have h1 : 2 / π * a * (1 - Real.cos ((a + b) / 2)) ≤ Real.sin a * (1 - Real.cos b) :=
+      mul_le_mul (hJ a ha.le (by linarith)) (by linarith) hc0 hsa
+    nlinarith [mul_nonneg hsb hca]
+  · rw [min_eq_right hle]
+    have hcos : Real.cos a ≤ Real.cos ((a + b) / 2) :=
+      Real.cos_le_cos_of_nonneg_of_le_pi (by linarith) (by linarith) (by linarith)
+    have h1 : 2 / π * b * (1 - Real.cos ((a + b) / 2)) ≤ Real.sin b * (1 - Real.cos a) :=
+      mul_le_mul (hJ b hb.le (by linarith)) (by linarith) hc0 hsb
+    nlinarith [mul_nonneg hsa hcb]
+
+/-- `e φ` as a combination of the ends: `sin(θ₂ − φ) e θ₁ + sin(φ − θ₁) e θ₂ = sin(θ₂ − θ₁) e φ`. -/
+theorem sin_mul_e_add_sin_mul_e (θ₁ θ₂ φ : ℝ) :
+    (Real.sin (θ₂ - φ) : ℂ) * e θ₁ + (Real.sin (φ - θ₁) : ℂ) * e θ₂ = (Real.sin (θ₂ - θ₁) : ℂ) * e φ := by
+  apply Complex.ext <;>
+    simp only [Complex.add_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, re_e, im_e, Complex.add_im,
+      Complex.mul_im, zero_mul, sub_zero, add_zero, Real.sin_sub] <;> ring
+
+/-- **N2-ENV's lens estimate**: for `q` in the lens `B̄(e θ₁, 1) ∩ B̄(e θ₂, 1)` and `φ` between the ends,
+`sin(θ₂ − θ₁) · (q · e φ) ≥ (sin(φ − θ₁) + sin(θ₂ − φ)) |q|² / 2`. -/
+theorem lens_dot_ge {θ₁ θ₂ φ : ℝ} (h1 : θ₁ ≤ φ) (h2 : φ ≤ θ₂) (hℓ : θ₂ - θ₁ ≤ π) {q : ℂ} (hq1 : ‖q - e θ₁‖ ≤ 1)
+    (hq2 : ‖q - e θ₂‖ ≤ 1) :
+    (Real.sin (φ - θ₁) + Real.sin (θ₂ - φ)) * ‖q‖ ^ 2 / 2 ≤
+      Real.sin (θ₂ - θ₁) * (q.re * Real.cos φ + q.im * Real.sin φ) := by
+  have sq : ∀ z : ℂ, ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := fun z => by
+    rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]; ring
+  have hd : ∀ θ, ‖q - e θ‖ ≤ 1 → ‖q‖ ^ 2 ≤ 2 * (q.re * Real.cos θ + q.im * Real.sin θ) := by
+    intro θ h
+    have h' : ‖q - e θ‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (q - e θ)]
+    rw [sq, Complex.sub_re, Complex.sub_im, re_e, im_e] at h'
+    rw [sq]
+    nlinarith [Real.cos_sq_add_sin_sq θ]
+  have hs1 : 0 ≤ Real.sin (θ₂ - φ) := Real.sin_nonneg_of_nonneg_of_le_pi (by linarith) (by linarith)
+  have hs2 : 0 ≤ Real.sin (φ - θ₁) := Real.sin_nonneg_of_nonneg_of_le_pi (by linarith) (by linarith)
+  have hcomb := sin_mul_e_add_sin_mul_e θ₁ θ₂ φ
+  have hre := congrArg Complex.re hcomb
+  have him := congrArg Complex.im hcomb
+  simp only [Complex.add_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, re_e, im_e, Complex.add_im,
+    Complex.mul_im, zero_mul, sub_zero, add_zero] at hre him
+  have e1 := hd θ₁ hq1
+  have e2 := hd θ₂ hq2
+  have : Real.sin (θ₂ - θ₁) * (q.re * Real.cos φ + q.im * Real.sin φ) =
+      Real.sin (θ₂ - φ) * (q.re * Real.cos θ₁ + q.im * Real.sin θ₁) +
+        Real.sin (φ - θ₁) * (q.re * Real.cos θ₂ + q.im * Real.sin θ₂) := by
+    rw [mul_add, ← mul_assoc, ← mul_assoc, mul_comm (Real.sin (θ₂ - θ₁)) q.re, mul_comm (Real.sin (θ₂ - θ₁)) q.im,
+      mul_assoc, mul_assoc, ← hre, ← him]; ring
+  rw [this]
+  nlinarith [mul_le_mul_of_nonneg_left e1 hs1, mul_le_mul_of_nonneg_left e2 hs2]
+
+/-- `|q − t e φ|² = |q|² − 2t (q · e φ) + t²`. -/
+theorem sq_norm_sub_ofReal_mul_e (q : ℂ) (t φ : ℝ) :
+    ‖q - (t : ℂ) * e φ‖ ^ 2 = ‖q‖ ^ 2 - 2 * t * (q.re * Real.cos φ + q.im * Real.sin φ) + t ^ 2 := by
+  rw [← Complex.normSq_eq_norm_sq, ← Complex.normSq_eq_norm_sq, Complex.normSq_apply, Complex.normSq_apply]
+  simp only [Complex.sub_re, Complex.sub_im, Complex.re_ofReal_mul, Complex.im_ofReal_mul, re_e, im_e]
+  linear_combination t ^ 2 * Real.cos_sq_add_sin_sq φ
+
+/-- N2-ENV near, the real core: `S Q ≤ 2 L D`, `L ≤ (1 − s) S`, `0 < s < 1` give `Q − 2(1 − s) D + (1 − s)² < 1`. -/
+theorem n2_env_near_core {Q D S L s : ℝ} (hL : 0 < L) (hQ0 : 0 ≤ Q) (hSD : S * Q ≤ 2 * (L * D))
+    (hK : L ≤ (1 - s) * S) (hs : 0 < s) (hs1 : s < 1) : Q - 2 * (1 - s) * D + (1 - s) ^ 2 < 1 := by
+  have h1 : L * Q ≤ (1 - s) * S * Q := mul_le_mul_of_nonneg_right hK hQ0
+  have h2 : (1 - s) * S * Q ≤ (1 - s) * (2 * (L * D)) := by
+    rw [mul_assoc]; exact mul_le_mul_of_nonneg_left hSD (by linarith)
+  have h3 : L * Q ≤ L * (2 * (1 - s) * D) := by linarith
+  have h4 : Q ≤ 2 * (1 - s) * D := le_of_mul_le_mul_left h3 hL
+  nlinarith
+
+/-- N2-ENV near-away, the real core. -/
+theorem n2_env_near_away_core {Q D S L s c Δ r : ℝ} (hL : 0 < L) (hL1 : L ≤ 1) (hSD : S * Q ≤ 2 * (L * D))
+    (hgap : 2 * c * Δ ≤ S - L) (hs : 0 < s) (h3s : 3 * s ≤ c * r ^ 2 * Δ) (hs1 : s ≤ 1) (hc : 0 < c) (hΔ : 0 < Δ)
+    (hr : 0 < r) (hrQ : r ^ 2 ≤ Q) : Q - 2 * (1 + s) * D + (1 + s) ^ 2 < 1 := by
+  have hQ0 : 0 ≤ Q := le_trans (sq_nonneg r) hrQ
+  have h0 : 0 ≤ 2 * c * Δ := by positivity
+  have hK : (1 + 2 * c * Δ + s) * L ≤ (1 + s) * S := by
+    have h1 : 2 * c * Δ * L ≤ 2 * c * Δ := by nlinarith
+    have hSl : 0 ≤ S - L := by linarith
+    have hp := mul_nonneg hs.le hSl
+    nlinarith
+  have h1 : (1 + 2 * c * Δ + s) * L * Q ≤ (1 + s) * S * Q := mul_le_mul_of_nonneg_right hK hQ0
+  have h2 : (1 + s) * S * Q ≤ (1 + s) * (2 * (L * D)) := by
+    rw [mul_assoc]; exact mul_le_mul_of_nonneg_left hSD (by linarith)
+  have h3 : L * ((1 + 2 * c * Δ + s) * Q) ≤ L * (2 * (1 + s) * D) := by linarith
+  have hQ : (1 + 2 * c * Δ + s) * Q ≤ 2 * (1 + s) * D := le_of_mul_le_mul_left h3 hL
+  have hcoef : 0 ≤ 2 * c * Δ + s := by positivity
+  have h4 : (2 * c * Δ + s) * r ^ 2 ≤ (2 * c * Δ + s) * Q := mul_le_mul_of_nonneg_left hrQ hcoef
+  have hmain : 2 * s + s ^ 2 < (2 * c * Δ + s) * r ^ 2 := by
+    have : 0 < c * r ^ 2 * Δ := by positivity
+    nlinarith
+  calc Q - 2 * (1 + s) * D + (1 + s) ^ 2 ≤ Q - (1 + 2 * c * Δ + s) * Q + (1 + s) ^ 2 := by linarith
+    _ = (1 + s) ^ 2 - (2 * c * Δ + s) * Q := by ring
+    _ ≤ (1 + s) ^ 2 - (2 * c * Δ + s) * r ^ 2 := by linarith
+    _ < 1 := by linarith
+
+/-- The arc data of N2-ENV: for `φ` strictly inside `(θ₁, θ₂)` with `ℓ = θ₂ − θ₁ ≤ 60°`, the sine gap and the lens estimate of a point
+of the lens of the ends about `P`. -/
+theorem n2_env_data (P : ℂ) {θ₁ θ₂ φ : ℝ} (hℓ : θ₂ - θ₁ ≤ π / 3) (hφ : φ ∈ Ioo θ₁ θ₂) {p : ℂ}
+    (hp : p ∈ closedBall (ringPt P θ₁) 1 ∩ closedBall (ringPt P θ₂) 1) :
+    2 / π * min (φ - θ₁) (θ₂ - φ) * (1 - Real.cos ((θ₂ - θ₁) / 2)) ≤
+        Real.sin (φ - θ₁) + Real.sin (θ₂ - φ) - Real.sin (θ₂ - θ₁) ∧
+      (Real.sin (φ - θ₁) + Real.sin (θ₂ - φ)) * ‖p - P‖ ^ 2 ≤
+        2 * (Real.sin (θ₂ - θ₁) * ((p - P).re * Real.cos φ + (p - P).im * Real.sin φ)) := by
+  have hπ := Real.pi_pos
+  obtain ⟨hp1, hp2⟩ := hp
+  have ha0 : 0 < φ - θ₁ := by linarith [hφ.1]
+  have hb0 : 0 < θ₂ - φ := by linarith [hφ.2]
+  have hgap := sin_add_sin_sub_sin_ge ha0 hb0 (by linarith)
+  rw [show φ - θ₁ + (θ₂ - φ) = θ₂ - θ₁ by ring] at hgap
+  refine ⟨hgap, ?_⟩
+  have hq1 : ‖(p - P) - e θ₁‖ ≤ 1 := by
+    rw [mem_closedBall, dist_eq_norm, ringPt, show p - (P + e θ₁) = (p - P) - e θ₁ by ring] at hp1; exact hp1
+  have hq2 : ‖(p - P) - e θ₂‖ ≤ 1 := by
+    rw [mem_closedBall, dist_eq_norm, ringPt, show p - (P + e θ₂) = (p - P) - e θ₂ by ring] at hp2; exact hp2
+  have hL := lens_dot_ge hφ.1.le hφ.2.le (by linarith) hq1 hq2
+  linarith
+
+/-- N2-ENV toward's angle step: with `U ≥ x > 0` (`U = x cos Δ + y sin Δ`), `x² + y² ≥ 2U` and the disc `x² + y² ≤ 2(1 − s)x + 2s − s²`,
+the direction is at least `45°` off the centre: `x ≤ y`. -/
+theorem toward_dir45 {x y U s : ℝ} (hx : 0 < x) (hy : 0 ≤ y) (hUx : x ≤ U) (hs : 0 < s)
+    (hunc : 2 * U ≤ x ^ 2 + y ^ 2) (hdisc : x ^ 2 + y ^ 2 ≤ 2 * (1 - s) * x + 2 * s - s ^ 2) : x ≤ y := by
+  have hU0 : 0 ≤ U := by linarith
+  have hρ0 : 0 ≤ x ^ 2 + y ^ 2 := by positivity
+  have hdiff : ((x ^ 2 + y ^ 2) - 2 * (1 - s) * x) * (x ^ 2 + y ^ 2) - (4 * U ^ 2 - 4 * (1 - s) * U * x) =
+      ((x ^ 2 + y ^ 2) - 2 * U) * ((x ^ 2 + y ^ 2) + 2 * U - 2 * (1 - s) * x) := by ring
+  have hA : 0 ≤ (x ^ 2 + y ^ 2) - 2 * U := by linarith
+  have hsx : (1 - s) * x ≤ x := by nlinarith
+  have hB : 0 ≤ (x ^ 2 + y ^ 2) + 2 * U - 2 * (1 - s) * x := by linarith
+  have h1 := mul_nonneg hA hB
+  have h2 : ((x ^ 2 + y ^ 2) - 2 * (1 - s) * x) * (x ^ 2 + y ^ 2) ≤ (2 * s) * (x ^ 2 + y ^ 2) :=
+    mul_le_mul_of_nonneg_right (by nlinarith) hρ0
+  have hkey : 4 * U ^ 2 - 4 * (1 - s) * U * x ≤ 2 * s * (x ^ 2 + y ^ 2) := by linarith
+  have hUU : U * x ≤ U * U := mul_le_mul_of_nonneg_left hUx hU0
+  have h3 : s * (2 * (U * x)) ≤ s * (x ^ 2 + y ^ 2) := by nlinarith
+  have h4 : 2 * (U * x) ≤ x ^ 2 + y ^ 2 := le_of_mul_le_mul_left h3 hs
+  have hxx : x * x ≤ U * x := mul_le_mul_of_nonneg_right hUx hx.le
+  have h5 : x ^ 2 ≤ y ^ 2 := by nlinarith
+  by_contra h
+  push Not at h
+  have := mul_lt_mul'' h h hy hy
+  nlinarith
+
+/-- N2-ENV toward, the real core beside the arc (`x > 0`, `y ≥ 0`, direction beyond `Δ`). -/
+theorem n2_env_toward_beside {x y s Δ ψ : ℝ} (hΔ : 0 < Δ) (hΔ6 : Δ ≤ π / 6) (hs : 0 < s) (hsψ : s ≤ ψ * Δ)
+    (hy : 0 ≤ y) (hdisc : x ^ 2 + y ^ 2 ≤ 2 * (1 - s) * x + 2 * s - s ^ 2)
+    (hunc : 2 * (x * Real.cos Δ + y * Real.sin Δ) ≤ x ^ 2 + y ^ 2) (hdir : x * Real.sin Δ < y * Real.cos Δ) (hx : 0 < x) :
+    x ^ 2 + y ^ 2 ≤ 72 * ψ ^ 2 := by
+  have hπ := Real.pi_pos
+  have hπ4 := Real.pi_le_four
+  have hcos : 0 < Real.cos Δ := Real.cos_pos_of_mem_Ioo ⟨by linarith, by linarith⟩
+  have hcos1' : Real.cos Δ ≤ 1 := Real.cos_le_one Δ
+  have hsin0 : 0 < Real.sin Δ := Real.sin_pos_of_pos_of_lt_pi hΔ (by linarith)
+  have hsin : 2 / π * Δ ≤ Real.sin Δ := Real.mul_le_sin hΔ.le (by linarith)
+  have hcos1 : 1 - Δ ^ 2 / 2 ≤ Real.cos Δ := Real.one_sub_sq_div_two_le_cos
+  have hcs := Real.cos_sq_add_sin_sq Δ
+  have hψ : 0 ≤ ψ := by
+    by_contra h; push Not at h
+    have : ψ * Δ < 0 := mul_neg_of_neg_of_pos h hΔ
+    linarith
+  have hUx : x ≤ x * Real.cos Δ + y * Real.sin Δ := by
+    have h1 : x * Real.sin Δ ^ 2 ≤ y * Real.sin Δ * Real.cos Δ := by
+      have := mul_le_mul_of_nonneg_left hdir.le hsin0.le
+      linarith [this]
+    have e2 : x * Real.cos Δ ^ 2 + x * Real.sin Δ ^ 2 = x := by rw [← mul_add, hcs, mul_one]
+    have h3 : 0 ≤ x * (1 - Real.cos Δ) := mul_nonneg hx.le (by linarith)
+    have : 0 ≤ (x * Real.cos Δ + y * Real.sin Δ - x) * Real.cos Δ := by
+      have e : (x * Real.cos Δ + y * Real.sin Δ - x) * Real.cos Δ =
+          x * Real.cos Δ ^ 2 + y * Real.sin Δ * Real.cos Δ - x * Real.cos Δ := by ring
+      rw [e]; linarith
+    exact sub_nonneg.mp (nonneg_of_mul_nonneg_left this hcos)
+  have hxy : x ≤ y := toward_dir45 hx hy hUx hs hunc hdisc
+  have hUle : x * Real.cos Δ + y * Real.sin Δ - x ≤ s := by
+    have hsx : 0 ≤ s * x := mul_nonneg hs.le hx.le
+    have : s ^ 2 ≥ 0 := sq_nonneg s
+    linarith
+  have hgap : Δ / 6 ≤ Real.sin Δ - (1 - Real.cos Δ) := by
+    have h1 : Δ ^ 2 / 2 ≤ Δ * (1 / 3) := by
+      have : Δ ≤ 2 / 3 := by linarith
+      have := mul_le_mul_of_nonneg_left this hΔ.le
+      linarith
+    have h2 : Δ * (1 / 2) ≤ 2 / π * Δ := by
+      rw [show 2 / π * Δ = Δ * (2 / π) by ring]
+      exact mul_le_mul_of_nonneg_left (by rw [le_div_iff₀ hπ]; linarith) hΔ.le
+    linarith
+  have hyb : y * (Δ / 6) ≤ s := by
+    have h1 : y * (Real.sin Δ - (1 - Real.cos Δ)) ≤ x * Real.cos Δ + y * Real.sin Δ - x := by
+      have : y * (Real.cos Δ - 1) ≤ x * (Real.cos Δ - 1) := mul_le_mul_of_nonpos_right hxy (by linarith)
+      linarith
+    have := mul_le_mul_of_nonneg_left hgap hy
+    linarith
+  have hy6 : y ≤ 6 * ψ := by
+    have : y * (Δ / 6) ≤ (6 * ψ) * (Δ / 6) := by
+      have : (6 * ψ) * (Δ / 6) = ψ * Δ := by ring
+      linarith
+    exact le_of_mul_le_mul_right this (by positivity)
+  have hyy : y * y ≤ (6 * ψ) * (6 * ψ) := mul_le_mul hy6 hy6 hy (by positivity)
+  have hxx : x * x ≤ y * y := mul_le_mul hxy hxy hx.le hy
+  nlinarith
+
+/-- N2-ENV toward, the real core on one side (`y ≥ 0`), off the arc's directions: a point of `B̄(1 − s, 1)` (in the frame of `φ`)
+farther than `1` from `e Δ` lies within `√72 ψ` of `0` when `s ≤ ψ Δ`. -/
+theorem n2_env_toward_core {x y s Δ ψ : ℝ} (hΔ : 0 < Δ) (hΔ6 : Δ ≤ π / 6) (hs : 0 < s) (hsψ : s ≤ ψ * Δ) (hs1 : s < 1) (hy : 0 ≤ y)
+    (hdisc : x ^ 2 + y ^ 2 ≤ 2 * (1 - s) * x + 2 * s - s ^ 2)
+    (hunc : 2 * (x * Real.cos Δ + y * Real.sin Δ) ≤ x ^ 2 + y ^ 2) (hdir : x * Real.sin Δ < y * Real.cos Δ) :
+    x ^ 2 + y ^ 2 ≤ 72 * ψ ^ 2 := by
+  have hπ := Real.pi_pos
+  have hπ4 := Real.pi_le_four
+  have hcos : 0 < Real.cos Δ := Real.cos_pos_of_mem_Ioo ⟨by linarith, by linarith⟩
+  have hsin : 2 / π * Δ ≤ Real.sin Δ := Real.mul_le_sin hΔ.le (by linarith)
+  have hcos1 : 1 - Δ ^ 2 / 2 ≤ Real.cos Δ := Real.one_sub_sq_div_two_le_cos
+  have hcs := Real.cos_sq_add_sin_sq Δ
+  have hψ : 0 ≤ ψ := by
+    by_contra h; push Not at h; nlinarith
+  -- `x ≥ −s` from the disc
+  have hxs : -s ≤ x := by nlinarith [sq_nonneg y, sq_nonneg (x - (1 - s) + 1)]
+  rcases le_or_gt x 0 with hx | hx
+  · -- behind: `y sin Δ ≤ 2s`
+    have h1 : y * Real.sin Δ ≤ 2 * s := by
+      have : x * (1 - s - Real.cos Δ) ≤ s := by
+        have ha : |1 - s - Real.cos Δ| ≤ 1 := by
+          rw [abs_le]; constructor <;> nlinarith [Real.cos_le_one Δ]
+        have hb : |x| ≤ s := by rw [abs_le]; constructor <;> linarith
+        calc x * (1 - s - Real.cos Δ) ≤ |x * (1 - s - Real.cos Δ)| := le_abs_self _
+          _ = |x| * |1 - s - Real.cos Δ| := abs_mul _ _
+          _ ≤ s * 1 := mul_le_mul hb ha (abs_nonneg _) hs.le
+          _ = s := mul_one s
+      nlinarith
+    have hy' : y ≤ π * ψ := by
+      have h2 : y * (2 / π * Δ) ≤ 2 * (ψ * Δ) := by nlinarith [mul_le_mul_of_nonneg_left hsin hy]
+      have h3 : y * (2 / π * Δ) = (2 * Δ / π) * y := by ring
+      have h4 : 2 * (ψ * Δ) = (2 * Δ / π) * (π * ψ) := by field_simp
+      rw [h3, h4] at h2
+      exact le_of_mul_le_mul_left h2 (by positivity)
+    have hx' : x ^ 2 ≤ ψ ^ 2 := by
+      have : s ≤ ψ := by nlinarith
+      nlinarith
+    have hπ2 : π ^ 2 ≤ 16 := by nlinarith
+    nlinarith [mul_le_mul hy' hy' hy (by positivity : 0 ≤ π * ψ)]
+  · exact n2_env_toward_beside hΔ hΔ6 hs hsψ hy hdisc hunc hdir hx
+
+/-- Frame coordinates of a point given in polar form about the frame's origin: `v + ρ e(α + t)` is at `(ρ cos t, ρ sin t)`. -/
+theorem frame_polar_add (v : ℂ) (α ρ t : ℝ) :
+    frameX v α (v + (ρ : ℂ) * e (α + t)) = ρ * Real.cos t ∧ frameY v α (v + (ρ : ℂ) * e (α + t)) = ρ * Real.sin t := by
+  have h : (v + (ρ : ℂ) * e (α + t) - v) * starRingEnd ℂ (e α) = (ρ : ℂ) * e t := by
+    rw [e_add]
+    calc _ = (ρ : ℂ) * e t * (e α * starRingEnd ℂ (e α)) := by ring
+      _ = _ := by rw [conj_e_mul_e, mul_one]
+  unfold frameX frameY
+  rw [h]
+  simp [re_e, im_e]
+
+/-- A point at angle `|t| ≤ Δ` off `φ` and distance in `(0, 2)` from the centre is within `< 1` of the ring point in its direction:
+in frame coordinates, for `x sin Δ ≥ |y| cos Δ`, `0 < x² + y²`, some `|t| ≤ Δ` has `x cos t + y sin t = √(x² + y²)`. -/
+theorem exists_dir_of_within {x y Δ : ℝ} (hΔ : 0 < Δ) (hΔ2 : Δ < π / 2) (h : |y| * Real.cos Δ ≤ x * Real.sin Δ)
+    (h0 : 0 < x ^ 2 + y ^ 2) : ∃ t, |t| ≤ Δ ∧ x * Real.cos t + y * Real.sin t = √(x ^ 2 + y ^ 2) := by
+  have hcos : 0 < Real.cos Δ := Real.cos_pos_of_mem_Ioo ⟨by linarith, hΔ2⟩
+  have hsin : 0 < Real.sin Δ := Real.sin_pos_of_pos_of_lt_pi hΔ (by linarith)
+  have hx : 0 < x := by
+    rcases lt_trichotomy x 0 with hx | hx | hx
+    · nlinarith [abs_nonneg y, mul_nonneg (abs_nonneg y) hcos.le]
+    · rw [hx, zero_mul] at h
+      have hy : |y| = 0 := le_antisymm (by nlinarith [abs_nonneg y]) (abs_nonneg y)
+      rw [abs_eq_zero] at hy; rw [hx, hy] at h0; norm_num at h0
+    · exact hx
+  refine ⟨Real.arctan (y / x), ?_, ?_⟩
+  · have htan : |y / x| ≤ Real.tan Δ := by
+      rw [Real.tan_eq_sin_div_cos, abs_div, abs_of_pos hx, div_le_div_iff₀ hx hcos]; linarith
+    rw [abs_le] at htan ⊢
+    have hmono := Real.arctan_strictMono.monotone
+    have h1 := hmono htan.2
+    have h2 := hmono htan.1
+    rw [Real.arctan_tan (by linarith) hΔ2] at h1
+    rw [Real.arctan_neg, Real.arctan_tan (by linarith) hΔ2] at h2
+    exact ⟨h2, h1⟩
+  · rw [Real.cos_arctan, Real.sin_arctan]
+    have hs : 0 < √(1 + (y / x) ^ 2) := Real.sqrt_pos.2 (by positivity)
+    have hq : √(x ^ 2 + y ^ 2) = x * √(1 + (y / x) ^ 2) := by
+      rw [show x ^ 2 + y ^ 2 = x ^ 2 * (1 + (y / x) ^ 2) by field_simp, Real.sqrt_mul (sq_nonneg x),
+        Real.sqrt_sq hx.le]
+    rw [hq]
+    field_simp
+    ring_nf
+    rw [Real.sq_sqrt (by positivity)]
+    field_simp
+
 /-- **FS112-N2-BENDS**, N2-ENV toward: for a closed arc `ᾱ = r([θ₁, θ₂])` of `ω(P)` with `0 < ℓ ≤ 60°` and every `r > 0` there is a
 lens profile `ψ > 0` such that, for every toward lens point `z = P + (1 − s) e(φ)` with `φ` interior and `0 < s ≤ ψ·Δ(φ)` (`Δ` the angular
 distance to the nearer end), the part of `B̄(z, 1)` not within `< 1` of some point of `ᾱ` lies in `B(P, r)`. -/
 theorem n2_env_toward (P : ℂ) {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂) (hℓ : θ₂ - θ₁ ≤ π / 3) {r : ℝ} (hr : 0 < r) :
     ∃ ψ > 0, ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ * min (φ - θ₁) (θ₂ - φ) →
       closedBall (P + (1 - s) * e φ) 1 \ ⋃ θ ∈ Icc θ₁ θ₂, ball (ringPt P θ) 1 ⊆ ball P r := by
-  sorry
+  have _ := h12
+  have hπ := Real.pi_pos
+  refine ⟨min 1 (r / 9), by positivity, fun φ hφ s hs hsψ p hp => ?_⟩
+  obtain ⟨hp1, hp2⟩ := hp
+  simp only [mem_iUnion, not_exists] at hp2
+  set Δ := min (φ - θ₁) (θ₂ - φ) with hΔdef
+  have hΔ0 : 0 < Δ := lt_min (by linarith [hφ.1]) (by linarith [hφ.2])
+  have hΔ6 : Δ ≤ π / 6 := by
+    rcases le_total (φ - θ₁) (θ₂ - φ) with h | h <;> simp only [hΔdef, h, min_eq_left, min_eq_right] <;> linarith
+  have hψ1 : min 1 (r / 9) ≤ 1 := min_le_left _ _
+  have hs1 : s < 1 := by
+    have : min 1 (r / 9) * Δ ≤ 1 * (π / 6) := mul_le_mul hψ1 hΔ6 hΔ0.le zero_le_one
+    linarith [Real.pi_le_four]
+  set x := frameX P φ p with hx
+  set y := frameY P φ p with hy
+  have hdist : ∀ ρ t : ℝ, dist p (P + (ρ : ℂ) * e (φ + t)) ^ 2 = (x - ρ * Real.cos t) ^ 2 + (y - ρ * Real.sin t) ^ 2 := by
+    intro ρ t
+    rw [sq_dist_frame P φ, (frame_polar_add P φ ρ t).1, (frame_polar_add P φ ρ t).2]
+  have hdisc : x ^ 2 + y ^ 2 ≤ 2 * (1 - s) * x + 2 * s - s ^ 2 := by
+    have h1 := hdist (1 - s) 0
+    rw [add_zero, Real.cos_zero, Real.sin_zero] at h1
+    push_cast at h1
+    have h2 : dist p (P + (1 - (s : ℂ)) * e φ) ^ 2 ≤ 1 := by
+      have := mem_closedBall.mp hp1
+      nlinarith [dist_nonneg (x := p) (y := P + (1 - (s : ℂ)) * e φ)]
+    nlinarith
+  have hunc : ∀ t, |t| ≤ Δ → 2 * (x * Real.cos t + y * Real.sin t) ≤ x ^ 2 + y ^ 2 := by
+    intro t ht
+    rw [abs_le] at ht
+    have hmem : φ + t ∈ Icc θ₁ θ₂ := ⟨by linarith [min_le_left (φ - θ₁) (θ₂ - φ)], by
+      linarith [min_le_right (φ - θ₁) (θ₂ - φ)]⟩
+    have h1 := hp2 (φ + t) hmem
+    rw [mem_ball, not_lt] at h1
+    have h2 := hdist 1 t
+    rw [Complex.ofReal_one, one_mul] at h2
+    have h3 : 1 ≤ dist p (ringPt P (φ + t)) ^ 2 := by nlinarith
+    rw [ringPt] at h3
+    rw [h2] at h3
+    nlinarith [Real.cos_sq_add_sin_sq t]
+  have hnorm : dist p P ^ 2 = x ^ 2 + y ^ 2 := by rw [dist_eq_norm, ← frame_normSq P φ p]
+  rw [mem_ball]
+  have hψ : min 1 (r / 9) ≤ r / 9 := min_le_right _ _
+  have hψ0 : 0 < min 1 (r / 9) := by positivity
+  have hbound : x ^ 2 + y ^ 2 < r ^ 2 := by
+    by_cases hw : |y| * Real.cos Δ ≤ x * Real.sin Δ
+    · -- within the arc's directions: covered unless `p = P`
+      by_cases h0 : x ^ 2 + y ^ 2 = 0
+      · rw [h0]; positivity
+      have h0' : 0 < x ^ 2 + y ^ 2 := lt_of_le_of_ne (by positivity) (Ne.symm h0)
+      obtain ⟨t, ht, hxt⟩ := exists_dir_of_within hΔ0 (by linarith) hw h0'
+      have h1 := hunc t ht
+      rw [hxt] at h1
+      set ρ := √(x ^ 2 + y ^ 2) with hρ
+      have hρ0 : 0 < ρ := Real.sqrt_pos.2 h0'
+      have hρ2 : ρ ^ 2 = x ^ 2 + y ^ 2 := Real.sq_sqrt h0'.le
+      have hxρ : x ≤ ρ := by
+        have := Real.sqrt_le_sqrt (show x ^ 2 ≤ x ^ 2 + y ^ 2 by nlinarith)
+        rw [Real.sqrt_sq_eq_abs] at this
+        exact (le_abs_self x).trans this
+      exfalso
+      have hge : 2 ≤ ρ := by nlinarith
+      have : ρ ^ 2 ≤ 2 * (1 - s) * ρ + 2 * s - s ^ 2 := by nlinarith
+      nlinarith
+    · push Not at hw
+      have hb : x ^ 2 + y ^ 2 ≤ 72 * min 1 (r / 9) ^ 2 := by
+        rcases le_total 0 y with hy0 | hy0
+        · rw [abs_of_nonneg hy0] at hw
+          exact n2_env_toward_core hΔ0 hΔ6 hs hsψ hs1 hy0 hdisc (hunc Δ (by rw [abs_of_pos hΔ0])) hw
+        · rw [abs_of_nonpos hy0] at hw
+          have h1 := hunc (-Δ) (by rw [abs_neg, abs_of_pos hΔ0])
+          rw [Real.cos_neg, Real.sin_neg] at h1
+          have := n2_env_toward_core (y := -y) hΔ0 hΔ6 hs hsψ hs1 (by linarith) (by nlinarith) (by nlinarith) hw
+          nlinarith
+      have : 72 * min 1 (r / 9) ^ 2 < r ^ 2 := by
+        have h1 : min 1 (r / 9) ^ 2 ≤ (r / 9) ^ 2 := pow_le_pow_left₀ hψ0.le hψ 2
+        nlinarith
+      linarith
+  rw [← hnorm] at hbound
+  exact lt_of_pow_lt_pow_left₀ 2 hr.le hbound
 
 /-- **FS112-N2-BENDS**, N2-ENV away: the same for an away lens point `z = P + (1 + s) e(φ)`, the uncovered part lying within `r` of
 the radius-2 arc `R₂(ᾱ)`. -/
@@ -1205,13 +1583,80 @@ arc's ends is within `< 1` of every toward lens point. -/
 theorem n2_env_near (P : ℂ) {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂) (hℓ : θ₂ - θ₁ ≤ π / 3) :
     ∃ ψ > 0, ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ * min (φ - θ₁) (θ₂ - φ) →
       ∀ p ∈ closedBall (ringPt P θ₁) 1 ∩ closedBall (ringPt P θ₂) 1, dist p (P + (1 - s) * e φ) < 1 := by
-  sorry
+  have hπ := Real.pi_pos
+  have hℓ0 : 0 < θ₂ - θ₁ := by linarith
+  have hcos0 : 0 ≤ Real.cos ((θ₂ - θ₁) / 2) := Real.cos_nonneg_of_mem_Icc ⟨by linarith, by linarith⟩
+  have hc : 0 < 1 - Real.cos ((θ₂ - θ₁) / 2) := by
+    have : Real.cos ((θ₂ - θ₁) / 2) < Real.cos 0 :=
+      Real.cos_lt_cos_of_nonneg_of_le_pi (le_refl 0) (by linarith) (by linarith)
+    rw [Real.cos_zero] at this; linarith
+  refine ⟨(1 - Real.cos ((θ₂ - θ₁) / 2)) / π, div_pos hc hπ, fun φ hφ s hs hsψ p hp => ?_⟩
+  obtain ⟨hgap, hSD⟩ := n2_env_data P hℓ hφ hp
+  have ha0 : 0 < φ - θ₁ := by linarith [hφ.1]
+  have hb0 : 0 < θ₂ - φ := by linarith [hφ.2]
+  have hmin0 : 0 < min (φ - θ₁) (θ₂ - φ) := lt_min ha0 hb0
+  have hmin_le : min (φ - θ₁) (θ₂ - φ) ≤ π / 6 := by
+    rcases le_total (φ - θ₁) (θ₂ - φ) with h | h <;> simp [h] <;> linarith
+  have hs1 : s < 1 := by
+    have h1 : (1 - Real.cos ((θ₂ - θ₁) / 2)) / π ≤ 1 / π := div_le_div_of_nonneg_right (by linarith) hπ.le
+    have h2 : (1 - Real.cos ((θ₂ - θ₁) / 2)) / π * min (φ - θ₁) (θ₂ - φ) ≤ 1 / π * (π / 6) :=
+      mul_le_mul h1 hmin_le hmin0.le (by positivity)
+    have h3 : 1 / π * (π / 6) = 1 / 6 := by field_simp
+    linarith
+  have hsa := Real.sin_le_one (φ - θ₁)
+  have hsb := Real.sin_le_one (θ₂ - φ)
+  have hsℓ : 0 < Real.sin (θ₂ - θ₁) := Real.sin_pos_of_pos_of_lt_pi hℓ0 (by linarith)
+  have hK : Real.sin (θ₂ - θ₁) ≤ (1 - s) * (Real.sin (φ - θ₁) + Real.sin (θ₂ - φ)) := by
+    have h2 : 2 * s ≤ 2 / π * min (φ - θ₁) (θ₂ - φ) * (1 - Real.cos ((θ₂ - θ₁) / 2)) := by
+      have : 2 / π * min (φ - θ₁) (θ₂ - φ) * (1 - Real.cos ((θ₂ - θ₁) / 2)) =
+          2 * ((1 - Real.cos ((θ₂ - θ₁) / 2)) / π * min (φ - θ₁) (θ₂ - φ)) := by ring
+      linarith
+    nlinarith
+  have hcore := n2_env_near_core hsℓ (sq_nonneg _) hSD hK hs hs1
+  rw [← sq_norm_sub_ofReal_mul_e] at hcore
+  have heq : p - (P + (1 - s) * e φ) = (p - P) - ((1 - s : ℝ) : ℂ) * e φ := by push_cast; ring
+  rw [dist_eq_norm, heq]
+  nlinarith [norm_nonneg ((p - P) - ((1 - s : ℝ) : ℂ) * e φ)]
 
 /-- **FS112-N2-BENDS**, N2-ENV's near clause, away: the same for the away lens off `B(P, r)`. -/
 theorem n2_env_near_away (P : ℂ) {θ₁ θ₂ : ℝ} (h12 : θ₁ < θ₂) (hℓ : θ₂ - θ₁ ≤ π / 3) {r : ℝ} (hr : 0 < r) :
     ∃ ψ > 0, ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ * min (φ - θ₁) (θ₂ - φ) →
       ∀ p ∈ (closedBall (ringPt P θ₁) 1 ∩ closedBall (ringPt P θ₂) 1) \ ball P r, dist p (P + (1 + s) * e φ) < 1 := by
-  sorry
+  have hπ := Real.pi_pos
+  have hℓ0 : 0 < θ₂ - θ₁ := by linarith
+  set c := (1 - Real.cos ((θ₂ - θ₁) / 2)) / π with hcdef
+  have hc : 0 < c := by
+    have : Real.cos ((θ₂ - θ₁) / 2) < Real.cos 0 :=
+      Real.cos_lt_cos_of_nonneg_of_le_pi (le_refl 0) (by linarith) (by linarith)
+    rw [Real.cos_zero] at this; exact div_pos (by linarith) hπ
+  refine ⟨min 1 (c * r ^ 2) / 3, by positivity, fun φ hφ s hs hsψ p hp => ?_⟩
+  obtain ⟨hpL, hpr⟩ := hp
+  obtain ⟨hgap, hSD⟩ := n2_env_data P hℓ hφ hpL
+  have ha0 : 0 < φ - θ₁ := by linarith [hφ.1]
+  have hb0 : 0 < θ₂ - φ := by linarith [hφ.2]
+  have hmin0 : 0 < min (φ - θ₁) (θ₂ - φ) := lt_min ha0 hb0
+  have hmin_le : min (φ - θ₁) (θ₂ - φ) ≤ π / 6 := by
+    rcases le_total (φ - θ₁) (θ₂ - φ) with h | h <;> simp [h] <;> linarith
+  have hs1 : s ≤ 1 := by
+    have h1 : min 1 (c * r ^ 2) / 3 * min (φ - θ₁) (θ₂ - φ) ≤ 1 / 3 * (π / 6) :=
+      mul_le_mul (by linarith [min_le_left 1 (c * r ^ 2)]) hmin_le hmin0.le (by norm_num)
+    linarith [Real.pi_le_four]
+  have h3s : 3 * s ≤ c * r ^ 2 * min (φ - θ₁) (θ₂ - φ) := by
+    have := mul_le_mul_of_nonneg_right (min_le_right 1 (c * r ^ 2)) hmin0.le
+    linarith
+  have hgap' : 2 * c * min (φ - θ₁) (θ₂ - φ) ≤
+      Real.sin (φ - θ₁) + Real.sin (θ₂ - φ) - Real.sin (θ₂ - θ₁) := by
+    have : 2 / π * min (φ - θ₁) (θ₂ - φ) * (1 - Real.cos ((θ₂ - θ₁) / 2)) = 2 * c * min (φ - θ₁) (θ₂ - φ) := by
+      rw [hcdef]; field_simp
+    linarith
+  have hsℓ : 0 < Real.sin (θ₂ - θ₁) := Real.sin_pos_of_pos_of_lt_pi hℓ0 (by linarith)
+  have hqr : r ^ 2 ≤ ‖p - P‖ ^ 2 := by
+    rw [mem_ball, not_lt, dist_eq_norm] at hpr; exact pow_le_pow_left₀ hr.le hpr 2
+  have hcore := n2_env_near_away_core hsℓ (Real.sin_le_one _) hSD hgap' hs h3s hs1 hc hmin0 hr hqr
+  rw [← sq_norm_sub_ofReal_mul_e] at hcore
+  have heq : p - (P + (1 + s) * e φ) = (p - P) - ((1 + s : ℝ) : ℂ) * e φ := by push_cast; ring
+  rw [dist_eq_norm, heq]
+  nlinarith [norm_nonneg ((p - P) - ((1 + s : ℝ) : ℂ) * e φ)]
 
 /-- `C₂(ᾱ)` (FS112-N2-TAN): the angles of the closed arc whose radius-2 point lies in the closure of the colour `c`'s class. -/
 def r2Contacts (P : ℂ) (θ₁ θ₂ : ℝ) (c : Fin k) : Set ℝ := {θ ∈ Icc θ₁ θ₂ | P + 2 * e θ ∈ closure (F.region c)}
