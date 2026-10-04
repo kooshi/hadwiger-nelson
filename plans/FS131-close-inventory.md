@@ -795,3 +795,11 @@ reason by the close.*
 133. **Brief FS131-I3g, wave 3's seventh implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I3g-wave3.md`, gated PASS): `localSectors` first,
      messaged on commit; then `four_of_bothKind`, `flank_edge_exists`, and the `SixFragment` leaves as context allows. Launched in I3f's half slot: 0.5 (IW) +
      0.5 (I2g) + 0.5 (I4b) + 0.5 (I3g) + 1 (E2) = 3. Kooshi's model decision (item 129) would apply to the next wave-3 successor.
+134. **Statement defect (a Lean slip) — the Dyadic statements drop "i ∉ F"** (FS131-I2g, message 2026-10-04; `Arith/Dyadic`): `hi : ∃ ι : L, ι ^ 2 = -1` with
+     `finrank F L = 2` lets `L` be any quadratic extension when `i ∈ F`. Counterexamples: `sqrt3_dyadic` at `F = ℚ(ζ₁₂)`, `L = F(√2) = ℚ(ζ₂₄)`, `P` above 2 (`L/F`
+     ramified there); `exists_root_quadratic` at `F = ℚ(i)`, `L = F(√2)`, `s = 1`, `d = 2`, `δ = 2` (`γ = −1 + i ∈ F`). Keryx's receipt: the ramification index
+     of 2 is `φ(8) = 4` in `ℚ(ζ₂₄)` and `φ(4) = 2` in `ℚ(ζ₁₂)`, so `L/F` is ramified at `P`; and `sqrt3_dyadic`'s own docstring (`Arith/Dyadic.lean` line 314)
+     reads "if `√3 ∈ F` and `i ∉ F`" — the row's hypothesis, dropped from the formal statement. **Ruling**: `hi` becomes `∃ ι : L, ι ^ 2 = -1 ∧ ι ∉ Set.range
+     (algebraMap F L)` in `exists_root_quadratic`, `dyadicConclusion_of_coeffs`, `sqrt3_local_of_congr`, `sqrt3_local` and `sqrt3_dyadic` (with finrank 2 it makes
+     `L = F(i)`, the row's reading). Alternative weighed: state `L` as `F⟮ι⟯` explicitly. Why not: the implementer's form is the smallest change and says the
+     same. Confidence: high. No hand result changes; credit I2g.

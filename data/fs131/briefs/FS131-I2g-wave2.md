@@ -88,3 +88,10 @@ exit 75 wait ten minutes and retry. `lake env lean` is for iteration only, never
 it with a symlink — two trees compiling into one build race on the same compiled files.
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2026-10-04 (Keryx) — the Dyadic statements, ruled
+
+Your finding is ruled as `plans/FS131-close-inventory.md` item 134. In `.claude/worktrees/fs131-w2/Proofs/HadwigerNelson/Arith/Dyadic.lean`, the hypothesis
+`hi` becomes `∃ ι : L, ι ^ 2 = -1 ∧ ι ∉ Set.range (algebraMap F L)` in exactly five declarations — `exists_root_quadratic`, `dyadicConclusion_of_coeffs`,
+`sqrt3_local_of_congr`, `sqrt3_local` and `sqrt3_dyadic` — with their docstrings saying so and the item number, and the change recorded in your record. Nothing
+else changes, and you still start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
