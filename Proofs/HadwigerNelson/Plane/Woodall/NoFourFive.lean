@@ -1182,6 +1182,81 @@ theorem SectorsAt.exists_parabola_region (hP : F.IsPlaneMap) {v : ℂ} {n : ℕ}
   · exact Or.inr hi'.symm
   · exact Or.inl hi'.symm
 
+/-- Carrying a collar on one side about an angle is stable under intersection. -/
+theorem _root_.HadwigerNelson.Plane.CollarAt.inter {S T : Set ℂ} {u : ℂ} {s : Rim} {θ : ℝ} (hS : CollarAt S u s θ) (hT : CollarAt T u s θ) :
+    CollarAt (S ∩ T) u s θ := by
+  obtain ⟨h₁, hh₁, hs⟩ := hS
+  obtain ⟨h₂, hh₂, ht⟩ := hT
+  refine ⟨min h₁ h₂, lt_min hh₁ hh₂, fun z hz => ⟨hs ?_, ht ?_⟩⟩
+  · exact collar_subset_collar u s (by linarith [min_le_left h₁ h₂]) (by linarith [min_le_left h₁ h₂]) (min_le_left _ _) hz
+  · exact collar_subset_collar u s (by linarith [min_le_right h₁ h₂]) (by linarith [min_le_right h₁ h₂]) (min_le_right _ _) hz
+
+/-- A direction just below the end of the sector before `i`, as seen from `d i.castSucc` (mod `2π`): E1-RAY's `γ` for the previous sector. -/
+theorem SectorsAt.exists_prev_dir {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c)
+    (hpos : ∀ j : Fin n, 0 < d j.succ - d j.castSucc) (i : Fin n) :
+    ∃ δ : ℝ, 0 < δ ∧ δ ≤ 1 / 2 ∧ ∃ γ ∈ Ioo (d ((finRotate n).symm i).castSucc) (d ((finRotate n).symm i).succ),
+      ∀ ψ : ℝ, Real.cos (γ - ψ) = Real.cos (d i.castSucc - δ - ψ) := by
+  set j := (finRotate n).symm i with hj
+  have hw := hpos j
+  set δ := min (d j.succ - d j.castSucc) (1 / 2) / 2 with hδ
+  have hδ0 : 0 < δ := by rw [hδ]; have := lt_min hw (by norm_num : (0 : ℝ) < 1 / 2); linarith
+  have hδ1 : δ ≤ 1 / 2 := by rw [hδ]; have := min_le_right (d j.succ - d j.castSucc) (1 / 2); linarith
+  have hδ2 : δ < d j.succ - d j.castSucc := by
+    rw [hδ]; have := min_le_left (d j.succ - d j.castSucc) (1 / 2); linarith
+  refine ⟨δ, hδ0, hδ1, d j.succ - δ, ⟨by linarith, by linarith⟩, fun ψ => ?_⟩
+  rcases d_prev_succ h.2.2.1 i with ⟨h1, -⟩ | ⟨h1, -⟩
+  · rw [h1]
+  · rw [h1, show d i.castSucc + 2 * π - δ - ψ = (d i.castSucc - δ - ψ) + 2 * π by ring, Real.cos_add_two_pi]
+
+/-- The inner collar about `β + π/2` in the shadow of the previous sector (E1-RAY). -/
+theorem SectorsAt.collarAt_prev_inner {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c)
+    (hpos : ∀ j : Fin n, 0 < d j.succ - d j.castSucc) (i : Fin n) :
+    CollarAt (shadow (F.region (c ((finRotate n).symm i)))) v .inner (d i.castSucc + π / 2) := by
+  obtain ⟨δ, hδ0, hδ1, γ, hγ, hcos⟩ := h.exists_prev_dir hpos i
+  refine h.collarAt_shadow_inner_of_mem _ hγ ?_
+  rw [hcos, show d i.castSucc - δ - (d i.castSucc + π / 2) = -(δ + π / 2) by ring, Real.cos_neg, Real.cos_add_pi_div_two]
+  have : 0 < Real.sin δ := Real.sin_pos_of_pos_of_lt_pi hδ0 (by linarith [Real.two_le_pi])
+  linarith
+
+/-- The outer collar about `β − π/2` in the shadow of the previous sector (E1-RAY). -/
+theorem SectorsAt.collarAt_prev_outer {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c)
+    (hpos : ∀ j : Fin n, 0 < d j.succ - d j.castSucc) (i : Fin n) :
+    CollarAt (shadow (F.region (c ((finRotate n).symm i)))) v .outer (d i.castSucc - π / 2) := by
+  obtain ⟨δ, hδ0, hδ1, γ, hγ, hcos⟩ := h.exists_prev_dir hpos i
+  refine h.collarAt_shadow_outer_of_mem _ hγ ?_
+  rw [hcos, show d i.castSucc - δ - (d i.castSucc - π / 2) = π / 2 - δ by ring, Real.cos_pi_div_two_sub]
+  exact Real.sin_pos_of_pos_of_lt_pi hδ0 (by linarith [Real.two_le_pi])
+
+/-- A direction just after the start of sector `i`. -/
+theorem exists_cur_dir {n : ℕ} {d : Fin (n + 1) → ℝ} (hpos : ∀ j : Fin n, 0 < d j.succ - d j.castSucc)
+    (i : Fin n) : ∃ δ : ℝ, 0 < δ ∧ δ ≤ 1 / 2 ∧ d i.castSucc + δ ∈ Ioo (d i.castSucc) (d i.succ) := by
+  have hw := hpos i
+  set δ := min (d i.succ - d i.castSucc) (1 / 2) / 2 with hδ
+  have hδ0 : 0 < δ := by rw [hδ]; have := lt_min hw (by norm_num : (0 : ℝ) < 1 / 2); linarith
+  have hδ1 : δ ≤ 1 / 2 := by rw [hδ]; have := min_le_right (d i.succ - d i.castSucc) (1 / 2); linarith
+  have hδ2 : δ < d i.succ - d i.castSucc := by
+    rw [hδ]; have := min_le_left (d i.succ - d i.castSucc) (1 / 2); linarith
+  exact ⟨δ, hδ0, hδ1, by linarith, by linarith⟩
+
+/-- The inner collar about `β − π/2` in the shadow of sector `i` (E1-RAY). -/
+theorem SectorsAt.collarAt_cur_inner {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c)
+    (hpos : ∀ j : Fin n, 0 < d j.succ - d j.castSucc) (i : Fin n) :
+    CollarAt (shadow (F.region (c i))) v .inner (d i.castSucc - π / 2) := by
+  obtain ⟨δ, hδ0, hδ1, hγ⟩ := exists_cur_dir hpos i
+  refine h.collarAt_shadow_inner_of_mem i hγ ?_
+  rw [show d i.castSucc + δ - (d i.castSucc - π / 2) = δ + π / 2 by ring, Real.cos_add_pi_div_two]
+  have : 0 < Real.sin δ := Real.sin_pos_of_pos_of_lt_pi hδ0 (by linarith [Real.two_le_pi])
+  linarith
+
+/-- The outer collar about `β + π/2` in the shadow of sector `i` (E1-RAY). -/
+theorem SectorsAt.collarAt_cur_outer {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c)
+    (hpos : ∀ j : Fin n, 0 < d j.succ - d j.castSucc) (i : Fin n) :
+    CollarAt (shadow (F.region (c i))) v .outer (d i.castSucc + π / 2) := by
+  obtain ⟨δ, hδ0, hδ1, hγ⟩ := exists_cur_dir hpos i
+  refine h.collarAt_shadow_outer_of_mem i hγ ?_
+  rw [show d i.castSucc + δ - (d i.castSucc + π / 2) = δ - π / 2 by ring, Real.cos_sub_pi_div_two]
+  exact Real.sin_pos_of_pos_of_lt_pi hδ0 (by linarith [Real.two_le_pi])
+
 /-- **The refined second-order lemma** (§ 7.3 (b); W's § 4.1 lemma in the form E1-BAD's count and `step6` consume): in a map of the plane, at
 every edge direction `β = d i` of a picture with positive angles, one of the edge's two normals `β ± π/2` carries an inner collar in the shadow of
 both adjacent colours. With the parabola of curvature `1/2` and its colour `j` (`exists_parabola_region`): if `j` is the colour after the edge,
@@ -1190,7 +1265,15 @@ theorem SectorsAt.exists_normal_collarAt (hP : F.IsPlaneMap) {v : ℂ} {n : ℕ}
     (h : F.SectorsAt v n d c) (hn : 2 ≤ n) (hpos : ∀ j : Fin n, 0 < d j.succ - d j.castSucc) (i : Fin n) :
     ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧
       CollarAt (shadow (F.region (c ((finRotate n).symm i))) ∩ shadow (F.region (c i))) v .inner (d i.castSucc + σ * (π / 2)) := by
-  sorry
+  obtain ⟨r, hr, j, hj, hS⟩ := SectorsAt.exists_parabola_region hP h hn hpos i
+  rcases hj with hj | hj
+  · -- the parabola lies in the colour before the edge: the normal `β − π/2`
+    refine ⟨-1, Or.inr rfl, ?_⟩
+    have hpar := (collarAt_shadow_of_parabola (σ := -1) (κ := 1 / 2) (Or.inr rfl) hr (hj ▸ hS)).1 (by norm_num)
+    exact hpar.inter (by simpa [sub_eq_add_neg] using h.collarAt_cur_inner hpos i)
+  · refine ⟨1, Or.inl rfl, ?_⟩
+    have hpar := (collarAt_shadow_of_parabola (σ := 1) (κ := 1 / 2) (Or.inl rfl) hr (hj ▸ hS)).1 (by norm_num)
+    exact (by simpa using h.collarAt_prev_inner hpos i : CollarAt _ v .inner (d i.castSucc + 1 * (π / 2))).inter hpar
 
 /-- **E1-BAD at a good normal** (the edge case's kill): in a valid map, if the normal `β + σπ/2` of the edge `β = d i` carries an inner collar in
 the shadow of both adjacent colours, the point `v + e (β + σπ/2)` lacks one of them — the one whose sector lies on the normal's side (E1-RAY puts
@@ -1201,7 +1284,17 @@ theorem SectorsAt.absent_at_normal (hF : F.Valid) {v : ℂ} {n : ℕ} {d : Fin (
     (hs : CollarAt (shadow (F.region (c ((finRotate n).symm i))) ∩ shadow (F.region (c i))) v .inner (d i.castSucc + σ * (π / 2))) :
     c ((finRotate n).symm i) ∉ F.coloursAt (v + e (d i.castSucc + σ * (π / 2))) ∨
       c i ∉ F.coloursAt (v + e (d i.castSucc + σ * (π / 2))) := by
-  sorry
+  have _ := hn
+  rcases hσ with rfl | rfl
+  · -- `σ = 1`: the sector after the edge lies on the normal's side
+    right
+    refine not_mem_coloursAt_of_collarAt hF ?_ ?_
+    · exact (hs.mono Set.inter_subset_right)
+    · simpa using h.collarAt_cur_outer hpos i
+  · left
+    refine not_mem_coloursAt_of_collarAt hF ?_ ?_
+    · exact (hs.mono Set.inter_subset_left)
+    · simpa [sub_eq_add_neg] using h.collarAt_prev_outer hpos i
 
 /-- **E1-BAD** (`plans/FS131-E1-derivation.md` § 3.5), corrected (§ 7.4) and robust (§ 7.3 (b)): in a valid map of the plane, at a point whose
 picture has `n ≥ 3` sectors of distinct colours, each of angle in `(0, π]`, there is a set `K` of at most `n` angles off which (mod `2π`) every point
