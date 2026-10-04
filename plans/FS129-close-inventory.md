@@ -396,3 +396,5 @@ One line per item with its source; no narration. Each line is ticked done or dec
      against 38/7/6/4.
 103. **FS129-SR2 to launch** on SR1's § 6.3: the rest of lane R's Lean-order sweep (rows listed there), item 63 (`data/fs129/index/open-steps.md`
      § 3 beyond FS-110, scoped to the Lean order), item 81's three leads, a wider V6-ADJ (DOUBLETIP's analogue), and group 5's stall.
+104. **Launched 2026-10-04 00:58 UTC**: FS129-SR2, pass 3, lane R, second part (`general-purpose`, Opus; `data/fs129/briefs/FS129-SR2-pass3.md`,
+     gated PASS, at `8065a302`), on item 103's list. Running: FS129-SA1, the Searcher, FS129-SR2 — the cap of three.
