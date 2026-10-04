@@ -1176,3 +1176,33 @@ reason by the close.*
      leaves and `Basic`'s five inhabitant leaves in § 15.3's order (the composition `exists_woodallMerged` first among the hard ones), `NiceAt.normal` made private
      first (item 167 (b)); the gate waits for wave 4. Launched in I2h's slot: 1 (I3i) + 1 (I4c) + 1 (IWc) = 3, plus QA2. Wave 2's next Opus implementer (I2i)
      queued for the next slot.
+171. **FS131-I3i done; `localSectors` LANDED on `main`** (report `data/fs131/reports/FS131-I3i.md`; record on `fs131-w3b`; `origin/main` fast-forwarded to `0131aa59`, whose Lean
+     source and gate scripts equal the gated commit `746a7b80`): **held in the kernel, standard three** — `localSectors` (every domain point has a sector chart;
+     item 136's form), `IsSectorChart.exists_tile_inter_ball` (E2's ONESECT, from the landed `IsJordanDomain.local_connected`, no Jordan curve theorem),
+     `Simple.coneAt_eq_angleIcc_sep` (E2 § 2.7 verbatim), and **`four_of_bothKind_simple` without `hnc`** (FS116-V5-U1's four-colour clause for simple maps, cusps
+     included — item 139's strengthening, so item 112's repair is now superseded on `main` by the full statement). Gate on `746a7b80` with T3's gate: build 0
+     warnings; axioms OK, 1,872 records — 1856 clean (1794 + 62, all within the standard three), 11 axiom-free, 0 imported, 5 purchases; both self-tests green;
+     vacuity OK (`declarations=8500`, `sites=460`, `generic=434`, reconciled: +102 declared, +13 generated, +1 site); architecture PASS; three negative controls
+     watched red. Exported for wave 4: `isSectorChart_of`, `dir_lt_nextDir`, the angular partition lemmas, `coneAt_sector`, `sector_nonempty`,
+     `sector_subset_interiorPts`, `IsTile.eq_of_mem`, `curveGerm` and its two lemmas, `halfDisc_sectorChart`. Carriers `BranchGerms`, `Sorted`, `Mono`,
+     `IsSectorChart` OUT with reasons (register `IsSectorChart` when a theorem takes it at a concrete instance). Tool observation: `scripts/build.sh` exits 0 and
+     prints "OK" with warnings — the zero-warnings item is the warning count. Slip (I3i's, caught): a helper name collision with `SixFragment`, renamed before
+     any build. **Filed** (this commit): `CLAUDE.md` § Trust ledger (1856 clean, 1,872 records), § The gate (`declarations=8500 refutations-skipped=57 sites=460`,
+     `… generic=434 …`), `scripts/vacuity-baseline.txt` header, `GATE_CHANGES` (1794 → 1856). Keryx's receipts, read before this commit: `gate_report.py` —
+     baseline and § The gate "match (9 of 9 compared)", Trust ledger "match (clean, purchases and imported compared)"; fact audit losses only the superseded
+     counts. The Frontier clauses (I3h's for wave 3, I3i's) are held for the milestone's filing, with the rows' regrading.
+172. **FS131-QA2 done** (report `data/fs131/reports/FS131-QA2.md`; record `plans/FS131-QA2-audit.md`; commits `a16446fd` … `bf15a62d`, and `d1777466`, a merge of
+     `origin/main` it made in the main tree so its push could pass after `localSectors` landed): **106 assumed definitions read across `main` and the four
+     branches, the 24 refutation-shaped theorems first — none unsatisfiable on real objects, none of item 158's class**; 77 with a proved non-degenerate instance,
+     15 with an instance still `sorry`, 5 with only degenerate ones, 7 with none named (hand instances in its § 3.1). **One weakness recurs five times** — a
+     hypothesis modelled only where the theorem's other hypotheses fail (item 158's hole): QA2-1 Woodall's normal forms modelled only on a disc of radius 1/3,
+     never on a plane map; QA2-2 `IsCubicTrichromatic` uninhabited, `MIn`'s only model degenerate; QA2-3 `Simple` modelled only by a one-tile disc; QA2-4 no horn
+     proved (every `bowtie_*` clause `sorry`); QA2-5 the stuck vertex under Condition 5 has no model, and with `n4_fin` none is expected — to be declared. **The
+     model that settles QA2-1 and QA2-2 exists**: `sevenBrickMap` at a brick corner is a T-junction (angles `π/2, π/2, π`, three colours), its far upper-cell
+     corner at distance exactly 1 (3–4–5) — [hand], over `tools/fs131_qa2_brick.py` with two faults watched. Wave 4's 29 skeleton rows read: 15 same, 8 stronger, 6
+     weaker — all six already ruled; no new defect. **Rulings**: (a) QA2-1's plane-map model is **wanted before Woodall's landing** (the exact check item 158
+     lacked) — carried by the Woodall implementer after `fs131-ww` merges wave 4's `sevenBrickMap`; (b) QA2-2, QA2-4 and QA2-3 to FS131-I4c (running) by message;
+     QA2-5's declaration to I4c, its "are models expected" question to wave 4's planner at the landing; (c) the minor ones as their consumers are proved; (d)
+     `LEAN.md` § The gate's inhabitant rule extended verbatim from its § 5.3 (this commit): the inhabitant satisfies every hypothesis the theorem does not refute,
+     at once, at a parameter the refutation leaves alive. Keryx's receipt: the brick claim's distance — a 3–4–5 diagonal is exactly 1 in units where the
+     cell's sides are 3/5 and 4/5 — and the tool's existence and planted faults per its record. Credit QA2.
