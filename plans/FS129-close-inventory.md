@@ -355,3 +355,7 @@ One line per item with its source; no narration. Each line is ticked done or dec
 91. **Search requests**: row 5 queued (U₄, U₈, U₁₆ with a gapped four-colouring); row 3 annotated with MA2's filters (still held for Kooshi).
 92. **MA2's registration, provisionally scored** (record § 4.3; FS129-Z1 scores): 49 reached against 28 expected; 3 compositions against 3; 10
     bearing unapplied against 6; 0 Y4-kind misses; 0 new cross-era sites; nothing found false. Prior art owed for DICHO, GAP4, HOSTS.
+93. **Launched 2026-10-04 00:33 UTC**: FS129-SA1, pass 3, lane A (`general-purpose`, Opus; `data/fs129/briefs/FS129-SA1-pass3.md`, gated PASS,
+    at `f0382498`), carrying items 20, 67–69, 77, 88–90 and the older record's vacuity by reading; and **the day's Searcher** (`searcher`, Opus;
+    `data/search/briefs/SEARCH-2026-10-03.md`, gated PASS, at `434964bf`) on `plans/SEARCH-QUEUE.md` rows 1, 2 (conditional), 4, 5 — row 3
+    held. Running: FS129-SR1, FS129-SA1, the Searcher — the cap of three.
