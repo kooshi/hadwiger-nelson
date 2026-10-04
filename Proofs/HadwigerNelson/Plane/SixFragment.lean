@@ -85,25 +85,6 @@ theorem sixArcs_locallyFinite : ∀ x ∈ ball (0 : ℂ) (3 / 2), ∃ t ∈ 𝓝
   intro x _
   exact ⟨univ, univ_mem, sixArcs_finite.subset fun a ha => ha.1⟩
 
-/-- `sixCol` is locally constant off the arcs, inside `B(0, 3/2)`: the floor of `arg x / 60°` jumps only on the rays
-`60°j`, which inside the disc are radial segments and outside lie in lenses (where the round is constant); the round
-jumps only on the rays `60°j + 30°`, which outside the disc lie in gaps (where it is not read); `arg` jumps only on the
-ray `180°`; the lens test changes only on the lens sides; `‖x‖ < 1` changes only on the unit circle. -/
-theorem sixCol_locallyConstant : ∀ x ∈ ball (0 : ℂ) (3 / 2), x ∉ ⋃ a ∈ sixArcs, a.carrier →
-    ∀ᶠ y in 𝓝 x, sixCol y = sixCol x := by
-  sorry
-
-/-- **FS116-Y2-SIXFRAG's fragment**: the six-coloured map of `B(0, 3/2)` by the unit sector flower, six lenses and six gap
-tiles. -/
-noncomputable def sixFrag : ArcMap 6 where
-  dom := ball 0 (3 / 2)
-  isOpen_dom := isOpen_ball
-  arcs := sixArcs
-  nondegenerate := sixArcs_nondegenerate
-  locallyFinite := sixArcs_locallyFinite
-  col := sixCol
-  locallyConstant := sixCol_locallyConstant
-
 /-- The squared distance from the polar point `r e(φ)` to the unit-circle point `e(θ)`. -/
 theorem dist_polar_sq (r φ θ : ℝ) : dist ((r : ℂ) * e φ) (e θ) ^ 2 = r ^ 2 - 2 * r * Real.cos (φ - θ) + 1 := by
   rw [Complex.dist_eq, Complex.sq_norm, Complex.normSq_apply]
@@ -120,6 +101,463 @@ theorem arg_polar {r φ : ℝ} (hr : 0 < r) (hφ : φ ∈ Ioc (-π) π) : Comple
 /-- The norm of `r e(φ)`. -/
 theorem norm_polar {r : ℝ} (hr : 0 ≤ r) (φ : ℝ) : ‖(r : ℂ) * e φ‖ = r := by
   rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg hr]
+
+/-! ## The local constancy of `sixCol`: lens rounds, lens sides, floors -/
+
+/-- `e (θ + 2π k) = e θ` for an integer `k`. -/
+theorem e_add_int_mul_two_pi (θ : ℝ) (k : ℤ) : e (θ + k * (2 * π)) = e θ := by
+  unfold e
+  rw [show ((θ + k * (2 * π) : ℝ) : ℂ) * I = θ * I + k * (2 * π * I) by push_cast; ring,
+    Complex.exp_add, Complex.exp_int_mul_two_pi_mul_I, mul_one]
+
+/-- The lens test is `6`-periodic in its index. -/
+theorem inSixLens_add_six (m k : ℤ) (x : ℂ) : InSixLens (m + 6 * k) x ↔ InSixLens m x := by
+  unfold InSixLens
+  have h1 : (((m + 6 * k : ℤ) : ℝ)) * (π / 3) - π / 6 = (m * (π / 3) - π / 6) + k * (2 * π) := by
+    push_cast; ring
+  have h2 : (((m + 6 * k : ℤ) : ℝ)) * (π / 3) + π / 6 = (m * (π / 3) + π / 6) + k * (2 * π) := by
+    push_cast; ring
+  rw [h1, h2, e_add_int_mul_two_pi, e_add_int_mul_two_pi]
+
+/-- A point `r e(φ)`, `r > 0`, is within `1` of `e(α)` exactly when `r < 2 cos(φ − α)`. -/
+theorem dist_polar_lt_one_iff {r : ℝ} (hr : 0 < r) (φ α : ℝ) :
+    dist ((r : ℂ) * e φ) (e α) < 1 ↔ r < 2 * Real.cos (φ - α) := by
+  have h := dist_polar_sq r φ α
+  rw [← abs_of_nonneg (dist_nonneg : 0 ≤ dist ((r : ℂ) * e φ) (e α)), ← sq_lt_one_iff_abs_lt_one, h]
+  constructor
+  · intro h1; nlinarith
+  · intro h1; nlinarith
+
+/-- A point `r e(φ)`, `r > 0`, is at distance exactly `1` from `e(α)` exactly when `r = 2 cos(φ − α)`. -/
+theorem dist_polar_eq_one_iff {r : ℝ} (hr : 0 < r) (φ α : ℝ) :
+    dist ((r : ℂ) * e φ) (e α) = 1 ↔ r = 2 * Real.cos (φ - α) := by
+  have h := dist_polar_sq r φ α
+  rw [← pow_eq_one_iff_of_nonneg dist_nonneg two_ne_zero, h]
+  constructor
+  · intro h1
+    have : r * (r - 2 * Real.cos (φ - α)) = 0 := by nlinarith
+    rcases mul_eq_zero.mp this with h2 | h2
+    · exact absurd h2 hr.ne'
+    · linarith
+  · intro h1; rw [h1]; ring
+
+/-- A point `x ≠ 0` is `‖x‖ e(arg x)`. -/
+theorem eq_norm_mul_e_arg {x : ℂ} : x = (‖x‖ : ℂ) * e (Complex.arg x) := by
+  have := Complex.norm_mul_exp_arg_mul_I x
+  rw [← this]; rw [e, ← this]; simp [Complex.norm_mul_exp_arg_mul_I]
+
+/-- If `1/2 < cos u`, then `u` is within `π/3` of a multiple of `2π`. -/
+theorem exists_int_abs_lt_of_half_lt_cos {u : ℝ} (h : 1 / 2 < Real.cos u) :
+    ∃ k : ℤ, |u - k * (2 * π)| < π / 3 := by
+  have hπ := Real.pi_pos
+  refine ⟨round (u / (2 * π)), ?_⟩
+  set k := round (u / (2 * π)) with hk
+  have h1 : |u / (2 * π) - k| ≤ 1 / 2 := abs_sub_round _
+  have h2 : |u - k * (2 * π)| ≤ π := by
+    have : u - k * (2 * π) = (u / (2 * π) - k) * (2 * π) := by field_simp
+    rw [this, abs_mul, abs_of_pos (by positivity : 0 < 2 * π)]
+    nlinarith
+  by_contra hc
+  push Not at hc
+  have h3 : Real.cos |u - k * (2 * π)| ≤ Real.cos (π / 3) :=
+    Real.cos_le_cos_of_nonneg_of_le_pi (by linarith) h2 hc
+  rw [Real.cos_abs, Real.cos_sub_int_mul_two_pi, Real.cos_pi_div_three] at h3
+  linarith
+
+/-- A lens point outside the open unit disc has round index congruent to the lens index. -/
+theorem sixRound_of_lens {x : ℂ} (hx : 1 ≤ ‖x‖) {m : ℤ} (h : InSixLens m x) :
+    ∃ k : ℤ, sixRound x = m + 6 * k := by
+  have hπ := Real.pi_pos
+  obtain ⟨h1, h2⟩ := h
+  have hr : 0 < ‖x‖ := by linarith
+  have hx' := (eq_norm_mul_e_arg (x := x))
+  set φ := Complex.arg x with hφ
+  rw [hx', dist_polar_lt_one_iff hr] at h1 h2
+  have c1 : 1 / 2 < Real.cos (φ - (m * (π / 3) - π / 6)) := by linarith
+  have c2 : 1 / 2 < Real.cos (φ - (m * (π / 3) + π / 6)) := by linarith
+  obtain ⟨k₁, hk₁⟩ := exists_int_abs_lt_of_half_lt_cos c1
+  obtain ⟨k₂, hk₂⟩ := exists_int_abs_lt_of_half_lt_cos c2
+  rw [abs_lt] at hk₁ hk₂
+  have hkk : k₁ = k₂ := by
+    by_contra hne
+    have : (1 : ℝ) ≤ |((k₁ - k₂ : ℤ) : ℝ)| := by
+      have : (1 : ℤ) ≤ |k₁ - k₂| := Int.one_le_abs (sub_ne_zero.mpr hne)
+      exact_mod_cast this
+    rcases le_abs'.mp this with h | h
+    · push_cast at h; nlinarith
+    · push_cast at h; nlinarith
+  subst hkk
+  refine ⟨k₁, ?_⟩
+  unfold sixRound
+  rw [round_eq, ← hφ, Int.floor_eq_iff]
+  have hp3 : 0 < π / 3 := by positivity
+  have hu1 : -(π / 6) < φ - m * (π / 3) - k₁ * (2 * π) := by linarith [hk₂.1]
+  have hu2 : φ - m * (π / 3) - k₁ * (2 * π) < π / 6 := by linarith [hk₁.2]
+  set u := φ - m * (π / 3) - k₁ * (2 * π) with hu
+  have hφu : φ / (π / 3) = m + 6 * k₁ + u / (π / 3) := by
+    rw [hu]; field_simp; ring
+  have hw1 : -(1 / 2 : ℝ) < u / (π / 3) := by rw [lt_div_iff₀ hp3]; linarith
+  have hw2 : u / (π / 3) < 1 / 2 := by rw [div_lt_iff₀ hp3]; linarith
+  rw [hφu]
+  push_cast
+  constructor <;> linarith
+
+/-- A point outside the open unit disc inside a lens has the lens colour. -/
+theorem sixCol_of_lens {x : ℂ} (hx : 1 ≤ ‖x‖) {m : ℤ} (h : InSixLens m x) :
+    sixCol x = (((m : ℤ) : ZMod 6) + 2 : ZMod 6) := by
+  obtain ⟨k, hk⟩ := sixRound_of_lens hx h
+  have hl : InSixLens (sixRound x) x := by rw [hk]; exact (inSixLens_add_six m k x).mpr h
+  have hn : ¬ ‖x‖ < 1 := not_lt.mpr hx
+  simp only [sixCol, hn, if_false]
+  rw [if_pos hl, hk]
+  push_cast
+  have : (6 : ZMod 6) = 0 := by decide
+  rw [this, zero_mul, add_zero]
+
+
+/-- `e(π/6) = √3/2 + i/2`. -/
+theorem e_pi_div_six : e (π / 6) = ((Real.sqrt 3 / 2 : ℝ) : ℂ) + ((1 / 2 : ℝ) : ℂ) * I := by
+  rw [e_eq, Real.cos_pi_div_six, Real.sin_pi_div_six]
+
+/-- `e(−π/6) = √3/2 − i/2`. -/
+theorem e_neg_pi_div_six : e (-(π / 6)) = ((Real.sqrt 3 / 2 : ℝ) : ℂ) - ((1 / 2 : ℝ) : ℂ) * I := by
+  rw [e_eq, Real.cos_neg, Real.sin_neg, Real.cos_pi_div_six, Real.sin_pi_div_six]; push_cast; ring
+
+/-- Real arithmetic of the lens boundary: `a² + b² = 1`, `b ≥ 1/2` and `|(a + √3/2, b − 1/2)| ≥ 1` force `a ≥ 0`. -/
+theorem re_nonneg_aux (a b s : ℝ) (hs : s ^ 2 = 3) (hs0 : 0 < s) (hab : a ^ 2 + b ^ 2 = 1) (hb : 1 / 2 ≤ b)
+    (h : 1 ≤ (a + s / 2) ^ 2 + (b - 1 / 2) ^ 2) : 0 ≤ a := by
+  by_contra hneg
+  push Not at hneg
+  have hb1 : b ≤ 1 := by nlinarith
+  have h3 : b - 1 ≤ s * a := by nlinarith
+  have h4 : (1 - b) * (1 + b) = a ^ 2 := by nlinarith
+  have h5 : (1 - b) * (3 / 2) ≤ a ^ 2 := by nlinarith
+  have h6 : s * (-a) * (3 / 2) ≤ a ^ 2 := by nlinarith
+  have hs3' : (1.7 : ℝ) < s := by nlinarith
+  have hc1 : -a ≤ 1 := by nlinarith
+  have h8 : s * (-a) * (3 / 2) ≤ -a := by nlinarith
+  have h9 : 0 < -a := neg_pos.mpr hneg
+  have h10 : s * (3 / 2) ≤ 1 := by
+    by_contra hc; push Not at hc
+    nlinarith [mul_lt_mul_of_pos_right hc h9]
+  linarith
+
+/-- The core of "a lens boundary point is on a lens side", in the frame of the lens `Q_0` (centres `e(∓30°)`): a point
+outside the open unit disc, on the circle about `e(−30°)` and in the closed disc about `e(30°)`, is `e(−30°) + e(ψ)` with
+`ψ ∈ [30°, 90°]`. -/
+theorem lens_boundary_core {x : ℂ} (hx : 1 ≤ ‖x‖) (h1 : dist x (e (-(π / 6))) = 1)
+    (h2 : dist x (e (π / 6)) ≤ 1) : ∃ ψ ∈ Icc (π / 6) (π / 2), x = e (-(π / 6)) + e ψ := by
+  have hπ := Real.pi_pos
+  have hs3 : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have hs3p : 0 < Real.sqrt 3 := by positivity
+  set w := x - e (-(π / 6)) with hw
+  have hwn : ‖w‖ = 1 := by rw [hw, ← dist_eq_norm]; exact h1
+  have hwsq : w.re ^ 2 + w.im ^ 2 = 1 := by
+    have := congrArg (· ^ 2) hwn
+    simp only [Complex.sq_norm, Complex.normSq_apply, one_pow] at this
+    nlinarith
+  have hx' : x = w + e (-(π / 6)) := by rw [hw]; ring
+  have hd2 : dist x (e (π / 6)) ^ 2 = w.re ^ 2 + (w.im - 1) ^ 2 := by
+    rw [dist_eq_norm, Complex.sq_norm, Complex.normSq_apply, hx', e_neg_pi_div_six, e_pi_div_six]
+    simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
+      Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+    ring
+  have hx2 : ‖x‖ ^ 2 = (w.re + Real.sqrt 3 / 2) ^ 2 + (w.im - 1 / 2) ^ 2 := by
+    rw [Complex.sq_norm, Complex.normSq_apply, hx', e_neg_pi_div_six]
+    simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
+      Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+    ring
+  have hb : 1 / 2 ≤ w.im := by
+    have : dist x (e (π / 6)) ^ 2 ≤ 1 := by nlinarith [dist_nonneg (x := x) (y := e (π / 6))]
+    rw [hd2] at this; nlinarith
+  have hxx : 1 ≤ ‖x‖ ^ 2 := by nlinarith
+  have ha : 0 ≤ w.re := re_nonneg_aux _ _ _ hs3 hs3p hwsq hb (hx2 ▸ hxx)
+  have harg0 : 0 ≤ Complex.arg w := Complex.arg_nonneg_iff.mpr (by linarith)
+  have harg1 : Complex.arg w ≤ π / 2 := by
+    have := Complex.abs_arg_le_pi_div_two_iff.mpr ha
+    exact (abs_le.mp this).2
+  have hsin : Real.sin (Complex.arg w) = w.im := by
+    rw [Complex.sin_arg, hwn, div_one]
+  have harg2 : π / 6 ≤ Complex.arg w := by
+    by_contra hlt
+    push Not at hlt
+    have := Real.sin_lt_sin_of_lt_of_le_pi_div_two (by linarith) (by linarith) hlt
+    rw [Real.sin_pi_div_six, hsin] at this
+    linarith
+  refine ⟨Complex.arg w, ⟨harg2, harg1⟩, ?_⟩
+  have hwe : w = e (Complex.arg w) := by
+    have := eq_norm_mul_e_arg (x := w)
+    rw [hwn] at this; simpa using this
+  rw [hx', add_comm]
+  congr 1
+
+/-- Every integer multiple of `60°` is a multiple of `60°` in `{0, …, 5}` plus whole turns. -/
+theorem exists_fin_six_rep (m : ℤ) :
+    ∃ (j : Fin 6) (n : ℤ), (m : ℝ) * (π / 3) = ((j : ℕ) : ℝ) * (π / 3) + n * (2 * π) := by
+  refine ⟨⟨(m % 6).toNat, by omega⟩, m / 6, ?_⟩
+  have h0 : 0 ≤ m % 6 := Int.emod_nonneg _ (by norm_num)
+  have h1 : (((m % 6).toNat : ℕ) : ℝ) = ((m % 6 : ℤ) : ℝ) := by
+    have : (((m % 6).toNat : ℕ) : ℤ) = m % 6 := Int.toNat_of_nonneg h0
+    exact_mod_cast this
+  have h2 : m = m % 6 + 6 * (m / 6) := (Int.emod_add_mul_ediv m 6).symm
+  show (m : ℝ) * (π / 3) = (((m % 6).toNat : ℕ) : ℝ) * (π / 3) + (m / 6 : ℤ) * (2 * π)
+  rw [h1]
+  have h3 : (m : ℝ) = ((m % 6 : ℤ) : ℝ) + 6 * ((m / 6 : ℤ) : ℝ) := by exact_mod_cast h2
+  rw [h3]; ring
+
+/-- The first family of lens-side points: `e(60°m − 30°) + e(ψ)` for `ψ ∈ [60°m + 30°, 60°m + 90°]` lies on `Γ`. -/
+theorem mem_arcs_side₁ (m : ℤ) {ψ : ℝ} (hψ : ψ ∈ Icc (m * (π / 3) + π / 6) (m * (π / 3) + π / 2)) :
+    e (m * (π / 3) - π / 6) + e ψ ∈ ⋃ a ∈ sixArcs, a.carrier := by
+  obtain ⟨j, n, hjn⟩ := exists_fin_six_rep m
+  refine mem_iUnion₂.mpr ⟨.circ (e (j * (π / 3) - π / 6)) 1 (j * (π / 3) + π / 6) (j * (π / 3) + π / 2),
+    Or.inl (Or.inr ⟨j, rfl⟩), ψ - n * (2 * π), ⟨by linarith [hψ.1], by linarith [hψ.2]⟩, ?_⟩
+  show e (((j : ℕ) : ℝ) * (π / 3) - π / 6) + 1 * e (ψ - n * (2 * π)) = _
+  have e1 : e (((j : ℕ) : ℝ) * (π / 3) - π / 6) = e (m * (π / 3) - π / 6) := by
+    have := e_add_int_mul_two_pi (((j : ℕ) : ℝ) * (π / 3) - π / 6) n
+    rw [← this]; congr 1; linarith
+  have e2 : e (ψ - n * (2 * π)) = e ψ := by
+    have := e_add_int_mul_two_pi (ψ - n * (2 * π)) n
+    rw [← this]; congr 1; ring
+  rw [e1, e2, one_mul]
+
+/-- The second family of lens-side points: `e(60°m + 30°) + e(ψ)` for `ψ ∈ [60°m − 90°, 60°m − 30°]` lies on `Γ`. -/
+theorem mem_arcs_side₂ (m : ℤ) {ψ : ℝ} (hψ : ψ ∈ Icc (m * (π / 3) - π / 2) (m * (π / 3) - π / 6)) :
+    e (m * (π / 3) + π / 6) + e ψ ∈ ⋃ a ∈ sixArcs, a.carrier := by
+  obtain ⟨j, n, hjn⟩ := exists_fin_six_rep m
+  refine mem_iUnion₂.mpr ⟨.circ (e (j * (π / 3) + π / 6)) 1 (j * (π / 3) - π / 2) (j * (π / 3) - π / 6),
+    Or.inr ⟨j, rfl⟩, ψ - n * (2 * π), ⟨by linarith [hψ.1], by linarith [hψ.2]⟩, ?_⟩
+  show e (((j : ℕ) : ℝ) * (π / 3) + π / 6) + 1 * e (ψ - n * (2 * π)) = _
+  have e1 : e (((j : ℕ) : ℝ) * (π / 3) + π / 6) = e (m * (π / 3) + π / 6) := by
+    have := e_add_int_mul_two_pi (((j : ℕ) : ℝ) * (π / 3) + π / 6) n
+    rw [← this]; congr 1; linarith
+  have e2 : e (ψ - n * (2 * π)) = e ψ := by
+    have := e_add_int_mul_two_pi (ψ - n * (2 * π)) n
+    rw [← this]; congr 1; ring
+  rw [e1, e2, one_mul]
+
+/-- `e 0 = 1`. -/
+theorem e_zero : e 0 = 1 := by simp [e]
+
+/-- The conjugate of `e θ` is `e (−θ)`. -/
+theorem conj_e (θ : ℝ) : (starRingEnd ℂ) (e θ) = e (-θ) := by
+  unfold e
+  rw [← Complex.exp_conj]
+  congr 1
+  simp [map_mul, Complex.conj_ofReal, Complex.conj_I]
+
+/-- Rotating by `e(−60°m)` carries the lens `m` to the lens `0`. -/
+theorem dist_rot (x y : ℂ) (t : ℝ) : dist (x * e t) (y * e t) = dist x y := by
+  rw [Complex.dist_eq, Complex.dist_eq, ← sub_mul, norm_mul, norm_e, mul_one]
+
+/-- **A lens boundary point is on a lens side (first family).** A point outside the open unit disc, on the circle about
+`e(60°m − 30°)` and in the closed disc about `e(60°m + 30°)`, lies on a lens side of `sixArcs`. -/
+theorem mem_arcs_of_lens_boundary₁ {x : ℂ} (hx : 1 ≤ ‖x‖) (m : ℤ) (h1 : dist x (e (m * (π / 3) - π / 6)) = 1)
+    (h2 : dist x (e (m * (π / 3) + π / 6)) ≤ 1) : x ∈ ⋃ a ∈ sixArcs, a.carrier := by
+  have hx' : x = (x * e (-(m * (π / 3)))) * e (m * (π / 3)) := by
+    rw [mul_assoc, ← e_add]; simp [e_zero]
+  set y := x * e (-(m * (π / 3))) with hy
+  have hyn : ‖y‖ = ‖x‖ := by rw [hy, norm_mul, norm_e, mul_one]
+  have k1 : dist y (e (-(π / 6))) = 1 := by
+    have : e (-(π / 6)) = e (m * (π / 3) - π / 6) * e (-(m * (π / 3))) := by
+      rw [← e_add]; congr 1; ring
+    rw [this, hy, dist_rot]; exact h1
+  have k2 : dist y (e (π / 6)) ≤ 1 := by
+    have : e (π / 6) = e (m * (π / 3) + π / 6) * e (-(m * (π / 3))) := by
+      rw [← e_add]; congr 1; ring
+    rw [this, hy, dist_rot]; exact h2
+  obtain ⟨ψ, hψ, hyψ⟩ := lens_boundary_core (by rw [hyn]; exact hx) k1 k2
+  rw [hx', hyψ, add_mul, ← e_add, ← e_add]
+  have := mem_arcs_side₁ m (ψ := ψ + m * (π / 3)) ⟨by linarith [hψ.1], by linarith [hψ.2]⟩
+  convert this using 2
+  congr 1; ring
+
+/-- **A lens boundary point is on a lens side (second family).** -/
+theorem mem_arcs_of_lens_boundary₂ {x : ℂ} (hx : 1 ≤ ‖x‖) (m : ℤ) (h1 : dist x (e (m * (π / 3) + π / 6)) = 1)
+    (h2 : dist x (e (m * (π / 3) - π / 6)) ≤ 1) : x ∈ ⋃ a ∈ sixArcs, a.carrier := by
+  -- conjugate: the frame of the lens `m` reflected in the real axis
+  have hx' : x = (x * e (-(m * (π / 3)))) * e (m * (π / 3)) := by
+    rw [mul_assoc, ← e_add]; simp [e_zero]
+  set y := x * e (-(m * (π / 3))) with hy
+  have hyn : ‖y‖ = ‖x‖ := by rw [hy, norm_mul, norm_e, mul_one]
+  have k1 : dist y (e (π / 6)) = 1 := by
+    have : e (π / 6) = e (m * (π / 3) + π / 6) * e (-(m * (π / 3))) := by
+      rw [← e_add]; congr 1; ring
+    rw [this, hy, dist_rot]; exact h1
+  have k2 : dist y (e (-(π / 6))) ≤ 1 := by
+    have : e (-(π / 6)) = e (m * (π / 3) - π / 6) * e (-(m * (π / 3))) := by
+      rw [← e_add]; congr 1; ring
+    rw [this, hy, dist_rot]; exact h2
+  have ec : ∀ θ : ℝ, (starRingEnd ℂ) (e θ) = e (-θ) := conj_e
+  have c1 : dist ((starRingEnd ℂ) y) (e (-(π / 6))) = 1 := by
+    rw [← ec, Complex.dist_conj_conj]; exact k1
+  have c2 : dist ((starRingEnd ℂ) y) (e (π / 6)) ≤ 1 := by
+    have : e (π / 6) = (starRingEnd ℂ) (e (-(π / 6))) := by rw [ec]; simp
+    rw [this, Complex.dist_conj_conj]; exact k2
+  obtain ⟨ψ, hψ, hyψ⟩ := lens_boundary_core (by rw [Complex.norm_conj, hyn]; exact hx) c1 c2
+  have hyy : y = e (π / 6) + e (-ψ) := by
+    have := congrArg (starRingEnd ℂ) hyψ
+    rw [Complex.conj_conj, map_add, ec, ec] at this
+    rw [this]; simp
+  rw [hx', hyy, add_mul, ← e_add, ← e_add]
+  have := mem_arcs_side₂ m (ψ := -ψ + m * (π / 3)) ⟨by linarith [hψ.2], by linarith [hψ.1]⟩
+  convert this using 2
+  congr 1; ring
+
+/-- The unit circle lies in the arcs. -/
+theorem mem_arcs_of_norm_eq_one {x : ℂ} (hn : ‖x‖ = 1) : x ∈ ⋃ a ∈ sixArcs, a.carrier := by
+  have hπ := Real.pi_pos
+  have hxe : x = e (Complex.arg x) := by
+    have := eq_norm_mul_e_arg (x := x)
+    rw [hn, Complex.ofReal_one, one_mul] at this
+    exact this
+  refine mem_iUnion₂.mpr ⟨.circ 0 1 0 (2 * π), by simp [sixArcs], ?_⟩
+  by_cases h0 : 0 ≤ Complex.arg x
+  · refine ⟨Complex.arg x, ⟨h0, by linarith [Complex.arg_le_pi x]⟩, ?_⟩
+    show (0 : ℂ) + 1 * e (Complex.arg x) = x
+    rw [zero_add, one_mul]; exact hxe.symm
+  · push Not at h0
+    refine ⟨Complex.arg x + 2 * π, ⟨by linarith [Complex.neg_pi_lt_arg x], by linarith⟩, ?_⟩
+    show (0 : ℂ) + 1 * e (Complex.arg x + 2 * π) = x
+    rw [zero_add, one_mul, e_add_two_pi]; exact hxe.symm
+
+/-- The radial segments lie in the arcs. -/
+theorem mem_arcs_radial {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1) (k : ℤ) :
+    (t : ℂ) * e (k * (π / 3)) ∈ ⋃ a ∈ sixArcs, a.carrier := by
+  obtain ⟨j, n, hjn⟩ := exists_fin_six_rep k
+  refine mem_iUnion₂.mpr ⟨.seg 0 (e (j * (π / 3))), Or.inl (Or.inl (Or.inl ⟨j, rfl⟩)), ?_⟩
+  have : e (k * (π / 3)) = e (((j : ℕ) : ℝ) * (π / 3)) := by
+    rw [hjn, e_add_int_mul_two_pi]
+  rw [this]
+  exact ⟨1 - t, t, by linarith, ht0, by ring, by simp⟩
+
+/-- The lens test depends on the index mod `6`: every index is equivalent to one in `{0, …, 5}`. -/
+theorem inSixLens_reduce (m : ℤ) : ∃ j : Fin 6, ∀ y : ℂ, InSixLens m y ↔ InSixLens (((j : ℕ) : ℤ)) y := by
+  refine ⟨⟨(m % 6).toNat, by omega⟩, fun y => ?_⟩
+  have h0 : 0 ≤ m % 6 := Int.emod_nonneg _ (by norm_num)
+  have h1 : ((((m % 6).toNat : ℕ) : ℤ)) = m % 6 := Int.toNat_of_nonneg h0
+  have h2 : m = m % 6 + 6 * (m / 6) := (Int.emod_add_mul_ediv m 6).symm
+  show InSixLens m y ↔ InSixLens (((m % 6).toNat : ℕ) : ℤ) y
+  rw [h1]
+  conv_lhs => rw [h2]
+  exact inSixLens_add_six _ _ _
+
+/-- No lens contains the point and no lens boundary point lies on `Γ`... a point outside the unit disc, not on `Γ`,
+off every lens, is off the closure of every lens: some lens distance exceeds `1`. -/
+theorem exists_one_lt_dist_of_not_lens {x : ℂ} (hx : 1 ≤ ‖x‖) (hxΓ : x ∉ ⋃ a ∈ sixArcs, a.carrier) (m : ℤ)
+    (hm : ¬ InSixLens m x) :
+    1 < dist x (e (m * (π / 3) - π / 6)) ∨ 1 < dist x (e (m * (π / 3) + π / 6)) := by
+  by_contra hc
+  push Not at hc
+  obtain ⟨c1, c2⟩ := hc
+  apply hxΓ
+  by_cases h1 : dist x (e (m * (π / 3) - π / 6)) = 1
+  · exact mem_arcs_of_lens_boundary₁ hx m h1 c2
+  · have h1' : dist x (e (m * (π / 3) - π / 6)) < 1 := lt_of_le_of_ne c1 h1
+    by_cases h2 : dist x (e (m * (π / 3) + π / 6)) = 1
+    · exact mem_arcs_of_lens_boundary₂ hx m h2 c1
+    · exact absurd ⟨h1', lt_of_le_of_ne c2 h2⟩ hm
+
+/-- The floor of `arg y / (π/3)` is locally constant at a non-integer value. -/
+theorem eventually_floor_arg {x : ℂ} (hsl : x ∈ Complex.slitPlane)
+    (hnint : ∀ n : ℤ, Complex.arg x / (π / 3) ≠ n) :
+    ∀ᶠ y in 𝓝 x, ⌊Complex.arg y / (π / 3)⌋ = ⌊Complex.arg x / (π / 3)⌋ := by
+  have hπ := Real.pi_pos
+  have hc : ContinuousAt (fun y : ℂ => Complex.arg y / (π / 3)) x :=
+    (Complex.continuousAt_arg hsl).div_const _
+  set a := Complex.arg x / (π / 3) with ha
+  have hmem : a ∈ Ioo ((⌊a⌋ : ℝ)) (⌊a⌋ + 1) :=
+    ⟨lt_of_le_of_ne (Int.floor_le a) (fun h => hnint ⌊a⌋ h.symm), Int.lt_floor_add_one a⟩
+  filter_upwards [hc.preimage_mem_nhds (Ioo_mem_nhds hmem.1 hmem.2)] with y hy
+  exact Int.floor_eq_iff.mpr ⟨hy.1.le, hy.2⟩
+
+/-- `sixCol` is locally constant off the arcs, inside `B(0, 3/2)`: the floor of `arg x / 60°` jumps only on the rays
+`60°j`, which inside the disc are radial segments and outside lie in lenses (where the round is constant); the round
+jumps only on the rays `60°j + 30°`, which outside the disc lie in gaps (where it is not read); `arg` jumps only on the
+ray `180°`; the lens test changes only on the lens sides; `‖x‖ < 1` changes only on the unit circle. -/
+theorem sixCol_locallyConstant : ∀ x ∈ ball (0 : ℂ) (3 / 2), x ∉ ⋃ a ∈ sixArcs, a.carrier →
+    ∀ᶠ y in 𝓝 x, sixCol y = sixCol x := by
+  intro x hx hxΓ
+  have hπ := Real.pi_pos
+  have hx32 : ‖x‖ < 3 / 2 := by simpa using hx
+  have hx0 : x ≠ 0 := by
+    rintro rfl
+    exact hxΓ (by simpa using mem_arcs_radial (le_refl (0 : ℝ)) zero_le_one 0)
+  have hn1 : ‖x‖ ≠ 1 := fun h => hxΓ (mem_arcs_of_norm_eq_one h)
+  have hxe := eq_norm_mul_e_arg (x := x)
+  have hslit_of : (∀ n : ℤ, Complex.arg x / (π / 3) ≠ n) → x ∈ Complex.slitPlane := by
+    intro hnint
+    rw [Complex.mem_slitPlane_iff_arg]
+    refine ⟨fun h => hnint 3 ?_, hx0⟩
+    rw [h]; push_cast; field_simp
+  rcases lt_or_gt_of_ne hn1 with hlt | hgt
+  · -- inside the unit disc
+    have hnint : ∀ n : ℤ, Complex.arg x / (π / 3) ≠ n := by
+      intro n hn
+      have : Complex.arg x = n * (π / 3) := by rw [← hn]; field_simp
+      apply hxΓ
+      rw [hxe, this]
+      exact mem_arcs_radial (norm_nonneg _) hlt.le n
+    have hfl := eventually_floor_arg (hslit_of hnint) hnint
+    have hnb : ∀ᶠ y in 𝓝 x, ‖y‖ < 1 := (continuous_norm.continuousAt).eventually_lt continuousAt_const hlt
+    filter_upwards [hfl, hnb] with y h1 h2
+    simp only [sixCol, h2, hlt, if_true, sixSector, h1]
+  · -- outside the unit disc
+    by_cases hL : ∃ m : ℤ, InSixLens m x
+    · obtain ⟨m, hm⟩ := hL
+      have hnb : ∀ᶠ y in 𝓝 x, InSixLens m y ∧ 1 < ‖y‖ := by
+        have o1 : IsOpen {y : ℂ | InSixLens m y} := by
+          unfold InSixLens
+          exact (isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+            (isOpen_lt (continuous_id.dist continuous_const) continuous_const)
+        have o2 : IsOpen {y : ℂ | 1 < ‖y‖} := isOpen_lt continuous_const continuous_norm
+        exact (o1.inter o2).mem_nhds ⟨hm, hgt⟩
+      filter_upwards [hnb] with y hy
+      rw [sixCol_of_lens hy.2.le hy.1, sixCol_of_lens hgt.le hm]
+    · push Not at hL
+      have hnl : ∀ᶠ y in 𝓝 x, ∀ m : ℤ, ¬ InSixLens m y := by
+        have hj : ∀ j : Fin 6, ∀ᶠ y in 𝓝 x, ¬ InSixLens (((j : ℕ) : ℤ)) y := by
+          intro j
+          have hd := exists_one_lt_dist_of_not_lens hgt.le hxΓ (((j : ℕ) : ℤ)) (hL _)
+          have o : IsOpen {y : ℂ | 1 < dist y (e ((((j : ℕ) : ℤ) : ℝ) * (π / 3) - π / 6)) ∨
+              1 < dist y (e ((((j : ℕ) : ℤ) : ℝ) * (π / 3) + π / 6))} :=
+            (isOpen_lt continuous_const (continuous_id.dist continuous_const)).union
+              (isOpen_lt continuous_const (continuous_id.dist continuous_const))
+          filter_upwards [o.mem_nhds hd] with y hy ⟨h1, h2⟩
+          rcases hy with hy | hy <;> linarith
+        have := (Filter.eventually_all (ι := Fin 6)).mpr hj
+        filter_upwards [this] with y hy m
+        obtain ⟨j, hjm⟩ := inSixLens_reduce m
+        rw [hjm]; exact hy j
+      have hnint : ∀ n : ℤ, Complex.arg x / (π / 3) ≠ n := by
+        intro n hn
+        have harg : Complex.arg x = n * (π / 3) := by rw [← hn]; field_simp
+        have hr : 0 < ‖x‖ := by linarith
+        have hs3 : (3 / 2 : ℝ) < Real.sqrt 3 := by
+          rw [Real.lt_sqrt (by norm_num)]; norm_num
+        refine hL n ⟨?_, ?_⟩
+        · rw [hxe, harg, dist_polar_lt_one_iff hr]
+          rw [show (n : ℝ) * (π / 3) - (n * (π / 3) - π / 6) = π / 6 by ring, Real.cos_pi_div_six]
+          linarith
+        · rw [hxe, harg, dist_polar_lt_one_iff hr]
+          rw [show (n : ℝ) * (π / 3) - (n * (π / 3) + π / 6) = -(π / 6) by ring, Real.cos_neg, Real.cos_pi_div_six]
+          linarith
+      have hfl := eventually_floor_arg (hslit_of hnint) hnint
+      have hnb : ∀ᶠ y in 𝓝 x, 1 < ‖y‖ := continuousAt_const.eventually_lt (continuous_norm.continuousAt) hgt
+      filter_upwards [hfl, hnl, hnb] with y h1 h2 h3
+      have hn : ¬ ‖y‖ < 1 := not_lt.mpr h3.le
+      have hn' : ¬ ‖x‖ < 1 := not_lt.mpr hgt.le
+      simp only [sixCol, hn, hn', if_false, h2 _, hL _, sixSector, h1]
+
+/-- **FS116-Y2-SIXFRAG's fragment**: the six-coloured map of `B(0, 3/2)` by the unit sector flower, six lenses and six gap
+tiles. -/
+noncomputable def sixFrag : ArcMap 6 where
+  dom := ball 0 (3 / 2)
+  isOpen_dom := isOpen_ball
+  arcs := sixArcs
+  nondegenerate := sixArcs_nondegenerate
+  locallyFinite := sixArcs_locallyFinite
+  col := sixCol
+  locallyConstant := sixCol_locallyConstant
 
 /-! ## Spec examples of the colour (each fails if `sixCol` drifts) -/
 
