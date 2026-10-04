@@ -1,5 +1,5 @@
 slot: admitted vacuity.sh: mem 24 GiB (hard cap), cpus 0,1,2,3
-==> vacuity-self-test: this run's full output: build/gate/vacuity-self-test/20261004T130122Z-3733491.log
+==> vacuity-self-test: this run's full output: build/gate/vacuity-self-test/20261004T130807Z-3749252.log
     control run: === SCANNED === declarations=7694 refutations-skipped=47
     control run: === TOTALS === sites=374 vacuous=7 stale=1 declared=3 witnessed=17 generic=339 unknown=7 untelescoped=0
 ==> vacuity self-test: twenty planted defects, each watched to fire
@@ -24,4 +24,4 @@ slot: admitted vacuity.sh: mem 24 GiB (hard cap), cpus 0,1,2,3
     ok    UNKNOWN planted_unknown_ne — the ≠ shape at a k nothing refutes: the load-bearing half
     ok    (no row) planted_arrow_false — a genuine refutation P → False over the empty carrier stays skipped
 ==> vacuity self-test: OK — every control fired, and the silent ones stayed silent.
-    full output: build/gate/vacuity-self-test/20261004T130122Z-3733491.log
+    full output: build/gate/vacuity-self-test/20261004T130807Z-3749252.log

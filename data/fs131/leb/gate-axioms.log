@@ -1,5 +1,5 @@
 slot: admitted axioms.sh: mem 24 GiB (hard cap), cpus 0,1,2,3
-==> axioms: this run's full output: build/gate/axioms/20261004T130019Z-3728310.log
+==> axioms: this run's full output: build/gate/axioms/20261004T130707Z-3747446.log
     audited: 1308 records — 1292 clean on the standard axioms, 11 axiom-free, 5 declared purchase(s)
     clean records, by axiom set:
        1191  [propext, Classical.choice, Quot.sound]
@@ -15,7 +15,8 @@ slot: admitted axioms.sh: mem 24 GiB (hard cap), cpus 0,1,2,3
       HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
     RECORDED COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 1285 clean → 1292
     --- changes since the previous complete run ---
-    no previous complete run on record; the next run is compared with this one
+    previous: build/gate/axioms/20261004T130019Z-3728310.log
+    no record appeared, disappeared or changed its axioms
     purchase ledgers agree — the docstrings warn of exactly the purchases the audit finds (5): four_le_chromaticNumber_plane_certified moserSpindle_cnf_unsat moserSpindleCubes_unsat moserSpindle_not_colorable_three_cubes moserSpindle_not_colorable_three_lrat
 ==> axioms: OK — 1292 clean, 11 axiom-free, 5 declared purchase(s)
-    full output: build/gate/axioms/20261004T130019Z-3728310.log
+    full output: build/gate/axioms/20261004T130707Z-3747446.log

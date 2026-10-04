@@ -1,5 +1,5 @@
 slot: admitted vacuity.sh: mem 24 GiB (hard cap), cpus 0,1,2,3
-==> vacuity: this run's full output: build/gate/vacuity/20261004T130022Z-3728678.log
+==> vacuity: this run's full output: build/gate/vacuity/20261004T130710Z-3747682.log
     scanned: declarations=7673  refutations-skipped=45
     sites:   sites=357  vacuous=0  stale=0  declared=3  witnessed=17  generic=335  unknown=2
     evidence: 6 emptiness proof(s), 41 witness(es)
@@ -24,8 +24,10 @@ slot: admitted vacuity.sh: mem 24 GiB (hard cap), cpus 0,1,2,3
     WITNESSED HadwigerNelson.twoAdicFive_forces_delta :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
     WITNESSED HadwigerNelson.twoAdicFive_forces_of_ker :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
     --- changes since the previous complete run ---
-    no previous complete run on record; the next run is compared with this one
-    every site and piece of evidence: rg '^(SITE|EVIDENCE) ' build/gate/vacuity/20261004T130022Z-3728678.log
+    previous: build/gate/vacuity/20261004T130022Z-3728678.log
+    counts: unchanged
+    rows: none changed
+    every site and piece of evidence: rg '^(SITE|EVIDENCE) ' build/gate/vacuity/20261004T130710Z-3747682.log
     --- declared empty, by design (3) ---
     DECLARED HadwigerNelson.core122_plane :: known vacuous and retained under this project's never-delete rule — same reason as `core9_plane`, same correction in ledger row 31, same instruction not to consume it. The 122-point carrier `core122_pigeonhole` above is the real content.
     DECLARED HadwigerNelson.core9_plane :: known vacuous and retained under this project's never-delete rule. Rung B makes `(unitDistance ℂ).Coloring (Fin 4)` empty (`Interval.lean`, `isEmpty_coloring_plane_four`), so this says nothing; it is kept because the record cites it by name, and ledger row 31 carries the correction. DO NOT CONSUME IT — the non-vacuous replacement over `K` is stubbed in `plans/STUB-four-colour-valuation-law.md`. The 1-minimal CARRIER above, `core9_pigeonhole`, is the real content and is not vacuous.
@@ -34,4 +36,4 @@ slot: admitted vacuity.sh: mem 24 GiB (hard cap), cpus 0,1,2,3
     UNKNOWN HadwigerNelson.hexShell_plane5
     UNKNOWN HadwigerNelson.hexShell_plane6
 ==> vacuity: OK
-    full output: build/gate/vacuity/20261004T130022Z-3728678.log
+    full output: build/gate/vacuity/20261004T130710Z-3747682.log
