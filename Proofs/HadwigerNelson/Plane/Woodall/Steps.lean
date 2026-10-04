@@ -92,7 +92,65 @@ of three or more colours; that point lacks two of `v`'s colours, so it carries e
 `step6` excludes it. Replaces Woodall's steps 7–8 (FS131-E1's E1-Q2) and step 5's equality case (E1-Q1). -/
 theorem false_of_four_le_sectors (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) (hN : F.WoodallNormal) {v : ℂ} {n : ℕ}
     {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c) (hn : 4 ≤ n) : False := by
-  sorry
+  obtain ⟨hc, hang⟩ := hN v n d c h (by omega)
+  have hpi := Real.pi_pos
+  have hnk : n ≤ k := by simpa using Fintype.card_le_of_injective c hc
+  have hpos : ∀ i : Fin n, 0 < d i.succ - d i.castSucc := fun i => by linarith [hang i]
+  -- each angle is at most `π`: the other `n − 1 ≥ 3` angles are at least `π/3` each
+  have hπ : ∀ i : Fin n, d i.succ - d i.castSucc ≤ π := by
+    intro i
+    have hsum := sum_width h.2.2.1
+    rw [← Finset.add_sum_erase Finset.univ _ (Finset.mem_univ i)] at hsum
+    have hge : (Finset.univ.erase i).card • (π / 3) ≤ ∑ j ∈ Finset.univ.erase i, (d j.succ - d j.castSucc) :=
+      Finset.card_nsmul_le_sum _ _ _ fun j _ => hang j
+    rw [Finset.card_erase_of_mem (Finset.mem_univ i), Finset.card_univ, Fintype.card_fin, nsmul_eq_mul] at hge
+    have : (3 : ℝ) ≤ ((n - 1 : ℕ) : ℝ) := by
+      have : 3 ≤ n - 1 := by omega
+      exact_mod_cast this
+    nlinarith
+  -- at most one colour is absent from the picture
+  have habs : ∀ X Y : Fin k, X ∉ Set.range c → Y ∉ Set.range c → X = Y := by
+    intro X Y hX hY
+    by_contra hXY
+    have hsub : Finset.univ.image c ⊆ (Finset.univ.erase X).erase Y := by
+      intro j hj
+      obtain ⟨i, -, rfl⟩ := Finset.mem_image.mp hj
+      exact Finset.mem_erase.mpr ⟨fun hh => hY ⟨i, hh⟩, Finset.mem_erase.mpr ⟨fun hh => hX ⟨i, hh⟩, Finset.mem_univ _⟩⟩
+    have h1 := Finset.card_le_card hsub
+    rw [Finset.card_image_of_injective _ hc, Finset.card_univ, Fintype.card_fin,
+      Finset.card_erase_of_mem (Finset.mem_erase.mpr ⟨Ne.symm hXY, Finset.mem_univ _⟩), Finset.card_erase_of_mem (Finset.mem_univ _),
+      Finset.card_univ, Fintype.card_fin] at h1
+    omega
+  obtain ⟨K, hK, hoff⟩ := SectorsAt.exists_two_absent hF hP h (by omega) hc hpos hπ
+  obtain ⟨θ, hθ⟩ := exists_Ioo_avoiding K (by omega)
+  -- an arc of length `2π/5 > π/3` free of cut angles holds a point of three colours
+  obtain ⟨θ', hθ'I, hθ'3⟩ : ∃ θ' ∈ Ioo θ (θ + 2 * π / 5), 3 ≤ (F.coloursAt (v + e θ')).ncard := by
+    by_contra hcon
+    push Not at hcon
+    exact SectorsAt.false_of_ncard_le_two_on_arc hF hP h hpos habs (θ₁ := θ) (θ₂ := θ + 2 * π / 5) (by linarith)
+      (fun θ' hθ' => by have := hcon θ' hθ'; omega)
+  obtain ⟨i, j, hij, hi, hj⟩ := hoff θ' (fun κ hκ m hm => hθ κ hκ m (hm ▸ hθ'I))
+  -- that point lacks two of `v`'s colours, so it carries exactly three
+  have hsub : F.coloursAt (v + e θ') ⊆ ((Finset.univ.erase (c i)).erase (c j) : Finset (Fin k)) := by
+    intro x hx
+    exact Finset.mem_coe.mpr (Finset.mem_erase.mpr ⟨fun hh => hj (hh ▸ hx), Finset.mem_erase.mpr ⟨fun hh => hi (hh ▸ hx), Finset.mem_univ _⟩⟩)
+  have hnc : (F.coloursAt (v + e θ')).ncard ≤ 3 := by
+    have h1 := Set.ncard_le_ncard hsub (Finset.finite_toSet _)
+    rw [Set.ncard_coe_finset, Finset.card_erase_of_mem (Finset.mem_erase.mpr ⟨hij.symm, Finset.mem_univ _⟩),
+      Finset.card_erase_of_mem (Finset.mem_univ _), Finset.card_univ, Fintype.card_fin] at h1
+    omega
+  -- its picture has three sectors in normal form
+  obtain ⟨n', d', c', h'⟩ := exists_sectorsAt hP (v + e θ')
+  have hcol := h'.coloursAt_eq
+  have hrange : (range c').ncard ≤ n' := by
+    rw [← Nat.card_coe_set_eq]; simpa using Finite.card_range_le c'
+  have hn'3 : 3 ≤ n' := by rw [hcol] at hθ'3; omega
+  obtain ⟨hinj', hang'⟩ := hN (v + e θ') n' d' c' h' hn'3
+  have hrn : (range c').ncard = n' := by
+    rw [← Set.image_univ, Set.ncard_image_of_injective _ hinj', Set.ncard_univ]; simp
+  have hn'le : n' ≤ 3 := by rw [← hrn, ← hcol]; exact hnc
+  obtain rfl : n' = 3 := by omega
+  exact step6 hk hF hP h' hinj' hang'
 
 /-! ## A vertex exists -/
 
@@ -102,7 +160,13 @@ least three colours; its picture has at least three sectors. Woodall's "no verti
 conditions do not give for arc maps. -/
 theorem exists_three_le_sectors (hF : F.Valid) (hP : F.IsPlaneMap) :
     ∃ v n d c, F.SectorsAt v n d c ∧ 3 ≤ n := by
-  sorry
+  obtain ⟨x, -, hx3⟩ := ts_t hF hP 0 (ε := 1) one_pos
+  obtain ⟨n, d, c, h⟩ := exists_sectorsAt hP x
+  refine ⟨x, n, d, c, h, ?_⟩
+  have hrange : (range c).ncard ≤ n := by
+    rw [← Nat.card_coe_set_eq]; simpa using Finite.card_range_le c
+  rw [h.coloursAt_eq] at hx3
+  omega
 
 /-! ## The theorems -/
 
@@ -110,19 +174,27 @@ theorem exists_three_le_sectors (hF : F.Valid) (hP : F.IsPlaneMap) :
 exist (a point of `n ≥ 3` sectors, `exists_three_le_sectors`, has `n ≤ 5` distinct colours; `step6` at three, `false_of_four_le_sectors` at four
 and five). -/
 theorem aeMap6_normal (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) (hN : F.WoodallNormal) : False := by
-  sorry
+  obtain ⟨v, n, d, c, hS, h3⟩ := exists_three_le_sectors hF hP
+  obtain ⟨hinj, hang⟩ := hN v n d c hS h3
+  have hnk : n ≤ k := by simpa using Fintype.card_le_of_injective c hinj
+  by_cases h4 : 4 ≤ n
+  · exact false_of_four_le_sectors hk hF hP hN hS h4
+  · obtain rfl : n = 3 := by omega
+    exact step6 hk hF hP hS hinj hang
 
 /-- **FS106-AE-MAP6** (arc maps): no map of the plane bounded by a locally finite family of segments and circular arcs, coloured with at most
 five colours, is almost-everywhere proper (no two interior points of one colour at distance exactly `1`; boundary points carry no colour).
 "Boundaries of measure 0" is not used (the row's last clause). The chain: steps 1–3, strict step 5, step 6, E1-NO45, E1-NOBRANCH (FS131-E1's
 E1-MAPS6); no step reads an angle equal to `π/3`, and nothing of Woodall's steps 7–8 is used. -/
 theorem aeMap6 (F : ArcMap k) (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) : False := by
-  sorry
+  obtain ⟨F', hv, hp, hM, -⟩ := exists_woodallMerged hF hP
+  exact aeMap6_merged hk hv hp hM
 
 /-- **FS106-AE-MAP6 under Condition 5** (no boundary meets a unit circle in infinitely many points): a corollary of `aeMap6`, Condition 5 unused
 (FS131-E1: "the Condition-5 form becomes a corollary"). -/
 theorem aeMap6_of_condition5 (F : ArcMap k) (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) (h5 : F.Condition5) : False := by
-  sorry
+  have _ := h5
+  exact aeMap6 F hk hF hP
 
 end ArcMap
 
@@ -132,6 +204,8 @@ the distance `1` — a colouring `col` agreeing with the map's colour at its int
 `ArcMap.aeMap6`: properness at every pair gives validity. -/
 theorem woodall_thm6 {k : ℕ} (hk : k ≤ 5) (F : ArcMap k) (hP : F.IsPlaneMap) (col : ℂ → Fin k)
     (hdiv : ∀ x ∈ F.interiorPts, col x = F.col x) (hproper : ∀ x y : ℂ, dist x y = 1 → col x ≠ col y) : False := by
-  sorry
+  refine ArcMap.aeMap6 F hk (fun x hx y hy hd => ?_) hP
+  rw [← hdiv x hx, ← hdiv y hy]
+  exact hproper x y hd
 
 end HadwigerNelson.Plane
