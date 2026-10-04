@@ -177,3 +177,8 @@ purchase(s)" (`data/fs131/i3i/axioms-gate2.log`, `build/gate/axioms/20261004T152
 (`data/fs131/i3i/vacuity-gate2.log`, `build/gate/vacuity/20261004T152430Z-339294.log`); `check_architecture` PASS (`data/fs131/i3i/arch2.log`). Then
 `origin/main` fast-forwarded to this branch by `git push origin HEAD:main` (the commit carrying this stage and the report). The main tree's local `main`
 was not touched.
+
+**Third merge** (`0fe08a25`): `origin/main` moved again during the report (`d5a4acfd`: QA2's `plans/FS131-QA2-audit.md` and `tools/fs131_qa2_brick.py`
+only). `git diff 746a7b80 0fe08a25 -- Proofs scripts lakefile.toml lean-toolchain ARCHITECTURE.md` is empty, so the gate of `746a7b80` covers the same Lean
+source and gate scripts; the build re-run there: "all 1737 modules already up to date, nothing built, 0 module(s) with warnings"
+(`build/gate/build/20261004T152617Z-348924.log`).
