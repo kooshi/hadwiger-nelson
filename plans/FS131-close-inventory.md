@@ -551,3 +551,13 @@ reason by the close.*
     build 444/444, only `sorry` warnings. Generalization G-TW: Townsend's lemma region-only, with one-sided collars whose side may vary with the angle (the seed
     one-sided, as every use has). **Vacuity rule for wave 9**: `aeMap6` says no valid five-coloured arc map exists, so any statement over such maps not concluding
     `False` is vacuous — compositions over "a valid five-coloured arc map" must be refutations (W folded the normal-form step into `aeMap6_merged`).
+97. **FS131-W done, harness ≈ 270k** (report on its branch; `fs131-ww` at `7aaaf2c4`, checked): Woodall's chain planned over `ArcMap` — 31 leaves (15 in `Collar`, 16 in
+    `Steps`), every one planned except the two open in the derivation (`step5_eq`, `step7`); `exists_woodallMerged` (Woodall's step 3, a global recolouring near the
+    vertices) priced H+, likely its own implementer job; a stronger helper (`false_of_collars_closed`) carries `woodall_step4` and `step5_eq_of_condition5`. Drafts
+    (plan § 5) for `CLAUDE.md` § The aim item 4, `LEDGER.md` row 132, `BIBLIOGRAPHY.md` ([Woodall1973] § 3 re-read from page images; [Townsend1979ms] re-read in
+    full) and FS106's errata — **held until FS131-E1 reports** (item 88).
+98. **Ruling — how Woodall's chain lands while two steps are open** (W's held decision): an implementer may build the chain's proved leaves now; the landing form
+    waits for FS131-E1. If E1 closes the GAPs, the chain lands unconditionally; if not, it lands with the open steps as named propositions — hypotheses of
+    `aeMap6`, `aeMap6_of_condition5` and `woodall_thm6`, in the way row 127 holds the main clause over named hypotheses — and FS106-AE-MAP6 stays unheld, recorded as
+    GAP. Alternative weighed: (b) now, restating the three theorems before E1 reports. Why: E1 may change what the open statements should say; restating twice costs
+    a planner job. Confidence: high. The Woodall implementer (FS131-IW) joins the queue after FS131-I4.
