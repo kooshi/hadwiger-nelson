@@ -582,3 +582,8 @@ reason by the close.*
      leaves closed per session against I2–I2e (inventory items 49, 58, 70, 82). The GitHub repository (item 9): the record holds its name only, from a search
      listing (`plans/FS131-kernel-plan.md` § 3.2) — `decalion89/chromatic-number-of-the-plane`, release v1.1.0; the same listing pass saw a Zenodo record claiming a
      formal verification that the plane is seven-chromatic (not read). Kooshi reads the repository.
+104. **Brief FS131-K2d, wave 2's last planning stage** (`debruijn`, Opus; `data/fs131/briefs/FS131-K2d-wave2-children.md`, gated PASS): state the ◇ children of
+     § 12.2 for the 17 leaves in `Plane/CoverExamples`, `Arith/PlaceHom`, `Arith/FalconerField`; plan `exists_not_uniform_kept`'s in the record (`Plane/Slack` is
+     I2e's). Worktree `.claude/worktrees/fs131-w2d`, branch `fs131-w2d` from `fs131-w2` at `29082313`; `.lake/packages` symlinked, `.lake/build` copied from
+     `fs131-w2`'s (no build running there at the copy). K2d merges `fs131-w2` into its branch at the end; the merge back into `fs131-w2` is the next implementer's
+     first step. Launched in the free slot (handoff § 4 item 1): slots 0.5 + 0.5 + 1 + 1 = 3. Queue after it: the Opus-implementer trial (after I2e), I4, IW, LEB.
