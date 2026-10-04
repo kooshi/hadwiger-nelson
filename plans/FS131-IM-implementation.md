@@ -199,3 +199,33 @@ the multi-branch cut; MERGE adds the gap's choice and the rim and `D_c(v′)` cl
 **Re-pricing** (standing order, from the first leaves): the germ arc, one of about a dozen children of comparable size SHAVE needs, took about 15k tokens of
 work; with (1)–(5) SHAVE is about three of my sessions, RAY two more over SHAVE's machinery, MERGE two to three — against IC1's "about a session each". The
 surgery engine ((1), (2), the counting partition) is shared and is most of SHAVE's cost; RAY and MERGE are cheaper once it stands.
+
+## Stage 4 — SAVED: FS131-IM2's readback, the as-given build
+
+*FS131-IM2 (de Bruijn, the implementer, on Opus) resumes this record at Stage 4 (standing rule 2): the last SAVED stage is 3, committed in
+`8d075e9c` and reported in `dbedaf97` (`git log -- plans/FS131-IM-implementation.md`). Brief: `data/fs131/briefs/FS131-IM2-moves.md` (on `main`).
+Report: `data/fs131/reports/FS131-IM2.md`.*
+
+### 4.1 The brief's quotations against their sources (standing rule 3)
+
+| quotation (a prefix, cut with `…`) | source | result |
+|---|---|---|
+| "236. **Ruling: `Contact` splits once more, when a slot frees** — the three moves (…) to a parallel implementer in a" | `plans/FS131-close-inventory.md` l. 1692 (on `main`) | **verbatim** |
+| "262. **Corrections, slips and a tool defect from IM1's report.** (a) **Correction owed — N4-RAY's route**: recolouring the whole gap merges every `c`-sector" | the same, l. 1884 | **verbatim** |
+| "263. **Ruling: the second move is a prefix move, into `Cone`, by IM1's successor on `fs131-w4m`.** Choice: FS131-IM2 moves **every declaration of `Contact` from" | the same, l. 1893 | **verbatim** |
+| "Every move builds `F'` with `F'.dom = F.dom`, `F'.col = F.col` off the recoloured region `R ⊆ B(v, ρ)`, and" | this record § 3.1 | **verbatim** |
+| "**Proved**: the seven children listed under "Theorems this phase proved"; engine 2 brought over byte-identical; the `Cone` block moved and checked; the three" | this record § 3.5 | **verbatim** |
+| "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the" | `.claude/worktrees/fs131-w4/plans/FS131-w4-kernel-plan.md` § 14.2 | **verbatim** |
+| "- **The moves' form (G-MOVES-UA)**: `exists_shave`, `exists_rayMerge`, `exists_merge` hold with unit arcs and conclude `F'.RingArcsWithin F` (no unit arc" | the same, § 14.5 | **verbatim** |
+
+**One wording difference, not a defect**: ruling 263 says "the single lemma already moved stays moved"; **two** of IM1's three single lemmas lie inside
+d4f946ae's l. 1057–2593 — `not_mem_interiorPts_of_mem_closure_sector` (l. 1373–1386) and `hornSet_mono_radius` (l. 1716–1718); the third,
+`IsSector.eq_of_mem` (l. 2627–2632), lies below the range. Both stay where IM1 put them in `Cone`; the second move is the range minus those two holes.
+
+The brief's state is as stated: branch head `dbedaf97`, tree clean, Lean sources at `8d075e9c`'s state.
+
+### 4.2 The branch builds as given
+
+`dbedaf97`, under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK**, all 1746 modules already up to date,
+nothing built; warnings only `declaration uses 'sorry'` — `BaseSteps` 7, `UnitArc` 17, `Contact` 4 (the three moves and `stuck_structure`), `Moves` 3 (the three
+`…_aux`). Log `build/gate/build/20261004T222624Z-2921733.log`; terminal output `data/fs131/im/build-im2-asgiven.log`.
