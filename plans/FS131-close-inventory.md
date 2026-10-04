@@ -632,3 +632,7 @@ reason by the close.*
      no manifest, default target's root absent). **Keryx's receipt**: read the file at that commit in the agent's working copy — `outside_headline`'s statement,
      its proof (six reals each `< π/3` sum to `< 2π`) and the definitions `OutsideColoring`, `outside_safe`, `OutsideDensity`, `outside_measure` as quoted; and the `r < 1/2`
      case by hand (diameter `2r < 1`). Agent continuing: compile against Mathlib, small Lean refutations, `#print axioms`.
+111. **Kooshi's ruling, 2026-10-04 (verbatim)**: *"lean proof serves as the check That's our new standard so we kill two birds with one stone."* — no blind second
+     mind on E1-NO45; FS131-W2's formalization is its check (item 107's held decision, closed). On the outside repositories: *"The other github repo is better,
+     but they're far behind us."* (`decalion89/chromatic-number-of-the-plane`, item 105; its prior-art note — an independent Lean formalization of rows 103 and
+     57 — stays a debt for `BIBLIOGRAPHY.md` at the close.)
