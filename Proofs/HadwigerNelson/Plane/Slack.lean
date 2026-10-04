@@ -285,7 +285,76 @@ theorem AeColouring.exists_rescale (c : AeColouring k) {s : ℝ} (hs : 0 < s)
 /-- A class of positive measure has non-null pairs at distances in `[a, 1]` for some `a > 0` (a density point `x` and
 `r ≤ 1/2` with density `≥ 9/10` in `B(x, r)` give positive mass to pairs at distance in `[r/2, 2r]`). -/
 theorem AeColouring.exists_pos_not_iccPairNull (c : AeColouring k) : ∃ a > 0, ∃ j, ¬ IccPairNull (c.cls j) a 1 := by
-  sorry
+  have hcov : (⋃ j, c.cls j) = univ := by
+    ext x; simp only [mem_iUnion, mem_univ, iff_true]; exact ⟨c.col x, rfl⟩
+  obtain ⟨j, hj⟩ : ∃ j, volume (c.cls j) ≠ 0 := by
+    by_contra h
+    push Not at h
+    have h0 : volume (univ : Set ℂ) = 0 := by rw [← hcov]; exact measure_iUnion_null h
+    rw [Measure.measure_univ_eq_zero] at h0
+    exact (NeZero.ne (volume : Measure ℂ)) h0
+  set A := c.cls j with hAdef
+  have hAm : MeasurableSet A := c.measurable (measurableSet_singleton j)
+  haveI : (ae (volume.restrict A)).NeBot := ae_neBot.2 (by rwa [Ne, Measure.restrict_eq_zero])
+  obtain ⟨x, hx⟩ := (ae_restrict_mem_densitySet A).exists
+  have hev : ∀ᶠ r in 𝓝[>] (0 : ℝ), (1 / 2 : ENNReal) < densityRatio A x r :=
+    hx.eventually (lt_mem_nhds (by norm_num))
+  obtain ⟨r, hr, hr0⟩ := (hev.and (Ioo_mem_nhdsGT (by norm_num : (0 : ℝ) < 1 / 2))).exists
+  have hrpos : 0 < r := hr0.1
+  set A1 := A ∩ closedBall x r with hA1def
+  have hA1m : MeasurableSet A1 := hAm.inter measurableSet_closedBall
+  have hcb : volume (closedBall x r) = ENNReal.ofReal (r ^ 2 * Real.pi) := by
+    rw [← volume_ball_ofReal x hrpos.le, Complex.volume_ball, Complex.volume_closedBall]
+  have hA1 : ENNReal.ofReal (r ^ 2 * Real.pi / 2) < volume A1 := by
+    unfold densityRatio at hr
+    rw [ENNReal.lt_div_iff_mul_lt (Or.inl (measure_closedBall_pos volume x hrpos).ne')
+      (Or.inl measure_closedBall_lt_top.ne), hcb] at hr
+    refine lt_of_eq_of_lt ?_ hr
+    rw [div_eq_mul_inv, ENNReal.ofReal_mul (by positivity), mul_comm, one_div,
+      ENNReal.ofReal_inv_of_pos (by norm_num), ENNReal.ofReal_ofNat]
+  refine ⟨r / 4, by positivity, j, fun hN => ?_⟩
+  have hsub : A1 ×ˢ A1 ⊆ {q : ℂ × ℂ | q.1 ∈ A1 ∧ dist q.2 q.1 < r / 4} ∪
+      {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ r / 4 ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ 1} := by
+    rintro ⟨p, q⟩ ⟨hp, hq⟩
+    by_cases h : dist p q < r / 4
+    · left; exact ⟨hp, by rw [dist_comm]; exact h⟩
+    · right
+      refine ⟨hp.1, hq.1, not_lt.1 h, ?_⟩
+      have h1 := mem_closedBall.1 hp.2
+      have h2 := mem_closedBall.1 hq.2
+      have := dist_triangle p x q
+      rw [dist_comm x q] at this
+      simp only at h1 h2 ⊢
+      linarith [hr0.2]
+  have hm : MeasurableSet {q : ℂ × ℂ | q.1 ∈ A1 ∧ dist q.2 q.1 < r / 4} :=
+    (measurable_fst hA1m).inter (measurableSet_lt (continuous_snd.dist continuous_fst).measurable measurable_const)
+  have hS : (volume.prod volume) {q : ℂ × ℂ | q.1 ∈ A1 ∧ dist q.2 q.1 < r / 4} ≤
+      volume A1 * ENNReal.ofReal ((r / 4) ^ 2 * Real.pi) := by
+    rw [Measure.prod_apply hm]
+    calc ∫⁻ p, volume (Prod.mk p ⁻¹' {q : ℂ × ℂ | q.1 ∈ A1 ∧ dist q.2 q.1 < r / 4}) ≤
+          ∫⁻ p, A1.indicator (fun _ => ENNReal.ofReal ((r / 4) ^ 2 * Real.pi)) p := by
+          refine lintegral_mono fun p => ?_
+          by_cases hp : p ∈ A1
+          · rw [indicator_of_mem hp, ← volume_ball_ofReal p (by positivity)]
+            exact measure_mono fun q hq => hq.2
+          · rw [indicator_of_notMem hp]
+            exact (measure_mono_null (fun q hq => hp hq.1) measure_empty).le
+      _ = _ := by rw [lintegral_indicator_const hA1m, mul_comm]
+  have key : volume A1 * volume A1 ≤ volume A1 * ENNReal.ofReal ((r / 4) ^ 2 * Real.pi) := by
+    rw [← Measure.prod_prod]
+    calc (volume.prod volume) (A1 ×ˢ A1) ≤ _ := measure_mono hsub
+      _ ≤ _ + _ := measure_union_le _ _
+      _ = (volume.prod volume) {q : ℂ × ℂ | q.1 ∈ A1 ∧ dist q.2 q.1 < r / 4} := by
+          rw [show (volume.prod volume) {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ r / 4 ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ 1} = 0
+            from hN, add_zero]
+      _ ≤ _ := hS
+  have hA1fin : volume A1 ≠ ⊤ := ((measure_mono inter_subset_right).trans_lt measure_closedBall_lt_top).ne
+  have hA1pos : volume A1 ≠ 0 := (lt_of_le_of_lt bot_le hA1).ne'
+  have h1 := (ENNReal.mul_le_mul_iff_right hA1pos hA1fin).1 key
+  have h2 : ENNReal.ofReal ((r / 4) ^ 2 * Real.pi) < ENNReal.ofReal (r ^ 2 * Real.pi / 2) := by
+    rw [ENNReal.ofReal_lt_ofReal_iff (by positivity)]
+    nlinarith [Real.pi_pos, mul_pos hrpos hrpos]
+  exact absurd (h1.trans_lt (h2.trans hA1)) (lt_irrefl _)
 
 /-! ### SUPK: the upper bounds, windows, kept points, periodization -/
 
