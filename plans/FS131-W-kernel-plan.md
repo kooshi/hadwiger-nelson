@@ -834,3 +834,9 @@ new definition (`CrossesAt`) has its spec example and adversary. No new carrier 
 
 **How the chain lands.** Unconditionally (inventory item 98: E1 closed the GAPs): when every leaf is proved and the gate passes, after waves 3 and 4
 land, by merging `main` and the implementer's gate. The open-leaf landing form (b) of § 4.7 is withdrawn.
+
+## Stage 10 — SAVED: the report
+
+The report is `data/fs131/reports/FS131-W2.md` (standing rule 11's form); its text is the job's hand-back. No drafts for Keryx's files beyond § 7.4's
+erratum for E1's record: `CLAUDE.md` § The aim item 4 and `LEDGER.md` row 132 already state maps-need-six for arc maps through E1-NO45 (filed at
+inventory item 107), and nothing here changes them.
