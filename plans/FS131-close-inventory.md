@@ -1834,3 +1834,21 @@ reason by the close.*
 256. **Item 255 sharpened: QA3 takes wave 2's slot** when FS131-I2n hands back (landed or not), not the first slot of any lane. Why: wave 4's three lanes are the
      milestone's longest path and nothing in waves 4–5 waits on wave 2, so wave 2's last steps (5 leaves, the carriers, the gate) can wait one slot-turn; if I2n
      lands wave 2, its slot is free anyway. Wave 2's successor, if one is needed, and wave 5's next implementer then follow as slots free. Confidence: medium.
+257. **Statement finding — `pair_i` (FS112-N3-PAIRS (i), `Plane/ValidMap/BaseSteps` on `fs131-w4`) has a GAP at one configuration** (FS131-I4k, by message,
+     2026-10-04). N3-I's step "a failure at `(x, y)` would recur at nearby unit pairs `(x′, y′)` with `x′` not a leaving centre" (`plans/FS112-N-proof.md` l. 766–769)
+     needs unit pairs near `(x, y)`; they form a curve through it except when `(x, y)` is a strict minimum of `|x′ − y′|`, which happens exactly when
+     `|u₁ − u₂| = 3` with `u₁, x, y, u₂` collinear at spacing 1: there `(x, y)` is isolated and `ω(y)` is tangent to `ω(u₁)` at `x` from outside, so CB's strip argument
+     reaches only an outer-side strip. I4k's local picture `u₁ = 0, x = 1, y = 2, u₂ = 3`, both strips inner, shows no contradiction; no whole fragment built — **a GAP
+     plus a suspected defect, not FALSE**. Consumers read (Keryx, by grep on `fs131-w5`): `BaseCtx.exists_pseudoCircle` (`BaseWalk` l. 153, `u₁ = u₂ = p`) and
+     `BaseCtx.l3_base` (l. 276, `1 < dist u₁ u₂ < 2`) — **neither reaches `|u₁ − u₂| = 3`**. Also from I4k: `fail_leavingCentre` landed (Stage 30, `bf00c377`);
+     `fail_colours`, `anti`, `pair_ii` proved, building (Stage 31); `pair_ii`'s unused binders renamed `_h₂`, `_hc₂`, `_hy` (held for a ruling).
+258. **Ruling on item 257: `pair_i` gains `(h3 : dist u₁ u₂ < 3)`.** Choice: add the hypothesis `dist u₁ u₂ < 3`, which excludes exactly I4k's isolated configuration
+     (for `|u₁ − u₂| > 3` no unit pair exists, so `< 3` and `≠ 3` agree); the docstring's "no transversality hypothesis" is rewritten to name it; the axioms record
+     is by name and unchanged. Alternatives weighed: (1) I4k's `dist y u₁ ≠ 2` (`pair_ii`'s `htr` form); (2) keep the statement and send the isolated case to an Ephodos
+     job. Why: both consumers meet `dist u₁ u₂ < 3` outright (0, and below 2), whereas `dist y u₁ ≠ 2` would move tangent-pair avoidance into `l3_base`'s proof; and
+     by I4k's own account the perturbation is needed anyway where the strip fails, and away from `|u₁ − u₂| = 3` the unit pairs near a tangent pair form a curve along
+     which tangency recurs at most twice (`|u₁ + 2e^{iθ} − u₂| = 1` has at most two roots) — Keryx's inference, labelled so, for I4k to confirm or refute. (2) is
+     declined: no consumer reads the isolated case. **Fallback**: if the tangent case at `|u₁ − u₂| < 3` resists, take (1) and say so in the report, and `l3_base`'s
+     implementer is told to discharge `dist y u₁ ≠ 2`. Confidence: medium — what would change it: the tangent case resisting the perturbation. **Erratum owed** to
+     FS112-N3-PAIRS ("(i)'s unconditional form"): drafted by I4k in its report, filed at the milestone's filing. **Wave 5's next brief** carries the new hypothesis
+     (`l3_base` discharges it from `ht'`). `pair_ii`'s renames `_h₂`, `_hc₂`, `_hy` accepted (ruling 185's reasons: a binder name is not part of the type).
