@@ -168,3 +168,48 @@ The Stage 1 build ran 07:34–07:42 under the slot: **OK, 440 of 440 batches**, 
 worktree. Because `build_order.py` walks every file under `Proofs/`, it first compiled the two skeleton modules (with `sorry` warnings),
 then, at its end, recompiled them in their proved form (`rebuilt: Topology.SpernerGrid, Topology.LebesgueCovering, Proofs`, no warnings).
 The tree as given from `main` built unchanged: no other module was rebuilt.
+
+## Stage 4 — SAVED: the plan per leaf, and the handoff
+
+### 4.1 The plan per leaf
+
+**No leaf is left.** The route was short enough that proving it was the quickest way to show it works (brief, § Done means item 6),
+so every leaf of the skeleton was closed in this job; the skeleton commit and the proof commit are one (`18735b71`), because the
+proofs closed in the same sitting as the skeleton elaborated. For a reader, the leaves and how each closed:
+
+| leaf | route | Mathlib / library names | price as measured |
+|---|---|---|---|
+| `door_cell`, `door_eq_*`, `Rainbow.exhaust`, `fin3_eq_one`, `zmod2_*` | `revert …; decide` over `Fin 3` (at most 81 cases) | — | one try |
+| `rowDoors_add_rowDoors` | induction on the column count; one cell per step: `door_cell` and `linear_combination hn + key + Vₙ * zmod2_two` (the doubled vertical edge cancels in `ZMod 2`) | `Finset.sum_range_succ` | one try, after importing `Mathlib.Tactic.LinearCombination` |
+| `sum_range_add_succ`, `rowDoors_bottom`, `rowDoors_top`, `rowDoors_succ_eq` | telescoping in `ZMod 2`; `door = bit + bit` on `{0, 1}` labels; `Finset.sum_eq_zero` | `Finset.sum_congr`, `Finset.sum_eq_zero`, `Finset.mem_range` | one try |
+| `exists_rainbowCell` | by contradiction; induction on the row: every line has door parity `1`, the top has `0` | `push Not` (`push_neg` is deprecated at the pin) | one try |
+| `leastLabel` lemmas | `unfold; split_ifs` (note: `split_ifs` discharges a test that a hypothesis already decides, so `leastLabel_ne_one` has two goals, not three) | — | two tries |
+| `gridPt_*`, `dist_gridPt_le` | `field_simp; ring`; `‖z‖ ≤ \|re z\| + \|im z\|` and `mul_le_of_le_one_left` | `Complex.norm_le_abs_re_add_abs_im`, `Complex.dist_eq` | one try |
+| `exists_mem_inter_three` | Lebesgue number on the cover by `(G k)ᶜ`; `exists_nat_gt` for the mesh; Sperner; the rainbow triangle's vertices in one ball | `lebesgue_number_lemma_of_metric`, `IsCompact.reProdIm`, `isCompact_Icc`, `exists_nat_gt`, `div_lt_iff₀` | one try |
+| `lebesgue_covering_rect'`, `lebesgue_covering_rect` | the grouping `g`; `G k` closed by `Set.Finite.isClosed_biUnion` | `Set.toFinite` | one try |
+| `closedSquare_eq_reProdIm`, `lebesgue_covering_square` | `ext; simp [and_assoc]`; `simp only [closedSquare_eq_reProdIm] at …` | `Complex.mem_reProdIm` | one try |
+| `quadrant_hypotheses` | the cover by `le_total` cases with `show` goals; the side conditions by `linarith` on the quadrant's own bounds (a side of length `½` cannot span `[0, 1]`), no evaluation of `![…] i` | `IsClosed.reProdIm` (needs `Mathlib.Analysis.Complex.ReImTopology`) | three tries (`norm_num` does not evaluate `![…] 2`) |
+
+Total: about 520 lines over two modules, closed within this job's budget — the "about an hour of agent work" line of `LEAN.md` §
+Assumptions was the right side to be on: formalize, never import.
+
+### 4.2 The handoff (in the form of `plans/FS131-kernel-plan.md` § 6.1)
+
+**Where it is.** Branch `fs131-leb` (pushed to origin), worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-leb`; two new
+modules under `Proofs/HadwigerNelson/Topology/`; `Proofs.lean` (two imports after `Arith.FalconerFan`), `ARCHITECTURE.md` § 3.11 (two
+rows, after `Arith/FalconerFan`; `tools/check_architecture.py` exit 0) and `scripts/Axioms.lean` (seven records, in the CLEAN block after
+`HadwigerNelson.Arith.falconerFan_chromaticNumber`) are updated on the branch.
+
+**The build.** From inside the worktree: `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
+./scripts/build.sh`. The gate script, resumable by re-running it: `data/fs131/leb/gate.sh` (run from a snapshot copy under `build/`).
+
+**No implementer is needed**: nothing is left to prove. **What may change**: nothing in the statements; a consumer may add lemmas in
+its own modules. **What wave 4 changes** (its implementer, when this lands): replace the body of `HadwigerNelson.Plane.lebesgue_covering_square`
+in `Plane/SVMap.lean` by `LebesgueCovering.lebesgue_covering_square c hs F hF hcov hLR hBT`, add
+`import Proofs.HadwigerNelson.Topology.LebesgueCovering` to SVMap's header (and `Topology/LebesgueCovering` to its `ARCHITECTURE.md`
+Imports cell), and drop the "outside theorem, its disposition owed" sentence from the docstring. Tested: § 3.3.
+
+**The landing** (a ruling of the coordinator's, brief § Done means item 6): the gate green on one commit of this branch (§ 5); then
+merge `main` into the branch (the append-only lines of `ARCHITECTURE.md` § 3.11, `Proofs.lean`, `scripts/Axioms.lean` are the only
+expected conflicts), re-run the gate, and fast-forward `main`. The two modules import Mathlib only (and each other), so no later wave's
+module can conflict with them.
