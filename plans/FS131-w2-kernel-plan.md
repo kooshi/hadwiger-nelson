@@ -21,6 +21,12 @@ FS131-K2c (stages 11–13): none. Two skeleton facts closed in passing, not resu
 record (one mind): the counterexamples and construction behind ruling 86 (§ 12.1), the Fourier-free Rajchman route (§ 12.1), the P-local
 Kummer–Dedekind coefficients (`exists_dyadic_coeffs`' docstring), the window route for SUPK's lower bound (`eventually_le_muPer`).
 
+FS131-K2d (stages 14–18): [kernel], sorry-free, in `Instances/FalconerOrbit` — `finitePlane7QuotColouring_proper`, `finitePlane7_fanGap`,
+`finitePlane7_not_fanGap_zero`, `finitePlane7_slack` (`UD(𝔽₇, 2)` is slack at four colours), `gamma11_orbit`, `gamma19_orbit` (the orbit
+facts, `decide +kernel` on held colourings), `tipFree_of_orbit`, `finitePlane11_tipFree`, `finitePlane19_tipFree`; skeleton facts closed in
+passing, not results: `exists_isPlaceHom`, `r7_unitPair_mem_sphere` (from `sorry`ed children), `measurableSet_r7Cls`, and the 13 leaves closed
+from children (§ 18).
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
