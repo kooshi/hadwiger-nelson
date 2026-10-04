@@ -402,3 +402,14 @@ Names checked against `fs131-w4`, `fs131-w5` and `main`: no collision.
 **Re-pricing** (from this job's work): the localization and the chart children took about 60k and 45k of work; `stuck_horns` about 15k over them. The reading
 of the derivation and the API cost as much as the proofs, as for IC1 and IC2. `stuck_structure` is now about a session and a half (its (iv) is most of it),
 `flank_shadows` about a session, the three moves a session each — 4.5 to 5 sessions for the five leaves.
+
+## Stage 9 — SAVED (FS131-IC3 stage 3): the hand-back
+
+**Proved in this job (FS131-IC3)**: 44 sorry-free children of `flank_shadows` and `stuck_structure` (Stage 8), among them `stuck_horns` (N4-STUCK (i)),
+`woodallCone_isHorn`, `IsHorn.exists_flankAbove` / `exists_flankBelow`, `horn_unique_of_stuck`, and N4-FLANK's localization with its out-type corollaries.
+**No leaf closed. Left (5)**: `stuck_structure`, `flank_shadows`, `exists_shave`, `exists_rayMerge`, `exists_merge` — the route and price of each is Stage 8's
+"What is left" (with IC1's Stage 2 items 3–4 for the moves). The build log and the axioms print against its oleans are Stage 8's
+(`build/gate/build/20261004T204837Z-2282147.log`, `data/fs131/ic/axioms-ic3-stage8.txt`). Branch `fs131-w4c` is ready for the merge into `fs131-w4`
+(records in their own block headed "FS131-IC3" in `scripts/Axioms.lean`, after IC2's; no import, module or `ARCHITECTURE.md` change in this job). I did not
+merge or run wave 4's gate. `data/fs131/ic/Scratch3.lean` … `Scratch6.lean` are iteration copies, superseded by `Contact` (they redeclare its new names, so
+they no longer elaborate against it; nothing builds them).
