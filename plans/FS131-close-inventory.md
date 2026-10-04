@@ -675,3 +675,18 @@ reason by the close.*
 117. **Brief FS131-I3f, wave 3's sixth implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I3f-wave3.md`, derived from I3e's by script, gated
      PASS): the last five leaves, the gate, the vacuity step, the landing. Launched in I3e's half slot: slots 0.5 (I4) + 0.5 (I3f) + 1 (K2d) + 1 (W2) = 3, plus
      EXT-HN1 in the special slot.
+118. **FS131-K2d done, harness ≈ 445k** (report on its branch; `fs131-w2d` at `f7eeace4`, checked): children stated for all 17 leaves in its three files; 13 leaves
+     closed from their children (`exists_placeHom`, `noAffine_fields`, `falconerFan_five_field`, `falconerFan_five_placeHom`, `sq9_saturated_both`,
+     `r7_aeColouring`, `r7Cls_saturated`, `r7_boundary`, `r7Cls_isMaximalCover`, `disc7_isMaximalCover`, `disc7_isRegularMUA`, `disc7_upperDensity`,
+     `g1Bounds_hcGap`); 4 assemblies planned, not written; 77 children `sorry`. **Proved [kernel]**: `Instances/FalconerOrbit` — `finitePlane7_fanGap`,
+     `finitePlane7_slack`, `gamma11_orbit`, `gamma19_orbit` (each `decide +kernel`, 2–4 s), `tipFree_of_orbit`, `finitePlane11_tipFree`, `finitePlane19_tipFree`;
+     K2c's `gamma7_orbit` not needed. Keryx's receipt: build log `build/gate/build/20261004T110617Z-2928418.log` (w2d) "Build completed successfully (5605 jobs)";
+     `Instances/FalconerOrbit.lean` has no `sorry` and no `native_decide`; `3dffa363` an ancestor of the branch. Generalization: FALC-RES clause (i) reads no
+     connectedness, clause (ii) no transcendence of `t`. **GAP at a planning step**: `exists_not_uniform_kept`'s fringe colouring does not handle fringe-to-fringe
+     unit pairs (§ 17.1; `k = 9 + 3N` proposed); if no proper formula comes out, a deriver writes out FS106-TQ's control C2 (queued behind FS131-E2). Slip
+     (Keryx's, in the K2d brief): `fatZ_spec` listed as a leaf, proved since `344a9081` (my `awk` attributed a later `sorry` to it). Slip (K2d's): a planted
+     fault that did not fire (the planted statement was true), replaced and logged. **Merge**: `fs131-w2d` merged into `fs131-w2` by Keryx (`ddc5b5c8`,
+     `--no-ff`, clean; the only files beyond K2d's tree are I2e's record, report and axioms print, so K2d's build covers the Lean).
+119. **Brief FS131-I2f, the Opus-implementer trial** (`debruijn-implementer` with `model: "opus"`, item 103; `data/fs131/briefs/FS131-I2f-wave2.md`, gated
+     PASS): every remaining wave-2 leaf and child (154 `sorry` lines at `ddc5b5c8`), the gate, the landing; its record counts what it closes, for comparison
+     with I2–I2e (items 49, 58, 70, 82, 114). Launched in K2d's Opus slot: slots 0.5 (I3f) + 0.5 (I4) + 1 (W2) + 1 (I2f) = 3, plus EXT-HN1.
