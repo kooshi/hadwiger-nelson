@@ -1191,6 +1191,54 @@ UnitArc 5, BaseSteps 1 (`n3_end`) — and no other warning.
 `∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x` is unsatisfiable and becomes `F'.coloursAt v ⊆ F.coloursAt v` on `fs131-w4m`; a proof of `n3_end`
 reads only that vertex instance.
 
+## Stage 36 — SAVED (FS131-I4l): engine 5 (upper), and `flankQ_upper` proved over one named child, its (R2) shadow clause; 9 `sorry` left on the branch (Contact 3, UnitArc 5, BaseSteps 1)
+
+**Engine 5, the upper bound** (`ArcMap.IsHorn.isRingArc_upper`, plan § 13.1 item 5, in `UnitArc` before FLANK-Q; consumers `flankQ_upper`, `n3_end`,
+wave 5's C-DOUBLE): a horn `IsHorn v α κ₁ 1 c` with an upper flank `g` is bounded by an arc of `Γ` on `ω(N)` from `v` with constant sides `g` inside,
+`c` outside. Route as Stage 28 gave it: on `O = {dist(·, v) < r, frameX > 0, TanAbove κ₁, TanBelow κ′}` the horn and the flank fill everything off
+`ω(N)`; the arc's points (`ringPt N (α − π/2 + t) = framePt v α (sin t) (1 − cos t)`, child `normalPt_add_eq_framePt`, the radial points
+`N + ρ e(α − π/2 + t)` at frame `(ρ sin t, 1 − ρ cos t)`) lie in `O` for `0 < t ≤ min (r/2) 1`; such a point, or `v`, if interior, would have a ball of
+interior points meeting the horn, hence inside the horn's component (the `IsSector` equality), yet holding points inside `ω(N)`; so the closed arc is in
+`Γ`, clean (arcs near it lie on `ω(N)`), and `isRingArc_of_clean` applies; its side colours are read at the arc's middle from the radial points
+`N + (1 ∓ s) e(m)`. No validity read.
+
+**`flankQ_upper`** now reads: engine 5 for the arc; the side colours of an arc with constant sides are unique (read at its middle), so `hQR`'s (Q) or
+(R2) arc is the flank's. (Q): `g ∈ P_cl(N)`, its tile `T` at `N` (`mem_coloursAt_iff_exists_tileOf`) is unit-near every flank tile (unit-far is refuted at
+`N`, a flank point being inside `B(N, 1)`), so every point of `T` is within `1` of every flank point, hence `T ⊆ B̄(v, 1)`, and `T` is open: `T ⊆ B(v, 1)`.
+(R2): `S′ = N + 2e(α − π/2)` is `R₂`'s point at `v`, so in `closure (region g)`; a `g`-tile at `S′` is unit-far from every flank tile (flank points have
+`frameY > 0`, so are farther than `1` from `S′`), so its points are at least `1` from `v`, and being open it misses `B̄(v, 1)`: out-type. The shadow clause
+is the one child left, **`flankQ_upper_shadow`** (`sorry`): `F.Valid`, `F.Covers v 1`, the upper flank, `α − π/2 < θ₂` and
+`radiusTwoArc N (α − π/2) θ₂ ⊆ closure (region g)` ⟹ `∀ᶠ r in 𝓝[>] 0, hornSet v α κ₁ 1 r ⊆ shadow (region g)` — the horn read only as a set.
+`hcN` is unread (as § 13.3 (e) foresaw for the (R2) branch's `c`-contact; FLANK-Q's statement keeps it).
+
+**Ruling 244 (c): Stage 28's step (iii) run — it holds (one mind, on paper, not formalized), by a route that needs no chart at `S′`.** Write
+`p_s = N + 2e(α − π/2 + s)`.
+1. *The cusp* (Stage 28 (i)): for small `s > 0` some ball about `p_s` holds no point of `region g` inside `B(N, 2)`. For `q` there,
+   `q′ = N + (|q − N| − 1)(q − N)/|q − N|` is at distance exactly `1` from `q`; `q ↦ q′` is continuous and `q′(p_s)` is the arc point `a(s)`, inside the open
+   set `{dist(·, v) < r_f, frameX > 0, TanBelow κ′}` (`r_f` a flank radius); with `|q′ − N| = |q − N| − 1 < 1`, `q′` is a flank point: a `g`–`g` unit pair.
+2. Hence the points of `R₂` near `S′` (`s > 0`) are in `Γ`: an interior one would be `g` (it lies in `closure (region g)`), with `g`-points just inside radius 2.
+3. *Generic points*: finitely many arcs meet a neighbourhood of `S′`; each lies on `sphere N 2` or meets it in finitely many points (wave 3's
+   `Arc.finite_inter_sphere_or_eq_circ` after the homothety `z ↦ (z + N)/2`, which takes `sphere N 2` to `ω(N)` and arcs to arcs). So some `s_min > 0`
+   has, for `0 < s < s_min`, a ball about `p_s` in which every arc point lies on `sphere N 2`.
+4. *The outer side is `g`*: a polar rectangle `{N + ρ e(φ) : 2 < ρ < 2 + η, |φ − φ_s| < η′}` in that ball is preconnected and free of arcs, so of one
+   colour; the `g`-points near `p_s` lie in it (by 1–2; angles by continuity of `arg` near the positive reals), so it is `g`'s.
+5. *The crossing*: for `z` in the horn, `w = z − N = |w| e(α − π/2 + s_w)` with `|w| > 1` (`TanBelow 1`) and `s_w > 0` small (`frameX > 0`);
+   `s_c = s_w + arccos((3 + |w|²)/(4|w|))` puts `p_{s_c}` on `ω(z)` (`|2e − w|² = 4 + |w|² − 4|w| cos = 1`), and `s_c → 0` as `z → v`; for `r` small
+   every horn point has `s_c ∈ (0, min(s_min, θ₂ − (α − π/2)))`. The crossing is transversal (`sin(s_c − s_w) ≠ 0`), so `ω(z)` enters the rectangle at
+   `p_{s_c}`: a point of `region g` at distance exactly `1` from `z`.
+So Stage 28's worry — "a cusp sector of another colour below `R₂`" — does not block: below `R₂` near `S′` there is no `g` at all (1), and above it, at the
+generic points the horn's circles reach, one colour carries `R₂` in its closure. Special points of `R₂` are avoided by taking `r` small (5). The mirror
+(`flankQ_lower_shadow`) is the same with `N ↔ S′`. Price: about 300–400 lines (the homothety of arcs, the clean ball, the cusp, the rectangle, the
+crossing) — a session.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 618 names, 3 added (`normalPt_add_eq_framePt`, `IsHorn.isRingArc_upper`, `flankQ_upper_shadow`); `--check`
+exit 0. **Statements**: `tools/fs131_i4_stmts.py 111830c8 …UnitArc.lean` 120 old, 123 new, 3 added, 0 changed, exit 0.
+**Axioms** (`data/fs131/i4/axioms-i4l-36.txt`, this stage's oleans, not a gate log): `normalPt_add_eq_framePt`, `IsHorn.isRingArc_upper` the standard
+three; `flankQ_upper` reads `sorryAx` through `flankQ_upper_shadow` only. **Build**: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s)
+with warnings, 9m57s", exit 0 (`build/gate/build/20261004T230630Z-3278350.log`; driver log `data/fs131/i4/build-i4l-stage36.log`): 9 distinct
+`declaration uses sorry` — Contact 3, UnitArc 5 (`bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower`, `nb4p`), BaseSteps 1 — and no other
+warning.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;

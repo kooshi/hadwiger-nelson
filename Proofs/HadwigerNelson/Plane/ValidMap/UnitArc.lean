@@ -3202,7 +3202,222 @@ theorem flank_siamese_of_inType (hF : F.Valid) {v : ℂ} {α κ' : ℝ} (hκ' : 
     have := dist_triangle z (v + e (α + π / 2)) y
     linarith
 
+end ArcMap
+
+/-- **The radial points of `ω(N)` from `v`, in the frame at `v`** (child of engine 5): `N + ρ e(α − π/2 + t)` has frame coordinates
+`(ρ sin t, 1 − ρ cos t)`, `N = v + e(α + π/2)`; at `ρ = 1` the arc of `ω(N)` leaving `v` along `e α`. -/
+theorem normalPt_add_eq_framePt (v : ℂ) (α ρ t : ℝ) :
+    v + e (α + π / 2) + (ρ : ℂ) * e (α - π / 2 + t) = framePt v α (ρ * Real.sin t) (1 - ρ * Real.cos t) := by
+  have h1 : e (α + π / 2) = I * e α := e_add_pi_div_two α
+  have h2 : e (α - π / 2 + t) = -(I * e α * e t) := by
+    have := e_add_pi (α - π / 2 + t)
+    rw [show α - π / 2 + t + π = (α + π / 2) + t by ring, e_add, h1] at this
+    linear_combination this
+  rw [h2, h1, e_eq t]
+  unfold framePt
+  simp only [Complex.ofReal_mul, Complex.ofReal_sub, Complex.ofReal_one]
+  linear_combination (-((ρ : ℂ) * (Real.sin t : ℂ) * e α)) * Complex.I_sq
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
 /-! ## FS112-N2-FLANK-Q: horn bounds `±1` sit on (Q) or (R2) arcs -/
+
+/-- **Engine 5, the upper bound** (`plans/FS131-w4-kernel-plan.md` § 13.1 item 5): a horn at `v` along `e α` whose upper arc has
+curvature `1`, with a flank colour `g` above it, is bounded by an arc of `Γ` on `ω(N)` leaving `v`, with constant sides — inner colour
+`g`, outer colour the horn's. The points of that arc near `v` are limits of both the horn and the flank and are not interior points
+(an interior one would join the horn's component, which holds no point inside `ω(N)`); near each of them the horn and the flank fill
+everything off `ω(N)`, so the arcs there lie on `ω(N)` (`isRingArc_of_clean`). -/
+theorem IsHorn.isRingArc_upper {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {c g : Fin k}
+    (hH : F.IsHorn v α κ₁ 1 c) (hg : F.IsFlankAbove v α 1 g) :
+    ∃ θ₂, α - π / 2 < θ₂ ∧ F.IsRingArc (v + e (α + π / 2)) (α - π / 2) θ₂ g c := by
+  have hπ := Real.pi_pos
+  have hπ3 := Real.pi_gt_three
+  obtain ⟨hκ₁, hHev⟩ := hH
+  obtain ⟨κ', hκ', hgev⟩ := hg
+  obtain ⟨r, ⟨⟨hsec, hcol⟩, hfl⟩, hr0⟩ :=
+    ((hHev.and hgev).and (Ioo_mem_nhdsGT (show (0 : ℝ) < 1 / 2 by norm_num))).exists
+  set N := v + e (α + π / 2) with hN
+  obtain ⟨x₀, -, hHeq, hvH⟩ := hsec
+  have hHI : hornSet v α κ₁ 1 r ⊆ F.interiorPts := by
+    rw [hHeq]; exact (connectedComponentIn_subset _ _).trans inter_subset_left
+  have hFlI : hornSet v α 1 κ' r ⊆ F.interiorPts := fun z hz => (hfl hz).1
+  -- a preconnected set of interior points in `B(v, r)` meeting the horn lies in it
+  have hjoin : ∀ B : Set ℂ, IsPreconnected B → B ⊆ F.interiorPts ∩ ball v r → ∀ p ∈ B, p ∈ hornSet v α κ₁ 1 r →
+      B ⊆ hornSet v α κ₁ 1 r := by
+    intro B hB hBsub p hpB hpH
+    rw [hHeq] at hpH ⊢
+    rw [connectedComponentIn_eq hpH]
+    exact hB.subset_connectedComponentIn hpB hBsub
+  set O : Set ℂ := {z | dist z v < r ∧ 0 < frameX v α z ∧ TanAbove v α κ₁ z ∧ TanBelow v α κ' z} with hOdef
+  have hOopen : IsOpen O := by
+    have hfx : Continuous (frameX v α) := by unfold frameX; fun_prop
+    have hfy : Continuous (frameY v α) := by unfold frameY; fun_prop
+    have ht : ∀ κ : ℝ, Continuous fun z => tanHeight κ (frameX v α z) (frameY v α z) := fun κ => by
+      unfold tanHeight; fun_prop
+    exact (isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+      ((isOpen_lt continuous_const hfx).inter ((isOpen_lt continuous_const (ht κ₁)).inter (isOpen_lt (ht κ') continuous_const)))
+  have hOball : O ⊆ ball v r := fun z hz => hz.1
+  have hOH : ∀ z ∈ O, 1 < dist z N → z ∈ hornSet v α κ₁ 1 r := fun z hz h =>
+    ⟨hz.1, hz.2.1, hz.2.2.1, (tanBelow_one_iff v α z).mpr h⟩
+  have hOF : ∀ z ∈ O, dist z N < 1 → z ∈ hornSet v α 1 κ' r := fun z hz h =>
+    ⟨hz.1, hz.2.1, (tanAbove_one_iff v α z).mpr h, hz.2.2.2⟩
+  have hHN : ∀ z ∈ hornSet v α κ₁ 1 r, 1 < dist z N := fun z hz => (tanBelow_one_iff v α z).mp hz.2.2.2
+  -- the radial points
+  have hdN : ∀ ρ θ : ℝ, 0 ≤ ρ → dist (N + (ρ : ℂ) * e θ) N = ρ := fun ρ θ hρ => by
+    rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hρ]
+  have hdd : ∀ ρ θ : ℝ, dist (N + (ρ : ℂ) * e θ) (N + e θ) = |ρ - 1| := fun ρ θ => by
+    rw [dist_eq_norm, show N + (ρ : ℂ) * e θ - (N + e θ) = ((ρ - 1 : ℝ) : ℂ) * e θ by push_cast; ring, norm_mul, norm_e, mul_one,
+      Complex.norm_real, Real.norm_eq_abs]
+  -- the arc points `a(t) = N + e(α − π/2 + t)`, `0 < t ≤ τ`, lie in `O`
+  set τ := min (r / 2) 1 with hτ
+  have hτ0 : 0 < τ := lt_min (by linarith [hr0.1]) one_pos
+  have hτr : τ ≤ r / 2 := min_le_left _ _
+  have hτ1 : τ ≤ 1 := min_le_right _ _
+  have hapt : ∀ t, ringPt N (α - π / 2 + t) = framePt v α (Real.sin t) (1 - Real.cos t) := fun t => by
+    have := normalPt_add_eq_framePt v α 1 t
+    rw [ofReal_one, one_mul, one_mul, one_mul] at this
+    rw [ringPt, ← this]
+  have hadist : ∀ t, 0 ≤ t → dist (ringPt N (α - π / 2 + t)) v ≤ t := by
+    intro t ht
+    have h := frame_normSq v α (ringPt N (α - π / 2 + t))
+    rw [hapt, frameX_framePt, frameY_framePt, ← hapt, ← dist_eq_norm] at h
+    have hc := Real.one_sub_sq_div_two_le_cos (x := t)
+    have hsc := Real.sin_sq_add_cos_sq t
+    have h2 : dist (ringPt N (α - π / 2 + t)) v ^ 2 ≤ t ^ 2 := by nlinarith
+    nlinarith [dist_nonneg (x := ringPt N (α - π / 2 + t)) (y := v)]
+  have hainO : ∀ t ∈ Ioc 0 τ, ringPt N (α - π / 2 + t) ∈ O := by
+    intro t ht
+    have hcos : Real.cos t < 1 := by
+      have := Real.cos_lt_cos_of_nonneg_of_le_pi (le_refl 0) (by linarith [ht.2, hτ1]) ht.1
+      rwa [Real.cos_zero] at this
+    have hsin : 0 < Real.sin t := Real.sin_pos_of_pos_of_lt_pi ht.1 (by linarith [ht.2, hτ1])
+    have hsc := Real.sin_sq_add_cos_sq t
+    refine ⟨by linarith [hadist t ht.1.le, hr0.1, ht.2, hτr], ?_, ?_, ?_⟩
+    · rw [hapt, frameX_framePt]; exact hsin
+    · unfold TanAbove; rw [hapt, frameX_framePt, frameY_framePt]; unfold tanHeight
+      nlinarith
+    · unfold TanBelow; rw [hapt, frameX_framePt, frameY_framePt]; unfold tanHeight
+      nlinarith
+  -- the arc points are not interior points
+  have hnotI : ∀ t ∈ Ioc 0 τ, ringPt N (α - π / 2 + t) ∉ F.interiorPts := by
+    intro t ht hI
+    set a := ringPt N (α - π / 2 + t) with ha
+    obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp (F.isOpen_interiorPts.inter hOopen) a ⟨hI, hainO t ht⟩
+    have hae : a = N + e (α - π / 2 + t) := rfl
+    set s := min (δ / 2) (1 / 2) with hs
+    have hs0 : 0 < s := lt_min (by linarith) (by norm_num)
+    have hsδ : s < δ := lt_of_le_of_lt (min_le_left _ _) (by linarith)
+    have hs1 : s ≤ 1 / 2 := min_le_right _ _
+    have hout : N + ((1 + s : ℝ) : ℂ) * e (α - π / 2 + t) ∈ ball a δ := by
+      rw [mem_ball, hae, hdd, abs_of_pos (by linarith)]; linarith
+    have hin : N + ((1 - s : ℝ) : ℂ) * e (α - π / 2 + t) ∈ ball a δ := by
+      rw [mem_ball, hae, hdd, abs_of_neg (by linarith)]; linarith
+    have hBsub : ball a δ ⊆ F.interiorPts ∩ ball v r := fun z hz => ⟨(hball hz).1, hOball (hball hz).2⟩
+    have houtH := hOH _ (hball hout).2 (by rw [hdN _ _ (by linarith)]; linarith)
+    have hsub := hjoin (ball a δ) (convex_ball a δ).isPreconnected hBsub _ hout houtH
+    have := hHN _ (hsub hin)
+    rw [hdN _ _ (by linarith)] at this
+    linarith
+  have hvnotI : v ∉ F.interiorPts := by
+    intro hI
+    obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp F.isOpen_interiorPts v hI
+    set δ' := min δ r with hδ'
+    have hδ'0 : 0 < δ' := lt_min hδ hr0.1
+    have hBsub : ball v δ' ⊆ F.interiorPts ∩ ball v r := fun z hz =>
+      ⟨hball (ball_subset_ball (min_le_left _ _) hz), ball_subset_ball (min_le_right _ _) hz⟩
+    obtain ⟨p, hpB, hpH⟩ := mem_closure_iff.mp hvH (ball v δ') isOpen_ball (mem_ball_self hδ'0)
+    have hsub := hjoin (ball v δ') (convex_ball v δ').isPreconnected hBsub p hpB hpH
+    have hq : framePt v α (-(δ' / 2)) 0 ∈ ball v δ' := by
+      rw [mem_ball, dist_eq_norm]
+      unfold framePt
+      rw [show v + ((((-(δ' / 2) : ℝ) : ℂ) + ((0 : ℝ) : ℂ) * I)) * e α - v = ((-(δ' / 2) : ℝ) : ℂ) * e α by push_cast; ring,
+        norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_neg, abs_of_pos (by linarith)]
+      linarith
+    have := (hsub hq).2.1
+    rw [frameX_framePt] at this
+    linarith
+  have hdomv : ∀ z, dist z v < r → z ∈ F.dom := fun z hz => hv (by rw [mem_closedBall]; linarith [hr0.2])
+  have hΓ : ringArc N (α - π / 2) (α - π / 2 + τ) ⊆ F.Γ := by
+    rintro _ ⟨θ, hθ, rfl⟩
+    have hθe : θ = α - π / 2 + (θ - (α - π / 2)) := by ring
+    rcases (show 0 ≤ θ - (α - π / 2) by linarith [hθ.1]).eq_or_lt with h0 | hpos
+    · have hθ0 : θ = α - π / 2 := by linarith
+      have hv' : ringPt N θ = v := by
+        rw [hθ0, show α - π / 2 = α - π / 2 + 0 by ring, hapt]; simp [framePt]
+      rw [hv']
+      exact ⟨hdomv v (by rw [dist_self]; exact hr0.1), not_not.mp fun h => hvnotI ⟨hdomv v (by rw [dist_self]; exact hr0.1), h⟩⟩
+    · have ht : θ - (α - π / 2) ∈ Ioc 0 τ := ⟨hpos, by linarith [hθ.2]⟩
+      rw [hθe]
+      have hd := hdomv _ (hainO _ ht).1
+      exact ⟨hd, not_not.mp fun h => hnotI _ ht ⟨hd, h⟩⟩
+  have hclean : ∀ θ ∈ Ioo (α - π / 2) (α - π / 2 + τ), ∃ δ > 0, ball (ringPt N θ) δ ⊆ F.dom ∧
+      ∀ z ∈ ball (ringPt N θ) δ, z ∈ ⋃ a ∈ F.arcs, a.carrier → dist z N = 1 := by
+    intro θ hθ
+    have ht : θ - (α - π / 2) ∈ Ioc 0 τ := ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+    have hmem := hainO _ ht
+    rw [show α - π / 2 + (θ - (α - π / 2)) = θ by ring] at hmem
+    obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp hOopen _ hmem
+    refine ⟨δ, hδ, fun z hz => hdomv z (hball hz).1, fun z hz hza => ?_⟩
+    have hzO := hball hz
+    by_contra hne
+    rcases lt_or_gt_of_ne hne with h | h
+    · exact (hFlI (hOF z hzO h)).2 hza
+    · exact (hHI (hOH z hzO h)).2 hza
+  obtain ⟨c₀, c₀', hR⟩ := isRingArc_of_clean (by linarith) hΓ hclean
+  -- the side colours: the flank inside, the horn outside
+  set m := α - π / 2 + τ / 2 with hm
+  have hmI : m ∈ Ioo (α - π / 2) (α - π / 2 + τ) := ⟨by linarith, by linarith⟩
+  have hmO : ringPt N m ∈ O := hainO (τ / 2) ⟨by linarith, by linarith⟩
+  obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.mp hOopen _ hmO
+  have hme : ringPt N m = N + e m := rfl
+  have hgin : g ∈ F.innerColours N (ringPt N m) := by
+    show ringPt N m ∈ closure (F.region g ∩ ball N 1)
+    rw [Metric.mem_closure_iff]
+    intro ε hε
+    set s := min (min (ε / 2) (δ / 2)) (1 / 2) with hs
+    have hs0 : 0 < s := lt_min (lt_min (by linarith) (by linarith)) (by norm_num)
+    have hs1 := min_le_left (min (ε / 2) (δ / 2)) (1 / 2)
+    have hs2 := min_le_right (min (ε / 2) (δ / 2)) (1 / 2)
+    have hs3 := min_le_left (ε / 2) (δ / 2)
+    have hs4 := min_le_right (ε / 2) (δ / 2)
+    have hd1 : dist (N + ((1 - s : ℝ) : ℂ) * e m) (ringPt N m) = s := by
+      rw [hme, hdd, abs_of_neg (by linarith)]; ring
+    have hbO : N + ((1 - s : ℝ) : ℂ) * e m ∈ O := hball (by rw [mem_ball, hd1]; linarith)
+    have hbN : dist (N + ((1 - s : ℝ) : ℂ) * e m) N < 1 := by rw [hdN _ _ (by linarith)]; linarith
+    refine ⟨_, ⟨hfl (hOF _ hbO hbN), hbN⟩, ?_⟩
+    rw [dist_comm, hd1]; linarith
+  have hcout : c ∈ F.outerColours N (ringPt N m) := by
+    show ringPt N m ∈ closure (F.region c \ closedBall N 1)
+    rw [Metric.mem_closure_iff]
+    intro ε hε
+    set s := min (ε / 2) (δ / 2) with hs
+    have hs0 : 0 < s := lt_min (by linarith) (by linarith)
+    have hs3 := min_le_left (ε / 2) (δ / 2)
+    have hs4 := min_le_right (ε / 2) (δ / 2)
+    have hd1 : dist (N + ((1 + s : ℝ) : ℂ) * e m) (ringPt N m) = s := by
+      rw [hme, hdd, abs_of_pos (by linarith)]; ring
+    have hbO : N + ((1 + s : ℝ) : ℂ) * e m ∈ O := hball (by rw [mem_ball, hd1]; linarith)
+    have hbN : 1 < dist (N + ((1 + s : ℝ) : ℂ) * e m) N := by rw [hdN _ _ (by linarith)]; linarith
+    have hbH := hOH _ hbO hbN
+    refine ⟨_, ⟨⟨hHI hbH, hcol hbH⟩, by rw [mem_closedBall, not_le]; exact hbN⟩, ?_⟩
+    rw [dist_comm, hd1]; linarith
+  have hgc : g = c₀ := by
+    have := (hR.2.2 m hmI).1 ▸ hgin; exact this
+  have hcc : c = c₀' := by
+    have := (hR.2.2 m hmI).2 ▸ hcout; exact this
+  subst hgc hcc
+  exact ⟨α - π / 2 + τ, by linarith, hR⟩
+
+/-- **FS112-N2-FLANK-Q's (R2) shadow, upper** (child of `flankQ_upper`): if the radius-2 arc `R₂` over `[α − π/2, θ₂]` about `N` lies in
+the closure of the flank colour `g`'s class, `g`'s class shadows every horn point near `v` below `ω(N)`. -/
+theorem flankQ_upper_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {g : Fin k}
+    (hg : F.IsFlankAbove v α 1 g) {θ₂ : ℝ} (hθ₂ : α - π / 2 < θ₂)
+    (hR2 : radiusTwoArc (v + e (α + π / 2)) (α - π / 2) θ₂ ⊆ closure (F.region g)) :
+    ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α κ₁ 1 r ⊆ shadow (F.region g) := by
+  sorry
+
 
 /-- **FS112-N2-FLANK-Q**, the upper bound `κ₂ = 1`. Let `c` have a horn at `v` along `e α` whose upper arc lies on `ω(N)`, with flank
 colour `g` above it and an out-type `c`-contact at `N` (N3-DEG's, where `int D_c(v) = ∅`), and suppose every arc of `Γ` on `ω(N)` with
@@ -3221,7 +3436,109 @@ theorem flankQ_upper (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ : �
         (F.IsR2Arc (v + e (α + π / 2)) (α - π / 2) θ₂ ∧ g ∉ F.coloursAt (v + e (α + π / 2)) ∧
           v - e (α + π / 2) ∈ closure (F.region g) ∧ F.OutType v g (v - e (α + π / 2)) ∧
           ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α κ₁ 1 r ⊆ shadow (F.region g))) := by
-  sorry
+  have _ := hcN
+  have hπ := Real.pi_pos
+  set N := v + e (α + π / 2) with hN
+  have hNdom : N ∈ F.dom := hv (by rw [mem_closedBall, hN, dist_eq_norm]; simp)
+  obtain ⟨θ₂, hθ₂, hR⟩ := hH.isRingArc_upper hv hg
+  -- the side colours of an arc of `Γ` with constant sides are unique
+  set m := ((α - π / 2) + θ₂) / 2 with hm
+  have hmI : m ∈ Ioo (α - π / 2) θ₂ := ⟨by linarith, by linarith⟩
+  have huniq : ∀ d d', F.IsRingArc N (α - π / 2) θ₂ d d' → d = g ∧ d' = c := by
+    intro d d' hR'
+    have h2 := (hR.2.2 m hmI).1
+    have h4 := (hR.2.2 m hmI).2
+    rw [(hR'.2.2 m hmI).1] at h2
+    rw [(hR'.2.2 m hmI).2] at h4
+    exact ⟨Set.singleton_eq_singleton_iff.mp h2, Set.singleton_eq_singleton_iff.mp h4⟩
+  -- flank points: inside `ω(N)`, on the `+n` side, arbitrarily near `v`
+  obtain ⟨κ', hκ', hgev⟩ := hg
+  have hflank : ∀ ε > 0, ∃ f ∈ F.region g, dist f v < ε ∧ dist f N < 1 ∧ 0 < frameY v α f := by
+    intro ε hε
+    obtain ⟨r, hr, hrpos⟩ := (hgev.and (Ioo_mem_nhdsGT hε)).exists
+    obtain ⟨z, hz, -, -⟩ := exists_mem_hornSet_aboveBelow v α (κ₁ := 1) (κ₂ := κ') (s := (1 + κ') / 2) (m := 1)
+      hrpos.1 (by linarith) (by linarith) (by intro h; linarith)
+    refine ⟨z, hr hz, by linarith [hz.1, hrpos.2], (tanAbove_one_iff v α z).mp hz.2.2.1, ?_⟩
+    have := hz.2.2.1
+    unfold TanAbove tanHeight at this
+    nlinarith [sq_nonneg (frameX v α z), sq_nonneg (frameY v α z)]
+  have htile : ∀ f ∈ F.region g, F.TileOf g (connectedComponentIn F.interiorPts f) ∧
+      f ∈ connectedComponentIn F.interiorPts f := by
+    intro f hf
+    have hT : F.IsTile (connectedComponentIn F.interiorPts f) := ⟨f, hf.1, rfl⟩
+    have hfT : f ∈ connectedComponentIn F.interiorPts f := mem_connectedComponentIn hf.1
+    refine ⟨?_, hfT⟩
+    have := hT.tileOf hfT
+    rwa [show F.col f = g from hf.2] at this
+  rcases hQR _ _ _ _ hR with hQ | hR2
+  · -- (Q): `g` is carried at `N`, and its tile there is Siamese with the flank, so inside `B(v, 1)`
+    obtain ⟨d, d', hR', hd, -, -⟩ := id hQ
+    rw [(huniq d d' hR').1] at hd
+    obtain ⟨T, hT, hNT⟩ := (F.mem_coloursAt_iff_exists_tileOf hNdom).mp hd
+    refine ⟨θ₂, hθ₂, hR, Or.inl ⟨hQ, T, hT, ?_, hNT⟩⟩
+    have hnear : ∀ t ∈ T, ∀ f ∈ F.region g, dist f N < 1 → dist t f < 1 := by
+      intro t ht f hf hfN
+      obtain ⟨hTf, hfT⟩ := htile f hf
+      rcases unitNear_or_unitFar hF hT hTf with h | h
+      · exact h t ht f hfT
+      · exfalso
+        obtain ⟨y, hy, hyd⟩ := Metric.mem_closure_iff.mp hNT (1 - dist f N) (by linarith)
+        have h1 := h y hy f hfT
+        have := dist_triangle y N f
+        rw [dist_comm N f] at this
+        rw [dist_comm] at hyd
+        linarith
+    have hTv : T ⊆ closedBall v 1 := by
+      intro t ht
+      rw [mem_closedBall]
+      by_contra hlt
+      push Not at hlt
+      obtain ⟨f, hf, hfv, hfN, -⟩ := hflank (dist t v - 1) (by linarith)
+      have h1 := hnear t ht f hf hfN
+      have := dist_triangle t f v
+      linarith
+    have := hT.1.isOpen.subset_interior_iff.mpr hTv
+    rwa [interior_closedBall v one_ne_zero] at this
+  · -- (R2): `S′ = N + 2e(α − π/2)` is the arc's radius-2 point at its end `v`; `g`'s tiles there are far from the flank
+    obtain ⟨d, d', hR', -, hd, hsub⟩ := id hR2
+    rw [(huniq d d' hR').1] at hd hsub
+    have hS : v - e (α + π / 2) = N + 2 * e (α - π / 2) := by
+      have := e_add_pi (α - π / 2)
+      rw [show α - π / 2 + π = α + π / 2 by ring] at this
+      rw [hN, this]; ring
+    have hSg : v - e (α + π / 2) ∈ closure (F.region g) := by
+      rw [hS]; exact hsub ⟨α - π / 2, ⟨le_rfl, hθ₂.le⟩, rfl⟩
+    refine ⟨θ₂, hθ₂, hR, Or.inr ⟨hR2, hd, hSg, ?_, flankQ_upper_shadow hF hv ⟨κ', hκ', hgev⟩ hθ₂ hsub⟩⟩
+    intro T hT hST
+    have hfar : ∀ t ∈ T, ∀ f ∈ F.region g, 0 < frameY v α f → 1 < dist t f := by
+      intro t ht f hf hfy
+      have hfS : 1 < dist f (v - e (α + π / 2)) := by
+        have h := sq_dist_S v α f
+        nlinarith [sq_nonneg (frameX v α f), dist_nonneg (x := f) (y := v - e (α + π / 2))]
+      obtain ⟨hTf, hfT⟩ := htile f hf
+      rcases unitNear_or_unitFar hF hT hTf with h | h
+      · exfalso
+        obtain ⟨y, hy, hyd⟩ := Metric.mem_closure_iff.mp hST (dist f (v - e (α + π / 2)) - 1) (by linarith)
+        have h1 := h y hy f hfT
+        have := dist_triangle f y (v - e (α + π / 2))
+        rw [dist_comm f y] at this
+        rw [dist_comm] at hyd
+        linarith
+      · exact h t ht f hfT
+    have hTv : T ⊆ {w | 1 ≤ dist w v} := by
+      intro t ht
+      show 1 ≤ dist t v
+      by_contra hlt
+      push Not at hlt
+      obtain ⟨f, hf, hfv, -, hfy⟩ := hflank (1 - dist t v) (by linarith)
+      have h1 := hfar t ht f hf hfy
+      have := dist_triangle t v f
+      rw [dist_comm v f] at this
+      linarith
+    have hint := hT.1.isOpen.subset_interior_iff.mpr hTv
+    have hcompl : {w : ℂ | 1 ≤ dist w v} = (ball v 1)ᶜ := by ext w; simp [mem_ball, not_lt]
+    rw [hcompl, interior_compl, closure_ball v one_ne_zero] at hint
+    exact Set.disjoint_left.mpr fun t ht htB => hint ht htB
 
 /-- **FS112-N2-FLANK-Q**, the lower bound `κ₁ = −1`, the mirror: the horn's lower arc on `ω(S′)` with flank colour `h` below, an out-type
 `c`-contact at `S′`, and every arc of `Γ` on `ω(S′)` with constant sides (Q) or (R2) (the same named hypothesis at `S′`): the lower arc is
