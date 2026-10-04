@@ -718,3 +718,12 @@ reason by the close.*
      `data/external/EXT-HN1-issue.md`; Keryx's receipt: the block's sha256 with its final newline re-computed, `9219ccba`, unchanged from the compiled one.
      Also: `threeArcs` and `arcClass_unit_safe` (the three-arc colouring at radius `1/√3`) now kernel-checked in the audit file, to be committed at its stage 3.
      Credit: EXT-HN1, for catching the coordinator's false sentence before it was posted.
+122. **EXT-HN1 done, harness ≈ 200k** (report `data/external/reports/EXT-HN1.md`; record `plans/EXT-HN1-verification.md`; commits `4a9fca37`, `02a06d16`, `73487cf1`,
+     `661fb6e1`, checked): the outside claim states no Hadwiger–Nelson result (items 110, 113); `threeArcs : OutsideColoring (1/√3)` added [kernel, outside harness];
+     every circle 3-colourable [hand, one mind]; the README's Lean 4 Web link decodes to the shipped file exactly. **Related listings settled**: the Zenodo
+     record an outside record is the same author (ORCID (removed)), claim and files (md5); the decalion89 release is a different author (S. Galán) and claim.
+     **Bibliography rows filed** (proposed by EXT-HN1, `BIBLIOGRAPHY.md` § A): `[Outside2026]` (author from Zenodo's creator field, checked in
+     `data/external/hn1/related/an outside record`) and `[Galan2026]` (from its CITATION.cff); `tools/bib_audit.py` clean. Slip (EXT-HN1's): two
+     sub-minute `lake env lean` runs outside `scripts/slot.py`. Tool note: in a sandbox with a toolchain's `bin` first on `PATH`, `LEAN_CC=clang` finds the
+     toolchain's broken clang — give `/usr/bin/clang`. **Held, default keep**: the Mathlib harness at `~/.cache/ext-hn1/` (7.6 GB, outside the repository) stays
+     for re-checks until the issue is answered, then is deleted. The special slot closes with this job.
