@@ -279,3 +279,9 @@ reason by the close.*
 45. **Brief FS131-I2, wave 2's implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I2-wave2.md`), gated PASS: merge `main` first (the branch
     sits on wave 1's skeleton); wave 2's carriers under T1's procedure; whichever of waves 2 and 3 lands second merges the other's carrier entries. FS131-I3's
     brief amended the same day (T2 landed; the shared list). Source: this commit.
+46. **Brief FS131-K4, wave 4's planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K4-wave4.md`), gated PASS; worktree `.claude/worktrees/fs131-w4` made by
+    Keryx with the recipe, branched at wave 3's skeleton `05cb0a3e` (wave 4's row edges reach only waves 1 and 4, checked by script; its foundation reads
+    wave 3's vocabulary). The brief names the pattern of waves 2–3 (each planner reached its line; plan for a successor). Source: this commit.
+47. **The day's search deferred, not dropped** (`plans/SEARCH-QUEUE.md` row 6 open; Kooshi's rule: once a day, outside the milestone loop): the three slots go
+    to waves 2 and 3's implementers and wave 4's planner, and two 40 GiB builds already fill most of the slot's 90 GiB. Default: the Searcher launches today in
+    the first slot an implementer frees, with its memory sized against the builds then running.
