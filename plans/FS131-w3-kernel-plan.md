@@ -1,4 +1,4 @@
-# FS-131 wave 3 — the kernel plan: arc maps and fragments, Siamese allowed (de Bruijn, the planner, FS131-K3)
+# FS-131 wave 3 — the kernel plan: arc maps and fragments, Siamese allowed (de Bruijn, the planner, FS131-K3; continued by FS131-K3b)
 
 *Brief: `data/fs131/briefs/FS131-K3-wave3.md`. Branch `fs131-w3`, worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w3`, built
 on wave 1's frozen skeleton (`3358a401`). The opening plan is `plans/FS131-kernel-plan.md` (§§ 4–7); this record follows its § 6 form. Nothing in
@@ -7,7 +7,8 @@ this milestone is blind (inventory ruling 1).*
 ## Theorems this phase proved
 
 None: a planning job. The foundation's spec examples and inhabitants (stage 2) are proved, but they are checks of definitions, not theorems of
-the backlog.
+the backlog. FS131-K3b (stages 3 on) likewise proves no backlog theorem: the skeleton's two proved items (`sixFrag_covers`, the spec example
+`sixCol (1/2) = 0`) are checks of a definition.
 
 ## Stage 1 — SAVED: the readback
 
@@ -253,3 +254,32 @@ FS114-Y2-BOWTIE (wave 7) and FS114-Y-DIAL's strip (not in the backlog); five-col
 **Order:** foundation (done) → `LocalStructure` statements → SIXFRAG → Tiles → RingGerm → Lens → RingBand; `ARCHITECTURE.md`, `Proofs.lean`,
 `scripts/Axioms.lean` updated in the same commit; build; read-backs in the opening plan's § 6.2 form; per-leaf plans with `#check`ed names
 (`debruijn-obligation-modeling` invoked fresh).
+
+## Stage 3 — SAVED: the readback, the merge, the build (FS131-K3b)
+
+*FS131-K3b resumes here (standing rule 2: K3's stages 1 and 2 are SAVED at `f74c3edb` and `e335b208`, its report at `7d89b077`; the section "For
+stage 3" above is K3's design, unwritten). Brief: `data/fs131/briefs/FS131-K3b-wave3-skeleton.md`. Stages from here are numbered on from K3's.*
+
+**The brief's quotations (standing rule 3).**
+
+| quotation in the brief | source | result |
+|---|---|---|
+| K3's handoff, "stage 3 (the skeleton of the 20 rows with sorry leaves, … and the order (SIXFRAG first)" | `data/fs131/reports/FS131-K3.md` (worktree), first `HELD FOR THE COORDINATOR` line | **verbatim** (an exact-substring match by script, one occurrence) |
+| the six merged rows (FS116-N1-TOUCH → TOUCHW; RING-Q-PRIME → RING-Q-PRIME-S; FS110-N2-RING, FS110-Y3-GP → RINGBAND; FS112-SIX → FIVERING and SIXQ; RING-TRANSFER-C → FIVERING and SIXRING) | `data/fs131/k1/dispositions.csv` `merged_into`, split on `;` (inventory item 28) | **agrees**; all six are quoted verbatim in `data/fs131/k3/rows.md`, whose `--check` against the backlog re-runs **OK** today |
+| rulings 26, 27 and caution C137 | `plans/FS131-close-inventory.md` items 26–27; `plans/LEAN-BACKLOG.md` § C137 | **agree** with the brief's summary; quoted by script in `data/fs131/k3b/rulings-quoted.md` |
+
+**The rows.** The 20 rows and the six merged rows stand as quoted in `data/fs131/k3/rows.md` (K3's script, `tools/fs131_k3_rows.py --check`: OK
+on the merged tree). FS116-RING-TRANSFER-C enters this wave by its five-colour clause only (FIVERING); its six-colour clause is FS116-N2-SIXRING's,
+wave 8; its four-colour clause is DNF (SR1 item DNF). FS112-SIX's five-colour clause is FIVERING's length clause, its six-colour clause SIXQ's.
+
+**The rulings in force for this wave.** Item 27: `Plane/LocalStructure` carries the three local-structure lemmas (finite tiles near a point, the
+germ dichotomy, interval cones in a simple map). Item 26: each row stated at the class its argument reads (K3's list of widenings). Caution C137:
+RINGBAND carries RINGWIND's periodicity clauses as clause (vi).
+
+**The merge.** `main` (`da5303b4`, wave 1 landed) merged into `fs131-w3` as `4b363881`, no conflict: `ARCHITECTURE.md`, `Proofs.lean` and
+`scripts/Axioms.lean` keep both sides' appended lines (checked by grep: wave 1's rows and K3's three rows present).
+
+**The build.** `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the
+worktree: **OK — 440 of 440 batches, 12 modules rebuilt, 0 modules with warnings**, 8 m 15 s, exit 0 (`build/gate/build/20261004T060833Z-1516785.log`
+in the worktree; driver log `data/fs131/k3b/build-stage1.log`). Wave 1's seven modules are sorry-free on the merged tree; K3's foundation builds
+clean on top of them.
