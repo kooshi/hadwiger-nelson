@@ -1905,7 +1905,97 @@ theorem ae_sum_eq_one_of_weakStar {C : ℕ → Fin k → Set ℂ} (hC : ∀ m, I
     (hhole : ∀ R : ℝ, Tendsto (fun m => volume (ball (0 : ℂ) R \ ⋃ j, C m j)) atTop (𝓝 0)) {F : Fin k → ℂ → ℝ}
     (hFm : ∀ j, Measurable (F j)) (hw : ∀ j, WeakStarTendsto (fun m => (C m j).indicator 1) (F j)) :
     ∀ᵐ x ∂volume, ∑ j, F j x = 1 := by
-  sorry
+  have hGm : Measurable fun x => ∑ j, F j x := Finset.measurable_sum _ fun j _ => hFm j
+  -- on a bounded set where every `F j` is bounded, `∫_B ∑ F j = |B|`
+  have key : ∀ B : Set ℂ, MeasurableSet B → ∀ n : ℝ, B ⊆ ball 0 n → ∀ M : ℝ, (∀ x ∈ B, ∀ j, |F j x| ≤ M) →
+      ∫ x in B, ∑ j, F j x = volume.real B := by
+    intro B hB n hBn M hM
+    have hBfin : volume B ≠ ⊤ := measure_ne_top_of_subset hBn measure_ball_lt_top.ne
+    have hφ : Integrable (B.indicator (1 : ℂ → ℝ)) :=
+      (integrableOn_const hBfin).integrable_indicator hB
+    have hFi : ∀ j, IntegrableOn (F j) B := fun j =>
+      Measure.integrableOn_of_bounded hBfin (hFm j).aestronglyMeasurable (M := M)
+        ((ae_restrict_iff' hB).2 (Eventually.of_forall fun x hx => by rw [Real.norm_eq_abs]; exact hM x hx j))
+    have hsum := tendsto_finsetSum Finset.univ (fun j (_ : j ∈ Finset.univ) => hw j _ hφ)
+    have hL : ∀ m, ∑ j, ∫ x, (C m j).indicator 1 x * B.indicator 1 x = volume.real (B ∩ ⋃ j, C m j) := by
+      intro m
+      have : ∀ j, ∫ x, (C m j).indicator 1 x * B.indicator (1 : ℂ → ℝ) x = volume.real (C m j ∩ B) := by
+        intro j
+        rw [← integral_indicator_one ((hC m).1 j |>.inter hB), inter_indicator_one]
+        rfl
+      simp_rw [this]
+      rw [inter_iUnion, ← measureReal_biUnion_finset (s := Finset.univ) (f := fun j => C m j ∩ B)]
+      · simp only [Finset.mem_univ, iUnion_true]
+        simp_rw [inter_comm (C m _) B]
+      · intro i _ j _ hij
+        exact ((hC m).2 hij).mono inter_subset_left inter_subset_left
+      · exact fun j _ => ((hC m).1 j).inter hB
+    have hU : ∀ m, MeasurableSet (⋃ j, C m j) := fun m => MeasurableSet.iUnion (hC m).1
+    have hconv : Tendsto (fun m => volume.real (B ∩ ⋃ j, C m j)) atTop (𝓝 (volume.real B)) := by
+      have hdiff : Tendsto (fun m => volume.real (B \ ⋃ j, C m j)) atTop (𝓝 0) := by
+        have h0 : Tendsto (fun m => volume (B \ ⋃ j, C m j)) atTop (𝓝 0) :=
+          tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds (hhole n) (fun m => bot_le)
+            (fun m => measure_mono (sdiff_subset_sdiff_left hBn))
+        have := (ENNReal.tendsto_toReal ENNReal.zero_ne_top).comp h0
+        simpa [Measure.real, Function.comp_def] using this
+      have : ∀ m, volume.real (B ∩ ⋃ j, C m j) = volume.real B - volume.real (B \ ⋃ j, C m j) := by
+        intro m; rw [← measureReal_inter_add_sdiff (hU m) hBfin]; ring
+      simp_rw [this]
+      simpa using (tendsto_const_nhds (x := volume.real B)).sub hdiff
+    have hR : ∑ j, ∫ x, F j x * B.indicator 1 x = ∫ x in B, ∑ j, F j x := by
+      have : ∀ j, ∫ x, F j x * B.indicator (1 : ℂ → ℝ) x = ∫ x in B, F j x := by
+        intro j
+        rw [← integral_indicator hB]
+        congr 1; ext x
+        by_cases hx : x ∈ B <;> simp [hx]
+      simp_rw [this]
+      rw [integral_finsetSum _ fun j _ => hFi j]
+    rw [← hR]
+    refine tendsto_nhds_unique hsum ?_
+    simp_rw [hL]
+    exact hconv
+  -- a bounded set where every `F j` is bounded and `s (∑ F j − 1) > 0` is null
+  have hnull : ∀ B : Set ℂ, MeasurableSet B → ∀ n : ℝ, B ⊆ ball 0 n → ∀ M : ℝ, (∀ x ∈ B, ∀ j, |F j x| ≤ M) →
+      ∀ σ : ℝ, (∀ x ∈ B, 0 < σ * (∑ j, F j x - 1)) → volume B = 0 := by
+    intro B hB n hBn M hM σ hσ
+    have hBfin : volume B ≠ ⊤ := measure_ne_top_of_subset hBn measure_ball_lt_top.ne
+    have hGi : IntegrableOn (fun x => ∑ j, F j x) B := by
+      refine integrable_finsetSum _ fun j _ => ?_
+      exact Measure.integrableOn_of_bounded hBfin (hFm j).aestronglyMeasurable (M := M)
+        ((ae_restrict_iff' hB).2 (Eventually.of_forall fun x hx => by rw [Real.norm_eq_abs]; exact hM x hx j))
+    have hfi : IntegrableOn (fun x => σ * (∑ j, F j x - 1)) B :=
+      (hGi.sub (integrableOn_const hBfin)).const_mul σ
+    have hint0 : ∫ x in B, σ * (∑ j, F j x - 1) = 0 := by
+      rw [integral_const_mul, integral_sub hGi (integrableOn_const hBfin), key B hB n hBn M hM, setIntegral_const,
+        smul_eq_mul, mul_one, sub_self, mul_zero]
+    have hae := (setIntegral_eq_zero_iff_of_nonneg_ae
+      ((ae_restrict_iff' hB).2 (Eventually.of_forall fun x hx => (hσ x hx).le)) hfi).1 hint0
+    have h' : ∀ᵐ x ∂volume, x ∉ B := by
+      filter_upwards [(ae_restrict_iff' hB).1 hae] with x hx hxB
+      exact (hσ x hxB).ne' (hx hxB)
+    simpa using ae_iff.1 h'
+  have hbd : ∀ M : ℝ, MeasurableSet {x | ∀ j, |F j x| ≤ M} := fun M => by
+    rw [setOf_forall]
+    exact MeasurableSet.iInter fun j => measurableSet_le (continuous_abs.measurable.comp (hFm j)) measurable_const
+  have hcov : {x | ∑ j, F j x ≠ 1} ⊆ ⋃ (n : ℕ) (M : ℕ),
+      ((ball 0 n ∩ {x | ∀ j, |F j x| ≤ M} ∩ {x | 0 < 1 * (∑ j, F j x - 1)}) ∪
+        (ball 0 n ∩ {x | ∀ j, |F j x| ≤ M} ∩ {x | 0 < (-1) * (∑ j, F j x - 1)})) := by
+    intro x hx
+    obtain ⟨n, hn⟩ := exists_nat_gt ‖x‖
+    obtain ⟨M, hM⟩ := exists_nat_ge (∑ j, |F j x|)
+    refine mem_iUnion₂.2 ⟨n, M, ?_⟩
+    have hb : ∀ j, |F j x| ≤ M := fun j =>
+      (Finset.single_le_sum (fun i _ => abs_nonneg (F i x)) (Finset.mem_univ j)).trans hM
+    have hxn : x ∈ ball (0 : ℂ) n := by rw [mem_ball, dist_zero_right]; exact hn
+    rcases lt_or_gt_of_ne hx with h | h
+    · right; exact ⟨⟨hxn, hb⟩, by show 0 < (-1) * (∑ j, F j x - 1); linarith⟩
+    · left; exact ⟨⟨hxn, hb⟩, by show 0 < 1 * (∑ j, F j x - 1); linarith⟩
+  rw [ae_iff]
+  refine measure_mono_null hcov (measure_iUnion_null fun n => measure_iUnion_null fun M => measure_union_null ?_ ?_)
+  · exact hnull _ ((measurableSet_ball.inter (hbd M)).inter (measurableSet_lt measurable_const
+      (measurable_const.mul (hGm.sub measurable_const)))) n (fun x hx => hx.1.1) M (fun x hx => hx.1.2) 1 (fun x hx => hx.2)
+  · exact hnull _ ((measurableSet_ball.inter (hbd M)).inter (measurableSet_lt measurable_const
+      (measurable_const.mul (hGm.sub measurable_const)))) n (fun x hx => hx.1.1) M (fun x hx => hx.1.2) (-1) (fun x hx => hx.2)
 
 /-- **Selection**: from weights summing to `1`, a measurable colour of positive weight (argmax over `Fin k`). -/
 theorem exists_selection {F : Fin k → ℂ → ℝ} (hF : ∀ j, Measurable (F j)) (hsum : ∀ᵐ x ∂volume, ∑ j, F j x = 1)
