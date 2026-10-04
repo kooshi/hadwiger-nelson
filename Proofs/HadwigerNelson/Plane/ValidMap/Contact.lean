@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Basic
 import Proofs.HadwigerNelson.Plane.Tiles
+import Proofs.HadwigerNelson.Plane.SVMap
 
 /-!
 # Contacts, the allowed cone, shadows and the local moves (FS-110's N3–N4 rounds)
@@ -404,6 +405,23 @@ theorem dot_nonpos_of_coneAt_subset {T : Set ℂ} {v w : ℂ} {β : ℝ} (hβ : 
   have hzd' : ‖a‖ < dot (e β) (w - v) / 2 := by rw [ha, ← dist_eq_norm]; exact hzd
   linarith
 
+/-- `dot` is symmetric. -/
+theorem dot_comm' (a b : ℂ) : dot a b = dot b a := by
+  unfold dot
+  rw [← Complex.conj_re (b * starRingEnd ℂ a), map_mul, Complex.conj_conj, mul_comm]
+
+/-- `dot u u = ‖u‖²`. -/
+theorem dot_self_eq (u : ℂ) : dot u u = ‖u‖ ^ 2 := by
+  unfold dot; rw [Complex.mul_conj, Complex.normSq_eq_norm_sq]; norm_cast
+
+/-- **The squared distance from `v + t d` to `y`** (`‖d‖ = 1`): `‖y − v‖² − 2t d·(y − v) + t²`. -/
+theorem sq_norm_sub_add_smul (v y : ℂ) (β t : ℝ) :
+    ‖y - (v + (t : ℂ) * e β)‖ ^ 2 = ‖y - v‖ ^ 2 - 2 * t * dot (e β) (y - v) + t ^ 2 := by
+  have h := norm_sub_sq_eq_dot (y - v) ((t : ℂ) * e β)
+  rw [show y - v - (t : ℂ) * e β = y - (v + (t : ℂ) * e β) by ring, norm_mul, Complex.norm_real, norm_e, mul_one,
+    Real.norm_eq_abs, sq_abs, dot_comm' (y - v), dot_ofReal_mul] at h
+  rw [h]; ring
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
@@ -521,11 +539,143 @@ theorem coneAt_subset_allowedCone (hF : F.Valid) {v : ℂ} {c : Fin k} (hv : F.C
     have := hge hwS
     simpa [dist_comm] using this
 
+/-- **Near a point of the domain, every tile meeting a small ball has the point in its closure** (finitely many tiles near
+it, `finite_tiles_near`). -/
+theorem exists_ball_tiles_mem_closure {w : ℂ} (hw : w ∈ F.dom) :
+    ∃ δ > 0, ∀ T, F.IsTile T → (T ∩ ball w δ).Nonempty → w ∈ closure T := by
+  obtain ⟨r, hr, hfin⟩ := F.finite_tiles_near hw
+  set 𝒯 := {T | F.IsTile T ∧ (T ∩ ball w r).Nonempty} with h𝒯
+  set B := ⋃ T ∈ {T | T ∈ 𝒯 ∧ w ∉ closure T}, closure T with hB
+  have hBc : IsClosed B := (hfin.subset fun T hT => hT.1).isClosed_biUnion fun T _ => isClosed_closure
+  have hwB : w ∉ B := by
+    rw [hB, mem_iUnion₂]
+    rintro ⟨T, ⟨_, hT⟩, hw⟩
+    exact hT hw
+  obtain ⟨δ₁, hδ₁, hδB⟩ := Metric.isOpen_iff.mp hBc.isOpen_compl w hwB
+  refine ⟨min r δ₁, lt_min hr hδ₁, fun T hT hne => ?_⟩
+  by_contra hwT
+  obtain ⟨y, hyT, hyb⟩ := hne
+  have hT𝒯 : T ∈ 𝒯 := ⟨hT, y, hyT, ball_subset_ball (min_le_left _ _) hyb⟩
+  have hyB : y ∈ B := mem_biUnion (x := T) ⟨hT𝒯, hwT⟩ (subset_closure hyT)
+  exact hδB (ball_subset_ball (min_le_right _ _) hyb) hyB
+
+/-- The tile through a point of `c`'s class is a `c`-tile containing it. -/
+theorem tileOf_component {c : Fin k} {y : ℂ} (hy : y ∈ F.region c) :
+    F.TileOf c (connectedComponentIn F.interiorPts y) ∧ y ∈ connectedComponentIn F.interiorPts y := by
+  have hyI : y ∈ F.interiorPts := hy.1
+  have hT : F.IsTile (connectedComponentIn F.interiorPts y) := ⟨y, hyI, rfl⟩
+  have hmem : y ∈ connectedComponentIn F.interiorPts y := mem_connectedComponentIn hyI
+  have hcol : F.col y = c := hy.2
+  exact ⟨hcol ▸ hT.tileOf hmem, hmem⟩
+
 /-- **FS110-N3-CONF**, (iii) (N3-CLEAR): a compact set of directions inside the interior of `D_c(v)` is clear for `c` near `v`. -/
 theorem clear_of_subset_interior_allowedCone (hF : F.Valid) {v : ℂ} {c : Fin k} (hv : F.Covers v 1) (hc : c ∈ F.coloursAt v)
     {Λ : Set ℝ} (hΛ : IsCompact Λ) (hΛD : e '' Λ ⊆ interior (F.allowedCone v c)) :
     ∃ ρ > 0, ∀ β ∈ Λ, ∀ t : ℝ, 0 < t → t < ρ → F.IsClear c (v + (t : ℂ) * e β) := by
-  sorry
+  have hcont_e : Continuous e := Complex.continuous_exp.comp (Complex.continuous_ofReal.mul continuous_const)
+  -- the margin `μ` of `Λ`'s directions inside `D_c(v)`
+  obtain ⟨δ, hδ, hthick⟩ := (hΛ.image hcont_e).exists_thickening_subset_open isOpen_interior hΛD
+  set μ := δ / 2 with hμ
+  have hμ0 : 0 < μ := by positivity
+  have hmargin : ∀ β ∈ Λ, ∀ w, F.IsContact v c w →
+      (F.InType v c w → μ ≤ dot (e β) (w - v)) ∧ (F.OutType v c w → dot (e β) (w - v) ≤ -μ) := by
+    intro β hβ w hw
+    have hu : ‖w - v‖ = 1 := by rw [← dist_eq_norm]; exact hw.2.1
+    have huu : dot (w - v) (w - v) = 1 := by rw [dot_self_eq, hu]; norm_num
+    have hmem : ∀ σ : ℝ, |σ| = 1 → e β + ((σ * μ : ℝ) : ℂ) * (w - v) ∈ F.allowedCone v c := by
+      intro σ hσ
+      apply interior_subset
+      apply hthick
+      rw [Metric.mem_thickening_iff]
+      refine ⟨e β, mem_image_of_mem e hβ, ?_⟩
+      rw [dist_eq_norm, add_sub_cancel_left, norm_mul, hu, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_mul, hσ,
+        one_mul, abs_of_pos hμ0]
+      linarith
+    constructor
+    · intro hin
+      have := (hmem (-1) (by norm_num) w hw).1 hin
+      rw [dot_add_left, dot_ofReal_mul, huu] at this; linarith
+    · intro hout
+      have := (hmem 1 (by norm_num) w hw).2 hout
+      rw [dot_add_left, dot_ofReal_mul, huu] at this; linarith
+  -- the contacts, each with a ball met only by tiles holding it in their closure
+  set W := closure (F.region c) ∩ sphere v 1 with hW
+  have hloc : ∀ w ∈ W, ∃ δw > 0, δw ≤ μ / 2 ∧ ∀ T, F.IsTile T → (T ∩ ball w δw).Nonempty → w ∈ closure T := by
+    intro w hw
+    have hwdom : w ∈ F.dom := hv (sphere_subset_closedBall hw.2)
+    obtain ⟨δ', hδ', h⟩ := exists_ball_tiles_mem_closure hwdom
+    refine ⟨min δ' (μ / 2), lt_min hδ' (by positivity), min_le_right _ _, fun T hT hne => h T hT ?_⟩
+    obtain ⟨y, hyT, hyb⟩ := hne
+    exact ⟨y, hyT, ball_subset_ball (min_le_left _ _) hyb⟩
+  choose! δw hδw0 hδwμ hδwT using hloc
+  set U := ⋃ w ∈ W, ball w (δw w) with hU
+  have hUo : IsOpen U := isOpen_biUnion fun w _ => isOpen_ball
+  have hWU : W ⊆ U := fun w hw => mem_biUnion hw (mem_ball_self (hδw0 w hw))
+  -- the annulus margin `t₀`
+  set K := (closure (F.region c) ∩ {y | 1 / 2 ≤ dist y v ∧ dist y v ≤ 3 / 2}) \ U with hK
+  have hKc : IsCompact K := by
+    refine Metric.isCompact_of_isClosed_isBounded ?_ ?_
+    · refine (isClosed_closure.inter ?_).sdiff hUo
+      exact (isClosed_le continuous_const (continuous_id.dist continuous_const)).inter
+        (isClosed_le (continuous_id.dist continuous_const) continuous_const)
+    · refine (Metric.isBounded_closedBall (x := v) (r := 3 / 2)).subset fun y hy => ?_
+      exact mem_closedBall.mpr hy.1.2.2
+  obtain ⟨t₀, ht₀, ht₀h, ht₀K⟩ : ∃ t₀ > 0, t₀ ≤ 1 / 2 ∧ ∀ y ∈ K, t₀ ≤ |dist y v - 1| := by
+    rcases K.eq_empty_or_nonempty with hKe | hKne
+    · exact ⟨1 / 2, by norm_num, le_rfl, fun y hy => by rw [hKe] at hy; exact hy.elim⟩
+    · obtain ⟨y₀, hy₀K, hmin⟩ := hKc.exists_isMinOn hKne
+        ((continuous_id.dist continuous_const).sub continuous_const).abs.continuousOn
+      have hpos : 0 < |dist y₀ v - 1| := by
+        rw [abs_pos, sub_ne_zero]
+        intro h1
+        exact hy₀K.2 (hWU ⟨hy₀K.1.1, by rw [mem_sphere]; exact h1⟩)
+      exact ⟨min (1 / 2) |dist y₀ v - 1|, lt_min (by norm_num) hpos, min_le_left _ _,
+        fun y hy => (min_le_right _ _).trans (hmin hy)⟩
+  refine ⟨min t₀ (μ / 2), lt_min ht₀ (by positivity), fun β hβ t ht0 htρ y hy hzy => ?_⟩
+  have htt₀ : t < t₀ := lt_of_lt_of_le htρ (min_le_left _ _)
+  have htμ : t < μ / 2 := lt_of_lt_of_le htρ (min_le_right _ _)
+  set z := v + (t : ℂ) * e β with hz
+  have hzv : dist z v = t := by
+    rw [hz, dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, norm_e, mul_one, Real.norm_eq_abs,
+      abs_of_pos ht0]
+  -- `y` is within `t₀` of `ω(v)`
+  have hnear : |dist y v - 1| < t₀ := by
+    have h1 := dist_triangle y z v
+    have h2 := dist_triangle y v z
+    rw [dist_comm y z, hzy, hzv] at h1
+    rw [dist_comm y z, hzy, dist_comm v z, hzv] at h2
+    rw [abs_lt]; constructor <;> linarith
+  have hyU : y ∈ U := by
+    by_contra hyU
+    have hyK : y ∈ K := by
+      refine ⟨⟨subset_closure hy, ?_, ?_⟩, hyU⟩
+      · have := (abs_lt.mp hnear).1; linarith
+      · have := (abs_lt.mp hnear).2; linarith
+    linarith [ht₀K y hyK]
+  obtain ⟨w, hwW, hyw⟩ := mem_iUnion₂.mp hyU
+  have hw : F.IsContact v c w := ⟨hc, hwW.2, hwW.1⟩
+  obtain ⟨hTy, hyT⟩ := tileOf_component hy
+  have hwT : w ∈ closure (connectedComponentIn F.interiorPts y) := hδwT w hwW _ hTy.1 ⟨y, hyT, hyw⟩
+  have hywd : ‖y - w‖ < μ / 2 := by rw [← dist_eq_norm]; exact lt_of_lt_of_le hyw (hδwμ w hwW)
+  have hdy : |dot (e β) (y - w)| < μ / 2 := by
+    have := abs_dot_le (e β) (y - w); rw [norm_e, one_mul] at this; linarith
+  have hsplit : dot (e β) (y - v) = dot (e β) (w - v) + dot (e β) (y - w) := by
+    unfold dot; simp only [map_sub, mul_sub, Complex.sub_re]; ring
+  have hsq : ‖y - z‖ ^ 2 = 1 := by rw [← dist_eq_norm, dist_comm, hzy]; norm_num
+  rw [hz, sq_norm_sub_add_smul] at hsq
+  rcases (contact_inType_or_outType hF hv hw).1 with hin | hout
+  · have hyv : ‖y - v‖ < 1 := by rw [← dist_eq_norm]; exact hin _ hTy hwT hyT
+    have hm := (hmargin β hβ w hw).1 hin
+    have hd : μ / 2 ≤ dot (e β) (y - v) := by rw [hsplit]; linarith [(abs_lt.mp hdy).1]
+    have : ‖y - v‖ ^ 2 < 1 := by nlinarith [norm_nonneg (y - v)]
+    nlinarith
+  · have hyv : 1 < ‖y - v‖ := by
+      have := disjoint_left.mp (hout _ hTy hwT) hyT
+      rw [mem_closedBall, not_le, dist_eq_norm] at this; exact this
+    have hm := (hmargin β hβ w hw).2 hout
+    have hd : dot (e β) (y - v) ≤ -(μ / 2) := by rw [hsplit]; linarith [(abs_lt.mp hdy).2]
+    have : 1 < ‖y - v‖ ^ 2 := by nlinarith
+    nlinarith
 
 end ArcMap
 
@@ -634,11 +784,507 @@ theorem lune_dist_le_of_up (v : ℂ) (α : ℝ) {z : ℂ} (hz : dist z v < 1 / 2
   have : dist z p ^ 2 ≤ dist (z + (t : ℂ) * e (α + π / 2)) p ^ 2 := by rw [hdz, hdz0]; nlinarith [hle]
   exact (pow_le_pow_iff_left₀ dist_nonneg dist_nonneg two_ne_zero).mp this
 
+/-- The horn depends on its direction only through `e β`. -/
+theorem hornSet_congr {v : ℂ} {β β' : ℝ} (h : e β = e β') (κ₁ κ₂ r : ℝ) :
+    hornSet v β κ₁ κ₂ r = hornSet v β' κ₁ κ₂ r := by
+  simp only [hornSet, TanAbove, TanBelow, frameX, frameY, h]
+
+/-- The height of the branch point of curvature `m` above the tangent circle of curvature `κ`: `s²(m − κ)/2`. -/
+theorem tanHeight_branchPt (v : ℂ) (β m κ : ℝ) {s : ℝ} (hs : |m| * s ≤ 2) (hs0 : 0 ≤ s) :
+    tanHeight κ (frameX v β (branchPt v β m s)) (frameY v β (branchPt v β m s)) = s ^ 2 * (m - κ) / 2 := by
+  have ha := half_curv_mem_Icc hs hs0 le_rfl
+  rw [branchPt, tanHeight_polar, add_sub_cancel_left, Real.sin_arcsin ha.1 ha.2]
+  ring
+
+/-- The branch point lies on the `+a` side of `v`. -/
+theorem frameX_branchPt_pos (v : ℂ) (β m : ℝ) {s : ℝ} (hs : |m| * s < 2) (hs0 : 0 < s) :
+    0 < frameX v β (branchPt v β m s) := by
+  rw [branchPt, (frame_polar v β s _).1, add_sub_cancel_left, Real.cos_arcsin]
+  refine mul_pos hs0 (Real.sqrt_pos.mpr ?_)
+  have h : |m * s / 2| < 1 := by
+    rw [abs_div, abs_mul, abs_of_pos hs0, abs_two]; rw [div_lt_one two_pos]; linarith
+  have := abs_lt.mp h
+  nlinarith
+
+/-- **A branch point of intermediate curvature lies in the horn**: for `κ₁ < m < κ₂` and `0 < s < r` (with `|m| s < 2`),
+`branchPt v β m s ∈ hornSet v β κ₁ κ₂ r`. -/
+theorem branchPt_mem_hornSet (v : ℂ) (β : ℝ) {κ₁ κ₂ m r s : ℝ} (h1 : κ₁ < m) (h2 : m < κ₂) (hs0 : 0 < s) (hsr : s < r)
+    (hs : |m| * s < 2) : branchPt v β m s ∈ hornSet v β κ₁ κ₂ r := by
+  refine ⟨?_, frameX_branchPt_pos v β m hs hs0, ?_, ?_⟩
+  · rw [dist_eq_norm, norm_branchPt_sub v β m hs0.le]; exact hsr
+  · show 0 < tanHeight _ _ _
+    rw [tanHeight_branchPt v β m κ₁ hs.le hs0.le]
+    have : 0 < s ^ 2 := by positivity
+    nlinarith
+  · show tanHeight _ _ _ < 0
+    rw [tanHeight_branchPt v β m κ₂ hs.le hs0.le]
+    have : 0 < s ^ 2 := by positivity
+    nlinarith
+
+/-- A small admissible distance: `0 < s < r` with `|m| s < 2`. -/
+theorem exists_small_s (m : ℝ) {r : ℝ} (hr : 0 < r) : ∃ s, 0 < s ∧ s < r ∧ |m| * s < 2 := by
+  refine ⟨min (r / 2) (1 / (|m| + 1)), by positivity, lt_of_le_of_lt (min_le_left _ _) (by linarith), ?_⟩
+  have h1 : |m| * min (r / 2) (1 / (|m| + 1)) ≤ |m| * (1 / (|m| + 1)) :=
+    mul_le_mul_of_nonneg_left (min_le_right _ _) (abs_nonneg m)
+  have h2 : |m| * (1 / (|m| + 1)) < 1 := by
+    rw [mul_one_div, div_lt_one (by positivity)]; linarith
+  linarith
+
+/-- `sin x = 0` and `sin (x + δ) = 0` with `0 < δ < π` cannot both hold. -/
+theorem sin_zero_of_two {x δ : ℝ} (hδ0 : 0 < δ) (hδπ : δ < π) (h1 : Real.sin x = 0) (h2 : Real.sin (x + δ) = 0) :
+    False := by
+  rw [Real.sin_add, h1, zero_mul, zero_add] at h2
+  have hs : 0 < Real.sin δ := Real.sin_pos_of_pos_of_lt_pi hδ0 hδπ
+  have hc : Real.cos x = 0 := by
+    rcases mul_eq_zero.mp h2 with h | h
+    · exact h
+    · linarith
+  have := Real.sin_sq_add_cos_sq x
+  rw [h1, hc] at this; norm_num at this
+
+/-- `sin (β − α) = 0` puts `e β` at `e α` or `e (α + π)`. -/
+theorem e_eq_or_of_sin_sub_eq_zero {α β : ℝ} (h : Real.sin (β - α) = 0) : e β = e α ∨ e β = e (α + π) := by
+  obtain ⟨m, hm⟩ := Real.sin_eq_zero_iff.mp h
+  rcases Int.even_or_odd m with ⟨j, hj⟩ | ⟨j, hj⟩
+  · left
+    have : β = α + 2 * π * j := by rw [hj] at hm; push_cast at hm; linarith
+    rw [this, e_add_int_mul]
+  · right
+    have : β = α + π + 2 * π * j := by rw [hj] at hm; push_cast at hm; linarith
+    rw [this, e_add_int_mul]
+
+/-- `dot` is odd in its second argument. -/
+theorem dot_neg_right (d u : ℂ) : dot d (-u) = -dot d u := by
+  unfold dot; rw [map_neg, mul_neg, Complex.neg_re]
+
+/-- `e (x + π) = −e x`. -/
+theorem e_add_pi' (x : ℝ) : e (x + π) = -e x := by
+  rw [e_add, show e π = -1 by rw [e_eq]; simp, mul_neg_one]
+
+/-- The dot product against `e α` is the frame's first coordinate at the origin. -/
+theorem dot_e_eq_frameX (α : ℝ) (u : ℂ) : dot (e α) u = frameX 0 α u := by
+  rw [dot_comm']; unfold dot frameX; rw [sub_zero]
+
+/-- The dot product against `n = e (α + π/2)` is the frame's second coordinate at the origin. -/
+theorem dot_e_add_pi_div_two_eq_frameY (α : ℝ) (u : ℂ) : dot (e (α + π / 2)) u = frameY 0 α u := by
+  rw [dot_comm']; unfold dot frameY; rw [sub_zero, e_add_pi_div_two, map_mul, Complex.conj_I]
+  have : u * (-I * starRingEnd ℂ (e α)) = -I * (u * starRingEnd ℂ (e α)) := by ring
+  rw [this]; simp
+
+/-- **A closed set of unit vectors on one side of `e α` that misses `s n` leaves `D` an interior** (the planar step of
+FS110-N3-DEG): if every `u ∈ A` has `e α · u ≥ 0` and `s e (α + π/2) ∉ A` (`s = ±1`), the cone `{d : d · u ≥ 0 ∀ u ∈ A}` has
+non-empty interior — it holds `e α − (s η/4) n` with a margin. -/
+theorem interior_nonempty_of_not_mem {A : Set ℂ} (hA : IsClosed A) (hA1 : ∀ u ∈ A, ‖u‖ = 1) {α s : ℝ}
+    (hs : s = 1 ∨ s = -1) (hα : ∀ u ∈ A, 0 ≤ dot (e α) u) (hn : (s : ℂ) * e (α + π / 2) ∉ A) :
+    (interior {d : ℂ | ∀ u ∈ A, 0 ≤ dot d u}).Nonempty := by
+  obtain ⟨η₀, hη₀, hball⟩ := Metric.isOpen_iff.mp hA.isOpen_compl _ hn
+  set η := min η₀ 1 with hη
+  have hη0 : 0 < η := lt_min hη₀ one_pos
+  have hη1 : η ≤ 1 := min_le_right _ _
+  set d : ℂ := e α - ((s * η / 4 : ℝ) : ℂ) * e (α + π / 2) with hd
+  have hs2 : s ^ 2 = 1 := by rcases hs with rfl | rfl <;> norm_num
+  have key : ∀ u ∈ A, η / 4 ≤ dot d u := by
+    intro u hu
+    have hu1 := hA1 u hu
+    have hfar : η ≤ ‖u - (s : ℂ) * e (α + π / 2)‖ := by
+      by_contra h
+      push Not at h
+      refine hball (show u ∈ ball _ η₀ from ?_) hu
+      rw [mem_ball, dist_eq_norm]; exact lt_of_lt_of_le h (min_le_left _ _)
+    have hpq : frameX 0 α u ^ 2 + frameY 0 α u ^ 2 = 1 := by
+      have := frame_normSq 0 α u; rw [sub_zero, hu1] at this; linarith
+    have hfar2 : η ^ 2 ≤ frameX 0 α u ^ 2 + (frameY 0 α u - s) ^ 2 := by
+      have := sq_dist_normalPt 0 α s u
+      rw [zero_add] at this
+      rw [← this]; exact pow_le_pow_left₀ hη0.le hfar 2
+    have hp : 0 ≤ frameX 0 α u := by have := hα u hu; rwa [dot_e_eq_frameX] at this
+    have hdu : dot d u = frameX 0 α u - η / 4 * (s * frameY 0 α u) := by
+      rw [hd, dot_sub, dot_ofReal_mul, dot_e_eq_frameX, dot_e_add_pi_div_two_eq_frameY]; ring
+    rw [hdu]
+    set p := frameX 0 α u
+    set q := s * frameY 0 α u with hq
+    have hq2 : q ^ 2 = frameY 0 α u ^ 2 := by rw [hq, mul_pow, hs2, one_mul]
+    have hpq' : p ^ 2 + q ^ 2 = 1 := by rw [hq2]; exact hpq
+    have hfar' : η ^ 2 ≤ 2 - 2 * q := by
+      have : (frameY 0 α u - s) ^ 2 = frameY 0 α u ^ 2 - 2 * q + s ^ 2 := by rw [hq]; ring
+      rw [this, hs2] at hfar2; linarith
+    rcases le_or_gt q 0 with hq0 | hq0
+    · have h1 : 1 ≤ p - q := by nlinarith
+      nlinarith
+    · have hq1 : q ≤ 1 := by nlinarith
+      have hp2 : η ^ 2 / 2 ≤ p ^ 2 := by nlinarith
+      have hpη : η / 2 ≤ p := by nlinarith
+      nlinarith
+  refine ⟨d, mem_interior.mpr ⟨ball d (η / 4), fun d' hd' u hu => ?_, isOpen_ball, mem_ball_self (by positivity)⟩⟩
+  have h1 := key u hu
+  have h2 : |dot (d' - d) u| ≤ ‖d' - d‖ * ‖u‖ := abs_dot_le _ _
+  rw [hA1 u hu, mul_one] at h2
+  have h3 : ‖d' - d‖ < η / 4 := by rw [← dist_eq_norm]; exact hd'
+  have h4 : dot d' u = dot d u + dot (d' - d) u := by have := dot_sub d' d u; linarith
+  rw [h4]
+  linarith [(abs_le.mp h2).1]
+
+/-- **A horn meeting no point of `B(N, 1)` has upper curvature at most `1`**. -/
+theorem curv_le_one_of_avoid {v : ℂ} {β κ₁ κ₂ r : ℝ} (hr : 0 < r) (hlt : κ₁ < κ₂)
+    (hN : ∀ x ∈ hornSet v β κ₁ κ₂ r, 1 ≤ dist x (v + e (β + π / 2))) : κ₂ ≤ 1 := by
+  by_contra h
+  push Not at h
+  set m := (max κ₁ 1 + κ₂) / 2
+  have hm1 : κ₁ < m := by have := le_max_left κ₁ 1; simp only [m]; linarith
+  have hm2 : m < κ₂ := by have := max_lt hlt h; simp only [m]; linarith
+  have hm3 : 1 < m := by have := le_max_right κ₁ 1; simp only [m]; linarith
+  obtain ⟨s, hs0, hsr, hsm⟩ := exists_small_s m hr
+  have hz := branchPt_mem_hornSet v β hm1 hm2 hs0 hsr hsm
+  have hA : TanAbove v β 1 (branchPt v β m s) := by
+    show 0 < tanHeight _ _ _
+    rw [tanHeight_branchPt v β m 1 hsm.le hs0.le]
+    have : 0 < s ^ 2 := by positivity
+    nlinarith
+  rw [tanAbove_one_iff] at hA
+  linarith [hN _ hz]
+
+/-- **A horn meeting no point of `B(S′, 1)` has lower curvature at least `−1`**. -/
+theorem neg_one_le_curv_of_avoid {v : ℂ} {β κ₁ κ₂ r : ℝ} (hr : 0 < r) (hlt : κ₁ < κ₂)
+    (hS : ∀ x ∈ hornSet v β κ₁ κ₂ r, 1 ≤ dist x (v - e (β + π / 2))) : -1 ≤ κ₁ := by
+  by_contra h
+  push Not at h
+  set m := (κ₁ + min κ₂ (-1)) / 2
+  have hm1 : κ₁ < m := by have := lt_min hlt h; simp only [m]; linarith
+  have hm2 : m < κ₂ := by have := min_le_left κ₂ (-1); simp only [m]; linarith
+  have hm3 : m < -1 := by have := min_le_right κ₂ (-1); simp only [m]; linarith
+  obtain ⟨s, hs0, hsr, hsm⟩ := exists_small_s m hr
+  have hz := branchPt_mem_hornSet v β hm1 hm2 hs0 hsr hsm
+  have hB : TanBelow v β (-1) (branchPt v β m s) := by
+    show tanHeight _ _ _ < 0
+    rw [tanHeight_branchPt v β m (-1) hsm.le hs0.le]
+    have : 0 < s ^ 2 := by positivity
+    nlinarith
+  rw [tanBelow_neg_one_iff] at hB
+  linarith [hS _ hz]
+
+/-- The branch point is continuous in its curvature. -/
+theorem continuous_branchPt_curv (v : ℂ) (β s : ℝ) : Continuous fun m : ℝ => branchPt v β m s := by
+  have h0 : Continuous fun m : ℝ => β + Real.arcsin (m * s / 2) :=
+    continuous_const.add (Real.continuous_arcsin.comp (by fun_prop))
+  have h1 : Continuous fun m : ℝ => e (β + Real.arcsin (m * s / 2)) :=
+    Complex.continuous_exp.comp ((Complex.continuous_ofReal.comp h0).mul continuous_const)
+  exact continuous_const.add (continuous_const.mul h1)
+
+/-- **The upper bounding arc lies in the horn's closure**: `branchPt v β κ₂ s ∈ cl (hornSet v β κ₁ κ₂ r)` for `0 < s < r`,
+`|κ₂| s < 2`. -/
+theorem branchPt_mem_closure_hornSet_upper (v : ℂ) (β : ℝ) {κ₁ κ₂ r s : ℝ} (hlt : κ₁ < κ₂) (hs0 : 0 < s) (hsr : s < r)
+    (hs : |κ₂| * s < 2) : branchPt v β κ₂ s ∈ closure (hornSet v β κ₁ κ₂ r) := by
+  have ht : Filter.Tendsto (fun m : ℝ => branchPt v β m s) (𝓝[<] κ₂) (𝓝 (branchPt v β κ₂ s)) :=
+    ((continuous_branchPt_curv v β s).tendsto κ₂).mono_left nhdsWithin_le_nhds
+  refine mem_closure_of_tendsto ht ?_
+  have hopen : {m : ℝ | |m| * s < 2} ∈ 𝓝 κ₂ :=
+    (isOpen_lt (continuous_abs.mul continuous_const) continuous_const).mem_nhds hs
+  filter_upwards [Ioo_mem_nhdsLT hlt, nhdsWithin_le_nhds hopen] with m hm hm2
+  exact branchPt_mem_hornSet v β hm.1 hm.2 hs0 hsr hm2
+
+/-- **The lower bounding arc lies in the horn's closure**. -/
+theorem branchPt_mem_closure_hornSet_lower (v : ℂ) (β : ℝ) {κ₁ κ₂ r s : ℝ} (hlt : κ₁ < κ₂) (hs0 : 0 < s) (hsr : s < r)
+    (hs : |κ₁| * s < 2) : branchPt v β κ₁ s ∈ closure (hornSet v β κ₁ κ₂ r) := by
+  have ht : Filter.Tendsto (fun m : ℝ => branchPt v β m s) (𝓝[>] κ₁) (𝓝 (branchPt v β κ₁ s)) :=
+    ((continuous_branchPt_curv v β s).tendsto κ₁).mono_left nhdsWithin_le_nhds
+  refine mem_closure_of_tendsto ht ?_
+  have hopen : {m : ℝ | |m| * s < 2} ∈ 𝓝 κ₁ :=
+    (isOpen_lt (continuous_abs.mul continuous_const) continuous_const).mem_nhds hs
+  filter_upwards [Ioo_mem_nhdsGT hlt, nhdsWithin_le_nhds hopen] with m hm hm2
+  exact branchPt_mem_hornSet v β hm.1 hm.2 hs0 hsr hm2
+
+/-- The branch of curvature `1` lies on `ω(N)`. -/
+theorem dist_branchPt_one (v : ℂ) (β : ℝ) {s : ℝ} (hs0 : 0 ≤ s) (hs : s ≤ 2) :
+    dist (branchPt v β 1 s) (v + e (β + π / 2)) = 1 := by
+  have h := sq_dist_N v β (branchPt v β 1 s)
+  have ht := tanHeight_branchPt v β 1 1 (s := s) (by rw [abs_one, one_mul]; exact hs) hs0
+  unfold tanHeight at ht
+  have h2 : dist (branchPt v β 1 s) (v + e (β + π / 2)) ^ 2 = 1 := by rw [h]; nlinarith
+  have := dist_nonneg (x := branchPt v β 1 s) (y := v + e (β + π / 2))
+  nlinarith
+
+/-- The branch of curvature `−1` lies on `ω(S′)`. -/
+theorem dist_branchPt_neg_one (v : ℂ) (β : ℝ) {s : ℝ} (hs0 : 0 ≤ s) (hs : s ≤ 2) :
+    dist (branchPt v β (-1) s) (v - e (β + π / 2)) = 1 := by
+  have h := sq_dist_S v β (branchPt v β (-1) s)
+  have ht := tanHeight_branchPt v β (-1) (-1) (s := s) (by rw [abs_neg, abs_one, one_mul]; exact hs) hs0
+  unfold tanHeight at ht
+  have h2 : dist (branchPt v β (-1) s) (v - e (β + π / 2)) ^ 2 = 1 := by rw [h]; nlinarith
+  have := dist_nonneg (x := branchPt v β (-1) s) (y := v - e (β + π / 2))
+  nlinarith
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
 
 /-! ## FS110-N3-DEG -/
+
+/-- An in-type contact is a closure point of `c`'s class inside `B(v, 1)`, and conversely. -/
+theorem inType_iff (hF : F.Valid) {v w : ℂ} {c : Fin k} (hv : F.Covers v 1) (hw : F.IsContact v c w) :
+    F.InType v c w ↔ w ∈ closure (F.region c ∩ ball v 1) := by
+  have hwdom : w ∈ F.dom := hv (by rw [mem_closedBall, hw.2.1])
+  constructor
+  · intro hin
+    obtain ⟨T, hT, hwT⟩ := (F.mem_coloursAt_iff_exists_tileOf hwdom).mp hw.2.2
+    exact closure_mono (show T ⊆ F.region c ∩ ball v 1 from fun x hx => ⟨hT.subset_region hx, hin T hT hwT hx⟩) hwT
+  · intro hcl
+    rcases (contact_inType_or_outType hF hv hw).1 with hin | hout
+    · exact hin
+    · exfalso
+      obtain ⟨δ, hδ, hδT⟩ := exists_ball_tiles_mem_closure hwdom
+      obtain ⟨y, ⟨hyc, hyv⟩, hyw⟩ := Metric.mem_closure_iff.mp hcl δ hδ
+      obtain ⟨hTy, hyT⟩ := tileOf_component hyc
+      have hwT := hδT _ hTy.1 ⟨y, hyT, by rw [mem_ball, dist_comm]; exact hyw⟩
+      exact disjoint_left.mp (hout _ hTy hwT) hyT (ball_subset_closedBall hyv)
+
+/-- An out-type contact is a closure point of `c`'s class outside `B̄(v, 1)`, and conversely. -/
+theorem outType_iff (hF : F.Valid) {v w : ℂ} {c : Fin k} (hv : F.Covers v 1) (hw : F.IsContact v c w) :
+    F.OutType v c w ↔ w ∈ closure (F.region c \ closedBall v 1) := by
+  have hwdom : w ∈ F.dom := hv (by rw [mem_closedBall, hw.2.1])
+  constructor
+  · intro hout
+    obtain ⟨T, hT, hwT⟩ := (F.mem_coloursAt_iff_exists_tileOf hwdom).mp hw.2.2
+    exact closure_mono (show T ⊆ F.region c \ closedBall v 1 from fun x hx => ⟨hT.subset_region hx, disjoint_left.mp (hout T hT hwT) hx⟩) hwT
+  · intro hcl
+    rcases (contact_inType_or_outType hF hv hw).1 with hin | hout
+    · exfalso
+      obtain ⟨δ, hδ, hδT⟩ := exists_ball_tiles_mem_closure hwdom
+      obtain ⟨y, ⟨hyc, hyv⟩, hyw⟩ := Metric.mem_closure_iff.mp hcl δ hδ
+      obtain ⟨hTy, hyT⟩ := tileOf_component hyc
+      have hwT := hδT _ hTy.1 ⟨y, hyT, by rw [mem_ball, dist_comm]; exact hyw⟩
+      exact hyv (ball_subset_closedBall (hin _ hTy hwT hyT))
+    · exact hout
+
+/-- **No in-type contacts at both `N` and `S′`**: a `c`-tile at `v` would lie in `B̄(N, 1) ∩ B̄(S′, 1) = {v}` (N-E2). -/
+theorem not_inType_both (hF : F.Valid) {v : ℂ} {c : Fin k} (hv : F.Covers v 1) {α : ℝ}
+    (hN : F.IsContact v c (v + e (α + π / 2))) (hNi : F.InType v c (v + e (α + π / 2)))
+    (hS : F.IsContact v c (v - e (α + π / 2))) (hSi : F.InType v c (v - e (α + π / 2))) : False := by
+  have hvdom : v ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  obtain ⟨X, hX, hvX⟩ := (F.mem_coloursAt_iff_exists_tileOf hvdom).mp hN.1
+  have key : ∀ w, F.IsContact v c w → F.InType v c w → ∀ x ∈ X, dist x w ≤ 1 := by
+    intro w hw hwi x hx
+    have hwdom : w ∈ F.dom := hv (by rw [mem_closedBall, hw.2.1])
+    obtain ⟨T, hT, hwT⟩ := (F.mem_coloursAt_iff_exists_tileOf hwdom).mp hw.2.2
+    obtain ⟨t, ht⟩ := hT.1.nonempty
+    have hvt : dist v t < 1 := by rw [dist_comm]; exact hwi T hT hwT ht
+    exact UnitNear.dist_le_of_mem_closure (unitNear_of_mem_closure hF hX hT hvX (subset_closure ht) hvt) (subset_closure hx) hwT
+  have hpt : ∀ x ∈ X, x = v := by
+    intro x hx
+    have h1 := key _ hN hNi x hx
+    have h2 := key _ hS hSi x hx
+    have e1 := sq_dist_N v α x
+    have e2 := sq_dist_S v α x
+    have e3 := frame_normSq v α x
+    have h1' : dist x (v + e (α + π / 2)) ^ 2 ≤ 1 := by nlinarith [dist_nonneg (x := x) (y := v + e (α + π / 2))]
+    have h2' : dist x (v - e (α + π / 2)) ^ 2 ≤ 1 := by nlinarith [dist_nonneg (x := x) (y := v - e (α + π / 2))]
+    have : ‖x - v‖ ^ 2 ≤ 0 := by nlinarith
+    have : ‖x - v‖ = 0 := by nlinarith [norm_nonneg (x - v)]
+    exact sub_eq_zero.mp (norm_eq_zero.mp this)
+  obtain ⟨x, hx⟩ := hX.1.nonempty
+  obtain ⟨ε, hε, hεX⟩ := Metric.isOpen_iff.mp hX.1.isOpen x hx
+  have hx' : x + ((ε / 2 : ℝ) : ℂ) ∈ X := hεX (by
+    rw [mem_ball, dist_eq_norm, add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by positivity)]
+    linarith)
+  have := (hpt _ hx').trans (hpt x hx).symm
+  have h0 : ((ε / 2 : ℝ) : ℂ) = 0 := by linear_combination this
+  have : ε / 2 = 0 := by exact_mod_cast h0
+  linarith
+
+/-- **FS110-N3-DEG's contacts**: if `int D_c(v) = ∅`, then for some axis `α` the colour `c` has out-type contacts at both
+`N = v + n` and `S′ = v − n`. -/
+theorem woodall_contacts (hF : F.Valid) {v : ℂ} {c : Fin k} (hv : F.Covers v 1) (hc : c ∈ F.coloursAt v)
+    (hD : interior (F.allowedCone v c) = ∅) :
+    ∃ α : ℝ, (F.IsContact v c (v + e (α + π / 2)) ∧ F.OutType v c (v + e (α + π / 2))) ∧
+      (F.IsContact v c (v - e (α + π / 2)) ∧ F.OutType v c (v - e (α + π / 2))) := by
+  -- a direction of `c`'s class at `v`
+  have hne : ∀ ε > 0, ∃ z ∈ F.region c, z ≠ v ∧ dist z v < ε := by
+    intro ε hε
+    by_cases hvr : v ∈ F.region c
+    · obtain ⟨δ, hδ, hδs⟩ := Metric.isOpen_iff.mp (F.isOpen_region c) v hvr
+      have hm : 0 < min ε δ / 2 := by positivity
+      have hd : dist (v + ((min ε δ / 2 : ℝ) : ℂ)) v = min ε δ / 2 := by
+        rw [dist_eq_norm, add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hm]
+      refine ⟨v + ((min ε δ / 2 : ℝ) : ℂ), hδs ?_, ?_, ?_⟩
+      · rw [mem_ball, hd]; linarith [min_le_right ε δ]
+      · intro h
+        have : dist (v + ((min ε δ / 2 : ℝ) : ℂ)) v = 0 := by rw [h, dist_self]
+        linarith
+      · rw [hd]; linarith [min_le_left ε δ]
+    · obtain ⟨z, hz, hzd⟩ := Metric.mem_closure_iff.mp hc ε hε
+      exact ⟨z, hz, fun h => hvr (h ▸ hz), by rw [dist_comm]; exact hzd⟩
+  obtain ⟨α, hα⟩ := coneAt_nonempty hne
+  have hαD := coneAt_subset_allowedCone hF hv hα
+  set Win := {w | F.IsContact v c w ∧ F.InType v c w} with hWin
+  set Wout := {w | F.IsContact v c w ∧ F.OutType v c w} with hWout
+  have hWin' : Win = closure (F.region c) ∩ sphere v 1 ∩ closure (F.region c ∩ ball v 1) := by
+    ext w
+    constructor
+    · rintro ⟨hw, hin⟩; exact ⟨⟨hw.2.2, hw.2.1⟩, (inType_iff hF hv hw).mp hin⟩
+    · rintro ⟨⟨h1, h2⟩, h3⟩
+      have hw : F.IsContact v c w := ⟨hc, h2, h1⟩
+      exact ⟨hw, (inType_iff hF hv hw).mpr h3⟩
+  have hWout' : Wout = closure (F.region c) ∩ sphere v 1 ∩ closure (F.region c \ closedBall v 1) := by
+    ext w
+    constructor
+    · rintro ⟨hw, hout⟩; exact ⟨⟨hw.2.2, hw.2.1⟩, (outType_iff hF hv hw).mp hout⟩
+    · rintro ⟨⟨h1, h2⟩, h3⟩
+      have hw : F.IsContact v c w := ⟨hc, h2, h1⟩
+      exact ⟨hw, (outType_iff hF hv hw).mpr h3⟩
+  have hcpt : ∀ X : Set ℂ, IsCompact (closure (F.region c) ∩ sphere v 1 ∩ closure X) := fun X =>
+    (isCompact_sphere v 1).inter_left isClosed_closure |>.inter_right isClosed_closure
+  set A := (fun w => w - v) '' Win ∪ (fun w => v - w) '' Wout with hA
+  have hAc : IsCompact A := by
+    refine IsCompact.union ?_ ?_
+    · rw [hWin']; exact (hcpt _).image (continuous_id.sub continuous_const)
+    · rw [hWout']; exact (hcpt _).image (continuous_const.sub continuous_id)
+  have hA1 : ∀ u ∈ A, ‖u‖ = 1 := by
+    rintro u (⟨w, hw, rfl⟩ | ⟨w, hw, rfl⟩)
+    · rw [← dist_eq_norm]; exact hw.1.2.1
+    · rw [← dist_eq_norm, dist_comm]; exact hw.1.2.1
+  have hAα : ∀ u ∈ A, 0 ≤ dot (e α) u := by
+    rintro u (⟨w, hw, rfl⟩ | ⟨w, hw, rfl⟩)
+    · exact (hαD w hw.1).1 hw.2
+    · have := (hαD w hw.1).2 hw.2
+      have h' : dot (e α) (v - w) = -dot (e α) (w - v) := by
+        rw [show v - w = -(w - v) by ring, dot_neg_right]
+      rw [h']; linarith
+  have hAD : {d : ℂ | ∀ u ∈ A, 0 ≤ dot d u} ⊆ F.allowedCone v c := by
+    intro d hd w hw
+    refine ⟨fun hin => hd _ (Or.inl ⟨w, ⟨hw, hin⟩, rfl⟩), fun hout => ?_⟩
+    have := hd _ (Or.inr ⟨w, ⟨hw, hout⟩, rfl⟩)
+    have h' : dot d (v - w) = -dot d (w - v) := by
+      rw [show v - w = -(w - v) by ring, dot_neg_right]
+    rw [h'] at this; linarith
+  have hmem : ∀ s : ℝ, (s = 1 ∨ s = -1) → (s : ℂ) * e (α + π / 2) ∈ A := by
+    intro s hs
+    by_contra h
+    obtain ⟨d, hd⟩ := interior_nonempty_of_not_mem hAc.isClosed hA1 hs hAα h
+    have := interior_mono hAD hd
+    rw [hD] at this
+    exact this
+  refine ⟨α, ?_⟩
+  have h1 := hmem 1 (Or.inl rfl)
+  have h2 := hmem (-1) (Or.inr rfl)
+  simp only [Complex.ofReal_one, one_mul, Complex.ofReal_neg, neg_one_mul] at h1 h2
+  rcases h1 with ⟨w, hw, hwv⟩ | ⟨w, hw, hwv⟩ <;> rcases h2 with ⟨w', hw', hwv'⟩ | ⟨w', hw', hwv'⟩
+  · -- in at `N`, in at `S′`
+    have e1 : w = v + e (α + π / 2) := by simp only at hwv; rw [← hwv]; ring
+    have e2 : w' = v - e (α + π / 2) := by simp only at hwv'; linear_combination hwv'
+    subst e1 e2
+    exact (not_inType_both hF hv hw.1 hw.2 hw'.1 hw'.2).elim
+  · -- in at `N`, out at `N`
+    have e1 : w = v + e (α + π / 2) := by simp only at hwv; rw [← hwv]; ring
+    have e2 : w' = v + e (α + π / 2) := by simp only at hwv'; linear_combination -hwv'
+    subst e1 e2
+    exact ((contact_inType_or_outType hF hv hw.1).2 ⟨hw.2, hw'.2⟩).elim
+  · -- out at `S′`, in at `S′`
+    have e1 : w = v - e (α + π / 2) := by simp only at hwv; linear_combination -hwv
+    have e2 : w' = v - e (α + π / 2) := by simp only at hwv'; linear_combination hwv'
+    subst e1 e2
+    exact ((contact_inType_or_outType hF hv hw.1).2 ⟨hw'.2, hw.2⟩).elim
+  · -- out at `S′`, out at `N`
+    have e1 : w = v - e (α + π / 2) := by simp only at hwv; linear_combination -hwv
+    have e2 : w' = v + e (α + π / 2) := by simp only at hwv'; linear_combination -hwv'
+    subst e1 e2
+    exact ⟨hw', hw⟩
+
+/-- A sector at `v` lies in a tile of its colour whose closure holds `v`. -/
+theorem sector_subset_tile {v : ℂ} {r : ℝ} {c : Fin k} {S : Set ℂ} (hS : S ∈ F.sectorsOf v r c) :
+    ∃ X, F.TileOf c X ∧ S ⊆ X ∧ v ∈ closure X := by
+  obtain ⟨⟨x, hx, rfl, hvS⟩, hcol⟩ := hS
+  have hxI : x ∈ F.interiorPts := hx.1
+  have hsub : connectedComponentIn (F.interiorPts ∩ ball v r) x ⊆ connectedComponentIn F.interiorPts x :=
+    connectedComponentIn_mono x inter_subset_left
+  refine ⟨connectedComponentIn F.interiorPts x, ?_, hsub, closure_mono hsub hvS⟩
+  have hT : F.IsTile (connectedComponentIn F.interiorPts x) := ⟨x, hxI, rfl⟩
+  have hc : F.col x = c := hcol (mem_connectedComponentIn hx)
+  have := hT.tileOf (mem_connectedComponentIn hxI)
+  rwa [hc] at this
+
+/-- **A sector whose directions all lie on the line `±a` is a horn along it** (in a chart at `v`): it is
+`hornSet v β κ₁ κ₂ r` with `κ₁ < κ₂` and `β` a direction of it. -/
+theorem IsSectorChart.horn_of_cone_sin {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G v r₀)
+    {r : ℝ} (hr : r ∈ Ioc 0 r₀) {S : Set ℂ} (hS : F.IsSector v r S) {α : ℝ}
+    (hcone : ∀ β ∈ coneAt S v, Real.sin (β - α) = 0) :
+    ∃ β κ₁ κ₂, κ₁ < κ₂ ∧ S = hornSet v β κ₁ κ₂ r ∧ β ∈ coneAt S v := by
+  have hπ := Real.pi_pos
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · exfalso
+    rw [(hC.isSector_iff_of_zero hn hr).mp hS, coneAt_ball_self v hr.1] at hcone
+    have := hcone (α + π / 2) (mem_univ _)
+    rw [show α + π / 2 - α = π / 2 by ring, Real.sin_pi_div_two] at this
+    norm_num at this
+  · obtain ⟨i, rfl⟩ := (hC.isSector_iff hn hr).mp hS
+    rw [hC.cone r hr i] at hcone ⊢
+    rcases hC.sorted.2 i with hlt | ⟨heq, hκ⟩
+    · exfalso
+      set δ := min ((G.nextβ i - G.β i) / 2) (π / 2) with hδ
+      have hδ0 : 0 < δ := lt_min (by linarith) (by linarith)
+      have hδπ : δ < π := lt_of_le_of_lt (min_le_right _ _) (by linarith)
+      have hδn : G.β i + δ ≤ G.nextβ i := by have := min_le_left ((G.nextβ i - G.β i) / 2) (π / 2); linarith
+      have h1 := hcone (G.β i) (Icc_subset_angleIcc _ _ ⟨le_rfl, hlt.le⟩)
+      have h2 := hcone (G.β i + δ) (Icc_subset_angleIcc _ _ ⟨by linarith, hδn⟩)
+      rw [show G.β i + δ - α = (G.β i - α) + δ by ring] at h2
+      exact sin_zero_of_two hδ0 hδπ h1 h2
+    · refine ⟨G.β i, G.κ i, G.nextκ i, hκ, ?_, Icc_subset_angleIcc _ _ ⟨le_rfl, heq.le⟩⟩
+      have h1 : |G.κ i| * r ≤ 2 := (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans (hC.curv i).le
+      have h2 : |G.nextκ i| * r ≤ 2 := (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans (hC.curv_next i).le
+      show sectorBetween v (G.β i) (G.κ i) (G.nextβ i) (G.nextκ i) r = _
+      rw [← heq]
+      exact sectorBetween_eq_hornSet v _ _ _ r h1 h2
+
+/-- A `c`-tile at `v` keeps distance at least `1` from an out-type contact of `c` at `v` (N-E2: the tiles are far). -/
+theorem one_le_dist_of_outType (hF : F.Valid) {v w : ℂ} {c : Fin k} (hv : F.Covers v 1) (hw : F.IsContact v c w)
+    (hwo : F.OutType v c w) {X : Set ℂ} (hX : F.TileOf c X) (hvX : v ∈ closure X) {x : ℂ} (hx : x ∈ X) :
+    1 ≤ dist x w := by
+  have hwdom : w ∈ F.dom := hv (by rw [mem_closedBall, hw.2.1])
+  obtain ⟨T, hT, hwT⟩ := (F.mem_coloursAt_iff_exists_tileOf hwdom).mp hw.2.2
+  obtain ⟨t, ht⟩ := hT.1.nonempty
+  have hvt : 1 < dist v t := by
+    have := disjoint_left.mp (hwo T hT hwT) ht
+    rw [mem_closedBall, not_le] at this
+    rwa [dist_comm]
+  exact UnitFar.one_le_dist_of_mem_closure (unitFar_of_mem_closure hF hX hT hvX (subset_closure ht) hvt)
+    (subset_closure hx) hwT
+
+/-- A point of a sector's closure inside the ball, not in the sector, is no interior point (the sector is a component). -/
+theorem not_mem_interiorPts_of_mem_closure_sector {v : ℂ} {r : ℝ} {S : Set ℂ} (hS : F.IsSector v r S) {p : ℂ}
+    (hpr : p ∈ ball v r) (hpS : p ∈ closure S) (hpn : p ∉ S) : p ∉ F.interiorPts := by
+  intro hpI
+  obtain ⟨x₀, hx₀, rfl, -⟩ := hS
+  set U := F.interiorPts ∩ ball v r
+  have hU : IsOpen U := F.isOpen_interiorPts.inter isOpen_ball
+  obtain ⟨δ, hδ, hδU⟩ := Metric.isOpen_iff.mp hU p ⟨hpI, hpr⟩
+  obtain ⟨y, hyS, hyp⟩ := Metric.mem_closure_iff.mp hpS δ hδ
+  have hyb : y ∈ ball p δ := by rw [mem_ball, dist_comm]; exact hyp
+  have hcy : connectedComponentIn U y = connectedComponentIn U x₀ := (connectedComponentIn_eq hyS).symm
+  have hsub : ball p δ ⊆ connectedComponentIn U y :=
+    (convex_ball p δ).isPreconnected.subset_connectedComponentIn hyb hδU
+  exact hpn (hcy ▸ hsub (mem_ball_self hδ))
+
+/-- **A branch of `Γ` at `v` lying on a unit circle contradicts Condition 5**: if the points `branchPt v β κ s`, `0 < s < r`, are
+off the interior points and on `ω(q)`, inside a ball about `v` met by finitely many arcs, Condition 5 fails. -/
+theorem false_of_branch_on_sphere (h5 : F.Condition5) {v q : ℂ} {β κ r ε : ℝ} (hr : 0 < r) (hrε : r ≤ ε)
+    (hεd : ball v ε ⊆ F.dom) (hfin : {a | a ∈ F.arcs ∧ (a.carrier ∩ ball v ε).Nonempty}.Finite)
+    (hΓ : ∀ s ∈ Ioo 0 r, branchPt v β κ s ∉ F.interiorPts) (hsph : ∀ s ∈ Ioo 0 r, branchPt v β κ s ∈ sphere q 1) :
+    False := by
+  set P := (fun s => branchPt v β κ s) '' Ioo 0 r
+  have hinj : InjOn (fun s => branchPt v β κ s) (Ioo 0 r) := by
+    intro s hs s' hs' h
+    have := congrArg (fun z => ‖z - v‖) h
+    simp only at this
+    rwa [norm_branchPt_sub v β κ hs.1.le, norm_branchPt_sub v β κ hs'.1.le] at this
+  have hPinf : P.Infinite := (Set.Ioo_infinite hr).image hinj
+  have hPsub : P ⊆ ⋃ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ ball v ε).Nonempty}, a.carrier ∩ F.dom ∩ sphere q 1 := by
+    rintro _ ⟨s, hs, rfl⟩
+    have hball : branchPt v β κ s ∈ ball v ε := by
+      rw [mem_ball, dist_eq_norm, norm_branchPt_sub v β κ hs.1.le]; linarith [hs.2]
+    have hdom : branchPt v β κ s ∈ F.dom := hεd hball
+    have harc : branchPt v β κ s ∈ ⋃ a ∈ F.arcs, a.carrier := by
+      by_contra h; exact hΓ s hs ⟨hdom, h⟩
+    obtain ⟨a, ha, hpa⟩ := mem_iUnion₂.mp harc
+    exact mem_iUnion₂.mpr ⟨a, ⟨ha, _, hpa, hball⟩, ⟨hpa, hdom⟩, hsph s hs⟩
+  exact hPinf ((hfin.biUnion fun a ha => h5 a ha.1 q).subset hPsub)
 
 /-- **FS110-N3-DEG**, the cone with unit arcs allowed: if `int D_c(v)` is empty then for some axis `α` the colour `c` has
 out-type contacts at both `v ± n`, and every `c`-sector at `v` is a cusp horn along `±a` with bounding curvatures in
@@ -649,7 +1295,41 @@ theorem woodallCone (hF : F.Valid) {v : ℂ} {c : Fin k} (hv : F.Covers v 1) (hc
       (F.IsContact v c (v - e (α + π / 2)) ∧ F.OutType v c (v - e (α + π / 2))) ∧
       ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ S ∈ F.sectorsOf v r c, ∃ β ∈ ({α, α + π} : Set ℝ), ∃ κ₁ κ₂,
         -1 ≤ κ₁ ∧ κ₁ < κ₂ ∧ κ₂ ≤ 1 ∧ S = hornSet v β κ₁ κ₂ r := by
-  sorry
+  have hvdom : v ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  obtain ⟨α, ⟨hNc, hNo⟩, ⟨hSc, hSo⟩⟩ := woodall_contacts hF hv hc hD
+  refine ⟨α, ⟨hNc, hNo⟩, ⟨hSc, hSo⟩, ?_⟩
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hvdom
+  filter_upwards [Ioc_mem_nhdsGT hC.pos] with r hr
+  intro S hS
+  obtain ⟨X, hX, hSX, hvX⟩ := sector_subset_tile hS
+  have hSN : ∀ x ∈ S, 1 ≤ dist x (v + e (α + π / 2)) := fun x hx =>
+    one_le_dist_of_outType hF hv hNc hNo hX hvX (hSX hx)
+  have hSS : ∀ x ∈ S, 1 ≤ dist x (v - e (α + π / 2)) := fun x hx =>
+    one_le_dist_of_outType hF hv hSc hSo hX hvX (hSX hx)
+  have hcone : ∀ β ∈ coneAt S v, Real.sin (β - α) = 0 := by
+    intro β hβ
+    have h1 := dot_nonpos_of_coneAt_subset hβ hNc.2.1 hSN
+    have h2 := dot_nonpos_of_coneAt_subset hβ hSc.2.1 hSS
+    rw [add_sub_cancel_left, dot_e_e] at h1
+    rw [show v - e (α + π / 2) - v = -e (α + π / 2) by ring, dot_neg_right, dot_e_e] at h2
+    have : Real.cos (β - (α + π / 2)) = Real.sin (β - α) := by
+      rw [show β - (α + π / 2) = (β - α) - π / 2 by ring, Real.cos_sub_pi_div_two]
+    linarith
+  obtain ⟨β, κ₁, κ₂, hlt, hSeq, hβ⟩ := hC.horn_of_cone_sin hr hS.1 hcone
+  have hr0 : 0 < r := hr.1
+  rcases e_eq_or_of_sin_sub_eq_zero (hcone β hβ) with he | he
+  · rw [hornSet_congr he] at hSeq
+    subst hSeq
+    exact ⟨α, Or.inl rfl, κ₁, κ₂, neg_one_le_curv_of_avoid hr0 hlt hSS, hlt, curv_le_one_of_avoid hr0 hlt hSN, rfl⟩
+  · rw [hornSet_congr he] at hSeq
+    subst hSeq
+    have hn' : e (α + π + π / 2) = -e (α + π / 2) := by
+      rw [show α + π + π / 2 = (α + π / 2) + π by ring, e_add_pi']
+    refine ⟨α + π, Or.inr rfl, κ₁, κ₂, ?_, hlt, ?_, rfl⟩
+    · refine neg_one_le_curv_of_avoid (v := v) (β := α + π) hr0 hlt fun x hx => ?_
+      rw [hn', sub_neg_eq_add]; exact hSN x hx
+    · refine curv_le_one_of_avoid (v := v) (β := α + π) hr0 hlt fun x hx => ?_
+      rw [hn', ← sub_eq_add_neg]; exact hSS x hx
 
 /-- **FS110-N3-DEG** as filed (Condition 5): the bounding curvatures of Woodall's cone lie in the open interval `(−1, 1)`. -/
 theorem woodallCone_strict (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} {c : Fin k} (hv : F.Covers v 1)
@@ -658,7 +1338,46 @@ theorem woodallCone_strict (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} {c : Fin
       (F.IsContact v c (v - e (α + π / 2)) ∧ F.OutType v c (v - e (α + π / 2))) ∧
       ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ S ∈ F.sectorsOf v r c, ∃ β ∈ ({α, α + π} : Set ℝ), ∃ κ₁ κ₂,
         -1 < κ₁ ∧ κ₁ < κ₂ ∧ κ₂ < 1 ∧ S = hornSet v β κ₁ κ₂ r := by
-  sorry
+  have hvdom : v ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  obtain ⟨α, hN, hS, hev⟩ := woodallCone hF hv hc hD
+  refine ⟨α, hN, hS, ?_⟩
+  obtain ⟨ε, hε, hεd, hfin⟩ := F.exists_ball_finite hvdom
+  filter_upwards [hev, Ioc_mem_nhdsGT (lt_min hε one_pos)] with r hr hrε
+  intro S hSmem
+  obtain ⟨β, hβ, κ₁, κ₂, h1, hlt, h2, rfl⟩ := hr S hSmem
+  have hr0 : 0 < r := hrε.1
+  have hrε' : r ≤ ε := hrε.2.trans (min_le_left _ _)
+  have hr1 : r ≤ 1 := hrε.2.trans (min_le_right _ _)
+  have hsec := hSmem.1
+  refine ⟨β, hβ, κ₁, κ₂, lt_of_le_of_ne h1 ?_, hlt, lt_of_le_of_ne h2 ?_, rfl⟩
+  · -- `κ₁ = −1`: the lower arc lies on `ω(S′)` and in `Γ`
+    intro heq
+    subst heq
+    refine false_of_branch_on_sphere h5 (κ := -1) (β := β) (q := v - e (β + π / 2)) hr0 hrε' hεd hfin
+      (fun s hs => ?_) (fun s hs => ?_)
+    · have hs2 : |(-1 : ℝ)| * s < 2 := by rw [abs_neg, abs_one, one_mul]; linarith [hs.2]
+      refine not_mem_interiorPts_of_mem_closure_sector hsec ?_
+        (branchPt_mem_closure_hornSet_lower v β hlt hs.1 hs.2 hs2) ?_
+      · rw [mem_ball, dist_eq_norm, norm_branchPt_sub v β _ hs.1.le]; exact hs.2
+      · rintro ⟨-, -, hA, -⟩
+        have : tanHeight (-1) (frameX v β (branchPt v β (-1) s)) (frameY v β (branchPt v β (-1) s)) = 0 := by
+          rw [tanHeight_branchPt v β (-1) (-1) hs2.le hs.1.le]; ring
+        exact (ne_of_gt hA) this
+    · rw [mem_sphere]; exact dist_branchPt_neg_one v β hs.1.le (by linarith [hs.2])
+  · -- `κ₂ = 1`: the upper arc lies on `ω(N)` and in `Γ`
+    intro heq
+    subst heq
+    refine false_of_branch_on_sphere h5 (κ := 1) (β := β) (q := v + e (β + π / 2)) hr0 hrε' hεd hfin
+      (fun s hs => ?_) (fun s hs => ?_)
+    · have hs2 : |(1 : ℝ)| * s < 2 := by rw [abs_one, one_mul]; linarith [hs.2]
+      refine not_mem_interiorPts_of_mem_closure_sector hsec ?_
+        (branchPt_mem_closure_hornSet_upper v β hlt hs.1 hs.2 hs2) ?_
+      · rw [mem_ball, dist_eq_norm, norm_branchPt_sub v β _ hs.1.le]; exact hs.2
+      · rintro ⟨-, -, -, hB⟩
+        have : tanHeight 1 (frameX v β (branchPt v β 1 s)) (frameY v β (branchPt v β 1 s)) = 0 := by
+          rw [tanHeight_branchPt v β 1 1 hs2.le hs.1.le]; ring
+        exact (ne_of_lt hB) this
+    · rw [mem_sphere]; exact dist_branchPt_one v β hs.1.le (by linarith [hs.2])
 
 /-! ## FS110-N4-SHADOW: N4-FLANK -/
 

@@ -3033,6 +3033,42 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.AeProperRegions.IsRegion.chain_step
 #print axioms HadwigerNelson.Plane.AeProperRegions.IsRegion.dist_lt_one
 
+/-! ## FS-131 wave 4, `Contact` (job FS131-IC1) — the implementer's added children and proved leaves -/
+
+#print axioms HadwigerNelson.Plane.dot_comm'
+#print axioms HadwigerNelson.Plane.dot_self_eq
+#print axioms HadwigerNelson.Plane.sq_norm_sub_add_smul
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_tiles_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.tileOf_component
+#print axioms HadwigerNelson.Plane.hornSet_congr
+#print axioms HadwigerNelson.Plane.tanHeight_branchPt
+#print axioms HadwigerNelson.Plane.frameX_branchPt_pos
+#print axioms HadwigerNelson.Plane.branchPt_mem_hornSet
+#print axioms HadwigerNelson.Plane.exists_small_s
+#print axioms HadwigerNelson.Plane.sin_zero_of_two
+#print axioms HadwigerNelson.Plane.e_eq_or_of_sin_sub_eq_zero
+#print axioms HadwigerNelson.Plane.dot_neg_right
+#print axioms HadwigerNelson.Plane.e_add_pi'
+#print axioms HadwigerNelson.Plane.dot_e_eq_frameX
+#print axioms HadwigerNelson.Plane.dot_e_add_pi_div_two_eq_frameY
+#print axioms HadwigerNelson.Plane.interior_nonempty_of_not_mem
+#print axioms HadwigerNelson.Plane.curv_le_one_of_avoid
+#print axioms HadwigerNelson.Plane.neg_one_le_curv_of_avoid
+#print axioms HadwigerNelson.Plane.continuous_branchPt_curv
+#print axioms HadwigerNelson.Plane.branchPt_mem_closure_hornSet_upper
+#print axioms HadwigerNelson.Plane.branchPt_mem_closure_hornSet_lower
+#print axioms HadwigerNelson.Plane.dist_branchPt_one
+#print axioms HadwigerNelson.Plane.dist_branchPt_neg_one
+#print axioms HadwigerNelson.Plane.ArcMap.inType_iff
+#print axioms HadwigerNelson.Plane.ArcMap.outType_iff
+#print axioms HadwigerNelson.Plane.ArcMap.not_inType_both
+#print axioms HadwigerNelson.Plane.ArcMap.woodall_contacts
+#print axioms HadwigerNelson.Plane.ArcMap.sector_subset_tile
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.horn_of_cone_sin
+#print axioms HadwigerNelson.Plane.ArcMap.one_le_dist_of_outType
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_interiorPts_of_mem_closure_sector
+#print axioms HadwigerNelson.Plane.ArcMap.false_of_branch_on_sphere
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
