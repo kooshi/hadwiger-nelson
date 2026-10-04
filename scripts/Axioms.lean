@@ -3162,8 +3162,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.shadow_of_tangent_sector_N
 #print axioms HadwigerNelson.Plane.ArcMap.flank_shadow_h
 
-#eval IO.println "=== PURCHASED ==="
-
 /-! ## FS-131 wave 4, `Moves` (job FS131-IM1) — the three moves under `Contact`'s statements, and their children -/
 
 #print axioms HadwigerNelson.Plane.ArcMap.exists_shave_aux
@@ -3271,6 +3269,8 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.cut_hlc
 #print axioms HadwigerNelson.Plane.ArcMap.Near.cut_hasSectors
 #print axioms HadwigerNelson.Plane.ArcMap.Near.exists_cut
+
+#eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
 

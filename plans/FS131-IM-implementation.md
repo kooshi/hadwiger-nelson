@@ -476,3 +476,40 @@ minutes' wait behind two other slots): **OK**, all 1746 modules already up to da
 
 **Early probe** (scratch, against the mirror, never evidence): SHAVE's two cut cases (`g = c`, `h = c`) elaborate over `Near.exists_cut` with
 three small children (`BranchGerms.ne_next_of_nextβ_eq`, `Near.horn_index`, `Near.encard_col_eq`); `data/fs131/im/scratch3/Cut.lean`.
+
+## Stage 8 — SAVED: the split (item 279) — the machinery into `Plane/ValidMap/Surgery`; the audit block moved out of PURCHASED
+
+### 8.1 The split
+
+`tools/fs131_im_split.py --write` generated `Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean` (2087 lines: a module doc, `namespace` and `open`,
+then `Moves`' l. 25–2087 at `9ffc2aba` verbatim, then `end HadwigerNelson.Plane`) and the trimmed `Moves.lean` (60 lines: `9ffc2aba`'s minus l. 25–2088,
+its import now `Plane/ValidMap/Surgery`, its module doc pointing at `Surgery`), both from `git show 9ffc2aba:…/Moves.lean`. The range is § 7.1's:
+from `/-! ## The arc of a branch germ` through the `end ArcMap` after `Near.exists_cut` — the ruling's l. 246–2087 plus IM1's l. 25–244, which the
+machinery reads. `Surgery` imports `Plane/ValidMap/Cone` (what `Moves` imported); `Moves` imports `Surgery`.
+
+**The check** — `--check`: the block found verbatim in `Surgery`; `Surgery` equal to header + block + footer, byte for byte; `Moves` imports
+`Surgery` and declares none of the 116 moved names (100 theorems, 16 definitions). `--check-split` adds: `Moves` equal to the source minus the
+block plus the new header (true at this commit only; later stages prove the moves in `Moves`). **PASS.** **Negative controls, watched**
+(`data/fs131/im/split-control.txt`): (1) `Near.Small`'s `ρ < 1 / 2` changed to `ρ < 1 / 3` in `Surgery` — exit 1, naming the block and the
+regenerated text; (2) `isClear_col` copied back into `Moves` — exit 1, naming the name; (3) `Moves`' import changed back to `Cone` — exit 1,
+naming the import; each restored by `--write`, `--check-split` passing again.
+
+Other checks: `tools/fs131_im_statements.py --check` PASS (the three `…_aux` statements, diffs empty); `tools/fs131_im_move_cone.py --check` PASS.
+`Proofs.lean` gains `Surgery` before `Moves`; `ARCHITECTURE.md` gains `Surgery`'s row, and `Moves`' Imports cell reads `Plane/ValidMap/Surgery`.
+The `scripts/Axioms.lean` records are by name and unchanged in content.
+
+### 8.2 A finding: the FS131-IM1 audit block sat under the PURCHASED banner (IM1's slip; IM2's "tool defect" was this)
+
+`tools/check_architecture.py` failed on this branch with "purchase ledgers disagree" (IM2 reported it as a tool defect, item 278). The cause is
+not the tool: IM1 inserted its block ("FS-131 wave 4, `Moves` (job FS131-IM1)", 3 + 7 records, later IM2's 93) **directly after**
+`#eval IO.println "=== PURCHASED ==="` (l. 3165 at `d4f946ae`), so the tool read the 103 moves records as purchases, and `scripts/axioms.sh` would
+fail every one of them at wave 4's gate (a PURCHASED record must carry a native axiom; these carry the standard three or `sorryAx`). The waves
+append CLEAN records just above the PURCHASED banner (the file's own note, l. 170–173); I moved the block, unchanged, to there (the file's lines
+as a multiset are identical before and after). **Watched**: before the move `check_architecture.py` exits 1, "FAIL purchase ledgers disagree"
+(`data/fs131/im/check-architecture-before-axioms-move.txt`); after, exit 0, "RESULT: PASS" (`data/fs131/im/check-architecture-after-axioms-move.txt`).
+
+### 8.3 The build
+
+Under the slot, as in § 7.2: **OK**, 446 of 446 batches, 3 modules rebuilt (`Surgery` 8.4 s, `Moves` 1.4 s, `Proofs`); warnings only
+`declaration uses 'sorry'` — `Moves` exactly 3 (l. 27, 39, 50: the three `…_aux`), `Contact` 4, `BaseSteps` 7, `UnitArc` 17 (unchanged); none in
+`Surgery`. Log `build/gate/build/20261004T233700Z-3503469.log`; terminal output `data/fs131/im/build-im3-split.log`.
