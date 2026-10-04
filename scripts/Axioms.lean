@@ -2252,6 +2252,43 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.tipFree_of_orbit
 #print axioms HadwigerNelson.finitePlane11_tipFree
 #print axioms HadwigerNelson.finitePlane19_tipFree
+#print axioms HadwigerNelson.Plane.SaturatedPos.saturated
+#print axioms HadwigerNelson.Plane.sq9_essClosure_subset
+#print axioms HadwigerNelson.Plane.sq9Sq_subset_essClosure
+#print axioms HadwigerNelson.Plane.sq9_mem_edge_of_not_mem_densitySet
+#print axioms HadwigerNelson.Plane.sq9_partner
+#print axioms HadwigerNelson.Plane.measurable_r7Col
+#print axioms HadwigerNelson.Plane.r7Col_mem_tile
+#print axioms HadwigerNelson.Plane.r7UpCol_ne_r7DownCol
+#print axioms HadwigerNelson.Plane.r7Up_unitPair
+#print axioms HadwigerNelson.Plane.r7Up_sep
+#print axioms HadwigerNelson.Plane.r7Down_dist_ne_one
+#print axioms HadwigerNelson.Plane.r7_unitPair_mem_sphere
+#print axioms HadwigerNelson.Plane.unitPairsNull_of_unitPair_mem
+#print axioms HadwigerNelson.Plane.volume_iUnion_sphere_tri
+#print axioms HadwigerNelson.Plane.measurableSet_r7Cls
+#print axioms HadwigerNelson.Plane.r7_boundary_lattice
+#print axioms HadwigerNelson.Plane.r7_boundary_offLattice
+#print axioms HadwigerNelson.Plane.r7_phi_pos_up
+#print axioms HadwigerNelson.Plane.r7_phi_pos_down
+#print axioms HadwigerNelson.Plane.measurableSet_disc7
+#print axioms HadwigerNelson.Plane.disc7Col_eq_dist_ge
+#print axioms HadwigerNelson.Plane.disc7_unitPair_mem_sphere
+#print axioms HadwigerNelson.Plane.disc7_cover
+#print axioms HadwigerNelson.Plane.disc7_colour_near
+#print axioms HadwigerNelson.Plane.phi_closedBall_pos
+#print axioms HadwigerNelson.Plane.disc7_isMUA
+#print axioms HadwigerNelson.Plane.essSupport_disc7
+#print axioms HadwigerNelson.Plane.volume_frontier_disc7
+#print axioms HadwigerNelson.Plane.disc7_periodic
+#print axioms HadwigerNelson.Plane.volume_disc7_cell
+#print axioms HadwigerNelson.Plane.disc7_linearIndependent
+#print axioms HadwigerNelson.Plane.IsMUA.exists_shadow_point
+#print axioms HadwigerNelson.Plane.circle_meets_halfBox_of_ne
+#print axioms HadwigerNelson.Plane.hcGap_eq_of_gap
+#print axioms HadwigerNelson.Plane.differentiable_hcGap
+#print axioms HadwigerNelson.Plane.hcGap_bounds
+#print axioms HadwigerNelson.Plane.hcGap_lowerParabola
 
 #eval IO.println "=== PURCHASED ==="
 

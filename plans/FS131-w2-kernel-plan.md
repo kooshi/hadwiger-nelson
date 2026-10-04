@@ -890,3 +890,54 @@ Records: `scripts/Axioms.lean` block "FS131-K2d" (`tools/fs131_k2d_records.py` e
 `Proofs.lean`, `ARCHITECTURE.md` (the new row, two Imports cells, § 3.10's theory-imports-instance line): `tools/check_architecture.py` PASS.
 Elaboration: each file by `lake env lean -DautoImplicit=false` against a scratch olean of `Instances/FalconerOrbit` (iteration only; the
 build at the end of this job is the evidence).
+
+## Stage 16 — SAVED: children for SQ9, R7, DISC7, BAND (1) and (G1) stated; seven leaves closed from them (FS131-K2d)
+
+*Prices as stage 15. Mathlib names (`#check`ed at the pin): `MeasureTheory.Measure.addHaar_sphere`, `LocallyFinite.isClosed_iUnion`,
+`Metric.infDist_le_dist_of_mem`, `isOpen_interior`; repository: `exists_ne_mem_essClosure`, `isMaximalCover_iff`, `isMUA_iff_ae_phi_pos`,
+`essSupport_eq_closure_densitySet`, `subset_densitySet_of_isOpen_ae_subset`, `upperDensity_of_periodic` (a `Plane/Slack` leaf),
+`IsMUA.interior_union_unitShadow`, `dist_ne_one_of_mem_interior_densitySet`.*
+
+**Closed from children in this stage** (assemblies written, sorry-free): `sq9_saturated_both`, `r7_aeColouring`, `r7Cls_saturated`,
+`r7_boundary` (moved above `r7Cls_saturated`, a move), `r7Cls_isMaximalCover`, `disc7_isMaximalCover`, `disc7_isRegularMUA`,
+`disc7_upperDensity`, `g1Bounds_hcGap`; and `r7_unitPair_mem_sphere` (a child, closed from its own children). `measurableSet_r7Cls` ✓.
+
+| leaf | child | route | price |
+|---|---|---|---|
+| SQ9 | `sq9Sq` (def) | the closed square `[n/2, (n+1)/2] × [m/2, (m+1)/2]` | — |
+| | `SaturatedPos.saturated` | `essClosure_subset_essSupport`, `essSupport_eq_closure_densitySet` | 5k |
+| | `sq9_essClosure_subset` | the closed squares of one colour are locally finite and closed (`LocallyFinite.isClosed_iUnion`) and contain the class (half-open ⊆ closed); off them a ball misses the class: `upperDensityAt_eq_zero_of_null` | 25k |
+| | `sq9Sq_subset_essClosure` | `ball x r ∩ (open square)` holds a square of side `r/√2` at the corner toward the square: ratio `≥ 1/(2π)` | 25k |
+| | `sq9_mem_edge_of_not_mem_densitySet` | the open square is inside the class; `subset_densitySet_of_isOpen_ae_subset` | 15k |
+| | `sq9_partner` | `x ∓ 1` lies on the facing edge of the square `(n ∓ 3, m)`, `x ∓ i` of `(n, m ∓ 3)`; `((n ∓ 3 : ℤ) : ZMod 3) = n` | 15k |
+| R7 | `r7Up`, `r7Down` (defs) | the Reuleaux triangle on `λ, λ + 1, λ + ω`; the cell's down triangle outside the three bulges (the colouring's own tests) | — |
+| | `measurable_r7Col` | `Int.measurable_floor`, `measurableSet_le`, `Measurable.ite`, a countable-valued composition (`measurable_to_countable'`) | 15k |
+| | `r7Col_mem_tile` | unfold `r7ColTri`: the first test puts `z` in `U(m, n)` (the up half satisfies all three vertex tests: `triQ u v ≤ (u + v)² ≤ 1`, and the two other vertices by the same bound), the second and third in `U(m + 1, n)`, `U(m, n + 1)`, else `D(m, n)`; `normSq_add_mul`, `triCoord_add_mul` | 35k |
+| | `r7UpCol_ne_r7DownCol` | values `< 4` against `≥ 4` (`omega` on the `Fin.val`s) | 5k |
+| | `r7Up_unitPair` | Reuleaux width 1: for `x, y ∈ U` with `‖x − y‖ = 1`, the diameter of a Reuleaux triangle is attained only vertex–arc; prove: if neither is a vertex, `‖x − y‖ < 1` (each lies in the intersection of three closed unit discs; write `y − x` against the vertex `v` opposite the arc `y` is nearest; `nlinarith` in lattice coordinates) — then `x` is a vertex (at distance `1` from the other two) or on the arc about the vertex `y` | 40k |
+| | `r7Up_sep` | `r7UpCol` equal ⟹ `(m' − m, n' − n) ∈ 2ℤ²`; if `‖λ' − λ‖ > 2` the tiles (circumradius `1/√3`) are more than `2 − 2/√3`... use `> 2.155`: centroids `≥ 2√3 > 1 + 2/√3` apart, no unit pair; the six offsets of length `2`: half-plane separation along the offset (`Re⟨x, u⟩ ≤ c` on `U(λ)`, `≥ c + 1` on `U(λ')`, equality only at the facing vertices) | 40k |
+| | `r7Down_dist_ne_one` | same tile: inside a closed unit triangle, distance `1` only between two vertices, which `r7Down` excludes (`1 < dist z λ…`); different tiles of one colour (`m − n ≡ m' − n' (mod 3)`): offsets of length `√3` (six) — the far tile lies outside the unit circle about the shared-neighbourhood vertex, so `‖x − y‖ > 1` (the cusp computation of § 2.4: transverse deviation `≤ s²/2`); longer offsets are too far | 40k |
+| | `unitPairsNull_of_unitPair_mem` | `unitPairSet A ⊆ N ×ˢ univ` (`dist x (x + e θ) = 1`), `Measure.prod_prod`, `hN` | 10k |
+| | `volume_iUnion_sphere_tri` | `measure_iUnion_null` twice, `MeasureTheory.Measure.addHaar_sphere` | 10k |
+| | `r7_boundary_lattice` | at `λ₀ = tri m n` only the three up colours (`U(λ₀)`, `U(λ₀ − 1)`, `U(λ₀ − ω)`) have positive upper density (the cusps' density is `0`: between two tangent unit circles, area `O(r³)` in `B(λ₀, r)`); pairs witnessed by `λ₀ + 1`, `λ₀ + ω`, `λ₀ + ω − 1` (each a vertex of both tiles' closures, hence in both supports) | 40k |
+| | `r7_boundary_offLattice` | off the lattice two classes meet only on an up/down arc of `U(m, n)` about a vertex `v` (else `x` is interior to one tile, or on two downs — impossible, downs never touch off the lattice); `v ∈ supp` of the up colour (a vertex) and of the down colour (the cusp at `v` of colour `m − n` resp. `m − n + 1` mod 3, checked by hand in § 12.2) | 40k |
+| | `r7_phi_pos_up`, `r7_phi_pos_down` | for `p` off class `j` (off the null union of tile boundaries), some tile of colour `j` has `dist p (its centroid) ∈ (r_in, r_out)` window with an open disc of the tile crossing the unit circle about `p`; by `r7Col_add_period`-style periodicity (period lattice `{m, n even, m ≡ n (mod 3)}`, index 12) one period, finitely many explicit witness discs, `phi` monotone; **split further at implementation** (one child per colour type) | 40k each |
+| DISC7 | `measurableSet_disc7` | `MeasurableSet.iUnion` (countable), `measurableSet_closedBall` | 5k |
+| | `disc7Col_eq_dist_ge` | `(m − m') + 3(n − n') ≡ 0 (mod 7)` ⟹ `triQ (m − m') (n − n') ≥ 7` (a finite check on `|m − m'|, |n − n'| ≤ 3`, else large), `normSq_add_mul` | 30k |
+| | `disc7_unitPair_mem_sphere` | one disc: `‖x − y‖ ≤ 1` with equality only antipodal on the boundary; two discs of one colour: `≥ √21/2 − 1 > 1` | 20k |
+| | `disc7_cover` | nearest lattice point by rounding in lattice coordinates: the hexagonal covering radius `(√3/2)/√3 = 1/2` | 30k |
+| | `disc7_colour_near` | the same for the colour lattice spanned by `c(1, 2)`, `c(−3, 1)` (spacing `√21/2`, covering radius `√7/2`) | 30k |
+| | `phi_closedBall_pos` | the circle about `p` meets the open disc in an arc around the direction of `c`: angles with `|p + e θ − c| < 1/2` form an open nonempty set (`measurableSet_angles`, `arcLength_ge_of_Ioo`) | 20k |
+| | `disc7_isMUA` | `isMUA_iff_ae_phi_pos`: null unit pairs from `disc7_unitPair_mem_sphere` (`unitPairsNull_of_unitPair_mem`, spheres null); off the class `1/2 < dist p c ≤ √7/2 < 3/2` for the nearest centre of colour `a`; `phi` monotone | 20k |
+| | `essSupport_disc7` | `⊆`: the class is closed (locally finite union); `⊇`: every point of a closed disc of radius `1/2` has positive measure of the disc in every ball | 25k |
+| | `volume_frontier_disc7` | `frontier ⊆ ⋃ sphere (centre) (1/2)` (`frontier_iUnion` for a locally finite family), spheres null | 15k |
+| | `disc7_periodic` | `disc7Centre (m + 1) (n + 2)`: colour `+ 7 ≡ 0`; `(m − 3) + 3(n + 1) = m + 3n`; reindex the union | 15k |
+| | `volume_disc7_cell` | the parallelogram's area `|det| = 21√3/8`; the class meets one cell in a full disc's area `π/4` by periodicity (cut-and-paste: `MeasureTheory.measure_preimage_add` over the cell's translates) | 35k |
+| | `disc7_linearIndependent` | the determinant `≠ 0` (`LinearIndependent.pair_iff`) | 10k |
+| BAND (1) | `IsMUA.exists_shadow_point` | `IsMUA.interior_union_unitShadow`: `z ∉ supp` ⟹ `z ∉ int supp` | 5k |
+| | `circle_meets_halfBox_of_ne` | `y = m + e θ · e(ψ)`, `ψ ≢ 0`: the circle through `m` about `y` leaves `m` along `±i e(ψ) e θ`, which has a component along `−e θ` unless `ψ = 0`, entering the half-box; explicit point at small arc parameter | 40k |
+| | assembly of `IsMUA.add_normal_mem_essSupport` (**not written**) | `y_k` for `τ_k = δ/(k + 2)` by `exists_shadow_point`, a limit `y*` (`IsCompact.tendsto_subseq` in `closedBall m 2`, `essSupport` closed), `dist m y* = 1`; if `y* ≠ m + e θ`, `circle_meets_halfBox_of_ne` gives a half-box point at distance `1` from `y*`, the half-box lies in `int Ã` (`subset_densitySet_of_isOpen_ae_subset`, `isOpen_halfBox`), against `dist_ne_one_of_mem_interior_densitySet` | 30k |
+| (G1) | `hcGap_eq_of_gap` | `sSup (Z ∩ Iic s) = a`, `sInf (Z ∩ Ici s) = b` (`csSup_eq_of_forall_le_of_forall_lt_exists_gt`, closedness gives attainment) | 25k |
+| | `differentiable_hcGap` | on a gap a polynomial (`hcGap_eq_of_gap`, open gap), at `z ∈ Z` derivative `0` from `|g| ≤ (s − z)²/4` (`hasDerivAt_of_isLittleO`), outside `[−1/2, 1/2]` zero; the derivative bound on gaps `|xy(y − x)/2| ≤ min(x, y)/2` | 35k |
+| | `hcGap_bounds` | on a gap `x²y²/4 ≤ min(x, y)²/4` with `x + y ≤ 1` (so `≤ 1/64`), `|g′| ≤ 1/8`; positivity off `Z` | 30k |
+| | `hcGap_lowerParabola` | `g′` is `1/2`-Lipschitz on `[−1/2, 1/2]` (`|g″| = |x² − 4xy + y²|/2 ≤ 1/2` on gaps; across a point of `Z` add the two bounds), then the mean value form (`image_le_of_deriv_right_le_deriv_boundary` or integrate `g′`) | 30k |
