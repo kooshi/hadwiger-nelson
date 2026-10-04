@@ -35,7 +35,22 @@ Clause (ii): FALC-FAN (A) against the orbit facts of `Instances/FalconerOrbit`, 
 are absent from the apex's neighbourhood, and the tip takes neither. -/
 theorem not_falconerFan_of_colorable {V : Type*} {H : SimpleGraph V} {k : ℕ} (hk : 2 ≤ k) (hH : H.Colorable (k - 2))
     {a t : V} : ¬ FalconerFan H k a t := by
-  sorry
+  rintro ⟨hat, -, hF⟩
+  obtain ⟨C0⟩ := hH
+  let C : (H.induce {v | v ≠ a}).Coloring (Fin k) :=
+    SimpleGraph.Coloring.mk (fun v => Fin.castLE (by omega) (C0 v.1)) (fun {u v} huv heq => by
+      have h := C0.valid (show H.Adj u.1 v.1 from huv)
+      exact h (Fin.castLE_injective _ heq))
+  have hlt : ∀ v : {v | v ≠ a}, (C v).val < k - 2 := fun v => (C0 v.1).isLt
+  have h := hF C ⟨k - 2, by omega⟩ ⟨k - 1, by omega⟩ (fun h => by simp [Fin.ext_iff] at h; omega)
+    (fun v hv _ => ⟨fun h => by have := hlt ⟨v, hv⟩; rw [h] at this; simp at this,
+      fun h => by have := hlt ⟨v, hv⟩; rw [h] at this; simp at this; omega⟩) (Ne.symm hat)
+  have := hlt ⟨t, Ne.symm hat⟩
+  rcases h with h | h
+  · have h' : (C ⟨t, Ne.symm hat⟩).val = k - 2 := congrArg Fin.val h
+    omega
+  · have h' : (C ⟨t, Ne.symm hat⟩).val = k - 1 := congrArg Fin.val h
+    omega
 
 /-- **The unit-vector subring holds every difference in a connected graph**: if `V` holds both coordinates of every unit
 vector of `E²`, then for a connected unit-distance graph drawn in `E²` with apex `a`, every vertex minus `a` has coordinates in
@@ -44,7 +59,31 @@ theorem sub_mem_of_connected {E : Subfield ℝ} {V : Subring ℝ}
     (hU : ∀ x y : ℝ, x ∈ E → y ∈ E → x ^ 2 + y ^ 2 = 1 → x ∈ V ∧ y ∈ V) {W : Finset ℂ}
     (hW : (W : Set ℂ) ⊆ planeOver E) (hconn : (udOn W).Connected) {a : ℂ} (ha : a ∈ W) :
     ∀ v ∈ W, (v - a).re ∈ V ∧ (v - a).im ∈ V := by
-  sorry
+  have hstep : ∀ u v : (W : Set ℂ), (udOn W).Adj u v → ((u : ℂ) - a).re ∈ V ∧ ((u : ℂ) - a).im ∈ V →
+      ((v : ℂ) - a).re ∈ V ∧ ((v : ℂ) - a).im ∈ V := by
+    intro u v h hu
+    have hd : dist (u : ℂ) (v : ℂ) = 1 := h
+    have hre : ((v : ℂ) - u).re ∈ E := by simpa using E.sub_mem (hW v.2).1 (hW u.2).1
+    have him : ((v : ℂ) - u).im ∈ E := by simpa using E.sub_mem (hW v.2).2 (hW u.2).2
+    have hn : ((v : ℂ) - u).re ^ 2 + ((v : ℂ) - u).im ^ 2 = 1 := by
+      have h1 : ‖(v : ℂ) - u‖ = 1 := by rw [← dist_eq_norm, dist_comm]; exact hd
+      have h2 := Complex.sq_norm ((v : ℂ) - u)
+      rw [h1, Complex.normSq_apply] at h2
+      nlinarith [h2]
+    obtain ⟨h1, h2⟩ := hU _ _ hre him hn
+    have e1 : ((v : ℂ) - a).re = ((u : ℂ) - a).re + ((v : ℂ) - u).re := by simp
+    have e2 : ((v : ℂ) - a).im = ((u : ℂ) - a).im + ((v : ℂ) - u).im := by simp
+    rw [e1, e2]
+    exact ⟨V.add_mem hu.1 h1, V.add_mem hu.2 h2⟩
+  have hwalk : ∀ (u v : (W : Set ℂ)) (w : (udOn W).Walk u v), ((u : ℂ) - a).re ∈ V ∧ ((u : ℂ) - a).im ∈ V →
+      ((v : ℂ) - a).re ∈ V ∧ ((v : ℂ) - a).im ∈ V := by
+    intro u v w
+    induction w with
+    | nil => exact id
+    | cons h _ ih => exact fun hu => ih (hstep _ _ h hu)
+  intro v hv
+  obtain ⟨w⟩ := hconn.preconnected ⟨a, ha⟩ ⟨v, hv⟩
+  exact hwalk _ _ w (by simp)
 
 /-- **The homomorphism read off a place-hom pair at the apex**: `v ↦ (φ (v − a).re, φ (v − a).im)` maps a connected
 unit-distance graph in `E²` into `Γ_q`, the apex to `0`. -/
@@ -53,7 +92,36 @@ theorem exists_hom_apex {F : Subfield ℝ} {𝔭 : Ideal (𝓞 F)} [𝔭.IsMaxim
     (hconn : (udOn W).Connected) {a : ℂ} (ha : a ∈ W) :
     ∃ ρ : udOn W →g unitQuadrance (𝓞 F ⧸ 𝔭), ∀ (v : (W : Set ℂ)) (hre : ((v : ℂ) - a).re ∈ V)
       (him : ((v : ℂ) - a).im ∈ V), ρ v = (φ ⟨_, hre⟩, φ ⟨_, him⟩) := by
-  sorry
+  have hsub := sub_mem_of_connected hφ.2.1 hW hconn ha
+  refine ⟨{ toFun := fun v => (φ ⟨_, (hsub v.1 v.2).1⟩, φ ⟨_, (hsub v.1 v.2).2⟩), map_rel' := ?_ },
+    fun v hre him => rfl⟩
+  intro x y hxy
+  have hd : dist (x : ℂ) (y : ℂ) = 1 := hxy
+  rw [unitQuadrance_adj]
+  have hre : ((x : ℂ) - y).re ∈ E := by simpa using E.sub_mem (hW x.2).1 (hW y.2).1
+  have him : ((x : ℂ) - y).im ∈ E := by simpa using E.sub_mem (hW x.2).2 (hW y.2).2
+  have hn : ((x : ℂ) - y).re ^ 2 + ((x : ℂ) - y).im ^ 2 = 1 := by
+    have h1 : ‖(x : ℂ) - y‖ = 1 := by rw [← dist_eq_norm]; exact hd
+    have h2 := Complex.sq_norm ((x : ℂ) - y)
+    rw [h1, Complex.normSq_apply] at h2
+    nlinarith [h2]
+  obtain ⟨hur, hui⟩ := hφ.2.1 _ _ hre him hn
+  have e1 : (⟨((x : ℂ) - a).re, (hsub x.1 x.2).1⟩ : V) - ⟨((y : ℂ) - a).re, (hsub y.1 y.2).1⟩ =
+      ⟨((x : ℂ) - y).re, hur⟩ := Subtype.ext (by simp)
+  have e2 : (⟨((x : ℂ) - a).im, (hsub x.1 x.2).2⟩ : V) - ⟨((y : ℂ) - a).im, (hsub y.1 y.2).2⟩ =
+      ⟨((x : ℂ) - y).im, hui⟩ := Subtype.ext (by simp)
+  have hq : (φ ⟨_, hur⟩) ^ 2 + (φ ⟨_, hui⟩) ^ 2 = 1 := by
+    have : (⟨((x : ℂ) - y).re, hur⟩ : V) ^ 2 + ⟨((x : ℂ) - y).im, hui⟩ ^ 2 = 1 := Subtype.ext (by simpa using hn)
+    simpa only [map_add, map_pow, map_one] using congrArg φ this
+  simp only
+  rw [← map_sub, ← map_sub, e1, e2]
+  refine ⟨fun heq => ?_, hq⟩
+  have h1 : φ ⟨_, hur⟩ = 0 := by
+    rw [← e1, map_sub, sub_eq_zero]; exact congrArg Prod.fst heq
+  have h2 : φ ⟨_, hui⟩ = 0 := by
+    rw [← e2, map_sub, sub_eq_zero]; exact congrArg Prod.snd heq
+  rw [h1, h2] at hq
+  simp at hq
 
 /-- **The tip lands on the apex** in a plane whose every nonzero vector is tip-free (FALC-FAN (A)): if `ρ` sends the apex
 to `0` and every `w ≠ 0` has a 5-colouring with a gap `γ` at `0` and `C w ∉ {C 0, γ}`, then `ρ` sends the tip to `0`. -/
@@ -62,13 +130,26 @@ theorem tip_eq_zero_of_tipFree {V : Type*} {H : SimpleGraph V} {R : Type*} [Comm
     (hfree : ∀ w : R × R, w ≠ 0 →
       ∃ (C : (unitQuadrance R).Coloring (Fin 5)) (γ : Fin 5), FanGap C 0 γ ∧ C w ≠ C 0 ∧ C w ≠ γ) :
     ρ t = 0 := by
-  sorry
+  by_contra hne
+  obtain ⟨C, γ, hgap, h1, h2⟩ := hfree _ hne
+  have hA := (falconerFan_hom (by norm_num) hfan ρ).1 C γ (by
+    rintro x (rfl | hx)
+    · rw [ha]; exact Ne.symm hgap.1
+    · rw [ha] at hx; exact hgap.2 x hx)
+  rw [ha] at hA
+  rcases hA.1 with h | h
+  · exact h1 h
+  · exact h2 h
 
 /-- **No fan at five over a plane with a homomorphism to a graph slack at four** (FALC-FAN (B)'s last clause): every
 4-colouring leaves no colour absent from the tip image's closed neighbourhood, while slackness supplies one that does. -/
 theorem not_falconerFan_five_of_hom_slack {V W : Type*} {H : SimpleGraph V} {T : SimpleGraph W} {a t : V}
     (hfan : FalconerFan H 5 a t) (ρ : H →g T) (hT : Slack T 4) : False := by
-  sorry
+  obtain ⟨C, γ, hgap⟩ := hT (ρ t)
+  obtain ⟨x, hx, hxc⟩ := ((falconerFan_hom (by norm_num) hfan ρ).2 C).2 γ
+  rcases hx with rfl | hadj
+  · exact hgap.1 hxc.symm
+  · exact hgap.2 x hadj hxc
 
 /-- **FS129-SA1-FALC-RES**, clause (i): a finite connected unit-distance graph over `E = F(t₁, …, t_n)` with a Falconer
 fan at five colours forces `χ(F²) ≥ 4`, and `F` has no usable prime with residue field `𝔽₇`. -/
