@@ -290,6 +290,27 @@ theorem collarAt_shadow_of_parabola {S : Set ℂ} {v : ℂ} {β κ σ r : ℝ} (
       nlinarith [dist_nonneg (x := v + (ρ' : ℂ) * e (β + σ * (π / 2) + τ)) (y := w x₂)]
 
 
+/-- `e` has period `2π m` for every integer `m`. -/
+theorem e_add_int_mul_two_pi (θ : ℝ) (m : ℤ) : e (θ + 2 * π * m) = e θ := by
+  have h : e (2 * π * m) = 1 := by
+    rw [e, show ((2 * π * m : ℝ) : ℂ) * I = (m : ℂ) * (2 * π * I) by push_cast; ring]
+    exact Complex.exp_int_mul_two_pi_mul_I m
+  rw [e_add, h, mul_one]
+
+/-- `1 − e(2φ) = 2 sin φ · e(φ − π/2)`. -/
+theorem one_sub_e_two_mul (φ : ℝ) : 1 - e (2 * φ) = ((2 * Real.sin φ : ℝ) : ℂ) * e (φ - π / 2) := by
+  have hsc : Complex.sin (φ : ℂ) ^ 2 + Complex.cos (φ : ℂ) ^ 2 = 1 := Complex.sin_sq_add_cos_sq _
+  rw [e_eq, e_eq, Real.cos_sub_pi_div_two, Real.sin_sub_pi_div_two, Real.cos_two_mul, Real.sin_two_mul]
+  push_cast
+  linear_combination (-2 : ℂ) * hsc
+
+/-- `1 − e(−2φ) = 2 sin φ · e(π/2 − φ)`. -/
+theorem one_sub_e_neg_two_mul (φ : ℝ) : 1 - e (-(2 * φ)) = ((2 * Real.sin φ : ℝ) : ℂ) * e (π / 2 - φ) := by
+  have hsc : Complex.sin (φ : ℂ) ^ 2 + Complex.cos (φ : ℂ) ^ 2 = 1 := Complex.sin_sq_add_cos_sq _
+  rw [e_eq, e_eq, Real.cos_pi_div_two_sub, Real.sin_pi_div_two_sub, Real.cos_neg, Real.sin_neg, Real.cos_two_mul, Real.sin_two_mul]
+  push_cast
+  linear_combination (-2 : ℂ) * hsc
+
 namespace ArcMap
 
 variable {k : ℕ} (F : ArcMap k)
@@ -779,7 +800,30 @@ theorem SectorsAt.false_of_ncard_le_two_on_arc (hF : F.Valid) (hP : F.IsPlaneMap
     {c : Fin n → Fin k} (h : F.SectorsAt v n d c) (hpos : ∀ i : Fin n, 0 < d i.succ - d i.castSucc)
     (habs : ∀ X Y : Fin k, X ∉ Set.range c → Y ∉ Set.range c → X = Y) {θ₁ θ₂ : ℝ} (hlen : π / 3 < θ₂ - θ₁)
     (hnb : ∀ θ ∈ Ioo θ₁ θ₂, (F.coloursAt (v + e θ)).ncard ≤ 2) : False := by
-  sorry
+  have hcross : ∀ X X' : Fin k, ∀ θ ∈ Ioo θ₁ θ₂, ∀ θ' ∈ Ioo θ₁ θ₂, F.CrossesAt v X θ → F.CrossesAt v X' θ' → X = X' :=
+    fun X X' θ _ θ' _ hX hX' => habs X X' (SectorsAt.not_mem_range_of_crossesAt hF h hpos hX)
+      (SectorsAt.not_mem_range_of_crossesAt hF h hpos hX')
+  obtain ⟨X, hX⟩ := exists_closure_colour_of_arc hP hnb hcross
+  set δ := (θ₂ - θ₁ - π / 3) / 4 with hδ
+  have hδ0 : 0 < δ := by rw [hδ]; linarith
+  set a := θ₁ + δ with ha
+  set b := a + min (θ₂ - θ₁ - 2 * δ) π with hb
+  have hmin : π / 3 < min (θ₂ - θ₁ - 2 * δ) π := lt_min (by rw [hδ]; linarith) (by linarith [Real.pi_pos])
+  have hminle : min (θ₂ - θ₁ - 2 * δ) π ≤ π := min_le_right _ _
+  have hminle' : min (θ₂ - θ₁ - 2 * δ) π ≤ θ₂ - θ₁ - 2 * δ := min_le_left _ _
+  have hIcc : Icc a b ⊆ Ioo θ₁ θ₂ := fun x hx => ⟨by linarith [hx.1], by linarith [hx.2]⟩
+  have hcurve : Continuous fun θ : ℝ => v + e θ := continuous_const.add continuous_e
+  have hS : IsPreconnected ((fun θ : ℝ => v + e θ) '' Icc a b) := isPreconnected_Icc.image _ hcurve.continuousOn
+  have hSsub : (fun θ : ℝ => v + e θ) '' Icc a b ⊆ closure (F.region X) := by
+    rintro _ ⟨θ, hθ, rfl⟩
+    exact hX θ (hIcc hθ)
+  have hdist : 1 < dist (v + e a) (v + e b) := by
+    have := (dist_ringPt_ringPt_cmp_one v (α := a) (β := b) (by rw [abs_of_nonpos (by linarith)]; linarith)).2.2
+    rw [abs_of_nonpos (by linarith), neg_sub] at this
+    exact this.mpr (by rw [hb]; linarith)
+  have hle := dist_le_one_of_subset_closure (F.isOpen_region X) (hF.unitPairsNull_region X) hS hSsub
+    (mem_image_of_mem _ (left_mem_Icc.mpr (by linarith))) (mem_image_of_mem _ (right_mem_Icc.mpr (by linarith)))
+  linarith
 
 /-! ## E1-BAD -/
 
@@ -787,14 +831,76 @@ theorem SectorsAt.false_of_ncard_le_two_on_arc (hF : F.Valid) (hP : F.IsPlaneMap
 `d (last n) = d 0 + 2π`. -/
 theorem SectorsAt.exists_mem_Ico {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c) (D : ℝ) :
     ∃ i : Fin n, ∃ m : ℤ, D + 2 * π * m ∈ Ico (d i.castSucc) (d i.succ) := by
-  sorry
+  classical
+  obtain ⟨hn, hmono, hlast, -⟩ := h
+  have hp : (0 : ℝ) < 2 * π := by positivity
+  set D' := toIcoMod hp (d 0) D with hD'
+  obtain ⟨hD'I, z, hz⟩ := (toIcoMod_eq_iff hp (a := d 0) (b := D) (c := D')).mp rfl
+  have hDz : D + 2 * π * ((-z : ℤ) : ℝ) = D' := by
+    rw [zsmul_eq_mul] at hz; push_cast; linarith
+  set T : Finset (Fin n) := Finset.univ.filter fun i => D' < d i.succ with hT
+  have hne : T.Nonempty := by
+    refine ⟨⟨n - 1, by omega⟩, Finset.mem_filter.mpr ⟨Finset.mem_univ _, ?_⟩⟩
+    have : (⟨n - 1, by omega⟩ : Fin n).succ = Fin.last n := by ext; simp; omega
+    rw [this, hlast]; exact hD'I.2
+  set i₀ := T.min' hne with hi₀
+  have hi₀T : D' < d i₀.succ := (Finset.mem_filter.mp (T.min'_mem hne)).2
+  refine ⟨i₀, -z, hDz ▸ ⟨?_, hi₀T⟩⟩
+  by_cases h0 : (i₀ : ℕ) = 0
+  · have : i₀.castSucc = 0 := by ext; simp [h0]
+    rw [this]; exact hD'I.1
+  · set i' : Fin n := ⟨i₀ - 1, by omega⟩ with hi'
+    have hlt : i' < i₀ := by rw [Fin.lt_def]; simp [hi']; omega
+    have hnot : i' ∉ T := fun hmem => absurd (T.min'_le i' hmem) (not_le.mpr hlt)
+    have hle : d i'.succ ≤ D' := by
+      by_contra hcon
+      exact hnot (Finset.mem_filter.mpr ⟨Finset.mem_univ _, not_le.mp hcon⟩)
+    have : i'.succ = i₀.castSucc := by ext; simp [hi']; omega
+    rw [this] at hle; exact hle
 
 /-- **E1-BAD, interior directions** (§ 3.5's first bullet, with E1-SEE): if a branch direction `ψ ± π/2` of `ω(v + e ψ)` at `v` is, mod `2π`,
 interior to sector `i`, the branch near `v` runs in a truncated sector, so `v + e ψ` does not carry `c i`. -/
 theorem SectorsAt.not_mem_coloursAt_of_mem_Ioo (hF : F.Valid) {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k}
     (h : F.SectorsAt v n d c) (i : Fin n) {ψ D : ℝ} (hD : D = ψ + π / 2 ∨ D = ψ - π / 2) {m : ℤ}
     (hm : D + 2 * π * m ∈ Ioo (d i.castSucc) (d i.succ)) : c i ∉ F.coloursAt (v + e ψ) := by
-  sorry
+  set D₂ := D + 2 * π * m with hD₂
+  obtain ⟨hD1, hD2⟩ := hm
+  set δ := min (D₂ - d i.castSucc) (d i.succ - D₂) / 2 with hδ
+  have hδ0 : 0 < δ := by rw [hδ]; have := lt_min (sub_pos.mpr hD1) (sub_pos.mpr hD2); linarith
+  have hδ1 : 2 * δ ≤ D₂ - d i.castSucc := by rw [hδ]; have := min_le_left (D₂ - d i.castSucc) (d i.succ - D₂); linarith
+  have hδ2 : 2 * δ ≤ d i.succ - D₂ := by rw [hδ]; have := min_le_right (D₂ - d i.castSucc) (d i.succ - D₂); linarith
+  obtain ⟨r, hr, hR⟩ := h.2.2.2.2.1 i δ hδ0
+  set φ := min (min (δ / 2) (r / 4)) 1 with hφ
+  have hφ0 : 0 < φ := lt_min (lt_min (by positivity) (by positivity)) one_pos
+  have hφ1 : φ ≤ 1 := min_le_right _ _
+  have hφδ : φ ≤ δ / 2 := (min_le_left _ _).trans (min_le_left _ _)
+  have hφr : φ ≤ r / 4 := (min_le_left _ _).trans (min_le_right _ _)
+  have hsin0 : 0 < Real.sin φ := Real.sin_pos_of_pos_of_lt_pi hφ0 (by linarith [Real.two_le_pi])
+  have hsin1 : Real.sin φ ≤ φ := Real.sin_le hφ0.le
+  have hρ : 0 < 2 * Real.sin φ ∧ 2 * Real.sin φ < r := ⟨by linarith, by linarith⟩
+  refine not_mem_coloursAt_of_dist_eq_one hF (q := v + ((2 * Real.sin φ : ℝ) : ℂ) * e (if D = ψ + π / 2 then D₂ - φ else D₂ + φ))
+    (Y := v + e ψ) ?_ ?_
+  · refine hR ⟨(2 * Real.sin φ, if D = ψ + π / 2 then D₂ - φ else D₂ + φ), ⟨hρ, ?_⟩, rfl⟩
+    split_ifs <;> constructor <;> linarith
+  · have hper : ∀ x : ℝ, e (x + 2 * π * m) = e x := fun x => e_add_int_mul_two_pi x m
+    rcases hD with hD | hD
+    · rw [if_pos hD, dist_eq_norm]
+      have h1 : D₂ - φ = (D - φ) + 2 * π * m := by rw [hD₂]; ring
+      have h2 : e (D - φ) = e ψ * e (π / 2 - φ) := by rw [← e_add, hD]; congr 1; ring
+      have h3 : ((2 * Real.sin φ : ℝ) : ℂ) * e (π / 2 - φ) = 1 - e (-(2 * φ)) := (one_sub_e_neg_two_mul φ).symm
+      have h4 : v + ((2 * Real.sin φ : ℝ) : ℂ) * e (D₂ - φ) - (v + e ψ) = -(e ψ * e (-(2 * φ))) := by
+        rw [h1, hper, h2]
+        linear_combination (e ψ) * h3
+      rw [h4, norm_neg, norm_mul, norm_e, norm_e, one_mul]
+    · have hne : D ≠ ψ + π / 2 := by rw [hD]; linarith [Real.pi_pos]
+      rw [if_neg hne, dist_eq_norm]
+      have h1 : D₂ + φ = (D + φ) + 2 * π * m := by rw [hD₂]; ring
+      have h2 : e (D + φ) = e ψ * e (φ - π / 2) := by rw [← e_add, hD]; congr 1; ring
+      have h3 : ((2 * Real.sin φ : ℝ) : ℂ) * e (φ - π / 2) = 1 - e (2 * φ) := (one_sub_e_two_mul φ).symm
+      have h4 : v + ((2 * Real.sin φ : ℝ) : ℂ) * e (D₂ + φ) - (v + e ψ) = -(e ψ * e (2 * φ)) := by
+        rw [h1, hper, h2]
+        linear_combination (e ψ) * h3
+      rw [h4, norm_neg, norm_mul, norm_e, norm_e, one_mul]
 
 /-- **The colour of a tangent parabola at an edge** (the second-order lemma's map-level input, § 9.1): in a map of the plane, at an edge
 direction `β = d i` of a picture with positive angles, the parabola tangent to `e β` at `v` with upward curvature `1/2` has its points `0 < x < r`,
