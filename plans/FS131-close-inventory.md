@@ -1636,3 +1636,7 @@ reason by the close.*
      The planar lemma joins the planar-infrastructure job (item 218 (c)). Optional stub (is `Row134BaseUA` true without `UnenclosedC`?): declined for now — no
      filed headline needs it; the search request carries the question. Prior-art debt: E4-OUTERMOST, E4-BEND-UN, E4-LOCALDENSE owed (in-house); bibliography read
      status for `[Voronov2023]` Obs. 2.2, Lemma 6.1 and `[SokolovVoronov2025]` pp. 27–28 (re-read first-hand 2026-10-04) to note at the filing.
+228. **Brief FS131-I5, wave 5's first implementer** (Opus; `data/fs131/briefs/FS131-I5-wave5.md`, gated PASS): merge `fs131-w5b` into `fs131-w5`, apply E4's repair
+     (item 227) verbatim, the base's owed obligation pass (item 218 (d)), then wave 5's leaves in plan § 10.1's order; `cvb_thom_reduced` priced from its first
+     two children (item 208 (a)); no gate or landing (after wave 4). Launched in E4's slot: 1 (I2m) + 1 (I4i) + 1 (IC3) + 1 (I5) = 4. Kooshi notified of E4's
+     verdict by push (rows 134, 137 stand; row 135's headline stands, its base clause needs the condition) per item 220's rule.
