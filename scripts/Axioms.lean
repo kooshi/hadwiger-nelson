@@ -2289,6 +2289,29 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.differentiable_hcGap
 #print axioms HadwigerNelson.Plane.hcGap_bounds
 #print axioms HadwigerNelson.Plane.hcGap_lowerParabola
+#print axioms HadwigerNelson.Plane.dist_hcFrame
+#print axioms HadwigerNelson.Plane.hcFrame_coords
+#print axioms HadwigerNelson.Plane.hcUpTri_frame
+#print axioms HadwigerNelson.Plane.hcUp_slivers
+#print axioms HadwigerNelson.Plane.hcBandTop_bounds
+#print axioms HadwigerNelson.Plane.lt_hcBandTop_iff
+#print axioms HadwigerNelson.Plane.continuousOn_hcBandTop
+#print axioms HadwigerNelson.Plane.isClosed_hcSet
+#print axioms HadwigerNelson.Plane.closure_interior_hcSet
+#print axioms HadwigerNelson.Plane.volume_frontier_hcSet
+#print axioms HadwigerNelson.Plane.hc_band_dist_lt_one
+#print axioms HadwigerNelson.Plane.hc_unitAvoiding
+#print axioms HadwigerNelson.Plane.exists_near_hcFace
+#print axioms HadwigerNelson.Plane.hc_sausage_cover
+#print axioms HadwigerNelson.Plane.hc_lemmaNL
+#print axioms HadwigerNelson.Plane.hc_exclusion
+#print axioms HadwigerNelson.Plane.hc_ae_phi_pos
+#print axioms HadwigerNelson.Plane.subset_compl_unitShadow_closure
+#print axioms HadwigerNelson.Plane.essSupport_of_isOpen
+#print axioms HadwigerNelson.Plane.hcBand_component_iff
+#print axioms HadwigerNelson.Plane.hc_free_pos
+#print axioms HadwigerNelson.Plane.hc_free_subset_nowhereDense
+#print axioms HadwigerNelson.Plane.frontier_essSupport_pos
 
 #eval IO.println "=== PURCHASED ==="
 

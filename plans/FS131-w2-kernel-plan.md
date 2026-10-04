@@ -941,3 +941,101 @@ build at the end of this job is the evidence).
 | | `differentiable_hcGap` | on a gap a polynomial (`hcGap_eq_of_gap`, open gap), at `z ∈ Z` derivative `0` from `|g| ≤ (s − z)²/4` (`hasDerivAt_of_isLittleO`), outside `[−1/2, 1/2]` zero; the derivative bound on gaps `|xy(y − x)/2| ≤ min(x, y)/2` | 35k |
 | | `hcGap_bounds` | on a gap `x²y²/4 ≤ min(x, y)²/4` with `x + y ≤ 1` (so `≤ 1/64`), `|g′| ≤ 1/8`; positivity off `Z` | 30k |
 | | `hcGap_lowerParabola` | `g′` is `1/2`-Lipschitz on `[−1/2, 1/2]` (`|g″| = |x² − 4xy + y²|/2 ≤ 1/2` on gaps; across a point of `Z` add the two bounds), then the mean value form (`image_le_of_deriv_right_le_deriv_boundary` or integrate `g′`) | 30k |
+
+## Stage 17 — SAVED: HC's and IRREG's children stated (after `plans/FS111-M3-finiteness.md` §§ 1.5–2.6 and 4.1–4.2, read line by line); `exists_not_uniform_kept`'s children planned (FS131-K2d)
+
+**Read** (this job, in full): FS111-M3 §§ 1.5, 1.6 (HC by formula), 2.1–2.6 ((G1)–(G3), unit-avoidance, B1, B2 with (C0) and cases 1–6,
+Lemma NL, the exact check H1–H7), 4.1–4.3 (IRREG: `|E| > 0`, `E ⊆ K`, irregularity of every completion). Nullity of `Z` enters only
+in the almost-everywhere step through `N_e` (§ 2.4) — so every child but `hc_ae_phi_pos` is stated with `interior Z = ∅` and serves
+IRREG too (§ 4.2 (1)). **(C0) is already in the kernel**: `vesica_apex` (BAND's third clause, proved) is (C0) in an edge frame; B2 reads it
+through `dist_hcFrame`.
+
+**Stated** (`Plane/CoverExamples`, each `sorry`, records written): `hcSeg` (def), and
+
+| child | route (FS111-M3 address) | price |
+|---|---|---|
+| `dist_hcFrame` | `hcFrame` is `C_u + (·)·w`, `‖w‖ = 1` (`norm_e`) | 10k |
+| `hcFrame_coords` | divide by `w` | 10k |
+| `hcUpTri_frame` | `convexHull` of the three vertices, each with `|s| ≤ 1/2`, `t ∈ [2, 2 + √3/2]` in every frame (frames are affine) | 20k |
+| `hcUp_slivers` | (G2) § 2.2 | 35k |
+| `hcBandTop_bounds` | (G3): `(s, 2 + g(s)) ∈ U` (`hcUp_slivers`) gives `ℓ ≤ 1 + g`; every `u ∈ U` has `u_t ≥ 2` (`hcUpTri_frame`), so `d_U ≥ 1` at `t ≤ 1`, with equality iff `u = (s, 2)` ∈ `U` iff `g(s) = 0` iff `s ∈ Z` | 35k |
+| `lt_hcBandTop_iff` | (G3): `d_U(s, ·)` strictly decreasing on `t < 2` | 30k |
+| `continuousOn_hcBandTop` | (G3): `ℓ` is the root of a continuous strictly decreasing family (`d_U` 1-Lipschitz) | 35k |
+| `isClosed_hcSet` | `LocallyFinite.isClosed_iUnion` for each family (face lattice discrete; blocks bounded) | 30k |
+| `closure_interior_hcSet` | each block is the closure of its interior; `σ_e ⊆ cl Λ_e` by `interior Z = ∅` and `hcBandTop_bounds` | 30k |
+| `volume_frontier_hcSet` | frontier in segments, circles, graphs of continuous functions (`MeasureTheory.Measure.addHaar_sphere`; a graph of a continuous function is null by Fubini) | 35k |
+| `hc_band_dist_lt_one` | § 2.3's band computation | 30k |
+| `hc_unitAvoiding` | § 2.3 (H1 on one period, flanking pairs, diameters, `hc_band_dist_lt_one`); **split at implementation** into the block table and the flanking pairs | 40k + 40k |
+| `exists_near_hcFace` | rounding in the face lattice's coordinates; covering radius `L` | 25k |
+| `hc_sausage_cover` | B1: reduce to the kite about the ray `O C_k` by `exists_near_hcFace` and the six 60° rotations (each carries the standard triangle and segments onto the actual ones — a child to state at implementation, `hc_pieces_rot`), then H3's quadrilateral by `nlinarith` | 40k + 35k |
+| `hc_lemmaNL` | Lemma NL § 2.4 (exterior disc `R = 5/4`, H5's inequality `max((2/5)x², |y|) > (5/16)x² + (5/256)y²`) | 40k |
+| `hc_exclusion` | B2 § 2.4, cases 1–6; (C0) = `vesica_apex`; **split at implementation** by case (disc; vesica; flat bulges; sliver) | 40k + 3 × 25k |
+| `hc_ae_phi_pos` | § 2.4's last paragraph; children at implementation: `N_e` null (`Z` null, Lipschitz image), level sets null, `E°` ⟹ open arc in the block's interior | 40k + 2 × 25k |
+| `subset_compl_unitShadow_closure` | perturb: `y′ ∈ U` near `y ∈ cl U`, then `z + (y′ − y) ∈ U` is at distance `1` from `y′` | 15k |
+| `essSupport_of_isOpen` | `⊆` support ⊆ closure; `⊇` an open set has positive measure in every ball about a point of its closure | 10k |
+| `hcBand_component_iff` | (G3): over a gap the region `{s ∈ J, 1 < t < ℓ(s)}` is connected (`ℓ` continuous, fibres intervals); a point `c ∈ Z` between gives `ℓ(c) = 1`, an empty fibre, which separates (the frame is a homeomorphism) | 35k |
+| `hc_free_pos` | § 4.2 (1): the arc-above-band inequality `t·d/r > d²/4`, and positivity through density points of `Z × Z` and the local diffeomorphism `(s, t) ↦ (s + r, s − r)` near `t = 0⁺`; **split**: the arc lemma, the measure lemma | 35k + 35k |
+| `hc_free_subset_nowhereDense` | § 4.2 (2): `K` the union of the null level sets, flat side lines, `T₁(e±)`, and `K_e`; `K_e` closed (`Z` compact) with empty interior by Baire on `(Z − ρ) ∪ (Z + ρ)` (`IsClosed.interior_union_left`/`nowhereDense_union`) | 40k |
+| `frontier_essSupport_pos` | § 4.2 (3), general: a density point `x ∈ K ∖ F` of `A′ ∖ F` has a neighbourhood where `supp A′ ⊆ K` (closed, empty interior), so `x ∈ ∂ supp A′` | 30k |
+
+**The assemblies, not written in this job** (each from the children above; for the next implementer):
+- `hc_isRegularMUA` (25k): `A = int HC` is open (measurable) with no unit pairs (`hc_unitAvoiding`: `unitPairSet A = ∅`, as in
+  `not_forall_isRegularMUA`); MUA by `isMUA_iff_ae_phi_pos` with `hc_ae_phi_pos`; `essSupport A = closure A = HC`
+  (`essSupport_of_isOpen`, `closure_interior_hcSet`); `|HC ∖ A| ≤ |frontier HC| = 0` (`isClosed_hcSet`: `HC ∖ int HC = frontier HC`);
+  shadow identity: `⊆` by `subset_compl_unitShadow_closure`, `⊇` by `hc_exclusion` (`interior Z = ∅` from `volume Z = 0`:
+  `interior_eq_empty_of_null`-type fact, a line).
+- `hc_band_components` (15k): `connectedComponentIn` equality ⟺ some preconnected subset holds both (`IsPreconnected.subset_connectedComponentIn`,
+  `isPreconnected_connectedComponentIn`), then `hcBand_component_iff`.
+- `hc_irreg` (35k): (1) from `hc_unitAvoiding`, `closure_interior_hcSet`, `volume_frontier_hcSet`, `isClosed_hcSet`, `hc_exclusion`; `¬ IsMUA`
+  from `hc_free_pos` against `isMUA_iff_ae_phi_pos`; completions: `A′ ∖ HC` has positive measure (else `A′ =ᵐ A` up to the null frontier,
+  and the free set would be in `A′` with `φ_{A′} = 0`, against `A′` MUA), lies a.e. in the free set (unit-avoidance of `A′` and
+  `∫_{A′∖A} φ_A = 0`), hence in `K` (`hc_free_subset_nowhereDense`); `frontier_essSupport_pos` with `F = HC`.
+- `IsMUA.add_normal_mem_essSupport` (30k): stage 16's table.
+
+### 17.1 `exists_not_uniform_kept`'s children (to paste into `Plane/Slack` by the implementer who next holds it; not edited here)
+
+The leaf (verbatim, `Plane/Slack`): `exists_not_uniform_kept {η : ℝ} (hη0 : 0 < η) (hη : η < 1) : ∃ (k : ℕ) (f : ℂ → Fin k), Measurable f ∧
+(∀ x y, dist x y = 1 → f x ≠ f y) ∧ ∃ m > (0 : ENNReal), ∀ ε > (0 : ℝ), ∃ z : ℂ, m ≤ volume {x | x - z ∈ {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧
+0 ≤ w.im ∧ w.im ≤ 1} ∧ ¬ KeptAt (f ⁻¹' {f x}) η ε x}`.
+
+**A simpler route than K2c's fringe colouring** (one mind, this record; the implementer may take either): the colouring need not
+change with `ε` in a way tied to annuli — **a chequer at every scale, placed in disjoint windows**. Base: `sq9` by squares of side `1/2`
+(proper at every unit pair, `sq9Col_ne_of_dist_eq_one`, colours `0–8`). Modification: in the unit square `W_j = j·(10, 0) + [0, 1]²`
+(`j ≥ 1`, far apart), replace the colouring by a chequerboard of side `h_j = 1/(10 j)` in **two fresh colours** `9, 10` — proper inside `W_j`
+since a chequer of side `h` has same-colour points at distance `1` (e.g. along an axis by `1 = (10j)·h`, an even number of cells: same
+colour!). So the chequer alone is **not** proper; K2c's margins avoided this with narrow strips. **Repair**: chequer `W_j` in colours `9, 10`
+by cells of side `h_j` with **diameter of `W_j` < 1**: take `W_j = j·(10, 0) + [0, 1/2]²` (diameter `√2/2 < 1`, so no unit pair inside
+`W_j`), and pairs between `W_j` and the rest use colours `9, 10` only in `W_j`s, which are `> 1` apart. At scale `ε` with `2ε ≥ h_j`... the
+kept test at `x ∈ W_j` with `ε/2 ≫ h_j` sees own-colour density `≈ 1/2 < 1 − η` iff `η < 1/2`. **This route needs `η < 1/2`, the leaf has
+`η < 1`**: at `1/2 ≤ η < 1` a chequer is kept (density `1/2 ≥ 1 − η`). Use `N` fresh colours cycled in cells (density `1/N`): take
+`N > 1/(1 − η)`, i.e. `k = 9 + N` with `N = ⌈2/(1 − η)⌉`; own-colour density `≈ 1/N < 1 − η`. The translate `z` of the unit square is chosen
+to contain `W_j` for `j` with `h_j ≤ ε/100` (so the ball of radius `ε/2` about most points of `W_j` stays inside `W_j` — needs
+`ε/2 < 1/4`: for `ε ≥ 1/2` use `W_1` at scale — at `2ε` the ball leaves `W_j`; the definition of `KeptAt` tests both radii `ε/2` and `2ε`:
+non-kept at either radius suffices). The measure bound `m = 1/16` (a quarter of `W_j`'s area `1/4`, the points at distance `≥ ε/2` from
+`∂W_j` when `ε ≤ 1/4`; for larger `ε`, points of `W_1` whose `ε/2`-ball is mostly outside `W_1` lie in sq9's classes… — **this case needs
+care**: for `ε ≥ 1/4`, choose instead a fixed configuration: a cycled chequer of side `h ≤ ε/100` inside a disc of radius `1/2`, so pick
+`W_j` with `h_j ≤ ε/100` **and side growing**? The side is capped by `< 1/√2` for unit-pair freedom). **So K2c's fringe route is the one
+that handles all `ε` uniformly**, and the children below follow it, with the colour count chosen from `η` as above:
+
+```lean
+/-- The zigzag colouring of FS106-TQ's control C2, with `N` fringe colours: `sq9` off the fringes; in the annulus `j ≤ ‖z‖ < j + 1`, a
+fringe of width `1/50` along every grid edge chequered by cells of side `1/(j + 1)` in `N` colours `9, …, 8 + N`. -/
+noncomputable def zigzagCol (N : ℕ) (z : ℂ) : Fin (9 + N) := sorry  -- a definition by formula; to be written
+
+theorem measurable_zigzagCol (N : ℕ) : Measurable (zigzagCol N) := sorry
+theorem zigzagCol_ne_of_dist_eq_one (N : ℕ) (hN : 1 ≤ N) {x y : ℂ} (h : dist x y = 1) : zigzagCol N x ≠ zigzagCol N y := sorry
+theorem exists_square_not_kept (N : ℕ) (hN : 1 ≤ N) {η : ℝ} (hη : (1 : ℝ) / N < 1 - η) {ε : ℝ} (hε : 0 < ε) :
+    ∃ z : ℂ, ENNReal.ofReal (1 / 1000) ≤ volume {x | x - z ∈ {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧ 0 ≤ w.im ∧ w.im ≤ 1} ∧
+      ¬ KeptAt (zigzagCol N ⁻¹' {zigzagCol N x}) η ε x} := sorry
+```
+
+with the assembly `⟨9 + N, zigzagCol N, measurable_zigzagCol N, fun x y h => zigzagCol_ne_of_dist_eq_one N hN h, ENNReal.ofReal (1/1000),
+by positivity, fun ε hε => exists_square_not_kept N hN hNη hε⟩`, `N = ⌈2 / (1 − η)⌉₊`. Prices: the definition 15k (a formula: `sq9Col`
+off the fringe set, `9 + ((⌊re·(j+1)⌋ + ⌊im·(j+1)⌋) mod N)` on it, `j = ⌊‖z‖⌋`), measurability 15k, properness 40k (fringe colours only in
+fringes of width `1/50`; two fringe points at distance `1` lie in fringes of grid edges `≥ 1/2 − 2/50` apart in the transverse direction or
+in the same fringe strip — **the latter can be at distance exactly 1 along the strip**: the cycled chequer along a strip of length `1/2` has
+length `< 1`, so pairs at distance `1` along fringes are in different strips; colour them by `(strip index mod 3)`-shifted cycles — the
+implementer must fix the formula so that fringes of edges at distance `≤ 1 + 1/25` get disjoint colour sets, e.g. `N` colours per strip
+class mod 3, `k = 9 + 3N`), the measure bound 40k. **K2c's sketch (§ 12.2) does not settle the fringe-to-fringe pairs; the formula above
+must**, and the properness child is where that is proved — if it cannot be, that is a missing lemma for the deriver (FS106-TQ's control
+C2 is a hand construction).

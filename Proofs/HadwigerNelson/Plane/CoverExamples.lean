@@ -1070,6 +1070,153 @@ theorem g1Bounds_hcGap {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2
   refine ⟨hd, fun s hs => ⟨(hb s hs).1, (hb s hs).2.1, hd' s hs, (hb s hs).2.2.1, (hb s hs).2.2.2.1⟩,
     fun s hs hsZ => (hb s hs).2.2.2.2 hsZ, hcGap_lowerParabola hZc hZs hl hr⟩
 
+/-! ### FS131-K2d: children of HC's and IRREG's leaves (plan § 17; `plans/FS111-M3-finiteness.md` §§ 2.2–2.4, 4.2)
+
+Every child is stated with `interior Z = ∅` where § 4.2 (1) says nullity is unused, so IRREG reuses it; nullity enters only in
+`hc_ae_phi_pos`. -/
+
+/-- The segment `σ_e = [−1/2, 1/2] × {1}` of an edge, in its frame. -/
+def hcSeg (m n : ℤ) (j : Fin 3) : Set ℂ := (fun s => hcFrame m n j s 1) '' Icc (-1 / 2) (1 / 2)
+
+/-- The edge frame is an isometry from `ℝ²`. -/
+theorem dist_hcFrame (m n : ℤ) (j : Fin 3) (s t s' t' : ℝ) :
+    dist (hcFrame m n j s t) (hcFrame m n j s' t') = √((s - s') ^ 2 + (t - t') ^ 2) := by
+  sorry
+
+/-- `hcFrameS`, `hcFrameT` invert the frame. -/
+theorem hcFrame_coords (m n : ℤ) (j : Fin 3) (s t : ℝ) :
+    hcFrameS m n j (hcFrame m n j s t) = s ∧ hcFrameT m n j (hcFrame m n j s t) = t := by
+  sorry
+
+/-- The up triangle in each of its edge frames: `|s| ≤ 1/2`, `2 ≤ t ≤ 2 + √3/2`. -/
+theorem hcUpTri_frame {m n : ℤ} {z : ℂ} (hz : z ∈ hcUpTri m n) (j : Fin 3) :
+    |hcFrameS m n j z| ≤ 1 / 2 ∧ 2 ≤ hcFrameT m n j z ∧ hcFrameT m n j z ≤ 2 + √3 / 2 := by
+  sorry
+
+/-- **(G2)**: the graph `t = 2 + g(s)`, `|s| ≤ 1/2`, of every side lies in `U` (the three slivers are disjoint and miss the other
+sides' curves: `g ≤ (1/2 − |s|)²/4` against the corner distance `0.8 (1/2 − |s|)`). -/
+theorem hcUp_slivers {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) :
+    hcFrame m n j s (2 + g s) ∈ hcUp g m n := by
+  sorry
+
+/-- **(G3)**, bounds: `1 ≤ ℓ ≤ 1 + g`, and `ℓ(s) = 1` iff `s ∈ Z`. -/
+theorem hcBandTop_bounds {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) :
+    1 ≤ hcBandTop g m n j s ∧ hcBandTop g m n j s ≤ 1 + g s ∧ (hcBandTop g m n j s = 1 ↔ s ∈ Z) := by
+  sorry
+
+/-- **(G3)**, the band below `t = 2` is exactly where `d_U > 1` (`d_U` strictly decreasing in `t` there). -/
+theorem lt_hcBandTop_iff {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s t : ℝ} (hs : s ∈ Icc (-1 / 2 : ℝ) (1 / 2)) (ht : t < 2) :
+    t < hcBandTop g m n j s ↔ 1 < infDist (hcFrame m n j s t) (hcUp g m n) := by
+  sorry
+
+/-- **(G3)**, continuity of `ℓ`. -/
+theorem continuousOn_hcBandTop {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) :
+    ContinuousOn (hcBandTop g m n j) (Icc (-1 / 2 : ℝ) (1 / 2)) := by
+  sorry
+
+/-- HC is closed (a locally finite union of closed blocks). -/
+theorem isClosed_hcSet {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) : IsClosed (hcSet g) := by
+  sorry
+
+/-- HC is the closure of its interior (each block is; `Z` has empty interior, so `σ_e ⊆ cl Λ_e`). -/
+theorem closure_interior_hcSet {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) : closure (interior (hcSet g)) = hcSet g := by
+  sorry
+
+/-- HC's frontier is null: segments, circles and graphs of continuous functions, locally finitely many. -/
+theorem volume_frontier_hcSet {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) : volume (frontier (hcSet g)) = 0 := by
+  sorry
+
+/-- **The band has diameter `< 1`**: it thins to `0` quadratically at both ends (§ 2.3: `|z₁ − z₂|² < 1 − σ + σ² ≤ 1`). -/
+theorem hc_band_dist_lt_one {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {x y : ℂ} (hx : x ∈ hcBand g m n j) (hy : y ∈ hcBand g m n j) :
+    dist x y < 1 := by
+  sorry
+
+/-- **§ 2.3, unit-avoiding**: no two points of `int HC` are at distance `1` — the block-distance table H1 (exact in `ℚ(√3)`, one
+period), the band within `1/64` of `σ_e`, the flanking pairs (`Λ_e ⊆ {t > 1}`, `d_U > 1` on `Λ_e`), diameters. **Split at
+implementation** into the table and the flanking pairs. -/
+theorem hc_unitAvoiding {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) : ∀ x ∈ interior (hcSet g), ∀ y ∈ interior (hcSet g), dist x y ≠ 1 := by
+  sorry
+
+/-- Every point is within `L` of a face centre (the face lattice's covering radius). -/
+theorem exists_near_hcFace (z : ℂ) : ∃ m n : ℤ, dist z (hcFace m n) ≤ hcL := by
+  sorry
+
+/-- **B1, the sausage cover (flat skeleton)**: every point is within `1` of a flat triangle or a segment, or within `3/2` of a face
+centre — the fundamental triangle `O C M` with H3's quadrilateral `Q ⊆ B̄(v, 1) ∪ B̄(e, 1)`, carried around each face by the 60°
+rotations (`exists_near_hcFace`). -/
+theorem hc_sausage_cover (z : ℂ) :
+    (∃ m n : ℤ, infDist z (hcDownTri m n) ≤ 1) ∨ (∃ m n : ℤ, infDist z (hcUpTri m n) ≤ 1) ∨
+      (∃ (m n : ℤ) (j : Fin 3), infDist z (hcSeg m n j) ≤ 1) ∨ ∃ m n : ℤ, dist z (hcFace m n) ≤ 3 / 2 := by
+  sorry
+
+/-- **Lemma NL**: a sliver point `(s, t)`, `2 < t ≤ 2 + g(s)`, is at distance `1` from a point of `cl Λ_e` (of `Λ_e` when
+`t < 2 + g(s)`) — the exterior disc of radius `5/4`, H5's constants. -/
+theorem hc_lemmaNL {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s t : ℝ} (hs : |s| < 1 / 2) (ht : 2 < t) (htg : t ≤ 2 + g s) :
+    ∃ p ∈ closure (hcBand g m n j), dist (hcFrame m n j s t) p = 1 := by
+  sorry
+
+/-- **B2, the exclusion**: every point outside `int HC` is at distance `1` from HC — B1's cases with (C0) (`vesica_apex` in the
+edge frame, through `dist_hcFrame`), (G3) and Lemma NL. -/
+theorem hc_exclusion {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) {z : ℂ} (hz : z ∉ interior (hcSet g)) : z ∈ unitShadow (hcSet g) := by
+  sorry
+
+/-- **§ 2.4, almost everywhere**: with `Z` null, almost every point off `int HC` has `φ > 0` — the exclusion inequalities strict off
+null level sets, `N_e = (Z × {1} + S¹) ∪ T₁(e±)` null, and `E°`-points see an open arc of a block's interior. -/
+theorem hc_ae_phi_pos {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (hZ0 : volume Z = 0) :
+    ∀ᵐ z ∂(volume.restrict (interior (hcSet g))ᶜ), 0 < phi (interior (hcSet g)) z := by
+  sorry
+
+/-- An open set with no two points at distance `1` meets no unit circle about its closure (perturb the far end into the set). -/
+theorem subset_compl_unitShadow_closure {U : Set ℂ} (hU : IsOpen U) (h : ∀ x ∈ U, ∀ y ∈ U, dist x y ≠ 1) :
+    U ⊆ (unitShadow (closure U))ᶜ := by
+  sorry
+
+/-- The support of an open set is its closure. -/
+theorem essSupport_of_isOpen {U : Set ℂ} (hU : IsOpen U) : essSupport U = closure U := by
+  sorry
+
+/-- The band over one gap is connected and separated from the bands over other gaps (§ 2.2 (G3): vertical fibres over a
+connected base; an empty fibre at each point of `Z`). -/
+theorem hcBand_component_iff {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (m n : ℤ) (j : Fin 3) {s₁ t₁ s₂ t₂ : ℝ} (h₁ : hcFrame m n j s₁ t₁ ∈ hcBand g m n j)
+    (h₂ : hcFrame m n j s₂ t₂ ∈ hcBand g m n j) :
+    (∃ S ⊆ hcBand g m n j, IsPreconnected S ∧ hcFrame m n j s₁ t₁ ∈ S ∧ hcFrame m n j s₂ t₂ ∈ S) ↔
+      Disjoint (uIcc s₁ s₂) Z := by
+  sorry
+
+/-- **IRREG (1), `|E| > 0`**: with `Z` of positive length, the bulge points whose unit circle crosses `t = 1` at two points of
+`Z` see no point of `int HC` (the arc passes above the band: `t·d/r > d²/4`), and they have positive measure (density points of
+`Z × Z` through the local diffeomorphism `(s, t) ↦ (s + r, s − r)`). -/
+theorem hc_free_pos {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) (hZpos : 0 < volume Z) :
+    0 < volume {z | z ∉ hcSet g ∧ phi (interior (hcSet g)) z = 0} := by
+  sorry
+
+/-- **IRREG (2)**: the free points lie in a closed nowhere dense set (null level sets, flat side lines, the circles about `σ_e`'s
+ends, and `K_e = ⋃_{c ∈ Z} T₁((c, 1))`, nowhere dense by Baire on `(Z − ρ) ∪ (Z + ρ)`). -/
+theorem hc_free_subset_nowhereDense {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1 / 2) (1 / 2)) (hZi : interior Z = ∅) (hl : (-1 / 2 : ℝ) ∈ Z)
+    (hr : (1 / 2 : ℝ) ∈ Z) {g : ℝ → ℝ} (hg : G1Bounds Z g) :
+    ∃ K : Set ℂ, IsClosed K ∧ interior K = ∅ ∧ {z | z ∉ hcSet g ∧ phi (interior (hcSet g)) z = 0} ⊆ K := by
+  sorry
+
+/-- **IRREG (3), general**: a set `A′` whose part outside a closed `F` has positive measure and lies a.e. in a closed nowhere
+dense `K` has a support whose frontier has positive measure (density points of `A′ ∖ F` are boundary points of `supp A′`). -/
+theorem frontier_essSupport_pos {A' F K : Set ℂ} (hF : IsClosed F) (hK : IsClosed K) (hKi : interior K = ∅)
+    (hS : 0 < volume (A' \ F)) (hsub : A' \ F ≤ᵐ[volume] K) : 0 < volume (frontier (essSupport A')) := by
+  sorry
+
 /-- HC₀'s zero set `Z = {−1/2, 1/2}` (every band one lens). -/
 def hcZ0 : Set ℝ := {-1 / 2, 1 / 2}
 
