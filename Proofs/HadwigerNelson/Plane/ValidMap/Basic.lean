@@ -1,0 +1,292 @@
+import Proofs.HadwigerNelson.Plane.LocalStructure
+
+/-!
+# Valid maps at a point: frames, horns, sectors, contacts, shadows, and the local moves
+
+Wave 4's foundation (`plans/FS131-w4-kernel-plan.md` § 2), over wave 3's `Plane/LocalMap` and `Plane/LocalStructure`. The
+vocabulary of FS-110's N3–N4 rounds (`plans/FS110-N-proof.md` § Continuation — FS110-N3, N4) and of FS-112's unit-arc calculus
+(`data/fs112/claims.md` § 0), made point-set:
+
+* **The frame at `v`** along the direction `e α`: `frameX`, `frameY` are the coordinates along `a = e α` and `n = i a`; the rows'
+  `N = v + n`, `S′ = v − n`, `P_k = v + kn` are `v + k * n` with `n = e (α + π / 2)`.
+* **Upward curvature.** The circle (or line) through `v` tangent to `a` with upward curvature `κ` is `tanHeight κ = 0`, and
+  "above it" is `tanHeight κ > 0` (exact, not second order: every boundary arc is a circle or a line). The unit circles `ω(N)`
+  and `ω(S′)` are the curvatures `1` and `−1` (`tanHeight_one_framePt`).
+* **A horn** along `e α` between the arcs of curvatures `κ₁ < κ₂` is `hornSet v α κ₁ κ₂ r`; `IsHorn` says it is, for all small
+  `r`, a sector of the map of one colour. A cusp horn has the single direction `α` as its cone.
+* **Sectors** (`IsSector`): the components of the interior points in `B(v, r)` whose closure holds `v`; `HasSectors v c n` and
+  `HasDegree v n` count them **for all small `r`** (as `encard`, so infinitely many is never counted as `0`). A cusp horn is one
+  sector; "a repeated colour" is a colour with at least two sectors; "cubic trichromatic" is degree 3 with three colours.
+* **Contacts** (`IsContact`, `InType`, `OutType`) of a colour `c ∈ P_cl(v)` on `ω(v)`, the **allowed cone** `allowedCone v c`
+  (the rows' `D_c(v) = ⋂_in {d·e_w ≥ 0} ∩ ⋂_out {d·e_w ≤ 0}`, as a set of vectors), **clear** points (`IsClear`) and the
+  **shadow** `shadow T = {z : ω(z) ∩ T ≠ ∅}`.
+* **The moves' preconditions** (`MergeAvailable`, `RayAvailable`, `ShaveAvailable`), **terminal** maps and **stuck** vertices
+  (N4-STUCK's hypothesis), and the doubly shadowed horn.
+* **Unit arcs' contact kinds** (FS-112): in, out, both, inert, and (R2), over wave 3's `IsRingArc`.
+* **Condition 5** (`[SokolovVoronov2025]`, read on an arc map) and the complexity class **`𝓜_K`** (`InMK`).
+
+Every definition has a spec example below, and the structures the rows take have inhabitants (`ArcMap.const`).
+-/
+
+namespace HadwigerNelson.Plane
+
+open Complex Real Set Filter Topology Metric
+
+/-! ## The frame at a point and upward curvature -/
+
+/-- The coordinate of `z` along `a = e α` in the frame at `v`: `(z − v)·a`. -/
+noncomputable def frameX (v : ℂ) (α : ℝ) (z : ℂ) : ℝ := ((z - v) * starRingEnd ℂ (e α)).re
+
+/-- The coordinate of `z` along `n = i·e α` in the frame at `v`: `(z − v)·n`. -/
+noncomputable def frameY (v : ℂ) (α : ℝ) (z : ℂ) : ℝ := ((z - v) * starRingEnd ℂ (e α)).im
+
+/-- The point with frame coordinates `(x, y)`: `v + (x + y i) e α`. -/
+noncomputable def framePt (v : ℂ) (α x y : ℝ) : ℂ := v + ((x : ℂ) + (y : ℂ) * I) * e α
+
+/-- The height of `(x, y)` above the circle through the origin tangent to the `x`-axis with upward curvature `κ` (the line
+`y = 0` when `κ = 0`): `y − κ (x² + y²)/2`. The circle is its zero set; its centre side, near the origin, is the positive side
+when `κ > 0`. -/
+noncomputable def tanHeight (κ x y : ℝ) : ℝ := y - κ * (x ^ 2 + y ^ 2) / 2
+
+/-- `z` lies strictly above (on the `+n` side of) the arc through `v` tangent to `e α` with upward curvature `κ`. -/
+def TanAbove (v : ℂ) (α κ : ℝ) (z : ℂ) : Prop := 0 < tanHeight κ (frameX v α z) (frameY v α z)
+
+/-- `z` lies strictly below the arc through `v` tangent to `e α` with upward curvature `κ`. -/
+def TanBelow (v : ℂ) (α κ : ℝ) (z : ℂ) : Prop := tanHeight κ (frameX v α z) (frameY v α z) < 0
+
+/-- **The horn** at `v` along `e α` between the arcs of upward curvatures `κ₁` (below) and `κ₂` (above), within `B(v, r)`:
+`{z ∈ B(v, r) : (z − v)·a > 0, above the arc κ₁, below the arc κ₂}` — the rows' `{κ₁x²/2 < y < κ₂x²/2, x > 0}`, exactly. -/
+def hornSet (v : ℂ) (α κ₁ κ₂ r : ℝ) : Set ℂ :=
+  {z | dist z v < r ∧ 0 < frameX v α z ∧ TanAbove v α κ₁ z ∧ TanBelow v α κ₂ z}
+
+/-- FS-110's curvature map going down the normal line (N4-SHADOW): an arc at `P_{k+1}` of upward curvature `λ` shadows at
+`P_k` along the concentric circle of curvature `f(λ) = λ/(1 + λ)`. -/
+noncomputable def curvDown (l : ℝ) : ℝ := l / (1 + l)
+
+/-- FS-110's curvature map going up the normal line: `f̃(υ) = υ/(1 − υ)`, the inverse of `curvDown`. -/
+noncomputable def curvUp (u : ℝ) : ℝ := u / (1 - u)
+
+/-! ## The shadow of a set, and clear points -/
+
+/-- The real dot product of two plane vectors, `d·u = Re(d ū)`. -/
+noncomputable def dot (d u : ℂ) : ℝ := (d * starRingEnd ℂ u).re
+
+/-- **The shadow** of `T`: the points whose unit circle meets `T` (`Sh(T)` of FS-110 N4-2; for a connected open `T` it is
+`{z : dist(z, T) < 1 < sup_{p ∈ T} |z − p|}`). A valid map's tile never meets the shadow of a tile of its own colour. -/
+def shadow (T : Set ℂ) : Set ℂ := {z | ∃ y ∈ T, dist z y = 1}
+
+namespace ArcMap
+
+variable {k : ℕ} (F : ArcMap k)
+
+/-- `z` is **clear** for the colour `c`: at distance `≠ 1` from every point of `c`'s class (so `z` may be recoloured `c`). -/
+def IsClear (c : Fin k) (z : ℂ) : Prop := ∀ y ∈ F.region c, dist z y ≠ 1
+
+/-! ## Sectors and degree -/
+
+/-- **A sector** of the map at `v`, at radius `r`: a connected component of the interior points in `B(v, r)` whose closure
+holds `v` (FS-110's "`c`-sector at `v`"; a cusp horn is one). -/
+def IsSector (v : ℂ) (r : ℝ) (S : Set ℂ) : Prop :=
+  ∃ x ∈ F.interiorPts ∩ ball v r, S = connectedComponentIn (F.interiorPts ∩ ball v r) x ∧ v ∈ closure S
+
+/-- The sectors of colour `c` at `v`, at radius `r`. -/
+def sectorsOf (v : ℂ) (r : ℝ) (c : Fin k) : Set (Set ℂ) := {S | F.IsSector v r S ∧ S ⊆ F.col ⁻¹' {c}}
+
+/-- **`s_c(v) = n`**: for every small radius, the colour `c` has exactly `n` sectors at `v`. -/
+def HasSectors (v : ℂ) (c : Fin k) (n : ℕ) : Prop := ∀ᶠ r in 𝓝[>] (0 : ℝ), (F.sectorsOf v r c).encard = n
+
+/-- **The degree of `v` is `n`**: for every small radius, `v` has exactly `n` sectors. -/
+def HasDegree (v : ℂ) (n : ℕ) : Prop := ∀ᶠ r in 𝓝[>] (0 : ℝ), {S | F.IsSector v r S}.encard = n
+
+/-- **`v` carries a repeated colour**: some colour has at least two sectors at `v`, for every small radius. -/
+def HasRepeatedColour (v : ℂ) : Prop := ∃ c, ∀ᶠ r in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf v r c).encard
+
+/-- **A cubic trichromatic vertex**: degree `3` and three colours (so one sector per colour). -/
+def IsCubicTrichromatic (v : ℂ) : Prop := F.HasDegree v 3 ∧ (F.coloursAt v).ncard = 3
+
+/-- **A `c`-horn** at `v` along `e α` with bounding curvatures `κ₁ < κ₂`: for every small `r` the horn set is a sector of the
+map, of colour `c`. -/
+def IsHorn (v : ℂ) (α κ₁ κ₂ : ℝ) (c : Fin k) : Prop :=
+  κ₁ < κ₂ ∧ ∀ᶠ r in 𝓝[>] (0 : ℝ), F.IsSector v r (hornSet v α κ₁ κ₂ r) ∧ hornSet v α κ₁ κ₂ r ⊆ F.col ⁻¹' {c}
+
+/-- The colour `g` lies directly above the horn's upper arc (curvature `κ₂`) near `v`: the **upper flank**. -/
+def IsFlankAbove (v : ℂ) (α κ₂ : ℝ) (g : Fin k) : Prop :=
+  ∃ κ', κ₂ < κ' ∧ ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α κ₂ κ' r ⊆ F.region g
+
+/-- The colour `h` lies directly below the horn's lower arc (curvature `κ₁`) near `v`: the **lower flank**. -/
+def IsFlankBelow (v : ℂ) (α κ₁ : ℝ) (h : Fin k) : Prop :=
+  ∃ κ', κ' < κ₁ ∧ ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α κ' κ₁ r ⊆ F.region h
+
+/-! ## Contacts of a colour on a unit circle, and the allowed cone -/
+
+/-- `w ∈ ω(v)` is **a contact of `c` at `v`**: `c` is carried at `v` and `w` lies in the closure of `c`'s class
+(FS110-N3-CONF's `w ∈ cl(C_c°) ∩ ω(v)`). -/
+def IsContact (v : ℂ) (c : Fin k) (w : ℂ) : Prop :=
+  c ∈ F.coloursAt v ∧ dist w v = 1 ∧ w ∈ closure (F.region c)
+
+/-- The contact `w` is **in-type**: every tile of colour `c` whose closure holds `w` lies in `B(v, 1)`. -/
+def InType (v : ℂ) (c : Fin k) (w : ℂ) : Prop := ∀ T, F.TileOf c T → w ∈ closure T → T ⊆ ball v 1
+
+/-- The contact `w` is **out-type**: every tile of colour `c` whose closure holds `w` misses `B̄(v, 1)`. -/
+def OutType (v : ℂ) (c : Fin k) (w : ℂ) : Prop :=
+  ∀ T, F.TileOf c T → w ∈ closure T → Disjoint T (closedBall v 1)
+
+/-- **The allowed cone `D_c(v)`** (FS110-N3-CONF): the vectors `d` with `d·(w − v) ≥ 0` at every in-type contact `w` and
+`d·(w − v) ≤ 0` at every out-type contact. A direction `β` is allowed when `e β` lies in it; `interior` is taken in `ℂ`. -/
+def allowedCone (v : ℂ) (c : Fin k) : Set ℂ :=
+  {d | ∀ w, F.IsContact v c w → (F.InType v c w → 0 ≤ dot d (w - v)) ∧ (F.OutType v c w → dot d (w - v) ≤ 0)}
+
+/-! ## The local moves' preconditions, terminal maps, stuck vertices -/
+
+/-- **MERGE is available at `v`** (FS110-W-MERGE's hypothesis): some colour with at least two sectors at `v` has an allowed
+cone with non-empty interior. -/
+def MergeAvailable (v : ℂ) : Prop :=
+  ∃ c n, 2 ≤ n ∧ F.HasSectors v c n ∧ (interior (F.allowedCone v c)).Nonempty
+
+/-- **MERGE-RAY is available at `v`** (FS110-N4-SHAVE's N4-RAY): one colour has two horns along one ray. -/
+def RayAvailable (v : ℂ) : Prop :=
+  ∃ c α κ₁ κ₂ κ₃ κ₄, κ₂ < κ₃ ∧ F.IsHorn v α κ₁ κ₂ c ∧ F.IsHorn v α κ₃ κ₄ c
+
+/-- **SHAVE is available at `v`** (FS110-N4-SHAVE): some horn, with flank colours `g` above and `h` below, splits along an arc
+tangent to its axis, of a curvature `σ` between its bounding curvatures, into a lower part clear for `h` and an upper part
+clear for `g` — so its tip may be recoloured by its two flanks. -/
+def ShaveAvailable (v : ℂ) : Prop :=
+  ∃ c g h α κ₁ κ₂ σ, F.IsHorn v α κ₁ κ₂ c ∧ F.IsFlankAbove v α κ₂ g ∧ F.IsFlankBelow v α κ₁ h ∧ κ₁ ≤ σ ∧ σ ≤ κ₂ ∧
+    ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ z ∈ hornSet v α κ₁ κ₂ r,
+      (TanAbove v α σ z → F.IsClear g z) ∧ (¬ TanAbove v α σ z → F.IsClear h z)
+
+/-- **A doubly shadowed horn** (FS110-N4-SHAVE, `σ_h < σ_g`): a band of the horn between two tangent arcs lies, near `v`, in
+the shadow of both flank colours' classes. -/
+def DoublyShadowed (v : ℂ) (α κ₁ κ₂ : ℝ) (g h : Fin k) : Prop :=
+  ∃ s₁ s₂, κ₁ ≤ s₁ ∧ s₁ < s₂ ∧ s₂ ≤ κ₂ ∧
+    ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α s₁ s₂ r ⊆ shadow (F.region g) ∩ shadow (F.region h)
+
+/-- **Terminal on `U`**: no MERGE, MERGE-RAY or SHAVE is available at any point of `U` (a fragment's local form; FS112-BOWTIE
+is terminal on a neighbourhood of its three named points). -/
+def TerminalOn (U : Set ℂ) : Prop := ∀ v ∈ U, ¬ F.MergeAvailable v ∧ ¬ F.RayAvailable v ∧ ¬ F.ShaveAvailable v
+
+/-- **A terminal map** (FS110-N4-PROP): no MERGE, MERGE-RAY or SHAVE is available at any point. -/
+def Terminal : Prop := F.TerminalOn univ
+
+/-- **A stuck vertex** (FS110-N4-STUCK's hypothesis): no move is available at `v`, and some colour has at least two sectors
+there. -/
+def IsStuck (v : ℂ) : Prop :=
+  ¬ F.MergeAvailable v ∧ ¬ F.RayAvailable v ∧ ¬ F.ShaveAvailable v ∧ ∃ c n, 2 ≤ n ∧ F.HasSectors v c n
+
+/-! ## Unit arcs: their contact kinds (FS-112) -/
+
+/-- **An in-contact** (FS-112): an arc of `Γ` on `ω(p)` with constant sides whose inner colour is carried at its centre. -/
+def InContact (p : ℂ) (θ₁ θ₂ : ℝ) : Prop := ∃ c c', F.IsRingArc p θ₁ θ₂ c c' ∧ c ∈ F.coloursAt p
+
+/-- **An out-contact**: the outer colour is carried at the centre. -/
+def OutContact (p : ℂ) (θ₁ θ₂ : ℝ) : Prop := ∃ c c', F.IsRingArc p θ₁ θ₂ c c' ∧ c' ∈ F.coloursAt p
+
+/-- **A both-kind arc**: both side colours are carried at the centre. -/
+def BothKind (p : ℂ) (θ₁ θ₂ : ℝ) : Prop :=
+  ∃ c c', F.IsRingArc p θ₁ θ₂ c c' ∧ c ∈ F.coloursAt p ∧ c' ∈ F.coloursAt p
+
+/-- **An inert arc**: neither side colour is carried at the centre. -/
+def Inert (p : ℂ) (θ₁ θ₂ : ℝ) : Prop :=
+  ∃ c c', F.IsRingArc p θ₁ θ₂ c c' ∧ c ∉ F.coloursAt p ∧ c' ∉ F.coloursAt p
+
+/-- `R₂(ᾱ)`: the arc of the circle of radius `2` about `p` over the angles of `ᾱ = r([θ₁, θ₂])`. -/
+noncomputable def radiusTwoArc (p : ℂ) (θ₁ θ₂ : ℝ) : Set ℂ := (fun θ => p + 2 * e θ) '' Icc θ₁ θ₂
+
+/-- **An (R2) arc** (FS-112's header): its centre carries the outer side colour and not the inner, and the inner colour's
+class has the whole radius-2 arc `R₂(ᾱ)` in its closure. -/
+def IsR2Arc (p : ℂ) (θ₁ θ₂ : ℝ) : Prop :=
+  ∃ c c', F.IsRingArc p θ₁ θ₂ c c' ∧ c' ∈ F.coloursAt p ∧ c ∉ F.coloursAt p ∧
+    radiusTwoArc p θ₁ θ₂ ⊆ closure (F.region c)
+
+/-! ## Condition 5 and the complexity class -/
+
+/-- **Condition 5** (`[SokolovVoronov2025]`: "any boundary intersects with a circle of unit radius at a finite set of
+points"), read on the arcs inside the domain. -/
+def Condition5 : Prop := ∀ a ∈ F.arcs, ∀ p, (a.carrier ∩ F.dom ∩ sphere p 1).Finite
+
+/-- **`𝓜_K`** (FS-107, without periodicity, as for the limit object): circular arcs of radius at least `1/K`, and at most `K`
+arcs meeting the domain inside any unit disc. -/
+def InMK (K : ℕ) : Prop :=
+  (∀ a ∈ F.arcs, ∀ c ρ θ₀ θ₁, a = .circ c ρ θ₀ θ₁ → 1 / (K : ℝ) ≤ ρ) ∧
+    ∀ x, {a | a ∈ F.arcs ∧ (a.carrier ∩ F.dom ∩ ball x 1).Nonempty}.encard ≤ K
+
+end ArcMap
+
+/-! ## Spec examples (each fails if its definition drifts) -/
+
+/-- `frameX` reads the coordinate along `e α`: at `α = 0` it is the real part of `z − v`. -/
+example : frameX 0 0 3 = 3 := by simp [frameX, e]
+
+/-- `frameY` reads the coordinate along `n`: at `α = 0` it is the imaginary part of `z − v`. -/
+example : frameY 0 0 I = 1 := by simp [frameY, e]
+
+/-- `ω(N)` is the arc of upward curvature `1`: the point `v + 2n` (frame `(0, 2)`) lies on it. -/
+example : tanHeight 1 0 2 = 0 := by norm_num [tanHeight]
+
+/-- `ω(S′)` is the arc of upward curvature `−1`: `v − 2n` lies on it, and `v + n` lies above it. -/
+example : tanHeight (-1) 0 (-2) = 0 ∧ 0 < tanHeight (-1) 0 1 := by norm_num [tanHeight]
+
+/-- A point of the horn between the curvatures `−1` and `1` along `e 0` at the origin. -/
+example : (1 / 4 : ℂ) ∈ hornSet 0 0 (-1) 1 1 := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · rw [dist_zero_right]; norm_num
+  · simp [frameX, e]
+  · simp [TanAbove, tanHeight, frameX, frameY, e]; norm_num
+  · simp [TanBelow, tanHeight, frameX, frameY, e]
+
+/-- **Adversary**: the horn is open at its lower arc — `1/4` (on the axis, the arc of curvature `0`) is not in the horn
+between `0` and `1`. -/
+example : (1 / 4 : ℂ) ∉ hornSet 0 0 0 1 1 := by
+  rintro ⟨-, -, h, -⟩
+  simp [TanAbove, tanHeight, frameX, frameY, e] at h
+
+/-- `curvDown` and `curvUp` are inverse at `1/2`: `f(1) = 1/2` and `f̃(1/2) = 1`. -/
+example : curvDown 1 = 1 / 2 ∧ curvUp (1 / 2) = 1 := by norm_num [curvDown, curvUp]
+
+/-- The shadow of a point is its unit circle: `1 ∈ shadow {0}`, **adversary** `1/2 ∉ shadow {0}`. -/
+example : (1 : ℂ) ∈ shadow {0} ∧ (1 / 2 : ℂ) ∉ shadow {0} := by
+  refine ⟨⟨0, rfl, by simp⟩, ?_⟩
+  rintro ⟨y, rfl, hy⟩
+  rw [dist_zero_right] at hy
+  norm_num at hy
+
+namespace ArcMap
+
+/-- The one-colour disc `B(0, 1)` has the single sector `B(0, 1/2)` at `0` at radius `1/2` (an inhabitant of `IsSector`). -/
+theorem const_isSector_ball (j : Fin 2) :
+    (ArcMap.const (ball (0 : ℂ) 1) isOpen_ball j).IsSector 0 (1 / 2) (ball 0 (1 / 2)) := by
+  have hI : (ArcMap.const (ball (0 : ℂ) 1) isOpen_ball j).interiorPts ∩ ball 0 (1 / 2) = ball 0 (1 / 2) := by
+    rw [const_interiorPts]
+    exact inter_eq_right.mpr (ball_subset_ball (by norm_num))
+  refine ⟨0, by rw [hI]; exact mem_ball_self (by norm_num), ?_, ?_⟩
+  · rw [hI]
+    exact ((convex_ball (0 : ℂ) (1 / 2)).isPreconnected.connectedComponentIn (mem_ball_self (by norm_num))).symm
+  · exact subset_closure (mem_ball_self (by norm_num))
+
+/-- **Adversary**: a set whose closure misses `v` is no sector at `v` — `B(1/2, 1/8)` is no sector of the one-colour disc at
+`0`. -/
+theorem const_not_isSector_far (j : Fin 2) :
+    ¬ (ArcMap.const (ball (0 : ℂ) 1) isOpen_ball j).IsSector 0 1 (ball (1 / 2) (1 / 8)) := by
+  rintro ⟨-, -, -, h⟩
+  rw [closure_ball _ (by norm_num), mem_closedBall, dist_comm, dist_zero_right] at h
+  norm_num at h
+
+/-- The one-colour map of the plane satisfies Condition 5 and lies in `𝓜_0` (no arcs). -/
+example (j : Fin 2) :
+    (ArcMap.const univ isOpen_univ j).Condition5 ∧ (ArcMap.const univ isOpen_univ j).InMK 0 := by
+  refine ⟨fun a ha => by simp [const] at ha, fun a ha => by simp [const] at ha, fun x => ?_⟩
+  simp [const]
+
+/-- `IsContact` reads the carried colour and the closure of its class on `ω(v)`: on the one-colour plane, `1` is a contact
+of the one colour at `0` (validity is not part of the definition). -/
+example (j : Fin 2) : (ArcMap.const univ isOpen_univ j).IsContact 0 j 1 := by
+  have hreg : (ArcMap.const univ isOpen_univ j).region j = univ := by
+    ext z; simp [region, const, interiorPts]
+  refine ⟨?_, by simp, ?_⟩
+  · show (0 : ℂ) ∈ closure ((ArcMap.const univ isOpen_univ j).region j)
+    rw [hreg, closure_univ]; trivial
+  · rw [hreg, closure_univ]; trivial
+
+end ArcMap
+
+end HadwigerNelson.Plane

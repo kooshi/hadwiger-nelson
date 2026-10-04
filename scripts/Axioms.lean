@@ -2042,6 +2042,39 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.ringCircleColouring
 #print axioms HadwigerNelson.Plane.ArcMap.exists_swap_of_ring
 
+/-! ## FS-131 wave 4 (job FS131-K4) — the foundation: valid maps at a point (frames, horns, sectors, contacts, shadows, the moves) -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.const_isSector_ball
+#print axioms HadwigerNelson.Plane.ArcMap.const_not_isSector_far
+
+/-! ## FS-131 wave 4 (job FS131-K4) — the skeleton: stuck chains, contacts and the local moves, the unit-arc calculus (sorry until wave 4's implementer lands it) -/
+
+#print axioms HadwigerNelson.Plane.n4_fin
+#print axioms HadwigerNelson.Plane.curvUp_curvDown
+#print axioms HadwigerNelson.Plane.ray_chain
+#print axioms HadwigerNelson.Plane.exists_oneSided_chain
+#print axioms HadwigerNelson.Plane.rayLower_pencil
+#print axioms HadwigerNelson.Plane.shadow_farSide_above
+#print axioms HadwigerNelson.Plane.shadow_farSide_below
+#print axioms HadwigerNelson.Plane.ArcMap.contact_inType_or_outType
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_subset_allowedCone
+#print axioms HadwigerNelson.Plane.ArcMap.clear_of_subset_interior_allowedCone
+#print axioms HadwigerNelson.Plane.lens_dist_lt_one_of_up
+#print axioms HadwigerNelson.Plane.lune_dist_le_of_up
+#print axioms HadwigerNelson.Plane.ArcMap.woodallCone
+#print axioms HadwigerNelson.Plane.ArcMap.woodallCone_strict
+#print axioms HadwigerNelson.Plane.ArcMap.flank_shadows
+#print axioms HadwigerNelson.Plane.ArcMap.shaveAvailable_of_not_doublyShadowed
+#print axioms HadwigerNelson.Plane.ArcMap.exists_shave
+#print axioms HadwigerNelson.Plane.ArcMap.exists_rayMerge
+#print axioms HadwigerNelson.Plane.ArcMap.exists_merge
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_structure
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_chain
+#print axioms HadwigerNelson.Plane.ArcMap.lock
+#print axioms HadwigerNelson.Plane.ArcMap.n2_sign
+#print axioms HadwigerNelson.Plane.ArcMap.l60_le
+#print axioms HadwigerNelson.Plane.ArcMap.noBoth
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
