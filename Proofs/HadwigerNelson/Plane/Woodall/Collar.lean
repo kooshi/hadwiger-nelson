@@ -380,7 +380,144 @@ theorem sphere_meets_of_collarAt {W : Set ℂ} {u : ℂ} {ρ θ σ : ℝ} (hρ :
       nlinarith [norm_nonneg (z t - u)]
     exact ⟨z t, hsph t, hsub (hcol t hta ⟨hgt, htr.2⟩)⟩
 
+/-! ## The engines: Engine A (the contradiction), Engine B (change points in every band), Engine C (the closed-arc form) -/
+
+/-- A collar of thickness at most `1` is preconnected. -/
+theorem isPreconnected_collar (u : ℂ) (s : Rim) (θ₁ θ₂ h : ℝ) : IsPreconnected (collar u s θ₁ θ₂ h) := by
+  cases s <;> exact isPreconnected_annSector u _ _ _ _
+
+/-- Carrying a collar about an angle is an open condition on the angle. -/
+theorem eventually_collarAt {S : Set ℂ} {u : ℂ} {s : Rim} {y : ℝ} (hy : CollarAt S u s y) :
+    ∀ᶠ y' in 𝓝 y, CollarAt S u s y' := by
+  obtain ⟨h, hh, hsub⟩ := hy
+  filter_upwards [Ioo_mem_nhds (show y - h / 2 < y by linarith) (show y < y + h / 2 by linarith)] with y' hy'
+  exact ⟨h / 2, by linarith, (collar_subset_collar u s (by linarith [hy'.1]) (by linarith [hy'.2]) (by linarith)).trans hsub⟩
+
+/-- A set carrying a collar about an angle carries it in its interior. -/
+theorem CollarAt.interior {S : Set ℂ} {u : ℂ} {s : Rim} {y : ℝ} (hy : CollarAt S u s y) : CollarAt (interior S) u s y := by
+  obtain ⟨h, hh, hsub⟩ := hy
+  refine ⟨min h 1, lt_min hh one_pos, interior_maximal ?_ (isOpen_collar u s _ _ (min_le_right _ _))⟩
+  exact (collar_subset_collar u s (by linarith [min_le_left h 1]) (by linarith [min_le_left h 1]) (min_le_left _ _)).trans hsub
+
+/-- **Engine A, the contradiction**: a change point `b` of a two-coloured open set `W`, whose unit circle lands (at an angle
+`θ ± arccos (ρ/2)` of `ω(u)`) on a collar inside `W`, is impossible — lemma (L) keeps the unit circle about `b` out of `W`. -/
+theorem false_of_changePt_landing {A B W : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1)
+    (hBu : ∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) (hW : IsOpen W) (hWAB : W ⊆ closure (A ∪ B)) {u : ℂ} {ρ θ σ : ℝ} (hρ : 0 < ρ)
+    (hρ2 : ρ < 2) (hσ : σ = 1 ∨ σ = -1) (hbW : u + (ρ : ℂ) * e θ ∈ W) (hbA : u + (ρ : ℂ) * e θ ∈ closure A)
+    (hbB : u + (ρ : ℂ) * e θ ∈ closure B) {s : Rim} (hland : CollarAt W u s (θ + σ * Real.arccos (ρ / 2))) : False := by
+  obtain ⟨z, hz1, hz2⟩ := sphere_meets_of_collarAt hρ hρ2 hσ hland
+  exact (lemmaL hA hB hW hWAB hAu hBu hbW hbA hbB).le_bot ⟨hz1, hz2⟩
+
+/-- **Engine B, change points in every band**: a thin collar over an open arc longer than `π/3`, inside `closure (A ∪ B)`, holds a change
+point (both classes in its closure) — a unit pair (`exists_unit_pair_collar`) in a connected open two-coloured set. -/
+theorem exists_changePt_band {A B : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1)
+    (hBu : ∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) {u : ℂ} {s : Rim} {θ₁ θ₂ h : ℝ} (hlen : π / 3 < θ₂ - θ₁) (hh : 0 < h) (hh1 : h ≤ 1)
+    (hC : collar u s θ₁ θ₂ h ⊆ closure (A ∪ B)) :
+    ∃ ρ θ : ℝ, θ ∈ Ioo θ₁ θ₂ ∧ ρ ∈ s.radii h ∧ u + (ρ : ℂ) * e θ ∈ closure A ∧ u + (ρ : ℂ) * e θ ∈ closure B := by
+  obtain ⟨x, hx, y, hy, hxy⟩ := exists_unit_pair_collar u s hlen hh
+  obtain ⟨b, hb, hbA, hbB⟩ := exists_changePt hA hB hAu hBu (isOpen_collar u s θ₁ θ₂ hh1) (isPreconnected_collar u s _ _ _) hC hx hy hxy
+  obtain ⟨ρ, hρ, θ, hθ, rfl⟩ := (mem_collar_iff u s _ _ _ _).mp hb
+  exact ⟨ρ, θ, hθ, hρ, hbA, hbB⟩
+
+/-- **Engine C, the closed-arc form** (strengthening of `woodall_step4`): collars on some side about every angle of a closed arc of length
+`≥ 2π/3`, and one side carrying them over a closed sub-arc longer than `π/3`, cannot be two-coloured. A change point in a thin band of
+the seed's collar has landings `θ ± arccos (ρ/2)` within a small `η` of `π/3` from `θ`, and one of them lands within `η` of the arc. -/
+theorem false_of_collars_closed {A B : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1)
+    (hBu : ∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) {u : ℂ} {θ₁ θ₂ : ℝ} (hlen : 2 * π / 3 ≤ θ₂ - θ₁)
+    (hcov : ∀ θ ∈ Icc θ₁ θ₂, ∃ s, CollarAt (closure (A ∪ B)) u s θ)
+    (hseed : ∃ (s : Rim) (φ₁ φ₂ : ℝ), θ₁ ≤ φ₁ ∧ φ₂ ≤ θ₂ ∧ π / 3 < φ₂ - φ₁ ∧ ∀ φ ∈ Icc φ₁ φ₂, CollarAt (closure (A ∪ B)) u s φ) :
+    False := by
+  obtain ⟨s, φ₁, φ₂, h1, h2, hφ, hseedc⟩ := hseed
+  -- the angles carrying a collar form an open set holding `[θ₁, θ₂]`: a thickening of it
+  have hGopen : IsOpen {y : ℝ | ∃ s, CollarAt (closure (A ∪ B)) u s y} := by
+    rw [isOpen_iff_mem_nhds]
+    rintro y ⟨s', hy⟩
+    exact (eventually_collarAt hy).mono fun y' hy' => ⟨s', hy'⟩
+  obtain ⟨η, hη, hthick⟩ := isCompact_Icc.exists_thickening_subset_open hGopen (fun θ hθ => hcov θ hθ)
+  -- a band of radii near `1` whose landing angle is within `η` of `π/3`
+  have hcont : ContinuousAt (fun ρ : ℝ => Real.arccos (ρ / 2)) 1 := (Real.continuous_arccos.comp (by fun_prop)).continuousAt
+  have hacos : Real.arccos ((1 : ℝ) / 2) = π / 3 := by
+    rw [← Real.cos_pi_div_three, Real.arccos_cos (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos])]
+  obtain ⟨t₀, ht₀, hband⟩ : ∃ t₀ > 0, ∀ ρ : ℝ, |ρ - 1| < t₀ → |Real.arccos (ρ / 2) - π / 3| < η := by
+    have := Metric.continuousAt_iff.mp hcont η hη
+    obtain ⟨δ, hδ, hd⟩ := this
+    exact ⟨δ, hδ, fun ρ hρ => by
+      have := hd (x := ρ) (by rw [Real.dist_eq]; exact hρ)
+      rwa [Real.dist_eq, hacos] at this⟩
+  obtain ⟨h₀, hh₀, hsub₀⟩ := exists_collar_of_collarAt (hseedc)
+  set t := min (min t₀ h₀) (1 / 2) with ht
+  have ht0 : 0 < t := lt_min (lt_min ht₀ hh₀) (by norm_num)
+  have ht1 : t ≤ 1 / 2 := min_le_right _ _
+  have htt₀ : t ≤ t₀ := (min_le_left _ _).trans (min_le_left _ _)
+  have hth₀ : t ≤ h₀ := (min_le_left _ _).trans (min_le_right _ _)
+  obtain ⟨ρ, θ, hθ, hρ, hbA, hbB⟩ := exists_changePt_band hA hB hAu hBu (u := u) (s := s) hφ ht0 (by linarith)
+    ((collar_subset_collar u s le_rfl le_rfl hth₀).trans hsub₀)
+  have hρ1 : |ρ - 1| < t := by
+    cases s
+    · have : ρ ∈ Ioo (1 - t) 1 := hρ
+      rw [abs_lt]; constructor <;> linarith [this.1, this.2]
+    · have : ρ ∈ Ioo 1 (1 + t) := hρ
+      rw [abs_lt]; constructor <;> linarith [this.1, this.2]
+  have hρpos : 0 < ρ := by have := abs_lt.mp hρ1; linarith [this.1]
+  have hρ2 : ρ < 2 := by have := abs_lt.mp hρ1; linarith [this.2]
+  set α := Real.arccos (ρ / 2) with hα
+  have hαη : -η < α - π / 3 ∧ α - π / 3 < η := abs_lt.mp (hband ρ (lt_of_lt_of_le hρ1 htt₀))
+  have hα0 : 0 < α := Real.arccos_pos.mpr (by linarith)
+  -- the interior of the closure is the open two-coloured set
+  have hbmem : u + (ρ : ℂ) * e θ ∈ interior (closure (A ∪ B)) := by
+    have hcol : u + (ρ : ℂ) * e θ ∈ collar u s φ₁ φ₂ t := (mem_collar_iff u s _ _ _ _).mpr ⟨ρ, hρ, θ, hθ, rfl⟩
+    exact interior_maximal ((collar_subset_collar u s le_rfl le_rfl hth₀).trans hsub₀) (isOpen_collar u s _ _ (by linarith)) hcol
+  have hθm : θ₁ < θ ∧ θ < θ₂ := ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+  by_cases hcase : θ ≤ θ₂ - π / 3
+  · have hy : θ + 1 * α ∈ thickening η (Icc θ₁ θ₂) := by
+      rw [Metric.mem_thickening_iff]
+      by_cases hin : θ + 1 * α ≤ θ₂
+      · exact ⟨θ + 1 * α, ⟨by linarith, hin⟩, by simpa using hη⟩
+      · refine ⟨θ₂, ⟨by linarith, le_rfl⟩, ?_⟩
+        rw [Real.dist_eq, abs_lt]; constructor <;> linarith
+    obtain ⟨s', hs'⟩ := hthick hy
+    exact false_of_changePt_landing hA hB hAu hBu isOpen_interior interior_subset hρpos hρ2 (Or.inl rfl) hbmem
+      (by simpa using hbA) (by simpa using hbB) (hs'.interior)
+  · have hy : θ + (-1) * α ∈ thickening η (Icc θ₁ θ₂) := by
+      rw [Metric.mem_thickening_iff]
+      by_cases hin : θ₁ ≤ θ + (-1) * α
+      · exact ⟨θ + (-1) * α, ⟨hin, by linarith⟩, by simpa using hη⟩
+      · refine ⟨θ₁, ⟨le_rfl, by linarith⟩, ?_⟩
+        rw [Real.dist_eq, abs_lt]; constructor <;> linarith
+    obtain ⟨s', hs'⟩ := hthick hy
+    exact false_of_changePt_landing hA hB hAu hBu isOpen_interior interior_subset hρpos hρ2 (Or.inr rfl) hbmem
+      (by simpa using hbA) (by simpa using hbB) (hs'.interior)
+
 /-! ## FS106-WO: Woodall's step-4 lemma, strict, and its sharpness -/
+
+/-- **Engine D, the bad radii are finite**: the radii `ρ ∈ (0, 2)` for which twice the landing angle `arccos (ρ/2)` is a difference of two cut
+angles mod `2π` are finitely many (`2 arccos (ρ/2) ∈ (0, 2π)` meets each class mod `2π` once, and `arccos` is injective). -/
+theorem finite_bad_radii {K : Set ℝ} (hK : K.Finite) :
+    {ρ : ℝ | 0 < ρ ∧ ρ < 2 ∧ ∃ κ ∈ K, ∃ κ' ∈ K, ∃ m : ℤ, 2 * Real.arccos (ρ / 2) = κ - κ' + 2 * π * m}.Finite := by
+  have hV : {v : ℝ | 0 < v ∧ v < 2 * π ∧ ∃ κ ∈ K, ∃ κ' ∈ K, ∃ m : ℤ, v = κ - κ' + 2 * π * m}.Finite := by
+    have hsub : {v : ℝ | 0 < v ∧ v < 2 * π ∧ ∃ κ ∈ K, ∃ κ' ∈ K, ∃ m : ℤ, v = κ - κ' + 2 * π * m} ⊆
+        ⋃ p ∈ K ×ˢ K, {v : ℝ | 0 < v ∧ v < 2 * π ∧ ∃ m : ℤ, v = p.1 - p.2 + 2 * π * m} := by
+      rintro v ⟨h0, h1, κ, hκ, κ', hκ', m, hm⟩
+      exact mem_iUnion₂.mpr ⟨(κ, κ'), ⟨hκ, hκ'⟩, h0, h1, m, hm⟩
+    refine ((hK.prod hK).biUnion fun p _ => ?_).subset hsub
+    refine Set.Subsingleton.finite ?_
+    rintro v ⟨hv0, hv1, m, hm⟩ v' ⟨hv0', hv1', m', hm'⟩
+    have hd : (m : ℝ) - m' < 1 ∧ -1 < (m : ℝ) - m' := by
+      have hp := Real.pi_pos
+      constructor <;> nlinarith
+    have h1 : m - m' < 1 := by exact_mod_cast hd.1
+    have h2 : -1 < m - m' := by exact_mod_cast hd.2
+    have : m = m' := by omega
+    rw [hm, hm', this]
+  refine Set.Finite.of_finite_image (f := fun ρ : ℝ => 2 * Real.arccos (ρ / 2)) (hV.subset ?_) ?_
+  · rintro _ ⟨ρ, ⟨h0, h2, κ, hκ, κ', hκ', m, hm⟩, rfl⟩
+    refine ⟨?_, ?_, κ, hκ, κ', hκ', m, hm⟩
+    · have := Real.arccos_pos.mpr (show ρ / 2 < 1 by linarith); linarith
+    · have := Real.arccos_lt_pi.mpr (show -1 < ρ / 2 by linarith); linarith
+  · intro ρ hρ ρ' hρ' h
+    have h2 : Real.arccos (ρ / 2) = Real.arccos (ρ' / 2) := by simpa using h
+    have := Real.arccos_injOn ⟨by linarith [hρ.1], by linarith [hρ.2.1]⟩ ⟨by linarith [hρ'.1], by linarith [hρ'.2.1]⟩ h2
+    linarith
 
 /-- **FS106-WO, the step-4 lemma** (`[Woodall1973]` p. 198, as repaired: length **strictly** above `2π/3`): if, on one side `s` of `ω(u)`,
 every angle of an open arc of length `> 2π/3` carries a collar inside `closure (A ∪ B)` — `A`, `B` open with no unit pair in either — then
@@ -389,7 +526,12 @@ circle.) -/
 theorem woodall_step4 {A B : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1)
     (hBu : ∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) {u : ℂ} (s : Rim) {θ₁ θ₂ : ℝ} (hlen : 2 * π / 3 < θ₂ - θ₁)
     (hW : ∀ θ ∈ Ioo θ₁ θ₂, CollarAt (closure (A ∪ B)) u s θ) : False := by
-  sorry
+  set ε := (θ₂ - θ₁ - 2 * π / 3) / 2 with hε
+  have hε0 : 0 < ε := by rw [hε]; linarith
+  have hsub : Icc (θ₁ + ε) (θ₂ - ε) ⊆ Ioo θ₁ θ₂ := fun x hx => ⟨by linarith [hx.1], by linarith [hx.2]⟩
+  refine false_of_collars_closed hA hB hAu hBu (θ₁ := θ₁ + ε) (θ₂ := θ₂ - ε) (by rw [hε]; linarith)
+    (fun θ hθ => ⟨s, hW θ (hsub hθ)⟩) ⟨s, θ₁ + ε, θ₂ - ε, le_rfl, le_rfl, by rw [hε]; linarith [Real.pi_pos],
+      fun φ hφ => hW φ (hsub hφ)⟩
 
 /-- **The step-4 lemma is false at length `2π/3`** — Townsend's counterexample (`[Townsend1979ms]` p. 2; `[Townsend1981]` p. 114): the inner
 collar of `ω(0)` over `(0, 2π/3)`, cut by the arc of `ω(1)` through `e(π/3)` into `A` (inside `B(1, 1)`) and `B` (outside `B̄(1, 1)`), has no unit
@@ -411,21 +553,211 @@ theorem townsend_lemma {A B : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hAu : �
     (hBu : ∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) {u : ℂ} {K : Set ℝ} (hK : K.Finite)
     (hcollar : ∀ θ : ℝ, (∀ κ ∈ K, ∀ m : ℤ, θ ≠ κ + 2 * π * m) → ∃ s, CollarAt (closure (A ∪ B)) u s θ)
     (hseed : ∃ (s : Rim) (θ₁ θ₂ : ℝ), π / 3 < θ₂ - θ₁ ∧ ∀ θ ∈ Icc θ₁ θ₂, CollarAt (closure (A ∪ B)) u s θ) : False := by
-  sorry
+  obtain ⟨s, θ₁, θ₂, hlen, hseedc⟩ := hseed
+  obtain ⟨h₀, hh₀, hsub₀⟩ := exists_collar_of_collarAt hseedc
+  have hBfin := finite_bad_radii hK
+  obtain ⟨t₀, ht₀, hbad⟩ : ∃ t₀ > 0, ∀ ρ ∈ {ρ : ℝ | 0 < ρ ∧ ρ < 2 ∧ ∃ κ ∈ K, ∃ κ' ∈ K, ∃ m : ℤ,
+      2 * Real.arccos (ρ / 2) = κ - κ' + 2 * π * m}, ρ ≠ 1 → t₀ ≤ |ρ - 1| := by
+    obtain ⟨t₀, ht₀, hle⟩ := exists_pos_le_finset hBfin.toFinset (fun ρ : ℝ => if ρ = 1 then 1 else |ρ - 1|)
+      (fun ρ => by by_cases h : ρ = 1 <;> simp [h, abs_pos, sub_ne_zero])
+    exact ⟨t₀, ht₀, fun ρ hρ hne => by simpa [hne] using hle ρ (hBfin.mem_toFinset.mpr hρ)⟩
+  set t := min (min t₀ h₀) (1 / 2) with ht
+  have ht0 : 0 < t := lt_min (lt_min ht₀ hh₀) (by norm_num)
+  have htt₀ : t ≤ t₀ := (min_le_left _ _).trans (min_le_left _ _)
+  have hth₀ : t ≤ h₀ := (min_le_left _ _).trans (min_le_right _ _)
+  have ht1 : t ≤ 1 / 2 := min_le_right _ _
+  obtain ⟨ρ, θ, hθ, hρ, hbA, hbB⟩ := exists_changePt_band hA hB hAu hBu (u := u) (s := s) hlen ht0 (by linarith)
+    ((collar_subset_collar u s le_rfl le_rfl hth₀).trans hsub₀)
+  have hρ1 : |ρ - 1| < t := by
+    cases s
+    · have : ρ ∈ Ioo (1 - t) 1 := hρ
+      rw [abs_lt]; constructor <;> linarith [this.1, this.2]
+    · have : ρ ∈ Ioo 1 (1 + t) := hρ
+      rw [abs_lt]; constructor <;> linarith [this.1, this.2]
+  have hρne : ρ ≠ 1 := by
+    intro h
+    cases s
+    · have : ρ ∈ Ioo (1 - t) 1 := hρ
+      linarith [this.2]
+    · have : ρ ∈ Ioo 1 (1 + t) := hρ
+      linarith [this.1]
+  have hρpos : 0 < ρ := by have := abs_lt.mp hρ1; linarith [this.1]
+  have hρ2 : ρ < 2 := by have := abs_lt.mp hρ1; linarith [this.2]
+  have hρgood : ¬ ∃ κ ∈ K, ∃ κ' ∈ K, ∃ m : ℤ, 2 * Real.arccos (ρ / 2) = κ - κ' + 2 * π * m := by
+    intro hbadρ
+    have := hbad ρ ⟨hρpos, hρ2, hbadρ⟩ hρne
+    linarith
+  set α := Real.arccos (ρ / 2) with hα
+  have hbmem : u + (ρ : ℂ) * e θ ∈ interior (closure (A ∪ B)) := by
+    have hcol : u + (ρ : ℂ) * e θ ∈ collar u s θ₁ θ₂ t := (mem_collar_iff u s _ _ _ _).mpr ⟨ρ, hρ, θ, hθ, rfl⟩
+    exact interior_maximal ((collar_subset_collar u s le_rfl le_rfl hth₀).trans hsub₀) (isOpen_collar u s _ _ (by linarith)) hcol
+  -- one of the two landings is not a cut angle
+  have hland : ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧ ∀ κ ∈ K, ∀ m : ℤ, θ + σ * α ≠ κ + 2 * π * m := by
+    by_contra hcon
+    push Not at hcon
+    obtain ⟨κ, hκ, m, hm⟩ := hcon 1 (Or.inl rfl)
+    obtain ⟨κ', hκ', m', hm'⟩ := hcon (-1) (Or.inr rfl)
+    exact hρgood ⟨κ, hκ, κ', hκ', m - m', by push_cast; linarith⟩
+  obtain ⟨σ, hσ, hK'⟩ := hland
+  obtain ⟨s', hs'⟩ := hcollar (θ + σ * α) hK'
+  exact false_of_changePt_landing hA hB hAu hBu isOpen_interior interior_subset hρpos hρ2 hσ hbmem
+    (by simpa using hbA) (by simpa using hbB) hs'.interior
 
 /-! ## The excluded set: cones decide the collars -/
+
+/-- `dot` in coordinates. -/
+theorem dot_eq (a b : ℂ) : dot a b = a.re * b.re + a.im * b.im := by
+  simp [dot, Complex.mul_re]
+
+theorem abs_dot_le (a b : ℂ) : |dot a b| ≤ ‖a‖ * ‖b‖ := by
+  have : dot a b = (a * starRingEnd ℂ b).re := rfl
+  rw [this, ← norm_conj b, ← norm_mul]
+  exact Complex.abs_re_le_norm _
+
+theorem dot_add_left (a b c : ℂ) : dot (a + b) c = dot a c + dot b c := by
+  simp [dot_eq]; ring
+
+theorem dot_sub_left (a b c : ℂ) : dot (a - b) c = dot a c - dot b c := by
+  simp [dot_eq]; ring
+
+theorem dot_sub_right (a b c : ℂ) : dot a (b - c) = dot a b - dot a c := by
+  simp [dot_eq]; ring
+
+theorem dot_real_mul_left (r : ℝ) (a b : ℂ) : dot ((r : ℂ) * a) b = r * dot a b := by
+  simp [dot_eq]; ring
+
+theorem dot_e_e (a b : ℝ) : dot (e a) (e b) = Real.cos (a - b) := by
+  rw [dot_eq, e_eq, e_eq, Real.cos_sub]; simp [-Complex.ofReal_cos, -Complex.ofReal_sin]
+
+theorem norm_sub_real_mul_e_sq (q : ℂ) (ρ ψ : ℝ) : ‖q - (ρ : ℂ) * e ψ‖ ^ 2 = ‖q‖ ^ 2 + ρ ^ 2 - 2 * ρ * dot q (e ψ) := by
+  rw [dot_eq, e_eq]
+  simp only [Complex.sq_norm, Complex.normSq_apply, Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im,
+    Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+  simp
+  nlinarith [Real.sin_sq_add_cos_sq ψ]
+
+/-- A preconnected set with a point inside and a point outside the unit circle about `z` meets it. -/
+theorem mem_shadow_of_preconnected {R : Set ℂ} (hR : IsPreconnected R) {z a b : ℂ} (ha : a ∈ R) (hb : b ∈ R)
+    (hza : dist z a < 1) (hzb : 1 < dist z b) : z ∈ shadow R := by
+  have himg : IsPreconnected ((fun y => dist z y) '' R) := hR.image _ (continuous_const.dist continuous_id).continuousOn
+  obtain ⟨y, hy, hy1⟩ := himg.Icc_subset ⟨a, ha, rfl⟩ ⟨b, hb, rfl⟩ ⟨hza.le, hzb.le⟩
+  exact ⟨y, hy, hy1⟩
+
+
+/-- **The cone bound**: if `q` is a vector, `r₀ > 0` and `q / r₀` is within `ε` of `e β`, then `dot q (e ψ') / r₀` is within `ε + |ψ' − ψ|` of
+`cos (β − ψ)`. -/
+theorem dot_cone_bound {q : ℂ} {r₀ : ℝ} (hr₀ : 0 < r₀) {β ψ ψ' ε : ℝ}
+    (hd : ‖q / (r₀ : ℂ) - e β‖ < ε) :
+    |dot q (e ψ') / r₀ - Real.cos (β - ψ)| ≤ ε + |ψ' - ψ| := by
+  set d := q / (r₀ : ℂ) with hdd
+  have hqd : q = (r₀ : ℂ) * d := by rw [hdd, mul_div_cancel₀]; exact_mod_cast hr₀.ne'
+  have h1 : dot q (e ψ') / r₀ = dot d (e ψ') := by
+    rw [hqd, dot_real_mul_left]; field_simp
+  have h2 : dot d (e ψ') = dot (d - e β) (e ψ') + (Real.cos (β - ψ) + dot (e β) (e ψ' - e ψ)) := by
+    rw [dot_sub_left, dot_sub_right, dot_e_e, dot_e_e]; ring
+  have h3 : |dot (d - e β) (e ψ')| ≤ ε := by
+    refine (abs_dot_le _ _).trans ?_
+    rw [norm_e, mul_one]; exact hd.le
+  have h4 : |dot (e β) (e ψ' - e ψ)| ≤ |ψ' - ψ| := by
+    refine (abs_dot_le _ _).trans ?_
+    rw [norm_e, one_mul]; exact norm_e_sub_e_le _ _
+  rw [h1, h2]
+  calc |dot (d - e β) (e ψ') + (Real.cos (β - ψ) + dot (e β) (e ψ' - e ψ)) - Real.cos (β - ψ)|
+      = |dot (d - e β) (e ψ') + dot (e β) (e ψ' - e ψ)| := by ring_nf
+    _ ≤ |dot (d - e β) (e ψ')| + |dot (e β) (e ψ' - e ψ)| := abs_add_le _ _
+    _ ≤ ε + |ψ' - ψ| := add_le_add h3 h4
+
+
 
 /-- **Outer collars from a cone direction**: a preconnected `R` with `u ∈ closure R` approaching `u` along `β` meets the unit circle about
 every point of some outer collar about `ψ` whenever `cos (β − ψ) > 0` (such a point `z` has `u` outside `B̄(z, 1)` and points of `R` inside). -/
 theorem collarAt_shadow_outer {R : Set ℂ} (hRc : IsPreconnected R) {u : ℂ} {β ψ : ℝ} (hβ : β ∈ coneAt R u)
     (hcos : 0 < Real.cos (β - ψ)) : CollarAt (shadow R) u .outer ψ := by
-  sorry
+  set c₀ := Real.cos (β - ψ) with hc₀
+  obtain ⟨w, hwR, hwu, hwd, hwdir⟩ := hβ (c₀ / 4) (by linarith)
+  set q := w - u with hq
+  set r₀ := ‖q‖ with hr₀def
+  have hr₀ : 0 < r₀ := norm_pos_iff.mpr (sub_ne_zero.mpr hwu)
+  have hr₀lt : r₀ < c₀ / 4 := by rw [dist_eq_norm] at hwd; exact hwd
+  have hmain : 0 < r₀ * c₀ := mul_pos hr₀ hcos
+  set h := min (min (c₀ / 4) 1) (r₀ * c₀ / 4) with hh
+  have hh0 : 0 < h := lt_min (lt_min (by linarith) one_pos) (by linarith)
+  have hh1 : h ≤ c₀ / 4 := (min_le_left _ _).trans (min_le_left _ _)
+  have hh2 : h ≤ 1 := (min_le_left _ _).trans (min_le_right _ _)
+  have hh3 : h ≤ r₀ * c₀ / 4 := min_le_right _ _
+  refine ⟨h, hh0, fun z hz => ?_⟩
+  obtain ⟨ρ', hρ', ψ', hψ', rfl⟩ := (mem_collar_iff _ _ _ _ _ _).mp hz
+  have hρ'' : 1 < ρ' ∧ ρ' < 1 + h := hρ'
+  have hψ'h : |ψ' - ψ| < h := by rw [abs_lt]; constructor <;> linarith [hψ'.1, hψ'.2]
+  have hdot := dot_cone_bound (ψ' := ψ') hr₀ (β := β) (ψ := ψ) (ε := c₀ / 4) hwdir
+  have hD : r₀ * c₀ / 2 ≤ dot q (e ψ') := by
+    have h1 := (abs_le.mp hdot).1
+    have : c₀ / 2 ≤ dot q (e ψ') / r₀ := by linarith
+    rw [le_div_iff₀ hr₀] at this; linarith
+  have ha : dist (u + (ρ' : ℂ) * e ψ') w < 1 := by
+    have hsq : ‖q - (ρ' : ℂ) * e ψ'‖ ^ 2 < 1 := by
+      rw [norm_sub_real_mul_e_sq]
+      have hr2 : r₀ ^ 2 < r₀ * (c₀ / 4) := by nlinarith
+      have hρ2 : ρ' ^ 2 < 1 + 3 * h := by nlinarith
+      have hρD : ρ' * (r₀ * c₀) ≥ r₀ * c₀ := by nlinarith
+      nlinarith
+    have : dist (u + (ρ' : ℂ) * e ψ') w = ‖q - (ρ' : ℂ) * e ψ'‖ := by
+      rw [dist_eq_norm, ← norm_neg]; congr 1; simp only [hq]; ring
+    rw [this]
+    nlinarith [norm_nonneg (q - (ρ' : ℂ) * e ψ')]
+  have hzu : dist (u + (ρ' : ℂ) * e ψ') u = ρ' := by
+    rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos (by linarith)]
+  obtain ⟨b, hbR, -, hbd, -⟩ := hβ (ρ' - 1) (by linarith)
+  refine mem_shadow_of_preconnected hRc hwR hbR ha ?_
+  have := dist_triangle (u + (ρ' : ℂ) * e ψ') b u
+  rw [hzu] at this
+  linarith
 
 /-- **Inner collars from a cone direction**: the same for inner collars when `cos (β − ψ) < 0` (such a point `z` has `u` inside `B(z, 1)` and
 points of `R` outside). -/
 theorem collarAt_shadow_inner {R : Set ℂ} (hRc : IsPreconnected R) {u : ℂ} {β ψ : ℝ} (hβ : β ∈ coneAt R u)
     (hcos : Real.cos (β - ψ) < 0) : CollarAt (shadow R) u .inner ψ := by
-  sorry
+  set m := -Real.cos (β - ψ) with hm
+  have hm0 : 0 < m := by rw [hm]; linarith
+  obtain ⟨w, hwR, hwu, hwd, hwdir⟩ := hβ (m / 4) (by linarith)
+  set q := w - u with hq
+  set r₀ := ‖q‖ with hr₀def
+  have hr₀ : 0 < r₀ := norm_pos_iff.mpr (sub_ne_zero.mpr hwu)
+  have hr₀lt : r₀ < m / 4 := by rw [dist_eq_norm] at hwd; exact hwd
+  have hmain : 0 < r₀ * m := mul_pos hr₀ hm0
+  set h := min (min (m / 4) (1 / 2)) (r₀ * m / 8) with hh
+  have hh0 : 0 < h := lt_min (lt_min (by linarith) (by norm_num)) (by linarith)
+  have hh1 : h ≤ m / 4 := (min_le_left _ _).trans (min_le_left _ _)
+  have hh2 : h ≤ 1 / 2 := (min_le_left _ _).trans (min_le_right _ _)
+  have hh3 : h ≤ r₀ * m / 8 := min_le_right _ _
+  refine ⟨h, hh0, fun z hz => ?_⟩
+  obtain ⟨ρ', hρ', ψ', hψ', rfl⟩ := (mem_collar_iff _ _ _ _ _ _).mp hz
+  have hρ'' : 1 - h < ρ' ∧ ρ' < 1 := hρ'
+  have hψ'h : |ψ' - ψ| < h := by rw [abs_lt]; constructor <;> linarith [hψ'.1, hψ'.2]
+  have hdot := dot_cone_bound (ψ' := ψ') hr₀ (β := β) (ψ := ψ) (ε := m / 4) hwdir
+  have hD : dot q (e ψ') ≤ -(r₀ * m / 2) := by
+    have h1 := (abs_le.mp hdot).2
+    have : dot q (e ψ') / r₀ ≤ -(m / 2) := by linarith
+    rw [div_le_iff₀ hr₀] at this; linarith
+  have hw : 1 < dist (u + (ρ' : ℂ) * e ψ') w := by
+    have hsq : 1 < ‖q - (ρ' : ℂ) * e ψ'‖ ^ 2 := by
+      rw [norm_sub_real_mul_e_sq]
+      have hρ2 : 1 - 2 * h < ρ' ^ 2 := by nlinarith
+      have hρD : ρ' * (r₀ * m) ≥ r₀ * m / 2 := by nlinarith
+      nlinarith [sq_nonneg r₀]
+    have : dist (u + (ρ' : ℂ) * e ψ') w = ‖q - (ρ' : ℂ) * e ψ'‖ := by
+      rw [dist_eq_norm, ← norm_neg]; congr 1; simp only [hq]; ring
+    rw [this]
+    nlinarith [norm_nonneg (q - (ρ' : ℂ) * e ψ')]
+  have hzu : dist (u + (ρ' : ℂ) * e ψ') u = ρ' := by
+    rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos (by linarith)]
+  obtain ⟨a, haR, -, had, -⟩ := hβ (1 - ρ') (by linarith)
+  refine mem_shadow_of_preconnected hRc haR hwR ?_ hw
+  have := dist_triangle (u + (ρ' : ℂ) * e ψ') u a
+  rw [hzu, dist_comm u a] at this
+  linarith
 
 namespace ArcMap
 
@@ -435,13 +767,24 @@ variable {k : ℕ} {F : ArcMap k}
 does not carry a colour of `T`. -/
 theorem col_not_mem_of_mem_shadow (hF : F.Valid) {T : Finset (Fin k)} {z : ℂ} (hz : z ∈ F.interiorPts)
     (hzT : ∀ c ∈ T, z ∈ shadow (F.region c)) : F.col z ∉ T := by
-  sorry
+  intro hc
+  obtain ⟨y, hy, hzy⟩ := hzT _ hc
+  exact hF z hz y hy.1 hzy (hy.2.symm)
 
 /-- **An open subset of the excluded set is coloured by the other colours**: in a valid map of the plane, an open set whose points' unit
 circles meet every class of `T` lies in the closure of the union of the classes of the colours outside `T`. -/
 theorem subset_closure_of_subset_shadow (hF : F.Valid) (hP : F.IsPlaneMap) {T : Finset (Fin k)} {W : Set ℂ} (hW : IsOpen W)
     (hWT : ∀ c ∈ T, W ⊆ shadow (F.region c)) : W ⊆ closure (⋃ c ∈ (Tᶜ : Finset (Fin k)), F.region c) := by
-  sorry
+  intro x hx
+  rw [Metric.mem_closure_iff]
+  intro ε hε
+  obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp hW x hx
+  have hxdom : x ∈ closure F.interiorPts := F.dense_interiorPts (by rw [hP]; trivial)
+  obtain ⟨z, hz, hxz⟩ := Metric.mem_closure_iff.mp hxdom (min ε r) (lt_min hε hr)
+  have hzW : z ∈ W := hball (by rw [Metric.mem_ball]; exact lt_of_lt_of_le (by rw [dist_comm]; exact hxz) (min_le_right _ _))
+  have hcol : F.col z ∉ T := col_not_mem_of_mem_shadow hF hz fun c hc => hWT c hc hzW
+  refine ⟨z, mem_iUnion₂.mpr ⟨F.col z, by simpa using hcol, hz, rfl⟩, ?_⟩
+  exact lt_of_lt_of_le hxz (min_le_left _ _)
 
 end ArcMap
 
