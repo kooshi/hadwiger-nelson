@@ -1858,6 +1858,37 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.halfDisc_component_upper
 #print axioms HadwigerNelson.Plane.halfDisc_component_lower
 
+/-! ## FS-131 wave 1 — the plane's sets with null unit pairs, chords, Falconer fans (skeleton until its implementer lands it) -/
+
+#print axioms HadwigerNelson.Plane.dist_ne_one_of_mem_densitySet
+#print axioms HadwigerNelson.Plane.AeColouring.dist_ne_one
+#print axioms HadwigerNelson.Plane.upperDensityAt_pos_of_mem_densitySet
+#print axioms HadwigerNelson.Plane.hullset
+#print axioms HadwigerNelson.Plane.hullset_of_isCompact
+#print axioms HadwigerNelson.Plane.hull2
+#print axioms HadwigerNelson.Plane.dist_ne_one_of_mem_interior_densitySet
+#print axioms HadwigerNelson.Plane.subset_densitySet_of_isOpen
+#print axioms HadwigerNelson.Plane.dist_ne_one_of_mem_of_mem_closure
+#print axioms HadwigerNelson.Plane.dist_lt_one_of_isPreconnected
+#print axioms HadwigerNelson.Plane.dist_lt_one_of_forall_dist_ne_one
+#print axioms HadwigerNelson.Plane.dist_lt_one_of_chain
+#print axioms HadwigerNelson.Plane.dist_lt_one_of_closure_inter_nonempty
+#print axioms HadwigerNelson.Plane.phi_univ
+#print axioms HadwigerNelson.Plane.unitPairsNull_iff_ae_phi_eq_zero
+#print axioms HadwigerNelson.Plane.isMUA_iff_ae_phi_pos
+#print axioms HadwigerNelson.Plane.isMUA_iff_ae_eq
+#print axioms HadwigerNelson.Plane.ringPt_sub_ringPt
+#print axioms HadwigerNelson.Plane.dist_ringPt_ringPt
+#print axioms HadwigerNelson.Plane.dist_ringPt_ringPt_cmp_one
+#print axioms HadwigerNelson.Plane.twoCirc_identity
+#print axioms HadwigerNelson.Plane.twoCirc_cmp_one
+#print axioms HadwigerNelson.Plane.exists_sign_of_equilateral
+#print axioms HadwigerNelson.Plane.xcorner
+#print axioms HadwigerNelson.Arith.noAffine
+#print axioms HadwigerNelson.Arith.rhombus_falconerFan
+#print axioms HadwigerNelson.Arith.falconerFan_hom
+#print axioms HadwigerNelson.Arith.falconerFan_chromaticNumber
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

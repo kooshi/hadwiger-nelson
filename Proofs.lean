@@ -156,6 +156,13 @@ import Proofs.HadwigerNelson.Plane.Basic
 import Proofs.HadwigerNelson.Plane.UnitPairs
 import Proofs.HadwigerNelson.Plane.AeColouring
 import Proofs.HadwigerNelson.Plane.ArcMap
+import Proofs.HadwigerNelson.Plane.DensityPoints
+import Proofs.HadwigerNelson.Plane.Closure
+import Proofs.HadwigerNelson.Plane.Diameter
+import Proofs.HadwigerNelson.Plane.UnitAvoiding
+import Proofs.HadwigerNelson.Plane.Chord
+import Proofs.HadwigerNelson.Arith.NoAffine
+import Proofs.HadwigerNelson.Arith.FalconerFan
 
 /-!
 # Proofs
