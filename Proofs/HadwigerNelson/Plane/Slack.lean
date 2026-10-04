@@ -94,13 +94,44 @@ theorem muZero_eq_one_iff_tendsto (k : ℕ) : muZero k = 1 ↔ Tendsto (mu k) (�
   · intro h; rw [← h]; exact tendsto_mu k
   · intro h; exact tendsto_nhds_unique (tendsto_mu k) h |>.symm ▸ rfl
 
+/-- A band-free class (no pair at a distance in `[1 − ε, 1 + ε]`, `ε ≥ 0`) has null unit pairs. -/
+theorem unitPairsNull_of_bandFree {A : Set ℂ} {ε : ℝ} (hε : 0 ≤ ε) (h : BandFree A ε) : UnitPairsNull A := by
+  rw [UnitPairsNull]
+  have : unitPairSet A = ∅ := by
+    ext q
+    simp only [unitPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+    intro hx hy
+    have hd : dist q.1 (q.1 + e q.2) = 1 := by rw [dist_eq_norm, sub_add_cancel_left, norm_neg, norm_e]
+    rcases h _ hx _ hy with h1 | h1 <;> linarith
+  rw [this, measure_empty]
+
 /-- **FS106-EQ**, (a) ⟺ (e): `χ_m⁰(ℝ²) ≤ k` iff for every `δ > 0` there are `ε > 0` and a periodic partial `k`-colouring by
 half-open grid squares with no monochromatic pair at any distance in `[1 − ε, 1 + ε]`, covering upper density at least
 `1 − δ`. -/
 theorem chiM0_le_iff_periodic (k : ℕ) :
     chiM0 ≤ k ↔ ∀ δ > 0, ∃ ε > 0, ∃ C : Fin k → Set ℂ, IsPartialColouring C ∧ IsTiled C ∧ IsPeriodic C ∧
       (∀ j, BandFree (C j) ε) ∧ 1 - ENNReal.ofReal δ ≤ upperDensity (⋃ j, C j) := by
-  sorry
+  constructor
+  · intro h δ hδ
+    have hz : muZero k = 1 := (chiM0_le_iff_muZero_eq_one k).1 h
+    have hlim := tendsto_muPer k
+    rw [hz] at hlim
+    have hlt : 1 - ENNReal.ofReal δ < 1 := ENNReal.sub_lt_self (by simp) one_ne_zero (by simpa using hδ)
+    have hev := hlim.eventually (lt_mem_nhds hlt)
+    obtain ⟨ε, hε, hεpos⟩ := (hev.and self_mem_nhdsWithin).exists
+    obtain ⟨C, hC⟩ := lt_iSup_iff.1 hε
+    obtain ⟨hCp, hdens⟩ := lt_iSup_iff.1 hC
+    exact ⟨ε, hεpos, C, hCp.1, hCp.2.1, hCp.2.2.1, hCp.2.2.2, hdens.le⟩
+  · intro h
+    refine (chiM0_le_iff_muZero_eq_one k).2 (le_antisymm (muZero_le_one k) ?_)
+    refine ENNReal.le_of_forall_pos_le_add fun r hr _ => ?_
+    obtain ⟨ε, hε, C, hCp, hCt, hCper, hCb, hd⟩ := h (r : ℝ) (by exact_mod_cast hr)
+    have hle : upperDensity (⋃ j, C j) ≤ muZero k :=
+      le_iSup₂ (f := fun C (_ : IsPartialColouring C ∧ ∀ j, UnitPairsNull (C j)) => upperDensity (⋃ j, C j)) C
+        ⟨hCp, fun j => unitPairsNull_of_bandFree hε.le (hCb j)⟩
+    have h3 : 1 - ENNReal.ofReal (r : ℝ) ≤ muZero k := hd.trans hle
+    rw [tsub_le_iff_right, ENNReal.ofReal_coe_nnreal] at h3
+    exact h3
 
 /-- **FS106-EQ**, at `k = 6`: `χ_m⁰(ℝ²) ≥ 7 ⟺ lim_{ε→0} µ₆(ε) < 1` (the limit is the supremum over `ε > 0`, `µ₆` being
 antitone). -/
@@ -187,13 +218,75 @@ theorem face {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {x :
     ∀ y ∈ essSupport A, dist x y ≠ 1 := by
   sorry
 
+/-- A set filling a half-box behind `x` almost everywhere has positive upper density at `x`. -/
+theorem upperDensityAt_pos_of_halfBox {A : Set ℂ} {x : ℂ} {θ ε : ℝ} (hε : 0 < ε)
+    (hhalf : volume (halfBox x θ ε \ A) = 0) : 0 < upperDensityAt A x := by
+  have hev : ∀ᶠ r in 𝓝[>] (0 : ℝ), (1 / 16 : ENNReal) ≤ densityRatio A x r := by
+    have : Ioo (0 : ℝ) ε ∈ 𝓝[>] (0 : ℝ) := Ioo_mem_nhdsGT hε
+    filter_upwards [this] with r hr
+    have hr0 : 0 < r := hr.1
+    have hεr : r < ε := hr.2
+    set c : ℂ := x - ((r / 2 : ℝ) : ℂ) * e θ with hc
+    have hne : e θ ≠ 0 := by
+      intro h; have := norm_e θ; rw [h, norm_zero] at this; exact zero_ne_one this
+    have hsub : ball c (r / 4) ⊆ halfBox x θ ε := by
+      intro w hw
+      rw [mem_ball, dist_eq_norm] at hw
+      set q : ℂ := (w - x) / e θ with hq
+      have hqn : ‖q + ((r / 2 : ℝ) : ℂ)‖ < r / 4 := by
+        have : q + ((r / 2 : ℝ) : ℂ) = (w - c) / e θ := by
+          rw [hc, hq]; field_simp; ring
+        rw [this, norm_div, norm_e, div_one]; exact hw
+      have h1 : |q.re + r / 2| < r / 4 := by
+        have := Complex.abs_re_le_norm (q + ((r / 2 : ℝ) : ℂ)); rw [Complex.add_re, Complex.ofReal_re] at this; linarith
+      have h2 : |q.im| < r / 4 := by
+        have := Complex.abs_im_le_norm (q + ((r / 2 : ℝ) : ℂ)); rw [Complex.add_im, Complex.ofReal_im, add_zero] at this; linarith
+      rw [abs_lt] at h1 h2
+      refine ⟨-q.re, q.im, by linarith [h1.1, h1.2], by linarith [h1.1, h1.2], ?_, ?_⟩
+      · rw [abs_lt]; constructor <;> linarith [h2.1, h2.2]
+      · have : (-((-q.re : ℝ) : ℂ) + (q.im : ℂ) * I) = q := by
+          apply Complex.ext <;> simp
+        rw [this, hq]; field_simp; ring
+    have hcl : ball c (r / 4) ⊆ closedBall x r := by
+      intro w hw
+      rw [mem_ball] at hw
+      rw [mem_closedBall]
+      have h3 : dist c x = r / 2 := by
+        rw [hc, dist_eq_norm, sub_sub_cancel_left, norm_neg, norm_mul, norm_e, mul_one, Complex.norm_real,
+          Real.norm_eq_abs, abs_of_pos (by linarith)]
+      linarith [dist_triangle w c x]
+    have hmeas : volume (ball c (r / 4)) ≤ volume (A ∩ closedBall x r) := by
+      have h4 : volume (ball c (r / 4) \ A) = 0 :=
+        measure_mono_null (t := halfBox x θ ε \ A) (fun w hw => ⟨hsub hw.1, hw.2⟩) hhalf
+      calc volume (ball c (r / 4)) ≤ volume (ball c (r / 4) ∩ A) + volume (ball c (r / 4) \ A) :=
+            measure_le_inter_add_sdiff _ _ _
+        _ = volume (ball c (r / 4) ∩ A) := by rw [h4, add_zero]
+        _ ≤ volume (A ∩ closedBall x r) := measure_mono fun w hw => ⟨hw.2, hcl hw.1⟩
+    unfold densityRatio
+    refine (ENNReal.le_div_iff_mul_le (Or.inl (measure_closedBall_pos volume x hr0).ne') (Or.inl measure_closedBall_lt_top.ne)).2 ?_
+    refine le_trans ?_ hmeas
+    rw [Complex.volume_ball, Complex.volume_closedBall]
+    have h4 : ENNReal.ofReal (r / 4) = ENNReal.ofReal r / 4 := by
+      rw [ENNReal.ofReal_div_of_pos (by norm_num)]; simp
+    rw [h4, div_eq_mul_inv (ENNReal.ofReal r), mul_pow, ← ENNReal.inv_pow]
+    have h16 : (4 : ENNReal) ^ 2 = 16 := by norm_num
+    rw [h16, one_div]
+    refine le_of_eq ?_
+    ring
+  exact lt_of_lt_of_le (by norm_num) (le_limsup_of_frequently_le hev.frequently)
+
 /-- **FS121-D4-FACE**, last clause: so in a saturated colouring the colour has density `1` at `x` (`g < 1`, ruling item 37). -/
 theorem face_densitySet {C : Fin k → Set ℂ} (hadm : IsAdmissible C) (hsat : Saturated C) {j : Fin k} {x : ℂ}
     {θ ε ε' g ρ : ℝ} (hε : 0 < ε) (hε' : 0 < ε') (hg : 0 < g) (hg1 : g < 1) (hρ : 0 < ρ)
     (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2)
     (hhalf : volume (halfBox x θ ε \ C j) = 0) (hfar : volume (farBox x θ g ε' ρ \ C j) = 0) :
     x ∈ densitySet (C j) := by
-  sorry
+  have hA := hadm j
+  have hpos := upperDensityAt_pos_of_halfBox hε hhalf
+  by_contra hx
+  obtain ⟨y, hy, hxy⟩ := hsat j x ⟨hpos, hx⟩
+  rw [← essSupport_eq_closure_densitySet] at hy
+  exact face hA.1 hA.2 hε hε' hg hg1 hρ hsharp hhalf hfar y hy hxy
 
 /-- **FS121-V5-FACE-SHARP**, its failure half: whenever `ρ² < 2g − g²` the first clause fails for some a.e.-proper colouring
 (V5 § 2.2's explicit colouring at `g = 1/10`, `ρ = 2/5`, generalized). -/
