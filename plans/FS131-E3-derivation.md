@@ -5,7 +5,15 @@
 
 ## Theorems this phase proved
 
-*(Filled at the last stage; see the last SAVED stage.)*
+| theorem | grade | address |
+|---|---|---|
+| E3-PHANTOM — `SectorsAt` admits phantom horns, so `WoodallMerged`/`WoodallNormal` (∀-forms) fail on every valid plane map | [hand], one mind | § 3.1 |
+| E3-Q1 — `exists_woodallMerged` as stated: FALSE at `k = 7` (hexagonal seven-colouring) | [derived], one mind | § 3.1 |
+| E3-W — Woodall's criterion with a radius: two open ray segments of a unit-pair-free open class, `< π` apart, clear the wedge between them near `v` | [hand], one mind | § 3.2 |
+| E3-NICE — the merge at a vertex, to NiceAt form, by E3-W alone (no contacts, no Condition 5) | [derived], one mind | § 3.3 |
+| E3-BALL — finitely many merges give NiceAt on `closedBall 0 R` | [derived], one mind | § 3.4 |
+| E3-CHAIN — NiceAt on `closedBall 0 3` gives `False` at `k ≤ 5` through the held chain | [derived], one mind | § 3.4 |
+| E3-FAKE — at a vertex `A, B, A, C` Townsend's lemma's hypothesis fails on arcs of positive length | [hand], one mind | § 3.5 |
 
 ## Stage 1 — SAVED: the readback, the questions, a defect found while reading, the registered predictions
 
@@ -310,3 +318,112 @@ colours, so `v` was never a vertex the chain could use. And the merged map's ver
 So the chain must read a modified map. ∎
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: drafts for the next Woodall implementer, the verdicts, the recommendation
+
+### 4.1 Lean drafts (apply verbatim in `Plane/Woodall/Basic.lean` and `Plane/Woodall/Steps.lean`, replacing the definitions and statements of the same names)
+
+```lean
+/-- **Woodall's step 3, in the form the chain reads** (FS131-E3): some picture at `v` gives its positive-angle sectors distinct colours and puts every
+zero-angle sector between sectors of distinct colours. An ∃-form: `SectorsAt` admits phantom horns, so the ∀-form fails at every point of two or more
+colours (FS131-E3, E3-PHANTOM). -/
+def NiceAt (v : ℂ) : Prop :=
+  ∃ n d c, F.SectorsAt v n d c ∧
+    (∀ i j : Fin n, i ≠ j → c i = c j → d i.castSucc = d i.succ ∨ d j.castSucc = d j.succ) ∧
+    ∀ i : Fin n, d i.castSucc = d i.succ → c ((finRotate n).symm i) ≠ c (finRotate n i)
+
+/-- **Woodall's step 3, its conclusion on a set** (∃-form): every point of `K` carrying three or more colours has a picture in `NiceAt` form. -/
+def WoodallMerged (K : Set ℂ) : Prop := ∀ v ∈ K, 3 ≤ (F.coloursAt v).ncard → F.NiceAt v
+
+/-- **Woodall's normal form on a set** (∃-form): every point of `K` carrying three or more colours has a picture with distinct colours and every angle
+at least `π/3`. -/
+def WoodallNormal (K : Set ℂ) : Prop :=
+  ∀ v ∈ K, 3 ≤ (F.coloursAt v).ncard →
+    ∃ n d c, F.SectorsAt v n d c ∧ Function.Injective c ∧ ∀ i : Fin n, π / 3 ≤ d i.succ - d i.castSucc
+
+theorem exists_woodallMerged (hF : F.Valid) (hP : F.IsPlaneMap) (R : ℝ) :
+    ∃ F' : ArcMap k, F'.Valid ∧ F'.IsPlaneMap ∧ F'.WoodallMerged (closedBall 0 R) ∧ (F.Condition5 → F'.Condition5)
+
+theorem NiceAt.normal (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} (h : F.NiceAt v) (h3 : 3 ≤ (F.coloursAt v).ncard) :
+    ∃ n d c, F.SectorsAt v n d c ∧ Function.Injective c ∧ ∀ i : Fin n, π / 3 ≤ d i.succ - d i.castSucc
+
+theorem false_of_four_le_sectors (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {n : ℕ}
+    {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k} (h : F.SectorsAt v n d c) (hn : 4 ≤ n) (hc : Function.Injective c)
+    (hang : ∀ i : Fin n, π / 3 ≤ d i.succ - d i.castSucc) (hN : F.WoodallNormal (sphere v 1)) : False
+
+theorem aeMap6_normal (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) (hN : F.WoodallNormal (closedBall 0 3)) : False
+
+theorem aeMap6_merged (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) (hM : F.WoodallMerged (closedBall 0 3)) : False
+
+theorem aeMap6 (F : ArcMap k) (hk : k ≤ 5) (hF : F.Valid) (hP : F.IsPlaneMap) : False := by
+  obtain ⟨F', hv, hp, hM, -⟩ := exists_woodallMerged hF hP 3
+  exact aeMap6_merged hk hv hp hM
+```
+Proof notes. `NiceAt.normal` is `aeMap6_merged`'s present argument on the given picture, with the horn step simplified: a horn has distinct neighbours by
+NiceAt's third clause, so `step5_lt` kills it at once. `aeMap6_normal` takes `v` from `ts_t hF hP 0 one_pos` (`|v| < 1/√2 + 1 < 3`) and passes
+`hN` restricted to `sphere v 1 ⊆ closedBall 0 3` (`|v| < 2`). `false_of_four_le_sectors` drops its call to `exists_sectorsAt`: the auxiliary point
+carries exactly three colours, so `hN` hands it a normal picture with `n′ = 3`. `exists_three_le_sectors` is no longer needed. `exists_sectorsAt` leaves
+the chain (its work moves into the merge's chart-to-picture step). The children of `exists_woodallMerged` are E3-W (over sets),
+the single merge, the iteration at a vertex (E3-NICE) and the finite induction (E3-BALL), with `localSectors` (FS131-I3i's brief) as the chart.
+
+**Inhabitants** (the vacuity this replaces had only one-colour inhabitants; each spec example below has a point of two or more colours):
+- `halfDisc.NiceAt 0`, by the picture `n = 2`, `d = ![0, π, 2π]`, `c = ![1, 0]`. The two cones are the closed upper and lower half-planes of directions.
+- `threeSectorDisc : ArcMap 3`: the disc `ball 0 (1/3)` cut by the three segments from `0` to `e(2πj/3)/2`, colour `j` on the open sector of directions
+  `(2πj/3, 2π(j+1)/3)`. It is valid (diameter `2/3 < 1`). Spec examples: `threeSectorDisc.WoodallMerged univ` and `threeSectorDisc.WoodallNormal univ`,
+  both by the picture `d = ![0, 2π/3, 4π/3, 2π]`, `c = ![0, 1, 2]` at `0`, the only point with three colours. **Adversary** (it would have caught the
+  defect): `threeSectorDisc.SectorsAt 0 5 ![0, 2π/3, 2π/3, 2π/3, 4π/3, 2π] ![0, 1, 0, 1, 2]`, a phantom picture repeating colour `0` on a positive sector.
+
+### 4.2 The verdicts
+
+- **Q1, as stated: REFUTED** (E3-Q1). It is false at `k = 7`, because no valid plane map satisfies the ∀-form `WoodallMerged` (E3-PHANTOM). At `k ≤ 5`
+  it is true only vacuously, and proving it amounts to proving `aeMap6` itself.
+- **Q1, repaired (∃-form): DERIVED in the form the chain reads** (E3-BALL: NiceAt on any closed ball, by finitely many merges, Condition 5 kept, no
+  Condition 5 assumed). **Woodall's horn-only conclusion everywhere** (repeated colours on horns only, at every point) is **not derived here**. It needs
+  FS110-W-MERGE's contact cone to merge a horn with a sector, generalized past Condition 5 and finitely many contacts. My reading is that this goes
+  through: contact types are locally constant on a compact contact set, uniform margins hold on the interior of `D_c`, and the horn end follows by N3-UP's
+  monotonicity within a chart at `v ± n`. It was not written to a planner's grain, and the chain does not need it.
+- **Q2: no route avoids a modification** (E3-FAKE: a vertex whose repeated colour is mergeable defeats Townsend's hypothesis there, and the merged map's
+  vertices can be artifacts of the merge). **But the modification the chain needs is small**: NiceAt on `closedBall 0 3` (E3-BALL), merges by E3-W only.
+
+### 4.3 Recommendation, with cost
+
+Take Q2's route: the ∃-forms of § 4.1 and `exists_woodallMerged` localized to `closedBall 0 R`, proved by E3-W, E3-NICE and E3-BALL.
+
+**Why this route.** Against IWb's 1,500–3,000 lines for the global horn-only modification, it drops four pieces:
+- the contacts on `ω(v)` and the cone `D_c` (charts at distance 1, compactness, types);
+- the horn monotonicity;
+- Woodall's cone;
+- the countable recursion and the limit map.
+
+**Prices** (mine, a prior to be scored):
+- E3-W over sets: M, 150–250 lines.
+- The single merge as an `ArcMap` (arcs, colour, local constancy, validity, Condition 5): H, 300–450.
+- Charts to pictures, and NiceAt at the centre and at crossings: H, 300–450, sharing exists_sectorsAt's route steps 4–5.
+- The finite induction on the ball: M, 100–200.
+- The chain edits: L, under 100.
+
+About 900–1,400 lines in all, after `localSectors` lands.
+
+**The chain's dependency cone** then holds:
+- `localSectors`
+- `ts_t`
+- `step5_lt`
+- `step6`
+- E1-NO45's lemmas
+- the merge
+
+`exists_sectorsAt` is no longer in it.
+
+### 4.4 Predictions, scored
+
+- E3-P1 (0.80): **met** in the form the chain reads, E3-BALL. It is **not scored** for the horn-only form, which was not written.
+- E3-P2 (0.75): **met.** No Condition 5 is assumed.
+- E3-P3 (0.85): **met** (E3-FAKE).
+- E3-P4 (0.95): **met.** The edits are listed in § 4.1.
+
+### 4.5 A slip, recorded
+
+My stage-1 push of `main` also published FS131-T3's two local commits `a09b2254` and `58a1cea5`, which sat unpushed on the main tree's `main` (the
+standing rules' "push after each commit" pushes the whole branch). Nothing was changed in them.
+
+## Stage 4 — SAVED
