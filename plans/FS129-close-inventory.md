@@ -692,3 +692,9 @@ One line per item with its source; no narration. Each line is ticked done or dec
      line is ticked done or declined at the close, not at Derived. Held for Kooshi, with defaults: the order of work (item 163; default the Lean
      backlog, then FS-124); the 46 GB of row-4 proofs (item 151; default kept, ignored); the finite-graph search (`plans/SEARCH-QUEUE.md` row 3;
      default held); a blind second mind on J1 (item 56; default no); the prior-art debt (item 140; default owed until publication).
+174. **The backlog's stub filed** (Kooshi, 2026-10-03: "Next up, the backlog. I'll start a new session for it. Please make sure everything is in
+     order."): FS-131, `plans/STUB-lean-backlog.md`, filed by Keryx as a special case on FS-129's precedent — the request verbatim (each quotation
+     checked by script against its source), the input, the cautions, how a kernel milestone opens, the held items; named in `CLAUDE.md`'s and
+     `plans/FRONTIER-STUBS.md`'s open-milestone lines (fact audit `--base 37cc5de0` exit 0, `--dupes` exit 0; atlas checker 212, 0 failed). The
+     handoff rewritten for the backlog session; the project memory updated; `.gitignore` widened to the whole dropped-search directory (its
+     logs as well as its proofs), so the tree is clean.

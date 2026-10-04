@@ -1,33 +1,35 @@
-# Session handoff — 2026-10-03: FS-129, the cross-application audit, is Opened; its first jobs launch from a fresh session
+# Session handoff — 2026-10-03: FS-129 is Derived; the next session opens FS-131, the Lean backlog
 
-*Rewritten 2026-10-03 22:38 UTC by Keryx; § 1 items 2–3 rewritten at FS-129's Derived filing, the same night. Current state only; the day's history is in git, in the close inventories and in
-`plans/WORKFLOW3-lane-edits-proposed.md`. A successor arriving with nothing reads this first.*
+*Rewritten 2026-10-04 03:50 UTC by Keryx at Kooshi's word ("Next up, the backlog. I'll start a new session for it. Please make sure everything is
+in order."). Current state only; the day's history is in git and in `plans/FS129-close-inventory.md`. A successor arriving with nothing reads
+this first.*
 
 ## 1. Read first
 
-1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow` and says **Workflow 3.1**. If it does not, the
-   session's output style predates the refinement: ask Kooshi to restart it before launching anything. **`/clear` is not enough** — it
-   reloads `CLAUDE.md` but not the output style (`plans/FS129-close-inventory.md` item 2).
-2. **FS-129, the cross-application audit, is Derived** (merged to `main` as `1622cf48`, 2026-10-03 night). Its record:
-   `plans/FS129-derivation.md` (44 entries, each derived, one mind; 12 superseded forms kept and marked); its inventory
-   `plans/FS129-close-inventory.md` (items 1–173: every result, ruling, receipt and held item, with sources); ledger rows 149–154; the index,
-   corrected, with its where-else column (`data/fs129/index/`); FS-130 minted; the frontier re-ranked by Poros (FS-124 first). No agent is running.
-3. **What runs next**, in Kooshi's order:
-   - **The Lean backlog, in a session of its own**, from `plans/LEAN-BACKLOG.md` (built by FS129-L1: 259 rows — the corrected Lean order, FS-129's
-     compositions, the entries that left the order, and a closing section with row 121's J45 inputs; read its § Cautions first). FS-129 Closes when
-     its compositions pass the Lean gate there; its inventory is ticked at that close. The backlog's de Bruijn lane: `debruijn` (planner) then
-     `debruijn-implementer`.
-   - **Then FS-124, the (Q) ring** — the top of Poros's ranking, its question posed in `plans/STUB-q-ring.md` § The question (Poros, 2026-10-03);
-     Poros's card 2 (a derivation round on whether the map step's rungs at five spend five; `plans/POROS-2026-10-03-fs129-rerank.md` § 2.4) runs at
-     its opening.
-   - **Not blocking**: the Proof Atlas republish (inventory item 172: headless look, two labels, then Keryx republishes to
-     https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx); the Searcher's next day (queue row 6, C-T-BIKE, open; row 3 held).
-   - **Held for Kooshi, with defaults** (inventory item 173): the order above; the 46 GB of row-4 proofs (kept, ignored); the finite-graph
-     search (held); a blind second mind on J1 (no); the prior-art debt (owed until publication).
-4. **Kooshi's order** (2026-10-03): FS-129; then **the Lean backlog**, in a session of its own, from the input FS-129 prepares
-   (`plans/LEAN-BACKLOG.md`: the 77 results handed to de Bruijn and what they rest on, in dependency order, with FS-129's merges applied,
-   and FS-129's own compositions); then Poros's ranking, whose top is FS-123, the (Q)-free ring.
-5. **At most three agents at a time** (Kooshi, 2026-10-03), the Searcher included.
+1. You are Keryx if your system prompt carries `# Keryx in lean-dir — the workflow` and says **Workflow 3.1**. If it does not, ask Kooshi to
+   restart the session (a `/clear` does not reload the output style).
+2. **No agent is running; the tree is clean; `main` is pushed.** FS-129, the cross-application audit, is **Derived** (merged as `1622cf48`): its
+   record is `plans/FS129-derivation.md`, its inventory `plans/FS129-close-inventory.md` (items 1–173), its front-page rows `LEDGER.md` 149–154.
+3. **This session opens FS-131, the Lean backlog** (Kooshi's order; a special case, unranked). Read, in order:
+   - its stub, `plans/STUB-lean-backlog.md` — the request verbatim, what it works from, how a kernel milestone opens, the held items;
+   - its input, `plans/LEAN-BACKLOG.md` — § How to read this file and § Cautions first (259 rows, every statement quoted by script);
+   - `LEAN.md` (§ The gate, § Assumptions, § The kernel's cost model) and `.claude/agents/debruijn.md` § A kernel milestone.
+4. **What to do first**:
+   1. Open the inventory, `plans/FS131-close-inventory.md`, with its first commit; write there the rules that will judge the milestone (what
+      "Closed" means here: every backlog row formalized in its merged form, or excluded with its reason, and the gate passing).
+   2. Brief de Bruijn's opening job (`debruijn`, Opus): the kernel reframe (§G for the kernel grokkings, read by number; §PA, Mathlib's coverage
+      and any formalization in print) and the plan — waves along the backlog's order, the skeleton with `sorry` at every leaf, a plan per leaf,
+      and which outside theorems enter as axioms with their four items (`LEAN.md` § Assumptions). Gate the brief
+      (`python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>`) and launch.
+   3. Then the implementer (`debruijn-implementer`, Sonnet) per wave, from the plan. A statement defect or missing lemma goes to an Ephodos job.
+5. **At most three agents at a time** (Kooshi, 2026-10-03), the Searcher included. **FS-129 is Closed** when its compositions pass the gate here;
+   tick its inventory then.
+6. **Held for Kooshi, with defaults** (`plans/FS129-close-inventory.md` item 173): the order (the backlog, then FS-124 — stands); the 46 GB of
+   partial proofs in `data/search/2026-10-03/row4/cubes-s10-pass1/` (kept on disk, git-ignored); the finite-graph search toward six
+   (`plans/SEARCH-QUEUE.md` row 3 — held); a blind second mind on FS129-OR1-QFREE (none); the prior-art debt of FS-129's entries (owed until
+   publication).
+7. **After the backlog**: FS-124, the (Q) ring, the top of Poros's ranking — its question posed in `plans/STUB-q-ring.md` § The question (Poros,
+   2026-10-03); Poros's card 2 (`plans/POROS-2026-10-03-fs129-rerank.md` § 2.4) runs at its opening.
 
 ## 2. Workflow 3.1, in one paragraph
 
@@ -41,12 +43,12 @@ the Searcher, from `plans/SEARCH-QUEUE.md`; no other lane searches. No one-line 
 loaded files is `plans/HISTORY-WORKFLOW-3.0.md`; the arithmetic-era items of "Where the problem stands" are
 `plans/WHERE-THE-PROBLEM-STANDS.md`.
 
-## 3. Open items
+## 3. Open items (none blocks the backlog)
 
-- **The brief gate is fixed** (agent-forge `4bc0e1d`, imported here at `f556d80b`): the six defects filed today, and two found while
-  fixing them. A brief launches on a pass; a failure judged false is noted in the brief and filed in agent-forge with a repro.
-- **agent-forge is ten commits ahead of its origin** (the filings and the fix among them); pushing it is Kooshi's call.
-- **The Searcher's identity** is a stub in agent-forge (`identities/_unnamed-searcher/README.md`), at Kooshi's word: probably not needed;
-  fleshed out only if the lane shows it needs more craft.
-- **The census** `tools/fs71_ledger_b_check.py --strict` checks derivation files against `LEDGER.md` § B, which stops at FS-116 and FS-121; it
-  is no longer run at a filing, and a 3.1 derivation file will fail it by design.
+- **The Proof Atlas republish** (`plans/FS129-close-inventory.md` item 172): `visualizations/proof-atlas/index.html` is built and passes its checker
+  (212 facts, 0 failed) but has not been looked at in a headless browser per theme (`visualizations/proof-atlas/README.md` § Updating at a close,
+  step 5); two node labels (FS128, FS120) still carry their old names; then Keryx republishes to https://claude.ai/artifact/7zzeXoXvTLHzqf4mTQujzx.
+- **The Searcher's next day**: `plans/SEARCH-QUEUE.md` row 6 (C-T-BIKE, FS-130's construction target) is open; row 3 is held.
+- **agent-forge is ahead of its origin** (the brief gate's defect filings, U8 and U9 among them); pushing it is Kooshi's call.
+- **The census**, `tools/fs71_ledger_b_check.py --strict`, is not run at filings (§ B takes no lines from Workflow 3.1 on).
+- **`plans/BACKLOG-FOR-OPUS.md`** is an older, unrelated stub triage (2026-09-08), not FS-131's input.

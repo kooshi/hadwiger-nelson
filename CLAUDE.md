@@ -260,7 +260,7 @@ theorem record, and no line per theorem goes to § B.
 milestone; Kooshi may override.*
 
 **Open milestones.** **FS-129, the cross-application audit**, is Derived (`plans/FS129-derivation.md`, 44 entries; rows 149–154; the index corrected and given its where-else column, `data/fs129/index/`); it is
-Closed when its compositions pass the Lean gate, in the Lean backlog's session. **Next, in Kooshi's order** (2026-10-03): **the Lean backlog**, in a
+Closed when its compositions pass the Lean gate, in the Lean backlog's session. **Next, in Kooshi's order** (2026-10-03): **the Lean backlog** (FS-131, `plans/STUB-lean-backlog.md`, a special case, unranked), in a
 session of its own — the hand results of the milestones closed before Workflow 3.1, with FS-129's compositions and merged forms, from the input FS129-L1
 writes (`plans/LEAN-BACKLOG.md`, on `data/fs129/index/lean-order-corrected.md`) — formalized before the pipeline continues; then the top of the ranking, FS-124, the (Q) ring (its question posed in `plans/STUB-q-ring.md`). **M63**
 stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it.
