@@ -1254,3 +1254,19 @@ reason by the close.*
      `cuspFrag_isHorn`'s pattern (near `E = 0` only its two unit arcs). **Next**: FS131-I4e (Opus) — `lock` first, the bowtie near `E`, then § 14.1's order.
 179. **Brief FS131-I4e, wave 4's fifth implementer** (Opus; `data/fs131/briefs/FS131-I4e-wave4.md`, gated PASS): `lock`, the bowtie near `E` by the cusp pattern,
      the rest; the four older linter warnings and the carrier before the gate. Launched in I4d's slot: 1 (I2i) + 1 (IWc) + 1 (I4e) = 3.
+180. **FS131-IWc handed back at stage 12, harness ≈ 494k** (report on its branch; `fs131-ww` at `ca6ec757`, checked): **20 of its 23 leaves proved**, statements unchanged,
+     standard three by iteration print — **E3-W (`clear_wedge`)** with an exact bound; **E3-BALL (`exists_woodallMerged`) proved as a composition** of its children
+     (the first composition check: the children fit together), `sorryAx` only through `exists_merge_at`; **`Plane/Woodall/Basic` sorry-free** — T1–T5, so
+     `threeSectorDisc` really satisfies `WoodallMerged univ` and `WoodallNormal univ`, `halfDisc` satisfies `NiceAt 0`, and the phantom adversaries rest on proved
+     leaves; the merge at a wedge valid, Condition 5 kept, nothing changed off its ball; locality; the local data (`exists_dirColourAt`); at most two colours away
+     from a good ball's centre, so three-colour points are finite on compacts; the data and three cone facts after a merge. Ruling 167 (b) applied
+     (`NiceAt.normal` private, record removed). Left: `niceAt_of_dirColourAt` (H−, 250–400 lines), `wedgeMerge_niceAt` (H−, 200–350; needs a curvilinear form of
+     `coneAt_annSector_eq` — the cone where a circle crosses a line or circle transversally — which the plan did not price), `exists_merge_at` (M+, 150–250, by a
+     simpler measure than the plan's: `μ = ∑_{δ ∈ D} (number of colours whose cone holds δ) − 1`, no decreasing radii). Keryx's receipts: build log
+     `build/gate/build/20261004T161928Z-665717.log` (ww) "Build completed successfully (5361 jobs)"; `sorry` Basic 0, Merge 3, Steps 0, NoFourFive 0, Collar 0;
+     `tools/fs131_w3_decls.py --check` "188 theorems, 188 records; 0 missing, 0 stale". Correction owed to W's plan § 14.4 (the simpler measure; a route, not a
+     statement). Moved into `Basic` (names and statements unchanged): `mem_coneAt_annSector`, `norm_real_mul_e`, `polar_inj`, `e_ne_e_of_lt`,
+     `closure_annSector_subset`. QA2-1 (the brick-map model) waits for wave 4's `sevenBrickMap` on this branch. **Next**: FS131-IWd (Opus) on the three leaves.
+181. **Brief FS131-IWd, Woodall's last three leaves** (Opus; `data/fs131/briefs/FS131-IWd-woodall-merge.md`, gated PASS): `niceAt_of_dirColourAt`, `wedgeMerge_niceAt`
+     (with the curvilinear cone child), `exists_merge_at`; after wave 4 lands, the merge of `main` (this branch deletes its identical colliding copies), QA2-1's
+     brick-map model, the gate and the landing. Launched in IWc's slot: 1 (I2i) + 1 (I4e) + 1 (IWd) = 3.
