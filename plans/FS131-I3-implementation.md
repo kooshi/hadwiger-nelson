@@ -399,8 +399,8 @@ self-test is the control suite, and the twelve new controls fired. Architecture:
 ## Theorems this phase proved (FS131-I3h)
 
 Axioms read from the gate's saved audit log `build/gate/axioms/20261004T135108Z-4008434.log` (copy `data/fs131/i3/axioms-h-gate.log`); statements as the skeleton
-gave them, read against FS116-Y2-SIXFRAG in `plans/FS131-w3-kernel-plan.md` § 5.2 ("a valid non-Siamese fragment … whose three diameters are below 1 and whose three
-cross distances are above 1"):
+gave them, read against FS116-Y2-SIXFRAG in `plans/FS131-w3-kernel-plan.md` § 5.2, whose row reads "`S_j` (colour `j`), `Q_j` (colour `j + 2`), `G_j` (colour
+`j + 4`), cut at `\|x\| = 3/2`, form a valid non-Siamese six-coloured fragment holding `B̄(p, R)` for `R < 3/2`, …" (verdict there: **Same**):
 - **FS116-Y2-SIXFRAG, validity** — `HadwigerNelson.Plane.sixFrag_valid` (`sixFrag.Valid`: no two interior points of one colour at distance exactly `1`): `[propext,
   Classical.choice, Quot.sound]`.
 - **FS116-Y2-SIXFRAG, non-Siamese** — `HadwigerNelson.Plane.sixFrag_nonSiamese` (`sixFrag.NonSiamese`: two distinct tiles of one colour have a pair at distance at
