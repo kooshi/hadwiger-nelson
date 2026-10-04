@@ -839,6 +839,34 @@ reading for the structure the crossing engine already gives was the saving.
   germs at `u` from its chart (degree 3) and the second-order vote of a branch against `ω(q)`; a shared child "the germs of a cubic trichromatic
   vertex and their votes" is the first thing to state. `n3_end` last, after `fs131-w4c` merges (`woodallCone`, `exists_merge`).
 
+## Stage 25 — SAVED (FS131-I4j): readback, the as-given build
+
+*FS131-I4j (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4j-wave4.md` on `main`) continues this record from `e16f5b2c`.
+Inventory ruling 194: this job takes `BaseSteps` and `UnitArc` only (14 leaves); `Contact` (10 `sorry` lines here) is FS131-IC3's on `fs131-w4c`, and
+`Contact.lean` is not edited here except by merging that branch.*
+
+**The brief's six quotations against their sources** (standing rule 3): (1) "**It may**: add children anywhere in the wave's modules — the seven engines and every
+child § 13 names are expected additions (the engines in the" — `plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. (2) "**What is left
+(14 in this job's files), in the order I would take it.**" — this record, Stage 24 (line 832): **matches**. (3) "- `pair_P'` (BaseSteps) is the nearest: at
+`dist u u' = 1`, every interior point near `u` has a colour of `c(u) = c(u')`, so by N-E1 (`ne1_region`) `ω(u')`" — Stage 24 (line 833): **matches as a truncation**.
+(4) item 194 — `plans/FS131-close-inventory.md` on `main` (line 1358): **matches as a truncation**. (5) item 177 — same file (line 1229): **matches as a truncation**.
+(6) item 185 — same file (line 1300): **matches as a truncation**. The source heading the brief gives for (2)–(3) is this record's Stage 24 heading, verbatim.
+No mismatch.
+
+**What I may change** (§ 14.2, unchanged since Stage 1): add children anywhere in the wave's modules (engines in `Basic`, sorry-free, with spec examples; every
+child § 13 names); supporting lemmas in the foundation modules (wave 4's `Basic`, wave 3's `Plane/LocalMap`, `LocalStructure`, `Tiles`, wave 1's `Plane/Chord`,
+`Diameter`, `Basic`), statements unchanged; imports (with `ARCHITECTURE.md`'s Imports cell, each new record in `scripts/Axioms.lean`, then
+`tools/fs131_k4_decls.py --check`); `Plane/ValidMap/Sectors`; wave 4's vacuity carriers at the gate (`AeProperRegions` registered, item 144). **What I may not
+change**: any statement of §§ 3.2, 7.2, 8.2, 12.2 (`lock`'s clause 3 in its ruled local form, item 177; `l60_eq_third`'s binder `_hF`, item 185); any definition
+of `Plane/ValidMap/Basic`; the fragments' definitions but for a coordinate slip found against the source tool (a finding); the read-backs' conventions; TS-T's
+Condition-5 clause in its carried form (item 142); no new `axiom`, no `native_decide`; `Contact.lean` (ruling 194) except by merging the parallel branch. A leaf
+that cannot be proved as written goes to Keryx at once. No edit while a build of the edited file runs. A merge commit is the one commit made without paths.
+
+**The worktree as given** (`e16f5b2c`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — all
+1744 modules already up to date, nothing built, 3 module(s) with warnings", exit 0 (`build/gate/build/20261004T202813Z-2139606.log`; driver log
+`data/fs131/i4/build-i4j-readback.log`). 24 `declaration uses sorry` warnings — BaseSteps 7, Contact 10, UnitArc 7 — and no other warning. This job's scratch
+mirror for `iter.sh`/`chk.sh`/`errs.sh` is `S=/home/kooshi/scratch-w4j`.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
