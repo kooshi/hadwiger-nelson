@@ -359,3 +359,40 @@ One line per item with its source; no narration. Each line is ticked done or dec
     at `f0382498`), carrying items 20, 67–69, 77, 88–90 and the older record's vacuity by reading; and **the day's Searcher** (`searcher`, Opus;
     `data/search/briefs/SEARCH-2026-10-03.md`, gated PASS, at `434964bf`) on `plans/SEARCH-QUEUE.md` rows 1, 2 (conditional), 4, 5 — row 3
     held. Running: FS129-SR1, FS129-SA1, the Searcher — the cap of three.
+94. **FS129-SR1 reported STAGE 6 SAVED, as planned** (`data/fs129/reports/FS129-SR1.md`; commits `7e22c070` … `d1aa61f1`, seven, all present; ≈433k by
+    the harness, not continued). **Keryx's receipt**: derive gate re-run, exit 0, PASS (4 controls fire); `tools/fs129_sr1_edges.py` re-run —
+    "edges sorted: 26 (real 6, route 6, false 12, reversed 2); lane-R cycles 17 -> 11; D4-HOLE dependents 61 -> 0".
+95. **The attacks on the ranking's two one-mind results both fail** (checking readings, not second minds): FS129-OR1-QFREE's chain holds at
+    both named steps (item 55); FS129-MR1-DOUBLETIP holds at its named step (item 76), and its `uses only:` can drop FS116-N2-STAR. Notes for
+    Lean: at end vertices follow N2's route, not NB2's; prove the connectedness step by quasi-components. Item 56 stays Kooshi's, its default
+    unchanged.
+96. **The bends' disagreement settled** (FS-116 items 136, 145): the two sides are about a map and a fragment and do not contradict; side 1
+    holds for the whole-tile restriction of radius ≤ √3, not the round one it names. Corrections owed (FS129-Z1): item 59's three side-1
+    remarks; FS116-Y4-EMPTY's *not claimed* line and `plans/FS116-Y4-construction.md` § 3.3, to say the (R2)-arc rings are now reached by
+    FS129-OR1-QFREE in the non-Siamese simple class.
+97. **Merges, lane R** (item 79's seven groups): three are one statement or a case (FS112-SIX subsumed by FIVERING and SIXQ; FS112-U1 = FS116-V5-U1
+    in its first three clauses; FS110-N2-RING, FS110-Y3-GP and FS129-OA1-RINGWIND one lemma, RINGBAND); V6-HUG / PXKILL / V6-ADJ / FLANK share
+    one identity (TWOCIRC), V6-HUG a special case of DOUBLETIP; four are not one statement (V0-ID1 / V5-NE1, C-HULL / V4-DICHOTOMY, stuck ray /
+    tangent pencil — stalls on an O1-OUT for valid maps — CUT / FACE). Five entries, derived, one mind: FS129-SR1-TWOCIRC, -SIXQ, -BENDANY (the
+    bends at any k and any centre), -BENDLE3 (at ≤ 3 colours the whole ring freed; derives item 82's generalization), -RINGBAND (refines
+    N2-RING: with no swap point W = 6M + 3 unless the change set is 60°-invariant). Stronger forms already held: FS121-D4-FACE by
+    V5-FACE-SHARP, FS121-D1-VT by V2-VT-W.
+98. **The vacuity sort, lane R, done**: main list 55 — 35 hypothetical by design, 15 empty, 4 no-go, 1 inhabited (O1-OUT, by SQ9's straight
+    edges); second list 16 — 10 hypothetical, 5 inhabited, 1 no-go. Only one empty result passes vacuity on: N2-HEX6's emptiness reaches
+    RING-TRANSFER-C's four-colour clause. **For the Lean backlog**: 15 results "do not formalize as stated", among them five Lean-order seeds
+    (Y3-NOQ, Y3-TIGHTLENS, Y3-STARFORCE, N2-HEX6, N2-HEX3) and the conditional seed Y4-SPOKE — the backlog session decides (FS129-L1 carries the
+    list, `plans/FS129-SR1-audit.md` § 6.2).
+99. **Tool defect, item 77 sized and sorted**: SR1 found 26 lane-R "nothing" records (12 false, 2 reversed, 6 second-route, 6 real) and nine
+    lane-A ones (relayed to FS129-SA1, 2026-10-03); Keryx's regex had counted 24 in all. The false edges put FS121-D4-HOLE at the top of
+    `data/fs129/index/vacuity.md` (61 dependents, truly 0) and made 7 cycles in the Lean order. For FS129-Z1: drop the false and reversed edges,
+    mark 6 as `route`, re-run the index (`tools/fs129_sr1_edges.py`). Item 35's receipt, which read D4-HOLE's 60 dependents from the index as
+    fact, inherits the defect.
+100. **Corrections owed** (FS129-Z1): DOUBLETIP's `uses only:` (drop N2-STAR); FS129-OA1-RINGWIND's prior art is partly in-house (FS110-N2-RING,
+     -Y3-GP, with h = (6 − 2n₂)/3), not only G71.
+101. **Leads for stubs** (FS129-Z1, FS129-P1): moving FS121-D2-SYM's window hypothesis to FS112-N3-PER needs an O1-OUT for valid maps (FS-126 or
+     FS-115's re-posing); the V5-RING family holds without simplicity — a lead for FS-123's question 3 (Siamese, now its main question).
+102. **Slip, SR1's, self-reported**: stage 2 committed while its record's derive gate failed ("no derivation entry"; readings only), cured at
+     stage 3. **SR1's registration** (record § 6.4): seven binary predictions, Brier 0.087; merge groups 3 of 7 against 5; vacuity 35/4/15/1
+     against 38/7/6/4.
+103. **FS129-SR2 to launch** on SR1's § 6.3: the rest of lane R's Lean-order sweep (rows listed there), item 63 (`data/fs129/index/open-steps.md`
+     § 3 beyond FS-110, scoped to the Lean order), item 81's three leads, a wider V6-ADJ (DOUBLETIP's analogue), and group 5's stall.
