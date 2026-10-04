@@ -8,6 +8,16 @@ in this milestone (inventory ruling 1): the derivation's records were read from 
 
 None (a planning job — FS131-W, and FS131-W2 in stages 6–10). The hand checks recorded below (§ 1.6's two configurations, § 4.5's bound for Townsend's counterexample) are a planner's checks, [hand, one mind], not theorems of this phase.
 
+FS131-W3 (stages 11–16) proved in Lean, each elaborated in the green build of § 15.2, **kernel-checked as composition only**: each still carries `sorryAx`
+through the leaves it cites (`exists_woodallMerged`'s children, the inhabitant leaves T1–T5, wave 4's skeleton):
+- `ArcMap.NiceAt.normal`, `ArcMap.false_of_four_le_sectors` (re-proved on `hN : WoodallNormal (sphere v 1)`), `ArcMap.aeMap6_normal`,
+  `ArcMap.aeMap6_merged` (`Woodall/Steps`);
+- `ArcMap.recolour` (the definition's proof fields), `recolour_isPlaneMap`, `interiorPts_recolour_subset`, `recolour_condition5`, and
+  `DirColourAt`'s spec example (`Woodall/Merge`; `sorry`-free: they depend on no leaf);
+- `threeSectorDisc_valid` (`sorry`-free in its own proof; it carries `sorryAx` only through the definition's field T1);
+- from the leaves T2–T5: `threeSectorDisc_niceAt`, `_woodallMerged`, `_woodallNormal`, `_not_forall_merged`, `_not_forall_normal`,
+  `halfDisc_niceAt` (`Woodall/Basic`).
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
