@@ -36,7 +36,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (slots used: 0.5 + 0.5 + 0.5 + 1 = 2.5 of 3 — the free half waits for a whole Opus slot; plus FS131-QA1 in Kooshi's special slot)
+## 3. Running now (slots used: 0.5 + 0.5 + 0.5 + 1 = 2.5 of 3 — the free half waits for a whole Opus slot)
 
 | job | model | brief | reports to |
 |---|---|---|---|
@@ -45,7 +45,6 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | FS131-LEB (Lebesgue's covering theorem, own branch `fs131-leb`; item 141) | Opus (de Bruijn planner) | `data/fs131/briefs/FS131-LEB-lebesgue.md` | its branch's `data/fs131/reports/FS131-LEB.md` |
 | FS131-I2g (wave 2, seventh implementer; item 130) | Sonnet | `data/fs131/briefs/FS131-I2g-wave2.md` | its branch's (`fs131-w2`) `data/fs131/reports/FS131-I2g.md` |
 
-| FS131-QA1 (code-quality audit, read-only; items 137–138) | Opus (special slot) | `data/fs131/briefs/FS131-QA1-quality-audit.md` | `data/fs131/reports/FS131-QA1.md` |
 
 **Implementers are Opus from now on** (Kooshi, item 137): the four Sonnet implementers above finish on Sonnet; each successor launches with `model: "opus"` (the agent file says so too) and counts one slot.
 
@@ -60,6 +59,8 @@ its record's last SAVED stage with a fresh agent on the same brief.
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
 5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
+   **Queue for whole Opus slots, in order**: FS131-T3 (gate tooling: the axiom gate's CLEAN subset check and IMPORTED category; vacuity carriers
+   `CPColouring`, `AeProperRegions`; item 144) — then wave 4's Opus implementer — then successors as Sonnets hand back. QA1 done (item 144, grade B+).
    FS131-I4 launched in I2e's half slot (item 115); I3e's half slot, when it frees, goes to FS131-IW once W2 has re-planned, else a wave-2 or wave-4 Sonnet successor.
    FS131-E2 done (items 139–140): the cusp case holds in the simple class; the skeleton's loose form was false (the monster); errata filed. Queued: an Ephodos
    job on `exists_not_uniform_kept`'s fringe colouring only if wave 2's implementer cannot find a proper formula (item 118).

@@ -889,3 +889,25 @@ reason by the close.*
      `c′` to exclude `P + 2e(θ)` — validity at `w` alone does not. Tool defect (I4b's): the scratch mirror's `chk.sh` can elaborate a name the real build
      lacks (`Real.pi_gt_three`); every stage ends with a real build. About 20 of the 54 wait on `localSectors` (item 132). Pace: about six leaves per 250k at
      this difficulty on Sonnet. **Next on wave 4**: an Opus implementer (item 137), when a whole slot is free — the half slot I4b freed stays empty until then.
+144. **FS131-QA1 done, harness ≈ 380k** (report `data/fs131/reports/FS131-QA1.md`; record `plans/FS131-QA1-audit.md`; commits `1905567e`, `bbee15f0`, `e7a91c31`, `2153ea8e`,
+     `ce54a729`, `b27070a2`, checked): **overall B+** — statement fidelity and trust A−, engineering hygiene B. Fidelity sampled on 22 statements across 20 rows
+     in all five bodies: 17 the same as their row or stronger; 3 changed by recorded rulings and right (COVER-SC, FACE-SHARP, RINGBAND (iv)); 1 a frame that
+     holds less than it reads (FALC-HOSTS (iv)); 1 weaker with no ruling (TS-T's Condition-5/6 clauses — ruled at item 142). Definitions: no trap; every carrier
+     with an example and a counter-example; eight small findings (D1–D8). Trust: one axiom in ≈ 30,000 lines, read back, four items done, used once as
+     declared; no `native_decide`, no raised heartbeats; the named hypotheses used as declared. Quality: low brittleness (72 mid-proof bare `simp`), median
+     proof 4–10 lines, six long concrete proofs (129–288 lines), no dead or WIP code, docstrings ≈ 100 % but for 84 wave-2 theorems; all 2,258 declarations
+     public in one namespace — the cause of the name collisions. Wave 3's seven skeleton statement changes break nothing in wave 4 or Woodall's chain.
+     Keryx's receipt: `scripts/axioms.sh` lines 86–104 read — the CLEAN section is checked only for `native_decide` and `sorryAx`, so a CLEAN record carrying an
+     imported axiom would pass (the tool defect is real); FALC-HOSTS (iv)'s docstring read at `Arith/FalconerField.lean` 270–274.
+     **Rulings on its held items**: (a) TS-T — item 142. (b) **The two gate defects** — the axiom gate's CLEAN section gets a subset check (the standard three
+     only) and an IMPORTED category for declared outside theorems; the vacuity scan tracks `CPColouring` and `AeProperRegions` (empty at `k ≤ 1`, as
+     `AeColouring` was) — one project-tooling job, **FS131-T3** (Opus implementer, on `main`), queued for the next whole slot, to land before wave 2 or 4 does.
+     (c) **Merge order**: by readiness (wave 3 is nearest), each landing implementer resolving the append points and running the duplicate tool (item 142);
+     not a fixed order. (d) **Corrections owed to wave 2, before it lands**: FALC-HOSTS (iv)'s docstring says the frame proves only "a fan's `t − a` is a
+     non-zero forced difference of `R`", the fields and `P = R ∩ 𝔓⁴` entering only on instantiation (and its ledger line at the close); docstrings for the 84
+     wave-2 theorems (`tools/fs131_qa1_quality.py` checks; `linter.missingDocs` does not check theorems) — both in wave 2's next brief. (e) **Before
+     publication** (D-class): the duplicated vocabulary across branches (`unitShadow`/`shadow`, `essMulticolour`/`essColours`, `IsContactFor`/`SaturatedAt`,
+     `ne1_region`/`not_mem_coloursAt_of_dist_eq_one`, `dot_sub`/`dot_sub_left`) unified, and the home-made `dot` replaced by Mathlib's real inner product on `ℂ`;
+     helper lemmas made `private` or namespaced. **Held for Kooshi**: a second audit pass over the statements no implementer has reached (wave 2's 13 `sorry`
+     row theorems, wave 4's 113 skeleton statements); default, not run — each implementer reads its statements back as it reaches them. Tools kept:
+     `tools/fs131_qa1_decls.py`, `tools/fs131_qa1_dupes.py`, `tools/fs131_qa1_quality.py`, each with a self-test and a watched control. Credit QA1.
