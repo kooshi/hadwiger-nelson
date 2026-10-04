@@ -3234,6 +3234,17 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.sevenBrick_unenclosedC
 #print axioms HadwigerNelson.Plane.sevenBrick_baseHyp
 #print axioms HadwigerNelson.Plane.sevenBrick_noInertNear
+#print axioms HadwigerNelson.Plane.ArcMap.dist_le_one_of_mem_region
+#print axioms HadwigerNelson.Plane.ArcMap.antipodal_aux
+#print axioms HadwigerNelson.Plane.ArcMap.eq_of_dist_le_one_antipodal
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_region_ne
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tileOf_of_mem_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.dist_sq_re_im
+#print axioms HadwigerNelson.Plane.ArcMap.antipodal_neg
+#print axioms HadwigerNelson.Plane.ArcMap.exists_near_far_antipodal
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_tile_dist
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.exists_dist_eq_one
+#print axioms HadwigerNelson.Plane.ArcMap.germPseudo_unique
 
 /-! ## FS-131 wave 5 (job FS131-I5b) — wave 5's second implementer: Lemma 1's children, the holed fragment -/
 

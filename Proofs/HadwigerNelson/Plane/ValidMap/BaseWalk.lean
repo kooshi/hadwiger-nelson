@@ -160,13 +160,70 @@ theorem BaseCtx.exists_pseudoCircle (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ clos
 
 /-! ## C — the planar core (Prop. 19(b), the reduction's arcs, the eleventh point) -/
 
+/-- **The (P) sweep**: in a valid map, a colour whose tile holds a point at distance exactly `1` from `y` is not carried at `y` (a point of its
+class near `y`, translated, would sit in the tile at distance `1`). Any `k`. -/
+theorem not_mem_coloursAt_of_tile_dist {k : ℕ} {F : ArcMap k} (hF : F.Valid) {a : Fin k} {T : Set ℂ} (hT : F.TileOf a T) {t y : ℂ}
+    (ht : t ∈ T) (h1 : dist t y = 1) : a ∉ F.coloursAt y := by
+  intro hay
+  obtain ⟨δ, hδ, hδT⟩ := Metric.isOpen_iff.mp hT.1.isOpen t ht
+  obtain ⟨y', hy', hy'd⟩ := Metric.mem_closure_iff.mp hay δ hδ
+  have hmem : t + (y' - y) ∈ T := hδT (by rw [mem_ball, dist_eq_norm, add_sub_cancel_left, ← dist_eq_norm, dist_comm]; exact hy'd)
+  refine hF _ (hT.1.subset_interiorPts hmem) y' hy'.1 ?_ (by rw [hT.2 hmem, hy'.2])
+  rw [dist_eq_norm, show t + (y' - y) - y' = t - y by ring, ← dist_eq_norm, h1]
+
+/-- A tile whose closure holds points inside and outside `B̄(y, 1)` holds a point at distance exactly `1` from `y`. -/
+theorem IsTile.exists_dist_eq_one {k : ℕ} {F : ArcMap k} {T : Set ℂ} (hT : F.IsTile T) {x₁ x₂ y : ℂ} (h₁ : x₁ ∈ closure T)
+    (h₂ : x₂ ∈ closure T) (hd₁ : dist x₁ y < 1) (hd₂ : 1 < dist x₂ y) : ∃ t ∈ T, dist t y = 1 := by
+  obtain ⟨t₁, ht₁, ht₁d⟩ := Metric.mem_closure_iff.mp h₁ (1 - dist x₁ y) (by linarith)
+  obtain ⟨t₂, ht₂, ht₂d⟩ := Metric.mem_closure_iff.mp h₂ (dist x₂ y - 1) (by linarith)
+  have e₁ : dist t₁ y < 1 := by have := dist_triangle t₁ x₁ y; rw [dist_comm] at ht₁d; linarith
+  have e₂ : 1 < dist t₂ y := by have := dist_triangle x₂ t₂ y; linarith
+  have hpre : IsPreconnected ((fun z => dist z y) '' T) := hT.isPreconnected.image _ (continuous_id.dist continuous_const).continuousOn
+  obtain ⟨t, ht, h1⟩ := hpre.Icc_subset ⟨t₁, ht₁, rfl⟩ ⟨t₂, ht₂, rfl⟩ ⟨e₁.le, e₂.le⟩
+  exact ⟨t, ht, h1⟩
+
+/-- A germ has one pseudo-colour. -/
+theorem germPseudo_unique {k : ℕ} {F : ArcMap k} {u : ℂ} {θ : ℝ} {s : Side} {a a' : Fin k} (h : F.GermPseudo u θ s a)
+    (h' : F.GermPseudo u θ s a') : a = a' := by
+  obtain ⟨δ, hδ, hsub⟩ := h
+  obtain ⟨δ', hδ', hsub'⟩ := h'
+  have hm : ringPt u (θ + s.sign * (min δ δ' / 2)) ∈ germ u θ s (min δ δ') :=
+    ⟨min δ δ' / 2, ⟨by positivity, by linarith [lt_min hδ hδ']⟩, rfl⟩
+  have h1 := hsub (germ_mono (min_le_left _ _) hm)
+  have h2 := hsub' (germ_mono (min_le_right _ _) hm)
+  simp only [mem_setOf_eq] at h1 h2
+  rw [h1] at h2
+  exact Set.singleton_injective h2
+
 /-- **The returning arcs are removable** (FS110-CD Lemma R step 3): for `x` inside a returning arc and `y = r(x ± 60°)`, `ω(y)` crosses `ω(u)`
 only at `x` within the arc, so it separates its ends; the `a`-tile and the `c`-tile, connected with both ends in their closures (through `K`),
 meet `ω(y)`, so neither colour is at `y` (the (P) sweep) and `c′(y)` is the third colour. The colour pattern at the ends is in `IsRetArc`. -/
 theorem BaseCtx.retArc_partner (B : F.BaseCtx u) {s t : ℝ} (hR : F.IsRetArc u s t) {x : ℝ} (hx : x ∈ Ioo s t) {a c : Fin 6}
     (ha : F.GermPseudo u s .cw a) (hc : F.GermPseudo u s .ccw c) (y : ℝ) (hy : y = x + π / 3 ∨ y = x - π / 3) :
     a ∉ F.pseudoColours u (ringPt u y) ∧ c ∉ F.pseudoColours u (ringPt u y) := by
-  sorry
+  obtain ⟨hst, hst', a', c', -, ha', hc', -, -, T₁, T₂, hT₁, hT₂, K, -, hsK, htK, hKsub⟩ := hR
+  obtain rfl := germPseudo_unique ha' ha
+  obtain rfl := germPseudo_unique hc' hc
+  obtain ⟨hx1, hx2⟩ := hx
+  -- `r(s)` and `r(t)` on opposite sides of `ω(r(y))`
+  have hfar : ∃ x₁ x₂, (x₁ = ringPt u s ∨ x₁ = ringPt u t) ∧ (x₂ = ringPt u s ∨ x₂ = ringPt u t) ∧
+      dist x₁ (ringPt u y) < 1 ∧ 1 < dist x₂ (ringPt u y) := by
+    rcases hy with rfl | rfl
+    · refine ⟨_, _, Or.inr rfl, Or.inl rfl, ?_, ?_⟩
+      · refine ((dist_ringPt_ringPt_cmp_one u ?_).2.1).mpr ?_ <;> rw [abs_of_neg (by linarith)] <;> linarith [Real.pi_pos]
+      · refine ((dist_ringPt_ringPt_cmp_one u ?_).2.2).mpr ?_ <;> rw [abs_of_neg (by linarith)] <;> linarith [Real.pi_pos]
+    · refine ⟨_, _, Or.inl rfl, Or.inr rfl, ?_, ?_⟩
+      · refine ((dist_ringPt_ringPt_cmp_one u ?_).2.1).mpr ?_ <;> rw [abs_of_pos (by linarith)] <;> linarith [Real.pi_pos]
+      · refine ((dist_ringPt_ringPt_cmp_one u ?_).2.2).mpr ?_ <;> rw [abs_of_pos (by linarith)] <;> linarith [Real.pi_pos]
+  obtain ⟨x₁, x₂, hx₁, hx₂, hd₁, hd₂⟩ := hfar
+  have hcl : ∀ {z}, (z = ringPt u s ∨ z = ringPt u t) → z ∈ closure T₁ ∧ z ∈ closure T₂ := by
+    rintro z (rfl | rfl)
+    · exact (hKsub hsK).1
+    · exact (hKsub htK).1
+  obtain ⟨t₁, ht₁, ht₁d⟩ := hT₁.1.exists_dist_eq_one (hcl hx₁).1 (hcl hx₂).1 hd₁ hd₂
+  obtain ⟨t₂, ht₂, ht₂d⟩ := hT₂.1.exists_dist_eq_one (hcl hx₁).2 (hcl hx₂).2 hd₁ hd₂
+  exact ⟨fun h => not_mem_coloursAt_of_tile_dist B.valid hT₁ ht₁ ht₁d h.1,
+    fun h => not_mem_coloursAt_of_tile_dist B.valid hT₂ ht₂ ht₂d h.1⟩
 
 /-- **Finitely many returning arcs** (FS110-CD Lemma R): their ends are change points of the pseudo-colouring, finitely many per period. -/
 theorem BaseCtx.retArcs_finite (B : F.BaseCtx u) :
@@ -239,12 +296,145 @@ theorem endpoint_dist_ge {k : ℕ} {F : ArcMap k} (hF : F.Valid) {a : Fin k} {T�
   rw [closure_prod_eq] at hcl
   exact hcl (show (p₁, p₂) ∈ closure T₁ ×ˢ closure T₂ from ⟨hp₁, hp₂⟩)
 
+/-- **A point of a colour's class within `1` of a tile of that colour stays within `1` of all of it** (Lemma H's distance step, FS110-CD § 2.3):
+in a valid map, if `s` lies in the class of `i` and within distance `1` of a point of an `i`-tile `T`, then every point of the closure of `T` is
+within distance `1` of `s` (the distances from `s` over the connected `T` form an interval that misses `1`). Any `k`, no base context. -/
+theorem dist_le_one_of_mem_region {k : ℕ} {F : ArcMap k} (hF : F.Valid) {i : Fin k} {T : Set ℂ} (hT : F.TileOf i T) {s t₀ : ℂ}
+    (hs : s ∈ F.region i) (ht₀ : t₀ ∈ T) (hst : dist s t₀ < 1) {q : ℂ} (hq : q ∈ closure T) : dist s q ≤ 1 := by
+  have hne : ∀ t ∈ T, dist s t ≠ 1 := fun t ht h1 =>
+    hF s hs.1 t (hT.1.subset_interiorPts ht) h1 (by rw [hs.2, hT.2 ht])
+  have hpre : IsPreconnected ((fun t : ℂ => dist s t) '' T) :=
+    hT.1.isPreconnected.image _ (continuous_const.dist continuous_id).continuousOn
+  have hall : ∀ t ∈ T, dist s t ≤ 1 := by
+    intro t ht
+    by_contra hlt
+    push Not at hlt
+    obtain ⟨y, hy, hy1⟩ := hpre.Icc_subset ⟨t₀, ht₀, rfl⟩ ⟨t, ht, rfl⟩ ⟨hst.le, hlt.le⟩
+    exact hne y hy hy1
+  exact closure_minimal hall (isClosed_le (continuous_const.dist continuous_id) continuous_const) hq
+
+/-- Real arithmetic for `eq_of_dist_le_one_antipodal`: two antipodal unit vectors `a`, `b` and a vector `w` within `1` of both: `w = 0`
+(`b = −a`, and the parallelogram law gives `2|w|² + 2 ≤ 2`). -/
+theorem antipodal_aux {a1 a2 b1 b2 w1 w2 : ℝ} (h1 : a1 ^ 2 + a2 ^ 2 = 1) (h2 : b1 ^ 2 + b2 ^ 2 = 1)
+    (h3 : (a1 - b1) ^ 2 + (a2 - b2) ^ 2 = 4) (h4 : (w1 - a1) ^ 2 + (w2 - a2) ^ 2 ≤ 1) (h5 : (w1 - b1) ^ 2 + (w2 - b2) ^ 2 ≤ 1) :
+    w1 = 0 ∧ w2 = 0 := by
+  have hs : (a1 + b1) ^ 2 + (a2 + b2) ^ 2 = 0 := by linear_combination 2 * h1 + 2 * h2 - h3
+  have hb1 : a1 + b1 = 0 := by nlinarith [sq_nonneg (a1 + b1), sq_nonneg (a2 + b2)]
+  have hb2 : a2 + b2 = 0 := by nlinarith [sq_nonneg (a1 + b1), sq_nonneg (a2 + b2)]
+  have hb1' : b1 = -a1 := by linarith
+  have hb2' : b2 = -a2 := by linarith
+  subst hb1' hb2'
+  have hw : w1 ^ 2 + w2 ^ 2 ≤ 0 := by nlinarith
+  exact ⟨by nlinarith [sq_nonneg w1, sq_nonneg w2], by nlinarith [sq_nonneg w1, sq_nonneg w2]⟩
+
+/-- The closed unit discs about two antipodal points of `ω(u)` meet only at `u`. -/
+theorem eq_of_dist_le_one_antipodal {u p p' s : ℂ} (hp : dist p u = 1) (hp' : dist p' u = 1) (h2 : dist p p' = 2)
+    (hs : dist s p ≤ 1) (hs' : dist s p' ≤ 1) : s = u := by
+  have sq : ∀ z w : ℂ, dist z w ^ 2 = (z.re - w.re) ^ 2 + (z.im - w.im) ^ 2 := fun z w => by
+    rw [Complex.dist_eq_re_im, Real.sq_sqrt (by positivity)]
+  have e1 := sq p u; rw [hp, one_pow] at e1
+  have e2 := sq p' u; rw [hp', one_pow] at e2
+  have e3 := sq p p'; rw [h2] at e3
+  have e4 : dist s p ^ 2 ≤ 1 := by nlinarith [dist_nonneg (x := s) (y := p)]
+  have e5 : dist s p' ^ 2 ≤ 1 := by nlinarith [dist_nonneg (x := s) (y := p')]
+  rw [sq] at e4 e5
+  obtain ⟨w1, w2⟩ := antipodal_aux (a1 := p.re - u.re) (a2 := p.im - u.im) (b1 := p'.re - u.re) (b2 := p'.im - u.im)
+    (w1 := s.re - u.re) (w2 := s.im - u.im) e1.symm e2.symm
+    (by rw [show (2 : ℝ) ^ 2 = 4 by norm_num] at e3; linear_combination -e3)
+    (by linear_combination e4) (by linear_combination e5)
+  exact Complex.ext (by linarith) (by linarith)
+
+/-- An open set containing a point `u` of `ℂ`, or meeting every ball about it, holds a point other than `u` near `u`: a point of the class of
+a colour carried at `u`, distinct from `u`, within any `ε > 0`. -/
+theorem exists_mem_region_ne {k : ℕ} {F : ArcMap k} {u : ℂ} {i : Fin k} (hi : i ∈ F.coloursAt u) {ε : ℝ} (hε : 0 < ε) :
+    ∃ s ∈ F.region i, s ≠ u ∧ dist s u < ε := by
+  obtain ⟨s₀, hs₀, hs₀d⟩ := Metric.mem_closure_iff.mp hi ε hε
+  have hopen : IsOpen (F.region i ∩ ball u ε) := (F.isOpen_region i).inter isOpen_ball
+  have hs₀' : s₀ ∈ F.region i ∩ ball u ε := ⟨hs₀, by rw [mem_ball, dist_comm]; exact hs₀d⟩
+  obtain ⟨δ, hδ, hδs⟩ := Metric.isOpen_iff.mp hopen s₀ hs₀'
+  by_cases hsu : s₀ = u
+  · subst hsu
+    have hm : s₀ + ((δ / 2 : ℝ) : ℂ) ∈ ball s₀ δ := by
+      rw [mem_ball, dist_eq_norm, add_sub_cancel_left, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by positivity)]
+      linarith
+    refine ⟨_, (hδs hm).1, fun h => ?_, (hδs hm).2⟩
+    have : ((δ / 2 : ℝ) : ℂ) = 0 := by linear_combination h
+    have : (δ / 2 : ℝ) = 0 := by exact_mod_cast this
+    linarith
+  · exact ⟨s₀, hs₀, hsu, hs₀'.2⟩
+
+/-- **A tile of each colour carried at a point** of the domain has the point in its closure (through the sector chart: a point of the class
+near the base lies in a sector, which lies in a tile). -/
+theorem exists_tileOf_of_mem_coloursAt {k : ℕ} {F : ArcMap k} {q : ℂ} (hq : q ∈ F.dom) {j : Fin k} (hj : j ∈ F.coloursAt q) :
+    ∃ T, F.TileOf j T ∧ q ∈ closure T := by
+  obtain ⟨r, hr, hrpos⟩ := ((exists_sector_of_mem hq).and self_mem_nhdsWithin).exists
+  obtain ⟨p, hp, hpd⟩ := Metric.mem_closure_iff.mp hj r hrpos
+  obtain ⟨S, hS, hpS⟩ := hr p ⟨hp.1, by rw [mem_ball, dist_comm]; exact hpd⟩
+  have hSj : S ∈ F.sectorsOf q r j :=
+    ⟨hS, fun z hz => ((hS.subset_region hpS hz).2 : F.col z = F.col p).trans hp.2⟩
+  obtain ⟨X, hX, -, hqX⟩ := sector_subset_tile hSj
+  exact ⟨X, hX, hqX⟩
+
+/-- Squared distances in coordinates. -/
+theorem dist_sq_re_im (z w : ℂ) : dist z w ^ 2 = (z.re - w.re) ^ 2 + (z.im - w.im) ^ 2 := by
+  rw [Complex.dist_eq_re_im, Real.sq_sqrt (by positivity)]
+
+/-- Real arithmetic: two antipodal unit vectors `a`, `b` (`|a − b| = 2`) satisfy `b = −a`. -/
+theorem antipodal_neg {a1 a2 b1 b2 : ℝ} (h1 : a1 ^ 2 + a2 ^ 2 = 1) (h2 : b1 ^ 2 + b2 ^ 2 = 1)
+    (h3 : (a1 - b1) ^ 2 + (a2 - b2) ^ 2 = 4) : b1 = -a1 ∧ b2 = -a2 := by
+  have hs : (a1 + b1) ^ 2 + (a2 + b2) ^ 2 = 0 := by linear_combination 2 * h1 + 2 * h2 - h3
+  have hb1 : a1 + b1 = 0 := by nlinarith [sq_nonneg (a1 + b1), sq_nonneg (a2 + b2)]
+  have hb2 : a2 + b2 = 0 := by nlinarith [sq_nonneg (a1 + b1), sq_nonneg (a2 + b2)]
+  exact ⟨by linarith, by linarith⟩
+
+/-- **The cusp between two tangent unit discs**: for antipodal `q`, `p` on `ω(u)` and any `ε > 0`, some point within `ε` of `u` is farther than `1`
+from both (`u + (ε/2) i (q − u)`, at distance `√(1 + ε²/4)` from each). -/
+theorem exists_near_far_antipodal {u q p : ℂ} (hq : dist q u = 1) (hp : dist p u = 1) (h2 : dist q p = 2) {ε : ℝ} (hε : 0 < ε) :
+    ∃ z₀ : ℂ, dist z₀ u < ε ∧ 1 < dist z₀ q ∧ 1 < dist z₀ p := by
+  have e1 := dist_sq_re_im q u; rw [hq, one_pow] at e1
+  have e2 := dist_sq_re_im p u; rw [hp, one_pow] at e2
+  have e3 := dist_sq_re_im q p; rw [h2] at e3
+  obtain ⟨hb1, hb2⟩ := antipodal_neg (a1 := q.re - u.re) (a2 := q.im - u.im) (b1 := p.re - u.re) (b2 := p.im - u.im)
+    e1.symm e2.symm (by linear_combination -e3)
+  have hpre : p.re = u.re - (q.re - u.re) := by linarith
+  have hpim : p.im = u.im - (q.im - u.im) := by linarith
+  refine ⟨⟨u.re - ε / 2 * (q.im - u.im), u.im + ε / 2 * (q.re - u.re)⟩, ?_, ?_, ?_⟩
+  · have h : dist (⟨u.re - ε / 2 * (q.im - u.im), u.im + ε / 2 * (q.re - u.re)⟩ : ℂ) u ^ 2 = (ε / 2) ^ 2 := by
+      rw [dist_sq_re_im]
+      show (u.re - ε / 2 * (q.im - u.im) - u.re) ^ 2 + (u.im + ε / 2 * (q.re - u.re) - u.im) ^ 2 = (ε / 2) ^ 2
+      linear_combination (ε / 2) ^ 2 * e1.symm
+    nlinarith [dist_nonneg (x := (⟨u.re - ε / 2 * (q.im - u.im), u.im + ε / 2 * (q.re - u.re)⟩ : ℂ)) (y := u)]
+  · have h : dist (⟨u.re - ε / 2 * (q.im - u.im), u.im + ε / 2 * (q.re - u.re)⟩ : ℂ) q ^ 2 = 1 + (ε / 2) ^ 2 := by
+      rw [dist_sq_re_im]
+      show (u.re - ε / 2 * (q.im - u.im) - q.re) ^ 2 + (u.im + ε / 2 * (q.re - u.re) - q.im) ^ 2 = 1 + (ε / 2) ^ 2
+      linear_combination (1 + (ε / 2) ^ 2) * e1.symm
+    nlinarith [dist_nonneg (x := (⟨u.re - ε / 2 * (q.im - u.im), u.im + ε / 2 * (q.re - u.re)⟩ : ℂ)) (y := q)]
+  · have h : dist (⟨u.re - ε / 2 * (q.im - u.im), u.im + ε / 2 * (q.re - u.re)⟩ : ℂ) p ^ 2 = 1 + (ε / 2) ^ 2 := by
+      rw [dist_sq_re_im]
+      show (u.re - ε / 2 * (q.im - u.im) - p.re) ^ 2 + (u.im + ε / 2 * (q.re - u.re) - p.im) ^ 2 = 1 + (ε / 2) ^ 2
+      rw [hpre, hpim]
+      linear_combination (1 + (ε / 2) ^ 2) * e1.symm
+    nlinarith [dist_nonneg (x := (⟨u.re - ε / 2 * (q.im - u.im), u.im + ε / 2 * (q.re - u.re)⟩ : ℂ)) (y := p)]
+
 /-- **No two V-in points of one colour of `u` are antipodal** (FS110-CD Theorem D2 (i); FS110-CE's Antipodal Lemma): their tiles of that
 colour lie in `B̄(p, 1) ∩ B̄(p′, 1) = {u}` (Lemma H(b)), against openness. -/
 theorem BaseCtx.vin_antipodal (B : F.BaseCtx u) {p p' : ℂ} {i : Fin 6} (hi : i ∈ F.coloursAt u)
     (hp : dist p u = 1) (hp' : dist p' u = 1) (hpi : ∃ T, F.TileOf i T ∧ p ∈ closure T ∧ (T ∩ ball u 1).Nonempty)
     (hpi' : ∃ T, F.TileOf i T ∧ p' ∈ closure T ∧ (T ∩ ball u 1).Nonempty) : dist p p' ≠ 2 := by
-  sorry
+  intro h2
+  obtain ⟨T, hT, hpT, t₀, ht₀T, ht₀u⟩ := hpi
+  obtain ⟨T', hT', hpT', t₀', ht₀T', ht₀u'⟩ := hpi'
+  rw [mem_ball] at ht₀u ht₀u'
+  have hε : 0 < min (1 - dist t₀ u) (1 - dist t₀' u) := lt_min (by linarith) (by linarith)
+  obtain ⟨s, hs, hsu, hsd⟩ := exists_mem_region_ne hi hε
+  have h1 : dist s t₀ < 1 := by
+    have := dist_triangle s u t₀; rw [dist_comm u t₀] at this
+    linarith [min_le_left (1 - dist t₀ u) (1 - dist t₀' u)]
+  have h1' : dist s t₀' < 1 := by
+    have := dist_triangle s u t₀'; rw [dist_comm u t₀'] at this
+    linarith [min_le_right (1 - dist t₀ u) (1 - dist t₀' u)]
+  exact hsu (eq_of_dist_le_one_antipodal hp hp' h2 (dist_le_one_of_mem_region B.valid hT hs ht₀T h1 hpT)
+    (dist_le_one_of_mem_region B.valid hT' hs ht₀T' h1' hpT'))
 
 /-- **The eleventh point is not antipodal to a complementary V-in endpoint** (FS110-CD Theorem D2 (ii)): the cusps `u + t·e⊥` between the two
 tangent discs meet none of `u`'s three tiles, against the sector picture at `u`. -/
@@ -252,7 +442,73 @@ theorem BaseCtx.eleventh_antipodal (B : F.BaseCtx u) {q p : ℂ} (hq : dist q u 
     (hqT : ∀ j ∈ F.coloursAt q ∩ F.coloursAt u, ∀ T, F.TileOf j T → q ∈ closure T → T ⊆ ball u 1)
     (hq2 : (F.coloursAt q ∩ F.coloursAt u).ncard = 2) (hp : F.VIn u p) (hdis : Disjoint (F.coloursAt q) (F.coloursAt p)) :
     dist q p ≠ 2 := by
-  sorry
+  intro h2
+  obtain ⟨hpu, i, hiu, T, hT, hpT, t₀, ht₀T, ht₀u⟩ := hp
+  rw [mem_ball] at ht₀u
+  have hdom : ∀ {z : ℂ}, dist z u ≤ 2 → z ∈ F.dom := fun hz => B.covers (by rw [mem_closedBall]; exact hz)
+  -- `i` is `u`'s colour off `q`, and every colour of `u` is `i` or one of `q`'s
+  have hip : i ∈ F.coloursAt p :=
+    closure_mono (show T ⊆ F.region i from fun z hz => ⟨hT.1.subset_interiorPts hz, hT.2 hz⟩) hpT
+  have hiq : i ∉ F.coloursAt q := fun h => Set.disjoint_left.mp hdis h hip
+  have hdiff : (F.coloursAt u \ F.coloursAt q).ncard = 1 := by
+    have := Set.ncard_inter_add_ncard_sdiff_eq_ncard (F.coloursAt u) (F.coloursAt q) (Set.toFinite _)
+    rw [Set.inter_comm, hq2, B.cubic.2] at this
+    omega
+  have hcol : ∀ c ∈ F.coloursAt u, c = i ∨ c ∈ F.coloursAt q ∩ F.coloursAt u := by
+    intro c hc
+    by_cases hcq : c ∈ F.coloursAt q
+    · exact Or.inr ⟨hcq, hc⟩
+    · left
+      obtain ⟨a, ha⟩ := Set.ncard_eq_one.mp hdiff
+      have h1 : c ∈ F.coloursAt u \ F.coloursAt q := ⟨hc, hcq⟩
+      have h2 : i ∈ F.coloursAt u \ F.coloursAt q := ⟨hiu, hiq⟩
+      rw [ha] at h1 h2
+      exact h1.trans h2.symm
+  -- the two colours shared with `q`, each with a tile at `q` inside `B(u, 1)`
+  obtain ⟨j₁, j₂, hj12, hJ⟩ := Set.ncard_eq_two.mp hq2
+  have hqdom : q ∈ F.dom := hdom (by rw [hq]; norm_num)
+  have htile : ∀ j ∈ F.coloursAt q ∩ F.coloursAt u, ∃ T', F.TileOf j T' ∧ q ∈ closure T' ∧ ∃ t ∈ T', dist t u < 1 := by
+    intro j hj
+    obtain ⟨T', hT', hqT'⟩ := exists_tileOf_of_mem_coloursAt hqdom hj.1
+    obtain ⟨t, ht⟩ := hT'.1.nonempty
+    exact ⟨T', hT', hqT', t, ht, mem_ball.mp (hqT j hj T' hT' hqT' ht)⟩
+  obtain ⟨T₁, hT₁, hqT₁, t₁, ht₁, ht₁u⟩ := htile j₁ (by rw [hJ]; simp)
+  obtain ⟨T₂, hT₂, hqT₂, t₂, ht₂, ht₂u⟩ := htile j₂ (by rw [hJ]; simp)
+  -- a radius inside which every interior point carries a colour of `u`, and all three tiles reach
+  obtain ⟨r₀, hr₀, hr₀pos⟩ := ((eventually_col_mem_coloursAt u).and self_mem_nhdsWithin).exists
+  have hr₀pos' : 0 < r₀ := hr₀pos
+  set ε := min (min (1 - dist t₀ u) (1 - dist t₁ u)) (min (1 - dist t₂ u) r₀) with hεdef
+  have hε : 0 < ε := lt_min (lt_min (by linarith) (by linarith)) (lt_min (by linarith) hr₀pos')
+  have hε0 : ε ≤ 1 - dist t₀ u := (min_le_left _ _).trans (min_le_left _ _)
+  have hε1 : ε ≤ 1 - dist t₁ u := (min_le_left _ _).trans (min_le_right _ _)
+  have hε2 : ε ≤ 1 - dist t₂ u := (min_le_right _ _).trans (min_le_left _ _)
+  have hεr : ε ≤ r₀ := (min_le_right _ _).trans (min_le_right _ _)
+  have hε1' : ε ≤ 1 := hε0.trans (by linarith [dist_nonneg (x := t₀) (y := u)])
+  obtain ⟨z₀, hz₀u, hz₀q, hz₀p⟩ := exists_near_far_antipodal hq hpu h2 hε
+  -- an interior point of the map near `z₀` with the same three properties
+  have hU : IsOpen {z : ℂ | dist z u < ε ∧ 1 < dist z q ∧ 1 < dist z p} :=
+    (isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+      ((isOpen_lt continuous_const (continuous_id.dist continuous_const)).inter
+        (isOpen_lt continuous_const (continuous_id.dist continuous_const)))
+  have hz₀dom : z₀ ∈ F.dom := hdom (by linarith)
+  obtain ⟨z, ⟨hzu, hzq, hzp⟩, hzI⟩ := mem_closure_iff.mp (F.dense_interiorPts hz₀dom) _ hU ⟨hz₀u, hz₀q, hz₀p⟩
+  have hzc : F.col z ∈ F.coloursAt u := hr₀ z ⟨hzI, mem_ball.mpr (hzu.trans_le hεr)⟩
+  have hzr : z ∈ F.region (F.col z) := ⟨hzI, rfl⟩
+  have hnear : ∀ t, dist t u < 1 → dist t u + ε ≤ 1 → dist z t < 1 := fun t _ ht => by
+    have := dist_triangle z u t; rw [dist_comm u t] at this; linarith
+  rcases hcol _ hzc with hci | hcq
+  · rw [hci] at hzr
+    have := dist_le_one_of_mem_region B.valid hT hzr ht₀T (hnear t₀ ht₀u (by linarith)) hpT
+    linarith
+  · rw [hJ] at hcq
+    rcases hcq with hc1 | hc1
+    · rw [hc1] at hzr
+      have := dist_le_one_of_mem_region B.valid hT₁ hzr ht₁ (hnear t₁ ht₁u (by linarith)) hqT₁
+      linarith
+    · rw [mem_singleton_iff] at hc1
+      rw [hc1] at hzr
+      have := dist_le_one_of_mem_region B.valid hT₂ hzr ht₂ (hnear t₂ ht₂u (by linarith)) hqT₂
+      linarith
 
 /-- **Corollary 3 under H** (FS112-N3-COR3): two cubic trichromatic points of `B̄(u, 1)` with disjoint colours are at least `2` apart —
 `cor3` would put a four-colour point within `1` of one of them, inside `B̄(u, 2)`. -/
