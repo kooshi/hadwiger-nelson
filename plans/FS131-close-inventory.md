@@ -1467,3 +1467,27 @@ reason by the close.*
      **Tool defect (the brief gate, a false pass)**: my first draft quoted two Stage-17 lines under source lines naming Stage 14's heading, and the gate passed
      it — it appears to accept a quotation found anywhere after the named heading, not only within its section. Caught by reading the draft; fixed before launch.
      Owed: a repro filed in agent-forge (`forge/STATUS.md` under Keryx).
+207. **FS131-K5b done, harness ≈ 411k** (report `data/fs131/reports/FS131-K5b.md` on `fs131-w5`; branch at `764cc558`, checked): **wave 5 is fully planned but
+     for the base's leaves.** Stated and read back: FS112-ROTHEX (`Plane/ValidMap/HexRing`: `rot_noThird`, `rot_out`, `rot_in`, `hex_regular` with item 203's
+     double-cusp disjunct, `p17_ua` widened to the germ form), FS114-BV-HEX's four clauses (`bv_hex`, `bv_l3`, `bv_nd` with `linkage_dot_ne_zero`, `bv_nd1`;
+     item 203's widenings and narrowing), FS114-CVB-THOM with CVB-PINCH (`Plane/ValidMap/MapGraph`: `cvb_thom_reduced`, `cvb_thom`, `cvb_pinch_connected`
+     widened to every hole-free tile, `cvb_hole_disconnected`, `exists_holed_valid_fragment`); Thomassen's Lemma 1 planned **formalized**, not an axiom. The
+     obligation pass over all 41 statements: no statement changes; two missing children named (`stuckAlong_of_run`, `shaveAvailable_of_flanks_eq`); Mathlib
+     names confirmed (`data/fs131/k5/K5bChecks.lean`, exit 0). The handoff is plan § 10 (wave 4's § 14 form). Keryx's receipts: build log
+     `build/gate/build/20261004T183935Z-1476479.log` (w5) "Build completed successfully (5364 jobs)", 0 warnings other than `sorry`; `sorry` lines by count Chain 0,
+     Terminal 14, Dense 10, HexRing 10, MapGraph 7 (41); no `axiom` in the new modules. Slip (K5's plan § 4, found by K5b): leaves 3 and 11 cite
+     `IsHorn.isRingArc_upper`, which does not exist — use `flankQ_upper_of_qrOnly`'s conclusion. **Question for FS131-KB**: `bv_l3` needs `RingProper` (no arc of
+     Γ along either circle), as BASE-V's BV-L3 does; the walk's step 8 at a pigeonhole vertex whose circle carries an in- or out-contact arc then has no Lemma 3 as
+     stated — KB settles first whether such arcs can occur there, or a Lemma 3 tolerating them is needed (plan § 10.5). Carriers recommended (for wave 5's gate):
+     IN `IsTerminalMap`, `QROnly`, `HexRing` (refuted-only), `RingProper`, `LocallyHamiltonian`; OUT `IsModification`, `BaseHyp`, `NoInertNear`, `DoubleEvent`,
+     `GermPseudo`, `IsHoleOf`. **Prediction registered** (scored at the close): wave 5 short of the base is three to four implementer sessions;
+     `cvb_thom_reduced` alone one to two (planar core; Mathlib has no Jordan curve theorem, checked by grep).
+208. **Rulings on K5b's held items.** (a) **`cvb_thom_reduced` is not split off yet**: wave 5's implementer prices it from its first two children (plan § 9.1)
+     and I decide then. Alternative weighed: its own implementer job now. Why: a split before any pricing guesses at the size, and no slot is free for it.
+     Confidence: high. (b) The carriers' in/out recommendation goes to wave 5's implementer at its gate, under T1's procedure (no ruling now). (c) **K5b's slot
+     goes to wave 4's `Contact` implementer, FS131-IC1** (item 205's order). Its worktree `fs131-w4c` branches from `fs131-w4` at `68f34f18` with its own record
+     `plans/FS131-IC-implementation.md`; it merges into `fs131-w4` before wave 4's gate.
+209. **Brief FS131-IC1, wave 4's `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC1-contact.md`, gated PASS): `Contact`'s 10 leaves on `fs131-w4c`
+     (from `fs131-w4` at `68f34f18`; `.lake/build` copied from `fs131-w5`), own record `plans/FS131-IC-implementation.md`; no merge and no gate of its own (the
+     second of IC1 and I4h to finish merges, on Keryx's word). Launched in K5b's slot: 1 (I2l) + 1 (I4h) + 1 (IC1) = 3. Queue: FS131-KB (the base's planner),
+     wave 5's implementer.
