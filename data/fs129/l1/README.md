@@ -32,3 +32,9 @@ The order's source is `data/fs129/index/lean-order-corrected.md`, never `lean-or
 ### Reading budget
 
 The brief's reading list fits: the script reads the files itself. I read the four audits' list sections, the inventory items named, the corrected order and its README, and the census and gate sources, in part.
+
+## Stage 2 — SAVED (the script, its merges, its self-test)
+
+- `tools/fs129_l1_backlog.py` written (standard library plus `tools/fs71_ledger_b_check.py` and, through it, the Ephodos gate). `data/fs129/l1/merges.csv`: 42 lines keyed by hand from the four audits' lists (list, item, kind, status, the ids each line names, its address as `file:first-last`), their `text` column filled by `python3 tools/fs129_l1_backlog.py --fill-merges` from those lines and re-checked against them on every run.
+- **Negative controls** (`python3 tools/fs129_l1_backlog.py --self-test`, output in `data/fs129/l1/self-test.out`, exit 0): the clean run has 0 failures and counts 259 rows, 28 dated notes and 147 merge notes (so it cannot pass by checking nothing); then each of the five planted faults is caught and named: a statement altered by one character (FS116-Y4-EMPTY), an erratum dropped from its entry (FS114-N7-3T), a superseded entry listed for formalization (FS129-MA1-FALC-19), a merge line naming an id that is no entry (FS129-NO-SUCH-ENTRY, in a planted copy of `merges.csv`, removed afterwards), an entry placed before something it rests on (FS106-TS-C before FS106-DIAM).
+- Second route: the written file is re-read and each quoted block is compared with its source by regular expressions over the raw lines at the row's address, not through the gate's parser (`indep`, `indep_notes` in the script).

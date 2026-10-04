@@ -1,0 +1,7 @@
+clean run: 0 failures (must be 0); rows 259, notes 28, merge notes 147
+plant statement altered by one character: caught (1 failures) — FS116-Y4-EMPTY: the statement differs from its source (plans/FS116-derivation.md:1714): file says 'no non-Sibm
+plant erratum dropped from its entry: caught (3 failures) — FS114-N7-3T: the erratum at plans/FS114-derivation.md:746 is missing from the file
+plant superseded entry listed for formalization: caught (12 failures) — FS129-MA1-FALC-19: a superseded entry is listed for formalization
+plant merge line naming an id that does not exist: caught (1 failures) — SR1-6.2 item 1: names id FS129-NO-SUCH-ENTRY, which is not an entry of any derivation file
+plant entry placed before something it rests on: caught (1 failures) — FS106-TS-C: placed before FS106-DIAM, which it rests on
+RESULT: PASS
