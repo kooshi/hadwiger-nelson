@@ -1866,3 +1866,38 @@ reason by the close.*
      separate T3-owner job for the file, wave 2 landing without it. Why: T3 is finished; a self-test landing red on `main` would hide the next real failure, and
      I2n's edits keep each control's intent and two-sidedness; the deeper fix (item 259's owed defect) is not needed to land. Confidence: high. **At wave 4's
      landing** (the second of waves 2 and 4 to land), whoever merges re-runs the self-test, since wave 4's counts differ.
+261. **FS131-IM1 handed back** (Stage 3 SAVED, harness ≈ 390k; report `fs131-w4m`'s `data/fs131/reports/FS131-IM1.md`, commits `47efc1e0`, `8d075e9c`, `dbedaf97`).
+     **The three moves not proved** (each `sorry`; none false, no statement defect); planned in the record (`plans/FS131-IM-implementation.md` § 3, on `fs131-w4m`).
+     **Held, [kernel], the standard three**: `germArc` with `carrier_germArc`, `germArc_nondegenerate`, `germArc_isUnitArc_iff` (an arc whose carrier is exactly the
+     branch `branchPt v β κ '' [0, ρ]`; a unit arc iff `|κ| = 1`) and `ArcMap.isClear_of_mem_closure` (a limit of points clear for `c` is clear for `c`), in `Moves`.
+     Engine 2 brought over (Basic byte-identical to `3f7ea033`'s); the ruled block move done (`Cone`, whole declarations l. 26–1056 plus the three single lemmas,
+     checked by `tools/fs131_im_move_cone.py`, negative control watched red); the three `…_aux` statements copied by `tools/fs131_im_statements.py` (empty diff,
+     control watched red). **Receipt (Keryx)**: the commits exist; `build/gate/build/20261004T220917Z-2800792.log` ends "Build completed successfully (5361
+     jobs)", 79 `sorry` warnings and 0 other warnings; `sorry` lines by count: `Moves` 3, `Cone` 0, `Contact` 4; `data/fs131/im/axioms-stage3.txt` gives the four
+     new lemmas `[propext, Classical.choice, Quot.sound]` and the three `…_aux` `sorryAx` besides. Results (record § 3): one surgery design for all three moves (the
+     cut re-adds the kept chart branches as germ arcs; an old arc through `v` minus the open ball is at most four arcs, by the chord formula; SHAVE and RAY may add
+     the whole rim circle as an arc, MERGE may not, by its `¬HasRepeatedColour` rim clause); SHAVE's open cases (`g = c`, `h = c`) provable with no statement
+     change (§ 3.2); N4-RAY's clearness as exact frame algebra, three cases [hand, one mind, a sketch] (§ 3.3). **Re-priced**: SHAVE about three implementer
+     sessions, RAY two more on SHAVE's machinery, MERGE two to three — against IC1's "about a session each"; most of it shared machinery (the old-arc pieces outside
+     the ball, the modified map, the sector-count partition, the rim-colour bound); § 3.5 orders SHAVE's next five children. Credit: IM1 found that ruling 236's
+     premise was wrong a second time (item 262 (b)), and planned the shared surgery that makes three moves one construction.
+262. **Corrections, slips and a tool defect from IM1's report.** (a) **Correction owed — N4-RAY's route**: recolouring the whole gap merges every `c`-sector
+     between, leaving `n − m` sectors, not `n`; RAY must merge `H₁` with the nearest `c`-horn above it, which the statement's `∃` allows (record § 3.3); erratum to
+     N4-RAY's hand route at the filing. (b) **Slip (Keryx's) — ruling 236's premise "the moves read nothing of `Contact`'s own" was wrong twice**: N3-CONF and the
+     horn algebra (items 253–254), and now SHAVE's sector count, which needs `Contact`'s horn-chart lemmas (`hornSet_curv_eq`, `IsHorn.exists_chart_index`,
+     `IsSectorChart.exists_col`, `IsSectorChart.exists_flank_after`/`_before`, `IsHorn.exists_flankAbove`/`_Below`, `IsSectorChart.index_of_isSector_hornSet`, l.
+     2252–2633 at `d4f946ae`, and `e_eq_of_mem_coneAt_hornSet`, l. 1058). (c) **Slip (Keryx's) — ruling 254's range "l. 27–1030" split declarations** (it began on
+     `frameX_add_smul`'s first line, whose docstring is l. 26, and ended inside `mem_coneAt_hornSet`); IM1 moved whole declarations, l. 26–1056. Lesson: name a
+     moved range by its first and last declarations, not by line numbers. (d) **Tool defect**: `tools/fs131_k4_decls.py` lists two `_root_`-prefixed names as
+     missing and exits 0 (predates IM1).
+263. **Ruling: the second move is a prefix move, into `Cone`, by IM1's successor on `fs131-w4m`.** Choice: FS131-IM2 moves **every declaration of `Contact` from
+     `e_eq_of_mem_coneAt_hornSet` through `IsSectorChart.index_of_isSector_hornSet`** (d4f946ae's l. 1057–2593, whole declarations with their docstrings and the
+     `namespace`/`variable` lines they sit under; the single lemma already moved stays moved) verbatim into `Cone`, deleting them from `Contact`, which reopens its
+     namespace before `woodallCone_isHorn`. Alternative weighed: IM1's proposal, moving only the horn-chart lemmas' dependency closure, computed by parsing the
+     proofs. Why: a prefix of a Lean file depends only on what precedes it, so moving the whole remaining prefix is valid by construction and needs no dependency
+     analysis, which IM1 found over-counts; the cost is lemmas in `Cone` that `Moves` never cites, which is harmless. The prefix stops before `woodallCone_isHorn`
+     (l. 2594), a child of `stuck_structure`, so FS131-IC5 keeps every lemma it may need to touch. IC5's hunks on `fs131-w4c` all lie at or below d4f946ae's
+     l. 3252 (Keryx, `git diff -U0 d4f946ae` in that tree), so the merge stays disjoint; IC5 is told by message not to edit d4f946ae's l. 1057–2593 either. No
+     `private` declaration lies in the range (Keryx, by grep), so nothing changes visibility. Confidence: medium-high — what would change it: IC5 needing to edit a
+     declaration in the range (then it messages first). **Wave 4's moves are now its longest path** (about seven to eight implementer sessions); once SHAVE's shared
+     machinery lands, I will weigh splitting RAY and MERGE into parallel modules downstream of it.
