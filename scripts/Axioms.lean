@@ -2159,6 +2159,8 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.CircleColouring.hSum_shift
 #print axioms HadwigerNelson.Plane.CircleColouring.ringband_iii'
 
+#eval IO.println "=== PURCHASED ==="
+
 /-! ## M03 — the certificate routes
 
 Each of these evaluates `LRAT.check` by `native_decide`, which is the only thing that can evaluate
