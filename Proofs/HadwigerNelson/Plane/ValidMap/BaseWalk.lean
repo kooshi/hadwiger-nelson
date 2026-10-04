@@ -40,10 +40,15 @@ variable {k : ℕ}
 trichromatic, no point of `F(M) ∪ R(M)` in `B̄(u, 2)`, no inert unit arc centred within `1` of `u`. Refuted by `row134BaseUA`; every theorem
 of this file is a step of that refutation (no model expected). -/
 structure BaseCtx (F : ArcMap 6) (u : ℂ) : Prop where
+  /-- The fragment is valid. -/
   valid : F.Valid
+  /-- It covers `B̄(u, 2)`. -/
   covers : F.Covers u 2
+  /-- `u` is cubic trichromatic. -/
   cubic : F.IsCubicTrichromatic u
+  /-- H: no point of `F(M) ∪ R(M)` in `B̄(u, 2)`. -/
   hyp : F.BaseHyp u
+  /-- No inert unit arc centred within `1` of `u`. -/
   noInert : F.NoInertNear u
 
 /-- A point is **V-in** relative to `u` (FS110-CD § 2.3): a point of `ω(u)` some tile of whose colours carried at `u` meets `B(u, 1)`. -/

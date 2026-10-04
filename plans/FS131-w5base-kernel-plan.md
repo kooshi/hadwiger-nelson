@@ -247,3 +247,10 @@ inside the refutation. `eleventh_type` and `endpoint_dist_ge` are unconditional 
 3. **GAP-ELEVEN's resolution** (Keryx and the deriver), then C5's plan.
 4. **A2/D4's covering caveat**: decide between a local `cor3` variant and a hypothesis change to `cor3` (the latter would be a finding).
 5. The skeleton build's result (§ 3.4).
+
+## Stage 3, § 3.4 — the skeleton build (SAVED)
+
+`./scripts/build.sh` under the slot (40 GiB, 8 cpus, `BATCH=4`) on `c48f0ba8`'s tree: **OK, 446 of 446 batches, 4 modules rebuilt, 9 with warnings, exit 0**
+(`build/gate/build/20261004T192248Z-1722529.log`; driver log `data/fs131/kb/build-asgiven.log`). Every warning was `declaration uses sorry` except five
+`missing doc string for public field BaseCtx.*` in `BaseWalk`. Those are fixed (field docstrings), and `lake env lean` on `BaseWalk` shows only `sorry`
+warnings. The confirming build is `data/fs131/kb/build-stage3b.log`, recorded in the report if it lands before hand-back.
