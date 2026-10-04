@@ -1770,6 +1770,50 @@ theorem unitForm_tendsto {g : ℕ → ℂ → ℝ} {F : ℂ → ℝ} (hg : ∀ m
       (𝓝 (∫ x in ball (0 : ℂ) R, F x * ∫ θ in Ico 0 (2 * Real.pi), F (x + e θ))) := by
   sorry
 
+/-- The averaging step: some disc of radius `r` about a point of `B(0, R − r)` meets the complement of `S` in at most the
+average, `|B(0, r)| · |B(0, R) ∖ S| / |B(0, R − r)|`. -/
+theorem exists_ball_diff_le_avg {S : Set ℂ} (hS : MeasurableSet S) {r R : ℝ} (hr : 0 < r) (hrR : r < R) :
+    ∃ v ∈ ball (0 : ℂ) (R - r), volume (ball v r \ S) ≤
+      volume (ball (0 : ℂ) r) * volume (ball (0 : ℂ) R \ S) / volume (ball (0 : ℂ) (R - r)) := by
+  set E : Set (ℂ × ℂ) := {q | dist q.2 q.1 < r ∧ q.2 ∉ S} with hE
+  have hEm : MeasurableSet E :=
+    (measurableSet_lt (continuous_snd.dist continuous_fst).measurable measurable_const).inter
+      (measurable_snd hS.compl)
+  have hsl : ∀ v, Prod.mk v ⁻¹' E = ball v r \ S := fun v => by ext x; simp [hE, mem_ball]
+  set B' := ball (0 : ℂ) (R - r) with hB'
+  have hB'0 : volume B' ≠ 0 := (measure_ball_pos volume _ (by linarith)).ne'
+  have hB'top : volume B' ≠ ⊤ := measure_ball_lt_top.ne
+  have hf : Measurable fun v => volume (Prod.mk v ⁻¹' E) := measurable_measure_prodMk_left hEm
+  have hint : ∫⁻ v in B', volume (Prod.mk v ⁻¹' E) ≤ volume (ball (0 : ℂ) r) * volume (ball (0 : ℂ) R \ S) := by
+    rw [← Measure.prod_apply hEm, Measure.prod_apply_symm hEm]
+    calc ∫⁻ x, (volume.restrict B') ((fun v => (v, x)) ⁻¹' E) ≤
+          ∫⁻ x, (ball (0 : ℂ) R \ S).indicator (fun _ => volume (ball (0 : ℂ) r)) x := by
+          refine lintegral_mono fun x => ?_
+          by_cases hx : x ∈ ball (0 : ℂ) R \ S
+          · rw [indicator_of_mem hx, Measure.restrict_apply' measurableSet_ball]
+            calc volume ((fun v => (v, x)) ⁻¹' E ∩ B') ≤ volume (ball x r) := by
+                  refine measure_mono fun v hv => ?_
+                  simp only [hE, mem_inter_iff, mem_preimage, mem_setOf_eq] at hv
+                  rw [mem_ball, dist_comm]; exact hv.1.1
+              _ = _ := by
+                  rw [volume_ball_ofReal x hr.le, volume_ball_ofReal 0 hr.le]
+          · rw [indicator_of_notMem hx, nonpos_iff_eq_zero, Measure.restrict_apply' measurableSet_ball]
+            refine measure_mono_null (fun v hv => ?_) measure_empty
+            simp only [hE, mem_inter_iff, mem_preimage, mem_setOf_eq, mem_ball, dist_zero_right] at hv
+            refine hx ⟨?_, hv.1.2⟩
+            rw [mem_ball, dist_zero_right]
+            have := norm_sub_norm_le x v
+            rw [← dist_eq_norm] at this
+            linarith [hv.1.1, hv.2]
+      _ = _ := by
+          rw [lintegral_indicator_const (measurableSet_ball.diff hS), mul_comm]
+  obtain ⟨v, hv, hle⟩ := exists_le_setLAverage hB'0 hB'top hf.aemeasurable
+  refine ⟨v, hv, ?_⟩
+  rw [← hsl v]
+  refine hle.trans ?_
+  rw [setLAverage_eq]
+  exact ENNReal.div_le_div_right hint _
+
 /-- **Translates with vanishing holes**: if partial colourings with a translation-invariant class property reach upper
 density `1`, translates of them leave holes tending to `0` in every ball (`upperDensity` at origin-centred balls, an
 averaging over centres in `B(0, R − r)`). -/
@@ -1778,7 +1822,83 @@ theorem exists_translates_small_hole {P : (Fin k → Set ℂ) → Prop}
     (h : (⨆ (C : Fin k → Set ℂ) (_ : IsPartialColouring C ∧ P C), upperDensity (⋃ j, C j)) = 1) :
     ∃ C : ℕ → Fin k → Set ℂ, (∀ m, IsPartialColouring (C m) ∧ P (C m)) ∧
       ∀ R : ℝ, Tendsto (fun m => volume (ball (0 : ℂ) R \ ⋃ j, C m j)) atTop (𝓝 0) := by
-  sorry
+  have key : ∀ r : ℝ, 0 < r → ∀ η : ℝ, 0 < η → ∃ C : Fin k → Set ℂ, (IsPartialColouring C ∧ P C) ∧
+      volume (ball (0 : ℂ) r \ ⋃ j, C j) ≤ ENNReal.ofReal η := by
+    intro r hr η hη
+    set δ : ℝ := η / (4 * (r ^ 2 * Real.pi)) with hδ
+    have hδ0 : 0 < δ := by positivity
+    have hlt : ENNReal.ofReal (1 - δ) < ⨆ (C : Fin k → Set ℂ) (_ : IsPartialColouring C ∧ P C), upperDensity (⋃ j, C j) := by
+      rw [h, ENNReal.ofReal_lt_one]; linarith
+    obtain ⟨C, hC⟩ := lt_iSup_iff.1 hlt
+    obtain ⟨hCP, hCd⟩ := lt_iSup_iff.1 hC
+    set S := ⋃ j, C j with hSdef
+    have hSm : MeasurableSet S := MeasurableSet.iUnion hCP.1.1
+    obtain ⟨R, hR, hRS⟩ := Filter.frequently_atTop.1 (frequently_lt_of_lt_limsup (by isBoundedDefault) hCd) (2 * r)
+    have hR0 : 0 < R := by linarith
+    have hBR0 : volume (ball (0 : ℂ) R) ≠ 0 := (measure_ball_pos volume _ hR0).ne'
+    have hBRt : volume (ball (0 : ℂ) R) ≠ ⊤ := measure_ball_lt_top.ne
+    -- the hole of `S` in `B(0, R)`
+    have hhole : volume (ball (0 : ℂ) R \ S) ≤ ENNReal.ofReal δ * volume (ball (0 : ℂ) R) := by
+      have h1 : ENNReal.ofReal (1 - δ) * volume (ball (0 : ℂ) R) ≤ volume (S ∩ ball 0 R) := by
+        have := (ENNReal.lt_div_iff_mul_lt (Or.inl hBR0) (Or.inl hBRt)).1 hRS
+        exact this.le
+      have hsplit := measure_inter_add_sdiff (μ := volume) (ball (0 : ℂ) R) hSm
+      have hsum : volume (ball (0 : ℂ) R) ≤
+          ENNReal.ofReal (1 - δ) * volume (ball (0 : ℂ) R) + ENNReal.ofReal δ * volume (ball (0 : ℂ) R) := by
+        rw [← add_mul]
+        calc volume (ball (0 : ℂ) R) = 1 * volume (ball (0 : ℂ) R) := (one_mul _).symm
+          _ ≤ _ := by
+              gcongr
+              calc (1 : ENNReal) = ENNReal.ofReal (1 - δ + δ) := by rw [sub_add_cancel, ENNReal.ofReal_one]
+                _ ≤ _ := ENNReal.ofReal_add_le
+      have hfin : volume (ball (0 : ℂ) R ∩ S) ≠ ⊤ := measure_ne_top_of_subset inter_subset_left hBRt
+      refine (ENNReal.add_le_add_iff_left hfin).1 ?_
+      rw [hsplit]
+      refine hsum.trans ?_
+      rw [inter_comm] at h1
+      gcongr
+    obtain ⟨v, -, hv⟩ := exists_ball_diff_le_avg hSm hr (by linarith : r < R)
+    have hRr : 0 < R - r := by linarith
+    have hbound : volume (ball v r \ S) ≤ ENNReal.ofReal η := by
+      refine hv.trans ?_
+      calc volume (ball (0 : ℂ) r) * volume (ball (0 : ℂ) R \ S) / volume (ball (0 : ℂ) (R - r)) ≤
+            volume (ball (0 : ℂ) r) * (ENNReal.ofReal δ * volume (ball (0 : ℂ) R)) / volume (ball (0 : ℂ) (R - r)) := by
+            gcongr
+        _ = volume (ball (0 : ℂ) r) * ENNReal.ofReal δ * (volume (ball (0 : ℂ) R) / volume (ball (0 : ℂ) (R - r))) := by
+            rw [← mul_assoc, mul_div_assoc]
+        _ = ENNReal.ofReal (r ^ 2 * Real.pi * δ * (R / (R - r)) ^ 2) := by
+            have e1 : volume (ball (0 : ℂ) R) / volume (ball (0 : ℂ) (R - r)) = ENNReal.ofReal ((R / (R - r)) ^ 2) := by
+              rw [volume_ball_ofReal 0 hR0.le, volume_ball_ofReal 0 hRr.le, ← ENNReal.ofReal_div_of_pos (by positivity)]
+              congr 1; field_simp
+            rw [e1, volume_ball_ofReal 0 hr.le, ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity)]
+        _ ≤ ENNReal.ofReal η := by
+            refine ENNReal.ofReal_le_ofReal ?_
+            have h2 : R / (R - r) ≤ 2 := by rw [div_le_iff₀ hRr]; linarith
+            have h3 : (R / (R - r)) ^ 2 ≤ 4 := by
+              have : 0 ≤ R / (R - r) := by positivity
+              nlinarith
+            have h4 : r ^ 2 * Real.pi * δ * 4 = η := by
+              rw [hδ]; field_simp
+            calc r ^ 2 * Real.pi * δ * (R / (R - r)) ^ 2 ≤ r ^ 2 * Real.pi * δ * 4 := by gcongr
+              _ = η := h4
+    refine ⟨fun j => (· + v) ⁻¹' C j, ⟨⟨fun j => (measurable_id.add_const v) (hCP.1.1 j), fun i j hij =>
+      (hCP.1.2 hij).preimage _⟩, hP C v hCP.2⟩, ?_⟩
+    have hpre : ball (0 : ℂ) r \ ⋃ j, (· + v) ⁻¹' C j = (· + v) ⁻¹' (ball v r \ S) := by
+      ext x
+      simp only [Set.mem_sdiff, mem_ball, mem_iUnion, mem_preimage, hSdef, dist_eq_norm, add_sub_cancel_right, sub_zero]
+    rw [hpre, measure_preimage_add_right]
+    exact hbound
+  choose C hC hhole using fun m : ℕ => key ((m : ℝ) + 1) (by positivity) (1 / ((m : ℝ) + 1)) (by positivity)
+  refine ⟨C, hC, fun R => ?_⟩
+  have hlim : Tendsto (fun m : ℕ => ENNReal.ofReal (1 / ((m : ℝ) + 1))) atTop (𝓝 0) := by
+    rw [← ENNReal.ofReal_zero]
+    exact ENNReal.tendsto_ofReal tendsto_one_div_add_atTop_nhds_zero_nat
+  refine tendsto_of_tendsto_of_tendsto_of_le_of_le' tendsto_const_nhds hlim (Eventually.of_forall fun m => bot_le) ?_
+  obtain ⟨m₀, hm₀⟩ := exists_nat_ge R
+  filter_upwards [eventually_ge_atTop m₀] with m hm
+  refine le_trans (measure_mono (sdiff_subset_sdiff_left (ball_subset_ball ?_))) (hhole m)
+  have : (m₀ : ℝ) ≤ m := by exact_mod_cast hm
+  linarith
 
 /-- The weak-* limit of the indicator families of `exists_translates_small_hole` sums to `1` almost everywhere. -/
 theorem ae_sum_eq_one_of_weakStar {C : ℕ → Fin k → Set ℂ} (hC : ∀ m, IsPartialColouring (C m))
