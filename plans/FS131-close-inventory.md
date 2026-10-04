@@ -911,3 +911,9 @@ reason by the close.*
      helper lemmas made `private` or namespaced. **Held for Kooshi**: a second audit pass over the statements no implementer has reached (wave 2's 13 `sorry`
      row theorems, wave 4's 113 skeleton statements); default, not run — each implementer reads its statements back as it reaches them. Tools kept:
      `tools/fs131_qa1_decls.py`, `tools/fs131_qa1_dupes.py`, `tools/fs131_qa1_quality.py`, each with a self-test and a watched control. Credit QA1.
+145. **FS131-I3g mid-job** (message 2026-10-04; commit `81608c71` on `fs131-w3`): `four_of_bothKind` and `flank_edge_exists` **proved** (scratch axioms: the standard
+     three); the inversion engine public at the end of `Plane/LocalStructure` as item 135 required (`Rgn`/`levD`/`invC` chart, `isPreconnected_Rgn_lev`,
+     `GoodAt.exists_wedge`, `coneAt_interiors_disjoint`, `exists_initialPiece_of_cone`, `Arc.exists_initialPiece_of_approach`). Left: `sixFrag_valid`,
+     `sixFrag_nonSiamese`, then `localSectors` (branch form) and `Simple.coneAt_eq_angleIcc_sep`; I3g takes `localSectors` next, while its engine is fresh, and
+     the `SixFragment` leaves after if budget allows. Accepted without a message: wave 4 has no implementer running, and the engine is the cheaper thing for
+     this context to finish. Keryx's receipt: the commit exists; `sorry` lines by count — `RingGerm` 0, `SixFragment` 2, `LocalStructure` 0.
