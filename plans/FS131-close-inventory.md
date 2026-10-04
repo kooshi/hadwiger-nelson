@@ -1212,3 +1212,17 @@ reason by the close.*
 174. **Brief FS131-I2i, wave 2's ninth implementer** (Opus; `data/fs131/briefs/FS131-I2i-wave2.md`, gated PASS): the 53 lines, the owed items (docstrings, FALC-HOSTS (iv),
      wave 2's vacuity carriers with clause-exercising inhabitants), the gate (warnings counted, not the exit status — item 171's observation) and the landing.
      Launched in I3i's slot: 1 (I4c) + 1 (IWc) + 1 (I2i) = 3.
+175. **FS131-I4c handed back at stage 6, harness ≈ 418k** (report on its branch; `fs131-w4` at `2e42278a`, checked): `main` merged (`52fe62fd`); **[kernel], standard
+     three**: `lebesgue_covering_square` discharged by LEB's theorem in one line (docstring citing the 1948 printing), **FS106-L (`lemmaL`)** — item 143's first gap
+     closed with no two-dimensional covering step (one point, `exists_double_unit_circle`, by the intermediate value theorem) — and **FS106-TS-T clause (i)**
+     (`AeProperRegions.exists_three_le_multicolour`), so `ArcMap.ts_t` is sorry-free; `ts_t_trichromatic` and `ts_t_degree_three` wait on `exists_hasDegree_of_mem_dom`
+     (the bridge to `localSectors`). 54 → 51 (Contact 10, UnitArc 20, BaseSteps 20, SVMap 1). Keryx's receipts: build log
+     `build/gate/build/20261004T152838Z-359462.log` (w4) "Build completed successfully (5356 jobs)"; 51 `sorry` by count; `data/fs131/i4/axioms-i4c-stage6.txt` prints
+     `lemmaL` and `exists_three_le_multicolour` on the standard three. Correction owed to wave 4's plan (§ 13.5 and I4b's note): `lemmaL` needs no covering
+     step. Slip (I4c's): two more names collide with `fs131-ww`'s `Collar` (`isOpen_shadow`, `dot_add_left`, identical statements; besides `abs_dot_le`) — the
+     later branch deletes its copy (item 142). Not started (context): the bridge, `exists_hasDegree_of_mem_dom`, QA2's four items, `lock` clause 1 (item 143's
+     second gap), `AeProperRegions` as a carrier. Re-pricing on Opus: a planned-M leaf with its route fixed ≈ 200–230 lines, 15–25k tokens; most of the session
+     went to reading context. **Next**: FS131-I4d (Opus) from its ordered list.
+176. **Brief FS131-I4d, wave 4's fourth implementer** (Opus; `data/fs131/briefs/FS131-I4d-wave4.md`, gated PASS): merge `main`, the bridge and
+     `exists_hasDegree_of_mem_dom`, QA2's four items, `lock` clause 1, the rest, the carrier, the gate and the landing. Launched in I4c's slot: 1 (I2i) + 1 (IWc) +
+     1 (I4d) = 3.
