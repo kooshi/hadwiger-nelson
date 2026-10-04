@@ -2749,6 +2749,10 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.exists_shift_avoiding
+#print axioms HadwigerNelson.Plane.ArcMap.isClosed_Γ_inter_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.countable_ringPt_preimage
+#print axioms HadwigerNelson.Plane.ArcMap.exists_coveringPoint_of_window
 #print axioms HadwigerNelson.Plane.ArcMap.outside_segment_real
 #print axioms HadwigerNelson.Plane.ArcMap.outside_segment
 #print axioms HadwigerNelson.Plane.ArcMap.dist_ringPt_radial

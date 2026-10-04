@@ -3331,6 +3331,140 @@ theorem flankQ_both (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₃
 
 /-! ## FS112-A4SIX and FS112-NB4P: four-colour vertices and their rings -/
 
+open MeasureTheory in
+/-- **Six translates of a thin periodic set** (child of FS112-A4SIX): a measurable set of angles whose part in `[0, 2π)` has measure
+below `π/3` misses all six points `x + j·60°` of some shift `x`. -/
+theorem exists_shift_avoiding {S : Set ℝ} (hS : MeasurableSet S) (h : volume (S ∩ Ico 0 (2 * π)) < ENNReal.ofReal (π / 3)) :
+    ∃ x : ℝ, ∀ j : ℕ, j < 6 → x + j * (π / 3) ∉ S := by
+  have hπ := Real.pi_pos
+  by_contra hno
+  push Not at hno
+  set I : ℕ → Set ℝ := fun j => Ico (j * (π / 3)) (j * (π / 3) + π / 3) with hI
+  set T : ℕ → Set ℝ := fun j => (fun x => x + j * (π / 3)) ⁻¹' (S ∩ I j) with hT
+  have hcov : Ico 0 (π / 3) ⊆ ⋃ j ∈ Finset.range 6, T j := by
+    intro x hx
+    obtain ⟨j, hj, hjS⟩ := hno x
+    refine mem_iUnion₂.mpr ⟨j, Finset.mem_range.mpr hj, hjS, ?_, ?_⟩
+    · show (j : ℝ) * (π / 3) ≤ x + j * (π / 3); linarith [hx.1]
+    · show x + j * (π / 3) < j * (π / 3) + π / 3; linarith [hx.2]
+  have hdisj : PairwiseDisjoint (↑(Finset.range 6)) fun j => S ∩ I j := by
+    intro i _ j _ hij
+    refine Set.disjoint_left.mpr fun x hxi hxj => hij ?_
+    have h1 := hxi.2; have h2 := hxj.2
+    simp only [hI, mem_Ico] at h1 h2
+    have hij1 : (i : ℝ) < j + 1 := by
+      by_contra hc; push Not at hc
+      nlinarith [mul_le_mul_of_nonneg_right hc (by positivity : (0 : ℝ) ≤ π / 3)]
+    have hji1 : (j : ℝ) < i + 1 := by
+      by_contra hc; push Not at hc
+      nlinarith [mul_le_mul_of_nonneg_right hc (by positivity : (0 : ℝ) ≤ π / 3)]
+    have a1 : i < j + 1 := by exact_mod_cast hij1
+    have a2 : j < i + 1 := by exact_mod_cast hji1
+    omega
+  have hsub : (⋃ j ∈ Finset.range 6, S ∩ I j) ⊆ S ∩ Ico 0 (2 * π) := by
+    intro x hx
+    obtain ⟨j, hj, hxS, hx1, hx2⟩ := mem_iUnion₂.mp hx
+    have hj6 : (j : ℝ) + 1 ≤ 6 := by
+      have := Finset.mem_range.mp hj; exact_mod_cast this
+    refine ⟨hxS, ?_, ?_⟩
+    · have : (0 : ℝ) ≤ j * (π / 3) := by positivity
+      linarith
+    · nlinarith
+  have hvol : volume (Ico (0 : ℝ) (π / 3)) = ENNReal.ofReal (π / 3) := by
+    rw [Real.volume_Ico, sub_zero]
+  have : ENNReal.ofReal (π / 3) ≤ volume (S ∩ Ico 0 (2 * π)) :=
+    calc ENNReal.ofReal (π / 3) = volume (Ico (0 : ℝ) (π / 3)) := hvol.symm
+      _ ≤ volume (⋃ j ∈ Finset.range 6, T j) := measure_mono hcov
+      _ ≤ ∑ j ∈ Finset.range 6, volume (T j) := measure_biUnion_finset_le _ _
+      _ = ∑ j ∈ Finset.range 6, volume (S ∩ I j) := by
+          refine Finset.sum_congr rfl fun j _ => ?_
+          exact measure_preimage_add_right volume (j * (π / 3)) (S ∩ I j)
+      _ = volume (⋃ j ∈ Finset.range 6, S ∩ I j) :=
+          (measure_biUnion_finset hdisj fun j _ => hS.inter measurableSet_Ico).symm
+      _ ≤ volume (S ∩ Ico 0 (2 * π)) := measure_mono hsub
+  exact absurd h (not_lt.mpr this)
+
+/-- On a covered ring, the points of `Γ` form a closed set (finitely many compact arcs meet the ring). -/
+theorem isClosed_Γ_inter_sphere {p : ℂ} (hp : F.Covers p 1) : IsClosed (F.Γ ∩ sphere p 1) := by
+  have hK : sphere p 1 ⊆ F.dom := sphere_subset_closedBall.trans hp
+  choose! t ht hfin using F.locallyFinite
+  obtain ⟨S, hSK, hcov⟩ := (isCompact_sphere p 1).elim_nhds_subcover t fun x hx => ht x (hK hx)
+  set 𝒜 := {a | a ∈ F.arcs ∧ (a.carrier ∩ sphere p 1).Nonempty} with h𝒜def
+  have h𝒜 : 𝒜.Finite := by
+    refine (S.finite_toSet.biUnion fun x hx => hfin x (hK (hSK x hx))).subset ?_
+    rintro a ⟨ha, y, hya, hyK⟩
+    obtain ⟨x, hxS, hyx⟩ := mem_iUnion₂.mp (hcov hyK)
+    exact mem_iUnion₂.mpr ⟨x, hxS, ha, y, hya, hyx⟩
+  have heq : F.Γ ∩ sphere p 1 = (⋃ a ∈ 𝒜, a.carrier) ∩ sphere p 1 := by
+    ext y
+    constructor
+    · rintro ⟨⟨-, hy⟩, hys⟩
+      obtain ⟨a, ha, hya⟩ := mem_iUnion₂.mp hy
+      exact ⟨mem_iUnion₂.mpr ⟨a, ⟨ha, y, hya, hys⟩, hya⟩, hys⟩
+    · rintro ⟨hy, hys⟩
+      obtain ⟨a, ha, hya⟩ := mem_iUnion₂.mp hy
+      exact ⟨⟨hK hys, mem_iUnion₂.mpr ⟨a, ha.1, hya⟩⟩, hys⟩
+  rw [heq]
+  exact (h𝒜.isClosed_biUnion fun a _ => a.isClosed_carrier).inter isClosed_sphere
+
+open MeasureTheory in
+/-- The angles of a point of the plane on a ring are countably many (`e` has period `2π`). -/
+theorem countable_ringPt_preimage (p c : ℂ) : (ringPt p ⁻¹' {c}).Countable := by
+  rcases (ringPt p ⁻¹' {c}).eq_empty_or_nonempty with h | ⟨θ₀, hθ₀⟩
+  · rw [h]; exact countable_empty
+  · refine (countable_range fun n : ℤ => θ₀ + n * (2 * π)).mono fun θ hθ => ?_
+    have h1 : e θ = e θ₀ := by
+      have := hθ.trans hθ₀.symm
+      simpa [ringPt] using this
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp h1
+    exact ⟨n, hn.symm⟩
+
+/-- **The covering change point** (wave 4's engine 7): on a window `[s, s + w]` of `ω(v)` whose interior points carry only the colours
+`a`, `b`, whose ends are interior points of colours `a` and `b`, and which holds no positive-length arc of `Γ` strictly inside, some point
+carries both `a` and `b` (the window is the union of the two closed sets of points carrying `a` and carrying `b`). -/
+theorem exists_coveringPoint_of_window {v : ℂ} (hv : F.Covers v 1) {s w : ℝ} (hw : 0 < w) {a b : Fin k}
+    (hsa : ringPt v s ∈ F.region a) (hsb : ringPt v (s + w) ∈ F.region b)
+    (hcol : ∀ θ ∈ Icc s (s + w), ringPt v θ ∈ F.interiorPts → F.col (ringPt v θ) = a ∨ F.col (ringPt v θ) = b)
+    (hno : ¬ ∃ θ₁ θ₂, s < θ₁ ∧ θ₁ < θ₂ ∧ θ₂ < s + w ∧ ringArc v θ₁ θ₂ ⊆ F.Γ) :
+    ∃ θ ∈ Icc s (s + w), a ∈ F.coloursAt (ringPt v θ) ∧ b ∈ F.coloursAt (ringPt v θ) := by
+  have hcont : Continuous (ringPt v) := by unfold ringPt e; fun_prop
+  have hdom : ∀ θ, ringPt v θ ∈ F.dom := fun θ => hv (sphere_subset_closedBall (ringPt_mem_sphere v θ))
+  have hca : IsClosed {θ | ringPt v θ ∈ closure (F.region a)} := isClosed_closure.preimage hcont
+  have hcb : IsClosed {θ | ringPt v θ ∈ closure (F.region b)} := isClosed_closure.preimage hcont
+  have hcover : Icc s (s + w) ⊆ {θ | ringPt v θ ∈ closure (F.region a)} ∪ {θ | ringPt v θ ∈ closure (F.region b)} := by
+    intro θ hθ
+    show ringPt v θ ∈ closure (F.region a) ∨ ringPt v θ ∈ closure (F.region b)
+    rw [← mem_union, ← closure_union, Metric.mem_closure_iff]
+    intro ε hε
+    set lo := max s (θ - ε / 2) with hlo
+    set hi := min (s + w) (θ + ε / 2) with hhi
+    have hlh : lo < hi := by
+      rcases lt_or_eq_of_le hθ.1 with h1 | h1
+      · exact max_lt (lt_min (by linarith) (by linarith [hθ.1])) (lt_min (by linarith [hθ.2]) (by linarith))
+      · rw [hlo, hhi, ← h1]
+        exact max_lt (lt_min (by linarith) (by linarith)) (lt_min (by linarith) (by linarith))
+    have hθ₁ : s < (2 * lo + hi) / 3 := by linarith [le_max_left s (θ - ε / 2)]
+    have hθ₂ : (lo + 2 * hi) / 3 < s + w := by linarith [min_le_left (s + w) (θ + ε / 2)]
+    have hnot : ¬ ringArc v ((2 * lo + hi) / 3) ((lo + 2 * hi) / 3) ⊆ F.Γ := fun h =>
+      hno ⟨_, _, hθ₁, by linarith, hθ₂, h⟩
+    obtain ⟨_, ⟨φ, hφ, rfl⟩, hφΓ⟩ := Set.not_subset.mp hnot
+    have hφI : ringPt v φ ∈ F.interiorPts := ⟨hdom φ, fun h => hφΓ ⟨hdom φ, h⟩⟩
+    have hφw : φ ∈ Icc s (s + w) := ⟨by linarith [hφ.1], by linarith [hφ.2]⟩
+    refine ⟨ringPt v φ, ?_, ?_⟩
+    · rcases hcol φ hφw hφI with h | h
+      · exact Or.inl ⟨hφI, h⟩
+      · exact Or.inr ⟨hφI, h⟩
+    · have h1 := dist_ringPt_ringPt_le v θ φ
+      have h2 : |θ - φ| < ε := by
+        rw [abs_lt]; constructor
+        · linarith [hφ.2, min_le_right (s + w) (θ + ε / 2)]
+        · linarith [hφ.1, le_max_right s (θ - ε / 2)]
+      linarith
+  obtain ⟨θ, hθ, hθa, hθb⟩ := isPreconnected_closed_iff.mp isPreconnected_Icc _ _ hca hcb hcover
+    ⟨s, ⟨le_rfl, by linarith⟩, subset_closure hsa⟩ ⟨s + w, ⟨by linarith, le_rfl⟩, subset_closure hsb⟩
+  exact ⟨θ, hθ, hθa, hθb⟩
+
+open MeasureTheory in
 /-- **FS112-A4SIX** (C-UA-BUDGET, branch 1), at the class its argument reads: a point `v` of a valid map at which exactly two colours
 are absent (a four-colour vertex, at six colours), with no covering pair `(v, y)` on its unit circle, has on that circle arcs of `Γ`
 of total length at least `60°`, or at least six, one inside each of six consecutive open `60°` windows. -/
@@ -3339,7 +3473,91 @@ theorem a4six (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {a b : Fin k} (hab : 
     ENNReal.ofReal (π / 3) ≤ arcLength {θ | F.OnRingArc v (ringPt v θ)} ∨
       ∃ x : ℝ, ∀ j : Fin 6, ∃ θ₁ θ₂, x + (j : ℕ) * (π / 3) < θ₁ ∧ θ₁ < θ₂ ∧ θ₂ < x + ((j : ℕ) + 1) * (π / 3) ∧
         ringArc v θ₁ θ₂ ⊆ F.Γ := by
-  sorry
+  have hπ := Real.pi_pos
+  by_cases hm : ENNReal.ofReal (π / 3) ≤ arcLength {θ | F.OnRingArc v (ringPt v θ)}
+  · exact Or.inl hm
+  right
+  push Not at hm
+  have hcont : Continuous (ringPt v) := by unfold ringPt e; fun_prop
+  -- the angles of `Γ` on the ring: closed, and of measure below `π/3` in one turn
+  set Sg : Set ℝ := ringPt v ⁻¹' (F.Γ ∩ sphere v 1) with hSg
+  have hSm : MeasurableSet Sg := ((isClosed_Γ_inter_sphere hv).preimage hcont).measurableSet
+  have hA : arcLength {θ | F.OnRingArc v (ringPt v θ)} = volume ({θ | F.OnRingArc v (ringPt v θ)} ∩ Ico 0 (2 * π)) :=
+    Measure.restrict_apply' measurableSet_Ico
+  set E := (F.Γ ∩ sphere v 1) \ {x | F.OnRingArc v x} with hEdef
+  have hE : volume (ringPt v ⁻¹' E) = 0 := by
+    refine Set.Countable.measure_zero ?_ volume
+    exact ((F.finite_ringΓ_off_ringArc hv).countable.biUnion fun c _ => countable_ringPt_preimage v c).mono
+      fun θ hθ => mem_iUnion₂.mpr ⟨ringPt v θ, hθ, rfl⟩
+  have hSv : volume (Sg ∩ Ico 0 (2 * π)) < ENNReal.ofReal (π / 3) := by
+    have hsub : Sg ∩ Ico 0 (2 * π) ⊆ ({θ | F.OnRingArc v (ringPt v θ)} ∩ Ico 0 (2 * π)) ∪ ringPt v ⁻¹' E := by
+      rintro θ ⟨hθ, hθI⟩
+      by_cases hon : F.OnRingArc v (ringPt v θ)
+      · exact Or.inl ⟨hon, hθI⟩
+      · exact Or.inr ⟨hθ, hon⟩
+    calc volume (Sg ∩ Ico 0 (2 * π)) ≤ volume (({θ | F.OnRingArc v (ringPt v θ)} ∩ Ico 0 (2 * π)) ∪ ringPt v ⁻¹' E) :=
+          measure_mono hsub
+      _ ≤ volume ({θ | F.OnRingArc v (ringPt v θ)} ∩ Ico 0 (2 * π)) + volume (ringPt v ⁻¹' E) := measure_union_le _ _
+      _ < ENNReal.ofReal (π / 3) := by rw [hE, add_zero, ← hA]; exact hm
+  obtain ⟨x, hx⟩ := exists_shift_avoiding hSm hSv
+  have hdom : ∀ θ, ringPt v θ ∈ F.dom := fun θ => hv (sphere_subset_closedBall (ringPt_mem_sphere v θ))
+  -- the six points `x + i·60°` (and the seventh, one turn on) are interior points
+  have hend : ∀ i : ℕ, i ≤ 6 → ringPt v (x + i * (π / 3)) ∈ F.interiorPts := by
+    intro i hi
+    have key : ∀ i' : ℕ, i' < 6 → ringPt v (x + i' * (π / 3)) ∈ F.interiorPts := fun i' hi' =>
+      ⟨hdom _, fun h => hx i' hi' ⟨⟨hdom _, h⟩, ringPt_mem_sphere v _⟩⟩
+    rcases lt_or_eq_of_le hi with h | rfl
+    · exact key i h
+    · have := key 0 (by norm_num)
+      rw [show x + ((6 : ℕ) : ℝ) * (π / 3) = x + 2 * π by push_cast; ring, ringPt, e_add_two_pi]
+      simpa [ringPt] using this
+  -- the colours on the ring are the two absent at `v`
+  have hcolS : ∀ θ, ringPt v θ ∈ F.interiorPts → F.col (ringPt v θ) = a ∨ F.col (ringPt v θ) = b := by
+    intro θ hθ
+    have hnot : F.col (ringPt v θ) ∉ F.coloursAt v := fun hc => ne1_region hF hc ⟨hθ, rfl⟩ (dist_ringPt v θ)
+    have : F.col (ringPt v θ) ∈ (F.coloursAt v)ᶜ := hnot
+    rw [habs] at this
+    rcases this with h | h
+    · exact Or.inl h
+    · exact Or.inr h
+  refine ⟨x, fun j => ?_⟩
+  by_contra hnoarc
+  set s := x + ((j : ℕ) : ℝ) * (π / 3) with hs
+  have hs1 : x + (((j : ℕ) : ℝ) + 1) * (π / 3) = s + π / 3 := by rw [hs]; ring
+  have hj6 : (j : ℕ) + 1 ≤ 6 := j.isLt
+  have hy₀ : ringPt v s ∈ F.interiorPts := hend j (by omega)
+  have hy₁ : ringPt v (s + π / 3) ∈ F.interiorPts := by
+    have := hend ((j : ℕ) + 1) hj6
+    rwa [show x + (((j : ℕ) + 1 : ℕ) : ℝ) * (π / 3) = s + π / 3 by rw [hs]; push_cast; ring] at this
+  have hd : dist (ringPt v s) (ringPt v (s + π / 3)) = 1 := by
+    have habs3 : |s - (s + π / 3)| = π / 3 := by
+      rw [show s - (s + π / 3) = -(π / 3) by ring, abs_neg, abs_of_pos (by positivity)]
+    exact ((dist_ringPt_ringPt_cmp_one v (by rw [habs3]; linarith)).1).mpr habs3
+  have hne : F.col (ringPt v s) ≠ F.col (ringPt v (s + π / 3)) := hF _ hy₀ _ hy₁ hd
+  have hno' : ¬ ∃ θ₁ θ₂, s < θ₁ ∧ θ₁ < θ₂ ∧ θ₂ < s + π / 3 ∧ ringArc v θ₁ θ₂ ⊆ F.Γ := by
+    rintro ⟨θ₁, θ₂, h1, h2, h3, h4⟩
+    exact hnoarc ⟨θ₁, θ₂, h1, h2, by rw [hs1]; exact h3, h4⟩
+  have hcolW : ∀ θ ∈ Icc s (s + π / 3), ringPt v θ ∈ F.interiorPts →
+      F.col (ringPt v θ) = a ∨ F.col (ringPt v θ) = b := fun θ _ hθ => hcolS θ hθ
+  obtain ⟨θ, -, hθ1, hθ2⟩ : ∃ θ ∈ Icc s (s + π / 3), a ∈ F.coloursAt (ringPt v θ) ∧ b ∈ F.coloursAt (ringPt v θ) := by
+    rcases hcolS s hy₀ with h0 | h0 <;> rcases hcolS (s + π / 3) hy₁ with h1 | h1
+    · exact absurd (h0.trans h1.symm) hne
+    · exact exists_coveringPoint_of_window hv (by positivity) ⟨hy₀, h0⟩ ⟨hy₁, h1⟩ hcolW hno'
+    · obtain ⟨θ, hθ, hb, ha⟩ := exists_coveringPoint_of_window hv (by positivity) ⟨hy₀, h0⟩ ⟨hy₁, h1⟩
+        (fun θ hθ hI => (hcolW θ hθ hI).symm) hno'
+      exact ⟨θ, hθ, ha, hb⟩
+    · exact absurd (h0.trans h1.symm) hne
+  refine hno (ringPt v θ) (ringPt_mem_sphere v θ) ?_
+  ext c
+  simp only [mem_union, mem_univ, iff_true]
+  by_cases hc : c ∈ F.coloursAt v
+  · exact Or.inl hc
+  · right
+    have : c ∈ (F.coloursAt v)ᶜ := hc
+    rw [habs] at this
+    rcases this with rfl | rfl
+    · exact hθ1
+    · exact hθ2
 
 /-- **FS112-NB4P** (NB-4 corrected): at a point `v` of exactly four colours of a valid six-coloured map, let `y₀ = r(ψ)` be a change
 point of its ring (a covering pair with `v`, automatically) and `y_j = r(ψ + j·60°)` its `σ_v`-orbit. If no orbit point lies on an arc

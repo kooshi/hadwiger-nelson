@@ -901,6 +901,27 @@ module(s) rebuilt, 3 module(s) with warnings", exit 0 (`build/gate/build/2026100
 **Re-pricing** (from this first leaf): the engine (planned nowhere; the plan's engine 5 assumed the ring arc would come from the horn's sectors) and
 `pair_P'` cost about 60k tokens with one iteration pass each; the engine is the reusable part.
 
+## Stage 27 — SAVED (FS131-I4j): `a4six` (engine 7 and the shift); 12 `sorry` left in `BaseSteps` and `UnitArc`
+
+**`a4six` (FS112-A4SIX) proved**, on the plan's route (§ 13.5) with four new children in `UnitArc` just before it:
+- `exists_shift_avoiding`: a measurable set of angles whose part in `[0, 2π)` has measure below `π/3` misses all six points `x + j·60°` of some `x`
+  (else `[0, π/3)` is covered by six translates of its pieces in the six windows: `measure_biUnion_finset_le`, `measure_preimage_add_right`,
+  `measure_biUnion_finset` on the disjoint windows).
+- `isClosed_Γ_inter_sphere` (finitely many compact arcs meet a covered ring), so the angles of `Γ` on `ω(v)` are a closed, hence measurable, set;
+  `countable_ringPt_preimage` (`e_eq_e_iff`), so the angles of the finitely many points of `Γ ∩ ω(v)` on no arc of `Γ` (wave 3's
+  `finite_ringΓ_off_ringArc`) are null, and `arcLength {θ | OnRingArc}` below `π/3` bounds them all.
+- `exists_coveringPoint_of_window` (**engine 7**): on a window whose interior points carry only `a`, `b`, with ends of colours `a`, `b` and no positive-length
+  arc of `Γ` strictly inside, some point carries both — every window point is a limit of interior window points (an open sub-interval not in `Γ`), so the
+  window is the union of the closed sets "carries `a`" and "carries `b`", and `isPreconnected_closed_iff` on `Icc`. The plan's sorted-list induction is not needed.
+Then: the six window ends are interior points (one turn on is `x` again), of colours in the two absent at `v` (N-E1), consecutive ends `60°` apart are a unit pair
+so of different colours; a window with no arc of `Γ` gives a point carrying both absent colours, a covering pair with `v`, against `hno`. `hab` is not read.
+(`open MeasureTheory in` precedes the three declarations that use `volume`; no statement changed — checked by script against `e16f5b2c`, 102 statements.)
+
+**Records**: 4 added (443 names); `tools/fs131_k4_decls.py --check` exit 0. **Axioms** (`data/fs131/i4/axioms-i4j-27.txt`, against this stage's oleans): the four
+children and `a4six`, all `[propext, Classical.choice, Quot.sound]`. Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings",
+exit 0 (`build/gate/build/20261004T205905Z-2360618.log`; driver log `data/fs131/i4/build-i4j-stage27.log`): 22 distinct `declaration uses sorry` (BaseSteps 6,
+Contact 10, UnitArc 6), no other warning. Cost: about 25k tokens, one iteration pass.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -1023,3 +1044,7 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   `ArcMap.outside_segment`, `ArcMap.outside_segment_real`, `ArcMap.dist_ringPt_radial`, `ArcMap.dist_radial_centre`, `ArcMap.carrier_circ_subset_sphere`,
   `ArcMap.ringArc_subset_ringArc`, `ArcMap.dist_ringPt_ringPt_le`, `ArcMap.ringPt_arg_sub` (UnitArc); `ArcMap.exists_ball_col_mem_coloursAt`,
   `ArcMap.IsCubicTrichromatic.not_hasRepeatedColour` (BaseSteps).
+- FS112-A4SIX: `ArcMap.a4six` — the standard three. Read against § 12.2: same statement (exactly two colours absent at `v`, no covering pair on `ω(v)` ⟹ arcs of `Γ`
+  on `ω(v)` of total length `≥ 60°`, or one strictly inside each of six consecutive open `60°` windows).
+- Children (no row), the standard three: engine 7 `ArcMap.exists_coveringPoint_of_window`, `ArcMap.exists_shift_avoiding`, `ArcMap.isClosed_Γ_inter_sphere`,
+  `ArcMap.countable_ringPt_preimage` (UnitArc).

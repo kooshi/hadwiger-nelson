@@ -1,0 +1,5 @@
+'HadwigerNelson.Plane.ArcMap.exists_shift_avoiding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.isClosed_Γ_inter_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.countable_ringPt_preimage' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_coveringPoint_of_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.a4six' depends on axioms: [propext, Classical.choice, Quot.sound]
