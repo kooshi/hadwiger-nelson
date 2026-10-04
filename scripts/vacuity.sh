@@ -135,6 +135,18 @@ if [[ "${1:-}" == "--self-test" ]]; then
   expect_site GENERIC planted_generic_ne  "the ≠ shape at a variable k: parametric"
   expect_site GENERIC planted_generic_not "the ¬ shape at a variable k: parametric"
   expect UNKNOWN planted_unknown_ne       "the ≠ shape at a k nothing refutes: the load-bearing half"
+  expect VACUOUS planted_vacuous_ringArc  "IsRingArc at halfPlane2's ring, which carries no arc of Γ (wave 3, FS131-I3h)"
+  expect_site GENERIC planted_generic_ringArc "IsRingArc at a variable map: parametric"
+  expect UNKNOWN planted_unknown_ringArc  "IsRingArc at a sixFrag instance nothing decides: the load-bearing half"
+  expect VACUOUS planted_vacuous_qArc     "IsQArc at halfPlane2's ring (no ring arc, so no (Q) arc)"
+  expect_site GENERIC planted_generic_qArc "IsQArc at a variable map: parametric"
+  expect UNKNOWN planted_unknown_qArc     "IsQArc at a sixFrag instance nothing decides: the load-bearing half"
+  expect VACUOUS planted_vacuous_changePoint "IsChangePoint at r(90°) = i, off halfPlane2's Γ"
+  expect_site GENERIC planted_generic_changePoint "IsChangePoint at a variable map: parametric"
+  expect UNKNOWN planted_unknown_changePoint "IsChangePoint at a sixFrag instance nothing decides: the load-bearing half"
+  expect VACUOUS planted_vacuous_hub      "IsHub at r(90°) = i: no change point there"
+  expect_site GENERIC planted_generic_hub "IsHub at a variable map: parametric"
+  expect UNKNOWN planted_unknown_hub      "IsHub at a sixFrag instance nothing decides: the load-bearing half"
   silent planted_arrow_false              "a genuine refutation P → False over the empty carrier stays skipped"
 
   if [[ "${fails}" -gt 0 ]]; then

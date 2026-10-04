@@ -250,6 +250,16 @@ Two exclusions are worth their reasons, because both look like obvious additions
   variable, `GENERIC` at every site, with no refutation theorem of the `¬ P` shape to collect; they would add
   lines and no signal.
 
+* **Wave 3's carriers (FS131-I3h, by the procedure below).** **IN**: `ArcMap.IsRingArc`, `ArcMap.IsQArc`,
+  `ArcMap.IsChangePoint`, `ArcMap.IsHub` — each refutable at a concrete map (`halfPlane2_not_isRingArc`: `halfPlane2`'s
+  ring carries no arc of `Γ`, hence no (Q) arc; `r(90°) = i` is off its `Γ`, so no change point and no hub there), so a
+  theorem taking one at an empty instance is a real defect; controls 21–32. **OUT**: `CircleColouring` (existence is a
+  construction, `hexColouring`); `CircleColouring.Lift` (`exists_lift` inhabits it for every colouring, so its binder is
+  never empty); `IsTile`, `TileOf`, `GermIn` (refutable only at a concrete set, which no theorem fixes: every site is a
+  set variable, `GENERIC`); `IsEssBoundary`, `SaturatedAt` (refuting either at a concrete instance is a density
+  computation the library makes only inside an `example`; their one consumer, in `Plane/RingGerm`, takes them at a
+  variable map; register them when a wave proves such a refutation as a theorem).
+
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
 its reason, in the `UDCert` / `AeColouring` style — IN iff "does one exist" is a theorem rather than a
@@ -268,7 +278,10 @@ def trackedProps : List Name :=
    `HadwigerNelson.MonoPair, `HadwigerNelson.CoverAtLeast, `HadwigerNelson.UDCert.CoordsIn,
    -- the Lean backlog's plane vocabulary (FS131-T1)
    `HadwigerNelson.Plane.AeColouring, `HadwigerNelson.Plane.ArcMap.Valid,
-   `HadwigerNelson.Plane.ArcMap.NonSiamese, `HadwigerNelson.Plane.ArcMap.Simple]
+   `HadwigerNelson.Plane.ArcMap.NonSiamese, `HadwigerNelson.Plane.ArcMap.Simple,
+   -- wave 3's ring vocabulary (FS131-I3h)
+   `HadwigerNelson.Plane.ArcMap.IsRingArc, `HadwigerNelson.Plane.ArcMap.IsQArc,
+   `HadwigerNelson.Plane.ArcMap.IsChangePoint, `HadwigerNelson.Plane.ArcMap.IsHub]
 
 /-- A carrier or a statement as one line of text, for the report. Called where its binders are still in
 scope: outside the telescope a generic carrier's variables print as `_fvar.N`, whose numbering shifts

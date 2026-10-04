@@ -1,0 +1,42 @@
+A  FS116-N1-GERM-R
+  ok    v-: s*dphi vanishes at psi+150deg and psi+330deg  (0, 0)
+  ok    v-: s*dphi > 0 at the interval's middle (2*sqrt(3)/3) and < 0 opposite (-2*sqrt(3)/3)
+  ok    v-: interval length is 180deg
+  ok    v-: at psi=0, beta=middle, |h|=1/50 the distance-1 ring point is -1.327568deg from phi0 (side -1; first order predicts 1.323189deg); | |z - r(phi)| - 1 | = 5.6e-191
+  ok    v+: s*dphi vanishes at psi-30deg and psi+150deg  (0, 0)
+  ok    v+: s*dphi > 0 at the interval's middle (2*sqrt(3)/3) and < 0 opposite (-2*sqrt(3)/3)
+  ok    v+: interval length is 180deg
+  ok    v+: at psi=0, beta=middle, |h|=1/50 the distance-1 ring point is 1.318752deg from phi0 (side +1; first order predicts 1.323189deg); | |z - r(phi)| - 1 | = 0.0e+00
+  ok    u-: s*dphi vanishes at psi-150deg and psi+30deg  (0, 0)
+  ok    u-: s*dphi > 0 at the interval's middle (2*sqrt(3)/3) and < 0 opposite (-2*sqrt(3)/3)
+  ok    u-: interval length is 180deg
+  ok    u-: at psi=0, beta=middle, |h|=1/50 the distance-1 ring point is -1.318752deg from phi0 (side -1; first order predicts 1.323189deg); | |z - r(phi)| - 1 | = 0.0e+00
+  ok    u+: s*dphi vanishes at psi+30deg and psi+210deg  (0, 0)
+  ok    u+: s*dphi > 0 at the interval's middle (2*sqrt(3)/3) and < 0 opposite (-2*sqrt(3)/3)
+  ok    u+: interval length is 180deg
+  ok    u+: at psi=0, beta=middle, |h|=1/50 the distance-1 ring point is 1.327568deg from phi0 (side +1; first order predicts 1.323189deg); | |z - r(phi)| - 1 | = 5.6e-191
+B  FS116-Y4-FLANK
+  ok    y' - y = e(psi + 120deg)
+  ok    cone of B(y',1) at y: first order sin(-beta + psi + pi/6) vanishes at psi+30, psi+210 and is < 0 at psi+120
+  ok    cone of B(y,1) at y': first order -sin(-beta + psi + pi/6) vanishes at psi+210, psi+390 and is < 0 at psi+300
+  ok    a segment leaving y along 210deg: |seg(s) - y'|^2 - 1 = s**2 > 0 for s > 0
+  ok    radius 1: the arc leaving y along 210deg curving toward y' stays in B(y',1) at turn 15deg (|z - y'| - 1 = 5.611e-191)
+  ok    radius 1: the arc curving away leaves B(y',1) at turn 15deg (|z - y'| - 1 = 6.597e-02)
+  ok    radius 1/2: the arc leaving y along 210deg curving toward y' stays in B(y',1) at turn 15deg (|z - y'| - 1 = -8.555e-03)
+  ok    radius 1/2: the arc curving away leaves B(y',1) at turn 15deg (|z - y'| - 1 = 2.524e-02)
+  ok    the unit arcs' centres are y' and y (1/2 + sqrt(3)*I/2, 1)
+  ok    TWOCIRC at equal turns: |a(s) - b(s)|^2 - 1 + 8 sin^2(s/2) cos s = 0
+C  FS116-S1-EXIT
+  ok    P = y_b at beta = tau
+  ok    |y_b - y_3| = 1
+  ok    d|P - y_3|^2/dbeta at tau = -2 cos(phi - b + 150deg)  (got 2*sin(-b + phi + pi/3))
+  ok    phi - b + 150deg ranges in (330deg, 450deg) on the box, where cos > 0, so the derivative is < 0
+  ok    Q = y_a at beta = tau'
+  ok    |y_a - y_5| = 1
+  ok    d|Q - y_5|^2/dbeta at tau' = 2 cos(g - a - 150deg)  (got -2*sin(a - g + pi/3))
+  ok    g - a - 150deg ranges in (-90deg, 30deg), where cos > 0, so the derivative is > 0
+  ok    |x_e - y_3| = 1.41421356237 >= 1 (the row's hypothesis)
+  ok    the feasible heading arc has width 90.000000deg <= 120deg
+  ok    tau is its lower end (offset 0deg) and its upper end is tau + 90.000000deg
+  ok    so it meets the exit window [tau - 180deg, tau] in tau alone: P = y_b
+=> A: PASS; B: PASS; C: PASS

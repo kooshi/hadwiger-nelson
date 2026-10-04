@@ -1,0 +1,51 @@
+slot: admitted axioms.sh: mem 20 GiB (hard cap), cpus 0,1,2,3
+==> axioms: this run's full output: build/gate/axioms/20261004T060225Z-1503931.log
+    audited: 1346 records — 1330 clean on the standard axioms, 11 axiom-free, 5 declared purchase(s)
+    clean records, by axiom set:
+       1201  [propext, Classical.choice, Quot.sound]
+         57  [propext]
+         43  [propext, Quot.sound]
+         28  [propext, sorryAx, Classical.choice, Quot.sound]
+          1  [Quot.sound]
+         11  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.PartialColoring.map, HadwigerNelson.Q4.approx, HadwigerNelson.Stripe.wheel_all, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    RECORDED COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 1236 clean → 1330
+    --- changes since the previous complete run ---
+    no previous complete run on record; the next run is compared with this one
+1270:'HadwigerNelson.Plane.dist_ne_one_of_mem_densitySet' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1271:'HadwigerNelson.Plane.AeColouring.dist_ne_one' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1272:'HadwigerNelson.Plane.upperDensityAt_pos_of_mem_densitySet' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1273:'HadwigerNelson.Plane.hullset' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1274:'HadwigerNelson.Plane.hullset_of_isCompact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1275:'HadwigerNelson.Plane.hull2' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1276:'HadwigerNelson.Plane.dist_ne_one_of_mem_interior_densitySet' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1277:'HadwigerNelson.Plane.subset_densitySet_of_isOpen' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1278:'HadwigerNelson.Plane.dist_ne_one_of_mem_of_mem_closure' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1279:'HadwigerNelson.Plane.dist_lt_one_of_isPreconnected' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1280:'HadwigerNelson.Plane.dist_lt_one_of_forall_dist_ne_one' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1281:'HadwigerNelson.Plane.dist_lt_one_of_chain' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1282:'HadwigerNelson.Plane.dist_lt_one_of_closure_inter_nonempty' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1283:'HadwigerNelson.Plane.phi_univ' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1284:'HadwigerNelson.Plane.unitPairsNull_iff_ae_phi_eq_zero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1285:'HadwigerNelson.Plane.isMUA_iff_ae_phi_pos' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1286:'HadwigerNelson.Plane.isMUA_iff_ae_eq' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1287:'HadwigerNelson.Plane.ringPt_sub_ringPt' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1288:'HadwigerNelson.Plane.dist_ringPt_ringPt' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1289:'HadwigerNelson.Plane.dist_ringPt_ringPt_cmp_one' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1290:'HadwigerNelson.Plane.twoCirc_identity' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1291:'HadwigerNelson.Plane.twoCirc_cmp_one' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1292:'HadwigerNelson.Plane.exists_sign_of_equilateral' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1293:'HadwigerNelson.Plane.xcorner' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1294:'HadwigerNelson.Arith.noAffine' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1295:'HadwigerNelson.Arith.rhombus_falconerFan' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1296:'HadwigerNelson.Arith.falconerFan_hom' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+1297:'HadwigerNelson.Arith.falconerFan_chromaticNumber' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+==> FAIL: sorryAx on the audited surface (above)
+    purchase ledgers agree — the docstrings warn of exactly the purchases the audit finds (5): four_le_chromaticNumber_plane_certified moserSpindle_cnf_unsat moserSpindleCubes_unsat moserSpindle_not_colorable_three_cubes moserSpindle_not_colorable_three_lrat
+==> axioms: FAIL
+    full output: build/gate/axioms/20261004T060225Z-1503931.log
