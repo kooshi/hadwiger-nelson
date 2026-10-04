@@ -2516,6 +2516,11 @@ No native evaluation. -/
 /-! ## FS-131 Woodall's merge (job FS131-W3) — step 3 localized: E3-W, recolouring, the merge at a wedge, locality, the local data, E3-NICE, E3-BALL (sorry until the chain's implementer lands them) -/
 
 #print axioms HadwigerNelson.Plane.clear_wedge
+#print axioms HadwigerNelson.Plane.norm_real_mul_e
+#print axioms HadwigerNelson.Plane.annSector_subset_ball
+#print axioms HadwigerNelson.Plane.annSector_mono_r₂
+#print axioms HadwigerNelson.Plane.mem_segment_ray
+#print axioms HadwigerNelson.Plane.closure_annSector_subset
 #print axioms HadwigerNelson.Plane.wedgeArcs_nondegenerate
 #print axioms HadwigerNelson.Plane.frontier_annSector_subset
 #print axioms HadwigerNelson.Plane.ArcMap.recolour_isPlaneMap

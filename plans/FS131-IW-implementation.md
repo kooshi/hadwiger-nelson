@@ -237,3 +237,23 @@ conclude `False`; the vacuity scan does not track `ArcMap` binders, so a `VACUIT
 `scripts/Axioms.lean` (a private name cannot be printed from another module; `aeMap6_merged`, its one reader, keeps its record) and its `ARCHITECTURE.md`
 mention re-worded. `tools/fs131_w3_decls.py --check`: 154 theorems, 154 records, 0 missing, 0 stale (its pattern reads `theorem` at line start, so a private
 theorem is not a theorem it counts). `Steps` elaborates (iteration, `data/fs131/iwc/run.sh`, never evidence).
+
+## Stage 8 — SAVED (FS131-IWc): `Merge`'s easy leaves and the composition `exists_woodallMerged`
+
+**Proved (statements unchanged)**, in § 15.3's order: `wedgeArcs_nondegenerate`, `recolour_valid`, `recolour_region_diff`, `coloursAt_congr`, `niceAt_congr`,
+`wedgeMerge_condition5`, `wedgeMerge_region_diff`, `frontier_annSector_subset`, `wedgeMerge_valid` (over `clear_wedge`, still a leaf), and
+**`exists_woodallMerged`** (E3-BALL) over its stated children — the first composition check passed: the children fit as § 15.1 says (strong induction on the
+size of a finite set holding the bad points, generalized over the map; `exists_merge_at` at one bad point with `ε = 1`; off the merged ball the regions
+agree on the open complement, so `coloursAt_congr` and `niceAt_congr` make a bad point of the new map a bad point of the old one, other than the merged
+point; the start from `finite_three_le_coloursAt` on `closedBall 0 R`).
+
+**Children added** (`Merge`, before `wedgeArcs`): `norm_real_mul_e`, `annSector_subset_ball`, `annSector_mono_r₂`, `mem_segment_ray`,
+`closure_annSector_subset`; records in `scripts/Axioms.lean`'s merge section; `tools/fs131_w3_decls.py --check`: 159 theorems, 159 records, 0 missing,
+0 stale. No name among them is declared in any other worktree's `Proofs/` or on `main` (`rg`).
+
+**Re-pricing from the first two leaves.** The plan priced the easy leaves E and the module at 1,100–1,800 lines for an Opus implementer; the nine easy
+leaves and the composition took about 230 lines and one elaboration round each (every one closed on its first or second try), so the easy band is priced
+right. The hard band is priced from its own first leaves below.
+
+**Left in `Merge` (8)**: `clear_wedge`, `exists_dirColourAt`, `GoodAt.ncard_coloursAt_le_two`, `finite_three_le_coloursAt`, `niceAt_of_dirColourAt`,
+`dirColourAt_wedgeMerge`, `wedgeMerge_niceAt`, `exists_merge_at`; in `Basic` T1–T5.
