@@ -45,7 +45,13 @@ The audit's counts are recorded in `CLAUDE.md` § Trust ledger, where `scripts/g
 | `propext`, `Classical.choice`, `Quot.sound` | accepted silently |
 | `sorryAx` | the gate fails on it |
 | `<decl>._native.native_decide.ax_N_M` | **explicit purchase, per use**, named in its declaration's docstring and listed in `ARCHITECTURE.md` § Trust |
-| an `axiom` importing an outside theorem | **explicit purchase**, with the four items above |
+| an `axiom` importing an outside theorem | **explicit purchase**, with the four items above; declared to the gate by one `AxiomAudit.declareImport` line in `scripts/Axioms.lean`'s IMPORTED section (the procedure is beside its banner), every record resting on it audited there |
+
+**The audit checks each record's axioms as a set** (`scripts/axioms.sh`): under CLEAN a subset of the standard three; under IMPORTED
+the standard three and declared imports, at least one; under PURCHASED those and native axioms, at least one native. Any other axiom
+fails, and so does any `axiom` the library declares that no `declareImport` names, whether or not an audited record uses it. The
+receipt prints every axiom by its full name (`pp.fullNames`), and its `CLAUDE.md` sentence records three counts: clean, declared
+purchases, imported.
 
 `native_decide` trusts the compiler and this CPU rather than the kernel; soundness theorems are identical either way, only the axiom
 list moves. **Grep for the right name:** at v4.32.0 `native_decide` mints a *per-declaration* axiom; `Lean.ofReduceBool` never appears
@@ -151,7 +157,7 @@ invoked. `lake update` and Mathlib bumps go alone in a labeled commit (they move
 
 ## The gate
 
-Elaboration is the floor: the build green, zero `sorry`, `#print axioms` clean on the public surface (`scripts/axioms.sh`), linters
+Elaboration is the floor: the build green, zero `sorry`, `#print axioms` clean on the public surface (`scripts/axioms.sh`), and `./scripts/axioms.sh --self-test` green (23 planted faults, each watched to fire, two of them partners that must pass), linters
 silent, spec examples passing. On top of that, the statement-level gate, because a formalization that proves the *wrong* theorem is
 the characteristic failure here:
 

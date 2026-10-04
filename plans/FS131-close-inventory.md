@@ -1071,3 +1071,18 @@ reason by the close.*
      `gate_report.py vacuity` — baseline header and CLAUDE.md § The gate "match (9 of 9 compared)"; `gate_report.py axioms` on `build/gate/axioms/20261004T141303Z-4086598.log`
      — "match (clean and purchases compared …)"; fact audit — losses are only the superseded counts (`1292`, `1308`, `357`, the two old count strings). The I3i
      brief, written while the tree was busy, committed here.
+160. **FS131-T3 done, harness ≈ 330k** (report `data/fs131/reports/FS131-T3.md`; record `plans/FS131-T3-axioms.md`; commits `9df42b80`, `a09b2254`, `58a1cea5`, `0db64494`,
+     `9afe260c`, `de4d8cc9`): the axiom gate repaired — the defect reproduced first on `main` (a planted axiom under CLEAN passed, "1293 clean"); CLEAN now fails
+     any record whose axioms are not within the standard three; a new **IMPORTED** section (above CLEAN; PURCHASED stays last because
+     `tools/check_architecture.py` reads everything after its banner as a purchase) holds records resting on a declared outside theorem, declared only by
+     `#eval AxiomAudit.declareImport ``Full.Name` lines there (Lean refuses a name that is not an axiom under `Proofs/` whose docstring names a bibliography key);
+     PURCHASED narrowed (only the standard three, native axioms and declared imports); the gate fails if `ARCHITECTURE.md` § Trust omits a declared import, and on
+     any undeclared axiom in the library; `scripts/gate_report.py` counts IMPORTED and reads a three-count sentence; 23 two-sided controls, and four mutants of the
+     checker each turning controls red. Four tool defects fixed on the way (shortened axiom names; PURCHASED's laxity; unaudited library axioms; a root-namespace
+     purchase skipped). **Wave 2 dry run**: four records move to IMPORTED — `falconer_reduction`, `le_chiM_of_falconerFan`, `exists_mem_falconerE`, `fan_tip_ae_mem`
+     (two beyond the brief's) — listed by `data/fs131/t3/wave_dryrun.sh`. **Filed verbatim from its drafts** (this commit): `CLAUDE.md` § Trust ledger's paragraph
+     (three counts: 1794 clean, 5 declared purchases, 0 imported); `LEAN.md` § Trust ledger's last row and the paragraph after the table; `LEAN.md` § The gate's
+     axioms item with `--self-test`. Also: `tools/claude_md_fact_audit.py`'s `GATE_CHANGES` gains the two transitions this session made ((1285, 5) → (1292, 5) at
+     LEB's landing; (1292, 5) → (1794, 5) at wave 3's). Keryx's receipts, read before this commit: `gate_report.py axioms` on
+     `build/gate/axioms/20261004T141303Z-4086598.log` — "match (clean, purchases and imported compared)"; fact audit `--base c6f8d56d` — "AUDIT PASSED (0
+     failure(s))". Open for the tool's owner (T3's question): `GATE_RE` reads only (clean, purchases), so a change in the imported count alone passes it unseen.

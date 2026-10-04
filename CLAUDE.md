@@ -445,9 +445,10 @@ One reduction plus two certified computations, and why nothing in `tools/` is tr
 
 ## Trust ledger
 
-Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/axioms.sh`); the
-current audit reads 1794 clean and 5 declared purchases (and 11 axiom-free; 1,810 records at FS-131 wave 3's landing, 2026-10-04), each listed in `ARCHITECTURE.md` § Trust. Rung B
-holds none.
+Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/axioms.sh`, which checks each record's axioms
+as a set); the current audit reads 1794 clean and 5 declared purchases, and 0 imported (and 11 axiom-free; 1,810 records at wave 3's
+landing with FS131-T3's gate repair, 2026-10-04), each purchase listed in `ARCHITECTURE.md` § Trust; an imported record rests on a
+declared outside theorem (`LEAN.md` § Trust ledger). Rung B holds none.
 
 What the audit accepts and what it buys — the ledger's entries, `native_decide`'s per-declaration axioms, an imported theorem's four
 items, `lean4checker` as the publication gate — is `LEAN.md` § Trust ledger.
