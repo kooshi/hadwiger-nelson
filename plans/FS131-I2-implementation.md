@@ -542,6 +542,22 @@ while `build.sh` runs; editing the module is not.
 **Re-pricing, overall**: about 300k tokens of this session went to proofs, merging and builds for 38 lines and 12 new children; the easy leaves at
 2–5k, the hard children (Kummer–Dedekind, the tiling squeeze, the disc-per-cell count) at 25–35k.
 
+## Stage 16 — SAVED (FS131-I2i, Opus): readback; the branch builds as given
+
+**Readback.** Both brief quotations checked by `grep -F` against their sources: the "May" line (`plans/FS131-w2-kernel-plan.md` line 754, § Stage 13) and
+"**Closed since Stage 14** (statements untouched):" (this record, Stage 15, line 498) — both exact. Counts at `e8237b4b` by script (lines that are exactly
+`sorry`): `Plane/Slack` 19, `Plane/CoverExamples` 34 — 53, as the brief says; no other wave-2 module holds one.
+
+**May**: prove any child or leaf; add further children (each stated as a lemma before use, with its `scripts/Axioms.lean` record); move declarations within
+a module; add imports (with `ARCHITECTURE.md`'s Imports cell); add supporting definitions (the fringe colouring of `exists_not_uniform_kept`); register wave 2's
+vacuity carriers under FS131-T1's procedure, each with a control; docstrings (item 144 (d), FALC-HOSTS (iv)'s on `falconerFan_five_mem_P`). **May not**: change
+any row statement, hypothesis or definition's meaning (the rulings 48, 56, 57, 63, 72, 86, 100, 134 are the authorised changes; item 134's Dyadic repair is
+kept), nor any child statement fixed by K2c or K2d; no new `axiom` (`falconer_lemma2_nonempty` is the one declared import), no `native_decide`. A leaf that
+cannot be proved as written goes to Keryx at once, and the others continue.
+
+**Build as given** at `e8237b4b`: OK — all 1750 modules up to date, nothing built, 2 modules with warnings, 53 warnings, every one `declaration uses 'sorry'`
+(`build/gate/build/20261004T153021Z-369432.log`).
+
 ## Theorems this phase proved (FS131-I2h, additions)
 
 Axioms read from `data/fs131/i2/i2h-axioms.txt` (printed from the built library at `a0865f7d`; the gate was not run). Each read against its docstring,
