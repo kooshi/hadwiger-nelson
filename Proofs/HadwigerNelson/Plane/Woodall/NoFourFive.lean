@@ -344,7 +344,23 @@ variable {F}
 does not carry `j` (FS106-DIAM's third clause, wave 1's `dist_ne_one_of_mem_of_mem_closure`, at the class of `j`). -/
 theorem not_mem_coloursAt_of_dist_eq_one (hF : F.Valid) {j : Fin k} {q Y : ℂ} (hq : q ∈ F.region j) (hqY : dist q Y = 1) :
     j ∉ F.coloursAt Y := by
-  sorry
+  intro hY
+  exact dist_ne_one_of_mem_of_mem_closure (F.isOpen_region j) (hF.unitPairsNull_region j) hq hY hqY
+
+/-- A valid map's class of `j` misses its own shadow. -/
+theorem not_mem_shadow_of_mem_region (hF : F.Valid) {j : Fin k} {q : ℂ} (hq : q ∈ F.region j) : q ∉ shadow (F.region j) := by
+  rintro ⟨y, hy, hd⟩
+  exact hF q hq.1 y hy.1 hd (by rw [show F.col q = j from hq.2, show F.col y = j from hy.2])
+
+/-- Carrying a collar is monotone in the set. -/
+theorem _root_.HadwigerNelson.Plane.CollarAt.mono {S T : Set ℂ} {u : ℂ} {s : Rim} {θ : ℝ} (h : CollarAt S u s θ) (hST : S ⊆ T) :
+    CollarAt T u s θ := by
+  obtain ⟨h, hh, hsub⟩ := h
+  exact ⟨h, hh, hsub.trans hST⟩
+
+/-- The shadow is monotone in the set. -/
+theorem _root_.HadwigerNelson.Plane.shadow_mono {S T : Set ℂ} (hST : S ⊆ T) : shadow S ⊆ shadow T :=
+  fun _ ⟨y, hy, hd⟩ => ⟨y, hST hy, hd⟩
 
 /-- **E1-SEE, robust form** (the kill at a normal, § 7.3 (b)): if both an inner and an outer collar about `ψ` lie in the shadow of `j`'s class,
 the point `v + e ψ` does not carry `j` — `j`'s class misses both collars (validity), hence a disc about `v + e ψ` (`exists_mem_collar_of_dist_lt`;
@@ -352,7 +368,44 @@ a point of the class on `ω(v)` has a disc in the class, meeting the inner colla
 theorem not_mem_coloursAt_of_collarAt (hF : F.Valid) {v : ℂ} {ψ : ℝ} {j : Fin k}
     (hin : CollarAt (shadow (F.region j)) v .inner ψ) (hout : CollarAt (shadow (F.region j)) v .outer ψ) :
     j ∉ F.coloursAt (v + e ψ) := by
-  sorry
+  intro hY
+  obtain ⟨h₁, hh₁, hsub₁⟩ := hin
+  obtain ⟨h₂, hh₂, hsub₂⟩ := hout
+  set h := min h₁ h₂ with hh
+  have hh0 : 0 < h := lt_min hh₁ hh₂
+  have hin' : collar v .inner (ψ - h) (ψ + h) h ⊆ shadow (F.region j) :=
+    (collar_subset_collar v .inner (by linarith [min_le_left h₁ h₂]) (by linarith [min_le_left h₁ h₂]) (min_le_left _ _)).trans hsub₁
+  have hout' : collar v .outer (ψ - h) (ψ + h) h ⊆ shadow (F.region j) :=
+    (collar_subset_collar v .outer (by linarith [min_le_right h₁ h₂]) (by linarith [min_le_right h₁ h₂]) (min_le_right _ _)).trans hsub₂
+  obtain ⟨ε, hε, hcol⟩ := exists_mem_collar_of_dist_lt v ψ hh0
+  obtain ⟨q, hq, hqd⟩ := Metric.mem_closure_iff.mp hY ε hε
+  have hqd' : dist q (v + e ψ) < ε := by rw [dist_comm]; exact hqd
+  rcases lt_trichotomy (dist q v) 1 with hlt | heq | hgt
+  · exact not_mem_shadow_of_mem_region hF hq (hin' ((hcol q hqd').1 hlt))
+  · -- on `ω(v)`: slide `q` inwards inside the open class
+    obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp (F.isOpen_region j) q hq
+    set t := min (1 / 2) (min (r / 2) ((ε - dist q (v + e ψ)) / 2)) with ht
+    have hgap : 0 < ε - dist q (v + e ψ) := by linarith
+    have ht0 : 0 < t := lt_min (by norm_num) (lt_min (by positivity) (by positivity))
+    have ht1 : t ≤ 1 / 2 := min_le_left _ _
+    have ht2 : t ≤ r / 2 := (min_le_right _ _).trans (min_le_left _ _)
+    have ht3 : t ≤ (ε - dist q (v + e ψ)) / 2 := (min_le_right _ _).trans (min_le_right _ _)
+    set q' := v + (1 - (t : ℂ)) * (q - v) with hq'
+    have hq'q : dist q' q = t * dist q v := by
+      rw [dist_eq_norm, dist_eq_norm, hq', show v + (1 - (t : ℂ)) * (q - v) - q = -((t : ℂ) * (q - v)) by ring,
+        norm_neg, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
+    have hq'v : dist q' v = (1 - t) * dist q v := by
+      rw [dist_eq_norm, dist_eq_norm, hq', add_sub_cancel_left, norm_mul]
+      congr 1
+      rw [← Complex.ofReal_one, ← Complex.ofReal_sub, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith)]
+    rw [heq, mul_one] at hq'q hq'v
+    have hq'R : q' ∈ F.region j := hball (by rw [Metric.mem_ball, hq'q]; linarith)
+    have hq'd : dist q' (v + e ψ) < ε := by
+      have := dist_triangle q' q (v + e ψ)
+      rw [hq'q] at this; linarith
+    have hq'lt : dist q' v < 1 := by rw [hq'v]; linarith
+    exact not_mem_shadow_of_mem_region hF hq'R (hin' ((hcol q' hq'd).1 hq'lt))
+  · exact not_mem_shadow_of_mem_region hF hq (hout' ((hcol q hqd').2 hgt))
 
 /-! ## E1-RAY and E1-CROSS -/
 
@@ -362,13 +415,29 @@ theorem not_mem_coloursAt_of_collarAt (hF : F.Valid) {v : ℂ} {ψ : ℝ} {j : F
 theorem SectorsAt.collarAt_shadow_inner_of_mem {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k}
     (h : F.SectorsAt v n d c) (i : Fin n) {γ ψ : ℝ} (hγ : γ ∈ Ioo (d i.castSucc) (d i.succ)) (hcos : Real.cos (γ - ψ) < 0) :
     CollarAt (shadow (F.region (c i))) v .inner ψ := by
-  sorry
+  obtain ⟨hδ0, hδ1⟩ := hγ
+  set δ := min (γ - d i.castSucc) (d i.succ - γ) / 2 with hδ
+  have hδpos : 0 < δ := by rw [hδ]; have := lt_min (sub_pos.mpr hδ0) (sub_pos.mpr hδ1); linarith
+  obtain ⟨r, hr, hR⟩ := h.2.2.2.2.1 i δ hδpos
+  have hγ' : γ ∈ Ioo (d i.castSucc + δ) (d i.succ - δ) := by
+    constructor
+    · have := min_le_left (γ - d i.castSucc) (d i.succ - γ); rw [hδ]; linarith
+    · have := min_le_right (γ - d i.castSucc) (d i.succ - γ); rw [hδ]; linarith
+  exact (collarAt_shadow_inner (isPreconnected_annSector _ _ _ _ _) (mem_coneAt_annSector v hr hγ') hcos).mono (shadow_mono hR)
 
 /-- **E1-RAY, outer**: the same with `cos (γ − ψ) > 0` and an outer collar. -/
 theorem SectorsAt.collarAt_shadow_outer_of_mem {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k}
     (h : F.SectorsAt v n d c) (i : Fin n) {γ ψ : ℝ} (hγ : γ ∈ Ioo (d i.castSucc) (d i.succ)) (hcos : 0 < Real.cos (γ - ψ)) :
     CollarAt (shadow (F.region (c i))) v .outer ψ := by
-  sorry
+  obtain ⟨hδ0, hδ1⟩ := hγ
+  set δ := min (γ - d i.castSucc) (d i.succ - γ) / 2 with hδ
+  have hδpos : 0 < δ := by rw [hδ]; have := lt_min (sub_pos.mpr hδ0) (sub_pos.mpr hδ1); linarith
+  obtain ⟨r, hr, hR⟩ := h.2.2.2.2.1 i δ hδpos
+  have hγ' : γ ∈ Ioo (d i.castSucc + δ) (d i.succ - δ) := by
+    constructor
+    · have := min_le_left (γ - d i.castSucc) (d i.succ - γ); rw [hδ]; linarith
+    · have := min_le_right (γ - d i.castSucc) (d i.succ - γ); rw [hδ]; linarith
+  exact (collarAt_shadow_outer (isPreconnected_annSector _ _ _ _ _) (mem_coneAt_annSector v hr hγ') hcos).mono (shadow_mono hR)
 
 /-- **E1-CROSS** (`plans/FS131-E1-derivation.md` § 3.3), on colour classes: in a valid map, at a point whose picture has positive angles, a colour
 crossing `ω(v)` at any angle is carried by no sector (a sector of colour `X` has a direction with `cos (γ − θ) ≠ 0`, so a collar on one side
@@ -376,7 +445,38 @@ about `θ` lies in `X`'s shadow, and `X`'s points on that side near `v + e θ` l
 theorem SectorsAt.not_mem_range_of_crossesAt (hF : F.Valid) {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k}
     (h : F.SectorsAt v n d c) (hpos : ∀ i : Fin n, 0 < d i.succ - d i.castSucc) {X : Fin k} {θ : ℝ} (hX : F.CrossesAt v X θ) :
     X ∉ Set.range c := by
-  sorry
+  rintro ⟨i, rfl⟩
+  have hw := hpos i
+  have hwle : d i.succ - d i.castSucc ≤ 2 * π := by
+    have h1 : d i.succ ≤ d (Fin.last n) := h.2.1 (Fin.le_last _)
+    have h2 : d 0 ≤ d i.castSucc := h.2.1 (Fin.zero_le _)
+    rw [h.2.2.1] at h1; linarith
+  set γ₀ := (d i.castSucc + d i.succ) / 2 with hγ₀
+  set ε := (d i.succ - d i.castSucc) / 4 with hε
+  have hγ₀m : γ₀ ∈ Ioo (d i.castSucc) (d i.succ) := ⟨by linarith, by linarith⟩
+  have hγ₁m : γ₀ + ε ∈ Ioo (d i.castSucc) (d i.succ) := ⟨by linarith, by linarith⟩
+  obtain ⟨γ, hγm, hγ⟩ : ∃ γ ∈ Ioo (d i.castSucc) (d i.succ), Real.cos (γ - θ) ≠ 0 := by
+    by_cases h0 : Real.cos (γ₀ - θ) = 0
+    · refine ⟨γ₀ + ε, hγ₁m, fun h1 => ?_⟩
+      have hsin : Real.sin ε ≠ 0 := (Real.sin_pos_of_pos_of_lt_pi (by linarith) (by linarith [Real.pi_pos])).ne'
+      have hexp : Real.cos (γ₀ + ε - θ) = Real.cos (γ₀ - θ) * Real.cos ε - Real.sin (γ₀ - θ) * Real.sin ε := by
+        rw [show γ₀ + ε - θ = (γ₀ - θ) + ε by ring, Real.cos_add]
+      rw [hexp, h0, zero_mul, zero_sub, neg_eq_zero] at h1
+      have hs2 : Real.sin (γ₀ - θ) ^ 2 = 1 := by nlinarith [Real.sin_sq_add_cos_sq (γ₀ - θ)]
+      rcases mul_eq_zero.mp h1 with h2 | h2
+      · rw [h2] at hs2; norm_num at hs2
+      · exact hsin h2
+    · exact ⟨γ₀, hγ₀m, h0⟩
+  rcases lt_or_gt_of_ne hγ with hneg | hpos'
+  · -- inner
+    obtain ⟨h₁, hh₁, hsub⟩ := h.collarAt_shadow_inner_of_mem i hγm hneg
+    obtain ⟨ε', hε', hcol⟩ := exists_mem_collar_of_dist_lt v θ hh₁
+    obtain ⟨q, ⟨hq, hqb⟩, hqd⟩ := Metric.mem_closure_iff.mp hX.1 ε' hε'
+    exact not_mem_shadow_of_mem_region hF hq (hsub ((hcol q (by rw [dist_comm]; exact hqd)).1 (mem_ball.mp hqb)))
+  · obtain ⟨h₁, hh₁, hsub⟩ := h.collarAt_shadow_outer_of_mem i hγm hpos'
+    obtain ⟨ε', hε', hcol⟩ := exists_mem_collar_of_dist_lt v θ hh₁
+    obtain ⟨q, ⟨hq, hqb⟩, hqd⟩ := Metric.mem_closure_iff.mp hX.2 ε' hε'
+    exact not_mem_shadow_of_mem_region hF hq (hsub ((hcol q (by rw [dist_comm]; exact hqd)).2 (not_le.mp (fun hh => hqb (mem_closedBall.mpr hh)))))
 
 /-! ## E1-COVER -/
 
