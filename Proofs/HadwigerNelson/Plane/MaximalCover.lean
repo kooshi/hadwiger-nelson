@@ -304,11 +304,12 @@ theorem IsMaximalCover.enclosing_or_exterior {C : Fin k → Set ℂ} (hC : IsMax
   exact ⟨y, h1, h2⟩
 
 /-- The class lies below the graph of `u` over `J` in the frame `(z₀, θ)`, locally: the points
-`z₀ + e θ · (s + t i)` with `s ∈ J` and `u s − δ < t ≤ u s` are in the density set `Ã`, and those with `u s < t < u s + δ`
+`z₀ + e θ · (s + t i)` with `s ∈ J` and `u s − δ < t < u s` are in the density set `Ã`, and those with `u s < t < u s + δ`
 are not in `supp A`. (Ruling, `plans/FS131-close-inventory.md` item 56: the region below the graph is read in `Ã`, as the
-derivation's pieces `P ⊆ F̃_a` are; it was `supp A`.) -/
+derivation's pieces `P ⊆ F̃_a` are; it was `supp A`. Item 72: the region is the open one, `t < u s` — a point on a smooth
+arc has density `1/2`.) -/
 def IsLowerGraphOf (A : Set ℂ) (z₀ : ℂ) (θ : ℝ) (J : Set ℝ) (u : ℝ → ℝ) (δ : ℝ) : Prop :=
-  0 < δ ∧ ∀ s ∈ J, ∀ t : ℝ, (u s - δ < t → t ≤ u s → z₀ + e θ * (s + t * I) ∈ densitySet A) ∧
+  0 < δ ∧ ∀ s ∈ J, ∀ t : ℝ, (u s - δ < t → t < u s → z₀ + e θ * (s + t * I) ∈ densitySet A) ∧
     (u s < t → t < u s + δ → z₀ + e θ * (s + t * I) ∉ essSupport A)
 
 /-- Curvature at most `1`, in the viscosity sense for a semiconcave bound: at every `s₀ ∈ J`, every `C²` function `φ` touching

@@ -129,10 +129,92 @@ example : r7ColTri (99 / 100) (1 / 50) = 4 := by
 theorem r7_aeColouring : ∃ c : AeColouring 7, c.col = r7Col := by
   sorry
 
+/-- Inside the open cell `(0, 0)` and the open unit disc, R7's colour is `0` (`U(0, 0)`). -/
+theorem r7ColTri_zero {a b : ℝ} (ha : 0 < a) (hb : 0 < b) (ha1 : a < 1) (hb1 : b < 1) (hq : triQ a b ≤ 1) :
+    r7ColTri a b = 0 := by
+  have h1 : ⌊a⌋ = 0 := Int.floor_eq_zero_iff.2 ⟨ha.le, ha1⟩
+  have h2 : ⌊b⌋ = 0 := Int.floor_eq_zero_iff.2 ⟨hb.le, hb1⟩
+  unfold r7ColTri
+  simp only [h1, h2, Int.cast_zero, sub_zero]
+  rw [if_pos hq]
+  rfl
+
 /-- **FS111-M-R7**, tightness: at every `ε > 0` some class has non-null pairs at distances in `[1 − ε, 1 + ε]` (the
 within-contacts of every up tile, vertex to opposite arc). -/
 theorem r7_not_bandNull {ε : ℝ} (hε : 0 < ε) : ∃ j, ¬ BandNull (r7Cls j) ε := by
-  sorry
+  refine ⟨0, fun hN => ?_⟩
+  set W : Set ℂ := {z | 0 < (triCoord z).1 ∧ 0 < (triCoord z).2 ∧ (triCoord z).1 < 1 ∧ (triCoord z).2 < 1 ∧
+    triQ (triCoord z).1 (triCoord z).2 < 1} with hW
+  have hWo : IsOpen W := by
+    have hc : Continuous triCoord := by
+      unfold triCoord
+      fun_prop
+    have h1 : Continuous fun z => (triCoord z).1 := hc.fst
+    have h2 : Continuous fun z => (triCoord z).2 := hc.snd
+    have hq : Continuous fun z => triQ (triCoord z).1 (triCoord z).2 := by
+      unfold triQ; fun_prop
+    refine IsOpen.inter (isOpen_lt continuous_const h1) (IsOpen.inter (isOpen_lt continuous_const h2)
+      (IsOpen.inter (isOpen_lt h1 continuous_const) (IsOpen.inter (isOpen_lt h2 continuous_const)
+        (isOpen_lt hq continuous_const))))
+  have hWc : W ⊆ r7Cls 0 := by
+    intro z hz
+    obtain ⟨h1, h2, h3, h4, h5⟩ := hz
+    show r7Col z = 0
+    exact r7ColTri_zero h1 h2 h3 h4 h5.le
+  set ε' : ℝ := min ε (1 / 10) with hε'
+  have hε'0 : 0 < ε' := lt_min hε (by norm_num)
+  have hε'1 : ε' ≤ ε := min_le_left _ _
+  have hε'2 : ε' ≤ 1 / 10 := min_le_right _ _
+  set x0 : ℂ := ((ε' / 4 : ℝ) : ℂ) * e (π / 6)
+  set y0 : ℂ := ((1 - ε' / 4 : ℝ) : ℂ) * e (π / 6)
+  have hcoord : ∀ ρ : ℝ, triCoord (((ρ : ℝ) : ℂ) * e (π / 6)) = (ρ / √3, ρ / √3) := by
+    intro ρ
+    have h3 : (√3 : ℝ) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+    have h3p : (0:ℝ) < √3 := by positivity
+    rw [e_eq, Real.cos_pi_div_six, Real.sin_pi_div_six, triCoord]
+    simp only [mul_re, ofReal_re, add_re, ofReal_im, I_re, I_im, mul_im, add_im]
+    norm_num
+    constructor <;> (field_simp; try rw [h3]; try ring)
+  have hx0 : x0 ∈ W := by
+    have h3 : (√3 : ℝ) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+    have h3p : (0:ℝ) < √3 := by positivity
+    have h3q : (1:ℝ) < √3 := by nlinarith [h3, h3p]
+    show 0 < (triCoord x0).1 ∧ _
+    rw [hcoord]
+    simp only [triQ]
+    refine ⟨by positivity, by positivity, ?_, ?_, ?_⟩
+    · rw [div_lt_one h3p]; linarith
+    · rw [div_lt_one h3p]; linarith
+    · have : (ε' / 4 / √3) ^ 2 * 3 = (ε' / 4) ^ 2 := by rw [div_pow, h3]; ring
+      nlinarith [this, sq_nonneg (ε' / 4 / √3)]
+  have hy0 : y0 ∈ W := by
+    have h3 : (√3 : ℝ) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+    have h3p : (0:ℝ) < √3 := by positivity
+    have h3q : (1:ℝ) < √3 := by nlinarith [h3, h3p]
+    show 0 < (triCoord y0).1 ∧ _
+    rw [hcoord]
+    simp only [triQ]
+    have hpos : 0 < 1 - ε' / 4 := by linarith
+    refine ⟨by positivity, by positivity, ?_, ?_, ?_⟩
+    · rw [div_lt_one h3p]; linarith
+    · rw [div_lt_one h3p]; linarith
+    · have : ((1 - ε' / 4) / √3) ^ 2 * 3 = (1 - ε' / 4) ^ 2 := by rw [div_pow, h3]; ring
+      nlinarith [this, sq_nonneg ((1 - ε' / 4) / √3)]
+  have hd : dist x0 y0 = 1 - ε' / 2 := by
+    have : x0 - y0 = ((ε' / 4 - (1 - ε' / 4) : ℝ) : ℂ) * e (π / 6) := by simp only [x0, y0]; push_cast; ring
+    rw [dist_eq_norm, this, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs]
+    rw [abs_of_neg (by linarith)]; ring
+  set P : Set (ℂ × ℂ) := {q | q.1 ∈ W ∧ q.2 ∈ W ∧ 1 - ε' < dist q.1 q.2 ∧ dist q.1 q.2 < 1 + ε'} with hP
+  have hPo : IsOpen P := by
+    refine IsOpen.inter (hWo.preimage continuous_fst) (IsOpen.inter (hWo.preimage continuous_snd)
+      (IsOpen.inter (isOpen_lt continuous_const (continuous_fst.dist continuous_snd))
+        (isOpen_lt (continuous_fst.dist continuous_snd) continuous_const)))
+  have hPn : (x0, y0) ∈ P := ⟨hx0, hy0, by rw [hd]; linarith, by rw [hd]; linarith⟩
+  have hsub : P ⊆ bandPairSet (r7Cls 0) ε := by
+    intro q hq
+    exact ⟨hWc hq.1, hWc hq.2.1, by linarith [hq.2.2.1], by linarith [hq.2.2.2]⟩
+  have hpos : 0 < (volume.prod volume) P := hPo.measure_pos _ ⟨_, hPn⟩
+  exact hpos.ne' (measure_mono_null hsub hN)
 
 /-- **FS111-M-R7**, saturation: every essential boundary point of a class is a contact point of that class. -/
 theorem r7Cls_saturated : Saturated r7Cls := by
@@ -160,11 +242,130 @@ counterexample's other half). -/
 theorem r7Cls_isMaximalCover : IsMaximalCover r7Cls := by
   sorry
 
+/-! ### Children of `r7_lowerGraph`: R7 in the frame `(e(π/6), 2π/3)` -/
+
+theorem triCoord_frame (s t : ℝ) :
+    triCoord (e (π / 6) + e (2 * π / 3) * ((s : ℂ) + t * I)) = ((1 - t) / √3 - s, (1 - t) / √3 + s) := by
+  have h3 : (√3 : ℝ) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have h3p : (0:ℝ) < √3 := by positivity
+  have hc : Real.cos (2 * π / 3) = -1 / 2 := by
+    rw [show 2 * π / 3 = π - π / 3 by ring, Real.cos_pi_sub, Real.cos_pi_div_three]; norm_num
+  have hs : Real.sin (2 * π / 3) = √3 / 2 := by
+    rw [show 2 * π / 3 = π - π / 3 by ring, Real.sin_pi_sub, Real.sin_pi_div_three]
+  rw [e_eq, e_eq, hc, hs, Real.cos_pi_div_six, Real.sin_pi_div_six, triCoord]
+  simp only [mul_re, ofReal_re, add_re, ofReal_im, I_re, I_im, mul_im, add_im]
+  norm_num
+  constructor <;> (field_simp; first | ring1 | linear_combination (1 - t) * h3)
+
+theorem r7ColTri_four {a b : ℝ} (ha : 0 < a) (hb : 0 < b) (ha1 : a < 1) (hb1 : b < 1) (h1 : 1 < triQ a b)
+    (h2 : 1 < triQ (a - 2) b) (h3 : 1 < triQ a (b - 2)) : r7ColTri a b = 4 := by
+  have e1 : ⌊a⌋ = 0 := Int.floor_eq_zero_iff.2 ⟨ha.le, ha1⟩
+  have e2 : ⌊b⌋ = 0 := Int.floor_eq_zero_iff.2 ⟨hb.le, hb1⟩
+  unfold r7ColTri
+  simp only [e1, e2, Int.cast_zero, sub_zero]
+  rw [if_neg (not_le.2 h1), if_neg (not_le.2 h2), if_neg (not_le.2 h3)]
+  rfl
+
+theorem triQ_far_gt {a b : ℝ} (ha : 0.35 < a) (ha' : a < 0.51) (hb : 0.65 < b) (hb' : b < 0.81) :
+    1 < triQ (a - 2) b ∧ 1 < triQ a (b - 2) := by
+  unfold triQ
+  constructor <;> nlinarith [mul_pos (sub_pos.2 ha) (sub_pos.2 hb), mul_pos (sub_pos.2 ha') (sub_pos.2 hb')]
+
+theorem triQ_frame {r s ρ : ℝ} (hr : r = ρ / √3) : triQ (r - s) (r + s) = ρ ^ 2 + s ^ 2 := by
+  have h3 : (√3 : ℝ) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have : r ^ 2 * 3 = ρ ^ 2 := by rw [hr, div_pow, h3]; ring
+  unfold triQ; nlinarith [this]
+
 /-- Near the midpoint `e(π/6)` of the arc of `U(0, 0)` opposite `0`, the down class `4` lies below the lower unit arc
 `t = 1 − √(1 − s²)` in the frame `(e(π/6), 2π/3)` (the disc about `0` above it). -/
 theorem r7_lowerGraph : ∃ δ, IsLowerGraphOf (r7Cls 4) (e (π / 6)) (2 * π / 3) (Ioo (1 / 10) (1 / 5))
     (fun s => 1 - √(1 - s ^ 2)) δ := by
-  sorry
+  have h3 : (√3 : ℝ) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have h3p : (0:ℝ) < √3 := by positivity
+  have h3a : (1.73:ℝ) < √3 := by nlinarith
+  have h3b : √3 < (1.74:ℝ) := by nlinarith
+  have hcont : Continuous triCoord := by unfold triCoord; fun_prop
+  have h1c : Continuous fun z => (triCoord z).1 := hcont.fst
+  have h2c : Continuous fun z => (triCoord z).2 := hcont.snd
+  set W4 : Set ℂ := {z | 0 < (triCoord z).1 ∧ 0 < (triCoord z).2 ∧ (triCoord z).1 < 1 ∧ (triCoord z).2 < 1 ∧
+    1 < triQ (triCoord z).1 (triCoord z).2 ∧ 1 < triQ ((triCoord z).1 - 2) (triCoord z).2 ∧
+    1 < triQ (triCoord z).1 ((triCoord z).2 - 2)} with hW4
+  have hW4o : IsOpen W4 := by
+    have q1 : Continuous fun z => triQ (triCoord z).1 (triCoord z).2 := by unfold triQ; fun_prop
+    have q2 : Continuous fun z => triQ ((triCoord z).1 - 2) (triCoord z).2 := by unfold triQ; fun_prop
+    have q3 : Continuous fun z => triQ (triCoord z).1 ((triCoord z).2 - 2) := by unfold triQ; fun_prop
+    exact IsOpen.inter (isOpen_lt continuous_const h1c) (IsOpen.inter (isOpen_lt continuous_const h2c)
+      (IsOpen.inter (isOpen_lt h1c continuous_const) (IsOpen.inter (isOpen_lt h2c continuous_const)
+        (IsOpen.inter (isOpen_lt continuous_const q1) (IsOpen.inter (isOpen_lt continuous_const q2)
+          (isOpen_lt continuous_const q3))))))
+  have hW4c : W4 ⊆ r7Cls 4 := by
+    intro z ⟨h1, h2, h3, h4, h5, h6, h7⟩
+    show r7Col z = 4
+    exact r7ColTri_four h1 h2 h3 h4 h5 h6 h7
+  set W0 : Set ℂ := {z | 0 < (triCoord z).1 ∧ 0 < (triCoord z).2 ∧ (triCoord z).1 < 1 ∧ (triCoord z).2 < 1 ∧
+    triQ (triCoord z).1 (triCoord z).2 < 1} with hW0
+  have hW0o : IsOpen W0 := by
+    have q1 : Continuous fun z => triQ (triCoord z).1 (triCoord z).2 := by unfold triQ; fun_prop
+    exact IsOpen.inter (isOpen_lt continuous_const h1c) (IsOpen.inter (isOpen_lt continuous_const h2c)
+      (IsOpen.inter (isOpen_lt h1c continuous_const) (IsOpen.inter (isOpen_lt h2c continuous_const)
+        (isOpen_lt q1 continuous_const))))
+  have hW0c : W0 ⊆ r7Cls 0 := by
+    intro z ⟨h1, h2, h3, h4, h5⟩
+    show r7Col z = 0
+    exact r7ColTri_zero h1 h2 h3 h4 h5.le
+  refine ⟨1 / 20, by norm_num, fun s hs t => ⟨fun ht1 ht2 => ?_, fun ht1 ht2 => ?_⟩⟩
+  · obtain ⟨hs1, hs2⟩ := hs
+    simp only at ht1 ht2
+    set q := √(1 - s ^ 2) with hq
+    have hq2 : q ^ 2 = 1 - s ^ 2 := Real.sq_sqrt (by nlinarith)
+    have hq0 : 0 ≤ q := Real.sqrt_nonneg _
+    have hq97 : 0.97 < q := by nlinarith
+    have hq1 : q < 1 := by nlinarith
+    have hρ1 : q < 1 - t := by linarith
+    have hρ2 : 1 - t < q + 1 / 20 := by linarith
+    have hz : triCoord (e (π / 6) + e (2 * π / 3) * ((s : ℂ) + t * I)) = ((1 - t) / √3 - s, (1 - t) / √3 + s) :=
+      triCoord_frame s t
+    have hmem : e (π / 6) + e (2 * π / 3) * ((s : ℂ) + t * I) ∈ W4 := by
+      show 0 < (triCoord _).1 ∧ _
+      rw [hz]
+      have hr1 : 0.55 < (1 - t) / √3 := by rw [lt_div_iff₀ h3p]; nlinarith
+      have hr2 : (1 - t) / √3 < 0.61 := by rw [div_lt_iff₀ h3p]; nlinarith
+      have hf := triQ_far_gt (a := (1 - t) / √3 - s) (b := (1 - t) / √3 + s) (by linarith) (by linarith)
+        (by linarith) (by linarith)
+      have hQ := triQ_frame (r := (1 - t) / √3) (s := s) (ρ := 1 - t) rfl
+      refine ⟨by linarith, by linarith, by linarith, by linarith, ?_, hf.1, hf.2⟩
+      simp only
+      rw [hQ]; nlinarith
+    exact subset_densitySet_of_isOpen_ae_subset hW4o (Eventually.of_forall fun z hz => hW4c hz) hmem
+  · obtain ⟨hs1, hs2⟩ := hs
+    simp only at ht1 ht2
+    set q := √(1 - s ^ 2) with hq
+    have hq2 : q ^ 2 = 1 - s ^ 2 := Real.sq_sqrt (by nlinarith)
+    have hq0 : 0 ≤ q := Real.sqrt_nonneg _
+    have hq97 : 0.97 < q := by nlinarith
+    have hq1 : q < 1 := by nlinarith
+    have hρ1 : 1 - t < q := by linarith
+    have hρ2 : q - 1 / 20 < 1 - t := by linarith
+    have hz : triCoord (e (π / 6) + e (2 * π / 3) * ((s : ℂ) + t * I)) = ((1 - t) / √3 - s, (1 - t) / √3 + s) :=
+      triCoord_frame s t
+    have hmem : e (π / 6) + e (2 * π / 3) * ((s : ℂ) + t * I) ∈ W0 := by
+      show 0 < (triCoord _).1 ∧ _
+      rw [hz]
+      have hr1 : 0.5 < (1 - t) / √3 := by rw [lt_div_iff₀ h3p]; nlinarith
+      have hr2 : (1 - t) / √3 < 0.6 := by rw [div_lt_iff₀ h3p]; nlinarith
+      have hQ := triQ_frame (r := (1 - t) / √3) (s := s) (ρ := 1 - t) rfl
+      refine ⟨by linarith, by linarith, by linarith, by linarith, ?_⟩
+      simp only
+      rw [hQ]; nlinarith
+    intro hsupp
+    obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp hW0o _ hmem
+    have := hsupp r hr
+    have hsub : r7Cls 4 ∩ ball (e (π / 6) + e (2 * π / 3) * ((s : ℂ) + t * I)) r ⊆ ∅ := by
+      intro w ⟨hw4, hwb⟩
+      have h0 : w ∈ r7Cls 0 := hW0c (hball hwb)
+      have : (0 : Fin 7) = 4 := h0.symm.trans hw4
+      exact absurd this (by decide)
+    exact absurd (measure_mono_null hsub measure_empty) this.ne'
 
 /-- The lower unit arc is not semiconcave with constant `1` away from its bottom (its second derivative is `(1 − s²)^{−3/2} > 1`). -/
 theorem not_semiconcaveWith_one_lowerArc :
