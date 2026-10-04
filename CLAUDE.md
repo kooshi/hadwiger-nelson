@@ -334,7 +334,7 @@ file, and loads into that mind alone.*
 | **ask and rank** | Poros | Opus | `.claude/agents/poros.md` |
 | **derive** | Ephodos | Opus | `.claude/agents/ephodos.md` |
 | **plan the kernel module** | de Bruijn | Opus | `.claude/agents/debruijn.md` |
-| **implement it** | de Bruijn | Sonnet 5.5 | `.claude/agents/debruijn-implementer.md` |
+| **implement it** | de Bruijn | Opus 5.5 | `.claude/agents/debruijn-implementer.md` |
 | **search**, once a day | the Searcher | Opus | `.claude/agents/searcher.md` |
 | **file**: reading and bookkeeping | the Clerk | Sonnet 5.5 | `.claude/agents/clerk.md` |
 

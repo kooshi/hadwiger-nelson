@@ -822,3 +822,15 @@ reason by the close.*
      curvature (0 for a segment) and the sectors for `r < r₀` the regions between consecutive branches — finiteness and stabilisation included; the bridge
      lemma, which needs wave 4's `IsSector` and `hornSet` (defined only in wave 4's tree), is a wave-4 child for FS131-I4b or its successor. Alternative: state
      the bridge in wave 3. Why not: wave 3 cannot see wave 4's definitions. Confidence: high.
+137. **Kooshi, 2026-10-04 (verbatim)**: *"I've just checked back in and seen the Opus result. Yes, all implementers should be Opus based on those results. Thank you
+     for the experiment."* — and: *"What does the general quality of the code look like so far? I'll authorize another special case auditor for what we've
+     implemented so far."* **Filed**: `.claude/output-styles/keryx.md` § Staffing (models) and its lanes table, `CLAUDE.md` § The pipeline (the implementer's
+     model), `.claude/agents/debruijn-implementer.md` (`model: opus`, its description), the memory's model note; `scripts/identities.py check` PASS. **Applied to
+     launches, not to running work**: the four Sonnet implementers now running (I2g, I3g, I4b, IW) finish on Sonnet; every successor launches on Opus, which
+     counts one slot, so at most three implementers run at once (fewer than the four Sonnet halves today). **The audit**: FS131-QA1, an Opus code-quality
+     auditor in a special slot outside the cap (brief follows).
+138. **Brief FS131-QA1, the code-quality audit** (`debruijn`, Opus, Kooshi's special slot; `data/fs131/briefs/FS131-QA1-quality-audit.md`, gated PASS): statement
+     fidelity sampled (≥ 15 row theorems, definitions unfolded to Mathlib's), the foundations' definitions, trust, measured code quality, a plain verdict
+     with ranked findings; read-only everywhere. Keryx's own counts before it (for comparison, not a finding): Lean files changed since `49c3abb8` — w2 13
+     files ≈ 7.9k lines, w3 10 ≈ 9.7k, w4 15 ≈ 5.9k, ww 19 ≈ 5.9k (the last two include earlier waves' skeleton files); no `maxHeartbeats` raised and no
+     linter switched off in any of them.
