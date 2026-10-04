@@ -492,3 +492,81 @@ batches, 25 modules rebuilt, every warning `declaration uses 'sorry'` (`build/ga
 **Re-pricing** (the brief's ask, from the first two hard children): `dyadicConclusion_of_minpoly` about 25k tokens and `upperDensity_of_tiling` with
 its two instances about 30k — K2c's table priced the Dyadic engine and the periodic density at about 40k each at the Sonnet rate. The easy Slack leaves
 ran at 2–4k each. The rate holds near a third of the table, as I2f measured.
+
+## Stage 15 — SAVED (FS131-I2h): exists_tight, R7's first three, four HC children, two more Slack leaves; the build is green; 53 `sorry` left — handoff
+
+**Closed since Stage 14** (statements untouched):
+- `Plane/Slack` (26 → 19): `pairMass_eq_zero_of_iccPairNull` (the closed zero set of a continuous function holds the open band less a null set,
+  so all of it), `iccPairNull_preimage_mul` (`addHaar_preimage_smul` on `ℂ × ℂ`), `AeColouring.exists_rescale` (pair mass at radius `s` pulled
+  back by `Prod.map (s • ·) id`, quasi-measure-preserving), `AeColouring.exists_tight` (FS111-V0-RESCALE: `a* = inf {a ≤ 1 : every class null on
+  [a, 1]}`, positive by `exists_pos_not_iccPairNull`, attained by `iccPairNull_of_forall_lt`, pair mass zero at `a*`, rescale; slack `ε` would put
+  `a*(1 − ε)` in the set), `exists_selection` (least colour of positive weight; its fibres are finite Boolean combinations of `{0 < F j}`),
+  `ae_eventually_keptAt` (Besicovitch density at `ε/2` and `2ε`), `CPColouring.lintegral_ball_ne` (Tonelli on `law ⊗ volume`, the modification
+  a.s. at `y` and at `0`).
+- `Plane/CoverExamples` (41 → 34): `measurable_r7Col` (floors into a countable type, three measurable tests), `r7UpCol_ne_r7DownCol`,
+  `volume_iUnion_sphere_tri`; HC's `dist_hcFrame`, `hcFrame_coords`, `essSupport_of_isOpen`, `subset_compl_unitShadow_closure` (a point of `U`
+  at distance `1` from `closure U` is moved along the line to a point of `U` at distance exactly `1` from a nearby point of `U`).
+
+**Build** at `a0865f7d`: `./scripts/build.sh` under the slot, OK — 446 of 446 batches, 2 modules rebuilt, 2 modules with warnings, every warning
+`declaration uses 'sorry'` (`build/gate/build/20261004T151522Z-268577.log`); `Arith/Dyadic`, `Plane/YesLimit` build with no warning.
+`tools/check_architecture.py`: PASS (Stage 14's YesLimit import). **Axioms**, printed from the built library with `lake env lean
+data/fs131/i2/i2h-axioms.lean` (not `scripts/axioms.sh`, which fails on the remaining `sorry` by design): `data/fs131/i2/i2h-axioms.txt`. Negative
+control: `continuous_pairMass`, still `sorry`, prints `sorryAx` — the check can fire. The gate (axioms.sh with the IMPORTED move, vacuity with wave 2's
+carriers) was not run.
+
+**Still `sorry`** (lines that are exactly `sorry`; 53):
+- `Plane/Slack` 19: `continuous_pairMass`, `ae_pairMass_eq_zero`, `AeColouring.exists_pos_not_iccPairNull` (these three carry `exists_tight` and
+  `bandNull_unitPairsNull` → `mu_le_muZero` → the three SUPK limits); `exists_squareWin_dense`, `exists_tiled_kept`, `eventually_le_muPer` (SUPK's lower
+  bound: the window, the pixelation, the assembly); `CPColouring.exists_modification`, `CPColouring.ae_unitPairsNull_of_modification` (carry
+  `chiM0_le_chiCP`), `CPColouring.tendsto_not_kept` (assembly: Markov on `lintegral_ball_ne`, now proved, with `exists_unif`); the compactness block
+  `exists_weakStar_subseq`, `convForm_tendsto`, `exists_twoCircle_density`, `integral_circleAvg_sq`, `unitForm_tendsto`,
+  `exists_translates_small_hole`, `ae_sum_eq_one_of_weakStar` and its two assemblies `chiM0_le_iff_muZero_eq_one` (the one leaf FS116-O1-YESLIM
+  still waits on) and `exists_bandNull_aeCover_of_mu_eq_one`; `exists_not_uniform_kept` (§ 17.1's fringe formula not reached).
+- `Plane/CoverExamples` 34: R7 8 (`r7Col_mem_tile`, `r7Up_unitPair`, `r7Up_sep`, `r7Down_dist_ne_one`, `r7_boundary_lattice`,
+  `r7_boundary_offLattice`, `r7_phi_pos_up`, `r7_phi_pos_down`); (G1) 4 (`hcGap_eq_of_gap`, `differentiable_hcGap`, `hcGap_bounds`,
+  `hcGap_lowerParabola` — the route: `g′ = uv(v − u)/2`, `|g″| ≤ 1/2` on a gap, `g′ = 0` on `Z` from `g ≤ dist²/4`, `g′` `1/2`-Lipschitz across
+  gaps through a point of `Z` between, then Taylor); HC/IRREG 22 (`hcUpTri_frame` onward, § 17's list).
+
+**Owed before the gate, not done this session**: docstrings for the wave-2 theorems that lack them (`tools/fs131_qa1_quality.py`; item 144 (d));
+FALC-HOSTS (iv)'s docstring on `falconerFan_five_mem_P`; wave 2's vacuity carriers (`CPColouring`, `AeCover`, maximal covers, partial colourings)
+registered under FS131-T1's procedure with a control each; the IMPORTED move is in place (Stage 14) but unverified until `axioms.sh` runs.
+
+**For the next implementer.** (1) `main` is merged (Stage 14); the landing's merge will be small. (2) Cheapest next: `tendsto_not_kept` (Markov:
+`¬ KeptAt` at `ρ ∈ {ε/2, 2ε}` puts `volume (ball 0 ρ ∩ {ct f · ≠ ct f 0}) ≥ η · volume (ball 0 ρ)`; `meas_ge_le_lintegral_div` with
+`lintegral_ball_ne` and `exists_unif`), the four (G1) children (route above), `exists_near_hcFace` (floors in the face lattice), `pairMass`'s
+continuity (`L¹` continuity of translation along the circle). (3) Iteration: a private overlay of the worktree's oleans (`cp -rs .lake/build/lib/lean/Proofs
+<dir>/ol/`), the edited upstream module compiled into it with `lake env lean -o … -i …`, then `LEAN_PATH=<dir>/ol:$(lake env printenv LEAN_PATH) lean
+-DautoImplicit=false …` — `lake env lean` resets `LEAN_PATH` and ignores the overlay. Testing a module's edits on a scratch copy of the file is safe
+while `build.sh` runs; editing the module is not.
+
+**Re-pricing, overall**: about 300k tokens of this session went to proofs, merging and builds for 38 lines and 12 new children; the easy leaves at
+2–5k, the hard children (Kummer–Dedekind, the tiling squeeze, the disc-per-cell count) at 25–35k.
+
+## Theorems this phase proved (FS131-I2h, additions)
+
+Axioms read from `data/fs131/i2/i2h-axioms.txt` (printed from the built library at `a0865f7d`; the gate was not run). Each read against its docstring,
+which carries the row.
+- `HadwigerNelson.Arith.sqrt3_local` — `[propext, Classical.choice, Quot.sound]` — FS129-SA1-SQRT3-LOCAL (item 134's `hi`: `ι² = −1`, `ι ∉ F`);
+  `sqrt3_dyadic` (TC1-SQRT3-DYADIC, merged), `sqrt3_local_of_congr`, `dyadicConclusion_of_coeffs`, `dyadicConclusion_of_minpoly`,
+  `three_dvd_two_pow_sub_one_iff` — the standard three.
+- `HadwigerNelson.Plane.disc7_upperDensity` (FS111-M2-DISC7, last clause), `volume_disc7_cell`, `disc7_periodic`, `disc7_linearIndependent` — the
+  standard three. **FS111-M2-DISC7 is sorry-free.**
+- `HadwigerNelson.Plane.muZero_eq_one_of_fragments` (FS116-O1-YESLIM's child), `ArcMap.measurableSet_region_inter`,
+  `ArcMap.volume_ball_diff_region`, `ArcMap.bandFree_region` — the standard three. `chiM0_le_of_fragments` carries `sorryAx` through
+  `chiM0_le_iff_muZero_eq_one`.
+- `HadwigerNelson.Plane.upperDensity_of_periodic`, `upperDensity_periodize`, `upperDensity_of_tiling`, `parallelogram_tiling`,
+  `measurableSet_squareWin`, `volume_squareWin`, `volume_ball_div_volume_ball`, `tendsto_sq_add_div` — the standard three.
+- `HadwigerNelson.Plane.unitPairsNull_iff_pairMass`, `dist_gridPoint_lt`, `measurable_eval_gridPoint`, `CPColouring.law_ne_shift`,
+  `CPColouring.exists_unif`, `CPColouring.lintegral_ball_ne`, `iccPairNull_preimage_mul`, `AeColouring.exists_rescale`, `exists_selection`,
+  `ae_eventually_keptAt` — the standard three.
+- Sorry-free in body, `sorryAx` through open children: `AeColouring.exists_tight` (FS111-V0-RESCALE) and `exists_tight_iff_chiM0_le`,
+  `tendsto_mu`, `tendsto_muTile`, `tendsto_muPer` (FS129-SR2-SUPK), `chiM0_le_chiCP`, `mu_le_muZero`, `bandNull_unitPairsNull`,
+  `pairMass_eq_zero_of_iccPairNull`.
+- `HadwigerNelson.Plane.measurable_r7Col`, `volume_iUnion_sphere_tri` — the standard three; `r7UpCol_ne_r7DownCol` — `[propext, Quot.sound]`.
+- `dist_hcFrame`, `hcFrame_coords`, `essSupport_of_isOpen`, `subset_compl_unitShadow_closure` — built at `a0865f7d`, not in the print file.
+- Renamed, unchanged: `dist_add_e_mul` (was `dist_rot`), `self_eq_norm_mul_e_arg` (was `eq_norm_mul_e_arg`) — the standard three;
+  `falconer_reduction` — the standard three and `HadwigerNelson.Plane.falconer_lemma2_nonempty`, the declared import.
+
+## Drafts for the front page (FS131-I2h)
+
+None: the gate was not run (53 `sorry` remain in wave 2's modules), so no count moves.
