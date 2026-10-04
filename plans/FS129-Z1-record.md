@@ -142,3 +142,30 @@ statement read against a weaker hypothesis than the one it cites, not a merge th
 | FS129-OR1-BENDFRAG | 1017 | `plans/FS129-OR1-audit.md` line 147 | superseded by FS129-SR1-BENDANY |
 | FS129-OR1-BEND3 | 1043 | `plans/FS129-OR1-audit.md` line 279 | superseded by FS129-SR1-BENDANY with FS129-SR1-BENDLE3 |
 | FS129-OA1-RINGWIND | 1067 | `plans/FS129-OA1-audit.md` line 348 | superseded by FS129-SR1-RINGBAND; corrected (item 100) |
+
+## Stage 3 — SAVED: the lost theorems filed
+
+Sixteen dated entries, each in its milestone's derivation file under its original id, in a section headed "Filed by FS129-Z1 (2026-10-03): …"
+appended at the end; nothing above it changed. Statements are the source's theorem line verbatim; where that line is a short form pointing to a
+section, the statement it names is quoted after it, verbatim. Grades and mind counts are the sources' (the J45, J31, X25B, X22D and FS106-TQ lines);
+a verification record that touched a statement is named in its `minds:` line and not counted (J46, FS84-S1V), since the source does not count it.
+
+| file | entries | gate before → after |
+|---|---|---|
+| `plans/FS84-SI-D-derivation.md` (first: the inputs of row 121) | J45-N1, J45-N2, J45-SI-4, J45-SI-5, J45-SI-J, J45-SI-C, J45-SP-oi, J45-SP-if | FAIL ("no derivation entry") → PASS, 8 derived, 8 warnings (prior art owed) |
+| `plans/FS84-S1-derivation.md` | S1b, S1b-47, S1d-K, S1e | FAIL → PASS, 4 derived |
+| `plans/FS100-derivation.md` | X25B-PZ, X25B-L1, X22D-FLK2 | FAIL → PASS, 3 derived |
+| `plans/FS106-derivation.md` | HOLE-t | FAIL → PASS, 1 derived |
+
+Each "after" output is `data/fs129/z1/gate-after-<file>.txt`. **Verbatim check**: `tools/fs129_z1_lost_check.py` (each statement's head inside the
+source's theorem line; every quoted segment inside the source file) printed "lost-check: 16 entries, 0 problems"; with a fault planted (`--fault`,
+"Haar-null" → "Haar-positive" in J45-N1 in memory) it printed "HEAD NOT IN SOURCE LINE J45-N1 … 1 problems" and exited 1 — it fires.
+
+**Readings the record job added** (from the proofs, not the theorem lines; each says so in its section's preamble): the `uses only:`,
+`not claimed:` and `model:` lines. Two not-claimed lines carry a verifier's finding: S1b (FS84-S1V's E2, a non-amenable counterexample to the
+necessity of amenability, which J31 had left "not examined") and S1e (FS84-S1V's S1V-8: (i) needs `Γ` four-colourable). J45-SP-oi and J45-SP-if
+have no model of their hypothesis (the open sign problem); each says so ("none known — …"), as a reduction.
+
+**Handoffs**: the eight J45 statements cross to de Bruijn with FS100-Q47's closure (row 121); X25B-PZ and X25B-L1 only if FS103-F-FRAC's X25B
+route is taken (C14.1–C14.3 is the held alternative); S1e through FS129-SA1-NOAFF-K; S1b, S1b-47, S1d-K, X22D-FLK2, HOLE-t none (no later entry cites
+them; FS100-FLK's kernel line is "declined").

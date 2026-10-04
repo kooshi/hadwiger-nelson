@@ -244,3 +244,27 @@ ruling, item 77). *Prior art:* none. *Kernel:* declined.
 *Proof:* A2 §2.2 (⟸ by row 130's continuity in probability; ⟹ by TQ's Route II with the band measures `ν_ε → σ`, the operator-norm convergence
 "not written in full"). *Proof verdict:* a sketch; not confirmed by a second mind. *Rests on it:* FS-107's R, as the pair form of "robust
 Voronov" that TQ-HIT does not cap. *Prior art:* none. *Kernel:* declined.
+
+## Filed by FS129-Z1 (2026-10-03): a statement FS106-TQ proved and no entry carried
+
+*A dated entry, appended by FS-129's record job (`plans/FS129-Z1-record.md`; `plans/FS129-close-inventory.md` item 110), found by FS129-SA1
+(`plans/FS129-SA1-audit.md` § 4.2: "HOLE-t … no FS106 entry states it"). The statement is FS106-TQ's theorem line, verbatim; grade and mind count
+are that line's. Nothing above this section is changed.*
+
+derivation: HOLE-t
+  statement: holes whose points are all within `t < ε/2` of the coloured set fill, at a loss of `2t` in the band
+  uses only: a choice of a coloured point `p(q)` within `t` of each hole point `q`, `q` taking its colour; the triangle inequality, which moves a
+    monochromatic pair at distance `ℓ` in the shrunk band to old points at a distance in `(ℓ − 2t, ℓ + 2t) ⊂ (1 − ε, 1 + ε)`, distinct since
+    `ℓ − 2t > 0` (`plans/FS106-TQ-derivation.md` § 4.1, HOLE-t's proof)
+  not claimed: anything about holes with a point at distance `≥ ε/2` from the coloured set (§ 4.1: "a hole that matters must contain points at
+    distance `≥ ε/2`"); measurability of the filled colouring
+  argument: FS106-TQ-derivation.md § 4.1 C-Q-HOLEa
+  verdict: derived
+  grade: hand — the line's grade, "[hand, one mind]"
+  minds: 1 — FS106-TQ's derivation
+  model: C-Q-HOLEa's holes — pairwise disjoint closed discs of radius `≤ r` in `U₃(0)`, `4r < ε`, which lie within `2r` of the coloured set (§ 4.1)
+  prior art: owed — § 4.7's short gate covered "the new statements" of stage 4; HOLE-t's line in it was not read here
+  handoff: none — no FS106 entry rests on it by id; it is C-Q-HOLEa's general form (the advisor's A8a), filed so that the record holds it
+
+Rests on it: C-Q-HOLEa (HOLE-t with `t = 2r`); the reading that a hole is invisible unless it holds a point at distance `≥ ε/2` from the coloured
+set (§ 4.1, "What it says").

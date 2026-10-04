@@ -386,3 +386,71 @@ kernel yet. **Stage 4′ and earlier (§1–§2):**
 All fifteen entries **declined**, each with its reason above: the objects live on duals of non-finitely-generated rings with Haar measure; the
 one combinatorial core (FS100-X1's cross and bit flip) is two lines with no kernel consumer; FS100-T1 and FS100-K0 rest on certificates (FS-66)
 and one-mind class forms (R88-TCA) whose kernel home, if any, is FS-75's or FS-87's. No stub route is opened.
+
+## Filed by FS129-Z1 (2026-10-03): three statements FS-100's job records proved and no entry carried
+
+*Dated entries, appended by FS-129's record job (`plans/FS129-Z1-record.md`; `plans/FS129-close-inventory.md` items 110, 113), found by FS129-SA1
+(`plans/FS129-SA1-audit.md` §§ 4.1–4.2). Each statement is the job record's own theorem line, verbatim (X22D-FLK2's is a table row pointing to two
+sharpenings, quoted after it from the section it names). Grades and mind counts are those lines'; where they state none, the entry says so.
+Uses-only, not-claimed and model lines are read off the job records' proofs by the record job. Nothing above this section is changed.*
+
+derivation: X25B-PZ
+  statement: the stationary ratio of a categorical product of two LCA Cayley graphs is at most the larger factor's (Zhang 2012 §2's argument,
+    measure form)
+  uses only: X25B-P (Zhang's Prop. 1.7 for stationary random a.e.-independent sets in an LCA Cayley graph, the same job's lemma); Zhang's §2 count
+    with sums replaced by probabilities at the origin; the fibre sets `X_a`, `X*_a`, `X′_a` of a stationary a.e.-independent `J ⊆ G × H` and their
+    stationarity; Tonelli (`plans/FS100-X25B-derivation.md` § Stage 2, X25B-P and X25B-PZ)
+  not claimed: equality of the ratios; anything for graphs that are not Cayley graphs of LCA groups
+  argument: FS100-X25B-derivation.md § Stage 2 — SAVED
+  verdict: derived
+  grade: hand — the line's grade, "[hand; one mind; the finite case is `[Zhang2012]` Thm 1.8's ratio half]"
+  minds: 1 — X25B's derivation
+  model: two finite vertex-transitive Cayley graphs, where it is `[Zhang2012]` Thm 1.8's ratio half; its use is the archimedean factor against the
+    profinite one in FS100-TCA's second derivation (`plans/FS100-X25B-derivation.md` § Stage 2, the chain `r(G_∅) ≤ sup_k r(ℂ^{r₁} × Y_k) ≤ …`)
+  prior art: partly: `[Zhang2012]` Thm 1.8 for finite graphs; the measure form for LCA Cayley graphs not searched (FS129-SA1 § 4.1)
+  handoff: de Bruijn — FS103-F-FRAC's grade names it ("X25B-L1/PZ/T or C14.1–C14.3", `plans/FS103-derivation.md` line 72) beside the held
+    alternative FS86-Cx-C14's C14.1–C14.3; it crosses only if the backlog takes that route
+
+Rests on it: FS100-TCA's second derivation (its `*Also:*` line names X25B-PZ); FS103-F-FRAC, which can take it or C14.1–C14.3.
+
+derivation: X25B-L1
+  statement: a profinite factor's stationary ratio in a product is at most the supremum over its finite levels (fibre shares above `1/2` form an
+    a.e.-independent set)
+  uses only: the Haar shares `φ_k(x, a)` of a stationary a.e.-independent set's fibres in the cosets of open subgroups `K_k ↓ 0`; that
+    `J_k = {φ_k > 1/2}` is stationary and a.e.-independent (an integral bound over `a + K_k`); martingale convergence on the fibres
+    (`plans/FS100-X25B-derivation.md` § Stage 2, X25B-L1)
+  not claimed: equality; anything for a factor that is not a compact group with open subgroups shrinking to 0
+  argument: FS100-X25B-derivation.md § Stage 2 — SAVED
+  verdict: derived
+  grade: hand — the line's grade, "[hand; one mind]"
+  minds: 1 — X25B's derivation
+  model: `X` a point and `Y` the inverse limit of a stable place's residue tower: the ratio of `Y` is at most the supremum of its levels' ratios (the
+    all-levels ratio `r_v` of FS100-T1's setting)
+  prior art: owed — none recorded in X25B's record
+  handoff: de Bruijn — FS103-F-FRAC's grade names it ("X25B-L1/PZ/T or C14.1–C14.3", `plans/FS103-derivation.md` line 72); it crosses only if the
+    backlog takes that route
+
+Rests on it: FS100-TCA's second derivation (X25B-T's chain); FS103-F-FRAC's alternative route.
+
+derivation: X22D-FLK2
+  statement: X03D-FL-K re-derived (second mind); holds for translation-invariant `μ` over `𝒜_E` and at every `k` (same ratio) — its two sharpenings
+    as `plans/FS100-X22D-derivation.md` § 4.1 states them, verbatim: "(i) the identity needs no rotation-invariance if the joining is taken over `𝒜_E`
+    (the factor of §2.2 step 1)"; "(ii) at `k` colours (simplex embedding, `⟨e_j, e_l⟩ = (k/(k−1))δ_{jl} − 1/(k−1)`): `ν̂(u) = −(k/(k−1))P(c¹(0) =
+    c²(u))`, `ν(R̂) = (k/(k−1))P(c¹(0) ≠ c²(0))`, the same ratio"
+  uses only: X22D-EF (the `E`-part of `L²(μ)` is `L²` of a factor, so the relatively independent self-joining over `𝒜_E` exists); `h = E[g | 𝒜_E]`
+    and `|h|² = (k/(k−1))Σ_j p_j² − 1/(k−1)` in the simplex embedding (`plans/FS100-X22D-derivation.md` § 4.1, from § 2.2 route (b) step 2)
+  not claimed: FS100-FLK's ℚ(√47) clause (`τ₀ ≠ 0`, not a Haar multiple) at `k ≠ 4` or without rotation invariance — that clause reads T-C(A) and
+    R-U; that `𝒜_E = 𝒜_∅` without rotation invariance and R-U (§ 4.1)
+  argument: FS100-X22D-derivation.md § 4.1 X03D-FL-K — TRUE, and wider than stated
+  verdict: derived
+  grade: hand — the row's grade, "[hand]"
+  minds: 1 — the two sharpenings are X22D's alone (FS129-SA1 § 4.2, item 113: "one mind"); on X03D-FL-K's own statement X22D agrees with X03D
+    (§ 4.1, "Agrees with X03D"), which FS100-FLK's grade already counts with X05V; nothing is added there
+  model: any translation-invariant random proper four-colouring of `Cay(R, U)`, such as J45's F2 colourings over ℚ(√11) (`plans/FS84-SI-D-derivation.md`
+    J45-SI-C); at `k = 5`, a uniform translate of ρ₁₁'s pullback of a five-colouring of `Γ₁₁` over ℚ(√47)
+  prior art: owed — FS100-FLK's line reads "none recorded at the close"
+  handoff: none — FS100-FLK's kernel line is "declined"; if it is formalized, it is formalized in this wider form (FS129-SA1 § 4.2: "a hypothesis
+    weakening the record lost")
+
+Rests on it: nothing by id; it widens FS100-FLK (G79's example invariant) from rotation-invariant four-colourings to translation-invariant
+`k`-colourings.

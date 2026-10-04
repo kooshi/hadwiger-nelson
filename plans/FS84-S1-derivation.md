@@ -377,3 +377,103 @@ On a lattice that is not four-colourable an identity is vacuous (G30.5). So P-G7
 - FS-84's §P: P-S1a — one AmbrusEtAl-free derivation (S1V would make two); P-int's price named (`[MatolcsiEtAl2025]`'s `α₁(ℝ²) = 1/4`);
   P-1p and P-G75 unscored (reduced as above).
 - S4(i) should start from §3's null: its finder's calibration must include a positive at a non-zero archimedean part (Ga26).
+
+## Filed by FS129-Z1 (2026-10-03): four theorems this record proved and no entry carried
+
+*Dated entries, appended by FS-129's record job (`plans/FS129-Z1-record.md`; `plans/FS129-close-inventory.md` item 110), found by FS129-SA1
+(`plans/FS129-SA1-audit.md` § 4.2: "theorems the record has lost"). Each statement is this file's "Theorems this phase proved" row, verbatim;
+where the row is a short form, the statement it names is quoted after it, verbatim from the section the row points to. The grade is the row's;
+the mind count is J31's own (the rows say "one derivation" or nothing more). FS84-S1V's verification (`plans/FS84-S1V-verification.md`) is named
+where it touches a statement and is not counted: this file does not count it, and the record job raises no grade. Uses-only, not-claimed and
+model lines are read off the proofs above by the record job; nothing above this section is changed.*
+
+derivation: S1b
+  statement: invariant-measure equivalence (i), the `1/k` density (ii), the window form (W), and the identities `ι_G = 1/χ_{f,0} = 1/ρ =
+    1/χ_{gf,G,0}` (iii) — as § 2.2 states them, in its setting, verbatim: "**S1b-i.** If `G` is amenable: `Γ` is `k`-colourable ⟺ `Col_k(Γ)` carries
+    a `G`-invariant Borel probability measure." "**S1b-ii.** If `G` is amenable and transitive: `Γ` `k`-colourable ⟹ `ι_G(Γ) ≥ 1/k`." "**S1b-W (the
+    window form, S2's bridge).** If `G` is amenable: for every finite `W ⊆ V`, let `P_k(W)` be the set of probability vectors `p` on `Col_k(Γ[W])`
+    with `p_Y(σ) = p_{gY}(σ ∘ g⁻¹)` for all `Y ⊆ W`, `g ∈ G` with `gY ⊆ W`, and patterns `σ` on `Y` (`p_Y` the marginal). If `P_k(W) = ∅` for one
+    `W`, then `Γ` is not `k`-colourable. Conversely, `Γ` is `k`-colourable iff `P_k(W) ≠ ∅` for every `W`." "**S1b-iii (the identities).** For
+    `Γ = Cay(R, U)`, `R` a countable abelian group acting by translation, and every amenable `G` with `R ≤ G ≤ Aut(Γ)`: `ι_G(Γ) = ι_R(Γ) =
+    1/χ_{f,0}(Γ) = 1/ρ(Γ) = 1/χ_{gf,G,0}(Γ)`, where `χ_{f,0} = sup` of `χ_f` over finite induced subgraphs, `ρ = sup |H|/α(H)` (the Hall ratio), and
+    `χ_{gf,G,0} = sup` over finite `H` of the `G`-geometric fractional chromatic number (`[MatolcsiEtAl2025]`'s (6), with congruences restricted to
+    elements of `G`). In particular **`ι_G = inf_H α(Γ[H])/|H|`**."
+  uses only: (i) right Følner sets and a weak* limit point of averaged point masses (Banach–Alaoglu; Day's fixed-point theorem) — amenability used
+    only in ⟹; (ii) averaging over the colour permutations and the equivariant map `c ↦ c⁻¹(1)` into `Ind`; (W) the marginals of (i)'s measure,
+    and for the converse a diagonal limit and Kolmogorov's extension theorem; (iii) Følner sets in `R` and in `G`, maximum (and maximum-weight)
+    independent sets of finite pieces, and the regular fractional colouring an invariant measure induces on a finite `H` (§ 2.2's proofs)
+  not claimed: that amenability is necessary for (i) (§ 2.4: "not examined"; FS84-S1V's divergence E2 gives a non-amenable counterexample, an
+    `F₂` action); anything about `χ(ℚ(√47)²)` (§ 2.4)
+  converse: § 2.2 S1b — the invariant-measure equivalence
+  argument: § 2.2 S1b — the invariant-measure equivalence
+  verdict: derived
+  grade: hand — the row's grade, "hand; one derivation"; § 2.2: "S1b-i, ii, W — [hand; standard (amenability ⟹ invariant measures); one derivation
+    here]. S1b-iii — [hand; one derivation; its steps are MatolcsiEtAl's Thms 1–2 transposed to a countable group acting on a countable graph]"
+  minds: 1 — J31's derivation; FS84-S1V verified S1b-i and S1b-ii blind (its § 2.2, rows E1, E3) and did not verify S1b-W or S1b-iii (row E5);
+    not counted here
+  model: `Γ = Cay(R, U)` over ℚ(√47), `G` the amenable group of § 2.3, `k = 5`: ρ₁₁'s pullback of a five-colouring of `Γ₁₁`, averaged over its finite
+    `G`-orbit, is the invariant measure (i) promises (§ 2.3 item 1)
+  prior art: partly: `[MatolcsiEtAl2025]` Thms 1–2 (iii's steps (b) and (d), in measure form, § 2.2); (i) and (ii) are standard, as § 2.2's grade
+    line says; not otherwise searched
+  handoff: none — no later entry cites it (FS129-SA1 § 4.2); filed so that the record holds it
+
+Rests on it: S1b-47 (through S1b-iii); § 2.3's readings of ℚ(√47)'s averaged routes (S2's window bridge, the single-class price).
+
+derivation: S1b-47
+  statement: `ρ_per(ℚ(√47)) = max_𝔓 r_𝔓 ∈ [28/121, h*(31)]`; `ι(ℚ(√47)) < 1/4` iff a finite `H` has `α(H) < |H|/4` (would refute
+    `[MatolcsiEtAl2025]`'s `α₁(ℝ²) = 1/4`)
+  uses only: S1a's steps 5–6 (`≤`); each single-place quotient `R → A_{𝔓,m}` is an admissible `L`, since unit vectors map to units (`≥`);
+    `α(Γ₁₁) = 28` (FS-66); S1b-iii (`ι = inf_H α(H)/|H|`) for the second clause (§ 2.3 items 3–4)
+  not claimed: which place attains the maximum (probably 11, from found sets only); that `ι(ℚ(√47)) < 1/4`, or that `[MatolcsiEtAl2025]`'s
+    conjecture fails
+  converse: § 2.3 Consequences at ℚ(√47)
+  argument: § 2.3 Consequences at ℚ(√47)
+  verdict: derived
+  grade: hand
+  minds: 1 — J31's derivation; FS84-S1V did not verify it (its § 2.2 row E5, "claim 8 … not verified here"); not counted
+  model: `F = ℚ(√47)` itself; the bracket's left end is a periodic independent set at 11 of density `28/121`
+  prior art: owed — none recorded in this file beyond the conjecture it names (`[MatolcsiEtAl2025]`, arXiv:2311.10069 v4, §2)
+  handoff: none — no later entry cites it (FS129-SA1 § 4.2)
+
+Rests on it: the price of the single-class averaged route at ℚ(√47) (§ 2.3 item 3): as hard as refuting `[MatolcsiEtAl2025]`'s `α₁(ℝ²) = 1/4`.
+
+derivation: S1d-K
+  statement: the window graph is `K_{2,3}`-free: `e(W) ≤ w(1 + √(8w−7))/4`; radius-1 windows are stars
+  uses only: two unit circles meet in at most two points; `Σ_v C(d_v, 2) ≤ 2·C(w, 2)` and convexity; that `Γ` is triangle-free over ℚ(√47) (`ζ₆ ∉ E`),
+    so the radius-1 window `{0} ∪ U_M` induces a star (§ 4.1)
+  not claimed: anything about the window LP's feasibility (§ 4.1: its window is not fixed, a GAP); the bound's sharpness
+  argument: § 4.1 S1d — the four-class window LP, its shape (no LP runs here)
+  verdict: derived
+  grade: hand
+  minds: 1 — J31's derivation
+  model: `w = 16`: at most 48 edges (average degree 6), as § 4.1 computes; the radius-1 window of `Cay(Λ_M, U_M)` is a star
+  prior art: owed — none recorded in this file (the `K_{2,3}`-freeness of unit-distance graphs is classical, recalled, not read)
+  handoff: none — no later entry cites it (FS129-SA1 § 4.2)
+
+Rests on it: § 4.1's count of the four-class window LP (windows are sparse; the LP is machine-scale from `w ≈ 14`).
+
+derivation: S1e
+  statement: linear tetrahedral identities are class-balance statements; none exists on a lattice with one gapped four-colouring; G75's mechanism
+    is vacuous without `√3` — as § 4.2 states it, verbatim: "**S1e.** Let `g = Σ_j 1[c = j]·t_j` be a four-colouring read on the regular tetrahedron
+    (`Σ t_j = 0`). (i) A linear identity `Σ_{x∈P} a_x g(x) = κ` valid for every proper four-colouring `c` of a lattice graph `Γ` has `κ = 0` and says
+    exactly that **every colour class has the same `a`-weight on `P`** in every colouring. (ii) If some proper four-colouring of `Γ` has a gap (a
+    vertex whose closed neighbourhood misses a colour), then **no non-trivial such identity exists on `Γ`**. (iii) Over ℚ(√47) (and every field
+    without `√3`) `Γ` has no triangles of any side, so G75's `√3`-triple mechanism is vacuous."
+  uses only: colour permutations preserve properness (averaging over `S₄` gives `κ = 0`); the only linear relation among the `t_j` is `Σ t_j = 0`;
+    translates of proper colourings are proper; recolouring one gapped vertex with its missing colour; `ζ₆ ∉ ℚ(√47, i)` (§ 4.2's proof)
+  not claimed: (i) for a `Γ` that is not four-colourable — there every identity holds vacuously, so "`κ = 0`" fails as worded (FS84-S1V's row S1V-8:
+    "(i) holds once `Γ` is assumed four-colourable"); identities of degree two or more; anything over a field with `√3`
+  argument: § 4.2 S1e — linear identities on the tetrahedral embedding
+  verdict: derived
+  grade: hand — the row's grade, "hand; one derivation"
+  minds: 1 — J31's derivation; FS84-S1V read S1e non-blind (row S1V-8: (ii) and (iii) hold as stated, (i) once `Γ` is four-colourable, also with
+    matrix coefficients); a checking reading, not counted
+  model: the lattice graph `Cay(R, U)` over ℚ(√11) pulled back from `Γ₇`, with C9's colouring `⌊4θ⌋` pulled back — proper, and gapped at the preimages
+    of `Γ₇`'s 14 gapped vertices (`plans/FS84-SI-D-derivation.md`, J45-G2), so (ii) applies; ℚ(√47) for (iii)
+  prior art: partly: `[BrewsterEtAl2020]` (a gapped vertex is a non-frozen vertex — the prior-art line of FS129-SA1-NOAFF-K, which merges (ii));
+    otherwise owed
+  handoff: de Bruijn — through FS129-SA1-NOAFF-K, which formalizes (ii) at every `k` in its place (`plans/FS129-SA1-audit.md` § 6.3 item 1); (i) and
+    (iii) are not needed apart from it
+
+Rests on it: P-G75's reduction (§ 4.2, "What it does to P-G75"); it is the in-house prior form of FS129-MA1-NOAFF5 and MA2's k = 4 note, which pass 2
+re-derived without citing it, now merged into FS129-SA1-NOAFF-K (`plans/FS129-derivation.md`).

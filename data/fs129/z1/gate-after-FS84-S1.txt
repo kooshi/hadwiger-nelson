@@ -1,0 +1,17 @@
+entry lint
+  claim S1b: minds 1 — J31's derivation; FS84-S1V verified S1b-i and S1b-ii blind (its § 2.2, rows E1, E3) and did not verify S1b-W or S1b-iii (row E5); not counted here
+  claim S1b: prior art partly
+  claim S1b-47: minds 1 — J31's derivation; FS84-S1V did not verify it (its § 2.2 row E5, "claim 8 … not verified here"); not counted
+  warn  FS84-S1-derivation.md:422 (S1b-47): prior art owed — novelty unmeasured; a standing finding
+  claim S1b-47: prior art owed
+  claim S1d-K: minds 1 — J31's derivation
+  warn  FS84-S1-derivation.md:440 (S1d-K): prior art owed — novelty unmeasured; a standing finding
+  claim S1d-K: prior art owed
+  claim S1e: minds 1 — J31's derivation; FS84-S1V read S1e non-blind (row S1V-8: (ii) and (iii) hold as stated, (i) once `Γ` is four-colourable, also with matrix coefficients); a checking reading, not counted
+  claim S1e: prior art partly
+  entries: 4  derived: 4  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  controls: 0  fired on their faults: 0
+GATE: PASS (0 failures, 2 warnings)
