@@ -2166,7 +2166,7 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.const_woodallMerged
 #print axioms HadwigerNelson.Plane.ArcMap.not_woodallNormal_of_repeat
 
-/-! ## FS-131 Woodall's chain (job FS131-W) — the skeleton: Townsend's π/3 lemma, Woodall's step-4 lemma, maps need six over arc maps (sorry until the chain's implementer lands it; `step5_eq` and `step7` are open, FS131-E1) -/
+/-! ## FS-131 Woodall's chain (job FS131-W, re-planned by FS131-W2) — the skeleton: Townsend's π/3 lemma, Woodall's step-4 lemma, maps need six over arc maps (sorry until the chain's implementer lands it; no open leaf: FS131-E1's E1-NO45 replaces steps 7–8 and step 5's equality case) -/
 
 #print axioms HadwigerNelson.Plane.isOpen_annSector
 #print axioms HadwigerNelson.Plane.isPreconnected_annSector
@@ -2187,18 +2187,36 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.coloursAt_eq
 #print axioms HadwigerNelson.Plane.ArcMap.exists_woodallMerged
 #print axioms HadwigerNelson.Plane.ArcMap.step5_lt
-#print axioms HadwigerNelson.Plane.ArcMap.step5_eq_of_condition5
-#print axioms HadwigerNelson.Plane.ArcMap.step5_eq
 #print axioms HadwigerNelson.Plane.ArcMap.aeMap6_merged
-#print axioms HadwigerNelson.Plane.ArcMap.aeMap6_merged_of_condition5
 #print axioms HadwigerNelson.Plane.ArcMap.step6
-#print axioms HadwigerNelson.Plane.ArcMap.step7
-#print axioms HadwigerNelson.Plane.ArcMap.step8
 #print axioms HadwigerNelson.Plane.ArcMap.exists_three_le_sectors
 #print axioms HadwigerNelson.Plane.ArcMap.aeMap6_normal
 #print axioms HadwigerNelson.Plane.ArcMap.aeMap6
 #print axioms HadwigerNelson.Plane.ArcMap.aeMap6_of_condition5
 #print axioms HadwigerNelson.Plane.woodall_thm6
+
+/-! ## FS-131 Woodall's chain (job FS131-W2) — FS131-E1's lemmas: E1-SEE, E1-RAY, E1-CROSS, E1-COVER, E1-BAD (corrected, robust), the refined second-order lemma, E1-NO45 (sorry until the chain's implementer lands them) -/
+
+#print axioms HadwigerNelson.Plane.dist_le_one_of_subset_closure
+#print axioms HadwigerNelson.Plane.exists_mem_collar_of_dist_lt
+#print axioms HadwigerNelson.Plane.exists_Ioo_avoiding
+#print axioms HadwigerNelson.Plane.mem_coneAt_annSector
+#print axioms HadwigerNelson.Plane.collarAt_shadow_of_parabola
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_dist_eq_one
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_collarAt
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_shadow_inner_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_shadow_outer_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.not_mem_range_of_crossesAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_side_colours_of_not_crossesAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_closure_colour_of_arc
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.false_of_ncard_le_two_on_arc
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.exists_mem_Ico
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.not_mem_coloursAt_of_mem_Ioo
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.exists_parabola_region
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.exists_normal_collarAt
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.absent_at_normal
+#print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.exists_two_absent
+#print axioms HadwigerNelson.Plane.ArcMap.false_of_four_le_sectors
 
 #eval IO.println "=== PURCHASED ==="
 

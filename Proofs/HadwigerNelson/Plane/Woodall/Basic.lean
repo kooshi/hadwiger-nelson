@@ -16,7 +16,8 @@ on one arc map, one two-constructor type.
   `P`" after his steps 1–2: adjacent regions of one colour are one sector (step 1), and every edge has a direction (step 2; automatic for arcs).
 * **Woodall's normal forms.** `ArcMap.WoodallMerged`: a colour repeated at a point sits on zero-angle sectors only (the conclusion of his step 3:
   "if two of the regions are in the same set, then each of them subtends angle 0 at P"); `ArcMap.WoodallNormal`: at every point of three or more
-  sectors the colours are distinct and every angle exceeds `π/3` (his steps 3 and 5).
+  sectors the colours are distinct and every angle is at least `π/3` (his step 3, and step 5 in its strict form — FS131-E1's normal form (N1)–(N2),
+  `plans/FS131-E1-derivation.md` § 3.0; the restored chain reads no angle equal to `π/3`).
 
 Spec examples and inhabitants below; the one-colour plane is the inhabitant of both normal forms and of `SectorsAt` (at every point, `n = 1`).
 -/
@@ -71,10 +72,11 @@ def WoodallMerged : Prop :=
   ∀ v n d c, F.SectorsAt v n d c → ∀ i j : Fin n, i ≠ j → c i = c j →
     d i.castSucc = d i.succ ∧ d j.castSucc = d j.succ
 
-/-- **Woodall's normal form** (steps 3 and 5): at every point of three or more sectors the colours are distinct and every sector subtends an
-angle above `π/3`. -/
+/-- **Woodall's normal form** (step 3, and step 5 in its strict form): at every point of three or more sectors the colours are distinct and
+every sector subtends an angle of at least `π/3` — FS131-E1's (N1) on colours and (N2) (`plans/FS131-E1-derivation.md` § 3.0). Strict step 5
+(`step5_lt`) excludes angles below `π/3` only; the angle `π/3` itself is not excluded, and the restored chain never needs it to be. -/
 def WoodallNormal : Prop :=
-  ∀ v n d c, F.SectorsAt v n d c → 3 ≤ n → Function.Injective c ∧ ∀ i : Fin n, π / 3 < d i.succ - d i.castSucc
+  ∀ v n d c, F.SectorsAt v n d c → 3 ≤ n → Function.Injective c ∧ ∀ i : Fin n, π / 3 ≤ d i.succ - d i.castSucc
 
 end ArcMap
 

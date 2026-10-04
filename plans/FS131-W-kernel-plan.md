@@ -6,7 +6,7 @@ in this milestone (inventory ruling 1): the derivation's records were read from 
 
 ## Theorems this phase proved
 
-None (a planning job). The hand checks recorded below (§ 1.6's two configurations, § 4.5's bound for Townsend's counterexample) are a planner's checks, [hand, one mind], not theorems of this phase.
+None (a planning job — FS131-W, and FS131-W2 in stages 6–10). The hand checks recorded below (§ 1.6's two configurations, § 4.5's bound for Townsend's counterexample) are a planner's checks, [hand, one mind], not theorems of this phase.
 
 ## Stage 1 — SAVED: the readback
 
@@ -593,3 +593,92 @@ The refined second-order dichotomy (7.3 (b)) on three configurations: one straig
 `κ = −1` with an invisible unit arc at `κ = 1` (W's-model counterexample to E1's exact count: `β − π/2` bad, `β + π/2` good, inner side); an
 alternation `X | Y | X | Y` at `κ = −1, 0, 1` (both good). The angle arithmetic of E1-NO45 (`≥ π/3` at `n ≥ 4` gives `≤ π`, at most one `π`-sector,
 none at `n = 5`), and the distinctness of the two kills off `K` (7.3; § 9's plan for E1-BAD).
+
+## Stage 8 — SAVED: the domain-modeling pass (`debruijn-domain-modeling`, invoked fresh) and the skeleton changed
+
+### 8.1 The model, and why this shape
+
+**The intrinsic structure.** Every step of E1-NO45 ends in one atomic fact: *a colour `j` is absent at a point `Y = v + e ψ` of `ω(v)`*
+(`j ∉ F.coloursAt Y`). Two mechanisms produce it, and nothing else: **exact** — an interior point of colour `j` at distance exactly `1` from `Y`
+(E1-SEE); **robust** — an inner and an outer collar about `ψ` both in the shadow of `j`'s class (the class then misses a disc about `Y`). The
+first-order mechanism (E1-RAY) and the second-order one (the parabola lemma) only manufacture collars. E1-COVER is the dual statement: along a
+branch-point-free arc, one class has every point in its closure, and a connected subset of a closure cannot be longer than `1`. So the
+vocabulary needed is the library's (`coloursAt`, `shadow`, `CollarAt`, `SectorsAt`) plus one predicate, `CrossesAt`.
+
+**Incidental, and stripped:**
+- *Regions (tiles) in place of colour classes.* E1 argues with one connected region at three places (E1-COVER (c), (d); E1-NOBRANCH (i)); the closure
+  form of FS106-DIAM (`dist_le_one_of_subset_closure`) makes every one of them a statement about a colour class, so (N1) per sector — not
+  expressible in W's colour-change picture — is never needed (§ 7.2).
+- *Arc-end types I/O/A* (E1-COVER (a)): replaced by the colour-class dichotomy at a non-crossing point (`exists_side_colours_of_not_crossesAt`).
+- *The exact exceptional set of E1-BAD* (edges on `ω(Y)`, branches in one sector): a proof artifact; the consumer reads only its size. Stated as an
+  existential `K` of at most `n` angles, with the conclusion E1-BAD composed with E1-SEE (two distinct colours absent).
+- *"At least six branch points"*: the consumer needs one branch point off `K`; stated as the pigeonhole `exists_Ioo_avoiding` (five angles leave an
+  arc of `2π/5 > π/3`) feeding E1-COVER.
+- *Circles of curvature `κ` for the second order*: the tangent **parabola** `y = κx²/2` (`framePt`) has the same second-order behaviour and no square
+  roots.
+
+**Placement.** Nothing indexed. `CrossesAt` is a predicate on one map (two statements and one internal step read it). Angles mod `2π` use the
+`∀ m : ℤ, ψ ≠ κ + 2 * π * m` form of `townsend_lemma`. The previous sector is `(finRotate n).symm i`, as in `step5_lt`.
+
+### 8.2 Alternatives weighed
+
+| choice | taken | alternative | why |
+|---|---|---|---|
+| (N1) per sector | not assumed; colour-class routes | an arc-level predicate "every point of `Γ` carries two colours" added to the normal form, delivered by `exists_woodallMerged` | it adds an obligation to the H+ leaf, and the colour-class routes need none |
+| E1-BAD's edge case | refined second-order lemma, inner side, `∃ σ` | E1's exact form (edge on `ω(Y)`) | the exact count fails in W's model (two tangent unit arcs, one invisible: § 7.2); the refined form needs no (N1)/(N2), no injectivity |
+| the second-order lemma's statement | "one of the two normals carries an inner two-colour collar" | W's § 4.1 "unless the edge is a unit arc centred there", per normal | the per-normal form is true but allows two bad normals per direction in W's model; the count needs at most one, and `step6` is served by either |
+| E1-COVER's scope | E1-GEN6's form: any `k`, at most one colour absent, positive angles, no normal form | E1's (five colours, normal form, four or five sectors) | the proof reads nothing more; the wider form is the one the six-colour questions can reuse (E1-GEN6's handoff); messaged as a generalization |
+| E1-NOBRANCH | `exists_three_le_sectors` via `ts_t` | the Jordan curve theorem for arc curves | § 7.5 |
+| `WoodallNormal` | angles `π/3 ≤` | keep `π/3 <` and prove `step5_eq` | E1-Q1: not needed; the strict form was the open leaf |
+| module | new `Plane/Woodall/NoFourFive` between `Collar` and `Steps` | the lemmas in `Collar` | `Collar` is region-only two-colour geometry; the new lemmas read `ArcMap` and `SectorsAt`; `false_of_four_le_sectors` stays in `Steps` (it needs `step6`, `exists_sectorsAt`) |
+
+### 8.3 Validation (the seams)
+
+- **Spec examples** for the one new definition: `CrossesAt` holds for the one-colour plane at every angle; **adversary** — a colour inside `ω(v)`
+  does not cross. Both proved (no `sorry`).
+- **Sharpness** of `dist_le_one_of_subset_closure`: an `example` exhibiting two points at distance exactly `1` in `closure (ball 0 (1/2))` — the
+  bound cannot be strict (FS106-DIAM's strict form is for the open set).
+- **The unsampled member** for E1-BAD's count: the `π`-sector carrying two exceptional points (`tools/fs131_w2_bad_pi.py`, § 7.4) — the reason `K`'s
+  bound is `n`, argued by the two edges' normals, never "one per `π`-sector".
+- **Inhabitants** (the module's docstring): `const_sectorsAt` for the `SectorsAt` hypotheses without validity; `sevenBrickMap` at a brick corner
+  (three sectors, angles `π, π/2, π/2`) for those over valid maps of the plane with pictures of two or three sectors; E1-COVER, E1-NO45 and the
+  chain's theorems over five colours conclude `False` (refutations, skipped by the vacuity scan). `WoodallNormal`'s inhabitants
+  (`const_woodallNormal`, the adversary `not_woodallNormal_of_repeat`) are unchanged by the weakened angle bound.
+- **The next lemma** (`step6`'s need: a collar at a normal of an edge, to extend a one-sided arc past `π/3`) states in the new vocabulary:
+  `SectorsAt.exists_normal_collarAt`.
+
+### 8.4 The skeleton
+
+| module | change |
+|---|---|
+| `Plane/Woodall/Basic` | `WoodallNormal`: `π / 3 <` → `π / 3 ≤` (and its docstring, the module docstring) |
+| `Plane/Woodall/NoFourFive` (**new**, imports `Woodall/Collar`, `Plane/Tiles`) | 20 theorems, each `sorry` — see 8.5; the definition `ArcMap.CrossesAt` with two proved spec examples; one proved sharpness example. Two statements refined at the obligation pass before this stage's final build (§ 9.1): `exists_side_colours_of_not_crossesAt` also concludes `coloursAt = {A, B}`; `exists_parabola_region` names the parabola of curvature `1/2` |
+| `Plane/Woodall/Steps` | imports `NoFourFive`; **removed**: `step5_eq_of_condition5`, `step5_eq`, `aeMap6_merged_of_condition5`, `step7`, `step8`; **added**: `false_of_four_le_sectors` (E1-NO45); `step6`'s `hang` now `π / 3 ≤`; docstrings of `aeMap6_merged`, `exists_three_le_sectors` (E1-NOBRANCH), `aeMap6_normal`, `aeMap6`, `aeMap6_of_condition5` and the module re-pointed |
+| `Proofs.lean` | `import Proofs.HadwigerNelson.Plane.Woodall.NoFourFive` |
+| `ARCHITECTURE.md` § 3.11 | a `Plane/Woodall/NoFourFive` row; the `Basic` and `Steps` rows updated; `tools/check_architecture.py`: **PASS** |
+| `scripts/Axioms.lean` | 5 records removed (the five leaves), the skeleton section's header updated, a section "FS-131 Woodall's chain (job FS131-W2)" with 20 records; `tools/fs131_w2_decls.py --check`: **53 theorems, 53 records; 0 missing, 0 stale**; `--plant` (one theorem dropped, one removed leaf re-added as a record): **FIRED** both ways |
+
+### 8.5 The read-backs (each formal statement against its E1 entry)
+
+| E1 entry (statement, verbatim in `plans/FS131-E1-derivation.md`) | declaration | read-back |
+|---|---|---|
+| **E1-SEE** "in an almost-everywhere-proper arc map, if a point q of an open region lies at distance exactly 1 from a point Y, then no region whose closure contains Y has the colour of q" | `ArcMap.not_mem_coloursAt_of_dist_eq_one` (`hF : F.Valid`, `q ∈ F.region j`, `dist q Y = 1` ⊢ `j ∉ F.coloursAt Y`) | "a region whose closure contains `Y` has colour `j`" implies `Y ∈ closure (F.region j)`, so the formal conclusion (`Y` not in the closure of the whole class) is the stronger. **Same, conclusion stronger.** The robust form `not_mem_coloursAt_of_collarAt` is new (§ 7.3 (b)) |
+| **E1-RAY** "if a sector s at a point P contains a direction γ with cos(γ − ψ) < 0 (respectively > 0), then every point z close enough to P + e(ψ) with \|z − P\| < 1 (respectively \|z − P\| > 1) has a point of s on ω(z)" | `SectorsAt.collarAt_shadow_inner_of_mem`, `_outer_of_mem` (`γ ∈ Ioo (d i.castSucc) (d i.succ)`, `cos (γ − ψ) < 0` / `> 0` ⊢ `CollarAt (shadow (F.region (c i))) v .inner / .outer ψ`) | "contains" is E1's open range ("Let γ lie in the open angular range of s"); "every point close enough, inside" = a collar about `ψ` (`exists_mem_collar_of_dist_lt` converts); "a point of `s`" is read as a point of `s`'s colour class — weaker, and every consumer reads only the colour. **Same, conclusion read on the colour** |
+| **E1-CROSS** "at a point P whose sectors all have positive angle, a region R whose closure meets ω(P) at a point Y both from inside and from outside — Y a limit of points of R with \|· − P\| < 1 and of points of R with \|· − P\| > 1 — has a colour different from every sector colour at P" | `SectorsAt.not_mem_range_of_crossesAt` (`hF`, `hpos`, `F.CrossesAt v X θ` ⊢ `X ∉ Set.range c`) | `CrossesAt` asks the two limits of the colour class, not of one region — a weaker hypothesis (one region crossing implies its class crosses). **Same, hypothesis weaker (stronger theorem)** |
+| **E1-COVER** "in a five-colour almost-everywhere-proper arc map in Woodall's normal form, if a point P lies on the boundary of exactly four or exactly five sectors, then every open arc of ω(P) containing no branch point has angular length at most π/3, and ω(P) contains at least six branch points" | `SectorsAt.false_of_ncard_le_two_on_arc` (`hF`, `hP`, positive angles, at most one colour absent from the picture, `π/3 < θ₂ − θ₁`, every point of the open arc with at most two colours ⊢ `False`) | E1's hypotheses imply the formal ones (five colours and four or five sectors of distinct colours leave at most one absent; (N2) gives positive angles); "no branch point" (no point of three sectors) implies "at most two colours" under (N1), and the formal hypothesis is the weaker (it reads colours). The first clause, contrapositive. **Wider** (E1-GEN6's form, no normal form; messaged). The second clause ("at least six") is not stated: its consumer reads `exists_Ioo_avoiding` instead |
+| **E1-BAD** "let every sector at a point P have angle in (0, π]; call Y ∈ ω(P) exceptional when …; then every Y ∈ ω(P) that is not exceptional has points of two different sectors of P on ω(Y), and there is at most one exceptional point per edge at P and at most one per sector of angle exactly π" | `SectorsAt.exists_two_absent` (`hF`, `hP`, `n ≥ 3`, `c` injective, angles in `(0, π]` ⊢ `∃ K : Finset ℝ, K.card ≤ n ∧ ∀ ψ off K mod 2π, ∃ i j, c i ≠ c j ∧ c i ∉ coloursAt (v + e ψ) ∧ c j ∉ coloursAt (v + e ψ)`) | **Different shape, by design**: E1-BAD composed with E1-SEE (points of two sectors on `ω(Y)` ⟹ those two colours absent at `Y`), the exceptional set an existential `K`; its bound `n` is E1's corrected total (§ 7.4: E1's per-`π`-sector clause is false, its total `(edges) + (π-sectors)` true, and the true bound is `n`). Validity and the plane enter because the conclusion is about colours; `n ≥ 3` and injectivity are the setting of every use. **Same content as "E1-BAD then E1-SEE", count corrected** |
+| **E1-NO45** "in a five-colour almost-everywhere-proper arc map in Woodall's normal form, no point lies on the boundary of exactly four or exactly five sectors" | `ArcMap.false_of_four_le_sectors` (`k ≤ 5`, `hF`, `hP`, `F.WoodallNormal`, a picture with `4 ≤ n` ⊢ `False`) | "five-colour" read as at most five (`k ≤ 5`, wider); "Woodall's normal form" is `WoodallNormal` — (N1) on colours and (N2); E1's (N1) per sector at the arc level is **not** assumed (wider: maps with arcs between equal colours are covered, § 7.2); "exactly four or exactly five sectors" is `4 ≤ n` (`n ≤ k ≤ 5` by injectivity). **Same, wider** |
+| **E1-NOBRANCH** "in an almost-everywhere-proper arc map satisfying (N1), with any finite number of colours, some point lies on the boundary of three or more sectors" | `ArcMap.exists_three_le_sectors` (`hF`, `hP` ⊢ `∃ v n d c, F.SectorsAt v n d c ∧ 3 ≤ n`) | E1's arc maps are maps of the plane (`hP`); (N1) not assumed (wider); a picture of `n ≥ 3` colour-change sectors gives at least three sectors in E1's sense. **Same, wider** |
+| **E1-MAPS6** "no five-colour almost-everywhere-proper arc map in Woodall's normal form exists" | `ArcMap.aeMap6_normal` (`k ≤ 5`, `hF`, `hP`, `F.WoodallNormal` ⊢ `False`) | **Same, `k ≤ 5`** |
+| the second-order lemma (W's § 4.1, described) | `SectorsAt.exists_normal_collarAt` | refined (§ 7.3 (b), 8.2): one of the two normals of every edge, inner side; with its children `exists_parabola_region` (map-level) and `collarAt_shadow_of_parabola` (region-only) |
+
+The rows (`aeMap6`, `aeMap6_of_condition5`, `woodall_thm6`, `townsend_lemma`, `woodall_step4`) are unchanged statements, as the brief fixed.
+
+### 8.6 The build of this stage
+
+`./scripts/build.sh` under the slot (40 GiB, 8 cpus, `BATCH=4`), from inside the worktree, on the final statements: **OK — 444 of 444 batches, 3
+modules rebuilt, 14 with warnings** (`Woodall/NoFourFive` the one new warned module; every Woodall warning `declaration uses 'sorry'`; the up-to-date
+probe's "target is out-of-date" line expected), 8 m 31 s, exit 0 (`build/gate/build/20261004T113659Z-3156654.log`; driver log
+`data/fs131/w2/build-stage8b.log`). The run before the two refinements of § 9.1: OK, 444 of 444, 5 rebuilt, 14 with warnings, 8 m 31 s
+(`build/gate/build/20261004T112750Z-3099938.log`, `data/fs131/w2/build-stage8.log`). Iteration used `lake env lean` (lakefile options passed) with
+a scratch olean for `NoFourFive` under `Steps` — never as evidence.
