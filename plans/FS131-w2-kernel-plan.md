@@ -1039,3 +1039,42 @@ implementer must fix the formula so that fringes of edges at distance `≤ 1 + 1
 class mod 3, `k = 9 + 3N`), the measure bound 40k. **K2c's sketch (§ 12.2) does not settle the fringe-to-fringe pairs; the formula above
 must**, and the properness child is where that is proved — if it cannot be, that is a missing lemma for the deriver (FS106-TQ's control
 C2 is a hand construction).
+
+## Stage 18 — SAVED: the handoff for the next implementer, for these 18 leaves (stage 13's form)
+
+**Branch `fs131-w2d`** in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w2d`, merged with `fs131-w2` at `3dffa363` (merge `0f6015a8`;
+the one conflict, `scripts/Axioms.lean`, append-only, both sides kept). **The implementer's first step**: merge `fs131-w2d` into `fs131-w2`
+(in the wave's worktree, after FS131-I2e has stopped), resolve append-only lines by keeping both sides, build.
+
+- **Builds**: from inside the worktree, `/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4
+  ./scripts/build.sh`; never `lake build`; up to two such builds across trees (ruling 5); exit 75 → wait ten minutes. `lake env lean
+  -DautoImplicit=false <file>` for iteration only, never as evidence. A module importing a not-yet-built new module needs that module's
+  olean: compile it to a scratch directory and prepend it to `LEAN_PATH` **only if no other `Proofs.*` olean lives there** (Lean resolves the
+  root `Proofs` to the first path holding it).
+- **May / may not**: § 13's rules, unchanged — prove any child or leaf; add further children (state each as a lemma first, add its
+  `scripts/Axioms.lean` record; `python3 tools/fs131_k2d_records.py` checks this job's files and can be extended); move declarations within
+  a module; add imports (updating `ARCHITECTURE.md`'s Imports cell). Never change a row statement, a hypothesis, a definition's meaning
+  (including `r7Up`, `r7Down`, `sq9Sq`, `hcSeg` and every child statement of this job — a child found false comes back through Keryx); no
+  `axiom`, no `native_decide`. The `have _ := hconn` / `have _ := ht` lines in `Arith/FalconerField` keep the row's hypotheses and the linter
+  silent; leave them.
+- **What is closed** (sorry-free from children): `exists_placeHom`, `noAffine_fields`, `falconerFan_five_field`, `falconerFan_five_placeHom`,
+  `sq9_saturated_both`, `r7_aeColouring`, `r7Cls_saturated`, `r7_boundary`, `r7Cls_isMaximalCover`, `disc7_isMaximalCover`,
+  `disc7_isRegularMUA`, `disc7_upperDensity`, `g1Bounds_hcGap` (13 of the 17 leaves in the three files). **Proved outright**: all of
+  `Instances/FalconerOrbit` (the slack fact at `7`, the orbit facts at `11` and `19`, the tip-free facts).
+- **What is left**: 77 `sorry`ed children (lane A 19: § 15.2's tables; CoverExamples 58: §§ 16–17's tables) and 4 leaves whose assemblies
+  are planned but not written (`IsMUA.add_normal_mem_essSupport` § 16, `hc_isRegularMUA`, `hc_band_components`, `hc_irreg` § 17), plus
+  `exists_not_uniform_kept` in `Plane/Slack` (§ 17.1: its children to paste; the fringe-to-fringe pairs are the open point).
+- **Order** (by what unblocks most and what is cheapest to re-price from): (1) lane A — `nonempty_ringEquiv_zmod_of_card`, `slack_complete`,
+  `not_falconerFan_of_colorable`, `sub_mem_of_connected`, `tip_eq_zero_of_tipFree`, `not_falconerFan_five_of_hom_slack`, `exists_hom_apex`
+  (FALC-RES then lands except through `exists_hom_finitePlane_of_card`), then `pureTranscendental_*`, the independence peel,
+  `chromaticNumber_planeOver_pureTranscendental_eq`, `exists_hom_slack`, `forall_const_of_hom_slack`, then the place-hom pipeline
+  (`exists_valuationSubring_localization`, `exists_residue_localization`, `placeHom_base`, `placeHom_step`, `exists_hom_of_isPlaceHom`);
+  (2) DISC7 and SQ9 (E–M children), (G1); (3) BAND (1)'s two children and its assembly; (4) R7 (`measurable_r7Col`, `r7Col_mem_tile`, the
+  three tile lemmas, then boundary and `phi` children); (5) HC/IRREG, frame facts first (`dist_hcFrame`, `hcFrame_coords`,
+  `hcUpTri_frame`), then (G2), (G3), closedness/frontier, unit-avoidance, B1, Lemma NL, B2, the a.e. step, then IRREG's three.
+  **Price the run from the first two children**, not from these tables (prices here are at the Sonnet rate; an Opus implementer is the trial
+  of inventory item 103).
+- **The landing**: § 13's gate (build with no warning; `scripts/axioms.sh` clean with `falconer_lemma2_nonempty` the one declared import;
+  `./scripts/vacuity.sh` and `--self-test` green with the counts reconciled; `tools/check_architecture.py` exit 0). Inhabitants for this
+  job's new hypotheses: none new (every new child's structure hypotheses are R7's, DISC7's, HC's, or a place-hom pair, inhabited as § 10
+  says; `IsPlaceHom` is inhabited by `exists_placeHom` at `ℚ ⊆ ℝ`, `𝔭 = (3)`, `n = 0` once its children land).
