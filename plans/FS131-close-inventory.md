@@ -1239,3 +1239,18 @@ reason by the close.*
      equivalent form the implementer chooses, saying so); if a consumer (FS112-BEND, FS112-N2-BENDS — the three bends) needs more than the local form, message
      me with the step, and it goes to a deriver. Alternative weighed: a deriver first. Why not: the row already says "from outside", which is local, and the
      global form is refuted. Confidence: medium-high (the counter-configuration is a float sample; the local form is what both of the row's minds proved).
+178. **FS131-I4d handed back at stage 8, harness ≈ 436k** (report on its branch; `fs131-w4` at `c1255fc5`, checked): `main` merged (`05968b36`); **[kernel], standard three**:
+     `exists_hasDegree_of_mem_dom` (TS-T's vertex step; `ts_t_trichromatic`, `ts_t_degree_three` sorry-free; `Plane/SVMap` has no `sorry`); **the bridge to
+     `localSectors`**, a new module `Plane/ValidMap/Sectors` (`IsSectorChart.isSector_iff`, `hasDegree` = `max n 1` for every small `r`, `sectorBetween_eq_hornSet`,
+     and item 136's dichotomy `isSector_cone_or_horn`; general `isSector_iff_of_partition`, `encard_sectors_of_partition`); **QA2's items**:
+     `sevenBrick_corner_isCubicTrichromatic` and `sevenBrick_corner_mIn` (modelling `pair_i`, `pair_ii`, `pair_P′`, `fail_*`, `anti` on a valid plane map at `k = 7`),
+     `halfDisc_simple`/`halfDisc_two_tiles`, **`cuspFrag_isHorn`** (the library's first proved horn, with `cuspFrag_valid`), `stuck_chain`'s docstring naming `n4_fin`;
+     `lock` clauses 1–2's route written, clause 3 restated under item 177 (`lock` itself still `sorry`; nothing in the library uses it). 51 → 50 (Contact 10,
+     UnitArc 20, BaseSteps 20). Keryx's receipts: build log `build/gate/build/20261004T160421Z-559067.log` (w4) "Build completed successfully (5359 jobs)"; 50 `sorry`
+     by count; `data/fs131/i4/axioms-i4d.txt` prints the brick-corner theorems and `halfDisc_simple` on the standard three; the log's non-`sorry` warnings are four
+     older linter warnings in `UnitArc` (unused `hF` at 234 and 236; `push_cast` does nothing at 664 and 666) — **to clear before the gate**. Slip (I4d's): the merge
+     commit made without paths (git requires it for a merge; standing rule 6 forbids it) — its index held only the conflict resolution and a log. Collisions with
+     `fs131-ww`: `abs_dot_le`, `dot_add_left`, `dot_e_e`, `isOpen_shadow` (identical; the second to land resolves). Generalization: the bowtie leaves can follow
+     `cuspFrag_isHorn`'s pattern (near `E = 0` only its two unit arcs). **Next**: FS131-I4e (Opus) — `lock` first, the bowtie near `E`, then § 14.1's order.
+179. **Brief FS131-I4e, wave 4's fifth implementer** (Opus; `data/fs131/briefs/FS131-I4e-wave4.md`, gated PASS): `lock`, the bowtie near `E` by the cusp pattern,
+     the rest; the four older linter warnings and the carrier before the gate. Launched in I4d's slot: 1 (I2i) + 1 (IWc) + 1 (I4e) = 3.
