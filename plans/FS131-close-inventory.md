@@ -1105,3 +1105,10 @@ reason by the close.*
      horn-only form is a GAP; confidence high. (b) Woodall's horn-only conclusion everywhere is **not wanted now** — no consumer; recorded as an optional stub
      (FS110-W-MERGE past Condition 5) for whoever needs it. **Next**: a planner pass on Woodall's chain (FS131-W3) applies E3's § 4.1 drafts and states E3-BALL's
      children with leaf plans, then an implementer. Credit E3: a definition defect that made a proved-looking chain vacuous, found before it was relied on.
+162. **Briefs FS131-W3 and FS131-I2h** (both Opus; gated PASS): **W3** (`debruijn` planner; `data/fs131/briefs/FS131-W3-woodall-nice.md`) applies E3's § 4.1 drafts to
+     Woodall's chain — the ∃-form definitions, the adapted statements, non-degenerate inhabitants and a phantom-picture adversary — re-proves the small
+     adaptations, states E3-BALL's children with leaf plans (saying which need `localSectors`), and writes the handoff. **I2h** (`debruijn-implementer`;
+     `data/fs131/briefs/FS131-I2h-wave2.md`) continues wave 2's 91 lines and carries the owed items: QA1's 84 docstrings and FALC-HOSTS (iv)'s docstring, the four
+     imported records moved under T3's procedure, `CPColouring` registered as a vacuity carrier, the collisions with wave 3 (`dist_rot`, `eq_norm_mul_e_arg`)
+     resolved at the merge; then the gate and the landing. Launched in T3's and E3's slots: 1 (I3i) + 1 (W3) + 1 (I2h) = 3. Next: wave 4's Opus implementer
+     (the LEB discharge, the two plan gaps, `localSectors` once I3i lands it, `AeProperRegions` as a carrier).
