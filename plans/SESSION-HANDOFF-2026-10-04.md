@@ -4,7 +4,7 @@
 reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–183 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written at the context limit, 2026-10-04 late):** inventory items run to **252**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157),
+> **Latest (written at the context limit, 2026-10-04 late):** inventory items run to **254**. **Landed on `main`, held in the kernel**: wave 1, wave 3 (item 157),
 > Lebesgue's covering theorem (151), `localSectors` + the separation lemma + `four_of_bothKind_simple` without `hnc` (171); the axiom gate repaired with an IMPORTED
 > section (160). **Running (4 Opus slots — Kooshi granted a fourth for the backlog, item 211)**: FS131-I2n (wave 2, the last 5 HC/IRREG lines → carriers, gate, landing; item 234), FS131-I4k (wave 4's `BaseSteps` + `UnitArc`, 11 left; item 245), FS131-IC5 (wave 4's `Contact`: `stuck_structure`; worktree `fs131-w4c`;
 > item 250), FS131-IM1 (wave 4's three moves in `Plane/ValidMap/Moves`, worktree `fs131-w4m`; item 248); **wave 5 paused** for one slot-turn (item 247 (c)) — it resumes in the next free slot. Woodall is sorry-free bar wave 4's statements (item 190) and idle until wave 4 lands. Agent ids in scratch `agents.txt`. **On each hand-back**: check the
@@ -77,7 +77,7 @@ its record's last SAVED stage with a fresh agent on the same brief.
 3. **Wave 5**: planned (items 198, 207, 216) and **GAP-ELEVEN repaired** (items 226–227: `UnenclosedC` on `Row134BaseUA` and `n3_base`; rows 134, 137
    stand; row 135's base clause corrected at the filing). **Wave 5 paused** at 44 leaves on `fs131-w5` (items 238, 246; 7 of them the planar job's, items 239, 242, 247 (b)); it resumes in the
    next free slot (I5b's successor, from I5's record Stage 8; it must also apply ruling 252 — `stuck_structure_ua`'s sides clause to form (b)). **Wave 4's merge**: when FS131-I4k, FS131-IC5 and FS131-IM1 are done: merge `fs131-w4m` into `fs131-w4c`
-   (Contact's three moves become citations of `Moves`' `…_aux`), then `fs131-w4c` into `fs131-w4`, then the gate — on Keryx's word (items 209, 236). **Queue for the next slot that frees when a lane ends** (wave 2's landing is next): **wave 5's next implementer**, then the planar-infrastructure job (items 218 (c), 227, 239:
+   (`Contact`'s head block now lives in `Plane/ValidMap/Cone`, item 254; its three moves become citations of `Moves`' `…_aux`), then `fs131-w4c` into `fs131-w4`, then the gate — on Keryx's word (items 209, 236). **Queue for the next slot that frees when a lane ends** (wave 2's landing is next): **wave 5's next implementer**, then the planar-infrastructure job (items 218 (c), 227, 239:
    `cvb_thom_reduced`, `retArcs_nested`, `exists_endpoint`, `exists_eleventh`, `exists_unenclosed_or_bad`, and the shared planar lemma). **At the filing**: `LEDGER.md` rows 135, 137, 134 from E4 § 5.4 items 1–3 (item 227).
    **When wave 4 lands**: brief the Woodall landing job (item 190's list).
 4. **Queued, conditional**: an Ephodos job on `exists_not_uniform_kept`'s fringe colouring only if wave 2's implementer cannot find a proper formula (item 118).
