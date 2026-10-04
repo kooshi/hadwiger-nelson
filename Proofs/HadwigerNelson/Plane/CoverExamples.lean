@@ -971,12 +971,564 @@ theorem r7_not_bandNull {ε : ℝ} (hε : 0 < ε) : ∃ j, ¬ BandNull (r7Cls j)
 /-- R7's classes are measurable. -/
 theorem measurableSet_r7Cls (j : Fin 7) : MeasurableSet (r7Cls j) := measurable_r7Col (measurableSet_singleton j)
 
+/-! ### R7's boundaries and maximality (FS131-I2l: children of `r7_boundary_lattice`, `r7_boundary_offLattice`,
+`r7_phi_pos_up`, `r7_phi_pos_down`) -/
+
+/-- `triCoord` is continuous. -/
+theorem continuous_triCoord : Continuous triCoord := by unfold triCoord; fun_prop
+
+/-- R7 inside the cell `(p, q)`: the three tests, read against the cell's corner. -/
+theorem r7ColTri_of_cell {a b : ℝ} {p q : ℤ} (h1 : (p : ℝ) ≤ a) (h2 : a < p + 1) (h3 : (q : ℝ) ≤ b) (h4 : b < q + 1) :
+    r7ColTri a b = if triQ (a - p) (b - q) ≤ 1 then r7UpCol p q else if triQ (a - p - 2) (b - q) ≤ 1 then r7UpCol (p + 1) q
+      else if triQ (a - p) (b - q - 2) ≤ 1 then r7UpCol p (q + 1) else r7DownCol p q := by
+  have e1 : ⌊a⌋ = p := Int.floor_eq_iff.2 ⟨h1, h2⟩
+  have e2 : ⌊b⌋ = q := Int.floor_eq_iff.2 ⟨h3, h4⟩
+  simp only [r7ColTri, e1, e2]
+
+/-- A point is in the support of a set containing an open set that comes arbitrarily close to it. -/
+theorem mem_essSupport_of_isOpen {S O : Set ℂ} {Q : ℂ} (hO : IsOpen O) (hOS : O ⊆ S)
+    (h : ∀ r > 0, ∃ z ∈ O, dist z Q < r) : Q ∈ essSupport S := by
+  intro r hr
+  obtain ⟨z, hzO, hz⟩ := h r hr
+  exact lt_of_lt_of_le ((hO.inter isOpen_ball).measure_pos volume ⟨z, hzO, by rw [mem_ball]; exact hz⟩)
+    (measure_mono (inter_subset_inter_left _ hOS))
+
+/-- `√(3 s²) < r` for `0 < s ≤ r/2`. -/
+theorem sqrt_three_sq_lt {r s : ℝ} (hr : 0 < r) (hs : 0 < s) (hsr : s ≤ r / 2) : √(3 * s ^ 2) < r := by
+  rw [Real.sqrt_lt' hr]; nlinarith
+
+/-- The open up triangle of the cell `(p, q)`: lattice offsets `u, v > 0`, `u + v < 1`. -/
+def r7UpOpen (p q : ℤ) : Set ℂ :=
+  {z | 0 < (triCoord z).1 - p ∧ 0 < (triCoord z).2 - q ∧ (triCoord z).1 - p + ((triCoord z).2 - q) < 1}
+
+/-- The open down tile of the cell `(p, q)`: lattice offsets in `(0, 1)²` outside the three closed bulge discs. -/
+def r7DownOpen (p q : ℤ) : Set ℂ :=
+  {z | 0 < (triCoord z).1 - p ∧ (triCoord z).1 - p < 1 ∧ 0 < (triCoord z).2 - q ∧ (triCoord z).2 - q < 1 ∧
+    1 < triQ ((triCoord z).1 - p) ((triCoord z).2 - q) ∧ 1 < triQ ((triCoord z).1 - p - 2) ((triCoord z).2 - q) ∧
+    1 < triQ ((triCoord z).1 - p) ((triCoord z).2 - q - 2)}
+
+/-- The centroid of the up triangle `(0, 0)` is in `r7UpOpen 0 0`, the vertex `0` is not. -/
+example : ((1 / 3 : ℝ) : ℂ) + ((1 / 3 : ℝ) : ℂ) * e (π / 3) ∈ r7UpOpen 0 0 ∧ (0 : ℂ) ∉ r7UpOpen 0 0 := by
+  refine ⟨?_, fun h => ?_⟩
+  · simp only [r7UpOpen, mem_setOf_eq, triCoord_add_mul]; norm_num
+  · have := h.1; simp [triCoord] at this
+
+/-- The centroid of the down triangle `(0, 0)` is in `r7DownOpen 0 0`; the centroid of the up triangle is not. -/
+example : ((2 / 3 : ℝ) : ℂ) + ((2 / 3 : ℝ) : ℂ) * e (π / 3) ∈ r7DownOpen 0 0 ∧
+    ((1 / 3 : ℝ) : ℂ) + ((1 / 3 : ℝ) : ℂ) * e (π / 3) ∉ r7DownOpen 0 0 := by
+  refine ⟨?_, fun h => ?_⟩
+  · simp only [r7DownOpen, mem_setOf_eq, triCoord_add_mul]; norm_num [triQ]
+  · have := h.2.2.2.2.1; simp only [triCoord_add_mul] at this; norm_num [triQ] at this
+
+theorem isOpen_r7UpOpen (p q : ℤ) : IsOpen (r7UpOpen p q) := by
+  have f1 : Continuous fun z : ℂ => (triCoord z).1 - (p : ℝ) := continuous_triCoord.fst.sub continuous_const
+  have f2 : Continuous fun z : ℂ => (triCoord z).2 - (q : ℝ) := continuous_triCoord.snd.sub continuous_const
+  exact (isOpen_lt continuous_const f1).inter ((isOpen_lt continuous_const f2).inter (isOpen_lt (f1.add f2) continuous_const))
+
+theorem isOpen_r7DownOpen (p q : ℤ) : IsOpen (r7DownOpen p q) := by
+  have f1 : Continuous fun z : ℂ => (triCoord z).1 - (p : ℝ) := continuous_triCoord.fst.sub continuous_const
+  have f2 : Continuous fun z : ℂ => (triCoord z).2 - (q : ℝ) := continuous_triCoord.snd.sub continuous_const
+  have hT := continuous_triCoord
+  have g1 : Continuous fun z : ℂ => triQ ((triCoord z).1 - p) ((triCoord z).2 - q) := by unfold triQ; fun_prop
+  have g2 : Continuous fun z : ℂ => triQ ((triCoord z).1 - p - 2) ((triCoord z).2 - q) := by unfold triQ; fun_prop
+  have g3 : Continuous fun z : ℂ => triQ ((triCoord z).1 - p) ((triCoord z).2 - q - 2) := by unfold triQ; fun_prop
+  exact (isOpen_lt continuous_const f1).inter ((isOpen_lt f1 continuous_const).inter ((isOpen_lt continuous_const f2).inter
+    ((isOpen_lt f2 continuous_const).inter ((isOpen_lt continuous_const g1).inter ((isOpen_lt continuous_const g2).inter
+      (isOpen_lt continuous_const g3))))))
+
+/-- The open up triangle has the up tile's colour (the first test holds: `triQ u v ≤ (u + v)² < 1`). -/
+theorem r7UpOpen_subset (p q : ℤ) : r7UpOpen p q ⊆ r7Cls (r7UpCol p q) := by
+  intro z hz
+  obtain ⟨h1, h2, h3⟩ := hz
+  show r7ColTri (triCoord z).1 (triCoord z).2 = r7UpCol p q
+  rw [r7ColTri_of_cell (p := p) (q := q) (by linarith) (by linarith) (by linarith) (by linarith), if_pos]
+  unfold triQ; nlinarith
+
+/-- The open down tile has the down tile's colour (all three tests fail). -/
+theorem r7DownOpen_subset (p q : ℤ) : r7DownOpen p q ⊆ r7Cls (r7DownCol p q) := by
+  intro z hz
+  obtain ⟨h1, h2, h3, h4, h5, h6, h7⟩ := hz
+  show r7ColTri (triCoord z).1 (triCoord z).2 = r7DownCol p q
+  rw [r7ColTri_of_cell (p := p) (q := q) (by linarith) (by linarith) (by linarith) (by linarith), if_neg (not_le.2 h5),
+    if_neg (not_le.2 h6), if_neg (not_le.2 h7)]
+
+/-- The three vertices of the up triangle are in the closure of `r7UpOpen`. -/
+theorem mem_closure_r7UpOpen (p q : ℤ) {Q : ℂ} (hQ : Q = tri p q ∨ Q = tri (p + 1) q ∨ Q = tri p (q + 1)) :
+    Q ∈ closure (r7UpOpen p q) := by
+  rw [Metric.mem_closure_iff]
+  intro r hr
+  set s := min (r / 2) (1 / 4) with hsdef
+  have hs0 : 0 < s := lt_min (half_pos hr) (by norm_num)
+  have hs1 : s ≤ r / 2 := min_le_left _ _
+  have hs2 : s ≤ 1 / 4 := min_le_right _ _
+  have hd := sqrt_three_sq_lt hr hs0 hs1
+  rcases hQ with rfl | rfl | rfl
+  · refine ⟨((p + s : ℝ) : ℂ) + ((q + s : ℝ) : ℂ) * e (π / 3), ?_, ?_⟩
+    · simp only [r7UpOpen, mem_setOf_eq, triCoord_add_mul]; refine ⟨by linarith, by linarith, by linarith⟩
+    · rw [tri_eq, dist_add_mul]; convert hd using 2; unfold triQ; ring
+  · refine ⟨((p + 1 - 2 * s : ℝ) : ℂ) + ((q + s : ℝ) : ℂ) * e (π / 3), ?_, ?_⟩
+    · simp only [r7UpOpen, mem_setOf_eq, triCoord_add_mul]; refine ⟨by linarith, by linarith, by linarith⟩
+    · rw [tri_eq, dist_add_mul]; convert hd using 2; push_cast; unfold triQ; ring
+  · refine ⟨((p + s : ℝ) : ℂ) + ((q + 1 - 2 * s : ℝ) : ℂ) * e (π / 3), ?_, ?_⟩
+    · simp only [r7UpOpen, mem_setOf_eq, triCoord_add_mul]; refine ⟨by linarith, by linarith, by linarith⟩
+    · rw [tri_eq, dist_add_mul]; convert hd using 2; push_cast; unfold triQ; ring
+
+/-- The three cusps of the down tile are in the closure of `r7DownOpen` (each reached along its horn). -/
+theorem mem_closure_r7DownOpen (p q : ℤ) {Q : ℂ}
+    (hQ : Q = tri (p + 1) q ∨ Q = tri p (q + 1) ∨ Q = tri (p + 1) (q + 1)) : Q ∈ closure (r7DownOpen p q) := by
+  rw [Metric.mem_closure_iff]
+  intro r hr
+  set s := min (r / 2) (1 / 4) with hsdef
+  have hs0 : 0 < s := lt_min (half_pos hr) (by norm_num)
+  have hs1 : s ≤ r / 2 := min_le_left _ _
+  have hs2 : s ≤ 1 / 4 := min_le_right _ _
+  have hd := sqrt_three_sq_lt hr hs0 hs1
+  rcases hQ with rfl | rfl | rfl
+  · refine ⟨((p + (1 - s) : ℝ) : ℂ) + ((q + 2 * s : ℝ) : ℂ) * e (π / 3), ?_, ?_⟩
+    · simp only [r7DownOpen, mem_setOf_eq, triCoord_add_mul, add_sub_cancel_left]
+      refine ⟨by linarith, by linarith, by linarith, by linarith, ?_, ?_, ?_⟩ <;> unfold triQ <;> nlinarith
+    · rw [tri_eq, dist_add_mul]; convert hd using 2; push_cast; unfold triQ; ring
+  · refine ⟨((p + 2 * s : ℝ) : ℂ) + ((q + (1 - s) : ℝ) : ℂ) * e (π / 3), ?_, ?_⟩
+    · simp only [r7DownOpen, mem_setOf_eq, triCoord_add_mul, add_sub_cancel_left]
+      refine ⟨by linarith, by linarith, by linarith, by linarith, ?_, ?_, ?_⟩ <;> unfold triQ <;> nlinarith
+    · rw [tri_eq, dist_add_mul]; convert hd using 2; push_cast; unfold triQ; ring
+  · refine ⟨((p + (1 - s) : ℝ) : ℂ) + ((q + (1 - s) : ℝ) : ℂ) * e (π / 3), ?_, ?_⟩
+    · simp only [r7DownOpen, mem_setOf_eq, triCoord_add_mul, add_sub_cancel_left]
+      refine ⟨by linarith, by linarith, by linarith, by linarith, ?_, ?_, ?_⟩ <;> unfold triQ <;> nlinarith
+    · rw [tri_eq, dist_add_mul]; convert hd using 2; push_cast; unfold triQ; ring
+
+/-- A point of the closure of an open subset is in the support. -/
+theorem mem_essSupport_of_mem_closure {S O : Set ℂ} {Q : ℂ} (hO : IsOpen O) (hOS : O ⊆ S) (hQ : Q ∈ closure O) :
+    Q ∈ essSupport S :=
+  mem_essSupport_of_isOpen hO hOS fun r hr => by
+    obtain ⟨z, hz, hd⟩ := Metric.mem_closure_iff.1 hQ r hr
+    exact ⟨z, hz, by rw [dist_comm]; exact hd⟩
+
+/-- **A vertex of an up tile is in the support of the tile's colour.** -/
+theorem r7Up_vertex_mem_essSupport (p q : ℤ) {Q : ℂ} (hQ : Q = tri p q ∨ Q = tri (p + 1) q ∨ Q = tri p (q + 1)) :
+    Q ∈ essSupport (r7Cls (r7UpCol p q)) :=
+  mem_essSupport_of_mem_closure (isOpen_r7UpOpen p q) (r7UpOpen_subset p q) (mem_closure_r7UpOpen p q hQ)
+
+/-- **A cusp of a down tile is in the support of the tile's colour.** -/
+theorem r7Down_cusp_mem_essSupport (p q : ℤ) {Q : ℂ}
+    (hQ : Q = tri (p + 1) q ∨ Q = tri p (q + 1) ∨ Q = tri (p + 1) (q + 1)) : Q ∈ essSupport (r7Cls (r7DownCol p q)) :=
+  mem_essSupport_of_mem_closure (isOpen_r7DownOpen p q) (r7DownOpen_subset p q) (mem_closure_r7DownOpen p q hQ)
+
+/-- **Every down colour is in the support at every lattice point** (the three down tiles cusped there carry the three down
+colours). -/
+theorem r7_down_mem_essSupport (P R : ℤ) {d : Fin 7} (hd : 4 ≤ d.val) : tri P R ∈ essSupport (r7Cls d) := by
+  have : d = r7DownCol (P - 1) R ∨ d = r7DownCol P (R - 1) ∨ d = r7DownCol (P - 1) (R - 1) := by
+    simp only [Fin.ext_iff, r7DownCol]; omega
+  rcases this with rfl | rfl | rfl
+  · exact r7Down_cusp_mem_essSupport _ _ (Or.inl (by rw [sub_add_cancel]))
+  · exact r7Down_cusp_mem_essSupport _ _ (Or.inr (Or.inl (by rw [sub_add_cancel])))
+  · exact r7Down_cusp_mem_essSupport _ _ (Or.inr (Or.inr (by rw [sub_add_cancel, sub_add_cancel])))
+
+/-- A point near which a set is absent is not in its essential closure. -/
+theorem not_mem_essClosure_of_eventually {S : Set ℂ} {x : ℂ} (h : ∀ᶠ z in 𝓝 x, z ∉ S) : x ∉ essClosure S := by
+  obtain ⟨r, hr, hball⟩ := Metric.eventually_nhds_iff_ball.1 h
+  intro hx
+  have : upperDensityAt S x = 0 := upperDensityAt_eq_zero_of_null (half_pos hr) fun ρ _ hρr => by
+    rw [show S ∩ closedBall x ρ = ∅ from eq_empty_of_forall_notMem fun z hz =>
+      hball z (by rw [mem_ball]; exact lt_of_le_of_lt (mem_closedBall.1 hz.2) (by linarith)) hz.1]
+    exact measure_empty
+  exact hx.ne' this
+
+/-- The tangency of the three bulge circles at the cell's corners, as the case analysis reads it: on the open cell, the first
+circle misses the other two discs and the second misses the third. -/
+theorem triQ_tangent {u v : ℝ} (hu0 : 0 < u) (hu1 : u < 1) (hv1 : v < 1) :
+    (triQ u v = 1 → 1 < triQ (u - 2) v ∧ 1 < triQ u (v - 2)) ∧ (triQ (u - 2) v = 1 → 1 < triQ u (v - 2)) := by
+  refine ⟨fun h => ⟨?_, ?_⟩, fun h => ?_⟩
+  · by_contra hc
+    push Not at hc
+    have h1 : 0 ≤ v - (2 - 2 * u) := by unfold triQ at h hc; nlinarith
+    unfold triQ at h
+    nlinarith [mul_nonneg h1 (by linarith : (0 : ℝ) ≤ u + v + (2 - 2 * u)), mul_pos (sub_pos.2 hu1) (sub_pos.2 hu1)]
+  · by_contra hc
+    push Not at hc
+    have h1 : 0 ≤ u - (2 - 2 * v) := by unfold triQ at h hc; nlinarith
+    unfold triQ at h
+    nlinarith [mul_nonneg h1 (by linarith : (0 : ℝ) ≤ u + v + (2 - 2 * v)), mul_pos (sub_pos.2 hv1) (sub_pos.2 hv1)]
+  · have e : triQ u (v - 2) = triQ (u - 2) v + 2 * (u - v) := by unfold triQ; ring
+    rw [e, h]
+    by_contra hc
+    push Not at hc
+    unfold triQ at h
+    nlinarith [mul_nonneg (by linarith : (0 : ℝ) ≤ v - u) (by linarith : (0 : ℝ) ≤ 4 - u - 2 * v),
+      mul_pos (sub_pos.2 hv1) (sub_pos.2 hv1)]
+
+/-- **R7 off the lattice, locally**: near a point that is not a lattice point at most two colours occur, and when two do, the
+point is on a unit circle about a lattice point in the support of both (the arc of an up tile facing a down tile). -/
+theorem r7_local {x : ℂ} (hx : ∀ m n : ℤ, x ≠ tri m n) : ∃ c₁ c₂ : Fin 7,
+    (∀ᶠ z in 𝓝 x, r7Col z = c₁ ∨ r7Col z = c₂) ∧
+      (c₁ = c₂ ∨ ∃ m n : ℤ, dist x (tri m n) = 1 ∧ tri m n ∈ essSupport (r7Cls c₁) ∧ tri m n ∈ essSupport (r7Cls c₂)) := by
+  set A := (triCoord x).1 with hA
+  set B := (triCoord x).2 with hB
+  set m := ⌊A⌋ with hm
+  set n := ⌊B⌋ with hn
+  have hm0 : (m : ℝ) ≤ A := Int.floor_le A
+  have hm1 : A < m + 1 := Int.lt_floor_add_one A
+  have hn0 : (n : ℝ) ≤ B := Int.floor_le B
+  have hn1 : B < n + 1 := Int.lt_floor_add_one B
+  have hc1 : Continuous fun z => (triCoord z).1 := continuous_triCoord.fst
+  have hc2 : Continuous fun z => (triCoord z).2 := continuous_triCoord.snd
+  have hq : ∀ α β : ℝ, Continuous fun z => triQ ((triCoord z).1 - α) ((triCoord z).2 - β) := by
+    intro α β; have := continuous_triCoord; unfold triQ; fun_prop
+  have evl : ∀ f : ℂ → ℝ, Continuous f → ∀ c, f x < c → ∀ᶠ z in 𝓝 x, f z < c := fun f hf c h =>
+    hf.continuousAt (Iio_mem_nhds h)
+  have evg : ∀ f : ℂ → ℝ, Continuous f → ∀ c, c < f x → ∀ᶠ z in 𝓝 x, c < f z := fun f hf c h =>
+    hf.continuousAt (Ioi_mem_nhds h)
+  have hxc : x = ((A : ℝ) : ℂ) + ((B : ℝ) : ℂ) * e (π / 3) := (triCoord_spec x).symm
+  have hdist : ∀ p q : ℤ, dist x (tri p q) = √(triQ (A - p) (B - q)) := fun p q => by
+    rw [hxc, tri_eq, dist_add_mul]
+  by_cases hAm : A = m
+  · -- on the lattice line `a = m`: one colour, `U(m, n)`'s
+    have hBn : (n : ℝ) < B := lt_of_le_of_ne hn0 fun h => hx m n (by rw [hxc, tri_eq, ← hAm, ← h])
+    refine ⟨r7UpCol m n, r7UpCol m n, ?_, Or.inl rfl⟩
+    have t1 : triQ (A - m) (B - n) < 1 := by rw [hAm, sub_self]; unfold triQ; nlinarith
+    have t2 : 1 < triQ (A - (m - 1)) (B - n) := by rw [hAm]; unfold triQ; nlinarith
+    have t3 : triQ (A - (m - 1 + 2)) (B - n) < 1 := by rw [hAm]; unfold triQ; nlinarith
+    filter_upwards [evg _ hc1 (m - 1) (by linarith), evl _ hc1 (m + 1) (by linarith), evg _ hc2 n hBn,
+      evl _ hc2 (n + 1) hn1, evl _ (hq m n) 1 t1, evg _ (hq (m - 1) n) 1 t2, evl _ (hq (m - 1 + 2) n) 1 t3]
+      with z z1 z2 z3 z4 z5 z6 z7
+    left
+    show r7ColTri (triCoord z).1 (triCoord z).2 = _
+    by_cases hz : (m : ℝ) ≤ (triCoord z).1
+    · rw [r7ColTri_of_cell (p := m) (q := n) hz z2 z3.le z4, if_pos z5.le]
+    · push Not at hz
+      rw [r7ColTri_of_cell (p := m - 1) (q := n) (by push_cast; linarith) (by push_cast; linarith) z3.le z4]
+      push_cast
+      rw [if_neg (not_le.2 z6), if_pos (by unfold triQ at z7 ⊢; linarith), sub_add_cancel]
+  by_cases hBn : B = n
+  · -- on the lattice line `b = n`: one colour, `U(m, n)`'s
+    have hAm' : (m : ℝ) < A := lt_of_le_of_ne hm0 (Ne.symm hAm)
+    refine ⟨r7UpCol m n, r7UpCol m n, ?_, Or.inl rfl⟩
+    have t1 : triQ (A - m) (B - n) < 1 := by rw [hBn, sub_self]; unfold triQ; nlinarith
+    have t2 : 1 < triQ (A - m) (B - (n - 1)) := by rw [hBn]; unfold triQ; nlinarith
+    have t3 : 1 < triQ (A - (m + 2)) (B - (n - 1)) := by rw [hBn]; unfold triQ; nlinarith
+    have t4 : triQ (A - m) (B - (n - 1 + 2)) < 1 := by rw [hBn]; unfold triQ; nlinarith
+    filter_upwards [evg _ hc1 m hAm', evl _ hc1 (m + 1) hm1, evg _ hc2 (n - 1) (by linarith),
+      evl _ hc2 (n + 1) hn1, evl _ (hq m n) 1 t1, evg _ (hq m (n - 1)) 1 t2, evg _ (hq (m + 2) (n - 1)) 1 t3,
+      evl _ (hq m (n - 1 + 2)) 1 t4]
+      with z z1 z2 z3 z4 z5 z6 z7 z8
+    left
+    show r7ColTri (triCoord z).1 (triCoord z).2 = _
+    by_cases hz : (n : ℝ) ≤ (triCoord z).2
+    · rw [r7ColTri_of_cell (p := m) (q := n) z1.le z2 hz z4, if_pos z5.le]
+    · push Not at hz
+      rw [r7ColTri_of_cell (p := m) (q := n - 1) z1.le z2 (by push_cast; linarith) (by push_cast; linarith)]
+      push_cast
+      rw [if_neg (not_le.2 z6), if_neg (not_le.2 (by unfold triQ at z7 ⊢; linarith)),
+        if_pos (by unfold triQ at z8 ⊢; linarith), sub_add_cancel]
+  -- the open cell
+  have hAm' : (m : ℝ) < A := lt_of_le_of_ne hm0 (Ne.symm hAm)
+  have hBn' : (n : ℝ) < B := lt_of_le_of_ne hn0 (Ne.symm hBn)
+  obtain ⟨T1, T3⟩ := triQ_tangent (u := A - m) (v := B - n) (by linarith) (by linarith) (by linarith)
+  have cell : ∀ᶠ z in 𝓝 x, (m : ℝ) ≤ (triCoord z).1 ∧ (triCoord z).1 < m + 1 ∧ (n : ℝ) ≤ (triCoord z).2 ∧
+      (triCoord z).2 < n + 1 := by
+    filter_upwards [evg _ hc1 m hAm', evl _ hc1 (m + 1) hm1, evg _ hc2 n hBn', evl _ hc2 (n + 1) hn1] with z z1 z2 z3 z4
+    exact ⟨z1.le, z2, z3.le, z4⟩
+  have hcol : ∀ z, (m : ℝ) ≤ (triCoord z).1 ∧ (triCoord z).1 < m + 1 ∧ (n : ℝ) ≤ (triCoord z).2 ∧ (triCoord z).2 < n + 1 →
+      r7Col z = if triQ ((triCoord z).1 - m) ((triCoord z).2 - n) ≤ 1 then r7UpCol m n
+        else if triQ ((triCoord z).1 - (m + 2)) ((triCoord z).2 - n) ≤ 1 then r7UpCol (m + 1) n
+        else if triQ ((triCoord z).1 - m) ((triCoord z).2 - (n + 2)) ≤ 1 then r7UpCol m (n + 1) else r7DownCol m n := by
+    rintro z ⟨z1, z2, z3, z4⟩
+    show r7ColTri _ _ = _
+    rw [r7ColTri_of_cell z1 z2 z3 z4]
+    simp only [show ∀ a : ℝ, a - m - 2 = a - (m + 2) from fun a => by ring,
+      show ∀ b : ℝ, b - n - 2 = b - (n + 2) from fun b => by ring]
+  have e2 : triQ (A - m - 2) (B - n) = triQ (A - (m + 2)) (B - n) := by ring_nf
+  have e3 : triQ (A - m) (B - n - 2) = triQ (A - m) (B - (n + 2)) := by ring_nf
+  have hup : ∀ (p q : ℤ) (Q : ℂ), (Q = tri p q ∨ Q = tri (p + 1) q ∨ Q = tri p (q + 1)) →
+      Q ∈ essSupport (r7Cls (r7UpCol p q)) := fun p q Q hQ => r7Up_vertex_mem_essSupport p q hQ
+  have hdn : ∀ p q : ℤ, tri p q ∈ essSupport (r7Cls (r7DownCol m n)) := fun p q =>
+    r7_down_mem_essSupport p q (by simp [r7DownCol])
+  rcases lt_trichotomy (triQ (A - m) (B - n)) 1 with h1 | h1 | h1
+  · refine ⟨r7UpCol m n, r7UpCol m n, ?_, Or.inl rfl⟩
+    filter_upwards [cell, evl _ (hq m n) 1 h1] with z z1 z2
+    left; rw [hcol z z1, if_pos z2.le]
+  · obtain ⟨g2, g3⟩ := T1 h1
+    refine ⟨r7UpCol m n, r7DownCol m n, ?_, Or.inr ⟨m, n, by rw [hdist, h1, Real.sqrt_one], hup m n _ (Or.inl rfl), hdn m n⟩⟩
+    filter_upwards [cell, evg _ (hq (m + 2) n) 1 (by rw [← e2]; exact g2), evg _ (hq m (n + 2)) 1 (by rw [← e3]; exact g3)]
+      with z z1 z2 z3
+    rw [hcol z z1]
+    split_ifs
+    · left; rfl
+    · exact absurd ‹_› (not_le.2 z2)
+    · exact absurd ‹_› (not_le.2 z3)
+    · right; rfl
+  rcases lt_trichotomy (triQ (A - m - 2) (B - n)) 1 with h2 | h2 | h2
+  · refine ⟨r7UpCol (m + 1) n, r7UpCol (m + 1) n, ?_, Or.inl rfl⟩
+    filter_upwards [cell, evg _ (hq m n) 1 h1, evl _ (hq (m + 2) n) 1 (by rw [← e2]; exact h2)] with z z1 z2 z3
+    left; rw [hcol z z1, if_neg (not_le.2 z2), if_pos z3.le]
+  · have g3 := T3 h2
+    refine ⟨r7UpCol (m + 1) n, r7DownCol m n, ?_, Or.inr ⟨m + 2, n, by rw [hdist]; push_cast; rw [← e2, h2, Real.sqrt_one],
+      hup (m + 1) n _ (Or.inr (Or.inl (by congr 1; ring))), hdn _ _⟩⟩
+    filter_upwards [cell, evg _ (hq m n) 1 h1, evg _ (hq m (n + 2)) 1 (by rw [← e3]; exact g3)] with z z1 z2 z3
+    rw [hcol z z1, if_neg (not_le.2 z2)]
+    split_ifs
+    · left; rfl
+    · exact absurd ‹_› (not_le.2 z3)
+    · right; rfl
+  rcases lt_trichotomy (triQ (A - m) (B - n - 2)) 1 with h3 | h3 | h3
+  · refine ⟨r7UpCol m (n + 1), r7UpCol m (n + 1), ?_, Or.inl rfl⟩
+    filter_upwards [cell, evg _ (hq m n) 1 h1, evg _ (hq (m + 2) n) 1 (by rw [← e2]; exact h2),
+      evl _ (hq m (n + 2)) 1 (by rw [← e3]; exact h3)] with z z1 z2 z3 z4
+    left; rw [hcol z z1, if_neg (not_le.2 z2), if_neg (not_le.2 z3), if_pos z4.le]
+  · refine ⟨r7UpCol m (n + 1), r7DownCol m n, ?_, Or.inr ⟨m, n + 2, by rw [hdist]; push_cast; rw [← e3, h3, Real.sqrt_one],
+      hup m (n + 1) _ (Or.inr (Or.inr (by congr 1; ring))), hdn _ _⟩⟩
+    filter_upwards [cell, evg _ (hq m n) 1 h1, evg _ (hq (m + 2) n) 1 (by rw [← e2]; exact h2)] with z z1 z2 z3
+    rw [hcol z z1, if_neg (not_le.2 z2), if_neg (not_le.2 z3)]
+    split_ifs
+    · left; rfl
+    · right; rfl
+  · refine ⟨r7DownCol m n, r7DownCol m n, ?_, Or.inl rfl⟩
+    filter_upwards [cell, evg _ (hq m n) 1 h1, evg _ (hq (m + 2) n) 1 (by rw [← e2]; exact h2),
+      evg _ (hq m (n + 2)) 1 (by rw [← e3]; exact h3)] with z z1 z2 z3 z4
+    left; rw [hcol z z1, if_neg (not_le.2 z2), if_neg (not_le.2 z3), if_neg (not_le.2 z4)]
+
+/-- **The colour absent at a lattice point**: an up tile of `λ₀ + 1 + ω`'s colour (mod `2Λ`) stays more than `7/10` from `λ₀`
+(one of its vertices is at distance at least `√3`). -/
+theorem r7_far_vertex {m n p q : ℤ} (hc : r7UpCol p q = r7UpCol (m + 1) (n + 1)) {z : ℂ} (hz : z ∈ r7Up p q) :
+    7 / 10 < dist z (tri m n) := by
+  have hc' := congrArg Fin.val hc
+  simp only [r7UpCol] at hc'
+  obtain ⟨⟨hz1, hz2⟩, hz3⟩ := hz
+  rw [mem_closedBall] at hz1 hz2 hz3
+  have h3 : (1.7 : ℝ) < √3 := by rw [Real.lt_sqrt (by norm_num)]; norm_num
+  have key : ∀ V : ℂ, dist z V ≤ 1 → √3 ≤ dist V (tri m n) → 7 / 10 < dist z (tri m n) := by
+    intro V hzV hV
+    have := dist_triangle V z (tri m n)
+    rw [dist_comm V z] at this
+    linarith
+  obtain ⟨P, hP⟩ : ∃ P, p = m + P := ⟨p - m, by ring⟩
+  obtain ⟨Q, hQ⟩ : ∃ Q, q = n + Q := ⟨q - n, by ring⟩
+  subst hP hQ
+  have hPo : P % 2 = 1 := by omega
+  have hQo : Q % 2 = 1 := by omega
+  have hd : ∀ a b : ℤ, 3 ≤ a * a + a * b + b * b → √3 ≤ dist (tri (m + a) (n + b)) (tri m n) := by
+    intro a b hab
+    rw [dist_tri]
+    apply Real.sqrt_le_sqrt
+    have : (3 : ℝ) ≤ (a : ℝ) * a + a * b + b * b := by exact_mod_cast hab
+    push_cast; unfold triQ; nlinarith
+  by_cases hfar : 3 ≤ P * P + P * Q + Q * Q
+  · exact key _ hz1 (hd P Q hfar)
+  push Not at hfar
+  have hQb : -1 ≤ Q ∧ Q ≤ 1 := by constructor <;> nlinarith [sq_nonneg (2 * P + Q)]
+  have hPb : -1 ≤ P ∧ P ≤ 1 := by constructor <;> nlinarith [sq_nonneg (2 * Q + P)]
+  obtain ⟨hP1, hP2⟩ := hPb
+  obtain ⟨hQ1, hQ2⟩ := hQb
+  interval_cases P <;> interval_cases Q <;> (try norm_num at hPo) <;> (try norm_num at hQo) <;> (try norm_num at hfar)
+  · -- (P, Q) = (−1, 1): the vertex `λ + ω` is at offset `(−1, 2)`
+    exact key _ hz3 (by rw [show n + 1 + 1 = n + 2 by ring]; exact hd (-1) 2 (by norm_num))
+  · -- (P, Q) = (1, −1): the vertex `λ + 1` is at offset `(2, −1)`
+    exact key _ hz2 (by rw [show m + 1 + 1 = m + 2 by ring]; exact hd 2 (-1) (by norm_num))
+
+/-- **A point at distance `1` inside an open part of `A` gives `φ_A > 0`** (an open arc of directions lands in it). -/
+theorem phi_pos_of_mem_open {A O : Set ℂ} (hA : MeasurableSet A) (hO : IsOpen O) (hOA : O ⊆ A) {p q : ℂ} (hq : q ∈ O)
+    (hpq : dist p q = 1) : 0 < phi A p := by
+  set α : ℝ := Complex.arg (q - p)
+  have hα : p + e α = q := by
+    have h := self_eq_norm_mul_e_arg (q - p)
+    rw [← dist_eq_norm, dist_comm, hpq, ofReal_one, one_mul] at h
+    rw [← h]; ring
+  have hopen : IsOpen {θ : ℝ | p + e θ ∈ O} := hO.preimage (continuous_const.add continuous_e)
+  obtain ⟨ε₀, hε₀, hball⟩ := Metric.isOpen_iff.1 hopen α (by simp only [mem_setOf_eq]; rw [hα]; exact hq)
+  set ε := min ε₀ Real.pi
+  have hε : 0 < ε := lt_min hε₀ Real.pi_pos
+  have hS : MeasurableSet {θ : ℝ | p + e θ ∈ A} := hA.preimage (continuous_const.add continuous_e).measurable
+  have hper : ∀ θ, θ + 2 * Real.pi ∈ {θ : ℝ | p + e θ ∈ A} ↔ θ ∈ {θ : ℝ | p + e θ ∈ A} := by
+    intro θ; simp only [mem_setOf_eq, e_add_two_pi]
+  have hsub : Ioo (α - ε) (α + ε) ⊆ {θ : ℝ | p + e θ ∈ A} := by
+    intro θ hθ
+    have : θ ∈ ball α ε₀ := by
+      rw [Real.ball_eq_Ioo]; exact ⟨by linarith [hθ.1, min_le_left ε₀ Real.pi], by linarith [hθ.2, min_le_left ε₀ Real.pi]⟩
+    exact hOA (hball this)
+  exact lt_of_lt_of_le (ENNReal.ofReal_pos.2 (by linarith)) (arcLength_ge_of_Ioo hS hper (min_le_right _ _) hsub)
+
+/-- **`φ_A > 0` from a star-shaped open part of `A` reaching both inside and outside the unit circle about `p`** (the
+intermediate value theorem along the two segments through the star's centre). -/
+theorem phi_pos_of_star {A O : Set ℂ} (hA : MeasurableSet A) (hO : IsOpen O) (hOA : O ⊆ A) {c : ℂ}
+    (hstar : ∀ z ∈ O, ∀ t : ℝ, 0 ≤ t → t ≤ 1 → (1 - t) • c + t • z ∈ O) {p P₁ P₂ : ℂ} (h₁ : P₁ ∈ closure O)
+    (h₂ : P₂ ∈ closure O) (hd₁ : dist p P₁ < 1) (hd₂ : 1 < dist p P₂) : 0 < phi A p := by
+  obtain ⟨a, haO, ha⟩ := Metric.mem_closure_iff.1 h₁ (1 - dist p P₁) (by linarith)
+  obtain ⟨b, hbO, hb⟩ := Metric.mem_closure_iff.1 h₂ (dist p P₂ - 1) (by linarith)
+  have hpa : dist p a < 1 := by linarith [dist_triangle p P₁ a]
+  have hpb : 1 < dist p b := by linarith [dist_triangle p b P₂, dist_comm b P₂]
+  have seg : ∀ z ∈ O, (dist p c ≤ 1 ∧ 1 ≤ dist p z) ∨ (dist p z ≤ 1 ∧ 1 ≤ dist p c) → ∃ q ∈ O, dist p q = 1 := by
+    intro z hz hcase
+    set f : ℝ → ℝ := fun t => dist p ((1 - t) • c + t • z) with hf
+    have hfc : Continuous f := by
+      apply continuous_const.dist
+      exact ((continuous_const.sub continuous_id).smul continuous_const).add (continuous_id.smul continuous_const)
+    have hf0 : f 0 = dist p c := by simp [hf]
+    have hf1 : f 1 = dist p z := by simp [hf]
+    have hmem : (1 : ℝ) ∈ f '' Icc 0 1 := by
+      rcases hcase with ⟨h1, h2⟩ | ⟨h1, h2⟩
+      · exact intermediate_value_Icc zero_le_one hfc.continuousOn ⟨by rw [hf0]; exact h1, by rw [hf1]; exact h2⟩
+      · exact intermediate_value_Icc' zero_le_one hfc.continuousOn ⟨by rw [hf1]; exact h1, by rw [hf0]; exact h2⟩
+    obtain ⟨t, ⟨ht0, ht1⟩, hft⟩ := hmem
+    exact ⟨_, hstar z hz t ht0 ht1, hft⟩
+  obtain ⟨q, hqO, hq⟩ : ∃ q ∈ O, dist p q = 1 := by
+    rcases le_total (dist p c) 1 with h | h
+    · exact seg b hbO (Or.inl ⟨h, hpb.le⟩)
+    · exact seg a haO (Or.inr ⟨hpa.le, h⟩)
+  exact phi_pos_of_mem_open hA hO hOA hqO hq
+
+/-- The open up triangle is star-shaped (convex) about its centroid. -/
+theorem r7UpOpen_star (p q : ℤ) : (((p : ℝ) + 1 / 3 : ℝ) : ℂ) + (((q : ℝ) + 1 / 3 : ℝ) : ℂ) * e (π / 3) ∈ r7UpOpen p q ∧
+    ∀ z ∈ r7UpOpen p q, ∀ t : ℝ, 0 ≤ t → t ≤ 1 →
+      (1 - t) • ((((p : ℝ) + 1 / 3 : ℝ) : ℂ) + (((q : ℝ) + 1 / 3 : ℝ) : ℂ) * e (π / 3)) + t • z ∈ r7UpOpen p q := by
+  refine ⟨?_, fun z hz t ht0 ht1 => ?_⟩
+  · simp only [r7UpOpen, mem_setOf_eq, triCoord_add_mul]; norm_num
+  · obtain ⟨h1, h2, h3⟩ := hz
+    simp only [r7UpOpen, mem_setOf_eq, triCoord_combo, triCoord_add_mul]
+    refine ⟨by nlinarith, by nlinarith, by nlinarith⟩
+
+/-- The convexity estimate behind the down tile's star shape: from a centre at `triQ`-distance `√(4/3)` from a disc centre,
+the segment to a point outside the unit disc and within `√(1/3)` of the centre stays outside. -/
+theorem triQ_star {a b c d t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1) (hc : triQ a c = 4 / 3) (hbd : 1 < triQ b d)
+    (hg : triQ (b - a) (d - c) ≤ 1 / 3) : 1 < triQ ((1 - t) * a + t * b) ((1 - t) * c + t * d) := by
+  have key : triQ ((1 - t) * a + t * b) ((1 - t) * c + t * d) =
+      (1 - t) * triQ a c + t * triQ b d - t * (1 - t) * triQ (b - a) (d - c) := by unfold triQ; ring
+  rw [key, hc]
+  rcases eq_or_lt_of_le ht1 with rfl | h
+  · simp; exact hbd
+  · nlinarith [mul_nonneg ht0 (sub_nonneg.2 ht1), mul_nonneg (mul_nonneg ht0 (sub_nonneg.2 ht1)) (sub_nonneg.2 hg),
+      mul_pos (sub_pos.2 h) (sub_pos.2 h), mul_nonneg ht0 (sub_nonneg.2 hbd.le)]
+
+/-- The open down tile is star-shaped about its centroid. -/
+theorem r7DownOpen_star (p q : ℤ) :
+    (((p : ℝ) + 2 / 3 : ℝ) : ℂ) + (((q : ℝ) + 2 / 3 : ℝ) : ℂ) * e (π / 3) ∈ r7DownOpen p q ∧
+    ∀ z ∈ r7DownOpen p q, ∀ t : ℝ, 0 ≤ t → t ≤ 1 →
+      (1 - t) • ((((p : ℝ) + 2 / 3 : ℝ) : ℂ) + (((q : ℝ) + 2 / 3 : ℝ) : ℂ) * e (π / 3)) + t • z ∈ r7DownOpen p q := by
+  refine ⟨?_, fun z hz t ht0 ht1 => ?_⟩
+  · simp only [r7DownOpen, mem_setOf_eq, triCoord_add_mul]; norm_num [triQ]
+  · obtain ⟨h1, h2, h3, h4, h5, h6, h7⟩ := hz
+    set u := (triCoord z).1 - p with hu
+    set v := (triCoord z).2 - q with hv
+    have huv : 1 ≤ u + v := by
+      by_contra hc; push Not at hc; unfold triQ at h5; nlinarith
+    have hg : triQ (u - 2 / 3) (v - 2 / 3) ≤ 1 / 3 := by
+      unfold triQ
+      nlinarith [mul_nonneg (sub_nonneg.2 h2.le) (sub_nonneg.2 h4.le), mul_nonneg (sub_nonneg.2 h2.le) (sub_nonneg.2 huv),
+        mul_nonneg (sub_nonneg.2 h4.le) (sub_nonneg.2 huv)]
+    simp only [r7DownOpen, mem_setOf_eq, triCoord_combo, triCoord_add_mul]
+    have e1 : (1 - t) * ((p : ℝ) + 2 / 3) + t * (triCoord z).1 - p = (1 - t) * (2 / 3) + t * u := by rw [hu]; ring
+    have e2 : (1 - t) * ((q : ℝ) + 2 / 3) + t * (triCoord z).2 - q = (1 - t) * (2 / 3) + t * v := by rw [hv]; ring
+    rw [e1, e2]
+    refine ⟨by nlinarith, by nlinarith, by nlinarith, by nlinarith, ?_, ?_, ?_⟩
+    · exact triQ_star ht0 ht1 (by norm_num [triQ]) h5 hg
+    · have := triQ_star (a := 2 / 3 - 2) (b := u - 2) (c := 2 / 3) (d := v) ht0 ht1 (by norm_num [triQ]) h6
+        (by convert hg using 2; ring)
+      convert this using 2; ring
+    · have := triQ_star (a := 2 / 3) (b := u) (c := 2 / 3 - 2) (d := v - 2) ht0 ht1 (by norm_num [triQ]) h7
+        (by convert hg using 2; ring)
+      convert this using 2; ring
+
+/-- In a down triangle every vertex is within `1`: the squared distances to the vertices `λ + 1`, `λ + ω`, `λ + 1 + ω`. -/
+theorem triQ_downTri_le {u v : ℝ} (hu : u ≤ 1) (hv : v ≤ 1) (huv : 1 ≤ u + v) :
+    triQ (u - 1) v ≤ 1 ∧ triQ u (v - 1) ≤ 1 ∧ triQ (u - 1) (v - 1) ≤ 1 := by
+  unfold triQ
+  refine ⟨?_, ?_, ?_⟩
+  · nlinarith [mul_nonneg (sub_nonneg.2 hu) (by linarith : (0 : ℝ) ≤ u + v - 1), mul_nonneg (sub_nonneg.2 hv) (by linarith : (0 : ℝ) ≤ 1 + v)]
+  · nlinarith [mul_nonneg (sub_nonneg.2 hv) (by linarith : (0 : ℝ) ≤ u + v - 1), mul_nonneg (sub_nonneg.2 hu) (by linarith : (0 : ℝ) ≤ 1 + u)]
+  · nlinarith [mul_nonneg (sub_nonneg.2 hu) (sub_nonneg.2 hv), mul_nonneg (sub_nonneg.2 hu) (by linarith : (0 : ℝ) ≤ u + v - 1),
+      mul_nonneg (sub_nonneg.2 hv) (by linarith : (0 : ℝ) ≤ u + v - 1)]
+
+/-- Off the unit circles about lattice points, `≤ 1` is `< 1` and `≥ 1` is `> 1`. -/
+theorem dist_tri_ne_one {p : ℂ} (hp : p ∉ ⋃ (m : ℤ) (n : ℤ), sphere (tri m n) 1) (m n : ℤ) : dist p (tri m n) ≠ 1 :=
+  fun h => hp (mem_iUnion.2 ⟨m, mem_iUnion.2 ⟨n, mem_sphere.2 h⟩⟩)
+
+/-- Antipodal lattice points: a point within `1` of `V` is at least `1` from `W` when `|V − W| = 2`. -/
+theorem one_le_dist_of_two {p V W : ℂ} (hVW : dist V W = 2) (hp : dist p V ≤ 1) : 1 ≤ dist p W := by
+  have := dist_triangle V p W
+  rw [dist_comm V p] at this
+  linarith
+
+theorem dist_tri_two (a b c d : ℤ) (h : (c - a, d - b) ∈ ({(2, 0), (0, 2), (2, -2), (-2, 0), (0, -2), (-2, 2)} : Set (ℤ × ℤ))) :
+    dist (tri a b) (tri c d) = 2 := by
+  rw [dist_tri, show (2 : ℝ) = √4 by rw [show (4 : ℝ) = 2 ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]]
+  congr 1
+  simp only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq] at h
+  have e1 : ((a : ℝ) - c) = -((c - a : ℤ) : ℝ) := by push_cast; ring
+  have e2 : ((b : ℝ) - d) = -((d - b : ℤ) : ℝ) := by push_cast; ring
+  rcases h with ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ <;>
+    (rw [e1, e2, h1, h2]; norm_num [triQ])
+
+/-- The witness step for an up colour: two vertices of an up triangle of that colour, one inside and one outside the unit
+circle about `p`. -/
+theorem phi_pos_up_witness {j : Fin 7} (a b : ℤ) (hj : j = r7UpCol a b) {p P₁ P₂ : ℂ}
+    (h₁ : P₁ = tri a b ∨ P₁ = tri (a + 1) b ∨ P₁ = tri a (b + 1)) (h₂ : P₂ = tri a b ∨ P₂ = tri (a + 1) b ∨ P₂ = tri a (b + 1))
+    (hd₁ : dist p P₁ < 1) (hd₂ : 1 < dist p P₂) : 0 < phi (r7Cls j) p := by
+  subst hj
+  exact phi_pos_of_star (measurableSet_r7Cls _) (isOpen_r7UpOpen a b) (r7UpOpen_subset a b) (r7UpOpen_star a b).2
+    (mem_closure_r7UpOpen a b h₁) (mem_closure_r7UpOpen a b h₂) hd₁ hd₂
+
+/-- The witness step for a down colour: two cusps of a down tile of that colour, one inside and one outside the unit circle
+about `p`. -/
+theorem phi_pos_down_witness {j : Fin 7} (a b : ℤ) (hj : j = r7DownCol a b) {p P₁ P₂ : ℂ}
+    (h₁ : P₁ = tri (a + 1) b ∨ P₁ = tri a (b + 1) ∨ P₁ = tri (a + 1) (b + 1))
+    (h₂ : P₂ = tri (a + 1) b ∨ P₂ = tri a (b + 1) ∨ P₂ = tri (a + 1) (b + 1))
+    (hd₁ : dist p P₁ < 1) (hd₂ : 1 < dist p P₂) : 0 < phi (r7Cls j) p := by
+  subst hj
+  exact phi_pos_of_star (measurableSet_r7Cls _) (isOpen_r7DownOpen a b) (r7DownOpen_subset a b) (r7DownOpen_star a b).2
+    (mem_closure_r7DownOpen a b h₁) (mem_closure_r7DownOpen a b h₂) hd₁ hd₂
+
 /-- **R7's boundary at a lattice point**: of the classes with positive upper density at `tri m n` (only its three up colours —
 the cusps have density `0`), every two have a common centre at distance `1` in both supports (`λ₀ + 1`, `λ₀ + ω`, `λ₀ + ω − 1`). -/
 theorem r7_boundary_lattice {m n : ℤ} {a b : Fin 7} (hab : a ≠ b) (ha : tri m n ∈ essClosure (r7Cls a))
     (hb : tri m n ∈ essClosure (r7Cls b)) :
     ∃ m' n' : ℤ, dist (tri m n) (tri m' n') = 1 ∧ tri m' n' ∈ essSupport (r7Cls a) ∧ tri m' n' ∈ essSupport (r7Cls b) := by
-  sorry
+  have _ := hab -- idle: the pair need not be distinct for the conclusion
+  set c7 := r7UpCol (m + 1) (n + 1) with hc7
+  have hfar : ∀ᶠ z in 𝓝 (tri m n), z ∉ r7Cls c7 := by
+    filter_upwards [ball_mem_nhds (tri m n) (by norm_num : (0 : ℝ) < 7 / 10)] with z hz hzc
+    have hzc' : r7Col z = c7 := hzc
+    rw [mem_ball] at hz
+    rcases r7Col_mem_tile z with ⟨p, q, hzU, hcz⟩ | ⟨p, q, hzD, hcz⟩
+    · linarith [r7_far_vertex (hcz.symm.trans hzc') hzU]
+    · exact r7UpCol_ne_r7DownCol _ _ _ _ (hzc'.symm.trans hcz)
+  have hna : a ≠ c7 := fun h => not_mem_essClosure_of_eventually (h ▸ hfar) ha
+  have hnb : b ≠ c7 := fun h => not_mem_essClosure_of_eventually (h ▸ hfar) hb
+  set c0 := r7UpCol m n with hc0
+  set c1 := r7UpCol (m + 1) n with hc1
+  set c2 := r7UpCol m (n + 1) with hc2
+  have hcls : ∀ d : Fin 7, d ≠ c7 → d = c0 ∨ d = c1 ∨ d = c2 ∨ 4 ≤ d.val := by
+    intro d hd
+    simp only [hc0, hc1, hc2, hc7, Fin.ext_iff, r7UpCol, ne_eq] at hd ⊢
+    omega
+  have h01 : c0 ≠ c1 := by simp only [hc0, hc1, ne_eq, Fin.ext_iff, r7UpCol]; omega
+  have h02 : c0 ≠ c2 := by simp only [hc0, hc2, ne_eq, Fin.ext_iff, r7UpCol]; omega
+  have h12 : c1 ≠ c2 := by simp only [hc1, hc2, ne_eq, Fin.ext_iff, r7UpCol]; omega
+  have hdown : ∀ (P R : ℤ) (d : Fin 7), 4 ≤ d.val → tri P R ∈ essSupport (r7Cls d) := fun P R d hd =>
+    r7_down_mem_essSupport P R hd
+  have S1 : ∀ d, d = c0 ∨ d = c1 ∨ 4 ≤ d.val → tri (m + 1) n ∈ essSupport (r7Cls d) := by
+    rintro d (rfl | rfl | hd)
+    · exact r7Up_vertex_mem_essSupport m n (Or.inr (Or.inl rfl))
+    · exact r7Up_vertex_mem_essSupport (m + 1) n (Or.inl rfl)
+    · exact hdown _ _ d hd
+  have S2 : ∀ d, d = c0 ∨ d = c2 ∨ 4 ≤ d.val → tri m (n + 1) ∈ essSupport (r7Cls d) := by
+    rintro d (rfl | rfl | hd)
+    · exact r7Up_vertex_mem_essSupport m n (Or.inr (Or.inr rfl))
+    · exact r7Up_vertex_mem_essSupport m (n + 1) (Or.inl rfl)
+    · exact hdown _ _ d hd
+  have S3 : ∀ d, d = c1 ∨ d = c2 ∨ 4 ≤ d.val → tri (m - 1) (n + 1) ∈ essSupport (r7Cls d) := by
+    rintro d (rfl | rfl | hd)
+    · have e : r7UpCol (m + 1) n = r7UpCol (m - 1) n := by simp only [Fin.ext_iff, r7UpCol]; omega
+      rw [hc1, e]; exact r7Up_vertex_mem_essSupport (m - 1) n (Or.inr (Or.inr rfl))
+    · have e : r7UpCol m (n + 1) = r7UpCol (m - 2) (n + 1) := by simp only [Fin.ext_iff, r7UpCol]; omega
+      rw [hc2, e]; exact r7Up_vertex_mem_essSupport (m - 2) (n + 1) (Or.inr (Or.inl (by congr 1; ring)))
+    · exact hdown _ _ d hd
+  have d1 : dist (tri m n) (tri (m + 1) n) = 1 := by rw [dist_tri]; push_cast; norm_num [triQ]
+  have d2 : dist (tri m n) (tri m (n + 1)) = 1 := by rw [dist_tri]; push_cast; norm_num [triQ]
+  have d3 : dist (tri m n) (tri (m - 1) (n + 1)) = 1 := by rw [dist_tri]; push_cast; norm_num [triQ]
+  rcases hcls a hna with ha' | ha' | ha' | ha' <;> rcases hcls b hnb with hb' | hb' | hb' | hb'
+  all_goals first
+    | exact ⟨_, _, d1, S1 a (by tauto), S1 b (by tauto)⟩
+    | exact ⟨_, _, d2, S2 a (by tauto), S2 b (by tauto)⟩
+    | exact ⟨_, _, d3, S3 a (by tauto), S3 b (by tauto)⟩
 
 /-- **R7's boundary off the lattice**: two classes meet only on an arc of an up tile facing a down tile, centred at a vertex `v`
 of the up tile; `v` is in the up colour's support (a vertex) and in the down colour's (the cusp of that colour at `v`, by
@@ -984,16 +1536,135 @@ M-R7-FORCE's coset computation: `D(m − 1, n − 1)` for the arc about `λ`, `D
 theorem r7_boundary_offLattice {x : ℂ} (hx : ∀ m n : ℤ, x ≠ tri m n) {a b : Fin 7} (hab : a ≠ b)
     (ha : x ∈ essClosure (r7Cls a)) (hb : x ∈ essClosure (r7Cls b)) :
     ∃ m n : ℤ, dist x (tri m n) = 1 ∧ tri m n ∈ essSupport (r7Cls a) ∧ tri m n ∈ essSupport (r7Cls b) := by
-  sorry
+  obtain ⟨c₁, c₂, hev, hc⟩ := r7_local hx
+  have hmem : ∀ d, x ∈ essClosure (r7Cls d) → d = c₁ ∨ d = c₂ := by
+    intro d hd
+    by_contra hne
+    push Not at hne
+    refine not_mem_essClosure_of_eventually ?_ hd
+    filter_upwards [hev] with z hz hzd
+    have : r7Col z = d := hzd
+    rcases hz with h | h <;> [exact hne.1 (this.symm.trans h); exact hne.2 (this.symm.trans h)]
+  rcases hmem a ha with rfl | rfl <;> rcases hmem b hb with rfl | rfl
+  · exact absurd rfl hab
+  · rcases hc with h | ⟨m, n, h1, h2, h3⟩
+    · exact absurd h hab
+    · exact ⟨m, n, h1, h2, h3⟩
+  · rcases hc with h | ⟨m, n, h1, h2, h3⟩
+    · exact absurd h.symm hab
+    · exact ⟨m, n, h1, h3, h2⟩
+  · exact absurd rfl hab
 
 /-- **R7's classes are maximal, up colours**: for almost every point off an up class, the unit circle about it crosses an open
 disc inside a tile of that colour (one period, finitely many explicit witness discs). -/
 theorem r7_phi_pos_up {j : Fin 7} (hj : j.val < 4) : ∀ᵐ p ∂(volume.restrict (r7Cls j)ᶜ), 0 < phi (r7Cls j) p := by
-  sorry
+  rw [ae_restrict_iff' (measurableSet_r7Cls j).compl]
+  filter_upwards [measure_eq_zero_iff_ae_notMem.mp volume_iUnion_sphere_tri] with p hN hpj
+  have hne : r7Col p ≠ j := hpj
+  have hd := dist_tri_ne_one hN
+  have two : ∀ a b c d : ℤ, (c - a = 2 ∧ d - b = 0) ∨ (c - a = 0 ∧ d - b = 2) ∨ (c - a = 2 ∧ d - b = -2) ∨
+      (c - a = -2 ∧ d - b = 0) ∨ (c - a = 0 ∧ d - b = -2) ∨ (c - a = -2 ∧ d - b = 2) →
+      dist p (tri a b) ≤ 1 → 1 < dist p (tri c d) := fun a b c d h hp =>
+    lt_of_le_of_ne (one_le_dist_of_two (dist_tri_two a b c d (by
+      simp only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq]; omega)) hp) (Ne.symm (hd c d))
+  rcases r7Col_mem_tile p with ⟨m, n, hU, hc⟩ | ⟨m, n, hD, hc⟩
+  · obtain ⟨⟨hx1, hx2⟩, hx3⟩ := hU
+    rw [mem_closedBall] at hx1 hx2 hx3
+    rw [hc] at hne
+    have hj' : j = r7UpCol (m + 1) n ∨ j = r7UpCol m (n + 1) ∨ j = r7UpCol (m + 1) (n - 1) := by
+      simp only [ne_eq, Fin.ext_iff, r7UpCol] at hne hj ⊢; omega
+    rcases hj' with h | h | h
+    · exact phi_pos_up_witness (m + 1) n h (Or.inl rfl) (Or.inr (Or.inl (show tri (m + 2) n = _ by congr 1; ring)))
+        (lt_of_le_of_ne hx2 (hd _ _)) (two m n (m + 2) n (by omega) hx1)
+    · exact phi_pos_up_witness m (n + 1) h (Or.inl rfl) (Or.inr (Or.inr (show tri m (n + 2) = _ by congr 1; ring)))
+        (lt_of_le_of_ne hx3 (hd _ _)) (two m n m (n + 2) (by omega) hx1)
+    · exact phi_pos_up_witness (m + 1) (n - 1) h (Or.inr (Or.inr (show tri (m + 1) n = _ by congr 1; ring)))
+        (Or.inr (Or.inl (show tri (m + 2) (n - 1) = _ by congr 1; ring)))
+        (lt_of_le_of_ne hx2 (hd _ _)) (two m (n + 1) (m + 2) (n - 1) (by omega) hx3)
+  · obtain ⟨hu1, hv1, huv, ex1, ex2, ex3⟩ := r7Down_coords hD
+    obtain ⟨k1, k2, k3⟩ := triQ_downTri_le hu1 hv1 huv
+    have hdist : ∀ a b : ℤ, dist p (tri a b) = √(triQ ((triCoord p).1 - a) ((triCoord p).2 - b)) := fun a b => by
+      rw [dist_eq_triQ, triCoord_tri]
+    have lt1 : ∀ a b : ℤ, ∀ α β : ℝ, (a : ℝ) = m + α → (b : ℝ) = n + β →
+        triQ ((triCoord p).1 - m - α) ((triCoord p).2 - n - β) ≤ 1 → dist p (tri a b) < 1 := by
+      intro a b α β ha hb h
+      refine lt_of_le_of_ne ?_ (hd a b)
+      rw [hdist, Real.sqrt_le_one, ha, hb]; convert h using 2 <;> ring
+    have gt1 : ∀ a b : ℤ, ∀ α β : ℝ, (a : ℝ) = m + α → (b : ℝ) = n + β →
+        1 < triQ ((triCoord p).1 - m - α) ((triCoord p).2 - n - β) → 1 < dist p (tri a b) := by
+      intro a b α β ha hb h
+      rw [hdist, Real.lt_sqrt zero_le_one, one_pow, ha, hb]; convert h using 2 <;> ring
+    have hj' : j = r7UpCol m n ∨ j = r7UpCol (m + 1) n ∨ j = r7UpCol m (n + 1) ∨ j = r7UpCol (m + 1) (n + 1) := by
+      simp only [Fin.ext_iff, r7UpCol] at hj ⊢; omega
+    rcases hj' with h | h | h | h
+    · exact phi_pos_up_witness m n h (Or.inr (Or.inl rfl)) (Or.inl rfl)
+        (lt1 _ _ 1 0 (by push_cast; ring) (by ring) (by simpa using k1)) (gt1 _ _ 0 0 (by ring) (by ring) (by simpa using ex1))
+    · exact phi_pos_up_witness (m + 1) n h (Or.inl rfl) (Or.inr (Or.inl (show tri (m + 2) n = _ by congr 1; ring)))
+        (lt1 _ _ 1 0 (by push_cast; ring) (by ring) (by simpa using k1)) (gt1 _ _ 2 0 (by push_cast; ring) (by ring)
+          (by simpa using ex2))
+    · exact phi_pos_up_witness m (n + 1) h (Or.inl rfl) (Or.inr (Or.inr (show tri m (n + 2) = _ by congr 1; ring)))
+        (lt1 _ _ 0 1 (by ring) (by push_cast; ring) (by simpa using k2)) (gt1 _ _ 0 2 (by ring) (by push_cast; ring)
+          (by simpa using ex3))
+    · have k4 : 1 < triQ ((triCoord p).1 - m - 2) ((triCoord p).2 - n - 1) := by
+        have : 1 ≤ triQ ((triCoord p).1 - m - 2) ((triCoord p).2 - n - 1) := by
+          unfold triQ; nlinarith [mul_nonneg (by linarith : (0 : ℝ) ≤ 1 - ((triCoord p).1 - m))
+            (by linarith : (0 : ℝ) ≤ 3 - ((triCoord p).1 - m)), mul_nonneg (by linarith : (0 : ℝ) ≤ 2 - ((triCoord p).1 - m))
+            (by linarith : (0 : ℝ) ≤ 1 - ((triCoord p).2 - n)), sq_nonneg (1 - ((triCoord p).2 - n))]
+        refine lt_of_le_of_ne this fun h => hd (m + 2) (n + 1) ?_
+        rw [hdist, ← Real.sqrt_one]; congr 1; rw [h]; push_cast; ring_nf
+      exact phi_pos_up_witness (m + 1) (n + 1) h (Or.inl rfl) (Or.inr (Or.inl (show tri (m + 2) (n + 1) = _ by congr 1; ring)))
+        (lt1 _ _ 1 1 (by push_cast; ring) (by push_cast; ring) (by simpa using k3)) (gt1 _ _ 2 1 (by push_cast; ring)
+          (by push_cast; ring) k4)
 
 /-- **R7's classes are maximal, down colours.** -/
 theorem r7_phi_pos_down {j : Fin 7} (hj : 4 ≤ j.val) : ∀ᵐ p ∂(volume.restrict (r7Cls j)ᶜ), 0 < phi (r7Cls j) p := by
-  sorry
+  rw [ae_restrict_iff' (measurableSet_r7Cls j).compl]
+  filter_upwards [measure_eq_zero_iff_ae_notMem.mp volume_iUnion_sphere_tri] with p hN hpj
+  have hne : r7Col p ≠ j := hpj
+  have hd := dist_tri_ne_one hN
+  have two : ∀ a b c d : ℤ, (c - a = 2 ∧ d - b = 0) ∨ (c - a = 0 ∧ d - b = 2) ∨ (c - a = 2 ∧ d - b = -2) ∨
+      (c - a = -2 ∧ d - b = 0) ∨ (c - a = 0 ∧ d - b = -2) ∨ (c - a = -2 ∧ d - b = 2) →
+      dist p (tri a b) ≤ 1 → 1 < dist p (tri c d) := fun a b c d h hp =>
+    lt_of_le_of_ne (one_le_dist_of_two (dist_tri_two a b c d (by
+      simp only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq]; omega)) hp) (Ne.symm (hd c d))
+  rcases r7Col_mem_tile p with ⟨m, n, hU, hc⟩ | ⟨m, n, hD, hc⟩
+  · obtain ⟨⟨hx1, hx2⟩, hx3⟩ := hU
+    rw [mem_closedBall] at hx1 hx2 hx3
+    have hj' : j = r7DownCol (m - 1) (n - 1) ∨ j = r7DownCol (m - 1) (n + 1) ∨ j = r7DownCol (m + 1) (n - 1) := by
+      simp only [Fin.ext_iff, r7DownCol] at hj ⊢; omega
+    rcases hj' with h | h | h
+    · exact phi_pos_down_witness (m - 1) (n - 1) h (Or.inr (Or.inr (show tri m n = _ by congr 1 <;> ring)))
+        (Or.inr (Or.inl (show tri (m - 1) n = _ by congr 1; ring)))
+        (lt_of_le_of_ne hx1 (hd _ _)) (two (m + 1) n (m - 1) n (by omega) hx2)
+    · exact phi_pos_down_witness (m - 1) (n + 1) h (Or.inl (show tri m (n + 1) = _ by congr 1; ring))
+        (Or.inr (Or.inr (show tri m (n + 2) = _ by congr 1 <;> ring)))
+        (lt_of_le_of_ne hx3 (hd _ _)) (two m n m (n + 2) (by omega) hx1)
+    · exact phi_pos_down_witness (m + 1) (n - 1) h (Or.inr (Or.inl (show tri (m + 1) n = _ by congr 1; ring)))
+        (Or.inr (Or.inr (show tri (m + 2) n = _ by congr 1 <;> ring)))
+        (lt_of_le_of_ne hx2 (hd _ _)) (two m n (m + 2) n (by omega) hx1)
+  · rw [hc] at hne
+    obtain ⟨hu1, hv1, huv, ex1, ex2, ex3⟩ := r7Down_coords hD
+    obtain ⟨k1, k2, k3⟩ := triQ_downTri_le hu1 hv1 huv
+    have hdist : ∀ a b : ℤ, dist p (tri a b) = √(triQ ((triCoord p).1 - a) ((triCoord p).2 - b)) := fun a b => by
+      rw [dist_eq_triQ, triCoord_tri]
+    have lt1 : ∀ a b : ℤ, ∀ α β : ℝ, (a : ℝ) = m + α → (b : ℝ) = n + β →
+        triQ ((triCoord p).1 - m - α) ((triCoord p).2 - n - β) ≤ 1 → dist p (tri a b) < 1 := by
+      intro a b α β ha hb h
+      refine lt_of_le_of_ne ?_ (hd a b)
+      rw [hdist, Real.sqrt_le_one, ha, hb]; convert h using 2 <;> ring
+    have gt1 : ∀ a b : ℤ, ∀ α β : ℝ, (a : ℝ) = m + α → (b : ℝ) = n + β →
+        1 < triQ ((triCoord p).1 - m - α) ((triCoord p).2 - n - β) → 1 < dist p (tri a b) := by
+      intro a b α β ha hb h
+      rw [hdist, Real.lt_sqrt zero_le_one, one_pow, ha, hb]; convert h using 2 <;> ring
+    have hj' : j = r7DownCol (m + 1) n ∨ j = r7DownCol m (n + 1) := by
+      simp only [ne_eq, Fin.ext_iff, r7DownCol] at hne hj ⊢; omega
+    rcases hj' with h | h
+    · exact phi_pos_down_witness (m + 1) n h (Or.inr (Or.inl rfl)) (Or.inl (show tri (m + 2) n = _ by congr 1; ring))
+        (lt1 _ _ 1 1 (by push_cast; ring) (by push_cast; ring) (by simpa using k3))
+        (gt1 _ _ 2 0 (by push_cast; ring) (by ring) (by simpa using ex2))
+    · exact phi_pos_down_witness m (n + 1) h (Or.inl rfl) (Or.inr (Or.inl (show tri m (n + 2) = _ by congr 1; ring)))
+        (lt1 _ _ 1 1 (by push_cast; ring) (by push_cast; ring) (by simpa using k3))
+        (gt1 _ _ 0 2 (by ring) (by push_cast; ring) (by simpa using ex3))
 
 /-- **FS111-M-R7**, last clause: every boundary is a unit arc centred at a lattice point carrying both its side colours — a point
 in the essential closure of two classes is at distance exactly `1` from a lattice point in the support of both. -/

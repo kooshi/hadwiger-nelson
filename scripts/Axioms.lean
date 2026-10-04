@@ -3111,6 +3111,35 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.sqrt_triQ_add_le
 #print axioms HadwigerNelson.Plane.triQ_neg
 #print axioms HadwigerNelson.Plane.r7Down_coords
+#print axioms HadwigerNelson.Plane.continuous_triCoord
+#print axioms HadwigerNelson.Plane.r7ColTri_of_cell
+#print axioms HadwigerNelson.Plane.mem_essSupport_of_isOpen
+#print axioms HadwigerNelson.Plane.sqrt_three_sq_lt
+#print axioms HadwigerNelson.Plane.isOpen_r7UpOpen
+#print axioms HadwigerNelson.Plane.isOpen_r7DownOpen
+#print axioms HadwigerNelson.Plane.r7UpOpen_subset
+#print axioms HadwigerNelson.Plane.r7DownOpen_subset
+#print axioms HadwigerNelson.Plane.mem_closure_r7UpOpen
+#print axioms HadwigerNelson.Plane.mem_closure_r7DownOpen
+#print axioms HadwigerNelson.Plane.mem_essSupport_of_mem_closure
+#print axioms HadwigerNelson.Plane.r7Up_vertex_mem_essSupport
+#print axioms HadwigerNelson.Plane.r7Down_cusp_mem_essSupport
+#print axioms HadwigerNelson.Plane.r7_down_mem_essSupport
+#print axioms HadwigerNelson.Plane.not_mem_essClosure_of_eventually
+#print axioms HadwigerNelson.Plane.triQ_tangent
+#print axioms HadwigerNelson.Plane.r7_local
+#print axioms HadwigerNelson.Plane.r7_far_vertex
+#print axioms HadwigerNelson.Plane.phi_pos_of_mem_open
+#print axioms HadwigerNelson.Plane.phi_pos_of_star
+#print axioms HadwigerNelson.Plane.r7UpOpen_star
+#print axioms HadwigerNelson.Plane.triQ_star
+#print axioms HadwigerNelson.Plane.r7DownOpen_star
+#print axioms HadwigerNelson.Plane.triQ_downTri_le
+#print axioms HadwigerNelson.Plane.dist_tri_ne_one
+#print axioms HadwigerNelson.Plane.one_le_dist_of_two
+#print axioms HadwigerNelson.Plane.dist_tri_two
+#print axioms HadwigerNelson.Plane.phi_pos_up_witness
+#print axioms HadwigerNelson.Plane.phi_pos_down_witness
 
 #eval IO.println "=== PURCHASED ==="
 
