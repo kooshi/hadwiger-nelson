@@ -4,7 +4,7 @@
 This file is FS-129's theorem record: every statement the audit's readers derived, as an entry in the deriver's grammar, gated by
 `python3 .claude/skills/ephodos/scripts/derive_gate.py all plans/FS129-derivation.md`. It is assembled by `tools/fs129_z1_assemble.py` from
 the readers' records: each block is the reader's, verbatim, with its `§` addresses pointed into the reader's record; the record job's changes
-are named in the prose under the entry they touch. FS129-SR3's entries (pass 3's last items) are FS129-Z2's to add.*
+are named in the prose under the entry they touch. FS129-SR3's four entries are included (the brief's amendment of 2026-10-03).*
 
 ## What FS-129 is
 
@@ -17,7 +17,7 @@ lanes split by milestone number — **lane A**, the arithmetic era (through FS-1
 |---|---|---|---|
 | 1, open steps ("finding new paths") | which held result closes, shortens or reduces each step of Poros's demand list (`data/fs129/demand-judged.md`) | `plans/FS129-OA1-audit.md` | `plans/FS129-OR1-audit.md` |
 | 2, mechanisms ("interweaving") | where each grokking's mechanism bears and was not applied | `plans/FS129-MA1-audit.md`, `plans/FS129-MA2-audit.md` | `plans/FS129-MR1-audit.md` |
-| 3, merges and strengthening | statements that are one; hypotheses that weaken; records that disagree; the vacuity sort; the Lean order | `plans/FS129-SA1-audit.md` | `plans/FS129-SR1-audit.md`, `plans/FS129-SR2-audit.md` (and FS129-SR3, running) |
+| 3, merges and strengthening | statements that are one; hypotheses that weaken; records that disagree; the vacuity sort; the Lean order | `plans/FS129-SA1-audit.md` | `plans/FS129-SR1-audit.md`, `plans/FS129-SR2-audit.md`, `plans/FS129-SR3-audit.md` |
 
 Each reader's report is `data/fs129/reports/<job>.md`; the inventory is `plans/FS129-close-inventory.md`.
 
@@ -40,16 +40,18 @@ run those searches (its brief keeps each line as measured), so each such debt is
 | FS129-SA1-FALC-RED's argument for the shared statement | FS129-OA1-FALC-RED's argument |
 | FS129-SR1-BENDANY, with FS129-SR1-BENDLE3 | FS129-OR1-BENDFRAG, FS129-OR1-BEND3 |
 | FS129-SR1-RINGBAND (if any of the family is formalized) | FS129-OA1-RINGWIND (and FS110-N2-RING, FS110-Y3-GP) |
+| FS129-SR3-QFREE-NS, over FS129-SR3-EMPTY-NS (FS116-V6's route) | FS129-OR1-QFREE (and FS116-Y4-EMPTY; FS116-S1-QF read as its case) |
 
 Pass 3's entries that replace earlier milestones' statements (FS129-SR1-TWOCIRC, -SIXQ; FS129-SR2-CLOSURE, -HULLSET, -SUPK, -DISC1TS, -YESLIM-EQ,
--QFCASE, -TOUCHW; FS129-SA1-SQRT3-LOCAL) say so in their own handoffs; the full lists for the Lean backlog are SA1 § 6.3, SR1 § 6.2 and SR2 § 4.3.
+-QFCASE, -TOUCHW; FS129-SR3-OUTERADJ, -E2ONE; FS129-SA1-SQRT3-LOCAL) say so in their own handoffs; the full lists for the Lean backlog are SA1 § 6.3, SR1 § 6.2, SR2 § 4.3 and SR3 § 5.1.
 
 **Record-job notes** (each under its entry): FS129-SR2-QFCASE read FS-116's "simple" at p only — raised by this job and resolved by
-FS129-SR3 (its FS129-SR3-QFREE-NS drops "simple" from QFREE; `plans/FS129-SR3-audit.md` § Stage 2), so QFCASE stands; FS129-MR1-DOUBLETIP carries
+FS129-SR3 (its FS129-SR3-QFREE-NS drops "simple" from QFREE; `plans/FS129-SR3-audit.md` § Stage 2), so QFCASE stands, its fields citing QFREE-NS; FS129-MR1-DOUBLETIP carries
 SR3's caution that it cannot replace FS116-V6-HUG without losing FS129-SR3-EMPTY-NS; FS129-SR1-BENDLE3 omits FS129-OR1-BEND3's tile
 clause, which FS129-SR1-BENDANY carries; FS129-SR1-RINGBAND does not restate FS129-OA1-RINGWIND's periodicity clauses. No hypothesis a source needed
 is dropped by a merged form. Corrections made inside entries: FS129-MR1-DOUBLETIP's `uses only:` (without FS116-N2-STAR) and FS129-OA1-RINGWIND's
-prior art (inventory item 100); FALC-RED's argument by supersession (items 67, 106).
+prior art (inventory item 100); FS129-SR2-QFCASE's `uses only:`, `grade:` and `handoff:` (QFREE-NS; items 125, 130); FALC-RED's argument by
+supersession (items 67, 106).
 
 
 ## 1. Lane A — the slack residue plane and the Falconer fan, merged (pass 3's forms first)
@@ -670,40 +672,80 @@ derivation: FS129-OR1-QFREE-CLASS
 
 Rests on it: FS129-OR1-QFREE; and any later Γ-free exclusion in one of the four classes becomes a (Q)-free one at once. Its input FS129-OR1-BENDFRAG is superseded by FS129-SR1-BENDANY, which carries the same step (BENDANY's prose).
 
-derivation: FS129-OR1-QFREE
-  statement: no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a
-    ring carrying no (Q) arc
-  uses only: FS116-Y4-EMPTY (the same statement with "no arc of Γ" for "no (Q) arc"); FS129-OR1-QFREE-CLASS at the non-Siamese simple class
-  not claimed: anything in the Siamese or non-simple classes (FS-123 question 3; FS-124 case 7); anything at k ≥ 7 (EMPTY's own limit); anything
-    for rings that carry a (Q) arc (FS-124); that a four-colour vertex with a (Q) ring dies at any radius
+derivation: FS129-SR3-EMPTY-NS
+  statement: no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying
+    no arc of Γ
+  uses only: FS116-V6's route to FS116-Y4-EMPTY (`plans/FS116-V6-verification.md` § 2.2) — V6-DIAM, V6-E1, V6-DICH, V6-RING, V6-WIN, V6-GERM, V6-TIP,
+    V6-HUBS, V6-HUG (its colour step through V6-GERM), V6-ANTI and V6-COUNT's count — none of which reads simplicity (§ 2.1); V6-COUNT's last step read on
+    sectors: every tile of p owns a sector at p, and two cyclically consecutive sectors of the two tipper groups share an edge, against V6-ANTI
+  not claimed: anything in the Siamese class (V6-RING's one tile per colour at p, V6-TIP's tip and V6-HUG's uniqueness of the tip and of R⁻, R⁺ read
+    non-Siamese); anything at k ≥ 7 (V6-RING and V6-TIP spend six); that FS116-Y4's own route carries the non-simple class (it reads one cone per tile at
+    a double-tipped hub)
+  converse: one-way — a non-existence
+  argument: FS129-SR3-audit.md § 2.1 Step by step
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none can exist (a non-existence); with the ring condition dropped the class is inhabited — FS114-Y2-BOWTIE, non-Siamese, about a degree-4
+    vertex of four colours, its ring carrying two (Q) arcs; the count and the sector step are control fs129-sr3-simple
+  prior art: partly: FS116-Y4-EMPTY (held, two routes, the simple class); FS116-V6 left the non-simple class undecided ("whether the conclusion survives
+    without them I did not decide", `plans/FS116-V6-verification.md` § 2.3 item 4); no outside search — owed
+  handoff: de Bruijn — in place of FS116-Y4-EMPTY, on V6's route: V6-HUG's own colour step (V6-GERM, the Γ-free ring's germs all off Γ), not
+    FS129-MR1-DOUBLETIP's cone step, and V6-COUNT's last step on sectors as here
+
+control: fs129-sr3-simple
+  of: FS129-SR3-EMPTY-NS — V6-COUNT's count (three antipodal two-path patterns, disjoint tipper groups) and its last step on sectors, any number per tile
+  run: python3 ../tools/fs129_sr3_simple.py
+  expect: simple: count ok; sectors ok
+  fault: python3 ../tools/fs129_sr3_simple.py --fault-sector
+
+control: fs129-sr3-simple-hug
+  of: FS129-SR3-EMPTY-NS — the count reads V6-HUG: without it single-edge paths survive
+  run: python3 ../tools/fs129_sr3_simple.py
+  expect: simple: count ok; sectors ok
+  fault: python3 ../tools/fs129_sr3_simple.py --fault-hug
+
+Rests on it: FS129-SR3-QFREE-NS, and through it FS129-SR2-QFCASE. It replaces FS116-Y4-EMPTY in the Lean order on FS116-V6's route (V6-HUG's own colour step through V6-GERM, V6-COUNT's last step on sectors), never through FS129-MR1-DOUBLETIP's cone step, which reads simplicity at the hubs (`plans/FS129-SR3-audit.md` § 2.3; inventory items 126, 131). FS116-Y4's own route does use simplicity. Prior art partly in-house: FS116-V6 had left the non-simple class undecided.
+
+derivation: FS129-SR3-QFREE-NS
+  statement: no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying
+    no (Q) arc
+  uses only: FS129-SR3-EMPTY-NS (for every r > 1); FS129-OR1-QFREE-CLASS at the class of non-Siamese fragments, through FS129-OR1-BENDFRAG (or
+    FS129-SR1-BENDANY), whose fragment keeps non-Siamese, p's colours and its tiles at p, and whose validity reads no simplicity (§ 2.1)
+  not claimed: anything in the Siamese class (FS-123's question 3); anything at k ≥ 7; anything for rings that carry a (Q) arc (FS-124); that a vertex
+    with a (Q) ring dies at any radius
+  converse: one-way — a non-existence
   argument: FS129-OR1-audit.md § Argument for FS129-OR1-QFREE-CLASS
   verdict: derived
-  grade: derived from: FS116-Y4-EMPTY, FS129-OR1-QFREE-CLASS
+  grade: derived from: FS129-SR3-EMPTY-NS, FS129-OR1-QFREE-CLASS
   minds: 1
-  model: FS114-Y2-BOWTIE, a non-Siamese valid six-coloured fragment on B̄(p, 3√3/5) about a degree-4 vertex of four colours — its ring carries
-    two (Q) arcs, the Reuleaux caps (FS-116's erratum under FS114-N7-3T), so the class is inhabited and the statement's alternative holds there
+  model: FS114-Y2-BOWTIE, non-Siamese, on B̄(p, 3√3/5) about a degree-4 vertex of four colours — its ring carries two (Q) arcs, so the class is inhabited
+    and the statement's alternative holds there
   prior art: owed — in-house
-  handoff: de Bruijn — the statement and its not claimed, over FS116-Y4-EMPTY (FS-116's module) and FS129-OR1-BENDFRAG
+  handoff: de Bruijn — in place of FS129-OR1-QFREE (it drops "simple"), over FS129-SR3-EMPTY-NS and FS129-SR1-BENDANY; FS116-S1-QF is then its case
+    with no "simple at p" step
 
-Rests on it: FS129-SR2-QFCASE; FS-123's question 1, answered yes (J1, inventory item 54); `CLAUDE.md` item 31's open case "(Q)-free rings with (R2) arcs", closed in the non-Siamese simple class (inventory item 57, for FS129-Z2 to score); in OR1's § J3, NO-SAT's case 2 (SAT-QFREE) and case 1's G3, closed in the non-Siamese simple class; FS116-Y4-EMPTY's not-claimed line, whose erratum this job files. Pass 3's attack on its two named steps did not succeed (`plans/FS129-SR1-audit.md` § 2.1; a checking reading, not a second mind). Whether a blind second mind runs is Kooshi's call (inventory item 56); the default files it derived, one mind.
+Rests on it: FS129-SR2-QFCASE (S1-QF is its case, no simplicity step); FS-123's question 3, whose non-simple half is closed for (Q)-free rings, the Siamese half left; FS116-C114-LOCAL-F's Γ-free line and FS116-Y4-EMPTY's not-claimed line, which narrow to the Siamese class (inventory items 125, 130; FS129-Z2's stub lines). It supersedes FS129-OR1-QFREE, and FS129-SR1-BENDANY carries the bend step as it does for QFREE (BENDANY's prose). The argument address is OR1's, as SR3 filed it: the class-to-class passage, read at the non-Siamese class.
 
 derivation: FS129-SR2-QFCASE
   statement: FS116-S1-QF's statement — no non-Siamese valid fragment on B̄(p, 2), saturated on B̄(p, 1), whose ring ω(p) carries no (Q) arc, has at p a
     degree-4 vertex of four colours whose four edges are segments at right angles — is a case of FS129-OR1-QFREE
-  uses only: FS129-OR1-QFREE; that a degree-4 vertex of four colours with four edges has four sectors, one tile each, so the fragment is simple at p;
-    that radius 2 is above 1; FS-116's "valid fragment", six-coloured unless "k-coloured" is written
+  uses only: FS129-SR3-QFREE-NS (S1-QF's class — non-Siamese, valid, six colours, radius 2 > 1, a degree-4 vertex of four colours, a ring
+    carrying no (Q) arc — lies inside its class; no simplicity is read); that radius 2 is above 1; FS-116's "valid fragment", six-coloured unless
+    "k-coloured" is written
   not claimed: anything for S1-QF in a k-coloured reading with k ≥ 7 (QFREE's limit); anything about saturation's role (QFREE needs none); anything for
     rings carrying a (Q) arc
   argument: FS129-SR2-audit.md § 3.2.2 FS129-SR2-QFCASE, the argument
   verdict: derived
-  grade: derived from: FS129-OR1-QFREE
+  grade: derived from: FS129-SR3-QFREE-NS
   minds: 1
   model: none — a no-go, its class empty (by S1-QF's route and by QFREE); with "no (Q) arc" dropped the class is inhabited (QFREE's model,
     FS114-Y2-BOWTIE, whose ring carries two (Q) arcs), so the statement is not empty for want of fragments
   prior art: partly: FS116-S1-QF (its own route through S1-LENS, S1-EXIT, S1-CLUSTER); FS129-OR1-QFREE
-  handoff: de Bruijn — formalize QFREE (over FS116-Y4-EMPTY) and read S1-QF as its case; S1-QF's own route (LENS, EXIT, CLUSTER) is then a second route
+  handoff: de Bruijn — formalize FS129-SR3-QFREE-NS (over FS129-SR3-EMPTY-NS, on FS116-V6's route, and FS129-SR1-BENDANY) and read S1-QF as its
+    case; S1-QF's own route (LENS, EXIT, CLUSTER) is then a second route
 
-Rests on it: nothing. **Record-job note (2026-10-03), the condition raised and resolved the same evening:** the argument (`plans/FS129-SR2-audit.md` § 3.2.2) shows a fragment of FS116-S1-QF's class to be simple at p, reading FS-116's "simple" as "one sector per tile at p"; `data/fs116/claims.md` § 0 defines simple globally ("every tile an open disc whose closure meets each other tile's closure in a connected set or not at all, and does not meet itself"), and FS116-S1-QF does not assume it, so FS129-OR1-QFREE as stated did not apply to S1-QF's fragments (raised to the coordinator by this job). **Resolved by FS129-SR3** (`plans/FS129-SR3-audit.md` § Stage 2 — SAVED: item (d), commit 2160c171; derived, one mind): on FS116-V6's route to FS116-Y4-EMPTY the chain under QFREE (WHOLE, the bends, QFREE-CLASS, EMPTY) never uses "simple", not even at p, and SR3 files FS129-SR3-EMPTY-NS and FS129-SR3-QFREE-NS ("no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no (Q) arc"). So this entry stands, read as citing FS129-SR3-QFREE-NS, its "simple at p" step idle; and inventory item 117's correction to `plans/FS129-OR1-audit.md` § J3 (S1-QF has no non-simple remainder) stands. SR3's entries are FS129-Z2's to file. FS116-Y4's own route does use simplicity (at p and at a double-tipped hub), so the kernel module follows V6's route.
+Rests on it: nothing. **Corrected by the record job (2026-10-03; inventory items 124, 125, 130):** the argument (`plans/FS129-SR2-audit.md` § 3.2.2) showed a fragment of FS116-S1-QF's class simple at p, glossing FS-116's "simple" as "one sector per tile at p"; `data/fs116/claims.md` § 0 defines simple for the whole fragment, and S1-QF does not assume it, so the statement's "a case of FS129-OR1-QFREE" does not hold as worded (QFREE is stated for simple fragments). This job raised it; FS129-SR3 resolved it (`plans/FS129-SR3-audit.md` § 2.3): S1-QF's class lies inside FS129-SR3-QFREE-NS's, which drops "simple", so the conclusion stands with the gloss idle. Read the statement as "… is a case of FS129-SR3-QFREE-NS"; the statement above is SR2's, left verbatim. Inventory item 117's correction to `plans/FS129-OR1-audit.md` § J3 (S1-QF has no non-simple remainder) stands. As SR2 filed them: `uses only:` began "FS129-OR1-QFREE; that a degree-4 vertex of four colours with four edges has four sectors, one tile each, so the fragment is simple at p;", `grade:` read "derived from: FS129-OR1-QFREE", and the handoff "formalize QFREE (over FS116-Y4-EMPTY) and read S1-QF as its case". *Fields this job changed:* `uses only:`, `grade:` and `handoff:` cite FS129-SR3-QFREE-NS in place of FS129-OR1-QFREE, and the step "so the fragment is simple at p" is withdrawn (SR3 § 2.3; inventory items 125, 130).
 
 derivation: FS129-MR1-DOUBLETIP
   statement: in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let
@@ -750,6 +792,48 @@ control: fs129-mr1-doubletip-flank
 
 Rests on it: FS116-V6-HUG, its Γ-free instance (a ring with no arc of Γ has every germ off (Q) arcs; `plans/FS129-SR1-audit.md` § Stage 3, group 1), so the kernel proves this form once and V6-HUG from it; and FS-124's ring types, which it prunes in case 5 and at hubs and kind-T semi-hubs in case 1 (inventory item 82; FS129-Z2's stub line). It does not reach SEMI-PAR3. **Changed by the record job** (inventory items 95, 100): FS116-N2-STAR is dropped from `uses only:`, `grade:` and `handoff:` — pass 3's attack (`plans/FS129-SR1-audit.md` § 2.2, a checking reading that did not succeed) found that step 3 needs only non-Siamese and FS116-V4-DICHOTOMY. As MR1 filed them: `uses only:` held "FS116-N2-STAR (C(y) = A(p) ⊔ T_y ⊔ O_y at a change point, p of four colours)" between FLANK and V4-TWIST; `grade:` read "derived from: FS116-Y4-FLANK, FS116-RING-GERM, FS116-N2-STAR, FS116-V4-TWIST, FS116-V4-DICHOTOMY"; the handoff read "over FS116-Y4-FLANK, RING-GERM (i) and N2-STAR". **Caution for the Lean list (FS129-SR3, `plans/FS129-SR3-audit.md` § Stage 2 — SAVED: item (d)):** SR1 § 6.2 item 2, "DOUBLETIP in place of V6-HUG", would lose FS129-SR3-EMPTY-NS, because this entry's step 3 uses one cone per tile at the hubs; FS116-V6-HUG's own colour step is kept for the Γ-free ring. *Fields this job changed:* FS116-N2-STAR dropped from `uses only:`, `grade:` and `handoff:` (SR1 § 2.2: step 3 needs only non-Siamese and FS116-V4-DICHOTOMY; inventory items 95, 100).
 
+derivation: FS129-SR3-OUTERADJ
+  statement: in a non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) and
+    y′ = r(ψ + 60°) be change points of the ring such that neither the arc of ω(p) just counter-clockwise of r(ψ − 60°) nor the arc just clockwise of
+    r(ψ + 120°) lies on a (Q) arc; then no colour of p is at once the only colour carried at y by a tile that is not a tile of p and the only colour
+    carried at y′ by a tile that is not a tile of p
+  uses only: FS116-RING-GERM (ii) at y (outer pair u⁻, v⁺) and at y′ (u′⁻, v′⁺) — u⁻ (the ring just clockwise of y′) and v′⁺ (just counter-clockwise
+    of y) are off Γ because y′ and y are change points, the other two by hypothesis — and its first clause (p has four colours, X and X̄ absent);
+    V6-GERM's neighbourhood form at y from the germs u⁻ (colour X) and u⁺ (colour X̄), and at y′ from v′⁺ (X) and v′⁻ (X̄), all off Γ (the argument of
+    FS116-N1-GERM-R, which reads only N-E1 and the germs' colours); the germs' colours from validity (ring points 60° apart differ, two absent colours);
+    non-Siamese (one tile per colour at a point; distinct tiles of one colour have no closure points below 1 apart, FS116-V4-DICHOTOMY); the diameter
+    bound; FS129-SR1-TWOCIRC at the mirror apex y + y′ − p; six colours, spent in RING-GERM and in the colour of the tile beyond the outer tile
+  not claimed: anything when y or y′ carries two or more outer colours (the tile beyond the outer tile may then be outer and unpinned: tangent segments
+    stay exactly 1 apart, plant --fault-tangent); anything when the arc just counter-clockwise of r(ψ − 60°) or just clockwise of r(ψ + 120°) lies on a
+    (Q) arc (RING-GERM (ii) is then unavailable); the Siamese class; anything at k ≥ 7 (a third absent colour leaves the tile beyond unpinned, plant
+    --fault-seven); that y or y′ has a single tip
+  converse: one-way — a non-existence; "the only" names the hypothesis, not a characterization
+  argument: FS129-SR3-audit.md § 3.1 Argument for FS129-SR3-OUTERADJ
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none can exist (a non-existence, hypothetical by design); the hypotheses without the shared colour are met at a four-colour hub whose neighbour
+    has another outer colour — no held fragment has two change points 60° apart (as for DOUBLETIP); FS116-V6's stage-1 candidate (outer colours 2, 3 at
+    y_0 and 2 at y_1, `plans/FS116-V6-verification.md` § 2.3 item 1) shows the rule at work: its builder gave y_0 a second outer colour because of it
+  prior art: owed — an in-house composition; its last step is FS116-V6-ADJ's and FS114-Y5-PXKILL's mechanism (G83's straddle), unsearched outside
+  handoff: de Bruijn — the statement and its not claimed, over RING-GERM (ii), V6-GERM's neighbourhood form and TWOCIRC; it carries FS116-V6-ADJ's
+    argument as its last step, so V6-ADJ is formalized class-free (two distinct same-colour tiles holding the two lens arcs beyond a unit pair) or
+    not at all
+
+control: fs129-sr3-outeradj
+  of: FS129-SR3-OUTERADJ — the cone facts at y and y′ (interval arithmetic), the colour step, and the mirror arcs below 1 (identity exact, grid by intervals)
+  run: python3 ../tools/fs129_sr3_outeradj.py
+  expect: outeradj: cones ok; colour ok; arcs ok
+  fault: python3 ../tools/fs129_sr3_outeradj.py --fault-tangent
+
+control: fs129-sr3-outeradj-seven
+  of: FS129-SR3-OUTERADJ — the colour step spends six: with a third absent colour the tile beyond the outer tile is not forced to be X
+  run: python3 ../tools/fs129_sr3_outeradj.py
+  expect: outeradj: cones ok; colour ok; arcs ok
+  fault: python3 ../tools/fs129_sr3_outeradj.py --fault-seven
+
+Rests on it: FS-124's ring types, which it prunes beside FS129-MR1-DOUBLETIP (DOUBLETIP's outer twin; inventory item 133, FS129-Z2's stub line). It widens FS116-V6-ADJ (two change points 60° apart, each with its outer germ off the shared arc free of (Q) arcs, never share a single outer colour; non-Siamese, no simplicity) and carries V6-ADJ's argument as its last step, so V6-ADJ is formalized class-free or not at all (its handoff). It rests on FS129-SR1-TWOCIRC's identity, through V6-ADJ's step.
+
 derivation: FS129-SR1-TWOCIRC
   statement: let y₀ and y₁ be points of the plane with |y₀ − y₁| = 1, and p a point with |p − y₀| = |p − y₁| = 1; for real s, t let a(s) be the point
     of ω(y₀) reached from y₁ by turning through the angle s about y₀ toward p, and b(t) the point of ω(y₁) reached from y₀ by turning through the
@@ -786,6 +870,45 @@ Rests on it: the identity steps of FS114-Y5-PXKILL, FS116-V6-HUG, FS116-V6-ADJ a
 
 
 ## 5. Lane R — the other entries
+
+derivation: FS129-SR3-E2ONE
+  statement: in a non-Siamese simple valid fragment containing a neighbourhood of the closed unit disc about p, with a pinwheel at p, no edge at p of
+    length 60° (no E1) and E2 at exactly one blade t_{c+1}, the pocket colours satisfy m_{c−1} ≠ m_c; hence POCKET at w_c and CASE at q_c hold, and no
+    such pinwheel exists at radius 1 + ε; in particular FS114-Y6-E2RED's survivor family S6, (120°, b, 180° − b, 60°), has no member
+  uses only: FS114-Y5-ALT at the three pairs (μ_c, μ_{c+1}), (μ_{c+1}, μ_{c+2}), (μ_{c+2}, μ_{c+3}) — each needs only all edges below 60° and no E2 at
+    t_{c+2}, t_{c+3}, t_c respectively; that each pocket colour m_j is one of the two colours absent at p (FS114-Y5-MU's setting: pocket tiles lie
+    inside B(p, 1) and are not tiles of p); FS114-Y6-E2RED's chain clause (E2 at t_{c+1} breaks only ALT(μ_{c−1}, μ_c), which only POCKET at w_c reads,
+    which only CASE at q_c reads — two readings, FS114-Y6's and YB5's blind one); FS114-Y5-PINALL's chain outside E1 and E2 (POCKET, CASE, REDUCE,
+    PIN120-60, PXKILL), whose use of "no E2" is ALT alone (YB4 item 11, YB5 item 6)
+  not claimed: E2 at two or more blades (two broken ALTs leave the parity free: plant --fault-two); E1, with or without E2 (E1 breaks MU at its edge,
+    so not every pocket colour is defined, and the residues E1-Z, E1-60, E1-ν, E1{1,2}, E1{1,4} stand); E1CAP's wrap at λ_3; anything in the Siamese
+    or non-simple class
+  converse: one-way — a non-existence; "exactly one" is a hypothesis, not a characterization
+  argument: FS129-SR3-audit.md § 1.3 Argument for FS129-SR3-E2ONE
+  verdict: derived
+  grade: derived from: FS114-Y5-PINALL, FS114-Y6-E2RED
+  minds: 1
+  model: none can exist (a non-existence, hypothetical by design); the local configuration of P_90 at radius 1 + ε, built by formula
+    (`tools/fs114_y5_px.py`), meets every hypothesis but E2, and no held object has E2 at a blade; the parity and S6's death under CASE are control
+    fs129-sr3-e2one
+  prior art: owed — an in-house composition (ALT, three times, around the four-cycle of pockets); the pinwheel exclusion's own prior art is FS-114's
+    gate ("ab:Reuleaux & ab:colo*" (3), "ab:exclusion zone & ab:colo*" (0))
+  handoff: de Bruijn — the parity step as a corollary of ALT at three pairs; with it FS114-Y5-PINALL is formalized with the exception "E1, or E2 at two
+    or more blades", and S6 leaves FS114-K1's case list
+
+control: fs129-sr3-e2one
+  of: FS129-SR3-E2ONE — the parity on all 64 colourings of the four pockets for each broken pair, and S6 killed by CASE at q_c on a grid of b
+  run: python3 ../tools/fs129_sr3_e2one.py
+  expect: e2one: parity ok; F2 ok
+  fault: python3 ../tools/fs129_sr3_e2one.py --fault-two
+
+control: fs129-sr3-e2one-case
+  of: FS129-SR3-E2ONE — CASE at q_c reads the neighbour a_{c−1} = 120°, not a_{c+1}
+  run: python3 ../tools/fs129_sr3_e2one.py
+  expect: e2one: parity ok; F2 ok
+  fault: python3 ../tools/fs129_sr3_e2one.py --fault-case
+
+Rests on it: FS114-Y5-PINALL's exception, which narrows to "E1, or E2 at two or more blades", and FS114-Y5-PIN120's; FS114-Y6-E2RED's not-claimed line (S6 is empty); FS114-K1's case list, which drops S6 and the wrap's E2RED site (inventory items 127, 130). This job files the errata under FS114-Y5-PINALL and FS114-Y6-E2RED (`plans/FS114-derivation.md`); the stub lines are FS129-Z2's (item 133).
 
 derivation: FS129-SR1-SIXQ
   statement: let F be a valid k-coloured fragment, for any k ≥ 1, Siamese pairs allowed, on a closed disc of radius above 1 about a point p at which
@@ -1015,6 +1138,24 @@ Rests on it: FS116-N2-RECIP, which uses FS116-N1-TOUCH and reads the wider form 
 
 
 ## 6. Lane R — superseded forms (kept, marked)
+
+derivation: FS129-OR1-QFREE
+  statement: no non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a
+    ring carrying no (Q) arc
+  uses only: FS116-Y4-EMPTY (the same statement with "no arc of Γ" for "no (Q) arc"); FS129-OR1-QFREE-CLASS at the non-Siamese simple class
+  not claimed: anything in the Siamese or non-simple classes (FS-123 question 3; FS-124 case 7); anything at k ≥ 7 (EMPTY's own limit); anything
+    for rings that carry a (Q) arc (FS-124); that a four-colour vertex with a (Q) ring dies at any radius
+  argument: FS129-OR1-audit.md § Argument for FS129-OR1-QFREE-CLASS
+  verdict: derived
+  grade: derived from: FS116-Y4-EMPTY, FS129-OR1-QFREE-CLASS
+  minds: 1
+  model: FS114-Y2-BOWTIE, a non-Siamese valid six-coloured fragment on B̄(p, 3√3/5) about a degree-4 vertex of four colours — its ring carries
+    two (Q) arcs, the Reuleaux caps (FS-116's erratum under FS114-N7-3T), so the class is inhabited and the statement's alternative holds there
+  prior art: owed — in-house
+  handoff: none — superseded by FS129-SR3-QFREE-NS (FS129-Z1, 2026-10-03; the same statement with "simple" dropped: SR3 § 2.2, inventory items 125, 128), which de Bruijn formalizes once in its place; the
+    reader's handoff, verbatim: "de Bruijn — the statement and its not claimed, over FS116-Y4-EMPTY (FS-116's module) and FS129-OR1-BENDFRAG"
+
+**Superseded** by FS129-SR3-QFREE-NS, the same statement with "simple" dropped, on FS116-V6's route (SR3 § 2.2); its not-claimed "the Siamese or non-simple classes" narrows to the Siamese class (inventory item 130). Rests on it, as filed: FS-123's question 1, answered yes (J1, inventory item 54); `CLAUDE.md` item 31's open case "(Q)-free rings with (R2) arcs", closed in the non-Siamese simple class (inventory item 57, for FS129-Z2 to score); in OR1's § J3, NO-SAT's case 2 (SAT-QFREE) and case 1's G3, closed in the non-Siamese simple class; FS116-Y4-EMPTY's not-claimed line, whose erratum this job files. Pass 3's attack on its two named steps did not succeed (`plans/FS129-SR1-audit.md` § 2.1; a checking reading, not a second mind). Whether a blind second mind runs is Kooshi's call (inventory item 56); the default files it derived, one mind. *Fields this job changed:* `handoff:` marks the supersession and quotes the reader's handoff.
 
 derivation: FS129-OR1-BENDFRAG
   statement: let F be a valid six-coloured fragment on a closed disc B̄(p, r), r > 1, about a vertex p of at least four colours, and let

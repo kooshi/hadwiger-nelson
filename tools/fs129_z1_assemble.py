@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PLANS = ROOT / "plans"
 OUT = PLANS / "FS129-derivation.md"
-READERS = ["OA1", "OR1", "MA1", "MA2", "MR1", "SA1", "SR1", "SR2"]
+READERS = ["OA1", "OR1", "MA1", "MA2", "MR1", "SA1", "SR1", "SR2", "SR3"]
 HEAD = re.compile(r"^(derivation|control): ([\w.-]+)\s*$")
 FIELD = re.compile(r"^  ([a-z][a-z ]*?):\s?(.*)$")
 
@@ -109,6 +109,7 @@ SUPERSEDED = {
     "FS129-OR1-BENDFRAG": ("FS129-SR1-BENDANY", "SR1 § 6.2 item 5"),
     "FS129-OR1-BEND3": ("FS129-SR1-BENDANY with FS129-SR1-BENDLE3", "SR1 § 6.2 item 5"),
     "FS129-OA1-RINGWIND": ("FS129-SR1-RINGBAND", "SR1 § 6.2 item 8; neither crosses unless one of the family is formalized"),
+    "FS129-OR1-QFREE": ("FS129-SR3-QFREE-NS", "the same statement with \"simple\" dropped: SR3 § 2.2, inventory items 125, 128"),
 }
 
 
@@ -141,6 +142,17 @@ def override(name, block):
             "    functions for three-colourings) and row 132's index of density traces, both \"fail only at a swap\"; the ring-hexagon form outside the",
             "    house not searched (owed)"])
         changes.append("`prior art:` names the in-house prior forms FS110-N2-RING and FS110-Y3-GP (inventory item 100)")
+    if name == "FS129-SR2-QFCASE":
+        block = replace_field(block, "uses only", [
+            "  uses only: FS129-SR3-QFREE-NS (S1-QF's class — non-Siamese, valid, six colours, radius 2 > 1, a degree-4 vertex of four colours, a ring",
+            "    carrying no (Q) arc — lies inside its class; no simplicity is read); that radius 2 is above 1; FS-116's \"valid fragment\", six-coloured unless",
+            "    \"k-coloured\" is written"])
+        block = replace_field(block, "grade", ["  grade: derived from: FS129-SR3-QFREE-NS"])
+        block = replace_field(block, "handoff", [
+            "  handoff: de Bruijn — formalize FS129-SR3-QFREE-NS (over FS129-SR3-EMPTY-NS, on FS116-V6's route, and FS129-SR1-BENDANY) and read S1-QF as its",
+            "    case; S1-QF's own route (LENS, EXIT, CLUSTER) is then a second route"])
+        changes.append("`uses only:`, `grade:` and `handoff:` cite FS129-SR3-QFREE-NS in place of FS129-OR1-QFREE, and the step \"so the fragment is "
+                       "simple at p\" is withdrawn (SR3 § 2.3; inventory items 125, 130)")
     return block, changes
 
 
@@ -156,13 +168,13 @@ ORDER = [
     "FS129-OA1-NOLIN5", "FS129-MA1-NOAFF5", "FS129-MA1-FALC-T", "FS129-MA2-FALC-GAP4", "FS129-MA2-FALC-DICHO", "FS129-OA1-FALC-11",
     "FS129-MA1-FALC-19", "FS129-OA1-FALC-RED",
     ("R", "## 4. Lane R — the bends on a fragment and the (Q)-free ring"),
-    "FS129-OR1-WHOLE", "FS129-SR1-BENDANY", "FS129-SR1-BENDLE3", "FS129-OR1-QFREE-CLASS", "FS129-OR1-QFREE", "FS129-SR2-QFCASE",
-    "FS129-MR1-DOUBLETIP", "FS129-SR1-TWOCIRC",
+    "FS129-OR1-WHOLE", "FS129-SR1-BENDANY", "FS129-SR1-BENDLE3", "FS129-OR1-QFREE-CLASS", "FS129-SR3-EMPTY-NS", "FS129-SR3-QFREE-NS",
+    "FS129-SR2-QFCASE", "FS129-MR1-DOUBLETIP", "FS129-SR3-OUTERADJ", "FS129-SR1-TWOCIRC",
     ("R", "## 5. Lane R — the other entries"),
-    "FS129-SR1-SIXQ", "FS129-SR1-RINGBAND", "FS129-OR1-LOCALDENSE", "FS129-OR1-DISCF-NS", "FS129-OR1-TOP5", "FS129-SR2-CLOSURE",
+    "FS129-SR3-E2ONE", "FS129-SR1-SIXQ", "FS129-SR1-RINGBAND", "FS129-OR1-LOCALDENSE", "FS129-OR1-DISCF-NS", "FS129-OR1-TOP5", "FS129-SR2-CLOSURE",
     "FS129-SR2-HULLSET", "FS129-SR2-SUPK", "FS129-SR2-DISC1TS", "FS129-SR2-YESLIM-EQ", "FS129-SR2-TOUCHW",
     ("R", "## 6. Lane R — superseded forms (kept, marked)"),
-    "FS129-OR1-BENDFRAG", "FS129-OR1-BEND3", "FS129-OA1-RINGWIND",
+    "FS129-OR1-QFREE", "FS129-OR1-BENDFRAG", "FS129-OR1-BEND3", "FS129-OA1-RINGWIND",
 ]
 
 PROSE = {
@@ -234,21 +246,21 @@ PROSE = {
 "with BENDANY's tile clause, or that clause of BEND3 is lost.",
 "FS129-OR1-QFREE-CLASS": "Rests on it: FS129-OR1-QFREE; and any later Γ-free exclusion in one of the four classes becomes a (Q)-free one at once. Its "
 "input FS129-OR1-BENDFRAG is superseded by FS129-SR1-BENDANY, which carries the same step (BENDANY's prose).",
-"FS129-OR1-QFREE": "Rests on it: FS129-SR2-QFCASE; FS-123's question 1, answered yes (J1, inventory item 54); `CLAUDE.md` item 31's open case \"(Q)-free "
+"FS129-OR1-QFREE": "**Superseded** by FS129-SR3-QFREE-NS, the same statement with \"simple\" dropped, on FS116-V6's route (SR3 § 2.2); its "
+"not-claimed \"the Siamese or non-simple classes\" narrows to the Siamese class (inventory item 130). Rests on it, as filed: FS-123's question 1, answered yes (J1, inventory item 54); `CLAUDE.md` item 31's open case \"(Q)-free "
 "rings with (R2) arcs\", closed in the non-Siamese simple class (inventory item 57, for FS129-Z2 to score); in OR1's § J3, NO-SAT's case 2 (SAT-QFREE) "
 "and case 1's G3, closed in the non-Siamese simple class; FS116-Y4-EMPTY's not-claimed line, whose erratum this job files. Pass 3's attack on its two "
 "named steps did not succeed (`plans/FS129-SR1-audit.md` § 2.1; a checking reading, not a second mind). Whether a blind second mind runs is Kooshi's "
 "call (inventory item 56); the default files it derived, one mind.",
-"FS129-SR2-QFCASE": "Rests on it: nothing. **Record-job note (2026-10-03), the condition raised and resolved the same evening:** the argument "
-"(`plans/FS129-SR2-audit.md` § 3.2.2) shows a fragment of FS116-S1-QF's class to be simple at p, reading FS-116's \"simple\" as \"one sector per tile "
-"at p\"; `data/fs116/claims.md` § 0 defines simple globally (\"every tile an open disc whose closure meets each other tile's closure in a connected set "
-"or not at all, and does not meet itself\"), and FS116-S1-QF does not assume it, so FS129-OR1-QFREE as stated did not apply to S1-QF's fragments "
-"(raised to the coordinator by this job). **Resolved by FS129-SR3** (`plans/FS129-SR3-audit.md` § Stage 2 — SAVED: item (d), commit 2160c171; derived, "
-"one mind): on FS116-V6's route to FS116-Y4-EMPTY the chain under QFREE (WHOLE, the bends, QFREE-CLASS, EMPTY) never uses \"simple\", not even at p, "
-"and SR3 files FS129-SR3-EMPTY-NS and FS129-SR3-QFREE-NS (\"no non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex "
-"p of at least four colours has a ring carrying no (Q) arc\"). So this entry stands, read as citing FS129-SR3-QFREE-NS, its \"simple at p\" step idle; "
-"and inventory item 117's correction to `plans/FS129-OR1-audit.md` § J3 (S1-QF has no non-simple remainder) stands. SR3's entries are FS129-Z2's to "
-"file. FS116-Y4's own route does use simplicity (at p and at a double-tipped hub), so the kernel module follows V6's route.",
+"FS129-SR2-QFCASE": "Rests on it: nothing. **Corrected by the record job (2026-10-03; inventory items 124, 125, 130):** the argument "
+"(`plans/FS129-SR2-audit.md` § 3.2.2) showed a fragment of FS116-S1-QF's class simple at p, glossing FS-116's \"simple\" as \"one sector per tile at "
+"p\"; `data/fs116/claims.md` § 0 defines simple for the whole fragment, and S1-QF does not assume it, so the statement's \"a case of "
+"FS129-OR1-QFREE\" does not hold as worded (QFREE is stated for simple fragments). This job raised it; FS129-SR3 resolved it (`plans/FS129-SR3-audit.md` "
+"§ 2.3): S1-QF's class lies inside FS129-SR3-QFREE-NS's, which drops \"simple\", so the conclusion stands with the gloss idle. Read the statement as "
+"\"… is a case of FS129-SR3-QFREE-NS\"; the statement above is SR2's, left verbatim. Inventory item 117's correction to `plans/FS129-OR1-audit.md` § J3 "
+"(S1-QF has no non-simple remainder) stands. As SR2 filed them: `uses only:` began \"FS129-OR1-QFREE; that a degree-4 vertex of four colours with "
+"four edges has four sectors, one tile each, so the fragment is simple at p;\", `grade:` read \"derived from: FS129-OR1-QFREE\", and the handoff "
+"\"formalize QFREE (over FS116-Y4-EMPTY) and read S1-QF as its case\".",
 "FS129-MR1-DOUBLETIP": "Rests on it: FS116-V6-HUG, its Γ-free instance (a ring with no arc of Γ has every germ off (Q) arcs; `plans/FS129-SR1-audit.md` "
 "§ Stage 3, group 1), so the kernel proves this form once and V6-HUG from it; and FS-124's ring types, which it prunes in case 5 and at hubs and kind-T "
 "semi-hubs in case 1 (inventory item 82; FS129-Z2's stub line). It does not reach SEMI-PAR3. **Changed by the record job** (inventory items 95, 100): "
@@ -258,6 +270,21 @@ PROSE = {
 "FS116-V4-TWIST, FS116-V4-DICHOTOMY\"; the handoff read \"over FS116-Y4-FLANK, RING-GERM (i) and N2-STAR\". **Caution for the Lean list (FS129-SR3, `plans/FS129-SR3-audit.md` § Stage 2 — SAVED: item (d)):** SR1 § 6.2 "
 "item 2, \"DOUBLETIP in place of V6-HUG\", would lose FS129-SR3-EMPTY-NS, because this entry's step 3 uses one cone per tile at the hubs; "
 "FS116-V6-HUG's own colour step is kept for the Γ-free ring.",
+"FS129-SR3-EMPTY-NS": "Rests on it: FS129-SR3-QFREE-NS, and through it FS129-SR2-QFCASE. It replaces FS116-Y4-EMPTY in the Lean order on "
+"FS116-V6's route (V6-HUG's own colour step through V6-GERM, V6-COUNT's last step on sectors), never through FS129-MR1-DOUBLETIP's cone step, which "
+"reads simplicity at the hubs (`plans/FS129-SR3-audit.md` § 2.3; inventory items 126, 131). FS116-Y4's own route does use simplicity. Prior art partly "
+"in-house: FS116-V6 had left the non-simple class undecided.",
+"FS129-SR3-QFREE-NS": "Rests on it: FS129-SR2-QFCASE (S1-QF is its case, no simplicity step); FS-123's question 3, whose non-simple half is closed "
+"for (Q)-free rings, the Siamese half left; FS116-C114-LOCAL-F's Γ-free line and FS116-Y4-EMPTY's not-claimed line, which narrow to the Siamese class "
+"(inventory items 125, 130; FS129-Z2's stub lines). It supersedes FS129-OR1-QFREE, and FS129-SR1-BENDANY carries the bend step as it does for QFREE "
+"(BENDANY's prose). The argument address is OR1's, as SR3 filed it: the class-to-class passage, read at the non-Siamese class.",
+"FS129-SR3-OUTERADJ": "Rests on it: FS-124's ring types, which it prunes beside FS129-MR1-DOUBLETIP (DOUBLETIP's outer twin; inventory item 133, "
+"FS129-Z2's stub line). It widens FS116-V6-ADJ (two change points 60° apart, each with its outer germ off the shared arc free of (Q) arcs, never share "
+"a single outer colour; non-Siamese, no simplicity) and carries V6-ADJ's argument as its last step, so V6-ADJ is formalized class-free or not at "
+"all (its handoff). It rests on FS129-SR1-TWOCIRC's identity, through V6-ADJ's step.",
+"FS129-SR3-E2ONE": "Rests on it: FS114-Y5-PINALL's exception, which narrows to \"E1, or E2 at two or more blades\", and FS114-Y5-PIN120's; FS114-Y6-E2RED's "
+"not-claimed line (S6 is empty); FS114-K1's case list, which drops S6 and the wrap's E2RED site (inventory items 127, 130). This job files the "
+"errata under FS114-Y5-PINALL and FS114-Y6-E2RED (`plans/FS114-derivation.md`); the stub lines are FS129-Z2's (item 133).",
 "FS129-SR1-TWOCIRC": "Rests on it: the identity steps of FS114-Y5-PXKILL, FS116-V6-HUG, FS116-V6-ADJ and FS116-Y4-FLANK (each keeps its own pinning of "
 "two tiles), and through FLANK FS129-MR1-DOUBLETIP. It is Kooshi's \"where else can we use that identity?\" (`plans/FS116-close-inventory.md` item 142) "
 "answered: one law found three times, unnamed (inventory item 75).",
@@ -301,7 +328,7 @@ HEADER = """# FS-129 — the cross-application audit: the derivation file
 This file is FS-129's theorem record: every statement the audit's readers derived, as an entry in the deriver's grammar, gated by
 `python3 .claude/skills/ephodos/scripts/derive_gate.py all plans/FS129-derivation.md`. It is assembled by `tools/fs129_z1_assemble.py` from
 the readers' records: each block is the reader's, verbatim, with its `§` addresses pointed into the reader's record; the record job's changes
-are named in the prose under the entry they touch. FS129-SR3's entries (pass 3's last items) are FS129-Z2's to add.*
+are named in the prose under the entry they touch. FS129-SR3's four entries are included (the brief's amendment of 2026-10-03).*
 
 ## What FS-129 is
 
@@ -314,7 +341,7 @@ lanes split by milestone number — **lane A**, the arithmetic era (through FS-1
 |---|---|---|---|
 | 1, open steps ("finding new paths") | which held result closes, shortens or reduces each step of Poros's demand list (`data/fs129/demand-judged.md`) | `plans/FS129-OA1-audit.md` | `plans/FS129-OR1-audit.md` |
 | 2, mechanisms ("interweaving") | where each grokking's mechanism bears and was not applied | `plans/FS129-MA1-audit.md`, `plans/FS129-MA2-audit.md` | `plans/FS129-MR1-audit.md` |
-| 3, merges and strengthening | statements that are one; hypotheses that weaken; records that disagree; the vacuity sort; the Lean order | `plans/FS129-SA1-audit.md` | `plans/FS129-SR1-audit.md`, `plans/FS129-SR2-audit.md` (and FS129-SR3, running) |
+| 3, merges and strengthening | statements that are one; hypotheses that weaken; records that disagree; the vacuity sort; the Lean order | `plans/FS129-SA1-audit.md` | `plans/FS129-SR1-audit.md`, `plans/FS129-SR2-audit.md`, `plans/FS129-SR3-audit.md` |
 
 Each reader's report is `data/fs129/reports/<job>.md`; the inventory is `plans/FS129-close-inventory.md`.
 
@@ -337,16 +364,18 @@ run those searches (its brief keeps each line as measured), so each such debt is
 | FS129-SA1-FALC-RED's argument for the shared statement | FS129-OA1-FALC-RED's argument |
 | FS129-SR1-BENDANY, with FS129-SR1-BENDLE3 | FS129-OR1-BENDFRAG, FS129-OR1-BEND3 |
 | FS129-SR1-RINGBAND (if any of the family is formalized) | FS129-OA1-RINGWIND (and FS110-N2-RING, FS110-Y3-GP) |
+| FS129-SR3-QFREE-NS, over FS129-SR3-EMPTY-NS (FS116-V6's route) | FS129-OR1-QFREE (and FS116-Y4-EMPTY; FS116-S1-QF read as its case) |
 
 Pass 3's entries that replace earlier milestones' statements (FS129-SR1-TWOCIRC, -SIXQ; FS129-SR2-CLOSURE, -HULLSET, -SUPK, -DISC1TS, -YESLIM-EQ,
--QFCASE, -TOUCHW; FS129-SA1-SQRT3-LOCAL) say so in their own handoffs; the full lists for the Lean backlog are SA1 § 6.3, SR1 § 6.2 and SR2 § 4.3.
+-QFCASE, -TOUCHW; FS129-SR3-OUTERADJ, -E2ONE; FS129-SA1-SQRT3-LOCAL) say so in their own handoffs; the full lists for the Lean backlog are SA1 § 6.3, SR1 § 6.2, SR2 § 4.3 and SR3 § 5.1.
 
 **Record-job notes** (each under its entry): FS129-SR2-QFCASE read FS-116's "simple" at p only — raised by this job and resolved by
-FS129-SR3 (its FS129-SR3-QFREE-NS drops "simple" from QFREE; `plans/FS129-SR3-audit.md` § Stage 2), so QFCASE stands; FS129-MR1-DOUBLETIP carries
+FS129-SR3 (its FS129-SR3-QFREE-NS drops "simple" from QFREE; `plans/FS129-SR3-audit.md` § Stage 2), so QFCASE stands, its fields citing QFREE-NS; FS129-MR1-DOUBLETIP carries
 SR3's caution that it cannot replace FS116-V6-HUG without losing FS129-SR3-EMPTY-NS; FS129-SR1-BENDLE3 omits FS129-OR1-BEND3's tile
 clause, which FS129-SR1-BENDANY carries; FS129-SR1-RINGBAND does not restate FS129-OA1-RINGWIND's periodicity clauses. No hypothesis a source needed
 is dropped by a merged form. Corrections made inside entries: FS129-MR1-DOUBLETIP's `uses only:` (without FS116-N2-STAR) and FS129-OA1-RINGWIND's
-prior art (inventory item 100); FALC-RED's argument by supersession (items 67, 106).
+prior art (inventory item 100); FS129-SR2-QFCASE's `uses only:`, `grade:` and `handoff:` (QFREE-NS; items 125, 130); FALC-RED's argument by
+supersession (items 67, 106).
 """
 
 
