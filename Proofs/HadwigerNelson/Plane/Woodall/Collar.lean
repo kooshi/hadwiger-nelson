@@ -380,6 +380,72 @@ theorem sphere_meets_of_collarAt {W : Set ℂ} {u : ℂ} {ρ θ σ : ℝ} (hρ :
       nlinarith [norm_nonneg (z t - u)]
     exact ⟨z t, hsph t, hsub (hcol t hta ⟨hgt, htr.2⟩)⟩
 
+/-! ## Dot products and the cone bound (the geometry of the shadow lemmas and of Townsend's example) -/
+
+/-- `dot` in coordinates. -/
+theorem dot_eq (a b : ℂ) : dot a b = a.re * b.re + a.im * b.im := by
+  simp [dot, Complex.mul_re]
+
+theorem abs_dot_le (a b : ℂ) : |dot a b| ≤ ‖a‖ * ‖b‖ := by
+  have : dot a b = (a * starRingEnd ℂ b).re := rfl
+  rw [this, ← norm_conj b, ← norm_mul]
+  exact Complex.abs_re_le_norm _
+
+theorem dot_add_left (a b c : ℂ) : dot (a + b) c = dot a c + dot b c := by
+  simp [dot_eq]; ring
+
+theorem dot_sub_left (a b c : ℂ) : dot (a - b) c = dot a c - dot b c := by
+  simp [dot_eq]; ring
+
+theorem dot_sub_right (a b c : ℂ) : dot a (b - c) = dot a b - dot a c := by
+  simp [dot_eq]; ring
+
+theorem dot_real_mul_left (r : ℝ) (a b : ℂ) : dot ((r : ℂ) * a) b = r * dot a b := by
+  simp [dot_eq]; ring
+
+theorem dot_e_e (a b : ℝ) : dot (e a) (e b) = Real.cos (a - b) := by
+  rw [dot_eq, e_eq, e_eq, Real.cos_sub]; simp [-Complex.ofReal_cos, -Complex.ofReal_sin]
+
+theorem norm_sub_real_mul_e_sq (q : ℂ) (ρ ψ : ℝ) : ‖q - (ρ : ℂ) * e ψ‖ ^ 2 = ‖q‖ ^ 2 + ρ ^ 2 - 2 * ρ * dot q (e ψ) := by
+  rw [dot_eq, e_eq]
+  simp only [Complex.sq_norm, Complex.normSq_apply, Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im,
+    Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+  simp
+  nlinarith [Real.sin_sq_add_cos_sq ψ]
+
+/-- A preconnected set with a point inside and a point outside the unit circle about `z` meets it. -/
+theorem mem_shadow_of_preconnected {R : Set ℂ} (hR : IsPreconnected R) {z a b : ℂ} (ha : a ∈ R) (hb : b ∈ R)
+    (hza : dist z a < 1) (hzb : 1 < dist z b) : z ∈ shadow R := by
+  have himg : IsPreconnected ((fun y => dist z y) '' R) := hR.image _ (continuous_const.dist continuous_id).continuousOn
+  obtain ⟨y, hy, hy1⟩ := himg.Icc_subset ⟨a, ha, rfl⟩ ⟨b, hb, rfl⟩ ⟨hza.le, hzb.le⟩
+  exact ⟨y, hy, hy1⟩
+
+
+/-- **The cone bound**: if `q` is a vector, `r₀ > 0` and `q / r₀` is within `ε` of `e β`, then `dot q (e ψ') / r₀` is within `ε + |ψ' − ψ|` of
+`cos (β − ψ)`. -/
+theorem dot_cone_bound {q : ℂ} {r₀ : ℝ} (hr₀ : 0 < r₀) {β ψ ψ' ε : ℝ}
+    (hd : ‖q / (r₀ : ℂ) - e β‖ < ε) :
+    |dot q (e ψ') / r₀ - Real.cos (β - ψ)| ≤ ε + |ψ' - ψ| := by
+  set d := q / (r₀ : ℂ) with hdd
+  have hqd : q = (r₀ : ℂ) * d := by rw [hdd, mul_div_cancel₀]; exact_mod_cast hr₀.ne'
+  have h1 : dot q (e ψ') / r₀ = dot d (e ψ') := by
+    rw [hqd, dot_real_mul_left]; field_simp
+  have h2 : dot d (e ψ') = dot (d - e β) (e ψ') + (Real.cos (β - ψ) + dot (e β) (e ψ' - e ψ)) := by
+    rw [dot_sub_left, dot_sub_right, dot_e_e, dot_e_e]; ring
+  have h3 : |dot (d - e β) (e ψ')| ≤ ε := by
+    refine (abs_dot_le _ _).trans ?_
+    rw [norm_e, mul_one]; exact hd.le
+  have h4 : |dot (e β) (e ψ' - e ψ)| ≤ |ψ' - ψ| := by
+    refine (abs_dot_le _ _).trans ?_
+    rw [norm_e, one_mul]; exact norm_e_sub_e_le _ _
+  rw [h1, h2]
+  calc |dot (d - e β) (e ψ') + (Real.cos (β - ψ) + dot (e β) (e ψ' - e ψ)) - Real.cos (β - ψ)|
+      = |dot (d - e β) (e ψ') + dot (e β) (e ψ' - e ψ)| := by ring_nf
+    _ ≤ |dot (d - e β) (e ψ')| + |dot (e β) (e ψ' - e ψ)| := abs_add_le _ _
+    _ ≤ ε + |ψ' - ψ| := add_le_add h3 h4
+
+
+
 /-! ## The engines: Engine A (the contradiction), Engine B (change points in every band), Engine C (the closed-arc form) -/
 
 /-- A collar of thickness at most `1` is preconnected. -/
@@ -533,6 +599,22 @@ theorem woodall_step4 {A B : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hAu : ∀
     (fun θ hθ => ⟨s, hW θ (hsub hθ)⟩) ⟨s, θ₁ + ε, θ₂ - ε, le_rfl, le_rfl, by rw [hε]; linarith [Real.pi_pos],
       fun φ hφ => hW φ (hsub hφ)⟩
 
+/-- Squared distance from `ρ e θ` to `1`. -/
+theorem dist_sq_polar_one (ρ θ : ℝ) : dist ((ρ : ℂ) * e θ) 1 ^ 2 = 1 + ρ ^ 2 - 2 * ρ * Real.cos θ := by
+  have h := norm_sub_real_mul_e_sq 1 ρ θ
+  have h1 : dot 1 (e θ) = Real.cos θ := by
+    have : (1 : ℂ) = e 0 := by simp [e]
+    rw [this, dot_e_e, zero_sub, Real.cos_neg]
+  rw [h1, norm_one] at h
+  rw [dist_eq_norm, ← norm_neg, neg_sub, h]; ring
+
+/-- Squared distance between two points of `0`-centred polar form. -/
+theorem dist_sq_polar_polar (ρ₁ θ₁ ρ₂ θ₂ : ℝ) :
+    dist ((ρ₁ : ℂ) * e θ₁) ((ρ₂ : ℂ) * e θ₂) ^ 2 = ρ₁ ^ 2 + ρ₂ ^ 2 - 2 * ρ₁ * ρ₂ * Real.cos (θ₁ - θ₂) := by
+  have h := norm_sub_real_mul_e_sq ((ρ₁ : ℂ) * e θ₁) ρ₂ θ₂
+  rw [dot_real_mul_left, dot_e_e, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, sq_abs] at h
+  rw [dist_eq_norm, h]; ring
+
 /-- **The step-4 lemma is false at length `2π/3`** — Townsend's counterexample (`[Townsend1979ms]` p. 2; `[Townsend1981]` p. 114): the inner
 collar of `ω(0)` over `(0, 2π/3)`, cut by the arc of `ω(1)` through `e(π/3)` into `A` (inside `B(1, 1)`) and `B` (outside `B̄(1, 1)`), has no unit
 pair in either part. The strictness in `woodall_step4` cannot be dropped; this is the assertion `[Woodall1973]` step 4 ("The lower bound `⅔π` is
@@ -541,7 +623,139 @@ theorem not_woodall_step4_two_thirds :
     ¬ ∀ (A B : Set ℂ) (u : ℂ) (s : Rim) (θ₁ θ₂ : ℝ), IsOpen A → IsOpen B → (∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1) →
       (∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1) → 2 * π / 3 ≤ θ₂ - θ₁ →
       (∀ θ ∈ Ioo θ₁ θ₂, CollarAt (closure (A ∪ B)) u s θ) → False := by
-  sorry
+  intro H
+  have hpi := Real.pi_pos
+  set R₀ : Set ℂ := collar 0 Rim.inner 0 (2 * π / 3) (1 / 100) with hR₀
+  have hR₀o : IsOpen R₀ := isOpen_collar 0 _ _ _ (by norm_num)
+  have hmemR : ∀ z, z ∈ R₀ ↔ ∃ ρ ∈ Ioo (99 / 100 : ℝ) 1, ∃ θ ∈ Ioo (0 : ℝ) (2 * π / 3), z = (ρ : ℂ) * e θ := by
+    intro z
+    rw [hR₀, mem_collar_iff]
+    constructor
+    · rintro ⟨ρ, hρ, θ, hθ, rfl⟩
+      exact ⟨ρ, ⟨by have : ρ ∈ Ioo (1 - 1 / 100) 1 := hρ; linarith [this.1], by have : ρ ∈ Ioo (1 - 1 / 100) 1 := hρ; exact this.2⟩, θ, hθ, by simp⟩
+    · rintro ⟨ρ, hρ, θ, hθ, rfl⟩
+      exact ⟨ρ, ⟨by linarith [hρ.1], hρ.2⟩, θ, hθ, by simp⟩
+  set A : Set ℂ := R₀ ∩ ball 1 1 with hA
+  set B : Set ℂ := R₀ \ closedBall 1 1 with hB
+  have hAo : IsOpen A := hR₀o.inter isOpen_ball
+  have hBo : IsOpen B := hR₀o.inter isClosed_closedBall.isOpen_compl
+  -- the polar description of the two classes
+  have hAd : ∀ ρ θ : ℝ, ρ ∈ Ioo (99 / 100 : ℝ) 1 → θ ∈ Ioo (0 : ℝ) (2 * π / 3) → ((ρ : ℂ) * e θ ∈ A ↔ ρ < 2 * Real.cos θ) := by
+    intro ρ θ hρ hθ
+    have hmem : (ρ : ℂ) * e θ ∈ R₀ := (hmemR _).mpr ⟨ρ, hρ, θ, hθ, rfl⟩
+    have hsq := dist_sq_polar_one ρ θ
+    rw [hA, mem_inter_iff, mem_ball]
+    constructor
+    · rintro ⟨-, h⟩
+      have : dist ((ρ : ℂ) * e θ) 1 ^ 2 < 1 := by nlinarith [dist_nonneg (x := (ρ : ℂ) * e θ) (y := 1)]
+      nlinarith [hρ.1]
+    · intro h
+      refine ⟨hmem, ?_⟩
+      have : dist ((ρ : ℂ) * e θ) 1 ^ 2 < 1 := by nlinarith [hρ.1]
+      nlinarith [dist_nonneg (x := (ρ : ℂ) * e θ) (y := 1)]
+  have hBd : ∀ ρ θ : ℝ, ρ ∈ Ioo (99 / 100 : ℝ) 1 → θ ∈ Ioo (0 : ℝ) (2 * π / 3) → ((ρ : ℂ) * e θ ∈ B ↔ 2 * Real.cos θ < ρ) := by
+    intro ρ θ hρ hθ
+    have hmem : (ρ : ℂ) * e θ ∈ R₀ := (hmemR _).mpr ⟨ρ, hρ, θ, hθ, rfl⟩
+    have hsq := dist_sq_polar_one ρ θ
+    rw [hB, Set.mem_sdiff, mem_closedBall, not_le]
+    constructor
+    · rintro ⟨-, h⟩
+      have : 1 < dist ((ρ : ℂ) * e θ) 1 ^ 2 := by nlinarith [dist_nonneg (x := (ρ : ℂ) * e θ) (y := 1)]
+      nlinarith [hρ.1]
+    · intro h
+      refine ⟨hmem, ?_⟩
+      have : 1 < dist ((ρ : ℂ) * e θ) 1 ^ 2 := by nlinarith [hρ.1]
+      nlinarith [dist_nonneg (x := (ρ : ℂ) * e θ) (y := 1)]
+  -- no unit pair in `B`
+  have hBu : ∀ x ∈ B, ∀ y ∈ B, dist x y ≠ 1 := by
+    intro x hx y hy hxy
+    obtain ⟨ρ₁, hρ₁, θ₁, hθ₁, rfl⟩ := (hmemR _).mp hx.1
+    obtain ⟨ρ₂, hρ₂, θ₂, hθ₂, rfl⟩ := (hmemR _).mp hy.1
+    have h1 := (hBd _ _ hρ₁ hθ₁).mp hx
+    have h2 := (hBd _ _ hρ₂ hθ₂).mp hy
+    -- `cos θ < 1/2`, so `θ > π/3`
+    have hθ1 : π / 3 < θ₁ := by
+      by_contra hle; push Not at hle
+      have := Real.cos_le_cos_of_nonneg_of_le_pi hθ₁.1.le (by linarith) hle
+      rw [Real.cos_pi_div_three] at this; linarith [hρ₁.2]
+    have hθ2 : π / 3 < θ₂ := by
+      by_contra hle; push Not at hle
+      have := Real.cos_le_cos_of_nonneg_of_le_pi hθ₂.1.le (by linarith) hle
+      rw [Real.cos_pi_div_three] at this; linarith [hρ₂.2]
+    have hsq := dist_sq_polar_polar ρ₁ θ₁ ρ₂ θ₂
+    have hcos : 1 / 2 < Real.cos (θ₁ - θ₂) := by
+      rw [← Real.cos_pi_div_three]
+      rw [← Real.cos_abs (θ₁ - θ₂)]
+      refine Real.cos_lt_cos_of_nonneg_of_le_pi (abs_nonneg _) (by linarith) ?_
+      rw [abs_lt]; constructor <;> linarith [hθ₁.2, hθ₂.2]
+    rw [hxy] at hsq
+    nlinarith [hρ₁.1, hρ₁.2, hρ₂.1, hρ₂.2, mul_pos (show (0 : ℝ) < ρ₁ by linarith [hρ₁.1]) (show (0 : ℝ) < ρ₂ by linarith [hρ₂.1])]
+  -- no unit pair in `A`
+  have hAkey : ∀ ρ₁ θ₁ ρ₂ θ₂ : ℝ, ρ₁ ∈ Ioo (99 / 100 : ℝ) 1 → ρ₂ ∈ Ioo (99 / 100 : ℝ) 1 → θ₁ ∈ Ioo (0 : ℝ) (2 * π / 3) →
+      θ₂ ∈ Ioo (0 : ℝ) (2 * π / 3) → θ₁ ≤ θ₂ → ρ₂ < 2 * Real.cos θ₂ →
+      dist ((ρ₁ : ℂ) * e θ₁) ((ρ₂ : ℂ) * e θ₂) ≠ 1 := by
+    intro ρ₁ θ₁ ρ₂ θ₂ hρ₁ hρ₂ hθ₁ hθ₂ hle hρ hxy
+    have hsq := dist_sq_polar_polar ρ₁ θ₁ ρ₂ θ₂
+    rw [hxy] at hsq
+    have hcos : Real.cos θ₂ ≤ Real.cos (θ₁ - θ₂) := by
+      rw [← Real.cos_abs (θ₁ - θ₂), abs_of_nonpos (by linarith)]
+      exact Real.cos_le_cos_of_nonneg_of_le_pi (by linarith) (by linarith [hθ₂.2]) (by linarith [hθ₁.1])
+    have h0 : 0 < ρ₁ * ρ₂ := mul_pos (by linarith [hρ₁.1]) (by linarith [hρ₂.1])
+    have e1 : ρ₁ * ρ₂ * ρ₂ < ρ₁ * ρ₂ * (2 * Real.cos θ₂) := mul_lt_mul_of_pos_left hρ h0
+    have e2 : ρ₁ * ρ₂ * Real.cos θ₂ ≤ ρ₁ * ρ₂ * Real.cos (θ₁ - θ₂) := mul_le_mul_of_nonneg_left hcos h0.le
+    have e3 : ρ₂ ^ 2 * (1 - ρ₁) < 1 - ρ₁ := by
+      have : ρ₂ ^ 2 < 1 := by nlinarith [hρ₂.1, hρ₂.2]
+      nlinarith [hρ₁.2]
+    have e4 : ρ₁ ^ 2 ≤ ρ₁ := by nlinarith [hρ₁.1, hρ₁.2]
+    nlinarith
+  have hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1 := by
+    intro x hx y hy
+    obtain ⟨ρ₁, hρ₁, θ₁, hθ₁, rfl⟩ := (hmemR _).mp hx.1
+    obtain ⟨ρ₂, hρ₂, θ₂, hθ₂, rfl⟩ := (hmemR _).mp hy.1
+    have h1 := (hAd _ _ hρ₁ hθ₁).mp hx
+    have h2 := (hAd _ _ hρ₂ hθ₂).mp hy
+    rcases le_total θ₁ θ₂ with h | h
+    · exact hAkey _ _ _ _ hρ₁ hρ₂ hθ₁ hθ₂ h h2
+    · rw [dist_comm]; exact hAkey _ _ _ _ hρ₂ hρ₁ hθ₂ hθ₁ h h1
+  -- `R₀ ⊆ closure (A ∪ B)`
+  have hcl : R₀ ⊆ closure (A ∪ B) := by
+    intro z hz
+    rcases lt_trichotomy (dist z 1) 1 with h | h | h
+    · exact subset_closure (Or.inl ⟨hz, h⟩)
+    · -- on `ω(1)`: a limit of points of `A`
+      rw [Metric.mem_closure_iff]
+      intro ε hε
+      obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp hR₀o z hz
+      set t := min (min (r / (‖1 - z‖ + 1)) (ε / (‖1 - z‖ + 1))) (1 / 2) with ht
+      have hn : 0 ≤ ‖1 - z‖ := norm_nonneg _
+      have ht0 : 0 < t := lt_min (lt_min (by positivity) (by positivity)) (by norm_num)
+      have hdz : dist (z + (t : ℂ) * (1 - z)) z = t * ‖1 - z‖ := by
+        rw [dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht0]
+      have htr : t * ‖1 - z‖ < min r ε := by
+        have h1 : t ≤ min (r / (‖1 - z‖ + 1)) (ε / (‖1 - z‖ + 1)) := min_le_left _ _
+        have h2 : t * (‖1 - z‖ + 1) ≤ min r ε := by
+          have a1 : t ≤ r / (‖1 - z‖ + 1) := h1.trans (min_le_left _ _)
+          have a2 : t ≤ ε / (‖1 - z‖ + 1) := h1.trans (min_le_right _ _)
+          rw [le_div_iff₀ (by positivity)] at a1 a2
+          exact le_min a1 a2
+        nlinarith
+      have hzt : z + (t : ℂ) * (1 - z) ∈ A := by
+        refine ⟨hball (by rw [Metric.mem_ball, hdz]; exact lt_of_lt_of_le htr (min_le_left _ _)), ?_⟩
+        rw [mem_ball, dist_eq_norm]
+        have hz1 : ‖z - 1‖ = 1 := by rw [← dist_eq_norm]; exact h
+        have : z + (t : ℂ) * (1 - z) - 1 = (1 - (t : ℂ)) * (z - 1) := by ring
+        rw [this, norm_mul, hz1, mul_one]
+        have : ‖(1 : ℂ) - (t : ℂ)‖ = 1 - t := by
+          rw [← Complex.ofReal_one, ← Complex.ofReal_sub, Complex.norm_real, Real.norm_eq_abs,
+            abs_of_pos (by linarith [min_le_right (min (r / (‖1 - z‖ + 1)) (ε / (‖1 - z‖ + 1))) (1 / 2 : ℝ)])]
+        rw [this]; linarith
+      exact ⟨_, Or.inl hzt, by rw [dist_comm, hdz]; exact lt_of_lt_of_le htr (min_le_right _ _)⟩
+    · exact subset_closure (Or.inr ⟨hz, fun hh => absurd (mem_closedBall.mp hh) (not_le.mpr h)⟩)
+  refine H A B 0 Rim.inner 0 (2 * π / 3) hAo hBo hAu hBu (by linarith) (fun θ hθ => ?_)
+  refine ⟨min (min (1 / 100) θ) (2 * π / 3 - θ), lt_min (lt_min (by norm_num) hθ.1) (by linarith [hθ.2]), ?_⟩
+  refine Subset.trans ?_ hcl
+  exact collar_subset_collar 0 Rim.inner (by linarith [min_le_left (min (1 / 100) θ) (2 * π / 3 - θ), min_le_right (min (1 / 100) θ) (2 * π / 3 - θ), min_le_right (1 / 100 : ℝ) θ])
+    (by linarith [min_le_right (min (1 / 100) θ) (2 * π / 3 - θ)]) ((min_le_left _ _).trans (min_le_left _ _))
 
 /-! ## FS106-TW: Townsend's `π/3` lemma -/
 
@@ -604,70 +818,6 @@ theorem townsend_lemma {A B : Set ℂ} (hA : IsOpen A) (hB : IsOpen B) (hAu : �
     (by simpa using hbA) (by simpa using hbB) hs'.interior
 
 /-! ## The excluded set: cones decide the collars -/
-
-/-- `dot` in coordinates. -/
-theorem dot_eq (a b : ℂ) : dot a b = a.re * b.re + a.im * b.im := by
-  simp [dot, Complex.mul_re]
-
-theorem abs_dot_le (a b : ℂ) : |dot a b| ≤ ‖a‖ * ‖b‖ := by
-  have : dot a b = (a * starRingEnd ℂ b).re := rfl
-  rw [this, ← norm_conj b, ← norm_mul]
-  exact Complex.abs_re_le_norm _
-
-theorem dot_add_left (a b c : ℂ) : dot (a + b) c = dot a c + dot b c := by
-  simp [dot_eq]; ring
-
-theorem dot_sub_left (a b c : ℂ) : dot (a - b) c = dot a c - dot b c := by
-  simp [dot_eq]; ring
-
-theorem dot_sub_right (a b c : ℂ) : dot a (b - c) = dot a b - dot a c := by
-  simp [dot_eq]; ring
-
-theorem dot_real_mul_left (r : ℝ) (a b : ℂ) : dot ((r : ℂ) * a) b = r * dot a b := by
-  simp [dot_eq]; ring
-
-theorem dot_e_e (a b : ℝ) : dot (e a) (e b) = Real.cos (a - b) := by
-  rw [dot_eq, e_eq, e_eq, Real.cos_sub]; simp [-Complex.ofReal_cos, -Complex.ofReal_sin]
-
-theorem norm_sub_real_mul_e_sq (q : ℂ) (ρ ψ : ℝ) : ‖q - (ρ : ℂ) * e ψ‖ ^ 2 = ‖q‖ ^ 2 + ρ ^ 2 - 2 * ρ * dot q (e ψ) := by
-  rw [dot_eq, e_eq]
-  simp only [Complex.sq_norm, Complex.normSq_apply, Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im,
-    Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
-  simp
-  nlinarith [Real.sin_sq_add_cos_sq ψ]
-
-/-- A preconnected set with a point inside and a point outside the unit circle about `z` meets it. -/
-theorem mem_shadow_of_preconnected {R : Set ℂ} (hR : IsPreconnected R) {z a b : ℂ} (ha : a ∈ R) (hb : b ∈ R)
-    (hza : dist z a < 1) (hzb : 1 < dist z b) : z ∈ shadow R := by
-  have himg : IsPreconnected ((fun y => dist z y) '' R) := hR.image _ (continuous_const.dist continuous_id).continuousOn
-  obtain ⟨y, hy, hy1⟩ := himg.Icc_subset ⟨a, ha, rfl⟩ ⟨b, hb, rfl⟩ ⟨hza.le, hzb.le⟩
-  exact ⟨y, hy, hy1⟩
-
-
-/-- **The cone bound**: if `q` is a vector, `r₀ > 0` and `q / r₀` is within `ε` of `e β`, then `dot q (e ψ') / r₀` is within `ε + |ψ' − ψ|` of
-`cos (β − ψ)`. -/
-theorem dot_cone_bound {q : ℂ} {r₀ : ℝ} (hr₀ : 0 < r₀) {β ψ ψ' ε : ℝ}
-    (hd : ‖q / (r₀ : ℂ) - e β‖ < ε) :
-    |dot q (e ψ') / r₀ - Real.cos (β - ψ)| ≤ ε + |ψ' - ψ| := by
-  set d := q / (r₀ : ℂ) with hdd
-  have hqd : q = (r₀ : ℂ) * d := by rw [hdd, mul_div_cancel₀]; exact_mod_cast hr₀.ne'
-  have h1 : dot q (e ψ') / r₀ = dot d (e ψ') := by
-    rw [hqd, dot_real_mul_left]; field_simp
-  have h2 : dot d (e ψ') = dot (d - e β) (e ψ') + (Real.cos (β - ψ) + dot (e β) (e ψ' - e ψ)) := by
-    rw [dot_sub_left, dot_sub_right, dot_e_e, dot_e_e]; ring
-  have h3 : |dot (d - e β) (e ψ')| ≤ ε := by
-    refine (abs_dot_le _ _).trans ?_
-    rw [norm_e, mul_one]; exact hd.le
-  have h4 : |dot (e β) (e ψ' - e ψ)| ≤ |ψ' - ψ| := by
-    refine (abs_dot_le _ _).trans ?_
-    rw [norm_e, one_mul]; exact norm_e_sub_e_le _ _
-  rw [h1, h2]
-  calc |dot (d - e β) (e ψ') + (Real.cos (β - ψ) + dot (e β) (e ψ' - e ψ)) - Real.cos (β - ψ)|
-      = |dot (d - e β) (e ψ') + dot (e β) (e ψ' - e ψ)| := by ring_nf
-    _ ≤ |dot (d - e β) (e ψ')| + |dot (e β) (e ψ' - e ψ)| := abs_add_le _ _
-    _ ≤ ε + |ψ' - ψ| := add_le_add h3 h4
-
-
 
 /-- **Outer collars from a cone direction**: a preconnected `R` with `u ∈ closure R` approaching `u` along `β` meets the unit circle about
 every point of some outer collar about `ψ` whenever `cos (β − ψ) > 0` (such a point `z` has `u` outside `B̄(z, 1)` and points of `R` inside). -/
