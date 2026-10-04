@@ -1369,3 +1369,16 @@ From the gate on `630beea1` (if `main` moves with Lean before the landing, its r
    the named halves `hR78`, `hR88`, `hR88per` of rows 78 and 88), FS129-SA1-SQRT3-LOCAL, FS111-W-SQ9, FS111-M-R7, FS111-M2-DISC7, FS111-M3-BAND,
    FS111-M3-HC, FS111-M3-IRREG, FS111-M3-FIXCONV. All other axioms: the standard three.
 7. **Proof Atlas** — grade changes for the rows above, [hand]/[tools]/[derived] → [kernel], at the filing.
+
+## Stage 32 — SAVED (FS131-I2n): the landing
+
+`origin/main` moved after stage 31 (`efe68c61`: FS131-QA3's stage 2, `plans/` only, no `Proofs/`, `scripts/`, `tools/` change); merged as `40f4b4ef`
+(its merge message is git's default, without the attribution lines; not amended). The gate re-run there: build "OK — all 1750 modules already up to
+date, nothing built, 0 module(s) with warnings" (`build/gate/build/20261004T225320Z-3120352.log`, `data/fs131/i2n/build-gate3.out`); axioms "OK —
+2512 clean, 11 axiom-free, 4 imported, 5 declared purchase(s)" (`build/gate/axioms/20261004T225322Z-3123760.log`, `axioms-gate3.log`); vacuity "OK",
+counts as stage 31 (`build/gate/vacuity/20261004T225327Z-3129569.log`, `vacuity-gate3.log`); `check_architecture` exit 0 (`arch3.log`). Stage 31's
+drafts stand as written. Correction to stage 31's theorem list: "44 further children" is **39** — block "FS131-I2n" holds 58 records, 19 of them
+named in the list.
+
+Then `origin/main` fast-forwarded to this branch by `git push origin HEAD:main` (the commit carrying this stage and the report). The main tree's local
+`main` was not touched. The untracked `build-i2*.log` files at the worktree's root stay uncommitted.
