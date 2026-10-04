@@ -8,9 +8,18 @@ the rest to FS129-SR2.*
 
 ## Theorems this phase proved
 
-*Filled at each stage; see the last line of this section for the current state.*
+*Filled at each stage.* Every entry is **derived, one mind, kernel pending**; none moves a value or the answer's bearing.
 
-- (none yet)
+- **FS129-SR1-TWOCIRC** — two unit circles about a unit pair: `|a(s) − b(t)|² − 1 = −8 sin(s/2) sin(t/2) cos((s + t)/2)`, below 1 exactly when
+  `s + t < 180°` (`0 < s, t < 180°`); the one lemma under FS114-Y5-PXKILL, FS116-V6-HUG, -V6-ADJ and -Y4-FLANK — hand — § 3.1, control `fs129-sr1-twocirc`.
+- **FS129-SR1-SIXQ** — at a point carrying all `k` colours of a valid fragment (Siamese allowed) the ring lies in `Γ`, every ring arc with both side
+  colours at the centre; at six colours every ring arc is (Q) — derived from FS116-N1-TWIST-D — § 3.2.
+- **FS129-SR1-BENDANY** — FS-112's bends on a whole-tile fragment below `√3` at any `k` and any centre: every ring arc not both of whose side colours are
+  carried at the centre is removed, the class kept — derived from FS129-OR1-WHOLE, FS112-N2-BENDS — § 3.3.
+- **FS129-SR1-BENDLE3** — in the non-Siamese simple class, any `k`, a point of at most three colours has its ring freed of every arc of `Γ` below `√3`
+  — derived from BENDANY, FS116-V5-U1 — § 3.3.
+- **FS129-SR1-RINGBAND** — the band of `D` on a three-coloured ring: `h = (6 − 2n₂)/3`, `W = Σ m_j + 3 − h/2`; carries FS110-N2-RING (refined: `W = 6M + 3`
+  unless the change set is `60°`-invariant), FS110-Y3-GP and FS129-OA1-RINGWIND — hand — § 3.4, control `fs129-sr1-ringband`.
 
 ## Stage 1 — SAVED: readback and registered expectations
 
@@ -168,3 +177,191 @@ line stand as written (both true; the second is weaker than what holds on a frag
 
 *Gate at this stage's commit: `derive_gate.py all` FAILs with exactly one failure, "no derivation entry" — this stage holds checking readings, not
 entries; stage 3's merge entries cure it. Committed so that the readings survive a halt (standing rule 2).*
+
+## Stage 3 — SAVED: the merges lane R's passes found (item 2(c); inventory items 61, 62, 79, 70)
+
+Seven groups, plus item 61's generalization of the bends. For each: is it one statement, one a case of another, or two statements sharing a step;
+and what de Bruijn formalizes. Four entries below (TWOCIRC, SIXQ, BENDANY with BENDLE3, RINGBAND); the rest are lines.
+
+| group | verdict | what crosses to Lean |
+|---|---|---|
+| 1. FS116-V6-HUG / FS114-Y5-PXKILL (FS114-YB4-2ND) / FS116-V6-ADJ / FS116-Y4-FLANK's model | **four statements sharing one lemma**, the two-circle identity (FS129-SR1-TWOCIRC); and V6-HUG is a **case** of FS129-MR1-DOUBLETIP (a ring with no arc of Γ has every germ off (Q) arcs; "tips both … the only tip at each" is DOUBLETIP's "the only tile of `p` whose closure holds `y`, and … `y′`") | TWOCIRC once; DOUBLETIP in place of V6-HUG (MR1's handoff already says so); PXKILL, V6-ADJ and FLANK each over TWOCIRC |
+| 2. FS112-SIX with FS116-N2-FIVERING and -SIXRING | **SIX is subsumed**: its five-colour clause ("unit arcs centred at it of total length at least 180°") is FIVERING's last clause in a weaker form (FIVERING: (Q) arcs, on fragments, Siamese allowed); its six-colour clause is TWIST-D's two-line corollary at any `k`, Siamese allowed (FS129-SR1-SIXQ); SIXRING is that clause's non-Siamese strengthening | FIVERING and SIXQ in place of FS112-SIX; SIXRING as filed |
+| 3. FS112-U1 = FS116-V5-U1 | **one statement in its first three clauses** (inner colour's sectors in the closed facing cone of width `π − ℓ`, outer colour's in the closed away cone, neither in the open side cones); V5-U1 states them on fragments at any `k`, U1 for six-coloured maps. Each adds one clause: U1 the outer tile's first-order shadow (`π + ℓ`), V5-U1 "a centre carrying both side colours carries at least four, non-Siamese simple" | V5-U1's first three clauses once, in place of U1's; U1's shadow clause and V5-U1's four-colour clause as two corollaries |
+| 4. FS111-V0-ID1 / FS116-V5-NE1; FS111-C-HULL / FS116-V4-DICHOTOMY | **not one statement**: parallel forms in two settings. V0-ID1 and C-HULL read density (a density point of colour `j` against a point of positive upper density, a.e.-proper colourings); V5-NE1 and DICHOTOMY read closures (an interior point against a closure point, fragments). On a fragment, V0-ID1 gives V5-NE1 only at closure points where the tile has positive upper density, and a tile's cusp point has density 0 — so neither subsumes the other. They share only the step "a continuous function on a connected set that avoids the value 1 stays on one side" | both pairs separately; the connectedness step can be one Lean lemma |
+| 5. the stuck ray (FS112-N2-RAY, -N3-CHAINS) and the tangent pencil (FS121-O1-OUT, -D2-SYM) | **not one statement**: one picture (a one-sided, unit-spaced, concentric pencil) in two settings — a valid map's stuck vertex chain, and an honest saturated colouring's tangent interfaces. The periodic kills (FS112-N3-PER; FS121-D2-PERFIN, -O1-PER) share only "finitely many radii". MR1's candidate weakening — FS121-D2-SYM's hypothesis (radius-`r` windows bounded below) moved to FS112-N3-PER toward N3-ALPH — **stalls at** an analogue of FS121-O1-OUT for valid maps: D2-SYM's kill uses that a tangent arc of radius `n` continues to `n + 1, n + 2, …` over one angular window, so windows stay fixed while radii grow; FS-112's pencil arcs bound horns near `P_k` and nothing makes a valid map continue them along a window, so their angular windows about `P_{−1}` need not be bounded below | nothing merged; the stall goes to FS129-Z1 as the smallest open form, for FS-126 or FS-115's re-posing |
+| 6. FS111-M4-CUT and FS121-D4-FACE | **not one statement**: one elementary fact (the sagitta of a circle of radius `R` over half-chord `a` is `R − (R² − a²)^{1/2}`) read on a rung at radius `n` and on a facing box at radius 1. What matters for the Lean order is different: **D4-FACE has a stronger held form**, FS121-V5-FACE-SHARP (hypothesis `ρ² ≥ 2g − g²` in place of `2g < ρ²`, sharp) — see the sweep | D4-FACE in V5-FACE-SHARP's form (sweep, § 6) |
+| 7. FS129-OA1-RINGWIND with FS110-Y3-GP and -N2-RING | **one lemma, three statements**: the band of `D(θ) = c̃(θ + 60°) − c̃(θ)` (N2-RING's proof) and the count `n₂` (Y3-GP's proof) carry all three. RINGWIND's hexagon winding is `h = (6 − 2n₂)/3`, so RINGWIND is Y3-GP's invariant read position by position — **its prior art is partly in-house** (FS110, two minds each), not only G71. The merged lemma adds the identity `W = Σ m_j + 3 − h/2` and refines N2-RING: with no swap point, `W = 6M + 3` unless the change set is invariant under the `60°` rotation (FS129-SR1-RINGBAND) | none required (all three are declined or uncrossed); if any is formalized, RINGBAND once |
+| item 61. FS129-OR1-BENDFRAG, -BEND3 | **one statement at a wider class**: the bends need only that one side colour of a ring arc is absent at the centre, at any `k` and any number of colours at the centre (FS129-SR1-BENDANY); BENDFRAG is its case at `k = 6` and four or more colours, and BEND3's conclusion is BENDANY plus V5-U1's four-colour clause (FS129-SR1-BENDLE3, at most three colours, any `k` — also MR1's "generalization, not derived", inventory item 82) | BENDANY and BENDLE3 in place of BENDFRAG and BEND3 |
+
+derivation: FS129-SR1-TWOCIRC
+  statement: let y₀ and y₁ be points of the plane with |y₀ − y₁| = 1, and p a point with |p − y₀| = |p − y₁| = 1; for real s, t let a(s) be the point
+    of ω(y₀) reached from y₁ by turning through the angle s about y₀ toward p, and b(t) the point of ω(y₁) reached from y₀ by turning through the
+    angle t about y₁ toward p; then |a(s) − b(t)|² − 1 = −8 sin(s/2) sin(t/2) cos((s + t)/2) = 2(1 − cos s)(1 − cos t) − 2 sin s sin t, and for
+    0 < s, t < 180° the distance |a(s) − b(t)| is below 1 when s + t < 180°, equal to 1 when s + t = 180°, and above 1 when s + t > 180°
+  uses only: a congruence taking (y₀, y₁, p) to (e(0°), e(60°), 0), which keeps "toward p"; there a(s) = y₀ + e(120° + s) and b(t) = y₁ + e(300° − t);
+    the half-angle formulas
+  not claimed: anything about tiles — each use (FS114-Y5-PXKILL, FS116-V6-HUG, FS116-V6-ADJ, FS116-Y4-FLANK) adds its own pinning of two tiles to the
+    two circles; anything for s or t outside (0°, 180°)
+  argument: § 3.1 FS129-SR1-TWOCIRC, the argument
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: s = t = 30°: |a − b| = 2 cos 30° − 1 = √3 − 1, the gap of FS116-V6-HUG's model line ("its two X̄ ring tiles √3 − 1 apart at s = t = 30°")
+  prior art: partly: in-house three times, unnamed (FS114-YB4-2ND's expanded form, FS116-V6-HUG's product form, FS116-Y4-FLANK's diagonal); Poros's
+    R2 card 2 names it the three-unit-step closure |u + v + w|² − 1 = (u + v)(v + w)(w + u)/(uvw) (as quoted in plans/FS129-MR1-audit.md; the card
+    not re-read here); the constant width of the unit Reuleaux triangle
+  handoff: de Bruijn — one lemma, proved once and consumed by FS114-Y5-PXKILL, FS116-V6-ADJ, FS116-Y4-FLANK and (through FS129-MR1-DOUBLETIP)
+    FS116-V6-HUG; the statement and its not claimed
+
+control: fs129-sr1-twocirc
+  of: FS129-SR1-TWOCIRC — both forms of the identity, the diagonal 2cos φ − 1, the sign on a grid of angles (step 15°), and V6-ADJ's mirror, exactly
+  run: python3 ../tools/fs129_sr1_twocirc.py
+  expect: twocirc ok
+  fault: python3 ../tools/fs129_sr1_twocirc.py --fault-sign
+
+control: fs129-sr1-twocirc-diag
+  of: FS129-SR1-TWOCIRC — the diagonal reads 2cos φ − 1, not 2cos φ + 1
+  run: python3 ../tools/fs129_sr1_twocirc.py
+  expect: twocirc ok
+  fault: python3 ../tools/fs129_sr1_twocirc.py --fault-diag
+
+### 3.1 FS129-SR1-TWOCIRC, the argument
+
+In the frame `p = 0`, `y₀ = e(0°)`, `y₁ = e(60°)`: `a(0) = y₀ + e(120°) = e(60°) = y₁` and `a(60°) = y₀ + e(180°) = 0 = p`, so `a(s) = y₀ + e(120° + s)`
+is the point of `ω(y₀)` turned through `s` from `y₁` toward `p`; likewise `b(0) = y₁ + e(300°) = y₀`, `b(60°) = p`. Then `a(s) − b(t) = (y₀ − y₁) +
+e(120° + s) − e(300° − t)`, and expanding `|·|²` (three unit vectors, `y₀ − y₁ = e(−60°)`) gives `3 + 2 cos(180° + s) − 2 cos(360° − t) −
+2 cos(180° + s + t)`, i.e. `|a − b|² − 1 = 2 − 2 cos s − 2 cos t + 2 cos(s + t) = 2(1 − cos s)(1 − cos t) − 2 sin s sin t`. With `1 − cos x =
+2 sin²(x/2)` and `sin x = 2 sin(x/2) cos(x/2)` this is `8 sin(s/2) sin(t/2)[sin(s/2) sin(t/2) − cos(s/2) cos(t/2)] = −8 sin(s/2) sin(t/2) cos((s + t)/2)`.
+For `0 < s, t < 180°` both sines are positive, and `cos((s + t)/2)` is positive, zero or negative as `s + t` is below, at or above `180°` (with
+`s + t < 360°`). A reflection of the frame exchanges nothing: `a` and `b` are defined by turning toward `p`. The diagonal: `|a(φ) − b(φ)|² =
+1 − 8 sin²(φ/2) cos φ = 1 − 4(1 − cos φ) cos φ = (2 cos φ − 1)²`. V6-ADJ's arcs (`a = y₁ + e(−60° + s)`, `b = y₀ + e(120° − t)`) are the same
+statement for the apex `p′ = y₀ + y₁ − p` of the other Reuleaux triangle. Control `fs129-sr1-twocirc` checks every equality symbolically.
+
+derivation: FS129-SR1-SIXQ
+  statement: let F be a valid k-coloured fragment, for any k ≥ 1, Siamese pairs allowed, on a closed disc of radius above 1 about a point p at which
+    all k colours are carried; then ω(p) lies in Γ, and both side colours of every arc of Γ on ω(p) are carried at p; so at k = 6, when p carries six
+    colours, every arc of Γ on ω(p) is a (Q) arc
+  uses only: FS116-N1-TWIST-D (the ring points in the closure of a tile of one of p's colours form a closed set lying in the union of the arcs of Γ on
+    ω(p) and finitely many points); that every point of the fragment's open set lies in the closure of a tile (Γ, a locally finite union of arcs, has
+    empty interior); the definition of (Q) (both side colours and at least four colours at the centre)
+  not claimed: FS116-N2-SIXRING's structure (six 60° arcs, each the ring points of one tile; it needs non-Siamese); anything when a colour is absent at
+    p (five colours: FS116-N2-FIVERING); that a fragment with a six-colour vertex exists beyond radius 3/2
+  argument: § 3.2 FS129-SR1-SIXQ, the argument
+  verdict: derived
+  grade: derived from: FS116-N1-TWIST-D
+  minds: 1
+  model: FS116-Y2-SIXFRAG, the straight flower: its centre carries six colours and its ring is six (Q) arcs (FS116-N2-SIXRING's model line)
+  prior art: partly: FS112-SIX's six-colour clause (valid six-coloured maps, two minds), of which this is the fragment form at any k
+  handoff: de Bruijn — with TWIST-D, in place of FS112-SIX's six-colour clause; FS112-SIX's five-colour clause is FS116-N2-FIVERING's last clause
+    in a weaker form, so FIVERING is formalized in its place
+
+### 3.2 FS129-SR1-SIXQ, the argument
+
+Every ring point lies in the closure of some tile (the ring lies in the fragment's open set, where `Γ` has empty interior), and that tile's colour is
+carried at `p`, so TWIST-D's set `D` is the whole ring. Hence `ω(p) ⊆ A ∪ E`, with `A` the union of the arcs of `Γ` on `ω(p)` (finitely many closed
+arcs, so `A` is closed) and `E` finite; `ω(p) ∖ E ⊆ A` is dense in `ω(p)`, so `ω(p) ⊆ A ⊆ Γ`. The side colours of an arc of `Γ` on `ω(p)` are colours
+of tiles, all carried at `p`. At `k = 6` with six colours at `p`, each ring arc has both side colours at a centre of at least four colours: (Q).
+
+derivation: FS129-SR1-BENDANY
+  statement: let F be a valid k-coloured fragment, for any k ≥ 1, on a closed disc B̄(p, r), r > 1, about a point p, and let 1 < ρ′ < min(r, √3);
+    then there is a valid k-coloured fragment F″ on B̄(p, ρ′), with the same colours carried at p as in F, whose arcs of Γ on ω(p) are exactly the
+    arcs of Γ on ω(p) in F both of whose side colours are carried at p, so that Γ ∩ ω(p) in F″ is those arcs and finitely many points; its tiles are
+    the tiles of F meeting B(p, min(r, √3)), each unchanged except the two side tiles of each other ring arc, which differ from F's only inside lenses,
+    as thin as wished, along that arc; and F″ is non-Siamese if F is, and simple if F is
+  uses only: FS129-OR1-WHOLE at ρ = min(r, √3) (stated for any k); FS112-N2-BENDS (N2-TOWARD, N2-AWAY) read on a fragment by N2's route (§ 2.1 of
+    this record), in which no colour count is spent (`plans/FS112-NB2-verification.md` § 1.5: six "nowhere in N2-RAY, TOWARD, AWAY, TAN, RED, SIGN, ENV");
+    FS116-V4-DICHOTOMY (any k), for non-Siamese after each bend
+  not claimed: anything at radius √3 or more (an (R2) arc's witness can be seen there); that F″ keeps saturation; anything about the rings of other
+    points; that an arc with both side colours at p can be removed
+  converse: § 3.3 FS129-SR1-BENDANY and BENDLE3, the argument
+  argument: § 3.3 FS129-SR1-BENDANY and BENDLE3, the argument
+  verdict: derived
+  grade: derived from: FS129-OR1-WHOLE, FS112-N2-BENDS
+  minds: 1
+  model: k = 6, the capped strip about a midline vertex P_j on B̄(P_j, 1.8), ρ′ = 1.7 — its four ring arcs are (Q), so F″ is F_√3 with nothing bent
+    (FS129-OR1-BENDFRAG's model); no held fragment has a ring arc with a side colour absent at a centre of four or more colours, so the bend clause's
+    held models are FS112-N2-RED's maps only
+  prior art: owed — in-house; FS-112's bends are "not found in print" (FS112-N2-RED's entry)
+  handoff: de Bruijn — in place of FS129-OR1-BENDFRAG and the bend half of FS129-OR1-BEND3: one module, the bends on a whole-tile fragment below √3,
+    over FS112-N2-BENDS as an imported hypothesis until FS-112's module lands, following N2's route at the end vertices
+
+derivation: FS129-SR1-BENDLE3
+  statement: let F be a non-Siamese simple valid k-coloured fragment, for any k ≥ 1, on a closed disc B̄(p, r), r > 1, about a point p carrying at most
+    three colours, and let 1 < ρ′ < min(r, √3); then there is a non-Siamese simple valid k-coloured fragment on B̄(p, ρ′), with the same colours carried
+    at p, whose ring carries no arc of Γ
+  uses only: FS129-SR1-BENDANY; FS116-V5-U1's last clause (in a non-Siamese simple fragment a centre carrying both side colours of an arc of Γ on its
+    unit circle carries at least four colours; its argument reads validity, one tile per colour at a point and one cone per tile at a vertex, at any k)
+  not claimed: anything at a point of four or more colours (there BENDANY keeps the arcs with both side colours at p: the (Q) arcs at k = 6); the
+    Siamese or non-simple classes
+  argument: § 3.3 FS129-SR1-BENDANY and BENDLE3, the argument
+  verdict: derived
+  grade: derived from: FS129-SR1-BENDANY, FS116-V5-U1
+  minds: 1
+  model: k = 6, a cubic trichromatic vertex u of the capped strip whose closed unit disc lies at distance above 1 from the strip's edge, on B̄(u, 1.1)
+    (FS129-OR1-BEND3's model)
+  prior art: owed — in-house
+  handoff: de Bruijn — in place of FS129-OR1-BEND3, with BENDANY
+
+### 3.3 FS129-SR1-BENDANY and BENDLE3, the argument
+
+*BENDANY.* FS129-OR1-BENDFRAG's argument (`plans/FS129-OR1-audit.md`, § Argument for FS129-OR1-BENDFRAG), read with "a ring arc not both of whose side
+colours are carried at `p`" in place of "a non-(Q) ring arc": that argument used "at least four colours at `p`" only to pass from "not (Q)" to "one side
+colour absent at the centre" (OR1 says so in BEND3's argument), and here that is the hypothesis. Every other step — WHOLE's restriction and its witness
+clause, TOWARD and AWAY on `F_ρ` (monotone, § 2.1), each bend keeping non-Siamese (V4-DICHOTOMY) and simple (the crescent, § 2.1's step 2), the
+finitely many ring arcs bent one at a time with lenses near radius 1 and witnesses excluded near radius 2 — reads no colour count: WHOLE and
+V4-DICHOTOMY are stated for `k` colours, and NB2 § 1.5 records that the bend lemmas spend six nowhere. *The converse direction of "exactly":* the arcs with both side
+colours at `p` are not touched — each lens lies inside the two side tiles of its own arc, away from every other ring arc — so each stays an arc of
+`Γ` on `ω(p)` with the same sides. The locality clause is the construction (each lens lies in a thin neighbourhood of its arc, inside its two side tiles).
+*BENDLE3.* By V5-U1's last clause, an arc of `Γ` on `ω(p)` with both side colours at `p` makes `p` carry at least four colours in a non-Siamese simple
+fragment; `p` carries at most three, so no ring arc has both side colours at `p`, and BENDANY removes them all, keeping non-Siamese and simple.
+
+derivation: FS129-SR1-RINGBAND
+  statement: let c colour the circle by ℤ/3, defined and locally constant off a finite set Σ of change points, with c(θ) ≠ c(θ + 60°) wherever both
+    are defined; lift c to c̃, changing by +1 or −1 at each change point, and put W = (c̃(θ + 360°) − c̃(θ))/3; for θ with no point θ + 60°j in Σ put
+    D_j(θ) = c̃(θ + 60°(j + 1)) − c̃(θ + 60°j), m_j(θ) = ⌊D_j(θ)/3⌋, n₂(θ) = #{j : D_j(θ) ≡ 2 (mod 3)} and h(θ) = (1/3) Σ_{j=0..5} d(c(θ + 60°j),
+    c(θ + 60°(j + 1))), with d(x, y) = ±1 as y = x ± 1 (FS129-OA1-RINGWIND's W); then (i) h(θ) = (6 − 2n₂(θ))/3, a value in {−2, 0, 2}; (ii) W = m_0(θ)
+    + m_1(θ) + … + m_5(θ) + 3 − h(θ)/2; (iii) h changes across θ₀ only if Σ holds two points θ₀ + 60°j and θ₀ + 60°(j + 1); (iv) if no point of Σ is a
+    swap point (a change point x with c(x + 60°−) = c(x+) and c(x + 60°+) = c(x−), or the same with −60°), all m_j(θ) equal one integer M, W is
+    6M + 2, 6M + 3 or 6M + 4, and W = 6M + 3 unless Σ is invariant under the rotation by 60°; (v) if no two points of Σ are 60° apart, h is 0
+    everywhere and W = 6M + 3
+  uses only: c(θ) ≠ c(θ + 60°), so no D_j is ≡ 0 (mod 3); that Σ is finite; at an event, the change of D_j is Δ_{j+1} − Δ_j (Δ_j the step crossed at
+    the hexagon's j-th point, 0 if none), so the changes sum to zero; FS110-N2-RING's band step (D_0 leaves {3M + 1, 3M + 2} only by a jump of ±2,
+    which needs a swap)
+  not claimed: anything about tiles or maps (the circle colouring is the input; FS110-N2-RING's setting — a three-colour vertex whose ring carries no
+    arc of Γ, coloured by its three absent colours — supplies one); that h is constant across two change points 60° apart (the swap moves it, row 132
+    and G71)
+  argument: § 3.4 FS129-SR1-RINGBAND, the argument
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the ring of six 60° arcs coloured 0, 1, 2, 0, 1, 2 — no swap point, Σ invariant, h = 2, W = 2 = 6·0 + 2; nine 40° arcs coloured 0, 1, 2, …
+    (`plans/FS110-Y-construction.md` § 8.2's control) — no two change points 60° apart, h = 0, W = 3
+  prior art: partly: FS110-N2-RING (the band) and FS110-Y3-GP (the count n₂ = 3, so W = 6M + 3), in-house, two minds each; FS129-OA1-RINGWIND
+    (one mind) is (i) with (iii); G71's height functions; the identity (ii) and the refinement in (iv) not found in-house (not searched outside)
+  handoff: none — FS110-N2-RING and -Y3-GP are declined for the kernel and RINGWIND crosses nowhere; if any of the three is formalized, this lemma is
+    formalized once in their place
+
+control: fs129-sr1-ringband
+  of: FS129-SR1-RINGBAND — (i), (ii), (iii), (iv) and (v) on every proper discretised ring of 12 and of 18 cells and on 4000 seeded random ones of
+    24 to 60 cells (44 with no 60° pair, 10896 with no swap point, 30 of those rotation-invariant)
+  run: python3 ../tools/fs129_sr1_ringband.py
+  expect: ringband ok (101284 rings; no 60-degree pair 44, no swap point 10896, of which rotation-invariant 30)
+  fault: python3 ../tools/fs129_sr1_ringband.py --fault
+
+### 3.4 FS129-SR1-RINGBAND, the argument
+
+(i) `D_j ≡ c(θ + 60°(j + 1)) − c(θ + 60°j)`, so `d = +1` exactly when `D_j ≡ 1` and `−1` when `D_j ≡ 2`: `Σ d = (6 − n₂) − n₂`. As `Σ_j D_j =
+c̃(θ + 360°) − c̃(θ) ≡ 0`, `Σ d ≡ 0 (mod 3)`, so `n₂ ∈ {0, 3, 6}`. (ii) `3W = Σ_j D_j = Σ_j (3m_j + r_j)`, `r_j ∈ {1, 2}`, `Σ r_j = 6 + n₂`; so
+`W = Σ m_j + 2 + n₂/3 = Σ m_j + 3 − h/2` by (i). (iii) At an event (some hexagon points cross change points), `D_j` moves by `Δ_{j+1} − Δ_j`. If no
+two adjacent hexagon points cross, every move is `0` or `±1`, and a `±1` move cannot reach a multiple of 3, so it stays in its band and flips its
+residue; the moves come in pairs (`D_{j−1}` by `+Δ_j`, `D_j` by `−Δ_j`) of opposite signs, one `1 → 2` and one `2 → 1`, so `n₂`, hence `h`, is
+unchanged. (iv) With no swap, `D_0` never leaves its band (N2-RING), so every `D_j(θ) = D_0(θ + 60°j)` lies in one band `{3M + 1, 3M + 2}`: `m_j = M`,
+and `W = 6M + 3 − h/2 ∈ {6M + 2, 6M + 3, 6M + 4}`. Every move is then `0` or `±1` and the moves sum to zero, so `n₂` is invariant as in (iii). If
+`n₂ = 0`, every `D_j = 3M + 1` and no move can be `−1`, so with sum zero every move is 0: `Δ_{j+1} = Δ_j` for all `j` at every event, i.e. every change
+point's five rotates by multiples of `60°` are change points with the same step — `Σ` is rotation-invariant; `n₂ = 6` the same. So if `Σ` is not
+invariant, `n₂ = 3`, `h = 0`, `W = 6M + 3`. (v) A swap point is a pair of change points `60°` apart, so (iv) applies; an invariant non-empty `Σ` would
+put every change point in such a pair (and `Σ` is non-empty: a colouring with `c(θ) ≠ c(θ + 60°)` is not constant). So `h = 0` and `W = 6M + 3`.
+*The three statements it carries:* FS110-N2-RING ("if it has no swap point then `|W(u)| ≥ 2`") is (iv)'s first part; FS110-Y3-GP ("winds `W ≡ 3 (mod 6)`")
+is (v); FS129-OA1-RINGWIND ("`W` takes values in `{−2, 0, 2}`, has period `60°`, and changes across `θ₀` only if `Σ` contains two points `θ₀ + 60°j` and
+`θ₀ + 60°(j+1)`") is (i) with (iii), its period being the definition's.
