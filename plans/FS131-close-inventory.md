@@ -1679,3 +1679,22 @@ reason by the close.*
      `hc_free_pos`, `hc_free_subset_nowhereDense`; the carriers (I2k's two open points); the gate; the landing. **Next**: FS131-I2n (Opus), same slot.
 234. **Brief FS131-I2n, wave 2's fourteenth implementer** (Opus; `data/fs131/briefs/FS131-I2n-wave2.md`, derived by script from I2m's, source headings checked,
      gated PASS): the last 5 HC/IRREG leaves, the carriers, the gate and the landing. Launched in I2m's slot: 1 (I4j) + 1 (IC3) + 1 (I5) + 1 (I2n) = 4.
+235. **FS131-IC3 handed back at stage 9, harness ≈ 423k** (report `data/fs131/reports/FS131-IC3.md` on `fs131-w4c`; branch at `923c8ad6`, checked): **no `Contact` leaf
+     closed; 44 children, all standard three**, among them **`stuck_horns` = N4-STUCK (i)** (at a stuck vertex under Condition 5 covering `B̄(v, 1)`, a colour
+     with ≥ 2 sectors has exactly two, horns along α and α + π with curvatures in (−1, 1), out-type contacts at N and S′; read against N4-STUCK (i) and
+     `stuck_structure`'s first seven clauses plus its two out-type clauses, its doubly-shadowed clause left to `flank_shadows`), `woodallCone_isHorn` (IC2's
+     finding 2), `IsHorn.exists_flankAbove/Below` (IC2's finding 1), and N4-FLANK's localization chain (`shadow_source_near_poles`, `horn_shadow_near_S/N`,
+     `outType_S/N_of_shadow`). Keryx's receipts: build log `build/gate/build/20261004T204837Z-2282147.log` (w4c) "Build completed successfully (5359 jobs)", 0
+     warnings other than `sorry`; `Contact` 5 `sorry` lines by count; `data/fs131/ic/axioms-ic3-stage8.txt` prints `stuck_horns`, `woodallCone_isHorn`,
+     `outType_N_of_shadow` on the standard three. Generalization: `shadow_source_near_poles` needs neither Condition 5 nor finitely many contacts (compactness of
+     the class's closure). Slips (IC3's): its own build killed twice by PID (only time lost); a Stage-7 count corrected. **Re-pricing**: the five at about 4.5–5
+     sessions (`stuck_structure` 1.5, `flank_shadows` 1, each move 1) — `Contact` is wave 4's long pole.
+236. **Ruling: `Contact` splits once more, when a slot frees** — the three moves (`exists_shave`, `exists_rayMerge`, `exists_merge`) to a parallel implementer in a
+     new module upstream of `Contact` (say `Plane/ValidMap/Moves`, importing `Basic`, `Sectors`, `SVMap` — the availability predicates live in `Basic`), proving
+     the three under their exact statements as `…_aux` lemmas that `Contact`'s leaves then cite in one line each, at the merge. Until a slot frees (wave 2's
+     landing is next), FS131-IC4 takes `stuck_structure` and `flank_shadows` first and the moves only after. Alternative weighed: keep `Contact` serial (about five
+     sessions). Why: the moves read nothing of `Contact`'s own (engine 2 and the charts are in the foundation), so the split is clean and takes about three sessions
+     off wave 4's longest path. Confidence: medium — the fact that would change it: a move needing a `Contact` lemma (then that lemma moves to `Moves` too).
+237. **Brief FS131-IC4, wave 4's fourth `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC4-contact.md`, derived by script from IC3's, gated PASS):
+     `stuck_structure` and `flank_shadows` first, the moves only if no parallel implementer has taken them (item 236). Launched in IC3's slot: 1 (I2n) + 1 (I4j) +
+     1 (I5) + 1 (IC4) = 4.
