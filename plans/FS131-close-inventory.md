@@ -478,3 +478,11 @@ reason by the close.*
 85. **Brief FS131-W, Woodall's chain** (`debruijn`, Opus; `data/fs131/briefs/FS131-W-woodall.md`, gated PASS, the three rows quoted from the backlog): worktree
     `.claude/worktrees/fs131-ww` made by Keryx with the recipe, branched at wave 4's full skeleton `f620977c`. Launched in the slot K4c freed (items 75, 83).
     Queued next: FS131-I4 (wave 4's implementer) and FS131-LEB, as slots free. Source: this commit.
+86. **Statement defect — FS121-V5-FACE-SHARP's failure half, `exists_face_fails`, false as stated** (FS131-K2c, message 2026-10-04; `Plane/Slack` at `3bd6cf52`): the
+    entry claims failure "whenever ρ² < 2g − g²", but (1) for ρ ≥ 1/2 the far box itself has unit pairs of positive measure (no class holds it a.e.), and (2) for
+    g² + ρ² > 1 the unit circles about the half-box's points cross the far box (K2c's example g = 19/20, ρ = 9/20; Keryx's receipt: 0.96² + 0.28² = 1.0000 and
+    g² + ρ² = 1.105). **Ruling: add `2ρ < 1` and `g² + ρ² < 1`** — the regime the derivation reads (V5's own example g = 1/10, ρ = 2/5 lies in it; K2b's note: null
+    unit pairs force ρ ≤ 1/2). With them K2c gives an explicit construction (class 9 = half box ∪ far box ∪ a small box Q at `x + e θ`, no unit pair at all; the
+    rest coloured by `sq9`; k = 10), checked by hand, one mind. Alternative weighed: state only the derivation's single example. Why: the repaired range is the
+    true form the construction reaches, and the kernel decides. Confidence: medium-high. Correction owed: with item 37, an erratum on FS121-V5-FACE-SHARP's
+    both halves (positive half `g < 1`; failure half `2ρ < 1`, `g² + ρ² < 1`), for the record job.
