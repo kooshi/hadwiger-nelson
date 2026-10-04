@@ -1901,3 +1901,26 @@ reason by the close.*
      `private` declaration lies in the range (Keryx, by grep), so nothing changes visibility. Confidence: medium-high — what would change it: IC5 needing to edit a
      declaration in the range (then it messages first). **Wave 4's moves are now its longest path** (about seven to eight implementer sessions); once SHAVE's shared
      machinery lands, I will weigh splitting RAY and MERGE into parallel modules downstream of it.
+264. **FS131-I4k handed back** (Stage 32 SAVED, harness ≈ 440k; report `fs131-w4`'s `data/fs131/reports/FS131-I4k.md`; commits `2d8b88c5`, `bf00c377`,
+     `ff32b839`, `59b14271`, `d391f480`). **Held, [kernel], the standard three**: `fail_leavingCentre`, `fail_colours` (FS112-N3-FAIL; the row's "exactly" read as
+     "only", as its docstring says), `anti` (FS112-N3-ANTI), `pair_ii` (FS112-N3-PAIRS (ii)), and `localSectors_disj` in wave 3's `Plane/LocalStructure` (ruling
+     244 (b); `localSectors` now derived from it, statement unchanged). `pair_i` carries ruling 258's `h3 : dist u₁ u₂ < 3`, builds, and is `sorry`. **Left in its
+     files (7)**: `UnitArc`'s `bend_toward`, `bend_away`, `flankQ_upper`, `flankQ_lower`, `nb4p`; `BaseSteps`' `pair_i`, `n3_end` (`n3_end` waits for `fs131-w4c`'s
+     `woodallCone` and `exists_merge` to merge). **Receipt (Keryx)**: the commits exist; `build/gate/build/20261004T221211Z-2818124.log` (after Stage 32's commit)
+     ends "Build completed successfully (5359 jobs)", 54 `sorry` warnings, 0 other warnings; `sorry` lines by count: `BaseSteps` 2, `UnitArc` 5, `LocalStructure` 0;
+     `data/fs131/i4/axioms-i4k-31.txt` gives the four N3 leaves, and `axioms-i4k-30.txt` `localSectors_disj` and `localSectors`, `[propext, Classical.choice,
+     Quot.sound]`; line 967 of `BaseSteps` carries `h3`. **Prediction scored — item 258's inference confirmed on paper** (one mind): the critical points of
+     `|x′ − y′|` on `ω(u₁) × ω(u₂)` are the four collinear configurations, with values `d − 2, d, d, d + 2`; the value 1 is critical only at `d = 3` (an isolated
+     minimum) and at `d = 1` (saddles, the level set two crossing curves, not isolated); tangency needs `y′ ∈ ω(u₂) ∩ sphere(u₁, 2)`, at most two points.
+     **Generalization**: the kernel proofs of `anti` and `pair_ii` are shorter than the derivation's (`anti` by `|b − x|² + |b − y|² = 2|b − u|² + 2`, no strip;
+     `pair_ii` from the two halves of `ω(y)`, reading neither the strip nor N3-FAIL). **Shared children**, all on the standard three (`fin3_adj` by `decide`, no
+     axiom): the chart, the germ-on-circle algebra, the vote, the arc of Γ along a tangent germ, the crossing at a vertex, the halves of a transversal circle
+     (record Stages 30–31). **New tool**: `tools/fs131_i4_stmts.py` compares every theorem statement against a revision (planted fault fired, exit 1). **Erratum
+     draft** to FS112-N3-PAIRS, "(i)'s unconditional form", is in the report (§ ERRATUM DRAFT), filed verbatim at the milestone's filing. **Held**:
+     `localSectors_disj` sits in wave 3's `LocalStructure`, already on `main`, and lands with wave 4 — the merge with `main` must keep it (editing that file rebuilds
+     every plane module: 11 min). Credit: I4k found N3-I's isolated pair, and confirmed the repair's inference on paper.
+265. **Slots (revising item 256): QA3 takes I4k's slot now; the I4 lane's successor takes wave 2's slot when I2n hands back.** Two slots freed together (IM1's,
+     I4k's). Choice: IM1's slot → FS131-IM2 (the second move and the moves, item 263); I4k's slot → FS131-QA3 at once. Alternative weighed: item 256's order (QA3
+     waits for wave 2's slot; I4k's successor now). Why: wave 4 lands only when its moves do (about seven to eight sessions, item 261), so the I4 lane's six
+     provable leaves are off the longest path and lose nothing by waiting one slot-turn, while QA3 audits the definitions wave 5 will build on (item 255's reason).
+     Confidence: medium-high. In flight: 1 (I2n) + 1 (IC5) + 1 (IM2) + 1 (QA3) = 4.
