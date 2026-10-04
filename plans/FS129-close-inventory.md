@@ -398,3 +398,41 @@ One line per item with its source; no narration. Each line is ticked done or dec
      § 3 beyond FS-110, scoped to the Lean order), item 81's three leads, a wider V6-ADJ (DOUBLETIP's analogue), and group 5's stall.
 104. **Launched 2026-10-04 00:58 UTC**: FS129-SR2, pass 3, lane R, second part (`general-purpose`, Opus; `data/fs129/briefs/FS129-SR2-pass3.md`,
      gated PASS, at `8065a302`), on item 103's list. Running: FS129-SA1, the Searcher, FS129-SR2 — the cap of three.
+105. **FS129-SA1 reported DONE** (`data/fs129/reports/FS129-SA1.md`; commits `c5265650` … `2654ca32`, seven, all present; ≈462k by the harness):
+     **lane A's pass 3 is complete; no SA2.** **Keryx's receipt**: derive gate re-run, exit 0, PASS (6 controls fire); `plans/FS89-derivation.md`'s
+     Notation (line 27) read — "`A`: archimedean characters `λ_e(x) = Re(ē x)`", one embedding, as SA1 says.
+106. **The Falconer-fan and slack-plane family merged** into seven statements, each derived, hand, one mind: FS129-SA1-NOAFF-K (any k; a gap at
+     ρ(u) suffices), -PLACE-HOM (G63's place with the residue map, over F(t₁, …, t_n)), -NOAFF-FIELDS, -FALC-FAN (any k ≥ 3), -FALC-DICHO-K,
+     -FALC-RES (HOSTS (i) sharpened to "χ(F²) ≥ 4 and no usable 𝔽₇ prime"), -FALC-RED (statement verbatim; argument in Falconer's p. 188 order).
+     Stated at every k, the fan lemmas are inhabited at k = 4 by the unit rhombus. Plus FS129-SA1-SQRT3-LOCAL (TC1-SQRT3-DYADIC weakened: "3 a
+     square in F_w" for "√3 ∈ F"; ℚ(√51) a model; PARI control over 194 fields). For FS129-L1: formalize 7 merged forms in place of 13
+     statements (`plans/FS129-SA1-audit.md` § 6.3).
+107. **Correction — Keryx's item 68 overstated three merges**: M60-T2's virtual-edge half at p = 19 is not row 66's (it rests on M60's tools-grade
+     S₁₉(5) = N₁; ℚ(√6) gives it content); M61-T5's mechanism has instances at k = 3, 4 where row 66 does not apply; FS86-Cx-C11 and NOAFF live on
+     disjoint field classes. Item 68 copied pass 2's lines as merges; they were candidates. Source: `plans/FS129-SA1-audit.md` § 2.2.
+108. **Records that are false as written — the statement's wording, not the mathematics** (SA1: "No held result is false as mathematics"): FS89's
+     Notation makes FS89-CL2, -S0A-2 and -S0A-10 false as written; the repair is one line, `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`; nothing downstream
+     inherits (CL3–CL5 read both real places). ASTRA-2026-09-14-T10: hypothesis meant as Separated (every colouring), its sentence weaker and
+     false as read; scope empty over F ⊇ K with a usable 𝔽₁₁ prime or χ(F²) ≤ 4. Errata drafted in SA1's record; for FS129-Z1. FS100-T1's grade
+     line omits X25B-T1, the blind second derivation row 117 counts.
+109. **Held, for the Lean backlog** (SA1's HELD): FS89-S0A-2 is on FS-87's kernel-candidate list and is unprovable as written; if the backlog
+     takes it before FS129-Z1 files the erratum, its statement is quoted with `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`. FS129-L1 carries this.
+110. **15 lost theorems** (SA1 § 4.1–4.2; for FS129-Z1's derivation file, ten load-bearing): X25B-PZ (FS103-F-FRAC cites it), X25B-L1, FS84-S1b,
+     -S1b-47, -S1d-K, -S1e (the in-house k = 4 form of NOAFF, 2026-09-25, which pass 2 re-derived without citing), J45-N1, -N2, -SI-4, -SI-5, -SI-J,
+     -SI-C, -SP-oi, -SP-if, and HOLE-t (lane R's, `plans/FS106-TQ-derivation.md` line 26). **The eight J45 statements are inputs of row 121**
+     (χ(ℚ(√47)²) = 5, the result that answers Moorhouse's question): FS100-Q47's grade names them, no entry carries them, so the Lean backlog's
+     closure for FS100-Q47 is incomplete until Z1 files them. Of item 20's 68 ids: 42 duplicates, 6 steps, 6 not ours or not theorems, 14 lost;
+     X25B-LP duplicates FS86-LP.
+111. **Tool defects, index** (SA1): ids resolved without their milestone prefix (16 of item 20's 68 were filed under other prefixes, so FS100-X28D is
+     not lost); range citations ("CL3–CL5") lose their middle member; lane A's nine "nothing" edges are 8 false and 1 reversed (FS56-T6), 0 real;
+     FS91-J03a-9 → FS89-CL2 and FS91-J07-14 → FS89-CL2 are corrections, not uses; roots.md rank 45 (FS91-J01-3) exists only through a false edge.
+     For FS129-Z1, with item 99.
+112. **Vacuity, lane A**: the index flags no lane-A result; by reading, 25 lane-A hubs, roots and Lean-order results — none empty (FS91-J01-3
+     hypothetical by design; CL4, CL5 no-gos); the only lane-A "empty" result is ASTRA-T10 on its sub-scope, nothing resting on it; 792 older entries
+     unsorted.
+113. **Generalization, lost and not re-derived**: X22D-FLK2 — FS100-FLK holds for translation-invariant μ over 𝒜_E and at every k (one mind). For
+     FS129-Z1. **Prior art**: NOAFF-FIELDS, FALC-FAN, DICHO-K, FALC-RES owed; NOAFF-K partly (FS84-S1e, `[BrewsterEtAl2020]`); PLACE-HOM partly
+     (`[Fischer1990]` Thm 6); SQRT3-LOCAL partly (standard local facts, recalled, not read).
+114. **SA1's registration, provisionally scored** (record § 6.4; FS129-Z1 scores): merges with an entry 5 (registered 3); merge lines 17 (10);
+     weakenings 2 (2); empty 1 (2); disagreements 2 (2); lost 14 of 68 (5); lane-A edges 8 false of 9 (half); no held result false (P = 0.12); no
+     attack succeeded (P = 0.10).
