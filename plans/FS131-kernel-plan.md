@@ -154,3 +154,93 @@ row needs MR as an input (rows needing row 130 take its conclusion as a named hy
 Herglotz–Bochner, then its step 4) is its own; the eight J45 rows of § Named are FS-101's step-4 interfaces N1/N2 and their neighbours, and they
 are disposed *formalize* in this milestone's last arithmetic wave (A4) **stated against `SpectralChain`'s existing objects**, so that FS-101 consumes
 them by name. If Kooshi prefers FS-101 to formalize them in its own order, A4 moves to FS-101 unchanged (a ruling, § 4.4).
+
+## Stage 4 — SAVED: the dispositions
+
+### 4.1 The file and its checker
+
+`data/fs131/k1/dispositions.csv` — one line per backlog row: `id, section, disposition, merged_into, replacement, wave, module, extra_upstream,
+outside_backlog, ruling, reason, address`. It is written by `tools/fs131_k1_make_dispositions.py`, where every non-default decision is one line with
+its reason and the address of that reason (so a ruling that changes a disposition is a one-line edit there, and the CSV is regenerated), and checked
+by `tools/fs131_k1_dispositions.py`, which reads the backlog's own `<!--row-->` and `<!--needs-->` tags independently of the parser:
+
+```
+$ python3 tools/fs131_k1_dispositions.py
+OK: 259 rows, each once; {'formalize': 205, 'merged into': 25, 'excluded': 29}; every merge target formalize; every exclusion cited;
+every upstream in an earlier or the same wave
+$ python3 tools/fs131_k1_dispositions.py --self-test
+  plant duplicate id: FIRED · plant missing id: FIRED · plant merge into a non-formalize row: FIRED · plant excluded without reason: FIRED
+  plant upstream in a later wave: FIRED · plant excluded upstream not dropped: FIRED
+self-test: every plant fired
+```
+
+The upstream check resolves each upstream id through its disposition: a merged upstream to its targets, an excluded one to its corrected form (FS112-L60
+→ FS114-L60-LE), and an excluded one with no corrected form only if the row's reason says "drops <id>" (one case: FS116-S1-KAPPA drops FS116-V4-OUTER
+with its last clause). Rows outside § The order carry no `needs` tag in the backlog; the eleven edges this plan adds are the CSV's `extra_upstream`
+column. One upstream id is not a backlog row at all (§ 4.3, finding F2).
+
+### 4.2 The summary
+
+| section | formalize | merged into | excluded | outside theorem |
+|---|---|---|---|---|
+| § The order (178) | 137 | 18 | 23 | 0 |
+| § FS-129's compositions (32) | 30 | 2 | 0 | 0 |
+| § Left the order (26) | 23 | 0 | 3 | 0 |
+| § Named by a merge line or a caution (23) | 15 | 5 | 3 | 0 |
+| **all 259** | **205** | **25** | **29** | **0** |
+
+**No row is an outside theorem**: every backlog row is our own result. The outside theorems the rows rest on (§ 3.3) enter as Mathlib lemmas, as
+supporting declarations formalized here, or — row 134's base, row 130's conclusion, row 123's chain — as named hypotheses outside the backlog; one,
+`[Falconer1981]` Lemma 1, is decided at wave 2's planning job (formalize or an axiom with the four items).
+
+Where the 25 merges come from: the audits' lines (SR1 items 3, 7, 8; SR2 items 9–13, 16, 20–22; SR3 items 23, 24, 26; SA1 items 1, 7), each cited in the
+CSV, plus four of this plan's (FS129-SR2-QFCASE, FS129-SR2-YESLIM-EQ, FS116-RING-TRANSFER-C, FS114-L60-WALK — rulings R5–R8 below). The 29 exclusions:
+the audits' DNF lines (SR1: 15 rows of empty classes; SR2: FS112-L60, FS112-BUDGET2, FS111-C-HULL-SO; SA1 item 8: ASTRA-2026-09-14-T10) and ten of this
+plan's (rulings R1–R3).
+
+Partial forms kept as *formalize* (the reason column says which clauses): FS106-DIAM (i)–(ii), FS106-COMP's second clause, FS111-M2-HULLC without its
+semiconcave clause, FS114-N3-JOINT without its first, FS112-U1's shadow clause, FS129-MA2-FALC-HOSTS (ii)–(iv), FS114-Y6-E2RED's chain clause,
+FS116-S1-KAPPA without its last clause; forms the audits changed: FS121-D4-FACE with FACE-SHARP's hypothesis, FS114-Y5-PINALL's narrowed exception, the
+three FS89 rows with `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1` (C109); errata governing: FS112-C-ENDS, -C-DOUBLE, -N3-BASE, FS114-N2-ENDS, -N3-JOINT (C116; the
+other two C116 rows, FS112-L60 and FS114-N7-3T, are excluded). V6-HUG keeps its own colour step (C126, C131).
+
+### 4.3 The ruling list (each needs Keryx's ruling; the CSV's `ruling` column marks the rows)
+
+- **R1. FS114-K1 excluded: it is not a held result.** Its entry's verdict is "gap" (`plans/FS114-derivation.md:810`: "verdict: gap: the cases no entry
+  above excludes — rings with (Q) arcs …"), it has no grade and no handoff, and its "disc of explicit radius" names no radius. It is FS-114's open local
+  question (K1), which § Left the order carries as a row. Ruling 3's default (*formalize*) cannot apply to a statement nobody proved. (**Finding F1**, a
+  backlog defect: a gap-verdict entry entered the backlog as a row.)
+- **R2. Two second-route lemmas over QFREE-NS's empty class excluded**: FS116-S1-LENS and FS116-V4-OUTER (non-Siamese valid six-coloured fragment, a
+  four-colour vertex, a ring with no (Q) arc — empty by FS129-SR3-QFREE-NS). They serve only S1-QF's second route (SR3 item 23); formalized, they would be
+  declarations over an empty domain with no consumer, each a `VACUITY DECLARED` entry bought for nothing.
+- **R3. Seven first-route lemmas over EMPTY-NS's empty class excluded**: FS116-Y3-SIX, -Y3-TIPS, -V5-RING (beyond the two clauses FS116-N1-TWIST-D
+  carries), -V5-OUT, -V5-GERM, -V5-TIPSET, -V5-LENS. Their class (a non-Siamese six-coloured fragment whose ring carries no arc of Γ) is empty by
+  FS129-SR3-EMPTY-NS; their consumers are FS116-Y4-EMPTY's first route, the audit's DNF rows and each other (checked by script over the backlog's edges);
+  SR3 item 24 proves EMPTY-NS on FS116-V6's route instead. The audit's DNF list stopped at the rows it named; these are the rest of the same route.
+- **R4. FS116-V6-HUBS, -V6-ANTI, -V6-HUG, -V6-COUNT formalized without "simple".** SR3 item 24 proves EMPTY-NS — the non-Siamese class, simplicity not
+  assumed — on V6's route, so the route's lemmas must hold at that class; their rows say "non-Siamese simple". The plan states them at the non-Siamese
+  class, as steps of EMPTY-NS's proof, each `VACUITY DECLARED` (their class is empty by the theorem they serve). A statement change, though the audit's.
+- **R5. FS129-SR2-QFCASE merged into FS129-SR3-QFREE-NS** (S1-QF's statement as QFREE-NS's direct case, SR3 item 23): a one-line corollary in the same
+  module, not a second declaration with a row of its own.
+- **R6. FS129-SR2-YESLIM-EQ merged into FS116-O1-YESLIM**: SR2 item 18 makes YESLIM-EQ the proof of YESLIM's first clause; YESLIM is the declaration.
+- **R7. FS116-RING-TRANSFER-C merged into FS116-N2-FIVERING and FS116-N2-SIXRING**: SR1's DNF list excludes its four-colour clause; the five- and
+  six-colour clause that remains is those two rows' content.
+- **R8. FS114-L60-WALK merged into FS114-L60-LE**: it is a statement about proofs ("no step of RED, COR3, BASE, DENSE3, CV-EXISTS needs the strict
+  bound"). The kernel checks it when those rows are formalized over L60-LE's non-strict bound, which this plan requires of waves 4–5.
+- **R9. Verdict clauses dropped from four rows, their mathematics formalized**: FS106-WO (Woodall's Thm 6 as repaired, the step-4 lemma for arcs
+  longer than 2π/3), FS106-TW (Townsend's π/3 lemma), FS112-N2-RAY (the one-sided chain satisfies N4-FIN's one-sided inequalities and N4-CONE's step
+  fails there), FS114-CVB-THOM (Thomassen's steps other than the rainbow step, each stated for valid maps). "Step 6 is a GAP", "is a GAP" and "the
+  steps hold" are verdicts on texts and proofs, not statements a kernel checks.
+- **R10. TC1-STANDING-FIVE (conditional seed, C13)**: its unconditional clauses (the degree-28 field, its places above 2 inert of norm 128, no usable
+  residue field of size ≤ 47, so `L(F) ≥ 7`) are formalized in wave 10; its clause "given MR, χ(F²) ≥ 5" as an implication from row 123's chain taken
+  as a named hypothesis (FS-101's). The other two conditional seeds: FS116-Y4-SPOKE is excluded (SR1's DNF list, empty HEX3 class); TC1-SQRT3-DYADIC is
+  merged into FS129-SA1-SQRT3-LOCAL (SA1 item 7), whose general form carries no condition.
+- **R11. The eight seeds the audit excluded as empty stay excluded** (FS116-Y3-NOQ, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SPOKE, -N2-HEX6, -N2-HEX3, the
+  four-colour clause of -RING-TRANSFER-C, and FS114-N7-3T through N7-HUB): their emptiness is itself formalized, once, as FS129-SR3-EMPTY-NS (with
+  FS116-Y4-OBST merged into it) and FS129-SR3-QFREE-NS; a structure lemma over an empty class adds nothing the emptiness theorem does not carry.
+- **R12. § Left the order**: 23 of 26 formalized; the three not formalized are FS111-C-HULL-SO and FS112-BUDGET2 (SR2's DNF list) and FS114-K1 (R1).
+- **R13. FS111-M-REDUCE-I is formalized beside FS129-OR1-TOP5 in wave 9** as a supporting lemma: OR1-TOP5's `uses only:` names it and it is not a
+  backlog row (**finding F2**, backlog completeness; without it TOP5 would carry a hand result of ours as a hypothesis, which inventory item 3 forbids
+  for a backlog declaration only if the result is inside the backlog — so it is permitted, but formalizing it is cheaper than naming it).
+
+Findings sent to Keryx with this stage: F1 (R1), F2 (R13), and the prior-art debt of § 3.2.

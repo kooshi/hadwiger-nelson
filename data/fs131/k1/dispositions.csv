@@ -1,0 +1,260 @@
+id,section,disposition,merged_into,replacement,wave,module,extra_upstream,outside_backlog,ruling,reason,address
+FS106-DIAM,order,formalize,,,1,Proofs/HadwigerNelson/Plane/Diameter,,,,clauses (i) and (ii); clause (iii) is FS129-SR2-CLOSURE's corollary (SR2 item 9),plans/FS129-SR2-audit.md:467
+FS106-L,order,formalize,,,4,Proofs/HadwigerNelson/Plane/SVMap,,,,,
+FS106-SUP,order,merged into,FS129-SR2-SUPK,,2,Proofs/HadwigerNelson/Plane/Slack,,,,SR2 item 11,plans/FS129-SR2-audit.md:472
+FS106-TS-C,order,formalize,,,1,Proofs/HadwigerNelson/Plane/Diameter,,,,,
+FS106-TS-T,order,formalize,,,4,Proofs/HadwigerNelson/Plane/SVMap,,,,,
+FS106-WO,order,formalize,,,4,Proofs/HadwigerNelson/Plane/SVMap,,,Y,"its mathematical content only: Woodall's Thm 6 as repaired by Townsend's 1/3-pi lemma, and the step-4 lemma for arcs longer than 2pi/3; 'step 6 is a GAP' is a verdict on a printed text, not a statement the kernel checks",plans/FS131-kernel-plan.md
+FS106-TW,order,formalize,,,4,Proofs/HadwigerNelson/Plane/SVMap,,,Y,its mathematical content only: Townsend's pi/3 lemma (TRUE); the bibliographic clauses are not statements,plans/FS131-kernel-plan.md
+FS106-AE-MAP6,order,formalize,,,4,Proofs/HadwigerNelson/Plane/SVMap,,,,,
+FS110-N3-CONF,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/Contact,,,,,
+FS110-N3-DEG,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/Contact,,,,,
+FS110-N4-SHADOW,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/Contact,,,,,
+FS110-N4-SHAVE,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/Contact,,,,,
+FS110-N4-STUCK,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/Contact,,,,,
+FS110-N4-FIN,order,formalize,,,4,Proofs/HadwigerNelson/Plane/StuckChain,,,,,
+FS110-W-MERGE,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/Contact,,,,,
+FS111-C-FILL,order,formalize,,,2,Proofs/HadwigerNelson/Plane/MaximalCover,,,,,
+FS111-C1-UNIF,order,formalize,,,9,Proofs/HadwigerNelson/Plane/Reduction,,,,,
+FS111-M-R7,order,formalize,,,2,Proofs/HadwigerNelson/Plane/CoverExamples,,,,,
+FS111-M-SATC,order,formalize,,,2,Proofs/HadwigerNelson/Plane/MaximalCover,,,,,
+FS111-M2-COV,order,formalize,,,2,Proofs/HadwigerNelson/Plane/MaximalCover,,,,,
+FS111-M2-ZERO,order,formalize,,,1,Proofs/HadwigerNelson/Plane/UnitAvoiding,,,,,
+FS111-V0-CLOSE,order,merged into,FS129-SR2-CLOSURE,,1,Proofs/HadwigerNelson/Plane/Closure,,,,SR2 item 9: CLOSURE in place of V0-CLOSE (CLOSURE applied to the union of the colour-j regions),plans/FS129-SR2-audit.md:467
+FS111-V0-ID1,order,formalize,,,1,Proofs/HadwigerNelson/Plane/DensityPoints,,,,,
+FS111-C-HULL,order,merged into,FS129-SR2-HULLSET,,1,Proofs/HadwigerNelson/Plane/DensityPoints,,,,SR2 item 10,plans/FS129-SR2-audit.md:470
+FS111-M-HALF,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Pinch,,,,,
+FS111-M-PINCH,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Pinch,,,,,
+FS111-M-C11,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Pinch,,,,,
+FS111-M2-INT,order,formalize,,,1,Proofs/HadwigerNelson/Plane/DensityPoints,,,,,
+FS111-M2-FIX,order,formalize,,,2,Proofs/HadwigerNelson/Plane/MaximalCover,,,,,
+FS111-M2-HULLC,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Pinch,,,,"without its semiconcave clause, which FS111-M-COVER-SC carries (SR2 item 17)",plans/FS129-SR2-audit.md:479
+FS111-V0-RESCALE,order,formalize,,,2,Proofs/HadwigerNelson/Plane/Slack,,,,,
+FS111-C-SIX-M,order,formalize,,,9,Proofs/HadwigerNelson/Plane/Reduction,,,,,
+FS111-M2-REDUCE-C,order,formalize,,,9,Proofs/HadwigerNelson/Plane/Reduction,,,,,
+FS111-W-KB-DIR,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Pinch,,,,,
+FS111-W-NOBEND,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Pinch,,,,,
+FS111-W-NOREP,order,merged into,FS121-DB1-L3,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,SR2 item 22,plans/FS129-SR2-audit.md:487
+FS111-W-SQ9,order,formalize,,,2,Proofs/HadwigerNelson/Plane/CoverExamples,,,,,
+FS111-M2-INTRAD,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Pinch,,,,,
+FS112-A4SIX,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,
+FS112-BOWTIE,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps,,,,,
+FS112-C-DOUBLE,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps,,,,"with its errata, caution C116",plans/FS129-SR2-audit.md
+FS112-DISC1,order,merged into,FS129-SR2-DISC1TS,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,"SR2 item 12 names TS-T in place of DISC1 through FS129-SR2-DISC1TS; DISC1TS is DISC1's statement as TS-T's corollary, so DISC1 merges into DISC1TS (its consumers LOCALDENSE, N3-DENSE3 cite it)",plans/FS129-SR2-audit.md:474
+FS112-FLANK,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,
+FS112-ISO,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,
+FS112-LOCK,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,
+FS112-BEND,order,merged into,FS112-N2-BENDS,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,SR2 item 13,plans/FS129-SR2-audit.md:475
+FS112-N2-BENDS,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,
+FS112-N2-FLANK-Q,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,
+FS112-N2-RAY,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,Y,"its mathematical content: the one-sided chain lambda_k = -1/(k+1), upsilon_k = 0 satisfies N4-FIN's one-sided inequalities, and N4-CONE's step fails there; 'is a GAP' is a verdict",plans/FS131-kernel-plan.md
+FS112-N3-ANTI,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps,,,,,
+FS112-N3-FAIL,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps,,,,,
+FS112-N3-NOBOTH,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps,,,,,
+FS112-N3-END,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps,,,,,
+FS112-N3-PAIRS,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps,,,,,
+FS112-NB4P,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,
+FS112-SIX,order,merged into,FS116-N2-FIVERING;FS129-SR1-SIXQ,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,SR1 item 3: FIVERING (five colours) and SIXQ (six) in place of FS112-SIX,plans/FS129-SR1-audit.md:540
+FS112-U1,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,"its shadow clause, as a corollary of FS116-V5-U1, whose first three clauses replace U1's (SR1 item 4)",plans/FS129-SR1-audit.md:541
+FS114-BV-HEX,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,,
+FS114-CV-HD,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Terminal,,,,,
+FS114-CVB-THOM,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,Y,"as the list of [Thomassen1999]'s steps other than the rainbow step, each stated for valid maps with Siamese pairs allowed (wave 5's planner reads CVB's record)",plans/FS131-kernel-plan.md
+FS114-L60-LE,order,formalize,,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,,,
+FS112-L60,order,excluded,,FS114-L60-LE,,,,,,false at exactly 60 degrees (its erratum); SR2 item 14 and SR2's DNF list,plans/FS129-SR2-audit.md:476
+FS112-N2-RED,order,merged into,FS112-N2-TERM,,5,Proofs/HadwigerNelson/Plane/ValidMap/Terminal,,,,SR2 item 13 (RED's procedure as TERM's lemma),plans/FS129-SR2-audit.md:475
+FS112-N2-TERM,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Terminal,,,,,
+FS112-C-ENDS,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Terminal,,,,"in its erratum's form (residue deleted), caution C116",plans/FS129-SR2-audit.md
+FS112-N3-COR3,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,,
+FS112-ROTHEX,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,,
+FS112-N3-BASE,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,"with its errata, caution C116; row 134's base enters as the named hypothesis Row134Base (outside the backlog, plan § 3.3)",plans/FS129-SR2-audit.md
+FS112-N3-DENSE3,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,,
+FS114-L60-WALK,order,merged into,FS114-L60-LE,,4,Proofs/HadwigerNelson/Plane/ValidMap/UnitArc,,,Y,"a statement about proofs (no step of RED, COR3, BASE, DENSE3, CV-EXISTS needs the strict bound): its content is checked by the kernel when those rows are formalized over L60-LE's non-strict bound, which this plan requires (§ 4.3)",plans/FS131-kernel-plan.md
+FS114-CV-EXISTS,order,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,,
+FS114-N114-RD,order,formalize,,,7,Proofs/HadwigerNelson/Plane/RouteT,,,,,
+FS114-N114-EULER,order,formalize,,,7,Proofs/HadwigerNelson/Plane/RouteT,,,,,
+FS114-N2-FIVE,order,formalize,,,7,Proofs/HadwigerNelson/Plane/RouteT,,,,,
+FS114-N114-ROOM,order,formalize,,,7,Proofs/HadwigerNelson/Plane/RouteT,,,,,
+FS114-N2-ENDS,order,formalize,,,7,Proofs/HadwigerNelson/Plane/RouteT,,,,"with its errata, caution C116",plans/FS129-SR2-audit.md
+FS114-N3-LOCAL,order,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Bowtie,,,,,
+FS114-N3-DR,order,merged into,FS114-Y4-RSTOPALL,,7,Proofs/HadwigerNelson/Plane/FourColour/Bowtie,,,,SR2 item 16,plans/FS129-SR2-audit.md:478
+FS114-N4-LEMMAS,order,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Bowtie,,,,,
+FS114-N4-D,order,merged into,FS114-Y4-RSTOPALL,,7,Proofs/HadwigerNelson/Plane/FourColour/Bowtie,,,,SR2 item 16 (N4-D a second route),plans/FS129-SR2-audit.md:478
+FS114-N5-GRING,order,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Bowtie,,,,,
+FS114-N6-NOQ,order,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Pinwheel,,,,,
+FS114-N7-QOPP,order,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Pinwheel,,,,,
+FS114-Y2-BOWTIE,order,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Bowtie,,,,,
+FS114-Y3-RSTOP,order,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Bowtie,,,,,
+FS114-Y4-LUNE,order,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Bowtie,,,,,
+FS114-Y4-RSTOPALL,order,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Bowtie,,,,,
+FS114-Y6-HALF,order,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Bowtie,,,,,
+FS114-N7-3T,order,excluded,,,,,,,,SR1's DNF list: with N7-HUB,plans/FS129-SR1-audit.md:552
+FS114-N7-HUB,order,excluded,,,,,,,,SR1's DNF list: empty given FS129-OR1-QFREE (now FS129-SR3-QFREE-NS),plans/FS129-SR1-audit.md:552
+FS116-N1-GERM-R,order,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS116-N1-TWIST-D,order,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS116-N1-ECHO,order,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS116-N1-GERM-S,order,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS116-N1-QFREE4,order,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS116-N1-TOUCH,order,merged into,FS129-SR2-TOUCHW,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,SR2 item 20 (idle hypothesis dropped),plans/FS129-SR2-audit.md:484
+FS116-N2-FIVERING,order,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS116-N2-SIXRING,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Star,,,,,
+FS116-N3-PAIR,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub,,,,,
+FS116-N3-STAR2,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub,,,,,
+FS116-O1-SATPIN,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Fragment,,,,,
+FS116-N1-AXIS,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Fragment,,,,,
+FS116-O1-YESLIM,order,formalize,,,3,Proofs/HadwigerNelson/Plane/YesLimit,FS106-EQ,,,"its first clause by FS129-SR2-YESLIM-EQ's route (SR2 item 18); its k = 6 clause needs chi(R^2) <= chi_m0(R^2) (row 130's free half, FS-103's N-EASY), formalized in wave 2 as a supporting lemma",plans/FS129-SR2-audit.md:481
+FS116-RING-GERM,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Star,,,,,
+FS116-N2-STAR,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Star,,,,,
+FS116-N2-ANTI,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Star,,,,,
+FS116-N2-RECIP,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Star,,,,,
+FS116-N2-HEX6,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-N2-HEX3,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-N3-CONE,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub,,,,,
+FS116-N3-CROSS,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub,,,,,
+FS116-RING-Q-PRIME,order,merged into,FS116-RING-Q-PRIME-S,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,SR2 item 21,plans/FS129-SR2-audit.md:485
+FS116-RING-Q-PRIME-S,order,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS116-RING-TWIST-C,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Star,,,,,
+FS116-RING-TRANSFER-C,order,merged into,FS116-N2-FIVERING;FS116-N2-SIXRING,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,Y,"SR1's DNF list excludes its four-colour clause (empty); what remains, five- and six-colour rings, is FIVERING's and SIXRING's content",plans/FS129-SR1-audit.md:552
+FS116-S1-CLUSTER,order,formalize,,,3,Proofs/HadwigerNelson/Plane/Tiles,,,,,
+FS116-S1-EXIT,order,formalize,,,3,Proofs/HadwigerNelson/Plane/Lens,,,,,
+FS116-S1-RUNG,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Fragment,,,,,
+FS116-V4-CHORD,order,formalize,,,1,Proofs/HadwigerNelson/Plane/Chord,,,,,
+FS116-V4-DICHOTOMY,order,formalize,,,3,Proofs/HadwigerNelson/Plane/Tiles,,,,first clause as FS111-M-HULL2's case for two open tiles (SR2 item 10),plans/FS129-SR2-audit.md:470
+FS116-V4-MEET,order,formalize,,,3,Proofs/HadwigerNelson/Plane/Tiles,,,,,
+FS116-V4-OUTER,order,excluded,,,,,,,Y,"as FS116-S1-LENS: empty class by FS129-SR3-QFREE-NS; its one consumer, S1-KAPPA's last clause, is excluded by SR3's DNF-2",plans/FS129-SR3-audit.md
+FS116-V4-PARTNER,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Fragment,,,,,
+FS116-V4-TWIST,order,formalize,,,3,Proofs/HadwigerNelson/Plane/Tiles,,,,,
+FS116-S1-KAPPA,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Fragment,,,,without its last clause (SR3 DNF-2); drops FS116-V4-OUTER with it,plans/FS129-SR3-audit.md
+FS116-S1-PAIR,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Fragment,,,,,
+FS116-S1-LENS,order,excluded,,,,,,,Y,"its class (non-Siamese valid six-coloured fragment, four-colour vertex, (Q)-free ring) is empty by FS129-SR3-QFREE-NS; it serves only S1-QF's second route (SR3 item 23), so formalizing it would add a declaration over an empty domain with no consumer",plans/FS129-SR3-audit.md
+FS116-S1-QF,order,merged into,FS129-SR3-QFREE-NS,,9,Proofs/HadwigerNelson/Plane/Classes,,,,SR3 item 23,plans/FS129-SR3-audit.md
+FS116-V5-NE1,order,formalize,,,3,Proofs/HadwigerNelson/Plane/Tiles,,,,first clause as FS129-SR2-CLOSURE's corollary (SR2 item 9),plans/FS129-SR2-audit.md:467
+FS116-V5-OUT,order,excluded,,,,,,,Y,"its class (non-Siamese six-coloured fragment whose ring carries no arc of Gamma, at a vertex of at least four colours) is empty by FS129-SR3-EMPTY-NS; it lies on Y4-EMPTY's first route only (its consumers are Y4-EMPTY, the DNF rows and each other), while SR3 item 24 proves EMPTY-NS on FS116-V6's route; V5-RING's first two clauses are carried by FS116-N1-TWIST-D (SR2 item 21)",plans/FS129-SR3-audit.md
+FS116-V5-OUT2,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub,,,,in V5-QCOL's setting only (V5-RING's is excluded),plans/FS131-kernel-plan.md
+FS116-V5-QCOL,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub,,,,,
+FS116-V5-RING,order,excluded,,,,,,,Y,"its class (non-Siamese six-coloured fragment whose ring carries no arc of Gamma, at a vertex of at least four colours) is empty by FS129-SR3-EMPTY-NS; it lies on Y4-EMPTY's first route only (its consumers are Y4-EMPTY, the DNF rows and each other), while SR3 item 24 proves EMPTY-NS on FS116-V6's route; V5-RING's first two clauses are carried by FS116-N1-TWIST-D (SR2 item 21)",plans/FS129-SR3-audit.md
+FS116-V5-GERM,order,excluded,,,,,,,Y,"its class (non-Siamese six-coloured fragment whose ring carries no arc of Gamma, at a vertex of at least four colours) is empty by FS129-SR3-EMPTY-NS; it lies on Y4-EMPTY's first route only (its consumers are Y4-EMPTY, the DNF rows and each other), while SR3 item 24 proves EMPTY-NS on FS116-V6's route; V5-RING's first two clauses are carried by FS116-N1-TWIST-D (SR2 item 21)",plans/FS129-SR3-audit.md
+FS116-V5-TIPSET,order,excluded,,,,,,,Y,"its class (non-Siamese six-coloured fragment whose ring carries no arc of Gamma, at a vertex of at least four colours) is empty by FS129-SR3-EMPTY-NS; it lies on Y4-EMPTY's first route only (its consumers are Y4-EMPTY, the DNF rows and each other), while SR3 item 24 proves EMPTY-NS on FS116-V6's route; V5-RING's first two clauses are carried by FS116-N1-TWIST-D (SR2 item 21)",plans/FS129-SR3-audit.md
+FS116-V5-LENS,order,excluded,,,,,,,Y,"its class (non-Siamese six-coloured fragment whose ring carries no arc of Gamma, at a vertex of at least four colours) is empty by FS129-SR3-EMPTY-NS; it lies on Y4-EMPTY's first route only (its consumers are Y4-EMPTY, the DNF rows and each other), while SR3 item 24 proves EMPTY-NS on FS116-V6's route; V5-RING's first two clauses are carried by FS116-N1-TWIST-D (SR2 item 21)",plans/FS129-SR3-audit.md
+FS116-Y3-SIX,order,excluded,,,,,,,Y,"its class (non-Siamese six-coloured fragment whose ring carries no arc of Gamma, at a vertex of at least four colours) is empty by FS129-SR3-EMPTY-NS; it lies on Y4-EMPTY's first route only (its consumers are Y4-EMPTY, the DNF rows and each other), while SR3 item 24 proves EMPTY-NS on FS116-V6's route; V5-RING's first two clauses are carried by FS116-N1-TWIST-D (SR2 item 21)",plans/FS129-SR3-audit.md
+FS116-Y3-TIPS,order,excluded,,,,,,,Y,"its class (non-Siamese six-coloured fragment whose ring carries no arc of Gamma, at a vertex of at least four colours) is empty by FS129-SR3-EMPTY-NS; it lies on Y4-EMPTY's first route only (its consumers are Y4-EMPTY, the DNF rows and each other), while SR3 item 24 proves EMPTY-NS on FS116-V6's route; V5-RING's first two clauses are carried by FS116-N1-TWIST-D (SR2 item 21)",plans/FS129-SR3-audit.md
+FS116-V5-U1,order,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS116-V5-DICHO,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub,,,,,
+FS116-N3-SEMI,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub,,,,,
+FS116-RING-TRANSFER-QC,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub,,,,,
+FS116-V6-HUBS,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,Y,"stated in the non-Siamese class without 'simple' (SR3 item 24's route for EMPTY-NS); a step of EMPTY-NS's proof, VACUITY DECLARED (its class is empty by EMPTY-NS)",plans/FS129-SR3-audit.md
+FS116-V6-ANTI,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,Y,as FS116-V6-HUBS,plans/FS129-SR3-audit.md
+FS116-V6-HUG,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,Y,"with its own colour step (V6-GERM), not DOUBLETIP's (cautions C126, C131); stated in the non-Siamese class without 'simple', as SR3 item 24's route for EMPTY-NS needs",plans/FS129-SR3-audit.md
+FS116-V6-COUNT,order,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,Y,"as FS116-V6-HUBS, with its last step on sectors (SR3 item 24)",plans/FS129-SR3-audit.md
+FS116-Y2-SIXFRAG,order,formalize,,,3,Proofs/HadwigerNelson/Plane/SixFragment,,,,,
+FS116-Y3-HUBCOL,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-Y3-NBTIP,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-Y3-NOQ,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-Y3-TIGHT,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-Y3-LENS,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-Y3-TIGHTLENS,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-Y3-STARFORCE,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-Y4-FLANK,order,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS116-Y4-EMPTY,order,merged into,FS129-SR3-EMPTY-NS,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,,SR3 item 24,plans/FS129-SR3-audit.md
+FS116-Y4-SYM,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-Y4-SPOKE,order,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS121-C1-BOUND,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/MapColouring,,,,,
+FS121-C1-SAT,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/MapColouring,,,,,
+FS121-D1-XCORNER,order,formalize,,,1,Proofs/HadwigerNelson/Plane/Chord,,,,,
+FS121-D2-EXT,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-D2-THIN,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-D3-FALLSAT,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Pinch,,,,,
+FS121-D3-GRUNDY,order,formalize,,,2,Proofs/HadwigerNelson/Plane/MaximalCover,,,,,
+FS121-C1-GMAP,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/MapColouring,,,,,
+FS121-D4-FACE,order,formalize,,,2,Proofs/HadwigerNelson/Plane/Slack,FS121-V5-FACE-SHARP,,,with FS121-V5-FACE-SHARP's hypothesis rho^2 >= 2g - g^2 in place of 2g < rho^2 (SR1 item 6),plans/FS129-SR1-audit.md:546
+FS121-DB1-L3,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-O1-ENDS,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-O1-OUT,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-V2-SECTOR,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-D1-VT,order,merged into,FS121-V2-VT-W,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,"SR1 item 7, conditional on VT-W's corner case being consumed: wave 6's planner confirms it; if not, D1-VT returns to formalize",plans/FS129-SR1-audit.md:548
+FS121-D1-EROSION,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-V5-LOC,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-V5-RAY,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-D2-SYM,order,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+TC1-SQRT3-DYADIC,order,merged into,FS129-SA1-SQRT3-LOCAL,,2,Proofs/HadwigerNelson/Arith/Dyadic,,,,"SA1 item 7 (the general local form; a conditional seed, caution C13)",plans/FS129-SA1-audit.md
+TC1-STANDING-FIVE,order,formalize,,,10,Proofs/HadwigerNelson/Arith/StandingFive,,,Y,"conditional seed (C13): its unconditional clauses (the field, its places above 2, no usable residue field of size <= 47, so L(F) >= 7) in wave 10; 'given MR, chi(F^2) >= 5' as an implication from row 123's chain, named as a hypothesis (FS-101's)",plans/FS131-kernel-plan.md
+FS129-OA1-NOPERLAW,comps,formalize,,,2,Proofs/HadwigerNelson/Plane/Stationary,,,,,
+FS129-OR1-LOCALDENSE,comps,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,,
+FS129-OR1-DISCF-NS,comps,formalize,,,9,Proofs/HadwigerNelson/Plane/Classes,,,,,
+FS129-OR1-TOP5,comps,formalize,,,9,Proofs/HadwigerNelson/Plane/Reduction,,FS111-M-REDUCE-I,Y,"FS111-M-REDUCE-I, which it uses, is not a backlog row: formalized beside it in wave 9 as a supporting lemma (finding sent to Keryx)",plans/FS131-kernel-plan.md
+FS129-OR1-WHOLE,comps,formalize,,,3,Proofs/HadwigerNelson/Plane/Tiles,,,,,
+FS129-SA1-FALC-FAN,comps,formalize,,,1,Proofs/HadwigerNelson/Arith/FalconerFan,,,,,
+FS129-SA1-FALC-DICHO-K,comps,formalize,,,1,Proofs/HadwigerNelson/Arith/FalconerFan,,,,,
+FS129-SA1-FALC-RED,comps,formalize,,,2,Proofs/HadwigerNelson/Plane/FalconerReduction,,,,,
+FS129-SA1-NOAFF-K,comps,formalize,,,1,Proofs/HadwigerNelson/Arith/NoAffine,,,,,
+FS129-SA1-PLACE-HOM,comps,formalize,,,2,Proofs/HadwigerNelson/Arith/PlaceHom,,,,,
+FS129-SA1-FALC-RES,comps,formalize,,,2,Proofs/HadwigerNelson/Arith/FalconerField,,,,,
+FS129-MA2-FALC-HOSTS,comps,formalize,,,2,Proofs/HadwigerNelson/Arith/FalconerField,,,,clauses (ii)-(iv); clause (i) is FS129-SA1-FALC-RES's (SA1 item 5),plans/FS129-SA1-audit.md
+FS129-SA1-NOAFF-FIELDS,comps,formalize,,,2,Proofs/HadwigerNelson/Arith/PlaceHom,,,,,
+FS129-SA1-SQRT3-LOCAL,comps,formalize,,,2,Proofs/HadwigerNelson/Arith/Dyadic,,,,,
+FS129-SR1-BENDANY,comps,formalize,,,9,Proofs/HadwigerNelson/Plane/Classes,,,,,
+FS129-OR1-QFREE-CLASS,comps,formalize,,,9,Proofs/HadwigerNelson/Plane/Classes,,,,,
+FS129-SR1-BENDLE3,comps,formalize,,,9,Proofs/HadwigerNelson/Plane/Classes,,,,,
+FS129-SR1-RINGBAND,comps,formalize,,,1,Proofs/HadwigerNelson/Plane/RingBand,,,,,
+FS129-SR1-SIXQ,comps,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS129-SR1-TWOCIRC,comps,formalize,,,1,Proofs/HadwigerNelson/Plane/Chord,,,,,
+FS129-SR2-CLOSURE,comps,formalize,,,1,Proofs/HadwigerNelson/Plane/Closure,,,,,
+FS129-SR2-DISC1TS,comps,formalize,,,5,Proofs/HadwigerNelson/Plane/ValidMap/Dense,,,,,
+FS129-SR2-HULLSET,comps,formalize,,,1,Proofs/HadwigerNelson/Plane/DensityPoints,,,,,
+FS129-SR2-SUPK,comps,formalize,,,2,Proofs/HadwigerNelson/Plane/Slack,,,,,
+FS129-SR2-TOUCHW,comps,formalize,,,3,Proofs/HadwigerNelson/Plane/RingGerm,,,,,
+FS129-SR2-YESLIM-EQ,comps,merged into,FS116-O1-YESLIM,,3,Proofs/HadwigerNelson/Plane/YesLimit,,,Y,"SR2 item 18: YESLIM is formalized by YESLIM-EQ's route (FS106-EQ's (c) => (a), then Lemma P), so YESLIM-EQ is the proof of YESLIM's first clause, not a second declaration",plans/FS129-SR2-audit.md:481
+FS129-SR3-E2ONE,comps,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Pinwheel,,,,,
+FS129-SR3-EMPTY-NS,comps,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,FS116-V6-HUBS;FS116-V6-HUG;FS116-V6-ANTI;FS116-V6-COUNT;FS116-RING-GERM;FS116-Y4-FLANK,,,proved on FS116-V6's route (SR3 item 24); carries FS116-Y4-EMPTY and FS116-Y4-OBST,plans/FS129-SR3-audit.md
+FS129-SR3-OUTERADJ,comps,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,,,
+FS129-MR1-DOUBLETIP,comps,formalize,,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,,,
+FS129-SR3-QFREE-NS,comps,formalize,,,9,Proofs/HadwigerNelson/Plane/Classes,FS129-SR3-EMPTY-NS,,,carries FS116-S1-QF and FS129-SR2-QFCASE (SR3 item 23),plans/FS129-SR3-audit.md
+FS129-SR2-QFCASE,comps,merged into,FS129-SR3-QFREE-NS,,9,Proofs/HadwigerNelson/Plane/Classes,,,Y,"SR3 item 23: S1-QF (QFCASE's statement) is QFREE-NS's direct case, so QFCASE is a one-line corollary carried inside QFREE-NS's module",plans/FS129-SR3-audit.md
+FS106-COMP,left,formalize,,,2,Proofs/HadwigerNelson/Plane/Slack,FS106-EQ,,,second clause only (the equivalence with [Voronov2023] Thm 1.1 named as a Prop); its first clause is FS106-EQ's (c) => (a) (SR2 item 11),plans/FS129-SR2-audit.md:472
+FS106-REM,left,formalize,,,2,Proofs/HadwigerNelson/Plane/Slack,,,,,
+FS106-EQ,left,formalize,,,2,Proofs/HadwigerNelson/Plane/Slack,FS129-SR2-SUPK,,,,
+FS111-C-HULL-SO,left,excluded,,,,,,,,SR2's DNF list: refuted; in the order only through false edges,plans/FS129-SR2-audit.md
+FS111-M2-DISC7,left,formalize,,,2,Proofs/HadwigerNelson/Plane/CoverExamples,,,,,
+FS111-V0-CLEAN,left,formalize,,,9,Proofs/HadwigerNelson/Plane/Reduction,FS106-DIAM,,,,
+FS111-C1-PW,left,formalize,,,9,Proofs/HadwigerNelson/Plane/Reduction,,,,,
+FS111-M-COVER-SC,left,formalize,,,2,Proofs/HadwigerNelson/Plane/MaximalCover,FS111-M-SATC,,,,
+FS111-M-HULL2,left,formalize,,,1,Proofs/HadwigerNelson/Plane/DensityPoints,FS129-SR2-HULLSET,,,,
+FS121-D4-HOLE,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS111-M3-BAND,left,formalize,,,2,Proofs/HadwigerNelson/Plane/CoverExamples,,,,,
+FS111-M3-FIXCONV,left,formalize,,,2,Proofs/HadwigerNelson/Plane/CoverExamples,,,,,
+FS111-M3-HC,left,formalize,,,2,Proofs/HadwigerNelson/Plane/CoverExamples,,,,,
+FS111-M3-IRREG,left,formalize,,,2,Proofs/HadwigerNelson/Plane/CoverExamples,,,,,
+FS121-DB1-L6,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS112-BUDGET2,left,excluded,,,,,,,,SR2's DNF list: FALSE as stated; in the order only through false edges,plans/FS129-SR2-audit.md
+FS114-N3-JOINT,left,formalize,,,7,Proofs/HadwigerNelson/Plane/RouteT,FS114-N2-ENDS,,,with its errata (caution C116); its first clause is FS114-N2-ENDS's (SR2 item 15),plans/FS129-SR2-audit.md:477
+FS114-Y-EDGE,left,formalize,,,7,Proofs/HadwigerNelson/Plane/RouteT,,,,,
+FS114-Y5-PINALL,left,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Pinwheel,FS129-SR3-E2ONE,,,"with the exception 'E1, or E2 at two or more blades' (SR3 item 27); PINALL as filed is a lemma of FS129-SR3-E2ONE inside the same module",plans/FS129-SR3-audit.md
+FS114-K1,left,excluded,,,,,,,Y,"not a held result: its entry's verdict is 'gap' (plans/FS114-derivation.md:810, FS114-K1: the cases no entry excludes); it is FS-114's open local question, with no grade and no handoff, and its 'explicit radius' is unspecified",plans/FS114-derivation.md:810
+FS121-DB1-L7,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-V2-EROSION-DIAM,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Pinch,,,,,
+FS121-V3-CPI,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-V2-VT-W,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-D1-PENCILWIN,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+FS121-D2-PERFIN,left,formalize,,,6,Proofs/HadwigerNelson/Plane/Saturated/Ladder,,,,,
+ASTRA-2026-09-14-T10,extras,excluded,,,,,,,,SA1 item 8: hypothesis empty over every F containing K with a usable prime of residue field F_11 or chi <= 4; its sentence is weaker than the Separated it means and false as read; FS-49 is not formalized here,plans/FS129-SA1-audit.md
+FS110-N2-RING,extras,merged into,FS129-SR1-RINGBAND,,1,Proofs/HadwigerNelson/Plane/RingBand,,,,SR1 item 8,plans/FS129-SR1-audit.md:550
+FS110-Y3-GP,extras,merged into,FS129-SR1-RINGBAND,,1,Proofs/HadwigerNelson/Plane/RingBand,,,,SR1 item 8,plans/FS129-SR1-audit.md:550
+FS114-Y6-E2RED,extras,formalize,,,7,Proofs/HadwigerNelson/Plane/FourColour/Pinwheel,,,,"its chain clause only; the survivor clause read as 'no survivor at a single blade' (SR3 item 27, DNF-1)",plans/FS129-SR3-audit.md
+FS116-V1-FRAME,extras,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS116-V6-ADJ,extras,merged into,FS129-SR3-OUTERADJ,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,,"SR3 item 26 (OUTERADJ in place of V6-ADJ; V6-ADJ's argument its last step, class-free); SR1's DNF list also names V6-ADJ",plans/FS129-SR3-audit.md
+FS116-Y4-OBST,extras,merged into,FS129-SR3-EMPTY-NS,,8,Proofs/HadwigerNelson/Plane/RingCalculus/Empty,,,,SR3 item 24: OBST follows from EMPTY-NS (the HEX3 class lies in the Gamma-free non-Siamese class),plans/FS129-SR3-audit.md
+FS116-Y4-Q1,extras,excluded,,,,,,,,"SR1's DNF list: the class is empty (Gamma-free ring, non-Siamese simple; empty by FS129-SR3-EMPTY-NS)",plans/FS129-SR1-audit.md:552
+FS121-V5-FACE-SHARP,extras,formalize,,,2,Proofs/HadwigerNelson/Plane/Slack,,,,,
+FS84-S1-S1e,extras,merged into,FS129-SA1-NOAFF-K,,1,Proofs/HadwigerNelson/Arith/NoAffine,,,,SA1 item 1,plans/FS129-SA1-audit.md
+FS89-CL2,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/CharacterColouring,,,,"with the corrected A, as FS89-S0A-2",plans/FS129-SA1-audit.md
+FS89-S0A-10,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/CharacterColouring,,,,"with the corrected A, as FS89-S0A-2",plans/FS129-SA1-audit.md
+FS89-S0A-2,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/CharacterColouring,,,,"with A(R_F) = Hom_Q(F(i), R) mod 1 in place of the Notation's A (caution C109, SA1 item 9): false as written",plans/FS129-SA1-audit.md
+J45-N1,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/SpectralInputs,,,,,
+J45-N2,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/SpectralInputs,,,,,
+J45-SI-4,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/SpectralInputs,,,,,
+J45-SI-5,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/SpectralInputs,,,,,
+J45-SI-C,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/SpectralInputs,,,,,
+J45-SI-J,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/SpectralInputs,,,,,
+J45-SP-if,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/SpectralInputs,,,,,
+J45-SP-oi,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/SpectralInputs,,,,,
+X25B-L1,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/StationaryRatio,,,,,
+X25B-PZ,extras,formalize,,,10,Proofs/HadwigerNelson/Arith/StationaryRatio,,,,,
