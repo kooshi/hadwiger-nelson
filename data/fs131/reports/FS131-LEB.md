@@ -3,7 +3,7 @@ RESULT: Lebesgue's covering theorem for the square (Hurewicz–Wallman Thm IV 2,
 RESULT: wider forms — TRUE, [kernel]: `lebesgue_covering_rect` (any closed rectangle of ℂ, any finite index type); `lebesgue_covering_rect'` (the top/bottom condition needed only for sets that miss the left side); `exists_mem_inter_three` (the three-set, cubical-KKM form)
 RESULT: Sperner's lemma on the triangulated square grid (three labels, square boundary conditions, mod-2 door count) — TRUE, [kernel]: `HadwigerNelson.SpernerGrid.exists_rainbowCell`
 RESULT: wave 4's `sorry` is discharged by one line, `:= LebesgueCovering.lebesgue_covering_square c hs F hF hcov hLR hBT`, tested against a verbatim copy of wave 4's declarations in its namespace with its `open` line (`data/fs131/leb/Wave4Bridge.lean`; negative control fires)
-RECORD: plans/FS131-LEB-kernel-plan.md (branch fs131-leb)   COMMITS: 9c3bf7dd, 68e6e7bb, 18735b71 (the two modules), 4cb84783, 2ff490b7, 1ded1a55, and this report's commit
+RECORD: plans/FS131-LEB-kernel-plan.md (branch fs131-leb)   COMMITS: 9c3bf7dd, 68e6e7bb, 18735b71 (the two modules), 4cb84783, 2ff490b7, 1ded1a55, f388afb1 (this report)
 INVENTORY:
 - result — Lebesgue's covering theorem, n = 2, for the square and any rectangle, [kernel], 357 lines — Proofs/HadwigerNelson/Topology/LebesgueCovering.lean (worktree fs131-leb)
 - result — Sperner's lemma on the triangulated square grid, [kernel], 192 lines — Proofs/HadwigerNelson/Topology/SpernerGrid.lean
