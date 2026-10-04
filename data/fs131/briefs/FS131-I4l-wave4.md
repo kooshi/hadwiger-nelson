@@ -91,3 +91,13 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 several trees are building today, so on exit 75 wait ten minutes and retry. `lake env lean` (with § 14.1's flags) is for iteration only, never evidence.
 The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`. You start no agents of your own
 (standing rule 1).
+
+
+## Amendment, 2026-10-04 — `exists_merge`'s colour clause (inventory items 268–269)
+
+A definitions audit found `exists_merge`'s clause `(∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x)` unsatisfiable (item 268). The ruling, whose first line is:
+
+> 269. **Ruling on item 268: `exists_merge` and `exists_merge_aux` take `F'.coloursAt v ⊆ F.coloursAt v` in place of the off-rim clause.** Choice: IM2 replaces the
+> — source: plans/FS131-close-inventory.md
+
+When `n3_end` uses `exists_merge`, use only its vertex clause `F'.coloursAt v ⊆ F.coloursAt v` (the new form), never the off-rim clause, which is being removed on `fs131-w4m`. Your touches are unchanged. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
