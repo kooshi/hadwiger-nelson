@@ -8,7 +8,8 @@ Wave 5's skeleton (`plans/FS131-w5-kernel-plan.md` § 3). Rows: **FS129-SR2-DISC
 `disc1ts_degree`; the fragment form FS129-OR1-LOCALDENSE reads, `disc1_local`), **FS112-N3-COR3** (`cor3`), **FS112-N3-BASE**
 (`n3_base`), **FS129-OR1-LOCALDENSE** (`localDense`), **FS112-N3-DENSE3** (`dense3`), **FS114-CV-EXISTS** (`cv_exists`), and the
 seven-colour control of `Row134BaseUA` (`not_row134BaseUA_seven`). `Row134BaseUA` (the foundation, `Plane/ValidMap/Chain`) is wave 5's
-intermediate statement of the base, proved here as `row134BaseUA` (FS112-N3-BASE's walk; inventory item 197). FS112-ROTHEX and FS114-BV-HEX, which the walk reads, are stated in `Plane/ValidMap/HexRing`; FS114-CVB-THOM in `Plane/ValidMap/MapGraph` (plan § 8).
+intermediate statement of the base; `row134BaseUA` and its four consumers moved to `Plane/ValidMap/BaseDense`, downstream of the walk's leaves
+(`Plane/ValidMap/BaseWalk`, job FS131-KB). FS112-ROTHEX and FS114-BV-HEX, which the walk reads, are stated in `Plane/ValidMap/HexRing`; FS114-CVB-THOM in `Plane/ValidMap/MapGraph` (plan § 8).
 -/
 
 namespace HadwigerNelson.Plane
@@ -51,49 +52,6 @@ theorem cor3 {F : ArcMap 6} (hF : F.Valid) {u u' : ℂ} (hu : F.IsCubicTrichroma
     (hcu : F.Covers u 1) (hcu' : F.Covers u' 1) (hdis : Disjoint (F.coloursAt u) (F.coloursAt u')) (hd : dist u u' < 2) :
     ∃ qp qm : ℂ, qp ≠ qm ∧ ∀ q ∈ ({qp, qm} : Set ℂ), dist q u = 1 ∧ dist q u' = 1 ∧ 4 ≤ (F.coloursAt q).ncard ∧
       F.IsLeavingCentre u q ∧ F.IsLeavingCentre u' q ∧ ∃ θ₁ θ₂, F.BothKind q θ₁ θ₂ := by
-  sorry
-
-/-! ## FS112-N3-BASE, FS129-OR1-LOCALDENSE, FS112-N3-DENSE3 -/
-
-/-- **The walk's assembly: row 134's base with unit arcs** (`Row134BaseUA`; FS112-N3-BASE's table, `plans/FS112-N-proof.md` stage N3-3,
-NB3 § 1.4 steps 1–12): CB's route with CE's repairs, CUSP-BASE, S–V Lemmas 3–6, Props. 10, 17–19 and Cor. 3, each use of Condition 5
-replaced by a walked step (`pair_P'`, `pair_i`, `pair_ii`, `fail_leavingCentre`, `fail_colours`, `anti`, `noBoth`, `cor3`, the ring lemmas
-of FS112-ROTHEX, FS114-BV-HEX). **Its hypotheses are owed** (inventory item 197; plan § 5.1): the pieces of `[SokolovVoronov2025]` the walk
-uses by statement, as named outside `Prop`s — added here by the successor planner, and then carried by `n3_base`, `localDense`, `dense3`,
-`cv_exists`. A refutation's engine: no model expected (`not_row134BaseUA_seven` shows six colours are spent). -/
-theorem row134BaseUA : Row134BaseUA := by
-  sorry
-
-/-- **FS112-N3-BASE** (caution C116: a regrade only): in a valid six-coloured fragment covering `B̄(u, 2)`, a cubic trichromatic vertex `u` whose disc
-`B̄(u, 2)` holds no vertex of at least four colours and none with a repeated colour does not exist — "row 134's base refutes the map near
-`u`", after the inert unit arcs centred within `1` of `u` are bent toward their centres (the proof: FS112-N2-BENDS' toward bend, then
-the walk, `row134BaseUA`). Stated on fragments (FS129-OR1-LOCALDENSE's reading: the base reads `B̄(u, 2)` alone). A refutation: no model expected. -/
-theorem n3_base {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hu2 : F.Covers u 2)
-    (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u) : False := by
-  sorry
-
-/-- **FS129-OR1-LOCALDENSE**: every valid six-coloured fragment on a closed disc `B̄(x, 3)` has, in `B̄(x, 3)`, a
-vertex of at least four colours or a vertex with a repeated colour. No model held (no valid six-coloured fragment on a disc of radius
-`3` is known — the row's own model line); `GENERIC`. -/
-theorem localDense {F : ArcMap 6} (hF : F.Valid) {x : ℂ} (hx : F.Covers x 3) :
-    ∃ y ∈ closedBall x 3, y ∈ F.fourSet ∪ F.repSet := by
-  sorry
-
-/-- **FS112-N3-DENSE3**: every closed disc of radius `3` of every valid six-coloured map of the plane holds a vertex of
-at least four colours or a vertex with a repeated colour (`localDense` on the plane). No valid six-map of the plane is known (`GENERIC`). -/
-theorem dense3 {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (x : ℂ) :
-    ∃ y ∈ closedBall x 3, y ∈ F.fourSet ∪ F.repSet := by
-  sorry
-
-/-! ## FS114-CV-EXISTS -/
-
-/-- **FS114-CV-EXISTS**: every valid six-coloured map of the plane has a vertex of at least four colours, in the map
-itself. The proof (FS114-CVB's route, `plans/FS114-CVB-verification.md` § 1.4) passes through `M*` (`exists_terminal`): with no such
-vertex, `dense3` on `M*` gives a stuck vertex whose run is bi-infinite, against N4-FIN (`n4_fin`); a four-colour vertex of `M*` carries
-its colours in the map (`IsModification.coloursAt_subset`). It uses neither CV-HD nor C-ENDS, and no strict bound (FS114-L60-WALK: over
-`l60_le`). No valid six-map of the plane is known (`GENERIC`). -/
-theorem cv_exists {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) :
-    ∃ x, 4 ≤ (F.coloursAt x).ncard := by
   sorry
 
 end ArcMap

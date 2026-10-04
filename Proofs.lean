@@ -182,6 +182,8 @@ import Proofs.HadwigerNelson.Plane.ValidMap.HexRing
 import Proofs.HadwigerNelson.Plane.ValidMap.MapGraph
 import Proofs.HadwigerNelson.Plane.ValidMap.Terminal
 import Proofs.HadwigerNelson.Plane.ValidMap.Dense
+import Proofs.HadwigerNelson.Plane.ValidMap.BaseWalk
+import Proofs.HadwigerNelson.Plane.ValidMap.BaseDense
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.Topology.SpernerGrid
