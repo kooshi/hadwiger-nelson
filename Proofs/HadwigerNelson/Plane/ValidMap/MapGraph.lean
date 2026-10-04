@@ -648,11 +648,313 @@ theorem cvb_hole_disconnected (hF : F.Valid) (hP : F.IsPlaneMap) {T Hc : Set ℂ
 
 end ArcMap
 
+/-! ### The holed fragment (`exists_holed_valid_fragment`'s object) -/
+
+/-- A preconnected set whose norms avoid `[a, b]` lies on one side of it, the side of any of its points. -/
+theorem norm_side_of_isPreconnected {S : Set ℂ} (hS : IsPreconnected S) {a b : ℝ} (hab : a ≤ b)
+    (havoid : ∀ z ∈ S, ‖z‖ < a ∨ b < ‖z‖) {z₀ : ℂ} (hz₀ : z₀ ∈ S) :
+    (‖z₀‖ < a → ∀ z ∈ S, ‖z‖ < a) ∧ (b < ‖z₀‖ → ∀ z ∈ S, b < ‖z‖) := by
+  have hI := hS.image (fun z : ℂ => ‖z‖) continuous_norm.continuousOn
+  constructor
+  · intro h0 z hz
+    by_contra hz'
+    push Not at hz'
+    obtain ⟨w, hw, hwa⟩ := hI.Icc_subset (mem_image_of_mem _ hz₀) (mem_image_of_mem _ hz) ⟨h0.le, hz'⟩
+    rcases havoid w hw with h | h <;> simp only at hwa <;> linarith
+  · intro h0 z hz
+    by_contra hz'
+    push Not at hz'
+    obtain ⟨w, hw, hwb⟩ := hI.Icc_subset (mem_image_of_mem _ hz) (mem_image_of_mem _ hz₀) ⟨hz', h0.le⟩
+    rcases havoid w hw with h | h <;> simp only at hwb <;> linarith
+
+/-- A point of norm `ρ > 0` lies on the full circle `circ 0 ρ 0 (2π)`. -/
+theorem mem_carrier_circ_of_norm {ρ : ℝ} {z : ℂ} (hz : ‖z‖ = ρ) : z ∈ (Arc.circ 0 ρ 0 (2 * π)).carrier := by
+  have hpol : z = (ρ : ℂ) * e (Complex.arg z) := by
+    rw [← hz]; exact (Complex.norm_mul_exp_arg_mul_I z).symm
+  rcases le_or_gt 0 (Complex.arg z) with h | h
+  · exact ⟨Complex.arg z, ⟨h, by linarith [Complex.arg_le_pi z, Real.pi_pos]⟩, by
+      show (0 : ℂ) + (ρ : ℂ) * e (Complex.arg z) = z; rw [zero_add, ← hpol]⟩
+  · refine ⟨Complex.arg z + 2 * π, ⟨by linarith [Complex.neg_pi_lt_arg z], by linarith⟩, ?_⟩
+    show (0 : ℂ) + (ρ : ℂ) * e (Complex.arg z + 2 * π) = z
+    rw [zero_add, e_add_two_pi, ← hpol]
+
+/-- The points of `circ 0 ρ θ₀ θ₁` have norm `ρ` (`ρ ≥ 0`). -/
+theorem norm_of_mem_carrier_circ {ρ θ₀ θ₁ : ℝ} (hρ : 0 ≤ ρ) {z : ℂ} (hz : z ∈ (Arc.circ 0 ρ θ₀ θ₁).carrier) : ‖z‖ = ρ := by
+  obtain ⟨θ, -, rfl⟩ := hz
+  show ‖(0 : ℂ) + (ρ : ℂ) * e θ‖ = ρ
+  rw [zero_add, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg hρ]
+
+/-- The points of the radial segment `seg (u/2) (3u/5)` (`‖u‖ = 1`) have norm in `[1/2, 3/5]`. -/
+theorem norm_of_mem_carrier_radial {u z : ℂ} (hu : ‖u‖ = 1) (hz : z ∈ (Arc.seg ((1 / 2 : ℝ) * u) ((3 / 5 : ℝ) * u)).carrier) :
+    1 / 2 ≤ ‖z‖ := by
+  obtain ⟨a, b, ha, hb, hab, rfl⟩ := hz
+  have : a • ((1 / 2 : ℝ) * u) + b • ((3 / 5 : ℝ) * u) = ((a / 2 + 3 * b / 5 : ℝ) : ℂ) * u := by
+    simp only [Complex.real_smul]; push_cast; ring
+  rw [this, norm_mul, hu, mul_one, Complex.norm_real, Real.norm_of_nonneg (by positivity)]
+  linarith
+
+/-- A point `t u` with `‖u‖ = 1`, `t ∈ [1/2, 3/5]`, lies on the radial segment `seg (u/2) (3u/5)`. -/
+theorem mem_carrier_radial {u : ℂ} {t : ℝ} (ht : 1 / 2 ≤ t) (ht' : t ≤ 3 / 5) :
+    (t : ℂ) * u ∈ (Arc.seg ((1 / 2 : ℝ) * u) ((3 / 5 : ℝ) * u)).carrier := by
+  refine ⟨(3 / 5 - t) * 10, (t - 1 / 2) * 10, by linarith, by linarith, by ring, ?_⟩
+  simp only [Complex.real_smul]; push_cast; ring
+
+/-- The holed fragment's arcs: the circles of radii `1/4` and `1/2` about `0`, and four radial segments from radius `1/2` to `3/5` on the
+axes. -/
+noncomputable def holedArcs : Set Arc :=
+  {.circ 0 (1 / 4) 0 (2 * π), .circ 0 (1 / 2) 0 (2 * π), .seg ((1 / 2 : ℝ) * 1) ((3 / 5 : ℝ) * 1),
+    .seg ((1 / 2 : ℝ) * (-1)) ((3 / 5 : ℝ) * (-1)), .seg ((1 / 2 : ℝ) * I) ((3 / 5 : ℝ) * I),
+    .seg ((1 / 2 : ℝ) * (-I)) ((3 / 5 : ℝ) * (-I))}
+
+/-- The holed fragment's colour: `2` on the disc `|z| < 1/4`, `1` on the annulus `1/4 ≤ |z| < 1/2`, and outside it one colour per open
+quadrant (`3`, `4`, `5`, `0`). -/
+noncomputable def holedCol (z : ℂ) : Fin 6 :=
+  if ‖z‖ < 1 / 4 then 2 else if ‖z‖ < 1 / 2 then 1 else
+    if 0 < z.re then (if 0 < z.im then 3 else 0) else (if 0 < z.im then 4 else 5)
+
+/-- A spec example for `holedCol`: the centre has colour `2`, the point `3/8` colour `1`. -/
+example : holedCol 0 = 2 ∧ holedCol (3 / 8) = 1 := by
+  constructor
+  · simp [holedCol]
+  · have h : ‖(3 / 8 : ℂ)‖ = 3 / 8 := by
+      rw [show (3 / 8 : ℂ) = ((3 / 8 : ℝ) : ℂ) by push_cast; ring, Complex.norm_real, Real.norm_of_nonneg (by norm_num)]
+    simp only [holedCol, h]; norm_num
+
+/-- Membership in the holed fragment's arcs, by norm: a point on an arc has norm `1/4` or at least `1/2`. -/
+theorem norm_of_mem_holedArcs {z : ℂ} (hz : z ∈ ⋃ a ∈ holedArcs, a.carrier) : ‖z‖ = 1 / 4 ∨ 1 / 2 ≤ ‖z‖ := by
+  simp only [mem_iUnion, holedArcs, mem_insert_iff, mem_singleton_iff, exists_prop] at hz
+  obtain ⟨a, ha, hza⟩ := hz
+  rcases ha with rfl | rfl | rfl | rfl | rfl | rfl
+  · exact Or.inl (norm_of_mem_carrier_circ (by norm_num) hza)
+  · exact Or.inr (norm_of_mem_carrier_circ (by norm_num) hza).ge
+  · exact Or.inr (norm_of_mem_carrier_radial (by simp) hza)
+  · exact Or.inr (norm_of_mem_carrier_radial (by simp) hza)
+  · exact Or.inr (norm_of_mem_carrier_radial (by simp) hza)
+  · exact Or.inr (norm_of_mem_carrier_radial (by simp) hza)
+
+/-- Off the holed fragment's arcs, within `3/5`: the norm is not `1/4` or `1/2`, and beyond `1/2` neither coordinate vanishes. -/
+theorem holed_off_arcs {z : ℂ} (hd : ‖z‖ < 3 / 5) (hz : z ∉ ⋃ a ∈ holedArcs, a.carrier) :
+    ‖z‖ ≠ 1 / 4 ∧ ‖z‖ ≠ 1 / 2 ∧ (1 / 2 < ‖z‖ → z.re ≠ 0 ∧ z.im ≠ 0) := by
+  have hmem : ∀ a ∈ holedArcs, z ∉ a.carrier := fun a ha h => hz (mem_biUnion ha h)
+  refine ⟨fun h => hmem _ (by simp [holedArcs]) (mem_carrier_circ_of_norm h),
+    fun h => hmem _ (by simp [holedArcs]) (mem_carrier_circ_of_norm h), fun h => ⟨fun hre => ?_, fun him => ?_⟩⟩
+  · -- on the imaginary axis
+    obtain ⟨t, rfl⟩ : ∃ t : ℝ, z = (t : ℂ) * I := ⟨z.im, by apply Complex.ext <;> simp [hre]⟩
+    have hn : ‖(t : ℂ) * I‖ = |t| := by rw [norm_mul, Complex.norm_I, mul_one, Complex.norm_real, Real.norm_eq_abs]
+    rw [hn] at h hd
+    rcases le_or_gt 0 t with h0 | h0
+    · rw [abs_of_nonneg h0] at h hd
+      exact hmem _ (by simp [holedArcs]) (mem_carrier_radial (u := I) (by linarith) (by linarith))
+    · rw [abs_of_neg h0] at h hd
+      have : (t : ℂ) * I = ((-t : ℝ) : ℂ) * (-I) := by push_cast; ring
+      rw [this] at hmem
+      exact hmem _ (by simp [holedArcs]) (mem_carrier_radial (u := -I) (by linarith) (by linarith))
+  · -- on the real axis
+    obtain ⟨t, rfl⟩ : ∃ t : ℝ, z = (t : ℂ) * 1 := ⟨z.re, by apply Complex.ext <;> simp [him]⟩
+    have hn : ‖(t : ℂ) * 1‖ = |t| := by rw [mul_one, Complex.norm_real, Real.norm_eq_abs]
+    rw [hn] at h hd
+    rcases le_or_gt 0 t with h0 | h0
+    · rw [abs_of_nonneg h0] at h hd
+      exact hmem _ (by simp [holedArcs]) (mem_carrier_radial (u := 1) (by linarith) (by linarith))
+    · rw [abs_of_neg h0] at h hd
+      have : (t : ℂ) * 1 = ((-t : ℝ) : ℂ) * (-1) := by push_cast; ring
+      rw [this] at hmem
+      exact hmem _ (by simp [holedArcs]) (mem_carrier_radial (u := -1) (by linarith) (by linarith))
+
+/-- **The holed fragment** (CVB B1's configuration): the disc `|z| < 1/4` of colour `2` inside the annulus `1/4 < |z| < 1/2` of colour `1`,
+ringed by four quarter-annuli `1/2 < |z| < 3/5` of colours `3`, `4`, `5`, `0`; domain `B(0, 3/5)`. -/
+noncomputable def holedFrag : ArcMap 6 where
+  dom := ball 0 (3 / 5)
+  isOpen_dom := isOpen_ball
+  arcs := holedArcs
+  nondegenerate := by
+    intro a ha
+    simp only [holedArcs, mem_insert_iff, mem_singleton_iff] at ha
+    rcases ha with rfl | rfl | rfl | rfl | rfl | rfl <;> simp only [Arc.Nondegenerate]
+    · exact ⟨by norm_num, by positivity, by linarith⟩
+    · exact ⟨by norm_num, by positivity, by linarith⟩
+    all_goals
+      intro h
+      have := congrArg (fun w : ℂ => ‖w‖) h
+      simp only [norm_mul, Complex.norm_real, norm_neg, Complex.norm_I, norm_one] at this
+      norm_num at this
+  locallyFinite := by
+    intro x _
+    refine ⟨univ, univ_mem, ?_⟩
+    refine Set.Finite.subset ?_ (fun a ha => ha.1)
+    simp only [holedArcs]
+    exact ((((((Set.finite_singleton _).insert _).insert _).insert _).insert _).insert _)
+  col := holedCol
+  locallyConstant := by
+    intro x hx hxa
+    have hd : ‖x‖ < 3 / 5 := by simpa using hx
+    obtain ⟨h4, h2, hax⟩ := holed_off_arcs hd hxa
+    have hcn := continuous_norm.tendsto x
+    rcases lt_or_gt_of_ne h4 with hlt | hgt
+    · filter_upwards [hcn.eventually (gt_mem_nhds hlt)] with y hy
+      simp only [holedCol, if_pos hy, if_pos hlt]
+    rcases lt_or_gt_of_ne h2 with hlt2 | hgt2
+    · filter_upwards [hcn.eventually (lt_mem_nhds hgt), hcn.eventually (gt_mem_nhds hlt2)] with y hy hy'
+      simp only [holedCol, if_neg (not_lt.mpr hy.le), if_pos hy', if_neg (not_lt.mpr hgt.le), if_pos hlt2]
+    obtain ⟨hre, him⟩ := hax hgt2
+    have hre' : ∀ᶠ y in 𝓝 x, (0 < y.re ↔ 0 < x.re) := by
+      rcases lt_or_gt_of_ne hre with h | h
+      · filter_upwards [(Complex.continuous_re.tendsto x).eventually (gt_mem_nhds h)] with y hy
+        exact ⟨fun h' => by linarith, fun h' => by linarith⟩
+      · filter_upwards [(Complex.continuous_re.tendsto x).eventually (lt_mem_nhds h)] with y hy
+        exact ⟨fun _ => h, fun _ => hy⟩
+    have him' : ∀ᶠ y in 𝓝 x, (0 < y.im ↔ 0 < x.im) := by
+      rcases lt_or_gt_of_ne him with h | h
+      · filter_upwards [(Complex.continuous_im.tendsto x).eventually (gt_mem_nhds h)] with y hy
+        exact ⟨fun h' => by linarith, fun h' => by linarith⟩
+      · filter_upwards [(Complex.continuous_im.tendsto x).eventually (lt_mem_nhds h)] with y hy
+        exact ⟨fun _ => h, fun _ => hy⟩
+    filter_upwards [hcn.eventually (lt_mem_nhds hgt2), hre', him'] with y hy hyr hyi
+    have h1 : ¬ ‖y‖ < 1 / 4 := by linarith
+    have h1' : ¬ ‖y‖ < 1 / 2 := by linarith
+    have h3 : ¬ ‖x‖ < 1 / 4 := by linarith
+    have h3' : ¬ ‖x‖ < 1 / 2 := by linarith
+    simp only [holedCol, if_neg h1, if_neg h1', if_neg h3, if_neg h3', hyr, hyi]
+
+/-- Two points of norm below `3/5` whose coordinates agree in sign (weakly) are less than `1` apart. -/
+theorem dist_lt_one_of_same_quadrant {x y : ℂ} (hx : ‖x‖ < 3 / 5) (hy : ‖y‖ < 3 / 5) (hre : 0 ≤ x.re * y.re)
+    (him : 0 ≤ x.im * y.im) : dist x y < 1 := by
+  have hx2 : x.re ^ 2 + x.im ^ 2 < 9 / 25 := by
+    have := Complex.sq_norm x; rw [Complex.normSq_apply] at this; nlinarith [norm_nonneg x]
+  have hy2 : y.re ^ 2 + y.im ^ 2 < 9 / 25 := by
+    have := Complex.sq_norm y; rw [Complex.normSq_apply] at this; nlinarith [norm_nonneg y]
+  have hd : dist x y ^ 2 = (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 := by
+    rw [dist_eq_norm, Complex.sq_norm, Complex.normSq_apply]; simp only [Complex.sub_re, Complex.sub_im]; ring
+  nlinarith [dist_nonneg (x := x) (y := y)]
+
+/-- The holed fragment is valid: each colour class is one piece of diameter below `1`. -/
+theorem holedFrag_valid : holedFrag.Valid := by
+  intro x hx y hy hxy hcol
+  have hxd : ‖x‖ < 3 / 5 := by simpa [holedFrag] using hx.1
+  have hyd : ‖y‖ < 3 / 5 := by simpa [holedFrag] using hy.1
+  change holedCol x = holedCol y at hcol
+  have hlt : dist x y < 1 := by
+    unfold holedCol at hcol
+    split_ifs at hcol with a1 a2 a3 a4 b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 b12 b13 b14 b15 b16 b17 b18 b19 b20 <;>
+      first
+      | exact absurd hcol (by decide)
+      | (rw [dist_eq_norm]; linarith [norm_sub_le x y, norm_neg y])
+      | (apply dist_lt_one_of_same_quadrant hxd hyd <;> nlinarith)
+  linarith
+
+/-- A spec example for `holedArcs` and `holedFrag`: the inner circle is an arc, the centre has colour `2`, the domain is `B(0, 3/5)`. -/
+example : Arc.circ 0 (1 / 4) 0 (2 * π) ∈ holedArcs ∧ holedFrag.col 0 = 2 ∧ holedFrag.dom = ball 0 (3 / 5) :=
+  ⟨by simp [holedArcs], by simp [holedFrag, holedCol], rfl⟩
+
+/-- The open annulus `1/4 < |z| < 1/2` is preconnected (the image of a band under polar coordinates). -/
+theorem isPreconnected_holedAnnulus : IsPreconnected {z : ℂ | 1 / 4 < ‖z‖ ∧ ‖z‖ < 1 / 2} := by
+  have h : {z : ℂ | 1 / 4 < ‖z‖ ∧ ‖z‖ < 1 / 2} = (fun p : ℝ × ℝ => (p.1 : ℂ) * e p.2) '' (Ioo (1 / 4) (1 / 2) ×ˢ univ) := by
+    ext z
+    constructor
+    · rintro ⟨h1, h2⟩
+      exact ⟨(‖z‖, Complex.arg z), ⟨⟨h1, h2⟩, mem_univ _⟩, Complex.norm_mul_exp_arg_mul_I z⟩
+    · rintro ⟨⟨r, θ⟩, ⟨⟨h1, h2⟩, -⟩, rfl⟩
+      have : ‖(r : ℂ) * e θ‖ = r := by rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg (by linarith)]
+      simp only [mem_setOf_eq, this]; exact ⟨h1, h2⟩
+  rw [h]
+  exact (isPreconnected_Ioo.prod isPreconnected_univ).image _ (by unfold e; fun_prop)
+
 /-- **Holes are locally consistent with validity** (FS114-CVB-PINCH's last clause, CVB B1's counterexample configuration): there is a valid
 six-coloured fragment covering `B̄(0, 1/2)` with a tile that has a hole — the annulus `1/4 < |z| < 1/2` of colour `1` about the disc
-`|z| < 1/4` of colour `2`, ringed by four quarter-annuli `1/2 < |z| < 0.55` of colours `3, 4, 5, 6`. -/
+`|z| < 1/4` of colour `2`, ringed by four quarter-annuli `1/2 < |z| < 3/5` of colours `3, 4, 5, 6 = 0` (`holedFrag`). -/
 theorem exists_holed_valid_fragment :
     ∃ F : ArcMap 6, F.Valid ∧ F.Covers 0 (1 / 2) ∧ ∃ T Hc, F.IsTile T ∧ ArcMap.IsHoleOf T Hc := by
-  sorry
+  set A : Set ℂ := {z : ℂ | 1 / 4 < ‖z‖ ∧ ‖z‖ < 1 / 2} with hA
+  have hint : ∀ z ∈ holedFrag.interiorPts, ‖z‖ ≠ 1 / 4 ∧ ‖z‖ ≠ 1 / 2 := by
+    intro z hz
+    have hd : ‖z‖ < 3 / 5 := by simpa [holedFrag] using hz.1
+    obtain ⟨h1, h2, -⟩ := holed_off_arcs hd hz.2
+    exact ⟨h1, h2⟩
+  have hAint : A ⊆ holedFrag.interiorPts := by
+    rintro z ⟨h1, h2⟩
+    refine ⟨show z ∈ ball (0 : ℂ) (3 / 5) by rw [mem_ball, dist_zero_right]; linarith, fun hz => ?_⟩
+    rcases norm_of_mem_holedArcs hz with h | h <;> linarith
+  have h38 : (3 / 8 : ℂ) ∈ A := by
+    have : ‖(3 / 8 : ℂ)‖ = 3 / 8 := by
+      rw [show (3 / 8 : ℂ) = ((3 / 8 : ℝ) : ℂ) by push_cast; ring, Complex.norm_real, Real.norm_of_nonneg (by norm_num)]
+    simp only [hA, mem_setOf_eq, this]; norm_num
+  have hn38 : ‖(3 / 8 : ℂ)‖ = 3 / 8 := by
+    rw [show (3 / 8 : ℂ) = ((3 / 8 : ℝ) : ℂ) by push_cast; ring, Complex.norm_real, Real.norm_of_nonneg (by norm_num)]
+  -- the tile through `3/8` is the annulus
+  have hT : A = connectedComponentIn holedFrag.interiorPts (3 / 8) := by
+    apply Set.Subset.antisymm (isPreconnected_holedAnnulus.subset_connectedComponentIn h38 hAint)
+    intro z hz
+    have hC := isPreconnected_connectedComponentIn (x := (3 / 8 : ℂ)) (F := holedFrag.interiorPts)
+    have hCsub := connectedComponentIn_subset holedFrag.interiorPts (3 / 8 : ℂ)
+    have hmem := mem_connectedComponentIn (hAint h38)
+    have hlo := (norm_side_of_isPreconnected hC le_rfl (a := 1 / 4) (fun w hw => lt_or_gt_of_ne (hint w (hCsub hw)).1)
+      hmem).2 (by rw [hn38]; norm_num) z hz
+    have hhi := (norm_side_of_isPreconnected hC le_rfl (a := 1 / 2) (fun w hw => lt_or_gt_of_ne (hint w (hCsub hw)).2)
+      hmem).1 (by rw [hn38]; norm_num) z hz
+    exact ⟨hlo, hhi⟩
+  -- the closure of the annulus is the closed annulus
+  have hclsub : closure A ⊆ {z : ℂ | 1 / 4 ≤ ‖z‖ ∧ ‖z‖ ≤ 1 / 2} :=
+    closure_minimal (fun z hz => ⟨hz.1.le, hz.2.le⟩)
+      ((isClosed_le continuous_const continuous_norm).inter (isClosed_le continuous_norm continuous_const))
+  have hclsup : ∀ z : ℂ, 1 / 4 ≤ ‖z‖ → ‖z‖ ≤ 1 / 2 → z ∈ closure A := by
+    intro z h1 h2
+    rw [Metric.mem_closure_iff]
+    intro ε hε
+    set s := min 1 ε with hs
+    have hs0 : 0 < s := lt_min one_pos hε
+    have hs1 : s ≤ 1 := min_le_left _ _
+    have hsε : s ≤ ε := min_le_right _ _
+    have hz0 : 0 < ‖z‖ := by linarith
+    set c : ℝ := 1 - s + 3 * s / (8 * ‖z‖) with hc
+    have hc0 : 0 < c := by
+      have : 0 < 3 * s / (8 * ‖z‖) := by positivity
+      rw [hc]; linarith
+    have hnb : ‖(c : ℂ) * z‖ = (1 - s) * ‖z‖ + 3 * s / 8 := by
+      rw [norm_mul, Complex.norm_real, Real.norm_of_nonneg hc0.le, hc]; field_simp
+    refine ⟨(c : ℂ) * z, ⟨?_, ?_⟩, ?_⟩
+    · rw [hnb]; nlinarith
+    · rw [hnb]; nlinarith
+    · have : dist z ((c : ℂ) * z) = |1 - c| * ‖z‖ := by
+        rw [dist_eq_norm, show z - (c : ℂ) * z = ((1 - c : ℝ) : ℂ) * z by push_cast; ring, norm_mul, Complex.norm_real,
+          Real.norm_eq_abs]
+      have h8 : (1 - c) * ‖z‖ = s * (‖z‖ - 3 / 8) := by rw [hc]; field_simp; ring
+      rw [this, show |1 - c| * ‖z‖ = |(1 - c) * ‖z‖| by rw [abs_mul, abs_of_pos hz0], h8, abs_mul, abs_of_pos hs0]
+      have hab : |‖z‖ - 3 / 8| ≤ 1 / 8 := abs_le.mpr ⟨by linarith, by linarith⟩
+      nlinarith [abs_nonneg (‖z‖ - 3 / 8)]
+  -- the complement of the closed annulus, and its components
+  have havoid : ∀ z ∈ (closure A)ᶜ, ‖z‖ < 1 / 4 ∨ 1 / 2 < ‖z‖ := by
+    intro z hz
+    by_contra h
+    push Not at h
+    exact hz (hclsup z h.1 h.2)
+  have hside : ∀ z ∈ (closure A)ᶜ, (‖z‖ < 1 / 4 → connectedComponentIn (closure A)ᶜ z ⊆ ball 0 (1 / 4)) ∧
+      (1 / 2 < ‖z‖ → connectedComponentIn (closure A)ᶜ z ⊆ {w | 1 / 2 < ‖w‖}) := by
+    intro z hz
+    have hsub := connectedComponentIn_subset (closure A)ᶜ z
+    obtain ⟨h1, h2⟩ := norm_side_of_isPreconnected isPreconnected_connectedComponentIn (by norm_num : (1 / 4 : ℝ) ≤ 1 / 2)
+      (fun w hw => havoid w (hsub hw)) (mem_connectedComponentIn hz)
+    exact ⟨fun h w hw => by rw [mem_ball, dist_zero_right]; exact h1 h w hw, fun h w hw => h2 h w hw⟩
+  have h0 : (0 : ℂ) ∈ (closure A)ᶜ := fun h => by have := (hclsub h).1; simp at this; linarith
+  have hHc := (hside 0 h0).1 (by simp)
+  refine ⟨holedFrag, holedFrag_valid, fun z hz => ?_, A, connectedComponentIn (closure A)ᶜ 0, ⟨3 / 8, hAint h38, hT⟩,
+    ⟨0, h0, rfl⟩, Metric.isBounded_ball.subset hHc, ?_⟩
+  · show z ∈ ball (0 : ℂ) (3 / 5)
+    rw [mem_closedBall] at hz; rw [mem_ball]; linarith
+  · intro z hz hunb
+    have hz2 : 1 / 2 < ‖z‖ := by
+      rcases havoid z hz with h | h
+      · exact absurd (Metric.isBounded_ball.subset ((hside z hz).1 h)) hunb
+      · exact h
+    have hW := (hside z hz).2 hz2
+    have hc1 : closure (connectedComponentIn (closure A)ᶜ 0) ⊆ closedBall 0 (1 / 4) :=
+      (closure_mono hHc).trans (closure_ball_subset_closedBall)
+    have hc2 : closure (connectedComponentIn (closure A)ᶜ z) ⊆ {w : ℂ | 1 / 2 ≤ ‖w‖} :=
+      closure_minimal (fun w hw => show 1 / 2 ≤ ‖w‖ from (show 1 / 2 < ‖w‖ from hW hw).le) (isClosed_le continuous_const continuous_norm)
+    refine Set.disjoint_left.mpr fun w hw1 hw2 => ?_
+    have := hc1 hw1
+    have := hc2 hw2
+    simp only [mem_closedBall, dist_zero_right, mem_setOf_eq] at *
+    linarith
+
 
 end HadwigerNelson.Plane

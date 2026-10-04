@@ -2999,6 +2999,23 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.isCubicTrichromatic_of_three_of_noRep
 #print axioms HadwigerNelson.Thomassen.triLattice_adj
 
+/-! ## FS-131 wave 5 (job FS131-I5b) — wave 5's second implementer: Lemma 1's children, the holed fragment -/
+
+#print axioms HadwigerNelson.Thomassen.LocallyHamiltonian.exists_two_common
+#print axioms HadwigerNelson.Thomassen.exists_eq_of_steps_up
+#print axioms HadwigerNelson.Thomassen.exists_eq_of_steps
+#print axioms HadwigerNelson.Thomassen.LocallyHamiltonian.two_mid
+#print axioms HadwigerNelson.Plane.norm_side_of_isPreconnected
+#print axioms HadwigerNelson.Plane.mem_carrier_circ_of_norm
+#print axioms HadwigerNelson.Plane.norm_of_mem_carrier_circ
+#print axioms HadwigerNelson.Plane.norm_of_mem_carrier_radial
+#print axioms HadwigerNelson.Plane.mem_carrier_radial
+#print axioms HadwigerNelson.Plane.norm_of_mem_holedArcs
+#print axioms HadwigerNelson.Plane.holed_off_arcs
+#print axioms HadwigerNelson.Plane.dist_lt_one_of_same_quadrant
+#print axioms HadwigerNelson.Plane.holedFrag_valid
+#print axioms HadwigerNelson.Plane.isPreconnected_holedAnnulus
+
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 
 #print axioms HadwigerNelson.Plane.dot_e_e
