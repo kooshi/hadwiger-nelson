@@ -401,3 +401,97 @@ every point of the circle of radius `r` about `x₁` (rotational measure pushes 
 - **Corrections of pass-2 lines**: `plans/FS129-close-inventory.md` item 68's "M60-T2 and M61-T5 are subsumed by row 66" — partly: M60-T2's
   virtual-edge half at 19 and M61-T5's mechanism at `k = 3, 4` are not row 66's (§ 2.2 items 1–2); "FS86-Cx-C11 is NOAFF5's four-colour face" — a
   consistency, on disjoint field classes (item 3).
+
+## Stage 3 — SAVED (item (b): the records that disagree — FS89-CL2, ASTRA-2026-09-14-T10)
+
+*Read for this stage: `plans/FS89-derivation.md` lines 25–30 (Notation), 42–103 (S0A-1 to S0A-13), 300–340 (D5-T2, CL1–CL5 and the correction
+banner); `LEDGER.md` rows 95, 96; `plans/FS91-close-inventory.md` rows 61, 69, 75, 78; `plans/FS91-derivation.md` FS91-J03a-9 (line 123),
+FS91-J07-12 to -14 (lines 352–362); `plans/FS91-S1D-character.md` § 4.4; `plans/FS91-S0F-three-colours.md` (how J02 used CL2);
+`plans/ASTRA-2026-09-14-derivation.md` T10 (line 55); `data/fs129/index/edges.csv` and `roots.md` for both.*
+
+### 3.1 FS89-CL2 — false as written in the record, corrected on the front page
+
+**The two records, quoted.**
+- `plans/FS89-derivation.md` line 27, the Notation: "`A`: archimedean characters `λ_e(x) = Re(ē x)`"; and FS89-CL2 (line 326): "For every
+  subfield `F ⊆ ℝ`: `Θ₄(R_F) ⊆ T₁₆₈ + A` and `Θ₅(R_F) ⊆ T + A`; every four- or five-colour character colouring of any real field's plane is a
+  torsion character plus an archimedean one". A banner above CL2 (line 324) says "**Correction owed (2026-09-25 crunch):** … Not applied here;
+  the close rewrites this entry."
+- `LEDGER.md` row 95: "`Θ₄(R_F) ⊆ T₁₆₈ + A`, `Θ₅(R_F) ⊆ T + A` for every `F ⊆ ℝ`, with `A = Hom_ℚ(F(i), ℝ) mod 1`, the archimedean characters of
+  every place of `F(i)`; with one embedding's `λ_e` the clause is false, row 98".
+
+**Which the argument supports: row 95's.** FS91-J03a-9's counterexample, re-checked here: over ℚ(√3), let `τ` be the additive three-colouring
+(the residue map at the ramified prime above 3 into `𝔽₉ = 𝔽₃[i]`, then `a + bi ↦ (a + b)/3`, which is `1/3` or `2/3` on each of `±1, ±i`) and
+`λ(x) = Re(ē σ₂(x))` with `σ₂` the embedding moving `√3`, `0 < |e| ≤ 1/12`. On a unit `u`, `|λ(u)| ≤ |e| ≤ 1/12`, so `(τ + λ)(u) ∈ [1/4, 3/4]`: it
+is in `Θ₄(R_F)`. If `τ + λ = t + λ_f` with `t` torsion and `λ_f = Re(f̄ ·)` at the identity embedding, then `L = λ − λ_f` takes values in
+`(1/N)ℤ` on `R_F`. On `ℤ[i][1/5] ⊂ R_F`, `σ₂` is the identity, so `L(w^n) = Re((ē − f̄) w^n)` with `w = (3 + 4i)/5`: bounded, and dense in an
+interval unless `e = f` (w is not a root of unity) — so `e = f`; then `L(i√3 · w^n) = −2√3 Re(ē i w^n)` (`i√3 = 2ζ₆ − 1 ∈ R_F`), again bounded with
+infinitely many values unless `e = 0`. So `τ + λ ∉ T + A` with the one-embedding `A`, and it is in `T + A` with `A = Hom_ℚ(F(i), ℝ) mod 1`.
+The record's CL2, read with its own Notation, is **false**; with the wide `A` it is **true** (FS91-J07-14, two derivations).
+
+**A finding the front page's correction did not name: the same Notation makes FS89-S0A-2 and FS89-S0A-10 false as written too.** S0A-2
+("`Θ_k(ℤ[U_ℚ]) ⊆ T_N + A` ⟹ `Θ_k(R_F) ⊆ T_N + A` for every subfield `F ⊆ ℝ`, at every band", line 47) and S0A-10 ("`Θ_k(ℤ[U_ℚ]) ⊆ T + A`
+⟺ `Θ_k(R_F) ⊆ T + A` for every subfield `F ⊆ ℝ`, every band", line 91) state the field clause with the same `A`. Over `ℚ(i)` the two readings of
+`A` agree, and RQ₄ holds there (FS89-D2-T1), so at `F = ℚ(√3)`, band 1/4, the left side is true and the right side, read with `λ_e`, is false by the
+same counterexample. Their **arguments** carry the wide `A` — S0A-2's own words: "the lift `lim 5^k·(small rep of Nθ(x/5^k))` is one real
+functional", a ℚ-linear functional on `F(i)`, which is `Hom_ℚ(F(i), ℝ)`, not `Re(ē ·)` — so the repair is the **Notation**, once, and it repairs
+CL2, S0A-2 and S0A-10 together. FS-91's inventory row 61 names the Notation ("FS89-derivation "Notation": over R_F, A must be Hom_ℚ(F(i), ℝ) mod
+1") but the record's banner sits only above CL2. **This matters for the Lean backlog**: S0A-2's `*Kernel:*` line reads "stub (a candidate for
+FS-87's list: short, and the conduit from `Q` to every field)" — formalized from the Notation as written, it is unprovable.
+
+**What downstream of CL2 inherits.** The index gives CL2 two out-edges (`FS89-CL2,FS89-CL3,rests`, `FS89-CL2,FS89-CL5,rests`; CL2's "*Rests on it:*
+CL3–CL5; row 95's field clause" — the range hides CL4 from the parser). By their own grade lines CL3–CL5 are compositions of S0A-6, S0A-8, S0A-9
+with D2-T1 or D5-T2, not of CL2; they use the field clause's *content* through those steps, and every one of them "reads **both** real places"
+(`plans/FS91-S1D-character.md` § 4.4: "So the one-embedding misreading (J03a-9) sits only in FS89-CL2's wording, not in any step of CL3–CL5"),
+with CL3, CL4, CL5 each TRUE under the wide `A` (FS91-J07-14, two derivations) and each re-proved through CLG with fewer inputs (FS91-J07-12, -13).
+Row 95 is corrected; row 96 states no `A`. J02 (FS-91's three-colour job) cited CL2 only as "a second route, not needed and not claimed"
+(`plans/FS91-S0F-three-colours.md` line 102). **So nothing downstream inherits the falsity**: the deepest lane-A root chain (`roots.md` rank 21,
+FS89-S0B-C1 → … → FS89-D2-T1 → FS89-CL2 → FS89-CL3) is sound in content, with its last link a content edge (CL3 uses the field clause through
+S0A-6, at the wide `A`), not a citation of CL2's wording. **Two index edges are false**: `FS91-J03a-9,FS89-CL2,rests` and `FS91-J07-14,FS89-CL2,rests`
+— both correcting entries name CL2 in their *Rests on it* as the thing corrected, not as a user (item 77's kind; for FS129-Z1's index pass).
+
+**Draft erratum for `plans/FS89-derivation.md`** (for FS129-Z1, the record job's pen; a dated entry under the Notation paragraph, the original
+text left standing): "*Erratum (2026-10-03, FS129-SA1, from FS91-J03a-9 and FS91-J07-14; `plans/FS91-close-inventory.md` rows 61, 69, 78):* over
+`R_F` with `F ≠ ℚ`, read `A` as `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`, the archimedean characters of every place of `F(i)`; `λ_e(x) = Re(ē x)` at one
+embedding is its case `F = ℚ`. With the one-embedding reading FS89-S0A-2, FS89-S0A-10 and FS89-CL2 are false (ℚ(√3), band 1/4:
+`τ + Re(ē σ₂(·))`); with `A(R_F)` they hold, and every proof step in this file already reads every real place (FS91-J07-14)." And the CL2 banner
+gains "and S0A-2, S0A-10 (the same Notation)".
+
+### 3.2 ASTRA-2026-09-14-T10 — a hypothesis empty on part of its stated scope, and a sentence weaker than its hypothesis
+
+**The statement** (`plans/ASTRA-2026-09-14-derivation.md` line 55): "For any real `F ⊇ K`: if some finite unit-distance graph over `F` has a
+proper five-colouring in which two points at distance 2 are properly separated (`Separated` at distance 2, five colours), then transporting
+an isometric copy of that graph onto each of the 892 length-2 edges of `[ExooIsmailescu2019]`'s 426-vertex `{1,2}`-graph … gives a
+unit-distance graph over `F` needing at least six colours". **Its prose** (same line, *Rests on it*): "row 66 explains why, over a 5-sealed
+field, though the `ρ₆₃` arena is 6-open — its emptiness stays measured, per G31".
+
+**Two items, one of vacuity and one of wording.**
+1. **Empty on part of the scope** (item 69). Over every `F ⊇ K` with a usable prime of residue field `𝔽₁₁`, row 66 gives `Separated G 5 u u' ↔
+   G.Adj u u'` for every graph with a homomorphism into Γ₁₁ — the residue map is one — so a distance-2 pair is never a five-colour virtual edge,
+   and the hypothesis has no member. The same holds over every `F` with `χ(F²) ≤ 4` (a four-colouring read with five colours leaves the fifth
+   absent everywhere, so any non-adjacent pair can be repainted alike). K itself is in the first class (11 ramifies in ℚ(√11) and splits in
+   ℚ(√3), `3 ≡ 5² mod 11`, residue field `𝔽₁₁`). The statement has content only over `F ⊇ K` with neither — `χ(F²) ≥ 5` and no usable
+   `𝔽₁₁` prime: a 6-open field, K(√7) the first (`7` is a non-square mod 11, so its primes above 11 have residue field `𝔽₁₂₁`), where the
+   hypothesis's membership is open and the one sweep run (FS-63's ρ₆₃ arena, all 1,306,721,748 pairs) found none.
+2. **The sentence is weaker than the hypothesis it means.** "has a proper five-colouring in which two points at distance 2 are properly
+   separated" reads as *there is a colouring* giving the two points different colours — true of almost every graph — while the parenthetical
+   `Separated` and the proof ("forcing each replaced length-2 edge's endpoints to differ by the copy's own gadget property", applied to an
+   arbitrary five-colouring of the assembly) use *every* proper five-colouring. Read as written, the statement is false (a gadget whose two
+   points merely *can* differ forces nothing). The argument supports the universal reading.
+
+**Draft correction** (for FS129-Z1; an erratum under T10, the original standing): "*Erratum (2026-10-03, FS129-SA1; `plans/FS129-close-inventory.md`
+item 69):* read the hypothesis as "two points at distance 2 that receive different colours in every proper five-colouring of the graph
+(`Separated` at distance 2, five colours)". The hypothesis is empty over every `F ⊇ K` with a usable prime of residue field `𝔽₁₁` (row 66,
+`Separated ↔ Adj`) and over every `F` with `χ(F²) ≤ 4`; the sentence has content only over fields with `χ(F²) ≥ 5` and no such prime — K(√7) the
+first."
+
+**What rests on T10:** no entry by id (`data/fs129/index/edges.csv` has no edge from it; its *Rests on it* names row 43 and the H4 sweep, neither
+a consumer). Its kernel line is a stub, "FS-49 — `six_le_chromaticNumber_plane_of_separated_two`, blocked on a kernel certificate of the
+`{1,2}` graph itself", not in the Lean order. **For the Lean backlog**: if FS-49 is formalized, its hypothesis is `Separated` (every colouring), and
+it is instantiated over no field with a usable `𝔽₁₁` prime — there it is vacuous by row 66, a theorem the kernel already holds.
+
+### 3.3 The tally for item (b)
+
+Records that disagree, reconciled: **FS89-CL2** against row 95 (row 95's reading supported; the Notation is the repair, and it covers S0A-2 and
+S0A-10, which the front page's correction did not name); **ASTRA-T10**'s sentence against its own parenthetical and proof (the universal reading
+supported), with its scope empty over residue-𝔽₁₁ fields as its own prose knows. No held result is newly false: both falsities are of wording,
+and in each the argument carries a true statement that nothing downstream contradicts.
