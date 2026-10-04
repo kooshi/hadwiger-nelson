@@ -156,4 +156,23 @@ theorem planted_generic_hub {k : ℕ} (F : Plane.ArcMap k) (p : ℂ) (ψ : ℝ) 
 /-- CONTROL 32 — `IsHub` at a concrete instance nothing decides. `UNKNOWN`. -/
 theorem planted_unknown_hub (_h : Plane.sixFrag.IsHub 0 (Real.pi / 4)) : (1 : ℕ) = 1 := rfl
 
+/-- CONTROL 33 — wave 2's `CPColouring` at `1` colour: emptiness by an `instance` (the adversary). `VACUOUS`. -/
+theorem planted_vacuous_cp (_c : Plane.CPColouring 1) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 34 — `CPColouring k` at a variable `k`: `GENERIC`. -/
+theorem planted_generic_cp {k : ℕ} (_c : Plane.CPColouring k) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 35 — `CPColouring` at a `k` nothing refutes. `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_cp (_c : Plane.CPColouring 3) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 36 — wave 2's `SemiconcaveWith` at the instance `not_semiconcaveWith_one_lowerArc` refutes. `VACUOUS`. -/
+theorem planted_vacuous_semiconcave
+    (_h : Plane.SemiconcaveWith 1 (fun s : ℝ => 1 - Real.sqrt (1 - s ^ 2)) (Set.Ioo (1 / 10) (1 / 5))) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 37 — `SemiconcaveWith` at variable arguments: `GENERIC`. -/
+theorem planted_generic_semiconcave {K : ℝ} {u : ℝ → ℝ} {J : Set ℝ} (_h : Plane.SemiconcaveWith K u J) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 38 — `SemiconcaveWith` at a concrete instance nothing decides (true, `0 ≤ 0`, but no theorem says so). `UNKNOWN`. -/
+theorem planted_unknown_semiconcave (_h : Plane.SemiconcaveWith 0 (fun _ : ℝ => (0 : ℝ)) Set.univ) : (1 : ℕ) = 1 := rfl
+
 end HadwigerNelson

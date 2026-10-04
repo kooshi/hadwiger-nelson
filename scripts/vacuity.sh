@@ -147,6 +147,12 @@ if [[ "${1:-}" == "--self-test" ]]; then
   expect VACUOUS planted_vacuous_hub      "IsHub at r(90°) = i: no change point there"
   expect_site GENERIC planted_generic_hub "IsHub at a variable map: parametric"
   expect UNKNOWN planted_unknown_hub      "IsHub at a sixFrag instance nothing decides: the load-bearing half"
+  expect VACUOUS planted_vacuous_cp       "CPColouring 1: emptiness by an instance, the adversary (wave 2, FS131-I2n)"
+  expect_site GENERIC planted_generic_cp  "CPColouring k at a variable k: parametric"
+  expect UNKNOWN planted_unknown_cp       "CPColouring at a k nothing refutes: the load-bearing half"
+  expect VACUOUS planted_vacuous_semiconcave "SemiconcaveWith at the lower unit arc, which not_semiconcaveWith_one_lowerArc refutes"
+  expect_site GENERIC planted_generic_semiconcave "SemiconcaveWith at variable arguments: parametric"
+  expect UNKNOWN planted_unknown_semiconcave "SemiconcaveWith at a concrete instance nothing decides: the load-bearing half"
   silent planted_arrow_false              "a genuine refutation P → False over the empty carrier stays skipped"
 
   if [[ "${fails}" -gt 0 ]]; then
