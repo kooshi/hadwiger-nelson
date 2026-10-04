@@ -731,3 +731,30 @@ reason by the close.*
      8GB of space."*): `~/.cache/ext-hn1/` (7.6 GB; build logs and the Mathlib v4.28.0 harness, no running process using it) removed. The audit's evidence stays in
      `data/external/hn1/` (the outside file, the audit module, the harness lakefile and manifest, every log); a re-check re-fetches Mathlib's cache. Item 122's
      held line closed.
+124. **FS131-W2 done, harness ≈ 520k** (report on its branch; `fs131-ww` at `058c65f8`, checked): Woodall's chain re-planned with **no open leaf** —
+     `step5_eq`, `step7`, `step8`, `step5_eq_of_condition5`, `aeMap6_merged_of_condition5` removed; new module `Plane/Woodall/NoFourFive` (E1-SEE, -RAY, -CROSS,
+     -COVER, -BAD and the refined second-order lemma; 20 theorems, `sorry` at every leaf); E1-NO45 = `ArcMap.false_of_four_le_sectors` (`Steps`); E1-NOBRANCH =
+     `exists_three_le_sectors`; `aeMap6_normal` = step 6 at three sectors + E1-NO45 at four and five. Keryx's receipt: build log
+     `build/gate/build/20261004T113659Z-3156654.log` (ww) "Build completed successfully (5346 jobs)", no warning but `declaration uses sorry`;
+     `tools/fs131_w2_decls.py --check` "53 theorems, 53 records; 0 missing, 0 stale". **E1-BAD erratum filed** in `plans/FS131-E1-derivation.md` after § E1-BAD's
+     argument, verbatim from W2's § 7.4 (item 120's correction owed: done). Two planner's checks proved in scratch (`dist_le_one_of_subset_closure`, E1-SEE).
+     **Rulings on its held items**: (a) the two Condition-5-only leaves stay removed — alternative, restore them as content of their own; why: nothing consumes
+     them once `aeMap6_of_condition5` is a corollary of `aeMap6`, and step 5 at equality is not a row; confidence high. (b) The non-row statement change
+     (`WoodallNormal`'s and `step6`'s angles `π/3 <` → `π/3 ≤`) is accepted — a weaker hypothesis, so stronger theorems. FS131-IW starts from § 9.5's handoff;
+     the chain lands unconditionally after waves 3–4 and FS131-LEB. Over its line (520k vs 480k): not a slip.
+125. **FS131-I4 handed back at stage 3, harness ≈ 425k** (report on its branch; `fs131-w4` at `d011c17d`): 26 of 86 leaves — FS110-N4-FIN (`n4_fin`), FS112-N2-RAY,
+     FS110-N3-CONF, FS110-N4-SHADOW, N2-SIGN, FS112-FLANK, `flankQ_both`, FS106-TS-T's arc-map clauses (`ts_t` and kin, over two `sorry` children incl.
+     `lebesgue_covering_square`), engine 1 and inhabitant plumbing; 60 left (Contact 10, UnitArc 23, SVMap 5, BaseSteps 22). Real build under the slot, 1741
+     modules, exit 0 (`data/fs131/i4/build-stage3*.log`); axioms from scratch prints. **Plan gap**: `localSectors` (wave 3's plan § 6 item 3, "the sector structure
+     at a point") was never stated on `fs131-w3` — I3e proved `finite_tiles_near` without it — and it gates `woodallCone`, `woodallCone_strict`,
+     `exists_hasDegree_of_mem_dom`, `noBoth`'s repeated-colour clause, engine 5, `flankQ_upper/lower`, `stuck_structure`. Corrections owed to the plan: § 13.5's
+     polar-region connectedness for the shadow leaves is unnecessary (one explicit ray point); `bowtie_mem_dom` is not E (it needs `0 ∈ interior (closure
+     bowtieTiles)`). Slip (I4's): its first build was not "as given". Tools: `data/fs131/i4/iter.sh`, `chk.sh`, `w3snap.sh` (wave 3's proved modules into a scratch
+     mirror), `tools/fs131_i4_addrecords.py`.
+126. **Ruling — whose is `localSectors`**: it is stated as wave 3's plan specifies it (`.claude/worktrees/fs131-w3/plans/FS131-w3-kernel-plan.md` § 6, item 3), in
+     `Plane/LocalStructure` if FS131-I3f states it for `flank_edge_exists` (that leaf was planned as its corollary; I3f is told), and otherwise by wave 4's next
+     implementer in a wave-4 module importing `Plane/LocalStructure`, once wave 3 has landed (built on I3e's `GoodAt` machinery). Alternative weighed: a
+     planner job to state it. Why not: its statement is already specified line by line in wave 3's plan; only its proof is new. Confidence: medium-high — if
+     the spec turns out to need design (I3e's route suggests a different shape), the implementer messages me and it goes to a planner.
+127. **Claim list `data/fs131/claims-E2.md` fixed and brief FS131-E2** (`ephodos`, Opus; `data/fs131/briefs/FS131-E2-cusp-case.md`, gated PASS): Q1 the cusp case
+     of FS116-V5-U1's four-colour clause, Q2 the same for FS112-N3-NOBOTH, Q3 the consumers' fates. Launched in W2's Opus slot.

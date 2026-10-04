@@ -441,6 +441,8 @@ sectors. If `s₊ = s₋ = s`, the closed angular range of `s` contains the anti
 centre: one `Y` per edge. A sector `s` of angle `π` with edges at `σ, σ + π` contains both branches only if `ψ ± π/2 = σ, σ + π`, so `Y = P + e(σ ± π/2)`,
 and only for the one of these two on `s`'s side (the branches lie on `Y`'s side of the line through the two edges): one `Y` per such sector. ∎
 
+*Erratum (FS131-W2): 'only for the one of these two on s's side' is false — the edges may curve to Y's side (FS131-W2 § 7.4, with `tools/fs131_w2_bad_pi.py`); a π-sector can carry two exceptional points, both normals of its two edges, among which those edges' unit-arc centres lie; the total count `≤ (edges) + (π-sectors)` stands, and E1-NO45's bound improves to `k`.* (filed by Keryx, 2026-10-04, from `.claude/worktrees/fs131-ww/plans/FS131-W-kernel-plan.md` § 7.4; inventory item 120)
+
 control: e1-tangent
   of: E1-BAD — the tangency core: a segment or a circle tangent to the x-axis at P meets ω(Y), Y = (0, −1), only at P unless it is ω(Y) itself, and ω(Y)'s branch lies below (on Y's side) for the segment and for curvature in (−1, ∞), above for curvature below −1; the fault adds the edge on ω(Y)
   run: python3 ../tools/fs131_e1_tangent.py
