@@ -2749,6 +2749,24 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 /-! ## FS-131 wave 4 (job FS131-I4) — the implementer's added children and proved leaves -/
 
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_hasSectors_of_tiles
+#print axioms HadwigerNelson.Plane.ArcMap.convex_halfPlane
+#print axioms HadwigerNelson.Plane.ArcMap.mem_bowtieArcs_near_I
+#print axioms HadwigerNelson.Plane.ArcMap.mem_bowtieArcs_near_negI
+#print axioms HadwigerNelson.Plane.ArcMap.bowtieCol_of_mem_CN_CS
+#print axioms HadwigerNelson.Plane.ArcMap.bowtieCol_of_mem_XY
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_hasSectors_of_four_tiles
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_of_ray
+#print axioms HadwigerNelson.Plane.ArcMap.convex_bowtie_tiles
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_partition_I
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_partition_negI
+#print axioms HadwigerNelson.Plane.ArcMap.subset_closure_of_diff_subset
+#print axioms HadwigerNelson.Plane.ArcMap.interior_sphere_union_lines
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_dom_end_pp
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_dom_end_np
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_dom_end_pn
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_dom_end_nn
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_arc_ends
 #print axioms HadwigerNelson.Plane.mem_segment_of_coords
 #print axioms HadwigerNelson.Plane.mem_bowtieArcs_seg
 #print axioms HadwigerNelson.Plane.mem_bowtieArcN_of

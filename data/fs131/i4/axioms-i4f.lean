@@ -12,3 +12,9 @@ open HadwigerNelson.Plane
 #print axioms ArcMap.dist_lt_one_of_mem_bowtieG
 #print axioms ArcMap.not_mem_bowtieArcs_near_I
 #print axioms ArcMap.mem_shadow_bowtie_region_zero
+#print axioms ArcMap.bowtie_unitArcEnds
+#print axioms ArcMap.bowtie_neighbours
+#print axioms ArcMap.coloursAt_hasSectors_of_tiles
+#print axioms ArcMap.bowtie_partition_I
+#print axioms ArcMap.bowtie_partition_negI
+#print axioms ArcMap.bowtie_arc_ends

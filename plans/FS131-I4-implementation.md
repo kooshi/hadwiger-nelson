@@ -498,6 +498,50 @@ restored, exit 0); `tools/fs131_k4_decls.py --check` 241 names, 0 missing. **No 
 `data/fs131/i4/build-i4f-stage13.log`): 41 distinct `declaration uses sorry` (BaseSteps 12, Contact 10, UnitArc 19), no other warning. (A first launch of this
 build was stopped by its PID while it still waited for the slot, before it read any file, so that the edits could be finished first; nothing was built by it.)
 
+## Stage 14 — SAVED (FS131-I4f): `bowtie_unitArcEnds`, `bowtie_neighbours`; 39 `sorry` left, and the handoff
+
+**`bowtie_unitArcEnds` proved**: the two unit arcs' ends are `(±5/13, ±1/13)` (`bowtie_arc_ends`, from `sin(arcsin 5/13) = 5/13`, `cos = 12/13`), and each is in the
+domain by I4e's density pattern with a circle and two lines (`interior_sphere_union_lines`, `subset_closure_of_diff_subset`): off `ω(i)`, `x = 5/13` and
+`12x + 5y = 5`, the ball of radius `1/100` about `(5/13, 1/13)` lies in `G ∪ C ∪ ZR` (`bowtie_dom_end_pp`; `ZR` there is `x > 5/13` or `12x + 5y > 5`; outside
+`ω(i)` with `x < 5/13` the point has `y < 1/13`, so it is in `C`); the three mirrors `_np`, `_pn`, `_nn` likewise. Every other boundary piece is a segment, so
+the hypothesis `a = .circ p 1 θ₀ θ₁` is refuted by `simp`.
+
+**`bowtie_neighbours` proved**, through one general lemma, `coloursAt_hasSectors_of_tiles` (any `ArcMap`): if near `v` the interior points are cut by `n` disjoint
+convex open sets, each holding `v` in its closure and of one colour `c i`, `c` injective, then `P_cl(v) = range c` and each colour has exactly one sector (over
+`isSector_iff_of_partition`); `coloursAt_hasSectors_of_four_tiles` is its four-named-tiles form. At `i` the four tiles are `G`, `CN`, `XR`, `XL`
+(`bowtie_partition_I`, for `r ≤ 1/10`: an interior point there is in one of them by `bowtie_interiorPts_cases` and the heights of the others; conversely each
+is in the domain and off every piece, by `mem_bowtieArcs_near_I` — within `1/10` of `i` a point of a piece is on one of the four edges through `i`), with colours
+`0, 1, 3, 4` (`bowtieCol_of_mem_CN_CS`, `bowtieCol_of_mem_XY`), convex (`convex_bowtie_tiles`, each tile a disc and half-planes, `convex_halfPlane`), and `i`
+in each closure along a ray (`mem_closure_of_ray`: `−i`, `i`, `1`, `−1`). At `−i` the mirror: `H`, `CS`, `YR`, `YL`, colours `2, 1, 3, 4`.
+
+**Axioms** (`data/fs131/i4/axioms-i4f.txt`, against this stage's build's oleans, not a gate log): `bowtie_unitArcEnds`, `bowtie_neighbours` and their children the
+standard three; no line of the file reads `sorryAx`. **Records**: `tools/fs131_i4_addrecords.py` — 341 names, 18 added, 0 missing; `tools/fs131_k4_decls.py
+--check` 259 names, 0 missing. **No statement changed, no new axiom, no `native_decide`.** Build: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s)
+with warnings", exit 0 (`build/gate/build/20261004T174227Z-1140038.log`; driver log `data/fs131/i4/build-i4f-stage14.log`): 39 distinct `declaration uses sorry`
+(BaseSteps 10, Contact 10, UnitArc 19), no other warning.
+
+**Re-pricing** (from the six bowtie leaves): each concrete-geometry leaf cost 10–25k tokens once its engine existed; the engines that the rest reuse are
+`coords_of_mem_segment` (a point of a segment by its parameter — every "not on a boundary piece" check becomes 30 cases closed by `linarith`), the near-point
+cases lemmas at `i`, `−i`, the closure lemmas of the nine tiles, and `coloursAt_hasSectors_of_tiles`.
+
+**What is left (39), in the order I would take it.**
+- *The bowtie's moves* (BaseSteps, 3): `bowtie_isStuck`, `bowtie_terminalOn`, `flank_incomplete_bowtie`. The easy halves: `¬ IsStuck (±i)` and `¬ MergeAvailable (±i)`
+  — by `bowtie_neighbours` every colour has one sector there, and a colour not carried has none (a sector's closure holds the vertex, so its colour is carried);
+  `¬ RayAvailable (±i)` — two disjoint horns of one colour would be two sectors of it. `flank_incomplete_bowtie`'s first clause: the contacts of `0` at `i` and
+  `2` at `−i` are in-type (`bowtie_inType`) through a tile meeting `G` near `i` (the segment `(1 − t) i` is connected and in the interior points), so not out-type;
+  `0` is no contact at `−i` (`region 0 ⊆ G ⊆ {im > 0}`), `2` none at `i`. The hard half, one engine for all three: **a horn at `E = 0` is one of the two cusp horns,
+  and its flanks are `G` and `H`** — a horn set is a sector, so for small `r` it is one of `cuspPiece r i` (`bowtie_partition`, `isSector_iff_of_partition`); it is not
+  a disc part (`cuspPiece r 2` contains points at angle `45°` at every radius, which a horn set between two tangent circles does not for small `r`); a flank band is
+  open, non-empty, disjoint from the horn and on the horn's side of `0`, so it lies in a disc part, colour `0` or `2`. Then `¬ ShaveAvailable 0`: every horn point is
+  in `shadow(region 0) ∩ shadow(region 2)` (`mem_shadow_bowtie_region_zero/two`), so neither flank colour is clear there. `¬ RayAvailable 0`: two disjoint colour-`1`
+  horns along one `α` are the two cusp horns, one holding `t > 0` and one `−t`, both in `{frameX 0 α > 0}` — `t cos α > 0` and `−t cos α > 0`. `¬ MergeAvailable 0`:
+  only colour `1` has two sectors; its contacts on `ω(0)` include `±i` (`CN`, `CS` near `±i`, from the partitions), both out-type (a tile of colour `1` is preconnected
+  inside the separated open sets `C`, `CN`, `CS`, so inside one; holding `i` in its closure it is in `CN`, outside `B̄(0, 1)`), so the allowed cone is in `{im d = 0}`,
+  with empty interior. At `±i`, `¬ ShaveAvailable` needs that no horn set is one of the four angular tiles (same 45°-type argument).
+- *UnitArc* (19), *Contact* (10) and the base's steps (BaseSteps' seven: `pair_i`, `pair_ii`, `pair_P'`, `fail_leavingCentre`, `fail_colours`, `anti`, `n3_end`)
+  as Stage 11 and Stage 8 list them. `n2_env_near` is not "one identity": it needs every point of the lens `B̄(A, 1) ∩ B̄(B, 1)` within `< 1` of a toward lens point
+  near the arc, with the profile `s ≤ ψ·Δ(φ)` doing the work near the ends — a real estimate.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -544,4 +588,22 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
 - FS112-BOWTIE: `ArcMap.bowtie_mem_dom` — `[propext, sorryAx, Classical.choice, Quot.sound]` **(over sorry: the structure `bowtie`, as above)**. Read against
   § 8.2: same statement (`E`, `N`, `S′` in the fragment's domain). Children `ArcMap.interior_line_eq_empty`, `ArcMap.isClosed_line`, `ArcMap.dense_compl_four_lines`,
   `ArcMap.subset_bowtieTiles`, `ArcMap.ball_I_subset_closure_bowtieTiles`, `ArcMap.ball_negI_subset_closure_bowtieTiles` — the standard three.
+
+## Theorems this phase proved (FS131-I4f's; axioms from `#print axioms` against the stage-13 and stage-14 builds' oleans, `data/fs131/i4/axioms-i4f.txt`, not a gate log)
+
+- FS112-BOWTIE's fragment: `HadwigerNelson.Plane.bowtieCol_locallyConstant` — `[propext, Classical.choice, Quot.sound]`. Read against § 8.2: same statement (the
+  bowtie's colour locally constant off its boundary pieces, in its domain). With it the structure `bowtie` is sorry-free, so `ArcMap.bowtie_isHorn`,
+  `ArcMap.bowtie_flanks`, `ArcMap.bowtie_coloursAt_zero`, `ArcMap.bowtie_mem_dom` (I4e's) read the standard three.
+- FS112-BOWTIE: `ArcMap.bowtie_valid` — the standard three. Same statement (no two interior points of one colour at distance exactly `1`; YB3's pairs).
+- FS112-BOWTIE: `ArcMap.bowtie_doublyShadowed` — the standard three. Same statement (both horns, near `E`, in the shadows of both flank colours; the band is the
+  whole horn, `s₁ = −1`, `s₂ = 1`).
+- FS112-BOWTIE: `ArcMap.bowtie_inType` — the standard three. Same statement (contacts of `0` at `i` and `2` at `−i`, in-type).
+- FS112-BOWTIE: `ArcMap.bowtie_unitArcEnds` — the standard three. Same statement (both ends of both unit arcs in the domain).
+- FS112-BOWTIE: `ArcMap.bowtie_neighbours` — the standard three. Same statement (`P_cl(i) = {0, 1, 3, 4}`, `P_cl(−i) = {2, 1, 3, 4}`, one sector per colour).
+- Children (no row), the standard three: `ArcMap.coloursAt_hasSectors_of_tiles` (general: colours and single sectors from a convex tile partition),
+  `ArcMap.coloursAt_hasSectors_of_four_tiles`, `ArcMap.coords_of_mem_segment`, `mem_segment_of_coords`, `ArcMap.mem_closure_of_ray`, `ArcMap.convex_halfPlane`,
+  `eventually_mem_iff_of_closure_subset`, `ArcMap.subset_closure_of_diff_subset`, and the bowtie's: the nine `closure_bowtie*_subset`, `bowtieCol_eq_of_iff`,
+  `bowtieCol_cases`, `bowtie_interiorPts_cases`, `dist_lt_one_of_mem_bowtieG/H`, `sq_ne_one_of_bowtie_one/XY`, `not_mem_bowtieArcs_near_I/negI`,
+  `mem_bowtieArcs_near_I/negI`, `bowtie_partition_I/negI`, `convex_bowtie_tiles`, `bowtie_arc_ends`, `bowtie_dom_end_pp/np/pn/nn`,
+  `mem_shadow_bowtie_region_zero/two`, `I_mem_closure_bowtie_region` (records in `scripts/Axioms.lean`, FS131-I4 block).
 
