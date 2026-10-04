@@ -267,6 +267,31 @@ theorem IsRegularMUA.component_side {A : Set ℂ} (hA : IsRegularMUA A) {y : ℂ
     · have := h z hz0; rw [dist_comm] at hlt; linarith
     · have := h z' hz'; rw [dist_comm] at hlt; linarith
 
+/-- **FS111-M-COVER-SC**, first clause, with the contact point in the support (the stronger child; the statement below reads
+it with `y` unconstrained, `x ∈ closure P` idle). -/
+theorem IsMaximalCover.enclosing_or_exterior_contact {C : Fin k → Set ℂ} (hC : IsMaximalCover C) (a : Fin k) {x : ℂ}
+    (hx : x ∈ frontier (essSupport (C a))) {P : Set ℂ} (hP : IsPreconnected P) (hPa : P ⊆ densitySet (C a)) :
+    ∃ y ∈ essSupport (C a), dist x y = 1 ∧ ((∀ p ∈ P, dist p y ≤ 1) ∨ (∀ p ∈ P, 1 ≤ dist p y)) := by
+  have hmeas := (hC.1.1 a).1
+  have hnull := (hC.1.1 a).2
+  have hxF : x ∉ interior (essSupport (C a)) := fun h => hx.2 h
+  obtain ⟨y, hyF, hxy⟩ : x ∈ unitShadow (essSupport (C a)) :=
+    (hC.interior_union_unitShadow a ▸ mem_univ x : x ∈ interior (essSupport (C a)) ∪ unitShadow (essSupport (C a))).resolve_left hxF
+  refine ⟨y, hyF, hxy, ?_⟩
+  by_contra hcon
+  push Not at hcon
+  obtain ⟨⟨p₁, hp₁, h₁⟩, ⟨p₂, hp₂, h₂⟩⟩ := hcon
+  have hopen : IsOpen {y' : ℂ | 1 < dist p₁ y' ∧ dist p₂ y' < 1} :=
+    (isOpen_lt continuous_const (continuous_const.dist continuous_id)).inter
+      (isOpen_lt (continuous_const.dist continuous_id) continuous_const)
+  have hy : y ∈ {y' : ℂ | 1 < dist p₁ y' ∧ dist p₂ y' < 1} :=
+    ⟨h₁, h₂⟩
+  rw [essSupport_eq_closure_densitySet] at hyF
+  obtain ⟨y', hy'o, hy'D⟩ := mem_closure_iff.1 hyF _ hopen hy
+  rcases hullset hmeas hnull hP hPa (upperDensityAt_pos_of_mem_densitySet hy'D) with h | h
+  · have := h p₁ hp₁; rw [dist_comm] at this; linarith [hy'o.1]
+  · have := h p₂ hp₂; rw [dist_comm] at this; linarith [hy'o.2]
+
 /-- **FS111-M-COVER-SC**, first clause: in a maximal cover, at every boundary point `x` of `F_a`, each adjacent
 preconnected piece `P` of `F̃_a` lies in an enclosing unit disc or outside an exterior one, the disc's circle through
 `x`. (The row says path-connected; preconnected is wider.) -/
@@ -274,18 +299,23 @@ theorem IsMaximalCover.enclosing_or_exterior {C : Fin k → Set ℂ} (hC : IsMax
     (hx : x ∈ frontier (essSupport (C a))) {P : Set ℂ} (hP : IsPreconnected P) (hPa : P ⊆ densitySet (C a))
     (hxP : x ∈ closure P) :
     ∃ y, dist x y = 1 ∧ ((∀ p ∈ P, dist p y ≤ 1) ∨ (∀ p ∈ P, 1 ≤ dist p y)) := by
-  sorry
+  obtain ⟨y, -, h1, h2⟩ := hC.enclosing_or_exterior_contact a hx hP hPa
+  have _ := hxP
+  exact ⟨y, h1, h2⟩
 
 /-- The class lies below the graph of `u` over `J` in the frame `(z₀, θ)`, locally: the points
-`z₀ + e θ · (s + t i)` with `s ∈ J` and `u s − δ < t ≤ u s` are in `supp A`, and those with `u s < t < u s + δ` are not. -/
+`z₀ + e θ · (s + t i)` with `s ∈ J` and `u s − δ < t ≤ u s` are in the density set `Ã`, and those with `u s < t < u s + δ`
+are not in `supp A`. (Ruling, `plans/FS131-close-inventory.md` item 56: the region below the graph is read in `Ã`, as the
+derivation's pieces `P ⊆ F̃_a` are; it was `supp A`.) -/
 def IsLowerGraphOf (A : Set ℂ) (z₀ : ℂ) (θ : ℝ) (J : Set ℝ) (u : ℝ → ℝ) (δ : ℝ) : Prop :=
-  0 < δ ∧ ∀ s ∈ J, ∀ t : ℝ, (u s - δ < t → t ≤ u s → z₀ + e θ * (s + t * I) ∈ essSupport A) ∧
+  0 < δ ∧ ∀ s ∈ J, ∀ t : ℝ, (u s - δ < t → t ≤ u s → z₀ + e θ * (s + t * I) ∈ densitySet A) ∧
     (u s < t → t < u s + δ → z₀ + e θ * (s + t * I) ∉ essSupport A)
 
-/-- Curvature at most `1` from above, in the viscosity sense: at every `s₀ ∈ J`, every `C²` function `φ` touching `u` from
-above at `s₀` has `φ''(s₀) ≤ (1 + φ'(s₀)²)^{3/2}`. -/
+/-- Curvature at most `1`, in the viscosity sense for a semiconcave bound: at every `s₀ ∈ J`, every `C²` function `φ` touching
+`u` from below at `s₀` has `φ''(s₀) ≤ (1 + φ'(s₀)²)^{3/2}`. (Ruling, `plans/FS131-close-inventory.md` item 57: the test
+functions touch from below; from above, `φ = u + N (s − s₀)²` defeats every bound.) -/
 def CurvatureLeOne (u : ℝ → ℝ) (J : Set ℝ) : Prop :=
-  ∀ s₀ ∈ J, ∀ φ : ℝ → ℝ, ContDiff ℝ 2 φ → φ s₀ = u s₀ → (∀ᶠ s in 𝓝 s₀, u s ≤ φ s) →
+  ∀ s₀ ∈ J, ∀ φ : ℝ → ℝ, ContDiff ℝ 2 φ → φ s₀ = u s₀ → (∀ᶠ s in 𝓝 s₀, φ s ≤ u s) →
     deriv (deriv φ) s₀ ≤ (1 + deriv φ s₀ ^ 2) ^ ((3 : ℝ) / 2)
 
 /-- **FS111-M-COVER-SC**, second clause, **corrected** (the row's "semiconcave with constant 1" is false at R7's cusped

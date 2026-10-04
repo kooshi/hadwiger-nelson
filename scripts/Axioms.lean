@@ -2048,6 +2048,30 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.antitone_mu
 #print axioms HadwigerNelson.Plane.muZero_le_one
 
+
+/-! ## FS-131 wave 2 — children stated by FS131-I2b -/
+
+#print axioms HadwigerNelson.Plane.preimage_inter_null_of_invertible_deriv
+#print axioms HadwigerNelson.Plane.hasDerivAt_e
+#print axioms HadwigerNelson.Plane.contDiff_e
+#print axioms HadwigerNelson.Plane.contDiff_twoCircleMap
+#print axioms HadwigerNelson.Plane.hasFDerivAt_twoCircleMap
+#print axioms HadwigerNelson.Plane.twoCircleDeriv_injective
+#print axioms HadwigerNelson.Plane.volume_sinZero_null
+#print axioms HadwigerNelson.Plane.eq_norm_mul_e_arg
+#print axioms HadwigerNelson.Plane.slice_slice_null
+#print axioms HadwigerNelson.Plane.CPColouring.law_shift
+#print axioms HadwigerNelson.Plane.CPColouring.measurableSet_eq
+#print axioms HadwigerNelson.Plane.CPColouring.law_eq_translate
+#print axioms HadwigerNelson.Plane.CPColouring.law_ne_triangle
+#print axioms HadwigerNelson.Plane.CPColouring.law_ne_eq
+#print axioms HadwigerNelson.Plane.CPColouring.isClosed_forcedSet
+#print axioms HadwigerNelson.Plane.CPColouring.law_eq_one_iff
+#print axioms HadwigerNelson.Plane.exists_pos_forall_norm_lt_eq_zero
+#print axioms HadwigerNelson.Plane.AeColouring.volume_badAngles_null
+#print axioms HadwigerNelson.Plane.AeColouring.exists_motion
+#print axioms HadwigerNelson.Plane.IsMaximalCover.enclosing_or_exterior_contact
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
