@@ -1321,3 +1321,26 @@ reason by the close.*
      FS131-I2g (record Stage 10). I2j checked all five declarations and changed nothing (credit: I2j). Fix: I2k's brief drops the amendment.
 189. **Brief FS131-I2k, wave 2's eleventh implementer** (Opus; `data/fs131/briefs/FS131-I2k-wave2.md`, derived by script from I2j's, stale amendment dropped,
      gated PASS): Slack's two leaves, CoverExamples' 34, the carriers, the gate and the landing. Launched in I2j's slot: 1 (I4f) + 1 (IWd) + 1 (I2k) = 3.
+190. **FS131-IWd handed back at stage 17, harness 595k** (the agent's own figure "≈300" read low; report `data/fs131/reports/FS131-IWd.md` on `fs131-ww`; branch at
+     `792434f0`, checked): **all three `Merge` leaves proved, statements unchanged; all five Woodall modules (`Basic`, `Collar`, `NoFourFive`, `Merge`, `Steps`)
+     sorry-free**. **[kernel], standard three** (iteration print `data/fs131/iwd/axioms-iteration.txt`, not a gate log): `niceAt_of_dirColourAt` (`h3` not needed),
+     `wedgeMerge_niceAt` (no transversality needed), `exists_merge_at` (E3-NICE, by strong induction on ∑ over directions of (colours approaching − 1)), and
+     **`exists_woodallMerged` (E3-BALL) on proved children**. The chain theorems `aeMap6`, `aeMap6_of_condition5`, `woodall_thm6` still print `sorryAx`, only through
+     wave 4's open statements in `Plane/SVMap` (`lemmaL`, `ts_t`, …). Keryx's receipts: build log `build/gate/build/20261004T172813Z-1058816.log` (ww) "Build
+     completed successfully (5361 jobs)", 0 warnings other than `sorry`, and every `sorry` warning in wave 4's five modules, none in `Plane/Woodall/`; `sorry`
+     lines in the five Woodall files by count 0; the iteration print shows the four on the standard three and `aeMap6` with `sorryAx`. Corrections owed (route
+     notes, no statement change): `plans/FS131-W-kernel-plan.md` § 14.3's transversal crossing is unneeded (`niceAt_of_crossing` has no transversality
+     hypothesis); § 14.4's measure replaced by stage 11's (as item 180). Generalization: `niceAt_of_crossing` holds for any arc map. Name note:
+     `ArcMap.GoodAt.exists_sides` vs `Plane/RingBand`'s `exists_sides` — full names differ, no collision. **Left on `fs131-ww`** (item 181's item 3): after wave 4
+     lands — merge `main`, delete the identical copies (`abs_dot_le`, `dot_add_left`, `dot_e_e`, `isOpen_shadow`), `tools/fs131_qa1_dupes.py`, QA2-1's explicit
+     merged `sevenBrickMap` inhabitant (a merged form exists by theorem now that `exists_woodallMerged` holds for every `k`), the gate, the landing.
+191. **Ruling: IWd's slot goes to wave 5's planner (FS131-K5), now.** Choice: launch the planner. Alternative weighed: a second wave-4 implementer on a branch
+     of its own taking `Contact` (10 leaves, disjoint from I4f's `BaseSteps`), to land wave 4 — and so Woodall — sooner. Why: waves 5–10 (124 rows) are serial
+     behind planning, so a planner started now shortens the milestone more than a faster wave-4 landing, which unblocks only Woodall's landing; wave 4's statements
+     stand, so wave 5 can plan on them (item 75's reason for waiting is met). Confidence: medium — a measured split of wave 4 could still pay if I4f's
+     re-pricing shows its 45 leaves need more than two more sessions. **Item 17 (b)'s `Row134Base` stub** (default "written before wave 5's planner") is drafted by
+     K5 as a deliverable, since wave 5 is its consumer (FS112-N3-BASE) and K1's § 7.4 holds the material; Keryx files it.
+192. **Brief FS131-K5, wave 5's planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K5-wave5.md`, gated PASS): the foundation (stuck chains, `F(M)`, `R(M)`,
+     `Row134Base` as a `Prop`), the 13 rows' skeleton with C-DOUBLE + Y3-END-NEEDS (item 69), FLANK-Q's unconditional form (item 79), N3-END's chain clause
+     (item 74), leaf plans, the obligation pass, the handoff, and the `Row134Base` stub draft (item 191). Worktree `fs131-w5` from `fs131-w4` at `9a8de899`
+     (`.lake/build` copied from `fs131-ww`). Launched in IWd's slot: 1 (I2k) + 1 (I4f) + 1 (K5) = 3.
