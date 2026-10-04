@@ -291,3 +291,17 @@ reason by the close.*
     **Ruling: add `(h0 : 0 ≤ h)`.** Alternative weighed: `−2 < h`, the widest form I2 believes true (one mind). Why: the row's own reading, the consumers'
     range, and no proof owed beyond the row; the wider form, if wanted, is a separate lemma the implementer may add. Confidence: high. No erratum owed on the
     derivation.
+49. **FS131-I2 handed back at stage 3, harness ≈ 357k by the task count (its own ≈ 400k)** (report on its branch,
+    `.claude/worktrees/fs131-w2/data/fs131/reports/FS131-I2.md`; `fs131-w2` at `0e5febba`, checked): 23 of 71 leaves proved; `main` merged in; real build 443/443
+    with only `sorry` warnings; axioms not audited (gate not run); `vesica_apex_exact` takes `0 ≤ h` per item 48, proved. Shared children sorry-free in
+    `Plane/Cover` (a general measure-exhaustion lemma `exists_ae_maximal`, among others) and `Plane/Suprema`. Generalizations: `UnitPairsNull.congr_ae` and
+    `volume_diff_essSupport` need no measurability. Slip: none of substance. 48 leaves left (13 hard untouched). Successor: FS131-I2b.
+50. **FS131-I3 handed back at stage 1, harness ≈ 436k** (report on its branch, `.claude/worktrees/fs131-w3/data/fs131/reports/FS131-I3.md`; `fs131-w3` at
+    `8a850e85`, checked): 55 of 96 leaves proved, no statement changed; rows with every clause sorry-free — FS116-V5-NE1, -V4-DICHOTOMY, -V4-MEET,
+    -S1-CLUSTER, FS129-OR1-WHOLE, FS116-V4-TWIST, -N1-TWIST-D, -N1-GERM-R, -N1-ECHO (scratch audit only; the gate's log is still to be read); `Plane/Tiles`
+    complete; engines 1 and 2 built, engine 3 (`localSectors`) not started. A real build of its last code commit was left running under the slot
+    (`data/fs131/i3/build-stage1.log` on the branch); I3 may wake to read it. Re-pricing: FS116-N1-GERM-R, priced hard, came out as two half-plane lemmas
+    (the calibration of `CLAUDE.md` § What compute actually helps). 41 leaves left. Successor FS131-I3b, launched once I3's build has finished and I3 has
+    stopped (one writer per branch). Slip (I3's): one commit message (`b45ef041`) lacks the attribution lines.
+51. **Brief SEARCH-2026-10-04** (the Searcher, Opus; `data/search/briefs/SEARCH-2026-10-04.md`), gated PASS: row 6 only (C-T-BIKE), the Searcher's call whether to
+    run it, one hour, at most 8 GiB per run. Launched in the slot I2 freed, per item 47's default. Source: this commit.
