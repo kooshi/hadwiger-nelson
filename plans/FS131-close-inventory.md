@@ -925,3 +925,12 @@ reason by the close.*
      finite index type (`lebesgue_covering_rect`); the cubical KKM three-set form (`exists_mem_inter_three`); read off the proof, not stated: the top/bottom
      hypothesis is needed only for sets missing the left side. No statement defect; wave 4's statement true and not vacuous. **The landing is a ruling of
      mine** (its brief, Done means 6), on the gate's saved logs at its report.
+147. **FS131-I3g handed back at stage 7, harness ≈ 425k** (report on its branch; `fs131-w3` at `93ca3468`, checked): `four_of_bothKind` and `flank_edge_exists` proved,
+     statements unchanged (item 145); the inversion engine public (`coneAt_interiors_disjoint`, `GoodAt.exists_wedge` — wave 4 can use it directly —,
+     `isPreconnected_Rgn_lev`, `exists_initialPiece_of_cone`, `Arc.exists_initialPiece_of_approach`); 110 audit records added. Keryx's receipt: build log
+     `build/gate/build/20261004T124303Z-3587986.log` (w3) "Build completed successfully (5348 jobs)", exactly two `sorry` warnings (`SixFragment` 844, 849);
+     `tools/fs131_k3b_decls.py --check` "400 names, 0 missing". Not started (budget): `localSectors`, the separation lemma. **Brief FS131-I3h**, wave 3's first Opus
+     implementer (`data/fs131/briefs/FS131-I3h-wave3.md`, gated PASS): the two `SixFragment` leaves, the gate, the landing; then `localSectors` and the separation
+     lemma (and `four_of_bothKind_simple` without `hnc`) on `fs131-w3b` from the landed `main`. Ordered ahead of FS131-T3 and wave 4's Opus implementer: wave 3 is
+     the nearest landing, and T3's gate fix concerns imported axioms, which wave 3 has none of. Launched in the whole slot I3g and I4b freed: 0.5 (IW) + 0.5
+     (I2g) + 1 (LEB) + 1 (I3h) = 3.
