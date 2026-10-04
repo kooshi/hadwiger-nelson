@@ -1,0 +1,6 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 16,17
+Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:615:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:622:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:641:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:658:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:665:8: warning: declaration uses `sorry`
