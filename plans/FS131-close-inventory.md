@@ -432,3 +432,6 @@ reason by the close.*
 75. **Order of planner launches** (Keryx): FS131-K4c (wave 4's plan finished) before FS131-W and FS131-LEB. Why: wave 4's implementer and wave 5's planner both wait
     on wave 4's full skeleton; W and LEB are needed only at wave 9 and at wave 4's gate. Supersedes item 71's "W and LEB take the next planner slots". Confidence:
     medium-high. Source: this commit.
+76. **Brief FS131-K4c, wave 4's third planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K4c-wave4.md`), gated PASS: the nine unit-arc items of K4b's Stage 9,
+    the domain- and obligation-modeling passes over the whole wave (neither K4 nor K4b ran them over its additions), every leaf's plan, the handoff. Source: this
+    commit.
