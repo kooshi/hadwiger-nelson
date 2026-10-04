@@ -758,3 +758,8 @@ reason by the close.*
      the spec turns out to need design (I3e's route suggests a different shape), the implementer messages me and it goes to a planner.
 127. **Claim list `data/fs131/claims-E2.md` fixed and brief FS131-E2** (`ephodos`, Opus; `data/fs131/briefs/FS131-E2-cusp-case.md`, gated PASS): Q1 the cusp case
      of FS116-V5-U1's four-colour clause, Q2 the same for FS112-N3-NOBOTH, Q3 the consumers' fates. Launched in W2's Opus slot.
+128. **Brief FS131-IW, Woodall's chain implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-IW-woodall.md`, gated PASS): § 9.5's order; its proofs
+     are the check on E1-NO45 (item 111). Launched in the half slot I4 freed, ahead of wave 4's successor, because it checks the newest one-mind hand result:
+     slots 0.5 (I3f) + 1 (I2f) + 1 (E2) + 0.5 (IW) = 3. **Next half slot**: FS131-I4b (wave 4's successor; item 126's `localSectors`). **Gate quirk, unreproduced**:
+     the gate placed § 9.5's opening lines "not under § 9.5" (W2's plan repeats near-identical paragraphs in § 4.7); a minimal two-section repro passed, so the
+     cause is not yet known — the brief quotes lines unique to § 9.5 instead. Not filed in agent-forge until reproduced.
