@@ -936,12 +936,83 @@ theorem disc7_sum_upperDensity : ∑ a, upperDensity (disc7 a) = ENNReal.ofReal 
 set, `IsMUA.interior_union_unitShadow`). -/
 theorem IsMUA.exists_shadow_point {A : Set ℂ} (hA : IsMUA A) {z : ℂ} (hz : z ∉ essSupport A) :
     ∃ y ∈ essSupport A, dist z y = 1 := by
-  sorry
+  have hz' : z ∈ interior (essSupport A) ∪ unitShadow (essSupport A) := by
+    rw [hA.interior_union_unitShadow]; exact mem_univ z
+  rcases hz' with h | h
+  · exact absurd (interior_subset h) hz
+  · exact h
 
 /-- **The unit circle about any point at distance `1` from `m`, other than `m + e θ`, enters the open half-box behind `m`.** -/
 theorem circle_meets_halfBox_of_ne {m y : ℂ} {θ ε : ℝ} (hε : 0 < ε) (hy : dist m y = 1) (hne : y ≠ m + e θ) :
     ∃ z ∈ halfBox m θ ε, dist z y = 1 := by
-  sorry
+  have he0 : e θ ≠ 0 := by
+    intro h; have := norm_e θ; rw [h, norm_zero] at this; exact zero_ne_one this
+  set w : ℂ := (y - m) / e θ with hw
+  have hyw : y = m + e θ * w := by rw [hw]; field_simp; ring
+  have hwn : w.re ^ 2 + w.im ^ 2 = 1 := by
+    have h1 : ‖w‖ = 1 := by rw [hw, norm_div, norm_e, div_one, ← dist_eq_norm, dist_comm]; exact hy
+    have h2 := Complex.sq_norm w
+    rw [h1, Complex.normSq_apply] at h2
+    nlinarith [h2]
+  set σ := w.re with hσ
+  set ρ := w.im with hρ
+  have hw1 : ¬ (σ = 1 ∧ ρ = 0) := by
+    rintro ⟨h1, h2⟩
+    apply hne
+    rw [hyw, show w = 1 from Complex.ext (by simpa using h1) (by simpa using h2), mul_one]
+  have hσ1 : σ ≤ 1 := by nlinarith [sq_nonneg ρ, sq_nonneg (σ - 1)]
+  have hσ1' : -1 ≤ σ := by nlinarith [sq_nonneg ρ, sq_nonneg (σ + 1)]
+  obtain ⟨k, hkε, hneg⟩ : ∃ k : ℝ, |k| ≤ ε / 8 ∧ σ * k ^ 2 + ρ * k < 0 := by
+    rcases lt_trichotomy ρ 0 with hρ0 | hρ0 | hρ0
+    · set κ := min (ε / 8) (-ρ / 2) with hκ
+      have hκ0 : 0 < κ := lt_min (by linarith) (by linarith)
+      have hκ1 : κ ≤ -ρ / 2 := min_le_right _ _
+      refine ⟨κ, by rw [abs_of_pos hκ0]; exact min_le_left _ _, ?_⟩
+      nlinarith
+    · have hσm : σ = -1 := by
+        rw [hρ0] at hwn
+        have : (σ - 1) * (σ + 1) = 0 := by linear_combination hwn
+        rcases mul_eq_zero.1 this with h | h
+        · exact absurd ⟨by linarith, hρ0⟩ hw1
+        · linarith
+      refine ⟨ε / 8, by rw [abs_of_pos (by linarith)], ?_⟩
+      rw [hσm, hρ0]; nlinarith
+    · set κ := min (ε / 8) (ρ / 2) with hκ
+      have hκ0 : 0 < κ := lt_min (by linarith) (by linarith)
+      have hκ1 : κ ≤ ρ / 2 := min_le_right _ _
+      refine ⟨-κ, by rw [abs_neg, abs_of_pos hκ0]; exact min_le_left _ _, ?_⟩
+      nlinarith
+  set D : ℝ := 1 + k ^ 2 with hD
+  have hD0 : 0 < D := by positivity
+  set q : ℂ := ⟨2 * (σ * k ^ 2 + ρ * k) / D, 2 * (ρ * k ^ 2 - σ * k) / D⟩ with hq
+  have hqre : q.re = 2 * (σ * k ^ 2 + ρ * k) / D := rfl
+  have hqim : q.im = 2 * (ρ * k ^ 2 - σ * k) / D := rfl
+  have hqn : (q.re ^ 2 + q.im ^ 2) * D = 4 * k ^ 2 := by
+    rw [hqre, hqim]; field_simp; rw [hD]; linear_combination (4 * k ^ 2 * (1 + k ^ 2)) * hwn
+  have hqb : q.re ^ 2 + q.im ^ 2 ≤ 4 * k ^ 2 := by nlinarith [sq_nonneg q.re, sq_nonneg q.im, sq_nonneg k]
+  have hk2 : 4 * k ^ 2 < ε ^ 2 := by
+    have : k ^ 2 ≤ (ε / 8) ^ 2 := by rw [← sq_abs]; exact pow_le_pow_left₀ (abs_nonneg k) hkε 2
+    nlinarith
+  refine ⟨m + e θ * q, ⟨-q.re, q.im, ?_, ?_, ?_, ?_⟩, ?_⟩
+  · rw [hqre, neg_pos]; exact div_neg_of_neg_of_pos (by linarith) hD0
+  · have := abs_lt_of_sq_lt_sq (show q.re ^ 2 < ε ^ 2 by nlinarith [sq_nonneg q.im]) hε.le
+    linarith [neg_abs_le q.re]
+  · exact abs_lt_of_sq_lt_sq (show q.im ^ 2 < ε ^ 2 by nlinarith [sq_nonneg q.re]) hε.le
+  · congr 2; apply Complex.ext <;> simp
+  · have hq1 : q.re - σ = (σ * (k ^ 2 - 1) + 2 * ρ * k) / D := by rw [hqre]; field_simp; ring
+    have hq2 : q.im - ρ = (ρ * (k ^ 2 - 1) - 2 * σ * k) / D := by rw [hqim]; field_simp; ring
+    have hnum : (σ * (k ^ 2 - 1) + 2 * ρ * k) ^ 2 + (ρ * (k ^ 2 - 1) - 2 * σ * k) ^ 2 = D ^ 2 := by
+      rw [hD]; linear_combination (1 + k ^ 2) ^ 2 * hwn
+    have hs : (q - w).re ^ 2 + (q - w).im ^ 2 = 1 := by
+      rw [Complex.sub_re, Complex.sub_im, ← hσ, ← hρ, hq1, hq2, div_pow, div_pow, ← add_div, hnum,
+        div_self (pow_ne_zero 2 hD0.ne')]
+    have hn : ‖q - w‖ = 1 := by
+      have h2 := Complex.sq_norm (q - w)
+      rw [Complex.normSq_apply] at h2
+      have h3 : ‖q - w‖ ^ 2 = 1 := by rw [h2]; linear_combination hs
+      have h4 := norm_nonneg (q - w)
+      nlinarith [sq_nonneg (‖q - w‖ - 1), sq_nonneg (‖q - w‖ + 1)]
+    rw [hyw, dist_eq_norm, show m + e θ * q - (m + e θ * w) = e θ * (q - w) by ring, norm_mul, norm_e, one_mul, hn]
 
 /-- **FS111-M3-BAND**, first clause, at the class its argument reads (wider; `plans/FS131-w2-kernel-plan.md` § 7): at a point `m`
 of the boundary of a MUA set's support where the set fills the half-box behind `m` (in direction `−e θ`) and the support misses
@@ -951,7 +1022,52 @@ block, diameter bound or regularity is read. -/
 theorem IsMUA.add_normal_mem_essSupport {A : Set ℂ} (hA : IsMUA A) {m : ℂ} {θ ε δ : ℝ} (hε : 0 < ε) (hδ : 0 < δ)
     (hin : volume (halfBox m θ ε \ A) = 0) (hout : ∀ τ : ℝ, 0 < τ → τ < δ → m + τ * e θ ∉ essSupport A) :
     m + e θ ∈ essSupport A := by
-  sorry
+  -- points `z k` on the normal ray, their shadow points `y k` in the support
+  set z : ℕ → ℂ := fun k => m + ((δ / (k + 2) : ℝ) : ℂ) * e θ with hz
+  have hzpos : ∀ k : ℕ, 0 < δ / ((k : ℝ) + 2) := fun k => div_pos hδ (by positivity)
+  have hzlt : ∀ k : ℕ, δ / ((k : ℝ) + 2) < δ := fun k =>
+    (div_lt_iff₀ (by positivity)).2 (by nlinarith [show (0 : ℝ) ≤ k from Nat.cast_nonneg k])
+  have hsh : ∀ k, ∃ y ∈ essSupport A, dist (z k) y = 1 := fun k =>
+    hA.exists_shadow_point (hout _ (hzpos k) (hzlt k))
+  choose y hyS hyd using hsh
+  have hzm : ∀ k, dist (z k) m ≤ δ := by
+    intro k
+    rw [hz, dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos (hzpos k)]
+    exact (hzlt k).le
+  have hyB : ∀ k, y k ∈ closedBall m (δ + 1) := by
+    intro k
+    rw [mem_closedBall]
+    calc dist (y k) m ≤ dist (y k) (z k) + dist (z k) m := dist_triangle _ _ _
+      _ ≤ 1 + δ := by rw [dist_comm, hyd k]; linarith [hzm k]
+      _ = δ + 1 := by ring
+  obtain ⟨ys, -, φ, hφ, hlim⟩ := (isCompact_closedBall m (δ + 1)).tendsto_subseq hyB
+  have hysS : ys ∈ essSupport A :=
+    (isClosed_essSupport A).mem_of_tendsto hlim (Eventually.of_forall fun k => hyS (φ k))
+  have hzlim : Tendsto (fun k => z (φ k)) atTop (𝓝 m) := by
+    have h0 : Tendsto (fun k : ℕ => δ / ((k : ℝ) + 2)) atTop (𝓝 0) := by
+      have := (tendsto_one_div_add_atTop_nhds_zero_nat).const_mul δ
+      rw [mul_zero] at this
+      refine squeeze_zero (fun k => (hzpos k).le) (fun k => ?_) this
+      rw [mul_one_div]
+      exact div_le_div_of_nonneg_left hδ.le (by positivity) (by linarith)
+    have h1 : Tendsto z atTop (𝓝 m) := by
+      have : Tendsto (fun k : ℕ => m + ((δ / ((k : ℝ) + 2) : ℝ) : ℂ) * e θ) atTop (𝓝 (m + ((0 : ℝ) : ℂ) * e θ)) :=
+        tendsto_const_nhds.add ((Complex.continuous_ofReal.tendsto 0).comp h0 |>.mul tendsto_const_nhds)
+      rw [Complex.ofReal_zero, zero_mul, add_zero] at this
+      exact this
+    exact h1.comp hφ.tendsto_atTop
+  have hdist : dist m ys = 1 := by
+    have h := (hzlim.dist hlim).congr fun k => hyd (φ k)
+    exact tendsto_nhds_unique h tendsto_const_nhds
+  by_contra hns
+  have hne : ys ≠ m + e θ := fun h => hns (h ▸ hysS)
+  obtain ⟨w, hw, hwd⟩ := circle_meets_halfBox_of_ne hε hdist hne
+  have hint : w ∈ interior (densitySet A) :=
+    interior_maximal (subset_densitySet_of_isOpen_ae_subset (isOpen_halfBox m θ ε)
+      (ae_le_set.2 hin)) (isOpen_halfBox m θ ε) hw
+  rw [essSupport_eq_closure_densitySet] at hysS
+  exact dist_ne_one_of_mem_interior_densitySet hA.1 hA.2.1 hint hysS hwd
 
 /-- **FS111-M3-BAND**, second clause, its horn half: a band of length `ℓ` (its base segment `[p, p + ℓd]`) excludes the point at
 offset `(x, w)` in its frame (`x` along the band past `p`, `w` across) iff the circle about it meets the segment, which past the
