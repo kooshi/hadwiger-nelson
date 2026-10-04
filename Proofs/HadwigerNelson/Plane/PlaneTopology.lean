@@ -100,6 +100,6 @@ example : ∃ i' ∈ ({0, 1} : Set ℕ), ∃ j' ∈ ({0, 1} : Set ℕ), i' ≠ j
       rcases le_total x 1 with h | h
       · left; exact ⟨by simpa using hx.1, by simpa using h⟩
       · right; exact ⟨by simpa using h, by have := hx.2; push_cast; linarith⟩)
-    (by simp) (by simp) (by norm_num) ⟨0, by simp⟩ ⟨2, by norm_num⟩
+    (i := 0) (j := 1) (by simp) (by simp) (by norm_num) ⟨0, by simp⟩ ⟨2, by norm_num⟩
 
 end HadwigerNelson.Plane
