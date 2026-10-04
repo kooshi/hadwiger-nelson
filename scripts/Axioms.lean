@@ -3094,6 +3094,24 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.abs_deriv_hcGap_le
 #print axioms HadwigerNelson.Plane.abs_deriv_hcGap_sub_le
 
+-- FS131-I2l: children added by the twelfth wave-2 implementer
+#print axioms HadwigerNelson.Plane.triQ_nonneg
+#print axioms HadwigerNelson.Plane.triQ_le_add
+#print axioms HadwigerNelson.Plane.tri_eq
+#print axioms HadwigerNelson.Plane.dist_add_mul
+#print axioms HadwigerNelson.Plane.triCoord_spec
+#print axioms HadwigerNelson.Plane.dist_eq_triQ
+#print axioms HadwigerNelson.Plane.triCoord_tri
+#print axioms HadwigerNelson.Plane.dist_tri
+#print axioms HadwigerNelson.Plane.reuleaux_aux
+#print axioms HadwigerNelson.Plane.reuleaux_unitPair
+#print axioms HadwigerNelson.Plane.dist_eq_one_of_three
+#print axioms HadwigerNelson.Plane.triCoord_combo
+#print axioms HadwigerNelson.Plane.triCoord_mem_downTri
+#print axioms HadwigerNelson.Plane.sqrt_triQ_add_le
+#print axioms HadwigerNelson.Plane.triQ_neg
+#print axioms HadwigerNelson.Plane.r7Down_coords
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

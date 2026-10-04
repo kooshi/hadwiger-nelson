@@ -495,23 +495,356 @@ theorem r7UpCol_ne_r7DownCol (m n m' n' : ℤ) : r7UpCol m n ≠ r7DownCol m' n'
   simp only [r7UpCol, r7DownCol] at this
   omega
 
+/-! ### Lattice coordinates and Reuleaux's diameter (FS131-I2l: children of R7's three tile lemmas) -/
+
+/-- `triQ` is nonnegative (half the sum of the squares of `a`, `b`, `a + b`). -/
+theorem triQ_nonneg (a b : ℝ) : 0 ≤ triQ a b := by
+  unfold triQ; nlinarith [sq_nonneg (a + b), sq_nonneg a, sq_nonneg b]
+
+/-- `triQ` is monotone on the nonnegative quadrant. -/
+theorem triQ_le_add {P Q R S : ℝ} (hP : 0 ≤ P) (hQ : 0 ≤ Q) (hR : 0 ≤ R) (hS : 0 ≤ S) :
+    triQ P Q ≤ triQ (P + R) (Q + S) := by
+  unfold triQ; nlinarith [mul_nonneg hP hR, mul_nonneg hQ hS, mul_nonneg hP hS, mul_nonneg hQ hR, mul_nonneg hR hS,
+    sq_nonneg R, sq_nonneg S]
+
+/-- `tri` with real casts. -/
+theorem tri_eq (p q : ℤ) : tri p q = (((p : ℝ) : ℂ)) + (((q : ℝ) : ℂ)) * e (π / 3) := by
+  simp only [tri, Complex.ofReal_intCast]
+
+/-- Distance in lattice coordinates. -/
+theorem dist_add_mul (a b a' b' : ℝ) :
+    dist ((a : ℂ) + b * e (π / 3)) ((a' : ℂ) + b' * e (π / 3)) = √(triQ (a - a') (b - b')) := by
+  rw [dist_eq_norm, show ((a : ℂ) + b * e (π / 3)) - ((a' : ℂ) + b' * e (π / 3)) =
+    ((a - a' : ℝ) : ℂ) + ((b - b' : ℝ) : ℂ) * e (π / 3) by push_cast; ring, Complex.norm_def, normSq_add_mul]
+
+/-- `triCoord` recovers the point. -/
+theorem triCoord_spec (z : ℂ) : (((triCoord z).1 : ℝ) : ℂ) + (((triCoord z).2 : ℝ) : ℂ) * e (π / 3) = z := by
+  have h3 : (√3 : ℝ) ≠ 0 := by positivity
+  rw [e_pi_div_three]
+  apply Complex.ext
+  · simp [triCoord]; field_simp; ring
+  · simp [triCoord]; field_simp
+
+/-- Distance read in lattice coordinates. -/
+theorem dist_eq_triQ (z w : ℂ) :
+    dist z w = √(triQ ((triCoord z).1 - (triCoord w).1) ((triCoord z).2 - (triCoord w).2)) := by
+  conv_lhs => rw [← triCoord_spec z, ← triCoord_spec w]
+  exact dist_add_mul _ _ _ _
+
+/-- The lattice coordinates of a lattice point. -/
+theorem triCoord_tri (p q : ℤ) : triCoord (tri p q) = ((p : ℝ), (q : ℝ)) := by
+  rw [tri_eq, triCoord_add_mul]
+
+/-- Distance between lattice points. -/
+theorem dist_tri (p q p' q' : ℤ) : dist (tri p q) (tri p' q') = √(triQ ((p : ℝ) - p') ((q : ℝ) - q')) := by
+  rw [tri_eq, tri_eq, dist_add_mul]
+
+/-- The real core of `reuleaux_unitPair`: two points of the lens `{|w| < 1, |w − 1| ≤ 1}` on one closed side of the axis are
+less than `1` apart. -/
+theorem reuleaux_aux {a₁ b₁ a₂ b₂ : ℝ} (h1 : a₁ ^ 2 + b₁ ^ 2 < 1) (h1' : (a₁ - 1) ^ 2 + b₁ ^ 2 ≤ 1)
+    (h2 : a₂ ^ 2 + b₂ ^ 2 < 1) (h2' : (a₂ - 1) ^ 2 + b₂ ^ 2 ≤ 1) (hb : 0 ≤ b₁ * b₂)
+    (h : (a₁ - a₂) ^ 2 + (b₁ - b₂) ^ 2 = 1) : False := by
+  wlog ha : a₁ ≤ a₂ generalizing a₁ b₁ a₂ b₂
+  · exact this h2 h2' h1 h1' (by linarith [mul_comm b₁ b₂]) (by linarith [h]) (le_of_not_ge ha)
+  have ha1 : 0 ≤ a₁ := by nlinarith [sq_nonneg b₁, sq_nonneg a₁]
+  have ha2 : a₂ < 1 := by nlinarith [sq_nonneg b₂]
+  have key : ∀ c d : ℝ, 0 ≤ c * d → c ^ 2 ≤ d ^ 2 → c ^ 2 ≤ c * d := by
+    intro c d hcd hcd'
+    have hab : |c| ≤ |d| := sq_le_sq.1 hcd'
+    have h3 : c ^ 2 = |c| * |c| := by rw [abs_mul_abs_self]; ring
+    have h4 : c * d = |c| * |d| := by rw [← abs_mul, abs_of_nonneg hcd]
+    rw [h3, h4]; exact mul_le_mul_of_nonneg_left hab (abs_nonneg _)
+  rcases le_total (b₁ ^ 2) (b₂ ^ 2) with hb' | hb'
+  · have e1 := key b₁ b₂ hb hb'
+    nlinarith [mul_nonneg ha1 (by linarith : (0 : ℝ) ≤ 2 * a₂ - a₁)]
+  · have e1 := key b₂ b₁ (by linarith [mul_comm b₁ b₂]) hb'
+    nlinarith [mul_pos (sub_pos.2 ha2) (by linarith : (0 : ℝ) < 1 + a₂ - 2 * a₁)]
+
+/-- **Reuleaux's diameter**: two points within `1` of the three vertices of a unit equilateral triangle at distance `1` put the
+first on a unit circle about a vertex. (In the frame `w = conj(y − x)(· − x)` every vertex lies in the lens `|w| ≤ 1`,
+`|w − 1| ≤ 1`; two vertices on one side of the axis would be less than `1` apart.) -/
+theorem reuleaux_unitPair {x y V₁ V₂ V₃ : ℂ} (h12 : dist V₁ V₂ = 1) (h13 : dist V₁ V₃ = 1) (h23 : dist V₂ V₃ = 1)
+    (hx₁ : dist x V₁ ≤ 1) (hx₂ : dist x V₂ ≤ 1) (hx₃ : dist x V₃ ≤ 1)
+    (hy₁ : dist y V₁ ≤ 1) (hy₂ : dist y V₂ ≤ 1) (hy₃ : dist y V₃ ≤ 1) (hxy : dist x y = 1) :
+    dist x V₁ = 1 ∨ dist x V₂ = 1 ∨ dist x V₃ = 1 := by
+  by_contra hne
+  push Not at hne
+  obtain ⟨n1, n2, n3⟩ := hne
+  set u := y - x with hu
+  have hu1 : normSq u = 1 := by
+    rw [← Complex.sq_norm, hu, ← dist_eq_norm, dist_comm, hxy, one_pow]
+  have hcu : (starRingEnd ℂ) u * u = 1 := by rw [← normSq_eq_conj_mul_self, hu1, ofReal_one]
+  set w : ℂ → ℂ := fun V => (starRingEnd ℂ) u * (V - x) with hw
+  have hnw : ∀ z : ℂ, normSq ((starRingEnd ℂ) u * z) = normSq z := fun z => by
+    rw [normSq_mul, normSq_conj, hu1, one_mul]
+  have hdsq : ∀ a b : ℂ, normSq (a - b) = dist a b ^ 2 := fun a b => by rw [← Complex.sq_norm, dist_eq_norm]
+  have key : ∀ V, dist x V < 1 → dist y V ≤ 1 →
+      (w V).re ^ 2 + (w V).im ^ 2 < 1 ∧ ((w V).re - 1) ^ 2 + (w V).im ^ 2 ≤ 1 := by
+    intro V hxV hyV
+    have e1 : (w V).re ^ 2 + (w V).im ^ 2 = dist x V ^ 2 := by
+      rw [show (w V).re ^ 2 + (w V).im ^ 2 = normSq (w V) by rw [normSq_apply]; ring, hw, hnw, ← neg_sub, normSq_neg, hdsq]
+    have e2 : ((w V).re - 1) ^ 2 + (w V).im ^ 2 = dist y V ^ 2 := by
+      have : w V - 1 = (starRingEnd ℂ) u * (V - y) := by
+        rw [hw]; simp only; rw [← hcu, hu]; ring
+      rw [show ((w V).re - 1) ^ 2 + (w V).im ^ 2 = normSq (w V - 1) by rw [normSq_apply]; simp; ring, this, hnw,
+        ← neg_sub, normSq_neg, hdsq]
+    refine ⟨?_, ?_⟩
+    · rw [e1]; nlinarith [dist_nonneg (x := x) (y := V)]
+    · rw [e2]; nlinarith [dist_nonneg (x := y) (y := V)]
+  have key2 : ∀ V V', dist V V' = 1 → ((w V).re - (w V').re) ^ 2 + ((w V).im - (w V').im) ^ 2 = 1 := by
+    intro V V' h
+    have : w V - w V' = (starRingEnd ℂ) u * (V - V') := by rw [hw]; ring
+    rw [show ((w V).re - (w V').re) ^ 2 + ((w V).im - (w V').im) ^ 2 = normSq (w V - w V') by rw [normSq_apply]; simp; ring,
+      this, hnw, hdsq, h, one_pow]
+  obtain ⟨k1, k1'⟩ := key V₁ (lt_of_le_of_ne hx₁ n1) hy₁
+  obtain ⟨k2, k2'⟩ := key V₂ (lt_of_le_of_ne hx₂ n2) hy₂
+  obtain ⟨k3, k3'⟩ := key V₃ (lt_of_le_of_ne hx₃ n3) hy₃
+  rcases le_or_gt 0 ((w V₁).im * (w V₂).im) with h | h
+  · exact reuleaux_aux k1 k1' k2 k2' h (key2 _ _ h12)
+  rcases le_or_gt 0 ((w V₁).im * (w V₃).im) with h' | h'
+  · exact reuleaux_aux k1 k1' k3 k3' h' (key2 _ _ h13)
+  have h'' : 0 ≤ (w V₂).im * (w V₃).im := by
+    have hp : 0 < (w V₁).im ^ 2 * ((w V₂).im * (w V₃).im) := by nlinarith [mul_pos_of_neg_of_neg h h']
+    exact (pos_of_mul_pos_right hp (sq_nonneg _)).le
+  exact reuleaux_aux k2 k2' k3 k3' h'' (key2 _ _ h23)
+
+/-- Three unit steps along a line: a point within `1` of both ends of a segment of length `3`, and at distance `1` from a point
+within `1` of the far end, is at distance exactly `1` from the near end. -/
+theorem dist_eq_one_of_three {x y W W' : ℂ} (hW : dist W W' = 3) (hx : dist x W ≤ 1) (hy : dist y W' ≤ 1)
+    (hxy : dist x y = 1) : dist x W = 1 := by
+  have := dist_triangle4 W x y W'
+  rw [dist_comm W x] at this
+  linarith
+
+/-- `triCoord` is linear. -/
+theorem triCoord_combo (x y : ℂ) (a b : ℝ) :
+    triCoord (a • x + b • y) = (a * (triCoord x).1 + b * (triCoord y).1, a * (triCoord x).2 + b * (triCoord y).2) := by
+  simp only [triCoord, Complex.add_re, Complex.add_im, Complex.smul_re, Complex.smul_im, smul_eq_mul, Prod.mk.injEq]
+  constructor <;> ring
+
+/-- The down triangle of the cell `(m, n)` in lattice coordinates: `a ≤ m + 1`, `b ≤ n + 1`, `a + b ≥ m + n + 1`. -/
+theorem triCoord_mem_downTri {m n : ℤ} {z : ℂ}
+    (hz : z ∈ convexHull ℝ {tri (m + 1) n, tri m (n + 1), tri (m + 1) (n + 1)}) :
+    (triCoord z).1 ≤ m + 1 ∧ (triCoord z).2 ≤ n + 1 ∧ (m : ℝ) + n + 1 ≤ (triCoord z).1 + (triCoord z).2 := by
+  refine convexHull_min (t := {z : ℂ | (triCoord z).1 ≤ m + 1 ∧ (triCoord z).2 ≤ n + 1 ∧
+    (m : ℝ) + n + 1 ≤ (triCoord z).1 + (triCoord z).2}) ?_ ?_ hz
+  · intro w hw
+    simp only [mem_insert_iff, mem_singleton_iff] at hw
+    rcases hw with rfl | rfl | rfl <;> simp only [mem_setOf_eq, triCoord_tri] <;> push_cast <;>
+      refine ⟨by linarith, by linarith, by linarith⟩
+  · intro x hx y hy a b ha hb hab
+    simp only [mem_setOf_eq, triCoord_combo] at hx hy ⊢
+    obtain ⟨hx1, hx2, hx3⟩ := hx
+    obtain ⟨hy1, hy2, hy3⟩ := hy
+    obtain rfl : b = 1 - a := by linarith
+    refine ⟨?_, ?_, ?_⟩ <;> nlinarith [mul_le_mul_of_nonneg_left hx1 ha, mul_le_mul_of_nonneg_left hy1 hb,
+      mul_le_mul_of_nonneg_left hx2 ha, mul_le_mul_of_nonneg_left hy2 hb, mul_le_mul_of_nonneg_left hx3 ha,
+      mul_le_mul_of_nonneg_left hy3 hb]
+
+/-- The norm `√triQ` is subadditive. -/
+theorem sqrt_triQ_add_le (a b c d : ℝ) : √(triQ (a + c) (b + d)) ≤ √(triQ a b) + √(triQ c d) := by
+  have h1 := dist_add_mul (a + c) (b + d) 0 0
+  have h2 := dist_add_mul a b 0 0
+  have h3 := dist_add_mul c d 0 0
+  simp only [sub_zero, ofReal_zero, zero_mul, add_zero, dist_zero_right] at h1 h2 h3
+  rw [← h1, ← h2, ← h3, show ((a + c : ℝ) : ℂ) + ((b + d : ℝ) : ℂ) * e (π / 3) =
+    ((a : ℂ) + b * e (π / 3)) + ((c : ℂ) + d * e (π / 3)) by push_cast; ring]
+  exact norm_add_le _ _
+
+theorem triQ_neg (a b : ℝ) : triQ (-a) (-b) = triQ a b := by unfold triQ; ring
+
+/-- A down tile in lattice coordinates, with its three bulge tests. -/
+theorem r7Down_coords {m n : ℤ} {z : ℂ} (hz : z ∈ r7Down m n) :
+    (triCoord z).1 - m ≤ 1 ∧ (triCoord z).2 - n ≤ 1 ∧ 1 ≤ (triCoord z).1 - m + ((triCoord z).2 - n) ∧
+      1 < triQ ((triCoord z).1 - m) ((triCoord z).2 - n) ∧ 1 < triQ ((triCoord z).1 - m - 2) ((triCoord z).2 - n) ∧
+      1 < triQ ((triCoord z).1 - m) ((triCoord z).2 - n - 2) := by
+  obtain ⟨hT, h1, h2, h3⟩ := hz
+  obtain ⟨t1, t2, t3⟩ := triCoord_mem_downTri hT
+  rw [dist_eq_triQ, triCoord_tri, Real.lt_sqrt zero_le_one, one_pow] at h1 h2 h3
+  push_cast at h1 h2 h3
+  refine ⟨by linarith, by linarith, by linarith, h1, by convert h2 using 2; ring, by convert h3 using 2; ring⟩
+
 /-- **Within one up tile** a unit pair has a vertex at one end and the opposite arc at the other, so `x` is at distance `1` from
 a lattice point. -/
 theorem r7Up_unitPair {m n : ℤ} {x y : ℂ} (hx : x ∈ r7Up m n) (hy : y ∈ r7Up m n) (hxy : dist x y = 1) :
     ∃ m' n' : ℤ, dist x (tri m' n') = 1 := by
-  sorry
+  obtain ⟨⟨hx1, hx2⟩, hx3⟩ := hx
+  obtain ⟨⟨hy1, hy2⟩, hy3⟩ := hy
+  rw [mem_closedBall] at hx1 hx2 hx3 hy1 hy2 hy3
+  have d12 : dist (tri m n) (tri (m + 1) n) = 1 := by rw [dist_tri]; push_cast; norm_num [triQ]
+  have d13 : dist (tri m n) (tri m (n + 1)) = 1 := by rw [dist_tri]; push_cast; norm_num [triQ]
+  have d23 : dist (tri (m + 1) n) (tri m (n + 1)) = 1 := by rw [dist_tri]; push_cast; norm_num [triQ]
+  rcases reuleaux_unitPair d12 d13 d23 hx1 hx2 hx3 hy1 hy2 hy3 hxy with h | h | h
+  · exact ⟨_, _, h⟩
+  · exact ⟨_, _, h⟩
+  · exact ⟨_, _, h⟩
 
 /-- **Two up tiles of one colour** (`λ' − λ ∈ 2Λ ∖ 0`) meet the unit distance only at a pair of lattice points (a half-plane
 separation along the offset; offsets of length `> 2` are too far). -/
 theorem r7Up_sep {m n m' n' : ℤ} (hne : (m, n) ≠ (m', n')) (hc : r7UpCol m n = r7UpCol m' n') {x y : ℂ}
     (hx : x ∈ r7Up m n) (hy : y ∈ r7Up m' n') (hxy : dist x y = 1) : ∃ m'' n'' : ℤ, dist x (tri m'' n'') = 1 := by
-  sorry
+  have hc' := congrArg Fin.val hc
+  simp only [r7UpCol] at hc'
+  obtain ⟨p, rfl⟩ : ∃ p, m' = m + 2 * p := ⟨(m' - m) / 2, by omega⟩
+  obtain ⟨q, rfl⟩ : ∃ q, n' = n + 2 * q := ⟨(n' - n) / 2, by omega⟩
+  obtain ⟨⟨hx1, hx2⟩, hx3⟩ := hx
+  obtain ⟨⟨hy1, hy2⟩, hy3⟩ := hy
+  rw [mem_closedBall] at hx1 hx2 hx3 hy1 hy2 hy3
+  have hpq : (p, q) ≠ (0, 0) := fun h => hne (by simp only [Prod.mk.injEq] at h ⊢; omega)
+  by_cases hfar : 3 ≤ p * p + p * q + q * q
+  · exfalso
+    have hd : 3 < dist (tri m n) (tri (m + 2 * p) (n + 2 * q)) := by
+      rw [dist_tri, Real.lt_sqrt (by norm_num)]
+      have : (3 : ℝ) ≤ (p : ℝ) * p + p * q + q * q := by exact_mod_cast hfar
+      unfold triQ; push_cast; nlinarith
+    have := dist_triangle4 (tri m n) x y (tri (m + 2 * p) (n + 2 * q))
+    rw [dist_comm (tri m n) x] at this
+    linarith
+  push Not at hfar
+  have hq : -1 ≤ q ∧ q ≤ 1 := by constructor <;> nlinarith [sq_nonneg (2 * p + q)]
+  have hp : -1 ≤ p ∧ p ≤ 1 := by constructor <;> nlinarith [sq_nonneg (2 * q + p)]
+  have d3 : ∀ a b c d : ℤ, (c - a, d - b) ∈ ({(3, 0), (0, 3), (-3, 0), (0, -3), (3, -3), (-3, 3)} : Set (ℤ × ℤ)) →
+      dist (tri a b) (tri c d) = 3 := by
+    intro a b c d h
+    rw [dist_tri, show (3 : ℝ) = √9 by rw [show (9 : ℝ) = 3 ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]]
+    congr 1
+    simp only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq] at h
+    rcases h with ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩ <;>
+    · have e1 : ((a : ℝ) - c) = -((c - a : ℤ) : ℝ) := by push_cast; ring
+      have e2 : ((b : ℝ) - d) = -((d - b : ℤ) : ℝ) := by push_cast; ring
+      rw [e1, e2, h1, h2]; norm_num [triQ]
+  obtain ⟨hp1, hp2⟩ := hp
+  obtain ⟨hq1, hq2⟩ := hq
+  interval_cases p <;> interval_cases q <;> simp only [ne_eq, Prod.mk.injEq, not_true_eq_false, and_self] at hpq <;>
+    norm_num at hfar
+  · exact ⟨_, _, dist_eq_one_of_three (d3 _ _ _ _ (by simp only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq]; omega))
+      hx2 hy1 hxy⟩
+  · exact ⟨_, _, dist_eq_one_of_three (d3 _ _ _ _ (by simp only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq]; omega))
+      hx2 hy3 hxy⟩
+  · exact ⟨_, _, dist_eq_one_of_three (d3 _ _ _ _ (by simp only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq]; omega))
+      hx3 hy1 hxy⟩
+  · exact ⟨_, _, dist_eq_one_of_three (d3 _ _ _ _ (by simp only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq]; omega))
+      hx1 hy3 hxy⟩
+  · exact ⟨_, _, dist_eq_one_of_three (d3 _ _ _ _ (by simp only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq]; omega))
+      hx3 hy2 hxy⟩
+  · exact ⟨_, _, dist_eq_one_of_three (d3 _ _ _ _ (by simp only [mem_insert_iff, mem_singleton_iff, Prod.mk.injEq]; omega))
+      hx1 hy2 hxy⟩
 
 /-- **Down tiles carry no unit pair of one colour**: within a tile (inside a unit triangle, vertices excluded) and across tiles
 of one colour (`λ' − λ ∈ M ∖ 0`, the bulges keep them apart). -/
 theorem r7Down_dist_ne_one {m n m' n' : ℤ} (hc : r7DownCol m n = r7DownCol m' n') {x y : ℂ} (hx : x ∈ r7Down m n)
     (hy : y ∈ r7Down m' n') : dist x y ≠ 1 := by
-  sorry
+  have hc' := congrArg Fin.val hc
+  simp only [r7DownCol] at hc'
+  obtain ⟨p, rfl⟩ : ∃ p, m' = m + p := ⟨m' - m, by ring⟩
+  obtain ⟨q, rfl⟩ : ∃ q, n' = n + q := ⟨n' - n, by ring⟩
+  have hpq : (p - q) % 3 = 0 := by omega
+  obtain ⟨hu1, hv1, huv, ex1, ex2, ex3⟩ := r7Down_coords hx
+  obtain ⟨hu1', hv1', huv', ey1, ey2, ey3⟩ := r7Down_coords hy
+  rw [dist_eq_triQ]
+  intro h
+  push_cast at hu1' hv1' huv' ey1 ey2 ey3
+  set u := (triCoord x).1 - m with hu
+  set v := (triCoord x).2 - n with hv
+  set u' := (triCoord y).1 - (m + p) with hu'
+  set v' := (triCoord y).2 - (n + q) with hv'
+  have hX : (triCoord x).1 - (triCoord y).1 = u - u' - p := by rw [hu, hu']; ring
+  have hY : (triCoord x).2 - (triCoord y).2 = v - v' - q := by rw [hv, hv']; ring
+  rw [hX, hY] at h
+  have hsq : triQ (u - u' - p) (v - v' - q) = 1 := by
+    have := congrArg (· ^ 2) h
+    simp only [one_pow] at this
+    rwa [Real.sq_sqrt (triQ_nonneg _ _)] at this
+  clear_value u v u' v'
+  -- the centroid bound
+  have hcen : ∀ a b : ℝ, a ≤ 1 → b ≤ 1 → 1 ≤ a + b → √(triQ (a - 2 / 3) (b - 2 / 3)) < 0.6 := by
+    intro a b ha hb hab
+    rw [Real.sqrt_lt' (by norm_num)]
+    unfold triQ
+    nlinarith [mul_nonneg (sub_nonneg.2 ha) (sub_nonneg.2 hb), mul_nonneg (sub_nonneg.2 ha) (sub_nonneg.2 hab),
+      mul_nonneg (sub_nonneg.2 hb) (sub_nonneg.2 hab)]
+  by_cases hfar : 5 ≤ p * p + p * q + q * q
+  · have hfar' : (5 : ℝ) ≤ triQ (p : ℝ) q := by
+      have : (5 : ℝ) ≤ (p : ℝ) * p + p * q + q * q := by exact_mod_cast hfar
+      unfold triQ; nlinarith
+    have e1 := sqrt_triQ_add_le (u - u' - p) (v - v' - q) ((u' - 2 / 3) + -(u - 2 / 3)) ((v' - 2 / 3) + -(v - 2 / 3))
+    have e2 := sqrt_triQ_add_le (u' - 2 / 3) (v' - 2 / 3) (-(u - 2 / 3)) (-(v - 2 / 3))
+    rw [triQ_neg] at e2
+    rw [show u - u' - p + ((u' - 2 / 3) + -(u - 2 / 3)) = -p by ring,
+      show v - v' - q + ((v' - 2 / 3) + -(v - 2 / 3)) = -q by ring, triQ_neg, h] at e1
+    have e3 := hcen u v hu1 hv1 huv
+    have e4 := hcen u' v' hu1' hv1' huv'
+    have e5 : √5 ≤ √(triQ (p : ℝ) q) := Real.sqrt_le_sqrt hfar'
+    have e6 : (2.2 : ℝ) < √5 := by rw [Real.lt_sqrt (by norm_num)]; norm_num
+    linarith
+  push Not at hfar
+  have hq : -2 ≤ q ∧ q ≤ 2 := by constructor <;> nlinarith [sq_nonneg (2 * p + q)]
+  have hp : -2 ≤ p ∧ p ≤ 2 := by constructor <;> nlinarith [sq_nonneg (2 * q + p)]
+  obtain ⟨hp1, hp2⟩ := hp
+  obtain ⟨hq1, hq2⟩ := hq
+  have hu0 : 0 ≤ u := by linarith
+  have hv0 : 0 ≤ v := by linarith
+  have hu0' : 0 ≤ u' := by linarith
+  have hv0' : 0 ≤ v' := by linarith
+  interval_cases p <;> interval_cases q <;> (try norm_num at hpq) <;> (try norm_num at hfar)
+  all_goals push_cast at hsq
+  · -- (−2, 1): `y`'s second test, the frame `(1, 1 − ω)`
+    have k1 : triQ (u - u' - -2) (v - v' - 1) = triQ ((2 - u' - v') + (u + v - 1)) (v' + (1 - v)) := by unfold triQ; ring
+    have k2 : triQ (2 - u' - v') v' = triQ (u' - 2) v' := by unfold triQ; ring
+    have := triQ_le_add (P := 2 - u' - v') (Q := v') (R := u + v - 1) (S := 1 - v) (by linarith) hv0' (by linarith)
+      (by linarith)
+    linarith
+  · -- (−1, −1): `x`'s first test
+    have k1 : triQ (u - u' - -1) (v - v' - -1) = triQ (u + (1 - u')) (v + (1 - v')) := by unfold triQ; ring
+    have := triQ_le_add (P := u) (Q := v) (R := 1 - u') (S := 1 - v') hu0 hv0 (by linarith) (by linarith)
+    linarith
+  · -- (−1, 2): `x`'s third test, the frame `(ω, ω − 1)`
+    have k1 : triQ (u - u' - -1) (v - v' - 2) = triQ (u + (1 - u')) ((2 - u - v) + (u' + v' - 1)) := by unfold triQ; ring
+    have k2 : triQ u (2 - u - v) = triQ u (v - 2) := by unfold triQ; ring
+    have := triQ_le_add (P := u) (Q := 2 - u - v) (R := 1 - u') (S := u' + v' - 1) hu0 (by linarith) (by linarith)
+      (by linarith)
+    linarith
+  · -- (0, 0): within one tile only two vertices are `1` apart, and the tests exclude every vertex
+    have key : 2 - 2 * triQ (u - u' - 0) (v - v' - 0) = 2 * ((1 - v) * (1 - v') + (1 - u) * (1 - u') +
+        (u + v - 1) * (u' + v' - 1)) + ((1 - v) * v + (1 - u) * u + (u + v - 1) * (2 - u - v)) +
+        ((1 - v') * v' + (1 - u') * u' + (u' + v' - 1) * (2 - u' - v')) := by unfold triQ; ring
+    rw [hsq] at key
+    have n1 := mul_nonneg (sub_nonneg.2 hv1) (sub_nonneg.2 hv1')
+    have n2 := mul_nonneg (sub_nonneg.2 hu1) (sub_nonneg.2 hu1')
+    have n3 := mul_nonneg (sub_nonneg.2 huv) (sub_nonneg.2 huv')
+    have n4 := mul_nonneg (sub_nonneg.2 hv1) hv0
+    have n5 := mul_nonneg (sub_nonneg.2 hu1) hu0
+    have n6 := mul_nonneg (sub_nonneg.2 huv) (by linarith : (0 : ℝ) ≤ 2 - u - v)
+    have n7 := mul_nonneg (sub_nonneg.2 hv1') hv0'
+    have n8 := mul_nonneg (sub_nonneg.2 hu1') hu0'
+    have n9 := mul_nonneg (sub_nonneg.2 huv') (by linarith : (0 : ℝ) ≤ 2 - u' - v')
+    have hv01 : (1 - v) * v = 0 := by linarith
+    have hu01 : (1 - u) * u = 0 := by linarith
+    rcases mul_eq_zero.1 hv01 with hv' | hv' <;> rcases mul_eq_zero.1 hu01 with hu' | hu'
+    · have e1 : u = 1 := by linarith
+      have e2 : v = 1 := by linarith
+      rw [e1, e2] at ex2; norm_num [triQ] at ex2
+    · have e2 : v = 1 := by linarith
+      rw [hu', e2] at ex1; norm_num [triQ] at ex1
+    · have e1 : u = 1 := by linarith
+      rw [e1, hv'] at ex1; norm_num [triQ] at ex1
+    · linarith
+  · -- (1, −2): `y`'s third test
+    have k1 : triQ (u - u' - 1) (v - v' - -2) = triQ (u' + (1 - u)) ((2 - u' - v') + (u + v - 1)) := by unfold triQ; ring
+    have k2 : triQ u' (2 - u' - v') = triQ u' (v' - 2) := by unfold triQ; ring
+    have := triQ_le_add (P := u') (Q := 2 - u' - v') (R := 1 - u) (S := u + v - 1) hu0' (by linarith) (by linarith)
+      (by linarith)
+    linarith
+  · -- (1, 1): `y`'s first test
+    have k1 : triQ (u - u' - 1) (v - v' - 1) = triQ (u' + (1 - u)) (v' + (1 - v)) := by unfold triQ; ring
+    have := triQ_le_add (P := u') (Q := v') (R := 1 - u) (S := 1 - v) hu0' hv0' (by linarith) (by linarith)
+    linarith
+  · -- (2, −1): `x`'s second test
+    have k1 : triQ (u - u' - 2) (v - v' - -1) = triQ ((2 - u - v) + (u' + v' - 1)) (v + (1 - v')) := by unfold triQ; ring
+    have k2 : triQ (2 - u - v) v = triQ (u - 2) v := by unfold triQ; ring
+    have := triQ_le_add (P := 2 - u - v) (Q := v) (R := u' + v' - 1) (S := 1 - v') (by linarith) hv0 (by linarith)
+      (by linarith)
+    linarith
 
 /-- **Same-colour unit pairs of R7 start on a unit circle about a lattice point** (the case table, assembled). -/
 theorem r7_unitPair_mem_sphere {x y : ℂ} (hxy : dist x y = 1) (hc : r7Col x = r7Col y) :
