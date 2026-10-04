@@ -2672,7 +2672,12 @@ theorem bend_away_whole (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin
     ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (thickening ε (ringArc P θ₁ θ₂)) ∧ F'.RingArcsWithin F ∧
       (∀ θ ∈ Ioo θ₁ θ₂, ¬ F'.OnRingArc P (ringPt P θ)) ∧ (∀ j, j ≠ c → F'.region j ⊆ F.region j) ∧
       F'.region c ⊆ F.region c ∪ (thickening ε (ringArc P θ₁ θ₂) \ ball P 1) := by
-  sorry
+  -- `bend_away` with no radius-2 contact: an interval of `C₂(ᾱ)` would put a point of `R₂(ᾱ)` in the closure of the inner class
+  obtain ⟨F', hV, hAg, hW, hon, hreg, hc⟩ := bend_away hF hA hin hε
+  refine ⟨F', hV, hAg, hW, fun θ hθ h => ?_, hreg, hc⟩
+  obtain ⟨a, b, hab, -, hsub⟩ := hon θ hθ h
+  obtain ⟨ha, hacl⟩ := hsub ⟨le_rfl, hab.le⟩
+  exact Set.disjoint_left.mp hR2 ⟨a, ha, rfl⟩ hacl
 
 /-! ## FS112-ISO: an isolated R2 contact, and what it blocks -/
 

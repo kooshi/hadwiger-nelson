@@ -922,6 +922,53 @@ children and `a4six`, all `[propext, Classical.choice, Quot.sound]`. Build: "bui
 exit 0 (`build/gate/build/20261004T205905Z-2360618.log`; driver log `data/fs131/i4/build-i4j-stage27.log`): 22 distinct `declaration uses sorry` (BaseSteps 6,
 Contact 10, UnitArc 6), no other warning. Cost: about 25k tokens, one iteration pass.
 
+## Stage 28 — SAVED (FS131-I4j): `bend_away_whole` over `bend_away`; 11 `sorry` left in `BaseSteps` and `UnitArc`, and the handoff
+
+**`bend_away_whole` reduced to `bend_away`** (plan § 13.5: "E over `bend_away` (`r2Contacts` empty)"): an interval `[a, b] ⊆ C₂(ᾱ)` would put
+`P + 2e(a) ∈ R₂(ᾱ)` in the closure of the inner class, against `hR2`. Its axioms read `sorryAx` through `bend_away` (`data/fs131/i4/axioms-i4j-28.txt`);
+the leaf's own `sorry` is gone. Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings", exit 0
+(`build/gate/build/20261004T210939Z-2417914.log`; driver log `data/fs131/i4/build-i4j-stage28.log`): 21 distinct `declaration uses sorry` (BaseSteps 6,
+Contact 10, UnitArc 5), no other warning. `tools/fs131_k4_decls.py --check` exit 0 (no new declaration).
+
+**What is left (11 in this job's files: UnitArc `bend_toward`, `bend_away`, `flankQ_upper`, `flankQ_lower`, `nb4p`; BaseSteps `pair_i`, `pair_ii`,
+`fail_leavingCentre`, `fail_colours`, `anti`, `n3_end`), in the order I would take it.** Routes below are worked out on paper, not written in Lean.
+- **`fail_leavingCentre`** (S–V Prop. 10's place, by votes). (a) A new `localSectors_disj` in `Plane/LocalStructure`: `localSectors`' proof already establishes
+  that distinct germs never meet at one distance (its last bullet, `hr₃`) and hands it to `isSectorChart_of`; return it as a second conjunct and make
+  `localSectors` its corollary (statement unchanged) — `IsSectorChart` does not carry it, and the cleanliness in (e) needs it. Editing `LocalStructure`
+  rebuilds every plane module (price one long build). (b) The vote, a child: for an interior point `z` and a sector `i` of the chart at `u` bounded by a germ
+  whose branch point `b` (at radius `δ`) has `|z − u| < 1 < |z − b|` (or `>`/`<` mirrored), the sector — preconnected, `u` and `b` in its closure (`b` because
+  the sector's angular slice at radius `δ` opens just above the germ's direction, `dir_lt_nextDir`) — holds a point at distance exactly `1` from `z`, so
+  `col z` is not the sector's colour. (c) At a cubic trichromatic `u` there are three germs and three sectors of the three colours (as in
+  `IsCubicTrichromatic.not_hasRepeatedColour`); two distinct germs bound all three sectors, so two germs voting the same way give `StripHolds` on that side.
+  Hence `¬ StripHolds u q` forces, for every `δ ∈ (0, r₀)`, a germ point `bp_k(δ) ∈ ω(q)`. (d) Four values of `δ`, three germs: one germ `k` has two zeros
+  `s₁ ≠ s₂` of `cos(A + arcsin(κs/2)) + s/2` (`A = β_k − arg(u − q)`); squaring, `cos²A = s²(κ² − 2κ sin A + 1)/4 = s²((κ − sin A)² + cos²A)/4` at two values of
+  `s`, so `cos A = 0`, `κ = sin A = ±1`, and then the whole branch is on `ω(q)`: `bp_k(s) = ringPt q (ψ ± 2 arcsin(s/2))`, `ψ = arg(u − q)` (two circles through `u`
+  meeting twice more are one). (e) `isRingArc_of_clean` (Stage 26) on `ringArc q ψ (ψ + τ)` or `ringArc q (ψ − τ) ψ`, `τ < 2 arcsin(r₀/2)`, cleanliness from (a)
+  (a branch point at radius `s` is at positive distance from every other branch: a compact middle range of radii, and the radius gap outside it); `u ∈ Γ` by the
+  chart's `mem_Γ`.
+- **`fail_colours`** over the same votes, plus which sector beside the `ω(q)`-branch lies inside `B(q, 1)` (the other two germs vote one in and one out at a
+  generic `δ`; the third colour is excluded on both sides). Then **`pair_i`, `pair_ii`** (N3-I, N3-II over the votes and `noBoth`, as `pair_P'` did) and
+  **`anti`** (N3-ANTI: each germ casts an in-vote at `u + e` or `u − e`, against a budget of one per M-in point).
+- **`flankQ_upper` / `flankQ_lower`.** Engine 5 through `isRingArc_of_clean`: near an arc point `x = N + e(α − π/2 + t)`, `t` small, the open set
+  `O = {dist(·, v) < r, frameX > 0, TanAbove κ₁, TanBelow κ′}` holds `x` (frame coordinates `(sin t, 1 − cos t)`, `tanHeight κ = (1 − κ)(1 − cos t)`); `O ∩ B(N, 1)`
+  lies in the flank (`g`) and `O ∖ B̄(N, 1)` in the horn (`c`), so an arc point of `F` in `O` is on `ω(N)`; arc points (and `v`) are not interior (a child: an
+  interior point of `B(v, r)` in the closure of a sector and off it would join the sector's component). (Q) branch: the `g`-tile at `N`
+  (`mem_coloursAt_iff_exists_tileOf`) is near the flank tile (`unitNear_or_unitFar`; a flank point is within `1` of `N`), so inside `B̄(v, 1)`, and `ne1_region`
+  at `v` makes it `B(v, 1)`. (R2) branch: `S′ = N + 2e(α − π/2) ∈ R₂`; out-type by the far branch of `unitNear_or_unitFar` (flank points are farther than `1`
+  from `S′`) and `ne1_region` at `v`. **The shadow clause is the one place the formal (R2) is weaker than the derivation's reading**: `IsR2Arc` gives only
+  `R₂ ⊆ cl(region g)`, while N4-SHADOW reads a `g`-tile filling the far side below `R₂`. My reading (one mind, not formalized): it still follows — (i) `g` avoids
+  the thin cusp just inside `B(N, 2)` above `R₂` near `S′` (a `g`-point there has its unit partner, on the segment toward `N`, inside the flank: a `g`–`g` unit
+  pair), so the points of `R₂` near `S′` are not interior, hence on `Γ`; (ii) by the chart at `S′` and the two-zeros algebra of (d) (curvature `1/2`), `R₂` near
+  `S′` is a germ `(α, 1/2)` of that chart; (iii) the sector clockwise next to it (outside `B̄(N, 2)`) is `g` (the `R₂` points are in the closure of `g`'s class,
+  the other adjacent sector lies in the forbidden cusp); (iv) for a horn point `z` near `v`, `ω(z)` crosses `R₂` transversally at an angle inside the open arc
+  (offset `≈ √ε` from `arg(z − N)`, `ε = dist(z, N) − 1 < (1 − κ₁)x²/2`; the upper crossing always qualifies) and just before that crossing runs through the
+  `g`-sector: a `g`-point at distance `1`. If (iii) fails (a cusp sector of another colour below `R₂`), the clause needs a hypothesis — that is where to look.
+- The bends and `nb4p` as Stage 24 left them; `n3_end` after `fs131-w4c` merges (`woodallCone`, `exists_merge`).
+
+**Re-pricing** (three leaves and a reduction this session, about 120k tokens of work): the leaves with a ready engine cost 25–60k each; the ring-arc engine
+was the reusable cost. The base's five (`pair_i`, `pair_ii`, `fail_*`, `anti`) share (a)–(d) above, priced at one session for (a)–(e) plus
+`fail_leavingCentre`, then about one leaf per 40k.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -1048,3 +1095,5 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   on `ω(v)` of total length `≥ 60°`, or one strictly inside each of six consecutive open `60°` windows).
 - Children (no row), the standard three: engine 7 `ArcMap.exists_coveringPoint_of_window`, `ArcMap.exists_shift_avoiding`, `ArcMap.isClosed_Γ_inter_sphere`,
   `ArcMap.countable_ringPt_preimage` (UnitArc).
+- FS112-N2-BENDS, the away bend as the row states it: `ArcMap.bend_away_whole` — `[propext, sorryAx, Classical.choice, Quot.sound]` **(over sorry:
+  `bend_away`)**. Same statement; the proof is the reduction to `bend_away`.
