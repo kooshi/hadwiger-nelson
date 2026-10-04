@@ -655,7 +655,7 @@ No mismatch.
 2026-10-04: **OK** — all 1738 modules up to date, nothing built, 8 modules with warnings, every warning `declaration uses 'sorry'`
 (`build/gate/build/20261004T091307Z-2395296.log`).
 
-## Stage 12 — SAVED: the 34 leaves re-planned; children stated for 18 of them (FS131-K2c)
+## Stage 12 — SAVED: the 34 leaves re-planned; children stated for 16 of them (FS131-K2c)
 
 *No fresh modeling-skill pass was run (budget); the decomposition below is mine. Prices are for a Sonnet implementer, from the
 implementers' measured rates (stages 3–6 of `plans/FS131-I2-implementation.md`: M leaves 40–70k, E 15–20k).* **✓** = stated in the
