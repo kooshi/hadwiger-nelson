@@ -564,3 +564,6 @@ reason by the close.*
 99. **Brief FS131-I2e, wave 2's fifth implementer** (`debruijn-implementer`, Sonnet; `data/fs131/briefs/FS131-I2e-wave2.md`, gated PASS): the 16 leaves K2c re-planned
     into stated children first, then any leaf whose route is complete; leaves `Plane/CoverExamples`, `Arith/PlaceHom`, `Arith/FalconerField` to FS131-K2d if it runs
     beside (item 94). Launched in the slot W freed. Queue after it: FS131-K2d, FS131-I4, FS131-IW, FS131-LEB. Source: this commit.
+100. **Skeleton slip — `arcLength_bigBall_ge` false at R = 1** (FS131-I2e, message 2026-10-04; `Plane/Cover`, a child K2c stated): at `R = 1`, `u = z`, every
+     `u + e θ` lies at distance exactly 1 from `z`, outside the open ball, so the arc length is 0 (Keryx's receipt: that observation). Its only consumer,
+     `not_keptAt_of_half_lt`, has `R = 2ε > 1`. **Ruling: `(hR : 1 < R)`.** Alternative: none live. Confidence: high.
