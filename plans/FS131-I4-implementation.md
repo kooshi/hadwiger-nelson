@@ -1271,6 +1271,44 @@ other warning.
 **Re-pricing** (this job, about 250k tokens of work after the readback): the merge and its checks about 40k; `pair_i` about 60k (one pass of children,
 one of the core, both nearly first-time clean); engine 5 and the two FLANK-Q assemblies about 70k, the mirror a third of the first side.
 
+## Stage 38 — SAVED (FS131-I4m): readback, the as-given build, and `n3_end`'s `hQR` question
+
+*FS131-I4m (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4m-wave4.md` on `main`) continues this record from `68ca5f0f`. Its
+leaves: `UnitArc`'s `bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `nb4p`, and `BaseSteps`' `n3_end`. `Contact.lean` is not
+edited here.*
+
+**The brief's quotations against their sources** (standing rule 3). Four blocks: (1) item 280 — `plans/FS131-close-inventory.md` on `main` (line 2071):
+**matches as a truncation**. (2) item 281 — same file (line 2089): **matches as a truncation**. (3) "**What is left (6 in this job's files): UnitArc
+`bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `nb4p`; BaseSteps `n3_end`.**" — this record, Stage 37: **matches exactly**.
+(4) "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the" —
+`plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. Items 268–269 read in full (on this branch `exists_merge` still carries the
+off-rim clause; the ruled vertex clause is `fs131-w4m`'s). No mismatch.
+
+**The worktree as given** (`68ca5f0f`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK —
+all 1744 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0 (`build/gate/build/20261004T234345Z-3556418.log`; driver log
+`data/fs131/i4/build-i4m-readback.log`): 9 `declaration uses sorry` — Contact 3 (l. 4064, 4078, 4094), UnitArc 5 (l. 2645, 2658, 3427, 3736, 4182),
+BaseSteps 1 (l. 1648) — and no other warning.
+
+**`n3_end`'s question (brief, Done means 2): does its proof need FLANK-Q's (Q)/(R2) dichotomy? — No, on my reading (one mind).** NB3-END item 1
+(`plans/FS112-NB3-verification.md` l. 230–231) splits on "an upper bound of `H_±` is `+1`" against "both upper bounds are `< 1`", and concludes in the first
+case only that the chain is `{P_0}` — the clause `n3_end` does not state (finding N-END-CHAIN, plan § 8.2). The Lean statement splits differently: its second
+disjunct is "the flank colour `g` is a contact at `N`, in-type, `κ₂ = 1`, and every `c`-horn along `α + π` has `κ₃ = −1`". So item 1 serves only as a case
+split, and the split the proof needs is on `g` at `N`:
+- **`g ∈ P_cl(N)`**: the contact is in-type or out-type (`contact_inType_or_outType`). Out-type forces `κ₂ < 1`: at `κ₂ = 1` the flank lies inside `B(N, 1)`,
+  so a `g`-tile at `N` is unit-near the flank tile (N-E2) and lies in `B̄(v, 1)` — FLANK-Q's (Q)-branch argument, which reads `g ∈ P_cl(N)` and never (Q).
+  In-type forces `κ₂ = 1` (`κ₂ ≤ 1` by `woodallCone`, since `HasSectors v c 2` and no MERGE give `int D_c(v) = ∅`; `κ₂ ≥ 1` by N-E2 of the in-type tile against
+  the flank) and `κ₃ = −1` (`flankQ_both`, which carries no `hQR`, or N-E2 against the `−a` horn's `+n` flank directly). The second disjunct.
+- **no in-type `g`-tile at `N`** — which includes `κ₂ = 1` with `g ∉ P_cl(N)`, i.e. FLANK-Q's (R2) branch or the out-contact arc `hQR` would exclude: the first
+  disjunct, by items 2–5. Item 2 reads "upper bound `< 1`" only to exclude an in-type `g`-tile at `N` ("the flank is not in `B̄(N, 1)`"); with no `g`-tile at
+  `N` at all its conclusion (`g`-tiles at `S′` tangent to `±a`, out-type) follows the same way, and items 3–5 never read the upper bound. **This extends NB3's
+  text** (which leaves the case `κ₂ = 1`, `g ∉ P_cl(N)` to item 1, whose conclusion is not the statement's) — a reading, one mind, not a statement defect.
+So no hypothesis is missing for `hQR`'s sake, and I send no message. **What the leaf does need**: NB3 items 2–5 for a horn whose lower arc is a unit arc
+(`κ₁ = −1`) with no Condition 5. Contact's shadow machinery — `flank_shadow_g`/`_h`, `flank_shadows`, `shaveAvailable_of_not_doublyShadowed`,
+`stuck_structure` — assumes Condition 5 and curvatures in `(−1, 1)`, so none applies; the SHAVE analysis, the `g`-sectors at `S′`, N3-DEG at `S′` (the
+non-strict `woodallCone`, no Condition 5, does apply), the colours `y ≠ z` and the in-type `y`-tile at `P_{−2}` are new work: a `stuck_structure`-sized leaf.
+
+**Order of this job**: the two shadow leaves first (one route, both mirrors), then the others as the budget allows.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
