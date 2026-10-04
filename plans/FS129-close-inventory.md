@@ -610,3 +610,27 @@ One line per item with its source; no narration. Each line is ticked done or dec
      `scripts/slot.py`). **Question for Ephodos**: what makes U₁₆ gap-free while slack — do its four-colourings pull back from a tight quotient, as
      row 87's do? For a future stub line (FS-129's filing carries it to FS129-P1's re-rank if it lands in time, else the next record job).
      **The Searcher's registration**: E1, E3, E4 met; E5 (U₁₆ yes, 0.7) and E6 missed; E2 unscored.
+155. **FS129-L1 reported DONE** (`data/fs129/reports/FS129-L1.md`; commits `1b98fc3f`, `5a40cb6b`, `7a8821fe`, `e1902023`, `69fe06bb`; ≈331k).
+     `plans/LEAN-BACKLOG.md`, written by one run of `tools/fs129_l1_backlog.py`: 259 rows — § The order 178 (seed 75, conditional seed 3,
+     upstream 100), § FS-129's compositions 32 (44 less 12 superseded), § Left the order 26, and a closing section of 23 entries a merge line or
+     caution names that no other section holds; 42 merge lines, 147 merge notes, 28 dated notes, 54 (row, caution) pairs. The index README's
+     pointer line added (item 143). **Keryx's receipt**: `--self-test` re-run, exit 0, PASS (five plants caught and named); five rows drawn at
+     random (seed 29) — FS112-A4SIX, TC1-STANDING-FIVE, FS116-Y3-HUBCOL, FS112-LOCK, TC1-SQRT3-DYADIC — each statement verbatim in its source and
+     its id at the line the row gives.
+156. **Rulings on L1's CHECKs**: (i) **do-not-formalize wins** over seed status for the 8 seeds a merge line excludes (FS116-N2-HEX6, -N2-HEX3,
+     -RING-TRANSFER-C, -S1-KAPPA, -Y3-NOQ, -Y3-TIGHTLENS, -Y3-STARFORCE, -Y4-SPOKE): the seed status records an old handoff; the exclusion records
+     FS129-SR1's vacuity sort or FS129-SR3's finding, later and sourced; the backlog session may overrule a row with its reason. Confidence high.
+     (ii) **The closing section stays** — it carries row 121's eight J45 inputs, X25B-PZ and X25B-L1 (item 110) and the FS89 rows under caution
+     C109, which the backlog needs. Confidence high. (iii) **The stale addresses in `data/fs129/index/lean-order-corrected.md`** (92 rows, shifted
+     2–8 lines by Z1's errata) are not re-issued: the backlog quotes current lines matched by id, and it is the backlog's input. (iv) The
+     abbreviation expansions and the later-audit-wins reading of SR3 items 23 and 25 are accepted as L1 applied them, each quoted on its rows.
+157. **Corrections to this inventory** (L1): item 139's "S1b-i, S1b-ii" are not entry ids — they are Z1's words for parts of FS84-S1b's
+     verification (FS84-S1V); FS114-Y5-PXKILL (named in items 79, 97) has no entry, like FS114-Y5-PIN120 (item 138). Three rows' handoffs say
+     "superseded" (FS111-M-COVER-SC — wrong, item 117; FS114-N3-DR; FS114-N4-D — a case of RSTOPALL, SR2 row 93).
+158. **Tool defect, deferred** (L1): the index (1,295 records) predates Z1's filings — the derivation files now hold 1,355 entries — so the order's
+     `needs` lack edges for the 60 later entries; L1 read FS-129's compositions' upstream from their own lines. Re-running the index chain
+     (`tools/fs129_index.py`, then `tools/fs129_z2_whereelse.py`, then `tools/fs129_z2_index.py`, item 143) is for FS-129's close or the backlog
+     session, whichever needs it first. **Disagreements inside FS-129's compositions** between `Rests on it:` prose and `uses only:` (two mutual
+     pairs, two prose-only, four reversed; `data/fs129/l1/final-run.out`): the order follows `uses only:`; a correction owed to
+     `plans/FS129-derivation.md`'s prose at the close. **FS-112's `*Kernel:*` lines** still read "with FS-114" where its errata item 8 says
+     "with FS-116"; each row points to item 8.
