@@ -395,7 +395,7 @@ theorem hex_summary {θ : ℝ} (hθ : C.Good θ) :
     rw [← this]
     refine Finset.sum_congr rfl fun j _ => ?_
     unfold Lift.D
-    congr 2 <;> push_cast <;> ring_nf
+    congr 2; push_cast; ring_nf
   have hdvd : (3 : ℤ) ∣ L.f (θ + 2 * π) - L.f θ := by
     have h1 := L.cast_eq _ (show θ + 2 * π ∉ C.S by rw [C.periodic_S]; exact hθ.notMem)
     have h0 := L.cast_eq _ hθ.notMem
@@ -451,9 +451,128 @@ end Lift
 
 variable (C)
 
+
+/-! ## The lift of a circle colouring -/
+
+/-- The integer step of the lift at `x`: the left and right colours' representatives `0, 1, 2` differ by at most two, and a
+difference of `±2` is replaced by the step `∓1` that is congruent to it mod 3. -/
+private noncomputable def liftStep (cl cr : ℝ → ZMod 3) (x : ℝ) : ℤ :=
+  if ((cr x).val : ℤ) - (cl x).val = 2 then -1 else if ((cr x).val : ℤ) - (cl x).val = -2 then 1 else 0
+
+/-- The sum of the steps over the change points in `(a, b]`. -/
+private noncomputable def liftB (C : CircleColouring) (cl cr : ℝ → ZMod 3) (a b : ℝ) : ℤ :=
+  ∑ᶠ s ∈ C.S ∩ Ioc a b, liftStep cl cr s
+
+/-- The cumulative step function. -/
+private noncomputable def liftA (C : CircleColouring) (cl cr : ℝ → ZMod 3) (θ : ℝ) : ℤ :=
+  liftB C cl cr 0 θ - liftB C cl cr θ 0
+
+private theorem liftB_fin (C : CircleColouring) (a b : ℝ) : (C.S ∩ Ioc a b).Finite :=
+  (C.S_inter_Icc_finite a b).subset (inter_subset_inter_right _ Ioc_subset_Icc_self)
+
+private theorem liftB_add (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b c : ℝ} (hab : a ≤ b) (hbc : b ≤ c) :
+    liftB C cl cr a c = liftB C cl cr a b + liftB C cl cr b c := by
+  unfold liftB
+  rw [← finsum_mem_union _ (liftB_fin C a b) (liftB_fin C b c)]
+  · rw [← inter_union_distrib_left, Ioc_union_Ioc_eq_Ioc hab hbc]
+  · exact Set.disjoint_of_subset (inter_subset_right) (inter_subset_right) (Ioc_disjoint_Ioc_of_le le_rfl)
+
+private theorem liftB_of_le (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b : ℝ} (h : b ≤ a) :
+    liftB C cl cr a b = 0 := by
+  unfold liftB; rw [Ioc_eq_empty (not_lt.mpr h)]; simp
+
+private theorem liftA_sub (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b : ℝ} (hab : a ≤ b) :
+    liftA C cl cr b - liftA C cl cr a = liftB C cl cr a b := by
+  unfold liftA
+  rcases le_total 0 a with h0 | h0
+  · have := liftB_add C cl cr h0 hab
+    have e1 := liftB_of_le C cl cr (a := b) (b := 0) (h0.trans hab)
+    have e2 := liftB_of_le C cl cr (a := a) (b := 0) h0
+    linarith
+  · rcases le_total 0 b with h1 | h1
+    · have := liftB_add C cl cr h0 h1
+      have e1 := liftB_of_le C cl cr (a := b) (b := 0) h1
+      have e2 := liftB_of_le C cl cr (a := 0) (b := a) h0
+      linarith
+    · have := liftB_add C cl cr hab h1
+      have e1 := liftB_of_le C cl cr (a := 0) (b := b) h1
+      have e2 := liftB_of_le C cl cr (a := 0) (b := a) h0
+      linarith
+
+private theorem liftB_empty (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b : ℝ} (h : C.S ∩ Ioc a b = ∅) :
+    liftB C cl cr a b = 0 := by
+  unfold liftB; rw [h]; simp
+
+private theorem liftB_single (C : CircleColouring) (cl cr : ℝ → ZMod 3) {a b x : ℝ} (h : C.S ∩ Ioc a b = {x}) :
+    liftB C cl cr a b = liftStep cl cr x := by
+  unfold liftB; rw [h]; simp
+
 /-- Every circle colouring has a lift (integrate the steps `±1` across the finitely many change points of a period). -/
 theorem exists_lift : Nonempty C.Lift := by
-  sorry
+  choose cl hcl using fun x : ℝ => exists_left_const C.locallyConstant x
+  choose cr hcr using fun x : ℝ => exists_right_const C.locallyConstant x
+  have hfree : ∀ x : ℝ, ∃ δ > 0, ∀ y, |y - x| < δ → y ≠ x → y ∉ C.S := by
+    intro x
+    obtain ⟨δ, hδ, h⟩ := Metric.eventually_nhds_iff.mp (eventually_nhdsWithin_iff.mp (C.eventually_notMem_S x))
+    exact ⟨δ, hδ, fun y hy hne => h (by rwa [Real.dist_eq]) hne⟩
+  have hAconst : ∀ θ ∉ C.S, ∃ δ > 0, ∀ y, |y - θ| < δ → liftA C cl cr y = liftA C cl cr θ := by
+    intro θ hθ
+    obtain ⟨δ, hδ, hδ'⟩ := hfree θ
+    refine ⟨δ, hδ, fun y hy => ?_⟩
+    have hempty : ∀ u v : ℝ, |u - θ| < δ → |v - θ| < δ → u ≤ v → (θ ≤ u ∨ v ≤ θ) → C.S ∩ Ioc u v = ∅ := by
+      intro u v hu hv huv hside
+      refine eq_empty_iff_forall_notMem.mpr fun s ⟨hs, h1, h2⟩ => ?_
+      have hsθ : |s - θ| < δ := by
+        rw [abs_lt] at hu hv ⊢; constructor <;> linarith
+      by_cases hsθ' : s = θ
+      · exact hθ (hsθ' ▸ hs)
+      · exact hδ' s hsθ hsθ' hs
+    rcases le_total y θ with h | h
+    · have := liftA_sub C cl cr h
+      rw [liftB_empty C cl cr (hempty y θ hy (by simp [hδ]) h (Or.inr le_rfl))] at this
+      linarith
+    · have := liftA_sub C cl cr h
+      rw [liftB_empty C cl cr (hempty θ y (by simp [hδ]) hy h (Or.inl le_rfl))] at this
+      linarith
+  refine ⟨{ f := fun θ => ((C.c θ).val : ℤ) + 3 * liftA C cl cr θ, cast_eq := ?_, locallyConstant := ?_, jump := ?_ }⟩
+  · intro θ _
+    push_cast
+    rw [ZMod.natCast_zmod_val]
+    rw [show (3 : ZMod 3) = 0 from rfl]; simp
+  · intro θ hθ
+    obtain ⟨δ, hδ, hδ'⟩ := hAconst θ hθ
+    filter_upwards [Metric.ball_mem_nhds θ hδ, C.locallyConstant θ hθ] with y hy hc
+    rw [hc, hδ' y (by rwa [Metric.mem_ball, Real.dist_eq] at hy)]
+  · intro x
+    obtain ⟨δ, hδ, hδ'⟩ := hfree x
+    have hsub : ∀ a b : ℝ, x - δ < a → b < x + δ → ∀ s ∈ C.S ∩ Ioc a b, s = x := by
+      intro a b ha hb s ⟨hs, h1, h2⟩
+      by_contra hne
+      exact hδ' s (by rw [abs_lt]; constructor <;> linarith) hne hs
+    have hL := Ioo_mem_nhdsLT (show x - δ < x by linarith)
+    have hR := Ioo_mem_nhdsGT (show x < x + δ by linarith)
+    by_cases hx : x ∈ C.S
+    · filter_upwards [hL, hcl x] with a ha hca
+      filter_upwards [hR, hcr x] with b hb hcb
+      have hsingle : C.S ∩ Ioc a b = {x} :=
+        Set.eq_singleton_iff_unique_mem.mpr ⟨⟨hx, ha.2, hb.1.le⟩, fun s hs => hsub a b ha.1 hb.2 s hs⟩
+      have := liftA_sub C cl cr (show a ≤ b by linarith [ha.2, hb.1])
+      rw [liftB_single C cl cr hsingle] at this
+      have h3a := ZMod.val_lt (cl x)
+      have h3b := ZMod.val_lt (cr x)
+      rw [hca, hcb, abs_le]
+      unfold liftStep at this
+      split_ifs at this <;> omega
+    · filter_upwards [hL, nhdsWithin_le_nhds (C.locallyConstant x hx)] with a ha hca
+      filter_upwards [hR, nhdsWithin_le_nhds (C.locallyConstant x hx)] with b hb hcb
+      have hempty : C.S ∩ Ioc a b = ∅ := eq_empty_iff_forall_notMem.mpr fun s hs => by
+        have := hsub a b ha.1 hb.2 s hs
+        exact hx (this ▸ hs.1)
+      have := liftA_sub C cl cr (show a ≤ b by linarith [ha.2, hb.1])
+      rw [liftB_empty C cl cr hempty] at this
+      rw [hca, hcb]
+      have : liftA C cl cr b = liftA C cl cr a := by linarith
+      rw [this]; simp
 
 /-- The positions carrying two change points `60°` apart: `θ` with `θ + 60°j, θ + 60°(j + 1) ∈ S` for some `j < 6`. -/
 def PairPos (θ : ℝ) : Prop := ∃ j : ℕ, j < 6 ∧ θ + j * (π / 3) ∈ C.S ∧ θ + (j + 1) * (π / 3) ∈ C.S
@@ -560,46 +679,408 @@ theorem m_eq_near {θ₀ : ℝ} (h0 : ¬ C.PairPos θ₀) : ∃ ε > 0, ∀ θ �
   unfold Lift.m
   by_cases c1 : θ ≤ θ₀ <;> by_cases c2 : θ' ≤ θ₀ <;> simp only [c1, c2, if_true, if_false] at dθ dθ' mθ mθ' ⊢ <;> omega
 
+
+/-- `h` is determined by the `m_j` and the winding. -/
+theorem h_eq_of_m_eq {θ θ' : ℝ} (hθ : C.Good θ) (hθ' : C.Good θ') (hm : ∀ j < 6, L.m j θ = L.m j θ') :
+    C.h θ = C.h θ' := by
+  have i1 := (ringband_ii L hθ).2
+  have i2 := (ringband_ii L hθ').2
+  have w := W_eq L hθ.notMem hθ'.notMem
+  have hs : ∑ j ∈ Finset.range 6, L.m j θ = ∑ j ∈ Finset.range 6, L.m j θ' :=
+    Finset.sum_congr rfl fun j hj => hm j (Finset.mem_range.mp hj)
+  have a1 := (ringband_i L hθ).2.2
+  have a2 := (ringband_i L hθ').2.2
+  simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at a1 a2
+  omega
+
+/-- `m_j(θ) = m_0(θ + 60°j)`. -/
+theorem m_eq_m0 (j : ℕ) (θ : ℝ) : L.m j θ = L.m 0 (θ + j * (π / 3)) := by
+  unfold Lift.m; rw [Lift.D_eq_D0]
+
+/-- The set where `D₀` is read: `z` and `z + 60°` off the change set. -/
+def T0 (C : CircleColouring) : Set ℝ := {z | z ∉ C.S ∧ z + π / 3 ∉ C.S}
+
+/-- Near any `y`, `D₀` at a point of `T0` is the left difference, the right difference, or both. -/
+theorem D0_near (y : ℝ) {l₀ r₀ l₁ r₁ : ℤ} (h0 : L.Sides y l₀ r₀) (h1 : L.Sides (y + π / 3) l₁ r₁) :
+    ∃ ε > 0, ∀ z ∈ T0 C, |z - y| < ε →
+      (z < y ∧ L.D 0 z = l₁ - l₀) ∨ (y < z ∧ L.D 0 z = r₁ - r₀) ∨
+        (z = y ∧ L.D 0 z = l₁ - l₀ ∧ L.D 0 z = r₁ - r₀) := by
+  have hP : ∀ᶠ z in 𝓝 y, (z < y → L.f z = l₀ ∧ L.f (z + π / 3) = l₁) ∧
+      (y < z → L.f z = r₀ ∧ L.f (z + π / 3) = r₁) := by
+    have a := eventually_nhdsWithin_iff.mp (h0.1.and (eventually_lt_add (a := π / 3) h1.1))
+    have b := eventually_nhdsWithin_iff.mp (h0.2.1.and (eventually_gt_add (a := π / 3) h1.2.1))
+    filter_upwards [a, b] with z hz1 hz2
+    exact ⟨fun hlt => hz1 hlt, fun hgt => hz2 hgt⟩
+  obtain ⟨ε, hε, hεP⟩ := Metric.eventually_nhds_iff.mp hP
+  refine ⟨ε, hε, fun z hz hzy => ?_⟩
+  have hzy' : dist z y < ε := by rwa [Real.dist_eq]
+  obtain ⟨hlt, hgt⟩ := hεP hzy'
+  have hD : L.D 0 z = L.f (z + π / 3) - L.f z := by
+    unfold Lift.D; simp only [Nat.cast_zero, zero_add, one_mul, zero_mul, add_zero]
+  rcases lt_trichotomy z y with a | a | a
+  · obtain ⟨u, v⟩ := hlt a; exact Or.inl ⟨a, by rw [hD, u, v]⟩
+  · subst a
+    obtain ⟨a1, a2⟩ := h0.2.2 hz.1
+    obtain ⟨b1, b2⟩ := h1.2.2 hz.2
+    exact Or.inr (Or.inr ⟨rfl, by rw [hD, ← a1, ← b1], by rw [hD, ← a2, ← b2]⟩)
+  · obtain ⟨u, v⟩ := hgt a; exact Or.inr (Or.inl ⟨a, by rw [hD, u, v]⟩)
+
+/-- `m₀` is constant on `T0` once no step jumps by two. -/
+theorem m0_const (hbig : ∀ x : ℝ, ∀ l₀ r₀ l₁ r₁ : ℤ, L.Sides x l₀ r₀ → L.Sides (x + π / 3) l₁ r₁ →
+      |r₀ - l₀| ≤ 1 → |r₁ - l₁| ≤ 1 → |(r₁ - l₁) - (r₀ - l₀)| ≤ 1) :
+    ∀ z ∈ T0 C, ∀ z' ∈ T0 C, L.m 0 z = L.m 0 z' := by
+  have hT : ∀ y ∈ (univ : Set ℝ), ∀ ε > 0, ∃ z ∈ T0 C, |z - y| < ε := fun y _ ε hε => by
+    obtain ⟨z, hz, hg⟩ := C.exists_good_near y ε hε
+    refine ⟨z, ⟨hg.notMem, ?_⟩, hz⟩
+    have := hg.hex_notMem (i := 1) (by norm_num)
+    simpa using this
+  have hg : ∀ y ∈ (univ : Set ℝ), ∃ ε > 0, ∀ z ∈ T0 C, |z - y| < ε → ∀ z' ∈ T0 C,
+      |z' - y| < ε → L.m 0 z = L.m 0 z' := by
+    intro y _
+    obtain ⟨l₀, r₀, h0, b0⟩ := L.exists_sides y
+    obtain ⟨l₁, r₁, h1, b1⟩ := L.exists_sides (y + π / 3)
+    have hb := hbig y l₀ r₀ l₁ r₁ h0 h1 b0 b1
+    obtain ⟨ε, hε, hnear⟩ := D0_near L y h0 h1
+    refine ⟨ε, hε, fun z hz hzy z' hz' hzy' => ?_⟩
+    have mz := Lift.D0_mod_ne (L := L) hz.1 hz.2
+    have mz' := Lift.D0_mod_ne (L := L) hz'.1 hz'.2
+    rw [abs_le] at hb b0 b1
+    unfold Lift.m
+    rcases hnear z hz hzy with a | a | a <;> rcases hnear z' hz' hzy' with b | b | b <;> omega
+  exact fun z hz z' hz' => const_of_local isPreconnected_univ hT hg z ⟨hz, mem_univ _⟩ z' ⟨hz', mem_univ _⟩
+
+/-- All `m_j` are one integer once `m₀` is constant on `T0`. -/
+theorem exists_M (hconst : ∀ z ∈ T0 C, ∀ z' ∈ T0 C, L.m 0 z = L.m 0 z') :
+    ∃ M : ℤ, ∀ θ, C.Good θ → ∀ j < 6, L.m j θ = M := by
+  obtain ⟨θ₁, -, hg₁⟩ := C.exists_good_near 0 1 one_pos
+  have hT : ∀ θ, C.Good θ → ∀ j : ℕ, j < 6 → θ + j * (π / 3) ∈ T0 C := fun θ hθ j hj => by
+    refine ⟨hθ j hj, ?_⟩
+    have := hθ.hex_notMem (i := j + 1) (by omega)
+    rwa [show θ + ((j + 1 : ℕ) : ℝ) * (π / 3) = θ + j * (π / 3) + π / 3 by push_cast; ring] at this
+  refine ⟨L.m 0 θ₁, fun θ hθ j hj => ?_⟩
+  rw [m_eq_m0]
+  exact hconst _ (hT θ hθ j hj) θ₁ (by simpa using hT θ₁ hg₁ 0 (by norm_num))
+
+
+/-- `D₀` as a plain difference. -/
+theorem D0_eq (z : ℝ) : L.D 0 z = L.f (z + π / 3) - L.f z := by
+  unfold Lift.D; simp only [Nat.cast_zero, zero_add, one_mul, zero_mul, add_zero]
+
+/-- Just left of `x` there are points of `T0` where `D₀` is the left difference. -/
+theorem exists_T0_left {x : ℝ} {l₀ r₀ l₁ r₁ : ℤ} (h0 : L.Sides x l₀ r₀) (h1 : L.Sides (x + π / 3) l₁ r₁) :
+    ∃ z ∈ T0 C, L.D 0 z = l₁ - l₀ := by
+  obtain ⟨z, ⟨⟨hz0, hz1⟩, hz2⟩, hz3⟩ := (((h0.1.and (eventually_lt_add (a := π / 3) h1.1)).and
+    (C.eventually_notMem_S_lt x)).and (eventually_lt_add (a := π / 3) (C.eventually_notMem_S_lt (x + π / 3)))).exists
+  exact ⟨z, ⟨hz2, hz3⟩, by rw [D0_eq, hz0, hz1]⟩
+
+/-- Just right of `x` there are points of `T0` where `D₀` is the right difference. -/
+theorem exists_T0_right {x : ℝ} {l₀ r₀ l₁ r₁ : ℤ} (h0 : L.Sides x l₀ r₀) (h1 : L.Sides (x + π / 3) l₁ r₁) :
+    ∃ z ∈ T0 C, L.D 0 z = r₁ - r₀ := by
+  obtain ⟨z, ⟨⟨hz0, hz1⟩, hz2⟩, hz3⟩ := (((h0.2.1.and (eventually_gt_add (a := π / 3) h1.2.1)).and
+    (C.eventually_notMem_S_gt x)).and (eventually_gt_add (a := π / 3) (C.eventually_notMem_S_gt (x + π / 3)))).exists
+  exact ⟨z, ⟨hz2, hz3⟩, by rw [D0_eq, hz0, hz1]⟩
+
+/-- No two change points `60°` apart: no step jumps by two. -/
+theorem hbig_of_noPair (hno : ∀ x ∈ C.S, x + π / 3 ∉ C.S) : ∀ x : ℝ, ∀ l₀ r₀ l₁ r₁ : ℤ,
+    L.Sides x l₀ r₀ → L.Sides (x + π / 3) l₁ r₁ → |r₀ - l₀| ≤ 1 → |r₁ - l₁| ≤ 1 →
+      |(r₁ - l₁) - (r₀ - l₀)| ≤ 1 := by
+  intro x l₀ r₀ l₁ r₁ h0 h1 b0 b1
+  rw [abs_le] at b0 b1 ⊢
+  by_cases hx : x ∈ C.S
+  · have := h1.2.2 (hno x hx); omega
+  · have := h0.2.2 hx; omega
+
+/-- No swap point: no step jumps by two. -/
+theorem hbig_of_noSwap (hns : ∀ x, ¬ C.IsSwap x) : ∀ x : ℝ, ∀ l₀ r₀ l₁ r₁ : ℤ,
+    L.Sides x l₀ r₀ → L.Sides (x + π / 3) l₁ r₁ → |r₀ - l₀| ≤ 1 → |r₁ - l₁| ≤ 1 →
+      |(r₁ - l₁) - (r₀ - l₀)| ≤ 1 := by
+  intro x l₀ r₀ l₁ r₁ h0 h1 b0 b1
+  by_contra hbig
+  rw [not_le] at hbig
+  rw [abs_le] at b0 b1
+  obtain ⟨zl, hzl, hzl'⟩ := exists_T0_left L h0 h1
+  obtain ⟨zr, hzr, hzr'⟩ := exists_T0_right L h0 h1
+  have m1 := Lift.D0_mod_ne (L := L) hzl.1 hzl.2
+  have m2 := Lift.D0_mod_ne (L := L) hzr.1 hzr.2
+  rw [hzl'] at m1
+  rw [hzr'] at m2
+  have hx : x ∈ C.S := by
+    by_contra hx
+    have := h0.2.2 hx
+    rcases lt_abs.mp hbig with h | h <;> omega
+  refine hns x ⟨hx, (l₀ : ZMod 3), (r₀ : ZMod 3), h0.vals.1, h0.vals.2, ?_⟩
+  have e1 : ((l₁ : ℤ) : ZMod 3) = (r₀ : ZMod 3) := (ZMod.intCast_eq_intCast_iff' _ _ 3).mpr (by
+    simp only [Nat.cast_ofNat]; rcases lt_abs.mp hbig with h | h <;> omega)
+  have e2 : ((r₁ : ℤ) : ZMod 3) = (l₀ : ZMod 3) := (ZMod.intCast_eq_intCast_iff' _ _ 3).mpr (by
+    simp only [Nat.cast_ofNat]; rcases lt_abs.mp hbig with h | h <;> omega)
+  left
+  exact ⟨e1 ▸ h1.vals.1, e2 ▸ h1.vals.2⟩
+
+/-- If every `D₀` on `T0` has one residue `ρ` mod 3, the jumps at `x` and `x + 60°` agree. -/
+theorem J_eq_of_rho {ρ : ℤ} (hρ : ∀ z ∈ T0 C, L.D 0 z % 3 = ρ) : ∀ x : ℝ, ∀ l₀ r₀ l₁ r₁ : ℤ,
+    L.Sides x l₀ r₀ → L.Sides (x + π / 3) l₁ r₁ → |r₀ - l₀| ≤ 1 → |r₁ - l₁| ≤ 1 → r₁ - l₁ = r₀ - l₀ := by
+  intro x l₀ r₀ l₁ r₁ h0 h1 b0 b1
+  obtain ⟨zl, hzl, hzl'⟩ := exists_T0_left L h0 h1
+  obtain ⟨zr, hzr, hzr'⟩ := exists_T0_right L h0 h1
+  have m1 := hρ zl hzl
+  have m2 := hρ zr hzr
+  rw [hzl'] at m1
+  rw [hzr'] at m2
+  rw [abs_le] at b0 b1
+  omega
+
+/-- All `D₀` on `T0` have the residue forced by a nonzero common `h`. -/
+theorem rho_const {H : ℤ} (hh : ∀ θ, C.Good θ → C.h θ = H) (hH : H ≠ 0) :
+    ∀ z ∈ T0 C, L.D 0 z % 3 = (if H = 2 then 1 else 2) := by
+  intro z hz
+  have hloc : ∀ᶠ y in 𝓝 z, L.D 0 y = L.D 0 z := by
+    have a := L.locallyConstant z hz.1
+    have b := ((continuous_add_const (π / 3)).tendsto z).eventually (L.locallyConstant _ hz.2)
+    filter_upwards [a, b] with y h1 h2
+    rw [D0_eq, D0_eq, h1, h2]
+  obtain ⟨ε, hε, hε'⟩ := Metric.eventually_nhds_iff.mp hloc
+  obtain ⟨θ, hθ, hg⟩ := C.exists_good_near z ε hε
+  have hD : L.D 0 θ = L.D 0 z := hε' (by rwa [Real.dist_eq])
+  obtain ⟨n, hn, h3, h6, hS, -⟩ := Lift.hex_summary (L := L) hg
+  have hhθ := hh θ hg
+  unfold CircleColouring.h at hhθ
+  rw [hS] at hhθ
+  have hm0 := Lift.D_mod_ne_good (L := L) hg (j := 0) (by norm_num)
+  have hcard : (∑ j ∈ Finset.range 6, if L.D j θ % 3 = 2 then 1 else 0) = n := by
+    rw [← hn]; unfold Lift.n₂; rw [Finset.card_filter]
+  simp only [Finset.sum_range_succ, Finset.sum_range_zero] at hcard
+  rw [← hD]
+  have hn' : n = 0 ∨ n = 6 := by
+    have : (n : ℤ) = 0 ∨ (n : ℤ) = 3 ∨ (n : ℤ) = 6 := by omega
+    rcases this with h | h | h
+    · left; omega
+    · exfalso; omega
+    · right; omega
+  rcases hn' with rfl | rfl
+  · split_ifs at hcard; omega
+  · split_ifs at hcard <;> omega
+
+/-- A genuine change point has a nonzero jump. -/
+theorem jump_ne_of_mem (hgen : ∀ x ∈ C.S, ¬ ∃ v, C.LeftVal x v ∧ C.RightVal x v) {x : ℝ} (hx : x ∈ C.S)
+    {l r : ℤ} (h : L.Sides x l r) : r - l ≠ 0 := by
+  intro h0
+  have hr : r = l := by omega
+  subst hr
+  exact hgen x hx ⟨(r : ZMod 3), h.vals.1, h.vals.2⟩
+
+/-- A nonzero jump sits at a point of the change set. -/
+theorem mem_of_jump_ne {x : ℝ} {l r : ℤ} (h : L.Sides x l r) (hne : r - l ≠ 0) : x ∈ C.S := by
+  by_contra hx
+  have := h.2.2 hx
+  omega
+
+/-- Equal jumps at `x` and `x + 60°` and genuine change points: `S` is `60°`-invariant. -/
+theorem inv_of_J_eq (hgen : ∀ x ∈ C.S, ¬ ∃ v, C.LeftVal x v ∧ C.RightVal x v)
+    (hJ : ∀ x : ℝ, ∀ l₀ r₀ l₁ r₁ : ℤ, L.Sides x l₀ r₀ → L.Sides (x + π / 3) l₁ r₁ → |r₀ - l₀| ≤ 1 →
+      |r₁ - l₁| ≤ 1 → r₁ - l₁ = r₀ - l₀) : ∀ x, x ∈ C.S ↔ x + π / 3 ∈ C.S := by
+  intro x
+  obtain ⟨l₀, r₀, h0, b0⟩ := L.exists_sides x
+  obtain ⟨l₁, r₁, h1, b1⟩ := L.exists_sides (x + π / 3)
+  have := hJ x l₀ r₀ l₁ r₁ h0 h1 b0 b1
+  constructor
+  · intro hx
+    exact mem_of_jump_ne L h1 (by have := jump_ne_of_mem L hgen hx h0; omega)
+  · intro hx
+    exact mem_of_jump_ne L h0 (by have := jump_ne_of_mem L hgen hx h1; omega)
+
+/-- The hexagon sum is unchanged by rotating the hexagon by `60°` (periodicity of `c`). -/
+theorem hSum_shift (θ : ℝ) : C.hSum (θ + π / 3) = C.hSum θ := by
+  unfold CircleColouring.hSum
+  set u : ℕ → ℤ := fun j => step (C.c (θ + (j : ℝ) * (π / 3))) (C.c (θ + ((j : ℝ) + 1) * (π / 3))) with hu
+  have h1 : ∀ j : ℕ, step (C.c (θ + π / 3 + (j : ℝ) * (π / 3))) (C.c (θ + π / 3 + ((j : ℝ) + 1) * (π / 3))) =
+      u (j + 1) := by
+    intro j
+    simp only [hu]
+    rw [show θ + π / 3 + (j : ℝ) * (π / 3) = θ + ((j + 1 : ℕ) : ℝ) * (π / 3) by push_cast; ring,
+      show θ + π / 3 + ((j : ℝ) + 1) * (π / 3) = θ + (((j + 1 : ℕ) : ℝ) + 1) * (π / 3) by push_cast; ring]
+  have h6 : u 6 = u 0 := by
+    simp only [hu]
+    have a : C.c (θ + ((6 : ℕ) : ℝ) * (π / 3)) = C.c (θ + ((0 : ℕ) : ℝ) * (π / 3)) := by
+      rw [show θ + ((6 : ℕ) : ℝ) * (π / 3) = θ + ((0 : ℕ) : ℝ) * (π / 3) + 2 * π by push_cast; ring]
+      exact C.periodic _
+    have b : C.c (θ + (((6 : ℕ) : ℝ) + 1) * (π / 3)) = C.c (θ + (((0 : ℕ) : ℝ) + 1) * (π / 3)) := by
+      rw [show θ + (((6 : ℕ) : ℝ) + 1) * (π / 3) = θ + (((0 : ℕ) : ℝ) + 1) * (π / 3) + 2 * π by push_cast; ring]
+      exact C.periodic _
+    rw [a, b]
+  simp_rw [h1]
+  have e1 := Finset.sum_range_succ u 6
+  have e2 := Finset.sum_range_succ' u 6
+  linarith
+
+include L in
+/-- (iii) of the row. -/
+theorem ringband_iii' {θ₀ : ℝ} (h0 : ¬ C.PairPos θ₀) :
+    ∃ ε > 0, ∀ θ θ', |θ - θ₀| < ε → |θ' - θ₀| < ε → C.Good θ → C.Good θ' → C.h θ = C.h θ' := by
+  obtain ⟨ε, hε, h⟩ := m_eq_near L h0
+  exact ⟨ε, hε, fun θ θ' a b ga gb => h_eq_of_m_eq L ga gb (h θ θ' a b ga gb)⟩
+
 /-- **FS129-SR1-RINGBAND** (iii): `h` changes across `θ₀` only if `S` holds two points `θ₀ + 60°j` and `θ₀ + 60°(j + 1)`. -/
 theorem ringband_iii {θ₀ : ℝ} (h0 : ¬ C.PairPos θ₀) :
     ∃ ε > 0, ∀ θ θ', |θ - θ₀| < ε → |θ' - θ₀| < ε → C.Good θ → C.Good θ' → C.h θ = C.h θ' := by
-  sorry
+  obtain ⟨L⟩ := exists_lift C
+  exact ringband_iii' L h0
 
 /-- **FS129-SR1-RINGBAND** (iv): with no swap point, all `m_j(θ)` equal one integer `M`, `W` is `6M + 2`, `6M + 3` or `6M + 4`,
 and `W = 6M + 3` unless `S` is invariant under the rotation by `60°`. -/
 theorem ringband_iv (hns : ∀ x, ¬ C.IsSwap x) :
     ∃ M : ℤ, (∀ θ, C.Good θ → ∀ j < 6, L.m j θ = M) ∧
       ∀ θ, C.Good θ → (L.W θ = 6 * M + 2 ∨ L.W θ = 6 * M + 3 ∨ L.W θ = 6 * M + 4) ∧
-        ((¬ ∀ x, x ∈ C.S ↔ x + π / 3 ∈ C.S) → L.W θ = 6 * M + 3) := by
-  sorry
+        ((∀ x ∈ C.S, ¬ ∃ v, C.LeftVal x v ∧ C.RightVal x v) →
+          (¬ ∀ x, x ∈ C.S ↔ x + π / 3 ∈ C.S) → L.W θ = 6 * M + 3) := by
+  obtain ⟨M, hM⟩ := exists_M L (m0_const L (hbig_of_noSwap L hns))
+  have hW : ∀ θ, C.Good θ → L.W θ = 6 * M + 3 - C.h θ / 2 := by
+    intro θ hθ
+    rw [(ringband_ii L hθ).2, Finset.sum_congr rfl (fun j hj => hM θ hθ j (Finset.mem_range.mp hj))]
+    simp
+  refine ⟨M, hM, fun θ hθ => ⟨?_, fun hgen hninv => ?_⟩⟩
+  · have := (ringband_i L hθ).2.2
+    simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at this
+    rw [hW θ hθ]; omega
+  · by_contra hW'
+    have hne : C.h θ ≠ 0 := fun h0 => hW' (by rw [hW θ hθ, h0]; simp)
+    have hall : ∀ θ', C.Good θ' → C.h θ' = C.h θ := fun θ' hθ' =>
+      h_eq_of_m_eq L hθ' hθ (fun j hj => by rw [hM θ' hθ' j hj, hM θ hθ j hj])
+    have hρ := rho_const L hall hne
+    exact hninv (inv_of_J_eq L hgen (J_eq_of_rho L hρ))
 
 /-- **FS129-SR1-RINGBAND** (v): with no two points of `S` `60°` apart, `h = 0` at every good `θ` and `W = 6M + 3` (`M` the
 common value of the `m_j`). -/
 theorem ringband_v (hno : ∀ x ∈ C.S, x + π / 3 ∉ C.S) :
     ∃ M : ℤ, (∀ θ, C.Good θ → ∀ j < 6, L.m j θ = M) ∧ ∀ θ, C.Good θ → C.h θ = 0 ∧ L.W θ = 6 * M + 3 := by
-  sorry
+  obtain ⟨M, hM⟩ := exists_M L (m0_const L (hbig_of_noPair L hno))
+  refine ⟨M, hM, fun θ hθ => ?_⟩
+  have hh0 : C.h θ = 0 := by
+    by_contra hne
+    have hall : ∀ θ', C.Good θ' → C.h θ' = C.h θ := fun θ' hθ' =>
+      h_eq_of_m_eq L hθ' hθ (fun j hj => by rw [hM θ' hθ' j hj, hM θ hθ j hj])
+    have hJ := J_eq_of_rho L (rho_const L hall hne)
+    -- every jump vanishes
+    have hz : ∀ x : ℝ, ∀ l r : ℤ, L.Sides x l r → |r - l| ≤ 1 → r = l := by
+      intro x l r h b
+      by_cases hx : x ∈ C.S
+      · obtain ⟨l₁, r₁, h1, b1⟩ := L.exists_sides (x + π / 3)
+        have := hJ x l r l₁ r₁ h h1 b b1
+        have := (h1.2.2 (hno x hx))
+        omega
+      · have := h.2.2 hx; omega
+    -- so the lift is constant off the change set
+    have hT : ∀ y ∈ (univ : Set ℝ), ∀ ε > 0, ∃ z ∈ {z : ℝ | z ∉ C.S}, |z - y| < ε := fun y _ ε hε => by
+      obtain ⟨z, hz, hg⟩ := C.exists_good_near y ε hε
+      exact ⟨z, hg.notMem, hz⟩
+    have hg : ∀ y ∈ (univ : Set ℝ), ∃ ε > 0, ∀ z ∈ {z : ℝ | z ∉ C.S}, |z - y| < ε → ∀ z' ∈ {z : ℝ | z ∉ C.S},
+        |z' - y| < ε → L.f z = L.f z' := by
+      intro y _
+      obtain ⟨l, r, h, b⟩ := L.exists_sides y
+      have hr := hz y l r h b
+      have hP : ∀ᶠ z in 𝓝 y, (z < y → L.f z = l) ∧ (y < z → L.f z = r) := by
+        have a := eventually_nhdsWithin_iff.mp h.1
+        have b := eventually_nhdsWithin_iff.mp h.2.1
+        filter_upwards [a, b] with z hz1 hz2
+        exact ⟨fun hlt => hz1 hlt, fun hgt => hz2 hgt⟩
+      obtain ⟨ε, hε, hεP⟩ := Metric.eventually_nhds_iff.mp hP
+      have hval : ∀ z ∈ {z : ℝ | z ∉ C.S}, |z - y| < ε → L.f z = l := by
+        intro z hzS hzy
+        have hzy' : dist z y < ε := by rwa [Real.dist_eq]
+        obtain ⟨hlt, hgt⟩ := hεP hzy'
+        rcases lt_trichotomy z y with a | a | a
+        · exact hlt a
+        · subst a; exact (h.2.2 hzS).1.symm
+        · rw [hgt a, hr]
+      exact ⟨ε, hε, fun z hzS hzy z' hz' hzy' => by rw [hval z hzS hzy, hval z' hz' hzy']⟩
+    obtain ⟨θ₁, -, hg₁⟩ := C.exists_good_near 0 1 one_pos
+    have h1 : θ₁ + π / 3 ∉ C.S := by simpa using hg₁.hex_notMem (i := 1) (by norm_num)
+    have := const_of_local isPreconnected_univ hT hg θ₁ ⟨hg₁.notMem, mem_univ _⟩ (θ₁ + π / 3) ⟨h1, mem_univ _⟩
+    exact Lift.D0_mod_ne (L := L) hg₁.notMem h1 (by rw [D0_eq, this]; simp)
+  refine ⟨hh0, ?_⟩
+  rw [(ringband_ii L hθ).2, Finset.sum_congr rfl (fun j hj => hM θ hθ j (Finset.mem_range.mp hj)), hh0]
+  simp
 
 /-- **FS129-SR1-RINGBAND** (vi), from FS129-OA1-RINGWIND (caution C137), first clause: `h` has period `60°`. -/
-theorem ringband_vi_periodic {θ : ℝ} (hθ : C.Good θ) : C.h (θ + π / 3) = C.h θ := by
-  sorry
+theorem ringband_vi_periodic {θ : ℝ} (_hθ : C.Good θ) : C.h (θ + π / 3) = C.h θ := by
+  unfold CircleColouring.h; rw [hSum_shift]
 
 /-- **FS129-SR1-RINGBAND** (vi), second clause: a hexagon position that is the only one in its period with two change points
 `60°` apart carries no jump of `h` (the jumps over one period sum to zero). -/
 theorem ringband_vi_noJump {θ₀ : ℝ} (honly : ∀ x, C.PairPos x → ∃ m : ℤ, x = θ₀ + m * (π / 3)) :
     ∃ ε > 0, ∀ θ θ', |θ - θ₀| < ε → |θ' - θ₀| < ε → C.Good θ → C.Good θ' → C.h θ = C.h θ' := by
-  sorry
+  by_cases hp : C.PairPos θ₀
+  swap
+  · exact ringband_iii hp
+  have hπ := Real.pi_pos
+  have hgood_shift : ∀ θ, C.Good θ → C.Good (θ + π / 3) := fun θ hθ j hj => by
+    have := hθ.hex_notMem (i := j + 1) (by omega)
+    rwa [show θ + ((j + 1 : ℕ) : ℝ) * (π / 3) = θ + π / 3 + (j : ℝ) * (π / 3) by push_cast; ring] at this
+  have hnotgood : ¬ C.Good θ₀ := by
+    obtain ⟨j, hj, h1, -⟩ := hp
+    exact fun hg => hg j hj h1
+  -- `h` is constant on the good angles of the open interval `(θ₀, θ₀ + 60°)`
+  have hconst : ∀ z ∈ {z : ℝ | C.Good z} ∩ Ioo θ₀ (θ₀ + π / 3), ∀ z' ∈ {z : ℝ | C.Good z} ∩ Ioo θ₀ (θ₀ + π / 3),
+      C.h z = C.h z' := by
+    refine const_of_local isPreconnected_Ioo (fun y _ ε hε => ?_) (fun y hy => ?_)
+    · obtain ⟨z, hz, hg⟩ := C.exists_good_near y ε hε
+      exact ⟨z, hg, hz⟩
+    · have hnp : ¬ C.PairPos y := by
+        intro hpy
+        obtain ⟨m, hm⟩ := honly y hpy
+        have h1 : (0 : ℝ) < m := by
+          have h0 : θ₀ < θ₀ + m * (π / 3) := by rw [← hm]; exact hy.1
+          by_contra hc
+          push Not at hc
+          have : (m : ℝ) * (π / 3) ≤ 0 := mul_nonpos_of_nonpos_of_nonneg hc (by positivity)
+          linarith
+        have h2 : (m : ℝ) < 1 := by
+          have : θ₀ + m * (π / 3) < θ₀ + π / 3 := by rw [← hm]; exact hy.2
+          have : (m : ℝ) * (π / 3) < 1 * (π / 3) := by linarith
+          exact lt_of_mul_lt_mul_right this (by positivity)
+        have h1' : 0 < m := by exact_mod_cast h1
+        have h2' : m < 1 := by exact_mod_cast h2
+        omega
+      obtain ⟨ε, hε, h⟩ := ringband_iii hnp
+      exact ⟨ε, hε, fun z hz hzy z' hz' hzy' => h z z' hzy hzy' hz hz'⟩
+  refine ⟨π / 6, by positivity, fun θ θ' hθ hθ' hg hg' => ?_⟩
+  have key : ∀ θ, |θ - θ₀| < π / 6 → C.Good θ → ∃ z, C.Good z ∧ z ∈ Ioo θ₀ (θ₀ + π / 3) ∧ C.h z = C.h θ := by
+    intro θ hθ hg
+    rw [abs_lt] at hθ
+    rcases lt_trichotomy θ θ₀ with a | a | a
+    · exact ⟨θ + π / 3, hgood_shift θ hg, ⟨by linarith, by linarith⟩, ringband_vi_periodic hg⟩
+    · exact absurd (a ▸ hg) hnotgood
+    · exact ⟨θ, hg, ⟨a, by linarith⟩, rfl⟩
+  obtain ⟨z, hzg, hzI, hzh⟩ := key θ hθ hg
+  obtain ⟨z', hzg', hzI', hzh'⟩ := key θ' hθ' hg'
+  rw [← hzh, ← hzh']
+  exact hconst z ⟨hzg, hzI⟩ z' ⟨hzg', hzI'⟩
 
 /-- **FS110-N2-RING**, on the circle: `|W| ≤ 1` forces a swap point. -/
 theorem exists_swap_of_abs_W_le_one {θ : ℝ} (hθ : θ ∉ C.S) (hW : |L.W θ| ≤ 1) : ∃ x, C.IsSwap x := by
-  sorry
+  by_contra hns
+  push Not at hns
+  obtain ⟨M, -, hWM⟩ := ringband_iv L hns
+  obtain ⟨θ₁, -, hg⟩ := C.exists_good_near 0 1 one_pos
+  have := (hWM θ₁ hg).1
+  rw [← W_eq L hθ hg.notMem] at this
+  rw [abs_le] at hW
+  omega
 
 /-- **FS110-Y3-GP**, on the circle: with no two change points `60°` apart, `W ≡ 3 (mod 6)`. -/
 theorem W_mod_six (hno : ∀ x ∈ C.S, x + π / 3 ∉ C.S) {θ : ℝ} (hθ : θ ∉ C.S) : L.W θ % 6 = 3 := by
-  sorry
+  obtain ⟨M, -, hWM⟩ := ringband_v L hno
+  obtain ⟨θ₁, -, hg⟩ := C.exists_good_near 0 1 one_pos
+  have := (hWM θ₁ hg).2
+  rw [← W_eq L hθ hg.notMem] at this
+  omega
 
 /-- **FS110-Y3-GP**, on the circle: `|W| ≤ 2` needs two change points `60°` apart. -/
 theorem exists_pair_of_abs_W_le_two {θ : ℝ} (hθ : θ ∉ C.S) (hW : |L.W θ| ≤ 2) : ∃ x ∈ C.S, x + π / 3 ∈ C.S := by
-  sorry
+  by_contra hno
+  push Not at hno
+  have := W_mod_six L hno hθ
+  rw [abs_le] at hW
+  omega
 
 end CircleColouring
 
