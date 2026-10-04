@@ -341,3 +341,12 @@ reason by the close.*
     in the skeleton's encoding of item 19's ruling (whose words — "touched from above at each point by a unit arc … in the viscosity sense" — name the supporting
     arc, not the test side). **Ruling: flip `u s ≤ φ s` to `φ s ≤ u s` in `CurvatureLeOne`**; `semiconcaveWith` re-derived from the corrected form. Alternative:
     none live. Confidence: high. No erratum on the derivation beyond item 18's.
+58. **FS131-I2b handed back at stage 4, harness ≈ 328k** (report on its branch; `fs131-w2` at `23c92109`, checked): five more leaves — `twoCircle_preimage_null`,
+    `falconer_lemma1` (Falconer's Lemma 1, measurable form), `CPColouring.exists_discrete_forcedSet`, `chromaticNumber_plane_le_chiM0` (N-EASY: χ(ℝ²) ≤ χ_m⁰(ℝ²),
+    no MR), `IsMaximalCover.enclosing_or_exterior` (FS111-M-COVER-SC's first clause, without `x ∈ closure P`) — 28 of 71; build 443/443, only `sorry` warnings;
+    items 56 and 57 applied. Open in `curvatureLeOne`: the equator configuration (contact at the exterior disc's equator) gives no supporting arc — routed to
+    the successor with the coordinator's labelled inference (the lower-test set may be empty there) and an instruction to message if the clause is false.
+    Re-pricing: two leaves priced hard came in moderate; about 40k tokens a leaf. 43 left. Successor FS131-I2c (`data/fs131/briefs/FS131-I2c-wave2.md`).
+59. **FS131-I3 stopped** (its background build finished green: `data/fs131/i3/build-stage1.log` on `fs131-w3`, 440/440, "build: OK"; no process in its worktree;
+    no commit since `8a850e85`). Successor FS131-I3b (`data/fs131/briefs/FS131-I3b-wave3.md`), 41 leaves. Both briefs gated PASS; launched together, beside the
+    day's Searcher. FS131-K4b (wave 4's second planner) follows when the Searcher's slot frees. Source: this commit.
