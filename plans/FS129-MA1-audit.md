@@ -386,3 +386,61 @@ could bound that field from above even if decided. Within lane A it is applied w
 
 **Tally:** of the seventeen, none bears where it was not applied (MA1-E9 registered 0.2); three are applied in lane R or the kernel lane under their
 sources (G18, G20, G22), and one is the shape of route M's NO under another name (G15).
+
+## Stage 5 — SAVED (the table of misses; mechanisms that are two; the registration, provisionally scored; what is left for FS129-MA2)
+
+### 5.1 Table of misses (pass 3 and the record job read this first)
+
+| mechanism | site | what it would have given | derived or not |
+|---|---|---|---|
+| row 66's repaint at every slack target (G13, G66), not only Γ₁₁ | FS129-OA1-NOLIN5 and FS129-OA1-FALC-11 (pass 1 applied the argument at 11 alone, scalar coefficients alone) | the linear-identity kill with vector coefficients and at 19 and at every field with a four-colourable residue target; the Falconer-fan kill at any target, at 19, and as a four-colour forced pair in any four-colourable field plane | **derived**: FS129-MA1-NOAFF5, FS129-MA1-FALC-T, FS129-MA1-FALC-19 (§ 3.1) |
+| G55's ideal argument (row 111) | FS-104 route (b)'s literal reading, carried open on `plans/STUB-cp-plane-six.md` l. 66 since FS-103 (listed, never worked) | the route empty at once | **derived by pass 1** (FS129-OA1-NOPERLAW); recorded here as the mechanism's miss |
+| G71's height / FS129-OA1-RINGWIND's winding | FS106-BIKE's GAP (C-T-BIKE: three colours on the bicycle by finitely many arcs) | an invariant for a three-colouring of two hexagon rings coupled by cross edges | **not derived** — the route it served (FS-107's R-S) is closed (row 133) |
+| row 1's two-circle theorem (G13) | FS106-BIKE | near miss: row 1 needs two concentric circles; the bicycle's are not | not derived |
+| row 66's `Separated ↔ Adj` | ASTRA-2026-09-14-T10's statement ("for any real `F ⊇ K`") | its hypothesis is empty over every `F ⊇ K` with a residue-𝔽₁₁ prime; the prose says so, the statement does not | **wording, for pass 3** |
+| G15's pigeonhole × kill | route M's NO (rows 135, 137; G83, G91) | the same shape under another name | a cross-reference for the record job; nothing to derive |
+
+No miss of the FS116-Y4 kind (a step worked for rounds that a held mechanism would have emptied) was found in the mechanisms reached.
+
+### 5.2 One grokking, two mechanisms; one mechanism, four grokkings (the brief's "say so")
+
+- **G71 is two mechanisms**: the lattice height (`Θ₃`, three-colourability of abelian Cayley graphs; lane A, row 79) and the height on a curve (row 132's
+  index of density traces, FS-110's ring winding, FS129-OA1-RINGWIND), which lane R uses and owns in practice. Pass 3's merge of RINGWIND with
+  FS110-Y3-GP/-N2-RING belongs with the second.
+- **G13 is two**: the coverage iff (`fan_iff_coverage`, `exists_fanGap_iff_not_coverAtLeast`; kernel, era-free) and the fan-ladder reading of Heule-510
+  (measured, lane A only).
+- **G54's last paragraph is a separate mechanism**: gap-free pullbacks in products (FS-67, rows 114–115), not tightness itself.
+- **Row 66 is one mechanism under four grokkings**: G13's slack face, G26's exclusion over 11-usable fields, G31's sealed half, G48's "no"; a record
+  job reading for "where else" should read row 66, not the four.
+
+### 5.3 The registration (§ 1.3), provisionally scored (FS129-Z1 scores)
+
+| id | registered | outcome |
+|---|---|---|
+| MA1-E1 mechanisms reached | 22 (12–35) | **23** (G13, G66 with row 66, G54, G71, G55, G56, the Falconer fan, and the seventeen); G26, G31, G75 read in support, not audited as mechanisms |
+| MA1-E2 bearing somewhere unapplied, beyond pass 1 | 6; P(≥ 3) = 0.6 | **3** — row 66's family (two compositions), G71 (one site, on a closed route), G55 (a listed miss already derived by pass 1) |
+| MA1-E3 compositions | 4 (1–8) | **3** |
+| MA1-E4 misses of the FS116-Y4 kind | 1.5; P(≥ 1) = 0.55 | **0** worked-for-rounds; one listed-not-worked (G55 on route (b)) |
+| MA1-E5 Falconer's lemmas differ materially | P = 0.15 | **no** — one difference changes FALC-RED's argument order, not its statement (stage 2) |
+| MA1-E6 the bearing on the answer changes | P = 0.06 | **no** — FS-104's routes (b) and (c) narrowed further; no route closed or opened |
+| MA1-E7 a held result found false | P = 0.03 | **no** |
+| MA1-E8 new cross-era sites | 1; P(≥ 1) = 0.45 | **0 new sites**; two deepenings of pass 1's (J12 by NOAFF5, J13 by FALC-T and FALC-19) |
+| MA1-E9 share of the seventeen bearing unapplied | 0.2 | **0 of 17** |
+
+The miss runs one way: I priced the unmentioned seventeen as the likeliest hiding place, and they were the least productive — most are finite-witness
+methods the project has retired (`CLAUDE.md` § Publication: a finite witness for six is out), and the rest are applied under their sources. The yield
+came from reading pass 1's own compositions at the class their arguments carry.
+
+### 5.4 What is left for FS129-MA2 (lane A's 47 mechanisms not audited here, in order of mentions in `data/fs129/index/grokking-uses.md`)
+
+G1 (17), G21 (15), G35 (11), G48 (10), G7 (9), G31 (8), G43 (8), G44 (8), G73 (7), G4 (6), G26 (6), G27 (6), G57 (6), G61 (6), G64 (6), G38 (5), G62 (5),
+G63 (5), G68 (5), G74 (5), G12 (4), G24 (4), G37 (4), G52 (4), G59 (4), G14 (3), G32 (3), G41 (3), G60 (3), G76 (3), G34 (2), G42 (2), G45 (2), G53 (2),
+G58 (2), G65 (2), G75 (2), G80 (2), G9 (1), G16 (1), G23 (1), G29 (1), G36 (1), G40 (1), G69 (1), G70 (1), G79 (1).
+
+**Notes for the successor.** (1) G26, G31, G48 are row 66's consumers (§ 5.2): read row 66's section here first and expect little new from them. (2) The
+lane-A roots in `data/fs129/index/roots.md` (FS89-S0B-C1, -S0B-T1, FS91-J01-1/-3/-2/-4, FS89-S0A-4, -D0-T1, FS91-J10-L1, FS89-PA-B1, -S0A-3, FS91-J01-6,
+FS66-L3) are G74's and G77's chains (the `Θ₄` layers and the torsion local–global theorem); weigh them when G74 comes up. (3) The method that paid
+here: take a held composition, read off what its argument actually uses, and restate it at that class (identity: "state the class the argument
+carries"); then list every target or field the record holds that meets the wider hypothesis. (4) A Searcher's request aimed at Falconer fans at five
+colours should carry FS129-MA1-FALC-T's three filters (`χ(H) ≥ 4`; tip ≡ apex at every residue-𝔽₁₁ or 𝔽₁₉ prime; apex–tip forced at four colours in any
+four-colourable field plane).
