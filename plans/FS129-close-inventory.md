@@ -329,3 +329,6 @@ One line per item with its source; no narration. Each line is ticked done or dec
     citation or re-derivation misses (the identity found three times; A3-HOLE answered without a link; the double tip stated narrowly); the
     bends shortening an FS-110 GAP, P = 0.45, no. Poros's card-2 hunch (0.5) met for the configuration, not for SEMI-PAR3. Prior art owed for
     DOUBLETIP.
+85. **Launched 2026-10-04 00:14 UTC**: FS129-SR1, pass 3, lane R (`general-purpose`, Opus; `data/fs129/briefs/FS129-SR1-pass3.md`, gated PASS, at
+    `86730055`), carrying items 13, 33–37, 55, 61–63, 70, 76, 77, 79, 81 and FS-116 items 136/145. Lane R's part of the Lean order is 195 of
+    its 197 results, so pass 3 lane R is planned as successive agents (SR2 from SR1's list). Running: FS129-MA2 and FS129-SR1, two of three.
