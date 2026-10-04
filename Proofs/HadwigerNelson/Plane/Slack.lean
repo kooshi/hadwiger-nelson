@@ -463,26 +463,338 @@ theorem add_e_mem_essSupport_faceFailClass (x : ℂ) (θ ε g ε' ρ : ℝ) {δ 
 
 /-! ### `face`: circles about the points near `y` meet the boxes -/
 
+/-- An open set met by the unit circle about `u` is met in a set of directions of positive measure. -/
+theorem arcLength_pos_of_isOpen {U : Set ℂ} (hU : IsOpen U) {u : ℂ} (h : ∃ φ : ℝ, u + e φ ∈ U) :
+    0 < arcLength {θ : ℝ | u + e θ ∈ U} := by
+  obtain ⟨φ, hφ⟩ := h
+  have hme : Continuous (fun θ : ℝ => u + e θ) := by unfold e; fun_prop
+  have hV : IsOpen {θ : ℝ | u + e θ ∈ U} := hU.preimage hme
+  have hper : ∀ θ, θ + 2 * Real.pi ∈ {θ : ℝ | u + e θ ∈ U} ↔ θ ∈ {θ : ℝ | u + e θ ∈ U} := by
+    intro θ; simp only [mem_setOf_eq, e_add_two_pi]
+  rw [arcLength_eq_window hV.measurableSet hper (φ - Real.pi)]
+  obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.1 hV φ hφ
+  set δ' := min δ Real.pi with hδ'
+  have hδ'0 : 0 < δ' := lt_min hδ Real.pi_pos
+  have hsub : Ioo (φ - δ') (φ + δ') ⊆ {θ : ℝ | u + e θ ∈ U} ∩ Ioc (φ - Real.pi) (φ - Real.pi + 2 * Real.pi) := by
+    intro θ hθ
+    have hd : dist θ φ < δ' := by rw [Real.dist_eq, abs_lt]; constructor <;> linarith [hθ.1, hθ.2]
+    refine ⟨hball (lt_of_lt_of_le hd (min_le_left _ _)), ?_, ?_⟩
+    · linarith [hθ.1, min_le_right δ Real.pi]
+    · linarith [hθ.2, min_le_right δ Real.pi]
+  refine lt_of_lt_of_le ?_ (measure_mono hsub)
+  rw [Real.volume_Ioo]; simp [hδ'0]
+
+theorem e_mul_e_neg (θ : ℝ) : e θ * e (-θ) = 1 := by
+  rw [← e_add, add_neg_cancel]; simp [e]
+
+/-- The image of an open set under the rigid motion `w ↦ x + e θ w` is open. -/
+theorem isOpen_rotImage (x : ℂ) (θ : ℝ) {W : Set ℂ} (hW : IsOpen W) : IsOpen {z : ℂ | ∃ w ∈ W, z = x + e θ * w} := by
+  have hc : Continuous (fun z : ℂ => (z - x) * e (-θ)) := by fun_prop
+  have : {z : ℂ | ∃ w ∈ W, z = x + e θ * w} = (fun z : ℂ => (z - x) * e (-θ)) ⁻¹' W := by
+    ext z
+    constructor
+    · rintro ⟨w, hw, rfl⟩
+      show (x + e θ * w - x) * e (-θ) ∈ W
+      have : (x + e θ * w - x) * e (-θ) = w := by
+        calc (x + e θ * w - x) * e (-θ) = (e θ * e (-θ)) * w := by ring
+          _ = w := by rw [e_mul_e_neg, one_mul]
+      rwa [this]
+    · intro h
+      refine ⟨(z - x) * e (-θ), h, ?_⟩
+      calc z = x + (z - x) * (e θ * e (-θ)) := by rw [e_mul_e_neg]; ring
+        _ = _ := by ring
+  rw [this]; exact hW.preimage hc
+
+/-- The point `x + e θ (−s + t i)` of the half-box frame. -/
+noncomputable def framePt (x : ℂ) (θ s t : ℝ) : ℂ := x + e θ * (-s + t * I)
+
+theorem convex_combo_mem {l a b lo hi : ℝ} (hl : l ∈ Icc (0 : ℝ) 1) (ha : lo ≤ a) (ha' : a ≤ hi) (hb : lo ≤ b)
+    (hb' : b ≤ hi) : lo ≤ (1 - l) * a + l * b ∧ (1 - l) * a + l * b ≤ hi := by
+  obtain ⟨h0, h1⟩ := hl
+  constructor <;> nlinarith [mul_nonneg (sub_nonneg.2 h1) (sub_nonneg.2 ha), mul_nonneg h0 (sub_nonneg.2 hb),
+    mul_nonneg (sub_nonneg.2 h1) (sub_nonneg.2 ha'), mul_nonneg h0 (sub_nonneg.2 hb')]
+
+/-- If a point of the open half-box is strictly inside and another strictly outside the unit circle about `y'`, the circle
+meets the half-box (intermediate value theorem along the segment). -/
+theorem exists_circle_point_halfBox {x : ℂ} {θ ε : ℝ} {y' : ℂ} {s₁ t₁ s₂ t₂ : ℝ}
+    (hs₁ : 0 < s₁) (hs₁' : s₁ < ε) (ht₁ : |t₁| < ε) (hs₂ : 0 < s₂) (hs₂' : s₂ < ε) (ht₂ : |t₂| < ε)
+    (hlt : dist (framePt x θ s₁ t₁) y' < 1) (hgt : 1 < dist (framePt x θ s₂ t₂) y') :
+    ∃ φ : ℝ, y' + e φ ∈ halfBox x θ ε := by
+  have hcont : ContinuousOn (fun l : ℝ => dist (framePt x θ ((1 - l) * s₁ + l * s₂) ((1 - l) * t₁ + l * t₂)) y')
+      (Icc 0 1) := by
+    refine Continuous.continuousOn ?_
+    unfold framePt; fun_prop
+  obtain ⟨l, hl, hl1⟩ := intermediate_value_Icc (zero_le_one' ℝ) hcont
+    (show (1 : ℝ) ∈ Icc _ _ from ⟨by simpa using hlt.le, by simpa using hgt.le⟩)
+  set s := (1 - l) * s₁ + l * s₂ with hs
+  set t := (1 - l) * t₁ + l * t₂ with ht
+  have hl1' : dist (framePt x θ s t) y' = 1 := hl1
+  have hz : framePt x θ s t - y' = e ((framePt x θ s t - y').arg) := by
+    have := eq_norm_mul_e_arg (framePt x θ s t - y')
+    rw [← dist_eq_norm, hl1'] at this
+    simpa using this
+  refine ⟨(framePt x θ s t - y').arg, ?_⟩
+  have : y' + e ((framePt x θ s t - y').arg) = framePt x θ s t := by rw [← hz]; ring
+  rw [this]
+  have hsb := convex_combo_mem (a := s₁) (b := s₂) (lo := min s₁ s₂) (hi := max s₁ s₂) hl (min_le_left _ _)
+    (le_max_left _ _) (min_le_right _ _) (le_max_right _ _)
+  have htb := convex_combo_mem (a := t₁) (b := t₂) (lo := -max |t₁| |t₂|) (hi := max |t₁| |t₂|) hl
+    (neg_le_of_abs_le (le_max_left _ _)) (le_of_abs_le (le_max_left _ _)) (neg_le_of_abs_le (le_max_right _ _))
+    (le_of_abs_le (le_max_right _ _))
+  refine ⟨s, t, ?_, ?_, ?_, rfl⟩
+  · exact lt_of_lt_of_le (lt_min hs₁ hs₂) hsb.1
+  · exact lt_of_le_of_lt hsb.2 (max_lt hs₁' hs₂')
+  · exact abs_le.2 ⟨htb.1, htb.2⟩ |>.trans_lt (max_lt ht₁ ht₂)
+
+theorem exists_frame_sides {a b ε : ℝ} (hε : 0 < ε) (hab : a ^ 2 + b ^ 2 = 1) (hne : ¬(a = 1 ∧ b = 0)) :
+    ∃ s₁ t₁ s₂ t₂ : ℝ, 0 < s₁ ∧ s₁ < ε ∧ |t₁| < ε ∧ 0 < s₂ ∧ s₂ < ε ∧ |t₂| < ε ∧
+      (s₁ + a) ^ 2 + (t₁ - b) ^ 2 < 1 ∧ 1 < (s₂ + a) ^ 2 + (t₂ - b) ^ 2 := by
+  by_cases hb : b = 0
+  · have ha : a = -1 := by
+      have h1 : (a - 1) * (a + 1) = 0 := by rw [hb] at hab; nlinarith
+      rcases mul_eq_zero.1 h1 with h | h
+      · exact absurd ⟨by linarith, hb⟩ hne
+      · linarith
+    set τ := min 1 (ε / 2) with hτ
+    have hτ0 : 0 < τ := lt_min one_pos (by positivity)
+    have hτ1 : τ ≤ 1 := min_le_left _ _
+    have hτε : τ ≤ ε / 2 := min_le_right _ _
+    refine ⟨τ, 0, τ ^ 2 / 2, τ, hτ0, by linarith, by simp [hε], by positivity, by nlinarith, ?_, ?_, ?_⟩
+    · rw [abs_of_pos hτ0]; linarith
+    · rw [ha, hb]; nlinarith
+    · rw [ha, hb]; nlinarith [pow_pos hτ0 4]
+  · have hβ : 0 < |b| := abs_pos.2 hb
+    set β := |b| with hβd
+    set σ := b / β with hσ
+    have hσ2 : σ ^ 2 = 1 := by
+      rw [hσ, div_pow, hβd, sq_abs]; field_simp
+    have hσb : σ * b = β := by
+      rw [hσ, hβd]; rcases lt_or_gt_of_ne hb with h | h
+      · rw [abs_of_neg h]; field_simp
+      · rw [abs_of_pos h]; field_simp
+    have hσabs : |σ| = 1 := by
+      have : |σ| ^ 2 = 1 := by rw [sq_abs]; exact hσ2
+      nlinarith [abs_nonneg σ]
+    set τ := min (min 1 (β / 4)) (ε / 2) with hτ
+    have hτ0 : 0 < τ := lt_min (lt_min one_pos (by positivity)) (by positivity)
+    have hτ1 : τ ≤ 1 := (min_le_left _ _).trans (min_le_left _ _)
+    have hτβ : τ ≤ β / 4 := (min_le_left _ _).trans (min_le_right _ _)
+    have hτε : τ ≤ ε / 2 := min_le_right _ _
+    have ha1 : a ^ 2 ≤ 1 := by nlinarith [sq_nonneg b]
+    have ha2 : -1 ≤ a ∧ a ≤ 1 := by constructor <;> nlinarith [sq_nonneg b]
+    refine ⟨τ ^ 2, σ * τ, τ ^ 2, -(σ * τ), by positivity, by nlinarith, ?_, by positivity, by nlinarith, ?_, ?_, ?_⟩
+    · rw [abs_mul, hσabs, abs_of_pos hτ0]; linarith
+    · rw [abs_neg, abs_mul, hσabs, abs_of_pos hτ0]; linarith
+    · have : (τ ^ 2 + a) ^ 2 + (σ * τ - b) ^ 2 = τ ^ 4 + 2 * τ ^ 2 * a + a ^ 2 + τ ^ 2 * σ ^ 2 - 2 * τ * (σ * b) + b ^ 2 := by ring
+      rw [this, hσ2, hσb]
+      have hτ2 : τ ^ 2 ≤ 1 := by nlinarith
+      have h4 : τ ^ 4 ≤ τ ^ 2 := by nlinarith [pow_pos hτ0 2]
+      nlinarith [mul_pos hτ0 hβ, mul_le_mul_of_nonneg_left hτβ hτ0.le]
+    · have : (τ ^ 2 + a) ^ 2 + (-(σ * τ) - b) ^ 2 = τ ^ 4 + 2 * τ ^ 2 * a + a ^ 2 + τ ^ 2 * σ ^ 2 + 2 * τ * (σ * b) + b ^ 2 := by ring
+      rw [this, hσ2, hσb]
+      nlinarith [mul_pos hτ0 hβ, mul_le_mul_of_nonneg_left hτβ hτ0.le, pow_pos hτ0 4]
+
+/-- A point `y` at distance `1` from `x`, read in the frame at `x`: `y = x + e θ (a + b i)`, `a² + b² = 1`. -/
+theorem frame_coords {x y : ℂ} (θ : ℝ) (hxy : dist x y = 1) :
+    ∃ a b : ℝ, y = x + e θ * (a + b * I) ∧ a ^ 2 + b ^ 2 = 1 := by
+  set w : ℂ := (y - x) * e (-θ) with hw
+  refine ⟨w.re, w.im, ?_, ?_⟩
+  · rw [Complex.re_add_im, hw]
+    calc y = x + (y - x) * (e θ * e (-θ)) := by rw [e_mul_e_neg]; ring
+      _ = _ := by ring
+  · have h1 : ‖w‖ = 1 := by
+      rw [hw, norm_mul, norm_e, mul_one, ← dist_eq_norm, dist_comm]; exact hxy
+    have := Complex.sq_norm w
+    rw [h1, Complex.normSq_apply] at this
+    nlinarith
+
+theorem exists_far_point {g ε' ρ u v : ℝ} (hg : 0 < g) (hg1 : g < 1) (hε' : 0 < ε') (hρ : 0 < ρ)
+    (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2) (hu0 : 0 ≤ u) (hug : u < g) (hvρ : |v| < ρ) (hne : ¬(u = 0 ∧ v = 0)) :
+    ∃ σ τ : ℝ, g < σ ∧ σ < g + ε' ∧ |τ| < ρ ∧ (σ - (1 + u)) ^ 2 + (τ - v) ^ 2 = 1 := by
+  set q : ℝ := ρ * |v| / (1 - g) with hq
+  have h1g : 0 < 1 - g := by linarith
+  have hq0 : 0 ≤ q := by positivity
+  have huq : 0 < u + q := by
+    rcases hu0.lt_or_eq with h | h
+    · linarith
+    · have hv : v ≠ 0 := fun hv => hne ⟨h.symm, hv⟩
+      have : 0 < |v| := abs_pos.2 hv
+      have : 0 < q := by positivity
+      linarith
+  set δ : ℝ := min (min (ε' / 2) ((1 - g) / 2)) ((u + q) / 2) with hδ
+  have hδ0 : 0 < δ := lt_min (lt_min (by positivity) (by linarith)) (by linarith)
+  have hδ1 : δ ≤ ε' / 2 := (min_le_left _ _).trans (min_le_left _ _)
+  have hδ2 : δ ≤ (1 - g) / 2 := (min_le_left _ _).trans (min_le_right _ _)
+  have hδ3 : δ ≤ (u + q) / 2 := min_le_right _ _
+  set h : ℝ := g + δ - u with hh
+  have hh0 : 0 < h := by linarith
+  have hh1 : h < 1 := by linarith
+  set κ : ℝ := Real.sqrt (2 * h - h ^ 2) with hκ
+  have hψ : 0 ≤ 2 * h - h ^ 2 := by nlinarith
+  have hκ2 : κ ^ 2 = 2 * h - h ^ 2 := Real.sq_sqrt hψ
+  have hκ0 : 0 ≤ κ := Real.sqrt_nonneg _
+  -- the key inequality `κ < ρ + |v|`
+  have hkey : 2 * h - h ^ 2 < (ρ + |v|) ^ 2 := by
+    have hw : 2 * h - h ^ 2 - (2 * g - g ^ 2) = (δ - u) * (2 - h - g) := by rw [hh]; ring
+    have h2hg : 0 < 2 - h - g := by linarith
+    by_cases hv : v = 0
+    · have hq' : q = 0 := by rw [hq, hv]; simp
+      have hu : 0 < u := lt_of_le_of_ne hu0 (fun h0 => hne ⟨h0.symm, hv⟩)
+      have : δ - u < 0 := by linarith
+      have : (δ - u) * (2 - h - g) < 0 := mul_neg_of_neg_of_pos this h2hg
+      rw [hv]; simp; nlinarith
+    · have hvpos : 0 < |v| := abs_pos.2 hv
+      by_cases hw0 : δ - u ≤ 0
+      · have : (δ - u) * (2 - h - g) ≤ 0 := mul_nonpos_of_nonpos_of_nonneg hw0 h2hg.le
+        nlinarith [sq_nonneg |v|, mul_pos hρ hvpos]
+      · push Not at hw0
+        have hwq : δ - u ≤ q / 2 := by linarith
+        have h2 : 2 - h - g ≤ 2 * (1 - g) := by linarith
+        have : (δ - u) * (2 - h - g) ≤ (q / 2) * (2 * (1 - g)) :=
+          mul_le_mul hwq h2 h2hg.le (by linarith)
+        have hq2 : q * (1 - g) = ρ * |v| := by rw [hq]; field_simp
+        nlinarith [sq_nonneg |v|, mul_pos hρ hvpos]
+  have hκlt : κ < ρ + |v| := by
+    by_contra hcon; push Not at hcon
+    nlinarith [mul_self_le_mul_self (by positivity) hcon]
+  have hvabs := abs_lt.1 hvρ
+  by_cases hv0 : 0 ≤ v
+  · refine ⟨g + δ, v - κ, by linarith, by linarith, ?_, ?_⟩
+    · rw [abs_lt]; rw [abs_of_nonneg hv0] at hκlt; constructor <;> linarith
+    · have : (g + δ - (1 + u)) ^ 2 = (h - 1) ^ 2 := by rw [hh]; ring
+      rw [this, show (v - κ - v) ^ 2 = κ ^ 2 by ring, hκ2]; ring
+  · push Not at hv0
+    refine ⟨g + δ, v + κ, by linarith, by linarith, ?_, ?_⟩
+    · rw [abs_lt]; rw [abs_of_neg hv0] at hκlt; constructor <;> linarith
+    · have : (g + δ - (1 + u)) ^ 2 = (h - 1) ^ 2 := by rw [hh]; ring
+      rw [this, show (v + κ - v) ^ 2 = κ ^ 2 by ring, hκ2]; ring
+
+theorem exists_phi_of_dist_eq_one {z y' : ℂ} (h : dist z y' = 1) : ∃ φ : ℝ, y' + e φ = z := by
+  have := eq_norm_mul_e_arg (z - y')
+  rw [← dist_eq_norm, h] at this
+  exact ⟨(z - y').arg, by rw [← one_mul (e _)]; simp at this; rw [← this]; ring⟩
+
+theorem norm_sq_re_im (a b : ℝ) : ‖(a : ℂ) + (b : ℂ) * I‖ ^ 2 = a ^ 2 + b ^ 2 := by
+  rw [Complex.sq_norm, Complex.normSq_apply]; simp; ring
+
+theorem dist_framePt_sq (x : ℂ) (θ s t a b : ℝ) :
+    dist (framePt x θ s t) (x + e θ * (a + b * I)) ^ 2 = (s + a) ^ 2 + (t - b) ^ 2 := by
+  have h : framePt x θ s t - (x + e θ * (a + b * I)) = e θ * ((((-(s + a)) : ℝ) : ℂ) + ((t - b : ℝ) : ℂ) * I) := by
+    unfold framePt; push_cast; ring
+  rw [dist_eq_norm, h, norm_mul, norm_e, one_mul, Complex.sq_norm, Complex.normSq_apply]
+  simp
+  ring
+
 /-- **The face key lemma** (I2b): an open `U` lying a.e. in a measurable `A`, a support point `y` of `A`, and every unit
 circle about the points of a ball about `y` (off a null set) meeting `U`, contradict null unit pairs (Tonelli: the pairs
 from `A ∩ B(y, r)` into `U ∩ A` have positive mass, each circle meeting the open `U` in a positive arc). -/
 theorem not_unitPairsNull_of_circles_meet {A U N : Set ℂ} (hA : MeasurableSet A) (hU : IsOpen U)
     (hUA : volume (U \ A) = 0) {y : ℂ} (hy : y ∈ essSupport A) {r : ℝ} (hr : 0 < r) (hN : volume N = 0)
     (hmeet : ∀ y' ∈ ball y r, y' ∉ N → ∃ φ : ℝ, y' + e φ ∈ U) : ¬ UnitPairsNull A := by
-  sorry
+  intro hnull
+  set S := A ∩ ball y r with hS
+  have hSm : MeasurableSet S := hA.inter measurableSet_ball
+  have hpos : 0 < volume S := hy r hr
+  have hz : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ S ∧ q.1 + e q.2 ∈ A} = 0 :=
+    measure_mono_null (fun q hq => (⟨hq.1.1, hq.2⟩ : q ∈ unitPairSet A)) hnull
+  rw [pairs_eq_lintegral hSm hA] at hz
+  have hme : Measurable (fun θ : ℝ => e θ) := by unfold e; fun_prop
+  have hUA' : MeasurableSet (U \ A) := hU.measurableSet.diff hA
+  have hnullS : (volume.prod arcLength) {q : ℂ × ℝ | q.1 + e q.2 ∈ U \ A} = 0 := volume_prod_shift_null hUA
+  have hmS : MeasurableSet {q : ℂ × ℝ | q.1 + e q.2 ∈ U \ A} :=
+    (measurable_fst.add (hme.comp measurable_snd)) hUA'
+  have hae1 : ∀ᵐ u ∂volume, arcLength {θ : ℝ | u + e θ ∈ U \ A} = 0 := by
+    have := (Measure.measure_prod_null hmS).1 hnullS
+    exact this
+  have hae2 : ∀ᵐ u ∂volume, u ∉ N := measure_eq_zero_iff_ae_notMem.1 hN
+  have hpos' : ∀ᵐ u ∂(volume.restrict S), 0 < phi A u := by
+    filter_upwards [ae_restrict_of_ae hae1, ae_restrict_of_ae hae2, ae_restrict_mem hSm] with u h1 h2 hu
+    obtain ⟨φ, hφ⟩ := hmeet u hu.2 h2
+    have h0 := arcLength_pos_of_isOpen hU ⟨φ, hφ⟩
+    refine lt_of_lt_of_le h0 ?_
+    calc arcLength {θ : ℝ | u + e θ ∈ U}
+        ≤ arcLength ({θ : ℝ | u + e θ ∈ A} ∪ {θ : ℝ | u + e θ ∈ U \ A}) := by
+          refine measure_mono fun θ hθ => ?_
+          by_cases h : u + e θ ∈ A
+          · exact Or.inl h
+          · exact Or.inr ⟨hθ, h⟩
+      _ ≤ arcLength {θ : ℝ | u + e θ ∈ A} + arcLength {θ : ℝ | u + e θ ∈ U \ A} := measure_union_le _ _
+      _ = phi A u := by rw [h1, add_zero]; rfl
+  have hne : volume.restrict S ≠ 0 := by
+    intro h
+    have := congrArg (fun μ => μ univ) h
+    simp only [Measure.restrict_apply_univ, Measure.coe_zero, Pi.zero_apply] at this
+    exact hpos.ne' this
+  haveI := ae_neBot.2 hne
+  have h0 := (lintegral_eq_zero_iff (measurable_phi hA)).1 hz
+  obtain ⟨u, hu1, hu2⟩ := (hpos'.and h0).exists
+  simp at hu2
+  exact hu1.ne' hu2
 
 theorem isOpen_halfBox (x : ℂ) (θ ε : ℝ) : IsOpen (halfBox x θ ε) := by
-  sorry
+  have hW : IsOpen {w : ℂ | 0 < -w.re ∧ -w.re < ε ∧ |w.im| < ε} := by
+    have h1 : IsOpen {w : ℂ | 0 < -w.re} := isOpen_lt continuous_const Complex.continuous_re.neg
+    have h2 : IsOpen {w : ℂ | -w.re < ε} := isOpen_lt Complex.continuous_re.neg continuous_const
+    have h3 : IsOpen {w : ℂ | |w.im| < ε} := isOpen_lt (continuous_abs.comp Complex.continuous_im) continuous_const
+    exact h1.inter (h2.inter h3)
+  have : halfBox x θ ε = {z : ℂ | ∃ w ∈ {w : ℂ | 0 < -w.re ∧ -w.re < ε ∧ |w.im| < ε}, z = x + e θ * w} := by
+    ext z
+    constructor
+    · rintro ⟨s, t, hs, hse, ht, rfl⟩
+      refine ⟨-s + t * I, ?_, rfl⟩
+      simp [hs, hse, ht]
+    · rintro ⟨w, ⟨h1, h2, h3⟩, rfl⟩
+      refine ⟨-w.re, w.im, h1, h2, h3, ?_⟩
+      congr 2
+      apply Complex.ext <;> simp
+  rw [this]; exact isOpen_rotImage x θ hW
 
 theorem isOpen_farBox (x : ℂ) (θ g ε' ρ : ℝ) : IsOpen (farBox x θ g ε' ρ) := by
-  sorry
+  have hW : IsOpen {w : ℂ | g < w.re ∧ w.re < g + ε' ∧ |w.im| < ρ} := by
+    have h1 : IsOpen {w : ℂ | g < w.re} := isOpen_lt continuous_const Complex.continuous_re
+    have h2 : IsOpen {w : ℂ | w.re < g + ε'} := isOpen_lt Complex.continuous_re continuous_const
+    have h3 : IsOpen {w : ℂ | |w.im| < ρ} := isOpen_lt (continuous_abs.comp Complex.continuous_im) continuous_const
+    exact h1.inter (h2.inter h3)
+  have : farBox x θ g ε' ρ = {z : ℂ | ∃ w ∈ {w : ℂ | g < w.re ∧ w.re < g + ε' ∧ |w.im| < ρ}, z = x + e θ * w} := by
+    ext z
+    constructor
+    · rintro ⟨s, t, hs, hse, ht, rfl⟩
+      refine ⟨s + t * I, ?_, rfl⟩
+      simp [hs, hse, ht]
+    · rintro ⟨w, ⟨h1, h2, h3⟩, rfl⟩
+      refine ⟨w.re, w.im, h1, h2, h3, ?_⟩
+      congr 2
+      apply Complex.ext <;> simp
+  rw [this]; exact isOpen_rotImage x θ hW
 
 /-- **The face geometry**, away from the normal: for `dist x y = 1`, `y ≠ x + e θ`, the unit circles about the points near
 `y` cross the face of the half-box into it (the circle about `y` passes through `x` with a tangent not along the face, or
 with its curvature towards the half-box when `y = x − e θ`). -/
 theorem circles_meet_halfBox {x y : ℂ} {θ ε : ℝ} (hε : 0 < ε) (hxy : dist x y = 1) (hy : y ≠ x + e θ) :
     ∃ r > (0 : ℝ), ∀ y' ∈ ball y r, ∃ φ : ℝ, y' + e φ ∈ halfBox x θ ε := by
-  sorry
+  obtain ⟨a, b, hyd, hab⟩ := frame_coords θ hxy
+  have hne : ¬(a = 1 ∧ b = 0) := by
+    rintro ⟨rfl, rfl⟩
+    apply hy; rw [hyd]; simp
+  obtain ⟨s₁, t₁, s₂, t₂, hs₁, hs₁', ht₁, hs₂, hs₂', ht₂, h1, h2⟩ := exists_frame_sides hε hab hne
+  have hd1 : dist (framePt x θ s₁ t₁) y < 1 := by
+    rw [hyd]
+    have := dist_framePt_sq x θ s₁ t₁ a b
+    by_contra hcon; push Not at hcon
+    nlinarith [dist_nonneg (x := framePt x θ s₁ t₁) (y := x + e θ * (a + b * I))]
+  have hd2 : 1 < dist (framePt x θ s₂ t₂) y := by
+    rw [hyd]
+    have := dist_framePt_sq x θ s₂ t₂ a b
+    by_contra hcon; push Not at hcon
+    nlinarith [dist_nonneg (x := framePt x θ s₂ t₂) (y := x + e θ * (a + b * I))]
+  refine ⟨min (1 - dist (framePt x θ s₁ t₁) y) (dist (framePt x θ s₂ t₂) y - 1), lt_min (by linarith) (by linarith), ?_⟩
+  intro y' hy'
+  rw [mem_ball] at hy'
+  have hr1 := lt_of_lt_of_le hy' (min_le_left _ _)
+  have hr2 := lt_of_lt_of_le hy' (min_le_right _ _)
+  refine exists_circle_point_halfBox hs₁ hs₁' ht₁ hs₂ hs₂' ht₂ ?_ ?_
+  · linarith [dist_triangle (framePt x θ s₁ t₁) y y', dist_comm y y']
+  · linarith [dist_triangle (framePt x θ s₂ t₂) y' y]
 
 /-- **The face geometry at the normal** (I2b's case split, item 37's regime): for `y = x + e θ`, circles about `y'` nearer
 than `1` along `e θ` meet the half-box, farther ones (and those at the same height off the normal) meet the far box by the
@@ -491,7 +803,50 @@ theorem circles_meet_boxes_at_normal {x : ℂ} {θ ε ε' g ρ : ℝ} (hε : 0 <
     (hρ : 0 < ρ) (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2) :
     ∃ r > (0 : ℝ), ∀ y' ∈ ball (x + e θ) r, y' ≠ x + e θ →
       ∃ φ : ℝ, y' + e φ ∈ halfBox x θ ε ∪ farBox x θ g ε' ρ := by
-  sorry
+  refine ⟨min (min ε g) ρ, lt_min (lt_min hε hg) hρ, ?_⟩
+  intro y' hy' hne
+  rw [mem_ball] at hy'
+  set w : ℂ := (y' - x) * e (-θ) with hw
+  have hyw : y' = x + e θ * w := by
+    calc y' = x + (y' - x) * (e θ * e (-θ)) := by rw [e_mul_e_neg]; ring
+      _ = _ := by rw [hw]; ring
+  set u : ℝ := w.re - 1 with hu
+  set v : ℝ := w.im with hv
+  have hwd : w = ((1 + u : ℝ) : ℂ) + (v : ℂ) * I := by
+    apply Complex.ext <;> simp [hu, hv]
+  have hdist : dist y' (x + e θ) = ‖w - 1‖ := by
+    rw [dist_eq_norm, hyw]
+    have : x + e θ * w - (x + e θ) = e θ * (w - 1) := by ring
+    rw [this, norm_mul, norm_e, one_mul]
+  have hu' : |u| ≤ ‖w - 1‖ := by
+    have := Complex.abs_re_le_norm (w - 1); simpa [hu] using this
+  have hv' : |v| ≤ ‖w - 1‖ := by
+    have := Complex.abs_im_le_norm (w - 1); simpa [hv] using this
+  have hr : ‖w - 1‖ < min (min ε g) ρ := by rw [← hdist]; exact hy'
+  have hrε := lt_of_lt_of_le hr ((min_le_left _ _).trans (min_le_left _ _))
+  have hrg := lt_of_lt_of_le hr ((min_le_left _ _).trans (min_le_right _ _))
+  have hrρ := lt_of_lt_of_le hr (min_le_right _ _)
+  rcases lt_or_ge u 0 with hu0 | hu0
+  · refine ⟨θ + Real.pi, Or.inl ⟨-u, v, by linarith [(abs_lt.1 (lt_of_le_of_lt hu' hrε)).1], by linarith [(abs_lt.1 (lt_of_le_of_lt hu' hrε)).1], ?_, ?_⟩⟩
+    · exact lt_of_le_of_lt hv' hrε
+    · rw [e_add_pi, hyw, hwd]; push_cast; ring
+  · have hnz : ¬(u = 0 ∧ v = 0) := by
+      rintro ⟨h1, h2⟩
+      apply hne
+      rw [hyw, hwd, h1, h2]; simp
+    obtain ⟨σ, τ, h1, h2, h3, h4⟩ := exists_far_point hg hg1 hε' hρ hsharp hu0
+      (lt_of_le_of_lt (le_abs_self u) (lt_of_le_of_lt hu' hrg)) (lt_of_le_of_lt hv' hrρ) hnz
+    set z : ℂ := x + e θ * ((σ : ℂ) + (τ : ℂ) * I) with hz
+    have hzd : dist z y' = 1 := by
+      rw [dist_eq_norm, hz, hyw, hwd]
+      have : x + e θ * ((σ : ℂ) + (τ : ℂ) * I) - (x + e θ * (((1 + u : ℝ) : ℂ) + (v : ℂ) * I)) =
+          e θ * ((((σ - (1 + u)) : ℝ) : ℂ) + ((τ - v : ℝ) : ℂ) * I) := by push_cast; ring
+      rw [this, norm_mul, norm_e, one_mul]
+      have hs := norm_sq_re_im (σ - (1 + u)) (τ - v)
+      rw [h4] at hs
+      exact (pow_eq_one_iff_of_nonneg (norm_nonneg _) two_ne_zero).1 (by simpa using hs)
+    obtain ⟨φ, hφ⟩ := exists_phi_of_dist_eq_one hzd
+    exact ⟨φ, Or.inr ⟨σ, τ, h1, h2, h3, by rw [hφ]⟩⟩
 
 
 /-- **FS111-V0-RESCALE**: if an a.e.-proper measurable `k`-colouring exists, a tight one exists. -/
@@ -801,7 +1156,17 @@ theorem face {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {x :
     (hε' : 0 < ε') (hg : 0 < g) (hg1 : g < 1) (hρ : 0 < ρ) (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2)
     (hhalf : volume (halfBox x θ ε \ A) = 0) (hfar : volume (farBox x θ g ε' ρ \ A) = 0) :
     ∀ y ∈ essSupport A, dist x y ≠ 1 := by
-  sorry
+  intro y hy hxy
+  by_cases hyn : y = x + e θ
+  · obtain ⟨r, hr, hm⟩ := circles_meet_boxes_at_normal hε hε' hg hg1 hρ hsharp
+    refine not_unitPairsNull_of_circles_meet hA ((isOpen_halfBox x θ ε).union (isOpen_farBox x θ g ε' ρ)) ?_ hy hr
+      (N := {y}) (measure_singleton y) ?_ hnull
+    · rw [union_sdiff_distrib]; exact measure_union_null hhalf hfar
+    · intro y' hy' hy'N
+      exact hm y' (hyn ▸ hy') (fun h => hy'N (by rw [hyn]; exact h))
+  · obtain ⟨r, hr, hm⟩ := circles_meet_halfBox hε hxy hyn
+    exact not_unitPairsNull_of_circles_meet hA (isOpen_halfBox x θ ε) hhalf hy hr (N := ∅) (by simp)
+      (fun y' hy' _ => hm y' hy') hnull
 
 /-- A set filling a half-box behind `x` almost everywhere has positive upper density at `x`. -/
 theorem upperDensityAt_pos_of_halfBox {A : Set ℂ} {x : ℂ} {θ ε : ℝ} (hε : 0 < ε)
