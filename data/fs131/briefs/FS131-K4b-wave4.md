@@ -110,3 +110,12 @@ wave-5 row, say so and stop that leaf: the table says wave 4 rests only on waves
   -DrelaxedAutoImplicit=false`) is for iteration only, never evidence that a module is green.
 - **Nothing with a `sorry` reaches `main`** (the opening plan § 7.5): your work stays on `fs131-w4` and lands with the wave, after its implementer's gate.
   Wave 3's statements may still gain children as its implementer works, but never change: build on them as committed.
+
+## Amendment 2026-10-04 (Keryx)
+
+Inventory item 69 rules FS112-C-DOUBLE out of wave 4 into wave 5, beside FS112-N2-TERM and FS112-C-ENDS, with FS112-Y3-END-NEEDS (corrected) as a wave-5
+supporting lemma. You are the disposition table's one writer for this change: in `tools/fs131_k1_make_dispositions.py`, set C-DOUBLE's wave to 5 and add
+FS112-N2-TERM to its extra upstream with item 69 as the reason; regenerate `data/fs131/k1/dispositions.csv`; run `tools/fs131_k1_dispositions.py` green; commit
+both on `main` from the main tree (a table file, no Lean). Your touches gain those two files, for that change only. Write C-DOUBLE's reading so far into your
+record for wave 5's planner. You still start no agents of your own (standing rule 1: delegation is one level deep, because Keryx can only review work it knows
+exists).

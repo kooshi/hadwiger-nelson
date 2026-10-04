@@ -395,3 +395,11 @@ reason by the close.*
 68. **Completeness, same shape as item 53** (K4b's F-A5): TS-T's Condition-5 clause rests on S–V Lemma 2 almost everywhere (not a backlog row); stated over its
     conclusion (at most three colours at every point), the class its argument reads. No backlog consumer reads the clause. Accepted. Generalization (G-L):
     lemma (L) needs no disjointness of the two colour classes.
+69. **Ruling — FS112-C-DOUBLE moves from wave 4 to wave 5** (K4b, message 2026-10-04): its proof is "a sketch over FS112-Y3-END-NEEDS's levels with n reversed and
+    FS112-N2-TERM" (`plans/FS112-derivation.md` line 237), and its (Q) conclusion is read in N2-TERM's terminal map `M*`; N2-TERM is a wave-5 row, and C-DOUBLE's
+    only consumer, FS112-C-ENDS, is in wave 5 too (checked by script). The table missed the edge C-DOUBLE → N2-TERM (an index defect of the kind item 158 of
+    FS-129's inventory names). **FS112-Y3-END-NEEDS (its corrected form) is formalized in wave 5 as a supporting lemma** beside C-DOUBLE, since C-DOUBLE as stated
+    needs its proof (the pattern of items 8 and 53); wave 5's planner settles whether C-DOUBLE's "terminal valid map" means N2-TERM's `M*` or wave 4's `Terminal`.
+    Alternative weighed: keep C-DOUBLE in wave 4 with Y3-END-NEEDS and N2-TERM's conclusion as named hypotheses. Why: N2-TERM is ours and lands in wave 5, so a
+    hypothesis there would only be discharged later; moving the row puts it beside what it reads. K4b is the table's one writer for this change (brief
+    amended). Confidence: high.
