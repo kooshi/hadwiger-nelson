@@ -314,3 +314,37 @@ frozen statements here (their proofs land from `fs131-w1`); wave 2 imports wave 
   (every wave-2 record the standard three; no purchase), `./scripts/vacuity.sh` and `--self-test` green with the counts reconciled
   (FALC-RES and HOSTS over a possibly empty domain read `GENERIC`/`UNKNOWN`, never `VACUITY DECLARED`), `tools/check_architecture.py`
   exit 0; then merge `main`, re-run, fast-forward.
+
+## Stage 6 — SAVED: the readback (FS131-K2b)
+
+*Job FS131-K2b, de Bruijn (Opus 5.5), launched 2026-10-04 to finish wave 2 from K2's stage 5 (brief
+`data/fs131/briefs/FS131-K2b-wave2-finish.md`, with `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building). Resuming per standing
+rule 2: `git log -- plans/FS131-w2-kernel-plan.md` shows K2's stages 1–5 saved at `69650050`, `6d6a87e6`, `856341a7`, `3620923c`; this job
+redoes none of them and numbers its own stages from 6.*
+
+### 6.1 The brief's quotation against its source (standing rule 3)
+
+| # | quotation (opening words) | source | result |
+|---|---|---|---|
+| 1 | "State FS111-M-R7, FS111-M2-DISC7, FS111-M3-BAND, FS111-M3-HC, FS111-M3-FIXCONV, FS111-M3-IRREG in `Plane/CoverExamples`, each object" | this record § 4.4, on `fs131-w2` at `3620923c` | exact (checked by script as a substring); the paragraph does end "Then run `debruijn-obligation-modeling` over the whole wave and re-price.", as the brief says |
+
+No mismatch.
+
+### 6.2 What this job owes (restated from the brief and the inventory)
+
+- **The six rows**, verbatim in `data/fs131/k2/rows-wave2.md` (main tree) at the headings `### 18. FS111-M-R7`, `### L17. FS111-M2-DISC7`,
+  `### L33. FS111-M3-BAND`, `### L34. FS111-M3-FIXCONV`, `### L35. FS111-M3-HC`, `### L36. FS111-M3-IRREG`, each identical to its block in
+  `plans/LEAN-BACKLOG.md`. None carries an erratum; DISC7, BAND, FIXCONV, HC and IRREG carry caution C118 (they left the order because no seed
+  rests on them). Their arguments: `plans/FS111-M-regularity.md` § 2.4 (R7), `plans/FS111-M2-regularity.md` § 1.6 (DISC7),
+  `plans/FS111-M3-finiteness.md` § 1.5 (BAND), §§ 1.6, 2.1–2.4 (HC), § 4.1–4.2 (IRREG, FIXCONV).
+- **The rulings in force** (`plans/FS131-close-inventory.md`): item 19 (FS111-M-COVER-SC's second clause in the viscosity curvature form, its
+  Lipschitz semiconcavity a corollary; R7's cusped downs the counterexample to the literal clause — state that failure on R7 if cheap); item 22
+  (`Row130M1`, `hR78`, `hR88`, `hR88per` named hypotheses from outside the backlog); item 23 (the question: does FS106-COMP's ⟸ read
+  FS106-SUP's attainment clause, which SUPK drops?).
+- **The obligation-modeling pass** over all 28 rows, re-pricing; **the handoff** brought to 28 rows.
+
+### 6.3 The worktree builds as K2 left it
+
+`/home/kooshi/source/lean-dir/scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree,
+2026-10-04: **OK** — all 1738 modules up to date, nothing built, 2 s (`build/gate/build/20261004T060508Z-1509443.log`); 76 distinct warnings,
+every one `declaration uses 'sorry'`: 28 wave 1's, 48 wave 2's (K2's count).
