@@ -101,3 +101,16 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 ./scripts/build.sh`; never `lake build`. Up to two builds from different worktrees may run at once when the slot admits them; four agents are building, so on exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never
 evidence; if you mirror oleans for iteration, use a scratch directory of your own (wave 4's `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w4/data/fs131/i4/iter.sh` reads it from the variable `S`). The worktree's
 `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`.
+
+
+## Amendment, 2026-10-04 — the planar job's fence, and one docstring (inventory item 274)
+
+A planner for the planar-infrastructure job now works on branch `fs131-w5p`, cut from `fs131-w5` at `0db34854`. The ruling, whose first line is:
+
+> 274. **Rulings on QA3's held items and the freed slot.** (a) **`InMK`**: restated when its first consumer is planned, not now (no theorem uses it; a definition
+> — source: plans/FS131-close-inventory.md
+
+So do not edit `IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph` or the three `cvb_*` leaves in `MapGraph`, nor `retArcs_nested`, `exists_endpoint`,
+`exists_eleventh` (`BaseWalk`) or `exists_unenclosed_or_bad` (`BaseDense`); add your children away from them. When you reach `l3_base`, rewrite
+`linkage_dot_ne_zero`'s docstring as the definitions audit drafted it (`plans/FS131-QA3-audit.md` § 2.4 d; docstring only). You start no agents of your own
+(standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

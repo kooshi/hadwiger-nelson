@@ -1999,3 +1999,26 @@ reason by the close.*
      `IsHoleOf`, item 242). Why: the stuck structure carries about nine of wave 5's leaves and is proved on wave 4 now, while the planar job's seven leaves feed
      only `cvb_*` and the eleventh-point chain; QA3's audit of wave 5's definitions found no new defect so far (item 268). Confidence: medium-high. In flight:
      1 (IM2) + 1 (QA3) + 1 (I4l) + 1 (I5c) = 4. The planar job takes the next slot.
+273. **FS131-QA3 done** (harness ≈ 255k; report `data/fs131/reports/FS131-QA3.md`, record `plans/FS131-QA3-audit.md`; commits `f0e41a11`, `efe68c61`, `a711e04c`,
+     `63ed8c0a`, `7abff9b9`, all present). 99 definitions (41 wave 5, 58 wave 4) and 31 clause families read against their sources, an adversarial instance tried
+     for each: **97 match; the other 2 were known and ruled** (`IsRetArc`, repaired, item 232; `IsHoleOf`, item 242). **Findings**: QA3-1, `exists_merge`'s
+     colour clause false (items 268–269, applied on `fs131-w4m` at `de8842c6`); QA3-2 (minor), `InMK` bounds arcs per unit disc where the source's 𝓜_K bounds
+     arcs per tile and tiles per unit disc, so `InMK` is 𝓜_K only up to `K ↦ O(K²)`, and no theorem uses it (the source's three bounds drafted in § 4.2 row 2).
+     Wave 5 has no new definition or clause defect; its recorded readings (R-CHAIN, R-CDOUBLE, R-MOD, G-BVHEX, G-BVND, N-BVL3, F-HEXCUSP) are harmless for their
+     consumers. Exact checks in scratch Lean against `fs131-w5`'s oleans (`data/fs131/qa3/QA3Checks.lean`; planted fault fired): `exists_endpoint`'s second `hc`
+     disjunct is dead; `HornBoundsQR`'s arcs start and end at the run vertex. Notes for later jobs (§ 2.4): phantom arcs make no statement false (`F.Clean` is
+     optional); `linkage_dot_ne_zero`'s docstring overstates its statement (`bv_l3`/`l3_base`'s implementer supplies the turning-point step); item 242's repair is
+     bound both ways (f). New tool: `tools/fs131_qa3_census.py` (4 controls, planted fault fired). Credit: QA3, for finding `exists_merge`'s defect before IM2
+     reached it.
+274. **Rulings on QA3's held items and the freed slot.** (a) **`InMK`**: restated when its first consumer is planned, not now (no theorem uses it; a definition
+     restated with no consumer has no reader to check it against). Correction owed, filed at the milestone's close if still unconsumed. Confidence: high.
+     (b) **`linkage_dot_ne_zero`'s docstring**: FS131-I5c fixes it when it reaches `l3_base` (docstring only; told by a brief amendment). (c) **`stuck_structure_ua`**:
+     already owed by I5c (item 272). (d) **QA3's slot → the planar-infrastructure planner, FS131-KP**, on a new branch `fs131-w5p` cut from `fs131-w5` at `0db34854`
+     (worktree created, `.lake/build` copied from the idle `fs131-w5b`). Choice: a planner first — the faithful `IsHoleOf` (item 242's design question, bound both
+     ways by QA3's note f), the shared planar lemma or lemmas Mathlib lacks, and a skeleton reducing the seven leaves to them, with a plan per leaf — then an
+     implementer. Alternative weighed: an implementer straight away (items 239, 242 named "the planar-infrastructure job" without saying which lane). Why: the job
+     opens with a definition's design and a choice of route through plane topology (a continuum's outer frontier, or a finite plane graph's outer face) that the
+     planners have not priced; planning and building in separate minds is the standing rule for exactly this. Fence for I5c: it does not edit `IsHoleOf`, `fill`,
+     `IsOuterTile`, `filledGraph`, the three `cvb_*` leaves in `MapGraph`, nor `retArcs_nested`, `exists_endpoint`, `exists_eleventh` (`BaseWalk`) or
+     `exists_unenclosed_or_bad` (`BaseDense`), so `fs131-w5p` merges back in disjoint hunks. Confidence: medium-high. In flight: 1 (IM2) + 1 (I4l) + 1 (I5c) + 1 (KP)
+     = 4.
