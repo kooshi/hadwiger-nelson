@@ -426,3 +426,94 @@ reading, recorded here as an entry so that the backlog formalizes the wider form
 None found. Every row this sweep reached whose class is known empty is already in SR1's § 5.1 lists or is a no-go in nonexistence form (FS116-S1-QF,
 FS114-N6-NOQ, FS114-N4-D, FS114-Y4-RSTOPALL, FS114-Y5-PINALL); the FS-112 statements over valid maps (FS112-DISC1 among them) are hypothetical by
 design, valid maps being the class whose emptiness is the map NO.
+
+## Stage 4 — SAVED: item 63, scoped and partly read; the additions to SR1's list for FS129-L1; expectations scored; hand-back
+
+### 4.1 Item 63 — the GAP lines of the Lean order, lane R beyond FS-110 (brief § Done means 2(b)) — partial
+
+`tools/fs129_sr2_gaps.py` keeps the lines of `data/fs129/index/open-steps.md` § 3 that open-steps.md places "after entry X" for X a lane-R row of the
+Lean order in FS-111's, FS-112's, FS-114's, FS-116's or FS-121's derivation file: **27 lines in 24 entries**, listed in `data/fs129/sr2/item63-gap-lines.md`.
+Read against what this pass holds (each line's full text in its file), sorted:
+
+| class | lines (row, id) |
+|---|---|
+| **answered elsewhere, no link back** | **43 FS111-W-NOREP** (l. 488: "the same for general saturated colourings (GAP: (H2) at the partners is not among C11's hypotheses there)"): answered for honest saturated colourings satisfying REG-J′ by **FS121-DB1-L3** (at every point of Σ no colour occupies two sectors of positive angle, whatever cusps); what is left is saturated colourings that are not honest or not REG-J′. A correction for FS129-Z1: NOREP's not-claimed line points to L3 |
+| answered in place (the entry or its errata already link the answer) | 55 FS112-BEND (closed by FS112-N2-BENDS); 53 FS112-ISO (N112-RED's GAP, closed by FS112-N2-RED); 94 FS114-N5-GRING (N5-RV's GAP, FALSE by NB5-RVKILL); 124 FS116-N3-CROSS (V5's blind GAP, its stall closed); 58 FS112-N2-RAY and 74 FS112-N2-TERM (the stuck ray and one-sided chains: bypassed for the NO by FS114-CV-EXISTS, "no ray step", erratum item 4 of `plans/FS112-derivation.md`; open only for GS-4's density form, FS-115) |
+| open, the frontier's own (a scope marker naming an open stub) | 97 FS114-N6-NOQ, 99 FS114-N7-QOPP, 102 FS114-N7-3T (×2), 125 FS116-RING-Q-PRIME, 126 -RING-Q-PRIME-S, 128 -RING-TRANSFER-C, 155 -RING-TRANSFER-QC: (Q) rings, RING-Q, RING-TRANSFER-Q and SEMI-PAR3 — FS-124's; 98 FS114-Y5-PINALL (×2): E1, E2 — FS114-Y6-E1CAP, -Y6-E2RED's residues, item 81 lead 1; 85 FS114-N2-ENDS: route T's GAP-μ and Siamese maps — FS-117 |
+| **not read here, for FS129-SR3** | 28 FS111-M-PINCH (ll. 442, 447: the same without (H1) or (H2); VMW's stage-1 GAP at cusp partners); 31 FS111-M2-INT (l. 853: the same for the interior of a support — to read against FS111-M3-IRREG's pinch points, which may refute it); 65 FS112-SIX (l. 49: de Grey's covering step); 63 FS112-N3-PAIRS (l. 165); 67 FS114-BV-HEX (l. 968: row 134's Lemma 4 at cusps, not landed); 95 FS114-Y3-RSTOP (l. 607: Y3-D2 without reading R-T); 138 FS116-S1-KAPPA (l. 816); 188 FS121-D1-VT (l. 263: reading (B) — to read against FS121-V2-VT-W, SR1's stronger form) |
+
+control: fs129-sr2-gaps
+  of: § 4.1 — open-steps.md § 3 holds 27 GAP lines inside Lean-order lane-R entries beyond FS-110, in 24 entries
+  run: cd .. && python3 tools/fs129_sr2_gaps.py
+  expect: GAP lines in Lean-order lane-R entries: 27 in 24 entries
+  fault: cd .. && python3 tools/fs129_sr2_gaps.py --fault
+
+### 4.2 Items (c), (d), (e) — not reached
+
+Not worked by this agent, and left whole for FS129-SR3 as SR1's § 4.2 states them: **(c)** item 81's three leads — G83's straddle against FS114-K1's
+(Q)-ring residues (FS114-Y6-E2RED's survivor S6, the wrap, the Reuleaux `(2, 1, 1, 0)` past `√3`; FS129-SR1-TWOCIRC first, S1 having died to PXKILL);
+V6-ADJ at adjacent change points whose outer pairs are off (Q); the coupling of two circles' windings for FS106-BIKE (FS129-SR1-RINGBAND sharpens the
+one-circle input); **(d)** a wider V6-ADJ, DOUBLETIP's analogue (the same as (c)'s second lead; RING-GERM (ii) at both points and V6-ADJ's pinning of the
+outer tiles to the lens arcs, TWOCIRC for the mirror apex); **(e)** group 5's stall — an O1-OUT analogue for valid maps (FS121-D2-SYM's window
+hypothesis moved to FS112-N3-PER). One input for (e) this pass did read: FS121-DB1-L7 (INTRAD's outward step, REG-J′ not used) is the saturated-colouring
+continuation property; a valid map has no saturation, so its analogue must come from the map's own stuck chains (FS112-N2-RAY's pencil), not from L7.
+
+### 4.3 Additions to SR1's list for FS129-L1 (the Lean backlog's input; brief § Done means 5)
+
+Read with `plans/FS129-SR1-audit.md` § 6.2, which stands; numbering continues it.
+
+**Formalize X in place of A, B, C:**
+
+9. **FS129-SR2-CLOSURE** (as FS111-M2-INT's corollary for open sets, or by V0-CLOSE's translation argument) in place of **FS106-DIAM (iii)**,
+   **FS111-V0-CLOSE** and **FS116-V5-NE1's first clause**; and **FS106-DIAM (i)** (a connected set with no unit pair has diameter at most 1) once, in
+   place of the connectedness step inside FS116-V5-NE1's "in particular", FS106-TS-C, FS116-V4-DICHOTOMY's "A ~ A" and FS111-V0-CLEAN's diameter step.
+10. **FS129-SR2-HULLSET** in place of **FS111-C-HULL** (one measurable set with null unit pairs; no colouring, tightness or normal form). FS111-M-HULL2 over
+    it; FS116-V4-DICHOTOMY's first clause is HULL2's case for two open tiles.
+11. **FS129-SR2-SUPK** (every `k`) in place of **FS106-SUP** (six); FS106-EQ's (c) ⟺ (d) as its corollary at the value 1, and **FS106-COMP's first
+    clause** as FS106-EQ's (c) ⟹ (a), stated at every `k`.
+12. **FS106-TS-T** in place of **FS112-DISC1** (FS129-SR2-DISC1TS).
+13. **FS112-N2-BENDS** (or SR1's BENDANY) in place of **FS112-BEND**; **FS112-N2-TERM** in place of **FS112-N2-RED** (RED's procedure as TERM's lemma).
+14. **FS114-L60-LE** in place of **FS112-L60**.
+15. **FS114-N2-ENDS** in place of **FS114-N3-JOINT's first clause** (one identity: `Σ n = 2N`).
+16. **FS114-Y4-RSTOPALL** in place of **FS114-N4-D** and **FS114-N3-DR** (both cases; N4-D a second route). FS114-Y3-RSTOP stays separate (Siamese
+    pairs allowed).
+17. **FS111-M-COVER-SC's semiconcavity** (every maximal cover) in place of **FS111-M2-HULLC's semiconcave clause** (regular classes).
+18. **FS106-EQ's (c) ⟹ (a) at every `k`** once (the weak-* step), and **FS116-O1-YESLIM** as its corollary by Lemma P (FS129-SR2-YESLIM-EQ), in
+    place of YESLIM's own weak-* argument.
+19. **FS129-OR1-QFREE** in place of **FS116-S1-QF** (FS129-SR2-QFCASE); S1-QF's route (S1-LENS, S1-EXIT, S1-CLUSTER) is then a second route.
+20. **FS129-SR2-TOUCHW** in place of **FS116-N1-TOUCH** (its idle hypothesis dropped).
+21. **FS116-RING-Q-PRIME-S** in place of **FS116-RING-Q-PRIME**; **FS116-N1-TWIST-D** in place of **FS116-RING-TWIST-C's first clause** and of
+    **FS116-V5-RING's first two clauses**.
+22. **FS121-DB1-L3** in place of **FS111-W-NOREP**.
+
+**Do not formalize as stated:**
+- **FS112-L60** (FALSE at exactly 60°; its erratum), **FS112-BUDGET2** (FALSE as stated), **FS111-C-HULL-SO** (refuted) — the last two are in the order
+  only through false edges.
+- Quote **FS112-C-ENDS** in its erratum's form (residue deleted), and **FS112-C-DOUBLE**, **FS112-N3-BASE**, **FS114-N2-ENDS**, **FS114-N3-JOINT**,
+  **FS114-N7-3T** with the errata under them (§ 2.4): the backlog quotes entries by script and the index carries no erratum.
+- No result this pass reached is empty beyond SR1's fifteen (§ 3.3).
+
+**Index corrections the order needs** (§ 2.3): drop the 19 false and reversed edges of § 2.3 with SR1's 14; mark § 2.3's 3 route edges with SR1's 6.
+Then lane-R cycles go from 11 to 2, and the Lean order from 197 rows to 171 (160 if it follows first routes); `tools/fs129_sr2_cycles.py -v` lists the
+rows that leave. Among them are FS106-EQ, -COMP, -REM and FS111-V0-CLEAN, -C1-PW: results that no seed rests on, not results without value — the
+backlog session decides whether to keep them.
+
+### 4.4 Registered expectations, scored
+
+| registered (stage 1) | outcome |
+|---|---|
+| merges in the 151 rows: 8 (3–15) | **18** (one statement, a case, or a stronger form held): DIAM (iii)/V0-CLOSE/V5-NE1 (CLOSURE); DIAM (ii) in TS-C; COMP (i) in EQ; DISC1 in TS-T; BEND in N2-BENDS; RED in TERM; L60 by L60-LE; JOINT in N2-ENDS; N4-D and N3-DR in RSTOPALL; YESLIM in EQ; S1-QF in QFREE; Q-PRIME in Q-PRIME-S; TWIST-C (i) and V5-RING (i)–(ii) in TWIST-D; NOREP in DB1-L3; N3-PAIR in V5-DICHO's setting; V5-TIPSET/V6-HUBS — above the range |
+| hypotheses weakened, derived: 2 (0–5) | **4** (HULLSET, SUPK, TOUCHW; and COVER-SC's semiconcavity standing without HULLC's regularity, a line) |
+| results the vacuity lists missed: 2 (0–6) | **0** |
+| records that disagree: 3 (1–8) | **6**: COVER-SC's "superseded by HULLC"; EQ (every `k`) resting on SUP (six); RSTOP "a member of RSTOPALL" (Siamese allowed); OR1 § J3's non-simple remainder for S1-QF (empty); NOREP's GAP answered by DB1-L3 with no link; the index quoting L60 and C-ENDS without their errata |
+| item 63: GAP lines answered or shortened elsewhere: 4 (1–10) | **1** answered with no link back (NOREP by DB1-L3), 6 answered in place, 11 open (the frontier's own); 8 lines not read (partial) |
+| item 81 lead 1, P = 0.30 | not reached — unscored |
+| item 81 lead 2 / (d), P = 0.45 | not reached — unscored |
+| item 81 lead 3, P = 0.10 | not reached — unscored |
+| (e), P = 0.15 derived, 0.15 refuted | not reached — unscored |
+| a held result found false, P = 0.12 | **no** (FS112-L60 and BUDGET2 were already filed false) |
+| reach the end of the sweep, P = 0.55 | **yes** |
+
+Brier on the two scored binary predictions (false result 0.12 → 0; sweep finished 0.55 → 1): (0.0144 + 0.2025) / 2 = **0.108**. The merge count missed
+high by a factor of two: most of the extra merges are the same lemma proved in two eras' vocabularies (density sets against open tiles; maps against
+fragments), which no pass before this one compared row by row.
