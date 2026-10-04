@@ -242,15 +242,167 @@ theorem sevenBrickArcs_nondegenerate : ∀ a ∈ sevenBrickArcs, a.Nondegenerate
     have := congrArg Complex.im h
     simp [brickCorner] at this
 
+/-- The real part of the cell corner. -/
+theorem brickCorner_re (c r : ℤ) : (brickCorner c r).re = 2 / 5 * r + 4 / 5 * c := by
+  simp [brickCorner]
+
+/-- The imaginary part of the cell corner. -/
+theorem brickCorner_im (c r : ℤ) : (brickCorner c r).im = 3 / 5 * r := by
+  simp [brickCorner]
+
+/-- The floor is locally constant at a non-integer. -/
+theorem eventually_floor_eq {t : ℝ} (ht : ∀ n : ℤ, t ≠ n) : ∀ᶠ u in 𝓝 t, ⌊u⌋ = ⌊t⌋ := by
+  have h1 : (⌊t⌋ : ℝ) < t := lt_of_le_of_ne (Int.floor_le t) (Ne.symm (ht _))
+  have h2 : t < ⌊t⌋ + 1 := Int.lt_floor_add_one t
+  filter_upwards [Ioo_mem_nhds h1 h2] with u hu
+  rw [Int.floor_eq_iff]; exact ⟨hu.1.le, hu.2⟩
+
+/-- The brick height as a real number. -/
+theorem sevenBrick_h : ((sevenBrick.h : ℚ) : ℝ) = 3 / 5 := by
+  simp [sevenBrick, cosetBrick]
+
+/-- The brick width as a real number. -/
+theorem sevenBrick_w : ((sevenBrick.w : ℚ) : ℝ) = 4 / 5 := by
+  simp [sevenBrick, cosetBrick]
+
+/-- The brick shear as a real number. -/
+theorem sevenBrick_s : ((sevenBrick.s : ℚ) : ℝ) = 2 / 5 := by
+  simp [sevenBrick, cosetBrick]
+
 /-- Finitely many cell edges meet a neighbourhood of each point. -/
 theorem sevenBrickArcs_locallyFinite : ∀ x ∈ (univ : Set ℂ), ∃ t ∈ 𝓝 x,
     {a | a ∈ sevenBrickArcs ∧ (a.carrier ∩ t).Nonempty}.Finite := by
-  sorry
+  intro x _
+  refine ⟨ball x 1, ball_mem_nhds x one_pos, ?_⟩
+  obtain ⟨B, hB⟩ := exists_nat_gt (|x.im| * 5 / 3 + 3)
+  obtain ⟨C, hC⟩ := exists_nat_gt (|x.re| * 5 / 4 + 2 * B + 5)
+  let box : Set (ℤ × ℤ) := Icc (-(C : ℤ), -(B : ℤ)) ((C : ℤ), (B : ℤ))
+  have hbox : box.Finite := Set.finite_Icc _ _
+  let f : ℤ × ℤ × Bool → Arc := fun q =>
+    if q.2.2 then Arc.seg (brickCorner q.1 q.2.1) (brickCorner (q.1 + 1) q.2.1)
+    else Arc.seg (brickCorner q.1 q.2.1) (brickCorner q.1 q.2.1 + ((3 / 5 : ℝ) : ℂ) * I)
+  have hfin : (((fun q : ℤ × ℤ => (q.1, q.2, true)) '' box) ∪ ((fun q : ℤ × ℤ => (q.1, q.2, false)) '' box)).Finite :=
+    (hbox.image _).union (hbox.image _)
+  refine (hfin.image f).subset ?_
+  rintro a ⟨ha, p, hpa, hpx⟩
+  rw [mem_ball] at hpx
+  have hpx' : |p.re - x.re| < 1 ∧ |p.im - x.im| < 1 := by
+    have h1 := Complex.abs_re_le_norm (p - x)
+    have h2 := Complex.abs_im_le_norm (p - x)
+    rw [← dist_eq_norm] at h1 h2
+    exact ⟨by simpa using h1.trans_lt hpx, by simpa using h2.trans_lt hpx⟩
+  simp only [sevenBrickArcs, mem_iUnion, mem_insert_iff, mem_singleton_iff] at ha
+  obtain ⟨c, r, rfl | rfl⟩ := ha
+  · -- bottom edge
+    obtain ⟨s, hs, hp⟩ : ∃ s ∈ Icc (0 : ℝ) 1, p = brickCorner c r + (s : ℂ) * (brickCorner (c + 1) r - brickCorner c r) := by
+      rw [Arc.carrier, segment_eq_image'] at hpa
+      obtain ⟨s, hs, hsp⟩ := hpa
+      exact ⟨s, hs, by rw [← hsp]; simp [Complex.real_smul]⟩
+    have him : p.im = 3 / 5 * r := by
+      rw [hp]; simp [brickCorner]
+    have hre : p.re = 2 / 5 * r + 4 / 5 * c + s * (4 / 5) := by
+      rw [hp, Complex.add_re, Complex.re_ofReal_mul, Complex.sub_re, brickCorner_re, brickCorner_re]
+      push_cast; ring
+    have hs0 := hs.1; have hs1 := hs.2
+    obtain ⟨hx1, hx2⟩ := abs_lt.mp hpx'.1
+    obtain ⟨hy1, hy2⟩ := abs_lt.mp hpx'.2
+    have hxa := neg_abs_le x.re; have hxb := le_abs_self x.re
+    have hya := neg_abs_le x.im; have hyb := le_abs_self x.im
+    have hr1 : (r : ℝ) < B := by rw [him] at hy2; linarith
+    have hr2 : -(B : ℝ) < r := by rw [him] at hy1; linarith
+    have hc1 : (c : ℝ) < C := by rw [hre] at hx2; linarith
+    have hc2 : -(C : ℝ) < c := by rw [hre] at hx1; linarith
+    have hrB : r ∈ Icc (-(B : ℤ)) B := ⟨by exact_mod_cast hr2.le, by exact_mod_cast hr1.le⟩
+    have hcC : c ∈ Icc (-(C : ℤ)) C := ⟨by exact_mod_cast hc2.le, by exact_mod_cast hc1.le⟩
+    refine ⟨(c, r, true), Or.inl ⟨(c, r), ⟨⟨hcC.1, hrB.1⟩, ⟨hcC.2, hrB.2⟩⟩, rfl⟩, ?_⟩
+    simp [f]
+  · -- left edge
+    obtain ⟨s, hs, hp⟩ : ∃ s ∈ Icc (0 : ℝ) 1, p = brickCorner c r + (s : ℂ) * (((3 / 5 : ℝ) : ℂ) * I) := by
+      rw [Arc.carrier, segment_eq_image'] at hpa
+      obtain ⟨s, hs, hsp⟩ := hpa
+      exact ⟨s, hs, by rw [← hsp]; simp [Complex.real_smul]⟩
+    have him : p.im = 3 / 5 * r + s * (3 / 5) := by
+      rw [hp, Complex.add_im, brickCorner_im]
+      simp
+    have hre : p.re = 2 / 5 * r + 4 / 5 * c := by
+      rw [hp, Complex.add_re, brickCorner_re]
+      simp
+    have hs0 := hs.1; have hs1 := hs.2
+    obtain ⟨hx1, hx2⟩ := abs_lt.mp hpx'.1
+    obtain ⟨hy1, hy2⟩ := abs_lt.mp hpx'.2
+    have hxa := neg_abs_le x.re; have hxb := le_abs_self x.re
+    have hya := neg_abs_le x.im; have hyb := le_abs_self x.im
+    have hr1 : (r : ℝ) < B := by rw [him] at hy2; linarith
+    have hr2 : -(B : ℝ) < r := by rw [him] at hy1; linarith
+    have hc1 : (c : ℝ) < C := by rw [hre] at hx2; linarith
+    have hc2 : -(C : ℝ) < c := by rw [hre] at hx1; linarith
+    have hrB : r ∈ Icc (-(B : ℤ)) B := ⟨by exact_mod_cast hr2.le, by exact_mod_cast hr1.le⟩
+    have hcC : c ∈ Icc (-(C : ℤ)) C := ⟨by exact_mod_cast hc2.le, by exact_mod_cast hc1.le⟩
+    refine ⟨(c, r, false), Or.inr ⟨(c, r), ⟨⟨hcC.1, hrB.1⟩, ⟨hcC.2, hrB.2⟩⟩, rfl⟩, ?_⟩
+    simp [f]
 
 /-- The brick colour is locally constant off the cell edges. -/
 theorem sevenBrick_color_locallyConstant : ∀ x ∈ (univ : Set ℂ), x ∉ ⋃ a ∈ sevenBrickArcs, a.carrier →
     ∀ᶠ y in 𝓝 x, sevenBrick.color y = sevenBrick.color x := by
-  sorry
+  intro x _ hx
+  have hrow : ∀ n : ℤ, x.im / (3 / 5 : ℝ) ≠ n := by
+    intro n hn
+    have him : x.im = 3 / 5 * n := by field_simp at hn; linarith
+    set c : ℤ := ⌊(x.re - 2 / 5 * n) / (4 / 5)⌋ with hc
+    have h0 : (c : ℝ) ≤ (x.re - 2 / 5 * n) / (4 / 5) := Int.floor_le _
+    have h1 : (x.re - 2 / 5 * n) / (4 / 5) < c + 1 := Int.lt_floor_add_one _
+    refine hx (mem_iUnion₂.mpr ⟨Arc.seg (brickCorner c n) (brickCorner (c + 1) n), ?_, ?_⟩)
+    · simp only [sevenBrickArcs, mem_iUnion, mem_insert_iff, mem_singleton_iff]
+      exact ⟨c, n, Or.inl rfl⟩
+    · rw [Arc.carrier, segment_eq_image']
+      refine ⟨(x.re - 2 / 5 * n - 4 / 5 * c) / (4 / 5), ⟨?_, ?_⟩, ?_⟩
+      · rw [le_div_iff₀ (by norm_num)]; rw [div_lt_iff₀ (by norm_num)] at h1; rw [le_div_iff₀ (by norm_num)] at h0; linarith
+      · rw [div_le_one (by norm_num)]; rw [div_lt_iff₀ (by norm_num)] at h1; linarith
+      · apply Complex.ext
+        · simp only [Complex.add_re, Complex.smul_re, Complex.sub_re, smul_eq_mul, brickCorner_re]
+          push_cast; field_simp; ring
+        · simp only [Complex.add_im, Complex.smul_im, Complex.sub_im, smul_eq_mul, brickCorner_im]
+          rw [him]; ring
+  have hrowE : ∀ᶠ y in 𝓝 x, sevenBrick.row y = sevenBrick.row x := by
+    have hcont : Tendsto (fun y : ℂ => y.im / (3 / 5 : ℝ)) (𝓝 x) (𝓝 (x.im / (3 / 5 : ℝ))) :=
+      ((Complex.continuous_im.div_const _).tendsto x)
+    filter_upwards [hcont.eventually (eventually_floor_eq hrow)] with y hy
+    unfold Brick.row; rw [sevenBrick_h]; exact hy
+  set r := sevenBrick.row x with hr
+  have hrr : (r : ℝ) < x.im / (3 / 5) ∧ x.im / (3 / 5) < r + 1 := by
+    have h1 : (r : ℝ) ≤ x.im / (3 / 5) := by rw [hr]; unfold Brick.row; rw [sevenBrick_h]; exact Int.floor_le _
+    have h2 : x.im / (3 / 5) < r + 1 := by rw [hr]; unfold Brick.row; rw [sevenBrick_h]; exact Int.lt_floor_add_one _
+    exact ⟨lt_of_le_of_ne h1 (fun h => hrow r h.symm), h2⟩
+  have hcol : ∀ n : ℤ, (x.re - 2 / 5 * r) / (4 / 5) ≠ n := by
+    intro n hn
+    have hre : x.re = 2 / 5 * r + 4 / 5 * n := by field_simp at hn; linarith
+    obtain ⟨hr1, hr2⟩ := hrr
+    rw [lt_div_iff₀ (by norm_num)] at hr1; rw [div_lt_iff₀ (by norm_num)] at hr2
+    refine hx (mem_iUnion₂.mpr ⟨Arc.seg (brickCorner n r) (brickCorner n r + ((3 / 5 : ℝ) : ℂ) * I), ?_, ?_⟩)
+    · simp only [sevenBrickArcs, mem_iUnion, mem_insert_iff, mem_singleton_iff]
+      exact ⟨n, r, Or.inr rfl⟩
+    · rw [Arc.carrier, segment_eq_image']
+      refine ⟨(x.im - 3 / 5 * r) / (3 / 5), ⟨?_, ?_⟩, ?_⟩
+      · exact div_nonneg (by linarith) (by norm_num)
+      · rw [div_le_one (by norm_num)]; linarith
+      · apply Complex.ext
+        · simp only [Complex.add_re, Complex.sub_re, Complex.smul_re, smul_eq_mul, brickCorner_re, Complex.mul_re, Complex.ofReal_re,
+            Complex.ofReal_im, Complex.I_re, Complex.I_im]
+          rw [hre]; ring
+        · simp only [Complex.add_im, Complex.sub_im, Complex.smul_im, smul_eq_mul, brickCorner_im, Complex.mul_im, Complex.ofReal_re,
+            Complex.ofReal_im, Complex.I_re, Complex.I_im]
+          field_simp; ring
+  have hcolE : ∀ᶠ y in 𝓝 x, ⌊(y.re - 2 / 5 * (r : ℝ)) / (4 / 5)⌋ = ⌊(x.re - 2 / 5 * (r : ℝ)) / (4 / 5)⌋ := by
+    have hcont : Tendsto (fun y : ℂ => (y.re - 2 / 5 * (r : ℝ)) / (4 / 5)) (𝓝 x) (𝓝 ((x.re - 2 / 5 * (r : ℝ)) / (4 / 5))) :=
+      (((Complex.continuous_re.sub continuous_const).div_const _).tendsto x)
+    exact hcont.eventually (eventually_floor_eq hcol)
+  filter_upwards [hrowE, hcolE] with y hy1 hy2
+  have hcy : sevenBrick.col y = sevenBrick.col x := by
+    unfold Brick.col
+    rw [hy1, sevenBrick_s, sevenBrick_w]
+    exact hy2
+  unfold Brick.color
+  rw [hcy, hy1]
 
 /-- **The brick seven-colouring as an arc map of the plane** — the inhabitant of "a valid map of the plane". -/
 noncomputable def sevenBrickMap : ArcMap 7 where
