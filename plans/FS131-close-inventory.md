@@ -213,3 +213,13 @@ reason by the close.*
     (`Plane/CoverExamples` on `fs131-w2`) states it for any MUA set at any point `m` where the set fills the half-box behind `m` and its support misses the
     normal ray up to `δ` — then `m + e θ` lies in the support — so over the whole side (in HC, exactly the segment `σ_e`). The derivation's diameter bound
     (§ 1.5 fact 1) only kept `z` from excluding itself. No downstream change (BAND's consumer is HC's design). For the record job's errata.
+34. **Item 23 settled — YES, a merged form lost a needed clause** (FS131-K2b, message 2026-10-04): FS106-COMP's ⟸ direction reads FS106-SUP's attainment —
+    "If `µ₆(ε) = 1`, the attaining family covers the plane up to a null set, and I-D4's construction … is proper at every pair at distance in
+    `(1 − ε, 1 + ε)`" (`plans/FS106-QB-verification.md` § 2.7, lines 206–208; Keryx's receipt: the lines read, the quotation matches across their wrap) —
+    and FS129-SR2-SUPK, merged in SUP's place, drops attainment (its not-claimed line). Only the value-1 case is read, in the a.e.-cover sense. K2b carries
+    it as SUP's merged content: `exists_bandNull_aeCover_of_mu_eq_one` in `Plane/Slack` (a leaf), at every k, by QB § 2.4's compactness argument with no
+    stationarity (K2b's route, one mind); `forall_mu_six_lt_one_iff`'s statement unchanged. **Ruling: accepted.** Alternative weighed: restore SUP's full
+    attainment clause at k = 6. Why: the value-1 form is what COMP reads, it holds at every k by an argument already on record, and the narrower clause is
+    the stronger lemma. Confidence: medium-high (one mind for the every-k route; the kernel decides). Correction owed: an erratum on SUPK's not-claimed
+    line (the value-1 a.e.-cover form holds at every k and COMP reads it), and on the merge line `data/fs129/l1/merges.csv` / `plans/FS129-SR2-audit.md`
+    § 4.3 that put SUPK in SUP's place — for the record job.
