@@ -604,6 +604,38 @@ edit was made during the build.)
 **Re-pricing.** The three bowtie moves cost about 70k tokens with their engine (most of it the ray engine and the tile rays, each elaborated on the first or second
 pass); `u1_shadow` (planned M) about 25k, two passes. The ray engine is general (any `ArcMap`, any horn) and serves `n3_end` and wave 5.
 
+## Stage 17 — SAVED (FS131-I4g): `l60Col_locallyConstant` (so `l60Frag` is sorry-free); 24 `sorry` left in `BaseSteps` and `UnitArc`, and the handoff
+
+**`l60Col_locallyConstant` proved.** The colouring reads three tests (in the lens `L`, `‖z‖ < 1`, `dist z 1 < 1/4`), so off the arcs each is locally constant: a
+point of `L` off the arcs has `‖x − 1‖ < 1` and `‖x − e 60°‖ < 1` (a point of `ω(1)` in `B̄(e 60°, 1)` is on the side `1 + e([60°, 180°])`, `mem_l60_arc1`; of
+`ω(e 60°)` in `B̄(1, 1)` on `e 60° + e([240°, 360°])`, `mem_l60_arc2`) and `‖x‖ ≠ 1` (`ω(0) ∩ L` is the arc `r([0, 60°])`, `mem_l60_arc0`); off `L`, `L` is closed
+and `dist x 1 ≠ 1/4` (`mem_carrier_circ_full`). Each arc lemma is `arg` with a whole-turn shift (`mem_carrier_circ_of_arg`) and one cosine bound
+(`cos_arg_sub`; `cos x ≥ 1/2` on `[−π, π]` gives `|x| ≤ π/3`, `abs_le_pi_div_three_of_cos`; `cos x ≤ −1/2` gives `|x| ≥ 2π/3`, `two_pi_div_three_le_abs_of_cos`).
+The domain hypothesis is not read. With it the structure `l60Frag` is sorry-free (its `locallyConstant` field).
+
+**Axioms** (`data/fs131/i4/axioms-i4g-17.lean` → `axioms-i4g-17.txt`, against this stage's build's oleans, not a gate log): the leaf and its ten children, the
+standard three. **Records**: `tools/fs131_i4_addrecords.py` — 379 names, 10 added, 0 missing. **No statement changed** (against `8a184ec1` the only lines removed
+from `UnitArc` and `BaseSteps` are five `sorry`s), no new axiom, no `native_decide`. Build: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s)
+with warnings", exit 0 (`build/gate/build/20261004T182956Z-1435730.log`; driver log `data/fs131/i4/build-i4g-stage17.log`): 34 distinct `declaration uses sorry`
+(BaseSteps 7, Contact 10, UnitArc 17), no other warning.
+
+**What is left (24 in this job's files; `Contact`'s 10 are the parallel implementer's), in the order I would take it.**
+- `l60_real` (UnitArc): `l60Frag` is now a sorry-free `ArcMap`; left are validity by the four classes (`Reul(0, A, B)` and the cap: constant width `1`, so interior
+  pairs are `< 1` apart; the two discs of diameter `1/2`; cross-class pairs need nothing), `IsRingArc 0 0 (π/3) 0 1` (sides near an open-arc point: inside
+  `B(0, 1)` the lens's colour `0`, outside colour `1`; the arc lies in `Γ` and the domain), and the thickening (`IsCompact.exists_thickening_subset_open` on the
+  closed arc inside the open domain). Check the classes against `tools/fs114_l60_check.py` first. This stage's arc lemmas (`mem_l60_arc0/1/2`) serve the `Γ` side.
+- `noBoth`: `c ≠ c′` is forced (`ringArc_cone_inner/outer` put the cones of `c` and `c′` at `P` in disjoint angle intervals, and a carried colour has a non-empty
+  cone, `coneAt_nonempty`); `ringArc_sideCone_other` gives `d, d′ ∉ {c, c′}` in the two open side cones; `d ≠ d′` gives four colours. The work is `d = d′`: two
+  sectors of `d` at `P`, separated by the `c`- and `c′`-directions — through the sector chart (`localSectors`, `IsSectorChart`; a sector's cone is the interval
+  between consecutive germs or a horn), not a one-line step.
+- The rest as Stage 11 lists them: the four `n2_env_*` (`n2_env_near` needs the lens estimate, Stage 14), engine 6 and `l60_le`, `l60_eq_inner/outer/corners`,
+  `flankQ_upper/lower` (engine 5), engine 7 and `a4six`, engine 3 and the three bends, `nb4p` (re-read FS110-NB-4 first); `BaseSteps`' `pair_i`, `pair_ii`,
+  `pair_P'`, `fail_leavingCentre`, `fail_colours`, `anti` (N3's proofs; read the derivation per leaf) and `n3_end` last — it needs `Contact`'s `woodallCone` and
+  `exists_merge`, so `BaseSteps` must import `Plane/ValidMap/Contact` after the parallel branch merges.
+- The ray engine of Stage 16 (`eventually_ray_not_mem_hornSet`, `eventually_not_two_rays_hornSet`, `eq_e_of_ray_subset_hornSet`, `IsSector.disjoint_of_rays`) is
+  general and lives in `BaseSteps`; if `UnitArc` or `Contact` needs it (`flankQ_*`, engine 5, `woodallCone`), move it to `Plane/ValidMap/Basic` — a move, no
+  statement change.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -682,4 +714,8 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   `norm_ray_sub_lt_one`; the bowtie's `bowtie_not_isHorn_I/negI`, `bowtie_hornSet_zero`, `bowtie_hasSectors_zero_two`, `bowtie_tileOf_one`, `bowtie_outType_one`,
   `bowtie_not_merge_zero`, `bowtie_not_ray_zero`, `bowtie_flank_colour`, `bowtie_not_shave_zero`, `bowtie_hasSectors_le_one`, `bowtie_terminal_pm_I`; and
   `ArcMap.rayParam_circ` (UnitArc).
+- FS114-L60-LE, L60-REAL's fragment: `ArcMap.l60Col_locallyConstant` — the standard three. Read against § 12.2: same statement (the colouring locally constant off
+  the five arcs, in the domain); with it the structure `l60Frag` is sorry-free. Children, the standard three: `ArcMap.mem_carrier_circ_of_arg`,
+  `ArcMap.mem_carrier_circ_full`, `ArcMap.mem_l60_arc0/1/2`, `ArcMap.cos_arg_sub`, `ArcMap.abs_le_pi_div_three_of_cos`, `ArcMap.two_pi_div_three_le_abs_of_cos`,
+  `ArcMap.sq_norm_sub_eq`, `ArcMap.e_pi_div_three_re_im`.
 

@@ -647,9 +647,175 @@ theorem l60Arcs_nondegenerate : ∀ a ∈ l60Arcs, a.Nondegenerate := by
   have hπ := pi_pos
   rcases ha with rfl | rfl | rfl | rfl | rfl <;> refine ⟨by norm_num, by linarith, by linarith⟩
 
+/-- A point at distance `ρ > 0` from `c` whose argument (shifted by a whole turn) lies in `[θ₀, θ₁]` is on the arc. -/
+theorem mem_carrier_circ_of_arg {c w : ℂ} {ρ θ₀ θ₁ : ℝ} (hw : ‖w - c‖ = ρ) (k : ℤ)
+    (h : Complex.arg (w - c) + k * (2 * π) ∈ Icc θ₀ θ₁) : w ∈ (Arc.circ c ρ θ₀ θ₁).carrier := by
+  refine ⟨_, h, ?_⟩
+  have he : e (Complex.arg (w - c) + k * (2 * π)) = e (Complex.arg (w - c)) := e_eq_e_iff.mpr ⟨k, rfl⟩
+  show c + (ρ : ℂ) * e _ = w
+  rw [he, ← hw]
+  have : (‖w - c‖ : ℂ) * e (Complex.arg (w - c)) = w - c := by
+    simp [e]
+  rw [this]; ring
+
+/-- On `[−π, π]`, `cos x ≥ 1/2` exactly within `π/3` of `0`. -/
+theorem abs_le_pi_div_three_of_cos {x : ℝ} (h1 : -π ≤ x) (h2 : x ≤ π) (hc : 1 / 2 ≤ Real.cos x) : |x| ≤ π / 3 := by
+  have hπ := Real.pi_pos
+  by_contra hlt
+  rw [not_le] at hlt
+  have hax : |x| ≤ π := abs_le.mpr ⟨h1, h2⟩
+  have : Real.cos |x| < Real.cos (π / 3) :=
+    Real.cos_lt_cos_of_nonneg_of_le_pi (by linarith) hax hlt
+  rw [Real.cos_abs, Real.cos_pi_div_three] at this
+  linarith
+
+/-- `cos x ≤ −1/2` only at least `2π/3` from `0`. -/
+theorem two_pi_div_three_le_abs_of_cos {x : ℝ} (hc : Real.cos x ≤ -1 / 2) :
+    2 * π / 3 ≤ |x| := by
+  have hπ := Real.pi_pos
+  by_contra hlt
+  rw [not_le] at hlt
+  have : Real.cos (2 * π / 3) < Real.cos |x| :=
+    Real.cos_lt_cos_of_nonneg_of_le_pi (abs_nonneg x) (by linarith) hlt
+  rw [Real.cos_abs, show 2 * π / 3 = π - π / 3 by ring, Real.cos_pi_sub, Real.cos_pi_div_three] at this
+  linarith
+
+/-- `cos (arg w − a)` for a unit `w`: `Re (w · conj (e a))`. -/
+theorem cos_arg_sub {w : ℂ} (hw : ‖w‖ = 1) (a : ℝ) :
+    Real.cos (Complex.arg w - a) = w.re * Real.cos a + w.im * Real.sin a := by
+  have hw0 : w ≠ 0 := by intro h; rw [h, norm_zero] at hw; norm_num at hw
+  rw [Real.cos_sub, Complex.cos_arg hw0, Complex.sin_arg, hw, div_one, div_one]
+
+/-- `‖x − a‖²` in coordinates. -/
+theorem sq_norm_sub_eq (x a : ℂ) : ‖x - a‖ ^ 2 = (x.re - a.re) ^ 2 + (x.im - a.im) ^ 2 := by
+  rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]; simp; ring
+
+/-- `e (π/3) = 1/2 + (√3/2) i`. -/
+theorem e_pi_div_three_re_im : (e (π / 3)).re = 1 / 2 ∧ (e (π / 3)).im = √3 / 2 := by
+  simp [e_eq, Real.cos_pi_div_three, Real.sin_pi_div_three]
+
+/-- A point at distance `ρ > 0` from `c` lies on the whole circle `.circ c ρ 0 (2π)`. -/
+theorem mem_carrier_circ_full {c w : ℂ} {ρ : ℝ} (hw : ‖w - c‖ = ρ) : w ∈ (Arc.circ c ρ 0 (2 * π)).carrier := by
+  have h1 := Complex.neg_pi_lt_arg (w - c)
+  have h2 := Complex.arg_le_pi (w - c)
+  by_cases h0 : 0 ≤ Complex.arg (w - c)
+  · exact mem_carrier_circ_of_arg hw 0 ⟨by simpa using h0, by simp; linarith [Real.pi_pos]⟩
+  · exact mem_carrier_circ_of_arg hw 1 ⟨by simp; linarith, by simp; linarith⟩
+
+/-- A point of `ω(0)` in the lens `B̄(1, 1) ∩ B̄(e 60°, 1)` lies on the arc `r([0, 60°])`. -/
+theorem mem_l60_arc0 {x : ℂ} (h0 : ‖x‖ = 1) (h1 : ‖x - 1‖ ≤ 1) (h2 : ‖x - e (π / 3)‖ ≤ 1) :
+    x ∈ (Arc.circ 0 1 0 (π / 3)).carrier := by
+  have hπ := Real.pi_pos
+  obtain ⟨er, ei⟩ := e_pi_div_three_re_im
+  have hs3 : √3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have hsq0 : x.re ^ 2 + x.im ^ 2 = 1 := by
+    have := sq_norm_sub_eq x 0; rw [sub_zero, h0] at this; simp at this; linarith
+  have hsq1 := sq_norm_sub_eq x 1
+  have hsq2 := sq_norm_sub_eq x (e (π / 3))
+  rw [er, ei] at hsq2
+  simp only [Complex.one_re, Complex.one_im] at hsq1
+  have hb1 : ‖x - 1‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (x - 1)]
+  have hb2 : ‖x - e (π / 3)‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (x - e (π / 3))]
+  have hx1 := Complex.neg_pi_lt_arg x
+  have hx2 := Complex.arg_le_pi x
+  have hc0 : 1 / 2 ≤ Real.cos (Complex.arg x - 0) := by rw [cos_arg_sub h0, Real.cos_zero, Real.sin_zero]; nlinarith
+  rw [sub_zero] at hc0
+  have ha := abs_le.mp (abs_le_pi_div_three_of_cos hx1.le hx2 hc0)
+  have hc1 : 1 / 2 ≤ Real.cos (Complex.arg x - π / 3) := by
+    rw [cos_arg_sub h0, Real.cos_pi_div_three, Real.sin_pi_div_three]; nlinarith
+  have hb := abs_le.mp (abs_le_pi_div_three_of_cos (by linarith) (by linarith) hc1)
+  refine mem_carrier_circ_of_arg (by rw [sub_zero, h0]) 0 ⟨?_, ?_⟩ <;> simp only [sub_zero, Int.cast_zero, zero_mul, add_zero] <;> linarith
+
+/-- A point of `ω(1)` in `B̄(e 60°, 1)` lies on the lens's side `1 + e([60°, 180°])`. -/
+theorem mem_l60_arc1 {x : ℂ} (h0 : ‖x - 1‖ = 1) (h2 : ‖x - e (π / 3)‖ ≤ 1) :
+    x ∈ (Arc.circ 1 1 (π / 3) π).carrier := by
+  have hπ := Real.pi_pos
+  obtain ⟨er, ei⟩ := e_pi_div_three_re_im
+  have hs3 : √3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have hsq0 := sq_norm_sub_eq x 1
+  rw [h0] at hsq0; simp only [Complex.one_re, Complex.one_im] at hsq0
+  have hsq2 := sq_norm_sub_eq x (e (π / 3))
+  rw [er, ei] at hsq2
+  have hb2 : ‖x - e (π / 3)‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (x - e (π / 3))]
+  have hw1 := Complex.neg_pi_lt_arg (x - 1)
+  have hw2 := Complex.arg_le_pi (x - 1)
+  have hc : Real.cos (Complex.arg (x - 1) - (-(π / 3))) ≤ -1 / 2 := by
+    rw [cos_arg_sub h0, Real.cos_neg, Real.sin_neg, Real.cos_pi_div_three, Real.sin_pi_div_three]
+    simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, sub_zero]; nlinarith
+  have := two_pi_div_three_le_abs_of_cos hc
+  rw [sub_neg_eq_add] at this
+  rcases le_abs'.mp this with h | h
+  · linarith
+  · exact mem_carrier_circ_of_arg h0 0 ⟨by simp; linarith, by simp; linarith⟩
+
+/-- A point of `ω(e 60°)` in `B̄(1, 1)` lies on the lens's side `e 60° + e([240°, 360°])`. -/
+theorem mem_l60_arc2 {x : ℂ} (h0 : ‖x - e (π / 3)‖ = 1) (h1 : ‖x - 1‖ ≤ 1) :
+    x ∈ (Arc.circ (e (π / 3)) 1 (4 * π / 3) (2 * π)).carrier := by
+  have hπ := Real.pi_pos
+  obtain ⟨er, ei⟩ := e_pi_div_three_re_im
+  have hs3 : √3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  have hsq0 := sq_norm_sub_eq x (e (π / 3))
+  rw [h0, er, ei] at hsq0
+  have hsq1 := sq_norm_sub_eq x 1
+  simp only [Complex.one_re, Complex.one_im] at hsq1
+  have hb1 : ‖x - 1‖ ^ 2 ≤ 1 := by nlinarith [norm_nonneg (x - 1)]
+  have hw1 := Complex.neg_pi_lt_arg (x - e (π / 3))
+  have hw2 := Complex.arg_le_pi (x - e (π / 3))
+  have hcs : Real.cos (2 * π / 3) = -1 / 2 ∧ Real.sin (2 * π / 3) = √3 / 2 := by
+    rw [show 2 * π / 3 = π - π / 3 by ring, Real.cos_pi_sub, Real.sin_pi_sub, Real.cos_pi_div_three, Real.sin_pi_div_three]
+    norm_num
+  have hc : Real.cos (Complex.arg (x - e (π / 3)) - 2 * π / 3) ≤ -1 / 2 := by
+    rw [cos_arg_sub h0, hcs.1, hcs.2]
+    simp only [Complex.sub_re, Complex.sub_im, er, ei]; nlinarith
+  have hA := two_pi_div_three_le_abs_of_cos hc
+  have hc' : Real.cos (Complex.arg (x - e (π / 3)) + 4 * π / 3) ≤ -1 / 2 := by
+    rw [show Complex.arg (x - e (π / 3)) + 4 * π / 3 = (Complex.arg (x - e (π / 3)) - 2 * π / 3) + 2 * π by ring,
+      Real.cos_add_two_pi]; exact hc
+  have hB := two_pi_div_three_le_abs_of_cos hc'
+  rcases le_abs'.mp hA with h | h
+  · rcases le_abs'.mp hB with h' | h'
+    · linarith
+    · exact mem_carrier_circ_of_arg h0 1 ⟨by simp; linarith, by simp; linarith⟩
+  · linarith
+
 /-- L60-REAL's colouring is locally constant off its arcs. -/
 theorem l60Col_locallyConstant : ∀ x ∈ l60Dom, x ∉ ⋃ a ∈ l60Arcs, a.carrier → ∀ᶠ y in 𝓝 x, l60Col y = l60Col x := by
-  sorry
+  intro x _ hx
+  have hmem : ∀ a ∈ l60Arcs, x ∉ a.carrier := fun a ha h => hx (mem_iUnion₂.mpr ⟨a, ha, h⟩)
+  by_cases hL : x ∈ l60Lens
+  · obtain ⟨hL1, hL2⟩ := hL
+    rw [mem_closedBall, dist_eq_norm] at hL1 hL2
+    have h1 : ‖x - 1‖ < 1 := lt_of_le_of_ne hL1 fun h => hmem _ (by simp [l60Arcs]) (mem_l60_arc1 h hL2)
+    have h2 : ‖x - e (π / 3)‖ < 1 := lt_of_le_of_ne hL2 fun h => hmem _ (by simp [l60Arcs]) (mem_l60_arc2 h hL1)
+    have h0 : ‖x‖ ≠ 1 := fun h => hmem _ (by simp [l60Arcs]) (mem_l60_arc0 h hL1 hL2)
+    have hxL : x ∈ l60Lens := ⟨by rw [mem_closedBall, dist_eq_norm]; exact hL1, by rw [mem_closedBall, dist_eq_norm]; exact hL2⟩
+    have hU : ∀ᶠ y in 𝓝 x, y ∈ l60Lens := by
+      filter_upwards [isOpen_ball.mem_nhds (show x ∈ ball 1 1 by rw [mem_ball, dist_eq_norm]; exact h1),
+        isOpen_ball.mem_nhds (show x ∈ ball (e (π / 3)) 1 by rw [mem_ball, dist_eq_norm]; exact h2)] with y hy1 hy2
+      exact ⟨ball_subset_closedBall hy1, ball_subset_closedBall hy2⟩
+    have hN : ∀ᶠ y in 𝓝 x, (‖y‖ < 1 ↔ ‖x‖ < 1) := by
+      rcases lt_or_gt_of_ne h0 with h | h
+      · filter_upwards [(isOpen_lt continuous_norm continuous_const).mem_nhds h] with y hy
+        exact ⟨fun _ => h, fun _ => hy⟩
+      · filter_upwards [(isOpen_lt continuous_const continuous_norm).mem_nhds h] with y hy
+        exact ⟨fun h' => absurd h' (not_lt.mpr hy.le), fun h' => absurd h' (not_lt.mpr h.le)⟩
+    filter_upwards [hU, hN] with y hy hyN
+    by_cases hx1 : ‖x‖ < 1
+    · simp only [l60Col, hy, hxL, hx1, hyN.mpr hx1, if_true]
+    · simp only [l60Col, hy, hxL, hx1, mt hyN.mp hx1, if_true, if_false]
+  · have hd1 : dist x 1 ≠ 1 / 4 := fun h => hmem (.circ 1 (1 / 4) 0 (2 * π)) (by simp [l60Arcs]) (mem_carrier_circ_full (c := 1) (ρ := 1 / 4) (show ‖x - 1‖ = 1 / 4 by rw [← dist_eq_norm]; exact h))
+    have hU : ∀ᶠ y in 𝓝 x, y ∉ l60Lens :=
+      (isClosed_closedBall.inter isClosed_closedBall).isOpen_compl.mem_nhds hL
+    have hD : ∀ᶠ y in 𝓝 x, (dist y 1 < 1 / 4 ↔ dist x 1 < 1 / 4) := by
+      rcases lt_or_gt_of_ne hd1 with h | h
+      · filter_upwards [isOpen_ball.mem_nhds (show x ∈ ball 1 (1 / 4) from h)] with y hy
+        exact ⟨fun _ => h, fun _ => hy⟩
+      · filter_upwards [(isOpen_lt continuous_const (continuous_id.dist continuous_const)).mem_nhds h] with y hy
+        exact ⟨fun h' => absurd h' (not_lt.mpr hy.le), fun h' => absurd h' (not_lt.mpr h.le)⟩
+    filter_upwards [hU, hD] with y hy hyD
+    by_cases hx1 : dist x 1 < 1 / 4
+    · simp only [l60Col, hy, hL, hx1, hyD.mpr hx1, if_true, if_false]
+    · simp only [l60Col, hy, hL, hx1, mt hyD.mp hx1, if_false]
 
 /-- **The fragment of L60-REAL**, by formula: four colours on a neighbourhood of the closed 60° arc `r([0, 60°])` of `ω(0)`. -/
 noncomputable def l60Frag : ArcMap 4 where
