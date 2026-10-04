@@ -2093,7 +2093,135 @@ theorem integral_circleAvg_sq {ρ : ℂ → ℝ} (hρ : Integrable ρ)
       (arcLength.prod arcLength) {p : ℝ × ℝ | e p.2 - e p.1 ∈ N} = ENNReal.ofReal (∫ w in N, ρ w))
     {h : ℂ → ℝ} (hh : Measurable h) (hb : ∀ x, |h x| ≤ 2) {R : ℝ} (hs : ∀ x, R < ‖x‖ → h x = 0) :
     ∫ x, (∫ θ in Ico 0 (2 * Real.pi), h (x + e θ)) ^ 2 = ∫ y, h y * ∫ w, h (y + w) * ρ w := by
-  sorry
+  set μ2 : Measure (ℝ × ℝ) := arcLength.prod arcLength with hμ2
+  set T : ℝ × ℝ → ℂ := fun p => e p.2 - e p.1 with hT
+  have hTm : Measurable T :=
+    ((continuous_e.comp continuous_snd).sub (continuous_e.comp continuous_fst)).measurable
+  -- a measurable version of `ρ`
+  set ρ' : ℂ → ℝ := hρ.1.mk ρ with hρ'
+  have hρ'm : Measurable ρ' := hρ.1.stronglyMeasurable_mk.measurable
+  have hρρ' : ρ =ᵐ[volume] ρ' := hρ.1.ae_eq_mk
+  have hρ'i : Integrable ρ' := hρ.congr hρρ'
+  have hset : ∀ N : Set ℂ, ∫ w in N, ρ w = ∫ w in N, ρ' w := fun N =>
+    integral_congr_ae (ae_restrict_of_ae hρρ')
+  have hN' : ∀ N : Set ℂ, MeasurableSet N → μ2 (T ⁻¹' N) = ENNReal.ofReal (∫ w in N, ρ' w) := fun N hN => by
+    rw [← hset]; exact hρN N hN
+  -- `ρ'` is non-negative almost everywhere
+  have hnn : ∀ᵐ w ∂volume, 0 ≤ ρ' w := by
+    set P : Set ℂ := {w | 0 ≤ ρ' w} with hP
+    have hPm : MeasurableSet P := measurableSet_le measurable_const hρ'm
+    have h1 : μ2 univ = ENNReal.ofReal (∫ w, ρ' w) := by
+      have := hN' univ MeasurableSet.univ
+      rwa [preimage_univ, Measure.restrict_univ] at this
+    have h3 : μ2 (T ⁻¹' Pᶜ) = 0 := by
+      rw [hN' _ hPm.compl, ENNReal.ofReal_eq_zero]
+      exact setIntegral_nonpos hPm.compl fun w hw => le_of_lt (not_le.1 hw)
+    have h2 : μ2 univ = ENNReal.ofReal (∫ w in P, ρ' w) := by
+      rw [← measure_add_measure_compl (hTm hPm), ← preimage_compl, h3, add_zero, hN' _ hPm]
+    have hpos : μ2 univ ≠ 0 := by
+      rw [hμ2, ← univ_prod_univ, Measure.prod_prod]
+      have : arcLength univ ≠ 0 := by
+        rw [arcLength, Measure.restrict_apply_univ, Real.volume_Ico, ne_eq, ENNReal.ofReal_eq_zero, not_le]
+        linarith [Real.pi_pos]
+      exact mul_ne_zero this this
+    have hI0 : 0 < ∫ w, ρ' w := by
+      rw [h1] at hpos; exact ENNReal.ofReal_pos.1 (pos_iff_ne_zero.2 hpos)
+    have hIP : 0 ≤ ∫ w in P, ρ' w := setIntegral_nonneg hPm fun w hw => hw
+    have heq : ∫ w, ρ' w = ∫ w in P, ρ' w :=
+      (ENNReal.ofReal_eq_ofReal_iff hI0.le hIP).1 (h1.symm.trans h2)
+    have hc : ∫ w in Pᶜ, ρ' w = 0 := by
+      have := integral_add_compl hPm hρ'i
+      linarith
+    have hc' : ∫ w in Pᶜ, -ρ' w = 0 := by rw [integral_neg, hc, neg_zero]
+    have hz := (setIntegral_eq_zero_iff_of_nonneg_ae
+      ((ae_restrict_iff' hPm.compl).2 (Eventually.of_forall fun w hw => by
+        simp only [Pi.zero_apply, Pi.neg_apply, Left.nonneg_neg_iff]; exact le_of_lt (not_le.1 hw)))
+      hρ'i.neg.integrableOn).1 hc'
+    filter_upwards [(ae_restrict_iff' hPm.compl).1 hz] with w hw
+    by_contra hneg
+    have := hw hneg
+    simp only [Pi.neg_apply, Pi.zero_apply, neg_eq_zero] at this
+    exact hneg (le_of_eq this.symm)
+  -- the law of `T` has density `ρ'`
+  have hmap : Measure.map T μ2 = volume.withDensity (fun w => ENNReal.ofReal (ρ' w)) := by
+    refine Measure.ext fun N hN => ?_
+    rw [Measure.map_apply hTm hN, withDensity_apply _ hN,
+      ← ofReal_integral_eq_lintegral_ofReal hρ'i.integrableOn (ae_restrict_of_ae hnn)]
+    exact hN' N hN
+  -- Step 1: the inner integral as an integral over pairs of angles
+  have hstep1 : ∀ y, ∫ w, h (y + w) * ρ w = ∫ p, h (y + T p) ∂μ2 := by
+    intro y
+    have hf : Measurable fun w => h (y + w) := hh.comp (measurable_const_add y)
+    rw [← integral_map hTm.aemeasurable hf.aestronglyMeasurable, hmap]
+    have := integral_withDensity_eq_integral_smul (μ := volume) hρ'm.real_toNNReal (fun w => h (y + w))
+    rw [show (fun w => ENNReal.ofReal (ρ' w)) = fun w => ((ρ' w).toNNReal : ENNReal) from rfl, this]
+    refine integral_congr_ae ?_
+    filter_upwards [hρρ', hnn] with w hw hw0
+    rw [NNReal.smul_def, smul_eq_mul, Real.coe_toNNReal _ hw0, hw, mul_comm]
+  -- the two integrability facts
+  have hbd : ∀ (r : ℝ) (f : ℂ × (ℝ × ℝ) → ℝ), Measurable f →
+      (∀ q, ‖f q‖ ≤ (closedBall (0 : ℂ) r).indicator (fun _ => (4 : ℝ)) q.1) → Integrable f (volume.prod μ2) := by
+    intro r f hf hfb
+    have hI : Integrable ((closedBall (0 : ℂ) r).indicator (fun _ => (4 : ℝ))) :=
+      (integrableOn_const (measure_closedBall_lt_top.ne)).integrable_indicator measurableSet_closedBall
+    exact (hI.comp_fst μ2).mono' hf.aestronglyMeasurable (Eventually.of_forall hfb)
+  have hint1 : Integrable (Function.uncurry fun (y : ℂ) (p : ℝ × ℝ) => h y * h (y + T p)) (volume.prod μ2) := by
+    refine hbd R _ ((hh.comp measurable_fst).mul (hh.comp (measurable_fst.add (hTm.comp measurable_snd)))) fun q => ?_
+    show ‖h q.1 * h (q.1 + T q.2)‖ ≤ _
+    by_cases hq : q.1 ∈ closedBall (0 : ℂ) R
+    · rw [indicator_of_mem hq, norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+      nlinarith [hb q.1, hb (q.1 + T q.2), abs_nonneg (h q.1), abs_nonneg (h (q.1 + T q.2))]
+    · rw [indicator_of_notMem hq, hs q.1 (by simpa using hq), zero_mul, norm_zero]
+  have hint2 : Integrable (Function.uncurry fun (x : ℂ) (p : ℝ × ℝ) => h (x + e p.1) * h (x + e p.2))
+      (volume.prod μ2) := by
+    refine hbd (R + 1) _ ((hh.comp (measurable_fst.add (continuous_e.measurable.comp (measurable_fst.comp
+      measurable_snd)))).mul (hh.comp (measurable_fst.add (continuous_e.measurable.comp (measurable_snd.comp
+      measurable_snd))))) fun q => ?_
+    show ‖h (q.1 + e q.2.1) * h (q.1 + e q.2.2)‖ ≤ _
+    by_cases hq : q.1 ∈ closedBall (0 : ℂ) (R + 1)
+    · rw [indicator_of_mem hq, norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+      nlinarith [hb (q.1 + e q.2.1), hb (q.1 + e q.2.2), abs_nonneg (h (q.1 + e q.2.1)),
+        abs_nonneg (h (q.1 + e q.2.2))]
+    · have hq' : R + 1 < ‖q.1‖ := by simpa using hq
+      have : R < ‖q.1 + e q.2.1‖ := by
+        have := norm_sub_norm_le q.1 (-e q.2.1)
+        rw [sub_neg_eq_add, norm_neg, norm_e] at this
+        linarith
+      rw [indicator_of_notMem hq, hs _ this, zero_mul, norm_zero]
+  -- assemble
+  calc ∫ x, (∫ θ in Ico 0 (2 * Real.pi), h (x + e θ)) ^ 2
+      = ∫ x, ∫ p, h (x + e p.1) * h (x + e p.2) ∂μ2 := by
+        refine integral_congr_ae (Eventually.of_forall fun x => ?_)
+        simp only [hμ2]
+        rw [integral_prod_mul (fun θ => h (x + e θ)) (fun θ => h (x + e θ)), sq]
+        rfl
+    _ = ∫ p, ∫ x, h (x + e p.1) * h (x + e p.2) ∂volume ∂μ2 := integral_integral_swap hint2
+    _ = ∫ p, ∫ y, h y * h (y + T p) ∂volume ∂μ2 := by
+        refine integral_congr_ae (Eventually.of_forall fun p => ?_)
+        show ∫ x, h (x + e p.1) * h (x + e p.2) = ∫ y, h y * h (y + T p)
+        rw [← integral_add_right_eq_self (fun y => h y * h (y + T p)) (e p.1)]
+        congr 1; ext x
+        simp only [hT]
+        congr 2; ring
+    _ = ∫ y, ∫ p, h y * h (y + T p) ∂μ2 ∂volume := (integral_integral_swap hint1).symm
+    _ = ∫ y, h y * ∫ w, h (y + w) * ρ w := by
+        refine integral_congr_ae (Eventually.of_forall fun y => ?_)
+        show ∫ p, h y * h (y + T p) ∂μ2 = h y * ∫ w, h (y + w) * ρ w
+        rw [hstep1 y, integral_const_mul]
+
+/-- A null set of the plane meets almost every unit circle in an arc-null set (Fubini on `(x, θ) ↦ x + e θ`). -/
+theorem ae_arcLength_null {N : Set ℂ} (hN : MeasurableSet N) (h0 : volume N = 0) :
+    ∀ᵐ x ∂volume, arcLength {θ | x + e θ ∈ N} = 0 := by
+  set S : Set (ℂ × ℝ) := {p | p.1 + e p.2 ∈ N} with hS
+  have hSm : MeasurableSet S := (measurable_fst.add (continuous_e.measurable.comp measurable_snd)) hN
+  have hz : (volume.prod arcLength) S = 0 := by
+    rw [Measure.prod_apply_symm hSm]
+    have : ∀ θ : ℝ, volume ((fun x => (x, θ)) ⁻¹' S) = 0 := by
+      intro θ
+      have : (fun x => (x, θ)) ⁻¹' S = (· + e θ) ⁻¹' N := rfl
+      rw [this, measure_preimage_add_right]; exact h0
+    simp [this]
+  exact (Measure.measure_prod_null hSm).1 hz
 
 /-- **The Rajchman step, Fourier-free**: the unit form is weak-* continuous on `[0, 1]`-valued families supported in a fixed
 ball (`integral_circleAvg_sq` and `convForm_tendsto` at `κ = ρ` make `T g_m → T F` in `L²`). -/
@@ -2101,7 +2229,204 @@ theorem unitForm_tendsto {g : ℕ → ℂ → ℝ} {F : ℂ → ℝ} (hg : ∀ m
     (hFm : Measurable F) (hF : ∀ᵐ x ∂volume, 0 ≤ F x ∧ F x ≤ 1) (hw : WeakStarTendsto g F) (R : ℝ) :
     Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * ∫ θ in Ico 0 (2 * Real.pi), g m (x + e θ)) atTop
       (𝓝 (∫ x in ball (0 : ℂ) R, F x * ∫ θ in Ico 0 (2 * Real.pi), F (x + e θ))) := by
-  sorry
+  -- the circle average and its two basic facts
+  set Tc : (ℂ → ℝ) → ℂ → ℝ := fun u x => ∫ θ in Ico 0 (2 * Real.pi), u (x + e θ) with hTc
+  have hTcm : ∀ u : ℂ → ℝ, Measurable u → StronglyMeasurable (Tc u) := fun u hu =>
+    (hu.comp (measurable_fst.add (continuous_e.measurable.comp measurable_snd))).stronglyMeasurable.integral_prod_right'
+  have hTcb : ∀ u : ℂ → ℝ, (∀ z, |u z| ≤ 1) → ∀ x, |Tc u x| ≤ 2 * Real.pi := fun u hu x => by
+    have := norm_integral_le_of_norm_le_const (μ := arcLength) (f := fun θ => u (x + e θ)) (C := 1)
+      (Eventually.of_forall fun θ => by rw [Real.norm_eq_abs]; exact hu _)
+    rw [Real.norm_eq_abs, one_mul, measureReal_def, arcLength, Measure.restrict_apply_univ, Real.volume_Ico,
+      ENNReal.toReal_ofReal (by linarith [Real.pi_pos]), sub_zero] at this
+    exact this
+  have hBfin : ∀ r : ℝ, volume (ball (0 : ℂ) r) ≠ ⊤ := fun r => measure_ball_lt_top.ne
+  -- the clamped limit
+  set G : ℂ → ℝ := fun x => max 0 (min (F x) 1) with hG
+  have hGm : Measurable G := measurable_const.max (hFm.min measurable_const)
+  have hG01 : ∀ x, 0 ≤ G x ∧ G x ≤ 1 := fun x => ⟨le_max_left _ _, max_le zero_le_one (min_le_right _ _)⟩
+  have hFG : F =ᵐ[volume] G := by
+    filter_upwards [hF] with x hx
+    simp only [hG, min_eq_left hx.2, max_eq_right hx.1]
+  have hwG : WeakStarTendsto g G := fun φ hφ => by
+    have : ∫ x, F x * φ x = ∫ x, G x * φ x := by
+      refine integral_congr_ae ?_
+      filter_upwards [hFG] with x hx
+      rw [hx]
+    rw [← this]; exact hw φ hφ
+  -- the target, with `G` in place of `F`
+  have hTFG : ∀ᵐ x ∂volume, Tc F x = Tc G x := by
+    have hN : MeasurableSet {x | F x ≠ G x} := (measurableSet_eq_fun hFm hGm).compl
+    have h0 : volume {x | F x ≠ G x} = 0 := ae_iff.1 hFG
+    filter_upwards [ae_arcLength_null hN h0] with x hx
+    refine integral_congr_ae ?_
+    exact ae_iff.2 hx
+  have htarget : ∫ x in ball (0 : ℂ) R, F x * Tc F x = ∫ x in ball (0 : ℂ) R, G x * Tc G x := by
+    refine integral_congr_ae (ae_restrict_of_ae ?_)
+    filter_upwards [hFG, hTFG] with x h1 h2
+    rw [h1, h2]
+  -- the truncated differences
+  set hm : ℕ → ℂ → ℝ := fun m => (ball (0 : ℂ) (R + 1)).indicator (fun z => g m z - G z) with hhm
+  have hmm : ∀ m, Measurable (hm m) := fun m => ((hg m).sub hGm).indicator measurableSet_ball
+  have hmb : ∀ m z, |hm m z| ≤ 1 := fun m z => by
+    simp only [hhm]
+    by_cases hz : z ∈ ball (0 : ℂ) (R + 1)
+    · rw [indicator_of_mem hz, abs_sub_le_iff]
+      constructor <;> linarith [h01 m z, hG01 z]
+    · rw [indicator_of_notMem hz, abs_zero]; exact zero_le_one
+  have hms : ∀ m z, R + 1 < ‖z‖ → hm m z = 0 := fun m z hz =>
+    indicator_of_notMem (by rw [mem_ball_zero_iff]; exact not_lt.2 hz.le) _
+  -- on the ball, the circle average of the difference is the difference of the averages
+  have hmem : ∀ x ∈ ball (0 : ℂ) R, ∀ θ : ℝ, x + e θ ∈ ball (0 : ℂ) (R + 1) := fun x hx θ => by
+    rw [mem_ball_zero_iff] at hx ⊢
+    calc ‖x + e θ‖ ≤ ‖x‖ + ‖e θ‖ := norm_add_le _ _
+      _ < R + 1 := by rw [norm_e]; linarith
+  have hintθ : ∀ (u : ℂ → ℝ), Measurable u → (∀ z, |u z| ≤ 1) → ∀ x,
+      Integrable (fun θ => u (x + e θ)) arcLength := fun u hu hb x =>
+    Integrable.of_bound ((hu.comp (measurable_const_add x |>.comp continuous_e.measurable)).aestronglyMeasurable) 1
+      (Eventually.of_forall fun θ => by rw [Real.norm_eq_abs]; exact hb _)
+  have hG1 : ∀ z, |G z| ≤ 1 := fun z => abs_le.2 ⟨by linarith [hG01 z], (hG01 z).2⟩
+  have hg1 : ∀ m z, |g m z| ≤ 1 := fun m z => abs_le.2 ⟨by linarith [h01 m z], (h01 m z).2⟩
+  have hsplitT : ∀ m, ∀ x ∈ ball (0 : ℂ) R, Tc (g m) x = Tc (hm m) x + Tc G x := fun m x hx => by
+    have : Tc (hm m) x = Tc (g m) x - Tc G x := by
+      show ∫ θ, hm m (x + e θ) ∂arcLength = (∫ θ, g m (x + e θ) ∂arcLength) - ∫ θ, G (x + e θ) ∂arcLength
+      rw [← integral_sub (hintθ _ (hg m) (hg1 m) x) (hintθ _ hGm hG1 x)]
+      refine integral_congr_ae (Eventually.of_forall fun θ => ?_)
+      simp only [hhm]
+      rw [indicator_of_mem (hmem x hx θ)]
+    linarith
+  -- Step 1: `∫ (T hm)² → 0` (`T*T` is convolution with the two-circle density)
+  obtain ⟨ρ, hρ, hρ0, hρN⟩ := exists_twoCircle_density
+  set K := ∫ w, ‖ρ w‖ with hK
+  set c : ℕ → ℂ → ℝ := fun m y => ∫ w, hm m (y + w) * ρ w with hc
+  have Pc := fun m => conv_props (hmm m) (Eventually.of_forall (hmb m)) hρ
+  have hsq : ∀ m, ∫ x, (Tc (hm m) x) ^ 2 = ∫ y, hm m y * c m y := fun m =>
+    integral_circleAvg_sq hρ hρN (hmm m) (fun z => (hmb m z).trans one_le_two) (hms m)
+  have hcpt : ∀ y, Tendsto (fun m => c m y) atTop (𝓝 0) := by
+    intro y
+    set φ : ℂ → ℝ := (ball (0 : ℂ) (R + 1)).indicator (fun z => ρ (z - y)) with hφ
+    have hφi : Integrable φ := (hρ.comp_sub_right y).indicator measurableSet_ball
+    have he : ∀ m, c m y = (∫ z, g m z * φ z) - ∫ z, G z * φ z := fun m => by
+      show ∫ w, hm m (y + w) * ρ w = _
+      rw [(Pc m).2.2 y, ← integral_sub
+        (hφi.bdd_mul (hg m).aestronglyMeasurable (Eventually.of_forall fun z => by rw [Real.norm_eq_abs]; exact hg1 m z))
+        (hφi.bdd_mul hGm.aestronglyMeasurable (Eventually.of_forall fun z => by rw [Real.norm_eq_abs]; exact hG1 z))]
+      refine integral_congr_ae (Eventually.of_forall fun z => ?_)
+      simp only [hhm, hφ]
+      by_cases hz : z ∈ ball (0 : ℂ) (R + 1)
+      · rw [indicator_of_mem hz, indicator_of_mem hz]; ring
+      · rw [indicator_of_notMem hz, indicator_of_notMem hz]; ring
+    simp_rw [he]
+    have := (hwG φ hφi).sub_const (∫ z, G z * φ z)
+    rwa [sub_self] at this
+  have hSq : Tendsto (fun m => ∫ x, (Tc (hm m) x) ^ 2) atTop (𝓝 0) := by
+    simp_rw [hsq]
+    have hK0 : 0 ≤ K := integral_nonneg fun w => norm_nonneg _
+    haveI : IsFiniteMeasure (volume.restrict (ball (0 : ℂ) (R + 1))) :=
+      ⟨by rw [Measure.restrict_apply_univ]; exact measure_ball_lt_top⟩
+    have hdom : Tendsto (fun m => ∫ y in ball (0 : ℂ) (R + 1), |c m y|) atTop (𝓝 0) := by
+      have := tendsto_integral_of_dominated_convergence (μ := volume.restrict (ball (0 : ℂ) (R + 1)))
+        (F := fun m y => |c m y|) (f := fun _ => 0) (fun _ => K) (fun m => (Pc m).1.restrict.norm)
+        (integrable_const K) (fun m => Eventually.of_forall fun y => by
+          rw [Real.norm_eq_abs, abs_abs]; exact (Pc m).2.1 y)
+        (Eventually.of_forall fun y => by simpa using (hcpt y).abs)
+      simpa using this
+    refine squeeze_zero_norm (fun m => ?_) hdom
+    rw [← setIntegral_eq_integral_of_forall_compl_eq_zero (s := ball (0 : ℂ) (R + 1)) (fun y hy => by
+      simp only [hhm]; rw [indicator_of_notMem hy, zero_mul])]
+    refine norm_integral_le_of_norm_le ?_ (Eventually.of_forall fun y => ?_)
+    · exact Measure.integrableOn_of_bounded (hBfin _) (Pc m).1.norm (M := K)
+        (Eventually.of_forall fun y => by rw [Real.norm_eq_abs, abs_abs]; exact (Pc m).2.1 y)
+    · rw [norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+      exact mul_le_of_le_one_left (abs_nonneg _) (hmb m y)
+  -- Step 2: `∫_{B_R} |T hm| → 0`
+  have hTm1 : ∀ m z, |Tc (hm m) z| ≤ 2 * Real.pi := fun m => hTcb _ (hmb m)
+  have hsupp : ∀ m x, R + 2 < ‖x‖ → Tc (hm m) x = 0 := fun m x hx => by
+    simp only [hTc]
+    refine (integral_congr_ae (Eventually.of_forall fun θ => ?_)).trans (integral_zero _ _)
+    refine hms m _ ?_
+    have := norm_sub_norm_le x (-e θ)
+    rw [sub_neg_eq_add, norm_neg, norm_e] at this
+    show R + 1 < ‖x + e θ‖
+    linarith
+  have hsqi : ∀ m, Integrable (fun x => (Tc (hm m) x) ^ 2) := fun m => by
+    have hI : Integrable ((closedBall (0 : ℂ) (R + 2)).indicator (fun _ => (2 * Real.pi) ^ 2)) :=
+      (integrableOn_const (measure_closedBall_lt_top.ne)).integrable_indicator measurableSet_closedBall
+    refine hI.mono' ((hTcm _ (hmm m)).aestronglyMeasurable.pow 2) (Eventually.of_forall fun x => ?_)
+    by_cases hx : x ∈ closedBall (0 : ℂ) (R + 2)
+    · rw [indicator_of_mem hx, Real.norm_eq_abs, abs_pow]
+      exact pow_le_pow_left₀ (abs_nonneg _) (hTm1 m x) 2
+    · rw [indicator_of_notMem hx, hsupp m x (by simpa using hx)]; simp
+  have hL1 : Tendsto (fun m => ∫ x in ball (0 : ℂ) R, |Tc (hm m) x|) atTop (𝓝 0) := by
+    set V := volume.real (ball (0 : ℂ) R) with hV
+    have hV0 : 0 ≤ V := measureReal_nonneg
+    refine tendsto_order.2 ⟨fun a ha => Eventually.of_forall fun m => lt_of_lt_of_le ha
+      (setIntegral_nonneg measurableSet_ball fun x _ => abs_nonneg _), fun a ha => ?_⟩
+    set δ := a / (V + 1) with hδ
+    have hδ0 : 0 < δ := div_pos ha (by linarith)
+    filter_upwards [(tendsto_order.1 hSq).2 (δ * a) (mul_pos hδ0 ha)] with m hm'
+    have hpt : ∀ x, |Tc (hm m) x| ≤ (Tc (hm m) x) ^ 2 / (2 * δ) + δ / 2 := fun x => by
+      rw [div_add_div _ _ (by positivity) (by positivity), le_div_iff₀ (by positivity)]
+      nlinarith [sq_nonneg (|Tc (hm m) x| - δ), sq_abs (Tc (hm m) x)]
+    have hiB : IntegrableOn (fun x => (Tc (hm m) x) ^ 2 / (2 * δ) + δ / 2) (ball (0 : ℂ) R) :=
+      ((hsqi m).div_const _).integrableOn.add (integrableOn_const (hBfin R))
+    calc ∫ x in ball (0 : ℂ) R, |Tc (hm m) x|
+        ≤ ∫ x in ball (0 : ℂ) R, ((Tc (hm m) x) ^ 2 / (2 * δ) + δ / 2) :=
+          setIntegral_mono_on (Measure.integrableOn_of_bounded (hBfin R)
+            (hTcm _ (hmm m)).aestronglyMeasurable.norm (M := 2 * Real.pi)
+            (Eventually.of_forall fun x => by rw [Real.norm_eq_abs, abs_abs]; exact hTm1 m x))
+            hiB measurableSet_ball fun x _ => hpt x
+      _ = (∫ x in ball (0 : ℂ) R, (Tc (hm m) x) ^ 2) / (2 * δ) + δ / 2 * V := by
+          rw [integral_add ((hsqi m).div_const _).integrableOn (integrableOn_const (hBfin R)), integral_div,
+            setIntegral_const, smul_eq_mul]
+          ring
+      _ ≤ (∫ x, (Tc (hm m) x) ^ 2) / (2 * δ) + δ / 2 * V := by
+          have hle := setIntegral_le_integral (s := ball (0 : ℂ) R) (hsqi m)
+            (Eventually.of_forall fun x => sq_nonneg (Tc (hm m) x))
+          have h2δ : 0 < 2 * δ := by positivity
+          linarith [(div_le_div_iff_of_pos_right h2δ).2 hle]
+      _ < (δ * a) / (2 * δ) + δ / 2 * (V + 1) := by
+          gcongr
+          · linarith
+      _ = a := by
+          rw [hδ]; field_simp; ring
+  -- Step 3: assemble
+  have hTGb : ∀ x, |Tc G x| ≤ 2 * Real.pi := hTcb _ hG1
+  have hψ : Integrable ((ball (0 : ℂ) R).indicator (Tc G)) :=
+    (Measure.integrableOn_of_bounded (hBfin R) (hTcm _ hGm).aestronglyMeasurable (M := 2 * Real.pi)
+      (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hTGb x)).integrable_indicator measurableSet_ball
+  have hind : ∀ u : ℂ → ℝ, ∫ x in ball (0 : ℂ) R, u x * Tc G x = ∫ x, u x * (ball (0 : ℂ) R).indicator (Tc G) x := by
+    intro u
+    rw [← integral_indicator measurableSet_ball]
+    congr 1; ext x
+    by_cases hx : x ∈ ball (0 : ℂ) R <;> simp [hx]
+  have hsecond : Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * Tc G x) atTop
+      (𝓝 (∫ x in ball (0 : ℂ) R, G x * Tc G x)) := by
+    simp_rw [hind]; exact hwG _ hψ
+  have hfirst : Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * Tc (hm m) x) atTop (𝓝 0) := by
+    refine squeeze_zero_norm (fun m => ?_) hL1
+    refine norm_integral_le_of_norm_le (Measure.integrableOn_of_bounded (hBfin R)
+      (hTcm _ (hmm m)).aestronglyMeasurable.norm (M := 2 * Real.pi)
+      (Eventually.of_forall fun x => by rw [Real.norm_eq_abs, abs_abs]; exact hTm1 m x))
+      (Eventually.of_forall fun x => ?_)
+    rw [norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+    exact mul_le_of_le_one_left (abs_nonneg _) (hg1 m x)
+  have hsplit : ∀ m, ∫ x in ball (0 : ℂ) R, g m x * Tc (g m) x =
+      (∫ x in ball (0 : ℂ) R, g m x * Tc (hm m) x) + ∫ x in ball (0 : ℂ) R, g m x * Tc G x := fun m => by
+    have h1 : IntegrableOn (fun x => g m x * Tc (hm m) x) (ball (0 : ℂ) R) := by
+      exact (Measure.integrableOn_of_bounded (hBfin R) (hTcm _ (hmm m)).aestronglyMeasurable (M := 2 * Real.pi)
+        (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hTm1 m x)).bdd_mul
+        (hg m).aestronglyMeasurable (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hg1 m x)
+    have h2 : IntegrableOn (fun x => g m x * Tc G x) (ball (0 : ℂ) R) := by
+      exact (Measure.integrableOn_of_bounded (hBfin R) (hTcm _ hGm).aestronglyMeasurable (M := 2 * Real.pi)
+        (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hTGb x)).bdd_mul
+        (hg m).aestronglyMeasurable (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hg1 m x)
+    rw [← integral_add h1 h2]
+    refine setIntegral_congr_fun measurableSet_ball fun x hx => ?_
+    rw [hsplitT m x hx]; ring
+  show Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * Tc (g m) x) atTop (𝓝 (∫ x in ball (0 : ℂ) R, F x * Tc F x))
+  rw [htarget]
+  simp_rw [hsplit]
+  simpa using hfirst.add hsecond
 
 /-- The averaging step: some disc of radius `r` about a point of `B(0, R − r)` meets the complement of `S` in at most the
 average, `|B(0, r)| · |B(0, R) ∖ S| / |B(0, R − r)|`. -/
@@ -3154,20 +3479,6 @@ theorem chiM0_le_chiCP : chiM0 ≤ chiCP := by
   obtain ⟨f, hf⟩ := (c.ae_unitPairsNull_of_modification hct hmod).exists
   have hmeas : Measurable (ct f) := hct.comp (measurable_const.prodMk measurable_id)
   exact chiM0_le ⟨ct f, hmeas, hf⟩
-
-/-- A null set of the plane meets almost every unit circle in an arc-null set (Fubini on `(x, θ) ↦ x + e θ`). -/
-theorem ae_arcLength_null {N : Set ℂ} (hN : MeasurableSet N) (h0 : volume N = 0) :
-    ∀ᵐ x ∂volume, arcLength {θ | x + e θ ∈ N} = 0 := by
-  set S : Set (ℂ × ℝ) := {p | p.1 + e p.2 ∈ N} with hS
-  have hSm : MeasurableSet S := (measurable_fst.add (continuous_e.measurable.comp measurable_snd)) hN
-  have hz : (volume.prod arcLength) S = 0 := by
-    rw [Measure.prod_apply_symm hSm]
-    have : ∀ θ : ℝ, volume ((fun x => (x, θ)) ⁻¹' S) = 0 := by
-      intro θ
-      have : (fun x => (x, θ)) ⁻¹' S = (· + e θ) ⁻¹' N := rfl
-      rw [this, measure_preimage_add_right]; exact h0
-    simp [this]
-  exact (Measure.measure_prod_null hSm).1 hz
 
 /-- **FS106-EQ**, (a) ⟺ (c), and FS106-COMP's first clause as (c) ⟹ (a) at every `k` (SR2 item 11):
 `χ_m⁰(ℝ²) ≤ k ⟺ µ_k⁰ = 1`. -/
