@@ -60,8 +60,8 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-IC5 (wave 4's `Contact`: `stuck_structure`; item 250) | Opus | `data/fs131/briefs/FS131-IC5-contact.md` | branch `fs131-w4c`'s `data/fs131/reports/FS131-IC5.md` |
-| FS131-IM1 (wave 4's moves, `…_aux` in `Moves`; no edit to `Contact`; item 248) | Opus | `data/fs131/briefs/FS131-IM1-moves.md` | branch `fs131-w4m`'s `data/fs131/reports/FS131-IM1.md` |
-| FS131-I4k (wave 4 on Opus: `UnitArc`, `BaseSteps`; not `Contact`; item 245) | Opus | `data/fs131/briefs/FS131-I4k-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4k.md` |
+| FS131-IM2 (wave 4's moves: the second prefix move into `Cone`, then SHAVE, RAY, MERGE; items 261–263) | Opus | `data/fs131/briefs/FS131-IM2-moves.md` | branch `fs131-w4m`'s `data/fs131/reports/FS131-IM2.md` |
+| FS131-QA3 (the definitions audit of waves 4 and 5, read-only; items 255, 265) | Opus | `data/fs131/briefs/FS131-QA3-definitions.md` | `data/fs131/reports/FS131-QA3.md` on `main` |
 | FS131-I2n (wave 2 on Opus: the last 5 lines, the carriers, the gate, the landing; item 234) | Opus | `data/fs131/briefs/FS131-I2n-wave2.md` | branch `fs131-w2`'s `data/fs131/reports/FS131-I2n.md` |
 
 
