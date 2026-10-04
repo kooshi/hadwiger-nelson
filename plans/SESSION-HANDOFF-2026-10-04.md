@@ -55,9 +55,11 @@ its record's last SAVED stage with a fresh agent on the same brief.
 2. When I2e hands back: the **Opus-implementer trial** on wave 2 (item 103); its first step merges `fs131-w2d` (K2d's branch) into `fs131-w2`.
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
-5. **On E1's report**: file its verdicts; if a GAP closes, tell the Woodall implementer; file the row 132 / § The aim corrections per the verdict (W's drafts, plan
+5. **E1's mid-flight finding (item 106)**: E1-NO45 bypasses both GAPs for arc maps [hand, one mind]; on E1's report, its Opus slot goes to a Woodall re-plan
+   (FS131-W2, resuming W if cheaper) before FS131-IW; I3e's half slot goes to FS131-I4.
+6. **On E1's report**: file its verdicts; if a GAP closes, tell the Woodall implementer; file the row 132 / § The aim corrections per the verdict (W's drafts, plan
    § 5) and the FS106 errata through the record job.
-6. **On a landing** (wave 3 is closest): read the worktree's `build/gate/*/latest`, the axioms digest (`scripts/gate_report.py axioms <log> <prev> CLAUDE.md`),
+7. **On a landing** (wave 3 is closest): read the worktree's `build/gate/*/latest`, the axioms digest (`scripts/gate_report.py axioms <log> <prev> CLAUDE.md`),
    read one statement back, file the counts (`CLAUDE.md` § Trust ledger line and § The gate counts line; `scripts/vacuity-baseline.txt` header lines 25–26),
    log the receipt. The second of waves 2 and 3 to land merges the first's vacuity carriers.
 
