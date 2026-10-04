@@ -1235,3 +1235,55 @@ files were compiled with `lake env lean -DautoImplicit=false` (never evidence), 
 (table 70k); IRREG (2) about 5k (table 40k). About half the table overall, the hardest leaf at the table.
 
 **Still `sorry`**: none — `grep` finds no `sorry` term in `Proofs/` (the word survives in prose only, "sorry-free").
+
+## Stage 30 — SAVED (FS131-I2n): wave 2's vacuity carriers; the gate on `fs131-w2` before the merge
+
+**The build of the last leaf** (`d078808a`): OK — 446 of 446 batches, 12 modules rebuilt (the five modules whose docstrings changed and their
+dependents), **0 warnings** (`grep -c "warning:"` = 0) — `build/gate/build/20261004T215748Z-2725003.log`, copy `data/fs131/i2n/build-gate.log`. The
+commits after it (`b0d18832`, `082f86c9`, `4679f115`) change `scripts/`, `tools/`, `data/`, `ARCHITECTURE.md` only, so that build is the Lean state
+gated here. `grep -rnw sorry Proofs` finds the word in prose only.
+
+**The carriers (FS131-T1's procedure, `scripts/Vacuity.lean`'s docstring, entry "Wave 2's carriers")**: **IN** `HadwigerNelson.Plane.CPColouring`
+(a structure whose emptiness is a theorem — `IsEmpty (CPColouring 0)`, `IsEmpty (CPColouring 1)`, both `instance`s; the evidence collector reads
+instances, as it reads `AeColouring`'s: `EVIDENCE EMPTY …instIsEmptyCPColouringOfNatNat(_1)` in the scan; inhabited at `9` by
+`nonempty_cpColouring_nine`) and `HadwigerNelson.Plane.SemiconcaveWith` (refuted at a concrete instance by `not_semiconcaveWith_one_lowerArc`, read as
+`EVIDENCE EMPTY`); **OUT** every other wave-2 predicate, each with its reason in the docstring (set/family/function/field variables, `GENERIC`
+everywhere; `Tight`/`HasSlack` with positive facts only; number inequalities; `Row130M1` and `Voronov11`, closed propositions consumed as named
+hypotheses, whose tracking would add undischargeable `UNKNOWN` sites). Controls 33–38 in `scripts/vacuity-controls.lean`, `expect` lines in
+`scripts/vacuity.sh --self-test` (T1's step (3)).
+
+**The gate** (every log read, not only its last line):
+- **axioms** — "OK — 2450 clean, 11 axiom-free, 4 imported, 5 declared purchase(s)" over 2470 records; the four IMPORTED records
+  (`falconer_reduction`, `le_chiM_of_falconerFan`, `exists_mem_falconerE`, `fan_tip_ae_mem`) carry exactly `falconer_lemma2_nonempty`, the one
+  declared import; library axioms other than native auxiliaries: 1, declared (`data/fs131/i2n/axioms-gate.log`; full
+  `build/gate/axioms/20261004T221018Z-2806763.log`, copy `axioms-gate-full.log`). Every wave-2 row declaration reads the standard three but the two
+  FALC-RED ones, which add the declared import (`tools/fs131_i2n_row_axioms.py`, 64 declarations, `data/fs131/i2n/row-axioms.txt`; its `--self-test`
+  plants a `sorryAx` record and an unaudited name, both reported, and a faithful partner passes).
+- **axioms self-test** — **red first**: 4 of 23 controls (`baseline`, `imported_declared`, `library_accounting`, `banner_dropped`), each traced to
+  the library's state, not to the plants: `scripts/axioms-controls.txt` assumed a library with no declared import
+  (`build/gate/axioms-self-test/20261004T221030Z-2808168.log`, copies `axioms-selftest.log`, `axioms-selftest-red-full.log`). Messaged; Keryx's
+  ruling (inventory item 260): apply the four edits — the counts and the `old` digest texts set to the shipped state (4/1/1; 5/2/2 with the planted
+  import), `library_accounting` drops the planted axiom's own `LIBRARY AXIOM` line, `banner_dropped` predicts the two consequences of a dropped
+  IMPORTED banner on a non-empty section. **Green after**: "every planted fault fired, and every partner passed", 23 of 23
+  (`build/gate/axioms-self-test/20261004T222158Z-2896287.log`, copies `axioms-selftest-green.log`, `axioms-selftest-green-full.log`).
+- **vacuity self-test** — "every control fired, and the silent ones stayed silent", controls 1–38, the six new ones among them
+  (`build/gate/vacuity-self-test/20261004T221942Z-2884278.log`, copy `vacuity-selftest.log`).
+- **vacuity** — "vacuity: OK", `declarations=9261 refutations-skipped=64 sites=515`, `vacuous=0 stale=0 declared=3 witnessed=23 generic=487
+  unknown=2` (the baseline's two), evidence 9 emptiness proofs and 48 witnesses (`data/fs131/i2n/vacuity-gate.log`; full
+  `build/gate/vacuity/20261004T222352Z-2908756.log`, copy `vacuity-gate-full.log`). **Reconciled against this branch's recorded 8385 / 57 / 459 /
+  21 / 433** (the counts recorded before wave 2's modules existed; `main`'s are reconciled at the landing): declarations +876 are wave 2's;
+  refutations-skipped +7, wave 2's theorems concluding `False`; witnessed +2 — `sq9 :: AeColouring 9` and one more witnessed site of the backlog
+  vocabulary; sites +56 = generic +54 + witnessed +2, the 19 `CPColouring k` sites (all `GENERIC`, `k` a variable) among them; `SemiconcaveWith`
+  raises no site (it occurs only as a conclusion and in its refutation). vacuous, stale, declared, unknown unchanged.
+- **architecture** — `tools/check_architecture.py` exit 0, "RESULT: PASS" (`data/fs131/i2n/arch.log`), after CoverExamples' row gained B1/B2's
+  shape.
+- **spec examples** — elaborated in the build: `hcCorner`'s, `hcN0`'s and `hcKZ`'s examples, and every earlier one.
+
+**Negative controls, each watched red, each reverted** (`git diff -- Proofs ARCHITECTURE.md` empty of the plant after each):
+- build — `theorem fs131_i2n_planted_build : (1 : ℕ) = 1 := by sorry` appended to `Plane/YesLimit` (imported by `Proofs` alone): "2 module(s)
+  rebuilt, **1 module(s) with warnings**", naming `YesLimit.lean:220:8: declaration uses sorry`; `build.sh` exits 0 and prints "OK" — the gate's
+  zero-warnings check is the count (`data/fs131/i2n/build-plant.log`). Reverted; the olean is restored by the post-merge build.
+- architecture — `Plane/CoverExamples`' Imports cell without `Plane/Slack`: "FAIL imports of Plane/CoverExamples: stated-only [], real-only
+  ['Plane/Slack']", exit 1 (`data/fs131/i2n/arch-plant.log`); reverted, exit 0.
+- axioms — the self-test is the plant suite: its `sorry` control ("FAIL sorry CLEAN 't3c_sorry' carries sorryAx") and 22 others fired.
+- vacuity — the self-test is the control suite; every control fired, the three new `VACUOUS` ones among them.
