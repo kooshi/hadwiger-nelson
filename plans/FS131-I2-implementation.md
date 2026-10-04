@@ -942,3 +942,21 @@ which carries the row.
 
 None: the gate was not run (23 `sorry` remain in `Plane/CoverExamples`), so no count in `CLAUDE.md` § The gate or § Trust ledger moves, and no ledger
 row is regraded.
+
+## Stage 24 — SAVED (FS131-I2l, Opus): readback; the branch builds as given
+
+**Readback.** The brief's four quotations checked by `grep -F` against their sources: the "May" line (`plans/FS131-w2-kernel-plan.md` line 754,
+§ Stage 13), "**Still `sorry`** (23, all in `Plane/CoverExamples`): …" (this record, Stage 23, line 910), "**For the next implementer.** (1) Nearest
+the root: …" (line 915) and "**Not done, owed before the gate**: wave 2's vacuity carriers. …" (line 899) — all four exact. Counts at `1cc25e27` by
+script (lines that are exactly `sorry`): `Plane/CoverExamples` 23; no other module holds one.
+
+**May**: prove any child or leaf; add further children (each stated as a lemma before use, with its `scripts/Axioms.lean` record); move declarations
+within a module; add imports (with `ARCHITECTURE.md`'s Imports cell); add supporting definitions and lemmas (in the wave-2 modules, the wave's foundation
+or the shared foundation under `Plane/`); register wave 2's vacuity carriers under FS131-T1's procedure, each with a control, and reconcile the counts;
+run the full gate and land on `main` by fast-forward after merging `main` (with `tools/fs131_qa1_dupes.py`). **May not**: change any row statement,
+hypothesis or definition's meaning, nor any child statement fixed by K2c or K2d (the authorised rulings, the IMPORTED move, the docstrings and the Dyadic
+`hi` change are kept); no new `axiom`, no `native_decide`; never force-push; never edit a file while a build of it runs. A leaf that cannot be proved as
+written goes to Keryx at once, and the others continue. The untracked `build-i2*.log` files stay uncommitted.
+
+**Build as given** at `1cc25e27`: OK — all 1750 modules up to date, nothing built, 1 module with warnings, 23 warnings, every one `declaration uses
+'sorry'`, 23 distinct (`build/gate/build/20261004T182453Z-1418891.log`; counted with `grep -c`).
