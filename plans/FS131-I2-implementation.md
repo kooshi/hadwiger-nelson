@@ -818,3 +818,21 @@ docstring, which carries the row.
 
 None: the gate was not run (36 `sorry` remain in wave 2's modules), so no count in `CLAUDE.md` § The gate or § Trust ledger moves, and no ledger
 row is regraded.
+
+## Stage 22 — SAVED (FS131-I2k, Opus): readback; the branch builds as given
+
+**Readback.** The brief's three quotations checked by `grep -F` against their sources: the "May" line (`plans/FS131-w2-kernel-plan.md` line 754,
+§ Stage 13), "**Still `sorry`** (36): …" (this record, Stage 21, line 783) and "**For the next implementer.** (1) `integral_circleAvg_sq`: …" (this
+record, Stage 21, line 788) — all three exact. Counts at `9e32ab1d` by script (lines that are exactly `sorry`): `Plane/Slack` 2, `Plane/CoverExamples`
+34 — 36, as the brief says; no other module holds one.
+
+**May**: prove any child or leaf; add further children (each stated as a lemma before use, with its `scripts/Axioms.lean` record); move declarations
+within a module; add imports (with `ARCHITECTURE.md`'s Imports cell); add supporting definitions; register wave 2's vacuity carriers under FS131-T1's
+procedure, each with a control, and reconcile the counts; run the full gate and land on `main` by fast-forward after merging `main`. **May not**: change
+any row statement, hypothesis or definition's meaning, nor any child statement fixed by K2c or K2d (the rulings 48, 56, 57, 63, 72, 86, 100, 134 are the
+authorised changes and are kept, with the IMPORTED move and the docstrings); no new `axiom` (`falconer_lemma2_nonempty` is the one declared import), no
+`native_decide`; never force-push. A leaf that cannot be proved as written goes to Keryx at once, and the others continue. The untracked
+`build-i2*.log` files stay uncommitted.
+
+**Build as given** at `9e32ab1d`: OK — all 1750 modules up to date, nothing built, 2 modules with warnings, 36 warnings, every one `declaration uses
+'sorry'` (`build/gate/build/20261004T173350Z-1106823.log`; counted with `grep -c`).
