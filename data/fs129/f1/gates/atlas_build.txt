@@ -1,6 +1,4 @@
-checked 212, failed 4, errors 0
-FAIL R134: second quote not found at CLAUDE.md § Paths forward, ranked: "BASE-V stands beside them (row 134's base re-derived but for Lemma 4 at cusps)"
-FAIL FS124: grade words not found at plans/STUB-q-ring.md: 'The main remaining case set of the six-map NO with unit arcs.'
-FAIL FS104: verbal registration not found at CLAUDE.md § Paths forward, ranked item 3: 'success low, a named no-go the likely product'
-FAIL note publish: quote not found at CLAUDE.md § The local–global conjecture: 'Nothing is published before it is formalized in Lean, in full, with no declared purchases'
-refusing to build: the facts check failed (python3 tools/viz_proof_atlas_check.py names every failing fact)
+checked 212, failed 0, errors 0
+theme tokens: 30 light, 27 redefined for dark, both dark blocks identical
+palette review: 0 failed
+wrote visualizations/proof-atlas/index.html, 176,030 bytes

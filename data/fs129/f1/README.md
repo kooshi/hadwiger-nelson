@@ -85,3 +85,24 @@ Gates (saved in `data/fs129/f1/gates/`; each read by exit status):
   replaced it). Palette review exit 0 ("0 failed"), its self-test exit 0; the checker's `--self-test` exit 1 (it runs on the failing real facts); the
   build **refuses** ("the facts check failed"). `index.html` not rebuilt. Not repaired: each repair is a ruling (below).
 - Step 6 (DESIGN.md stage section; distances) not done: it needs the build.
+
+## Stage 5 — SAVED: the coordinator's amendment (R1–R7), every gate again
+
+Amendment read from `/home/kooshi/source/lean-dir/data/fs129/briefs/FS129-F1-front-page.md` § Amendment.
+- **R1** (`tools/claude_md_fact_audit.py`, ALLOW table): one entry per token, reason "FS129-P1 re-drafted the ranked row; the fact stays in `<file>`", the
+  file being the first my grep found: `j = 2, 3` -> STUB-cp-plane-six; `104–108`, `109–111`, `C114-LOCAL-F's`, `FS114-Y2-BOWTIE's` -> STUB-qfree-ring;
+  `FS116-N2's`, `√ε` -> STUB-q-ring; `REG-J′-C₅` -> STUB-map-step; `(R2)` -> STUB-curved-pencils (found in ten stubs); `131–141`: "item 31's row range now
+  reads 131–154 (FS-129's rows 149–154)". Every token was found in a stub. `0.03` was an EXTERNAL_HOMES entry pointing at FRONTIER-STUBS (a verified
+  allowance, which cannot be satisfied by ALLOW): re-pointed to `plans/STUB-cp-plane-six.md` (its "advisor's prior … P ≈ 0.03" line), same reason text.
+  **One more, a consequence of R4:** `plans/FS129-cross-application-audit.md` (code and chunk token) left the corpus when R4 replaced the Opened sentence;
+  I added one ALLOW entry (reason: FS-129 is Derived, R4 replaced the sentence naming its plan, the file stays) — not authorized word for word; CHECK.
+  Fact audit `--base f411553f`: exit 0, PASS. `--dupes` exit 0, 163 runs / 15,161 bytes.
+- **R2** (atlas; listed in DESIGN.md's FS129-F1 section): R134's second quote -> FRONTIER-STUBS § Open milestones, in order; FS124's grade words -> "The main
+  remaining case set of the six-map NO with unit arcs, and the YES side's home"; "publish" text and quote -> "… in Lean, in full."; FS104's registration
+  **removed** (its row as filed gives none); FS123's label and plain text -> "the Siamese class". Checker "checked 212, failed 0, errors 0"; checker
+  self-test PASS; palette review 0 failed and its self-test PASS; build exit 0 (`index.html` 176,030 bytes); DESIGN.md stage section written, with the look
+  and the distances said not done.
+- **R3** done ("4–74 | 71 more open stubs"). **R4** done (Derived sentence; FS-129's Next clause removed; "from `plans/LEAN-BACKLOG.md`"). **R5** done (queue row 5's
+  "what it would decide" cell quoted before the result bullets). **R6**, **R7**: no action.
+- Gates (all in `gates/`): bib_audit 0; architecture PASS; identities PASS; sizes CLAUDE.md 51,126, SKILL.md 170,280; derive gate rerun (see the report);
+  rk_mirror retired (exit 2, not run).

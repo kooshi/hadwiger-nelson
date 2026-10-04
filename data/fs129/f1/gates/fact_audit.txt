@@ -1,25 +1,16 @@
 corpus: CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md + .claude/skills/grokkings/SKILL.md + plans/GROKKINGS-RETIRED.md + RUNNING.md + plans/CLAUDE-MD-HISTORY.md + LEAN.md + plans/WHERE-THE-PROBLEM-STANDS.md + plans/HISTORY-WORKFLOW-3.0.md + plans/FRONTIER-STUBS.md (each joined if present)
-bytes: 1,224,664 -> 1,245,083  (+20,419)
-token PROXY (see token_proxy; not a tokenizer): 415,351 -> 422,329  (+6,978)
+bytes: 1,224,664 -> 1,245,099  (+20,435)
+token PROXY (see token_proxy; not a tokenizer): 415,351 -> 422,330  (+6,979)
 [date] 40 distinct before, 40 after, LOST 0, homed outside the corpus 0
 [bib] 157 distinct before, 157 after, LOST 0, homed outside the corpus 0
-[code] 2391 distinct before, 2419 after, LOST 1, homed outside the corpus 0
-    LOST code: 'j = 2, 3'  (was ×1)
+[code] 2391 distinct before, 2418 after, LOST 0, homed outside the corpus 0
 [id] 896 distinct before, 911 after, LOST 0, homed outside the corpus 0
 [row] 113 distinct before, 120 after, LOST 0, homed outside the corpus 0
 [ref] 404 distinct before, 418 after, LOST 0, homed outside the corpus 0
 [num] 942 distinct before, 944 after, LOST 0, homed outside the corpus 1
+    HOMED num: '0.03' in plans/STUB-cp-plane-six.md
 [tag] 110 distinct before, 111 after, LOST 0, homed outside the corpus 0
-[chunk] 5645 distinct before, 5728 after, LOST 9, homed outside the corpus 0
-    LOST chunk: '(R2)'  (was ×1)
-    LOST chunk: '104–108'  (was ×1)
-    LOST chunk: '109–111'  (was ×1)
-    LOST chunk: '131–141'  (was ×1)
-    LOST chunk: "C114-LOCAL-F's"  (was ×1)
-    LOST chunk: "FS114-Y2-BOWTIE's"  (was ×1)
-    LOST chunk: "FS116-N2's"  (was ×1)
-    LOST chunk: 'REG-J′-C₅'  (was ×1)
-    LOST chunk: '√ε'  (was ×1)
+[chunk] 5645 distinct before, 5728 after, LOST 0, homed outside the corpus 0
 [name] 958 distinct before, 975 after, LOST 0, homed outside the corpus 0
 pointers: 120 distinct row references, 92 grokkings; dangling: none
 PROTECTED regions: 3 before (1086, 2567, 2899 bytes), 3 after
@@ -167,7 +158,7 @@ bytes per section (before -> after):
      3,876 ->    3,876        +0  ## `CLAUDE.md` § The gate — the vacuity check
      2,173 ->    2,172        -1  ## `CLAUDE.md` § Make the gate fail, and watch it fail
      2,227 ->    2,227        +0  # The frontier stubs — the ranked set of next milestones
-     7,764 ->    7,687       -77  ## Open milestones, in order
+     7,764 ->    7,703       -61  ## Open milestones, in order
    103,876 ->  107,185    +3,309  ## Ranked stubs
     31,548 ->   31,549        +1  ## Closed, absorbed and demoted
 
@@ -264,7 +255,7 @@ external homes in force: 276
   'FS-84' -> plans/FRONTIER-STUBS.md: the Open-milestones paragraph's 'Kooshi's rulings (FS-84's among them)', cut by D-C7 at FS-106's close; the closed list holds FS-84's entry and ruling
   "84's" -> plans/FRONTIER-STUBS.md: the same clause ('FS-84's'); the closed list holds it
   '120–127' -> plans/FRONTIER-STUBS.md: the Last-updated line's 'FS-100 stage 5 with its waves (rows 120–127)', cut by D-C5 at FS-106's close; the closed list holds it
-  '0.03' -> plans/FRONTIER-STUBS.md: FS-104's paths-forward bearing 'the advisor's prior for six itself ≈ 0.03', cut by D-C8 at FS-106's close; FS-104's row in plans/FRONTIER-STUBS.md keeps it
+  '0.03' -> plans/STUB-cp-plane-six.md: FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md` (formerly FS-104's paths-forward bearing 'the advisor's prior for six itself ≈ 0.03', cut by D-C8 at FS-106's close)
   "80's" -> plans/FRONTIER-STUBS.md: FS-104's paths-forward question '`k`-point correlation constraints (FS-80's route)', shortened to '(FS-80)' by D-C8; FS-104's row in plans/FRONTIER-STUBS.md keeps it
   'D1–D5' -> plans/STUB-regularity-wall.md: link 5's normal-form address '(FS-103's V1 and M, D1–D5)', cut by D-C2 at FS-106's close ('whose normal form FS-103 holds'); the stub's reduction, the working copy of § The aim, keeps 'FS103-M's D1–D5'
   'plans/STUB-ultrametric-continuation.md' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-98, which left CLAUDE.md's ranks 1–29 at FS-107's close (§R-close 4.2; E1's design); the stub's row in plans/FRONTIER-STUBS.md is authoritative
@@ -455,7 +446,18 @@ external homes in force: 276
   'Std' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
   'TwoAdicFive' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
   'ZMod' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
-allowances in force: 245
+allowances in force: 256
+  'j = 2, 3': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`
+  '104–108': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`
+  '109–111': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`
+  "C114-LOCAL-F's": FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`
+  "FS114-Y2-BOWTIE's": FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`
+  "FS116-N2's": FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-q-ring.md`
+  'REG-J′-C₅': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-map-step.md`
+  '√ε': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-q-ring.md`
+  '(R2)': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-curved-pencils.md`
+  '131–141': item 31's row range now reads 131–154 (FS-129's rows 149–154)
+  'plans/FS129-cross-application-audit.md': FS-129 is Derived: the amendment's R4 replaced the open-milestones sentence that named its plan; the plan file stays at plans/FS129-cross-application-audit.md (FS129-F1 CHECK for the coordinator)
   '38–42': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
   '46–49': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
   '50–51': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
@@ -706,17 +708,6 @@ gate-count transitions in force: 3
   ('1130', '5') -> ('1193', '5'): FS-75's close gate (the owner's re-run at J52K's end; build/gate/axioms/20260926T053431Z-866750.log): 1,209 records, 1,193 clean, 11 axiom-free, 5 purchases
   ('1193', '5') -> ('1236', '5'): X11K3's gate (FS-100 wave 3's kernel lane; build/gate/axioms/20260926T122606Z-1387817.log): 1,252 records, 1,236 clean, 11 axiom-free, 5 purchases
 
-FAIL: lost code token 'j = 2, 3'
-FAIL: external home plans/FRONTIER-STUBS.md lacks num token '0.03'
-FAIL: lost chunk token '(R2)'
-FAIL: lost chunk token '104–108'
-FAIL: lost chunk token '109–111'
-FAIL: lost chunk token '131–141'
-FAIL: lost chunk token "C114-LOCAL-F's"
-FAIL: lost chunk token "FS114-Y2-BOWTIE's"
-FAIL: lost chunk token "FS116-N2's"
-FAIL: lost chunk token 'REG-J′-C₅'
-FAIL: lost chunk token '√ε'
-AUDIT FAILED (11 failure(s))
+AUDIT PASSED (0 failure(s))
 size: CLAUDE.md 51,126 of 80,000 bytes
 size: .claude/skills/grokkings/SKILL.md 170,280 of 200,000 bytes

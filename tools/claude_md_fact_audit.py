@@ -61,6 +61,18 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # FS129-F1 (2026-10-03, the coordinator's amendment R1): FS129-P1's re-drafted ranked rows.
+    'j = 2, 3': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    '104–108': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`",
+    '109–111': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`",
+    "C114-LOCAL-F's": "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`",
+    "FS114-Y2-BOWTIE's": "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`",
+    "FS116-N2's": "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-q-ring.md`",
+    'REG-J′-C₅': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-map-step.md`",
+    '√ε': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-q-ring.md`",
+    '(R2)': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-curved-pencils.md`",
+    '131–141': "item 31's row range now reads 131–154 (FS-129's rows 149–154)",
+    'plans/FS129-cross-application-audit.md': "FS-129 is Derived: the amendment's R4 replaced the open-milestones sentence that named its plan; the plan file stays at plans/FS129-cross-application-audit.md (FS129-F1 CHECK for the coordinator)",
     # E1, design (b) on CLAUDE.md (2026-09-26): paths-forward ranks >= 30 cut to one pointer row (their tokens: EXTERNAL_HOMES).
     '38–42': "a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank",
     '46–49': "a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank",
@@ -436,7 +448,7 @@ EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
     'FS-84': ("plans/FRONTIER-STUBS.md", "the Open-milestones paragraph's 'Kooshi's rulings (FS-84's among them)', cut by D-C7 at FS-106's close; the closed list holds FS-84's entry and ruling"),
     "84's": ("plans/FRONTIER-STUBS.md", "the same clause ('FS-84's'); the closed list holds it"),
     '120–127': ("plans/FRONTIER-STUBS.md", "the Last-updated line's 'FS-100 stage 5 with its waves (rows 120–127)', cut by D-C5 at FS-106's close; the closed list holds it"),
-    '0.03': ("plans/FRONTIER-STUBS.md", "FS-104's paths-forward bearing 'the advisor's prior for six itself ≈ 0.03', cut by D-C8 at FS-106's close; FS-104's row in plans/FRONTIER-STUBS.md keeps it"),
+    '0.03': ("plans/STUB-cp-plane-six.md", "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md` (formerly FS-104's paths-forward bearing 'the advisor's prior for six itself ≈ 0.03', cut by D-C8 at FS-106's close)"),
     "80's": ("plans/FRONTIER-STUBS.md", "FS-104's paths-forward question '`k`-point correlation constraints (FS-80's route)', shortened to '(FS-80)' by D-C8; FS-104's row in plans/FRONTIER-STUBS.md keeps it"),
     'D1–D5': ("plans/STUB-regularity-wall.md", "link 5's normal-form address '(FS-103's V1 and M, D1–D5)', cut by D-C2 at FS-106's close ('whose normal form FS-103 holds'); the stub's reduction, the working copy of § The aim, keeps 'FS103-M's D1–D5'"),
     # FS107-X, the front page of FS-107's close (2026-09-27; data/fs107/fs107-x/record.md): FS-107's rank-1 row and FS-98's row left CLAUDE.md's

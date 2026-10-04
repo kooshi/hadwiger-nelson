@@ -912,11 +912,11 @@
    "also": [
     {
      "src": {
-      "file": "CLAUDE.md",
-      "section": "### Paths forward, ranked"
+      "file": "plans/FRONTIER-STUBS.md",
+      "section": "## Open milestones, in order"
      },
-     "quote": "BASE-V stands beside them (row 134's base re-derived but for Lemma 4 at cusps)",
-     "address": "CLAUDE.md § Paths forward, ranked, line 257"
+     "quote": "with BASE-V beside them (row 134's base re-derived but for Lemma 4 at cusps)",
+     "address": "plans/FRONTIER-STUBS.md § Open milestones, in order, line 28"
     }
    ],
    "posed": [
@@ -1625,7 +1625,7 @@
   },
   {
    "id": "FS123",
-   "label": "the (Q)-free ring",
+   "label": "the Siamese class",
    "role": "step",
    "plain": "Does a four-colour vertex whose ring carries no (Q) arc survive past 1 + ε? First: do a fragment's bends keep it in the class the Γ-free exclusion reads?",
    "src": {
@@ -1658,7 +1658,7 @@
    "grade_src": {
     "file": "plans/STUB-q-ring.md"
    },
-   "grade": "The main remaining case set of the six-map NO with unit arcs.",
+   "grade": "The main remaining case set of the six-map NO with unit arcs, and the YES side's home",
    "theta": 16,
    "r": 429,
    "sector": "seven",
@@ -1991,15 +1991,6 @@
    "r": 222,
    "sector": "six-low",
    "tier": 1,
-   "words": {
-    "src": {
-     "file": "CLAUDE.md",
-     "section": "### Paths forward, ranked",
-     "row": "3"
-    },
-    "quote": "success low, a named no-go the likely product",
-    "address": "CLAUDE.md § Paths forward, ranked item 3, line 274"
-   },
    "status": "gap",
    "line": 274,
    "address": "CLAUDE.md § Paths forward, ranked item 3, line 274",
@@ -3973,12 +3964,12 @@
   },
   {
    "id": "publish",
-   "text": "Nothing is published before it is formalized in Lean, in full, with no declared purchases.",
+   "text": "Nothing is published before it is formalized in Lean, in full.",
    "src": {
     "file": "CLAUDE.md",
     "section": "### The local–global conjecture"
    },
-   "quote": "Nothing is published before it is formalized in Lean, in full, with no declared purchases",
+   "quote": "Nothing is published before it is formalized in Lean, in full.",
    "address": "CLAUDE.md § The local–global conjecture, line 159"
   }
  ]

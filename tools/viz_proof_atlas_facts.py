@@ -37,7 +37,7 @@ GSTUB = STUB("STUB-global-step.md")
 RSTUB = STUB("STUB-stuck-ray.md")
 NIGHT = STUB("POROS-2026-09-27-night-aim.md")
 NOT_THE_NO = (L(135), "Not claimed: the NO")
-BASEV = ({"file": "CLAUDE.md", "section": "### Paths forward, ranked"}, "BASE-V stands beside them (row 134's base re-derived but for Lemma 4 at cusps)")
+BASEV = ({"file": "plans/FRONTIER-STUBS.md", "section": "## Open milestones, in order"}, "with BASE-V beside them (row 134's base re-derived but for Lemma 4 at cusps)")
 
 NODES, EDGES = [], []
 
@@ -321,14 +321,14 @@ N("YESLIM", "the YES needs no map", "held", "Valid six-coloured fragments on dis
   "decides both ways.", B("FS116-O1-YESLIM"),
   "for every k ≥ 1, if for every R > 0 some closed disc of radius R carries a valid k-coloured fragment",
   "hand; held, two minds (the second blind)", at=(110, 430), sector="six-up")
-N("FS123", "the (Q)-free ring", "step", "Does a four-colour vertex whose ring carries no (Q) arc survive past 1 + ε? First: do a fragment's bends keep "
+N("FS123", "the Siamese class", "step", "Does a four-colour vertex whose ring carries no (Q) arc survive past 1 + ε? First: do a fragment's bends keep "
   "it in the class the Γ-free exclusion reads?", STUB("STUB-qfree-ring.md"),
   "the Siamese class: does any four-colour vertex whose ring carries no (Q) arc survive past radius 1 + ε, in any class?",
   (STUB("STUB-qfree-ring.md"), "A rung of route M's first half, smaller than the answer; possibly cheap."), at=(31, 377), sector="seven")
 N("FS124", "the (Q) ring", "step", "The rest of the case list: rings with (Q) arcs (SEMI-PAR3, the disk's corner, crossed reciprocity) and vertices of "
   "five or six colours.", STUB("STUB-q-ring.md"),
   "the (Q) ring: does every vertex of at least four colours whose ring carries (Q) arcs, and every vertex of five or six colours, die within an explicit radius?",
-  (STUB("STUB-q-ring.md"), "The main remaining case set of the six-map NO with unit arcs."), at=(16, 429), sector="seven")
+  (STUB("STUB-q-ring.md"), "The main remaining case set of the six-map NO with unit arcs, and the YES side's home"), at=(16, 429), sector="seven")
 N("FS125", "the saturated local exclusion", "step", "The same exclusion in the class route M's honest branch hands it: saturated fragments.",
   STUB("STUB-saturated-local.md"),
   "the saturated local exclusion: is there an explicit radius about a four-colour vertex within which no saturated valid six-coloured fragment exists?",
@@ -398,7 +398,7 @@ N("FS104", "χ_CP(ℝ²) ≥ 6", "question", "Is the stationary (equivalently th
   "YES gives χ(ℝ²) ≥ 6 given MR — a new lower bound, independent of the map line, leaving six against seven; a NO is a stationary "
   "five-colouring, which gives χ(ℝ²) = 5 with no MR. No held result decides it, and no one-point density bound can (FS-104).", PF(3),
   "is χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130)?", (PF(3), "is χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130)?"), at=(86, 222), sector="six-low",
-  tier=1, words=(PF(3), "success low, a named no-go the likely product"))
+  tier=1)
 N("R129", "density cannot give six", "nogo", "One colour class at a time is capped below 4.37: the bound that gave five is a fractional "
   "bound rounded up, and that route never gives six. A proof of six must use how the classes fit together.", L(129),
   "1/α_loc ≤ 4.36: that route never gives six", "FRAC, TJ, ROUND, DV, TF, 47 two derivations (FS103-F; FS103-B blind to F's record)",
@@ -668,9 +668,9 @@ NOTES = [
          src=LGC, quote="Believing the answer is seven is not evidence for seven; the value-skipping that motivates the belief is itself compatible with five (G64)."),
     dict(id="rank", text="Routes are ranked by bearing on the answer, never by difficulty, length or formalization effort.",
          src=PRIORS, quote="Rank a route by its bearing on the answer, never by its difficulty, its length or its formalization effort."),
-    dict(id="publish", text="Nothing is published before it is formalized in Lean, in full, with no declared purchases.",
+    dict(id="publish", text="Nothing is published before it is formalized in Lean, in full.",
          src={"file": "CLAUDE.md", "section": "### The local–global conjecture"},
-         quote="Nothing is published before it is formalized in Lean, in full, with no declared purchases"),
+         quote="Nothing is published before it is formalized in Lean, in full."),
 ]
 
 

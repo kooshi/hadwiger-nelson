@@ -233,3 +233,31 @@ None. The job folds a close into an instrument.
 
 **Would have searched here:** none. The layout was placed by hand against the lint; nothing here is a search for a finite witness.
 
+
+## FS129-F1 — SAVED: FS-129's record folded in
+
+*The filing job FS129-F1 (`data/fs129/f1/README.md`); the coordinator's amendment R2 of `data/fs129/briefs/FS129-F1-front-page.md`.*
+
+**What the checker named first:** 9 facts (three already failing on `main`: R134's second quote, FS124's grade words, the "publish" note). Six moved with
+the filing: FS123's and FS120's title quotes (re-aimed names), FS104's registration and `PF(3)` text, FS-59's `FSR(20)` (now 21) and the BOWTIE→TSMYES
+edge's row (18, now 19).
+
+**What changed on the map** (every quote verbatim at its address; the checker reads 212, failed 0, errors 0):
+- Three marks added from FS129-Z2's draft: QFREE (row 149, no-go), QPRUNE (row 150, held), TOP5 (row 154, held), with the edges GFREE→QFREE ("rests"),
+  QFREE→LOCALF and QPRUNE→LOCALF ("context"). Positions chosen by `data/fs129/f1/place_atlas.py` against the lint: QFREE (84, 520), QPRUNE (80, 540), TOP5 (162, 434).
+- Re-pointed quotes: FS123's title quote now "the Siamese class: …"; FS120's "the pinch at a junction, and the cover route at five: …"; FS-59's row address
+  `FSR(21)`; the BOWTIE→TSMYES edge's row "19".
+- Re-pointed by ruling R2: R134's second quote now at `plans/FRONTIER-STUBS.md` § Open milestones, in order, "with BASE-V beside them (row 134's base
+  re-derived but for Lemma 4 at cusps)"; FS124's grade words now "The main remaining case set of the six-map NO with unit arcs, and the YES side's home"
+  (`plans/STUB-q-ring.md`); the "publish" note's text and quote now "Nothing is published before it is formalized in Lean, in full."
+- **FS-104's verbal registration removed**: its row in `CLAUDE.md` § Paths forward, as filed by FS129-P1, gives none ("success low, a named no-go the
+  likely product" is gone from it), and the atlas takes a stub's registration only for that event.
+- The FS123 node's label and plain text read "the Siamese class" (ruling R2). Not changed, not asked: the FS128 and FS120 nodes' labels ("the six-colour
+  rungs", "the pinch at a junction"), and the edge FS123→LOCALF's quote "the (Q)-free ring", which still stands in its stub.
+
+**The one look:** not done (no headless screenshot taken in this job). **Distances at the defaults:** not read; the build wrote `index.html` (176,030 bytes) and the page computes them.
+The layout lint reads 0 overlaps. Palette review 0 failed; its self-test and the checker's self-test pass.
+
+## Theorems this phase proved
+
+None. The job folds a close into an instrument.
