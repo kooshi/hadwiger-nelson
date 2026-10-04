@@ -1778,3 +1778,19 @@ reason by the close.*
      their exact statements in a new module `Plane/ValidMap/Moves` upstream of `Contact`, on `fs131-w4m` (from `fs131-w4c` at `d4f946ae`, IC4's stage 11;
      `.lake/build` copied from `fs131-w5b`); engine 2's hunk brought over first; no edit to `Contact`, no merge, no gate. Launched in I5b's slot (item 247 (c)):
      1 (I2n) + 1 (I4k) + 1 (IC4) + 1 (IM1) = 4. IC4 told the moves are taken.
+249. **FS131-IC4 handed back at stage 12, harness ≈ 444k** (report `data/fs131/reports/FS131-IC4.md` on `fs131-w4c`; branch at `67c9f5a3`, checked): `Contact` 5 → 4.
+     **[kernel] on the branch, standard three**: **FS110-N4-SHADOW's N4-FLANK `flank_shadows`** (in the horn near `v`, the points in the `g`-class's shadow are those
+     below a tangent circle of curvature `σ_g ∈ [κ₁, κ₂]`, the `h`-class's above one of curvature `σ_h ∈ [κ₁, κ₂]`), so **FS110-N4-SHAVE's criterion
+     `shaveAvailable_of_not_doublyShadowed` is sorry-free**; 25 children (`flank_shadow_g/_h`, `sector_shadow_S/_N`, `shadow_of_tangent_sector_S/_N`,
+     `IsSectorChart.exists_lift_lower/_upper`). Keryx's receipts: build log `build/gate/build/20261004T212953Z-2540733.log` (w4c) "Build completed successfully (5359
+     jobs)", 0 warnings other than `sorry`; `Contact` 4 `sorry` lines by count; `data/fs131/ic/axioms-ic4-stage11.txt` prints `flank_shadows` and
+     `shaveAvailable_of_not_doublyShadowed` on the standard three. Generalization: `flank_shadows` uses neither `g ≠ c`, `h ≠ c` nor the horn beyond `κ₁ < κ₂`
+     (kept, `have _ := …`); Condition 5 only rules out a pole germ of curvature ±1. Route note: `stuck_structure`'s `g ≠ h` does not follow from `flank_shadows`'
+     statement but from its mechanism, now supplied by `shadow_of_tangent_sector_S/_N` — no statement change. Tool defect fixed in IC4's copy: IC1–IC3's records
+     tools read `theorem _root_.X` as `<ns>._root_.X`. Left: `stuck_structure` (about two sessions; route in Stage 12), and the moves (IM1's). **Slip (Keryx's)**:
+     my message telling IC4 the moves were taken reached it as it handed back and resumed it (the harness reported "Resuming agent"); it billed IC4's context with
+     no work lost — the rule against messaging a finished agent, broken by timing; next time, check the hand-back queue before messaging a running agent.
+250. **IC4's resumed turn** (item 249's slip) added one record commit, `addcfbf3` (a note recording ruling 236 on the branch; checked by `git diff --stat`: the
+     record only). **Brief FS131-IC5, wave 4's fifth `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC5-contact.md`, derived by script from IC4's, at
+     `addcfbf3`, gated PASS): `stuck_structure` by IC4's Stage-12 route; the moves stay IM1's. Launched in IC4's slot: 1 (I2n) + 1 (I4k) + 1 (IM1) + 1 (IC5) = 4.
+     Wave 5 waits for the next free slot (item 247 (c)).
