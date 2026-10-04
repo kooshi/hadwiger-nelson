@@ -169,7 +169,16 @@ theorem r7_lowerGraph : ∃ δ, IsLowerGraphOf (r7Cls 4) (e (π / 6)) (2 * π / 
 /-- The lower unit arc is not semiconcave with constant `1` away from its bottom (its second derivative is `(1 − s²)^{−3/2} > 1`). -/
 theorem not_semiconcaveWith_one_lowerArc :
     ¬ SemiconcaveWith 1 (fun s : ℝ => 1 - √(1 - s ^ 2)) (Ioo (1 / 10) (1 / 5)) := by
-  sorry
+  intro h
+  have h1 := h (3 / 20) (1 / 25) ⟨by norm_num, by norm_num⟩ ⟨by norm_num, by norm_num⟩ ⟨by norm_num, by norm_num⟩
+  simp only at h1
+  have hA : √(1 - (3 / 20 + 1 / 25 : ℝ) ^ 2) ≤ 9817841 / 10000000 :=
+    Real.sqrt_le_iff.2 ⟨by norm_num, by norm_num⟩
+  have hB : √(1 - (3 / 20 - 1 / 25 : ℝ) ^ 2) ≤ 2484829 / 2500000 :=
+    Real.sqrt_le_iff.2 ⟨by norm_num, by norm_num⟩
+  have hC : 9886859 / 10000000 ≤ √(1 - (3 / 20 : ℝ) ^ 2) :=
+    Real.le_sqrt_of_sq_le (by norm_num)
+  nlinarith [hA, hB, hC]
 
 /-- **The literal second clause of FS111-M-COVER-SC is false** (the statement defect of inventory item 18), on R7: some maximal
 cover has a class whose boundary is locally the graph of a continuous function, the class below it, that is not semiconcave
@@ -259,13 +268,55 @@ band's end (`x > ℓ`) is iff `x − √(1 − w²)` lies in `[0, ℓ]` — a wi
 theorem band_excludes_horn {p d : ℂ} (hd : ‖d‖ = 1) {ℓ x w : ℝ} (hℓ : 0 ≤ ℓ) (hx : ℓ < x) (hw : |w| ≤ 1) :
     (∃ y ∈ segment ℝ p (p + ℓ * d), dist (p + (x + w * I) * d) y = 1) ↔
       0 ≤ x - √(1 - w ^ 2) ∧ x - √(1 - w ^ 2) ≤ ℓ := by
-  sorry
+  have key : ∀ s : ℝ, dist (p + (x + w * I) * d) (p + s * d) = √((x - s) ^ 2 + w ^ 2) := by
+    intro s
+    have : p + (x + w * I) * d - (p + s * d) = (((x - s : ℝ) : ℂ) + w * I) * d := by push_cast; ring
+    rw [dist_eq_norm, this, norm_mul, hd, mul_one, Complex.norm_add_mul_I]
+  have hseg : ∀ y, y ∈ segment ℝ p (p + ℓ * d) ↔ ∃ s ∈ Icc 0 ℓ, y = p + s * d := by
+    intro y
+    rw [segment_eq_image']
+    constructor
+    · rintro ⟨θ, ⟨h0, h1⟩, rfl⟩
+      refine ⟨θ * ℓ, ⟨mul_nonneg h0 hℓ, by nlinarith⟩, ?_⟩
+      simp only [add_sub_cancel_left, real_smul]; push_cast; ring
+    · rintro ⟨s, ⟨h0, h1⟩, rfl⟩
+      rcases hℓ.eq_or_lt with h | h
+      · refine ⟨0, ⟨le_rfl, zero_le_one⟩, ?_⟩
+        have : s = 0 := by linarith
+        subst this; simp
+      · refine ⟨s / ℓ, ⟨div_nonneg h0 hℓ, (div_le_one h).2 h1⟩, ?_⟩
+        have hl : (ℓ : ℂ) ≠ 0 := by exact_mod_cast h.ne'
+        simp only [add_sub_cancel_left, real_smul]; push_cast; field_simp
+  have hw2 : 0 ≤ 1 - w ^ 2 := by nlinarith [abs_le.1 hw, sq_abs w]
+  constructor
+  · rintro ⟨y, hy, hd1⟩
+    obtain ⟨s, ⟨h0, h1⟩, rfl⟩ := (hseg y).1 hy
+    rw [key] at hd1
+    have h2 : (x - s) ^ 2 + w ^ 2 = 1 := by
+      have := Real.sqrt_eq_iff_mul_self_eq (by positivity) (by norm_num : (0 : ℝ) ≤ 1) |>.1 hd1
+      nlinarith
+    have h3 : x - s = √(1 - w ^ 2) := by
+      have hpos : 0 < x - s := by linarith
+      rw [eq_comm, Real.sqrt_eq_iff_mul_self_eq hw2 hpos.le]
+      nlinarith
+    constructor <;> linarith
+  · rintro ⟨h0, h1⟩
+    refine ⟨p + (x - √(1 - w ^ 2) : ℝ) * d, (hseg _).2 ⟨_, ⟨h0, h1⟩, rfl⟩, ?_⟩
+    rw [key]
+    have : x - (x - √(1 - w ^ 2)) = √(1 - w ^ 2) := by ring
+    rw [this, Real.sq_sqrt hw2]; simp
 
 /-- **FS111-M3-BAND**, second clause, its length half: a band of length `ℓ` whose points are pairwise at distances other than
 `1` has `ℓ ≤ 1`. -/
 theorem le_one_of_band_unitFree {p d : ℂ} (hd : ‖d‖ = 1) {ℓ : ℝ} {S : Set ℂ} (hS : ∀ s ∈ Ioo 0 ℓ, p + s * d ∈ S)
     (hfree : ∀ x ∈ S, ∀ y ∈ S, dist x y ≠ 1) : ℓ ≤ 1 := by
-  sorry
+  by_contra hℓ
+  push Not at hℓ
+  have h1 := hS ((ℓ - 1) / 2) ⟨by linarith, by linarith⟩
+  have h2 := hS ((ℓ + 1) / 2) ⟨by linarith, by linarith⟩
+  refine hfree _ h1 _ h2 ?_
+  rw [dist_eq_norm, show p + (((ℓ - 1) / 2 : ℝ) : ℂ) * d - (p + (((ℓ + 1) / 2 : ℝ) : ℂ) * d) = -d by push_cast; ring,
+    norm_neg, hd]
 
 /-- **FS111-M3-BAND**, third clause, its tight half (the frame of `plans/FS111-M3-finiteness.md` § 1.6: the side
 `[−1/2, 1/2] × {0}`, the band's ends `(±1/2, 1)`): the apex at depth `√3/2` excludes the lower half of the band's vesica
@@ -274,13 +325,70 @@ theorem vesica_apex :
     (∀ z : ℂ, dist z (-1 / 2 + I) ≤ 1 → dist z (1 / 2 + I) ≤ 1 → z.im ≤ 1 → 1 ≤ dist z (-(√3 / 2 : ℝ) * I)) ∧
       {z : ℂ | dist z (-1 / 2 + I) ≤ 1 ∧ dist z (1 / 2 + I) ≤ 1 ∧ z.im ≤ 1 ∧ dist z (-(√3 / 2 : ℝ) * I) = 1} =
         {((1 - √3 / 2 : ℝ) : ℂ) * I} := by
-  sorry
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have h3p : 0 < √3 := by positivity
+  have hd1 : ∀ z : ℂ, dist z (-1 / 2 + I) = √((z.re + 1 / 2) ^ 2 + (z.im - 1) ^ 2) := fun z => by
+    rw [Complex.dist_eq_re_im]; congr 1; simp; ring
+  have hd2 : ∀ z : ℂ, dist z (1 / 2 + I) = √((z.re - 1 / 2) ^ 2 + (z.im - 1) ^ 2) := fun z => by
+    rw [Complex.dist_eq_re_im]; congr 1; simp
+  have hd3 : ∀ z : ℂ, dist z (-(√3 / 2 : ℝ) * I) = √(z.re ^ 2 + (z.im + √3 / 2) ^ 2) := fun z => by
+    rw [Complex.dist_eq_re_im]; congr 1; simp
+  -- the two constraints force `t = 1 - im ≤ √3/2`
+  have key : ∀ z : ℂ, dist z (-1 / 2 + I) ≤ 1 → dist z (1 / 2 + I) ≤ 1 → z.im ≤ 1 →
+      1 - z.im ≤ √3 / 2 ∧ 1 ≤ z.re ^ 2 + (z.im + √3 / 2) ^ 2 ∧
+        (z.re ^ 2 + (z.im + √3 / 2) ^ 2 = 1 → z.re = 0 ∧ z.im = 1 - √3 / 2) := by
+    intro z a b c
+    rw [hd1, Real.sqrt_le_iff] at a
+    rw [hd2, Real.sqrt_le_iff] at b
+    obtain ⟨-, a⟩ := a
+    obtain ⟨-, b⟩ := b
+    have hsum : z.re ^ 2 + (z.im - 1) ^ 2 ≤ 3 / 4 := by nlinarith
+    have ht : 1 - z.im ≤ √3 / 2 := by
+      by_contra hcon
+      push Not at hcon
+      nlinarith [sq_nonneg z.re]
+    refine ⟨ht, ?_, fun heq => ?_⟩
+    · nlinarith [sq_nonneg z.re]
+    · have hre : z.re = 0 := by nlinarith [sq_nonneg z.re, sq_nonneg (1 - z.im - √3 / 2)]
+      refine ⟨hre, ?_⟩
+      nlinarith [sq_nonneg z.re, sq_nonneg (1 - z.im - √3 / 2)]
+  refine ⟨fun z a b c => ?_, ?_⟩
+  · obtain ⟨-, h1, -⟩ := key z a b c
+    rw [hd3]; exact Real.le_sqrt_of_sq_le (by nlinarith)
+  · ext z
+    simp only [mem_setOf_eq, mem_singleton_iff]
+    constructor
+    · rintro ⟨a, b, c, d⟩
+      rw [hd3] at d
+      have d' : z.re ^ 2 + (z.im + √3 / 2) ^ 2 = 1 := by
+        have := Real.sqrt_eq_iff_mul_self_eq (by positivity) (by norm_num : (0 : ℝ) ≤ 1) |>.1 d
+        nlinarith
+      obtain ⟨-, -, h3'⟩ := key z a b c
+      obtain ⟨hre, him⟩ := h3' d'
+      apply Complex.ext <;> simp [hre, him]
+    · rintro rfl
+      refine ⟨?_, ?_, ?_, ?_⟩
+      · rw [hd1, Real.sqrt_le_iff]; refine ⟨by norm_num, ?_⟩; simp; nlinarith
+      · rw [hd2, Real.sqrt_le_iff]; refine ⟨by norm_num, ?_⟩; simp; nlinarith
+      · simp; linarith
+      · rw [hd3, Real.sqrt_eq_iff_mul_self_eq (by positivity) (by norm_num : (0 : ℝ) ≤ 1)]
+        simp
 
-/-- **FS111-M3-BAND**, third clause, its exact half: an apex at any smaller depth `h < √3/2` fails to exclude some point of the
+/-- **FS111-M3-BAND**, third clause, its exact half: an apex at any smaller depth `0 ≤ h < √3/2` fails to exclude some point of the
 open vesica below the band. -/
-theorem vesica_apex_exact {h : ℝ} (hh : h < √3 / 2) :
+theorem vesica_apex_exact {h : ℝ} (h0 : 0 ≤ h) (hh : h < √3 / 2) :
     ∃ z : ℂ, dist z (-1 / 2 + I) < 1 ∧ dist z (1 / 2 + I) < 1 ∧ z.im < 1 ∧ dist z (-(h : ℂ) * I) < 1 := by
-  sorry
+  have h3 : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+  have h3p : 0 < √3 := by positivity
+  set η : ℝ := (√3 / 2 - h) / 2 with hη
+  have hη0 : 0 < η := by rw [hη]; linarith
+  have hη1 : η ≤ √3 / 4 := by rw [hη]; linarith
+  refine ⟨((1 - √3 / 2 + η : ℝ) : ℂ) * I, ?_, ?_, ?_, ?_⟩
+  · rw [Complex.dist_eq_re_im, Real.sqrt_lt' one_pos]; simp; nlinarith
+  · rw [Complex.dist_eq_re_im, Real.sqrt_lt' one_pos]; simp; nlinarith
+  · simp; linarith
+  · rw [Complex.dist_eq_re_im, Real.sqrt_lt' one_pos]; simp
+    rw [abs_lt]; constructor <;> nlinarith
 
 /-! ## FS111-M3-HC: the honeycomb class -/
 
@@ -436,7 +544,79 @@ noncomputable def fatZ : Set ℝ :=
 /-- `fatZ` is what FS111-M3-IRREG needs. -/
 theorem fatZ_spec : IsClosed fatZ ∧ fatZ ⊆ Icc (-1 / 2) (1 / 2) ∧ interior fatZ = ∅ ∧ 0 < volume fatZ ∧
     (-1 / 2 : ℝ) ∈ fatZ ∧ (1 / 2 : ℝ) ∈ fatZ := by
-  sorry
+  have hR0 : ∀ n, 0 ≤ fatR n := fun n => by
+    unfold fatR
+    refine le_min (by positivity) (by positivity)
+  have hRle : ∀ n, fatR n ≤ (1 / 4) ^ (n + 2) := fun n => min_le_left _ _
+  have hRq1 : ∀ n, fatR n ≤ |((Denumerable.ofNat ℚ n : ℚ) : ℝ) - 1 / 2| := fun n => by
+    unfold fatR
+    refine (min_le_right _ _).trans ?_
+    have := min_le_left |((Denumerable.ofNat ℚ n : ℚ) : ℝ) - 1 / 2| |((Denumerable.ofNat ℚ n : ℚ) : ℝ) + 1 / 2|
+    have := abs_nonneg (((Denumerable.ofNat ℚ n : ℚ) : ℝ) - 1 / 2)
+    linarith
+  have hRq2 : ∀ n, fatR n ≤ |((Denumerable.ofNat ℚ n : ℚ) : ℝ) + 1 / 2| := fun n => by
+    unfold fatR
+    refine (min_le_right _ _).trans ?_
+    have := min_le_right |((Denumerable.ofNat ℚ n : ℚ) : ℝ) - 1 / 2| |((Denumerable.ofNat ℚ n : ℚ) : ℝ) + 1 / 2|
+    have := abs_nonneg (((Denumerable.ofNat ℚ n : ℚ) : ℝ) + 1 / 2)
+    linarith
+  have hends : ∀ a : ℝ, (a = 1 / 2 ∨ a = -1 / 2) → a ∈ fatZ := by
+    intro a ha
+    refine ⟨by rcases ha with rfl | rfl <;> norm_num, ?_⟩
+    simp only [mem_iUnion, mem_ball, not_exists, not_lt]
+    intro n
+    rcases ha with rfl | rfl
+    · rw [Real.dist_eq, abs_sub_comm]; exact hRq1 n
+    · rw [Real.dist_eq, abs_sub_comm]
+      have := hRq2 n
+      rwa [show ((Denumerable.ofNat ℚ n : ℚ) : ℝ) - -1 / 2 = ((Denumerable.ofNat ℚ n : ℚ) : ℝ) + 1 / 2 by ring]
+  refine ⟨isClosed_Icc.sdiff (isOpen_iUnion fun _ => isOpen_ball), sdiff_subset, ?_, ?_,
+    hends _ (Or.inr rfl), hends _ (Or.inl rfl)⟩
+  · refine eq_empty_of_forall_notMem fun x hx => ?_
+    obtain ⟨ε, hε, hball⟩ := Metric.mem_nhds_iff.1 (mem_interior_iff_mem_nhds.1 hx)
+    have hV : IsOpen (ball x ε \ {1 / 2, -1 / 2}) :=
+      isOpen_ball.sdiff (Set.toFinite _).isClosed
+    have hne : (ball x ε \ {1 / 2, -1 / 2}).Nonempty := by
+      have hinf : (Ioo (x - ε) (x + ε)).Infinite := Set.Ioo_infinite (by linarith)
+      obtain ⟨y, hy1, hy2⟩ := (hinf.sdiff (Set.toFinite ({1 / 2, -1 / 2} : Set ℝ))).nonempty
+      exact ⟨y, by rw [mem_ball, Real.dist_eq, abs_lt]; constructor <;> linarith [hy1.1, hy1.2], hy2⟩
+    obtain ⟨q, hq⟩ := Rat.denseRange_cast.exists_mem_open hV hne
+    obtain ⟨n, hn⟩ : ∃ n : ℕ, (Denumerable.ofNat ℚ n : ℚ) = q := ⟨Denumerable.eqv ℚ q, (Denumerable.eqv ℚ).symm_apply_apply q⟩
+    have hq1 : (q : ℝ) ≠ 1 / 2 := fun h => hq.2 (Or.inl h)
+    have hq2 : (q : ℝ) ≠ -1 / 2 := fun h => hq.2 (Or.inr h)
+    have hR : 0 < fatR n := by
+      unfold fatR
+      simp only [hn]
+      have a1 : 0 < |(q : ℝ) - 1 / 2| := abs_pos.2 (sub_ne_zero.2 hq1)
+      have a2 : 0 < |(q : ℝ) + 1 / 2| := abs_pos.2 fun h => hq2 (by linarith)
+      exact lt_min (by positivity) (div_pos (lt_min a1 a2) two_pos)
+    have hqF : (q : ℝ) ∈ fatZ := hball hq.1
+    exact hqF.2 (mem_iUnion.2 ⟨n, by rw [hn]; exact mem_ball_self hR⟩)
+  · have hU : volume (⋃ n : ℕ, ball ((Denumerable.ofNat ℚ n : ℚ) : ℝ) (fatR n)) ≤ ENNReal.ofReal (1 / 6) := by
+      refine (measure_iUnion_le _).trans ?_
+      have hg : HasSum (fun n : ℕ => 2 * (1 / 4 : ℝ) ^ (n + 2)) (1 / 6) := by
+        have := (hasSum_geometric_of_lt_one (r := (1 / 4 : ℝ)) (by norm_num) (by norm_num)).mul_left (2 * (1 / 4) ^ 2)
+        have e : (fun n : ℕ => 2 * (1 / 4 : ℝ) ^ (n + 2)) = fun n : ℕ => 2 * (1 / 4) ^ 2 * (1 / 4) ^ n := by
+          funext n; ring
+        have e2 : (2 * (1 / 4 : ℝ) ^ 2 * (1 - 1 / 4)⁻¹) = 1 / 6 := by norm_num
+        rw [e, ← e2]; exact this
+      calc ∑' n : ℕ, volume (ball ((Denumerable.ofNat ℚ n : ℚ) : ℝ) (fatR n))
+          ≤ ∑' n : ℕ, ENNReal.ofReal (2 * (1 / 4 : ℝ) ^ (n + 2)) := by
+            refine ENNReal.tsum_le_tsum fun n => ?_
+            rw [Real.volume_ball]
+            exact ENNReal.ofReal_le_ofReal (by linarith [hRle n])
+        _ = ENNReal.ofReal (1 / 6) := by
+            rw [← ENNReal.ofReal_tsum_of_nonneg (fun n => by positivity) hg.summable, hg.tsum_eq]
+    have hI : volume (Icc (-1 / 2 : ℝ) (1 / 2)) = 1 := by
+      rw [Real.volume_Icc]; norm_num
+    have h1 : volume (Icc (-1 / 2 : ℝ) (1 / 2)) - volume (⋃ n : ℕ, ball ((Denumerable.ofNat ℚ n : ℚ) : ℝ) (fatR n))
+        ≤ volume fatZ := le_measure_sdiff
+    have h2 : 0 < (1 : ENNReal) - ENNReal.ofReal (1 / 6) := by
+      rw [tsub_pos_iff_lt]
+      exact (ENNReal.ofReal_lt_one.2 (by norm_num))
+    refine lt_of_lt_of_le ?_ h1
+    rw [hI]
+    exact lt_of_lt_of_le h2 (tsub_le_tsub le_rfl hU)
 
 /-- `fatZ` is closed (spec, sorry-free). -/
 example : IsClosed fatZ := isClosed_Icc.sdiff (isOpen_iUnion fun _ => isOpen_ball)
