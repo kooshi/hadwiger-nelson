@@ -1,4 +1,6 @@
 import Proofs.HadwigerNelson.Plane.LocalMap
+import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+import Mathlib.Geometry.Euclidean.Basic
 
 /-!
 # The local structure of an arc map at a point: finitely many tiles, the germ dichotomy, interval cones
@@ -71,7 +73,99 @@ example : -(π / 2) ∉ angleIoo 0 π := by
 line or a different circle meets `ω(p)` in at most two points). -/
 theorem Arc.finite_inter_sphere_or_eq_circ (a : Arc) (ha : a.Nondegenerate) (p : ℂ) :
     (a.carrier ∩ sphere p 1).Finite ∨ ∃ θ₀ θ₁, a = .circ p 1 θ₀ θ₁ := by
-  sorry
+  cases a with
+  | seg a b =>
+    left
+    have hab : b - a ≠ 0 := sub_ne_zero.mpr (Ne.symm ha)
+    set A : ℝ := ‖b - a‖ ^ 2
+    set B : ℝ := 2 * ((a - p) * (starRingEnd ℂ) (b - a)).re
+    set C : ℝ := ‖a - p‖ ^ 2 - 1
+    have hA : A ≠ 0 := by positivity
+    let q : Polynomial ℝ := Polynomial.C A * Polynomial.X ^ 2 + Polynomial.C B * Polynomial.X + Polynomial.C C
+    have hq : q ≠ 0 := by
+      intro h
+      have := congrArg (fun r => Polynomial.coeff r 2) h
+      simp [q, Polynomial.coeff_X_pow] at this
+      exact hA this
+    refine ((Polynomial.finite_setOf_isRoot hq).image (fun t : ℝ => a + (t : ℂ) * (b - a))).subset ?_
+    rintro z ⟨hz, hzs⟩
+    rw [Arc.carrier, segment_eq_image'] at hz
+    obtain ⟨t, -, rfl⟩ := hz
+    refine ⟨t, ?_, by simp [Complex.real_smul]⟩
+    simp only [mem_sphere, dist_eq_norm] at hzs
+    have h2 : ‖a + (t : ℂ) * (b - a) - p‖ ^ 2 = 1 := by
+      simp only [Complex.real_smul] at hzs
+      rw [hzs]; norm_num
+    have h3 : ‖a - p + (t : ℂ) * (b - a)‖ ^ 2 = A * t ^ 2 + B * t + (C + 1) := by
+      rw [Complex.sq_norm, Complex.normSq_apply]
+      simp only [A, B, C, Complex.sq_norm, Complex.normSq_apply, Complex.add_re, Complex.add_im,
+        Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.sub_re,
+        Complex.sub_im, Complex.conj_re, Complex.conj_im]
+      ring
+    have h4 : a - p + (t : ℂ) * (b - a) = a + (t : ℂ) * (b - a) - p := by ring
+    rw [h4, h2] at h3
+    simp only [q, Set.mem_setOf_eq, Polynomial.IsRoot, Polynomial.eval_add, Polynomial.eval_mul,
+      Polynomial.eval_C, Polynomial.eval_pow, Polynomial.eval_X]
+    linarith
+  | circ c ρ θ₀ θ₁ =>
+    by_cases hcp : c = p
+    · subst hcp
+      by_cases hρ : ρ = 1
+      · right; subst hρ; exact ⟨θ₀, θ₁, rfl⟩
+      · left
+        have : (Arc.circ c ρ θ₀ θ₁).carrier ∩ sphere c 1 = ∅ := by
+          refine eq_empty_of_forall_notMem ?_
+          rintro z ⟨⟨θ, -, rfl⟩, hz⟩
+          simp only [mem_sphere, dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one,
+            Complex.norm_real] at hz
+          have hρ0 : 0 < ρ := ha.1
+          rw [Real.norm_eq_abs, abs_of_pos hρ0] at hz
+          exact hρ hz
+        rw [this]; exact finite_empty
+    · left
+      have hsub : (Arc.circ c ρ θ₀ θ₁).carrier ∩ sphere p 1 ⊆ sphere c ρ ∩ sphere p 1 := by
+        rintro z ⟨⟨θ, -, rfl⟩, hz⟩
+        refine ⟨?_, hz⟩
+        have hρ0 : 0 < ρ := ha.1
+        simp [norm_e, abs_of_pos hρ0]
+      refine Set.Finite.subset ?_ hsub
+      by_cases hsub1 : (sphere c ρ ∩ sphere p 1 : Set ℂ).Subsingleton
+      · exact hsub1.finite
+      · obtain ⟨x, hx, y, hy, hxy⟩ := Set.not_subsingleton_iff.mp hsub1
+        refine (Set.toFinite {x, y}).subset ?_
+        intro z hz
+        have := EuclideanGeometry.eq_of_dist_eq_of_dist_eq_of_finrank_eq_two
+          (V := ℂ) (P := ℂ) Complex.finrank_real_complex hcp hxy hx.1 hy.1 hz.1 hx.2 hy.2 hz.2
+        simpa using this
+
+/-- A segment is a Lebesgue-null set of the plane (it lies in a proper affine subspace). -/
+theorem volume_segment_eq_zero (a b : ℂ) : MeasureTheory.volume (segment ℝ a b) = 0 := by
+  let s : AffineSubspace ℝ ℂ := AffineSubspace.mk' a (Submodule.span ℝ {b - a})
+  have hsub : segment ℝ a b ⊆ (s : Set ℂ) := by
+    rintro z ⟨u, v, hu, hv, huv, rfl⟩
+    rw [SetLike.mem_coe, AffineSubspace.mem_mk']
+    refine Submodule.mem_span_singleton.mpr ⟨v, ?_⟩
+    have : u = 1 - v := by linarith
+    subst this
+    simp only [vsub_eq_sub, Complex.real_smul]
+    push_cast; ring
+  refine MeasureTheory.measure_mono_null hsub (MeasureTheory.Measure.addHaar_affineSubspace _ _ ?_)
+  intro h
+  have h1 : s.direction = ⊤ := by rw [h]; exact AffineSubspace.direction_top _ _ _
+  rw [AffineSubspace.direction_mk'] at h1
+  have h2 := finrank_span_le_card (R := ℝ) ({b - a} : Set ℂ)
+  rw [h1, finrank_top, Complex.finrank_real_complex] at h2
+  simp at h2
+
+/-- The points of an arc form a Lebesgue-null set. -/
+theorem Arc.volume_carrier (a : Arc) : MeasureTheory.volume a.carrier = 0 := by
+  cases a with
+  | seg a b => exact volume_segment_eq_zero a b
+  | circ c ρ θ₀ θ₁ =>
+    refine MeasureTheory.measure_mono_null (t := sphere c |ρ|) ?_
+      (MeasureTheory.Measure.addHaar_sphere _ _ _)
+    rintro _ ⟨θ, -, rfl⟩
+    simp [norm_e]
 
 namespace ArcMap
 
@@ -82,7 +176,15 @@ variable {k : ℕ} (F : ArcMap k)
 /-- A fragment covers `B̄(p, 1)` exactly when it covers a closed disc of radius above `1` about `p`: the domain is open and
 the disc compact. Every row's "on a closed disc of radius above 1 about `p`" is stated as `F.Covers p 1`. -/
 theorem covers_one_iff (p : ℂ) : F.Covers p 1 ↔ ∃ R, 1 < R ∧ F.Covers p R := by
-  sorry
+  constructor
+  · intro h
+    obtain ⟨δ, hδ, hsub⟩ := isCompact_closedBall p (1 : ℝ) |>.exists_cthickening_subset_open F.isOpen_dom h
+    refine ⟨δ + 1, by linarith, ?_⟩
+    have := cthickening_closedBall (E := ℂ) hδ.le zero_le_one p
+    rw [this] at hsub
+    exact hsub
+  · rintro ⟨R, hR, h⟩
+    exact (closedBall_subset_closedBall hR.le).trans h
 
 /-! ## The points of `Γ` on a ring that lie on no arc of `Γ` on it -/
 
@@ -91,17 +193,229 @@ of its points has a neighbourhood meeting finitely many arcs, and each arc not o
 points (`Arc.finite_inter_sphere_or_eq_circ`). -/
 theorem finite_ringΓ_off_ringArc {p : ℂ} (hp : F.Covers p 1) :
     ((F.Γ ∩ sphere p 1) \ {x | F.OnRingArc p x}).Finite := by
-  sorry
+  have hK : sphere p 1 ⊆ F.dom := sphere_subset_closedBall.trans hp
+  choose! t ht hfin using F.locallyFinite
+  obtain ⟨S, hSK, hcov⟩ := (isCompact_sphere p 1).elim_nhds_subcover t fun x hx => ht x (hK hx)
+  have h𝒜 : {a | a ∈ F.arcs ∧ (a.carrier ∩ sphere p 1).Nonempty}.Finite := by
+    refine (S.finite_toSet.biUnion fun x hx => hfin x (hK (hSK x hx))).subset ?_
+    rintro a ⟨ha, y, hya, hyK⟩
+    obtain ⟨x, hxS, hyx⟩ := mem_iUnion₂.mp (hcov hyK)
+    exact mem_iUnion₂.mpr ⟨x, hxS, ha, y, hya, hyx⟩
+  have hsub : (F.Γ ∩ sphere p 1) \ {x | F.OnRingArc p x} ⊆
+      ⋃ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ sphere p 1).Nonempty},
+        (a.carrier ∩ sphere p 1) \ {x | F.OnRingArc p x} := by
+    rintro x ⟨⟨⟨hxd, hxΓ⟩, hxK⟩, hxn⟩
+    obtain ⟨a, ha, hxa⟩ := mem_iUnion₂.mp hxΓ
+    exact mem_iUnion₂.mpr ⟨a, ⟨ha, x, hxa, hxK⟩, ⟨hxa, hxK⟩, hxn⟩
+  refine (h𝒜.biUnion fun a ha => ?_).subset hsub
+  rcases Arc.finite_inter_sphere_or_eq_circ a (F.nondegenerate a ha.1) p with h | ⟨θ₀, θ₁, rfl⟩
+  · exact h.subset sdiff_subset
+  · refine (finite_empty).subset ?_
+    rintro x ⟨⟨hxa, hxK⟩, hxn⟩
+    apply hxn
+    have hnd := F.nondegenerate _ ha.1
+    have hcar : (Arc.circ p 1 θ₀ θ₁).carrier = ringArc p θ₀ θ₁ := by
+      simp [Arc.carrier, ringArc, ringPt]
+    refine ⟨θ₀, θ₁, hnd.2.1, ?_, ?_⟩
+    · rw [← hcar]; exact hxa
+    · rw [← hcar]
+      intro z hz
+      refine ⟨hK ?_, mem_iUnion₂.mpr ⟨_, ha.1, hz⟩⟩
+      obtain ⟨θ, -, rfl⟩ := hz
+      simp
+
 
 /-! ## Interior points are dense -/
 
 /-- `Γ` has empty interior: every point of the domain is a limit of interior points. -/
 theorem dense_interiorPts : F.dom ⊆ closure F.interiorPts := by
-  sorry
+  intro x hx
+  rw [Metric.mem_closure_iff]
+  intro ε hε
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite x hx
+  obtain ⟨r, hr, hrsub⟩ := Metric.mem_nhds_iff.mp (inter_mem ht (F.isOpen_dom.mem_nhds hx))
+  set r' := min r ε
+  have hr' : 0 < r' := lt_min hr hε
+  set N : Set ℂ := ⋃ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ t).Nonempty}, a.carrier
+  have hN : MeasureTheory.volume N = 0 :=
+    (MeasureTheory.measure_biUnion_null_iff hfin.countable).mpr fun a _ => a.volume_carrier
+  have hpos : 0 < MeasureTheory.volume (ball x r') := Metric.measure_ball_pos _ _ hr'
+  have hnot : ¬ ball x r' ⊆ N := fun h =>
+    absurd (MeasureTheory.measure_mono_null h hN) hpos.ne'
+  obtain ⟨y, hy, hyN⟩ := not_subset.mp hnot
+  have hyr : y ∈ ball x r := ball_subset_ball (min_le_left _ _) hy
+  refine ⟨y, ⟨(hrsub hyr).2, fun hΓ => hyN ?_⟩, ?_⟩
+  · obtain ⟨a, ha, hya⟩ := mem_iUnion₂.mp hΓ
+    exact mem_iUnion₂.mpr ⟨a, ⟨ha, y, hya, (hrsub hyr).1⟩, hya⟩
+  · rw [dist_comm]
+    exact lt_of_lt_of_le (mem_ball.mp hy) (min_le_right _ _)
 
 /-- Every point of the domain carries a colour. -/
 theorem exists_mem_coloursAt {x : ℂ} (hx : x ∈ F.dom) : ∃ c, c ∈ F.coloursAt x := by
-  sorry
+  have hx' := F.dense_interiorPts hx
+  have : F.interiorPts = ⋃ c, F.region c := by
+    ext y
+    simp only [mem_iUnion, region, mem_inter_iff, mem_preimage, mem_singleton_iff]
+    exact ⟨fun h => ⟨F.col y, h, rfl⟩, fun ⟨_, h, _⟩ => h⟩
+  rw [this, closure_iUnion_of_finite] at hx'
+  obtain ⟨c, hc⟩ := mem_iUnion.mp hx'
+  exact ⟨c, hc⟩
+
+/-! ## A ray from a point of the domain into the interior points -/
+
+/-- A line meets a circle in finitely many points: `{s | ‖x + s w − c‖ = ρ}` is finite when `w ≠ 0`. -/
+theorem finite_ray_inter_sphere (x c w : ℂ) (ρ : ℝ) (hw : w ≠ 0) :
+    {s : ℝ | ‖x + (s : ℂ) * w - c‖ = ρ}.Finite := by
+  set A : ℝ := ‖w‖ ^ 2
+  set B : ℝ := 2 * ((x - c) * (starRingEnd ℂ) w).re
+  set C : ℝ := ‖x - c‖ ^ 2 - ρ ^ 2
+  have hA : A ≠ 0 := by positivity
+  let q : Polynomial ℝ := Polynomial.C A * Polynomial.X ^ 2 + Polynomial.C B * Polynomial.X + Polynomial.C C
+  have hq : q ≠ 0 := by
+    intro h
+    have := congrArg (fun r => Polynomial.coeff r 2) h
+    simp [q, Polynomial.coeff_X_pow] at this
+    exact hA this
+  refine (Polynomial.finite_setOf_isRoot hq).subset ?_
+  intro t ht
+  simp only [mem_setOf_eq] at ht
+  have h3 : ‖x - c + (t : ℂ) * w‖ ^ 2 = A * t ^ 2 + B * t + (C + ρ ^ 2) := by
+    rw [Complex.sq_norm, Complex.normSq_apply]
+    simp only [A, B, C, Complex.sq_norm, Complex.normSq_apply, Complex.add_re, Complex.add_im,
+      Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im, Complex.sub_re,
+      Complex.sub_im, Complex.conj_re, Complex.conj_im]
+    ring
+  have h4 : x - c + (t : ℂ) * w = x + (t : ℂ) * w - c := by ring
+  rw [h4, ht] at h3
+  simp only [q, Set.mem_setOf_eq, Polynomial.IsRoot, Polynomial.eval_add, Polynomial.eval_mul,
+    Polynomial.eval_C, Polynomial.eval_pow, Polynomial.eval_X]
+  linarith
+
+/-- A ray `x + s w` with `w` not parallel to the segment `[u, v]` meets it in at most one point. -/
+theorem subsingleton_ray_inter_segment (x u v w : ℂ) (hd : v - u ≠ 0)
+    (hpar : (w * (starRingEnd ℂ) (v - u)).im ≠ 0) :
+    {s : ℝ | x + (s : ℂ) * w ∈ segment ℝ u v}.Subsingleton := by
+  intro s₁ h₁ s₂ h₂
+  obtain ⟨a₁, b₁, -, hb₁, hab₁, e₁⟩ := h₁
+  obtain ⟨a₂, b₂, -, hb₂, hab₂, e₂⟩ := h₂
+  by_contra hne
+  have key : ((s₁ - s₂ : ℝ) : ℂ) * w = ((b₁ - b₂ : ℝ) : ℂ) * (v - u) := by
+    have ha₁ : a₁ = 1 - b₁ := by linarith
+    have ha₂ : a₂ = 1 - b₂ := by linarith
+    subst ha₁ ha₂
+    simp only [Complex.real_smul] at e₁ e₂
+    push_cast at e₁ e₂ ⊢
+    linear_combination e₂ - e₁
+  apply hpar
+  have : w = (((b₁ - b₂) / (s₁ - s₂) : ℝ) : ℂ) * (v - u) := by
+    have hs : ((s₁ - s₂ : ℝ) : ℂ) ≠ 0 := by
+      exact_mod_cast sub_ne_zero.mpr hne
+    apply mul_left_cancel₀ hs
+    rw [key]
+    push_cast
+    have hs' : ((s₁ : ℂ) - s₂) ≠ 0 := by simpa using hs
+    field_simp
+  rw [this, mul_assoc, Complex.mul_conj, ← Complex.ofReal_mul]
+  exact Complex.ofReal_im _
+
+/-- **A ray from a point of the domain** (child of engine 2): there are a direction `w ≠ 0` and `ε > 0` with
+`x + s w` an interior point for all `0 < s < ε`. -/
+theorem exists_ray_in_interiorPts {x : ℂ} (hx : x ∈ F.dom) :
+    ∃ w : ℂ, w ≠ 0 ∧ ∃ ε > 0, ∀ s ∈ Ioo (0 : ℝ) ε, x + (s : ℂ) * w ∈ F.interiorPts := by
+  classical
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite x hx
+  set 𝒜 := {a | a ∈ F.arcs ∧ (a.carrier ∩ t).Nonempty}
+  obtain ⟨r, hr, hrsub⟩ := Metric.mem_nhds_iff.mp (inter_mem ht (F.isOpen_dom.mem_nhds hx))
+  -- the bad slopes
+  let slope : Arc → ℝ := fun a => match a with
+    | .seg u v => (v - u).im / (v - u).re
+    | .circ .. => 0
+  have hbad : (slope '' 𝒜).Finite := hfin.image _
+  obtain ⟨lam, hlam⟩ := hbad.infinite_compl.nonempty
+  set w : ℂ := 1 + (lam : ℂ) * I with hw
+  have hw0 : w ≠ 0 := by
+    intro h; have := congrArg Complex.re h; simp [hw] at this
+  have hfinS : {s : ℝ | x + (s : ℂ) * w ∈ ⋃ a ∈ 𝒜, a.carrier}.Finite := by
+    have : {s : ℝ | x + (s : ℂ) * w ∈ ⋃ a ∈ 𝒜, a.carrier} ⊆ ⋃ a ∈ 𝒜, {s : ℝ | x + (s : ℂ) * w ∈ a.carrier} := by
+      intro s hs
+      obtain ⟨a, ha, hsa⟩ := mem_iUnion₂.mp hs
+      exact mem_iUnion₂.mpr ⟨a, ha, hsa⟩
+    refine (hfin.biUnion fun a ha => ?_).subset this
+    have hnd := F.nondegenerate a ha.1
+    cases a with
+    | seg u v =>
+      have hd : v - u ≠ 0 := sub_ne_zero.mpr (Ne.symm hnd)
+      refine (subsingleton_ray_inter_segment x u v w hd ?_).finite
+      intro him
+      apply hlam
+      refine ⟨Arc.seg u v, ha, ?_⟩
+      show (v - u).im / (v - u).re = lam
+      have hre : (v - u).re ≠ 0 := by
+        intro h0
+        have : (w * (starRingEnd ℂ) (v - u)).im = lam * (v - u).re - (v - u).im := by
+          simp [hw, Complex.mul_im]; ring
+        rw [this, h0] at him
+        have him' : (v - u).im = 0 := by linarith
+        exact hd (Complex.ext h0 him')
+      have : (w * (starRingEnd ℂ) (v - u)).im = lam * (v - u).re - (v - u).im := by
+        simp [hw, Complex.mul_im]; ring
+      rw [this] at him
+      field_simp
+      linarith
+    | circ c ρ θ₀ θ₁ =>
+      refine (finite_ray_inter_sphere x c w |ρ| hw0).subset ?_
+      rintro s ⟨θ, -, hθ⟩
+      simp only [mem_setOf_eq]
+      rw [← hθ]
+      simp [norm_e]
+  obtain ⟨ε₁, hε₁, hε₁S⟩ : ∃ ε > 0, ∀ s ∈ {s : ℝ | x + (s : ℂ) * w ∈ ⋃ a ∈ 𝒜, a.carrier}, ε ≤ |s| ∨ s = 0 ∨ True := by
+    exact ⟨1, one_pos, fun _ _ => Or.inr (Or.inr trivial)⟩
+  -- a positive lower bound for the bad parameters
+  have hclosed := hfinS.isClosed
+  have hopen : IsOpen {s : ℝ | x + (s : ℂ) * w ∈ ⋃ a ∈ 𝒜, a.carrier}ᶜ := hclosed.isOpen_compl
+  -- remove s = 0, which may be bad: use the finite set restricted to positive parameters
+  have hfinPos : ({s : ℝ | x + (s : ℂ) * w ∈ ⋃ a ∈ 𝒜, a.carrier} ∩ Ioi 0).Finite := hfinS.subset inter_subset_left
+  have hcl2 := hfinPos.isClosed
+  have h0 : (0 : ℝ) ∈ ({s : ℝ | x + (s : ℂ) * w ∈ ⋃ a ∈ 𝒜, a.carrier} ∩ Ioi 0)ᶜ := by
+    intro h; exact (lt_irrefl (0 : ℝ)) h.2
+  obtain ⟨ε₂, hε₂, hball⟩ := Metric.isOpen_iff.mp hcl2.isOpen_compl 0 h0
+  refine ⟨w, hw0, min ε₂ (r / ‖w‖), lt_min hε₂ (div_pos hr (norm_pos_iff.mpr hw0)), ?_⟩
+  intro s hs
+  have hs0 : 0 < s := hs.1
+  have hsε : s < ε₂ := lt_of_lt_of_le hs.2 (min_le_left _ _)
+  have hsr : s * ‖w‖ < r := by
+    have := lt_of_lt_of_le hs.2 (min_le_right _ _)
+    rwa [lt_div_iff₀ (norm_pos_iff.mpr hw0)] at this
+  have hmem : x + (s : ℂ) * w ∈ ball x r := by
+    rw [mem_ball, dist_eq_norm]
+    simpa [norm_mul, abs_of_pos hs0] using hsr
+  have hnb : x + (s : ℂ) * w ∉ ⋃ a ∈ 𝒜, a.carrier := by
+    intro h
+    have : s ∈ ({s : ℝ | x + (s : ℂ) * w ∈ ⋃ a ∈ 𝒜, a.carrier} ∩ Ioi 0) := ⟨h, hs0⟩
+    have hsb : s ∈ ball (0 : ℝ) ε₂ := by
+      rw [mem_ball, Real.dist_eq, sub_zero, abs_of_pos hs0]; exact hsε
+    exact hball hsb this
+  refine ⟨(hrsub hmem).2, fun hΓ => hnb ?_⟩
+  obtain ⟨a, ha, hya⟩ := mem_iUnion₂.mp hΓ
+  exact mem_iUnion₂.mpr ⟨a, ⟨ha, _, hya, (hrsub hmem).1⟩, hya⟩
+
+/-- **Engine 2.** Every point of the domain lies in the closure of some tile: a ray from it into the interior points
+is connected, so lies in one tile. -/
+theorem mem_closure_tile {x : ℂ} (hx : x ∈ F.dom) : ∃ T, F.IsTile T ∧ x ∈ closure T := by
+  obtain ⟨w, hw, ε, hε, hray⟩ := F.exists_ray_in_interiorPts hx
+  set y := x + ((ε / 2 : ℝ) : ℂ) * w
+  have hy : y ∈ F.interiorPts := hray _ ⟨by positivity, by linarith⟩
+  refine ⟨connectedComponentIn F.interiorPts y, ⟨y, hy, rfl⟩, ?_⟩
+  have hpre : IsPreconnected ((fun s : ℝ => x + (s : ℂ) * w) '' Ioo 0 ε) :=
+    (isPreconnected_Ioo).image _ (by fun_prop)
+  have hsub : (fun s : ℝ => x + (s : ℂ) * w) '' Ioo 0 ε ⊆ connectedComponentIn F.interiorPts y :=
+    hpre.subset_connectedComponentIn ⟨ε / 2, ⟨by positivity, by linarith⟩, rfl⟩
+      (by rintro _ ⟨s, hs, rfl⟩; exact hray s hs)
+  refine closure_mono hsub ?_
+  have hcont : Continuous fun s : ℝ => x + (s : ℂ) * w := by fun_prop
+  have h0x := map_mem_closure hcont (by rw [closure_Ioo hε.ne]; exact ⟨le_rfl, hε.le⟩ : (0 : ℝ) ∈ closure (Ioo 0 ε))
+    (mapsTo_image (fun s : ℝ => x + (s : ℂ) * w) (Ioo 0 ε))
+  simpa using h0x
 
 /-! ## Finitely many tiles near a point -/
 
