@@ -24,7 +24,7 @@ that judge the milestone, written before any job).*
 | wave 2 (28 rows) | 91 `sorry` lines left (I2g, item 148); FALC-RED sorry-free over the declared import; **FS131-T3 must land before wave 2's gate**; next: an Opus implementer | `.claude/worktrees/fs131-w2` |
 | wave 3 (20 rows + 6 merged) | 94 of 96 proved (I3–I3g, items 131, 145, 147); **FS131-I3h (Opus) running**: two leaves, gate, landing, then `localSectors` | `.claude/worktrees/fs131-w3` |
 | wave 4 (25 rows) | 32 of 86 proved (I4, I4b; items 125, 143); two plan routes owed (`lemmaL`, `lock` clause 1); ~20 leaves wait on `localSectors`; **next: an Opus implementer when a whole slot frees** | `.claude/worktrees/fs131-w4` |
-| Woodall's chain (FS106-WO, -TW, -AE-MAP6) | Collar and NoFourFive sorry-free; **E1-NO45 proved in Lean from its citations** (item 150); 4 `Steps` leaves left; **FS131-IWb (Opus) running** | `.claude/worktrees/fs131-ww` |
+| Woodall's chain (FS106-WO, -TW, -AE-MAP6) | all but two leaves proved (items 150, 156): `exists_sectorsAt` (route ready, next implementer) and `exists_woodallMerged` (Woodall's step 3, **FS131-E3 deriving**) | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
 | Lebesgue's covering theorem (FS131-LEB) | **LANDED on `main`** (item 151; `33471a75`): held in the kernel, standard three; wave 4 discharges its `sorry` in one line | `Proofs/HadwigerNelson/Topology/` |
 | waves 5–10 (124 rows) | not started; wave 5 carries C-DOUBLE + Y3-END-NEEDS (item 69) and FLANK-Q's discharge (item 79); wave 9 bound by item 89's note and item 96's vacuity rule | plan § 7 |
@@ -40,7 +40,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 
 | job | model | brief | reports to |
 |---|---|---|---|
-| FS131-IWb (Woodall's chain on **Opus**: the child lemma, then `step5_lt`, `step6`, `exists_sectorsAt`, `exists_woodallMerged`; item 150) | Opus | `data/fs131/briefs/FS131-IWb-woodall.md` | its branch's (`fs131-ww`) `data/fs131/reports/FS131-IWb.md` |
+| FS131-E3 (Woodall's step 3: derive the modification, or a route around it; Ephodos; item 156) | Opus | `data/fs131/briefs/FS131-E3-woodall-step3.md` | `data/fs131/reports/FS131-E3.md` (claim list `data/fs131/claims-E3.md`) |
 | FS131-T3 (the axiom gate: CLEAN subset check, IMPORTED category; item 153) | Opus (tooling, main tree) | `data/fs131/briefs/FS131-T3-axiom-gate.md` | `data/fs131/reports/FS131-T3.md` |
 | FS131-I3h (wave 3 on **Opus**: last two leaves, the gate, the landing; then `localSectors` on `fs131-w3b`; item 147) | Opus | `data/fs131/briefs/FS131-I3h-wave3.md` | its branch's (`fs131-w3`) `data/fs131/reports/FS131-I3h.md` |
 
@@ -58,7 +58,7 @@ its record's last SAVED stage with a fresh agent on the same brief.
 3. Then FS131-LEB (Opus planner, Lebesgue's covering theorem; a source to read and a `BIBLIOGRAPHY.md` row to propose — item 66).
 4. Wave 5's planner once wave 4's statements stand (they do) — it reads wave 4's § 14.5 first; `Row134Base` needs its stub (item 17 (b)).
 5. **E1 done (items 106–107)**; its corrections filed (row 132, § The aim item 4, FS106 errata). Held for Kooshi: a second mind on E1-NO45 (default: none).
-   **Queue for whole Opus slots, in order**: wave 4's Opus implementer (I4c: `lebesgue_covering_square`'s one-line discharge, the two plan gaps, `localSectors`
+   **Queue for whole Opus slots, in order**: Woodall's `exists_sectorsAt` (IWc, the stage-6 route) — wave 4's Opus implementer (I4c: `lebesgue_covering_square`'s one-line discharge, the two plan gaps, `localSectors`
    once I3h states it, `AeProperRegions` as a vacuity carrier) — wave 2's Opus implementer (I2h: QA1's docstrings and FALC-HOSTS (iv) docstring, `CPColouring`
    as a vacuity carrier, T3 before its gate). QA1 done (item 144, grade B+).
    FS131-I4 launched in I2e's half slot (item 115); I3e's half slot, when it frees, goes to FS131-IW once W2 has re-planned, else a wave-2 or wave-4 Sonnet successor.

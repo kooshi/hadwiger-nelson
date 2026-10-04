@@ -1013,3 +1013,16 @@ reason by the close.*
      clause 5 becomes `v ∈ F.dom` at the same position (no projection moves; true wherever `exists_sectorsAt` produces a picture, since `hP` makes the domain the
      plane; `const_sectorsAt` still holds), and the three readers re-route as item 154 says, with `hv` from the new clause. Alternative: drop it and add `v ∈ F.dom`
      as a hypothesis to E1-RAY and its callers. Why not: a hypothesis on every caller where one clause carries it once. Confidence: high. Credit IWb.
+156. **FS131-IWb handed back at stage 6, harness ≈ 438k** (report on its branch; `fs131-ww` at `f73cb1e3`, checked): `step5_lt` (Woodall's strict step 5) and `step6`
+     (Townsend's π/3 lemma) **proved**, statements unchanged; the connected-piece child `exists_preconnected_of_mem_coneAt` proved (with the inner and outer collar
+     corollaries); items 154–155 applied (`SectorsAt`'s fifth clause now `v ∈ F.dom`; E1-RAY and E1-BAD's interior case re-routed through the cone clause — they
+     now cite wave 3's `coneAt_region_eq_biUnion`, so carry `sorryAx` until wave 3 lands). Keryx's receipt: build log
+     `build/gate/build/20261004T133104Z-3845273.log` (ww) "Build completed successfully (5346 jobs)"; `Steps` has 2 `sorry`; `SectorsAt` reads `v ∈ F.dom ∧` at its
+     fifth clause. Corrections owed to W's plan: `step5_lt` needs no δ or truncated sector; `step6` needs no "at most three cut angles". Generalization:
+     `SectorsAt.collarAt_opposite` for any `n ≥ 1`, no validity. Left: `exists_sectorsAt` (H, 600–800 lines; route in its record's stage 6 on wave 3's engine, or a
+     bridge from I3h's `localSectors`) and `exists_woodallMerged` (Woodall's step 3, re-priced H+, 1,500–3,000 lines, **no derivation of the global
+     modification with every clause in the record** — FS110-W-MERGE is the local step). **Rulings**: (a) `exists_sectorsAt` goes to the chain's next implementer by
+     the stage-6 route, a bridge from `localSectors` its call if that lands first; (b) step 3 goes to a derivation first — **FS131-E3** (Ephodos; claim list
+     `data/fs131/claims-E3.md`; brief `data/fs131/briefs/FS131-E3-woodall-step3.md`, gated PASS): Q1 the modification as the Lean states it, Q2 a route around it.
+     Alternative: a planner straight on step 3. Why not: no derivation holds the global clauses, and a route around it would save the 1,500–3,000 lines.
+     Launched in IWb's slot: 1 (I3h) + 1 (T3) + 1 (E3) = 3.
