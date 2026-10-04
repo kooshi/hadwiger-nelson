@@ -64,3 +64,19 @@ question: is-top-six-a-coverage-question
   answered by: derivation — Ephodos, FS-128's opening, reading FS121-D3 §§ 3.2–3.4 against G13
   cost: under a round
   rank: 4
+
+*Dated correction (Poros, FS129-P1, 2026-10-03; the card above stands as written).* The ask's "that point's unit circle covered by the five lower
+colours" is exact only where `max P(x)` is the sixth colour. At a boundary point `x` with `m = max P(x) < 6`, colours above `m` may lie on `T₁(x)`, being
+absent only near `x`; so `m` is free at `x` iff `T₁(x)` misses `F_m`, that is, iff `T₁(x)` is covered by the other five colours, higher ones included
+(`plans/FS129-OA1-audit.md` § 2.1; FS-129 inventory item 43). The card was answered on its "if it is not" branch, as a reading with three receipts: coverage at
+the top colour restates TOP₆ and cannot spend six (OA1 § 2.1).
+
+## The question, at five as well (Poros, 2026-10-03)
+
+*FS129-P1 re-aims this stub to carry the map step at five's top colour (`plans/POROS-2026-10-03-fs129-rerank.md` § 3.1; FS-129 inventory item 26).*
+**TOP₅**: can the largest colour of a Grundy five-colouring obtained from a tight one be bound too? Given REG-J′₅ (FS-127 at five), the honest existence
+form at five holds if and only if `χ_m⁰(ℝ²) ≥ 6` (FS129-OR1-TOP5, row 154), and at five no NO is needed: FS106-AE-MAP6 excludes every a.e.-proper
+map-type five-colouring outright (FS129-OR1 § J10, note 3). The obstacle is the one TOP₆ names: regularity where the top colour is unbound, FS111-M-PINCH
+needing both colours bound. Binding spends the colour count (FS121-O1-ABOVE7), so a proof of TOP₅ must read five. **Bearing**: decisive at five both ways
+given REG-J′₅ — a binding gives `χ(ℝ²) ≥ 6` given MR, and a tight five-colouring whose top colour no modification binds gives `χ(ℝ²) ≤ 5` with no MR — which
+is FS-104's question in route M's Grundy form.

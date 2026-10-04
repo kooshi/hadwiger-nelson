@@ -49,6 +49,44 @@ What FS-116 left, case by case (`plans/FS116-Z1-close.md` § 2.6):
    "there is an explicit `r ≥ 3` such that every valid fragment on a closed disc `B̄(x, r)` has, in `B̄(x, 3)`, a vertex of at least four colours or a vertex
    with a repeated colour" — with LOCAL-DENSE, C114-LOCAL-F and DISC-F are one question (`plans/FS116-local-exclusion.md` § 3.6).
 
+## The question (Poros, 2026-10-03)
+
+*FS129-P1's re-rank put this stub at rank 1, the milestone after the Lean backlog (`plans/POROS-2026-10-03-fs129-rerank.md` § 3). The card is that
+record's rank-1 card, copied by script.*
+
+### The card
+
+question: what-does-a-q-ring-pass-on
+  evidence: every held positive past `√3` has (Q) arcs on its four-colour rings (row 136), and in the non-Siamese class a ring with no (Q) arc dies at
+    `1 + ε` (FS129-SR3-QFREE-NS); the placing rule (FS116-RING-GERM, -N3-SEMI) puts a four-colour vertex at every change point off (Q) arcs, so four-colour
+    vertices propagate along the unit triangular lattice until a (Q) arc intervenes (G91); the held positives stop at named radii — FS114-Y2-BOWTIE at `√3`,
+    the disk extended about a corner above `φ`, the capped strip's family Q1 open below `φ²/√2`, FS116-Y2-SIXFRAG below `3/2` (`plans/STUB-q-ring.md` ll. 60–62,
+    126–129); FS-124's eight cases (ll. 25–50) are listed by ring type, and FS116-N2 reads the transfer at a hub as a homomorphism into `KG(6, 2)` (case 5)
+  expected: that FS-124 is eight cases, worked one at a time as FS-116 worked its ring types
+  ask: What does a four-colour vertex's (Q) ring pass to the four-colour vertices its change points place — and is that quantity conserved, so that the placed skeleton either recurs at every radius or must close within one?
+  if a conserved quantity exists: cases 1, 3 and 5 are one statement about the skeleton; the held positives are read as finite pieces of it, the radius where each stops names the skeleton's obstruction, and FS-124 opens on that obstruction
+  if none exists (the placed vertex's ring type is free beyond the absent pair): the cases are worked apart, SEMI-PAR3 (case 1) and the strip's family Q1 first, and the recurrence leaves the list as a reading
+  answered by: derivation — Ephodos, FS-124's opening: first the held positives read by formula (their placements, exact), then the general statement
+  cost: a reading round on four held objects, then one derivation round
+  hunch: the type is conserved in the strip and in SIXFRAG and changes only at the disk's corner (placements-conserve-the-type, 0.4)
+  falsifier: a held positive in which a placed four-colour vertex's ring has a different number of (Q) arcs from the placing vertex's, away from the disk's corner
+  rank: 1
+
+### Existence form
+
+Is there a valid six-coloured fragment, non-Siamese, on a closed disc of radius above `φ²/√2` about a vertex `p` of at least four colours whose ring
+carries a (Q) arc — or about a vertex of five or six colours? Its negation at one explicit radius, with FS-123's Siamese half, is C114-LOCAL-F; a family of
+such fragments on discs of every radius gives `χ(ℝ²) ≤ 6` with no MR (FS116-O1-YESLIM).
+
+### Structural form
+
+In every valid six-coloured fragment, Siamese pairs allowed, about a vertex `p` of at least four colours whose ring carries (Q) arcs: what does `p` hand to
+each four-colour vertex its ring's change points place — its absent pair, the perfect matching of the six colours into that pair and the two pairs the
+placed vertex misses (FS116-N2-STAR; FS116-N2's `KG(6, 2)` reading), the positions of its (Q) arcs — and which of these is invariant along every chain of
+placements? The question is about every solution and cannot be answered without naming the quantity each four-colour vertex carries and passes on. Its
+answer either makes the placed skeleton an image of the unit triangular lattice that must recur at every radius (the YES side's shape; the capped strip's
+row of midline vertices is one finite piece), or names where every chain of placements must close (the exclusion's shape).
+
 ## What FS-116 established that this stands on (addresses in `plans/FS116-derivation.md`)
 
 - **The placing rule, derived.** A change point whose `±60°` germs lie off (Q) arcs is a vertex of at least four colours (FS116-RING-GERM, held); at a
@@ -63,11 +101,14 @@ What FS-116 left, case by case (`plans/FS116-Z1-close.md` § 2.6):
 
 ## Bearing on the answer
 
-**The main remaining case set of the six-map NO with unit arcs.** With FS-123 and the Siamese rungs, an exclusion here at one explicit radius is
-C114-LOCAL-F, hence (FS114-CV-EXISTS) no valid six-map with unit arcs at any complexity — `[SokolovVoronov2025]` Question 2's unit-arc half, almost
-everywhere, for locally finite segment-and-arc maps — and, with FS-121's successors (FS-126–FS-128), route M's first half toward `χ(ℝ²) = 7` given MR. A
-valid fragment by formula about a (Q)-ring vertex of at least four colours beyond `φ²/√2` meets G83's killing test and moves C114-LOCAL-F's dial; a family
-of such fragments on discs of every radius gives `χ(ℝ²) ≤ 6` with no MR (FS116-O1-YESLIM, held). Each case alone is a piece, not the answer.
+**The main remaining case set of the six-map NO with unit arcs, and the YES side's home** (Poros, 2026-10-03). Every held positive past `√3` has (Q) arcs
+on its four-colour rings (row 136), and in the non-Siamese class no ring without one survives past `1 + ε` (row 149), so the life of a four-colour vertex is
+its (Q) arcs. An exclusion here at one explicit radius, with FS-123's Siamese class, is C114-LOCAL-F, hence (FS114-CV-EXISTS) no valid six-map with unit
+arcs at any complexity — `[SokolovVoronov2025]` Question 2's unit-arc half — and, with route M's map step at six (FS-125–FS-128), `χ(ℝ²) = 7` given MR. It
+is route R's exact-map form too: both common unit points of a cubic trichromatic complementary pair are (Q)-ring vertices of at least four colours
+(FS112-N3-COR3), so the exclusion leaves no close complementary pair in any valid map (FS129-OR1 § J15). A valid fragment by formula about a (Q)-ring vertex
+beyond `φ²/√2` meets G83's killing test; a family of them on discs of every radius gives `χ(ℝ²) ≤ 6` with no MR (FS116-O1-YESLIM, held). Each case alone is
+a piece, not the answer.
 
 *At FS-129's audit (FS129-Z2, 2026-10-03; from the readers' records, each FS-129 result derived, one mind, kernel pending, prior art owed unless named).*
 - *Two pruning rules for ring types*, for case 5 (the recurrence) and at hubs and kind-T semi-hubs in case 1: **FS129-MR1-DOUBLETIP**: "in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) and y′ = r(ψ + 60°) be change points of the ring of p such that neither the arc of ω(p) just clockwise of r(ψ − 60°) nor the arc just counter-clockwise of r(ψ + 120°) lies on a (Q) arc; then no tile of p is at once the only tile of p whose closure holds y and the only tile of p whose closure holds y′" — the double-tip
@@ -147,8 +188,12 @@ it places, if one is built; the close's drafts.
 
 ## Provisional bearings
 
-G83, G91 (drafted at FS-116's close), G84 (a (Q) arc is FS111-M-PINCH's split case), G15, G21, G79, G86; rows 133–138 and FS-116's; stubs FS-123, FS-125,
-FS-117, FS-121's successors FS-126–FS-128.
+G91 (the ring's twisted colouring and the placing rule — the object the card reads); G83 (the straddle and the four-colour vertex — the kill every
+exclusion so far used); G79 (the example invariant: what the held positives carry, before sharpening a no-go — the card's first step); G73 (the Kneser
+graphs `KG(6, 2)` and `KG(4, 2)` — case 5's reading lives there); G84 (a (Q) arc is FS111-M-PINCH's split case — the contact a (Q) arc is); G86 (Siamese
+pairs blind every count — why case 7 is FS-123's and no count is a step); G21 (no held inhabitant past `φ²/√2` — every exclusion fails on the controls
+first); proposed G92 (a held result reaches its argument's class — read DOUBLETIP's and OUTERADJ's arguments before citing their statements). Rows 133–138,
+145–150, 153. Stubs FS-123 (the Siamese class), FS-125 (the saturated class), FS-117 (the count's K1′), FS-122 (route R's exact-map form).
 
 *At FS-129's audit (FS129-Z2, 2026-10-03):* FS129-MR1-DOUBLETIP, FS129-SR3-OUTERADJ,
 -E2ONE, FS129-SR1-TWOCIRC, -BENDANY, -BENDLE3, -RINGBAND, -SIXQ, FS129-OR1-BENDFRAG, -LOCALDENSE, -DISCF-NS; G71's height on a curve (FS110's winding)

@@ -46,6 +46,19 @@ live stub is FS-122 (`plans/STUB-forced-pair.md`), whose progress is measured by
 **None known.** Whether the bicycle's three-colourability by arcs bears on a robust Lemma 6.1 count (FS-122) is this stub's first question for Poros. A
 coupling invariant would be new structure on the unit-distance graph of two circles, whatever its bearing.
 
+## The question (Poros, 2026-10-03)
+
+*FS129-P1 ranks this stub 18 (`plans/POROS-2026-10-03-fs129-rerank.md` § 3).*
+
+**Existence form.** For a given `d ∈ (1, 2)`, is there a proper three-colouring of `T₁(u) ∪ T₁(v)` by finitely many arcs (C-T-BIKE)?
+**Structural form.** For every three-colouring of the bicycle by finitely many arcs, at every `d`, what relation do the two circles' windings (FS110-N2-RING,
+FS129-SR1-RINGBAND: `W = 6M + 3` with no swap point) satisfy across the cross curve — an invariant every colouring carries, so that existence is decided by
+which pairs of windings the cross curve permits?
+**First, for its bearing**: does a robust count of `[Voronov2023]` Lemma 6.1 (FS-122) read branch (i), whose configuration the bicycle is? If it does, a NO
+here closes that branch for the count; if not, this stub's interest is the coupling invariant alone, and its rank stays where it is.
+**Bearing on the answer**: none known; a coupling invariant would be new structure on two rings joined by cross edges, bearing on route R only through
+FS-122's count (its old consumer, FS-107's R-S, is closed, row 133).
+
 ## Registered expectations
 
 None registered here (Poros's card and the opening register them).

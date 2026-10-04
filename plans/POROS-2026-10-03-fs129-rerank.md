@@ -587,3 +587,24 @@ Four scored, two met; Brier 0.184. `data/fs129/p1/apply_rerank.py` builds the ta
 assertion "an FS number is missing or doubled" fires).
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED
+
+*The stubs, written 2026-10-03 (question sections only; no banner; Z2's dated bearing lines kept verbatim).*
+
+- `plans/STUB-q-ring.md` (FS-124, the next milestone after the Lean backlog): `## The question (Poros, 2026-10-03)` before "What FS-116 established", with
+  `### The card` (§ 2.4's rank-1 card, copied by script), `### Existence form`, `### Structural form`; its "Bearing on the answer" opening paragraph and its
+  provisional-bearings line rewritten in place, one line of why each; Z2's "At FS-129's audit" paragraphs untouched. The card passes
+  `poros_gate.py cards`.
+- `plans/STUB-top-colour.md` (FS-128): the dated correction under my carried card (inventory item 43: "covered by the five lower colours" is exact only
+  where `max P(x)` is the sixth colour; otherwise the other five, higher ones included), and "The question, at five as well" — TOP₅, the map step at five's
+  top colour, carried here (item 26).
+- `plans/STUB-pinch-at-junction.md` (FS-120): question 4, MUA-REG-P, the cover route at five's other rung, carried here with card 2 as its first step.
+- `plans/STUB-bicycle-windings.md` (FS-130): its question section (existence and structural forms, the bearing question first, the bearing line).
+- Not written, left to their openings or to Keryx: FS-123's question section (card 3 is in § 2.4, its re-aim in the draft row and banner); FS-104's
+  route (e) (in its draft row; the stub's routes list is the opening's to extend); the stub titles of FS-123, FS-128 and FS-120, which the draft rows rename.
+
+**The next milestone.** FS-124, the (Q) ring — the top of the ranking, opening on the card above; FS-123, the Siamese class, is the alternative. If card 2
+(the cover rungs at five) lands on its first branch before FS-124 opens, the next milestone is the frame question of § 3.2, Kooshi's.
+
+## Stage 4 — SAVED

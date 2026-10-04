@@ -65,6 +65,16 @@ the honest existence form of C-SAT-T at five holds if and only if `χ_m⁰(ℝ²
 measurable set with null unit pairs, so FS111-M-PINCH and FS111-M-HULL2 need no colouring for that step; `plans/FS129-SR2-audit.md` § 2.1, row 24). No
 held result closes the pinch (`plans/FS129-OR1-audit.md` § J11).
 
+## The question, the cover route at five (Poros, 2026-10-03)
+
+*FS129-P1 adds the cover route at five's other rung to this stub (`plans/POROS-2026-10-03-fs129-rerank.md` § 3.1; FS-129 inventory item 26).*
+**4. MUA-REG-P**: can a maximal cover be modified into one with regular classes (FS111-REG-JP-C5's first rung; MUA-REG-U is false, FS111-M3-IRREG)? With
+MUA-FIN (this stub's) it is the cover route at five (FS111-M2-REDUCE-C), which with held FS106-AE-MAP6 gives `χ(ℝ²) ≥ 6` given MR and needs no NO
+(FS129-OR1 § J10). **First**, card 2 of that record, an invention-signal item for Ephodos: does either rung have a tight `k`-colouring, `k ≥ 7`, that
+defeats every local modification, as FS121-O1-ABOVE7 defeats the top colour? If neither has one, six given MR reduces to these two colour-generic rungs and
+this stub rises to FS-104's rank; if one has one, that colouring is the product — for MUA-FIN it is question 1's pinched partition — and the cover route at
+five is a restatement (FS111-VM2-EQ5), its reason recorded.
+
 ## The room and the prior art
 
 The unit-distance graph's **fall colourings** (Dunbar et al. 2000, Zbl 0962.05020, finite graphs; held under FS-67) and measurable **maximal independent
