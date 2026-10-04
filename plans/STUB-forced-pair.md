@@ -1,5 +1,8 @@
 # FS-122 — the forced pair at every complexity (route R's third statement): must every near-colouring of the plane with small holes carry a close complementary pair of fat junctions? (stub)
 
+> **Re-ranked 2026-10-03 (FS129-P1; 5 → 6).** "Meets route M nowhere below the answer" holds under Condition 5
+> only; with unit arcs its exact-map form is FS-124's case list (FS112-N3-COR3), so what is route R's own is the band form.
+
 *Minted 2026-09-28 by the close job FS111-C at FS-111's close from the planner's draft `data/fs111/fs111-p/STUB-DRAFT-forced-pair.md`, corrected by what
 FS-111 found (`plans/FS111-close-inventory.md` items 5, 20, 23; `plans/FS111-C-close.md` § Stage 5). Sibling of FS-121 (route M). **Solver column:
 in-ban** — derivation and reading. Written for a session with no memory of FS-111: read `CLAUDE.md` § The aim and § Counter-priors first, then `LEDGER.md`

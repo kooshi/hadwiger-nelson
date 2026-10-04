@@ -1,5 +1,8 @@
 # FS-125 — the saturated local exclusion: is there an explicit radius about a four-colour vertex within which no saturated valid six-coloured fragment exists? (stub)
 
+> **Re-ranked 2026-10-03 (FS129-P1; 4 → 5).** FS-128 enters above it carrying the map step at five's top
+> colour, FS-104's question in route M's form; NO-SAT's bearing is unchanged, and its (Q)-free part is closed in the non-Siamese class (row 149).
+
 *Minted 2026-10-03 by FS-116's close, part 2 (FS116-Z2; `plans/FS116-Z2-close.md` stage 3), carrying FS-116's phase D0 (`data/fs116/claims.md` § 4:
 SAT-STRIP, SAT-QFREE, SATPIN-PER, NO-SAT), its construction target Y-SAT, `plans/FS116-close-inventory.md` items 45, 56, 83, 108 and 115 (FS116-S1-QF's
 blind second mind, owed by Kooshi's ruling: *"agree, leave it owed"*), and the saturated row of FS116-C114-LOCAL-F's case list. FS-116's successor; siblings

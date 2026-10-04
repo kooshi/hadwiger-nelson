@@ -41,3 +41,29 @@ Gates (saved: `fact_audit_stage2.txt`, `dupes_stage2.txt`):
   fixed (no word of mine); see HELD.
 - `--dupes`: exit 0; 163 repeated runs, 15,161 bytes, against 154 runs and 14,287 bytes on `main` — the rows 149–154's quotations repeat their
   derivation entries' words by design.
+
+## Stage 3 — SAVED: items 3–8
+
+Applied by `data/fs129/f1/file_items3to8.py` (every slot asserted once).
+
+| item | target | source | note |
+|---|---|---|---|
+| 3 | `.claude/skills/grokkings/SKILL.md`: G92 placed directly after G91's entry (the file is not in number order; G91 is followed by the G51 pointer); front matter "entries G1 to G91" -> "G1 to G92" (ruled merge, used) | Z2 § Proposed grokking G92 | no "G1–G91" in `CLAUDE.md` |
+| 4 | `plans/GROKKING-INSTANCES.md`: slot 1 at the end of § G49, slot 2 at the end of § G83, slot 3 at the end of § G87 | Z2 § `plans/GROKKING-INSTANCES.md`, slots 1–3 | |
+| 5 | `BIBLIOGRAPHY.md` `[Falconer1981]` row, its "what of ours rests on it" cell | Z2 § Bibliography | the draft says the cell "gains" the words; I appended them to the cell's end after "FS-103 (row 130), FS-104;" |
+| 6 | `plans/FRONTIER-STUBS.md`: § Ranked stubs table replaced by `data/fs129/p1/frontier-table-draft.md` (76 table lines; 13 rows differ from the file's, modulo rank; FS-117's cell is in the draft); the open-milestones paragraph's sentence replaced by P1's | P1 § Draft re-rank, "The open-milestones paragraph" | |
+| 7 | five banners (FS-123 1→2, FS-125 4→5, FS-122 5→6, FS-126 7→9, FS-115 18→19) as blockquotes directly under each stub's title; three title names re-aimed (ruled merge, used) | P1 "Banner lines"; brief § merges | FS-123's earlier re-aim banner left in place below the new one |
+| 8 | `plans/FS129-derivation.md`: dated notes after the FS129-OA1-FALC-11 block and after the FS129-MA2-FALC-HOSTS block (each after its control and "Superseded" paragraph) | `plans/SEARCH-QUEUE.md` row 1; `plans/SEARCH-2026-10-03.md` l. 10, 13–19, § 2.4 | quoted by script |
+
+Gates (saved in `data/fs129/f1/gates/`; each read by exit status):
+- `bib_audit.py` exit 0 (0 cited-undefined keys).
+- `derive_gate.py all plans/FS129-derivation.md` exit 0: GATE PASS (0 failures, 55 warnings; 28 controls fired on their faults).
+- `rk_mirror_check.py` exit 2: prints "RETIRED (Workflow 3.1, 2026-10-03) ... no longer run at a filing." Not run as a gate.
+- `check_architecture.py` exit 0 PASS; `identities.py check` exit 0 PASS.
+- Sizes: `CLAUDE.md` 51,126; SKILL.md 170,280.
+- `claude_md_fact_audit.py --base f411553f`: **exit 1, 11 failures** (on `main`, same base: PASS). Each is a token the filed drafts no longer hold:
+  `'131–141'` (CLAUDE.md item 31, Z2 unit 3's "rows 131–154"); and from P1's rewritten table rows (the old rows' words, in FRONTIER-STUBS as
+  the external home): `'j = 2, 3'`, `'104–108'`, `'109–111'`, `"C114-LOCAL-F's"`, `"FS114-Y2-BOWTIE's"`, `"FS116-N2's"`, `'REG-J′-C₅'`, `'√ε'`, `'(R2)'` (chunk),
+  and `external home plans/FRONTIER-STUBS.md lacks num token '0.03'` (the old FS-104 row's "the advisor's prior for six itself ≈ 0.03"). Not repaired:
+  restoring a token is a word the manifest does not give.
+- `--dupes` exit 0: 163 runs / 15,161 bytes (main: 154 / 14,287).

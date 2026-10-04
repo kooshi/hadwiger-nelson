@@ -1,6 +1,6 @@
 ---
 name: grokkings
-description: lean-dir's grokkings, the working theory of the Hadwiger–Nelson hunt — entries G1 to G91, each with its status, its Do and its killing test or what it forbids. Preloaded at launch into the poros, ephodos, ephodos-verifier and debruijn agents through their skills field; the coordinator and the Clerk read an entry here by its number instead of loading the file.
+description: lean-dir's grokkings, the working theory of the Hadwiger–Nelson hunt — entries G1 to G92, each with its status, its Do and its killing test or what it forbids. Preloaded at launch into the poros, ephodos, ephodos-verifier and debruijn agents through their skills field; the coordinator and the Clerk read an entry here by its number instead of loading the file.
 ---
 
 # Grokkings — the working theory of Hadwiger–Nelson (the entries)
@@ -1116,4 +1116,15 @@ writer.*
   compared its two flank tiles). Killing test: a valid six-coloured fragment by formula, non-Siamese and simple, about a vertex of at least four colours
   whose ring carries no arc of `Γ`, on a disc of radius above 1 (a defect in two routes, never a finding); of the reading, a hub whose placed missing pairs
   leave `KG(4, 2)`. It forbids the defect-free ring past `1 + ε` in that class.*
+* **G92 — A held result reaches as far as its argument, not as far as its statement. [method; FS-129, one audit; new, untested]** Measured on the
+  audit of 2026-10-03: the mechanism and merge passes found most of their yield by reading a held composition at the class its argument carries —
+  NOLIN5 to NOAFF5 to NOAFF-K (any target, any `k`), FALC-11 to FALC-T to FALC-FAN, the double tip from Γ-free rings to every ring with outer germs off
+  (Q) arcs (DOUBLETIP), FS106-SUP from six to every `k` (SUPK), EMPTY and QFREE without simplicity (EMPTY-NS, QFREE-NS); the three "does a held result
+  reach further?" questions FS129-SR3 priced below even all landed (`plans/FS129-SR3-audit.md` § 5.2), while predictions of new sites and of misses of
+  the FS116-Y4 kind, priced high, did not (`plans/FS129-Z2-record.md` § Stage 6). The cause is the filing: a result is stated for the milestone that
+  needed it, so its hypotheses name that milestone's class (simple, Γ-free, five colours, a residue field 𝔽₁₁) whether or not its argument reads them.
+  *Do: before applying or citing a held result, read its `uses only:` line, list the hypotheses its argument never consumes, and restate it without
+  them before asking where else it bears; trigger: a statement whose class names a property its proof does not use, or a second milestone about to
+  re-derive a near neighbour.* Killing test: a pass in which the restated (widened) forms fail on attack more often than they hold — then the
+  statements were tight and the reach was not there.
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** Retired to `plans/GROKKINGS-RETIRED.md`; carried by `plans/PROTOCOL-competitor-and-advisor.md`, the `keryx` skill's `<independence>`, `.claude/agents/ephodos-verifier.md`, and `plans/STANDING-RULES.md` rules 6, 8 and 11.

@@ -1,0 +1,722 @@
+corpus: CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md + .claude/skills/grokkings/SKILL.md + plans/GROKKINGS-RETIRED.md + RUNNING.md + plans/CLAUDE-MD-HISTORY.md + LEAN.md + plans/WHERE-THE-PROBLEM-STANDS.md + plans/HISTORY-WORKFLOW-3.0.md + plans/FRONTIER-STUBS.md (each joined if present)
+bytes: 1,224,664 -> 1,245,083  (+20,419)
+token PROXY (see token_proxy; not a tokenizer): 415,351 -> 422,329  (+6,978)
+[date] 40 distinct before, 40 after, LOST 0, homed outside the corpus 0
+[bib] 157 distinct before, 157 after, LOST 0, homed outside the corpus 0
+[code] 2391 distinct before, 2419 after, LOST 1, homed outside the corpus 0
+    LOST code: 'j = 2, 3'  (was ×1)
+[id] 896 distinct before, 911 after, LOST 0, homed outside the corpus 0
+[row] 113 distinct before, 120 after, LOST 0, homed outside the corpus 0
+[ref] 404 distinct before, 418 after, LOST 0, homed outside the corpus 0
+[num] 942 distinct before, 944 after, LOST 0, homed outside the corpus 1
+[tag] 110 distinct before, 111 after, LOST 0, homed outside the corpus 0
+[chunk] 5645 distinct before, 5728 after, LOST 9, homed outside the corpus 0
+    LOST chunk: '(R2)'  (was ×1)
+    LOST chunk: '104–108'  (was ×1)
+    LOST chunk: '109–111'  (was ×1)
+    LOST chunk: '131–141'  (was ×1)
+    LOST chunk: "C114-LOCAL-F's"  (was ×1)
+    LOST chunk: "FS114-Y2-BOWTIE's"  (was ×1)
+    LOST chunk: "FS116-N2's"  (was ×1)
+    LOST chunk: 'REG-J′-C₅'  (was ×1)
+    LOST chunk: '√ε'  (was ×1)
+[name] 958 distinct before, 975 after, LOST 0, homed outside the corpus 0
+pointers: 120 distinct row references, 92 grokkings; dangling: none
+PROTECTED regions: 3 before (1086, 2567, 2899 bytes), 3 after
+gate sentence: current audit reads 1236 clean and 5 declared purchases
+
+bytes per section (before -> after):
+         0 ->        0        +0  (preamble)
+     2,622 ->    3,453      +831  # This workspace — lean-dir
+     2,801 ->    2,801        +0  ## Notation
+     1,284 ->    1,284        +0  ## The mission
+     5,596 ->    5,636       +40  ### The aim
+     2,409 ->    2,409        +0  ### Counter-priors — read before pricing anything (Kooshi, 2026-09-26)
+     6,170 ->    6,170        +0  ### The local–global conjecture
+       864 ->    1,465      +601  ## Frontier
+     5,871 ->    6,748      +877  ### Where the problem stands
+       624 ->  293,604  +292,980  ### The novel-results ledger
+     3,347 ->    3,795      +448  ### Paths forward, ranked
+       146 ->      146        +0  ### The open structural question
+     4,305 ->    4,412      +107  ## Grokkings — the working theory of Hadwiger–Nelson
+     4,093 ->    3,835      -258  ## The pipeline
+     1,033 ->    1,033        +0  ## Whose work this is
+       463 ->      490       +27  ## Delegation — one level deep
+     1,844 ->    2,773      +929  ## The standard of evidence above rung B
+     1,167 ->    1,167        +0  ## What compute actually helps
+       152 ->      223       +71  ## The shape of the proof
+       524 ->    1,346      +822  ## Trust ledger
+     1,631 ->    1,854      +223  ## Toolchain
+       417 ->      417        +0  ### Building
+        68 ->      133       +65  ### The kernel's cost model
+       976 ->    1,138      +162  ### Searching
+       143 ->      191       +48  ## The package
+       733 ->    3,097    +2,364  ## The gate
+       689 ->      689        +0  ### Make the gate fail, and watch it fail
+   168,325 ->  169,878    +1,553  # Grokkings — the working theory of Hadwiger–Nelson (the entries)
+     1,182 ->    1,182        +0  # Retired grokkings — recorded, not loaded
+       986 ->      986        +0  ## The paragraph that opened § Grokkings
+    21,595 ->   21,595        +0  ## The entries
+       986 ->      986        +0  ## Subsumed entries
+     1,011 ->    1,011        +0  # Running things here — the toolchain, processes, and instruments that must fail loudly
+     7,703 -> None            ## Toolchain
+    10,834 ->    2,909    -7,925  ## Building
+    20,543 ->   20,543        +0  ## Make the gate fail, and watch it fail
+       360 ->      360        +0  # Text retired from `CLAUDE.md` as history — recorded, not loaded
+     2,699 ->    2,699        +0  ## The size-budget paragraph, as it stood before 2026-09-28's budgets
+       371 ->      371        +0  # The Lean facts of this repository
+     1,046 -> None            ## The shape of the proof
+     1,325 ->    1,325        +0  ## Assumptions: outside theorems and our own
+     1,346 -> None            ## Trust ledger
+       642 -> None            ## Toolchain
+     2,909 -> None            ## Building
+     2,657 ->    2,657        +0  ## The kernel's cost model
+       471 ->      471        +0  ## Searching — Lean
+       682 -> None            ## The package
+     3,097 -> None            ## The gate
+       429 ->      429        +0  # Where the problem stands — the arithmetic era, and the prior-art position
+    14,553 ->   14,553        +0  ## What the hunt has established, items 1–30
+     1,264 ->    1,264        +0  ## The prior-art position
+       829 ->      829        +0  ## The open structural question
+       878 ->      878        +0  # History: text cut from the always-loaded files by Workflow 3.1
+       305 ->      305        +0  ## 1. The Lean facts, as `.claude/agents/debruijn.md` carried them under Workflow 3.0 (now `LEAN.md`, current state only)
+     1,192 ->    1,192        +0  ### The shape of the proof
+     1,390 ->    1,390        +0  ### Trust ledger
+       654 ->      654        +0  ### Toolchain — Lean
+     3,335 ->    3,335        +0  ### Building Lean
+     3,266 -> None            ### The kernel's cost model
+       561 ->      561        +0  ### Searching — Lean
+       580 ->      580        +0  ### The package
+     3,377 ->    3,377        +0  ### The gate
+        94 ->       94        +0  ## 2. `CLAUDE.md`, the text Workflow 3.1 replaced, by section (verbatim, at commit f550cb5f)
+        16 ->       16        +0  ### the header
+     3,453 -> None            # This workspace — lean-dir
+        85 ->       85        +0  ### the local–global conjecture, item 10's address
+     2,860 ->    2,860        +0  ### the local–global conjecture section, § Publication
+        53 ->       53        +0  ### § Frontier, its head and the Last-updated line
+     1,465 -> None            ## Frontier
+       111 ->      111        +0  ### § Where the problem stands, items 1–30 (moved)
+       121 ->      121        +0  ### § Where the problem stands, the prior-art position (moved)
+        33 ->       33        +0  ### § The novel-results ledger
+       510 -> None            ### The novel-results ledger
+     1,338 ->    1,338        +0  ### § Paths forward, the open-milestones paragraph
+       267 ->      267        +0  ### § Paths forward, its italic head
+       360 ->      360        +0  ### § Paths forward, the table's lead-in
+     2,788 ->    2,788        +0  ### § Paths forward, ranks 4–73 (in plans/FRONTIER-STUBS.md)
+       101 ->      101        +0  ### § The open structural question (moved)
+       914 ->      914        +0  ### § Grokkings, the italic head
+       527 ->      527        +0  ### § Grokkings, the italic foot
+        21 ->       21        +0  ### § The pipeline
+     3,835 -> None            ## The pipeline
+        38 ->       38        +0  ### § Delegation — one level deep
+       490 -> None            ## Delegation — one level deep
+        46 ->       46        +0  ### § The standard of evidence above rung B
+     2,773 -> None            ## The standard of evidence above rung B
+       613 ->      613        +0  ### § What compute actually helps, its first paragraph
+        31 ->       31        +0  ### § The shape of the proof
+       223 -> None            ## The shape of the proof
+       254 ->      254        +0  ### § Trust ledger, its pointer
+        39 ->       39        +0  ### § Toolchain, with the search ban
+     1,854 -> None            ## Toolchain
+        32 ->       32        +0  ### § The kernel's cost model
+       133 -> None            ### The kernel's cost model
+        18 ->       18        +0  ### § Searching
+     1,138 -> None            ### Searching
+        20 ->       20        +0  ### § The package
+       191 -> None            ## The package
+       231 ->      231        +0  ### § The gate, its pointer
+        76 ->       76        +0  ## 3. `plans/FRONTIER-STUBS.md`, the text Workflow 3.1 replaced (verbatim)
+    11,968 ->   11,968        +0  ### § Ranked stubs: the dated re-rank paragraphs
+     1,144 ->    1,144        +0  ### § Open milestones, the paragraph as filed at FS-116's and FS-121's closes
+        56 ->       92       +36  ### the file's head
+       118 -> None            ### the file's head
+        92 -> None            ### the file's head
+     1,514 ->    1,514        +0  # LEDGER.md — the novel-results ledger of the Hadwiger–Nelson workspace
+     9,745 ->    9,745        +0  ## The claim list — what is ours beyond Theorems A and B (moved from `CLAUDE.md` § The prior-art position, 2026-09-26)
+        32 ->       32        +0  ## A. The novel-results ledger
+   282,082 -> None            ### The novel-results ledger
+   306,022 ->  306,022        +0  ## B. Theorems proved outside the kernel, by milestone
+     1,481 ->    1,481        +0  # GROKKING-INSTANCES.md — the second and later instances behind `CLAUDE.md`'s rules
+    15,246 ->   15,246        +0  ## G21 — A negative measures its enumeration
+    15,759 ->   15,759        +0  ## G30 — Measurement generates; derivation kills
+     5,093 ->    5,093        +0  ### The tally, re-sorted 2026-09-26 (job G2)
+     3,496 ->    3,496        +0  ## G46 — Recognize the classical theory first
+     8,987 ->   10,194    +1,207  ## G49 — The prior-art gate
+     9,169 ->    9,169        +0  ## G50 — Read what the search found
+    14,833 ->   14,833        +0  ## G51 — A competitor and an advisor beat one mind
+       371 ->      371        +0  ## G54 — Tight or slack
+       781 ->      781        +0  ## G58 — The antipodal conjecture
+       450 ->      450        +0  ## G60 — Fractional colourings reach fields the residue method cannot
+       335 ->      335        +0  ## G64 — Six may be a value no field attains
+       642 ->      642        +0  ## G65 — The refusal phase diagram
+       820 ->      820        +0  ## G67 — A grokking is grokked by its form
+     6,365 ->    6,365        +0  ## G72 — The invariant question
+     4,347 ->    4,347        +0  ## G79 — A wall arrives as a counterexample's invariant
+       442 ->      442        +0  ## G82 — The measurable question is a stability question
+       580 ->    1,162      +582  ## G83 — With unit arcs, the tight question lives at one four-colour vertex
+       621 ->      621        +0  ## G84 — Contact is the regularity mechanism
+       810 ->    1,424      +614  ## G87 — The invention signal
+       455 ->      455        +0  ## `CLAUDE.md` § Counter-priors
+       827 ->      827        +0  ## `CLAUDE.md` § Delegation — one level deep
+       723 ->      723        +0  ## `CLAUDE.md` § What compute actually helps
+     2,056 ->    2,056        +0  ## `CLAUDE.md` § Building — Kill by PID or process group
+       398 ->      398        +0  ## `CLAUDE.md` § Building — RAM is the discriminator (`scripts/slot.py`)
+       575 ->      575        +0  ## `CLAUDE.md` § The standard of evidence above rung B
+     1,542 ->    1,542        +0  ## `CLAUDE.md` § Toolchain — Two machines
+     2,717 ->    2,717        +0  ## `CLAUDE.md` § Searching
+     3,876 ->    3,876        +0  ## `CLAUDE.md` § The gate — the vacuity check
+     2,173 ->    2,172        -1  ## `CLAUDE.md` § Make the gate fail, and watch it fail
+     2,227 ->    2,227        +0  # The frontier stubs — the ranked set of next milestones
+     7,764 ->    7,687       -77  ## Open milestones, in order
+   103,876 ->  107,185    +3,309  ## Ranked stubs
+    31,548 ->   31,549        +1  ## Closed, absorbed and demoted
+
+normalisations in force:
+  '(?<=\\d),(?=\\d{3}(?!\\d))' -> '': thousands separators: 1,581 and 1581 are one number
+  'ℚ\\(√3,√11\\)' -> 'K': legend macro K := ℚ(√3,√11) (§ Notation)
+  'ℚ\\(√3,√5,√7,√11\\)' -> 'K(√5,√7)': K(√d) adjoins √d (§ Notation): de Grey's field
+  'ℚ\\(√3,(√[57]),√11\\)' -> 'K(\\1)': K(√d) adjoins √d (§ Notation)
+  'ℚ\\(√3,√11,(√\\d+)\\)' -> 'K(\\1)': K(√d) adjoins √d (§ Notation)
+  'UD\\(𝔽(_[qp]|[₀-₉]+), ?2\\)' -> 'Γ\\1': legend macro Γ_q := UD(𝔽_q, 2) (§ Notation; rows 70-71 already used it)
+external homes in force: 276
+  'plans/STUB-sanctioned-search-fs86.md' -> plans/FRONTIER-STUBS.md: FS-90's paths-forward row, ranked 30 once FS-113 was minted at rank 8 (the 2026-09-27 consolidation run), so it left CLAUDE.md's single rows for the group row; the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '[Chow1993]' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'U < 308.17' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'forces_of_tight' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-arena-slack-census.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-certificate-at-43.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-distance-two-gadget.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-exact-independence-solver.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-fractional-wall.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-plane-bridge.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-rational-four-space-rigidity.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-six-is-not-a-value.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'struction' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '308.17' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '9–23' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'Chow1993' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'G(ℚ⁴)' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'G–H2' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'v_𝔭(d²)' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  "¶5.4's" -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'α(Γ_q)' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'Nullstellensatz' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'Zaks' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-biquadratic-table.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-character-classification.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-de-grey-chain-kernel.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-five-colours-47.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-infinite-place-spectra.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-kr6.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-last-lattice.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-literal-ring-mixon.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-one-prime-minimal-sets.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-pyjama-gluing.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-quadratic-witnesses-kernel.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-rank-one-walls.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-three-colour-classification.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-tower-never-rises.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-unit-vector-ring-kernel.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '0.1' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '3^f' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  "C3-aper's" -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'R/3R' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  "V8's" -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'p^{2(k−1)}·α(Γ_p)' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'α(UD(ℤ/p^k,2))' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'α(Γ_p)/p²' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'ℚ(√3,√d)' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '3′' -> plans/FRONTIER-STUBS.md: FS-101's rank label '3′' in CLAUDE.md's table, renumbered 17 at the 2026-09-26 re-rank (R3, mirrored by R4); plans/FRONTIER-STUBS.md's re-rank paragraphs keep the label
+  '14′' -> plans/FRONTIER-STUBS.md: FS-102's rank label '14′' in CLAUDE.md's table, renumbered 7 at the 2026-09-26 re-rank (R3, mirrored by R4); plans/FRONTIER-STUBS.md's re-rank paragraphs keep the label
+  'Ā' -> plans/STUB-pyjama-gluing.md: FS-93's paths-forward row ('on `A` and `Ā`'), which left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R4); its FRONTIER-STUBS row says 'the half rings', and its stub names `A`, its conjugate `Ā`
+  '0.1–11' -> plans/RERANK-2026-09-26.md: FS-68's paths-forward row ('Certified within 0.1–11 % at 7–23'), which left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R4); the fact is FS-68's FRONTIER-STUBS row, spelled '0.1 %, 0.7 %, 2 % and 11 %', and R4's record quotes the old cell
+  '30–59' -> plans/RERANK-2026-09-26.md: the pointer row's rank label, 30–59 -> 30–62 at the 2026-09-26 re-rank (FS-103, FS-104, FS-105 minted; R4's record names the change)
+  'plans/CRUNCH-2026-09-25-queue.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS67-tight-products.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS84-S1-derivation.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS84-S1V-verification.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS84-five-colours-47.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS86-row88-rigidity.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS89-rational-band-rigidity.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS91-character-local-global.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/M3-exotic-colourings.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/STUB-band-rigidity-six.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/STUB-isometric-measure-rigidity.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/STUB-layer-method-five-colours.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/STUB-three-colours-residue-degree-three.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/STUB-collapse-cp-plane.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  '0.30' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'M1–M3' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'S1V' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  '§ What' -> plans/FRONTIER-STUBS.md: the same close history; restored by FS103-X to plans/FRONTIER-STUBS.md's Open-milestones history (the owner's ruling 4), where the audit found it nowhere else
+  '111–115' -> plans/FRONTIER-STUBS.md: the same close history; restored by FS103-X to plans/FRONTIER-STUBS.md's Open-milestones history (the owner's ruling 4), where the audit found it nowhere else
+  '98–110' -> plans/FRONTIER-STUBS.md: the same close history; restored by FS103-X to plans/FRONTIER-STUBS.md's Open-milestones history (the owner's ruling 4), where the audit found it nowhere else
+  '25–27' -> plans/FRONTIER-STUBS.md: the same close history; restored by FS103-X to plans/FRONTIER-STUBS.md's Open-milestones history (the owner's ruling 4), where the audit found it nowhere else
+  '0.195' -> plans/STUB-collapse-cp-plane.md: FS-103's paths-forward row ('first usable prime 103, `2√103/104 ≈ 0.195 < 1/5`'), which left the table at FS-103's close (C17); the stub plans/STUB-collapse-cp-plane.md keeps it
+  '2√103/104' -> plans/STUB-collapse-cp-plane.md: FS-103's paths-forward row ('first usable prime 103, `2√103/104 ≈ 0.195 < 1/5`'), which left the table at FS-103's close (C17); the stub plans/STUB-collapse-cp-plane.md keeps it
+  'plans/RERANK-2026-09-26.md' -> plans/FRONTIER-STUBS.md: the Last-updated line's 'the paths forward re-ranked (R1–R4, plans/RERANK-2026-09-26.md)', cut when FS-105's close replaced the line (§R-close 4.2); plans/FRONTIER-STUBS.md's re-rank paragraphs cite the record
+  'RERANK' -> plans/FRONTIER-STUBS.md: the same Last-updated clause (the record's name); plans/FRONTIER-STUBS.md cites plans/RERANK-2026-09-26.md
+  'plans/STUB-harden-mr.md' -> plans/FRONTIER-STUBS.md: FS-105's rank-1 paths-forward row, which left the table at FS-105's close (§R-close 4.2, 4.4); the stub's path heads its entry in plans/FRONTIER-STUBS.md's closed list
+  '121–130' -> plans/STUB-harden-mr.md: FS-105's rank-1 row's bearing 'rows 121–130 rest on MR (row 120), the table's weakest link', which left the table at FS-105's close (§R-close 4.2); the stub keeps it
+  '§§3' -> plans/STUB-harden-mr.md: FS-105's rank-1 row's question 'Thm 1.2's proof (§§3, 5–9 unread)', answered at FS-105's close (row 120's grade); the stub keeps it
+  '5–9' -> plans/STUB-harden-mr.md: the same row's '§§3, 5–9 unread'; the stub keeps it
+  'plans/STUB-four-colour-inheritance.md' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-76, which left CLAUDE.md's ranks 1–29 at FS-106's close (FS106-X; E1's design); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'FS-84' -> plans/FRONTIER-STUBS.md: the Open-milestones paragraph's 'Kooshi's rulings (FS-84's among them)', cut by D-C7 at FS-106's close; the closed list holds FS-84's entry and ruling
+  "84's" -> plans/FRONTIER-STUBS.md: the same clause ('FS-84's'); the closed list holds it
+  '120–127' -> plans/FRONTIER-STUBS.md: the Last-updated line's 'FS-100 stage 5 with its waves (rows 120–127)', cut by D-C5 at FS-106's close; the closed list holds it
+  '0.03' -> plans/FRONTIER-STUBS.md: FS-104's paths-forward bearing 'the advisor's prior for six itself ≈ 0.03', cut by D-C8 at FS-106's close; FS-104's row in plans/FRONTIER-STUBS.md keeps it
+  "80's" -> plans/FRONTIER-STUBS.md: FS-104's paths-forward question '`k`-point correlation constraints (FS-80's route)', shortened to '(FS-80)' by D-C8; FS-104's row in plans/FRONTIER-STUBS.md keeps it
+  'D1–D5' -> plans/STUB-regularity-wall.md: link 5's normal-form address '(FS-103's V1 and M, D1–D5)', cut by D-C2 at FS-106's close ('whose normal form FS-103 holds'); the stub's reduction, the working copy of § The aim, keeps 'FS103-M's D1–D5'
+  'plans/STUB-ultrametric-continuation.md' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-98, which left CLAUDE.md's ranks 1–29 at FS-107's close (§R-close 4.2; E1's design); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'J38' -> plans/FRONTIER-STUBS.md: the same row's 're-aimed (J38's R1)'; FS-98's row in plans/FRONTIER-STUBS.md keeps it
+  "J38's" -> plans/FRONTIER-STUBS.md: the same clause; FS-98's row in plans/FRONTIER-STUBS.md keeps it
+  '§ FS' -> plans/FRONTIER-STUBS.md: the address '`plans/STUB-regularity-wall.md` § FS-107' in FS-107's rank-1 row and the Open-milestones sentence, both replaced at FS-107's close (§R-close 4.2); the closed-list entry keeps it
+  'δ₀' -> plans/STUB-regularity-wall.md: FS-107's rank-1 row's question 'leaves `δ₀|U_R|` uncovered, for every `ε`' (claim R), which left the table at FS-107's close; the stub's § FS-107 keeps it, and row 133 cites it as row 131's C-Q-STAB
+  'δ₀|U_R' -> plans/STUB-regularity-wall.md: the same clause; the stub's § FS-107 keeps it
+  'J47' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-100 (rank 18 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  'Y1' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-90 (rank 29 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  "(3)'s" -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-67 (rank 7 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '06:5x' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-101 (rank 19 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '10⁻⁴' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-109 (rank 4 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '112–113' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-64 (rank 12 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '116–117' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-64 (rank 12 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '116–118' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-100 (rank 18 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '4′' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-100 (rank 18 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  "HD1-cert's" -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-90 (rank 29 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  'PL(23' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-96 (rank 11 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  'plans/STUB-tangency-seam.md' -> plans/FRONTIER-STUBS.md: FS-110's stub, cited by CLAUDE.md's Open-milestones paragraph and paths-forward rank 1 until FS-110 closed (FS110-X; FS110-C's §R-close 4.2); plans/FRONTIER-STUBS.md's closed list keeps it
+  '(1, 2)' -> plans/STUB-tangency-seam.md: FS-110's paths-forward row ('equal-type pairs in `(1, 2)` must survive the bicycle'), removed from CLAUDE.md when FS-110 closed and FS-112 took rank 1 (FS110-X; FS110-C's §R-close 4.2); the stub keeps the fact
+  "R1's" -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-44 (rank 15 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  'T-J39-5' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-59 (rank 8 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  'μ_min' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-67 (rank 7 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '2026-07-30' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '# noqa' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '#eval' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '+kernel' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  ', ' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '--' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '-- line comment' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '--plan' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '-j' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  './install-toolchain.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  './scripts/vacuity.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  './scripts/vacuity.sh --self-test' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '.c' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '.claude/settings.local.json' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '.lake/build/ir/' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '.olean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '/-! module doc -/' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '/-- docstring -/' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '<decl>._native.native_decide.ax_N_M' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '= true' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '@[extern] opaque' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'BATCH' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Bool' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Classical.choice' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'DECLARED' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Decidable' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'False' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'GENERIC' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Instances/TwoAdicFive/Edges.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'LEAN_ABORT_ON_PANIC' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'LEAN_CC' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'LIBRARY_PATH' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Lean.ofReduceBool' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'List.all' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'List.all_eq_true' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'List.map' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'List.range' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'List.range 529' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'MEMMAX' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'MemorySwapMax=0' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Nat.fold' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Nat.ldiff' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Nat.testBit_two_pow_sub_one' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Proofs' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Proofs.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'PtTable' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Quot.sound' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'STALE' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Sat/ClauseTable.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Sat/Diagnose.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Sat/Mask.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Sat/MaskCheck.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'SimpleGraph.chromaticNumber' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Std.HashMap' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Std.Tactic.BVDecide.LRAT.check' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'USize' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'VACUITY DECLARED:' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'VACUOUS' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'WITNESSED' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'ZMod (2 ^ ((5 + 1) / 2))' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'ZMod 8' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'agreesWithCNF' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'autoImplicit' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'autoImplicit := false' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'available_memory / peak' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'axioms.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'build.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'build/gate/<gate>/' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'check' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'check_sound' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'debruijn-init' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'decide (…)' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'decide +kernel' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'example' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'grep -rn "<name-fragment>" $(lean --print-prefix)/src/lean/' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'insert' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'l.all f = true' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lake' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lake build --no-build' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lake env lean <file>' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lake update' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lakefile.toml' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'latest' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lean-toolchain' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lean4checker.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'leanprover/lean4:v4.32.0' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'libc++' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'maxHeartbeats' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'mmap' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'model: opus' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'plans/PROTOCOL-crunch.md' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  'propext' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'range' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'regen-check.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'relaxedAutoImplicit' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'scripts/build_order.py' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'scripts/gate-log.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'sorryAx' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'source scripts/dev-env.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'v4.32.0' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'vacuity.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '~/.profile' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'K3' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'M04' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'M05' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'M11' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '§ Searching.' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '0.81' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '0.83' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '1024' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '1048576' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '12696' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '16.7' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '180' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '2.14' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '209' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '2381' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '31.9' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '32.9' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '33089' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '4.17' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '4.19' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '5.0' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '5.9' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '600' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  '6325' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '778' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '853' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '861' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '99335' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '[extern]' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '[it]' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  '100G' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '100–180' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '20%' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '2×' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '5.0.0' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '500k–600k' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  '55–70' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  "M04's" -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'e.1' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'e.2' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  's/1048576' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '{s+=$1}' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'BVDecide' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'CNF' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  "Claude's" -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'ClauseTable' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Efodos' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  'Emit' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Fable' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  'Feed' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'HashMap' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'InfoView' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'KB' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'LLVM' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Managed' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Mask' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'MaskCheck' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'MemorySwapMax' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'OOM' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'SimpleGraph' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Std' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'TwoAdicFive' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'ZMod' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+allowances in force: 245
+  '38–42': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  '46–49': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  '50–51': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  '52–54': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  '55–56': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  '57–59': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  "K0's": item 12's 'five at K0's grade (row 121)', a superseded pointer rewritten to its grade and address ('five at [hand], through MR (row 123)'); K0 stays in rows 117, 121 and 123
+  'G1–G79': the stable-identifier range, extended to G1–G80 when G80 (infinite rank is the resource) was minted at FS-100 stage 5's front page
+  '1–119': the ledger's row range in § The novel-results ledger's pointer, extended to 1–122 at FS-100 stage 5's close (the 1–115 precedent)
+  '1–122': the ledger's row range in § The novel-results ledger's pointer, extended to 1–125 at FS-100 stage 5 wave 3's close (the 1–119 precedent)
+  '73–74': § The mission (2)'s citation of four proven at ℚ(√3,√5) (rows 73–74, G55), superseded when five landed there (row 123) at FS-100 stage 5 wave 3's front page; rows 73–74 stand in LEDGER.md
+  '1–125': the ledger's row range in § The novel-results ledger's pointer, extended to 1–127 at FS-100 wave 3b's fold (X31C; the 1–122 precedent)
+  'X27D/X27V': the FS-98 paths-forward row's 'X27D/X27V attacked it at the close', superseded by their verdict (row 126: TR-ROT a GAP at NA₀); the records are plans/FS100-X27D-derivation.md and plans/FS100-X27V-verification.md
+  '7279': the vacuity gate's declaration count, 7279 -> 7438 at X11K3's gate (build/gate/vacuity/20260926T122608Z-1388046.log)
+  'declarations=7279': the same count, as the gate report prints it
+  '309': vacuity's refutations-skipped count, 309 -> 313 at X11K3's gate (the same log)
+  'refutations-skipped=309': the same count, as the gate report prints it
+  '1193': the axiom audit's clean count, 1193 -> 1236 at X11K3's gate (build/gate/axioms/20260926T122606Z-1387817.log; the 1130 precedent)
+  '1209': the axiom audit's record count, 1,209 at FS-75's close -> 1,252 at X11K3's gate (the same log)
+  '7051': the vacuity gate's declaration count, 7051 -> 7279 at FS-75's close (the owner's re-run, build/gate/vacuity/20260926T053434Z-866933.log)
+  'declarations=7051': the same count, as the gate report prints it
+  '304': vacuity's refutations-skipped count, 304 -> 309 at FS-75's close (the same log)
+  'refutations-skipped=304': the same count, as the gate report prints it
+  '1130': the axiom audit's clean count, 1130 -> 1193 at FS-75's close (build/gate/axioms/20260926T053431Z-866750.log; the 1034 precedent)
+  '1146': the axiom audit's record count, 1,146 at M2's close -> 1,209 at FS-75's close (the same log)
+  '1–115': the ledger's row range in § The novel-results ledger's pointer, extended to 1–119 at FS-100's and FS-75's closes (the 1–110 precedent)
+  'J48': FS-100's paths-forward row's stage label ('stages 1 (blind check, J48) and 2 (KT-1, J49) done'), superseded by the row's re-aim at its in-ban close; plans/STUB-measure-rigidity-three-fields.md keeps it
+  'KT-1': the same stage label; the FS-100 stub keeps it
+  "T39's": a possessive of T39 ('with T39's stub') in LEDGER.md § B's FS73-T41 and T42 lines, replaced by FS-75's kernel cells; T39 itself stays
+  'ν̂': a tokenizer artefact of the `\|` escape in M3-J22-T8's code span (`|ν̂|` -> `\|ν̂\|`): the chunker strips `|` but not the backslash; no fact changes
+  '294994': the file's byte count when the temporary 325,000 budget was granted; removed with that budget at the crunch's end
+  '325': the crunch's temporary size budget (325,000), superseded by 300,000 at its end (Kooshi, 2026-09-26)
+  '325k': Kooshi's words granting the temporary 325,000 budget; superseded at the crunch's end
+  '37–41': the paths-forward table's group rank, renumbered 38–42 when FS-100 was ranked in at 3 (J47)
+  '42–44': the same re-rank: now 43–45
+  '54–55': the same re-rank: now 55–56
+  '56–58': the same re-rank: now 57–59
+  '1–110': the ledger's row range, extended to 1–115 at row 88's and FS-67's closes (2026-09-25)
+  'G1–G78': the stable-identifier range, extended to G1–G79 when G79 (Kooshi's example invariant) was minted at J44's front page
+  '34–38': the paths-forward table's group rank, renumbered 37–41 when FS-98, FS-97 and FS-99 were ranked in (J44)
+  '39–41': the same re-rank: now 42–44
+  '42–45': the same re-rank: now 45–48
+  '51–52': the same re-rank: now 54–55
+  '53–55': the same re-rank: now 56–58
+  'G = K_k^s': FS-67's old paths-forward row ('Yes for `G = K_k^s` (Greenwell–Lovász)'), replaced by its close's draft (FS67 R.8c); the fact is row 114's (`K_k^s` by iteration) and the stub's
+  'χ_f(H)': FS-67's old paths-forward row ('leaving the gap `χ_f(H) ≤ k < χ(H)`'), replaced by its close's draft; row 115 states the gap regime as `χv(H) ≤ k < χ(H)`, and the stub keeps Zhang's form
+  'G76:[hand, two derivations for the frame, the local theorem and the no-gos (rows 88–92); the obstruction a reading, reached twice independently]': G76's grade widened by row 88's close's draft (J41, data/fs86r88/j41/claude_drafts.py pair 4) to name the measure half (rows 111–113)
+  'p = 2': row 92's 'C14.2 at `p = 2` … not checked' replaced by M3's correction (C14.2 (c) holds at `q = 2`, row 110); the check is done
+  'B′': FS39-T1's § B kernel cell 'stub (FS-39 phase B′)' replaced by M2's kernel names (row 104); FS-39's stub banner keeps phase B′
+  'ℤ[U]/3ℤ[U]': row 82's T6 parenthesis ('needs ℤ[U]/3ℤ[U] and is not settled') replaced by 'settled at FS-91, row 99' (FS91-J09-J4-T6)
+  'U3': FS-91's paths-forward row ('MS₄({5}) and U3 at one prime'), deleted when FS-91 closed; U3 is answered at every split prime (row 102), the stub keeps it
+  '1/8': FS-91's paths-forward row ('band 1/6 … and 1/8'), deleted when FS-91 closed; every band is answered on characters (row 98)
+  'FS81-T1–T5': FS-75's row, re-aimed at FS-91's close to S1 and no mixing (row 99); plans/STUB-three-colour-criterion-kernel.md keeps T4's leaves
+  '(K(√7))': FS-45's row's `five_le_chromaticNumber_planeOver (K(√7))`, replaced at M2's close by the kernel theorem's own name (row 103, SevenConditional)
+  'F(t)²': G63's old killing test ('a unit vector of `F(t)²` with a pole …'), replaced by the owner's ruling (J24 stage 2) with G67's forbids-form; G63's statement χ(F(t)²) = χ(F²) stays in row 104
+  '1034': the axiom audit's clean count, 1034 -> 1130 at M2's close (J23b stage 0, build/gate/axioms/20260925T232928Z-253944.log)
+  '6795': the vacuity gate's declaration count, 6795 -> 7051 at M2's close (J23b stage 0)
+  'declarations=6795': the same count, as the gate report prints it
+  '278': vacuity's refutations-skipped count, 278 -> 304 at M2's close
+  'refutations-skipped=278': the same count, as the gate report prints it
+  '275': vacuity's sites count, 275 -> 279 at M2's close
+  'sites=275': the same count, as the gate report prints it
+  '253': vacuity's generic count, 253 -> 257 at M2's close
+  'generic=253': the same count, as the gate report prints it
+  '1–94': the ledger's row range in § The novel-results ledger's pointer, extended to 1–110 at the M1-M3 closes
+  'G1–G76': the stable-identifier range, extended to G1–G78 when G77 (M1) and G78 (M3) were minted (2026-09-25)
+  '32–36': a grouped rank in the paths-forward table, renumbered at the M1-M3 re-rank (55 rows)
+  '37–39': a grouped rank, renumbered at the M1-M3 re-rank
+  '40–43': a grouped rank, renumbered at the M1-M3 re-rank
+  '44–45': a grouped rank, renumbered at the M1-M3 re-rank
+  '46–48': a grouped rank, renumbered at the M1-M3 re-rank
+  '49–50': a grouped rank, renumbered at the M1-M3 re-rank
+  '51–53': a grouped rank, renumbered at the M1-M3 re-rank
+  'G63:[hand; prior art: `[Fischer1990]': G63 re-graded at M2's close (owner's ruling, J24): kernel at d = 2 for every F ⊆ ℝ and t transcendental (row 104, Transcendental.lean); title 'pure transcendence'
+  'plans/POROS-2026-09-25-fs86-next.md': the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses
+  'plans/STUB-dyadic-rigidity-triangle-free.md': the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses
+  'ℚ(i)': the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses
+  '§ R.4': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'R.4': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'C₅': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'T34–T35': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '1050': the FS-75 row's minted target, compressed at FS-89's close; plans/STUB-three-colour-criterion-kernel.md keeps the 1,050-leaf certificate and FS-60's fields
+  'Asymmetric': the FS-65 row's bearing, compressed at FS-89's close; plans/FRONTIER-STUBS.md keeps it
+  "60's": the FS-75 row's minted target, compressed at FS-89's close; plans/STUB-three-colour-criterion-kernel.md keeps the 1,050-leaf certificate and FS-60's fields
+  'ℚ(√p,√q)²': row 57's spelling of Fischer's plane; its home, § Publication, says 'the plane over ℚ(√p,√q)'
+  'SUSPENDED': § Publication's trigger was SUSPENDED (2026-09-19) pending [Fischer1994]; read and verified 2026-09-22, it resolved to 'has not fired' — the value is his
+  'UD(ℤ/p²,2)': the FS-66 stub row; § Notation now writes the tower as UD(ℤ/p^k, 2)
+  'UD(ℤ/529,2)': the FS-66 stub row; item 17 and row 75 write UD(ℤ/529, 2)
+  'χ(level': the FS-66 stub row's 'χ(level two) ≤ χ(level one)'; § Notation says χ(G_k) is non-increasing in k
+  'Pilot': the FS-66 stub row's 'Pilot:'; row 75 and G66 say 'the pilot'
+  '3a': WORKFLOW 2.0: the prior-art gate is step 3.2; G49 and the grokkings intro now say 3.2
+  '3g': WORKFLOW 2.0: the re-grokking is step 3.1; the grokkings intro now says 3.1
+  'G1–G54': the stable-identifier range in the grokkings intro, extended to G1–G67 when G67 was minted (2026-09-22)
+  'G1–G67': the stable-identifier range, extended to G1–G68 when G68 (the quotient/fan-gap screen) was minted (2026-09-22)
+  'G1–G68': the stable-identifier range, extended to G1–G69 when G69 (rigidity prime by prime) was minted (2026-09-22)
+  'G1–G71': the stable-identifier range, extended to G1–G72 when G72 (the invariant question, a method) was minted (2026-09-23)
+  'G1–G69': the stable-identifier range, extended to G1–G70 when G70 (√3-clean is residue, Coxeter's theorem) was minted at FS-71's close (2026-09-22)
+  '[kernel for ρ₁₅; measured for ρ₆₃]': G12's old tag; FS-71 batch 1 (M31-T1) found the law a hand derivation confirmed at 26 censuses, kernel for the ρ₁₅ instance
+  'G12:[kernel for ρ₁₅; measured for ρ₆₃]': FS-71 batch 1: G12 re-graded [hand, confirmed at 26 exact censuses; kernel for the ρ₁₅ instance] (M31-T1)
+  'G20:[kernel + measured]': FS-71 batch 1: G20 re-graded [hand + kernel + measured] — the boundary-tightness argument is M36-T1, a hand derivation
+  'G52:[measured + reading, one instance with a positive control]': FS-71 batch 4b: G52's necessary half is a hand theorem (the σ-criterion, M63G-T4/T5); the tag now says so
+  'G54:[kernel one way; derived the other; the table computed]': FS-71 batch 5b: the tight-forcing direction is a hand theorem (FS38-D2-A/B), graded so in row 67 and its entry
+  '[GarciaMarcoKnauer]': G58's yearless key, corrected to [GarciaMarcoKnauer2024] by FS-71 batch 6a
+  'arXiv:2303.06262': G58 cited the wrong arXiv id (it is Cervantes–Krebs); the García-Marco–Knauer paper is arXiv:2405.19543 (FS-71 batch 6a)
+  '6723': the vacuity gate's declaration count, 6723 -> 6728 when Instances/ThreeFive (five declarations) joined Proofs.lean at FS-70's close (2026-09-22)
+  'declarations=6723': the same count, as the gate report prints it
+  'FS38-D2-A/B': the LEDGER.md § B placeholder row FS-71 was to backfill; batch 5b indexed FS-38's seven theorems under their own rows (§ S.2) and removed the placeholder row that named them as pending
+  'FS66-W/E/T': the same placeholder row's FS-66 half; the whole row is one line, so batch 5b's removal (on filing FS-38, per the brief) drops it too — batch 6 adds FS-66's own § B rows fresh, with no placeholder to clean up
+  '6728': the vacuity gate's declaration count, 6728 -> 6795 at FS-73's close (the Kempe layer and FS-72's lattices joined the library)
+  'declarations=6728': the same count, as the gate report prints it
+  '270': vacuity's refutations-skipped count, 270 -> 278 at FS-73's close
+  'refutations-skipped=270': the same count, as the gate report prints it
+  '262': vacuity's sites count, 262 -> 275 at FS-73's close
+  'sites=262': the same count, as the gate report prints it
+  '240': vacuity's generic count, 240 -> 253 at FS-73's close
+  'generic=240': the same count, as the gate report prints it
+  '1–75': the ledger's row range in § The novel-results ledger's pointer, extended to 1–79 at FS-73's close
+  'G1–G72': the stable-identifier range, extended to G1–G73 when G73 (four colours cell by cell) was minted at FS-79's close (2026-09-24)
+  '1–79': the ledger's row range, extended to 1–81 at FS-79's close (2026-09-24)
+  'R1–R9': the FS-59 row's 'the stub's three-colour routes R1–R9 are answered'; the row was rewritten at FS-79's close around the survivors and the four-colour question, and the routes with their answered status stay in plans/STUB-four-colours-167.md
+  'R9': the old FS-59 row's first experiment (the chain route on Kooshi's 7-cycle triangle); superseded at three colours by FS-73's Theta_3 (row 79); its text stays in plans/STUB-four-colours-167.md §3a
+  "R9's": the same, possessive
+  'R5–R8': the old FS-59 row's instruments (degree-aimed asks, core growth, the rigidity dial, the order parameter); kept in plans/STUB-four-colours-167.md §3a, carried to the five-colour question there
+  'c(3w)': R9's pinned ask c(0) != c(3w); plans/STUB-four-colours-167.md §3a
+  'w′': R9's identity 1/6 = 1 + 1 - w - w-bar - w' - w-bar'; plans/STUB-four-colours-167.md §3a
+  'w̄′': the same identity
+  'G68/G69': the old open-milestones sentence 'FS-59's R9 stays deferred, re-aimed by G68/G69'; FS-73 closed and R9 is answered
+  "MASCOT-T6's": the old open-milestones sentence naming FS-73's bearings; G70 names MASCOT-T6 as its source
+  'T39–T44': row 79's theorem range, extended to T39–T45 when T45 (v is G7's n = 42 rotation) was filed at FS-73's close
+  '1–81': the ledger's row range, extended to 1–84 at FS-81's close (2026-09-24)
+  'G1–G73': the stable-identifier range, extended to G1–G74 when G74 (the layer method) was minted at FS-81's close
+  'G61:[kernel + certified + measured; one reading]': G61's grade gained 'hand' at FS-81's close: T4 is proved at [hand, two independent derivations] (row 82); the old claim 'no proof and no route' is kept as a demotion record
+  '[kernel + certified + measured; one reading]': G61's old status tag, replaced by '[kernel + certified + hand + measured; one reading]' (the entry above)
+  '9–13': the paths-forward table's group rank, renumbered 29–33 when the stubs were re-ranked one rank per row at FS-81's close
+  '14–16': the same re-rank: now 34–36
+  '17–20': the same re-rank: now 37–40
+  '21–22': the same re-rank: now 41–42
+  '23–25': the same re-rank: now 43–45
+  '26–27': the same re-rank: now 46–47
+  '28–30': the same re-rank: now 48–50
+  "9's": the old ranked-stubs intro's 'FS-9's bearing rewritten' (FS-79's re-rank narrative); FS-9's row carries its bearing
+  'plans/STUB-five-over-sqrt3-sqrt5.md': the old open-milestones paragraph's banner pointer for FS-70; the stub and its banner are in plans/FRONTIER-STUBS.md's closed list
+  'plans/STUB-invariant-question-four-colours.md': the same, for FS-79
+  'plans/STUB-rigidity-dichotomy.md': the same, for FS-73
+  'plans/STUB-theorem-audit.md': the same, for FS-71
+  '§ B.': the old open-milestones sentence 'every one indexed in `LEDGER.md` § B.'; item 19 keeps the pointer to LEDGER.md § B
+  '56th': old item 14's ℚ(√167) sentence (55 of 57 lattices periodic, a 56th linear, the 57th L21cc6506 refusing); row 79 holds the census of the 57
+  '57th': the same
+  '1–84': the ledger's row range, extended to 1–87 at FS-85's close (2026-09-24)
+  'G1–G74': the stable-identifier range, extended to G1–G75 when G75 (where triangles enter four-colour rigidity) was minted at FS-85's close
+  '29–33': the paths-forward table's group rank, renumbered 31–35 when FS-86, FS-87, FS-88 joined the table at FS-85's close
+  '34–36': the same re-rank: now 36–38
+  '37–40': the same re-rank: now 39–42
+  '41–42': the same re-rank: now 43–44
+  '43–45': the same re-rank: now 45–47
+  '46–47': the same re-rank: now 48–49
+  '48–50': the same re-rank: now 50–52
+  'k·arccos(5/6)': the FS-74 row's lead 1 (Hubai's rotation acting as ±k·120°); FS-74 closed by row 85, and the lead stays in plans/STUB-algebraic-explanation.md
+  '±k·120°': the same lead
+  "Baxter's": the FS-74 row's last lead (Baxter's height); kept in plans/STUB-algebraic-explanation.md
+  'Lead': the FS-74 row's 'Lead 1:'; the row left the table when FS-74 closed
+  'plans/STUB-four-colour-rigidity-without-triangles.md': FS-85's stub; the open-milestones sentence points at the record, and the stub path with its banner is in plans/FRONTIER-STUBS.md's closed list
+  'plans/STUB-quadratic-four-colour-classification.md': FS-81's stub; the old open-milestones sentence; its path and banner are in plans/FRONTIER-STUBS.md's closed list
+  'T1–T25': FS-81's derivation range, in the old open-milestones sentence; plans/FRONTIER-STUBS.md's closed list carries it
+  'T1–T43': FS-79's derivation range, in the old 'earlier closes' list; plans/FRONTIER-STUBS.md's closed list carries it
+  'T1–T45': FS-73's derivation range, the same
+  'plans/<milestone>-derivation.md': the old 'earlier closes' list's FS-71 entry; item 19 keeps the pointer as plans/<home>-derivation.md
+  'M17–M36': FS-71's reading batches, in the old 'earlier closes' list; the batches are in plans/FS71-theorem-audit.md
+  'M37–M52': the same
+  'M53–M61': the same
+  '24–FS-38': the same ('FS-24–FS-38')
+  '50–FS-66': the same ('FS-50–FS-66')
+  'data/fs66/ckpt/b1-p23/README.md': the old 'earlier closes' list's FS-66 note (the GPU solve at 23 re-rounds from a later checkpoint); the commands are in plans/FS66-phase2-certificate.md and plans/FS66-residue-tower-drop.md
+  '559': item 9's 'best object 559, census-certified' had no source (plans/FRONTIER-STUBS.md's M62 row: 'an earlier 559 here had no source'); the census-certified best object is c582 (data/m62/c582/census.json), corrected at FS-85's close
+  '39.7': the FS-60 row's as-minted certificate sizes (59's LRAT 39.7 MB); the row now points at plans/STUB-quadratic-witnesses-kernel.md, which holds them
+  '131–2360': the same (the witnesses' 131–2,360 points)
+  "239's": the same (239's LRAT)
+  'LRATs': the FS-75 row's 'in place of LRATs', compressed to 'through Θ'
+  '1–87': the ledger's row range, extended to 1–94 at FS-86's close (2026-09-25)
+  'G1–G75': the stable-identifier range, extended to G1–G76 when G76 was minted at FS-86's close
+  '31–35': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '36–38': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '39–42': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '43–44': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '45–47': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '48–49': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '50–52': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  'H5': the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  'H6': the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  "H5's": the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  "H6's": the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  "G75's": the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  '1–3': the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  'k = 78': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'n/2': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'q−1': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'μ_{q+1}': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '7/2': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'χ_f(ℚ(√11)²)': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '37/47': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'ℚ(√1823)': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'ℚ(√887)': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '1823': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '887': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "43's": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "44's": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'Thm 5': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "ℚ(√3,√5)'s": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'H4': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "29's": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '[reading, Poros, 2026-09-24]': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '480': G51's run records, compressed at FS-86's close to a pointer and the standing rules; their home is plans/PROTOCOL-competitor-and-advisor.md §3 (and FS-85's records for D1–D4)
+  'D1–D4': G51's run records, compressed at FS-86's close to a pointer and the standing rules; their home is plans/PROTOCOL-competitor-and-advisor.md §3 (and FS-85's records for D1–D4)
+  'Draw': item 23's 'Part 1 alone Draw (K)', FS-85's week verdict; its home is plans/FS85-rigidity-without-triangles.md §R-close.2
+  '1–127': the ledger's row range in § The novel-results ledger's pointer, extended to 1–130 at FS-103's close (FS103-C's C5; the 1–125 precedent)
+  'G1–G80': the stable-identifier range, extended to G1–G81 when G81 (where every place mixes, the field is the plane) was minted at FS-103's close (C14, C15; kept by the owner's ruling 3)
+  '30–62': the paths-forward table's group rank, renumbered 29–61 when FS-103's row left the table at its close (C17); the label again at FS-106's close, 30–62 -> 30–63 (FS106-X: FS-106 left, FS-109 and FS-108 minted at 3–4, FS-76 folded into the group row so CLAUDE.md shows ranks 1–29, E1's design)
+  '121–125': FS-105's paths-forward row's 'rows 121–125 and FS-103 rest on MR', superseded by 'rows 121–130 rest on MR' at FS-103's close (C17); rows 121–125 stand in LEDGER.md
+  '§§2–9': row 120's grade 'its proof in EL2021 §§2–9, unread here', superseded at FS-105's close (FS105-C's §R-close 4.1): Thm 1.2's proof is EL2021 Thm 1.3 plus FS105-DED; plans/FS105-harden-mr.md keeps the old reading
+  '§4.1–4.3': row 120's prior-art cell 'EL2021 §2 and §4.1–4.3 read (X24R)', widened to 'EL2021 §§1, 2, 4 read in full (X24R; FS105-R)' at FS-105's close (4.1)
+  'c·M^{1/[F:ℚ]}': row 120's mechanism '`U_ℚ` alone gives `c·M^{1/[F:ℚ]}`', sharpened to the exact constant `(4/π + o(1))M^{1/[F:ℚ]}` at FS-105's close (4.1; FS105-W-H)
+  '29–61': the paths-forward table's group rank, renumbered 28–60 when FS-105's row left the table at its close (§R-close 4.2; the 30–62 precedent)
+  '28–60': the paths-forward table's group rank, renumbered 30–62 when FS-106 and FS-107 were minted at ranks 1–2 at the reframe (RF1; every rank from FS-104's on moved down two, so CLAUDE.md shows ranks 1–29 again, E1's design; the 29–61 precedent)
+  '§G79.': G79's pointer '`plans/GROKKING-INSTANCES.md` §G79.' now reads '§G79 (FS-106: …)' (FS106-C's D-C12); punctuation only, the address stands
+  '1–130': the ledger's row range in § The novel-results ledger's pointer, extended to 1–133 at FS-107's close (FS107-X; rows 131–133 had been added at FS-106's and FS-107's closes; the 1–127 precedent)
+  '30–63': the paths-forward table's group rank, renumbered 30–64 at FS-107's close (§R-close 4.2): FS-107 left, FS-110 and FS-111 minted at ranks 1–2, FS-98 folded into the group (the 30–62 precedent)
+  '30–64': the paths-forward table's group rank, renumbered 30–65 at the 2026-09-27 consolidation run: FS-113 minted at rank 8, every rank from 8 on moved down one, FS-90 folded into the group (plans/CONSOLIDATION-2026-09-27.md; the 30–62 precedent)
+  '1–133': the ledger's row range in § The novel-results ledger's pointer, extended to 1–134 at FS-110's close (FS110-X; row 134 added; the 1–130 precedent)
+  '131–133': item 31's row range in § Where the problem stands, extended to 131–134 at FS-110's close (FS110-X; FS110-C's §R-close 4.2 rewrites item 31 with row 134)
+  '1–134': the ledger's row range in § The novel-results ledger's pointer, extended to 1–136 at FS-112's close (FS112-X; rows 135–136 added; the 1–133 precedent)
+  '131–134': item 31's row range in § Where the problem stands, extended to 131–136 at FS-112's close (FS112-X; FS112-C's §R-close 4.2 D4 rewrites item 31 with rows 135–136)
+  '30–65': the paths-forward table's group rank, renumbered 30–66 at FS-112's close: FS-112 left, FS-114 and FS-115 minted at ranks 1 and 4 (NIGHT-A's ranking, plans/POROS-2026-09-27-night-aim.md §2), FS-75 folded into the group (the 30–62 precedent)
+  'G1–G81': the Grokkings header's range of stable identifiers, extended to G1–G83 at FS-112's close (G82 cites row 131, FS-106's; G83 is FS-112's; flagged in FS112-X's inventory, fixed by the owner)
+  'G82:[hand, two minds, one blind (row 131); the reading one mind]': G82's status tag, now '[…; the reading one mind, corrected at FS-107]': the reading rewritten with its demotion record at FS-107's close (FS107-C's §R-close 4.2; inventory item 26)
+  '# Engineering standard': the heading of CLAUDE.md's `@DEBRUIJN.md` import, removed when de Bruijn became an agent file (`.claude/agents/debruijn.md` now carries the `debruijn` skill, DEBRUIJN.md's text, verbatim; CLAUDE.md § The pipeline); cited only in old audit logs
+  '30–69': the paths-forward table's group rank for its tail, replaced by the row '11–69 | 59 more open stubs' when the table was cut to the top ten (Kooshi, 2026-09-28); every rank stands in plans/FRONTIER-STUBS.md
+  'G1–G83': the Grokkings header's range of stable identifiers, extended to G1–G87 when TP1 noticed it stale (2026-09-28; G84–G87 minted at the FS-114/FS-111 closes and on Kooshi's word)
+  '5th': the Grokkings heading's 'the 5th colour', renamed 'Hadwiger–Nelson' with the heading (Kooshi, 2026-09-28)
+  '## Grokkings — the working theory of the 5th colour': renamed '## Grokkings — the working theory of Hadwiger–Nelson' (Kooshi, 2026-09-28: 'That feels a bit out of date')
+  '# Grokkings — the working theory of the 5th colour (the entries)': renamed with CLAUDE.md's heading, '# Grokkings — the working theory of Hadwiger–Nelson (the entries)' (Kooshi, 2026-09-28)
+  'plans/GROKKINGS-WORKFLOW.md': the retired grokkings' file, renamed plans/GROKKINGS-RETIRED.md on 2026-09-28 when G47 joined the workflow grokkings (retirements of any kind)
+  '121–126': FS-100's paths-forward cell 'rows 121–126 at [hand]', cut with ranks 11–29 (Kooshi, 2026-09-28); the rows stand in LEDGER.md, and FS-100's full row in plans/FRONTIER-STUBS.md
+  '# Workflow': the heading of CLAUDE.md's `@WORKFLOW.md` import, removed when the workflow was split into the identity files (Workflow 3.0, 2026-09-28): WORKFLOW.md is now an index loaded by no one; CLAUDE.md § The pipeline is the shared map
+  'SessionStart': the name of the startup hook that told the main session to load `keryx`; retired the same day for the output style `.claude/output-styles/keryx.md`, which carries the identity in every request
+  "G56:[derived: exact spectra and the 83 certificate; the exclusion is elementary and script-verified; the consequence for χ(ℝ²) rides on the conjecture's bold form and on FS-39's bridge, which is `[Madore2015]": G56's status tag (the audit reads it to the first ']'), now '… FS-39's bridge, which is `[BendaPerles2000]` pp. 117–118 (Madore's ¶5.4) plus de Bruijn–Erdős]': the bridge is Benda–Perles's (1976), Madore's ¶5.4 a re-derivation crediting them in its fn. 5 (the consolidation run's LP and LV; draft D-6, owner item 24); only the credit moved, the grade did not
+gate-count transitions in force: 3
+  ('1034', '5') -> ('1130', '5'): M2's close gate (J23b stage 0; build/gate/axioms/20260925T232928Z-253944.log): 1,146 records, 1,130 clean, 11 axiom-free, 5 purchases
+  ('1130', '5') -> ('1193', '5'): FS-75's close gate (the owner's re-run at J52K's end; build/gate/axioms/20260926T053431Z-866750.log): 1,209 records, 1,193 clean, 11 axiom-free, 5 purchases
+  ('1193', '5') -> ('1236', '5'): X11K3's gate (FS-100 wave 3's kernel lane; build/gate/axioms/20260926T122606Z-1387817.log): 1,252 records, 1,236 clean, 11 axiom-free, 5 purchases
+
+FAIL: lost code token 'j = 2, 3'
+FAIL: external home plans/FRONTIER-STUBS.md lacks num token '0.03'
+FAIL: lost chunk token '(R2)'
+FAIL: lost chunk token '104–108'
+FAIL: lost chunk token '109–111'
+FAIL: lost chunk token '131–141'
+FAIL: lost chunk token "C114-LOCAL-F's"
+FAIL: lost chunk token "FS114-Y2-BOWTIE's"
+FAIL: lost chunk token "FS116-N2's"
+FAIL: lost chunk token 'REG-J′-C₅'
+FAIL: lost chunk token '√ε'
+AUDIT FAILED (11 failure(s))
+size: CLAUDE.md 51,126 of 80,000 bytes
+size: .claude/skills/grokkings/SKILL.md 170,280 of 200,000 bytes
