@@ -9,8 +9,7 @@ that judge the milestone, written before any job).*
 > **Running (4)**: **FS131-I5c** (wave 5 on `fs131-w5`: merges `fs131-w4` once it holds the `Contact` lane, applies ruling 252 to `stuck_structure_ua`, 37
 > leaves; item 272), **FS131-I4l** (on `fs131-w4`: merges the finished `Contact` lane `fs131-w4c` in first, item 267, then `n3_end`, `UnitArc`'s five, `pair_i`; IC5 proved `stuck_structure`, item 266), **FS131-IM2** (wave 4's
 > moves on `fs131-w4m`: the second prefix move into `Cone`, item 263, then SHAVE, RAY, MERGE; items 261–263), **FS131-QA3** (the definitions audit, read-only;
-> launched in I4k's slot, item 265). **Next slot**: the planar-infrastructure job (paused at 44 leaves on `fs131-w5`; applies ruling 252 to `stuck_structure_ua`; `l3_base` discharges `pair_i`'s
-> `h3` from `ht'`, item 258), then the planar-infrastructure job. **Wave 4's moves are its longest path** (about seven to eight sessions, item 261); once SHAVE's
+> launched in I4k's slot, item 265). **Next slot**: the planar-infrastructure job (seven leaves and `IsHoleOf`'s repair, items 239, 242, 247). **Wave 4's moves are its longest path** (about seven to eight sessions, item 261); once SHAVE's
 > machinery lands, weigh RAY and MERGE in parallel. **Wave 4's merge** (item 267): `fs131-w4c` → `fs131-w4` now (I4l); when IM2's line is done, `fs131-w4m` → `fs131-w4` (the three moves
 > become citations; keep `localSectors_disj` in wave 3's `LocalStructure`, item 264), the gate (re-run the axiom self-test, item 260;
 > vacuity notes on `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N`, items 252, 266), the landing; then Woodall's landing job (item 190). **Held for the filing**: wave 2's drafts 5–7 (Frontier clause, 28 rows to regrade, atlas grades; item 271); rows 134/135/137 from E4 § 5.4 (item
