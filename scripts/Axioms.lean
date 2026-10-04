@@ -2161,6 +2161,27 @@ No native evaluation. -/
 
 /-! ## FS-131 wave 3 (job FS131-I3c) — the implementer's added children and the rows' leaves -/
 
+#print axioms HadwigerNelson.Plane.carrier_circ_unit
+#print axioms HadwigerNelson.Plane.Arc.OnRing.carrier_subset_sphere
+#print axioms HadwigerNelson.Plane.continuous_polarPt
+#print axioms HadwigerNelson.Plane.norm_polarPt_sub
+#print axioms HadwigerNelson.Plane.dist_polarPt_ringPt_le
+#print axioms HadwigerNelson.Plane.abs_norm_sub_one_le
+#print axioms HadwigerNelson.Plane.polar_nbhd
+#print axioms HadwigerNelson.Plane.e_eq_e_iff
+#print axioms HadwigerNelson.Plane.exists_mem_Icc_e_eq
+#print axioms HadwigerNelson.Plane.e_ne_one
+#print axioms HadwigerNelson.Plane.dist_ringPt_side_le
+#print axioms HadwigerNelson.Plane.dist_lt_of_mem_germ
+#print axioms HadwigerNelson.Plane.ringPt_notMem_germ
+#print axioms HadwigerNelson.Plane.isPreconnected_germ
+#print axioms HadwigerNelson.Plane.sideInterval
+#print axioms HadwigerNelson.Plane.exists_germ_subset_ringArc
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_finite
+#print axioms HadwigerNelson.Plane.ArcMap.finite_nonring_inter_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_onRing
+#print axioms HadwigerNelson.Plane.ArcMap.exists_sides_nbhd
+#print axioms HadwigerNelson.Plane.ArcMap.sides_const
 #print axioms HadwigerNelson.Plane.lens_stepA
 #print axioms HadwigerNelson.Plane.lens_stepB
 #print axioms HadwigerNelson.Plane.re_e

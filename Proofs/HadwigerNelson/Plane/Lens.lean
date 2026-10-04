@@ -1,4 +1,4 @@
-import Proofs.HadwigerNelson.Plane.Basic
+import Proofs.HadwigerNelson.Plane.Chord
 import Mathlib.Analysis.Calculus.Deriv.Basic
 import Mathlib.Analysis.Calculus.Deriv.Slope
 import Mathlib.Analysis.Calculus.ContDiff.Defs
@@ -112,23 +112,6 @@ theorem lens_stepB {r3 d1 d2 n1 n2 : ℝ} (hr3 : r3 ^ 2 = 3) (hd : d1 ^ 2 + d2 ^
   have h1 : d1 + n1 = 0 := by nlinarith only [sq_nonneg (d1 + n1), sq_nonneg (d2 + n2), hsum]
   have h2 : d2 + n2 = 0 := by nlinarith only [sq_nonneg (d1 + n1), sq_nonneg (d2 + n2), hsum]
   exact ⟨by linarith only [h1], by linarith only [h2]⟩
-
-/-- The real and imaginary parts of `e θ`. -/
-theorem re_e (θ : ℝ) : (e θ).re = Real.cos θ := by simp [e, Complex.exp_ofReal_mul_I_re]
-/-- The imaginary part of `e θ`. -/
-theorem im_e (θ : ℝ) : (e θ).im = Real.sin θ := by simp [e, Complex.exp_ofReal_mul_I_im]
-
-/-- The squared norm in coordinates. -/
-theorem sq_norm_eq (z : ℂ) : ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := by
-  rw [Complex.sq_norm, Complex.normSq_apply]; ring
-
-/-- `e θ` is nonzero and `e θ * conj (e θ) = 1`. -/
-theorem e_mul_conj_e (θ : ℝ) : e θ * (starRingEnd ℂ) (e θ) = 1 := by
-  rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, norm_e]; simp
-
-/-- Conjugation reverses the angle: `conj (e θ) = e (−θ)`. -/
-theorem conj_e (θ : ℝ) : (starRingEnd ℂ) (e θ) = e (-θ) := by
-  rw [e, e, ← Complex.exp_conj]; congr 1; simp [map_mul, Complex.conj_ofReal]
 
 /-- **The core of EXIT, one circle.** At a point `x` of `ω(e b)` inside `B̄(e a, 1)` (`30° < b < 90°`, `−90° < a < −30°`), a unit
 vector `ν` turned counter-clockwise from `x − e b` (by at most `180°`) whose tip `x + ν` lies within `1` of `e(b + 60°)` is

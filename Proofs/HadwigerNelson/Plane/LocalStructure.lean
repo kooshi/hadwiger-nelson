@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.LocalMap
+import Proofs.HadwigerNelson.Plane.Chord
 import Mathlib.LinearAlgebra.Complex.FiniteDimensional
 import Mathlib.Geometry.Euclidean.Basic
 
@@ -191,6 +192,221 @@ theorem Arc.volume_carrier (a : Arc) : MeasureTheory.volume a.carrier = 0 := by
       (MeasureTheory.Measure.addHaar_sphere _ _ _)
     rintro _ ⟨θ, -, rfl⟩
     simp [norm_e]
+
+/-- The carrier of the arc `circ p 1 θ₀ θ₁` is the closed sub-arc `r([θ₀, θ₁])` of `ω(p)`. -/
+theorem carrier_circ_unit (p : ℂ) (θ₀ θ₁ : ℝ) : (Arc.circ p 1 θ₀ θ₁).carrier = ringArc p θ₀ θ₁ := by
+  simp [Arc.carrier, ringArc, ringPt]
+
+/-- `a` is an arc of the unit circle `ω(p)`. -/
+def Arc.OnRing (p : ℂ) (a : Arc) : Prop := ∃ θ₀ θ₁, a = .circ p 1 θ₀ θ₁
+
+/-- An arc on `ω(p)` has its carrier on `ω(p)`. -/
+theorem Arc.OnRing.carrier_subset_sphere {p : ℂ} {a : Arc} (h : a.OnRing p) : a.carrier ⊆ sphere p 1 := by
+  obtain ⟨θ₀, θ₁, rfl⟩ := h
+  rw [carrier_circ_unit]
+  rintro _ ⟨θ, -, rfl⟩
+  exact ringPt_mem_sphere p θ
+
+/-- The polar point `p + ρ e(ψ)`. -/
+noncomputable def polarPt (p : ℂ) (ρ ψ : ℝ) : ℂ := p + (ρ : ℂ) * e ψ
+
+/-- The polar map is continuous. -/
+theorem continuous_polarPt (p : ℂ) : Continuous (fun q : ℝ × ℝ => polarPt p q.1 q.2) := by
+  unfold polarPt e; fun_prop
+
+/-- The distance from the centre of a polar point is `|ρ|`. -/
+theorem norm_polarPt_sub (p : ℂ) (ρ ψ : ℝ) : ‖polarPt p ρ ψ - p‖ = |ρ| := by
+  simp [polarPt]
+
+/-- A polar point at radius within `ε` of `1` and angle within `κ` of `φ` is within `ε + κ` of `r(φ)`. -/
+theorem dist_polarPt_ringPt_le (p : ℂ) (ρ ψ φ : ℝ) :
+    dist (polarPt p ρ ψ) (ringPt p φ) ≤ |ρ - 1| + |ψ - φ| := by
+  have h1 : polarPt p ρ ψ - ringPt p φ = ((ρ - 1 : ℝ) : ℂ) * e ψ + (e ψ - e φ) := by
+    simp only [polarPt, ringPt]; push_cast; ring
+  rw [dist_eq_norm, h1]
+  refine (norm_add_le _ _).trans ?_
+  rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs]
+  linarith [norm_e_sub_e_le ψ φ]
+
+/-- `|‖z − p‖ − 1| ≤ dist z r(φ)`. -/
+theorem abs_norm_sub_one_le (p z : ℂ) (φ : ℝ) : |‖z - p‖ - 1| ≤ dist z (ringPt p φ) := by
+  have := abs_norm_sub_norm_le (z - p) (e φ)
+  rw [norm_e, show z - p - e φ = z - ringPt p φ by simp only [ringPt]; ring] at this
+  exact this.trans (dist_eq_norm _ _).symm.le
+
+/-- **Polar neighbourhoods**: every point `z` near `r(φ)` is `p + ρ e(ψ)` with `ρ = ‖z − p‖` near `1` and `ψ` in a given open
+interval about `φ`. -/
+theorem polar_nbhd (p : ℂ) {φ α β : ℝ} (h : φ ∈ Ioo α β) :
+    ∃ ν > 0, ∀ z : ℂ, dist z (ringPt p φ) < ν →
+      |‖z - p‖ - 1| < ν ∧ ∃ ψ ∈ Ioo α β, z = polarPt p ‖z - p‖ ψ := by
+  have hc : ContinuousAt Complex.arg (1 : ℂ) :=
+    Complex.continuousAt_arg (by simp [Complex.mem_slitPlane_iff])
+  obtain ⟨ν', hν', harg⟩ := Metric.continuousAt_iff.mp hc (min (φ - α) (β - φ))
+    (lt_min (by linarith [h.1]) (by linarith [h.2]))
+  refine ⟨ν', hν', fun z hz => ⟨?_, ?_⟩⟩
+  · exact lt_of_le_of_lt (abs_norm_sub_one_le p z φ) hz
+  · set w : ℂ := (z - p) * (starRingEnd ℂ) (e φ) with hw
+    have hconj : e φ * (starRingEnd ℂ) (e φ) = 1 := e_mul_conj_e φ
+    have hdw : dist w 1 < ν' := by
+      have : w - 1 = (z - ringPt p φ) * (starRingEnd ℂ) (e φ) := by
+        rw [hw]; simp only [ringPt]
+        linear_combination hconj
+      rw [dist_eq_norm, this, norm_mul, Complex.norm_conj, norm_e, mul_one, ← dist_eq_norm]
+      exact hz
+    have ha := harg hdw
+    rw [Complex.arg_one, Real.dist_eq, sub_zero] at ha
+    have hlt := lt_of_lt_of_le ha (min_le_left _ _)
+    have hlt' := lt_of_lt_of_le ha (min_le_right _ _)
+    rw [abs_lt] at hlt hlt'
+    refine ⟨φ + Complex.arg w, ⟨by linarith [hlt.1], by linarith [hlt'.2]⟩, ?_⟩
+    have hwn : ‖w‖ = ‖z - p‖ := by rw [hw, norm_mul, Complex.norm_conj, norm_e, mul_one]
+    have h3 := Complex.norm_mul_exp_arg_mul_I w
+    have h4 : z - p = w * e φ := by rw [hw, mul_assoc, mul_comm (starRingEnd ℂ (e φ)), hconj, mul_one]
+    unfold polarPt
+    rw [← hwn, e_add, show ((‖w‖ : ℝ) : ℂ) * (e φ * e (Complex.arg w)) = ((‖w‖ : ℂ) * e (Complex.arg w)) * e φ by ring]
+    have h5 : ((‖w‖ : ℝ) : ℂ) * e (Complex.arg w) = w := by rw [e]; exact h3
+    rw [h5, ← h4]; ring
+
+/-- `e a = e b` exactly when `a − b` is an integer multiple of `2π`. -/
+theorem e_eq_e_iff {a b : ℝ} : e a = e b ↔ ∃ n : ℤ, a = b + n * (2 * π) := by
+  rw [e, e, Complex.exp_eq_exp_iff_exists_int]
+  constructor
+  · rintro ⟨n, hn⟩
+    refine ⟨n, ?_⟩
+    have := congrArg Complex.im hn
+    simpa using this
+  · rintro ⟨n, hn⟩
+    exact ⟨n, by rw [hn]; push_cast; ring⟩
+
+/-- Every angle is congruent mod `2π` to one in `[θ₀, θ₀ + 2π]`. -/
+theorem exists_mem_Icc_e_eq (θ₀ x : ℝ) : ∃ ψ ∈ Icc θ₀ (θ₀ + 2 * π), e ψ = e x := by
+  have hπ := Real.pi_pos
+  refine ⟨x - ⌊(x - θ₀) / (2 * π)⌋ * (2 * π), ⟨?_, ?_⟩, e_eq_e_iff.mpr ⟨-⌊(x - θ₀) / (2 * π)⌋, by push_cast; ring⟩⟩
+  · have := Int.floor_le ((x - θ₀) / (2 * π))
+    rw [le_div_iff₀ (by positivity)] at this
+    linarith
+  · have := Int.lt_floor_add_one ((x - θ₀) / (2 * π))
+    rw [div_lt_iff₀ (by positivity)] at this
+    linarith
+
+/-- `e t ≠ 1` for `0 < |t| < 2π`. -/
+theorem e_ne_one {t : ℝ} (h0 : t ≠ 0) (h1 : |t| < 2 * π) : e t ≠ 1 := by
+  intro h
+  have h' : e t = e 0 := by rw [h]; simp [e]
+  obtain ⟨n, hn⟩ := e_eq_e_iff.mp h'
+  have hπ := Real.pi_pos
+  rw [zero_add] at hn
+  rcases lt_trichotomy n 0 with hn0 | hn0 | hn0
+  · have : (n : ℝ) ≤ -1 := by exact_mod_cast Int.le_sub_one_iff.mpr hn0
+    have : t ≤ -(2 * π) := by rw [hn]; nlinarith
+    rw [abs_of_neg (by linarith)] at h1; linarith
+  · subst hn0; simp at hn; exact h0 hn
+  · have : (1 : ℝ) ≤ n := by exact_mod_cast hn0
+    have : 2 * π ≤ t := by rw [hn]; nlinarith
+    rw [abs_of_pos (by linarith)] at h1; linarith
+
+/-- A ring point `t ≥ 0` along a side of `r(θ)` is within `t` of it. -/
+theorem dist_ringPt_side_le (p : ℂ) (θ : ℝ) (s : Side) {t : ℝ} (ht : 0 ≤ t) :
+    dist (ringPt p (θ + s.sign * t)) (ringPt p θ) ≤ t := by
+  have h1 := norm_e_sub_e_le (θ + s.sign * t) θ
+  have hs : |s.sign| = 1 := by cases s <;> simp [Side.sign]
+  rw [dist_eq_norm]
+  simp only [ringPt, add_sub_add_left_eq_sub]
+  calc _ ≤ |θ + s.sign * t - θ| := h1
+    _ = t := by rw [add_sub_cancel_left, abs_mul, hs, one_mul, abs_of_nonneg ht]
+
+/-- A point of the germ of `ω(p)` of length `δ` is within `δ` of the base point. -/
+theorem dist_lt_of_mem_germ {p : ℂ} {θ : ℝ} {s : Side} {δ : ℝ} {x : ℂ} (h : x ∈ germ p θ s δ) :
+    dist x (ringPt p θ) < δ := by
+  obtain ⟨t, ⟨ht0, htδ⟩, rfl⟩ := h
+  have h1 := norm_e_sub_e_le (θ + s.sign * t) θ
+  have hs : |s.sign| = 1 := by cases s <;> simp [Side.sign]
+  rw [dist_eq_norm]
+  simp only [ringPt, add_sub_add_left_eq_sub]
+  calc _ ≤ |θ + s.sign * t - θ| := h1
+    _ = t := by rw [add_sub_cancel_left, abs_mul, hs, one_mul, abs_of_pos ht0]
+    _ < δ := htδ
+
+/-- The base point of a germ of length below `2π` is not on it. -/
+theorem ringPt_notMem_germ {p : ℂ} {θ : ℝ} {s : Side} {δ : ℝ} (hδ : δ ≤ 2 * π) : ringPt p θ ∉ germ p θ s δ := by
+  rintro ⟨t, ⟨ht0, htδ⟩, h⟩
+  have hs : |s.sign| = 1 := by cases s <;> simp [Side.sign]
+  have h1 : e (s.sign * t) = 1 := by
+    have h2 : e (θ + s.sign * t) = e θ := by simpa [ringPt] using h
+    rw [e_add] at h2
+    have hne : e θ ≠ 0 := fun h0 => by simpa [h0] using norm_e θ
+    exact mul_left_cancel₀ hne (by rw [h2, mul_one])
+  exact e_ne_one (by cases s <;> simp [Side.sign] <;> exact ht0.ne')
+    (by rw [abs_mul, hs, one_mul, abs_of_pos ht0]; linarith) h1
+
+/-- The germ is preconnected. -/
+theorem isPreconnected_germ (p : ℂ) (θ : ℝ) (s : Side) (δ : ℝ) : IsPreconnected (germ p θ s δ) :=
+  isPreconnected_Ioo.image _ (by unfold ringPt e; fun_prop)
+
+/-- The angles of the closed (open) sub-arc of the germ's side of `θ` of length `δ` are `θ + sign · u` for `u ∈ [0, δ]`
+(`(0, δ)`). -/
+theorem sideInterval (θ δ : ℝ) (hδ : 0 < δ) (s : Side) :
+    θ < θ + δ ∧ (s = .ccw → ∀ φ, (φ ∈ Icc θ (θ + δ) ↔ ∃ u ∈ Icc 0 δ, φ = θ + s.sign * u)) ∧
+      (s = .cw → ∀ φ, (φ ∈ Icc (θ - δ) θ ↔ ∃ u ∈ Icc 0 δ, φ = θ + s.sign * u)) := by
+  refine ⟨by linarith, ?_, ?_⟩
+  · rintro rfl φ
+    simp only [Side.sign, one_mul]
+    constructor
+    · intro h; exact ⟨φ - θ, ⟨by linarith [h.1], by linarith [h.2]⟩, by ring⟩
+    · rintro ⟨u, hu, rfl⟩; exact ⟨by linarith [hu.1], by linarith [hu.2]⟩
+  · rintro rfl φ
+    simp only [Side.sign]
+    constructor
+    · intro h; exact ⟨θ - φ, ⟨by linarith [h.2], by linarith [h.1]⟩, by ring⟩
+    · rintro ⟨u, hu, rfl⟩; exact ⟨by linarith [hu.2], by linarith [hu.1]⟩
+
+/-- **A germ that an arc of `ω(p)` meets arbitrarily close to its base point lies in it** (for short germs): `r(θ)` lies on
+the arc `r([θ₀, θ₁])` and every germ of length `δ` meets it. -/
+theorem exists_germ_subset_ringArc {p : ℂ} {θ θ₀ θ₁ : ℝ} (hlt : θ₀ < θ₁) (hle : θ₁ ≤ θ₀ + 2 * π) (s : Side)
+    (hy : ringPt p θ ∈ ringArc p θ₀ θ₁) (hhit : ∀ δ > 0, (germ p θ s δ ∩ ringArc p θ₀ θ₁).Nonempty)
+    {δ₀ : ℝ} (hδ₀ : 0 < δ₀) : ∃ δ' > 0, δ' ≤ δ₀ ∧ germ p θ s δ' ⊆ ringArc p θ₀ θ₁ := by
+  have hπ := Real.pi_pos
+  have hs : |s.sign| = 1 := by cases s <;> simp [Side.sign]
+  by_cases hfull : θ₁ = θ₀ + 2 * π
+  · refine ⟨δ₀, hδ₀, le_rfl, ?_⟩
+    rintro _ ⟨t, -, rfl⟩
+    obtain ⟨ψ, hψ, hψe⟩ := exists_mem_Icc_e_eq θ₀ (θ + s.sign * t)
+    exact ⟨ψ, ⟨hψ.1, by rw [hfull]; exact hψ.2⟩, by simp [ringPt, hψe]⟩
+  · have hg : 0 < 2 * π - (θ₁ - θ₀) := by
+      have : θ₁ < θ₀ + 2 * π := lt_of_le_of_ne hle hfull
+      linarith
+    set δ' := min δ₀ ((2 * π - (θ₁ - θ₀)) / 2) with hδ'
+    have hδ'0 : 0 < δ' := lt_min hδ₀ (by linarith)
+    obtain ⟨z, ⟨t, ⟨ht0, htδ⟩, rfl⟩, ψ, hψ, hψz⟩ := hhit δ' hδ'0
+    obtain ⟨φ₀, hφ₀, hφ₀e⟩ := hy
+    have heθ : e θ = e φ₀ := by simpa [ringPt] using hφ₀e.symm
+    have h1 : e ψ = e (φ₀ + s.sign * t) := by
+      have h2 : e ψ = e (θ + s.sign * t) := by simpa [ringPt] using hψz
+      rw [h2, e_add, e_add, heθ]
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp h1
+    have htδ' : t < (2 * π - (θ₁ - θ₀)) / 2 := lt_of_lt_of_le htδ (min_le_right _ _)
+    have hst : |s.sign * t| = t := by rw [abs_mul, hs, one_mul, abs_of_pos ht0]
+    have hst' := abs_le.mp hst.le
+    have hn0 : n = 0 := by
+      by_contra hne
+      rcases lt_or_gt_of_ne hne with hneg | hpos
+      · have : (n : ℝ) ≤ -1 := by exact_mod_cast Int.le_sub_one_iff.mpr hneg
+        nlinarith [hψ.1, hφ₀.2]
+      · have : (1 : ℝ) ≤ n := by exact_mod_cast hpos
+        nlinarith [hψ.2, hφ₀.1]
+    subst hn0
+    simp only [Int.cast_zero, zero_mul, add_zero] at hn
+    have hψ' : φ₀ + s.sign * t ∈ Icc θ₀ θ₁ := hn ▸ hψ
+    refine ⟨t, ht0, lt_of_lt_of_le htδ (min_le_left _ _) |>.le, ?_⟩
+    rintro _ ⟨u, ⟨hu0, hut⟩, rfl⟩
+    have hconv : φ₀ + s.sign * u ∈ Icc θ₀ θ₁ := by
+      have hl : u / t ∈ Icc (0 : ℝ) 1 := ⟨by positivity, by rw [div_le_one ht0]; exact hut.le⟩
+      have : φ₀ + s.sign * u = (1 - u / t) * φ₀ + (u / t) * (φ₀ + s.sign * t) := by field_simp; ring
+      rw [this]
+      exact (convex_Icc θ₀ θ₁) hφ₀ hψ' (by linarith [hl.2]) hl.1 (by ring)
+    refine ⟨φ₀ + s.sign * u, hconv, ?_⟩
+    simp only [ringPt]
+    rw [e_add, e_add, heθ]
 
 namespace ArcMap
 
@@ -564,13 +780,343 @@ theorem exists_mem_coneAt_region {x : ℂ} (hx : x ∈ F.dom) (β : ℝ) : ∃ c
 
 /-! ## The germ dichotomy -/
 
+/-- Near a point of the domain, a ball in the domain meets only finitely many arcs. -/
+theorem exists_ball_finite {y : ℂ} (hy : y ∈ F.dom) :
+    ∃ ε > 0, ball y ε ⊆ F.dom ∧ {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty}.Finite := by
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite y hy
+  obtain ⟨ε, hε, hsub⟩ := Metric.mem_nhds_iff.mp (inter_mem ht (F.isOpen_dom.mem_nhds hy))
+  refine ⟨ε, hε, fun z hz => (hsub hz).2, hfin.subset ?_⟩
+  rintro a ⟨ha, z, hza, hz⟩
+  exact ⟨ha, z, hza, (hsub hz).1⟩
+
+/-- Inside a ball meeting finitely many arcs, the points of the unit circle on the arcs that are not arcs of it are
+finitely many. -/
+theorem finite_nonring_inter_sphere (p : ℂ) {y : ℂ} {ε : ℝ}
+    (hfin : {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty}.Finite) :
+    (⋃ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty ∧ ¬ a.OnRing p}, a.carrier ∩ sphere p 1).Finite := by
+  refine (hfin.subset ?_ : {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty ∧ ¬ a.OnRing p}.Finite).biUnion ?_
+  · rintro a ⟨ha, hne, -⟩; exact ⟨ha, hne⟩
+  · rintro a ⟨ha, -, hring⟩
+    rcases Arc.finite_inter_sphere_or_eq_circ a (F.nondegenerate a ha) p with h | ⟨θ₀, θ₁, rfl⟩
+    · exact h
+    · exact absurd ⟨θ₀, θ₁, rfl⟩ hring
+
+/-- A point of a ball meeting finitely many arcs that lies on no arc other than arcs of `ω(p)` has a neighbourhood meeting
+only arcs of `ω(p)`. -/
+theorem exists_ball_onRing (p : ℂ) {y : ℂ} {ε : ℝ}
+    (hfin : {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty}.Finite) {x : ℂ} (hx : x ∈ ball y ε)
+    (hxn : ∀ a ∈ F.arcs, ¬ a.OnRing p → x ∉ a.carrier) :
+    ∃ r0 > 0, ball x r0 ⊆ ball y ε ∧ ∀ a ∈ F.arcs, (a.carrier ∩ ball x r0).Nonempty → a.OnRing p := by
+  set bad : Set ℂ := ⋃ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty ∧ ¬ a.OnRing p}, a.carrier with hbad
+  have hbfin : {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty ∧ ¬ a.OnRing p}.Finite :=
+    hfin.subset fun a ⟨ha, hne, _⟩ => ⟨ha, hne⟩
+  have hcl : IsClosed bad := hbfin.isClosed_biUnion fun a ha => a.isClosed_carrier
+  have hxb : x ∉ bad := by
+    intro h
+    obtain ⟨a, ⟨ha, -, hr⟩, hxa⟩ := mem_iUnion₂.mp h
+    exact hxn a ha hr hxa
+  obtain ⟨r0, hr0, hsub⟩ := Metric.isOpen_iff.mp (isOpen_ball.inter hcl.isOpen_compl) x ⟨hx, hxb⟩
+  refine ⟨r0, hr0, fun z hz => (hsub hz).1, fun a ha hne => ?_⟩
+  obtain ⟨z, hza, hz⟩ := hne
+  by_contra hr
+  exact (hsub hz).2 (mem_iUnion₂.mpr ⟨a, ⟨ha, ⟨z, hza, (hsub hz).1⟩, hr⟩, hza⟩)
+
+
+/-- **The sides of a ring point**: if a ball about `r(φ)` lies in the domain and meets only arcs of `ω(p)`, then for angles in a
+neighbourhood of `φ` the colours just inside and just outside the ring are each one colour, the same for all of them. -/
+theorem exists_sides_nbhd (p : ℂ) {φ r0 : ℝ} (hr0 : 0 < r0) (hdom : ball (ringPt p φ) r0 ⊆ F.dom)
+    (hring : ∀ a ∈ F.arcs, (a.carrier ∩ ball (ringPt p φ) r0).Nonempty → a.OnRing p) :
+    ∃ κ > 0, ∃ c c' : Fin k, ∀ φ' ∈ Ioo (φ - κ) (φ + κ),
+      F.innerColours p (ringPt p φ') = {c} ∧ F.outerColours p (ringPt p φ') = {c'} := by
+  set κ : ℝ := min (r0 / 4) (1 / 2) with hκ
+  have hκ0 : 0 < κ := lt_min (by positivity) (by norm_num)
+  have hκ1 : κ ≤ r0 / 4 := min_le_left _ _
+  have hκ2 : κ ≤ 1 / 2 := min_le_right _ _
+  -- polar points near `r(φ)` off the ring are interior points
+  have hint : ∀ ρ ψ : ℝ, |ρ - 1| < κ → ρ ≠ 1 → |ψ - φ| < κ → polarPt p ρ ψ ∈ F.interiorPts := by
+    intro ρ ψ hρ hρ1 hψ
+    have hball : polarPt p ρ ψ ∈ ball (ringPt p φ) r0 := by
+      rw [mem_ball]
+      linarith [dist_polarPt_ringPt_le p ρ ψ φ]
+    refine ⟨hdom hball, fun hz => ?_⟩
+    obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp hz
+    have hr := hring a ha ⟨_, hza, hball⟩
+    have hs := hr.carrier_subset_sphere hza
+    rw [mem_sphere, dist_eq_norm, norm_polarPt_sub, abs_of_pos (by linarith [(abs_lt.mp hρ).1, hκ2])] at hs
+    exact hρ1 hs
+  -- one colour on each side box
+  have hbox : ∀ J : Set ℝ, IsPreconnected J → J ⊆ {ρ | |ρ - 1| < κ ∧ ρ ≠ 1} → J.Nonempty →
+      ∃ c, ∀ ρ ∈ J, ∀ ψ ∈ Ioo (φ - κ) (φ + κ), polarPt p ρ ψ ∈ F.region c := by
+    intro J hJ hJs ⟨ρ0, hρ0⟩
+    have hconn : IsPreconnected ((fun q : ℝ × ℝ => polarPt p q.1 q.2) '' (J ×ˢ Ioo (φ - κ) (φ + κ))) :=
+      (hJ.prod isPreconnected_Ioo).image _ (continuous_polarPt p).continuousOn
+    have hsub : ((fun q : ℝ × ℝ => polarPt p q.1 q.2) '' (J ×ˢ Ioo (φ - κ) (φ + κ))) ⊆ F.interiorPts := by
+      rintro _ ⟨⟨ρ, ψ⟩, ⟨hρ, hψ⟩, rfl⟩
+      exact hint ρ ψ (hJs hρ).1 (hJs hρ).2 (by rw [abs_lt]; constructor <;> linarith [hψ.1, hψ.2])
+    refine ⟨F.col (polarPt p ρ0 φ), fun ρ hρ ψ hψ => ⟨hsub ⟨(ρ, ψ), ⟨hρ, hψ⟩, rfl⟩, ?_⟩⟩
+    exact hconn.constant (F.continuousOn_col.mono hsub) ⟨(ρ, ψ), ⟨hρ, hψ⟩, rfl⟩
+      ⟨(ρ0, φ), ⟨hρ0, ⟨by linarith, by linarith⟩⟩, rfl⟩
+  obtain ⟨c, hc⟩ := hbox (Ioo (1 - κ) 1) isPreconnected_Ioo
+    (fun ρ hρ => ⟨by rw [abs_lt]; constructor <;> linarith [hρ.1, hρ.2], hρ.2.ne⟩)
+    ⟨1 - κ / 2, by constructor <;> linarith⟩
+  obtain ⟨c', hc'⟩ := hbox (Ioo 1 (1 + κ)) isPreconnected_Ioo
+    (fun ρ hρ => ⟨by rw [abs_lt]; constructor <;> linarith [hρ.1, hρ.2], hρ.1.ne'⟩)
+    ⟨1 + κ / 2, by constructor <;> linarith⟩
+  refine ⟨κ, hκ0, c, c', fun φ' hφ' => ⟨?_, ?_⟩⟩
+  · -- inside
+    ext c''
+    simp only [mem_singleton_iff]
+    constructor
+    · intro hmem
+      obtain ⟨ν, hν, hnu⟩ := polar_nbhd p hφ'
+      have hmem' : ringPt p φ' ∈ closure (F.region c'' ∩ ball p 1) := hmem
+      obtain ⟨z, ⟨hzr, hzb⟩, hzd⟩ := Metric.mem_closure_iff.mp hmem' (min ν κ) (lt_min hν hκ0)
+      rw [dist_comm] at hzd
+      obtain ⟨hρ, ψ, hψ, hz⟩ := hnu z (lt_of_lt_of_le hzd (min_le_left _ _))
+      have hzn : ‖z - p‖ < 1 := by simpa [dist_eq_norm] using hzb
+      have hρκ : ‖z - p‖ ∈ Ioo (1 - κ) 1 := by
+        refine ⟨?_, hzn⟩
+        have : dist z (ringPt p φ') < κ := lt_of_lt_of_le hzd (min_le_right _ _)
+        have h2 := abs_norm_sub_one_le p z φ'
+        linarith [(abs_le.mp h2).1]
+      have hψ' : ψ ∈ Ioo (φ - κ) (φ + κ) := ⟨by linarith [hψ.1, hφ'.1], by linarith [hψ.2, hφ'.2]⟩
+      have := (hc _ hρκ ψ hψ').2
+      rw [← hz] at this
+      exact hzr.2.symm.trans this
+    · intro hcc
+      rw [hcc]
+      show ringPt p φ' ∈ closure (F.region c ∩ ball p 1)
+      rw [mem_closure_iff_nhds]
+      intro U hU
+      obtain ⟨ε', hε', hεU⟩ := Metric.mem_nhds_iff.mp hU
+      set ρ := 1 - min κ ε' / 2 with hρ
+      have hmk : 0 < min κ ε' := lt_min hκ0 hε'
+      have hρ1 : ρ ∈ Ioo (1 - κ) 1 :=
+        ⟨by linarith [min_le_left κ ε'], by linarith⟩
+      refine ⟨polarPt p ρ φ', hεU ?_, ?_, ?_⟩
+      · rw [mem_ball]
+        have := dist_polarPt_ringPt_le p ρ φ' φ'
+        rw [sub_self, abs_zero, add_zero] at this
+        refine lt_of_le_of_lt this ?_
+        rw [abs_of_neg (by linarith)]
+        linarith [min_le_right κ ε']
+      · exact hc _ hρ1 φ' hφ'
+      · rw [mem_ball, dist_eq_norm, norm_polarPt_sub, abs_of_pos (by linarith [hρ1.1, hκ0])]
+        exact hρ1.2
+  · -- outside
+    ext c''
+    simp only [mem_singleton_iff]
+    constructor
+    · intro hmem
+      obtain ⟨ν, hν, hnu⟩ := polar_nbhd p hφ'
+      have hmem' : ringPt p φ' ∈ closure (F.region c'' \ closedBall p 1) := hmem
+      obtain ⟨z, ⟨hzr, hzb⟩, hzd⟩ := Metric.mem_closure_iff.mp hmem' (min ν κ) (lt_min hν hκ0)
+      rw [dist_comm] at hzd
+      obtain ⟨hρ, ψ, hψ, hz⟩ := hnu z (lt_of_lt_of_le hzd (min_le_left _ _))
+      have hzn : 1 < ‖z - p‖ := by simpa [dist_eq_norm] using hzb
+      have hρκ : ‖z - p‖ ∈ Ioo 1 (1 + κ) := by
+        refine ⟨hzn, ?_⟩
+        have : dist z (ringPt p φ') < κ := lt_of_lt_of_le hzd (min_le_right _ _)
+        have h2 := abs_norm_sub_one_le p z φ'
+        linarith [(abs_le.mp h2).2]
+      have hψ' : ψ ∈ Ioo (φ - κ) (φ + κ) := ⟨by linarith [hψ.1, hφ'.1], by linarith [hψ.2, hφ'.2]⟩
+      have := (hc' _ hρκ ψ hψ').2
+      rw [← hz] at this
+      exact hzr.2.symm.trans this
+    · intro hcc
+      rw [hcc]
+      show ringPt p φ' ∈ closure (F.region c' \ closedBall p 1)
+      rw [mem_closure_iff_nhds]
+      intro U hU
+      obtain ⟨ε', hε', hεU⟩ := Metric.mem_nhds_iff.mp hU
+      set ρ := 1 + min κ ε' / 2 with hρ
+      have hmk : 0 < min κ ε' := lt_min hκ0 hε'
+      have hρ1 : ρ ∈ Ioo 1 (1 + κ) :=
+        ⟨by linarith, by linarith [min_le_left κ ε']⟩
+      refine ⟨polarPt p ρ φ', hεU ?_, ?_, ?_⟩
+      · rw [mem_ball]
+        have := dist_polarPt_ringPt_le p ρ φ' φ'
+        rw [sub_self, abs_zero, add_zero] at this
+        refine lt_of_le_of_lt this ?_
+        rw [abs_of_pos (by linarith)]
+        linarith [min_le_right κ ε']
+      · exact hc' _ hρ1 φ' hφ'
+      · rw [mem_closedBall, dist_eq_norm, norm_polarPt_sub, abs_of_pos (by linarith [hρ1.1])]
+        linarith [hρ1.1]
+
+/-- **Constancy of the sides**: if the sides of the ring are locally constant along a preconnected set of angles, they are
+constant on it. -/
+theorem sides_const (p : ℂ) {I : Set ℝ} (hI : IsPreconnected I) (hne : I.Nonempty)
+    (hloc : ∀ φ ∈ I, ∃ κ > 0, ∃ c c' : Fin k, ∀ φ' ∈ Ioo (φ - κ) (φ + κ),
+      F.innerColours p (ringPt p φ') = {c} ∧ F.outerColours p (ringPt p φ') = {c'}) :
+    ∃ c c' : Fin k, ∀ φ ∈ I, F.innerColours p (ringPt p φ) = {c} ∧ F.outerColours p (ringPt p φ) = {c'} := by
+  classical
+  obtain ⟨φ₀, hφ₀⟩ := hne
+  obtain ⟨κ₀, -, c₀, c₀', -⟩ := hloc φ₀ hφ₀
+  haveI : Nonempty (Fin k × Fin k) := ⟨(c₀, c₀')⟩
+  let P : ℝ → Fin k × Fin k → Prop := fun φ cc =>
+    F.innerColours p (ringPt p φ) = {cc.1} ∧ F.outerColours p (ringPt p φ) = {cc.2}
+  have huniq : ∀ φ cc dd, P φ cc → P φ dd → cc = dd := by
+    intro φ cc dd h1 h2
+    exact Prod.ext (Set.singleton_eq_singleton_iff.mp (h1.1.symm.trans h2.1))
+      (Set.singleton_eq_singleton_iff.mp (h1.2.symm.trans h2.2))
+  let f : ℝ → Fin k × Fin k := fun φ => Classical.epsilon (P φ)
+  have hf : ∀ φ cc, P φ cc → f φ = cc := fun φ cc h =>
+    huniq φ _ _ (Classical.epsilon_spec (p := P φ) ⟨cc, h⟩) h
+  have hcont : ContinuousOn f I := by
+    intro φ hφ
+    obtain ⟨κ, hκ, c, c', h⟩ := hloc φ hφ
+    refine ContinuousAt.continuousWithinAt ?_
+    have hev : ∀ᶠ φ' in 𝓝 φ, f φ' = (c, c') := by
+      filter_upwards [Ioo_mem_nhds (show φ - κ < φ by linarith) (show φ < φ + κ by linarith)] with φ' hφ'
+      exact hf φ' (c, c') (h φ' hφ')
+    have hφ : f φ = (c, c') := hf φ (c, c') (h φ ⟨by linarith, by linarith⟩)
+    exact continuousAt_const.congr (hev.mono fun φ' h' => hφ.trans h'.symm)
+  refine ⟨(f φ₀).1, (f φ₀).2, fun φ hφ => ?_⟩
+  have hfφ : f φ = f φ₀ := hI.constant hcont hφ hφ₀
+  obtain ⟨κ, hκ, c, c', h⟩ := hloc φ hφ
+  have hP : P φ (c, c') := h φ ⟨by linarith, by linarith⟩
+  have : (c, c') = f φ₀ := (hf φ _ hP).symm.trans hfφ
+  rw [← this]
+  exact hP
+
 /-- **The germ dichotomy**: at a ring point `r(θ)` of the domain, the germ of `ω(p)` on either side lies in one colour
 class, or on an arc of `Γ` on `ω(p)` with constant sides (the strip beside a short germ avoids every other arc, which
 meets `ω(p)` in finitely many points). -/
 theorem germ_dichotomy {p : ℂ} {θ : ℝ} (hθ : ringPt p θ ∈ F.dom) (s : Side) :
     (∃ c, GermIn p θ s (F.region c)) ∨
       ∃ θ₁ θ₂ c c', F.IsRingArc p θ₁ θ₂ c c' ∧ GermIn p θ s (ringArc p θ₁ θ₂) := by
-  sorry
+  classical
+  have hπ := Real.pi_pos
+  obtain ⟨ε, hε, hdomε, hfin⟩ := F.exists_ball_finite hθ
+  set y := ringPt p θ with hy
+  have hNfin := F.finite_nonring_inter_sphere p hfin
+  set N := ⋃ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty ∧ ¬ a.OnRing p}, a.carrier ∩ sphere p 1 with hN
+  -- short germs avoid the finite set of crossings
+  have hgermN : ∀ᶠ δ in 𝓝[>] (0 : ℝ), ∀ n ∈ N, n ∉ germ p θ s δ := by
+    refine (Filter.eventually_all_finite hNfin).2 fun n _ => ?_
+    by_cases hny : n = y
+    · filter_upwards [Ioo_mem_nhdsGT (show (0 : ℝ) < 2 * π by positivity)] with δ hδ
+      rw [hny]; exact ringPt_notMem_germ hδ.2.le
+    · have hd : 0 < dist n y := dist_pos.mpr hny
+      filter_upwards [Ioo_mem_nhdsGT hd] with δ hδ hmem
+      have h2 : dist n y < δ := dist_lt_of_mem_germ hmem
+      linarith [hδ.2]
+  have hsmall : ∀ᶠ δ in 𝓝[>] (0 : ℝ), δ < ε / 2 := by
+    filter_upwards [Ioo_mem_nhdsGT (show (0 : ℝ) < ε / 2 by positivity)] with δ h using h.2
+  have hpos : ∀ᶠ δ in 𝓝[>] (0 : ℝ), 0 < δ := self_mem_nhdsWithin
+  -- a germ short enough lies in interior points unless an arc of `ω(p)` meets it
+  have hgerm_int : ∀ δ, 0 < δ → δ < ε / 2 → (∀ n ∈ N, n ∉ germ p θ s δ) →
+      (∀ a ∈ F.arcs, a.OnRing p → (a.carrier ∩ ball y ε).Nonempty → Disjoint (germ p θ s δ) a.carrier) →
+      germ p θ s δ ⊆ F.interiorPts := by
+    intro δ hδ hδε hN' hA z hz
+    have hzb : z ∈ ball y ε := by
+      rw [mem_ball]; linarith [dist_lt_of_mem_germ hz]
+    refine ⟨hdomε hzb, fun hzΓ => ?_⟩
+    obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp hzΓ
+    by_cases hr : a.OnRing p
+    · exact Set.disjoint_left.mp (hA a ha hr ⟨z, hza, hzb⟩) hz hza
+    · have hzs : z ∈ sphere p 1 := by
+        obtain ⟨t, -, rfl⟩ := hz
+        exact ringPt_mem_sphere _ _
+      exact hN' z (mem_iUnion₂.mpr ⟨a, ⟨ha, ⟨z, hza, hzb⟩, hr⟩, hza, hzs⟩) hz
+  -- the arcs of `ω(p)` near `y`
+  set 𝒜₁ := {a | a ∈ F.arcs ∧ (a.carrier ∩ ball y ε).Nonempty ∧ a.OnRing p} with h𝒜₁
+  have h𝒜₁fin : 𝒜₁.Finite := hfin.subset fun a ⟨ha, hne, _⟩ => ⟨ha, hne⟩
+  by_cases hA : ∀ᶠ δ in 𝓝[>] (0 : ℝ), ∀ a ∈ 𝒜₁, Disjoint (germ p θ s δ) a.carrier
+  · -- the germ lies in one colour class
+    left
+    obtain ⟨δ, ⟨⟨⟨hδA, hδN⟩, hδs⟩, hδp⟩⟩ := ((((hA.and hgermN).and hsmall).and hpos)).exists
+    have hint := hgerm_int δ hδp hδs hδN (fun a ha hr hne => hδA a ⟨ha, hne, hr⟩)
+    set z0 := ringPt p (θ + s.sign * (δ / 2)) with hz0
+    have hz0g : z0 ∈ germ p θ s δ := ⟨δ / 2, ⟨by linarith, by linarith⟩, rfl⟩
+    exact ⟨F.col z0, δ, hδp, fun z hz => ⟨hint hz,
+      (isPreconnected_germ p θ s δ).constant (F.continuousOn_col.mono hint) hz hz0g⟩⟩
+  · -- an arc of `ω(p)` meets every short germ
+    right
+    have hex : ∃ a ∈ 𝒜₁, ∀ δ > 0, (germ p θ s δ ∩ a.carrier).Nonempty := by
+      by_contra hcon
+      push Not at hcon
+      apply hA
+      refine (Filter.eventually_all_finite h𝒜₁fin).2 fun a ha => ?_
+      obtain ⟨δa, hδa, hemp⟩ := hcon a ha
+      filter_upwards [Ioo_mem_nhdsGT hδa] with δ hδ
+      refine Set.disjoint_left.mpr fun z hz hza => ?_
+      have : z ∈ germ p θ s δa ∩ a.carrier := ⟨germ_mono hδ.2.le hz, hza⟩
+      rw [hemp] at this
+      exact this
+    obtain ⟨a, ⟨haF, hane, hring⟩, hhit⟩ := hex
+    obtain ⟨θ₀, θ₁, rfl⟩ := hring
+    obtain ⟨-, hlt, hle⟩ := F.nondegenerate _ haF
+    rw [carrier_circ_unit] at hhit
+    have hclosed : IsClosed (ringArc p θ₀ θ₁) := by
+      rw [← carrier_circ_unit]; exact Arc.isClosed_carrier _
+    have hymem : y ∈ ringArc p θ₀ θ₁ := by
+      refine hclosed.closure_subset_iff.mpr subset_rfl ?_
+      rw [Metric.mem_closure_iff]
+      intro ε' hε'
+      obtain ⟨z, hzg, hza⟩ := hhit ε' hε'
+      exact ⟨z, hza, by rw [dist_comm]; exact dist_lt_of_mem_germ hzg⟩
+    obtain ⟨δ₁, ⟨⟨hδN, hδs⟩, hδp⟩⟩ := (((hgermN.and hsmall).and hpos)).exists
+    obtain ⟨δ', hδ'0, hδ'le, hsub⟩ := exists_germ_subset_ringArc hlt hle s hymem hhit hδp
+    have hN' : ∀ n ∈ N, n ∉ germ p θ s δ' := fun n hn h => hδN n hn (germ_mono hδ'le h)
+    have hδ'ε : δ' < ε / 2 := lt_of_le_of_lt hδ'le hδs
+    obtain ⟨θ₁', θ₂', hlt', hIcc, hIoo⟩ : ∃ θ₁' θ₂' : ℝ, θ₁' < θ₂' ∧
+        (∀ φ, φ ∈ Icc θ₁' θ₂' ↔ ∃ u ∈ Icc 0 δ', φ = θ + s.sign * u) ∧
+        (∀ φ, φ ∈ Ioo θ₁' θ₂' ↔ ∃ u ∈ Ioo 0 δ', φ = θ + s.sign * u) := by
+      cases s
+      · refine ⟨θ - δ', θ, by linarith, fun φ => ?_, fun φ => ?_⟩
+        · simp only [Side.sign]
+          constructor
+          · intro h; exact ⟨θ - φ, ⟨by linarith [h.2], by linarith [h.1]⟩, by ring⟩
+          · rintro ⟨u, hu, rfl⟩; exact ⟨by linarith [hu.2], by linarith [hu.1]⟩
+        · simp only [Side.sign]
+          constructor
+          · intro h; exact ⟨θ - φ, ⟨by linarith [h.2], by linarith [h.1]⟩, by ring⟩
+          · rintro ⟨u, hu, rfl⟩; exact ⟨by linarith [hu.2], by linarith [hu.1]⟩
+      · refine ⟨θ, θ + δ', by linarith, fun φ => ?_, fun φ => ?_⟩
+        · simp only [Side.sign]
+          constructor
+          · intro h; exact ⟨φ - θ, ⟨by linarith [h.1], by linarith [h.2]⟩, by ring⟩
+          · rintro ⟨u, hu, rfl⟩; exact ⟨by linarith [hu.1], by linarith [hu.2]⟩
+        · simp only [Side.sign]
+          constructor
+          · intro h; exact ⟨φ - θ, ⟨by linarith [h.1], by linarith [h.2]⟩, by ring⟩
+          · rintro ⟨u, hu, rfl⟩; exact ⟨by linarith [hu.1], by linarith [hu.2]⟩
+    have hGermIn : GermIn p θ s (ringArc p θ₁' θ₂') :=
+      ⟨δ', hδ'0, fun z ⟨t, ht, hz⟩ => ⟨θ + s.sign * t, (hIcc _).2 ⟨t, ⟨ht.1.le, ht.2.le⟩, rfl⟩, hz⟩⟩
+    have hΓ : ringArc p θ₁' θ₂' ⊆ F.Γ := by
+      rintro _ ⟨φ, hφ, rfl⟩
+      obtain ⟨u, hu, rfl⟩ := (hIcc φ).1 hφ
+      have hball : ringPt p (θ + s.sign * u) ∈ ball y ε := by
+        rw [mem_ball]
+        have h2 : dist (ringPt p (θ + s.sign * u)) y ≤ u := dist_ringPt_side_le p θ s hu.1
+        linarith [hu.2]
+      refine ⟨hdomε hball, mem_iUnion₂.mpr ⟨Arc.circ p 1 θ₀ θ₁, haF, ?_⟩⟩
+      rw [carrier_circ_unit]
+      have hcl : ringPt p (θ + s.sign * u) ∈ closure (germ p θ s δ') := by
+        have hc : Continuous fun t : ℝ => ringPt p (θ + s.sign * t) := by unfold ringPt e; fun_prop
+        have hu' : u ∈ closure (Ioo (0 : ℝ) δ') := by rw [closure_Ioo hδ'0.ne]; exact hu
+        exact map_mem_closure (f := fun t : ℝ => ringPt p (θ + s.sign * t)) hc hu' (mapsTo_image _ _)
+      exact hclosed.closure_subset_iff.mpr hsub hcl
+    have hloc : ∀ φ ∈ Ioo θ₁' θ₂', ∃ κ > 0, ∃ c c' : Fin k, ∀ φ' ∈ Ioo (φ - κ) (φ + κ),
+        F.innerColours p (ringPt p φ') = {c} ∧ F.outerColours p (ringPt p φ') = {c'} := by
+      intro φ hφ
+      obtain ⟨u, hu, rfl⟩ := (hIoo φ).1 hφ
+      have hzg : ringPt p (θ + s.sign * u) ∈ germ p θ s δ' := ⟨u, hu, rfl⟩
+      have hzb : ringPt p (θ + s.sign * u) ∈ ball y ε := by
+        rw [mem_ball]
+        have h2 : dist (ringPt p (θ + s.sign * u)) y < δ' := dist_lt_of_mem_germ hzg
+        linarith
+      have hxn : ∀ a' ∈ F.arcs, ¬ a'.OnRing p → ringPt p (θ + s.sign * u) ∉ a'.carrier := by
+        intro a' ha' hr hza
+        exact hN' _ (mem_iUnion₂.mpr ⟨a', ⟨ha', ⟨_, hza, hzb⟩, hr⟩, hza, ringPt_mem_sphere _ _⟩) hzg
+      obtain ⟨r0, hr0, hrb, hring'⟩ := F.exists_ball_onRing p hfin hzb hxn
+      exact F.exists_sides_nbhd p hr0 (hrb.trans hdomε) hring'
+    obtain ⟨c, c', hcc⟩ := F.sides_const p isPreconnected_Ioo
+      ⟨(θ₁' + θ₂') / 2, by constructor <;> linarith⟩ hloc
+    exact ⟨θ₁', θ₂', c, c', ⟨hlt', hΓ, fun φ hφ => hcc φ hφ⟩, hGermIn⟩
+
 
 /-! ## Interval cones in a simple map -/
 
