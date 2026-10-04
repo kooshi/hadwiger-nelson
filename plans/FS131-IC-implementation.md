@@ -33,6 +33,14 @@ Axioms from `#print axioms` against the stage-2 build's oleans (`data/fs131/ic/a
   `ArcMap.outType_N_of_shadow` (a flank colour shadowing the horn near `v` has an out-type contact at the far pole), `hornSet_curv_eq`,
   `ArcMap.IsHorn.exists_chart_index`.
 
+- FS110-N4-SHADOW, N4-FLANK (FS131-IC4, Stage 11): `HadwigerNelson.Plane.ArcMap.flank_shadows` — [kernel] `[propext, Classical.choice, Quot.sound]`
+  (`data/fs131/ic/axioms-ic4-stage11.txt`); with it `ArcMap.shaveAvailable_of_not_doublyShadowed` (FS110-N4-SHAVE's criterion) is now `[propext, Classical.choice,
+  Quot.sound]`. Read against plan § 3.2's row (N4-FLANK as its semantic content): same statement.
+- 25 children (FS131-IC4, Stage 11), each [kernel] `[propext, Classical.choice, Quot.sound]`, among them `ArcMap.flank_shadow_g`, `ArcMap.flank_shadow_h` (the two halves
+  of N4-FLANK, without `g ≠ c`, `h ≠ c` or the horn), `ArcMap.sector_shadow_S` / `_N` (one pole sector's shadow), `ArcMap.shadow_of_tangent_sector_S` / `_N` (the converse,
+  for every point near `v` on the `+a` side, not only the horn's), `ArcMap.IsSectorChart.exists_lift_lower` / `_upper` (an out-type colour's sectors at a pole look away
+  from `v`), `ArcMap.outType_S_of_mem_closure` / `outType_N_of_mem_closure`.
+
 ## Stage 1 — SAVED: the readback, the as-given build
 
 **The brief's four quotations against their sources** (standing rule 3):
@@ -442,3 +450,41 @@ taken them (item 236). A leaf that cannot be proved as written goes to Keryx at 
 all 1744 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0 (`build/gate/build/20261004T210229Z-2389715.log`; driver log
 `data/fs131/ic/build-ic4-readback.log`) — IC3's stage-8 oleans are current. 29 `declaration uses sorry` warnings replayed: `Contact` 5 (lines 2743, 2782,
 2796, 2812, 2828: `flank_shadows`, `exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure`), `UnitArc` 17, `BaseSteps` 7 (as given on this branch).
+
+## Stage 11 — SAVED (FS131-IC4 stage 2): `flank_shadows` (N4-FLANK) proved, 25 children; 4 `sorry` left in `Contact`
+
+**Proved** (no statement changed, no new axiom, no `native_decide`): **FS110-N4-SHADOW's N4-FLANK, `ArcMap.flank_shadows`**, read against plan § 3.2's row ("the
+horn's points near `v` in the `g`-class's shadow are those below a tangent circle of curvature `σ_g ∈ [κ₁, κ₂]`, in the `h`-class's shadow those above one of curvature
+`σ_h ∈ [κ₁, κ₂]` (Condition 5, curvatures in `(−1, 1)`, as filed)"): same statement. With it `shaveAvailable_of_not_doublyShadowed` is sorry-free. Route (the
+derivation's N4-FLANK proof, `plans/FS110-N-proof.md` § 2.2, made sector by sector through the chart at the pole):
+- **Localization** (IC3's `horn_shadow_near_S`): a `g`-source of a horn point near `v` lies within any `δ` of `S′`, so in a sector of the chart at `S′`
+  (`localSectors`; with no germ there the ball is one colour, and `S′ ∈ ω(v)` carrying `g` is N-E1, `ne1_region`).
+- **The shape of a `g`-sector at `S′`**: `S′` is an out-type `g`-contact (`outType_S_of_mem_closure`, the tail of IC3's `outType_S_of_shadow`), so every direction
+  of the sector's cone has `sin(φ − α) ≤ 0` (a direction above would put sector points in `B(v, 1)`) and its germs lie in one lift `[α + 2πm − π, α + 2πm]`
+  (`exists_lift_lower`).
+- **Per sector** (`sector_shadow_S`): tangent (upper germ `α + 2πm`, curvature `υ`): `υ < 1` (`υ > 1` puts thin-horn points in `B(v, 1)`; `υ = 1` puts the germ's
+  branch on `ω(v)`, against Condition 5 — the only use of Condition 5), its points with `x > 0` are below the arc `υ` (`BranchGerms.frameY_lt_of_mem`, a polar
+  argument), so in `farSideBelow`, and IC1's `shadow_farSide_below` gives `TanBelow v α (f̃ υ)`; not tangent (margin `θ > 0` below `+a`): its points with `x > 0`
+  are below the arc of curvature `−K`, `K = 1/(1 + κ₁)`, whose shadow `TanBelow (f̃(−K))` misses the horn (`f̃(−K) ≤ κ₁`). Points behind the pole (`x ≤ 0`,
+  outside `B̄(v, 1)`) shadow nothing near the axis (`flank_back_aux`, real arithmetic).
+- **The converse** (`shadow_of_tangent_sector_S`, N4-SHADOW's "the nearest point lies on `A`"): from a far-side source `y₀` at unit distance, the germ's own point at the
+  same distance from `S′` is nearer than `1` (`flank_higher_aux`); a thin-horn point of the sector just below the germ (`exists_horn_before`, the sector form of IC3's
+  `exists_flank_before`) is too; the sector is connected and reaches `S′`, beyond `1` (`mem_shadow_of_mem`, intermediate values).
+- **Assembly** (`flank_shadow_g`): `σ_g = max(κ₁, f̃(υᵢ))` over the tangent `g`-sectors (a `Finset.max'`); `σ_g ≤ κ₂` because the converse holds for flank points
+  too, and a flank point below `f̃(υᵢ)` would be shadowed by its own colour. The lower flank is the mirror at `N` (`flank_shadow_h`, `σ_h = min(κ₂, f(μᵢ))`).
+
+**A generalization found** (no statement changed): `flank_shadows`' hypotheses `g ≠ c`, `h ≠ c` and the horn itself (beyond `κ₁ < κ₂`) are not used —
+`flank_shadow_g` / `_h` hold for any band between two tangent arcs of curvatures in `(−1, 1)` with a flank colour beside it. `flank_shadows` keeps them, consumed
+by `have _ := …` (the convention of `UnitArc`).
+
+**Build of this stage**: `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — 444 of 444 batches, 2 module(s) rebuilt,
+3 module(s) with warnings, 9m19s", exit 0 (`build/gate/build/20261004T212953Z-2540733.log`; driver log `data/fs131/ic/build-ic4-stage11.log`). 28 distinct
+`declaration uses sorry` warnings — `Contact` 4 (lines 4019, 4033, 4049, 4065: `exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure`), `UnitArc` 17,
+`BaseSteps` 7 (as given) — and no other warning or error. Nothing was edited while it ran. **Axioms** against its oleans (`lake env lean data/fs131/ic/AxiomsIC4.lean`,
+`pp.fullNames`; output `data/fs131/ic/axioms-ic4-stage11.txt`; not a gate log): all 147 theorems of `Contact`; 139 read `[propext, Classical.choice, Quot.sound]`;
+8 read `sorryAx` besides — the four leaves left and `stuck_neighbour`, `stuck_flip`, `stuck_step`, `stuck_chain` (through `stuck_structure`). **Records**:
+`tools/fs131_ic4_addrecords.py` (IC3's tool, its own block headed "FS131-IC4" in `scripts/Axioms.lean`, and `_root_.` names read as written): 147 names, 25 added,
+`--check` exit 0; negative control `--plant --check` exit 1 (watched). No import or module changed. Names checked against `main`, `fs131-w4`, `fs131-w5*`: no collision.
+`data/fs131/ic/Scratch7.lean` is the iteration copy (it redeclares the new names, so it no longer elaborates against `Contact`; nothing builds it).
+
+**Re-pricing**: `flank_shadows` took about 120k of context, about a session as IC3 priced it; the mirror half was cheap once the first half stood.

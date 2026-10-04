@@ -3134,6 +3134,34 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.IsHorn.exists_flankAbove
 #print axioms HadwigerNelson.Plane.ArcMap.IsHorn.exists_flankBelow
 
+/-! ## FS-131 wave 4, `Contact` (job FS131-IC4) — the fourth implementer's added children and proved leaves -/
+
+#print axioms HadwigerNelson.Plane.flank_back_aux
+#print axioms HadwigerNelson.Plane.flank_higher_aux
+#print axioms HadwigerNelson.Plane.sin_lt_of_cos_pos
+#print axioms HadwigerNelson.Plane.lt_sin_of_cos_pos
+#print axioms HadwigerNelson.Plane.flank_half_le_aux
+#print axioms HadwigerNelson.Plane.abs_frameY_of_horn_le
+#print axioms HadwigerNelson.Plane.flank_lt_one_aux
+#print axioms HadwigerNelson.Plane.ArcMap.outType_S_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.sector_subset_tile
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_lift_lower
+#print axioms HadwigerNelson.Plane.BranchGerms.frameY_lt_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_horn_before
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.mem_shadow_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.branchPt_next_not_mem
+#print axioms HadwigerNelson.Plane.ArcMap.sector_shadow_S
+#print axioms HadwigerNelson.Plane.ArcMap.shadow_of_tangent_sector_S
+#print axioms HadwigerNelson.Plane.ArcMap.flank_shadow_g
+#print axioms HadwigerNelson.Plane.ArcMap.outType_N_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_lift_upper
+#print axioms HadwigerNelson.Plane.BranchGerms.lt_frameY_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_horn_after
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.branchPt_not_mem
+#print axioms HadwigerNelson.Plane.ArcMap.sector_shadow_N
+#print axioms HadwigerNelson.Plane.ArcMap.shadow_of_tangent_sector_N
+#print axioms HadwigerNelson.Plane.ArcMap.flank_shadow_h
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
