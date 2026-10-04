@@ -4,6 +4,9 @@
 `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w4`, from `05cb0a3e` (wave 3's skeleton). Nothing in this milestone is blind
 (`plans/FS131-close-inventory.md` § Rulings in force, ruling 1).*
 
+*Continued by FS131-K4b (de Bruijn, the planner, Opus 5.5; brief `data/fs131/briefs/FS131-K4b-wave4.md`) from `d0c56af0`: stages 1–5 below are
+K4's; K4b's stages are numbered on from them (K4b's stage 1 is Stage 6, and so on), so every stage number in this record is unique.*
+
 ## Theorems this phase proved
 
 None (a planning job: definitions, spec examples and a skeleton; no row is proved here).
@@ -280,3 +283,42 @@ noted.
   statements unchanged): first the frame fact `frame_normSq`, the reflection `ArcMap.reflect` (§ 2.1 (a)), and the recolouring engine
   (leaf 13). **It may not** change a statement; a needed change comes back through Keryx.
 - **Nothing with a `sorry` reaches `main`** (opening plan § 7.5): the wave lands after its implementer's gate.
+
+## Stage 6 — SAVED (K4b stage 1): the readback
+
+### 6.1 The brief's quotations against their sources (standing rule 3)
+
+| quotation in the brief | source | result |
+|---|---|---|
+| "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors (line 118) | **matches**, a prefix of the source's run (it continues "Your predecessor formalized …") |
+| "3. **States every row at the class its argument reads** (G92), reports each widening to Keryx as a generalization, and reads each statement back in" | `plans/FS131-kernel-plan.md` § 7.3 item 3 (line 568) | **matches as a truncation**: the source item ends "… reads each statement back in its record against the row."; nothing changed |
+| "Each needs its derivation entry read in full first (`data/fs131/k4/rows.md` gives the address); the foundation already has the vocabulary" | this record § 5.2, its opening sentence | **matches as a truncation**: the source sentence ends "… the foundation already has the vocabulary noted." (the brief drops the last word); nothing changed |
+
+The brief's other statements of fact, checked: K4 stated 9 of 29 rows (§ 3.1: 25 theorems in three modules) — **yes**; § 5.2's table lists twenty items
+— **yes** (counted); less FS106-WO, FS106-TW, FS106-AE-MAP6 leaves seventeen — **yes**; "the wave's only inhabitant of `IsHorn`, `IsStuck` and
+`TerminalOn`" is § 2.1 (b) — **yes**; inventory items 52 (K4's findings), 53 (N4-STUCK over NB-4's conclusion) and 54 (Woodall's chain is FS131-W)
+read in `plans/FS131-close-inventory.md` on `main` — **yes**, as the brief summarizes them.
+
+### 6.2 What is mine: the seventeen items, the merged rows, the rulings, caution C116
+
+The seventeen (K4's § 5.2 less Woodall's three), in the order I take them: **FS106-L**, **FS106-TS-T** (stage 2: Woodall's job branches from
+them); then the base steps with **FS112-BOWTIE** first (the inhabitant of `IsHorn`, `IsStuck`, `TerminalOn`), **FS112-C-DOUBLE** (C116),
+**FS112-N3-END**, **FS112-N3-PAIRS**, **FS112-N3-FAIL**, **FS112-N3-ANTI**; then the unit-arc rows **FS112-U1** (its shadow clause, SR1 item 4),
+**FS114-L60-LE**'s clauses L60-EQ and L60-REAL, **FS112-N2-BENDS**'s bends with **FS112-BEND** merged, the ENV lemma of N2-BENDS, **FS112-ISO**,
+**FS112-FLANK**, **FS112-N2-FLANK-Q**, **FS112-A4SIX**, **FS112-NB4P**. Each row's whole backlog section is in `data/fs131/k4/rows.md`
+(byte for byte, `tools/fs131_k4_rows.py --check`).
+
+- **Merged rows carried** (ruling of the CSV): FS112-BEND into FS112-N2-BENDS (BEND is the bends off end vertices); FS114-L60-WALK into FS114-L60-LE
+  (R8: checked when its wave-5 consumers are stated over the non-strict bound; its clause L60-D5 goes to wave 5 with FS112-N3-BASE, inventory item 52).
+- **Rulings in force**: R9 (verdict clauses dropped) on FS112-N2-RAY — already stated by K4 (`Plane/StuckChain`); FS106-WO and FS106-TW are FS131-W's
+  (inventory item 54). Item 53: FS110-N4-STUCK over NB-4's conclusion, as K4 stated it — unchanged here. Item 52: K4's generalizations
+  (N3-CONF, W-MERGE with unit arcs; N3-DEG non-strict; N4-SHADOW's far-side form; LOCK and N2-SIGN in class form) stand as stated.
+- **Caution C116 on FS112-C-DOUBLE**: formalized with the errata filed under it (`plans/LEAN-BACKLOG.md` at the row; re-read at the row in stage 3).
+- **The obligation-modeling pass** over all wave-4 rows (K4's slip, item 52) is mine: stage 4.
+
+### 6.3 The worktree builds as K4 left it
+
+`./scripts/build.sh` in the worktree at `d0c56af0` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): **OK — all 1739 modules
+already up to date, nothing built, 9 modules with warnings** (wave 3's six skeleton modules and K4's three, their `sorry` warnings), exit 0
+(`build/gate/build/20261004T080043Z-2048659.log`; driver log `data/fs131/k4/build-k4b-stage1.log`).
+
