@@ -350,3 +350,13 @@ reason by the close.*
 59. **FS131-I3 stopped** (its background build finished green: `data/fs131/i3/build-stage1.log` on `fs131-w3`, 440/440, "build: OK"; no process in its worktree;
     no commit since `8a850e85`). Successor FS131-I3b (`data/fs131/briefs/FS131-I3b-wave3.md`), 41 leaves. Both briefs gated PASS; launched together, beside the
     day's Searcher. FS131-K4b (wave 4's second planner) follows when the Searcher's slot frees. Source: this commit.
+60. **The day's search done — SEARCH-2026-10-04** (report `data/search/2026-10-04/report.md`; record `plans/SEARCH-2026-10-04.md`): queue row 6 (C-T-BIKE)
+    answered yes at nine named `d` [cert] — FS106-TS's one-offset reduction on an open window about `φ ≡ 0` (`d = 4/3, 3/2, 30/17, 19/10, 99/50`; measured for
+    `d ∈ ((√13 − 1)/2, 2)`), FS-107's shared-colour ansatz only on its tangent curve (`d = 30/17, 24/13, 48/25, 80/41`; measured only for `d > √3`); below
+    `(√13 − 1)/2` no two-coloured circle works on the grid (open). Keryx's receipt: `tools/search_20261004_check.py` re-run — ACCEPT on
+    `fs107-tangent-d30_17.json` and `ts1-phi0-d19_10.json`, REJECT on the expected-failing `fs107-tangent-d8_5.json` and on the planted
+    `plant-fs107-shift.json`. Filed verbatim from the record § 4.2: the queue's row-6 fate cell, and two "What is held" bullets of
+    `plans/STUB-bicycle-windings.md` (one added, one replaced). **Not filed**: the stub's G21 line under "Provisional bearings" — Poros's section; for its next
+    re-rank. Items for FS-130 if it opens: the Searcher's three questions for Ephodos (§ 4.1); the queue row's wording defect (the row's object is FS107-R
+    § 3.6's special case, not FS106-TS's reduction — both run); prior-art debt (arc colourings of two unit circles not searched in print). The Searcher's
+    overrun of its hand-back line is not a slip (agent budgets are guidance). No continuation proposed (FS-130 is ranked 18, bearing "none known").
