@@ -1226,3 +1226,16 @@ reason by the close.*
 176. **Brief FS131-I4d, wave 4's fourth implementer** (Opus; `data/fs131/briefs/FS131-I4d-wave4.md`, gated PASS): merge `main`, the bridge and
      `exists_hasDegree_of_mem_dom`, QA2's four items, `lock` clause 1, the rest, the carrier, the gate and the landing. Launched in I4c's slot: 1 (I2i) + 1 (IWc) +
      1 (I4d) = 3.
+177. **FS131-I4d mid-job, on `ArcMap.lock`** (FS112-LOCK; `fs131-w4`, `Plane/ValidMap/UnitArc.lean`): (1) **clause 1 closes with no N-E2** — `IsRingArc`'s
+     constant-sides clause applies at `w = r(θ)` itself, so the outer colours at `w` are `{c′}`; for `y` in the closure of `c′`'s region with `|y − w| = 1`, `y ≠ P`,
+     `ω(y)` has points outside `B̄(P, 1)` arbitrarily near `w`, and a point `z″` of `c′`'s region near `y` (off the finitely many unit-arc centres) yields a
+     `c′`-coloured unit pair — item 143's second gap closed; clause 2 the same on the inner side. (2) **Clause 3 as stated looks false globally for short arcs**:
+     `∀ T, TileOf c T → P + 2e(θ) ∈ closure T → Disjoint T (ball P 2)` fails at its counter-configuration (`P = 0`, `θ = 0`, arc `r([−0.01, 0.01])`, a
+     `c`-tile `T = B(m, 1/2)` minus the unit discs about the arc, `m = (2 + 1.95 e^{0.3i})/2`, containing `t = 1.95 e^{0.3i}`; cross distances to the inner tile
+     ≥ 1.0024 by float sample — a sanity check, not exact). Keryx's receipt: the hand row (`plans/FS112-derivation.md` line 72) reads "a tile of either side
+     colour touches `ω(w)` only at `P`, or — the inner colour only — at `P + 2e_w`, **from outside `B(P, 2)`**" — a statement about how the tile approaches the
+     contact point, so the Lean clause's whole-tile `Disjoint T (ball P 2)` is stronger than the row: a formalization slip, not a hand defect. **Ruling**: clause
+     3 restated locally, as the row reads — the tile lies outside `B(P, 2)` near `P + 2e(θ)` (`∃ δ > 0, Disjoint (T ∩ ball (P + 2e(θ)) δ) (ball P 2)`, or an
+     equivalent form the implementer chooses, saying so); if a consumer (FS112-BEND, FS112-N2-BENDS — the three bends) needs more than the local form, message
+     me with the step, and it goes to a deriver. Alternative weighed: a deriver first. Why not: the row already says "from outside", which is local, and the
+     global form is refuted. Confidence: medium-high (the counter-configuration is a float sample; the local form is what both of the row's minds proved).
