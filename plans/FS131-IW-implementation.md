@@ -22,7 +22,7 @@ statement (`lemmaL`; `ArcMap.dense_interiorPts`; `ArcMap.Valid.unitPairsNull_reg
 | E1-BAD `SectorsAt.exists_two_absent` (with `exists_mem_Ico`, `not_mem_coloursAt_of_mem_Ioo`, `exists_parabola_region`, `exists_normal_collarAt`, `absent_at_normal`, `eq_of_edge_mem_angleIcc`, `Arc.finite_inter_parabola`, `width_eq_pi_unique`) | § 8.5 (corrected count, robust form) | `exists_two_absent` and `not_mem_coloursAt_of_mem_Ioo`: `sorryAx` through E1-SEE, i.e. `ArcMap.Valid.unitPairsNull_region` (cited); `exists_mem_Ico`, `exists_parabola_region`, `exists_normal_collarAt`, `absent_at_normal`, `eq_of_edge_mem_angleIcc`, `Arc.finite_inter_parabola`, `width_eq_pi_unique`: standard three |
 | `SectorsAt.coloursAt_eq` | § 4.5 (`j ∈ coloursAt v ⟺ j ∈ range c`) | standard three |
 | **E1-NO45** `ArcMap.false_of_four_le_sectors` | `plans/FS131-E1-derivation.md` § 3.6 ("no point lies on the boundary of exactly four or exactly five sectors"), read as `4 ≤ n`, `k ≤ 5`, `WoodallNormal` | `sorryAx` through its citations: `exists_sectorsAt`, `step6` (open leaves) and the cited statements; the argument itself is proved: the angle bound `≤ π`, `habs`, the avoiding arc, the three-colour point, its picture |
-| `ArcMap.exists_three_le_sectors`, `ArcMap.aeMap6_normal`, `ArcMap.aeMap6`, `ArcMap.aeMap6_of_condition5`, `woodall_thm6` | compositions, § 9.3 | proved from their citations; `sorryAx` through `exists_sectorsAt`, `ts_t`, `step6`, `step5_lt`, `exists_woodallMerged` (open or cited) |
+| `ArcMap.exists_three_le_sectors`, `ArcMap.aeMap6_normal`, `ArcMap.aeMap6_merged` (moved after `aeMap6_normal`, which it cites), `ArcMap.aeMap6`, `ArcMap.aeMap6_of_condition5`, `woodall_thm6` | compositions, § 9.3; `aeMap6_merged` as § 9.3's route (cyclic step by the orbit of `finRotate`, `step5_lt` at the horn, injectivity, `step5_lt` again for the angles) | proved from their citations; `sorryAx` through `exists_sectorsAt`, `ts_t`, `step6`, `step5_lt`, `exists_woodallMerged` (open or cited) |
 
 **E1-NO45 holds in the kernel as a proof from its citations**: the proof of `false_of_four_le_sectors` is complete, and the check on E1's argument it was
 asked to be (inventory item 111) found no gap: E1-BAD's count (`K.card ≤ n`), E1-COVER's colour-class form and the refined second-order lemma all closed
@@ -41,16 +41,16 @@ skeleton had been built green at `058c65f8` by FS131-W2 (`plans/FS131-W-kernel-p
 
 ## Stage 2 — SAVED: the leaves, in § 9.5's order
 
-**Proved (modules sorry-free): `Plane/Woodall/Collar` (0 `sorry`), `Plane/Woodall/NoFourFive` (0 `sorry`).** `Plane/Woodall/Steps` has **5** left, each
-named: `exists_sectorsAt` (H), `exists_woodallMerged` (H+), `step5_lt` (M), `aeMap6_merged` (M), `step6` (H−). `lebesgue_covering_square` is FS131-LEB's.
+**Proved (modules sorry-free): `Plane/Woodall/Collar` (0 `sorry`), `Plane/Woodall/NoFourFive` (0 `sorry`).** `Plane/Woodall/Steps` has **4** left, each
+named: `exists_sectorsAt` (H), `exists_woodallMerged` (H+), `step5_lt` (M, with the horn child below), `step6` (H−). `lebesgue_covering_square` is FS131-LEB's.
 
 **Re-pricing (from the first two hard leaves).** The plan's table priced `Collar`'s foundation at M/E and the module at about two implementer sessions; the
 first two leaves (`isOpen_annSector`, `isPreconnected_annSector`) closed in one pass each, on one polar-coordinate lemma (`eq_add_norm_mul_e`, `eventually_abs_arg_lt`)
 that every later leaf reused. All of `Collar` and `NoFourFive` (about 55 declarations, 1,300 lines) took about 380k tokens. Open leaves, by what each needs:
 * `step5_lt` (M): `woodall_step4` on the inner arc opposite the narrow sector, `collarAt_shadow_inner` for the three colours' tiles, `neighbour_dirs` through the
   `Fin` wrap (`prev_succ`, `d_prev_succ`, `exists_prev_dir` are in `NoFourFive` and serve it). Not started.
-* `aeMap6_merged` (M): the cyclic step "a zero-width sector whose next has positive width exists if any zero-width sector exists" is the one new piece
-  (orbit of `finRotate` is the whole circle, or an extremal choice on `d`); then `step5_lt` and `aeMap6_normal` (proved) finish. Not started.
+* `aeMap6_merged` (M): **proved** (stage 3), over `step5_lt`; the order of declarations in `Steps` changed (it now follows `aeMap6_normal`: the skeleton
+  put it before the theorem it cites, which cannot elaborate). No statement changed.
 * `step6` (H−): `townsend_lemma` with `K` the at most three uncertified normals (`exists_normal_collarAt`, in place), seeds from `collarAt_shadow_inner`/`outer_of_mem`
   and `exists_cur_dir`/`exists_prev_dir`. Not started.
 * `exists_sectorsAt` (H) and `exists_woodallMerged` (H+): not started; the second is a separate job at this rate.
@@ -69,6 +69,12 @@ sectors of any width). `aeMap6_merged` uses `step5_lt` precisely at a horn (the 
 **Findings.** No statement defect: no leaf proved so far disagreed with its statement. E1-NO45's chain is formalizable as written (see above). Two
 notes for the planner: (i) `exists_parabola_region` and `absent_at_normal` carry `hn : 2 ≤ n` unused (it follows from the others); kept, discharged by `have _ := hn`.
 (ii) every theorem here that cites `lemmaL`, `dense_interiorPts` or `Valid.unitPairsNull_region` shows `sorryAx` until waves 3–4 land; the parabola lemmas, `exists_normal_collarAt`, `absent_at_normal` and `exists_mem_Ico` are free of it (`exists_two_absent` is not: it cites E1-SEE).
+
+## Stage 3 — SAVED: `aeMap6_merged`; the final build
+
+`aeMap6_merged` proved and moved after `aeMap6_normal`; `finRotate_ne_symm` added (`n ≥ 3`: the rotation has no 2-cycle). `tools/fs131_w2_decls.py --check`: 115
+theorems, 115 records. The build of stage 2's tree: OK, 444 of 444, 8 m 47 s, `build/gate/build/20261004T123605Z-3530781.log` (`data/fs131/iw-build1.log`;
+`Collar` and `NoFourFive` built with no warning; every warning of `Steps` is `declaration uses 'sorry'`). The build of stage 3's tree: `data/fs131/iw-build2.log`.
 
 ## Drafts for the front page
 

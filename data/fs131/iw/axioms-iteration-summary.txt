@@ -1,5 +1,5 @@
-# #print axioms of the 114 Woodall-chain records, iteration build (scratch oleans); not gate evidence
-CLEAN (standard three only): 89
+# #print axioms of the 115 Woodall-chain records, iteration build (scratch oleans); not gate evidence
+CLEAN (standard three only): 90
 angleIcc_zero_two_pi
 coneAt_univ
 ArcMap.const_sectorsAt
@@ -89,6 +89,7 @@ ArcMap.exists_cur_dir
 ArcMap.SectorsAt.collarAt_cur_inner
 ArcMap.SectorsAt.collarAt_cur_outer
 ArcMap.coneAt_nonempty_of_mem_closure_region
+finRotate_ne_symm
 DEPEND ON sorryAx (25, their own leaf or a cited unlanded statement):
 woodall_step4
 townsend_lemma

@@ -113,3 +113,4 @@ import Proofs.HadwigerNelson.Plane.Woodall.Steps
 #print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_cur_inner
 #print axioms HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_cur_outer
 #print axioms HadwigerNelson.Plane.ArcMap.coneAt_nonempty_of_mem_closure_region
+#print axioms HadwigerNelson.Plane.finRotate_ne_symm

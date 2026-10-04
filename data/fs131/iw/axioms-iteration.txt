@@ -159,3 +159,4 @@
 'HadwigerNelson.Plane.ArcMap.coneAt_nonempty_of_mem_closure_region' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'HadwigerNelson.Plane.finRotate_ne_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
