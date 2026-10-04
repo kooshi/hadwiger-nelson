@@ -1053,3 +1053,113 @@ stay uncommitted (this job writes its build stdout to its scratch directory, not
 
 **Build as given** at `63ffebec`: OK — all 1750 modules up to date, nothing built, 1 module with warnings, 16 warning lines, 16 distinct, every one
 `declaration uses 'sorry'` (`build/gate/build/20261004T194002Z-1862699.log`; counted with `grep -c`).
+
+## Stage 27 — SAVED (FS131-I2m): eleven HC leaves closed; CoverExamples 16 → 5; handoff — 5 `sorry` left, the exclusion and IRREG
+
+**Closed** (statements untouched; every new child stated before use with a docstring and a `scripts/Axioms.lean` record in block "FS131-I2m";
+seven new definitions — `hcBlock`, `hcCA`, `hcCB`, `hcCentre`, `hcFlank`, `hcDn`, `hcUpO` — each with a spec `example` that fails if it drifts;
+one new import, `Mathlib.Analysis.Convex.Measure`, for `Convex.addHaar_frontier`):
+- **Frames in Cartesian form** (`hcFrame_explicit`: `t_j`, `s_j` as linear forms in `z − C`), the inverse `hcFrame_hcFrameST`, distance in a frame,
+  `hcFrame_other` (two frames at one centroid differ by `±2π/3`), and **`mem_hcUpTri_iff`: the up triangle is `{∀ k, t_k ≥ 2}`** (barycentric
+  weights `(2/√3)(t_k − 2)`).
+- `hcUp_slivers` (G2) — in the other frame `t − 2 = (√3u − τ)/2` and `s = ε(α − 1/2)`, `α = u/2 + (√3/2)τ ≤ u`, so `g(s) ≤ α²/4 ≤ u/4 ≤ t − 2`.
+- `hcBandTop_bounds`, `lt_hcBandTop_iff`, `continuousOn_hcBandTop` (G3) — `U` compact and nonempty, every point of `U` at `t ≥ 2 + g(s)` in every
+  frame (`hcUp_frame`); `d_U` antitone and, by compactness, strictly decreasing below `t = 2`; `ℓ(s)` attained; continuity from the strict decrease
+  and `d_U` 1-Lipschitz in `s`.
+- `hc_band_dist_lt_one` (§ 2.3's `1 − σ + σ²`), `hc_lemmaNL` — **simpler than the derivation's**: the exterior disc is placed at the *vertical*
+  foot `(s, 2 + g s)` (no nearest-point argument), `p = z + ν`; the lower-parabola bound gives `|w − c|² − R² ≥ (3/8)X² + Y² ≥ 0` for `w ∈ U`
+  (any `R ≤ 2` works), and `|p − c|² = (R − 1)² − η/(2N) + η² < (R − 1)²` for `0 < η < 1/(2N)`; the boundary case `t = 2 + g s` by a limit.
+- **The block kit**: `hcBlock` (six per cell), `hcSet_eq_iUnion`; centres `(L/2)·tri(A, B)` with integer `A`, `B` (`hcCentre_eq`); every block within
+  `3/5` of its centre; `int_triQ_lt_three` + `hcC_near` (centres with `A² + AB + B² < 3` are one block or a flanking pair — 36 kind pairs by `omega`);
+  `mem_hcDownTri_iff` (the down triangle is the point reflection of its cell's up triangle) and `hcFrame_dn` (`t = 2 − t′`, `s = −s′` across an
+  edge), so the flanked down triangle lies in `t ≤ 0`; **`hcBlock_sep`: distinct blocks are `≥ 1` apart** (far centres: `√3 + 1/2 − 6/5 > 1`);
+  **`hcBlock_dist_le_one`: every block has diameter `≤ 1`** (`convexHull_diam`); `hcBlock_locallyFinite`.
+- `hc_unitAvoiding` — **without the interior characterization**: for `x ∈ int HC`, `y ∈ HC`, `|x − y| = 1`, the points `x ± εv` lie in `HC`;
+  separation puts `x + εv`, `x`, `y`, `x − εv` in one block, whose diameter `1` is beaten by `|x − εv − y| = 1 + ε`.
+- `isClosed_hcSet` (`LocallyFinite.isClosed_iUnion`), `closure_interior_hcSet` (the down triangle has the ball of radius `1/4` about its centroid;
+  `U = cl U°` by shrinking toward the centroid, `|g′| ≤ 1/8`; bands open; discs), `volume_frontier_hcSet` (frontier of a locally finite union in
+  the union of frontiers; convex blocks by `Convex.addHaar_frontier`; `U` and the bands through **`volume_graph_eq_zero`**: a graph `φ = f ∘ ψ`
+  of a continuous `f`, with `φ` shifted by `c` and `ψ` fixed under translation by `c·v`, is null — its translates by `v/(k+1)` are disjoint and lie in one
+  bounded set; no Fubini, no measure-preserving frame map).
+- `hcBand_component_iff` — `(⟸)` the image of `[s₁, s₂] × (0, 1)` under `(s, μ) ↦ (s, 1 + μ(ℓ(s) − 1))`; `(⟹)` the line `s = c`, `c ∈ Z`, misses
+  the band and separates.
+
+**Builds** (`./scripts/build.sh` under the slot, `MEMMAX=40G BATCH=4`): at `6b581a65` (six leaves) OK, 2 modules rebuilt, 20 warning lines = 10
+distinct, every one `declaration uses 'sorry'` (`build/gate/build/20261004T201140Z-2017320.log`). At `b968c1bb` (eleven leaves) OK, 2 modules rebuilt, 10 warning lines = 5 distinct, every one `declaration uses 'sorry'`, no other warning (`build/gate/build/20261004T203429Z-2166305.log`; counted with `grep`).
+**Axioms**, printed from the built library at `b968c1bb` with `lake env lean data/fs131/i2/i2m-axioms.lean` (not `scripts/axioms.sh`, which fails on
+the remaining `sorry` by design): `data/fs131/i2/i2m-axioms.txt`, 89 records — 82 read exactly the standard three (the 11 leaves, `hc_band_components` which they close, 70 new children); the 7 negative controls (the 5 open leaves, `hc_isRegularMUA`, `hc_irreg`) print `sorryAx` (the check can fire).
+Iteration: `lake env lean -DautoImplicit=false` on scratch files importing the built module (each compile 3–10 s), then the module in place (about
+100 s). The module was never edited while a build ran.
+
+**Re-pricing** (from the first two hard children, as the brief asks): `hcUp_slivers` with the frame kit about 20k tokens, the (G3) trio about 15k
+(K2d's table: 35k + 35k + 30k + 35k); the block kit with `hc_unitAvoiding` about 35k (table 80k), the three regularity leaves about 30k (table 95k) —
+a quarter to a third of the table, as I2k and I2l found.
+
+**Still `sorry`** (5, all in `Plane/CoverExamples`): `hc_sausage_cover` (B1), `hc_exclusion` (B2), `hc_ae_phi_pos`, `hc_free_pos` (IRREG (1)),
+`hc_free_subset_nowhereDense` (IRREG (2)). The assemblies `hc_isRegularMUA` and `hc_irreg` wait on them; `hc_band_components` is now sorry-free.
+
+**Not done, owed before the gate**: wave 2's vacuity carriers (Stage 23's survey stands; I2k's two points — the `IsEmpty (CPColouring 0/1)`
+instances and `not_semiconcaveWith_one_lowerArc` — still open), the full gate, the landing.
+
+**For the next implementer — the routes for the five, worked out but not written.**
+1. **`hc_free_subset_nowhereDense` needs only `hc_exclusion` and `closure_interior_hcSet`** (no case analysis): take
+   `K = {z | ∀ θ, z + e θ ∉ int HC} ∩ (int HC)ᶜ` — closed (`int HC` open), and `E ⊆ K` (an open 2π-periodic set of angles of arc length `0` is
+   empty). If `B(z, δ) ⊆ K`: `z ∉ int HC`, so `hc_exclusion` gives `y ∈ HC` with `|z − y| = 1`; `HC = cl int HC` gives `y′ ∈ int HC` with
+   `|y′ − y| < δ`; then `z′ = y′ − (y′ − z)/|y′ − z|` is in `B(z, δ)` and `z′ + (unit) = y′ ∈ int HC` — against `z′ ∈ K`.
+2. **`hc_exclusion` and `hc_ae_phi_pos` through one strict-exclusion lemma** SE: `∀ z ∉ int HC, z ∈ N₀ ∨ z ∈ K_Z ∨ ∃ y ∈ int HC, dist z y = 1`,
+   with `N₀` a countable union of null sets that does not depend on `|Z|` — spheres `|z − O| ∈ {1/2, 3/2}`; `{d_T = 1}` and `{D_T = 1}` for the
+   triangles (frontiers of the convex sets `{d_T ≤ 1}` and `⋂ B̄(v, 1)`); the lines `t ∈ {0, 1, 2}` and `s = ±1/2` of every edge frame
+   (`volume_hcFrame_graph`, `volume_hcFrame_line`); the circles `T₁(e±)`; `{d_σ = 1}`; the graphs of `ℓ`; `∂U` — and
+   `K_Z = ⋃_e {z : ∃ c ∈ Z, |z − frame(c, 1)| = 1}`, which lies in `unitShadow HC` (`σ_e ⊆ HC`) and is null when `Z` is null. Then
+   `hc_ae_phi_pos` is SE with `phi_pos_of_mem_open` off `N₀ ∪ K_Z`; and `hc_exclusion` follows on `HCᶜ ∖ N₀` (SE, or `K_Z ⊆` shadow), which is
+   dense in `(int HC)ᶜ = cl HCᶜ` because `N₀` is null, and `unitShadow HC` is closed. SE's cases, through B1: (a) a face — `1/2 < |z − O| < 3/2`,
+   the radial point; (b) a down triangle — `D_T > 1` gives IVT on `int T`; `D_T < 1` puts `z` across one incident side (the down triangle is
+   `{∀ incident frame, t ≤ 0}` by `mem_hcDownTri_iff` + `hcFrame_dn`), at `0 < t < 1 − √3/2`, `|s| < 1/2`, off the closed vesica (`vesica_apex`),
+   so case (d); (c) an up triangle — outside it, in the frame where `t < 2`: `|s| ≤ 1/2` gives `d_T = 2 − t` and, by `t` against `ℓ(s)`, the band
+   (impossible), the graph of `ℓ` (`N₀`) or `d_U < 1` (`infDist_hcUp_strictAnti`); `|s| > 1/2` makes the end vertex the nearest point (`v ∈ U`); with
+   a vertex beyond `1`, IVT on `U°` (needs `U°` preconnected: star-shaped about `C` by `hcFrame_shrink`); inside `T ∖ int HC`: the sliver at `t > 2`
+   by `hc_lemmaNL`, `t = 2` a line, else `∂U`; `D_T < 1` is the flat bulge (case (d) mirrored); (d) a segment — `d_σ < 1 < D_σ` gives the secant
+   point `(s′, 1)` (IVT on `σ`), `s′ ∈ Z` → `K_Z`, `|s′| = 1/2` → `T₁(e±)`, else the circle point `(s_z + σ√(1 − (1 + κ − t_z)²), 1 + κ)` lies in
+   the band for small `κ > 0` (continuity of `ℓ` at `s′`); `D_σ < 1` (open vesica): `t < 1` the down triangle (strict (C0)), `t = 1` a line,
+   `1 < t < ℓ` impossible, `t = ℓ` the graph, `t > ℓ` IVT on `U°` with the up apex beyond `1` (mirrored (C0)).
+3. **`hc_sausage_cover`** is B1 as the derivation states it (fundamental triangle `O C M`, H3's quadrilateral `Q ⊆ B̄(v, 1) ∪ B̄(e, 1)`), carried
+   around each face: `exists_near_hcFace`, then the sector of `arg(z − O)` within `30°` of `kπ/3`; the six triangles around `O` are
+   `up(m, n)`, `down(m, n)`, … by the face-lattice relations (`hcFace_eq_tri`, `hcDownC_dn`).
+4. **`hc_free_pos`** (the hardest): in the frame of edge `(0, 0, 0)`, `E ⊇ {(s, t) : 0 < t < t₀, s ± r(t) ∈ Z, |s − p| < h}`, `r(t) = √(2t − t²)`,
+   `p` a Lebesgue density point of `Z` in `(−1/2, 1/2)` (Mathlib's density theorem); each such circle misses `int HC` — `T_down` (`D < 1`), `U`
+   (top `1 + t < 2`), the band (the arc passes above it: `t·d/r > d²/4 ≥ g ≥ ℓ − 1`), and every other block, which needs the exact distances to the
+   four adjacent bands and the two adjacent faces (the lattice table gives only `triQ ≥ 3` there, not enough: use the adjacent sides' frames);
+   positivity by Fubini in frame coordinates (frame `(0, 0, 0)` is `(s, t) ↦ C + (c₀ − t) − i s`, measure-preserving through
+   `Complex.volume_preserving_equiv_real_prod`) and `|(Z + r) ∩ (Z − r) ∩ I| ≥ |I| − 2|I′ ∖ Z| > 0` near the density point.
+5. **Traps met this session**: a `set` variable hides its definition from `linarith` (use `obtain ⟨u, hu⟩ : ∃ u, u = …`); `(-(1/(k+1 : ℝ)) : ℂ)`
+   elaborates with the coercion at the leaves — write `((c k : ℝ) : ℂ)`; `Convex.addHaar_frontier` needs `Mathlib.Analysis.Convex.Measure` (now
+   imported) and takes `μ` implicitly; `rw` cannot see inside `z ∈ {z | …}` (use `show`); `Pairwise (Disjoint on H)` needs `open Function`
+   (write `Function.onFun`); `Set.Finite.isCompact_convexHull` needs `(𝕜 := ℝ)`; after `fin_cases j` the coercion `↑↑⟨0, _⟩` no longer matches
+   a lemma stated at `((0 : Fin 3) : ℕ)` — rewrite the edge direction to `![…] j` before `fin_cases`. The splice helper this session used (move proved
+   chunks from a scratch file into the module by name, renaming primed copies) is `data/fs131/i2/i2m-splice.py`.
+
+## Theorems this phase proved (FS131-I2m, additions)
+
+Axioms read from `data/fs131/i2/i2m-axioms.txt` (printed from the built library at `b968c1bb`; the gate was not run). Each read against its
+docstring, which carries the row.
+- `HadwigerNelson.Plane.hcUp_slivers` — `[propext, Classical.choice, Quot.sound]` — FS111-M3-HC (G2): the graph `t = 2 + g(s)` of each side lies in `U`.
+- `HadwigerNelson.Plane.hcBandTop_bounds`, `lt_hcBandTop_iff`, `continuousOn_hcBandTop` — the standard three — (G3): `1 ≤ ℓ ≤ 1 + g`, `ℓ = 1`
+  exactly on `Z`; below `t = 2` the band is `{d_U > 1}`; `ℓ` continuous.
+- `HadwigerNelson.Plane.hc_band_dist_lt_one` — the standard three — § 2.3: a band has diameter `< 1`.
+- `HadwigerNelson.Plane.hc_lemmaNL` — the standard three — Lemma NL: a sliver point is at distance `1` from the closed band.
+- `HadwigerNelson.Plane.hc_unitAvoiding` — the standard three — § 2.3: no two points of `int HC` are at distance `1`.
+- `HadwigerNelson.Plane.isClosed_hcSet`, `closure_interior_hcSet`, `volume_frontier_hcSet` — the standard three — HC is closed, the closure of its
+  interior, with null frontier.
+- `HadwigerNelson.Plane.hcBand_component_iff` — the standard three — (G3): the band's components are its gaps; with it the assembly
+  `hc_band_components` (FS111-M3-HC's second clause) is sorry-free and reads the standard three.
+- `HadwigerNelson.Plane.hcBlock_sep`, `hcBlock_dist_le_one` — the standard three — distinct blocks of HC are `≥ 1` apart; each has diameter `≤ 1`.
+- `HadwigerNelson.Plane.mem_hcUpTri_iff`, `mem_hcDownTri_iff`, `hcFrame_dn` — the standard three — the triangles as half-plane intersections and
+  reflections.
+- `HadwigerNelson.Plane.volume_graph_eq_zero` — the standard three — a graph `φ = f ∘ ψ` in translation-sheared coordinates is null.
+- 60 further children (frames, `U`'s compactness and monotonicity, the lattice centres, local finiteness, the regularity pieces), each the standard
+  three; listed in `scripts/Axioms.lean` block "FS131-I2m" and `data/fs131/i2/i2m-axioms.txt`.
+
+## Drafts for the front page (FS131-I2m)
+
+None: the gate was not run (5 `sorry` remain in `Plane/CoverExamples`), so no count in `CLAUDE.md` § The gate or § Trust ledger moves, and no ledger
+row is regraded.
