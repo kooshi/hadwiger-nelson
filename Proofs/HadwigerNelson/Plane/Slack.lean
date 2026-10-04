@@ -1,7 +1,9 @@
 import Proofs.HadwigerNelson.Plane.Suprema
 import Proofs.HadwigerNelson.Plane.CPColouring
+import Proofs.HadwigerNelson.Plane.FalconerReduction
 import Mathlib.MeasureTheory.Measure.Lebesgue.VolumeOfBalls
 import Mathlib.MeasureTheory.Measure.ContinuousPreimage
+import Mathlib.MeasureTheory.Measure.Decomposition.RadonNikodym
 
 /-!
 # Rescaling, the suprema's limits, the equivalence, kept points, the face lemma (FS-131 wave 2)
@@ -1707,7 +1709,49 @@ theorem convForm_tendsto {g : ℕ → ℂ → ℝ} {F : ℂ → ℝ} (hg : ∀ m
 theorem exists_twoCircle_density : ∃ ρ : ℂ → ℝ, Integrable ρ ∧ (∀ w, 0 ≤ ρ w) ∧
     ∀ N : Set ℂ, MeasurableSet N →
       (arcLength.prod arcLength) {p : ℝ × ℝ | e p.2 - e p.1 ∈ N} = ENNReal.ofReal (∫ w in N, ρ w) := by
-  sorry
+  set T : ℝ × ℝ → ℂ := fun p => e p.2 - e p.1 with hT
+  have hTm : Measurable T := (continuous_e.comp continuous_snd).sub (continuous_e.comp continuous_fst) |>.measurable
+  set ν : Measure ℂ := Measure.map T (arcLength.prod arcLength) with hν
+  have hac : ν ≪ volume := by
+    refine Measure.AbsolutelyContinuous.mk fun N hN h0 => ?_
+    rw [hν, Measure.map_apply hTm hN]
+    -- `e p.2 - e p.1 = e (p.1 + π) + e p.2`, and `arcLength ⊗ arcLength ≤ volume`
+    have hle : arcLength.prod arcLength ≤ (volume : Measure (ℝ × ℝ)) := by
+      rw [Measure.volume_eq_prod]
+      exact Measure.prod_mono Measure.restrict_le_self Measure.restrict_le_self
+    refine le_antisymm ((hle _).trans (le_of_eq ?_)) bot_le
+    · set sh : ℝ × ℝ → ℝ × ℝ := fun p => (p.1 + Real.pi, p.2) with hsh
+      have hshp : MeasurePreserving sh volume volume := by
+        rw [Measure.volume_eq_prod]
+        exact (measurePreserving_add_right volume Real.pi).prod (MeasurePreserving.id volume)
+      have hpre : T ⁻¹' N = sh ⁻¹' ((fun q : ℝ × ℝ => (0 : ℂ) + ((1 : ℝ) : ℂ) * e q.1 + ((1 : ℝ) : ℂ) * e q.2) ⁻¹' N) := by
+        ext p
+        simp only [hT, hsh, mem_preimage, Complex.ofReal_one, one_mul, zero_add]
+        have : e (p.1 + Real.pi) = -e p.1 := by
+          simp [e, add_mul, Complex.exp_add, Complex.exp_pi_mul_I]
+        rw [this, neg_add_eq_sub]
+      rw [hpre, hshp.measure_preimage (by
+        exact ((measurable_const.add ((continuous_ofReal.measurable.comp measurable_const).mul
+          (continuous_e.measurable.comp measurable_fst))).add ((continuous_ofReal.measurable.comp measurable_const).mul
+          (continuous_e.measurable.comp measurable_snd))) hN |>.nullMeasurableSet)]
+      exact twoCircle_preimage_null 0 one_pos one_pos h0
+  haveI : IsFiniteMeasure ν := Measure.isFiniteMeasure_map _ _
+  refine ⟨fun w => (ν.rnDeriv volume w).toReal, ?_, fun w => ENNReal.toReal_nonneg, fun N hN => ?_⟩
+  · refine integrable_toReal_of_lintegral_ne_top (Measure.measurable_rnDeriv _ _).aemeasurable ?_
+    rw [Measure.lintegral_rnDeriv hac]
+    exact measure_ne_top _ _
+  · rw [ofReal_integral_eq_lintegral_ofReal]
+    · have : ∫⁻ w in N, ENNReal.ofReal (ν.rnDeriv volume w).toReal = ∫⁻ w in N, ν.rnDeriv volume w := by
+        refine lintegral_congr_ae ?_
+        filter_upwards [ae_restrict_of_ae (Measure.rnDeriv_ne_top ν volume)] with w hw
+        exact ENNReal.ofReal_toReal hw
+      rw [this, Measure.setLIntegral_rnDeriv' hac hN, hν, Measure.map_apply hTm hN]
+      rfl
+    · refine Integrable.integrableOn ?_
+      refine integrable_toReal_of_lintegral_ne_top (Measure.measurable_rnDeriv _ _).aemeasurable ?_
+      rw [Measure.lintegral_rnDeriv hac]
+      exact measure_ne_top _ _
+    · exact Eventually.of_forall fun w => ENNReal.toReal_nonneg
 
 /-- **`T*T` has an integrable kernel** (Fubini): for bounded measurable `h` supported in a ball,
 `∫ |∫_θ h(x + e θ)|² dx = ∫ h(y) ∫ h(y + w) ρ(w) dw dy` with `ρ` the two-circle density. -/
