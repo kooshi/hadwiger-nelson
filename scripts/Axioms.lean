@@ -3087,6 +3087,53 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.stuck_flip
 #print axioms HadwigerNelson.Plane.ArcMap.stuck_step
 
+/-! ## FS-131 wave 4, `Contact` (job FS131-IC3) — the third implementer's added children and proved leaves -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.index_of_isSector_hornSet
+#print axioms HadwigerNelson.Plane.ArcMap.woodallCone_isHorn
+#print axioms HadwigerNelson.Plane.ArcMap.IsSector.eq_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.horn_unique_of_stuck
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_horns
+#print axioms HadwigerNelson.Plane.abs_frameX_sub_le
+#print axioms HadwigerNelson.Plane.abs_frameY_le_norm
+#print axioms HadwigerNelson.Plane.abs_frameY_le_of_mem_hornSet
+#print axioms HadwigerNelson.Plane.half_norm_le_frameX
+#print axioms HadwigerNelson.Plane.dist_push_up_lt_one
+#print axioms HadwigerNelson.Plane.dist_push_down_lt_one
+#print axioms HadwigerNelson.Plane.hornSet_mono_radius
+#print axioms HadwigerNelson.Plane.abs_le_sq_of_near_axis
+#print axioms HadwigerNelson.Plane.exists_push_up
+#print axioms HadwigerNelson.Plane.exists_push_down
+#print axioms HadwigerNelson.Plane.ArcMap.false_of_pole
+#print axioms HadwigerNelson.Plane.ArcMap.IsFlankAbove.mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.IsFlankBelow.mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.horn_not_shadowed_near_N
+#print axioms HadwigerNelson.Plane.ArcMap.horn_not_shadowed_near_S
+#print axioms HadwigerNelson.Plane.ArcMap.dot_e_sub_eq_frameX
+#print axioms HadwigerNelson.Plane.ArcMap.shadow_ineq_in
+#print axioms HadwigerNelson.Plane.ArcMap.shadow_ineq_out
+#print axioms HadwigerNelson.Plane.ArcMap.norm_pos_of_frameX_pos
+#print axioms HadwigerNelson.Plane.ArcMap.eq_N_or_S_of_frameX_eq_zero
+#print axioms HadwigerNelson.Plane.ArcMap.shadow_local_contact
+#print axioms HadwigerNelson.Plane.ArcMap.shadow_source_near_poles
+#print axioms HadwigerNelson.Plane.ArcMap.horn_shadow_near_S
+#print axioms HadwigerNelson.Plane.ArcMap.horn_shadow_near_N
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_hornSet_near
+#print axioms HadwigerNelson.Plane.ArcMap.outType_S_of_shadow
+#print axioms HadwigerNelson.Plane.ArcMap.outType_N_of_shadow
+#print axioms HadwigerNelson.Plane.not_tanBelow_branchPt
+#print axioms HadwigerNelson.Plane.not_tanAbove_branchPt
+#print axioms HadwigerNelson.Plane.hornSet_curv_eq
+#print axioms HadwigerNelson.Plane.e_add_pi_ne
+#print axioms HadwigerNelson.Plane.exists_abs_arcsin_lt
+#print axioms HadwigerNelson.Plane.abs_half_lt
+#print axioms HadwigerNelson.Plane.ArcMap.IsHorn.exists_chart_index
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_col
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_flank_after
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_flank_before
+#print axioms HadwigerNelson.Plane.ArcMap.IsHorn.exists_flankAbove
+#print axioms HadwigerNelson.Plane.ArcMap.IsHorn.exists_flankBelow
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

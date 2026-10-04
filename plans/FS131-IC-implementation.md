@@ -25,6 +25,14 @@ Axioms from `#print axioms` against the stage-2 build's oleans (`data/fs131/ic/a
 - 1 child (FS131-IC2, Stage 6), `[propext, Classical.choice, Quot.sound]`: `ArcMap.shaveAvailable_of_adjacent_horns` (two `c`-horns on one ray sharing their
   bounding arc, with a lower flank, make SHAVE available — Stage 5's finding 1).
 
+- 44 children (FS131-IC3, Stage 8), each [kernel] `[propext, Classical.choice, Quot.sound]` (`data/fs131/ic/axioms-ic3-stage8.txt`), among them:
+  `ArcMap.stuck_horns` (N4-STUCK (i): exactly two `c`-horns along `±a`, curvatures in `(−1, 1)`, out-type `c`-contacts at `N`, `S′` — `stuck_structure`'s first
+  seven clauses and its two out-type `c`-clauses), `ArcMap.woodallCone_isHorn` (Woodall's cone with radius-independent horns), `ArcMap.IsHorn.exists_flankAbove`,
+  `ArcMap.IsHorn.exists_flankBelow` (a horn has flank colours), `ArcMap.horn_unique_of_stuck` (one horn per ray at a stuck vertex),
+  `ArcMap.shadow_source_near_poles` (N4-FLANK's localization), `ArcMap.horn_shadow_near_S`, `ArcMap.horn_shadow_near_N`, `ArcMap.outType_S_of_shadow`,
+  `ArcMap.outType_N_of_shadow` (a flank colour shadowing the horn near `v` has an out-type contact at the far pole), `hornSet_curv_eq`,
+  `ArcMap.IsHorn.exists_chart_index`.
+
 ## Stage 1 — SAVED: the readback, the as-given build
 
 **The brief's four quotations against their sources** (standing rule 3):
@@ -302,5 +310,95 @@ counterexample or missing hypothesis), and I go on with the others.
 **The worktree as given** (`c7249cc7`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build:
 OK — all 1744 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0 (`build/gate/build/20261004T202040Z-2089578.log`; driver
 log `data/fs131/ic/build-ic3-readback.log`) — IC2's stage-6 oleans are current. 29 distinct `declaration uses sorry` warnings replayed: `Contact` 5
-(lines 1641, 1680, 1694, 1710, 1726: `flank_shadows`, `exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure`), `UnitArc` 22 and `BaseSteps` 7
+(lines 1641, 1680, 1694, 1710, 1726: `flank_shadows`, `exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure`), `UnitArc` 17 and `BaseSteps` 7
 (as given on this branch; FS131-I4i's progress on `fs131-w4` is not merged here).
+
+## Stage 8 — SAVED (FS131-IC3 stage 2): 44 sorry-free children — N4-FLANK's mechanism, a horn's chart sector and flanks, N4-STUCK (i); 5 `sorry` left in `Contact`
+
+**No leaf closed; 44 children proved**, each `[propext, Classical.choice, Quot.sound]` (axioms below), no statement changed, no new axiom, no
+`native_decide`. They are the first steps of `flank_shadows` and of `stuck_structure`, in the order IC2's Stage 5 recommended (`stuck_cone` and
+`IsHorn.exists_flanks` first), plus the localization half of N4-FLANK, which both leaves read. Developed against the as-given oleans in
+`data/fs131/ic/Scratch3.lean` … `Scratch6.lean` (iteration only; each checked with `lean`, a planted fault watched to fire), then moved into
+`Contact` between `stuck_neighbour`'s block and `flank_shadows`.
+
+**(a) N4-FLANK's mechanism: where a horn's shadow comes from** (27; section "N4-FLANK's mechanism", read against `plans/FS110-N-proof.md` § 2.2, N4-FLANK's
+proof). The localization `ArcMap.shadow_source_near_poles`: for a colour `c ∈ P_cl(v)` with `e α ∈ D_c(v)`, a point `z` near `v` near the axis (`x > 0`,
+`|y| ≤ ‖z − v‖²/2`) at unit distance from a point of `c`'s class sees it within `δ` of `N` or `S′` — the derivation's "for `w ≠ N, S′` the direction `+a` is
+interior to `w`'s half-plane and N3-CLEAR clears a neighbourhood of `H`'s tip", proved by compactness of `cl(C_c) ∩ B̄(v, 2)` off the two poles' balls
+(`IsCompact.eventually_forall_of_forall_eventually`), the contact step `shadow_local_contact` (in-type: `|z − y|² < 1`; out-type: `> 1`; two real lemmas
+`shadow_ineq_in`, `shadow_ineq_out` carry the arithmetic, per `LEAN.md`'s heartbeat rule), and the triangle inequality off `ω(v)`. **Condition 5 is not used**
+(no finiteness of contacts is needed). The pole on the flank's side is excluded by a vertical push: `exists_push_up` / `exists_push_down` (a horn point
+pushed along `±n` by `t ∈ (0, 1)` lands in the flank band, by the intermediate value theorem on `tanHeight`), `dist_push_up_lt_one` /
+`dist_push_down_lt_one` (the pushed point is nearer than `1` to a point near the pole that the horn point was at unit distance from), and
+`false_of_pole` (N-E2: the pushed flank point, outside `B̄(N, 1)`, is far from every tile at `N`, yet nearer than `1` to one of its points):
+`horn_not_shadowed_near_N` (upper flank `g`, `κ₂ < 1`) and its mirror `horn_not_shadowed_near_S` (lower flank `h`, `κ₁ > −1`) — the derivation's "out-type
+`g` at `N` shadows an upward-closed set that must miss the flank sector, hence misses `H`". Together: `horn_shadow_near_S` (the `g`-shadow of the horn
+near `v` comes from within any `δ` of `S′`) and `horn_shadow_near_N` (the `h`-shadow from near `N`). Corollaries `outType_S_of_shadow`,
+`outType_N_of_shadow`: a flank colour shadowing horn points arbitrarily near `v` has an **out-type contact** at `S′` (for `g`) or `N` (for `h`); in-type is
+excluded by N-E2 against a flank point outside `B̄(S′, 1)` (resp. `B̄(N, 1)`) and near `v` — the derivation's "in-type `g` at `N` or at `S′` would be Siamese
+with the flank sector" and N4-STUCK (ii)'s first sentence, "Doubly shadowed gives an out-type `h_±`-tile at `N` and an out-type `g_±`-tile at `S′`".
+Helpers: `abs_frameX_sub_le`, `abs_frameY_le_norm`, `abs_frameY_le_of_mem_hornSet`, `half_norm_le_frameX`, `abs_le_sq_of_near_axis`,
+`hornSet_mono_radius`, `dot_e_sub_eq_frameX`, `norm_pos_of_frameX_pos`, `eq_N_or_S_of_frameX_eq_zero`, `exists_mem_hornSet_near`,
+`IsFlankAbove.mem_coneAt`, `IsFlankBelow.mem_coneAt`.
+
+**(b) A horn's chart sector and its flanks** (14; section "A horn's chart sector and its flanks"). `hornSet_curv_eq` (a horn determines its curvatures:
+a branch point of an intermediate curvature separates two different horns; over `not_tanBelow_branchPt`, `not_tanAbove_branchPt`);
+`IsHorn.exists_chart_index` (in any sector chart, a horn is the sector after a germ of direction `α` mod `2π` and curvature `κ₁` whose next germ has the
+same direction and curvature `κ₂`: the sector's cone is the horn's single direction, so its two germs share it, `e_add_pi_ne` excluding the ball);
+`IsSectorChart.index_of_isSector_hornSet` (the same from a horn that is a sector at one radius, with the chart sector equal to the horn at every radius
+up to the chart's); `IsSectorChart.exists_col` (a chart sector lies in one colour's class at every radius); `IsSectorChart.exists_flank_after` /
+`exists_flank_before` (above a germ, resp. below the germ after a sector, a thin horn lies in that sector's colour — the sector itself when the next germ
+has the same direction, else a horn of curvature `κ ± 1` for small radii, by continuity of `arcsin` at `0`: `exists_abs_arcsin_lt`, `abs_half_lt`); and
+**`IsHorn.exists_flankAbove`, `IsHorn.exists_flankBelow`** (IC2's finding 1: a horn at a point of the domain has an upper and a lower flank colour). And
+**`woodallCone_isHorn`** (IC2's finding 2, the core of its `stuck_cone`): under `woodallCone_strict`'s hypotheses every `c`-sector at a small radius is
+a horn with radius-independent curvatures in `(−1, 1)` — `IsHorn` — along `α` or `α + π`, with the two out-type contacts.
+
+**(c) N4-STUCK (i)** (3; section the same). `IsSector.eq_of_mem` (two sectors sharing a point are one); `horn_unique_of_stuck` (two `c`-horns along one
+direction where neither MERGE-RAY nor SHAVE is available have the same curvatures: a gap is MERGE-RAY, a shared bounding arc is SHAVE through
+`shaveAvailable_of_adjacent_horns` over `IsHorn.exists_flankBelow`, an overlap is one sector); and **`stuck_horns`**, read against N4-STUCK (i) ("`int D_c(v) = ∅`
+(no MERGE), so N3-DEG: out-type `c`-contacts at `N`, `S′`, all `c`-sectors horns along `±a` with curvatures in `(−1, 1)`; one per ray (no MERGE-RAY)") and
+`stuck_structure`'s first seven clauses: at a stuck vertex with Condition 5 covering `B̄(v, 1)`, a colour with `m ≥ 2` sectors has exactly two, `IsHorn`s
+along `α` and `α + π` with curvatures in `(−1, 1)`, `HasSectors v c 2`, and out-type `c`-contacts at `N` and `S′` (`stuck_structure`'s two out-type
+`c`-clauses). **Same as the derivation's (i)**, without its doubly-shadowed clause (that is the next step, over `flank_shadows`).
+
+**What is left (5), with the route** (my reading for the successor; none changes a statement):
+1. **`stuck_structure`** over `stuck_horns` (horns `H₊` along `α`, `H₋` along `α + π`): (1) flanks by `IsHorn.exists_flankAbove/Below` — note that for
+   `H₋` the frame is rotated by `π`, so its `IsFlankAbove v (α + π) κ₄` colour lies on the global `−n` side (the derivation's `h₋`) and its `IsFlankBelow`
+   colour on the `+n` side (`g₋`), and `v + e(α + π + π/2) = S′`; (2) no flank colour is `c`: the flank band lies in a sector at `v` (a component of the interior
+   points in a ball, `v` in its closure), which would be `H₊` or `H₋` by `stuck_horns`' count — not `H₊` (the band is above `κ₂`), not `H₋` (its directions
+   tend to `α`, `H₋`'s to `α + π`: `e_eq_of_mem_coneAt_hornSet`); (3) no SHAVE and `shaveAvailable_of_not_doublyShadowed` (over `flank_shadows`) make each horn
+   doubly shadowed; (4) a doubly shadowed band gives horn points arbitrarily near `v` in both shadows, so `outType_N_of_shadow` / `outType_S_of_shadow`
+   give out-type `h₊` at `N`, `g₊` at `S′` (and for `H₋`, in its rotated frame, `h₋` at `S′`, `g₋` at `N`); (5) N3-CONF (`coneAt_subset_allowedCone`) puts
+   all `h`-directions in `{d·n ≤ 0}`, `g`'s in `{d·n ≥ 0}`; then (ii)'s count with `h3` at `v` (`P_cl(v) = {c, g₊, h₊} = {c, g₋, h₋}`, `g₋ = h₊` excluded),
+   degree 4 and the two sides' colours (the chart at `v`: `IsSectorChart.encard_sectors`, `hasDegree`); (6) (iii) from `D_g(v) ⊇ {d·n > 0}`; (7) (iv) at `N`
+   and `S′`: the chart at `N`, the tangent out-type `h`-sectors `Q±` (from `flank_shadows`' mechanism at `N`, item 2 below), N-E1 for the ring colour `r`,
+   `h3` at `N`; "`h` has two sectors at `N`" by the order of sectors at `N` (N4-STUCK (iv)'s last paragraph). About a session and a half; (iv) is most of it.
+2. **`flank_shadows`** over the localization (`horn_shadow_near_S` / `_N`): if `S′ ∉ cl(C_g)`, the `g`-shadow near `v` is empty (`σ_g = κ₁`); if `S′` is a
+   `g`-contact (out-type, `outType_S_of_shadow`'s in-type exclusion), the chart at `S′`: each out-type `g`-sector tangent to `+a` (upper germ of direction
+   `α` mod `2π`, curvature `υ < 1`) shadows near `v` exactly `TanBelow v α (curvUp υ)` — `shadow_farSide_below` for its far side, plus the crossing: a unit
+   circle meeting the far side crosses the `υ`-branch into the sector near the branch; non-tangent sectors shadow only points inside `B(S′, 1)`, which the
+   horn misses (`κ₁ > −1`); `σ_g = max(κ₁, max_i curvUp υ_i)`, `≤ κ₂` by validity against the flank (a flank point below `curvUp υ_i` would be shadowed by
+   its own colour). The mirror at `N` with `shadow_farSide_above`. About a session.
+3. **`exists_shave`, `exists_rayMerge`, `exists_merge`**: IC1's Stage 2 items 3–4 stand (constructions of `F'`; the cut where `g = c` or `h = c` or in a merge
+   gap; engine 2 from `3f7ea033`). A session each; untouched by this job.
+
+**Hygiene notes.** Five pure-geometry children sit in the `ArcMap` namespace (`shadow_ineq_in`, `shadow_ineq_out`, `dot_e_sub_eq_frameX`,
+`norm_pos_of_frameX_pos`, `eq_N_or_S_of_frameX_eq_zero`) and `exists_mem_hornSet_near`, `exists_abs_arcsin_lt`, `abs_half_lt` are general helpers: harmless,
+movable in a cleanup. Two kills, both of this job's own build and by PID: the first while I believed it still waiting for its slot (it had been admitted
+and stood at batch 26 of 444, before `Contact`), the second at batch 177 to fold in group (c); each forfeited only the walk, re-run in full below. A slip in
+Stage 7's text (`UnitArc` 22) is corrected there to 17.
+
+**Build of this stage**: `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK — 444 of 444 batches, 2 module(s)
+rebuilt, 3 module(s) with warnings, 8m36s", exit 0 (`build/gate/build/20261004T204837Z-2282147.log`; driver log `data/fs131/ic/build-ic3-stage8.log`). 29
+distinct `declaration uses sorry` warnings — `Contact` 5 (`flank_shadows`, `exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure`), `UnitArc` 17,
+`BaseSteps` 7 (as given) — and no other warning or error (the one `error:` line is the driver's `lake build --no-build` probe). Nothing was edited while it
+ran. **Axioms** against its oleans (`lake env lean data/fs131/ic/AxiomsIC3.lean`, `pp.fullNames`; output `data/fs131/ic/axioms-ic3-stage8.txt`; not a gate
+log): all 122 theorems of `Contact`; 112 read `[propext, Classical.choice, Quot.sound]` — among them the 44 of this stage; 10 read `sorryAx` besides (the
+five leaves; `shaveAvailable_of_not_doublyShadowed` through `flank_shadows`; `stuck_neighbour`, `stuck_flip`, `stuck_step`, `stuck_chain` through
+`stuck_structure`). **Records**: `tools/fs131_ic3_addrecords.py` (new; IC2's tool, its own block headed "FS131-IC3" in `scripts/Axioms.lean`): 122 names, 44
+added, `--check` exit 0; negative control `--plant --check` exit 1 (watched). `tools/check_architecture.py` not re-run: no import or module changed.
+Names checked against `fs131-w4`, `fs131-w5` and `main`: no collision.
+
+**Re-pricing** (from this job's work): the localization and the chart children took about 60k and 45k of work; `stuck_horns` about 15k over them. The reading
+of the derivation and the API cost as much as the proofs, as for IC1 and IC2. `stuck_structure` is now about a session and a half (its (iv) is most of it),
+`flank_shadows` about a session, the three moves a session each — 4.5 to 5 sessions for the five leaves.
