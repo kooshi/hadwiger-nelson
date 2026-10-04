@@ -613,3 +613,9 @@ reason by the close.*
      (item 89), now with one named obstacle (E1-BAD's count with oscillating edges). Statement defect (minor, E1's): Q2's "every angle > π/3" leaned on step 5 at
      equality; harmless. Prior-art debt: Reid–Jungreis–Witte 1990, Zaks 1992 (cite Woodall; judged off-topic by title). **Held for Kooshi**: a blind second mind
      on E1-NO45 before de Bruijn formalizes it, or the kernel as the second check (Workflow 3.1's default). Over its line (490k vs 480k): not a slip.
+108. **Kooshi, 2026-10-04 (verbatim in `data/external/EXT-HN1-request.md`)**: an outside repository, an outside repository, appears to
+     settle Hadwiger–Nelson with a short proof; *"Please have an opus agent of some kind pull and verify this. I'm authorizing a special purpose slot for this."*
+     **Brief EXT-HN1** (`debruijn`, Opus; `data/external/briefs/EXT-HN1-outside-claim.md`, gated PASS): pin the commit, read every file before anything runs,
+     read the headline statement aloud against the claim down to Mathlib's definitions, build sandboxed (`bwrap`, network off for the build, under the slot),
+     compile the headline's file directly, `#print axioms`, locate any defect with the smallest demonstration; read-only toward the outside world. Launched in
+     the special slot, outside the three-slot cap (Kooshi's word).
