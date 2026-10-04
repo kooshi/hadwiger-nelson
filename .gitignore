@@ -37,5 +37,5 @@ data/fs62/q19/sat78.log
 
 # Local settings file (Kooshi, 2026-09-27). Never commit.
 .env
-# queue row 4 (dropped): 46 GB of partial LRAT proofs and their logs; kept on disk pending Kooshi, never committed
+# queue row 4 (dropped): its 940 partial LRAT proofs were deleted at Kooshi's word (2026-10-03); the unknown cubes' logs stay local
 data/search/2026-10-03/row4/cubes-s10-pass1/

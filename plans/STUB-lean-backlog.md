@@ -55,8 +55,7 @@ goes back to Ephodos as a statement defect; a missing lemma, as a question. At m
 
 ## Held for Kooshi, with defaults (from `plans/FS129-close-inventory.md` item 173)
 
-The order (the backlog, then FS-124; default: stands); the 46 GB of partial proofs from a dropped search (default: kept on disk, ignored by git);
-the finite-graph search toward six (`plans/SEARCH-QUEUE.md` row 3; default: held); a blind second mind on FS129-OR1-QFREE (default: none — the
+The order (the backlog, then FS-124; default: stands); the finite-graph search toward six (`plans/SEARCH-QUEUE.md` row 3; default: held); a blind second mind on FS129-OR1-QFREE (default: none — the
 kernel is the second check); the prior-art debt of FS-129's entries (default: owed until publication).
 
 ## Bearing on the answer

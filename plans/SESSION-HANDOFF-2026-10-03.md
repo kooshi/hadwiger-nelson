@@ -24,8 +24,7 @@ this first.*
    3. Then the implementer (`debruijn-implementer`, Sonnet) per wave, from the plan. A statement defect or missing lemma goes to an Ephodos job.
 5. **At most three agents at a time** (Kooshi, 2026-10-03), the Searcher included. **FS-129 is Closed** when its compositions pass the gate here;
    tick its inventory then.
-6. **Held for Kooshi, with defaults** (`plans/FS129-close-inventory.md` item 173): the order (the backlog, then FS-124 — stands); the 46 GB of
-   partial proofs in `data/search/2026-10-03/row4/cubes-s10-pass1/` (kept on disk, git-ignored); the finite-graph search toward six
+6. **Held for Kooshi, with defaults** (`plans/FS129-close-inventory.md` item 173): the order (the backlog, then FS-124 — stands); the finite-graph search toward six
    (`plans/SEARCH-QUEUE.md` row 3 — held); a blind second mind on FS129-OR1-QFREE (none); the prior-art debt of FS-129's entries (owed until
    publication).
 7. **After the backlog**: FS-124, the (Q) ring, the top of Poros's ranking — its question posed in `plans/STUB-q-ring.md` § The question (Poros,

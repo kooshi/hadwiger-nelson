@@ -698,3 +698,8 @@ One line per item with its source; no narration. Each line is ticked done or dec
      `plans/FRONTIER-STUBS.md`'s open-milestone lines (fact audit `--base 37cc5de0` exit 0, `--dupes` exit 0; atlas checker 212, 0 failed). The
      handoff rewritten for the backlog session; the project memory updated; `.gitignore` widened to the whole dropped-search directory (its
      logs as well as its proofs), so the tree is clean.
+175. **Item 151 resolved — the partial proofs deleted** (Kooshi, 2026-10-03: "remove the partial proofs unless we need them"). Checked first: no held
+     result rests on queue row 4's partial refutation (FS129-MA1-FALC-19 keeps its exception as filed; the Searcher's record, report, this
+     inventory and the handoff describe the run, none uses the proofs as a certificate). Deleted the 940 `*.lrat.gz` files in
+     `data/search/2026-10-03/row4/cubes-s10-pass1/` (46 GB → 2.5 MB); kept its two tracked files (`cubes.jsonl`, `manifest.json`), its 84 logs, and
+     every other search's certificates (rows 1 and 5, which results rest on). The measurement stands in `plans/SEARCH-2026-10-03.md` § 5.
