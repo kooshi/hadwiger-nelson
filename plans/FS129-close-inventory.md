@@ -283,3 +283,5 @@ One line per item with its source; no narration. Each line is ticked done or dec
 73. **MA1's registration, provisionally scored** (record § 5.3; FS129-Z1 scores): reached 23 of an expected 22; 3 compositions of an expected 4;
     0 misses of the Y4 kind; 0 of the 17 unmentioned grokkings bearing unapplied, against an expected 0.2; MA1-E5 (a material Falconer
     difference, P = 0.15) not met.
+74. **Launched 2026-10-04 00:07 UTC**: FS129-MA2, pass 2, lane A, second part (`general-purpose`, Opus; `data/fs129/briefs/FS129-MA2-pass2.md`,
+    gated PASS, at `034cd9e0`). Running: FS129-MR1 and FS129-MA2, two of the cap of three.
