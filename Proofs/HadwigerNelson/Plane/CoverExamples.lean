@@ -2359,7 +2359,36 @@ theorem hc_free_subset_nowhereDense {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z �
 dense `K` has a support whose frontier has positive measure (density points of `A′ ∖ F` are boundary points of `supp A′`). -/
 theorem frontier_essSupport_pos {A' F K : Set ℂ} (hF : IsClosed F) (hK : IsClosed K) (hKi : interior K = ∅)
     (hS : 0 < volume (A' \ F)) (hsub : A' \ F ≤ᵐ[volume] K) : 0 < volume (frontier (essSupport A')) := by
-  sorry
+  have hnull : volume ((A' \ F) \ K) = 0 := ae_le_set.1 hsub
+  have hfr : (essSupport A' ∩ K) \ F ⊆ frontier (essSupport A') := by
+    rintro x ⟨⟨hxS, -⟩, hxF⟩
+    rw [(isClosed_essSupport A').frontier_eq]
+    refine ⟨hxS, fun hint => ?_⟩
+    set U := interior (essSupport A') ∩ Fᶜ with hU
+    have hUo : IsOpen U := isOpen_interior.inter hF.isOpen_compl
+    have hUK : U ⊆ K := by
+      intro y hy
+      by_contra hyK
+      obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.1 (hUo.inter hK.isOpen_compl) y ⟨hy, hyK⟩
+      have h0 : volume (A' ∩ ball y r) = 0 := by
+        refine measure_mono_null (fun w hw => ?_) hnull
+        have := hball hw.2
+        exact ⟨⟨hw.1, this.1.2⟩, this.2⟩
+      have hpos := (interior_subset hy.1 : y ∈ essSupport A') r hr
+      rw [h0] at hpos
+      exact lt_irrefl _ hpos
+    have : x ∈ interior K := interior_maximal hUK hUo ⟨hint, hxF⟩
+    rw [hKi] at this; exact this
+  have hae : A' \ F ≤ᵐ[volume] ((essSupport A' ∩ K) \ F : Set ℂ) := by
+    have h1 : volume ((A' \ F) \ essSupport A') = 0 :=
+      measure_mono_null (show (A' \ F) \ essSupport A' ⊆ A' \ essSupport A' from fun w hw => ⟨hw.1.1, hw.2⟩)
+        (volume_diff_essSupport A')
+    rw [ae_le_set]
+    refine measure_mono_null (fun w hw => ?_) (measure_union_null h1 hnull)
+    by_cases hw' : w ∈ essSupport A'
+    · exact Or.inr ⟨hw.1, fun hk => hw.2 ⟨⟨hw', hk⟩, hw.1.2⟩⟩
+    · exact Or.inl ⟨hw.1, hw'⟩
+  exact lt_of_lt_of_le hS ((measure_mono_ae hae).trans (measure_mono hfr))
 
 /-- HC₀'s zero set `Z = {−1/2, 1/2}` (every band one lens). -/
 def hcZ0 : Set ℝ := {-1 / 2, 1 / 2}
@@ -2392,7 +2421,16 @@ theorem hc_band_components {Z : Set ℝ} (hZc : IsClosed Z) (hZs : Z ⊆ Icc (-1
     (ht₂ : 1 < t₂) (ht₂' : t₂ < hcBandTop g m n j s₂) :
     connectedComponentIn (hcBand g m n j) (hcFrame m n j s₁ t₁) =
         connectedComponentIn (hcBand g m n j) (hcFrame m n j s₂ t₂) ↔ Disjoint (uIcc s₁ s₂) Z := by
-  sorry
+  have hZi : interior Z = ∅ := Measure.interior_eq_empty_of_null hZ0
+  have h₁ : hcFrame m n j s₁ t₁ ∈ hcBand g m n j := ⟨s₁, t₁, hs₁, ht₁, ht₁', rfl⟩
+  have h₂ : hcFrame m n j s₂ t₂ ∈ hcBand g m n j := ⟨s₂, t₂, hs₂, ht₂, ht₂', rfl⟩
+  rw [← hcBand_component_iff hZc hZs hZi hl hr hg m n j h₁ h₂]
+  constructor
+  · intro h
+    refine ⟨_, connectedComponentIn_subset _ _, isPreconnected_connectedComponentIn, mem_connectedComponentIn h₁, ?_⟩
+    rw [h]; exact mem_connectedComponentIn h₂
+  · rintro ⟨S, hSF, hSc, hx, hy⟩
+    exact connectedComponentIn_eq (hSc.subset_connectedComponentIn hx hSF hy)
 
 /-! ## FS111-M3-IRREG and FS111-M3-FIXCONV: a fat pinch -/
 
