@@ -2945,7 +2945,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.dense3
 #print axioms HadwigerNelson.Plane.ArcMap.cv_exists
 #print axioms HadwigerNelson.Plane.sevenBrickMap_isTerminalMap
-#print axioms HadwigerNelson.Plane.row134BaseUA
+#print axioms HadwigerNelson.Plane.ArcMap.row134BaseUA
 #print axioms HadwigerNelson.Plane.not_row134BaseUA_seven
 
 /-! ## FS-131 wave 5 (job FS131-KB) — the base's skeleton: row134BaseUA's leaves (BaseWalk) (sorry until the base's implementer lands it) -/
@@ -2990,6 +2990,12 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.cvb_pinch_connected
 #print axioms HadwigerNelson.Plane.ArcMap.cvb_hole_disconnected
 #print axioms HadwigerNelson.Plane.exists_holed_valid_fragment
+
+/-! ## FS-131 wave 5 (job FS131-I5) — wave 5's first implementer: FS131-E4's repair (b) and its children, the implementer's added children -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.Unenclosed.unenclosedC
+#print axioms HadwigerNelson.Plane.ArcMap.exists_preBend
+#print axioms HadwigerNelson.Plane.ArcMap.exists_unenclosed_or_bad
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 

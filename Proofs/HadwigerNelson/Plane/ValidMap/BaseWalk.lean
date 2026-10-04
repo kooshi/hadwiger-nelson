@@ -7,8 +7,8 @@ import Proofs.HadwigerNelson.Plane.RingBand
 The skeleton of `row134BaseUA`'s proof (job FS131-KB, `plans/FS131-w5base-kernel-plan.md`): FS112-N3-BASE's walk (`plans/FS112-N-proof.md`
 stage N3-3; NB3 § 1.4 steps 1–12), which is `[SokolovVoronov2025]` Lemma 4's pigeonhole as FS110-CB D1–D6, FS110-CD Lemmas H, E, R and
 Theorem D2, and FS110-CE's R1–R4 and Antipodal Lemma repaired it, with each use of Condition 5 replaced by a walked step. Everything is read
-in the base's context `BaseCtx F u`: a valid six-coloured fragment covering `B̄(u, 2)`, `u` cubic trichromatic, `BaseHyp u` (H) and
-`NoInertNear u` — the hypotheses of `Row134BaseUA`, which the walk refutes. So no statement here has a model (each is a step of a proof by
+in the base's context `BaseCtx F u`: a valid six-coloured fragment covering `B̄(u, 2)`, `u` cubic trichromatic, `BaseHyp u` (H),
+`NoInertNear u` and `UnenclosedC u` (FS131-E4's repair (b), inventory item 227) — the hypotheses of `Row134BaseUA`, which the walk refutes. So no statement here has a model (each is a step of a proof by
 contradiction, refuted by `row134BaseUA`); the carrier `BaseCtx` is OUT of the vacuity scan.
 
 The leaves, in the walk's order:
@@ -19,7 +19,8 @@ The leaves, in the walk's order:
   Prop. 18 — BASE-V's BV-L5, BV-C6, BV-P18).
 * **C — the planar core**: the returning arcs are removable and nest (`retArc_removable`, `retArcs_finite`, `retArcs_nested`), a
   non-returning change point has an endpoint (`exists_endpoint`: Prop. 19(b) with R1–R4 and Lemma E), and the eleventh point
-  (`exists_eleventh` — **a GAP in the walk as written**, plan § 2.3: the sources obtain it after hole-filling, which can destroy `u`).
+  (`exists_eleventh`, proved from `BaseCtx.unenclosed` by FS131-E4's E4-RIM; KB's plan § 2.3 found it a GAP without that hypothesis: the
+  sources obtain it after hole-filling, which can destroy `u`).
 * **D — the refuters and distances**: `endpoint_dist_ge` (the `a`-side tiles), `vin_antipodal`, `eleventh_antipodal` (Theorem D2 / the
   Antipodal Lemma), `cor3_base` (FS112-N3-COR3 under H), `l3_base` (Lemma 3 in pseudo-colour form: the circles may carry in- and
   out-contact unit arcs, so wave 5's `bv_l3` with `RingProper` does not apply — plan § 2.2), `hex_base` (Prop. 17 through `p17_ua`).
@@ -37,8 +38,8 @@ variable {k : ℕ}
 /-! ## The base's context -/
 
 /-- **The base's context at `u`** (`Row134BaseUA`'s hypotheses, bundled): a valid six-coloured fragment covering `B̄(u, 2)`, `u` cubic
-trichromatic, no point of `F(M) ∪ R(M)` in `B̄(u, 2)`, no inert unit arc centred within `1` of `u`. Refuted by `row134BaseUA`; every theorem
-of this file is a step of that refutation (no model expected). -/
+trichromatic, no point of `F(M) ∪ R(M)` in `B̄(u, 2)`, no inert unit arc centred within `1` of `u`, no tile of a colour of `u` enclosing a
+tile at `u`. Refuted by `row134BaseUA`; every theorem of this file is a step of that refutation (no model expected). -/
 structure BaseCtx (F : ArcMap 6) (u : ℂ) : Prop where
   /-- The fragment is valid. -/
   valid : F.Valid
@@ -50,6 +51,8 @@ structure BaseCtx (F : ArcMap 6) (u : ℂ) : Prop where
   hyp : F.BaseHyp u
   /-- No inert unit arc centred within `1` of `u`. -/
   noInert : F.NoInertNear u
+  /-- No tile of a colour of `u` encloses a tile at `u`. -/
+  unenclosed : F.UnenclosedC u
 
 /-- A point is **V-in** relative to `u` (FS110-CD § 2.3): a point of `ω(u)` some tile of whose colours carried at `u` meets `B(u, 1)`. -/
 def VIn (F : ArcMap k) (u p : ℂ) : Prop :=
@@ -184,9 +187,11 @@ theorem BaseCtx.exists_endpoint (B : F.BaseCtx u) {θ : ℝ} {a c : Fin 6} (hac 
   sorry
 
 /-- **The eleventh point** (`[SokolovVoronov2025]` p. 28, "on the boundary of the union of three regions … whose vertex is `u`, there is at
-least one more trichromatic point"; FS110-CD § 2.6; FS112-N3-3) — **GAP as the walk stands** (plan § 2.3, sent to Keryx): every source obtains it
-on the outer rim of `u`'s `P_cl(u)`-component after hole-filling, which in the local base can destroy `u` (a tile of a colour of `u` enclosing
-`u` inside `B(u, 1)`). A three-colour point of `B̄(u, 1)` carrying exactly two colours of `u`, whose tiles of those colours lie in `B(u, 1)`. -/
+least one more trichromatic point"; FS110-CD § 2.6; FS112-N3-3) — proved from `B.unenclosed` (FS131-E4 E4-RIM, `plans/FS131-E4-derivation.md`
+§ Argument for E4-RIM: the outer frontier of `u`'s `P_cl(u)`-component is connected and borders two of its tiles, since a lone bordering tile would
+enclose `u`'s other tiles). Every printed source obtains it after hole-filling, which in the local base can destroy `u` (KB's plan § 2.3); the
+hypothesis `UnenclosedC u` replaces that step. A three-colour point of `B̄(u, 1)` carrying exactly two colours of `u`, whose tiles of those
+colours lie in `B(u, 1)`. -/
 theorem BaseCtx.exists_eleventh (B : F.BaseCtx u) :
     ∃ q ∈ closedBall u 1, (F.coloursAt q).ncard = 3 ∧ (F.coloursAt q ∩ F.coloursAt u).ncard = 2 ∧
       ∀ j ∈ F.coloursAt q ∩ F.coloursAt u, ∀ T, F.TileOf j T → q ∈ closure T → T ⊆ ball u 1 := by

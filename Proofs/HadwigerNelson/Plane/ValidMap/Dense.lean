@@ -59,10 +59,12 @@ end ArcMap
 /-! ## The seven-colour control: `Row134BaseUA` spends six colours -/
 
 /-- **`Row134BaseUA`'s seven-colour form is false**: the seven-brick map's corner `0` is a cubic trichromatic vertex of a valid
-seven-coloured map of the plane with no point of `F(M) ∪ R(M)` in `B̄(0, 2)` and no unit arc anywhere. So the base's six colours are
-load-bearing, and the hypothesis is not true for a reason that ignores the colour count. -/
+seven-coloured map of the plane with no point of `F(M) ∪ R(M)` in `B̄(0, 2)`, no unit arc anywhere, and no tile enclosing another (its tiles are
+open rectangles, whose closures have connected, unbounded complements: `UnenclosedC 0`, FS131-E4's added hypothesis). So the base's six colours
+are load-bearing, and the hypothesis is not true for a reason that ignores the colour count. -/
 theorem not_row134BaseUA_seven :
-    ¬ ∀ (F : ArcMap 7) (u : ℂ), F.Valid → F.Covers u 2 → F.IsCubicTrichromatic u → F.BaseHyp u → F.NoInertNear u → False := by
+    ¬ ∀ (F : ArcMap 7) (u : ℂ), F.Valid → F.Covers u 2 → F.IsCubicTrichromatic u → F.BaseHyp u → F.NoInertNear u →
+      F.UnenclosedC u → False := by
   sorry
 
 end HadwigerNelson.Plane

@@ -26,10 +26,13 @@ composition (`plans/FS112-derivation.md`'s header; `data/fs114/claims.md` § 0),
   itself"). Reflexive and transitive.
 * **The base's hypothesis** (`BaseHyp u`): the closed disc of radius `2` about `u` holds no point of `F(M) ∪ R(M)`; and
   **no inert unit arc centred within `1`** (`NoInertNear u`), the state after FS112-N3-BASE's pre-bend.
+* **Enclosure** (FS131-E4, inventory item 227): `UnenclosedC u` — no tile of a colour carried at `u` has a tile at `u` in a bounded component
+  of the complement of its closure; `Unenclosed v` — the same for every tile (E4-OUTERMOST's conclusion; it implies `UnenclosedC v`).
 * **`Row134BaseUA`**: wave 5's intermediate `Prop` (inventory item 197) — row 134's base at a cubic trichromatic vertex, read on a valid
-  six-coloured fragment covering `B̄(u, 2)`, unit arcs allowed, after the inert pre-bend: `BaseHyp u` is impossible. It is **proved in
-  wave 5** (`row134BaseUA`, `Plane/ValidMap/Dense`: FS112-N3-BASE's walk), over the pieces of `[SokolovVoronov2025]` the walk uses by
-  statement, which are the only named outside hypotheses.
+  six-coloured fragment covering `B̄(u, 2)`, unit arcs allowed, after the inert pre-bend, at a vertex no tile of whose colours encloses a
+  tile at it (`UnenclosedC u`, FS131-E4's repair (b)): `BaseHyp u` is impossible. It is **proved in wave 5** (`row134BaseUA`,
+  `Plane/ValidMap/BaseDense`: FS112-N3-BASE's walk, its eleventh point from `UnenclosedC u` by E4-RIM); no piece of
+  `[SokolovVoronov2025]` enters it by statement (`plans/FS131-w5base-kernel-plan.md` § 2.1).
 -/
 
 namespace HadwigerNelson.Plane
@@ -92,17 +95,32 @@ def BaseHyp (u : ℂ) : Prop := Disjoint (closedBall u 2) (F.fourSet ∪ F.repSe
 first bent toward their centres"). -/
 def NoInertNear (u : ℂ) : Prop := ∀ P ∈ closedBall u 1, ∀ θ₁ θ₂, ¬ F.Inert P θ₁ θ₂
 
+/-- **No tile of a colour of `u` encloses a tile at `u`** (FS131-E4 E4-RIM's hypothesis): for every tile `T` of a colour carried at `u` and every tile
+`S` whose closure holds `u`, each point of `S` off `cl T` lies in an unbounded component of `(cl T)ᶜ`. Without it the base's eleventh point is open
+(`plans/FS131-E4-derivation.md` E4-Q1, E4-Q2). -/
+def UnenclosedC (u : ℂ) : Prop :=
+  ∀ c ∈ F.coloursAt u, ∀ T S, F.TileOf c T → F.IsTile S → u ∈ closure S →
+    ∀ y ∈ S \ closure T, ¬ Bornology.IsBounded (connectedComponentIn (closure T)ᶜ y)
+
+/-- **No tile encloses a tile at `v`** (E4-OUTERMOST's conclusion; it implies `UnenclosedC v`). -/
+def Unenclosed (v : ℂ) : Prop :=
+  ∀ T S, F.IsTile T → F.IsTile S → v ∈ closure S →
+    ∀ y ∈ S \ closure T, ¬ Bornology.IsBounded (connectedComponentIn (closure T)ᶜ y)
+
 end ArcMap
 
 /-- **`Row134BaseUA`** — wave 5's intermediate statement of row 134's base with unit arcs (inventory items 196–197; not an outside
 hypothesis): **in a valid six-coloured fragment covering `B̄(u, 2)`, a cubic trichromatic vertex `u` with no point of `F(M) ∪ R(M)` in
-`B̄(u, 2)` and no inert unit arc centred within `1` of `u` does not exist.** Proved in wave 5 as `row134BaseUA` (`Plane/ValidMap/Dense`):
+`B̄(u, 2)`, no inert unit arc centred within `1` of `u`, and no tile of a colour of `u` enclosing a tile at `u` does not exist.** The last
+hypothesis (`UnenclosedC u`) is FS131-E4's repair (b) (inventory item 227): the walk's eleventh point is proved from it (E4-RIM), and open without
+it. Proved in wave 5 as `row134BaseUA` (`Plane/ValidMap/BaseDense`):
 FS112-N3-BASE's walk — `[SokolovVoronov2025]` Cor. 1's argument as FS-110 repaired it (FS110-CB, -CD, -CE, CUSP-BASE) with each use of
 Condition 5 replaced by the walked steps (FS112-N3-PAIRS, -N3-FAIL, -N3-ANTI, -N3-NOBOTH, -N3-COR3, -ROTHEX, FS114-BV-HEX); the pieces of
 the paper the walk uses by statement enter that theorem as named outside `Prop`s. It spends six colours: its seven-colour form is false
 (`not_row134BaseUA_seven`). -/
 def Row134BaseUA : Prop :=
-  ∀ (F : ArcMap 6) (u : ℂ), F.Valid → F.Covers u 2 → F.IsCubicTrichromatic u → F.BaseHyp u → F.NoInertNear u → False
+  ∀ (F : ArcMap 6) (u : ℂ), F.Valid → F.Covers u 2 → F.IsCubicTrichromatic u → F.BaseHyp u → F.NoInertNear u →
+    F.UnenclosedC u → False
 
 namespace ArcMap
 
@@ -167,6 +185,13 @@ theorem IsModification.trans {M M' : ArcMap k} (h₁ : F.IsModification M) (h₂
     have hM : 4 ≤ (M.coloursAt x).ncard := hx.trans (Set.ncard_le_ncard h2 (Set.toFinite _))
     exact h2.trans (h₁.coloursAt_subset x hM)
 
+/-! ## Enclosure -/
+
+/-- **No tile enclosing a tile at `v` implies none of `v`'s colours does** (by definition: `UnenclosedC` restricts `Unenclosed`'s `T` to the
+tiles of colours carried at `v`). -/
+theorem Unenclosed.unenclosedC {v : ℂ} (h : F.Unenclosed v) : F.UnenclosedC v :=
+  fun _ _ T S hT hS hv y hy => h T S hT.1 hS hv y hy
+
 end ArcMap
 
 /-! ### Spec examples -/
@@ -221,6 +246,22 @@ example (j : Fin 2) (u : ℂ) : (ArcMap.const univ isOpen_univ j).NoInertNear u 
   have hmem : ringPt P θ₁ ∈ ringArc P θ₁ θ₂ := ⟨θ₁, ⟨le_rfl, h12.le⟩, rfl⟩
   have := hsub hmem
   simp [ArcMap.Γ, ArcMap.const] at this
+
+/-- On the one-colour plane no tile encloses anything: its one tile is the plane, whose closure leaves no point outside (a spec example for
+`Unenclosed`, and through `Unenclosed.unenclosedC` for `UnenclosedC`). -/
+example (j : Fin 2) (v : ℂ) : (ArcMap.const univ isOpen_univ j).UnenclosedC v := by
+  apply Unenclosed.unenclosedC
+  rintro T S ⟨x, hx, rfl⟩ - - y ⟨-, hy⟩
+  have hU : (ArcMap.const univ isOpen_univ j).interiorPts = univ := by simp
+  simp only [hU, connectedComponentIn_univ, PreconnectedSpace.connectedComponent_eq_univ, closure_univ] at hy
+  exact absurd (mem_univ y) hy
+
+/-- **Adversary**: `UnenclosedC` reads the bounded components — a tile `S` at `v` with a point `y` off `cl T` in a bounded component of
+`(cl T)ᶜ`, for `T` of a colour at `v`, refutes it (a spec example: the definition is not vacuous in its conclusion). -/
+example {k : ℕ} (F : ArcMap k) (v : ℂ) {c : Fin k} (hc : c ∈ F.coloursAt v) {T S : Set ℂ} (hT : F.TileOf c T) (hS : F.IsTile S)
+    (hv : v ∈ closure S) {y : ℂ} (hy : y ∈ S \ closure T) (hb : Bornology.IsBounded (connectedComponentIn (closure T)ᶜ y)) :
+    ¬ F.UnenclosedC v :=
+  fun h => h c hc T S hT hS hv y hy hb
 
 /-- A point that is not a chain vertex has an empty run (a spec example for `stuckRun`). -/
 example {k : ℕ} (F : ArcMap k) (v : ℂ) (α : ℝ) (h : ¬ F.IsChainVertex v) : F.stuckRun v α = ∅ := by
