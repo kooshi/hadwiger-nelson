@@ -1033,6 +1033,45 @@ log): all twelve `[propext, Classical.choice, Quot.sound]`, `fin3_adj` none. **N
 **Re-pricing** (first hard leaf): about 70k tokens including the readback; three iteration passes on a scratch file importing `BaseSteps` (compiling only
 `LocalStructure` into the scratch mirror: a purely additive change leaves its dependents' oleans loadable, iteration only).
 
+## Stage 31 — SAVED (FS131-I4k): `fail_colours`, `anti`, `pair_ii`; `pair_i` held (a GAP, ruled); 7 `sorry` left in `BaseSteps` and `UnitArc`
+
+**The vote, refactored** (children in the same section, now moved before N3-PAIRS so that `pair_ii` can read them): `stripHolds_of_two_branches` (two germs
+with branch points strictly on one side of `ω(q)` at one radius make the strip hold) with `exists_branch_on_circle_of_not_stripHolds` over it;
+`IsSectorChart.exists_isRingArc_of_along` (the arc of `Γ` along a germ tangent to `ω(q)`, ending at `u`, its interior points that germ's branch points —
+`fail_leavingCentre`'s tail, now shared); `exists_along_of_side` (if both bounding germs of a sector stay weakly on one side of `ω(q)`, one lies along it:
+off that each meets `ω(q)` at one radius at most, so at some radius both are strictly on one side); `closure_sector_subset_of_side` (**the crossing at a
+vertex**: a colour of `u` approaching `x` from inside `ω(u)` confines its sector's closure to `B̄(x, 1)`, from outside to `{1 ≤ dist · x}`);
+`exists_colour_near` (finitely many colours: a colour of `u` occurring near `q` on one side for every `ε` approaches `q` on that side).
+
+**`fail_colours` (FS112-N3-FAIL, the colours) proved.** (1), (3) from `¬ StripHolds` by `exists_colour_near`. (2): a colour `f i` of `u` inside at `q` confines
+sector `i` to `B̄(q, 1)`, hence (open) to `B(q, 1)`; of its two bounding germs one lies along `ω(q)` (`exists_along_of_side`, the outer strip would hold
+otherwise); the arc along it has a branch point of that germ, in the closure of sector `i`, as an interior point, so `f i` is its inner colour. (4) mirrors it.
+Read against § 8.2 and the row: same statement (the row's "exactly" read as the proof's "only", as the docstring says).
+
+**`anti` (FS112-N3-ANTI) proved**, with no second-order formula: `u` is the midpoint of the antipodes, so `|b − x|² + |b − y|² = 2|b − u|² + 2` puts every
+branch point at a positive radius beyond `ω(x)` or beyond `ω(y)`; two of the three germs are beyond the same one, they bound all three sectors, and the sector
+of the M-in colour there is confined to its closed disc (`closure_sector_subset_of_side`). The strip is not read. Same statement.
+
+**`pair_ii` (FS112-N3-PAIRS (ii)) proved**, with neither the strip nor N3-FAIL: `exists_side_germs_of_transversal` (with `ζ = (x − u₁) conj(x − y) = P + iQ`,
+`|ringPt y (φ₀ + t) − u₁|² = 1 + 2(1 − P)(1 − cos t) + 2Q sin t`, and `htr` is `Q ≠ 0`) gives a half of `ω(y)` strictly inside `ω(u₁)` and one strictly outside;
+`half_colour_or_bothKind` on each: an interior point of the half has a colour outside `{a, b}` (N-E1 at `y`), else the half is in `Γ` and a constant-sides
+sub-arc has side colours in `{a, b}` (both-kind at `y`, the second disjunct) or one outside. So `x` carries a colour `d₁` of `u₁` from inside and `d₂` from
+outside, distinct (one sector would lie on `ω(x)`, `interior_sphere`), and `{a, b, d₁, d₂}` are four colours at `x`. **Binders renamed**: `h₂`, `hc₂`, `hy`
+are unread, now `_h₂`, `_hc₂`, `_hy` (accepted by the coordinator mid-job, ruling 185's reason). Read against § 8.2: same statement.
+
+**`pair_i` held — a GAP in N3-I, sent to the coordinator and ruled.** The derivation's step "a failure at `(x, y)` would recur at nearby unit pairs" fails
+when `(x, y)` is an isolated unit pair of `ω(u₁) × ω(u₂)`: `|u₁ − u₂| = 3`, `u₁, x, y, u₂` collinear at spacing `1` (then `ω(y)` is tangent to `ω(u₁)` at
+`x` from outside, and CB's strip argument reaches only an outer strip). A local picture (`u₁ = 0, x = 1, y = 2, u₂ = 3`, both strips holding on the inner
+side, colour `a` inside each) shows no contradiction; no full counterexample was built. **Ruling (inventory item 258)**: `pair_i` gains `(h3 : dist u₁ u₂ < 3)`.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 459 names, 7 added; `tools/fs131_k4_decls.py --check` exit 0. **Statements**: new `tools/fs131_i4_stmts.py`
+(every theorem's text up to `:=` against a revision): against `cd0fe492`, 141 old, 157 new, 16 added, 0 removed, 1 changed — `pair_ii`'s binders,
+allowed; its plant (`fail_leavingCentre`'s hypothesis `¬ StripHolds` edited to `StripHolds`) fired `CHANGED fail_leavingCentre`, exit 1, and the restored file
+reads exit 0. **Axioms** (`data/fs131/i4/axioms-i4k-31.txt`, this stage's oleans, not a gate log): the three leaves, `fail_leavingCentre` and the eight new
+children, all `[propext, Classical.choice, Quot.sound]`. Build: "build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings", exit 0
+(`build/gate/build/20261004T215858Z-2731754.log`; driver log `data/fs131/i4/build-i4k-stage31.log`): 17 distinct `declaration uses sorry` (BaseSteps 2,
+Contact 10, UnitArc 5), no other warning. Cost: about 60k tokens for the three leaves and the refactor, two iteration passes.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -1170,3 +1209,9 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
 - Children (no row), the standard three: `BranchGerms.mem_closure_sector_of_lt`, `sq_dist_branchPt`, `germ_circle_real`, `germ_eq_of_two_on_circle`,
   `branchPt_two_sin`, `ArcMap.IsCubicTrichromatic.chart`, `ArcMap.IsSectorChart.exists_ball_branch`, `ArcMap.exists_branch_on_circle_of_not_stripHolds`;
   `BranchGerms.fin3_adj` (no axioms, `decide`).
+- FS112-N3-FAIL, the colours: `ArcMap.fail_colours` — the standard three. Read against § 8.2: same statement.
+- FS112-N3-ANTI: `ArcMap.anti` — the standard three. Read against § 8.2 and the row: same statement (at a cubic trichromatic `u`, no two points of `ω(u)` at
+  distance `2` are both M-in).
+- FS112-N3-PAIRS (ii): `ArcMap.pair_ii` — the standard three. Read against § 8.2: same statement; binders `h₂`, `hc₂`, `hy` renamed `_h₂`, `_hc₂`, `_hy` (accepted).
+- Children (no row), the standard three: `ArcMap.stripHolds_of_two_branches`, `ArcMap.IsSectorChart.exists_isRingArc_of_along`, `ArcMap.exists_along_of_side`,
+  `ArcMap.exists_colour_near`, `ArcMap.closure_sector_subset_of_side`, `ArcMap.exists_side_germs_of_transversal`, `ArcMap.half_colour_or_bothKind`.
