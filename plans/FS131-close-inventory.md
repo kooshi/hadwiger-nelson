@@ -169,3 +169,38 @@ reason by the close.*
 24. **Brief FS131-K2b, wave 2 finished** (`debruijn`, Opus; `data/fs131/briefs/FS131-K2b-wave2-finish.md`): the six example rows, the obligation-modeling
     pass over all 28, item 23's question, the handoff brought to 28 rows; continues K2's record on `fs131-w2`. Gated PASS after one fix (its quotation's
     source lives on the branch; the source line now names the worktree's copy). Source: this commit.
+25. **FS131-K3 handed back at stage 2, harness ≈ 501k** (report `data/fs131/reports/FS131-K3.md`; branch `fs131-w3` at `7d89b077`, commits checked): wave 3's
+    foundation sorry-free and green (Plane/LocalMap, LocalMapExamples, CircleColouring; 45 records clean; two new example maps `halfPlane2`, `quadRing`;
+    RINGBAND's two models inhabited); no statement defect, and no definitional choice changes a row (§ 2.2); the reading every row inherits — "a tile of
+    colour c" read as the colour class `region c`, equal to the literal tile reading once `finite_tiles_near` is proved (§ 2.1). Stage 3 (the 20 rows'
+    skeleton) is designed, not written: the record's section "For stage 3". Successor: FS131-K3b.
+26. **Generalizations** (K3, "For stage 3"): FS116-N1-GERM-R in every valid map (its covering hypothesis idle); FS116-V4-TWIST without the covering
+    hypothesis and "when p is a vertex"; FS116-N1-TWIST-D at any point; FS116-N1-GERM-S, -RING-Q-PRIME-S, FS129-SR2-TOUCHW, FS116-N1-QFREE4,
+    FS116-N2-FIVERING at any k for their count of absent colours (the arguments read the count, not six); FS116-N1-ECHO with radius 2, essential boundary
+    and density idle; FS129-OR1-WHOLE's R₂ clause for any arc whose inner side is one tile; FS116-S1-EXIT on the left derivative at `t_e` alone;
+    FS116-Y4-FLANK's edge clause for any tiles bordering the two edges. For the record job's errata.
+27. **Ruling — wave 3 takes the local-structure lemmas forward from wave 4** (K3's held decision): finitely many tiles meet a small disc about any point;
+    the germ dichotomy; in a simple map each tile's cone at a point is one closed interval — as `Plane/LocalStructure` on `fs131-w3`. Alternative weighed:
+    state the tile-literal conclusions only after wave 4, leaving FS116-V5-U1's last clause and FS129-OR1-WHOLE's covering clause unstated in wave 3. Why:
+    the lemmas are the local foundation both waves read, wave 4 follows wave 3 in the order, and a row stated in two halves across waves is a seam a
+    later reader can miss. Wave 4's planner is told its foundation list shrinks by these three. Confidence: high.
+28. **Slip, the coordinator's** (found by K3): FS131-K3's brief named four rows merging into wave 3; there are six — FS112-SIX into FS116-N2-FIVERING and
+    FS129-SR1-SIXQ, and FS116-RING-TRANSFER-C into FS116-N2-FIVERING and -N2-SIXRING were missed, because Keryx's script matched `merged_into` by exact
+    equality and both have two targets. K3 carried both. Rule for later briefs: split `merged_into` on `;` (the check is now run that way, this commit's
+    session). FS131-K2's brief was built by the same script; its wave's merges re-checked with the split: none missed.
+29. **Wave 1 landed** (FS131-I1, report `data/fs131/reports/FS131-I1.md`; `main` fast-forwarded to `d59ffcdf`): 14 rows, 28 leaves proved, no statement
+    changed, no axiom, no `native_decide`. **Announcement rule met, by Keryx's reading of the saved logs on the landed tree** (worktree `fs131-w1`):
+    build 440/440, all targets up to date after the last merge (`build/gate/build/20261004T060308Z-1505660.log`); axioms 1,301 records — 1,285 clean, 11
+    axiom-free, 5 declared purchases, no `sorryAx` (`build/gate/axioms/20261004T055957Z-1493361.log`); vacuity declarations=7624, refutations-skipped=319,
+    sites 279, vacuous 0 (`build/gate/vacuity/20261004T060000Z-1493724.log`); self-test OK. Read-back receipt: `Plane.dist_lt_one_of_forall_dist_ne_one`
+    (FS106-DIAM (i)) read against its row — a preconnected set with no unit pair has all distances < 1, the row's "diameter ≤ 1" strengthened (G2).
+    Counts filed from I1's drafts: `CLAUDE.md` § Trust ledger and § The gate, `scripts/vacuity-baseline.txt`'s header; both digests read "match".
+    Held (kernel), 14 rows: FS106-DIAM, FS106-TS-C, FS129-SR2-CLOSURE, FS111-V0-ID1, FS129-SR2-HULLSET, FS111-M-HULL2, FS111-M2-INT, FS111-M2-ZERO,
+    FS116-V4-CHORD, FS129-SR1-TWOCIRC, FS121-D1-XCORNER, FS129-SA1-NOAFF-K (carrying FS84-S1-S1e), FS129-SA1-FALC-FAN, FS129-SA1-FALC-DICHO-K —
+    each as stated in `plans/FS131-kernel-plan.md` § 6.2, on the standard three axioms. Ledger regrades wait for the milestone's filing.
+30. **Tool defect — the vacuity scan does not track `AeColouring k` as a carrier** (I1; evidence `build/i1-vac-plant.log` in the worktree `fs131-w1`): a
+    planted theorem over `(c : AeColouring 1)` raised no site, though `IsEmpty (AeColouring 1)` is in the evidence. No wave-1 statement is affected (every
+    binder at a variable k); wave 2's statements over `AeColouring` and partial colourings would pass unchecked. Owed before wave 2 lands: extend
+    `scripts/Vacuity.lean`. Job FS131-T1.
+31. **I1's held items**: the scratch backups in the worktree's `build/` (`build/i1-backup`, `build/i1-*.log`; gitignored) — default: kept until the
+    milestone's close, then removed with the worktree; the worktree `fs131-w1` itself — kept as the home of wave 1's gate logs until the close.
