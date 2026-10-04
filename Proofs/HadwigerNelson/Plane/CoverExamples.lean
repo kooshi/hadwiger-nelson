@@ -1009,13 +1009,124 @@ theorem disc7_isMUA (a : Fin 7) : IsMUA (disc7 a) := by
   refine measure_mono fun θ hθ => ?_
   exact mem_iUnion.2 ⟨m, mem_iUnion.2 ⟨n, mem_iUnion.2 ⟨hc, hθ⟩⟩⟩
 
+/-- **A class is closed**: its discs are a locally finite family (a ball of radius `1` meets the discs of the centres whose lattice
+coordinates lie in a bounded box). A child of `essSupport_disc7` and `volume_frontier_disc7` (FS131-I2f). -/
+theorem isClosed_disc7 (a : Fin 7) : IsClosed (disc7 a) := by
+  let f : ℤ × ℤ → Set ℂ := fun q => if disc7Col q.1 q.2 = a then closedBall (disc7Centre q.1 q.2) (1 / 2) else ∅
+  have hU : disc7 a = ⋃ q, f q := by
+    ext x
+    simp only [disc7, f, mem_iUnion, Prod.exists]
+    constructor
+    · rintro ⟨m, n, hc, hx⟩; exact ⟨m, n, by rw [if_pos hc]; exact hx⟩
+    · rintro ⟨m, n, hx⟩
+      split_ifs at hx with hc
+      · exact ⟨m, n, hc, hx⟩
+      · exact hx.elim
+  rw [hU]
+  refine LocallyFinite.isClosed_iUnion (fun z => ?_) (fun q => ?_)
+  · refine ⟨ball z 1, ball_mem_nhds z one_pos, ?_⟩
+    refine (Set.finite_Icc (⌊2 * z.re / √3 - 2 * z.im / 3⌋ - 5, ⌊4 * z.im / 3⌋ - 3)
+      (⌊2 * z.re / √3 - 2 * z.im / 3⌋ + 5, ⌊4 * z.im / 3⌋ + 3)).subset ?_
+    rintro ⟨m, n⟩ ⟨w, hwf, hw⟩
+    simp only [f] at hwf
+    split_ifs at hwf with hc
+    · rw [mem_closedBall] at hwf
+      rw [mem_ball] at hw
+      have hd : dist (disc7Centre m n) z < 3 / 2 := by linarith [dist_triangle (disc7Centre m n) w z, dist_comm w (disc7Centre m n)]
+      have hre : |(disc7Centre m n).re - z.re| < 3 / 2 := lt_of_le_of_lt (by
+        have := Complex.abs_re_le_norm (disc7Centre m n - z); simpa [dist_eq_norm] using this) hd
+      have him : |(disc7Centre m n).im - z.im| < 3 / 2 := lt_of_le_of_lt (by
+        have := Complex.abs_im_le_norm (disc7Centre m n - z); simpa [dist_eq_norm] using this) hd
+      have h3 : (0 : ℝ) < √3 := by positivity
+      have h3s : √3 * √3 = 3 := Real.mul_self_sqrt (by norm_num)
+      have hcre : (disc7Centre m n).re = √3 / 2 * (m + n / 2) := by
+        simp [disc7Centre, tri, e_pi_div_three]; ring
+      have hcim : (disc7Centre m n).im = 3 / 4 * n := by
+        simp [disc7Centre, tri, e_pi_div_three]; ring_nf; rw [Real.sq_sqrt (by norm_num)]; ring
+      rw [hcre, abs_lt] at hre
+      rw [hcim, abs_lt] at him
+      have hn1 : (n : ℝ) < 4 * z.im / 3 + 2 := by linarith
+      have hn2 : 4 * z.im / 3 - 2 < (n : ℝ) := by linarith
+      have hm1 : (m : ℝ) < 2 * z.re / √3 - 2 * z.im / 3 + 4 := by
+        rw [div_eq_mul_inv, ← sub_neg]
+        have : (m : ℝ) - (2 * z.re * (√3)⁻¹ - 2 * z.im / 3 + 4) =
+            ((√3 / 2 * (m + n / 2) - z.re) * 2 / √3) - n / 2 + 2 * z.im / 3 - 4 := by field_simp; ring
+        rw [this]
+        have : (√3 / 2 * (m + n / 2) - z.re) * 2 / √3 < 3 / √3 := by
+          rw [div_lt_div_iff_of_pos_right h3]; linarith
+        have h33 : 3 / √3 = √3 := by field_simp; linarith
+        nlinarith [Real.sqrt_lt' (show (0:ℝ) < 2 by norm_num) |>.2 (show (3:ℝ) < 2 ^ 2 by norm_num)]
+      have hm2 : 2 * z.re / √3 - 2 * z.im / 3 - 4 < (m : ℝ) := by
+        rw [div_eq_mul_inv]
+        have : (m : ℝ) - (2 * z.re * (√3)⁻¹ - 2 * z.im / 3 - 4) =
+            ((√3 / 2 * (m + n / 2) - z.re) * 2 / √3) - n / 2 + 2 * z.im / 3 + 4 := by field_simp; ring
+        rw [← sub_pos, this]
+        have : -(3 / √3) < (√3 / 2 * (m + n / 2) - z.re) * 2 / √3 := by
+          rw [← neg_div, div_lt_div_iff_of_pos_right h3]; linarith
+        have h33 : 3 / √3 = √3 := by field_simp; linarith
+        nlinarith [Real.sqrt_lt' (show (0:ℝ) < 2 by norm_num) |>.2 (show (3:ℝ) < 2 ^ 2 by norm_num)]
+      have f1 := Int.floor_le (2 * z.re / √3 - 2 * z.im / 3)
+      have f2 := Int.lt_floor_add_one (2 * z.re / √3 - 2 * z.im / 3)
+      have f3 := Int.floor_le (4 * z.im / 3)
+      have f4 := Int.lt_floor_add_one (4 * z.im / 3)
+      have l1 : m < ⌊2 * z.re / √3 - 2 * z.im / 3⌋ + 5 := by exact_mod_cast (show (m : ℝ) < (⌊2 * z.re / √3 - 2 * z.im / 3⌋ : ℝ) + 5 by linarith)
+      have l2 : ⌊2 * z.re / √3 - 2 * z.im / 3⌋ - 5 < m := by exact_mod_cast (show (⌊2 * z.re / √3 - 2 * z.im / 3⌋ : ℝ) - 5 < (m : ℝ) by linarith)
+      have l3 : n < ⌊4 * z.im / 3⌋ + 3 := by exact_mod_cast (show (n : ℝ) < (⌊4 * z.im / 3⌋ : ℝ) + 3 by linarith)
+      have l4 : ⌊4 * z.im / 3⌋ - 3 < n := by exact_mod_cast (show (⌊4 * z.im / 3⌋ : ℝ) - 3 < (n : ℝ) by linarith)
+      exact ⟨⟨by omega, by omega⟩, ⟨by omega, by omega⟩⟩
+    · exact hwf.elim
+  · simp only [f]; split_ifs
+    · exact isClosed_closedBall
+    · exact isClosed_empty
+
 /-- A union of closed discs of radius `1/2` about a discrete lattice coset is its own support. -/
 theorem essSupport_disc7 (a : Fin 7) : essSupport (disc7 a) = disc7 a := by
-  sorry
+  apply subset_antisymm
+  · intro x hx
+    rw [← (isClosed_disc7 a).closure_eq, Metric.mem_closure_iff]
+    intro r hr
+    obtain ⟨y, hy⟩ := nonempty_of_measure_ne_zero (hx r hr).ne'
+    exact ⟨y, hy.1, by rw [dist_comm]; exact mem_ball.1 hy.2⟩
+  · intro x hx r hr
+    obtain ⟨m, n, hc, hxc⟩ : ∃ m n, disc7Col m n = a ∧ x ∈ closedBall (disc7Centre m n) (1 / 2) := by
+      simpa [disc7] using hx
+    set c := disc7Centre m n
+    set l : ℝ := min 1 (r / 2) with hl
+    have hl0 : 0 < l := lt_min one_pos (by linarith)
+    set y : ℂ := x + (l : ℂ) * (c - x)
+    have hxc' : dist x c ≤ 1 / 2 := hxc
+    have hsub : ball y (l / 4) ⊆ disc7 a ∩ ball x r := by
+      intro w hw
+      rw [mem_ball] at hw
+      have hyx : dist y x = l * dist x c := by
+        simp only [y, dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs,
+          abs_of_pos hl0]
+        rw [norm_sub_rev]
+      have hyc : dist y c = (1 - l) * dist x c := by
+        have : y - c = ((1 - l : ℝ) : ℂ) * (x - c) := by simp only [y]; push_cast; ring
+        rw [dist_eq_norm, this, norm_mul, Complex.norm_real, Real.norm_eq_abs,
+          abs_of_nonneg (by linarith [min_le_left 1 (r / 2)]), ← dist_eq_norm]
+      refine ⟨mem_iUnion.2 ⟨m, mem_iUnion.2 ⟨n, mem_iUnion.2 ⟨hc, mem_closedBall.2 ?_⟩⟩⟩, mem_ball.2 ?_⟩
+      · have := dist_triangle w y c
+        nlinarith [min_le_left 1 (r / 2), dist_nonneg (x := x) (y := c)]
+      · have := dist_triangle w y x
+        nlinarith [min_le_right 1 (r / 2), dist_nonneg (x := x) (y := c)]
+    exact lt_of_lt_of_le (measure_ball_pos volume y (by positivity)) (measure_mono hsub)
 
 /-- The frontier of a class lies on the boundary circles: null. -/
 theorem volume_frontier_disc7 (a : Fin 7) : volume (frontier (disc7 a)) = 0 := by
-  sorry
+  have hN : volume (⋃ (m : ℤ) (n : ℤ), sphere (disc7Centre m n) (1 / 2)) = 0 :=
+    measure_iUnion_null fun m => measure_iUnion_null fun n => Measure.addHaar_sphere volume _ _
+  refine measure_mono_null (fun x hx => ?_) hN
+  rw [frontier, (isClosed_disc7 a).closure_eq] at hx
+  obtain ⟨hx, hxi⟩ := hx
+  obtain ⟨m, n, hc, hxc⟩ : ∃ m n, disc7Col m n = a ∧ x ∈ closedBall (disc7Centre m n) (1 / 2) := by
+    simpa [disc7] using hx
+  refine mem_iUnion.2 ⟨m, mem_iUnion.2 ⟨n, mem_sphere.2 (le_antisymm hxc ?_)⟩⟩
+  by_contra hlt
+  push Not at hlt
+  refine hxi (mem_interior.2 ⟨ball (disc7Centre m n) (1 / 2), fun w hw => ?_, isOpen_ball, mem_ball.2 hlt⟩)
+  exact mem_iUnion.2 ⟨m, mem_iUnion.2 ⟨n, mem_iUnion.2 ⟨hc, ball_subset_closedBall hw⟩⟩⟩
 
 /-- A class is invariant under the colour lattice, spanned by `c(1, 2)` and `c(−3, 1)`. -/
 theorem disc7_periodic (a : Fin 7) (x : ℂ) :

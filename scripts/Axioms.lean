@@ -2352,6 +2352,7 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.sq9_openSq_subset
 #print axioms HadwigerNelson.Plane.triQ_cover_tri
 #print axioms HadwigerNelson.Plane.tri_cover
+#print axioms HadwigerNelson.Plane.isClosed_disc7
 
 #eval IO.println "=== PURCHASED ==="
 
