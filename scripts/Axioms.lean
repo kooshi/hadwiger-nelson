@@ -2250,6 +2250,12 @@ colourings and `χ_CP`. Definitions and their spec lemmas; no backlog row. No na
 #print axioms HadwigerNelson.Plane.measurableSet_grundyS
 #print axioms HadwigerNelson.Plane.unitPairsNull_grundyS
 #print axioms HadwigerNelson.Plane.measurableSet_grundyTaken
+#print axioms HadwigerNelson.Plane.isOpen_faceQ
+#print axioms HadwigerNelson.Plane.sq_lt_of_abs_lt'
+#print axioms HadwigerNelson.Plane.abs_sub_lt_of_abs_lt
+#print axioms HadwigerNelson.Plane.real_no_unit
+#print axioms HadwigerNelson.Plane.frame_dist_sq
+#print axioms HadwigerNelson.Plane.mem_faceFailClass_iff
 
 #eval IO.println "=== PURCHASED ==="
 

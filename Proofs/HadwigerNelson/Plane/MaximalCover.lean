@@ -159,7 +159,7 @@ theorem AeColouring.exists_fill (c : AeColouring k) {j : Fin k} {x : ℂ} {η : 
       have t1 := dist_triangle p x (p + e θ)
       rw [dist_comm x (p + e θ)] at t1
       linarith
-  · exact (c.unitPairsNull i).mono sdiff_subset
+  · exact (c.unitPairsNull i).mono ssdiff_subset
 
 /-- **FS111-M2-COV**: a `k`-tuple of measurable sets is a maximal admissible cover iff each coordinate is a MUA set and
 their union has full measure. -/
@@ -818,7 +818,7 @@ theorem measurableSet_grundyTaken (c : AeColouring k) (m : ℕ) : MeasurableSet 
   | succ m ih =>
     have hS : MeasurableSet (grundyS c m \ grundyTaken c m) := (measurableSet_grundyS c m).diff ih
     have hn : UnitPairsNull (grundyS c m \ grundyTaken c m) :=
-      (unitPairsNull_grundyS c m).mono diff_subset
+      (unitPairsNull_grundyS c m).mono sdiff_subset
     have := isMaxIn_maxIn ih hS hn (fun x hx => hx.2)
     exact ih.union this.2.2.1
 
@@ -843,7 +843,7 @@ theorem grundyCls_isMaxIn (c : AeColouring k) (m : ℕ) :
     IsMaxIn (grundyTaken c m) (grundyS c m \ grundyTaken c m) (grundyCls c m) := by
   exact
   isMaxIn_maxIn (measurableSet_grundyTaken c m) ((measurableSet_grundyS c m).diff (measurableSet_grundyTaken c m))
-    ((unitPairsNull_grundyS c m).mono diff_subset) (fun x hx => hx.2)
+    ((unitPairsNull_grundyS c m).mono sdiff_subset) (fun x hx => hx.2)
 
 /-- **The shadow clause** (stage 4.2's argument): a measurable set inside the same complement and disjoint from a maximal
 `Aᵢ` has its support in the unit shadow of `supp Aᵢ` — a support point off the shadow has a ball whose unit circles miss

@@ -428,38 +428,26 @@ theorem exists_selection {F : Fin k → ℂ → ℝ} (hF : ∀ j, Measurable (F 
   sorry
 
 theorem bandNull_preimage_add {A : Set ℂ} {ε : ℝ} (h : BandNull A ε) (v : ℂ) : BandNull ((· + v) ⁻¹' A) ε := by
-  sorry
+  let E : ℂ × ℂ ≃ᵐ ℂ × ℂ := MeasurableEquiv.prodCongr (MeasurableEquiv.addRight v) (MeasurableEquiv.addRight v)
+  have hE : MeasurePreserving E (volume.prod volume) (volume.prod volume) :=
+    (measurePreserving_add_right volume v).prod (measurePreserving_add_right volume v)
+  have : bandPairSet ((· + v) ⁻¹' A) ε = E ⁻¹' bandPairSet A ε := by
+    ext ⟨a, b⟩
+    simp only [bandPairSet, mem_setOf_eq, mem_preimage, E, MeasurableEquiv.prodCongr, MeasurableEquiv.coe_mk,
+      Equiv.prodCongr_apply, MeasurableEquiv.addRight, Equiv.coe_addRight, Prod.map_apply, dist_add_right]
+  rw [BandNull, this, hE.measure_preimage_equiv]; exact h
 
 theorem unitPairsNull_preimage_add {A : Set ℂ} (h : UnitPairsNull A) (v : ℂ) : UnitPairsNull ((· + v) ⁻¹' A) := by
-  sorry
-
-/-! ### `exists_face_fails` (ruling, inventory item 86): the explicit class -/
-
-/-- FACE-SHARP's failure class: the half-box, the far box and a box `Q` just beyond `x + e θ`. -/
-def faceFailClass (x : ℂ) (θ ε g ε' ρ δ : ℝ) : Set ℂ :=
-  halfBox x θ ε ∪ farBox x θ g ε' ρ ∪ {z | ∃ s t : ℝ, 1 < s ∧ s < 1 + δ ∧ |t| < δ ∧ z = x + e θ * (s + t * I)}
-
-/-- **No unit pair at all** in the failure class, for small `ε, ε', δ`: each piece has diameter `< 1` (`2ρ < 1`);
-half-box to far box `< 1` (`g² + ρ² < 1`); far box to `Q` `< 1` (`(1 − g)² + ρ² < 1`, i.e. `ρ² < 2g − g²`); half-box to
-`Q` `> 1`. -/
-theorem exists_faceFailClass_noUnitPairs {g ρ : ℝ} (hg : 0 < g) (hρ : 0 < ρ) (hlt : ρ ^ 2 < 2 * g - g ^ 2)
-    (hρ2 : 2 * ρ < 1) (hgρ : g ^ 2 + ρ ^ 2 < 1) (x : ℂ) (θ : ℝ) :
-    ∃ ε ε' δ : ℝ, 0 < ε ∧ 0 < ε' ∧ 0 < δ ∧
-      ∀ z ∈ faceFailClass x θ ε g ε' ρ δ, ∀ w ∈ faceFailClass x θ ε g ε' ρ δ, dist z w ≠ 1 := by
-  sorry
-
-/-- A measurable set with no unit pair is one class of an `AeColouring 10` (the rest coloured by `sq9`). -/
-theorem exists_aeColouring_of_noUnitPairs {D : Set ℂ} (hD : MeasurableSet D) (h : ∀ z ∈ D, ∀ w ∈ D, dist z w ≠ 1) :
-    ∃ c : AeColouring 10, c.cls 9 = D := by
-  sorry
-
-theorem measurableSet_faceFailClass (x : ℂ) (θ ε g ε' ρ δ : ℝ) : MeasurableSet (faceFailClass x θ ε g ε' ρ δ) := by
-  sorry
-
-/-- `x + e θ` is in the support of the failure class (every ball about it meets `Q` in an open set). -/
-theorem add_e_mem_essSupport_faceFailClass (x : ℂ) (θ ε g ε' ρ : ℝ) {δ : ℝ} (hδ : 0 < δ) :
-    x + e θ ∈ essSupport (faceFailClass x θ ε g ε' ρ δ) := by
-  sorry
+  have hmp : MeasurePreserving (fun q : ℂ × ℝ => (q.1 + v, q.2)) (volume.prod arcLength) (volume.prod arcLength) :=
+    (measurePreserving_add_right volume v).prod (MeasurePreserving.id _)
+  let E : ℂ × ℝ ≃ᵐ ℂ × ℝ := MeasurableEquiv.prodCongr (MeasurableEquiv.addRight v) (MeasurableEquiv.refl ℝ)
+  have hE : MeasurePreserving E (volume.prod arcLength) (volume.prod arcLength) := hmp
+  have : unitPairSet ((· + v) ⁻¹' A) = E ⁻¹' unitPairSet A := by
+    ext ⟨u, θ⟩
+    simp only [unitPairSet, mem_setOf_eq, mem_preimage, E, MeasurableEquiv.prodCongr, MeasurableEquiv.coe_mk,
+      Equiv.prodCongr_apply, MeasurableEquiv.addRight, Equiv.coe_addRight, Prod.map_apply]
+    simp [add_right_comm]
+  rw [UnitPairsNull, this, hE.measure_preimage_equiv]; exact h
 
 /-! ### `face`: circles about the points near `y` meet the boxes -/
 
@@ -848,6 +836,211 @@ theorem circles_meet_boxes_at_normal {x : ℂ} {θ ε ε' g ρ : ℝ} (hε : 0 <
     obtain ⟨φ, hφ⟩ := exists_phi_of_dist_eq_one hzd
     exact ⟨φ, Or.inr ⟨σ, τ, h1, h2, h3, by rw [hφ]⟩⟩
 
+
+/-! ### `exists_face_fails` (ruling, inventory item 86): the explicit class -/
+
+/-- FACE-SHARP's failure class: the half-box, the far box and a box `Q` just beyond `x + e θ`. -/
+def faceFailClass (x : ℂ) (θ ε g ε' ρ δ : ℝ) : Set ℂ :=
+  halfBox x θ ε ∪ farBox x θ g ε' ρ ∪ {z | ∃ s t : ℝ, 1 < s ∧ s < 1 + δ ∧ |t| < δ ∧ z = x + e θ * (s + t * I)}
+
+theorem sq_lt_of_abs_lt' {a b : ℝ} (h : |a| < b) : a ^ 2 < b ^ 2 := by
+  have := abs_nonneg a; nlinarith [sq_abs a]
+
+/-- Piece conditions of the failure class in frame coordinates. -/
+def PieceH (ε σ τ : ℝ) : Prop := -ε < σ ∧ σ < 0 ∧ |τ| < ε
+
+/-- The far-box piece, in frame coordinates. -/
+def PieceF (g ε' ρ σ τ : ℝ) : Prop := g < σ ∧ σ < g + ε' ∧ |τ| < ρ
+
+/-- The `Q` piece, in frame coordinates. -/
+def PieceQ (δ σ τ : ℝ) : Prop := 1 < σ ∧ σ < 1 + δ ∧ |τ| < δ
+
+theorem abs_sub_lt_of_abs_lt {a b c d : ℝ} (h1 : |a| < c) (h2 : |b| < d) : |a - b| < c + d :=
+  lt_of_le_of_lt (abs_sub _ _) (by linarith)
+
+theorem real_no_unit {g ρ ε ε' δ : ℝ} (hg : 0 < g) (hε' : 0 < ε')
+    (hHH : 5 * ε ^ 2 < 1) (hFF : ε' ^ 2 + 4 * ρ ^ 2 < 1) (hQQ : 5 * δ ^ 2 < 1)
+    (hHF : (g + ε' + ε) ^ 2 + (ρ + ε) ^ 2 < 1) (hFQ : (1 - g + δ) ^ 2 + (ρ + δ) ^ 2 < 1)
+    (hg' : ε' < 1 - g) :
+    (∀ σ τ σ' τ', PieceH ε σ τ → PieceH ε σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) ∧
+    (∀ σ τ σ' τ', PieceH ε σ τ → PieceF g ε' ρ σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) ∧
+    (∀ σ τ σ' τ', PieceH ε σ τ → PieceQ δ σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) ∧
+    (∀ σ τ σ' τ', PieceF g ε' ρ σ τ → PieceF g ε' ρ σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) ∧
+    (∀ σ τ σ' τ', PieceF g ε' ρ σ τ → PieceQ δ σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) ∧
+    (∀ σ τ σ' τ', PieceQ δ σ τ → PieceQ δ σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    have h1 : (σ - σ') ^ 2 < ε ^ 2 := sq_lt_of_abs_lt' (abs_lt.2 ⟨by linarith, by linarith⟩)
+    have h2 : (τ - τ') ^ 2 < (ε + ε) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
+    intro h; nlinarith
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    have h1 : (σ - σ') ^ 2 < (g + ε' + ε) ^ 2 := sq_lt_of_abs_lt' (abs_lt.2 ⟨by linarith, by linarith⟩)
+    have h2 : (τ - τ') ^ 2 < (ε + ρ) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
+    intro h; nlinarith
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    intro h; nlinarith [sq_nonneg (τ - τ')]
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    have h1 : (σ - σ') ^ 2 < ε' ^ 2 := sq_lt_of_abs_lt' (abs_lt.2 ⟨by linarith, by linarith⟩)
+    have h2 : (τ - τ') ^ 2 < (ρ + ρ) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
+    intro h; nlinarith
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    have h1 : (σ - σ') ^ 2 < (1 - g + δ) ^ 2 := sq_lt_of_abs_lt' (abs_lt.2 ⟨by linarith, by linarith⟩)
+    have h2 : (τ - τ') ^ 2 < (ρ + δ) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
+    intro h; nlinarith
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    have h1 : (σ - σ') ^ 2 < δ ^ 2 := sq_lt_of_abs_lt' (abs_lt.2 ⟨by linarith, by linarith⟩)
+    have h2 : (τ - τ') ^ 2 < (δ + δ) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
+    intro h; nlinarith
+
+theorem frame_dist_sq (x : ℂ) (θ σ τ σ' τ' : ℝ) :
+    dist (x + e θ * ((σ : ℂ) + (τ : ℂ) * I)) (x + e θ * ((σ' : ℂ) + (τ' : ℂ) * I)) ^ 2 =
+      (σ - σ') ^ 2 + (τ - τ') ^ 2 := by
+  have : x + e θ * ((σ : ℂ) + (τ : ℂ) * I) - (x + e θ * ((σ' : ℂ) + (τ' : ℂ) * I)) =
+      e θ * (((σ - σ' : ℝ) : ℂ) + ((τ - τ' : ℝ) : ℂ) * I) := by push_cast; ring
+  rw [dist_eq_norm, this, norm_mul, norm_e, one_mul, norm_sq_re_im]
+
+theorem mem_faceFailClass_iff {x : ℂ} {θ ε g ε' ρ δ : ℝ} {z : ℂ} (hz : z ∈ faceFailClass x θ ε g ε' ρ δ) :
+    ∃ σ τ : ℝ, z = x + e θ * ((σ : ℂ) + (τ : ℂ) * I) ∧
+      (PieceH ε σ τ ∨ PieceF g ε' ρ σ τ ∨ PieceQ δ σ τ) := by
+  rcases hz with (⟨s, t, hs, hs', ht, rfl⟩ | ⟨s, t, hs, hs', ht, rfl⟩) | ⟨s, t, hs, hs', ht, rfl⟩
+  · exact ⟨-s, t, by push_cast; ring_nf, Or.inl ⟨by linarith, by linarith, ht⟩⟩
+  · exact ⟨s, t, rfl, Or.inr (Or.inl ⟨hs, hs', ht⟩)⟩
+  · exact ⟨s, t, rfl, Or.inr (Or.inr ⟨hs, hs', ht⟩)⟩
+
+/-- **No unit pair at all** in the failure class, for small `ε, ε', δ`: each piece has diameter `< 1` (`2ρ < 1`);
+half-box to far box `< 1` (`g² + ρ² < 1`); far box to `Q` `< 1` (`(1 − g)² + ρ² < 1`, i.e. `ρ² < 2g − g²`); half-box to
+`Q` `> 1`. -/
+theorem exists_faceFailClass_noUnitPairs {g ρ : ℝ} (hg : 0 < g) (hρ : 0 < ρ) (hlt : ρ ^ 2 < 2 * g - g ^ 2)
+    (hρ2 : 2 * ρ < 1) (hgρ : g ^ 2 + ρ ^ 2 < 1) (x : ℂ) (θ : ℝ) :
+    ∃ ε ε' δ : ℝ, 0 < ε ∧ 0 < ε' ∧ 0 < δ ∧
+      ∀ z ∈ faceFailClass x θ ε g ε' ρ δ, ∀ w ∈ faceFailClass x θ ε g ε' ρ δ, dist z w ≠ 1 := by
+  have hg1 : g < 1 := by nlinarith
+  have hc1 : 0 < 1 - 4 * ρ ^ 2 := by nlinarith
+  have hc2 : 0 < 1 - g ^ 2 - ρ ^ 2 := by linarith
+  have hc3 : 0 < 2 * g - g ^ 2 - ρ ^ 2 := by linarith
+  set c : ℝ := min (1 - 4 * ρ ^ 2) (min (1 - g ^ 2 - ρ ^ 2) (2 * g - g ^ 2 - ρ ^ 2)) with hc
+  have hc0 : 0 < c := lt_min hc1 (lt_min hc2 hc3)
+  have hcc1 : c ≤ 1 - 4 * ρ ^ 2 := min_le_left _ _
+  have hcc2 : c ≤ 1 - g ^ 2 - ρ ^ 2 := (min_le_right _ _).trans (min_le_left _ _)
+  have hcc3 : c ≤ 2 * g - g ^ 2 - ρ ^ 2 := (min_le_right _ _).trans (min_le_right _ _)
+  have hcle : c ≤ 1 := by nlinarith [sq_nonneg ρ]
+  set η : ℝ := c / 12 with hη
+  have hη0 : 0 < η := by positivity
+  have hη1 : η ≤ 1 / 12 := by rw [hη]; linarith
+  have hρ1 : ρ < 1 / 2 := by linarith
+  have hη12 : η = c / 12 := hη
+  have hF : 5 * η ^ 2 < 1 := by nlinarith
+  have hFF : η ^ 2 + 4 * ρ ^ 2 < 1 := by
+    have : η ^ 2 ≤ η * (1 / 12) := by nlinarith
+    linarith
+  have hHF : (g + η + η) ^ 2 + (ρ + η) ^ 2 < 1 := by
+    have e : (g + η + η) ^ 2 + (ρ + η) ^ 2 = g ^ 2 + ρ ^ 2 + η * (4 * g + 5 * η + 2 * ρ) := by ring
+    have : η * (4 * g + 5 * η + 2 * ρ) ≤ η * 6 := mul_le_mul_of_nonneg_left (by linarith) hη0.le
+    rw [e]; linarith
+  have hFQ : (1 - g + η) ^ 2 + (ρ + η) ^ 2 < 1 := by
+    have e : (1 - g + η) ^ 2 + (ρ + η) ^ 2 =
+        1 - (2 * g - g ^ 2 - ρ ^ 2) + η * (2 * (1 - g) + 2 * η + 2 * ρ) := by ring
+    have : η * (2 * (1 - g) + 2 * η + 2 * ρ) ≤ η * 4 := mul_le_mul_of_nonneg_left (by linarith) hη0.le
+    rw [e]; linarith
+  have hg' : η < 1 - g := by
+    have h1 : 1 - g ^ 2 = (1 - g) * (1 + g) := by ring
+    have h2 : (1 - g) * (1 + g) ≤ (1 - g) * 2 := mul_le_mul_of_nonneg_left (by linarith) (by linarith)
+    linarith [sq_nonneg ρ]
+  obtain ⟨hHH', hHF', hHQ', hFF', hFQ', hQQ'⟩ := real_no_unit (g := g) (ρ := ρ) (ε := η) (ε' := η) (δ := η)
+    hg hη0 hF hFF hF hHF hFQ hg'
+  refine ⟨η, η, η, hη0, hη0, hη0, ?_⟩
+  intro z hz w hw hd
+  obtain ⟨σ, τ, rfl, hp⟩ := mem_faceFailClass_iff hz
+  obtain ⟨σ', τ', rfl, hp'⟩ := mem_faceFailClass_iff hw
+  have hsq := frame_dist_sq x θ σ τ σ' τ'
+  rw [hd, one_pow] at hsq
+  have hsq' : (σ' - σ) ^ 2 + (τ' - τ) ^ 2 = 1 := by nlinarith
+  rcases hp with h1 | h1 | h1 <;> rcases hp' with h2 | h2 | h2
+  · exact hHH' _ _ _ _ h1 h2 hsq.symm
+  · exact hHF' _ _ _ _ h1 h2 hsq.symm
+  · exact hHQ' _ _ _ _ h1 h2 hsq.symm
+  · exact hHF' _ _ _ _ h2 h1 hsq'
+  · exact hFF' _ _ _ _ h1 h2 hsq.symm
+  · exact hFQ' _ _ _ _ h1 h2 hsq.symm
+  · exact hHQ' _ _ _ _ h2 h1 hsq'
+  · exact hFQ' _ _ _ _ h2 h1 hsq'
+  · exact hQQ' _ _ _ _ h1 h2 hsq.symm
+
+/-- A measurable set with no unit pair is one class of an `AeColouring 10` (the rest coloured by `sq9`). -/
+theorem exists_aeColouring_of_noUnitPairs {D : Set ℂ} (hD : MeasurableSet D) (h : ∀ z ∈ D, ∀ w ∈ D, dist z w ≠ 1) :
+    ∃ c : AeColouring 10, c.cls 9 = D := by
+  classical
+  let col : ℂ → Fin 10 := fun z => if z ∈ D then Fin.last 9 else Fin.castSucc (sq9Col z)
+  have hmeas : Measurable col :=
+    Measurable.ite hD measurable_const ((measurable_of_finite (Fin.castSucc (n := 9))).comp measurable_sq9Col)
+  have hlast : col ⁻¹' {Fin.last 9} = D := by
+    ext z; simp only [mem_preimage, mem_singleton_iff, col]
+    split_ifs with hz
+    · simp [hz]
+    · simp only [hz, iff_false]
+      intro h
+      have h1 := congrArg Fin.val h
+      have h2 := (sq9Col z).2
+      simp at h1; omega
+  refine ⟨⟨col, hmeas, fun j => ?_⟩, ?_⟩
+  · refine Fin.lastCases ?_ (fun j' => ?_) j
+    · rw [hlast]
+      have : unitPairSet D = ∅ := by
+        ext ⟨z, θ⟩
+        simp only [unitPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+        intro hz hw
+        exact h _ hz _ hw (by simp [dist_eq_norm])
+      rw [UnitPairsNull, this, measure_empty]
+    · refine (sq9.unitPairsNull j').mono ?_
+      intro z hz
+      simp only [mem_preimage, mem_singleton_iff, col] at hz ⊢
+      split_ifs at hz with hzD
+      · exfalso
+        have h1 := congrArg Fin.val hz
+        have h2 := j'.2
+        simp at h1; omega
+      · exact Fin.castSucc_injective _ hz
+  · exact hlast
+
+/-- The box `Q` of the failure class is open. -/
+theorem isOpen_faceQ (x : ℂ) (θ δ : ℝ) :
+    IsOpen {z : ℂ | ∃ s t : ℝ, 1 < s ∧ s < 1 + δ ∧ |t| < δ ∧ z = x + e θ * (s + t * I)} := by
+  have h1 : IsOpen {w : ℂ | 1 < w.re} := isOpen_lt continuous_const Complex.continuous_re
+  have h2 : IsOpen {w : ℂ | w.re < 1 + δ} := isOpen_lt Complex.continuous_re continuous_const
+  have h3 : IsOpen {w : ℂ | |w.im| < δ} := isOpen_lt (continuous_abs.comp Complex.continuous_im) continuous_const
+  have := isOpen_rotImage x θ (h1.inter (h2.inter h3))
+  convert this using 1
+  ext z
+  constructor
+  · rintro ⟨s, t, hs, hs', ht, rfl⟩
+    exact ⟨s + t * I, ⟨by simpa using hs, by simpa using hs', by simpa using ht⟩, rfl⟩
+  · rintro ⟨w, ⟨h1, h2, h3⟩, rfl⟩
+    refine ⟨w.re, w.im, h1, h2, h3, ?_⟩
+    congr 2; apply Complex.ext <;> simp
+
+theorem measurableSet_faceFailClass (x : ℂ) (θ ε g ε' ρ δ : ℝ) : MeasurableSet (faceFailClass x θ ε g ε' ρ δ) := by
+  exact (((isOpen_halfBox x θ ε).union (isOpen_farBox x θ g ε' ρ)).union (isOpen_faceQ x θ δ)).measurableSet
+
+/-- `x + e θ` is in the support of the failure class (every ball about it meets `Q` in an open set). -/
+theorem add_e_mem_essSupport_faceFailClass (x : ℂ) (θ ε g ε' ρ : ℝ) {δ : ℝ} (hδ : 0 < δ) :
+    x + e θ ∈ essSupport (faceFailClass x θ ε g ε' ρ δ) := by
+  intro r hr
+  set η : ℝ := min δ r / 2 with hη
+  have hη0 : 0 < η := by positivity
+  have hηδ : η < δ := by have := min_le_left δ r; linarith
+  have hηr : η < r := by have := min_le_right δ r; linarith
+  have hz : x + e θ * ((1 + η : ℝ) + (0 : ℝ) * I) ∈ ball (x + e θ) r ∩
+      {z : ℂ | ∃ s t : ℝ, 1 < s ∧ s < 1 + δ ∧ |t| < δ ∧ z = x + e θ * (s + t * I)} := by
+    refine ⟨?_, 1 + η, 0, by linarith, by linarith, by simpa using hδ, rfl⟩
+    rw [mem_ball, dist_eq_norm]
+    have : x + e θ * (((1 + η : ℝ) : ℂ) + ((0 : ℝ) : ℂ) * I) - (x + e θ) = ((η : ℝ) : ℂ) * e θ := by
+      push_cast; ring
+    rw [this, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hη0]
+    exact hηr
+  have hpos := (isOpen_ball.inter (isOpen_faceQ x θ δ)).measure_pos volume ⟨_, hz⟩
+  refine lt_of_lt_of_le hpos (measure_mono ?_)
+  intro w hw
+  exact ⟨Or.inr hw.2, hw.1⟩
 
 /-- **FS111-V0-RESCALE**: if an a.e.-proper measurable `k`-colouring exists, a tight one exists. -/
 theorem AeColouring.exists_tight (c : AeColouring k) : ∃ c' : AeColouring k, c'.Tight := by
@@ -1247,6 +1440,14 @@ theorem exists_face_fails {g ρ : ℝ} (hg : 0 < g) (hρ : 0 < ρ) (hlt : ρ ^ 2
     ∃ (k : ℕ) (c : AeColouring k) (j : Fin k) (x : ℂ) (θ ε ε' : ℝ), 0 < ε ∧ 0 < ε' ∧
       volume (halfBox x θ ε \ c.cls j) = 0 ∧ volume (farBox x θ g ε' ρ \ c.cls j) = 0 ∧
       ∃ y ∈ essSupport (c.cls j), dist x y = 1 := by
-  sorry
+  obtain ⟨ε, ε', δ, hε, hε', hδ, hno⟩ := exists_faceFailClass_noUnitPairs hg hρ hlt hρ2 hgρ 0 0
+  have hD := measurableSet_faceFailClass 0 0 ε g ε' ρ δ
+  obtain ⟨c, hc⟩ := exists_aeColouring_of_noUnitPairs hD hno
+  refine ⟨10, c, 9, 0, 0, ε, ε', hε, hε', ?_, ?_, e 0, ?_, ?_⟩
+  · rw [hc]; exact measure_mono_null (fun z hz => (hz.2 (Or.inl (Or.inl hz.1))).elim) measure_empty
+  · rw [hc]; exact measure_mono_null (fun z hz => (hz.2 (Or.inl (Or.inr hz.1))).elim) measure_empty
+  · rw [hc]
+    simpa using add_e_mem_essSupport_faceFailClass 0 0 ε g ε' ρ hδ
+  · simp [dist_eq_norm]
 
 end HadwigerNelson.Plane
