@@ -282,3 +282,75 @@ sorry-free from them. 130 lines that are exactly `sorry` remain (`Plane/CoverExa
 (priced 40k) about 12k with two rounds. Lane A's 19 children took about 55k in all against K2d's 445k Sonnet-rate table; SQ9's five about 20k
 against 85k. On this evidence the Opus rate is roughly a quarter to a sixth of the Sonnet table, the gain largest on plumbing whose Mathlib API
 exists (`Localization.subalgebra.ofField` replaced K2d's planned hand-built residue map).
+
+## Stage 9 — SAVED (FS131-I2f): BAND (1) closed; DISC7's first two clauses closed; the build is green; 117 `sorry` left — handoff
+
+**Closed since Stage 8** (statements untouched):
+- BAND (1), `Plane/CoverExamples` (all 3): `IsMUA.exists_shadow_point`, `circle_meets_halfBox_of_ne` (the circle about `y = m + e θ · w` is
+  parametrized rationally, `q(k) = 2k(σk + ρ, ρk − σ)/(1 + k²)`, `|q − w| = 1`, with `k` chosen by the sign of `ρ = w.im`; `ρ = 0` forces
+  `w = −1` by `y ≠ m + e θ`), and the assembly of `IsMUA.add_normal_mem_essSupport` (shadow points at `τ_k = δ/(k + 2)`, a convergent
+  subsequence in `closedBall m (δ + 1)`, the limit at distance `1` from `m`, then `dist_ne_one_of_mem_interior_densitySet` against the
+  half-box). **So FS111-M3-BAND is sorry-free** (its other clauses were closed in Stage 2).
+- DISC7, `Plane/CoverExamples` (9 of 12): `measurableSet_disc7`, `disc7Col_eq_dist_ge` (`a ≡ −3b (mod 7)` makes `a² + ab + b² = 7(7t² − 5tb + b²)`,
+  positive, so `≥ 7`), `disc7_unitPair_mem_sphere`, `disc7_cover`, `disc7_colour_near` (the colour lattice is `μ·Λ`, `μ = 1 + 2ω`, `|μ|² = 7`;
+  the centre `(a + p − 2q, 2p + 3q)` through `ω² = ω − 1`), `phi_closedBall_pos` (an open window of angles about `arg (c − p)`,
+  `arcLength_ge_of_Ioo`), `disc7_isMUA`, `essSupport_disc7`, `volume_frontier_disc7`; and R7's child `unitPairsNull_of_unitPair_mem`
+  (`unitPairSet A ⊆ N ×ˢ univ`, `Measure.prod_prod`). **So `disc7_isMaximalCover` and `disc7_isRegularMUA` (FS111-M2-DISC7's first two
+  clauses) are sorry-free**; `disc7_lens` was already; `disc7_upperDensity` still needs `disc7_periodic`, `volume_disc7_cell`,
+  `disc7_linearIndependent` and `Plane/Slack`'s `upperDensity_of_periodic`.
+- New children, stated before use, recorded in `scripts/Axioms.lean` block "FS131-I2f": `triQ_cover_tri` (the Voronoi split of the lower
+  triangle; certificates `1/3 − Q = (a + b)/6 + (au + bv)/2` and its two images), `tri_cover` (the unit triangular lattice's covering radius
+  `1/√3`), `isClosed_disc7` (the discs as a `LocallyFinite` family over `ℤ × ℤ`).
+
+**Build**: `./scripts/build.sh` under the slot at `aed439ba`: **OK** — 443 of 443 batches, 2 modules rebuilt (`Plane/CoverExamples`, `Proofs`),
+6 modules with warnings, every warning `declaration uses 'sorry'` (359 lines, 0 others), 8 m 35 s (`build/gate/build/20261004T114615Z-3230511.log`).
+`Arith/PlaceHom` and `Arith/FalconerField` built with no warning in the Stage 8 build (`✔` in `build/gate/build/20261004T112218Z-3062460.log`)
+and are unchanged since. **Axioms**, printed from the built library with `lake env lean data/fs131/i2/i2f-axioms.lean` (not the gate's
+`scripts/axioms.sh`, which fails on the remaining `sorry` by design): every line `[propext, Classical.choice, Quot.sound]`, no `sorryAx`
+(`data/fs131/i2/i2f-axioms.txt`). Negative control: the same print of `disc7_upperDensity`, still `sorry`, reads
+`[propext, sorryAx, Classical.choice, Quot.sound]` — the check can fire. The gate (axioms.sh, vacuity with wave 2's carriers) was not run.
+
+**Count for the trial** (inventory item 103), this session: **37 lines that are exactly `sorry` closed** (lane A 19, SQ9 5, BAND (1) 3,
+DISC7 9, R7's `unitPairsNull_of_unitPair_mem` 1) and **5 children added and proved**; **5 rows made sorry-free** (FS129-SA1-PLACE-HOM,
+FS129-SA1-NOAFF-FIELDS, FS129-SA1-FALC-RES, FS111-W-SQ9, FS111-M3-BAND) and two of FS111-M2-DISC7's clauses. 154 → 117.
+
+**Re-pricing, overall.** About 120k tokens of this session's context went to proofs (the rest to reading the briefs, plans and the build
+waits): lane A 55k, SQ9 20k, BAND (1) 15k, DISC7 30k. K2c/K2d's Sonnet-rate prices for the same items total about 780k. The ratio held at
+roughly one sixth across plumbing (lane A), measure-theoretic assembly (BAND) and explicit geometry (DISC7); no child was dearer than priced.
+Most children compiled on the first or second try; the errors were tactic-level (a `rw` order, a `linarith` with an underdetermined `show`),
+never a missing lemma.
+
+**Still `sorry`** (lines that are exactly `sorry`): `Plane/Slack` 46 (unchanged: `exists_tight` and its children, the three limits and SUPK's
+children, the modification and `chiM0_le_chiCP`, `tendsto_not_kept`, the compactness children and the attainment lemma, `exists_not_uniform_kept`),
+`Plane/CoverExamples` 44 (R7 10: `measurable_r7Col`, `r7Col_mem_tile`, `r7UpCol_ne_r7DownCol`, `r7Up_unitPair`, `r7Up_sep`, `r7Down_dist_ne_one`,
+`volume_iUnion_sphere_tri`, `r7_boundary_lattice`, `r7_boundary_offLattice`, `r7_phi_pos_up`/`_down` (11 with both); DISC7 3; (G1) 4; HC/IRREG 26
+plus the three assemblies), `Arith/Dyadic` 12, `Plane/FalconerReduction` 9, `Plane/YesLimit` 4, `Plane/Cover` 2.
+**Not touched**: `exists_not_uniform_kept`'s fringe formula (§ 17.1's open point) — no message to Keryx was needed, since I did not reach it.
+
+**For the next implementer.**
+- Order by row closure per child: DISC7's last three plus `upperDensity_of_periodic` close FS111-M2-DISC7; (G1)'s four close `g1Bounds_hcGap`;
+  `Plane/Cover`'s two plus `FalconerReduction`'s nine close FALC-RED. `volume_iUnion_sphere_tri` is a two-line copy of `disc7_isMUA`'s `hN`.
+- Iteration: a private symlink overlay of the worktree's oleans (`cp -rs .lake/build/lib/lean/Proofs <dir>/ol/`), `LEAN_PATH=<dir>/ol:$(lake env
+  printenv LEAN_PATH)`, `lean -DautoImplicit=false -DrelaxedAutoImplicit=false`; compile a changed upstream module into the overlay with `-o`/`-i`.
+  **Do not reuse the parent session's shared `scratchpad/ol`**: it already holds real (non-symlink) oleans from earlier wave-2 sessions
+  (`Plane/Cover.olean` among them), stale against the branch.
+- The Mathlib pin deprecates `push_neg` (use `push Not at h`, or `simp only [not_or, not_exists, not_and]`) and `mul_le_mul_left'` (here `gcongr`);
+  both are warnings and the landing's build must have none.
+
+## Theorems this phase proved (FS131-I2f, additions)
+
+Axioms read from `data/fs131/i2/i2f-axioms.txt` (printed from the built library at `aed439ba`, not from the gate's saved log; the gate was not run):
+- `HadwigerNelson.Arith.exists_placeHom` — `[propext, Classical.choice, Quot.sound]` — FS129-SA1-PLACE-HOM (§ 4.1's read-back: reduction mod `𝔭`
+  on `𝒪_{F,𝔭}` as every `a/s ∈ V` with `φ(a/s)·s̄ = ā`; the coset formula as `h x − h y = (φ Δre, φ Δim)`).
+- `HadwigerNelson.Arith.noAffine_fields` — the standard three — FS129-SA1-NOAFF-FIELDS.
+- `HadwigerNelson.Arith.falconerFan_five_field` — the standard three — FS129-SA1-FALC-RES (i).
+- `HadwigerNelson.Arith.falconerFan_five_placeHom` — the standard three — FS129-SA1-FALC-RES (ii), for every `(V, φ)` with PLACE-HOM's properties.
+- `HadwigerNelson.Plane.sq9_tight_saturated` — the standard three — FS111-W-SQ9 (half-open squares for the row's closed ones).
+- `HadwigerNelson.Plane.IsMUA.add_normal_mem_essSupport` — the standard three — FS111-M3-BAND (1), § 7.3's wider form.
+- `HadwigerNelson.Plane.disc7_isMaximalCover`, `HadwigerNelson.Plane.disc7_isRegularMUA` — the standard three — FS111-M2-DISC7, first two clauses.
+- Children: `upperDensityAt_pos_of_balls`, `sq9_openSq_subset`, `triQ_cover_tri`, `tri_cover`, `isClosed_disc7`, `unitPairsNull_of_unitPair_mem`,
+  `phi_closedBall_pos` — the standard three.
+
+## Drafts for the front page (FS131-I2f)
+
+None: the gate was not run (117 `sorry` remain in wave 2's modules), and wave 2's vacuity carriers are not yet registered.
