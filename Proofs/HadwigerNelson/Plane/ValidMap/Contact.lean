@@ -2,6 +2,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.Basic
 import Proofs.HadwigerNelson.Plane.Tiles
 import Proofs.HadwigerNelson.Plane.SVMap
 import Proofs.HadwigerNelson.Plane.ValidMap.Cone
+import Proofs.HadwigerNelson.Plane.ValidMap.Moves
 
 /-!
 # Contacts, the allowed cone, shadows and the local moves (FS-110's N3–N4 rounds)
@@ -1499,7 +1500,7 @@ theorem exists_shave (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ�
     ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (closedBall v ρ) ∧ F'.RingArcsWithin F ∧
       (F.Condition5 → F'.Condition5) ∧
       F'.HasSectors v c n ∧ F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ sphere v ρ, (F'.coloursAt x).ncard ≤ 3 := by
-  sorry
+  exact exists_shave_aux hF hv hn hH h1 h2 hg hh hσ₁ hσ₂ hclear
 
 /-- **FS110-N4-SHAVE**, N4-RAY: two `c`-horns along one ray merge — the region between them is `c`-clear near `v`, and
 recolouring it gives a valid map, agreeing with `F` off a small disc about `v` and creating no unit arc, in which `c` has one
@@ -1512,7 +1513,7 @@ theorem exists_rayMerge (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ �
     ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (closedBall v ρ) ∧ F'.RingArcsWithin F ∧
       (F.Condition5 → F'.Condition5) ∧
       F'.HasSectors v c n ∧ F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ sphere v ρ, (F'.coloursAt x).ncard ≤ 3 := by
-  sorry
+  exact exists_rayMerge_aux hF hv hn h23 hH hH' h1 h4
 
 /-! ## FS110-W-MERGE -/
 
