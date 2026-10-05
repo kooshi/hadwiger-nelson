@@ -2346,3 +2346,32 @@ reason by the close.*
      Woodall's landing job, the order is T-GRAPH, the second wave-5 implementer (in its own worktree, on files I5e's brief does not touch, split by me at its
      launch), IMM2, then `bend_away`'s job. Why: T-GRAPH is unstarted and would become the longest path; MERGE and `bend_away` have no consumer. Confidence:
      medium. In flight after I5e's launch: 1 (G4) + 1 (IP2) + 1 (IX1) + 1 (I5e) = 4.
+
+300. **FS131-IP2 handed back** (Stage 8 SAVED, harness ≈ 460k by the task notice; record `fs131-w5p`'s `plans/FS131-planar-implementation.md`, Stages 6–8;
+     report `data/fs131/reports/FS131-IP2.md`; commits `7da12d5e` … `02e85433`, pushed). **Results, each [kernel] on the standard three or fewer, statements
+     unchanged**: **FS131-E4's E4-OUTERMOST whole**, `ArcMap.exists_unenclosed_or_bad` (`Plane/ValidMap/BaseDense`), over `ArcMap.exists_outermost` (steps 1–2)
+     and `ArcMap.unenclosed_of_rim_vertex` (step 5); KP's owed child `ArcMap.not_encloses_of_hull_eq` (false for open connected sets in general — Wada's lakes —
+     and proved through the map's regularity); `ArcMap.exists_ball_two_tiles` (points with three tiles in their closure are isolated, so a compact disc holds
+     finitely many vertices — BG's hardest finiteness); 12 more children. **E4-RIM**, `ArcMap.exists_eleventh_of` (so `BaseCtx.exists_eleventh`), proved but on
+     `sorryAx` through this branch's copy of `noBoth` (FS112-N3-NOBOTH), which is proved on `fs131-w4` (`UnitArc` l. 507) and arrives when this branch takes wave
+     4. **The 60° question: yes** — a two-colour exit that is a return comes back within 60° of `r(θ)` (FS110-CD Lemma R step 1; CB D5 item 1 as FS110-CE quotes
+     it: ends less than 1 apart, a chord below 1 an angle below 60°). **Receipt** (Keryx): the eight commits exist and `origin/fs131-w5p` is `02e85433`; the
+     stage-8 build log (`build/gate/build/20261005T013504Z-210720.log`) ends "Build completed successfully (5403 jobs)", 0 warnings other than `sorry`; `sorry`
+     by grep: `PlaneTopology` 1 (IX1's leaf), `MapTopology` 1 (`exists_far_end`), `MapGraph` 8, `BaseWalk` 15, `BaseDense` 3; `data/fs131/ip/axioms-ip2-stage8.txt`
+     parsed by script: 20 records, 16 on the standard three, `BranchGerms.next_injective` on `[propext, Quot.sound]` (a subset), and the 3 controls (`noBoth`,
+     `exists_eleventh_of`, `localDense`) on `sorryAx`. **Generalization**: `exists_outermost` needs no convex hulls (a disc holding a set's closure holds its
+     hull), so KP's `compl_outerDom_subset_convexHull` is unneeded. **Correction owed** (to IP1's record § 5.4): strictness goes through the isolation of
+     three-tile points, not "finitely many vertices in a disc", and cannot be pure topology (Wada's lakes). **Route findings for `endpoint_of_far_end`** (record
+     § 7.4; not statement defects): (1) `exists_far_end`'s disjunct `q ≠ r(θ) ∧ dist q u = 1` also admits spike touches and three-colour V-out vertices, from
+     which no endpoint follows — the statement stays true (its conclusion does not mention `q`) but the proof must re-select the far end as an odd vertex of the
+     boundary graph (a strong child of `exists_far_end`); (2) at a genuine exit, `IsRetArc` needs the germs' orientation (CD § 2.4 step 2, § 3.0 item 1), a
+     Jordan-type step that may follow from the crossing lemma. **Re-price** (record § 7.3): BG + PATH 0.6–1 session; `exists_far_end` 0.3; `endpoint_of_far_end`
+     1 or more; F-LOC/CONN/INF/ONE 0.4; adversaries 0.3; the two `retArcs` 0.5; F-RING 1–2 (unmeasured). **Tool**: `tools/fs131_ip_axioms.py` (each record against
+     "standard three" or "must show `sorryAx`"; both planted faults fired). Credit: IP2, for the isolation of three-tile points and the two route findings.
+301. **Ruling: IP2's slot → FS131-IP3 on `fs131-w5p`, the planar chain continued.** Choice: IP3 takes ruling 293 (b)'s remaining order — BG with PATH,
+     `exists_far_end` with IP2's strong child (an odd vertex of the boundary graph), `endpoint_of_far_end` (the orientation step by whatever route it finds,
+     citing the crossing lemma `inter_nonempty_of_interleaved` as given if that route serves — it is FS131-IX1's, on `fs131-w5x`), F-LOC/CONN/INF/ONE, the
+     adversaries, F-RING, the two `retArcs`; and, once BG exists, it records whether the crossing lemma's route (b) through BG is cheap, so a stalled IX1 can be
+     re-routed. Alternative weighed: the queued T-GRAPH or the second wave-5 implementer in this slot. Why: this chain is the longest path to wave 5's landing,
+     and a continuation keeps the branch's state warm; the queue of item 299 (e) moves one slot later. Confidence: high. In flight after IP3's launch: 1 (G4) +
+     1 (IX1) + 1 (I5e) + 1 (IP3) = 4.
