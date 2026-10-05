@@ -1698,3 +1698,47 @@ All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5l/
   (over `cv_class`).
 
 ## Stage 36 — SAVED
+
+## Stage 37 — SAVED (FS131-I5l): `cv_exists` proved over `exists_terminal`, with no CV-HD
+
+**What this stage proves.** `cv_exists` (FS114-CV-EXISTS, `BaseDense`, its lines only) no longer uses `sorry` itself: it rests on `exists_terminal`
+(open, by statement) and `dense3`. Statement unchanged; the docstring's route sentence names the new children. No `axiom`; no `native_decide`.
+
+**The route, against FS114-CVB § 1.4** (every step went through; none failed):
+
+| CVB § 1.4 | Lean |
+|---|---|
+| `M*` (N2-TERM); suppose it has no vertex of four or more colours | `exists_terminal`; a four-colour point of `M*` would carry its colours in `F` (`IsModification.coloursAt_subset`), so `#P_cl ≤ 3` everywhere in `M*` |
+| item 2: stuck vertices exist (DENSE3; N2-TERM item 2) | `dense3` on `M*`; its point is not in `F(M*)`, so it carries a repeated colour, hence is stuck (`isStuck_of_hasRepeatedColour`: terminal), along the axis of its horns (`stuck_horns_ua`) |
+| items 1, 4: every unit arc (R2), so FLANK holds as under Condition 5 (`G_N`, `H_S` absent) | an in-type flank at a pole forces its horn arc onto the pole's unit circle (`upper_bounds_of_inType_N`), FLANK-Q's ring arc (`flankQ_upper_of_qrOnly`), both-kind there: (Q) needs four colours, (R2) needs the flank colour absent — so `¬G_N`, `¬H_S` |
+| item 5: `h` twice at `N` (and `g` twice at `S′`) | `flank_two_sectors_at_S_gen` at `S` and in the turned frame (`stuck_turned_frame`), as `cv_class`'s "None" case |
+| item 6: the chain runs on, on the same axis; bi-infinite | both neighbours stuck with `≤ 3` colours, so chain vertices (`chainVertex_neighbours_of_noFour`); the axis by `stuckAlong_of_run`; induction on `\|j\|` (`stuckRun_eq_univ_of_noFour`) |
+| item 7: N4-FIN forbids it | `exists_terminal`'s clause 3: the run is not `univ` |
+
+CVB's item 3 (CV-L0) and its `|P_cl(N)| ≤ 3` count are not needed: E5 § 3.4's general form gives the two sectors directly. `cv_exists` uses neither CV-HD
+nor C-ENDS, as its docstring and CVB say.
+
+**Children added** (`Terminal`, after `c_ends`): `chainVertex_neighbours_of_noFour`, `stuckRun_eq_univ_of_noFour`. Names checked unique by `git grep`
+over `main`, `origin/fs131-w5`, `origin/fs131-w5p`, `origin/fs131-ww`, `origin/fs131-w4mm` (each ref verified to exist, positive control
+`exists_shave` found on each); so are all of Stage 36's.
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 72149b07`: **PASS** (exit 0).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses
+'sorry'`**, exit 0, 8 min 49 s (`build/gate/build/20261005T063146Z-1980470.log`, ends "Build completed successfully (5370 jobs)"; driver log
+`data/fs131/i5l/build-stage37.log`). `BaseDense`'s `sorry` declarations: **2** (`exists_preBend`, `exists_unenclosed_or_bad`, neither mine); wave 5 **21**.
+
+**Axioms, read from this build's oleans** (`data/fs131/i5l/I5lAxioms37.lean` → `I5lAxioms37.out`, 12 GiB slot, exit 0): `chainVertex_neighbours_of_noFour`
+and `stuckRun_eq_univ_of_noFour` read `sorryAx` **only through this branch's stale `flankQ_upper`** (proved on `main`; every other input is on the
+standard three: `upper_bounds_of_inType_N`, `stuck_turned_frame`, `stuck_structure_at_axis`, `flank_two_sectors_at_S_gen`, `stuckAlong_of_run`,
+`isStuck_of_hasRepeatedColour`); `cv_exists` reads `sorryAx` (also through `exists_terminal` and `dense3`'s base); controls: `exists_terminal` reads
+`sorryAx`, `stuckAlong_of_run` the standard three. `scripts/Axioms.lean`: the two records added to the "FS131-I5h" block (`cv_exists` had its record).
+
+### Theorems this phase proved
+
+- `HadwigerNelson.Plane.ArcMap.chainVertex_neighbours_of_noFour`, `ArcMap.stuckRun_eq_univ_of_noFour` (`Plane/ValidMap/Terminal.lean`) — CVB § 1.4
+  items 4–6 (with no four-colour vertex every stuck run is bi-infinite), [kernel] over the branch's stale `flankQ_upper` (axioms `[propext, sorryAx,
+  Classical.choice, Quot.sound]` here; the standard three at the merge with `main`).
+- `ArcMap.cv_exists` (`Plane/ValidMap/BaseDense.lean`) — FS114-CV-EXISTS, proved **over** `exists_terminal` (open) and `dense3`.
+
+## Stage 37 — SAVED

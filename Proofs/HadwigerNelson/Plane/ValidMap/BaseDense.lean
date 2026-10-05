@@ -358,12 +358,34 @@ theorem dense3 {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (x : ℂ) :
 
 /-- **FS114-CV-EXISTS**: every valid six-coloured map of the plane has a vertex of at least four colours, in the map
 itself. The proof (FS114-CVB's route, `plans/FS114-CVB-verification.md` § 1.4) passes through `M*` (`exists_terminal`): with no such
-vertex, `dense3` on `M*` gives a stuck vertex whose run is bi-infinite, against N4-FIN (`n4_fin`); a four-colour vertex of `M*` carries
-its colours in the map (`IsModification.coloursAt_subset`). It uses neither CV-HD nor C-ENDS, and no strict bound (FS114-L60-WALK: over
-`l60_le`). No valid six-map of the plane is known (`GENERIC`). -/
+vertex, `dense3` on `M*` gives a stuck vertex whose run is bi-infinite (`stuckRun_eq_univ_of_noFour`: CVB § 1.4 items 4–6), against N4-FIN
+in `exists_terminal`'s clause 3 (the run is not `univ`); a four-colour vertex of `M*` carries its colours in the map
+(`IsModification.coloursAt_subset`). It uses neither CV-HD nor C-ENDS, and no strict bound (FS114-L60-WALK: over `l60_le`). No valid six-map of
+the plane is known (`GENERIC`). -/
 theorem cv_exists {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) :
     ∃ x, 4 ≤ (F.coloursAt x).ncard := by
-  sorry
+  obtain ⟨M, hMod, hMT, -, hcl3⟩ := exists_terminal hF hP
+  obtain ⟨hMF, hMP, hMTe, -⟩ := id hMT
+  have hvC : ∀ x, M.Covers x 1 := fun x z _ => by rw [hMP]; exact mem_univ z
+  by_contra hno
+  push Not at hno
+  -- `M*` has no four-colour vertex either: a modification keeps such a vertex's colours
+  have h4 : ∀ x, (M.coloursAt x).ncard ≤ 3 := fun x => by
+    by_contra hx
+    push Not at hx
+    have := Set.ncard_le_ncard (hMod.coloursAt_subset x hx) (Set.toFinite _)
+    have := hno x
+    omega
+  -- DENSE3 on `M*`: a repeated-colour vertex, stuck (terminal), with at most three colours
+  obtain ⟨y, -, hy⟩ := dense3 hMF hMP 0
+  rcases hy with ⟨-, hy4⟩ | ⟨hyd, hR⟩
+  · have := h4 y; omega
+  have hst := isStuck_of_hasRepeatedColour hMTe hyd hR
+  obtain ⟨c, m, hm, hc⟩ := hst.2.2.2
+  obtain ⟨α, κ₁, κ₂, -, -, hH, -⟩ := stuck_horns_ua hMF (hvC y) hst hm hc
+  have hSA : M.StuckAlong y α := ⟨hst, c, m, κ₁, κ₂, hm, hc, hH⟩
+  -- its run is bi-infinite (no four-colour vertex for a chain to end at), against N2-TERM's clause 3
+  exact (hcl3 y α hSA (h4 y)).1 (stuckRun_eq_univ_of_noFour hMT h4 hSA)
 
 end ArcMap
 

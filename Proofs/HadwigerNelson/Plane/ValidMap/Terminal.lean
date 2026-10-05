@@ -2426,6 +2426,97 @@ theorem c_ends {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : ℝ} (hv : 
     have := hfin (-1) (Or.inr rfl) (by simpa [sub_eq_add_neg] using h)
     simpa [sub_eq_add_neg] using this⟩
 
+/-- **With no four-colour vertex, a chain vertex's neighbours along its axis are chain vertices** (FS114-CVB § 1.4 items 4–6, CV-EXISTS's step,
+with no use of CV-HD): in a terminal valid six-coloured map with at most three colours at every point, at a vertex stuck along `e α` neither
+flank is in-type at its pole (its horn arc would be both-kind, so (Q) by `QROnly` — four colours at the pole — or (R2), whose inner colour is
+not carried there), so E5 § 3.4 (`flank_two_sectors_at_S_gen`, as in `cv_class`'s "None" case) gives the upper flank two sectors at `S` and the
+lower flank two at `N`: both neighbours carry a repeated colour, so are stuck (terminal), with at most three colours. A step of `cv_exists`'s
+refutation: no model expected (`GENERIC`; no valid six-map of the plane is known). -/
+theorem chainVertex_neighbours_of_noFour {F : ArcMap 6} (hM : F.IsTerminalMap) (h4 : ∀ x, (F.coloursAt x).ncard ≤ 3)
+    {w : ℂ} {α : ℝ} (hw : F.StuckAlong w α) :
+    F.IsChainVertex (w + e (α + π / 2)) ∧ F.IsChainVertex (w - e (α + π / 2)) := by
+  obtain ⟨hF, hP, hT, hQR⟩ := id hM
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  have hdom : ∀ x, x ∈ F.dom := fun x => by rw [hP]; exact mem_univ x
+  obtain ⟨hst, c₀, m, κ₀, κ₀', hm, hc₀, hH₀⟩ := hw
+  obtain ⟨κ₁, κ₂, κ₃, κ₄, g, h, hH, hH', hc2, h3, hg, hh⟩ := stuck_structure_at_axis hF (hvC w) hst (h4 w) hm hc₀ hH₀
+  obtain ⟨h1, h2⟩ := horn_bounds_of_noMerge hF (hvC w) hst.1 le_rfl hc2 hH
+  obtain ⟨h3', h4'⟩ := horn_bounds_of_noMerge hF (hvC w) hst.1 le_rfl hc2 hH'
+  obtain ⟨hH2, hhd, -, hNS, hSN⟩ := stuck_turned_frame hF hP hst h3.le hc2 hH hH' hg hh
+  obtain ⟨hcN, hcS⟩ := horn_poles_contact hF (hvC w) hst.1 le_rfl hc2 hH
+  -- no in-type flank contact at either pole: the horn arc it bounds would be both-kind, hence (Q), with four colours
+  have hGN : ¬ (F.IsContact w g (w + e (α + π / 2)) ∧ F.InType w g (w + e (α + π / 2))) := by
+    intro hx
+    obtain ⟨hk2, -⟩ := upper_bounds_of_inType_N hF hP hst h3.le hc2 hH hH' hg hx
+    subst hk2
+    obtain ⟨θ₂, -, -, hQ | ⟨-, hgN, -⟩⟩ := flankQ_upper_of_qrOnly hF hQR (hvC w) hH hg hcN
+    · obtain ⟨⟨-, -, -, -, -, h4N⟩, -⟩ := hQ
+      have := h4 (w + e (α + π / 2)); omega
+    · exact hgN hx.1.2.2
+  have hHS : ¬ (F.IsContact w h (w + e (α + π + π / 2)) ∧ F.InType w h (w + e (α + π + π / 2))) := by
+    intro hx
+    obtain ⟨hk4, -⟩ := upper_bounds_of_inType_N hF hP hst h3.le hc2 hH' hH2 hhd hx
+    subst hk4
+    obtain ⟨θ₂, -, -, hQ | ⟨-, hhN, -⟩⟩ := flankQ_upper_of_qrOnly hF hQR (hvC w) hH' hhd (by rw [hNS]; exact hcS)
+    · obtain ⟨⟨-, -, -, -, -, h4N⟩, -⟩ := hQ
+      have := h4 (w + e (α + π + π / 2)); omega
+    · exact hhN hx.1.2.2
+  -- E5 § 3.4 at both poles (`cv_class`'s "None" case): a repeated colour at each, so each is stuck
+  have hgS := flank_two_sectors_at_S_gen hF hP hst h3 hc2 hH hH' h1 h2 h3' h4' hg hGN
+  have hhN := flank_two_sectors_at_S_gen hF hP hst h3 hc2 hH' hH2 h3' h4' h1 h2 hhd hHS
+  rw [hSN] at hhN
+  exact ⟨⟨isStuck_of_hasRepeatedColour hT (hdom _) ⟨h, hhN⟩, h4 _⟩,
+    ⟨isStuck_of_hasRepeatedColour hT (hdom _) ⟨g, hgS⟩, h4 _⟩⟩
+
+/-- **With no four-colour vertex, every stuck run is bi-infinite** (FS114-CVB § 1.4 item 6, "the chain runs on"): `chainVertex_neighbours_of_noFour`
+and `stuckAlong_of_run` by induction on `|j|`. A step of `cv_exists`'s refutation: no model expected. -/
+theorem stuckRun_eq_univ_of_noFour {F : ArcMap 6} (hM : F.IsTerminalMap) (h4 : ∀ x, (F.coloursAt x).ncard ≤ 3)
+    {v : ℂ} {α : ℝ} (hv : F.StuckAlong v α) : F.stuckRun v α = univ := by
+  obtain ⟨hF, hP, -, -⟩ := id hM
+  have hall : ∀ m : ℕ, ∀ i : ℤ, i.natAbs ≤ m →
+      F.IsChainVertex (v + (i : ℂ) * e (α + π / 2)) ∧
+        (F.StuckAlong (v + (i : ℂ) * e (α + π / 2)) α ∨ F.StuckAlong (v + (i : ℂ) * e (α + π / 2)) (α + π)) := by
+    intro m
+    induction m with
+    | zero =>
+      intro i hi
+      have hi0 : i = 0 := by omega
+      subst hi0
+      simp only [Int.cast_zero, zero_mul, add_zero]
+      exact ⟨⟨hv.1, h4 v⟩, Or.inl hv⟩
+    | succ m ih =>
+      intro i hi
+      by_cases him : i.natAbs ≤ m
+      · exact ih i him
+      · have hi0 : i ≠ 0 := by omega
+        -- the neighbour `w ± n` of a chain vertex `w` stuck along `±e α` is a chain vertex, and the axis propagates
+        have step : ∀ j : ℤ, j.natAbs ≤ m → ∀ s : ℤ, (s = 1 ∨ s = -1) → i = j + s →
+            F.IsChainVertex (v + (i : ℂ) * e (α + π / 2)) ∧
+              (F.StuckAlong (v + (i : ℂ) * e (α + π / 2)) α ∨ F.StuckAlong (v + (i : ℂ) * e (α + π / 2)) (α + π)) := by
+          intro j hj s hs hij
+          obtain ⟨-, hax⟩ := ih j hj
+          have hw : v + (i : ℂ) * e (α + π / 2) = v + (j : ℂ) * e (α + π / 2) + e (α + π / 2) ∨
+              v + (i : ℂ) * e (α + π / 2) = v + (j : ℂ) * e (α + π / 2) - e (α + π / 2) := by
+            rcases hs with rfl | rfl
+            · left; rw [hij]; push_cast; ring
+            · right; rw [hij]; push_cast; ring
+          have hcv : F.IsChainVertex (v + (i : ℂ) * e (α + π / 2)) := by
+            rcases hax with hax | hax
+            · have := chainVertex_neighbours_of_noFour hM h4 hax
+              rcases hw with hw | hw <;> rw [hw]
+              · exact this.1
+              · exact this.2
+            · have := chainVertex_neighbours_of_noFour hM h4 hax
+              rw [add_e_add_pi_add, sub_e_add_pi_add] at this
+              rcases hw with hw | hw <;> rw [hw]
+              · exact this.2
+              · exact this.1
+          exact ⟨hcv, stuckAlong_of_run hF hP hax hw hcv⟩
+        rcases lt_or_gt_of_ne hi0 with hneg | hpos
+        · exact step (i + 1) (by omega) (-1) (Or.inr rfl) (by ring)
+        · exact step (i - 1) (by omega) 1 (Or.inl rfl) (by ring)
+  exact eq_univ_of_forall fun j i _ _ => (hall _ i le_rfl).1
+
 end ArcMap
 
 /-! ## The inhabitant of `IsTerminalMap` -/

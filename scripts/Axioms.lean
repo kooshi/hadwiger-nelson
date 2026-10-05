@@ -3620,6 +3620,8 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.stuckAlong_of_run
 #print axioms HadwigerNelson.Plane.ArcMap.stuckAlong_of_mem_stuckRun
 #print axioms HadwigerNelson.Plane.ArcMap.four_or_stuck_of_chainVertex
+#print axioms HadwigerNelson.Plane.ArcMap.chainVertex_neighbours_of_noFour
+#print axioms HadwigerNelson.Plane.ArcMap.stuckRun_eq_univ_of_noFour
 
 #eval IO.println "=== PURCHASED ==="
 
