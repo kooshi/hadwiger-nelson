@@ -141,7 +141,58 @@ FS131-IM3's, kernel-checked in its stage-9 build (`build/gate/build/20261004T235
 - `HadwigerNelson.Plane.ArcMap.Near.shave_hlc` — [kernel], the standard three
 - `HadwigerNelson.Plane.ArcMap.exists_shave_recolour` — [kernel], the standard three
 
-Still open: `exists_rayMerge_aux`, `exists_merge_aux` (each reads `sorryAx` besides the standard three).
+FS131-IM3's, kernel-checked in its stage-10 build (`build/gate/build/20261005T001350Z-3780541.log`), axioms printed against that build's oleans
+(`data/fs131/im/axioms-stage10.txt`), all in `Moves`, each reading exactly `[propext, Classical.choice, Quot.sound]`:
+
+- `HadwigerNelson.Plane.ArcMap.exists_rayMerge_aux` — [kernel], the standard three — **N4-RAY, the clearness and the merge, under `Contact`'s statement**
+- `HadwigerNelson.Plane.RayGap.frameX_framePt` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.frameY_framePt` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.sq_dist_framePt` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.tanHeight_parab` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.exists_parab_mem_hornSet` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.exists_same_side` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.sq_lt_one` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.one_lt_sq` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.lt_of_sq_add_sq_lt` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.sq_lt_of_sq_add_sq_lt` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.abs_le_sq_of_gap` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.sq_le_pow_four_of_abs_le` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.parab_below` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.parab_above` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.vertical_identity` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.not_both_inside` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.trapped_of_both_outside` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.abs_half_mul_sq_le` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.abeam_inside` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.abs_abeam_height` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.abeam_identity` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.abeam_contra` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.side_of_preconnected` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.hornSet_subset_region` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.ray_clear` — [kernel], the standard three
+- `HadwigerNelson.Plane.branchPt_congr_dir` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.eq_of_mem_closure_hornSet` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.curv_le_of_hornSet_subset` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.sector_subset_hornSet_of_meets` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.horn_of_sector_subset_hornSet` — [kernel], the standard three
+- `HadwigerNelson.Plane.RayGap.mem_hornSet_cases` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.rayCol_of_mem` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.rayCol_of_not_mem` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.abs_curv_le` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.curv_lt` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.gap_sector` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.branchPt_not_mem` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.off_keep_iff` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.mem_keep₀` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.mem_keep₄` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.sector_disjoint` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.ne` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.hasSectors` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.hlc` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.RayConfig.exists_merge` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.exists_rayMerge_of_clear` — [kernel], the standard three
+
+Still open: `exists_merge_aux` (reads `sorryAx` besides the standard three), now FS131-IMM1's (item 285).
 
 ## Stage 1 — SAVED: the readback, the as-given build, what I may and may not change
 
@@ -577,3 +628,81 @@ lines, one session-fraction; nothing needed a dispatch.
 **RAY's clearness** (the first conjunct of `exists_rayMerge_aux`) elaborates in scratch (`data/fs131/im/scratch3/RayClear.lean`, against the mirror):
 `ArcMap.ray_clear`, by record § 3.3's three cases over parabola points `framePt v α X (μ X²/2)` of each horn, every real inequality a small lemma
 (`RayGap.*`, LEAN.md's `nlinarith` rule). It goes into `Moves` with the merge.
+
+## Stage 10 — SAVED: MERGE-RAY proved (`exists_rayMerge_aux`); MERGE moved to FS131-IMM1 (item 285), with what I found about it
+
+**Proved** (in `Moves`, between SHAVE's section and the three statements, under the heading "MERGE-RAY (`exists_rayMerge_aux`): the gap's
+clearness and the merge with the nearest `c`-horn"; 46 theorems, `data/fs131/im/im3-ray-names.txt`):
+
+1. **The first conjunct** — `ArcMap.ray_clear`: near `v` the gap `hornSet v α κ₂ κ₃ r` between the two `c`-horns is clear for `c`. Record
+   § 3.3's argument, made exact over **parabola points** `framePt v α X (μ X²/2)` (`RayGap.exists_parab_mem_hornSet`: for `κ₁ < μ < κ₂` they lie
+   in the horn at every small abscissa). A unit circle about `y ∈ c` through a gap point `t` has each horn (a preconnected piece of `c`'s class,
+   `side_of_preconnected`) inside it or outside it. *Both inside*: the parabola points of the two horns on the vertical through `t`, one below
+   (`RayGap.parab_below`) and one above (`parab_above`), give `b < u₁/2 < 0 < u₂/2 < b` for the normal component `b` of `y − t`
+   (`not_both_inside`). *Both outside*: `2b` is trapped between `u₁` and `u₂`, so `|b| ≤ 3x²/4`, the centre is abeam of `t`, and the lower horn's
+   parabola point at abscissa `x + a x/2` lies inside (`abeam_contra`, `abeam_inside`). *Mixed*: `v` is in both closures, so `|v − y| = 1`, and at
+   a small abscissa both horns' parabola points fall on one side (`exists_same_side`: inside when `y` is ahead of `v` along `α`, outside
+   otherwise). Every real inequality is a small lemma carrying only its own hypotheses (LEAN.md's `nlinarith` rule: one 300-line declaration
+   timed out until split).
+2. **The merge** — `exists_rayMerge_of_clear`, with item 262 (a)'s correction: of the `c`-horns along `α` above the lower horn (the upper horn
+   and every chart sector of colour `c` inside the gap) take the one of least lower curvature `κ*` (`Finset.exists_min_image`). If `κ* = κ₂`
+   it is the sector just above the lower horn (`Sorted.κ_ne`) and `Near.exists_cut` merges them. Otherwise the gap `hornSet v α κ₂ κ*` holds
+   no `c`-sector and `Near.RayConfig.exists_merge` recolours the horn `hornSet v α κ₁ κ₄' ρ` that spans both horns and the gap, cutting every
+   germ of direction `α` with curvature in `[κ₂, κ*]` (`rayKeep`, `rayCol`). Children: `RayGap.eq_of_mem_closure_hornSet` (a horn's frontier
+   in the open ball is `v` and its two bounding arcs), `Near.sector_subset_hornSet_of_meets` (a chart sector meeting the gap lies in it —
+   preconnectedness against that frontier, whose arcs are chart branches), `Near.horn_of_sector_subset_hornSet` (and is a horn there, from its
+   cone), `RayGap.curv_le_of_hornSet_subset`, `RayGap.mem_hornSet_cases` (the spanning horn = lower horn ∪ κ₂-arc ∪ gap ∪ κ₃-arc ∪ upper horn),
+   `RayConfig.branchPt_not_mem` (kept branches miss the spanning horn), `RayConfig.off_keep_iff` (off the kept branches the punctured ball is the
+   spanning horn and `F`'s interior points), `RayConfig.sector_disjoint`, `RayConfig.hasSectors` (partition over `Option T`, `T` the chart
+   sectors off the gap and the two horns; count `(n + 1) − 2 + 1`), `RayConfig.hlc`, with spec examples for `rayCol` and `rayKeep`. The rim
+   bound is `F`'s two colours plus `c`.
+
+`exists_rayMerge_aux` is `⟨ray_clear …, exists_rayMerge_of_clear … (ray_clear …)⟩`. **No statement changed** (`tools/fs131_im_statements.py --check`
+PASS; `tools/fs131_im_split.py --check` PASS). New records in `scripts/Axioms.lean`'s IM block ("FS131-IM3: MERGE-RAY's children"). Names
+checked against `fs131-w4`, `fs131-w5`, `fs131-w5p`: no clash (the frame helpers are in a namespace `RayGap` because `UnitArc` has its own
+`frameX_framePt`).
+
+### 10.1 MERGE (`exists_merge_aux`) — FS131-IMM1's now; what I found about it, for IMM1
+
+**The brief's amendment** (2026-10-04, inventory item 285), read back: its quotation "285. **Ruling: I5c's slot → the parallel MERGE implementer
+FS131-IMM1 on a new branch `fs131-w4mm`; wave 5's next implementer takes the next slot.** Choice: as" is **verbatim** against
+`plans/FS131-close-inventory.md` l. 2141 (on `main`). I did not edit `exists_merge_aux` and added no MERGE child; `Surgery` is unchanged since
+the split (`tools/fs131_im_split.py --check` PASS), so `fs131-w4mm` (cut from `73d31ad6`) merges with this branch's `Surgery` cleanly. The likely
+textual conflicts at the merge are trivial: `scripts/Axioms.lean`, where both branches append records just above the PURCHASED banner, and
+`Moves`' statement block if IMM1 rewrites `exists_merge_aux` there.
+
+Not started in Lean. What I worked out:
+
+- **The gap's choice.** The directions of `D_c(v)` form an arc `A` (a convex cone with non-empty interior); every `c`-sector's cone lies in
+  `A` (`coneAt_subset_allowedCone`). With `n + 1 ≥ 2` `c`-sectors, at most one of the `n + 1` cyclic gaps between consecutive `c`-sectors meets
+  the complement of `A`; take another. Its end directions are interior to `A` unless the adjacent `c`-sector is a cusp at `∂A` (N3-UP's case).
+- **`Near.move` and `Near.exists_cut` cannot be used as they are**: both add the whole circle `∂B(v, ρ)` as an arc (`Near.newArcs`), and a rim
+  point with one colour on both sides of it carries a repeated colour, against MERGE's rim clause (IM1's § 3.1 note). MERGE needs a surgery
+  whose rim arcs lie only where the colour changes, and its own local-constancy proof on the rest of the circle (`surgery_hlc_of` assumes the
+  whole circle is on the new arcs).
+- **A finding about the rim clause** `∀ x ∈ sphere v ρ, ¬ F'.HasRepeatedColour x`: a valid `ArcMap` may carry a germ at `v` with the **same
+  colour on both sides** (nothing in `Valid`, `Condition5` or the statement forbids it). Where such a germ crosses `∂B(v, ρ)`, `F'` agrees with
+  `F` outside the closed ball, so the outer piece is still an arc with one colour on both sides; if the germ also continues inside (or the rim
+  is an arc there) that point has two sectors of one colour. So the construction must, for every such germ, **cut it in a thin annulus just
+  inside `ρ`** (its inner part, which the sector count at `v` may need, stays; the outer piece then ends at the rim with no arc inside, one
+  sector). Inside the chosen gap, a same-coloured pair of gap sectors across a gap germ forces the recoloured region's boundary to run inside
+  the ball (radius `ρ' < ρ`) rather than along the rim. Example that rules out the naive construction: three `c`-sectors at `v` separated by
+  three radial segments with `c` on both sides (`n + 1 = 3`): cutting one segment gives `n = 2`, and the other two must be cut near the rim
+  or their rim points carry `c` twice. I believe the statement is **true** (the annulus cuts repair it), but MERGE's price is above § 6.3's
+  "about two sessions": the surgery needs variable rim arcs, annulus cuts, and FS110's `cl R ∩ ω(v′) ⊆ {v}` for the `D_c(v′)` clause (contact
+  types do not change: when `c ∈ coloursAt v′`, every `c`-tile of `F'` avoids `ω(v′)` by validity, so a merged tile lies on one side).
+- Reusable as they stand: `Near.horn_index`, `Near.encard_col_eq`, `ne_next_of_nextβ_eq`, `coloursAt_subset_of_mem_closure_sector`,
+  `encard_sectorsOf_of_partition`, `Arc.outer`/`trimArcs`/`ArcMap.surgery` and its transfer lemmas (`surgery_agreesOff`, `surgery_ringArcsWithin`,
+  `surgery_condition5`), N3-CLEAR (`clear_of_subset_interior_allowedCone`) and N3-UP (`lens_dist_lt_one_of_up`, `lune_dist_le_of_up`) in `Cone`.
+
+### 10.2 The build and the axioms
+
+Under the slot, as in § 7.2: **OK**, 446 of 446 batches, 2 modules rebuilt (`Moves` 13 s, `Proofs`); warnings only `declaration uses 'sorry'` —
+`Moves` exactly 1 (l. 1667, `exists_merge_aux`), `Contact` 4, `BaseSteps` 7, `UnitArc` 17; no other warning (a deprecation warning,
+`Set.encard_diff_add_encard_of_subset`, seen in iteration, was fixed to `Set.encard_sdiff_add_encard_of_subset` before the build). Log
+`build/gate/build/20261005T001350Z-3780541.log`; terminal output `data/fs131/im/build-im3-ray.log`. **Axioms** against that build's oleans
+(`lake env lean data/fs131/im/AxiomsIM3.lean`, `data/fs131/im/axioms-stage10.txt`, 71 records): `exists_shave_aux`, `exists_rayMerge_aux` and
+their 68 children read exactly `[propext, Classical.choice, Quot.sound]`; `exists_merge_aux` reads `sorryAx` besides. No `axiom`, no `native_decide`.
+
+**Re-priced**: RAY took about one session-fraction more than SHAVE (the clearness algebra ~350 lines, the merge ~500), against § 6.3's
+"about 1.5 sessions".
