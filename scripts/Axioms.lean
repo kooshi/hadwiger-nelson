@@ -3566,6 +3566,27 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.link_partners
 #print axioms HadwigerNelson.Plane.ArcMap.link_one_lt_two
 #print axioms HadwigerNelson.Plane.ArcMap.exists_linkage
+-- FS131-I5j (stage 31): `coneAt_of_cubic`, the hexagon count, BV-HEX's steps
+#print axioms HadwigerNelson.Plane.ArcMap.hex_int_core
+#print axioms HadwigerNelson.Plane.ArcMap.hex_int_noAdj
+#print axioms HadwigerNelson.Plane.ArcMap.exists_halfTurn_of_cos_nonpos
+#print axioms HadwigerNelson.Plane.ArcMap.eq_floor_of_floor_eq_ceil
+#print axioms HadwigerNelson.Plane.ArcMap.hex_real_core
+#print axioms HadwigerNelson.Plane.ArcMap.angleIcc_add_int_mul
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_of_cubic
+#print axioms HadwigerNelson.Plane.ArcMap.hex_cones_of_serve
+#print axioms HadwigerNelson.Plane.ArcMap.subset_closure_region_of_isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonneg_of_preconnected
+#print axioms HadwigerNelson.Plane.ArcMap.GermPseudo.germIn_closure
+#print axioms HadwigerNelson.Plane.ArcMap.germPseudo_add_two_pi
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_add_two_pi'
+#print axioms HadwigerNelson.Plane.ArcMap.hex_side
+#print axioms HadwigerNelson.Plane.ArcMap.dist_frame
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_frame
+#print axioms HadwigerNelson.Plane.ArcMap.norm_sq_eq_re_im
+#print axioms HadwigerNelson.Plane.ArcMap.e_hex_re_im
+#print axioms HadwigerNelson.Plane.ArcMap.hex_point
+#print axioms HadwigerNelson.Plane.ArcMap.hex_adjacent
 
 #eval IO.println "=== PURCHASED ==="
 

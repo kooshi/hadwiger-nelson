@@ -141,6 +141,19 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
   `link_norm_e_sub_sq`, `link_cos_eq_of_ringPt`, `link_fibres`, `link_turn`, `link_flip`, `link_dist_ringPt_sq`, `link_partners`, `link_one_lt_two`,
   `exists_linkage`.
 
+### FS131-I5j (wave 5's eighth implementer)
+
+*Each stage's build and axiom read named in its line; axioms read from that build's oleans (`data/fs131/i5j/I5jAxioms<stage>.lean`, output `.out`).*
+
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
+- Stage 31 (`data/fs131/i5j/build-stage31.log`; `build/gate/build/20261005T051518Z-1601427.log`; axioms `I5jAxioms31.out`, controls `rot_out` and
+  `row134BaseUA` with `sorryAx`, `linkage_dot_ne_zero` clean), `Plane/ValidMap/HexRing`: `HadwigerNelson.Plane.ArcMap.bv_hex` (FS114-BV-HEX, BASE-V
+  § 1a.4 steps 1–6), `HadwigerNelson.Plane.ArcMap.hex_regular` (FS112-ROTHEX's N2-HEX; its first disjunct always), and with them `p17_ua`,
+  `BaseCtx.hex_base`; the shared child `coneAt_of_cubic` (plan § 9.1); children `hex_int_core`, `hex_int_noAdj`, `exists_halfTurn_of_cos_nonpos`,
+  `eq_floor_of_floor_eq_ceil`, `hex_real_core`, `angleIcc_add_int_mul`, `hex_cones_of_serve`, `subset_closure_region_of_isOpen`,
+  `Valid.cone_re_nonneg_of_preconnected`, `GermPseudo.germIn_closure`, `germPseudo_add_two_pi`, `ringPt_add_two_pi'`, `hex_side`, `dist_frame`,
+  `ringPt_frame`, `norm_sq_eq_re_im`, `e_hex_re_im`, `hex_point`, `hex_adjacent` (all `ArcMap.`).
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -1394,3 +1407,61 @@ up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/
 Iteration script: `data/fs131/i5j/iter.sh` (I5g's, re-pointed at a fresh scratch mirror `/home/kooshi/scratch-w5j`, outside the repository).
 
 ## Stage 30 — SAVED
+
+## Stage 31 — SAVED: `coneAt_of_cubic` (a new shared child), `hex_regular` and `bv_hex` proved (kernel theorems); `l3_base`'s docstring corrected
+
+**`coneAt_of_cubic`** (plan § 9.1's shared child, `Plane/ValidMap/HexRing`): at a cubic trichromatic `u` there are `β : Fin 3 → ℝ` and an injective
+`f : Fin 3 → Fin k` with `β₀ ≤ β₁ ≤ β₂ ≤ β₀ + 2π`, `coloursAt u = range f`, and the cones of the three colour classes at `u` the closed angular intervals
+`[β₀, β₁]`, `[β₁, β₂]`, `[β₂, β₀ + 2π]` (horns of angle `0` allowed). From the sector chart (`IsCubicTrichromatic.chart`): the class of `f i` near `u` is
+the `i`-th sector (`exists_sector_of_mem_coneAt_region` and injectivity), whose cone is the chart's. Spec example: it applies at the brick corner
+(`sevenBrick_corner_isCubicTrichromatic`, a valid map of the plane).
+
+**The hexagon count** (new children, pure arithmetic): `hex_int_core` (three integer intervals over one period holding the six residues mod 6 are the
+tight ones — a Finset count: two classes fit an interval of length `≤ 3`, so `2 · 6 ≤ 12` forces equality; a class of two needs two integers),
+`hex_int_noAdj` (with no two consecutive residues in one class, impossible), `exists_halfTurn_of_cos_nonpos`, `eq_floor_of_floor_eq_ceil`,
+`hex_real_core` (the same in the directions, through `⌊3(a − ψ)/π − 3/2⌋`, `⌈3(a − ψ)/π − 9/2⌉`), `angleIcc_add_int_mul`, and `hex_cones_of_serve`
+(the six directions served by the cones of a cubic vertex make the cones regular, and two consecutive directions share a colour). A first attempt
+to close the count by `omega` over the 3⁶ assignments timed out at 200000 heartbeats both as one call and as 729 split calls; the count is now a
+Finset argument and every `omega` call is small.
+
+**`hex_regular` is proved as stated** — **and its first disjunct always holds**: at a cubic vertex the cones are contiguous, so two horns share their
+boundary direction and point the same way; the antipodal double cusp (the second disjunct) needs four branches. So **F-HEXCUSP (plan § 8.4) does not
+arise at a cubic vertex**: N2-HEX holds as FS-110 wrote it, for degree 3. The statement is untouched (its second disjunct is unrealized, not false);
+the docstring now says what the proof establishes. Read against the informal claim (FS110-N2-HEX): "each of the six points served ⟹ `u` regular" —
+**same** (stronger than the statement, which also allows the unrealized disjunct).
+
+**`bv_hex` is proved as stated** (`plans/BASE-V-verification.md` § 1a.4 steps 1–6), with new children:
+- `hex_side` (step 1: a germ in the closure of `q` whose points are nearer than `1` to `x` puts the class of `q` near `x` inside `B̄(y, 1)`);
+- `hex_point` (steps 1–3 and 5 at one point: near `x`, outside `B̄(r(φ ± 60°), 1)`, every interior point has one colour `c ∈ P_cl(u)`, and `c`'s cone at
+  `u` lies in the closed half-plane away from `x`; the outward radial lies in that cone, `1 + s + s²`); step 3 uses only "fewer than four colours" at
+  `x` (the repeated-colour half of H is not needed: the cone's colours are colours of `x` that are colours of `u`, and there is one such);
+- `Valid.cone_re_nonneg_of_preconnected` (`Valid.cone_re_nonneg_of_germ` with the germ replaced by any preconnected set; step 5 along the radial);
+- `hex_adjacent` (step 4: `x + s e(φ + 30°)` and `x′ + s e(φ + 30°)` are exactly `1` apart, in the two cones — `1 + s²` to the near neighbours,
+  `1 + √3 s + s²` to the far ones — and each cone is an open set in its colour's closure, `subset_closure_region_of_isOpen`; then
+  `Valid.dist_ne_one_of_isOpen_subset_closure`);
+- glue: `GermPseudo.germIn_closure`, `germPseudo_add_two_pi`, `ringPt_add_two_pi'`, `dist_frame`, `ringPt_frame`, `norm_sq_eq_re_im`, `e_hex_re_im`.
+Step 6 is `hex_cones_of_serve` (no colour serves two consecutive directions alone, against step 4). Read against the informal claim (FS114-BV-HEX):
+"the regular hexagon of kept points cannot occur at a cubic trichromatic `u` of a valid map (unit arcs allowed) when `x_1, …, x_6` are cubic" —
+**same** (the statement's widening G-BVHEX — every `k`, H at the six points, `B̄(u, 1)` — holds as stated).
+
+With `bv_hex`, `p17_ua` and `BaseCtx.hex_base` are kernel theorems, and **`row134BaseUA` rests only on the planar job's three** (`retArcs_nested`,
+`exists_endpoint`, `exists_eleventh`).
+
+**`l3_base`'s docstring** (item 330's correction) now names its inputs as the proof uses them (`exists_pseudoCircle`, `pair_i`, `pair_ii`,
+`exists_linkage`, `link_path`) and says that neither `linkage_dot_ne_zero` nor `bv_nd` is an input.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS). New names collision-free on `fs131-w5p`, `fs131-w5c`, `fs131-w4`, `main` as
+full names (`git grep`); `main` has `HadwigerNelson.Plane.dist_frame` (wave 2's `MaximalCover`), a different full name from mine
+(`HadwigerNelson.Plane.ArcMap.dist_frame`) — renamed `dist_eFrame` at the next stage to keep `open ArcMap` unambiguous after the merge.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`HexRing`, `Dense`, `BaseWalk`, `BaseDense`, `Proofs`), 8 with
+warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T051518Z-1601427.log`; driver log `data/fs131/i5j/build-stage31.log`).
+Wave 5's sorry declarations (distinct sites in the gate log): **23** (`HexRing` 4: `rot_out`, `rot_in`, `bv_l3`, `bv_nd`), mine 5. Axioms
+(`data/fs131/i5j/I5jAxioms31.lean` → `.out`, read against the build's oleans): `bv_hex`, `hex_regular`, `p17_ua`, `BaseCtx.hex_base` and the 20 children
+on the standard three; controls `rot_out` and `row134BaseUA` read `sorryAx`, `linkage_dot_ne_zero` clean. `scripts/Axioms.lean`: the 20 children added to
+the "FS131-I5g" block (a comment line names this stage), above the `=== PURCHASED ===` banner. `tools/check_architecture.py`: PASS.
+
+**Re-pricing from the first two hard leaves** (`coneAt_of_cubic` with `hex_regular`, then `bv_hex`): about 60k and 90k tokens of context with three
+iteration rounds each — the plan's M and M–H hold; the arithmetic count (planned "finite real arithmetic") was the expensive part of `hex_regular`.
+
+## Stage 31 — SAVED

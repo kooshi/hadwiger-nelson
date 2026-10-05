@@ -2763,7 +2763,9 @@ theorem exists_linkage {u₁ u₂ : ℂ} (ht : 1 < dist u₁ u₂) (ht' : dist u
 /-- **Lemma 3 in pseudo-colour form** (`[SokolovVoronov2025]` Lemma 3; BASE-V's BV-L3 route — the unit-distance linkage and the band lemma —
 on the two pseudo-colourings): two cubic trichromatic points of `B̄(u, 1)` with one multicolour are not at distance in `(1, 2)`. Their circles may
 carry in- and out-contact unit arcs (plan § 2.2), so `bv_l3`'s `RingProper` is not available; the inputs are `exists_pseudoCircle` at both,
-(i) across the circles from `pair_i`, the double event from `pair_ii` (or `bv_nd`), and `linkage_dot_ne_zero`. -/
+(i) across the circles from `pair_i`, and the double switch of both colours excluded by `pair_ii` (two switching points carry one pair, which
+needs no sense of motion), read along the linkage `exists_linkage` by the band lemma `link_path`. No velocity argument is used, so neither
+`linkage_dot_ne_zero` nor `bv_nd` is an input. -/
 theorem BaseCtx.l3_base (B : F.BaseCtx u) {u₁ u₂ : ℂ} (h₁ : u₁ ∈ closedBall u 1) (h₂ : u₂ ∈ closedBall u 1)
     (c₁ : F.IsCubicTrichromatic u₁) (c₂ : F.IsCubicTrichromatic u₂) (hsame : F.coloursAt u₁ = F.coloursAt u₂)
     (ht : 1 < dist u₁ u₂) (ht' : dist u₁ u₂ < 2) : False := by
