@@ -3330,3 +3330,29 @@ reason by the close.*
      `exists_shave`, `IsModification`, `exists_terminal`, copied by script, then the question and its *not claimed* line). Alternative weighed: lane B of the
      limit (`Terminal`'s two children). Why: F6 is a question about `exists_terminal`'s truth, which every later job on the procedure builds toward; lane B's
      first children do not read it and can start at the next slot. Confidence: high. In flight after E6's launch: 1 (KB2) + 1 (IL1) + 1 (E6) = 3.
+378. **FS131-KB2 handed back** (Stage 46 SAVED, harness ≈ 420k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 43–46;
+     report `data/fs131/reports/FS131-KB2.md`; commits `adeba828`, `30efac19`, `3cff8a6f`, `caada347`, pushed). **Results**: `bend_toward_collar` landed in the
+     new module `Plane/ValidMap/BendCollar` (upstream of `BaseDense`), docstring and statement byte-identical to I5o's scratch at `4a0e5c28`
+     (`tools/fs131_kb_stmt_move.py`, plants fired), `sorry`; the scratch file deleted. **`exists_preBend` proved** (statement unchanged) over `bend_toward_collar`
+     and six stated children — strong induction on `maxRingArcs F u` (the maximal constant-sided unit arcs centred in `B̄(u, 1)`), each step
+     `exists_preBend_step`, every invariant checked from the child's clauses alone; the six: `finite_maxRingArcs`, `exists_maxRingArc`, `hfree_of_baseHyp`,
+     `ncard_coloursAt_le_two_of_mem_openArc`, `maxRingArcs_subset_of_bend`, `unenclosedC_of_homeomorph` — so `n3_base`, `localDense`, `dense3` rest on these seven
+     alone. **[kernel], standard three**: `not_hasRepeatedColour_of_mem_interiorPts`. **Receipt** (Keryx): `origin/fs131-w5` is `caada347`; the latest build log
+     (`build/gate/build/20261005T093152Z-3016959.log`) ends "Build completed successfully (5409 jobs)", 0 warnings other than `sorry`; the `sorry` declarations by
+     grep: `BendCollar` 1 (`bend_toward_collar`), `BaseDense` the six children and `cv_exists`'s stale copy; `tools/fs131_i5_stmt_check.py d61edefc` run by Keryx:
+     PASS; `data/fs131/kb/KBAxioms45.out` parsed: `not_hasRepeatedColour_of_mem_interiorPts` and `row134BaseUA` standard, the rest on `sorryAx` through the child
+     and the six. **Generalizations** (record § 44.2): `hlen` follows from `l60_le` (every ring arc of a valid map has length ≤ π/3), so **the full-circle case
+     is empty** (ruling 370 (d)'s "full circles as their own case" needs no construction); "no new inert arc" at a centre on `α°` is `lock` (FS112-LOCK, proved
+     on this branch), at a centre in the lens `Valid.dist_ne_one_of_isOpen_subset_closure`; R1/R2 reduce to the arc's two ends. **The construction designed**
+     (record § 44.3, D1: `β` = arcs of circles of radius `R ∈ (1/2, 1)` internally tangent to `ω(P)` at `A` and `B`, crossing on the bisector; a radial push about
+     `P` with tent profiles; `M` = `F`'s image, arcs = `F`'s cut plus `β`'s two arcs; end degrees by chart surgery), **priced at 3,000–4,000 lines**; it needs
+     wave 4's cut engine (`cutArcs`, `mem_cutArcs_iff`, `cutArcs_locallyFinite`, …) and `toward_clear`, proved on `main` only — this branch's `UnitArc` is a stale
+     copy without them. Credit: KB2, for the iteration over the child alone and the empty full-circle case.
+379. **Rulings on KB2's held items, and its slot.** (a) **Merge `main` into `fs131-w5` now** (the alternative, re-proving the cut engine in `BendCollar`
+     under new names, would duplicate at the merge): since their merge base `111830c8` the two sides share only four changed files, one of them in `Proofs/`
+     (`BaseSteps`); `main`'s side for every wave-4 module, `framePt → fromFrame` in wave 5's own files (`FlankUA` and any other wave-5 user; item 318's
+     correction (1)), identical copies removed, a three-way statement check, a build, an axioms print. (b) **KB2's slot → that merge job, FS131-M5, on
+     `fs131-w5`**, then, as budget allows, the four short `BaseDense` children (`ncard_coloursAt_le_two_of_mem_openArc`, `unenclosedC_of_homeomorph`,
+     `exists_maxRingArc`, `hfree_of_baseHyp`). Why: the construction, `bv_l3`, and lane B's steps after the merge all want `main`'s wave 4; one merge serves them.
+     Confidence: high. (c) **The construction** (3,000–4,000 lines) gets a planner pass first (FS131-KP2, the D1 skeleton), then implementers, on a branch cut
+     from `fs131-w5` after M5 — and `bv_l3` likewise on its own branch — so no two jobs share a tree. In flight after M5's launch: 1 (IL1) + 1 (E6) + 1 (M5) = 3.

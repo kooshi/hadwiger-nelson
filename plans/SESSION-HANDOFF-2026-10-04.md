@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–377 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–379 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **377**.
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **379**.
 >
 > **Held in the kernel, on `main`**: **MERGE** (item 375: `main` at `ca4dcfa2`, gated `df473bfe`, counts filed, item 376 — 3,807 records, 3,784 clean); waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -15,12 +15,13 @@ that judge the milestone, written before any job).*
 > **Running (3)** — each reports to "main" by hand-back; its report file is on its branch:
 > - **FS131-IL1** (`fs131-w5c`): lane A of the limit constructions — `Limit` (the limit of a sequence of `ArcMap`s), then `Procedure`'s finiteness lemmas.
 >   Brief `data/fs131/briefs/FS131-IL1-limit.md`.
-> - **FS131-KB2** (`fs131-w5`): the strengthened bend `bend_toward_collar` landed and constructed (I5o's statement and notes, record § 41), then `exists_preBend`
->   over it. Brief `data/fs131/briefs/FS131-KB2-bend.md`.
+> - **FS131-M5** (`fs131-w5`): `main` merged into `fs131-w5` (wave 4, Woodall, MERGE brought in; `framePt → fromFrame` in wave 5's files), then four short
+>   children of `exists_preBend`. Brief `data/fs131/briefs/FS131-M5-sync.md`.
 > - **FS131-E6** (Ephodos, main tree): F6 — can a lone horn, shaveable only at `σ = ±1`, occur where the terminal procedure meets it; claim list
 >   `data/fs131/claims-E6.md`. Brief `data/fs131/briefs/FS131-E6-shave.md`.
 >
-> **Done since the compaction**: **FS131-ML1** (items 375–376: **MERGE landed on `main`**; wave 5's landing now waits on wave 5 alone); **FS131-KL1** (items 371–374: the limit constructions planned over one `exists_terminalMap`; `ArcMap.clean` repairs the
+> **Done since the compaction**: **FS131-KB2** (items 378–379: `bend_toward_collar` landed; `exists_preBend` over it and six children; the construction designed,
+> 3,000–4,000 lines, needs `main`'s cut engine); **FS131-ML1** (items 375–376: **MERGE landed on `main`**; wave 5's landing now waits on wave 5 alone); **FS131-KL1** (items 371–374: the limit constructions planned over one `exists_terminalMap`; `ArcMap.clean` repairs the
 > moves' descent; F6 (a lone horn shaveable only at `σ = ±1`) to Ephodos); **FS131-I5o** (items 369–370: `fs131-w5p` merged into `fs131-w5`; **`row134BaseUA` held** there; `disc1_local` in the kernel;
 > `bv_l3` to move to `BaseWalk` with `l3_base`'s argument extracted); **FS131-IMM4** (items 367–368: **MERGE proved** — `exists_merge_aux` on exactly the standard three; `MergeMove` free of
 > `sorry`); **FS131-I5p** (items 361–362: `y3_end_needs_of_not_mem` in the kernel, so `y3_end_needs`, `cv_hd_main`, `cv_hd` hold;
@@ -46,7 +47,9 @@ that judge the milestone, written before any job).*
 > `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'`; the axioms print parsed by script from the job's data file; one statement read back); log the item; rule the
 > slot per item 323. **At each landing** (as WL1's, items 326–327): read the saved gate logs, file the drafts with `scripts/gate_report.py axioms|vacuity` and `tools/claude_md_fact_audit.py --base <last CLAUDE.md commit>` run **before** committing, push notify Kooshi.
 >
-> **Queue for the next freed slot (items 370, 374, 377)**: the freed lane's own continuation if on wave 5's path; **lane B of the limit** (`Terminal`'s `run_hornBoundsQR`,
+> **Queue for the next freed slot (items 374, 377, 379)**: the freed lane's own continuation if on wave 5's path; after M5, **the collar construction's planner
+> FS131-KP2** (KB2's D1 design, record § 44.3; on a branch cut from `fs131-w5`) and the remaining two `exists_preBend` children (`finite_maxRingArcs`,
+> `maxRingArcs_subset_of_bend`); **lane B of the limit** (`Terminal`'s `run_hornBoundsQR`,
 > `stuckRun_ne_univ`, then `exists_vertexStep`/`exists_arcStep` after `main` merges in; on a branch cut from `fs131-w5c`); **`bv_l3`'s move and proof** (to
 > `BaseWalk` after `l3_base`, item 370 (a)); then **`bend_away`'s implementer** (branch `fs131-w4ba` at
 > `71cca146`; E5 § 4 — e5-claim-e and e5-end-cap — its route; lands on its own); then **`disc1_local`** (planar, after `fs131-w5p` merges back into `fs131-w5`).
@@ -109,7 +112,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-IL1 (lane A of the limit constructions on `fs131-w5c`; items 373–374) | Opus | `data/fs131/briefs/FS131-IL1-limit.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-IL1.md` |
-| FS131-KB2 (the strengthened bend and `exists_preBend` on `fs131-w5`; items 369–370) | Opus | `data/fs131/briefs/FS131-KB2-bend.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-KB2.md` |
+| FS131-M5 (`main` into `fs131-w5`; four `exists_preBend` children; items 378–379) | Opus | `data/fs131/briefs/FS131-M5-sync.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-M5.md` |
 | FS131-E6 (Ephodos: F6, SHAVE's residual case; items 374, 377) | Opus | `data/fs131/briefs/FS131-E6-shave.md` | `data/fs131/reports/FS131-E6.md` (main tree) |
 
 
