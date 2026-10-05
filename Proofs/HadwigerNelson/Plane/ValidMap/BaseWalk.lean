@@ -203,10 +203,10 @@ theorem BaseCtx.orient_pair (B : F.BaseCtx u) {a c : Fin 6} (hac : a ≠ c) {T�
 
 /-- **Returning arcs do not interleave** (FS110-CB D5 item 1; FS131-KP plan § 4, leaf NEST-X): with `s < s' + 2πn < t < t' + 2πn`, the
 closures of the two joining continua meet (`inter_nonempty_of_interleaved`, after the shift by `2πn`), at a point `z` of `B̄(u, 1)` in the
-closures of the `a`- and `c`-tiles of both pairs. If the pairs' tiles differ, `z` carries two tiles of one colour (a repeated colour) or a
-fourth colour, against H. If they are the same two tiles, both continua lie in one component of their common boundary in `B̄(u, 1)`, which
-(child PATH, plan § 4: under H the `T₁|T₂` boundary graph in the closed disc has degree at most `2` inside and `1` at a two-colour change
-point of `ω(u)`) is a path with two ends — not four. -/
+closures of the `a`- and `c`-tiles of both pairs. If a tile of the second pair is neither tile of the first, `z` carries three tiles, so it is
+cubic trichromatic with three pseudo-colours, disjoint from `u`'s and within `1` of `u`, and `cor3` puts a four-colour point in `B̄(u, 2)`, against
+H. If the pairs share their tiles — in the same order `r(s′)`, in the swapped order `r(t′)` — that point is a second change point from `a` to `c`
+on the preconnected `cl K ∪ cl K′`, against one-sidedness (`BaseCtx.orient_pair`). (FS131-IP4; the planned child PATH was not needed.) -/
 theorem BaseCtx.retArcs_not_interleaved (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t') (n : ℤ)
     (hi : s < s' + 2 * π * n ∧ s' + 2 * π * n < t ∧ t < t' + 2 * π * n) : False := by
   obtain ⟨hst, hst', a, c, hac, ha, hc, hc₂, ha₂, T₁, T₂, h₁, h₂, K, hK, hsK, htK, hKsub⟩ := h
@@ -309,8 +309,8 @@ theorem BaseCtx.retArcs_not_interleaved (B : F.BaseCtx u) {s t s' t' : ℝ} (h :
     exact hdist _ (by linarith) (by linarith)
 
 /-- **Returning arcs do not abut** (FS131-KP plan § 4, leaf NEST-A): at a common end `p = r(t) = r(s')` the germs force the second pair to be `(c, a)` (`GermPseudo.eq_of_cw`), so its tiles are the
-first pair's (one sector per colour at `p`, under H); both continua then lie in one component of the `T₁|T₂` boundary in `B̄(u, 1)`, a path
-(child PATH) with three ends `r(s)`, `p`, `r(t')`. -/
+first pair's swapped (no repeated colour, under H); then `r(s)` and `r(t′)` are two distinct change points from `a` to `c` on the preconnected
+`cl K ∪ cl K′`, against one-sidedness (`BaseCtx.orient_pair`). (FS131-IP4; the planned child PATH was not needed.) -/
 theorem BaseCtx.retArcs_not_abut (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t')
     (hab : ringPt u t = ringPt u s') : False := by
   obtain ⟨hst, hst', a, c, hac, ha, hc, hc₂, ha₂, T₁, T₂, h₁, h₂, K, hK, hsK, htK, hKsub⟩ := h
@@ -411,9 +411,11 @@ theorem BaseCtx.colours_sub (B : F.BaseCtx u) {z : ℂ} (hz : z ∈ closedBall u
 /-- **The far end gives an endpoint** (FS110-CD Lemma E, FS110-CE R1–R4; FS131-KP plan § 4, leaf END-C): a far end `q` of the `a|c` boundary
 from `r(θ)` (`exists_far_end`) with three colours in `B(u, 1)` is an endpoint outright; a three-colour point on `ω(u)` (`r(θ)` itself
 included) is V-in (its colour of `u` has a tile meeting `B(u, 1)`: CE R2, R4), an endpoint; a two-colour exit `q ≠ r(θ)` closes a returning
-pair through `r(θ)` — against `hout`. **Owed before proving** (plan § 4): the exit
-case must be read against CD Lemma E/R and CE R1–R4 (not read by this planner) — if an exit can return farther than `60°` from `r(θ)`, the
-parity is re-run on the component without that exit, and if that fails, `IsRetArc`'s `60°` bound is a statement question for Keryx. -/
+pair through `r(θ)` — against `hout`. The proof (FS131-IP4, read against CD Lemma E and CE R1–R4): with no endpoint, every point of the
+component carries a curve star (`inner_star` inside the disc, `circ_local` on `ω(u)`), of degree `1` at `r(θ)`; the handshake
+(`exists_finset_even_sum_deg`) gives a second odd vertex, a change point of `ω(u)` running `c → a` (`orient_pair` excludes `a → c`); it lies within
+`1` of `r(θ)`, and a chord of exactly `1` is excluded by `pair_ii` with `noBoth`, so it is within `60°` — a returning pair whose arc holds `r(θ)`,
+against `hout`. `IsRetArc`'s `60°` bound needs no change. -/
 theorem BaseCtx.endpoint_of_far_end (B : F.BaseCtx u) {θ : ℝ} {a c : Fin 6} (hac : a ≠ c) (ha : F.GermPseudo u θ .cw a)
     (hc : F.GermPseudo u θ .ccw c) (hout : ∀ s t, F.IsRetArc u s t → ringPt u θ ∉ ringArc u s t) {T₁ T₂ : Set ℂ}
     (h₁ : F.TileOf a T₁) (h₂ : F.TileOf c T₂) (hx₁ : ringPt u θ ∈ closure T₁) (hx₂ : ringPt u θ ∈ closure T₂) {q : ℂ}

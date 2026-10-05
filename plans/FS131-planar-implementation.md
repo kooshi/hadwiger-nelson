@@ -774,3 +774,57 @@ Wall clock from stage 14's commit (03:41Z) to this stage (04:12Z): about 30 minu
 
 By the session's token counter I am at about 660k, past the brief's 500k line (I noticed at this stage; the line was crossed inside `circ_local`'s
 iterations, with no stage then saveable). I hand back here, at a saved stage, with the leaves of § 15.3 named. Slip, mine: the line passed unwatched.
+
+## Stage 16 — SAVED: FS131-IP5's readback (the fifth implementer, from IP4's Stage 15)
+
+*de Bruijn, the implementer (FS131-IP5), 2026-10-05. Brief: `data/fs131/briefs/FS131-IP5-planar.md` (main tree). Same branch and worktree; I append
+stages from here. Read in full at launch: the brief, `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building and § Make the gate fail, this record
+(stages 12–15 closely), KP's plan §§ 2–6, inventory items 277, 309, 324, 325.*
+
+### 16.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (each `>` block's text, whitespace-normalized, searched in the main tree's `plans/FS131-close-inventory.md` and `CLAUDE.md` and this
+branch's record and KP's plan; a planted control string, fresh per run, reported `MISS` — a first control string, `ABSENT-CONTROL-STRING-xyzzy`, reported
+`OK` because earlier stages of this record quote it, so it was replaced: a control already present is no control):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors | verbatim |
+| inventory item 324 (truncated at "named it") | `plans/FS131-close-inventory.md` l. 2646 | verbatim |
+| inventory item 325 (truncated at "Queue for") | same, l. 2672 | verbatim |
+| "F-INF and F-CONN read one lemma: … (E4-OUTERMOST steps 1–2, held)" | this record § 15.3 | verbatim |
+| "F-LOC: `fill x ⊆ B̄(p, 1)` … `finite_tiles_closure_inter`." | this record § 15.3 | verbatim |
+| "The two adversaries both need … (every other point is a limit of" | this record § 15.3 | verbatim |
+| "F-RING: not reached, not measured (done-means 4 asks for a measurement from its first child; I have none to give). One observation for the" | this record § 15.3 | verbatim |
+| inventory item 309 (truncated at "if T-GRAPH") | `plans/FS131-close-inventory.md` l. 2461 | verbatim |
+| inventory item 277 (truncated at "KP's") | same, l. 2040 | verbatim |
+| "**Work order** (each step unblocks the next; re-price after the first two):" | KP's plan § 5.1 | verbatim |
+| "**May:** add children (with spec examples; …), change imports (updating `ARCHITECTURE.md`'s" | KP's plan § 5.2 | verbatim |
+
+No mismatch. The eight `sorry` declarations the brief names are exactly `MapGraph`'s at `aa753bb1` (`grep -n sorry`: lines 104, 113, 128, 133, 137, 148,
+155, 163 — `not_isHoleOf_chain`, `isHoleOf_cluster`, F-LOC, F-CONN, F-INF, F-RING, F-ONE, F-SEP).
+
+### 16.2 What I may and may not change (the brief's touches, KP's plan § 5.2, rulings 277 and 309)
+
+**May:** prove the eight `sorry`s of `MapGraph` named above, adding children beside them with spec examples (shared ones in `MapTopology` or
+`Plane/CurveGraph`); fix the three `BaseWalk` docstrings item 324 names (docstrings only — no statement, no proof); imports (with `ARCHITECTURE.md`'s
+Imports cell and `scripts/Axioms.lean`'s FS131-KP block above `=== PURCHASED ===`); `Proofs.lean`, this record, `tools/fs131_ip_*.py`, `data/fs131/ip/`,
+`data/fs131/reports/FS131-IP5.md`. A later leaf of item 325's order may go first when cheaper, said here.
+
+**May not:** change any statement of KP's job (plan §§ 3.2, 4.1) or any definition they use (`IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`,
+`mapGraph`, `outerDom`, `EnclosesTile`, and in `Thomassen` `IsRing`, `TwiceApart`, `offTwo`, `twoSepInterior`, `PlanarLike`), nor any statement outside
+this job; no new `axiom`, no `native_decide`; nothing in `Plane/PlaneTopology`, `Thomassen` or `Plane/ValidMap/BaseDense`; not KP's plan file; no merge
+into `fs131-w5`, no taking `main`, no gate run, nothing on `main`; no file edited while a build of it runs. A leaf that cannot be proved as written goes to
+Keryx at once.
+
+### 16.3 The as-given build (`aa753bb1`, before any edit)
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up to date, nothing built, 9 modules with warnings, every warning
+`declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T042332Z-1339005.log`; driver log `data/fs131/ip/build-ip5-asgiven.log`).
+
+### 16.4 The three `BaseWalk` docstrings (item 324's correction), edited after the as-given build
+
+`retArcs_not_interleaved` and `retArcs_not_abut` now describe the route taken (the crossing lemma, `cor3` for a third tile, `orient_pair` when the pairs
+share their tiles; PATH not needed), `endpoint_of_far_end` the proof done (stars by `inner_star` and `circ_local`, the handshake's second odd vertex,
+`orient_pair`, `pair_ii` with `noBoth` for the `60°` bound) in place of the "owed before proving" reading. Docstrings only: the diff touches no statement
+or proof line. They are built with stage 17's first build.
