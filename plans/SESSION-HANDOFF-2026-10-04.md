@@ -1,10 +1,16 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
-*Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–403 at this writing; its first two sections are the rules
+*Rewritten 2026-10-05 by Keryx at Kooshi's halt (inventory item 407). Current state only. A successor arriving with nothing
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–407 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **403**.
+> **Latest (written 2026-10-05 at Kooshi's halt — inventory item 407):** inventory items
+> run to **407** (IO3's hand-back adds the next).
+>
+> **On restart, first**: (1) `/tmp` is a tmpfs and is gone; its work files are in `/home/kooshi/source/lean-dir-tmp-rescue-2026-10-05/tmp/` (a record citing
+> `/tmp/claude-1000/…` reads it there, same relative path; item 407). (2) `git fetch`; check each branch tip below against `origin` (all were pushed at the halt).
+> (3) Each worktree's `.lake/build` is on disk and survives; if the toolchain or Mathlib moved meanwhile, build a tree once before a job uses it. (4) Three Opus
+> slots (item 323); fill them from the queue below, item (1) first. **Nothing is running at the halt.**
 >
 > **Held in the kernel, on `main`**: **MERGE** (item 375: `main` at `ca4dcfa2`, gated `df473bfe`, counts filed, item 376 — 3,807 records, 3,784 clean); waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -12,14 +18,19 @@ that judge the milestone, written before any job).*
 > **Staffing (item 323)**: **three slots** again (Kooshi's word). The first slot to free (IP4's, item 325) was not refilled;
 > three run now, and every slot that frees from here is refilled from the queue.
 >
-> **Running (3)** — each reports to "main" by hand-back; its report file is on its branch:
-> - **FS131-CC1** (`fs131-w5k`, a new branch from `fs131-w5` at `2736ab8c`): the collar bend's lane C — `Pushforward`, C's `BendCollar` children, B0.
->   Brief `data/fs131/briefs/FS131-CC1-collar.md`.
-> - **(open slot)** — **NEXT ACTION after the compaction**: brief and launch `stuckRun_ne_univ` + the procedure's last steps on `fs131-w5c` (item 403;
->   from M6's and IL2's briefs: `exists_vertexStep`/`exists_arcStep` restated per items 383 (b), 385 (a), E6 record § 4.5; KL1 plan § 3.3's moves' lemmas;
->   merge `fs131-wop` once IO3 lands OPEN; `exists_terminalSeq`).
-> - **FS131-IO3** (`fs131-wop`): OPEN's last leaf `open_allowedCone` over the margin, the positive `HasHornCount` example, the inhabitant note. Brief
->   `data/fs131/briefs/FS131-IO3-open.md`.
+> **At the halt** — the last two jobs:
+> - **FS131-CC1** (`fs131-w5k` at `bc168474`): **done** (item 405): `Pushforward` free of `sorry`, the two-germ chart on a circle, `degree_openArc`; R1–R3,
+>   inert and the degree case split over open children; four leaves and B0 left. Rulings item 406.
+> - **FS131-IO3** (`fs131-wop`): OPEN's last leaf `open_allowedCone`, the positive `HasHornCount` example, the inhabitant note — **told to stop at a saved
+>   stage** (item 407). Its record's last SAVED stage and `data/fs131/reports/FS131-IO3.md` on `fs131-wop` are the state; if its hand-back is not logged in
+>   the inventory, review it by artifact first on restart.
+>
+> **Queue on restart, in order**: (1) **FS131-CC2**, lane C's continuation on `fs131-w5k` (item 406 (d)): merge `fs131-w5` in first, build, then
+> `map_degree_lensCurve`, the hard pair (`map_degree_end` with `exists_collarFit`'s C4), `sides_end`, B0 `collarModel`; fix `tools/fs131_cc_stmt.py` (406 (c));
+> brief from `data/fs131/briefs/FS131-CC1-collar.md` and CC1's record § 3.2. (2) **`stuckRun_ne_univ` and the procedure's last steps** on `fs131-w5c`
+> (item 403; from M6's and IL2's briefs: `exists_vertexStep`/`exists_arcStep` restated per items 383 (b), 385 (a), E6 record § 4.5; KL1 plan § 3.3's moves'
+> lemmas; merge `fs131-wop` once OPEN is whole; `exists_terminalSeq`). (3) OPEN's continuation on `fs131-wop`, if IO3 left leaves. (4) The rest of the queue
+> paragraph below, from its item (4).
 >
 > **Done since the compaction**: **FS131-CG1** (item 402: the collar's lane G complete — `RadialPush`, `CollarMap` free of `sorry`); **FS131-IO2** (items 400–401: four of OPEN's five leaves in the kernel; `margin` and `ray0` repairs made); **FS131-M6** (items 398–399: **`fs131-w5` merged into `fs131-w5c`**; `run_hornBoundsQR` in the kernel; `stuckRun_ne_univ`
 > left); IO2's second finding (item 397: `OpenConfig` gains `ray0`); CG1's move commit `2736ab8c` (item 396); **FS131-KP2** (item 394: the collar bend planned — 53 children, about 4,750 lines, lanes G and C; the bent map as `F`'s
@@ -116,12 +127,12 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (2 + one open slot, item 403)
+## 3. Running now: nothing (Kooshi's halt, item 407)
 
-| job | model | brief | reports to |
+| job | model | brief | state |
 |---|---|---|---|
-| FS131-CC1 (the collar bend's lane C on `fs131-w5k`; items 395–399) | Opus | `data/fs131/briefs/FS131-CC1-collar.md` | branch `fs131-w5k`'s `data/fs131/reports/FS131-CC1.md` |
-| FS131-IO3 (OPEN's last leaf on `fs131-wop`; items 400–401) | Opus | `data/fs131/briefs/FS131-IO3-open.md` | branch `fs131-wop`'s `data/fs131/reports/FS131-IO3.md` |
+| FS131-CC1 (the collar bend's lane C on `fs131-w5k`) | Opus | `data/fs131/briefs/FS131-CC1-collar.md` | done, item 405 |
+| FS131-IO3 (OPEN's last leaf on `fs131-wop`) | Opus | `data/fs131/briefs/FS131-IO3-open.md` | stopped at a saved stage at the halt; report on its branch |
 
 
 **Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.

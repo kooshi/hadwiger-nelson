@@ -3639,3 +3639,44 @@ reason by the close.*
 404. **FS131-IO3 stopped on a server-side API error** (HTTP 529, overloaded), after Stage 11 (`5177c867`, readback) with uncommitted edits to `OpenMove`,
      `AxiomsIO.lean`, `scripts/Axioms.lean`; **resumed by message** (the same mind, below its line), told its last committed stage and its uncommitted files.
      Not a slip.
+405. **FS131-CC1 handed back** (Stage 3 SAVED, harness ≈ 464k by the task notice; record `fs131-w5k`'s `plans/FS131-collar-C-implementation.md`, Stages 1–3;
+     report `data/fs131/reports/FS131-CC1.md`; commits `f2ffa3c9`, `2e4bfd48`, `52925ac2`, `bc168474`, pushed). **Results, [kernel] on the standard three**:
+     `Plane/ValidMap/Pushforward` free of `sorry` — KP2's seven children (`pushforward_locallyConstant`, `pushforward_interiorPts`, `pushforward_region`,
+     `pushforward_coloursAt`, `hasDegree_iff_of_agree`, `hasDegree_iff_of_charts`, `hasDegree_iff_of_mem_interiorPts`), so `pushforward`, `pushforward_Γ`,
+     `pushforward_mem_interiorPts_iff`, `pushforward_col_apply` are off `sorryAx`; the general two-germ chart on a circle (`ArcMap.isSectorChart_circle`,
+     `ArcMap.degree_of_circle`, fourteen helpers); `CollarFit.degree_openArc`. **Proved over open children** (no `sorry` of their own; on `sorryAx` through lane
+     G's statements as they stand on this branch and lane C's open leaves): `map_R1`, `map_R2`, `map_R3`, `map_inert`, `coloursAt_subset`,
+     `side_ne_inner_of_mem_lens`, `map_ringArcsWithin`, `map_hasDegree`, `map_hasRepeatedColour` (from `map_degree_and_repeated`). **Left in lane C**:
+     `exists_collarFit`, `CollarFit.map_degree_lensCurve`, `CollarFit.map_degree_end`, `CollarFit.sides_end` (`sorry`), and B0 `collarModel` (not yet stated);
+     routes in record § 3.2, about 1,450 lines; the hard pair (`map_degree_end`, `exists_collarFit`'s C4) share the end germ's identification and suit one job.
+     **Receipt** (Keryx): `origin/fs131-w5k` is `bc168474`; the build log (`build/gate/build/20261005T123523Z-79691.log` in that tree) ends "Build completed
+     successfully (5791 jobs)", 0 warnings other than `sorry`; `sorry` by grep `Pushforward` 0, `BendCollar` 4; `data/fs131/cc/CCAxioms2.out` parsed: 29 records,
+     27 standard, 2 on `sorryAx` (`map_degree_lensCurve`, `bend_toward_collar`, the controls), and each of the thirteen results named above standard by name;
+     `CCAxioms3.out`: 21 records, 4 standard, 17 on `sorryAx`, as reported; `data/fs131/cc/stmt-stage3.txt` PASS; `degree_openArc`'s statement read against
+     `2736ab8c` — identical. On `fs131-w5k`, `RadialPush` (20) and `CollarMap` (12) still show `sorry` by grep because the branch was cut at CG1's move commit,
+     before its proofs (on `fs131-w5` at `5059983d`); the two branches' changed files since `2736ab8c` are disjoint except `scripts/Axioms.lean`.
+     **Corrections owed** (CC1's): (a) `ArcMap.exists_sphere_inter_ball_subset_openArc` (`Pushforward`) nearly duplicates `FlankUA`'s `sphere_near_mem_ringArc`,
+     which sits downstream of `BendCollar` — one copy upstream in `Plane/LocalStructure`, the other retired; (b) KP2's plan routes R1 through
+     `map_ringArcsWithin`, but `RingArcsWithin` gives each point its own sub-arc, not the whole arc; R1 goes through `ringArc_subset_Γ_of_finite`, and
+     `map_ringArcsWithin` (proved) is now used by nothing in the assembly (record § 3.1). **Tool defect, its own**: `tools/fs131_cc_stmt.py` reads a statement up
+     to `:= by`, so a term-mode proof of an unchanged statement reads as changed; worked around by writing two proofs `:= by exact …` (record § 3.3) — the same
+     class as CG1's `tools/fs131_cg_stmt.py` defect (item 402). **Prediction scored, in part**: KP2's reading that `hmax` is never used (item 390) — none of the
+     children proved so far uses it; the four open leaves are the rest of the test. **Question for lane G, answered by the record**: every map-level child
+     rests on `pushProfiles_collar`, which CG1 proved on `fs131-w5` (item 402). Credit: CC1, for `Pushforward` whole and a reusable chart on a circle.
+406. **Rulings on CC1's items.** (a) The duplicate: **joins item 387 (a)'s tidy moves** (one copy to `Plane/LocalStructure` at wave 5's landing). (b)
+     `map_ringArcsWithin`: **kept** (true, proved, harmless); deleted at the tidy moves if still unused at wave 5's landing; KP2's plan line corrected at the
+     filing. Alternative weighed: delete it now. Why: deleting proved text mid-lane costs a build and buys nothing before the landing. Confidence: high. (c) The
+     statement checker: **the successor fixes `tools/fs131_cc_stmt.py`** (split at the statement's top-level `:=`, with a planted term-mode control); the
+     `:= by exact` forms stay. Two per-job checkers with the same class of defect (items 402, 405) — **one shared statement checker for FS-131 is owed**
+     (tool defects owed). Confidence: high. (d) **The slot: not refilled** — Kooshi's halt (item 407). On restart, lane C's continuation (FS131-CC2) is queue
+     item (1): first merge `fs131-w5` into `fs131-w5k` (CG1's proofs, so CC1's stage-3 lemmas come off `sorryAx`; keep both `scripts/Axioms.lean` blocks),
+     build, then `map_degree_lensCurve`, the hard pair (`map_degree_end` with `exists_collarFit`'s C4), `sides_end`, B0 `collarModel`; then `fs131-w5k`
+     merges into `fs131-w5`. Confidence: high.
+407. **Kooshi's halt (2026-10-05)**: *"[…]
+     Have everyone come to a stopping point and move everything important out of /tmp"*. Done: no launch from here; FS131-IO3 (the only job running) told
+     by message to stop at its next saved stage, commit and push, rescue anything its record cites from `/tmp`, write its report, leave no process, and hand
+     back. `/tmp` is a tmpfs here (lost at power-off): its work files are copied to `/home/kooshi/source/lean-dir-tmp-rescue-2026-10-05/tmp/` (379 MB, outside
+     the repository; the agents' task outputs are symlinks into `~/.claude/projects/…/subagents/`, which persist, and are not copied; the scratch file of agent
+     identifiers is not copied, by the rule that keeps them out of files). Records that cite a `/tmp/claude-1000/…` path read it under that folder at the
+     same relative path. Every worktree: no uncommitted tracked change, nothing unpushed (checked against `origin`); untracked files are build logs and job
+     scratch on disk, which survive.
