@@ -116,6 +116,22 @@ Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plan
   `ArcMap.nodup_orbList`, `ArcMap.orbList_closed`, `ArcMap.mem_orbList`, `ArcMap.pow_sigma_pow`, `ArcMap.minimalPeriod_perm_pos`, `ArcMap.pow_minimalPeriod_apply`,
   `ArcMap.pow_mem_of_closed`
 
+**FS131-RW2 (stages 23–)**, the WALK lane's second implementer (brief `data/fs131/briefs/FS131-RW2-walk.md`, on `main`), all [kernel], each on exactly the
+standard three (receipt `data/fs131/rw/axioms-rw2b.txt` against the final build's oleans, checked by `tools/fs131_ip_axioms.py`); statements of the
+skeleton unchanged (`tools/fs131_rw_stmt_check.py`: all 148 declarations of `MapGraph` and `CurveGraph` at `515e28af` byte-identical):
+
+- `ArcMap.exists_boundaryWalk` (**WALK**) — every outer tile of every valid plane map has a boundary walk (`Plane/ValidMap/MapGraph`)
+- `port_arc` (**C5a**) — the component of `C'` through a port is an injective arc from it to its partner (`Plane/CurveGraph`); `port_pair` re-proved over it
+- `ArcMap.exists_isPortGraph` (**C5b–C5d, pure**) — a compact connected set of even, positive curve stars has a port graph (`ArcMap.IsPortGraph`, new
+  structure) over any finite vertex set holding its non-regular points; children `ArcMap.ray_piece`, `ArcMap.isPreconnected_inter_ball_of_hasCurveStar`,
+  `ArcMap.exists_Ioo_of_preimage_ball`
+- `ArcMap.exists_edgeOf` (**C5d, on the map**) — each edge of the port graph of `∂ cl x̂` is an edge of `x` with one outer tile; children
+  `ArcMap.frontier_fill_regular_local`, `ArcMap.sector_inter_sphere`, `ArcMap.nextDir_two`, `ArcMap.isOuterTile_of_closure_inter`,
+  `ArcMap.subset_of_isPreconnected_of_locally`, `ArcMap.closure_inter_subset_frontier_fill`, `ArcMap.frontier_fill_hasCurveStar_pos`,
+  `ArcMap.nonempty_frontier_closure_fill`
+- `ArcMap.IsPortGraph.exists_shared_vertex` (**C7**) — on a connected set, the edges are connected through shared vertices
+- `ArcMap.isBoundaryWalk_of_trail`, `ArcMap.BasedTrail.insert_all`, `ArcMap.BasedTrail.map` (**C10**) — the assembly
+
 IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
 
@@ -1250,3 +1266,97 @@ Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up
 - The build: under the slot (40 GiB, 8 cpus, `BATCH=4`), **OK — 447 of 447 batches, 6 modules rebuilt (`CurveGraph` 5.2 s, `MapTopology` 13 s,
   `BaseWalk` 3.0 s, `MapGraph` 19 s, `BaseDense` 1.5 s, `Proofs` 1.5 s), 9 with warnings, every one `declaration uses 'sorry'`, `EXIT 0`, 8 min 49 s
   wall** (`build/gate/build/20261005T070132Z-2178471.log`; driver log `data/fs131/rw/build-rw2-c5a.log`). One attempt.
+
+## Stage 25 — SAVED (FS131-RW2): C5b–C5d, C7, C10 and `exists_boundaryWalk` proved — WALK has no `sorry`
+
+Each child was stated, then proved, in the working file `data/fs131/rw/WalkScratch.lean` (commit `6988eb8e`, elaborated against the stage-24
+oleans), in § 22.2's order, then moved verbatim into `MapGraph` before `exists_boundaryWalk` (one rename: `HasCurveStar.isPreconnected_inter_ball`
+→ `isPreconnected_inter_ball_of_hasCurveStar`, so that no `ArcMap.HasCurveStar` namespace is minted); the working file is removed.
+
+### 25.1 Proved (all in `Plane/ValidMap/MapGraph`, namespace `ArcMap`; statements of the skeleton unchanged)
+
+- **C5b–C5d, pure** — **`IsPortGraph C N P vtx σ E`** (new structure, the interface between the curve topology and the map): ports `P` at vertices
+  `vtx d ∈ N`, paired by `σ`; evenly many ports and at least one at each vertex; each edge closed, in `C`, holding its two end vertices, connected
+  off `N` and in the closure of that part, meeting `N` only at its ends and another edge only in `N`; the edges cover `C`; each edge has a pure
+  point off `N` about which every small disc meets the edge as it meets `C`, misses every other edge, and cuts the edge into two closed connected
+  pieces, one from each end to its own circle point. Spec example: a vertex with no port is no port graph. Inhabitant: **`exists_isPortGraph`**
+  — every compact connected `C` with an even, positive curve star at each point has a port graph over any finite nonempty vertex set `N ⊆ C`
+  holding its non-regular points (ports = the rays' points at a cut radius `ρ`; `σ` = the other end of the port's arc, `port_arc`; the edge of a
+  port = its radial piece ∪ its arc ∪ its partner's radial piece; coverage because a component of `C'` with no port would be clopen in `C`).
+  Children: `ray_piece` (the radial piece `insert v (f '' (0, ρ])` is compact and connected, in `B̄(v, ρ)`, with `v` in the closure of its punctured
+  part), `isPreconnected_inter_ball_of_hasCurveStar` (a curve star is locally connected), `exists_Ioo_of_preimage_ball` (the parameters of an
+  injective arc inside a small disc about an interior point, with the arc's points there connected, are one interval `(c₁, c₂)`, `γ c₁`, `γ c₂`
+  on the circle).
+- **C5d, on the map** — **`exists_edgeOf`**: each edge of a port graph of `C = ∂ cl x̂` (vertices holding the points where `Γ` is not regular) is
+  `IsEdgeOf x y (E d) (vtx d) (vtx (σ d)) p ρ` for one outer tile `y ⊆ (cl x̂)ᶜ`, with `p ∉ N`, the closed disc missing every other edge, and `y` the
+  only tile off `cl x̂` whose closure meets the edge off `N`. Children: **`frontier_fill_regular_local`** (at a point of `C` where `Γ` is regular:
+  two germs, both branches in `C`, one sector in `x`, the other in a tile `Y` off `cl x̂` — the only such tile meeting the disc, holding `C` there
+  in its closure; each smaller disc is `x ∪ Y ∪ C`, its circle meets `x` and `Y` in nonempty arcs, and its two points of `C` interleave with points
+  of `x ∪ Y`), `sector_inter_sphere` (a sector meets a circle about its vertex in the polar arc between its germs' directions), `nextDir_two`,
+  `isOuterTile_of_closure_inter` (a tile off `cl x̂` whose closure meets `cl x` is outer), `subset_of_isPreconnected_of_locally`,
+  `closure_inter_subset_frontier_fill`, `frontier_fill_hasCurveStar_pos` (C3 with at least one ray), `nonempty_frontier_closure_fill`.
+- **C7** — **`IsPortGraph.exists_shared_vertex`**: on a connected `C`, a `σ`-closed set of ports, neither empty nor all, shares a vertex with its
+  complement (else the two sides' edges are disjoint closed sets covering `C`).
+- **C10** — `BasedTrail.map`, **`BasedTrail.insert_all`** (finitely many entries, each starting and ending at some entry's start, go in one at a
+  time), **`isBoundaryWalk_of_trail`** (a nodup closed trail of entries with tiles, starts and ends in their tiles' closures, edges on the edge
+  entries, repeated tiles only at edge entries, distinct edges off each other's closed discs, and exactly the neighbours as tiles, read cyclically,
+  is a boundary walk: hinge after an entry = its end).
+- **`exists_boundaryWalk`** (WALK) — its body: the stars and the vertices (`finite_frontier_fill_nonRegular` with one point of `C` added); the
+  port graph; `exists_edgeOf` at each port; `exists_euler` on the ports (`σ` and a vertex-preserving involution from `exists_vertex_involution`
+  as permutations of the subtype, `hconn` from C7); entries `ports ⊕ outer tiles`, the circuit's ports first, then each neighbour meeting `C` only
+  at vertices inserted at one of its vertices; `isBoundaryWalk_of_trail`. The docstring is rewritten to the route actually taken (the statement is
+  untouched).
+
+`IsBoundaryWalk` and `IsEdgeOf` are unchanged — no field or clause was added or dropped, so nothing was messaged about them.
+
+### 25.2 Measured, and the re-price (done-means 2)
+
+C5a about 10 minutes (stage 24); C5b–C5d pure (with C7) about 25 minutes, one elaboration error class per lemma (renamed Mathlib lemmas:
+`le_or_gt`, `le_of_not_gt`, `sdiff_subset`); the map half (C5d's local picture, `exists_edgeOf`) about 15 minutes; C10 and the body about
+15 minutes. So the re-price after the first two children was moot: WALK closed in the session, about 1.1 hours of work against RW1's
+"about 1 session" and RL1's 4–6 sessions. No dispatch to a companion was needed (no obligation took three attempts).
+
+## Stage 26 — SAVED (FS131-RW2): the build, the receipt, and the handover
+
+### 26.1 The build
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`), my wrapper writing its `EXIT` line: **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 21 s,
+`Proofs` 1.7 s), 9 modules with warnings, `EXIT 0`, 8 min 31 s** (`build/gate/build/20261005T073716Z-2385209.log`; driver log
+`data/fs131/rw/build-rw2-final.log`). The only warning in `MapGraph` is `declaration uses 'sorry'` at l. 1430 — `IsBoundaryWalk.sep`, the SEP
+lane's; `CurveGraph` has none. The build before it (`data/fs131/rw/build-rw2-walk.log`, `build/gate/build/20261005T072722Z-2308008.log`) was
+green but its linter fired 17 times, `missing doc string for public field IsPortGraph.*` — the negative control for "linters silent"; the fields
+got docstrings and the final build is silent.
+
+### 26.2 The receipt
+
+`data/fs131/rw/AxiomsRW2b.lean` (importing `MapGraph`, `pp.fullNames`) run against the final build's oleans → `data/fs131/rw/axioms-rw2b.txt`
+(24 records), checked by `tools/fs131_ip_axioms.py` (IP2's checker, run, not edited) against `data/fs131/rw/axioms-rw2a-clean.txt` /
+`axioms-rw2a-sorry.txt`: **`OK: 21 clean on the standard three, 3 controls on sorryAx`** — clean: `port_arc`, `port_pair`, `even_sum_deg`, the 17
+children of § 25.1 and **`exists_boundaryWalk`**; controls on `sorryAx`: `IsBoundaryWalk.sep`, `filledGraph_ringList`, `cvb_thom_reduced` (they rest
+on SEP). Planted fault (`IsBoundaryWalk.sep` listed as clean) → `FAIL … NOT CLEAN [… 'sorryAx']`, exit 1. `scripts/Axioms.lean`'s FS131-KP block
+gains the 18 new theorems under "-- FS131-RW2's children", above the `=== PURCHASED ===` banner. No `axiom`, no `native_decide`, no `sorry` added
+(the diff against `515e28af` greps clean; its control — the removed lines — finds the one `sorry` this job removed). No import changed, no module
+added (`ARCHITECTURE.md` and `Proofs.lean` untouched).
+
+### 26.3 Statements
+
+`tools/fs131_rw_stmt_check.py 515e28af` over every declaration of `MapGraph` and `CurveGraph` at `515e28af` (148, names extracted from that
+revision): **all SAME, PASS** (`data/fs131/rw/stmt-check-rw2.txt`) — `port_pair`, `exists_boundaryWalk`, `IsBoundaryWalk`, `IsEdgeOf`,
+`IsBoundaryWalk.sep`, `filledGraph_ringList`, `filledGraph_adj_iff` among them. Planted faults at stage 24 fired.
+
+### 26.4 What is proved and what is left
+
+WALK is proved: **`exists_boundaryWalk` carries no `sorry` beneath and rests on the standard three.** Left on this branch's F-RING path: SEP
+(`IsBoundaryWalk.sep`, the SEP lane's), on which `filledGraph_ringList`, `filledGraph_rings`, `filledGraph_planarLike` and `cvb_thom_reduced`
+still rest. Nothing of WALK is left. For the SEP lane: WALK uses `IsBoundaryWalk.sep` exactly as stated, for every walk meeting the fields; the
+walk it builds is an Euler circuit of the boundary graph of `∂ cl x̂` with each vertex-only neighbour inserted once at a vertex.
+
+### 26.5 For the coordinator
+
+- `IsPortGraph` is a new structure that theorems take as a hypothesis (`exists_edgeOf`, `IsPortGraph.exists_shared_vertex`); by
+  `scripts/Vacuity.lean`'s registration procedure I would file it **OUT**, like `IsSectorChart`: its existence is a theorem
+  (`exists_isPortGraph`), and every site takes it at a variable set. `scripts/Vacuity.lean` is not in my touches; a draft line for its list:
+  "`ArcMap.IsPortGraph` (FS131-RW2): OUT — existence is a theorem (`exists_isPortGraph`, at every `∂ cl x̂` of a valid plane map, so at
+  `sevenBrickMap`); every site takes it at a variable set, vertex set and port data; register it when a theorem takes it at a concrete set."
+- The gate's recorded counts (`CLAUDE.md` § The gate, § Trust ledger) will move when this branch lands: 18 new audited records, all clean, and
+  `exists_boundaryWalk` leaves the `sorryAx` side; I ran neither `axioms.sh` nor `vacuity.sh` (not this job's), so I give no counts.

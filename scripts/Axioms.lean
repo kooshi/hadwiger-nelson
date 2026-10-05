@@ -3236,6 +3236,26 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.sigma_ne_pow
 #print axioms HadwigerNelson.Plane.ArcMap.exists_euler
 
+-- FS131-RW2's children (WALK: the port graph of a filled tile's frontier, its edges, the Euler circuit's assembly)
+#print axioms HadwigerNelson.Plane.port_arc
+#print axioms HadwigerNelson.Plane.ArcMap.ray_piece
+#print axioms HadwigerNelson.Plane.ArcMap.isPreconnected_inter_ball_of_hasCurveStar
+#print axioms HadwigerNelson.Plane.ArcMap.exists_Ioo_of_preimage_ball
+#print axioms HadwigerNelson.Plane.ArcMap.IsPortGraph.exists_shared_vertex
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isPortGraph
+#print axioms HadwigerNelson.Plane.ArcMap.subset_of_isPreconnected_of_locally
+#print axioms HadwigerNelson.Plane.ArcMap.nonempty_frontier_closure_fill
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_hasCurveStar_pos
+#print axioms HadwigerNelson.Plane.ArcMap.closure_inter_subset_frontier_fill
+#print axioms HadwigerNelson.Plane.ArcMap.isOuterTile_of_closure_inter
+#print axioms HadwigerNelson.Plane.ArcMap.nextDir_two
+#print axioms HadwigerNelson.Plane.ArcMap.sector_inter_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_regular_local
+#print axioms HadwigerNelson.Plane.ArcMap.exists_edgeOf
+#print axioms HadwigerNelson.Plane.ArcMap.BasedTrail.map
+#print axioms HadwigerNelson.Plane.ArcMap.BasedTrail.insert_all
+#print axioms HadwigerNelson.Plane.ArcMap.isBoundaryWalk_of_trail
+
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 
 #print axioms HadwigerNelson.Plane.dot_e_e
