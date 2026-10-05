@@ -1309,6 +1309,40 @@ non-strict `woodallCone`, no Condition 5, does apply), the colours `y ≠ z` and
 
 **Order of this job**: the two shadow leaves first (one route, both mirrors), then the others as the budget allows.
 
+## Stage 39 — SAVED (FS131-I4m): `flankQ_upper_shadow`, `flankQ_lower_shadow` — FLANK-Q is sorry-free; 7 `sorry` left on the branch (Contact 3, UnitArc 3, BaseSteps 1)
+
+**The shadow clause proved, both mirrors, on a shorter route than Stage 36's.** Stage 36's step 1 (the cusp: no `g` inside `B(N, 2)` near `R₂`, by
+validity against the flank) is not needed, and with it neither validity nor the flank is read: at a point `p` of `R₂` where the arcs nearby lie on
+the circle of radius `2` about `N`, the two sides of that circle near `p` are each one colour, and `p ∈ cl(region g)` makes one of them `g`; `ω(z)`
+crosses the circle at `p` transversally, so it enters **both** sides, and the intermediate value theorem in the `g` side gives a `g`-point at distance
+exactly `1` from `z`. Children, in `UnitArc` (the first five before `namespace ArcMap` ahead of FLANK-Q, the rest just before `flankQ_upper_shadow`):
+- `r2Cross` (def: `arg u + arccos((3 + ‖u‖²)/(4‖u‖))`, with a spec example at `u = 2`), `sq_norm_two_e_sub` (`‖2e(t) − u‖² = 4 + ‖u‖² − 4‖u‖cos(t − arg u)`),
+  `r2Cross_spec` (for `1 < ‖u‖ < 3`, `Im u > 0`: `0 < arg u < r2Cross u < arg u + π/2`, inside `ω(u)` between `arg u` and the crossing, outside from it
+  to `arg u + π`), `continuousAt_r2Cross_one`, `r2Cross_one` — the crossing angle and its limit `0` at `u = 1`.
+- `Arc.finite_inter_sphere_two_or_subset` (the homothety `z ↦ (z + C)/2` carried through wave 3's `Arc.finite_inter_sphere_or_eq_circ`: a
+  nondegenerate arc meets `sphere C 2` finitely or lies on it); `ArcMap.eventually_arcs_on_sphere_two` (at `C + 2e(θ₀)` in the domain, for every
+  `θ ≠ θ₀` near `θ₀` the point `C + 2e(θ)` is in the domain and some ball about it meets the arcs only on the circle).
+- `ArcMap.exists_polarBox_subset_region` (at such a point in `cl(region g)`, the polar box just outside or just inside the circle lies in `region g`;
+  the boxes are images of products of intervals, so preconnected; a `g`-point near `p` is put in polar form with `arg` continuous at `2`);
+  `ArcMap.mem_shadow_of_crossing` (with points of the circle at angles arbitrarily near `p`'s both inside and outside `ω(z)`, `z ∈ shadow (region g)`).
+- `flankQ_upper_shadow`: `u = (z − N)/e(α − π/2)` is `(1 − frameY) + i·frameX`, so `Im u > 0` on the horn and `‖u‖ = dist z N > 1`; `u → 1` at `v`,
+  so the crossing angle tends to `0` uniformly on small horns; the crossing point `N + 2e(α − π/2 + r2Cross u)` lies in `R₂` and off the finitely many
+  special points. `flankQ_lower_shadow`: the same at `S′` with `conj u` and the angle `α + π/2 − r2Cross (conj u)`.
+`hF` and `hg` are unread in both (bound by `have _ :=`, as FLANK-Q's `hcN`); `hv` is read once, for `S′` (resp. `N`) in the domain.
+Read against § 12.2 and Stage 36's statement: same statements (`tools/fs131_i4_stmts.py 70075915 …UnitArc.lean`: 126 old, 134 new, 8 added, 0 changed,
+exit 0). With them **`flankQ_upper`, `flankQ_lower` read the standard three**.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 629 names, 8 added; `--check` exit 0. **Duplicates**: `tools/fs131_i4_treedupes.py` — 7,550 declarations
+(7,541 + the 9 added: 8 theorems and `r2Cross`), the same 3 pre-existing repeats. **Axioms** (`data/fs131/i4/axioms-i4m-39.txt`, this stage's
+oleans, not a gate log): the eight children, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `flankQ_upper`, `flankQ_lower` — all
+`[propext, Classical.choice, Quot.sound]`. No `native_decide`, no axiom, no import changed. **Build**: "build: OK — 444 of 444 batches, 3 module(s)
+rebuilt, 3 module(s) with warnings, 10m0s", exit 0 (`build/gate/build/20261005T000153Z-3696869.log`; driver log `data/fs131/i4/build-i4m-stage39.log`):
+7 distinct `declaration uses sorry` — Contact 3 (the moves), UnitArc 3 (`bend_toward`, `bend_away`, `nb4p`), BaseSteps 1 (`n3_end`) — and no other
+warning.
+
+**Re-pricing**: Stage 36 priced the pair at "a session, 300–400 lines"; it took about 490 lines and about 40k tokens, nearly first-time clean, because
+the cusp step dropped out.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;

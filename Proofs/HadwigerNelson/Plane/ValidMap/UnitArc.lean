@@ -3230,6 +3230,139 @@ theorem normalPt_sub_add_eq_framePt (v : ℂ) (α ρ t : ℝ) :
   simp only [Complex.ofReal_mul, Complex.ofReal_sub, Complex.ofReal_one, Complex.ofReal_neg]
   linear_combination (-((ρ : ℂ) * (Real.sin t : ℂ) * e α)) * Complex.I_sq
 
+/-- The angle, measured from `arg u`, at which the circle of radius `2` about `0` meets `ω(u)` going counter-clockwise. -/
+noncomputable def r2Cross (u : ℂ) : ℝ := Complex.arg u + Real.arccos ((3 + ‖u‖ ^ 2) / (4 * ‖u‖))
+
+/-- The squared distance from `2 e(t)` to `u`, by the angle from `arg u`. -/
+theorem sq_norm_two_e_sub (u : ℂ) (t : ℝ) :
+    ‖2 * e t - u‖ ^ 2 = 4 + ‖u‖ ^ 2 - 4 * ‖u‖ * Real.cos (t - Complex.arg u) := by
+  have hu : u = (‖u‖ : ℂ) * e (Complex.arg u) := by
+    rw [e]; exact (Complex.norm_mul_exp_arg_mul_I u).symm
+  conv_lhs => rw [hu]
+  rw [Complex.sq_norm, Complex.normSq_apply, e_eq, e_eq]
+  simp only [Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+    Complex.add_re, Complex.add_im, Complex.I_re, Complex.I_im, Complex.re_ofNat, Complex.im_ofNat]
+  rw [Real.cos_sub]
+  have h1 := Real.cos_sq_add_sin_sq t
+  have h2 := Real.cos_sq_add_sin_sq (Complex.arg u)
+  nlinarith [h1, h2]
+
+/-- **The crossing of `ω(u)` with the circle of radius `2`** (child of FLANK-Q's shadow clause): for `1 < ‖u‖ < 3` above the real
+axis, the angle `r2Cross u` lies in `(0, arg u + π/2)`, the point `2 e(t)` is inside `ω(u)` for `t` between `arg u` and it, and outside
+for `t` between it and `arg u + π`. -/
+theorem r2Cross_spec {u : ℂ} (h1 : 1 < ‖u‖) (h3 : ‖u‖ < 3) (him : 0 < u.im) :
+    0 < Complex.arg u ∧ Complex.arg u < r2Cross u ∧ r2Cross u < Complex.arg u + π / 2 ∧
+      (∀ t, Complex.arg u < t → t < r2Cross u → ‖2 * e t - u‖ < 1) ∧
+      (∀ t, r2Cross u < t → t < Complex.arg u + π → 1 < ‖2 * e t - u‖) := by
+  have hπ := Real.pi_pos
+  set ρ := ‖u‖ with hρ
+  set x := (3 + ρ ^ 2) / (4 * ρ) with hx
+  have hρ0 : 0 < ρ := by linarith
+  have hx0 : 0 < x := by positivity
+  have hx1 : x < 1 := by
+    rw [hx, div_lt_one (by positivity)]; nlinarith
+  have harg0 : 0 < Complex.arg u := by
+    rcases (Complex.arg_nonneg_iff.mpr him.le).lt_or_eq with h | h
+    · exact h
+    · exfalso
+      have := (Complex.arg_eq_zero_iff.mp h.symm).2
+      linarith
+  have hargπ : Complex.arg u < π := by
+    rcases (Complex.arg_le_pi u).lt_or_eq with h | h
+    · exact h
+    · exfalso
+      have := (Complex.arg_eq_pi_iff.mp h).2
+      linarith
+  set Δ := Real.arccos x with hΔ
+  have hΔ0 : 0 < Δ := Real.arccos_pos.mpr hx1
+  have hΔ1 : Δ < π / 2 := Real.arccos_lt_pi_div_two.mpr hx0
+  have hcosΔ : Real.cos Δ = x := Real.cos_arccos (by linarith) hx1.le
+  have hsc : r2Cross u = Complex.arg u + Δ := rfl
+  refine ⟨harg0, by rw [hsc]; linarith, by rw [hsc]; linarith, ?_, ?_⟩
+  · intro t ht1 ht2
+    rw [hsc] at ht2
+    have hlt : x < Real.cos (t - Complex.arg u) := by
+      rw [← hcosΔ]
+      exact Real.cos_lt_cos_of_nonneg_of_le_pi (by linarith) (by linarith) (by linarith)
+    have hsq := sq_norm_two_e_sub u t
+    have hxρ : 4 * ρ * x = 3 + ρ ^ 2 := by rw [hx]; field_simp
+    have : ‖2 * e t - u‖ ^ 2 < 1 := by rw [hsq]; nlinarith
+    nlinarith [norm_nonneg (2 * e t - u)]
+  · intro t ht1 ht2
+    rw [hsc] at ht1
+    have hlt : Real.cos (t - Complex.arg u) < x := by
+      rw [← hcosΔ]
+      exact Real.cos_lt_cos_of_nonneg_of_le_pi hΔ0.le (by linarith) (by linarith)
+    have hsq := sq_norm_two_e_sub u t
+    have hxρ : 4 * ρ * x = 3 + ρ ^ 2 := by rw [hx]; field_simp
+    have : 1 < ‖2 * e t - u‖ ^ 2 := by rw [hsq]; nlinarith
+    nlinarith [norm_nonneg (2 * e t - u)]
+
+/-- `r2Cross` is continuous at `u = 1` (so it tends to `r2Cross 1 = 0` there). -/
+theorem continuousAt_r2Cross_one : ContinuousAt r2Cross 1 := by
+  unfold r2Cross
+  refine (Complex.continuousAt_arg (by simp [Complex.mem_slitPlane_iff])).add ?_
+  refine Real.continuous_arccos.continuousAt.comp ?_
+  refine ContinuousAt.div (by fun_prop) (by fun_prop) (by simp)
+
+/-- At `u = 1` the crossing angle is `0`. -/
+theorem r2Cross_one : r2Cross 1 = 0 := by
+  simp only [r2Cross, Complex.arg_one, norm_one]
+  norm_num
+
+
+
+/-- **A nondegenerate arc meets the circle of radius `2` about `C` finitely, or lies on it** (the homothety `z ↦ (z + C)/2`, which takes
+that circle to `ω(C)` and arcs to arcs, carried through `Arc.finite_inter_sphere_or_eq_circ`). -/
+theorem Arc.finite_inter_sphere_two_or_subset (a : Arc) (ha : a.Nondegenerate) (C : ℂ) :
+    (a.carrier ∩ sphere C 2).Finite ∨ a.carrier ⊆ sphere C 2 := by
+  have hinj : Function.Injective (fun z : ℂ => (z + C) / 2) := by
+    intro z w h; simp only at h; linear_combination 2 * h
+  have hsph : ∀ z, z ∈ sphere C 2 ↔ (z + C) / 2 ∈ sphere C 1 := by
+    intro z
+    rw [mem_sphere, mem_sphere, dist_eq_norm, dist_eq_norm,
+      show (z + C) / 2 - C = (z - C) / 2 by ring, norm_div]
+    simp only [Complex.norm_ofNat]
+    constructor <;> intro h <;> linarith
+  cases a with
+  | seg p q =>
+    left
+    have hnd : (Arc.seg ((p + C) / 2) ((q + C) / 2)).Nondegenerate := by
+      intro h; exact ha (hinj h)
+    rcases Arc.finite_inter_sphere_or_eq_circ _ hnd C with h | ⟨θ₀, θ₁, h⟩
+    · refine (h.preimage hinj.injOn).subset ?_
+      rintro z ⟨hz, hzs⟩
+      refine ⟨?_, (hsph z).mp hzs⟩
+      obtain ⟨s, t, hs, ht, hst, rfl⟩ := hz
+      refine ⟨s, t, hs, ht, hst, ?_⟩
+      simp only [Complex.real_smul]
+      linear_combination (C / 2) * (by exact_mod_cast hst : ((s : ℂ) + t) = 1)
+    · cases h
+  | circ c ρ θ₀ θ₁ =>
+    obtain ⟨hρ, h01, h01'⟩ := ha
+    have hnd : (Arc.circ ((c + C) / 2) (ρ / 2) θ₀ θ₁).Nondegenerate := ⟨by linarith, h01, h01'⟩
+    rcases Arc.finite_inter_sphere_or_eq_circ _ hnd C with h | ⟨θa, θb, h⟩
+    · left
+      refine (h.preimage hinj.injOn).subset ?_
+      rintro z ⟨hz, hzs⟩
+      refine ⟨?_, (hsph z).mp hzs⟩
+      obtain ⟨θ, hθ, rfl⟩ := hz
+      refine ⟨θ, hθ, ?_⟩
+      simp only; push_cast; ring
+    · right
+      simp only [Arc.circ.injEq] at h
+      obtain ⟨hc, hρ2, -, -⟩ := h
+      have hcC : c = C := by linear_combination 2 * hc
+      have hρ' : ρ = 2 := by linarith
+      rintro z ⟨θ, -, rfl⟩
+      rw [mem_sphere, dist_eq_norm, hcC, hρ', add_sub_cancel_left, norm_mul, norm_e]
+      simp
+
+/-- Spec: at `u = 2` (norm `2`, argument `0`) the crossing angle is `arccos (7/8)`. -/
+example : r2Cross 2 = Real.arccos (7 / 8) := by
+  simp only [r2Cross, Complex.norm_ofNat]
+  norm_num
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
@@ -3422,13 +3555,287 @@ theorem IsHorn.isRingArc_upper {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {c
   subst hgc hcc
   exact ⟨α - π / 2 + τ, by linarith, hR⟩
 
+/-- **Near a point of the circle of radius `2` about `C`, all but finitely many nearby points of that circle see only arcs lying on
+the circle** (child of FLANK-Q's shadow clause): at `S₀ = C + 2 e(θ₀)` in the domain, for every angle `θ ≠ θ₀` near `θ₀` the point
+`C + 2 e(θ)` is in the domain and some ball about it meets the arcs only on the circle. -/
+theorem eventually_arcs_on_sphere_two {C : ℂ} {θ₀ : ℝ} (hd : C + 2 * e θ₀ ∈ F.dom) :
+    ∀ᶠ θ in 𝓝[≠] θ₀, C + 2 * e θ ∈ F.dom ∧
+      ∃ η > 0, ∀ w ∈ ball (C + 2 * e θ) η, w ∈ ⋃ a ∈ F.arcs, a.carrier → dist w C = 2 := by
+  obtain ⟨t, ht, hfin⟩ := F.locallyFinite _ hd
+  set A := {a | a ∈ F.arcs ∧ (a.carrier ∩ t).Nonempty} with hA
+  set Afin := {a | a ∈ A ∧ (a.carrier ∩ sphere C 2).Finite} with hAfin
+  have hAfinF : Afin.Finite := hfin.subset fun a ha => ha.1
+  set D := ⋃ a ∈ Afin, a.carrier with hD
+  have hDc : IsClosed D := hAfinF.isClosed_biUnion fun a _ => a.isClosed_carrier
+  have hE : (D ∩ sphere C 2).Finite := by
+    rw [hD, iUnion₂_inter]
+    exact hAfinF.biUnion fun a ha => ha.2
+  have hcont : Continuous (fun θ : ℝ => C + 2 * e θ) := by unfold e; fun_prop
+  -- the points of the circle near `S₀` lie in the interior of `t` and in the domain
+  have h1 : ∀ᶠ θ in 𝓝 θ₀, C + 2 * e θ ∈ interior t ∩ F.dom :=
+    hcont.continuousAt.preimage_mem_nhds (inter_mem (interior_mem_nhds.mpr ht) (F.isOpen_dom.mem_nhds hd))
+  -- and, `θ ≠ θ₀` near `θ₀`, off the finite set `D ∩ sphere C 2`
+  have hinj : InjOn (fun θ : ℝ => C + 2 * e θ) (Ioo (θ₀ - π) (θ₀ - π + 2 * π)) := by
+    have := injOn_spherePt C (show (0 : ℝ) < 2 by norm_num) (θ₀ - π)
+    intro x hx y hy hxy
+    exact this hx hy (by simpa [spherePt] using hxy)
+  set Θ := (fun θ : ℝ => C + 2 * e θ) ⁻¹' (D ∩ sphere C 2) ∩ Ioo (θ₀ - π) (θ₀ - π + 2 * π) with hΘ
+  have hΘfin : Θ.Finite :=
+    Set.Finite.of_finite_image (hE.subset (image_subset_iff.mpr fun θ (hθ : θ ∈ Θ) => hθ.1))
+      (hinj.mono fun θ (hθ : θ ∈ Θ) => hθ.2)
+  have h2 : ∀ᶠ θ in 𝓝[≠] θ₀, θ ∉ Θ := by
+    have hcl : IsClosed (Θ \ {θ₀}) := (hΘfin.subset sdiff_subset).isClosed
+    have hmem : (Θ \ {θ₀})ᶜ ∈ 𝓝 θ₀ := hcl.isOpen_compl.mem_nhds (fun h => h.2 rfl)
+    filter_upwards [nhdsWithin_le_nhds hmem, self_mem_nhdsWithin] with θ h hne h'
+    exact h ⟨h', hne⟩
+  have h3 : ∀ᶠ θ in 𝓝 θ₀, θ ∈ Ioo (θ₀ - π) (θ₀ - π + 2 * π) :=
+    Ioo_mem_nhds (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos])
+  filter_upwards [nhdsWithin_le_nhds h1, h2, nhdsWithin_le_nhds h3] with θ hθ hθΘ hθI
+  refine ⟨hθ.2, ?_⟩
+  have hpD : C + 2 * e θ ∉ D := by
+    intro h
+    refine hθΘ ⟨⟨h, ?_⟩, hθI⟩
+    rw [mem_sphere, dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e]; simp
+  obtain ⟨η₁, hη₁, hb1⟩ := Metric.isOpen_iff.mp hDc.isOpen_compl _ hpD
+  obtain ⟨η₂, hη₂, hb2⟩ := Metric.isOpen_iff.mp isOpen_interior _ hθ.1
+  refine ⟨min η₁ η₂, lt_min hη₁ hη₂, fun w hw hwa => ?_⟩
+  have hw1 : w ∈ ball (C + 2 * e θ) η₁ := ball_subset_ball (min_le_left _ _) hw
+  have hw2 : w ∈ interior t := hb2 (ball_subset_ball (min_le_right _ _) hw)
+  obtain ⟨a, ha, hwa'⟩ := mem_iUnion₂.mp hwa
+  have haA : a ∈ A := ⟨ha, w, hwa', interior_subset hw2⟩
+  rcases Arc.finite_inter_sphere_two_or_subset a (F.nondegenerate a ha) C with hf | hs
+  · exact absurd (mem_iUnion₂.mpr ⟨a, ⟨haA, hf⟩, hwa'⟩) (hb1 hw1)
+  · exact hs hwa'
+
+/-- **One side of the circle of radius `2`, near a point of it in a class's closure, is that class** (child of FLANK-Q's shadow
+clause): at `p = C + 2 e(φ)` in the domain and in the closure of `g`'s class, with the arcs near `p` lying on the circle, some polar
+box just outside the circle, or just inside it, about `p` lies in `g`'s class. -/
+theorem exists_polarBox_subset_region {C : ℂ} {φ : ℝ} {g : Fin k} (hd : C + 2 * e φ ∈ F.dom)
+    (hcl : C + 2 * e φ ∈ closure (F.region g)) {η₀ : ℝ} (hη₀ : 0 < η₀)
+    (harc : ∀ w ∈ ball (C + 2 * e φ) η₀, w ∈ ⋃ a ∈ F.arcs, a.carrier → dist w C = 2) :
+    ∃ η > 0, η < 1 ∧
+      ((fun q : ℝ × ℝ => C + (q.1 : ℂ) * e q.2) '' (Ioo 2 (2 + η) ×ˢ Ioo (φ - η) (φ + η)) ⊆ F.region g ∨
+        (fun q : ℝ × ℝ => C + (q.1 : ℂ) * e q.2) '' (Ioo (2 - η) 2 ×ˢ Ioo (φ - η) (φ + η)) ⊆ F.region g) := by
+  set p := C + 2 * e φ with hp
+  obtain ⟨η₁, hη₁, hball⟩ := Metric.isOpen_iff.mp F.isOpen_dom p hd
+  set η := min (min η₁ η₀ / 3) (1 / 2) with hη
+  have hη0 : 0 < η := lt_min (by positivity) (by norm_num)
+  have hη1 : η ≤ min η₁ η₀ / 3 := min_le_left _ _
+  have hηh : η ≤ 1 / 2 := min_le_right _ _
+  set Φ := fun q : ℝ × ℝ => C + (q.1 : ℂ) * e q.2 with hΦ
+  have hΦc : Continuous Φ := by rw [hΦ]; unfold e; fun_prop
+  -- a box point is within `3η` of `p`, so in the domain and in the ball where the arcs lie on the circle
+  have hnear : ∀ ρ t, |ρ - 2| < η → |t - φ| < η → dist (Φ (ρ, t)) p < min η₁ η₀ := by
+    intro ρ t hρ ht
+    have : dist (Φ (ρ, t)) p ≤ |ρ - 2| + 2 * |t - φ| := by
+      rw [hΦ, hp, dist_eq_norm]
+      simp only
+      have h1 : C + (ρ : ℂ) * e t - (C + 2 * e φ) = ((ρ - 2 : ℝ) : ℂ) * e t + 2 * (e t - e φ) := by push_cast; ring
+      rw [h1]
+      calc ‖((ρ - 2 : ℝ) : ℂ) * e t + 2 * (e t - e φ)‖ ≤ ‖((ρ - 2 : ℝ) : ℂ) * e t‖ + ‖2 * (e t - e φ)‖ := norm_add_le _ _
+        _ = |ρ - 2| + 2 * ‖e t - e φ‖ := by
+          rw [norm_mul, norm_mul, norm_e, Complex.norm_real, Real.norm_eq_abs]; simp
+        _ ≤ |ρ - 2| + 2 * |t - φ| := by linarith [norm_e_sub_e_le t φ]
+    linarith
+  have hdistC : ∀ ρ t, 0 ≤ ρ → dist (Φ (ρ, t)) C = ρ := by
+    intro ρ t hρ
+    rw [hΦ, dist_eq_norm]; simp only
+    rw [add_sub_cancel_left, norm_mul, norm_e, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hρ, mul_one]
+  -- each half box is a preconnected set of interior points
+  have hhalf : ∀ a b : ℝ, 2 - η ≤ a → b ≤ 2 + η → (2 ∉ Ioo a b) →
+      IsPreconnected (Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η))) ∧
+        Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η)) ⊆ F.interiorPts := by
+    intro a b ha hb h2
+    refine ⟨(isPreconnected_Ioo.prod isPreconnected_Ioo).image _ hΦc.continuousOn, ?_⟩
+    rintro _ ⟨⟨ρ, t⟩, ⟨hρ, ht⟩, rfl⟩
+    have hρ2 : |ρ - 2| < η := by rw [abs_lt]; constructor <;> linarith [hρ.1, hρ.2]
+    have ht2 : |t - φ| < η := by rw [abs_lt]; constructor <;> linarith [ht.1, ht.2]
+    have hn := hnear ρ t hρ2 ht2
+    refine ⟨hball (lt_of_lt_of_le hn (min_le_left _ _)), fun hmem => ?_⟩
+    have := harc _ (lt_of_lt_of_le hn (min_le_right _ _)) hmem
+    rw [hdistC ρ t (by linarith [hρ.1])] at this
+    exact h2 (this ▸ hρ)
+  obtain ⟨hpo, hpo'⟩ := hhalf 2 (2 + η) (by linarith) le_rfl (fun h => lt_irrefl _ h.1)
+  obtain ⟨hpi, hpi'⟩ := hhalf (2 - η) 2 le_rfl (by linarith) (fun h => lt_irrefl _ h.2)
+  -- a half box with one point of colour `g` lies in `g`'s class
+  have hfill : ∀ H : Set ℂ, IsPreconnected H → H ⊆ F.interiorPts → (H ∩ F.region g).Nonempty → H ⊆ F.region g := by
+    intro H hH hHi ⟨y, hyH, hyg⟩ w hw
+    refine ⟨hHi hw, ?_⟩
+    have := hH.constant (F.continuousOn_col.mono hHi) hw hyH
+    show F.col w = g
+    rw [this]; exact hyg.2
+  -- a point of `g`'s class near `p`, in polar form about `C`
+  have harg : ∀ᶠ ζ in 𝓝 (2 : ℂ), |Complex.arg ζ| < η := by
+    have hc : ContinuousAt Complex.arg 2 := Complex.continuousAt_arg (by simp)
+    have : Complex.arg 2 = 0 := by simp
+    have h := hc.eventually (Metric.ball_mem_nhds (Complex.arg 2) hη0)
+    filter_upwards [h] with ζ hζ
+    have hζ' : dist (Complex.arg ζ) (Complex.arg 2) < η := hζ
+    rw [Real.dist_eq, this, sub_zero] at hζ'; exact hζ'
+  obtain ⟨ε, hε, hεarg⟩ := Metric.eventually_nhds_iff.mp harg
+  obtain ⟨y, hyg, hyd⟩ := Metric.mem_closure_iff.mp hcl (min ε η) (lt_min hε hη0)
+  set ζ := (y - C) / e φ with hζ
+  have he0 : e φ ≠ 0 := by intro h; simpa [h] using norm_e φ
+  have hζ2 : dist ζ 2 < min ε η := by
+    rw [hζ, dist_eq_norm, show (y - C) / e φ - 2 = (y - (C + 2 * e φ)) / e φ by field_simp; ring, norm_div, norm_e,
+      div_one, ← dist_eq_norm, dist_comm]; exact hyd
+  have hζarg : |Complex.arg ζ| < η := hεarg (lt_of_lt_of_le hζ2 (min_le_left _ _))
+  have hζn : |‖ζ‖ - 2| < η := by
+    have := abs_norm_sub_norm_le ζ 2
+    rw [show ‖(2 : ℂ)‖ = 2 by simp] at this
+    rw [dist_eq_norm] at hζ2
+    linarith [min_le_right ε η]
+  have hy : y = Φ (‖ζ‖, φ + Complex.arg ζ) := by
+    rw [hΦ]; simp only
+    have hpol : (‖ζ‖ : ℂ) * e (Complex.arg ζ) = ζ := Complex.norm_mul_exp_arg_mul_I ζ
+    rw [e_add, show (‖ζ‖ : ℂ) * (e φ * e (Complex.arg ζ)) = e φ * ((‖ζ‖ : ℂ) * e (Complex.arg ζ)) by ring, hpol, hζ]
+    field_simp; ring
+  have htI : φ + Complex.arg ζ ∈ Ioo (φ - η) (φ + η) := by
+    rw [abs_lt] at hζarg; constructor <;> linarith [hζarg.1, hζarg.2]
+  rw [abs_lt] at hζn
+  refine ⟨η, hη0, by linarith, ?_⟩
+  rcases lt_trichotomy ‖ζ‖ 2 with h | h | h
+  · right
+    exact hfill _ hpi hpi' ⟨y, hy ▸ mem_image_of_mem _ ⟨⟨by linarith [hζn.1], h⟩, htI⟩, hyg⟩
+  · -- `y` on the circle: its class contains a small ball, which reaches outside
+    left
+    obtain ⟨ε', hε', hb'⟩ := Metric.isOpen_iff.mp (F.isOpen_region g) y hyg
+    set δ := min (ε' / 2) (η / 2) with hδ
+    have hδ0 : 0 < δ := lt_min (by linarith) (by linarith)
+    refine hfill _ hpo hpo' ⟨Φ (2 + δ, φ + Complex.arg ζ), mem_image_of_mem _ ⟨⟨by linarith, by linarith [min_le_right (ε' / 2) (η / 2)]⟩, htI⟩, hb' ?_⟩
+    rw [mem_ball, hy, h, hΦ, dist_eq_norm]; simp only
+    rw [show C + ((2 + δ : ℝ) : ℂ) * e (φ + Complex.arg ζ) - (C + ((2 : ℝ) : ℂ) * e (φ + Complex.arg ζ)) =
+      (δ : ℂ) * e (φ + Complex.arg ζ) by push_cast; ring, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos hδ0]
+    linarith [min_le_left (ε' / 2) (η / 2)]
+  · left
+    exact hfill _ hpo hpo' ⟨y, hy ▸ mem_image_of_mem _ ⟨⟨h, by linarith [hζn.2]⟩, htI⟩, hyg⟩
+
+/-- **A circle crossing the circle of radius `2` into a class's side lies in the class's shadow** (child of FLANK-Q's shadow clause):
+if `p = C + 2 e(φ)` is as in `exists_polarBox_subset_region` and `z` has points of that circle at angles arbitrarily near `φ` both
+inside and outside `ω(z)`, then `z` is in the shadow of `g`'s class. -/
+theorem mem_shadow_of_crossing {C z : ℂ} {φ : ℝ} {g : Fin k} (hd : C + 2 * e φ ∈ F.dom)
+    (hcl : C + 2 * e φ ∈ closure (F.region g)) {η₀ : ℝ} (hη₀ : 0 < η₀)
+    (harc : ∀ w ∈ ball (C + 2 * e φ) η₀, w ∈ ⋃ a ∈ F.arcs, a.carrier → dist w C = 2)
+    (hcross : ∀ δ > 0, ∃ φ₁ φ₂, |φ₁ - φ| < δ ∧ |φ₂ - φ| < δ ∧ dist z (C + 2 * e φ₁) < 1 ∧ 1 < dist z (C + 2 * e φ₂)) :
+    z ∈ shadow (F.region g) := by
+  obtain ⟨η, hη, hη1, hbox⟩ := exists_polarBox_subset_region hd hcl hη₀ harc
+  obtain ⟨φ₁, φ₂, h1, h2, hd1, hd2⟩ := hcross η hη
+  set Φ := fun q : ℝ × ℝ => C + (q.1 : ℂ) * e q.2 with hΦ
+  have hΦc : Continuous Φ := by rw [hΦ]; unfold e; fun_prop
+  have hc1 : Continuous fun ρ : ℝ => dist z (Φ (ρ, φ₁)) := by fun_prop
+  have hc2 : Continuous fun ρ : ℝ => dist z (Φ (ρ, φ₂)) := by fun_prop
+  have hev : ∀ᶠ ρ in 𝓝 (2 : ℝ), dist z (Φ (ρ, φ₁)) < 1 ∧ 1 < dist z (Φ (ρ, φ₂)) := by
+    have e1 : dist z (Φ (2, φ₁)) < 1 := by simpa [hΦ] using hd1
+    have e2 : 1 < dist z (Φ (2, φ₂)) := by simpa [hΦ] using hd2
+    exact (hc1.continuousAt.eventually (gt_mem_nhds e1)).and (hc2.continuousAt.eventually (lt_mem_nhds e2))
+  have hφ1 : φ₁ ∈ Ioo (φ - η) (φ + η) := by rw [abs_lt] at h1; constructor <;> linarith [h1.1, h1.2]
+  have hφ2 : φ₂ ∈ Ioo (φ - η) (φ + η) := by rw [abs_lt] at h2; constructor <;> linarith [h2.1, h2.2]
+  have hivt : ∀ a b : ℝ, (Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η)) ⊆ F.region g) →
+      (∃ ρ ∈ Ioo a b, dist z (Φ (ρ, φ₁)) < 1 ∧ 1 < dist z (Φ (ρ, φ₂))) → z ∈ shadow (F.region g) := by
+    intro a b hsub ⟨ρ, hρ, hρ1, hρ2⟩
+    have hpc : IsPreconnected (Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η))) :=
+      (isPreconnected_Ioo.prod isPreconnected_Ioo).image _ hΦc.continuousOn
+    have hm1 : Φ (ρ, φ₁) ∈ Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η)) := mem_image_of_mem _ ⟨hρ, hφ1⟩
+    have hm2 : Φ (ρ, φ₂) ∈ Φ '' (Ioo a b ×ˢ Ioo (φ - η) (φ + η)) := mem_image_of_mem _ ⟨hρ, hφ2⟩
+    obtain ⟨y, hy, hyd⟩ := hpc.intermediate_value hm1 hm2 (continuous_const.dist continuous_id).continuousOn
+      (show (1 : ℝ) ∈ Icc (dist z (Φ (ρ, φ₁))) (dist z (Φ (ρ, φ₂))) from ⟨hρ1.le, hρ2.le⟩)
+    exact ⟨y, hsub hy, hyd⟩
+  rcases hbox with hb | hb
+  · refine hivt 2 (2 + η) hb ?_
+    obtain ⟨ρ, hρ, hρI⟩ := ((hev.filter_mono nhdsWithin_le_nhds).and (Ioo_mem_nhdsGT (show (2 : ℝ) < 2 + η by linarith))).exists
+    exact ⟨ρ, hρI, hρ⟩
+  · refine hivt (2 - η) 2 hb ?_
+    obtain ⟨ρ, hρ, hρI⟩ := ((hev.filter_mono nhdsWithin_le_nhds).and (Ioo_mem_nhdsLT (show (2 - η : ℝ) < 2 by linarith))).exists
+    exact ⟨ρ, hρI, hρ⟩
+
 /-- **FS112-N2-FLANK-Q's (R2) shadow, upper** (child of `flankQ_upper`): if the radius-2 arc `R₂` over `[α − π/2, θ₂]` about `N` lies in
 the closure of the flank colour `g`'s class, `g`'s class shadows every horn point near `v` below `ω(N)`. -/
 theorem flankQ_upper_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {g : Fin k}
     (hg : F.IsFlankAbove v α 1 g) {θ₂ : ℝ} (hθ₂ : α - π / 2 < θ₂)
     (hR2 : radiusTwoArc (v + e (α + π / 2)) (α - π / 2) θ₂ ⊆ closure (F.region g)) :
     ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α κ₁ 1 r ⊆ shadow (F.region g) := by
-  sorry
+  have _ := hF
+  have _ := hg
+  set N := v + e (α + π / 2) with hN
+  set θ₀ := α - π / 2 with hθ₀
+  have heb : e (α + π / 2) = -e θ₀ := by
+    rw [show α + π / 2 = θ₀ + π by rw [hθ₀]; ring, e_add_pi]
+  have hb0 : e θ₀ ≠ 0 := by intro h; simpa [h] using norm_e θ₀
+  -- `S′ = N + 2 e(θ₀)` is in the domain
+  have hS : N + 2 * e θ₀ ∈ F.dom := by
+    refine hv ?_
+    rw [mem_closedBall, hN, heb, dist_eq_norm, show v + -e θ₀ + 2 * e θ₀ - v = e θ₀ by ring, norm_e]
+  obtain ⟨ε₁, hε₁, hgood⟩ := Metric.eventually_nhds_iff.mp (eventually_nhdsWithin_iff.mp (eventually_arcs_on_sphere_two hS))
+  set ε := min ε₁ (θ₂ - θ₀) with hε
+  have hε0 : 0 < ε := lt_min hε₁ (by linarith)
+  -- the frame coordinate `u = (z − N)/e(θ₀)`, equal to `1` at `v`
+  set u : ℂ → ℂ := fun z => (z - N) / e θ₀ with hu
+  have huc : Continuous u := by rw [hu]; fun_prop (disch := exact hb0)
+  have huv : u v = 1 := by
+    rw [hu]; simp only; rw [hN, heb, show v - (v + -e θ₀) = e θ₀ by ring, div_self hb0]
+  have hev : ∀ᶠ z in 𝓝 v, r2Cross (u z) < ε ∧ ‖u z‖ < 3 := by
+    have h1 : ∀ᶠ z in 𝓝 v, r2Cross (u z) < ε := by
+      have hc : ContinuousAt (r2Cross ∘ u) v :=
+        ContinuousAt.comp (by rw [huv]; exact continuousAt_r2Cross_one) huc.continuousAt
+      have : (r2Cross ∘ u) v = 0 := by simp only [Function.comp, huv, r2Cross_one]
+      exact hc.eventually (gt_mem_nhds (show (r2Cross ∘ u) v < ε by rw [this]; exact hε0))
+    have h2 : ∀ᶠ z in 𝓝 v, ‖u z‖ < 3 := by
+      have hc : ContinuousAt (fun z => ‖u z‖) v := (continuous_norm.comp huc).continuousAt
+      exact hc.eventually (gt_mem_nhds (show ‖u v‖ < 3 by rw [huv]; norm_num))
+    exact h1.and h2
+  obtain ⟨δ, hδ, hδev⟩ := Metric.eventually_nhds_iff.mp hev
+  filter_upwards [Ioo_mem_nhdsGT hδ] with r hr z hz
+  obtain ⟨hzr, hzx, -, hzB⟩ := hz
+  obtain ⟨hsc, hu3⟩ := hδev (lt_trans hzr hr.2)
+  have hzN : z - N = e θ₀ * u z := by rw [hu]; simp only; field_simp
+  -- `u z` is above the real axis, of norm `> 1`
+  have hun : ‖u z‖ = dist z N := by
+    rw [hu]; simp only; rw [norm_div, norm_e, div_one, dist_eq_norm]
+  have hu1 : 1 < ‖u z‖ := by rw [hun]; exact (tanBelow_one_iff v α z).mp hzB
+  have huim : 0 < (u z).im := by
+    have : (u z).im = frameX v α z := by
+      rw [hu]; simp only
+      rw [hN, heb, show z - (v + -e θ₀) = (z - v) + e θ₀ by ring, add_div, div_self hb0]
+      unfold frameX
+      have hinv : (e θ₀)⁻¹ = starRingEnd ℂ (e θ₀) := by
+        rw [Complex.inv_def, Complex.normSq_eq_norm_sq, norm_e]; simp
+      have hI : e (π / 2) = I := by rw [e_eq]; simp
+      rw [show α = θ₀ + π / 2 by rw [hθ₀]; ring, e_add, div_eq_mul_inv, hinv, hI, map_mul, Complex.conj_I]
+      simp only [Complex.add_im, Complex.one_im, add_zero, Complex.mul_re, Complex.mul_im, Complex.neg_re, Complex.neg_im,
+        Complex.I_re, Complex.I_im]
+      ring
+    rw [this]; exact hzx
+  obtain ⟨hw0, hwc, hcw, hin, hout⟩ := r2Cross_spec hu1 hu3 huim
+  set sc := r2Cross (u z) with hscdef
+  have hsc0 : 0 < sc := by linarith
+  -- the crossing point `p = N + 2 e(θ₀ + sc)`
+  obtain ⟨hpd, η₀, hη₀, harc⟩ := hgood (by
+    rw [Real.dist_eq, show θ₀ + sc - θ₀ = sc by ring, abs_of_pos hsc0]; exact lt_of_lt_of_le hsc (min_le_left _ _))
+    (by intro h; simp only [mem_singleton_iff] at h; linarith)
+  have hpcl : N + 2 * e (θ₀ + sc) ∈ closure (F.region g) := by
+    refine hR2 ⟨θ₀ + sc, ⟨by linarith, ?_⟩, rfl⟩
+    have := lt_of_lt_of_le hsc (min_le_right ε₁ (θ₂ - θ₀)); linarith
+  have hdist : ∀ t, dist z (N + 2 * e (θ₀ + t)) = ‖2 * e t - u z‖ := by
+    intro t
+    calc dist z (N + 2 * e (θ₀ + t)) = ‖(z - N) - 2 * (e θ₀ * e t)‖ := by
+          rw [dist_eq_norm, e_add]; congr 1; ring
+      _ = ‖e θ₀ * (u z - 2 * e t)‖ := by rw [hzN]; congr 1; ring
+      _ = ‖2 * e t - u z‖ := by rw [norm_mul, norm_e, one_mul, norm_sub_rev]
+  refine mem_shadow_of_crossing hpd hpcl hη₀ harc fun d hd => ?_
+  set d' := min d (sc - Complex.arg (u z)) / 2 with hd'
+  have hd'0 : 0 < d' := by
+    have : 0 < min d (sc - Complex.arg (u z)) := lt_min hd (by linarith)
+    linarith
+  have hd'1 : d' < d := by
+    have := min_le_left d (sc - Complex.arg (u z)); linarith
+  have hd'2 : d' < sc - Complex.arg (u z) := by
+    have := min_le_right d (sc - Complex.arg (u z)); linarith
+  refine ⟨θ₀ + (sc - d'), θ₀ + (sc + d'), ?_, ?_, ?_, ?_⟩
+  · rw [show θ₀ + (sc - d') - (θ₀ + sc) = -d' by ring, abs_neg, abs_of_pos hd'0]; exact hd'1
+  · rw [show θ₀ + (sc + d') - (θ₀ + sc) = d' by ring, abs_of_pos hd'0]; exact hd'1
+  · rw [hdist]; exact hin _ (by linarith) (by linarith)
+  · rw [hdist]; exact hout _ (by linarith) (by linarith [Real.pi_pos])
 
 
 /-- **FS112-N2-FLANK-Q**, the upper bound `κ₂ = 1`. Let `c` have a horn at `v` along `e α` whose upper arc lies on `ω(N)`, with flank
@@ -3737,7 +4144,86 @@ theorem flankQ_lower_shadow (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ�
     (hh : F.IsFlankBelow v α (-1) h) {θ₁ : ℝ} (hθ₁ : θ₁ < α + π / 2)
     (hR2 : radiusTwoArc (v - e (α + π / 2)) θ₁ (α + π / 2) ⊆ closure (F.region h)) :
     ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α (-1) κ₂ r ⊆ shadow (F.region h) := by
-  sorry
+  have _ := hF
+  have _ := hh
+  set θ₀ := α + π / 2 with hθ₀
+  set S := v - e θ₀ with hS
+  have hb0 : e θ₀ ≠ 0 := by intro h; simpa [h] using norm_e θ₀
+  -- `N = S + 2 e(θ₀)` is in the domain
+  have hN : S + 2 * e θ₀ ∈ F.dom := by
+    refine hv ?_
+    rw [mem_closedBall, hS, dist_eq_norm, show v - e θ₀ + 2 * e θ₀ - v = e θ₀ by ring, norm_e]
+  obtain ⟨ε₁, hε₁, hgood⟩ := Metric.eventually_nhds_iff.mp (eventually_nhdsWithin_iff.mp (eventually_arcs_on_sphere_two hN))
+  set ε := min ε₁ (θ₀ - θ₁) with hε
+  have hε0 : 0 < ε := lt_min hε₁ (by linarith)
+  -- the frame coordinate `u = (z − S′)/e(θ₀)`, equal to `1` at `v`; its conjugate is above the real axis on the horn
+  set u : ℂ → ℂ := fun z => starRingEnd ℂ ((z - S) / e θ₀) with hu
+  have huc : Continuous u := by rw [hu]; fun_prop (disch := exact hb0)
+  have huv : u v = 1 := by
+    rw [hu]; simp only; rw [hS, show v - (v - e θ₀) = e θ₀ by ring, div_self hb0, map_one]
+  have hev : ∀ᶠ z in 𝓝 v, r2Cross (u z) < ε ∧ ‖u z‖ < 3 := by
+    have h1 : ∀ᶠ z in 𝓝 v, r2Cross (u z) < ε := by
+      have hc : ContinuousAt (r2Cross ∘ u) v :=
+        ContinuousAt.comp (by rw [huv]; exact continuousAt_r2Cross_one) huc.continuousAt
+      have : (r2Cross ∘ u) v = 0 := by simp only [Function.comp, huv, r2Cross_one]
+      exact hc.eventually (gt_mem_nhds (show (r2Cross ∘ u) v < ε by rw [this]; exact hε0))
+    have h2 : ∀ᶠ z in 𝓝 v, ‖u z‖ < 3 := by
+      have hc : ContinuousAt (fun z => ‖u z‖) v := (continuous_norm.comp huc).continuousAt
+      exact hc.eventually (gt_mem_nhds (show ‖u v‖ < 3 by rw [huv]; norm_num))
+    exact h1.and h2
+  obtain ⟨δ, hδ, hδev⟩ := Metric.eventually_nhds_iff.mp hev
+  filter_upwards [Ioo_mem_nhdsGT hδ] with r hr z hz
+  obtain ⟨hzr, hzx, hzA, -⟩ := hz
+  obtain ⟨hsc, hu3⟩ := hδev (lt_trans hzr hr.2)
+  have hzS : z - S = e θ₀ * starRingEnd ℂ (u z) := by
+    rw [hu]; simp only; rw [Complex.conj_conj]; field_simp
+  have hun : ‖u z‖ = dist z S := by
+    rw [hu]; simp only; rw [Complex.norm_conj, norm_div, norm_e, div_one, dist_eq_norm]
+  have hu1 : 1 < ‖u z‖ := by rw [hun]; exact (tanAbove_neg_one_iff v α z).mp hzA
+  have huim : 0 < (u z).im := by
+    have : (u z).im = frameX v α z := by
+      rw [hu]; simp only
+      rw [Complex.conj_im, hS, show z - (v - e θ₀) = (z - v) + e θ₀ by ring, add_div, div_self hb0]
+      unfold frameX
+      have hinv : (e θ₀)⁻¹ = starRingEnd ℂ (e θ₀) := by
+        rw [Complex.inv_def, Complex.normSq_eq_norm_sq, norm_e]; simp
+      have hI : e (π / 2) = I := by rw [e_eq]; simp
+      rw [div_eq_mul_inv, hinv, hθ₀, e_add, hI, map_mul, Complex.conj_I]
+      simp only [Complex.add_im, Complex.one_im, add_zero, Complex.mul_re, Complex.mul_im, Complex.neg_re, Complex.neg_im,
+        Complex.I_re, Complex.I_im]
+      ring
+    rw [this]; exact hzx
+  obtain ⟨hw0, hwc, hcw, hin, hout⟩ := r2Cross_spec hu1 hu3 huim
+  set sc := r2Cross (u z) with hscdef
+  have hsc0 : 0 < sc := by linarith
+  -- the crossing point `p = S′ + 2 e(θ₀ − sc)`
+  obtain ⟨hpd, η₀, hη₀, harc⟩ := hgood (by
+    rw [Real.dist_eq, show θ₀ - sc - θ₀ = -sc by ring, abs_neg, abs_of_pos hsc0]; exact lt_of_lt_of_le hsc (min_le_left _ _))
+    (by intro h; simp only [mem_singleton_iff] at h; linarith)
+  have hpcl : S + 2 * e (θ₀ - sc) ∈ closure (F.region h) := by
+    refine hR2 ⟨θ₀ - sc, ⟨?_, by linarith⟩, rfl⟩
+    have := lt_of_lt_of_le hsc (min_le_right ε₁ (θ₀ - θ₁)); linarith
+  have hdist : ∀ t, dist z (S + 2 * e (θ₀ - t)) = ‖2 * e t - u z‖ := by
+    intro t
+    calc dist z (S + 2 * e (θ₀ - t)) = ‖(z - S) - 2 * (e θ₀ * e (-t))‖ := by
+          rw [dist_eq_norm, sub_eq_add_neg θ₀ t, e_add]; congr 1; ring
+      _ = ‖e θ₀ * starRingEnd ℂ (u z - 2 * e t)‖ := by
+          rw [hzS, map_sub, map_mul, conj_e, show (starRingEnd ℂ) (2 : ℂ) = 2 from map_ofNat _ 2]; congr 1; ring
+      _ = ‖2 * e t - u z‖ := by rw [norm_mul, norm_e, one_mul, Complex.norm_conj, norm_sub_rev]
+  refine mem_shadow_of_crossing hpd hpcl hη₀ harc fun d hd => ?_
+  set d' := min d (sc - Complex.arg (u z)) / 2 with hd'
+  have hd'0 : 0 < d' := by
+    have : 0 < min d (sc - Complex.arg (u z)) := lt_min hd (by linarith)
+    linarith
+  have hd'1 : d' < d := by
+    have := min_le_left d (sc - Complex.arg (u z)); linarith
+  have hd'2 : d' < sc - Complex.arg (u z) := by
+    have := min_le_right d (sc - Complex.arg (u z)); linarith
+  refine ⟨θ₀ - (sc - d'), θ₀ - (sc + d'), ?_, ?_, ?_, ?_⟩
+  · rw [show θ₀ - (sc - d') - (θ₀ - sc) = d' by ring, abs_of_pos hd'0]; exact hd'1
+  · rw [show θ₀ - (sc + d') - (θ₀ - sc) = -d' by ring, abs_neg, abs_of_pos hd'0]; exact hd'1
+  · rw [hdist]; exact hin _ (by linarith) (by linarith)
+  · rw [hdist]; exact hout _ (by linarith) (by linarith [Real.pi_pos])
 
 /-- **FS112-N2-FLANK-Q**, the lower bound `κ₁ = −1`, the mirror: the horn's lower arc on `ω(S′)` with flank colour `h` below, an out-type
 `c`-contact at `S′`, and every arc of `Γ` on `ω(S′)` with constant sides (Q) or (R2) (the same named hypothesis at `S′`): the lower arc is
