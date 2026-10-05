@@ -1012,4 +1012,188 @@ theorem branch_locally_curve (v : ℂ) (β κ : ℝ) {r : ℝ} (hκr : |κ| * r 
       rw [← hwq] at h1
       linarith
 
+/-- **One branch is a curve star of one ray.** -/
+theorem hasCurveStar_of_branch {C : Set ℂ} {v : ℂ} (β κ : ℝ) {r : ℝ} (hr : 0 < r) (hcurv : |κ| * r < 2)
+    (heq : C ∩ ball v r = insert v (branchPt v β κ '' Ioo 0 r)) : HasCurveStar C v 1 := by
+  refine ⟨r, hr, fun _ => branchPt v β κ, fun _ => (continuous_branchPt v _ _).continuousOn,
+    fun _ s hs => norm_branchPt_sub v _ _ hs.1.le, fun i j hij => absurd (Subsingleton.elim i j) hij, ?_,
+    fun _ s hs => branch_locally_curve v _ _ hcurv hs⟩
+  rw [heq]
+  congr 1
+  ext w
+  simp
+
+/-- **Stars pass to components**: a curve star of `C` at a point of a component of `C` is one of the component (each ray with the centre is
+connected). -/
+theorem HasCurveStar.connectedComponentIn {C : Set ℂ} {z x : ℂ} {n : ℕ} (h : HasCurveStar C z n)
+    (hz : z ∈ connectedComponentIn C x) : HasCurveStar (connectedComponentIn C x) z n := by
+  obtain ⟨r, hr, b, hcont, hnorm, hdisj, heq, hcurve⟩ := h
+  refine ⟨r, hr, b, hcont, hnorm, hdisj, Subset.antisymm ?_ ?_, hcurve⟩
+  · rw [← heq]
+    exact inter_subset_inter_left _ (connectedComponentIn_subset _ _)
+  · -- the star is connected and lies in `C`
+    have hray : ∀ i, IsPreconnected (insert z (b i '' Ioo 0 r)) := by
+      intro i
+      have hpre : IsPreconnected (b i '' Ioo 0 r) := isPreconnected_Ioo.image _ (hcont i)
+      refine hpre.subset_closure (subset_insert _ _) (insert_subset_iff.mpr ⟨?_, subset_closure⟩)
+      rw [Metric.mem_closure_iff]
+      intro ε hε
+      refine ⟨b i (min ε r / 2), ⟨min ε r / 2, ⟨by positivity, by linarith [min_le_right ε r]⟩, rfl⟩, ?_⟩
+      rw [dist_comm, dist_eq_norm, hnorm i _ ⟨by positivity, by linarith [min_le_right ε r]⟩]
+      linarith [min_le_left ε r, lt_min hε hr]
+    have hstar : IsPreconnected (insert z (⋃ i, b i '' Ioo 0 r)) := by
+      refine isPreconnected_of_forall z fun y hy => ?_
+      rcases hy with rfl | hy
+      · exact ⟨{y}, singleton_subset_iff.mpr (mem_insert _ _), rfl, rfl, isPreconnected_singleton⟩
+      · obtain ⟨i, hi⟩ := mem_iUnion.mp hy
+        exact ⟨insert z (b i '' Ioo 0 r), insert_subset_insert (subset_iUnion (fun i => b i '' Ioo 0 r) i),
+          mem_insert _ _, mem_insert_of_mem _ hi, hray i⟩
+    have hsub : insert z (⋃ i, b i '' Ioo 0 r) ⊆ C := by
+      rw [← heq]; exact inter_subset_left
+    have h1 := hstar.subset_connectedComponentIn (mem_insert _ _) hsub
+    rw [← connectedComponentIn_eq hz] at h1
+    intro w hw
+    have hwC : w ∈ C ∩ ball z r := by rw [heq]; exact hw
+    exact ⟨h1 hw, hwC.2⟩
+
+/-- **A curve has two points at every small distance from each of its points.** -/
+theorem IsCurve.exists_two_mem_sphere {L : Set ℂ} (hL : IsCurve L) {z : ℂ} (hz : z ∈ L) :
+    ∃ s₀ > 0, ∀ s ∈ Ioo 0 s₀, ∃ p₁ ∈ L, ∃ p₂ ∈ L, p₁ ≠ p₂ ∧ ‖p₁ - z‖ = s ∧ ‖p₂ - z‖ = s := by
+  have hπ := Real.pi_pos
+  rcases hL with ⟨x, d, hd, rfl⟩ | ⟨c, R, hR, rfl⟩
+  · obtain ⟨t₀, rfl⟩ := hz
+    have hdn : 0 < ‖d‖ := norm_pos_iff.mpr hd
+    refine ⟨1, one_pos, fun s hs => ⟨x + ((t₀ + s / ‖d‖ : ℝ) : ℂ) * d, ⟨_, rfl⟩, x + ((t₀ - s / ‖d‖ : ℝ) : ℂ) * d, ⟨_, rfl⟩,
+      ?_, ?_, ?_⟩⟩
+    · intro h
+      have h1 := line_param_inj hd h
+      have : 0 < s / ‖d‖ := div_pos hs.1 hdn
+      linarith
+    · rw [show x + ((t₀ + s / ‖d‖ : ℝ) : ℂ) * d - (x + (t₀ : ℂ) * d) = ((s / ‖d‖ : ℝ) : ℂ) * d by push_cast; ring,
+        norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (div_pos hs.1 hdn)]
+      field_simp
+    · rw [show x + ((t₀ - s / ‖d‖ : ℝ) : ℂ) * d - (x + (t₀ : ℂ) * d) = ((-(s / ‖d‖) : ℝ) : ℂ) * d by push_cast; ring,
+        norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_neg, abs_of_pos (div_pos hs.1 hdn)]
+      field_simp
+  · have hzc : z = c + (R : ℂ) * e (arg (z - c)) := by
+      have h1 := eq_polar_arg (z - c)
+      rw [show ‖z - c‖ = R by rw [← dist_eq_norm]; exact mem_sphere.mp hz] at h1
+      linear_combination h1
+    set φ := arg (z - c)
+    refine ⟨2 * R, by positivity, fun s hs => ?_⟩
+    set y := 1 - s ^ 2 / (2 * R ^ 2) with hy
+    have hy1 : y < 1 := by have : 0 < s ^ 2 / (2 * R ^ 2) := by have := hs.1; positivity
+                           linarith
+    have hy2 : -1 < y := by
+      have : s ^ 2 / (2 * R ^ 2) < 2 := by
+        rw [div_lt_iff₀ (by positivity)]; nlinarith [hs.1, hs.2]
+      linarith
+    set α := Real.arccos y with hα
+    have hα0 : 0 < α := Real.arccos_pos.mpr hy1
+    have hαπ : α < π := Real.arccos_lt_pi.mpr hy2
+    have hcos : Real.cos α = y := Real.cos_arccos (by linarith) hy1.le
+    have hpt : ∀ σ : ℝ, (σ = 1 ∨ σ = -1) → c + (R : ℂ) * e (φ + σ * α) ∈ sphere c R ∧
+        ‖c + (R : ℂ) * e (φ + σ * α) - z‖ = s := by
+      intro σ hσ
+      refine ⟨by rw [mem_sphere, dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, norm_e, mul_one,
+        Real.norm_eq_abs, abs_of_pos hR], ?_⟩
+      conv_lhs => rw [hzc]
+      rw [show c + (R : ℂ) * e (φ + σ * α) - (c + (R : ℂ) * e φ) = (R : ℂ) * (e (φ + σ * α) - e φ) by ring,
+        norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hR]
+      have hsq := sq_norm_e_sub_e (φ + σ * α) φ
+      have hc2 : Real.cos (φ + σ * α - φ) = y := by
+        rw [show φ + σ * α - φ = σ * α by ring]
+        rcases hσ with rfl | rfl
+        · rw [one_mul, hcos]
+        · rw [neg_one_mul, Real.cos_neg, hcos]
+      rw [hc2, hy] at hsq
+      have hn : ‖e (φ + σ * α) - e φ‖ = s / R := by
+        have h0 : 0 ≤ ‖e (φ + σ * α) - e φ‖ := norm_nonneg _
+        have h1 : ‖e (φ + σ * α) - e φ‖ ^ 2 = (s / R) ^ 2 := by rw [hsq]; field_simp; ring
+        exact (pow_left_inj₀ h0 (div_pos hs.1 hR).le two_ne_zero).mp h1
+      rw [hn]; field_simp
+    obtain ⟨h1L, h1s⟩ := hpt 1 (Or.inl rfl)
+    obtain ⟨h2L, h2s⟩ := hpt (-1) (Or.inr rfl)
+    refine ⟨_, h1L, _, h2L, ?_, h1s, h2s⟩
+    intro h
+    have hR0 : (R : ℂ) ≠ 0 := by exact_mod_cast hR.ne'
+    have h1 : e (φ + 1 * α) = e (φ + -1 * α) := mul_left_cancel₀ hR0 (add_left_cancel h)
+    have h2 : e (2 * α) = 1 := by
+      have : e (φ + 1 * α) = e (φ + -1 * α) * e (2 * α) := by rw [← e_add]; ring_nf
+      rw [h1] at this
+      have hne0 : e (φ + -1 * α) ≠ 0 := by
+        intro h0; have := norm_e (φ + -1 * α); rw [h0, norm_zero] at this; exact zero_ne_one this
+      exact (mul_eq_left₀ hne0).mp this.symm
+    refine e_ne_one (by positivity) ?_ h2
+    rw [abs_of_pos (by positivity)]; linarith
+
+/-- **A star of one ray is not regular**: a curve has two points at each small distance, the ray one. -/
+theorem not_isRegularAt_of_hasCurveStar_one {C : Set ℂ} {z : ℂ} (h : HasCurveStar C z 1) : ¬ IsRegularAt C z := by
+  rintro ⟨L, hL, ε, hε, hCL⟩
+  obtain ⟨r, hr, b, -, hnorm, -, heq, -⟩ := h
+  have hzC : z ∈ C := by
+    have : z ∈ insert z (⋃ i, b i '' Ioo 0 r) := mem_insert _ _
+    rw [← heq] at this; exact this.1
+  have hzL : z ∈ L := by
+    have : z ∈ C ∩ ball z ε := ⟨hzC, mem_ball_self hε⟩
+    rw [hCL] at this; exact this.1
+  obtain ⟨s₀, hs₀, htwo⟩ := hL.exists_two_mem_sphere hzL
+  set s := min (min s₀ ε) r / 2 with hsdef
+  have hm : 0 < min (min s₀ ε) r := lt_min (lt_min hs₀ hε) hr
+  have hs0 : 0 < s := half_pos hm
+  have hss₀ : s < s₀ := by linarith [min_le_left (min s₀ ε) r, min_le_left s₀ ε]
+  have hsε : s < ε := by linarith [min_le_left (min s₀ ε) r, min_le_right s₀ ε]
+  have hsr : s < r := by linarith [min_le_right (min s₀ ε) r]
+  obtain ⟨p₁, hp₁, p₂, hp₂, hne, h1, h2⟩ := htwo s ⟨hs0, hss₀⟩
+  have key : ∀ p ∈ L, ‖p - z‖ = s → p = b 0 s := by
+    intro p hp hps
+    have hpC : p ∈ C := by
+      have : p ∈ L ∩ ball z ε := ⟨hp, by rw [mem_ball, dist_eq_norm, hps]; exact hsε⟩
+      rw [← hCL] at this; exact this.1
+    have hpb : p ∈ C ∩ ball z r := ⟨hpC, by rw [mem_ball, dist_eq_norm, hps]; exact hsr⟩
+    rw [heq] at hpb
+    rcases hpb with rfl | hp'
+    · rw [sub_self, norm_zero] at hps; exact absurd hps.symm hs0.ne'
+    · obtain ⟨i, s', hs', rfl⟩ := mem_iUnion.mp hp'
+      have hs's : s' = s := by rw [← hnorm i s' hs', hps]
+      rw [hs's, Subsingleton.elim i 0]
+  exact hne ((key p₁ hp₁ h1).trans (key p₂ hp₂ h2).symm)
+
+/-! ## Spec examples -/
+
+/-- The unit circle is a curve. -/
+example : IsCurve (sphere (0 : ℂ) 1) := Or.inr ⟨0, 1, one_pos, rfl⟩
+
+/-- The empty set is no curve (a drift check on `IsCurve`: lines and circles of positive radius are nonempty). -/
+example : ¬ IsCurve (∅ : Set ℂ) := by
+  rintro (⟨x, d, -, h⟩ | ⟨c, R, hR, h⟩)
+  · have : x + ((0 : ℝ) : ℂ) * d ∈ (∅ : Set ℂ) := by rw [h]; exact ⟨0, rfl⟩
+    exact this
+  · have : c + (R : ℂ) * e 0 ∈ (∅ : Set ℂ) := by
+      rw [h, mem_sphere, dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, norm_e, mul_one, Real.norm_eq_abs,
+        abs_of_pos hR]
+    exact this
+
+/-- **An inhabitant of `HasCurveStar`, every clause exercised**: the closed half-line `[0, ∞)` has a star of one ray at `0` (the branch of the
+straight germ of direction `0`), and is not regular there. -/
+theorem halfLine_hasCurveStar : HasCurveStar {z : ℂ | ∃ t : ℝ, 0 ≤ t ∧ z = t} 0 1 ∧
+    ¬ IsRegularAt {z : ℂ | ∃ t : ℝ, 0 ≤ t ∧ z = t} 0 := by
+  have hb : ∀ s : ℝ, branchPt 0 0 0 s = (s : ℂ) := fun s => by simp [branchPt, e]
+  have hstar : HasCurveStar {z : ℂ | ∃ t : ℝ, 0 ≤ t ∧ z = t} 0 1 := by
+    refine hasCurveStar_of_branch 0 0 one_pos (by simp) ?_
+    ext z
+    simp only [mem_inter_iff, mem_setOf_eq, mem_ball, dist_zero_right, mem_insert_iff, mem_image, hb]
+    constructor
+    · rintro ⟨⟨t, ht, rfl⟩, hz⟩
+      rcases eq_or_lt_of_le ht with h | h
+      · left; rw [← h]; simp
+      · right
+        rw [Complex.norm_real, Real.norm_eq_abs, abs_of_pos h] at hz
+        exact ⟨t, ⟨h, hz⟩, rfl⟩
+    · rintro (rfl | ⟨t, ht, rfl⟩)
+      · exact ⟨⟨0, le_rfl, by simp⟩, by simp⟩
+      · refine ⟨⟨t, ht.1.le, rfl⟩, ?_⟩
+        rw [Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht.1]; exact ht.2
+  exact ⟨hstar, not_isRegularAt_of_hasCurveStar_one hstar⟩
+
 end HadwigerNelson.Plane

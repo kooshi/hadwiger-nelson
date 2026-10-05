@@ -43,6 +43,19 @@ Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plan
   `noBoth`** (FS112-N3-NOBOTH, `ValidMap/UnitArc`, wave 4's leaf, `sorry` at the pin, used by statement); it lands on the standard three when `noBoth`
   does
 
+**FS131-IP3 (stages 9–)**, all [kernel] (stage-11 build, `build/gate/build/20261005T023343Z-612010.log`), each on exactly the standard three
+(`data/fs131/ip/axioms-ip3-stage11.txt`, checked by `tools/fs131_ip_axioms.py`: 35 clean, the 2 controls `endpoint_of_far_end`, `exists_endpoint` on `sorryAx`):
+
+- `ArcMap.exists_far_end` — **the `a|c` boundary's far end** (FS110-CD Lemma E's planar parity step), as stated (`Plane/ValidMap/MapTopology`)
+- `even_sum_deg`, `exists_finset_even_sum_deg` — **the boundary graph's handshake (BG)**: in a compact set with a curve star at each point, the degrees at the
+  non-regular points have an even sum (`Plane/CurveGraph`, new module)
+- `port_pair` — each port of the cut-out vertices has exactly one partner, the other end of its arc (`Plane/CurveGraph`)
+- `IsCurve.eq_of_three`, `IsCurve.exists_param`, `HasCurveStar.isRegularAt`, `finite_nonRegular`, `branch_locally_curve`, `HasCurveStar.connectedComponentIn`,
+  `not_isRegularAt_of_hasCurveStar_one`, `IsCurve.exists_two_mem_sphere`, and 13 more children (`Plane/CurveGraph`); inhabitant `halfLine_hasCurveStar`
+- `ArcMap.exists_inner_branch` — at a two-colour change point of `ω(u)` one branch enters the disc and the other leaves it (`MapTopology` § D)
+- `ArcMap.IsSectorChart.eq_two`, `.inter_closure_two`, `.hasRepeatedColour_of_col_eq`, `.col_mem_coloursAt`, `.col_eq_of_mem_sector`,
+  `ArcMap.hasCurveStar_of_branches`, `ArcMap.coloursAt_subset_of_mem_interiorPts`, `ArcMap.fin_two_eq_of_ne` (`MapTopology` § D)
+
 IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
 
@@ -496,3 +509,64 @@ tree, by `grep -F`): at the next saved stage, merge `fs131-w5x` into `fs131-w5p`
   warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T015706Z-359162.log`; `data/fs131/ip/build-ip3-merge-w5x.log`; grep for
   `warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe line).
 - Where my order reads the crossing (`retArcs_not_interleaved`), I cite `inter_nonempty_of_interleaved` as held.
+
+## Stage 11 — SAVED: the boundary graph BG (its handshake), and `exists_far_end`
+
+### 11.1 Proved
+
+- **`Plane/CurveGraph`** (new module, imports `Plane/LocalStructure`; `ARCHITECTURE.md` row added, `Proofs.lean` import added; `MapTopology` now imports it,
+  its Imports cell unchanged in spirit — `tools/check_architecture.py`: PASS). BG is built as **the handshake for compact sets made of lines and circles**,
+  not as a `SimpleGraph`: a compact `C` with a *curve star* at each point (finitely many rays leaving the point, each a continuous graph over the distance,
+  pairwise disjoint, each locally a piece of a line or circle) has finitely many non-regular points (`finite_nonRegular`: off its centre a star is regular),
+  and their degrees have an even sum (`even_sum_deg`). The proof cuts each vertex out by a disc of radius `ρ`; the rays' points on the circles are the
+  *ports* (`∑ deg v` of them); the component of the rest through a port lies in one curve (two curves sharing three points are equal), is an arc of it
+  (`IsCurve.exists_param`: a parameter interval `[a, b]`), and holds exactly two ports, its ends (`port_pair`); the pairing is a fixed-point-free
+  involution (`Finset.sum_involution` in `ZMod 2`). No Jordan-type theorem, no `SimpleGraph`. A sector chart's branches are curve rays
+  (`branch_locally_curve`, through the library's `curveGerm`); stars pass to components; a one-ray star is not regular.
+- **`MapTopology` § D**: at a point in the closures of two distinct tiles, with two colours and no repeated colour, a chart has exactly two germs
+  (`IsSectorChart.eq_two`) and the common boundary of the two tiles near it is the point and both branches (`IsSectorChart.inter_closure_two`); at a two-colour
+  change point `r(θ)` of `ω(u)` one branch enters the disc and the other leaves it (`exists_inner_branch`: the clockwise germ lies in the `a`-sector, the
+  counter-clockwise one in the `c`-sector, so arcs of the circles of radius `1 ∓ η` about `u` near `r(θ)` each cross a branch, and no branch meets `ω(u)` near
+  `r(θ)`, whose points there carry one pseudo-colour).
+- **`exists_far_end`**, statement unchanged: if `r(θ)` has three colours it is its own far end; otherwise, were every point of the component `C` of `r(θ)` in
+  `cl T₁ ∩ cl T₂ ∩ B̄(u, 1)` two-coloured and off `ω(u)` but for `r(θ)`, `C` would have a curve star of two rays at each point but `r(θ)`, of one ray there
+  (H gives two germs at each), so its degrees at non-regular points would sum to `1 + 2m` — against the handshake.
+- **Binder renamed, type unchanged** (for Keryx, ruling 293 (a)'s reasons): `exists_far_end`'s `hF : F.Valid` is never read (the unused-variables linter
+  fired), renamed `_hF`; its one caller (`exists_endpoint`) passes it positionally. **Generalization**: the far end exists for any six-coloured fragment
+  covering `B̄(u, 2)` under H — validity is not needed.
+
+### 11.2 The stage-11 build and the receipt
+
+`29004f08` + this stage's edits, under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 446 of 446 batches, 6 modules rebuilt (`CurveGraph` 5.3 s, `MapTopology`
+6.5 s, `BaseWalk`, `MapGraph` 9.6 s, `BaseDense`, `Proofs`), 9 modules with warnings (one fewer: `MapTopology` now has no `sorry`), every warning `declaration
+uses 'sorry'`, exit 0** (`build/gate/build/20261005T023343Z-612010.log`; `data/fs131/ip/build-ip3-stage11.log`; grep for `warning|error` minus the `sorry`
+lines leaves only Lake's `--no-build` probe line). Axioms: `data/fs131/ip/AxiomsIP3.lean` → `data/fs131/ip/axioms-ip3-stage11.txt`, checked by
+`tools/fs131_ip_axioms.py` against `data/fs131/ip/axioms-ip3-names.txt`: **35 records on the standard three, the 2 controls on `sorryAx`**; planted fault (a
+`sorry` control listed as clean) → `NOT CLEAN …`, exit 1. `scripts/Axioms.lean`'s FS131-KP block gains IP3's 34 children (under "-- FS131-IP3's added
+children"; `exists_far_end` was already there).
+
+### 11.3 Re-priced after the first two leaves (BG, `exists_far_end`)
+
+Wall clock from stage 10's commit (02:06Z) to this stage (02:44Z): about 40 minutes, about 1,770 lines (`CurveGraph` 1,199, `MapTopology` + 572), one
+build. KP priced BG + PATH + `exists_far_end` at one to two sessions, IP2 at about one; BG and `exists_far_end` took about a third of this session's
+context. **What made it cheap**: the arcs are lines and circles, so every regular stretch of the boundary is an interval of one curve's parameter, and the
+handshake needs only "two distinct curves share at most two points" and the order of `ℝ` — no general 1-manifold theory. **Re-price of what is left**
+(implementer sessions): **PATH** 0.3 (max degree two plus connectedness: the ports' pairing as a multigraph, connected because the union of the stars and arcs
+reachable from a vertex is clopen; then `|E| ≥ |V| − 1`); **the strong child** of `exists_far_end` (an odd vertex) 0.3 — the handshake gives it at once once
+stars exist at every point of `ω(u)` (branches along `ω(u)`, inside, outside, tangent: the D-cut at a general circle point); `retArcs_not_interleaved` 0.2
+(over the crossing lemma, held: different tiles close by H and `cor3_base` — three tiles of the two pairs carry three pseudo-colours, disjoint from `u`'s,
+within `1` of `u`; same tiles need PATH); `retArcs_not_abut` 0.2 over PATH; **`endpoint_of_far_end` 1** — besides the strong child it needs IP2's finding 2
+(the orientation at an exit, a Jordan-type step: the crossing lemma does not give it directly — the natural crossing continua are subsets of the tiles,
+which may leave the disc; a route through PATH's parametrized boundary path, where "the `a`-tile on the left" propagates along the path by continuity, is
+the one I would try) and the bi–bi exclusion of a chord exactly `1`; F-LOC/CONN/INF/ONE 0.4; the adversaries 0.3; F-RING 1–2 (not measured).
+
+### 11.4 For the coordinator (done-means 4)
+
+- **The crossing lemma's route (b) through BG**: moot — the crossing lemma is held (stage 10). For the record: BG as built is a *parity* tool; it gives no
+  separation, so route (b) would still have needed an orientation or separation step of its own. Not measured further.
+- **F-RING**: not reached, not measured.
+
+### 11.5 Leaves left (named), in ruling 301's order
+
+`endpoint_of_far_end` (strong child, orientation step, bi–bi — § 11.3); PATH; F-LOC, F-CONN, F-INF, F-ONE; `not_isHoleOf_chain`, `isHoleOf_cluster`; F-RING;
+`retArcs_not_abut`, `retArcs_not_interleaved`. All in this branch's files as before; `MapTopology` has none left.
