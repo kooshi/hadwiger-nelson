@@ -937,6 +937,39 @@ theorem tangentArc_image {R uX : ℝ} (hR : 1 / 2 < R) (hR1 : R ≤ 1) (hu0 : 0 
     obtain ⟨p1, p2, -⟩ := polar_tangentCircle hR hu.1 (by linarith [hu.2])
     exact ⟨f u, ⟨norm_nonneg _, hs⟩, eq_of_tangentCircle hRpos g1 p1 g2 p2 (by rw [g3])⟩
 
+/-- The crossing on the bisector: `X = P + tangRad R ((θ₂ − θ₁)/2) · e(θ₁ + (θ₂ − θ₁)/2)` (the two tangent circles' terms agree there). -/
+theorem collarMid_eq {P : ℂ} {θ₁ θ₂ R : ℝ} (h12 : θ₁ ≤ θ₂) :
+    collarMid P θ₁ θ₂ R = P + (tangRad R ((θ₂ - θ₁) / 2) : ℂ) * e (θ₁ + (θ₂ - θ₁) / 2) := by
+  have hc : clampAngle θ₁ θ₂ ((θ₁ + θ₂) / 2) = (θ₁ + θ₂) / 2 := by
+    unfold clampAngle; rw [min_eq_left (by linarith), max_eq_right (by linarith)]
+  rw [collarMid, lensProf, hc, show (θ₁ + θ₂) / 2 - θ₁ = (θ₂ - θ₁) / 2 by ring,
+    show θ₂ - (θ₁ + θ₂) / 2 = (θ₂ - θ₁) / 2 by ring, max_self, show (θ₁ + θ₂) / 2 = θ₁ + (θ₂ - θ₁) / 2 by ring]
+
+/-- The chord from `A = ringPt P θ₁` to the crossing, in the end's frame. -/
+theorem dist_collarMid_left {P : ℂ} {θ₁ θ₂ R : ℝ} (h12 : θ₁ ≤ θ₂) :
+    dist (ringPt P θ₁) (collarMid P θ₁ θ₂ R) = ‖(tangRad R ((θ₂ - θ₁) / 2) : ℂ) * e ((θ₂ - θ₁) / 2) - 1‖ := by
+  rw [collarMid_eq h12, dist_comm, dist_eq_norm, ringPt,
+    show P + (tangRad R ((θ₂ - θ₁) / 2) : ℂ) * e (θ₁ + (θ₂ - θ₁) / 2) - (P + e θ₁) =
+      ((tangRad R ((θ₂ - θ₁) / 2) : ℂ) * e ((θ₂ - θ₁) / 2) - 1) * e θ₁ by rw [e_add]; ring,
+    norm_mul, norm_e, mul_one]
+
+/-- The chord from `B = ringPt P θ₂` to the crossing, in the mirrored end's frame (the same length). -/
+theorem dist_collarMid_right {P : ℂ} {θ₁ θ₂ R : ℝ} (h12 : θ₁ ≤ θ₂) :
+    dist (ringPt P θ₂) (collarMid P θ₁ θ₂ R) = ‖(tangRad R ((θ₂ - θ₁) / 2) : ℂ) * e ((θ₂ - θ₁) / 2) - 1‖ := by
+  rw [collarMid_eq h12, show θ₁ + (θ₂ - θ₁) / 2 = θ₂ - (θ₂ - θ₁) / 2 by ring, dist_comm, dist_eq_norm, ringPt,
+    show P + (tangRad R ((θ₂ - θ₁) / 2) : ℂ) * e (θ₂ - (θ₂ - θ₁) / 2) - (P + e θ₂) =
+      starRingEnd ℂ ((tangRad R ((θ₂ - θ₁) / 2) : ℂ) * e ((θ₂ - θ₁) / 2) - 1) * e θ₂ by
+        rw [map_sub, map_one, map_mul, Complex.conj_ofReal, conj_e, sub_eq_add_neg θ₂ ((θ₂ - θ₁) / 2), e_add]; ring,
+    norm_mul, norm_e, mul_one, RCLike.norm_conj]
+
+/-- Off the point of tangency the lens curve's chord is positive (`0 < u < π`: the point is strictly on the upper side). -/
+theorem norm_tangRad_sub_one_pos {R u : ℝ} (hR : 1 / 2 < R) (hu : 0 < u) (hu' : u < π) :
+    0 < ‖(tangRad R u : ℂ) * e u - 1‖ := by
+  refine norm_pos_iff.mpr fun h => ?_
+  have him := congrArg Complex.im h
+  rw [Complex.sub_im, Complex.im_ofReal_mul, im_e, Complex.one_im, Complex.zero_im, sub_zero] at him
+  exact (mul_pos (tangRad_pos hR u) (Real.sin_pos_of_pos_of_lt_pi hu hu')).ne' him
+
 /-- **The two arcs are the lens boundary.** Route: `germArc`'s carrier is the branch (`carrier_germArc`), the points
 `A + 2R sin(s/2) e(θ₁ + π/2 + s/2)` of the circle about `P + (1 − R) e(θ₁)`; their polar angle about `P` runs from `θ₁` to the
 bisector monotonically (`P` is inside the circle), and on that range `C_A` is the larger profile (`tangRad` even, increasing in
@@ -968,17 +1001,8 @@ theorem collarArcs_carrier {P : ℂ} {θ₁ θ₂ R : ℝ} (hR : 1 / 2 < R) (hR1
     unfold lensProf; rw [hc]
     exact max_eq_right (tangRad_anti hR hR1.le (by linarith [hθ.2]) (by linarith [hθ.1]) (by linarith [hθ.2]))
   -- the crossing, and the two chords to it
-  have hX : collarMid P θ₁ θ₂ R = P + (tangRad R uX : ℂ) * e (θ₁ + uX) := by
-    rw [collarMid, hmidA, hL1 _ ⟨by linarith, le_rfl⟩, add_sub_cancel_left]
-  have hρA : dist (ringPt P θ₁) (collarMid P θ₁ θ₂ R) = ρ := by
-    rw [hX, dist_comm, dist_eq_norm, ringPt,
-      show P + (tangRad R uX : ℂ) * e (θ₁ + uX) - (P + e θ₁) = ((tangRad R uX : ℂ) * e uX - 1) * e θ₁ by rw [e_add]; ring,
-      norm_mul, norm_e, mul_one]
-  have hρB : dist (ringPt P θ₂) (collarMid P θ₁ θ₂ R) = ρ := by
-    rw [hX, show θ₁ + uX = θ₂ - uX by linarith, dist_comm, dist_eq_norm, ringPt,
-      show P + (tangRad R uX : ℂ) * e (θ₂ - uX) - (P + e θ₂) = starRingEnd ℂ ((tangRad R uX : ℂ) * e uX - 1) * e θ₂ by
-        rw [map_sub, map_one, map_mul, Complex.conj_ofReal, conj_e, sub_eq_add_neg θ₂ uX, e_add]; ring,
-      norm_mul, norm_e, mul_one, RCLike.norm_conj]
+  have hρA : dist (ringPt P θ₁) (collarMid P θ₁ θ₂ R) = ρ := by rw [dist_collarMid_left h12.le, ← huX]
+  have hρB : dist (ringPt P θ₂) (collarMid P θ₁ θ₂ R) = ρ := by rw [dist_collarMid_right h12.le, ← huX]
   -- the germ arcs in their ends' frames
   have hbA : ∀ s : ℝ, branchPt (ringPt P θ₁) (θ₁ + π / 2) (1 / R) s =
       P + (1 + (s : ℂ) * e (π / 2 + Real.arcsin (s / (2 * R)))) * e θ₁ := by
@@ -1051,5 +1075,64 @@ theorem dist_lt_one_of_mem_polarSet {P : ℂ} {θ₁ θ₂ : ℝ} (hℓ : θ₂ 
     nlinarith [mul_nonneg (sub_nonneg.mpr ht.2) ht'.1.le, mul_nonneg (sub_nonneg.mpr ht'.2) ht.1.le,
       mul_nonneg (sub_nonneg.mpr ht.2) (sub_nonneg.mpr ht'.2)]
   nlinarith [dist_nonneg (x := P + (t : ℂ) * e θ) (y := P + (t' : ℂ) * e θ')]
+
+/-! ### Supporting lemmas for the collar's map (FS131-CG1) -/
+
+/-- Polar sets are monotone in the angles and the radii. -/
+theorem polarSet_mono {P : ℂ} {I I' : Set ℝ} {S S' : ℝ → Set ℝ} (hI : I ⊆ I') (hS : ∀ θ ∈ I, S θ ⊆ S' θ) :
+    polarSet P I S ⊆ polarSet P I' S' := by
+  rintro z ⟨θ, hθ, t, ht, rfl⟩
+  exact ⟨θ, hI hθ, t, hS θ hθ ht, rfl⟩
+
+/-- **Polar coordinates are unique** in a window: angles in `(φ − π, φ + π]` and radii positive. -/
+theorem polar_inj_window {P : ℂ} {φ θ θ' t t' : ℝ} (hθ : θ ∈ Ioc (φ - π) (φ + π)) (hθ' : θ' ∈ Ioc (φ - π) (φ + π)) (ht : 0 < t)
+    (ht' : 0 < t') (h : P + (t : ℂ) * e θ = P + (t' : ℂ) * e θ') : θ = θ' ∧ t = t' := by
+  have h1 : θ = θ' := by rw [← polarAngle_polar (P := P) hθ ht, h, polarAngle_polar hθ' ht']
+  subst h1
+  refine ⟨rfl, ?_⟩
+  have h2 := congrArg (fun z => ‖z - P‖) h
+  simp only [add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht,
+    abs_of_pos ht'] at h2
+  exact h2
+
+/-- A polar point at an end angle of a short sector is not in a polar set over the open sector (positive radii). -/
+theorem polar_not_mem_polarSet {P : ℂ} {θ₁ θ₂ θ t : ℝ} (hℓ : θ₂ - θ₁ ≤ π / 3) (hθ : θ ∈ Icc θ₁ θ₂) (hθ' : θ ∉ Ioo θ₁ θ₂)
+    (ht : 0 < t) {S : ℝ → Set ℝ} (hS : ∀ θ, S θ ⊆ Ioi 0) : P + (t : ℂ) * e θ ∉ polarSet P (Ioo θ₁ θ₂) S := by
+  rintro ⟨θ', hθ'', t', ht', heq⟩
+  have h := polar_inj_window (mem_window_of_mem_Icc hℓ hθ) (mem_window_of_mem_Icc hℓ (Ioo_subset_Icc_self hθ'')) ht (hS θ' ht') heq
+  exact hθ' (h.1 ▸ hθ'')
+
+/-- The ends of a short arc are not on its open part. -/
+theorem ringPt_not_mem_openArc {P : ℂ} {θ₁ θ₂ θ : ℝ} (hℓ : θ₂ - θ₁ ≤ π / 3) (hθ : θ ∈ Icc θ₁ θ₂) (hθ' : θ ∉ Ioo θ₁ θ₂) :
+    ringPt P θ ∉ ringPt P '' Ioo θ₁ θ₂ := by
+  rintro ⟨θ', hθ'', heq⟩
+  have h := polar_inj_window (P := P) (t := 1) (t' := 1) (mem_window_of_mem_Icc hℓ hθ)
+    (mem_window_of_mem_Icc hℓ (Ioo_subset_Icc_self hθ'')) one_pos one_pos (by simpa [ringPt] using heq.symm)
+  exact hθ' (h.1 ▸ hθ'')
+
+/-- The push maps `(a, b)` into itself. -/
+theorem push1_mem_Ioo {a m m' b t : ℝ} (ha : a < m) (hb : m < b) (ha' : a < m') (hb' : m' < b) (ht : t ∈ Ioo a b) :
+    push1 a m m' b t ∈ Ioo a b := by
+  rcases lt_trichotomy t m with h | rfl | h
+  · have h1 := push1_mem_Ico (m' := m') (b := b) ha hb ha' ⟨ht.1.le, h⟩
+    have h2 : a < push1 a m m' b t := by
+      rw [push1_of_le_mid ha hb ht.1.le h.le]
+      have := div_pos (mul_pos (sub_pos.mpr ht.1) (sub_pos.mpr ha')) (sub_pos.mpr ha)
+      linarith
+    exact ⟨h2, by linarith [h1.2]⟩
+  · rw [push1_mid ha hb]; exact ⟨ha', hb'⟩
+  · have h1 := push1_mem_Ioc ha hb hb' ⟨h, ht.2.le⟩
+    have h2 : push1 a m m' b t < b := by
+      rw [push1_of_mid_le ha hb h.le ht.2.le]
+      have := div_pos (mul_pos (sub_pos.mpr ht.2) (sub_pos.mpr hb')) (sub_pos.mpr hb)
+      linarith
+    exact ⟨by linarith [h1.1], h2⟩
+
+/-- **The push back on a ray**: `P + t e(θ) ↦ P + push1 (a θ) (l θ) 1 (b θ) t · e(θ)` for `θ ∈ (θ₁, θ₂)`, `t > 0`. -/
+theorem pushHomeo_symm_polar {P : ℂ} {θ₁ θ₂ : ℝ} {a l b : ℝ → ℝ} (hp : PushProfiles θ₁ θ₂ a l b) {θ t : ℝ}
+    (hθ : θ ∈ Ioo θ₁ θ₂) (ht : 0 < t) :
+    (pushHomeo P θ₁ θ₂ a l b hp).symm (P + (t : ℂ) * e θ) = P + (push1 (a θ) (l θ) 1 (b θ) t : ℝ) * e θ := by
+  show pushInv P θ₁ θ₂ a l b (P + (t : ℂ) * e θ) = _
+  rw [pushInv_eq_radialMap, radialMap_polar (mem_window_of_mem_Icc hp.short (Ioo_subset_Icc_self hθ)) ht]
 
 end HadwigerNelson.Plane

@@ -5011,7 +5011,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.coloursAt_subset
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.side_ne_inner_of_mem_lens
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_inert
--- FS131-CG1: lane G's supporting lemmas (`Plane/ValidMap/RadialPush`: the radial push, the tangent circles, the lens boundary)
+-- FS131-CG1: lane G's supporting lemmas (`Plane/ValidMap/RadialPush`: the radial push, the tangent circles, the lens boundary; `Plane/ValidMap/CollarMap`: the collar's map)
 #print axioms HadwigerNelson.Plane.tent_nonneg
 #print axioms HadwigerNelson.Plane.tent_of_le_left
 #print axioms HadwigerNelson.Plane.tent_le_one
@@ -5059,6 +5059,21 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.polar_tangentCircle
 #print axioms HadwigerNelson.Plane.norm_tangRad_sub_one_le
 #print axioms HadwigerNelson.Plane.tangentArc_image
+#print axioms HadwigerNelson.Plane.collarMid_eq
+#print axioms HadwigerNelson.Plane.dist_collarMid_left
+#print axioms HadwigerNelson.Plane.dist_collarMid_right
+#print axioms HadwigerNelson.Plane.norm_tangRad_sub_one_pos
+#print axioms HadwigerNelson.Plane.polarSet_mono
+#print axioms HadwigerNelson.Plane.polar_inj_window
+#print axioms HadwigerNelson.Plane.polar_not_mem_polarSet
+#print axioms HadwigerNelson.Plane.ringPt_not_mem_openArc
+#print axioms HadwigerNelson.Plane.push1_mem_Ioo
+#print axioms HadwigerNelson.Plane.pushHomeo_symm_polar
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.mem_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.lensCurve_subset
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.ringPt_mem_lensCurve
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.not_kept
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.homeo_image_Γ
 
 /-! ## FS-131 wave 5 (job FS131-IX1) — the crossing lemma's children (`inter_nonempty_of_interleaved` itself is in FS131-KP's block) -/
 
