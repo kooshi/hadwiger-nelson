@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Chain
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
+import Proofs.HadwigerNelson.Plane.ValidMap.Cor3
 import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 import Proofs.HadwigerNelson.Plane.LocalStructure
 

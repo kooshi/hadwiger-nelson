@@ -809,3 +809,66 @@ Items 218, 258, 268–269, 274 (the planar fence: `IsHoleOf`, `fill`, `IsOuterTi
 Iteration script: `data/fs131/i5e/iter.sh` (I5d's, re-pointed at its own scratch mirror `/home/kooshi/scratch-w5e`, outside the repository).
 
 ## Stage 19 — SAVED
+
+## Stage 20 — SAVED: `cor3` moved upstream of `HexRing` (ruling 299 (a)); `n3_end_of_not_inType` stopped at a GAP in NB3-END item 2 (ruling 299 (b))
+
+### 20.1 The move
+
+Every name `cor3`'s statement uses is upstream of `HexRing`: `IsCubicTrichromatic`, `BothKind` (`Plane/ValidMap/Basic`), `IsLeavingCentre`
+(`Plane/ValidMap/BaseSteps`), `Covers`, `Valid`, `coloursAt` (`Plane/ArcMap`). So `cor3` — statement, docstring and proof (a `sorry`) — moved by script into
+a new module **`Plane/ValidMap/Cor3`** (imports `BaseSteps`; its own module docstring; the declaration under the same section header
+`/-! ## FS112-N3-COR3 -/` it had in `Dense`), and was deleted from `Dense` with that header. `HexRing` and `Dense` import `Cor3` (`Dense` also through
+`HexRing`); `Dense`'s module docstring says where `cor3` went; `rot_noThird`'s docstring is unchanged. The full name `HadwigerNelson.Plane.ArcMap.cor3`
+is unchanged, so `scripts/Axioms.lean`'s record of it (wave 5's skeleton block) stands. `Proofs.lean`, `ARCHITECTURE.md` (a row for `Cor3`; `Dense`'s
+row and Imports cell; `HexRing`'s Imports cell) updated; `tools/check_architecture.py`: PASS.
+
+**The check** (`tools/fs131_i5_cor3_move.py`): extracts the declaration (docstring to the end of the body) from `Dense` at `a804de21` and from `Cor3` in the
+tree, and compares byte for byte; checks `Dense` no longer declares `cor3` and that exactly one file under `Proofs/` does. Result: **PASS** — "block: 11
+lines, 1257 bytes, identical". `--self-test`: five plants (one byte in the statement, one in the docstring, the body changed, still in the old module,
+declared twice), each **fired**, and the unplanted control passed. The docstring plant at first **did not fire**: its pattern ("close complementary
+pair") occurs first in `Cor3`'s module docstring, so the plant edited the wrong docstring — an unreachable control, caught by the self-test and
+re-aimed at a phrase only the declaration's docstring carries ("FS112-STOP's object"). The check is of the move commit: later stages prove `cor3`
+over `cor3_local` (stage 21), after which its body differs by design.
+
+### 20.2 `n3_end_of_not_inType`: GAP at NB3-END item 2, and what the leaf can start from
+
+**The GAP** (messaged to Keryx 2026-10-05, ruled: the leaf stays `sorry` in this job and goes to an Ephodos re-derivation; inventory to be filed by
+Keryx). NB3-END item 2 (`plans/FS112-NB3-verification.md` l. 234–237): "`c ∈ P_cl(S′)` (N3-DEG at `v`), its sectors in `α`'s away cone (U1), below:
+the two `g`-tiles are **two sectors** of `g` at `S′`." U1 read on `H`'s lower arc of `ω(S′)` — which runs from `v` toward `+a` only — puts `c`'s
+cone at `S′` in the **closed** interval `[α+π, α+2π−φ]` (I5d's `not_antipodal_coneAt_S_of_horn`), which contains the direction `α+π` of `−a`. So
+the text does not exclude: one `g`-sector at `S′` with cone `[α+π, α+2π]` (the whole closed lower half-plane, shadowing both `H` and `H₋`), and `c`
+carried at `S′` only by a `c`-horn along `−a` on its `+n` side (cone `{α+π}`). Then the two sectors are one, and `HasRepeatedColour (v − n)` does not
+follow. The case needs `κ₄ < 1` (`H₋`'s bound on the `S′` side): at `κ₄ = 1`, `H₋`'s arc continues the arc of `ω(S′)` past `v` and U1 excludes `−a`.
+A repair (one mind, leading order only, sent with the message): `y = S′ + s·e(α+π−θ)` has a unit partner in `H₋` iff `θ/s > τ(κ₄) = −κ₄/(2(1−κ₄))`
+(the minimum over `x` of `(s−x)²/2 − κ₄x²/2`); `g`'s witnesses for `H₋` satisfy it, and the `c`-horn lies on their `+n` side, at larger `θ`, so it
+meets `H₋` at distance `1` (a `c`-unit pair). The exact form needs the shadow of `H₋` near `S′` to be closed upward in the frame's `Y` at fixed `X`
+— the mirror of NB3 item 4's "downward closed" — not derived.
+
+**The limit directions of the shadow witnesses** (worked out here for the deriver and the next implementer; one mind, exact inequalities). Frame at
+`v`: `a = e α`, `n = e(α + π/2)`, `S′ = v − n`, `N = v + n`. From `stuck_flanks_ua`: horns `H` (along `a`, bounds `−1, κ₂`) and `H₋` (along `−a`,
+bounds `κ₃, κ₄`), `g` = `IsFlankAbove v α κ₂ g` = `IsFlankBelow v (α+π) κ₃ g` (the `+n` side of both). No SHAVE (`shadow_of_not_shave`) gives `g`-shadow
+witnesses on both horns at every scale; `hno` excludes an in-type `g`-contact at `N`, so `srcG_of_shadow` / `srcH_of_shadow` (turned) give `g`
+out-type at `S′`.
+- *Localization at `S′`.* For `H`: at `κ₂ < 1`, `horn_shadow_near_S`; at `κ₂ = 1`, `shadow_source_near_poles` with `N ∉ cl(region g)` (a `g`-contact
+  at `N` is not out-type, `not_outType_N_of_flankAbove_one`, and not in-type, `hno`). For `H₋` (turned frame `a' = −a`, `n' = −n`, its `N′ = S′`): at
+  `κ₃ > −1`, `horn_shadow_near_N` turned; at `κ₃ = −1`, `shadow_source_near_poles` with `N ∉ cl(region g)` (`not_outType_S_of_flankBelow_neg_one`
+  turned, and `hno`). So witnesses `z_k → v` in the horn, `y_k ∈ region g`, `|z_k − y_k| = 1`, `y_k → S′`.
+- *For `H`:* write `z_k − v = x a + y n` (`x > 0`; the horn: `x² + 2y + y² > 0` and `y < κ₂(x² + y²)/2`, so `|y| ≤ C x²`) and
+  `y_k = S′ + s·e(α + t)`. (1) `y_k`'s sector lies in a `g`-tile at `S′`, out-type, so `|y_k − v| > 1`: `sin t < s/2`. (2) `|z_k − y_k| = 1`:
+  `2s(x cos t + (1 + y) sin t) = x² + 2y + y² + s² > s²`, so `x cos t + (1 + y) sin t > s/2`. Hence `sin t ∈ (−x/(1+y), s/2) → 0` and
+  `cos t > −y s/(2x) → 0`: **the witnesses tend to `+a` from `S′`**, from the closed lower side (`g`'s cone at `S′` lies in `d·n ≤ 0`). The `g`-sector
+  holding infinitely many of them has `α` in its cone and its cone in `[α−π, α]`: its upper germ `nextβ ≡ α` — tangent to `+a` from below.
+- *For `H₋`:* the mirror (turned frame; `|y_k − v| > 1` gives `sin t′ > −s/2`; the unit distance with `H₋` below `ω(S′)` in its frame,
+  `x² + y′² − 2y′ > 0`, gives `x cos t′ − (1 − y′) sin t′ > s/2`): `sin t′ → 0`, `cos t′ ≥ 0` in the limit — **the witnesses tend to `−a`**; the sector
+  holding them has `α + π` in its cone and its cone in `[α+π, α+2π]`: its lower germ `β ≡ α + π`.
+- What is then open is exactly the GAP above: that these two sectors differ.
+
+Wave 4's analogue of this step (`sector_shadow_S`, `flank_shadow_g_chart`) assumes Condition 5 and `κ₁ > −1`, neither available here; the leaf has
+`κ₁ = −1` by hypothesis.
+
+### 20.3 The build
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 6 modules rebuilt, 9 with warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T015517Z-347267.log`, "Build completed successfully (5369 jobs)"; driver log `data/fs131/i5e/build-stage20-cor3move.log`). Wave 5's sorry declarations:
+**33** (`Terminal` 9, `Dense` 1, `Cor3` 1, `HexRing` 7, `MapGraph` 3, `BaseWalk` 8, `BaseDense` 4), **26 this lane's** — unchanged by the move.
+
+## Stage 20 — SAVED
