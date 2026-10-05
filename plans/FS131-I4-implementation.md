@@ -1439,6 +1439,48 @@ the new arc `circ C R (φ_m − γ) (φ_m + γ)`, `γ = arccos((d² + R² − 1)
 distance `1`, `|φ − φ'| < π/3`); no unit arc by engine 2. `Surgery`'s `Near.exists_cut` and `ArcMap.surgery` are ball-centred (they trim `B(v, ρ)` and add
 `∂B(v, ρ)`) and do not serve a cut along `ω(P)`; its `Arc.sub`, `Arc.nondegenerate_sub`, `Arc.carrier_sub` do, and are reused.
 
+## Stage 42 — SAVED (FS131-I4n): `fs131-w4m` merged; `Contact` cites SHAVE and RAY; `n3_end` moved to wave 5; the ruling on `bend_away`
+
+**Keryx's ruling on `bend_away` (inventory items 290–291, message of this stage)**: the repair is adopted — `bend_away` gains the hypothesis that the
+radius-2 arc `radiusTwoArc P θ₁ θ₂` lies in `F.dom`, with its docstring rewritten; `bend_away_whole` is proved directly on `bend_toward`'s lens mirrored,
+statement unchanged; order: `bend_toward`, `bend_away_whole`, the repaired `bend_away`; if the repaired leaf is not done when MERGE lands it moves out
+of wave 4. The statement change is made in the commit that proves `bend_away_whole` directly (so no proved leaf regresses to `sorry` meanwhile).
+**On the smallest hypothesis** (Keryx asked): the arc in the domain is a neighbourhood of it for free (the arc is compact, the domain open), so
+nothing more is needed for `C₂` to be locally a finite union of points and closed intervals.
+
+**The merge** (`8c50673c`, made without paths): `git merge origin/fs131-w4m` at `67256973`. `Contact` merged cleanly. Conflicts only in
+`ARCHITECTURE.md` (both sides kept: `fs131-w4m`'s `Contact`, `Cone`, `Surgery`, `Moves` rows — the two `Contact` descriptions were identical, `w4m`'s
+Imports cell adds `Cone` — and `fs131-w4`'s `UnitArc` row with its `Sectors` import) and `scripts/Axioms.lean` (both audit blocks, IC5's then IM's,
+above the `=== PURCHASED ===` banner; records 2509 + 2539 − 2368 at the base = 2680, no record twice). Item 244's `localSectors_disj` is kept
+(`LocalStructure` l. 4608). **Checks**: `tools/fs131_i4_treedupes.py` — 7,749 declarations, the same 3 pre-existing repeats as both parents
+(`data/fs131/i4/treedupes-i4n-merge.log`); `tools/fs131_qa1_dupes.py` — the same 6 cross-body names as at I4l's merge (it reads branch refs, not the
+working tree; `data/fs131/i4/qa1dupes-i4n-merge.log`); **the statement comparison against both parents** — a new tool,
+`tools/fs131_i4_mergestmts.py` (every theorem statement of `Proofs/`, keyed by name so files may move, checked three-way: a side that changed a
+name's statements from the merge base wins, both changing it is a conflict, and the merged tree must hold exactly the result): 5,416 names, 0
+mismatches, PASS (`data/fs131/i4/mergestmts-i4n.log`); **planted control** (`--plant`: one statement `fs131-w4m` added, altered in the merged view):
+"MISMATCH Arc.finite_inter_sphere_of_not_isUnitArc", FAIL, exit 1 (`data/fs131/i4/mergestmts-i4n-plant.log`), beside the faithful run's PASS;
+`tools/fs131_im_statements.py --check` and `tools/fs131_im_split.py --check` PASS; `tools/check_architecture.py` PASS
+(`data/fs131/i4/check-architecture-i4n-merge.txt`). **Build**: "build: OK — 446 of 446 batches, 5 module(s) rebuilt, 4 module(s) with warnings,
+9m35s", exit 0 (`build/gate/build/20261005T004304Z-4022253.log`; driver log `data/fs131/i4/build-i4n-merge.log`): `sorry` only — UnitArc 2, Contact 3,
+BaseSteps 1, Moves 1 (`exists_merge_aux`).
+
+**The citations** (`7011ce9e`): `Contact` imports `Plane/ValidMap/Moves` (no cycle: `Moves` → `Surgery` → `Cone`), and `exists_shave`, `exists_rayMerge`
+are `exact exists_shave_aux …`, `exact exists_rayMerge_aux …` (statements identical, `tools/fs131_im_statements.py --check` PASS); `exists_merge` stays
+`sorry`. `ARCHITECTURE.md`'s `Contact` Imports cell gains `Moves`; `check_architecture` PASS.
+
+**`n3_end` moved out** (`addf6e8e`, item 289 (b)): its section header, docstring and declaration deleted from `BaseSteps` and its record from
+`scripts/Axioms.lean` — the resulting `BaseSteps.lean` is **byte-identical** to FS131-I5d's on `fs131-w5` (`4a126455`, `diff` empty), so the later merge is
+clean. (I5d left `BaseSteps`' module docstring, l. 20, and `ARCHITECTURE.md`'s `BaseSteps` row still naming `n3_end`; I left them identical for the
+same reason — a stale mention for whoever merges the waves.)
+
+**Build of both** (one run): "build: OK — 446 of 446 batches, 3 module(s) rebuilt, 3 module(s) with warnings, 10m0s", exit 0
+(`build/gate/build/20261005T010142Z-4169366.log`; driver log `data/fs131/i4/build-i4n-cite.log`): `sorry` only — UnitArc 2 (`bend_toward`, `bend_away`),
+Contact 1 (`exists_merge`), Moves 1 (`exists_merge_aux`); none in `BaseSteps`.
+
+**The bends in scratch** (`data/fs131/i4/scratch-i4n/Cut.lean`, against the real oleans, iteration only): engine 3 (`cutArcs` and its lemmas), the
+generic bend (`bendMap` and its five transfer lemmas), the lens geometry, and `bend_toward'`, `bend_away_whole'` elaborate sorry-free, both printing
+`[propext, Classical.choice, Quot.sound]`; 17 s, 3.4 GB. They go into `UnitArc` next.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
