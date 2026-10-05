@@ -52,29 +52,31 @@ Each is scored in the last stage. A "no" on any of them is a result of the same 
 
 ### 1.5 The targets, stated as conjectures (to be replaced in place by derived entries, or by stated stalls)
 
+*Stage 3 (2026-10-04) replaced `e5-two-g-sectors` and `e5-cv-separation` in place by their derived entries (the loop's legal move); their Stage 1 form is in git (`68ef4e85`).*
+
 derivation: e5-two-g-sectors
   statement: in n3_end_of_not_inType's setting, with a = e α, n = e(α + π/2) and S′ = v − n, the colour g of the upper flank has at least two sectors at S′ for every small radius
-  uses only: not yet derived
-  not claimed: anything about items 3–5 of NB3-END
-  argument: § 1.4 The targets
-  verdict: gap: not yet derived — Stage 2
-  grade: hand
+  uses only: e5-sep; the stuck structure at v (stuck_flanks_ua, horn_bounds_of_noMerge); the g-shadow witnesses on both horns localized at S′ (NB3-END item 2's first sentences, I5e's localization); c ∈ P_cl(S′) (N3-DEG) and U1 on H's lower arc; the local structure at S′
+  not claimed: NB3-END items 3–5, re-derived nowhere here; that the two g-sectors are horns (item 3's terminality step)
+  argument: § 3.4 NB3-END item 2, derived
+  verdict: derived
+  grade: derived from: e5-sep
   minds: 1
-  model: not yet exhibited
-  prior art: owed
-  handoff: none — a conjecture
+  model: none expected — a step inside a refutation-shaped row (the Lean docstring's words); item 305's configuration is the case it refutes
+  prior art: partly: NB3-END item 2 and N3-END item 1 assert it (this project) without the separation step; not found in print
+  handoff: de Bruijn — n3_end_of_not_inType's repeated colour at S′, statement unchanged; the Terminal implementer formalizes e5-sh and e5-sep first
 
 derivation: e5-cv-separation
   statement: in cv_class's setting, when no in-type tile of the upper flank colour g sits at E + n and none of the lower flank colour h at E − n, h has at least two sectors at E + n and g at least two at E − n, for every small radius
-  uses only: not yet derived
-  not claimed: the other clauses of cv_class's second disjunct
-  argument: § 1.4 The targets
-  verdict: gap: not yet derived — Stage 2
-  grade: hand
+  uses only: e5-sep and its mirror in the line through E along a; FLANK at E with its witnesses at E ± n (FS114-CVB § 1.4 item 4); c ∈ P_cl(E ± n) (N3-DEG); U1 at a bound ±1; the local structure at E ± n
+  not claimed: the other clauses of cv_class's second disjunct (each neighbour stuck or with at least four colours, N2-TERM item 2); CVB's ring tiles below, not needed
+  argument: § 3.5 FS114-CVB § 1.4 item 5, and `cv_class`'s "None" case, derived
+  verdict: derived
+  grade: derived from: e5-sep
   minds: 1
-  model: not yet exhibited
-  prior art: owed
-  handoff: none — a conjecture
+  model: none exhibited — cv_class's model is the bowtie, which lies in the other disjunct
+  prior art: partly: FS114-CVB § 1.4 item 5 and § 1.7 assert it (this project) in one line; not found in print
+  handoff: de Bruijn — cv_class's second disjunct, its first two clauses, statement unchanged
 
 derivation: e5-bend-end
   statement: in bend_away's setting, at an end A = P + e θ₁ of the arc with θ₁ ∈ C₂ (the r2Contacts set), an away lens bounded near A by a circle tangent to ω(P) at A of curvature κ ∈ (0, 1) close enough to 1 is clear for the inner colour c near A
@@ -170,3 +172,165 @@ calculus of valid arc maps, whose lemmas are not found in print (`plans/FS112-de
 two local lemmas beyond that; the entries say "partly".
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: Q1 derived — the shadow of a horn at its antipode (SH), the separation (SEP), NB3-END item 2 and FS114-CVB § 1.4 item 5
+
+**Frame and words.** As the Lean definitions read them (`ValidMap/Basic.lean`): at `v`, `a = e α`, `n = e(α + π/2)`, `X = frameX v α`, `Y = frameY v α`,
+`N = v + n`, `S′ = v − n`; `tanHeight μ x y = y − μ(x² + y²)/2`, and `TanAbove w α μ`, `TanBelow w α μ` read it in the frame at `w` with the same axes
+(`frameX S′ α = X`, `frameY S′ α = Y + 1`). A circle through `w` tangent to `a` with **upward curvature** `μ` is `{tanHeight_w μ = 0}`; `μ = 1` at `w = S′`
+is `ω(v)`, `μ = −1` at `w = v` is `ω(S′)`. For `σ ∈ {+1, −1}` and `−1 ≤ ν < ν′ ≤ 1`, the horn **on side `σ`** is
+`H^σ_r(ν, ν′) = {z : |z − v| < r, σX(z) > 0, tanHeight_v ν (z) > 0, tanHeight_v ν′ (z) < 0}`: `hornSet v α ν ν′ r` for `σ = +1`, and
+`hornSet v (α + π) κ₃ κ₄ r = H^{−1}_r(−κ₄, −κ₃)` for `σ = −1` (turning the frame by `π` negates `x`, `y` and so the upward curvature; `tanHeight` is even in
+`x`). Its **`S′`-side bound** is `ν`. The **curvature map** `f(ν) = ν/(1 + ν)` (`curvDown`) for `ν ∈ (−1, 1)`. A **unit partner** of `y` in `T` is a
+`z ∈ T` with `|z − y| = 1`; `y` is in the **shadow** of `T` when it has one (`shadow` in `Basic.lean`).
+
+### 3.1 Lemma SH — the shadow of a horn at its antipode is bounded by the concentric circle of curvature `f(ν)` [hand, one mind; SH-ID, SH-SAMPLE exact]
+
+*Statement.* Let `H = H^σ_r(ν, ν′)` with `−1 < ν < ν′ ≤ 1`, `0 < r < 1/2`, and `μ = f(ν)`.
+- **(SH1)** Every `y` with `|y − S′| < 1/2` that has a unit partner in `H` satisfies `TanAbove S′ α μ y`.
+- **(SH2)** There is `ρ > 0` such that every `y` with `|y − S′| < ρ`, `σX(y) > 0` and `TanAbove S′ α μ y` has a unit partner in `H`.
+
+*Argument.* Let `C = {tanHeight_v ν = 0}` (centre `O = v + n/ν`, radius `1/|ν|`; the line `Y = 0` at `ν = 0`); `H`'s `S′`-side boundary is the arc
+`A_H = C ∩ {σX > 0} ∩ B(v, r)`.
+- **(D) the vertical drop.** If `|z − y| < 1` and `q = (z − y)·n > 0`, then `|z − tn − y| < 1` for `0 < t < 2q`: `|(p, q − t)|² − |(p, q)|² = t(t − 2q) < 0`
+  (SH-ID, second identity).
+- **(O) the offset identity.** For `y = S′ + (X, Y′)` and `ν ∉ {0, −1}`: `|y − O|² − (1/ν + 1)² = −(2/μ)·tanHeight μ X Y′` (SH-ID, first identity; it
+  fails for `μ = ν/(1 − ν)`, the planted fault). For `y` near `S′`: if `ν > 0`, `y` lies outside `C`, `dist(y, C) = |y − O| − 1/ν`, and `dist(y, C) < 1 ⟺
+  |y − O|² < (1/ν + 1)² ⟺ tanHeight μ X Y′ > 0` (as `−2/μ < 0`); if `ν ∈ (−1, 0)`, `y` lies inside `C`, `dist(y, C) = 1/|ν| − |y − O|`, and the same
+  equivalence holds (`1/|ν| − 1 = (1 + ν)/|ν|` squares to `(1/ν + 1)²`, and `−2/μ > 0`); if `ν = 0`, `dist(y, C) = 1 − Y′`. So, near `S′`,
+  **`dist(y, C) < 1 ⟺ TanAbove S′ α μ y`.**
+- **(SH1).** A unit partner `z ∈ H` (open) gives `z′ ∈ H` with `|z′ − y| < 1`; `q = (z′ − y)·n > 1/2`, and `z′` lies above `C` by less than `2q`, so (D) drops
+  it to a point of `C` within distance `< 1` of `y`: `dist(y, C) < 1`, and (O).
+- **(SH2).** Given such `y`, its nearest point `p` on `C` lies on the ray from `O` through `y` (`p = (X(y), 0)` at `ν = 0`), so `σX(p) > 0`, and `|p − v| → 0`
+  as `y → S′`; for `ρ` small, `p ∈ A_H` and `|p − y| = dist(y, C) < 1` by (O). The points `p + tn`, small `t > 0`, lie in `H` (above `C`; below the `ν′`-circle
+  since `tanHeight ν′ (p) = (ν − ν′)|p − v|²/2 < 0`; `σX > 0`; inside `B(v, r)`) and within `< 1` of `y`. The point `z₀` of the circle of upward curvature
+  `(ν + ν′)/2` with `|z₀ − v| = r/2` on side `σ` lies in `H`, and `|z₀ − y|² − 1 = |z₀ − S′|² − 1 − 2(y − S′)·(z₀ − S′) + |y − S′|² ≥ (r²/4)(1 + (ν + ν′)/2)
+  − 3ρ > 0` for `ρ` small (`|z₀ − S′|² − 1 = 2·tanHeight_v(−1)(z₀) = (1 + (ν+ν′)/2)|z₀ − v|²`). `H` is connected, so it holds a unit partner of `y`. ∎
+
+*Not claimed:* (SH2) on the far side of the normal line — for `σX(y) ≤ 0` the nearest point of `A_H` is its end `v`, and the shadow near `S′` is `B(v, 1)`
+(the SH-SAMPLE variant that drops this clause fails 14 of 150); and the case `ν = −1`, where `C = ω(S′)` and U1 (§ 3.2 (F5)) takes its place.
+*Recognition:* (O) is FS110-N4-SHADOW's `f`, the curvature of the parallel curve at distance 1 (§ 2.3); what is new is its use between two sectors of one point.
+
+### 3.2 The inputs at a stuck vertex, each with its address or its derivation
+
+In `n3_end_of_not_inType`'s setting (`hF`, `hP`, `hT`, `hst`, `h3`, `hc2`, `hH : IsHorn v α (−1) κ₂ c`, `hno`):
+- **(F1) The stuck structure.** `P_cl(v) = {c, g, h}`; four sectors at `v`: `H = hornSet v α (−1) κ₂` (`c`), the upper `g`-sector filling the directions
+  `(α, α + π)` above both horns, `H₋ = hornSet v (α + π) κ₃ κ₄` (`c`), the lower `h`-sector; bounds in `[−1, 1]` — I5d's `stuck_flanks_ua`,
+  `horn_bounds_of_noMerge` (kernel, `fs131-w5`). So `H₋ = H^{−1}(ν₄, −κ₃)` with **`ν₄ = −κ₄ ∈ [−1, 1)`**.
+- **(F2) `g` near `S′` lies outside `B̄(v, 1)`.** Let `y` be a `g`-point near `S′`. If `|y − v| < 1`, `t ↦ |v + tn − y|` is increasing near `0` and passes `1`
+  at some small `t₀ > 0`; `v + t₀n` lies in the upper `g`-sector: a `g`-pair at distance 1. If `|y − v| = 1`, `y ≠ S′`, the unit vector `u = v − y` is tilted
+  from `n` by `β ≠ 0`, and the upper `g`-sector holds points `v + s e(φ)` with `0 < φ < β` (or `π + β < φ < π`) inside `B(y, 1)` and the point `v + (r/2)n`
+  outside it: by connectedness a `g`-pair at distance 1. So every `g`-sector at `S′` lies in `TanBelow S′ α 1` near `S′`, its cone in `[α + π, α + 2π]`.
+  (The mirror: every `h`-sector at `N` lies outside `B̄(v, 1)`, its cone in `[α, α + π]`.)
+- **(F3) The witnesses.** No SHAVE at `v` with `σ = −1` (all of `H` above it) needs `g`-shadow on `H`, and with `σ = κ₄` in `H₋`'s frame `g`-shadow on `H₋`:
+  `z_k → v` in the horn, `y_k ∈ region g`, `|z_k − y_k| = 1` (`ShaveAvailable`'s negation). Their limits lie on `ω(v) ∩ cl(region g)`, and `y_k → S′`: other
+  contacts are cleared (N3-CLEAR), and `N ∉ cl(region g)` — a `g`-tile at `N` is in-type (a `g`-point near `N` outside or on `ω(v)` crosses the upper
+  sector, as in (F2); a `g`-tile at `N` leaving `B(v, 1)` crosses `ω(v)` at a point other than `N`, `S′`, and that point crosses the upper sector), which
+  `hno` excludes. NB3-END item 2's first sentences; I5e's localization lemmas (`horn_shadow_near_S`, `shadow_source_near_poles`, `srcG_of_shadow`, § 20.2).
+- **(F4) Their directions.** Write `y_k = S′ + s e(α + t)`. For `H`: `|y_k − v| > 1` (F2) gives `sin t < s/2`, and `|z_k − y_k| = 1` with
+  `|z_k − S′|² − 1 = 2·tanHeight_v(−1)(z_k) > 0` gives `(z_k − S′)·e(α + t) > s/2`; these force `t → 0` (I5e § 20.2, re-derived: `t` near `π` would need
+  `X(z_k) < Y(z_k)s/2`, against `Y ≤ κ₂(X² + Y²)/2`). For `H₋`, the same with `|z − S′|² − 1 = 2Y(z) + |z − v|² > (1 + ν₄)|z − v|² ≥ 0` on `H₋` (it lies above the
+  `ν₄`-circle) and `X(z) < 0`: `t → π`. So infinitely many `H`-witnesses lie in one `g`-sector `G₊` at `S′` whose cone holds `α`, and infinitely many `H₋`-witnesses
+  in one `G₋` whose cone holds `α + π`, with `X > 0`, resp. `X < 0`, eventually.
+- **(F5) `c` at `S′`.** `c ∈ P_cl(S′)` (N3-DEG at `v`, two minds; the out-type contact at `S′`). **U1, exact:** a `c`-point `y = S′ + s e(α + θ)` with
+  `cos(θ − w) > s/2` for some `w ∈ (π/2 − ℓ_r, π/2)` (the directions `α + w` of `H`'s lower arc `A₁ ⊂ ω(S′)` inside `B(v, r)`, seen from `S′`) is within `< 1` of the
+  points `S′ + (1 + ε)e(α + w)` of `H` and, for `y` near `S′`, farther than 1 from `H`'s points on its middle curve far along it
+  (`|z − S′|² − 1 = (1 + (κ₂ − 1)/2)|z − v|²` there): a `c`-pair at distance 1.
+  So every `c`-sector at `S′` has its cone in `[α + π, α + 2π − ℓ_r] ⊂ [α + π, α + 2π)`. With `κ₄ = 1` the same on `H₋`'s lower arc removes `α + π` too.
+- **(F6) The local structure at `S′`** (`S′ ∈ dom = ℂ`): finitely many arcs meet a small disc about `S′`; the sectors at `S′` are the regions between
+  consecutive half-arcs from `S′`; a half-arc with direction `α` or `α + π` is, near `S′` on its side, `{tanHeight_{S′} μ = 0}` for one `μ ∈ ℝ` (a circle or
+  segment tangent to `a`); distinct ones have distinct `μ`, ordered from the `−n` side up.
+
+### 3.3 Lemma SEP — a sector that meets the shadow pushes every same-colour horn above it into the shadow [hand, one mind; SEP-ORDER exact]
+
+*Statement.* Valid `F`; `H = H^σ_r(ν, ν′)` a `c`-horn at `v` (a `c`-sector for all small `r`) with `ν ∈ (−1, 1)`; `G` a sector at `S′` one of whose
+boundary half-arcs `γ` has direction `α` (`σ = +1`) or `α + π` (`σ = −1`), with `G` on `γ`'s `−n` side, i.e. `G ∩ {σX > 0} ⊆ TanBelow S′ α μ_γ` near `S′`;
+and points `y_k ∈ G`, `y_k → S′`, `σX(y_k) > 0`, each with a unit partner in `H`. Then **no `c`-sector at `S′` with cone `{α}` (`σ = +1`), resp. `{α + π}`,
+lies on `γ`'s `+n` side.**
+
+*Argument.* By (SH1) `y_k ∈ TanAbove S′ α f(ν) ∩ TanBelow S′ α μ_γ`. Since `tanHeight μ₁ − tanHeight μ₂ = (μ₂ − μ₁)ρ²/2` identically (SEP-ORDER),
+`TanAbove μ₁ ∩ TanBelow μ₂ = ∅` whenever `μ₂ ≤ μ₁`; so **`μ_γ > f(ν)`**. A `c`-sector `K` at `S′` with cone `{σ-direction}` on `γ`'s `+n` side is the region
+between two half-arcs of that direction (F6), the lower of upward curvature `μ_K ≥ μ_γ`; so `K ∩ {σX > 0} ⊆ TanAbove S′ α μ_K ⊆ TanAbove S′ α f(ν)` near `S′`
+(the identity again, `μ_K > f(ν)`). `K` holds points `y` arbitrarily near `S′` with `σX(y) > 0`; by (SH2) such a `y` has a unit partner `z ∈ H`. Both are
+interior points of colour `c` at distance 1: `F` is not valid. ∎ *At `ν = −1`* the conclusion is (F5)'s: no `c`-sector at `S′` has the `σ`-direction at all.
+
+### 3.4 NB3-END item 2, derived
+
+*Claim (the conjecture `e5-two-g-sectors`).* In `n3_end_of_not_inType`'s setting `g` has at least two sectors at `S′` for every small radius.
+
+*Argument.* (F3)–(F4) give `G₊` (cone `∋ α`) and `G₋` (cone `∋ α + π`). Suppose `G₊ = G₋ =: G`. By (F2) its cone lies in `[α + π, α + 2π]` and holds both
+ends, so it **is** `[α + π, α + 2π]`: `G` fills the lower half of a small disc about `S′` between two half-arcs `γ₊`, `γ₋` with directions `α`, `α + π`, and
+holds no arc. By (F5) and (F6) every `c`-sector at `S′` has its cone in `[α + π, α + 2π)` with interior disjoint from `G`'s, hence equal to `{α + π}`: a
+`c`-horn `K` along `−a`, on `γ₋`'s `+n` side (a half-arc of direction `α + π` on `γ₋`'s `−n` side would lie inside `G`). If `κ₄ = 1`, (F5) removes `α + π`
+as well, and `c ∉ P_cl(S′)`, against (F5). If `κ₄ < 1`, SEP with `σ = −1`, `H = H₋`, `ν = ν₄ = −κ₄`, `γ = γ₋` and the `H₋`-witnesses in `G` (with `X < 0`) leaves
+`K` nowhere: contradiction. So `G₊ ≠ G₋`: two `g`-sectors at `S′`, stable for small radii by (F6); **`HasRepeatedColour (v − n)`, the colour `g`.** ∎
+
+*Item 305's configuration* — one `g`-sector with cone `[α+π, α+2π]`, `c` only as a `c`-horn along `−a` on its `+n` side, `κ₄ < 1` — is exactly the case
+refuted, **by validity alone**: the horn `K` lies above `γ₋`, `γ₋` above the circle of curvature `f(−κ₄)` (the `H₋`-witnesses are in `G`), so `K` is in the
+shadow of `H₋`. I5e's leading-order bound `θ/s > τ(κ₄) = −κ₄/(2(1 − κ₄))` is `TanAbove S′ α f(−κ₄)` to first order, and the "closure property" it named
+is (D). Terminality at `S′` is not used.
+
+### 3.5 FS114-CVB § 1.4 item 5, and `cv_class`'s "None" case, derived
+
+*The mirror.* Reflecting in the line through `v` along `a` (`Y ↦ −Y`) exchanges `N` and `S′`, sends upward curvature `μ` to `−μ`, a horn's `N`-side bound
+`υ` to an `S′`-side bound `−υ`, and `TanAbove S′ α μ` to `TanBelow N α (−μ)`. So **the shadow near `N` of a horn on side `σ` with `N`-side bound `υ ∈ (−1, 1)`
+is `TanBelow N α f̃(υ)` on side `σ`**, `f̃(υ) = −f(−υ) = υ/(1 − υ)` (`curvUp`, N4-SHADOW read upward), and SEP mirrored reads: *a sector at `N` meeting that
+shadow, with a boundary half-arc `γ` of the `σ`-direction and lying on `γ`'s `+n` side, leaves no `c`-sector of the `σ`-direction on `γ`'s `−n` side.*
+
+*CVB § 1.4 item 5's exclusion* — "`c`'s sectors at `N` … not in the `±a` stacks below `Q±` (such a sector would shadow part of `H±`, against N-E0)" — is
+this mirrored SEP, applied with `Q₊` (the out-type `h`-sector at `N` holding `H₊`'s `h`-witnesses, CVB item 4) and `H₊` (bound `υ₊ = κ₂` in `cv_class`'s
+names), and with `Q₋`, `H₋` (`υ₋ = −κ₃`); where a bound is `1`, U1 at `N` excludes that direction from `c` outright. **Derived**, for every `υ±`.
+
+*The two sectors.* In `cv_class`'s "None" case (no in-type `g`-tile at `E + n`, none of `h` at `E − n`; FLANK then holds at `E`, CVB § 1.4 item 4):
+`c ∈ P_cl(N)` (N3-DEG), and `c`'s sectors at `N` have cones in `[α, α + π]` (a `c`-point near `N` inside or on `ω(E)` crosses `H₊`: `E` lies in its unit disc
+and `H₊`'s points along its lower arc, far enough out, do not, since its lower bound is `< 1`); `h`'s sectors at `N` likewise (F2 mirrored). If `Q₊ = Q₋`,
+its cone is `[α, α + π]` and every `c`-sector at `N` is a horn along `+a` or `−a` on the `−n` side of `Q`'s half-arc of that direction — excluded above. So
+**`h` has two sectors at `E + n`**, and by § 3.4's argument with `cv_class`'s bounds (`λ₊ = κ₁`, `λ₋ = −κ₄`; U1 on whichever lower arc is `ω(S′)`) **`g` has
+two at `E − n`**. "Both lower bounds `−1`" or "both upper `1`" are CV-HD's conditions, outside "None"; one bound `±1` is handled by U1. CVB's further words —
+"going from `Q₊` to `Q₋` over the top meets `c`, under the bottom `r`" — are not needed for the two sectors. ∎
+
+### 3.6 Entries
+
+derivation: e5-sh
+  statement: for a horn H = H^σ_r(ν, ν′) at v with −1 < ν < ν′ ≤ 1 and 0 < r < 1/2, and μ = ν/(1 + ν): every y with |y − S′| < 1/2 that has a unit partner in H satisfies TanAbove S′ α μ y; and for some ρ > 0 every y with |y − S′| < ρ, σ·frameX v α y > 0 and TanAbove S′ α μ y has a unit partner in H
+  uses only: the offset identity of a circle at distance 1, the vertical drop inside a unit disc, and the connectedness of the horn
+  not claimed: the second half on the far side of the normal line, where the shadow near S′ is B(v, 1); the case ν = −1
+  argument: § 3.1 Lemma SH — the shadow of a horn at its antipode is bounded by the concentric circle of curvature `f(ν)` [hand, one mind; SH-ID, SH-SAMPLE exact]
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: ν = 1/3, ν′ = 2/3, r = 1/5, σ = −1 — SH-SAMPLE's fourth horn; prediction and truth agree at all 30 points placed about its boundary
+  prior art: partly: FS110-N4-SHADOW's curvature map (this project, two minds); the curvature of a parallel curve is classical (recalled, not read)
+  handoff: de Bruijn — two lemmas beside wave 5's horn geometry (statements as here, in hornSet, tanHeight and shadow)
+
+control: e5-sh-identities
+  of: e5-sh — the offset identity and the vertical drop, symbolically
+  run: python3 ../tools/fs131_e5_checks.py sh-id
+  expect: SH-ID identities zero: 2 of 2
+  fault: python3 ../tools/fs131_e5_checks.py sh-id --plant
+
+control: e5-sh-sampled
+  of: e5-sh — prediction against an independent minimum-distance computation, five rational horns, 150 points on both sides of both boundaries
+  run: python3 ../tools/fs131_e5_checks.py sh-sample
+  expect: SH-SAMPLE agree 150 of 150
+  fault: python3 ../tools/fs131_e5_checks.py sh-sample --plant
+
+derivation: e5-sep
+  statement: in a valid map, let H be a c-horn at v on side σ with S′-side bound ν ∈ (−1, 1), and G a sector at S′ with a boundary half-arc γ of the σ-direction, lying on γ's −n side, that holds points tending to S′ on side σ each with a unit partner in H; then no c-sector at S′ whose cone is the σ-direction alone lies on γ's +n side
+  uses only: e5-sh, the identity tanHeight μ₁ − tanHeight μ₂ = (μ₂ − μ₁)ρ²/2, the local structure of sectors at S′, and validity
+  not claimed: anything about c-sectors at S′ of other directions; the case ν = −1, which U1 settles outright
+  argument: § 3.3 Lemma SEP — a sector that meets the shadow pushes every same-colour horn above it into the shadow [hand, one mind; SEP-ORDER exact]
+  verdict: derived
+  grade: derived from: e5-sh
+  minds: 1
+  model: none expected — its conclusion excludes a configuration; the hypotheses without a c-horn on γ's +n side are met by any horn whose antipodal sector meets its shadow
+  prior art: partly: FS110-N4-SHADOW (this project); not found in print
+  handoff: de Bruijn — one lemma, used twice in Terminal (n3_end_of_not_inType at S′; cv_class at E + n and E − n, mirrored)
+
+control: e5-sep-order
+  of: e5-sep — the order of circles tangent at one point
+  run: python3 ../tools/fs131_e5_checks.py sep-order
+  expect: SEP-ORDER identity zero: True
+  fault: python3 ../tools/fs131_e5_checks.py sep-order --plant
+
+## Stage 3 — SAVED
