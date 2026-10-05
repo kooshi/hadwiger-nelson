@@ -1022,6 +1022,48 @@ theorem openArcs_subset_closedBall {up : Bool} {ψ ρ : ℝ} (h : X.Small ρ) :
   · exact (X.G.openRim_subset_sphere v up s b ψ h.1.le).trans
       (sphere_subset_closedBall.trans (closedBall_subset_closedBall (by linarith [h.1])))
 
+/-- **The configuration's clear range covers the gap**: below `ρc`, every point at a direction between the gap's end germs is clear
+for `c`. -/
+theorem OpenConfig.isClear_of_Icc (cfg : X.OpenConfig c up s b ψ ρc) {t φ : ℝ} (ht : t ∈ Ioo 0 ρc)
+    (hφ : φ ∈ Icc (X.G.liftDir s 1 t) (X.G.liftDir s b t)) : F.IsClear c (v + (t : ℂ) * e φ) := by
+  have hray := cfg.ray t ht
+  refine cfg.clear t ht φ ?_ ?_
+  · cases up
+    · simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hray ⊢; exact hray.2.le.trans hφ.1
+    · simp only [if_true]; exact hφ.1
+  · cases up
+    · simp only [Bool.false_eq_true, if_false]; exact hφ.2
+    · simp only [BranchGerms.rayPos, if_true] at hray ⊢; exact hφ.2.trans hray.1.le
+
+/-- **The wedge is clear for `c`.** -/
+theorem OpenConfig.isClear_of_mem_openWedge (cfg : X.OpenConfig c up s b ψ ρc) {ρ : ℝ} (h : X.Small ρ) (hρc : ρ ≤ ρc)
+    {z : ℂ} (hz : z ∈ X.G.openWedge v up s b ψ ρ) : F.IsClear c z := by
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := X.G.mem_openWedge.mp hz
+  have htc : t ∈ Ioo 0 ρc := ⟨ht.1, by linarith [ht.2, h.1]⟩
+  have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, by linarith [ht.2, h.1, h.2.1]⟩
+  have hmono := (X.G.liftDir_mono X.hord s hts).monotone
+  refine cfg.clear t htc φ ?_ ?_
+  · cases up
+    · simp only [Bool.false_eq_true, if_false] at hφ ⊢; exact hφ.1.le
+    · simp only [if_true] at hφ ⊢; exact (hmono cfg.hb1).trans hφ.1.le
+  · cases up
+    · simp only [Bool.false_eq_true, if_false] at hφ ⊢; exact hφ.2.le.trans (hmono cfg.hb1)
+    · simp only [if_true] at hφ ⊢; exact hφ.2.le
+
+/-- OPEN's colour on the wedge is `c`. -/
+theorem openCol_of_mem {ρ : ℝ} {Fcol : ℂ → Fin k} {z : ℂ} (hz : z ∈ X.G.openWedge v up s b ψ ρ) :
+    X.G.openCol v X.col Fcol up s b ψ c ρ z = c := by
+  unfold BranchGerms.openCol; rw [if_pos hz]
+
+/-- Off the wedge OPEN's colour is MERGE's. -/
+theorem openCol_of_not_mem {ρ : ℝ} {Fcol : ℂ → Fin k} {z : ℂ} (hz : z ∉ X.G.openWedge v up s b ψ ρ) :
+    X.G.openCol v X.col Fcol up s b ψ c ρ z = X.G.mergeCol v X.col Fcol s 0 b c ρ z := by
+  unfold BranchGerms.openCol; rw [if_neg hz]
+
+/-- `v` lies on the new ray. -/
+theorem v_mem_openArcs {ρ : ℝ} : v ∈ ⋃ A ∈ X.G.openArcs v X.col up s b ψ ρ, A.carrier :=
+  mem_iUnion₂.mpr ⟨openRay v ψ ρ, Or.inr (Or.inl rfl), left_mem_segment ℝ _ _⟩
+
 /-! ## OPEN's clauses -/
 
 section Surgery
@@ -1030,6 +1072,27 @@ variable {c : Fin k} {up : Bool} {ψ ρc ρ : ℝ} {hv : v ∈ F.dom} {hρ : 0 <
   {hA : ∀ A ∈ X.G.openArcs v X.col up s b ψ ρ, A.Nondegenerate} {hAf : (X.G.openArcs v X.col up s b ψ ρ).Finite}
   {hlc : ∀ x ∈ F.dom, x ∉ ⋃ a ∈ F.trimArcs v ρ ∪ X.G.openArcs v X.col up s b ψ ρ, a.carrier →
     ∀ᶠ y in 𝓝 x, X.G.openCol v X.col F.col up s b ψ c ρ y = X.G.openCol v X.col F.col up s b ψ c ρ x}
+
+/-- Inside `B(v, ρ)`, OPEN's interior points are the points off its new arcs. -/
+theorem mem_open_interiorPts_iff (h : X.Small ρ) {z : ℂ} (hz : z ∈ ball v ρ) :
+    z ∈ (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).interiorPts ↔
+      z ∉ ⋃ A ∈ X.G.openArcs v X.col up s b ψ ρ, A.carrier := by
+  have hzd : z ∈ F.dom := X.hG.subdom (ball_subset_ball h.2.2.1.le hz)
+  show z ∈ F.dom \ _ ↔ _
+  rw [Set.mem_sdiff, surgery_mem_arcs_iff_of_mem X.hG h.2.2.1 hz]
+  exact ⟨fun h1 => h1.2, fun h1 => ⟨hzd, h1⟩⟩
+
+/-- On the rim, OPEN's interior points are `F`'s (a germ's rim point lies on the trimmed arcs). -/
+theorem mem_interiorPts_of_open_rim {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') {z : ℂ} (hz : dist z v = ρ)
+    (hzI : z ∈ (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf
+      hlc).interiorPts) : z ∈ F.interiorPts := by
+  refine ⟨hzI.1, fun hzF => ?_⟩
+  have hzv : z ≠ v := fun hzv => by rw [hzv, dist_self] at hz; linarith
+  have hzr : z ∈ ball v X.r₀ := by rw [mem_ball, hz]; exact hρρ'.trans h'.lt_r₀
+  obtain ⟨j, hj⟩ := X.hC.exists_branchPt_eq hzv hzr (fun hI => hI.2 hzF)
+  rw [← dist_eq_norm, hz] at hj
+  obtain ⟨B, hB, hzB⟩ := mem_iUnion₂.mp (hj ▸ branchPt_rim_mem_trimArcs h' hρ hρρ' j)
+  exact hzI.2 (mem_iUnion₂.mpr ⟨B, Or.inl hB, hzB⟩)
 
 /-- OPEN's map agrees with `F` off the closed disc. -/
 theorem open_agreesOff (h : X.Small ρ) :
@@ -1076,7 +1139,41 @@ theorem open_condition5 (cfg : X.OpenConfig c up s b ψ ρc) (h : X.Small ρ) (h
 theorem open_valid (hF : F.Valid) (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ')
     (h : X.Small ρ) (hρc : ρ ≤ ρc) :
     (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).Valid := by
-  sorry
+  have hregion : ∀ i, ∀ y ∈ F.region i, F.IsClear i y := fun i y hy => by
+    have h1 := hy.2; simp only [mem_preimage, mem_singleton_iff] at h1; rw [← h1]; exact isClear_col hF hy.1
+  have hn : 0 < X.n := by have := cfg.hbn; omega
+  refine Valid.of_agreesOff hF (open_agreesOff h) ?_ ?_
+  · rintro z ⟨hzc, hzI⟩
+    show F.IsClear (X.G.openCol v X.col F.col up s b ψ c ρ z) z
+    rcases (mem_closedBall.mp hzc).lt_or_eq with hlt | heq
+    · have hzv : z ≠ v := by
+        rintro rfl; exact (mem_open_interiorPts_iff h hlt).mp hzI v_mem_openArcs
+      by_cases hzW : z ∈ X.G.openWedge v up s b ψ ρ
+      · rw [openCol_of_mem hzW]; exact cfg.isClear_of_mem_openWedge h hρc hzW
+      rw [openCol_of_not_mem hzW]
+      rcases ball_cases h hn hlt hzv with ⟨i, hi⟩ | ⟨j, t, ht, rfl⟩
+      · rw [mergeCol_of_mem_sector h hi]; split_ifs with hg
+        · obtain ⟨φ, hφ, hzφ⟩ := exists_dir_of_mem_gapSec h hg.1 hi
+          rw [zero_add] at hφ
+          rw [hzφ]; exact cfg.isClear_of_Icc ⟨(norm_of_mem_sector hi).1, by linarith [hg.2, h.1]⟩ hφ
+        · exact hregion _ _ (X.hcol i ρ h.mem_Ioc hi)
+      · rw [mergeCol_branchPt h j ht]; split_ifs with hg
+        · obtain ⟨m, h1, h2, rfl⟩ := hg.1
+          have hφ := liftDir_gap_germ (s := s) (⟨ht.1, ht.2.trans h.2.1⟩ : t ∈ Ioo 0 X.s₀) h1 h2
+          rw [zero_add] at hφ
+          rw [X.G.branchPt_idx]
+          exact cfg.isClear_of_Icc ⟨ht.1, by linarith [hg.2, h.1]⟩ hφ
+        · exact isClear_of_mem_closure (hregion _) (cutSet_subset_closure h ⟨t, ht, rfl⟩)
+    · have hzF := mem_interiorPts_of_open_rim h' hρρ' heq hzI
+      have hzb : z ∉ ball v ρ := by rw [mem_ball, heq]; exact lt_irrefl ρ
+      rw [openCol_of_not_mem (fun hW => hzb (ball_subset_ball (by linarith [h.1])
+        (X.G.openWedge_subset_ball v up s b ψ ρ hW))), mergeCol_of_not_mem h hzb]
+      exact isClear_col hF hzF
+  · rintro z ⟨hz, -⟩ y ⟨hy, -⟩ hzy
+    exfalso
+    have := dist_triangle_right z y v
+    rw [mem_closedBall] at hz hy
+    linarith [h.2.2.2]
 
 /-- **`v` gains no colour**: every colour of the new map near `v` is a chart sector's colour or `c`. -/
 theorem open_coloursAt_self (cfg : X.OpenConfig c up s b ψ ρc) (h : X.Small ρ) (_hρc : ρ ≤ ρc) :
