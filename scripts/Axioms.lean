@@ -2699,7 +2699,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.fail_leavingCentre
 #print axioms HadwigerNelson.Plane.ArcMap.fail_colours
 #print axioms HadwigerNelson.Plane.ArcMap.anti
-#print axioms HadwigerNelson.Plane.ArcMap.n3_end
 #print axioms HadwigerNelson.Plane.bowtieArcs_nondegenerate
 #print axioms HadwigerNelson.Plane.bowtieArcs_locallyFinite
 #print axioms HadwigerNelson.Plane.bowtieCol_locallyConstant
@@ -3250,6 +3249,10 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.woodallCone_isHorn_ua
 #print axioms HadwigerNelson.Plane.ArcMap.stuck_horns_ua
 #print axioms HadwigerNelson.Plane.ArcMap.stuck_flanks_ua
+
+/-! ## FS-131 wave 5 (job FS131-I5d) — wave 5's fourth implementer: `n3_end` (moved from wave 4's `BaseSteps`, inventory item 289), the unit-arc flank lemmas -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.n3_end
 
 /-! ## FS-131 wave 5 (job FS131-I5b) — wave 5's second implementer: Lemma 1's children, the holed fragment -/
 

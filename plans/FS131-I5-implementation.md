@@ -612,3 +612,20 @@ read. No mismatch found. `n3_end`'s statement and docstring on this branch (`Bas
 `BaseWalk` 10, `BaseDense` 4 (**37**, the brief's count; less the planar seven, **30** mine), and wave 4's stale `Contact` 3, `UnitArc` 5, `BaseSteps` 1.
 
 ## Stage 14 — SAVED
+
+## Stage 15 — SAVED: `n3_end` moved to wave 5 (inventory item 289, the brief's amendment)
+
+`n3_end` (FS112-N3-END), statement and docstring verbatim (the 12 lines of `BaseSteps` l. 1643–1654, copied by script), now stands in
+`Plane/ValidMap/Terminal` just before `n3_end_chain`; deleted from this branch's `BaseSteps` together with its section header `/-! ## FS112-N3-END -/`
+(l. 1641–1655), and its `#print axioms` line deleted from `scripts/Axioms.lean`'s wave-4 block and re-added in a new block "FS-131 wave 5 (job
+FS131-I5d)" (placed after I5c's block, before I5b's, away from the PURCHASED banner where wave 4 appends). `ARCHITECTURE.md`: `Terminal`'s row names
+`n3_end` (moved from `BaseSteps` by item 289); `BaseSteps`' row and `BaseSteps`' module docstring still name it (wave 4's text, left for the merge, so the
+two branches' `BaseSteps` deletions stay identical — **for the coordinator**: whichever lands second may drop those two mentions). `tools/check_architecture.py`:
+PASS. No other file referenced `n3_end` (by grep).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 446 of 446 batches, 7 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T003637Z-3957634.log`; driver log `data/fs131/i5d/build-stage15-move.log`). Sorry declarations (unique): wave 5's `Terminal`
+12 (11 + `n3_end`), `Dense` 2, `HexRing` 7, `MapGraph` 3, `BaseWalk` 10, `BaseDense` 4 — **38**, of them **31 this lane's**; wave 4's stale `Contact` 3,
+`UnitArc` 5; `BaseSteps` 0.
+
+## Stage 15 — SAVED
