@@ -387,3 +387,40 @@ colour would be constant near `x` and `x` would carry one colour. So the present
 avoided, and the work is IL1's (i)–(ii).
 
 ## Stage 9 — SAVED (FS131-IL2)
+
+## Stage 10 — SAVED (FS131-IL2): `exists_clean` proved, and the re-pricing
+
+- **`exists_clean` proved** (`Limit`), over the clean map `ArcMap.clean`: same domain; arcs `cleanArcs` — for each arc `a` of `F`, the
+  sub-arcs `a.subL s t` over the non-trivial maximal intervals `[s, t]` (`ordConnectedComponent`, closed: `isClosed_ordConnectedComponent`,
+  `= Icc`: `ordConnectedComponent_eq_Icc`) of its *essential parameters* `essParams a` (the parameters whose point is off the domain or carries
+  two or more colours, `essSet`); colour `cleanCol` (the one colour at a point carrying one). The proof's facts, each a lemma:
+  - **`dom ∩ ⋃ cleanArcs = essSet`** (`dom_inter_cleanArcs`), hence `clean.Γ = essSet ⊆ Γ` and `clean.interiorPts = dom \ essSet`. The
+    inclusion `essSet ⊆ ⋃ cleanArcs` (`essSet_subset_cleanArcs`) is by isolation: an essential point on no clean arc would have no essential
+    point near it (every essential point of `Γ` near `x` lies on an arc through `x`, joined to `x`'s parameter through essential parameters,
+    `eventually_finite_components`), and an isolated point of the essential set is not essential (`not_mem_essSet_of_isolated`: the punctured
+    disc is connected, `isPreconnected_ball_diff_singleton`, and carries one colour).
+  - **Local finiteness** (`cleanArcs_locallyFinite`): in a good ball about `x` the essential status is locally constant on `Γ` off `x`
+    (`eventually_essSet_iff_of_goodAt`: a chart at `y ≠ x` has at most two germs, `germs_le_two_of_goodAt`, the argument of IL1's
+    `not_isSite_of_goodAt`; with two, every point of `Γ` near `y` is in the closure of both sectors, `branchPt_mem_closure_sector_pair`, copied
+    from `fs131-w5`'s `MapTopology`), so along each arc through `x` the essential parameters are, near each parameter at `x`, all or none of
+    each side (`essParams_eventually_iff`); a general lemma about a closed set of parameters of a path on a compact interval
+    (`eventually_finite_components`) then gives finitely many components near `x`. Finitely many parameters of an arc map to one point
+    (`Arc.finite_ptL_eq`).
+  - **Validity** (`clean_valid`): two points of the new interior of one colour `j` at distance `1` are moved together by a small vector onto
+    an interior point `z` of `F` (of colour `j`) and a point of the closure of `j`'s class at distance `1` from it, against `ne1_region`.
+  - **Colours unchanged** (`coloursAt_clean`): `F.region j ⊆ clean.region j ⊆ closure (F.region j)`; clean (`clean_isClean`); `IsModification`
+    from `Γ' ⊆ Γ` and the colours.
+- **The arc parametrisation** (`Arc.ptL`, `Arc.paramsL`, `Arc.subL`, `continuous_ptL`, `carrier_eq_imageL`, `carrier_subL`, `nondegenerate_subL`) is
+  `main`'s `Surgery` block (`Arc.pt`, `Arc.params`, `Arc.sub` and their lemmas) copied under names suffixed `L`, since `Surgery` is not on this
+  branch: **at the merge with `main`, delete the copies and rename the uses** (seven names; no statement depends on the suffix).
+- **Build** (code at this stage's commit): `slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` — **OK, 447 of 447 batches,
+  7 modules rebuilt, 9 with warnings (was 10: `Limit` now has none)**, 8 min 48 s, exit 0 (`build/gate/build/20261005T102944Z-3350317.log`, which
+  ends "Build completed successfully (5372 jobs)"; driver log `data/fs131/il/build-il2-stage10.log`). `Limit`: no `sorry`. An iteration copy
+  with a planted `example : (1:ℕ) = 2 := rfl` after the proof went red (control).
+- **Re-price** (the brief's checkpoint after `exists_clean`): planned H, "400–600 lines, one session"; it took about 800 lines in one pass of
+  well under a session (the scratch elaborated after three rounds of local fixes). The three finiteness lemmas re-price to E–M each: `RingGerm`'s
+  regular angles (`RegularAt`, `finite_not_regular`) already hold the local structure of `Γ` on a unit circle, and `badCount_lt_top` needs no
+  cleanness (the ends of a maximal arc are irregular angles); `mergeAvailable_of_bothKind` stays M (U1 is `ringArc_sideCone_other`, the
+  allowed cone's interior is `woodallCone`'s contrapositive, two sectors from the chart's cone intervals, `Mono.disjoint`).
+
+## Stage 10 — SAVED (FS131-IL2)
