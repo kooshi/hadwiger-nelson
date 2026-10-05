@@ -1,0 +1,53 @@
+slot: admitted vacuity.sh: mem 30 GiB (hard cap), cpus 0,1,2,3
+==> vacuity-self-test: this run's full output: build/gate/vacuity-self-test/20261005T023001Z-589589.log
+    control run: === SCANNED === declarations=9698 refutations-skipped=87
+    control run: === TOTALS === sites=595 vacuous=12 stale=1 declared=3 witnessed=23 generic=545 unknown=11 untelescoped=0
+==> vacuity self-test: twenty planted defects, each watched to fire
+    ok    VACUOUS planted_vacuous_coloring — the core9_plane shape: a colouring type the library proves empty
+    ok    VACUOUS planted_vacuous_prop — a tracked Prop hypothesis the library refutes
+    ok    VACUOUS planted_vacuous_forces — a Forces hypothesis refuted by a theorem in the same run
+    ok    UNKNOWN planted_unknown_prop — THE LOAD-BEARING ONE: same family, an instantiation nothing refutes
+    ok    VACUOUS planted_vacuous_ae — AeColouring 1: a structure whose emptiness is a theorem (FS131-T1's defect)
+    ok    SITE GENERIC planted_generic_ae — AeColouring k at a variable k: parametric
+    ok    UNKNOWN planted_unknown_ae — AeColouring at a k nothing refutes: the load-bearing half for the new family
+    ok    VACUOUS planted_vacuous_valid — ArcMap.Valid at a concrete map the library refutes
+    ok    SITE GENERIC planted_generic_valid — ArcMap.Valid at a variable map: parametric
+    ok    UNKNOWN planted_ae_def — a user-written def concluding a tracked structure is still audited (the generated-API filter is narrow)
+    ok    (no row) planted_not_valid — the ArcMap refutation is never audited against the emptiness it proves
+    ok    STALE planted_stale — a VACUITY DECLARED: annotation whose claim is false
+    ok    (no row) planted_refutation — a refutation's binders are meant to be empty
+    ok    (no row) planted_not_forces — the evidence itself is never audited against the emptiness it proves
+    ok    VACUOUS planted_vacuous_ne — a conclusion x ≠ y over AeColouring 1: a stated negation is not a refutation (FS131-T2's defect)
+    ok    VACUOUS planted_vacuous_not — a conclusion ¬ P over AeColouring 1: the same
+    ok    SITE GENERIC planted_generic_ne — the ≠ shape at a variable k: parametric
+    ok    SITE GENERIC planted_generic_not — the ¬ shape at a variable k: parametric
+    ok    UNKNOWN planted_unknown_ne — the ≠ shape at a k nothing refutes: the load-bearing half
+    ok    VACUOUS planted_vacuous_ringArc — IsRingArc at halfPlane2's ring, which carries no arc of Γ (wave 3, FS131-I3h)
+    ok    SITE GENERIC planted_generic_ringArc — IsRingArc at a variable map: parametric
+    ok    UNKNOWN planted_unknown_ringArc — IsRingArc at a sixFrag instance nothing decides: the load-bearing half
+    ok    VACUOUS planted_vacuous_qArc — IsQArc at halfPlane2's ring (no ring arc, so no (Q) arc)
+    ok    SITE GENERIC planted_generic_qArc — IsQArc at a variable map: parametric
+    ok    UNKNOWN planted_unknown_qArc — IsQArc at a sixFrag instance nothing decides: the load-bearing half
+    ok    VACUOUS planted_vacuous_changePoint — IsChangePoint at r(90°) = i, off halfPlane2's Γ
+    ok    SITE GENERIC planted_generic_changePoint — IsChangePoint at a variable map: parametric
+    ok    UNKNOWN planted_unknown_changePoint — IsChangePoint at a sixFrag instance nothing decides: the load-bearing half
+    ok    VACUOUS planted_vacuous_hub — IsHub at r(90°) = i: no change point there
+    ok    SITE GENERIC planted_generic_hub — IsHub at a variable map: parametric
+    ok    UNKNOWN planted_unknown_hub — IsHub at a sixFrag instance nothing decides: the load-bearing half
+    FAIL  expected 'VACUOUS planted_vacuous_horn' and it is absent — IsHorn at i, which bowtie_not_isHorn_I_axis refutes (wave 4, FS131-G4)
+    FAIL  expected 'SITE GENERIC planted_generic_horn' and it is absent — IsHorn at a variable map: parametric
+    FAIL  expected 'UNKNOWN planted_unknown_horn' and it is absent — IsHorn at -i, which no closed theorem refutes: the load-bearing half
+    FAIL  expected 'VACUOUS planted_vacuous_stuck' and it is absent — IsStuck at i, which bowtie_not_isStuck_I refutes
+    FAIL  expected 'SITE GENERIC planted_generic_stuck' and it is absent — IsStuck at a variable map: parametric
+    FAIL  expected 'UNKNOWN planted_unknown_stuck' and it is absent — IsStuck at -i, which no closed theorem refutes: the load-bearing half
+    FAIL  expected 'VACUOUS planted_vacuous_condition5' and it is absent — Condition5 at unitArcPlane, which unitArcPlane_not_condition5 refutes
+    FAIL  expected 'SITE GENERIC planted_generic_condition5' and it is absent — Condition5 at a variable map: parametric
+    FAIL  expected 'UNKNOWN planted_unknown_condition5' and it is absent — Condition5 at segPlane, true but proved nowhere: the load-bearing half
+    FAIL  expected 'VACUOUS planted_vacuous_aeRegions' and it is absent — AeProperRegions 1: emptiness by an instance, the adversary
+    FAIL  expected 'SITE GENERIC planted_generic_aeRegions' and it is absent — AeProperRegions k at a variable k: parametric
+    FAIL  expected 'UNKNOWN planted_unknown_aeRegions' and it is absent — AeProperRegions at a k nothing refutes: the load-bearing half
+    ok    (no row) planted_arrow_false — a genuine refutation P → False over the empty carrier stays skipped
+==> vacuity self-test: FAIL — 12 control(s) did not behave as designed.
+    The gate cannot be trusted until every one of these fires. Do not baseline around it.
+    full output: build/gate/vacuity-self-test/20261005T023001Z-589589.log
+exit=1

@@ -1,0 +1,4 @@
+planted: Arc.finite_inter_sphere_of_not_isUnitArc
+MISMATCH Arc.finite_inter_sphere_of_not_isUnitArc: merged {'{a : Arc} (ha : a.Nondegenerate) (hu : ¬ a.IsUnitArc) (p : ℂ) : (a.carrier ∩ sphere p 1).Finite PLANTED': 1} expected {'{a : Arc} (ha : a.Nondegenerate) (hu : ¬ a.IsUnitArc) (p : ℂ) : (a.carrier ∩ sphere p 1).Finite': 1}
+5416 names; base d4f946ae; 1 mismatches/conflicts
+FAIL

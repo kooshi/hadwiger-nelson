@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Plane.Woodall.Basic
 import Proofs.HadwigerNelson.Plane.SVMap
+import Proofs.HadwigerNelson.Plane.ValidMap.Cone
 import Proofs.HadwigerNelson.Plane.Chord
 
 /-!
@@ -240,18 +241,6 @@ theorem exists_unit_pair_collar (u : ℂ) (s : Rim) {θ₁ θ₂ h : ℝ} (hlen 
 
 /-! ## Two colours: change points -/
 
-/-- The shadow of an open set is open (translate the witness). -/
-theorem isOpen_shadow {U : Set ℂ} (hU : IsOpen U) : IsOpen (shadow U) := by
-  rw [isOpen_iff_mem_nhds]
-  rintro z ⟨y, hy, hzy⟩
-  obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp hU y hy
-  refine Filter.mem_of_superset (Metric.ball_mem_nhds z hr) fun z' hz' => ⟨y + (z' - z), hball ?_, ?_⟩
-  · rw [Metric.mem_ball, dist_eq_norm, add_sub_cancel_left, ← dist_eq_norm]
-    exact hz'
-  · rw [dist_eq_norm] at hzy ⊢
-    rw [show z' - (y + (z' - z)) = z - y by ring]
-    exact hzy
-
 /-- **A dense open class with no unit pair cannot hold a unit pair of points of an open set**: if `W` is open, `W ⊆ closure A`, `A` open
 with no unit pair, then no two points of `W` are at distance `1` (the shadow of a small piece of `A` near `x` is an open set near `y`). -/
 theorem false_of_dense_unit_pair {A W : Set ℂ} (hA : IsOpen A) (hAu : ∀ x ∈ A, ∀ y ∈ A, dist x y ≠ 1) (hW : IsOpen W)
@@ -384,14 +373,6 @@ theorem sphere_meets_of_collarAt {W : Set ℂ} {u : ℂ} {ρ θ σ : ℝ} (hρ :
 theorem dot_eq (a b : ℂ) : dot a b = a.re * b.re + a.im * b.im := by
   simp [dot, Complex.mul_re]
 
-theorem abs_dot_le (a b : ℂ) : |dot a b| ≤ ‖a‖ * ‖b‖ := by
-  have : dot a b = (a * starRingEnd ℂ b).re := rfl
-  rw [this, ← norm_conj b, ← norm_mul]
-  exact Complex.abs_re_le_norm _
-
-theorem dot_add_left (a b c : ℂ) : dot (a + b) c = dot a c + dot b c := by
-  simp [dot_eq]; ring
-
 theorem dot_sub_left (a b c : ℂ) : dot (a - b) c = dot a c - dot b c := by
   simp [dot_eq]; ring
 
@@ -400,9 +381,6 @@ theorem dot_sub_right (a b c : ℂ) : dot a (b - c) = dot a b - dot a c := by
 
 theorem dot_real_mul_left (r : ℝ) (a b : ℂ) : dot ((r : ℂ) * a) b = r * dot a b := by
   simp [dot_eq]; ring
-
-theorem dot_e_e (a b : ℝ) : dot (e a) (e b) = Real.cos (a - b) := by
-  rw [dot_eq, e_eq, e_eq, Real.cos_sub]; simp [-Complex.ofReal_cos, -Complex.ofReal_sin]
 
 theorem norm_sub_real_mul_e_sq (q : ℂ) (ρ ψ : ℝ) : ‖q - (ρ : ℂ) * e ψ‖ ^ 2 = ‖q‖ ^ 2 + ρ ^ 2 - 2 * ρ * dot q (e ψ) := by
   rw [dot_eq, e_eq]

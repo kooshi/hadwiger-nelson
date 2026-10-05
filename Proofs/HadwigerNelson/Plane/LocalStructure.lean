@@ -29,7 +29,13 @@ these forward from wave 4's foundation). Pure topology of `ArcMap`: no validity,
 * **Interval cones in a simple map** (`Simple.coneAt_eq_angleIcc`): each tile's cone at a point of its closure is one closed
   angular interval.
 
-The inversion engine at the end of the module (`rotD`, `invC`, `Rgn`, `levD`: the chart `ζ ↦ ζ/|ζ|²` about a point turns every
+* **The sector structure at a point** (`localSectors`, FS131-I3i; inventory item 136): for small radii the arcs about a
+  point of the domain are finitely many **branch germs** — a tangent direction and a signed curvature each (`branchPt`,
+  `BranchGerms`) — sorted counter-clockwise, and the interior points near the point are the open **sectors** between
+  consecutive germs, the same for every smaller radius: open, connected, disjoint, each with the cone of its two germs'
+  directions (`ArcMap.IsSectorChart`); a cusp is a sector between two tangent germs, its cone one direction.
+
+The inversion engine late in the module (`rotD`, `invC`, `Rgn`, `levD`: the chart `ζ ↦ ζ/|ζ|²` about a point turns every
 curve through it into a line) gives the wedge lemma, tiles' cones with disjoint interiors, and initial pieces of arcs.
 -/
 
@@ -3571,5 +3577,1402 @@ theorem exists_initialPiece_of_cone {y : ℂ} (hy : y ∈ F.dom) {t : Set ℂ} (
 
 
 end ArcMap
+
+section LocalSectors
+
+/-! ## The sector structure at a point (`localSectors`) -/
+
+/-- The point at distance `s` from `v` on the branch germ with tangent direction `β` and signed curvature `κ`. -/
+noncomputable def branchPt (v : ℂ) (β κ s : ℝ) : ℂ := v + (s : ℂ) * e (β + Real.arcsin (κ * s / 2))
+
+/-- The open sector between the germs `(β₁, κ₁)` and `(β₂, κ₂)`, out to radius `r`: the points `v + s e(φ)`, `0 < s < r`,
+with `φ` strictly between the two germs' directions at distance `s`. -/
+def sectorBetween (v : ℂ) (β₁ κ₁ β₂ κ₂ r : ℝ) : Set ℂ :=
+  {z | ∃ s ∈ Ioo 0 r, ∃ φ ∈ Ioo (β₁ + Real.arcsin (κ₁ * s / 2)) (β₂ + Real.arcsin (κ₂ * s / 2)),
+    z = v + (s : ℂ) * e φ}
+
+/-- `n` branch germs, read counter-clockwise. -/
+structure BranchGerms (n : ℕ) where
+  /-- The tangent directions. -/
+  β : Fin n → ℝ
+  /-- The signed curvatures (`0` for a segment). -/
+  κ : Fin n → ℝ
+
+namespace BranchGerms
+
+variable {n : ℕ} (G : BranchGerms n)
+
+/-- The direction of the germ after `i` (the first one, one turn on, after the last). -/
+noncomputable def nextβ (i : Fin n) : ℝ :=
+  if h : i.val + 1 < n then G.β ⟨i.val + 1, h⟩ else G.β ⟨0, by omega⟩ + 2 * π
+
+/-- The curvature of the germ after `i`. -/
+noncomputable def nextκ (i : Fin n) : ℝ :=
+  if h : i.val + 1 < n then G.κ ⟨i.val + 1, h⟩ else G.κ ⟨0, by omega⟩
+
+/-- The `i`-th sector out to radius `r`: between germ `i` and the next. -/
+def sector (v : ℂ) (r : ℝ) (i : Fin n) : Set ℂ := sectorBetween v (G.β i) (G.κ i) (G.nextβ i) (G.nextκ i) r
+
+/-- The germs are sorted: strictly increasing in `(β, κ)` lexicographically, within one turn of the first. -/
+def Sorted : Prop :=
+  (∀ i j : Fin n, i < j → G.β i < G.β j ∨ (G.β i = G.β j ∧ G.κ i < G.κ j)) ∧
+    ∀ i : Fin n, G.β i < G.nextβ i ∨ (G.β i = G.nextβ i ∧ G.κ i < G.nextκ i)
+
+end BranchGerms
+
+/-! ### Germ directions -/
+
+/-- The direction from `v` of the point at distance `s` on the germ `(β, κ)`: `β + arcsin(κ s / 2)`. -/
+noncomputable def germDir (β κ s : ℝ) : ℝ := β + Real.arcsin (κ * s / 2)
+
+theorem branchPt_eq (v : ℂ) (β κ s : ℝ) : branchPt v β κ s = v + (s : ℂ) * e (germDir β κ s) := rfl
+
+@[simp] theorem germDir_zero (β κ : ℝ) : germDir β κ 0 = β := by simp [germDir]
+
+theorem germDir_add_two_pi (β κ s : ℝ) : germDir (β + 2 * π) κ s = germDir β κ s + 2 * π := by
+  unfold germDir; ring
+
+theorem continuous_germDir (β κ : ℝ) : Continuous (germDir β κ) :=
+  continuous_const.add (Real.continuous_arcsin.comp (by fun_prop))
+
+theorem continuous_branchPt (v : ℂ) (β κ : ℝ) : Continuous (branchPt v β κ) := by
+  have h1 : Continuous fun s : ℝ => e (germDir β κ s) :=
+    Complex.continuous_exp.comp ((Complex.continuous_ofReal.comp (continuous_germDir β κ)).mul continuous_const)
+  exact continuous_const.add ((Complex.continuous_ofReal).mul h1)
+
+theorem norm_mul_e {s : ℝ} (hs : 0 ≤ s) (φ : ℝ) : ‖(s : ℂ) * e φ‖ = s := by
+  rw [norm_mul, Complex.norm_real, norm_e, mul_one, Real.norm_eq_abs, abs_of_nonneg hs]
+
+theorem norm_branchPt_sub (v : ℂ) (β κ : ℝ) {s : ℝ} (hs : 0 ≤ s) : ‖branchPt v β κ s - v‖ = s := by
+  rw [branchPt, add_sub_cancel_left, norm_mul_e hs]
+
+/-- Two points `v + s e(φ)`, `v + s' e(φ')` at positive distances agree only at one distance and congruent angles. -/
+theorem polar_eq_iff {v : ℂ} {s s' φ φ' : ℝ} (hs : 0 < s) (hs' : 0 < s') :
+    v + (s : ℂ) * e φ = v + (s' : ℂ) * e φ' ↔ s = s' ∧ e φ = e φ' := by
+  constructor
+  · intro h
+    have h1 : (s : ℂ) * e φ = s' * e φ' := add_left_cancel h
+    have hss : s = s' := by
+      have := congrArg norm h1
+      rwa [norm_mul_e hs.le, norm_mul_e hs'.le] at this
+    refine ⟨hss, ?_⟩
+    subst hss
+    have hs0 : (s : ℂ) ≠ 0 := by exact_mod_cast hs.ne'
+    exact mul_left_cancel₀ hs0 h1
+  · rintro ⟨rfl, h⟩; rw [h]
+
+/-- A complex number is `‖z‖ e(arg z)`. -/
+theorem eq_polar_arg (z : ℂ) : z = (‖z‖ : ℂ) * e (arg z) := by
+  have := Complex.norm_mul_exp_arg_mul_I z
+  simp [e, this]
+
+/-- `e` reads an angle modulo `2π`: `e(x + 2πm) = e(x)`. -/
+theorem e_add_int_mul (x : ℝ) (m : ℤ) : e (x + 2 * π * m) = e x := by
+  rw [e_eq_e_iff]; exact ⟨m, by ring⟩
+
+/-- **The local angle at a point**: near `z₀ = v + s₀ e(φ₀)`, `s₀ > 0`, every point is `v + ‖z − v‖ e(ψ z)` with `ψ` continuous
+at `z₀`, `ψ z₀ = φ₀`. -/
+theorem eq_polar_local {v z₀ : ℂ} {s₀ φ₀ : ℝ} (hs₀ : 0 < s₀) (hz₀ : z₀ = v + (s₀ : ℂ) * e φ₀) (z : ℂ) :
+    z = v + (‖z - v‖ : ℂ) * e (φ₀ + arg ((z - v) / (z₀ - v))) := by
+  have hz0v : z₀ - v = (s₀ : ℂ) * e φ₀ := by rw [hz₀]; ring
+  have hne : z₀ - v ≠ 0 := by
+    rw [hz0v]; exact mul_ne_zero (by exact_mod_cast hs₀.ne') (e_ne_zero _)
+  set w := (z - v) / (z₀ - v) with hw
+  have hnw : ‖w‖ * s₀ = ‖z - v‖ := by
+    rw [hw, norm_div, hz0v, norm_mul_e hs₀.le]; field_simp
+  have h1 : z - v = w * (z₀ - v) := by rw [hw]; field_simp
+  have h2 := eq_polar_arg w
+  calc z = v + (z - v) := by ring
+    _ = v + ((‖w‖ : ℂ) * e (arg w)) * ((s₀ : ℂ) * e φ₀) := by rw [h1, ← h2, hz0v]
+    _ = v + ((‖w‖ * s₀ : ℝ) : ℂ) * (e φ₀ * e (arg w)) := by push_cast; ring
+    _ = _ := by rw [hnw, ← e_add]
+
+theorem continuousAt_arg_div {v z₀ : ℂ} (hne : z₀ ≠ v) :
+    ContinuousAt (fun z => arg ((z - v) / (z₀ - v))) z₀ := by
+  have hne' : z₀ - v ≠ 0 := sub_ne_zero.mpr hne
+  have hc : ContinuousAt (fun z : ℂ => (z - v) / (z₀ - v)) z₀ :=
+    ((continuous_id.sub continuous_const).div_const _).continuousAt
+  have ha : ContinuousAt arg ((z₀ - v) / (z₀ - v)) := by
+    rw [div_self hne']; exact Complex.continuousAt_arg Complex.one_mem_slitPlane
+  exact ContinuousAt.comp (g := arg) (f := fun z : ℂ => (z - v) / (z₀ - v)) ha hc
+
+theorem arg_div_self {v z₀ : ℂ} (hne : z₀ ≠ v) : arg ((z₀ - v) / (z₀ - v)) = 0 := by
+  rw [div_self (sub_ne_zero.mpr hne), Complex.arg_one]
+
+/-- `‖e a − e b‖² = 2 − 2 cos (a − b)`. -/
+theorem sq_norm_e_sub_e (a b : ℝ) : ‖e a - e b‖ ^ 2 = 2 - 2 * Real.cos (a - b) := by
+  rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]
+  simp only [Complex.sub_re, Complex.sub_im, re_e, im_e]
+  rw [Real.cos_sub]
+  nlinarith [Real.sin_sq_add_cos_sq a, Real.sin_sq_add_cos_sq b]
+
+namespace BranchGerms
+
+variable {n : ℕ} (G : BranchGerms n)
+
+/-- The direction of germ `i` at distance `s`. -/
+noncomputable def dir (i : Fin n) (s : ℝ) : ℝ := germDir (G.β i) (G.κ i) s
+
+/-- The direction of the germ after `i` at distance `s` (one turn on after the last). -/
+noncomputable def nextDir (i : Fin n) (s : ℝ) : ℝ := germDir (G.nextβ i) (G.nextκ i) s
+
+theorem sector_eq (v : ℂ) (r : ℝ) (i : Fin n) :
+    G.sector v r i = {z | ∃ s ∈ Ioo 0 r, ∃ φ ∈ Ioo (G.dir i s) (G.nextDir i s), z = v + (s : ℂ) * e φ} := rfl
+
+/-- The germs' directions at distance `s`, as straight germs. -/
+noncomputable def atRadius (s : ℝ) : BranchGerms n := ⟨fun i => G.dir i s, fun _ => 0⟩
+
+theorem atRadius_nextβ (s : ℝ) (i : Fin n) : (G.atRadius s).nextβ i = G.nextDir i s := by
+  unfold atRadius nextDir dir
+  unfold nextβ nextκ
+  split_ifs <;> simp [germDir_add_two_pi]
+
+theorem nextDir_eq (i : Fin n) (s : ℝ) :
+    G.nextDir i s = if h : i.val + 1 < n then G.dir ⟨i.val + 1, h⟩ s else G.dir ⟨0, i.pos⟩ s + 2 * π := by
+  rw [← atRadius_nextβ]; rfl
+
+theorem continuous_dir (i : Fin n) : Continuous (G.dir i) := continuous_germDir _ _
+
+theorem continuous_nextDir (i : Fin n) : Continuous (G.nextDir i) := continuous_germDir _ _
+
+/-- Consecutive directions weakly increase, round one turn. -/
+def Mono : Prop := ∀ i, G.β i ≤ G.nextβ i
+
+theorem Sorted.mono {G : BranchGerms n} (h : G.Sorted) : G.Mono := fun i =>
+  (h.2 i).elim le_of_lt fun h => h.1.le
+
+variable {G}
+
+theorem Mono.le_add (hG : G.Mono) : ∀ (k : ℕ) (i : Fin n) (h : i.val + k < n), G.β i ≤ G.β ⟨i.val + k, h⟩
+  | 0, i, _ => le_rfl
+  | k + 1, i, h => by
+    have h1 := hG.le_add k i (by omega)
+    have h2 := hG ⟨i.val + k, by omega⟩
+    simp only [nextβ, show i.val + k + 1 < n from by omega, dite_true] at h2
+    exact h1.trans h2
+
+theorem Mono.le_of_le (hG : G.Mono) {i j : Fin n} (hij : i ≤ j) : G.β i ≤ G.β j := by
+  have := hG.le_add (j.val - i.val) i (by omega)
+  have e1 : (⟨i.val + (j.val - i.val), by omega⟩ : Fin n) = j := Fin.ext (by simp; omega)
+  rwa [e1] at this
+
+theorem Mono.le_two_pi (hG : G.Mono) (j : Fin n) : G.β j ≤ G.β ⟨0, j.pos⟩ + 2 * π := by
+  have hj := j.isLt
+  have h1 := hG.le_of_le (show j ≤ ⟨n - 1, by omega⟩ from Fin.mk_le_mk.mpr (by omega))
+  have h2 := hG ⟨n - 1, by omega⟩
+  simp only [nextβ, show ¬ (n - 1 + 1 < n) from by omega, dite_false] at h2
+  linarith
+
+theorem Mono.nextβ_le (hG : G.Mono) (i : Fin n) : G.nextβ i ≤ G.β ⟨0, i.pos⟩ + 2 * π := by
+  unfold nextβ
+  split_ifs with h
+  · exact hG.le_two_pi _
+  · exact le_rfl
+
+theorem Mono.zero_le (hG : G.Mono) (i : Fin n) : G.β ⟨0, i.pos⟩ ≤ G.β i :=
+  hG.le_of_le (Fin.mk_le_mk.mpr (Nat.zero_le _))
+
+theorem Mono.nextβ_le_add (hG : G.Mono) (i : Fin n) : G.nextβ i ≤ G.β i + 2 * π := by
+  linarith [hG.nextβ_le i, hG.zero_le i]
+
+theorem Mono.nextβ_le_of_lt (hG : G.Mono) {i j : Fin n} (hij : i < j) : G.nextβ i ≤ G.β j := by
+  have hi : i.val + 1 < n := by have := j.isLt; have : i.val < j.val := hij; omega
+  simp only [nextβ, hi, dite_true]
+  exact hG.le_of_le (Fin.mk_le_mk.mpr (by have : i.val < j.val := hij; omega))
+
+/-- **The angular intervals of distinct consecutive pairs overlap only at ends.** -/
+theorem Mono.disjoint (hG : G.Mono) {i j : Fin n} (hij : i ≠ j) :
+    Disjoint (angleIcc (G.β j) (G.nextβ j)) (angleIoo (G.β i) (G.nextβ i)) := by
+  have hπ := Real.pi_pos
+  rw [Set.disjoint_left]
+  intro x hx hx'
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hx
+  obtain ⟨m', hm1', hm2'⟩ := mem_iUnion.mp hx'
+  have b1 := hG.zero_le i
+  have b2 := hG.zero_le j
+  have b3 := hG.nextβ_le i
+  have b4 := hG.nextβ_le j
+  have b5 := hG i
+  have b6 := hG j
+  -- reduce to `m - m'`
+  set d : ℤ := m - m' with hd
+  have hdR : (m : ℝ) = d + m' := by rw [hd]; push_cast; ring
+  rw [hdR] at hm1 hm2
+  rcases lt_trichotomy d 0 with hneg | hzero | hpos
+  · have : (d : ℝ) ≤ -1 := by exact_mod_cast Int.le_sub_one_iff.mpr hneg
+    nlinarith
+  · rw [hzero] at hm1 hm2
+    push_cast at hm1 hm2
+    rcases lt_or_gt_of_ne hij with h | h
+    · have := hG.nextβ_le_of_lt h; linarith
+    · have := hG.nextβ_le_of_lt h; linarith
+  · have : (1 : ℝ) ≤ d := by exact_mod_cast hpos
+    nlinarith
+
+/-- **Every angle is a germ direction or in the open interval of one consecutive pair.** -/
+theorem exists_angle (G : BranchGerms n) (hn : 0 < n) (φ : ℝ) :
+    (∃ i, ∃ m : ℤ, φ = G.β i + 2 * π * m) ∨ ∃ i, φ ∈ angleIoo (G.β i) (G.nextβ i) := by
+  have hπ := Real.pi_pos
+  set z0 : Fin n := ⟨0, hn⟩
+  obtain ⟨m, hm1, hm2⟩ := exists_shift_Ico (G.β z0) φ
+  set φ' := φ + 2 * π * m with hφ'
+  classical
+  set I := Finset.univ.filter (fun i : Fin n => G.β i ≤ φ') with hI
+  have hIne : I.Nonempty := ⟨z0, by simp [hI, hm1]⟩
+  set i := I.max' hIne with hi
+  have hiI : i ∈ I := I.max'_mem hIne
+  have hiφ : G.β i ≤ φ' := (Finset.mem_filter.mp hiI).2
+  have hnext : φ' < G.nextβ i := by
+    unfold nextβ
+    split_ifs with h
+    · by_contra hc
+      push Not at hc
+      have hmem : (⟨i.val + 1, h⟩ : Fin n) ∈ I := by simp [hI, hc]
+      have := I.le_max' _ hmem
+      rw [← hi] at this
+      have : i.val + 1 ≤ i.val := this
+      omega
+    · exact hm2
+  rcases eq_or_lt_of_le hiφ with heq | hlt
+  · left; exact ⟨i, -m, by push_cast; linarith⟩
+  · right; exact ⟨i, mem_iUnion.mpr ⟨-m, by push_cast; constructor <;> linarith⟩⟩
+
+/-- **No germ direction lies in the open interval of a consecutive pair.** -/
+theorem Mono.not_mem_angleIoo (hG : G.Mono) (i j : Fin n) (m : ℤ) :
+    G.β j + 2 * π * m ∉ angleIoo (G.β i) (G.nextβ i) := by
+  have hπ := Real.pi_pos
+  by_cases hij : i = j
+  · subst hij
+    intro h
+    obtain ⟨m', h1, h2⟩ := mem_iUnion.mp h
+    have b1 := hG.zero_le i
+    have b3 := hG.nextβ_le i
+    rcases le_or_gt m m' with hle | hgt
+    · have : (m : ℝ) ≤ m' := by exact_mod_cast hle
+      nlinarith
+    · have : (m' : ℝ) + 1 ≤ m := by exact_mod_cast hgt
+      nlinarith
+  · intro h
+    refine Set.disjoint_left.mp (hG.disjoint hij) ?_ h
+    exact mem_iUnion.mpr ⟨m, by constructor <;> linarith [hG j]⟩
+
+
+/-! ### The cyclic order at every distance -/
+
+variable (G) in
+/-- The index of the germ after `i`. -/
+def next (i : Fin n) : Fin n := if h : i.val + 1 < n then ⟨i.val + 1, h⟩ else ⟨0, i.pos⟩
+
+theorem e_nextDir (i : Fin n) (s : ℝ) : e (G.nextDir i s) = e (G.dir (next i) s) := by
+  rw [nextDir_eq]
+  unfold next
+  split_ifs with h
+  · rfl
+  · exact e_add_two_pi _
+
+theorem nextDir_of_next_eq {i : Fin n} (h : next i = i) (s : ℝ) : G.nextDir i s = G.dir i s + 2 * π := by
+  rw [nextDir_eq]
+  by_cases h' : i.val + 1 < n
+  · simp only [next, h', dite_true] at h
+    exact absurd (congrArg Fin.val h) (by simp)
+  · simp only [next, h', dite_false] at h
+    rw [dif_neg h', h]
+
+theorem nextκ_eq (i : Fin n) : G.nextκ i = G.κ (next i) := by
+  unfold nextκ next; split_ifs <;> rfl
+
+variable (G) in
+/-- **The cyclic order at every distance**: sorted germs whose branches are graphs over the radius and never meet at one
+distance keep their order: at every `s ∈ (0, r₀)` each germ's direction lies below the next one's. -/
+theorem dir_lt_nextDir (hS : G.Sorted) {r₀ : ℝ} (hcurv : ∀ i, |G.κ i| * r₀ < 2)
+    (hdisj : ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) :
+    ∀ s ∈ Ioo 0 r₀, ∀ i, G.dir i s < G.nextDir i s := by
+  intro s hs i
+  have hπ := Real.pi_pos
+  by_cases hni : next i = i
+  · rw [nextDir_of_next_eq hni]; linarith
+  set g : ℝ → ℝ := fun t => G.nextDir i t - G.dir i t with hg
+  have hgc : Continuous g := (G.continuous_nextDir i).sub (G.continuous_dir i)
+  have hg0 : ∀ t ∈ Ioo 0 r₀, g t ≠ 0 := by
+    intro t ht h
+    apply hdisj i (next i) (Ne.symm hni) t ht
+    rw [← e_nextDir, show G.nextDir i t = G.dir i t by simp only [hg] at h; linarith]
+  have hr₀ : 0 < r₀ := hs.1.trans hs.2
+  have hbound : ∀ j, ∀ t ∈ Ioo 0 r₀, -1 ≤ G.κ j * t / 2 ∧ G.κ j * t / 2 ≤ 1 := by
+    intro j t ht
+    have h1 := hcurv j
+    have h2 : |G.κ j * t| ≤ |G.κ j| * r₀ := by
+      rw [abs_mul, abs_of_pos ht.1]; exact mul_le_mul_of_nonneg_left ht.2.le (abs_nonneg _)
+    constructor <;> [skip; skip] <;> cases abs_le.mp (h2.trans h1.le) <;> linarith
+  have hpos : ∃ t ∈ Ioo 0 r₀, 0 < g t := by
+    rcases hS.2 i with hlt | ⟨heq, hκ⟩
+    · have hlim : Tendsto g (𝓝 0) (𝓝 (G.nextβ i - G.β i)) := by
+        have := hgc.tendsto 0
+        simpa [hg, nextDir, dir] using this
+      have ev : ∀ᶠ t in 𝓝[>] (0 : ℝ), 0 < g t ∧ t ∈ Ioo 0 r₀ :=
+        ((hlim.eventually_const_lt (by linarith)).filter_mono nhdsWithin_le_nhds).and
+          (Ioo_mem_nhdsGT hr₀)
+      obtain ⟨t, h1, h2⟩ := ev.exists
+      exact ⟨t, h2, h1⟩
+    · refine ⟨s, hs, ?_⟩
+      have hb1 := hbound i s hs
+      have hb2 := hbound (next i) s hs
+      have hlt : G.κ i * s / 2 < G.nextκ i * s / 2 := by
+        have := mul_lt_mul_of_pos_right hκ hs.1; linarith
+      rw [nextκ_eq] at hlt
+      have := Real.arcsin_lt_arcsin hb1.1 hlt hb2.2
+      simp only [hg, nextDir, dir, germDir, heq, nextκ_eq]
+      linarith
+  obtain ⟨t₀, ht₀, hgt₀⟩ := hpos
+  by_contra hcon
+  push Not at hcon
+  have hgs : g s ≤ 0 := by simp only [hg]; linarith
+  obtain ⟨t, ht, hgt⟩ := isPreconnected_Ioo.intermediate_value hs ht₀ hgc.continuousOn ⟨hgs, hgt₀.le⟩
+  exact hg0 t ht hgt
+
+/-! ### Sectors -/
+
+variable {v : ℂ} {r₀ : ℝ}
+
+theorem atRadius_mono (hord : ∀ s ∈ Ioo 0 r₀, ∀ i, G.dir i s < G.nextDir i s) {s : ℝ} (hs : s ∈ Ioo 0 r₀) :
+    (G.atRadius s).Mono := fun i => by
+  rw [atRadius_nextβ]; exact (hord s hs i).le
+
+theorem mem_sector_iff {r : ℝ} {i : Fin n} {z : ℂ} :
+    z ∈ G.sector v r i ↔ ‖z - v‖ ∈ Ioo 0 r ∧ ∃ φ ∈ Ioo (G.dir i ‖z - v‖) (G.nextDir i ‖z - v‖),
+      z = v + (‖z - v‖ : ℂ) * e φ := by
+  constructor
+  · rintro ⟨s, hs, φ, hφ, rfl⟩
+    rw [add_sub_cancel_left, norm_mul_e hs.1.le]
+    exact ⟨hs, φ, hφ, rfl⟩
+  · rintro ⟨hs, φ, hφ, hz⟩
+    exact ⟨_, hs, φ, hφ, hz⟩
+
+theorem sector_mono {r r' : ℝ} (h : r' ≤ r) (i : Fin n) : G.sector v r' i ⊆ G.sector v r i := by
+  rintro z ⟨s, hs, φ, hφ, rfl⟩
+  exact ⟨s, ⟨hs.1, hs.2.trans_le h⟩, φ, hφ, rfl⟩
+
+theorem sector_subset_ball {r : ℝ} (i : Fin n) : G.sector v r i ⊆ ball v r := by
+  rintro z ⟨s, hs, φ, -, rfl⟩
+  rw [mem_ball, dist_eq_norm, add_sub_cancel_left, norm_mul_e hs.1.le]; exact hs.2
+
+/-- **Distinct sectors are disjoint.** -/
+theorem sector_disjoint (hord : ∀ s ∈ Ioo 0 r₀, ∀ i, G.dir i s < G.nextDir i s) {r : ℝ} (hr : r ≤ r₀) {i j : Fin n}
+    (hij : i ≠ j) : Disjoint (G.sector v r i) (G.sector v r j) := by
+  rw [Set.disjoint_left]
+  rintro z ⟨s, hs, φ, hφ, rfl⟩ ⟨s', hs', φ', hφ', heq⟩
+  obtain ⟨rfl, he⟩ := (polar_eq_iff hs.1 hs'.1).mp heq
+  obtain ⟨m, hm⟩ := e_eq_e_iff.mp he
+  have hsr : s ∈ Ioo 0 r₀ := ⟨hs.1, hs.2.trans_le hr⟩
+  have hM := G.atRadius_mono hord hsr
+  have hφ1 : G.dir i s < φ ∧ φ < G.nextDir i s := hφ
+  have hφ2 : G.dir j s < φ' ∧ φ' < G.nextDir j s := hφ'
+  have h1 : φ ∈ angleIcc ((G.atRadius s).β j) ((G.atRadius s).nextβ j) := by
+    rw [atRadius_nextβ]
+    refine mem_iUnion.mpr ⟨m, ?_⟩
+    show G.dir j s + 2 * π * m ≤ φ ∧ φ ≤ G.nextDir j s + 2 * π * m
+    constructor <;> linarith [hφ2.1, hφ2.2]
+  have h2 : φ ∈ angleIoo ((G.atRadius s).β i) ((G.atRadius s).nextβ i) := by
+    rw [atRadius_nextβ]; exact Ioo_subset_angleIoo _ _ hφ1
+  exact Set.disjoint_left.mp (hM.disjoint hij) h1 h2
+
+/-- **Each sector is open**: near a point of it, the local angle and the distance move continuously. -/
+theorem isOpen_sector (r : ℝ) (i : Fin n) : IsOpen (G.sector v r i) := by
+  rw [isOpen_iff_mem_nhds]
+  rintro z₀ ⟨s₀, hs₀, φ₀, hφ₀, hz₀⟩
+  have hz₀v : z₀ ≠ v := by
+    intro h
+    have := congrArg (fun z => ‖z - v‖) hz₀
+    simp only [h, sub_self, norm_zero, add_sub_cancel_left, norm_mul_e hs₀.1.le] at this
+    linarith [hs₀.1]
+  set ψ : ℂ → ℝ := fun z => φ₀ + arg ((z - v) / (z₀ - v)) with hψ
+  have hψc : ContinuousAt ψ z₀ := continuousAt_const.add (continuousAt_arg_div hz₀v)
+  have hψ0 : ψ z₀ = φ₀ := by simp [hψ, arg_div_self hz₀v]
+  have hnc : ContinuousAt (fun z : ℂ => ‖z - v‖) z₀ := (continuous_norm.comp (continuous_id.sub continuous_const)).continuousAt
+  have hn0 : ‖z₀ - v‖ = s₀ := by rw [hz₀, add_sub_cancel_left, norm_mul_e hs₀.1.le]
+  have ev1 : ∀ᶠ z in 𝓝 z₀, ‖z - v‖ ∈ Ioo 0 r :=
+    hnc.preimage_mem_nhds (by rw [hn0]; exact Ioo_mem_nhds hs₀.1 hs₀.2)
+  have ev2 : ∀ᶠ z in 𝓝 z₀, G.dir i ‖z - v‖ < ψ z :=
+    ContinuousAt.eventually_lt ((G.continuous_dir i).continuousAt.comp hnc) hψc
+      (by simp only [hn0, hψ0]; exact hφ₀.1)
+  have ev3 : ∀ᶠ z in 𝓝 z₀, ψ z < G.nextDir i ‖z - v‖ :=
+    ContinuousAt.eventually_lt hψc ((G.continuous_nextDir i).continuousAt.comp hnc)
+      (by simp only [hn0, hψ0]; exact hφ₀.2)
+  filter_upwards [ev1, ev2, ev3] with z h1 h2 h3
+  exact ⟨‖z - v‖, h1, ψ z, ⟨h2, h3⟩, eq_polar_local hs₀.1 hz₀ z⟩
+
+/-- **Each sector is connected**: the image of `(0, r) × (0, 1)` under `(s, t) ↦ v + s e(fᵢ(s) + t (fᵢ₊₁(s) − fᵢ(s)))`. -/
+theorem isPreconnected_sector (hord : ∀ s ∈ Ioo 0 r₀, ∀ i, G.dir i s < G.nextDir i s) {r : ℝ} (hr : r ≤ r₀)
+    (i : Fin n) : IsPreconnected (G.sector v r i) := by
+  set f : ℝ × ℝ → ℂ := fun p => v + (p.1 : ℂ) * e (G.dir i p.1 + p.2 * (G.nextDir i p.1 - G.dir i p.1)) with hf
+  have hfc : Continuous f := by
+    have h1 : Continuous fun p : ℝ × ℝ => G.dir i p.1 + p.2 * (G.nextDir i p.1 - G.dir i p.1) :=
+      ((G.continuous_dir i).comp continuous_fst).add
+        (continuous_snd.mul (((G.continuous_nextDir i).comp continuous_fst).sub ((G.continuous_dir i).comp continuous_fst)))
+    have h2 : Continuous fun p : ℝ × ℝ => e (G.dir i p.1 + p.2 * (G.nextDir i p.1 - G.dir i p.1)) :=
+      Complex.continuous_exp.comp ((Complex.continuous_ofReal.comp h1).mul continuous_const)
+    exact continuous_const.add ((Complex.continuous_ofReal.comp continuous_fst).mul h2)
+  have heq : G.sector v r i = f '' (Ioo 0 r ×ˢ Ioo 0 1) := by
+    ext z
+    constructor
+    · rintro ⟨s, hs, φ, hφ, rfl⟩
+      have hφ : G.dir i s < φ ∧ φ < G.nextDir i s := hφ
+      have hgap : 0 < G.nextDir i s - G.dir i s := by linarith [hφ.1, hφ.2]
+      refine ⟨(s, (φ - G.dir i s) / (G.nextDir i s - G.dir i s)), ⟨hs, ?_, ?_⟩, ?_⟩
+      · exact div_pos (by linarith [hφ.1]) hgap
+      · rw [div_lt_one hgap]; linarith [hφ.2]
+      · simp only [hf]; congr 3; field_simp; ring
+    · rintro ⟨⟨s, t⟩, ⟨hs, ht⟩, rfl⟩
+      have hgap := hord s ⟨hs.1, hs.2.trans_le hr⟩ i
+      refine ⟨s, hs, _, ⟨?_, ?_⟩, rfl⟩
+      · show G.dir i s < G.dir i s + t * (G.nextDir i s - G.dir i s)
+        nlinarith [ht.1]
+      · show G.dir i s + t * (G.nextDir i s - G.dir i s) < G.nextDir i s
+        nlinarith [ht.2]
+  rw [heq]
+  exact ((convex_Ioo 0 r).prod (convex_Ioo 0 1)).isPreconnected.image f hfc.continuousOn
+
+/-- A direction along which the set holds points `v + t e(δ)` for arbitrarily small `t > 0` is in its cone. -/
+theorem mem_coneAt_of_ray {S : Set ℂ} {δ : ℝ} (h : ∀ ε : ℝ, 0 < ε → ∃ t : ℝ, t ∈ Ioo 0 ε ∧ v + (t : ℂ) * e δ ∈ S) :
+    δ ∈ coneAt S v := by
+  intro ε hε
+  obtain ⟨t, ht, hS⟩ := h ε hε
+  refine ⟨_, hS, ?_, ?_, ?_⟩
+  · intro h'
+    have := congrArg (fun z => ‖z - v‖) h'
+    simp only [add_sub_cancel_left, sub_self, norm_zero, norm_mul_e ht.1.le] at this
+    linarith [ht.1]
+  · rw [dist_eq_norm, add_sub_cancel_left, norm_mul_e ht.1.le]; exact ht.2
+  · have ht0 : (t : ℂ) ≠ 0 := by exact_mod_cast ht.1.ne'
+    rw [add_sub_cancel_left, norm_mul_e ht.1.le, mul_div_cancel_left₀ _ ht0, sub_self, norm_zero]; exact hε
+
+/-- **The cone of a sector** at `v` is the angular interval of its two germs' directions (one direction at a cusp). -/
+theorem coneAt_sector (hM : G.Mono) (hord : ∀ s ∈ Ioo 0 r₀, ∀ i, G.dir i s < G.nextDir i s) {r : ℝ}
+    (hr : r ∈ Ioc 0 r₀) (i : Fin n) : coneAt (G.sector v r i) v = angleIcc (G.β i) (G.nextβ i) := by
+  have hπ := Real.pi_pos
+  have hd0 : Tendsto (G.dir i) (𝓝 0) (𝓝 (G.β i)) := by
+    have := (G.continuous_dir i).tendsto 0; simpa [dir] using this
+  have hn0 : Tendsto (G.nextDir i) (𝓝 0) (𝓝 (G.nextβ i)) := by
+    have := (G.continuous_nextDir i).tendsto 0; simpa [nextDir] using this
+  -- the open interval is approached along rays
+  have hopen : Ioo (G.β i) (G.nextβ i) ⊆ coneAt (G.sector v r i) v := by
+    intro δ hδ
+    refine mem_coneAt_of_ray fun ε hε => ?_
+    have ev : ∀ᶠ t in 𝓝[>] (0 : ℝ), (G.dir i t < δ ∧ δ < G.nextDir i t) ∧ t ∈ Ioo 0 (min r ε) :=
+      (((hd0.eventually_lt_const hδ.1).and (hn0.eventually_const_lt hδ.2)).filter_mono nhdsWithin_le_nhds).and
+        (Ioo_mem_nhdsGT (lt_min hr.1 hε))
+    obtain ⟨t, ⟨h1, h2⟩, ht⟩ := ev.exists
+    exact ⟨t, ⟨ht.1, ht.2.trans_le (min_le_right _ _)⟩, t, ⟨ht.1, ht.2.trans_le (min_le_left _ _)⟩, δ,
+      ⟨h1, h2⟩, rfl⟩
+  -- nothing outside the closed interval is approached
+  have hsub : coneAt (G.sector v r i) v ⊆ angleIcc (G.β i) (G.nextβ i) := by
+    intro β₀ hβ₀
+    by_contra hnot
+    have hle := hM i
+    have hle2 := hM.nextβ_le_add i
+    obtain ⟨m, hm1, hm2⟩ := exists_shift_Ico (G.β i) β₀
+    set b := β₀ + 2 * π * m with hb
+    have hbn : G.nextβ i < b := by
+      by_contra hc
+      push Not at hc
+      exact hnot (mem_iUnion.mpr ⟨-m, by push_cast; constructor <;> linarith⟩)
+    set η := min (b - G.nextβ i) (G.β i + 2 * π - b) / 2 with hη
+    have hη1 : 2 * η ≤ b - G.nextβ i := by rw [hη]; linarith [min_le_left (b - G.nextβ i) (G.β i + 2 * π - b)]
+    have hη2 : 2 * η ≤ G.β i + 2 * π - b := by rw [hη]; linarith [min_le_right (b - G.nextβ i) (G.β i + 2 * π - b)]
+    have hη0 : 0 < η := by rw [hη]; exact half_pos (lt_min (by linarith) (by linarith))
+    have hηπ : η ≤ π := by linarith
+    have ev : ∀ᶠ t in 𝓝 (0 : ℝ), G.β i - η < G.dir i t ∧ G.nextDir i t < G.nextβ i + η :=
+      (hd0.eventually_const_lt (by linarith)).and (hn0.eventually_lt_const (by linarith))
+    obtain ⟨ρ, hρ, hρev⟩ := Metric.eventually_nhds_iff.mp ev
+    set c := 1 - Real.cos η with hc
+    have hc0 : 0 < c := by
+      have := Real.cos_lt_cos_of_nonneg_of_le_pi le_rfl hηπ hη0
+      rw [Real.cos_zero] at this; linarith
+    have hc2 : c ≤ 2 := by have := Real.neg_one_le_cos η; linarith
+    obtain ⟨z, hz, -, hzd, hzu⟩ := hβ₀ (min ρ c) (lt_min hρ hc0)
+    obtain ⟨s, hs, φ, hφ, rfl⟩ := hz
+    have hφ : G.dir i s < φ ∧ φ < G.nextDir i s := hφ
+    rw [dist_eq_norm, add_sub_cancel_left, norm_mul_e hs.1.le] at hzd
+    have hds := hρev (show dist s 0 < ρ by
+      rw [Real.dist_eq, sub_zero, abs_of_pos hs.1]; exact hzd.trans_le (min_le_left _ _))
+    have hs0 : (s : ℂ) ≠ 0 := by exact_mod_cast hs.1.ne'
+    rw [add_sub_cancel_left, norm_mul_e hs.1.le, mul_div_cancel_left₀ _ hs0,
+      show e β₀ = e b from (e_add_int_mul β₀ m).symm] at hzu
+    have hx1 : η < b - φ := by linarith [hds.2, hφ.2]
+    have hx2 : b - φ < 2 * π - η := by linarith [hds.1, hφ.1]
+    have hcos : Real.cos (φ - b) ≤ Real.cos η := by
+      rw [← Real.cos_neg, neg_sub]
+      rcases le_total (b - φ) π with h | h
+      · exact Real.cos_le_cos_of_nonneg_of_le_pi hη0.le h hx1.le
+      · rw [← Real.cos_two_pi_sub]
+        exact Real.cos_le_cos_of_nonneg_of_le_pi hη0.le (by linarith) (by linarith)
+    have hsq := sq_norm_e_sub_e φ b
+    have hlt : ‖e φ - e b‖ < c := hzu.trans_le (min_le_right _ _)
+    have hn0' : 0 ≤ ‖e φ - e b‖ := norm_nonneg _
+    nlinarith [mul_lt_mul'' hlt hlt hn0' hn0', mul_le_mul_of_nonneg_left hc2 hc0.le]
+  -- the sector has points at every small distance
+  have hnonempty : (coneAt (G.sector v r i) v).Nonempty := by
+    refine coneAt_nonempty fun ε hε => ?_
+    set t := min r ε / 2 with ht
+    have ht0 : 0 < t := by rw [ht]; exact half_pos (lt_min hr.1 hε)
+    have htr : t < r := by rw [ht]; linarith [min_le_left r ε]
+    have hte : t < ε := by rw [ht]; linarith [min_le_right r ε]
+    have hord' := hord t ⟨ht0, htr.trans_le hr.2⟩ i
+    refine ⟨v + (t : ℂ) * e ((G.dir i t + G.nextDir i t) / 2), ⟨t, ⟨ht0, htr⟩, _, ⟨?_, ?_⟩, rfl⟩, ?_, ?_⟩
+    · show G.dir i t < _; linarith
+    · show _ < G.nextDir i t; linarith
+    · intro h'
+      have := congrArg (fun z => ‖z - v‖) h'
+      simp only [add_sub_cancel_left, sub_self, norm_zero, norm_mul_e ht0.le] at this
+      linarith
+    · rw [dist_eq_norm, add_sub_cancel_left, norm_mul_e ht0.le]; exact hte
+  have hper : ∀ β, β + 2 * π ∈ coneAt (G.sector v r i) v ↔ β ∈ coneAt (G.sector v r i) v :=
+    fun β => mem_coneAt_add_two_pi
+  have hIcc : Icc (G.β i) (G.nextβ i) ⊆ coneAt (G.sector v r i) v := by
+    rcases eq_or_lt_of_le (hM i) with heq | hlt
+    · obtain ⟨β', hβ'⟩ := hnonempty
+      obtain ⟨m', hm'1, hm'2⟩ := mem_iUnion.mp (hsub hβ')
+      rw [← heq] at hm'2
+      have h' : β' = G.β i + 2 * π * m' := le_antisymm hm'2 hm'1
+      rw [h'] at hβ'
+      have hβi := (periodic_int hper (G.β i) m').mp hβ'
+      intro y hy
+      rw [← heq] at hy
+      rw [le_antisymm hy.2 hy.1]; exact hβi
+    · rw [← closure_Ioo hlt.ne]
+      exact closure_minimal hopen (isClosed_coneAt _ _)
+  apply Subset.antisymm hsub
+  intro x hx
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hx
+  have h := hIcc (show x - 2 * π * m ∈ Icc (G.β i) (G.nextβ i) from ⟨by linarith, by linarith⟩)
+  have := (periodic_int hper (x - 2 * π * m) m).mpr h
+  rwa [sub_add_cancel] at this
+
+end BranchGerms
+
+/-! ### The germs of a line or circle through `v` -/
+
+/-- The germ of the full curve `curveAt v κ b` (`κ ∈ {0, 1}`) leaving `v` on side `σ = ±1`: its direction, normalised into
+`[0, 2π)`, and its signed curvature (`0` on a line, `±1/‖b‖` on the circle centred at `v + b`). -/
+noncomputable def curveGerm (κ : ℝ) (b : ℂ) (σ : ℝ) : ℝ × ℝ :=
+  (toIcoMod Real.two_pi_pos 0 (arg b - σ * (π / 2)), σ * κ / ‖b‖)
+
+theorem curveGerm_fst_mem (κ : ℝ) (b : ℂ) (σ : ℝ) : (curveGerm κ b σ).1 ∈ Ico 0 (2 * π) := by
+  have := toIcoMod_mem_Ico Real.two_pi_pos 0 (arg b - σ * (π / 2))
+  simpa [curveGerm] using this
+
+theorem e_toIcoMod_add (x y : ℝ) : e (toIcoMod Real.two_pi_pos 0 x + y) = e (x + y) := by
+  have h := self_sub_toIcoMod Real.two_pi_pos 0 x
+  rw [zsmul_eq_mul] at h
+  rw [show toIcoMod Real.two_pi_pos 0 x + y = (x + y) + 2 * π * ((-(toIcoDiv Real.two_pi_pos 0 x) : ℤ) : ℝ) by
+    push_cast; linarith]
+  exact e_add_int_mul _ _
+
+theorem branchPt_curveGerm (v : ℂ) (κ : ℝ) (b : ℂ) (σ s : ℝ) :
+    branchPt v (curveGerm κ b σ).1 (curveGerm κ b σ).2 s =
+      v + (s : ℂ) * e (arg b - σ * (π / 2) + Real.arcsin (σ * (κ * s / (2 * ‖b‖)))) := by
+  simp only [branchPt, curveGerm]
+  rw [e_toIcoMod_add]
+  congr 4
+  ring_nf
+
+/-- `(s e(θ)) · conj b = s ‖b‖ e(θ − arg b)`. -/
+theorem mul_e_mul_conj (s θ : ℝ) (b : ℂ) :
+    (s : ℂ) * e θ * (starRingEnd ℂ) b = ((s * ‖b‖ : ℝ) : ℂ) * e (θ - arg b) := by
+  conv_lhs => rw [eq_polar_arg b]
+  rw [map_mul, Complex.conj_ofReal, conj_e, show θ - arg b = θ + -arg b by ring, e_add]
+  push_cast; ring
+
+/-- **A germ's branch lies on its curve** (as long as it is a graph over the radius). -/
+theorem branchPt_curveGerm_mem {v : ℂ} {κ : ℝ} (hκ : 0 ≤ κ) {b : ℂ} (hb : b ≠ 0) {σ : ℝ} (hσ : σ = 1 ∨ σ = -1)
+    {s : ℝ} (hs : 0 ≤ s) (hsb : κ * s ≤ 2 * ‖b‖) :
+    branchPt v (curveGerm κ b σ).1 (curveGerm κ b σ).2 s ∈ curveAt v κ b := by
+  have hbn : 0 < ‖b‖ := norm_pos_iff.mpr hb
+  set x := κ * s / (2 * ‖b‖) with hx
+  have hx0 : 0 ≤ x := by positivity
+  have hx1 : x ≤ 1 := by rw [hx, div_le_one (by positivity)]; exact hsb
+  set α := Real.arcsin (σ * x) with hα
+  have hsα : Real.sin α = σ * x :=
+    Real.sin_arcsin (by rcases hσ with rfl | rfl <;> linarith) (by rcases hσ with rfl | rfl <;> linarith)
+  rw [branchPt_curveGerm]
+  simp only [curveAt, mem_setOf_eq, add_sub_cancel_left]
+  rw [mul_e_mul_conj, Complex.re_ofReal_mul, re_e, Complex.normSq_eq_norm_sq, norm_mul_e hs]
+  have hcos : Real.cos (arg b - σ * (π / 2) + α - arg b) = σ * Real.sin α := by
+    rw [show arg b - σ * (π / 2) + α - arg b = α - σ * (π / 2) by ring]
+    rcases hσ with rfl | rfl
+    · rw [one_mul, Real.cos_sub_pi_div_two, one_mul]
+    · rw [show α - -1 * (π / 2) = α + π / 2 by ring, Real.cos_add_pi_div_two]; ring
+  rw [hcos, hsα]
+  have hσσ : σ * σ = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  rw [show σ * (σ * x) = x by rw [← mul_assoc, hσσ, one_mul], hx]
+  field_simp
+
+/-- **A curve point near `v` lies on one of the curve's two germs**, at its own distance. -/
+theorem exists_eq_branchPt_curveGerm {v : ℂ} {κ : ℝ} (hκ : 0 ≤ κ) {b : ℂ} (hb : b ≠ 0) {z : ℂ}
+    (hz : z ∈ curveAt v κ b) (hzv : z ≠ v) (hzb : κ * ‖z - v‖ < 2 * ‖b‖) :
+    ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧ z = branchPt v (curveGerm κ b σ).1 (curveGerm κ b σ).2 ‖z - v‖ := by
+  have hbn : 0 < ‖b‖ := norm_pos_iff.mpr hb
+  set s := ‖z - v‖ with hs
+  have hs0 : 0 < s := norm_pos_iff.mpr (sub_ne_zero.mpr hzv)
+  set φ := arg (z - v) with hφ
+  have hzpol : z - v = (s : ℂ) * e φ := eq_polar_arg (z - v)
+  set x := κ * s / (2 * ‖b‖) with hx
+  have hx0 : 0 ≤ x := by positivity
+  have hx1 : x < 1 := by rw [hx, div_lt_one (by positivity)]; exact hzb
+  have hcos : Real.cos (φ - arg b) = x := by
+    simp only [curveAt, mem_setOf_eq] at hz
+    rw [hzpol, mul_e_mul_conj, Complex.re_ofReal_mul, re_e, Complex.normSq_eq_norm_sq, norm_mul_e hs0.le] at hz
+    rw [hx, eq_div_iff (by positivity)]
+    have h3 : s * (κ * s) = s * (Real.cos (φ - arg b) * (2 * ‖b‖)) := by linear_combination hz
+    exact (mul_left_cancel₀ hs0.ne' h3).symm
+  set α₀ := Real.arcsin x with hα₀
+  have hsin : Real.sin α₀ = x := Real.sin_arcsin (by linarith) hx1.le
+  have h2 : Real.cos (φ - arg b) = Real.cos (π / 2 - α₀) := by rw [Real.cos_pi_div_two_sub, hsin, hcos]
+  obtain ⟨m, hm | hm⟩ := Real.cos_eq_cos_iff.mp h2
+  · refine ⟨-1, Or.inr rfl, ?_⟩
+    rw [branchPt_curveGerm]
+    have h4 : arg b - -1 * (π / 2) + Real.arcsin (-1 * (κ * s / (2 * ‖b‖))) = φ + 2 * π * m := by
+      rw [show -1 * (κ * s / (2 * ‖b‖)) = -x by rw [hx]; ring, Real.arcsin_neg]; linarith
+    rw [h4, e_add_int_mul]; linear_combination hzpol
+  · refine ⟨1, Or.inl rfl, ?_⟩
+    rw [branchPt_curveGerm]
+    have h4 : arg b - 1 * (π / 2) + Real.arcsin (1 * (κ * s / (2 * ‖b‖))) = φ + 2 * π * ((-m : ℤ) : ℝ) := by
+      simp only [one_mul]; rw [← hx]; push_cast; linarith [hα₀]
+    rw [h4, e_add_int_mul]; linear_combination hzpol
+
+/-- Two normalised germs that differ have branches that never meet at one small distance. -/
+theorem exists_germDir_ne {g g' : ℝ × ℝ} (hg : g.1 ∈ Ico 0 (2 * π)) (hg' : g'.1 ∈ Ico 0 (2 * π)) (hne : g ≠ g') :
+    ∃ ε > 0, ∀ s ∈ Ioo 0 ε, e (germDir g.1 g.2 s) ≠ e (germDir g'.1 g'.2 s) := by
+  have hπ := Real.pi_pos
+  by_cases h1 : g.1 = g'.1
+  · have h2 : g.2 ≠ g'.2 := fun h2 => hne (Prod.ext h1 h2)
+    refine ⟨1 / (|g.2| + |g'.2| + 1), by positivity, fun s hs heq => ?_⟩
+    have hsmall : ∀ κ : ℝ, |κ| ≤ |g.2| + |g'.2| → |κ * s / 2| < 1 / 2 := by
+      intro κ hκ
+      have hs1 : s * (|g.2| + |g'.2| + 1) < 1 := by
+        have := hs.2; rw [lt_div_iff₀ (by positivity)] at this; exact this
+      rw [abs_div, abs_mul, abs_of_pos hs.1, abs_two]
+      have : |κ| * s ≤ (|g.2| + |g'.2|) * s := mul_le_mul_of_nonneg_right hκ hs.1.le
+      nlinarith [hs.1]
+    have hb1 := abs_lt.mp (hsmall g.2 (by linarith [abs_nonneg g'.2]))
+    have hb2 := abs_lt.mp (hsmall g'.2 (by linarith [abs_nonneg g.2]))
+    obtain ⟨m, hm⟩ := e_eq_e_iff.mp heq
+    simp only [germDir, h1] at hm
+    have ha1 := Real.arcsin_lt_pi_div_two.mpr (show g.2 * s / 2 < 1 by linarith)
+    have ha2 := Real.neg_pi_div_two_lt_arcsin.mpr (show -1 < g.2 * s / 2 by linarith)
+    have ha3 := Real.arcsin_lt_pi_div_two.mpr (show g'.2 * s / 2 < 1 by linarith)
+    have ha4 := Real.neg_pi_div_two_lt_arcsin.mpr (show -1 < g'.2 * s / 2 by linarith)
+    have hm0 : m = 0 := by
+      rcases lt_trichotomy m 0 with h | h | h
+      · have : (m : ℝ) ≤ -1 := by exact_mod_cast Int.le_sub_one_iff.mpr h
+        nlinarith
+      · exact h
+      · have : (1 : ℝ) ≤ m := by exact_mod_cast h
+        nlinarith
+    rw [hm0] at hm
+    push_cast at hm
+    have h5 : Real.arcsin (g.2 * s / 2) = Real.arcsin (g'.2 * s / 2) := by linarith
+    have h6 := (Real.arcsin_inj (by linarith) (by linarith) (by linarith) (by linarith)).mp h5
+    exact h2 (by
+      have hs0 : s ≠ 0 := hs.1.ne'
+      have : (g.2 - g'.2) * s = 0 := by linarith
+      rcases mul_eq_zero.mp this with h | h
+      · linarith
+      · exact absurd h hs0)
+  · have hne' : e g.1 ≠ e g'.1 := by
+      intro h
+      obtain ⟨m, hm⟩ := e_eq_e_iff.mp h
+      apply h1
+      rcases lt_trichotomy m 0 with h' | h' | h'
+      · have : (m : ℝ) ≤ -1 := by exact_mod_cast Int.le_sub_one_iff.mpr h'
+        nlinarith [hg.1, hg.2, hg'.1, hg'.2]
+      · rw [h'] at hm; simpa using hm
+      · have : (1 : ℝ) ≤ m := by exact_mod_cast h'
+        nlinarith [hg.1, hg.2, hg'.1, hg'.2]
+    have hcont : Continuous fun s => e (germDir g.1 g.2 s) - e (germDir g'.1 g'.2 s) :=
+      (continuous_e.comp (continuous_germDir _ _)).sub (continuous_e.comp (continuous_germDir _ _))
+    have hopen : IsOpen {s : ℝ | e (germDir g.1 g.2 s) - e (germDir g'.1 g'.2 s) ≠ 0} :=
+      hcont.isOpen_preimage _ isOpen_ne
+    have h0 : (0 : ℝ) ∈ {s : ℝ | e (germDir g.1 g.2 s) - e (germDir g'.1 g'.2 s) ≠ 0} := by
+      simp only [mem_setOf_eq, germDir_zero]; exact sub_ne_zero.mpr hne'
+    obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hopen 0 h0
+    refine ⟨ε, hε, fun s hs heq => hball ?_ (sub_eq_zero.mpr heq)⟩
+    rw [mem_ball, Real.dist_eq, sub_zero, abs_of_pos hs.1]; exact hs.2
+
+/-! ### Arcs near a point of their own -/
+
+/-- The end points of an arc. -/
+noncomputable def Arc.ends : Arc → Set ℂ
+  | .seg u w => {u, w}
+  | .circ c ρ θ₀ θ₁ => {c + ρ * e θ₀, c + ρ * e θ₁}
+
+theorem Arc.finite_ends (a : Arc) : a.ends.Finite := by
+  cases a <;> exact (Set.finite_singleton _).insert _
+
+/-- **Off its ends, an arc holds every point of its full curve nearby.** -/
+theorem Arc.eventually_mem_carrier {a : Arc} (ha : a.Nondegenerate) {v y : ℂ} (hv : v ∈ a.carrier)
+    (hy : y ∈ a.carrier) (hye : y ∉ a.ends) : ∀ᶠ z in 𝓝 y, z ∈ a.curve v → z ∈ a.carrier := by
+  cases a with
+  | seg u w =>
+    have hd : w - u ≠ 0 := sub_ne_zero.mpr (Ne.symm ha)
+    set d := w - u with hddef
+    have hnd : 0 < Complex.normSq d := Complex.normSq_pos.mpr hd
+    set τ : ℂ → ℝ := fun z => ((z - u) * (starRingEnd ℂ) d).re / Complex.normSq d with hτ
+    have hτc : Continuous τ := by
+      simp only [hτ]
+      exact (Complex.continuous_re.comp ((continuous_id.sub continuous_const).mul continuous_const)).div_const _
+    have hseg : ∀ z ∈ segment ℝ u w, ∃ t : ℝ, z = u + (t : ℂ) * d ∧ τ z = t ∧ t ∈ Icc 0 1 := by
+      rintro z ⟨a1, b1, ha1, hb1, hab, rfl⟩
+      have hz : a1 • u + b1 • w = u + (b1 : ℂ) * d := by
+        rw [hddef, show a1 = 1 - b1 by linarith]; simp only [Complex.real_smul]; push_cast; ring
+      refine ⟨b1, hz, ?_, hb1, by linarith⟩
+      simp only [hτ, hz, add_sub_cancel_left]
+      rw [mul_assoc, Complex.mul_conj, ← Complex.ofReal_mul, Complex.ofReal_re]
+      field_simp
+    have hline : ∀ z ∈ (Arc.seg u w).curve v, z = u + (τ z : ℂ) * d := by
+      intro z hz
+      obtain ⟨tv, hv', -, -⟩ := hseg v hv
+      simp only [Arc.curve, Arc.curveData, curveAt, mem_setOf_eq, zero_mul] at hz
+      rw [map_mul, Complex.conj_I, ← hddef] at hz
+      have hP : ((z - u) * (starRingEnd ℂ) d).im = 0 := by
+        have h1 : ((z - v) * (-I * (starRingEnd ℂ) d)).re = ((z - v) * (starRingEnd ℂ) d).im := by
+          simp only [Complex.mul_re, Complex.mul_im, Complex.neg_re, Complex.neg_im, Complex.I_re, Complex.I_im]
+          ring
+        have h2 : (z - u) * (starRingEnd ℂ) d = (z - v) * (starRingEnd ℂ) d + ((tv * Complex.normSq d : ℝ) : ℂ) := by
+          rw [hv', Complex.ofReal_mul, Complex.normSq_eq_conj_mul_self]; ring
+        rw [h2, Complex.add_im, Complex.ofReal_im, add_zero, ← h1]
+        linarith
+      have hPe : (z - u) * (starRingEnd ℂ) d = (((z - u) * (starRingEnd ℂ) d).re : ℂ) :=
+        Complex.ext (by simp) (by simp [hP])
+      have hnd' : (Complex.normSq d : ℂ) ≠ 0 := by exact_mod_cast hnd.ne'
+      have h3 : (z - u) * (Complex.normSq d : ℂ) = (((z - u) * (starRingEnd ℂ) d).re : ℂ) * d := by
+        rw [Complex.normSq_eq_conj_mul_self, ← mul_assoc, ← hPe]
+      have h4 : z - u = (τ z : ℂ) * d := by
+        simp only [hτ]
+        push_cast
+        field_simp
+        linear_combination h3
+      linear_combination h4
+    obtain ⟨ty, hyt, hτy, hty⟩ := hseg y hy
+    have hty' : ty ∈ Ioo 0 1 := by
+      refine ⟨lt_of_le_of_ne hty.1 ?_, lt_of_le_of_ne hty.2 ?_⟩
+      · rintro rfl; apply hye; left; rw [hyt]; simp
+      · rintro rfl; apply hye; right; rw [hyt, hddef]; simp
+    have ev : ∀ᶠ z in 𝓝 y, τ z ∈ Ioo 0 1 :=
+      hτc.continuousAt.preimage_mem_nhds (by rw [hτy]; exact Ioo_mem_nhds hty'.1 hty'.2)
+    filter_upwards [ev] with z hz hzc
+    rw [hline z hzc]
+    refine ⟨1 - τ z, τ z, by linarith [hz.2], hz.1.le, by ring, ?_⟩
+    rw [hddef]; simp only [Complex.real_smul]; push_cast; ring
+  | circ c ρ θ₀ θ₁ =>
+    obtain ⟨hρ, -, -⟩ := ha
+    obtain ⟨θv, -, rfl⟩ := hv
+    obtain ⟨θy, hθy, rfl⟩ := hy
+    have hθy' : θy ∈ Ioo θ₀ θ₁ := by
+      refine ⟨lt_of_le_of_ne hθy.1 ?_, lt_of_le_of_ne hθy.2 ?_⟩
+      · rintro rfl; exact hye (Or.inl rfl)
+      · rintro rfl; exact hye (Or.inr rfl)
+    have hcurve : ∀ z ∈ (Arc.circ c ρ θ₀ θ₁).curve (c + ρ * e θv), ‖z - c‖ = ρ := by
+      intro z hz
+      simp only [Arc.curve, Arc.curveData, curveAt, mem_setOf_eq, one_mul] at hz
+      have h1 := Complex.normSq_sub (z - (c + ρ * e θv)) (c - (c + ρ * e θv))
+      rw [show z - (c + ρ * e θv) - (c - (c + ρ * e θv)) = z - c by ring] at h1
+      have h2 : Complex.normSq (c - (c + ↑ρ * e θv)) = ρ ^ 2 := by
+        rw [Complex.normSq_eq_norm_sq, show c - (c + ↑ρ * e θv) = -(↑ρ * e θv) by ring, norm_neg, norm_mul_e hρ.le]
+      have h3 : ‖z - c‖ ^ 2 = ρ ^ 2 := by rw [← Complex.normSq_eq_norm_sq]; linarith
+      exact (sq_eq_sq₀ (norm_nonneg _) hρ.le).mp h3
+    have hyc : c + ↑ρ * e θy ≠ c := by
+      intro h
+      have := congrArg (fun z => ‖z - c‖) h
+      simp only [add_sub_cancel_left, sub_self, norm_zero, norm_mul_e hρ.le] at this
+      linarith
+    set ψ : ℂ → ℝ := fun z => θy + arg ((z - c) / ((c + ↑ρ * e θy) - c)) with hψ
+    have hψc : ContinuousAt ψ (c + ↑ρ * e θy) := continuousAt_const.add (continuousAt_arg_div hyc)
+    have hψ0 : ψ (c + ↑ρ * e θy) = θy := by simp only [hψ, arg_div_self hyc, add_zero]
+    have ev : ∀ᶠ z in 𝓝 (c + ↑ρ * e θy), ψ z ∈ Ioo θ₀ θ₁ :=
+      hψc.preimage_mem_nhds (by rw [hψ0]; exact Ioo_mem_nhds hθy'.1 hθy'.2)
+    filter_upwards [ev] with z hz hzc
+    refine ⟨ψ z, Ioo_subset_Icc_self hz, ?_⟩
+    have := eq_polar_local (v := c) (z₀ := c + ↑ρ * e θy) (φ₀ := θy) hρ rfl z
+    rw [hcurve z hzc] at this
+    exact this.symm
+
+/-- An arc through `v` has points at every small positive distance from `v`. -/
+theorem Arc.exists_near {a : Arc} (ha : a.Nondegenerate) {v : ℂ} (hv : v ∈ a.carrier) {r : ℝ} (hr : 0 < r) :
+    ∃ z ∈ a.carrier, 0 < ‖z - v‖ ∧ ‖z - v‖ < r := by
+  have hπ := Real.pi_pos
+  have hpre : IsPreconnected a.carrier := by
+    cases a with
+    | seg u w => exact (convex_segment u w).isPreconnected
+    | circ c ρ θ₀ θ₁ => exact isPreconnected_Icc.image _ (continuous_const.add (continuous_const.mul continuous_e)).continuousOn
+  have hw : ∃ w ∈ a.carrier, w ≠ v := by
+    cases a with
+    | seg u w =>
+      by_cases hu : u = v
+      · exact ⟨w, right_mem_segment ℝ u w, fun h => ha (hu.trans h.symm)⟩
+      · exact ⟨u, left_mem_segment ℝ u w, hu⟩
+    | circ c ρ θ₀ θ₁ =>
+      obtain ⟨hρ, h01, h01'⟩ := ha
+      by_cases h0 : c + ρ * e θ₀ = v
+      · refine ⟨c + ρ * e ((θ₀ + θ₁) / 2), ⟨_, ⟨by linarith, by linarith⟩, rfl⟩, ?_⟩
+        rw [← h0]
+        intro h
+        have hρ0 : (ρ : ℂ) ≠ 0 := by exact_mod_cast hρ.ne'
+        have h' : e ((θ₀ + θ₁) / 2) = e θ₀ := mul_left_cancel₀ hρ0 (add_left_cancel h)
+        obtain ⟨m, hm⟩ := e_eq_e_iff.mp h'
+        rcases lt_trichotomy m 0 with hm0 | hm0 | hm0
+        · have : (m : ℝ) ≤ -1 := by exact_mod_cast Int.le_sub_one_iff.mpr hm0
+          nlinarith
+        · rw [hm0] at hm; push_cast at hm; linarith
+        · have : (1 : ℝ) ≤ m := by exact_mod_cast hm0
+          nlinarith
+      · exact ⟨_, ⟨θ₀, ⟨le_rfl, h01.le⟩, rfl⟩, h0⟩
+  obtain ⟨w, hw, hwv⟩ := hw
+  have hd : 0 < ‖w - v‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hwv)
+  have hsub := hpre.intermediate_value hv hw (f := fun z => ‖z - v‖)
+    (continuous_norm.comp (continuous_id.sub continuous_const)).continuousOn
+  set t := min ‖w - v‖ r / 2 with ht
+  have ht0 : 0 < t := half_pos (lt_min hd hr)
+  obtain ⟨z, hz, hzt⟩ := hsub (show t ∈ Icc ‖v - v‖ ‖w - v‖ from
+    ⟨by rw [sub_self, norm_zero]; exact ht0.le, by rw [ht]; linarith [min_le_left ‖w - v‖ r]⟩)
+  refine ⟨z, hz, ?_, ?_⟩
+  · simp only at hzt; rw [hzt]; exact ht0
+  · simp only at hzt; rw [hzt, ht]; linarith [min_le_right ‖w - v‖ r]
+
+/-- **A branch lies in its arc wholly or not at all**, below the distance of the arc's far ends. -/
+theorem Arc.branch_mem_of_mem {a : Arc} (ha : a.Nondegenerate) {v : ℂ} (hv : v ∈ a.carrier) {r : ℝ}
+    (hends : ∀ q ∈ a.ends, q ≠ v → r ≤ ‖q - v‖) (hbig : (a.curveData v).1 * r ≤ 2 * ‖(a.curveData v).2‖)
+    {σ : ℝ} (hσ : σ = 1 ∨ σ = -1)
+    (h : ∃ s ∈ Ioo 0 r, branchPt v (curveGerm (a.curveData v).1 (a.curveData v).2 σ).1
+      (curveGerm (a.curveData v).1 (a.curveData v).2 σ).2 s ∈ a.carrier) :
+    ∀ s ∈ Ioo 0 r, branchPt v (curveGerm (a.curveData v).1 (a.curveData v).2 σ).1
+      (curveGerm (a.curveData v).1 (a.curveData v).2 σ).2 s ∈ a.carrier := by
+  set g := curveGerm (a.curveData v).1 (a.curveData v).2 σ with hg
+  set B := branchPt v g.1 g.2 with hBdef
+  have hB : Continuous B := continuous_branchPt v g.1 g.2
+  have hb := Arc.curveData_ne ha hv
+  have hκ0 : 0 ≤ (a.curveData v).1 := by
+    rcases Arc.curveData_kappa v a with h' | h' <;> simp [h']
+  have hcurve : ∀ s ∈ Ioo 0 r, B s ∈ a.curve v := fun s hs =>
+    branchPt_curveGerm_mem hκ0 hb hσ hs.1.le ((mul_le_mul_of_nonneg_left hs.2.le hκ0).trans hbig)
+  set U := {s : ℝ | ∀ᶠ s' in 𝓝 s, B s' ∈ a.carrier} with hU
+  set V := {s : ℝ | B s ∉ a.carrier} with hV
+  have hUo : IsOpen U := isOpen_setOf_eventually_nhds
+  have hVo : IsOpen V := a.isClosed_carrier.isOpen_compl.preimage hB
+  have hUV : Disjoint U V := Set.disjoint_left.mpr fun s hs hs' => hs' hs.self_of_nhds
+  have hcov : Ioo 0 r ⊆ U ∪ V := by
+    intro s hs
+    by_cases hBs : B s ∈ a.carrier
+    · left
+      have hnorm : ‖B s - v‖ = s := norm_branchPt_sub v g.1 g.2 hs.1.le
+      have hye : B s ∉ a.ends := by
+        intro he
+        have hne : B s ≠ v := by
+          intro h'; rw [h', sub_self, norm_zero] at hnorm; linarith [hs.1]
+        have := hends _ he hne
+        rw [hnorm] at this
+        linarith [hs.2]
+      have ev1 := hB.continuousAt.tendsto.eventually (Arc.eventually_mem_carrier ha hv hBs hye)
+      have ev2 : ∀ᶠ s' in 𝓝 s, s' ∈ Ioo 0 r := Ioo_mem_nhds hs.1 hs.2
+      filter_upwards [ev1, ev2] with s' h1 h2
+      exact h1 (hcurve s' h2)
+    · right; exact hBs
+  rcases isPreconnected_Ioo.subset_or_subset hUo hVo hUV hcov with hsub | hsub
+  · intro s hs; exact (hsub hs).self_of_nhds
+  · obtain ⟨s₀, hs₀, hB₀⟩ := h; exact absurd hB₀ (hsub hs₀)
+
+variable {k : ℕ} (F : ArcMap k)
+
+namespace ArcMap
+
+/-- **The sector chart of `F` at `v` out to `r₀`** given by the germs `G`: the arcs in the punctured ball are the germs'
+branches, and for every `r ≤ r₀` the interior points of the ball are the sectors between consecutive germs (the whole ball
+when there is no germ) — open, connected, disjoint, each with the cone of its two germs' directions. -/
+structure IsSectorChart {n : ℕ} (G : BranchGerms n) (v : ℂ) (r₀ : ℝ) : Prop where
+  /-- The radius is positive. -/
+  pos : 0 < r₀
+  /-- The ball lies in the domain. -/
+  subdom : ball v r₀ ⊆ F.dom
+  /-- The germs are sorted counter-clockwise. -/
+  sorted : G.Sorted
+  /-- Each branch is a graph over the radius. -/
+  curv : ∀ i, |G.κ i| * r₀ < 2
+  /-- `v` lies on the arcs exactly when there is a germ. -/
+  mem_Γ : v ∈ F.Γ ↔ 0 < n
+  /-- The arcs in the punctured ball are the branches. -/
+  branches : (F.Γ ∩ ball v r₀) \ {v} = ⋃ i, branchPt v (G.β i) (G.κ i) '' Ioo 0 r₀
+  /-- With no germ, the ball is interior. -/
+  empty : n = 0 → ball v r₀ ⊆ F.interiorPts
+  /-- The interior points of a smaller ball are the sectors. -/
+  cover : ∀ r ∈ Ioc 0 r₀, 0 < n → ball v r ∩ F.interiorPts = ⋃ i, G.sector v r i
+  /-- Each sector is open. -/
+  isOpen : ∀ r ∈ Ioc 0 r₀, ∀ i, IsOpen (G.sector v r i)
+  /-- Each sector is connected. -/
+  isPreconnected : ∀ r ∈ Ioc 0 r₀, ∀ i, IsPreconnected (G.sector v r i)
+  /-- Distinct sectors are disjoint. -/
+  disjoint : ∀ r ∈ Ioc 0 r₀, ∀ i j, i ≠ j → Disjoint (G.sector v r i) (G.sector v r j)
+  /-- Each sector's cone at `v` is the interval of its two germs' directions. -/
+  cone : ∀ r ∈ Ioc 0 r₀, ∀ i, coneAt (G.sector v r i) v = angleIcc (G.β i) (G.nextβ i)
+
+/-- **A sector chart from its branch data**: sorted germs, each a graph over the radius, whose branches are the arcs of the
+punctured ball and never meet at one distance, cut the ball's interior points into the sectors between consecutive germs. -/
+theorem isSectorChart_of {n : ℕ} (G : BranchGerms n) {v : ℂ} {r₀ : ℝ} (pos : 0 < r₀)
+    (subdom : ball v r₀ ⊆ F.dom) (sorted : G.Sorted) (curv : ∀ i, |G.κ i| * r₀ < 2)
+    (mem_Γ : v ∈ F.Γ ↔ 0 < n)
+    (branches : (F.Γ ∩ ball v r₀) \ {v} = ⋃ i, branchPt v (G.β i) (G.κ i) '' Ioo 0 r₀)
+    (hdisj : ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) :
+    F.IsSectorChart G v r₀ := by
+  have hπ := Real.pi_pos
+  have hord := G.dir_lt_nextDir sorted curv hdisj
+  have hM := sorted.mono
+  have hΓ : ∀ z ∈ ball v r₀, z ≠ v → z ∈ ⋃ a ∈ F.arcs, a.carrier →
+      ∃ j, z = branchPt v (G.β j) (G.κ j) ‖z - v‖ := by
+    intro z hz hzv hza
+    have hmem : z ∈ (F.Γ ∩ ball v r₀) \ {v} := ⟨⟨⟨subdom hz, hza⟩, hz⟩, hzv⟩
+    rw [branches] at hmem
+    obtain ⟨j, hj⟩ := mem_iUnion.mp hmem
+    obtain ⟨s, hs, hsz⟩ := hj
+    refine ⟨j, ?_⟩
+    rw [← hsz, norm_branchPt_sub _ _ _ hs.1.le]
+  refine ⟨pos, subdom, sorted, curv, mem_Γ, branches, ?_, ?_, fun r _ i => G.isOpen_sector r i,
+    fun r hr i => G.isPreconnected_sector hord hr.2 i, fun r hr i j hij => G.sector_disjoint hord hr.2 hij,
+    fun r hr i => G.coneAt_sector hM hord hr i⟩
+  · intro hn z hz
+    refine ⟨subdom hz, fun hza => ?_⟩
+    by_cases hzv : z = v
+    · subst hzv; exact absurd (mem_Γ.mp ⟨subdom hz, hza⟩) (by omega)
+    · obtain ⟨j, -⟩ := hΓ z hz hzv hza
+      exact absurd j.isLt (by omega)
+  · intro r hr hn
+    ext z
+    constructor
+    · rintro ⟨hz, hzI⟩
+      have hzv : z ≠ v := by
+        rintro rfl; exact hzI.2 (mem_Γ.mpr hn).2
+      set s := ‖z - v‖ with hsdef
+      have hs : s ∈ Ioo 0 r := ⟨norm_pos_iff.mpr (sub_ne_zero.mpr hzv), by rw [mem_ball, dist_eq_norm] at hz; exact hz⟩
+      have hsr : s ∈ Ioo 0 r₀ := ⟨hs.1, hs.2.trans_le hr.2⟩
+      have hzpol : z = v + (s : ℂ) * e (arg (z - v)) := by
+        have := eq_polar_arg (z - v); rw [hsdef]; linear_combination this
+      rcases (G.atRadius s).exists_angle hn (arg (z - v)) with ⟨j, m, hj⟩ | ⟨j, hj⟩
+      · exfalso
+        apply hzI.2
+        have hzb : branchPt v (G.β j) (G.κ j) s = z := by
+          rw [branchPt_eq, hzpol, hj, e_add_int_mul]; rfl
+        have hmem : z ∈ ⋃ i, branchPt v (G.β i) (G.κ i) '' Ioo 0 r₀ := mem_iUnion.mpr ⟨j, s, hsr, hzb⟩
+        rw [← branches] at hmem
+        exact hmem.1.1.2
+      · obtain ⟨m, hm⟩ := mem_iUnion.mp hj
+        rw [BranchGerms.atRadius_nextβ] at hm
+        have hm' : G.dir j s + 2 * π * m < arg (z - v) ∧ arg (z - v) < G.nextDir j s + 2 * π * m := hm
+        refine mem_iUnion.mpr ⟨j, s, hs, arg (z - v) - 2 * π * m, ⟨?_, ?_⟩, ?_⟩
+        · show G.dir j s < _; linarith [hm'.1]
+        · show _ < G.nextDir j s; linarith [hm'.2]
+        · rw [show arg (z - v) - 2 * π * m = arg (z - v) + 2 * π * ((-m : ℤ) : ℝ) by push_cast; ring,
+            e_add_int_mul]
+          exact hzpol
+    · intro hz
+      obtain ⟨j, hj⟩ := mem_iUnion.mp hz
+      have hzball : z ∈ ball v r := G.sector_subset_ball j hj
+      obtain ⟨s, hs, φ, hφ, rfl⟩ := hj
+      have hφ : G.dir j s < φ ∧ φ < G.nextDir j s := hφ
+      have hsr : s ∈ Ioo 0 r₀ := ⟨hs.1, hs.2.trans_le hr.2⟩
+      refine ⟨hzball, subdom (ball_subset_ball hr.2 hzball), fun hza => ?_⟩
+      have hzv : v + (s : ℂ) * e φ ≠ v := by
+        intro h'
+        have := congrArg (fun z => ‖z - v‖) h'
+        simp only [add_sub_cancel_left, sub_self, norm_zero, norm_mul_e hs.1.le] at this
+        linarith [hs.1]
+      obtain ⟨l, hl⟩ := hΓ _ (ball_subset_ball hr.2 hzball) hzv hza
+      rw [add_sub_cancel_left, norm_mul_e hs.1.le, branchPt_eq] at hl
+      obtain ⟨-, he⟩ := (polar_eq_iff hs.1 hs.1).mp hl
+      obtain ⟨m', hm'⟩ := e_eq_e_iff.mp he
+      have hM' := G.atRadius_mono hord hsr
+      apply hM'.not_mem_angleIoo j l m'
+      rw [BranchGerms.atRadius_nextβ]
+      refine Ioo_subset_angleIoo _ _ ⟨?_, ?_⟩
+      · show G.dir j s < G.dir l s + 2 * π * m'
+        have : G.dir l s = germDir (G.β l) (G.κ l) s := rfl
+        rw [this]; linarith [hφ.1]
+      · show G.dir l s + 2 * π * m' < G.nextDir j s
+        have : G.dir l s = germDir (G.β l) (G.κ l) s := rfl
+        rw [this]; linarith [hφ.2]
+
+end ArcMap
+
+/-- **`localSectors`, with its disjointness** (FS131-I4k; inventory item 244 (b)): every point of the domain has a sector chart
+whose distinct germs' branches never meet at one distance below the chart's radius. The germs are those of the finitely many arcs
+through `v` in a good ball (`GoodAt`), each line or circle contributing the branches it covers; the radius stays below every far
+end of those arcs and below every distance at which two distinct germs' branches meet. `IsSectorChart` does not carry the
+disjointness; consumers that need an arc of `Γ` near a branch point to lie on that branch alone read it here. -/
+theorem localSectors_disj {v : ℂ} (hv : v ∈ F.dom) : ∃ r₀, ∃ n, ∃ G : BranchGerms n, F.IsSectorChart G v r₀ ∧
+    ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s) := by
+  have hπ := Real.pi_pos
+  obtain ⟨ρ₀, hG⟩ := F.exists_goodAt hv
+  set 𝒜 := {a | a ∈ F.arcs ∧ (a.carrier ∩ ball v ρ₀).Nonempty} with h𝒜def
+  have h𝒜 : 𝒜.Finite := hG.fin
+  set C : Set (ℝ × ℝ) := ⋃ a ∈ 𝒜, ({curveGerm (a.curveData v).1 (a.curveData v).2 1,
+    curveGerm (a.curveData v).1 (a.curveData v).2 (-1)} : Set (ℝ × ℝ)) with hCdef
+  have hC : C.Finite := h𝒜.biUnion fun a _ => Set.toFinite _
+  have hCmem : ∀ g ∈ C, ∃ a ∈ 𝒜, ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧
+      g = curveGerm (a.curveData v).1 (a.curveData v).2 σ := by
+    intro g hg
+    obtain ⟨a, ha, hga⟩ := mem_iUnion₂.mp hg
+    rcases hga with h | h
+    · exact ⟨a, ha, 1, Or.inl rfl, h⟩
+    · exact ⟨a, ha, -1, Or.inr rfl, h⟩
+  have hCof : ∀ a ∈ 𝒜, ∀ σ : ℝ, (σ = 1 ∨ σ = -1) → curveGerm (a.curveData v).1 (a.curveData v).2 σ ∈ C := by
+    intro a ha σ hσ
+    refine mem_iUnion₂.mpr ⟨a, ha, ?_⟩
+    rcases hσ with rfl | rfl
+    · exact Or.inl rfl
+    · exact Or.inr rfl
+  have hCfst : ∀ g ∈ C, g.1 ∈ Ico 0 (2 * π) := by
+    intro g hg; obtain ⟨a, -, σ, -, rfl⟩ := hCmem g hg; exact curveGerm_fst_mem _ _ _
+  -- the radius
+  have ev1 : ∀ᶠ r in 𝓝[>] (0 : ℝ), r < ρ₀ := by
+    filter_upwards [Ioo_mem_nhdsGT hG.pos] with r hr using hr.2
+  have ev2 : ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ a ∈ 𝒜, ∀ q ∈ a.ends, q ≠ v → r ≤ ‖q - v‖ := by
+    refine (eventually_all_finite h𝒜).mpr fun a _ => (eventually_all_finite a.finite_ends).mpr fun q _ => ?_
+    by_cases hq : q = v
+    · exact Filter.Eventually.of_forall fun _ h => absurd hq h
+    · have hpos : 0 < ‖q - v‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hq)
+      filter_upwards [Ioo_mem_nhdsGT hpos] with r hr _ using hr.2.le
+  have ev3 : ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ g ∈ C, ∀ g' ∈ C, g ≠ g' → ∀ s ∈ Ioo 0 r,
+      e (germDir g.1 g.2 s) ≠ e (germDir g'.1 g'.2 s) := by
+    refine (eventually_all_finite hC).mpr fun g hg => (eventually_all_finite hC).mpr fun g' hg' => ?_
+    by_cases hgg : g = g'
+    · exact Filter.Eventually.of_forall fun _ h => absurd hgg h
+    · obtain ⟨ε, hε, hne⟩ := exists_germDir_ne (hCfst g hg) (hCfst g' hg') hgg
+      filter_upwards [Ioo_mem_nhdsGT hε] with r hr _ s hs using hne s ⟨hs.1, hs.2.trans hr.2⟩
+  have ev0 : ∀ᶠ r in 𝓝[>] (0 : ℝ), r ∈ Ioi 0 := eventually_mem_nhdsWithin
+  obtain ⟨r₀, hr₀, hr₁, hr₂, hr₃⟩ := (ev0.and (ev1.and (ev2.and ev3))).exists
+  have hr₀ : 0 < r₀ := hr₀
+  have hsub : ball v r₀ ⊆ F.dom := (ball_subset_ball hr₁.le).trans hG.subdom
+  -- the arcs through `v`
+  have harc : ∀ a ∈ 𝒜, a.Nondegenerate ∧ v ∈ a.carrier ∧ (a.curveData v).2 ≠ 0 ∧ 0 ≤ (a.curveData v).1 ∧
+      (a.curveData v).1 * r₀ < 2 * ‖(a.curveData v).2‖ := by
+    intro a ha
+    have hnd := F.nondegenerate a ha.1
+    have hva := hG.through a ha.1 ha.2
+    have hb := Arc.curveData_ne hnd hva
+    refine ⟨hnd, hva, hb, ?_, ?_⟩
+    · rcases Arc.curveData_kappa v a with h | h <;> simp [h]
+    · rcases Arc.curveData_kappa v a with h | h
+      · rw [h, zero_mul]; exact mul_pos two_pos (norm_pos_iff.mpr hb)
+      · rw [h, one_mul]; exact hr₁.trans (hG.big a ha.1 ha.2 h)
+  -- the germs
+  set G₀ : Set (ℝ × ℝ) := {g ∈ C | ∀ s ∈ Ioo 0 r₀, branchPt v g.1 g.2 s ∈ F.Γ} with hG₀def
+  have hG₀ : G₀.Finite := hC.subset (sep_subset _ _)
+  -- a point of an arc near `v` lies on a germ
+  have hfound : ∀ a ∈ 𝒜, ∀ z ∈ a.carrier, z ∈ ball v r₀ → z ≠ v →
+      ∃ g ∈ G₀, z = branchPt v g.1 g.2 ‖z - v‖ := by
+    intro a ha z hza hz hzv
+    obtain ⟨hnd, hva, hb, hκ0, hbig⟩ := harc a ha
+    have hzr : ‖z - v‖ < r₀ := by rw [mem_ball, dist_eq_norm] at hz; exact hz
+    have hzpos : 0 < ‖z - v‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hzv)
+    obtain ⟨σ, hσ, hzeq⟩ := exists_eq_branchPt_curveGerm hκ0 hb (Arc.carrier_subset_curve hva hza) hzv
+      (lt_of_le_of_lt (mul_le_mul_of_nonneg_left hzr.le hκ0) hbig)
+    have hall := Arc.branch_mem_of_mem hnd hva (fun q hq hqv => hr₂ a ha q hq hqv) hbig.le hσ
+      ⟨‖z - v‖, ⟨hzpos, hzr⟩, hzeq ▸ hza⟩
+    refine ⟨_, ⟨hCof a ha σ hσ, fun s hs => ?_⟩, hzeq⟩
+    refine ⟨hsub ?_, mem_iUnion₂.mpr ⟨a, ha.1, hall s hs⟩⟩
+    rw [mem_ball, dist_eq_norm, norm_branchPt_sub _ _ _ hs.1.le]; exact hs.2
+  -- sort the germs
+  set S : Finset (Lex (ℝ × ℝ)) := hG₀.toFinset.map toLex.toEmbedding with hSdef
+  set f := S.orderEmbOfFin rfl with hfdef
+  set G : BranchGerms S.card := ⟨fun i => (ofLex (f i)).1, fun i => (ofLex (f i)).2⟩ with hGdef
+  have hfG₀ : ∀ i, ofLex (f i) ∈ G₀ := by
+    intro i
+    have h1 : f i ∈ S := S.orderEmbOfFin_mem rfl i
+    obtain ⟨g, hg, hgf⟩ := Finset.mem_map.mp h1
+    rw [← hgf]
+    exact (Set.Finite.mem_toFinset hG₀).mp hg
+  have hG₀f : ∀ g ∈ G₀, ∃ i, ofLex (f i) = g := by
+    intro g hg
+    have h1 : toLex g ∈ (S : Set (Lex (ℝ × ℝ))) := by
+      rw [hSdef, Finset.coe_map]
+      exact ⟨g, (Set.Finite.mem_toFinset hG₀).mpr hg, rfl⟩
+    rw [← Finset.range_orderEmbOfFin S rfl] at h1
+    obtain ⟨i, hi⟩ := h1
+    exact ⟨i, by rw [← hfdef] at hi; rw [hi]; rfl⟩
+  have hfC : ∀ i, ofLex (f i) ∈ C := fun i => (hfG₀ i).1
+  have hdisj : ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s) := by
+    -- distinct germs never meet at one distance
+    intro i j hij s hs
+    have hne : ofLex (f i) ≠ ofLex (f j) := fun h => hij (f.injective (by simpa using h))
+    exact hr₃ _ (hfC i) _ (hfC j) hne s ⟨hs.1, hs.2.trans_le le_rfl⟩
+  refine ⟨r₀, S.card, G, F.isSectorChart_of G hr₀ hsub ?_ ?_ ?_ ?_ hdisj, hdisj⟩
+  · -- sorted
+    have hlex : ∀ i j : Fin S.card, i < j → G.β i < G.β j ∨ (G.β i = G.β j ∧ G.κ i < G.κ j) :=
+      fun i j hij => Prod.Lex.lt_iff.mp (f.strictMono hij)
+    refine ⟨hlex, fun i => ?_⟩
+    unfold BranchGerms.nextβ BranchGerms.nextκ
+    split_ifs with h
+    · exact hlex i ⟨i.val + 1, h⟩ (Fin.lt_def.mpr (by simp))
+    · left
+      have h1 := hCfst _ (hfC i)
+      have h0 := hCfst _ (hfC ⟨0, i.pos⟩)
+      show (ofLex (f i)).1 < (ofLex (f ⟨0, i.pos⟩)).1 + 2 * π
+      linarith [h1.2, h0.1]
+  · -- curvature
+    intro i
+    obtain ⟨a, ha, σ, hσ, hg⟩ := hCmem _ (hfC i)
+    obtain ⟨-, -, hb, hκ0, hbig⟩ := harc a ha
+    have hbn : 0 < ‖(a.curveData v).2‖ := norm_pos_iff.mpr hb
+    show |(ofLex (f i)).2| * r₀ < 2
+    rw [hg]
+    simp only [curveGerm]
+    have hσa : |σ| = 1 := by rcases hσ with rfl | rfl <;> simp
+    rw [abs_div, abs_mul, hσa, one_mul, abs_of_nonneg hκ0, abs_of_pos hbn, div_mul_eq_mul_div,
+      div_lt_iff₀ hbn]
+    exact hbig
+  · -- `v` on the arcs
+    constructor
+    · rintro ⟨-, hva⟩
+      obtain ⟨a, haF, hva⟩ := mem_iUnion₂.mp hva
+      have ha : a ∈ 𝒜 := ⟨haF, v, hva, mem_ball_self hG.pos⟩
+      obtain ⟨z, hz, hz0, hzr⟩ := Arc.exists_near (F.nondegenerate a haF) hva hr₀
+      have hzv : z ≠ v := fun h => by rw [h, sub_self, norm_zero] at hz0; exact lt_irrefl _ hz0
+      obtain ⟨g, hg, -⟩ := hfound a ha z hz (by rw [mem_ball, dist_eq_norm]; exact hzr) hzv
+      obtain ⟨i, -⟩ := hG₀f g hg
+      exact Fin.pos i
+    · intro hn
+      obtain ⟨a, ha, -, -, -⟩ := hCmem _ (hfC ⟨0, hn⟩)
+      exact ⟨hv, mem_iUnion₂.mpr ⟨a, ha.1, hG.through a ha.1 ha.2⟩⟩
+  · -- the branches
+    ext z
+    constructor
+    · rintro ⟨⟨⟨hzd, hza⟩, hz⟩, hzv⟩
+      obtain ⟨a, haF, hza⟩ := mem_iUnion₂.mp hza
+      have ha : a ∈ 𝒜 := ⟨haF, z, hza, ball_subset_ball hr₁.le hz⟩
+      obtain ⟨g, hg, hzg⟩ := hfound a ha z hza hz hzv
+      obtain ⟨i, hi⟩ := hG₀f g hg
+      refine mem_iUnion.mpr ⟨i, ‖z - v‖, ⟨norm_pos_iff.mpr (sub_ne_zero.mpr hzv), ?_⟩, ?_⟩
+      · rw [mem_ball, dist_eq_norm] at hz; exact hz
+      · show branchPt v (ofLex (f i)).1 (ofLex (f i)).2 ‖z - v‖ = z
+        rw [hi]; exact hzg.symm
+    · intro hz
+      obtain ⟨i, s, hs, rfl⟩ := mem_iUnion.mp hz
+      have hΓ := (hfG₀ i).2 s hs
+      refine ⟨⟨hΓ, ?_⟩, ?_⟩
+      · rw [mem_ball, dist_eq_norm, norm_branchPt_sub _ _ _ hs.1.le]; exact hs.2
+      · intro h
+        have := norm_branchPt_sub v (G.β i) (G.κ i) hs.1.le
+        rw [mem_singleton_iff.mp h, sub_self, norm_zero] at this
+        exact hs.1.ne this
+
+/-- **`localSectors`**: every point of the domain has a sector chart (`localSectors_disj` without its disjointness clause). -/
+theorem localSectors {v : ℂ} (hv : v ∈ F.dom) : ∃ r₀, ∃ n, ∃ G : BranchGerms n, F.IsSectorChart G v r₀ := by
+  obtain ⟨r₀, n, G, hC, -⟩ := localSectors_disj F hv
+  exact ⟨r₀, n, G, hC⟩
+
+/-! ### One sector per Jordan tile, and the separated interval -/
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- Two tiles sharing a point are one tile. -/
+theorem IsTile.eq_of_mem {T T' : Set ℂ} (hT : F.IsTile T) (hT' : F.IsTile T') {w : ℂ} (hw : w ∈ T) (hw' : w ∈ T') :
+    T = T' := by
+  obtain ⟨x, -, rfl⟩ := hT
+  obtain ⟨x', -, rfl⟩ := hT'
+  exact (connectedComponentIn_eq hw).trans (connectedComponentIn_eq hw').symm
+
+/-- Each sector of a chart lies in the interior points. -/
+theorem IsSectorChart.sector_subset_interiorPts {n : ℕ} {G : BranchGerms n} {x : ℂ} {r₀ : ℝ}
+    (hC : F.IsSectorChart G x r₀) (hn : 0 < n) {r : ℝ} (hr : r ∈ Ioc 0 r₀) (i : Fin n) :
+    G.sector x r i ⊆ F.interiorPts := by
+  intro z hz
+  have h : z ∈ ball x r ∩ F.interiorPts := by rw [hC.cover r hr hn]; exact mem_iUnion.mpr ⟨i, hz⟩
+  exact h.2
+
+/-- Each sector of a chart is nonempty: its cone holds its first germ's direction. -/
+theorem IsSectorChart.sector_nonempty {n : ℕ} {G : BranchGerms n} {x : ℂ} {r₀ : ℝ}
+    (hC : F.IsSectorChart G x r₀) {r : ℝ} (hr : r ∈ Ioc 0 r₀) (i : Fin n) : (G.sector x r i).Nonempty := by
+  have hβ : G.β i ∈ coneAt (G.sector x r i) x := by
+    rw [hC.cone r hr i]; exact Icc_subset_angleIcc _ _ ⟨le_rfl, hC.sorted.mono i⟩
+  obtain ⟨z, hz, -⟩ := hβ 1 one_pos
+  exact ⟨z, hz⟩
+
+/-- **One sector per Jordan tile** (FS131-E2-ONESECT, `plans/FS131-E2-derivation.md` § 2.3): in a sector chart at `x` with a
+germ, a tile that is a Jordan domain with `x` in its closure meets the chart's ball in exactly one sector. The Jordan chart
+(`IsJordanDomain.local_connected`) puts the tile's part of a small ball inside one connected piece of it, which lies in one
+sector; a second sector of the tile would reach into that small ball. -/
+theorem IsSectorChart.exists_tile_inter_ball {n : ℕ} {G : BranchGerms n} {x : ℂ} {r₀ : ℝ}
+    (hC : F.IsSectorChart G x r₀) (hn : 0 < n) {T : Set ℂ} (hT : F.IsTile T) (hJ : IsJordanDomain T)
+    (hx : x ∈ closure T) : ∃ i, T ∩ ball x r₀ = G.sector x r₀ i := by
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  have hTsub : T ∩ ball x r₀ ⊆ ⋃ i, G.sector x r₀ i := by
+    rintro z ⟨hzT, hzb⟩
+    rw [← hC.cover r₀ hr₀ hn]
+    exact ⟨hzb, hT.subset_interiorPts hzT⟩
+  obtain ⟨r', hr', K, hKT, hKb, hKpre, hKsub⟩ := hJ.local_connected hx hC.pos
+  obtain ⟨z₀, hz₀T, hz₀d⟩ := Metric.mem_closure_iff.mp hx r' hr'
+  have hz₀ : z₀ ∈ K := hKsub ⟨hz₀T, by rw [mem_ball, dist_comm]; exact hz₀d⟩
+  obtain ⟨i₀, hi₀⟩ := mem_iUnion.mp (hTsub ⟨hKT hz₀, hKb hz₀⟩)
+  have hKi : K ⊆ G.sector x r₀ i₀ := by
+    refine hKpre.subset_left_of_subset_union (hC.isOpen r₀ hr₀ i₀)
+      (isOpen_iUnion fun j => isOpen_iUnion fun _ : j ≠ i₀ => hC.isOpen r₀ hr₀ j) ?_ ?_ ⟨z₀, hz₀, hi₀⟩
+    · rw [Set.disjoint_iUnion_right]
+      intro j
+      rw [Set.disjoint_iUnion_right]
+      intro hj
+      exact hC.disjoint r₀ hr₀ i₀ j (Ne.symm hj)
+    · intro z hz
+      obtain ⟨j, hj⟩ := mem_iUnion.mp (hTsub ⟨hKT hz, hKb hz⟩)
+      by_cases hji : j = i₀
+      · left; rw [← hji]; exact hj
+      · right; exact mem_iUnion.mpr ⟨j, mem_iUnion.mpr ⟨hji, hj⟩⟩
+  have hsecT : ∀ j, (G.sector x r₀ j ∩ T).Nonempty → G.sector x r₀ j ⊆ T := by
+    rintro j ⟨w, hwj, hwT⟩
+    exact hT.subset_of_preconnected (hC.isPreconnected r₀ hr₀ j) (hC.sector_subset_interiorPts hn hr₀ j) hwj hwT
+  have hi₀T : G.sector x r₀ i₀ ⊆ T := hsecT i₀ ⟨z₀, hi₀, hKT hz₀⟩
+  refine ⟨i₀, Subset.antisymm ?_ (subset_inter hi₀T (G.sector_subset_ball i₀))⟩
+  rintro z ⟨hzT, hzb⟩
+  obtain ⟨j, hj⟩ := mem_iUnion.mp (hTsub ⟨hzT, hzb⟩)
+  by_cases hji : j = i₀
+  · rw [← hji]; exact hj
+  · exfalso
+    have hjT : G.sector x r₀ j ⊆ T := hsecT j ⟨z, hj, hzT⟩
+    have hr'' : min r' r₀ ∈ Ioc 0 r₀ := ⟨lt_min hr' hC.pos, min_le_right _ _⟩
+    obtain ⟨w, hw⟩ := hC.sector_nonempty hr'' j
+    have hw1 : w ∈ G.sector x r₀ j := G.sector_mono (min_le_right _ _) j hw
+    have hw2 : w ∈ G.sector x r₀ i₀ :=
+      hKi (hKsub ⟨hjT hw1, ball_subset_ball (min_le_left _ _) (G.sector_subset_ball j hw)⟩)
+    exact Set.disjoint_left.mp (hC.disjoint r₀ hr₀ j i₀ hji) hw1 hw2
+
+/-- **The separated interval** (FS131-E2-SEP; `plans/FS131-E2-derivation.md` § 2.7): in a simple map, a tile's cone at a
+point of its closure is one closed interval whose open part meets no other tile's cone at that point — the tile is one
+sector, between consecutive branches (`IsSectorChart.exists_tile_inter_ball`), and a cusp of another tile is a sector of its
+own, pointing into no other sector. -/
+theorem Simple.coneAt_eq_angleIcc_sep (hS : F.Simple) {T : Set ℂ} (hT : F.IsTile T) {x : ℂ} (hxd : x ∈ F.dom)
+    (hx : x ∈ closure T) :
+    ∃ β₁ β₂, β₁ ≤ β₂ ∧ β₂ ≤ β₁ + 2 * π ∧ coneAt T x = angleIcc β₁ β₂ ∧
+      ∀ T', F.IsTile T' → T' ≠ T → x ∈ closure T' → Disjoint (coneAt T' x) (angleIoo β₁ β₂) := by
+  have hπ := Real.pi_pos
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hxd
+  have hloc : ∀ S : Set ℂ, coneAt S x = coneAt (S ∩ ball x r₀) x := fun S =>
+    Subset.antisymm (fun β hβ => coneAt_inter_ball hC.pos hβ) (coneAt_mono inter_subset_left x)
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · have hball : ball x r₀ ⊆ T := by
+      obtain ⟨z, hzT, hzd⟩ := Metric.mem_closure_iff.mp hx r₀ hC.pos
+      exact hT.subset_of_preconnected (convex_ball x r₀).isPreconnected (hC.empty hn)
+        (by rw [mem_ball, dist_comm]; exact hzd) hzT
+    have hxT : x ∈ T := hball (mem_ball_self hC.pos)
+    refine ⟨0, 2 * π, by positivity, by linarith, ?_, ?_⟩
+    · ext β
+      simp only [mem_coneAt_of_mem_isOpen hT.isOpen hxT β, true_iff]
+      obtain ⟨m, hm1, hm2⟩ := exists_shift_Ico 0 β
+      exact mem_iUnion.mpr ⟨-m, by push_cast; constructor <;> linarith⟩
+    · intro T' hT' hne hx'
+      exfalso
+      obtain ⟨z, hzT', hzd⟩ := Metric.mem_closure_iff.mp hx' r₀ hC.pos
+      exact hne (hT'.eq_of_mem hT hzT' (hball (by rw [mem_ball, dist_comm]; exact hzd)))
+  · obtain ⟨i, hi⟩ := hC.exists_tile_inter_ball hn hT (hS.1 T hT) hx
+    have hM := hC.sorted.mono
+    refine ⟨G.β i, G.nextβ i, hM i, hM.nextβ_le_add i, ?_, ?_⟩
+    · rw [hloc, hi, hC.cone r₀ ⟨hC.pos, le_rfl⟩ i]
+    · intro T' hT' hne hx'
+      obtain ⟨j, hj⟩ := hC.exists_tile_inter_ball hn hT' (hS.1 T' hT') hx'
+      have hji : j ≠ i := by
+        rintro rfl
+        obtain ⟨w, hw⟩ := hC.sector_nonempty ⟨hC.pos, le_rfl⟩ j
+        have hwT : w ∈ T := (hi.symm ▸ hw : w ∈ T ∩ ball x r₀).1
+        have hwT' : w ∈ T' := (hj.symm ▸ hw : w ∈ T' ∩ ball x r₀).1
+        exact hne (hT'.eq_of_mem hT hwT' hwT)
+      rw [hloc, hj, hC.cone r₀ ⟨hC.pos, le_rfl⟩ j]
+      exact hM.disjoint hji.symm
+
+end ArcMap
+
+/-! ### Spec examples -/
+
+/-- The straight germ in direction `0` reaches `1` at distance `1`. -/
+example : branchPt 0 0 0 1 = 1 := by simp [branchPt, e]
+
+/-- The germ in direction `0` of curvature `1` bends left: at distance `1` it lies on the unit circle about `i`. -/
+example : ‖branchPt 0 0 1 1 - I‖ = 1 := by
+  have h : Real.arcsin (1 * 1 / 2) = π / 6 := by
+    rw [show (1 : ℝ) * 1 / 2 = Real.sin (π / 6) by rw [Real.sin_pi_div_six]; norm_num]
+    exact Real.arcsin_sin (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos])
+  rw [branchPt, zero_add, zero_add, h, Complex.ofReal_one, one_mul, e_eq, Real.cos_pi_div_six,
+    Real.sin_pi_div_six, ← sq_eq_sq₀ (norm_nonneg _) zero_le_one, ← Complex.normSq_eq_norm_sq,
+    Complex.normSq_apply]
+  simp only [Complex.sub_re, Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.ofReal_im, Complex.I_re,
+    Complex.I_im, Complex.sub_im, Complex.add_im, Complex.mul_im]
+  nlinarith [Real.sq_sqrt (show (0 : ℝ) ≤ 3 by norm_num)]
+
+/-- The upper half of the unit disc is the sector between the directions `0` and `π`. -/
+example : (I / 2 : ℂ) ∈ sectorBetween 0 0 0 π 0 1 := by
+  refine ⟨1 / 2, ⟨by norm_num, by norm_num⟩, π / 2, ⟨?_, ?_⟩, ?_⟩
+  · simp; linarith [Real.pi_pos]
+  · simp; linarith [Real.pi_pos]
+  · rw [e_pi_div_two]; push_cast; ring
+
+/-- **Adversary**: the lower half is not. -/
+example : -(I / 2 : ℂ) ∉ sectorBetween 0 0 0 π 0 1 := by
+  rintro ⟨s, hs, φ, hφ, h⟩
+  simp only [zero_mul, zero_div, Real.arcsin_zero, add_zero, mem_Ioo] at hφ
+  have him := congrArg Complex.im h
+  simp only [Complex.neg_im, Complex.div_ofNat_im, Complex.I_im, zero_add, Complex.mul_im, Complex.ofReal_re,
+    im_e, Complex.ofReal_im, re_e, zero_mul, add_zero] at him
+  have := Real.sin_pos_of_pos_of_lt_pi hφ.1 hφ.2
+  nlinarith [hs.1]
+
+/-- The germ after the last is the first, one turn on. -/
+example : (⟨![0, π], ![1, 2]⟩ : BranchGerms 2).nextβ 1 = 2 * π ∧
+    (⟨![0, π], ![1, 2]⟩ : BranchGerms 2).nextβ 0 = π ∧ (⟨![0, π], ![1, 2]⟩ : BranchGerms 2).nextκ 1 = 1 := by
+  simp [BranchGerms.nextβ, BranchGerms.nextκ]
+
+/-- Two opposite rays are sorted. -/
+example : (⟨![0, π], ![0, 0]⟩ : BranchGerms 2).Sorted := by
+  refine ⟨fun i j hij => ?_, fun i => ?_⟩
+  · fin_cases i <;> fin_cases j <;> simp_all [Real.pi_pos]
+  · fin_cases i <;> simp [BranchGerms.nextβ, Real.pi_pos]
+
+/-- A ray and a circle tangent to it at `v` are sorted by curvature: the circle bending left comes second. -/
+example : (⟨![0, 0], ![0, 1]⟩ : BranchGerms 2).Sorted := by
+  refine ⟨fun i j hij => ?_, fun i => ?_⟩
+  · fin_cases i <;> fin_cases j <;> simp_all
+  · fin_cases i <;> simp [BranchGerms.nextβ, BranchGerms.nextκ, Real.pi_pos]
+
+/-- **Adversary**: the same pair in the other order is not sorted. -/
+example : ¬ (⟨![0, 0], ![1, 0]⟩ : BranchGerms 2).Sorted := by
+  intro h
+  have := h.1 0 1 (by decide)
+  norm_num at this
+
+/-- The direction of a germ of curvature `2` at distance `1` is a quarter turn on. -/
+example : germDir 0 2 1 = π / 2 := by simp [germDir]
+
+/-- The circle about `v + i` leaves `v` in direction `0` with curvature `1`. -/
+example : curveGerm 1 I 1 = (0, 1) := by
+  have h0 : toIcoMod Real.two_pi_pos 0 (0 : ℝ) = 0 :=
+    (toIcoMod_eq_self _).mpr ⟨le_rfl, by linarith [Real.pi_pos]⟩
+  simp only [curveGerm, Complex.arg_I, one_mul, sub_self, Complex.norm_I, div_one, h0]
+
+/-- The end points of a segment. -/
+example : (Arc.seg 0 1).ends = {0, 1} := rfl
+
+/-- The germ after the last is the first; the germs' directions at a distance; consecutive directions weakly increase. -/
+example : BranchGerms.next (n := 2) 1 = 0 ∧ BranchGerms.next (n := 2) 0 = 1 ∧
+    ((⟨![0, π], ![0, 0]⟩ : BranchGerms 2).atRadius 1).β 1 = π ∧
+    (⟨![0, π], ![0, 0]⟩ : BranchGerms 2).dir 1 1 = π ∧ (⟨![0, π], ![0, 0]⟩ : BranchGerms 2).Mono := by
+  refine ⟨rfl, rfl, by simp [BranchGerms.atRadius, BranchGerms.dir, germDir],
+    by simp [BranchGerms.dir, germDir], fun i => ?_⟩
+  fin_cases i <;> simp [BranchGerms.nextβ, Real.pi_pos.le]
+  linarith [Real.pi_pos]
+
+/-- **Inhabitant** of `ArcMap.IsSectorChart` with a germ: `halfDisc` at the origin, which lies on its segment. -/
+theorem halfDisc_sectorChart : ∃ r₀ n, ∃ G : BranchGerms n, halfDisc.IsSectorChart G 0 r₀ ∧ 0 < n := by
+  obtain ⟨r₀, n, G, hC⟩ := localSectors halfDisc (show (0 : ℂ) ∈ halfDisc.dom by
+    show (0 : ℂ) ∈ ball 0 (1 / 3); simp)
+  refine ⟨r₀, n, G, hC, hC.mem_Γ.mp ⟨by show (0 : ℂ) ∈ ball 0 (1 / 3); simp, ?_⟩⟩
+  rw [halfDisc_arcs_union]
+  exact mem_segment_of_im_eq_zero (by simp) (by simp)
+
+end LocalSectors
 
 end HadwigerNelson.Plane

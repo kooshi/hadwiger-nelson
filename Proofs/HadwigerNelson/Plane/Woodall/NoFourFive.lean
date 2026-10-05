@@ -128,18 +128,18 @@ theorem exists_Ioo_avoiding (K : Finset ℝ) (hK : K.card ≤ 5) :
 
 -- `mem_coneAt_annSector` moved to `Plane/Woodall/Basic` (FS131-IWc: the inhabitants' cone of a sector reads it).
 
-/-- The frame distance formula: the squared distance from `framePt v β x (κ x²/2)` to the point `v + ρ e(β + σπ/2 + τ)`. -/
-theorem norm_sq_framePt_sub {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) (v : ℂ) (β κ ρ τ x : ℝ) :
-    ‖framePt v β x (κ * x ^ 2 / 2) - (v + (ρ : ℂ) * e (β + σ * (π / 2) + τ))‖ ^ 2 =
+/-- The frame distance formula: the squared distance from `fromFrame v β x (κ x²/2)` to the point `v + ρ e(β + σπ/2 + τ)`. -/
+theorem norm_sq_fromFrame_sub {σ : ℝ} (hσ : σ = 1 ∨ σ = -1) (v : ℂ) (β κ ρ τ x : ℝ) :
+    ‖fromFrame v β x (κ * x ^ 2 / 2) - (v + (ρ : ℂ) * e (β + σ * (π / 2) + τ))‖ ^ 2 =
       x ^ 2 * (1 - σ * κ * ρ * Real.cos τ) + 2 * σ * ρ * Real.sin τ * x + κ ^ 2 * x ^ 4 / 4 + ρ ^ 2 := by
   have hc : Real.cos (σ * (π / 2) + τ) = -σ * Real.sin τ ∧ Real.sin (σ * (π / 2) + τ) = σ * Real.cos τ := by
     rcases hσ with rfl | rfl
     · rw [one_mul, add_comm, Real.cos_add_pi_div_two, Real.sin_add_pi_div_two]; simp
     · rw [neg_one_mul, neg_add_eq_sub, Real.cos_sub_pi_div_two, Real.sin_sub_pi_div_two]
       simp
-  have h : framePt v β x (κ * x ^ 2 / 2) - (v + (ρ : ℂ) * e (β + σ * (π / 2) + τ)) =
+  have h : fromFrame v β x (κ * x ^ 2 / 2) - (v + (ρ : ℂ) * e (β + σ * (π / 2) + τ)) =
       e β * (((x : ℂ) + ((κ * x ^ 2 / 2 : ℝ) : ℂ) * I) - (ρ : ℂ) * e (σ * (π / 2) + τ)) := by
-    rw [framePt, add_assoc β, e_add β]; ring
+    rw [fromFrame, add_assoc β, e_add β]; ring
   rw [h, norm_mul, norm_e, one_mul, Complex.sq_norm, Complex.normSq_apply, e_eq, hc.1, hc.2]
   simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
     Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
@@ -152,13 +152,13 @@ points `v + (x + (κx²/2) i) e(β)`, `0 < x < r`, of the parabola tangent to `e
 `z` of the collar has `v` on one side (inside it for inner `z`) and the parabola's point at a fixed small `x` on the other, and the parabola's arc
 is connected. -/
 theorem collarAt_shadow_of_parabola {S : Set ℂ} {v : ℂ} {β κ σ r : ℝ} (hσ : σ = 1 ∨ σ = -1) (hr : 0 < r)
-    (hS : ∀ x ∈ Ioo 0 r, framePt v β x (κ * x ^ 2 / 2) ∈ S) :
+    (hS : ∀ x ∈ Ioo 0 r, fromFrame v β x (κ * x ^ 2 / 2) ∈ S) :
     (σ * κ < 1 → CollarAt (shadow S) v .inner (β + σ * (π / 2))) ∧
       (1 < σ * κ → CollarAt (shadow S) v .outer (β + σ * (π / 2))) := by
-  set w : ℝ → ℂ := fun x => framePt v β x (κ * x ^ 2 / 2) with hw
+  set w : ℝ → ℂ := fun x => fromFrame v β x (κ * x ^ 2 / 2) with hw
   set Q : ℝ → ℝ → ℝ → ℝ := fun ρ τ x =>
     x ^ 2 * (1 - σ * κ * ρ * Real.cos τ) + 2 * σ * ρ * Real.sin τ * x + κ ^ 2 * x ^ 4 / 4 + ρ ^ 2 with hQ
-  have hwc : Continuous w := by simp only [hw, framePt]; fun_prop
+  have hwc : Continuous w := by simp only [hw, fromFrame]; fun_prop
   have hQc : ∀ ρ τ, Continuous (Q ρ τ) := fun ρ τ => by simp only [hQ]; fun_prop
   have hQcp : ∀ x, Continuous (fun p : ℝ × ℝ => Q p.1 p.2 x) := fun x => by simp only [hQ]; fun_prop
   have hQ0 : ∀ ρ τ, Q ρ τ 0 = ρ ^ 2 := by intro ρ τ; simp [hQ]
@@ -172,7 +172,7 @@ theorem collarAt_shadow_of_parabola {S : Set ℂ} {v : ℂ} {β κ σ r : ℝ} (
   have hdist : ∀ ρ τ x : ℝ, dist (v + (ρ : ℂ) * e (β + σ * (π / 2) + τ)) (w x) ^ 2 = Q ρ τ x := by
     intro ρ τ x
     rw [dist_eq_norm, ← norm_neg, neg_sub]
-    exact norm_sq_framePt_sub hσ v β κ ρ τ x
+    exact norm_sq_fromFrame_sub hσ v β κ ρ τ x
   -- small parameters on the arc
   have hsmall_lt : ∀ ρ τ x₀ : ℝ, 0 < x₀ → ρ ^ 2 < 1 → ∃ x₁ ∈ Ioc 0 x₀, Q ρ τ x₁ < 1 := by
     intro ρ τ x₀ hx₀ hρ
@@ -423,18 +423,18 @@ theorem finite_roots_quartic (a0 a1 a2 a3 a4 : ℝ) (h : a1 ≠ 0 ∨ a2 ≠ 0 �
   linarith
 
 
-theorem framePt_re (v : ℂ) (β x y : ℝ) : (framePt v β x y).re = v.re + x * Real.cos β - y * Real.sin β := by
-  simp [framePt, e_eq, Complex.mul_re, Complex.mul_im, -Complex.ofReal_cos, -Complex.ofReal_sin]
+theorem fromFrame_re (v : ℂ) (β x y : ℝ) : (fromFrame v β x y).re = v.re + x * Real.cos β - y * Real.sin β := by
+  simp [fromFrame, e_eq, Complex.mul_re, Complex.mul_im, -Complex.ofReal_cos, -Complex.ofReal_sin]
   ring
 
-theorem framePt_im (v : ℂ) (β x y : ℝ) : (framePt v β x y).im = v.im + x * Real.sin β + y * Real.cos β := by
-  simp [framePt, e_eq, Complex.mul_re, Complex.mul_im, -Complex.ofReal_cos, -Complex.ofReal_sin]
+theorem fromFrame_im (v : ℂ) (β x y : ℝ) : (fromFrame v β x y).im = v.im + x * Real.sin β + y * Real.cos β := by
+  simp [fromFrame, e_eq, Complex.mul_re, Complex.mul_im, -Complex.ofReal_cos, -Complex.ofReal_sin]
   ring
 
 /-- **A nondegenerate arc meets the parabola of curvature `1/2` tangent to `e β` at `v` in finitely many points**: the parabola lies on no
 circle and no line. -/
 theorem Arc.finite_inter_parabola (a : Arc) (ha : a.Nondegenerate) (v : ℂ) (β : ℝ) :
-    {x : ℝ | framePt v β x ((1 / 2 : ℝ) * x ^ 2 / 2) ∈ a.carrier}.Finite := by
+    {x : ℝ | fromFrame v β x ((1 / 2 : ℝ) * x ^ 2 / 2) ∈ a.carrier}.Finite := by
   have hg : Real.cos β ^ 2 + Real.sin β ^ 2 = 1 := by rw [add_comm]; exact Real.sin_sq_add_cos_sq β
   cases a with
   | seg p q =>
@@ -463,8 +463,8 @@ theorem Arc.finite_inter_parabola (a : Arc) (ha : a.Nondegenerate) (v : ℂ) (β
       obtain ⟨s, t, hs, ht, hst, hz⟩ := hx
       have hre := congrArg Complex.re hz
       have him := congrArg Complex.im hz
-      rw [framePt_re] at hre
-      rw [framePt_im] at him
+      rw [fromFrame_re] at hre
+      rw [fromFrame_im] at him
       simp [Complex.add_re, Complex.add_im] at hre him
       have hw1' : w1 = q.re - p.re := by rw [hw1]; simp
       have hw2' : w2 = q.im - p.im := by rw [hw2]; simp
@@ -482,9 +482,9 @@ theorem Arc.finite_inter_parabola (a : Arc) (ha : a.Nondegenerate) (v : ℂ) (β
     intro x hx
     simp only [Arc.carrier, mem_setOf_eq] at hx ⊢
     obtain ⟨θ, -, hz⟩ := hx
-    have hn : ‖framePt v β x ((1 / 2 : ℝ) * x ^ 2 / 2) - c‖ ^ 2 = ρ ^ 2 := by
+    have hn : ‖fromFrame v β x ((1 / 2 : ℝ) * x ^ 2 / 2) - c‖ ^ 2 = ρ ^ 2 := by
       rw [← hz, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hρ]
-    rw [Complex.sq_norm, Complex.normSq_apply, Complex.sub_re, Complex.sub_im, framePt_re, framePt_im] at hn
+    rw [Complex.sq_norm, Complex.normSq_apply, Complex.sub_re, Complex.sub_im, fromFrame_re, fromFrame_im] at hn
     linear_combination hn - (x ^ 2 + x ^ 4 / 16) * hg
 
 namespace ArcMap
@@ -1134,14 +1134,14 @@ sector `i` or of the sector before. -/
 theorem SectorsAt.exists_parabola_region (hP : F.IsPlaneMap) {v : ℂ} {n : ℕ} {d : Fin (n + 1) → ℝ} {c : Fin n → Fin k}
     (h : F.SectorsAt v n d c) (hn : 2 ≤ n) (hpos : ∀ j : Fin n, 0 < d j.succ - d j.castSucc) (i : Fin n) :
     ∃ r > 0, ∃ j : Fin k, (j = c ((finRotate n).symm i) ∨ j = c i) ∧
-      ∀ x ∈ Ioo 0 r, framePt v (d i.castSucc) x ((1 / 2 : ℝ) * x ^ 2 / 2) ∈ F.region j := by
+      ∀ x ∈ Ioo 0 r, fromFrame v (d i.castSucc) x ((1 / 2 : ℝ) * x ^ 2 / 2) ∈ F.region j := by
   have _ := hn
   set β := d i.castSucc with hβ
-  set w : ℝ → ℂ := fun x => framePt v β x ((1 / 2 : ℝ) * x ^ 2 / 2) with hw
-  have hwc : Continuous w := by simp only [hw, framePt]; fun_prop
-  have hw0 : w 0 = v := by simp [hw, framePt]
+  set w : ℝ → ℂ := fun x => fromFrame v β x ((1 / 2 : ℝ) * x ^ 2 / 2) with hw
+  have hwc : Continuous w := by simp only [hw, fromFrame]; fun_prop
+  have hw0 : w 0 = v := by simp [hw, fromFrame]
   have hwv : ∀ x : ℝ, w x - v = (x : ℂ) * (1 + ((x / 4 : ℝ) : ℂ) * I) * e β := by
-    intro x; simp only [hw, framePt]; push_cast; ring
+    intro x; simp only [hw, fromFrame]; push_cast; ring
   -- (a)-(c): small parameters give interior points
   obtain ⟨t, ht, hfin⟩ := F.locallyFinite v (by rw [hP]; trivial)
   set Z : Set ℝ := ⋃ a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ t).Nonempty}, {x | w x ∈ a.carrier} with hZ

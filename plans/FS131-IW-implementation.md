@@ -568,3 +568,48 @@ definition or statement changes); `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axi
 `scripts/vacuity-baseline.txt`, this record, `tools/fs131_wl_*.py`, `data/fs131/wl/`, my report; `main` by fast-forward only. **What I may not**: any
 statement or definition of the Woodall modules or of wave 4, any new `axiom`, any `native_decide`; `CLAUDE.md`, `LEAN.md`, `tools/claude_md_fact_audit.py`
 (drafts only); nothing with a `sorry` reaches `main`; no force-push.
+
+## Stage 19 — SAVED (FS131-WL1): `main` merged (wave 4 landed); `framePt → fromFrame`; the identical copies deleted
+
+**The merge**: `origin/main` at `a573a140` into `fs131-ww` at `22eaa004`. A criss-cross merge: two merge bases, `f01c964d` (main, before
+the skeleton) and `f620977c` (FS131-K4c's report, the wave-4 skeleton both sides carry); none of this branch's own commits touches a wave-4
+file, so every wave-4 module took `main`'s proved text cleanly. **Two conflicts, both resolved both-sides-kept**: `ARCHITECTURE.md` (the
+`Plane/LocalStructure` row: `main`'s, a superset; the wave-4 rows: `main`'s, then this branch's five `Plane/Woodall/` rows) and
+`scripts/Axioms.lean` (this branch's wave-4 skeleton sections dropped — `main` holds wave 4's records in its own sections, with G4's
+deletions — and this branch's eight Woodall sections kept in place; `main`'s wave-2 and wave-4 sections kept).
+
+**The rename** (item 318's correction (1)): `framePt` occurs in one Woodall file, `Woodall/NoFourFive` (23 lines), renamed to `fromFrame`
+with the three names built on it — `norm_sq_framePt_sub → norm_sq_fromFrame_sub`, `framePt_re → fromFrame_re`, `framePt_im → fromFrame_im`
+(as wave 4 renamed `frameX_framePt → frameX_fromFrame`), and their three records. No `framePt` is left in `Plane/Woodall/` or in a Woodall
+record (`grep`: 0); `Plane/Slack`, the only other `framePt`, is not in `Woodall/Steps`' import closure (25 modules, computed from the
+`import` lines), so no Woodall name could have resolved to it.
+
+**The identical copies** (`tools/fs131_qa1_dupes.py`, `data/fs131/wl/qa1-dupes.txt`: four names declared both in `ww`'s and in `w4`'s own
+files, as items 181 and 190 listed; `tools/fs131_i4_treedupes.py` on the merged tree: those four plus `main`'s three standing textual repeats,
+`conj_e`, `bindings`, `with`, which `--rev origin/main` also reports). Each `ww` copy is the same statement up to binder names:
+`abs_dot_le` (verbatim) and `dot_add_left`, `dot_e_e`, `isOpen_shadow` (binders renamed: `(a b c)`/`(d d' u)`, `(a b)`/`(α β)`, `{U}`/`{O}`;
+no Woodall caller passes a named argument). **Deleted** from `Woodall/Collar`, with their four records; `Woodall/Collar` now imports
+`Plane/ValidMap/Cone` (for `abs_dot_le`; the other three come through `Plane/SVMap`, which it already imported). After the deletions
+`fs131_i4_treedupes.py` reports exactly `main`'s three. No copy collided and differed.
+
+**Statements, three-way** (`tools/fs131_i4_mergestmts.py HEAD origin/main`, `data/fs131/wl/mergestmts.txt`): FAIL, 21 — but it takes one
+merge base (`f01c964d`) of two, so every wave-4 statement the skeleton changed and wave 4 changed again reads CONFLICT and every skeleton
+declaration G4 deleted (`bend_away`, `exists_merge`, `n3_end`'s skeleton form, …) reads MISMATCH. **New tool `tools/fs131_wl_mergestmts.py`**
+(imports FS131-I4n's check, never copies it): the virtual base `merge3(05cb0a3e, f01c964d, f620977c)` per name, as git's own merge does,
+and `--rename framePt=fromFrame` applied to `ours`. Result (`data/fs131/wl/mergestmts-virtual-renamed.txt`): **6,319 names, 0 base
+conflicts, 3 conflicts — `dot_add_left`, `dot_e_e`, `isOpen_shadow`, the three alpha-equivalent copies above** (each side added the name
+with its own binder names; the merged tree holds `main`'s). Without the rename (`mergestmts-virtual.txt`): 12, the 9 more being exactly the
+rename's six statements and three names. **Control**: `--plant` alters one merged statement `main` changed (`AeColouring.exists_fill`) and
+the tool reports it, exit 1 (`data/fs131/wl/mergestmts-plant.txt`). So no statement changed in the merge beyond the rename and the three
+binder renamings.
+
+**Records**: `tools/fs131_w3_decls.py --check` 219 theorems, 219 records, 0 missing, 0 stale (223 − the 4 deleted); the frozen
+`fs131_w2_decls.py --check` 147/147, `fs131_w_decls.py --check` 96, 0 missing; `fs131_k4_decls.py --check` 495 names, 0 missing.
+`ARCHITECTURE.md`: `Woodall/Collar`'s imports cell gains `Plane/ValidMap/Cone`; `tools/check_architecture.py` PASS (`data/fs131/wl/arch.txt`).
+
+**The build of the merged tree**: OK — 451 of 451 batches, 33 modules rebuilt (wave 2's and wave 4's modules from `main` and the five Woodall
+modules), **0 modules with warnings**, 13 m 56 s, exit 0 (`build/gate/build/20261005T032705Z-967400.log`, 0 `warning:` lines; driver log
+`data/fs131/wl/build1.log`).
+
+**The model, drafted** (stage 20 places it): `data/fs131/wl/scratch/Model.lean` elaborates against the merged oleans, `sevenBrickMap_woodallModel`
+on the standard three by the iteration print (`data/fs131/wl/run.sh`; a planted `1 = 2` is reported, so the runner reports errors).

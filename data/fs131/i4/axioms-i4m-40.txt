@@ -1,0 +1,8 @@
+'HadwigerNelson.Plane.cos_int_mul_third_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.cos_int_mul_third_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_opposite_cos_third' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sq_norm_e_add_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.e_add_third_add_e_sub_third' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.germ_rotate_third' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.straddlers_third' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.nb4p' depends on axioms: [propext, Classical.choice, Quot.sound]

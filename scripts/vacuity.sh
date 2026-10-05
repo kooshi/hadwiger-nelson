@@ -60,7 +60,7 @@ kept() { echo "    full output: ${GATE_LOG#"${REPO}"/}"; }
 # 2026-09-09 this gate's controls could not be run at all — `scripts/Vacuity.lean`'s header says
 # how — so they are now a flag rather than a memory.
 #
-# Twenty planted declarations, in `scripts/vacuity-controls.lean`, spliced into a COPY of the audit
+# The planted declarations, in `scripts/vacuity-controls.lean`, spliced into a COPY of the audit
 # (never the file itself, which must stay editable while a run is in flight).
 # ---------------------------------------------------------------------------------------------
 if [[ "${1:-}" == "--self-test" ]]; then
@@ -81,10 +81,12 @@ if [[ "${1:-}" == "--self-test" ]]; then
   grep -E '^=== (SCANNED|TOTALS) ===' <<< "${OUT}" | sed 's/^/    control run: /'
 
   fails=0
+  ran=0
   # Here-strings, never `echo | grep -q`: under `pipefail` a `grep -q` that stops at its first match
   # SIGPIPEs the writer once the text outgrows the pipe buffer, and a control that fired reads as
   # absent (`axioms.sh` found this at M26). The per-site rows made this output large enough to hit it.
   expect() {  # expect <verdict> <declaration> <what it proves>
+    ran=$((ran+1))
     if grep -qE "^$1 HadwigerNelson\.$2\$" <<< "${OUT}"; then
       echo "    ok    $1 $2 — $3"
     else
@@ -95,6 +97,7 @@ if [[ "${1:-}" == "--self-test" ]]; then
   }
   # `GENERIC` is never in the FLAGGED list (nobody can discharge it), so it is read from the SITE rows.
   expect_site() {  # expect_site <verdict> <declaration> <what it proves>
+    ran=$((ran+1))
     if grep -qE "^SITE $1 HadwigerNelson\.$2 ::" <<< "${OUT}"; then
       echo "    ok    SITE $1 $2 — $3"
     else
@@ -106,6 +109,7 @@ if [[ "${1:-}" == "--self-test" ]]; then
   # Any verdict row counts, the per-site `SITE` rows included: a planted refutation that produced even
   # a `GENERIC` row has been audited against the emptiness it proves.
   silent() {  # silent <declaration> <what it proves>
+    ran=$((ran+1))
     if grep -qE "^(SITE )?[A-Z]+ HadwigerNelson\.$1( |\$)" <<< "${OUT}"; then
       echo "    FAIL  $1 produced a row and must produce none — $2"
       grep -E "^(SITE )?[A-Z]+ HadwigerNelson\.$1( |\$)" <<< "${OUT}" | sed 's/^/            got: /'
@@ -115,7 +119,7 @@ if [[ "${1:-}" == "--self-test" ]]; then
     fi
   }
 
-  echo "==> vacuity self-test: twenty planted defects, each watched to fire"
+  echo "==> vacuity self-test: the planted controls, each watched to fire (the count is printed at the end)"
   expect VACUOUS planted_vacuous_coloring "the core9_plane shape: a colouring type the library proves empty"
   expect VACUOUS planted_vacuous_prop     "a tracked Prop hypothesis the library refutes"
   expect VACUOUS planted_vacuous_forces   "a Forces hypothesis refuted by a theorem in the same run"
@@ -147,15 +151,33 @@ if [[ "${1:-}" == "--self-test" ]]; then
   expect VACUOUS planted_vacuous_hub      "IsHub at r(90°) = i: no change point there"
   expect_site GENERIC planted_generic_hub "IsHub at a variable map: parametric"
   expect UNKNOWN planted_unknown_hub      "IsHub at a sixFrag instance nothing decides: the load-bearing half"
+  expect VACUOUS planted_vacuous_cp       "CPColouring 1: emptiness by an instance, the adversary (wave 2, FS131-I2n)"
+  expect_site GENERIC planted_generic_cp  "CPColouring k at a variable k: parametric"
+  expect UNKNOWN planted_unknown_cp       "CPColouring at a k nothing refutes: the load-bearing half"
+  expect VACUOUS planted_vacuous_semiconcave "SemiconcaveWith at the lower unit arc, which not_semiconcaveWith_one_lowerArc refutes"
+  expect_site GENERIC planted_generic_semiconcave "SemiconcaveWith at variable arguments: parametric"
+  expect UNKNOWN planted_unknown_semiconcave "SemiconcaveWith at a concrete instance nothing decides: the load-bearing half"
+  expect VACUOUS planted_vacuous_horn     "IsHorn at i, which bowtie_not_isHorn_I_axis refutes (wave 4, FS131-G4)"
+  expect_site GENERIC planted_generic_horn "IsHorn at a variable map: parametric"
+  expect UNKNOWN planted_unknown_horn     "IsHorn at -i, which no closed theorem refutes: the load-bearing half"
+  expect VACUOUS planted_vacuous_stuck    "IsStuck at i, which bowtie_not_isStuck_I refutes"
+  expect_site GENERIC planted_generic_stuck "IsStuck at a variable map: parametric"
+  expect UNKNOWN planted_unknown_stuck    "IsStuck at -i, which no closed theorem refutes: the load-bearing half"
+  expect VACUOUS planted_vacuous_condition5 "Condition5 at unitArcPlane, which unitArcPlane_not_condition5 refutes"
+  expect_site GENERIC planted_generic_condition5 "Condition5 at a variable map: parametric"
+  expect UNKNOWN planted_unknown_condition5 "Condition5 at segPlane, true but proved nowhere: the load-bearing half"
+  expect VACUOUS planted_vacuous_aeRegions "AeProperRegions 1: emptiness by an instance, the adversary"
+  expect_site GENERIC planted_generic_aeRegions "AeProperRegions k at a variable k: parametric"
+  expect UNKNOWN planted_unknown_aeRegions "AeProperRegions at a k nothing refutes: the load-bearing half"
   silent planted_arrow_false              "a genuine refutation P → False over the empty carrier stays skipped"
 
   if [[ "${fails}" -gt 0 ]]; then
-    echo "==> vacuity self-test: FAIL — ${fails} control(s) did not behave as designed."
+    echo "==> vacuity self-test: FAIL — ${fails} of ${ran} control(s) did not behave as designed."
     echo "    The gate cannot be trusted until every one of these fires. Do not baseline around it."
     kept
     exit 1
   fi
-  echo "==> vacuity self-test: OK — every control fired, and the silent ones stayed silent."
+  echo "==> vacuity self-test: OK — all ${ran} controls behaved: every one fired, and the silent ones stayed silent."
   kept
   exit 0
 fi

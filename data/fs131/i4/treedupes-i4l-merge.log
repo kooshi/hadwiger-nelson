@@ -1,0 +1,27 @@
+REPEAT HadwigerNelson.Plane.conj_e Proofs/HadwigerNelson/Plane/Chord.lean:276 | Proofs/HadwigerNelson/Plane/SixFragment.lean:342
+REPEAT HadwigerNelson.bindings Proofs/HadwigerNelson/Instances/DeGrey/Narrow1420.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow1423.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow630.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow633.lean:1395
+REPEAT HadwigerNelson.with Proofs/HadwigerNelson/Additive.lean:70 | Proofs/HadwigerNelson/Motion.lean:442
+1743 files, 7529 declarations, 7524 names, 3 repeated
+exit=1
+== --rev 68f34f18
+REPEAT HadwigerNelson.Plane.conj_e Proofs/HadwigerNelson/Plane/Chord.lean:276 | Proofs/HadwigerNelson/Plane/SixFragment.lean:342
+REPEAT HadwigerNelson.bindings Proofs/HadwigerNelson/Instances/DeGrey/Narrow1420.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow1423.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow630.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow633.lean:1395
+REPEAT HadwigerNelson.with Proofs/HadwigerNelson/Additive.lean:70 | Proofs/HadwigerNelson/Motion.lean:442
+1743 files, 7296 declarations, 7291 names, 3 repeated
+== --rev d391f480
+REPEAT HadwigerNelson.Plane.conj_e Proofs/HadwigerNelson/Plane/Chord.lean:276 | Proofs/HadwigerNelson/Plane/SixFragment.lean:342
+REPEAT HadwigerNelson.bindings Proofs/HadwigerNelson/Instances/DeGrey/Narrow1420.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow1423.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow630.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow633.lean:1395
+REPEAT HadwigerNelson.with Proofs/HadwigerNelson/Additive.lean:70 | Proofs/HadwigerNelson/Motion.lean:442
+1743 files, 7378 declarations, 7373 names, 3 repeated
+== --rev f975677b
+REPEAT HadwigerNelson.Plane.conj_e Proofs/HadwigerNelson/Plane/Chord.lean:276 | Proofs/HadwigerNelson/Plane/SixFragment.lean:342
+REPEAT HadwigerNelson.bindings Proofs/HadwigerNelson/Instances/DeGrey/Narrow1420.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow1423.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow630.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow633.lean:1395
+REPEAT HadwigerNelson.with Proofs/HadwigerNelson/Additive.lean:70 | Proofs/HadwigerNelson/Motion.lean:442
+1743 files, 7447 declarations, 7442 names, 3 repeated
+== --plant
+REPEAT HadwigerNelson.Plane.ArcMap.pair_i Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:966 | PLANTED.lean:3
+REPEAT HadwigerNelson.Plane.conj_e Proofs/HadwigerNelson/Plane/Chord.lean:276 | Proofs/HadwigerNelson/Plane/SixFragment.lean:342
+REPEAT HadwigerNelson.bindings Proofs/HadwigerNelson/Instances/DeGrey/Narrow1420.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow1423.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow630.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow633.lean:1395
+REPEAT HadwigerNelson.with Proofs/HadwigerNelson/Additive.lean:70 | Proofs/HadwigerNelson/Motion.lean:442
+1744 files, 7530 declarations, 7524 names, 4 repeated
+plant exit=1

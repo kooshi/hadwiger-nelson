@@ -1,0 +1,11 @@
+'HadwigerNelson.Plane.lebesgue_covering_square' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.lemmaL' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_double_unit_circle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.AeProperRegions.exists_three_le_multicolour' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.AeProperRegions.exists_three_le_multicolour_lt_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ts_t' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ts_t_trichromatic' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

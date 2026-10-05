@@ -1,0 +1,41 @@
+== control 1: rename woodallCone_strict in Cone (inside the second move's range)
+1
+ok: source lines 26-1056 (1031 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1716-1718 (3 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1373-1386 (14 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 2627-2632 (6 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1058-1372 (315 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+FAIL: source lines 1388-1715 are not found verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1720-2592 (873 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+FAIL: Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean differs from the text regenerated from d4f946ae
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean is d4f946ae's minus exactly the moved ranges (and their trailing blank lines) plus `import Proofs.HadwigerNelson.Plane.ValidMap.Cone` and the reopening of `namespace ArcMap` before source line 2594
+FAIL: 2 check(s) failed
+exit=1
+wrote Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean (2607 lines) and Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean
+restored, check exit=0
+== control 2: drop the reopened 'namespace ArcMap' line from Contact
+ok: source lines 26-1056 (1031 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1716-1718 (3 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1373-1386 (14 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 2627-2632 (6 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1058-1372 (315 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1388-1715 (328 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1720-2592 (873 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+FAIL: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean differs from d4f946ae's minus the moved ranges plus the import
+FAIL: 1 check(s) failed
+exit=1
+wrote Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean (2607 lines) and Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean
+restored, check exit=0
+== control 3: a hole moved off its first-move range (HOLES[1] = (1716, 1717)) in a copy of the tool
+FAIL: hole 1716-1717 is not a first-move range inside the second move's range
+ok: source lines 26-1056 (1031 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1716-1718 (3 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1373-1386 (14 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 2627-2632 (6 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1058-1372 (315 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1388-1715 (328 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1719-2592 (874 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+FAIL: Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean differs from the text regenerated from d4f946ae
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean is d4f946ae's minus exactly the moved ranges (and their trailing blank lines) plus `import Proofs.HadwigerNelson.Plane.ValidMap.Cone` and the reopening of `namespace ArcMap` before source line 2594
+FAIL: 2 check(s) failed
+exit=1

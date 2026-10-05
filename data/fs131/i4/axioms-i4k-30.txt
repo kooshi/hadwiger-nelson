@@ -1,0 +1,17 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 10
+'HadwigerNelson.Plane.localSectors_disj' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.localSectors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.mem_closure_sector_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.fin3_adj' does not depend on any axioms
+'HadwigerNelson.Plane.sq_dist_branchPt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.germ_circle_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.germ_eq_of_two_on_circle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.branchPt_two_sin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsCubicTrichromatic.chart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_ball_branch' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_branch_on_circle_of_not_stripHolds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.fail_leavingCentre' depends on axioms: [propext, Classical.choice, Quot.sound]
