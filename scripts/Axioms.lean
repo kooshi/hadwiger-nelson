@@ -3285,6 +3285,12 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.horn_bounds_of_noMerge
 #print axioms HadwigerNelson.Plane.ArcMap.n3_end_of_not_inType
 
+/-! ## FS-131 wave 5 (job FS131-I5e) — wave 5's fifth implementer: `cor3` moved upstream (`Plane/ValidMap/Cor3`), its local form, `|c′| ≤ 2` -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.cor3_local
+#print axioms HadwigerNelson.Plane.ArcMap.GermPseudo.mem_pseudoColours
+#print axioms HadwigerNelson.Plane.ArcMap.pseudo_ncard_le_two_of_baseHyp
+
 /-! ## FS-131 wave 5 (job FS131-I5b) — wave 5's second implementer: Lemma 1's children, the holed fragment -/
 
 #print axioms HadwigerNelson.Thomassen.LocallyHamiltonian.exists_two_common

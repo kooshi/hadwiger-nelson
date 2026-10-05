@@ -85,6 +85,19 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
 Wired by FS131-I5d (over a `sorry` child): `n3_end` (FS112-N3-END, moved to wave 5 by item 289) — its second disjunct proved; its first case is the new
 child `n3_end_of_not_inType` (NB3-END items 2–5).
 
+### FS131-I5e (wave 5's fifth implementer)
+
+*Kernel-checked on the build of stage 21 (`data/fs131/i5e/build-stage21.log`; `build/gate/build/20261005T020618Z-432319.log`); axioms read from that build's
+oleans (`data/fs131/i5e/I5eAxioms21.lean`, output `I5eAxioms21.out`; its controls: `cor3_local` reads `sorryAx`, `linkage_dot_ne_zero` the standard three).*
+
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
+- `HadwigerNelson.Plane.ArcMap.GermPseudo.mem_pseudoColours` (`Plane/ValidMap/HexRing`) — a germ's pseudo-colour is a pseudo-colour of its point.
+
+Wired by FS131-I5e (over the new `sorry` child `cor3_local`, `Plane/ValidMap/Cor3`; axioms `[propext, sorryAx, Classical.choice, Quot.sound]`): `cor3`
+(FS112-N3-COR3; moved verbatim to `Plane/ValidMap/Cor3` at stage 20), `pseudo_ncard_le_two_of_baseHyp` (`HexRing`), `BaseCtx.pseudo_ncard_le_two`
+(`BaseWalk`, NB3 step 5), `rot_noThird` (`HexRing`, N2-ROT's "no `r`-tile at `x`"). Held, not proved: `n3_end_of_not_inType` (a GAP in NB3-END item 2,
+stage 20; to Ephodos).
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -872,3 +885,56 @@ Wave 4's analogue of this step (`sector_shadow_S`, `flank_shadow_g_chart`) assum
 **33** (`Terminal` 9, `Dense` 1, `Cor3` 1, `HexRing` 7, `MapGraph` 3, `BaseWalk` 8, `BaseDense` 4), **26 this lane's** — unchanged by the move.
 
 ## Stage 20 — SAVED
+
+## Stage 21 — SAVED: `cor3_local` stated (ruling 218 (b)); `cor3`, `pseudo_ncard_le_two` and `rot_noThird` proved over it
+
+- **`cor3_local`** (`Plane/ValidMap/Cor3`, new, `sorry`; ruling 218 (b): "`cor3_local`, reading small discs only"; ruling 299 (c)). Its statement is
+  `cor3`'s, with `Covers u 1`, `Covers u′ 1` replaced by `u ∈ F.dom`, `u′ ∈ F.dom` and `∀ q, dist q u = 1 → dist q u′ = 1 → q ∈ F.dom` (the domain is
+  open, so each gives a small disc). Why these: N3-COR3's argument (`plans/FS112-NB3-verification.md` l. 120–135) reads the strips at the two
+  crossings `w₀, w₀′` (NB3-FAIL; in Lean `fail_leavingCentre` and `fail_colours` use their `Covers u 1` only for `u ∈ F.dom`, by reading their
+  proofs), the arcs of `ω(w)` ending at `u`, `u′` (inside the charts at `u`, `u′`), and N112-U1 at `w` (`ringArc_cone_outer`, no covering hypothesis).
+  The reading that nothing else is read is mine (one mind) and is what `cor3_local`'s eventual proof must confirm; if it needs a larger disc, the
+  statement comes back through Keryx. `cor3` keeps its statement and is now **proved over `cor3_local`** (its covers give all three hypotheses), so
+  the row's open part is the one leaf `cor3_local`.
+- **`pseudo_ncard_le_two_of_baseHyp`** (`HexRing`, new child, statement new): `|c′| ≤ 2` at a cubic trichromatic `p ∈ B̄(u, 1)` under `Valid`,
+  `Covers u 2`, `BaseHyp u` alone. Three pseudo-colours at `x ∈ ω(p)` are all three colours absent at `p`; a fourth colour would be a point of `F(M)`
+  in `B̄(u, 2)`, so `x` carries exactly those, is cubic trichromatic (`isCubicTrichromatic_of_three_of_noRep`, H) and complementary to `p` at distance
+  `1`; `cor3_local` (with `p, x ∈ B̄(u, 2) ⊆ dom` and the common unit points within `1` of `p`) gives a four-colour common unit point inside `B̄(u, 2)`,
+  against H. Placed in `HexRing` because `rot_noThird` needs it and `BaseWalk` is downstream.
+- **`BaseCtx.pseudo_ncard_le_two`** (`BaseWalk`, NB3 step 5) — proved: the child at `B.valid`, `B.covers`, `B.hyp` (it reads neither `NoInertNear` nor
+  `UnenclosedC`).
+- **`rot_noThird`** (`HexRing`, N2-ROT's "no `r`-tile at `x`") — proved: the germs' pseudo-colours `p`, `q` are pseudo-colours of `x = r(ψ)`
+  (`GermPseudo.mem_pseudoColours`, new child: colours are closed), and the child bounds them by two. Its docstring ("the proof rests on FS112-N3-COR3")
+  stands. `rot_out` and `rot_in` read `rot_noThird` and are now unblocked; not reached in this job.
+- **`GermPseudo.mem_pseudoColours`** (`HexRing`, new child): a germ's pseudo-colour is a pseudo-colour of its point (the local `hmem` of I5c's
+  `pseudo_ncard_ne_one_of_change`, stated once; that proof is left as it is).
+
+Statements of the leaves read back against plan §§ 3.2, 8.2 and KB's § 3.2: unchanged (`git diff` touches only their bodies). `scripts/Axioms.lean`: a
+block "FS131-I5e" (after I5d's block, above the PURCHASED banner) with the three new records; `ARCHITECTURE.md`: `Cor3`'s and `HexRing`'s rows. New names
+collision-free (`rg` over `Proofs/`: each declared once).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 6 modules rebuilt, 9 with warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T020618Z-432319.log`, "Build completed successfully (5369 jobs)"; driver log `data/fs131/i5e/build-stage21.log`). Wave 5's sorry declarations:
+**31** (`Terminal` 9, `Dense` 1, `Cor3` 1, `HexRing` 6, `MapGraph` 3, `BaseWalk` 7, `BaseDense` 4), **24 this lane's** (from 26: `pseudo_ncard_le_two` and `rot_noThird` closed; `cor3` closed over the new `cor3_local`). Axioms (`data/fs131/i5e/I5eAxioms21.lean` → `I5eAxioms21.out`, read from this build's oleans): `GermPseudo.mem_pseudoColours` on `[propext, Classical.choice, Quot.sound]`; `pseudo_ncard_le_two_of_baseHyp`, `rot_noThird`, `BaseCtx.pseudo_ncard_le_two`, `cor3` on the standard three and `sorryAx` (wired over `cor3_local`, which reads `sorryAx` itself — the control the reader must see fail); `linkage_dot_ne_zero` (a kernel theorem, the clean control) on the standard three.
+
+**What is left in this lane (24), and where it stands** (for wave 5's next implementers):
+- **`Terminal` (9)**: `n3_end_of_not_inType` — **held for an Ephodos re-derivation** (stage 20's GAP at NB3-END item 2; the limit directions are in
+  § 20.2); `cv_class` — its second disjunct ("`g` twice at `E − n`, `h` twice at `E + n`") rests on CVB § 1.4 item 5's separation, whose exclusion of a
+  `c`-sector in the `±a` stack is the same one-line step (told to Keryx; best proved after the re-derivation); `cv_hd_main` (H: CVB § 1.6),
+  `y3_end_needs` (H: YB3 § 3.1), `cv_hd`, `c_double`, `c_ends` (with `stuckAlong_of_run`); the limit constructions `exists_red`, `exists_terminal`.
+- **`HexRing` (6)**: `rot_out`, `rot_in` (unblocked: N2-ROT's table by N-E2 at `σ^{±1}x`, with `rot_noThird` for "no `r`-tile"), `hex_regular`,
+  `bv_hex`, `bv_l3`, `bv_nd`.
+- **`Cor3` (1)**: `cor3_local` (H: N3-COR3; the strips fail at both crossings, the side cones force four colours; children `common_unit_points`).
+- **`BaseWalk` (4 of 7 left)**: `exists_pseudoCircle` (now over `pseudo_ncard_le_two`, proved), `reduce`, `select` (circle-abstract), `l3_base`
+  (rewrite `linkage_dot_ne_zero`'s docstring as `plans/FS131-QA3-audit.md` § 2.4 d drafts it, item 274 (b)). The other three are the planar job's.
+- **`Dense` (1)**: `disc1_local`. **`BaseDense` (3 of 4)**: `row134BaseUA`, `exists_preBend`, `cv_exists`.
+
+**A split for a second wave-5 implementer** (ruling 299 (e)), by file, so the two trees merge in disjoint hunks: one implementer on **`Terminal`**
+(the CV-HD cluster, `c_ends`, `c_double`, the limit constructions — after the re-derivation for `n3_end_of_not_inType` and `cv_class`); the other on
+**`HexRing`, `Cor3`, `BaseWalk`'s four** (the base's ring lemmas: `rot_out`, `rot_in`, `hex_regular`, `bv_*`, `cor3_local`, `reduce`, `select`,
+`exists_pseudoCircle`, `l3_base`). `Terminal` imports none of `HexRing`, `Cor3`, `BaseWalk`; `BaseWalk` reaches `Terminal` through `Dense`, so an edit to `Terminal` rebuilds it, but the files are disjoint. `Dense`'s `disc1_local` and `BaseDense`'s
+three go with the second (they read `HexRing` and the walk). The shared files are `Proofs.lean`, `ARCHITECTURE.md` and `scripts/Axioms.lean` (one block
+per job).
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 21 — SAVED

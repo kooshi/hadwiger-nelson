@@ -210,8 +210,8 @@ theorem BaseCtx.pseudo_nonempty (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ closedBa
 /-- **`|c′| ≤ 2`** on `ω(p)` (FS112-N3-3; NB3 step 5): three pseudo-colours make `x` cubic trichromatic and complementary to `p` at distance
 `1`; `cor3` then puts four colours at the rhombus corners, inside `B̄(u, 2)`, against H. -/
 theorem BaseCtx.pseudo_ncard_le_two (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ closedBall u 1) (hp3 : F.IsCubicTrichromatic p) {x : ℂ}
-    (hx : dist x p = 1) : (F.pseudoColours p x).ncard ≤ 2 := by
-  sorry
+    (hx : dist x p = 1) : (F.pseudoColours p x).ncard ≤ 2 :=
+  pseudo_ncard_le_two_of_baseHyp B.valid B.covers B.hyp hp hp3 hx
 
 /-- **Finitely many non-singleton points** on `ω(p)` (FS112-N3-3; NB3 step 4): local finiteness on the compact `ω(p)`; an arc of `Γ` not on
 `ω(p)` meets it in at most two points; an arc on `ω(p)` is in- or out-contact (a single pseudo-colour along its interior), never inert

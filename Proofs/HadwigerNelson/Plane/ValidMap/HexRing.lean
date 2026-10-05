@@ -173,6 +173,55 @@ theorem isCubicTrichromatic_of_three_of_noRep {x : ℂ} (hx : x ∈ F.dom) (h3 :
   have hmax : max n 1 = 3 := by omega
   exact ⟨hmax ▸ hC.hasDegree, h3⟩
 
+/-! ## Two shared children: a germ's pseudo-colour at its point, and `|c′| ≤ 2` under H -/
+
+/-- **A germ's pseudo-colour is a pseudo-colour of its point** (colours are closed): the germ's points carry `j`, not carried at `u`. -/
+theorem GermPseudo.mem_pseudoColours {u : ℂ} {θ : ℝ} {s : Side} {j : Fin k} (h : F.GermPseudo u θ s j) :
+    j ∈ F.pseudoColours u (ringPt u θ) := by
+  obtain ⟨δ, hδ, hsub⟩ := h
+  have hcl : ringPt u θ ∈ closure (germ u θ s δ) := ringPt_mem_closure_germ u θ s hδ
+  have hz : ∀ z ∈ germ u θ s δ, j ∈ F.pseudoColours u z := fun z hz => by
+    have := hsub hz
+    simp only [mem_setOf_eq] at this
+    rw [this]
+    exact mem_singleton j
+  obtain ⟨z, hz'⟩ : (germ u θ s δ).Nonempty := ⟨_, ⟨δ / 2, ⟨by linarith, by linarith⟩, rfl⟩⟩
+  exact ⟨closure_minimal (fun y hy => (hz y hy).1) isClosed_closure hcl, (hz z hz').2⟩
+
+/-- **`|c′| ≤ 2` under the base's hypothesis** (the step `BaseCtx.pseudo_ncard_le_two` and `rot_noThird` share: FS112-N3-3's `|c′| ≤ 2`, NB3
+step 5; N2-ROT's "no `r`-tile at `x`"): in a valid six-coloured fragment covering `B̄(u, 2)` under H, at a cubic trichromatic `p ∈ B̄(u, 1)`, no
+point `x` of `ω(p)` carries all three colours absent at `p`. It would carry exactly those (a fourth colour is a point of `F(M)` in `B̄(u, 2)`), so be
+cubic trichromatic (no repeated colour, H) and complementary to `p` at distance `1`, and `cor3_local` would put four colours at a common unit point
+of `p` and `x`, within `1` of `p`, inside `B̄(u, 2)`. Six colours are spent. A step inside `row134BaseUA`'s proof (`GENERIC`). -/
+theorem pseudo_ncard_le_two_of_baseHyp {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hH : F.BaseHyp u) {p : ℂ}
+    (hp : p ∈ closedBall u 1) (hp3 : F.IsCubicTrichromatic p) {x : ℂ} (hx : dist x p = 1) :
+    (F.pseudoColours p x).ncard ≤ 2 := by
+  by_contra hlt
+  push Not at hlt
+  have hpu : dist p u ≤ 1 := hp
+  have hxu : x ∈ closedBall u 2 := by rw [mem_closedBall]; linarith [dist_triangle x p u]
+  have hxd : x ∈ F.dom := hc hxu
+  have hpd : p ∈ F.dom := hc (closedBall_subset_closedBall (by norm_num) hp)
+  have hcompl : (F.coloursAt p)ᶜ.ncard = 3 := by
+    rw [Set.ncard_compl, Nat.card_eq_fintype_card, Fintype.card_fin, hp3.2]
+  have hsub : F.pseudoColours p x ⊆ (F.coloursAt p)ᶜ := fun j hj => hj.2
+  have heq : F.pseudoColours p x = (F.coloursAt p)ᶜ := Set.eq_of_subset_of_ncard_le hsub (by omega)
+  have hsubx : (F.coloursAt p)ᶜ ⊆ F.coloursAt x := fun j hj => (heq.symm ▸ hj : j ∈ F.pseudoColours p x).1
+  have h3le : 3 ≤ (F.coloursAt x).ncard := hcompl ▸ Set.ncard_le_ncard hsubx
+  have hx3 : (F.coloursAt x).ncard = 3 := by
+    by_contra hne
+    exact Set.disjoint_left.mp hH hxu (Or.inl ⟨hxd, by omega⟩)
+  have hxeq : (F.coloursAt p)ᶜ = F.coloursAt x := Set.eq_of_subset_of_ncard_le hsubx (by omega)
+  have hdis : Disjoint (F.coloursAt p) (F.coloursAt x) := hxeq ▸ disjoint_compl_right
+  have hxc : F.IsCubicTrichromatic x :=
+    isCubicTrichromatic_of_three_of_noRep hxd hx3 fun hr => Set.disjoint_left.mp hH hxu (Or.inr ⟨hxd, hr⟩)
+  have hcov : ∀ q, dist q p = 1 → q ∈ closedBall u 2 := fun q hq => by
+    rw [mem_closedBall]; linarith [dist_triangle q p u]
+  obtain ⟨qp, qm, -, hq⟩ := cor3_local hF hp3 hxc hpd hxd (fun q hq _ => hc (hcov q hq)) hdis
+    (by rw [dist_comm, hx]; norm_num)
+  obtain ⟨hqp, -, h4, -⟩ := hq qp (by simp)
+  exact Set.disjoint_left.mp hH (hcov qp hqp) (Or.inl ⟨hc (hcov qp hqp), h4⟩)
+
 /-! ## FS112-ROTHEX: FS-110's ring lemmas with unit arcs under the base's hypothesis -/
 
 /-- **FS112-ROTHEX, N2-ROT's "no `r`-tile at `x`"** (FS110-N2-ROT, `plans/FS110-N-proof.md` l. 393; with unit arcs, NB3 § 1.4 N3-BASE step
@@ -185,7 +234,10 @@ statement is a step inside `row134BaseUA`'s proof (`GENERIC`). -/
 theorem rot_noThird {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
     {ψ : ℝ} {p q : Fin 6} (hpq : p ≠ q) (hp : F.GermPseudo u ψ .cw p) (hq : F.GermPseudo u ψ .ccw q) :
     F.pseudoColours u (ringPt u ψ) = {p, q} := by
-  sorry
+  have hsub : ({p, q} : Set (Fin 6)) ⊆ F.pseudoColours u (ringPt u ψ) :=
+    insert_subset hp.mem_pseudoColours (singleton_subset_iff.mpr hq.mem_pseudoColours)
+  have hle := pseudo_ncard_le_two_of_baseHyp hF hc hH (mem_closedBall_self zero_le_one) hu (dist_ringPt u ψ)
+  exact (Set.eq_of_subset_of_ncard_le hsub (by rw [Set.ncard_pair hpq]; exact hle)).symm
 
 /-- **FS112-ROTHEX, N2-ROT's outward row (A+, A−)**: at a change point `x = r(ψ)` (`p` before, `q` after) with `c(σx−) = q` (A+) and
 `c(σ⁻¹x+) = p` (A−), `σ` the rotation by `60°` about `u`, the point `x` carries `p`, `q` and one colour `g` of `P_cl(u)`; `g` fills the
