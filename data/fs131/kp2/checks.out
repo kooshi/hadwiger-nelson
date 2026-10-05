@@ -1,0 +1,145 @@
+@lebesgue_number_lemma_of_metric : ∀ {α : Type u_1} [inst : PseudoMetricSpace α] {s : Set α} {ι : Sort u_2}
+  {c : ι → Set α}, IsCompact s → (∀ (i : ι), IsOpen (c i)) → s ⊆ ⋃ i, c i → ∃ δ > 0, ∀ x ∈ s, ∃ i, Metric.ball x δ ⊆ c i
+@Homeomorph.image_closure : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y]
+  (h : X ≃ₜ Y) (s : Set X), ⇑h '' closure s = closure (⇑h '' s)
+@Real.one_sub_sq_div_two_le_cos : ∀ {x : ℝ}, 1 - x ^ 2 / 2 ≤ Real.cos x
+@IsCompact.exists_thickening_subset_open : ∀ {α : Type u_1} [inst : PseudoEMetricSpace α] {s t : Set α},
+  IsCompact s → IsOpen t → s ⊆ t → ∃ δ, 0 < δ ∧ Metric.thickening δ s ⊆ t
+@Complex.continuousAt_arg : ∀ {x : ℂ}, x ∈ Complex.slitPlane → ContinuousAt Complex.arg x
+@IsPreconnected.constant : ∀ {α : Type u_1} [inst : TopologicalSpace α] {Y : Type u_2} [inst_1 : TopologicalSpace Y]
+  [DiscreteTopology Y] {s : Set α},
+  IsPreconnected s → ∀ {f : α → Y}, ContinuousOn f s → ∀ {x y : α}, x ∈ s → y ∈ s → f x = f y
+@Real.cos_lt_cos_of_nonneg_of_le_pi : ∀ {x y : ℝ}, 0 ≤ x → y ≤ Real.pi → x < y → Real.cos y < Real.cos x
+@continuous_of_continuousOn_iUnion_of_isOpen : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α]
+  [inst_1 : TopologicalSpace β] {f : α → β} {ι : Type u_3} {s : ι → Set α},
+  (∀ (i : ι), ContinuousOn f (s i)) → (∀ (i : ι), IsOpen (s i)) → ⋃ i, s i = Set.univ → Continuous f
+isPreconnected_hornSet : ∀ (v : ℂ) (α : ℝ) {κ₁ κ₂ r : ℝ},
+  κ₁ < κ₂ → |κ₁| * r < 2 → |κ₂| * r < 2 → IsPreconnected (hornSet v α κ₁ κ₂ r)
+sectorBetween_eq_hornSet : ∀ (v : ℂ) (β κ₁ κ₂ r : ℝ),
+  |κ₁| * r ≤ 2 → |κ₂| * r ≤ 2 → sectorBetween v β κ₁ β κ₂ r = hornSet v β κ₁ κ₂ r
+@exists_germDir_ne_of_ne : ∀ {β β' κ κ' : ℝ},
+  ¬(e β = e β' ∧ κ = κ') → ∃ ε > 0, ∀ s ∈ Set.Ioo 0 ε, e (germDir β κ s) ≠ e (germDir β' κ' s)
+Arc.finite_inter_sphere_or_eq_circ : ∀ (a : Arc),
+  a.Nondegenerate → ∀ (p : ℂ), (a.carrier ∩ Metric.sphere p 1).Finite ∨ ∃ θ₀ θ₁, a = Arc.circ p 1 θ₀ θ₁
+@ringArcsWithin_of_Γ_subset : ∀ {k : ℕ} {F F' : ArcMap k},
+  F'.dom = F.dom →
+    ∀ {A' : Set Arc},
+      (∀ a ∈ A', a.Nondegenerate) →
+        (∀ x ∈ F.dom, ∃ t ∈ nhds x, {a | a ∈ A' ∧ (a.carrier ∩ t).Nonempty}.Finite) →
+          (∀ a ∈ A', ¬a.IsUnitArc) → F'.Γ ⊆ F.Γ ∪ ⋃ a ∈ A', a.carrier → F'.RingArcsWithin F
+@IsSectorChart.isSector_iff_of_zero : ∀ {k : ℕ} {F : ArcMap k} {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀ : ℝ},
+  F.IsSectorChart G v r₀ → n = 0 → ∀ {r : ℝ}, r ∈ Set.Ioc 0 r₀ → ∀ {S : Set ℂ}, F.IsSector v r S ↔ S = Metric.ball v r
+eq_polar_frameDir : ∀ (P z : ℂ) (φ : ℝ), z = P + ↑(dist z P) * e (φ + ((z - P) * (starRingEnd ℂ) (e φ)).arg)
+dist_polar_polar_sq : ∀ (P : ℂ) (ρ ρ' b b' : ℝ),
+  dist (P + ↑ρ * e b) (P + ↑ρ' * e b') ^ 2 = ρ ^ 2 + ρ' ^ 2 - 2 * ρ * ρ' * Real.cos (b - b')
+@toward_clear : ∀ {k : ℕ} (F : ArcMap k),
+  F.Valid →
+    ∀ {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k},
+      F.IsRingArc P θ₁ θ₂ c c' →
+        ∀ {r ψ₁ ψ₂ : ℝ},
+          (∀ y ∈ F.region c', r ≤ dist y P) →
+            (∀ φ ∈ Set.Ioo θ₁ θ₂,
+                ∀ (s : ℝ),
+                  0 < s →
+                    s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ) →
+                      Metric.closedBall (P + (1 - ↑s) * e φ) 1 \ ⋃ θ ∈ Set.Icc θ₁ θ₂, Metric.ball (ringPt P θ) 1 ⊆
+                        Metric.ball P r) →
+              (∀ φ ∈ Set.Ioo θ₁ θ₂,
+                  ∀ (s : ℝ),
+                    0 < s →
+                      s ≤ ψ₂ * min (φ - θ₁) (θ₂ - φ) →
+                        ∀ p ∈ Metric.closedBall (ringPt P θ₁) 1 ∩ Metric.closedBall (ringPt P θ₂) 1,
+                          dist p (P + (1 - ↑s) * e φ) < 1) →
+                ∀ {φ s : ℝ},
+                  φ ∈ Set.Ioo θ₁ θ₂ →
+                    0 < s →
+                      s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ) →
+                        s ≤ ψ₂ * min (φ - θ₁) (θ₂ - φ) → F.IsClear c' (P + (1 - ↑s) * e φ)
+@lock : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    ∀ {P : ℂ} {θ₁ θ₂ θ : ℝ} {c c' : Fin k},
+      F.IsRingArc P θ₁ θ₂ c c' →
+        θ ∈ Set.Ioo θ₁ θ₂ →
+          closure (F.region c') ∩ Metric.sphere (ringPt P θ) 1 ⊆ {P} ∧
+            closure (F.region c) ∩ Metric.sphere (ringPt P θ) 1 ⊆ {P, P + 2 * e θ} ∧
+              ∀ (T : Set ℂ),
+                F.TileOf c T →
+                  P + 2 * e θ ∈ closure T → ∃ δ > 0, Disjoint (T ∩ Metric.ball (P + 2 * e θ) δ) (Metric.ball P 2)
+@Valid.dist_ne_one_of_isOpen_subset_closure : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    ∀ {d : Fin k} {a q : ℂ} {O : Set ℂ},
+      a ∈ closure (F.region d) → IsOpen O → O ⊆ closure (F.region d) → q ∈ O → dist a q ≠ 1
+@localSectors_disj : ∀ {k : ℕ} (F : ArcMap k) {v : ℂ},
+  v ∈ F.dom →
+    ∃ r₀ n G, F.IsSectorChart G v r₀ ∧ ∀ (i j : Fin n), i ≠ j → ∀ s ∈ Set.Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)
+@isSectorChart_of : ∀ {k : ℕ} (F : ArcMap k) {n : ℕ} (G : BranchGerms n) {v : ℂ} {r₀ : ℝ},
+  0 < r₀ →
+    Metric.ball v r₀ ⊆ F.dom →
+      G.Sorted →
+        (∀ (i : Fin n), |G.κ i| * r₀ < 2) →
+          (v ∈ F.Γ ↔ 0 < n) →
+            (F.Γ ∩ Metric.ball v r₀) \ {v} = ⋃ i, branchPt v (G.β i) (G.κ i) '' Set.Ioo 0 r₀ →
+              (∀ (i j : Fin n), i ≠ j → ∀ s ∈ Set.Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) → F.IsSectorChart G v r₀
+@exists_eq_branchPt_curveGerm : ∀ {v : ℂ} {κ : ℝ},
+  0 ≤ κ →
+    ∀ {b : ℂ},
+      b ≠ 0 →
+        ∀ {z : ℂ},
+          z ∈ curveAt v κ b →
+            z ≠ v →
+              κ * ‖z - v‖ < 2 * ‖b‖ →
+                ∃ σ, (σ = 1 ∨ σ = -1) ∧ z = branchPt v (curveGerm κ b σ).1 (curveGerm κ b σ).2 ‖z - v‖
+@branchPt_curveGerm_mem : ∀ {v : ℂ} {κ : ℝ},
+  0 ≤ κ →
+    ∀ {b : ℂ},
+      b ≠ 0 →
+        ∀ {σ : ℝ},
+          σ = 1 ∨ σ = -1 →
+            ∀ {s : ℝ}, 0 ≤ s → κ * s ≤ 2 * ‖b‖ → branchPt v (curveGerm κ b σ).1 (curveGerm κ b σ).2 s ∈ curveAt v κ b
+carrier_germArc : ∀ (v : ℂ) (β : ℝ) {κ ρ : ℝ},
+  0 ≤ ρ → |κ| * ρ ≤ 2 → (germArc v β κ ρ).carrier = branchPt v β κ '' Set.Icc 0 ρ
+branchPt_eq_circle : ∀ (v : ℂ) (β : ℝ) {κ s : ℝ},
+  κ ≠ 0 →
+    |κ * s / 2| ≤ 1 →
+      branchPt v β κ s = v + ↑(1 / κ) * (e (β + Real.pi / 2) - e (β + Real.pi / 2 + 2 * Real.arcsin (κ * s / 2)))
+germArc_isUnitArc_iff : ∀ (v : ℂ) (β κ ρ : ℝ), (germArc v β κ ρ).IsUnitArc ↔ |κ| = 1
+@IsSectorChart.encard_sectorsOf : ∀ {k : ℕ} {F : ArcMap k} {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀ : ℝ},
+  F.IsSectorChart G v r₀ →
+    0 < n →
+      ∀ {r : ℝ},
+        r ∈ Set.Ioc 0 r₀ →
+          ∀ {col : Fin n → Fin k},
+            (∀ (i : Fin n), G.sector v r i ⊆ F.region (col i)) →
+              ∀ (c : Fin k), (F.sectorsOf v r c).encard = {i | col i = c}.encard
+@IsSectorChart.hasDegree : ∀ {k : ℕ} {F : ArcMap k} {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀ : ℝ},
+  F.IsSectorChart G v r₀ → F.HasDegree v (max n 1)
+@exists_kept_of_mem_openArc : ∀ {k : ℕ} (F : ArcMap k) {P : ℂ} {θ₁ θ₂ : ℝ} {x : ℂ},
+  x ∈ ringPt P '' Set.Ioo θ₁ θ₂ →
+    x ∈ ⋃ b ∈ F.cutArcs P θ₁ θ₂, b.carrier → ∃ a ∈ F.arcs, (∀ (θa θb : ℝ), a ≠ Arc.circ P 1 θa θb) ∧ x ∈ a.carrier
+@mem_cutArcs_iff : ∀ {k : ℕ} (F : ArcMap k) {P : ℂ} {θ₁ θ₂ : ℝ} {x : ℂ},
+  x ∉ ringPt P '' Set.Ioo θ₁ θ₂ →
+    x ≠ ringPt P θ₁ → x ≠ ringPt P θ₂ → (x ∈ ⋃ b ∈ F.cutArcs P θ₁ θ₂, b.carrier ↔ x ∈ ⋃ a ∈ F.arcs, a.carrier)
+n2_env_toward : ∀ (P : ℂ) {θ₁ θ₂ : ℝ},
+  θ₁ < θ₂ →
+    θ₂ - θ₁ ≤ Real.pi / 3 →
+      ∀ {r : ℝ},
+        0 < r →
+          ∃ ψ > 0,
+            ∀ φ ∈ Set.Ioo θ₁ θ₂,
+              ∀ (s : ℝ),
+                0 < s →
+                  s ≤ ψ * min (φ - θ₁) (θ₂ - φ) →
+                    Metric.closedBall (P + (1 - ↑s) * e φ) 1 \ ⋃ θ ∈ Set.Icc θ₁ θ₂, Metric.ball (ringPt P θ) 1 ⊆
+                      Metric.ball P r
+n2_env_near : ∀ (P : ℂ) {θ₁ θ₂ : ℝ},
+  θ₁ < θ₂ →
+    θ₂ - θ₁ ≤ Real.pi / 3 →
+      ∃ ψ > 0,
+        ∀ φ ∈ Set.Ioo θ₁ θ₂,
+          ∀ (s : ℝ),
+            0 < s →
+              s ≤ ψ * min (φ - θ₁) (θ₂ - φ) →
+                ∀ p ∈ Metric.closedBall (ringPt P θ₁) 1 ∩ Metric.closedBall (ringPt P θ₂) 1,
+                  dist p (P + (1 - ↑s) * e φ) < 1
+@l60_le : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid → ∀ {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}, F.IsRingArc P θ₁ θ₂ c c' → θ₂ - θ₁ ≤ Real.pi / 3

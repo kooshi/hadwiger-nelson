@@ -207,6 +207,8 @@ import Proofs.HadwigerNelson.Plane.ValidMap.FlankUA
 import Proofs.HadwigerNelson.Plane.ValidMap.Terminal
 import Proofs.HadwigerNelson.Plane.ValidMap.Dense
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseWalk
+import Proofs.HadwigerNelson.Plane.ValidMap.RadialPush
+import Proofs.HadwigerNelson.Plane.ValidMap.Pushforward
 import Proofs.HadwigerNelson.Plane.ValidMap.BendCollar
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseDense
 import Proofs.HadwigerNelson.Plane.Woodall.Basic
