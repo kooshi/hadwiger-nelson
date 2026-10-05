@@ -569,3 +569,37 @@ Prove `merge_not_hasRepeatedColour_rim` (§ 8.2 item 1, about 200 lines: the sid
 then three cases) and `merge_allowedCone` (§ 8.2 item 2 and § 5.2's route, about 300–400 lines). Iterate with `data/fs131/imm/wip/C.lean`
 (imports `Moves`) via `bash data/fs131/imm/iter.sh data/fs131/imm/wip/C.lean` after refreshing the mirror (`cp -a .lake/build/lib/lean/.
 build/imm-mirror/` after a green build; the mirror is current at stage 9). Then MERGE's landing (a later job).
+
+## Stage 10 — SAVED (FS131-IMM4): the readback, the as-given build
+
+*FS131-IMM4 (de Bruijn, the implementer, on Opus) continues this record from here; brief `data/fs131/briefs/FS131-IMM4-merge.md` (on `main`).*
+
+### 10.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (exact substring search), each **verbatim**:
+
+| quotation (a prefix) | source | line |
+|---|---|---|
+| "theorem merge_not_hasRepeatedColour_rim {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) (hab : a < b)" | `Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean` (this branch, `8cae85bc`) | 2426 |
+| "theorem merge_allowedCone (hF : F.Valid) (hv1 : F.Covers v 1) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ)" | the same | 2434 |
+| "theorem exists_merge_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)" | `Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean` (this branch) | 585 |
+| "1. **`¬ F'.HasRepeatedColour x` at rim points** — the sides lemma (§ 5.2): …" | this record § 8.2 | 526 |
+| "2. **`D_c(v′)` unchanged** for `v′ ∉ B̄(v, ρ)` (§ 5.2's route; …" | this record § 8.2 | 531 |
+| "Prove `merge_not_hasRepeatedColour_rim` (§ 8.2 item 1, about 200 lines: …" | this record § 9.2 | 568 |
+| "353. **FS131-IMM3 handed back** …" | `plans/FS131-close-inventory.md` (on `main`) | 3034 |
+| "354. **Ruling on IMM3's slot: MERGE's continuation, FS131-IMM4, …**" | the same | 3052 |
+| "348. **Ruling on item 347: MERGE returns to wave 5's path; …**" | the same | 2978 |
+| "269. **Ruling on item 268: …**" | the same | 1958 |
+| "**It may**: add children anywhere in the wave's modules — …" | `.claude/worktrees/fs131-w4/plans/FS131-w4-kernel-plan.md` § 14.2 | 887 |
+
+Read: this record's Stages 6–9 and IMM2's § 5.2 in full (and IMM1's § 4), inventory items 269, 348, 353, 354, plan § 14.2, both leaves and the
+assembly, and the APIs they stand on (`Surgery`: `surgery`, `trimArcs_spec`, `encard_sectorsOf_of_partition`, `exists_ball_subset_of_branchPt`,
+`Near`; `Cone`: `inType_iff`, `outType_iff`; `Tiles`: `ne1_region`; `LocalStructure`: `finite_tiles_near`, `GoodAt.finite_tiles_sphere`).
+
+### 10.2 The branch builds as given
+
+`8cae85bc`, under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK**, "all 1748 modules already
+up to date, nothing built", 2 s; warnings only `declaration uses 'sorry'` (`MergeMove` l. 2426, l. 2434 — the two leaves; `Moves` l. 574
+`exists_rayMerge_aux`; `Contact`, `BaseSteps`, `UnitArc` as before). Log `build/gate/build/20261005T080558Z-2587020.log`; terminal output
+`data/fs131/imm/build-asgiven-imm4.log`. The iteration mirror `build/imm-mirror` was older than this build's oleans (02:44 against 02:54) and was
+refreshed from them.
