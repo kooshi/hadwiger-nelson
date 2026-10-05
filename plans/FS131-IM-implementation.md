@@ -114,7 +114,34 @@ reading `[propext, Classical.choice, Quot.sound]` (`HadwigerNelson.Plane.BranchG
 - `HadwigerNelson.Plane.ArcMap.Near.cut_hasSectors` — [kernel], the standard three or fewer
 - `HadwigerNelson.Plane.ArcMap.Near.exists_cut` — [kernel], the standard three or fewer
 
-None of the three moves is proved: `exists_shave_aux`, `exists_rayMerge_aux`, `exists_merge_aux` read `sorryAx` besides the standard three.
+FS131-IM3's, kernel-checked in its stage-9 build (`build/gate/build/20261004T235251Z-3627279.log`), axioms printed against that build's oleans
+(`data/fs131/im/axioms-stage9.txt`), all in `Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean`, each reading exactly `[propext, Classical.choice, Quot.sound]`:
+
+- `HadwigerNelson.Plane.ArcMap.exists_shave_aux` — [kernel], the standard three — **FS110-N4-SHAVE, the move, under `Contact`'s statement**
+- `HadwigerNelson.Plane.BranchGerms.ne_next_of_nextβ_eq` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.horn_index` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.encard_col_eq` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.exists_shave_of_flankAbove` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.exists_shave_of_flankBelow` — [kernel], the standard three
+- `HadwigerNelson.Plane.Arc.finite_inter_sphere_of_not_isUnitArc` — [kernel], the standard three
+- `HadwigerNelson.Plane.mem_germArc_iff_of_mem_hornSet` — [kernel], the standard three
+- `HadwigerNelson.Plane.mem_shaveArcs_carrier` — [kernel], the standard three
+- `HadwigerNelson.Plane.shaveArcs_finite` — [kernel], the standard three
+- `HadwigerNelson.Plane.shaveArcs_nondegenerate` — [kernel], the standard three
+- `HadwigerNelson.Plane.shaveArcs_not_isUnitArc` — [kernel], the standard three
+- `HadwigerNelson.Plane.shaveArcs_subset_closedBall` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.shaveCol_of_not_mem` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.shaveCol_of_above` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.shaveCol_of_not_above` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.shaveCol_mem` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.not_mem_interiorPts_self` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.shave_mem_interiorPts_iff` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.coloursAt_subset_of_mem_closure_sector` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.shave_hasSectors` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.Near.shave_hlc` — [kernel], the standard three
+- `HadwigerNelson.Plane.ArcMap.exists_shave_recolour` — [kernel], the standard three
+
+Still open: `exists_rayMerge_aux`, `exists_merge_aux` (each reads `sorryAx` besides the standard three).
 
 ## Stage 1 — SAVED: the readback, the as-given build, what I may and may not change
 
@@ -513,3 +540,40 @@ as a multiset are identical before and after). **Watched**: before the move `che
 Under the slot, as in § 7.2: **OK**, 446 of 446 batches, 3 modules rebuilt (`Surgery` 8.4 s, `Moves` 1.4 s, `Proofs`); warnings only
 `declaration uses 'sorry'` — `Moves` exactly 3 (l. 27, 39, 50: the three `…_aux`), `Contact` 4, `BaseSteps` 7, `UnitArc` 17 (unchanged); none in
 `Surgery`. Log `build/gate/build/20261004T233700Z-3503469.log`; terminal output `data/fs131/im/build-im3-split.log`.
+
+## Stage 9 — SAVED: SHAVE proved (`exists_shave_aux`), its three cases
+
+**Proved** (in `Moves`, before the three statements, under the heading "SHAVE (`exists_shave_aux`): two cuts and one recolouring"; 23 theorems,
+listed under "Theorems this phase proved"), in § 6.3's order:
+
+1. **`g = c`** — `exists_shave_of_flankAbove`: `Near.exists_cut` at `p = i₀` (the horn's chart index), `j = next i₀`. Children:
+   `Near.horn_index` (a `c`-horn is a chart sector `i₀` of colour `c`, its germs of direction `α` with curvatures `κ₁`, `κ₂`, and the sector
+   is the horn at every chart radius — from `IsSectorChart.index_of_isSector_hornSet`), `Near.encard_col_eq` (`s_c(v) = m` counts the chart
+   sectors of colour `c`), `BranchGerms.ne_next_of_nextβ_eq` (a germ whose next germ has its direction is not its own next: a one-germ chart's
+   next direction is a turn on). The rim bound comes out as `≤ 2`.
+2. **`h = c`** — `exists_shave_of_flankBelow`: the cut at `p` with `next p = i₀` (`next` is a bijection of `Fin n`).
+3. **`g ≠ c`, `h ≠ c`** — `exists_shave_recolour`: `Near.move` with every germ kept, the extra arcs `shaveArcs` (the `σ`-arc `germArc v α σ ρ`
+   when `κ₁ < σ < κ₂`, none otherwise) and the colouring `shaveCol` (`g` above the `σ`-arc in the tip `hornSet v α κ₁ κ₂ ρ`, `h` on or below
+   it, `F`'s elsewhere). Children: `mem_germArc_iff_of_mem_hornSet` (inside a horn the `σ`-arc is the tangent circle `tanHeight σ = 0`),
+   `shave_mem_interiorPts_iff` (the move's interior points in the ball are `F`'s off the `σ`-circle in the tip), `shave_hasSectors` (the
+   horn's sector replaced by its two pieces `hornSet v α σ κ₂ r`, `hornSet v α κ₁ σ r`, possibly empty, coloured `g`, `h`; the partition
+   lemma over `{i // i ≠ i₀} ⊕ Bool`), `shave_hlc` (local constancy: the side of the `σ`-circle in the tip, `F`'s off the tip's closure by
+   `not_mem_interiorPts_of_mem_closure_sector`), `coloursAt_subset_of_mem_closure_sector` (a point of a chart sector's closure carries at
+   most the colours of that sector and its two neighbours, so a rim point carries at most `{h, c, g}`), `Arc.finite_inter_sphere_of_not_isUnitArc`
+   (Condition 5 for the new arc), with `shaveArcs_*`, `shaveCol_*` and spec examples for both definitions. `hclear` is read at the chosen `ρ`.
+
+`exists_shave_aux` splits on `g = c`, then `h = c`, and cites the three. **No statement changed** (`tools/fs131_im_statements.py --check` PASS);
+`tools/fs131_im_split.py --check` PASS. The 22 children are recorded in `scripts/Axioms.lean`'s IM block (headed "FS131-IM3: SHAVE's children").
+
+**Re-priced from SHAVE**: the two cut cases took a few minutes of glue each over `exists_cut`, as § 6.3 said; the recolouring case about 500
+lines, one session-fraction; nothing needed a dispatch.
+
+**The build** (under the slot, as in § 7.2): **OK**, 446 of 446 batches, 2 modules rebuilt (`Moves` 2.7 s, `Proofs`); warnings only
+`declaration uses 'sorry'` — `Moves` exactly 2 (`exists_rayMerge_aux`, `exists_merge_aux`), `Contact` 4, `BaseSteps` 7, `UnitArc` 17. Log
+`build/gate/build/20261004T235251Z-3627279.log`; terminal output `data/fs131/im/build-im3-shave.log`. **Axioms** against that build's oleans
+(`lake env lean data/fs131/im/AxiomsIM3.lean`, `data/fs131/im/axioms-stage9.txt`, 25 records): `exists_shave_aux` and the 22 children read exactly
+`[propext, Classical.choice, Quot.sound]`; `exists_rayMerge_aux`, `exists_merge_aux` read `sorryAx` besides. No `axiom`, no `native_decide`.
+
+**RAY's clearness** (the first conjunct of `exists_rayMerge_aux`) elaborates in scratch (`data/fs131/im/scratch3/RayClear.lean`, against the mirror):
+`ArcMap.ray_clear`, by record § 3.3's three cases over parabola points `framePt v α X (μ X²/2)` of each horn, every real inequality a small lemma
+(`RayGap.*`, LEAN.md's `nlinarith` rule). It goes into `Moves` with the merge.
