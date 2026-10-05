@@ -2637,3 +2637,9 @@ reason by the close.*
      `cv_class` (§ 3.5), the CV-HD cluster, `exists_red`, `exists_terminal`, then `cv_exists` (in `BaseDense`, its lines only). (d) **`bend_away`'s implementer**
      is unblocked (E5 § 4: e5-claim-e and e5-end-cap its route) and joins the queue with IMM2, neither having a consumer. In flight after I5h's launch: 1 (WL1) +
      1 (I5g) + 1 (IP4) + 1 (I5h) = 4.
+323. **Staffing: back to three slots** (Kooshi, 2026-10-05, mid-turn: *"We need to reduce the cap back to 3 subagents. […]
+     Let the current ones finish out though, just let the lane expire. […] it's worth a handoff and compaction again before we go
+     overnight."*). The fourth slot (item 211) is withdrawn. **Applied to launches, never to running work**: the four running jobs (WL1, I5g, IP4, I5h) finish
+     their briefs; the first slot to free is not refilled, and from then on at most three run. **Queue when a slot frees under three**: the freed lane's own
+     continuation if its leaves remain on the longest path (the planar chain, then wave 5's halves); else IMM2 (MERGE), then `bend_away`'s implementer (E5 § 4 its
+     route), then `disc1_local` after `fs131-w5p` merges back. Memory's staffing line rewritten. The handoff rewritten before a compaction, at Kooshi's word.
