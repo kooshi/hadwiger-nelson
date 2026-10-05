@@ -333,6 +333,606 @@ theorem filledGraph_infinite (hF : F.Valid) (hP : F.IsPlaneMap) : Infinite {T : 
   obtain ⟨T, hT, hST⟩ := exists_outer_fill hF hP hS
   exact hz (hR (mem_iUnion.mpr ⟨⟨T, hT⟩, closure_mono hST hzS⟩))
 
+/-! ### The far side, and Janiszewski's theorem for holes (FS131-IP5; for F-ONE, F-SEP and F-RING) -/
+
+/-- **A tile meeting a filled closure** is the tile or lies in one of its holes (it is open, so it meets the fill; a hole is separated from
+the rest of the complement). -/
+theorem eq_or_subset_hole_of_inter {X S : Set ℂ} (hX : F.IsTile X) (hS : F.IsTile S) (h : (S ∩ closure (fill X)).Nonempty) :
+    S = X ∨ ∃ Hc, IsHoleOf X Hc ∧ S ⊆ Hc := by
+  obtain ⟨z, hzf, hzS⟩ := (closure_inter_open_nonempty_iff hS.isOpen).mp (by rw [inter_comm]; exact h)
+  rcases hzf with hzX | ⟨Hc, hH, hzH⟩
+  · exact Or.inl (hS.eq_of_mem hX hzS hzX)
+  · have hSX : S ≠ X := fun h => hH.2.1 hzH (subset_closure (h ▸ hzS))
+    refine Or.inr ⟨Hc, hH, (hS.subset_or_subset_of_separated hH.2.2.2 fun w hw => ?_).resolve_right fun h' => (h' hzS).2 hzH⟩
+    by_cases hwH : w ∈ Hc
+    · exact Or.inl hwH
+    · exact Or.inr ⟨IsTile.subset_compl_closure hX hS hSX hw, hwH⟩
+
+/-- A tile meeting a filled closure lies in the fill. -/
+theorem subset_fill_of_inter {X S : Set ℂ} (hX : F.IsTile X) (hS : F.IsTile S) (h : (S ∩ closure (fill X)).Nonempty) :
+    S ⊆ fill X := by
+  rcases eq_or_subset_hole_of_inter hX hS h with rfl | ⟨Hc, hH, hSH⟩
+  · exact subset_fill S
+  · exact fun z hz => Or.inr ⟨Hc, hH, hSH hz⟩
+
+/-- An outer tile other than `X` misses the filled closure of `X`. -/
+theorem IsOuterTile.disjoint_closure_fill {X S : Set ℂ} (hX : F.IsTile X) (hS : F.IsOuterTile S) (hne : S ≠ X) :
+    Disjoint S (closure (fill X)) := by
+  rw [Set.disjoint_iff_inter_eq_empty, ← not_nonempty_iff_eq_empty]
+  intro h
+  rcases eq_or_subset_hole_of_inter hX hS.1 h with h' | ⟨Hc, hH, hSH⟩
+  · exact hne h'
+  · exact hS.2 X Hc hX hH hSH
+
+/-- Outer tiles off `x`, `y` whose filled closures meet are joined in `M̂ − x − y`. -/
+theorem reachable_offTwo_of_inter {x y : {T : Set ℂ // F.IsOuterTile T}} {a b : Thomassen.offTwo x y}
+    (h : (closure (fill a.1.1) ∩ closure (fill b.1.1)).Nonempty) : (F.filledGraph.induce (Thomassen.offTwo x y)).Reachable a b := by
+  by_cases hab : a = b
+  · exact hab ▸ SimpleGraph.Reachable.refl _
+  · exact SimpleGraph.Adj.reachable (SimpleGraph.induce_adj.mpr ⟨fun h' => hab (Subtype.ext h'), h⟩)
+
+/-- A tile meeting the complement of two filled closures lies in it (`subset_fill_of_inter`). -/
+theorem subset_compl_of_inter_compl {X Y S : Set ℂ} (hX : F.IsTile X) (hY : F.IsTile Y) (hS : F.IsTile S)
+    (h : (S ∩ (closure (fill X) ∪ closure (fill Y))ᶜ).Nonempty) : S ⊆ (closure (fill X) ∪ closure (fill Y))ᶜ := by
+  obtain ⟨z, hzS, hzK⟩ := h
+  rintro w hwS (hw | hw)
+  · exact hzK (Or.inl (subset_closure (subset_fill_of_inter hX hS ⟨w, hwS, hw⟩ hzS)))
+  · exact hzK (Or.inr (subset_closure (subset_fill_of_inter hY hS ⟨w, hwS, hw⟩ hzS)))
+
+/-- An outer tile other than `x`, `y` misses their filled closures. -/
+theorem subset_compl_of_mem_offTwo {x y : {T : Set ℂ // F.IsOuterTile T}} (v : {T : Set ℂ // F.IsOuterTile T})
+    (hv : v ∈ Thomassen.offTwo x y) : v.1 ⊆ (closure (fill x.1) ∪ closure (fill y.1))ᶜ := by
+  rintro w hw (h | h)
+  · exact Set.disjoint_left.mp (IsOuterTile.disjoint_closure_fill x.2.1 v.2 fun h' => hv.1 (Subtype.ext h')) hw h
+  · exact Set.disjoint_left.mp (IsOuterTile.disjoint_closure_fill y.2.1 v.2 fun h' => hv.2 (Subtype.ext h')) hw h
+
+/-- A tile off two filled closures lies in the fill of an outer tile other than those two (`exists_outer_fill`). -/
+theorem exists_outer_fill_offTwo (hF : F.Valid) (hP : F.IsPlaneMap) (x y : {T : Set ℂ // F.IsOuterTile T}) {S : Set ℂ}
+    (hS : F.IsTile S) (hSK : S ⊆ (closure (fill x.1) ∪ closure (fill y.1))ᶜ) :
+    ∃ (T : Set ℂ) (hT : F.IsOuterTile T), (⟨T, hT⟩ : {T : Set ℂ // F.IsOuterTile T}) ∈ Thomassen.offTwo x y ∧ S ⊆ fill T := by
+  obtain ⟨T, hT, hST⟩ := exists_outer_fill hF hP hS
+  obtain ⟨s, hs⟩ := hS.nonempty
+  refine ⟨T, hT, ⟨fun h => hSK hs (Or.inl ?_), fun h => hSK hs (Or.inr ?_)⟩, hST⟩
+  · rw [show x.1 = T from (congrArg Subtype.val h).symm]; exact subset_closure (hST hs)
+  · rw [show y.1 = T from (congrArg Subtype.val h).symm]; exact subset_closure (hST hs)
+
+/-- Off two outer tiles, infinitely many remain (`filledGraph_infinite`). -/
+theorem offTwo_infinite (hF : F.Valid) (hP : F.IsPlaneMap) (x y : {T : Set ℂ // F.IsOuterTile T}) :
+    (Thomassen.offTwo x y).Infinite := by
+  haveI := filledGraph_infinite hF hP
+  have hS : Thomassen.offTwo x y = ({x, y} : Set {T : Set ℂ // F.IsOuterTile T})ᶜ := by
+    ext v; simp [Thomassen.offTwo]
+  rw [hS]
+  exact (Set.toFinite _).infinite_compl
+
+/-- **The far side is one class** (F-ONE, F-SEP; FS131-IP5): for outer tiles `x`, `y` (equal allowed) whose filled closures lie in `B̄(c, R)`,
+`M̂ − x − y` has an infinite component holding every outer tile other than `x`, `y` that meets `B̄(c, R)ᶜ`. Every tile meeting the
+complement `Kᶜ` of the two filled closures lies in it (`eq_or_subset_hole_of_inter`), hence in one of its components; the tiles of the
+unbounded component `W ⊇ B̄(c, R)ᶜ` are chained by touching closures (`mem_of_touch_closed`), each lies in the fill of an outer tile other than
+`x`, `y` (`exists_outer_fill`), and those fills reach arbitrarily far. -/
+theorem exists_far_component (hF : F.Valid) (hP : F.IsPlaneMap) (x y : {T : Set ℂ // F.IsOuterTile T}) {c : ℂ} {R : ℝ}
+    (hR : closure (fill x.1) ∪ closure (fill y.1) ⊆ closedBall c R) :
+    ∃ C : (F.filledGraph.induce (Thomassen.offTwo x y)).ConnectedComponent, ¬ C.supp.Finite ∧
+      ∀ v (hv : v ∈ Thomassen.offTwo x y), (v.1 ∩ (closedBall c R)ᶜ).Nonempty →
+        (F.filledGraph.induce (Thomassen.offTwo x y)).connectedComponentMk ⟨v, hv⟩ = C := by
+  classical
+  have hdom : ∀ A : Set ℂ, A ⊆ F.dom := fun A => by rw [hP]; exact subset_univ _
+  set G' := F.filledGraph.induce (Thomassen.offTwo x y) with hG'
+  set K := closure (fill x.1) ∪ closure (fill y.1) with hK
+  have hKc : IsOpen Kᶜ := (isClosed_closure.union isClosed_closure).isOpen_compl
+  have htile : ∀ S, F.IsTile S → (S ∩ Kᶜ).Nonempty → S ⊆ Kᶜ := fun S hS h => subset_compl_of_inter_compl x.2.1 y.2.1 hS h
+  have hrep : ∀ S, F.IsTile S → S ⊆ Kᶜ → ∃ (T : Set ℂ) (hT : F.IsOuterTile T),
+      (⟨T, hT⟩ : {T : Set ℂ // F.IsOuterTile T}) ∈ Thomassen.offTwo x y ∧ S ⊆ fill T := fun S hS hSK =>
+    exists_outer_fill_offTwo hF hP x y hS hSK
+  -- the unbounded component `W`
+  obtain ⟨z₀, hz₀⟩ := exists_not_mem_closedBall_zero (‖c‖ + |R| + 1)
+  have hfar : ∀ z : ℂ, ‖c‖ + |R| < ‖z‖ → z ∉ closedBall c R := fun z hz h => by
+    rw [mem_closedBall, dist_eq_norm] at h
+    linarith [norm_sub_norm_le z c, le_abs_self R]
+  have hz₀R : z₀ ∉ closedBall c R := hfar z₀ (by
+    rw [mem_closedBall, dist_zero_right, not_le] at hz₀; linarith)
+  set W := connectedComponentIn Kᶜ z₀ with hW
+  have hWo : IsOpen W := hKc.connectedComponentIn
+  have hRW : (closedBall c R)ᶜ ⊆ W :=
+    (isPreconnected_compl_closedBall c R).subset_connectedComponentIn hz₀R (compl_subset_compl.mpr hR)
+  have hin : ∀ S, F.IsTile S → (S ∩ W).Nonempty → S ⊆ W := by
+    rintro S hS ⟨z, hzS, hzW⟩
+    have hSK := htile S hS ⟨z, hzS, connectedComponentIn_subset _ _ hzW⟩
+    rw [hW, connectedComponentIn_eq hzW]
+    exact hS.isPreconnected.subset_connectedComponentIn hzS hSK
+  -- the seed
+  obtain ⟨S₀, hS₀, hS₀R⟩ := exists_tile_inter_of_isOpen isClosed_closedBall.isOpen_compl (hdom _) ⟨z₀, hz₀R⟩
+  have hS₀W : S₀ ⊆ W := hin S₀ hS₀ (hS₀R.mono fun z hz => ⟨hz.1, hRW hz.2⟩)
+  obtain ⟨T₀, hT₀, hT₀o, hS₀T₀⟩ := hrep S₀ hS₀ (hS₀W.trans (connectedComponentIn_subset _ _))
+  set C := G'.connectedComponentMk ⟨⟨T₀, hT₀⟩, hT₀o⟩ with hC
+  set P : Set (Set ℂ) := {S | F.IsTile S ∧ S ⊆ W ∧ ∃ (T : Set ℂ) (hT : F.IsOuterTile T)
+    (hTo : (⟨T, hT⟩ : {T : Set ℂ // F.IsOuterTile T}) ∈ Thomassen.offTwo x y), S ⊆ fill T ∧ G'.connectedComponentMk ⟨⟨T, hT⟩, hTo⟩ = C}
+  have key := mem_of_touch_closed hWo isPreconnected_connectedComponentIn (hdom _) hin P (fun S hS => ⟨hS.1, hS.2.1⟩)
+    ⟨S₀, hS₀, hS₀W, T₀, hT₀, hT₀o, hS₀T₀, rfl⟩ (by
+      rintro S ⟨hS, hSW, T, hT, hTo, hST, hTC⟩ S' hS' hS'W ⟨z, hzS, hzS'⟩
+      obtain ⟨T', hT', hT'o, hS'T'⟩ := hrep S' hS' (hS'W.trans (connectedComponentIn_subset _ _))
+      refine ⟨hS', hS'W, T', hT', hT'o, hS'T', ?_⟩
+      rw [← hTC]
+      exact (SimpleGraph.ConnectedComponent.sound (reachable_offTwo_of_inter (a := ⟨⟨T, hT⟩, hTo⟩) (b := ⟨⟨T', hT'⟩, hT'o⟩)
+        ⟨z, closure_mono hST hzS, closure_mono hS'T' hzS'⟩)).symm)
+  refine ⟨C, fun hfin => ?_, fun v hv hvR => ?_⟩
+  · -- the fills of the component's tiles are bounded, but tiles of `W` reach arbitrarily far
+    have hb : Bornology.IsBounded (⋃ v ∈ C.supp, closure (fill v.1.1)) := by
+      refine (Bornology.isBounded_biUnion hfin).mpr fun v _ => ?_
+      obtain ⟨w, hw⟩ := v.1.2.1.nonempty
+      exact isBounded_closedBall.subset (closure_fill_subset_closedBall hF v.1.2.1 (subset_closure hw))
+    obtain ⟨R', hR'⟩ := hb.subset_closedBall 0
+    obtain ⟨z, hz⟩ := exists_not_mem_closedBall_zero (max R' (‖c‖ + |R|))
+    have hzR : z ∉ closedBall c R := hfar z (by
+      rw [mem_closedBall, dist_zero_right, not_le] at hz; linarith [le_max_right R' (‖c‖ + |R|)])
+    obtain ⟨S, hS, hzS⟩ := F.mem_closure_tile (hdom _ (mem_univ z))
+    have hSW : S ⊆ W := hin S hS (((closure_inter_open_nonempty_iff isClosed_closedBall.isOpen_compl).mp
+      ⟨z, hzS, hzR⟩).mono fun w hw => ⟨hw.1, hRW hw.2⟩)
+    obtain ⟨-, -, T, hT, hTo, hST, hTC⟩ := key S hS hSW
+    have hzT : z ∈ closure (fill T) := closure_mono hST hzS
+    exact hz (closedBall_subset_closedBall (le_max_left _ _) (hR' (mem_iUnion₂.mpr
+      ⟨⟨⟨T, hT⟩, hTo⟩, (SimpleGraph.ConnectedComponent.mem_supp_iff _ _).mpr hTC, hzT⟩)))
+  · -- an outer tile meeting the far region lies in `W`, inside the fill of a tile of the component
+    have hvW : v.1 ⊆ W := hin v.1 v.2.1 (hvR.mono fun w hw => ⟨hw.1, hRW hw.2⟩)
+    obtain ⟨-, -, T, hT, hTo, hvT, hTC⟩ := key v.1 v.2.1 hvW
+    rw [← hTC]
+    exact SimpleGraph.ConnectedComponent.sound (reachable_offTwo_of_inter (a := ⟨v, hv⟩) (b := ⟨⟨T, hT⟩, hTo⟩)
+      (let ⟨s, hs⟩ := v.2.1.nonempty; ⟨s, subset_closure (subset_fill v.1 hs), subset_closure (hvT hs)⟩))
+
+/-! ## Janiszewski's theorem for holes (FS131-IP5), pure plane topology -/
+
+/-- **A piece of a hole cut by a split is a hole of one continuum**: `X` an open part of `(A ∪ B)ᶜ` separated from the rest, `u`, `v` closed
+sets splitting `cl X ∪ A ∪ B` with `B` on the `u` side; then `X ∩ v`, when nonempty and bounded, is a hole of `A`. -/
+theorem isHoleOf_inter_of_split {A B X u v : Set ℂ} (hA : IsClosed A) (hB : IsClosed B) (hXK : X ⊆ (A ∪ B)ᶜ)
+    (hsep : Disjoint (closure X) (closure ((A ∪ B)ᶜ \ X))) (hu : IsClosed u) (hv : IsClosed v)
+    (hcov : closure X ∪ (A ∪ B) ⊆ u ∪ v) (hdis : Disjoint ((closure X ∪ (A ∪ B)) ∩ u) v) (hBu : B ⊆ u)
+    (hne : (X ∩ v).Nonempty) (hbd : Bornology.IsBounded (X ∩ v)) : IsHoleOf A (X ∩ v) := by
+  set M := closure X ∪ (A ∪ B) with hM
+  have hMc : IsClosed M := isClosed_closure.union (hA.union hB)
+  have hXM : X ⊆ M := fun z hz => Or.inl (subset_closure hz)
+  have hcl : closure (X ∩ v) ⊆ M ∩ v :=
+    closure_minimal (fun z hz => ⟨hXM hz.1, hz.2⟩) (hMc.inter hv)
+  refine ⟨hne, ?_, hbd, ?_⟩
+  · rw [hA.closure_eq]; exact fun z hz hzA => hXK hz.1 (Or.inl hzA)
+  · rw [hA.closure_eq]
+    have hsub : Aᶜ \ (X ∩ v) ⊆ (M ∩ u) ∪ ((A ∪ B)ᶜ \ X) := by
+      rintro z ⟨hzA, hzXv⟩
+      by_cases hzB : z ∈ B
+      · exact Or.inl ⟨Or.inr (Or.inr hzB), hBu hzB⟩
+      by_cases hzX : z ∈ X
+      · refine Or.inl ⟨hXM hzX, ?_⟩
+        rcases hcov (hXM hzX) with h | h
+        · exact h
+        · exact absurd ⟨hzX, h⟩ hzXv
+      · exact Or.inr ⟨fun h => h.elim hzA hzB, hzX⟩
+    rw [Set.disjoint_left]
+    intro z hz hz'
+    have hz'' := closure_mono hsub hz'
+    rw [closure_union, (hMc.inter hu).closure_eq] at hz''
+    rcases hz'' with h | h
+    · exact Set.disjoint_left.mp hdis ⟨h.1, h.2⟩ (hcl hz).2
+    · exact Set.disjoint_left.mp hsep (closure_mono inter_subset_left hz) h
+
+/-- **No split of `cl X ∪ A ∪ B`** (the step of `not_isHoleOf_union`): with `A`, `B` closed sets without holes, `B` a continuum, each meeting
+`cl X`, and one of the two pieces of `X` bounded, a split of `cl X ∪ A ∪ B` by closed `u ⊇ A`, `v` is impossible — it would cut `X` into a hole
+of `A` or of `B` (`isHoleOf_inter_of_split`), or into a nonempty proper clopen subset of `ℂ`. -/
+theorem not_split_aux {A B X u v : Set ℂ} (hA : IsClosed A) (hB : IsClosed B) (hBc : IsPreconnected B)
+    (hAne : A.Nonempty) (hAh : ∀ H, ¬ IsHoleOf A H) (hBh : ∀ H, ¬ IsHoleOf B H) (hXo : IsOpen X) (hXK : X ⊆ (A ∪ B)ᶜ)
+    (hsep : Disjoint (closure X) (closure ((A ∪ B)ᶜ \ X))) (hAX : (A ∩ closure X).Nonempty) (hBX : (B ∩ closure X).Nonempty)
+    (hu : IsClosed u) (hv : IsClosed v) (hcov : closure X ∪ (A ∪ B) ⊆ u ∪ v) (hdis : Disjoint ((closure X ∪ (A ∪ B)) ∩ u) v)
+    (hMv : ((closure X ∪ (A ∪ B)) ∩ v).Nonempty) (hAu : A ⊆ u)
+    (hbd : Bornology.IsBounded (X ∩ u) ∨ Bornology.IsBounded (X ∩ v)) : False := by
+  set M := closure X ∪ (A ∪ B) with hM
+  have hMc : IsClosed M := isClosed_closure.union (hA.union hB)
+  have hXM : X ⊆ M := fun z hz => Or.inl (subset_closure hz)
+  have hdis' : Disjoint (M ∩ v) u := by
+    rw [Set.disjoint_left]; exact fun z hz hzu => Set.disjoint_left.mp hdis ⟨hz.1, hzu⟩ hz.2
+  -- `B` lies on one side
+  have hBuv : B ⊆ u ∨ B ⊆ v := by
+    by_contra h
+    push Not at h
+    obtain ⟨⟨b, hbB, hbu⟩, ⟨b', hb'B, hb'v⟩⟩ := And.intro (not_subset.mp h.1) (not_subset.mp h.2)
+    obtain ⟨w, hwB, hwu, hwv⟩ := isPreconnected_closed_iff.mp hBc u v hu hv
+      (fun z hz => hcov (Or.inr (Or.inr hz))) ⟨b', hb'B, (hcov (Or.inr (Or.inr hb'B))).resolve_right hb'v⟩
+      ⟨b, hbB, (hcov (Or.inr (Or.inr hbB))).resolve_left hbu⟩
+    exact Set.disjoint_left.mp hdis ⟨Or.inr (Or.inr hwB), hwu⟩ hwv
+  rcases hBuv with hBu | hBv
+  · -- `A ∪ B ⊆ u`: `X ∩ v` is clopen in `ℂ`, nonempty, and misses `A`
+    have hKu : A ∪ B ⊆ u := union_subset hAu hBu
+    have hcl : closure (X ∩ v) ⊆ X ∩ v := by
+      intro z hz
+      have hzM : z ∈ M ∩ v := closure_minimal (s := X ∩ v) (t := M ∩ v) (fun w hw => ⟨hXM hw.1, hw.2⟩) (hMc.inter hv) hz
+      have hzu : z ∉ u := Set.disjoint_left.mp hdis' hzM
+      have hzK : z ∉ A ∪ B := fun h => hzu (hKu h)
+      have hzX : z ∈ closure X := closure_mono inter_subset_left hz
+      by_contra hzXv
+      have hzX' : z ∉ X := fun h => hzXv ⟨h, hzM.2⟩
+      exact Set.disjoint_left.mp hsep hzX (subset_closure ⟨hzK, hzX'⟩)
+    have hop : IsOpen (X ∩ v) := by
+      have : X ∩ v = X ∩ uᶜ := by
+        ext z
+        refine ⟨fun h => ⟨h.1, Set.disjoint_left.mp hdis' ⟨hXM h.1, h.2⟩⟩, fun h => ⟨h.1, ?_⟩⟩
+        exact (hcov (hXM h.1)).resolve_left h.2
+      rw [this]; exact hXo.inter hu.isOpen_compl
+    have hne : (X ∩ v).Nonempty := by
+      by_contra hne
+      rw [not_nonempty_iff_eq_empty] at hne
+      have hXu : X ⊆ u := fun z hz => (hcov (hXM hz)).resolve_right fun h => (hne ▸ ⟨hz, h⟩ : z ∈ (∅ : Set ℂ))
+      obtain ⟨z, hzM, hzv⟩ := hMv
+      rcases hzM with hz | hz
+      · exact Set.disjoint_left.mp hdis' ⟨Or.inl hz, hzv⟩ (closure_minimal hXu hu hz)
+      · exact Set.disjoint_left.mp hdis' ⟨Or.inr hz, hzv⟩ (hKu hz)
+    have huniv := (isClopen_iff.mp ⟨closure_subset_iff_isClosed.mp hcl, hop⟩).resolve_left hne.ne_empty
+    obtain ⟨a, ha⟩ := hAne
+    exact hXK (huniv ▸ mem_univ a : a ∈ X ∩ v).1 (Or.inl ha)
+  · -- `B ⊆ v`: one piece of `X` is a hole of `A` or of `B`
+    have hdisv : Disjoint ((closure X ∪ (B ∪ A)) ∩ v) u := by
+      rw [union_comm B A]; exact hdis'
+    rcases hbd with hb | hb
+    · -- `X ∩ u` is a hole of `A`
+      refine hAh _ (isHoleOf_inter_of_split hA hB hXK hsep hv hu (by rw [union_comm v u]; exact hcov) hdis' hBv ?_ hb)
+      obtain ⟨a, haA, haX⟩ := hAX
+      by_contra hne
+      rw [not_nonempty_iff_eq_empty] at hne
+      have hXv : X ⊆ v := fun z hz => (hcov (hXM hz)).resolve_left fun h => (hne ▸ ⟨hz, h⟩ : z ∈ (∅ : Set ℂ))
+      exact Set.disjoint_left.mp hdis' ⟨Or.inr (Or.inl haA), closure_minimal hXv hv haX⟩ (hAu haA)
+    · -- `X ∩ v` is a hole of `B`
+      have hXK' : X ⊆ (B ∪ A)ᶜ := by rw [union_comm]; exact hXK
+      have hsep' : Disjoint (closure X) (closure ((B ∪ A)ᶜ \ X)) := by rw [union_comm]; exact hsep
+      refine hBh _ (isHoleOf_inter_of_split hB hA hXK' hsep' hu hv (by rw [union_comm B A]; exact hcov)
+        (by rw [union_comm B A]; exact hdis) hAu ?_ hb)
+      obtain ⟨b, hbB, hbX⟩ := hBX
+      by_contra hne
+      rw [not_nonempty_iff_eq_empty] at hne
+      have hXu : X ⊆ u := fun z hz => (hcov (hXM hz)).resolve_right fun h => (hne ▸ ⟨hz, h⟩ : z ∈ (∅ : Set ℂ))
+      exact Set.disjoint_left.mp hdis' ⟨Or.inr (Or.inr hbB), hBv hbB⟩ (closure_minimal hXu hu hbX)
+
+/-- `cl X ∪ A ∪ B` is preconnected (by `not_split_aux`, on whichever side of a split `A` lies). -/
+theorem isPreconnected_closure_union_aux {A B X : Set ℂ} (hA : IsClosed A) (hB : IsClosed B) (hAc : IsPreconnected A)
+    (hBc : IsPreconnected B) (hAne : A.Nonempty) (hAh : ∀ H, ¬ IsHoleOf A H)
+    (hBh : ∀ H, ¬ IsHoleOf B H) (hXo : IsOpen X) (hXK : X ⊆ (A ∪ B)ᶜ) (hsep : Disjoint (closure X) (closure ((A ∪ B)ᶜ \ X)))
+    (hAX : (A ∩ closure X).Nonempty) (hBX : (B ∩ closure X).Nonempty)
+    (hbd : ∀ u v : Set ℂ, IsClosed u → IsClosed v → X ⊆ u ∪ v → Disjoint (X ∩ u) v →
+      Bornology.IsBounded (X ∩ u) ∨ Bornology.IsBounded (X ∩ v)) :
+    IsPreconnected (closure X ∪ (A ∪ B)) := by
+  set M := closure X ∪ (A ∪ B) with hM
+  have hXM : X ⊆ M := fun z hz => Or.inl (subset_closure hz)
+  rw [isPreconnected_closed_iff]
+  intro u v hu hv hcov hMu hMv
+  by_contra hne
+  have hdis : Disjoint (M ∩ u) v := by
+    rw [Set.disjoint_left]; exact fun z hz hzv => hne ⟨z, hz.1, hz.2, hzv⟩
+  have hdis' : Disjoint (M ∩ v) u := by
+    rw [Set.disjoint_left]; exact fun z hz hzu => hne ⟨z, hz.1, hzu, hz.2⟩
+  have hXdis : ∀ {u v : Set ℂ}, Disjoint (M ∩ u) v → Disjoint (X ∩ u) v := fun h => by
+    rw [Set.disjoint_left]; exact fun z hz hzv => Set.disjoint_left.mp h ⟨hXM hz.1, hz.2⟩ hzv
+  -- `A` lies on one side
+  have hAuv : A ⊆ u ∨ A ⊆ v := by
+    by_contra h
+    push Not at h
+    obtain ⟨⟨a, haA, hau⟩, ⟨a', ha'A, ha'v⟩⟩ := And.intro (not_subset.mp h.1) (not_subset.mp h.2)
+    obtain ⟨w, hwA, hwu, hwv⟩ := isPreconnected_closed_iff.mp hAc u v hu hv
+      (fun z hz => hcov (Or.inr (Or.inl hz))) ⟨a', ha'A, (hcov (Or.inr (Or.inl ha'A))).resolve_right ha'v⟩
+      ⟨a, haA, (hcov (Or.inr (Or.inl haA))).resolve_left hau⟩
+    exact Set.disjoint_left.mp hdis ⟨Or.inr (Or.inl hwA), hwu⟩ hwv
+  rcases hAuv with hAu | hAv
+  · exact not_split_aux hA hB hBc hAne hAh hBh hXo hXK hsep hAX hBX hu hv hcov hdis hMv hAu
+      (hbd u v hu hv (fun z hz => hcov (hXM hz)) (hXdis hdis))
+  · exact not_split_aux hA hB hBc hAne hAh hBh hXo hXK hsep hAX hBX hv hu (by rw [union_comm v u]; exact hcov) hdis' hMu hAv
+      ((hbd u v hu hv (fun z hz => hcov (hXM hz)) (hXdis hdis)).symm)
+
+/-- **Janiszewski's theorem for holes** (FS131-IP5): two disjoint nonempty bounded closed continua, neither with a hole, have no hole together.
+Were `H` a hole of `A ∪ B` and `R` the rest of the complement, `A` and `B` would each meet both `cl H` and `cl R` (else `H` or `H ∪ A`, or the
+symmetric sets, would be a hole of `A` or of `B`); then `cl H ∪ A ∪ B` and `cl R ∪ A ∪ B` are continua (`isPreconnected_closure_union_aux`)
+covering `ℂ` and meeting in `A ∪ B`, which is not connected — against unicoherence (`isPreconnected_inter_of_union_eq_univ`). -/
+theorem not_isHoleOf_union {A B : Set ℂ} (hA : IsClosed A) (hB : IsClosed B) (hAc : IsPreconnected A) (hBc : IsPreconnected B)
+    (hAne : A.Nonempty) (hBne : B.Nonempty) (hAb : Bornology.IsBounded A) (hBb : Bornology.IsBounded B) (hAB : Disjoint A B)
+    (hAh : ∀ H, ¬ IsHoleOf A H) (hBh : ∀ H, ¬ IsHoleOf B H) (H : Set ℂ) : ¬ IsHoleOf (A ∪ B) H := by
+  intro hH
+  have hKc : IsClosed (A ∪ B) := hA.union hB
+  have hHo : IsOpen H := hH.isOpen
+  have hRo : IsOpen ((A ∪ B)ᶜ \ H) := by have := hH.isOpen_diff; rwa [hKc.closure_eq] at this
+  obtain ⟨hHne, hHK, hHb, hHsep⟩ := hH
+  rw [hKc.closure_eq] at hHK hHsep
+  set R := (A ∪ B)ᶜ \ H with hR
+  have hRK : R ⊆ (A ∪ B)ᶜ := sdiff_subset
+  have hRH : (A ∪ B)ᶜ \ R = H := by
+    ext z; constructor
+    · rintro ⟨hzK, hzR⟩; by_contra hzH; exact hzR ⟨hzK, hzH⟩
+    · intro hz; exact ⟨hHK hz, fun h => h.2 hz⟩
+  have hRsep : Disjoint (closure R) (closure ((A ∪ B)ᶜ \ R)) := by rw [hRH]; exact hHsep.symm
+  have hole_of : ∀ {D G : Set ℂ}, IsClosed D → G.Nonempty → Bornology.IsBounded G → G ⊆ Dᶜ →
+      Disjoint (closure G) (closure (Dᶜ \ G)) → IsHoleOf D G := fun hD hGne hGb hGD hGsep =>
+    ⟨hGne, by rw [hD.closure_eq]; exact hGD, hGb, by rw [hD.closure_eq]; exact hGsep⟩
+  -- `A` and `B` each meet `cl H` and `cl R`
+  have hAH : (A ∩ closure H).Nonempty := by
+    by_contra h
+    rw [not_nonempty_iff_eq_empty, ← disjoint_iff_inter_eq_empty] at h
+    refine hBh H (hole_of hB hHne hHb (fun z hz hzB => hHK hz (Or.inr hzB)) ?_)
+    refine Disjoint.mono_right (closure_minimal (t := closure R ∪ A) ?_ (isClosed_closure.union hA))
+      (Disjoint.union_right hHsep h.symm)
+    rintro z ⟨hzB, hzH⟩
+    by_cases hzA : z ∈ A
+    · exact Or.inr hzA
+    · exact Or.inl (subset_closure ⟨fun h => h.elim hzA hzB, hzH⟩)
+  have hBH : (B ∩ closure H).Nonempty := by
+    by_contra h
+    rw [not_nonempty_iff_eq_empty, ← disjoint_iff_inter_eq_empty] at h
+    refine hAh H (hole_of hA hHne hHb (fun z hz hzA => hHK hz (Or.inl hzA)) ?_)
+    refine Disjoint.mono_right (closure_minimal (t := closure R ∪ B) ?_ (isClosed_closure.union hB))
+      (Disjoint.union_right hHsep h.symm)
+    rintro z ⟨hzA, hzH⟩
+    by_cases hzB : z ∈ B
+    · exact Or.inr hzB
+    · exact Or.inl (subset_closure ⟨fun h => h.elim hzA hzB, hzH⟩)
+  have hAR : (A ∩ closure R).Nonempty := by
+    by_contra h
+    rw [not_nonempty_iff_eq_empty, ← disjoint_iff_inter_eq_empty] at h
+    refine hBh (H ∪ A) (hole_of hB (hHne.mono subset_union_left) (hHb.union hAb)
+      (fun z hz hzB => hz.elim (fun h => hHK h (Or.inr hzB)) fun h => Set.disjoint_left.mp hAB h hzB) ?_)
+    rw [closure_union, hA.closure_eq]
+    refine Disjoint.mono_right (closure_mono (s := Bᶜ \ (H ∪ A)) (t := R) ?_) (Disjoint.union_left hHsep h)
+    rintro z ⟨hzB, hzHA⟩
+    exact ⟨fun h' => h'.elim (fun h => hzHA (Or.inr h)) hzB, fun h => hzHA (Or.inl h)⟩
+  have hBR : (B ∩ closure R).Nonempty := by
+    by_contra h
+    rw [not_nonempty_iff_eq_empty, ← disjoint_iff_inter_eq_empty] at h
+    refine hAh (H ∪ B) (hole_of hA (hHne.mono subset_union_left) (hHb.union hBb)
+      (fun z hz hzA => hz.elim (fun h => hHK h (Or.inl hzA)) fun h => Set.disjoint_left.mp hAB hzA h) ?_)
+    rw [closure_union, hB.closure_eq]
+    refine Disjoint.mono_right (closure_mono (s := Aᶜ \ (H ∪ B)) (t := R) ?_) (Disjoint.union_left hHsep h)
+    rintro z ⟨hzA, hzHB⟩
+    exact ⟨fun h' => h'.elim hzA (fun h => hzHB (Or.inr h)), fun h => hzHB (Or.inl h)⟩
+  -- the two continua
+  have hM₁ : IsPreconnected (closure H ∪ (A ∪ B)) :=
+    isPreconnected_closure_union_aux hA hB hAc hBc hAne hAh hBh hHo hHK hHsep hAH hBH
+      fun u v _ _ _ _ => Or.inl (hHb.subset inter_subset_left)
+  have hM₂ : IsPreconnected (closure R ∪ (A ∪ B)) := by
+    refine isPreconnected_closure_union_aux hA hB hAc hBc hAne hAh hBh hRo hRK hRsep hAR hBR ?_
+    intro u v hu hv hcov hdis
+    obtain ⟨ρ, hρ⟩ := ((hAb.union hBb).union hHb).subset_closedBall 0
+    have hfarR : (closedBall (0 : ℂ) ρ)ᶜ ⊆ R := fun z hz =>
+      ⟨fun h => hz (hρ (Or.inl h)), fun h => hz (hρ (Or.inr h))⟩
+    by_cases hu' : ((closedBall (0 : ℂ) ρ)ᶜ ∩ u).Nonempty
+    · by_cases hv' : ((closedBall (0 : ℂ) ρ)ᶜ ∩ v).Nonempty
+      · exfalso
+        obtain ⟨w, hw, hwu, hwv⟩ := isPreconnected_closed_iff.mp (isPreconnected_compl_closedBall 0 ρ) u v hu hv
+          (fun z hz => hcov (hfarR hz)) hu' hv'
+        exact Set.disjoint_left.mp hdis ⟨hfarR hw, hwu⟩ hwv
+      · refine Or.inr (isBounded_closedBall (x := (0 : ℂ)) (r := ρ) |>.subset fun z hz => ?_)
+        by_contra hzρ
+        exact hv' ⟨z, hzρ, hz.2⟩
+    · refine Or.inl (isBounded_closedBall (x := (0 : ℂ)) (r := ρ) |>.subset fun z hz => ?_)
+      by_contra hzρ
+      exact hu' ⟨z, hzρ, hz.2⟩
+  -- unicoherence
+  have hcup : (closure H ∪ (A ∪ B)) ∪ (closure R ∪ (A ∪ B)) = univ := by
+    refine eq_univ_of_forall fun z => ?_
+    by_cases hzK : z ∈ A ∪ B
+    · exact Or.inl (Or.inr hzK)
+    by_cases hzH : z ∈ H
+    · exact Or.inl (Or.inl (subset_closure hzH))
+    · exact Or.inr (Or.inl (subset_closure ⟨hzK, hzH⟩))
+  have hcap : (closure H ∪ (A ∪ B)) ∩ (closure R ∪ (A ∪ B)) = A ∪ B := by
+    ext z; constructor
+    · rintro ⟨h1 | h1, h2 | h2⟩
+      · exact absurd h2 (Set.disjoint_left.mp hHsep h1)
+      · exact h2
+      · exact h1
+      · exact h1
+    · intro hz; exact ⟨Or.inr hz, Or.inr hz⟩
+  have hK := isPreconnected_inter_of_union_eq_univ (isClosed_closure.union hKc) (isClosed_closure.union hKc) hM₁ hM₂ hcup
+  rw [hcap] at hK
+  obtain ⟨a, ha⟩ := hAne
+  obtain ⟨b, hb⟩ := hBne
+  obtain ⟨w, -, hwA, hwB⟩ := isPreconnected_closed_iff.mp hK A B hA hB subset_rfl ⟨a, Or.inl ha, ha⟩ ⟨b, Or.inr hb, hb⟩
+  exact Set.disjoint_left.mp hAB hwA hwB
+
+/-- **The holes of a tile, together, are separated from the rest of the complement** (local finiteness: a point in both closures is in the
+closure of a tile meeting one hole, hence inside it — against that hole's separation). -/
+theorem disjoint_closure_sUnion_holes (hP : F.IsPlaneMap) {X : Set ℂ} (hX : F.IsTile X) :
+    Disjoint (closure (⋃₀ {Hc | IsHoleOf X Hc})) (closure ((closure X)ᶜ \ ⋃₀ {Hc | IsHoleOf X Hc})) := by
+  rw [Set.disjoint_left]
+  intro z hz hz'
+  have hHo : IsOpen (⋃₀ {Hc | IsHoleOf X Hc}) := isOpen_sUnion fun Hc hH => IsHoleOf.isOpen hH
+  obtain ⟨S, hS, ⟨w, hwS, hwH⟩, hzS⟩ := exists_tile_mem_closure_of_mem_closure hHo (by rw [hP]; exact mem_univ z) hz
+  obtain ⟨Hc, hH, hwHc⟩ := hwH
+  have hSX : S ≠ X := fun h => hH.2.1 hwHc (subset_closure (h ▸ hwS))
+  have hSH : S ⊆ Hc := (hS.subset_or_subset_of_separated hH.2.2.2 fun v hv => by
+    by_cases hvH : v ∈ Hc
+    · exact Or.inl hvH
+    · exact Or.inr ⟨IsTile.subset_compl_closure hX hS hSX hv, hvH⟩).resolve_right fun h => (h hwS).2 hwHc
+  exact Set.disjoint_left.mp hH.2.2.2 (closure_mono hSH hzS)
+    (closure_mono (sdiff_subset_sdiff_right (subset_sUnion_of_mem hH)) hz')
+
+/-- **A filled tile has no hole** (FS131-IP5): a hole of `cl x̂` would be a hole of `x` (its closure misses that of the union of `x`'s holes,
+`disjoint_closure_sUnion_holes`), so inside `x̂`. -/
+theorem not_isHoleOf_closure_fill (hP : F.IsPlaneMap) {X : Set ℂ} (hX : F.IsTile X) (H : Set ℂ) :
+    ¬ IsHoleOf (closure (fill X)) H := by
+  rintro ⟨hHne, hHK, hHb, hHsep⟩
+  rw [closure_closure] at hHK hHsep
+  set Hs := ⋃₀ {Hc | IsHoleOf X Hc} with hHs
+  have hfill : closure (fill X) = closure X ∪ closure Hs := closure_union
+  have hHHs : H ⊆ (closure X)ᶜ \ Hs := fun z hz =>
+    ⟨fun h => hHK hz (closure_mono (subset_fill X) h), fun h => hHK hz (subset_closure (Or.inr h))⟩
+  have hhole : IsHoleOf X H := by
+    refine ⟨hHne, fun z hz => (hHHs hz).1, hHb, ?_⟩
+    have hsub : (closure X)ᶜ \ H ⊆ ((closure (fill X))ᶜ \ H) ∪ closure Hs := by
+      rintro z ⟨hzX, hzH⟩
+      by_cases hzf : z ∈ closure (fill X)
+      · rw [hfill] at hzf; exact Or.inr (hzf.resolve_left hzX)
+      · exact Or.inl ⟨hzf, hzH⟩
+    have h2 : closure ((closure X)ᶜ \ H) ⊆ closure ((closure (fill X))ᶜ \ H) ∪ closure Hs := by
+      have := closure_mono hsub; rwa [closure_union, closure_closure] at this
+    exact Disjoint.mono_right h2
+      (Disjoint.union_right hHsep ((disjoint_closure_sUnion_holes hP hX).symm.mono_left (closure_mono hHHs)))
+  obtain ⟨z, hz⟩ := hHne
+  exact hHK hz (subset_closure (Or.inr ⟨H, hhole, hz⟩))
+
+/-- **A filled tile's closure is a continuum**: the tile's closure with the closures of the complementary components inside its holes, each
+meeting it on its frontier. -/
+theorem isPreconnected_closure_fill {X : Set ℂ} (hX : F.IsTile X) : IsPreconnected (closure (fill X)) := by
+  set O := (closure X)ᶜ with hO
+  have hOo : IsOpen O := isClosed_closure.isOpen_compl
+  obtain ⟨x₀, hx₀⟩ := hX.nonempty
+  set c : Set (Set ℂ) :=
+    insert (closure X) {s | ∃ z ∈ ⋃₀ {Hc | IsHoleOf X Hc}, s = closure X ∪ closure (connectedComponentIn O z)} with hc
+  have hmeet : ∀ z ∈ O, (closure X ∩ closure (connectedComponentIn O z)).Nonempty := by
+    intro z hz
+    have hfr : (frontier (connectedComponentIn O z)).Nonempty := by
+      rw [nonempty_frontier_iff]
+      exact ⟨⟨z, mem_connectedComponentIn hz⟩, fun h =>
+        connectedComponentIn_subset O z (h ▸ mem_univ x₀ : x₀ ∈ connectedComponentIn O z) (subset_closure hx₀)⟩
+    obtain ⟨w, hw⟩ := hfr
+    exact ⟨w, by simpa [hO] using frontier_connectedComponentIn_subset hOo z hw, hw.1⟩
+  have hcp : IsPreconnected (⋃₀ c) := by
+    refine isPreconnected_sUnion x₀ c ?_ ?_
+    · rintro s (rfl | ⟨z, -, rfl⟩)
+      · exact subset_closure hx₀
+      · exact Or.inl (subset_closure hx₀)
+    · rintro s (rfl | ⟨z, ⟨Hc, hH, hzH⟩, rfl⟩)
+      · exact hX.isPreconnected.closure
+      · obtain ⟨w, hw1, hw2⟩ := hmeet z (hH.2.1 hzH)
+        exact hX.isPreconnected.closure.union w hw1 hw2 isPreconnected_connectedComponentIn.closure
+  refine hcp.subset_closure (sUnion_subset ?_) (closure_mono ?_)
+  · rintro s (rfl | ⟨z, ⟨Hc, hH, hzH⟩, rfl⟩)
+    · exact closure_mono (subset_fill X)
+    · exact union_subset (closure_mono (subset_fill X))
+        (closure_mono ((hH.connectedComponentIn_subset hzH).trans fun w hw => Or.inr ⟨Hc, hH, hw⟩))
+  · rintro w (hw | ⟨Hc, hH, hwH⟩)
+    · exact ⟨closure X, mem_insert _ _, subset_closure hw⟩
+    · exact ⟨_, Or.inr ⟨w, ⟨Hc, hH, hwH⟩, rfl⟩, Or.inr (subset_closure (mem_connectedComponentIn (hH.2.1 hwH)))⟩
+
+/-- **Tiles off a closed set without holes are chained** (FS131-IP5; `cvb_pinch_connected`'s argument for any closed bounded `K`): if every
+tile meeting `Kᶜ` lies in it and `K` has no hole, a nonempty set `P` of tiles in `Kᶜ`, closed under passing to a tile in `Kᶜ` whose closure
+meets a member's, holds every tile in `Kᶜ`. The components of `Kᶜ` holding a tile of `P` are chained inside (`mem_of_touch_closed`) and their
+union `Y` is separated from the rest (a common closure point is in the closures of tiles of both, which touch); whichever of the two misses
+the unbounded part is a hole of `K`, so empty. -/
+theorem mem_of_touch_closed_of_not_isHoleOf (hP : F.IsPlaneMap) {K : Set ℂ} (hK : IsClosed K) (hKb : Bornology.IsBounded K)
+    (hno : ∀ H, ¬ IsHoleOf K H) (hin : ∀ S, F.IsTile S → (S ∩ Kᶜ).Nonempty → S ⊆ Kᶜ) (P : Set (Set ℂ))
+    (hPt : ∀ S ∈ P, F.IsTile S ∧ S ⊆ Kᶜ) (hne : P.Nonempty)
+    (hcl : ∀ S ∈ P, ∀ S', F.IsTile S' → S' ⊆ Kᶜ → (closure S ∩ closure S').Nonempty → S' ∈ P) :
+    ∀ S, F.IsTile S → S ⊆ Kᶜ → S ∈ P := by
+  set O := Kᶜ with hO
+  have hOo : IsOpen O := hK.isOpen_compl
+  have hdom : ∀ S : Set ℂ, S ⊆ F.dom := fun S => by rw [hP]; exact subset_univ _
+  have hsubC : ∀ S, F.IsTile S → S ⊆ O → ∀ s ∈ S, S ⊆ connectedComponentIn O s := fun S hS hSO s hs =>
+    hS.isPreconnected.subset_connectedComponentIn hs hSO
+  -- every tile in a component of `O` holding a tile of `P` is in `P`
+  have hcomp : ∀ w ∈ O, (∃ S ∈ P, (S ∩ connectedComponentIn O w).Nonempty) →
+      ∀ S, F.IsTile S → S ⊆ connectedComponentIn O w → S ∈ P := by
+    intro w hw ⟨S₀, hS₀P, hS₀w⟩
+    set U := connectedComponentIn O w
+    have hUo : IsOpen U := hOo.connectedComponentIn
+    have hinU : ∀ S, F.IsTile S → (S ∩ U).Nonempty → S ⊆ U := by
+      rintro S hS ⟨z, hzS, hzU⟩
+      have hSO := hin S hS ⟨z, hzS, connectedComponentIn_subset _ _ hzU⟩
+      rw [show U = connectedComponentIn O z from connectedComponentIn_eq hzU]
+      exact hsubC S hS hSO z hzS
+    have key := mem_of_touch_closed hUo isPreconnected_connectedComponentIn (hdom _) hinU {S | S ∈ P ∧ S ⊆ U}
+      (fun S hS => ⟨(hPt S hS.1).1, hS.2⟩) ⟨S₀, hS₀P, hinU S₀ (hPt S₀ hS₀P).1 hS₀w⟩ (by
+        rintro S ⟨hSP, hSU⟩ S' hS' hS'U hcl'
+        exact ⟨hcl S hSP S' hS' (hS'U.trans (connectedComponentIn_subset _ _)) hcl', hS'U⟩)
+    intro S hS hSU
+    exact (key S hS hSU).1
+  set Y := {z | z ∈ O ∧ ∃ S ∈ P, (S ∩ connectedComponentIn O z).Nonempty} with hYdef
+  set Hc := O \ Y with hHcdef
+  have hYsat : ∀ z ∈ O, ∀ w ∈ connectedComponentIn O z, (w ∈ Y ↔ z ∈ Y) := by
+    intro z hz w hw
+    rw [hYdef, mem_setOf_eq, mem_setOf_eq, ← connectedComponentIn_eq hw]
+    exact ⟨fun h => ⟨hz, h.2⟩, fun h => ⟨connectedComponentIn_subset _ _ hw, h.2⟩⟩
+  have hYo : IsOpen Y := by
+    rw [isOpen_iff_forall_mem_open]
+    intro z hz
+    exact ⟨connectedComponentIn O z, fun w hw => (hYsat z hz.1 w hw).mpr hz, hOo.connectedComponentIn,
+      mem_connectedComponentIn hz.1⟩
+  have hHo : IsOpen Hc := by
+    rw [isOpen_iff_forall_mem_open]
+    intro z hz
+    exact ⟨connectedComponentIn O z, fun w hw => ⟨connectedComponentIn_subset _ _ hw,
+      fun hwY => hz.2 ((hYsat z hz.1 w hw).mp hwY)⟩, hOo.connectedComponentIn, mem_connectedComponentIn hz.1⟩
+  have hYP : ∀ S, F.IsTile S → (S ∩ Y).Nonempty → S ∈ P := by
+    rintro S hS ⟨z, hzS, hzY⟩
+    exact hcomp z hzY.1 hzY.2 S hS (hsubC S hS (hin S hS ⟨z, hzS, hzY.1⟩) z hzS)
+  have hsep : Disjoint (closure Hc) (closure Y) := by
+    rw [Set.disjoint_left]
+    intro z hzH hzY
+    obtain ⟨X, hX, ⟨x', hx'X, hx'H⟩, hzX⟩ := exists_tile_mem_closure_of_mem_closure hHo (hdom _ (mem_univ z)) hzH
+    obtain ⟨W, hW, ⟨w, hwW, hwY⟩, hzW⟩ := exists_tile_mem_closure_of_mem_closure hYo (hdom _ (mem_univ z)) hzY
+    have hWP := hYP W hW ⟨w, hwW, hwY⟩
+    have hXO : X ⊆ O := hin X hX ⟨x', hx'X, hx'H.1⟩
+    have hXP : X ∈ P := hcl W hWP X hX hXO ⟨z, hzW, hzX⟩
+    exact hx'H.2 ⟨hx'H.1, X, hXP, x', hx'X, mem_connectedComponentIn hx'H.1⟩
+  have hYH : O \ Hc = Y := by
+    ext z; constructor
+    · rintro ⟨hzO, hzH⟩; by_contra hzY; exact hzH ⟨hzO, hzY⟩
+    · intro hz; exact ⟨hz.1, fun h => h.2 hz⟩
+  -- the far part lies in `Y` or in `Hc`; the other is a hole of `K`
+  obtain ⟨ρ, hρ⟩ := hKb.subset_closedBall 0
+  have hfarO : (closedBall (0 : ℂ) ρ)ᶜ ⊆ O := fun z hz h => hz (hρ h)
+  have hcov : (closedBall (0 : ℂ) ρ)ᶜ ⊆ Y ∪ Hc := fun z hz => by
+    by_cases hzY : z ∈ Y
+    · exact Or.inl hzY
+    · exact Or.inr ⟨hfarO hz, hzY⟩
+  have hYHd : Disjoint Y Hc := Set.disjoint_left.mpr fun z hzY hzH => hzH.2 hzY
+  obtain ⟨S₀, hS₀P⟩ := hne
+  obtain ⟨s₀, hs₀⟩ := (hPt S₀ hS₀P).1.nonempty
+  have hs₀Y : s₀ ∈ Y := ⟨(hPt S₀ hS₀P).2 hs₀, S₀, hS₀P, s₀, hs₀, mem_connectedComponentIn ((hPt S₀ hS₀P).2 hs₀)⟩
+  have hHc : Hc = ∅ := by
+    rcases (isPreconnected_compl_closedBall (0 : ℂ) ρ).subset_or_subset hYo hHo hYHd hcov with hfY | hfH
+    · by_contra hne'
+      refine hno Hc ⟨nonempty_iff_ne_empty.mpr hne', by rw [hK.closure_eq]; exact sdiff_subset,
+        (isBounded_closedBall (x := (0 : ℂ)) (r := ρ)).subset fun z hz => ?_, by rw [hK.closure_eq, hYH]; exact hsep⟩
+      by_contra hzρ
+      exact hz.2 (hfY hzρ)
+    · exfalso
+      refine hno Y ⟨⟨s₀, hs₀Y⟩, by rw [hK.closure_eq]; exact fun z hz => hz.1,
+        (isBounded_closedBall (x := (0 : ℂ)) (r := ρ)).subset fun z hz => ?_, by rw [hK.closure_eq]; exact hsep.symm⟩
+      by_contra hzρ
+      exact (hfH hzρ).2 hz
+  intro S hS hSO
+  obtain ⟨z, hz⟩ := hS.nonempty
+  have hzY : z ∈ Y := by
+    by_contra hzY
+    have : z ∈ Hc := ⟨hSO hz, hzY⟩
+    rw [hHc] at this
+    exact this
+  exact hYP S hS ⟨z, hz, hzY⟩
+
+/-- Filled closures of tiles are bounded. -/
+theorem isBounded_closure_fill (hF : F.Valid) {X : Set ℂ} (hX : F.IsTile X) : Bornology.IsBounded (closure (fill X)) := by
+  obtain ⟨w, hw⟩ := hX.nonempty
+  exact isBounded_closedBall.subset (closure_fill_subset_closedBall hF hX (subset_closure hw))
+
+/-- **Two outer tiles with disjoint filled closures separate nothing** (FS131-IP5; F-RING's clause for a vertex absent from the ring, and
+F-SEP's): `M̂ − x − y` is connected. `cl x̂ ∪ cl ŷ` has no hole (`not_isHoleOf_union` over `not_isHoleOf_closure_fill`), so the tiles off it
+are chained (`mem_of_touch_closed_of_not_isHoleOf`), each in the fill of an outer tile other than `x`, `y`. -/
+theorem filledGraph_offTwo_connected (hF : F.Valid) (hP : F.IsPlaneMap) (x y : {T : Set ℂ // F.IsOuterTile T})
+    (hd : Disjoint (closure (fill x.1)) (closure (fill y.1))) : (F.filledGraph.induce (Thomassen.offTwo x y)).Connected := by
+  set G' := F.filledGraph.induce (Thomassen.offTwo x y) with hG'
+  set K := closure (fill x.1) ∪ closure (fill y.1) with hK
+  have nonemp : ∀ X : Set ℂ, F.IsTile X → (closure (fill X)).Nonempty := fun X hX =>
+    hX.nonempty.mono fun z hz => subset_closure (subset_fill X hz)
+  have hno : ∀ H, ¬ IsHoleOf K H := not_isHoleOf_union isClosed_closure isClosed_closure (isPreconnected_closure_fill x.2.1)
+    (isPreconnected_closure_fill y.2.1) (nonemp _ x.2.1) (nonemp _ y.2.1) (isBounded_closure_fill hF x.2.1)
+    (isBounded_closure_fill hF y.2.1) hd (not_isHoleOf_closure_fill hP x.2.1) (not_isHoleOf_closure_fill hP y.2.1)
+  haveI : Nonempty (Thomassen.offTwo x y) := (offTwo_infinite hF hP x y).nonempty.to_subtype
+  refine ⟨fun v w => ?_⟩
+  set P : Set (Set ℂ) := {S | F.IsTile S ∧ S ⊆ Kᶜ ∧ ∃ (T : Set ℂ) (hT : F.IsOuterTile T)
+    (hTo : (⟨T, hT⟩ : {T : Set ℂ // F.IsOuterTile T}) ∈ Thomassen.offTwo x y), S ⊆ fill T ∧ G'.Reachable v ⟨⟨T, hT⟩, hTo⟩} with hPdef
+  have key := mem_of_touch_closed_of_not_isHoleOf hP (isClosed_closure.union isClosed_closure)
+    ((isBounded_closure_fill hF x.2.1).union (isBounded_closure_fill hF y.2.1)) hno
+    (fun S hS h => subset_compl_of_inter_compl x.2.1 y.2.1 hS h) P (fun S hS => ⟨hS.1, hS.2.1⟩)
+    ⟨v.1.1, v.1.2.1, subset_compl_of_mem_offTwo v.1 v.2, v.1.1, v.1.2, v.2, subset_fill _, SimpleGraph.Reachable.refl _⟩ (by
+      rintro S ⟨hS, hSK, T, hT, hTo, hST, hreach⟩ S' hS' hS'K ⟨z, hzS, hzS'⟩
+      obtain ⟨T', hT', hT'o, hS'T'⟩ := exists_outer_fill_offTwo hF hP x y hS' hS'K
+      exact ⟨hS', hS'K, T', hT', hT'o, hS'T', hreach.trans (reachable_offTwo_of_inter (a := ⟨⟨T, hT⟩, hTo⟩)
+        (b := ⟨⟨T', hT'⟩, hT'o⟩) ⟨z, closure_mono hST hzS, closure_mono hS'T' hzS'⟩)⟩)
+  obtain ⟨-, -, T, hT, hTo, hwT, hreach⟩ := key w.1.1 w.1.2.1 (subset_compl_of_mem_offTwo w.1 w.2)
+  obtain ⟨s, hs⟩ := w.1.2.1.nonempty
+  exact hreach.trans (reachable_offTwo_of_inter (a := ⟨⟨T, hT⟩, hTo⟩) (b := w)
+    ⟨s, subset_closure (hwT hs), subset_closure (subset_fill _ hs)⟩)
+
 /-- **Rings from boundary walks** (leaf F-RING, the planar heart of CVB B2 step 2): every filled outer tile `x̂` has a ring — the outer
 boundary walk of `x̂` (`frontier (outerDom x)`, preconnected), listing the tiles met at each pass (sector charts), each repeated tile only at
 its edge contacts — and `M̂ − x − y` is connected unless `y` appears twice apart (a bounded component of `ℂ ∖ (cl x̂ ∪ cl ŷ)` is enclosed by
@@ -349,7 +949,31 @@ component — the tiles of the unbounded component of `ℂ ∖ (cl x̂ ∪ cl ŷ
 bounded components finitely many (`finite_tiles_closure_inter` on the hull), and every component meeting no unbounded tile is among them. -/
 theorem filledGraph_oneInf (hF : F.Valid) (hP : F.IsPlaneMap) (x y : {T : Set ℂ // F.IsOuterTile T}) (hxy : x ≠ y) :
     ∃ c : (F.filledGraph.induce (Thomassen.offTwo x y)).ConnectedComponent, ¬ c.supp.Finite ∧ ∀ c', ¬ c'.supp.Finite → c' = c := by
-  sorry
+  -- `x ≠ y` is not read: the far side is one class for `x = y` too (`exists_far_component`)
+  have _ := hxy
+  have hdom : ∀ A : Set ℂ, A ⊆ F.dom := fun A => by rw [hP]; exact subset_univ _
+  -- the two filled closures lie in one disc
+  obtain ⟨p, hp⟩ := x.2.1.nonempty
+  obtain ⟨q, hq⟩ := y.2.1.nonempty
+  have hR : closure (fill x.1) ∪ closure (fill y.1) ⊆ closedBall p (dist q p + 1) :=
+    union_subset ((closure_fill_subset_closedBall hF x.2.1 (subset_closure hp)).trans
+        (closedBall_subset_closedBall (by linarith [dist_nonneg (x := q) (y := p)])))
+      ((closure_fill_subset_closedBall hF y.2.1 (subset_closure hq)).trans (closedBall_subset_closedBall' (by linarith)))
+  obtain ⟨C, hCinf, hCfar⟩ := exists_far_component hF hP x y hR
+  refine ⟨C, hCinf, fun C' hC' => ?_⟩
+  -- an infinite component has a tile meeting the far region: finitely many tiles lie in the disc
+  have hfin : {v : Thomassen.offTwo x y | v.1.1 ⊆ closedBall p (dist q p + 1)}.Finite := by
+    refine ((finite_tiles_closure_inter (isCompact_closedBall p (dist q p + 1)) (hdom _)).preimage
+      (Subtype.val_injective.comp Subtype.val_injective).injOn).subset fun v hv => ?_
+    obtain ⟨w, hw⟩ := v.1.2.1.nonempty
+    exact ⟨v.1.2.1, w, subset_closure hw, hv hw⟩
+  obtain ⟨v, hvC', hvR⟩ : ∃ v ∈ C'.supp, ¬ v.1.1 ⊆ closedBall p (dist q p + 1) := by
+    by_contra h
+    push Not at h
+    exact hC' (hfin.subset fun v hv => h v hv)
+  obtain ⟨w, hw, hwR⟩ := not_subset.mp hvR
+  rw [← (SimpleGraph.ConnectedComponent.mem_supp_iff _ _).mp hvC']
+  exact hCfar v.1 v.2 ⟨w, hw, hwR⟩
 
 /-- **Finitely many pairs enclose a tile** (leaf F-SEP, inventory item 309; FS131-IT1's sketch, one mind): a filled outer tile `v` lies in the
 interior of finitely many pairs of `M̂`. If `v ∈ int(x, y)` then `{x, y}` is a 2-separator, so `x̂` and `ŷ` touch (the rings), and `v̂` lies in a
@@ -357,7 +981,48 @@ bounded component of `ℂ ∖ (cl x̂ ∪ cl ŷ)`, inside that compact set's con
 tiles of diameter at most `1`), and only finitely many tiles do (`finite_tiles_closure_inter`). -/
 theorem filledGraph_finSep (hF : F.Valid) (hP : F.IsPlaneMap) (v : {T : Set ℂ // F.IsOuterTile T}) :
     {p : {T : Set ℂ // F.IsOuterTile T} × {T : Set ℂ // F.IsOuterTile T} | v ∈ Thomassen.twoSepInterior F.filledGraph p.1 p.2}.Finite := by
-  sorry
+  have hdom : ∀ A : Set ℂ, A ⊆ F.dom := fun A => by rw [hP]; exact subset_univ _
+  obtain ⟨p, hp⟩ := v.2.1.nonempty
+  have hfin : {T : {T : Set ℂ // F.IsOuterTile T} | (closure T.1 ∩ closedBall p 3).Nonempty}.Finite :=
+    ((finite_tiles_closure_inter (isCompact_closedBall p 3) (hdom _)).preimage Subtype.val_injective.injOn).subset
+      fun T hT => ⟨T.2.1, hT⟩
+  refine (hfin.prod hfin).subset ?_
+  rintro ⟨x, y⟩ ⟨hvo, hvfin⟩
+  -- the filled closures of `x` and `y` meet: else `M̂ − x − y` is connected (`filledGraph_offTwo_connected`) and infinite
+  have hmeet : (closure (fill x.1) ∩ closure (fill y.1)).Nonempty := by
+    by_contra hd
+    rw [not_nonempty_iff_eq_empty, ← disjoint_iff_inter_eq_empty] at hd
+    have hconn := filledGraph_offTwo_connected hF hP x y hd
+    have huniv : ((F.filledGraph.induce (Thomassen.offTwo x y)).connectedComponentMk ⟨v, hvo⟩).supp = univ :=
+      eq_univ_of_forall fun w => (SimpleGraph.ConnectedComponent.mem_supp_iff _ _).mpr
+        (SimpleGraph.ConnectedComponent.sound (hconn.preconnected w ⟨v, hvo⟩))
+    rw [huniv] at hvfin
+    exact offTwo_infinite hF hP x y (Set.finite_coe_iff.mp (Set.finite_univ_iff.mp hvfin))
+  obtain ⟨z, hzx, hzy⟩ := hmeet
+  obtain ⟨qx, hqx⟩ := x.2.1.nonempty
+  obtain ⟨qy, hqy⟩ := y.2.1.nonempty
+  have hx1 := closure_fill_subset_closedBall hF x.2.1 (subset_closure hqx)
+  have hy1 := closure_fill_subset_closedBall hF y.2.1 (subset_closure hqy)
+  have hdxy : dist qx qy ≤ 2 := by
+    have h1 := hx1 hzx
+    have h2 := hy1 hzy
+    rw [mem_closedBall] at h1 h2
+    linarith [dist_triangle qx z qy, dist_comm z qx]
+  -- `v` lies in every disc holding both filled closures (`exists_far_component`)
+  have hvin : ∀ c R, closure (fill x.1) ∪ closure (fill y.1) ⊆ closedBall c R → v.1 ⊆ closedBall c R := by
+    intro c R hR
+    by_contra h
+    obtain ⟨w, hw, hwR⟩ := not_subset.mp h
+    obtain ⟨C, hCinf, hCfar⟩ := exists_far_component hF hP x y hR
+    rw [hCfar v hvo ⟨w, hw, hwR⟩] at hvfin
+    exact hCinf hvfin
+  have h1 := hvin qx 3 (union_subset (hx1.trans (closedBall_subset_closedBall (by norm_num)))
+    (hy1.trans (closedBall_subset_closedBall' (by linarith [dist_comm qy qx])))) hp
+  have h2 := hvin qy 3 (union_subset (hx1.trans (closedBall_subset_closedBall' (by linarith)))
+    (hy1.trans (closedBall_subset_closedBall (by norm_num)))) hp
+  refine ⟨⟨qx, subset_closure hqx, ?_⟩, ⟨qy, subset_closure hqy, ?_⟩⟩
+  · rw [mem_closedBall, dist_comm]; exact h1
+  · rw [mem_closedBall, dist_comm]; exact h2
 
 /-- **The filled map graph of a valid plane map has Thomassen's planar properties** (CVB B2 steps 1–3; the six leaves above). -/
 theorem filledGraph_planarLike (hF : F.Valid) (hP : F.IsPlaneMap) : Thomassen.PlanarLike F.filledGraph :=

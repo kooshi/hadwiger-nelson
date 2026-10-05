@@ -872,3 +872,52 @@ over 447 batches). F-LOC came free with the shared lemma. **Re-price of what is 
 class); F-SEP 0.3 — it needs, beside F-ONE's far-side lemma, that a pair whose interior holds a tile has meeting filled closures, which is F-RING's
 non-neighbour clause: `M̂ − x − y` is connected when `cl x̂ ∩ cl ŷ = ∅`. That clause is Janiszewski's theorem for holes (two disjoint continua
 without holes have none together), drafted over unicoherence (§ 18); the adversaries 0.2; F-RING's ring list (the boundary walk) unmeasured.
+
+## Stage 18 — SAVED: F-ONE and F-SEP proved; Janiszewski's theorem for holes, and F-RING's non-neighbour clause
+
+### 18.1 Proved (statements unchanged)
+
+- **`exists_far_component`** (the far side is one class): for outer `x`, `y` (equal allowed) with `cl x̂ ∪ cl ŷ ⊆ B̄(c, R)`, `M̂ − x − y` has an infinite
+  component holding every outer tile other than `x`, `y` that meets `B̄(c, R)ᶜ`. A tile meeting `K = cl x̂ ∪ cl ŷ` lies in `x̂` or `ŷ`
+  (`eq_or_subset_hole_of_inter`), so every tile meeting `Kᶜ` lies in it and in one of its components; the tiles of the unbounded component are
+  chained (`mem_of_touch_closed`), each inside an outer fill other than `x̂`, `ŷ` (`exists_outer_fill_offTwo`).
+- **`filledGraph_oneInf`** (F-ONE): an infinite component has an outer tile meeting `B̄(c, R)ᶜ` (finitely many lie in the disc), so it is the far one.
+  The hypothesis `x ≠ y` is not read (referenced by a `have _ := hxy` so the linter stays silent; the statement is untouched).
+- **`not_isHoleOf_union`** — **Janiszewski's theorem for holes**, pure plane topology: two disjoint nonempty bounded closed continua, neither with a
+  hole (in `IsHoleOf`'s sense, read for a closed set `K` as `IsHoleOf K`), have no hole together. Were `H` a hole of `A ∪ B` and `R` the rest of the
+  complement, `A` and `B` each meet `cl H` and `cl R` (else `H`, or `H ∪ A`, `H ∪ B`, is a hole of one of them); then `cl H ∪ A ∪ B` and
+  `cl R ∪ A ∪ B` are continua (a split cuts `H` or `R` into a hole of `A`, a hole of `B`, or a nonempty proper clopen set of `ℂ`:
+  `isHoleOf_inter_of_split`, `not_split_aux`, `isPreconnected_closure_union_aux`), cover `ℂ` and meet in `A ∪ B` — against unicoherence
+  (`isPreconnected_inter_of_union_eq_univ`, held). No component counting and no local finiteness enter.
+- **`not_isHoleOf_closure_fill`**: a filled tile's closure has no hole — the union of a tile's holes is separated from the rest of the complement
+  (`disjoint_closure_sUnion_holes`, by local finiteness: a common closure point is in the closure of a tile meeting one hole, hence inside it).
+  **`isPreconnected_closure_fill`**: `cl x̂` is a continuum.
+- **`mem_of_touch_closed_of_not_isHoleOf`** (CHAIN): `cvb_pinch_connected`'s argument for any closed bounded `K` without a hole, every tile meeting
+  `Kᶜ` lying in it — the tiles in `Kᶜ` are chained by touching closures; whichever of `Y` (the components holding a tile of `P`) and the rest misses
+  the unbounded part is a hole of `K`.
+- **`filledGraph_offTwo_connected`** (J): for outer `x`, `y` with `cl x̂ ∩ cl ŷ = ∅`, `M̂ − x − y` is connected — `cl x̂ ∪ cl ŷ` has no hole, so CHAIN.
+  This is F-RING's clause for a vertex absent from the ring, and the step of F-SEP.
+- **`filledGraph_finSep`** (F-SEP): if `v ∈ int(x, y)` then `cl x̂` and `cl ŷ` meet (else `M̂ − x − y` is connected, by J, and infinite), so both lie
+  within `3` of each point of `cl x`, and `v`, outside the far component, lies in every disc holding them: `cl x` and `cl y` meet `B̄(p, 3)`
+  (`p ∈ v`); finitely many tiles do. IT1's sketch (adjacency through the rings) is replaced by J, which needs no ring.
+- Children: `eq_or_subset_hole_of_inter`, `subset_fill_of_inter`, `IsOuterTile.disjoint_closure_fill`, `reachable_offTwo_of_inter`,
+  `subset_compl_of_inter_compl`, `subset_compl_of_mem_offTwo`, `exists_outer_fill_offTwo`, `offTwo_infinite`, `exists_far_component`,
+  `isHoleOf_inter_of_split`, `not_split_aux`, `isPreconnected_closure_union_aux`, `not_isHoleOf_union`, `disjoint_closure_sUnion_holes`,
+  `not_isHoleOf_closure_fill`, `isPreconnected_closure_fill`, `mem_of_touch_closed_of_not_isHoleOf`, `isBounded_closure_fill`,
+  `filledGraph_offTwo_connected` (all `MapGraph`, between F-INF and F-RING).
+
+### 18.2 The stage-18 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 7.5 s, `Proofs`), 9 modules with warnings, every
+warning `declaration uses 'sorry'`; `MapGraph`'s three `sorry` declarations are `not_isHoleOf_chain`, `isHoleOf_cluster`, `filledGraph_rings`;
+exit 0** (`build/gate/build/20261005T044937Z-1440384.log`; `data/fs131/ip/build-ip5-s18.log`; grep for `warning|error` minus the `sorry` lines leaves
+only Lake's `--no-build` probe lines).
+
+Axioms: `data/fs131/ip/AxiomsIP5b.lean` → `data/fs131/ip/axioms-ip5-stage18.txt`, checked by `tools/fs131_ip_axioms.py` against
+`data/fs131/ip/axioms-ip5b-names.txt`: **21 records on the standard three (the 19 children, F-ONE, F-SEP); 3 controls on `sorryAx`
+(`filledGraph_rings`, `filledGraph_planarLike`, `cvb_thom_reduced`)**; planted fault (`filledGraph_rings` listed as clean) → `NOT CLEAN …`, exit 1.
+`scripts/Axioms.lean`'s FS131-KP block gains the 19 children.
+
+### 18.3 Cost
+
+From stage 17's commit (04:45Z) to this stage (05:00Z): about 15 minutes and one build; about 560 lines (Janiszewski for holes ≈ 250, CHAIN ≈ 120).
