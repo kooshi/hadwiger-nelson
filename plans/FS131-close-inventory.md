@@ -3326,3 +3326,7 @@ reason by the close.*
      and 23 controls). Both digests re-run after the edit: "match" (axioms: clean, purchases, imported; vacuity: 9 of 9). `tools/claude_md_fact_audit.py --base
      bdb8d318`: 13 losses, every one a superseded count or Woodall's attribution (10851, 755, 718, 111, 3633, 3654, FS131-WL1) — expected. **Wave 5's landing now
      waits on wave 5 alone**: MERGE is on `main`. Kooshi push-notified.
+377. **Ruling on ML1's slot: FS131-E6 (Ephodos, F6)**, as item 374 (b) queued — its claim list fixed first (`data/fs131/claims-E6.md`: `ShaveAvailable`,
+     `exists_shave`, `IsModification`, `exists_terminal`, copied by script, then the question and its *not claimed* line). Alternative weighed: lane B of the
+     limit (`Terminal`'s two children). Why: F6 is a question about `exists_terminal`'s truth, which every later job on the procedure builds toward; lane B's
+     first children do not read it and can start at the next slot. Confidence: high. In flight after E6's launch: 1 (KB2) + 1 (IL1) + 1 (E6) = 3.
