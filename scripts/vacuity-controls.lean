@@ -213,4 +213,42 @@ theorem planted_generic_aeRegions {k : ℕ} (_R : Plane.AeProperRegions k) (x : 
 /-- CONTROL 50 — `AeProperRegions` at a `k` nothing decides. `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
 theorem planted_unknown_aeRegions (_R : Plane.AeProperRegions 4) (x : ℂ) : x = x := rfl
 
+/-- CONTROL 51 — Woodall's `SectorsAt` at the instance `threeSectorDisc_not_sectorsAt_one` refutes (`1` is off the domain). `VACUOUS`. -/
+theorem planted_vacuous_sectorsAt (_h : Plane.ArcMap.threeSectorDisc.SectorsAt 1 1 ![0, 2 * Real.pi] ![0]) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 52 — `SectorsAt` at a variable map: `GENERIC`. -/
+theorem planted_generic_sectorsAt {k : ℕ} (F : Plane.ArcMap k) (v : ℂ) (n : ℕ) (d : Fin (n + 1) → ℝ) (c : Fin n → Fin k)
+    (_h : F.SectorsAt v n d c) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 53 — `SectorsAt` at `halfDisc`'s centre with one sector (false — two colours approach — but no closed theorem says so).
+`UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_sectorsAt (_h : Plane.halfDisc.SectorsAt 0 1 ![0, 2 * Real.pi] ![0]) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 54 — `NiceAt` at the point `threeSectorDisc_not_niceAt_one` refutes. `VACUOUS`. -/
+theorem planted_vacuous_niceAt (_h : Plane.ArcMap.threeSectorDisc.NiceAt 1) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 55 — `NiceAt` at a variable map: `GENERIC`. -/
+theorem planted_generic_niceAt {k : ℕ} (F : Plane.ArcMap k) (v : ℂ) (_h : F.NiceAt v) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 56 — `NiceAt` at `1/4` on `halfDisc`'s segment (true, two sectors, but proved nowhere). `UNKNOWN`. -/
+theorem planted_unknown_niceAt (_h : Plane.halfDisc.NiceAt (1 / 4)) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 57 — `WoodallMerged` at the map `puncturedThreeSectorDisc_not_woodallMerged` refutes. `VACUOUS`. -/
+theorem planted_vacuous_merged (_h : Plane.ArcMap.puncturedThreeSectorDisc.WoodallMerged Set.univ) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 58 — `WoodallMerged` at a variable map: `GENERIC`. -/
+theorem planted_generic_merged {k : ℕ} (F : Plane.ArcMap k) (K : Set ℂ) (_h : F.WoodallMerged K) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 59 — `WoodallMerged` on `halfDisc` (true — no point carries three colours — but proved nowhere). `UNKNOWN`. -/
+theorem planted_unknown_merged (_h : Plane.halfDisc.WoodallMerged Set.univ) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 60 — `WoodallNormal` at the map `puncturedThreeSectorDisc_not_woodallNormal` refutes. `VACUOUS`. -/
+theorem planted_vacuous_normal (_h : Plane.ArcMap.puncturedThreeSectorDisc.WoodallNormal Set.univ) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 61 — `WoodallNormal` at a variable map: `GENERIC`. -/
+theorem planted_generic_normal {k : ℕ} (F : Plane.ArcMap k) (K : Set ℂ) (_h : F.WoodallNormal K) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 62 — `WoodallNormal` on `halfDisc` (true, but proved nowhere). `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_normal (_h : Plane.halfDisc.WoodallNormal Set.univ) : (1 : ℕ) = 1 := rfl
+
 end HadwigerNelson

@@ -2502,6 +2502,47 @@ No native evaluation. -/
 #print axioms HadwigerNelson.Plane.ArcMap.wedgeMerge_crossing
 #print axioms HadwigerNelson.Plane.ArcMap.DirColourAt.exists_merge_dirs
 
+/-! ## FS-131 Woodall's chain (job FS131-WL1) — the plane-map model (QA2-1): the brick map's T-junctions, its pictures, Woodall's normal form on the plane, Condition 5; the adversaries off the domain -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_region_of_sectors
+#print axioms HadwigerNelson.Plane.ArcMap.niceAt_of_injective
+#print axioms HadwigerNelson.Plane.brickCellCol_ne
+#print axioms HadwigerNelson.Plane.polar_re_im
+#print axioms HadwigerNelson.Plane.sevenBrickMap_mem_region_of_cell
+#print axioms HadwigerNelson.Plane.exists_polar_Ioc
+#print axioms HadwigerNelson.Plane.tUpCols_injective
+#print axioms HadwigerNelson.Plane.tDownCols_injective
+#print axioms HadwigerNelson.Plane.tUpDirs_lt
+#print axioms HadwigerNelson.Plane.tDownDirs_lt
+#print axioms HadwigerNelson.Plane.tUpDirs_ge
+#print axioms HadwigerNelson.Plane.tDownDirs_ge
+#print axioms HadwigerNelson.Plane.brickCorner_mem_arcs
+#print axioms HadwigerNelson.Plane.tUp_sub
+#print axioms HadwigerNelson.Plane.tDown_sub
+#print axioms HadwigerNelson.Plane.tUp_cov
+#print axioms HadwigerNelson.Plane.tDown_cov
+#print axioms HadwigerNelson.Plane.sevenBrickMap_sectorsAt_tUp
+#print axioms HadwigerNelson.Plane.sevenBrickMap_sectorsAt_tDown
+#print axioms HadwigerNelson.Plane.isClosed_brickClosedCell
+#print axioms HadwigerNelson.Plane.sevenBrickMap_mem_coloursAt
+#print axioms HadwigerNelson.Plane.brickClosedCell_same_row
+#print axioms HadwigerNelson.Plane.brickClosedCell_rows
+#print axioms HadwigerNelson.Plane.tJunction_of_pair
+#print axioms HadwigerNelson.Plane.tJunction_of_three
+#print axioms HadwigerNelson.Plane.sevenBrickMap_tJunction
+#print axioms HadwigerNelson.Plane.sevenBrickMap_condition5
+#print axioms HadwigerNelson.Plane.sevenBrickMap_woodallNormal
+#print axioms HadwigerNelson.Plane.sevenBrickMap_woodallMerged
+#print axioms HadwigerNelson.Plane.sevenBrickMap_woodallModel
+#print axioms HadwigerNelson.Plane.sevenBrickMap_thm6Model
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_sectorsAt_one
+#print axioms HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_niceAt_one
+#print axioms HadwigerNelson.Plane.ArcMap.zero_mem_threeCuts
+#print axioms HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc_region
+#print axioms HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc_coloursAt_zero
+#print axioms HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc_not_woodallMerged
+#print axioms HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc_not_woodallNormal
+
 
 /-! ## FS-131 wave 3 (job FS131-I3b) — the implementer's added children (every one a theorem the rows rest on) -/
 

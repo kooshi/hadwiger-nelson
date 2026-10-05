@@ -305,6 +305,19 @@ Two exclusions are worth their reasons, because both look like obvious additions
   variable chart at every site); `IsLeavingCentre`, `StripHolds`, `MIn`, `AeProperRegions.IsRegion` (predicates of a point or a set
   variable, `GENERIC` at every site, with no `¬ P` theorem at a concrete instance).
 
+* **Woodall's carriers (FS131-WL1, by the procedure below).** **IN**: `ArcMap.SectorsAt` — refuted at a concrete instance by a theorem
+  (`threeSectorDisc_not_sectorsAt_one`: no picture at `1`, off the disc's domain), inhabited by `threeSectorDisc_sectorsAt`; controls 51–53.
+  `ArcMap.NiceAt` — refuted at a concrete point (`threeSectorDisc_not_niceAt_one`), inhabited by `threeSectorDisc_niceAt`; controls 54–56.
+  `ArcMap.WoodallMerged` and `ArcMap.WoodallNormal` — refuted at a concrete map (`puncturedThreeSectorDisc_not_woodallMerged`,
+  `_not_woodallNormal`: a point of three colours off the domain), inhabited on a map of the plane by `sevenBrickMap_woodallMerged`,
+  `sevenBrickMap_woodallNormal` (FS131-QA2's QA2-1); controls 57–59 and 60–62. Every binder site of the two normal forms is a refutation
+  (`aeMap6_normal`, `aeMap6_merged`, `false_of_four_le_sectors`), which the scan skips, so their positive sites are the inhabitants'
+  conclusions. **OUT**: `annSector`, `collar`, `Rim`, `Rim.radii`, `wedgeArcs`, `ArcMap.recolour`, `wedgeMerge`, `isoRad`, `rightCol`,
+  `leftCol`, `threeCol`, `threeCuts`, `threeSectorDisc`, `puncturedThreeSectorDisc`, `brickCellCol`, `tUpDirs`, `tUpCols`, `tDownDirs`,
+  `tDownCols`, `brickClosedCell` (data and sets, written down); `CollarAt`, `ArcMap.CrossesAt`, `ArcMap.DirColourAt`, `OffDirs`
+  (predicates of a set, map, finite set or direction variable, `GENERIC` at every site, with no `¬ P` theorem at a concrete instance —
+  register them when one is).
+
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
 its reason, in the `UDCert` / `AeColouring` style — IN iff "does one exist" is a theorem rather than a
@@ -331,7 +344,10 @@ def trackedProps : List Name :=
    `HadwigerNelson.Plane.CPColouring, `HadwigerNelson.Plane.SemiconcaveWith,
    -- wave 4's valid-map vocabulary (FS131-G4)
    `HadwigerNelson.Plane.ArcMap.IsHorn, `HadwigerNelson.Plane.ArcMap.IsStuck,
-   `HadwigerNelson.Plane.ArcMap.Condition5, `HadwigerNelson.Plane.AeProperRegions]
+   `HadwigerNelson.Plane.ArcMap.Condition5, `HadwigerNelson.Plane.AeProperRegions,
+   -- Woodall's pictures and normal forms (FS131-WL1)
+   `HadwigerNelson.Plane.ArcMap.SectorsAt, `HadwigerNelson.Plane.ArcMap.NiceAt,
+   `HadwigerNelson.Plane.ArcMap.WoodallMerged, `HadwigerNelson.Plane.ArcMap.WoodallNormal]
 
 /-- A carrier or a statement as one line of text, for the report. Called where its binders are still in
 scope: outside the telescope a generic carrier's variables print as `_fvar.N`, whose numbering shifts

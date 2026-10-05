@@ -613,3 +613,47 @@ modules), **0 modules with warnings**, 13 m 56 s, exit 0 (`build/gate/build/2026
 
 **The model, drafted** (stage 20 places it): `data/fs131/wl/scratch/Model.lean` elaborates against the merged oleans, `sevenBrickMap_woodallModel`
 on the standard three by the iteration print (`data/fs131/wl/run.sh`; a planted `1 = 2` is reported, so the runner reports errors).
+
+## Stage 20 — SAVED (FS131-WL1): the plane-map model (QA2-1), proved; the adversaries; Woodall's carriers registered
+
+**The model, in `Plane/Woodall/Steps`** (a section after `woodall_thm6`, so in the file of the theorems it models; the module docstring names
+it). `sevenBrickMap_woodallModel : sevenBrickMap.Valid ∧ sevenBrickMap.IsPlaneMap ∧ sevenBrickMap.Condition5 ∧ sevenBrickMap.WoodallNormal univ
+∧ sevenBrickMap.WoodallMerged univ ∧ (sevenBrickMap.coloursAt 0).ncard = 3` — every hypothesis of `aeMap6`, `aeMap6_of_condition5`,
+`aeMap6_normal` and `aeMap6_merged` but `k ≤ 5`, at once, at `k = 7` on a map of the plane (`LEAN.md` § The gate's inhabitant rule), with the
+normal form exercised (a point of three colours). `sevenBrickMap_thm6Model`: `woodall_thm6`'s colouring at `k = 7` (the brick colouring itself,
+proper at every unit pair by `Brick.avoids`). The route, as the brief's amendment named it, on the whole plane rather than `closedBall 0 3`:
+- **The points of three colours are the T-junctions** (`sevenBrickMap_tJunction`). `sevenBrickMap_mem_coloursAt`: a colour at `z` is the colour
+  of a closed brick cell through `z` (near `z` the class lies in the closed cells of a finite 3 × 3 block of indices; `Set.Finite.closure_biUnion`).
+  `tJunction_of_three`: three distinct closed cells through `z` force two in one row (rows through a point lie within one of each other) and
+  the third in another, so `z` is `brickCorner c r` (upward T: cells `(c, r)`, `(c − 1, r)`, `(c, r − 1)`) or `brickCorner c r − 2/5`
+  (downward T: `(c − 1, r)`, `(c − 1, r − 1)`, `(c, r − 1)`).
+- **The pictures** (`sevenBrickMap_sectorsAt_tUp`, `_tDown`): directions `0, π/2, π, 2π` and `0, π, 3π/2, 2π`, colours `brickCellCol` of the
+  three cells (`table i j = i + 3j mod 7`: the three are `x, x − 1, x − 3` and `x − 1, x − 4, x − 3` mod 7, distinct, `tUpCols_injective`,
+  `tDownCols_injective` by `omega`). The cone clause comes from a new region-only lemma, `ArcMap.coneAt_region_of_sectors`: if each open sector
+  of radius `ρ` lies in its colour's class and every interior point of `B(v, ρ)` lies in a sector, the cones are the closed angular intervals.
+  Each sector of radius `1/5` lies inside one open cell (`tUp_sub`, `tDown_sub`, through `sevenBrickMap_mem_region_of_cell`), and an interior
+  point near the junction lies in a sector because the three remaining directions are cell edges (`tUp_cov`, `tDown_cov`).
+- **Condition 5** (`sevenBrickMap_condition5`): the arcs are segments (`Arc.finite_inter_sphere_or_eq_circ`).
+- **Spec examples** (each fails if its definition drifts): `tUpCols 0 0 = ![0, 6, 4]` and `tDownCols 0 0 = ![6, 3, 4]` by `decide`; the
+  picture's colours at `0` equal wave 4's independent `sevenBrick_corner_coloursAt` (`{0, 6, 4}`); the corner `0` in the closed cells
+  `(0, 0)`, `(−1, 0)`, `(0, −1)` and not in `(1, 0)`; the directions; the centre off the punctured disc's domain.
+
+**The adversaries** (the vacuity scan's evidence, and the lesson QA2 drew — a picture reads the domain): `threeSectorDisc_not_sectorsAt_one`,
+`threeSectorDisc_not_niceAt_one` (no picture at `1`, off the disc), and `puncturedThreeSectorDisc` (`threeSectorDisc` with its centre removed
+from the domain: the classes are unchanged, the centre still carries three colours, `puncturedThreeSectorDisc_coloursAt_zero`, and no picture
+exists there), so `puncturedThreeSectorDisc_not_woodallMerged` and `_not_woodallNormal` on `univ`.
+
+**Woodall's carriers, registered** (`scripts/Vacuity.lean`'s procedure): **IN** `ArcMap.SectorsAt`, `ArcMap.NiceAt`, `ArcMap.WoodallMerged`,
+`ArcMap.WoodallNormal`, each refuted at a concrete instance by the adversaries above and inhabited (on the plane, for the normal forms, by
+the model); controls 51–62 in `scripts/vacuity-controls.lean`, three each (VACUOUS at the refuted instance, GENERIC at a variable map, UNKNOWN
+at a `halfDisc` instance nothing decides), with their `expect` lines in `scripts/vacuity.sh`. **OUT**, with reasons in the docstring: the data
+(`annSector`, `collar`, `Rim`, the merge's constructions, the inhabitants, the model's tables) and `CollarAt`, `CrossesAt`, `DirColourAt`,
+`OffDirs` (predicates of variables, `GENERIC` at every site, no `¬ P` at a concrete instance).
+
+**Records**: 38 new theorems, each recorded by `tools/fs131_wl_add_records.py` in a section "FS-131 Woodall's chain (job FS131-WL1)";
+`tools/fs131_w3_decls.py --check` 257 theorems, 257 records, 0 missing, 0 stale; `--plant` FIRED. `ARCHITECTURE.md`'s `Woodall/Steps` row names
+the model; `tools/check_architecture.py` PASS. No new name is declared on `fs131-w5` or `fs131-w5p` (`git grep`); `tools/fs131_i4_treedupes.py`
+on the tree: `main`'s three textual repeats only.
+
+**Build of this stage**: OK — 451 of 451 batches, 2 modules rebuilt (`Woodall/Steps`, `Proofs`), **0 modules with warnings** (0 `warning:` lines),
+8 m 41 s, exit 0 (`build/gate/build/20261005T035201Z-1162343.log`; driver log `data/fs131/wl/build2.log`).

@@ -169,6 +169,18 @@ if [[ "${1:-}" == "--self-test" ]]; then
   expect VACUOUS planted_vacuous_aeRegions "AeProperRegions 1: emptiness by an instance, the adversary"
   expect_site GENERIC planted_generic_aeRegions "AeProperRegions k at a variable k: parametric"
   expect UNKNOWN planted_unknown_aeRegions "AeProperRegions at a k nothing refutes: the load-bearing half"
+  expect VACUOUS planted_vacuous_sectorsAt "SectorsAt at 1, off threeSectorDisc's domain, which threeSectorDisc_not_sectorsAt_one refutes (Woodall, FS131-WL1)"
+  expect_site GENERIC planted_generic_sectorsAt "SectorsAt at a variable map: parametric"
+  expect UNKNOWN planted_unknown_sectorsAt "SectorsAt at halfDisc's centre with one sector, which no closed theorem refutes: the load-bearing half"
+  expect VACUOUS planted_vacuous_niceAt   "NiceAt at 1, which threeSectorDisc_not_niceAt_one refutes"
+  expect_site GENERIC planted_generic_niceAt "NiceAt at a variable map: parametric"
+  expect UNKNOWN planted_unknown_niceAt   "NiceAt at 1/4 on halfDisc, true but proved nowhere: the load-bearing half"
+  expect VACUOUS planted_vacuous_merged   "WoodallMerged on the punctured disc, which puncturedThreeSectorDisc_not_woodallMerged refutes"
+  expect_site GENERIC planted_generic_merged "WoodallMerged at a variable map: parametric"
+  expect UNKNOWN planted_unknown_merged   "WoodallMerged on halfDisc, true but proved nowhere: the load-bearing half"
+  expect VACUOUS planted_vacuous_normal   "WoodallNormal on the punctured disc, which puncturedThreeSectorDisc_not_woodallNormal refutes"
+  expect_site GENERIC planted_generic_normal "WoodallNormal at a variable map: parametric"
+  expect UNKNOWN planted_unknown_normal   "WoodallNormal on halfDisc, true but proved nowhere: the load-bearing half"
   silent planted_arrow_false              "a genuine refutation P → False over the empty carrier stays skipped"
 
   if [[ "${fails}" -gt 0 ]]; then
