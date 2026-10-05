@@ -116,7 +116,162 @@ end Spec
 
 namespace ArcMap
 
+/-! ## Holes and filled tiles (FS131-IP5): openness, nesting, and every tile inside an outer tile's fill -/
+
+namespace IsHoleOf
+
+variable {T Hc : Set ℂ}
+
+/-- A hole is open: `Hc = (cl T)ᶜ ∖ cl ((cl T)ᶜ ∖ Hc)`. -/
+theorem isOpen (h : IsHoleOf T Hc) : IsOpen Hc := by
+  obtain ⟨-, hsub, -, hsep⟩ := h
+  have hHeq : Hc = (closure T)ᶜ \ closure ((closure T)ᶜ \ Hc) := by
+    ext z
+    constructor
+    · intro hz
+      exact ⟨hsub hz, fun h => Set.disjoint_left.mp hsep (subset_closure hz) h⟩
+    · rintro ⟨hzO, hzn⟩
+      by_contra hzH
+      exact hzn (subset_closure ⟨hzO, hzH⟩)
+  rw [hHeq]; exact isClosed_closure.isOpen_compl.sdiff isClosed_closure
+
+/-- The rest of the complement of a holed tile's closure is open: `(cl T)ᶜ ∖ Hc = (cl T)ᶜ ∖ cl Hc`. -/
+theorem isOpen_diff (h : IsHoleOf T Hc) : IsOpen ((closure T)ᶜ \ Hc) := by
+  obtain ⟨-, -, -, hsep⟩ := h
+  have heq : (closure T)ᶜ \ Hc = (closure T)ᶜ \ closure Hc := by
+    ext z
+    constructor
+    · rintro ⟨hzO, hzH⟩
+      exact ⟨hzO, fun hzc => Set.disjoint_left.mp hsep hzc (subset_closure ⟨hzO, hzH⟩)⟩
+    · rintro ⟨hzO, hzc⟩
+      exact ⟨hzO, fun h => hzc (subset_closure h)⟩
+  rw [heq]; exact isClosed_closure.isOpen_compl.sdiff isClosed_closure
+
+/-- A hole holds the whole complementary component of each of its points. -/
+theorem connectedComponentIn_subset (h : IsHoleOf T Hc) {y : ℂ} (hy : y ∈ Hc) :
+    connectedComponentIn (closure T)ᶜ y ⊆ Hc := by
+  refine isPreconnected_connectedComponentIn.subset_left_of_subset_union h.isOpen h.isOpen_diff
+    (Set.disjoint_left.mpr fun z hz hz' => hz'.2 hz) (fun z hz => ?_) ⟨y, mem_connectedComponentIn (h.2.1 hy), hy⟩
+  by_cases hzH : z ∈ Hc
+  · exact Or.inl hzH
+  · exact Or.inr ⟨_root_.connectedComponentIn_subset _ _ hz, hzH⟩
+
+/-- A hole misses the outer domain: it is bounded and holds the component of each of its points. -/
+theorem subset_compl_outerDom (h : IsHoleOf T Hc) : Hc ⊆ (outerDom T)ᶜ := fun _ hy hyo =>
+  hyo.2 (h.2.2.1.subset (h.connectedComponentIn_subset hy))
+
+end IsHoleOf
+
+/-- A filled tile lies in its hull. -/
+theorem fill_subset_compl_outerDom (T : Set ℂ) : fill T ⊆ (outerDom T)ᶜ := by
+  rintro z (hz | ⟨Hc, hH, hzH⟩) hzo
+  · exact hzo.1 (subset_closure hz)
+  · exact IsHoleOf.subset_compl_outerDom hH hzH hzo
+
+/-- A tile lies in its fill. -/
+theorem subset_fill (T : Set ℂ) : T ⊆ fill T := fun _ hz => Or.inl hz
+
 variable {k : ℕ} {F : ArcMap k}
+
+/-- The closure of a filled tile lies within `1` of each point of the tile's closure (its hull does: `compl_outerDom_subset_closedBall`). -/
+theorem closure_fill_subset_closedBall (hF : F.Valid) {T : Set ℂ} (hT : F.IsTile T) {w : ℂ} (hw : w ∈ closure T) :
+    closure (fill T) ⊆ closedBall w 1 :=
+  closure_minimal ((fill_subset_compl_outerDom T).trans
+    (compl_outerDom_subset_closedBall (hT.closure_subset_closedBall hF hw))) isClosed_closedBall
+
+/-- A tile inside a hole of `T` is enclosed by `T`. -/
+theorem encloses_of_subset_hole {T S Hc : Set ℂ} (hS : F.IsTile S) (hH : IsHoleOf T Hc) (hSH : S ⊆ Hc) :
+    EnclosesTile T S := by
+  obtain ⟨y, hy⟩ := hS.nonempty
+  exact ⟨y, ⟨hy, hH.2.1 (hSH hy)⟩, hH.2.2.1.subset (hH.connectedComponentIn_subset (hSH hy))⟩
+
+/-- **Nested holes**: if the tile `T₁` lies in a hole `Hc₂` of the tile `T₂`, every hole of `T₁` lies in `Hc₂`. (`T₂` is not in a hole of
+`T₁`, else each encloses the other and their hulls coincide, against `not_encloses_of_hull_eq`; so the holes of `T₁` miss `cl T₂`, and each
+component `D` of a hole of `T₁` is on one side of `Hc₂`'s separation — the side of `cl T₁ ⊆ cl Hc₂`, which `cl D` meets on its frontier.) -/
+theorem hole_subset_hole (hF : F.Valid) (hP : F.IsPlaneMap) {T₁ T₂ Hc₁ Hc₂ : Set ℂ} (h₁ : F.IsTile T₁) (h₂ : F.IsTile T₂)
+    (hH₂ : IsHoleOf T₂ Hc₂) (hT₁ : T₁ ⊆ Hc₂) (hH₁ : IsHoleOf T₁ Hc₁) : Hc₁ ⊆ Hc₂ := by
+  have hdom : ∀ S : Set ℂ, S ⊆ F.dom := fun S => by rw [hP]; exact subset_univ _
+  obtain ⟨x₁, hx₁⟩ := h₁.nonempty
+  have h12 : T₁ ≠ T₂ := fun h => hH₂.2.1 (hT₁ hx₁) (h ▸ subset_closure hx₁)
+  -- `T₂` lies on the far side of `Hc₁`'s separation
+  have hT₂ : T₂ ⊆ (closure T₁)ᶜ \ Hc₁ := by
+    have hcov : T₂ ⊆ Hc₁ ∪ ((closure T₁)ᶜ \ Hc₁) := fun z hz => by
+      by_cases hzH : z ∈ Hc₁
+      · exact Or.inl hzH
+      · exact Or.inr ⟨IsTile.subset_compl_closure h₁ h₂ h12.symm hz, hzH⟩
+    rcases h₂.subset_or_subset_of_separated hH₁.2.2.2 hcov with h | h
+    · exfalso
+      have e12 : EnclosesTile T₁ T₂ := encloses_of_subset_hole h₂ hH₁ h
+      have e21 : EnclosesTile T₂ T₁ := encloses_of_subset_hole h₁ hH₂ hT₁
+      exact not_encloses_of_hull_eq hF h₂ h₁ (hdom _)
+        (Subset.antisymm (outerDom_subset_of_encloses h₂ h₁ e12) (outerDom_subset_of_encloses h₁ h₂ e21)) e12
+    · exact h
+  have hHc₁O : Hc₁ ⊆ (closure T₂)ᶜ := fun z hz hz2 =>
+    Set.disjoint_left.mp hH₁.2.2.2 (subset_closure hz) (closure_mono hT₂ hz2)
+  intro w hw
+  set D := connectedComponentIn (closure T₁)ᶜ w with hD
+  have hwD : w ∈ D := mem_connectedComponentIn (hH₁.2.1 hw)
+  have hDO : D ⊆ (closure T₂)ᶜ := (hH₁.connectedComponentIn_subset hw).trans hHc₁O
+  -- a frontier point of `D` lies in `cl T₁ ⊆ cl Hc₂`
+  have hfr : (frontier D).Nonempty := by
+    rw [nonempty_frontier_iff]
+    exact ⟨⟨w, hwD⟩, fun h => (h ▸ mem_univ x₁ : x₁ ∈ D) |> connectedComponentIn_subset _ _ |>.elim (subset_closure hx₁)⟩
+  obtain ⟨z, hz⟩ := hfr
+  have hzT₁ : z ∈ closure T₁ := by
+    simpa using frontier_connectedComponentIn_subset isClosed_closure.isOpen_compl w hz
+  have hzH₂ : z ∈ closure Hc₂ := closure_mono hT₁ hzT₁
+  rcases isPreconnected_connectedComponentIn.subset_or_subset hH₂.isOpen hH₂.isOpen_diff
+      (Set.disjoint_left.mpr fun z hz hz' => hz'.2 hz) (fun z hz => by
+        by_cases hzH : z ∈ Hc₂
+        · exact Or.inl hzH
+        · exact Or.inr ⟨hDO hz, hzH⟩) with h | h
+  · exact h hwD
+  · exact absurd (closure_mono h hz.1) (Set.disjoint_left.mp hH₂.2.2.2 hzH₂)
+
+/-- A tile inside a hole of another tile has its whole fill there (`hole_subset_hole`). -/
+theorem fill_subset_hole (hF : F.Valid) (hP : F.IsPlaneMap) {T T' Hc' : Set ℂ} (hT : F.IsTile T) (hT' : F.IsTile T')
+    (hH' : IsHoleOf T' Hc') (hTH : T ⊆ Hc') : fill T ⊆ Hc' := by
+  rintro z (hz | ⟨Hc, hH, hzH⟩)
+  · exact hTH hz
+  · exact hole_subset_hole hF hP hT hT' hH' hTH hH hzH
+
+/-- **Every tile lies in an outer tile's fill** (FS131-IP5; the chain of enclosing holes stops, as in `exists_outermost`): among the tiles
+whose fill holds `S` — finitely many, their closures meeting `B̄(s, 1)` — one with a maximal hull is outer, since a hole holding it holds its
+fill (`fill_subset_hole`) and its tile encloses it, strictly growing the hull (`not_encloses_of_hull_eq`). -/
+theorem exists_outer_fill (hF : F.Valid) (hP : F.IsPlaneMap) {S : Set ℂ} (hS : F.IsTile S) :
+    ∃ T, F.IsOuterTile T ∧ S ⊆ fill T := by
+  have hdom : ∀ A : Set ℂ, A ⊆ F.dom := fun A => by rw [hP]; exact subset_univ _
+  obtain ⟨s, hs⟩ := hS.nonempty
+  set C := {T | F.IsTile T ∧ S ⊆ fill T} with hCdef
+  have hfin : C.Finite := by
+    refine (finite_tiles_closure_inter (isCompact_closedBall s 1) (hdom _)).subset ?_
+    rintro T ⟨hT, hST⟩
+    obtain ⟨w, hw⟩ := hT.nonempty
+    have := closure_fill_subset_closedBall hF hT (subset_closure hw) (subset_closure (hST hs))
+    refine ⟨hT, w, subset_closure hw, ?_⟩
+    rw [mem_closedBall, dist_comm]; exact this
+  have hne : C.Nonempty := ⟨S, hS, subset_fill S⟩
+  obtain ⟨T, hTmax⟩ := hfin.exists_maximalFor (fun T => (outerDom T)ᶜ) C hne
+  obtain ⟨hT, hST⟩ := hTmax.1
+  refine ⟨T, ⟨hT, fun T' Hc' hT' hH' hTH => ?_⟩, hST⟩
+  have henc := encloses_of_subset_hole hT hH' hTH
+  have hT'C : T' ∈ C := ⟨hT', fun z hz => Or.inr ⟨Hc', hH', fill_subset_hole hF hP hT hT' hH' hTH (hST hz)⟩⟩
+  have hle : (outerDom T)ᶜ ⊆ (outerDom T')ᶜ := compl_subset_compl.mpr (outerDom_subset_of_encloses hT hT' henc)
+  have hge : (outerDom T')ᶜ ⊆ (outerDom T)ᶜ := hTmax.2 hT'C hle
+  exact not_encloses_of_hull_eq hF hT hT' (hdom _) (compl_injective (Subset.antisymm hge hle)) henc
+
+/-- Two outer tiles whose filled closures meet are equal or adjacent in the filled map graph, so joined. -/
+theorem filledGraph_reachable_of_inter {a b : {T : Set ℂ // F.IsOuterTile T}}
+    (h : (closure (fill a.1) ∩ closure (fill b.1)).Nonempty) : F.filledGraph.Reachable a b := by
+  by_cases hab : a = b
+  · exact hab ▸ SimpleGraph.Reachable.refl _
+  · exact SimpleGraph.Adj.reachable ⟨hab, h⟩
+
+/-- Two outer tiles whose fills hold one tile `S` are joined. -/
+theorem filledGraph_reachable_of_subset {a b : {T : Set ℂ // F.IsOuterTile T}} {S : Set ℂ} (hS : S.Nonempty)
+    (ha : S ⊆ fill a.1) (hb : S ⊆ fill b.1) : F.filledGraph.Reachable a b := by
+  obtain ⟨s, hs⟩ := hS
+  exact filledGraph_reachable_of_inter ⟨s, subset_closure (ha hs), subset_closure (hb hs)⟩
 
 /-! ## FS114-CVB-THOM -/
 
@@ -125,16 +280,58 @@ its closure (`IsTile.closure_subset_closedBall`, `exists_outermost`'s hull bound
 meeting a compact set (`finite_tiles_closure_inter`). -/
 theorem filledGraph_locallyFinite (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :
     (F.filledGraph.neighborSet x).Finite := by
-  sorry
+  have hdom : ∀ A : Set ℂ, A ⊆ F.dom := fun A => by rw [hP]; exact subset_univ _
+  obtain ⟨p, hp⟩ := x.2.1.nonempty
+  -- a neighbour's tile has its closure within `2` of `p`
+  refine ((finite_tiles_closure_inter (isCompact_closedBall p 2) (hdom _)).preimage
+    Subtype.val_injective.injOn).subset fun y hy => ?_
+  obtain ⟨-, z, hzx, hzy⟩ := hy
+  obtain ⟨q, hq⟩ := y.2.1.nonempty
+  have h1 := closure_fill_subset_closedBall hF x.2.1 (subset_closure hp) hzx
+  have h2 := closure_fill_subset_closedBall hF y.2.1 (subset_closure hq) hzy
+  refine ⟨y.2.1, q, subset_closure hq, ?_⟩
+  rw [mem_closedBall] at h1 h2 ⊢
+  linarith [dist_triangle q z p, dist_comm z q]
 
 /-- The filled map graph is connected (leaf F-CONN): the filled outer tiles' closures cover the plane (every tile lies in an outer tile's
 fill: the enclosure chain stops, as in `exists_outermost`), so `mem_of_touch_closed` on `U = ℂ` with the touching relation of the fills. -/
 theorem filledGraph_connected (hF : F.Valid) (hP : F.IsPlaneMap) : F.filledGraph.Connected := by
-  sorry
+  have hdom : ∀ A : Set ℂ, A ⊆ F.dom := fun A => by rw [hP]; exact subset_univ _
+  obtain ⟨S₀, hS₀, -⟩ := exists_tile_inter_of_isOpen isOpen_univ (hdom _) univ_nonempty
+  obtain ⟨T₀, hT₀, hS₀T₀⟩ := exists_outer_fill hF hP hS₀
+  set x₀ : {T : Set ℂ // F.IsOuterTile T} := ⟨T₀, hT₀⟩
+  -- the tiles lying in the fill of an outer tile joined to `x₀`
+  set P : Set (Set ℂ) := {S | F.IsTile S ∧ ∃ (T : Set ℂ) (hT : F.IsOuterTile T), S ⊆ fill T ∧ F.filledGraph.Reachable x₀ ⟨T, hT⟩}
+  have key := mem_of_touch_closed isOpen_univ isPreconnected_univ (hdom _) (fun T _ _ => subset_univ T) P
+    (fun S hS => ⟨hS.1, subset_univ S⟩) ⟨S₀, hS₀, T₀, hT₀, hS₀T₀, SimpleGraph.Reachable.refl _⟩ (by
+      rintro S ⟨hS, T, hT, hST, hreach⟩ S' hS' - ⟨z, hzS, hzS'⟩
+      obtain ⟨T', hT', hS'T'⟩ := exists_outer_fill hF hP hS'
+      exact ⟨hS', T', hT', hS'T', hreach.trans (filledGraph_reachable_of_inter (a := ⟨T, hT⟩) (b := ⟨T', hT'⟩)
+        ⟨z, closure_mono hST hzS, closure_mono hS'T' hzS'⟩)⟩)
+  haveI : Nonempty {T : Set ℂ // F.IsOuterTile T} := ⟨x₀⟩
+  have hall : ∀ v : {T : Set ℂ // F.IsOuterTile T}, F.filledGraph.Reachable x₀ v := by
+    intro v
+    obtain ⟨-, T, hT, hvT, hreach⟩ := key v.1 v.2.1 (subset_univ _)
+    exact hreach.trans (filledGraph_reachable_of_subset (a := ⟨T, hT⟩) v.2.1.nonempty hvT (subset_fill v.1))
+  exact ⟨fun v w => (hall v).symm.trans (hall w)⟩
 
 /-- The filled map graph is infinite (leaf F-INF): the plane is unbounded and every filled tile bounded. -/
 theorem filledGraph_infinite (hF : F.Valid) (hP : F.IsPlaneMap) : Infinite {T : Set ℂ // F.IsOuterTile T} := by
-  sorry
+  have hdom : ∀ A : Set ℂ, A ⊆ F.dom := fun A => by rw [hP]; exact subset_univ _
+  by_contra hfin
+  rw [not_infinite_iff_finite] at hfin
+  -- the filled closures of the finitely many outer tiles lie in one disc
+  have hb : Bornology.IsBounded (⋃ T : {T : Set ℂ // F.IsOuterTile T}, closure (fill T.1)) := by
+    rw [Bornology.isBounded_iUnion]
+    intro T
+    obtain ⟨w, hw⟩ := T.2.1.nonempty
+    exact isBounded_closedBall.subset (closure_fill_subset_closedBall hF T.2.1 (subset_closure hw))
+  obtain ⟨R, hR⟩ := hb.subset_closedBall 0
+  -- but a point outside it lies in the closure of a tile, inside an outer tile's fill
+  obtain ⟨z, hz⟩ := exists_not_mem_closedBall_zero R
+  obtain ⟨S, hS, hzS⟩ := F.mem_closure_tile (hdom _ (mem_univ z))
+  obtain ⟨T, hT, hST⟩ := exists_outer_fill hF hP hS
+  exact hz (hR (mem_iUnion.mpr ⟨⟨T, hT⟩, closure_mono hST hzS⟩))
 
 /-- **Rings from boundary walks** (leaf F-RING, the planar heart of CVB B2 step 2): every filled outer tile `x̂` has a ring — the outer
 boundary walk of `x̂` (`frontier (outerDom x)`, preconnected), listing the tiles met at each pass (sector charts), each repeated tile only at

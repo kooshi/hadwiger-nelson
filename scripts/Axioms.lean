@@ -3146,6 +3146,20 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.inner_star
 #print axioms HadwigerNelson.Plane.ArcMap.circ_local
 #print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.colours_sub
+-- FS131-IP5's added children (`MapGraph`: holes and filled tiles, nesting, every tile in an outer fill)
+#print axioms HadwigerNelson.Plane.ArcMap.IsHoleOf.isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.IsHoleOf.isOpen_diff
+#print axioms HadwigerNelson.Plane.ArcMap.IsHoleOf.connectedComponentIn_subset
+#print axioms HadwigerNelson.Plane.ArcMap.IsHoleOf.subset_compl_outerDom
+#print axioms HadwigerNelson.Plane.ArcMap.fill_subset_compl_outerDom
+#print axioms HadwigerNelson.Plane.ArcMap.subset_fill
+#print axioms HadwigerNelson.Plane.ArcMap.closure_fill_subset_closedBall
+#print axioms HadwigerNelson.Plane.ArcMap.encloses_of_subset_hole
+#print axioms HadwigerNelson.Plane.ArcMap.hole_subset_hole
+#print axioms HadwigerNelson.Plane.ArcMap.fill_subset_hole
+#print axioms HadwigerNelson.Plane.ArcMap.exists_outer_fill
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_reachable_of_inter
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_reachable_of_subset
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 

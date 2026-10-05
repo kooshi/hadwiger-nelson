@@ -828,3 +828,47 @@ Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up
 share their tiles; PATH not needed), `endpoint_of_far_end` the proof done (stars by `inner_star` and `circ_local`, the handshake's second odd vertex,
 `orient_pair`, `pair_ii` with `noBoth` for the `60°` bound) in place of the "owed before proving" reading. Docstrings only: the diff touches no statement
 or proof line. They are built with stage 17's first build.
+
+## Stage 17 — SAVED: F-INF, F-CONN and F-LOC proved, over one lemma — every tile lies in an outer tile's fill
+
+### 17.1 Proved (statements unchanged)
+
+- **`exists_outer_fill`** (the shared lemma; IP4's route sharpened): every tile `S` of a valid plane map lies in the fill of an outer tile. IP4's sketch
+  ("`exists_outermost` gives, at any point, a tile there enclosed by no tile") does not reach the fill: a point can lie in a bounded complementary
+  component of a tile that is no hole (FS131-I5b's chain), so being in the outermost tile's hull does not put it in that tile's fill. The proof used
+  instead: among the tiles whose fill holds `S` (finitely many — their closures meet `B̄(s, 1)`), take one with a maximal hull; if it lay in a hole of
+  another tile, that hole would hold its whole fill (`fill_subset_hole`) and that tile would enclose it, strictly growing the hull
+  (`not_encloses_of_hull_eq`). Child **`hole_subset_hole`** (nested holes): if `T₁` lies in a hole `Hc₂` of `T₂`, every hole of `T₁` lies in `Hc₂` —
+  `T₂` is not in a hole of `T₁` (else each encloses the other and their hulls coincide), so the holes of `T₁` miss `cl T₂`, and each component of
+  such a hole is on the side of `Hc₂`'s separation that its frontier point in `cl T₁ ⊆ cl Hc₂` dictates.
+- **`filledGraph_infinite`** (F-INF): finitely many outer tiles would have their filled closures in one disc (`closure_fill_subset_closedBall`: a filled
+  closure lies within `1` of each point of the tile's closure, through the hull), but a point outside it is in a tile's closure, inside an outer fill.
+- **`filledGraph_connected`** (F-CONN): `mem_of_touch_closed` on `U = ℂ` with `P` the tiles inside the fill of an outer tile joined to a fixed one;
+  a tile touching a member lies in some outer fill (`exists_outer_fill`), and two outer tiles whose filled closures meet are joined
+  (`filledGraph_reachable_of_inter`).
+- **`filledGraph_locallyFinite`** (F-LOC): a neighbour's filled closure meets `B̄(p, 1)` (`p` in the tile), so its tile's closure meets `B̄(p, 2)`;
+  `finite_tiles_closure_inter`.
+- Children (`MapGraph`, before the leaves): `IsHoleOf.isOpen`, `IsHoleOf.isOpen_diff`, `IsHoleOf.connectedComponentIn_subset`,
+  `IsHoleOf.subset_compl_outerDom`, `fill_subset_compl_outerDom`, `subset_fill`, `closure_fill_subset_closedBall`, `encloses_of_subset_hole`,
+  `hole_subset_hole`, `fill_subset_hole`, `exists_outer_fill`, `filledGraph_reachable_of_inter`, `filledGraph_reachable_of_subset`.
+
+### 17.2 The stage-17 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 4 modules rebuilt (`BaseWalk` 2.0 s — the three docstrings of § 16.4 —,
+`MapGraph` 7.1 s, `BaseDense`, `Proofs`), 9 modules with warnings, every warning `declaration uses 'sorry'`; `MapGraph`'s five `sorry` declarations
+are `not_isHoleOf_chain`, `isHoleOf_cluster`, `filledGraph_rings`, `filledGraph_oneInf`, `filledGraph_finSep`; exit 0**
+(`build/gate/build/20261005T043543Z-1369788.log`; `data/fs131/ip/build-ip5-s17.log`; grep for `warning|error` minus the `sorry` lines leaves only Lake's
+`--no-build` probe lines).
+
+Axioms: `data/fs131/ip/AxiomsIP5a.lean` (importing `MapGraph` alone) → `data/fs131/ip/axioms-ip5-stage17.txt`, checked by `tools/fs131_ip_axioms.py`
+against `data/fs131/ip/axioms-ip5a-names.txt`: **16 records on the standard three (the 13 children and F-LOC, F-CONN, F-INF); 5 controls on `sorryAx`
+(`filledGraph_oneInf`, `_rings`, `_finSep`, `filledGraph_planarLike`, `cvb_thom_reduced`)**; planted fault (`filledGraph_oneInf` listed as clean) →
+`NOT CLEAN …`, exit 1. `scripts/Axioms.lean`'s FS131-KP block gains the 13 children (under "-- FS131-IP5's added children").
+
+### 17.3 Re-priced after the first two leaves
+
+Wall clock from stage 16's commit (04:28Z) to this stage (04:45Z): about 17 minutes, about 200 lines, one build (8.5 minutes of it the build's walk
+over 447 batches). F-LOC came free with the shared lemma. **Re-price of what is left** (implementer sessions): F-ONE 0.1 (drafted: the far side is one
+class); F-SEP 0.3 — it needs, beside F-ONE's far-side lemma, that a pair whose interior holds a tile has meeting filled closures, which is F-RING's
+non-neighbour clause: `M̂ − x − y` is connected when `cl x̂ ∩ cl ŷ = ∅`. That clause is Janiszewski's theorem for holes (two disjoint continua
+without holes have none together), drafted over unicoherence (§ 18); the adversaries 0.2; F-RING's ring list (the boundary walk) unmeasured.
