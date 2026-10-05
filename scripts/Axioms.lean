@@ -3311,6 +3311,45 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.sigma_tanHeight_nonneg
 #print axioms HadwigerNelson.Plane.push_decomp
 #print axioms HadwigerNelson.Plane.ArcMap.clear_near_end
+-- FS131-IMM2
+#print axioms HadwigerNelson.Plane.BranchGerms.idx_zero
+#print axioms HadwigerNelson.Plane.BranchGerms.turns_zero
+#print axioms HadwigerNelson.Plane.BranchGerms.lift_zero
+#print axioms HadwigerNelson.Plane.BranchGerms.next_idx
+#print axioms HadwigerNelson.Plane.BranchGerms.turns_succ
+#print axioms HadwigerNelson.Plane.BranchGerms.lift_succ
+#print axioms HadwigerNelson.Plane.BranchGerms.lift_succ'
+#print axioms HadwigerNelson.Plane.BranchGerms.κ_idx_succ
+#print axioms HadwigerNelson.Plane.BranchGerms.e_lift
+#print axioms HadwigerNelson.Plane.BranchGerms.liftDir_eq
+#print axioms HadwigerNelson.Plane.BranchGerms.liftDir_succ
+#print axioms HadwigerNelson.Plane.BranchGerms.branchPt_idx
+#print axioms HadwigerNelson.Plane.BranchGerms.mem_sector_idx
+#print axioms HadwigerNelson.Plane.BranchGerms.liftDir_lt_succ
+#print axioms HadwigerNelson.Plane.BranchGerms.liftDir_mono
+#print axioms HadwigerNelson.Plane.BranchGerms.lift_mono
+#print axioms HadwigerNelson.Plane.BranchGerms.idx_add_n
+#print axioms HadwigerNelson.Plane.BranchGerms.turns_add_n
+#print axioms HadwigerNelson.Plane.BranchGerms.lift_add_n
+#print axioms HadwigerNelson.Plane.BranchGerms.exists_idx_eq
+#print axioms HadwigerNelson.Plane.BranchGerms.idx_ne
+#print axioms HadwigerNelson.Plane.cross_e_e
+#print axioms HadwigerNelson.Plane.cone_smul_mem_interior
+#print axioms HadwigerNelson.Plane.cone_add_mem_interior
+#print axioms HadwigerNelson.Plane.cone_eq_univ_of_zero_mem_interior
+#print axioms HadwigerNelson.Plane.cone_mem_interior_of_arc
+#print axioms HadwigerNelson.Plane.cone_half_plane
+#print axioms HadwigerNelson.Plane.cone_mem_interior_of_between
+#print axioms HadwigerNelson.Plane.cone_side
+#print axioms HadwigerNelson.Plane.gap_assemble
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_tile_of_sector
+#print axioms HadwigerNelson.Plane.ArcMap.Near.pos_of_hasSectors
+#print axioms HadwigerNelson.Plane.ArcMap.Near.e_mem_allowedCone_of_col
+#print axioms HadwigerNelson.Plane.ArcMap.Near.branchPt_lift
+#print axioms HadwigerNelson.Plane.ArcMap.Near.base_before
+#print axioms HadwigerNelson.Plane.ArcMap.Near.base_after
+#print axioms HadwigerNelson.Plane.ArcMap.Near.gap_clear
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_gap
 
 #eval IO.println "=== PURCHASED ==="
 

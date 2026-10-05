@@ -25,7 +25,51 @@ reading exactly `[propext, Classical.choice, Quot.sound]` (`exists_merge_aux` re
 - `HadwigerNelson.Plane.push_decomp` — [kernel], the standard three — the germ's point on the perpendicular through a point near it
 - `HadwigerNelson.Plane.ArcMap.clear_near_end` — [kernel], the standard three — **clearness at an end of a gap** (interior: N3-CLEAR; boundary: the push)
 
-Still open: `exists_merge_aux` (§ 4).
+
+### FS131-IMM2 (stage 5; build `build/gate/build/20261005T060420Z-1825986.log`, axioms `data/fs131/imm/axioms-stage5.txt`, all in `MergeMove`)
+
+- `BranchGerms.idx_zero` — [kernel], the standard three
+- `BranchGerms.turns_zero` — [kernel], the standard three
+- `BranchGerms.lift_zero` — [kernel], the standard three
+- `BranchGerms.next_idx` — [kernel], the standard three
+- `BranchGerms.turns_succ` — [kernel], the standard three
+- `BranchGerms.lift_succ` — [kernel], the standard three
+- `BranchGerms.lift_succ'` — [kernel], the standard three
+- `BranchGerms.κ_idx_succ` — [kernel], the standard three
+- `BranchGerms.e_lift` — [kernel], the standard three
+- `BranchGerms.liftDir_eq` — [kernel], the standard three
+- `BranchGerms.liftDir_succ` — [kernel], the standard three
+- `BranchGerms.branchPt_idx` — [kernel], the standard three
+- `BranchGerms.mem_sector_idx` — [kernel], the standard three
+- `BranchGerms.liftDir_lt_succ` — [kernel], the standard three
+- `BranchGerms.liftDir_mono` — [kernel], the standard three
+- `BranchGerms.lift_mono` — [kernel], the standard three
+- `BranchGerms.idx_add_n` — [kernel], the standard three
+- `BranchGerms.turns_add_n` — [kernel], the standard three
+- `BranchGerms.lift_add_n` — [kernel], the standard three
+- `BranchGerms.exists_idx_eq` — [kernel], the standard three
+- `BranchGerms.idx_ne` — [kernel], the standard three
+- `cross_e_e` — [kernel], the standard three
+- `cone_smul_mem_interior` — [kernel], the standard three
+- `cone_add_mem_interior` — [kernel], the standard three
+- `cone_eq_univ_of_zero_mem_interior` — [kernel], the standard three
+- `cone_mem_interior_of_arc` — [kernel], the standard three
+- `cone_half_plane` — [kernel], the standard three
+- `cone_mem_interior_of_between` — [kernel], the standard three
+- `cone_side` — [kernel], the standard three
+- `gap_assemble` — [kernel], the standard three
+- `ArcMap.Near.exists_tile_of_sector` — [kernel], the standard three
+- `ArcMap.Near.pos_of_hasSectors` — [kernel], the standard three
+- `ArcMap.Near.e_mem_allowedCone_of_col` — [kernel], the standard three
+- `ArcMap.Near.branchPt_lift` — [kernel], the standard three
+- `ArcMap.Near.base_before` — [kernel], the standard three
+- `ArcMap.Near.base_after` — [kernel], the standard three
+- `ArcMap.Near.gap_clear` — [kernel], the standard three
+- `ArcMap.Near.exists_gap` — [kernel], the standard three
+
+Definitions: `BranchGerms.idx`, `turns`, `lift`, `liftDir` (spec examples beside them). The interface for the rest is `ArcMap.Near.exists_gap` (record § 4.1–4.2 proved).
+
+Still open: `exists_merge_aux` (§ 5.2).
 
 ## Stage 1 — SAVED: the readback, the as-given build
 
@@ -204,3 +248,106 @@ up to date, nothing built", 2 s; warnings only `declaration uses 'sorry'` (`Move
 `Contact`, `BaseSteps`, `UnitArc` as before). Log `build/gate/build/20261005T054213Z-1726483.log`; terminal output
 `data/fs131/imm/build-asgiven-imm2.log`. The scratch copies `data/fs131/imm/scratch/{Push,End,Gap}.lean` are deleted (each of their 13 declarations
 checked present in `MergeMove` by name first).
+
+## Stage 5 — SAVED (FS131-IMM2): the gap's choice and its clearness (record § 4.1–4.2), in `MergeMove`
+
+**Proved** (in `MergeMove`, sorry-free, 38 theorems and 4 definitions; listed under "Theorems this phase proved"). The interface every later
+part reads is one theorem:
+
+> `ArcMap.Near.exists_gap (hF : F.Valid) (hv : F.Covers v 1) {c} {n} (hn1 : 1 ≤ n) (hn : F.HasSectors v c (n + 1)) (hD : (interior (F.allowedCone v c)).Nonempty) :`
+> `∃ s : Fin X.n, ∃ a b : ℕ, a < b ∧ b < a + X.n ∧ X.col (idx s a) = c ∧ X.col (idx s b) = c ∧ (∀ m, a < m → m < b → X.col (idx s m) ≠ c) ∧`
+> `∃ ρc > 0, ∀ t ∈ Ioo 0 ρc, ∀ φ, X.G.liftDir s (a + 1) t ≤ φ → φ ≤ X.G.liftDir s b t → F.IsClear c (v + t * e φ)`
+
+that is: two `c`-sectors `idx s a`, `idx s b`, consecutive along the orbit of `next`, and every point of the gap between them near `v`
+(directions from germ `idx s (a + 1)` to germ `idx s b`, lifted) clear for `c`. Its parts:
+
+- **The orbit and its lifts** (`BranchGerms.idx s m = (s + m) mod n`, `turns`, `lift`, `liftDir`): `next_idx`, `lift_succ`/`lift_succ'`
+  (one step adds `nextβ − β`), `lift_add_n` (a full turn adds `2π`), `lift_mono`, `liftDir_lt_succ`/`liftDir_mono` (strict where the germs are
+  ordered), `e_lift`, `branchPt_idx`, `mem_sector_idx` (sector `idx s m` in lifted directions), `exists_idx_eq`, `idx_ne` (injective within
+  a turn). Lifts are by the closed form `β (idx s m) + 2π ⌊(s + m)/n⌋`, so the recursion and the full turn are lemmas, not definitions.
+- **The directions of a convex cone** (stated for any `K` closed under sums and non-negative multiples, applied to `D_c(v)` by IMM1's
+  `add_mem_allowedCone`, `smul_mem_allowedCone`): `cone_smul_mem_interior`, `cone_add_mem_interior`, `cone_eq_univ_of_zero_mem_interior`;
+  `cone_mem_interior_of_arc` (an open arc shorter than `π` with ends in `K` is interior — Cramer's coefficients, an open quadrant inside `K`);
+  `cone_half_plane` (`±u ∈ K` and a point of `K` on the left of `u` put the whole open left half-plane in `K`, interior when the point is);
+  **`cone_mem_interior_of_between`**: `e θ₁, e θ₂ ∈ K`, `e θs ∉ K`, `θs < θ₁ ≤ θ₂ < θs + 2π` ⟹ `e θ ∈ int K` on `(θ₁, θ₂)` — by cases
+  `θ₂ − θ₁ < π` (Cramer), `= π` (the half-plane; an interior point on the wrong side would put `e θs` in `K`), `> π` (the complementary arc
+  is shorter than `π` and holds `θs + 2π`: contradiction); **`cone_side`**: a direction of `K` (int `K ≠ ∅`) is interior or has a direction
+  of `K` at `θ ± ψ`, `0 < ψ < π` (via `arg (d₀ · conj (e θ))`).
+- **The gap's clearness**: `gap_assemble` (a property near each end of `[germDir θ₁ κ₁ t, germDir θ₂ κ₂ t]` and on each closed middle
+  interval holds on the whole gap for small `t`; the ends tend to `θ₁, θ₂` by `exists_abs_arcsin_lt`); `Near.base_before`/`base_after`
+  (the bounding germs lie in the closure of the `c`-sectors' tiles, `exists_tile_of_sector`); `Near.gap_clear` — IMM1's `clear_near_end` at
+  `θ₁` (side `+1`, base germ `idx s (a+1)`) and at `θ₂` (side `−1`, base germ `idx s b`), N3-CLEAR (`clear_of_subset_interior_allowedCone`)
+  on the middle; when `θ₁ = θ₂` one end lemma covers the gap, on the side `cone_side` names.
+- **The choice** (`exists_gap`): if `D_c(v) = ℂ`, any `c`-sector and the next one (`Nat.find`), clear by N3-CLEAR on a padded interval.
+  Otherwise `e θs ∉ D_c(v)` for `θs = arg u`, `u ∉ D_c(v)`; `exists_angle` puts `θs` (mod `2π`) in the closed cone of a chart sector `s`,
+  which is therefore not a `c`-sector (`e_mem_allowedCone_of_col`); `a` is the first `c`-sector after `s`, `b` the next (`Nat.find` twice,
+  `a ≥ 1`, `b < X.n`); then `θs ≤ lift s 1 ≤ θ₁ ≤ θ₂ ≤ lift s X.n = β s + 2π ≤ θs + 2π`, strict at both ends since `e θ₁, e θ₂ ∈ D_c(v)`.
+  `pos_of_hasSectors`: two sectors of one colour force a germ (with none the punctured ball is one sector), so `0 < X.n`.
+
+**Re-priced from the first two parts** (standing order): 4.1 + 4.2 came to about 650 lines against IMM1's 400 + 150 — the cone geometry
+was stated once for any convex cone, which kept each case short; no heartbeat death. At this rate 4.3 + 4.4 are about 1,300–1,600 lines
+(§ 5.2's list), two of my sessions.
+
+### 5.1 The build, the axioms, the checks
+
+Under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK**, 446 of 446 batches, 3 modules rebuilt (`MergeMove` 15 s, `Moves` 2.5 s, `Proofs`), 8 min 27 s; warnings only `declaration uses 'sorry'` (`Moves` l. 574 `exists_rayMerge_aux`, l. 585 `exists_merge_aux`; `Contact`, `BaseSteps`, `UnitArc` as before), none in `MergeMove`. Log `build/gate/build/20261005T060420Z-1825986.log` ("Build completed successfully (5363 jobs)"); terminal output
+`data/fs131/imm/build-stage5.log`. **Axioms** against that build's oleans (`lake env lean data/fs131/imm/AxiomsIMM.lean`,
+`data/fs131/imm/axioms-stage5.txt`): 54 records: the 53 theorems of `MergeMove` (IMM1's 15 and these 38) read exactly `[propext, Classical.choice, Quot.sound]`; `exists_merge_aux` reads `sorryAx` besides — the print's positive control, so the print sees a `sorry` where one is. `tools/fs131_im_statements.py --check` PASS (diff empty); `tools/fs131_im_split.py --check` PASS;
+`tools/check_architecture.py` PASS. New tool **`tools/fs131_imm_decls.py`** (`--check`: every theorem of `MergeMove`, by full name with its
+namespaces resolved, has a `#print axioms` line in `scripts/Axioms.lean` and in `data/fs131/imm/AxiomsIMM.lean`): PASS, 53 theorems;
+`--self-test` fires on all three planted faults (a dropped record, namespace resolution, a mismatched `end`). The 38 new records are in
+`scripts/Axioms.lean`'s FS131-IMM1 block after the line `-- FS131-IMM2`, above the PURCHASED banner. No `axiom`, no `native_decide`, no
+statement changed.
+
+### 5.2 What is left, and the plan (refined from § 4.3–4.4; for whoever continues)
+
+`exists_merge_aux` is still `sorry`. Everything below takes `exists_gap`'s output, `X.Small ρ`, `ρ < ρc`, and writes `ρ₁ = ρ/2`.
+**First, an easy strengthening of my own lemma**: `exists_gap` proves `b < X.n` in both cases; restate its clause `b < a + X.n` as `b < X.n`
+(the index lemmas below need `a < X.n`).
+
+**Definitions, on the chart's plain data** (so each can have a spec example; drafted, uncompiled against the new oleans, in
+`data/fs131/imm/wip/B.lean`): `BranchGerms.gapGerm s a b = {idx s m | a < m ≤ b}`, `gapSec s a b = {idx s m | a < m < b}`,
+`G.branch v r j = branchPt '' Ioo 0 r` (= `Near.cutSet`), `G.gapSet v s a b r` (gap sectors and gap germs' branches out to `r`),
+`Phantom col j` (the two sides of germ `j` have one colour), `G.mergeCol v col Fcol s a b c ρ` (`c` on `gapSet ρ₁`; on any branch out to
+`ρ`, the colour of the sector after its germ — so the colouring never mentions phantoms; `Fcol` elsewhere), `G.rimArc` (`circ v ρ₁` from
+`liftDir s (a+1) ρ₁` to `liftDir s b ρ₁`), `G.mergeArcs` (germ arcs out to `ρ₁` off `gapGerm`; `Arc.outer (germArc … ρ) v ρ₁` for the
+non-phantom germs; the rim arc when `a + 1 < b`). With `a + 1 = b` the single gap germ `idx s b` is phantom (both sides `c`) and is cut in
+all of `B(v, ρ)`.
+
+**4.3 the map** `F' = F.surgery v ρ (mergeArcs) (mergeCol) …`: (i) the arcs: non-degenerate, finite, inside `B̄(v, ρ)`, unit ones in `F.Γ`,
+Condition 5 (as `newArcs_*`); the outer pieces lie on the branch over `[ρ₁, ρ]` and cover it over `(ρ₁, ρ]` (`outer_subset`, `mem_outer`,
+drafted) — the point at `ρ₁` is not needed, since there a non-phantom gap germ is on the rim arc and every other germ on its inner arc;
+(ii) membership in the new arcs inside `B(v, ρ)` by radius (`v`; a germ off the gap at `t ≤ ρ₁`; a non-phantom germ at `t ∈ [ρ₁, ρ]`; the rim);
+(iii) the colouring on sector points (`c` iff a gap sector below `ρ₁`, else the sector's colour) and branch points (`c` iff a gap germ below
+`ρ₁`, else the colour after the germ), by `sector_disjoint`, `eq_of_branchPt_eq`; (iv) **the rim germ points lie on `trimArcs`**: the branch
+over `(ρ, s₀)` is on `F`'s arcs outside `B̄(v, ρ)`, covered by `trimArcs` (`trimArcs_spec`), finitely many of which meet a neighbourhood
+(`F.locallyFinite`, `trimArcs ⊆ F.arcs ∪ T`), so their union is closed there; (v) `hlc`, by cases: off `B̄(v, ρ)` as `surgery_hlc_of`'s third
+case; on the rim, a point off the arcs is on no germ (iv), hence in a chart sector, colour constant; inside, a sector point (gap sector below
+or above `ρ₁` — at `ρ₁` it is on the rim arc — or another sector), or a branch point (a gap germ below `ρ₁`: the ball of
+`exists_ball_subset_of_branchPt` meets only `c`-coloured pieces; at `ρ₁` only when `a + 1 = b`; above `ρ₁` only a phantom germ, both sides one
+colour). Germ indices are read at a representative `m ∈ [a + 1, a + 1 + X.n)`, so `prev (idx s m) = idx s (m − 1)` (`exists_rep`, `idx_inj`,
+`idx_mem_gapGerm_iff`, `phantom_idx_succ_iff`, drafted).
+
+**4.4 the clauses.** *AgreesOff, RingArcsWithin, Condition 5*: `surgery_agreesOff`, `surgery_ringArcsWithin`, `surgery_condition5`. *Valid*:
+`Valid.of_agreesOff` on `B̄(v, ρ)` — gap points clear by `exists_gap` (a gap sector point has its lifted direction in `[liftDir (a+1),
+liftDir b]` by `mem_sector_idx` and `liftDir_mono`), sector points by `isClear_col`, and every branch point clear for the colour after its
+germ (`isClear_of_mem_closure` on the sector after it) — one rule for phantom and rim points; pairs inside are closer than `1`. *`v` gains no
+colour*: every `F'`-interior point of `B(v, ρ)` has a colour some chart sector has, and each chart sector's colour is at `v`. *HasSectors
+v c n*: at `r < ρ₁` the pieces `A i` (`i : Fin X.n`) = the merged sector `sector (idx s a) ∪ sector (idx s b) ∪ gapSet r` at `i = idx s a`,
+`∅` at the other merged indices, `sector r i` elsewhere; the merged piece is open (sectors, and `exists_ball_subset_of_branchPt` at gap
+branch points) and preconnected by induction along the chain `m = a, …, b` (each gap germ's branch is in the closure of the sectors on both
+its sides, as `cut_hasSectors`' `hMpre`); count `1 + ((n + 1) − 2) = n` by `encard_sectorsOf_of_partition`. *The rim* (`x ∈ ∂B(v, ρ)`, a
+small ball about `x` misses `B̄(v, ρ₁)`): `F'.coloursAt x ⊆ F.coloursAt x` (≤ 2, `ncard_coloursAt_le_two`), and no repeated colour — (R1) `x` on
+no germ: one interior piece; (R2) `x` on a non-phantom germ: `F' = F` near `x`, two pieces of two colours; (R3) `x` on a phantom germ: one
+piece, the two sides joined through the cut branch inside `B(v, ρ)`. Both need **the sides lemma**: for the germ's circle `∂B(o, R)` (or line)
+through `x` and `r ≤ R/2`, `B(x, r) ∩ B(o, R)` is convex and `B(x, r) ∖ B̄(o, R)` is star-convex about `x + (r/2)(x − o)/R` (from
+`‖(1−t)y + tz − o‖² = (1−t)‖y−o‖² + t‖z−o‖² − t(1−t)‖y−z‖²`, `‖y − o‖ = R + r/2`, `‖y − z‖ < 3r/2`: the excess is `(1−t)r(R − 2r) ≥ 0`); with
+`−(2/κ) tanHeight = ‖z − o‖² − 1/κ²` these are the two sides `{tanHeight ≷ 0}`, and each lies in one of the two chart sectors beside the germ
+(connected, inside their disjoint union), different ones since both sectors reach `x` — so no sign bookkeeping. *`D_c(v′)` unchanged* for
+`v′ ∉ B̄(v, ρ)`: coloursAt `v′` agree (a neighbourhood of `v′` misses `B̄(v, ρ)`); `F.region c ⊆ F'.region c ⊆ F.region c ∪ gapSet ρ₁ ∪`
+(branches of germs with colour `c` after them, in the closure of `F.region c`), so the contacts agree because `closure (gapSet ρ₁) ⊆ {v} ∪
+mergedSet ρ`, an open set of points clear for `c` (`dist_ne_one_of_isOpen_isClear`); types: the easy direction by `F`-tile ⊆ `F'`-tile; the
+other by — an `F'`-`c`-tile `T′` misses `ω(v′)` (`ne1_region` for `F'`), its closure points off `closure (gapSet ρ₁)` are closure points of
+`T′ ∩ F.region c` (a cut-branch point of `T′` has a convex `F'`-interior ball inside `T′`), and `T′ ∩ F.region c` is a finite union of
+`F`-tiles: a tile of `T′` whose closure misses `B̄(v, ρ)` is clopen in `T′`, hence `T′` itself, and the others meet a finite cover of the
+compact `B̄(v, ρ)` by `finite_tiles_near` balls.

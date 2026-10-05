@@ -20,6 +20,12 @@ The children, in the order the proof uses them:
   (`push_decomp`).
 * **Clearness at an end of a gap** (`clear_near_end`): at a direction `e θ` interior to `D_c(v)` by N3-CLEAR
   (`clear_of_subset_interior_allowedCone`), at a boundary direction by the push from the gap's bounding germ.
+* **The orbit of `next` and its lifted directions** (`BranchGerms.idx`, `turns`, `lift`, `liftDir`; FS131-IMM2): the germs after `s`
+  in order, with directions lifted so they increase (`lift_succ`, `lift_add_n`, `mem_sector_idx`).
+* **The directions of a convex cone** (`cone_mem_interior_of_arc`, `cone_half_plane`, `cone_mem_interior_of_between`, `cone_side`):
+  between two directions of `D_c(v)` with an excluded direction outside, every direction is interior.
+* **The gap** (`gap_assemble`, `gap_clear`, `exists_gap`): two `c`-sectors consecutive along the orbit after an excluded direction,
+  with every point of the gap between them near `v` clear for `c` (record § 4.1–4.2).
 
 The hypotheses `F.Valid`, `F.Covers v 1`, `c ∈ F.coloursAt v` are parametric (the caller's), as in `Cone`; `hgt` has its spec examples.
 -/
@@ -576,6 +582,675 @@ theorem clear_near_end (hF : F.Valid) {v : ℂ} {c : Fin k} (hv : F.Covers v 1) 
       have h2 : ‖e φ - e θ‖ ≤ μ / 2 := (norm_e_sub_e_le φ θ).trans hφμ
       calc s * ‖e φ - e θ‖ ≤ s * (μ / 2) := mul_le_mul_of_nonneg_left h2 hs0.le
         _ = μ / 2 * s := by ring
+
+end ArcMap
+
+end HadwigerNelson.Plane
+
+namespace HadwigerNelson.Plane
+
+open Complex Real Set Filter Topology Metric
+
+/-! ## The orbit of `next` and the lifted directions along it -/
+
+namespace BranchGerms
+
+variable {n : ℕ} (G : BranchGerms n)
+
+/-- The `m`-th index after `s` along `next`: `(s + m) mod n`. -/
+def idx (s : Fin n) (m : ℕ) : Fin n := ⟨(s.val + m) % n, Nat.mod_lt _ s.pos⟩
+
+/-- The number of full turns taken by the first `m` steps after `s`. -/
+def turns (s : Fin n) (m : ℕ) : ℕ := (s.val + m) / n
+
+/-- **The lifted direction of germ `idx s m`**: its direction plus `2π` per full turn, so the lifts increase along the orbit. -/
+noncomputable def lift (s : Fin n) (m : ℕ) : ℝ := G.β (idx s m) + 2 * π * (turns s m : ℝ)
+
+/-- The lifted direction of germ `idx s m` at distance `t`. -/
+noncomputable def liftDir (s : Fin n) (m : ℕ) (t : ℝ) : ℝ := germDir (G.lift s m) (G.κ (idx s m)) t
+
+/-- Spec: two steps after the last of three germs reach the second, one turn on. -/
+example : idx (n := 3) ⟨2, by norm_num⟩ 2 = ⟨1, by norm_num⟩ ∧ turns (n := 3) ⟨2, by norm_num⟩ 2 = 1 := by decide
+
+/-- Spec: the lift of the germ one step after the last of three is the first germ's direction plus a turn, and its lifted direction
+at distance `0` is that lift. -/
+example : (⟨![0, 1, 2], ![0, 0, 0]⟩ : BranchGerms 3).lift ⟨2, by norm_num⟩ 1 = 2 * π ∧
+    (⟨![0, 1, 2], ![0, 0, 0]⟩ : BranchGerms 3).liftDir ⟨2, by norm_num⟩ 1 0 = 2 * π := by
+  refine ⟨?_, ?_⟩
+  · simp [lift, idx, turns]
+  · simp [liftDir, lift, idx, turns]
+
+theorem idx_zero (s : Fin n) : idx s 0 = s := Fin.ext (by simp [idx, Nat.mod_eq_of_lt s.isLt])
+
+theorem turns_zero (s : Fin n) : turns s 0 = 0 := by simp [turns, Nat.div_eq_of_lt s.isLt]
+
+theorem lift_zero (s : Fin n) : G.lift s 0 = G.β s := by simp [lift, idx_zero, turns_zero]
+
+theorem next_idx (s : Fin n) (m : ℕ) : next (idx s m) = idx s (m + 1) := by
+  have hn := s.pos
+  have h1 := Nat.mod_add_div (s.val + m) n
+  have hlt := Nat.mod_lt (s.val + m) hn
+  unfold next idx
+  split_ifs with h
+  · apply Fin.ext
+    simp only at h ⊢
+    rw [show s.val + (m + 1) = ((s.val + m) % n + 1) + n * ((s.val + m) / n) by omega,
+      Nat.add_mul_mod_self_left, Nat.mod_eq_of_lt h]
+  · apply Fin.ext
+    simp only at h ⊢
+    rw [show s.val + (m + 1) = n * ((s.val + m) / n + 1) by rw [Nat.mul_add, Nat.mul_one]; omega,
+      Nat.mul_mod_right]
+
+theorem turns_succ (s : Fin n) (m : ℕ) :
+    turns s (m + 1) = if (idx s m).val + 1 < n then turns s m else turns s m + 1 := by
+  have hn := s.pos
+  unfold turns idx
+  simp only
+  have := Nat.mod_add_div (s.val + m) n
+  have hlt := Nat.mod_lt (s.val + m) hn
+  split_ifs with h
+  · rw [← Nat.add_assoc]
+    rw [show s.val + m + 1 = ((s.val + m) % n + 1) + n * ((s.val + m) / n) by omega,
+      Nat.add_mul_div_left _ _ hn, Nat.div_eq_of_lt h, Nat.zero_add]
+  · rw [← Nat.add_assoc]
+    rw [show s.val + m + 1 = n * ((s.val + m) / n + 1) by rw [Nat.mul_add, Nat.mul_one]; omega,
+      Nat.mul_div_cancel_left _ hn]
+
+/-- **One step of the lift** adds the gap to the next germ's direction. -/
+theorem lift_succ (s : Fin n) (m : ℕ) :
+    G.lift s (m + 1) = G.lift s m + (G.nextβ (idx s m) - G.β (idx s m)) := by
+  have hts := turns_succ s m
+  have hni := next_idx s m
+  unfold lift
+  unfold nextβ
+  unfold next at hni
+  split_ifs at hts hni ⊢ with h
+  · rw [← hni, hts]; ring
+  · rw [← hni, hts]; push_cast; ring
+
+/-- The lift at one step is the next direction of the previous germ, plus its turns. -/
+theorem lift_succ' (s : Fin n) (m : ℕ) :
+    G.lift s (m + 1) = G.nextβ (idx s m) + 2 * π * (turns s m : ℝ) := by
+  rw [lift_succ]; unfold lift; ring
+
+theorem κ_idx_succ (s : Fin n) (m : ℕ) : G.κ (idx s (m + 1)) = G.nextκ (idx s m) := by
+  rw [nextκ_eq, next_idx]
+
+/-- The lift is the germ's direction up to whole turns. -/
+theorem e_lift (s : Fin n) (m : ℕ) : e (G.lift s m) = e (G.β (idx s m)) := by
+  unfold lift
+  rw [e_eq_e_iff]
+  exact ⟨((turns s m : ℕ) : ℤ), by push_cast; ring⟩
+
+/-- The lifted direction at a distance is the germ's direction there plus its turns. -/
+theorem liftDir_eq (s : Fin n) (m : ℕ) (t : ℝ) :
+    G.liftDir s m t = G.dir (idx s m) t + 2 * π * (turns s m : ℝ) := by
+  unfold liftDir lift; rw [dir]; unfold germDir; ring
+
+/-- The lifted direction one step on is the previous germ's next direction plus its turns. -/
+theorem liftDir_succ (s : Fin n) (m : ℕ) (t : ℝ) :
+    G.liftDir s (m + 1) t = G.nextDir (idx s m) t + 2 * π * (turns s m : ℝ) := by
+  unfold liftDir nextDir germDir
+  rw [lift_succ', κ_idx_succ]; ring
+
+/-- The branch point of germ `idx s m` along its lifted direction. -/
+theorem branchPt_idx (v : ℂ) (s : Fin n) (m : ℕ) (t : ℝ) :
+    branchPt v (G.β (idx s m)) (G.κ (idx s m)) t = v + (t : ℂ) * e (G.liftDir s m t) := by
+  rw [branchPt_eq, liftDir_eq]
+  congr 2
+  rw [e_eq_e_iff]
+  exact ⟨-((turns s m : ℕ) : ℤ), by unfold dir; push_cast; ring⟩
+
+/-- **The sector `idx s m` in lifted directions.** -/
+theorem mem_sector_idx {v : ℂ} {r : ℝ} (s : Fin n) (m : ℕ) {z : ℂ} :
+    z ∈ G.sector v r (idx s m) ↔
+      ∃ t ∈ Ioo 0 r, ∃ φ ∈ Ioo (G.liftDir s m t) (G.liftDir s (m + 1) t), z = v + (t : ℂ) * e φ := by
+  rw [sector_eq]
+  simp only [liftDir_succ]
+  simp only [mem_setOf_eq, G.liftDir_eq s m]
+  set T := 2 * π * (turns s m : ℝ)
+  have he : ∀ φ, e (φ + T) = e φ := fun φ => by
+    rw [e_eq_e_iff]; exact ⟨((turns s m : ℕ) : ℤ), by simp only [T]; push_cast; ring⟩
+  constructor
+  · rintro ⟨t, ht, φ, hφ, rfl⟩
+    exact ⟨t, ht, φ + T, ⟨by linarith [hφ.1], by linarith [hφ.2]⟩, by rw [he]⟩
+  · rintro ⟨t, ht, φ, hφ, rfl⟩
+    exact ⟨t, ht, φ - T, ⟨by linarith [hφ.1], by linarith [hφ.2]⟩, by rw [← he (φ - T), sub_add_cancel]⟩
+
+/-- The lifted directions increase along the orbit where the germs are ordered. -/
+theorem liftDir_lt_succ {s₀ : ℝ} (hord : ∀ t ∈ Ioo 0 s₀, ∀ i, G.dir i t < G.nextDir i t) (s : Fin n) (m : ℕ)
+    {t : ℝ} (ht : t ∈ Ioo 0 s₀) : G.liftDir s m t < G.liftDir s (m + 1) t := by
+  rw [liftDir_eq, liftDir_succ]; linarith [hord t ht (idx s m)]
+
+theorem liftDir_mono {s₀ : ℝ} (hord : ∀ t ∈ Ioo 0 s₀, ∀ i, G.dir i t < G.nextDir i t) (s : Fin n)
+    {t : ℝ} (ht : t ∈ Ioo 0 s₀) : StrictMono fun m => G.liftDir s m t :=
+  strictMono_nat_of_lt_succ fun m => G.liftDir_lt_succ hord s m ht
+
+theorem lift_mono (hM : G.Mono) (s : Fin n) : Monotone (G.lift s) :=
+  monotone_nat_of_le_succ fun m => by rw [lift_succ]; linarith [hM (idx s m)]
+
+theorem idx_add_n (s : Fin n) (m : ℕ) : idx s (m + n) = idx s m := Fin.ext (by simp [idx, ← Nat.add_assoc])
+
+theorem turns_add_n (s : Fin n) (m : ℕ) : turns s (m + n) = turns s m + 1 := by
+  unfold turns; rw [← Nat.add_assoc, Nat.add_div_right _ s.pos]
+
+/-- **A full turn** adds `2π` to the lift. -/
+theorem lift_add_n (s : Fin n) (m : ℕ) : G.lift s (m + n) = G.lift s m + 2 * π := by
+  unfold lift; rw [idx_add_n, turns_add_n]; push_cast; ring
+
+/-- Every index is on the orbit within one turn. -/
+theorem exists_idx_eq (s i : Fin n) : ∃ m < n, idx s m = i := by
+  have hn := s.pos
+  refine ⟨(i.val + n - s.val) % n, Nat.mod_lt _ hn, Fin.ext ?_⟩
+  simp only [idx]
+  rw [Nat.add_mod, Nat.mod_mod, ← Nat.add_mod]
+  rw [show s.val + (i.val + n - s.val) = i.val + n by have := s.isLt; omega, Nat.add_mod_right,
+    Nat.mod_eq_of_lt i.isLt]
+
+/-- Distinct steps within one turn reach distinct indices. -/
+theorem idx_ne {s : Fin n} {m m' : ℕ} (h : m < m') (h' : m' < m + n) : idx s m ≠ idx s m' := by
+  intro heq
+  have := congrArg Fin.val heq
+  simp only [idx] at this
+  have hn := s.pos
+  have h1 := Nat.mod_add_div (s.val + m) n
+  have h2 := Nat.mod_add_div (s.val + m') n
+  have h3 : (s.val + m') / n ≤ (s.val + m) / n + 1 := by
+    rw [← Nat.add_div_right _ hn]; exact Nat.div_le_div_right (by omega)
+  have h4 : (s.val + m) / n ≤ (s.val + m') / n := Nat.div_le_div_right (by omega)
+  set Q := (s.val + m) / n
+  set Q' := (s.val + m') / n
+  rcases Nat.lt_or_ge Q Q' with h5 | h5
+  · have h6 : Q' = Q + 1 := by omega
+    rw [h6, Nat.mul_add, Nat.mul_one] at h2
+    omega
+  · have h6 : Q' = Q := by omega
+    rw [h6] at h2
+    omega
+
+end BranchGerms
+
+/-! ## The directions of a convex cone in the plane -/
+
+/-- `e θ` in coordinates against `e α`: the cross product is `sin (θ − α)`. -/
+theorem cross_e_e (α θ : ℝ) : (e α).re * (e θ).im - (e α).im * (e θ).re = Real.sin (θ - α) := by
+  simp only [re_e, im_e]; rw [Real.sin_sub]; ring
+
+
+section ConeArc
+
+variable {K : Set ℂ} (hadd : ∀ d ∈ K, ∀ d' ∈ K, d + d' ∈ K) (hsmul : ∀ d ∈ K, ∀ t : ℝ, 0 ≤ t → (t : ℂ) * d ∈ K)
+include hadd hsmul
+
+omit hadd in
+/-- In a convex cone, a positive multiple of an interior point is interior. -/
+theorem cone_smul_mem_interior {d : ℂ} (hd : d ∈ interior K) {t : ℝ} (ht : 0 < t) : (t : ℂ) * d ∈ interior K := by
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp isOpen_interior d hd
+  rw [mem_interior]
+  refine ⟨ball ((t : ℂ) * d) (t * ε), fun y hy => ?_, isOpen_ball, mem_ball_self (by positivity)⟩
+  have ht0 : (t : ℂ) ≠ 0 := by exact_mod_cast ht.ne'
+  have hy' : y / t ∈ ball d ε := by
+    rw [mem_ball, dist_eq_norm] at hy ⊢
+    have : y / t - d = (y - t * d) / t := by field_simp
+    rw [this, norm_div, Complex.norm_real, Real.norm_eq_abs, abs_of_pos ht, div_lt_iff₀ ht]; linarith
+  have := hsmul _ (interior_subset (hball hy')) t ht.le
+  rwa [mul_div_cancel₀ _ ht0] at this
+
+omit hsmul in
+/-- In a convex cone, an interior point plus a point of the cone is interior. -/
+theorem cone_add_mem_interior {d d' : ℂ} (hd : d ∈ interior K) (hd' : d' ∈ K) : d + d' ∈ interior K := by
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp isOpen_interior d hd
+  rw [mem_interior]
+  refine ⟨ball (d + d') ε, fun y hy => ?_, isOpen_ball, mem_ball_self hε⟩
+  have hy' : y - d' ∈ ball d ε := by
+    rw [mem_ball, dist_eq_norm] at hy ⊢; rwa [show y - d' - d = y - (d + d') by ring]
+  have := hadd _ (interior_subset (hball hy')) d' hd'
+  rwa [sub_add_cancel] at this
+
+omit hadd in
+/-- A convex cone with `0` interior is the plane. -/
+theorem cone_eq_univ_of_zero_mem_interior (h0 : (0 : ℂ) ∈ interior K) : K = univ := by
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp isOpen_interior 0 h0
+  refine eq_univ_of_forall fun u => ?_
+  by_cases hu : u = 0
+  · subst hu; exact interior_subset h0
+  have hn : 0 < ‖u‖ := norm_pos_iff.mpr hu
+  have hw : ((ε / (2 * ‖u‖) : ℝ) : ℂ) * u ∈ K := by
+    refine interior_subset (hball ?_)
+    rw [mem_ball, dist_zero_right, norm_mul, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos (by positivity)]
+    field_simp; linarith
+  have := hsmul _ hw (2 * ‖u‖ / ε) (by positivity)
+  rwa [← mul_assoc, ← ofReal_mul, show 2 * ‖u‖ / ε * (ε / (2 * ‖u‖)) = 1 by field_simp, ofReal_one, one_mul] at this
+
+/-- **An open arc shorter than `π` with both ends in a convex cone is interior to it** (Cramer: every vector is a combination of
+the two end directions with coefficients `cross(d, e β)/sin(β − α)` and `cross(e α, d)/sin(β − α)`). -/
+theorem cone_mem_interior_of_arc {α β : ℝ} (hα : e α ∈ K) (hβ : e β ∈ K) (h0 : 0 < β - α) (hπ : β - α < π)
+    {θ : ℝ} (hθ : θ ∈ Ioo α β) : e θ ∈ interior K := by
+  set S := Real.sin (β - α) with hS
+  have hS0 : 0 < S := Real.sin_pos_of_pos_of_lt_pi h0 hπ
+  set U : Set ℂ := {d | 0 < d.re * Real.sin β - d.im * Real.cos β ∧ 0 < Real.cos α * d.im - Real.sin α * d.re} with hU
+  have hUo : IsOpen U :=
+    (isOpen_lt continuous_const ((continuous_re.mul continuous_const).sub (continuous_im.mul continuous_const))).inter
+      (isOpen_lt continuous_const ((continuous_const.mul continuous_im).sub (continuous_const.mul continuous_re)))
+  have hUK : U ⊆ K := by
+    rintro d ⟨h1, h2⟩
+    have hdec : d = (((d.re * Real.sin β - d.im * Real.cos β) / S : ℝ) : ℂ) * e α +
+        (((Real.cos α * d.im - Real.sin α * d.re) / S : ℝ) : ℂ) * e β := by
+      apply Complex.ext <;>
+        simp only [add_re, add_im, mul_re, mul_im, ofReal_re, ofReal_im, re_e, im_e, zero_mul, sub_zero, add_zero] <;>
+        field_simp <;> rw [hS, Real.sin_sub] <;> ring
+    rw [hdec]
+    exact hadd _ (hsmul _ hα _ (div_pos h1 hS0).le) _ (hsmul _ hβ _ (div_pos h2 hS0).le)
+  refine interior_maximal hUK hUo ⟨?_, ?_⟩
+  · simp only [re_e, im_e]
+    rw [show Real.cos θ * Real.sin β - Real.sin θ * Real.cos β = Real.sin (β - θ) by rw [Real.sin_sub]; ring]
+    exact Real.sin_pos_of_pos_of_lt_pi (by linarith [hθ.2]) (by linarith [hθ.1])
+  · simp only [re_e, im_e]
+    rw [show Real.cos α * Real.sin θ - Real.sin α * Real.cos θ = Real.sin (θ - α) by rw [Real.sin_sub]; ring]
+    exact Real.sin_pos_of_pos_of_lt_pi (by linarith [hθ.1]) (by linarith [hθ.2])
+
+/-- **A half-plane from a line**: if `±u` (a unit vector) lie in the cone and a point `x` of it is strictly on the left of `u`, every
+point strictly on the left lies in the cone; interior when `x` is. -/
+theorem cone_half_plane {u : ℂ} (hu : ‖u‖ = 1) (hpos : u ∈ K) (hneg : -u ∈ K) {x : ℂ}
+    (hb : 0 < u.re * x.im - u.im * x.re) {y : ℂ} (hy : 0 < u.re * y.im - u.im * y.re) :
+    (x ∈ K → y ∈ K) ∧ (x ∈ interior K → y ∈ interior K) := by
+  have hu2 : u.re ^ 2 + u.im ^ 2 = 1 := by
+    have := Complex.sq_norm u; rw [hu, Complex.normSq_apply] at this; nlinarith [this]
+  have kre : (u.re * x.im - u.im * x.re) * y.re = (u.re * y.im - u.im * y.re) * x.re +
+      ((u.re * y.re + u.im * y.im) * (u.re * x.im - u.im * x.re) -
+        (u.re * y.im - u.im * y.re) * (u.re * x.re + u.im * x.im)) * u.re := by
+    linear_combination ((u.re * y.im - u.im * y.re) * x.re - (u.re * x.im - u.im * x.re) * y.re) * hu2
+  have kim : (u.re * x.im - u.im * x.re) * y.im = (u.re * y.im - u.im * y.re) * x.im +
+      ((u.re * y.re + u.im * y.im) * (u.re * x.im - u.im * x.re) -
+        (u.re * y.im - u.im * y.re) * (u.re * x.re + u.im * x.im)) * u.im := by
+    linear_combination ((u.re * y.im - u.im * y.re) * x.im - (u.re * x.im - u.im * x.re) * y.im) * hu2
+  set b := u.re * x.im - u.im * x.re
+  set by' := u.re * y.im - u.im * y.re
+  set a := u.re * x.re + u.im * x.im
+  set a' := u.re * y.re + u.im * y.im
+  have hdec : y = ((by' / b : ℝ) : ℂ) * x + ((a' - by' / b * a : ℝ) : ℂ) * u := by
+    have hb0 : b ≠ 0 := hb.ne'
+    apply Complex.ext <;>
+      simp only [add_re, add_im, mul_re, mul_im, ofReal_re, ofReal_im, zero_mul, sub_zero, add_zero]
+    · field_simp; linear_combination kre
+    · field_simp; linear_combination kim
+  have hline : ∀ t : ℝ, (t : ℂ) * u ∈ K := fun t => by
+    rcases le_total 0 t with ht | ht
+    · exact hsmul _ hpos t ht
+    · have := hsmul _ hneg (-t) (by linarith); rwa [ofReal_neg, neg_mul_neg] at this
+  refine ⟨fun hx => ?_, fun hx => ?_⟩
+  · rw [hdec]; exact hadd _ (hsmul _ hx _ (div_pos hy hb).le) _ (hline _)
+  · rw [hdec]; exact cone_add_mem_interior hadd (cone_smul_mem_interior hsmul hx (div_pos hy hb)) (hline _)
+
+/-- **The directions of a convex cone between two of its directions** (FS110-W-MERGE's gap inside `D_c(v)`): if `e θ₁, e θ₂` lie in
+the cone, `e θs` does not, and `θs < θ₁ ≤ θ₂ < θs + 2π`, every direction strictly between `θ₁` and `θ₂` is interior to the cone. -/
+theorem cone_mem_interior_of_between (hint : (interior K).Nonempty) {θ₁ θ₂ θs : ℝ} (h1 : e θ₁ ∈ K) (h2 : e θ₂ ∈ K)
+    (hs : e θs ∉ K) (hlo : θs < θ₁) (hhi : θ₂ < θs + 2 * π) {θ : ℝ} (hθ : θ ∈ Ioo θ₁ θ₂) : e θ ∈ interior K := by
+  have hπ := Real.pi_pos
+  rcases lt_trichotomy (θ₂ - θ₁) π with hlt | heq | hgt
+  · exact cone_mem_interior_of_arc hadd hsmul h1 h2 (by linarith [hθ.1, hθ.2]) hlt hθ
+  · -- a half-plane: `±e θ₁` lie in the cone, and an interior point lies on the gap's side
+    obtain ⟨d₀, hd₀⟩ := hint
+    have hneg : -e θ₁ ∈ K := by
+      rw [show -e θ₁ = e θ₂ by rw [show θ₂ = θ₁ + π by linarith, e_add, show e π = -1 by simp [e_eq]]; ring]
+      exact h2
+    have hu : ‖e θ₁‖ = 1 := norm_e θ₁
+    have hcs : (e θ₁).re * (e θs).im - (e θ₁).im * (e θs).re < 0 := by
+      rw [cross_e_e]; exact Real.sin_neg_of_neg_of_neg_pi_lt (by linarith) (by linarith)
+    -- the interior point is strictly on the gap's side
+    have hb : 0 < (e θ₁).re * d₀.im - (e θ₁).im * d₀.re := by
+      by_contra hc; push Not at hc
+      obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp isOpen_interior d₀ hd₀
+      set w := d₀ - ((ε / 2 : ℝ) : ℂ) * (I * e θ₁) with hw
+      have hwK : w ∈ K := by
+        refine interior_subset (hball ?_)
+        rw [mem_ball, dist_eq_norm, hw, show d₀ - ((ε / 2 : ℝ) : ℂ) * (I * e θ₁) - d₀ = -(((ε / 2 : ℝ) : ℂ) * (I * e θ₁)) by ring,
+          norm_neg, norm_mul, norm_mul, Complex.norm_real, Complex.norm_I, hu, Real.norm_eq_abs, abs_of_pos (by positivity)]
+        linarith
+      have hwb : (-e θ₁).re * w.im - (-e θ₁).im * w.re > 0 := by
+        have hu2 : (e θ₁).re ^ 2 + (e θ₁).im ^ 2 = 1 := by simp only [re_e, im_e]; exact Real.cos_sq_add_sin_sq θ₁
+        simp only [hw, neg_re, neg_im, sub_re, sub_im, mul_re, mul_im, ofReal_re, ofReal_im, I_re, I_im, zero_mul,
+          one_mul, zero_sub, sub_zero, zero_add, mul_neg, neg_mul]
+        nlinarith [hu2]
+      have hsK := (cone_half_plane hadd hsmul (u := -e θ₁) (by rw [norm_neg, hu]) hneg (by rw [neg_neg]; exact h1) hwb
+        (y := e θs) (by simp only [neg_re, neg_im]; linarith)).1 hwK
+      exact hs hsK
+    have hθb : 0 < (e θ₁).re * (e θ).im - (e θ₁).im * (e θ).re := by
+      rw [cross_e_e]; exact Real.sin_pos_of_pos_of_lt_pi (by linarith [hθ.1]) (by linarith [hθ.2])
+    exact (cone_half_plane hadd hsmul hu h1 hneg hb hθb).2 hd₀
+  · -- the complementary arc is shorter than `π` and holds `θs + 2π`
+    exfalso
+    have h1' : e (θ₁ + 2 * π) ∈ K := by rwa [e_add_two_pi]
+    have := cone_mem_interior_of_arc hadd hsmul h2 h1' (by linarith [hθ.1, hθ.2]) (by linarith)
+      (θ := θs + 2 * π) ⟨by linarith, by linarith⟩
+    rw [e_add_two_pi] at this
+    exact hs (interior_subset this)
+
+/-- **A direction of a convex cone with non-empty interior** is interior, or has a direction of the cone on one of its sides within
+`(0, π)`. -/
+theorem cone_side (hint : (interior K).Nonempty) {θ : ℝ} (hθ : e θ ∈ K) :
+    e θ ∈ interior K ∨ ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧ ∃ ψ, 0 < ψ ∧ ψ < π ∧ e (θ + σ * ψ) ∈ K := by
+  have hπ := Real.pi_pos
+  obtain ⟨d₀, hd₀⟩ := hint
+  by_cases h0 : d₀ = 0
+  · left; rw [cone_eq_univ_of_zero_mem_interior hsmul (h0 ▸ hd₀), interior_univ]; trivial
+  obtain ⟨w, hw⟩ : ∃ w, w = d₀ * starRingEnd ℂ (e θ) := ⟨_, rfl⟩
+  have hw0 : w ≠ 0 := by rw [hw]; exact mul_ne_zero h0 (by rw [map_ne_zero]; exact e_ne_zero θ)
+  have hwn : 0 < ‖w‖ := norm_pos_iff.mpr hw0
+  -- `e (θ + arg w)` is `d₀ / ‖w‖`, interior
+  have hdir : e (θ + arg w) = ((1 / ‖w‖ : ℝ) : ℂ) * d₀ := by
+    have h1 : (‖w‖ : ℂ) * e (arg w) = w := by simp [e]
+    have hee : e θ * starRingEnd ℂ (e θ) = 1 := by
+      rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, norm_e]; simp
+    have key : (‖w‖ : ℂ) * e (θ + arg w) = d₀ := by
+      rw [e_add, show (‖w‖ : ℂ) * (e θ * e (arg w)) = e θ * ((‖w‖ : ℂ) * e (arg w)) by ring, h1, hw,
+        show e θ * (d₀ * starRingEnd ℂ (e θ)) = d₀ * (e θ * starRingEnd ℂ (e θ)) by ring, hee, mul_one]
+    have hwn' : (‖w‖ : ℂ) ≠ 0 := by exact_mod_cast hwn.ne'
+    rw [← key]; push_cast; field_simp
+  have hint' : e (θ + arg w) ∈ interior K := by rw [hdir]; exact cone_smul_mem_interior hsmul hd₀ (by positivity)
+  rcases lt_trichotomy (arg w) 0 with hneg | hzero | hpos
+  · right; exact ⟨-1, Or.inr rfl, -arg w, by linarith, by linarith [Complex.neg_pi_lt_arg w], by
+      rw [show θ + -1 * -arg w = θ + arg w by ring]; exact interior_subset hint'⟩
+  · left; rwa [hzero, add_zero] at hint'
+  · rcases lt_or_eq_of_le (Complex.arg_le_pi w) with hlt | heq
+    · right; exact ⟨1, Or.inl rfl, arg w, hpos, hlt, by rw [one_mul]; exact interior_subset hint'⟩
+    · left
+      rw [heq, show e (θ + π) = -e θ by rw [e_add, show e π = -1 by simp [e_eq]]; ring] at hint'
+      have h00 := cone_add_mem_interior hadd hint' hθ
+      rw [neg_add_cancel] at h00
+      rw [cone_eq_univ_of_zero_mem_interior hsmul h00, interior_univ]; trivial
+
+end ConeArc
+
+/-! ## The gap's clearness, assembled from its two ends and its middle -/
+
+/-- **Assembling the gap's clearness**: a property holding near each end of the gap `[germDir θ₁ κ₁ t, germDir θ₂ κ₂ t]` and on
+every closed middle interval holds on the whole gap for small `t` (the gap's ends tend to `θ₁` and `θ₂`). -/
+theorem gap_assemble {P : ℝ → ℝ → Prop} {θ₁ θ₂ κ₁ κ₂ : ℝ}
+    (hend1 : ∃ ε > 0, ∃ ρ > 0, ∀ t ∈ Ioo 0 ρ, ∀ φ, germDir θ₁ κ₁ t ≤ φ → φ ≤ germDir θ₂ κ₂ t → |φ - θ₁| ≤ ε → P t φ)
+    (hend2 : ∃ ε > 0, ∃ ρ > 0, ∀ t ∈ Ioo 0 ρ, ∀ φ, germDir θ₁ κ₁ t ≤ φ → φ ≤ germDir θ₂ κ₂ t → |φ - θ₂| ≤ ε → P t φ)
+    (hmid : ∀ ε > 0, ∃ ρ > 0, ∀ t ∈ Ioo 0 ρ, ∀ φ ∈ Icc (θ₁ + ε) (θ₂ - ε), P t φ) :
+    ∃ ρ > 0, ∀ t ∈ Ioo 0 ρ, ∀ φ, germDir θ₁ κ₁ t ≤ φ → φ ≤ germDir θ₂ κ₂ t → P t φ := by
+  obtain ⟨ε₁, hε₁, ρ₁, hρ₁, h1⟩ := hend1
+  obtain ⟨ε₂, hε₂, ρ₂, hρ₂, h2⟩ := hend2
+  set ε := min ε₁ ε₂ with hε
+  have hε0 : 0 < ε := lt_min hε₁ hε₂
+  obtain ⟨ρm, hρm, hm⟩ := hmid ε hε0
+  obtain ⟨η, hη, harc⟩ := exists_abs_arcsin_lt hε0
+  set ρa := η / (|κ₁| + |κ₂| + 1) with hρa
+  have hρa0 : 0 < ρa := by positivity
+  refine ⟨min (min ρ₁ ρ₂) (min ρm ρa), lt_min (lt_min hρ₁ hρ₂) (lt_min hρm hρa0), fun t ht φ hφ1 hφ2 => ?_⟩
+  have ht1 : t < ρ₁ := ht.2.trans_le ((min_le_left _ _).trans (min_le_left _ _))
+  have ht2 : t < ρ₂ := ht.2.trans_le ((min_le_left _ _).trans (min_le_right _ _))
+  have htm : t < ρm := ht.2.trans_le ((min_le_right _ _).trans (min_le_left _ _))
+  have hta : t < ρa := ht.2.trans_le ((min_le_right _ _).trans (min_le_right _ _))
+  have hsmall : ∀ κ, |κ| ≤ |κ₁| + |κ₂| → |Real.arcsin (κ * t / 2)| < ε := fun κ hκ => by
+    refine harc _ ?_
+    rw [abs_div, abs_mul, abs_of_pos ht.1, abs_two]
+    have : |κ| * t ≤ (|κ₁| + |κ₂|) * t := mul_le_mul_of_nonneg_right hκ ht.1.le
+    have h3 : (|κ₁| + |κ₂| + 1) * t < η := by rw [hρa, lt_div_iff₀ (by positivity)] at hta; linarith
+    nlinarith [abs_nonneg κ₁, abs_nonneg κ₂, ht.1]
+  have hd1 := hsmall κ₁ (by linarith [abs_nonneg κ₂])
+  have hd2 := hsmall κ₂ (by linarith [abs_nonneg κ₁])
+  unfold germDir at hφ1 hφ2
+  have hφ1' : θ₁ - ε < φ := by linarith [(abs_lt.mp hd1).1]
+  have hφ2' : φ < θ₂ + ε := by linarith [(abs_lt.mp hd2).2]
+  by_cases hA : φ ≤ θ₁ + ε
+  · refine h1 t ⟨ht.1, ht1⟩ φ hφ1 hφ2 ?_
+    rw [abs_le]; constructor <;> linarith [min_le_left ε₁ ε₂]
+  by_cases hB : θ₂ - ε ≤ φ
+  · refine h2 t ⟨ht.1, ht2⟩ φ hφ1 hφ2 ?_
+    rw [abs_le]; constructor <;> linarith [min_le_right ε₁ ε₂]
+  push Not at hA hB
+  exact hm t ⟨ht.1, htm⟩ φ ⟨hA.le, hB.le⟩
+
+namespace ArcMap
+
+namespace Near
+
+variable {k : ℕ} {F : ArcMap k} {v : ℂ} (X : F.Near v)
+
+/-- A chart sector lies in a tile of its colour whose closure holds `v`. -/
+theorem exists_tile_of_sector (i : Fin X.n) :
+    ∃ T₀, F.TileOf (X.col i) T₀ ∧ X.G.sector v X.s₀ i ⊆ T₀ ∧ v ∈ closure T₀ := by
+  obtain ⟨z, hz⟩ := X.hC.sector_nonempty X.hs₀ i
+  have hI := X.hC.sector_subset_interiorPts i.pos X.hs₀ i
+  have hsub : X.G.sector v X.s₀ i ⊆ connectedComponentIn F.interiorPts z :=
+    (X.hC.isPreconnected X.s₀ X.hs₀ i).subset_connectedComponentIn hz hI
+  have hT : F.IsTile (connectedComponentIn F.interiorPts z) := ⟨z, hI hz, rfl⟩
+  refine ⟨_, ?_, hsub, closure_mono hsub (X.hC.mem_closure_sector X.hs₀ i)⟩
+  have := hT.tileOf (mem_connectedComponentIn (hI hz))
+  have hc : F.col z = X.col i := by simpa using (X.hcol₀ i hz).2
+  rwa [hc] at this
+
+/-- **A colour with two sectors at `v` has a germ there**: with no germ the punctured ball is one sector. -/
+theorem pos_of_hasSectors {c : Fin k} {m : ℕ} (hm2 : 2 ≤ m) (hm : F.HasSectors v c m) : 0 < X.n := by
+  by_contra h0
+  have hn0 : X.n = 0 := by omega
+  obtain ⟨r, hr', hr⟩ := (hm.and (Ioc_mem_nhdsGT X.hC.pos)).exists
+  have hball : ball v r ⊆ F.interiorPts := (ball_subset_ball hr.2).trans (X.hC.empty hn0)
+  have hle : (F.sectorsOf v r c).encard ≤ 1 := by
+    refine (encard_le_encard (t := {ball v r}) ?_).trans (by simp)
+    rintro S ⟨⟨x, hx, rfl, -⟩, -⟩
+    rw [mem_singleton_iff, inter_eq_right.mpr hball]
+    exact (convex_ball v r).isPreconnected.connectedComponentIn hx.2
+  rw [hr'] at hle
+  have : (2 : ℕ∞) ≤ m := by exact_mod_cast hm2
+  have := this.trans hle
+  norm_num at this
+
+variable {X}
+
+/-- **The ends of a `c`-sector's directions lie in `D_c(v)`.** -/
+theorem e_mem_allowedCone_of_col (hF : F.Valid) (hv : F.Covers v 1) {c : Fin k} {i : Fin X.n} (hi : X.col i = c)
+    {θ : ℝ} (hθ : θ ∈ Icc (X.G.β i) (X.G.nextβ i)) : e θ ∈ F.allowedCone v c := by
+  refine coneAt_subset_allowedCone hF hv ?_
+  refine coneAt_mono ((X.hcol₀ i).trans (by rw [hi])) v ?_
+  rw [X.hC.cone X.s₀ X.hs₀ i]; exact Icc_subset_angleIcc _ _ hθ
+
+/-- A germ's branch point along its lifted direction. -/
+theorem branchPt_lift (s : Fin X.n) (m : ℕ) (t : ℝ) :
+    branchPt v (X.G.lift s m) (X.G.κ (BranchGerms.idx s m)) t =
+      branchPt v (X.G.β (BranchGerms.idx s m)) (X.G.κ (BranchGerms.idx s m)) t := by
+  rw [X.G.branchPt_idx v s m t]; rfl
+
+/-- **The base of the gap's lower end**: the germ after a `c`-sector lies in the closure of that sector's tile. -/
+theorem base_before {c : Fin k} {s : Fin X.n} {a : ℕ} (hca : X.col (BranchGerms.idx s a) = c) :
+    ∃ T₀, F.TileOf c T₀ ∧ v ∈ closure T₀ ∧ ∃ r > 0, ∀ t ∈ Ioo 0 r,
+      branchPt v (X.G.lift s (a + 1)) (X.G.κ (BranchGerms.idx s (a + 1))) t ∈ closure T₀ := by
+  obtain ⟨T₀, hT₀, hsub, hvT⟩ := X.exists_tile_of_sector (BranchGerms.idx s a)
+  rw [hca] at hT₀
+  refine ⟨T₀, hT₀, hvT, X.s₀, X.hs₀.1, fun t ht => ?_⟩
+  rw [branchPt_lift, ← BranchGerms.next_idx]
+  exact closure_mono hsub (IsSectorChart.branchPt_mem_closure_sector_before X.hord le_rfl _ ht)
+
+/-- **The base of the gap's upper end**: a `c`-sector's own germ lies in the closure of its tile. -/
+theorem base_after {c : Fin k} {s : Fin X.n} {b : ℕ} (hcb : X.col (BranchGerms.idx s b) = c) :
+    ∃ T₀, F.TileOf c T₀ ∧ v ∈ closure T₀ ∧ ∃ r > 0, ∀ t ∈ Ioo 0 r,
+      branchPt v (X.G.lift s b) (X.G.κ (BranchGerms.idx s b)) t ∈ closure T₀ := by
+  obtain ⟨T₀, hT₀, hsub, hvT⟩ := X.exists_tile_of_sector (BranchGerms.idx s b)
+  rw [hcb] at hT₀
+  refine ⟨T₀, hT₀, hvT, X.s₀, X.hs₀.1, fun t ht => ?_⟩
+  rw [branchPt_lift]
+  exact closure_mono hsub (IsSectorChart.branchPt_mem_closure_sector_after X.hord le_rfl _ ht)
+
+/-- **The gap's clearness** (FS110-W-MERGE's gap, record § 4.2): between a `c`-sector `idx s a` and the next `c`-sector `idx s b`,
+with a direction `e θs ∉ D_c(v)` below the gap and one turn above it, every point of the gap near `v` is clear for `c`. -/
+theorem gap_clear (hF : F.Valid) (hv : F.Covers v 1) {c : Fin k} (hc : c ∈ F.coloursAt v)
+    (hD : (interior (F.allowedCone v c)).Nonempty) {s : Fin X.n} {a b : ℕ} (hab : a < b)
+    (hca : X.col (BranchGerms.idx s a) = c) (hcb : X.col (BranchGerms.idx s b) = c) {θs : ℝ}
+    (hθs : e θs ∉ F.allowedCone v c) (hlo : θs < X.G.lift s (a + 1)) (hhi : X.G.lift s b < θs + 2 * π) :
+    ∃ ρc > 0, ∀ t ∈ Ioo 0 ρc, ∀ φ, X.G.liftDir s (a + 1) t ≤ φ → φ ≤ X.G.liftDir s b t →
+      F.IsClear c (v + (t : ℂ) * e φ) := by
+  have hπ := Real.pi_pos
+  have hπ3 := Real.two_le_pi
+  have hadd : ∀ d ∈ F.allowedCone v c, ∀ d' ∈ F.allowedCone v c, d + d' ∈ F.allowedCone v c :=
+    fun d hd d' hd' => add_mem_allowedCone hd hd'
+  have hsmul : ∀ d ∈ F.allowedCone v c, ∀ t : ℝ, 0 ≤ t → (t : ℂ) * d ∈ F.allowedCone v c :=
+    fun d hd t ht => smul_mem_allowedCone ht hd
+  set θ₁ := X.G.lift s (a + 1) with hθ₁
+  set θ₂ := X.G.lift s b with hθ₂
+  set κ₁ := X.G.κ (BranchGerms.idx s (a + 1)) with hκ₁
+  set κ₂ := X.G.κ (BranchGerms.idx s b) with hκ₂
+  have hM := X.hC.sorted.mono
+  have h12 : θ₁ ≤ θ₂ := X.G.lift_mono hM s (by omega)
+  have h1K : e θ₁ ∈ F.allowedCone v c := by
+    rw [hθ₁, X.G.lift_succ', show e (X.G.nextβ (BranchGerms.idx s a) + 2 * π * (BranchGerms.turns s a : ℝ)) =
+      e (X.G.nextβ (BranchGerms.idx s a)) by rw [e_eq_e_iff]; exact ⟨(BranchGerms.turns s a : ℤ), by push_cast; ring⟩]
+    exact e_mem_allowedCone_of_col hF hv hca ⟨hM _, le_rfl⟩
+  have h2K : e θ₂ ∈ F.allowedCone v c := by
+    rw [hθ₂, X.G.e_lift]; exact e_mem_allowedCone_of_col hF hv hcb ⟨le_rfl, hM _⟩
+  -- the end lemmas in the gap's form
+  have end1 : ∀ hK : e θ₁ ∈ interior (F.allowedCone v c) ∨
+      (e θ₁ ∈ F.allowedCone v c ∧ ∃ ψ, 0 < ψ ∧ ψ < π ∧ e (θ₁ + 1 * ψ) ∈ F.allowedCone v c),
+      ∃ ε > 0, ∃ ρ > 0, ∀ t ∈ Ioo 0 ρ, ∀ φ, germDir θ₁ κ₁ t ≤ φ → φ ≤ germDir θ₂ κ₂ t → |φ - θ₁| ≤ ε →
+        F.IsClear c (v + (t : ℂ) * e φ) := fun hK => by
+    obtain ⟨ε, hε, ρ, hρ, h⟩ := clear_near_end hF hv hc (Or.inl rfl) hK (X.base_before hca)
+    exact ⟨ε, hε, ρ, hρ, fun t ht φ hφ1 _ hφ => h t ht φ (by linarith) hφ⟩
+  have end2 : ∀ hK : e θ₂ ∈ interior (F.allowedCone v c) ∨
+      (e θ₂ ∈ F.allowedCone v c ∧ ∃ ψ, 0 < ψ ∧ ψ < π ∧ e (θ₂ + -1 * ψ) ∈ F.allowedCone v c),
+      ∃ ε > 0, ∃ ρ > 0, ∀ t ∈ Ioo 0 ρ, ∀ φ, germDir θ₁ κ₁ t ≤ φ → φ ≤ germDir θ₂ κ₂ t → |φ - θ₂| ≤ ε →
+        F.IsClear c (v + (t : ℂ) * e φ) := fun hK => by
+    obtain ⟨ε, hε, ρ, hρ, h⟩ := clear_near_end hF hv hc (Or.inr rfl) hK (X.base_after hcb)
+    exact ⟨ε, hε, ρ, hρ, fun t ht φ _ hφ2 hφ => h t ht φ (by linarith) hφ⟩
+  refine gap_assemble (κ₁ := κ₁) (κ₂ := κ₂) (P := fun t φ => F.IsClear c (v + (t : ℂ) * e φ)) ?_ ?_ ?_
+  · rcases lt_or_eq_of_le h12 with hlt | heq
+    · set ψ := min ((θ₂ - θ₁) / 2) 1
+      have hψ0 : 0 < ψ := lt_min (by linarith) one_pos
+      have hψ1 : ψ ≤ 1 := min_le_right _ _
+      have hψ2 : ψ ≤ (θ₂ - θ₁) / 2 := min_le_left _ _
+      exact end1 (Or.inr ⟨h1K, ψ, hψ0, by linarith, interior_subset (cone_mem_interior_of_between hadd hsmul hD h1K h2K
+        hθs hlo hhi ⟨by linarith, by linarith⟩)⟩)
+    · rcases cone_side hadd hsmul hD h1K with hint | ⟨σ, hσ, ψ, hψ, hψπ, hK⟩
+      · exact end1 (Or.inl hint)
+      · rcases hσ with rfl | rfl
+        · exact end1 (Or.inr ⟨h1K, ψ, hψ, hψπ, hK⟩)
+        · obtain ⟨ε, hε, ρ, hρ, h⟩ := end2 (Or.inr ⟨h2K, ψ, hψ, hψπ, by rw [← heq]; exact hK⟩)
+          exact ⟨ε, hε, ρ, hρ, fun t ht φ h1 h2 hφ => h t ht φ h1 h2 (by rw [← heq]; exact hφ)⟩
+  · rcases lt_or_eq_of_le h12 with hlt | heq
+    · set ψ := min ((θ₂ - θ₁) / 2) 1
+      have hψ0 : 0 < ψ := lt_min (by linarith) one_pos
+      have hψ1 : ψ ≤ 1 := min_le_right _ _
+      have hψ2 : ψ ≤ (θ₂ - θ₁) / 2 := min_le_left _ _
+      exact end2 (Or.inr ⟨h2K, ψ, hψ0, by linarith, interior_subset (cone_mem_interior_of_between hadd hsmul hD h1K h2K
+        hθs hlo hhi ⟨by linarith, by linarith⟩)⟩)
+    · rcases cone_side hadd hsmul hD h2K with hint | ⟨σ, hσ, ψ, hψ, hψπ, hK⟩
+      · obtain ⟨ε, hε, ρ, hρ, h⟩ := end1 (Or.inl (by rw [heq]; exact hint))
+        exact ⟨ε, hε, ρ, hρ, fun t ht φ h1 h2 hφ => h t ht φ h1 h2 (by rw [heq]; exact hφ)⟩
+      · rcases hσ with rfl | rfl
+        · obtain ⟨ε, hε, ρ, hρ, h⟩ := end1 (Or.inr ⟨h1K, ψ, hψ, hψπ, by rw [heq]; exact hK⟩)
+          exact ⟨ε, hε, ρ, hρ, fun t ht φ h1 h2 hφ => h t ht φ h1 h2 (by rw [heq]; exact hφ)⟩
+        · exact end2 (Or.inr ⟨h2K, ψ, hψ, hψπ, hK⟩)
+  · intro ε hε
+    by_cases hlt : θ₁ + ε ≤ θ₂ - ε
+    · have hsub : e '' Icc (θ₁ + ε) (θ₂ - ε) ⊆ interior (F.allowedCone v c) := by
+        rintro _ ⟨θ, hθ, rfl⟩
+        exact cone_mem_interior_of_between hadd hsmul hD h1K h2K hθs hlo hhi ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+      obtain ⟨ρ, hρ, h⟩ := clear_of_subset_interior_allowedCone hF hv hc isCompact_Icc hsub
+      exact ⟨ρ, hρ, fun t ht φ hφ => h φ hφ t ht.1 ht.2⟩
+    · exact ⟨1, one_pos, fun t _ φ hφ => absurd (hφ.1.trans hφ.2) hlt⟩
+
+/-- **The gap** (FS110-W-MERGE, record § 4.1): if `int D_c(v)` is non-empty and `c` has `n + 1 ≥ 2` sectors at `v`, there are two
+`c`-sectors `idx s a` and `idx s b`, consecutive along the orbit (`a < b < a + n`, no `c`-sector strictly between), such that every
+point of the gap between them near `v` (directions from germ `idx s (a + 1)` to germ `idx s b`) is clear for `c`. The gap is the
+one after an excluded direction `e θs ∉ D_c(v)` (when `D_c(v)` is not the plane). -/
+theorem exists_gap (hF : F.Valid) (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)
+    (hn : F.HasSectors v c (n + 1)) (hD : (interior (F.allowedCone v c)).Nonempty) :
+    ∃ s : Fin X.n, ∃ a b : ℕ, a < b ∧ b < a + X.n ∧ X.col (BranchGerms.idx s a) = c ∧
+      X.col (BranchGerms.idx s b) = c ∧ (∀ m, a < m → m < b → X.col (BranchGerms.idx s m) ≠ c) ∧
+      ∃ ρc > 0, ∀ t ∈ Ioo 0 ρc, ∀ φ, X.G.liftDir s (a + 1) t ≤ φ → φ ≤ X.G.liftDir s b t →
+        F.IsClear c (v + (t : ℂ) * e φ) := by
+  classical
+  have hπ := Real.pi_pos
+  have hM := X.hC.sorted.mono
+  have hpos : 0 < X.n := X.pos_of_hasSectors (by omega) hn
+  have hcnt : {i | X.col i = c}.encard = ((n + 1 : ℕ) : ℕ∞) := by
+    obtain ⟨r, hr', hr⟩ := (hn.and (Ioc_mem_nhdsGT X.hC.pos)).exists
+    rw [← hr', X.hC.encard_sectorsOf hpos hr (fun i => X.hcol i r hr) c]
+  obtain ⟨i₁, i₂, hi₁, hi₂, h12⟩ : ∃ i₁ i₂, X.col i₁ = c ∧ X.col i₂ = c ∧ i₁ ≠ i₂ := by
+    have : 1 < {i | X.col i = c}.encard := by
+      rw [hcnt]; exact_mod_cast (show 1 < n + 1 by omega)
+    exact Set.one_lt_encard_iff.mp this
+  have hc : c ∈ F.coloursAt v :=
+    closure_mono ((X.hcol₀ i₁).trans (by rw [hi₁])) (X.hC.mem_closure_sector X.hs₀ i₁)
+  by_cases hU : F.allowedCone v c = univ
+  · -- `D_c(v)` is the plane: any `c`-sector and the next one
+    obtain ⟨m₂, hm₂, hm₂i⟩ := BranchGerms.exists_idx_eq i₁ i₂
+    have hex : ∃ m, 0 < m ∧ m < X.n ∧ X.col (BranchGerms.idx i₁ m) = c := by
+      refine ⟨m₂, Nat.pos_of_ne_zero fun h0 => h12 ?_, hm₂, by rw [hm₂i]; exact hi₂⟩
+      rw [← hm₂i, h0, BranchGerms.idx_zero]
+    have hb := Nat.find_spec hex
+    refine ⟨i₁, 0, Nat.find hex, hb.1, by omega, by rw [BranchGerms.idx_zero]; exact hi₁, hb.2.2,
+      fun m hm0 hmb => fun hcm => Nat.find_min hex hmb ⟨hm0, by omega, hcm⟩, ?_⟩
+    have hsub : e '' Icc (X.G.lift i₁ (0 + 1) - 2) (X.G.lift i₁ (Nat.find hex) + 2) ⊆ interior (F.allowedCone v c) := by
+      rw [hU, interior_univ]; exact subset_univ _
+    obtain ⟨ρ, hρ, h⟩ := clear_of_subset_interior_allowedCone hF hv hc isCompact_Icc hsub
+    refine ⟨ρ, hρ, fun t ht φ hφ1 hφ2 => h φ ⟨?_, ?_⟩ t ht.1 ht.2⟩
+    · unfold BranchGerms.liftDir germDir at hφ1
+      linarith [Real.neg_pi_div_two_le_arcsin (X.G.κ (BranchGerms.idx i₁ (0 + 1)) * t / 2), Real.pi_le_four]
+    · unfold BranchGerms.liftDir germDir at hφ2
+      linarith [Real.arcsin_le_pi_div_two (X.G.κ (BranchGerms.idx i₁ (Nat.find hex)) * t / 2), Real.pi_le_four]
+  · -- an excluded direction `e θs ∉ D_c(v)`, on the closed cone of the chart sector `s`
+    obtain ⟨u, hu⟩ : ∃ u, u ∉ F.allowedCone v c := by
+      by_contra h; push Not at h; exact hU (eq_univ_of_forall h)
+    have hu0 : u ≠ 0 := by
+      rintro rfl
+      obtain ⟨d₀, hd₀⟩ := hD
+      have := smul_mem_allowedCone (t := 0) le_rfl (interior_subset hd₀)
+      rw [ofReal_zero, zero_mul] at this
+      exact hu this
+    have hθs : e (arg u) ∉ F.allowedCone v c := by
+      intro h
+      have := smul_mem_allowedCone (norm_nonneg u) h
+      rw [show ((‖u‖ : ℝ) : ℂ) * e (arg u) = u by simp [e]] at this
+      exact hu this
+    obtain ⟨s, θs, hθsI, hθsK⟩ : ∃ s : Fin X.n, ∃ θs, θs ∈ Icc (X.G.β s) (X.G.nextβ s) ∧ e θs ∉ F.allowedCone v c := by
+      rcases X.G.exists_angle hpos (arg u) with ⟨i, m, hm⟩ | ⟨i, hi⟩
+      · refine ⟨i, X.G.β i, ⟨le_rfl, hM i⟩, ?_⟩
+        rwa [show e (X.G.β i) = e (arg u) by rw [e_eq_e_iff]; exact ⟨-m, by rw [hm]; push_cast; ring⟩]
+      · obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hi
+        refine ⟨i, arg u - 2 * π * m, ⟨by linarith, by linarith⟩, ?_⟩
+        rwa [show e (arg u - 2 * π * m) = e (arg u) by rw [e_eq_e_iff]; exact ⟨-m, by push_cast; ring⟩]
+    have hcs : X.col s ≠ c := fun h => hθsK (e_mem_allowedCone_of_col hF hv h hθsI)
+    obtain ⟨m₁, hm₁, hm₁i⟩ := BranchGerms.exists_idx_eq s i₁
+    obtain ⟨m₂, hm₂, hm₂i⟩ := BranchGerms.exists_idx_eq s i₂
+    have hexa : ∃ m, m < X.n ∧ X.col (BranchGerms.idx s m) = c := ⟨m₁, hm₁, by rw [hm₁i]; exact hi₁⟩
+    set a := Nat.find hexa with ha
+    have hav := Nat.find_spec hexa
+    have ha0 : a ≠ 0 := fun h0 => hcs (by rw [← BranchGerms.idx_zero s, ← h0]; exact hav.2)
+    have ham₁ : a ≤ m₁ := Nat.find_min' hexa ⟨hm₁, by rw [hm₁i]; exact hi₁⟩
+    have ham₂ : a ≤ m₂ := Nat.find_min' hexa ⟨hm₂, by rw [hm₂i]; exact hi₂⟩
+    have hm12 : m₁ ≠ m₂ := fun h => h12 (by rw [← hm₁i, ← hm₂i, h])
+    have hexb : ∃ m, a < m ∧ m < X.n ∧ X.col (BranchGerms.idx s m) = c := by
+      rcases lt_or_eq_of_le ham₁ with h1 | h1
+      · exact ⟨m₁, h1, hm₁, by rw [hm₁i]; exact hi₁⟩
+      · exact ⟨m₂, by omega, hm₂, by rw [hm₂i]; exact hi₂⟩
+    set b := Nat.find hexb with hb
+    have hbv := Nat.find_spec hexb
+    refine ⟨s, a, b, hbv.1, by omega, hav.2, hbv.2.2,
+      fun m ham hmb hcm => Nat.find_min hexb hmb ⟨ham, by omega, hcm⟩, ?_⟩
+    -- the excluded direction lies below the gap, and one turn above it
+    have hlift1 : X.G.lift s 1 = X.G.nextβ s := by
+      rw [X.G.lift_succ', BranchGerms.idx_zero, BranchGerms.turns_zero]; simp
+    have hlo' : θs ≤ X.G.lift s (a + 1) :=
+      hθsI.2.trans (hlift1 ▸ X.G.lift_mono hM s (by omega))
+    have hhi' : X.G.lift s b ≤ θs + 2 * π := by
+      have h1 : X.G.lift s b ≤ X.G.lift s (0 + X.n) := X.G.lift_mono hM s (by omega)
+      rw [X.G.lift_add_n, X.G.lift_zero] at h1
+      linarith [hθsI.1]
+    have h1K : e (X.G.lift s (a + 1)) ∈ F.allowedCone v c := by
+      rw [X.G.lift_succ', show e (X.G.nextβ (BranchGerms.idx s a) + 2 * π * (BranchGerms.turns s a : ℝ)) =
+        e (X.G.nextβ (BranchGerms.idx s a)) by rw [e_eq_e_iff]; exact ⟨(BranchGerms.turns s a : ℤ), by push_cast; ring⟩]
+      exact e_mem_allowedCone_of_col hF hv hav.2 ⟨hM _, le_rfl⟩
+    have h2K : e (X.G.lift s b) ∈ F.allowedCone v c := by
+      rw [X.G.e_lift]; exact e_mem_allowedCone_of_col hF hv hbv.2.2 ⟨le_rfl, hM _⟩
+    have hlo : θs < X.G.lift s (a + 1) := lt_of_le_of_ne hlo' fun h => hθsK (h ▸ h1K)
+    have hhi : X.G.lift s b < θs + 2 * π :=
+      lt_of_le_of_ne hhi' fun h => hθsK (by rw [← e_add_two_pi, ← h]; exact h2K)
+    exact X.gap_clear hF hv hc hD hbv.1 hav.2 hbv.2.2 hθsK hlo hhi
+
+end Near
 
 end ArcMap
 
