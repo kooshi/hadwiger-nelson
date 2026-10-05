@@ -98,6 +98,8 @@ Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plan
   `mem_closure_of_path`, `eventually_path_mem`, `mem_disc_minus_iff`, `mem_closure_disc_minus`, `mem_closure_disc_minus_tangent`, `sq_norm_sub_ofReal`,
   `norm_le_iff_sq`, `compl_closure_disc_minus_subset`, `closure_disc_minus_subset`, `sq_facts`
 
+**FS131-RW1 (stages 20–)**, the boundary walk's WALK lane (brief `data/fs131/briefs/FS131-RW1-walk.md`, on `main`): filled in at each saved stage below.
+
 IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
 
@@ -1002,3 +1004,45 @@ F-LOC, F-CONN, F-INF, F-ONE, F-SEP, `not_isHoleOf_union`, `filledGraph_offTwo_co
 
 From stage 18's commit (05:00Z) to this stage (05:12Z): about 12 minutes and one build. By the session's counter I am at about 465k, past the brief's
 400k guidance and under its 500k line, so I hand back here, at a saved stage, with one leaf left, named: `filledGraph_ringList` (§ 19.2).
+
+## Stage 20 — SAVED (FS131-RW1): the readback
+
+*de Bruijn, the implementer (FS131-RW1), 2026-10-05, from IP5's Stage 19 and FS131-RL1's plan (`plans/FS131-ringlist-kernel-plan.md`, stages 1–4).
+Brief: `data/fs131/briefs/FS131-RW1-walk.md` (main tree). Branch `fs131-w5p`, worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5p`.*
+
+### 20.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by `grep -cF` of each quotation's full text (the control: a planted absent string, `ABSENT-CONTROL-STRING-xyzzy`, counted 0, exit 1):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors | verbatim |
+| `theorem exists_boundaryWalk (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :` | `MapGraph.lean` l. 1392 at `f86e174e` | verbatim |
+| `theorem filledGraph_adj_iff (hP : F.IsPlaneMap) {x y : {T : Set ℂ // F.IsOuterTile T}} :` | `MapGraph.lean` l. 1349 | verbatim |
+| "**ADJ `filledGraph_adj_iff`** (E–M, 0.2). … A hole `H` of `y` is open and misses" | RL1's plan § 4.2 | verbatim |
+| "**WALK** (H, 4–6). Children, each to be stated by the implementer before proving …" | RL1's plan § 4.2 | verbatim |
+| "- **C5 the boundary structure**: ports at radius `ρ` (`port_pair` with `hreg`, `hP`, `hray`, `hsep` …" | RL1's plan § 4.2 | verbatim |
+| "**May**: add children (statements of § 4.2, with spec examples), add fields to `IsBoundaryWalk` …" | RL1's plan § 4.4 | verbatim |
+| items 338, 339, 277 (opening lines) | `plans/FS131-close-inventory.md` (main tree) l. 2846, 2867, 2040 | verbatim |
+
+No mismatch. Read in full: RL1's plan (stages 1–4, the traps of § 2.1 above all); IP5's Stages 17–19 here; inventory items 277, 338, 339;
+`plans/STANDING-RULES.md`; `LEAN.md`; `RUNNING.md` § Building and § Make the gate fail, and watch it fail.
+
+### 20.2 What I may and may not change (the brief's touches; ruling 339 (a), (c); RL1's plan § 4.4)
+
+**May**: prove `filledGraph_adj_iff` (ADJ) and `exists_boundaryWalk` (WALK); add children C1–C10 (statements within plan § 4.2's words, each with a
+spec example) beside them in `MapGraph` § "The boundary walk", pure-topology children in `MapTopology` § F or beside the handshake in `CurveGraph`;
+change imports with `ARCHITECTURE.md`; extend the FS131-KP block of `scripts/Axioms.lean` above the `=== PURCHASED ===` banner; `tools/fs131_rw_*.py`,
+`data/fs131/rw/`, this record, `data/fs131/reports/FS131-RW1.md`. Change `IsBoundaryWalk`'s fields or `IsEdgeOf`'s clauses **only** where the
+construction cannot meet them as stated and SEP does not read them, each reported here (ruling 339 (c); once an SEP lane runs in parallel, messaged
+to Keryx first).
+**May not**: change `IsBoundaryWalk.sep` or its children (SEP's lane), `filledGraph_ringList`, `IsRing`, `PlanarLike`, `Plane/PlaneTopology`,
+`BaseWalk`, `BaseDense`, RL1's plan file, any statement outside this lane; add an `axiom` or `native_decide`; merge, take `main`, run the gate, touch
+`main`.
+
+### 20.3 The as-given build (`f86e174e`, before any edit)
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up to date, nothing built, 9 modules with warnings (every one `declaration
+uses 'sorry'`; `MapGraph`'s three at l. 1349, 1372, 1392 — ADJ, SEP, WALK), exit 0** (`build/gate/build/20261005T055726Z-1813684.log`; driver log
+`data/fs131/rw/build-asgiven.log`).
+
