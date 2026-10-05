@@ -3236,3 +3236,33 @@ reason by the close.*
      Alternative weighed: `bv_l3` first. Why: the bend and the iteration are the longer chain (H, then H), on wave 5's path; `bv_l3` (about one session with the
      extraction) follows at the next slot, on a branch cut from `fs131-w5` if KB2 still holds the tree. Confidence: medium-high. In flight after KB2's launch:
      1 (KL1) + 1 (ML1) + 1 (KB2) = 3.
+371. **FS131-KL1 (the limit planner), by message: N4-TERM's count does not descend over `main`'s SHAVE as built; a clean step is owed; `exists_red` has a shorter
+     route.** (1) **A descent defect in a construction, not a statement**: `main`'s `exists_shave_recolour` builds `F' := X.move hs univ …` (`Moves.lean`, case 3)
+     with `K = univ`, keeping every germ at `v`, the horn's two bounding germs among them; after the tip is recoloured `g` above `σ` and `h` below, those germs
+     have one colour on both sides, `g` and `h` each gain a sector at `v`, so `Φ(v) = Σ (s_c − 1)⁺` rises by 1 or 2 and the degree at `v` rises by 1 — not down,
+     as FS110 N4-SHAVE's "Φ(v) down by one" says; the new `g`-tip is again a horn flanked by `g` and `h`, so SHAVE can loop. `exists_shave`'s statement is fine;
+     only N4-TERM's termination fails over this construction. (2) **The full rim circle**: `Near.move` (`Surgery`) adds the whole circle `∂B(v, ρ)` as an arc,
+     which off the recoloured region has one colour on both sides, so every such rim point has a repeated colour and MERGE is generically available at a continuum
+     of points — this hits SHAVE and RAY; MERGE's own construction (`mergeArcs`: phantom germs dropped, a rim arc across the gap only) proves "no repeated colour on
+     the rim" and is the template. (3) **The input map**: an arbitrary valid plane map may carry arcs with one colour on both sides (`ArcMap` allows them, item
+     363), each point a repeated-colour point — uncountably many sites, so N4-TERM's "enumerate the vertices" fails. **KL1's plan**: one generic `ArcMap.clean`
+     (drop the parts of `Γ` where at most one colour is present; `coloursAt`, validity and `RingArcsWithin` unchanged), applied to `F` first and after each move —
+     each move becomes clean-after-move, repairing (1) and (2) without rebuilding SHAVE or RAY; each move must still export new lemmas (an arc-level locality
+     clause; at most 3 colours, no repeated colour and no horn at the points of `closedBall v ρ` other than `v`; the degree at `v` strictly down after `clean`), a
+     list for `main`'s `Moves` and `fs131-w4mm`'s `MergeMove` in KL1's record; nothing edited outside its touches. (4) **Shorter route**: `exists_red` is a
+     corollary of one construction, `exists_terminalMap` (for every `k`, a valid plane map has `M` with `F.IsModification M` and `M.IsTerminalMap`, which contains
+     `Valid` and `QROnly`); `exists_terminal` is that construction plus three theorems about every terminal map at six colours (clause 2 from
+     `isStuck_of_hasRepeatedColour` and `isCubicTrichromatic_of_three_of_noRep`; clause 3's ends from `c_ends` and horn bounds from `flankQ_*_of_qrOnly`; clause
+     3's "run not bi-infinite" a new child — N4-SHADOW's curvature recursion along the run, `±1` excluded by `cv_l0`, then `n4_fin`); one limit construction
+     instead of two; at `k ≥ 7`, `exists_red` is immediate with the seven-brick map. (5) **A question for the deriver, routed with its report**: the interleaved
+     count needs that a bend of `α` about `P` changes no other ring arc's type except where a centre on `α°` loses a colour — in particular an (R2) witness is
+     never cut by a bend's lens (the hand proof says "radius 1 against radius 2"; KL1's sketch, one mind: `R2(β)` cannot cross `α°`, because past `α` it would lie
+     in `T_out`); the kernel will check it as a child. Credit: KL1, for finding the descent defect before an implementer built on it.
+372. **Rulings on item 371.** (a) **`ArcMap.clean` accepted** as the plan's repair, with the moves' new exported lemmas as **new declarations only** (no landed
+     statement changes) — proved, not in `main`'s modules directly, but on wave 5's branch after it merges `main` (MERGE landed by then, item 348 (b)), in a new
+     module downstream of `Moves` and `MergeMove` that reads their constructions; if a lemma needs a construction's private detail, the planner says which, and
+     that is a message to me. Alternative weighed: a separate small landing on `main` for the moves' lemmas. Why: wave 5's landing merges `main` anyway, and one
+     landing is cheaper than two. Confidence: medium-high. (b) **The shorter route accepted**: `exists_red` and `exists_terminal` over one `exists_terminalMap`,
+     statements unchanged. Confidence: high. (c) **(5) needs no Ephodos job now**: the planner states it as a child, and the kernel checks it; a failed proof is
+     routed then. Confidence: medium. (d) **Correction owed** (for the filing, with the other errata): FS110-N-proof's N4-SHAVE "Φ(v) down by one" holds for the
+     move up to `clean`, not for `main`'s construction as built; and the same for RAY's full rim circle. Sent to KL1 by message.
