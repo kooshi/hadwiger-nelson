@@ -657,3 +657,39 @@ on the tree: `main`'s three textual repeats only.
 
 **Build of this stage**: OK — 451 of 451 batches, 2 modules rebuilt (`Woodall/Steps`, `Proofs`), **0 modules with warnings** (0 `warning:` lines),
 8 m 41 s, exit 0 (`build/gate/build/20261005T035201Z-1162343.log`; driver log `data/fs131/wl/build2.log`).
+
+## Stage 21 — SAVED (FS131-WL1): the full gate on `cde9ceb9` — green
+
+Every check on the stage-20 commit `cde9ceb9`, its saved log read (copies under `data/fs131/wl/`, since `build/` is scratch):
+- **Build**: OK, 451 of 451, **0 modules with warnings, 0 `warning:` lines** (`build/gate/build/20261005T035201Z-1162343.log`, copy
+  `data/fs131/wl/build2-full.log`). **`sorry`**: none — 0 warnings means no `declaration uses 'sorry'`, and the audit finds no `sorryAx`; the three
+  `sorry` words under `Proofs/` are docstring prose (`Packed`, `Plane/Cover`, `Plane/CoverExamples`, all `main`'s).
+- **Axioms** (`scripts/axioms.sh`): **OK — 3,654 records: 3,633 clean, 12 axiom-free, 4 imported, 5 declared purchases**; no `sorryAx`; no new
+  `axiom`, no `native_decide` (the purchases are `main`'s five) (`build/gate/axioms/20261005T040244Z-1241530.log`, copy
+  `data/fs131/wl/axioms-receipt.log`; digest `data/fs131/wl/axioms.log`). Reconciled: `main` 3,397 records (3,376 clean) + 257 Woodall
+  records = 3,654 (3,633 clean). **Every Woodall record on exactly the standard three**: `tools/fs131_wl_woodall_axioms.py` on the saved log —
+  257 records, all `[propext, Classical.choice, Quot.sound]`, 0 failures (`data/fs131/wl/woodall-axioms.txt`); its `--plant` (a `sorryAx` added
+  to one record, another dropped) fails with both named. **`--self-test`: 23 of 23 controls OK**, every planted fault fired, every partner
+  passed (`data/fs131/wl/axioms-selftest.log`); no control's expected count moved.
+- **Vacuity** (`scripts/vacuity.sh`): **OK** — `declarations=10851 refutations-skipped=111 sites=755`, `vacuous=0 stale=0 declared=3 witnessed=32
+  generic=718 unknown=2` (the baseline's two, `hexShell_plane5/6`) (`build/gate/vacuity/20261005T040503Z-1255823.log`, copy
+  `data/fs131/wl/vacuity-scan.log`). **Reconciled row for row** against `main`'s last scan (G4's gated run, `fs131-w4`'s
+  `build/gate/vacuity/20261005T031346Z-903019.log`, copy `data/fs131/wl/vacuity-main-g4-scan.log`) by the new `tools/fs131_wl_vacdiff.py`: 0
+  rows of `main`'s lost, 59 added, every one a Woodall declaration's — 50 sites (5 WITNESSED: `threeSectorDisc_sectorsAt`, `_phantom`,
+  `_niceAt`, `halfDisc_sectorsAt`, `halfDisc_niceAt`; 45 GENERIC) and 9 evidence rows (4 EMPTY: the adversaries; 5 WITNESS: the same five);
+  `--plant` (a `main` row dropped, a non-Woodall row added) fails with both named (`data/fs131/wl/vacdiff.txt`). The declaration and refutation
+  counts by the scan's own logic over the five Woodall modules (`data/fs131/wl/count-woodall.lean`, output `count-woodall.out`): **326
+  declarations, 19 refutations** = 10851 − 10525 and 111 − 92 exactly. **`--self-test`: all 62 controls behaved** (`data/fs131/wl/vacuity-selftest.log`,
+  full `vacuity-selftest-full.log`); **the negative control watched going red**: `WoodallNormal` misspelt in `trackedProps` (a copy edit, restored
+  with `git checkout`, `git diff` empty after) — exactly controls 60–62 fail, "3 of 62", exit 1 (`data/fs131/wl/vacuity-selftest-plant-misspelt.log`).
+  `scripts/vacuity-baseline.txt`'s header now records the new counts (`gate_report.py vacuity`: "match (9 of 9 compared)"; `CLAUDE.md` §
+  The gate reads stale until Keryx files the draft below).
+- **Architecture**: `tools/check_architecture.py` PASS. **Records**: `fs131_w3_decls.py --check` 257/257; `fs131_k4_decls.py --check` 495, 0 missing.
+
+**An observation on the scan, not a defect of this job**: a conclusion `F.Valid` reduces to `∀ x …, … → F.col x ≠ F.col y`, whose stated form is
+not a negation, so the scan counts a validity theorem as a refutation and skips it (`threeSectorDisc_valid`, `recolour_valid`, `wedgeMerge_valid`
+among the 19; `main`'s `sevenBrickMap_valid` the same). Nothing is lost here (their binders are variables or none), but a validity theorem with a
+concrete hypothesis would go unaudited. The two normal forms are read the same way as conclusions (stated in `Vacuity.lean`'s new entry).
+
+`main` moved meanwhile (`a573a140 → 61007223`: `plans/`, `data/` and E5's `tools/fs131_e5_*.py`, no Lean, no gate script), so the landing merges
+it and re-runs the gate on the merged commit (stage 22).

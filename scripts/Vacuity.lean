@@ -311,8 +311,10 @@ Two exclusions are worth their reasons, because both look like obvious additions
   `ArcMap.WoodallMerged` and `ArcMap.WoodallNormal` — refuted at a concrete map (`puncturedThreeSectorDisc_not_woodallMerged`,
   `_not_woodallNormal`: a point of three colours off the domain), inhabited on a map of the plane by `sevenBrickMap_woodallMerged`,
   `sevenBrickMap_woodallNormal` (FS131-QA2's QA2-1); controls 57–59 and 60–62. Every binder site of the two normal forms is a refutation
-  (`aeMap6_normal`, `aeMap6_merged`, `false_of_four_le_sectors`), which the scan skips, so their positive sites are the inhabitants'
-  conclusions. **OUT**: `annSector`, `collar`, `Rim`, `Rim.radii`, `wedgeArcs`, `ArcMap.recolour`, `wedgeMerge`, `isoRad`, `rightCol`,
+  (`aeMap6_normal`, `aeMap6_merged`, `false_of_four_le_sectors`), which the scan skips. Both are `∀ v ∈ K, …` by definition, so the reducing
+  telescope reads a conclusion `F.WoodallMerged K` through to its `NiceAt v` (a `GENERIC` site) and `gather` collects neither inhabitant as a
+  witness: a theorem taking one at a concrete map as a hypothesis would read `UNKNOWN` until a closed `Nonempty (F.WoodallMerged K)` is stated
+  (none does today; the emptiness evidence, read unreduced from `¬ P`, is unaffected). **OUT**: `annSector`, `collar`, `Rim`, `Rim.radii`, `wedgeArcs`, `ArcMap.recolour`, `wedgeMerge`, `isoRad`, `rightCol`,
   `leftCol`, `threeCol`, `threeCuts`, `threeSectorDisc`, `puncturedThreeSectorDisc`, `brickCellCol`, `tUpDirs`, `tUpCols`, `tDownDirs`,
   `tDownCols`, `brickClosedCell` (data and sets, written down); `CollarAt`, `ArcMap.CrossesAt`, `ArcMap.DirColourAt`, `OffDirs`
   (predicates of a set, map, finite set or direction variable, `GENERIC` at every site, with no `¬ P` theorem at a concrete instance —
