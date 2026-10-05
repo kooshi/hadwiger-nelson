@@ -6,7 +6,8 @@
 
 ## Theorems this phase proved
 
-*(filled at each stage; one line per theorem, its grade and address)*
+- **E6-OCCURS** — a valid clean plane map (twelve colours, no unit arc) whose only site is a lone horn shaveable only at `σ = 1`, `κ₁ = 0 < 1 < 2 = κ₂` — [hand, one mind; tools exact] — § 3.1–3.3, `e6-occurs`
+- **E6-NODROP** — at that vertex no local modification creating no unit arc and adding no colour lowers the degree, so `exists_vertexStep`'s degree clause is false there — [derived, one mind; tools exact] — § 3.4, `e6-nodrop`
 
 ## Stage 1 — SAVED: the readback, the question restated, the prediction registered
 
@@ -170,3 +171,136 @@ a one-sector Woodall merge*. Dispatched to stage 3 (the derivations and the exac
 collision of held descriptions; H2's (R2) reading and `IsModification` do not contradict, they exclude one repair.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: F6 occurs — a valid plane map, exact; and at it no local step lowers the degree
+
+### 3.1 The model
+
+Coordinates: `v = 0`, `α = 0` (`a = (1, 0)`, `n = (0, 1)`), `N = (0, 1)`, `S′ = (0, −1)`; `ρ = ℓ = ℓ′ = r_c = 1/10`; `w = (3/5, 4/5)`.
+Colours: `c, g, h` and nine background colours. Tiles:
+
+| tile | colour | set | role |
+|---|---|---|---|
+| `H` | `c` | `{|z| < ρ, x > 0, y > 0, x² + y² − y > 0}` | the horn: `hornSet 0 0 0 2 r = H ∩ B(0, r)` for `r < ρ` (lower arc the axis, curvature `0`; upper arc `C₂: x² + (y − 1/2)² = 1/4`, curvature `2`) |
+| `G₀` | `g` | `{|z| < ρ, y > 0} ∖ cl H` | the upper flank (connected: the parts `x < 0` and inside `C₂` overlap) |
+| `H₀` | `h` | `{|z| < ρ, y < 0}` | the lower flank |
+| `T` | `h` | `{N + s e(φ) : 0 < s < ℓ, π/3 < φ < 2π/3}` | an out-type corner of `h` at `N` |
+| `T′` | `g` | `{|z − N| > 2, x > 0, |z − S′| < ℓ′}` | an out-type `g`-region at `S′`, bounded on the `+a` side by the circle of radius `2` about `N` (upward curvature `1/2` at `S′`) |
+| `T_c` | `c` | `B((1 − r_c) w, r_c)` | an in-type `c`-region touching `ω(0)` at `w` only (internally tangent) |
+| background | 9 colours | the squares of side `3/5` centred at `(3i/5, 3j/5)`, colour `(i mod 3, j mod 3)`, minus the closures of the features | `B(0, ρ)` lies in square `(0,0)`, `T` in `(0,2)`, `T′` in `(0,−2)`, `T_c` in `(1,1)` (V6) |
+
+Arcs: the grid lines; the rim `∂B(0, ρ)`; the axis from `−ρ` to `ρ`; `C₂`'s arc from `0` to the rim (`x > 0`); `T`'s two rays and its arc of radius `ℓ`;
+`T′`'s arc of the circle of radius `2` about `N`, its ray down from `S′` and its arc of radius `ℓ′`; `T_c`'s circle. **No arc of radius 1**
+(`e6-arcs`), so Condition 5 holds and every unit arc is (Q) or (R2) vacuously; every arc separates two colours (clean).
+
+### 3.2 Validity (no two interior points of one colour at distance exactly 1), by colour
+
+- **Background.** One square has diameter `(3/5)√2 < 1`; two squares of one colour differ by a multiple of `9/5` in a coordinate, so their gap is
+  at least `2·(3/5) = 6/5 > 1`. Cutting out features keeps this (V5).
+- **`c`: `H` and `T_c`.** Each has diameter `< 1`. For `z ∈ H` (`x, y > 0`, `|z| < ρ`) and `p ∈ T_c`: `p_x, p_y ≥ m := (1 − r_c)·3/5 − r_c = 11/25`,
+  so `z·p ≥ m(x + y) ≥ m|z| > |z|²/2` (as `2m > ρ`), and `|z − p|² = |p|² − 2z·p + |z|² < |p|² < 1` (V1).
+- **`g`: `G₀` and `T′`.** For `q ∈ G₀` with `x > 0`: `q` is inside `C₂`, and `x² + (y − 1)² = (x² + y² − y) + 1 − y < 1`, so `|q − N| < 1` and
+  `|q − p| ≥ |p − N| − |q − N| > 2 − 1` for `p ∈ T′`. For `q ∈ G₀` with `x ≤ 0` (`y > 0`) and `p ∈ T′` (`p_x > 0`, `p_y < 1 − √(4 − p_x²)`):
+  `|q − p|² > p_x² + (√(4 − p_x²) − 1)² = 5 − 2√(4 − p_x²) > 1` (V2, V3).
+- **`h`: `H₀` and `T`.** For `q ∈ H₀`, `p = N + s e(φ)`: `e(φ)·(q − N) ≤ ρ/2 − (√3/2)(1 − ρ) < 0`, so `|q − p|² = |q − N|² + s² − 2s e(φ)·(q − N) >
+  |q − N|² = q_x² + (1 − q_y)² > 1` (V4).
+
+### 3.3 F6 at `v = 0`
+
+`IsHorn 0 0 0 2 c` (H's set is `hornSet` exactly for `r < ρ`), `IsFlankAbove 0 0 2 g` (inside `C₂` near `0` is `G₀`), `IsFlankBelow 0 0 0 h`, and
+`HasSectors 0 c 1`: a lone horn, `κ₁ = 0 < 1 < 2 = κ₂`. For `z` near `0` with `x > 0`:
+- **the `h`-shadow is exactly `B(N, 1)`.** `T`'s points satisfy `|z − p| > |z − N|` (the bound of V4, now for `|z| < ρ` above the axis too: `e(φ)·(z − N) ≤
+  ρ/2 − (√3/2)(1 − ρ) < 0`), so `inf_T |z − p| = |z − N|` (not attained) and `sup > 1`; the `h`-flank `H₀` is within `2ρ`. So `z` is `h`-clear iff
+  `|z − N| ≥ 1`, and for `|z − N| < 1` an explicit `y = (0, 1 + s″) ∈ T` with `s″ = z_y − 1 + √(1 − z_x²) ∈ (0, ℓ)` has `|z − y| = 1`.
+- **the `g`-shadow is exactly the outside of `B̄(N, 1)`.** For `p ∈ T′`, `|z − p| > 2 − |z − N|` (V2's bound), so `|z − N| ≤ 1` is `g`-clear; for
+  `|z − N| > 1` the point `y = N + (1 + d)(z − N)/d`, `d = |z − N|`, lies in `T′` (`|y − N| = 1 + d > 2`, `y_x > 0`, `|y − S′| < ℓ′` for `|z| < 1/50`) and
+  `|z − y| = 1`.
+- **So the admissible set is `{1}`.** At `σ = 1`: the points with `TanAbove 0 0 1 z` (`|z − N| < 1`, `tanAbove_one_iff`) are `g`-clear and the rest `h`-clear —
+  `ShaveAvailable 0` holds. At `σ ∈ [0, 1)`: `z = (t, s t²)` with `max(σ, 0)/2 < s < 1/2` is in the horn, `TanAbove σ`, and `|z − N| > 1` for all small `t`
+  (signs of `tanHeight κ (t, st²) = t²(s − κ/2 − κs²t²/2)`), so not `g`-clear. At `σ ∈ (1, 2]`: `1/2 < s < σ/2` gives horn points not `TanAbove σ`
+  with `|z − N| < 1`, not `h`-clear. Exact at `t = 10⁻³, 10⁻⁴, 10⁻⁵` and ten values of `σ` (`e6-sigma-down`, `e6-sigma-up`); the sign argument is
+  for every small `t`.
+- **No other site.** The sites (`IsSite`: a repeated colour or a horn) of the model: `v` alone. The rim points of `B(0, ρ)` are cubic with transversal
+  arcs; `N` (two sectors, angles `60°`, `300°`), `S′` (`90°`, `270°`), the features' corners and the grid corners (four colours, one sector each) carry no
+  repeated colour and no horn; no point but `v` has a horn. So `v` is the only point with an available move, and it has exactly `ShaveAvailable`.
+- **What the planned step meets.** `exists_shave` needs `κ₂ ≤ 1` (here `2`); `shave_step_gen` (KL1 § 3.3) needs `|σ| ≠ 1` or `σ ∈ {κ₁, κ₂}` (here
+  `σ = 1 ∉ {0, 2}`). The shave along `σ = 1` would create the arc `ω(N) ∩ H`, inner colour `g`, outer `h`, centre `N` carrying `h` and not `g`, with `g`
+  along the radius-2 arc `R₂` at `S′`: an **(R2) arc** (§ 2.4, H2) — and `IsModification` forbids it.
+- **The allowed cone.** The only `c`-contact on `ω(0)` is `w` (in-type), so `allowedCone 0 c = {d : d·w ≥ 0}`, a closed half-plane with the horn's
+  direction `e 0` inside it (`w·e 0 = 3/5`): `int D_c(0) ≠ ∅`, as E6-CONE (stage 4) says every F6 must have.
+
+### 3.4 At the model no local step lowers `v`'s degree (E6-NODROP)
+
+Let `F′` be valid, agree with the model off `B̄(0, ρ′)`, `ρ′ < 1/10` (so `T`, `T′`, `T_c` are unchanged), create no unit arc (`RingArcsWithin`), and
+carry no colour at `0` the model does not. Then `F′.coloursAt 0 = {c, g, h}`, so `0` has at least three sectors:
+1. **`h ∈ F′.coloursAt 0`.** Near the direction `225°` (`z = (−t, −t)`) points are in `shadow T_c` (`z·w < 0`: `p = λw` with `λ = z·w + √((z·w)² + 1 −
+   |z|²) ∈ (1 − 2r_c, 1)` has `|z − p| = 1`) and in `shadow T′` (`|z − S′| < 1`: `p = S′ + (1/100, −b)` with `|z − p| = 1`, `p ∈ T′`). Shadows of open sets
+   are open, interior points are dense, so interior points of `F′` accumulate at `0` along that direction, each of a colour other than `c` and `g`;
+   one colour accumulates, and it is carried at `0`, so it is `h`.
+2. **`g ∈ F′.coloursAt 0`.** The same near `z = (−2t, t)` (`z·w = −2t/5 < 0`, `z_y > 0`): in `shadow T_c` and in `shadow T` (`|z − N| < 1`).
+3. **`c ∈ F′.coloursAt 0`.** Otherwise a ball `B(0, ρ″)` meets only `g`- and `h`-interior points (colours not carried at `0` are bounded away). Old horn
+   points inside `B(N, 1)` are in `shadow T`, so not `h`: they are `g` or on `Γ′`; those outside `B̄(N, 1)` are in `shadow T′`, so `h` or on `Γ′`. Every point of
+   `ω(N) ∩ H ∩ B(0, ρ″)` is then a limit of `g`-interior and of `h`-interior points, hence in `Γ′`: an arc of `ω(N)` in `Γ′` with sides `g`, `h`, which the
+   model's `Γ` does not meet — a unit arc created.
+Each colour at a point holds a sector there (the sector chart), so the degree is at least `3`. **Hence `exists_vertexStep`'s conclusion
+"`∃ m' < m, F'.HasDegree v m'`" is false at the model (`m = 3`), for every `δ ≤ 1/10`, while every hypothesis of `exists_vertexStep` holds there**
+(`F` valid and clean, `0 ∈ F.dom`, `ShaveAvailable 0`, `HasDegree 0 3`). The witnesses at `t = 10⁻³`: `e6-nodrop`.
+
+### 3.5 Entries
+
+derivation: e6-occurs
+  statement: there is a valid clean plane map with twelve colours and no arc of radius 1 in which the only site is a vertex v with ShaveAvailable v through a lone horn of bounds κ₁ = 0 < κ₂ = 2, admissible at the split σ = 1 and at no other σ
+  uses only: the shadow near v of an out-type region at N meeting N away from the +a tangent is B(N, 1); the shadow near v of a region outside the circle of radius 2 about N, at S′ on the +a side, is the outside of B̄(N, 1); the validity inequalities of § 3.2
+  not claimed: a valid six-coloured plane map with such a vertex (no valid six-map of the plane is known, FS-114); that the twelve colours are needed (the background's nine are a convenience); that F6 needs Condition 5 to fail
+  argument: § 3.2 Validity (no two interior points of one colour at distance exactly 1), by colour
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: § 3.1 The model — the statement is an existence claim and the model is its witness
+  converse: one-way — an existence statement; "the only site" describes the model, it characterizes nothing
+  prior art: new — "cusp" (0), "tangen" (5) in my extraction of [SokolovVoronov2025]'s text, none on a cusp; FS110-A6-C2's single horn exists locally but is doubly shadowed, not F6
+  handoff: Keryx — the model, for de Bruijn's implementer of exists_vertexStep, as the instance the lone-horn case must meet
+
+derivation: e6-nodrop
+  statement: at the model's vertex v, every valid map that agrees with the model off a closed disc about v of radius below 1/10, creates no unit arc and carries no colour at v that the model does not, carries c, g and h at v, so v has degree at least 3
+  uses only: the shadows of T_c, T and T′ at the directions 225°, about 153° and in the horn (explicit witnesses at distance 1); shadows of open sets are open; Γ is nowhere dense; a colour carried at a point holds a sector there
+  not claimed: anything about modifications that change the map at distance 1/10 or more from v; that exists_vertexStep's other clauses fail
+  argument: § 3.4 At the model no local step lowers `v`'s degree (E6-NODROP)
+  verdict: derived
+  grade: derived from: e6-occurs
+  minds: 1
+  model: the model of § 3.1 with δ = 1/20 in exists_vertexStep
+  prior art: partly: plans/FS110-NB4-verification.md § 2.9 — "no move of N4's lowers Φ there" at a cubic vertex with a cusp horn; the degree count is this job's
+  handoff: de Bruijn — exists_vertexStep's clause "∃ m' < m, F'.HasDegree v m'" is false at the model; its corrected statement is drafted in stage 4
+
+control: e6-arcs
+  of: e6-occurs — the model has no arc of radius 1
+  run: python3 ../tools/fs131_e6_model.py --check arcs
+  expect: arcs: 7 circular radii (plus segments: the grid, the axis, T's two rays, T''s ray, the opening's ray); unit arcs: 0
+  fault: python3 ../tools/fs131_e6_model.py --check arcs --unit-arc
+
+control: e6-valid
+  of: e6-occurs — the inequalities validity reduces to
+  run: python3 ../tools/fs131_e6_model.py --check valid
+  expect: valid: 6 of 6 lemma inequalities hold
+  fault: python3 ../tools/fs131_e6_model.py --check valid --rho 9/10
+
+control: e6-sigma-down
+  of: e6-occurs — every σ below 1 is refuted by a g-shadow witness in T′; the radius 2 about N determines it
+  run: python3 ../tools/fs131_e6_model.py --check sigma
+  expect: sigma: below 1 refuted 6/6; above 1 refuted 4/4; admissible {1}
+  fault: python3 ../tools/fs131_e6_model.py --check sigma --R 21/10
+
+control: e6-sigma-up
+  of: e6-occurs — every σ above 1 is refuted by an h-shadow witness in T; the corner at N determines it
+  run: python3 ../tools/fs131_e6_model.py --check sigma
+  expect: sigma: below 1 refuted 6/6; above 1 refuted 4/4; admissible {1}
+  fault: python3 ../tools/fs131_e6_model.py --check sigma --apex 1/50
+
+control: e6-nodrop
+  of: e6-nodrop — the four witnesses; the in-type c-region T_c determines the first, second and fourth
+  run: python3 ../tools/fs131_e6_model.py --check nodrop
+  expect: nodrop witnesses: 4 of 4
+  fault: python3 ../tools/fs131_e6_model.py --check nodrop --no-tc
+
+## Stage 3 — SAVED
