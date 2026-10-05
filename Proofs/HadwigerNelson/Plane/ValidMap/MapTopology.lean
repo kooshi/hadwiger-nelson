@@ -197,6 +197,14 @@ theorem exists_far_side (G : BranchGerms n) (hn : 2 ≤ n) {ρ : ℝ} (hord : �
       · rw [hnk, dif_pos hk1]; exact hlt (Fin.mk_lt_mk.mpr hm2)
       · linarith [htop m, hle (show z0 ≤ k from Fin.mk_le_mk.mpr (Nat.zero_le _))]
 
+-- The straight three-germ chart (directions `0`, `2π/3`, `4π/3`) is strictly ordered at every distance: a model of `exists_far_side`'s
+-- hypothesis `hord`, at every `ρ`.
+example : ∀ s : ℝ, ∀ i, (⟨![0, 2 * π / 3, 4 * π / 3], ![0, 0, 0]⟩ : BranchGerms 3).dir i s <
+    (⟨![0, 2 * π / 3, 4 * π / 3], ![0, 0, 0]⟩ : BranchGerms 3).nextDir i s := by
+  intro s i
+  have hπ := Real.pi_pos
+  fin_cases i <;> simp [dir, nextDir, germDir, nextβ, nextκ] <;> linarith
+
 end BranchGerms
 
 namespace ArcMap
