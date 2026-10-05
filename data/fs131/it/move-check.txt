@@ -1,0 +1,2 @@
+original block at 02e85433: 36..595 (29612 bytes)
+move check: PASS

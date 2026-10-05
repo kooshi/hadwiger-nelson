@@ -1,0 +1,2 @@
+OK: 76 clean records on the standard three or fewer, 2 partners on sorryAx
+selftest: partner-as-clean caught; clean-as-partner caught

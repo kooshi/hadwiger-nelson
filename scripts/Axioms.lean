@@ -3151,6 +3151,83 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.isPreconnected_thickening
 #print axioms HadwigerNelson.Plane.inter_nonempty_of_interleaved_of_isClosed_left
 
+/-! ## FS-131 wave 5 (job FS131-IT1) — T-GRAPH: the reachability layer, the inhabitant of `PlanarLike`, the reduction's children; F-SEP (sorry until the planar chain lands it) -/
+
+#print axioms HadwigerNelson.Thomassen.ReachIn.refl
+#print axioms HadwigerNelson.Thomassen.ReachIn.symm
+#print axioms HadwigerNelson.Thomassen.ReachIn.trans
+#print axioms HadwigerNelson.Thomassen.ReachIn.of_adj
+#print axioms HadwigerNelson.Thomassen.ReachIn.mono
+#print axioms HadwigerNelson.Thomassen.ReachIn.left_mem
+#print axioms HadwigerNelson.Thomassen.ReachIn.right_mem
+#print axioms HadwigerNelson.Thomassen.reachIn_of_mem_support
+#print axioms HadwigerNelson.Thomassen.mem_of_reachIn_of_closed
+#print axioms HadwigerNelson.Thomassen.exists_exit
+#print axioms HadwigerNelson.Thomassen.reachable_induce_iff
+#print axioms HadwigerNelson.Thomassen.compIn_eq_of_reachIn
+#print axioms HadwigerNelson.Thomassen.supp_finite_iff
+#print axioms HadwigerNelson.Thomassen.mem_twoSepInterior_iff
+#print axioms HadwigerNelson.Thomassen.connected_induce_iff'
+#print axioms HadwigerNelson.Thomassen.triLattice_reachIn
+#print axioms HadwigerNelson.Thomassen.triLattice_offTwo_infinite
+#print axioms HadwigerNelson.Thomassen.triLattice_twoSepInterior
+#print axioms HadwigerNelson.Thomassen.triRing_isRing
+#print axioms HadwigerNelson.Thomassen.triLattice_planarLike
+#print axioms HadwigerNelson.Thomassen.NoInterleave.sublist
+#print axioms HadwigerNelson.Thomassen.collapse_sublist
+#print axioms HadwigerNelson.Thomassen.mem_collapse
+#print axioms HadwigerNelson.Thomassen.head?_collapse
+#print axioms HadwigerNelson.Thomassen.getLast?_collapse
+#print axioms HadwigerNelson.Thomassen.isChain_collapse
+#print axioms HadwigerNelson.Thomassen.exists_cycle_of_chain
+#print axioms HadwigerNelson.Thomassen.exists_cycle_of_cyclic
+#print axioms HadwigerNelson.Thomassen.offTwo_comm
+#print axioms HadwigerNelson.Thomassen.twoSepInterior_comm
+#print axioms HadwigerNelson.Thomassen.twoSepInterior_subset_offTwo
+#print axioms HadwigerNelson.Thomassen.mem_twoSepInterior_of_reachIn
+#print axioms HadwigerNelson.Thomassen.mem_twoSepInterior_or_of_adj
+#print axioms HadwigerNelson.Thomassen.PlanarLike.offTwo_infinite
+#print axioms HadwigerNelson.Thomassen.PlanarLike.reachIn_of_adj_adj
+#print axioms HadwigerNelson.Thomassen.PlanarLike.reachIn_ne
+#print axioms HadwigerNelson.Thomassen.PlanarLike.twoSepInterior_self
+#print axioms HadwigerNelson.Thomassen.PlanarLike.ne_of_mem_twoSepInterior
+#print axioms HadwigerNelson.Thomassen.PlanarLike.adj_of_mem_twoSepInterior
+#print axioms HadwigerNelson.Thomassen.PlanarLike.exists_adj_left
+#print axioms HadwigerNelson.Thomassen.PlanarLike.exists_adj_right
+#print axioms HadwigerNelson.Thomassen.PlanarLike.twoSepInterior_finite
+#print axioms HadwigerNelson.Thomassen.PlanarLike.twoSepInterior_subset
+#print axioms HadwigerNelson.Thomassen.PlanarLike.eq_or_eq_of_mem
+#print axioms HadwigerNelson.Thomassen.PlanarLike.eq_of_mem_maximal
+#print axioms HadwigerNelson.Thomassen.PlanarLike.exists_maximal_above
+#print axioms HadwigerNelson.Thomassen.PlanarLike.not_mem_twoSepInterior
+#print axioms HadwigerNelson.Thomassen.mem_reducedVerts_of_maximal
+#print axioms HadwigerNelson.Thomassen.exists_maximal_of_not_mem
+#print axioms HadwigerNelson.Thomassen.exists_reducedVerts_mem_twoSepInterior
+#print axioms HadwigerNelson.Thomassen.exists_eq_of_cross_up
+#print axioms HadwigerNelson.Thomassen.exists_eq_of_cross_down
+#print axioms HadwigerNelson.Thomassen.PlanarLike.exists_adj
+#print axioms HadwigerNelson.Thomassen.PlanarLike.reduced_locallyFinite
+#print axioms HadwigerNelson.Thomassen.PlanarLike.reducedVerts_infinite
+#print axioms HadwigerNelson.Thomassen.PlanarLike.reduced_connected
+#print axioms HadwigerNelson.Thomassen.PlanarLike.eq_of_mem_twoSepInterior_of_mem_reducedVerts
+#print axioms HadwigerNelson.Thomassen.PlanarLike.exists_adj_mem_reducedVerts_ne
+#print axioms HadwigerNelson.Thomassen.PlanarLike.reduced_locallyHamiltonian
+#print axioms HadwigerNelson.Thomassen.ladder_adj
+#print axioms HadwigerNelson.Thomassen.ladder_climb
+#print axioms HadwigerNelson.Thomassen.ladder_descend
+#print axioms HadwigerNelson.Thomassen.ladder_reachIn
+#print axioms HadwigerNelson.Thomassen.ladder_connected
+#print axioms HadwigerNelson.Thomassen.ladder_below_closed
+#print axioms HadwigerNelson.Thomassen.ladder_below_finite
+#print axioms HadwigerNelson.Thomassen.ladder_mem_twoSepInterior
+#print axioms HadwigerNelson.Thomassen.ladder_offTwo_infinite
+#print axioms HadwigerNelson.Thomassen.ladder_ring_zero
+#print axioms HadwigerNelson.Thomassen.ladder_ring_succ
+#print axioms HadwigerNelson.Thomassen.ladder_not_isMaximalTwoSep
+#print axioms HadwigerNelson.Thomassen.ladder_reducedVerts
+#print axioms HadwigerNelson.Thomassen.ladder_adversary
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_finSep
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

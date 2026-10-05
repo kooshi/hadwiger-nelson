@@ -1,0 +1,77 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 12,13
+'HadwigerNelson.Thomassen.ReachIn.refl' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Thomassen.ReachIn.symm' depends on axioms: [propext]
+'HadwigerNelson.Thomassen.ReachIn.trans' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.ReachIn.of_adj' depends on axioms: [propext]
+'HadwigerNelson.Thomassen.ReachIn.mono' does not depend on any axioms
+'HadwigerNelson.Thomassen.ReachIn.left_mem' depends on axioms: [propext]
+'HadwigerNelson.Thomassen.ReachIn.right_mem' depends on axioms: [propext]
+'HadwigerNelson.Thomassen.reachIn_of_mem_support' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.mem_of_reachIn_of_closed' depends on axioms: [propext]
+'HadwigerNelson.Thomassen.exists_exit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.reachable_induce_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.compIn_eq_of_reachIn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.supp_finite_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.mem_twoSepInterior_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.connected_induce_iff'' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.triLattice_reachIn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.triLattice_offTwo_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.triLattice_twoSepInterior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.triRing_isRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.triLattice_planarLike' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.NoInterleave.sublist' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Thomassen.collapse_sublist' depends on axioms: [propext]
+'HadwigerNelson.Thomassen.mem_collapse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.head?_collapse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.getLast?_collapse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.isChain_collapse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.exists_cycle_of_chain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.exists_cycle_of_cyclic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.offTwo_comm' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Thomassen.twoSepInterior_comm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.twoSepInterior_subset_offTwo' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Thomassen.mem_twoSepInterior_of_reachIn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.mem_twoSepInterior_or_of_adj' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.offTwo_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.reachIn_of_adj_adj' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.reachIn_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.twoSepInterior_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.ne_of_mem_twoSepInterior' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.adj_of_mem_twoSepInterior' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.exists_adj_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.exists_adj_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.twoSepInterior_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.twoSepInterior_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.eq_or_eq_of_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.eq_of_mem_maximal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.exists_maximal_above' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.not_mem_twoSepInterior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.mem_reducedVerts_of_maximal' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Thomassen.exists_maximal_of_not_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.exists_reducedVerts_mem_twoSepInterior' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Thomassen.exists_eq_of_cross_up' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.exists_eq_of_cross_down' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.exists_adj' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.reduced_locallyFinite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.reducedVerts_infinite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.reduced_connected' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.eq_of_mem_twoSepInterior_of_mem_reducedVerts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.exists_adj_mem_reducedVerts_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Thomassen.PlanarLike.reduced_locallyHamiltonian' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Thomassen.reduced_props_of_planarLike' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.lemma1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Thomassen.triLattice_hyps' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.filledGraph_finSep' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cvb_thom_reduced' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
