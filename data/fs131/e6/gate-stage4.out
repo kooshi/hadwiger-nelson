@@ -1,0 +1,26 @@
+entry lint
+  claim e6-occurs: minds 1
+  claim e6-occurs: prior art new, 2 counted queries
+  claim e6-nodrop: governed by e6-occurs (hand, minds 1)
+  claim e6-nodrop: minds 1
+  claim e6-nodrop: prior art partly
+  claim e6-cone: minds 1
+  claim e6-cone: prior art known
+  claim e6-open: minds 1
+  claim e6-open: prior art partly
+  claim e6-route: governed by e6-cone (hand, minds 1)
+  claim e6-route: governed by e6-open (hand, minds 1)
+  claim e6-route: minds 1
+  claim e6-route: prior art partly
+  entries: 6  derived: 5  stalled, gapped or refuted: 1
+quotes
+  statements named in more than one place: 0
+controls
+  ok    e6-arcs: printed "arcs: 7 circular radii (plus segments: the grid, the axis, T's two rays, T''s ray, the opening's ray); unit arcs: 0"; with the fault planted ('' → '--unit-arc') it printed 'arcs: 7 circular radii (plus segments: t' — it fires
+  ok    e6-valid: printed 'valid: 6 of 6 lemma inequalities hold'; with the fault planted ('' → '--rho 9/10') it printed 'valid: 2 of 6 lemma inequalities hold (f' — it fires
+  ok    e6-sigma-down: printed 'sigma: below 1 refuted 6/6; above 1 refuted 4/4; admissible {1}'; with the fault planted ('' → '--R 21/10') it printed 'sigma: below 1 refuted 0/6; above 1 refu' — it fires
+  ok    e6-sigma-up: printed 'sigma: below 1 refuted 6/6; above 1 refuted 4/4; admissible {1}'; with the fault planted ('' → '--apex 1/50') it printed 'sigma: below 1 refuted 6/6; above 1 refu' — it fires
+  ok    e6-nodrop: printed 'nodrop witnesses: 4 of 4'; with the fault planted ('' → '--no-tc') it printed 'nodrop witnesses: 1 of 4 (missing: z1 c-' — it fires
+  ok    e6-open-model: printed 'open: wedge c-clear; far ray inside D_c(v); v after: 3 sectors, 0 horns'; with the fault planted ('' → '--open-dir -5,2') it printed 'open: wedge NOT c-clear; far ray outside' — it fires
+  controls: 6  fired on their faults: 6
+GATE: PASS (0 failures, 0 warnings)

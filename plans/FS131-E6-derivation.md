@@ -8,6 +8,9 @@
 
 - **E6-OCCURS** — a valid clean plane map (twelve colours, no unit arc) whose only site is a lone horn shaveable only at `σ = 1`, `κ₁ = 0 < 1 < 2 = κ₂` — [hand, one mind; tools exact] — § 3.1–3.3, `e6-occurs`
 - **E6-NODROP** — at that vertex no local modification creating no unit arc and adding no colour lowers the degree, so `exists_vertexStep`'s degree clause is false there — [derived, one mind; tools exact] — § 3.4, `e6-nodrop`
+- **E6-CONE** — a horn whose colour's allowed cone has empty interior has bounds in `[−1, 1]`; so every F6 horn has a non-degenerate allowed cone — [hand, one mind; `horn_bounds_of_noMerge`'s proof with its cone hypothesis made direct] — § 4.1, `e6-cone`
+- **E6-OPEN** — at a horn whose colour's allowed cone has non-empty interior, recolouring a thin wedge beside it with its colour is valid, creates no unit arc, adds no colour, does not raise the degree, removes a horn, keeps far allowed cones — [hand, one mind; the clearness step is `clear_near_end`, kernel] — § 4.2, `e6-open`
+- **E6-ROUTE** — the vertex step repaired: MERGE, else RAY, else SHAVE when the cone is degenerate, else OPEN; each lowers degree plus horns — [derived, one mind] — § 4.3, `e6-route`
 
 ## Stage 1 — SAVED: the readback, the question restated, the prediction registered
 
@@ -304,3 +307,234 @@ control: e6-nodrop
   fault: python3 ../tools/fs131_e6_model.py --check nodrop --no-tc
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the repair derived — E6-CONE, E6-OPEN (the one-sector wedge-opening), the repaired lone-horn case, the potential
+
+*Coordinator's message received mid-stage (inventory items 382–383): finding accepted; derive OPEN and the repaired case with the descent on
+degree plus horns; hand back OPEN's Lean statement in `exists_merge`'s shape with the reuse question answered, the restated
+`exists_vertexStep` clause and `acted_finitely`, and the corrections owed to FS110-N-proof's N4 rows and FS112-WALK row 7. All four are below.*
+
+### 4.1 E6-CONE — a horn with a bound outside `[−1, 1]` has a non-degenerate allowed cone
+
+*Statement.* `F` valid, `F.Covers v 1`, `F.IsHorn v α κ₁ κ₂ c`. If `interior (F.allowedCone v c) = ∅` then `−1 ≤ κ₁` and `κ₂ ≤ 1`. Hence every F6
+horn (`κ₁ < σ < κ₂` with `σ = ±1`, so `κ₂ > 1` or `κ₁ < −1`) has `interior (F.allowedCone v c)` non-empty.
+
+*Proof.* `horn_bounds_of_noMerge`'s proof (`fs131-w5c`, `FlankUA.lean` l. 724–740) from its line `have hD` on: `c ∈ F.coloursAt v` from the horn;
+`woodallCone` with `hD` gives, for small `r`, every `c`-sector equal to `hornSet v β κ κ' r` with `−1 ≤ κ < κ' ≤ 1`; the horn set is a `c`-sector, so
+`e α = e β` (`e_eq_of_mem_coneAt_hornSet`) and `hornSet_curv_eq` gives `κ₁ = κ`, `κ₂ = κ'`. The hypotheses `¬ MergeAvailable v`, `2 ≤ m`,
+`HasSectors v c m` were used only to produce `hD`. ∎ The model: `allowedCone 0 c = {d : d·w ≥ 0}` with `κ₂ = 2` (§ 3.3).
+
+### 4.2 E6-OPEN — the one-sector wedge-opening (FS110 § 2.8's sketch, derived with unit arcs allowed)
+
+*Statement.* `F` valid, `F.Covers v 1`, `F.IsHorn v α κ₁ κ₂ c`, `interior (F.allowedCone v c)` non-empty. Then for every `δ > 0` there is `ρ ∈
+(0, δ)` and a valid map `F′` agreeing with `F` off `B̄(v, ρ)`, creating no unit arc, keeping Condition 5, carrying no new colour at `v`, with `v`'s
+degree not raised and its number of horns lowered by at least one, the rim's points of at most three colours with none repeated, and
+`allowedCone v′ c` unchanged at every `v′ ∉ B̄(v, ρ)`.
+
+*Proof.*
+1. **The horn's direction is allowed.** `α ∈ coneAt (F.region c) v` (the horn set approaches `v` along `α`, `IsHorn.mem_coneAt_region`), so
+   `e α ∈ F.allowedCone v c` (`coneAt_subset_allowedCone`, N3-CONF).
+2. **A side.** `allowedCone v c` is a convex cone (`add_mem_allowedCone`, `smul_mem_allowedCone`) with non-empty interior, so `cone_side`
+   (`MergeMove`, kernel) gives `e α ∈ interior` or a side `σ = ±1` and `ψ ∈ (0, π)` with `e (α + σψ)` in the cone; in the first case take `σ = 1`.
+3. **The wedge is clear — a kernel lemma already.** `clear_near_end` (`MergeMove` l. 530, kernel) with `θ = α`, `κ` the horn's `σ`-side curvature
+   (`κ₂` for `σ = 1`, `κ₁` for `σ = −1`), `hK` from step 2, `hbase` from the horn's own tile (its germ lies in the tile's closure): there are `ε, ρc
+   > 0` such that every `v + s e φ` with `0 < s < ρc`, `φ` on the `σ` side of the germ's point (`0 ≤ σ(φ − germDir α κ s)`) and `|φ − α| ≤ ε` is
+   clear for `c`. Its proof is the one this case needs: N3-CLEAR at the contacts with a margin at `e α`, and at the contacts tight at `e α` — the
+   poles `v ± n` — N3-UP's push (`clear_of_push`: the lens for in-type tiles near the pole on the `σ` side, the lune for out-type tiles near the
+   other). In the words of § 2.4's H3: the tight contacts the side allows are exactly those whose shadows are monotone away from the wedge
+   (for `σ = 1`: in-type at `N`, out-type at `S′`), so a shadowed wedge point would shadow the horn point beneath it — a monochromatic unit
+   pair in `F`.
+4. **The ray.** The sector chart at `v` (`Near`, `localSectors`) has finitely many germs. Let `X` be the first sector on the `σ` side of the horn
+   whose cone has positive angle (`[α, α + σψ_X]`, `ψ_X > 0`); the sectors strictly between the horn and `X` are horns along `α` (the swallowed
+   ones, possibly none). Choose `ψ₁ ∈ (0, min(ε, ψ_X))` with `α + σψ₁` no germ's direction, and `ρ < min(δ, ρc)` inside the chart's radius.
+5. **The map.** `W` := the points of `B(v, ρ)` strictly between the horn's `σ`-germ and the ray `v + ℝ₊ e(α + σψ₁)` (the swallowed horns and the part
+   of `X` below the ray). `F′` := `F` with `W` coloured `c`, the swallowed germs dropped, the ray and an arc of `∂B(v, ρ)` across `W` added (then
+   `exists_clean`, which drops the horn's `σ`-germ, now with `c` on both sides).
+6. **Valid** by the validity transfer (`Valid.of_agreesOff`): every interior point of `F′` in `B̄(v, ρ)` coloured anew is in `W ⊆` step 3's clear set;
+   two new `c`-points are within `2ρ < 1`.
+7. **No unit arc; Condition 5.** The new arcs are a segment and an arc of radius `ρ < 1`, the rest of `Γ′` lies in `Γ`
+   (`ringArcsWithin_of_Γ_subset`).
+8. **Colours, degree, horns at `v`.** Only `c` is added near `v`, and `c ∈ F.coloursAt v`. The sectors after: the new `c`-sector (the horn, the
+   swallowed horns and `W`) bounded by the horn's `−σ`-germ, tangent at `α`, and the ray at `α + σψ₁` — positive angle, no horn; `X` above the ray —
+   positive angle, still one sector; every other sector unchanged. So degree′ = degree − (swallowed) and horns′ = horns − 1 − (swallowed horns).
+9. **The rim.** `∂B(v, ρ)` meets `Γ` transversally at points that are no vertices (the chart), so each new rim point carries at most three colours;
+   where `X` lies on both sides of the rim arc it is not added (or `exists_clean` drops it), so no rim point has a repeated colour.
+10. **`D_c(v′)` off the disc** — `merge_allowedCone`'s route (`MergeMove` l. 3440): the closure of the recoloured set lies in `{v}` and the open
+    set `U = {v + s e φ : 0 < s < ρc, φ strictly between the horn's −σ-germ and α + σε}`, all of whose points are clear for `c` (the horn's
+    interior points by validity, the rest by step 3); by `dist_ne_one_of_isOpen_isClear` no point of `U` lies on `ω(y)` for `y` in the closure of
+    `c`'s class, so the contacts of `c` on `ω(v′)` agree, and each new `c`-tile at a contact holds an old one there and is in- or out-type with it
+    (the new map is valid). ∎
+
+*Model.* At § 3.1's `v`: `σ = 1`, `ψ₁` with `tan ψ₁ = 2/5`, `X = G₀`; `e6-open-model` checks step 3's inequality in the model's own terms.
+
+### 4.3 E6-ROUTE — the vertex step repaired (priority form, F7)
+
+At a site `v` of a clean valid map with an available move, for every `δ > 0`, a clean valid modification that is a local step on a disc of radius
+below `δ` about `v`, adds no colour at `v`, leaves no other site in the disc, and **lowers `Π(v) := degree(v) + horns(v)`**:
+- **MERGE available** — `exists_merge_aux`, then `exists_clean`: the degree drops (KL1's count after cleaning); no horn is made (the merged
+  `c`-sector's outer germs are old ones; two horns along one ray merge into one horn), so `Π` drops.
+- **else MERGE-RAY** — `horn_bounds_of_noMerge` gives the outer bounds in `[−1, 1]`, `exists_rayMerge_aux`, `exists_clean`: degree down, horns down.
+- **else SHAVE through a `c`-horn.** With no MERGE, a colour of two or more sectors has `interior (allowedCone v c) = ∅`; so:
+  - `interior (allowedCone v c) = ∅` (every horn of a repeated colour, and a lone horn in Woodall's cone): E6-CONE gives `−1 ≤ κ₁`, `κ₂ ≤ 1`, so
+    `exists_shave_aux` applies with the available `σ ∈ [κ₁, κ₂] ⊆ [−1, 1]` (a split at `±1` is the horn's own arc, FS112-WALK row 7), then
+    `exists_clean`: the horn's two germs drop and `Σ` is added — degree down by one; the flanks keep their kind (a flank horn stays a horn between
+    `σ` and its far curvature), the shaved horn is gone — horns down;
+  - otherwise (a lone horn with a non-degenerate allowed cone — every F6 horn, by E6-CONE): **E6-OPEN**, then `exists_clean`: degree not up,
+    horns down.
+- `KL1 § 3.3`'s `shave_step_gen` is no longer needed: every lone horn with a bound outside `[−1, 1]` is opened, not shaved.
+
+### 4.4 The trace
+
+| statement | reads F6? | fate |
+|---|---|---|
+| `exists_terminal` (`fs131-w5c`, `Terminal.lean`) | through `IsTerminalMap`'s `Terminal` (no SHAVE anywhere) | **unchanged, and carried**: its route needs E6-OPEN; FS112-N2-TERM's hand statement does not assert "no SHAVE at a single horn", so the Lean statement says more than the hand proof carried until now — E6-OPEN supplies the missing step (FS110 § 2.8's sketch, NB4's D3) |
+| `exists_terminalMap` (`Procedure.lean`) | yes | **unchanged**, true over the repaired step; § 3.5's model is an instance of its hypotheses at `k = 12` where the move is OPEN |
+| `IsTerminalMap`, `Terminal`, `ShaveAvailable`, `IsModification` | — | **unchanged** (`Terminal` is consumed downstream only at points with a repeated colour, `isStuck_of_hasRepeatedColour`; nothing needed weakening once OPEN exists) |
+| `exists_vertexStep` (KL1's child, a `sorry`) | yes | **its degree clause is false at the model** (E6-NODROP); restated below with the potential `Π` |
+| `exists_terminalSeq` (`sorry`) | through `acted_finitely` | **statement unchanged**; its child `acted_finitely` counts `Π` at sites (below) |
+| `exists_arcStep` (`sorry`) | indirectly | **one clause owed**: no step raises a site's horn count (below) — a bend's new curve leaves an end vertex at a changed angle, and must not become tangent there to another arc; a genericity choice of the bend's profile, to be checked against `bendMap` |
+| FS110-N4-TERM (row and § 2.7) | yes | corrections drafted in § 4.6; Keryx's item 372 (d) already corrects "Φ(v) down by one" for the construction as built |
+
+### 4.5 Lean-level drafts (for Keryx to file; the statements are de Bruijn's to settle)
+
+**(1) OPEN, in `exists_merge`'s shape.** New declarations, in the module downstream of `Moves` and `MergeMove` (ruling 372 (a)):
+
+```lean
+/-- **`v` has exactly `j` horns**: for every small radius, exactly `j` of its sectors are horn sets. -/
+def HasHornCount (v : ℂ) (j : ℕ) : Prop :=
+  ∀ᶠ r in 𝓝[>] (0 : ℝ), {S | F.IsSector v r S ∧ ∃ α κ₁ κ₂, κ₁ < κ₂ ∧ S = hornSet v α κ₁ κ₂ r}.encard = j
+
+/-- **E6-CONE** (`horn_bounds_of_noMerge` with its cone hypothesis made direct): a horn of a colour whose allowed cone has empty
+interior has bounds in `[−1, 1]`. -/
+theorem horn_bounds_of_interior_empty (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {α κ₁ κ₂ : ℝ}
+    (hH : F.IsHorn v α κ₁ κ₂ c) (hD : interior (F.allowedCone v c) = ∅) : -1 ≤ κ₁ ∧ κ₂ ≤ 1
+
+/-- **FS131-E6-OPEN** (FS110 § 2.8's wedge-opening): if `c` has a horn at `v` and `int D_c(v)` is non-empty, recolouring with `c` a
+thin wedge beside the horn, on a side where `D_c(v)` has interior directions, gives a valid map, equal to `F` off a small disc about
+`v`, creating no unit arc (so Condition 5 is kept), in which `v` gains no colour, `v`'s degree does not rise and it has one horn fewer,
+the new points on the rim carry at most three colours with none repeated, and no other point's allowed cone for `c` changes. -/
+theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c : Fin k}
+    (hH : F.IsHorn v α κ₁ κ₂ c) (hD : (interior (F.allowedCone v c)).Nonempty) {m j : ℕ}
+    (hm : F.HasDegree v m) (hj : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :
+    ∃ ρ, 0 < ρ ∧ ρ < δ ∧ ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (closedBall v ρ) ∧ F'.RingArcsWithin F ∧
+      (F.Condition5 → F'.Condition5) ∧ F'.coloursAt v ⊆ F.coloursAt v ∧
+      (∃ m' j', m' ≤ m ∧ j' < j ∧ F'.HasDegree v m' ∧ F'.HasHornCount v j') ∧
+      (∀ x ∈ sphere v ρ, (F'.coloursAt x).ncard ≤ 3 ∧ ¬ F'.HasRepeatedColour x) ∧
+      ∀ v' ∉ closedBall v ρ, F'.allowedCone v' c = F.allowedCone v' c
+```
+
+**Can `MergeMove`'s construction be reused?** Its lemmas, yes, unchanged: `cone_side` (the side), `clear_near_end` (the whole clearness, step 3
+— it already contains `clear_of_push` and `push_contacts_of_mem_allowedCone`), `dist_ne_one_of_isOpen_isClear` and `merge_allowedCone`'s route
+(`D_c(v′)`), and its rim argument (no repeated colour). Its surgery, not as it stands: `mergeArcs`/`mergeCol` recolour a gap that runs from
+one `c`-germ to the next `c`-germ and add only a rim arc; OPEN's gap runs from the horn's `σ`-germ to a **new ray inside the sector `X`**, so it
+needs one more arc (a segment from `v`) and a colouring that splits `X` along it. Two ways: (a) a variant of `mergeArcs`/`mergeCol` whose gap's far
+end is the ray (closest to `merge_allowedCone`'s proof, and it keeps the rim free of repeated colours by construction); (b) `Moves`' `Near.move`
+with `E = {the ray}` and `col' = c` on `W`, then `exists_clean` (the full rim circle and the horn's `σ`-germ are dropped by cleaning — KL1's
+finding (2)). I would take (a). Whether `HasHornCount` is the encoding, or a horn count read off `BranchGerms` (germ pairs with equal directions),
+is the implementer's call.
+
+**(2) `exists_vertexStep`, restated** (`fs131-w5c`, `Procedure.lean`; replaces the hypotheses' "`{m : ℕ} (hdeg : F.HasDegree v m)`" and the
+conclusion's "`(∃ m' < m, F'.HasDegree v m')`"):
+
+```lean
+theorem exists_vertexStep (hF : F.Valid) (hc : F.IsClean) {v : ℂ} (hv : v ∈ F.dom)
+    (hav : F.MergeAvailable v ∨ F.RayAvailable v ∨ F.ShaveAvailable v) {m j : ℕ} (hdeg : F.HasDegree v m)
+    (hhorn : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :
+    ∃ ρ, 0 < ρ ∧ ρ < δ ∧ ∃ F' : ArcMap k, F'.Valid ∧ F'.IsClean ∧ LocalStep F F' (closedBall v ρ) ∧ F.IsModification F' ∧
+      (∃ m' j', m' + j' < m + j ∧ F'.HasDegree v m' ∧ F'.HasHornCount v j') ∧
+      F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ closedBall v ρ, x ≠ v → ¬ F'.IsSite x
+```
+
+Its proof is § 4.3's case split. **`acted_finitely`**, restated: *a site is acted on finitely often: its potential `degree + horns` never rises —
+a vertex step elsewhere leaves it (`LocalStep`, and no site in that step's disc but its centre), an arc step leaves it (its degree clause and the
+new horn clause) — and each vertex step at it lowers it; a centre as before (its bad count rises only at the finitely many vertex steps within
+`3` and at the at most `k` stages where it loses a colour, and each arc step at it lowers it).* **`exists_arcStep`'s owed clause**, added beside
+"`(∀ x m, F.HasDegree x m → F'.HasDegree x m)`": `(∀ x j, F.HasHornCount x j → ∃ j' ≤ j, F'.HasHornCount x j')`.
+
+### 4.6 Corrections owed (dated drafts; the original text left standing above each)
+
+**`plans/FS110-N-proof.md`, § Continuation — FS110-N4, theorem table, below the N4-SHAVE row (l. 718) and the N4-TERM row (l. 723), and below
+§ 2.8's "partial remedy, sketch" (l. 918–920):**
+
+> *Erratum (2026-10-05, FS131-E6, `plans/FS131-E6-derivation.md` §§ 3–4):* **N4-SHAVE** holds as written in § 2.2's setting (`−1 < κ_− < κ_+ < 1`,
+> the horns N3-DEG gives). At a **single horn** (its colour one sector at `v`) the bounds may leave `[−1, 1]`, and then the admissible splits can be
+> exactly `σ = 1` (or `−1`) strictly inside the horn: an out-type corner of `h` at `N` shadows exactly `B(N, 1)`, and a `g`-region at `S′` bounded by
+> the circle of radius `2` about `N` shadows exactly its outside (`f̃(1/2) = 1`, `f(∞) = 1`). The split is then an arc of radius 1, which breaks
+> Condition 5 — realised by an exact valid plane map that satisfies Condition 5 (FS131-E6-OCCURS). **N4-TERM**, with NB4's D3 (SHAVE on single horns,
+> count `Φ + #horns`), reaches a map with no SHAVE at any horn only with § 2.8's wedge-opening, which is now derived for every horn whose colour's
+> allowed cone has non-empty interior, unit arcs allowed (FS131-E6-OPEN); every F6 horn has such a cone (FS131-E6-CONE). The count is degree plus
+> horns: at FS131-E6's model no local step lowers the degree (FS131-E6-NODROP). The residue NB4-CS names (doubly shadowed single-horn Woodall cones) is
+> unchanged.
+
+**`plans/FS112-N-proof.md` § 1.4, row 7 (N4-SHAVE with FLANK, RAY), and `plans/FS112-derivation.md`'s FS112-WALK entry, below its proof
+verdict:**
+
+> *Erratum (2026-10-05, FS131-E6):* row 7's "SHAVE creates no unit arc (its circle `Σ` has curvature `σ_h ∈ [κ₋, κ₊)`, and `σ_h = −1` forces `Σ` onto
+> the existing lower arc)" holds for horns with bounds in `[−1, 1]` (row 5's). At a single horn whose bounds leave `[−1, 1]` SHAVE's only split can be
+> `σ = ±1` strictly inside the horn, and SHAVE then creates a unit arc — an (R2) arc of `ω(N)` when the `g`-shadow comes from a `g`-region along the
+> radius-2 circle at `S′`, a both-kind arc when it comes from FLANK's in-type `g` at `N` (FS131-E6-OCCURS, exact). This is a step that fails by
+> creating a unit-arc centre, not at one it reads, so the headline's "every other step holds off unit-arc centres at points it reads" gains this
+> case. The route replaces SHAVE there by the wedge-opening (FS131-E6-OPEN).
+
+**`plans/FS110-NB4-verification.md` § 2.3 and divergence D3** (a precision): "split along the circle … of any curvature in `[σ_g, σ_h] ⊂ (−1, 1)`"
+holds for horns with bounds in `(−1, 1)`; D3's "the §2.3 criterion is unchanged" for single horns misses `σ_g = σ_h = ±1` (FS131-E6-OCCURS).
+
+### 4.7 Entries
+
+derivation: e6-cone
+  statement: at a point v of a valid map covering B̄(v, 1), a horn of colour c along e α with bounds κ₁ < κ₂ such that interior (allowedCone v c) is empty has −1 ≤ κ₁ and κ₂ ≤ 1; so every horn shaveable only at σ = ±1 strictly between its bounds has a non-empty interior of its colour's allowed cone
+  uses only: woodallCone (every c-sector a horn set with bounds in [−1, 1] when the interior is empty); a horn set's bounds are determined by the set
+  not claimed: that a colour of one sector with an empty-interior cone has a horn at all; anything about the second sentence's converse
+  argument: § 4.1 E6-CONE — a horn with a bound outside `[−1, 1]` has a non-degenerate allowed cone
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: § 3.1's v: κ₂ = 2 and allowedCone 0 c = {d : d·w ≥ 0}; and fs131-w5c's bowtie at 0 for the first sentence (horn_bounds_of_noMerge's inhabitant)
+  prior art: known: horn_bounds_of_noMerge (fs131-w5c, FlankUA.lean l. 724) — its proof, read with its cone hypothesis made direct
+  handoff: de Bruijn — horn_bounds_of_interior_empty, § 4.5 (1)
+
+derivation: e6-open
+  statement: at a point v of a valid map covering B̄(v, 1), if c has a horn at v and interior (allowedCone v c) is non-empty, then for every δ > 0 recolouring with c a wedge beside the horn inside B(v, ρ), ρ < δ, gives a valid map agreeing off B̄(v, ρ), creating no unit arc, with no new colour at v, the degree at v not raised, one horn fewer at v, rim points of at most three colours none repeated, and allowedCone v′ c unchanged for v′ off the disc
+  uses only: N3-CONF (the horn's direction is allowed); cone_side; clear_near_end (N3-CLEAR with a margin, N3-UP's lens and lune at the poles); the sector chart's finitely many germs; the validity transfer; no new arc of radius 1; merge_allowedCone's route for the far cones
+  not claimed: that the opening lowers the degree (e6-nodrop: it cannot always); that the horn's colour has one sector (the statement does not need it); anything without a non-empty interior (Woodall's cone, where shaving is the move)
+  argument: § 4.2 E6-OPEN — the one-sector wedge-opening (FS110 § 2.8's sketch, derived with unit arcs allowed)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: § 3.1's v with σ = 1 and tan ψ₁ = 2/5 (control e6-open-model)
+  prior art: partly: plans/FS110-N-proof.md § 2.8 (the sketch, D_c(v) a half-plane); [SokolovVoronov2025] Prop. 7 (the polygonal triangle recolouring, read 2026-10-05); the cusp case not found in print
+  handoff: de Bruijn — exists_open and HasHornCount, § 4.5 (1), with MergeMove's lemmas reused and its surgery varied by one segment
+
+derivation: e6-route
+  statement: at a point v of a clean valid map where MERGE, MERGE-RAY or SHAVE is available, for every δ > 0 there is a clean valid modification that is a local step on a closed disc about v of radius below δ, adds no colour at v, leaves no other site in the disc, and lowers the degree of v plus its number of horns
+  uses only: exists_merge_aux, exists_rayMerge_aux, exists_shave_aux, exists_clean (their constructions as KL1 § 3.3 lists); horn_bounds_of_noMerge; e6-cone; e6-open; MERGE and SHAVE create no horn at v and the flanks keep their kind
+  not claimed: that the degree alone drops (false at e6-nodrop's model); that the arc step keeps every site's horn count (a clause owed, § 4.4); anything at a point where no move is available
+  argument: § 4.3 E6-ROUTE — the vertex step repaired (priority form, F7)
+  verdict: derived
+  grade: derived from: e6-cone, e6-open
+  minds: 1
+  model: § 3.1's v (the OPEN branch); the other branches are the held moves' own
+  prior art: partly: plans/FS110-NB4-verification.md § 4.1 D3 — "count Φ + #horns … SHAVE on single horns and the opening remedy both join the moves"
+  handoff: de Bruijn — exists_vertexStep restated, acted_finitely's potential, exists_arcStep's horn clause, § 4.5 (2)
+
+control: e6-open-model
+  of: e6-open — the wedge's clearness inequality and the far ray inside the allowed cone, at the model; a ray past the cone breaks both
+  run: python3 ../tools/fs131_e6_model.py --check open
+  expect: open: wedge c-clear; far ray inside D_c(v); v after: 3 sectors, 0 horns
+  fault: python3 ../tools/fs131_e6_model.py --check open --open-dir -5,2
+
+### 4.8 Predictions, scored (registered § 1.4)
+
+| id | probability | outcome |
+|---|---|---|
+| E6-P1 (F6 occurs in a valid plane map, `k ≥ 7`, exact) | 0.85 | **met** — `k = 12`, and under Condition 5 as well (stronger than registered) |
+| E6-P2 (F6 forces `int D_c(v) ≠ ∅`) | 0.97 | **met** — E6-CONE |
+| E6-P3 (OPEN valid at every horn with `int D_c(v) ≠ ∅`, no unit arc, no colour added, degree not up, one horn fewer) | 0.85 | **met** (one mind) — and its clearness step was already a kernel lemma, `clear_near_end` |
+| E6-P4 (at some F6 instance no local step lowers the degree) | 0.75 | **met** — E6-NODROP |
+| E6-P5 (`exists_terminal`, `exists_terminalMap`, `IsTerminalMap` unchanged) | 0.85 | **met** — two `sorry` children change (`exists_vertexStep`, `exists_arcStep`), no backlog statement |
+
+Brier over the five: `((0.15)² + (0.03)² + (0.15)² + (0.25)² + (0.15)²)/5 = 0.0272`. All five went the way registered; the one I priced lowest (P4) was
+the one that needed a construction choice: without the in-type `c`-region `T_c`, `c` has no contact on `ω(0)`, `D_c(0)` is the whole plane, and
+recolouring all of `G₀` with `c` lowers the degree to `2` — so the instance had to be built against the clause, not found.
+
+## Stage 4 — SAVED
