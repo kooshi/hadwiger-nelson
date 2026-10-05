@@ -2145,3 +2145,26 @@ reason by the close.*
      Alternative weighed: wave 5's next implementer now (a lane keeps its slot, item 199 (c)). Why: IM3 proved SHAVE in one stage, so RAY and MERGE in parallel
      cut wave 4's remaining moves from about 3.5 sessions to about 2, and wave 4's landing gates Woodall's and wave 5's; wave 5's own lane has slack, since the
      planar chain (six to nine sessions) bounds its landing. Confidence: medium-high. In flight: 1 (IM3) + 1 (I4m) + 1 (IP1) + 1 (IMM1) = 4.
+286. **FS131-IM3 handed back** (Stage 10 SAVED, harness 538k by the task notice; report `fs131-w4m`'s `data/fs131/reports/FS131-IM3.md`; commits `8ab4f838`,
+     `934bc81c`, `73d31ad6`, `530b3ac6`, `67256973`). **Held, [kernel], the standard three**: FS110-N4-SHAVE `exists_shave_aux` (two cuts when a flank has the
+     horn's colour, one recolouring otherwise; 22 children) and FS110 N4-RAY `exists_rayMerge_aux` (the gap's clearness `ray_clear`, made exact with parabola
+     points of each horn; the merge with item 262 (a)'s correction — the lower horn joins the nearest `c`-horn above it, by the cut when adjacent, else by
+     recolouring the horn spanning both; 46 children). **Done**: the split (item 279), `Moves` l. 25–2087 at `9ffc2aba` verbatim into `Plane/ValidMap/Surgery`
+     (checked by `tools/fs131_im_split.py`, three controls watched red). **Receipt (Keryx)**: the commits exist; `build/gate/build/20261005T001350Z-3780541.log`
+     ends "Build completed successfully (5362 jobs)", 0 warnings other than `sorry`; `sorry` lines by count `Moves` 1 (`exists_merge_aux`, IMM1's), `Surgery` 0;
+     `data/fs131/im/axioms-stage10.txt` gives `exists_shave_aux` and `exists_rayMerge_aux` on the standard three, `exists_merge_aux` on `sorryAx` besides.
+     **Corrections**: (a) **item 278's "tool defect" was not one** — IM1 had put its audit block in `scripts/Axioms.lean` just after the `=== PURCHASED ===`
+     banner, so `check_architecture` rightly failed and `axioms.sh` would have failed every moves record at the gate; IM3 moved the block above the banner and the
+     check passes (both runs saved, `data/fs131/im/check-architecture-{before,after}-axioms-move.txt`); (b) **slip (Keryx's) — item 279's range** ("The chart near
+     its point" through `Near.exists_cut`) left out IM1's l. 25–244, which the machinery uses; IM3 moved l. 25–2087; (c) IM1's § 3.3 clearness route ("the
+     vertical line") is replaced by parabola points and a fresh abscissa (`exists_same_side`). **For MERGE (record § 10.1)**: `Near.move` and `Near.exists_cut`
+     add the whole circle `∂B(v, ρ)` as an arc, so neither serves MERGE as is; the rim clause `¬ F'.HasRepeatedColour x` fails where a germ at `v` has one colour
+     on both sides (a phantom germ, which `ArcMap` allows) unless that germ is cut in a thin annulus inside `ρ` — IM3 believes the statement true with annulus cuts,
+     and MERGE's price rises above two sessions. **Generalization**: `Near.sector_subset_hornSet_of_meets`, `Near.horn_of_sector_subset_hornSet`. **For the
+     merge**: expect a trivial `scripts/Axioms.lean` conflict with `fs131-w4mm` (both append records above the PURCHASED banner). Credit: IM3, for SHAVE and RAY.
+287. **IM3's slot → wave 5's next implementer, FS131-I5d, on `fs131-w5`; IM3's MERGE findings relayed to IMM1 at once.** Choice: as the handoff queued (item 285):
+     I5d works wave 5's 30 own leaves, `stuck_flanks_ua` first (its unit-arc versions of wave 4's three flank lemmas), then the shared child
+     `exists_isRingArc_of_onRingArc` (for `pseudo_nonempty`, `cv_l0`), then the rest in I5c's order; it repairs `tools/fs131_i5_dupes.py`'s FORK (item 284) if it
+     needs the tool. IMM1 is told by message of IM3's § 10.1 (the whole-circle arc, the phantom-germ rim crossing, annulus cuts) and of the audit block's place.
+     Alternative weighed: a second planar implementer now. Why: IP1 has not yet measured the planar foundation, so a split would be guessed; wave 5's own lane is
+     next in the queue and has 30 leaves. Confidence: medium-high. In flight: 1 (I4m) + 1 (IP1) + 1 (IMM1) + 1 (I5d) = 4.
