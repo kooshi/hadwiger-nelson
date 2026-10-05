@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–401 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–403 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **401**.
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **403**.
 >
 > **Held in the kernel, on `main`**: **MERGE** (item 375: `main` at `ca4dcfa2`, gated `df473bfe`, counts filed, item 376 — 3,807 records, 3,784 clean); waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -15,12 +15,13 @@ that judge the milestone, written before any job).*
 > **Running (3)** — each reports to "main" by hand-back; its report file is on its branch:
 > - **FS131-CC1** (`fs131-w5k`, a new branch from `fs131-w5` at `2736ab8c`): the collar bend's lane C — `Pushforward`, C's `BendCollar` children, B0.
 >   Brief `data/fs131/briefs/FS131-CC1-collar.md`.
-> - **FS131-CG1** (`fs131-w5`): the collar bend's lane G — G's block moved to a new `CollarMap` first (its commit cuts lane C's branch), then `RadialPush` and
->   the map-level children. Brief `data/fs131/briefs/FS131-CG1-collar.md`.
+> - **(open slot)** — **NEXT ACTION after the compaction**: brief and launch `stuckRun_ne_univ` + the procedure's last steps on `fs131-w5c` (item 403;
+>   from M6's and IL2's briefs: `exists_vertexStep`/`exists_arcStep` restated per items 383 (b), 385 (a), E6 record § 4.5; KL1 plan § 3.3's moves' lemmas;
+>   merge `fs131-wop` once IO3 lands OPEN; `exists_terminalSeq`).
 > - **FS131-IO3** (`fs131-wop`): OPEN's last leaf `open_allowedCone` over the margin, the positive `HasHornCount` example, the inhabitant note. Brief
 >   `data/fs131/briefs/FS131-IO3-open.md`.
 >
-> **Done since the compaction**: **FS131-IO2** (items 400–401: four of OPEN's five leaves in the kernel; `margin` and `ray0` repairs made); **FS131-M6** (items 398–399: **`fs131-w5` merged into `fs131-w5c`**; `run_hornBoundsQR` in the kernel; `stuckRun_ne_univ`
+> **Done since the compaction**: **FS131-CG1** (item 402: the collar's lane G complete — `RadialPush`, `CollarMap` free of `sorry`); **FS131-IO2** (items 400–401: four of OPEN's five leaves in the kernel; `margin` and `ray0` repairs made); **FS131-M6** (items 398–399: **`fs131-w5` merged into `fs131-w5c`**; `run_hornBoundsQR` in the kernel; `stuckRun_ne_univ`
 > left); IO2's second finding (item 397: `OpenConfig` gains `ray0`); CG1's move commit `2736ab8c` (item 396); **FS131-KP2** (item 394: the collar bend planned — 53 children, about 4,750 lines, lanes G and C; the bent map as `F`'s
 > pushforward); IO2's finding (item 393: `OpenConfig` gains a clear margin); **FS131-IO1** (items 391–392: OPEN's statement settled (lone form kept), its configuration and four clauses in the kernel;
 > five leaves left); **FS131-IL2** (items 388–389: **the limit's lane A complete** — `Limit` free of `sorry`; `exists_clean`, the finiteness lemmas,
@@ -115,12 +116,11 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (3, at the cap; items 323, 325, 329)
+## 3. Running now (2 + one open slot, item 403)
 
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-CC1 (the collar bend's lane C on `fs131-w5k`; items 395–399) | Opus | `data/fs131/briefs/FS131-CC1-collar.md` | branch `fs131-w5k`'s `data/fs131/reports/FS131-CC1.md` |
-| FS131-CG1 (the collar bend's lane G on `fs131-w5`; items 394–395) | Opus | `data/fs131/briefs/FS131-CG1-collar.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-CG1.md` |
 | FS131-IO3 (OPEN's last leaf on `fs131-wop`; items 400–401) | Opus | `data/fs131/briefs/FS131-IO3-open.md` | branch `fs131-wop`'s `data/fs131/reports/FS131-IO3.md` |
 
 
