@@ -1135,3 +1135,43 @@ build's oleans (`data/fs131/i5f/I5fAxioms24.lean` → `I5fAxioms24.out`): `exist
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 24 — SAVED
+
+## Stage 25 — SAVED: FS131-I5g's readback
+
+*FS131-I5g, wave 5's seventh implementer (Opus), resuming this record at its first unsaved stage (Stage 24 SAVED, `d61edefc`). Brief:
+`data/fs131/briefs/FS131-I5g-wave5.md` (main tree). My set (ruling 317 (a)): `BaseWalk`'s `CircleColouring.reduce`, `CircleColouring.select`,
+`BaseCtx.l3_base`; `HexRing`'s `bv_hex`, `rot_out`, `rot_in`, `hex_regular`, `bv_nd`, `bv_l3`; `BaseDense`'s `exists_preBend` with the strengthened-bend
+child (ruling 317 (b)) — 10. Never `Terminal`, `cv_exists`, `disc1_local`, or the planar job's seven.
+
+### 25.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (each `> ` line of the brief searched verbatim in the file its `— source:` line names, with line breaks in the source folded to one
+space; main tree for `CLAUDE.md` and the inventory, the worktree for the plans and this record). The checker was watched to fire on a planted
+one-letter change ("practicaly") in the first quotation.
+
+| quotation (opening words) | source | result |
+|---|---|---|
+| "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors | verbatim |
+| "**What is left of my set (12), and where it stands** (for wave 5's next implementer on this half):" | this record, Stage 24 | verbatim |
+| "- **`exists_preBend`** (`n3_base`'s pre-bend): needs `bend_toward` (`sorry` on this branch, proved on `fs131-w4` by I4n) iterated over the finitely" | this record, Stage 24 | verbatim |
+| "316. **FS131-I5f handed back** (Stage 24 SAVED, harness ≈ 569k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 22–24;" | `plans/FS131-close-inventory.md` item 316 | verbatim |
+| "317. **Rulings on I5f's questions, and its slot.** (a) **I5f's slot → FS131-I5g on `fs131-w5`**, the same half: `row134BaseUA`'s four first (`reduce` by I5f's" | the inventory, item 317 | verbatim |
+| "226. **FS131-E4 done, harness ≈ 480k** (report `data/fs131/reports/FS131-E4.md`; record `plans/FS131-E4-derivation.md`; commits `fffe465f` … `e2928a7b`, checked;" | the inventory, item 226 | verbatim |
+| "274. **Rulings on QA3's held items and the freed slot.** (a) **`InMK`**: restated when its first consumer is planned, not now (no theorem uses it; a definition" | the inventory, item 274 | verbatim |
+| "**It may**: add children anywhere in the wave's modules — every child §§ 4, 9.1 name is an expected addition, and the shared ones may go to the" | `plans/FS131-w5-kernel-plan.md` § 10.2 | verbatim |
+| "295. **Ruling: MERGE leaves wave 4; the freed slot goes to FS131-IX1 as ruled.** Choice: (a) wave 4 lands without `exists_merge` — at wave 4's merge-and-gate," | the inventory, item 295 | verbatim |
+
+Items 226, 258, 274, 295, 316, 317 read in full; I5f's Stages 22–24 read; the plans' §§ 3.2, 8.2, 9.1, 10.2 (`FS131-w5-kernel-plan.md`) and stages 3–6
+(`FS131-w5base-kernel-plan.md`) read.
+
+### 25.2 The as-given build (`d61edefc`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1754 modules already
+up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T031610Z-915357.log`; driver log
+`data/fs131/i5g/build-stage25-asgiven.log`). Every warning is `declaration uses 'sorry'`, 36: wave 5's `Terminal` 9, `Dense` 1, `HexRing` 6, `MapGraph` 3,
+`BaseWalk` 6, `BaseDense` 3 (**28**, the brief's count; mine 10 of them), and wave 4's stale `Contact` 3, `UnitArc` 5. `tools/fs131_i5_stmt_check.py
+d61edefc`: PASS; `--self-test`: three plants fired, the control passed.
+
+Iteration script: `data/fs131/i5g/iter.sh` (I5f's, re-pointed at its own scratch mirror `/home/kooshi/scratch-w5g`, outside the repository).
+
+## Stage 25 — SAVED
