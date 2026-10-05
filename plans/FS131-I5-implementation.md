@@ -131,6 +131,21 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
   `reduce_right_uncov`, `reduce_zmod3`, `reduce_partner_noChange`, `reduce_leftVal_ne`, `reduce_vals_of_const`, `reduce_locConst`, `reduce_proper_off`,
   `reduce_int_eq_zero` (all `CircleColouring.`).
 
+### FS131-I5h (wave 5's `Terminal` implementer)
+
+*Kernel-checked on the build of stage 28 (`data/fs131/i5h/build-stage28.log`; `build/gate/build/20261005T041051Z-1283678.log`); axioms read from that
+build's oleans (`data/fs131/i5h/I5hAxioms28.lean`, output `I5hAxioms28.out`; controls `n3_end_of_not_inType` with `sorryAx`, `linkage_dot_ne_zero` clean).*
+
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]`, all in `Plane/ValidMap/HornShadow` (new):
+- FS131-E5's **e5-sh**, (SH1) in a global form stronger than E5's: `HadwigerNelson.Plane.tanAbove_S_of_dist_le_one`, mirror `tanBelow_N_of_dist_le_one`;
+  horn forms `shadow_hornSet_subset_S`, `shadow_hornSet_add_pi_subset_S`, `shadow_hornSet_subset_N`, `shadow_hornSet_add_pi_subset_N`.
+- **e5-sh**, (SH2) as E5 states it (`r ≤ 1/2`): `mem_shadow_hornSet_S`, `mem_shadow_hornSet_add_pi_S`, `mem_shadow_hornSet_N`, `mem_shadow_hornSet_add_pi_N`.
+- **e5-sep**, as the unit pair it produces: `sep_S`, `sep_add_pi_S`, `sep_N`, `sep_add_pi_N`.
+- Children: `isPreconnected_hornSet_unit`, `exists_drop_height`, `exists_near_hornSet_of_partner`, `lt_of_tanAbove_tanBelow`, `TanAbove.mono`,
+  `TanBelow.mono`, `frameY_add_pi`, `tanAbove_add_pi_iff`, `tanBelow_add_pi_iff`, `neg_curvDown_neg`, `e_add_pi_add_pi`, `dist_eq_dist_of_frame`.
+
+None of my ten leaves is closed yet (stage 28, "What is left").
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -1254,3 +1269,53 @@ Iteration script: `data/fs131/i5h/iter.sh` (I5g's, re-pointed at this worktree a
 repository).
 
 ## Stage 27 — SAVED
+
+## Stage 28 — SAVED (FS131-I5h): E5's lemmas SH and SEP, kernel theorems (`Plane/ValidMap/HornShadow`, new)
+
+**The module.** `Plane/ValidMap/HornShadow` (imports `FlankUA`; imported by `Terminal` and `Proofs.lean`), 26 declarations, every one proved, no `sorry`,
+no `axiom`, no `native_decide`. Statements read back against E5's record (`plans/FS131-E5-derivation.md`, main tree):
+
+| E5's entry | Lean | read-back |
+|---|---|---|
+| e5-sh (SH1): "every y with \|y − S′\| < 1/2 that has a unit partner in H satisfies TanAbove S′ α μ y" (`H = H^σ_r(ν, ν′)`, `−1 < ν < ν′ ≤ 1`, `0 < r < 1/2`, `μ = ν/(1 + ν)`) | `tanAbove_S_of_dist_le_one` (`−1 < ν`, `TanAbove v α ν z`, `dist y z ≤ 1` ⟹ `TanAbove (v − n) α (curvDown ν) y`); horn forms `shadow_hornSet_subset_S` (σ = +1) and `shadow_hornSet_add_pi_subset_S` (σ = −1, `ν = −κ₄`, `κ₄ < 1`) | **stronger** (the brief's "a stronger one you find"): no bound on `\|y − S′\|`, no `ν′`, no `r`, any point above the `ν`-circle, distance `≤ 1`. The proof is E5's (O) without (D): the circle of curvature `ν` has centre `v + n/ν`, radius `1/\|ν\|`; the triangle inequality gives `\|y − O\| < 1 + 1/ν` (`ν > 0`) or `> 1/\|ν\| − 1` (`ν < 0`), which is `TanAbove S′ α f(ν)` by the offset identity (`ν = 0`: `Y(y) > Y(z) − 1 > −1`) |
+| e5-sh (SH2): "for some ρ > 0 every y with \|y − S′\| < ρ, σ·frameX v α y > 0 and TanAbove S′ α μ y has a unit partner in H" | `mem_shadow_hornSet_S` (σ = +1: `−1 < ν < ν′ ≤ 1`, `0 < r ≤ 1/2`), `mem_shadow_hornSet_add_pi_S` (σ = −1: `−1 ≤ κ₃ < κ₄ < 1`, so `ν = −κ₄`, `ν′ = −κ₃`) | **same**, with `r ≤ 1/2` for E5's `r < 1/2` (a widening). Route: wave 4's far-side shadow `shadow_farSide_above` (based at `S′`) gives a unit partner `w` above the `ν`-circle near `v`; E5's vertical drop (D) moves it to a height strictly between the `ν`- and `ν′`-circles (`exists_drop_height`, an intermediate value), a point of `H` within `1` of `y` (`exists_near_hornSet_of_partner`); a point of `H` on the middle germ (`branchPt`) lies beyond `1`; `H` is connected (`isPreconnected_hornSet_unit`: the sector between two germs of one direction, `BranchGerms.isPreconnected_sector`). Side `−` by the reflection in the normal line through `v` |
+| e5-sh at `N` (§ 3.5's mirror: "the shadow near N of a horn on side σ with N-side bound υ ∈ (−1, 1) is TanBelow N α f̃(υ) on side σ") | SH1: `tanBelow_N_of_dist_le_one`, `shadow_hornSet_subset_N` (σ = +1, `υ < 1`), `shadow_hornSet_add_pi_subset_N` (σ = −1, `υ = −κ₃`, `κ₃ > −1`); SH2: `mem_shadow_hornSet_N` (`−1 ≤ υ′ < υ < 1`), `mem_shadow_hornSet_add_pi_N` (`−1 < κ₃ < κ₄ ≤ 1`) | **same** (SH1 stronger as above), by the frame turned by `π` (`tanAbove_add_pi_iff`, `tanBelow_add_pi_iff`, `neg_curvDown_neg`: `−f(−υ) = f̃(υ)`) |
+| e5-sep: "let H be a c-horn at v on side σ with S′-side bound ν ∈ (−1, 1), and G a sector at S′ with a boundary half-arc γ of the σ-direction, lying on γ's −n side, that holds points tending to S′ on side σ each with a unit partner in H; then no c-sector at S′ whose cone is the σ-direction alone lies on γ's +n side" | `sep_S` (σ = +1), `sep_add_pi_S` (σ = −1, the form `n3_end_of_not_inType` reads with `H = H₋`); mirrored at `N`: `sep_N`, `sep_add_pi_N` (the forms `cv_class` reads, CVB § 1.4 item 5 with `Q±`, `H±`) | **the same content, stated map-free as the unit pair it produces**: one point `y₀` of `shadow H` below the arc of curvature `μ` through `S′` (G's witness, below its half-arc `γ` of curvature `μ`), and a set `K` with points arbitrarily near `S′` on side σ above that arc, give `y ∈ K`, `z ∈ H`, `dist y z = 1`. With `K` a `c`-sector and `H` a `c`-horn this contradicts `Valid` (`F.Valid` reads exactly "two interior points at distance 1 differ in colour"). E5's sequence `y_k → S′` is not needed: one witness suffices (`lt_of_tanAbove_tanBelow`, the SEP-ORDER identity: above `f(ν)` and below `μ` at one point off `S′` forces `μ > f(ν)`); the cone/local-structure reading of "K on γ's +n side" is the consumer's (F6) |
+
+Children (all in `HornShadow`): `frameY_add_pi`, `tanAbove_add_pi_iff`, `tanBelow_add_pi_iff`, `neg_curvDown_neg`, `e_add_pi_add_pi`, `dist_eq_dist_of_frame`,
+`isPreconnected_hornSet_unit` (renamed from `isPreconnected_hornSet`: `main`'s `Plane/ValidMap/Surgery` declares that name with another statement — found by
+`git grep` over `fs131-w5c`, `fs131-w5`, `fs131-w5p`, `fs131-ww`, `main`; every other new name is unique there), `exists_drop_height`,
+`exists_near_hornSet_of_partner`, `lt_of_tanAbove_tanBelow`, `TanAbove.mono`, `TanBelow.mono`. Spec examples: `curvDown (1/3) = 1/4` (E5's SH model line),
+`−curvDown (−1/2) = curvUp (1/2) = 1`.
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 75689a4c` (FS131-I5f's checker re-aimed at `Terminal`, `BaseDense`, `FlankUA`): **PASS**;
+`--self-test`: three plants (a hypothesis of `n3_end_of_not_inType` loosened, `cv_exists`'s conclusion loosened, `cv_class` renamed) each **FIRED**, the
+unplanted control passed. `tools/fs131_i5_stmt_check.py 75689a4c` (I5g's files, which I did not touch): **PASS**. `Terminal`'s only edit is its import of
+`HornShadow`.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 6 modules rebuilt (`HornShadow`, `Terminal`, `Dense`, `BaseWalk`, `BaseDense`, `Proofs`), 8 with warnings, every warning `declaration uses 'sorry'`**, exit 0, 9 min 15 s (`build/gate/build/20261005T041051Z-1283678.log`; driver log `data/fs131/i5h/build-stage28.log`). `HornShadow` has no warning. Wave 5's sorry declarations: **27** (unchanged: SH and SEP are new children, no leaf closed yet), mine 10. Axioms read from this build's oleans (`data/fs131/i5h/I5hAxioms28.lean` → `I5hAxioms28.out`): all 26 declarations of `HornShadow` on `[propext, Classical.choice, Quot.sound]`; controls: `n3_end_of_not_inType` reads `sorryAx` (the reader sees the failure the print guards against), `linkage_dot_ne_zero` the standard three. `scripts/Axioms.lean`: a block "FS131-I5h" above the `=== PURCHASED ===` banner with the 26 records; `ARCHITECTURE.md`: a row for `HornShadow`, `Terminal`'s Imports cell; `tools/check_architecture.py`: PASS.
+
+**Re-pricing** (the brief: "re-price from your first two hard leaves"). SH2 was the first hard proof here: about 60k tokens of context with its children,
+of which most went to elaboration timeouts in one long proof, cured by splitting it into three lemmas. The leaves themselves are not started, so the
+re-pricing is of their route: `n3_end_of_not_inType` needs, beyond SH/SEP, the local structure at `S′` (E5's F2–F6) — the sector chart at `S′`
+(`localSectors`), the two `g`-sectors located by the witnesses' directions (I5e's § 20.2 limits), U1 at `S′` for `c` — and then NB3-END items 3–5 (which
+E5 did not re-derive and which are NB3's, one mind). On this session's rate, H as planned: one implementer session for item 2 (the repeated colour),
+a second for items 3–5.
+
+**What is left of my set (10), and where it stands** (for the next `Terminal` implementer):
+- **`n3_end_of_not_inType`** (`Terminal`). Its three conclusions: `HasRepeatedColour S′` is E5 § 3.4 (now over `sep_add_pi_S`); `4 ≤ #P_cl(S′)` and the
+  both-kind arc at `v − 2n` are NB3-END items 3–5. Suggested children: (i) `g_sectors_two_at_S` — `∀ᶠ r, 2 ≤ (F.sectorsOf S′ r g).encard`, from: F2 (a
+  `g`-point near `S′` inside `B̄(v, 1)` crosses the upper `g`-sector: `region_far_S_of_srcG`, `dot_nonneg_of_srcG`), F3–F4 (the witnesses of
+  `shadow_of_not_shave` localize at `S′` and tend to `±a`: I5e's § 20.2 inequalities), F5 (U1 at `S′`: `not_antipodal_coneAt_S_of_horn`,
+  `ringArc_cone_outer`), F6 (`localSectors` at `S′`; a sector whose cone holds `α` and `α + π` inside `[α + π, α + 2π]` is the lower half between two germs
+  of directions `α`, `α + π`), then `sep_add_pi_S` (with `H = H₋`, `ν = −κ₄`; at `κ₄ = 1`, U1 instead). **Sign care**: a chart germ at `S′` of direction
+  `α + π` and `BranchGerms` curvature `κ` is the arc of upward curvature `−κ` in the frame at `α` (`branchPt` reads curvature in the germ's own
+  direction). (ii) items 3–5 of NB3-END.
+- **`cv_class`**: its "None" disjunct by `sep_N`/`sep_add_pi_N` at `N` and § 3.4's argument at `S` (E5 § 3.5); its bowtie disjunct over `cv_hd`.
+- **`cv_hd_main`** (H: CVB § 1.6, both branches), **`y3_end_needs`** (H: YB3 § 3.1), **`cv_hd`** (M over `cv_hd_main`), **`c_double`** (E–M over `cv_hd`,
+  `flankQ_*_of_qrOnly`), **`c_ends`** (M, with `stuckAlong_of_run`), **`exists_red`**, **`exists_terminal`** (H, the limit constructions), **`cv_exists`**
+  (`BaseDense`; over `exists_terminal`, CVB § 1.4 items 3–6) — none started.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 28 — SAVED

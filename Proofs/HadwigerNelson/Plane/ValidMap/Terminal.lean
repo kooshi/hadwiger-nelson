@@ -4,6 +4,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
 import Proofs.HadwigerNelson.Plane.ValidMap.BrickMap
 import Proofs.HadwigerNelson.Plane.ValidMap.FlankUA
+import Proofs.HadwigerNelson.Plane.ValidMap.HornShadow
 
 /-!
 # The terminal modification `M*` and the stuck chains' ends (FS112-N2-TERM, -C-ENDS, -C-DOUBLE, FS114-CV-HD)
