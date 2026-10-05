@@ -443,18 +443,18 @@ theorem cv_class' {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStu
         (∀ᶠ r in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf (E + e (α + π / 2)) r h).encard) ∧
         (F.IsStuck (E + e (α + π / 2)) ∨ 4 ≤ (F.coloursAt (E + e (α + π / 2))).ncard) ∧
         (F.IsStuck (E - e (α + π / 2)) ∨ 4 ≤ (F.coloursAt (E - e (α + π / 2))).ncard)) := by
-  obtain ⟨hF, hP, hT, -⟩ := hM
+  obtain ⟨hF, hP, hT, -⟩ := id hM
   have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
   have hdom : ∀ x, x ∈ F.dom := fun x => by rw [hP]; exact mem_univ x
   obtain ⟨h1, h2⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH
   obtain ⟨h3', h4⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH'
-  obtain ⟨hGH, hHυ, hυλ⟩ := cv_hd hM hst h3 hc2 hH hH' hg hh
+  obtain ⟨hGH, hHυ, hυl⟩ := cv_hd hM hst h3 hc2 hH hH' hg hh
   by_cases hGN : F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2))
   · -- the bowtie: CV-HD's four conditions, C-DOUBLE's (Q) arcs, the chain clause
     left
     have hHS := hGH.mp hGN
     obtain ⟨hk2, hk3⟩ := hHυ.mp hHS
-    obtain ⟨hk1, hk4⟩ := hυλ.mp ⟨hk2, hk3⟩
+    obtain ⟨hk1, hk4⟩ := hυl.mp ⟨hk2, hk3⟩
     subst hk1 hk2 hk3 hk4
     obtain ⟨-, -, hN4, hS4, ⟨θ₂, -, hQN⟩, -, ⟨θ₁, -, hQS⟩, -⟩ := c_double hM hst h3 hc2 hH hH' hg hh
     refine ⟨rfl, rfl, rfl, rfl, hN4, hS4, ?_, ?_, n3_end_chain hF hP hT hst h3 hc2 hH hg hGN⟩
