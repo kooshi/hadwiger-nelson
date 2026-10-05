@@ -2759,3 +2759,40 @@ reason by the close.*
      `l3_base`'s docstring fixed at its first build. Alternative weighed: IMM2 (MERGE), next in the queue. Why: wave 5 lands only when all three lanes finish,
      this half's seven leaves (about two to three sessions) are on that path, and MERGE has no consumer in wave 5. Confidence: high. In flight after I5j's
      launch: 1 (IP5) + 1 (I5i) + 1 (I5j) = 3.
+332. **FS131-IP5 handed back** (Stage 19 SAVED, harness ≈ 472k by the task notice; record `fs131-w5p`'s `plans/FS131-planar-implementation.md`, Stages 16–19;
+     report `data/fs131/reports/FS131-IP5.md`; commits `4572a64a`, `991fcd9e`, `4ea92caf`, `d3b332a9`, `b6f9e761`, pushed). **Results, [kernel] on the standard
+     three, statements unchanged**: `filledGraph_locallyFinite` (F-LOC), `filledGraph_connected` (F-CONN), `filledGraph_infinite` (F-INF) over
+     `exists_outer_fill` (every tile of a valid plane map lies in an outer tile's fill — by a maximal-hull argument over nested holes); `filledGraph_oneInf`
+     (F-ONE); `filledGraph_finSep` (F-SEP, ruling 309's field); `not_isHoleOf_chain`, `isHoleOf_cluster` (the two `IsHoleOf` adversaries); `not_isHoleOf_union`
+     (**Janiszewski's theorem for holes**: two disjoint, nonempty, bounded, closed continua, neither with a hole, have no hole together — from unicoherence);
+     `filledGraph_offTwo_connected` (outer tiles with disjoint filled closures do not separate `M̂`). **F-RING proved over one new child, `filledGraph_ringList`,
+     left `sorry`** — by statement exactly F-RING's first conjunct (`∃ r, Thomassen.IsRing F.filledGraph x r`): repeating each ring entry four times makes every
+     neighbour twice apart (`isRing_flatMap_replicate_four`), and `filledGraph_offTwo_connected` settles every non-neighbour. The three `BaseWalk` docstrings
+     of item 324 fixed. **Receipt** (Keryx): the five commits exist and `origin/fs131-w5p` is `b6f9e761`; the stage-19 build log
+     (`build/gate/build/20261005T050146Z-1518710.log`) ends "Build completed successfully (5405 jobs)", 0 warnings other than `sorry`; `sorry` by grep: `MapGraph` 1
+     (`filledGraph_ringList`), `MapTopology` 0, `PlaneTopology` 0, `Thomassen` 0, `BaseWalk` 12 and `BaseDense` 3 (wave 5's lane, proved or worked on its
+     branches); the eleven `MapGraph` statements at `aa753bb1` and `HEAD` compared by script — all identical; `data/fs131/ip/axioms-ip5-stage19.txt` parsed by
+     script: 28 records, 24 standard, the 4 controls (`filledGraph_ringList`, `filledGraph_rings`, `filledGraph_planarLike`, `cvb_thom_reduced`) on `sorryAx`;
+     `exists_outer_fill` standard in the stage-17 receipt; `filledGraph_ringList`'s statement read against its docstring. **Findings**: (1) **the ring field
+     is weaker than its docstring reads** — a ring repeated in place makes every neighbour twice apart, so `PlanarLike.ring`'s "connected unless twice apart"
+     constrains non-neighbours only; T-GRAPH is proved from `PlanarLike` as stated, so Thomassen's reduction needs only a ring (separation at repeated
+     appearances) and non-separation by non-adjacent pairs (harmless; no statement defect). (2) F-ONE also holds for `x = y`; F-SEP needs no rings.
+     **Correction to a sketch** (no filed text): IP4's record § 15.3 route for F-INF/F-CONN ("`exists_outermost` gives, at any point, a tile there enclosed by
+     no tile") does not reach the fill — a point can lie in a bounded complementary component that is not a hole (I5b's chain); record § 17.1 has the route
+     used. **Done-means 4**: F-RING measured — the reduction took about 10 minutes and 90 lines; what is left is exactly the boundary walk (Thomassen's facial
+     walk with no plane graph: the outer frontier of `x̂` and the frontiers of its non-hole bounded complementary components, joined at pinch points), **H**, its
+     own job (planner and implementer), as KP foresaw; nothing else is left on `fs131-w5p`. **Held**: (a) whether RING-LIST gets its own job, and whether
+     `filledGraph_ringList` with `filledGraph_rings`, `filledGraph_planarLike`, `cvb_thom_reduced`, `cvb_thom` moves to a module of its own; (b) whether
+     `PlanarLike`'s docstring in `Thomassen.lean` should say its ring field constrains non-neighbours only. Credit: IP5, for Janiszewski's theorem for holes
+     and for reducing F-RING to the walk alone.
+333. **Rulings on IP5's held items, and its slot.** (a) **RING-LIST gets its own planner first, FS131-RL1** (de Bruijn's planner, on `fs131-w5p`), then an
+     implementer: the boundary walk laid out as children with `sorry`, each read back, a plan per child, re-priced. Alternative weighed: an implementer
+     directly, planning its own children as IP1–IP5 did. Why: two minds (KP, IP5) price it H and as the planar chain's hardest piece — a facial walk with no
+     plane graph — and a plan on disk lets the implementer spend its whole budget on proofs; the cap admits one job here either way. Confidence: medium (it
+     changes if the planner finds the walk short: then it may prove what it plans, within its budget). (b) **No module move**: the job works in `MapGraph`,
+     which nobody else needs now, with any pure-topology children upstream (`MapTopology`, `CurveGraph`) as KP's plan § 5.2 allows. Alternative weighed: a
+     new module downstream of `MapGraph`'s definitions. Why: the move buys parallelism only, and nothing else runs on this branch; it would add a statement
+     relocation to the merge for nothing. Confidence: high. (c) **`PlanarLike`'s docstring**: RL1 adds the note (docstring only, no statement). Why: cheap, true,
+     and the branch is its own. Confidence: high. (d) **IP5's slot → RL1.** Alternative weighed: IMM2 (MERGE). Why: wave 5 needs F-RING (via
+     `filledGraph_planarLike` and `cvb_thom_reduced`); MERGE has no consumer in wave 5. In flight after RL1's launch: 1 (I5i) + 1 (I5j) + 1 (RL1) = 3.
+     **The merge of `fs131-w5p` into `fs131-w5`** waits until no agent is working in `fs131-w5`'s tree (I5j is), and then takes RL1's branch state.
