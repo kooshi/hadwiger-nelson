@@ -85,6 +85,13 @@ Each [kernel], reading exactly `[propext, Classical.choice, Quot.sound]` except 
 (clause `b < X.n`, ruling 344 (a)). Definitions: `BranchGerms.gapGerm`, `gapSec`, `branch`, `gapSet`, `Phantom`, `mergeCol`, `rimArc`,
 `mergeArcs` (spec examples beside them).
 
+### FS131-IMM3 (stage 8; build `build/gate/build/20261005T073602Z-2376652.log`, axioms `data/fs131/imm/axioms-stage8.txt`, all in `MergeMove`)
+
+Each [kernel], reading exactly `[propext, Classical.choice, Quot.sound]`: `ArcMap.Near.mergeCol_mem_coloursAt`, `mem_mergeArcs_inner`,
+`gap_sides_idx`, `mem_chain`, `sector_subset_chain`, `isPreconnected_chain`, `mem_merge_interiorPts_iff`, `mem_interiorPts_of_merge_rim`,
+**`merge_agreesOff`**, **`merge_ringArcsWithin`**, **`merge_condition5`**, **`merge_coloursAt_self`**, **`merge_valid`**, **`merge_hasSectors`**,
+**`merge_coloursAt_rim`**, **`merge_ncard_coloursAt_rim`** (16 theorems). Definition: `ArcMap.Near.chain` (spec examples beside it).
+
 
 ## Stage 1 — SAVED: the readback, the as-given build
 
@@ -470,3 +477,56 @@ With `ρ' := ` a radius with `X.Small ρ'`, `ρ < ρ'`, `ρ < ρc` (exists_gap),
 - **The rim** (`x ∈ sphere v ρ`): `F'.coloursAt x ⊆ F.coloursAt x` as `move_coloursAt_sphere` (the colouring is `F`'s near `x` except on cut phantom
   branches, whose colour is that of both sectors beside them), so `≤ 2`; and `¬ F'.HasRepeatedColour x` by the sides lemma (§ 5.2).
 - **`D_c(v′)` unchanged** (§ 5.2's route).
+
+## Stage 8 — SAVED (FS131-IMM3): 4.4's clauses but two — agreement, no unit arc, Condition 5, validity, `v`'s colours, `HasSectors v c n`, the rim's colours
+
+Every clause lemma is stated for `F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc` with
+the surgery's proof arguments implicit (as `Surgery`'s section does), so the assembly instantiates them with `mergeArcs_nondegenerate`,
+`mergeArcs_finite`, `merge_hlc`.
+
+**Proved** (sorry-free, listed under "Theorems this phase proved"):
+- `mem_merge_interiorPts_iff` (inside `B(v, ρ)` an interior point of the new map is a point off `⋃ mergeArcs`) and `mem_interiorPts_of_merge_rim`
+  (a rim point interior to the new map is interior to `F`, by (iv)).
+- **`merge_agreesOff`**, **`merge_ringArcsWithin`**, **`merge_condition5`**: `surgery_agreesOff`, `surgery_ringArcsWithin`, `surgery_condition5` over
+  stage 7's arc lemmas.
+- **`merge_coloursAt_self`** (`v` gains no colour): every colour the new map gives in the punctured `B(v, ρ)` is a chart sector's colour or `c`
+  (`mergeCol_mem_coloursAt`), each carried at `v`.
+- **`merge_valid`**: `Valid.of_agreesOff` on `B̄(v, ρ)` with the gap's clearness as a hypothesis in `exists_gap`'s form (`ρ ≤ ρc`); a sector point is
+  clear for `c` (gap, `exists_dir_of_mem_gapSec`) or for its sector's colour (`isClear_col`); a branch point for `c` (gap germ, `branchPt_idx`,
+  `liftDir_gap_germ`) or for the colour after its germ (`isClear_of_mem_closure` over `cutSet_subset_closure`); a rim point is `F`'s; pairs in
+  `B̄(v, ρ)` are closer than `1`.
+- **`merge_hasSectors`**: at every `r < ρ/2`, `encard_sectorsOf_of_partition` over the pieces `P i` (`i : Fin X.n`) = the chain from `idx s a` to
+  `idx s b` at `i = idx s a`, `∅` at the gap germs' indices (the gap sectors and `idx s b`), `sector r i` elsewhere; the chain (`chain`: the first
+  `c`-sector, then each gap germ's branch and the sector after it) is open (`exists_ball_subset_of_branchPt`, `gap_sides_idx`) and preconnected
+  (`isPreconnected_chain`, by induction along the orbit, as `cut_hasSectors`' `hMpre`), all of colour `c`; the pieces of colour `c` are
+  `{i | X.col i = c} \ {idx s b}`, so the count is `(n + 1) − 1` (`Set.encard_sdiff_singleton_add_one`).
+- **`merge_coloursAt_rim`**: at a rim point `x`, `F'.coloursAt x ⊆ F.coloursAt x` — off `B̄(v, ρ/2)` the new map's colour class is in the closure of
+  `F`'s (a cut phantom branch point has the colour of the sector after its germ, `cutSet_subset_closure`); **`merge_ncard_coloursAt_rim`**: `≤ 3`
+  (`≤ 2` by `IsSectorChart.ncard_coloursAt_le_two`).
+
+**Re-priced**: stage 8 came to 16 theorems in about 390 lines, each compiled within three attempts; no heartbeat death.
+
+### 8.1 The build, the axioms, the checks
+
+Under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK**, 446 of 446 batches, 3 modules rebuilt,
+8 min 30 s; "Build completed successfully (5363 jobs)"; warnings only `declaration uses 'sorry'` (`Moves` `exists_rayMerge_aux`, `exists_merge_aux`;
+`Contact`, `BaseSteps`, `UnitArc` as before), none in `MergeMove`. Log `build/gate/build/20261005T073602Z-2376652.log`; terminal output
+`data/fs131/imm/build-stage8.log`. **Axioms** against that build's oleans (`data/fs131/imm/axioms-stage8.txt`): 119 records — 116 on exactly the
+standard three, 2 axiom-free, `exists_merge_aux` on `sorryAx` besides (the control). `tools/fs131_imm_decls.py --check`: FAIL naming the 16 new
+theorems (32 lines) before their receipt lines were added, PASS (118 theorems) after; `tools/fs131_im_statements.py --check` PASS;
+`tools/fs131_im_split.py --check` PASS. No `axiom`, no `native_decide`, no backlog statement changed.
+
+### 8.2 What is left: two clauses and the assembly
+
+1. **`¬ F'.HasRepeatedColour x` at rim points** — the sides lemma (§ 5.2): at a rim point on germ `j`, for small `r`, `sector (prev j) ∩ B(x, r)`
+   and `sector j ∩ B(x, r)` are preconnected (each is one side of the germ's circle or line inside the ball: convex, or star-convex about
+   `x + (r/2R)(x − o)`), so `encard_sectorsOf_of_partition` gives one piece per colour: (R1) `x` on no germ — one sector; (R2) a non-phantom germ —
+   the new map is `F` near `x` (its annulus piece and the trimmed arcs), two pieces of two colours; (R3) a phantom germ — one piece (the two sides
+   joined through the cut branch inside `B(v, ρ)`, `isPreconnected` as in `isPreconnected_chain`), one colour.
+2. **`D_c(v′)` unchanged** for `v′ ∉ B̄(v, ρ)` (§ 5.2's route; note that a merged `c`-tile misses `ω(v′)` because the new map is valid
+   (`merge_valid`), which is what keeps `w = v`'s type when `dist v v′ = 1`).
+3. **The assembly** of `exists_merge_aux`: `X := (exists_near hv.mem).some`, `hcnt := X.encard_col_eq …` (`Near.encard_col_eq`), `exists_gap` for
+   `s a b ρc hgc`; `ρ'` with `X.Small ρ'` (`eventually_small`) and `ρ := min (ρ' / 2) ρc / 2`-style so that `X.Small ρ`, `ρ < ρ'`, `ρ ≤ ρc`; then
+   `F' := F.surgery v ρ (mergeArcs) (mergeCol) X.mem_dom h.1 (mergeArcs_nondegenerate h hbn) (mergeArcs_finite ρ) (merge_hlc h' hρρ' h hab hbn hca hcb)`
+   and the clauses `merge_valid`, `merge_agreesOff`, `merge_ringArcsWithin`, `merge_condition5`, `merge_hasSectors`, `merge_coloursAt_self`,
+   `merge_ncard_coloursAt_rim` with items 1 and 2.

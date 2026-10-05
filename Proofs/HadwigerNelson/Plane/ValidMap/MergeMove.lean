@@ -1939,3 +1939,465 @@ end Near
 end ArcMap
 
 end HadwigerNelson.Plane
+
+/-! ## FS131-IMM3: MERGE's clauses — agreement, no unit arc, Condition 5, validity, `v`'s colours, the sector count, the rim's colours
+(record § 4.4) -/
+
+namespace HadwigerNelson.Plane
+
+open Complex Real Set Filter Topology Metric
+
+namespace ArcMap
+
+namespace Near
+
+variable {k : ℕ} {F : ArcMap k} {v : ℂ} {X : F.Near v} {s : Fin X.n} {a b : ℕ}
+
+/-- **Every colour MERGE gives near `v` is carried at `v`** (`c` is a `c`-sector's colour). -/
+theorem mergeCol_mem_coloursAt {ρ : ℝ} (h : X.Small ρ) {c : Fin k} (hn : 0 < X.n) (hca : X.col (BranchGerms.idx s a) = c)
+    {z : ℂ} (hz : z ∈ ball v ρ) (hzv : z ≠ v) : X.G.mergeCol v X.col F.col s a b c ρ z ∈ F.coloursAt v := by
+  have hcol : ∀ i, X.col i ∈ F.coloursAt v := fun i =>
+    closure_mono (X.hcol₀ i) (X.hC.mem_closure_sector X.hs₀ i)
+  have hc : c ∈ F.coloursAt v := hca ▸ hcol _
+  rcases ball_cases h hn hz hzv with ⟨i, hi⟩ | ⟨j, t, ht, rfl⟩
+  · rw [mergeCol_of_mem_sector h hi]; split_ifs
+    · exact hc
+    · exact hcol i
+  · rw [mergeCol_branchPt h j ht]; split_ifs
+    · exact hc
+    · exact hcol j
+
+/-- Inside `B(v, ρ/2)` a point of MERGE's new arcs is `v` or a branch point of a germ off the gap. -/
+theorem mem_mergeArcs_inner {ρ : ℝ} (h : X.Small ρ) {z : ℂ} (hz : z ∈ ball v (ρ / 2))
+    (hzA : z ∈ ⋃ A ∈ X.G.mergeArcs v X.col s a b ρ, A.carrier) :
+    z = v ∨ ∃ j ∉ BranchGerms.gapGerm s a b, ∃ t ∈ Ioo 0 (ρ / 2), z = branchPt v (X.G.β j) (X.G.κ j) t := by
+  obtain ⟨A, hA, hzA⟩ := mem_iUnion₂.mp hzA
+  rw [mem_ball] at hz
+  rcases mem_mergeArcs.mp hA with ⟨j, hj, rfl⟩ | ⟨j, -, hA'⟩ | ⟨-, rfl⟩
+  · rw [carrier_germ h.half] at hzA
+    obtain ⟨t, ht, rfl⟩ := hzA
+    rcases eq_or_lt_of_le ht.1 with h0 | h0
+    · left; rw [← h0]; simp [branchPt]
+    · right; rw [dist_branchPt j ht.1] at hz; exact ⟨j, hj, t, ⟨h0, hz⟩, rfl⟩
+  · obtain ⟨t, ht, rfl⟩ := outer_subset h j A hA' hzA
+    rw [dist_branchPt j (by linarith [ht.1, h.1])] at hz; linarith [ht.1]
+  · obtain ⟨θ, -, rfl⟩ := hzA
+    rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real,
+      Real.norm_of_nonneg (by linarith [h.1])] at hz
+    linarith
+
+/-- A gap sector or a gap germ's index: the two sectors beside a gap germ are the gap's first `c`-sector or gap sectors, and the
+gap's last `c`-sector or gap sectors. -/
+theorem gap_sides_idx {p j : Fin X.n} (hpj : BranchGerms.next p = j) {m : ℕ} (h1 : a < m) (h2 : m ≤ b)
+    (hj : BranchGerms.idx s m = j) : ∃ m', m = m' + 1 ∧ a ≤ m' ∧ p = BranchGerms.idx s m' := by
+  obtain ⟨m', rfl⟩ : ∃ m', m = m' + 1 := ⟨m - 1, by omega⟩
+  exact ⟨m', rfl, by omega, BranchGerms.next_injective (by rw [hpj, BranchGerms.next_idx, hj])⟩
+
+/-- **The merged chain** out to `r`: the first `c`-sector, then each gap germ's branch and the sector after it, up to `idx s m`. -/
+def chain (X : F.Near v) (s : Fin X.n) (a : ℕ) (r : ℝ) (m : ℕ) : Set ℂ :=
+  X.G.sector v r (BranchGerms.idx s a) ∪
+    ⋃ m' ∈ Ioc a m, (X.G.branch v r (BranchGerms.idx s m') ∪ X.G.sector v r (BranchGerms.idx s m'))
+
+theorem mem_chain {r : ℝ} {m : ℕ} {z : ℂ} : z ∈ chain X s a r m ↔ z ∈ X.G.sector v r (BranchGerms.idx s a) ∨
+    ∃ m', a < m' ∧ m' ≤ m ∧ (z ∈ X.G.branch v r (BranchGerms.idx s m') ∨ z ∈ X.G.sector v r (BranchGerms.idx s m')) := by
+  unfold chain; simp only [mem_union, mem_iUnion₂, mem_Ioc, exists_prop]
+  constructor
+  · rintro (h | ⟨m', ⟨h1, h2⟩, h3⟩)
+    · exact Or.inl h
+    · exact Or.inr ⟨m', h1, h2, h3⟩
+  · rintro (h | ⟨m', h1, h2, h3⟩)
+    · exact Or.inl h
+    · exact Or.inr ⟨m', ⟨h1, h2⟩, h3⟩
+
+-- spec examples for `chain`: the first `c`-sector, and the branch of the germ after it once `m > a`
+example (r : ℝ) (m : ℕ) : X.G.sector v r (BranchGerms.idx s a) ⊆ chain X s a r m := fun _ hz => Or.inl hz
+example (r : ℝ) : X.G.branch v r (BranchGerms.idx s (a + 1)) ⊆ chain X s a r (a + 1) := fun _ hz =>
+  mem_chain.mpr (Or.inr ⟨a + 1, by omega, le_rfl, Or.inl hz⟩)
+
+theorem sector_subset_chain {r : ℝ} {m m' : ℕ} (h1 : a ≤ m') (h2 : m' ≤ m) :
+    X.G.sector v r (BranchGerms.idx s m') ⊆ chain X s a r m := fun z hz => by
+  rcases eq_or_lt_of_le h1 with h | h
+  · subst h; exact mem_chain.mpr (Or.inl hz)
+  · exact mem_chain.mpr (Or.inr ⟨m', h, h2, Or.inr hz⟩)
+
+/-- The chain is preconnected. -/
+theorem isPreconnected_chain {r : ℝ} (hr : r ∈ Ioc 0 X.s₀) {m : ℕ} (hm : a ≤ m) : IsPreconnected (chain X s a r m) := by
+  have hr₀ : r ∈ Ioc 0 X.r₀ := ⟨hr.1, hr.2.trans X.hs₀.2⟩
+  induction m, hm using Nat.le_induction with
+  | base =>
+    have : chain X s a r a = X.G.sector v r (BranchGerms.idx s a) := by
+      ext z; rw [mem_chain]; constructor
+      · rintro (h | ⟨m', h1, h2, -⟩)
+        · exact h
+        · omega
+      · exact Or.inl
+    rw [this]; exact X.hC.isPreconnected r hr₀ _
+  | succ m hm ih =>
+    have heq : chain X s a r (m + 1) = (chain X s a r m ∪ X.G.branch v r (BranchGerms.idx s (m + 1))) ∪
+        (X.G.branch v r (BranchGerms.idx s (m + 1)) ∪ X.G.sector v r (BranchGerms.idx s (m + 1))) := by
+      ext z; simp only [mem_union, mem_chain]
+      constructor
+      · rintro (h | ⟨m', h1, h2, h3⟩)
+        · exact Or.inl (Or.inl (Or.inl h))
+        · rcases eq_or_lt_of_le h2 with h2 | h2
+          · subst h2; exact Or.inr h3
+          · exact Or.inl (Or.inl (Or.inr ⟨m', h1, by omega, h3⟩))
+      · rintro (((h | ⟨m', h1, h2, h3⟩) | h) | (h | h))
+        · exact Or.inl h
+        · exact Or.inr ⟨m', h1, by omega, h3⟩
+        · exact Or.inr ⟨m + 1, by omega, le_rfl, Or.inl h⟩
+        · exact Or.inr ⟨m + 1, by omega, le_rfl, Or.inl h⟩
+        · exact Or.inr ⟨m + 1, by omega, le_rfl, Or.inr h⟩
+    rw [heq]
+    have hbr : X.G.branch v r (BranchGerms.idx s (m + 1)) ⊆ closure (X.G.sector v r (BranchGerms.idx s m)) := by
+      rintro z ⟨t, ht, rfl⟩
+      have := IsSectorChart.branchPt_mem_closure_sector_before (v := v) X.hord hr.2 (BranchGerms.idx s m) ht
+      rwa [BranchGerms.next_idx] at this
+    have h1 : IsPreconnected (chain X s a r m ∪ X.G.branch v r (BranchGerms.idx s (m + 1))) :=
+      ih.subset_closure subset_union_left (union_subset subset_closure
+        (hbr.trans (closure_mono (sector_subset_chain hm le_rfl))))
+    have h2 : IsPreconnected (X.G.branch v r (BranchGerms.idx s (m + 1)) ∪ X.G.sector v r (BranchGerms.idx s (m + 1))) := by
+      refine (X.hC.isPreconnected r hr₀ _).subset_closure subset_union_right (union_subset ?_ subset_closure)
+      rintro z ⟨t, ht, rfl⟩
+      exact IsSectorChart.branchPt_mem_closure_sector_after X.hord hr.2 _ ht
+    refine h1.union' ⟨branchPt v (X.G.β (BranchGerms.idx s (m + 1))) (X.G.κ (BranchGerms.idx s (m + 1))) (r / 2),
+      Or.inr ⟨r / 2, ⟨by linarith [hr.1], by linarith [hr.1]⟩, rfl⟩, Or.inl ⟨r / 2, ⟨by linarith [hr.1], by linarith [hr.1]⟩, rfl⟩⟩ h2
+
+section Surgery
+
+variable {c : Fin k} {ρ : ℝ} {hv : v ∈ F.dom} {hρ : 0 < ρ} {hA : ∀ A ∈ X.G.mergeArcs v X.col s a b ρ, A.Nondegenerate}
+  {hAf : (X.G.mergeArcs v X.col s a b ρ).Finite}
+  {hlc : ∀ x ∈ F.dom, x ∉ ⋃ A ∈ F.trimArcs v ρ ∪ X.G.mergeArcs v X.col s a b ρ, A.carrier →
+    ∀ᶠ y in 𝓝 x, X.G.mergeCol v X.col F.col s a b c ρ y = X.G.mergeCol v X.col F.col s a b c ρ x}
+
+/-- Inside `B(v, ρ)`, MERGE's interior points are the points off its new arcs. -/
+theorem mem_merge_interiorPts_iff (h : X.Small ρ) {z : ℂ} (hz : z ∈ ball v ρ) :
+    z ∈ (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).interiorPts ↔
+      z ∉ ⋃ A ∈ X.G.mergeArcs v X.col s a b ρ, A.carrier := by
+  have hzd : z ∈ F.dom := X.hG.subdom (ball_subset_ball h.2.2.1.le hz)
+  show z ∈ F.dom \ _ ↔ _
+  rw [Set.mem_sdiff, surgery_mem_arcs_iff_of_mem X.hG h.2.2.1 hz]
+  exact ⟨fun h1 => h1.2, fun h1 => ⟨hzd, h1⟩⟩
+
+/-- On the rim, MERGE's interior points are `F`'s (a germ's rim point lies on the trimmed arcs). -/
+theorem mem_interiorPts_of_merge_rim {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') {z : ℂ} (hz : dist z v = ρ)
+    (hzI : z ∈ (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).interiorPts) :
+    z ∈ F.interiorPts := by
+  refine ⟨hzI.1, fun hzF => ?_⟩
+  have hzv : z ≠ v := fun hzv => by rw [hzv, dist_self] at hz; linarith
+  have hzr : z ∈ ball v X.r₀ := by rw [mem_ball, hz]; exact hρρ'.trans h'.lt_r₀
+  obtain ⟨j, hj⟩ := X.hC.exists_branchPt_eq hzv hzr (fun hI => hI.2 hzF)
+  rw [← dist_eq_norm, hz] at hj
+  obtain ⟨B, hB, hzB⟩ := mem_iUnion₂.mp (hj ▸ branchPt_rim_mem_trimArcs h' hρ hρρ' j)
+  exact hzI.2 (mem_iUnion₂.mpr ⟨B, Or.inl hB, hzB⟩)
+
+/-- **MERGE agrees with `F` off `B̄(v, ρ)`.** -/
+theorem merge_agreesOff (h : X.Small ρ) :
+    (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).AgreesOff F
+      (closedBall v ρ) :=
+  surgery_agreesOff (mergeArcs_subset_closedBall h)
+    fun _ hz => mergeCol_of_not_mem h fun hb => hz (ball_subset_closedBall hb)
+
+/-- **MERGE creates no unit arc.** -/
+theorem merge_ringArcsWithin (h : X.Small ρ) :
+    (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).RingArcsWithin F :=
+  surgery_ringArcsWithin (mergeArcs_unit h)
+
+/-- **MERGE keeps Condition 5.** -/
+theorem merge_condition5 (h : X.Small ρ) (hbn : b < X.n) :
+    F.Condition5 →
+      (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).Condition5 :=
+  surgery_condition5 (mergeArcs_condition5 h hbn)
+
+/-- **`v` gains no colour** under MERGE. -/
+theorem merge_coloursAt_self (h : X.Small ρ) (hab : a < b) (hbn : b < X.n) (hca : X.col (BranchGerms.idx s a) = c) :
+    (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).coloursAt v ⊆
+      F.coloursAt v := by
+  intro j hj
+  have hj : v ∈ closure ((F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf
+    hlc).region j) := hj
+  rw [mem_closure_iff_nhds] at hj
+  obtain ⟨z, hzb, hzI, hzj⟩ := hj (ball v ρ) (isOpen_ball.mem_nhds (mem_ball_self h.1))
+  have hzj' : X.G.mergeCol v X.col F.col s a b c ρ z = j := hzj
+  have hzv : z ≠ v := by
+    rintro rfl; exact (mem_merge_interiorPts_iff h hzb).mp hzI (v_mem_mergeArcs h hab hbn)
+  rw [← hzj']; exact mergeCol_mem_coloursAt h (by omega) hca hzb hzv
+
+/-- **MERGE is valid** (record § 4.4): an interior point of the new map in `B̄(v, ρ)` is clear for its colour — the gap's points for
+`c` by the gap's clearness, the others for the colour of their sector or of the sector after their germ — and points of `B̄(v, ρ)` are
+closer than `1`. -/
+theorem merge_valid (hF : F.Valid) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) (hab : a < b) (hbn : b < X.n)
+    {ρc : ℝ} (hρc : ρ ≤ ρc) (hgc : ∀ t ∈ Ioo 0 ρc, ∀ φ, X.G.liftDir s (a + 1) t ≤ φ → φ ≤ X.G.liftDir s b t →
+      F.IsClear c (v + (t : ℂ) * e φ)) :
+    (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).Valid := by
+  have hregion : ∀ i, ∀ y ∈ F.region i, F.IsClear i y := fun i y hy => by
+    have h1 := hy.2; simp only [mem_preimage, mem_singleton_iff] at h1; rw [← h1]; exact isClear_col hF hy.1
+  refine Valid.of_agreesOff hF (merge_agreesOff h) ?_ ?_
+  · rintro z ⟨hzc, hzI⟩
+    show F.IsClear (X.G.mergeCol v X.col F.col s a b c ρ z) z
+    rcases (mem_closedBall.mp hzc).lt_or_eq with hlt | heq
+    · have hzv : z ≠ v := by
+        rintro rfl; exact (mem_merge_interiorPts_iff h hlt).mp hzI (v_mem_mergeArcs h hab hbn)
+      rcases ball_cases h (by omega) hlt hzv with ⟨i, hi⟩ | ⟨j, t, ht, rfl⟩
+      · rw [mergeCol_of_mem_sector h hi]; split_ifs with hg
+        · obtain ⟨φ, hφ, hzφ⟩ := exists_dir_of_mem_gapSec h hg.1 hi
+          rw [hzφ]; exact hgc _ ⟨(norm_of_mem_sector hi).1, by linarith [hg.2, h.1]⟩ φ hφ.1 hφ.2
+        · exact hregion _ _ (X.hcol i ρ h.mem_Ioc hi)
+      · rw [mergeCol_branchPt h j ht]; split_ifs with hg
+        · obtain ⟨m, h1, h2, rfl⟩ := hg.1
+          have hφ := liftDir_gap_germ (s := s) (⟨ht.1, ht.2.trans h.2.1⟩ : t ∈ Ioo 0 X.s₀) h1 h2
+          rw [X.G.branchPt_idx]
+          exact hgc t ⟨ht.1, by linarith [hg.2, h.1]⟩ _ hφ.1 hφ.2
+        · exact isClear_of_mem_closure (hregion _) (cutSet_subset_closure h ⟨t, ht, rfl⟩)
+    · have hzF := mem_interiorPts_of_merge_rim h' hρρ' heq hzI
+      rw [mergeCol_of_not_mem h (by rw [mem_ball, heq]; exact lt_irrefl ρ)]
+      exact isClear_col hF hzF
+  · rintro z ⟨hz, -⟩ y ⟨hy, -⟩ hzy
+    exfalso
+    have := dist_triangle_right z y v
+    rw [mem_closedBall] at hz hy
+    linarith [h.2.2.2]
+
+/-- **MERGE's sector count at `v`**: `c` loses one sector (record § 4.4) — inside `B(v, ρ/2)` the interior points are the sectors off
+the gap and the merged chain from `idx s a` to `idx s b`, all of colour `c`. -/
+theorem merge_hasSectors (h : X.Small ρ) (hab : a < b) (hbn : b < X.n) (hca : X.col (BranchGerms.idx s a) = c)
+    (hcb : X.col (BranchGerms.idx s b) = c) (hgap : ∀ m, a < m → m < b → X.col (BranchGerms.idx s m) ≠ c) {n : ℕ}
+    (hcnt : {i | X.col i = c}.encard = n + 1) :
+    (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).HasSectors v c n := by
+  classical
+  have hn : 0 < X.n := by omega
+  filter_upwards [Ioo_mem_nhdsGT h.half.1] with r hr
+  have hr0 := hr.1
+  have hrs : r ∈ Ioc 0 X.s₀ := ⟨hr.1, by linarith [hr.2, h.2.1, h.1]⟩
+  have hr₀ : r ∈ Ioc 0 X.r₀ := ⟨hr.1, hrs.2.trans X.hs₀.2⟩
+  have hrρ : r ≤ ρ := by linarith [hr.2, h.1]
+  have hsr : X.Small r := h.mono hr.1 hrρ
+  have hagg : BranchGerms.idx s a ∉ BranchGerms.gapGerm s a b := by
+    rw [BranchGerms.idx_mem_gapGerm_iff (by omega) le_rfl (by omega)]; omega
+  set F' := F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc with hF'
+  have hball : ∀ {z : ℂ}, ‖z - v‖ < r → z ∈ ball v ρ := fun hz => by rw [mem_ball, dist_eq_norm]; linarith
+  have hball2 : ∀ {z : ℂ}, ‖z - v‖ < r → z ∈ ball v (ρ / 2) := fun hz => by rw [mem_ball, dist_eq_norm]; linarith [hr.2]
+  have hsecI : ∀ i, ∀ z ∈ X.G.sector v r i, z ∈ F'.interiorPts ∩ ball v r := by
+    intro i z hz
+    have hzr := (norm_of_mem_sector hz).2
+    refine ⟨(mem_merge_interiorPts_iff h (hball hzr)).mpr fun hzA => ?_, by rw [mem_ball, dist_eq_norm]; exact hzr⟩
+    rcases mem_mergeArcs_inner h (hball2 hzr) hzA with rfl | ⟨j, -, t, ht, rfl⟩
+    · have := (norm_of_mem_sector hz).1; rw [sub_self, norm_zero] at this; exact lt_irrefl 0 this
+    · exact branchPt_not_mem_sector h j ⟨ht.1, by linarith [ht.2, h.1]⟩ i (sector_mono hrρ i hz)
+  have hbrI : ∀ m', a < m' → m' ≤ b → ∀ z ∈ X.G.branch v r (BranchGerms.idx s m'), z ∈ F'.interiorPts ∩ ball v r := by
+    rintro m' h1 h2 z ⟨t, ht, rfl⟩
+    have hzr : ‖branchPt v (X.G.β (BranchGerms.idx s m')) (X.G.κ (BranchGerms.idx s m')) t - v‖ < r := by
+      rw [norm_branchPt_sub v _ _ ht.1.le]; exact ht.2
+    refine ⟨(mem_merge_interiorPts_iff h (hball hzr)).mpr fun hzA => ?_, by rw [mem_ball, dist_eq_norm]; exact hzr⟩
+    rcases mem_mergeArcs_inner h (hball2 hzr) hzA with h0 | ⟨j, hj, t', ht', he⟩
+    · have := congrArg (fun z => ‖z - v‖) h0
+      simp only [norm_branchPt_sub v _ _ ht.1.le, sub_self, norm_zero] at this; linarith [ht.1]
+    · have := eq_of_mem_branch (r := r) h ⟨ht'.1, by linarith [ht'.2, h.1]⟩ ⟨t, ht, he⟩
+      exact hj (this ▸ ⟨m', h1, h2, rfl⟩)
+  have hchainI : chain X s a r b ⊆ F'.interiorPts ∩ ball v r := by
+    intro z hz
+    rcases mem_chain.mp hz with hz | ⟨m', h1, h2, hz | hz⟩
+    · exact hsecI _ z hz
+    · exact hbrI m' h1 h2 z hz
+    · exact hsecI _ z hz
+  set P : Fin X.n → Set ℂ := fun i => if i = BranchGerms.idx s a then chain X s a r b else
+    if i ∈ BranchGerms.gapGerm s a b then ∅ else X.G.sector v r i with hP
+  set colA : Fin X.n → Fin k := fun i => if i = BranchGerms.idx s a then c else X.col i with hcolA
+  have hPa : P (BranchGerms.idx s a) = chain X s a r b := by simp [hP]
+  have hPg : ∀ i, i ∈ BranchGerms.gapGerm s a b → P i = ∅ := fun i hi => by
+    have : i ≠ BranchGerms.idx s a := fun he => hagg (he ▸ hi)
+    simp [hP, this, hi]
+  have hPo : ∀ i, i ≠ BranchGerms.idx s a → i ∉ BranchGerms.gapGerm s a b → P i = X.G.sector v r i := fun i h1 h2 => by
+    simp [hP, h1, h2]
+  have hU : F'.interiorPts ∩ ball v r = ⋃ i, P i := by
+    ext z; constructor
+    · rintro ⟨hzI, hzb⟩
+      have hzb' : z ∈ ball v ρ := ball_subset_ball hrρ hzb
+      have hzv : z ≠ v := by
+        rintro rfl; exact (mem_merge_interiorPts_iff h hzb').mp hzI (v_mem_mergeArcs h hab hbn)
+      have hzr : ‖z - v‖ < r := by rw [← dist_eq_norm]; exact hzb
+      rcases ball_cases h hn hzb' hzv with ⟨i, hi⟩ | ⟨j, t, ht, rfl⟩
+      · have hi' := mem_sector_of_lt hi hzr
+        refine mem_iUnion.mpr ?_
+        by_cases hia : i = BranchGerms.idx s a
+        · exact ⟨_, by rw [hPa]; exact mem_chain.mpr (Or.inl (hia ▸ hi'))⟩
+        by_cases hig : i ∈ BranchGerms.gapGerm s a b
+        · obtain ⟨m', h1, h2, rfl⟩ := hig
+          exact ⟨_, by rw [hPa]; exact sector_subset_chain (by omega) h2 hi'⟩
+        · exact ⟨i, by rw [hPo i hia hig]; exact hi'⟩
+      · rw [norm_branchPt_sub v _ _ ht.1.le] at hzr
+        by_cases hjg : j ∈ BranchGerms.gapGerm s a b
+        · obtain ⟨m', h1, h2, rfl⟩ := hjg
+          exact mem_iUnion.mpr ⟨_, by rw [hPa]; exact mem_chain.mpr (Or.inr ⟨m', h1, h2, Or.inl ⟨t, ⟨ht.1, hzr⟩, rfl⟩⟩)⟩
+        · exact absurd (branchPt_mem_mergeArcs_inner h hjg ⟨ht.1, by linarith [hr.2]⟩)
+            ((mem_merge_interiorPts_iff h hzb').mp hzI)
+    · intro hz
+      obtain ⟨i, hi⟩ := mem_iUnion.mp hz
+      by_cases hia : i = BranchGerms.idx s a
+      · rw [hia, hPa] at hi; exact hchainI hi
+      by_cases hig : i ∈ BranchGerms.gapGerm s a b
+      · rw [hPg i hig] at hi; exact absurd hi (notMem_empty z)
+      · rw [hPo i hia hig] at hi; exact hsecI i z hi
+  have hchain_open : IsOpen (chain X s a r b) := by
+    rw [isOpen_iff_mem_nhds]
+    intro z hz
+    rcases mem_chain.mp hz with hz' | ⟨m', h1, h2, ⟨t, ht, rfl⟩ | hz'⟩
+    · exact Filter.mem_of_superset ((X.hC.isOpen r hr₀ _).mem_nhds hz') (sector_subset_chain le_rfl hab.le)
+    · obtain ⟨p, hpj⟩ := exists_next_eq (BranchGerms.idx s m')
+      obtain ⟨m'', hm, ham, rfl⟩ := gap_sides_idx hpj h1 h2 rfl
+      obtain ⟨ε, hε, hsub⟩ := X.hC.exists_ball_subset_of_branchPt X.hs₀.2 X.hdisj hrs (p := BranchGerms.idx s m'') ht
+      rw [hpj] at hsub
+      refine Filter.mem_of_superset (ball_mem_nhds _ hε) (hsub.trans ?_)
+      rintro y ((hy | hy) | hy)
+      · exact sector_subset_chain ham (by omega) hy
+      · exact sector_subset_chain (by omega) h2 hy
+      · exact mem_chain.mpr (Or.inr ⟨m', h1, h2, Or.inl hy⟩)
+    · exact Filter.mem_of_superset ((X.hC.isOpen r hr₀ _).mem_nhds hz') (sector_subset_chain (by omega) h2)
+  have hchain_sec : ∀ i, i ≠ BranchGerms.idx s a → i ∉ BranchGerms.gapGerm s a b →
+      Disjoint (chain X s a r b) (X.G.sector v r i) := by
+    intro i hia hig
+    rw [disjoint_left]
+    intro z hz hzi
+    rcases mem_chain.mp hz with hz' | ⟨m', h1, h2, hz' | hz'⟩
+    · exact hia (sector_disjoint hsr hzi hz')
+    · exact not_mem_branch_of_mem_sector hsr hzi _ hz'
+    · exact hig (sector_disjoint hsr hz' hzi ▸ ⟨m', h1, h2, rfl⟩)
+  rw [encard_sectorsOf_of_partition (A := P) (colA := colA) hU ?_ ?_ ?_ ?_ ?_ c]
+  · have hset : {i | (P i).Nonempty ∧ colA i = c} = {i | X.col i = c} \ {BranchGerms.idx s b} := by
+      ext i
+      simp only [mem_setOf_eq, Set.mem_sdiff, mem_singleton_iff]
+      by_cases hia : i = BranchGerms.idx s a
+      · subst hia
+        refine ⟨fun _ => ⟨hca, fun he => ?_⟩, fun _ => ⟨?_, by simp [hcolA]⟩⟩
+        · have := BranchGerms.idx_inj (n := X.n) (s := s) (a := a) le_rfl (by omega) (by omega) (by omega) he; omega
+        · rw [hPa]; exact (X.hC.sector_nonempty hr₀ _).mono (sector_subset_chain le_rfl hab.le)
+      by_cases hig : i ∈ BranchGerms.gapGerm s a b
+      · rw [hPg i hig]
+        obtain ⟨m', h1, h2, rfl⟩ := hig
+        constructor
+        · rintro ⟨hne, -⟩; exact absurd hne Set.not_nonempty_empty
+        · rintro ⟨hc, hne⟩
+          rcases eq_or_lt_of_le h2 with h2 | h2
+          · exact absurd (by rw [h2]) hne
+          · exact absurd hc (hgap m' h1 h2)
+      · rw [hPo i hia hig]
+        simp only [hcolA, if_neg hia]
+        refine ⟨fun h1 => ⟨h1.2, fun he => hig (he ▸ ⟨b, hab, le_rfl, rfl⟩)⟩, fun h1 => ⟨X.hC.sector_nonempty hr₀ i, h1.1⟩⟩
+    rw [hset]
+    have hb : BranchGerms.idx s b ∈ {i | X.col i = c} := hcb
+    have := Set.encard_sdiff_singleton_add_one hb
+    rw [hcnt] at this
+    exact WithTop.add_right_cancel ENat.one_ne_top this
+  · intro i
+    by_cases hia : i = BranchGerms.idx s a
+    · rw [hia, hPa]; exact hchain_open
+    by_cases hig : i ∈ BranchGerms.gapGerm s a b
+    · rw [hPg i hig]; exact isOpen_empty
+    · rw [hPo i hia hig]; exact X.hC.isOpen r hr₀ i
+  · intro i
+    by_cases hia : i = BranchGerms.idx s a
+    · rw [hia, hPa]; exact isPreconnected_chain hrs hab.le
+    by_cases hig : i ∈ BranchGerms.gapGerm s a b
+    · rw [hPg i hig]; exact isPreconnected_empty
+    · rw [hPo i hia hig]; exact X.hC.isPreconnected r hr₀ i
+  · intro i i' hii'
+    by_cases hia : i = BranchGerms.idx s a
+    · subst hia
+      rw [hPa]
+      by_cases hig : i' ∈ BranchGerms.gapGerm s a b
+      · rw [hPg i' hig]; exact disjoint_empty _
+      · rw [hPo i' (Ne.symm hii') hig]; exact hchain_sec i' (Ne.symm hii') hig
+    by_cases hig : i ∈ BranchGerms.gapGerm s a b
+    · rw [hPg i hig]; exact empty_disjoint _
+    rw [hPo i hia hig]
+    by_cases hia' : i' = BranchGerms.idx s a
+    · subst hia'; rw [hPa]; exact (hchain_sec i hia hig).symm
+    by_cases hig' : i' ∈ BranchGerms.gapGerm s a b
+    · rw [hPg i' hig']; exact disjoint_empty _
+    · rw [hPo i' hia' hig']; exact X.hC.disjoint r hr₀ i i' hii'
+  · intro i _
+    by_cases hia : i = BranchGerms.idx s a
+    · rw [hia, hPa]; exact closure_mono (sector_subset_chain le_rfl hab.le) (X.hC.mem_closure_sector hr₀ _)
+    by_cases hig : i ∈ BranchGerms.gapGerm s a b
+    · rw [hPg i hig] at *; exact absurd ‹(∅ : Set ℂ).Nonempty› Set.not_nonempty_empty
+    · rw [hPo i hia hig]; exact X.hC.mem_closure_sector hr₀ i
+  · intro i z hz
+    show X.G.mergeCol v X.col F.col s a b c ρ z = colA i
+    by_cases hia : i = BranchGerms.idx s a
+    · rw [hia, hPa] at hz
+      simp only [hcolA, hia, if_true]
+      rcases mem_chain.mp hz with hz' | ⟨m', h1, h2, ⟨t, ht, rfl⟩ | hz'⟩
+      · rw [mergeCol_of_mem_sector h (sector_mono hrρ _ hz')]; split_ifs <;> [rfl; exact hca]
+      · rw [mergeCol_branchPt h _ ⟨ht.1, by linarith [ht.2]⟩, if_pos ⟨⟨m', h1, h2, rfl⟩, by linarith [ht.2, hr.2]⟩]
+      · rw [mergeCol_of_mem_sector h (sector_mono hrρ _ hz')]
+        split_ifs with hg
+        · rfl
+        · rcases eq_or_lt_of_le h2 with h2 | h2
+          · rw [h2, hcb]
+          · exact absurd ⟨⟨m', h1, h2, rfl⟩, by linarith [(norm_of_mem_sector hz').2, hr.2]⟩ hg
+    by_cases hig : i ∈ BranchGerms.gapGerm s a b
+    · rw [hPg i hig] at hz; exact absurd hz (notMem_empty z)
+    · rw [hPo i hia hig] at hz
+      simp only [hcolA, if_neg hia]
+      rw [mergeCol_of_mem_sector h (sector_mono hrρ _ hz),
+        if_neg (fun hg => hig (by obtain ⟨m', h1, h2, he⟩ := hg.1; exact ⟨m', h1, h2.le, he⟩))]
+
+/-- **The colours at a rim point** after MERGE are `F`'s there: near the rim the new colouring is `F`'s on `F`'s interior points, and a
+cut phantom branch takes the colour of the sector after its germ, in whose closure it lies. -/
+theorem merge_coloursAt_rim {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) (hn : 0 < X.n) {x : ℂ}
+    (hx : x ∈ sphere v ρ) :
+    (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).coloursAt x ⊆
+      F.coloursAt x := by
+  intro j hj
+  have hj : x ∈ closure ((F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf
+    hlc).region j) := hj
+  have hxU : x ∈ (closedBall v (ρ / 2))ᶜ := by
+    rw [mem_compl_iff, mem_closedBall, not_le, mem_sphere.mp hx]; linarith [h.1]
+  have key : (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).region j ∩
+      (closedBall v (ρ / 2))ᶜ ⊆ closure (F.region j) := by
+    rintro z ⟨⟨hzI, hzj⟩, hzc⟩
+    have hzj' : X.G.mergeCol v X.col F.col s a b c ρ z = j := hzj
+    rw [mem_compl_iff, mem_closedBall, not_le] at hzc
+    rcases lt_trichotomy (dist z v) ρ with hlt | heq | hgt
+    · have hzv : z ≠ v := fun hzv => by rw [hzv, dist_self] at hzc; linarith [h.1]
+      have hzn : ρ / 2 < ‖z - v‖ := by rw [← dist_eq_norm]; exact hzc
+      rcases ball_cases h hn hlt hzv with ⟨i, hi⟩ | ⟨j', t, ht, rfl⟩
+      · rw [mergeCol_of_mem_sector h hi, if_neg (fun h1 => (not_lt.mpr hzn.le) h1.2)] at hzj'
+        exact subset_closure (hzj' ▸ X.hcol i ρ h.mem_Ioc hi)
+      · rw [norm_branchPt_sub v _ _ ht.1.le] at hzn
+        rw [mergeCol_branchPt h j' ht, if_neg (fun h1 => (not_lt.mpr hzn.le) h1.2)] at hzj'
+        exact hzj' ▸ cutSet_subset_closure h ⟨t, ht, rfl⟩
+    · have hzF := mem_interiorPts_of_merge_rim h' hρρ' heq hzI
+      rw [mergeCol_of_not_mem h (by rw [mem_ball, heq]; exact lt_irrefl ρ)] at hzj'
+      exact subset_closure ⟨hzF, hzj'⟩
+    · have hzc' : z ∉ closedBall v ρ := by rw [mem_closedBall, not_le]; exact hgt
+      have hzF : z ∈ F.interiorPts :=
+        ((merge_agreesOff (X := X) (s := s) (a := a) (b := b) (c := c) (hv := hv) (hρ := hρ) (hA := hA) (hAf := hAf)
+          (hlc := hlc) h).2 z hzc').1.mpr hzI
+      rw [mergeCol_of_not_mem h (fun hb => hzc' (ball_subset_closedBall hb))] at hzj'
+      exact subset_closure ⟨hzF, hzj'⟩
+  have : x ∈ closure (((F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf
+      hlc).region j) ∩ (closedBall v (ρ / 2))ᶜ) := by
+    rw [mem_closure_iff_nhds] at hj ⊢
+    intro t ht
+    obtain ⟨y, hyt, hy⟩ := hj (t ∩ (closedBall v (ρ / 2))ᶜ) (inter_mem ht (isClosed_closedBall.isOpen_compl.mem_nhds hxU))
+    exact ⟨y, hyt.1, hy, hyt.2⟩
+  exact closure_minimal key isClosed_closure this
+
+/-- **At most three colours at a rim point** after MERGE (at most two, as for `F`). -/
+theorem merge_ncard_coloursAt_rim {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) (hn : 0 < X.n) {x : ℂ}
+    (hx : x ∈ sphere v ρ) :
+    ((F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).coloursAt x).ncard
+      ≤ 3 := by
+  have hxv : x ≠ v := fun hxv => by rw [hxv, mem_sphere, dist_self] at hx; linarith [h.1]
+  have hxs : x ∈ ball v X.s₀ := by rw [mem_ball, mem_sphere.mp hx]; exact h.2.1
+  exact (ncard_le_ncard (merge_coloursAt_rim h' hρρ' h hn hx) (toFinite _)).trans
+    ((X.hC.ncard_coloursAt_le_two X.hs₀ X.hdisj hxv hxs).trans (by norm_num))
+
+end Surgery
+
+end Near
+
+end ArcMap
+
+end HadwigerNelson.Plane
