@@ -3356,3 +3356,16 @@ reason by the close.*
      `exists_maxRingArc`, `hfree_of_baseHyp`). Why: the construction, `bv_l3`, and lane B's steps after the merge all want `main`'s wave 4; one merge serves them.
      Confidence: high. (c) **The construction** (3,000–4,000 lines) gets a planner pass first (FS131-KP2, the D1 skeleton), then implementers, on a branch cut
      from `fs131-w5` after M5 — and `bv_l3` likewise on its own branch — so no two jobs share a tree. In flight after M5's launch: 1 (IL1) + 1 (E6) + 1 (M5) = 3.
+380. **FS131-IL1, by message: three of `Procedure`'s finiteness children are false without a domain hypothesis** (KL1's own children, not backlog
+     statements). `badCount_eq_zero_iff (hF : F.Valid) (P : ℂ)` — **false as written**, a counterexample by hand: `P = 0`, `k = 2`, `dom` the open annular sector
+     `{1/2 < |z| < 3/2, 0 < arg z < π/6}`, one arc `Arc.circ 0 1 0 (π/6)`, colour 0 inside `ω(0)` and 1 outside — valid (each part's diameter about 0.81); the
+     ring arcs about 0 are the `[θ₁, θ₂]` with `0 < θ₁ < θ₂ < π/6` (the endpoints are not in `dom`, so not in `Γ`), none maximal, so `badCount F 0 = 0`, yet none
+     is (Q) or (R2) (`0 ∉ closure dom`, so `coloursAt 0 = ∅`); the plan's "every ring arc lies in a maximal one" needs `Γ ∩ ω(P)` closed, which holds when
+     `ω(P) ⊆ dom`. `badCount_lt_top` and `treatPts_inter_finite` — the same gap, sketched (maximal arcs, or centres in `K` of unit arcs, accumulating at a
+     frontier point of `dom`; e.g. `dom = ball 0 2 ∖ ω(0)`, `K = closedBall 0 (1/10)`, unit circles about `v_n = 1/(10n)` clipped off `ω(0)` — locally finite in
+     `dom`, infinitely many centres in `K`); `treatPts_inter_finite` also carries no `Valid`, which the plane proof does not need. **Proposed repair**: add
+     `(hP : F.IsPlaneMap)` to all three (their only consumer, `exists_terminalSeq`, has it). **Progress** (iteration-checked, stage-6 build green): in `Limit`,
+     `LocalStep.mono`, `exists_stab`, `frozen`, its five consumers, all six locality lemmas, `limit_isTerminalMap`, `not_available_of_not_isSite`; left
+     `IsClean.eventually_not_isSite`, `exists_clean`. **Ruling**: the repair accepted — `hP` added to the three (not the weaker domain clauses: the consumer
+     has `hP`, and the plane form is the simplest true statement). Alternative weighed: `closedBall P 1 ⊆ F.dom` / `cthickening 1 K ⊆ F.dom`. Why not: no
+     consumer needs a non-plane map. Confidence: high. Credit: IL1, for a counterexample built by hand before anyone proved toward it. Sent to IL1 by message.
