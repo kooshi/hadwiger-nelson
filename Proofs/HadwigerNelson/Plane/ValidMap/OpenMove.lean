@@ -249,6 +249,9 @@ structure OpenConfig (X : F.Near v) (c : Fin k) (up : Bool) (s : Fin X.n) (b : �
   /-- Below `ρc` the ray lies strictly inside the partial sector. -/
   ray : ∀ t ∈ Ioo 0 ρc, X.G.liftDir s (BranchGerms.rayPos up b) t < ψ ∧
     ψ < X.G.liftDir s (BranchGerms.rayPos up b + 1) t
+  /-- The ray lies strictly inside the partial sector's directions at `v` (FS131-IO2, inventory item 397: without it the ray may
+  run along the horn, and the merged piece is then itself a horn). -/
+  ray0 : X.G.lift s (BranchGerms.rayPos up b) < ψ ∧ ψ < X.G.lift s (BranchGerms.rayPos up b + 1)
   /-- Below `ρc` every point between the horn's inner germ and the ray is clear for `c`. -/
   clear : ∀ t ∈ Ioo 0 ρc, ∀ φ, (if up then X.G.liftDir s 1 t else ψ) ≤ φ →
     φ ≤ (if up then ψ else X.G.liftDir s b t) → F.IsClear c (v + (t : ℂ) * e φ)
@@ -334,7 +337,7 @@ theorem exists_openConfig_up (hF : F.Valid) (hv : F.Covers v 1) (X : F.Near v) {
   have hρc1 : ρc ≤ ρ₁ := (min_le_left _ _).trans (min_le_left _ _)
   have hρcs : ρc ≤ X.s₀ := (min_le_left _ _).trans (min_le_right _ _)
   have hρca : ρc ≤ ρa := min_le_right _ _
-  refine ⟨b, X.G.lift p b + ψ₁, ρc, ⟨hb1, hbn, hρc0, hρcs, ?_, ?_, ?_, ?_, ?_, ?_⟩⟩
+  refine ⟨b, X.G.lift p b + ψ₁, ρc, ⟨hb1, hbn, hρc0, hρcs, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩⟩
   · show X.G.lift p 0 = X.G.lift p (0 + 1)
     rw [zero_add, hl01]
   · show X.col (BranchGerms.idx p 0) = c
@@ -351,6 +354,8 @@ theorem exists_openConfig_up (hF : F.Valid) (hv : F.Covers v 1) (X : F.Near v) {
     constructor
     · linarith [(abs_lt.mp h1).2]
     · linarith [(abs_lt.mp h2).1]
+  · show X.G.lift p b < X.G.lift p b + ψ₁ ∧ X.G.lift p b + ψ₁ < X.G.lift p (b + 1)
+    constructor <;> linarith
   · intro t ht φ hφ1 hφ2
     simp only [if_true] at hφ1 hφ2
     have hta : t ∈ Ioo 0 ρa := ⟨ht.1, ht.2.trans_le hρca⟩
@@ -495,7 +500,7 @@ theorem exists_openConfig_down (hF : F.Valid) (hv : F.Covers v 1) (X : F.Near v)
   have hρcs : ρc ≤ X.s₀ := (min_le_left _ _).trans (min_le_right _ _)
   have hρca : ρc ≤ ρa := min_le_right _ _
   have hlone' : ∀ i, X.col i = c → i = BranchGerms.idx s b := fun i hi => by rw [hsb]; exact hlone i hi
-  refine ⟨s, b, X.G.lift s 1 - ψ₁, ρc, ⟨hb1, hbn, hρc0, hρcs, hcusp_s, hcb, hlone', ?_, ?_, ?_⟩⟩
+  refine ⟨s, b, X.G.lift s 1 - ψ₁, ρc, ⟨hb1, hbn, hρc0, hρcs, hcusp_s, hcb, hlone', ?_, ?_, ?_, ?_⟩⟩
   · intro t ht
     show X.G.liftDir s 0 t < X.G.lift s 1 - ψ₁ ∧ X.G.lift s 1 - ψ₁ < X.G.liftDir s (0 + 1) t
     have hta : t ∈ Ioo 0 ρa := ⟨ht.1, ht.2.trans_le hρca⟩
@@ -506,6 +511,8 @@ theorem exists_openConfig_down (hF : F.Valid) (hv : F.Covers v 1) (X : F.Near v)
     constructor
     · linarith [(abs_lt.mp h0).2]
     · linarith [(abs_lt.mp h1).1]
+  · show X.G.lift s 0 < X.G.lift s 1 - ψ₁ ∧ X.G.lift s 1 - ψ₁ < X.G.lift s (0 + 1)
+    rw [zero_add]; constructor <;> linarith
   · intro t ht φ hφ1 hφ2
     simp only [Bool.false_eq_true, if_false] at hφ1 hφ2
     have hta : t ∈ Ioo 0 ρa := ⟨ht.1, ht.2.trans_le hρca⟩

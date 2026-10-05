@@ -328,3 +328,41 @@ inside `ρ/2`, which are in the piece, and at `ρ/2` when `b = 1`, where the poi
 leaves left (`open_valid`, `open_degree_horns`, `open_rim`, `open_allowedCone`).
 
 ## Stage 6 — SAVED (FS131-IO2)
+
+## Stage 7 — SAVED (FS131-IO2): `open_valid` proved; the real build; `open_degree_horns` false as stated, the `ray0` field added (item 397)
+
+### 7.1 `open_valid` and the build
+
+`open_valid` (template `merge_valid`): `Valid.of_agreesOff` on `B̄(v, ρ)`; a recoloured point is a wedge point (`OpenConfig.isClear_of_mem_openWedge`,
+from `cfg.clear`) or a gap point (`OpenConfig.isClear_of_Icc`: the gap's directions `[L₁, L_b]` lie in the clear range); the rest as MERGE's,
+with `mem_open_interiorPts_iff`, `mem_interiorPts_of_open_rim`, `v_mem_openArcs`, `openCol_of_mem`, `openCol_of_not_mem`. **Real build** at
+`fs131-wop` after `open_valid` (commit `7ab5b0a1`'s tree, before `ray0`): **OK** — 451 of 451 batches, 2 modules rebuilt, 8 min 21 s; warnings
+only `declaration uses 'sorry'`, the three leaves left (`open_degree_horns`, `open_rim`, `open_allowedCone`); log
+`build/gate/build/20261005T114229Z-3949911.log`, terminal output `data/fs131/io/build-io2-1.log`.
+
+### 7.2 The second defect: `open_degree_horns`
+
+`OpenConfig.ray` puts the ray strictly inside the partial sector only for `t > 0`; at `t = 0` it gives `lift s rp ≤ ψ ≤ lift s (rp + 1)`. If `ψ`
+equals the horn's direction (`up`: `ψ = lift s 0 = … = lift s b`, possible when germ `b` curves below the ray), the merged piece
+`sectorBetween v (lift s 0) κ₀ ψ 0 r` is itself a horn set (`sectorBetween_eq_hornSet`), so the horn count does not drop.
+
+**Counterexample** (sent mid-job): `k = 2`, `v = 0`, `dom = ball(0, r₁)`, `r₁ < 1/2`; two germs tangent at `0` along `α`, curving clockwise
+(`κ₀ = −2`, `κ₁ = −1`); sector 0 (the cusp between them) colour `c`, sector 1 (the rest of the disc) colour `c₂`. Valid (both classes have
+diameter `< 1`). `cfg`: `up`, `s = 0`, `b = 1`, `ψ = α`; `ray` (`L₁(t) = α + arcsin(−t/2) < α < L₂(t) ≈ α + 2π`), `clear`, `margin` trivial. OPEN's
+merged piece is `sectorBetween v α (−2) α 0 r = hornSet v α (−2) 0 r`, a horn set and a sector; the rest has an interior cone; every other
+sector is unchanged. Horn count and degree unchanged, so no `j′ < j`. `exists_open` is true (`ψ = lift ± ψ₁` with `0 < ψ₁ ≤ gap/2`).
+
+### 7.3 The repair (accepted, item 397)
+
+One field added to `OpenConfig` after `ray`:
+
+```lean
+  ray0 : X.G.lift s (BranchGerms.rayPos up b) < ψ ∧ ψ < X.G.lift s (BranchGerms.rayPos up b + 1)
+```
+
+proved in `exists_openConfig_up` (`ψ = lift p b + ψ₁`, `0 < ψ₁ ≤ gap/2`) and `exists_openConfig_down` (`ψ = lift s 1 − ψ₁`, `ψ₁ ≤ (lift s 1 −
+lift s 0)/2`); the diff is `data/fs131/io/ray0.diff` (50 lines). With `margin` (Stage 5), `OpenConfig` now reads, after IO1's eight fields
+(`hb1`, `hbn`, `hρc`, `hρcs`, `cusp`, `col_horn`, `lone`, `ray`), `ray0`, then IO1's `clear`, then `margin`. `exists_open`'s and `HasHornCount`'s
+statements unchanged; iteration clean.
+
+## Stage 7 — SAVED (FS131-IO2)
