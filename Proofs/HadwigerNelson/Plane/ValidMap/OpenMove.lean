@@ -101,6 +101,90 @@ example (j : Fin 2) : (ArcMap.const univ isOpen_univ j).HasHornCount 0 0 := by
     simp at hx; linarith
   rw [hempty, encard_empty]; rfl
 
+/-- **The cusp fragment has two horns at `0`** (the positive spec example, FS131-IO3; IO1's record § 2.1): below `1/2` its sectors at
+`0` are the two horns of colour `1` — along `e 0` and along `e π`, each between the arcs of `ω(±i)` — and the two discs' parts of colour
+`0`, which approach `0` along open intervals of directions and so are no horn sets. It fails if the definition drifts to counting every
+sector (four) or one horn per colour (one). -/
+example : ArcMap.cuspFrag.HasHornCount 0 2 := by
+  have hπ := Real.pi_pos
+  filter_upwards [Ioc_mem_nhdsGT (show (0 : ℝ) < 1 / 2 by norm_num)] with r hr
+  obtain ⟨ho, hp, hd, hn, hc⟩ := ArcMap.cuspPiece_data hr.1 hr.2
+  have hsec : ∀ S, ArcMap.cuspFrag.IsSector 0 r S ↔ ∃ i, S = ArcMap.cuspPiece r i := fun S =>
+    ArcMap.isSector_iff_of_partition (ArcMap.cuspFrag_partition hr.2) ho hp hd hn hc
+  -- piece `1` is the horn along `e π` (its frame's normal is `−i`, so the bounding arcs trade places)
+  have h1 : ArcMap.cuspPiece r 1 = hornSet 0 π (-1) 1 r := by
+    ext z
+    show z ∈ (fun z => -(starRingEnd ℂ z)) '' hornSet 0 0 (-1) 1 r ↔ _
+    rw [ArcMap.mem_cuspPiece_one]
+    have hepi : e π = -1 := by unfold e; exact Complex.exp_pi_mul_I
+    have hx : frameX 0 π z = -z.re := by simp [frameX, hepi]
+    have hN : e (π + π / 2) = -I := by rw [e_add, hepi, e_pi_div_two]; ring
+    simp only [hornSet, mem_setOf_eq, tanAbove_neg_one_iff, tanBelow_one_iff, hN, dist_eq_norm, sub_zero,
+      zero_add, hx, sub_neg_eq_add]
+    constructor
+    · rintro ⟨h1, h2, h3, h4⟩; exact ⟨h1, by linarith, h4, h3⟩
+    · rintro ⟨h1, h2, h3, h4⟩; exact ⟨h1, by linarith, h4, h3⟩
+  -- pieces `2` and `3` approach `0` along open intervals of directions
+  have hray : ∀ (σ : ℝ), (σ = 1 ∨ σ = -1) → ∀ δ : ℝ, 0 < σ * Real.sin δ → ∀ ε : ℝ, 0 < ε → ∃ t : ℝ, t ∈ Ioo 0 ε ∧
+      (0 : ℂ) + (t : ℂ) * e δ ∈ ball (0 : ℂ) r ∩ ball ((σ : ℂ) * I) 1 := by
+    intro σ hσ δ hδ ε hε
+    set t := min (ε / 2) (min (r / 2) (σ * Real.sin δ)) with ht
+    have ht0 : 0 < t := lt_min (by linarith) (lt_min (by linarith [hr.1]) hδ)
+    have htε : t < ε := by linarith [min_le_left (ε / 2) (min (r / 2) (σ * Real.sin δ))]
+    have htr : t < r := by
+      have := min_le_right (ε / 2) (min (r / 2) (σ * Real.sin δ))
+      linarith [min_le_left (r / 2) (σ * Real.sin δ), hr.1]
+    have hts : t ≤ σ * Real.sin δ :=
+      (min_le_right _ _).trans (min_le_right _ _)
+    refine ⟨t, ⟨ht0, htε⟩, ?_, ?_⟩
+    · rw [zero_add, mem_ball, dist_zero_right, norm_mul_e ht0.le]; exact htr
+    · rw [zero_add, mem_ball, dist_eq_norm]
+      have hσ2 : σ ^ 2 = 1 := by rcases hσ with rfl | rfl <;> norm_num
+      have hsq : ‖(t : ℂ) * e δ - (σ : ℂ) * I‖ ^ 2 = t ^ 2 - 2 * t * (σ * Real.sin δ) + 1 := by
+        rw [← Complex.normSq_eq_norm_sq, Complex.normSq_apply]
+        simp only [Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+          re_e, im_e, Complex.I_re, Complex.I_im]
+        nlinarith [Real.cos_sq_add_sin_sq δ]
+      have h2 : ‖(t : ℂ) * e δ - (σ : ℂ) * I‖ ^ 2 < 1 := by rw [hsq]; nlinarith
+      by_contra hge
+      push Not at hge
+      nlinarith [norm_nonneg ((t : ℂ) * e δ - (σ : ℂ) * I)]
+  have hnot : ∀ (σ : ℝ), (σ = 1 ∨ σ = -1) → ∀ (lo hi : ℝ), lo < hi → (∀ δ ∈ Ioo lo hi, 0 < σ * Real.sin δ) →
+      ∀ α κ₁ κ₂, ball (0 : ℂ) r ∩ ball ((σ : ℂ) * I) 1 ≠ hornSet 0 α κ₁ κ₂ r := by
+    intro σ hσ lo hi hlh hpos α κ₁ κ₂
+    refine ne_hornSet_of_interior_coneAt ⟨(lo + hi) / 2, interior_mono (s := Ioo lo hi) (fun δ hδ => ?_)
+      (by rw [interior_Ioo]; constructor <;> linarith)⟩ α κ₁ κ₂ r
+    exact BranchGerms.mem_coneAt_of_ray (v := 0) (hray σ hσ δ (hpos δ hδ))
+  have h2 : ∀ α κ₁ κ₂, ArcMap.cuspPiece r 2 ≠ hornSet 0 α κ₁ κ₂ r := by
+    intro α κ₁ κ₂
+    show ball 0 r ∩ ball I 1 ≠ hornSet 0 α κ₁ κ₂ r
+    have := hnot 1 (Or.inl rfl) 0 π hπ (fun δ hδ => by rw [one_mul]; exact Real.sin_pos_of_pos_of_lt_pi hδ.1 hδ.2) α κ₁ κ₂
+    simpa using this
+  have h3 : ∀ α κ₁ κ₂, ArcMap.cuspPiece r 3 ≠ hornSet 0 α κ₁ κ₂ r := by
+    intro α κ₁ κ₂
+    show ball 0 r ∩ ball (-I) 1 ≠ hornSet 0 α κ₁ κ₂ r
+    have := hnot (-1) (Or.inr rfl) (-π) 0 (by linarith) (fun δ hδ => by
+      have := Real.sin_neg_of_neg_of_neg_pi_lt hδ.2 hδ.1; linarith) α κ₁ κ₂
+    simpa using this
+  have hset : {S | ArcMap.cuspFrag.IsSector 0 r S ∧ ∃ α κ₁ κ₂, κ₁ < κ₂ ∧ S = hornSet 0 α κ₁ κ₂ r} =
+      {ArcMap.cuspPiece r 0, ArcMap.cuspPiece r 1} := by
+    ext S
+    simp only [mem_setOf_eq, mem_insert_iff, mem_singleton_iff, hsec]
+    constructor
+    · rintro ⟨⟨i, rfl⟩, α, κ₁, κ₂, -, he⟩
+      fin_cases i
+      · exact Or.inl rfl
+      · exact Or.inr rfl
+      · exact absurd he (h2 α κ₁ κ₂)
+      · exact absurd he (h3 α κ₁ κ₂)
+    · rintro (rfl | rfl)
+      · exact ⟨⟨0, rfl⟩, 0, -1, 1, by norm_num, rfl⟩
+      · exact ⟨⟨1, rfl⟩, π, -1, 1, by norm_num, h1⟩
+  have hne : ArcMap.cuspPiece r 0 ≠ ArcMap.cuspPiece r 1 := fun he => by
+    obtain ⟨z, hz⟩ := hn 0
+    exact disjoint_left.mp (hd 0 1 (by decide)) hz (he ▸ hz)
+  rw [hset, encard_pair hne]; rfl
+
 /-! ## OPEN's map: the wedge, the ray, the rim arc, the colouring -/
 
 /-- **The new ray** out to `ρ/2` at the direction `ψ`. -/

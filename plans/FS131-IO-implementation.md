@@ -559,3 +559,17 @@ planted into `exists_open`'s record makes the classifier exit 1 naming it (`SORR
 The new names: `data/fs131/io/io3-new-decls.txt` (`tools/fs131_io_decls.py` against `276aeaff`).
 
 ## Stage 12 — SAVED (FS131-IO3)
+
+## Stage 13 — SAVED (FS131-IO3): the positive `HasHornCount` spec example
+
+`example : ArcMap.cuspFrag.HasHornCount 0 2` in `OpenMove.lean`, after the constant map's `HasHornCount 0 0`. Route (IO1's § 2.1): for
+`r ∈ (0, 1/2]`, `cuspFrag_partition` and `cuspPiece_data` make the sectors at `0` exactly the four pieces (`isSector_iff_of_partition`);
+piece 0 is `hornSet 0 0 (−1) 1 r` by definition; piece 1 equals `hornSet 0 π (−1) 1 r` (in the frame along `e π` the normal is `−i`, so
+`tanAbove_neg_one_iff` and `tanBelow_one_iff` read the arcs of `ω(i)` and `ω(−i)` in traded places, against `mem_cuspPiece_one`); pieces 2
+and 3 (`B(0, r) ∩ B(±i, 1)`) hold `t e(δ)` for every small `t` at each `δ ∈ (0, π)`, resp. `(−π, 0)`
+(`‖t e(δ) ∓ i‖² = t² ∓ 2t sin δ + 1`), so their cones at `0` have interior (`BranchGerms.mem_coneAt_of_ray`) and they are no horn sets
+(`ne_hornSet_of_interior_coneAt`); the horn sectors are the pair `{piece 0, piece 1}`, distinct as disjoint non-empty sets (`encard_pair`).
+**Control**: the same proof claiming `HasHornCount 0 1` goes red at its last step (`rfl`: `2` is not `↑1`), watched in a scratch copy.
+Evidence so far: iteration only (`lake env lean` on `OpenMove.lean`, exit 0, no warning); the real build comes with Stage 14.
+
+## Stage 13 — SAVED (FS131-IO3)
