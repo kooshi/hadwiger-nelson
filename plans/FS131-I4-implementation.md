@@ -1393,6 +1393,52 @@ uses sorry` — Contact 3 (the moves), UnitArc 2 (`bend_toward`, `bend_away`), B
 **Re-pricing**: `nb4p` (§ 13.5's H, "the one leaf whose derivation must be re-read in full") took about 360 lines and about 60k tokens, first build clean
 after six scratch iterations; wave 3's GERM-R lemmas did the geometric half.
 
+## Stage 41 — SAVED (FS131-I4n): readback, the as-given build, and `bend_away`'s statement defect (sent to Keryx)
+
+*FS131-I4n (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4n-wave4.md` on `main`) continues this record from `a0c29483`.
+Its job: merge `fs131-w4m` (at `67256973`), make `Contact` cite SHAVE and RAY, move `n3_end` to wave 5 (item 289 (b)), prove `bend_toward` and
+`bend_away`.*
+
+**The brief's quotations against their sources** (standing rule 3). Five blocks: (1) "**What is left (3 in this job's files): UnitArc `bend_toward`,
+`bend_away`; BaseSteps `n3_end`.** Contact's three moves are IM3's." — this record, Stage 40: **matches exactly**. (2) item 288 — `plans/FS131-close-inventory.md`
+on `main` (l. 2171): **matches as a truncation**. (3) item 289 (l. 2187): **matches as a truncation**. (4) item 286 (l. 2148): **matches as a truncation**.
+(5) "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the" —
+`plans/FS131-w4-kernel-plan.md` § 14.2 (l. 887): **matches as a truncation**. `origin/fs131-w4m` is at `67256973` as the brief says. Items 288–289 read in
+full; I4m's Stages 38–40 and IM's record §§ 3, 6–10 (on `fs131-w4m`) read. No mismatch.
+
+**The worktree as given** (`a0c29483`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK —
+all 1744 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0 (`build/gate/build/20261005T003233Z-3932168.log`; driver log
+`data/fs131/i4/build-i4n-readback.log`): 6 `declaration uses sorry` — Contact 3 (l. 4064, 4078, 4094), UnitArc 2 (l. 2645, 2658), BaseSteps 1 (l. 1648) —
+and no other warning.
+
+**`bend_away` is false as written — a statement defect, sent to Keryx at this stage (message to "main").** Nothing in the statement puts the radius-2 arc
+`R₂(ᾱ)` in `F.dom`, and off the domain `closure (F.region c)` may meet `R₂(ᾱ)` in an infinite nowhere-dense set of angles; then `C₂` holds no non-degenerate
+interval and the conclusion demands the whole open arc be bent away, which no `F'` can do. **Counterexample** (`k = 2`, `c ≠ c'`, `P = 0`, `θ₁ = 0`,
+`θ₂ = ℓ = 0.1`, `η`, `δ` small): `K = {0.05} ∪ {0.05 + 0.001/n : n ≥ 1}`, `f = infDist · K`; `N = {ρe(φ) : 1 − η < ρ < 1 + η, −η < φ < ℓ + η}`,
+`Y = {ρe(φ) : 0 < φ < ℓ, 2 + f(φ) < ρ < 2 + f(φ) + δ}`, `dom = N ∪ Y`; one arc `circ 0 1 (−η) (ℓ + η)`; colour `c` on `N`'s inside and on `Y`, `c'` on
+`N`'s outside. Valid (inner pairs `< 1`: angular gap `< π/3`, radii `< 1`; inner–`Y` `> 1`; `Y` and `N`'s outside of diameter `< 1`); `IsRingArc 0 0 ℓ c c'`;
+`c ∉ coloursAt 0`; `C₂ = K` (the closure of `Y` meets the radius-2 circle where `f = 0`, points not in `dom`). For any `F'` with `AgreesOff F
+(thickening ε ᾱ)` (`ε < η/2`) and `F'.region j ⊆ F.region j` for `j ≠ c`: (1) if `r(φ)`, `φ ∈ K`, is `F'`-interior its colour is `c` (it lies on `F.Γ`),
+so by local constancy `z = (1 + s)e(φ)` is `F'`-interior of colour `c` for small `s > 0`, while `w = (2 + s)e(φ) ∈ Y` is untouched, of colour `c`, at
+distance `1`: `F'` invalid; (2) otherwise `r(K) ⊆ F'.Γ`; near `r(0.05)` finitely many `F'`-arcs, so one holds infinitely many points of `r(K)`, hence is
+`circ 0 1 θa θb` (`Arc.finite_inter_sphere_or_eq_circ`), and a point of `K` with parameter inside `(θa, θb)` is `F'.OnRingArc`, needing a non-degenerate
+interval inside `K`. **Likely repair** (Keryx's and the planner's call): `(hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom)` — the derivation's "`C₂` is a finite union
+of points and closed arcs" (FS112-N-proof N2-TAN) reads local finiteness there. **`bend_away_whole` is true as stated** with no domain hypothesis (`R₂`
+compact and disjoint from the closed class: positive distance; N2-ENV-away clears the lens), but today it is proved *through* `bend_away`; I proposed to
+prove it directly, statement unchanged, on the mirrored lens of `bend_toward`. No other Lean consumer of `bend_away` (grep on `fs131-w4`, `-w5`, `-w5p`,
+`-w4mm`). **`bend_toward` is true as stated, on my reading**: the lens's far colour `c'` is kept off by `c' ∉ coloursAt P` (a positive distance from `P`,
+for N2-ENV toward) and by N2-SIGN with N2-ENV's near clause; nothing reads the domain beyond a thickening of `ᾱ`.
+
+**The plan for `bend_toward`** (the construction, fixed before writing): the new boundary is one circular arc through `A`, `B` of radius `R > 1`, centre
+`C = P − d e(φ_m)` (`φ_m` the arc's middle angle, `h = ℓ/2`, `R² = 1 + 2d cos h + d²`, `d` small); the lens is `L = {z : |z − P| ≤ 1, R < |z − C|}`, which
+holds the open arc `O` and lies in the circular segment beyond the chord; in polar form `z = P + (1 − s)e(φ)`, `|φ − φ_m| < h` and `s < 2d·Δ(φ)`, so N2-ENV's
+profile is met by `2d ≤ ψ`. The arcs of `F'`: every arc of `F` not of the form `circ P 1 _ _` kept; each `circ P 1 θa θb` replaced by its sub-arcs over
+`[θa, θb] ∩ [θ₂ + 2πm, θ₁ + 2π(m + 1)]` for `m = ⌊(θa − θ₂)/2π⌋` and `m + 1` (non-degenerate ones; a dropped single point is `A` or `B`, on the new arc);
+the new arc `circ C R (φ_m − γ) (φ_m + γ)`, `γ = arccos((d² + R² − 1)/(2dR))`, whose carrier is exactly `sphere C R ∩ closedBall P 1`. Colour `c'` on `L`,
+`F`'s elsewhere. Validity by engine 1 (lens points clear: N2-ENV toward and near, N2-SIGN; points of `O` by `ne1_region`; two lens points are never at
+distance `1`, `|φ − φ'| < π/3`); no unit arc by engine 2. `Surgery`'s `Near.exists_cut` and `ArcMap.surgery` are ball-centred (they trim `B(v, ρ)` and add
+`∂B(v, ρ)`) and do not serve a cut along `ω(P)`; its `Arc.sub`, `Arc.nondegenerate_sub`, `Arc.carrier_sub` do, and are reused.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
