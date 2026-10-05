@@ -52,7 +52,7 @@ Each is scored in the last stage. A "no" on any of them is a result of the same 
 
 ### 1.5 The targets, stated as conjectures (to be replaced in place by derived entries, or by stated stalls)
 
-*Stage 3 (2026-10-04) replaced `e5-two-g-sectors` and `e5-cv-separation` in place by their derived entries (the loop's legal move); their Stage 1 form is in git (`68ef4e85`).*
+*Stage 3 (2026-10-04) replaced `e5-two-g-sectors` and `e5-cv-separation` in place by their derived entries, and Stage 4 `e5-bend-end` (the loop's legal move); their Stage 1 form is in git (`68ef4e85`).*
 
 derivation: e5-two-g-sectors
   statement: in n3_end_of_not_inType's setting, with a = e α, n = e(α + π/2) and S′ = v − n, the colour g of the upper flank has at least two sectors at S′ for every small radius
@@ -80,15 +80,15 @@ derivation: e5-cv-separation
 
 derivation: e5-bend-end
   statement: in bend_away's setting, at an end A = P + e θ₁ of the arc with θ₁ ∈ C₂ (the r2Contacts set), an away lens bounded near A by a circle tangent to ω(P) at A of curvature κ ∈ (0, 1) close enough to 1 is clear for the inner colour c near A
-  uses only: not yet derived
-  not claimed: the interior of the arc, which N2-TAN covers
-  argument: § 1.4 The targets
-  verdict: gap: not yet derived — Stage 3
-  grade: hand
+  uses only: e5-claim-e and e5-end-cap; N2-SIGN and N2-ENV's near and away clauses; hin; hdom (the finite structure of C₂ and the sectors at q_A); the horn of the outer tile at A, if any
+  not claimed: the interior of the arc (N2-TAN, with e5-end-cap two-sided); the case θ₁ ∉ C₂ (N2-AWAY's corner end) and the case of an interval of C₂ at A (no bend needed near A)
+  argument: § 4.3 The end case, assembled
+  verdict: derived
+  grade: derived from: e5-claim-e, e5-end-cap
   minds: 1
-  model: not yet exhibited
-  prior art: owed
-  handoff: none — a conjecture
+  model: P = 0, ᾱ = r([0, π/6]), c on a thin inner annulus and on Y = {x > 2 + |y|}; C₂ = {0}, the end isolated (§ 4.3)
+  prior art: partly: N2-TAN's sentence covers "an end of α" without the beyond-side step (this project); not found in print
+  handoff: de Bruijn — bend_away as repaired (hdom), statement unchanged; its job reads § 4 for the end and e5-end-cap for every isolated contact
 
 ## Stage 1 — SAVED
 
@@ -334,3 +334,114 @@ control: e5-sep-order
   fault: python3 ../tools/fs131_e5_checks.py sep-order --plant
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: Q2 derived — `bend_away`'s end case goes through by a tangent start; the region beyond the end is never reached
+
+**Frame.** `bend_away`'s setting: `hF : F.Valid`, `hA : F.IsRingArc P θ₁ θ₂ c c'` (inner colour `c`, outer `c'`; `IsRingArc` does not ask the arc to be
+maximal, so an end may be a vertex or an interior point of a longer arc of `Γ` on `ω(P)`), `hin : c ∉ F.coloursAt P`, `hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom`.
+Translate `P = 0`. The end `A = e θ₁`, `q_A = 2e θ₁`, and `e₁ = e θ₁`, `e₂ = e(θ₁ + π/2)` (the arc lies on the `e₂ ≥ 0` side of the line `PA` near `A`; the
+other end is the mirror). `C₂ = F.r2Contacts P θ₁ θ₂ c`; by `hdom` and local finiteness it is a finite union of points and closed intervals (I4n's route
+item (1); N2-TAN). Three cases at `A`: `θ₁ ∉ C₂` — N2-AWAY's end (a positive distance from `q_A` to `c`'s closure; `bend_away_whole`'s lens, proved);
+`[θ₁, θ₁ + t₀] ⊆ C₂` — no point near `A` need be bent (the conclusion allows `OnRingArc` points inside a non-degenerate interval of `C₂`), and the interval's
+other end is an interior end, N2-TAN's "non-R2 side of an end of an arc component"; **`θ₁` isolated in `C₂`** — the case asked.
+
+**The lens at `A`.** `β`: the circle tangent to `ω(P)` at `A` with curvature `κ ∈ (0, 1)` toward `P` (centre `(1 − 1/κ)e₁`, radius `1/κ`, not a unit circle).
+`L_A = {z : |z| > 1, |z − (1 − 1/κ)e₁| < 1/κ, arg z ∈ (θ₁, θ₁ + δ₀)}`, recoloured `c`; at angular offset `δ` its height is `(1 − κ)δ²/2 + O(δ⁴)`. Since `β`'s
+disc lies on `P`'s side of the tangent line `{z·e₁ = 1}` to `ω(P)` at `A` (a disc tangent to a line at a point lies on one side of it), **every `z ∈ L_A` has
+`z·e₁ < 1`, `z·e₂ > 0`, `|z| > 1`.** It lies inside `T_out`'s sector at `A`: if that sector is a horn bounded by `α` and a half-arc tangent to `ω(P)` at `A`
+of curvature `κ_σ < 1` toward `P`, take `κ > κ_σ`.
+
+**What must be shown.** No `c`-point at distance exactly `1` from a point of `L_A` (validity of the recoloured map near `A`; the rest — no unit arc created,
+the lens inside one tile, two lens points never at distance 1, the bent points of `α` clear — is `bend_away_whole`'s, unchanged). Every `c`-tile is **near**
+(inside `I = B̄(A, 1) ∩ B̄(B, 1)`) or **far** (farther than 1 from all of `int α`, hence `|p − w| ≥ 1` for every `w ∈ ᾱ`) — N2-SIGN, two minds.
+- **Near tiles** are within `< 1` of every lens point off `B(P, r_ψ)` (N2-ENV's near clause, two minds; `L_A`'s quadratic profile meets its linear one, and
+  on `∂I ∩ ω(A)` the margin `δ sin ℓ − (1 − κ)δ²/2 > 0`); `c`'s closure misses `P` (`hin`), so `r_ψ` below that distance.
+- **Far tiles** meet `B̄(z, 1)` only near `R₂(ᾱ)` (N2-ENV's away clause), and near `q_w` for `w ∉ C₂` they are a positive distance off. Near `q_A`, split by the
+  side of the line `PA`.
+
+### 4.1 Claim E — beyond the end, every point is nearer `A` than any lens point [hand, one mind; CLAIM-E exact]
+
+*Statement.* Let `z = z₁e₁ + z₂e₂` with `z₁ < 1`, `z₂ ≥ 0`, `|z| ≥ 1`, and `p = p₁e₁ + p₂e₂` with `p₁ > 0`, `p₂ ≤ 0`. Then `|p − z| > |p − A|`.
+
+*Argument.* `|p − z|² − |p − A|² = −2p·(z − A) + |z|² − |A|²`, the radical axis of `ω(z)` and `ω(A)`; `p·(z − A) = p₁(z₁ − 1) + p₂z₂ < 0` (the first term `< 0`,
+the second `≤ 0`), and `|z|² − 1 ≥ 0`. So `|p − z|² > |p − A|²`. ∎ No smallness is used.
+
+*Consequence at the end.* A far `c`-point `p` beyond the end (`p₂ ≤ 0`, near `q_A` so `p₁ > 0`) has `|p − A| ≥ 1`, so `|p − z| > 1` for every `z ∈ L_A`. **The far
+class beyond the end — hugging `ω(A)` from outside or not — is never within distance 1 of the lens.** I4n's worry (§ 2.4) is about a feature that
+accompanies (§ 2.5): `ω(A)` bounds the uncovered region beyond the end, but a lens on `P`'s side of the tangent line at `A` never reaches it. *Not claimed:* the
+same for a lens crossing that tangent line — a corner lens of slope `ψ` has `z₁ − 1 ≍ ψδ > 0` and does reach beyond the end, which is NB2's "it blocks a
+**wedge** lens" (`plans/FS112-NB2-verification.md` l. 171–172) and N2-AWAY's "the end vertex's own blocker is exactly R2 at the end" for corner lenses; the
+planted fault `s = 3(sec δ − 1)` (a lens beyond the tangent line) finds 328 violating grid points.
+
+### 4.2 The arc side at the end — an exact threshold, `κ > κ_Y/(1 − κ_Y)` [hand, one mind; END-CAP exact]
+
+`q_A ∈ dom` (`hdom`), so finitely many `c`-sectors `Y_j` at `q_A`, each bounded by half-arcs from `q_A`. On the arc side (`p₂ > 0`) a far point near `q_A`
+lies outside `B(P, 2)` (`|p − e(arg p)| ≥ 1`). So the half-arc bounding `Y_j` toward `P` on the arc side is (a) the radius-2 circle itself — then `C₂ ⊇
+[θ₁, θ₁ + t₀]`, not this case; (b) transversal to it, outward; or (c) tangent to it with curvature `κ_Y < 1/2` toward `P` (curvature above `1/2` would enter
+`B(P, 2)`). In (b) and (c) there is `κ_Y < 1/2` (`κ_Y = 0` for (b), the tangent line) with **`Y_j ∩ {p₂ > 0}` beyond the circle `Γ_Y`** through `q_A`,
+tangent to the radius-2 circle there, of curvature `κ_Y` toward `P`, near `q_A`.
+
+*Statement.* Let `Σ_Y` be the circle concentric with `Γ_Y` at distance `1` on `P`'s side: it passes through `A`, is tangent to `ω(P)` there, and has curvature
+`κ_Y/(1 − κ_Y) < 1` toward `P` (`curvUp(κ_Y)`, N4-SHADOW read upward, again). Every `z` on `P`'s side of `Σ_Y` is farther than `1` from every point beyond
+`Γ_Y`. *Argument* (the triangle inequality, exact): for `κ_Y > 0`, `O_Y = (2 − 1/κ_Y)e₁`, `|z − O_Y| < 1/κ_Y − 1 < 1/κ_Y − 1 + (|p − O_Y| − 1/κ_Y)` gives
+`|p − z| ≥ |p − O_Y| − |z − O_Y| > 1`; for `κ_Y = 0` the two parallel lines `p·e₁ = 2`, `z·e₁ < 1`; for `κ_Y < 0`, `O_Y = (2 + 1/|κ_Y|)e₁`, `Y_j` near `q_A`
+inside `B(O_Y, 1/|κ_Y|)` and `z` outside `B̄(O_Y, 1/|κ_Y| + 1)`. ∎ `β` lies on `P`'s side of `Σ_Y` near `A` exactly when `κ > κ_Y/(1 − κ_Y)` (two circles
+tangent at `A`). So **with `κ ∈ (max(0, κ_σ, max_j κ_{Y_j}/(1 − κ_{Y_j})), 1)` — non-empty, every `κ_{Y_j} < 1/2` — the lens `L_A` is clear of the far class
+on the arc side.** At `κ_Y = 1/2`, `Σ_Y = ω(P)` and no `κ < 1` serves: R2 along an arc blocks, as N2-TAN says. The planted fault (`κ` below the threshold)
+finds 685 violating grid points; the run as written, with `Y` taken as the worst case on both sides at once (beyond `Γ_Y` on the arc side, outside `B(A, 1)`
+beyond the end), finds none of 108,085.
+
+*Recognition, and a generalization for the kernel:* the threshold is N2-TAN's comparison made exact. At an **interior** isolated contact `w₀` the same
+triangle inequality on both sides replaces the cap-height asymptotics ("`1 − κ` small against `1 − 2κ_Y`"; I4n's "inf-convolution inequality") by one exact
+condition, `κ > max_j κ_{Y_j}/(1 − κ_{Y_j})` — the lens on `P`'s side of every `Σ_{Y_j}`, each a circle through the foot `r(w₀)` tangent to `ω(P)`.
+
+### 4.3 The end case, assembled
+
+*Claim (the conjecture `e5-bend-end`).* With `θ₁` isolated in `C₂`, the lens `L_A` with `κ` in § 4.2's interval and `δ₀`, `ψ` small is clear for `c`: near
+`c`-tiles by N2-ENV's near clause, far ones near `R₂(ᾱ)` away from `q_A` by their positive distance, far ones near `q_A` beyond the end by Claim E, on the arc
+side by § 4.2. So the tangent bend goes through at the end, and `bend_away`'s conclusion holds near `A` with **no new hypothesis**. ∎
+
+*Model of the case* (a fragment, checked by inspection): `P = 0`, `ᾱ = r([0, π/6])`, `c` on `T_in = {1 − η < |t| < 1, −η < arg t < π/6 + η}` and on
+`Y = {(x, y) : x > 2 + |y|}`, `c′` on the thin annulus outside `α`. `Y` lies outside `B̄(0, 2)` and touches `R₂` at `q_A = (2, 0)` only, so `C₂ = {0}`, the end
+isolated; `|p − t| ≥ x − t₁ > 1` for `p ∈ Y`, `|t| < 1`, so no `c`-pair at distance 1. Its arc-side boundary is transversal (case (b), `κ_Y = 0`): any
+`κ ∈ (0, 1)` serves; its beyond-side boundary is too, and Claim E needs nothing of it.
+
+### 4.4 Entries
+
+derivation: e5-claim-e
+  statement: with P = 0, A = e₁ a unit vector and e₂ ⟂ e₁, if z = z₁e₁ + z₂e₂ has z₁ < 1, z₂ ≥ 0 and |z| ≥ 1, and p = p₁e₁ + p₂e₂ has p₁ > 0 and p₂ ≤ 0, then |p − z| > |p − A|
+  uses only: the radical-axis identity |p − z|² − |p − A|² = −2p·(z − A) + |z|² − |A|² and the signs of the two products
+  not claimed: the same for z₁ ≥ 1 (a lens crossing the tangent line at A) — a corner lens reaches beyond the end
+  argument: § 4.1 Claim E — beyond the end, every point is nearer `A` than any lens point [hand, one mind; CLAIM-E exact]
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: e₁ = (1, 0), z = (1.002, 0.1), p = (2, −0.01) — |p − z|² = 1.008 > |p − A|² = 1.0001; CLAIM-E's grid at four angles and four lens heights
+  prior art: partly: the radical axis is classical (recalled, not read); its use at an arc's end is not found in print
+  handoff: de Bruijn — one lemma in UnitArc beside the lens geometry (it needs no smallness)
+
+control: e5-claim-e-grid
+  of: e5-claim-e — rational lens points inside the tangent line at A, grid points beyond the end near q_A
+  run: python3 ../tools/fs131_e5_checks.py claim-e
+  expect: CLAIM-E violations 0 of 26896
+  fault: python3 ../tools/fs131_e5_checks.py claim-e --plant
+
+derivation: e5-end-cap
+  statement: for κ_Y < 1/2, let Γ_Y be the circle through q_A = 2e₁ tangent to the radius-2 circle about P = 0 with curvature κ_Y toward P, and Σ_Y the concentric circle through A = e₁; every z on P's side of Σ_Y is farther than 1 from every point beyond Γ_Y, and the circle tangent to ω(P) at A of curvature κ lies on P's side of Σ_Y near A when κ > κ_Y/(1 − κ_Y)
+  uses only: the triangle inequality about the common centre of Γ_Y and Σ_Y, and the order of circles tangent at A
+  not claimed: anything at κ_Y = 1/2, where Σ_Y = ω(P) and no lens serves (R2 along an arc); the converse (below the threshold the lens meets the tile's shadow), true and seen by the planted fault, argued nowhere here
+  argument: § 4.2 The arc side at the end — an exact threshold, `κ > κ_Y/(1 − κ_Y)` [hand, one mind; END-CAP exact]
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: κ_Y = 1/4, κ = 2/3 — threshold 1/3; END-CAP's grid finds no lens point within 1 of Y
+  prior art: partly: FS110-N4-SHADOW's curvUp read at A, and NB2's horn lens (this project); not found in print
+  handoff: de Bruijn — one lemma, used at the end and, two-sided, at every isolated interior contact (it replaces N2-TAN's cap asymptotics)
+
+control: e5-end-cap-grid
+  of: e5-end-cap — four tile curvatures, the worst-case tile on both sides of the line PA, the lens's outermost points
+  run: python3 ../tools/fs131_e5_checks.py end-cap
+  expect: END-CAP violations 0 of 108085
+  fault: python3 ../tools/fs131_e5_checks.py end-cap --plant
+
+## Stage 4 — SAVED
