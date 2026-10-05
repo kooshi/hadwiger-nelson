@@ -3291,6 +3291,33 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.GermPseudo.mem_pseudoColours
 #print axioms HadwigerNelson.Plane.ArcMap.pseudo_ncard_le_two_of_baseHyp
 
+/-! ## FS-131 wave 5 (job FS131-I5f) — wave 5's sixth implementer: `cor3_local` proved (the crossing read through cones), the base's ring lemmas and the walk -/
+
+#print axioms HadwigerNelson.Plane.ArcMap.e_arg_of_norm_eq_one
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.disjoint_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ringArc_of_sides
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_coneAt_region_inter
+#print axioms HadwigerNelson.Plane.ArcMap.mem_coneAt_inter_ball_of_re_neg
+#print axioms HadwigerNelson.Plane.ArcMap.mem_coneAt_diff_closedBall_of_re_pos
+#print axioms HadwigerNelson.Plane.ArcMap.exists_near_tangent
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tangent_colour
+#print axioms HadwigerNelson.Plane.ArcMap.cor3_half
+#print axioms HadwigerNelson.Plane.ArcMap.cor3_at
+#print axioms HadwigerNelson.Plane.ArcMap.exists_crossings
+#print axioms HadwigerNelson.Plane.CircleColouring.mem_S_of_ne
+#print axioms HadwigerNelson.Plane.CircleColouring.leftVal_of_not_mem
+#print axioms HadwigerNelson.Plane.ArcMap.germ_add_int_mul
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_add_int_mul
+#print axioms HadwigerNelson.Plane.ArcMap.germPseudo_add_int_mul
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_add_int_mul
+#print axioms HadwigerNelson.Plane.ArcMap.IsRetArc.add_int_mul
+#print axioms HadwigerNelson.Plane.ArcMap.IsRetArc.exists_Ico
+#print axioms HadwigerNelson.Plane.ArcMap.exists_eq_of_absent
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.removable
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.exists_endpoint_third
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.third_ne
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.false
+
 /-! ## FS-131 wave 5 (job FS131-I5b) — wave 5's second implementer: Lemma 1's children, the holed fragment -/
 
 #print axioms HadwigerNelson.Thomassen.LocallyHamiltonian.exists_two_common

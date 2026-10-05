@@ -98,6 +98,24 @@ Wired by FS131-I5e (over the new `sorry` child `cor3_local`, `Plane/ValidMap/Cor
 (`BaseWalk`, NB3 step 5), `rot_noThird` (`HexRing`, N2-ROT's "no `r`-tile at `x`"). Held, not proved: `n3_end_of_not_inType` (a GAP in NB3-END item 2,
 stage 20; to Ephodos).
 
+### FS131-I5f (wave 5's sixth implementer)
+
+*Kernel-checked on the build of stage 23 (`data/fs131/i5f/build-stage23.log`; `build/gate/build/20261005T024824Z-741049.log`); axioms read from that
+build's oleans (`data/fs131/i5f/I5fAxioms23.lean`, output `I5fAxioms23.out`; controls `l3_base` with `sorryAx`, `linkage_dot_ne_zero` clean).*
+
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
+- `HadwigerNelson.Plane.ArcMap.cor3_local` (`Plane/ValidMap/Cor3`) — FS112-N3-COR3's local form (inventory item 218 (b)); with it `cor3`,
+  `pseudo_ncard_le_two_of_baseHyp`, `BaseCtx.pseudo_ncard_le_two`, `rot_noThird` and `BaseCtx.cor3_base` are kernel theorems.
+- Children (`Cor3`): `e_arg_of_norm_eq_one`, `IsRingArc.disjoint_coneAt`, `exists_ringArc_of_sides`, `exists_mem_coneAt_region_inter`,
+  `mem_coneAt_inter_ball_of_re_neg`, `mem_coneAt_diff_closedBall_of_re_pos`, `exists_near_tangent`, `exists_tangent_colour`, `cor3_half`, `cor3_at`,
+  `exists_crossings`.
+- The assembly's glue (`BaseDense`): `CircleColouring.mem_S_of_ne`, `CircleColouring.leftVal_of_not_mem`, `exists_eq_of_absent`, `BaseCtx.removable`, and
+  the periodicity lemmas `germ_add_int_mul`, `ringPt_add_int_mul`, `germPseudo_add_int_mul`, `ringArc_add_int_mul`, `IsRetArc.add_int_mul`,
+  `IsRetArc.exists_Ico`.
+
+Wired by FS131-I5f (axioms `[propext, sorryAx, Classical.choice, Quot.sound]`): `row134BaseUA` (= `BaseCtx.false`, the walk assembled over its leaves as
+stated), `BaseCtx.exists_endpoint_third`, `BaseCtx.third_ne`.
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -978,3 +996,71 @@ item 311 says the lane "would otherwise stand idle with 16 leaves open that need
 Iteration script: `data/fs131/i5f/iter.sh` (I5e's, re-pointed at its own scratch mirror `/home/kooshi/scratch-w5f`, outside the repository).
 
 ## Stage 22 — SAVED
+
+## Stage 23 — SAVED: `cor3_local` proved (its hypotheses suffice, ruling 218 (b) confirmed); `row134BaseUA` wired (the walk assembled over its leaves, no statement defect)
+
+### 23.1 `cor3_local` — a kernel theorem
+
+**`cor3_local` is proved as stated** (`Plane/ValidMap/Cor3`; axioms the standard three). I5e's reading (stage 21: the argument reads `u`, `u′` and the
+common unit points in the domain, nothing more) is confirmed: the proof uses `u ∈ F.dom`, `u′ ∈ F.dom` (the charts at `u`, `u′`) and `w ∈ F.dom` at each
+crossing `w` (interior points near `w`), and no covering hypothesis. With it `cor3`, `pseudo_ncard_le_two_of_baseHyp`, `BaseCtx.pseudo_ncard_le_two` and
+`rot_noThird` are kernel theorems (they were wired over it).
+
+**The route** (one mind; a re-reading of N3-COR3 through the colours' cones at the crossing, shorter than NB3's strip-by-strip argument, and with no
+strip and no `fail_*` lemma): at a crossing `w` of `ω(u)` and `ω(u′)`,
+1. *(`exists_tangent_colour`)* along each half-tangent `e β = (w − u)(±i)` of `ω(u)` at `w`, colours approach `w` from inside and from outside `ω(u)`
+   (pigeonhole over the colours on interior points along the tangent, `exists_mem_coneAt_region_inter`, on explicit points `exists_near_tangent`). If
+   both were colours of `u`, the two sectors of `u` they fill lie inside and outside `ω(w)` (`closure_sector_subset_of_side`), so they share a germ that
+   runs along `ω(w)` — an arc of `Γ` on `ω(w)` ending at `u` with those two side colours (`exists_ringArc_of_sides`) — and `β` would lie in that arc's
+   facing and away cones, which are disjoint (`IsRingArc.disjoint_coneAt`, from U1). So a colour of `u′` approaches `w` along each half-tangent.
+2. *(`cor3_half`)* the two half-tangents of `ω(u)` lie strictly on opposite sides of `ω(u′)` (transversality, `Im((w − u′) conj (w − u)) ≠ 0`), so one
+   colour of `u′` approaches `w` from inside `ω(u′)` and one from outside (`mem_coneAt_inter_ball_of_re_neg` and its outward form, first order). By the
+   same chart lemma at `u′` they are the inner and outer colours of one arc of `ω(w)` ending at `u′`, distinct (U1 again) and carried at `w`: a leaving
+   centre of `u′` and the centre of a both-kind arc.
+3. *(`cor3_at`)* the roles exchanged give two colours of `u` at `w`; the four are distinct (the colours of `u` and `u′` are disjoint): four colours.
+4. *(`exists_crossings`)* the two crossings exist, are distinct and transversal for `0 < |u − u′| < 2` (`u ≠ u′` since the colours are disjoint and
+   three each).
+
+NB3's "one failure is not enough" (the side-cone argument with two leaving arcs sharing a colour) is replaced by step 1, which needs no case on the
+number of leaving arcs: the shared germ between the inside and the outside sector *is* the arc with exactly those two colours. No strip is used, so
+`fail_leavingCentre` / `fail_colours` (which take `Covers u 1`) are not needed.
+
+Children (all in `Cor3`, axioms the standard three): `e_arg_of_norm_eq_one`, `IsRingArc.disjoint_coneAt`, `exists_ringArc_of_sides`,
+`exists_mem_coneAt_region_inter`, `mem_coneAt_inter_ball_of_re_neg`, `mem_coneAt_diff_closedBall_of_re_pos`, `exists_near_tangent`,
+`exists_tangent_colour`, `cor3_half`, `cor3_at`, `exists_crossings`. **Generalizations** (every `k`, reported): `exists_ringArc_of_sides`,
+`exists_tangent_colour`, `cor3_half` and `cor3_at` hold at every `k` (six colours enter `cor3_local` only as "every colour is carried at `u` or at
+`u′`").
+
+### 23.2 `row134BaseUA` — wired: the walk composes from its leaves as stated
+
+`row134BaseUA` is now `BaseCtx.false` applied to the bundled hypotheses, and `BaseCtx.false` assembles the walk (KB's plan § 4 leaf F1, the order in
+`row134BaseUA`'s docstring) over the leaves **as stated**: `exists_pseudoCircle`, `reduce`, `retArcs_finite`, `retArcs_nested`, `select`, `rot_noThird`,
+`p17_ua`, `exists_endpoint`, `exists_eleventh`, `eleventh_type`, `endpoint_dist_ge`, `pair_P'`, `vin_antipodal`, `l3_base`, `cor3_base`,
+`eleventh_antipodal`, `cubic_of_three`, `retArc_partner`. **No statement defect surfaced**: every leaf's hypotheses were dischargeable from the others'
+conclusions. Two observations, neither a defect:
+- `hex_base` cannot be cited on the reduced colouring `C′` (its `hL`, `hR` ask for every angle, and `C′` differs from the map inside the removed
+  returning arcs); the assembly repeats its four-line proof at the hexagon's six points, which are change points of `C′` and so keep the map's germs.
+- `exists_endpoint`'s second disjunct of `hc` (`GermPseudo u θ .cw c ∧ GermPseudo u θ .ccw a`) is unusable beside `ha : GermPseudo u θ .cw a`
+  (`germPseudo_unique` and `a ≠ c`); the assembly calls it with `a`, `c` exchanged instead. Harmless.
+
+Glue (`BaseDense`, before `row134BaseUA`): `CircleColouring.mem_S_of_ne`, `CircleColouring.leftVal_of_not_mem`, the `2π`-periodicity of germs, ring
+points, ring arcs and returning arcs (`IsRetArc.exists_Ico`), `exists_eq_of_absent`, `BaseCtx.removable` (a returning arc is `Removable` for the
+pseudo-colouring's circle colouring: `retArc_partner` through the bridge), `BaseCtx.exists_endpoint_third` (an endpoint's third colour is a colour of
+`u`, else `cor3_base`), `BaseCtx.third_ne` (Lemma 4's distinctness: `endpoint_dist_ge`, `pair_P'`, `vin_antipodal`, `l3_base`). `BaseCtx.removable` and the
+periodicity lemmas are kernel theorems; `BaseCtx.false`, `third_ne`, `exists_endpoint_third` and `row134BaseUA` are wired (over `exists_pseudoCircle`,
+`reduce`, `select`, `l3_base`, `bv_hex` and the planar job's three).
+
+### 23.3 The build
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` (a first attempt waited 25 min for the slot without starting and was
+stopped by PID while still waiting, so that one build covers both leaves): **OK — 447 of 447 batches, 6 modules rebuilt, 8 with warnings, every warning
+`declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T024824Z-741049.log`, "Build completed successfully (5369 jobs)"; driver log
+`data/fs131/i5f/build-stage23.log`). Wave 5's sorry declarations: **29** (`Terminal` 9, `Dense` 1, `Cor3` 0, `HexRing` 6, `MapGraph` 3, `BaseWalk` 7,
+`BaseDense` 3), **13 mine** (from 15: `cor3_local` proved, `row134BaseUA` wired). Axioms read from this build's oleans
+(`data/fs131/i5f/I5fAxioms23.lean` → `I5fAxioms23.out`): `cor3_local`, `cor3`, `pseudo_ncard_le_two_of_baseHyp`, `BaseCtx.pseudo_ncard_le_two`,
+`rot_noThird`, `BaseCtx.cor3_base`, the `Cor3` children, `BaseCtx.removable`, `IsRetArc.exists_Ico` on `[propext, Classical.choice, Quot.sound]`;
+`BaseCtx.false` and `row134BaseUA` on those and `sorryAx` (wired); the controls read as they must (`l3_base` `sorryAx`, `linkage_dot_ne_zero` clean).
+`tools/check_architecture.py`: PASS. `scripts/Axioms.lean`: a block "FS131-I5f" (after I5e's) with every new record. New names collision-free here and
+on `fs131-w5p`, `fs131-w5t`, `fs131-w4`, `main` (by `git grep`).
+
+## Stage 23 — SAVED
