@@ -1,0 +1,41 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261005T085414Z-2846430.log
+    ⚠ [5005/5014] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Contact
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:4064:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:4078:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:4094:8: declaration uses `sorry`
+    ⚠ [5009/5014] Replayed Proofs.HadwigerNelson.Plane.ValidMap.MapGraph
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:621:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:638:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/MapGraph.lean:645:8: declaration uses `sorry`
+    ⚠ [5029/5370] Replayed Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:2645:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:2658:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:3213:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:3231:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:3571:8: declaration uses `sorry`
+    ⚠ [5066/5370] Replayed Proofs.HadwigerNelson.Plane.ValidMap.HexRing
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:248:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:262:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:281:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:299:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:320:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:390:8: declaration uses `sorry`
+    ⚠ [5067/5370] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Terminal
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:806:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:818:8: declaration uses `sorry`
+    ⚠ [5190/5370] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Dense
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Dense.lean:48:8: declaration uses `sorry`
+    ⚠ [5197/5370] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BaseWalk
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:542:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:1148:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:1157:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:1169:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseWalk.lean:1443:8: declaration uses `sorry`
+    ⚠ [5208/5370] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BaseDense
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:307:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:329:8: declaration uses `sorry`
+    All targets up-to-date (5370 jobs).
+==> build: OK — all 1755 modules already up to date, nothing built, 8 module(s) with warnings, 2s
+    full output: build/gate/build/20261005T085414Z-2846430.log
+EXIT=0
