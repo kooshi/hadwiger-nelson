@@ -357,3 +357,32 @@ with warnings, every warning `declaration uses 'sorry'`**, exit 0, 8 min 30 s (`
 completed successfully (5791 jobs)"; driver log `data/fs131/cg/build-move.log`).
 
 ## Stage 8 — SAVED (FS131-CG1)
+
+## Stage 9 — SAVED (FS131-CG1): the radial push proved, and the lane re-priced
+
+**Proved** (`Plane/ValidMap/RadialPush`, statements unchanged — `tools/fs131_cg_stmt.py` PASS, `data/fs131/cg/stmt-9.txt`): `push1_push1`,
+`push1_image_Ico`, `push1_image_Ioc`, `pushInv_pushFun`, `pushFun_pushInv`, `continuous_pushFun`, `continuous_pushInv`, `pushHomeo_polar`,
+`pushHomeo_eq_self`, `pushHomeo_image_polarSet` — so `pushHomeo` is a homeomorphism with no `sorry` beneath it. Evidence at this stage:
+`lake env lean` on the module, only the ten remaining `sorry` warnings (`data/fs131/cg/iter-9.txt`); the build is at Stage 10.
+
+**How** (33 new supporting declarations, listed in `stmt-9.txt`):
+- the one-dimensional push in closed form on each side of its peak (`push1_of_le_mid`, `push1_of_mid_le`, from `tent_of_le_mid`,
+  `tent_of_mid_le`); `push1_mem_Ico`/`_Ioc` map the sides into the image sides, and `push1_push1` is the affine inverse on each side;
+- **`polarAngle_polar`** (the plan's new child), stated on the whole window: `θ ∈ Ioc (φ − π) (φ + π)`, `0 < t` ⟹ `polarAngle P φ (P + t e θ)
+  = θ` (the plan's `|θ − φ| < π` misses the window's closed end, which `pushInv_pushFun` meets when `z` lies on the slit);
+- **`radialMap`** (a new def, with spec theorem `radialMap_id`): `pushFun` and `pushInv` are radial maps by `rfl`, and one lemma,
+  `radialMap_radialMap` (each ray to itself, the radius map inverted ray by ray, `0` and positivity kept), gives both inverses;
+- **continuity** through one lemma for both directions, `continuous_radialMap_push1`: the map is `z − (m − m')(θ)·tent(a θ, m θ, b θ,
+  |z − P|)·e θ` (`radialMap_push1_eq`); the displacement is `0` on the open half-plane behind `P` (there `|arg| > π/2`, so the angle is
+  more than `π/2` from the bisector and outside the sector) and on a ball about `P` (inside the inner profile's positive minimum,
+  `PushProfiles.exists_a_ge`); elsewhere the angle is continuous (`Complex.continuousAt_arg`), and either the angle is inside the sector
+  (every piece continuous, the tent's denominators nonzero) or `m = m'` there and the displacement is squeezed by `|m − m'| → 0`. No case
+  on the tent's knots, as the plan foresaw.
+
+**Re-price** (`LEAN.md`: from the first leaves). KP2 priced this part at about 670 lines (push1 60 + images 60 + inverses 150 + continuity
+250 + `pushHomeo_*` 150); it came in at 376 lines, every leaf on its first or second elaboration — about 0.55× the plan. Lane G's remaining
+price by the same ratio: the `tangRad` family and the profiles (plan ≈ 520) ≈ 300; `collarArcs_carrier` (plan 250, hard) ≈ 150–250; the
+map-level children in `CollarMap` (plan ≈ 650) ≈ 350–650 — those read `F`'s geometry, where the ratio is less certain. The lane fits this
+job's budget on that reading.
+
+## Stage 9 — SAVED (FS131-CG1)
