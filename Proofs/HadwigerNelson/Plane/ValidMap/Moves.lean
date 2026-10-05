@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Surgery
+import Proofs.HadwigerNelson.Plane.ValidMap.MergeMove
 
 /-!
 # The local moves at a point: SHAVE, MERGE-RAY and MERGE (FS110-N4-SHAVE, N4-RAY, W-MERGE)

@@ -3294,6 +3294,12 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.shave_hlc
 #print axioms HadwigerNelson.Plane.ArcMap.exists_shave_recolour
 
+/-! ## FS-131 wave 4, `MergeMove` (job FS131-IMM1) — MERGE's children -/
+-- FS131-IMM1
+#print axioms HadwigerNelson.Plane.ArcMap.dist_ne_one_of_isOpen_isClear
+#print axioms HadwigerNelson.Plane.ArcMap.add_mem_allowedCone
+#print axioms HadwigerNelson.Plane.ArcMap.smul_mem_allowedCone
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

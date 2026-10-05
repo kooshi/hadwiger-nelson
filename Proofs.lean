@@ -176,6 +176,7 @@ import Proofs.HadwigerNelson.Plane.StuckChain
 import Proofs.HadwigerNelson.Plane.ValidMap.Cone
 import Proofs.HadwigerNelson.Plane.ValidMap.Contact
 import Proofs.HadwigerNelson.Plane.ValidMap.Surgery
+import Proofs.HadwigerNelson.Plane.ValidMap.MergeMove
 import Proofs.HadwigerNelson.Plane.ValidMap.Moves
 import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 import Proofs.HadwigerNelson.Plane.SVMap

@@ -33,3 +33,25 @@ modules rebuilt (the copied `.lake/build` came from an older tree: `Basic`, `Sec
 `Moves`, `BaseSteps`, `Proofs`), 10 min 24 s; warnings only `declaration uses 'sorry'` — `Moves` 2 (l. 573 `exists_rayMerge_aux`, l. 584
 `exists_merge_aux`), `Contact` 4, `BaseSteps` 7, `UnitArc` 17. Log `build/gate/build/20261005T002608Z-3882202.log`; terminal output
 `data/fs131/imm/build-asgiven.log`.
+
+## Stage 2 — SAVED: `MergeMove` created; `Moves` imports it
+
+`Proofs/HadwigerNelson/Plane/ValidMap/MergeMove.lean` (importing `Plane/ValidMap/Surgery` only) holds MERGE's children; `Moves` gains the line
+`import Proofs.HadwigerNelson.Plane.ValidMap.MergeMove` beside its `Surgery` import (kept, so `tools/fs131_im_split.py --check` still reads
+`Moves` as importing `Surgery`); `Proofs.lean` imports it after `Surgery`; `ARCHITECTURE.md` gains its row and `Moves`' Imports cell names
+it; `scripts/Axioms.lean` gains the block "FS-131 wave 4, `MergeMove` (job FS131-IMM1)" just above the `=== PURCHASED ===` banner.
+**No child goes into `Surgery`**: the brief allows new declarations at its end, but `tools/fs131_im_split.py --check` holds `Surgery` byte
+for byte to header + IM2's block + footer, so every child of MERGE lives in `MergeMove` (and `fs131-w4mm` merges with `fs131-w4m`'s
+`Surgery` without conflict).
+
+First children (sorry-free): `ArcMap.dist_ne_one_of_isOpen_isClear` (an open set of points clear for `c` meets no unit circle about a
+point of the closure of `c`'s class — what the `D_c(v′)` clause needs of the recoloured region), `ArcMap.add_mem_allowedCone`,
+`ArcMap.smul_mem_allowedCone` (`D_c(v)` is a convex cone).
+
+Checks: `tools/check_architecture.py` PASS (before the row was added it failed exactly on "missing: ['Plane/ValidMap/MergeMove']" — the
+module-coverage control); `tools/fs131_im_split.py --check` PASS; `tools/fs131_im_statements.py --check` PASS (diffs empty).
+**Build** (under the slot, as in § 1.2): **OK**, 446 of 446 batches, 3 modules rebuilt (`MergeMove` 1.4 s, `Moves` 3.2 s, `Proofs`); warnings
+only `declaration uses 'sorry'` — `Moves` 2 (l. 574 `exists_rayMerge_aux`, l. 585 `exists_merge_aux`), `Contact` 4, `BaseSteps` 7, `UnitArc`
+17; none in `MergeMove`. Log `build/gate/build/20261005T005242Z-4094929.log`; terminal output `data/fs131/imm/build-stage2.log`.
+Iteration: `data/fs131/imm/iter.sh` elaborates a scratch file against a private olean mirror `build/imm-mirror` (never evidence; a planted
+`example : (1:ℕ) = 2 := rfl` was reported, so the mirror checks).
