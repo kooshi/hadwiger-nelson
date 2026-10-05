@@ -1222,3 +1222,35 @@ record is KB's).
 **Re-pricing** (first hard leaf): `reduce` took about 30k tokens of context, about a third of an implementer session's working budget — M–H as planned.
 
 ## Stage 26 — SAVED
+
+## Stage 27 — SAVED (FS131-I5h): the readback
+
+*FS131-I5h, wave 5's `Terminal` implementer (Opus), on branch `fs131-w5c` in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c`, cut from `fs131-w5`
+at `75689a4c`; continuing this record from Stage 27 while FS131-I5g writes stages on `fs131-w5`. Brief: `data/fs131/briefs/FS131-I5h-terminal.md` (main
+tree). My set (ruling 322 (c)): E5's two lemmas as children, then `n3_end_of_not_inType`, `cv_class`, the CV-HD cluster (`cv_hd_main`, `y3_end_needs`,
+`cv_hd`, `c_double`, `c_ends`), `exists_red`, `exists_terminal`, then `cv_exists` (`BaseDense`, its lines only).*
+
+### 27.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script, `tools/fs131_i5h_quotes.py` (each run of `> ` lines searched verbatim, whitespace folded, in the file its `— source:` line names; main
+tree unless the path is absolute). **11 quotations, 0 failures** — every one verbatim: `CLAUDE.md` § Counter-priors (Kooshi on pricing); this record's
+Stage 21 (`Terminal` (9)) and Stage 24 (`cv_exists`); the inventory's items 320, 321, 322, 274, 295; E5's record § 3.4 and § 3.5 headings; the plan's
+§ 10.2 ("It may"). `--self-test`: a one-letter plant in the first quotation **fired** (1 failure reported), the unplanted run passed.
+
+Read in full: inventory items 274, 295, 320–323; E5's record § 3 (§§ 3.1–3.6: SH, the inputs F1–F6, SEP, NB3-END item 2, CVB § 1.4 item 5, the
+entries); this record's Stages 18 and 20.2 (I5d's and I5e's notes under `n3_end`: the GAP and the limit directions), Stages 21–26; the plan's §§ 3.2, 4,
+8.2, 9.1, 10.2; NB3-END items 1–5 (`plans/FS112-NB3-verification.md` l. 222–243). No mismatch found. Item 323 (staffing back to three) applies to launches,
+not to this running job.
+
+### 27.2 The as-given build (`75689a4c`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — 447 of 447 batches, 22
+modules rebuilt (the copied `.lake/build` differed), 8 modules with warnings**, exit 0, 11 min 49 s (`build/gate/build/20261005T035051Z-1154391.log`;
+driver log `data/fs131/i5h/build-stage27-asgiven.log`). Every warning is `declaration uses 'sorry'`; distinct declarations: wave 5's `Terminal` 9, `Dense`
+1, `HexRing` 6, `MapGraph` 3, `BaseWalk` 5, `BaseDense` 3 (**27**, I5g's count at Stage 26; mine 10: `Terminal`'s 9 and `cv_exists`), and wave 4's stale
+`Contact` 3, `UnitArc` 5.
+
+Iteration script: `data/fs131/i5h/iter.sh` (I5g's, re-pointed at this worktree and its own scratch mirror `/home/kooshi/scratch-w5h`, outside the
+repository).
+
+## Stage 27 — SAVED
