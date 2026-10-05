@@ -3077,3 +3077,29 @@ reason by the close.*
      record's route), then `exists_red` and `exists_terminal` (citing `exists_merge` in ruling 269's form only). The non-`Terminal` continuation keeps the name
      FS131-I5o (item 350's queue). Alternative weighed: I5o (`bv_l3`, `exists_preBend`). Why: the `Terminal` half's three H leaves, two of them limit
      constructions, are still the longest lane; I5o's two have slack. Confidence: high. In flight after I5p's launch: 1 (RS1) + 1 (IMM4) + 1 (I5p) = 3.
+357. **FS131-RS1 done: SEP is held — the planar chain is complete** (harness ≈ 295k by the task notice; record `fs131-w5p`'s
+     `plans/FS131-planar-implementation.md`, Stages 27–29; report `data/fs131/reports/FS131-RS1.md`; commits `0ddbae32`, `da540e63`, `82efa460`, `5086e856`,
+     pushed). **Result, [kernel] on the standard three, statement unchanged**: `ArcMap.IsBoundaryWalk.sep` (a tile the walk lists at `i < j` cuts every entry
+     strictly between from every entry strictly outside, in `M̂ − x − y` — `Thomassen.IsRing`'s clause 3 word for word, `[Thomassen1999]` p. 851). **With WALK,
+     on the standard three on `fs131-w5p`**: F-RING `filledGraph_ringList`, `filledGraph_rings`, `filledGraph_oneInf`, `filledGraph_finSep`,
+     `filledGraph_planarLike`, and FS114-CVB-THOM `cvb_thom_reduced` and `cvb_thom`. Children: SEP-X `inter_nonempty_of_interleaved_exterior_of_isClosed` (the
+     crossing lemma outside a disc for a closed set, bounded or not), SEP-CHAIN `isPreconnected_biUnion_Icc_mod` with `mod_prev_succ`, SEP-K1
+     `isPreconnected_union_insert_diff_ball`, SEP-S `exists_isClosed_of_reachable_offTwo`, SEP-PIECE `IsBoundaryWalk.exists_piece` (the two `mod_*` on
+     `[propext, Quot.sound]`). **Receipt** (Keryx): the four commits exist and `origin/fs131-w5p` is `5086e856`; the stage-29 build log
+     (`build/gate/build/20261005T081136Z-2602331.log`) ends "Build completed successfully (5405 jobs)", 0 warnings other than `sorry`; the three driver logs
+     (`data/fs131/rs/build-*.log`) end `EXIT 0`; `sorry` by grep: `MapGraph`, `MapTopology`, `CurveGraph`, `PlaneTopology`, `Thomassen` all 0; the branch's
+     remaining `BaseWalk`/`BaseDense` `sorry` declarations are the wave-5 lane's leaves in this branch's stale copies (proved on `fs131-w5`/`fs131-w5c`), and the
+     planar seven are not among them; `data/fs131/rs/axioms-rs1.txt` parsed: 19 records, 18 within the standard three (the eight named above among them), the
+     control `rot_noThird` on `sorryAx`. **Generalization**: SEP holds for every `ArcMap`, valid or not (its statement carries no `F.Valid`); the bounded
+     crossing lemma is a special case of SEP-X. **Correction owed** (plan text only): RL1's plan §§ 2.2, 4.2 call `K₂` "closed, bounded" — without `F.Valid`
+     it need not be bounded, so SEP-X replaces the bounded lemma. **Shorter route**: SEP-ROT and SEP-REDUCE not needed (positions read mod the length inside
+     SEP-CHAIN). **Prediction scored**: RL1 priced SEP at 1.2–1.5 sessions; about 35 minutes plus three 9-minute builds. **For wave 5's landing**: 8 new
+     audited records, all clean; no new hypothesis structure, so no vacuity registration from this job. Credit: RS1, for the crossing lemma for closed sets.
+358. **Ruling on RS1's slot: FS131-I5o on `fs131-w5`** — (1) **merge `fs131-w5p` (at `5086e856`) into `fs131-w5`** (both sides touch only `ARCHITECTURE.md`,
+     `BaseDense`, `BaseWalk`, `Proofs.lean` and `scripts/Axioms.lean` since their merge base `0db34854`; keep both sides' declarations and blocks), build,
+     and check that `BaseWalk`'s planar three and every `MapGraph` leaf are proved on `fs131-w5` (axioms print), with every statement on both sides unchanged;
+     (2) `bv_l3`; (3) `exists_preBend`; (4) `disc1_local` (`Dense`, planar topology, now with the plane topology in reach — item 317's (d)). Alternative weighed:
+     a merge job alone first. Why: the merge is small (five shared files, disjoint declarations), the tree is idle, and the leaves after it want the merged
+     state; one job keeps the slot busy. Confidence: medium-high. **No `main`, no `framePt → fromFrame`** in this merge: neither branch carries wave 2's
+     landing (checked: `6f20e12f` is an ancestor of neither), so the rename waits for wave 5's landing. In flight after I5o's launch: 1 (IMM4) + 1 (I5p) +
+     1 (I5o) = 3.
