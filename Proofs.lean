@@ -191,6 +191,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.Contact
 import Proofs.HadwigerNelson.Plane.ValidMap.Surgery
 import Proofs.HadwigerNelson.Plane.ValidMap.MergeMove
 import Proofs.HadwigerNelson.Plane.ValidMap.Moves
+import Proofs.HadwigerNelson.Plane.ValidMap.OpenMove
 import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
 import Proofs.HadwigerNelson.Plane.SVMap
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps

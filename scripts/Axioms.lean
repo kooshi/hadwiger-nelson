@@ -4695,6 +4695,25 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_inType_iff
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_outType_iff
 
+/-! ## FS-131, `OpenMove` (job FS131-IO1) — OPEN, the fifth move (children `sorry` until the implementer closes them) -/
+-- FS131-IO1
+#print axioms HadwigerNelson.Plane.ArcMap.HasHornCount.eq
+#print axioms HadwigerNelson.Plane.ArcMap.HasDegree.eq
+#print axioms HadwigerNelson.Plane.ne_hornSet_of_interior_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.Near.exists_openConfig
+#print axioms HadwigerNelson.Plane.ArcMap.Near.openArcs_finite
+#print axioms HadwigerNelson.Plane.ArcMap.Near.openArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_hlc
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_agreesOff
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_ringArcsWithin
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_condition5
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_valid
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_coloursAt_self
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_degree_horns
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_rim
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_allowedCone
+#print axioms HadwigerNelson.Plane.ArcMap.exists_open
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
