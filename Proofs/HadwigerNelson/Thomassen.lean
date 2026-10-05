@@ -74,7 +74,7 @@ for every pair exactly one infinite component of `G − x − y` (CVB step 2: "t
 unbounded component and every other component of `M − x − y` is finite"); and every vertex in the interior of finitely many pairs (on a map:
 the tiles have diameter at most `1`, so a pair whose interior holds a tile lies near it). Without `finSep` the reduction fails: in the strong
 product of a ray with an edge, every other field holds, the levels are 2-separators nesting forever, none is maximal, and `H = G` is not locally
-Hamiltonian (FS131-IT1). The filled map graph of a valid plane map has them (`ArcMap.filledGraph_planarLike`); the reduction is
+Hamiltonian (`ladder_adversary`, FS131-IT1). The filled map graph of a valid plane map has them (`ArcMap.filledGraph_planarLike`); the reduction is
 `reduced_props_of_planarLike`. -/
 structure PlanarLike : Prop where
   /-- Locally finite. -/
@@ -1687,6 +1687,304 @@ theorem triLattice_planarLike : PlanarLike triLattice where
   finSep v := by
     simp only [triLattice_twoSepInterior, Set.mem_empty_iff_false, Set.setOf_false, Set.finite_empty]
 
+/-! ## The adversary: without `finSep` the reduction fails -/
+
+/-- **The ladder**: the strong product of the ray `ℕ` with an edge — the levels `{(n, false), (n, true)}` are edges and consecutive levels are
+completely joined. Every field of `PlanarLike` but `finSep` holds, and `H = G` is not locally Hamiltonian (`ladder_adversary`; FS131-IT1,
+inventory item 308). -/
+def ladder : SimpleGraph (ℕ × Bool) where
+  Adj p q := (p.1 = q.1 ∧ p.2 ≠ q.2) ∨ p.1 + 1 = q.1 ∨ q.1 + 1 = p.1
+  symm := ⟨fun p q h => by
+    rcases h with ⟨h1, h2⟩ | h | h
+    · exact Or.inl ⟨h1.symm, Ne.symm h2⟩
+    · exact Or.inr (Or.inr h)
+    · exact Or.inr (Or.inl h)⟩
+  loopless := ⟨fun p h => by
+    rcases h with ⟨-, h⟩ | h | h
+    · exact h rfl
+    · omega
+    · omega⟩
+
+/-- Adjacency in the ladder: same level and other side, or consecutive levels. -/
+theorem ladder_adj {p q : ℕ × Bool} : ladder.Adj p q ↔ (p.1 = q.1 ∧ p.2 ≠ q.2) ∨ p.1 + 1 = q.1 ∨ q.1 + 1 = p.1 := Iff.rfl
+
+/-- In the ladder, a vertex climbs inside `S` to level `N` when every level strictly above it, up to `N`, keeps a vertex of `S`. -/
+theorem ladder_climb {S : Set (ℕ × Bool)} {N : ℕ} :
+    ∀ (d : ℕ) (v : ℕ × Bool), v ∈ S → v.1 + d = N → (∀ k, v.1 < k → k ≤ N → ∃ t, (k, t) ∈ S) →
+      ∃ t, ReachIn ladder S v (N, t) := by
+  intro d
+  induction d with
+  | zero => intro v hv hd _; exact ⟨v.2, by rw [← hd]; exact ReachIn.refl hv⟩
+  | succ d ih =>
+    intro v hv hd hlev
+    obtain ⟨t, ht⟩ := hlev (v.1 + 1) (by omega) (by omega)
+    obtain ⟨t', ht'⟩ := ih (v.1 + 1, t) ht (by simp only; omega) (fun k hk hk' => hlev k (by simp only at hk; omega) hk')
+    exact ⟨t', (ReachIn.of_adj hv ht (Or.inr (Or.inl rfl))).trans ht'⟩
+
+/-- In the ladder, a vertex descends inside `S` to `(N, false)` when every level from `N` up is wholly in `S`. -/
+theorem ladder_descend {S : Set (ℕ × Bool)} {N : ℕ} (hS : ∀ k t, N ≤ k → (k, t) ∈ S) :
+    ∀ (d : ℕ) (v : ℕ × Bool), v.1 = N + d → ReachIn ladder S v (N, false) := by
+  intro d
+  induction d with
+  | zero =>
+    intro v hv
+    obtain ⟨n, t⟩ := v
+    simp only [Nat.add_zero] at hv
+    subst hv
+    cases t
+    · exact ReachIn.refl (hS _ _ le_rfl)
+    · exact ReachIn.of_adj (hS _ _ le_rfl) (hS _ _ le_rfl) (Or.inl ⟨rfl, by simp⟩)
+  | succ d ih =>
+    intro v hv
+    have hv' : v ∈ S := by obtain ⟨n, t⟩ := v; exact hS _ _ (by simp only at hv; omega)
+    exact (ReachIn.of_adj hv' (hS (N + d) false (by omega)) (Or.inr (Or.inr (by simp only; omega)))).trans
+      (ih (N + d, false) rfl)
+
+/-- Off any two vertices that are not a level above the first, every vertex of the ladder reaches a vertex above both. -/
+theorem ladder_reachIn {x y : ℕ × Bool} (hxy : ¬ (x.1 = y.1 ∧ x ≠ y ∧ 1 ≤ x.1)) {a : ℕ × Bool} (ha : a ∈ offTwo x y) :
+    ReachIn ladder (offTwo x y) a (max x.1 y.1 + 1, false) := by
+  set N := max x.1 y.1 + 1 with hN
+  have hhigh : ∀ k t, N ≤ k → (k, t) ∈ offTwo x y := fun k t hk =>
+    ⟨fun h => by have := congrArg Prod.fst h; simp only at this; omega,
+     fun h => by have := congrArg Prod.fst h; simp only at this; omega⟩
+  by_cases haN : a.1 ≤ N
+  · obtain ⟨t, ht⟩ := ladder_climb (N := N) (N - a.1) a ha (by omega) (fun k hk hkN => by
+      by_contra hno
+      push Not at hno
+      have h1 := hno false
+      have h2 := hno true
+      simp only [offTwo, Set.mem_setOf_eq, not_and_or, not_not] at h1 h2
+      apply hxy
+      rcases h1 with h1 | h1 <;> rcases h2 with h2 | h2
+      · rw [← h1] at h2; simp at h2
+      · rw [← h1, ← h2]; simp; omega
+      · rw [← h1, ← h2]; simp; omega
+      · rw [← h1] at h2; simp at h2)
+    exact ht.trans (ladder_descend hhigh 0 (N, t) (by simp))
+  · exact ladder_descend hhigh (a.1 - N) a (by omega)
+
+/-- `G − x − y` in the ladder is connected unless `{x, y}` is a level above the first. -/
+theorem ladder_connected {x y : ℕ × Bool} (hxy : ¬ (x.1 = y.1 ∧ x ≠ y ∧ 1 ≤ x.1)) :
+    (ladder.induce (offTwo x y)).Connected := by
+  have hhigh : (max x.1 y.1 + 1, false) ∈ offTwo x y :=
+    ⟨fun h => by have := congrArg Prod.fst h; simp only at this; omega,
+     fun h => by have := congrArg Prod.fst h; simp only at this; omega⟩
+  exact connected_induce_iff'.mpr ⟨⟨_, hhigh⟩, fun a b ha hb => (ladder_reachIn hxy ha).trans (ladder_reachIn hxy hb).symm⟩
+
+/-- Below a level `L_n` (given as `{x, y}`, two vertices of level `n`), the lower levels are closed under adjacency off `L_n`. -/
+theorem ladder_below_closed {n : ℕ} {x y : ℕ × Bool} (hx : x.1 = n) (hy : y.1 = n) (hxy : x ≠ y) {a b : ℕ × Bool} (ha : a.1 < n)
+    (hb : ReachIn ladder (offTwo x y) a b) : b.1 < n := by
+  refine mem_of_reachIn_of_closed (C := {v : ℕ × Bool | v.1 < n}) (fun v w hv hw hvw => ?_) ha hb
+  simp only [Set.mem_setOf_eq] at hv ⊢
+  have hw1 : w.1 ≤ n := by rcases hvw with ⟨h1, -⟩ | h1 | h1 <;> omega
+  by_contra hc
+  have hwn : w.1 = n := by omega
+  have hx2y2 : x.2 ≠ y.2 := fun h => hxy (Prod.ext (hx.trans hy.symm) h)
+  have hw2 : w.2 = x.2 ∨ w.2 = y.2 := by
+    revert hx2y2
+    cases w.2 <;> cases x.2 <;> cases y.2 <;> simp
+  rcases hw2 with h | h
+  · exact hw.1 (Prod.ext (hwn.trans hx.symm) h)
+  · exact hw.2 (Prod.ext (hwn.trans hy.symm) h)
+
+/-- The levels below `n` are finitely many vertices. -/
+theorem ladder_below_finite (n : ℕ) : {v : ℕ × Bool | v.1 < n}.Finite := by
+  refine ((Set.finite_Iio n).prod (Set.finite_univ (α := Bool))).subset ?_
+  intro v hv
+  exact ⟨hv, trivial⟩
+
+/-- A vertex below a level `L_n` lies in its interior. -/
+theorem ladder_mem_twoSepInterior {n : ℕ} {v : ℕ × Bool} (hv : v.1 < n) :
+    v ∈ twoSepInterior ladder (n, false) (n, true) := by
+  have hvS : v ∈ offTwo (n, false) (n, true) :=
+    ⟨fun h => by rw [h] at hv; simp at hv, fun h => by rw [h] at hv; simp at hv⟩
+  exact mem_twoSepInterior_iff.mpr ⟨hvS, (ladder_below_finite n).subset fun b hb =>
+    ladder_below_closed (x := (n, false)) (y := (n, true)) rfl rfl (by simp) hv hb⟩
+
+/-- Infinitely many vertices of the ladder are off any two. -/
+theorem ladder_offTwo_infinite (x y : ℕ × Bool) : (offTwo x y).Infinite := by
+  have hS : offTwo x y = ({x, y} : Set (ℕ × Bool))ᶜ := by ext v; simp [offTwo]
+  rw [hS]
+  exact (Set.toFinite _).infinite_compl
+
+/-- The ring of the ladder at `(0, s)`: no repeats. -/
+theorem ladder_ring_zero (s : Bool) : IsRing ladder (0, s) [(0, !s), (1, s), (1, !s)] := by
+  refine ⟨fun y => ?_, fun i a b ha hb => ?_, fun y i j hij hi hj => ?_⟩
+  · obtain ⟨m, t⟩ := y
+    simp only [List.mem_cons, List.not_mem_nil, or_false, Prod.mk.injEq, ladder_adj]
+    cases s <;> cases t <;> simp <;> omega
+  · simp only [List.length_cons, List.length_nil] at hb
+    rcases i with _ | _ | _ | i <;> simp at ha hb <;> subst ha <;> subst hb <;> right <;> simp [ladder_adj]
+  · exfalso
+    have hnd : [((0 : ℕ), !s), (1, s), (1, !s)].Nodup := by cases s <;> decide
+    exact List.nodup_iff_getElem?_ne_getElem?.mp hnd i j hij (List.getElem?_eq_some_iff.mp hj).1 (hi.trans hj.symm)
+
+/-- The ring of the ladder at `(n + 1, s)`: the one repeat, `(n + 1, !s)`, separates level `n` from level `n + 2`. -/
+theorem ladder_ring_succ (n : ℕ) (s : Bool) :
+    IsRing ladder (n + 1, s) [(n + 2, s), (n + 2, !s), (n + 1, !s), (n, !s), (n, s), (n + 1, !s)] := by
+  refine ⟨fun y => ?_, fun i a b ha hb => ?_, fun y i j hij hi hj => ?_⟩
+  · obtain ⟨m, t⟩ := y
+    simp only [List.mem_cons, List.not_mem_nil, or_false, Prod.mk.injEq, ladder_adj]
+    cases s <;> cases t <;> simp <;> omega
+  · simp only [List.length_cons, List.length_nil] at hb
+    rcases i with _ | _ | _ | _ | _ | _ | i <;> simp at ha hb <;> subst ha <;> subst hb <;> right <;> simp [ladder_adj]
+  · have hj6 : j < 6 := (List.getElem?_eq_some_iff.mp hj).1
+    have h25 : i = 2 ∧ j = 5 ∧ y = (n + 1, !s) := by
+      rcases i with _ | _ | _ | _ | _ | _ | i <;> rcases j with _ | _ | _ | _ | _ | _ | j <;>
+        simp only [List.getElem?_cons_zero, List.getElem?_cons_succ, Option.some.injEq] at hi hj <;>
+        (try omega) <;> subst hi <;> simp_all
+    obtain ⟨rfl, rfl, rfl⟩ := h25
+    intro m n' a b him hmj hn' ha hb hxa hxb hreach
+    have hab : a.1 = n ∧ b.1 = n + 2 := by
+      have hn6 : n' < 6 := (List.getElem?_eq_some_iff.mp hb).1
+      rcases m with _ | _ | _ | _ | _ | _ | m <;> (try omega) <;>
+      rcases n' with _ | _ | _ | _ | _ | _ | n' <;> (try omega) <;>
+        simp only [List.getElem?_cons_zero, List.getElem?_cons_succ, Option.some.injEq] at ha hb <;>
+        subst ha <;> subst hb <;> simp
+    have := ladder_below_closed (n := n + 1) (x := (n + 1, s)) (y := (n + 1, !s)) rfl rfl (by simp) (by omega)
+      ((reachable_induce_iff hxa hxb).mp hreach)
+    omega
+
+/-- No 2-separator of the ladder is maximal: each lies in the interior of the level above it. -/
+theorem ladder_not_isMaximalTwoSep (x y : ℕ × Bool) : ¬ IsMaximalTwoSep ladder x y := by
+  intro hm
+  have hx := ladder_mem_twoSepInterior (n := x.1 + 1) (v := x) (by omega)
+  exact (hm.2 _ _ ⟨fun h => by simp at h, x, hx⟩).1 hx
+
+/-- `H` of the ladder is the ladder: no vertex lies in the interior of a maximal 2-separator. -/
+theorem ladder_reducedVerts (v : ℕ × Bool) : v ∈ reducedVerts ladder := fun x y hm => absurd hm (ladder_not_isMaximalTwoSep x y)
+
+/-- **The ladder is an adversary of `PlanarLike` without `finSep`**: locally finite, connected, infinite, rings at every vertex with `G − x − y`
+connected unless `y` appears twice apart, exactly one infinite component of every `G − x − y` — yet `finSep` fails (`(0, false)` lies in the
+interior of every level above it) and `H` (here `G` itself: no 2-separator is maximal) is not locally Hamiltonian (at `(1, false)` the
+neighbourhood is two edges joined through one vertex). So `reduced_props_of_planarLike` needs `finSep`. -/
+theorem ladder_adversary :
+    (∀ x, (ladder.neighborSet x).Finite) ∧ ladder.Connected ∧ Infinite (ℕ × Bool) ∧
+      (∀ x, ∃ r, IsRing ladder x r ∧ ∀ y, y ≠ x → ¬ TwiceApart r y → (ladder.induce (offTwo x y)).Connected) ∧
+      (∀ x y, x ≠ y → ∃ c : (ladder.induce (offTwo x y)).ConnectedComponent, ¬ c.supp.Finite ∧ ∀ c', ¬ c'.supp.Finite → c' = c) ∧
+      ¬ (∀ v, {p : (ℕ × Bool) × (ℕ × Bool) | v ∈ twoSepInterior ladder p.1 p.2}.Finite) ∧
+      ¬ LocallyHamiltonian (reduced ladder) := by
+  refine ⟨?_, ?_, inferInstance, ?_, ?_, ?_, ?_⟩
+  · -- locally finite
+    intro x
+    refine ((ladder_below_finite (x.1 + 2)).subset fun y hy => ?_)
+    rcases hy with ⟨h1, -⟩ | h1 | h1 <;> simp only [Set.mem_setOf_eq] <;> omega
+  · -- connected
+    refine (SimpleGraph.connected_iff_exists_forall_reachable ladder).mpr ⟨(0, false), ?_⟩
+    rintro ⟨n, t⟩
+    induction n with
+    | zero =>
+      cases t
+      · rfl
+      · exact SimpleGraph.Adj.reachable (Or.inl ⟨rfl, by decide⟩)
+    | succ n ih => exact ih.trans (SimpleGraph.Adj.reachable (Or.inr (Or.inl rfl)))
+  · -- rings
+    rintro ⟨_ | n, s⟩
+    · refine ⟨_, ladder_ring_zero s, fun y hy _ => ladder_connected fun h => ?_⟩
+      simp only at h; omega
+    · refine ⟨_, ladder_ring_succ n s, fun y hy htw => ladder_connected fun h => htw ?_⟩
+      obtain ⟨h1, h2, -⟩ := h
+      have hy' : y = (n + 1, !s) := by
+        obtain ⟨m, t⟩ := y
+        simp only at h1
+        subst h1
+        cases s <;> cases t <;> simp_all
+      subst hy'
+      exact ⟨2, 5, by omega, by simp, rfl, rfl⟩
+  · -- one infinite component
+    intro x y hxy
+    by_cases hsplit : x.1 = y.1 ∧ x ≠ y ∧ 1 ≤ x.1
+    · obtain ⟨hxy1, hne, -⟩ := hsplit
+      have hS : ∀ k t, x.1 + 1 ≤ k → (k, t) ∈ offTwo x y := fun k t hk =>
+        ⟨fun h => by rw [← h] at hk; simp at hk, fun h => by rw [hxy1, ← h] at hk; simp at hk⟩
+      have hc0 := hS (x.1 + 1) false le_rfl
+      refine ⟨(ladder.induce (offTwo x y)).connectedComponentMk ⟨_, hc0⟩, fun hf => ?_, fun c' hc' => ?_⟩
+      · rw [supp_finite_iff hc0] at hf
+        exact Set.infinite_of_injective_forall_mem (f := fun m : ℕ => ((x.1 + 1 + m, false) : ℕ × Bool))
+          (fun a b hab => by simp only [Prod.mk.injEq] at hab; omega)
+          (fun m => (ladder_descend hS m _ rfl).symm) hf
+      · obtain ⟨⟨v, hv⟩, rfl⟩ := c'.exists_rep
+        by_cases hvn : v.1 < x.1
+        · exfalso
+          apply hc'
+          refine (supp_finite_iff (G := ladder) hv).mpr ?_
+          exact (ladder_below_finite x.1).subset fun b hb => ladder_below_closed rfl hxy1.symm hne hvn hb
+        · have hvn' : x.1 + 1 ≤ v.1 := by
+            by_contra hc
+            have hv1 : v.1 = x.1 := by omega
+            obtain ⟨v1, v2⟩ := v
+            obtain ⟨x1, x2⟩ := x
+            obtain ⟨y1, y2⟩ := y
+            simp only at hv1 hxy1
+            subst hv1 hxy1
+            simp only [offTwo, Set.mem_setOf_eq, ne_eq, Prod.mk.injEq, true_and] at hv hne
+            cases v2 <;> cases x2 <;> cases y2 <;> simp_all
+          exact SimpleGraph.ConnectedComponent.sound ((reachable_induce_iff hv hc0).mpr
+            (ladder_descend hS (v.1 - (x.1 + 1)) v (by omega)))
+    · have hc0 : (max x.1 y.1 + 1, false) ∈ offTwo x y :=
+        ⟨fun h => by have := congrArg Prod.fst h; simp only at this; omega,
+         fun h => by have := congrArg Prod.fst h; simp only at this; omega⟩
+      refine ⟨(ladder.induce (offTwo x y)).connectedComponentMk ⟨_, hc0⟩, fun hf => ?_, fun c' _ => ?_⟩
+      · rw [supp_finite_iff hc0] at hf
+        exact ladder_offTwo_infinite x y (hf.subset fun b hb => (ladder_reachIn hsplit hb).symm)
+      · obtain ⟨⟨v, hv⟩, rfl⟩ := c'.exists_rep
+        exact SimpleGraph.ConnectedComponent.sound ((reachable_induce_iff hv hc0).mpr (ladder_reachIn hsplit hv))
+  · -- `finSep` fails at `(0, false)`
+    intro hfin
+    exact Set.infinite_of_injective_forall_mem (f := fun n : ℕ => (((n + 1, false), (n + 1, true)) : (ℕ × Bool) × (ℕ × Bool)))
+      (fun a b hab => by simp only [Prod.mk.injEq] at hab; omega) (fun n => ladder_mem_twoSepInterior (by simp)) (hfin (0, false))
+  · -- at `(1, false)`: each of the four outer neighbours has its two cycle-neighbours forced, and `(1, true)` would need four
+    intro hH
+    set mk : ℕ × Bool → reducedVerts ladder := fun v => ⟨v, ladder_reducedVerts v⟩ with hmk
+    obtain ⟨a, p, hp, hsupp⟩ := hH (mk (1, false))
+    have hsuppv : ∀ v : ℕ × Bool, mk v ∈ p.support ↔ ladder.Adj (1, false) v := fun v => hsupp (mk v)
+    -- the cycle-neighbours of a support vertex are support vertices adjacent to it
+    have hnb : ∀ w z, p.toSubgraph.Adj w z → ladder.Adj (1, false) z.1 ∧ ladder.Adj w.1 z.1 := fun w z hwz =>
+      ⟨(hsupp z).mp (p.mem_support_of_adj_toSubgraph hwz.symm), hwz.adj_sub⟩
+    have htwo : ∀ w, w ∈ p.support → (p.toSubgraph.neighborSet w).ncard = 2 := fun w hw =>
+      hp.ncard_neighborSet_toSubgraph_eq_two hw
+    -- an outer vertex is joined to `(1, true)` in the cycle
+    have hforced : ∀ v o : ℕ × Bool, ladder.Adj (1, false) v →
+        (∀ z : ℕ × Bool, ladder.Adj (1, false) z → ladder.Adj v z → z = o ∨ z = (1, true)) →
+        p.toSubgraph.Adj (mk v) (mk (1, true)) := by
+      intro v o hv hz
+      by_contra hno
+      have hsub : p.toSubgraph.neighborSet (mk v) ⊆ {mk o} := by
+        intro z hzv
+        obtain ⟨h1, h2⟩ := hnb _ _ hzv
+        rcases hz z.1 h1 h2 with h | h
+        · exact Subtype.ext h
+        · exact absurd (by rw [show z = mk (1, true) from Subtype.ext h] at hzv; exact hzv) hno
+      have := Set.ncard_le_ncard hsub (Set.finite_singleton _)
+      rw [htwo _ ((hsuppv v).mpr hv), Set.ncard_singleton] at this
+      omega
+    have h1 := hforced (0, false) (0, true) (by simp [ladder_adj]) (fun z hz1 hz2 => by
+      obtain ⟨m, t⟩ := z; simp only [ladder_adj, Prod.mk.injEq] at hz1 hz2 ⊢; cases t <;> simp at hz1 hz2 ⊢ <;> omega)
+    have h2 := hforced (0, true) (0, false) (by simp [ladder_adj]) (fun z hz1 hz2 => by
+      obtain ⟨m, t⟩ := z; simp only [ladder_adj, Prod.mk.injEq] at hz1 hz2 ⊢; cases t <;> simp at hz1 hz2 ⊢ <;> omega)
+    have h3 := hforced (2, false) (2, true) (by simp [ladder_adj]) (fun z hz1 hz2 => by
+      obtain ⟨m, t⟩ := z; simp only [ladder_adj, Prod.mk.injEq] at hz1 hz2 ⊢; cases t <;> simp at hz1 hz2 ⊢ <;> omega)
+    have h4 := hforced (2, true) (2, false) (by simp [ladder_adj]) (fun z hz1 hz2 => by
+      obtain ⟨m, t⟩ := z; simp only [ladder_adj, Prod.mk.injEq] at hz1 hz2 ⊢; cases t <;> simp at hz1 hz2 ⊢ <;> omega)
+    have hsub : ({mk (0, false), mk (0, true), mk (2, false), mk (2, true)} : Set (reducedVerts ladder)) ⊆
+        p.toSubgraph.neighborSet (mk (1, true)) := by
+      intro z hz
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz
+      rcases hz with rfl | rfl | rfl | rfl
+      · exact h1.symm
+      · exact h2.symm
+      · exact h3.symm
+      · exact h4.symm
+    have hfin : (p.toSubgraph.neighborSet (mk (1, true))).Finite := by
+      apply Set.finite_of_ncard_ne_zero
+      rw [htwo _ ((hsuppv (1, true)).mpr (by simp [ladder_adj]))]
+      omega
+    have := Set.ncard_le_ncard hsub hfin
+    rw [htwo _ ((hsuppv (1, true)).mpr (by simp [ladder_adj]))] at this
+    rw [Set.ncard_insert_of_notMem (by simp [hmk]), Set.ncard_insert_of_notMem (by simp [hmk]),
+      Set.ncard_pair (by simp [hmk])] at this
+    omega
+
 /-- A spec example for `triLattice`: `(0, 0)` and `(1, −1)` are adjacent, `(0, 0)` and `(1, 1)` are not. -/
 example : triLattice.Adj (0, 0) (1, -1) ∧ ¬ triLattice.Adj (0, 0) (1, 1) := by
   constructor
@@ -1729,5 +2027,9 @@ example : ¬ NoInterleave [1, 2, 1, 3] ∧ NoInterleave [1, 1, 2] := by
     obtain rfl : j = 2 := by omega
     simp only [List.getElem?_cons_zero, List.getElem?_cons_succ, Option.some.injEq] at hi hj
     omega
+
+/-- A spec example for `ladder`: `(0, false)` is adjacent to `(0, true)` and `(1, true)`, not to `(2, false)`. -/
+example : ladder.Adj (0, false) (0, true) ∧ ladder.Adj (0, false) (1, true) ∧ ¬ ladder.Adj (0, false) (2, false) := by
+  simp [ladder_adj]
 
 end HadwigerNelson.Thomassen

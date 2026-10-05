@@ -6,7 +6,33 @@
 
 ## Theorems this phase proved
 
-None yet (stage 1).
+All [kernel] (stage-5 build `build/gate/build/20261005T025622Z-795162.log`), each on exactly `[propext, Classical.choice, Quot.sound]`
+(`data/fs131/it/axioms-it1-stage5.txt`, checked by `tools/fs131_it_axioms.py`). Namespace `HadwigerNelson.Thomassen`, module
+`Proofs/HadwigerNelson/Thomassen.lean`.
+
+- `reduced_props_of_planarLike` — **T-GRAPH: Thomassen's reduction as pure graph theory** (`H` connected, locally finite, locally Hamiltonian,
+  infinite, for every `PlanarLike` graph; `PlanarLike` with `finSep`, ruling 309) — standard three
+- `triLattice_planarLike` — the inhabitant of `PlanarLike`, every field exercised — standard three
+- `ladder_adversary` — the ladder satisfies every field of `PlanarLike` but `finSep`, `finSep` fails, and `H` is not locally Hamiltonian: the
+  field is necessary — standard three
+- the reduction's children: `PlanarLike.reduced_connected`, `.reduced_locallyFinite`, `.reducedVerts_infinite`, `.reduced_locallyHamiltonian`,
+  `.reachIn_of_adj_adj`, `.reachIn_ne`, `.offTwo_infinite`, `.twoSepInterior_self`, `.ne_of_mem_twoSepInterior`, `.adj_of_mem_twoSepInterior`,
+  `.exists_adj_left`, `.exists_adj_right`, `.twoSepInterior_finite`, `.twoSepInterior_subset`, `.eq_or_eq_of_mem`, `.eq_of_mem_maximal`,
+  `.exists_maximal_above`, `.not_mem_twoSepInterior`, `.exists_adj`, `.eq_of_mem_twoSepInterior_of_mem_reducedVerts`,
+  `.exists_adj_mem_reducedVerts_ne`; `offTwo_comm`, `twoSepInterior_comm`, `twoSepInterior_subset_offTwo`, `mem_twoSepInterior_of_reachIn`,
+  `mem_twoSepInterior_or_of_adj`, `mem_reducedVerts_of_maximal`, `exists_maximal_of_not_mem`, `exists_reducedVerts_mem_twoSepInterior`,
+  `exists_eq_of_cross_up`, `exists_eq_of_cross_down` — standard three
+- the cyclic collapse (generic): `exists_cycle_of_cyclic`, `exists_cycle_of_chain`, `NoInterleave.sublist`, `collapse_sublist`, `mem_collapse`,
+  `head?_collapse`, `getLast?_collapse`, `isChain_collapse` — standard three
+- the reachability layer (generic): `ReachIn.refl`, `.symm`, `.trans`, `.of_adj`, `.mono`, `.left_mem`, `.right_mem`, `reachIn_of_mem_support`,
+  `mem_of_reachIn_of_closed`, `exists_exit`, `reachable_induce_iff`, `compIn_eq_of_reachIn`, `supp_finite_iff`, `mem_twoSepInterior_iff`,
+  `connected_induce_iff'` — standard three
+- the inhabitant's and the adversary's children: `triLattice_reachIn`, `triLattice_offTwo_infinite`, `triLattice_twoSepInterior`,
+  `triRing_isRing`; `ladder_adj`, `ladder_climb`, `ladder_descend`, `ladder_reachIn`, `ladder_connected`, `ladder_below_closed`,
+  `ladder_below_finite`, `ladder_mem_twoSepInterior`, `ladder_offTwo_infinite`, `ladder_ring_zero`, `ladder_ring_succ`,
+  `ladder_not_isMaximalTwoSep`, `ladder_reducedVerts` — standard three
+
+Stated, not proved: `ArcMap.filledGraph_finSep` (`MapGraph`, leaf F-SEP, `sorry`; to the planar chain by ruling 309 (b)).
 
 ## Stage 1 — SAVED: the readback
 
@@ -182,3 +208,41 @@ stage: the field (the ruling), then the inhabitant and the leaf into the module.
   interior of every maximal 2-separator is connected, locally finite, locally Hamiltonian (every vertex's neighbourhood in `H` is the vertex set of
   a cycle of `H`) and infinite — `[Thomassen1999]` pp. 851–852's conclusion before Lemma 1, with CVB B2 step 3's finiteness in place of the count.
   `cvb_thom_reduced` (`MapGraph`) is now a reduction to the six F-leaves alone.
+
+## Stage 5 — SAVED: the ladder adversary; the handover
+
+- **`ladder`** (`V = ℕ × Bool`, levels `{(n, false), (n, true)}` edges, consecutive levels completely joined) and **`ladder_adversary`**: locally
+  finite, connected, infinite, a ring at every vertex (`ladder_ring_zero`, `ladder_ring_succ`; the one repeat `(n + 1, !s)` is `TwiceApart` and
+  separates level `n` from level `n + 2`) with `G − x − y` connected unless `y` appears twice apart, exactly one infinite component of every
+  `G − x − y` — and `finSep` fails (`(0, false)` lies in the interior of every level above it) and `LocallyHamiltonian (reduced ladder)` fails (no
+  2-separator is maximal, so `H` is the ladder; at `(1, false)` each of the four outer neighbours is forced to its cycle-neighbour `(1, true)`,
+  which would then have four, against `IsCycle.ncard_neighborSet_toSubgraph_eq_two`). Spec example for `ladder`. `PlanarLike`'s docstring now names
+  `ladder_adversary`. Cost: well under half a session (ruling 309 (c)'s line).
+- `ARCHITECTURE.md`'s `Thomassen` row rewritten to the module's contents; `tools/check_architecture.py` PASS, exit 0
+  (`data/fs131/it/arch-check-stage5.txt`). `scripts/Axioms.lean`: 14 more records (73 `Thomassen` records and F-SEP in the FS131-IT1 block).
+- **Build: OK — 447 of 447 batches, 3 modules rebuilt (`Thomassen`, `MapGraph`, `Proofs`), 11 with warnings, every warning `declaration uses
+  'sorry'` (0 others), exit 0** (`build/gate/build/20261005T025622Z-795162.log`, last line "Build completed successfully (5404 jobs)."; driver log
+  `data/fs131/it/build-stage5.log`). `Thomassen.lean`: 0 `sorry` by `grep -c`.
+- **Axioms receipt against this build's oleans** (`data/fs131/it/axioms-it1-stage5.txt`, verdict `data/fs131/it/axioms-it1-stage5-check.txt`):
+  **OK — 76 clean records on the standard three or fewer, 2 partners on `sorryAx`** (`ArcMap.filledGraph_finSep`, `ArcMap.cvb_thom_reduced`);
+  self-test caught both swaps.
+
+**What is proved, what is left.** Proved: T-GRAPH (`reduced_props_of_planarLike`), its inhabitant and the adversary showing `finSep` necessary.
+Left: **F-SEP** (`ArcMap.filledGraph_finSep`) — not attempted here (budget; ruling 309 (b) sends it to the planar chain after the merge); my
+sketch is in its docstring, one mind. `cvb_thom_reduced` now rests on the six F-leaves alone (F-LOC, F-CONN, F-INF, F-RING, F-ONE, F-SEP). Nothing
+merged, the gate not run, `main` untouched, per the brief.
+
+**For the merge** (`fs131-w5t` into `fs131-w5p`): my `MapGraph` hunks are the import line, the block's deletion, `filledGraph_finSep` (new,
+before `filledGraph_planarLike`) and the constructor line — adjacent to IP3's F-leaf proofs (ruling 309's note: keep both). `ARCHITECTURE.md`:
+the new `Thomassen` row and `MapGraph`'s row (description and Imports cell). `scripts/Axioms.lean`: the FS131-IT1 block, above `=== PURCHASED ===`.
+`Proofs.lean`: one import line.
+
+## Drafts for the front page
+
+- **`CLAUDE.md` § The gate and § Trust ledger**: no counts drafted — the brief forbids this job the gate; the landing job's run supplies them.
+  Expect, from this branch: 73 new clean records and one new `sorry` record (F-SEP) in the audit; new vacuity sites from `PlanarLike`-hypothesis
+  theorems, witnessed by `triLattice_planarLike` (named in the same file).
+- **Ledger rows**: none regraded — the row FS114-CVB-THOM (`cvb_thom_reduced`, `cvb_thom`) stays at its grade until the six F-leaves land; its
+  graph half is now [kernel] (`reduced_props_of_planarLike`, standard three), assumptions: `PlanarLike` (six fields, `finSep` by ruling 309) only.
+- **Frontier line**: unchanged (no value moved).
+- **Proof Atlas**: T-GRAPH → [kernel]; F-SEP added as a new planar leaf (stated, `sorry`).

@@ -3161,6 +3161,20 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Thomassen.PlanarLike.eq_of_mem_twoSepInterior_of_mem_reducedVerts
 #print axioms HadwigerNelson.Thomassen.PlanarLike.exists_adj_mem_reducedVerts_ne
 #print axioms HadwigerNelson.Thomassen.PlanarLike.reduced_locallyHamiltonian
+#print axioms HadwigerNelson.Thomassen.ladder_adj
+#print axioms HadwigerNelson.Thomassen.ladder_climb
+#print axioms HadwigerNelson.Thomassen.ladder_descend
+#print axioms HadwigerNelson.Thomassen.ladder_reachIn
+#print axioms HadwigerNelson.Thomassen.ladder_connected
+#print axioms HadwigerNelson.Thomassen.ladder_below_closed
+#print axioms HadwigerNelson.Thomassen.ladder_below_finite
+#print axioms HadwigerNelson.Thomassen.ladder_mem_twoSepInterior
+#print axioms HadwigerNelson.Thomassen.ladder_offTwo_infinite
+#print axioms HadwigerNelson.Thomassen.ladder_ring_zero
+#print axioms HadwigerNelson.Thomassen.ladder_ring_succ
+#print axioms HadwigerNelson.Thomassen.ladder_not_isMaximalTwoSep
+#print axioms HadwigerNelson.Thomassen.ladder_reducedVerts
+#print axioms HadwigerNelson.Thomassen.ladder_adversary
 #print axioms HadwigerNelson.Plane.ArcMap.filledGraph_finSep
 
 #eval IO.println "=== PURCHASED ==="
