@@ -167,6 +167,8 @@ import Proofs.HadwigerNelson.Plane.CircleColouring
 import Proofs.HadwigerNelson.Plane.LocalStructure
 import Proofs.HadwigerNelson.Plane.SixFragment
 import Proofs.HadwigerNelson.Plane.Tiles
+import Proofs.HadwigerNelson.Plane.PlaneTopology
+import Proofs.HadwigerNelson.Plane.CurveGraph
 import Proofs.HadwigerNelson.Plane.RingGerm
 import Proofs.HadwigerNelson.Plane.Lens
 import Proofs.HadwigerNelson.Plane.RingBand
@@ -180,6 +182,8 @@ import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
 import Proofs.HadwigerNelson.Plane.ValidMap.Chain
 import Proofs.HadwigerNelson.Plane.ValidMap.Cor3
 import Proofs.HadwigerNelson.Plane.ValidMap.HexRing
+import Proofs.HadwigerNelson.Plane.ValidMap.MapTopology
+import Proofs.HadwigerNelson.Thomassen
 import Proofs.HadwigerNelson.Plane.ValidMap.MapGraph
 import Proofs.HadwigerNelson.Plane.ValidMap.BrickMap
 import Proofs.HadwigerNelson.Plane.ValidMap.FlankUA

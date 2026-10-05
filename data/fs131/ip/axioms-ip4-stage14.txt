@@ -1,0 +1,27 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Plane.ringPt_eq_polarPt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.polarPt_ne_of_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.inter_nonempty_of_interleaved_radius' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.orient_aux' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.orient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.sector_subset_tile_of_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.tile_side' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.germ_side' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.TileOf.eq_colour' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.GermPseudo.congr_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.GermPseudo.eq_of_same' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.orient_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_not_abut' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_not_interleaved' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_nested' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.BaseCtx.endpoint_of_far_end' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.cor3' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+exit=0

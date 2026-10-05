@@ -1733,3 +1733,42 @@ up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/
 (`data/fs131/i5o/stmt-check-38.txt`).
 
 ## Stage 38 — SAVED
+
+## Stage 39 — SAVED (FS131-I5o): `fs131-w5p` merged (the planar chain); checked
+
+`git merge --no-ff origin/fs131-w5p` (at `5086e856`; merge base `0db34854`) into `fs131-w5` (at `956c1cd2`). Git auto-merged `Proofs.lean`, `BaseDense`,
+`BaseWalk` and brought `MapGraph`, `MapTopology`, `CurveGraph`, `PlaneTopology`, `Thomassen` and `fs131-w5p`'s `data/`, `plans/`, `tools/` files; two
+conflicts, each **keep both sides**, nothing more:
+- `ARCHITECTURE.md` (the module table): classified row by row against the merge base, **no row changed on both sides** (ours changed `BaseSteps`, `BrickMap`,
+  `Contact`, `Cor3`, `Dense`, `FlankUA`, `HexRing`, `Terminal`, `UnitArc`; theirs `BaseWalk`, `MapGraph` and the new `CurveGraph`, `PlaneTopology`,
+  `MapTopology`, `Thomassen`); each row taken from the side that changed it, `MapTopology` and `Thomassen` placed before `MapGraph` as theirs orders them;
+  checked by script: 239 rows = 235 ours + 4 new, every row equal to its changed side.
+- `scripts/Axioms.lean`: both sides appended a block at the end of the CLEAN section (ours FS131-IC1 … I5m; theirs FS131-IX1 … RS1); both kept, ours
+  first; the merged `#print axioms` lines equal the union of both parents' (3099), no duplicate.
+
+### 39.1 The checks
+
+- **(a) Statements, byte for byte** — new tool `tools/fs131_i5o_merge_check.py BASE OURS THEIRS`: every declaration of `BaseWalk`, `BaseDense`, `MapGraph`,
+  `MapTopology`, `CurveGraph`, `PlaneTopology`, `Thomassen` in either parent (a theorem up to its `:=`, any other declaration whole), three-way against
+  the base, must appear in the merge identical to the side that changed it (a key changed on both sides is a CONFLICT); and every `.lean` file only one
+  side changed must equal that side's file. **PASS: 504 declaration keys, 0 conflicts, 17 one-sided files byte-equal** (`data/fs131/i5o/merge-check.txt`).
+  `--self-test`: a hypothesis added in `BaseWalk`, `cvb_thom_reduced` renamed, a line appended to `HexRing` — each FIRED, the unplanted run PASS
+  (`merge-check-selftest.txt`). Also `tools/fs131_i5_stmt_check.py d61edefc`: PASS (`stmt-check-39.txt`).
+- **The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 448 of 448 batches, 8 modules rebuilt (`Thomassen`, `PlaneTopology`, `CurveGraph`, `MapTopology`,
+  `MapGraph`, `BaseWalk`, `BaseDense`, `Proofs`), 6 with warnings, every warning `declaration uses 'sorry'`**, exit 0, 9 min 20 s
+  (`build/gate/build/20261005T083032Z-2697877.log`; driver log `data/fs131/i5o/build-stage39-merge.log`). `tools/check_architecture.py`: PASS.
+- **(b) Axioms** (`data/fs131/i5o/I5oAxioms39.lean` → `.out`, against the merged build's oleans, 12 GiB slot): **on the standard three** —
+  `BaseCtx.retArcs_nested`, `BaseCtx.exists_endpoint`, `BaseCtx.exists_eleventh` (`BaseWalk`'s planar three), `BaseCtx.false`, **`row134BaseUA`**,
+  `exists_unenclosed_or_bad`, `cvb_thom_reduced`, `cvb_thom`, `cvb_pinch_connected`, `cvb_hole_disconnected` (`MapGraph`'s three leaves and their consumer),
+  `IsBoundaryWalk.sep`, `filledGraph_ringList`, `filledGraph_planarLike`; **controls on `sorryAx`**: `exists_preBend`, `bv_l3`, `localDense` (it rests on
+  `n3_base` → `exists_preBend`).
+- **(c) `sorry` by file** (`grep -cw sorry`; `data/fs131/i5o/sorry-counts-39.txt`), before (`f33ef153`) → after: `BaseWalk` 3 → 0, `BaseDense` 3 → 2
+  (`exists_preBend`, `cv_exists`), `MapGraph` 3 → 0, `HexRing` 1 → 1, `Dense` 1 → 1, `Terminal` 9 → 9; `MapTopology`, `CurveGraph`, `PlaneTopology`,
+  `Thomassen` 0. **Wave 5: 20 → 13** (`Terminal` 9 — the other lane's; mine: `bv_l3`, `exists_preBend`, `disc1_local`; `cv_exists` the `Terminal` lane's).
+  Wave 4's stale copies unchanged (`Contact` 3, `UnitArc` 5).
+
+**`row134BaseUA` is a kernel theorem on this branch** (with the planar chain and E4-RIM; `n3_base` still waits on `exists_preBend`). Statements unchanged on
+both sides; no `axiom`, no `native_decide`. The merge commit is made with `git commit -i <paths>` (a merge cannot be a partial commit; `-i` names the
+resolved paths explicitly, standing rule 6's intent).
+
+## Stage 39 — SAVED

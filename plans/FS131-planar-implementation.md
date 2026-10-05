@@ -1,0 +1,1543 @@
+# FS131-IP1 — the planar infrastructure, implemented
+
+*de Bruijn, the implementer (FS131-IP1), 2026-10-04/05. Brief: `data/fs131/briefs/FS131-IP1-planar.md` (main tree). Branch `fs131-w5p`, worktree
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5p`. The plan this record executes: `plans/FS131-planar-kernel-plan.md` (FS131-KP), § 5.1's work order.*
+
+## Theorems this phase proved
+
+All [kernel] (stage-5 build `146a8d63`, `build/gate/build/20261005T004641Z-4048849.log`), each on exactly `[propext, Classical.choice,
+Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plane`; `ArcMap.` where shown.
+
+- `isPreconnected_inter_of_union_eq_univ` — **the plane is unicoherent** (`Plane/PlaneTopology`)
+- `isPreconnected_frontier_connectedComponentIn` — the frontier of a component of the complement of a closed preconnected set is preconnected (`Plane/PlaneTopology`)
+- `isPreconnected_compl_connectedComponentIn` — the complement of such a component is preconnected (`Plane/PlaneTopology`)
+- `isBounded_connectedComponentIn_of_frontier_subset` — the last exit (`Plane/PlaneTopology`)
+- `connectedComponentIn_eq_of_not_isBounded` — one unbounded complementary component (`Plane/PlaneTopology`)
+- `exists_inter_of_finite_closed_cover` — two of finitely many closed sets meet on a preconnected set they cover (`Plane/PlaneTopology`)
+- `isPreconnected_compl_closedBall` (`Plane/PlaneTopology`)
+- children `eq_of_intValued_of_isPreconnected`, `inter_frontier_nonempty_of_isPreconnected`, `frontier_connectedComponentIn_subset`, `compl_closedBall_subset_connectedComponentIn` (`Plane/PlaneTopology`)
+- `ArcMap.cvb_pinch_connected` — FS114-CVB-PINCH's pinch clause (`Plane/ValidMap/MapGraph`)
+- `ArcMap.cvb_hole_disconnected` — FS114-CVB-PINCH's hole clause (`Plane/ValidMap/MapGraph`)
+- `ArcMap.IsTile.subset_compl_closure`, `ArcMap.IsTile.subset_or_subset_of_separated`, `ArcMap.exists_tile_inter_of_isOpen`, `ArcMap.exists_tile_mem_closure_of_mem_closure`, `ArcMap.mem_of_touch_closed`, `ArcMap.finite_tiles_closure_inter` — § A (`Plane/ValidMap/MapTopology`)
+- `ArcMap.exists_rim_vertex` — E4-OUTERMOST step 3 (`Plane/ValidMap/MapTopology`)
+- `ArcMap.isCubicTrichromatic_of_three_tiles` — E4-OUTERMOST step 4, E4-RIM step 5 (`Plane/ValidMap/MapTopology`)
+- `ArcMap.tileOf_subset_ball` — Lemma H(a), any `k` (`Plane/ValidMap/MapTopology`)
+- `ArcMap.GermPseudo.eq_of_cw`, `ringArc_cases` (`Plane/ValidMap/MapTopology`)
+- children `ArcMap.exists_mem_closure_of_mem_closure_biUnion`, `ArcMap.isOpen_outerDom`, `ArcMap.outerDom_eq_connectedComponentIn`, `ArcMap.IsTile.closure_subset_closedBall_zero`, `ArcMap.exists_not_mem_closedBall_zero`, `ArcMap.IsSectorChart.exists_sector_subset_tile`, `ArcMap.hasRepeatedColour_of_two_tiles`, `ringArc_add_two_pi_mul` (`Plane/ValidMap/MapTopology`)
+
+**FS131-IP2 (stages 6–)**, all [kernel] (stage-7 build `f0e0c249`, `build/gate/build/20261005T012057Z-111415.log`), each on exactly the standard three
+(`data/fs131/ip/axioms-ip2-stage7.txt`, checked by `tools/fs131_ip_axioms.py`):
+
+- `ArcMap.exists_unenclosed_or_bad` — **FS131-E4's E4-OUTERMOST, whole** (`Plane/ValidMap/BaseDense`; its last two leaves below)
+- `ArcMap.exists_outermost` — E4-OUTERMOST steps 1–2 (`Plane/ValidMap/MapTopology`)
+- `ArcMap.unenclosed_of_rim_vertex` — E4-OUTERMOST step 5 (`Plane/ValidMap/MapTopology`)
+- `ArcMap.not_encloses_of_hull_eq` — enclosure strictly grows hulls (KP's owed child) (`Plane/ValidMap/MapTopology`)
+- `ArcMap.exists_ball_two_tiles` — points with three tiles in their closure are isolated (`Plane/ValidMap/MapTopology`)
+- children `ArcMap.outerDom_subset_of_encloses`, `ArcMap.compl_outerDom_subset_closedBall`, `ArcMap.IsSectorChart.exists_sector_mem_closure`,
+  `BranchGerms.exists_far_side`, `BranchGerms.eventually_dir_lt_nextDir`, `BranchGerms.dir_lt_dir`, `BranchGerms.dir_le_dir`,
+  `BranchGerms.dir_lt_dir_zero_add`, `BranchGerms.next_injective` (`Plane/ValidMap/MapTopology`)
+
+- `ArcMap.exists_isRingArc_of_touch` — at a cubic touch point on `ω(u)`, a tile inside `B(u, 1)` and one off `B̄(u, 1)` bound an arc of `Γ` on `ω(u)`
+  (`Plane/ValidMap/MapTopology`); children `BranchGerms.branchPt_mem_closure_sector`, `BranchGerms.eq_or_next_eq_of_mem_closure_sector` (stage 8)
+- `ArcMap.exists_eleventh_of` — **FS131-E4's E4-RIM** (`Plane/ValidMap/MapTopology`), hence `BaseCtx.exists_eleventh`: proved, **on `sorryAx` through
+  `noBoth`** (FS112-N3-NOBOTH, `ValidMap/UnitArc`, wave 4's leaf, `sorry` at the pin, used by statement); it lands on the standard three when `noBoth`
+  does
+
+**FS131-IP3 (stages 9–)**, all [kernel] (stage-11 build, `build/gate/build/20261005T023343Z-612010.log`), each on exactly the standard three
+(`data/fs131/ip/axioms-ip3-stage11.txt`, checked by `tools/fs131_ip_axioms.py`: 35 clean, the 2 controls `endpoint_of_far_end`, `exists_endpoint` on `sorryAx`):
+
+- `ArcMap.exists_far_end` — **the `a|c` boundary's far end** (FS110-CD Lemma E's planar parity step), as stated (`Plane/ValidMap/MapTopology`)
+- `even_sum_deg`, `exists_finset_even_sum_deg` — **the boundary graph's handshake (BG)**: in a compact set with a curve star at each point, the degrees at the
+  non-regular points have an even sum (`Plane/CurveGraph`, new module)
+- `port_pair` — each port of the cut-out vertices has exactly one partner, the other end of its arc (`Plane/CurveGraph`)
+- `IsCurve.eq_of_three`, `IsCurve.exists_param`, `HasCurveStar.isRegularAt`, `finite_nonRegular`, `branch_locally_curve`, `HasCurveStar.connectedComponentIn`,
+  `not_isRegularAt_of_hasCurveStar_one`, `IsCurve.exists_two_mem_sphere`, and 13 more children (`Plane/CurveGraph`); inhabitant `halfLine_hasCurveStar`
+- `ArcMap.exists_inner_branch` — at a two-colour change point of `ω(u)` one branch enters the disc and the other leaves it (`MapTopology` § D)
+- `ArcMap.IsSectorChart.eq_two`, `.inter_closure_two`, `.hasRepeatedColour_of_col_eq`, `.col_mem_coloursAt`, `.col_eq_of_mem_sector`,
+  `ArcMap.hasCurveStar_of_branches`, `ArcMap.coloursAt_subset_of_mem_interiorPts`, `ArcMap.fin_two_eq_of_ne` (`MapTopology` § D)
+
+**FS131-IP4 (stages 12–)**, all [kernel] (stage-14 build `build/gate/build/20261005T032249Z-941152.log`, stage-15 build
+`build/gate/build/20261005T040047Z-1228628.log`), on the standard three except where `sorryAx` is named (`data/fs131/ip/axioms-ip4-stage14.txt`,
+`data/fs131/ip/axioms-ip4-stage15.txt`, checked by `tools/fs131_ip_axioms.py`):
+
+- `ArcMap.BaseCtx.retArcs_not_abut` — **NEST-A**, as stated (`Plane/ValidMap/BaseWalk`); standard three
+- `ArcMap.BaseCtx.retArcs_not_interleaved` — **NEST-X**, as stated (`Plane/ValidMap/BaseWalk`); `sorryAx` only through `cor3` (wave 5's leaf, used by
+  statement); so `retArcs_nested` rests on `cor3` alone
+- `ArcMap.BaseCtx.endpoint_of_far_end` — **END-C**, as stated (`Plane/ValidMap/BaseWalk`), hence `exists_endpoint` (FS110-CD Lemma E with CE R1–R4);
+  `sorryAx` only through `pseudo_finite`, `pair_ii`, `noBoth`, `cor3` (waves 4–5's leaves, used by statement)
+- `orient_aux`, `orient` — **one-sidedness**: a continuum in `B̄(u, 1)` with an open set one-sided along it cannot have that set on the counter-clockwise side of
+  two of its circle points (`Plane/ValidMap/MapTopology` § E); `ArcMap.BaseCtx.orient_pair` (`BaseWalk`)
+- `ArcMap.circ_local` — the common boundary of two tiles at a point of `ω(u)`: a star of at most two rays in the closed disc, one exactly at a change point
+  (`MapTopology`)
+- children `inter_nonempty_of_interleaved_radius`, `polarPt_ne_of_sub`, `ringPt_eq_polarPt`, `branch_side`, `hasCurveStar_zero`, `exists_annular_out`,
+  `exists_annular_in`, `subset_or_subset_of_closed`, `side_contra`, `exists_Ico_ringPt`, `disjoint_closedBall_of_isOpen`, `BranchGerms.shared_germ3`,
+  `ArcMap.tile_side`, `ArcMap.germ_side`, `ArcMap.germ_side_cw`, `ArcMap.germPseudo_of_side`, `ArcMap.inner_star`, `ArcMap.coloursAt_subset_near`,
+  `ArcMap.IsSectorChart.sector_subset_tile_of_mem`, `.tile_inter_ball_eq`, `.mem_closure_some_sector`, `ArcMap.TileOf.eq_colour`,
+  `ArcMap.GermPseudo.congr_e`, `.eq_of_same` (`MapTopology`); `ArcMap.BaseCtx.colours_sub` (`BaseWalk`; `sorryAx` through `cor3`)
+
+**FS131-IP5 (stages 16–)**, all [kernel] (stage-17 build `build/gate/build/20261005T043543Z-1369788.log`, stage-18 build
+`build/gate/build/20261005T044937Z-1440384.log`, stage-19 build `build/gate/build/20261005T050146Z-1518710.log`), each on exactly the standard three
+(`data/fs131/ip/axioms-ip5-stage17.txt`, `-stage18.txt`, `-stage19.txt`, checked by `tools/fs131_ip_axioms.py`), statements unchanged; all in
+`Plane/ValidMap/MapGraph`:
+
+- `ArcMap.filledGraph_locallyFinite` (F-LOC), `ArcMap.filledGraph_connected` (F-CONN), `ArcMap.filledGraph_infinite` (F-INF), `ArcMap.filledGraph_oneInf` (F-ONE),
+  `ArcMap.filledGraph_finSep` (F-SEP)
+- `not_isHoleOf_chain`, `isHoleOf_cluster` — the two adversaries of `IsHoleOf`
+- `ArcMap.filledGraph_rings` (F-RING) — proved **over `ArcMap.filledGraph_ringList`** (the boundary walk, `sorry`; by statement F-RING's first conjunct),
+  so it, `filledGraph_planarLike` and `cvb_thom_reduced` carry `sorryAx` through that one child
+- `ArcMap.not_isHoleOf_union` — **Janiszewski's theorem for holes** (two disjoint bounded closed continua without holes have none together), from
+  unicoherence; `ArcMap.filledGraph_offTwo_connected` — `M̂ − x − y` is connected when `cl x̂ ∩ cl ŷ = ∅`; `ArcMap.exists_outer_fill` — every tile lies
+  in an outer tile's fill; `ArcMap.exists_far_component`; `ArcMap.mem_of_touch_closed_of_not_isHoleOf` (CHAIN); `ArcMap.not_isHoleOf_closure_fill`;
+  `ArcMap.hole_subset_hole`
+- children: `ArcMap.IsHoleOf.isOpen`, `.isOpen_diff`, `.connectedComponentIn_subset`, `.subset_compl_outerDom`, `fill_subset_compl_outerDom`,
+  `subset_fill`, `closure_fill_subset_closedBall`, `encloses_of_subset_hole`, `fill_subset_hole`, `filledGraph_reachable_of_inter`, `_of_subset`,
+  `eq_or_subset_hole_of_inter`, `subset_fill_of_inter`, `IsOuterTile.disjoint_closure_fill`, `reachable_offTwo_of_inter`, `subset_compl_of_inter_compl`,
+  `subset_compl_of_mem_offTwo`, `exists_outer_fill_offTwo`, `offTwo_infinite`, `isHoleOf_inter_of_split`, `not_split_aux`,
+  `isPreconnected_closure_union_aux`, `disjoint_closure_sUnion_holes`, `isPreconnected_closure_fill`, `isBounded_closure_fill`,
+  `getElem?_flatMap_replicate_four`, `length_flatMap_replicate_four`, `isRing_flatMap_replicate_four`, `twiceApart_flatMap_replicate_four` (all `ArcMap.`);
+  `mem_closure_of_path`, `eventually_path_mem`, `mem_disc_minus_iff`, `mem_closure_disc_minus`, `mem_closure_disc_minus_tangent`, `sq_norm_sub_ofReal`,
+  `norm_le_iff_sq`, `compl_closure_disc_minus_subset`, `closure_disc_minus_subset`, `sq_facts`
+
+**FS131-RW1 (stages 20–)**, the boundary walk's WALK lane (brief `data/fs131/briefs/FS131-RW1-walk.md`, on `main`), all [kernel] (stage-21 build
+`build/gate/build/20261005T062106Z-1897325.log`), each on exactly the standard three (`data/fs131/rw/axioms-rw1a.txt`, checked by
+`tools/fs131_ip_axioms.py`); all in `Plane/ValidMap/MapGraph`, statements of the skeleton unchanged:
+
+- `ArcMap.filledGraph_adj_iff` (**ADJ**) — two outer tiles are adjacent in `M̂` exactly when their own closures meet
+- `ArcMap.frontier_closure_fill_subset` (**C1**) — `∂ cl x̂ ⊆ cl x`; `ArcMap.isPreconnected_frontier_closure_fill` (**C2**) — `∂ cl x̂` is connected
+- **C3**: `ArcMap.frontier_fill_hasCurveStar` — `∂ cl x̂` has a curve star of an even number of rays at each of its points; `ArcMap.frontier_fill_inter_ball`,
+  `ArcMap.frontier_fill_branch_iff`, `ArcMap.frontier_fill_chart_pos`, `ArcMap.frontier_fill_exists_ray`
+- **C4**: `ArcMap.finite_frontier_fill_nonRegular` — finitely many vertices (points of `∂ cl x̂` where `Γ` is no curve); `ArcMap.frontier_fill_isRegularAt` —
+  off them `∂ cl x̂` is regular; `ArcMap.IsSectorChart.eq_two_of_isRegularAt`
+- children: `ArcMap.IsTile.subset_fill_or_subset_compl`, `ArcMap.IsTile.isOpen_fill`, `ArcMap.IsSectorChart.exists_tile_superset`, `ArcMap.IsSectorChart.near_branch`,
+  `ArcMap.IsSectorChart.gamma_inter_ball`, `ArcMap.branchPt_ne_of_ne`, `ArcMap.hasCurveStar_of_branches_finset`, `ArcMap.even_card_filter_ne_next`
+- **C6/C8** (stage-22 build `build/gate/build/20261005T063441Z-2002748.log`, receipt `data/fs131/rw/axioms-rw1b.txt`): `ArcMap.exists_euler` — an Euler
+  circuit of any port structure (two fixed-point-free involutions, connected through shared vertices); `ArcMap.sigma_ne_pow` — no orbit of `πA σ` holds a
+  port with its partner; `ArcMap.exists_vertex_involution`; `ArcMap.BasedTrail.insert`, `.append`, `.exists_start`; `ArcMap.basedTrail_orbList`,
+  `ArcMap.nodup_orbList`, `ArcMap.orbList_closed`, `ArcMap.mem_orbList`, `ArcMap.pow_sigma_pow`, `ArcMap.minimalPeriod_perm_pos`, `ArcMap.pow_minimalPeriod_apply`,
+  `ArcMap.pow_mem_of_closed`
+
+**FS131-RW2 (stages 23–)**, the WALK lane's second implementer (brief `data/fs131/briefs/FS131-RW2-walk.md`, on `main`), all [kernel], each on exactly the
+standard three (receipt `data/fs131/rw/axioms-rw2b.txt` against the final build's oleans, checked by `tools/fs131_ip_axioms.py`); statements of the
+skeleton unchanged (`tools/fs131_rw_stmt_check.py`: all 148 declarations of `MapGraph` and `CurveGraph` at `515e28af` byte-identical):
+
+- `ArcMap.exists_boundaryWalk` (**WALK**) — every outer tile of every valid plane map has a boundary walk (`Plane/ValidMap/MapGraph`)
+- `port_arc` (**C5a**) — the component of `C'` through a port is an injective arc from it to its partner (`Plane/CurveGraph`); `port_pair` re-proved over it
+- `ArcMap.exists_isPortGraph` (**C5b–C5d, pure**) — a compact connected set of even, positive curve stars has a port graph (`ArcMap.IsPortGraph`, new
+  structure) over any finite vertex set holding its non-regular points; children `ArcMap.ray_piece`, `ArcMap.isPreconnected_inter_ball_of_hasCurveStar`,
+  `ArcMap.exists_Ioo_of_preimage_ball`
+- `ArcMap.exists_edgeOf` (**C5d, on the map**) — each edge of the port graph of `∂ cl x̂` is an edge of `x` with one outer tile; children
+  `ArcMap.frontier_fill_regular_local`, `ArcMap.sector_inter_sphere`, `ArcMap.nextDir_two`, `ArcMap.isOuterTile_of_closure_inter`,
+  `ArcMap.subset_of_isPreconnected_of_locally`, `ArcMap.closure_inter_subset_frontier_fill`, `ArcMap.frontier_fill_hasCurveStar_pos`,
+  `ArcMap.nonempty_frontier_closure_fill`
+- `ArcMap.IsPortGraph.exists_shared_vertex` (**C7**) — on a connected set, the edges are connected through shared vertices
+- `ArcMap.isBoundaryWalk_of_trail`, `ArcMap.BasedTrail.insert_all`, `ArcMap.BasedTrail.map` (**C10**) — the assembly
+
+**FS131-RS1 (stages 27–)**, the boundary walk's SEP lane (brief `data/fs131/briefs/FS131-RS1-sep.md`, on `main`), all [kernel], each on exactly the
+standard three or a subset (receipt `data/fs131/rs/axioms-rs1.txt` against the stage-29 build's oleans, checked by `tools/fs131_ip_axioms.py`); statements
+of the skeleton unchanged (`tools/fs131_rw_stmt_check.py e27da6c1`: all 215 uniquely named declarations of `MapGraph` and `MapTopology` byte-identical):
+
+- `ArcMap.IsBoundaryWalk.sep` (**SEP**) — a tile a boundary walk lists twice separates, in `M̂ − x − y`, the entries strictly between its two positions
+  from those strictly outside (`Plane/ValidMap/MapGraph`); with it `filledGraph_ringList` (F-RING), `filledGraph_rings`, `filledGraph_planarLike`,
+  `cvb_thom_reduced` and `cvb_thom` rest on the standard three
+- `inter_nonempty_of_interleaved_exterior_of_isClosed` (**SEP-X**) — the crossing lemma outside a disc for a closed set, bounded or not
+  (`Plane/ValidMap/MapTopology` § F)
+- `isPreconnected_biUnion_Icc_mod` (**SEP-CHAIN**) — pieces chained by hinges, read mod the length, have a connected union; helper `mod_prev_succ`
+  (`MapTopology` § F)
+- `isPreconnected_union_insert_diff_ball` (**SEP-K1**) — two connected sets off a disc, joined at a common closure point off the closed disc, are
+  connected (`MapTopology` § F)
+- `ArcMap.exists_isClosed_of_reachable_offTwo` (**SEP-S**) — a chain in `M̂ − x − y` gives a closed connected set of filled closures off `x`, `y`
+  (`MapGraph`)
+- `ArcMap.IsBoundaryWalk.exists_piece` (**SEP-PIECE**) — each other position's piece (tile closure or edge) is closed, connected, holds its two
+  hinges, and misses `x ∪ y`, the disc at `p i` and the point `p j`; helpers `ArcMap.IsEdgeOf.disjoint_closure_ball`, `ArcMap.mod_succ_prev`
+  (`MapGraph`)
+
+IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
+`unenclosed_of_rim_vertex`.
+
+## Stage 1 — SAVED: the readback
+
+### 1.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by `grep -F` of each quotation's full text (a planted absent string, `ABSENT-CONTROL-STRING-xyzzy`, reported `MISS`, the control):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors | verbatim |
+| "**Work order** (each step unblocks the next; re-price after the first two):" | `plans/FS131-planar-kernel-plan.md` § 5.1 (branch) | verbatim |
+| "**May:** add children (with spec examples; …), change imports (updating `ARCHITECTURE.md`'s" | same, § 5.2 | verbatim |
+| inventory item 282 (truncated at "`397a89de` …") | `plans/FS131-close-inventory.md` (main tree) l. 2096 | verbatim (the source itself carries the ellipsis) |
+| inventory item 283 (truncated at "plan § 5.1's") | same, l. 2115 | verbatim |
+| inventory item 277 (truncated at "KP's") | same, l. 2040 | verbatim |
+
+No mismatch. Read in full: KP's plan (all six stages); inventory items 277–283; `plans/STANDING-RULES.md`; `LEAN.md`; `RUNNING.md` § Building and
+§ Make the gate fail, and watch it fail.
+
+### 1.2 What I may and may not change (KP's plan § 5.2, the brief's touches)
+
+**May:** prove every `sorry` FS131-KP left — `Plane/PlaneTopology` (8), `Plane/ValidMap/MapTopology` (15), in `MapGraph` `not_isHoleOf_chain`,
+`isHoleOf_cluster`, `reduced_props_of_planarLike`, `filledGraph_locallyFinite`, `_connected`, `_infinite`, `_rings`, `_oneInf` and the in-proof joints of
+`cvb_pinch_connected` and `cvb_hole_disconnected`; in `BaseWalk` `retArcs_not_interleaved`, `retArcs_not_abut`, `endpoint_of_far_end`; in `BaseDense` the
+three joints of `exists_unenclosed_or_bad` — adding children beside them (with spec examples; shared ones in `PlaneTopology` / `MapTopology`), changing
+imports (with `ARCHITECTURE.md`'s Imports cell and `scripts/Axioms.lean`'s FS131-KP block). Also `Proofs.lean`, this record, `tools/fs131_ip_*.py`,
+`data/fs131/ip/`, `data/fs131/reports/FS131-IP1.md`.
+
+**May not:** change any statement of FS131-KP's job (plan §§ 3.2, 4.1), nor `IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`, `IsRing`, `TwiceApart`,
+`PlanarLike`, `outerDom`, `EnclosesTile`, nor any statement outside this job; no new `axiom`, no `native_decide`; not KP's plan file; not the other `sorry`s
+in `BaseWalk`/`BaseDense` (FS131-I5c's leaves); no merge into `fs131-w5`, no gate run, nothing on `main`. A statement that fails goes to Keryx at once.
+Watched: `endpoint_of_far_end`'s exit case (read FS110-CD Lemma E/R and FS110-CE R1–R4 first; message Keryx if a two-colour exit can return farther than
+`60°` from `r(θ)`), and `PlanarLike`'s sufficiency for T-GRAPH.
+
+### 1.3 The as-given build (`d0868ff5`, before any edit)
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`), queued about 6 minutes behind two other builds: **OK — all 1753 modules already up to date, nothing built,
+11 modules with warnings, every warning `declaration uses 'sorry'` (119 lines), exit 0** (`build/gate/build/20261005T000606Z-3729272.log`; driver log
+`data/fs131/ip/build-asgiven.log`).
+
+### 1.4 Iteration while the build queued (no tracked file edited)
+
+The foundation leaf was developed in a scratch file `data/fs131/ip/Unico.lean` (imports `PlaneTopology`'s Mathlib modules plus
+`Topology.UrysohnsLemma`, `Topology.Homotopy.Contractible`, `Analysis.Convex.Contractible` — the last two supply `SimplyConnectedSpace ℂ`, which
+`PlaneTopology`'s present imports do not). `isPreconnected_inter_of_union_eq_univ` iterates clean there (stage 2).
+
+## Stage 2 — SAVED: the foundation (`PlaneTopology`), measured
+
+### 2.1 Proved (iteration-green; the stage build is recorded in § 3.1)
+
+Seven of `PlaneTopology`'s eight leaves, statements byte-identical to KP's (checked by `tools/fs131_ip_splice.py --check-only`, which compares
+each module statement with the scratch statement whose proof is spliced; planted control: a scratch copy with `A ∩ B` changed to `A ∪ B` in
+unicoherence's conclusion → `REFUSED: isPreconnected_inter_of_union_eq_univ: STATEMENT DIFFERS`, exit 2, while the unplanted
+`isPreconnected_compl_closedBall` in the same run passed):
+
+| leaf | how | lines |
+|---|---|---|
+| `isPreconnected_inter_of_union_eq_univ` (**unicoherence**) | KP's route with one change: lift through `Complex.isCoveringMap_exp : ℂ → ℂ ∖ {0}` instead of `Circle.exp` (no `Circle` coercions); Urysohn by `exists_continuous_zero_one_of_isClosed`; the pasted map by `Continuous.if` (the frontier of `A` lies in `A ∩ B`); constancy of integer-valued functions by the child `eq_of_intValued_of_isPreconnected` (intermediate value `n + 1/2`) | ≈ 95 |
+| `isPreconnected_compl_connectedComponentIn` | `isPreconnected_of_forall` from a point of `K`: each other component `D` with a frontier point `p ∈ K` (`nonempty_frontier_iff`, child `frontier_connectedComponentIn_subset`), `insert p D` preconnected (`subset_closure`), then `∪ K` | 33 |
+| `isPreconnected_frontier_connectedComponentIn` | unicoherence on `closure C`, `Cᶜ` (`IsOpen.frontier_eq`) | 10 |
+| `exists_inter_of_finite_closed_cover` | `isPreconnected_closed_iff` on `C i` and the finite union of the others (`Set.Finite.isClosed_biUnion`) — direct, no contradiction | 18 |
+| `isPreconnected_compl_closedBall` | polar image of `Ioi R × univ` (as `isPreconnected_holedAnnulus`); `R < 0` is `univ` | 24 |
+| `isBounded_connectedComponentIn_of_frontier_subset` (**the last exit**) | child `compl_closedBall_subset_connectedComponentIn` and child `inter_frontier_nonempty_of_isPreconnected` (Mathlib has no `IsPreconnected.inter_frontier_nonempty` at the pin: KP's docstring named it; grep finds nothing) | 14 |
+| `connectedComponentIn_eq_of_not_isBounded` | both components hold the complement of a large disc | 12 |
+
+New children (shared, in `PlaneTopology`): `eq_of_intValued_of_isPreconnected`, `inter_frontier_nonempty_of_isPreconnected`,
+`frontier_connectedComponentIn_subset`, `compl_closedBall_subset_connectedComponentIn`. New imports: `Mathlib.Topology.UrysohnsLemma`,
+`Mathlib.Topology.Homotopy.Contractible`, `Mathlib.Analysis.Convex.Contractible` (the last two give `SimplyConnectedSpace ℂ`); no project import
+changes, so `ARCHITECTURE.md`'s Imports cell stands.
+
+**Binder renamed, type unchanged** (for Keryx): the last exit never reads `hK : IsClosed K` or `hR : IsClosed R`; the unused-variables linter
+fires on both, and the gate wants linters silent. I renamed them `_hK`, `_hR` (inventory ruling 281 (a)'s reasons: a binder name is not part of
+the type; no caller passes them by name). **Generalization**: the last exit holds for any bounded `K` and any `R`.
+
+### 2.2 Measured, and the chain re-priced from the first two leaves
+
+Unicoherence: about 20 minutes of wall clock from first draft to iteration-green (three iterations, each 2–3 s of `lake env lean`), ≈ 95 lines
+against the plan's "M (≈ 120 lines)". The frontier lemma with the five small lemmas and four children: about 15 minutes, four iterations. KP's
+§ 4.2 priced "§ A and the small `PlaneTopology` lemmas: one session; unicoherence and the frontier lemma: half a session" — together they took
+under a fifth of a session. **Re-price**: the topology that has a textbook proof over Mathlib's connectedness API runs three to five times
+under KP's table; I expect § A and the two `cvb_*` pinch/hole leaves in about a third of a session, §§ B–C in about half. The crossing lemma
+is the exception (§ 2.3): its price depends on a proof route not yet in hand.
+
+### 2.3 The crossing lemma — a route question, not a statement question
+
+`inter_nonempty_of_interleaved` (KP's H) is left for step 5. KP's sketch ("Phragmén–Brouwer from unicoherence … a line from infinity to
+infinity separates its two sides") needs, at its last step, a *separation* fact about a wild set (that `K ∪` two rays separates its two
+sides), which unicoherence alone does not give: every unicoherence argument refutes by showing a frontier disconnected, and a connected
+separator never yields that. The Phragmén–Brouwer property itself is provable here in about 60 lines (the complement-of-a-component lemma above
+does the work), but applying it to the crossing needs `A ∪ B` to separate two points, which for `A ⊇ K`, `B ⊇ K'` is the crossing again. Routes
+to weigh at step 5: (a) no-retraction (`D̄ → ∂D` with degree one cannot exist, provable with the same lifting theorem on `ℂ`) plus a
+Poincaré–Miranda-type construction from disjoint `K`, `K'`; (b) the boundary graph BG (step 4) making both continua unions of arc pieces, where
+the crossing becomes a finite planar-graph fact. Recorded here so step 5 starts from it.
+
+## Stage 3 — SAVED: `MapTopology` § A, and two of the seven planar leaves closed (`cvb_hole_disconnected`, `cvb_pinch_connected`)
+
+### 3.1 The stage-2/3 build
+
+`1779e981` under the slot (40 GiB, 8 cpus, `BATCH=4`, queued about 15 minutes behind two builds): **OK — 446 of 446 batches, 6 modules
+rebuilt (`PlaneTopology` 2.2 s, `MapTopology` 1.6 s, `BaseWalk` 1.9 s, `MapGraph` 9.4 s, `BaseDense` 1.5 s, `Proofs`), 11 modules with
+warnings, every warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T002316Z-3863003.log`; driver log
+`data/fs131/ip/build-stage3.log`).
+
+### 3.2 Proved
+
+- **`MapTopology` § A, all six leaves**: `IsTile.subset_compl_closure` (open and disjoint, `Disjoint.closure_right`),
+  `IsTile.subset_or_subset_of_separated` (`isPreconnected_closed_iff` on the two closures), `exists_tile_inter_of_isOpen`
+  (`dense_interiorPts`), `exists_tile_mem_closure_of_mem_closure` and `mem_of_touch_closed` (both over the new shared child
+  **`exists_mem_closure_of_mem_closure_biUnion`**: a closure point in the domain of the union of the closures of any family of tiles is a
+  closure point of one of them — `finite_tiles_near`, the only place local finiteness enters), `finite_tiles_closure_inter`
+  (`IsCompact.elim_nhds_subcover`).
+- **`cvb_hole_disconnected`** (row FS114-CVB-PINCH's hole clause): KP's four joints, then the boundary dart of a walk
+  (`SimpleGraph.Walk.exists_boundary_dart`, confirmed at the pin). The skeleton's comment shape is kept; ≈ 75 lines.
+- **`cvb_pinch_connected`** (the pinch clause): KP's plan through the separation. `P` = tiles reachable from a far tile `A` in `M − T`;
+  `Y` = the union of the components of `(cl T)ᶜ` holding a tile of `P` (open, saturated), `Hc` = the rest; every tile in such a component is
+  in `P` (`mem_of_touch_closed` on the component); a common closure point of `Hc` and `Y` gives touching tiles on both sides, so `Hc` and `Y`
+  are separated; `Y` holds the complement of a large disc, so `Hc` is bounded — a hole unless empty. Local finiteness is read only through
+  `exists_mem_closure_of_mem_closure_biUnion` at one point (KP's claim, confirmed). ≈ 150 lines. KP's two in-proof `have`s (`hbd`, `hne`) are
+  absorbed into the restructured proof (in-proof joints, no statement).
+
+## Stage 4 — SAVED: §§ B–D pieces, `exists_unenclosed_or_bad`'s joints
+
+### 4.1 The stage-4 build
+
+`f587bfea`: **OK — 446 of 446 batches, 5 modules rebuilt (`MapTopology` 3.6 s, `BaseWalk`, `MapGraph` 9.7 s, `BaseDense`, `Proofs`), 11 modules
+with warnings, every warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T003356Z-3939265.log`; `data/fs131/ip/build-stage4.log`).
+
+### 4.2 Proved
+
+- **`exists_rim_vertex`** (E4-OUTERMOST step 3, KP's narrower hypotheses): the rim `Φ = frontier (outerDom T)` is preconnected (the frontier
+  lemma), compact, in `cl T` and nonempty; the tiles of the outer domain touching it are finitely many and cover it; one alone would enclose `T`
+  (the last exit, against `hno`), so two meet on `Φ` (`exists_inter_of_finite_closed_cover`). ≈ 75 lines. New shared children in § B:
+  **`isOpen_outerDom`**, **`outerDom_eq_connectedComponentIn`** (for a set whose closure lies in `B̄(0, R)`, the outer domain is the component
+  through any point outside it), `IsTile.closure_subset_closedBall_zero`, `exists_not_mem_closedBall_zero`.
+- **`tileOf_subset_ball`** (Lemma H(a), any `k`): `endpoint_dist_ge`'s connectedness argument, then openness makes `≤ 1` strict.
+- **`GermPseudo.eq_of_cw`**: two germs of positive length share a point.
+- **`ringArc_cases`**: shift the second arc by `2πn`, `n = ⌊(s − s' + π)/2π⌋`, to start within `π` of `s`; the eight order cases; disjoint
+  real intervals give disjoint arcs because two angles of the two arcs differ by less than `2π` (`e_eq_e_iff`). New child
+  `ringArc_add_two_pi_mul`.
+- **`exists_unenclosed_or_bad`'s three joints** (`BaseDense`): the rim misses the open outer domain (`IsOpen.inter_frontier_eq`); `T` misses
+  its outer domain, so `T ≠ X`, `T ≠ Y`. The leaf itself still rests on `exists_outermost`, `isCubicTrichromatic_of_three_tiles` and
+  `unenclosed_of_rim_vertex`.
+
+### 4.3 The axiom check (iteration, against the stage-4 oleans)
+
+`data/fs131/ip/AxiomsIP.lean` (output `data/fs131/ip/axioms-stage4.txt`, `pp.fullNames`): all 29 declarations proved by this job on exactly
+`[propext, Classical.choice, Quot.sound]`; the two partners that must show `sorryAx` do (`exists_unenclosed_or_bad`, whose `exists_outermost`
+is open, and `inter_nonempty_of_interleaved`) — the check sees a `sorry` when there is one. `scripts/Axioms.lean`'s FS131-KP block gains the
+ten new children (a comment line "FS131-IP1's added children" heads them).
+
+### 4.4 The leaves left (named)
+
+| file | leaf | state |
+|---|---|---|
+| `PlaneTopology` | `inter_nonempty_of_interleaved` (the crossing lemma) | route open (§ 2.3) |
+| `MapTopology` § B | `exists_outermost` | owes `not_encloses_of_hull_eq` (sector charts at non-vertex points of the common outer frontier) and the finite-chain argument |
+| `MapTopology` § B | `isCubicTrichromatic_of_three_tiles`, `unenclosed_of_rim_vertex` | both need one shared child: a tile whose closure holds `v` contains a sector of `v`'s chart at every small radius, distinct tiles distinct sectors (`IsSectorChart.cover`, `.disjoint`, `.isSector_iff`) — then two tiles of one colour give `HasRepeatedColour`, and a cubic vertex has exactly its three tiles |
+| `MapTopology` § C | `exists_eleventh_of` | E4-RIM's five steps; all its topology is now proved (§§ A–B children, the last exit) |
+| `MapTopology` § D | `exists_far_end` | BG + PATH (the finite boundary graph) |
+| `MapGraph` | `not_isHoleOf_chain`, `isHoleOf_cluster` | concrete geometry (adversaries) |
+| `MapGraph` | `filledGraph_locallyFinite`, `_connected`, `_infinite`, `_oneInf` | F-LOC/CONN/INF/ONE, over § A–B |
+| `MapGraph` | `filledGraph_rings` (F-RING), `reduced_props_of_planarLike` (T-GRAPH), `triLattice_planarLike` (owed inhabitant) | not started |
+| `BaseWalk` | `retArcs_not_interleaved`, `retArcs_not_abut`, `endpoint_of_far_end` | over the crossing lemma, PATH, and the CD/CE reading |
+
+## Stage 5 — SAVED: `isCubicTrichromatic_of_three_tiles`, the stage-5 build, and what is handed on
+
+### 5.1 Proved
+
+**`isCubicTrichromatic_of_three_tiles`**, over two new shared children in `MapTopology` § B: **`IsSectorChart.exists_sector_subset_tile`** (a
+tile whose closure holds the chart's point contains a sector of every radius `r ∈ (0, r₀]`: a sector meeting the tile is preconnected inside the
+interior points, so inside the tile's component) and **`hasRepeatedColour_of_two_tiles`** (two distinct tiles of one colour at `v` give
+`HasRepeatedColour v`: two disjoint nonempty sectors of that colour at every small radius; with no germ the ball is one tile). Then three
+distinct tiles at a good point have three distinct colours, `coloursAt` has at most three (not in `fourSet`), and
+`isCubicTrichromatic_of_three_of_noRep` finishes. The same child is the first half of `unenclosed_of_rim_vertex` (a cubic vertex's tiles are
+exactly the three holding its three sectors).
+
+### 5.2 The stage-5 build and the receipt
+
+`146a8d63`: **OK — 446 of 446 batches, 5 modules rebuilt, 11 modules with warnings, every warning `declaration uses 'sorry'`, exit 0**
+(`build/gate/build/20261005T004641Z-4048849.log`; `data/fs131/ip/build-stage5.log`). No warning of any other kind in the saved log (grep for
+`warning|error` minus the `sorry` lines and Lake's `--no-build` probe line: empty). Axiom check `data/fs131/ip/axioms-stage5.txt`: 32 records on
+exactly the standard three; the two partners on `sorryAx` (`exists_unenclosed_or_bad`, `inter_nonempty_of_interleaved`) show it.
+`tools/check_architecture.py`: PASS, exit 0 (`data/fs131/ip/check-architecture.txt`; no project import changed). `sorry` lines left:
+`PlaneTopology` 1, `MapTopology` 4.
+
+### 5.3 Measured cost, and the chain re-priced
+
+Wall clock for stages 2–5: about 50 minutes (stage 1's commit at 00:08Z to stage 5's at 00:57Z), of which about 30 were three builds and
+their queues, for 32 declarations (≈ 1,100 lines) in about a third of this session's context; two of the seven planar leaves closed
+outright (`cvb_pinch_connected`, `cvb_hole_disconnected`) and 15 of the 23 topology leaves (`PlaneTopology` 7 of 8, `MapTopology` 11 of 15)
+with `exists_unenclosed_or_bad`'s joints. Every leaf with a textbook proof over Mathlib's connectedness API closed on its first or second
+iteration; the price driver is not topology but the map's local structure (sector charts) and the two finite-graph constructions.
+
+| what is left | price (implementer sessions, this job's measured rate) | why |
+|---|---|---|
+| `unenclosed_of_rim_vertex` | 0.3 | `exists_sector_subset_tile` gives the three tiles; the one case needing geometry is `T' = Y` (the `T|X` branch near `v` misses `cl Y`: the sector of `Y` is bounded by the other two branches) — read `G.sector`'s definition first |
+| `exists_outermost` (with `not_encloses_of_hull_eq`, `compl_outerDom_subset_convexHull`) | 0.5–0.8 | hull monotonicity under enclosure is plain topology (worked out on paper below); strictness needs the sector picture at a non-vertex point of the common outer frontier |
+| `exists_eleventh_of` | 0.4 | all its topology is now proved; E4-RIM's steps over `tileOf_subset_ball`, `noBoth`, the last exit and the finite cover |
+| F-LOC, F-CONN, F-INF, F-ONE | 0.5 | over § A–B as built |
+| `not_isHoleOf_chain`, `isHoleOf_cluster` | 0.3–0.5 | concrete norm geometry |
+| BG + PATH + `exists_far_end` + `endpoint_of_far_end` (with the CD/CE reading) | 1.5–2 | the finite boundary graph is new infrastructure |
+| the crossing lemma, then `retArcs_not_interleaved`, `retArcs_not_abut` | 1–2 | route open (§ 2.3); over PATH once BG exists |
+| F-RING, T-GRAPH, `triLattice_planarLike` | 2–3 (not measured) | not started |
+
+Total left: about 6.5–9.5 sessions. The measured pieces (topology over Mathlib's connectedness API) ran about three times under KP's table
+(this one session did what KP priced at about 2.5); the unmeasured pieces — BG, the crossing lemma, F-RING, T-GRAPH — keep KP's prices, since
+nothing here measured them, and they are where the time now goes. **Not measured, as the brief asked**: F-RING and T-GRAPH from their first
+children — I did not reach them; the row above is read from the statements, not measured.
+
+### 5.4 Worked on paper, for the successor (`exists_outermost`)
+
+If `T'` encloses `T` (`y ∈ T \ cl T'` in a bounded component `B'` of `(cl T')ᶜ`), then `T ≠ T'`, `T ⊆ B'`, and the unbounded component `W'`
+of `(cl T')ᶜ` misses `cl T` (`W' ∩ B' = ∅`, `W' ∩ cl T' = ∅`, `cl T ⊆ B' ∪ cl T'`), so `W' ⊆ outerDom T` and **hull `T ⊆` hull `T'`**. If the hulls
+are equal, `outerDom T = outerDom T'` and its frontier lies in `cl T ∩ cl T'`; it is preconnected (the frontier lemma) with at least two
+points (a one-point frontier would split `ℂ ∖ {p}`), so it is infinite and has a point off the finitely many vertices of a compact disc, where
+the sector chart has two sectors, one of `T` and one of `T'` — and that point is in the closure of the outer domain, which meets neither tile:
+contradiction. Then the finite family of tiles whose closures meet `B̄(x, 1)` (`finite_tiles_closure_inter`), ordered by hull inclusion, has a
+maximal member containing `x` in its hull; it is enclosed by none.
+
+### 5.5 For the coordinator
+
+- **F-RING and T-GRAPH: each deserves its own job** (judged from the statements, not measured). T-GRAPH (`reduced_props_of_planarLike`, with
+  the owed inhabitant `triLattice_planarLike`) is pure graph theory, with KP's recorded risk that `PlanarLike` may need one more field; F-RING
+  needs the boundary graph BG first.
+- **What a second implementer could take now, without sharing a file with whoever continues `MapTopology`/`BaseWalk`**: the crossing lemma
+  `inter_nonempty_of_interleaved` — the only leaf left in `Plane/PlaneTopology`, which nothing else in this chain will edit (a route
+  decision first: § 2.3). T-GRAPH is disjoint from the map-level leaves but lives in `MapGraph`'s `Thomassen` block; it shares a file with
+  F-LOC/CONN/INF/ONE and the adversaries unless Keryx moves the `Thomassen` block to its own module.
+- **The 60° question** (`endpoint_of_far_end`): not reached; FS110-CD Lemma E/R and FS110-CE R1–R4 not read by this job.
+- **Binder renames**: the last exit's `hK`, `hR` → `_hK`, `_hR` (§ 2.1; type unchanged).
+
+## Stage 6 — SAVED: FS131-IP2's readback (the second implementer, from IP1's Stage 5)
+
+*de Bruijn, the implementer (FS131-IP2), 2026-10-05. Brief: `data/fs131/briefs/FS131-IP2-planar.md` (main tree). Same branch and worktree; I append
+stages from here. Read in full at launch: the brief, `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building and § Make the gate fail, this record
+(stages 1–5), KP's plan §§ 3–5 (and its Stage 6), inventory items 277, 292, 293.*
+
+### 6.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by `grep -F` of each quotation's full text (planted absent string `ABSENT-CONTROL-STRING-xyzzy` reported `MISS`, the control):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| inventory item 292 (truncated at "`data/fs131/reports/FS131-IP1.md`;") | `plans/FS131-close-inventory.md` (main tree) l. 2219 | verbatim |
+| inventory item 293 (truncated at "a binder name is not part") | same, l. 2240 | verbatim |
+| the `unenclosed_of_rim_vertex` price row | this record § 5.3 | verbatim |
+| "If `T'` encloses `T` (… the unbounded component `W'`" | this record § 5.4 | verbatim |
+| "`inter_nonempty_of_interleaved` (KP's H) is left for step 5. KP's sketch (…" | this record § 2.3 | verbatim |
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors | verbatim |
+| "**Work order** (each step unblocks the next; re-price after the first two):" | KP's plan § 5.1 | verbatim |
+| "**May:** add children (with spec examples; …), change imports (updating `ARCHITECTURE.md`'s" | KP's plan § 5.2 | verbatim |
+| inventory item 277 (truncated at "KP's") | `plans/FS131-close-inventory.md` l. 2040 | verbatim |
+
+No mismatch.
+
+### 6.2 What I may and may not change (the brief's touches, ruling 293 (b), KP's plan § 5.2)
+
+**May:** prove the `sorry`s in `Plane/ValidMap/MapTopology` (`exists_outermost`, `unenclosed_of_rim_vertex`, `exists_eleventh_of`, `exists_far_end`); in
+`MapGraph` outside the `namespace HadwigerNelson.Thomassen` block (l. 36–595 at `01011037`): `not_isHoleOf_chain`, `isHoleOf_cluster`,
+`filledGraph_locallyFinite`, `_connected`, `_infinite`, `_rings`, `_oneInf`; in `BaseWalk` `endpoint_of_far_end`, `retArcs_not_abut`,
+`retArcs_not_interleaved` (the last over the crossing lemma as given, carrying `sorryAx` until FS131-IX1 merges); add children beside them with spec
+examples (shared ones in `MapTopology` or `MapGraph` outside the `Thomassen` block; BG and PATH in `MapTopology` § D); change imports (with
+`ARCHITECTURE.md`'s Imports cell, `scripts/Axioms.lean`'s FS131-KP block above `=== PURCHASED ===`). Also `Proofs.lean`, this record,
+`tools/fs131_ip_*.py`, `data/fs131/ip/`, `data/fs131/reports/FS131-IP2.md`. A later leaf of ruling 293 (b)'s order may go first when cheaper, said here.
+
+**May not:** change any statement of KP's job (plan §§ 3.2, 4.1) or any definition they use (`IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`, `IsRing`,
+`TwiceApart`, `PlanarLike`, `outerDom`, `EnclosesTile`), nor any statement outside this job; no new `axiom`, no `native_decide`; nothing in
+`Plane/PlaneTopology` (FS131-IX1's) or inside the `HadwigerNelson.Thomassen` block (T-GRAPH's later job); not KP's plan file; not the other `sorry`s in
+`BaseWalk`/`BaseDense` (wave 5's lane); no merge, no gate run, nothing on `main`; no file edited while a build of it runs. A leaf that cannot be
+proved as written goes to Keryx at once. The 60° question is answered here before `endpoint_of_far_end`; a no stops that leaf and goes to Keryx.
+
+### 6.3 The as-given build (`01011037`, before any edit)
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1753 modules already up to date, nothing built, 11 modules with warnings, every warning
+`declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T010519Z-4684.log`; driver log `data/fs131/ip/build-ip2-asgiven.log`).
+
+## Stage 7 — SAVED: `unenclosed_of_rim_vertex`, `exists_outermost`; `exists_unenclosed_or_bad` closed
+
+### 7.1 Proved
+
+- **`unenclosed_of_rim_vertex`.** The chart at the cubic `v` has three germs (`HasDegree v 3` against `IsSectorChart.hasDegree`); below some radius
+  the germs are strictly ordered (new child `BranchGerms.eventually_dir_lt_nextDir`: a direction gap persists by continuity, germs of one direction
+  are ordered by curvature at every distance). `T`, `X`, `Y` hold three distinct sectors, so they are the only tiles at `v`. For `S = X` (or `Y`)
+  and a tile `T'`: `T' = T` is `X ⊆ outerDom T`; `v ∉ cl T'` joins `X` to `T` by a small disc; `v ∈ cl T'` forces `T' = Y`, and then `X` and `T`
+  both meet **the far side of `Y`'s sector** (new child `BranchGerms.exists_far_side`: the second sector of the two-germ chart of `Y`'s bounding
+  germs — open, connected, missing `Y`'s sector, holding every other sector and every other germ's branch points; built from the library's
+  `isOpen_sector`, `isPreconnected_sector`, `sector_disjoint` on a `BranchGerms 2`). Either way `X`'s point and a point of `T` share a component of
+  `(cl T')ᶜ`, unbounded by `hno`. IP1's case "`T' = Y`" was the only geometry, as priced.
+- **`exists_outermost`.** Candidates: tiles with `x` in the hull. A disc holding a closure holds the hull (child `compl_outerDom_subset_closedBall`);
+  a tile's closure lies within `1` of each of its points, so `x` in the hull puts the closure, then the hull, in `B̄(x, 1)` — **no convex hulls
+  needed** (KP's `compl_outerDom_subset_convexHull` is not used). Finitely many candidates (`finite_tiles_closure_inter`); one with a maximal hull
+  (`Set.Finite.exists_maximalFor`); enclosure grows hulls (child `outerDom_subset_of_encloses`, record § 5.4's paper argument) and strictly
+  (`not_encloses_of_hull_eq`).
+- **`not_encloses_of_hull_eq` — the route.** Strictness is **false for open connected sets in general** (two of Wada's lakes have one outer
+  frontier and enclose each other), so it must read the map's regularity. IP1's sketch read "finitely many vertices in a compact disc", which
+  nothing here holds yet. The route taken: **points with three tiles in their closure are isolated** (`exists_ball_two_tiles`: in a chart ball, a
+  point off the centre is interior, or on one branch, whose closure meets only the two sectors that branch bounds — `exists_far_side` again; child
+  `IsSectorChart.exists_sector_mem_closure`). Were the hulls equal, every point of the common rim would carry `T`, `T'` and a tile of the outer domain;
+  the rim is preconnected, so isolation makes it one point, and a one-point rim would split `ℂ ∖ {p}` (Mathlib's
+  `isConnected_compl_singleton_of_one_lt_rank`; new import `Mathlib.Analysis.Normed.Module.Connected` in `MapTopology`, no project import changed).
+- **`exists_unenclosed_or_bad`** (`BaseDense`) needs nothing more: its three joints (IP1), `exists_rim_vertex`, `isCubicTrichromatic_of_three_tiles`
+  and the two leaves above. **E4-OUTERMOST is [kernel]** on the standard three. (`localDense`, its consumer, still rests on `n3_base`, wave 5's lane.)
+- Spec example: the straight three-germ chart satisfies `exists_far_side`'s hypothesis (an `example` beside it).
+
+### 7.2 The stage-7 build and the receipt
+
+`f0e0c249` under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 446 of 446 batches, 5 modules rebuilt (`MapTopology` 4.1 s, `BaseWalk`, `MapGraph`,
+`BaseDense`, `Proofs`), 11 modules with warnings, every warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T012057Z-111415.log`;
+`data/fs131/ip/build-stage7.log`; grep for `warning|error` minus `sorry` lines leaves only Lake's `--no-build` probe line). Axioms
+(`data/fs131/ip/AxiomsIP2.lean` → `data/fs131/ip/axioms-ip2-stage7.txt`): **14 records on the standard three, the 2 partners (`exists_eleventh_of`,
+`localDense`) on `sorryAx`**, checked by the new `tools/fs131_ip_axioms.py` (fails on a record off the standard three, a control without `sorryAx`, a
+missing record, or an unexpected record). Planted faults, both watched to fire: a `sorry` control listed as clean → `NOT CLEAN`, exit 1; a clean
+record listed as a control → `CONTROL SHOWS NO sorryAx`, exit 1. `scripts/Axioms.lean`'s FS131-KP block gains IP2's eleven children (under "--
+FS131-IP2's added children"). `sorry` declarations left in `MapTopology`: `exists_eleventh_of`, `exists_far_end`.
+
+### 7.3 Re-priced after the first two leaves
+
+Both leaves closed on iteration in well under a session's tenth each once the shared child (`exists_far_side`) existed; the child itself (≈ 130
+lines with its index lemmas) was most of the cost. **The sector chart is now the reusable engine**: `exists_far_side` and `exists_ball_two_tiles`
+answer, from any chart, "which sectors does this point touch". Re-price of what is left (implementer sessions): `exists_eleventh_of` 0.3 — its
+plan is written (§ 7.5), the one new geometric child being the ring arc at a touch point on `ω(u)`; F-LOC/CONN/INF/ONE 0.4; the adversaries 0.3;
+**BG + PATH 0.6–1** (cheaper than KP's table: the vertex set of a compact disc is finite by `exists_ball_two_tiles` and compactness, which is BG's
+hardest finiteness); `exists_far_end` 0.3 over BG; `endpoint_of_far_end` **1 or more** (§ 7.4: it needs the orientation of the boundary at an exit,
+a Jordan-type step); `retArcs_not_abut`, `retArcs_not_interleaved` 0.5 over PATH; F-RING 1–2 (not measured).
+
+### 7.4 The 60° question (brief, done-means 3), read before `endpoint_of_far_end`
+
+Read: FS110-CD § 2.3 (the inward continuation, Lemma E), § 2.4 (Lemma R), § 3.0 items 1–3; FS110-CE § E3 (D5 items 1–2, R1–R4), `plans/FS110-derivation.md`
+FS110-CE3, -CE4, -CE6. **Answer: yes — a two-colour exit that is a return returns within 60° of `r(θ)`.** CD Lemma R step 1: "`|b − b′| < 1`: both lie in
+the closure of the `a`-region along `β` (F3 gives `≤ 1`), and `= 1` would put two `{a,c}` circle points at unit distance (bi–bi)"; CB D5 item 1 as CE
+quotes it: "Its ends are < 1 apart (the a-tile along it has diameter ≤ 1; = 1 is (P′)) … their arcs (< 60°) nest or are disjoint". A chord below `1` is
+an angle below `60°`, which is `IsRetArc`'s bound. So the leaf is not stopped; no message sent.
+
+**Two route findings for `endpoint_of_far_end` (not statement defects; for the coordinator):**
+1. `exists_far_end`'s second disjunct, `q ≠ r(θ) ∧ dist q u = 1`, also admits **spike touches** (CE's SPIKE and spike corners: the `a|c` boundary
+   touches `ω(u)` from inside and the circle does not change colour, CE3), where no returning pair exists (CE R1: the path continues), and three-colour
+   V-out vertices of `ω(u)`. From such a `q` no endpoint follows. `endpoint_of_far_end`'s conclusion does not mention `q`, so the statement stays true
+   (it is `exists_endpoint`'s conclusion), but its proof must **re-select** the far end: the handshake's odd vertices on `ω(u)` are exactly the points
+   where one branch of the `T₁|T₂` boundary lies in the closed disc (a spike touch has two, even). Plan: a strong child of `exists_far_end` returning
+   an odd vertex, used by both leaves.
+2. At a genuine exit `q = r(φ)`, `IsRetArc` needs the germs' pseudo-colours in the right orientation (`c` inside `[θ, φ]` at both ends): CD's step 2
+   ("`β ∪ I` bounds a region `Q`", tightened in § 3.0 item 1 by pushing `β` off `ω(u)`) — a Jordan-type step. It may follow from the crossing lemma
+   (two continua in the disc joining interleaved circle points meet), applied to the `c`-tile's side and the `a`-tile's side; not yet worked.
+
+### 7.5 `exists_eleventh_of`, planned (for whoever takes it next, if I do not finish it)
+
+E4-RIM over the pieces now held: (i) each colour of `u` has a tile at `u` (`exists_mem_closure_of_mem_closure_biUnion` over the tiles of that
+colour); (ii) a tile of a colour of `u` meeting `B̄(u, 1)` lies in `B(u, 1)` (`tileOf_subset_ball`, `closure_ball`); (iii) `𝒯` = tiles of `u`'s
+colours meeting `B(u, 1)`, finite; `K₀` the union of their closures, `R*` the component of `u` (closed: its closure is preconnected in `K₀`); a
+member whose closure meets `R*` has its closure in `R*`; (iv) `W` the component of `R*ᶜ` through `u + 2` (holds `(B̄(u, 1))ᶜ`), `Φ = frontier W`,
+preconnected, compact, nonempty; (v) one member alone on `Φ` would enclose a tile at `u` of another colour (the last exit) against `UnenclosedC u`;
+two meet at `q ∈ Φ` (`exists_inter_of_finite_closed_cover`); (vi) a tile `Y` at `q` meets `W` (`exists_tile_mem_closure_of_mem_closure`), so `Y` is
+neither member; `q` is cubic trichromatic (`isCubicTrichromatic_of_three_tiles`, H at `q`); (vii) `Y` has no colour of `u`: if it met `B(u, 1)` it
+would be a member inside `R*`; else `Y` misses `B̄(u, 1)` and touches the member `T₀ ⊆ B(u, 1)` at `q ∈ ω(u)` — **the one new child**: at a cubic
+`q`, a tile inside `B(u, 1)` and a tile off `B̄(u, 1)` touching there are adjacent sectors whose common branch lies on `ω(u)`, and a short arc of it is
+an `IsRingArc u θ₁ θ₂ a c` (branch points are closure points of both sectors and of no other — `exists_far_side`; the angle about `u` is
+`arg ((p s − u)/(q − u))`, continuous since the chord stays below `1`, injective, so its image holds an interval); then `BothKind` and `noBoth`
+(wave 4's leaf, `sorry` at the pin, used by statement) give a bad point at `u`, against H; (viii) the colours: `{a, b, c}` with `c ∉ P_cl(u)`,
+two in common, and a second tile of `a` at `q` would be a repeated colour. `exists_eleventh_of` will carry `sorryAx` through `noBoth` until that
+leaf lands.
+
+## Stage 8 — SAVED: `exists_eleventh_of` (E4-RIM), over one new child and `noBoth`
+
+### 8.1 Proved
+
+`exists_eleventh_of` as planned in § 7.5, steps (i)–(viii), with one new geometric child, **`exists_isRingArc_of_touch`**: at a cubic `q` the chart
+has three germs, any two of its sectors are adjacent (`decide` on `Fin 3`), so the sectors of `A` (inside `B(u, 1)`) and `Y` (off `B̄(u, 1)`) share a
+germ `m`; its branch points are closure points of both sectors (child `BranchGerms.branchPt_mem_closure_sector`, by directions just inside) and of no
+other (child `BranchGerms.eq_or_next_eq_of_mem_closure_sector`, over `exists_far_side`), so they lie on `ω(u)` and their side colours are `a` inside and
+`c` outside; the angle `arg ((p s − u)/(q − u))` is continuous (the chord to `q` stays below `1/2`, so the quotient stays off the negative axis) and
+injective, so two radii give `θ₁ < θ₂` and the IVT fills `[θ₁, θ₂]` with branch points, all in `Γ` (the chart's `branches`). Then `BothKind u θ₁ θ₂` and
+`noBoth` give a bad point at `u`, against H. **`exists_eleventh_of` carries `sorryAx` only through `noBoth`** (its other inputs are proved: the module's
+one remaining `sorry` is `exists_far_end`, which it does not use); it lands with `noBoth`.
+
+### 8.2 The stage-8 build and the receipt
+
+`733729a6` under the slot: **OK — 446 of 446 batches, 5 modules rebuilt, 11 modules with warnings, every warning `declaration uses 'sorry'`, exit 0**
+(`build/gate/build/20261005T013504Z-210720.log`; `data/fs131/ip/build-stage8.log`; nothing but `sorry` lines and Lake's probe line). Axioms
+(`data/fs131/ip/axioms-ip2-stage8.txt`, `tools/fs131_ip_axioms.py`): **17 records on the standard three; the 3 partners (`noBoth`,
+`exists_eleventh_of`, `localDense`) on `sorryAx`**. `scripts/Axioms.lean`'s FS131-KP block gains the three stage-8 children. `MapTopology` has one
+`sorry` left: `exists_far_end`.
+
+### 8.3 Where this hands off (ruling 293 (b)'s order)
+
+Done: `unenclosed_of_rim_vertex`, `exists_outermost`, `exists_eleventh_of` (closing `exists_unenclosed_or_bad` outright and `exists_eleventh` up to
+`noBoth`). **Left, in the ruled order**: BG with PATH, `exists_far_end`, `endpoint_of_far_end` (route findings § 7.4: re-select the far end as an
+odd vertex; the orientation at an exit is a Jordan-type step); F-LOC/CONN/INF/ONE; `not_isHoleOf_chain`, `isHoleOf_cluster`; F-RING after BG;
+`retArcs_not_abut`, `retArcs_not_interleaved`. **For the coordinator** (done-means 5): BG does not exist yet, so whether the crossing lemma's route (b)
+is cheap through it is not measured; what is held now that bears on it is `exists_ball_two_tiles` (vertices of a compact disc are finitely many, by
+isolation and compactness), BG's hardest finiteness. F-RING not reached, not measured.
+
+## Stage 9 — SAVED: FS131-IP3's readback (the third implementer, from IP2's Stage 8)
+
+*de Bruijn, the implementer (FS131-IP3), 2026-10-05. Brief: `data/fs131/briefs/FS131-IP3-planar.md` (main tree). Same branch and worktree; I append
+stages from here. Read in full at launch: the brief, `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building and § Make the gate fail, this record
+(stages 1–8), KP's plan (all six stages, §§ 3–5 among them), inventory items 277, 293, 300, 301.*
+
+### 9.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by `grep -F` of each quotation's full text (planted absent string `ABSENT-CONTROL-STRING-xyzzy` reported `MISS`, the control):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| inventory item 300 (truncated at "Stages 6–8;") | `plans/FS131-close-inventory.md` (main tree) l. 2350 | verbatim |
+| inventory item 301 (truncated at "BG with PATH,") | same, l. 2371 | verbatim |
+| inventory item 293 (truncated at "a binder name is not part") | same, l. 2240 | verbatim |
+| "Both leaves closed on iteration in well under a session's tenth each … (≈ 130" | this record § 7.3 | verbatim |
+| finding 1 ("1. `exists_far_end`'s second disjunct, … the `a|c` boundary") | this record § 7.4 | verbatim |
+| finding 2 ("2. At a genuine exit `q = r(φ)`, … CD's step 2") | this record § 7.4 | verbatim |
+| "**Work order** (each step unblocks the next; re-price after the first two):" | KP's plan § 5.1 | verbatim |
+| "**May:** add children (with spec examples; …), change imports (updating `ARCHITECTURE.md`'s" | KP's plan § 5.2 | verbatim |
+| inventory item 277 (truncated at "KP's") | `plans/FS131-close-inventory.md` l. 2040 | verbatim |
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors | verbatim |
+
+No mismatch.
+
+### 9.2 What I may and may not change (the brief's touches, ruling 301, ruling 293 (b), KP's plan § 5.2)
+
+**May:** prove the `sorry`s left at `02e85433` in the files my touches name — `MapTopology`'s `exists_far_end`; in `MapGraph` outside the
+`namespace HadwigerNelson.Thomassen` block: `not_isHoleOf_chain`, `isHoleOf_cluster`, `filledGraph_locallyFinite`, `_connected`, `_infinite`, `_rings`,
+`_oneInf`; in `BaseWalk` `endpoint_of_far_end`, `retArcs_not_abut`, `retArcs_not_interleaved` (the last over the crossing lemma as given, carrying `sorryAx`
+until FS131-IX1 merges) — adding children beside them with spec examples (BG and PATH where I choose: `MapTopology` § D, `MapGraph` outside the
+`Thomassen` block, or a new module importing nothing under `Plane/PlaneTopology` beyond what `MapTopology` imports); imports (with `ARCHITECTURE.md`'s
+Imports cell and `scripts/Axioms.lean`'s FS131-KP block above `=== PURCHASED ===`); `Proofs.lean`, this record, `tools/fs131_ip_*.py`, `data/fs131/ip/`,
+`data/fs131/reports/FS131-IP3.md`. A later leaf of ruling 301's order may go first when cheaper, said here.
+
+**May not:** change any statement of KP's job (plan §§ 3.2, 4.1) or any definition they use (`IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`, `IsRing`,
+`TwiceApart`, `PlanarLike`, `outerDom`, `EnclosesTile`), nor any statement outside this job; no new `axiom`, no `native_decide`; nothing in
+`Plane/PlaneTopology` (FS131-IX1's) or inside the `HadwigerNelson.Thomassen` block (T-GRAPH's later job); not KP's plan file; not the other `sorry`s in
+`BaseWalk`/`BaseDense` (wave 5's lane, `fs131-w5`); no merge into `fs131-w5`, no taking `main`, no gate run, nothing on `main`; no file edited while a build
+of it runs. A leaf that cannot be proved as written goes to Keryx at once.
+
+### 9.3 The as-given build (`02e85433`, before any edit)
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1753 modules already up to date, nothing built, 11 modules with warnings, every warning
+`declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T014928Z-325388.log`; driver log `data/fs131/ip/build-ip3-asgiven.log`).
+
+## Stage 10 — SAVED: `fs131-w5x` merged (the crossing lemma, held), as the brief's amendment rules
+
+The brief's amendment (2026-10-05, inventory items 302–303; ruling 303 quoted there and checked verbatim against `plans/FS131-close-inventory.md`, main
+tree, by `grep -F`): at the next saved stage, merge `fs131-w5x` into `fs131-w5p`, build, record it as its own stage.
+
+- **Merge**: `git merge origin/fs131-w5x` (`6db4fe3d`, FS131-IX1's report) at `c0d12324` → merge commit `99b47e9f`. **No conflict**: Git's own merge kept
+  both sides in `scripts/Axioms.lean` (the FS131-KP block at l. 3019 and the new FS131-IX1 block at l. 3103, both above `=== PURCHASED ===` at l. 3119)
+  and in `ARCHITECTURE.md`. `Plane/PlaneTopology` now has no `sorry`: `inter_nonempty_of_interleaved` (both continua closed) and
+  `inter_nonempty_of_interleaved_of_isClosed_left` (one closed) are held, with IX1's 13 children. Not edited by me.
+- **Build** (the merged tree, under the slot, 40 GiB, 8 cpus, `BATCH=4`): **OK — 446 of 446 batches, 6 modules rebuilt (`PlaneTopology` 3.6 s,
+  `MapTopology` 5.6 s, `BaseWalk` 1.9 s, `MapGraph` 9.4 s, `BaseDense` 1.6 s, `Proofs`), 10 modules with warnings (one fewer: `PlaneTopology`), every
+  warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T015706Z-359162.log`; `data/fs131/ip/build-ip3-merge-w5x.log`; grep for
+  `warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe line).
+- Where my order reads the crossing (`retArcs_not_interleaved`), I cite `inter_nonempty_of_interleaved` as held.
+
+## Stage 11 — SAVED: the boundary graph BG (its handshake), and `exists_far_end`
+
+### 11.1 Proved
+
+- **`Plane/CurveGraph`** (new module, imports `Plane/LocalStructure`; `ARCHITECTURE.md` row added, `Proofs.lean` import added; `MapTopology` now imports it,
+  the `MapTopology` row's Imports cell gains `Plane/CurveGraph` — `tools/check_architecture.py`: FAIL before that edit (real-only `Plane/CurveGraph`, the check firing), PASS after, `data/fs131/ip/check-architecture-ip3.txt`). BG is built as **the handshake for compact sets made of lines and circles**,
+  not as a `SimpleGraph`: a compact `C` with a *curve star* at each point (finitely many rays leaving the point, each a continuous graph over the distance,
+  pairwise disjoint, each locally a piece of a line or circle) has finitely many non-regular points (`finite_nonRegular`: off its centre a star is regular),
+  and their degrees have an even sum (`even_sum_deg`). The proof cuts each vertex out by a disc of radius `ρ`; the rays' points on the circles are the
+  *ports* (`∑ deg v` of them); the component of the rest through a port lies in one curve (two curves sharing three points are equal), is an arc of it
+  (`IsCurve.exists_param`: a parameter interval `[a, b]`), and holds exactly two ports, its ends (`port_pair`); the pairing is a fixed-point-free
+  involution (`Finset.sum_involution` in `ZMod 2`). No Jordan-type theorem, no `SimpleGraph`. A sector chart's branches are curve rays
+  (`branch_locally_curve`, through the library's `curveGerm`); stars pass to components; a one-ray star is not regular.
+- **`MapTopology` § D**: at a point in the closures of two distinct tiles, with two colours and no repeated colour, a chart has exactly two germs
+  (`IsSectorChart.eq_two`) and the common boundary of the two tiles near it is the point and both branches (`IsSectorChart.inter_closure_two`); at a two-colour
+  change point `r(θ)` of `ω(u)` one branch enters the disc and the other leaves it (`exists_inner_branch`: the clockwise germ lies in the `a`-sector, the
+  counter-clockwise one in the `c`-sector, so arcs of the circles of radius `1 ∓ η` about `u` near `r(θ)` each cross a branch, and no branch meets `ω(u)` near
+  `r(θ)`, whose points there carry one pseudo-colour).
+- **`exists_far_end`**, statement unchanged: if `r(θ)` has three colours it is its own far end; otherwise, were every point of the component `C` of `r(θ)` in
+  `cl T₁ ∩ cl T₂ ∩ B̄(u, 1)` two-coloured and off `ω(u)` but for `r(θ)`, `C` would have a curve star of two rays at each point but `r(θ)`, of one ray there
+  (H gives two germs at each), so its degrees at non-regular points would sum to `1 + 2m` — against the handshake.
+- **Binder renamed, type unchanged** (for Keryx, ruling 293 (a)'s reasons): `exists_far_end`'s `hF : F.Valid` is never read (the unused-variables linter
+  fired), renamed `_hF`; its one caller (`exists_endpoint`) passes it positionally. **Generalization**: the far end exists for any six-coloured fragment
+  covering `B̄(u, 2)` under H — validity is not needed.
+
+### 11.2 The stage-11 build and the receipt
+
+`29004f08` + this stage's edits, under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 446 of 446 batches, 6 modules rebuilt (`CurveGraph` 5.3 s, `MapTopology`
+6.5 s, `BaseWalk`, `MapGraph` 9.6 s, `BaseDense`, `Proofs`), 9 modules with warnings (one fewer: `MapTopology` now has no `sorry`), every warning `declaration
+uses 'sorry'`, exit 0** (`build/gate/build/20261005T023343Z-612010.log`; `data/fs131/ip/build-ip3-stage11.log`; grep for `warning|error` minus the `sorry`
+lines leaves only Lake's `--no-build` probe line). Axioms: `data/fs131/ip/AxiomsIP3.lean` → `data/fs131/ip/axioms-ip3-stage11.txt`, checked by
+`tools/fs131_ip_axioms.py` against `data/fs131/ip/axioms-ip3-names.txt`: **35 records on the standard three, the 2 controls on `sorryAx`**; planted fault (a
+`sorry` control listed as clean) → `NOT CLEAN …`, exit 1. `scripts/Axioms.lean`'s FS131-KP block gains IP3's 34 children (under "-- FS131-IP3's added
+children"; `exists_far_end` was already there).
+
+### 11.3 Re-priced after the first two leaves (BG, `exists_far_end`)
+
+Wall clock from stage 10's commit (02:06Z) to this stage (02:44Z): about 40 minutes, about 1,770 lines (`CurveGraph` 1,199, `MapTopology` + 572), one
+build. KP priced BG + PATH + `exists_far_end` at one to two sessions, IP2 at about one; BG and `exists_far_end` took about a third of this session's
+context. **What made it cheap**: the arcs are lines and circles, so every regular stretch of the boundary is an interval of one curve's parameter, and the
+handshake needs only "two distinct curves share at most two points" and the order of `ℝ` — no general 1-manifold theory. **Re-price of what is left**
+(implementer sessions): **PATH** 0.3 (max degree two plus connectedness: the ports' pairing as a multigraph, connected because the union of the stars and arcs
+reachable from a vertex is clopen; then `|E| ≥ |V| − 1`); **the strong child** of `exists_far_end` (an odd vertex) 0.3 — the handshake gives it at once once
+stars exist at every point of `ω(u)` (branches along `ω(u)`, inside, outside, tangent: the D-cut at a general circle point); `retArcs_not_interleaved` 0.2
+(over the crossing lemma, held: different tiles close by H and `cor3_base` — three tiles of the two pairs carry three pseudo-colours, disjoint from `u`'s,
+within `1` of `u`; same tiles need PATH); `retArcs_not_abut` 0.2 over PATH; **`endpoint_of_far_end` 1** — besides the strong child it needs IP2's finding 2
+(the orientation at an exit, a Jordan-type step: the crossing lemma does not give it directly — the natural crossing continua are subsets of the tiles,
+which may leave the disc; a route through PATH's parametrized boundary path, where "the `a`-tile on the left" propagates along the path by continuity, is
+the one I would try) and the bi–bi exclusion of a chord exactly `1`; F-LOC/CONN/INF/ONE 0.4; the adversaries 0.3; F-RING 1–2 (not measured).
+
+### 11.4 For the coordinator (done-means 4)
+
+- **The crossing lemma's route (b) through BG**: moot — the crossing lemma is held (stage 10). For the record: BG as built is a *parity* tool; it gives no
+  separation, so route (b) would still have needed an orientation or separation step of its own. Not measured further.
+- **F-RING**: not reached, not measured.
+
+### 11.5 Leaves left (named), in ruling 301's order
+
+`endpoint_of_far_end` (strong child, orientation step, bi–bi — § 11.3); PATH; F-LOC, F-CONN, F-INF, F-ONE; `not_isHoleOf_chain`, `isHoleOf_cluster`; F-RING;
+`retArcs_not_abut`, `retArcs_not_interleaved`. All in this branch's files as before; `MapTopology` has none left.
+
+## Stage 12 — SAVED: FS131-IP4's readback (the fourth implementer, from IP3's Stage 11)
+
+*de Bruijn, the implementer (FS131-IP4), 2026-10-05. Brief: `data/fs131/briefs/FS131-IP4-planar.md` (main tree). Same branch and worktree; I append
+stages from here. Read in full at launch: the brief, `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building and § Make the gate fail, this record
+(stages 1–11; 6–11 closely), KP's plan §§ 3–6, inventory items 277, 300, 309, 312, 313; for `endpoint_of_far_end`, FS110-CD §§ 2.0–2.4 and § 3.0, FS110-CE
+§ E3 (R1–R4).*
+
+### 12.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (each `>` block's text, joined, against the source's text with its lines' indentation joined; planted absent string
+`ABSENT-CONTROL-STRING-xyzzy` reported `MISS`, the control):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| inventory item 312 (truncated at "record") | `plans/FS131-close-inventory.md` (main tree) l. 2493 | verbatim |
+| inventory item 313 (truncated at "FS131-IP4 on") | same, l. 2510 | verbatim |
+| "Wall clock from stage 10's commit (02:06Z) … one" | this record § 11.3 | verbatim |
+| finding 2 ("2. At a genuine exit `q = r(φ)`, … CD's step 2") | this record § 7.4 | verbatim |
+| inventory item 300 (truncated at "Stages 6–8;") | `plans/FS131-close-inventory.md` l. 2350 | verbatim |
+| inventory item 309 (truncated at "if T-GRAPH") | same, l. 2461 | verbatim |
+| "**Work order** (each step unblocks the next; re-price after the first two):" | KP's plan § 5.1 | verbatim |
+| "**May:** add children (with spec examples; …), change imports (updating `ARCHITECTURE.md`'s" | KP's plan § 5.2 | verbatim |
+| inventory item 277 (truncated at "KP's") | `plans/FS131-close-inventory.md` l. 2040 | verbatim |
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors | verbatim |
+
+No mismatch.
+
+### 12.2 What I may and may not change (the brief's touches, ruling 313 (b), ruling 309, KP's plan § 5.2)
+
+**May:** prove the `sorry`s left at `7b5e8ed6` in the files my touches name — in `BaseWalk` `endpoint_of_far_end`, `retArcs_not_interleaved`,
+`retArcs_not_abut` (KP's plan § 5.1's three; not the other twelve, wave 5's lane); in `MapGraph` outside the `namespace HadwigerNelson.Thomassen` block:
+`not_isHoleOf_chain`, `isHoleOf_cluster`, `filledGraph_locallyFinite`, `_connected`, `_infinite`, `_rings`, `_oneInf` — adding children beside them with
+spec examples (PATH and the strong child of `exists_far_end` in `MapTopology` § D or `Plane/CurveGraph`, my choice); imports (with `ARCHITECTURE.md`'s Imports
+cell and `scripts/Axioms.lean`'s FS131-KP block above `=== PURCHASED ===`); `Proofs.lean`, this record, `tools/fs131_ip_*.py`, `data/fs131/ip/`,
+`data/fs131/reports/FS131-IP4.md`. A later leaf of item 313 (b)'s order may go first when cheaper, said here.
+
+**May not:** change any statement of KP's job (plan §§ 3.2, 4.1) or any definition they use (`IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`, `IsRing`,
+`TwiceApart`, `PlanarLike`, `outerDom`, `EnclosesTile`, and `IsRetArc`, `IsEndpoint`, `VIn`, `BaseCtx`), nor any statement outside this job; no new
+`axiom`, no `native_decide`; nothing in `Plane/PlaneTopology`, inside the `HadwigerNelson.Thomassen` block, or between `filledGraph_oneInf` and
+`filledGraph_planarLike` (IT1 adds `filledGraph_finSep` there on `fs131-w5t`; not mine to prove); not KP's plan file; no merge into `fs131-w5`, no taking
+`main`, no gate run, nothing on `main`; no file edited while a build of it runs. A leaf that cannot be proved as written goes to Keryx at once.
+
+### 12.3 The as-given build (`7b5e8ed6`, before any edit)
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1754 modules already up to date, nothing built, 9 modules with warnings, every warning
+`declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T025209Z-771307.log`; driver log `data/fs131/ip/build-ip4-asgiven.log`).
+
+## Stage 13 — SAVED: `fs131-w5t` merged (T-GRAPH, held), as the brief's amendment rules
+
+The brief's amendment (2026-10-05, inventory items 314–315; ruling 315 (a) quoted there and checked verbatim against `plans/FS131-close-inventory.md`, main
+tree, l. 2535, by script): at the next saved stage, merge `fs131-w5t` (at `5604b532`) into `fs131-w5p`, fix `MapGraph`'s module docstring line, build, record
+it as its own stage. No tracked file had been edited since stage 12, so this is that stage.
+
+- **Merge**: `git merge origin/fs131-w5t` (`5604b532`, FS131-IT1's report) at `bf27d9a4`. Two conflicts, both append-only: `ARCHITECTURE.md` (resolved to IP3's
+  `MapTopology` row — Imports with `Plane/CurveGraph` — then IT1's new `Thomassen` row and IT1's amended `MapGraph` row, Imports with `Thomassen`) and
+  `scripts/Axioms.lean` (both blocks kept: FS131-IX1's, then FS131-IT1's, both above `=== PURCHASED ===`). `MapGraph.lean` and `Proofs.lean` merged
+  without conflict (IT1's import line, the moved block's deletion, `filledGraph_finSep` and its constructor line; one `import Proofs.HadwigerNelson.Thomassen`).
+- **`MapGraph`'s module docstring**: "**Pure graph theory** (namespace `HadwigerNelson.Thomassen`, over Mathlib's `SimpleGraph`):" replaced by "**Pure
+  graph theory** — not in this file: module `Thomassen` (`Proofs/HadwigerNelson/Thomassen.lean`, namespace `HadwigerNelson.Thomassen`, over Mathlib's
+  `SimpleGraph`; moved there verbatim by job FS131-IT1), which this file imports and reads:" (the bullets that follow describe what it reads).
+- `tools/check_architecture.py`: PASS (`data/fs131/ip/check-architecture-ip4-merge.txt`).
+- **Build** (the merged tree, under the slot, 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 3 modules rebuilt (`Thomassen` 6.5 s, `MapGraph`
+  6.9 s, `Proofs`), 9 modules with warnings, every warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T031127Z-886054.log`;
+  `data/fs131/ip/build-ip4-merge-w5t.log`; grep for `warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe line).
+- F-SEP (`filledGraph_finSep`) joins my order beside F-LOC/CONN/INF/ONE.
+
+## Stage 14 — SAVED: one-sidedness (`orient`), and both `retArcs` leaves closed — PATH not needed
+
+### 14.1 The order, and why PATH was replaced
+
+Item 313 (b) put PATH (each component of the `T₁|T₂` boundary in the disc is a path) first, as the shared child of `endpoint_of_far_end`'s orientation
+step and of both `retArcs`. Working the orientation step (IP2's finding 2, IP3's route note) showed that what all three leaves read is not that the
+component is a path but that **its one side is one class**: a continuum `C` joining two circle points, with a tile `T` on one side along all of `C`, cannot
+have that tile on the counter-clockwise side at both ends. That is provable from the crossing lemma (held) with no parametrization and no Jordan-type
+theorem, so I proved it first (`orient`) and took the two `retArcs` — now the cheapest leaves — before `endpoint_of_far_end` (the brief allows a later
+leaf first when cheaper). PATH is not built and, as far as these three leaves go, not needed (F-RING not examined yet).
+
+### 14.2 Proved
+
+- **`orient_aux` / `orient`** (`MapTopology` § E, pure topology over `inter_nonempty_of_interleaved_of_isClosed_left`): `C ⊆ B̄(u, 1)` closed and
+  preconnected, `T` open, `C ∩ T = ∅`, `C ⊆ cl T`, `T ∩ B(z, r)` preconnected for small `r` at every `z ∈ C`; then two distinct points `r(θ)`, `r(φ)` of `C`
+  cannot both have the counter-clockwise germ of `ω(u)` in `cl T ∖ C` and the clockwise germ off `cl T`. The proof: extend `C` by each point's clockwise
+  germ and a radial segment out to `ω(u, R)`, `R = 1 + η` (so the extension `C'` misses `T`); the counter-clockwise germ and a radial segment join the
+  `T`-side near each point to `ω(u, R)` at angle `θ + t₀`, resp. `φ + t₀`, off `C'`; those two points are not joined off `C'` (the crossing lemma at radius
+  `R`: `θ − t₀ < θ + t₀ < φ − t₀ < φ + t₀`); but `{z ∈ C : the T-side near z is joined to the first}` and its complement in `C` are both open (one-sidedness),
+  so `C` would be split. Children: `inter_nonempty_of_interleaved_radius` (the crossing lemma moved by a homothety; model: two crossing diameters of the
+  disc of radius `2`), `polarPt_ne_of_sub`, `ringPt_eq_polarPt`; `ArcMap.tile_side` (with no repeated colour, a tile is one sector near a point of its
+  closure, the only tile of its colour there), `ArcMap.germ_side` (at a change point `a → c` the counter-clockwise germ is in `cl T₂ ∖ cl T₁`, the clockwise
+  one off `cl T₂`), `ArcMap.IsSectorChart.sector_subset_tile_of_mem`, `ArcMap.TileOf.eq_colour`, `ArcMap.GermPseudo.congr_e`, `ArcMap.GermPseudo.eq_of_same`.
+- **`BaseCtx.orient_pair`** (`BaseWalk`, beside the leaves): in the base's context, a closed preconnected `C ⊆ cl T₁ ∩ cl T₂ ∩ B̄(u, 1)` holds no two
+  distinct change points both from `a` (clockwise) to `c` (counter-clockwise).
+- **`retArcs_not_interleaved`** (statement unchanged): the closures of the two joining continua meet (the crossing lemma); if a tile of the second pair is
+  neither tile of the first, the meeting point carries three tiles, so it is cubic trichromatic with three pseudo-colours, disjoint from `u`'s and within `1`
+  of `u` — `cor3` puts a four-colour point in `B̄(u, 2)`, against H (inlined: `cor3_base` stands later in the file, so it is not cited); if the pairs share
+  their tiles, in the same order `r(s′)` and in the swapped order `r(t′)` is a second change point `a → c` on `cl K ∪ cl K′` — `orient_pair`.
+- **`retArcs_not_abut`** (statement unchanged): at the common end the germs make the second pair `(c, a)` (`GermPseudo.eq_of_same`), its tiles the first
+  pair's swapped (no repeated colour), and `r(s)`, `r(t′)` are two change points `a → c` on `cl K ∪ cl K′` — `orient_pair`. **On the standard three.**
+- `retArcs_nested` now rests only on these two (and `ringArc_cases`).
+
+### 14.3 The stage-14 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`MapTopology` 12 s, `BaseWalk` 2.6 s, `MapGraph`, `BaseDense`,
+`Proofs`), 9 modules with warnings, every warning `declaration uses 'sorry'`; `MapTopology` built with no warning; exit 0**
+(`build/gate/build/20261005T032249Z-941152.log`; `data/fs131/ip/build-ip4-s14a.log`). Axioms: `data/fs131/ip/AxiomsIP4.lean` →
+`data/fs131/ip/axioms-ip4-stage14.txt`, checked by `tools/fs131_ip_axioms.py` against `data/fs131/ip/axioms-ip4-names.txt`: **13 records on the standard
+three (the 12 children and `retArcs_not_abut`); the 4 controls on `sorryAx`: `retArcs_not_interleaved` and `retArcs_nested` (through `cor3`, wave 5's leaf,
+printed beside them as the source), `endpoint_of_far_end` (open), `cor3`**; planted fault (`retArcs_not_interleaved` listed as clean) → `NOT CLEAN …`, exit 1.
+`scripts/Axioms.lean`'s FS131-KP block gains the 12 children (under "-- FS131-IP4's added children").
+
+### 14.4 Re-priced after the first two leaves
+
+Wall clock from stage 12's commit (≈ 02:55Z) to this stage (03:41Z), with stage 13's merge build inside it: about 45 minutes, about 650 lines, one build.
+**Re-price of what is left** (implementer sessions): `endpoint_of_far_end` 0.5 (its local case list at circle points is written, `circ_local` iteration-green
+but for its last case split; then the handshake, the distance bound and the assembly); F-LOC/CONN/INF/ONE and F-SEP 0.5; the adversaries 0.2; F-RING
+unmeasured (whether `orient`'s class argument replaces boundary walks there is the first thing to look at).
+
+## Stage 15 — SAVED: `endpoint_of_far_end` proved — the far end re-selected as an odd vertex, its orientation by `orient_pair`
+
+### 15.1 Proved
+
+- **`endpoint_of_far_end`** (statement unchanged; it now closes `exists_endpoint`, FS110-CD Lemma E with CE's R1–R4). By contradiction, with no endpoint:
+  every point of `K = cl T₁ ∩ cl T₂ ∩ B̄(u, 1)` carries `a`, `c` and colours of `u` (`colours_sub`: a third colour off `u`'s is `cor3`'s configuration);
+  a third tile at a point of `K` misses `B̄(u, 1)` (else the point is an endpoint — inside, or V-in); the points of `ω(u)` in `cl T₁ ∩ cl T₂` are finitely
+  many (`pseudo_finite`, used by statement), so isolated. On the component `C` of `r(θ)` in `K` every point has a curve star: two rays inside the disc
+  (`inner_star`), and at a point of `ω(u)` a star of `d ≤ 2` rays with `d = 1` exactly when the two germs of `ω(u)` lie in different tiles' closures
+  (`circ_local`). At `r(θ)` the germs differ (`germ_side`, `germ_side_cw`), so `d = 1`; the handshake (`exists_finset_even_sum_deg`, IP3's BG) gives a
+  second odd vertex `q′`, on `ω(u)`, a change point between `a` and `c` (IP2's finding 1: the far end re-selected as an odd vertex, so spikes and V-out
+  touches never arise). Its germs' pseudo-colours (`germPseudo_of_side`): if `q′` runs `a → c` like `r(θ)`, `orient_pair` refutes it; so it runs `c → a`.
+  `|r(θ) − q′| ≤ 1` (one `a`-tile's closure), and `= 1` is FS112-N3-PAIRS (ii) (`pair_ii`) with `noBoth` (the bi–bi exclusion), so the angle is below `60°`
+  (`dist_ringPt_ringPt_cmp_one`), and `(r(θ), q′)` with the continuum `C` is a returning pair whose arc holds `r(θ)` — against `hout`. The given far end `q`
+  is used only for the shortcut "three colours inside the disc is an endpoint at once" (its other cases need no `q`).
+- **`circ_local`** (`MapTopology`, the D-cut at a general circle point; FS110-CD § 2.3's case list): at `r(φ)` in the closures of an `a`-tile and a `c`-tile,
+  no repeated colour, at most three colours, every other tile there off `B̄(u, 1)`, no other point of `ω(u) ∩ cl T₁ ∩ cl T₂` nearby: the common boundary in
+  the closed disc is a star of `d ≤ 2` rays, and `d = 1` iff the germs lie in different closures. Two germs (two colours) or three (three colours, via the
+  shared germs of `shared_germ3`); each branch strictly inside or outside (`branch_side`: `‖b(s) − u‖² − 1 = s(s + 2Re(conj(z − u) e(β + arcsin(κs/2))))`,
+  exactly `s²(1 − κ Im P)` when tangent); a germ of `ω(u)` lies in one closure (`subset_or_subset_of_closed`); "same germs" is refuted at `d = 1` by
+  `side_contra` (a tile's one sector near `z`, missing `ω(u)`, cannot reach both sides) and forced at `d ∈ {0, 2}` by a thin annular sector inside or outside
+  (`exists_annular_in`, `exists_annular_out`). Children: `hasCurveStar_zero`, `exists_Ico_ringPt`, `disjoint_closedBall_of_isOpen`,
+  `IsSectorChart.tile_inter_ball_eq`, `IsSectorChart.mem_closure_some_sector`, `coloursAt_subset_near`; in `BaseWalk` `BaseCtx.colours_sub`.
+- **Generalization** (for the record): `circ_local` and `orient` are pure statements about an `ArcMap` with any number of colours; nothing of the base
+  enters them.
+
+### 15.2 The stage-15 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`MapTopology` 13 s, `BaseWalk` 2.0 s, `MapGraph`, `BaseDense`,
+`Proofs`), 9 modules with warnings, every warning `declaration uses 'sorry'`; `MapTopology` built with no warning; `BaseWalk`'s 12 `sorry` declarations are
+all wave 5's lane's (`reduce`, `select`, `pseudo_*`, `exists_pseudoCircle`, `retArc_partner`, `retArcs_finite`, `vin_antipodal`, `eleventh_antipodal`,
+`l3_base`, `hex_base`); exit 0** (`build/gate/build/20261005T040047Z-1228628.log`; `data/fs131/ip/build-ip4-s15.log`; grep for `warning|error` minus the
+`sorry` lines leaves only Lake's `--no-build` probe line). `tools/check_architecture.py`: PASS (`data/fs131/ip/check-architecture-ip4-s15.txt`; the
+`MapTopology` and `BaseWalk` rows' descriptions gain IP4's sentences, no Imports cell changed).
+
+Axioms: `data/fs131/ip/AxiomsIP4b.lean` → `data/fs131/ip/axioms-ip4-stage15.txt`, checked by `tools/fs131_ip_axioms.py` against
+`data/fs131/ip/axioms-ip4b-names.txt`: **17 records on the standard three (the 16 new `MapTopology` children and `retArcs_not_abut`); 8 controls on
+`sorryAx`: `colours_sub` (through `cor3`), `endpoint_of_far_end` and `exists_endpoint` (through `pseudo_finite`, `pair_ii`, `noBoth`, `cor3`, all used by
+statement), `retArcs_nested`, and the four sources themselves printed beside them**; planted fault (`endpoint_of_far_end` listed as clean) → `NOT CLEAN …`,
+exit 1. `scripts/Axioms.lean`'s FS131-KP block gains the 17 children. So **every `sorryAx` left under the three leaves comes from wave 4's or wave 5's own
+leaves used by statement** (`pseudo_finite`, `pair_ii`, `noBoth`, `cor3`); the planar chain adds none.
+
+### 15.3 Leaves left (named), and for the coordinator (done-means 4)
+
+Left in this branch's files: **F-LOC, F-CONN, F-INF, F-ONE, F-SEP** (`MapGraph`), **`not_isHoleOf_chain`, `isHoleOf_cluster`**, **F-RING**. Worked on paper,
+for the successor (not formalized):
+- **F-INF and F-CONN** read one lemma: *every point of the plane lies in the closure of an outer tile*. `exists_outermost` (E4-OUTERMOST steps 1–2, held)
+  gives, at any point, a tile there enclosed by no tile; a tile inside a hole `Hc` of `T′` is enclosed by `T′` (its component in `(cl T′)ᶜ` lies in the
+  separated, bounded `Hc`), so that tile is outer. Then F-INF: outer fills are bounded (`fill T ⊆ (outerDom T)ᶜ ⊆ B̄(p, 1)`: a hole misses the unbounded
+  component, which is connected and so lies on one side of the separation), and they cover the plane. F-CONN: `mem_of_touch_closed` on `ℂ` with the outer
+  tiles' closures.
+- **F-LOC**: `fill x ⊆ B̄(p, 1)` (as above), so a neighbour's filled closure meets `B̄(p, 1)` and its tile meets `B̄(p, 3)`; `finite_tiles_closure_inter`.
+- **The two adversaries** both need `(cl T)ᶜ ⊆ (B̄(0,1))ᶜ ∪ B(c₁, ¼) ∪ B(c₂, ¼)` for `T = B(0, 1) ∖ (B̄(c₁, ¼) ∪ B̄(c₂, ¼))` (every other point is a limit of
+  `T`: outward along the radius from a small disc's centre, or `1 − δ + i√δ` at the touching point `1`); then a separated part of `(cl T)ᶜ` is a union of
+  those three connected open pieces, and the touching points decide.
+- **F-RING: not reached, not measured** (done-means 4 asks for a measurement from its first child; I have none to give). One observation for the
+  coordinator's call: the class argument of `orient` (a tile's side of a separating continuum is one class off it, by the crossing lemma) is the tool
+  F-RING's separation clause ("`M̂ − x − y` is connected unless `y` appears twice apart") most plausibly needs; boundary walks may not.
+
+### 15.4 Measured cost
+
+Wall clock from stage 14's commit (03:41Z) to this stage (04:12Z): about 30 minutes of writing plus one 9-minute build, about 1,050 lines (`MapTopology` + ≈ 820, `BaseWalk` + ≈ 230), one build.
+`circ_local` (≈ 520 lines) was most of it; `endpoint_of_far_end`'s assembly over it took one iteration.
+
+### 15.5 Hand-back
+
+By the session's token counter I am at about 660k, past the brief's 500k line (I noticed at this stage; the line was crossed inside `circ_local`'s
+iterations, with no stage then saveable). I hand back here, at a saved stage, with the leaves of § 15.3 named. Slip, mine: the line passed unwatched.
+
+## Stage 16 — SAVED: FS131-IP5's readback (the fifth implementer, from IP4's Stage 15)
+
+*de Bruijn, the implementer (FS131-IP5), 2026-10-05. Brief: `data/fs131/briefs/FS131-IP5-planar.md` (main tree). Same branch and worktree; I append
+stages from here. Read in full at launch: the brief, `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building and § Make the gate fail, this record
+(stages 12–15 closely), KP's plan §§ 2–6, inventory items 277, 309, 324, 325.*
+
+### 16.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (each `>` block's text, whitespace-normalized, searched in the main tree's `plans/FS131-close-inventory.md` and `CLAUDE.md` and this
+branch's record and KP's plan; a planted control string, fresh per run, reported `MISS` — a first control string, `ABSENT-CONTROL-STRING-xyzzy`, reported
+`OK` because earlier stages of this record quote it, so it was replaced: a control already present is no control):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors | verbatim |
+| inventory item 324 (truncated at "named it") | `plans/FS131-close-inventory.md` l. 2646 | verbatim |
+| inventory item 325 (truncated at "Queue for") | same, l. 2672 | verbatim |
+| "F-INF and F-CONN read one lemma: … (E4-OUTERMOST steps 1–2, held)" | this record § 15.3 | verbatim |
+| "F-LOC: `fill x ⊆ B̄(p, 1)` … `finite_tiles_closure_inter`." | this record § 15.3 | verbatim |
+| "The two adversaries both need … (every other point is a limit of" | this record § 15.3 | verbatim |
+| "F-RING: not reached, not measured (done-means 4 asks for a measurement from its first child; I have none to give). One observation for the" | this record § 15.3 | verbatim |
+| inventory item 309 (truncated at "if T-GRAPH") | `plans/FS131-close-inventory.md` l. 2461 | verbatim |
+| inventory item 277 (truncated at "KP's") | same, l. 2040 | verbatim |
+| "**Work order** (each step unblocks the next; re-price after the first two):" | KP's plan § 5.1 | verbatim |
+| "**May:** add children (with spec examples; …), change imports (updating `ARCHITECTURE.md`'s" | KP's plan § 5.2 | verbatim |
+
+No mismatch. The eight `sorry` declarations the brief names are exactly `MapGraph`'s at `aa753bb1` (`grep -n sorry`: lines 104, 113, 128, 133, 137, 148,
+155, 163 — `not_isHoleOf_chain`, `isHoleOf_cluster`, F-LOC, F-CONN, F-INF, F-RING, F-ONE, F-SEP).
+
+### 16.2 What I may and may not change (the brief's touches, KP's plan § 5.2, rulings 277 and 309)
+
+**May:** prove the eight `sorry`s of `MapGraph` named above, adding children beside them with spec examples (shared ones in `MapTopology` or
+`Plane/CurveGraph`); fix the three `BaseWalk` docstrings item 324 names (docstrings only — no statement, no proof); imports (with `ARCHITECTURE.md`'s
+Imports cell and `scripts/Axioms.lean`'s FS131-KP block above `=== PURCHASED ===`); `Proofs.lean`, this record, `tools/fs131_ip_*.py`, `data/fs131/ip/`,
+`data/fs131/reports/FS131-IP5.md`. A later leaf of item 325's order may go first when cheaper, said here.
+
+**May not:** change any statement of KP's job (plan §§ 3.2, 4.1) or any definition they use (`IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`,
+`mapGraph`, `outerDom`, `EnclosesTile`, and in `Thomassen` `IsRing`, `TwiceApart`, `offTwo`, `twoSepInterior`, `PlanarLike`), nor any statement outside
+this job; no new `axiom`, no `native_decide`; nothing in `Plane/PlaneTopology`, `Thomassen` or `Plane/ValidMap/BaseDense`; not KP's plan file; no merge
+into `fs131-w5`, no taking `main`, no gate run, nothing on `main`; no file edited while a build of it runs. A leaf that cannot be proved as written goes to
+Keryx at once.
+
+### 16.3 The as-given build (`aa753bb1`, before any edit)
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up to date, nothing built, 9 modules with warnings, every warning
+`declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T042332Z-1339005.log`; driver log `data/fs131/ip/build-ip5-asgiven.log`).
+
+### 16.4 The three `BaseWalk` docstrings (item 324's correction), edited after the as-given build
+
+`retArcs_not_interleaved` and `retArcs_not_abut` now describe the route taken (the crossing lemma, `cor3` for a third tile, `orient_pair` when the pairs
+share their tiles; PATH not needed), `endpoint_of_far_end` the proof done (stars by `inner_star` and `circ_local`, the handshake's second odd vertex,
+`orient_pair`, `pair_ii` with `noBoth` for the `60°` bound) in place of the "owed before proving" reading. Docstrings only: the diff touches no statement
+or proof line. They are built with stage 17's first build.
+
+## Stage 17 — SAVED: F-INF, F-CONN and F-LOC proved, over one lemma — every tile lies in an outer tile's fill
+
+### 17.1 Proved (statements unchanged)
+
+- **`exists_outer_fill`** (the shared lemma; IP4's route sharpened): every tile `S` of a valid plane map lies in the fill of an outer tile. IP4's sketch
+  ("`exists_outermost` gives, at any point, a tile there enclosed by no tile") does not reach the fill: a point can lie in a bounded complementary
+  component of a tile that is no hole (FS131-I5b's chain), so being in the outermost tile's hull does not put it in that tile's fill. The proof used
+  instead: among the tiles whose fill holds `S` (finitely many — their closures meet `B̄(s, 1)`), take one with a maximal hull; if it lay in a hole of
+  another tile, that hole would hold its whole fill (`fill_subset_hole`) and that tile would enclose it, strictly growing the hull
+  (`not_encloses_of_hull_eq`). Child **`hole_subset_hole`** (nested holes): if `T₁` lies in a hole `Hc₂` of `T₂`, every hole of `T₁` lies in `Hc₂` —
+  `T₂` is not in a hole of `T₁` (else each encloses the other and their hulls coincide), so the holes of `T₁` miss `cl T₂`, and each component of
+  such a hole is on the side of `Hc₂`'s separation that its frontier point in `cl T₁ ⊆ cl Hc₂` dictates.
+- **`filledGraph_infinite`** (F-INF): finitely many outer tiles would have their filled closures in one disc (`closure_fill_subset_closedBall`: a filled
+  closure lies within `1` of each point of the tile's closure, through the hull), but a point outside it is in a tile's closure, inside an outer fill.
+- **`filledGraph_connected`** (F-CONN): `mem_of_touch_closed` on `U = ℂ` with `P` the tiles inside the fill of an outer tile joined to a fixed one;
+  a tile touching a member lies in some outer fill (`exists_outer_fill`), and two outer tiles whose filled closures meet are joined
+  (`filledGraph_reachable_of_inter`).
+- **`filledGraph_locallyFinite`** (F-LOC): a neighbour's filled closure meets `B̄(p, 1)` (`p` in the tile), so its tile's closure meets `B̄(p, 2)`;
+  `finite_tiles_closure_inter`.
+- Children (`MapGraph`, before the leaves): `IsHoleOf.isOpen`, `IsHoleOf.isOpen_diff`, `IsHoleOf.connectedComponentIn_subset`,
+  `IsHoleOf.subset_compl_outerDom`, `fill_subset_compl_outerDom`, `subset_fill`, `closure_fill_subset_closedBall`, `encloses_of_subset_hole`,
+  `hole_subset_hole`, `fill_subset_hole`, `exists_outer_fill`, `filledGraph_reachable_of_inter`, `filledGraph_reachable_of_subset`.
+
+### 17.2 The stage-17 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 4 modules rebuilt (`BaseWalk` 2.0 s — the three docstrings of § 16.4 —,
+`MapGraph` 7.1 s, `BaseDense`, `Proofs`), 9 modules with warnings, every warning `declaration uses 'sorry'`; `MapGraph`'s five `sorry` declarations
+are `not_isHoleOf_chain`, `isHoleOf_cluster`, `filledGraph_rings`, `filledGraph_oneInf`, `filledGraph_finSep`; exit 0**
+(`build/gate/build/20261005T043543Z-1369788.log`; `data/fs131/ip/build-ip5-s17.log`; grep for `warning|error` minus the `sorry` lines leaves only Lake's
+`--no-build` probe lines).
+
+Axioms: `data/fs131/ip/AxiomsIP5a.lean` (importing `MapGraph` alone) → `data/fs131/ip/axioms-ip5-stage17.txt`, checked by `tools/fs131_ip_axioms.py`
+against `data/fs131/ip/axioms-ip5a-names.txt`: **16 records on the standard three (the 13 children and F-LOC, F-CONN, F-INF); 5 controls on `sorryAx`
+(`filledGraph_oneInf`, `_rings`, `_finSep`, `filledGraph_planarLike`, `cvb_thom_reduced`)**; planted fault (`filledGraph_oneInf` listed as clean) →
+`NOT CLEAN …`, exit 1. `scripts/Axioms.lean`'s FS131-KP block gains the 13 children (under "-- FS131-IP5's added children").
+
+### 17.3 Re-priced after the first two leaves
+
+Wall clock from stage 16's commit (04:28Z) to this stage (04:45Z): about 17 minutes, about 200 lines, one build (8.5 minutes of it the build's walk
+over 447 batches). F-LOC came free with the shared lemma. **Re-price of what is left** (implementer sessions): F-ONE 0.1 (drafted: the far side is one
+class); F-SEP 0.3 — it needs, beside F-ONE's far-side lemma, that a pair whose interior holds a tile has meeting filled closures, which is F-RING's
+non-neighbour clause: `M̂ − x − y` is connected when `cl x̂ ∩ cl ŷ = ∅`. That clause is Janiszewski's theorem for holes (two disjoint continua
+without holes have none together), drafted over unicoherence (§ 18); the adversaries 0.2; F-RING's ring list (the boundary walk) unmeasured.
+
+## Stage 18 — SAVED: F-ONE and F-SEP proved; Janiszewski's theorem for holes, and F-RING's non-neighbour clause
+
+### 18.1 Proved (statements unchanged)
+
+- **`exists_far_component`** (the far side is one class): for outer `x`, `y` (equal allowed) with `cl x̂ ∪ cl ŷ ⊆ B̄(c, R)`, `M̂ − x − y` has an infinite
+  component holding every outer tile other than `x`, `y` that meets `B̄(c, R)ᶜ`. A tile meeting `K = cl x̂ ∪ cl ŷ` lies in `x̂` or `ŷ`
+  (`eq_or_subset_hole_of_inter`), so every tile meeting `Kᶜ` lies in it and in one of its components; the tiles of the unbounded component are
+  chained (`mem_of_touch_closed`), each inside an outer fill other than `x̂`, `ŷ` (`exists_outer_fill_offTwo`).
+- **`filledGraph_oneInf`** (F-ONE): an infinite component has an outer tile meeting `B̄(c, R)ᶜ` (finitely many lie in the disc), so it is the far one.
+  The hypothesis `x ≠ y` is not read (referenced by a `have _ := hxy` so the linter stays silent; the statement is untouched).
+- **`not_isHoleOf_union`** — **Janiszewski's theorem for holes**, pure plane topology: two disjoint nonempty bounded closed continua, neither with a
+  hole (in `IsHoleOf`'s sense, read for a closed set `K` as `IsHoleOf K`), have no hole together. Were `H` a hole of `A ∪ B` and `R` the rest of the
+  complement, `A` and `B` each meet `cl H` and `cl R` (else `H`, or `H ∪ A`, `H ∪ B`, is a hole of one of them); then `cl H ∪ A ∪ B` and
+  `cl R ∪ A ∪ B` are continua (a split cuts `H` or `R` into a hole of `A`, a hole of `B`, or a nonempty proper clopen set of `ℂ`:
+  `isHoleOf_inter_of_split`, `not_split_aux`, `isPreconnected_closure_union_aux`), cover `ℂ` and meet in `A ∪ B` — against unicoherence
+  (`isPreconnected_inter_of_union_eq_univ`, held). No component counting and no local finiteness enter.
+- **`not_isHoleOf_closure_fill`**: a filled tile's closure has no hole — the union of a tile's holes is separated from the rest of the complement
+  (`disjoint_closure_sUnion_holes`, by local finiteness: a common closure point is in the closure of a tile meeting one hole, hence inside it).
+  **`isPreconnected_closure_fill`**: `cl x̂` is a continuum.
+- **`mem_of_touch_closed_of_not_isHoleOf`** (CHAIN): `cvb_pinch_connected`'s argument for any closed bounded `K` without a hole, every tile meeting
+  `Kᶜ` lying in it — the tiles in `Kᶜ` are chained by touching closures; whichever of `Y` (the components holding a tile of `P`) and the rest misses
+  the unbounded part is a hole of `K`.
+- **`filledGraph_offTwo_connected`** (J): for outer `x`, `y` with `cl x̂ ∩ cl ŷ = ∅`, `M̂ − x − y` is connected — `cl x̂ ∪ cl ŷ` has no hole, so CHAIN.
+  This is F-RING's clause for a vertex absent from the ring, and the step of F-SEP.
+- **`filledGraph_finSep`** (F-SEP): if `v ∈ int(x, y)` then `cl x̂` and `cl ŷ` meet (else `M̂ − x − y` is connected, by J, and infinite), so both lie
+  within `3` of each point of `cl x`, and `v`, outside the far component, lies in every disc holding them: `cl x` and `cl y` meet `B̄(p, 3)`
+  (`p ∈ v`); finitely many tiles do. IT1's sketch (adjacency through the rings) is replaced by J, which needs no ring.
+- Children: `eq_or_subset_hole_of_inter`, `subset_fill_of_inter`, `IsOuterTile.disjoint_closure_fill`, `reachable_offTwo_of_inter`,
+  `subset_compl_of_inter_compl`, `subset_compl_of_mem_offTwo`, `exists_outer_fill_offTwo`, `offTwo_infinite`, `exists_far_component`,
+  `isHoleOf_inter_of_split`, `not_split_aux`, `isPreconnected_closure_union_aux`, `not_isHoleOf_union`, `disjoint_closure_sUnion_holes`,
+  `not_isHoleOf_closure_fill`, `isPreconnected_closure_fill`, `mem_of_touch_closed_of_not_isHoleOf`, `isBounded_closure_fill`,
+  `filledGraph_offTwo_connected` (all `MapGraph`, between F-INF and F-RING).
+
+### 18.2 The stage-18 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 7.5 s, `Proofs`), 9 modules with warnings, every
+warning `declaration uses 'sorry'`; `MapGraph`'s three `sorry` declarations are `not_isHoleOf_chain`, `isHoleOf_cluster`, `filledGraph_rings`;
+exit 0** (`build/gate/build/20261005T044937Z-1440384.log`; `data/fs131/ip/build-ip5-s18.log`; grep for `warning|error` minus the `sorry` lines leaves
+only Lake's `--no-build` probe lines).
+
+Axioms: `data/fs131/ip/AxiomsIP5b.lean` → `data/fs131/ip/axioms-ip5-stage18.txt`, checked by `tools/fs131_ip_axioms.py` against
+`data/fs131/ip/axioms-ip5b-names.txt`: **21 records on the standard three (the 19 children, F-ONE, F-SEP); 3 controls on `sorryAx`
+(`filledGraph_rings`, `filledGraph_planarLike`, `cvb_thom_reduced`)**; planted fault (`filledGraph_rings` listed as clean) → `NOT CLEAN …`, exit 1.
+`scripts/Axioms.lean`'s FS131-KP block gains the 19 children.
+
+### 18.3 Cost
+
+From stage 17's commit (04:45Z) to this stage (05:00Z): about 15 minutes and one build; about 560 lines (Janiszewski for holes ≈ 250, CHAIN ≈ 120).
+
+## Stage 19 — SAVED: both adversaries proved; F-RING reduced to one child, the boundary walk (`filledGraph_ringList`)
+
+### 19.1 Proved (statements unchanged)
+
+- **`not_isHoleOf_chain`** and **`isHoleOf_cluster`** (the adversaries), over IP4's route: the complement of the closure of
+  `T = B(0, 1) ∖ (B̄(c₁, ¼) ∪ B̄(c₂, ¼))` is the outside of the closed unit disc and the two open small discs
+  (`compl_closure_disc_minus_subset`, `closure_disc_minus_subset`): off the tangencies a point of the closed region is reached by a radial push
+  (`mem_closure_disc_minus`: inward from the unit circle, outward from a small circle, the other two constraints strict by continuity); at a
+  tangency of two small circles by the vertical path `p + t i` (`mem_closure_disc_minus_tangent`), and at the chain's point `1` by
+  `1 − t + √t i`. The chain: each piece lies in `Hc` or in the rest, touching pieces on one side (`1/2`, `1`), the outside unbounded — so no piece
+  is in `Hc`, which is then empty. The cluster: the two discs together are separated from the outside (their closures lie in `B̄(0, ½)`); one alone
+  touches the other at `0`.
+- **`filledGraph_rings`** (F-RING), **proved over one new child**: from any ring `r₀` at `x` (`filledGraph_ringList`), the list with each entry
+  repeated four times is a ring (`isRing_flatMap_replicate_four`) in which every neighbour appears twice apart (`twiceApart_flatMap_replicate_four`);
+  so the clause "`M̂ − x − y` connected unless `y` appears twice apart" is owed only for non-neighbours `y`, whose filled closures miss `x̂`'s — and
+  that is `filledGraph_offTwo_connected` (stage 18). Children: `getElem?_flatMap_replicate_four`, `length_flatMap_replicate_four`,
+  `isRing_flatMap_replicate_four`, `twiceApart_flatMap_replicate_four`; adversary children `mem_closure_of_path`, `eventually_path_mem`,
+  `mem_disc_minus_iff`, `mem_closure_disc_minus`, `mem_closure_disc_minus_tangent`, `sq_norm_sub_ofReal`, `norm_le_iff_sq`,
+  `compl_closure_disc_minus_subset`, `closure_disc_minus_subset`, `sq_facts`. The `IsHoleOf` openness lemmas moved above the spec section (the
+  adversaries read them); unchanged.
+- **Stated, `sorry`: `filledGraph_ringList`** — `∃ r, Thomassen.IsRing F.filledGraph x r`, which is by statement exactly F-RING's first conjunct
+  (so no truth is lost or added: it holds iff F-RING's first half does). It is the only `sorry` left on `fs131-w5p` outside `BaseWalk`/`BaseDense`'s
+  wave-5 leaves.
+
+### 19.2 F-RING measured (done-means 4), and for the coordinator
+
+- **Measured from its first child**: the reduction (quadrupling plus the non-neighbour clause) took about 10 minutes and about 90 lines, because the
+  hard topology of the non-neighbour clause was already stage 18's (Janiszewski for holes, CHAIN, J). **What is left is exactly the boundary walk**:
+  a cyclic listing of `x̂`'s neighbours with consecutive entries touching, and any two appearances of a neighbour separating, in `M̂ − x − y`, the
+  entries between from those outside. That is Thomassen's facial walk in a setting with no plane graph — the outer frontier of `x̂` together with
+  the frontiers of its non-hole bounded complementary components (the chain's pockets), joined at pinch points. **H**; it deserves its own job
+  (planner and implementer), as KP foresaw. Starting points held here: the finite boundary graph's local stars (`Plane/CurveGraph`), one-sidedness
+  along a continuum (`orient`), the crossing lemma, CHAIN and J (a neighbour listed once needs no separation; J settles every non-neighbour).
+- **What a second implementer could take beside this branch without sharing a file**: nothing else is left on `fs131-w5p` — `filledGraph_ringList`
+  is the last leaf, in `MapGraph`. To let a RING-LIST job work in a file of its own, `filledGraph_ringList` would move to a new module downstream
+  of `MapGraph`'s definitions, with `filledGraph_rings`, `filledGraph_planarLike`, `cvb_thom_reduced`, `cvb_thom` after it — a change of where
+  statements live (none of their text), so Keryx's call; or the job works in `MapGraph` alone, which nobody else needs now.
+- **The ring field is weaker than its docstring reads** (a finding about the statement, harmless): any ring repeated in place makes every neighbour
+  twice apart at no cost, so `PlanarLike.ring`'s "connected unless twice apart" constrains non-neighbours only. T-GRAPH is proved from `PlanarLike`
+  as stated, so Thomassen's reduction needs only a ring (separation at repeated appearances) and the non-separation of non-adjacent pairs.
+
+### 19.3 The stage-19 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 13 s, `Proofs`), 9 modules with warnings, every
+warning `declaration uses 'sorry'`; `MapGraph`'s one `sorry` declaration is `filledGraph_ringList`; exit 0** (`build/gate/build/20261005T050146Z-1518710.log`;
+`data/fs131/ip/build-ip5-s19.log`; grep for `warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe lines).
+
+Axioms: `data/fs131/ip/AxiomsIP5c.lean` → `data/fs131/ip/axioms-ip5-stage19.txt`, checked by `tools/fs131_ip_axioms.py` against
+`data/fs131/ip/axioms-ip5c-names.txt`: **24 records on the standard three (both adversaries, the 14 new children, `IsHoleOf.isOpen` after its move, and
+F-LOC, F-CONN, F-INF, F-ONE, F-SEP, `not_isHoleOf_union`, `filledGraph_offTwo_connected` re-read); 4 controls on `sorryAx` (`filledGraph_ringList`,
+`filledGraph_rings`, `filledGraph_planarLike`, `cvb_thom_reduced`)**; planted fault (`filledGraph_rings` listed as clean) → `NOT CLEAN …`, exit 1.
+`scripts/Axioms.lean`'s FS131-KP block gains the 14 children and `filledGraph_ringList`. `ARCHITECTURE.md`: no import changed, row not touched.
+
+### 19.4 Hand-back
+
+From stage 18's commit (05:00Z) to this stage (05:12Z): about 12 minutes and one build. By the session's counter I am at about 465k, past the brief's
+400k guidance and under its 500k line, so I hand back here, at a saved stage, with one leaf left, named: `filledGraph_ringList` (§ 19.2).
+
+## Stage 20 — SAVED (FS131-RW1): the readback
+
+*de Bruijn, the implementer (FS131-RW1), 2026-10-05, from IP5's Stage 19 and FS131-RL1's plan (`plans/FS131-ringlist-kernel-plan.md`, stages 1–4).
+Brief: `data/fs131/briefs/FS131-RW1-walk.md` (main tree). Branch `fs131-w5p`, worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5p`.*
+
+### 20.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by `grep -cF` of each quotation's full text (the control: a planted absent string, `ABSENT-CONTROL-STRING-xyzzy`, counted 0, exit 1):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors | verbatim |
+| `theorem exists_boundaryWalk (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :` | `MapGraph.lean` l. 1392 at `f86e174e` | verbatim |
+| `theorem filledGraph_adj_iff (hP : F.IsPlaneMap) {x y : {T : Set ℂ // F.IsOuterTile T}} :` | `MapGraph.lean` l. 1349 | verbatim |
+| "**ADJ `filledGraph_adj_iff`** (E–M, 0.2). … A hole `H` of `y` is open and misses" | RL1's plan § 4.2 | verbatim |
+| "**WALK** (H, 4–6). Children, each to be stated by the implementer before proving …" | RL1's plan § 4.2 | verbatim |
+| "- **C5 the boundary structure**: ports at radius `ρ` (`port_pair` with `hreg`, `hP`, `hray`, `hsep` …" | RL1's plan § 4.2 | verbatim |
+| "**May**: add children (statements of § 4.2, with spec examples), add fields to `IsBoundaryWalk` …" | RL1's plan § 4.4 | verbatim |
+| items 338, 339, 277 (opening lines) | `plans/FS131-close-inventory.md` (main tree) l. 2846, 2867, 2040 | verbatim |
+
+No mismatch. Read in full: RL1's plan (stages 1–4, the traps of § 2.1 above all); IP5's Stages 17–19 here; inventory items 277, 338, 339;
+`plans/STANDING-RULES.md`; `LEAN.md`; `RUNNING.md` § Building and § Make the gate fail, and watch it fail.
+
+### 20.2 What I may and may not change (the brief's touches; ruling 339 (a), (c); RL1's plan § 4.4)
+
+**May**: prove `filledGraph_adj_iff` (ADJ) and `exists_boundaryWalk` (WALK); add children C1–C10 (statements within plan § 4.2's words, each with a
+spec example) beside them in `MapGraph` § "The boundary walk", pure-topology children in `MapTopology` § F or beside the handshake in `CurveGraph`;
+change imports with `ARCHITECTURE.md`; extend the FS131-KP block of `scripts/Axioms.lean` above the `=== PURCHASED ===` banner; `tools/fs131_rw_*.py`,
+`data/fs131/rw/`, this record, `data/fs131/reports/FS131-RW1.md`. Change `IsBoundaryWalk`'s fields or `IsEdgeOf`'s clauses **only** where the
+construction cannot meet them as stated and SEP does not read them, each reported here (ruling 339 (c); once an SEP lane runs in parallel, messaged
+to Keryx first).
+**May not**: change `IsBoundaryWalk.sep` or its children (SEP's lane), `filledGraph_ringList`, `IsRing`, `PlanarLike`, `Plane/PlaneTopology`,
+`BaseWalk`, `BaseDense`, RL1's plan file, any statement outside this lane; add an `axiom` or `native_decide`; merge, take `main`, run the gate, touch
+`main`.
+
+### 20.3 The as-given build (`f86e174e`, before any edit)
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up to date, nothing built, 9 modules with warnings (every one `declaration
+uses 'sorry'`; `MapGraph`'s three at l. 1349, 1372, 1392 — ADJ, SEP, WALK), exit 0** (`build/gate/build/20261005T055726Z-1813684.log`; driver log
+`data/fs131/rw/build-asgiven.log`).
+
+## Stage 21 — SAVED (FS131-RW1): ADJ proved; WALK's C1–C4 proved; re-priced; the route for C5–C10 shortened
+
+### 21.1 Proved (all in `MapGraph`, statements of the skeleton unchanged)
+
+- **ADJ `filledGraph_adj_iff`** (as stated; `hP` only — no `hF`, so RL1's route through `fill_subset_hole` was not usable): each tile lies off the
+  other's filled closure (`IsOuterTile.disjoint_closure_fill`), so its closure misses the closure of the other's holes
+  (`disjoint_closure_sUnion_holes`); a common point of `cl x̂ ∩ cl ŷ` off `cl x ∩ cl y` would lie in a hole of both, and then the component `D` of
+  `(cl x)ᶜ` at it lies in `x`'s holes, hence off `cl y`, hence in `y`'s holes — its frontier lies in `cl x` and in `cl (holes of y)`, which miss, so
+  `D` is clopen and nonempty, the plane, against `x ∩ D = ∅`. One attempt, about 10 minutes.
+- **C1 `frontier_closure_fill_subset`**: `frontier (cl x̂) ⊆ cl x`.
+- **C2 `isPreconnected_frontier_closure_fill`**: `C = frontier (cl x̂)` is preconnected (unicoherence on `cl x̂` and `cl (cl x̂)ᶜ`; the latter is
+  connected, a closed split giving a hole of `cl x̂`).
+- **C3** (the local structure at `z ∈ C`, for any chart at `z` and a radius where its germs are strictly ordered):
+  `frontier_fill_chart_pos` (a chart at a point of `C` has a germ), `frontier_fill_branch_iff` (a branch lies in `C` iff its two sectors are on
+  opposite sides of `cl x̂`), `frontier_fill_inter_ball` (`C ∩ B(z, r)` is `z` and those branches), `frontier_fill_exists_ray` (at least one),
+  `frontier_fill_hasCurveStar` (**`C` has a curve star of an even number of rays at each of its points**). Children:
+  `IsTile.subset_fill_or_subset_compl`, `IsTile.isOpen_fill`, `IsSectorChart.exists_tile_superset`, `IsSectorChart.near_branch`,
+  `branchPt_ne_of_ne`, `hasCurveStar_of_branches_finset`, `even_card_filter_ne_next` (side changes around a cycle are even; spec example at
+  `Fin 2`).
+- **C4** `finite_frontier_fill_nonRegular` (the points of `C` where `Γ` is not a curve are finitely many — the vertices),
+  `frontier_fill_isRegularAt` (off them `C` is regular: `IsSectorChart.eq_two_of_isRegularAt` — two germs where `Γ` is a curve — with
+  `frontier_fill_exists_ray` and the parity puts both branches in `C`, so `C = Γ` there); child `IsSectorChart.gamma_inter_ball`.
+
+### 21.2 A shorter route for C5–C10 (mine, said here as the brief allows): SEP reads no facial order
+
+RL1's plan builds the *facial* walk (angles as runs of outer sectors, `πA` the other end of an outer angle, one orbit of each `πE`-pair,
+in-angle insertion, vertex appearances dropped). Reading SEP's argument (`IsBoundaryWalk.sep`'s docstring; RL1 § 2.2) field by field: it uses
+only `hinge`, `edgeOf`, `rep`, `apart` and the crossing lemma at the pure point of one of the repeated tile's edges — **never the order in
+which the walk meets the edges**. Every list meeting `IsBoundaryWalk`'s fields is a ring. So WALK needs only *some* walk with the fields, and
+the cheapest is an **Euler circuit of the boundary graph with each vertex-only neighbour inserted once at one of its vertices**:
+
+- *Edges*: the port pairs (`port_pair`) at a radius `ρ` about the vertex set `V = (non-regular points of Γ on C) ∪ {z₀}`; the edge of a port
+  `d` is `E_d = R_d ∪ Q_d ∪ R_{σ d}` (the closed radial piece of `d`'s ray, the component of `C'` through `d`, the other end's radial piece),
+  its pure point a middle point of `Q_d`, its tile the outer tile there. Distinct edges meet only at vertices, so `apart` holds for any
+  radius below the distance from the pure point to the other edges.
+- *Transitions*: `πA` **any** fixed-point-free involution on the ports preserving the vertex (it exists because the number of ports at each
+  vertex is even — `frontier_fill_hasCurveStar`); no angles, no orientation. `φ = πA ∘ σ`; an orbit of `φ` is a closed trail (each port's
+  arrival vertex is the next port's departure vertex).
+- *No orbit is its own reverse*, combinatorially: if `σ d = φ^n d`, then `σ φ^k = φ^{-k} σ` gives a fixed point of `σ` (`n` even, at
+  `φ^{n/2} d`) or of `πA = φ σ` (`n` odd, at `φ^{(n+1)/2} d`). (RL1's "never self-paired" holds; this is its proof, with no geometry.)
+- *Merging*: a closed trail based at `v` (`IsChain` with head/last at `v`) absorbs an orbit at any vertex it visits by list insertion
+  (`A ++ O ++ e :: B`); the invariant (nodup, `φ`-closed, no port with its partner) is kept; connectivity of `C` (C2) supplies an uncovered
+  edge at a visited vertex while one is left (C7). Then each neighbour with no edge (it touches `C` only at vertices) is inserted once, as a
+  one-entry trail based at a vertex in its closure. `rep` holds because only edge tiles repeat, `apart` because each edge appears once.
+
+Consequences: C5's angles and interior tile lists, C6's choice of one orbit per pair by geometry, C9 (dropping vertex appearances) all go;
+C8 becomes one insertion lemma used twice.
+
+### 21.3 Re-priced after ADJ and C1–C4 (implementer sessions, Opus)
+
+Measured: ADJ about 10 minutes; C1–C4 about 25 minutes, about 470 lines, one build. What is left, priced from that: **C5** (the port structure
+from `port_pair`, refactored to expose the arc `Q = γ '' [a, b]`; `E_d`; the outer tile constant along `E_d`; every point of `C` on an edge;
+`IsEdgeOf` with `E₁`, `E₂` cut at the parameters where `γ` leaves the pure disc, the interleaving from the chart at the pure point) **0.6–0.8**;
+**C6/C8** (the pure lemma: `πA` from even fibres, orbit lists, the dihedral lemma, the insertion lemma, the merge induction) **0.3–0.4**; **C7**
+(connectivity, from C2 and the coverage of `C` by edges) **0.1**; **C10** (the fields from the entries list; vertex-only tiles) **0.2–0.3**.
+**Total ≈ 1.2–1.6 sessions** against RL1's 4–6 for WALK.
+
+### 21.4 The stage-21 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 18 s, `Proofs` 1.7 s), 9 modules with
+warnings, every warning `declaration uses 'sorry'`; `MapGraph`'s two `sorry` declarations are `IsBoundaryWalk.sep` (l. 1430, SEP's lane) and
+`exists_boundaryWalk` (l. 1954); exit 0** (`build/gate/build/20261005T062106Z-1897325.log`; driver log `data/fs131/rw/build-s21.log`; grep for
+`warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe line).
+
+Axioms against that build's oleans: `data/fs131/rw/AxiomsRW1a.lean` (importing `MapGraph`, `pp.fullNames`) → `data/fs131/rw/axioms-rw1a.txt`,
+checked by `tools/fs131_ip_axioms.py` (IP2's checker, run, not edited) against `data/fs131/rw/axioms-rw1a-clean.txt` /
+`axioms-rw1a-sorry.txt`: **`OK: 19 clean on the standard three, 3 controls on sorryAx`** (`IsBoundaryWalk.sep`, `exists_boundaryWalk`,
+`filledGraph_ringList`); planted fault (`exists_boundaryWalk` listed as clean) → `NOT CLEAN [… 'sorryAx']`, exit 1. `scripts/Axioms.lean`'s
+FS131-KP block gains the 18 new children under "-- FS131-RW1's children" (`filledGraph_adj_iff` was already listed). No import changed, no
+module added (`ARCHITECTURE.md` untouched). No `axiom`, no `native_decide`.
+
+### 21.5 Next, and a working file
+
+C6/C8's pure combinatorics is begun in `data/fs131/rw/EulerScratch.lean` (imports Mathlib only; elaborates clean): `BasedTrail` (a closed
+trail based at a point), `.append`, `.exists_start`, `.insert` (the insertion lemma, with membership and `Nodup`), and
+`exists_vertex_involution` (a vertex-preserving fixed-point-free pairing from even fibres). Left there: the orbit lists of `φ = πA ∘ σ`, the
+dihedral lemma, the merge induction. It moves into `MapGraph` when finished.
+
+## Stage 22 — SAVED (FS131-RW1): WALK's C6/C8 proved — the Euler circuit of the port structure, pure
+
+### 22.1 Proved (`MapGraph` § "WALK's C6/C8, pure", namespace `ArcMap`, over any finite type of ports)
+
+- **`exists_euler`** — with `σ` (other end of each edge) and `πA` (a pairing of the ports at each vertex) fixed-point-free involutions, and
+  the edges connected through shared vertices (`hconn`: every `σ`-closed nonempty proper set of ports shares a vertex with its complement),
+  some closed trail based at `vtx a₀` lists every port or its partner, never both, no port twice. Model of all its hypotheses at once: one
+  loop edge on `Fin 2` (the example after it).
+- **`sigma_ne_pow`** (the dihedral lemma): `σ d ≠ (πA σ)ⁿ d` — RL1's "never self-paired", with no geometry; `pow_sigma_pow` (`φᵏ (σ (φᵏ b)) = σ b`).
+- **`exists_vertex_involution`** — a vertex-preserving fixed-point-free involution exists when every vertex has evenly many ports (C3's parity).
+- `BasedTrail` (def: a closed trail based at a point; `IsChain` with head and last at the point), `BasedTrail.append`, `.exists_start`,
+  **`.insert`** (a trail based at an entry's start goes in before that entry — the one insertion lemma, used for orbits and for vertex-only
+  neighbours); `orbList` (def; spec example: it holds its start), `basedTrail_orbList`, `nodup_orbList`, `orbList_closed`, `mem_orbList`,
+  `minimalPeriod_perm_pos`, `pow_minimalPeriod_apply`, `pow_mem_of_closed`.
+
+Measured: about 20 minutes, about 300 lines, every lemma at most two attempts. (Developed in `data/fs131/rw/EulerScratch.lean`, then moved
+here verbatim; the scratch file is removed.)
+
+### 22.2 What is left of WALK, named, with the route (for the next session)
+
+- **C5a `port_arc`** (`CurveGraph`, beside the handshake; `port_pair` re-proved through it, its statement unchanged): `port_pair`'s
+  hypotheses give `γ, a < b`, `γ` continuous and injective on `[a, b]`, the component of `C'` through `p` equal to `γ '' [a, b]`, `γ a = p`,
+  `γ b` the partner. (`port_pair`'s proof already holds `γ` and `J = [a, b]`; in the case `γ b = p`, reverse `γ`.)
+- **C5b the port structure of `C = ∂ cl x̂`**: `V` = (`finite_frontier_fill_nonRegular`).toFinset ∪ {a point of `C`}; stars from
+  `frontier_fill_hasCurveStar` (`choose!`); `ρ`, ports and `σ` exactly as in `even_sum_deg`'s proof with `port_arc`; regularity off `V` from
+  `frontier_fill_isRegularAt`; every vertex has a port (`frontier_fill_exists_ray`), and evenly many.
+- **C5c the edges**: `R_d = closure (ray_d '' (0, ρ))`, with `w ∈ R_d, w ≠ v ⇒ w = ray_d ‖w − v‖` (sequential continuity at `‖w − v‖ ∈ (0, ρ]`);
+  `E_d = R_d ∪ Q_d ∪ R_{σ d}`; two distinct edges meet only in `V`; every point of `C` lies on an edge (a component of `C'` with no port is
+  open in `C` — `C` is locally connected, `frontier_fill_inter_ball` — and closed, against C2); the outer tile is constant along `E_d` minus its
+  ends (clopen there: at a non-vertex point a chart has two germs, `x` on one side).
+- **C5d `IsEdgeOf`** for `E_d` from `vtx d` to `vtx (σ d)`: pure point `γ((a+b)/2)`; radius below the chart radius there, below the distance to
+  the other edges and to `R_d ∪ R_{σ d} ∪ γ''([a, c−δ] ∪ [c+δ, b])`; `I = {t ∈ [a, b] | γ t ∈ ball}` is an interval (else `γ''[a, t]`, `γ''[t, b]`
+  split the preconnected `C ∩ ball`), `I = (c₁, c₂)`, `E₁ = R_d ∪ γ''[a, c₁]`, `E₂ = γ''[c₂, b] ∪ R_{σ d}`; the circle points and the
+  interleaving from the two-germ chart at the pure point (two cases: which branch `γ c₁` is); the sphere slices of `x` and of the tile are the
+  sectors' angle intervals at that radius.
+- **C7** `hconn` for the ports: a `σ`-closed set and its complement sharing no vertex give disjoint closed unions of edges covering `C`, against
+  C2.
+- **C10** the assembly: entries = the edges of `exists_euler`'s list, then each neighbour with no edge (it touches `C` only at vertices)
+  inserted once by `BasedTrail.insert`; the fields from `isChain_iff_getElem` and the closing condition (`rep`: only edge tiles repeat;
+  `apart`: each edge once; `mem`: ADJ and the coverage of `C`).
+
+Re-price of what is left: C5a 0.1, C5b–C5c 0.3–0.4, C5d 0.3, C7 0.05, C10 0.2 — **about 1 session**.
+
+### 22.3 The stage-22 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 19 s, `Proofs` 1.7 s), 9 modules with
+warnings, every warning `declaration uses 'sorry'`; `MapGraph`'s two `sorry` declarations are `IsBoundaryWalk.sep` (l. 1430, SEP's lane) and
+`exists_boundaryWalk` (l. 2265)** (`build/gate/build/20261005T063441Z-2002748.log`; driver log `data/fs131/rw/build-s22.log`; grep for
+`warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe line).
+
+Axioms against that build's oleans: `data/fs131/rw/AxiomsRW1b.lean` → `data/fs131/rw/axioms-rw1b.txt`, checked by `tools/fs131_ip_axioms.py`
+against `data/fs131/rw/axioms-rw1b-clean.txt` / `axioms-rw1b-sorry.txt`: **`OK: 33 clean on the standard three, 3 controls on sorryAx`**
+(`IsBoundaryWalk.sep`, `exists_boundaryWalk`, `filledGraph_ringList`); planted fault (`filledGraph_ringList` listed as clean) →
+`NOT CLEAN [… 'sorryAx']`, exit 1. `scripts/Axioms.lean`'s FS131-KP block gains the 14 new theorems under "-- FS131-RW1's children". No import
+changed, no module added. No `axiom`, no `native_decide`.
+
+### 22.4 Hand-back
+
+By the session's counter about 460k, past the brief's 400k guidance and under its 500k line: I hand back here, at a saved stage. Proved and
+left: § 22.1 and § 22.2. `IsBoundaryWalk` and `IsEdgeOf` are unchanged.
+
+## Stage 23 — SAVED (FS131-RW2): the readback
+
+*de Bruijn, the implementer (FS131-RW2), 2026-10-05, from RW1's Stage 22. Brief: `data/fs131/briefs/FS131-RW2-walk.md` (main tree). Branch `fs131-w5p`,
+worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5p`.*
+
+### 23.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by `grep -cF` of each quotation's full text (the control: a planted absent string, `ABSENT-CONTROL-STRING-xyzzy`, counted 0, exit 1):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors (main tree) | verbatim (1) |
+| `theorem exists_boundaryWalk (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :` | `MapGraph.lean` l. 2265 at `515e28af` | verbatim (1) |
+| the six lines of § 22.2 (C5a, C5b, C5c, C5d, C7, C10, each truncated as quoted) | this record § 22.2 | verbatim (1 each) |
+| items 345, 346, 339, 277 (opening lines) | `plans/FS131-close-inventory.md` (main tree) l. 2929, 2949, 2867, 2040 | verbatim (1 each) |
+
+No mismatch. Read in full: RW1's Stages 20–22 here; RL1's plan §§ 2 and 4; inventory items 277, 339, 345, 346; `plans/STANDING-RULES.md`; `LEAN.md`;
+`RUNNING.md` § Building and § Make the gate fail, and watch it fail.
+
+### 23.2 What I may and may not change (the brief's touches; rulings 339 (c), 346 (a))
+
+**May**: prove `exists_boundaryWalk` and add its children beside it in `MapGraph` (§ 22.2's C5a–C5d, C7, C10, each stated before proved, with a spec
+example where it carries a structure); add `port_arc` in `CurveGraph` and re-prove `port_pair` over it, **its statement byte-identical**; add
+pure-topology children in `MapTopology` § F; change imports with `ARCHITECTURE.md`; extend the FS131-KP block of `scripts/Axioms.lean` above the
+`=== PURCHASED ===` banner; `tools/fs131_rw_*.py`, `data/fs131/rw/`, this record, `data/fs131/reports/FS131-RW2.md`. Change `IsBoundaryWalk`'s fields or
+`IsEdgeOf`'s clauses **only** where the construction cannot meet them and SEP does not read them, and — an SEP lane may now run in parallel — only
+after messaging the coordinator first.
+**May not**: change `IsBoundaryWalk.sep` or its children, `filledGraph_ringList`, `IsRing`, `PlanarLike`, `Plane/PlaneTopology`, `BaseWalk`,
+`BaseDense`, RL1's plan file, any statement outside this lane; add an `axiom` or `native_decide`; edit a file while a build of it runs; merge, take
+`main`, run the gate, touch `main`.
+
+### 23.3 The as-given build (`515e28af`, before any edit)
+
+My wrapper `data/fs131/rw/rw2-build.sh` (run from a snapshot copy under `build/`) writes `START` and an `EXIT <status>` line to its driver log.
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up to date, nothing built, 9 modules with warnings (every one
+`declaration uses 'sorry'`; `MapGraph`'s two at l. 1430 — `IsBoundaryWalk.sep` — and l. 2265 — `exists_boundaryWalk`), `EXIT 0`**
+(`build/gate/build/20261005T065106Z-2122697.log`; driver log `data/fs131/rw/build-rw2-asgiven.log`).
+
+## Stage 24 — SAVED (FS131-RW2): C5a — `port_arc`, and `port_pair` re-proved over it
+
+- **`port_arc`** (`Plane/CurveGraph`, beside the handshake): `port_pair`'s hypotheses give `γ`, `a < b`, `γ` continuous and injective on `[a, b]`,
+  the component of `C'` through the port `p` equal to `γ '' [a, b]`, `γ a = p`, `γ b` a port, and no third port on the component. It is `port_pair`'s
+  old body with its last step changed: where the old proof found `p = γ b`, the arc is read backwards (`t ↦ γ (a + b − t)`).
+- **`port_pair`** re-proved in four lines over `port_arc`; **its statement is byte-identical** — `tools/fs131_rw_stmt_check.py 515e28af
+  Proofs/HadwigerNelson/Plane/CurveGraph.lean:port_pair` → `SAME (601 bytes)`, `PASS`; planted faults (the conclusion's disjuncts swapped in the
+  tree; a declaration name that does not exist) → `CHANGED` and `MISSING`, `FAIL`, exit 1, the file restored and compared byte-for-byte.
+- The build: under the slot (40 GiB, 8 cpus, `BATCH=4`), **OK — 447 of 447 batches, 6 modules rebuilt (`CurveGraph` 5.2 s, `MapTopology` 13 s,
+  `BaseWalk` 3.0 s, `MapGraph` 19 s, `BaseDense` 1.5 s, `Proofs` 1.5 s), 9 with warnings, every one `declaration uses 'sorry'`, `EXIT 0`, 8 min 49 s
+  wall** (`build/gate/build/20261005T070132Z-2178471.log`; driver log `data/fs131/rw/build-rw2-c5a.log`). One attempt.
+
+## Stage 25 — SAVED (FS131-RW2): C5b–C5d, C7, C10 and `exists_boundaryWalk` proved — WALK has no `sorry`
+
+Each child was stated, then proved, in the working file `data/fs131/rw/WalkScratch.lean` (commit `6988eb8e`, elaborated against the stage-24
+oleans), in § 22.2's order, then moved verbatim into `MapGraph` before `exists_boundaryWalk` (one rename: `HasCurveStar.isPreconnected_inter_ball`
+→ `isPreconnected_inter_ball_of_hasCurveStar`, so that no `ArcMap.HasCurveStar` namespace is minted); the working file is removed.
+
+### 25.1 Proved (all in `Plane/ValidMap/MapGraph`, namespace `ArcMap`; statements of the skeleton unchanged)
+
+- **C5b–C5d, pure** — **`IsPortGraph C N P vtx σ E`** (new structure, the interface between the curve topology and the map): ports `P` at vertices
+  `vtx d ∈ N`, paired by `σ`; evenly many ports and at least one at each vertex; each edge closed, in `C`, holding its two end vertices, connected
+  off `N` and in the closure of that part, meeting `N` only at its ends and another edge only in `N`; the edges cover `C`; each edge has a pure
+  point off `N` about which every small disc meets the edge as it meets `C`, misses every other edge, and cuts the edge into two closed connected
+  pieces, one from each end to its own circle point. Spec example: a vertex with no port is no port graph. Inhabitant: **`exists_isPortGraph`**
+  — every compact connected `C` with an even, positive curve star at each point has a port graph over any finite nonempty vertex set `N ⊆ C`
+  holding its non-regular points (ports = the rays' points at a cut radius `ρ`; `σ` = the other end of the port's arc, `port_arc`; the edge of a
+  port = its radial piece ∪ its arc ∪ its partner's radial piece; coverage because a component of `C'` with no port would be clopen in `C`).
+  Children: `ray_piece` (the radial piece `insert v (f '' (0, ρ])` is compact and connected, in `B̄(v, ρ)`, with `v` in the closure of its punctured
+  part), `isPreconnected_inter_ball_of_hasCurveStar` (a curve star is locally connected), `exists_Ioo_of_preimage_ball` (the parameters of an
+  injective arc inside a small disc about an interior point, with the arc's points there connected, are one interval `(c₁, c₂)`, `γ c₁`, `γ c₂`
+  on the circle).
+- **C5d, on the map** — **`exists_edgeOf`**: each edge of a port graph of `C = ∂ cl x̂` (vertices holding the points where `Γ` is not regular) is
+  `IsEdgeOf x y (E d) (vtx d) (vtx (σ d)) p ρ` for one outer tile `y ⊆ (cl x̂)ᶜ`, with `p ∉ N`, the closed disc missing every other edge, and `y` the
+  only tile off `cl x̂` whose closure meets the edge off `N`. Children: **`frontier_fill_regular_local`** (at a point of `C` where `Γ` is regular:
+  two germs, both branches in `C`, one sector in `x`, the other in a tile `Y` off `cl x̂` — the only such tile meeting the disc, holding `C` there
+  in its closure; each smaller disc is `x ∪ Y ∪ C`, its circle meets `x` and `Y` in nonempty arcs, and its two points of `C` interleave with points
+  of `x ∪ Y`), `sector_inter_sphere` (a sector meets a circle about its vertex in the polar arc between its germs' directions), `nextDir_two`,
+  `isOuterTile_of_closure_inter` (a tile off `cl x̂` whose closure meets `cl x` is outer), `subset_of_isPreconnected_of_locally`,
+  `closure_inter_subset_frontier_fill`, `frontier_fill_hasCurveStar_pos` (C3 with at least one ray), `nonempty_frontier_closure_fill`.
+- **C7** — **`IsPortGraph.exists_shared_vertex`**: on a connected `C`, a `σ`-closed set of ports, neither empty nor all, shares a vertex with its
+  complement (else the two sides' edges are disjoint closed sets covering `C`).
+- **C10** — `BasedTrail.map`, **`BasedTrail.insert_all`** (finitely many entries, each starting and ending at some entry's start, go in one at a
+  time), **`isBoundaryWalk_of_trail`** (a nodup closed trail of entries with tiles, starts and ends in their tiles' closures, edges on the edge
+  entries, repeated tiles only at edge entries, distinct edges off each other's closed discs, and exactly the neighbours as tiles, read cyclically,
+  is a boundary walk: hinge after an entry = its end).
+- **`exists_boundaryWalk`** (WALK) — its body: the stars and the vertices (`finite_frontier_fill_nonRegular` with one point of `C` added); the
+  port graph; `exists_edgeOf` at each port; `exists_euler` on the ports (`σ` and a vertex-preserving involution from `exists_vertex_involution`
+  as permutations of the subtype, `hconn` from C7); entries `ports ⊕ outer tiles`, the circuit's ports first, then each neighbour meeting `C` only
+  at vertices inserted at one of its vertices; `isBoundaryWalk_of_trail`. The docstring is rewritten to the route actually taken (the statement is
+  untouched).
+
+`IsBoundaryWalk` and `IsEdgeOf` are unchanged — no field or clause was added or dropped, so nothing was messaged about them.
+
+### 25.2 Measured, and the re-price (done-means 2)
+
+C5a about 10 minutes (stage 24); C5b–C5d pure (with C7) about 25 minutes, one elaboration error class per lemma (renamed Mathlib lemmas:
+`le_or_gt`, `le_of_not_gt`, `sdiff_subset`); the map half (C5d's local picture, `exists_edgeOf`) about 15 minutes; C10 and the body about
+15 minutes. So the re-price after the first two children was moot: WALK closed in the session, about 1.1 hours of work against RW1's
+"about 1 session" and RL1's 4–6 sessions. No dispatch to a companion was needed (no obligation took three attempts).
+
+## Stage 26 — SAVED (FS131-RW2): the build, the receipt, and the handover
+
+### 26.1 The build
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`), my wrapper writing its `EXIT` line: **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 21 s,
+`Proofs` 1.7 s), 9 modules with warnings, `EXIT 0`, 8 min 31 s** (`build/gate/build/20261005T073716Z-2385209.log`; driver log
+`data/fs131/rw/build-rw2-final.log`). The only warning in `MapGraph` is `declaration uses 'sorry'` at l. 1430 — `IsBoundaryWalk.sep`, the SEP
+lane's; `CurveGraph` has none. The build before it (`data/fs131/rw/build-rw2-walk.log`, `build/gate/build/20261005T072722Z-2308008.log`) was
+green but its linter fired 17 times, `missing doc string for public field IsPortGraph.*` — the negative control for "linters silent"; the fields
+got docstrings and the final build is silent.
+
+### 26.2 The receipt
+
+`data/fs131/rw/AxiomsRW2b.lean` (importing `MapGraph`, `pp.fullNames`) run against the final build's oleans → `data/fs131/rw/axioms-rw2b.txt`
+(24 records), checked by `tools/fs131_ip_axioms.py` (IP2's checker, run, not edited) against `data/fs131/rw/axioms-rw2a-clean.txt` /
+`axioms-rw2a-sorry.txt`: **`OK: 21 clean on the standard three, 3 controls on sorryAx`** — clean: `port_arc`, `port_pair`, `even_sum_deg`, the 17
+children of § 25.1 and **`exists_boundaryWalk`**; controls on `sorryAx`: `IsBoundaryWalk.sep`, `filledGraph_ringList`, `cvb_thom_reduced` (they rest
+on SEP). Planted fault (`IsBoundaryWalk.sep` listed as clean) → `FAIL … NOT CLEAN [… 'sorryAx']`, exit 1. `scripts/Axioms.lean`'s FS131-KP block
+gains the 18 new theorems under "-- FS131-RW2's children", above the `=== PURCHASED ===` banner. No `axiom`, no `native_decide`, no `sorry` added
+(the diff against `515e28af` greps clean; its control — the removed lines — finds the one `sorry` this job removed). No import changed, no module
+added (`ARCHITECTURE.md` and `Proofs.lean` untouched).
+
+### 26.3 Statements
+
+`tools/fs131_rw_stmt_check.py 515e28af` over every declaration of `MapGraph` and `CurveGraph` at `515e28af` (148, names extracted from that
+revision): **all SAME, PASS** (`data/fs131/rw/stmt-check-rw2.txt`) — `port_pair`, `exists_boundaryWalk`, `IsBoundaryWalk`, `IsEdgeOf`,
+`IsBoundaryWalk.sep`, `filledGraph_ringList`, `filledGraph_adj_iff` among them. Planted faults at stage 24 fired.
+
+### 26.4 What is proved and what is left
+
+WALK is proved: **`exists_boundaryWalk` carries no `sorry` beneath and rests on the standard three.** Left on this branch's F-RING path: SEP
+(`IsBoundaryWalk.sep`, the SEP lane's), on which `filledGraph_ringList`, `filledGraph_rings`, `filledGraph_planarLike` and `cvb_thom_reduced`
+still rest. Nothing of WALK is left. For the SEP lane: WALK uses `IsBoundaryWalk.sep` exactly as stated, for every walk meeting the fields; the
+walk it builds is an Euler circuit of the boundary graph of `∂ cl x̂` with each vertex-only neighbour inserted once at a vertex.
+
+### 26.5 For the coordinator
+
+- `IsPortGraph` is a new structure that theorems take as a hypothesis (`exists_edgeOf`, `IsPortGraph.exists_shared_vertex`); by
+  `scripts/Vacuity.lean`'s registration procedure I would file it **OUT**, like `IsSectorChart`: its existence is a theorem
+  (`exists_isPortGraph`), and every site takes it at a variable set. `scripts/Vacuity.lean` is not in my touches; a draft line for its list:
+  "`ArcMap.IsPortGraph` (FS131-RW2): OUT — existence is a theorem (`exists_isPortGraph`, at every `∂ cl x̂` of a valid plane map, so at
+  `sevenBrickMap`); every site takes it at a variable set, vertex set and port data; register it when a theorem takes it at a concrete set."
+- The gate's recorded counts (`CLAUDE.md` § The gate, § Trust ledger) will move when this branch lands: 18 new audited records, all clean, and
+  `exists_boundaryWalk` leaves the `sorryAx` side; I ran neither `axioms.sh` nor `vacuity.sh` (not this job's), so I give no counts.
+
+## Stage 27 — SAVED (FS131-RS1): the readback, and the route
+
+*de Bruijn, the implementer (FS131-RS1), 2026-10-05, from RW2's Stage 26. Brief: `data/fs131/briefs/FS131-RS1-sep.md` (main tree). Branch `fs131-w5p`,
+worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5p`, from `e27da6c1`.*
+
+### 27.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by `grep -cF` of each quotation's full text (the control: a planted absent string, `ABSENT-CONTROL-STRING-xyzzy`, counted 0):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors (main tree) | verbatim (1) |
+| `theorem IsBoundaryWalk.sep {x : {T : Set ℂ // F.IsOuterTile T}} {r : List {T : Set ℂ // F.IsOuterTile T}} {z : ℕ → ℂ}` | `MapGraph.lean` l. 1430 at `e27da6c1` | verbatim (1) |
+| "2. **SEP** (`IsBoundaryWalk.sep`): two positions of `y` are edge entries; …" | RL1's plan § 2.2 | verbatim (1) |
+| "- **Are `IsEdgeOf` / `IsBoundaryWalk` the statements SEP derives from?** …" and "- **SEP's space** is the cyclic arcs …" | RL1's plan § 4.1 | verbatim (1 each) |
+| "**SEP** (M–H, 1.2–1.5 over its six children, § 4.1). …" | RL1's plan § 4.2 | verbatim (1) |
+| "**May**: add children (statements of § 4.2, with spec examples), …" | RL1's plan § 4.4 | verbatim (1) |
+| items 338, 339, 351, 352, 277 (opening lines) | `plans/FS131-close-inventory.md` (main tree) l. 2846, 2867, 3008, 3028, 2040 | verbatim (1 each) |
+
+No mismatch. Read in full: RL1's plan (stages 1–4); RW1's and RW2's Stages 20–26 here; inventory items 277, 338, 339, 351, 352;
+`plans/STANDING-RULES.md`; `LEAN.md`; `RUNNING.md` § Building and § Make the gate fail, and watch it fail. WALK relies on SEP exactly as stated:
+`exists_boundaryWalk` produces an `IsBoundaryWalk` and `filledGraph_ringList` applies `IsBoundaryWalk.isRing = ⟨mem, cons, sep⟩` to it (§ 26.4).
+
+### 27.2 What I may and may not change (the brief's touches; ruling 352; RL1's plan § 4.4)
+
+**May**: prove `IsBoundaryWalk.sep` and add its children before it in `MapGraph` (each stated before proved, with a spec example where it carries a
+structure); add pure-topology children in `MapTopology` § F; change imports with `ARCHITECTURE.md` and `Proofs.lean`; extend the FS131-KP block of
+`scripts/Axioms.lean` above the `=== PURCHASED ===` banner; `tools/fs131_rs_*.py`, `data/fs131/rs/`, this record, `data/fs131/reports/FS131-RS1.md`.
+**May not**: change `IsBoundaryWalk`, `IsEdgeOf`, `IsPortGraph` or any other statement (a field SEP needs is a message to the coordinator),
+`exists_boundaryWalk`, `filledGraph_ringList`, `IsRing`, `PlanarLike`, `CurveGraph`, `Plane/PlaneTopology`, `BaseWalk`, `BaseDense`, RL1's plan file; add an
+`axiom` or `native_decide`; edit a file while a build of it runs; merge, take `main`, run the gate, touch `main`.
+
+### 27.3 The as-given build (`e27da6c1`, before any edit)
+
+My wrapper `data/fs131/rs/rs1-build.sh` (RW2's pattern; run from a snapshot copy under `build/`) writes `START` with the head and an `EXIT <status>` line.
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up to date, nothing built, 9 modules with warnings (every one `declaration
+uses 'sorry'`; `MapGraph`'s one at l. 1430 — `IsBoundaryWalk.sep`), `EXIT 0`** (`build/gate/build/20261005T075522Z-2516843.log`; driver log
+`data/fs131/rs/build-asgiven.log`).
+
+### 27.4 The route (mine, said here as the brief allows): `s = i`, `t = j`, no rotation; and one missing hypothesis replaced by a stronger lemma
+
+Reading RL1's § 2.2 against the statement:
+
+- **No rotation and no reduction to arcs are needed.** With `y` at `i < j`, `a` at `m ∈ (i, j)`, `b` at `n ∉ [i, j]`, take the pure point of `y`'s edge at
+  `i` itself and the second pure point `p j`. The walk forward from the hinge `z i` to `a` (positions `i+1 … m`) and forward from `b` back to the hinge
+  before `i` (positions `n …` cyclically to `i−1`) both avoid positions `i` and `j`; the appearances of `y` they pass are edge entries (`rep`, since `y` is
+  also at `i`) and are crossed along their edges, which miss the closed discs at `p i` and `p j` (`apart`). So `K₂` = the two pieces of `E i` off the disc,
+  the pieces of positions `i+1 … m`, the chain `S`, and the pieces of positions `n … i−1`, read mod the length; `K₁` = `x` and `y` off the disc with `p j`.
+  The wrap is handled by reading positions mod the length inside one chain lemma (`P (l % len)` over an interval of `ℕ`), where the only arithmetic is
+  `((l+1) % len + len − 1) % len = l % len`. So RL1's SEP-ROT (rotate the walk) and SEP-REDUCE (pick the last appearances) are replaced by the chain lemma's
+  mod-indexing and a two-case choice of the interval for `b`'s side (`n < i`: `[n, i−1]`; `n > j`: `[n, i+len−1]`).
+- **`IsBoundaryWalk.sep` carries no `F.Valid`, and an `ArcMap`'s tiles need not be bounded** (`IsTile` is a component of the interior points; boundedness
+  of tiles is `IsTile.closure_subset_closedBall_zero`, which takes `hF`). The held crossing lemma `inter_nonempty_of_interleaved_exterior` asks `K` bounded,
+  and `K₂` is built from tile closures, filled closures and edges, none bounded without `hF`. **No statement changes**: the crossing lemma holds for any
+  closed `K` — after the inversion, the closure of `ι '' K` adds at most the centre `u`, which `ι '' K'` never contains. New child **SEP-X**
+  (`MapTopology` § F), the crossing lemma outside a disc for a closed `K`, bounded or not.
+
+The children, in order: **SEP-CHAIN** (pure: the mod-indexed chain lemma), **SEP-X** (pure: the crossing lemma without boundedness) — re-priced after
+them — then **SEP-S** (a chain in `M̂ − x − y` gives a closed preconnected `S` inside the filled closures of its tiles), **SEP-K1** (pure: `K₁` is
+preconnected), **SEP-PIECE** (each position other than `i`, `j` has a closed preconnected piece holding its two hinges, off `x ∪ y`, off the open disc
+at `p i` and off `p j`; the tile's closure when the entry is not `y`, the edge when it is), then **SEP-CORE** = `IsBoundaryWalk.sep`'s body.
+
+## Stage 28 — SAVED (FS131-RS1): SEP-CHAIN, SEP-X and SEP-K1 proved (pure, `MapTopology` § F); the rest elaborates in the working file
+
+### 28.1 Proved (`Plane/ValidMap/MapTopology` § F, namespace `HadwigerNelson.Plane`; nothing else changed)
+
+- **`isPreconnected_biUnion_Icc_mod`** (**SEP-CHAIN**): pieces `P l` (`l < len`), each preconnected and holding the hinge before it
+  `z ((l + len − 1) % len)` and its own `z l`, have a preconnected union over any interval of `ℕ` read mod `len` (Mathlib's
+  `IsPreconnected.biUnion_of_chain`); helper **`mod_prev_succ`** (`((l+1) % len + len − 1) % len = l % len`, spec example at the wrap of a
+  five-entry walk). It replaces RL1's SEP-ROT: the wrap is read mod the length instead of rotating the walk's five fields.
+- **`inter_nonempty_of_interleaved_exterior_of_isClosed`** (**SEP-X**, new — § 27.4): the crossing lemma outside a disc for a closed `K`, bounded or
+  not; the closure of the inverted `K` adds at most the centre, which the inverted `K'` misses.
+- **`isPreconnected_union_insert_diff_ball`** (**SEP-K1**): `(x ∖ B) ∪ (y ∖ B) ∪ {q}` is preconnected when `x`, `y` are and each meets the circle in a
+  nonempty preconnected set, and `q ∈ cl x ∩ cl y` lies off the closed disc.
+
+Each elaborated at the first or second attempt (two annotation fixes in SEP-K1). `scripts/Axioms.lean`'s FS131-KP block gains the four under
+"-- FS131-RS1's children".
+
+### 28.2 The stage-28 build
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`), my wrapper writing its `EXIT` line: **OK — 447 of 447 batches, 5 modules rebuilt (`MapTopology` 13 s,
+`BaseWalk` 2.0 s, `MapGraph` 21 s, `BaseDense` 1.5 s, `Proofs` 1.5 s), 9 modules with warnings, every one `declaration uses 'sorry'`, `EXIT 0`, 8 min
+46 s** (`build/gate/build/20261005T075938Z-2536495.log`; driver log `data/fs131/rs/build-s28.log`). `MapTopology` has no warning; `MapGraph`'s one is
+l. 1430, `IsBoundaryWalk.sep`.
+
+### 28.3 Re-priced after the first two (done-means 2)
+
+Measured: SEP-CHAIN and SEP-X about 10 minutes together (each first attempt but for one `Nat` lemma), SEP-K1 about 5. Against the stage-28 oleans,
+the rest — **SEP-S** (`exists_isClosed_of_reachable_offTwo`), the helper `IsEdgeOf.disjoint_closure_ball`, **SEP-PIECE**
+(`IsBoundaryWalk.exists_piece`, with `mod_succ_prev`) and **SEP-CORE** (`IsBoundaryWalk.sep`'s body, as `sep'`) — already elaborates in the working
+file `data/fs131/rs/SepScratch.lean`, on the standard three by `#print axioms` there (one fix: unfolding the interval's lower end before
+`split_ifs`). So the re-price is moot: what is left is moving them into `MapGraph` before `IsBoundaryWalk.sep`, the build and the receipt —
+**about 0.1 session**, against RL1's 1.2–1.5 for SEP.
+
+## Stage 29 — SAVED (FS131-RS1): SEP proved — `IsBoundaryWalk.sep` has no `sorry`; the build, the receipt, and the handover
+
+### 29.1 Proved (`Plane/ValidMap/MapGraph`, namespace `ArcMap`, before `IsBoundaryWalk.sep`; statement of the leaf unchanged)
+
+- **`exists_isClosed_of_reachable_offTwo`** (**SEP-S**): `a ⇝ b` in `M̂ − x − y` gives a closed preconnected `S ⊇ cl â ∪ cl b̂` inside the union of the
+  filled closures of outer tiles other than `x`, `y` (induction on the walk).
+- **`IsEdgeOf.disjoint_closure_ball`**: the closure of an open set off `x` and `y` misses an edge's pure disc (the disc holds only `x`, `y` and the edge,
+  and the edge lies in `cl x`).
+- **`IsBoundaryWalk.exists_piece`** (**SEP-PIECE**) with **`mod_succ_prev`** (spec example at the wrap): at a position `q ≠ i, j` (two appearances of `y`),
+  the closure of the entry, or its edge if the entry is `y` (an edge entry by `rep`), is closed and preconnected, holds both hinges, misses `x ∪ y`, the
+  open disc at `p i` and the point `p j` (`apart` for edges; `disjoint_closure_ball` for tiles).
+- **`IsBoundaryWalk.sep`** (**SEP**), its body: § 27.4's route — `K₂` = `E₂ ∪ (positions i+1 … m) ∪ S ∪ (positions n … i+len−1, mod len) ∪ E₁`,
+  closed and connected (SEP-CHAIN on pieces extended by `E i`, `E j` at `i`, `j`), every point off `x`, `y`, `p j` and the open disc; `K₁` = `x`, `y` off
+  the disc with `p j` (SEP-K1); the circle points `θ₁ ∈ E₁`, `θ₃ ∈ E₂` and `θ₂`, `θ₄ ∈ x ∪ y` interleave, so SEP-X makes `K₂ ∩ K₁` nonempty — a point
+  of `K₂` in `x`, `y` or equal to `p j`, which no point of `K₂` is. Its docstring is rewritten to the route taken (statement untouched).
+
+One fix in the move: `IsTile.isOpen_fill` is declared later in `MapGraph`, so the fill's openness is inlined (`IsHoleOf.isOpen`). The working file
+`data/fs131/rs/SepScratch.lean` is removed. Total time on SEP: about 35 minutes from the readback, no obligation needing a third attempt, no dispatch.
+
+### 29.2 The build
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`), my wrapper writing its `EXIT` line: **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 21 s, `Proofs`
+1.7 s), 8 modules with warnings (was 9: `MapGraph` has none now — no `sorry`, linter silent), `EXIT 0`, 8 min 29 s** (`build/gate/build/20261005T081136Z-2602331.log`;
+driver log `data/fs131/rs/build-s29.log`). Every remaining warning is `declaration uses 'sorry'`.
+
+### 29.3 The receipt
+
+`data/fs131/rs/AxiomsRS1.lean` (importing `MapGraph`, `pp.fullNames`) run against the stage-29 build's oleans → `data/fs131/rs/axioms-rs1.txt` (19 records),
+checked by `tools/fs131_ip_axioms.py` (IP2's checker, run, not edited) against `data/fs131/rs/axioms-rs1-clean.txt` / `axioms-rs1-sorry.txt`: **`OK: 18 clean on the
+standard three, 1 controls on sorryAx`** — clean: the eight children of §§ 28.1, 29.1, **`IsBoundaryWalk.sep`**, `IsBoundaryWalk.isRing`,
+`exists_boundaryWalk`, **`filledGraph_ringList`**, `filledGraph_rings`, `filledGraph_oneInf`, `filledGraph_finSep`, **`filledGraph_planarLike`**,
+**`cvb_thom_reduced`**, **`cvb_thom`** (`mod_prev_succ` and `mod_succ_prev` on `[propext, Quot.sound]`, the rest on the standard three); the control
+`ArcMap.rot_noThird` (`HexRing` l. 184, a skeleton leaf imported through `MapTopology`) on `sorryAx`. Planted fault (the control listed as clean) → `FAIL …
+NOT CLEAN [… 'sorryAx']`, exit 1. `scripts/Axioms.lean`'s FS131-KP block gains the eight children under "-- FS131-RS1's children" (byte-equal to the
+receipt's list by `diff`); `IsBoundaryWalk.sep` was already listed (RL1). No `axiom`, no `native_decide`; `grep -w sorry` finds none in `MapGraph` or
+`MapTopology` (its control: the same grep at `e27da6c1` finds `MapGraph`'s one). No import changed, no module added (`tools/check_architecture.py` exit 0;
+`ARCHITECTURE.md`, `Proofs.lean` untouched).
+
+### 29.4 Statements
+
+`tools/fs131_rw_stmt_check.py e27da6c1` (RW2's, run, not edited) over every uniquely named declaration of `MapGraph` and `MapTopology` at `e27da6c1`
+(215): **all SAME, PASS** (`data/fs131/rs/stmt-check-rs1.txt`) — `IsBoundaryWalk`, `IsBoundaryWalk.sep`, `IsEdgeOf`, `inter_nonempty_of_interleaved_exterior`
+among them. That tool compares a signature up to `:=`/`where`, so for the two definitions SEP reads I also checked the diff: against `e27da6c1` the
+removed lines of `MapGraph` and `MapTopology` are nine — `IsBoundaryWalk.sep`'s old docstring (8) and its `sorry` (1); `IsEdgeOf`'s body and
+`IsBoundaryWalk`'s fields are untouched. Control: a declaration absent at the base (`IsBoundaryWalk.exists_piece`) → `MISSING`, `FAIL`, exit 1.
+
+### 29.5 What is proved and what is left
+
+**SEP is proved, and with WALK the planar chain's last leaf is closed on this branch**: `IsBoundaryWalk.sep` carries no `sorry` beneath and rests on the
+standard three, and so do F-RING (`filledGraph_ringList`), `filledGraph_planarLike` and FS114-CVB-THOM (`cvb_thom_reduced`, `cvb_thom`). Nothing of SEP is
+left. **What still reads `sorryAx` on the branch** (82 declarations with a `sorry`, listed in `data/fs131/rs/sorry-leaves-s29.txt`): `BaseDense` 3, `BaseSteps`
+16, `BaseWalk` 12, `Contact` 10, `Dense` 3, `HexRing` 7, `Terminal` 12, `UnitArc` 19 — wave 5's other halves (termination, density) and the skeleton leaves
+other lanes own on other branches; none in `MapGraph`, `MapTopology`, `CurveGraph`, `PlaneTopology` or `Thomassen`, and none beneath any record of § 29.3.
+`IsBoundaryWalk` and `IsEdgeOf` are unchanged (no field was needed, so nothing was messaged).
+
+### 29.6 For the coordinator
+
+- **Hypothesis-strength finding** (no statement changed): `IsBoundaryWalk.sep` holds for any `ArcMap`, valid or not — tiles need not be bounded — by the
+  crossing lemma for closed sets (SEP-X), which is strictly stronger than RL1's `inter_nonempty_of_interleaved_exterior` (that lemma is now a corollary
+  in all but name; I left it, as its statement is not mine).
+- **RL1's SEP-ROT and SEP-REDUCE were not needed** (§ 27.4): the pure point of the edge at `i` and the point `p j` serve for every `m`, `n` directly, and the
+  wrap is read mod the length inside SEP-CHAIN.
+- **For the landing**: 8 new audited records in the FS131-KP block, all clean; `IsBoundaryWalk.sep`, `filledGraph_ringList`, `cvb_thom_reduced` (and their
+  dependents) leave the `sorryAx` side. No new structure is taken as a hypothesis (no vacuity registration owed by this job). I ran neither `axioms.sh` nor
+  `vacuity.sh` (not this job's), so I give no gate counts.
+- **Drafts for the front page**: none from this job — the brief rules out the gate, so there are no gate counts to draft; the ledger and Atlas
+  regrade of F-RING / FS114-CVB-THOM to [kernel] waits for wave 5's landing, whose job drafts them against the gate it runs.

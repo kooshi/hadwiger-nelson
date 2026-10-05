@@ -1,0 +1,28 @@
+'HadwigerNelson.Plane.BranchGerms.eventually_dir_lt_nextDir' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.next_injective' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.dir_lt_dir' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.dir_le_dir' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.dir_lt_dir_zero_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.exists_far_side' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_sector_mem_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_ball_two_tiles' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.compl_outerDom_subset_closedBall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.outerDom_subset_of_encloses' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.not_encloses_of_hull_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_outermost' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.unenclosed_of_rim_vertex' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_unenclosed_or_bad' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.branchPt_mem_closure_sector' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.eq_or_next_eq_of_mem_closure_sector' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_isRingArc_of_touch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.noBoth' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_eleventh_of' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.localDense' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
