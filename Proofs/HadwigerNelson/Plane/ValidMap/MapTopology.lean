@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.HexRing
 import Proofs.HadwigerNelson.Plane.Tiles
 import Proofs.HadwigerNelson.Plane.PlaneTopology
+import Mathlib.Analysis.Normed.Module.Connected
 
 /-!
 # The plane topology of a map: tiles in complementary components, the outermost tile, the rim, the common boundary of two tiles
@@ -371,12 +372,267 @@ theorem outerDom_eq_connectedComponentIn {T : Set ℂ} {R : ℝ} (hTR : closure 
   · intro hz
     exact ⟨connectedComponentIn_subset _ _ hz, by rw [← connectedComponentIn_eq hz]; exact hunb⟩
 
+/-- **A tile at a point of a chart's ball holds a sector having the point in its closure** (the ball's interior points are the finitely many
+sectors, so a closure point of the tile in the ball is a closure point of one sector meeting the tile, and that sector lies in the tile). -/
+theorem IsSectorChart.exists_sector_mem_closure {n : ℕ} {G : BranchGerms n} {p : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G p r₀)
+    (hn : 0 < n) {r : ℝ} (hr : r ∈ Ioc 0 r₀) {q : ℂ} (hq : q ∈ ball p r) {A : Set ℂ} (hA : F.IsTile A) (hqA : q ∈ closure A) :
+    ∃ i, G.sector p r i ⊆ A ∧ q ∈ closure (G.sector p r i) := by
+  have h1 : q ∈ closure (⋃ i, G.sector p r i ∩ A) := by
+    refine closure_mono ?_ (isOpen_ball.inter_closure ⟨hq, hqA⟩)
+    rintro w ⟨hwb, hwA⟩
+    have hw : w ∈ ball p r ∩ F.interiorPts := ⟨hwb, hA.subset_interiorPts hwA⟩
+    rw [hC.cover r hr hn] at hw
+    obtain ⟨i, hi⟩ := mem_iUnion.mp hw
+    exact mem_iUnion.mpr ⟨i, hi, hwA⟩
+  rw [closure_iUnion_of_finite] at h1
+  obtain ⟨i, hi⟩ := mem_iUnion.mp h1
+  obtain ⟨w, hwi, hwA⟩ : (G.sector p r i ∩ A).Nonempty := by
+    by_contra h
+    rw [not_nonempty_iff_eq_empty] at h
+    rw [h, closure_empty] at hi
+    exact hi
+  exact ⟨i, hA.subset_of_preconnected (hC.isPreconnected r hr i) (hC.sector_subset_interiorPts hn hr i) hwi hwA,
+    closure_mono inter_subset_left hi⟩
+
+/-- **Points of three tiles are isolated**: about each point of the domain there is a disc in which every other point has at most two tiles
+in its closure (off the centre the disc's points are interior, or on one branch of the chart, whose closure meets only the two sectors that
+branch bounds: `BranchGerms.exists_far_side`). -/
+theorem exists_ball_two_tiles {p : ℂ} (hp : p ∈ F.dom) :
+    ∃ ρ > 0, ∀ q ∈ ball p ρ, q ≠ p → ∀ A B C : Set ℂ, F.IsTile A → F.IsTile B → F.IsTile C → q ∈ closure A → q ∈ closure B →
+      q ∈ closure C → A = B ∨ A = C ∨ B = C := by
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hp
+  obtain ⟨ρ', hρ', hord'⟩ :=
+    mem_nhdsGT_iff_exists_Ioo_subset.mp (G.eventually_dir_lt_nextDir hC.sorted hC.pos hC.curv)
+  set ρ := min ρ' r₀ with hρdef
+  have hρ : ρ ∈ Ioc 0 r₀ := ⟨lt_min hρ' hC.pos, min_le_right _ _⟩
+  have hord : ∀ s ∈ Ioo 0 ρ, ∀ i, G.dir i s < G.nextDir i s := fun s hs =>
+    hord' ⟨hs.1, hs.2.trans_le (min_le_left _ _)⟩
+  refine ⟨ρ, hρ.1, ?_⟩
+  intro q hq hqp A B C hA hB hC' hqA hqB hqC
+  by_cases hqi : q ∈ F.interiorPts
+  · -- `q` lies in a tile, the only tile with `q` in its closure
+    have hZ : F.IsTile (connectedComponentIn F.interiorPts q) := ⟨q, hqi, rfl⟩
+    have key : ∀ D, F.IsTile D → q ∈ closure D → D = connectedComponentIn F.interiorPts q := by
+      intro D hD hqD
+      obtain ⟨w, hwD, hwZ⟩ := (closure_inter_open_nonempty_iff hZ.isOpen).mp ⟨q, hqD, mem_connectedComponentIn hqi⟩
+      exact hD.eq_of_mem hZ hwD hwZ
+    exact Or.inl ((key A hA hqA).trans (key B hB hqB).symm)
+  · -- `q` lies on one branch `m`
+    have hqb : q ∈ ball p r₀ := ball_subset_ball hρ.2 hq
+    have hqd : q ∈ F.dom := hC.subdom hqb
+    have hqΓ : q ∈ (F.Γ ∩ ball p r₀) \ {p} := by
+      refine ⟨⟨⟨hqd, ?_⟩, hqb⟩, hqp⟩
+      by_contra h
+      exact hqi ⟨hqd, h⟩
+    rw [hC.branches] at hqΓ
+    obtain ⟨m, hm⟩ := mem_iUnion.mp hqΓ
+    obtain ⟨s, hs, hqm⟩ := hm
+    have hn : 0 < n := m.pos
+    have hsρ : s < ρ := by
+      have := norm_branchPt_sub p (G.β m) (G.κ m) hs.1.le
+      rw [hqm] at this
+      rw [mem_ball, dist_eq_norm, this] at hq
+      exact hq
+    -- each of the three tiles holds a sector having `q` in its closure
+    obtain ⟨iA, hiA, hqiA⟩ := hC.exists_sector_mem_closure hn hρ hq hA hqA
+    obtain ⟨iB, hiB, hqiB⟩ := hC.exists_sector_mem_closure hn hρ hq hB hqB
+    obtain ⟨iC, hiC, hqiC⟩ := hC.exists_sector_mem_closure hn hρ hq hC' hqC
+    have heq : ∀ {D D' : Set ℂ} {i : Fin n}, F.IsTile D → F.IsTile D' → G.sector p ρ i ⊆ D → G.sector p ρ i ⊆ D' →
+        D = D' := by
+      intro D D' i hD hD' hi hi'
+      obtain ⟨w, hw⟩ := hC.sector_nonempty hρ i
+      exact hD.eq_of_mem hD' (hi hw) (hi' hw)
+    suffices h : iA = iB ∨ iA = iC ∨ iB = iC by
+      rcases h with h | h | h
+      · subst h; exact Or.inl (heq hA hB hiA hiB)
+      · subst h; exact Or.inr (Or.inl (heq hA hC' hiA hiC))
+      · subst h; exact Or.inr (Or.inr (heq hB hC' hiB hiC))
+    by_cases hn2 : n ≤ 2
+    · simp only [Fin.ext_iff]; omega
+    · -- with three germs or more, a sector whose closure has `q` is one of the two that branch `m` bounds
+      have hadj : ∀ i, q ∈ closure (G.sector p ρ i) → i = m ∨ BranchGerms.next i = m := by
+        intro i hqi'
+        by_contra h
+        push Not at h
+        obtain ⟨O, hOo, -, -, hOd, -, hOm⟩ := G.exists_far_side (by omega) hord p i
+        have hqO : q ∈ O := hqm ▸ hOm m (Ne.symm h.1) (Ne.symm h.2) s ⟨hs.1, hsρ⟩
+        exact Set.disjoint_left.mp (hOd.closure_right hOo) hqO hqi'
+      have hinj := BranchGerms.next_injective (n := n)
+      rcases hadj iA hqiA with h1 | h1 <;> rcases hadj iB hqiB with h2 | h2 <;> rcases hadj iC hqiC with h3 | h3 <;>
+        first
+        | exact Or.inl (h1.trans h2.symm)
+        | exact Or.inr (Or.inl (h1.trans h3.symm))
+        | exact Or.inr (Or.inr (h2.trans h3.symm))
+        | exact Or.inl (hinj (h1.trans h2.symm))
+        | exact Or.inr (Or.inl (hinj (h1.trans h3.symm)))
+        | exact Or.inr (Or.inr (hinj (h2.trans h3.symm)))
+
+/-- **A disc holding a set's closure holds its hull**: the complement of the disc is connected, unbounded, and off the closure. -/
+theorem compl_outerDom_subset_closedBall {T : Set ℂ} {c : ℂ} {R : ℝ} (hT : closure T ⊆ closedBall c R) :
+    (outerDom T)ᶜ ⊆ closedBall c R := by
+  intro w hw
+  by_contra hwc
+  apply hw
+  refine ⟨fun h => hwc (hT h), fun hb => ?_⟩
+  have hsub : (closedBall c R)ᶜ ⊆ connectedComponentIn (closure T)ᶜ w :=
+    (isPreconnected_compl_closedBall c R).subset_connectedComponentIn hwc (compl_subset_compl.mpr hT)
+  have : Bornology.IsBounded (univ : Set ℂ) :=
+    ((isBounded_closedBall (x := c) (r := R)).union hb).subset fun z _ => by
+      by_cases h : z ∈ closedBall c R
+      · exact Or.inl h
+      · exact Or.inr (hsub h)
+  exact NormedSpace.unbounded_univ ℝ ℂ this
+
+/-- **Enclosure grows hulls** (FS131-E4 E4-OUTERMOST step 2; this record § 5.4): if the tile `T'` encloses the tile `T`, the outer domain of
+`T'` lies in that of `T` — `T` sits in a bounded component `B'` of `(cl T')ᶜ`, so `cl T ⊆ B' ∪ cl T'`, which an unbounded component of
+`(cl T')ᶜ` misses. -/
+theorem outerDom_subset_of_encloses {T T' : Set ℂ} (hT : F.IsTile T) (hT' : F.IsTile T') (henc : EnclosesTile T' T) :
+    outerDom T' ⊆ outerDom T := by
+  obtain ⟨y, ⟨hyT, hyT'⟩, hb⟩ := henc
+  set B' := connectedComponentIn (closure T')ᶜ y with hB'
+  have hopen : IsOpen (closure T')ᶜ := isClosed_closure.isOpen_compl
+  have hTT' : T ≠ T' := fun h => hyT' (h ▸ subset_closure hyT)
+  have hTB : T ⊆ B' :=
+    hT.isPreconnected.subset_connectedComponentIn hyT (IsTile.subset_compl_closure hT' hT hTT')
+  have hclT : closure T ⊆ B' ∪ closure T' := by
+    intro z hz
+    by_cases hzB : z ∈ B'
+    · exact Or.inl hzB
+    · right
+      have hzf : z ∈ frontier B' := ⟨closure_mono hTB hz, by rwa [hopen.connectedComponentIn.interior_eq]⟩
+      simpa using frontier_connectedComponentIn_subset hopen y hzf
+  rintro w ⟨hwT', hwb⟩
+  set W := connectedComponentIn (closure T')ᶜ w with hWdef
+  have hWB : Disjoint W B' := by
+    rw [Set.disjoint_left]
+    intro z hzW hzB
+    apply hwb
+    have h1 : W = connectedComponentIn (closure T')ᶜ z := by rw [hWdef]; exact connectedComponentIn_eq (hWdef ▸ hzW)
+    have h2 : B' = connectedComponentIn (closure T')ᶜ z := by rw [hB']; exact connectedComponentIn_eq (hB' ▸ hzB)
+    rw [h1, ← h2]; exact hb
+  have hWT : W ⊆ (closure T)ᶜ := by
+    intro z hzW hzT
+    rcases hclT hzT with h | h
+    · exact Set.disjoint_left.mp hWB hzW h
+    · exact connectedComponentIn_subset _ _ hzW h
+  have hwW : w ∈ W := mem_connectedComponentIn hwT'
+  exact ⟨hWT hwW, fun hbd => hwb (hbd.subset (isPreconnected_connectedComponentIn.subset_connectedComponentIn hwW hWT))⟩
+
+/-- **Enclosure strictly grows hulls** (KP's `not_encloses_of_hull_eq`): a tile whose outer domain is that of the tile `T` does not enclose
+`T`. Were it to, the common rim `frontier (outerDom T)` would lie in both closures and be preconnected with two points (a one-point rim would
+split `ℂ ∖ {p}`), and at each of its points a third tile, of the outer domain, would touch; but points of three tiles are isolated
+(`exists_ball_two_tiles`). For open connected sets in general this fails (Wada's lakes): the map's regularity is read here. -/
+theorem not_encloses_of_hull_eq (hF : F.Valid) {T T' : Set ℂ} (hT : F.IsTile T) (hT' : F.IsTile T') (hdom : (outerDom T)ᶜ ⊆ F.dom)
+    (heq : outerDom T' = outerDom T) : ¬ EnclosesTile T' T := by
+  rintro ⟨y, ⟨hyT, hyT'⟩, -⟩
+  have hTT' : T ≠ T' := fun h => hyT' (h ▸ subset_closure hyT)
+  obtain ⟨x, hx⟩ := hT.nonempty
+  obtain ⟨x', hx'⟩ := hT'.nonempty
+  have hTR := hT.closure_subset_closedBall_zero hF hx
+  have hT'R := hT'.closure_subset_closedBall_zero hF hx'
+  obtain ⟨z₀, hz₀⟩ := exists_not_mem_closedBall_zero (max (‖x‖ + 1) (‖x'‖ + 1))
+  have hz₀1 : z₀ ∉ closedBall (0 : ℂ) (‖x‖ + 1) := fun h => hz₀ (closedBall_subset_closedBall (le_max_left _ _) h)
+  have hz₀2 : z₀ ∉ closedBall (0 : ℂ) (‖x'‖ + 1) := fun h => hz₀ (closedBall_subset_closedBall (le_max_right _ _) h)
+  have hW := outerDom_eq_connectedComponentIn hTR hz₀1
+  have hW' := outerDom_eq_connectedComponentIn hT'R hz₀2
+  set W := outerDom T with hWdef
+  have hWo : IsOpen W := isOpen_outerDom T
+  set Φ := frontier W with hΦ
+  have hΦT : Φ ⊆ closure T := by
+    rw [hΦ, hW]; intro v hv; simpa using frontier_connectedComponentIn_subset isClosed_closure.isOpen_compl z₀ hv
+  have hΦT' : Φ ⊆ closure T' := by
+    rw [hΦ, ← heq, hW']; intro v hv; simpa using frontier_connectedComponentIn_subset isClosed_closure.isOpen_compl z₀ hv
+  have hΦpre : IsPreconnected Φ := by
+    rw [hΦ, hW]; exact isPreconnected_frontier_connectedComponentIn isClosed_closure hT.isPreconnected.closure z₀
+  have hWT : Disjoint W (closure T) := Set.disjoint_left.mpr fun z hz => hz.1
+  have hWT' : Disjoint W (closure T') := by rw [← heq]; exact Set.disjoint_left.mpr fun z hz => hz.1
+  have hΦd : ∀ p ∈ Φ, p ∈ F.dom := fun p hp => hdom (fun h => (hWo.inter_frontier_eq.subset ⟨h, hp⟩ : p ∈ (∅ : Set ℂ)))
+  -- at every rim point a third tile, of `W`, touches
+  have hthree : ∀ p ∈ Φ, ∃ Z, F.IsTile Z ∧ Z ≠ T ∧ Z ≠ T' ∧ p ∈ closure Z := by
+    intro p hp
+    obtain ⟨Z, hZ, ⟨w, hwZ, hwW⟩, hpZ⟩ := exists_tile_mem_closure_of_mem_closure hWo (hΦd p hp) hp.1
+    refine ⟨Z, hZ, fun h => ?_, fun h => ?_, hpZ⟩
+    · exact Set.disjoint_left.mp hWT hwW (subset_closure (h ▸ hwZ))
+    · exact Set.disjoint_left.mp hWT' hwW (subset_closure (h ▸ hwZ))
+  -- so the rim is one point
+  have hz₀W : z₀ ∈ W := by rw [hW]; exact mem_connectedComponentIn (fun h => hz₀1 (hTR h))
+  have hΦne : Φ.Nonempty := by
+    rw [hΦ, nonempty_frontier_iff]
+    refine ⟨⟨z₀, hz₀W⟩, fun h => ?_⟩
+    exact (h ▸ mem_univ x : x ∈ W).1 (subset_closure hx)
+  obtain ⟨p, hp⟩ := hΦne
+  obtain ⟨ρ, hρ, hiso⟩ := exists_ball_two_tiles (hΦd p hp)
+  have hsub : Φ ⊆ {p} ∪ (ball p ρ)ᶜ := by
+    intro q hq
+    by_cases hqp : q = p
+    · exact Or.inl hqp
+    · right
+      intro hqb
+      obtain ⟨Z, hZ, hZT, hZT', hqZ⟩ := hthree q hq
+      rcases hiso q hqb hqp T T' Z hT hT' hZ (hΦT hq) (hΦT' hq) hqZ with h | h | h
+      · exact hTT' h
+      · exact hZT h.symm
+      · exact hZT' h.symm
+  have hΦp : Φ ⊆ {p} := by
+    intro q hq
+    by_contra hqp
+    obtain ⟨w, -, hw1, hw2⟩ := isPreconnected_closed_iff.mp hΦpre {p} (ball p ρ)ᶜ isClosed_singleton
+      isOpen_ball.isClosed_compl hsub ⟨p, hp, rfl⟩ ⟨q, hq, (hsub hq).resolve_left hqp⟩
+    rw [mem_singleton_iff] at hw1
+    subst hw1
+    exact hw2 (mem_ball_self hρ)
+  -- but `ℂ ∖ {p}` is connected, and `W`, `(cl W)ᶜ` would split it
+  have hconn : IsPreconnected ({p}ᶜ : Set ℂ) :=
+    (isConnected_compl_singleton_of_one_lt_rank (by rw [Complex.rank_real_complex]; norm_num) p).isPreconnected
+  have hxW : x ∉ closure W :=
+    Set.disjoint_left.mp ((Set.disjoint_left.mpr fun z hzT hzW => Set.disjoint_left.mp hWT hzW (subset_closure hzT) :
+      Disjoint T W).closure_right hT.isOpen) hx
+  have hpcl : p ∈ closure W := hp.1
+  obtain ⟨w, -, hwW, hwc⟩ := hconn W (closure W)ᶜ hWo isClosed_closure.isOpen_compl
+    (fun z hz => by
+      by_cases hzW : z ∈ W
+      · exact Or.inl hzW
+      · exact Or.inr fun hzc => hz (hΦp ⟨hzc, by rwa [hWo.interior_eq]⟩))
+    ⟨z₀, fun h => hz₀1 (hTR (hΦT ((mem_singleton_iff.mp h) ▸ hp))), hz₀W⟩
+    ⟨x, fun h => hxW ((mem_singleton_iff.mp h) ▸ hpcl), hxW⟩
+  exact hwc (subset_closure hwW)
+
 /-- **The outermost tile** (E4-OUTERMOST steps 1–2): in a valid map covering `B̄(x, 1 + ρ)`, some tile `T*` has `x` in its hull, its hull in
 `B̄(x, 1)`, and no tile enclosing it. (A tile has diameter at most `1`, its hull lies in the convex hull of its closure; enclosure strictly
 grows hulls; the chain from a tile at `x` stays among the finitely many tiles meeting `B̄(x, 1)`.) -/
 theorem exists_outermost (hF : F.Valid) {x : ℂ} {ρ : ℝ} (hρ : 0 < ρ) (hx : closedBall x (1 + ρ) ⊆ F.dom) :
     ∃ T, F.IsTile T ∧ x ∉ outerDom T ∧ (outerDom T)ᶜ ⊆ closedBall x 1 ∧ ∀ T', F.IsTile T' → ¬ EnclosesTile T' T := by
-  sorry
+  have hxd : closedBall x 1 ⊆ F.dom := (closedBall_subset_closedBall (by linarith)).trans hx
+  -- the candidates: the tiles with `x` in the hull; each hull lies in `B̄(x, 1)` (a tile's closure lies within `1` of each of its points,
+  -- so within `1` of `x`)
+  set C := {T | F.IsTile T ∧ x ∉ outerDom T} with hCdef
+  have hhull : ∀ T ∈ C, (outerDom T)ᶜ ⊆ closedBall x 1 := by
+    rintro T ⟨hT, hxT⟩
+    have h2 : closure T ⊆ closedBall x 1 := by
+      intro w hw
+      have hxw : x ∈ closedBall w 1 := compl_outerDom_subset_closedBall (hT.closure_subset_closedBall hF hw) hxT
+      rw [mem_closedBall] at hxw ⊢
+      rw [dist_comm]; exact hxw
+    exact compl_outerDom_subset_closedBall h2
+  have hfin : C.Finite := by
+    refine (finite_tiles_closure_inter (isCompact_closedBall x 1) hxd).subset ?_
+    intro T hTC
+    obtain ⟨z, hz⟩ := hTC.1.nonempty
+    exact ⟨hTC.1, z, subset_closure hz, hhull T hTC (fun h => h.1 (subset_closure hz))⟩
+  have hne : C.Nonempty := by
+    obtain ⟨T, hT, hxT⟩ := F.mem_closure_tile (hxd (mem_closedBall_self zero_le_one))
+    exact ⟨T, hT, fun h => h.1 hxT⟩
+  -- a candidate with a maximal hull is enclosed by none
+  obtain ⟨T, hTmax⟩ := hfin.exists_maximalFor (fun T => (outerDom T)ᶜ) C hne
+  have hTC : T ∈ C := hTmax.1
+  have hdom : (outerDom T)ᶜ ⊆ F.dom := (hhull T hTC).trans hxd
+  refine ⟨T, hTC.1, hTC.2, hhull T hTC, fun T' hT' henc => ?_⟩
+  have hmono := outerDom_subset_of_encloses hTC.1 hT' henc
+  have hT'C : T' ∈ C := ⟨hT', fun h => hTC.2 (hmono h)⟩
+  have hle : (outerDom T)ᶜ ⊆ (outerDom T')ᶜ := compl_subset_compl.mpr hmono
+  have hge : (outerDom T')ᶜ ⊆ (outerDom T)ᶜ := hTmax.2 hT'C hle
+  have heq : outerDom T' = outerDom T := compl_injective (Subset.antisymm hge hle)
+  exact not_encloses_of_hull_eq hF hTC.1 hT' hdom heq henc
 
 /-- **Two outer tiles meet on the rim of an un-enclosed tile** (E4-OUTERMOST step 3): the rim `Φ* = frontier (outerDom T*)` is preconnected
 (`isPreconnected_frontier_connectedComponentIn`) and lies in the closures of the tiles of `outerDom T*` touching it, finitely many; were there
