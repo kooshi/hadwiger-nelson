@@ -1071,6 +1071,508 @@ theorem openCol_of_not_mem {ρ : ℝ} {Fcol : ℂ → Fin k} {z : ℂ} (hz : z �
 theorem v_mem_openArcs {ρ : ℝ} : v ∈ ⋃ A ∈ X.G.openArcs v X.col up s b ψ ρ, A.carrier :=
   mem_iUnion₂.mpr ⟨openRay v ψ ρ, Or.inr (Or.inl rfl), left_mem_segment ℝ _ _⟩
 
+/-! ### OPEN's sectors at `v` (FS131-IO2) -/
+
+/-- A sector between two germs, cut down to a smaller radius. -/
+theorem _root_.HadwigerNelson.Plane.mem_sectorBetween_of_lt {z : ℂ} {β₁ κ₁ β₂ κ₂ R r : ℝ}
+    (hz : z ∈ sectorBetween v β₁ κ₁ β₂ κ₂ R) (hr : ‖z - v‖ < r) : z ∈ sectorBetween v β₁ κ₁ β₂ κ₂ r := by
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := hz
+  rw [add_sub_cancel_left, norm_mul_e ht.1.le] at hr
+  exact ⟨t, ⟨ht.1, hr⟩, φ, hφ, rfl⟩
+
+/-- **A sector between two germs whose directions stay ordered is preconnected** (as `BranchGerms.isPreconnected_sector`). -/
+theorem _root_.HadwigerNelson.Plane.isPreconnected_sectorBetween (v : ℂ) {β₁ κ₁ β₂ κ₂ r : ℝ}
+    (hord : ∀ t ∈ Ioo 0 r, germDir β₁ κ₁ t < germDir β₂ κ₂ t) : IsPreconnected (sectorBetween v β₁ κ₁ β₂ κ₂ r) := by
+  set f : ℝ × ℝ → ℂ := fun p => v + (p.1 : ℂ) * e (germDir β₁ κ₁ p.1 + p.2 * (germDir β₂ κ₂ p.1 - germDir β₁ κ₁ p.1))
+    with hf
+  have hfc : Continuous f := by
+    have h1 : Continuous fun p : ℝ × ℝ => germDir β₁ κ₁ p.1 + p.2 * (germDir β₂ κ₂ p.1 - germDir β₁ κ₁ p.1) :=
+      ((continuous_germDir β₁ κ₁).comp continuous_fst).add (continuous_snd.mul
+        (((continuous_germDir β₂ κ₂).comp continuous_fst).sub ((continuous_germDir β₁ κ₁).comp continuous_fst)))
+    exact continuous_const.add ((Complex.continuous_ofReal.comp continuous_fst).mul (continuous_e.comp h1))
+  have heq : sectorBetween v β₁ κ₁ β₂ κ₂ r = f '' (Ioo 0 r ×ˢ Ioo 0 1) := by
+    ext z
+    constructor
+    · rintro ⟨s, hs, φ, hφ, rfl⟩
+      have hφ : germDir β₁ κ₁ s < φ ∧ φ < germDir β₂ κ₂ s := hφ
+      have hgap : 0 < germDir β₂ κ₂ s - germDir β₁ κ₁ s := by linarith [hφ.1, hφ.2]
+      refine ⟨(s, (φ - germDir β₁ κ₁ s) / (germDir β₂ κ₂ s - germDir β₁ κ₁ s)), ⟨hs, ?_, ?_⟩, ?_⟩
+      · exact div_pos (by linarith [hφ.1]) hgap
+      · rw [div_lt_one hgap]; linarith [hφ.2]
+      · simp only [hf]; congr 3; field_simp; ring
+    · rintro ⟨⟨s, t⟩, ⟨hs, ht⟩, rfl⟩
+      have hgap := hord s hs
+      refine ⟨s, hs, _, ⟨?_, ?_⟩, rfl⟩
+      · show germDir β₁ κ₁ s < germDir β₁ κ₁ s + t * (germDir β₂ κ₂ s - germDir β₁ κ₁ s)
+        nlinarith [ht.1]
+      · show germDir β₁ κ₁ s + t * (germDir β₂ κ₂ s - germDir β₁ κ₁ s) < germDir β₂ κ₂ s
+        nlinarith [ht.2]
+  rw [heq]
+  exact ((convex_Ioo 0 r).prod (convex_Ioo 0 1)).isPreconnected.image f hfc.continuousOn
+
+/-- **Every direction strictly between two germs' tangents is a direction of the sector between them** at `v`. -/
+theorem _root_.HadwigerNelson.Plane.Ioo_subset_coneAt_sectorBetween (v : ℂ) {β₁ κ₁ β₂ κ₂ r : ℝ} (hr : 0 < r) :
+    Ioo β₁ β₂ ⊆ coneAt (sectorBetween v β₁ κ₁ β₂ κ₂ r) v := by
+  intro δ hδ
+  have h1 : ∀ᶠ t in 𝓝 (0 : ℝ), germDir β₁ κ₁ t < δ :=
+    (continuous_germDir β₁ κ₁).continuousAt.eventually_lt continuousAt_const (by rw [germDir_zero]; exact hδ.1)
+  have h2 : ∀ᶠ t in 𝓝 (0 : ℝ), δ < germDir β₂ κ₂ t :=
+    continuousAt_const.eventually_lt (continuous_germDir β₂ κ₂).continuousAt (by rw [germDir_zero]; exact hδ.2)
+  obtain ⟨η, hη, hball⟩ := Metric.eventually_nhds_iff.mp (h1.and h2)
+  refine BranchGerms.mem_coneAt_of_ray fun ε hε => ?_
+  set t := min (min ε r) η / 2 with ht
+  have ht0 : 0 < t := by positivity
+  have htε : t < ε := by have := min_le_left (min ε r) η; have := min_le_left ε r; linarith
+  have htr : t < r := by have := min_le_left (min ε r) η; have := min_le_right ε r; linarith
+  have htη : dist t 0 < η := by
+    rw [Real.dist_eq, sub_zero, abs_of_pos ht0]; have := min_le_right (min ε r) η; linarith
+  obtain ⟨ha, hb⟩ := hball htη
+  exact ⟨t, ⟨ht0, htε⟩, t, ⟨ht0, htr⟩, δ, ⟨ha, hb⟩, rfl⟩
+
+/-- A point of the new ray is `v + t e(ψ)` with `t ∈ [0, ρ/2]`. -/
+theorem eq_of_mem_openRay {ψ ρ : ℝ} (hρ : 0 < ρ) {z : ℂ} (hz : z ∈ (openRay v ψ ρ).carrier) :
+    ∃ t ∈ Icc 0 (ρ / 2), z = v + (t : ℂ) * e ψ := by
+  obtain ⟨a, b', ha, hb, hab, rfl⟩ := hz
+  obtain rfl : a = 1 - b' := by linarith
+  refine ⟨b' * (ρ / 2), ⟨by positivity, by nlinarith⟩, ?_⟩
+  simp only [Complex.real_smul]
+  push_cast; ring
+
+/-- **The window**: below the clear radius the ray lies between the gap's outer germs `idx s 0` and `idx s (b + 1)`, which are at
+most a turn apart. -/
+theorem OpenConfig.window (cfg : X.OpenConfig c up s b ψ ρc) {t : ℝ} (ht : t ∈ Ioo 0 ρc) :
+    X.G.liftDir s 0 t < ψ ∧ ψ < X.G.liftDir s (b + 1) t ∧ X.G.liftDir s (b + 1) t ≤ X.G.liftDir s 0 t + 2 * π := by
+  have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, ht.2.trans_le cfg.hρcs⟩
+  have hmono := (X.G.liftDir_mono X.hord s hts).monotone
+  have hray := cfg.ray t ht
+  have h2 : X.G.liftDir s (b + 1) t ≤ X.G.liftDir s 0 t + 2 * π := by
+    have := X.G.liftDir_add_n s 0 t
+    rw [zero_add] at this
+    rw [← this]; exact hmono (by have := cfg.hbn; omega)
+  cases up
+  · simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hray
+    exact ⟨hray.1, hray.2.trans_le (hmono (by omega)), h2⟩
+  · simp only [BranchGerms.rayPos, if_true] at hray
+    exact ⟨(hmono (Nat.zero_le b)).trans_lt hray.1, hray.2, h2⟩
+
+/-- The merged piece's directions lie in the window, on the horn's side of the ray. -/
+theorem OpenConfig.mem_openPiece_iff (cfg : X.OpenConfig c up s b ψ ρc) {r : ℝ} (hr : r ≤ ρc) {z : ℂ}
+    (hz : z ∈ X.G.openPiece v up s b ψ r) :
+    ∃ t ∈ Ioo 0 r, ∃ φ, X.G.liftDir s 0 t < φ ∧ φ < X.G.liftDir s (b + 1) t ∧ φ ≠ ψ ∧ z = v + (t : ℂ) * e φ := by
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := X.G.mem_openPiece.mp hz
+  have hw := cfg.window ⟨ht.1, ht.2.trans_le hr⟩
+  refine ⟨t, ht, φ, ?_, ?_, ?_, rfl⟩ <;> cases up <;> simp only [Bool.false_eq_true, if_false, if_true] at hφ
+  all_goals linarith [hφ.1, hφ.2, hw.1, hw.2.1]
+
+/-- The rest of the partial sector's directions lie in the window, beyond the ray. -/
+theorem OpenConfig.mem_openRest_iff (cfg : X.OpenConfig c up s b ψ ρc) {r : ℝ} (hr : r ≤ ρc) {z : ℂ}
+    (hz : z ∈ X.G.openRest v up s b ψ r) :
+    ∃ t ∈ Ioo 0 r, ∃ φ, X.G.liftDir s 0 t < φ ∧ φ < X.G.liftDir s (b + 1) t ∧ φ ≠ ψ ∧ z = v + (t : ℂ) * e φ := by
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := X.G.mem_openRest.mp hz
+  have hw := cfg.window ⟨ht.1, ht.2.trans_le hr⟩
+  refine ⟨t, ht, φ, ?_, ?_, ?_, rfl⟩ <;> cases up <;> simp only [Bool.false_eq_true, if_false, if_true] at hφ
+  all_goals linarith [hφ.1, hφ.2, hw.1, hw.2.1]
+
+/-- **An index off the gap, the horn and the partial sector** is `idx s m` with `b < m < n`. -/
+theorem OpenConfig.exists_other (cfg : X.OpenConfig c up s b ψ ρc) {i : Fin X.n}
+    (h1 : i ≠ BranchGerms.idx s (BranchGerms.hornPos up b)) (h2 : i ≠ BranchGerms.idx s (BranchGerms.rayPos up b))
+    (h3 : i ∉ BranchGerms.gapSec s 0 b) : ∃ m, b < m ∧ m < X.n ∧ BranchGerms.idx s m = i := by
+  have hbn := cfg.hbn
+  obtain ⟨m, hm0, hmn, rfl⟩ := BranchGerms.exists_rep s (a := 0) (by omega) i
+  refine ⟨m, ?_, by omega, rfl⟩
+  by_contra hmb
+  push Not at hmb
+  rcases Nat.eq_zero_or_pos m with rfl | hm
+  · cases up
+    · exact h2 rfl
+    · exact h1 rfl
+  rcases eq_or_lt_of_le hmb with rfl | hlt
+  · cases up
+    · exact h1 rfl
+    · exact h2 rfl
+  · exact h3 ⟨m, hm, hlt, rfl⟩
+
+/-- **A germ off the gap** is `idx s m` with `b < m ≤ n`. -/
+theorem OpenConfig.exists_germ_off (cfg : X.OpenConfig c up s b ψ ρc) {j : Fin X.n} (hj : j ∉ BranchGerms.gapGerm s 0 b) :
+    ∃ m, b < m ∧ m ≤ X.n ∧ BranchGerms.idx s m = j := by
+  have hn2 := cfg.two_le
+  obtain ⟨m, hm1, hmn, rfl⟩ := BranchGerms.exists_rep s (a := 1) (by omega) j
+  refine ⟨m, ?_, by omega, rfl⟩
+  by_contra hmb
+  exact hj ⟨m, by omega, by omega, rfl⟩
+
+/-- **A point at a direction in the window, off the ray, inside `ρ/2`, is on no new arc.** -/
+theorem OpenConfig.not_mem_openArcs (cfg : X.OpenConfig c up s b ψ ρc) {ρ : ℝ} (h : X.Small ρ) (hρc : ρ ≤ ρc) {t φ : ℝ}
+    (ht : t ∈ Ioo 0 (ρ / 2)) (hφ1 : X.G.liftDir s 0 t < φ) (hφ2 : φ < X.G.liftDir s (b + 1) t) (hφψ : φ ≠ ψ) :
+    v + (t : ℂ) * e φ ∉ ⋃ A ∈ X.G.openArcs v X.col up s b ψ ρ, A.carrier := by
+  have hπ := Real.pi_pos
+  have htc : t ∈ Ioo 0 ρc := ⟨ht.1, by linarith [ht.2, h.1]⟩
+  have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, by linarith [ht.2, h.1, h.2.1]⟩
+  have hw := cfg.window htc
+  have hmono := (X.G.liftDir_mono X.hord s hts).monotone
+  have hnorm : ‖v + (t : ℂ) * e φ - v‖ = t := by rw [add_sub_cancel_left, norm_mul_e ht.1.le]
+  intro hz
+  obtain ⟨A, hA, hzA⟩ := mem_iUnion₂.mp hz
+  rcases hA with hA | rfl | rfl
+  · rcases mem_mergeArcs.mp hA with ⟨j, hj, rfl⟩ | ⟨j, -, hA'⟩ | ⟨-, rfl⟩
+    · rw [carrier_germ h.half] at hzA
+      obtain ⟨t', ht', he⟩ := hzA
+      have htt : t' = t := by
+        have := congrArg (fun z => ‖z - v‖) he
+        simp only [norm_branchPt_sub v _ _ ht'.1, hnorm] at this; exact this
+      rw [htt] at he
+      obtain ⟨m, hm1, hm2, rfl⟩ := cfg.exists_germ_off hj
+      rw [X.G.branchPt_idx] at he
+      have h1 : X.G.liftDir s (b + 1) t ≤ X.G.liftDir s m t := hmono (by omega)
+      have h2 : X.G.liftDir s m t ≤ X.G.liftDir s 0 t + 2 * π := by
+        have := X.G.liftDir_add_n s 0 t; rw [zero_add] at this; rw [← this]; exact hmono hm2
+      obtain ⟨-, he'⟩ := polar_eq_of_abs_lt ht.1 ht.1 he fun _ => by rw [abs_lt]; constructor <;> linarith
+      linarith
+    · obtain ⟨t', ht', he⟩ := outer_subset h j A hA' hzA
+      have := congrArg (fun z => ‖z - v‖) he
+      rw [norm_branchPt_sub v _ _ (by linarith [ht'.1, h.1]), hnorm] at this
+      linarith [ht'.1, ht.2]
+    · rw [norm_of_mem_rimArc h hzA] at hnorm; linarith [ht.2]
+  · obtain ⟨t', ht', he⟩ := eq_of_mem_openRay h.1 hzA
+    have ht'0 : 0 < t' := by
+      rcases eq_or_lt_of_le ht'.1 with h0 | h0
+      · exfalso
+        rw [← h0, Complex.ofReal_zero, zero_mul, add_zero] at he
+        have := congrArg (fun z => ‖z - v‖) he
+        simp only [hnorm, sub_self, norm_zero] at this; linarith [ht.1]
+      · exact h0
+    obtain ⟨-, he'⟩ := polar_eq_of_abs_lt ht.1 ht'0 he fun _ => by
+      rw [abs_lt]; constructor <;> linarith [hw.1, hw.2.1, hw.2.2]
+    exact hφψ he'
+  · have := X.G.openRim_subset_sphere v up s b ψ h.1.le hzA
+    rw [mem_sphere, dist_eq_norm, hnorm] at this; linarith [ht.2]
+
+/-- **A chart sector is a horn set exactly when its two germs share a direction.** -/
+theorem sector_eq_hornSet_iff {r : ℝ} (hr : r ∈ Ioc 0 X.r₀) (i : Fin X.n) :
+    (∃ α κ₁ κ₂, κ₁ < κ₂ ∧ X.G.sector v r i = hornSet v α κ₁ κ₂ r) ↔ X.G.β i = X.G.nextβ i := by
+  constructor
+  · rintro ⟨α, κ₁, κ₂, -, hS⟩
+    rcases X.hC.sorted.2 i with hlt | ⟨heq, -⟩
+    · refine absurd hS (ne_hornSet_of_interior_coneAt ?_ α κ₁ κ₂ r)
+      rw [X.hC.cone r hr i]
+      exact ⟨(X.G.β i + X.G.nextβ i) / 2, mem_interior.mpr ⟨Ioo (X.G.β i) (X.G.nextβ i),
+        Ioo_subset_Icc_self.trans (Icc_subset_angleIcc _ _), isOpen_Ioo, ⟨by linarith, by linarith⟩⟩⟩
+    · exact heq
+  · intro heq
+    rcases X.hC.sorted.2 i with hlt | ⟨-, hκ⟩
+    · rw [heq] at hlt; exact absurd hlt (lt_irrefl _)
+    · refine ⟨X.G.β i, X.G.κ i, X.G.nextκ i, hκ, ?_⟩
+      have h1 : |X.G.κ i| * r ≤ 2 := (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans (X.hC.curv i).le
+      have h2 : |X.G.nextκ i| * r ≤ 2 := (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans (X.hC.curv_next i).le
+      show sectorBetween v (X.G.β i) (X.G.κ i) (X.G.nextβ i) (X.G.nextκ i) r = _
+      rw [← heq]
+      exact sectorBetween_eq_hornSet v _ _ _ r h1 h2
+
+/-- **The horn count at a chart's point** (with at least one germ) is its number of cusps. -/
+theorem hasHornCount_chart (hn : 0 < X.n) : F.HasHornCount v {i : Fin X.n | X.G.β i = X.G.nextβ i}.ncard := by
+  filter_upwards [Ioc_mem_nhdsGT X.hC.pos] with r hr
+  have heq : {S | F.IsSector v r S ∧ ∃ α κ₁ κ₂, κ₁ < κ₂ ∧ S = hornSet v α κ₁ κ₂ r} =
+      (fun i => X.G.sector v r i) '' {i | X.G.β i = X.G.nextβ i} := by
+    ext S
+    constructor
+    · rintro ⟨hS, α, κ₁, κ₂, hκ, rfl⟩
+      obtain ⟨i, hi⟩ := (X.hC.isSector_iff hn hr).mp hS
+      exact ⟨i, (sector_eq_hornSet_iff hr i).mp ⟨α, κ₁, κ₂, hκ, hi.symm⟩, hi.symm⟩
+    · rintro ⟨i, hi, rfl⟩
+      exact ⟨(X.hC.isSector_iff hn hr).mpr ⟨i, rfl⟩, (sector_eq_hornSet_iff hr i).mpr hi⟩
+  rw [heq, (injective_of_disjoint (X.hC.disjoint r hr) (X.hC.sector_nonempty hr)).encard_image,
+    (Set.toFinite _).cast_ncard_eq]
+
+/-- **Sectors from a partition with empty pieces allowed**: the sectors are the non-empty pieces. -/
+theorem _root_.HadwigerNelson.Plane.ArcMap.isSector_iff_of_partition' {G : ArcMap k} {ι : Type*} {A : ι → Set ℂ} {x : ℂ}
+    {r : ℝ} (hU : G.interiorPts ∩ ball x r = ⋃ i, A i) (hopen : ∀ i, IsOpen (A i)) (hpre : ∀ i, IsPreconnected (A i))
+    (hdisj : ∀ i j, i ≠ j → Disjoint (A i) (A j)) (hcl : ∀ i, (A i).Nonempty → x ∈ closure (A i)) {S : Set ℂ} :
+    G.IsSector x r S ↔ ∃ i, (A i).Nonempty ∧ S = A i := by
+  have hcomp : ∀ i, ∀ y ∈ A i, connectedComponentIn (G.interiorPts ∩ ball x r) y = A i :=
+    fun i y hy => connectedComponentIn_eq_of_iUnion hU hopen hpre hdisj hy
+  constructor
+  · rintro ⟨y, hy, rfl, -⟩
+    rw [hU] at hy
+    obtain ⟨i, hi⟩ := mem_iUnion.mp hy
+    exact ⟨i, ⟨y, hi⟩, hcomp i y hi⟩
+  · rintro ⟨i, ⟨y, hy⟩, rfl⟩
+    refine ⟨y, ?_, (hcomp i y hy).symm, hcl i ⟨y, hy⟩⟩
+    rw [hU]; exact mem_iUnion.mpr ⟨i, hy⟩
+
+/-- Pairwise disjoint sets are injective on the non-empty ones. -/
+theorem _root_.HadwigerNelson.Plane.ArcMap.injOn_of_disjoint {ι : Type*} {A : ι → Set ℂ}
+    (hdisj : ∀ i j, i ≠ j → Disjoint (A i) (A j)) : Set.InjOn A {i | (A i).Nonempty} := by
+  intro i hi j _ hij
+  by_contra h
+  obtain ⟨x, hx⟩ := hi
+  exact disjoint_left.mp (hdisj i j h) hx (hij ▸ hx)
+
+/-- **OPEN's sectors at `v`** out to `r`, indexed by the chart's: the merged piece at the horn's index, the rest of the partial sector
+at its index, nothing at the swallowed sectors', the chart's sector elsewhere. -/
+noncomputable def openSectors (X : F.Near v) (up : Bool) (s : Fin X.n) (b : ℕ) (ψ r : ℝ) (i : Fin X.n) : Set ℂ := by
+  classical
+  exact if i = BranchGerms.idx s (BranchGerms.hornPos up b) then X.G.openPiece v up s b ψ r
+    else if i = BranchGerms.idx s (BranchGerms.rayPos up b) then X.G.openRest v up s b ψ r
+    else if i ∈ BranchGerms.gapSec s 0 b then ∅ else X.G.sector v r i
+
+theorem openSectors_cases (up : Bool) (ψ r : ℝ) (i : Fin X.n) :
+    (i = BranchGerms.idx s (BranchGerms.hornPos up b) ∧ openSectors X up s b ψ r i = X.G.openPiece v up s b ψ r) ∨
+    (i ≠ BranchGerms.idx s (BranchGerms.hornPos up b) ∧ i = BranchGerms.idx s (BranchGerms.rayPos up b) ∧
+      openSectors X up s b ψ r i = X.G.openRest v up s b ψ r) ∨
+    (i ≠ BranchGerms.idx s (BranchGerms.hornPos up b) ∧ i ≠ BranchGerms.idx s (BranchGerms.rayPos up b) ∧
+      i ∈ BranchGerms.gapSec s 0 b ∧ openSectors X up s b ψ r i = ∅) ∨
+    (i ≠ BranchGerms.idx s (BranchGerms.hornPos up b) ∧ i ≠ BranchGerms.idx s (BranchGerms.rayPos up b) ∧
+      i ∉ BranchGerms.gapSec s 0 b ∧ openSectors X up s b ψ r i = X.G.sector v r i) := by
+  classical
+  unfold openSectors
+  by_cases h1 : i = BranchGerms.idx s (BranchGerms.hornPos up b)
+  · left; exact ⟨h1, by rw [if_pos h1]⟩
+  by_cases h2 : i = BranchGerms.idx s (BranchGerms.rayPos up b)
+  · right; left; exact ⟨h1, h2, by rw [if_neg h1, if_pos h2]⟩
+  by_cases h3 : i ∈ BranchGerms.gapSec s 0 b
+  · right; right; left; exact ⟨h1, h2, h3, by rw [if_neg h1, if_neg h2, if_pos h3]⟩
+  · right; right; right; exact ⟨h1, h2, h3, by rw [if_neg h1, if_neg h2, if_neg h3]⟩
+
+-- spec example: at the horn's index OPEN's sector is the merged piece
+example (up : Bool) (ψ r : ℝ) :
+    openSectors X up s b ψ r (BranchGerms.idx s (BranchGerms.hornPos up b)) = X.G.openPiece v up s b ψ r := by
+  rcases openSectors_cases (X := X) (s := s) (b := b) up ψ r (BranchGerms.idx s (BranchGerms.hornPos up b)) with
+    ⟨-, h⟩ | ⟨h, -⟩ | ⟨h, -⟩ | ⟨h, -⟩
+  · exact h
+  all_goals exact absurd rfl h
+
+/-- The horn's and the partial sector's indices are distinct and off the swallowed sectors. -/
+theorem OpenConfig.idx_facts (cfg : X.OpenConfig c up s b ψ ρc) :
+    BranchGerms.idx s (BranchGerms.hornPos up b) ≠ BranchGerms.idx s (BranchGerms.rayPos up b) ∧
+      BranchGerms.idx s (BranchGerms.hornPos up b) ∉ BranchGerms.gapSec s 0 b ∧
+      BranchGerms.idx s (BranchGerms.rayPos up b) ∉ BranchGerms.gapSec s 0 b := by
+  have hb1 := cfg.hb1; have hbn := cfg.hbn
+  have h0 : BranchGerms.idx s 0 ∉ BranchGerms.gapSec s 0 b := by
+    rw [BranchGerms.idx_mem_gapSec_iff (by omega) le_rfl (by omega)]; omega
+  have hb : BranchGerms.idx s b ∉ BranchGerms.gapSec s 0 b := by
+    rw [BranchGerms.idx_mem_gapSec_iff (by omega) (Nat.zero_le b) (by omega)]; omega
+  have hne : BranchGerms.idx s 0 ≠ BranchGerms.idx s b := BranchGerms.idx_ne (by omega) (by omega)
+  cases up
+  · exact ⟨hne.symm, hb, h0⟩
+  · exact ⟨hne, h0, hb⟩
+
+/-- **The merged piece and the rest of the partial sector approach `v` along an open interval of directions** (`ray0`). -/
+theorem OpenConfig.cone_piece_rest (cfg : X.OpenConfig c up s b ψ ρc) {r : ℝ} (hr : 0 < r) :
+    (∃ lo hi, lo < hi ∧ Ioo lo hi ⊆ coneAt (X.G.openPiece v up s b ψ r) v) ∧
+      ∃ lo hi, lo < hi ∧ Ioo lo hi ⊆ coneAt (X.G.openRest v up s b ψ r) v := by
+  have hmono := X.G.lift_mono X.hC.sorted.mono s
+  have h0 := cfg.ray0
+  cases up
+  · simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at h0
+    refine ⟨⟨ψ, X.G.lift s (b + 1), h0.2.trans_le (hmono (by omega)), ?_⟩, ⟨X.G.lift s 0, ψ, h0.1, ?_⟩⟩
+    · unfold BranchGerms.openPiece; simp only [Bool.false_eq_true, if_false]
+      exact Ioo_subset_coneAt_sectorBetween v hr
+    · unfold BranchGerms.openRest; simp only [Bool.false_eq_true, if_false]
+      exact Ioo_subset_coneAt_sectorBetween v hr
+  · simp only [BranchGerms.rayPos, if_true] at h0
+    refine ⟨⟨X.G.lift s 0, ψ, (hmono (Nat.zero_le b)).trans_lt h0.1, ?_⟩, ⟨ψ, X.G.lift s (b + 1), h0.2, ?_⟩⟩
+    · unfold BranchGerms.openPiece; simp only [if_true]
+      exact Ioo_subset_coneAt_sectorBetween v hr
+    · unfold BranchGerms.openRest; simp only [if_true]
+      exact Ioo_subset_coneAt_sectorBetween v hr
+
+/-- A set approaching `v` along an open interval of directions has `v` in its closure, is non-empty, and is no horn set. -/
+theorem facts_of_cone {S : Set ℂ} {lo hi : ℝ} (hlh : lo < hi) (hS : Ioo lo hi ⊆ coneAt S v) :
+    v ∈ closure S ∧ S.Nonempty ∧ ∀ α κ₁ κ₂ r, S ≠ hornSet v α κ₁ κ₂ r := by
+  have hm : (lo + hi) / 2 ∈ coneAt S v := hS ⟨by linarith, by linarith⟩
+  have hcl := mem_closure_of_mem_coneAt hm
+  refine ⟨hcl, ?_, fun α κ₁ κ₂ r => ne_hornSet_of_interior_coneAt ?_ α κ₁ κ₂ r⟩
+  · by_contra hne
+    rw [Set.not_nonempty_iff_eq_empty] at hne
+    rw [hne, closure_empty] at hcl; exact hcl
+  · exact ⟨(lo + hi) / 2, mem_interior.mpr ⟨Ioo lo hi, hS, isOpen_Ioo, ⟨by linarith, by linarith⟩⟩⟩
+
+/-- The merged piece and the rest of the partial sector are preconnected. -/
+theorem OpenConfig.isPreconnected_piece_rest (cfg : X.OpenConfig c up s b ψ ρc) {r : ℝ} (hr : r ≤ ρc) :
+    IsPreconnected (X.G.openPiece v up s b ψ r) ∧ IsPreconnected (X.G.openRest v up s b ψ r) := by
+  have hw : ∀ t ∈ Ioo 0 r, X.G.liftDir s 0 t < ψ ∧ ψ < X.G.liftDir s (b + 1) t := fun t ht =>
+    ⟨(cfg.window ⟨ht.1, ht.2.trans_le hr⟩).1, (cfg.window ⟨ht.1, ht.2.trans_le hr⟩).2.1⟩
+  have hz : ∀ t : ℝ, germDir ψ 0 t = ψ := fun t => by simp [germDir]
+  cases up
+  · unfold BranchGerms.openPiece BranchGerms.openRest; simp only [Bool.false_eq_true, if_false]
+    exact ⟨isPreconnected_sectorBetween v fun t ht => by rw [hz]; exact (hw t ht).2,
+      isPreconnected_sectorBetween v fun t ht => by rw [hz]; exact (hw t ht).1⟩
+  · unfold BranchGerms.openPiece BranchGerms.openRest; simp only [if_true]
+    exact ⟨isPreconnected_sectorBetween v fun t ht => by rw [hz]; exact (hw t ht).1,
+      isPreconnected_sectorBetween v fun t ht => by rw [hz]; exact (hw t ht).2⟩
+
+/-- **The merged piece misses the rest of the partial sector** (the two lie on the two sides of the ray, in the window). -/
+theorem OpenConfig.disjoint_piece_rest (cfg : X.OpenConfig c up s b ψ ρc) {r : ℝ} (hr : r ≤ ρc) :
+    Disjoint (X.G.openPiece v up s b ψ r) (X.G.openRest v up s b ψ r) := by
+  rw [Set.disjoint_left]
+  intro z hz hz'
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := X.G.mem_openPiece.mp hz
+  obtain ⟨t', ht', φ', hφ', he⟩ := X.G.mem_openRest.mp hz'
+  obtain ⟨rfl, rfl⟩ := polar_eq_of_abs_lt ht.1 ht'.1 he fun htt => by
+    subst htt
+    have hw := cfg.window ⟨ht.1, ht.2.trans_le hr⟩
+    cases up <;> simp only [Bool.false_eq_true, if_false, if_true] at hφ hφ' <;>
+      · rw [abs_lt]; constructor <;> linarith [hφ.1, hφ.2, hφ'.1, hφ'.2, hw.1, hw.2.1, hw.2.2]
+  cases up <;> simp only [Bool.false_eq_true, if_false, if_true] at hφ hφ' <;> linarith [hφ.1, hφ.2, hφ'.1, hφ'.2]
+
+/-- **The merged piece misses every chart sector off the gap, the horn and the partial sector** (their directions lie beyond the
+window). -/
+theorem OpenConfig.disjoint_piece_other (cfg : X.OpenConfig c up s b ψ ρc) {r : ℝ} (hr : r ≤ ρc) {m : ℕ} (hm1 : b < m)
+    (hm2 : m < X.n) : Disjoint (X.G.openPiece v up s b ψ r) (X.G.sector v r (BranchGerms.idx s m)) := by
+  rw [Set.disjoint_left]
+  intro z hz hz'
+  obtain ⟨t, ht, φ, h1, h2, -, rfl⟩ := cfg.mem_openPiece_iff hr hz
+  obtain ⟨t', ht', φ', hφ', he⟩ := (X.G.mem_sector_idx s m).mp hz'
+  have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, ht.2.trans_le (hr.trans cfg.hρcs)⟩
+  have hmono := (X.G.liftDir_mono X.hord s hts).monotone
+  have hπ := Real.pi_pos
+  obtain ⟨rfl, rfl⟩ := polar_eq_of_abs_lt ht.1 ht'.1 he fun htt => by
+    subst htt
+    have h3 : X.G.liftDir s (b + 1) t ≤ X.G.liftDir s m t := hmono (by omega)
+    have h4 : X.G.liftDir s (m + 1) t ≤ X.G.liftDir s 0 t + 2 * π := by
+      have := X.G.liftDir_add_n s 0 t; rw [zero_add] at this; rw [← this]; exact hmono (by omega)
+    rw [abs_lt]; constructor <;> linarith [hφ'.1, hφ'.2]
+  have h3 : X.G.liftDir s (b + 1) t ≤ X.G.liftDir s m t := hmono (by omega)
+  linarith [hφ'.1]
+
+/-- A horn sector point inside `r` is in the merged piece. -/
+theorem OpenConfig.horn_subset_piece (cfg : X.OpenConfig c up s b ψ ρc) {r : ℝ} (hr : r ≤ ρc) :
+    X.G.sector v r (BranchGerms.idx s (BranchGerms.hornPos up b)) ⊆ X.G.openPiece v up s b ψ r := by
+  intro z hz
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := (X.G.mem_sector_idx s _).mp hz
+  have htc : t ∈ Ioo 0 ρc := ⟨ht.1, ht.2.trans_le hr⟩
+  have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, htc.2.trans_le cfg.hρcs⟩
+  have hmono := (X.G.liftDir_mono X.hord s hts).monotone
+  have hray := cfg.ray t htc
+  refine X.G.mem_openPiece.mpr ⟨t, ht, φ, ?_, rfl⟩
+  cases up
+  · simp only [BranchGerms.hornPos, BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hφ hray ⊢
+    exact ⟨hray.2.trans_le ((hmono cfg.hb1).trans hφ.1.le), hφ.2⟩
+  · simp only [BranchGerms.hornPos, BranchGerms.rayPos, if_true, zero_add] at hφ hray ⊢
+    exact ⟨hφ.1, hφ.2.trans_le ((hmono cfg.hb1).trans hray.1.le)⟩
+
+/-- A point at a direction between the gap's end germs, inside `r ≤ ρc`, lies in the merged piece. -/
+theorem OpenConfig.mem_piece_of_Icc (cfg : X.OpenConfig c up s b ψ ρc) {r t φ : ℝ} (hr : r ≤ ρc) (ht : t ∈ Ioo 0 r)
+    (hφ : φ ∈ Icc (X.G.liftDir s 1 t) (X.G.liftDir s b t)) : v + (t : ℂ) * e φ ∈ X.G.openPiece v up s b ψ r := by
+  have htc : t ∈ Ioo 0 ρc := ⟨ht.1, ht.2.trans_le hr⟩
+  have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, htc.2.trans_le cfg.hρcs⟩
+  have hmono := X.G.liftDir_mono X.hord s hts
+  have hray := cfg.ray t htc
+  refine X.G.mem_openPiece.mpr ⟨t, ht, φ, ?_, rfl⟩
+  cases up
+  · simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hray ⊢
+    exact ⟨hray.2.trans_le hφ.1, hφ.2.trans_lt (hmono (Nat.lt_succ_self b))⟩
+  · simp only [BranchGerms.rayPos, if_true] at hray ⊢
+    exact ⟨(hmono Nat.zero_lt_one).trans_le hφ.1, hφ.2.trans_lt hray.1⟩
+
+/-- The merged piece and the rest, cut down to a smaller radius. -/
+theorem _root_.HadwigerNelson.Plane.BranchGerms.mem_openPiece_of_lt {n : ℕ} (G : BranchGerms n) {v z : ℂ} {up : Bool}
+    {s : Fin n} {b : ℕ} {ψ R r : ℝ} (hz : z ∈ G.openPiece v up s b ψ R) (hr : ‖z - v‖ < r) : z ∈ G.openPiece v up s b ψ r := by
+  unfold BranchGerms.openPiece at hz ⊢; split_ifs at hz ⊢ <;> exact mem_sectorBetween_of_lt hz hr
+
+theorem _root_.HadwigerNelson.Plane.BranchGerms.mem_openRest_of_lt {n : ℕ} (G : BranchGerms n) {v z : ℂ} {up : Bool}
+    {s : Fin n} {b : ℕ} {ψ R r : ℝ} (hz : z ∈ G.openRest v up s b ψ R) (hr : ‖z - v‖ < r) : z ∈ G.openRest v up s b ψ r := by
+  unfold BranchGerms.openRest at hz ⊢; split_ifs at hz ⊢ <;> exact mem_sectorBetween_of_lt hz hr
+
+/-- The rest of the partial sector lies in the partial sector. -/
+theorem OpenConfig.rest_subset_sector (cfg : X.OpenConfig c up s b ψ ρc) {r : ℝ} (hr : r ≤ ρc) :
+    X.G.openRest v up s b ψ r ⊆ X.G.sector v r (BranchGerms.idx s (BranchGerms.rayPos up b)) := by
+  intro z hz
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := X.G.mem_openRest.mp hz
+  have hray := cfg.ray t ⟨ht.1, ht.2.trans_le hr⟩
+  refine (X.G.mem_sector_idx s _).mpr ⟨t, ht, φ, ?_, rfl⟩
+  cases up
+  · simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hφ hray ⊢
+    exact ⟨hφ.1, hφ.2.trans hray.2⟩
+  · simp only [BranchGerms.rayPos, if_true] at hφ hray ⊢
+    exact ⟨hray.1.trans hφ.1, hφ.2⟩
+
+/-- **OPEN's sectors are pairwise disjoint.** -/
+theorem OpenConfig.disjoint_openSectors (cfg : X.OpenConfig c up s b ψ ρc) {r : ℝ} (hr0 : 0 < r) (hr : r ≤ ρc) {i i' : Fin X.n}
+    (hii' : i ≠ i') : Disjoint (openSectors X up s b ψ r i) (openSectors X up s b ψ r i') := by
+  have hr₀ : r ∈ Ioc 0 X.r₀ := ⟨hr0, hr.trans (cfg.hρcs.trans X.hs₀.2)⟩
+  -- the piece against any other index
+  have hpiece : ∀ i', i' ≠ BranchGerms.idx s (BranchGerms.hornPos up b) →
+      Disjoint (X.G.openPiece v up s b ψ r) (openSectors X up s b ψ r i') := by
+    intro i' hne
+    rcases openSectors_cases (X := X) (s := s) (b := b) up ψ r i' with ⟨h1, -⟩ | ⟨-, -, h2⟩ | ⟨-, -, -, h2⟩ |
+      ⟨h1, h2, h3, h4⟩
+    · exact absurd h1 hne
+    · rw [h2]; exact cfg.disjoint_piece_rest hr
+    · rw [h2]; exact disjoint_empty _
+    · obtain ⟨m, hm1, hm2, rfl⟩ := cfg.exists_other h1 h2 h3
+      rw [h4]; exact cfg.disjoint_piece_other hr hm1 hm2
+  -- the rest against any index other than the horn's and its own
+  have hrest : ∀ i', i' ≠ BranchGerms.idx s (BranchGerms.hornPos up b) → i' ≠ BranchGerms.idx s (BranchGerms.rayPos up b) →
+      Disjoint (X.G.openRest v up s b ψ r) (openSectors X up s b ψ r i') := by
+    intro i' hne1 hne2
+    rcases openSectors_cases (X := X) (s := s) (b := b) up ψ r i' with ⟨h1, -⟩ | ⟨-, h1, -⟩ | ⟨-, -, -, h2⟩ |
+      ⟨h1, h2, h3, h4⟩
+    · exact absurd h1 hne1
+    · exact absurd h1 hne2
+    · rw [h2]; exact disjoint_empty _
+    · rw [h4]
+      exact (X.hC.disjoint r hr₀ _ _ (Ne.symm h2)).mono_left (cfg.rest_subset_sector hr)
+  rcases openSectors_cases (X := X) (s := s) (b := b) up ψ r i with ⟨h1, h2⟩ | ⟨h1, h1', h2⟩ | ⟨-, -, -, h2⟩ |
+    ⟨h1, h2, h3, h4⟩
+  · rw [h2]; exact hpiece i' (h1 ▸ Ne.symm hii')
+  · rw [h2]
+    by_cases hi'p : i' = BranchGerms.idx s (BranchGerms.hornPos up b)
+    · have := (hpiece i (by rw [h1']; exact (cfg.idx_facts).1.symm))
+      rcases openSectors_cases (X := X) (s := s) (b := b) up ψ r i' with ⟨-, h3⟩ | ⟨h3, -⟩ | ⟨h3, -⟩ | ⟨h3, -⟩
+      · rw [h3]; rw [h2] at this; exact this.symm
+      all_goals exact absurd hi'p h3
+    · exact hrest i' hi'p (h1' ▸ Ne.symm hii')
+  · rw [h2]; exact empty_disjoint _
+  · rw [h4]
+    rcases openSectors_cases (X := X) (s := s) (b := b) up ψ r i' with ⟨-, h5⟩ | ⟨-, -, h5⟩ | ⟨-, -, -, h5⟩ |
+      ⟨-, -, -, h5⟩
+    · have := hpiece i h1; rw [h4] at this; rw [h5]; exact this.symm
+    · have := hrest i h1 h2; rw [h4] at this; rw [h5]; exact this.symm
+    · rw [h5]; exact disjoint_empty _
+    · rw [h5]; exact X.hC.disjoint r hr₀ i i' hii'
+
+/-- **OPEN's sectors at a radius inside the clear radius**: open, preconnected, with `v` in the closure of each non-empty one;
+non-empty exactly off the swallowed sectors; horn sets exactly at the cusps off the gap, the horn and the partial sector. -/
+theorem OpenConfig.openSectors_facts (cfg : X.OpenConfig c up s b ψ ρc) {r : ℝ} (hr0 : 0 < r) (hr : r ≤ ρc) :
+    (∀ i, IsOpen (openSectors X up s b ψ r i)) ∧ (∀ i, IsPreconnected (openSectors X up s b ψ r i)) ∧
+      (∀ i, (openSectors X up s b ψ r i).Nonempty → v ∈ closure (openSectors X up s b ψ r i)) ∧
+      (∀ i, (openSectors X up s b ψ r i).Nonempty ↔ i ∉ BranchGerms.gapSec s 0 b) ∧
+      ∀ i, ((openSectors X up s b ψ r i).Nonempty ∧
+          ∃ α κ₁ κ₂, κ₁ < κ₂ ∧ openSectors X up s b ψ r i = hornSet v α κ₁ κ₂ r) ↔
+        (X.G.β i = X.G.nextβ i ∧ i ≠ BranchGerms.idx s (BranchGerms.hornPos up b) ∧
+          i ≠ BranchGerms.idx s (BranchGerms.rayPos up b) ∧ i ∉ BranchGerms.gapSec s 0 b) := by
+  have hr₀ : r ∈ Ioc 0 X.r₀ := ⟨hr0, hr.trans (cfg.hρcs.trans X.hs₀.2)⟩
+  obtain ⟨hpr, hpg, hrg⟩ := cfg.idx_facts
+  obtain ⟨⟨lo, hi, hlh, hP⟩, ⟨lo', hi', hlh', hR⟩⟩ := cfg.cone_piece_rest (s := s) hr0
+  obtain ⟨hPcl, hPne, hPh⟩ := facts_of_cone hlh hP
+  obtain ⟨hRcl, hRne, hRh⟩ := facts_of_cone hlh' hR
+  obtain ⟨hPpre, hRpre⟩ := cfg.isPreconnected_piece_rest hr
+  refine ⟨fun i => ?_, fun i => ?_, fun i => ?_, fun i => ?_, fun i => ?_⟩ <;>
+    rcases openSectors_cases (X := X) (s := s) (b := b) up ψ r i with ⟨h1, h2⟩ | ⟨h1, h1', h2⟩ | ⟨h1, h1', h3, h2⟩ |
+      ⟨h1, h1', h3, h2⟩ <;> rw [h2]
+  · exact X.G.isOpen_openPiece v up s b ψ r
+  · exact X.G.isOpen_openRest v up s b ψ r
+  · exact isOpen_empty
+  · exact X.hC.isOpen r hr₀ i
+  · exact hPpre
+  · exact hRpre
+  · exact isPreconnected_empty
+  · exact X.hC.isPreconnected r hr₀ i
+  · exact fun _ => hPcl
+  · exact fun _ => hRcl
+  · exact fun hne => absurd hne Set.not_nonempty_empty
+  · exact fun _ => X.hC.mem_closure_sector hr₀ i
+  · exact ⟨fun _ => h1 ▸ hpg, fun _ => hPne⟩
+  · exact ⟨fun _ => h1' ▸ hrg, fun _ => hRne⟩
+  · exact ⟨fun hne => absurd hne Set.not_nonempty_empty, fun h => absurd h3 h⟩
+  · exact ⟨fun _ => h3, fun _ => X.hC.sector_nonempty hr₀ i⟩
+  · exact ⟨fun ⟨_, α, κ₁, κ₂, _, he⟩ => absurd he (hPh α κ₁ κ₂ r), fun hh => absurd h1 hh.2.1⟩
+  · exact ⟨fun ⟨_, α, κ₁, κ₂, _, he⟩ => absurd he (hRh α κ₁ κ₂ r), fun hh => absurd h1' hh.2.2.1⟩
+  · exact ⟨fun hh => absurd hh.1 Set.not_nonempty_empty, fun hh => absurd h3 hh.2.2.2⟩
+  · rw [← sector_eq_hornSet_iff hr₀ i]
+    exact ⟨fun hh => ⟨hh.2, h1, h1', h3⟩, fun hh => ⟨X.hC.sector_nonempty hr₀ i, hh.1⟩⟩
+
 /-! ## OPEN's clauses -/
 
 section Surgery
@@ -1210,16 +1712,159 @@ theorem open_coloursAt_self (cfg : X.OpenConfig c up s b ψ ρc) (h : X.Small ρ
       · exact hc
       · exact hcol j'
 
+/-- **A point of a chart sector off the partial sector, inside `ρ/2`, is interior to OPEN's map** (it is interior to `F`, and the ray
+runs through the partial sector). -/
+theorem mem_open_interiorPts_of_sector (cfg : X.OpenConfig c up s b ψ ρc) (h : X.Small ρ) (hρc : ρ ≤ ρc) {i : Fin X.n}
+    (hi : i ≠ BranchGerms.idx s (BranchGerms.rayPos up b)) {z : ℂ} (hz : z ∈ X.G.sector v ρ i) (hzr : ‖z - v‖ < ρ / 2) :
+    z ∈ (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).interiorPts := by
+  have hzb : z ∈ ball v ρ := by rw [mem_ball, dist_eq_norm]; linarith [h.1]
+  refine (mem_open_interiorPts_iff h hzb).mpr fun hzA => ?_
+  have hzF := sector_subset_interiorPts h i hz
+  obtain ⟨A, hA, hzA'⟩ := mem_iUnion₂.mp hzA
+  rcases hA with hA | rfl | rfl
+  · rcases mergeArcs_cases h hA with ⟨j, hj⟩ | ⟨-, rfl⟩
+    · exact hzF.2 (germ_subset_Γ h j (hj hzA')).2
+    · rw [norm_of_mem_rimArc h hzA'] at hzr; exact lt_irrefl _ hzr
+  · obtain ⟨t, ht, rfl⟩ := eq_of_mem_openRay h.1 hzA'
+    have ht0 := (norm_of_mem_sector hz).1
+    rw [add_sub_cancel_left, norm_mul_e ht.1] at ht0 hzr
+    have hray : v + (t : ℂ) * e ψ ∈ X.G.sector v ρ (BranchGerms.idx s (BranchGerms.rayPos up b)) :=
+      (X.G.mem_sector_idx s _).mpr ⟨t, ⟨ht0, by linarith [h.1]⟩, ψ, cfg.ray t ⟨ht0, by linarith [h.1]⟩, rfl⟩
+    exact hi (sector_disjoint h hz hray)
+  · have := X.G.openRim_subset_sphere v up s b ψ h.1.le hzA'
+    rw [mem_sphere, dist_eq_norm] at this; linarith
+
+/-- **OPEN's interior points near `v` are OPEN's sectors**: inside `ρ/2`, the merged piece, the rest of the partial sector and the chart's
+sectors off the gap cover them. -/
+theorem open_partition (cfg : X.OpenConfig c up s b ψ ρc) (h : X.Small ρ) (hρc : ρ ≤ ρc) {r : ℝ} (hr : r ∈ Ioc 0 (ρ / 2)) :
+    (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).interiorPts ∩
+      ball v r = ⋃ i, openSectors X up s b ψ r i := by
+  have hn : 0 < X.n := by have := cfg.hbn; omega
+  have hrc : r ≤ ρc := by linarith [hr.2, h.1]
+  have hrρ : r < ρ := by linarith [hr.2, h.1]
+  have hpiece : ∀ z, z ∈ X.G.openPiece v up s b ψ r → z ∈ ⋃ i, openSectors X up s b ψ r i := fun z hz => by
+    refine mem_iUnion.mpr ⟨BranchGerms.idx s (BranchGerms.hornPos up b), ?_⟩
+    rcases openSectors_cases (X := X) (s := s) (b := b) up ψ r (BranchGerms.idx s (BranchGerms.hornPos up b)) with
+      ⟨-, h1⟩ | ⟨h1, -⟩ | ⟨h1, -⟩ | ⟨h1, -⟩
+    · rw [h1]; exact hz
+    all_goals exact absurd rfl h1
+  ext z
+  constructor
+  · rintro ⟨hzI, hzb⟩
+    have hzr : ‖z - v‖ < r := by rw [← dist_eq_norm]; exact hzb
+    have hzb' : z ∈ ball v ρ := ball_subset_ball hrρ.le hzb
+    have hzA := (mem_open_interiorPts_iff h hzb').mp hzI
+    have hzv : z ≠ v := by rintro rfl; exact hzA v_mem_openArcs
+    rcases ball_cases h hn hzb' hzv with ⟨i, hi⟩ | ⟨j, t, ht, rfl⟩
+    · have hi' := mem_sector_of_lt hi hzr
+      rcases openSectors_cases (X := X) (s := s) (b := b) up ψ r i with ⟨h1, -⟩ | ⟨-, h1, h2⟩ | ⟨-, -, h3, -⟩ |
+        ⟨-, -, -, h4⟩
+      · exact hpiece z (cfg.horn_subset_piece hrc (h1 ▸ hi'))
+      · rw [h1] at hi
+        rcases sector_rayPos_cases cfg h hi (by linarith [hr.2]) with hW | hR | hM | hRest
+        · exact hpiece z (X.G.mem_openPiece_of_lt (openWedge_subset_openPiece cfg h hW) hzr)
+        · exact absurd (mem_iUnion₂.mpr ⟨openRay v ψ ρ, Or.inr (Or.inl rfl), hR⟩) hzA
+        · exact absurd (mem_iUnion₂.mpr ⟨X.G.openRim v up s b ψ ρ, Or.inr (Or.inr rfl), hM⟩) hzA
+        · exact mem_iUnion.mpr ⟨i, by rw [h2]; exact X.G.mem_openRest_of_lt hRest hzr⟩
+      · obtain ⟨φ, hφ, hzφ⟩ := exists_dir_of_mem_gapSec h h3 hi
+        rw [zero_add] at hφ
+        exact hpiece z (hzφ ▸ cfg.mem_piece_of_Icc hrc ⟨(norm_of_mem_sector hi).1, hzr⟩ hφ)
+      · exact mem_iUnion.mpr ⟨i, by rw [h4]; exact hi'⟩
+    · rw [norm_branchPt_sub v _ _ ht.1.le] at hzr
+      by_cases hjg : j ∈ BranchGerms.gapGerm s 0 b
+      · obtain ⟨m, h1, h2, rfl⟩ := hjg
+        have hφ := liftDir_gap_germ (s := s) (⟨ht.1, ht.2.trans h.2.1⟩ : t ∈ Ioo 0 X.s₀) h1 h2
+        rw [zero_add] at hφ
+        rw [X.G.branchPt_idx]
+        exact hpiece _ (cfg.mem_piece_of_Icc hrc ⟨ht.1, hzr⟩ hφ)
+      · obtain ⟨A, hA', hzA'⟩ := mem_iUnion₂.mp (branchPt_mem_mergeArcs_inner (s := s) h hjg ⟨ht.1, by linarith [hr.2]⟩)
+        exact absurd (mem_iUnion₂.mpr ⟨A, Or.inl hA', hzA'⟩) hzA
+  · intro hz
+    obtain ⟨i, hi⟩ := mem_iUnion.mp hz
+    rcases openSectors_cases (X := X) (s := s) (b := b) up ψ r i with ⟨-, h1⟩ | ⟨-, -, h1⟩ | ⟨-, -, -, h1⟩ |
+      ⟨-, h2, -, h4⟩
+    · rw [h1] at hi
+      obtain ⟨t, ht, φ, h1', h2', h3', rfl⟩ := cfg.mem_openPiece_iff hrc hi
+      have htn : ‖v + (t : ℂ) * e φ - v‖ = t := by rw [add_sub_cancel_left, norm_mul_e ht.1.le]
+      have hzb : v + (t : ℂ) * e φ ∈ ball v ρ := by rw [mem_ball, dist_eq_norm, htn]; linarith [ht.2, hr.2]
+      exact ⟨(mem_open_interiorPts_iff h hzb).mpr
+        (cfg.not_mem_openArcs h hρc ⟨ht.1, by linarith [ht.2, hr.2]⟩ h1' h2' h3'), by
+          rw [mem_ball, dist_eq_norm, htn]; exact ht.2⟩
+    · rw [h1] at hi
+      obtain ⟨t, ht, φ, h1', h2', h3', rfl⟩ := cfg.mem_openRest_iff hrc hi
+      have htn : ‖v + (t : ℂ) * e φ - v‖ = t := by rw [add_sub_cancel_left, norm_mul_e ht.1.le]
+      have hzb : v + (t : ℂ) * e φ ∈ ball v ρ := by rw [mem_ball, dist_eq_norm, htn]; linarith [ht.2, hr.2]
+      exact ⟨(mem_open_interiorPts_iff h hzb).mpr
+        (cfg.not_mem_openArcs h hρc ⟨ht.1, by linarith [ht.2, hr.2]⟩ h1' h2' h3'), by
+          rw [mem_ball, dist_eq_norm, htn]; exact ht.2⟩
+    · rw [h1] at hi; exact absurd hi (notMem_empty z)
+    · rw [h4] at hi
+      have hzr := (norm_of_mem_sector hi).2
+      exact ⟨mem_open_interiorPts_of_sector cfg h hρc h2 (sector_mono hrρ.le i hi) (by linarith [hr.2]), by
+        rw [mem_ball, dist_eq_norm]; exact hzr⟩
+
 /-- **The degree does not rise and a horn is lost**: below `ρ/2` the sectors of the new map at `v` are the chart sectors off the
 gap, the merged piece (the horn, the swallowed horns and the wedge) and the rest of the partial sector; the last two have
 directions on an open interval, so they are no horn sets, while the horn was one. -/
-theorem open_degree_horns (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ)
+theorem open_degree_horns (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (_h' : X.Small ρ') (_hρρ' : ρ < ρ') (h : X.Small ρ)
     (hρc : ρ ≤ ρc) {m j : ℕ} (hm : F.HasDegree v m) (hj : F.HasHornCount v j) :
     ∃ m' j', m' ≤ m ∧ j' < j ∧
       (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).HasDegree v m' ∧
       (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).HasHornCount v
         j' := by
-  sorry
+  classical
+  have hn2 := cfg.two_le
+  have hn : 0 < X.n := by omega
+  have hmn : m = X.n := by rw [hm.eq X.hC.hasDegree, max_eq_left (by omega)]
+  have hjJ : j = {i : Fin X.n | X.G.β i = X.G.nextβ i}.ncard := hj.eq (hasHornCount_chart hn)
+  have hpJ : X.G.β (BranchGerms.idx s (BranchGerms.hornPos up b)) = X.G.nextβ (BranchGerms.idx s (BranchGerms.hornPos up b)) := by
+    have hc := cfg.cusp
+    rw [X.G.lift_succ] at hc
+    linarith
+  set K : Set (Fin X.n) := {i | X.G.β i = X.G.nextβ i ∧ i ≠ BranchGerms.idx s (BranchGerms.hornPos up b) ∧
+    i ≠ BranchGerms.idx s (BranchGerms.rayPos up b) ∧ i ∉ BranchGerms.gapSec s 0 b} with hK
+  set D : Set (Fin X.n) := {i | i ∉ BranchGerms.gapSec s 0 b} with hD
+  -- at each radius inside `ρ/2`, the sectors of the new map are OPEN's non-empty sectors
+  have hsec : ∀ r ∈ Ioo 0 (ρ / 2), ∀ S,
+      (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).IsSector
+        v r S ↔ ∃ i, (openSectors X up s b ψ r i).Nonempty ∧ S = openSectors X up s b ψ r i := by
+    intro r hr S
+    have hrc : r ≤ ρc := by linarith [hr.2, h.1]
+    obtain ⟨hopen, hpre, hcl, -, -⟩ := cfg.openSectors_facts hr.1 hrc
+    exact isSector_iff_of_partition' (open_partition cfg h hρc ⟨hr.1, hr.2.le⟩) hopen hpre
+      (fun i i' hii' => cfg.disjoint_openSectors hr.1 hrc hii') hcl
+  refine ⟨D.ncard, K.ncard, ?_, ?_, ?_, ?_⟩
+  · rw [hmn]
+    exact (Set.ncard_le_ncard (subset_univ D)).trans (by rw [Set.ncard_univ, Nat.card_eq_fintype_card, Fintype.card_fin])
+  · rw [hjJ]
+    exact Set.ncard_lt_ncard ⟨fun i hi => hi.1, fun hsub => (hsub hpJ).2.1 rfl⟩
+  · filter_upwards [Ioo_mem_nhdsGT h.half.1] with r hr
+    have hrc : r ≤ ρc := by linarith [hr.2, h.1]
+    obtain ⟨-, -, -, hne, -⟩ := cfg.openSectors_facts hr.1 hrc
+    have heq : {S | (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf
+        hlc).IsSector v r S} = openSectors X up s b ψ r '' D := by
+      ext S
+      rw [mem_setOf_eq, hsec r hr S]
+      exact ⟨fun ⟨i, hi, he⟩ => ⟨i, (hne i).mp hi, he.symm⟩, fun ⟨i, hi, he⟩ => ⟨i, (hne i).mpr hi, he.symm⟩⟩
+    have hinj : Set.InjOn (openSectors X up s b ψ r) D :=
+      (injOn_of_disjoint fun i i' hii' => cfg.disjoint_openSectors hr.1 hrc hii').mono fun i hi => (hne i).mpr hi
+    rw [heq, hinj.encard_image, (Set.toFinite D).cast_ncard_eq]
+  · filter_upwards [Ioo_mem_nhdsGT h.half.1] with r hr
+    have hrc : r ≤ ρc := by linarith [hr.2, h.1]
+    obtain ⟨-, -, -, -, hhorn⟩ := cfg.openSectors_facts hr.1 hrc
+    have heq : {S | (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf
+        hlc).IsSector v r S ∧ ∃ α κ₁ κ₂, κ₁ < κ₂ ∧ S = hornSet v α κ₁ κ₂ r} = openSectors X up s b ψ r '' K := by
+      ext S
+      rw [mem_setOf_eq, hsec r hr S]
+      constructor
+      · rintro ⟨⟨i, hi, rfl⟩, hh⟩
+        exact ⟨i, (hhorn i).mp ⟨hi, hh⟩, rfl⟩
+      · rintro ⟨i, hi, rfl⟩
+        obtain ⟨hne, hh⟩ := (hhorn i).mpr hi
+        exact ⟨⟨i, hne, rfl⟩, hh⟩
+    have hinj : Set.InjOn (openSectors X up s b ψ r) K :=
+      (injOn_of_disjoint fun i i' hii' => cfg.disjoint_openSectors hr.1 hrc hii').mono fun i hi => ((hhorn i).mpr hi).1
+    rw [heq, hinj.encard_image, (Set.toFinite K).cast_ncard_eq]
 
 /-- **A point of `F`'s interior off `B̄(v, ρ/2)` is interior to OPEN's map**: OPEN's new arcs there are germ arcs of `F` (the rim arcs,
 the ray and the wedge lie in `B̄(v, ρ/2)`). -/

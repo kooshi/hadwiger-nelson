@@ -378,3 +378,26 @@ exactly when inside `ρ` on a phantom germ), `openCol_of_mem_sector_out`, `open_
 Iteration clean; two leaves left (`open_degree_horns`, `open_allowedCone`).
 
 ## Stage 8 — SAVED (FS131-IO2)
+
+## Stage 9 — SAVED (FS131-IO2): `open_degree_horns` proved
+
+**OPEN's sectors at `v`** (`openSectors X up s b ψ r i`, a new definition with a spec example): the merged piece at the horn's index, the rest
+of the partial sector at its index, `∅` at the swallowed sectors' (`gapSec s 0 b`), the chart's sector elsewhere (`openSectors_cases`).
+Children: `mem_sectorBetween_of_lt`, `isPreconnected_sectorBetween` (as `isPreconnected_sector`), `Ioo_subset_coneAt_sectorBetween` (every
+direction strictly between two germs' tangents is a direction of the sector between them), `eq_of_mem_openRay`; `OpenConfig.window` (the ray
+lies in the window `(L₀, L_{b+1})`, at most a turn wide), `mem_openPiece_iff`, `mem_openRest_iff`, `exists_other`, `exists_germ_off`,
+`not_mem_openArcs` (a point at a direction in the window, off the ray, inside `ρ/2`, is on no new arc), `sector_eq_hornSet_iff` (a chart sector
+is a horn set exactly when its germs share a direction), `hasHornCount_chart` (the horn count at a chart's point is its number of cusps),
+`isSector_iff_of_partition'` and `injOn_of_disjoint` (the partition lemma with empty pieces allowed), `idx_facts`, `cone_piece_rest` (with
+`ray0`, the piece and the rest approach `v` along open intervals), `facts_of_cone` (so `v` is in their closures, they are non-empty, and no
+horn sets), `isPreconnected_piece_rest`, `disjoint_piece_rest`, `disjoint_piece_other`, `horn_subset_piece`, `mem_piece_of_Icc`,
+`mem_openPiece_of_lt`, `mem_openRest_of_lt`, `rest_subset_sector`, `disjoint_openSectors`, `openSectors_facts`; in the surgery section
+`mem_open_interiorPts_of_sector` and `open_partition` (inside `ρ/2` OPEN's interior points are its sectors).
+
+`open_degree_horns`: `m = n` (`IsSectorChart.hasDegree`, `HasDegree.eq`), `j` = the number of cusps (`hasHornCount_chart`, `HasHornCount.eq`);
+`m′` = the number of indices off the swallowed sectors (`≤ n`), `j′` = the number of cusps off the gap, the horn and the partial sector, `< j`
+since the horn is a cusp (`cfg.cusp`, `lift_succ`). The binders `h'`, `hρρ'` are unused here and renamed `_h'`, `_hρρ'` (names only; the
+statement is unchanged, as IO1 did for `open_coloursAt_self`'s `_hρc`; likewise `open_rim`'s `_hρc`). Iteration clean; one leaf left
+(`open_allowedCone`).
+
+## Stage 9 — SAVED (FS131-IO2)
