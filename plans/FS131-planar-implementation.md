@@ -51,3 +51,51 @@ Under the slot (40 GiB, 8 cpus, `BATCH=4`), queued about 6 minutes behind two ot
 The foundation leaf was developed in a scratch file `data/fs131/ip/Unico.lean` (imports `PlaneTopology`'s Mathlib modules plus
 `Topology.UrysohnsLemma`, `Topology.Homotopy.Contractible`, `Analysis.Convex.Contractible` — the last two supply `SimplyConnectedSpace ℂ`, which
 `PlaneTopology`'s present imports do not). `isPreconnected_inter_of_union_eq_univ` iterates clean there (stage 2).
+
+## Stage 2 — SAVED: the foundation (`PlaneTopology`), measured
+
+### 2.1 Proved (iteration-green; the stage build is recorded in § 3.1)
+
+Seven of `PlaneTopology`'s eight leaves, statements byte-identical to KP's (checked by `tools/fs131_ip_splice.py --check-only`, which compares
+each module statement with the scratch statement whose proof is spliced; planted control: a scratch copy with `A ∩ B` changed to `A ∪ B` in
+unicoherence's conclusion → `REFUSED: isPreconnected_inter_of_union_eq_univ: STATEMENT DIFFERS`, exit 2, while the unplanted
+`isPreconnected_compl_closedBall` in the same run passed):
+
+| leaf | how | lines |
+|---|---|---|
+| `isPreconnected_inter_of_union_eq_univ` (**unicoherence**) | KP's route with one change: lift through `Complex.isCoveringMap_exp : ℂ → ℂ ∖ {0}` instead of `Circle.exp` (no `Circle` coercions); Urysohn by `exists_continuous_zero_one_of_isClosed`; the pasted map by `Continuous.if` (the frontier of `A` lies in `A ∩ B`); constancy of integer-valued functions by the child `eq_of_intValued_of_isPreconnected` (intermediate value `n + 1/2`) | ≈ 95 |
+| `isPreconnected_compl_connectedComponentIn` | `isPreconnected_of_forall` from a point of `K`: each other component `D` with a frontier point `p ∈ K` (`nonempty_frontier_iff`, child `frontier_connectedComponentIn_subset`), `insert p D` preconnected (`subset_closure`), then `∪ K` | 33 |
+| `isPreconnected_frontier_connectedComponentIn` | unicoherence on `closure C`, `Cᶜ` (`IsOpen.frontier_eq`) | 10 |
+| `exists_inter_of_finite_closed_cover` | `isPreconnected_closed_iff` on `C i` and the finite union of the others (`Set.Finite.isClosed_biUnion`) — direct, no contradiction | 18 |
+| `isPreconnected_compl_closedBall` | polar image of `Ioi R × univ` (as `isPreconnected_holedAnnulus`); `R < 0` is `univ` | 24 |
+| `isBounded_connectedComponentIn_of_frontier_subset` (**the last exit**) | child `compl_closedBall_subset_connectedComponentIn` and child `inter_frontier_nonempty_of_isPreconnected` (Mathlib has no `IsPreconnected.inter_frontier_nonempty` at the pin: KP's docstring named it; grep finds nothing) | 14 |
+| `connectedComponentIn_eq_of_not_isBounded` | both components hold the complement of a large disc | 12 |
+
+New children (shared, in `PlaneTopology`): `eq_of_intValued_of_isPreconnected`, `inter_frontier_nonempty_of_isPreconnected`,
+`frontier_connectedComponentIn_subset`, `compl_closedBall_subset_connectedComponentIn`. New imports: `Mathlib.Topology.UrysohnsLemma`,
+`Mathlib.Topology.Homotopy.Contractible`, `Mathlib.Analysis.Convex.Contractible` (the last two give `SimplyConnectedSpace ℂ`); no project import
+changes, so `ARCHITECTURE.md`'s Imports cell stands.
+
+**Binder renamed, type unchanged** (for Keryx): the last exit never reads `hK : IsClosed K` or `hR : IsClosed R`; the unused-variables linter
+fires on both, and the gate wants linters silent. I renamed them `_hK`, `_hR` (inventory ruling 281 (a)'s reasons: a binder name is not part of
+the type; no caller passes them by name). **Generalization**: the last exit holds for any bounded `K` and any `R`.
+
+### 2.2 Measured, and the chain re-priced from the first two leaves
+
+Unicoherence: about 20 minutes of wall clock from first draft to iteration-green (three iterations, each 2–3 s of `lake env lean`), ≈ 95 lines
+against the plan's "M (≈ 120 lines)". The frontier lemma with the five small lemmas and four children: about 15 minutes, four iterations. KP's
+§ 4.2 priced "§ A and the small `PlaneTopology` lemmas: one session; unicoherence and the frontier lemma: half a session" — together they took
+under a fifth of a session. **Re-price**: the topology that has a textbook proof over Mathlib's connectedness API runs three to five times
+under KP's table; I expect § A and the two `cvb_*` pinch/hole leaves in about a third of a session, §§ B–C in about half. The crossing lemma
+is the exception (§ 2.3): its price depends on a proof route not yet in hand.
+
+### 2.3 The crossing lemma — a route question, not a statement question
+
+`inter_nonempty_of_interleaved` (KP's H) is left for step 5. KP's sketch ("Phragmén–Brouwer from unicoherence … a line from infinity to
+infinity separates its two sides") needs, at its last step, a *separation* fact about a wild set (that `K ∪` two rays separates its two
+sides), which unicoherence alone does not give: every unicoherence argument refutes by showing a frontier disconnected, and a connected
+separator never yields that. The Phragmén–Brouwer property itself is provable here in about 60 lines (the complement-of-a-component lemma above
+does the work), but applying it to the crossing needs `A ∪ B` to separate two points, which for `A ⊇ K`, `B ⊇ K'` is the crossing again. Routes
+to weigh at step 5: (a) no-retraction (`D̄ → ∂D` with degree one cannot exist, provable with the same lifting theorem on `ℂ`) plus a
+Poincaré–Miranda-type construction from disjoint `K`, `K'`; (b) the boundary graph BG (step 4) making both continua unions of arc pieces, where
+the crossing becomes a finite planar-graph fact. Recorded here so step 5 starts from it.
