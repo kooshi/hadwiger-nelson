@@ -1,11 +1,11 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's halt (inventory item 407). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–407 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–409 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
 > **Latest (written 2026-10-05 at Kooshi's halt — inventory item 407):** inventory items
-> run to **407** (IO3's hand-back adds the next).
+> run to **409**.
 >
 > **On restart, first**: (1) `/tmp` is a tmpfs and is gone; its work files are in `/home/kooshi/source/lean-dir-tmp-rescue-2026-10-05/tmp/` (a record citing
 > `/tmp/claude-1000/…` reads it there, same relative path; item 407). (2) `git fetch`; check each branch tip below against `origin` (all were pushed at the halt).
@@ -21,15 +21,13 @@ that judge the milestone, written before any job).*
 > **At the halt** — the last two jobs:
 > - **FS131-CC1** (`fs131-w5k` at `bc168474`): **done** (item 405): `Pushforward` free of `sorry`, the two-germ chart on a circle, `degree_openArc`; R1–R3,
 >   inert and the degree case split over open children; four leaves and B0 left. Rulings item 406.
-> - **FS131-IO3** (`fs131-wop`): OPEN's last leaf `open_allowedCone`, the positive `HasHornCount` example, the inhabitant note — **told to stop at a saved
->   stage** (item 407). Its record's last SAVED stage and `data/fs131/reports/FS131-IO3.md` on `fs131-wop` are the state; if its hand-back is not logged in
->   the inventory, review it by artifact first on restart.
+> - **FS131-IO3** (`fs131-wop` at `a20bb6f5`): **done — OPEN held** (item 408): `exists_open` on the standard three, no `sorry` on the branch; ruling 409.
 >
 > **Queue on restart, in order**: (1) **FS131-CC2**, lane C's continuation on `fs131-w5k` (item 406 (d)): merge `fs131-w5` in first, build, then
 > `map_degree_lensCurve`, the hard pair (`map_degree_end` with `exists_collarFit`'s C4), `sides_end`, B0 `collarModel`; fix `tools/fs131_cc_stmt.py` (406 (c));
 > brief from `data/fs131/briefs/FS131-CC1-collar.md` and CC1's record § 3.2. (2) **`stuckRun_ne_univ` and the procedure's last steps** on `fs131-w5c`
 > (item 403; from M6's and IL2's briefs: `exists_vertexStep`/`exists_arcStep` restated per items 383 (b), 385 (a), E6 record § 4.5; KL1 plan § 3.3's moves'
-> lemmas; merge `fs131-wop` once OPEN is whole; `exists_terminalSeq`). (3) OPEN's continuation on `fs131-wop`, if IO3 left leaves. (4) The rest of the queue
+> lemmas; take OPEN from `main` once it lands (or merge `fs131-wop`); `exists_terminalSeq`). (3) **OPEN's landing on `main`** (item 409): the gate on `fs131-wop` at `a20bb6f5`, counts filed with `scripts/gate_report.py` and the fact audit before committing, as ML1 did (items 375–376). (4) The rest of the queue
 > paragraph below, from its item (4).
 >
 > **Done since the compaction**: **FS131-CG1** (item 402: the collar's lane G complete — `RadialPush`, `CollarMap` free of `sorry`); **FS131-IO2** (items 400–401: four of OPEN's five leaves in the kernel; `margin` and `ray0` repairs made); **FS131-M6** (items 398–399: **`fs131-w5` merged into `fs131-w5c`**; `run_hornBoundsQR` in the kernel; `stuckRun_ne_univ`
@@ -132,7 +130,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 | job | model | brief | state |
 |---|---|---|---|
 | FS131-CC1 (the collar bend's lane C on `fs131-w5k`) | Opus | `data/fs131/briefs/FS131-CC1-collar.md` | done, item 405 |
-| FS131-IO3 (OPEN's last leaf on `fs131-wop`) | Opus | `data/fs131/briefs/FS131-IO3-open.md` | stopped at a saved stage at the halt; report on its branch |
+| FS131-IO3 (OPEN's last leaf on `fs131-wop`) | Opus | `data/fs131/briefs/FS131-IO3-open.md` | done, item 408 (OPEN held); lands by item 409 |
 
 
 **Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.

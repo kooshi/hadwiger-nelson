@@ -3680,3 +3680,23 @@ reason by the close.*
      identifiers is not copied, by the rule that keeps them out of files). Records that cite a `/tmp/claude-1000/…` path read it under that folder at the
      same relative path. Every worktree: no uncommitted tracked change, nothing unpushed (checked against `origin`); untracked files are build logs and job
      scratch on disk, which survive.
+408. **FS131-IO3 done — OPEN held** (Stage 15 SAVED at Kooshi's halt, all three of its items finished; harness ≈ 384k by the task notice; record `fs131-wop`'s
+     `plans/FS131-IO-implementation.md`, Stages 11–15; report `data/fs131/reports/FS131-IO3.md`; commits `5177c867`, `fc897603`, `37706727`, `864e41b7`,
+     `4ca66d4b`, `a20bb6f5`, pushed). **Results, [kernel] on exactly the standard three**: `ArcMap.Near.open_allowedCone` (OPEN leaves `c`'s allowed cone
+     unchanged at every point off the closed disc — E6-OPEN's last clause), so **`ArcMap.exists_open` holds: FS131-E6-OPEN is proved whole**, its statement as
+     IO1 read it against E6-OPEN (record § 2.2); 15 children (`data/fs131/io/io3-new-decls.txt`; `OpenConfig.exists_clearSet` uses the `margin` field); the
+     positive spec example `cuspFrag.HasHornCount 0 2`, with a failing control. `exists_open`'s docstring carries the inhabitant note: no Lean model of its
+     hypotheses yet; FS131-E6's twelve-colour map (E6 derivation §§ 3.1–3.3) satisfies them at [hand]; `cuspFrag` does not. **Receipt** (Keryx):
+     `origin/fs131-wop` is `a20bb6f5`, the tree clean; the build log (`build/gate/build/20261005T124448Z-133559.log` in that tree) ends "Build completed
+     successfully (5750 jobs)" with 0 warnings of any kind, `sorry` included; `OpenMove` 0 `sorry` by grep; `data/fs131/io/axioms-io3-final.txt` parsed: 105
+     records, 103 on exactly the standard three, 2 on fewer (`BranchGerms.idx_idx`, `BranchGerms.turns_idx`), 0 `sorryAx`, 0 foreign, `exists_open` and
+     `open_allowedCone` standard by name; `git diff 5177c867 a20bb6f5` on `OpenMove` adds theorems and removes no statement line. **Correction owed**: IO1's
+     record § 3.3 says item 375 names "the same gap" (a missing inhabitant) for `exists_merge`; item 375 does not, and `exists_merge`'s docstring
+     (`Contact.lean` l. 1520–1524) carries no inhabitant note. **Slip, its own, corrected**: a line range cited as l. 1513–1524 (§ 15.2). **Owed**: a Lean model
+     of `exists_open`'s hypotheses (E6's map), the inhabitant the note names — held for the filing with item 96's vacuity rule. Credit: IO3, for OPEN's last leaf
+     and a clean stop at the halt.
+409. **Ruling on OPEN: it lands on `main` by its own gate-and-land job on restart** (queue item (3), as ML1 landed MERGE, item 375): the gate on `fs131-wop`
+     (build, zero `sorry`, `axioms.sh` and its self-test, `vacuity.sh` with the counts reconciled — the new theorems add sites — linters), then the counts filed
+     by `scripts/gate_report.py` and the fact audit before committing. Alternative weighed: merge `fs131-wop` into `fs131-w5c` and land OPEN with wave 5 (ruling
+     401's plan). Why: the branch is `main` plus OPEN with no `sorry` anywhere, gate-ready now; landing it alone keeps wave 5's landing smaller and puts OPEN's
+     counts on file; the procedure job then takes OPEN from `main`. Confidence: high. The slot is not refilled (Kooshi's halt, item 407). **Nothing is running.**
