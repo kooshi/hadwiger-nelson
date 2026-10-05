@@ -72,51 +72,7 @@ def filledGraph : SimpleGraph {T : Set ℂ // F.IsOuterTile T} where
   symm := ⟨fun T T' h => ⟨h.1.symm, by rw [inter_comm]; exact h.2⟩⟩
   loopless := ⟨fun T h => h.1 rfl⟩
 
-end ArcMap
-
-/-! ### Spec examples -/
-
-section Spec
-
-/-- A tile of the one-colour plane is the plane (a spec example for `mapGraph`: the one-colour plane's map graph has one vertex, so no
-edge). -/
-example (j : Fin 2) (T T' : {T : Set ℂ // (ArcMap.const univ isOpen_univ j).IsTile T}) :
-    ¬ (ArcMap.const univ isOpen_univ j).mapGraph.Adj T T' := by
-  rintro ⟨hne, -⟩
-  apply hne
-  obtain ⟨T, x, hx, rfl⟩ := T
-  obtain ⟨T', y, hy, rfl⟩ := T'
-  have hU : (ArcMap.const univ isOpen_univ j).interiorPts = univ := by simp
-  apply Subtype.ext
-  simp only [hU, connectedComponentIn_univ, PreconnectedSpace.connectedComponent_eq_univ]
-
-/-- **Adversary**: a set with empty closure-complement has no hole (a spec example for `IsHoleOf`: the plane is no tile's hole-maker). -/
-example (Hc : Set ℂ) : ¬ ArcMap.IsHoleOf (univ : Set ℂ) Hc := by
-  rintro ⟨⟨z, hz⟩, hsub, -⟩
-  simpa using hsub hz
-
-/-- **Adversary: a chain to the outside is no hole** (FS131-I5b's counterexample to the old definition, as a plane set; plan § 2.3): the
-unit disc minus the closed discs of radius `1/4` about `1/4` and `3/4` — the first touches the second at `1/2`, the second touches the unit
-circle at `1`. A separated part of the complement holding either small disc holds the other, then the outside, so it is unbounded. (Under the
-old definition the disc about `1/4` was a hole, and `cvb_hole_disconnected` was false.) -/
-theorem not_isHoleOf_chain (Hc : Set ℂ) :
-    ¬ ArcMap.IsHoleOf (ball 0 1 \ (closedBall (1 / 4 : ℂ) (1 / 4) ∪ closedBall (3 / 4 : ℂ) (1 / 4))) Hc := by
-  sorry
-
-/-- **A cluster is one hole** (item 242's case; plan § 2.3): the unit disc minus the closed discs of radius `1/4` about `±1/4`, which touch at
-`0` and miss the unit circle; the two open small discs together are a hole (neither alone is: their closures touch). Exercises the separation
-clause on a hole of two components. -/
-theorem isHoleOf_cluster :
-    ArcMap.IsHoleOf (ball 0 1 \ (closedBall (-1 / 4 : ℂ) (1 / 4) ∪ closedBall (1 / 4 : ℂ) (1 / 4)))
-      (ball (-1 / 4 : ℂ) (1 / 4) ∪ ball (1 / 4 : ℂ) (1 / 4)) ∧
-    ¬ ArcMap.IsHoleOf (ball 0 1 \ (closedBall (-1 / 4 : ℂ) (1 / 4) ∪ closedBall (1 / 4 : ℂ) (1 / 4))) (ball (1 / 4 : ℂ) (1 / 4)) := by
-  sorry
-
-end Spec
-
-namespace ArcMap
-
-/-! ## Holes and filled tiles (FS131-IP5): openness, nesting, and every tile inside an outer tile's fill -/
+/-! ### Holes are open, and hold whole complementary components (FS131-IP5) -/
 
 namespace IsHoleOf
 
@@ -161,6 +117,351 @@ theorem subset_compl_outerDom (h : IsHoleOf T Hc) : Hc ⊆ (outerDom T)ᶜ := fu
   hyo.2 (h.2.2.1.subset (h.connectedComponentIn_subset hy))
 
 end IsHoleOf
+
+end ArcMap
+
+/-! ### Spec examples -/
+
+section Spec
+
+/-- A tile of the one-colour plane is the plane (a spec example for `mapGraph`: the one-colour plane's map graph has one vertex, so no
+edge). -/
+example (j : Fin 2) (T T' : {T : Set ℂ // (ArcMap.const univ isOpen_univ j).IsTile T}) :
+    ¬ (ArcMap.const univ isOpen_univ j).mapGraph.Adj T T' := by
+  rintro ⟨hne, -⟩
+  apply hne
+  obtain ⟨T, x, hx, rfl⟩ := T
+  obtain ⟨T', y, hy, rfl⟩ := T'
+  have hU : (ArcMap.const univ isOpen_univ j).interiorPts = univ := by simp
+  apply Subtype.ext
+  simp only [hU, connectedComponentIn_univ, PreconnectedSpace.connectedComponent_eq_univ]
+
+/-- **Adversary**: a set with empty closure-complement has no hole (a spec example for `IsHoleOf`: the plane is no tile's hole-maker). -/
+example (Hc : Set ℂ) : ¬ ArcMap.IsHoleOf (univ : Set ℂ) Hc := by
+  rintro ⟨⟨z, hz⟩, hsub, -⟩
+  simpa using hsub hz
+
+/-! ### The two adversaries' plane set: the unit disc minus two closed discs of radius `1/4` (FS131-IP5) -/
+
+/-- A point reached from inside `T` along a continuous path lies in `cl T`. -/
+theorem mem_closure_of_path {T : Set ℂ} {z : ℂ} (γ : ℝ → ℂ) (hγ : Continuous γ) (h0 : γ 0 = z)
+    (hT : ∀ᶠ t in 𝓝[>] (0 : ℝ), γ t ∈ T) : z ∈ closure T :=
+  h0 ▸ mem_closure_of_tendsto ((hγ.tendsto 0).mono_left nhdsWithin_le_nhds) hT
+
+/-- Along a path from `z`, eventually inside any open set holding `z`. -/
+theorem eventually_path_mem {U : Set ℂ} {z : ℂ} (hU : IsOpen U) (hz : z ∈ U) (γ : ℝ → ℂ) (hγ : Continuous γ) (h0 : γ 0 = z) :
+    ∀ᶠ t in 𝓝[>] (0 : ℝ), γ t ∈ U :=
+  Filter.Eventually.filter_mono nhdsWithin_le_nhds ((hγ.tendsto 0).eventually (hU.mem_nhds (h0.symm ▸ hz)))
+
+/-- The open set the adversaries read: inside the unit circle, outside two closed discs of radius `1/4`. -/
+theorem mem_disc_minus_iff {c₁ c₂ w : ℂ} :
+    w ∈ ball 0 1 \ (closedBall c₁ (1 / 4) ∪ closedBall c₂ (1 / 4)) ↔ ‖w‖ < 1 ∧ 1 / 4 < ‖w - c₁‖ ∧ 1 / 4 < ‖w - c₂‖ := by
+  simp only [Set.mem_sdiff, mem_ball, mem_union, mem_closedBall, dist_eq_norm, sub_zero, not_or, not_le]
+
+/-- **Points of the closed region off the tangencies are limits of the open one**: a point of the closed unit disc outside the two open
+discs, where at most one of the three circles passes, is reached from the open region by a radial push (inward from the unit circle, outward
+from a small circle). -/
+theorem mem_closure_disc_minus {c₁ c₂ z : ℂ} (hz1 : ‖z‖ ≤ 1) (h1 : 1 / 4 ≤ ‖z - c₁‖) (h2 : 1 / 4 ≤ ‖z - c₂‖)
+    (hu : ‖z‖ = 1 → 1 / 4 < ‖z - c₁‖ ∧ 1 / 4 < ‖z - c₂‖) (hd1 : ‖z - c₁‖ = 1 / 4 → ‖z‖ < 1 ∧ 1 / 4 < ‖z - c₂‖)
+    (hd2 : ‖z - c₂‖ = 1 / 4 → ‖z‖ < 1 ∧ 1 / 4 < ‖z - c₁‖) :
+    z ∈ closure (ball 0 1 \ (closedBall c₁ (1 / 4) ∪ closedBall c₂ (1 / 4))) := by
+  have hO : ∀ c : ℂ, IsOpen {w : ℂ | 1 / 4 < ‖w - c‖} := fun c =>
+    isOpen_lt continuous_const (continuous_norm.comp (continuous_id.sub continuous_const))
+  have hB : IsOpen {w : ℂ | ‖w‖ < 1} := isOpen_lt continuous_norm continuous_const
+  have hpos : ∀ᶠ t in 𝓝[>] (0 : ℝ), 0 < t ∧ t < 1 := Ioo_mem_nhdsGT one_pos
+  rcases eq_or_lt_of_le hz1 with hz | hz
+  · -- inward from the unit circle
+    obtain ⟨h1', h2'⟩ := hu hz
+    have hγ : Continuous fun t : ℝ => ((1 - t : ℝ) : ℂ) * z := (Complex.continuous_ofReal.comp (continuous_const.sub continuous_id)).mul continuous_const
+    refine mem_closure_of_path _ hγ (by simp) ?_
+    filter_upwards [hpos, eventually_path_mem (hO c₁) h1' _ hγ (by simp), eventually_path_mem (hO c₂) h2' _ hγ (by simp)]
+      with t ht ht1 ht2
+    refine mem_disc_minus_iff.mpr ⟨?_, ht1, ht2⟩
+    rw [norm_mul, Complex.norm_real, Real.norm_of_nonneg (by linarith [ht.2]), hz]
+    linarith [ht.1]
+  rcases eq_or_lt_of_le h1 with hc1 | hc1
+  · -- outward from the first small circle
+    obtain ⟨hz', h2'⟩ := hd1 hc1.symm
+    have hγ : Continuous fun t : ℝ => z + (t : ℂ) * (z - c₁) := continuous_const.add (Complex.continuous_ofReal.mul continuous_const)
+    refine mem_closure_of_path _ hγ (by simp) ?_
+    filter_upwards [hpos, eventually_path_mem hB hz' _ hγ (by simp), eventually_path_mem (hO c₂) h2' _ hγ (by simp)]
+      with t ht ht0 ht2
+    refine mem_disc_minus_iff.mpr ⟨ht0, ?_, ht2⟩
+    have : z + (t : ℂ) * (z - c₁) - c₁ = ((1 + t : ℝ) : ℂ) * (z - c₁) := by push_cast; ring
+    rw [this, norm_mul, Complex.norm_real, Real.norm_of_nonneg (by linarith [ht.1]), ← hc1]
+    nlinarith [ht.1]
+  rcases eq_or_lt_of_le h2 with hc2 | hc2
+  · -- outward from the second small circle
+    obtain ⟨hz', h1'⟩ := hd2 hc2.symm
+    have hγ : Continuous fun t : ℝ => z + (t : ℂ) * (z - c₂) := continuous_const.add (Complex.continuous_ofReal.mul continuous_const)
+    refine mem_closure_of_path _ hγ (by simp) ?_
+    filter_upwards [hpos, eventually_path_mem hB hz' _ hγ (by simp), eventually_path_mem (hO c₁) h1' _ hγ (by simp)]
+      with t ht ht0 ht1
+    refine mem_disc_minus_iff.mpr ⟨ht0, ht1, ?_⟩
+    have : z + (t : ℂ) * (z - c₂) - c₂ = ((1 + t : ℝ) : ℂ) * (z - c₂) := by push_cast; ring
+    rw [this, norm_mul, Complex.norm_real, Real.norm_of_nonneg (by linarith [ht.1]), ← hc2]
+    nlinarith [ht.1]
+  exact subset_closure (mem_disc_minus_iff.mpr ⟨hz, hc1, hc2⟩)
+
+/-- **A tangency point is a limit of the open region**: at `p` with `p − c₁ = −1/4`, `p − c₂ = 1/4` (two small circles tangent at `p`, inside
+the unit circle), the vertical path `p + t i` enters the region. -/
+theorem mem_closure_disc_minus_tangent {c₁ c₂ p : ℂ} (hp : ‖p‖ < 1) (h1 : p - c₁ = (1 / 4 : ℝ)) (h2 : p - c₂ = (-1 / 4 : ℝ)) :
+    p ∈ closure (ball 0 1 \ (closedBall c₁ (1 / 4) ∪ closedBall c₂ (1 / 4))) := by
+  have hγ : Continuous fun t : ℝ => p + (t : ℂ) * I := continuous_const.add (Complex.continuous_ofReal.mul continuous_const)
+  refine mem_closure_of_path _ hγ (by simp) ?_
+  filter_upwards [Ioo_mem_nhdsGT (one_pos (α := ℝ)),
+    eventually_path_mem (isOpen_lt continuous_norm continuous_const) (show p ∈ {w : ℂ | ‖w‖ < 1} from hp) _ hγ (by simp)]
+    with t ht ht0
+  refine mem_disc_minus_iff.mpr ⟨ht0, ?_, ?_⟩
+  · rw [show p + (t : ℂ) * I - c₁ = ((1 / 4 : ℝ) : ℂ) + (t : ℂ) * I by rw [← h1]; ring, Complex.norm_add_mul_I,
+      Real.lt_sqrt (by norm_num)]
+    nlinarith [ht.1]
+  · rw [show p + (t : ℂ) * I - c₂ = ((-1 / 4 : ℝ) : ℂ) + (t : ℂ) * I by rw [← h2]; ring, Complex.norm_add_mul_I,
+      Real.lt_sqrt (by norm_num)]
+    nlinarith [ht.1]
+
+/-- The squared distance to a real centre. -/
+theorem sq_norm_sub_ofReal (z : ℂ) (a : ℝ) : ‖z - a‖ ^ 2 = (z.re - a) ^ 2 + z.im ^ 2 := by
+  rw [Complex.sq_norm, Complex.normSq_apply]; simp only [Complex.sub_re, Complex.ofReal_re, Complex.sub_im, Complex.ofReal_im,
+    sub_zero]; ring
+
+/-- `‖w‖ ≤ r ↔ ‖w‖² ≤ r²` for `r ≥ 0`, as used on the adversaries' circles. -/
+theorem norm_le_iff_sq {w : ℂ} {r : ℝ} (hr : 0 ≤ r) : ‖w‖ ≤ r ↔ ‖w‖ ^ 2 ≤ r ^ 2 :=
+  (pow_le_pow_iff_left₀ (norm_nonneg w) hr two_ne_zero).symm
+
+/-- **The closure of the unit disc minus two closed discs** of radius `1/4` about real centres in `[-1/2, 3/4]`, given which points are
+limits: off the three open pieces, every point is. -/
+theorem compl_closure_disc_minus_subset {c₁ c₂ : ℂ}
+    (hlim : ∀ z : ℂ, ‖z‖ ≤ 1 → 1 / 4 ≤ ‖z - c₁‖ → 1 / 4 ≤ ‖z - c₂‖ →
+      z ∈ closure (ball 0 1 \ (closedBall c₁ (1 / 4) ∪ closedBall c₂ (1 / 4)))) :
+    (closure (ball 0 1 \ (closedBall c₁ (1 / 4) ∪ closedBall c₂ (1 / 4))))ᶜ ⊆ (closedBall 0 1)ᶜ ∪ ball c₁ (1 / 4) ∪ ball c₂ (1 / 4) := by
+  intro z hz
+  by_contra h
+  simp only [mem_union, mem_compl_iff, mem_closedBall, mem_ball, dist_eq_norm, sub_zero, not_or, not_le, not_lt] at h
+  exact hz (hlim z h.1.1 h.1.2 h.2)
+
+/-- The three open pieces miss the closure (it lies in the closed region). -/
+theorem closure_disc_minus_subset (c₁ c₂ : ℂ) :
+    closure (ball 0 1 \ (closedBall c₁ (1 / 4) ∪ closedBall c₂ (1 / 4))) ⊆ closedBall 0 1 \ (ball c₁ (1 / 4) ∪ ball c₂ (1 / 4)) :=
+  closure_minimal (sdiff_subset_sdiff ball_subset_closedBall (union_subset_union ball_subset_closedBall ball_subset_closedBall))
+    (isClosed_closedBall.sdiff (isOpen_ball.union isOpen_ball))
+
+/-- Squared norms of a point against real centres. -/
+theorem sq_facts (z : ℂ) (a : ℝ) {r : ℝ} :
+    (‖z - a‖ ≤ r → (z.re - a) ^ 2 + z.im ^ 2 ≤ r ^ 2) ∧ (‖z - a‖ = r → (z.re - a) ^ 2 + z.im ^ 2 = r ^ 2) := by
+  rw [← sq_norm_sub_ofReal]
+  exact ⟨fun h => pow_le_pow_left₀ (norm_nonneg _) h 2, fun h => by rw [h]⟩
+
+/-- **Adversary: a chain to the outside is no hole** (FS131-I5b's counterexample to the old definition, as a plane set; plan § 2.3): the
+unit disc minus the closed discs of radius `1/4` about `1/4` and `3/4` — the first touches the second at `1/2`, the second touches the unit
+circle at `1`. A separated part of the complement holding either small disc holds the other, then the outside, so it is unbounded. (Under the
+old definition the disc about `1/4` was a hole, and `cvb_hole_disconnected` was false.) -/
+theorem not_isHoleOf_chain (Hc : Set ℂ) :
+    ¬ ArcMap.IsHoleOf (ball 0 1 \ (closedBall (1 / 4 : ℂ) (1 / 4) ∪ closedBall (3 / 4 : ℂ) (1 / 4))) Hc := by
+  have e₁ : (1 / 4 : ℂ) = ((1 / 4 : ℝ) : ℂ) := by push_cast; ring
+  have e₂ : (3 / 4 : ℂ) = ((3 / 4 : ℝ) : ℂ) := by push_cast; ring
+  have hn0 : ∀ z : ℂ, ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := fun z => by rw [Complex.sq_norm, Complex.normSq_apply]; ring
+  have n₁ : ‖(1 / 4 : ℂ)‖ = 1 / 4 := by rw [e₁, Complex.norm_real]; norm_num
+  have hO1 : IsOpen {w : ℂ | 1 / 4 < ‖w - 1 / 4‖} := isOpen_lt continuous_const (continuous_norm.comp (continuous_id.sub continuous_const))
+  -- every point of the closed region is a limit (the tangencies are `1/2` and `1`)
+  have hlim : ∀ z : ℂ, ‖z‖ ≤ 1 → 1 / 4 ≤ ‖z - 1 / 4‖ → 1 / 4 ≤ ‖z - 3 / 4‖ →
+      z ∈ closure (ball 0 1 \ (closedBall (1 / 4 : ℂ) (1 / 4) ∪ closedBall (3 / 4 : ℂ) (1 / 4))) := by
+    intro z hz h1 h2
+    by_cases hh : z = ((1 / 2 : ℝ) : ℂ)
+    · subst hh
+      exact mem_closure_disc_minus_tangent (by rw [Complex.norm_real]; norm_num) (by push_cast; ring) (by push_cast; ring)
+    by_cases hh' : z = 1
+    · subst hh'
+      have hγ : Continuous fun t : ℝ => ((1 - t : ℝ) : ℂ) + ((√t : ℝ) : ℂ) * I :=
+        (Complex.continuous_ofReal.comp (continuous_const.sub continuous_id)).add
+          ((Complex.continuous_ofReal.comp Real.continuous_sqrt).mul continuous_const)
+      refine mem_closure_of_path _ hγ (by simp) ?_
+      have h1' : (1 : ℂ) ∈ {w : ℂ | 1 / 4 < ‖w - 1 / 4‖} := by
+        show (1 / 4 : ℝ) < ‖(1 : ℂ) - 1 / 4‖
+        rw [show (1 : ℂ) - 1 / 4 = ((3 / 4 : ℝ) : ℂ) by push_cast; ring, Complex.norm_real]; norm_num
+      filter_upwards [Ioo_mem_nhdsGT (one_pos (α := ℝ)), eventually_path_mem hO1 h1' _ hγ (by simp)] with t ht ht1
+      have hs : (√t) ^ 2 = t := Real.sq_sqrt ht.1.le
+      refine mem_disc_minus_iff.mpr ⟨?_, ht1, ?_⟩
+      · rw [Complex.norm_add_mul_I, Real.sqrt_lt' one_pos]; nlinarith [ht.1, ht.2]
+      · rw [show ((1 - t : ℝ) : ℂ) + ((√t : ℝ) : ℂ) * I - 3 / 4 = ((1 / 4 - t : ℝ) : ℂ) + ((√t : ℝ) : ℂ) * I by push_cast; ring,
+          Complex.norm_add_mul_I, Real.lt_sqrt (by norm_num)]
+        nlinarith [ht.1]
+    have hne₁ : ¬ ((z.re - 1 / 2) ^ 2 = 0 ∧ z.im ^ 2 = 0) := fun ⟨a, b⟩ => hh (Complex.ext
+      (by simp; linarith [pow_eq_zero_iff (n := 2) two_ne_zero |>.mp a]) (by simp [pow_eq_zero_iff (n := 2) two_ne_zero |>.mp b]))
+    have hne₂ : ¬ ((z.re - 1) ^ 2 = 0 ∧ z.im ^ 2 = 0) := fun ⟨a, b⟩ => hh' (Complex.ext
+      (by simp; linarith [pow_eq_zero_iff (n := 2) two_ne_zero |>.mp a]) (by simp [pow_eq_zero_iff (n := 2) two_ne_zero |>.mp b]))
+    have q1 := sq_facts z (1 / 4) (r := 1 / 4)
+    have q2 := sq_facts z (3 / 4) (r := 1 / 4)
+    rw [← e₁] at q1
+    rw [← e₂] at q2
+    have hre : z.re ^ 2 ≤ 1 := by
+      have := pow_le_pow_left₀ (norm_nonneg z) hz 2
+      rw [hn0] at this; nlinarith [sq_nonneg z.im]
+    refine mem_closure_disc_minus hz h1 h2 (fun hu => ⟨?_, ?_⟩) (fun hd => ⟨?_, ?_⟩) (fun hd => ⟨?_, ?_⟩)
+    · linarith [norm_sub_norm_le z (1 / 4 : ℂ)]
+    · by_contra h
+      push Not at h
+      have k0 := hn0 z
+      rw [hu] at k0
+      have k2 := q2.1 h
+      exact hne₂ ⟨by nlinarith [sq_nonneg (z.re - 1), sq_nonneg z.im], by nlinarith [sq_nonneg (z.re - 1), sq_nonneg z.im]⟩
+    · linarith [norm_le_norm_add_norm_sub' z (1 / 4 : ℂ)]
+    · by_contra h
+      push Not at h
+      have k1 := q1.2 hd
+      have k2 := q2.1 h
+      exact hne₁ ⟨by nlinarith [sq_nonneg (z.re - 1 / 2), sq_nonneg z.im], by nlinarith [sq_nonneg (z.re - 1 / 2), sq_nonneg z.im]⟩
+    · by_contra h
+      push Not at h
+      have k0 : 1 ≤ z.re ^ 2 + z.im ^ 2 := by rw [← hn0]; nlinarith [norm_nonneg z]
+      have k2 := q2.2 hd
+      exact hne₂ ⟨by nlinarith [sq_nonneg (z.re - 1), sq_nonneg z.im], by nlinarith [sq_nonneg (z.re - 1), sq_nonneg z.im]⟩
+    · by_contra h
+      push Not at h
+      have k1 := q1.1 h
+      have k2 := q2.2 hd
+      exact hne₁ ⟨by nlinarith [sq_nonneg (z.re - 1 / 2), sq_nonneg z.im], by nlinarith [sq_nonneg (z.re - 1 / 2), sq_nonneg z.im]⟩
+  -- the three open pieces of the complement, and their touching points
+  intro hH
+  have hHo := hH.isOpen
+  have hRo := hH.isOpen_diff
+  obtain ⟨hne, hsub, hb, hsep⟩ := hH
+  have hO := compl_closure_disc_minus_subset hlim
+  have hcl := closure_disc_minus_subset (1 / 4 : ℂ) (3 / 4)
+  set O := (closure (ball 0 1 \ (closedBall (1 / 4 : ℂ) (1 / 4) ∪ closedBall (3 / 4 : ℂ) (1 / 4))))ᶜ with hOdef
+  have hE : (closedBall (0 : ℂ) 1)ᶜ ⊆ O := fun z hz h => hz (hcl h).1
+  have hB₁ : ball (1 / 4 : ℂ) (1 / 4) ⊆ O := fun z hz h => (hcl h).2 (Or.inl hz)
+  have hB₂ : ball (3 / 4 : ℂ) (1 / 4) ⊆ O := fun z hz h => (hcl h).2 (Or.inr hz)
+  have side : ∀ P : Set ℂ, IsPreconnected P → P ⊆ O → P ⊆ Hc ∨ P ⊆ O \ Hc := fun P hP hPO =>
+    hP.subset_or_subset hHo hRo (Set.disjoint_left.mpr fun z hz hz' => hz'.2 hz) fun z hz => by
+      by_cases h : z ∈ Hc
+      · exact Or.inl h
+      · exact Or.inr ⟨hPO hz, h⟩
+  have nottouch : ∀ {P Q : Set ℂ}, P ⊆ Hc → Q ⊆ O \ Hc → (closure P ∩ closure Q).Nonempty → False :=
+    fun hP hQ ⟨w, hw1, hw2⟩ => Set.disjoint_left.mp hsep (closure_mono hP hw1) (closure_mono hQ hw2)
+  have half : (1 / 2 : ℂ) ∈ closure (ball (1 / 4 : ℂ) (1 / 4)) ∩ closure (ball (3 / 4 : ℂ) (1 / 4)) := by
+    rw [closure_ball _ (by norm_num), closure_ball _ (by norm_num), mem_inter_iff, mem_closedBall, mem_closedBall, dist_eq_norm,
+      dist_eq_norm, show (1 / 2 : ℂ) - 1 / 4 = ((1 / 4 : ℝ) : ℂ) by push_cast; ring,
+      show (1 / 2 : ℂ) - 3 / 4 = ((-1 / 4 : ℝ) : ℂ) by push_cast; ring, Complex.norm_real, Complex.norm_real]
+    norm_num
+  have one : (1 : ℂ) ∈ closure (ball (3 / 4 : ℂ) (1 / 4)) ∩ closure (closedBall (0 : ℂ) 1)ᶜ := by
+    refine ⟨?_, ?_⟩
+    · rw [closure_ball _ (by norm_num), mem_closedBall, dist_eq_norm,
+        show (1 : ℂ) - 3 / 4 = ((1 / 4 : ℝ) : ℂ) by push_cast; ring, Complex.norm_real]
+      norm_num
+    · have hγ : Continuous fun t : ℝ => ((1 + t : ℝ) : ℂ) := Complex.continuous_ofReal.comp (continuous_const.add continuous_id)
+      refine mem_closure_of_path _ hγ (by simp) ?_
+      filter_upwards [Ioo_mem_nhdsGT (one_pos (α := ℝ))] with t ht
+      rw [mem_compl_iff, mem_closedBall, dist_zero_right, Complex.norm_real, Real.norm_of_nonneg (by linarith [ht.1])]
+      linarith [ht.1]
+  -- the outside is unbounded, so it misses `Hc`; hence so do the discs chained to it
+  have hEH : ¬ (closedBall (0 : ℂ) 1)ᶜ ⊆ Hc := fun h => by
+    obtain ⟨R, hR⟩ := hb.subset_closedBall 0
+    obtain ⟨z, hz⟩ := ArcMap.exists_not_mem_closedBall_zero (max R 1)
+    exact hz (closedBall_subset_closedBall (le_max_left _ _) (hR (h fun h' => hz (closedBall_subset_closedBall (le_max_right _ _) h'))))
+  have hEout : (closedBall (0 : ℂ) 1)ᶜ ⊆ O \ Hc := (side _ (isPreconnected_compl_closedBall 0 1) hE).resolve_left hEH
+  have hB₂out : ball (3 / 4 : ℂ) (1 / 4) ⊆ O \ Hc :=
+    (side _ (convex_ball _ _).isPreconnected hB₂).resolve_left fun h => nottouch h hEout ⟨1, one⟩
+  have hB₁out : ball (1 / 4 : ℂ) (1 / 4) ⊆ O \ Hc :=
+    (side _ (convex_ball _ _).isPreconnected hB₁).resolve_left fun h => nottouch h hB₂out ⟨1 / 2, half⟩
+  obtain ⟨h, hh⟩ := hne
+  rcases hO (hsub hh) with (h' | h') | h'
+  · exact (hEout h').2 hh
+  · exact (hB₁out h').2 hh
+  · exact (hB₂out h').2 hh
+
+/-- **A cluster is one hole** (item 242's case; plan § 2.3): the unit disc minus the closed discs of radius `1/4` about `±1/4`, which touch at
+`0` and miss the unit circle; the two open small discs together are a hole (neither alone is: their closures touch). Exercises the separation
+clause on a hole of two components. -/
+theorem isHoleOf_cluster :
+    ArcMap.IsHoleOf (ball 0 1 \ (closedBall (-1 / 4 : ℂ) (1 / 4) ∪ closedBall (1 / 4 : ℂ) (1 / 4)))
+      (ball (-1 / 4 : ℂ) (1 / 4) ∪ ball (1 / 4 : ℂ) (1 / 4)) ∧
+    ¬ ArcMap.IsHoleOf (ball 0 1 \ (closedBall (-1 / 4 : ℂ) (1 / 4) ∪ closedBall (1 / 4 : ℂ) (1 / 4))) (ball (1 / 4 : ℂ) (1 / 4)) := by
+  have e₁ : (-1 / 4 : ℂ) = ((-1 / 4 : ℝ) : ℂ) := by push_cast; ring
+  have e₂ : (1 / 4 : ℂ) = ((1 / 4 : ℝ) : ℂ) := by push_cast; ring
+  have n₁ : ‖(-1 / 4 : ℂ)‖ = 1 / 4 := by rw [e₁, Complex.norm_real]; norm_num
+  have n₂ : ‖(1 / 4 : ℂ)‖ = 1 / 4 := by rw [e₂, Complex.norm_real]; norm_num
+  have hcl := closure_disc_minus_subset (-1 / 4 : ℂ) (1 / 4)
+  -- every point of the closed region is a limit (the one tangency is `0`)
+  have hlim : ∀ z : ℂ, ‖z‖ ≤ 1 → 1 / 4 ≤ ‖z - (-1 / 4)‖ → 1 / 4 ≤ ‖z - 1 / 4‖ →
+      z ∈ closure (ball 0 1 \ (closedBall (-1 / 4 : ℂ) (1 / 4) ∪ closedBall (1 / 4 : ℂ) (1 / 4))) := by
+    intro z hz h1 h2
+    by_cases h0 : z = 0
+    · subst h0
+      exact mem_closure_disc_minus_tangent (by simp) (by push_cast; ring) (by push_cast; ring)
+    have hne : ¬ (z.re ^ 2 = 0 ∧ z.im ^ 2 = 0) := fun ⟨a, b⟩ => h0 (Complex.ext
+      (by simp [pow_eq_zero_iff (n := 2) two_ne_zero |>.mp a]) (by simp [pow_eq_zero_iff (n := 2) two_ne_zero |>.mp b]))
+    have q1 := sq_facts z (-1 / 4) (r := 1 / 4)
+    have q2 := sq_facts z (1 / 4) (r := 1 / 4)
+    rw [← e₁] at q1
+    rw [← e₂] at q2
+    refine mem_closure_disc_minus hz h1 h2 (fun hu => ⟨?_, ?_⟩) (fun hd => ⟨?_, ?_⟩) (fun hd => ⟨?_, ?_⟩)
+    · linarith [norm_sub_norm_le z (-1 / 4 : ℂ)]
+    · linarith [norm_sub_norm_le z (1 / 4 : ℂ)]
+    · linarith [norm_le_norm_add_norm_sub' z (-1 / 4 : ℂ)]
+    · by_contra h
+      push Not at h
+      have k1 := q1.2 hd
+      have k2 := q2.1 h
+      exact hne ⟨by nlinarith [sq_nonneg z.re, sq_nonneg z.im], by nlinarith [sq_nonneg z.re, sq_nonneg z.im]⟩
+    · linarith [norm_le_norm_add_norm_sub' z (1 / 4 : ℂ)]
+    · by_contra h
+      push Not at h
+      have k1 := q1.1 h
+      have k2 := q2.2 hd
+      exact hne ⟨by nlinarith [sq_nonneg z.re, sq_nonneg z.im], by nlinarith [sq_nonneg z.re, sq_nonneg z.im]⟩
+  have hO := compl_closure_disc_minus_subset hlim
+  set O := (closure (ball 0 1 \ (closedBall (-1 / 4 : ℂ) (1 / 4) ∪ closedBall (1 / 4 : ℂ) (1 / 4))))ᶜ with hOdef
+  have hB₁ : ball (-1 / 4 : ℂ) (1 / 4) ⊆ O := fun z hz h => (hcl h).2 (Or.inl hz)
+  have hB₂ : ball (1 / 4 : ℂ) (1 / 4) ⊆ O := fun z hz h => (hcl h).2 (Or.inr hz)
+  have hcB : ∀ c : ℂ, closure (ball c (1 / 4)) ⊆ closedBall 0 (1 / 2) ∨ ‖c‖ ≠ 1 / 4 := fun c => by
+    by_cases hc : ‖c‖ = 1 / 4
+    · left
+      rw [closure_ball _ (by norm_num)]
+      intro w hw
+      rw [mem_closedBall, dist_eq_norm] at hw
+      rw [mem_closedBall, dist_zero_right]
+      linarith [norm_le_norm_add_norm_sub' w c]
+    · exact Or.inr hc
+  have hsmall : ∀ c : ℂ, ‖c‖ = 1 / 4 → closure (ball c (1 / 4)) ⊆ closedBall 0 (1 / 2) := fun c hc =>
+    (hcB c).resolve_right fun h => h hc
+  have zero_mem : ∀ c : ℂ, ‖c‖ = 1 / 4 → (0 : ℂ) ∈ closure (ball c (1 / 4)) := fun c hc => by
+    rw [closure_ball _ (by norm_num), mem_closedBall, dist_eq_norm, zero_sub, norm_neg, hc]
+  refine ⟨⟨⟨-1 / 4, Or.inl (mem_ball_self (by norm_num))⟩, fun z hz => ?_, (isBounded_ball.union isBounded_ball), ?_⟩, ?_⟩
+  · rcases hz with hz | hz
+    · exact hB₁ hz
+    · exact hB₂ hz
+  · -- the rest of the complement is the outside of the unit disc
+    rw [Set.disjoint_left]
+    intro w hw hw'
+    have hrest : O \ (ball (-1 / 4 : ℂ) (1 / 4) ∪ ball (1 / 4 : ℂ) (1 / 4)) ⊆ (ball (0 : ℂ) 1)ᶜ := by
+      rintro v ⟨hvO, hvH⟩
+      rcases hO hvO with (h | h) | h
+      · intro hv; exact h (ball_subset_closedBall hv)
+      · exact absurd (Or.inl h) hvH
+      · exact absurd (Or.inr h) hvH
+    have h1 := closure_minimal hrest isOpen_ball.isClosed_compl hw'
+    rw [closure_union] at hw
+    have h2 : w ∈ closedBall (0 : ℂ) (1 / 2) := hw.elim (fun h => hsmall _ n₁ h) (fun h => hsmall _ n₂ h)
+    rw [mem_closedBall, dist_zero_right] at h2
+    exact h1 (by rw [mem_ball, dist_zero_right]; linarith)
+  · -- one small disc alone is not separated: the other touches it at `0`
+    rintro ⟨-, -, -, hsep⟩
+    refine Set.disjoint_left.mp hsep (zero_mem _ n₂) (closure_mono ?_ (zero_mem _ n₁))
+    intro v hv
+    refine ⟨hB₁ hv, fun hv' => ?_⟩
+    rw [mem_ball, dist_eq_norm] at hv hv'
+    linarith [norm_sub_norm_le (v - (-1 / 4 : ℂ)) (v - 1 / 4),
+      show ‖(v - (-1 / 4 : ℂ)) - (v - 1 / 4)‖ = 1 / 2 by
+        rw [show (v - (-1 / 4 : ℂ)) - (v - 1 / 4) = ((1 / 2 : ℝ) : ℂ) by push_cast; ring, Complex.norm_real]; norm_num,
+      norm_sub_le (v - (-1 / 4 : ℂ)) (v - 1 / 4)]
+
+end Spec
+
+namespace ArcMap
+
+/-! ## Holes and filled tiles (FS131-IP5): openness, nesting, and every tile inside an outer tile's fill -/
+
 
 /-- A filled tile lies in its hull. -/
 theorem fill_subset_compl_outerDom (T : Set ℂ) : fill T ⊆ (outerDom T)ᶜ := by
@@ -933,6 +1234,83 @@ theorem filledGraph_offTwo_connected (hF : F.Valid) (hP : F.IsPlaneMap) (x y : {
   exact hreach.trans (reachable_offTwo_of_inter (a := ⟨⟨T, hT⟩, hTo⟩) (b := w)
     ⟨s, subset_closure (hwT hs), subset_closure (subset_fill _ hs)⟩)
 
+/-! ### F-RING reduced to the boundary walk (FS131-IP5): each entry repeated four times, and the non-neighbour clause -/
+
+/-- Repeating each entry four times: the `i`-th entry is the original's `(i / 4)`-th. -/
+theorem getElem?_flatMap_replicate_four {α : Type*} : ∀ (l : List α) (i : ℕ),
+    (l.flatMap (List.replicate 4))[i]? = l[i / 4]?
+  | [], i => by simp
+  | a :: l, i => by
+    rw [List.flatMap_cons]
+    by_cases hi : i < 4
+    · rw [List.getElem?_append_left (by simpa using hi), List.getElem?_replicate, if_pos hi,
+        show i / 4 = 0 by omega]
+      rfl
+    · rw [List.getElem?_append_right (by simp; omega), List.length_replicate, getElem?_flatMap_replicate_four l (i - 4),
+        show i / 4 = (i - 4) / 4 + 1 by omega]
+      rfl
+
+theorem length_flatMap_replicate_four {α : Type*} (l : List α) : (l.flatMap (List.replicate 4)).length = 4 * l.length := by
+  induction l with
+  | nil => rfl
+  | cons a l ih => rw [List.flatMap_cons, List.length_append, ih, List.length_replicate, List.length_cons]; omega
+
+/-- **A ring with each entry repeated four times is a ring**, in which every entry appears twice apart — so the ring field's "connected unless
+twice apart" clause is free for neighbours (FS131-IP5). -/
+theorem isRing_flatMap_replicate_four {V : Type*} {G : SimpleGraph V} {x : V} {r : List V} (h : Thomassen.IsRing G x r) :
+    Thomassen.IsRing G x (r.flatMap (List.replicate 4)) := by
+  obtain ⟨hmem, hcons, hsep⟩ := h
+  have hlen := length_flatMap_replicate_four r
+  refine ⟨fun y => ?_, fun i a b ha hb => ?_, fun y i j hij hi hj m n a b him hmj hn ha hb hao hbo => ?_⟩
+  · rw [List.mem_flatMap, ← hmem y]
+    simp only [List.mem_replicate, ne_eq, OfNat.ofNat_ne_zero, not_false_eq_true, true_and]
+    exact ⟨fun ⟨a, ha, h⟩ => h ▸ ha, fun h => ⟨y, h, rfl⟩⟩
+  · rw [getElem?_flatMap_replicate_four] at ha hb
+    rw [hlen] at hb
+    have hi : i / 4 < r.length := by
+      by_contra h'; rw [List.getElem?_eq_none (by omega)] at ha; exact absurd ha (by simp)
+    rw [Nat.mod_mul_right_div_self] at hb
+    by_cases h4 : (i + 1) % 4 = 0
+    · rw [show (i + 1) / 4 = i / 4 + 1 by omega] at hb
+      exact hcons (i / 4) a b ha hb
+    · rw [show (i + 1) / 4 = i / 4 by omega, Nat.mod_eq_of_lt hi] at hb
+      rw [ha] at hb
+      exact Or.inl (Option.some_injective _ hb)
+  · rw [getElem?_flatMap_replicate_four] at hi hj ha hb
+    have hay : a ≠ y := hao.2
+    have hby : b ≠ y := hbo.2
+    have hmI : m / 4 ≠ i / 4 := fun h => hay (Option.some_injective _ (by rw [← ha, ← hi, h]))
+    have hmJ : m / 4 ≠ j / 4 := fun h => hay (Option.some_injective _ (by rw [← ha, ← hj, h]))
+    have hnI : n / 4 ≠ i / 4 := fun h => hby (Option.some_injective _ (by rw [← hb, ← hi, h]))
+    have hnJ : n / 4 ≠ j / 4 := fun h => hby (Option.some_injective _ (by rw [← hb, ← hj, h]))
+    have h1 : i / 4 ≤ m / 4 := Nat.div_le_div_right him.le
+    have h2 : m / 4 ≤ j / 4 := Nat.div_le_div_right hmj.le
+    refine hsep y (i / 4) (j / 4) (by omega) hi hj (m / 4) (n / 4) a b (by omega) (by omega) ?_ ha hb hao hbo
+    rcases hn with hn | hn
+    · exact Or.inl (lt_of_le_of_ne (Nat.div_le_div_right hn.le) hnI)
+    · exact Or.inr (lt_of_le_of_ne (Nat.div_le_div_right hn.le) (Ne.symm hnJ))
+
+/-- Every entry of a list repeated four times appears twice apart. -/
+theorem twiceApart_flatMap_replicate_four {V : Type*} {r : List V} {y : V} (hy : y ∈ r) :
+    Thomassen.TwiceApart (r.flatMap (List.replicate 4)) y := by
+  obtain ⟨k, hk, rfl⟩ := List.getElem_of_mem hy
+  refine ⟨4 * k, 4 * k + 2, by omega, ?_, ?_, ?_⟩
+  · rw [length_flatMap_replicate_four]; omega
+  · rw [getElem?_flatMap_replicate_four, show 4 * k / 4 = k by omega, List.getElem?_eq_getElem hk]
+  · rw [getElem?_flatMap_replicate_four, show (4 * k + 2) / 4 = k by omega, List.getElem?_eq_getElem hk]
+
+/-- **The boundary walk of a filled tile** (F-RING's remaining child; FS131-IP5's reduction of F-RING, by statement exactly F-RING's first
+conjunct): every filled outer tile `x̂` has a ring — its neighbours listed so that cyclically consecutive entries are equal or adjacent, and any
+two appearances of a neighbour `y` separate, in `M̂ − x − y`, the entries between from those outside (Thomassen's rule: a repeated neighbour is
+listed only at its edge contacts). The planned route (FS131-KP plan § 4, one mind, not formalized): the walk around the frontier of `x̂` — the
+outer frontier and the frontiers of the bounded complementary components that are not holes, joined at their pinch points — over the finite
+boundary graph (`Plane/CurveGraph`), separation by `isPreconnected_frontier_connectedComponentIn` and the crossing lemma; IP4's observation
+(record § 15.3): one-sidedness along a continuum (`orient`) may replace the walk in the separation step. **H**; its own job is Keryx's call
+(record § 19). -/
+theorem filledGraph_ringList (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :
+    ∃ r, Thomassen.IsRing F.filledGraph x r := by
+  sorry
+
 /-- **Rings from boundary walks** (leaf F-RING, the planar heart of CVB B2 step 2): every filled outer tile `x̂` has a ring — the outer
 boundary walk of `x̂` (`frontier (outerDom x)`, preconnected), listing the tiles met at each pass (sector charts), each repeated tile only at
 its edge contacts — and `M̂ − x − y` is connected unless `y` appears twice apart (a bounded component of `ℂ ∖ (cl x̂ ∪ cl ŷ)` is enclosed by
@@ -942,7 +1320,15 @@ wave's longest leaf; may be its own job (Keryx's call after the implementer's me
 theorem filledGraph_rings (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :
     ∃ r, Thomassen.IsRing F.filledGraph x r ∧
       ∀ y, y ≠ x → ¬ Thomassen.TwiceApart r y → (F.filledGraph.induce (Thomassen.offTwo x y)).Connected := by
-  sorry
+  -- the boundary walk with each entry repeated four times: every neighbour appears twice apart, and a non-neighbour's filled closure
+  -- misses `x̂`'s, so `M̂ − x − y` is connected (`filledGraph_offTwo_connected`)
+  obtain ⟨r₀, hr₀⟩ := filledGraph_ringList hF hP x
+  refine ⟨r₀.flatMap (List.replicate 4), isRing_flatMap_replicate_four hr₀, fun y hyx htw => ?_⟩
+  by_cases hadj : F.filledGraph.Adj x y
+  · exact absurd (twiceApart_flatMap_replicate_four ((hr₀.1 y).mpr hadj)) htw
+  · refine filledGraph_offTwo_connected hF hP x y ?_
+    rw [Set.disjoint_iff_inter_eq_empty, ← not_nonempty_iff_eq_empty]
+    exact fun h => hadj ⟨hyx.symm, h⟩
 
 /-- **One infinite component** (leaf F-ONE, CVB B2 step 2): for distinct outer tiles `x`, `y`, `M̂ − x − y` has exactly one infinite
 component — the tiles of the unbounded component of `ℂ ∖ (cl x̂ ∪ cl ŷ)` are chained (`mem_of_touch_closed`) and infinitely many, those of

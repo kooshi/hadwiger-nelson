@@ -75,6 +75,29 @@ Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plan
   `ArcMap.IsSectorChart.sector_subset_tile_of_mem`, `.tile_inter_ball_eq`, `.mem_closure_some_sector`, `ArcMap.TileOf.eq_colour`,
   `ArcMap.GermPseudo.congr_e`, `.eq_of_same` (`MapTopology`); `ArcMap.BaseCtx.colours_sub` (`BaseWalk`; `sorryAx` through `cor3`)
 
+**FS131-IP5 (stages 16–)**, all [kernel] (stage-17 build `build/gate/build/20261005T043543Z-1369788.log`, stage-18 build
+`build/gate/build/20261005T044937Z-1440384.log`, stage-19 build `build/gate/build/20261005T050146Z-1518710.log`), each on exactly the standard three
+(`data/fs131/ip/axioms-ip5-stage17.txt`, `-stage18.txt`, `-stage19.txt`, checked by `tools/fs131_ip_axioms.py`), statements unchanged; all in
+`Plane/ValidMap/MapGraph`:
+
+- `ArcMap.filledGraph_locallyFinite` (F-LOC), `ArcMap.filledGraph_connected` (F-CONN), `ArcMap.filledGraph_infinite` (F-INF), `ArcMap.filledGraph_oneInf` (F-ONE),
+  `ArcMap.filledGraph_finSep` (F-SEP)
+- `not_isHoleOf_chain`, `isHoleOf_cluster` — the two adversaries of `IsHoleOf`
+- `ArcMap.filledGraph_rings` (F-RING) — proved **over `ArcMap.filledGraph_ringList`** (the boundary walk, `sorry`; by statement F-RING's first conjunct),
+  so it, `filledGraph_planarLike` and `cvb_thom_reduced` carry `sorryAx` through that one child
+- `ArcMap.not_isHoleOf_union` — **Janiszewski's theorem for holes** (two disjoint bounded closed continua without holes have none together), from
+  unicoherence; `ArcMap.filledGraph_offTwo_connected` — `M̂ − x − y` is connected when `cl x̂ ∩ cl ŷ = ∅`; `ArcMap.exists_outer_fill` — every tile lies
+  in an outer tile's fill; `ArcMap.exists_far_component`; `ArcMap.mem_of_touch_closed_of_not_isHoleOf` (CHAIN); `ArcMap.not_isHoleOf_closure_fill`;
+  `ArcMap.hole_subset_hole`
+- children: `ArcMap.IsHoleOf.isOpen`, `.isOpen_diff`, `.connectedComponentIn_subset`, `.subset_compl_outerDom`, `fill_subset_compl_outerDom`,
+  `subset_fill`, `closure_fill_subset_closedBall`, `encloses_of_subset_hole`, `fill_subset_hole`, `filledGraph_reachable_of_inter`, `_of_subset`,
+  `eq_or_subset_hole_of_inter`, `subset_fill_of_inter`, `IsOuterTile.disjoint_closure_fill`, `reachable_offTwo_of_inter`, `subset_compl_of_inter_compl`,
+  `subset_compl_of_mem_offTwo`, `exists_outer_fill_offTwo`, `offTwo_infinite`, `isHoleOf_inter_of_split`, `not_split_aux`,
+  `isPreconnected_closure_union_aux`, `disjoint_closure_sUnion_holes`, `isPreconnected_closure_fill`, `isBounded_closure_fill`,
+  `getElem?_flatMap_replicate_four`, `length_flatMap_replicate_four`, `isRing_flatMap_replicate_four`, `twiceApart_flatMap_replicate_four` (all `ArcMap.`);
+  `mem_closure_of_path`, `eventually_path_mem`, `mem_disc_minus_iff`, `mem_closure_disc_minus`, `mem_closure_disc_minus_tangent`, `sq_norm_sub_ofReal`,
+  `norm_le_iff_sq`, `compl_closure_disc_minus_subset`, `closure_disc_minus_subset`, `sq_facts`
+
 IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
 
@@ -921,3 +944,61 @@ Axioms: `data/fs131/ip/AxiomsIP5b.lean` → `data/fs131/ip/axioms-ip5-stage18.tx
 ### 18.3 Cost
 
 From stage 17's commit (04:45Z) to this stage (05:00Z): about 15 minutes and one build; about 560 lines (Janiszewski for holes ≈ 250, CHAIN ≈ 120).
+
+## Stage 19 — SAVED: both adversaries proved; F-RING reduced to one child, the boundary walk (`filledGraph_ringList`)
+
+### 19.1 Proved (statements unchanged)
+
+- **`not_isHoleOf_chain`** and **`isHoleOf_cluster`** (the adversaries), over IP4's route: the complement of the closure of
+  `T = B(0, 1) ∖ (B̄(c₁, ¼) ∪ B̄(c₂, ¼))` is the outside of the closed unit disc and the two open small discs
+  (`compl_closure_disc_minus_subset`, `closure_disc_minus_subset`): off the tangencies a point of the closed region is reached by a radial push
+  (`mem_closure_disc_minus`: inward from the unit circle, outward from a small circle, the other two constraints strict by continuity); at a
+  tangency of two small circles by the vertical path `p + t i` (`mem_closure_disc_minus_tangent`), and at the chain's point `1` by
+  `1 − t + √t i`. The chain: each piece lies in `Hc` or in the rest, touching pieces on one side (`1/2`, `1`), the outside unbounded — so no piece
+  is in `Hc`, which is then empty. The cluster: the two discs together are separated from the outside (their closures lie in `B̄(0, ½)`); one alone
+  touches the other at `0`.
+- **`filledGraph_rings`** (F-RING), **proved over one new child**: from any ring `r₀` at `x` (`filledGraph_ringList`), the list with each entry
+  repeated four times is a ring (`isRing_flatMap_replicate_four`) in which every neighbour appears twice apart (`twiceApart_flatMap_replicate_four`);
+  so the clause "`M̂ − x − y` connected unless `y` appears twice apart" is owed only for non-neighbours `y`, whose filled closures miss `x̂`'s — and
+  that is `filledGraph_offTwo_connected` (stage 18). Children: `getElem?_flatMap_replicate_four`, `length_flatMap_replicate_four`,
+  `isRing_flatMap_replicate_four`, `twiceApart_flatMap_replicate_four`; adversary children `mem_closure_of_path`, `eventually_path_mem`,
+  `mem_disc_minus_iff`, `mem_closure_disc_minus`, `mem_closure_disc_minus_tangent`, `sq_norm_sub_ofReal`, `norm_le_iff_sq`,
+  `compl_closure_disc_minus_subset`, `closure_disc_minus_subset`, `sq_facts`. The `IsHoleOf` openness lemmas moved above the spec section (the
+  adversaries read them); unchanged.
+- **Stated, `sorry`: `filledGraph_ringList`** — `∃ r, Thomassen.IsRing F.filledGraph x r`, which is by statement exactly F-RING's first conjunct
+  (so no truth is lost or added: it holds iff F-RING's first half does). It is the only `sorry` left on `fs131-w5p` outside `BaseWalk`/`BaseDense`'s
+  wave-5 leaves.
+
+### 19.2 F-RING measured (done-means 4), and for the coordinator
+
+- **Measured from its first child**: the reduction (quadrupling plus the non-neighbour clause) took about 10 minutes and about 90 lines, because the
+  hard topology of the non-neighbour clause was already stage 18's (Janiszewski for holes, CHAIN, J). **What is left is exactly the boundary walk**:
+  a cyclic listing of `x̂`'s neighbours with consecutive entries touching, and any two appearances of a neighbour separating, in `M̂ − x − y`, the
+  entries between from those outside. That is Thomassen's facial walk in a setting with no plane graph — the outer frontier of `x̂` together with
+  the frontiers of its non-hole bounded complementary components (the chain's pockets), joined at pinch points. **H**; it deserves its own job
+  (planner and implementer), as KP foresaw. Starting points held here: the finite boundary graph's local stars (`Plane/CurveGraph`), one-sidedness
+  along a continuum (`orient`), the crossing lemma, CHAIN and J (a neighbour listed once needs no separation; J settles every non-neighbour).
+- **What a second implementer could take beside this branch without sharing a file**: nothing else is left on `fs131-w5p` — `filledGraph_ringList`
+  is the last leaf, in `MapGraph`. To let a RING-LIST job work in a file of its own, `filledGraph_ringList` would move to a new module downstream
+  of `MapGraph`'s definitions, with `filledGraph_rings`, `filledGraph_planarLike`, `cvb_thom_reduced`, `cvb_thom` after it — a change of where
+  statements live (none of their text), so Keryx's call; or the job works in `MapGraph` alone, which nobody else needs now.
+- **The ring field is weaker than its docstring reads** (a finding about the statement, harmless): any ring repeated in place makes every neighbour
+  twice apart at no cost, so `PlanarLike.ring`'s "connected unless twice apart" constrains non-neighbours only. T-GRAPH is proved from `PlanarLike`
+  as stated, so Thomassen's reduction needs only a ring (separation at repeated appearances) and the non-separation of non-adjacent pairs.
+
+### 19.3 The stage-19 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 13 s, `Proofs`), 9 modules with warnings, every
+warning `declaration uses 'sorry'`; `MapGraph`'s one `sorry` declaration is `filledGraph_ringList`; exit 0** (`build/gate/build/20261005T050146Z-1518710.log`;
+`data/fs131/ip/build-ip5-s19.log`; grep for `warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe lines).
+
+Axioms: `data/fs131/ip/AxiomsIP5c.lean` → `data/fs131/ip/axioms-ip5-stage19.txt`, checked by `tools/fs131_ip_axioms.py` against
+`data/fs131/ip/axioms-ip5c-names.txt`: **24 records on the standard three (both adversaries, the 14 new children, `IsHoleOf.isOpen` after its move, and
+F-LOC, F-CONN, F-INF, F-ONE, F-SEP, `not_isHoleOf_union`, `filledGraph_offTwo_connected` re-read); 4 controls on `sorryAx` (`filledGraph_ringList`,
+`filledGraph_rings`, `filledGraph_planarLike`, `cvb_thom_reduced`)**; planted fault (`filledGraph_rings` listed as clean) → `NOT CLEAN …`, exit 1.
+`scripts/Axioms.lean`'s FS131-KP block gains the 14 children and `filledGraph_ringList`. `ARCHITECTURE.md`: no import changed, row not touched.
+
+### 19.4 Hand-back
+
+From stage 18's commit (05:00Z) to this stage (05:12Z): about 12 minutes and one build. By the session's counter I am at about 465k, past the brief's
+400k guidance and under its 500k line, so I hand back here, at a saved stage, with one leaf left, named: `filledGraph_ringList` (§ 19.2).

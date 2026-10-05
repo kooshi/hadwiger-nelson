@@ -3179,6 +3179,21 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.mem_of_touch_closed_of_not_isHoleOf
 #print axioms HadwigerNelson.Plane.ArcMap.isBounded_closure_fill
 #print axioms HadwigerNelson.Plane.ArcMap.filledGraph_offTwo_connected
+#print axioms HadwigerNelson.Plane.mem_closure_of_path
+#print axioms HadwigerNelson.Plane.eventually_path_mem
+#print axioms HadwigerNelson.Plane.mem_disc_minus_iff
+#print axioms HadwigerNelson.Plane.mem_closure_disc_minus
+#print axioms HadwigerNelson.Plane.mem_closure_disc_minus_tangent
+#print axioms HadwigerNelson.Plane.sq_norm_sub_ofReal
+#print axioms HadwigerNelson.Plane.norm_le_iff_sq
+#print axioms HadwigerNelson.Plane.compl_closure_disc_minus_subset
+#print axioms HadwigerNelson.Plane.closure_disc_minus_subset
+#print axioms HadwigerNelson.Plane.sq_facts
+#print axioms HadwigerNelson.Plane.ArcMap.getElem?_flatMap_replicate_four
+#print axioms HadwigerNelson.Plane.ArcMap.length_flatMap_replicate_four
+#print axioms HadwigerNelson.Plane.ArcMap.isRing_flatMap_replicate_four
+#print axioms HadwigerNelson.Plane.ArcMap.twiceApart_flatMap_replicate_four
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_ringList
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 
