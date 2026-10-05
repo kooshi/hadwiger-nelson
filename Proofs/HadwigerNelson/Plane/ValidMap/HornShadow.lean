@@ -531,6 +531,390 @@ theorem sep_add_pi_N {v : ℂ} {α κ₃ κ₄ r μ : ℝ} (h3 : -1 < κ₃) (h3
   obtain ⟨z, hz, hyz⟩ := H y hyS hyX (hyT.mono hμ.le)
   exact ⟨y, hyK, z, hz, hyz⟩
 
+/-! ## The shadow witnesses at the antipode and the cones there (FS131-I5i, for `n3_end_of_not_inType`, E5 § 3.2) -/
+
+/-- `witness_dir_real`'s first step: the horn point's normal coordinate is small, `|Y| ≤ x²`, and `x < ρ`. -/
+theorem witness_dir_aux1 {a Y ρ : ℝ} (ha : 0 < a) (hY : |Y| ≤ (a ^ 2 + Y ^ 2) / 2) (hρ : a ^ 2 + Y ^ 2 < ρ ^ 2)
+    (hρ0 : 0 < ρ) (hρ8 : ρ ≤ 1 / 8) : |Y| < 1 / 2 ∧ |Y| ≤ a ^ 2 ∧ a < ρ := by
+  have hρ2 : ρ ^ 2 ≤ 1 / 64 := by nlinarith
+  have hY0 := abs_nonneg Y
+  have hYa : |Y| < 1 / 2 := by nlinarith
+  have hY2 : Y ^ 2 = |Y| ^ 2 := (sq_abs Y).symm
+  have hYY : |Y| ^ 2 ≤ |Y| / 2 := by nlinarith
+  refine ⟨hYa, by nlinarith, ?_⟩
+  have : a ^ 2 < ρ ^ 2 := by nlinarith
+  nlinarith
+
+/-- `witness_dir_real`'s second step: the identities (E1), (E2) give `σp > −x s²/2`, `q > −2 x s`, `2q < s²`. -/
+theorem witness_dir_aux2 {a Y P q s : ℝ} (ha : 0 < a) (hYa : |Y| < 1 / 2) (hYx : |Y| ≤ a ^ 2)
+    (hzS : 1 < a ^ 2 + (1 + Y) ^ 2) (hzy : (a - P) ^ 2 + (1 + Y - q) ^ 2 = 1) (hyv : 0 < P ^ 2 + q ^ 2 - 2 * q)
+    (hs : s ^ 2 = P ^ 2 + q ^ 2) (hs0 : 0 < s) :
+    -(a * s ^ 2) < 2 * P ∧ -(2 * a * s) < q ∧ 2 * q < s ^ 2 := by
+  have hY1 : -|Y| ≤ Y := neg_abs_le Y
+  have h1Y : 0 < 1 + Y := by linarith
+  have hE1 : 2 * (a * P) + 2 * (1 + Y) * q = a ^ 2 + (1 + Y) ^ 2 - 1 + s ^ 2 := by nlinarith
+  have hE2 : 2 * q < s ^ 2 := by nlinarith
+  have hE3 : (1 + Y) * (2 * q) < (1 + Y) * s ^ 2 := mul_lt_mul_of_pos_left hE2 h1Y
+  have hYs : Y * s ^ 2 ≤ a ^ 2 * s ^ 2 := mul_le_mul_of_nonneg_right (le_trans (le_abs_self Y) hYx) (sq_nonneg s)
+  have h6 : -(a ^ 2 * s ^ 2) < 2 * (a * P) := by nlinarith
+  have hP1 : -(a * s ^ 2) < 2 * P := by
+    have : a * (-(a * s ^ 2)) < a * (2 * P) := by nlinarith
+    exact lt_of_mul_lt_mul_left this ha.le
+  have hPs : P ≤ s := by nlinarith
+  have haS : a * P ≤ a * s := mul_le_mul_of_nonneg_left hPs ha.le
+  have h7 : -(a * s) < (1 + Y) * q := by nlinarith
+  refine ⟨hP1, ?_, hE2⟩
+  have has0 : 0 < a * s := mul_pos ha hs0
+  rcases le_or_gt 0 q with hq | hq
+  · linarith
+  · have h12 : (1 : ℝ) / 2 ≤ 1 + Y := by linarith
+    have : (1 + Y) * q ≤ (1 / 2) * q := mul_le_mul_of_nonpos_right h12 hq.le
+    linarith
+
+/-- `witness_dir_real`'s last step: the sign of `σp`, and the direction's distance from `σ e α`. -/
+theorem witness_dir_aux3 {a P q s ρ δ : ℝ} (hs0 : 0 < s) (hs : s ^ 2 = P ^ 2 + q ^ 2) (haρ : a < ρ) (ha : 0 < a)
+    (hδ : s < δ) (hρ8 : ρ ≤ 1 / 8) (hδ8 : δ ≤ 1 / 8)
+    (hP1 : -(a * s ^ 2) < 2 * P) (hq1 : -(2 * a * s) < q) (hE2 : 2 * q < s ^ 2) :
+    0 < P ∧ (P - s) ^ 2 + q ^ 2 < 8 * (ρ + δ) ^ 2 * s ^ 2 := by
+  obtain ⟨M, hM⟩ : ∃ M, M = 2 * (ρ + δ) := ⟨_, rfl⟩
+  have hM2 : M ≤ 1 / 2 := by rw [hM]; linarith
+  have hss : s * s < δ * s := mul_lt_mul_of_pos_right hδ hs0
+  have has : a * s < ρ * s := mul_lt_mul_of_pos_right haρ hs0
+  have hqu : q < M * s := by nlinarith
+  have hql : -(M * s) < q := by nlinarith
+  have hq2 : q ^ 2 < M ^ 2 * s ^ 2 := by nlinarith
+  have hM0 : 0 ≤ M := by rw [hM]; linarith
+  have hM4 : M ^ 2 ≤ 1 / 4 := by nlinarith
+  have hMs : M ^ 2 * s ^ 2 ≤ s ^ 2 / 4 := by nlinarith [sq_nonneg s]
+  have hPpos : 0 < P := by
+    by_contra hle
+    push Not at hle
+    have has : a * s < 1 / 64 := by nlinarith
+    have hnP : -P < a * s ^ 2 / 2 := by linarith
+    have hnP0 : 0 ≤ -P := by linarith
+    have h8 : P ^ 2 < (a * s ^ 2 / 2) ^ 2 := by nlinarith
+    have h8' : (a * s ^ 2 / 2) ^ 2 = (a * s) ^ 2 * s ^ 2 / 4 := by ring
+    have h8'' : (a * s) ^ 2 * s ^ 2 / 4 ≤ s ^ 2 / 4 := by
+      have : (a * s) ^ 2 ≤ 1 := by nlinarith
+      nlinarith [sq_nonneg s]
+    nlinarith
+  refine ⟨hPpos, ?_⟩
+  have h9 : (s - P) * (s + P) = q ^ 2 := by rw [show (s - P) * (s + P) = s ^ 2 - P ^ 2 by ring, hs]; ring
+  have h11 : 0 ≤ s - P := (mul_nonneg_iff_of_pos_right (by linarith : 0 < s + P)).mp (h9 ▸ sq_nonneg q)
+  have h10 : (s - P) * s ≤ q ^ 2 := h9 ▸ mul_le_mul_of_nonneg_left (by linarith) h11
+  have h14 : ((s - P) * s) ^ 2 ≤ (q ^ 2) ^ 2 := pow_le_pow_left₀ (mul_nonneg h11 hs0.le) h10 2
+  have h15 : q ^ 2 * q ^ 2 ≤ q ^ 2 * (M ^ 2 * s ^ 2) := mul_le_mul_of_nonneg_left hq2.le (sq_nonneg q)
+  have h12 : (s - P) ^ 2 * s ^ 2 ≤ (M ^ 2 * q ^ 2) * s ^ 2 := by
+    calc (s - P) ^ 2 * s ^ 2 = ((s - P) * s) ^ 2 := by ring
+      _ ≤ (q ^ 2) ^ 2 := h14
+      _ = q ^ 2 * q ^ 2 := by ring
+      _ ≤ q ^ 2 * (M ^ 2 * s ^ 2) := h15
+      _ = (M ^ 2 * q ^ 2) * s ^ 2 := by ring
+  have h13 : (s - P) ^ 2 ≤ M ^ 2 * q ^ 2 := le_of_mul_le_mul_right h12 (by positivity)
+  have h16 : M ^ 2 * q ^ 2 ≤ q ^ 2 / 4 := by nlinarith [sq_nonneg q]
+  have hM8 : 2 * M ^ 2 = 8 * (ρ + δ) ^ 2 := by rw [hM]; ring
+  have h17 : (P - s) ^ 2 = (s - P) ^ 2 := by ring
+  rw [h17, ← hM8]
+  have h18 : 0 ≤ M ^ 2 * s ^ 2 := by positivity
+  linarith
+
+/-- **The direction of a shadow witness** (E5 § 3.2 (F4), I5e § 20.2, exact): in the frame at `S′` along `e α`, let `z − v = (x, Y)`
+with `σx > 0`, `|Y| ≤ (x² + Y²)/2` (a horn with bounds in `[−1, 1]`), `z` outside `B̄(S′, 1)`, and `y − S′ = (p, q)` at distance `s`
+from `S′`, outside `B̄(v, 1)`, with `|z − y| = 1`. Then `σp > 0` and `(σp − s)² + q² < 8 (ρ + δ)² s²` when `x² + Y² < ρ²`,
+`s < δ`, `0 < ρ ≤ 1/8`, `δ ≤ 1/8`. -/
+theorem witness_dir_real {σ x Y p q s ρ δ : ℝ} (hσ : σ = 1 ∨ σ = -1) (hx : 0 < σ * x)
+    (hY : |Y| ≤ (x ^ 2 + Y ^ 2) / 2) (hzS : 1 < x ^ 2 + (1 + Y) ^ 2) (hzy : (x - p) ^ 2 + (1 + Y - q) ^ 2 = 1)
+    (hyv : 0 < p ^ 2 + q ^ 2 - 2 * q) (hs : s ^ 2 = p ^ 2 + q ^ 2) (hs0 : 0 < s) (hρ : x ^ 2 + Y ^ 2 < ρ ^ 2)
+    (hρ0 : 0 < ρ) (hδ : s < δ) (hρ8 : ρ ≤ 1 / 8) (hδ8 : δ ≤ 1 / 8) :
+    0 < σ * p ∧ (σ * p - s) ^ 2 + q ^ 2 < 8 * (ρ + δ) ^ 2 * s ^ 2 := by
+  have hσ2 : σ ^ 2 = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  have hax : (σ * x) ^ 2 = x ^ 2 := by rw [mul_pow, hσ2, one_mul]
+  have hPp : (σ * p) ^ 2 = p ^ 2 := by rw [mul_pow, hσ2, one_mul]
+  have hxp : (σ * x - σ * p) ^ 2 = (x - p) ^ 2 := by rw [← mul_sub, mul_pow, hσ2, one_mul]
+  rw [← hax] at hY hzS hρ
+  rw [← hxp] at hzy
+  rw [← hPp] at hyv hs
+  obtain ⟨hYa, hYx, haρ⟩ := witness_dir_aux1 hx hY hρ hρ0 hρ8
+  obtain ⟨hP1, hq1, hE2⟩ := witness_dir_aux2 hx hYa hYx hzS hzy hyv hs hs0
+  exact witness_dir_aux3 hs0 hs haρ hx hδ hρ8 hδ8 hP1 hq1 hE2
+
+/-- The unit direction of `y` from `w`, read in the frame at `w` along `e α`: `‖(y − w)/|y − w| − σ e α‖² · |y − w|² =
+(σ X − |y − w|)² + Y²` for `σ = ±1`, `(X, Y)` the frame coordinates of `y`. -/
+theorem dirDist_sq_frame {w y : ℂ} {α σ : ℝ} (hσ : σ = 1 ∨ σ = -1) (hy : y ≠ w) :
+    ‖(y - w) / (‖y - w‖ : ℂ) - (σ : ℂ) * e α‖ ^ 2 * ‖y - w‖ ^ 2 =
+      (σ * frameX w α y - ‖y - w‖) ^ 2 + frameY w α y ^ 2 := by
+  have hs : 0 < ‖y - w‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hy)
+  have hσ2 : σ ^ 2 = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  set s := ‖y - w‖ with hsdef
+  have hsC : (s : ℂ) ≠ 0 := by exact_mod_cast hs.ne'
+  have h1 : ‖(y - w) / (s : ℂ) - (σ : ℂ) * e α‖ * s = ‖(y - w) * starRingEnd ℂ (e α) - (σ * s : ℝ)‖ := by
+    have : ((y - w) / (s : ℂ) - (σ : ℂ) * e α) * (s : ℂ) * starRingEnd ℂ (e α) =
+        (y - w) * starRingEnd ℂ (e α) - ((σ * s : ℝ) : ℂ) := by
+      rw [sub_mul, sub_mul, div_mul_cancel₀ _ hsC, mul_assoc, mul_assoc, mul_comm (s : ℂ), ← mul_assoc (e α),
+        conj_e_mul_e]
+      push_cast; ring
+    rw [← this, norm_mul, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hs,
+      show ‖starRingEnd ℂ (e α)‖ = 1 by rw [Complex.norm_conj, norm_e], mul_one]
+  rw [show ‖(y - w) / (s : ℂ) - (σ : ℂ) * e α‖ ^ 2 * s ^ 2 = (‖(y - w) / (s : ℂ) - (σ : ℂ) * e α‖ * s) ^ 2 by ring, h1,
+    Complex.sq_norm, Complex.normSq_apply]
+  simp only [Complex.sub_re, Complex.sub_im, Complex.ofReal_re, Complex.ofReal_im, sub_zero]
+  unfold frameX frameY
+  have : (σ * ((y - w) * starRingEnd ℂ (e α)).re - s) ^ 2 = (((y - w) * starRingEnd ℂ (e α)).re - σ * s) ^ 2 := by
+    linear_combination (((y - w) * starRingEnd ℂ (e α)).re ^ 2 - s ^ 2) * hσ2
+  nlinarith [this]
+
+/-- **A shadow witness of a horn points along its axis from the antipode** (E5 § 3.2 (F4), a point form of `witness_dir_real`): `z`
+near `v` on the `σ` side of the normal line, within the parabola `|Y| ≤ |z − v|²/2` (a horn with bounds in `[−1, 1]`) and outside
+`B̄(S′, 1)`; `y` near `S′`, outside `B̄(v, 1)`, at distance `1` from `z`. Then `y` lies on the `σ` side and its direction from `S′`
+is within `3(ρ + δ)` of `σ e α`. -/
+theorem witness_dir_pt {v z y : ℂ} {α σ ρ δ : ℝ} (hσ : σ = 1 ∨ σ = -1) (hzx : 0 < σ * frameX v α z)
+    (hzY : |frameY v α z| ≤ ‖z - v‖ ^ 2 / 2) (hzS : 1 < dist z (v - e (α + π / 2))) (hzy : dist z y = 1)
+    (hyv : 1 < dist y v) (hzv : dist z v < ρ) (hyS : dist y (v - e (α + π / 2)) < δ) (hy0 : y ≠ v - e (α + π / 2))
+    (hρ0 : 0 < ρ) (hρ8 : ρ ≤ 1 / 8) (hδ8 : δ ≤ 1 / 8) :
+    0 < σ * frameX v α y ∧
+      ‖(y - (v - e (α + π / 2))) / (‖y - (v - e (α + π / 2))‖ : ℂ) - (σ : ℂ) * e α‖ < 3 * (ρ + δ) := by
+  set S := v - e (α + π / 2) with hSdef
+  have hfx : ∀ u, frameX S α u = frameX v α u := frameX_base_S v α
+  have hfy : ∀ u, frameY S α u = frameY v α u + 1 := frameY_base_S v α
+  have hnz := frame_normSq v α z
+  have hzS2 := frame_normSq S α z
+  have hyS2 := frame_normSq S α y
+  have hzy2 := sq_dist_frame v α z y
+  have hyv2 := sq_dist_frame v α y v
+  rw [hfx, hfy] at hzS2 hyS2
+  rw [frameX_self, frameY_self, sub_zero, sub_zero] at hyv2
+  set s := ‖y - S‖ with hsdef
+  have hs0 : 0 < s := norm_pos_iff.mpr (sub_ne_zero.mpr hy0)
+  have hsδ : s < δ := by rw [hsdef, ← dist_eq_norm]; exact hyS
+  have hzS' : 1 < ‖z - S‖ ^ 2 := by rw [← dist_eq_norm]; nlinarith [dist_nonneg (x := z) (y := S)]
+  have hyv' : 1 < dist y v ^ 2 := by nlinarith
+  have hzv' : ‖z - v‖ ^ 2 < ρ ^ 2 := by
+    rw [← dist_eq_norm]; exact pow_lt_pow_left₀ hzv dist_nonneg two_ne_zero
+  obtain ⟨h1, h2⟩ := witness_dir_real (σ := σ) (x := frameX v α z) (Y := frameY v α z) (p := frameX v α y)
+    (q := frameY v α y + 1) (s := s) (ρ := ρ) (δ := δ) hσ hzx (by rw [hnz]; exact hzY) (by nlinarith [hzS2, hzS'])
+    (by have := hzy2; rw [hzy] at this; nlinarith [this]) (by nlinarith) (by rw [hsdef, ← hyS2]) hs0 (by rw [hnz]; exact hzv') hρ0 hsδ hρ8 hδ8
+  refine ⟨h1, ?_⟩
+  have hd := dirDist_sq_frame (w := S) (y := y) (α := α) hσ hy0
+  rw [hfx, hfy] at hd
+  have hlt : ‖(y - S) / (s : ℂ) - (σ : ℂ) * e α‖ ^ 2 * s ^ 2 < (3 * (ρ + δ)) ^ 2 * s ^ 2 := by
+    have h9 : 0 ≤ (ρ + δ) ^ 2 * s ^ 2 := by positivity
+    have h10 : (3 * (ρ + δ)) ^ 2 * s ^ 2 = 9 * ((ρ + δ) ^ 2 * s ^ 2) := by ring
+    have h11 : 8 * (ρ + δ) ^ 2 * s ^ 2 = 8 * ((ρ + δ) ^ 2 * s ^ 2) := by ring
+    linarith
+  have hlt' : ‖(y - S) / (s : ℂ) - (σ : ℂ) * e α‖ ^ 2 < (3 * (ρ + δ)) ^ 2 :=
+    lt_of_mul_lt_mul_right hlt (sq_nonneg s)
+  have h3 : 0 ≤ 3 * (ρ + δ) := by linarith
+  exact (pow_lt_pow_iff_left₀ (norm_nonneg _) h3 two_ne_zero).mp hlt'
+
+/-- The direction `α + π` lies outside `[α + π + φ, α + 2π]` for `0 < φ < π` (U1 on the `−a` horn's arc of `ω(S′)` removes it). -/
+theorem angle_pinch_false {α φ b : ℝ} (hφ : 0 < φ) (hφπ : φ < π) (hm : ∃ m : ℤ, b = α + π + 2 * π * m)
+    (hb : b ∈ angleIcc (α + π + φ) (α + 2 * π)) : False := by
+  obtain ⟨m, rfl⟩ := hm
+  obtain ⟨k, hk1, hk2⟩ := mem_iUnion.mp hb
+  have h1 : (0 : ℝ) < ((m - k : ℤ) : ℝ) := by
+    push_cast
+    have : 0 < 2 * π * ((m : ℝ) - k) := by nlinarith
+    by_contra h; push Not at h; nlinarith
+  have h2 : ((m - k : ℤ) : ℝ) < 1 := by
+    push_cast
+    by_contra h; push Not at h; nlinarith
+  have h1' : 0 < m - k := by exact_mod_cast h1
+  have h2' : m - k < 1 := by exact_mod_cast h2
+  omega
+
+/-- The cone at `S′` of a set lying, near `S′`, outside `B(v, 1)` is in the lower closed half-turn. -/
+theorem coneAt_subset_of_far {v : ℂ} {α : ℝ} {A : Set ℂ}
+    (h : ∃ r > 0, ∀ y ∈ A, dist y (v - e (α + π / 2)) < r → 1 ≤ dist y v) :
+    coneAt A (v - e (α + π / 2)) ⊆ angleIcc (α + π) (α + 2 * π) := by
+  intro β hβ
+  obtain ⟨r, hr, hfar⟩ := h
+  have hπ := Real.pi_pos
+  set S := v - e (α + π / 2) with hSdef
+  have hsin : Real.sin (β - α) ≤ 0 := by
+    by_contra hpos
+    push Not at hpos
+    set t := Real.sin (β - α) with ht
+    obtain ⟨y, hy, hyS, hyd, hdir⟩ := hβ (min (t / 4) (min r 1)) (lt_min (by linarith) (lt_min hr one_pos))
+    have hyd' : dist y S < r := lt_of_lt_of_le hyd ((min_le_right _ _).trans (min_le_left _ _))
+    have hyv := hfar y hy hyd'
+    have hb := ArcMap.re_mul_conj_e_bound (sub_ne_zero.mpr hyS) (θ := α + π / 2) hdir
+    have hre : ((y - S) * starRingEnd ℂ (e (α + π / 2))).re = frameY S α y := by
+      unfold frameY
+      rw [e_add, show e (π / 2) = I by simp [e, Complex.exp_mul_I]]
+      simp [Complex.mul_re, Complex.mul_im]; ring
+    rw [hre, show β - (α + π / 2) = (β - α) - π / 2 by ring, Real.cos_sub_pi_div_two] at hb
+    set s := ‖y - S‖ with hs
+    have hs0 : 0 < s := norm_pos_iff.mpr (sub_ne_zero.mpr hyS)
+    have hsd : s < t / 4 := by
+      have : dist y S = s := by rw [hs, dist_eq_norm]
+      rw [← this]; exact lt_of_lt_of_le hyd (min_le_left _ _)
+    -- far from `v`: `frameY S α y ≤ s² / 2`
+    have hN := sq_dist_N S α y
+    rw [hSdef, sub_add_cancel] at hN
+    have hns := frame_normSq S α y
+    rw [← hs] at hns
+    have hY : frameY S α y ≤ s ^ 2 / 2 := by nlinarith [hyv]
+    have hε : min (t / 4) (min r 1) ≤ t / 4 := min_le_left _ _
+    have h1 : s * t - s * (t / 4) ≤ frameY S α y := by
+      have := (abs_le.mp hb).1
+      nlinarith [mul_le_mul_of_nonneg_left hε hs0.le]
+    nlinarith
+  have hc : 0 ≤ Real.cos (β - (α + 3 * π / 2)) := by
+    rw [show β - (α + 3 * π / 2) = (β - α) - π - π / 2 by ring, Real.cos_sub_pi_div_two, Real.sin_sub_pi]
+    linarith
+  have := ArcMap.mem_angleIcc_of_cos_nonneg_single hc
+  rwa [show α + 3 * π / 2 - π / 2 = α + π by ring, show α + 3 * π / 2 + π / 2 = α + 2 * π by ring] at this
+
+/-- **Shadow witnesses of a horn at the antipode, with their direction** (E5 § 3.2 (F3)–(F4)). -/
+theorem exists_witness_dir {v : ℂ} {α σ : ℝ} (hσ : σ = 1 ∨ σ = -1) {H : ℝ → Set ℂ} {W : Set ℂ}
+    (hH : ∀ ρ, ∀ z ∈ H ρ, dist z v < ρ ∧ 0 < σ * frameX v α z ∧ |frameY v α z| ≤ ‖z - v‖ ^ 2 / 2 ∧
+      1 < dist z (v - e (α + π / 2)))
+    (hmono : ∀ ρ ρ', ρ ≤ ρ' → H ρ ⊆ H ρ') (hsh : ∀ ρ > 0, ∃ z ∈ H ρ, z ∈ shadow W)
+    (hloc : ∀ δ > 0, ∃ ρ > 0, ∀ z ∈ H ρ, ∀ y ∈ W, dist z y = 1 → dist y (v - e (α + π / 2)) < δ)
+    (hfar : ∃ r > 0, ∀ y ∈ W, dist y (v - e (α + π / 2)) < r → 1 < dist y v) :
+    ∀ ε > 0, ∀ ρ₀ > 0, ∃ y ∈ W, ∃ z ∈ H ρ₀, dist z y = 1 ∧ y ≠ v - e (α + π / 2) ∧
+      dist y (v - e (α + π / 2)) < ε ∧ 0 < σ * frameX v α y ∧
+      ‖(y - (v - e (α + π / 2))) / (‖y - (v - e (α + π / 2))‖ : ℂ) - (σ : ℂ) * e α‖ < ε := by
+  intro ε hε ρ₀ hρ₀
+  obtain ⟨r, hr, hfr⟩ := hfar
+  set δ := min (min (ε / 6) (1 / 8)) r with hδ
+  have hδ0 : 0 < δ := lt_min (lt_min (by linarith) (by norm_num)) hr
+  obtain ⟨ρ₁, hρ₁, hl⟩ := hloc δ hδ0
+  set ρ := min (min ρ₀ ρ₁) (min (ε / 6) (1 / 8)) with hρ
+  have hρ0 : 0 < ρ := lt_min (lt_min hρ₀ hρ₁) (lt_min (by linarith) (by norm_num))
+  obtain ⟨z, hz, y, hy, hzy⟩ := hsh ρ hρ0
+  obtain ⟨hzv, hzx, hzY, hzS⟩ := hH ρ z hz
+  have hyS : dist y (v - e (α + π / 2)) < δ := hl z (hmono ρ ρ₁ ((min_le_left _ _).trans (min_le_right _ _)) hz) y hy hzy
+  have hy0 : y ≠ v - e (α + π / 2) := by
+    rintro rfl; rw [hzy] at hzS; exact lt_irrefl _ hzS
+  have hyv : 1 < dist y v := hfr y hy (lt_of_lt_of_le hyS (min_le_right _ _))
+  obtain ⟨h1, h2⟩ := witness_dir_pt hσ hzx hzY hzS hzy hyv hzv hyS hy0 hρ0
+    ((min_le_right _ _).trans (min_le_right _ _)) ((min_le_left _ _).trans (min_le_right _ _))
+  have hρε : ρ ≤ ε / 6 := (min_le_right _ _).trans (min_le_left _ _)
+  have hδε : δ ≤ ε / 6 := (min_le_left _ _).trans (min_le_left _ _)
+  refine ⟨y, hy, z, hmono ρ ρ₀ ((min_le_left _ _).trans (min_le_left _ _)) hz, hzy, hy0, by linarith, h1, by linarith⟩
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- **The upper flank's shadow witnesses on the `+a` horn localize at `S′`** (E5 § 3.2 (F3); I5e § 20.2): at `κ₂ < 1` by
+`horn_shadow_near_S`; at `κ₂ = 1` by `shadow_source_near_poles`, given that `N` is not in the flank colour's closure. -/
+theorem witness_near_S_upper (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₂ : ℝ} {g : Fin k} (h2 : κ₂ ≤ 1)
+    (hg : F.IsFlankAbove v α κ₂ g) (hN : κ₂ = 1 → v + e (α + π / 2) ∉ closure (F.region g)) {δ : ℝ} (hδ : 0 < δ) :
+    ∃ ρ > 0, ∀ z ∈ hornSet v α (-1) κ₂ ρ, ∀ y ∈ F.region g, dist z y = 1 → dist y (v - e (α + π / 2)) < δ := by
+  have hgv : g ∈ F.coloursAt v := mem_closure_of_mem_coneAt hg.mem_coneAt
+  rcases lt_or_eq_of_le h2 with h2' | rfl
+  · exact horn_shadow_near_S hF hv le_rfl h2' hg hδ
+  · have hNcl := hN rfl
+    rw [Metric.mem_closure_iff] at hNcl
+    push Not at hNcl
+    obtain ⟨δN, hδN, hfN⟩ := hNcl
+    obtain ⟨ρ, hρ, hloc⟩ := shadow_source_near_poles hF hv hgv (coneAt_subset_allowedCone hF hv hg.mem_coneAt)
+      (lt_min hδ hδN)
+    refine ⟨ρ, hρ, fun z hz y hy hzy => ?_⟩
+    rcases hloc z hz.1 hz.2.1 (abs_frameY_le_of_mem_hornSet le_rfl le_rfl hz) y hy hzy with hyN | hyS
+    · have := hfN y hy
+      rw [dist_comm] at this
+      linarith [min_le_right δ δN]
+    · exact lt_of_lt_of_le hyS (min_le_left _ _)
+
+/-- **The lower flank's shadow witnesses on the `−a` horn localize at `S′`** (its own `N`; E5 § 3.2 (F3)): at `κ₃ > −1` by
+`horn_shadow_near_N` turned; at `κ₃ = −1` by `shadow_source_near_poles`, given that `N` is not in the colour's closure. -/
+theorem witness_near_S_lower (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₃ κ₄ : ℝ} {g : Fin k} (h3 : -1 ≤ κ₃)
+    (h4 : κ₄ ≤ 1) (hg : F.IsFlankBelow v (α + π) κ₃ g) (hN : κ₃ = -1 → v + e (α + π / 2) ∉ closure (F.region g))
+    {δ : ℝ} (hδ : 0 < δ) :
+    ∃ ρ > 0, ∀ z ∈ hornSet v (α + π) κ₃ κ₄ ρ, ∀ y ∈ F.region g, dist z y = 1 → dist y (v - e (α + π / 2)) < δ := by
+  have hgv : g ∈ F.coloursAt v := mem_closure_of_mem_coneAt hg.mem_coneAt
+  rcases lt_or_eq_of_le h3 with h3' | rfl
+  · obtain ⟨ρ, hρ, H⟩ := horn_shadow_near_N hF hv h3' h4 hg hδ
+    rw [add_e_add_pi_add] at H
+    exact ⟨ρ, hρ, H⟩
+  · have hNcl := hN rfl
+    rw [Metric.mem_closure_iff] at hNcl
+    push Not at hNcl
+    obtain ⟨δN, hδN, hfN⟩ := hNcl
+    obtain ⟨ρ, hρ, hloc⟩ := shadow_source_near_poles hF hv hgv (coneAt_subset_allowedCone hF hv hg.mem_coneAt)
+      (lt_min hδ hδN)
+    refine ⟨ρ, hρ, fun z hz y hy hzy => ?_⟩
+    rcases hloc z hz.1 hz.2.1 (abs_frameY_le_of_mem_hornSet le_rfl h4 hz) y hy hzy with hyS | hyN
+    · rw [add_e_add_pi_add] at hyS
+      exact lt_of_lt_of_le hyS (min_le_left _ _)
+    · rw [sub_e_add_pi_add] at hyN
+      have := hfN y hy
+      rw [dist_comm] at this
+      linarith [min_le_right δ δN]
+
+/-- **An out-type contact at `P` keeps every point of its colour near `P` outside `B̄(w, 1)`** (E5 § 3.2 (F2), pointwise): near `P` each
+such point lies in a sector of the chart at `P`, hence in a tile of that colour whose closure holds `P`. -/
+theorem far_of_outType_chart {P w : ℂ} {g : Fin k} (hout : F.OutType w g P) {n : ℕ} {G : BranchGerms n} {r₀ : ℝ}
+    (hC : F.IsSectorChart G P r₀) (hn : 0 < n) :
+    ∀ y ∈ F.region g, dist y P < r₀ → 1 < dist y w := by
+  intro y hy hyP
+  have hyc : y ∈ ball P r₀ ∩ F.interiorPts := ⟨hyP, hy.1⟩
+  rw [hC.cover r₀ ⟨hC.pos, le_rfl⟩ hn] at hyc
+  obtain ⟨i, hi⟩ := mem_iUnion.mp hyc
+  obtain ⟨hT, hyT⟩ := tileOf_component hy
+  have hsub : G.sector P r₀ i ⊆ connectedComponentIn F.interiorPts y :=
+    (hC.isPreconnected r₀ ⟨hC.pos, le_rfl⟩ i).subset_connectedComponentIn hi
+      (hC.sector_subset_interiorPts hn ⟨hC.pos, le_rfl⟩ i)
+  have hPcl : P ∈ closure (G.sector P r₀ i) := by
+    apply mem_closure_of_mem_coneAt (β := G.β i)
+    rw [hC.cone r₀ ⟨hC.pos, le_rfl⟩ i]
+    exact Icc_subset_angleIcc _ _ ⟨le_rfl, hC.sorted.mono i⟩
+  have hdisj := hout _ hT (closure_mono hsub hPcl)
+  have : y ∉ closedBall w 1 := Set.disjoint_left.mp hdisj hyT
+  rw [mem_closedBall, not_le] at this
+  exact this
+
+/-- **U1 at `S′`, the cone form** (the bound inside `not_antipodal_coneAt_S_of_horn`): a `c`-horn on `ω(S′)` puts `c`'s cone at `S′`
+in `[α + π, α + 2π − φ]` for some `φ ∈ (0, π)`. -/
+theorem coneAt_S_subset_of_horn (hF : F.Valid) {v : ℂ} {α κ₂ : ℝ} {c : Fin k} (hH : F.IsHorn v α (-1) κ₂ c)
+    (h2 : κ₂ ≤ 1) : ∃ φ, 0 < φ ∧ φ < π ∧ coneAt (F.region c) (v - e (α + π / 2)) ⊆ angleIcc (α + π) (α + 2 * π - φ) := by
+  have hπ := Real.pi_pos
+  obtain ⟨φ₀, hφ₀, hrad⟩ := horn_radial_S hH h2
+  set φ := min φ₀ 1 with hφ
+  have hφ0 : 0 < φ := lt_min hφ₀ one_pos
+  have hφπ : φ < π := lt_of_le_of_lt (min_le_right _ _) (by linarith [Real.pi_gt_three])
+  refine ⟨φ, hφ0, hφπ, fun γ hγ => ?_⟩
+  have hI : γ - π ∈ angleIcc (α + π / 2 - π / 2) (α + π / 2 - φ + π / 2) := by
+    refine mem_angleIcc_of_cos_nonneg (by linarith) fun θ hθ => ?_
+    obtain ⟨η₀, hη₀, hseg⟩ := hrad (α + π / 2 - θ) ⟨by linarith [hθ.2], by linarith [hθ.1, min_le_left φ₀ 1]⟩
+    have hseg' : ∀ t ∈ Ioo 1 (1 + η₀), v - e (α + π / 2) + (t : ℂ) * e θ ∈ closure (F.region c) := fun t ht => by
+      have := hseg t ht
+      rw [show α + π / 2 - (α + π / 2 - θ) = θ by ring] at this
+      exact subset_closure this
+    have := hF.cos_nonpos_of_radial_outer hη₀ hseg' γ hγ
+    rw [show γ - π - θ = (γ - θ) - π by ring, Real.cos_sub_pi]
+    linarith
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hI
+  exact mem_iUnion.mpr ⟨m, by constructor <;> linarith⟩
+
+/-- **U1 at `N`, the cone form** (the bound inside `not_antipodal_coneAt_N_of_horn`): a `c`-horn on `ω(N)` puts `c`'s cone at `N` in
+`[α + φ, α + π]` for some `φ ∈ (0, π)`. -/
+theorem coneAt_N_subset_of_horn (hF : F.Valid) {v : ℂ} {α κ₁ : ℝ} {c : Fin k} (hH : F.IsHorn v α κ₁ 1 c)
+    (h1 : -1 ≤ κ₁) : ∃ φ, 0 < φ ∧ φ < π ∧ coneAt (F.region c) (v + e (α + π / 2)) ⊆ angleIcc (α + φ) (α + π) := by
+  have hπ := Real.pi_pos
+  obtain ⟨φ₀, hφ₀, hrad⟩ := horn_radial_N hH h1
+  set φ := min φ₀ 1 with hφ
+  have hφ0 : 0 < φ := lt_min hφ₀ one_pos
+  have hφπ : φ < π := lt_of_le_of_lt (min_le_right _ _) (by linarith [Real.pi_gt_three])
+  refine ⟨φ, hφ0, hφπ, fun γ hγ => ?_⟩
+  have hI : γ - π ∈ angleIcc (α - π / 2 + φ - π / 2) (α - π / 2 + π / 2) := by
+    refine mem_angleIcc_of_cos_nonneg (by linarith) fun θ hθ => ?_
+    obtain ⟨η₀, hη₀, hseg⟩ := hrad (θ - (α - π / 2)) ⟨by linarith [hθ.1], by linarith [hθ.2, min_le_left φ₀ 1]⟩
+    have hseg' : ∀ t ∈ Ioo 1 (1 + η₀), v + e (α + π / 2) + (t : ℂ) * e θ ∈ closure (F.region c) := fun t ht => by
+      have := hseg t ht
+      rw [show α - π / 2 + (θ - (α - π / 2)) = θ by ring] at this
+      exact subset_closure this
+    have := hF.cos_nonpos_of_radial_outer hη₀ hseg' γ hγ
+    rw [show γ - π - θ = (γ - θ) - π by ring, Real.cos_sub_pi]
+    linarith
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hI
+  exact mem_iUnion.mpr ⟨m, by constructor <;> linarith⟩
+
+end ArcMap
+
 /-! ## Spec examples -/
 
 -- SH1's model (E5's `e5-sh` model line, side `−`): `ν = 1/3` gives `f(ν) = 1/4`.

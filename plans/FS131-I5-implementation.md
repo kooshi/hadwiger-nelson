@@ -1345,3 +1345,49 @@ to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/202
 `BaseWalk` 5, `BaseDense` 3 (**27**, I5h's count; mine 10: `Terminal`'s 9 and `cv_exists`), and wave 4's stale `Contact` 3, `UnitArc` 5.
 
 ## Stage 29 — SAVED
+
+## Stage 30 — SAVED (FS131-I5i): NB3-END item 2 assembled in the kernel over named children (`flank_two_sectors_at_S`, E5 § 3.4 over SEP); `n3_end_of_not_inType` reduced to NB3-END items 3–5
+
+**What this stage proves.** `flank_two_sectors_at_S` (`Terminal`): in `n3_end_of_not_inType`'s setting the upper flank colour `g` has at least two
+sectors at `S′ = v − n` for every small radius — E5 § 3.4 (NB3-END item 2, `e5-two-g-sectors`), assembled over the children below; at this stage five
+of them (`angleIcc_eq_lower_half`, `angle_pinch`, `nextκ_le_of_disjoint`, `tanBelow_of_mem_sector`, `exists_tanAbove_of_sector`) are still `sorry`
+(proved in scratch, folded in at Stage 31). With
+it `n3_end_of_not_inType` is assembled: its repeated-colour conclusion is `flank_two_sectors_at_S`; its other two conclusions are the new named children
+`n3_end_four_colours` (NB3-END items 3–4) and `n3_end_bothKind` (item 5), each `sorry`, statements in `n3_end_of_not_inType`'s hypotheses verbatim. The
+leaf's `sorry` is replaced by two smaller ones; no statement of the skeleton changed.
+
+**The route, step by step against E5's record** (every step of E5 § 3.2–3.4 went through in Lean; none failed):
+
+| E5 | Lean | note |
+|---|---|---|
+| (F1) the stuck structure | `exists_horn_add_pi_of_stuck` (the `−a` horn at exactly `α + π`), `horn_bounds_of_noMerge`, `horn_poles_contact`, `stuck_flanks_ua` | new child: the opposite horn of a given horn, by `woodallCone_isHorn_ua` and `horn_unique_of_stuck` |
+| (F2) `g` near `S′` outside `B̄(v, 1)` | `far_of_outType_chart` (pointwise: a point of a colour out-type at `P`, near `P`, lies in a chart sector, hence in a tile whose closure holds `P`), `coneAt_subset_of_far` (the cone form, `[α + π, α + 2π]`) | out-type at `S′` from `srcG_of_shadow` and `hno` — not E5's connectedness argument; the same fact |
+| (F3) the witnesses, localized | `shadow_of_not_shave`; `witness_near_S_upper` (κ₂ < 1: `horn_shadow_near_S`; κ₂ = 1: `shadow_source_near_poles`, `N ∉ cl(region g)`), `witness_near_S_lower` (its mirror at the `−a` horn) | `N ∉ cl(region g)` when κ₂ = 1 or κ₃ = −1: in-type excluded by `hno`, out-type by `not_outType_N_of_flankAbove_one` / `not_outType_S_of_flankBelow_neg_one` turned |
+| (F4) their directions | `witness_dir_real` (pure reals, exact: `σp > 0` and `(σp − s)² + q² < 8(ρ + δ)² s²`), `dirDist_sq_frame`, `witness_dir_pt`, `exists_witness_dir` | I5e § 20.2's inequalities made exact and uniform: `α ∈ cone(g)`, `α + π ∈ cone(g)` at `S′` |
+| (F5) U1 at `S′` | `coneAt_S_subset_of_horn`, `coneAt_N_subset_of_horn` (the bounds inside wave 5's `not_antipodal_coneAt_*_of_horn`, exposed) | `c`'s cone at `S′` in `[α + π, α + 2π − φ]`; at κ₄ = 1 also in `[α + π + φ′, α + 2π]` |
+| (F6) the chart at `S′` | `localSectors`; `angleIcc_eq_lower_half` (one `g`-sector holding `α` and `α + π` inside the lower half-turn is the half-disc, germs at `α + π` and `α + 2π`), `angle_pinch` (`c`'s sector is a horn along `−a`, via `Mono.disjoint`), `nextκ_le_of_disjoint` (that horn's upper germ curves no more than the half-disc's first germ, else the sectors meet at small radius) | sign care as I5h warned: a germ of direction `α + π` and curvature `κ` is upward curvature `−κ`; `tanBelow_of_mem_sector`, `exists_tanAbove_of_sector` read it |
+| SEP, κ₄ < 1 | `sep_add_pi_S` with `μ = −κ_{i₀}`, an `H₋`-witness in the half-disc on the `−a` side (below the first germ), the `c`-horn above it | the unit pair contradicts `Valid` |
+| κ₄ = 1 | `angle_pinch_false` | `c`'s horn direction `α + π` is outside U1's cone through `H₋`'s arc of `ω(S′)` |
+
+Children added: `HornShadow` (all proved) — `witness_dir_aux1`–`aux3`, `witness_dir_real`, `dirDist_sq_frame`, `witness_dir_pt`, `angle_pinch_false`,
+`coneAt_subset_of_far`, `exists_witness_dir`, `ArcMap.witness_near_S_upper`, `_lower`, `ArcMap.far_of_outType_chart`, `ArcMap.coneAt_S_subset_of_horn`,
+`ArcMap.coneAt_N_subset_of_horn`; `Terminal` — `int_eq_one_of_real`, `int_eq_zero_of_real`, `abs_half_lt_one`, `angleIcc_eq_lower_half`, `angle_pinch`,
+`ArcMap.nextκ_le_of_disjoint`, `ArcMap.tanBelow_of_mem_sector`, `ArcMap.exists_tanAbove_of_sector`, `ArcMap.exists_horn_add_pi_of_stuck`,
+`ArcMap.flank_two_sectors_at_S`. Children added `sorry`: `ArcMap.n3_end_four_colours`, `ArcMap.n3_end_bothKind`. Names checked unique by `git grep` over
+`main`, `fs131-w5`, `fs131-w5p`, `fs131-ww` (one collision found and avoided: `frame_polar` exists in `Sectors`, identical statement; used it).
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 72149b07` (I5h's checker: `Terminal`, `BaseDense`, `FlankUA`): **PASS**.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 6 modules rebuilt (`HornShadow`, `Terminal`, `Dense`, `BaseWalk`,
+`BaseDense`, `Proofs`), 8 with warnings, every warning `declaration uses 'sorry'`**, exit 0, 8 min 47 s (`build/gate/build/20261005T045447Z-1471139.log`;
+driver log `data/fs131/i5i/build-stage30.log`). `HornShadow` has no warning. Distinct `sorry` declarations: `Terminal` 15 (the 8 untouched leaves, the
+5 chart/angle children, `n3_end_four_colours`, `n3_end_bothKind`; `n3_end_of_not_inType` no longer uses `sorry` directly), `Dense` 1, `HexRing` 6,
+`MapGraph` 3, `BaseWalk` 5, `BaseDense` 3; wave 4's stale `Contact` 3, `UnitArc` 5.
+
+**Re-pricing** (the brief: "re-price from your first two hard leaves"). The two hard pieces here were `witness_dir_real` (the exact witness-direction
+inequality, about 15k tokens, the cost all in `nlinarith` heartbeats until split into three small lemmas, as `LEAN.md` advises) and the assembly
+`flank_two_sectors_at_S` (about 12k: it elaborated over its children on the second attempt). The whole of NB3-END item 2 — 26 declarations — cost about
+130k tokens of one session, against I5h's estimate of one session for it. NB3-END items 3–5 (NB3's, one mind) are of the same kind (sector charts at
+`S′` and `v − 2n`, U1, SHAVE's clearness): about one session.
+
+## Stage 30 — SAVED
