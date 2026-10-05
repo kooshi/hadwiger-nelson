@@ -2151,3 +2151,21 @@ fifteen rows; Woodall's five), `scripts/Axioms.lean` (wave 5's blocks; `Moves`' 
 Statements unchanged on both sides but for the copies removed; no `axiom`, no `native_decide`.
 
 ## Stage 48 — SAVED
+
+## Stage 49 — SAVED (FS131-M5): `ncard_coloursAt_le_two_of_mem_openArc` and `unenclosedC_of_homeomorph` proved
+
+Statements unchanged; no new declarations.
+- **`ncard_coloursAt_le_two_of_mem_openArc`** — a colour `j` at `x = r(θ)` has `x` in the closure of its class; the class is open (`isOpen_region`), so
+  each of its points on `ω(P)` is a closure point of its part inside (`IsOpen.inter_closure`, `closure_ball`); hence
+  `region j ⊆ cl(region j ∩ B(P, 1)) ∪ (region j ∖ B̄(P, 1))`, and `x` is in the closure of one of the two parts: `j` is an inner colour (`= c`) or an
+  outer one (`= c'`). So `coloursAt x ⊆ {c, c'}`, `ncard ≤ 2`. (No arc geometry needed: the sphere part is absorbed by openness.)
+- **`unenclosedC_of_homeomorph`** — pull everything back by `h`: `h⁻¹' M.interiorPts = F.interiorPts`; the preimage of a component is the component of
+  the preimage (`Homeomorph.image_connectedComponentIn` for `h.symm`), so `h⁻¹'` carries `M`'s tiles to `F`'s and their colours (`hint`); closures and
+  complements commute with `h⁻¹'`; and `h⁻¹' C ⊆ cl K ∪ C` (`h` is the identity off `K`), so a bounded component pulls back to a bounded one, which
+  `F.UnenclosedC u` forbids. Only the one direction of boundedness is used.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 2 modules rebuilt (`BaseDense`, `Proofs`), 4 with warnings, every warning
+`declaration uses 'sorry'`** — `BaseDense`'s now at `finite_maxRingArcs`, `exists_maxRingArc`, `hfree_of_baseHyp`, `maxRingArcs_subset_of_bend`,
+`cv_exists` — exit 0, 8 min 14 s (`build/gate/build/20261005T102236Z-3314484.log`; driver log `data/fs131/m5/build-stage49.log`). Axioms: in Stage 50's print.
+
+## Stage 49 — SAVED

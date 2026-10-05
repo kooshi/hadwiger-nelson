@@ -341,7 +341,27 @@ theorem hfree_of_baseHyp (hF : F.Valid) {u P : ℂ} (hu : F.Covers u 2) (hH : F.
 approaches it from inside or from outside the circle. `GENERIC`. -/
 theorem ncard_coloursAt_le_two_of_mem_openArc {P : ℂ} {θ₁ θ₂ θ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
     (hθ : θ ∈ Ioo θ₁ θ₂) : (F.coloursAt (ringPt P θ)).ncard ≤ 2 := by
-  sorry
+  obtain ⟨hin, hout⟩ := hA.2.2 θ hθ
+  have hsub : F.coloursAt (ringPt P θ) ⊆ {c, c'} := by
+    intro j hj
+    -- a point of the class on `ω(P)` is a closure point of its part inside: the class is open there
+    have hcov : F.region j ⊆ closure (F.region j ∩ ball P 1) ∪ (F.region j \ closedBall P 1) := by
+      intro y hy
+      rcases lt_trichotomy (dist y P) 1 with h | h | h
+      · exact Or.inl (subset_closure ⟨hy, h⟩)
+      · have hyc : y ∈ closure (ball P 1) := by rw [closure_ball P one_ne_zero, mem_closedBall]; exact h.le
+        exact Or.inl ((F.isOpen_region j).inter_closure ⟨hy, hyc⟩)
+      · exact Or.inr ⟨hy, fun h' => by rw [mem_closedBall] at h'; linarith⟩
+    have hj' := closure_mono hcov hj
+    rw [closure_union, closure_closure] at hj'
+    rcases hj' with h | h
+    · have : j ∈ F.innerColours P (ringPt P θ) := h
+      rw [hin] at this; exact Or.inl this
+    · have : j ∈ F.outerColours P (ringPt P θ) := h
+      rw [hout] at this; exact Or.inr this
+  calc (F.coloursAt (ringPt P θ)).ncard ≤ ({c, c'} : Set (Fin k)).ncard := Set.ncard_le_ncard hsub (Set.toFinite _)
+    _ ≤ ({c'} : Set (Fin k)).ncard + 1 := Set.ncard_insert_le c {c'}
+    _ = 2 := by rw [Set.ncard_singleton]
 
 /-- **An interior point has no repeated colour**: near it the one sector is a ball. `GENERIC`. -/
 theorem not_hasRepeatedColour_of_mem_interiorPts {x : ℂ} (hx : x ∈ F.interiorPts) : ¬ F.HasRepeatedColour x := by
@@ -380,7 +400,37 @@ theorem unenclosedC_of_homeomorph {M : ArcMap k} {h : ℂ ≃ₜ ℂ} {u : ℂ} 
     (hhK : ∀ z ∉ K, h z = z) (hu : h u = u)
     (hint : ∀ z, (h z ∈ M.interiorPts ↔ z ∈ F.interiorPts) ∧ (z ∈ F.interiorPts → M.col (h z) = F.col z))
     (hcol : ∀ z, M.coloursAt (h z) = F.coloursAt z) (hE : F.UnenclosedC u) : M.UnenclosedC u := by
-  sorry
+  have hpre : h ⁻¹' M.interiorPts = F.interiorPts := Set.ext fun z => (hint z).1
+  -- preimages of components, and of bounded sets
+  have hcc : ∀ (A : Set ℂ) (y : ℂ), y ∈ A →
+      h ⁻¹' connectedComponentIn A y = connectedComponentIn (h ⁻¹' A) (h.symm y) := by
+    intro A y hy
+    have := h.symm.image_connectedComponentIn hy
+    rwa [h.image_symm] at this
+  have hbdd : ∀ C : Set ℂ, Bornology.IsBounded C → Bornology.IsBounded (h ⁻¹' C) := by
+    intro C hC
+    refine (hK.closure.union hC).subset fun z hz => ?_
+    by_cases hzK : z ∈ closure K
+    · exact Or.inl hzK
+    · exact Or.inr (by rw [← hhK z fun h' => hzK (subset_closure h')]; exact hz)
+  have htile : ∀ S, M.IsTile S → F.IsTile (h ⁻¹' S) := by
+    rintro S ⟨x, hx, rfl⟩
+    exact ⟨h.symm x, (hint _).1.mp (by rw [h.apply_symm_apply]; exact hx), by rw [hcc _ _ hx, hpre]⟩
+  intro c hc T S hT hS huS y hy
+  have hc' : c ∈ F.coloursAt u := by rw [← hcol u, hu]; exact hc
+  have hT₀ : F.TileOf c (h ⁻¹' T) := by
+    refine ⟨htile T hT.1, fun z hz => ?_⟩
+    have hzI : z ∈ F.interiorPts := (htile T hT.1).subset_interiorPts hz
+    have h1 : M.col (h z) = c := hT.2 hz
+    rw [mem_preimage, mem_singleton_iff, ← (hint z).2 hzI, h1]
+  have hu₀ : u ∈ closure (h ⁻¹' S) := by rw [← h.preimage_closure, mem_preimage, hu]; exact huS
+  have hy₀ : h.symm y ∈ h ⁻¹' S \ closure (h ⁻¹' T) := by
+    rw [← h.preimage_closure]
+    exact ⟨by rw [mem_preimage, h.apply_symm_apply]; exact hy.1, by rw [mem_preimage, h.apply_symm_apply]; exact hy.2⟩
+  intro hb
+  apply hE c hc' _ _ hT₀ (htile S hS) hu₀ _ hy₀
+  have := hbdd _ hb
+  rwa [hcc (closure T)ᶜ y hy.2, preimage_compl, h.preimage_closure] at this
 
 /-- **One pre-bend** (record § 41.3's step): if an inert unit arc is centred within `1` of `u`, its maximal extension `α` is bent toward
 its centre by `bend_toward_collar` (with `hfree` from `BaseHyp u` and `hlen` from `l60_le`); the bent map keeps every hypothesis of
