@@ -1544,3 +1544,70 @@ mirrored chart lemmas `κ_le_of_disjoint_end`, `tanBelow_of_mem_sector_end`, `ex
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 33 — SAVED
+
+## Stage 34 — SAVED (FS131-I5k): `cv_class` proved over `cv_hd`, `c_double` and a general form of E5 § 3.4; the handover
+
+**What this stage proves.** `cv_class` (FS114-CV-HD's CV-CLASS) no longer uses `sorry` itself: it rests on `cv_hd` and `c_double` (both open,
+both in my set). Statement unchanged; the declaration is moved below its children in `Terminal` (a section "FS114-CV-HD, (CV-CLASS) (placed
+after its children)" before `end ArcMap`), because its proof cites lemmas that sit after its old place. Lean changes in commit `a4900311`;
+this record entry in the next commit (the first commit's record append did not run: a `git rm` before it failed on the scratch file, which
+this commit removes — its content is all in `Terminal`).
+
+**The route, against E5 § 3.5** (every step went through; none failed):
+
+| E5 § 3.5 | Lean |
+|---|---|
+| the split: CV-HD's four conditions all hold or none does | `cv_hd`'s three equivalences (open) |
+| the bowtie case: both neighbours `≥ 4` colours and both-kind centres, a one-vertex chain | `c_double` (open): its (Q) arcs at `N` and `S` are both-kind arcs (a (Q) arc carries both side colours at its centre) with `≥ 4` colours; the chain clause is `n3_end_chain` (kernel) |
+| "None": `h` has two sectors at `E + n` (`Q₊ = Q₋` excluded by SEP mirrored, or U1 at a bound `1`) | `flank_two_sectors_at_S_gen` applied in the frame turned by `π` (`c`'s horn along `α + π`, its upper flank `h`, its `N` the point `S`; `¬H_S` from `¬G_N` by `cv_hd`'s first equivalence), `IsFlankBelow.unique` to name `h` |
+| "by § 3.4's argument with `cv_class`'s bounds (U1 on whichever lower arc is `ω(S′)`) `g` has two at `E − n`" | `flank_two_sectors_at_S_gen` (new, kernel): `flank_two_sectors_at_S`'s argument with both ends of the half-disc closed — a `c`-horn along `−a` at `S′` by `sep_add_pi_S` (`κ₄ < 1`) or U1 (`κ₄ = 1`), one along `+a` by `sep_S` (`κ₁ > −1`) or U1 (`κ₁ = −1`); the `c`-cone at `S′` bounded by `c`'s out-type contact there (`far_of_outType_chart`), so a `c`-sector meeting no interior direction of the half-disc is a horn at one of its two ends (`angle_pinch_ends`) |
+| "each neighbour stuck or with at least four colours" | each neighbour has a repeated colour, so it is stuck (`isStuck_of_hasRepeatedColour`) |
+
+Children added (all `Terminal`, all proved): `angle_pinch_ends`, `not_mem_angleIcc_S_add`, `ArcMap.κ_le_of_disjoint_end`,
+`ArcMap.tanBelow_of_mem_sector_end`, `ArcMap.exists_tanAbove_of_sector_end` (the `+a`-end mirrors of I5i's three chart lemmas),
+`ArcMap.IsFlankBelow.unique` (the mirror of `IsFlankAbove.unique`), `ArcMap.flank_two_sectors_at_S_gen`. Names checked unique by `git grep` over
+`main`, `origin/fs131-w5`, `origin/fs131-w5p`, `origin/fs131-ww`.
+
+**Generalizations** (for the report): E5 § 3.5's two-sector claim holds at every bound in `[−1, 1]` with no use of "None" beyond `¬G_N` (for `g`
+at `S`) and `¬H_S` (for `h` at `N`) — the conditions on `υ±` and `λ±` are not read; and in the "None" disjunct the alternative "at least four
+colours" is never needed: both neighbours are stuck.
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 72149b07` and `… 33320123`: **PASS** both. `tools/check_architecture.py`: not re-run
+(no module or import changed since Stage 33's PASS).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses
+'sorry'`**, exit 0, 8 min 40 s (`build/gate/build/20261005T054738Z-1755163.log`, ends "Build completed successfully (5370 jobs)"; driver log
+`data/fs131/i5k/build-stage34.log`). `Terminal`'s `sorry` declarations: **7** (`exists_red`, `exists_terminal`, `cv_hd_main`, `cv_hd`,
+`y3_end_needs`, `c_ends`, `c_double`); wave 5 **25** (28 at launch).
+
+**Axioms, read from this build's oleans** (`data/fs131/i5k/I5kAxioms34.lean` → `I5kAxioms34.out`, 12 GiB slot, exit 0): the seven children and
+`n3_end` on `[propext, Classical.choice, Quot.sound]`; `cv_class` reads `sorryAx` (through `cv_hd`, `c_double`), and so does the control `cv_hd`;
+the control `ArcMap.linkage_dot_ne_zero` the standard three. `scripts/Axioms.lean`: the seven records added to the "FS131-I5h" block (`cv_class`
+already had its record).
+
+### Theorems this phase proved
+
+All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5k/I5kAxioms34.out`):
+- `HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S_gen` (`Plane/ValidMap/Terminal.lean`) — E5 § 3.4 at any bounds in `[−1, 1]` (E5 § 3.5's
+  claim): an upper flank with no in-type contact at `N` has at least two sectors at `S′`.
+- `ArcMap.κ_le_of_disjoint_end`, `ArcMap.tanBelow_of_mem_sector_end`, `ArcMap.exists_tanAbove_of_sector_end`, `angle_pinch_ends`,
+  `not_mem_angleIcc_S_add`, `ArcMap.IsFlankBelow.unique` (`Terminal`) — its chart, angle and flank children.
+- `ArcMap.cv_class` is proved **over** `cv_hd` and `c_double` (its axioms include `sorryAx` until those land).
+
+### What is left of my set (7 of 11), and where it stands (for the next `Terminal` implementer)
+
+- **`cv_hd`** (M, over `cv_hd_main`): the cycle `G_N → υ± = 1 → H_S → λ± = −1 → G_N`. `G_N → υ±` is already in the kernel inside `n3_end`'s
+  proof (its `right` branch: `outType_N_of_flankAbove` forces `κ₂ = 1`; `stuck_flanks_ua` and `outType_S_of_flankBelow` force `κ₃ = −1`):
+  extract it as a child. `H_S → λ±` is the same lemma in the frame turned by `π` (as `cv_class`'s "None" case turns it: `c`'s horn along
+  `α + π`, `IsHorn.congr` for the other horn along `α + 2π`, `e (α + π + π/2) = −e (α + π/2)`, `IsFlankBelow.unique`). `υ± → H_S` is
+  `cv_hd_main`; `λ± → G_N` is `cv_hd_main` turned by `π`.
+- **`cv_hd_main`** (H: FS114-CVB § 1.6, both branches; its `¬G_N` branch consumes `y3_end_needs`), **`y3_end_needs`** (H: YB3 § 3.1): not started.
+- **`c_double`** (E–M over `cv_hd`): all four arcs unit gives `λ±`, hence `G_N ∧ H_S` by `cv_hd`; the (Q) arcs from `flankQ_upper_of_qrOnly` /
+  `flankQ_lower_of_qrOnly` (`QROnly`: both side colours at the centre, so not (R2)). `flankQ_upper`/`flankQ_lower` are `sorry` on this branch
+  (wave 4's stale copy; proved on `main`), so `c_double` reads `sorryAx` through them until the merge with `main`.
+- **`c_ends`** (M, with `stuckAlong_of_run`), **`exists_red`**, **`exists_terminal`** (H, the limit constructions), **`cv_exists`** (`BaseDense`,
+  over `exists_terminal`, CVB § 1.4 items 3–6): not started.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 34 — SAVED
