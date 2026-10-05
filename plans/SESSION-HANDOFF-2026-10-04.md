@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–370 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–374 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **370**.
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **374**.
 >
 > **Held in the kernel, on `main`**: waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -13,14 +13,15 @@ that judge the milestone, written before any job).*
 > three run now, and every slot that frees from here is refilled from the queue.
 >
 > **Running (3)** — each reports to "main" by hand-back; its report file is on its branch:
-> - **FS131-KL1** (`fs131-w5c`, de Bruijn's planner): the limit constructions — the limit of a sequence of `ArcMap`s, the strengthened moves (where each
->   lives), `exists_red` and `exists_terminal` laid out (record `plans/FS131-limit-kernel-plan.md`). Brief `data/fs131/briefs/FS131-KL1-limit.md`.
+> - **FS131-IL1** (`fs131-w5c`): lane A of the limit constructions — `Limit` (the limit of a sequence of `ArcMap`s), then `Procedure`'s finiteness lemmas.
+>   Brief `data/fs131/briefs/FS131-IL1-limit.md`.
 > - **FS131-KB2** (`fs131-w5`): the strengthened bend `bend_toward_collar` landed and constructed (I5o's statement and notes, record § 41), then `exists_preBend`
 >   over it. Brief `data/fs131/briefs/FS131-KB2-bend.md`.
 > - **FS131-ML1** (`fs131-w4mm`): MERGE's landing — `main` merged in, `exists_merge_aux` and `exists_merge` restored in ruling 269's form, the full gate,
 >   `main` fast-forwarded, drafts of the counts. Brief `data/fs131/briefs/FS131-ML1-merge-land.md`. **On its landing, file the counts as WL1's were.**
 >
-> **Done since the compaction**: **FS131-I5o** (items 369–370: `fs131-w5p` merged into `fs131-w5`; **`row134BaseUA` held** there; `disc1_local` in the kernel;
+> **Done since the compaction**: **FS131-KL1** (items 371–374: the limit constructions planned over one `exists_terminalMap`; `ArcMap.clean` repairs the
+> moves' descent; F6 (a lone horn shaveable only at `σ = ±1`) to Ephodos); **FS131-I5o** (items 369–370: `fs131-w5p` merged into `fs131-w5`; **`row134BaseUA` held** there; `disc1_local` in the kernel;
 > `bv_l3` to move to `BaseWalk` with `l3_base`'s argument extracted); **FS131-IMM4** (items 367–368: **MERGE proved** — `exists_merge_aux` on exactly the standard three; `MergeMove` free of
 > `sorry`); **FS131-I5p** (items 361–362: `y3_end_needs_of_not_mem` in the kernel, so `y3_end_needs`, `cv_hd_main`, `cv_hd` hold;
 > `exists_red`, `exists_terminal` need the limit infrastructure); I5o's two findings on the strengthened bend (items 363–366: one retracted, one narrowed by `BaseHyp`; no Ephodos job); **FS131-RS1** (items 357–358: **SEP held — the planar chain is complete**; F-RING, `filledGraph_planarLike`,
@@ -45,8 +46,10 @@ that judge the milestone, written before any job).*
 > `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'`; the axioms print parsed by script from the job's data file; one statement read back); log the item; rule the
 > slot per item 323. **At each landing** (as WL1's, items 326–327): read the saved gate logs, file the drafts with `scripts/gate_report.py axioms|vacuity` and `tools/claude_md_fact_audit.py --base <last CLAUDE.md commit>` run **before** committing, push notify Kooshi.
 >
-> **Queue for the next freed slot (items 366, 370)**: the freed lane's own continuation if on wave 5's path; **`bv_l3`'s move and proof** (to `BaseWalk` after
-> `l3_base`, statement verbatim, with `l3_base`'s argument extracted — item 370 (a); on a branch cut from `fs131-w5` if KB2 holds the tree); then **`bend_away`'s implementer** (branch `fs131-w4ba` at
+> **Queue for the next freed slot (items 370, 374)**: **FS131-E6** (Ephodos: F6 — can a lone horn, shaveable only at `σ = ±1`, occur in a valid map; if so,
+> what N4-TERM does there; KL1's plan § 3.4); the freed lane's own continuation if on wave 5's path; **lane B of the limit** (`Terminal`'s `run_hornBoundsQR`,
+> `stuckRun_ne_univ`, then `exists_vertexStep`/`exists_arcStep` after `main` merges in; on a branch cut from `fs131-w5c`); **`bv_l3`'s move and proof** (to
+> `BaseWalk` after `l3_base`, item 370 (a)); then **`bend_away`'s implementer** (branch `fs131-w4ba` at
 > `71cca146`; E5 § 4 — e5-claim-e and e5-end-cap — its route; lands on its own); then **`disc1_local`** (planar, after `fs131-w5p` merges back into `fs131-w5`).
 >
 > **Merges ahead** (MERGE lands on `main` before wave 5's landing, or merges into wave 5 at it — item 348 (b)): `fs131-w5t` → `fs131-w5p` (IP4, by amendment); then `fs131-w5p` → `fs131-w5` and `fs131-w5c` → `fs131-w5` on Keryx's word when their
@@ -106,7 +109,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 
 | job | model | brief | reports to |
 |---|---|---|---|
-| FS131-KL1 (planner: the limit constructions on `fs131-w5c`; items 361–362) | Opus | `data/fs131/briefs/FS131-KL1-limit.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-KL1.md` |
+| FS131-IL1 (lane A of the limit constructions on `fs131-w5c`; items 373–374) | Opus | `data/fs131/briefs/FS131-IL1-limit.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-IL1.md` |
 | FS131-KB2 (the strengthened bend and `exists_preBend` on `fs131-w5`; items 369–370) | Opus | `data/fs131/briefs/FS131-KB2-bend.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-KB2.md` |
 | FS131-ML1 (MERGE's landing on `fs131-w4mm`; items 367–368) | Opus | `data/fs131/briefs/FS131-ML1-merge-land.md` | branch `fs131-w4mm`'s `data/fs131/reports/FS131-ML1.md` |
 

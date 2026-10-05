@@ -3266,3 +3266,36 @@ reason by the close.*
      statements unchanged. Confidence: high. (c) **(5) needs no Ephodos job now**: the planner states it as a child, and the kernel checks it; a failed proof is
      routed then. Confidence: medium. (d) **Correction owed** (for the filing, with the other errata): FS110-N-proof's N4-SHAVE "Φ(v) down by one" holds for the
      move up to `clean`, not for `main`'s construction as built; and the same for RAY's full rim circle. Sent to KL1 by message.
+373. **FS131-KL1 done: the limit constructions planned** (planner; stage 4 SAVED, harness ≈ 418k by the task notice; record `fs131-w5c`'s
+     `plans/FS131-limit-kernel-plan.md`; report `data/fs131/reports/FS131-KL1.md`; commits `80962972`, `cc769b53`, `9b7ebe9d`, `1d1a40aa`, `8a42a2e0`,
+     pushed). **Skeleton**: `exists_red` and `exists_terminal` (statements unchanged, compared by script against `ff6e917f`) proved over one construction,
+     `exists_terminalMap` (every `k`: a valid plane map has a modification that is a terminal valid map), itself over named `sorry` children — the limit in the
+     new module `Plane/ValidMap/Limit` (`LocalStep`, `LocalSeq`, the pivot `frozen`, `limit`, `limit_valid`, `limit_isModification`, `limit_isTerminalMap`, six
+     locality lemmas, `exists_clean`), the procedure in the new module `Plane/ValidMap/Procedure` (`exists_vertexStep`, `exists_arcStep`, `exists_terminalSeq`,
+     the finiteness lemmas, `mergeAvailable_of_bothKind`), and two theorems about every terminal six-map in `Terminal` (`run_hornBoundsQR`, `stuckRun_ne_univ`).
+     **[kernel], standard three**: `LocalStep.refl`, `LocalSeq.const`, `LocalSeq.dom_eq`, `limitArcs_nondegenerate`, `terminal_vertices` (N2-TERM's clause 2 in
+     every terminal map); proved over open children: `exists_terminalMap`, `exists_red`, `exists_terminal`, `run_ends`. **Receipt** (Keryx): the five commits
+     exist and `origin/fs131-w5c` is `8a42a2e0`; the build log (`build/gate/build/20261005T090553Z-2902958.log`) ends "Build completed successfully (5372 jobs)", 0
+     warnings other than `sorry`; the open children by grep: 18 in `Limit`, 7 in `Procedure`, 2 in `Terminal`; `data/fs131/kl/KLAxioms2.out` parsed: 37 records,
+     the five named standard; `tools/fs131_i5h_stmt_check.py da09c260`: PASS. **Findings** (record § 3.4): the moves' statements as given do not yield
+     `IsModification` (nothing constrains the points of the open disc other than `v`) — new exported lemmas, record § 3.3, two of which read construction
+     detail no statement exports (`merge_step`: `MergeMove`'s colours and sectors at points of the open disc off the rim; `bend_step`: `bendMap`'s arc set);
+     **F6, a statement risk**: `ShaveAvailable` allows a lone horn (its colour has a single sector at `v`, so no curvature bound applies); if its only admissible
+     split is `σ = ±1` strictly between `κ₁` and `κ₂`, every shave there adds a unit arc, which `IsModification` forbids — FS112-WALK row 7 covers only bounds
+     inside `[−1, 1]`; either the configuration cannot occur in a valid map (still to derive), or `Terminal` cannot be reached there by the moves; no
+     counterexample built; **F7**: RAY needs MERGE first (`RayAvailable` has no clearness clause), so `exists_vertexStep` takes a priority form, internal to the
+     construction. Two one-mind steps stated as children for the kernel to check: `witness_not_cross` (item 371 (5)) and `mergeAvailable_of_bothKind` (N2-RED's
+     parenthesis). **Price**: five to seven implementer sessions; two can split by file — **A**: `Limit` then `Procedure`'s finiteness lemmas; **B**: `Terminal`'s
+     two children now, then `exists_vertexStep`/`exists_arcStep` after the merge with `main`; `exists_terminalSeq` last. Spec examples owed for `badCount`,
+     `IsMaxRingArc`, `treatPts`. Credit: KL1, for one limit construction where the plan had two, and for F6 before an implementer met it.
+374. **Rulings on KL1's held items, and its slot.** (a) **The moves' new lemmas** are proved on wave 5's branch after it merges `main` (ruling 372 (a)): in a
+     module downstream of `Moves`/`MergeMove`/`UnitArc` where the needed definitions are public, else as new declarations appended to the construction's own
+     file on that branch (no statement of a landed declaration changes). Confidence: high. (b) **F6 → an Ephodos derivation, FS131-E6, at the next free slot**:
+     whether a lone horn, `ShaveAvailable` at `v` with every admissible split at `σ = ±1` strictly between `κ₁` and `κ₂`, can occur in a valid map (and in a
+     map reached by the procedure); if it can, what N4-TERM's route does there (another move, or a defect in `exists_terminal`). Alternative weighed: the
+     implementer meets it first as a child of `exists_vertexStep`. Why: it is a question about the backlog statement's truth, not about Lean, and implementer B
+     reaches `exists_vertexStep` only after the merge with `main` — the derivation has time to land first. Confidence: medium-high. (c) **KL1's slot →
+     implementer A, FS131-IL1, on `fs131-w5c`**: `Limit` (the plan's order: `LocalStep.mono`, `exists_stab`, `frozen`, its consumers, the locality lemmas,
+     `limit_isTerminalMap`, the clean lemmas, `exists_clean`), then `Procedure`'s finiteness lemmas and `mergeAvailable_of_bothKind`. Implementer B joins the queue
+     (on a branch cut from `fs131-w5c`, since one writer per tree). Why: the limit is the longest chain to wave 5's landing, and it is independent of F6.
+     Confidence: high. In flight after IL1's launch: 1 (ML1) + 1 (KB2) + 1 (IL1) = 3.
