@@ -5,6 +5,8 @@ import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
 import Proofs.HadwigerNelson.Plane.ValidMap.BrickMap
 import Proofs.HadwigerNelson.Plane.ValidMap.FlankUA
 import Proofs.HadwigerNelson.Plane.ValidMap.HornShadow
+import Proofs.HadwigerNelson.Plane.ValidMap.Procedure
+import Proofs.HadwigerNelson.Plane.ValidMap.HexRing
 
 /-!
 # The terminal modification `M*` and the stuck chains' ends (FS112-N2-TERM, -C-ENDS, -C-DOUBLE, FS114-CV-HD)
@@ -796,36 +798,6 @@ theorem chainVertex_antipodal (hF : F.Valid) {E : ℂ} (hv : F.Covers E 1) (hst 
   · exact ⟨Hu.mem_coneAt_region, Hd.mem_coneAt_region⟩
   · exact ⟨fa.mem_coneAt, fb'.mem_coneAt⟩
   · exact ⟨fb.mem_coneAt, fa'.mem_coneAt⟩
-
-/-! ## FS112-N2-TERM, with FS112-N2-RED as its lemma -/
-
-/-- **FS112-N2-RED** (merged into FS112-N2-TERM as its lemma, SR2 item 13): every valid map of the plane has a valid modification —
-the same domain, no unit arc created, every point of at least four colours carrying those colours in the map itself — in which every
-unit arc is (Q) or (R2). "By W-MERGE and whole-arc bends" and "the procedure terminates with no stubs" are the proof's content (the
-modification is the limit of the procedure). Inhabitant of the hypotheses: `sevenBrickMap` at seven colours (no unit arc: itself). -/
-theorem exists_red (hF : F.Valid) (hP : F.IsPlaneMap) :
-    ∃ M : ArcMap k, F.IsModification M ∧ M.Valid ∧ M.QROnly := by
-  sorry
-
-/-- **FS112-N2-TERM**: every valid six-coloured map of the plane has a valid modification `M*` (the same domain, no unit arc created,
-four-colour points' colours kept) which is a terminal valid map (`IsTerminalMap`: no MERGE, MERGE-RAY or SHAVE anywhere, every unit
-arc (Q) or (R2)), in which (clause 2) every vertex — a point of at least three colours or with a repeated colour — is cubic
-trichromatic, carries at least four colours (an NB4P exception), or is stuck; and (clause 3) every vertex stuck along `e α` lies on a
-stuck run that is not bi-infinite, each finite end (the last chain vertex) within distance `1` of a point of a (Q) or (R2) arc or of a
-point of at least four colours, and every horn bound `±1` at a vertex of the run, along `±e α`, a (Q) or (R2) arc. "One-sided infinite
-chains are a GAP" is a not-claimed clause: nothing is stated about them. Inhabitant of the hypotheses: none at six colours is known
-(a valid six-map of the plane is FS-114's open question); the statement's class at seven colours is inhabited by `sevenBrickMap`. -/
-theorem exists_terminal {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) :
-    ∃ M : ArcMap 6, F.IsModification M ∧ M.IsTerminalMap ∧
-      (∀ x ∈ M.dom, 3 ≤ (M.coloursAt x).ncard ∨ M.HasRepeatedColour x →
-        M.IsCubicTrichromatic x ∨ 4 ≤ (M.coloursAt x).ncard ∨ M.IsStuck x) ∧
-      ∀ v α, M.StuckAlong v α → (M.coloursAt v).ncard ≤ 3 →
-        M.stuckRun v α ≠ univ ∧
-        (∀ j ∈ M.stuckRun v α, (j + 1 ∉ M.stuckRun v α ∨ j - 1 ∉ M.stuckRun v α) →
-          ∃ z, dist z (v + (j : ℂ) * e (α + π / 2)) ≤ 1 ∧ (M.OnQR2Arc z ∨ 4 ≤ (M.coloursAt z).ncard)) ∧
-        ∀ j ∈ M.stuckRun v α, M.HornBoundsQR (v + (j : ℂ) * e (α + π / 2)) α ∧
-          M.HornBoundsQR (v + (j : ℂ) * e (α + π / 2)) (α + π) := by
-  sorry
 
 /-! ## FLANK-Q unconditional (wave 4's obligation, inventory item 79) -/
 
@@ -3662,6 +3634,94 @@ theorem stuckRun_eq_univ_of_noFour {F : ArcMap 6} (hM : F.IsTerminalMap) (h4 : �
         · exact step (i + 1) (by omega) (-1) (Or.inr rfl) (by ring)
         · exact step (i - 1) (by omega) 1 (Or.inl rfl) (by ring)
   exact eq_univ_of_forall fun j i _ _ => (hall _ i le_rfl).1
+
+/-! ## FS112-N2-TERM's clauses 2–3: theorems about every terminal map (FS131-KL1) -/
+
+/-- **N2-TERM's clause 2 in every terminal map**: a point of at least three colours or with a repeated colour is cubic trichromatic,
+of at least four colours, or stuck — a repeated colour with no move available is stuck (`isStuck_of_hasRepeatedColour`), and three
+colours with none repeated is cubic (`isCubicTrichromatic_of_three_of_noRep`). Inhabitant: `sevenBrickMap_isTerminalMap`. -/
+theorem terminal_vertices (hM : F.IsTerminalMap) :
+    ∀ x ∈ F.dom, 3 ≤ (F.coloursAt x).ncard ∨ F.HasRepeatedColour x →
+      F.IsCubicTrichromatic x ∨ 4 ≤ (F.coloursAt x).ncard ∨ F.IsStuck x := by
+  intro x hx h
+  by_cases hR : F.HasRepeatedColour x
+  · exact Or.inr (Or.inr (isStuck_of_hasRepeatedColour hM.2.2.1 hx hR))
+  · rcases h with h3 | h
+    · by_cases h4 : 4 ≤ (F.coloursAt x).ncard
+      · exact Or.inr (Or.inl h4)
+      · exact Or.inl (isCubicTrichromatic_of_three_of_noRep hx (by omega) hR)
+    · exact absurd h hR
+
+/-- **N2-TERM's clause 3, the ends, in every terminal six-map**: an end of a stuck run is within distance `1` of a point of at least
+four colours — the next point of the normal line (`c_ends`, FS112-C-ENDS's erratum form). No model of a stuck chain in a terminal
+valid plane map is known (`GENERIC`, FS-115). -/
+theorem run_ends {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : ℝ} (hv : F.StuckAlong v α) :
+    ∀ j ∈ F.stuckRun v α, (j + 1 ∉ F.stuckRun v α ∨ j - 1 ∉ F.stuckRun v α) →
+      ∃ z, dist z (v + (j : ℂ) * e (α + π / 2)) ≤ 1 ∧ (F.OnQR2Arc z ∨ 4 ≤ (F.coloursAt z).ncard) := by
+  intro j hj hend
+  obtain ⟨h1, h2⟩ := c_ends hM hv hj
+  rcases hend with h | h
+  · refine ⟨v + ((j + 1 : ℤ) : ℂ) * e (α + π / 2), le_of_eq ?_, Or.inr (h1 h)⟩
+    rw [dist_eq_norm, show v + ((j + 1 : ℤ) : ℂ) * e (α + π / 2) - (v + (j : ℂ) * e (α + π / 2)) = e (α + π / 2) by
+      push_cast; ring, norm_e]
+  · refine ⟨v + ((j - 1 : ℤ) : ℂ) * e (α + π / 2), le_of_eq ?_, Or.inr (h2 h)⟩
+    rw [dist_eq_norm, show v + ((j - 1 : ℤ) : ℂ) * e (α + π / 2) - (v + (j : ℂ) * e (α + π / 2)) = -e (α + π / 2) by
+      push_cast; ring, norm_neg, norm_e]
+
+/-- **N2-TERM's clause 3, the horn bounds, in every terminal six-map**: at each vertex of a stuck run, every horn bound `±1` along
+`±e α` sits on a (Q) or an (R2) arc. The run vertex is stuck along `±e α` (`stuckAlong_of_mem_stuckRun`); a horn there is one of the
+two-sector colour's (`stuck_structure_at_axis`), whose flank and pole contact are `stuck_structure_ua`'s; then
+`flankQ_upper_of_qrOnly` / `flankQ_lower_of_qrOnly` (FS112-N2-FLANK-Q). No model expected (`GENERIC`, FS-115). -/
+theorem run_hornBoundsQR {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : ℝ} (hv : F.StuckAlong v α)
+    (h3 : (F.coloursAt v).ncard ≤ 3) :
+    ∀ j ∈ F.stuckRun v α, F.HornBoundsQR (v + (j : ℂ) * e (α + π / 2)) α ∧
+      F.HornBoundsQR (v + (j : ℂ) * e (α + π / 2)) (α + π) := by
+  sorry
+
+/-- **N2-TERM's clause 3, finiteness, in every terminal six-map: no stuck run is bi-infinite** (FS110-N4-FIN under unit arcs,
+FS112-N2-RAY). Along a bi-infinite run every vertex is stuck along `±e α` (`stuckAlong_of_mem_stuckRun`); no horn bound is `±1`, for
+its arc would be a unit arc centred at the neighbouring chain vertex, which centres none (`cv_l0`); so the bounds `λ_j < υ_j` lie in
+`(−1, 1)` and satisfy N4-SHADOW's `λ_j ≤ f(λ_{j+1})`, `f̃(υ_{j−1}) ≤ υ_j` (no SHAVE at a stuck vertex: the horn is doubly shadowed by
+its flanks, whose shadows at the next vertex are the concentric circles, `shadow_hornSet_subset_S`/`_N`), which `n4_fin` refutes.
+No model expected (`GENERIC`, FS-115). -/
+theorem stuckRun_ne_univ {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : ℝ} (hv : F.StuckAlong v α)
+    (h3 : (F.coloursAt v).ncard ≤ 3) : F.stuckRun v α ≠ univ := by
+  sorry
+
+/-! ## FS112-N2-TERM, with FS112-N2-RED as its lemma -/
+
+/-- **FS112-N2-RED** (merged into FS112-N2-TERM as its lemma, SR2 item 13): every valid map of the plane has a valid modification —
+the same domain, no unit arc created, every point of at least four colours carrying those colours in the map itself — in which every
+unit arc is (Q) or (R2). "By W-MERGE and whole-arc bends" and "the procedure terminates with no stubs" are the proof's content (the
+modification is the limit of the procedure). Inhabitant of the hypotheses: `sevenBrickMap` at seven colours (no unit arc: itself). -/
+theorem exists_red (hF : F.Valid) (hP : F.IsPlaneMap) :
+    ∃ M : ArcMap k, F.IsModification M ∧ M.Valid ∧ M.QROnly := by
+  -- FS131-KL1's route (inventory item 372): a corollary of the terminal construction, whose map is valid and (Q)/(R2) only
+  obtain ⟨M, hM, hT⟩ := exists_terminalMap hF hP
+  exact ⟨M, hM, hT.1, hT.2.2.2⟩
+
+/-- **FS112-N2-TERM**: every valid six-coloured map of the plane has a valid modification `M*` (the same domain, no unit arc created,
+four-colour points' colours kept) which is a terminal valid map (`IsTerminalMap`: no MERGE, MERGE-RAY or SHAVE anywhere, every unit
+arc (Q) or (R2)), in which (clause 2) every vertex — a point of at least three colours or with a repeated colour — is cubic
+trichromatic, carries at least four colours (an NB4P exception), or is stuck; and (clause 3) every vertex stuck along `e α` lies on a
+stuck run that is not bi-infinite, each finite end (the last chain vertex) within distance `1` of a point of a (Q) or (R2) arc or of a
+point of at least four colours, and every horn bound `±1` at a vertex of the run, along `±e α`, a (Q) or (R2) arc. "One-sided infinite
+chains are a GAP" is a not-claimed clause: nothing is stated about them. Inhabitant of the hypotheses: none at six colours is known
+(a valid six-map of the plane is FS-114's open question); the statement's class at seven colours is inhabited by `sevenBrickMap`. -/
+theorem exists_terminal {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) :
+    ∃ M : ArcMap 6, F.IsModification M ∧ M.IsTerminalMap ∧
+      (∀ x ∈ M.dom, 3 ≤ (M.coloursAt x).ncard ∨ M.HasRepeatedColour x →
+        M.IsCubicTrichromatic x ∨ 4 ≤ (M.coloursAt x).ncard ∨ M.IsStuck x) ∧
+      ∀ v α, M.StuckAlong v α → (M.coloursAt v).ncard ≤ 3 →
+        M.stuckRun v α ≠ univ ∧
+        (∀ j ∈ M.stuckRun v α, (j + 1 ∉ M.stuckRun v α ∨ j - 1 ∉ M.stuckRun v α) →
+          ∃ z, dist z (v + (j : ℂ) * e (α + π / 2)) ≤ 1 ∧ (M.OnQR2Arc z ∨ 4 ≤ (M.coloursAt z).ncard)) ∧
+        ∀ j ∈ M.stuckRun v α, M.HornBoundsQR (v + (j : ℂ) * e (α + π / 2)) α ∧
+          M.HornBoundsQR (v + (j : ℂ) * e (α + π / 2)) (α + π) := by
+  -- FS131-KL1's route (inventory item 372): the terminal construction, then three theorems about every terminal map
+  obtain ⟨M, hM, hT⟩ := exists_terminalMap hF hP
+  exact ⟨M, hM, hT, terminal_vertices hT, fun v α hv h3 =>
+    ⟨stuckRun_ne_univ hT hv h3, run_ends hT hv, run_hornBoundsQR hT hv h3⟩⟩
 
 end ArcMap
 

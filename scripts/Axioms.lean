@@ -3651,6 +3651,45 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.not_inType_N_of_flankBelow
 #print axioms HadwigerNelson.Plane.ArcMap.horns_of_two_sectors_at
 
+-- FS131-KL1 (the limit planner): `Plane/ValidMap/Limit`, `Plane/ValidMap/Procedure`, and N2-TERM's clause children in `Terminal`
+#print axioms HadwigerNelson.Plane.ArcMap.LocalStep.refl
+#print axioms HadwigerNelson.Plane.ArcMap.LocalStep.mono
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.const
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.dom_eq
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.exists_stab
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.not_mem_U_of_stab_le
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.frozen
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limitArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limitArcs_locallyFinite
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limitCol_locallyConstant
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limit
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.eventually_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limit_isPlaneMap
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limit_valid
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limit_isModification
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_eq_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.onRingArc_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.mergeAvailable_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.rayAvailable_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.shaveAvailable_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.qrAt_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limit_isTerminalMap
+#print axioms HadwigerNelson.Plane.ArcMap.not_available_of_not_isSite
+#print axioms HadwigerNelson.Plane.ArcMap.IsClean.eventually_not_isSite
+#print axioms HadwigerNelson.Plane.ArcMap.exists_clean
+#print axioms HadwigerNelson.Plane.ArcMap.badCount_eq_zero_iff
+#print axioms HadwigerNelson.Plane.ArcMap.badCount_lt_top
+#print axioms HadwigerNelson.Plane.ArcMap.treatPts_inter_finite
+#print axioms HadwigerNelson.Plane.ArcMap.mergeAvailable_of_bothKind
+#print axioms HadwigerNelson.Plane.ArcMap.exists_vertexStep
+#print axioms HadwigerNelson.Plane.ArcMap.exists_arcStep
+#print axioms HadwigerNelson.Plane.ArcMap.exists_terminalSeq
+#print axioms HadwigerNelson.Plane.ArcMap.exists_terminalMap
+#print axioms HadwigerNelson.Plane.ArcMap.terminal_vertices
+#print axioms HadwigerNelson.Plane.ArcMap.run_ends
+#print axioms HadwigerNelson.Plane.ArcMap.run_hornBoundsQR
+#print axioms HadwigerNelson.Plane.ArcMap.stuckRun_ne_univ
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
