@@ -3123,3 +3123,46 @@ reason by the close.*
      queued after I5o's hand-back): build the multi-arc lens with a horn-shaped tip and the homeomorphism; if it finds the collar lens is not always
      constructible, it stops and reports with the configuration, and that goes to an Ephodos re-derivation of E4-BEND-UN's open line. This leaf joins wave 5's
      path. (c) **Order** `disc1_local` before `bv_l3`: accepted (the brief leaves order to the job). Sent to I5o by message.
+361. **FS131-I5p handed back** (Stage 44 SAVED, harness ≈ 378k by the task notice; record `fs131-w5c`'s `plans/FS131-I5-implementation.md`, Stages 43–44; report
+     `data/fs131/reports/FS131-I5p.md`; commits `d3e15a0f`, `827a2245`, `ff6e917f`, pushed). **Results, [kernel] on the standard three**:
+     `y3_end_needs_of_not_mem` (YB3 § 3.1 Steps 3–4, the case `g ∉ P_cl(N)`), so **`y3_end_needs` (FS112-Y3-END-NEEDS as corrected, item 69), `cv_hd_main`
+     (FS114-CV-HD's main clause) and `cv_hd` (its four equivalences) carry nothing open beneath them**; seven children, among them
+     `flank_two_sectors_at_S_of_flanks` (E5 § 3.4 at a stuck vertex with any number of colours, given one colour flanking both horns on the `+n` side).
+     **Receipt** (Keryx): `origin/fs131-w5c` is `ff6e917f`; the build log (`build/gate/build/20261005T082921Z-2689945.log`) ends "Build completed successfully
+     (5370 jobs)", 0 warnings other than `sorry`; `Terminal`'s `sorry` declarations by grep: `exists_red`, `exists_terminal`; `data/fs131/i5p/I5pAxioms44.out`
+     parsed: 21 records, 13 standard (the four named among them), the rest on `sorryAx` through `exists_red`, `exists_terminal`, `exists_merge` and this branch's
+     stale `flankQ_upper/lower_of_qrOnly` (proved on `main`) — `cv_class`, `c_double`, `c_ends` drop to the standard three at the merge with `main`;
+     `tools/fs131_i5h_stmt_check.py da09c260` and `tools/fs131_i5n_merge_swap.py --check` run by Keryx: PASS, IDENTICAL. **Generalizations**: YB3 § 3.1 Step 4
+     needs neither a separate `z₁ ≠ z₂` nor sharpening (b) (both upper flanks at `N + n` are `g`, and `g ∉ P_cl(N)` makes MERGE available); Step 3 (a) is only
+     a case split's other branch (two different lower chart colours close by the seven-colour count). **Tool coverage note**: the statement checker at base
+     `72149b07` predates `y3_end_needs_of_not_mem`; I5p also ran it at `da09c260`. **Left (2)**: `exists_red`, `exists_terminal`, the limit constructions — they
+     need the limit of a sequence of `ArcMap`s (arcs locally finite, colouring valid, `IsModification` kept), which nothing in the repository provides; W-MERGE
+     (`exists_merge`, IMM4 running); and the whole-arc bends (stale `sorry` here, proved on `main`). I5p recommends a planner pass on the limit infrastructure.
+     Credit: I5p, for Step 4 without sharpening (b).
+362. **Ruling on I5p's slot: a planner for the limit constructions, FS131-KL1** (de Bruijn's planner, on `fs131-w5c`): the limit of a sequence of `ArcMap`s
+     (local eventual constancy, validity, plane map, `IsModification` and `RingArcsWithin` passing to the limit), the strengthened moves the plan § 4 leaf 2
+     says `IsModification` needs (whether they follow from the moves' statements, or need new children where the constructions live — on `main`'s `Moves` and
+     `fs131-w4mm`'s `MergeMove`), the counts' descent (N2-RED's arcs, N4-TERM's `Φ`), and `exists_red` and `exists_terminal` laid out over them — a skeleton with
+     `sorry` at each child, a plan and a price per child. Alternative weighed: an implementer directly, as I5p's two predecessors priced the leaves at one to
+     two sessions each. Why: the limit is new infrastructure, used by two leaves, and the strengthened moves may reach files outside wave 5 — a plan on disk
+     first decides where each piece lives. Confidence: high. In flight after KL1's launch: 1 (IMM4) + 1 (I5o) + 1 (KL1) = 3.
+363. **FS131-I5o, by message: two findings about the strengthened bend's clauses, for Ephodos** (neither a backlog statement defect). (1) **"No new inert arc"
+     is false for any toward bend, whatever the lens**: a unit arc `β ⊆ ω(Q)` of `Γ` centred at a point `Q` of the open bent arc `α°` (`|Q − u| ≤ 1`), sides
+     `(c, d)` with `c` α's inner colour and `d ≠ c'`; in `F`, `coloursAt Q = {c, c'}`, so `β` is not inert (`c` is carried at `Q`); after the bend `α°` lies in the
+     `c'` class, `coloursAt Q = {c'}`, and `β` is inert. So the iteration cannot be measured by inert arcs; I5o's measure: the number of maximal constant-sided
+     unit arcs (any sides) centred in `B̄(u, 1)`, which drops by exactly one per collar bend given (R1) every ring arc of `M` is a ring arc of `F` with the same
+     sides and (R2) every ring arc of `F` whose open arc misses `α°` is a ring arc of `M` (both from the collar, since with `α` maximal and `c ≠ c'` no ring arc of
+     `F` has `A` or `B` as an interior point). (2) **The collar is not always available**: E4-BEND-UN assumes `α°` borders exactly two tiles; if an arc `δ` of
+     `Γ` meets `α` at an interior point `x`, constant sides force `δ` to be a same-colour ("fake") boundary there (a transversal crossing needs `c = c'`; a
+     tangency from inside needs both sides of `δ` coloured `c`), so near `x`, `cl T_in` is two cusps pinched at `x`; and a homeomorphism fixing `Γ ∖ α°` cannot
+     move `α°` off itself at a crossing point (`h(x) = x` by continuity along `δ`). Nothing in `ArcMap`'s definition forbids an arc of `Γ` with one colour on both
+     sides. **The question for Ephodos**: does the pre-bend's iteration (NB3 § 1.4 step 4, "the bends iterated until none is left") hold when `α°` carries
+     vertices of same-colour boundaries, and is "no new inert arc" needed anywhere upstream? Credit: I5o, for both counterexamples.
+364. **Ruling on item 363.** (a) **An Ephodos re-derivation, FS131-E6, takes the next free slot** (ahead of the strengthened bend's construction job KB2,
+     which waits on its answer): E4-BEND-UN's iteration re-derived — its measure (inert arcs fail; I5o's count of maximal constant-sided unit arcs with R1–R2,
+     or another), α° meeting same-colour boundaries (split α at such points, or pinch the lens, or show they cannot arise in a valid map), and whether "no new
+     inert arc" is read anywhere upstream (NB3 § 1.4 step 4, row 134's base, `exists_preBend`'s consumers). Alternative weighed: E6 ahead of the limit planner
+     KL1 now. Why not: KL1's ruling (362) is made and its work is independent; I5o and IMM4 are near their hand-backs, so E6 waits about one slot. Confidence:
+     medium. (b) **I5o states the child in the form it believes true** (R1–R3 in place of "no new inert arc", and the hypothesis that `α°` holds no point of
+     another arc of `Γ`, if it judges so), with its reasons in the record, and proves `exists_preBend` over it only where E6's answer cannot change the route;
+     otherwise it leaves `exists_preBend` `sorry` with full notes. Sent to I5o by message.
