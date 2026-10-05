@@ -777,3 +777,52 @@ header; the axioms self-test's expected counts if this state moves them; `tools/
 fast-forward only. **May not**: any statement — no hypothesis, conclusion or definition the statements use; no `axiom`, no `native_decide`; `CLAUDE.md`,
 `LEAN.md`, `tools/claude_md_fact_audit.py`, `LEDGER.md` (drafts only); another job's tools (`tools/fs131_qa1_dupes.py`, `fs131_wl_mergestmts.py`,
 `fs131_im_statements.py`, `fs131_im_split.py`, `fs131_imm_*.py` are run, never edited).
+
+## Stage 14 — SAVED (FS131-ML1): `main` merged (`b9305232`); `exists_merge_aux` and `exists_merge` restored; the build green
+
+**Before the merge.** `tools/fs131_qa1_dupes.py` (run as the brief names it, not edited): 13 names in two bodies' own files, none of them
+`MergeMove`'s — its fixed body table has no entry for `fs131-w4mm` (`data/fs131/ml/qa1-dupes.txt`; `--self-test` OK). So the question was asked
+of this merge by a new tool, **`tools/fs131_ml_dupes.py`** (QA1's `qualified_decls` imported): every name declared in this branch's own files
+(`git diff --name-only 73d31ad6 HEAD`: `MergeMove`, `Moves`; 192 declarations) against every name `main` declares (8,857): **0 pairs**
+(`data/fs131/ml/dupes-premerge.txt`). Its `--plant` (two synthetic own files: `main`'s `ArcMap.exists_shave_aux` under another statement, and
+`ArcMap.exists_rayMerge_aux` with `main`'s statement copied verbatim) reports exactly `DIFFERS exists_shave_aux` and `IDENTICAL exists_rayMerge_aux`,
+exit 1 (`data/fs131/ml/dupes-plant.txt`). Also: none of `MergeMove`'s 151 theorem statements is held by `main` under another name (an ad hoc
+pass over `tools/fs131_i4_mergestmts.py`'s `stmts`: 0). **No identical copy, no collision: nothing deleted, nothing renamed.**
+
+**The merge** (`b9305232`, `git merge --no-ff --no-commit origin/main` at `7e5e98a1`, one merge base `73d31ad6`; the resolved files `git add`ed by
+name). `Proofs.lean` auto-merged (both sides: `main`'s new modules and `MergeMove`'s import). Three conflicts:
+- `Moves`: git kept this branch's `import …MergeMove` and took `main`'s text everywhere else; the one conflict, at the end, was resolved by
+  script — `main`'s `exists_rayMerge_aux` body (RAY, proved there), then `exists_merge_aux`'s docstring, statement and proof cut from `c9623d04`
+  verbatim. The module docstring is put back to naming MERGE (title "SHAVE, MERGE-RAY and MERGE (FS110-N4-SHAVE, N4-RAY, W-MERGE)", "three
+  simplifying moves", `exists_merge_aux` in the list — the words G4 Stage 45 removed) with one clause added: "MERGE's children are
+  `Plane/ValidMap/MergeMove`". `git diff origin/main` on `Moves`: the import, the docstring's three lines, and the 30 lines of `exists_merge_aux`.
+- `Contact` (no conflict: `main` deleted, this branch never touched it): `exists_merge` restored by script — the section header `/-! ## FS110-W-MERGE -/`,
+  docstring and statement cut from `c9623d04` verbatim, placed where they stood (after `exists_rayMerge`, before `/-! ## FS110-N4-STUCK -/`), the body
+  `exact exists_merge_aux hF hv hn1 hn hD` in place of `sorry` (the one-line citation, `exists_shave`'s form); the header line
+  "* **FS110-W-MERGE**: `exists_merge`." after N4-STUCK's, as at `c9623d04`.
+- `ARCHITECTURE.md`: `MergeMove`'s row (now "FS131-IMM1–IMM4, inventory items 285, 367; landed by FS131-ML1"), `Moves`' row as the three moves
+  (with "W-MERGE left wave 4 at its landing, inventory item 295 (a), and returned at MERGE's, FS131-ML1"; imports `Surgery`, `MergeMove`), `UnitArc`'s
+  row `main`'s (its `Sectors` import); `Contact`'s row regains "FS110-W-MERGE (`exists_merge`)".
+- `scripts/Axioms.lean`: `main`'s block "FS131-IM3: MERGE-RAY's children" first, then this branch's `MergeMove` block (151 records), both just above
+  `=== PURCHASED ===`; the two records `ArcMap.exists_merge` (after `exists_rayMerge`) and `ArcMap.exists_merge_aux` (after `exists_rayMerge_aux`)
+  restored where G4 deleted them. 3,807 records = 3,654 + 151 + 2, none twice.
+
+**`framePt`**: none in `MergeMove`, `Moves` or `Contact` (`grep`: 0); on the merged tree `framePt` occurs only in wave 2's `Plane/Slack` and its
+record `dist_framePt_sq`, so nothing of MERGE can resolve to it; this branch's two `framePt` records were the base's, replaced by `main`'s renamed ones.
+
+**Checks.** **`tools/fs131_ml_restore.py`** (new): both declarations' docstring + statement byte-identical to `c9623d04` (`exists_merge_aux` 848
+bytes, `exists_merge` 1,101 bytes), `exists_merge`'s body the one-line citation, and the import, header, `Proofs.lean`, `ARCHITECTURE.md` and record
+checks: PASS (`data/fs131/ml/restore-check.txt`); `--plant` (`hn1 : 2 ≤ n` in `exists_merge`): FAIL naming it, exit 1 (`restore-plant.txt`); on
+`origin/main` every check FAILS (11 lines, `restore-main.txt`), so each failure path is reachable. `tools/fs131_im_statements.py --check` (IM's,
+run): **PASS** — "exists_merge_aux has Contact's statement of exists_merge verbatim (6 lines; diff empty)"; on `main` it FAILS on `exists_merge`
+(item 318's correction (2), discharged) (`data/fs131/ml/im-statements.txt`). `tools/fs131_im_split.py --check`: PASS (`im-split.txt`).
+**Three-way statements** (`tools/fs131_wl_mergestmts.py HEAD origin/main`, WL1's, run): **6,509 names, 0 base conflicts, 2 mismatches —
+`exists_merge` and `exists_merge_aux`, each "merged {…} expected {}"**: a plain three-way merge would keep `main`'s deletion; the two are the
+restore this job was asked for, their statements checked against `c9623d04` above (`data/fs131/ml/mergestmts.txt`). Its `--plant`: a third
+mismatch (`AeColouring.exists_fill`), exit 1 (`mergestmts-plant.txt`). `tools/fs131_i4_treedupes.py` on the merged tree: 9,029 declarations,
+exactly `main`'s three standing repeats (`conj_e`, `bindings`, `with`; `--rev origin/main` the same three) (`treedupes-merged.txt`, `treedupes-main.txt`).
+
+**Build** of the merged tree (under the slot): **OK — 451 of 451 batches, 34 module(s) rebuilt, 0 module(s) with warnings, 13m41s**, exit 0
+(`build/gate/build/20261005T085902Z-2875622.log`; driver `data/fs131/ml/build-merged.log`): `grep -c warning` on the full log 0; its five `error` lines
+are the up-to-date probe's "target is out-of-date" (5 of 5), which starts the walk. `MergeMove` rebuilt against `main`'s oleans in 41 s, `Moves`
+11 s, `Contact` 13 s.

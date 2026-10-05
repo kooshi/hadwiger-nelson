@@ -320,12 +320,14 @@ Two exclusions are worth their reasons, because both look like obvious additions
   (predicates of a set, map, finite set or direction variable, `GENERIC` at every site, with no `¬ P` theorem at a concrete instance —
   register them when one is).
 
-* **MERGE's carriers (FS131-ML1, by the procedure below; `Plane/ValidMap/MergeMove`).** **None IN.** **OUT**: `BranchGerms.Phantom` (a
-  germ whose predecessor has its colour: a predicate of a germ list and a colouring, decided by a computation on written-down data — both
-  values are spec examples in `MergeMove` — taken as a hypothesis only negated, at a variable chart, `branchPt_mem_mergeArcs_outer`);
-  `hgt`, `BranchGerms.idx`, `turns`, `lift`, `liftDir`, `gapGerm`, `gapSec`, `branch`, `gapSet`, `mergeCol`, `rimArc`, `mergeArcs`,
-  `Near.chain` (numbers, indices, functions, arcs and sets, written down). Every other hypothesis `MergeMove` takes is a carrier decided
-  above (`Valid` IN; `Near`, `Near.Small`, `Covers`, `HasSectors`, `IsClear`, `IsTile` OUT).
+* **MERGE's carriers (FS131-ML1, by the procedure below; `Plane/ValidMap/MergeMove`).** **No new carrier IN.** **OUT**:
+  `BranchGerms.Phantom` (a germ whose predecessor has its colour: a predicate of a germ list and a colouring, decided by a computation on
+  written-down data — both values are spec examples in `MergeMove` — taken as a hypothesis only negated, at a variable chart,
+  `branchPt_mem_mergeArcs_outer`); `hgt`, `BranchGerms.idx`, `turns`, `lift`, `liftDir`, `gapGerm`, `gapSec`, `branch`, `gapSet`,
+  `mergeCol`, `rimArc`, `mergeArcs`, `Near.chain` (numbers, indices, functions, arcs and sets, written down). Every other hypothesis
+  `MergeMove` takes is a carrier decided above: `Valid` and `Condition5` IN — MERGE's 15 sites, 13 on `Valid` and 2 on `Condition5`, all
+  `GENERIC` at a variable map, the restored `exists_merge` and `exists_merge_aux` among them — and `Near`, `Near.Small`, `Covers`,
+  `HasSectors`, `IsClear`, `IsTile` OUT.
 
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
