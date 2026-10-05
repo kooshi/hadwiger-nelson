@@ -298,3 +298,52 @@ modules already up to date, nothing built, 10 modules with warnings**, exit 0 (`
   unused-variables linter stays silent.
 
 ## Stage 7 — SAVED (FS131-IL1)
+
+## Stage 8 — SAVED (FS131-IL1): the handover
+
+### 8.1 The build and the receipt
+
+- **Build** of `d3d38d3a` (the code this record describes; `18437fe0` added only this record): `scripts/slot.py --mem 40 --cpus 8 -- env
+  MEMMAX=40G BATCH=4 ./scripts/build.sh` — **OK, 447 of 447 batches, 7 modules rebuilt, 10 with warnings, every warning `declaration uses
+  'sorry'`**, 8 min 53 s, exit 0 (`build/gate/build/20261005T095506Z-3150087.log`, which ends "Build completed successfully (5372 jobs)";
+  driver log `data/fs131/il/build-stage8.log`). `sorry` declarations: `Limit` 1 (`exists_clean`), `Procedure` 7 (unchanged), `Terminal` 2
+  (lane B's).
+- **Axioms**, read against that build's oleans (`data/fs131/il/ILAxioms.lean` → `ILAxioms.out`, `slot.py --mem 12 --cpus 2 -- lake env
+  lean`, exit 0; summary `data/fs131/il/ILAxioms-summary.txt`): **75 records — 63 on the standard three or fewer, 12 through `sorryAx`, 0
+  other.** The twelve: `exists_clean`, the four `Procedure` lemmas of my brief, `exists_vertexStep`, `exists_arcStep`, `exists_terminalSeq`,
+  `exists_terminalMap`, `run_ends`, `run_hornBoundsQR`, `stuckRun_ne_univ`. **Control on `sorryAx`**: `exists_clean`, a `sorry` by
+  construction, prints `sorryAx`, so the print sees it; and the summary's parse, run on a copy with `sorryAx` planted in `frozen`'s record,
+  counted 13 instead of 12 (fired).
+- `scripts/Axioms.lean`: 38 records added to the "FS131-I5h" block, above `=== PURCHASED ===` (heading "FS131-IL1"). Map: `tools/check_architecture.py`
+  PASS. I ran no gate (my brief).
+
+### 8.2 What is left (my brief's part), with routes
+
+- **`exists_clean`** (`Limit`, H). Design worked out, not built: `E := {x ∈ Γ | 2 ≤ ncard (coloursAt x)}`, closed in `dom` (a point of the
+  domain with one colour has a neighbourhood all of whose points carry at most that colour). New interior points `dom \ E`; new colour `F.col`
+  on `F.interiorPts`, the one colour of `coloursAt x` on `Γ \ E`. Then: `coloursAt` unchanged (`F.region j ⊆ region' j ⊆ closure (F.region j)`);
+  validity because a new interior point of colour `j` lies in `interior (closure (F.region j))`, and two such points at distance exactly `1`
+  give an interior unit pair of `F` (a ball in `region j` near one, the unit circle about a point of `region j` near the other, the radial
+  point); `Γ' ⊆ Γ` and `IsModification` immediate. **The work is the presentation**: arcs' = the maximal non-degenerate parameter intervals of
+  `A_a := {t | a t ∉ dom ∨ a t ∈ E}` (closed) over `a ∈ F.arcs`. Needed: (i) every `x ∈ E` lies on such an interval of some arc (two adjacent
+  sectors of `x`'s chart with different colours share a germ, whose branch is essential; rigidity puts that branch on one arc —
+  `Arc.finite_inter_sphere_or_eq_circ`-style facts and `germ_eq_curveGerm_of_goodAt` are the tools); (ii) local finiteness: near `x`, `E`-membership
+  is constant along each branch of a good chart at `x`, so each arc contributes at most one interval near `x`. Sub-arcs: `main`'s `Surgery`
+  (`Arc.sub`) is not on this branch; re-prove or wait for the merge.
+- **`treatPts_inter_finite`** (now with `hP`, M): sites — `IsClean.eventually_not_isSite` at each point and `IsCompact.induction_on` (as in
+  `finite_arcs_inter_compact`), about 25 lines; centres — the ring arc lies in `Γ ∩ cthickening 1 K`, met by finitely many arcs; one arc holds
+  infinitely many of its points, so by `Arc.finite_inter_sphere_or_eq_circ` (`UnitArc`) it is `circ v 1 _ _`: the centres lie in the finite set of
+  centres of those arcs.
+- **`badCount_eq_zero_iff`** (now with `hP`, M): `←` is immediate (no maximal arc is bad); `→` needs a maximal extension of each ring arc —
+  extensions with the same sides are directed (overlapping ones unite), bounded by `l60_le`, and the sup is attained because `Γ ∩ ω(P)` is closed
+  in the plane; a sub-arc with the same sides of a (Q) or (R2) arc is one (sides are unique: `innerColours = {c}`).
+- **`badCount_lt_top`** (now with `hP`, M): maximal arcs have disjoint interiors (same sides unite; different sides cannot overlap); their ends are
+  sites or side changes on the compact `ω(P)`, finitely many by `IsClean.eventually_not_isSite`.
+- **`mergeAvailable_of_bothKind`** (M–H, one mind's hand proof): not started; read N2-RED/NB2-RED first (KL1 § 3.1).
+
+### 8.3 Notes for the merge with `main`
+
+`Limit` imports this branch's `Contact` (stale, ruling-269 form) for `e_eq_of_mem_coneAt_hornSet` only; if `main`'s `Contact` renames it, that one
+call moves.
+
+## Stage 8 — SAVED (FS131-IL1)
