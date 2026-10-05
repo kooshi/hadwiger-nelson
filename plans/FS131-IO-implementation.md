@@ -481,3 +481,41 @@ theorems, optionally those absent from a baseline) exits 2 on a file with none (
    not in Lean; the same gap item 375 names for `exists_merge`).
 
 ## Stage 10 — SAVED (FS131-IO2)
+
+## Stage 11 — SAVED (FS131-IO3): the readback and the as-given build
+
+*FS131-IO3 (de Bruijn, the implementer, on Opus) continues this record from here, on `fs131-wop` at `276aeaff`. Brief:
+`data/fs131/briefs/FS131-IO3-open.md` (on `main`). Report: `data/fs131/reports/FS131-IO3.md`.*
+
+### 11.1 The brief's quotations against their sources (standing rule 3)
+
+| quotation (first words) | source | result |
+|---|---|---|
+| "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors (l. 119) | **matches** |
+| "theorem open_allowedCone (hF : F.Valid) (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ')" | `OpenMove.lean` l. 2175 at `276aeaff` | **matches** |
+| "theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c : Fin k}" | `OpenMove.lean` l. 2195 | **matches** |
+| "1. **`open_allowedCone`** (template `merge_allowedCone` and its children, MergeMove l. 2747–3480). The route, worked out (not written):" | this record § 10.3, l. 455 | **matches** |
+| "2. **The positive `HasHornCount` spec example** (`cuspFrag` has `HasHornCount 0 2`): not written. Route (IO1's § 2.1): `cuspFrag_partition` and" | § 10.3, l. 477 | **matches** |
+| "3. **Owed besides** (IO1's § 3.3, unchanged): an inhabitant note for `exists_open` (no Lean model satisfies its hypotheses at once; E6's model is" | § 10.3, l. 480 | **matches** |
+| item 400, "**FS131-IO2 handed back** (Stage 10 SAVED, harness ≈ 560k by the task notice — past its line; it stopped at Stage 9 to run the handover; record" | `main`'s `plans/FS131-close-inventory.md` l. 3605 | **matches** |
+| item 401, "**Ruling on IO2's slot: OPEN's last leaf, FS131-IO3, on `fs131-wop`** — `open_allowedCone` by record § 10.3 item 1, the positive `HasHornCount` example" | `main`'s inventory l. 3619 | **matches** |
+| item 393, "**FS131-IO2, by message: `open_allowedCone` is false as stated; a one-field repair to `OpenConfig`.** Why: in OPEN's new map the closure of the" | `main`'s inventory l. 3530 | **matches** |
+| item 397, "**FS131-IO2, by message: `open_degree_horns` is also false as stated; a second one-field repair to `OpenConfig`.** `OpenConfig.ray` puts the ray strictly" | `main`'s inventory l. 3569 | **matches** |
+| item 384, "**FS131-E6 done: F6 is real, and repaired with no backlog statement changed** (harness ≈ 540k by the task notice; record `plans/FS131-E6-derivation.md`;" | `main`'s inventory l. 3411 | **matches** |
+| item 367, "**FS131-IMM4 done: MERGE is proved** (harness ≈ 472k by the task notice; record `fs131-w4mm`'s `plans/FS131-IMM-implementation.md`, Stages 10–12; report" | `main`'s inventory l. 3187 | **matches** |
+
+No mismatch.
+
+### 11.2 Read for this job
+
+`plans/STANDING-RULES.md`, `LEAN.md` in full; `RUNNING.md` § Building and § Make the gate fail; this record's Stages 4–10 in full;
+`OpenMove.lean`'s statements and the children IO2 left (the surgery section, `open_partition`, `openSectors`); MERGE's `merge_allowedCone`
+and its children (`MergeMove.lean` l. 2747–3480, identical on `fs131-wop` and `main`).
+
+### 11.3 The branch builds as given
+
+Under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`), before any edit: **OK — "all 1767 modules
+already up to date, nothing built, 1 module(s) with warnings"** (the one `sorry`, `OpenMove.lean:2175`, `open_allowedCone`), exit 0; log
+`build/gate/build/20261005T121321Z-4119716.log`, terminal output `data/fs131/io/build-io3-0.log`.
+
+## Stage 11 — SAVED (FS131-IO3)
