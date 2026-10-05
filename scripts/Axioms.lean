@@ -5011,6 +5011,54 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.coloursAt_subset
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.side_ne_inner_of_mem_lens
 #print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_inert
+-- FS131-CG1: lane G's supporting lemmas (`Plane/ValidMap/RadialPush`: the radial push, the tangent circles, the lens boundary)
+#print axioms HadwigerNelson.Plane.tent_nonneg
+#print axioms HadwigerNelson.Plane.tent_of_le_left
+#print axioms HadwigerNelson.Plane.tent_le_one
+#print axioms HadwigerNelson.Plane.tent_of_le_mid
+#print axioms HadwigerNelson.Plane.tent_of_mid_le
+#print axioms HadwigerNelson.Plane.push1_of_le_mid
+#print axioms HadwigerNelson.Plane.push1_of_mid_le
+#print axioms HadwigerNelson.Plane.push1_self
+#print axioms HadwigerNelson.Plane.push1_mem_Ico
+#print axioms HadwigerNelson.Plane.push1_mem_Ioc
+#print axioms HadwigerNelson.Plane.PushProfiles.cases
+#print axioms HadwigerNelson.Plane.PushProfiles.a_pos
+#print axioms HadwigerNelson.Plane.PushProfiles.exists_a_ge
+#print axioms HadwigerNelson.Plane.polarAngle_mem
+#print axioms HadwigerNelson.Plane.eq_polar_polarAngle
+#print axioms HadwigerNelson.Plane.polarAngle_polar
+#print axioms HadwigerNelson.Plane.abs_sub_bisector_le
+#print axioms HadwigerNelson.Plane.mem_window_of_mem_Icc
+#print axioms HadwigerNelson.Plane.radialMap_id
+#print axioms HadwigerNelson.Plane.pushFun_eq_radialMap
+#print axioms HadwigerNelson.Plane.pushInv_eq_radialMap
+#print axioms HadwigerNelson.Plane.radialMap_center
+#print axioms HadwigerNelson.Plane.radialMap_polar
+#print axioms HadwigerNelson.Plane.radialMap_eq_self
+#print axioms HadwigerNelson.Plane.radialMap_radialMap
+#print axioms HadwigerNelson.Plane.push1_zero
+#print axioms HadwigerNelson.Plane.push1_pos
+#print axioms HadwigerNelson.Plane.PushProfiles.push1_zero
+#print axioms HadwigerNelson.Plane.PushProfiles.push1_pos
+#print axioms HadwigerNelson.Plane.PushProfiles.push1_push1
+#print axioms HadwigerNelson.Plane.radialMap_push1_eq
+#print axioms HadwigerNelson.Plane.continuous_radialMap_push1
+#print axioms HadwigerNelson.Plane.tangRad_quad
+#print axioms HadwigerNelson.Plane.tangRad_pos
+#print axioms HadwigerNelson.Plane.le_tangRad_iff
+#print axioms HadwigerNelson.Plane.tangRad_le_iff
+#print axioms HadwigerNelson.Plane.lt_tangRad_iff
+#print axioms HadwigerNelson.Plane.tangRad_root
+#print axioms HadwigerNelson.Plane.cos_lt_one_of_abs
+#print axioms HadwigerNelson.Plane.continuous_tangRad
+#print axioms HadwigerNelson.Plane.tangRad_identity
+#print axioms HadwigerNelson.Plane.tangRad_anti
+#print axioms HadwigerNelson.Plane.eq_of_tangentCircle
+#print axioms HadwigerNelson.Plane.germ_tangentCircle
+#print axioms HadwigerNelson.Plane.polar_tangentCircle
+#print axioms HadwigerNelson.Plane.norm_tangRad_sub_one_le
+#print axioms HadwigerNelson.Plane.tangentArc_image
 
 /-! ## FS-131 wave 5 (job FS131-IX1) — the crossing lemma's children (`inter_nonempty_of_interleaved` itself is in FS131-KP's block) -/
 

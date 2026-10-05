@@ -386,3 +386,31 @@ map-level children in `CollarMap` (plan ≈ 650) ≈ 350–650 — those read `F
 job's budget on that reading.
 
 ## Stage 9 — SAVED (FS131-CG1)
+
+## Stage 10 — SAVED (FS131-CG1): `RadialPush` sorry-free — the tangent circles, the profiles, the lens boundary
+
+**Proved** (statements unchanged, `data/fs131/cg/stmt-10.txt` PASS): `tangRad_spec`, `tangRad_lt_one`, `one_lt_tangRad`, `tangRad_lt_tangRad`,
+`one_sub_tangRad_le`, `tangRad_sub_one_le`, `pushProfiles_collar`, `one_sub_lensProf_le`, **`collarArcs_carrier`** (the plan's second hard
+leaf), `dist_lt_one_of_mem_polarSet`. **`Plane/ValidMap/RadialPush` has no `sorry`**: `lake env lean` on it prints nothing
+(`data/fs131/cg/iter-10.txt`, empty). Spec example added: `pushProfiles_collar` at `R' = 3/4`, `R = 7/8`, `R'' = 5/4` over `[0, π/6]` (the
+plan's § 5.1 partition). The build is deferred to the next stage: the slot was full (two other lanes' builds), and the waiting build was
+stopped by its PID before it started (`slot: waiting`), so that work could continue.
+
+**How** (supporting declarations listed in `stmt-10.txt`):
+- **one quadratic** carries the whole `tangRad` family: `tangRad_quad` — `s² − 2(1 − R) s cos u − (2R − 1) = (s − tangRad R u)(s − t')`
+  with `t' < 0` — so for `s > 0` the sign of the quadratic is the sign of `s − tangRad R u` (`le_tangRad_iff`, `lt_tangRad_iff`,
+  `tangRad_le_iff`). Then: the sphere and disc (`tangRad_spec`) are the quadratic as a distance; `< 1` / `> 1` are its value at `s = 1`,
+  `2(1 − R)(1 − cos u)`; the order in `R` is its value at the smaller circle's root, `2(R − R')(s cos u − 1) < 0` (the smaller circle's
+  point projects below `1`); the depth and height bounds are the identity `(1 − t)(t + 2R − 1) = 2(1 − R) t (1 − cos u)`
+  (`tangRad_identity`) with `1 − cos u ≤ u²/2`; `tangRad_anti` (decreasing in `u` on `[0, π]`) is its value at another angle;
+- **`collarArcs_carrier`** by normal position: in the frame `w = (z − P) e(θ_E)‾` at an end the tangent circle is the circle about `1 − R`
+  of radius `R`; the germ arc is `s ↦ 1 + s e(π/2 + arcsin(s/2R))` (that is `branchPt`'s own formula), the lens curve `u ↦ tangRad R u · e u`.
+  Both lie on the circle's closed upper side (`germ_tangentCircle`, `polar_tangentCircle`), where a point is fixed by its chord from `1`
+  (`eq_of_tangentCircle`); the lens curve's chord `2R(1 − t cos u)` increases on `[0, π/2]`, from `0` to the germ arc's length, so the
+  intermediate value theorem matches every chord (`tangentArc_image`). At `B` the frame is the mirror `w‾` (`arcsin` is odd), so one lemma
+  serves both ends with no case on orientation. No inverse trigonometry beyond `branchPt`'s own `arcsin`.
+
+**Price**: the `tangRad` family, the profiles and the carrier came to about 350 lines against the plan's 770 (0.45×). `RadialPush` in all: 20
+children closed in ~810 lines against the plan's ~1,450.
+
+## Stage 10 — SAVED (FS131-CG1)
