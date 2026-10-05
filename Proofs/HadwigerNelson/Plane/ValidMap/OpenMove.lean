@@ -134,10 +134,46 @@ otherwise. -/
 noncomputable def openRim (v : ℂ) (up : Bool) (s : Fin n) (b : ℕ) (ψ ρ : ℝ) : Arc :=
   if up then .circ v (ρ / 2) (G.liftDir s b (ρ / 2)) ψ else .circ v (ρ / 2) ψ (G.liftDir s 1 (ρ / 2))
 
+/-- **The merged piece** out to `r` (FS131-IO2): the new `c`-sector, from the horn's outer germ to the ray — for `up`, between germ
+`idx s 0` and the ray; otherwise between the ray and germ `idx s (b + 1)`. -/
+def openPiece (v : ℂ) (up : Bool) (s : Fin n) (b : ℕ) (ψ r : ℝ) : Set ℂ :=
+  if up then sectorBetween v (G.lift s 0) (G.κ (idx s 0)) ψ 0 r
+  else sectorBetween v ψ 0 (G.lift s (b + 1)) (G.κ (idx s (b + 1))) r
+
+/-- **The rest of the partial sector** out to `r`, beyond the ray: for `up`, between the ray and germ `idx s (b + 1)`; otherwise
+between germ `idx s 0` and the ray. -/
+def openRest (v : ℂ) (up : Bool) (s : Fin n) (b : ℕ) (ψ r : ℝ) : Set ℂ :=
+  if up then sectorBetween v ψ 0 (G.lift s (b + 1)) (G.κ (idx s (b + 1))) r
+  else sectorBetween v (G.lift s 0) (G.κ (idx s 0)) ψ 0 r
+
 /-- **OPEN's new arcs**: MERGE's for the gap `s, 0, b` (the germs off the gap out to `ρ/2`, the non-phantom germs' pieces between
 `ρ/2` and `ρ`, the rim arc across the gap's sectors), the ray, and the rim arc across the wedge. -/
 noncomputable def openArcs {k : ℕ} (v : ℂ) (col : Fin n → Fin k) (up : Bool) (s : Fin n) (b : ℕ) (ψ ρ : ℝ) : Set Arc :=
   G.mergeArcs v col s 0 b ρ ∪ {openRay v ψ ρ, G.openRim v up s b ψ ρ}
+
+/-- The wedge in lifted directions. -/
+theorem mem_openWedge {v z : ℂ} {up : Bool} {s : Fin n} {b : ℕ} {ψ ρ : ℝ} :
+    z ∈ G.openWedge v up s b ψ ρ ↔ ∃ t ∈ Ioo 0 (ρ / 2), ∃ φ, (if up then G.liftDir s b t < φ ∧ φ < ψ else
+      ψ < φ ∧ φ < G.liftDir s 1 t) ∧ z = v + (t : ℂ) * e φ := by
+  cases up <;>
+  · simp only [openWedge, Bool.false_eq_true, if_true, if_false, sectorBetween, mem_setOf_eq, mem_Ioo, zero_mul, zero_div,
+      Real.arcsin_zero, add_zero, liftDir, germDir]
+
+/-- The merged piece in lifted directions. -/
+theorem mem_openPiece {v z : ℂ} {up : Bool} {s : Fin n} {b : ℕ} {ψ r : ℝ} :
+    z ∈ G.openPiece v up s b ψ r ↔ ∃ t ∈ Ioo 0 r, ∃ φ, (if up then G.liftDir s 0 t < φ ∧ φ < ψ else
+      ψ < φ ∧ φ < G.liftDir s (b + 1) t) ∧ z = v + (t : ℂ) * e φ := by
+  cases up <;>
+  · simp only [openPiece, Bool.false_eq_true, if_true, if_false, sectorBetween, mem_setOf_eq, mem_Ioo, zero_mul, zero_div,
+      Real.arcsin_zero, add_zero, liftDir, germDir]
+
+/-- The rest of the partial sector in lifted directions. -/
+theorem mem_openRest {v z : ℂ} {up : Bool} {s : Fin n} {b : ℕ} {ψ r : ℝ} :
+    z ∈ G.openRest v up s b ψ r ↔ ∃ t ∈ Ioo 0 r, ∃ φ, (if up then ψ < φ ∧ φ < G.liftDir s (b + 1) t else
+      G.liftDir s 0 t < φ ∧ φ < ψ) ∧ z = v + (t : ℂ) * e φ := by
+  cases up <;>
+  · simp only [openRest, Bool.false_eq_true, if_true, if_false, sectorBetween, mem_setOf_eq, mem_Ioo, zero_mul, zero_div,
+      Real.arcsin_zero, add_zero, liftDir, germDir]
 
 end BranchGerms
 
@@ -156,6 +192,12 @@ example (G : BranchGerms 3) (v : ℂ) (col : Fin 3 → Fin 2) (Fcol : ℂ → Fi
     G.openCol v col Fcol true s 2 ψ c ρ z = G.mergeCol v col Fcol s 0 2 c ρ z := by
   simp [BranchGerms.openCol, hz]
 example (v : ℂ) (ψ ρ : ℝ) : openRay v ψ ρ = .seg v (v + ((ρ / 2 : ℝ) : ℂ) * e ψ) := rfl
+example (G : BranchGerms 3) (v : ℂ) (s : Fin 3) (ψ r : ℝ) :
+    G.openPiece v true s 2 ψ r = sectorBetween v (G.lift s 0) (G.κ (BranchGerms.idx s 0)) ψ 0 r ∧
+      G.openPiece v false s 2 ψ r = sectorBetween v ψ 0 (G.lift s 3) (G.κ (BranchGerms.idx s 3)) r := ⟨rfl, rfl⟩
+example (G : BranchGerms 3) (v : ℂ) (s : Fin 3) (ψ r : ℝ) :
+    G.openRest v true s 2 ψ r = sectorBetween v ψ 0 (G.lift s 3) (G.κ (BranchGerms.idx s 3)) r ∧
+      G.openRest v false s 2 ψ r = sectorBetween v (G.lift s 0) (G.κ (BranchGerms.idx s 0)) ψ 0 r := ⟨rfl, rfl⟩
 example (G : BranchGerms 3) (v : ℂ) (s : Fin 3) (ψ ρ : ℝ) :
     G.openRim v true s 2 ψ ρ = .circ v (ρ / 2) (G.liftDir s 2 (ρ / 2)) ψ ∧
       G.openRim v false s 2 ψ ρ = .circ v (ρ / 2) ψ (G.liftDir s 1 (ρ / 2)) := ⟨rfl, rfl⟩
@@ -586,12 +628,388 @@ theorem openArcs_nondegenerate {c : Fin k} {up : Bool} {ψ ρc ρ : ℝ} (cfg : 
   · exact openRay_nondegenerate h.1
   · exact openRim_nondegenerate cfg h hρc
 
+/-! ### The wedge, the merged piece and the rest of the partial sector (FS131-IO2) -/
+
+/-- **A sector between two germs is open**: near a point of it, the local angle and the distance move continuously (as
+`BranchGerms.isOpen_sector`). -/
+theorem _root_.HadwigerNelson.Plane.isOpen_sectorBetween (v : ℂ) (β₁ κ₁ β₂ κ₂ r : ℝ) :
+    IsOpen (sectorBetween v β₁ κ₁ β₂ κ₂ r) := by
+  rw [isOpen_iff_mem_nhds]
+  rintro z₀ ⟨s₀, hs₀, φ₀, hφ₀, hz₀⟩
+  have hz₀v : z₀ ≠ v := by
+    intro h
+    have := congrArg (fun z => ‖z - v‖) hz₀
+    simp only [h, sub_self, norm_zero, add_sub_cancel_left, norm_mul_e hs₀.1.le] at this
+    linarith [hs₀.1]
+  set ψ : ℂ → ℝ := fun z => φ₀ + arg ((z - v) / (z₀ - v)) with hψ
+  have hψc : ContinuousAt ψ z₀ := continuousAt_const.add (continuousAt_arg_div hz₀v)
+  have hψ0 : ψ z₀ = φ₀ := by simp [hψ, arg_div_self hz₀v]
+  have hnc : ContinuousAt (fun z : ℂ => ‖z - v‖) z₀ :=
+    (continuous_norm.comp (continuous_id.sub continuous_const)).continuousAt
+  have hn0 : ‖z₀ - v‖ = s₀ := by rw [hz₀, add_sub_cancel_left, norm_mul_e hs₀.1.le]
+  have ev1 : ∀ᶠ z in 𝓝 z₀, ‖z - v‖ ∈ Ioo 0 r :=
+    hnc.preimage_mem_nhds (by rw [hn0]; exact Ioo_mem_nhds hs₀.1 hs₀.2)
+  have ev2 : ∀ᶠ z in 𝓝 z₀, germDir β₁ κ₁ ‖z - v‖ < ψ z :=
+    ContinuousAt.eventually_lt ((continuous_germDir β₁ κ₁).continuousAt.comp hnc) hψc
+      (by simp only [hn0, hψ0]; exact hφ₀.1)
+  have ev3 : ∀ᶠ z in 𝓝 z₀, ψ z < germDir β₂ κ₂ ‖z - v‖ :=
+    ContinuousAt.eventually_lt hψc ((continuous_germDir β₂ κ₂).continuousAt.comp hnc)
+      (by simp only [hn0, hψ0]; exact hφ₀.2)
+  filter_upwards [ev1, ev2, ev3] with z h1 h2 h3
+  exact ⟨‖z - v‖, h1, ψ z, ⟨h2, h3⟩, eq_polar_local hs₀.1 hz₀ z⟩
+
+/-- **Two polar forms of one point** at angles less than a turn apart are one. -/
+theorem _root_.HadwigerNelson.Plane.polar_eq_of_abs_lt {v : ℂ} {t t' φ φ' : ℝ} (ht : 0 < t) (ht' : 0 < t')
+    (h : v + (t : ℂ) * e φ = v + (t' : ℂ) * e φ') (hφ : t = t' → |φ - φ'| < 2 * π) : t = t' ∧ φ = φ' := by
+  obtain ⟨rfl, he⟩ := (polar_eq_iff ht ht').mp h
+  refine ⟨rfl, ?_⟩
+  have hφ := hφ rfl
+  obtain ⟨m, hm⟩ := e_eq_e_iff.mp he
+  have hπ := Real.pi_pos
+  rw [hm, add_sub_cancel_left, abs_mul, abs_of_pos (by positivity : (0 : ℝ) < 2 * π)] at hφ
+  have h2 : |(m : ℝ)| < 1 := by
+    by_contra hc; push Not at hc; nlinarith
+  have h3 : m = 0 := Int.abs_lt_one_iff.mp (by exact_mod_cast h2)
+  rw [hm, h3]; simp
+
+theorem _root_.HadwigerNelson.Plane.BranchGerms.isOpen_openWedge {n : ℕ} (G : BranchGerms n) (v : ℂ) (up : Bool) (s : Fin n)
+    (b : ℕ) (ψ ρ : ℝ) : IsOpen (G.openWedge v up s b ψ ρ) := by
+  unfold BranchGerms.openWedge; split_ifs <;> exact isOpen_sectorBetween _ _ _ _ _ _
+
+theorem _root_.HadwigerNelson.Plane.BranchGerms.isOpen_openPiece {n : ℕ} (G : BranchGerms n) (v : ℂ) (up : Bool) (s : Fin n)
+    (b : ℕ) (ψ r : ℝ) : IsOpen (G.openPiece v up s b ψ r) := by
+  unfold BranchGerms.openPiece; split_ifs <;> exact isOpen_sectorBetween _ _ _ _ _ _
+
+theorem _root_.HadwigerNelson.Plane.BranchGerms.isOpen_openRest {n : ℕ} (G : BranchGerms n) (v : ℂ) (up : Bool) (s : Fin n)
+    (b : ℕ) (ψ r : ℝ) : IsOpen (G.openRest v up s b ψ r) := by
+  unfold BranchGerms.openRest; split_ifs <;> exact isOpen_sectorBetween _ _ _ _ _ _
+
+/-- A point of the ray out to `ρ/2` lies on the new ray. -/
+theorem mem_openRay {ψ ρ t : ℝ} (hρ : 0 < ρ) (ht : t ∈ Icc 0 (ρ / 2)) :
+    v + (t : ℂ) * e ψ ∈ (openRay v ψ ρ).carrier := by
+  have hρ2 : (0 : ℝ) < ρ / 2 := by linarith
+  refine ⟨1 - t / (ρ / 2), t / (ρ / 2), ?_, div_nonneg ht.1 hρ2.le, by ring, ?_⟩
+  · rw [sub_nonneg, div_le_one hρ2]; exact ht.2
+  · simp only [Complex.real_smul]
+    have : (ρ : ℂ) ≠ 0 := by exact_mod_cast hρ.ne'
+    push_cast
+    field_simp
+    ring
+
+/-- A point of the circle of radius `ρ/2` between the wedge's germ and the ray lies on the rim arc across the wedge. -/
+theorem mem_openRim {up : Bool} {ψ ρ φ : ℝ}
+    (hφ : if up then X.G.liftDir s b (ρ / 2) ≤ φ ∧ φ ≤ ψ else ψ ≤ φ ∧ φ ≤ X.G.liftDir s 1 (ρ / 2)) :
+    v + ((ρ / 2 : ℝ) : ℂ) * e φ ∈ (X.G.openRim v up s b ψ ρ).carrier := by
+  cases up
+  · simp only [Bool.false_eq_true, if_false] at hφ
+    unfold BranchGerms.openRim; simp only [Bool.false_eq_true, if_false]; exact ⟨φ, hφ, rfl⟩
+  · simp only [if_true] at hφ
+    unfold BranchGerms.openRim; simp only [if_true]; exact ⟨φ, hφ, rfl⟩
+
+variable {c : Fin k} {up : Bool} {ψ ρc : ℝ}
+
+theorem OpenConfig.two_le (cfg : X.OpenConfig c up s b ψ ρc) : 2 ≤ X.n := by
+  have := cfg.hb1; have := cfg.hbn; omega
+
+/-- Below the clear radius the lifted directions increase along the orbit, and gain less than a turn in one step. -/
+theorem OpenConfig.liftDir_succ_lt (cfg : X.OpenConfig c up s b ψ ρc) {t : ℝ} (ht : t ∈ Ioo 0 X.s₀) (m : ℕ) :
+    X.G.liftDir s (m + 1) t < X.G.liftDir s m t + 2 * π := by
+  rw [← X.G.liftDir_add_n s m t]
+  exact X.G.liftDir_mono X.hord s ht (show m + 1 < m + X.n by have := cfg.two_le; omega)
+
+/-- **The wedge lies in the partial sector** (the ray lies strictly inside it below the clear radius). -/
+theorem openWedge_subset_sector (cfg : X.OpenConfig c up s b ψ ρc) {ρ : ℝ} (h : X.Small ρ) (hρc : ρ ≤ ρc) :
+    X.G.openWedge v up s b ψ ρ ⊆ X.G.sector v ρ (BranchGerms.idx s (BranchGerms.rayPos up b)) := by
+  intro z hz
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := X.G.mem_openWedge.mp hz
+  have htc : t ∈ Ioo 0 ρc := ⟨ht.1, by linarith [ht.2, h.1]⟩
+  have hray := cfg.ray t htc
+  refine (X.G.mem_sector_idx s _).mpr ⟨t, ⟨ht.1, by linarith [ht.2, h.1]⟩, φ, ?_, rfl⟩
+  cases up
+  · simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hφ hray ⊢
+    exact ⟨hray.1.trans hφ.1, hφ.2⟩
+  · simp only [BranchGerms.rayPos, if_true] at hφ hray ⊢
+    exact ⟨hφ.1, hφ.2.trans hray.2⟩
+
+/-- **A point at a direction between the gap's end germs, inside `ρ/2`, lies in the merged piece.** -/
+theorem mem_openPiece_of_Icc (cfg : X.OpenConfig c up s b ψ ρc) {ρ : ℝ} (h : X.Small ρ) (hρc : ρ ≤ ρc) {t φ : ℝ}
+    (ht : t ∈ Ioo 0 (ρ / 2)) (hφ : φ ∈ Icc (X.G.liftDir s 1 t) (X.G.liftDir s b t)) :
+    v + (t : ℂ) * e φ ∈ X.G.openPiece v up s b ψ (ρ / 2) := by
+  have htc : t ∈ Ioo 0 ρc := ⟨ht.1, by linarith [ht.2, h.1]⟩
+  have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, by linarith [ht.2, h.1, h.2.1]⟩
+  have hmono := X.G.liftDir_mono X.hord s hts
+  have hray := cfg.ray t htc
+  refine X.G.mem_openPiece.mpr ⟨t, ht, φ, ?_, rfl⟩
+  cases up
+  · simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hray ⊢
+    exact ⟨hray.2.trans_le hφ.1, hφ.2.trans_lt (hmono (Nat.lt_succ_self b))⟩
+  · simp only [BranchGerms.rayPos, if_true] at hray ⊢
+    exact ⟨(hmono Nat.zero_lt_one).trans_le hφ.1, hφ.2.trans_lt hray.1⟩
+
+/-- **The wedge lies in the merged piece.** -/
+theorem openWedge_subset_openPiece (cfg : X.OpenConfig c up s b ψ ρc) {ρ : ℝ} (h : X.Small ρ) :
+    X.G.openWedge v up s b ψ ρ ⊆ X.G.openPiece v up s b ψ (ρ / 2) := by
+  intro z hz
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := X.G.mem_openWedge.mp hz
+  have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, by linarith [ht.2, h.1, h.2.1]⟩
+  have hmono := X.G.liftDir_mono X.hord s hts
+  refine X.G.mem_openPiece.mpr ⟨t, ht, φ, ?_, rfl⟩
+  cases up
+  · simp only [Bool.false_eq_true, if_false] at hφ ⊢
+    exact ⟨hφ.1, hφ.2.trans (hmono (show 1 < b + 1 by have := cfg.hb1; omega))⟩
+  · simp only [if_true] at hφ ⊢
+    exact ⟨(hmono.monotone (Nat.zero_le b)).trans_lt hφ.1, hφ.2⟩
+
+/-- **The wedge misses the rest of the partial sector** (the two lie on the two sides of the ray, within one turn). -/
+theorem disjoint_openWedge_openRest (cfg : X.OpenConfig c up s b ψ ρc) {ρ : ℝ} (h : X.Small ρ) :
+    Disjoint (X.G.openWedge v up s b ψ ρ) (X.G.openRest v up s b ψ ρ) := by
+  rw [Set.disjoint_left]
+  intro z hz hz'
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := X.G.mem_openWedge.mp hz
+  obtain ⟨t', ht', φ', hφ', he⟩ := X.G.mem_openRest.mp hz'
+  have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, by linarith [ht.2, h.1, h.2.1]⟩
+  have hmono := X.G.liftDir_mono X.hord s hts
+  have hπ := Real.pi_pos
+  obtain ⟨rfl, rfl⟩ := polar_eq_of_abs_lt ht.1 ht'.1 he fun htt => by
+    subst htt
+    cases up
+    · simp only [Bool.false_eq_true, if_false] at hφ hφ'
+      have h1 := cfg.liftDir_succ_lt hts 0
+      rw [zero_add] at h1
+      rw [abs_lt]; constructor <;> linarith [hφ.1, hφ.2, hφ'.1, hφ'.2]
+    · simp only [if_true] at hφ hφ'
+      have h1 := cfg.liftDir_succ_lt hts b
+      rw [abs_lt]; constructor <;> linarith [hφ.1, hφ.2, hφ'.1, hφ'.2]
+  cases up
+  · simp only [Bool.false_eq_true, if_false] at hφ hφ'; linarith [hφ.1, hφ'.2]
+  · simp only [if_true] at hφ hφ'; linarith [hφ.2, hφ'.1]
+
+/-- **A point of the partial sector inside `B̄(v, ρ/2)`** is in the wedge, on the ray, on the rim arc across the wedge, or in the rest
+of the partial sector. -/
+theorem sector_rayPos_cases (cfg : X.OpenConfig c up s b ψ ρc) {ρ : ℝ} (h : X.Small ρ) {x : ℂ}
+    (hx : x ∈ X.G.sector v ρ (BranchGerms.idx s (BranchGerms.rayPos up b))) (hxr : ‖x - v‖ ≤ ρ / 2) :
+    x ∈ X.G.openWedge v up s b ψ ρ ∨ x ∈ (openRay v ψ ρ).carrier ∨ x ∈ (X.G.openRim v up s b ψ ρ).carrier ∨
+      x ∈ X.G.openRest v up s b ψ ρ := by
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := (X.G.mem_sector_idx s _).mp hx
+  rw [add_sub_cancel_left, norm_mul_e ht.1.le] at hxr
+  rcases lt_trichotomy φ ψ with hlt | rfl | hgt
+  · cases up
+    · right; right; right
+      simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hφ
+      exact X.G.mem_openRest.mpr ⟨t, ht, φ, by simp only [Bool.false_eq_true, if_false]; exact ⟨hφ.1, hlt⟩, rfl⟩
+    · simp only [BranchGerms.rayPos, if_true] at hφ
+      rcases eq_or_lt_of_le hxr with heq | hlt'
+      · right; right; left
+        subst heq
+        exact mem_openRim (by simp only [if_true]; exact ⟨hφ.1.le, hlt.le⟩)
+      · left
+        exact X.G.mem_openWedge.mpr ⟨t, ⟨ht.1, hlt'⟩, φ, by simp only [if_true]; exact ⟨hφ.1, hlt⟩, rfl⟩
+  · right; left; exact mem_openRay h.1 ⟨ht.1.le, hxr⟩
+  · cases up
+    · simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hφ
+      rcases eq_or_lt_of_le hxr with heq | hlt'
+      · right; right; left
+        subst heq
+        exact mem_openRim (by simp only [Bool.false_eq_true, if_false]; exact ⟨hgt.le, hφ.2.le⟩)
+      · left
+        exact X.G.mem_openWedge.mpr ⟨t, ⟨ht.1, hlt'⟩, φ, by simp only [Bool.false_eq_true, if_false]; exact ⟨hgt, hφ.2⟩, rfl⟩
+    · right; right; right
+      simp only [BranchGerms.rayPos, if_true] at hφ
+      exact X.G.mem_openRest.mpr ⟨t, ht, φ, by simp only [if_true]; exact ⟨hgt, hφ.2⟩, rfl⟩
+
+/-- **OPEN's colouring is `c` on the merged piece** out to `ρ/2`: its points are in the wedge, on a gap germ, or in the horn or a gap
+sector. -/
+theorem openCol_of_mem_openPiece (cfg : X.OpenConfig c up s b ψ ρc) {ρ : ℝ} (h : X.Small ρ) {z : ℂ}
+    (hz : z ∈ X.G.openPiece v up s b ψ (ρ / 2)) : X.G.openCol v X.col F.col up s b ψ c ρ z = c := by
+  classical
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := X.G.mem_openPiece.mp hz
+  have htρ : t ∈ Ioo 0 ρ := ⟨ht.1, by linarith [ht.2, h.1]⟩
+  have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, by linarith [ht.2, h.1, h.2.1]⟩
+  have hmono := X.G.liftDir_mono X.hord s hts
+  have hgerm : ∀ m, 0 < m → m ≤ b →
+      X.G.mergeCol v X.col F.col s 0 b c ρ (v + (t : ℂ) * e (X.G.liftDir s m t)) = c := by
+    intro m h1 h2
+    rw [← X.G.branchPt_idx, mergeCol_branchPt h _ htρ, if_pos ⟨⟨m, h1, h2, rfl⟩, ht.2⟩]
+  have hsec : ∀ m, (m = BranchGerms.hornPos up b ∨ (0 < m ∧ m < b)) → ∀ φ, X.G.liftDir s m t < φ →
+      φ < X.G.liftDir s (m + 1) t → X.G.mergeCol v X.col F.col s 0 b c ρ (v + (t : ℂ) * e φ) = c := by
+    intro m hm φ h1 h2
+    have hz : v + (t : ℂ) * e φ ∈ X.G.sector v ρ (BranchGerms.idx s m) :=
+      (X.G.mem_sector_idx s m).mpr ⟨t, htρ, φ, ⟨h1, h2⟩, rfl⟩
+    rw [mergeCol_of_mem_sector h hz]
+    split_ifs with hg
+    · rfl
+    · rcases hm with rfl | hm
+      · exact cfg.col_horn
+      · exact absurd ⟨⟨m, hm.1, hm.2, rfl⟩, by rw [add_sub_cancel_left, norm_mul_e ht.1.le]; exact ht.2⟩ hg
+  unfold BranchGerms.openCol
+  split_ifs with hW
+  · rfl
+  cases up
+  · simp only [Bool.false_eq_true, if_false] at hφ
+    have h1 : X.G.liftDir s 1 t ≤ φ := by
+      by_contra hlt; push Not at hlt
+      exact hW (X.G.mem_openWedge.mpr ⟨t, ht, φ, by simp only [Bool.false_eq_true, if_false]; exact ⟨hφ.1, hlt⟩, rfl⟩)
+    rcases exists_step_of_strictMono hmono (show 1 ≤ b + 1 by omega) h1 hφ.2.le with he | ⟨m, hm1, hm2, hm3, hm4⟩
+    · exact absurd he (ne_of_lt hφ.2)
+    · rcases eq_or_lt_of_le hm3 with he | hlt
+      · rw [← he]; exact hgerm m (by omega) (by omega)
+      · refine hsec m ?_ φ hlt hm4
+        rcases eq_or_lt_of_le (show m ≤ b by omega) with rfl | hmb
+        · left; rfl
+        · right; exact ⟨by omega, hmb⟩
+  · simp only [if_true] at hφ
+    have h1 : φ ≤ X.G.liftDir s b t := by
+      by_contra hlt; push Not at hlt
+      exact hW (X.G.mem_openWedge.mpr ⟨t, ht, φ, by simp only [if_true]; exact ⟨hlt, hφ.2⟩, rfl⟩)
+    rcases exists_step_of_strictMono hmono (Nat.zero_le b) hφ.1.le h1 with he | ⟨m, hm1, hm2, hm3, hm4⟩
+    · rw [he]; exact hgerm b cfg.hb1 le_rfl
+    · rcases eq_or_lt_of_le hm3 with he | hlt
+      · rcases Nat.eq_zero_or_pos m with rfl | hm0
+        · exact absurd he (ne_of_lt hφ.1)
+        · rw [← he]; exact hgerm m hm0 (by omega)
+      · refine hsec m ?_ φ hlt hm4
+        rcases Nat.eq_zero_or_pos m with rfl | hm0
+        · left; rfl
+        · right; exact ⟨hm0, hm2⟩
+
 /-- **OPEN's colouring is locally constant** off the trimmed arcs and the new arcs. -/
 theorem open_hlc {c : Fin k} {up : Bool} {ψ ρc ρ ρ' : ℝ} (cfg : X.OpenConfig c up s b ψ ρc) (h' : X.Small ρ')
     (hρρ' : ρ < ρ') (h : X.Small ρ) (hρc : ρ ≤ ρc) :
     ∀ x ∈ F.dom, x ∉ ⋃ a ∈ F.trimArcs v ρ ∪ X.G.openArcs v X.col up s b ψ ρ, a.carrier →
       ∀ᶠ y in 𝓝 x, X.G.openCol v X.col F.col up s b ψ c ρ y = X.G.openCol v X.col F.col up s b ψ c ρ x := by
-  sorry
+  classical
+  have hn : 0 < X.n := by have := cfg.hbn; omega
+  have hb0 : 0 < b := cfg.hb1
+  obtain ⟨-, h2, -⟩ := F.trimArcs_spec X.mem_dom h.1
+  intro x hx hxa
+  have hxO : ∀ A ∈ X.G.openArcs v X.col up s b ψ ρ, x ∉ A.carrier := fun A hA hxA' =>
+    hxa (mem_iUnion₂.mpr ⟨A, Or.inr hA, hxA'⟩)
+  have hxA : x ∉ ⋃ A ∈ X.G.mergeArcs v X.col s 0 b ρ, A.carrier := fun hm => by
+    obtain ⟨A, hA, hxA'⟩ := mem_iUnion₂.mp hm; exact hxO A (Or.inl hA) hxA'
+  have hxT : x ∉ ⋃ B ∈ F.trimArcs v ρ, B.carrier := fun hm => by
+    obtain ⟨B, hB, hxB⟩ := mem_iUnion₂.mp hm; exact hxa (mem_iUnion₂.mpr ⟨B, Or.inl hB, hxB⟩)
+  have hxR : x ∉ (openRay v ψ ρ).carrier := hxO _ (Or.inr (Or.inl rfl))
+  have hxM : x ∉ (X.G.openRim v up s b ψ ρ).carrier := hxO _ (Or.inr (Or.inr rfl))
+  have hoff : ∀ y, y ∉ X.G.openWedge v up s b ψ ρ →
+      X.G.openCol v X.col F.col up s b ψ c ρ y = X.G.mergeCol v X.col F.col s 0 b c ρ y := fun y hy => by
+    unfold BranchGerms.openCol; rw [if_neg hy]
+  by_cases hxP : x ∈ X.G.openPiece v up s b ψ (ρ / 2)
+  · -- in the merged piece: `c` throughout
+    filter_upwards [(X.G.isOpen_openPiece v up s b ψ (ρ / 2)).mem_nhds hxP] with y hy
+    rw [openCol_of_mem_openPiece cfg h hy, openCol_of_mem_openPiece cfg h hxP]
+  rcases le_or_gt ‖x - v‖ (ρ / 2) with hxr | hxr
+  · -- inside `B̄(v, ρ/2)`, off the piece: a point of a sector off the gap
+    have hxv : x ≠ v := fun hxv => hxR (hxv ▸ left_mem_segment ℝ _ _)
+    have hxb : x ∈ ball v ρ := by rw [mem_ball, dist_eq_norm]; linarith [h.1]
+    rcases ball_cases h hn hxb hxv with ⟨i, hi⟩ | ⟨j, t, ht, rfl⟩
+    · have hig : i ∉ BranchGerms.gapSec s 0 b := by
+        intro hig
+        obtain ⟨φ, hφ, hxφ⟩ := exists_dir_of_mem_gapSec h hig hi
+        rcases eq_or_lt_of_le hxr with heq | hlt
+        · have hab' : 0 + 1 < b := by obtain ⟨m, h3, h4, -⟩ := hig; omega
+          rw [heq] at hφ hxφ
+          exact hxA (hxφ ▸ mem_mergeArcs_rim hab' hφ)
+        · rw [zero_add] at hφ
+          exact hxP (hxφ ▸ mem_openPiece_of_Icc cfg h hρc ⟨(norm_of_mem_sector hi).1, hlt⟩ hφ)
+      have hev : ∀ᶠ y in 𝓝 x, y ∉ X.G.openWedge v up s b ψ ρ := by
+        by_cases hir : i = BranchGerms.idx s (BranchGerms.rayPos up b)
+        · subst hir
+          rcases sector_rayPos_cases cfg h hi hxr with hW | hR | hM | hRest
+          · exact absurd (openWedge_subset_openPiece cfg h hW) hxP
+          · exact absurd hR hxR
+          · exact absurd hM hxM
+          · filter_upwards [(X.G.isOpen_openRest v up s b ψ ρ).mem_nhds hRest] with y hy hyW
+            exact Set.disjoint_left.mp (disjoint_openWedge_openRest cfg h) hyW hy
+        · filter_upwards [(X.hC.isOpen ρ h.mem_Ioc i).mem_nhds hi] with y hy hyW
+          exact hir (sector_disjoint h hy (openWedge_subset_sector cfg h hρc hyW))
+      filter_upwards [hev, (X.hC.isOpen ρ h.mem_Ioc i).mem_nhds hi] with y hyW hy
+      rw [hoff y hyW, hoff x hev.self_of_nhds, mergeCol_of_mem_sector h hy, mergeCol_of_mem_sector h hi,
+        if_neg (fun h1 => hig h1.1), if_neg (fun h1 => hig h1.1)]
+    · -- a branch point inside `ρ/2`: on an arc, or in the piece
+      exfalso
+      rw [norm_branchPt_sub v _ _ ht.1.le] at hxr
+      by_cases hjg : j ∈ BranchGerms.gapGerm s 0 b
+      · obtain ⟨m, h1, h2', rfl⟩ := hjg
+        have hts : t ∈ Ioo 0 X.s₀ := ⟨ht.1, ht.2.trans h.2.1⟩
+        have hφ := liftDir_gap_germ (s := s) hts h1 h2'
+        rw [zero_add] at hφ
+        rcases eq_or_lt_of_le hxr with heq | hlt
+        · rw [X.G.branchPt_idx, heq] at hxA hxM
+          rw [heq] at hφ
+          by_cases hb1 : 0 + 1 < b
+          · exact hxA (mem_mergeArcs_rim hb1 (by rw [zero_add]; exact hφ))
+          · have hb : b = 1 := by omega
+            have hm : m = 1 := by omega
+            subst hb hm
+            have hray := cfg.ray (ρ / 2) ⟨h.half.1, by linarith [h.1]⟩
+            apply hxM
+            refine mem_openRim ?_
+            cases up
+            · simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hray ⊢
+              exact ⟨hray.2.le, le_rfl⟩
+            · simp only [BranchGerms.rayPos, if_true] at hray ⊢
+              exact ⟨le_rfl, hray.1.le⟩
+        · rw [X.G.branchPt_idx] at hxP
+          exact hxP (mem_openPiece_of_Icc cfg h hρc ⟨ht.1, hlt⟩ hφ)
+      · exact hxA (branchPt_mem_mergeArcs_inner h hjg ⟨ht.1, hxr⟩)
+  · -- beyond `ρ/2`: OPEN's colouring is MERGE's, and MERGE's argument
+    have hfar : ∀ᶠ y in 𝓝 x, X.G.openCol v X.col F.col up s b ψ c ρ y = X.G.mergeCol v X.col F.col s 0 b c ρ y := by
+      filter_upwards [isClosed_closedBall.isOpen_compl.mem_nhds (show x ∉ closedBall v (ρ / 2) by
+        rw [mem_closedBall, dist_eq_norm, not_le]; exact hxr)] with y hy
+      exact hoff y fun hyW => hy (ball_subset_closedBall (X.G.openWedge_subset_ball v up s b ψ ρ hyW))
+    suffices hm : ∀ᶠ y in 𝓝 x, X.G.mergeCol v X.col F.col s 0 b c ρ y = X.G.mergeCol v X.col F.col s 0 b c ρ x by
+      filter_upwards [hfar, hm] with y hy1 hy2
+      rw [hy1, hy2, hfar.self_of_nhds]
+    rcases lt_trichotomy (dist x v) ρ with hlt | heq | hgt
+    · have hxv : x ≠ v := fun hxv => by rw [hxv, sub_self, norm_zero] at hxr; linarith [h.1]
+      rcases ball_cases h hn hlt hxv with ⟨i, hi⟩ | ⟨j, t, ht, rfl⟩
+      · filter_upwards [(X.hC.isOpen ρ h.mem_Ioc i).mem_nhds hi, isClosed_closedBall.isOpen_compl.mem_nhds
+          (show x ∉ closedBall v (ρ / 2) by rw [mem_closedBall, dist_eq_norm, not_le]; exact hxr)] with y hy hyb
+        rw [mem_compl_iff, mem_closedBall, dist_eq_norm, not_le] at hyb
+        rw [mergeCol_of_mem_sector h hy, mergeCol_of_mem_sector h hi, if_neg (fun h1 => (not_lt.mpr hyb.le) h1.2),
+          if_neg (fun h1 => (not_lt.mpr hxr.le) h1.2)]
+      · obtain ⟨p, hpj⟩ := exists_next_eq j
+        obtain ⟨ε, hε, hball⟩ := X.hC.exists_ball_subset_of_branchPt X.hs₀.2 X.hdisj (r := ρ) ⟨h.1, h.2.1.le⟩ (p := p) ht
+        rw [hpj] at hball
+        have hev : ∀ᶠ y in 𝓝 (branchPt v (X.G.β j) (X.G.κ j) t), y ∈ X.G.sector v ρ p ∪ X.G.sector v ρ j ∪
+            branchPt v (X.G.β j) (X.G.κ j) '' Ioo 0 ρ := Filter.mem_of_superset (ball_mem_nhds _ hε) hball
+        rw [norm_branchPt_sub v _ _ ht.1.le] at hxr
+        have hph : BranchGerms.Phantom X.col j := by
+          by_contra hph; exact hxA (branchPt_mem_mergeArcs_outer h hph ⟨hxr, ht.2.le⟩)
+        have hpc : X.col p = X.col j := by
+          obtain ⟨i, hi, hc⟩ := hph; rw [← BranchGerms.next_injective (hi.trans hpj.symm)]; exact hc
+        rw [mergeCol_branchPt h j ht, if_neg (fun h1 => (not_lt.mpr hxr.le) h1.2)]
+        filter_upwards [hev, isClosed_closedBall.isOpen_compl.mem_nhds (show branchPt v (X.G.β j) (X.G.κ j) t ∉
+          closedBall v (ρ / 2) by rw [mem_closedBall, dist_eq_norm, norm_branchPt_sub v _ _ ht.1.le, not_le]; exact hxr)]
+          with y hy hyb
+        rw [mem_compl_iff, mem_closedBall, dist_eq_norm, not_le] at hyb
+        rcases hy with (hy | hy) | ⟨t', ht', rfl⟩
+        · rw [mergeCol_of_mem_sector h hy, if_neg (fun h1 => (not_lt.mpr hyb.le) h1.2), hpc]
+        · rw [mergeCol_of_mem_sector h hy, if_neg (fun h1 => (not_lt.mpr hyb.le) h1.2)]
+        · rw [norm_branchPt_sub v _ _ ht'.1.le] at hyb
+          rw [mergeCol_branchPt h j ht', if_neg (fun h1 => (not_lt.mpr hyb.le) h1.2)]
+    · -- on the rim: interior to `F`, in one chart sector
+      have hxv : x ≠ v := fun hxv => by rw [hxv, dist_self] at heq; linarith [h.1]
+      have hxF : x ∈ F.interiorPts := by
+        refine ⟨hx, fun hxF => ?_⟩
+        have hxr' : x ∈ ball v X.r₀ := by rw [mem_ball, heq]; exact h.lt_r₀
+        obtain ⟨j, hj⟩ := X.hC.exists_branchPt_eq hxv hxr' (fun hI => hI.2 hxF)
+        rw [← dist_eq_norm, heq] at hj
+        exact hxT (hj ▸ branchPt_rim_mem_trimArcs h' h.1 hρρ' j)
+      obtain ⟨i, hi⟩ : ∃ i, x ∈ X.G.sector v ρ' i := by
+        have : x ∈ ball v ρ' ∩ F.interiorPts := ⟨by rw [mem_ball, heq]; exact hρρ', hxF⟩
+        rw [X.hC.cover ρ' h'.mem_Ioc hn] at this
+        exact mem_iUnion.mp this
+      filter_upwards [(X.hC.isOpen ρ' h'.mem_Ioc i).mem_nhds hi, isClosed_closedBall.isOpen_compl.mem_nhds
+        (show x ∉ closedBall v (ρ / 2) by rw [mem_closedBall, dist_eq_norm, not_le]; exact hxr)] with y hy hyb
+      rw [mem_compl_iff, mem_closedBall, dist_eq_norm, not_le] at hyb
+      rw [mergeCol_of_mem_sector_out h' h hy hyb, mergeCol_of_mem_sector_out h' h hi hxr]
+    · -- off the closed ball: `F`'s colouring
+      have hxc : x ∉ closedBall v ρ := by rw [mem_closedBall, not_le]; exact hgt
+      have hxF : x ∉ ⋃ a ∈ F.arcs, a.carrier := fun hF => hxT (h2 ⟨hF, hxc⟩)
+      filter_upwards [F.locallyConstant x hx hxF, isClosed_closedBall.isOpen_compl.mem_nhds hxc] with y hy hyc
+      rw [mergeCol_of_not_mem h (fun hb => hyc (ball_subset_closedBall hb)),
+        mergeCol_of_not_mem h (fun hb => hxc (ball_subset_closedBall hb)), hy]
 
 /-- OPEN's new arcs lie in the closed ball. -/
 theorem openArcs_subset_closedBall {up : Bool} {ψ ρ : ℝ} (h : X.Small ρ) :

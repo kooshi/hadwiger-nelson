@@ -304,3 +304,27 @@ holds as for `clear`). The diff is `data/fs131/io/margin.diff` (65 lines: the fi
 the five leaves still `sorry`.
 
 ## Stage 5 — SAVED (FS131-IO2)
+
+## Stage 6 — SAVED (FS131-IO2): `open_hlc` proved
+
+**The route** (IO1's § 3.3 item 1 reorganized around one open set). New definitions in `BranchGerms` (with spec examples): `openPiece`
+(the merged `c`-sector out to `r`: from germ `idx s 0` to the ray for `up`, from the ray to germ `idx s (b + 1)` otherwise) and `openRest`
+(the rest of the partial sector, beyond the ray), each a `sectorBetween` with the ray as one side, and their lifted-direction membership
+lemmas (`mem_openWedge`, `mem_openPiece`, `mem_openRest`). Children, all in `OpenMove`:
+
+- `isOpen_sectorBetween` (as `BranchGerms.isOpen_sector`, for any two germs) and so `isOpen_openWedge`, `isOpen_openPiece`, `isOpen_openRest`;
+- `polar_eq_of_abs_lt`: two polar forms of one point at angles less than a turn apart are one;
+- `mem_openRay`, `mem_openRim`; `OpenConfig.two_le`, `OpenConfig.liftDir_succ_lt` (one step gains less than a turn);
+- `openWedge_subset_sector` (the wedge is in the partial sector), `openWedge_subset_openPiece`, `mem_openPiece_of_Icc` (gap sectors and gap
+  germs inside `ρ/2` are in the piece), `disjoint_openWedge_openRest`, `sector_rayPos_cases` (a partial-sector point inside `ρ/2` is in the
+  wedge, on the ray, on the rim arc, or in the rest);
+- `openCol_of_mem_openPiece`: OPEN's colouring is `c` on the whole piece (wedge, gap germs, horn and gap sectors, by
+  `exists_step_of_strictMono`).
+
+`open_hlc`: in the piece the colouring is `c` on an open set; inside `B̄(v, ρ/2)` off the piece a point off the arcs is in a chart sector off
+the gap (a gap sector or gap germ there is in the piece or on a rim arc), whose neighbourhood misses the wedge (another sector, or the rest of
+the partial sector); beyond `ρ/2` OPEN's colouring is MERGE's and MERGE's argument runs unchanged (it uses `hca`, `hcb` only at the gap germs
+inside `ρ/2`, which are in the piece, and at `ρ/2` when `b = 1`, where the point is on `openRim`). Iteration (`lake env lean`): clean, four
+leaves left (`open_valid`, `open_degree_horns`, `open_rim`, `open_allowedCone`).
+
+## Stage 6 — SAVED (FS131-IO2)
