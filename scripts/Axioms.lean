@@ -3064,6 +3064,8 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.IsTile.closure_subset_closedBall_zero
 #print axioms HadwigerNelson.Plane.ArcMap.exists_not_mem_closedBall_zero
 #print axioms HadwigerNelson.Plane.ArcMap.outerDom_eq_connectedComponentIn
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_sector_subset_tile
+#print axioms HadwigerNelson.Plane.ArcMap.hasRepeatedColour_of_two_tiles
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 

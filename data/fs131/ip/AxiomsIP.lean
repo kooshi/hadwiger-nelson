@@ -31,4 +31,7 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.ArcMap.cvb_pinch_connected
 #print axioms HadwigerNelson.Plane.ArcMap.cvb_hole_disconnected
 #print axioms HadwigerNelson.Plane.ArcMap.exists_unenclosed_or_bad
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_sector_subset_tile
+#print axioms HadwigerNelson.Plane.ArcMap.hasRepeatedColour_of_two_tiles
+#print axioms HadwigerNelson.Plane.ArcMap.isCubicTrichromatic_of_three_tiles
 #print axioms HadwigerNelson.Plane.inter_nonempty_of_interleaved
