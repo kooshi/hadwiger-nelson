@@ -3408,3 +3408,37 @@ reason by the close.*
      over MERGE's `MergeMove` machinery, a one-sector form); queued. (d) **IL1's slot → lane A's continuation, FS131-IL2, on `fs131-w5c`** (`exists_clean`, the
      three `hP` lemmas, `mergeAvailable_of_bothKind`), none of which reads `exists_vertexStep`. Alternative weighed: lane B (`Terminal`'s two children). Why: the
      freed lane's own continuation, on the limit's chain. Confidence: high. In flight after IL2's launch: 1 (E6) + 1 (M5) + 1 (IL2) = 3.
+384. **FS131-E6 done: F6 is real, and repaired with no backlog statement changed** (harness ≈ 540k by the task notice; record `plans/FS131-E6-derivation.md`;
+     report `data/fs131/reports/FS131-E6.md`; commits `806095aa`, `b9bbf3ce`, `6c0fb2a2`, `991bb487`, `11a34d9d`). **E6-OCCURS** [hand, one mind; tools exact,
+     controls fire]: a valid, clean plane map with 12 colours and no arc of radius 1 (Condition 5 holds) carries a lone `c`-horn at `v` with bounds
+     `κ₁ = 0 < 1 < κ₂ = 2`, `ShaveAvailable v` at `σ = 1` and at no other `σ`, forced by an out-type `h` corner at `N` (shadow near `v` exactly `B(N, 1)`) and a
+     `g`-region at `S′` bounded by the circle of radius 2 about `N` (shadow exactly the outside of `B̄(N, 1)`); `v` the only site; the shave would create an (R2)
+     arc of `ω(N)`. **E6-NODROP** [derived, one mind]: with an in-type `c`-region touching `ω(v)` at `(3/5, 4/5)`, no local modification lowers `v`'s degree
+     without a unit arc or a new colour at `v`. **E6-CONE** [hand, one mind]: an allowed cone with empty interior forces the horn's bounds into `[−1, 1]`
+     (`horn_bounds_of_noMerge`'s proof with the cone hypothesis made direct), so every F6 horn has a non-degenerate cone. **E6-OPEN** [hand, one mind; its
+     clearness step is the kernel lemma `clear_near_end`]: at any horn whose colour's allowed cone has nonempty interior, recolour with that colour a thin wedge
+     beside the horn on the cone's interior side — valid, no unit arc, no colour added at `v`, degree not raised, at least one horn removed, rim free of repeated
+     colours, allowed cones off the disc unchanged (FS110 § 2.8's sketch, derived with unit arcs allowed; needs neither a single sector nor Condition 5).
+     **E6-ROUTE** [derived, one mind]: the vertex step is MERGE; else RAY; else, for a horn whose cone has empty interior, `exists_shave` with `woodallCone`'s
+     bounds; else OPEN — each lowering degree + horns. **Trace**: `exists_terminal`, `exists_terminalMap`, `IsTerminalMap`, `Terminal`, `ShaveAvailable`,
+     `IsModification` unchanged; `exists_vertexStep` restated (hypothesis `HasHornCount v j`, conclusion `∃ m′ j′, m′ + j′ < m + j ∧ …`); `exists_arcStep` owes a
+     horn clause; `acted_finitely` counts degree + horns; KL1's `shave_step_gen` not needed. **Lean drafts** (record § 4.5): `HasHornCount`, `exists_open` in
+     `exists_merge`'s shape. **Receipt** (Keryx): the five commits exist on `main`; the derive gate on the record (`derive_gate.py all FS131-E6-derivation.md`):
+     PASS, 6 controls each firing on its plant; `tools/fs131_e6_model.py` run by Keryx: "valid: 6 of 6 lemma inequalities hold; sigma: below 1 refuted 6/6;
+     above 1 refuted 4/4; admissible {1}; nodrop witnesses: 4 of 4; open: wedge c-clear; far ray inside D_c(v); v after: 3 sectors, 0 horns". **Generalization**:
+     `horn_bounds_of_noMerge` holds with `interior (allowedCone v c) = ∅` in place of `¬ MergeAvailable v, 2 ≤ m` (`horn_bounds_of_interior_empty`). **Corrections
+     owed** (dated drafts in record § 4.6, for the filing): FS110-N-proof's N4-SHAVE row (l. 718), N4-TERM row (l. 723) and § 2.8's sketch, with
+     FS110-derivation.md's FS110-N4-TERM entry; FS112-N-proof § 1.4 row 7 and FS112-derivation.md's FS112-WALK entry; FS110-NB4-verification § 2.3 and D3
+     ("`[σ_g, σ_h] ⊂ (−1, 1)`" is false for single horns). **Prediction scored**: E6-P1 to P5 all met (P1 stronger: the model holds under Condition 5); Brier
+     0.0272. **Prior art**: `[SokolovVoronov2025]` Prop. 7 read (the polygonal triangle recolouring, the printed form of the wedge recolouring; no cusp case) —
+     filed to `BIBLIOGRAPHY.md`'s reading status this commit. Credit: E6, for the exact model and a repair that keeps every backlog statement.
+385. **Rulings on E6's held items, and its slot.** (a) **`exists_arcStep`'s horn clause accepted** ("`∀ x j, F.HasHornCount x j → ∃ j′ ≤ j, F′.HasHornCount x
+     j′`", a statement change to a `sorry` child, as item 383 ruled for `exists_vertexStep`), with E6's note that a bend's new curve must not become tangent at
+     an end vertex to another arc (a genericity choice of the profile, checked against `bendMap`). Confidence: high. (b) **The three dated errata are held for
+     FS-131's filing**, with the others (items 262, 264, 277, 288, 291, 294, 322, 372 (d)). Why: the front files change once per filing; nothing waits on them.
+     Confidence: high. (c) **E6's slot → OPEN's construction, FS131-IO1, on a new branch `fs131-wop` cut from `main` at `11a34d9d`** (worktree made by the
+     recipe; `.lake/build` copied from the idle `fs131-w4mm`): `HasHornCount` and `exists_open` in a new module downstream of `MergeMove`, by E6's route (a)
+     (a `mergeArcs` variant whose gap ends at a new ray), reusing `cone_side`, `clear_near_end`, `dist_ne_one_of_isOpen_isClear` and `merge_allowedCone`'s route;
+     it lands on `main` on its own, or merges into wave 5 at its landing. Alternative weighed: the collar construction's planner (KP2), which waits on M5's merge.
+     Why: OPEN needs only `main` and is on the procedure's path; the branch from `main` keeps it independent of wave 5's merges. Confidence: medium-high. In flight
+     after IO1's launch: 1 (M5) + 1 (IL2) + 1 (IO1) = 3.
