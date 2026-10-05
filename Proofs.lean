@@ -190,6 +190,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.FlankUA
 import Proofs.HadwigerNelson.Plane.ValidMap.Terminal
 import Proofs.HadwigerNelson.Plane.ValidMap.Dense
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseWalk
+import Proofs.HadwigerNelson.Plane.ValidMap.BendCollar
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseDense
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan

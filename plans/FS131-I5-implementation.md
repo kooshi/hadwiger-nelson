@@ -1939,3 +1939,66 @@ up to date, nothing built, 5 modules with warnings**, exit 0 (`build/gate/build/
 `data/fs131/kb/build-stage43-asgiven.log`); every warning `declaration uses 'sorry'`. `tools/fs131_i5_stmt_check.py d61edefc`: PASS (`data/fs131/kb/stmt-check-43.txt`).
 
 ## Stage 43 — SAVED
+
+## Stage 44 — SAVED (FS131-KB2): `bend_toward_collar` landed in `Plane/ValidMap/BendCollar`; the construction's design
+
+### 44.1 The landing
+
+`Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean` (new; imports `Chain`, `UnitArc`, `LocalStructure`), imported by `BaseDense`; added to
+`Proofs.lean`, to `ARCHITECTURE.md` (a row before `BaseDense`, whose Imports cell gains it) and to `scripts/Axioms.lean` (after I5o's stage-40 lines).
+`bend_toward_collar`, docstring and statement, **verbatim**: `tools/fs131_kb_stmt_move.py` (new) compares the block from `/--` to `:= by` in
+`data/fs131/i5o/BendCollar.lean` at `4a0e5c28` with the module's, byte for byte, and checks the context lines (`namespace HadwigerNelson.Plane`,
+`namespace ArcMap`, `variable {k : ℕ} {F : ArcMap k}`) and that one file under `Proofs/` declares it: **PASS** (`data/fs131/kb/move-check-44.txt`);
+`--self-test`: a changed hypothesis, a changed docstring letter, a dropped `variable` line, a second declaring file — each FIRED, unplanted PASS
+(`move-check-44-selftest.txt`). The scratch file is deleted (its content is in the library; the check reads it from `4a0e5c28`).
+
+### 44.2 The statement read clause by clause (no defect found)
+
+Before building, each clause was checked for an edge case that could make it false; none was found, and two facts shorten the construction:
+- **`hlen` is implied, and full circles cannot occur**: `l60_le` (wave 4, proved on this branch) gives `θ₂ − θ₁ ≤ π/3` for every ring arc of a valid map,
+  so § 41.2 item 6's full-circle case is empty (a whole circle would be a ring arc of length `2π`).
+- **No new inert arc at a centre on `α°` is `lock`**: a unit arc of `M` centred at `Q ∈ α°` is one of `F`'s (R1); if `c` lay on a side, every interior
+  point `x` of it would be in `cl(C_c) ∩ ω(Q)`, which `lock` (FS112-LOCK, proved here) confines to `{P, P + 2e(θ_Q)}` — two points. At a centre in the lens
+  (an open set inside `C_c`) it is `Valid.dist_ne_one_of_isOpen_subset_closure`. Every other centre keeps its colours or only gains (`β°` gains `c'`).
+- **R1/R2 reduce to the two ends**: with `β` built from circles of radius `≠ 1`, a unit arc in `M.Γ` meets `β` finitely, so lies in `F.Γ` (closed in the
+  domain), misses `β°` (`β° ⊆` interior points of `F`) and `α°` (interior points of `M`); off `cl(supp h)` the maps agree; `cl(supp h) ∩ F.Γ = α`. So
+  only a unit arc of `ω(Q)` through `A` or `B`, `Q ≠ P`, needs its sides compared, and there the collar near the end (the two sectors of the end's chart
+  beside `α`, with `α`'s branch) is preconnected and misses `ω(Q)`, so it lies on one side of `ω(Q)`, and each side carries the same colours in `M` and
+  `F` (`c` keeps `S_in ∖ cl L`, `c'` gains only on that side).
+- **R3** is `α° ∩ M.Γ = ∅`; **degrees and repeated colours** need local structure only at interior points (degree 1), at `α°` (two germs of `ω(P)`),
+  at `β°` (two germs, at a corner of two circles or on one circle) and at the ends.
+
+### 44.3 The construction's design (D1; for the construction leaves)
+
+- **The lens boundary `β`**: `C_A`, `C_B`, the circles of radius `R < 1` internally tangent to `ω(P)` at `A`, `B` (centres `P + (1 − R)e(θ₁)`,
+  `P + (1 − R)e(θ₂)`), curvature `1/R`; `β` = the arc of `C_A` from `A` to their crossing `X` (on the ray at `θ_m = (θ₁+θ₂)/2`, by symmetry) and the arc of
+  `C_B` from `X` to `B`. With `R > 1/2`, `P` is inside both discs, so each ray from `P` meets each circle once: `C_A` is the radial graph
+  `t_A(θ) = (1−R)cos(θ−θ₁) + √((1−R)²cos²(θ−θ₁) + 2R − 1)`, and `β`'s radial function is `max(t_A, t_B)`; the depth of `β` below `α` is about
+  `(1−R)(1 − cos(θ − θ_E))` (at most `(1−R)/2`), quadratic at the ends — so (i) at a horn end (the next germ inside tangent to `α`, curvature `κ > 1`) `C_A`'s
+  germ `(β_α, 1/R)` fits between `α`'s germ `(β_α, 1)` and it once `1/R < κ`, and (ii) the depth is below main's toward profile `ψ · min(θ − θ₁, θ₂ − θ)`, so
+  main's `toward_clear` argument (N2-SIGN, N2-ENV near and toward; `n2_env_*` are proved on this branch, `toward_clear` is main-only — ~30 lines to
+  re-prove under a new name) makes every lens point clear for `c'`; `α°` points are clear by `ne1_region`; two points of `L ∪ α°` are `< 1` apart
+  (angular width `≤ π/3`, radii `≤ 1`). Validity is then `Valid.of_agreesOff` on `U = cl L` (proved on this branch).
+- **The push `h`**: along the rays from `P`, `h(P + t e(θ)) = P + ψ_θ(t) e(θ)` with `ψ_θ(t) = t − ℓ(θ) · tent_{a(θ), 1, b(θ)}(t)` (tent = 0 off
+  `[a, b]`, 1 at `1`, linear between), `ℓ = 1 − max(t_A, t_B)` the lens depth, `a`, `b` the collar's inner and outer profiles (inner: the same two circles
+  with a smaller radius `R' < R`, outer: the circles of radius `R'' > 1` tangent externally-containing at `A`, `B`); identity for `θ ∉ (θ₁, θ₂)`. Its
+  inverse is `u ↦ u + ℓ · tent_{a, 1−ℓ, b}(u)`. Increasing since `ℓ < 1 − a`; continuous at the ends since `ℓ → 0` there. The collar is Γ-free but for
+  `α°`: near each end by the end's chart (`localSectors_disj`; `α`'s germ `(θ_E + π/2, 1)` is one of the chart's, and the collar's germs lie strictly
+  between its neighbours), in the middle by `hfree` and compactness.
+- **The bent map**: `M.dom = F.dom`, `M.col = F.col ∘ h⁻¹`, `M.arcs` = F's arcs with the open arc cut out (main's `cutArcs` engine, ~150 lines, main-only:
+  to re-prove under a new name, or to cite after the merge with `main`) and the two arcs of `β`. Then `M.Γ = h(F.Γ)`, so clauses 3–6 and
+  `M.interiorPts = h(F.interiorPts)` follow, and `M`'s colour is locally constant through `h`.
+- **Degrees at the ends**: `M`'s chart at `A` is `F`'s with `α`'s germ replaced by `C_A`'s (`isSectorChart_of`), so both have `max n 1` sectors, and the
+  sector colours agree as lists (`α`'s outer neighbour sector becomes `S_out ∪ α ∪ L`, colour `c'`; the inner `S_in ∖ cl L`, colour `c`).
+- **Price**: about 3,000–4,000 lines (geometry of the tangent circles and radial graphs ~600; the push ~400; the bent map ~400; collar freeness ~500;
+  validity ~300; degrees ~700; R1/R2 ~500). Not attempted this job beyond the landing (budget: the job opened at about 340k by the harness's count
+  after the readback).
+
+### 44.4 The build
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`: **OK — 448 of 448 batches, 3 modules rebuilt (`BendCollar`,
+`BaseDense`, `Proofs`), 6 with warnings, every warning `declaration uses 'sorry'`** (new: `bend_toward_collar`), exit 0, 8 min 16 s
+(`build/gate/build/20261005T091944Z-2965180.log`; driver log `data/fs131/kb/build-stage44.log`). `tools/fs131_i5_stmt_check.py d61edefc`: PASS
+(`stmt-check-44.txt`); `tools/check_architecture.py`: PASS; `tools/fs131_kb_stmt_move.py` after the deletion: PASS.
+
+## Stage 44 — SAVED

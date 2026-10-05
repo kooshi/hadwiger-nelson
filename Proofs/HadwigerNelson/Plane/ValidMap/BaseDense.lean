@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.BaseWalk
+import Proofs.HadwigerNelson.Plane.ValidMap.BendCollar
 
 /-!
 # Row 134's base with unit arcs, and the density rows that rest on it

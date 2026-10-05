@@ -1,8 +1,16 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Chain
+import Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
+import Proofs.HadwigerNelson.Plane.LocalStructure
 
-/-! FS131-I5o: the strengthened bend, as a statement (ruling 363–364: stated in the form believed true; NOT added to the library —
-`exists_preBend` stays `sorry` until FS131-E6 re-derives the iteration). Elaborated here so the construction job starts from a checked
-statement. -/
+/-!
+# The collar bend (FS131-KB2)
+
+`bend_toward_collar`, the strengthened toward bend `exists_preBend` iterates (FS131-E4's E4-BEND-UN with R1–R3 and no new inert arc;
+FS131-I5o's statement, moved verbatim from `data/fs131/i5o/BendCollar.lean`, rulings 360, 366, 370 (d)). Its construction: a lens
+bounded by circles internally tangent to the arc at its two ends (so a horn-shaped tip fits a horn), the push of the arc across a collar
+along the rays from its centre, and the bent map as the image of the old one under that homeomorphism (`plans/FS131-I5-implementation.md`
+§ 44).
+-/
 
 namespace HadwigerNelson.Plane
 
