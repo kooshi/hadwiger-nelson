@@ -40,6 +40,9 @@ prints the standard three alone.
 | **FS131-IWd** — **`niceAt_of_dirColourAt`** (the `NiceAt` picture from the local data), with `DirColourAt.const_of_noChange`, `rightCol`/`leftCol` lemmas, `exists_offDirs_punctured`, `finRotate_val`, … (stage 14) | E3-NICE's last paragraph; plan § 14.3 row; stage 11's truth reading | standard three |
 | **FS131-IWd** — **`wedgeMerge_niceAt`** (the crossings a merge creates), with `niceAt_of_crossing`, `GoodAt.exists_sides`, `wedgeMerge_crossing`, `cos_pos_arc`, `exists_sign_near`, `coneAt_subset_halfPlane` (stage 15) | E3-NICE's crossings; plan § 14.3 row (no transversality needed) | standard three |
 | **FS131-IWd** — **`exists_merge_at` (E3-NICE)**, with `DirColourAt.exists_merge_dirs`; so **`exists_woodallMerged` (E3-BALL)** on its proved children (stage 16) | `plans/FS131-E3-derivation.md` § 3.3, as read back in plan § 14.2; stage 11's measure | standard three (both) |
+| **FS131-WL1, at the gate** — the chain: `ArcMap.aeMap6` (FS106-AE-MAP6), `ArcMap.aeMap6_of_condition5`, `woodall_thm6` (FS106-WO's Theorem 6), and with them every Woodall record (257: `woodall_step4`, `townsend_lemma` (FS106-TW), `false_of_four_le_sectors` (E1-NO45), `exists_woodallMerged` (E3-BALL), `step5_lt`, `step6`, …) | the brief's three quotations (`Woodall/Steps`), statements unchanged | **standard three, read from the gate's saved log** (`data/fs131/wl/axioms-receipt-final.log`, gated commit `08e64ae5`; `tools/fs131_wl_woodall_axioms.py`: 257 of 257); no outside theorem, no hypothesis (wave 4's `lemmaL`, `ts_t` proved on `main`) |
+| **FS131-WL1** — the plane-map model (QA2-1): `sevenBrickMap_woodallModel`, `sevenBrickMap_thm6Model`, `sevenBrickMap_woodallNormal`, `sevenBrickMap_woodallMerged`, `sevenBrickMap_condition5`, `sevenBrickMap_tJunction` (with `sevenBrickMap_mem_coloursAt`, `tJunction_of_three`, `tJunction_of_pair`, `brickClosedCell_same_row`, `brickClosedCell_rows`, `isClosed_brickClosedCell`), `sevenBrickMap_sectorsAt_tUp`, `_tDown` (with `tUp_sub`, `tDown_sub`, `tUp_cov`, `tDown_cov`, `sevenBrickMap_mem_region_of_cell`, `brickCellCol_ne`, `tUpCols_injective`, `tDownCols_injective`, `tUpDirs_lt`, `tDownDirs_lt`, `tUpDirs_ge`, `tDownDirs_ge`, `brickCorner_mem_arcs`, `polar_re_im`, `exists_polar_Ioc`), `ArcMap.coneAt_region_of_sectors`, `ArcMap.niceAt_of_injective` | QA2-1 (inventory item 172, ruling (a)); the IWd brief's amendment ("`sevenBrickMap.WoodallNormal univ` (with `WoodallMerged univ`)") | standard three (gate log) |
+| **FS131-WL1** — the adversaries: `threeSectorDisc_not_sectorsAt_one`, `threeSectorDisc_not_niceAt_one`, `puncturedThreeSectorDisc_not_woodallMerged`, `_not_woodallNormal` (with `zero_mem_threeCuts`, `puncturedThreeSectorDisc_region`, `puncturedThreeSectorDisc_coloursAt_zero`) | `SectorsAt`'s domain clause (inventory item 155) | standard three (gate log) |
 
 **E1-NO45 holds in the kernel as a proof from its citations**: the proof of `false_of_four_le_sectors` is complete, and the check on E1's argument it was
 asked to be (inventory item 111) found no gap: E1-BAD's count (`K.card ≤ n`), E1-COVER's colour-class form and the refined second-order lemma all closed
@@ -693,3 +696,57 @@ concrete hypothesis would go unaudited. The two normal forms are read the same w
 
 `main` moved meanwhile (`a573a140 → 61007223`: `plans/`, `data/` and E5's `tools/fs131_e5_*.py`, no Lean, no gate script), so the landing merges
 it and re-runs the gate on the merged commit (stage 22).
+
+## Stage 22 — SAVED (FS131-WL1): `main` merged again; the full gate re-run on the merged commit `08e64ae5` — green
+
+**The merge**: `origin/main` at `61007223` into `fs131-ww` (`08e64ae5`, a clean merge; its message is git's default and carries no attribution
+lines — a slip, logged; no amend). It brings `plans/` (3 files), `data/` (3) and E5's `tools/fs131_e5_checks.py`, `tools/fs131_e5_readback.py`
+(`git diff --name-only a5ca88d0 08e64ae5`): no Lean module, no gate script. The gate was re-run anyway, on `08e64ae5`, since `tools/` lies
+outside "plans/ and data/":
+- **Build**: OK — all 1765 modules up to date, nothing built, **0 modules with warnings, 0 `warning:` lines** (`build/gate/build/20261005T041255Z-1296636.log`,
+  copy `data/fs131/wl/build3-full.log`; driver `data/fs131/wl/build3.log`).
+- **Axioms**: **OK — 3,654 records: 3,633 clean, 12 axiom-free, 4 imported, 5 declared purchases**; "no record appeared, disappeared or changed
+  its axioms" since stage 21's run (`data/fs131/wl/axioms-final.log`; receipt copy `axioms-receipt-final.log`). Woodall: 257 of 257 on exactly
+  the standard three (`data/fs131/wl/woodall-axioms-final.txt`). **`--self-test` 23 of 23** (`axioms-selftest-final.log`).
+- **Vacuity**: **OK** — `declarations=10851 refutations-skipped=111 sites=755`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=718 unknown=2`;
+  "counts: unchanged, rows: none changed" since stage 21's run; the baseline header "match (9 of 9 compared)" (`data/fs131/wl/vacuity-final.log`,
+  scan copy `vacuity-scan-final.log`); against `main`'s scan, `tools/fs131_wl_vacdiff.py` PASS, 0 lost, 59 added, all Woodall's
+  (`vacdiff-final.txt`). **`--self-test`: all 62 controls behaved** (`vacuity-selftest-final.log`, full `vacuity-selftest-final-full.log`).
+- `tools/check_architecture.py` PASS (`arch-final.txt`); `fs131_w3_decls.py --check` 257/257, 0 missing, 0 stale; `fs131_k4_decls.py --check`
+  495, 0 missing; zero `sorry` in `Proofs/` (0 warnings; no `sorryAx`).
+
+**The chain's theorems, read from the gate's saved log** (`data/fs131/wl/axioms-receipt-final.log`): `HadwigerNelson.Plane.ArcMap.aeMap6`,
+`HadwigerNelson.Plane.ArcMap.aeMap6_of_condition5`, `HadwigerNelson.Plane.woodall_thm6` — each `[propext, Classical.choice, Quot.sound]`; so
+`ArcMap.aeMap6_normal`, `aeMap6_merged`, `exists_woodallMerged`, `exists_merge_at`, `step5_lt`, `step6`, `false_of_four_le_sectors`, `townsend_lemma`,
+`woodall_step4`, `not_woodall_step4_two_thirds`, and the model `sevenBrickMap_woodallModel`, `sevenBrickMap_thm6Model`.
+
+## Drafts for the front page (FS131-WL1)
+
+Each with its slot and the log line it comes from (gated commit `08e64ae5`).
+
+1. **`CLAUDE.md` § Trust ledger**, the sentence "the current audit reads 3376 clean and 5 declared purchases, and 4 imported (and 12 axiom-free;
+   3,397 records at wave 4's landing, FS131-G4, 2026-10-05)" becomes: "the current audit reads 3633 clean and 5 declared purchases, and 4 imported
+   (and 12 axiom-free; 3,654 records at Woodall's landing, FS131-WL1, 2026-10-05)". From `data/fs131/wl/axioms-final.log`: "audited: 3654 records —
+   3633 clean on the standard axioms, 12 axiom-free, 4 imported (resting on a declared outside theorem), 5 declared purchase(s)" and "==> axioms:
+   OK — 3633 clean, 12 axiom-free, 4 imported, 5 declared purchase(s)".
+2. **`CLAUDE.md` § The gate**, the two count lines "`declarations=10525 refutations-skipped=92 sites=705`, `vacuous=0 stale=0 declared=3 witnessed=27
+   generic=673 unknown=2`" become "`declarations=10851 refutations-skipped=111 sites=755`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=718
+   unknown=2`". From `data/fs131/wl/vacuity-final.log`: "scanned: declarations=10851  refutations-skipped=111" and "sites:   sites=755  vacuous=0
+   stale=0  declared=3  witnessed=32  generic=718  unknown=2".
+3. **`scripts/vacuity-baseline.txt`'s header** (written, this branch): "#   declarations=10851  refutations-skipped=111  sites=755" / "#   vacuous=0
+   stale=0 declared=3 witnessed=32 generic=718 unknown=2" — the digest's "recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9
+   compared)".
+4. **`tools/claude_md_fact_audit.py`'s `GATE_CHANGES`**, after the `(("2512", "5"), ("3376", "5"))` entry:
+   `(("3376", "5"), ("3633", "5")): "FS-131 Woodall's landing (FS131-WL1; .claude/worktrees/fs131-ww/build/gate/axioms/20261005T041304Z-1297413.log,
+   copy data/fs131/wl/axioms-receipt-final.log, gated commit 08e64ae5): 3,654 records, 3,633 clean, 12 axiom-free, 4 imported, 5 purchases",`
+5. **`LEAN.md` § The gate**, "`--self-test` plants fifty controls" becomes "`--self-test` plants sixty-two controls". From
+   `data/fs131/wl/vacuity-selftest-final.log`: "==> vacuity self-test: OK — all 62 controls behaved: every one fired, and the silent ones stayed
+   silent." (The axiom audit's "23 planted faults" is unchanged: "23 controls", every one OK.)
+6. **Held for the milestone's filing** (as wave 4's, item 319), drafted here: `LEDGER.md` row 132's clause "maps need six for arc maps (segments
+   and circular arcs), by `[Woodall1973]`'s steps 1–6, step 6 repaired by Townsend's lemma, and FS131-E1's E1-NO45 in place of his steps 7–8" is
+   **[kernel]** (FS131-WL1, gated commit `08e64ae5`): `ArcMap.aeMap6` (FS106-AE-MAP6), `ArcMap.aeMap6_of_condition5`, `woodall_thm6` (FS106-WO's
+   Theorem 6), `woodall_step4`, `townsend_lemma` (FS106-TW), `ArcMap.false_of_four_le_sectors` (E1-NO45), `ArcMap.exists_woodallMerged` (E3-BALL),
+   in `Proofs/HadwigerNelson/Plane/Woodall/`, on the standard three, resting on no outside theorem and no hypothesis (wave 4's FS106-L `lemmaL`
+   and FS106-TS-T `ts_t`, and Lebesgue's covering theorem, proved on `main`); its hypotheses modelled together at `k = 7` on a map of the plane
+   (`sevenBrickMap_woodallModel`). The Frontier line and the Proof Atlas grades for FS106-WO, FS106-TW, FS106-AE-MAP6, E1-NO45 move to [kernel]
+   with it.
