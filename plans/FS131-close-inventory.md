@@ -2469,3 +2469,24 @@ reason by the close.*
      separate property inside another). Why: the field is the property the step reads, and the map supplies it. Confidence: high on the defect (the
      counterexample is concrete and the failing step named); medium-high on the field's sufficiency (one mind, on paper). **For the merge**: `fs131-w5t`'s new
      theorem and constructor change sit beside IP3's proofs of the F-leaves in `MapGraph` — expect an adjacent-hunk conflict, resolved keeping both.
+310. **FS131-I5e handed back** (Stage 21 SAVED, harness ≈ 401k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 19–21;
+     report `data/fs131/reports/FS131-I5e.md`; commits `38fe7c4e`, `62523b33`, `a1babf0b`, `6e38803d`, pushed). **`cor3` moved** verbatim to the new module
+     `Plane/ValidMap/Cor3` (ruling 299 (a); `tools/fs131_i5_cor3_move.py` PASS at `62523b33`, its self-test 5 of 5 planted faults fired); `HexRing` and `Dense`
+     import it. **[kernel], standard three**: `GermPseudo.mem_pseudoColours`. **Stated**: `cor3_local` (ruling 218 (b); `cor3`'s statement with `Covers u 1`,
+     `Covers u' 1` replaced by `u`, `u'` and every common unit point in the domain — I5e's reading of what N3-COR3 reads, one mind; **if its proof needs a larger
+     disc, the statement comes back through me**). **Proved over `cor3_local`** (on `sorryAx` until it lands): `cor3`, `pseudo_ncard_le_two_of_baseHyp` (a new
+     child), `BaseCtx.pseudo_ncard_le_two` (NB3 step 5), `rot_noThird` (so `rot_out`, `rot_in` are unblocked). **The GAP** at NB3-END item 2 (items 305, 307),
+     with the shadow witnesses' limit directions in the record § 20.2. **Receipt** (Keryx): the four commits exist and `origin/fs131-w5` is `6e38803d`; the
+     stage-21 build log (`build/gate/build/20261005T020618Z-432319.log`) ends "Build completed successfully (5369 jobs)", 0 warnings other than `sorry`; `sorry`
+     by grep: `Terminal` 9, `Dense` 1, `HexRing` 6, `MapGraph` 3, `BaseWalk` 7, `BaseDense` 4, `Cor3` 1 — 31, of them 24 the lane's; `data/fs131/i5e/I5eAxioms21.out`
+     read: `mem_pseudoColours` and the control `linkage_dot_ne_zero` on the standard three, the five over `cor3_local` on `sorryAx`. **The split it proposes**
+     (record Stage 21): one implementer on `Terminal` (after the re-derivation), the other on `HexRing`, `Cor3`, `BaseWalk`'s four, `Dense`'s `disc1_local` and
+     `BaseDense`'s three — disjoint files, one `scripts/Axioms.lean` block each. **Slip, I5e's own**: most of its budget went on reading for `n3_end` before the
+     GAP surfaced. Credit: I5e, for the GAP and for finding the same exclusion under `cv_class`.
+311. **Ruling: I5e's slot → FS131-I5f, wave 5's non-`Terminal` half; E5 takes the next slot, whatever wave 4's state.** Choice: I5f on `fs131-w5` takes I5e's
+     second set (`HexRing`, `Cor3`, `BaseWalk`'s four, `Dense`'s `disc1_local`, `BaseDense`'s three); E5 (the re-derivation, item 306) launches in the next
+     slot that frees; then Woodall's landing job; then the `Terminal` implementer in its own worktree, on E5's verdict; then IMM2 and `bend_away`'s job. This
+     revises item 306's order, which put Woodall's landing ahead of E5 if wave 4 had landed. Alternative weighed: E5 in this slot, as item 306 said. Why: the
+     slot that freed is wave 5's own lane, which would otherwise stand idle with 16 leaves open that need no re-derivation, while the `Terminal` half waits on
+     E5 either way; Woodall's landing converts finished work and blocks nothing downstream. Confidence: medium-high; it would change if the planar chain
+     finished first, making the `Terminal` half the longest path. In flight after I5f's launch: 1 (G4) + 1 (IP3) + 1 (IT1) + 1 (I5f) = 4.
