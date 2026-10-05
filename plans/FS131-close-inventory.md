@@ -3442,3 +3442,33 @@ reason by the close.*
      it lands on `main` on its own, or merges into wave 5 at its landing. Alternative weighed: the collar construction's planner (KP2), which waits on M5's merge.
      Why: OPEN needs only `main` and is on the procedure's path; the branch from `main` keeps it independent of wave 5's merges. Confidence: medium-high. In flight
      after IO1's launch: 1 (M5) + 1 (IL2) + 1 (IO1) = 3.
+386. **FS131-M5 done: `main` merged into `fs131-w5`** (harness ≈ 368k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 47–51;
+     report `data/fs131/reports/FS131-M5.md`; commits `e6ba8923`, `947dce4d` (the merge; second parent `1be5d622` — the brief's `ddad786d` plus item 380, `plans/`
+     only), `cf589709`, `cb72d05a`, `764f177d`, `ae881022`, pushed). **The merge**: git took `main`'s side for every wave-4 module by itself (this branch never
+     touched `Basic`, `Contact` or `UnitArc` after the fork); `BaseSteps` merged clean; conflicts only in `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`,
+     both sides kept; `framePt → fromFrame` in `FlankUA` (29 occurrences, three lemma names); six copies of `main`'s new lemmas resolved
+     (`tools/fs131_m5_dupes.py`, 0 pairs after): `BranchGerms.next_injective` and `ArcMap.coloursAt_subset_of_mem_interiorPts` deleted from `MapTopology` (now
+     importing `Surgery`), `unitPairsNull_of_dist_ne_one` deleted from `Dense` (now importing `FalconerReduction`), `ArcMap.N_add_eq_fromFrame` deleted (same as
+     `main`'s `normalPt_add_eq_fromFrame`), `e_mul_e_neg` and `branchPt_congr` made `private` in `PlaneTopology` and `CurveGraph` (importing `Slack` or `Moves`
+     would add 10 or 17 modules). **Wave 4's seven stale leaves now print the standard three** on this branch (`exists_shave`, `exists_rayMerge`, `exists_merge`,
+     `bend_toward`, `flankQ_upper`, `flankQ_lower`, `nb4p`). **Children, [kernel], standard three**: `ncard_coloursAt_le_two_of_mem_openArc`,
+     `unenclosedC_of_homeomorph`, `exists_maxRingArc` (with `exists_shift_of_ringArc_subset`, `IsRingArc.shift`). **Receipt** (Keryx): the merge commit's
+     parents are `e6ba8923` and `1be5d622` (an ancestor of `main`); `origin/fs131-w5` is `ae881022`; the latest build log
+     (`build/gate/build/20261005T103209Z-3367893.log`) ends "Build completed successfully (5788 jobs)", 0 warnings other than `sorry`; `sorry` by grep: `Contact`
+     0, `UnitArc` 0, `BaseWalk` 0, `Dense` 0, `HexRing` 1 (`bv_l3`), `BendCollar` 1, `BaseDense` 4 (three `exists_preBend` children and `cv_exists`'s stale copy);
+     `framePt` in `FlankUA`: 0; `M5Axioms48.out` and `…50.out` parsed: the seven wave-4 leaves and the three children standard, the controls on `sorryAx`;
+     `tools/fs131_i5_stmt_check.py d61edefc`: PASS; the job's `tools/fs131_m5_merge_check.py` (1,783 files, 5 plants fired) and the three-way statement check
+     with the rename (7,126 names, exactly the 6 declared changes). **Slip, its own**: the merge commit's subject names `main` as `ddad786d` (another session's
+     fetch moved `origin/main` between its fetch and merge; the difference is item 380, `plans/` only; corrected in the record). **Corrections owed**: `e_mul_e_neg`'s
+     common home is `Plane/Basic`; `branchPt_congr_dir` (`Moves`) and `branchPt_congr` state one fact, home `Plane/LocalStructure`. **Tool defect**:
+     `tools/fs131_qa1_dupes.py`'s `qualified_decls` (also in `tools/fs131_ml_dupes.py`) reads a docstring line "class near …" as a declaration.
+     **For `fs131-w5c`'s merge**: `HornShadow`, `Terminal`, `FlankUA` use `framePt`; I5h's `isPreconnected_hornSet_unit` to check against `Surgery`'s
+     `isPreconnected_hornSet`; `tools/fs131_m5_dupes.py <branch> origin/main <fork>` runs on any branch. **Generalization**: `exists_maxRingArc` needs only
+     `ω(P) ⊆ dom` — item 380's condition. Credit: M5, for a merge checked file by file.
+387. **Rulings on M5's held items, and its slot.** (a) **The two module-local copies stay `private`** until after wave 5 lands; their move to common homes on
+     `main` is a tidy job for after FS-131's waves (each move rebuilds most of `Plane/`), logged as a correction owed. Confidence: high. (b) **M5's slot → the
+     collar construction's planner, FS131-KP2, on `fs131-w5`** (now carrying `main`'s cut engine and `toward_clear`): the D1 design of KB2's record § 44.3 laid
+     out as children of `bend_toward_collar` in `BendCollar`, `sorry` at each, a plan and a price per child, a handoff that can split the work. Alternative
+     weighed: the three remaining `exists_preBend` children or `bv_l3` first. Why: the construction (3,000–4,000 lines) is the longest piece left on this branch;
+     the children and `bv_l3` can run on a branch cut from `fs131-w5` beside it (disjoint files). Confidence: high. In flight after KP2's launch: 1 (IL2) + 1 (IO1)
+     + 1 (KP2) = 3.
