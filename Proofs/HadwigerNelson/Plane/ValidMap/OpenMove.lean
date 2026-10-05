@@ -1221,16 +1221,309 @@ theorem open_degree_horns (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' :
         j' := by
   sorry
 
+/-- **A point of `F`'s interior off `B̄(v, ρ/2)` is interior to OPEN's map**: OPEN's new arcs there are germ arcs of `F` (the rim arcs,
+the ray and the wedge lie in `B̄(v, ρ/2)`). -/
+theorem mem_open_interiorPts_of_mem (h : X.Small ρ) {z : ℂ} (hz : z ∈ F.interiorPts) (hzr : ρ / 2 < ‖z - v‖) :
+    z ∈ (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).interiorPts := by
+  refine ⟨hz.1, fun hzA => ?_⟩
+  obtain ⟨B, hB, hzB⟩ := mem_iUnion₂.mp hzA
+  rcases hB with hB | hB | rfl | rfl
+  · obtain ⟨-, a', ha', hsub, -⟩ := (F.trimArcs_spec hv hρ).1 B hB
+    exact hz.2 (mem_iUnion₂.mpr ⟨a', ha', hsub hzB⟩)
+  · rcases mergeArcs_cases h hB with ⟨j, hj⟩ | ⟨-, rfl⟩
+    · exact hz.2 (germ_subset_Γ h j (hj hzB)).2
+    · rw [norm_of_mem_rimArc h hzB] at hzr; exact lt_irrefl _ hzr
+  · have := openRay_subset_closedBall v ψ h.1.le hzB
+    rw [mem_closedBall, dist_eq_norm] at this; linarith
+  · have := X.G.openRim_subset_sphere v up s b ψ h.1.le hzB
+    rw [mem_sphere, dist_eq_norm] at this; linarith
+
+/-- **A germ's point between `ρ/2` and a small `ρ' > ρ` is interior to OPEN's map** exactly when it is inside `ρ` on a phantom germ
+(as for MERGE: the phantom germs are cut in the annulus; a germ's rim point is on the trimmed arcs; beyond `ρ` the map is `F`). -/
+theorem branchPt_mem_open_interiorPts_iff {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) (j : Fin X.n) {t : ℝ}
+    (ht : t ∈ Ioo (ρ / 2) ρ') :
+    branchPt v (X.G.β j) (X.G.κ j) t ∈
+        (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).interiorPts ↔
+      t < ρ ∧ BranchGerms.Phantom X.col j := by
+  have ht0 : 0 < t := by linarith [ht.1, h.1]
+  have hdist : dist (branchPt v (X.G.β j) (X.G.κ j) t) v = t := dist_branchPt j ht0.le
+  constructor
+  · intro hzI
+    have htρ : t < ρ := by
+      by_contra hge
+      rcases eq_or_lt_of_le (not_lt.mp hge) with heq | hgt
+      · obtain ⟨B, hB, hzB⟩ := mem_iUnion₂.mp (branchPt_rim_mem_trimArcs h' hρ hρρ' j)
+        rw [heq] at hzB
+        exact hzI.2 (mem_iUnion₂.mpr ⟨B, Or.inl hB, hzB⟩)
+      · have hzc : branchPt v (X.G.β j) (X.G.κ j) t ∉ closedBall v ρ := by
+          rw [mem_closedBall, hdist, not_le]; exact hgt
+        have hzF := ((open_agreesOff (X := X) (s := s) (b := b) (c := c) (up := up) (ψ := ψ) (hv := hv) (hρ := hρ) (hA := hA)
+          (hAf := hAf) (hlc := hlc) h).2 _ hzc).1.mpr hzI
+        exact hzF.2 (X.hC.branchPt_mem_Γ j ⟨ht0, ht.2.trans h'.lt_r₀⟩).2
+    refine ⟨htρ, ?_⟩
+    by_contra hph
+    have hzb : branchPt v (X.G.β j) (X.G.κ j) t ∈ ball v ρ := by rw [mem_ball, hdist]; exact htρ
+    obtain ⟨A, hA', hzA'⟩ := mem_iUnion₂.mp (branchPt_mem_mergeArcs_outer (s := s) (a := 0) (b := b) h hph ⟨ht.1, htρ.le⟩)
+    exact (mem_open_interiorPts_iff h hzb).mp hzI (mem_iUnion₂.mpr ⟨A, Or.inl hA', hzA'⟩)
+  · rintro ⟨htρ, hph⟩
+    have hzb : branchPt v (X.G.β j) (X.G.κ j) t ∈ ball v ρ := by rw [mem_ball, hdist]; exact htρ
+    refine (mem_open_interiorPts_iff h hzb).mpr fun hzA => ?_
+    obtain ⟨A, hA', hzA'⟩ := mem_iUnion₂.mp hzA
+    rcases hA' with hA' | rfl | rfl
+    · rcases mem_mergeArcs.mp hA' with ⟨j', -, rfl⟩ | ⟨j', hj', hA''⟩ | ⟨-, rfl⟩
+      · rw [carrier_germ h.half] at hzA'
+        obtain ⟨t', ht', he⟩ := hzA'
+        have := congrArg (fun z => dist z v) he
+        simp only [dist_branchPt j' ht'.1, hdist] at this
+        linarith [ht'.2, ht.1]
+      · obtain ⟨t', ht', he⟩ := outer_subset h j' A hA'' hzA'
+        have htt : t' = t := by
+          have := congrArg (fun z => dist z v) he
+          simp only [dist_branchPt j' (by linarith [ht'.1, h.1] : (0 : ℝ) ≤ t'), hdist] at this
+          exact this
+        subst htt
+        exact hj' ((eq_of_branchPt_eq X.hdisj ⟨ht0, ht.2.trans h'.2.1⟩ he) ▸ hph)
+      · have := norm_of_mem_rimArc h hzA'
+        rw [← dist_eq_norm, hdist] at this
+        linarith [ht.1]
+    · have := openRay_subset_closedBall v ψ h.1.le hzA'
+      rw [mem_closedBall, hdist] at this; linarith [ht.1]
+    · have := X.G.openRim_subset_sphere v up s b ψ h.1.le hzA'
+      rw [mem_sphere, hdist] at this; linarith [ht.1]
+
+/-- **OPEN's colour of a sector point off `B̄(v, ρ/2)`** (out to a small `ρ' > ρ`) is the sector's colour. -/
+theorem openCol_of_mem_sector_out {ρ' : ℝ} (h' : X.Small ρ') (h : X.Small ρ) {i : Fin X.n} {z : ℂ}
+    (hz : z ∈ X.G.sector v ρ' i) (hzr : ρ / 2 < ‖z - v‖) : X.G.openCol v X.col F.col up s b ψ c ρ z = X.col i := by
+  rw [openCol_of_not_mem (fun hW => by
+      have := X.G.openWedge_subset_ball v up s b ψ ρ hW
+      rw [mem_ball, dist_eq_norm] at this; linarith), mergeCol_of_mem_sector_out h' h hz hzr]
+
+/-- **The colours at a rim point** after OPEN are `F`'s there (as for MERGE: near the rim the new colouring is `F`'s on `F`'s interior
+points, and a cut phantom branch takes the colour of the sector after its germ). -/
+theorem open_coloursAt_rim {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) (hn : 0 < X.n) {x : ℂ}
+    (hx : x ∈ sphere v ρ) :
+    (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).coloursAt x ⊆
+      F.coloursAt x := by
+  intro j hj
+  have hj : x ∈ closure ((F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA
+    hAf hlc).region j) := hj
+  have hxU : x ∈ (closedBall v (ρ / 2))ᶜ := by
+    rw [mem_compl_iff, mem_closedBall, not_le, mem_sphere.mp hx]; linarith [h.1]
+  have hoffW : ∀ z : ℂ, ρ / 2 < dist z v → X.G.openCol v X.col F.col up s b ψ c ρ z = X.G.mergeCol v X.col F.col s 0 b c ρ z :=
+    fun z hz => openCol_of_not_mem fun hW => by
+      have := X.G.openWedge_subset_ball v up s b ψ ρ hW; rw [mem_ball] at this; linarith
+  have key : (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).region j ∩
+      (closedBall v (ρ / 2))ᶜ ⊆ closure (F.region j) := by
+    rintro z ⟨⟨hzI, hzj⟩, hzc⟩
+    have hzj' : X.G.openCol v X.col F.col up s b ψ c ρ z = j := hzj
+    rw [mem_compl_iff, mem_closedBall, not_le] at hzc
+    rw [hoffW z hzc] at hzj'
+    rcases lt_trichotomy (dist z v) ρ with hlt | heq | hgt
+    · have hzv : z ≠ v := fun hzv => by rw [hzv, dist_self] at hzc; linarith [h.1]
+      have hzn : ρ / 2 < ‖z - v‖ := by rw [← dist_eq_norm]; exact hzc
+      rcases ball_cases h hn hlt hzv with ⟨i, hi⟩ | ⟨j', t, ht, rfl⟩
+      · rw [mergeCol_of_mem_sector h hi, if_neg (fun h1 => (not_lt.mpr hzn.le) h1.2)] at hzj'
+        exact subset_closure (hzj' ▸ X.hcol i ρ h.mem_Ioc hi)
+      · rw [norm_branchPt_sub v _ _ ht.1.le] at hzn
+        rw [mergeCol_branchPt h j' ht, if_neg (fun h1 => (not_lt.mpr hzn.le) h1.2)] at hzj'
+        exact hzj' ▸ cutSet_subset_closure h ⟨t, ht, rfl⟩
+    · have hzF := mem_interiorPts_of_open_rim h' hρρ' heq hzI
+      rw [mergeCol_of_not_mem h (by rw [mem_ball, heq]; exact lt_irrefl ρ)] at hzj'
+      exact subset_closure ⟨hzF, hzj'⟩
+    · have hzc' : z ∉ closedBall v ρ := by rw [mem_closedBall, not_le]; exact hgt
+      have hzF : z ∈ F.interiorPts :=
+        ((open_agreesOff (X := X) (s := s) (b := b) (c := c) (up := up) (ψ := ψ) (hv := hv) (hρ := hρ) (hA := hA) (hAf := hAf)
+          (hlc := hlc) h).2 z hzc').1.mpr hzI
+      rw [mergeCol_of_not_mem h (fun hb => hzc' (ball_subset_closedBall hb))] at hzj'
+      exact subset_closure ⟨hzF, hzj'⟩
+  have : x ∈ closure (((F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf
+      hlc).region j) ∩ (closedBall v (ρ / 2))ᶜ) := by
+    rw [mem_closure_iff_nhds] at hj ⊢
+    intro t ht
+    obtain ⟨y, hyt, hy⟩ := hj (t ∩ (closedBall v (ρ / 2))ᶜ) (inter_mem ht (isClosed_closedBall.isOpen_compl.mem_nhds hxU))
+    exact ⟨y, hyt.1, hy, hyt.2⟩
+  exact closure_minimal key isClosed_closure this
+
+/-- **No repeated colour at a rim point** after OPEN (as for MERGE, `merge_not_hasRepeatedColour_rim`: near the rim OPEN's map is
+MERGE's, the wedge, the ray and the rim arc lying in `B̄(v, ρ/2)`). -/
+theorem open_not_hasRepeatedColour_rim (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ')
+    (h : X.Small ρ) {x : ℂ} (hx : x ∈ sphere v ρ) :
+    ¬ (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf
+      hlc).HasRepeatedColour x := by
+  classical
+  set F' := F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc with hF'
+  have hn : 0 < X.n := by have := cfg.hbn; omega
+  have hn2 := cfg.two_le
+  have hxv : dist x v = ρ := mem_sphere.mp hx
+  have hxv' : x ≠ v := fun he => by rw [he, dist_self] at hxv; linarith [h.1]
+  suffices hle : ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ c', (F'.sectorsOf x r c').encard ≤ 1 by
+    rintro ⟨c', hc'⟩
+    obtain ⟨r, hr2, hr1⟩ := (hc'.and hle).exists
+    have := hr2.trans (hr1 c')
+    norm_num at this
+  -- a sector point off `B̄(v, ρ/2)` is interior to the new map
+  have hsecI : ∀ i, ∀ z ∈ X.G.sector v ρ' i, ρ / 2 < ‖z - v‖ → z ∈ F'.interiorPts := fun i z hz hzr =>
+    mem_open_interiorPts_of_mem h (sector_subset_interiorPts h' i hz) hzr
+  -- points of a ball of radius `< ρ/2` about `x` are off `B̄(v, ρ/2)`
+  have hfar : ∀ r, r ≤ ρ / 2 → ∀ z ∈ ball x r, ρ / 2 < ‖z - v‖ := fun r hr z hz => by
+    rw [← dist_eq_norm]
+    have := dist_triangle x z v
+    rw [mem_ball, dist_comm] at hz
+    linarith
+  have hnear : ∀ r, r ≤ ρ' - ρ → ∀ z ∈ ball x r, ‖z - v‖ < ρ' := fun r hr z hz => by
+    rw [← dist_eq_norm]
+    have := dist_triangle z x v
+    rw [mem_ball] at hz
+    linarith
+  by_cases hxI : x ∈ F.interiorPts
+  · -- (R1) on no germ: one sector
+    obtain ⟨i, hi⟩ : ∃ i, x ∈ X.G.sector v ρ' i := by
+      have : x ∈ ball v ρ' ∩ F.interiorPts := ⟨by rw [mem_ball, hxv]; exact hρρ', hxI⟩
+      rw [X.hC.cover ρ' h'.mem_Ioc hn] at this
+      exact mem_iUnion.mp this
+    obtain ⟨ε, hε, hεs⟩ := Metric.isOpen_iff.mp (X.hC.isOpen ρ' h'.mem_Ioc i) x hi
+    filter_upwards [Ioo_mem_nhdsGT (lt_min hε (half_pos h.1))] with r hr c'
+    have hU : F'.interiorPts ∩ ball x r = ball x r := by
+      refine inter_eq_right.mpr fun z hz => hsecI i z (hεs (ball_subset_ball (hr.2.trans_le (min_le_left _ _)).le hz)) ?_
+      exact hfar r (hr.2.trans_le (min_le_right _ _)).le z hz
+    exact encard_sectorsOf_le_one (by rw [hU]; exact (convex_ball x r).isPreconnected) c'
+  · -- on a germ `j`, with `p` the sector before it
+    obtain ⟨j, hj⟩ := X.hC.exists_branchPt_eq hxv' (by rw [mem_ball, hxv]; exact hρρ'.trans h'.lt_r₀) hxI
+    rw [← dist_eq_norm, hxv] at hj
+    subst hj
+    obtain ⟨p, hpj⟩ := exists_next_eq j
+    have hpj' : p ≠ j := by
+      intro he
+      have h1 : BranchGerms.next (BranchGerms.idx p 0) = BranchGerms.idx p 1 := BranchGerms.next_idx p 0
+      rw [BranchGerms.idx_zero, hpj, ← he] at h1
+      exact BranchGerms.idx_ne (s := p) (show 0 < 1 by omega) (show 1 < 0 + X.n by omega) (by rw [BranchGerms.idx_zero]; exact h1)
+    obtain ⟨ε, hε, hside⟩ := sides_preconnected h' h.1 hρρ' hpj hpj'
+    obtain ⟨ε₁, hε₁, hball⟩ := X.hC.exists_ball_subset_of_branchPt X.hs₀.2 X.hdisj (r := ρ') ⟨h'.1, h'.2.1.le⟩ (p := p)
+      ⟨h.1, hρρ'⟩
+    rw [hpj] at hball
+    have hpos : 0 < min (min ε ε₁) (min (ρ / 2) (ρ' - ρ)) :=
+      lt_min (lt_min hε hε₁) (lt_min (half_pos h.1) (sub_pos.mpr hρρ'))
+    filter_upwards [Ioo_mem_nhdsGT hpos] with r hr c'
+    have hrε : r < ε := hr.2.trans_le ((min_le_left _ _).trans (min_le_left _ _))
+    have hrε₁ : r < ε₁ := hr.2.trans_le ((min_le_left _ _).trans (min_le_right _ _))
+    have hrρ : r ≤ ρ / 2 := (hr.2.trans_le ((min_le_right _ _).trans (min_le_left _ _))).le
+    have hrρ' : r ≤ ρ' - ρ := (hr.2.trans_le ((min_le_right _ _).trans (min_le_right _ _))).le
+    set x := branchPt v (X.G.β j) (X.G.κ j) ρ with hx
+    have hB : ball x r ⊆ X.G.sector v ρ' p ∪ X.G.sector v ρ' j ∪ branchPt v (X.G.β j) (X.G.κ j) '' Ioo 0 ρ' :=
+      (ball_subset_ball hrε₁.le).trans hball
+    obtain ⟨hSp, hSj⟩ := hside r ⟨hr.1, hrε⟩
+    -- a branch point of the ball is at distance in `(ρ/2, ρ')`
+    have hbrt : ∀ t ∈ Ioo 0 ρ', branchPt v (X.G.β j) (X.G.κ j) t ∈ ball x r → t ∈ Ioo (ρ / 2) ρ' := by
+      intro t ht hz
+      have := hfar r hrρ _ hz
+      rw [norm_branchPt_sub v _ _ ht.1.le] at this
+      exact ⟨this, ht.2⟩
+    -- the ball's points beside the germ, in the sectors, are interior to the new map
+    have hSpI : X.G.sector v ρ' p ∩ ball x r ⊆ F'.interiorPts := fun z hz => hsecI p z hz.1 (hfar r hrρ z hz.2)
+    have hSjI : X.G.sector v ρ' j ∩ ball x r ⊆ F'.interiorPts := fun z hz => hsecI j z hz.1 (hfar r hrρ z hz.2)
+    -- a germ point of the ball is in the closure of the sector after it, inside the ball
+    have hclj : ∀ t ∈ Ioo 0 ρ', branchPt v (X.G.β j) (X.G.κ j) t ∈ ball x r →
+        branchPt v (X.G.β j) (X.G.κ j) t ∈ closure (X.G.sector v ρ' j ∩ ball x r) := by
+      intro t ht hz
+      have hcl := IsSectorChart.branchPt_mem_closure_sector_after (v := v) X.hord h'.2.1.le j ht
+      rw [inter_comm]; exact isOpen_ball.inter_closure ⟨hz, hcl⟩
+    have hclp : ∀ t ∈ Ioo 0 ρ', branchPt v (X.G.β j) (X.G.κ j) t ∈ ball x r →
+        branchPt v (X.G.β j) (X.G.κ j) t ∈ closure (X.G.sector v ρ' p ∩ ball x r) := by
+      intro t ht hz
+      have hcl := IsSectorChart.branchPt_mem_closure_sector_before (v := v) X.hord h'.2.1.le p ht
+      rw [hpj] at hcl
+      rw [inter_comm]; exact isOpen_ball.inter_closure ⟨hz, hcl⟩
+    by_cases hph : BranchGerms.Phantom X.col j
+    · -- (R3) a phantom germ, cut inside `ρ`: one sector
+      refine encard_sectorsOf_le_one ?_ c'
+      obtain ⟨δ, hδ, hδc⟩ := Metric.continuousAt_iff.mp (continuous_branchPt v (X.G.β j) (X.G.κ j)).continuousAt r hr.1
+      set t₀ := ρ - min δ (ρ / 2) / 2 with ht₀
+      have hm : 0 < min δ (ρ / 2) := lt_min hδ (half_pos h.1)
+      have hm' : min δ (ρ / 2) ≤ ρ / 2 := min_le_right _ _
+      have ht₀ρ : t₀ < ρ := by linarith
+      have ht₀2 : ρ / 2 < t₀ := by linarith
+      have hy₀ : branchPt v (X.G.β j) (X.G.κ j) t₀ ∈ ball x r := by
+        rw [mem_ball]; refine hδc ?_
+        rw [Real.dist_eq, abs_of_neg (by linarith)]; linarith [min_le_left δ (ρ / 2)]
+      have ht₀' : t₀ ∈ Ioo 0 ρ' := ⟨by linarith [h.1], ht₀ρ.trans hρρ'⟩
+      have hy₀I : branchPt v (X.G.β j) (X.G.κ j) t₀ ∈ F'.interiorPts :=
+        (branchPt_mem_open_interiorPts_iff h' hρρ' h j ⟨ht₀2, ht₀'.2⟩).mpr ⟨ht₀ρ, hph⟩
+      set y₀ := branchPt v (X.G.β j) (X.G.κ j) t₀ with hy₀def
+      have hS₁ : IsPreconnected (X.G.sector v ρ' p ∩ ball x r ∪ {y₀}) :=
+        hSp.subset_closure subset_union_left (union_subset subset_closure (singleton_subset_iff.mpr (hclp t₀ ht₀' hy₀)))
+      have hS₂ : IsPreconnected ({y₀} ∪ X.G.sector v ρ' j ∩ ball x r) :=
+        hSj.subset_closure subset_union_right (union_subset (singleton_subset_iff.mpr (hclj t₀ ht₀' hy₀)) subset_closure)
+      have hS := hS₁.union y₀ (Or.inr rfl) (Or.inl rfl) hS₂
+      refine hS.subset_closure ?_ ?_
+      · rintro z ((hz | rfl) | (rfl | hz))
+        · exact ⟨hSpI hz, hz.2⟩
+        · exact ⟨hy₀I, hy₀⟩
+        · exact ⟨hy₀I, hy₀⟩
+        · exact ⟨hSjI hz, hz.2⟩
+      · rintro z ⟨-, hz⟩
+        rcases hB hz with (hz' | hz') | ⟨t, ht, rfl⟩
+        · exact subset_closure (Or.inl (Or.inl ⟨hz', hz⟩))
+        · exact subset_closure (Or.inr (Or.inr ⟨hz', hz⟩))
+        · exact closure_mono (subset_union_right.trans subset_union_right) (hclj t ht hz)
+    · -- (R2) a non-phantom germ: two sectors, of the two colours beside it
+      have hcol : X.col p ≠ X.col j := fun he => hph ⟨p, hpj, he⟩
+      have hU : F'.interiorPts ∩ ball x r = ⋃ b' : Bool, cond b' (X.G.sector v ρ' p ∩ ball x r) (X.G.sector v ρ' j ∩ ball x r) := by
+        rw [← union_eq_iUnion]
+        ext z
+        constructor
+        · rintro ⟨hzI, hz⟩
+          rcases hB hz with (hz' | hz') | ⟨t, ht, rfl⟩
+          · exact Or.inl ⟨hz', hz⟩
+          · exact Or.inr ⟨hz', hz⟩
+          · exact absurd ((branchPt_mem_open_interiorPts_iff h' hρρ' h j (hbrt t ht hz)).mp hzI).2 hph
+        · rintro (hz | hz)
+          · exact ⟨hSpI hz, hz.2⟩
+          · exact ⟨hSjI hz, hz.2⟩
+      rw [encard_sectorsOf_of_partition (colA := fun b' => cond b' (X.col p) (X.col j)) hU ?_ ?_ ?_ ?_ ?_ c']
+      · rw [Set.encard_le_one_iff]
+        rintro b₁ b₂ ⟨-, h₁⟩ ⟨-, h₂⟩
+        cases b₁ <;> cases b₂ <;> simp only [cond_true, cond_false] at h₁ h₂ ⊢
+        · exact (hcol (h₂.trans h₁.symm)).elim
+        · exact (hcol (h₁.trans h₂.symm)).elim
+      · intro b'; cases b'
+        · exact (X.hC.isOpen ρ' h'.mem_Ioc j).inter isOpen_ball
+        · exact (X.hC.isOpen ρ' h'.mem_Ioc p).inter isOpen_ball
+      · intro b'; cases b'
+        · exact hSj
+        · exact hSp
+      · intro b₁ b₂ hb
+        have hd := (X.hC.disjoint ρ' h'.mem_Ioc p j hpj').mono (inter_subset_left (t := ball x r))
+          (inter_subset_left (t := ball x r))
+        cases b₁ <;> cases b₂
+        · exact absurd rfl hb
+        · exact hd.symm
+        · exact hd
+        · exact absurd rfl hb
+      · intro b' _; cases b'
+        · exact hclj ρ ⟨h.1, hρρ'⟩ (mem_ball_self hr.1)
+        · exact hclp ρ ⟨h.1, hρρ'⟩ (mem_ball_self hr.1)
+      · intro b' z hz; cases b'
+        · show X.G.openCol v X.col F.col up s b ψ c ρ z = X.col j
+          exact openCol_of_mem_sector_out h' h hz.1 (hfar r hrρ z hz.2)
+        · show X.G.openCol v X.col F.col up s b ψ c ρ z = X.col p
+          exact openCol_of_mem_sector_out h' h hz.1 (hfar r hrρ z hz.2)
+
 /-- **The rim**: near a point of `∂B(v, ρ)` the new map is MERGE's (the wedge, the ray and the rim arc lie inside `B̄(v, ρ/2)`), so
 the point carries at most three colours, none repeated. -/
 theorem open_rim (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ)
-    (hρc : ρ ≤ ρc) :
+    (_hρc : ρ ≤ ρc) :
     ∀ x ∈ sphere v ρ,
       ((F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).coloursAt
         x).ncard ≤ 3 ∧
       ¬ (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf
         hlc).HasRepeatedColour x := by
-  sorry
+  intro x hx
+  have hn : 0 < X.n := by have := cfg.hbn; omega
+  refine ⟨?_, open_not_hasRepeatedColour_rim cfg h' hρρ' h hx⟩
+  have hxv : x ≠ v := fun hxv => by rw [hxv, mem_sphere, dist_self] at hx; linarith [h.1]
+  have hxs : x ∈ ball v X.s₀ := by rw [mem_ball, mem_sphere.mp hx]; exact h.2.1
+  exact (ncard_le_ncard (open_coloursAt_rim h' hρρ' h hn hx) (toFinite _)).trans
+    ((X.hC.ncard_coloursAt_le_two X.hs₀ X.hdisj hxv hxs).trans (by norm_num))
 
 /-- **`D_c(v′)` is unchanged off the disc** (`merge_allowedCone`'s route): the recoloured set's closure lies in `{v}` and an open
 set of points clear for `c`, so no contact of `c` moves (`dist_ne_one_of_isOpen_isClear`), and the tiles keep their types. -/

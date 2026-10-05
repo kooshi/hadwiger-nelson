@@ -336,7 +336,7 @@ leaves left (`open_valid`, `open_degree_horns`, `open_rim`, `open_allowedCone`).
 `open_valid` (template `merge_valid`): `Valid.of_agreesOff` on `B̄(v, ρ)`; a recoloured point is a wedge point (`OpenConfig.isClear_of_mem_openWedge`,
 from `cfg.clear`) or a gap point (`OpenConfig.isClear_of_Icc`: the gap's directions `[L₁, L_b]` lie in the clear range); the rest as MERGE's,
 with `mem_open_interiorPts_iff`, `mem_interiorPts_of_open_rim`, `v_mem_openArcs`, `openCol_of_mem`, `openCol_of_not_mem`. **Real build** at
-`fs131-wop` after `open_valid` (commit `7ab5b0a1`'s tree, before `ray0`): **OK** — 451 of 451 batches, 2 modules rebuilt, 8 min 21 s; warnings
+`fs131-wop` after `open_valid` (commit `1a234d10`'s tree, before `ray0`): **OK** — 451 of 451 batches, 2 modules rebuilt, 8 min 21 s; warnings
 only `declaration uses 'sorry'`, the three leaves left (`open_degree_horns`, `open_rim`, `open_allowedCone`); log
 `build/gate/build/20261005T114229Z-3949911.log`, terminal output `data/fs131/io/build-io2-1.log`.
 
@@ -366,3 +366,15 @@ lift s 0)/2`); the diff is `data/fs131/io/ray0.diff` (50 lines). With `margin` (
 statements unchanged; iteration clean.
 
 ## Stage 7 — SAVED (FS131-IO2)
+
+## Stage 8 — SAVED (FS131-IO2): `open_rim` proved
+
+Template `merge_not_hasRepeatedColour_rim`, `merge_coloursAt_rim`, `merge_ncard_coloursAt_rim`; the surgery-specific children re-run for
+`openArcs` (the ray and the rim arc across the wedge lie in `B̄(v, ρ/2)`, so near the rim they never matter): `mem_open_interiorPts_of_mem` (a
+point of `F`'s interior off `B̄(v, ρ/2)` is interior to OPEN's map), `branchPt_mem_open_interiorPts_iff` (a germ point in the annulus is interior
+exactly when inside `ρ` on a phantom germ), `openCol_of_mem_sector_out`, `open_coloursAt_rim` (the rim's colours are `F`'s), and
+`open_not_hasRepeatedColour_rim`, MERGE's proof with those substituted (generated from MERGE's text by renaming, then checked);
+`sides_preconnected` reused as is. `open_rim` reads the two (at most two colours at a rim point, `ncard_coloursAt_le_two`; no repeated colour).
+Iteration clean; two leaves left (`open_degree_horns`, `open_allowedCone`).
+
+## Stage 8 — SAVED (FS131-IO2)
