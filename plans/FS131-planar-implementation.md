@@ -481,3 +481,18 @@ of it runs. A leaf that cannot be proved as written goes to Keryx at once.
 
 Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1753 modules already up to date, nothing built, 11 modules with warnings, every warning
 `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T014928Z-325388.log`; driver log `data/fs131/ip/build-ip3-asgiven.log`).
+
+## Stage 10 — SAVED: `fs131-w5x` merged (the crossing lemma, held), as the brief's amendment rules
+
+The brief's amendment (2026-10-05, inventory items 302–303; ruling 303 quoted there and checked verbatim against `plans/FS131-close-inventory.md`, main
+tree, by `grep -F`): at the next saved stage, merge `fs131-w5x` into `fs131-w5p`, build, record it as its own stage.
+
+- **Merge**: `git merge origin/fs131-w5x` (`6db4fe3d`, FS131-IX1's report) at `c0d12324` → merge commit `99b47e9f`. **No conflict**: Git's own merge kept
+  both sides in `scripts/Axioms.lean` (the FS131-KP block at l. 3019 and the new FS131-IX1 block at l. 3103, both above `=== PURCHASED ===` at l. 3119)
+  and in `ARCHITECTURE.md`. `Plane/PlaneTopology` now has no `sorry`: `inter_nonempty_of_interleaved` (both continua closed) and
+  `inter_nonempty_of_interleaved_of_isClosed_left` (one closed) are held, with IX1's 13 children. Not edited by me.
+- **Build** (the merged tree, under the slot, 40 GiB, 8 cpus, `BATCH=4`): **OK — 446 of 446 batches, 6 modules rebuilt (`PlaneTopology` 3.6 s,
+  `MapTopology` 5.6 s, `BaseWalk` 1.9 s, `MapGraph` 9.4 s, `BaseDense` 1.6 s, `Proofs`), 10 modules with warnings (one fewer: `PlaneTopology`), every
+  warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T015706Z-359162.log`; `data/fs131/ip/build-ip3-merge-w5x.log`; grep for
+  `warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe line).
+- Where my order reads the crossing (`retArcs_not_interleaved`), I cite `inter_nonempty_of_interleaved` as held.
