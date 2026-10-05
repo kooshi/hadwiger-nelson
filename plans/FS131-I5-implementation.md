@@ -1350,3 +1350,47 @@ Wave 5's sorry declarations: **25** (`BaseWalk` 3 — the planar job's `retArcs_
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 29 — SAVED
+
+## Stage 30 — SAVED: FS131-I5j's readback
+
+*FS131-I5j, wave 5's eighth implementer (Opus), resuming this record at its first unsaved stage (Stage 29 SAVED, `f0c6ba67`). Brief:
+`data/fs131/briefs/FS131-I5j-wave5.md` (main tree). My set (ruling 331 (b)): `coneAt_of_cubic` (a new shared child), then `HexRing`'s `bv_hex` and
+`hex_regular` over it, then `rot_out`, `rot_in`, `bv_nd`, `bv_l3`, then `BaseDense`'s `exists_preBend` over the strengthened-bend child (ruling 317 (b))
+— 7 `sorry` declarations. Never `Terminal`, `cv_exists`, `disc1_local`, or the planar job's declarations.
+
+### 30.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by a new script, `tools/fs131_i5_quote_check.py` (each run of `> ` lines searched verbatim, line breaks folded, in the file its `— source:` line
+names; a relative path resolves to the main tree first, an absolute one as given): **12 quotations, 12 verbatim**, exit 0. Negative control: `--plant`
+changes "practically" to "practicaly" in the first quotation, and the checker reports it MISMATCH (exit 0 under `--plant` only when caught). A first run
+resolved `plans/FS131-close-inventory.md` to the worktree's stale copy and reported the six inventory quotations as mismatches — the resolution was
+corrected to the main tree's copy (the brief's own tree), and the six then read verbatim.
+
+| quotation (opening words) | source | result |
+|---|---|---|
+| "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors | verbatim |
+| "**What is left of my set (7)**, for wave 5's next implementer on this half:" | this record, Stage 29 | verbatim |
+| "- **`bv_hex`** (**H**; the last of this half on `row134BaseUA`'s path — …" | this record, Stage 29 | verbatim |
+| "- **`rot_out`, `rot_in`** (M each), **`hex_regular`** (M, over `coneAt_of_cubic`), …" | this record, Stage 29 | verbatim |
+| "- **`exists_preBend`** (H): needs the strengthened bend (ruling 317 (b): …" | this record, Stage 29 | verbatim |
+| "330. **FS131-I5g handed back** …" | `plans/FS131-close-inventory.md` item 330 | verbatim |
+| "331. **Rulings on I5g's held items, and its slot.** …" | the inventory, item 331 | verbatim |
+| "317. **Rulings on I5f's questions, and its slot.** …" | the inventory, item 317 | verbatim |
+| "226. **FS131-E4 done, harness ≈ 480k** …" | the inventory, item 226 | verbatim |
+| "274. **Rulings on QA3's held items and the freed slot.** …" | the inventory, item 274 | verbatim |
+| "**It may**: add children anywhere in the wave's modules — …" | `plans/FS131-w5-kernel-plan.md` § 10.2 | verbatim |
+| "295. **Ruling: MERGE leaves wave 4; …" | the inventory, item 295 | verbatim |
+
+Items 317, 330, 331 read in full; I5g's Stages 25–29 read; the kernel plan's §§ 3.2, 4, 8.2, 9.1, 10.2 and the base plan's Stages 3–6 read.
+
+### 30.2 The as-given build (`f0c6ba67`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1754 modules already
+up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T044936Z-1440310.log`; driver log
+`data/fs131/i5j/build-stage30-asgiven.log`). Every warning is `declaration uses 'sorry'`, 33: wave 5's `Terminal` 9, `Dense` 1, `HexRing` 6, `MapGraph` 3,
+`BaseWalk` 3, `BaseDense` 3 (**25**, the brief's count; mine 7 of them: `HexRing`'s 6 and `BaseDense`'s `exists_preBend`), and wave 4's stale `Contact` 3,
+`UnitArc` 5. `tools/fs131_i5_stmt_check.py d61edefc`: PASS; `--self-test`: three plants fired, the control passed.
+
+Iteration script: `data/fs131/i5j/iter.sh` (I5g's, re-pointed at a fresh scratch mirror `/home/kooshi/scratch-w5j`, outside the repository).
+
+## Stage 30 — SAVED
