@@ -134,6 +134,12 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
   `sorryAx`), `BaseWalk`: `HadwigerNelson.Plane.CircleColouring.select` (`[SokolovVoronov2025]` Lemma 5, BV-C6, Prop. 18 as BASE-V's BV-L5, BV-C6,
   BV-P18); children `select_bdd`, `select_firstPassage`, `select_unique`, `select_lt`, `select_window`, `select_window'`, `select_chord`,
   `select_residue`, `select_core`.
+- Stage 28 (`data/fs131/i5g/build-stage28.log`; `build/gate/build/20261005T043331Z-1353383.log`; axioms `I5gAxioms28.out`, controls `row134BaseUA`
+  and `bv_hex` with `sorryAx`, `linkage_dot_ne_zero` clean), `BaseWalk`: `HadwigerNelson.Plane.ArcMap.BaseCtx.l3_base` (`[SokolovVoronov2025]` Lemma 3
+  in pseudo-colour form, BASE-V's BV-L3 route); children `CircleColouring.link_side_right`, `link_side_left`, `link_val_right`, `link_val_left`,
+  `link_path`, `link_relabel`, `link_periodic_finite`; `ArcMap.link_cos_fibre`, `link_circles_rep`, `link_circles_two`, `link_circles_finite`,
+  `link_norm_e_sub_sq`, `link_cos_eq_of_ringPt`, `link_fibres`, `link_turn`, `link_flip`, `link_dist_ringPt_sq`, `link_partners`, `link_one_lt_two`,
+  `exists_linkage`.
 
 ## Stage 1 — SAVED: the readback
 
@@ -1261,3 +1267,55 @@ of the set (a parametrized linkage loop, a discrete intermediate-value argument 
 intersection point).
 
 ## Stage 27 — SAVED
+
+## Stage 28 — SAVED: `BaseCtx.l3_base` proved (a kernel theorem); `linkage_dot_ne_zero`'s docstring rewritten (item 274 (b))
+
+**`l3_base` is proved as stated** (`Plane/ValidMap/BaseWalk`; axioms the standard three), on BASE-V § 1b.3's route — the unit-distance linkage and the
+band — with three changes of construction, each forced by the pseudo-colour setting (rings may carry contact arcs, change points may be non-generic):
+1. *The linkage as one loop* (`exists_linkage`, explicit): `x = r_{u₁}(φ θ)`, `φ θ = φ_c + θ_X cos θ` (`φ_c` the direction to `u₂`, `cos θ_X =
+   (t² − 3)/2t`, so `φ` sweeps exactly the arc of `ω(u₁)` within `2` of `u₂`), `y = u₂ + (x − u₂)(½ + k i)` with `k = sgn(sin θ)·√(1/|x − u₂|² − ¼)`,
+   `χ` the angle of `y` read from the direction to `u₁` (continuous: `y` never reaches the far point, which is `t + 1 > 2` from `u₁`). Facts: finite
+   fibres (`link_fibres`: a point of `ω(u₂)` has at most two partners on `ω(u₁)`, `link_circles_finite`); `χ` turns where `|y − u₁| = 2` (`link_turn`:
+   there `χ` is an end of its range); at the intersection point `P = r_{u₁}(φ_c + γ)`, `cos γ = t/2`, reached at `θ = ±θ_A`, the two values of `y` are
+   `P`'s partners `r_{u₂}(χ_P ± 60°)` (`link_partners`), `x` stays above `P` on `(−θ_A, θ_A)` and below it on `(θ_A, 2π − θ_A)`; `χ` is strictly monotone
+   near `±θ_A` where `|y − u₁| < 2` (`link_flip`: the two partners of `y` are then apart, so `x` is a function of `y` near `P`), which holds at one of
+   them at least (`link_one_lt_two`). The declaration needs 300000 heartbeats (measured; it fails at the default 200000), so it carries
+   `set_option maxHeartbeats 400000 in` with that measurement as its comment.
+2. *The band constancy* (`link_path`, circle-abstract): along a path with finite fibres, read through lifts `L₁`, `L₂`, the difference `L₁(φ) − L₂(χ)`
+   at generic parameters is never `0 mod 3` (`hgen`) and keeps its band `⌊·/3⌋`: at every parameter the one-sided values (`link_val_left/right`, from
+   the lifts' sides and the path's side, constant by the intermediate value theorem) differ by at most `1`, unless both lifts jump and the jump is `±2`
+   — and then the two changes carry one pair (computed), which `hdbl` excludes unless `χ` turns. No velocity is used: BV-ND's `μ ≠ 0` and the
+   turning-point step of QA3's note 2.4 d are replaced by "the two points switch the same pair" (FS112-N3-PAIRS (ii), `pair_ii`, which needs no sense),
+   so `linkage_dot_ne_zero` is not cited (its docstring is rewritten anyway, as item 274 (b) asks).
+3. *The endpoints and the band* (no `c₀`, no genericity of `P`): on each of the two paths from `P`'s configurations — `θ ∈ [−θ_A, θ_A]` (`x` above `P`)
+   and `[θ_A, 2π − θ_A]` (`x` below) — `L₁` is read at `P` from one side at both ends, so the band constancy gives `|L₂(χ_A^±) − L₂(χ_B^±)| ≤ 1` for the
+   sides from which `y` reaches its two ends. The flip makes the two paths reach a non-end partner from opposite sides; at one partner at least this
+   holds. With the band of `C₂` (`D₀ ∈ {3M + 1, 3M + 2}`, at left and at right values) at `χ_P ± 60°` and `χ_P`, every combination of sides gives a
+   difference of absolute value at least `2` (equal sides: two band terms; opposite sides on both paths: their sum is four band terms) — a
+   contradiction (`omega` over the cases). This replaces BASE-V's `c₀ = h₁(P) − h₂(P) ∈ 3ℤ`, which needs `P` generic (BV's "non-generic `P`" remark).
+
+Map inputs: both pseudo-colourings from `exists_pseudoCircle`, the second relabelled to the first's labelling (`link_relabel`; `g₁` hits every colour
+absent at `u₁`, a count); `hgen` is FS112-N3-PAIRS (i) (`pair_i`) at points whose pseudo-colour is one colour (non-singleton points excluded with the
+change points: `pseudo_finite` and `link_periodic_finite`); `hdbl` is FS112-N3-PAIRS (ii) (`pair_ii`) with `y ≠ u₁`, `|y − u₁| ≠ 2`, its two outcomes
+refuted by H (`BaseCtx.hyp`) and `noBoth`.
+
+Read against the informal claim (`l3_base`'s docstring; `[SokolovVoronov2025]` Lemma 3, BV-L3): "two cubic trichromatic points of `B̄(u, 1)` with one
+multicolour are not at distance in `(1, 2)`; their circles may carry in- and out-contact unit arcs" — **same**. The docstring's list of inputs names
+`linkage_dot_ne_zero`, which the proof does not need (point 2); left as written (a docstring, not a statement).
+
+**`linkage_dot_ne_zero`'s docstring** (`HexRing`) now reads as `plans/FS131-QA3-audit.md` § 2.4 d drafts it ("at least one of the two points moves with
+non-zero component along `e`; at a switch of both colours (no turning point, `λ₁, λ₂ ≠ 0`) the two components are equal, so both are non-zero");
+statement unchanged.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS). New names collision-free (`git grep` on `fs131-w5p`, `fs131-w5t`, `fs131-w4`,
+`fs131-w5x`, `main`).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`HexRing`, `Dense`, `BaseWalk`, `BaseDense`, `Proofs`), 8 with
+warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T043331Z-1353383.log`; driver log `data/fs131/i5g/build-stage28.log`).
+Wave 5's sorry declarations: **25** (`BaseWalk` 3 — the planar job's `retArcs_nested`, `exists_endpoint`, `exists_eleventh`), mine 7. Axioms
+(`I5gAxioms28.lean` → `.out`): `l3_base` and its 20 children on the standard three; controls `row134BaseUA` and `bv_hex` read `sorryAx`,
+`linkage_dot_ne_zero` clean. `scripts/Axioms.lean`: the 20 children added to the "FS131-I5g" block.
+
+**`row134BaseUA` now rests, of this half, on `bv_hex` alone** (through `hex_base` → `p17_ua`), with the planar job's three.
+
+## Stage 28 — SAVED

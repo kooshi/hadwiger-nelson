@@ -3546,6 +3546,26 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.CircleColouring.select_chord
 #print axioms HadwigerNelson.Plane.CircleColouring.select_residue
 #print axioms HadwigerNelson.Plane.CircleColouring.select_core
+#print axioms HadwigerNelson.Plane.CircleColouring.link_side_right
+#print axioms HadwigerNelson.Plane.CircleColouring.link_side_left
+#print axioms HadwigerNelson.Plane.CircleColouring.link_val_right
+#print axioms HadwigerNelson.Plane.CircleColouring.link_val_left
+#print axioms HadwigerNelson.Plane.CircleColouring.link_path
+#print axioms HadwigerNelson.Plane.CircleColouring.link_relabel
+#print axioms HadwigerNelson.Plane.CircleColouring.link_periodic_finite
+#print axioms HadwigerNelson.Plane.ArcMap.link_cos_fibre
+#print axioms HadwigerNelson.Plane.ArcMap.link_circles_rep
+#print axioms HadwigerNelson.Plane.ArcMap.link_circles_two
+#print axioms HadwigerNelson.Plane.ArcMap.link_circles_finite
+#print axioms HadwigerNelson.Plane.ArcMap.link_norm_e_sub_sq
+#print axioms HadwigerNelson.Plane.ArcMap.link_cos_eq_of_ringPt
+#print axioms HadwigerNelson.Plane.ArcMap.link_fibres
+#print axioms HadwigerNelson.Plane.ArcMap.link_turn
+#print axioms HadwigerNelson.Plane.ArcMap.link_flip
+#print axioms HadwigerNelson.Plane.ArcMap.link_dist_ringPt_sq
+#print axioms HadwigerNelson.Plane.ArcMap.link_partners
+#print axioms HadwigerNelson.Plane.ArcMap.link_one_lt_two
+#print axioms HadwigerNelson.Plane.ArcMap.exists_linkage
 
 #eval IO.println "=== PURCHASED ==="
 

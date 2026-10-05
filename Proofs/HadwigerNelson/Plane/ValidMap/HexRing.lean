@@ -324,8 +324,9 @@ theorem bv_l3 {F : ArcMap 6} (hF : F.Valid) {u₁ u₂ : ℂ} (hc₁ : F.Covers 
   sorry
 
 /-- **BV-ND's step 1** (`plans/BASE-V-verification.md` § 1b.2): on the unit-distance linkage of `ω(u₁)` and `ω(u₂)` with
-`|u₁ − u₂| ∉ {1, 3}`, both points move with non-zero component along `e = x₀ − y₀` — so every switch of both colours at one configuration
-is a `DoubleEvent` in one of its two senses. The input `bv_nd`'s consumers (BV-L3's step 4) use to read a `±2` jump as a double event. -/
+`|u₁ − u₂| ∉ {1, 3}`, at least one of the two points moves with non-zero component along `e = x₀ − y₀`; at a switch of both colours (no
+turning point, `λ₁, λ₂ ≠ 0`) the two components are equal, so both are non-zero — so every switch of both colours at one configuration is a
+`DoubleEvent` in one of its two senses. The input `bv_nd`'s consumers (BV-L3's step 4) use to read a `±2` jump as a double event. -/
 theorem linkage_dot_ne_zero {u₁ u₂ : ℂ} (ht : dist u₁ u₂ ≠ 1 ∧ dist u₁ u₂ ≠ 3) {φ χ : ℝ}
     (h1 : dist (ringPt u₁ φ) (ringPt u₂ χ) = 1) :
     dot (I * e φ) (ringPt u₁ φ - ringPt u₂ χ) ≠ 0 ∨ dot (I * e χ) (ringPt u₁ φ - ringPt u₂ χ) ≠ 0 := by
