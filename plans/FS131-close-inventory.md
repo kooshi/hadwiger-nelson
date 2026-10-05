@@ -2251,3 +2251,33 @@ reason by the close.*
      longest path, and the crossing lemma (the only leaf in its file) and T-GRAPH (pure graph theory) run beside the map-level leaves without sharing a file,
      taking 1–2 and 2–3 sessions off it. Confidence: high on the split; medium on the crossing lemma's price (no route in hand; it would change if Mathlib holds a
      two-dimensional fixed-point or Jordan-type theorem at the pin). In flight after IP2's launch: 1 (I4n) + 1 (IMM1) + 1 (I5d) + 1 (IP2) = 4.
+
+294. **FS131-IMM1 done at its line, MERGE not yet proved** (harness ≈ 543k; record `fs131-w4mm`'s `plans/FS131-IMM-implementation.md`, stages 1–3 SAVED;
+     report `data/fs131/reports/FS131-IMM1.md`; commits `a58ae315`, `b292eb6c`, `6c031212`, `7060fcc6`, pushed). **Results, each [kernel] on the standard three**,
+     in the new module `Plane/ValidMap/MergeMove`: `ArcMap.clear_of_push` (N3-CLEAR at a boundary direction by N3-UP, the base point any closure point of a
+     `c`-tile at `v`, no cusp horn), `ArcMap.push_contacts_of_mem_allowedCone` (its contact hypothesis, `μ = min (sin ψ / 2) (1/4)`, `γ = α + σπ/2`),
+     `ArcMap.clear_near_end` (the gap's clearness at an interior or a boundary end), and 12 children, among them `dist_ne_one_of_isOpen_isClear` (for the
+     `D_c(v′)` clause) — 15 theorems and the definition `hgt`. **Receipt** (Keryx): the four commits exist and `origin/fs131-w4mm` is `7060fcc6`; the stage-3
+     build log (`build/gate/build/20261005T010522Z-5176.log`) ends "Build completed successfully (5363 jobs)", 0 warnings other than `sorry`, none in
+     `MergeMove`; `sorry` by grep: `MergeMove` 0, `Moves` 2 (`exists_merge_aux`, and `exists_rayMerge_aux` in this branch's pre-RAY copy, which `fs131-w4m`'s
+     proof replaces at the merge); `data/fs131/imm/axioms-stage3.txt` parsed by script: 16 records, 15 on the standard three, `exists_merge_aux` showing `sorryAx`.
+     **Statement**: no defect found; `exists_merge_aux` believed true as written (ruling 269's form). **Left**: MERGE itself, planned in record § 4 (the gap
+     chosen through the antipode of an interior direction of `D_c(v)`; its clearness assembled; `F'` built — germ arcs to `ρ/2`, annulus pieces only for germs
+     whose two sides differ in colour, rim arcs at `ρ/2` over the gap, no arc on `∂B(v, ρ)`; each clause, with a "sides lemma" for the rim clause and a
+     tile-by-tile argument for `D_c(v′)`), priced at about 2,000–2,500 lines, two to three sessions. **Corrections owed** to FS110-N-proof § 2.2 (W-MERGE): (1)
+     the recoloured region stays inside `B(v, ρ/2)` and any germ with one colour on both sides is cut in the annulus just inside `ρ`, else the rim clause fails
+     (IM3's § 10.1 finding, item 286, confirmed independently); (2) "`cl R ∩ ω(v′) ⊆ {v}`" rests on an unstated fact, that a whole neighbourhood of `cl R ∖ {v}`
+     is clear (`dist_ne_one_of_isOpen_isClear`). **Generalization**: N3-UP's push needs no cusp horn. **Coordinator's slip**: IMM1's brief allowed new
+     declarations at the end of `Surgery`, but `tools/fs131_im_split.py --check` holds `Surgery` byte for byte to its split; IMM1 put every MERGE child in
+     `MergeMove` (accepted; `Moves` imports it, so the merge with `fs131-w4m`'s `Surgery` meets no conflict). **To delete at MERGE's landing**: the scratch copies
+     `data/fs131/imm/scratch/{Push,End,Gap}.lean`, which duplicate `MergeMove`. Credit: IMM1, for the push without a cusp horn and for the second correction.
+295. **Ruling: MERGE leaves wave 4; the freed slot goes to FS131-IX1 as ruled.** Choice: (a) wave 4 lands without `exists_merge` — at wave 4's merge-and-gate,
+     `Contact`'s `exists_merge` and `Moves`' `exists_merge_aux` (both `sorry` on `fs131-w4`) are deleted from `fs131-w4`, and MERGE lands later from
+     `fs131-w4mm` as its own small landing (merge `main` in, restore the two statements, the gate), like Lebesgue's (item 151); (b) the merge-and-gate job starts
+     at I4n's hand-back, and `bend_away`'s trigger (item 291 (d)) becomes I4n's hand-back, since MERGE no longer lands with wave 4; (c) IMM1's slot → FS131-IX1
+     (ruling 293 (c)); MERGE's successor, FS131-IMM2, from record § 4 on `fs131-w4mm`, takes a slot after wave 4's merge-and-gate and Woodall's landing job.
+     Alternative weighed: keep MERGE in wave 4 and give IMM2 this slot. Why: nothing in Lean consumes `exists_merge` on any branch (grep on `fs131-w4`,
+     `fs131-w4mm`, `fs131-w5`, `fs131-w5p`, `fs131-ww`: only `Contact`'s header list names it), so holding wave 4 two to three sessions for it delays Woodall's
+     landing and wave 5's base for nothing that reads it; the same reason moved `n3_end` (item 289) and `bend_away` (item 291 (d)). Cost: one restore at MERGE's
+     landing (a conflict where `main` deleted the two declarations and `fs131-w4mm` proves one). Confidence: medium-high; it would change if wave 5's skeleton
+     came to cite `exists_merge` before wave 4's merge-and-gate starts. In flight after IX1's launch: 1 (I4n) + 1 (I5d) + 1 (IP2) + 1 (IX1) = 4.

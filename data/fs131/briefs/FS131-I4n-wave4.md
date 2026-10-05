@@ -101,3 +101,14 @@ Your finding is logged as item 290 and ruled in item 291, whose first line is:
 
 Your touches gain `bend_away`'s statement (that one hypothesis and its docstring) and `bend_away_whole`'s proof. You start no agents of your own (standing rule
 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment, 2026-10-05 — MERGE leaves wave 4 (inventory items 294–295)
+
+FS131-IMM1 handed back at its line with MERGE not yet proved (two to three sessions left), and nothing in Lean consumes `exists_merge`. The ruling:
+
+> 295. **Ruling: MERGE leaves wave 4; the freed slot goes to FS131-IX1 as ruled.** Choice: (a) wave 4 lands without `exists_merge` — at wave 4's merge-and-gate,
+> — source: plans/FS131-close-inventory.md
+
+For you this changes one thing: `bend_away`'s trigger. If the repaired `bend_away` is not proved when you hand back, it moves out of wave 4 (item 291 (d)),
+and your report says so. Leave `exists_merge` and `exists_merge_aux` as they are (`sorry`); the merge-and-gate job deletes them. Your work order, touches and
+budget are unchanged. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
