@@ -1,0 +1,4 @@
+FAIL no record in the log: HadwigerNelson.Plane.ArcMap.Near.merge_allowedCone
+FAIL outside the standard three: HadwigerNelson.Plane.ArcMap.exists_merge ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+MERGE records: 153 named (153 distinct) — 138 on exactly the standard three, 11 on fewer, 2 on none; the restored: exists_merge_aux ['Classical.choice', 'Quot.sound', 'propext'], exists_merge ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+merge axioms: FAIL (2)

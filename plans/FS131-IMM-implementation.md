@@ -826,3 +826,56 @@ exactly `main`'s three standing repeats (`conj_e`, `bindings`, `with`; `--rev or
 (`build/gate/build/20261005T085902Z-2875622.log`; driver `data/fs131/ml/build-merged.log`): `grep -c warning` on the full log 0; its five `error` lines
 are the up-to-date probe's "target is out-of-date" (5 of 5), which starts the walk. `MergeMove` rebuilt against `main`'s oleans in 41 s, `Moves`
 11 s, `Contact` 13 s.
+
+## Stage 15 — SAVED (FS131-ML1): the full gate on `df473bfe` — green, every count reconciled
+
+**`main` merged again first** (`df473bfe`, `origin/main` at `3d6319ad`: three commits, `git diff --name-only a6c248c9 df473bfe` = two briefs,
+`plans/FS131-close-inventory.md`, `plans/SESSION-HANDOFF-2026-10-04.md` — no gate input). Every check on `df473bfe`, its saved log read
+(copies under `data/fs131/ml/`; runner `data/fs131/ml/run-gate.sh final`, each script under `scripts/slot.py --mem 30 --cpus 4`):
+- **Build**: "build: OK — all 1766 modules already up to date, nothing built, 0 module(s) with warnings, 2s", exit 0 — the up-to-date probe against
+  the oleans Stage 14's 13m41s build wrote from the same Lean sources (`build/gate/build/20261005T092305Z-2984013.log`; driver
+  `data/fs131/ml/build-final.log`); **0 warnings** there and in Stage 14's full log. Negative control: the as-given build of Stage 13 (`c9623d04`),
+  the same script, reported 29 warnings, every one `declaration uses 'sorry'`.
+- **Sorry**: `grep -rnP '^\s*sorry\s*$|:= sorry|by sorry' Proofs/`: **0**; the wider `\bsorry\b` finds 4 lines, all docstring prose of `main`'s
+  (`Plane/Cover` l. 33, `Plane/CoverExamples` l. 13, l. 6541, `Packed` l. 266) (`data/fs131/ml/sorry-final.txt`). Control: the same pattern over
+  `c9623d04`'s tree, 29 lines.
+- **Axioms** (`scripts/axioms.sh`): "**axioms: OK — 3784 clean, 14 axiom-free, 4 imported, 5 declared purchase(s)**", exit 0; "audited: 3807
+  records" (`build/gate/axioms/20261005T092312Z-2984691.log`, copy `data/fs131/ml/axioms-receipt-final.log`; digest `data/fs131/ml/axioms-final.log`).
+  **Reconciled against `main`'s gated run** (WL1's, `fs131-ww/build/gate/axioms/20261005T041304Z-1297413.log`, `main`'s Lean and scripts unchanged
+  since its gated `08e64ae5` — `git diff --name-only 08e64ae5 origin/main` outside `plans/`, `data/` is `CLAUDE.md`, `LEAN.md`, the output style and
+  the fact audit): `scripts/gate_report.py axioms` with it as the previous run lists **153 records added, every one CLEAN, none removed, none
+  changed** (`data/fs131/ml/axioms-vs-main-final.txt`); 3,654 + 153 = 3,807; clean 3,633 + 151 = 3,784; axiom-free 12 + 2 = 14 (`BranchGerms.mem_gapGerm`,
+  `mem_gapSec`); imported 4 and purchases 5 unchanged (no `axiom`, no `native_decide`: the purchases are rung A's five). The prediction written before
+  the run (from IMM4's stage-12 receipt: 151 `MergeMove` records, 2 axiom-free, plus the 2 restored on the three) was these four numbers exactly.
+  **MERGE's records** (`tools/fs131_ml_axioms.py`, new: the names of `scripts/Axioms.lean`'s `MergeMove` block plus the two restored, read in the gate's
+  saved log with IMM4's parser): **153 records, 140 on exactly `[propext, Classical.choice, Quot.sound]` — `exists_merge` and `exists_merge_aux` among
+  them — 11 on fewer, 2 on none; PASS** (`data/fs131/ml/merge-axioms-final.txt`); its `--plant` (a `sorryAx` added to `exists_merge`'s record,
+  `merge_allowedCone`'s dropped) FAILS naming both (`merge-axioms-plant.txt`). `tools/fs131_imm_decls.py --check`: "all 151 theorems of MergeMove
+  audited in 2 files". **`--self-test`**: "23 controls … OK — every planted fault fired, and every partner passed", exit 0
+  (`build/gate/axioms-self-test/20261005T092316Z-2985167.log`; driver `data/fs131/ml/axioms-selftest-final.log`); its expected counts read the
+  library's one declared import, which MERGE does not move, so `scripts/axioms-controls.txt` is unchanged.
+- **Vacuity** (`scripts/vacuity.sh`): "**vacuity: OK**", exit 0: `declarations=11026 refutations-skipped=113 sites=770`, `vacuous=0 stale=0 declared=3
+  witnessed=32 generic=733 unknown=2`; "recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)"; against Stage 14's run
+  "counts: unchanged, rows: none changed" (`build/gate/vacuity/20261005T092450Z-2995244.log`, copy `data/fs131/ml/vacuity-scan-final.log`; digest
+  `data/fs131/ml/vacuity-final.log`). **Reconciled row for row** against `main`'s gated scan (WL1's `fs131-ww/build/gate/vacuity/20261005T041457Z-1309134.log`,
+  `sites=755`) by **`tools/fs131_ml_vacdiff.py`** (new): 830 rows of `main`'s, **0 lost**; **15 added, every one a MERGE declaration's: SITE GENERIC on
+  `F.Valid` 13, on `F.Condition5` 2** (among them `exists_merge`, `exists_merge_aux`, `merge_allowedCone`, `exists_gap`, `merge_condition5`); no
+  EVIDENCE row added; PASS (`data/fs131/ml/vacdiff-final.txt`); its `--plant` (a `main` row dropped, a non-MERGE row added) FAILS naming both
+  (`vacdiff-plant.txt`). **The scan's other counts by its own logic** (`data/fs131/ml/count-merge.lean`, `isRefutation` copied from `scripts/Vacuity.lean`,
+  over `MergeMove` and the two restored names): **175 declarations, 2 refutations** (`merge_valid`, `isClear_chain` — a conclusion `F'.Valid` or
+  `IsClear` reduces to `… → False`, WL1's noted reading) = 11026 − 10851 and 113 − 111 exactly (`count-merge.out`). Witnessed, declared, vacuous, stale,
+  unknown unchanged (32, 3, 0, 0, 2 — the baseline's two `hexShell` entries). **MERGE's carriers** decided by the procedure (`scripts/Vacuity.lean`,
+  "MERGE's carriers (FS131-ML1 …)"): no new carrier IN — `BranchGerms.Phantom` OUT (a predicate of written-down germ data, both values spec
+  examples, taken only negated at a variable chart) with `MergeMove`'s data definitions; its 15 sites are on `Valid` and `Condition5`, already IN. So
+  no control is added (the last on `main` stays 62). **`--self-test`**: "OK — all 62 controls behaved", exit 0
+  (`build/gate/vacuity-self-test/20261005T092559Z-3000462.log`; driver `data/fs131/ml/vacuity-selftest-final.log`). **Negative control**:
+  `ArcMap.Condition5` misspelt in `trackedProps` (`Condition5X`), the self-test run: "FAIL — 3 of 62 control(s) did not behave as designed",
+  exactly the `Condition5` controls (`planted_vacuous_condition5`, `planted_generic_condition5`, `planted_unknown_condition5`), exit 1
+  (`data/fs131/ml/vacuity-selftest-plant-misspelt.log`); the file restored from a copy (`cmp` identical) before the green runs.
+- **Architecture**: `tools/check_architecture.py` "RESULT: PASS", exit 0 (`data/fs131/ml/arch-final.txt`). Negative control: `MergeMove`'s row removed in
+  a copy-edit — "missing: ['Plane/ValidMap/MergeMove']", "FAIL module coverage", exit 1 (`arch-plant.txt`); restored, `cmp` identical.
+- **The restore and the statements on `HEAD`**: `tools/fs131_ml_restore.py --rev HEAD` PASS (`restore-check-final.txt`); `fs131_im_statements.py --check`,
+  `fs131_im_split.py --check` PASS (Stage 14; no `.lean` changed since).
+
+**The baseline header** (`scripts/vacuity-baseline.txt`, written in Stage 14's commit from `scripts/gate_report.py header` on the merged run):
+`declarations=11026  refutations-skipped=113  sites=770` / `vacuous=0 stale=0 declared=3 witnessed=32 generic=733 unknown=2`.

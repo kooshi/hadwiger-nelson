@@ -1,0 +1,2 @@
+MERGE records: 153 named (153 distinct) — 140 on exactly the standard three, 11 on fewer, 2 on none; the restored: exists_merge_aux ['Classical.choice', 'Quot.sound', 'propext'], exists_merge ['Classical.choice', 'Quot.sound', 'propext']
+merge axioms: PASS
