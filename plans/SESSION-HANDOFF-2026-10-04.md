@@ -54,12 +54,13 @@ that judge the milestone, written before any job).*
 > `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'`; the axioms print parsed by script from the job's data file; one statement read back); log the item; rule the
 > slot per item 323. **At each landing** (as WL1's, items 326–327): read the saved gate logs, file the drafts with `scripts/gate_report.py axioms|vacuity` and `tools/claude_md_fact_audit.py --base <last CLAUDE.md commit>` run **before** committing, push notify Kooshi.
 >
-> **Queue for the next freed slot (item 395 (c) first)**: **lane C of the collar bend, FS131-CC1**, on a new branch `fs131-w5k` cut from `fs131-w5` after CG1's
-> move commit (`Pushforward`, C's `BendCollar` children, B0); then the freed lane's own continuation if on wave 5's path; the freed lane's own continuation if on wave 5's path; `exists_vertexStep`'s and `exists_arcStep`'s restatements (items 383 (b), 385 (a), E6's record § 4.5); **the remaining three `exists_preBend` children** (`hfree_of_baseHyp`, `finite_maxRingArcs`,
-> `maxRingArcs_subset_of_bend`) **with `bv_l3`'s move and proof**, on a branch cut from `fs131-w5` (disjoint from KP2's `BendCollar`); **the procedure's last steps** (`exists_vertexStep` and `exists_arcStep` restated, items 383 (b), 385 (a); the moves' new lemmas, KL1's plan § 3.3; OPEN
-> merged in from `fs131-wop`; `exists_terminalSeq`), on `fs131-w5c` after M6; **`bv_l3`'s move and proof** (to
-> `BaseWalk` after `l3_base`, item 370 (a)); then **`bend_away`'s implementer** (branch `fs131-w4ba` at
-> `71cca146`; E5 § 4 — e5-claim-e and e5-end-cap — its route; lands on its own); then **`disc1_local`** (planar, after `fs131-w5p` merges back into `fs131-w5`).
+> **Queue for the next freed slot (items 383, 385, 389, 395)**, in order: (1) **lane C of the collar bend, FS131-CC1**, on a new branch `fs131-w5k` cut from
+> `fs131-w5` after CG1's move commit (`Pushforward`, C's `BendCollar` children, B0); (2) the freed lane's own continuation if on wave 5's path; (3) **the
+> procedure's last steps** on `fs131-w5c` after M6 (`exists_vertexStep` and `exists_arcStep` restated, items 383 (b), 385 (a); the moves' new lemmas, KL1's plan
+> § 3.3; OPEN merged in from `fs131-wop` once IO2 lands it; `exists_terminalSeq`); (4) **the remaining three `exists_preBend` children** (`hfree_of_baseHyp`,
+> `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`) **with `bv_l3`'s move and proof** (to `BaseWalk` after `l3_base`, item 370 (a)), on a branch cut from
+> `fs131-w5` (disjoint from the collar's files); then `bend_away`'s implementer (branch `fs131-w4ba` at `71cca146`, E5 § 4; lands on its own); and the tidy
+> moves of item 387 (a) after wave 5 lands.
 >
 > **Merges ahead** (MERGE lands on `main` before wave 5's landing, or merges into wave 5 at it — item 348 (b)): `fs131-w5t` → `fs131-w5p` (IP4, by amendment); then `fs131-w5p` → `fs131-w5` and `fs131-w5c` → `fs131-w5` on Keryx's word when their
 > jobs finish (disjoint files except `BaseWalk`, edited on `fs131-w5` and `fs131-w5p` in different declarations, item 330; one `scripts/Axioms.lean` block each); then wave 5's landing job (merge `main`, `framePt → fromFrame` in `FlankUA` and the
