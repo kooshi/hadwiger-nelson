@@ -130,6 +130,10 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
   `reduce_leftVal_add_int_mul`, `reduce_rightVal_add_int_mul`, `Removable.add_int_mul`, `reduce_nearOnly`, `reduce_exists_max`, `reduce_left_uncov`,
   `reduce_right_uncov`, `reduce_zmod3`, `reduce_partner_noChange`, `reduce_leftVal_ne`, `reduce_vals_of_const`, `reduce_locConst`, `reduce_proper_off`,
   `reduce_int_eq_zero` (all `CircleColouring.`).
+- Stage 27 (`data/fs131/i5g/build-stage27.log`; `build/gate/build/20261005T034254Z-1077466.log`; axioms `I5gAxioms27.out`, control `l3_base` with
+  `sorryAx`), `BaseWalk`: `HadwigerNelson.Plane.CircleColouring.select` (`[SokolovVoronov2025]` Lemma 5, BV-C6, Prop. 18 as BASE-V's BV-L5, BV-C6,
+  BV-P18); children `select_bdd`, `select_firstPassage`, `select_unique`, `select_lt`, `select_window`, `select_window'`, `select_chord`,
+  `select_residue`, `select_core`.
 
 ## Stage 1 — SAVED: the readback
 
@@ -1222,3 +1226,38 @@ record is KB's).
 **Re-pricing** (first hard leaf): `reduce` took about 30k tokens of context, about a third of an implementer session's working budget — M–H as planned.
 
 ## Stage 26 — SAVED
+
+## Stage 27 — SAVED: `CircleColouring.select` proved (a kernel theorem)
+
+**`select` is proved as stated** (`Plane/ValidMap/BaseWalk`; axioms the standard three), circle-abstract, on BASE-V's route (§ 1a.2–1a.3) with BV-L5's
+recolouring replaced by its jump points — the **first passages** of the lift — so no recoloured colouring is built:
+1. *The band* (BV-H1): with no swap point wave 3's `m0_const` (over `hbig_of_noSwap`) makes `m₀` constant on `T0`, so `D₀ ∈ {3M + 1, 3M + 2}` at every `z`
+   with `z, z + 60°` off `S`. *The increment* `N = f(θ + 2π) − f(θ)` is one integer off `S` (`W_eq_aux` and `3 | N`, by periodicity of `c`), and summing the
+   band over a good hexagon gives `18M + 6 ≤ N ≤ 18M + 12`, so `N ≠ 0`. For `N < 0` the selection runs on the negated lift (colours `−c`, `M ↦ −M − 1`).
+2. *First passages* (`select_firstPassage`, for an integer lift `g` with `N > 0`): `x_ℓ = inf {x ∉ S | g x ≥ ℓ}` exists (`g` is bounded above on a period,
+   `select_bdd`, by compactness), `g < ℓ` left of it, `g = ℓ − 1` just left and `g = ℓ` just right (the jump is at most one). They are unique
+   (`select_unique`), strictly increasing (`select_lt`), `2π`-periodic in `ℓ ↦ ℓ + N`, change points, and each keeps its pair `{ℓ − 1, ℓ}` — BV-L5's
+   kept points with their pairs.
+3. *Windows* (`select_window`, `select_window'`): `x_{ℓ + 3M + 3} > x_ℓ + 60°` (BV-P18's count: just right of `x_ℓ` and everywhere left of it `g ≤ ℓ`, and
+   the band adds at most `3M + 2`), and `x_{ℓ + 3M + 1} ≤ x_ℓ + 60°` (the band adds at least `3M + 1`).
+4. *`N = 6`* forces `M = 0`; six gaps of at most `60°` summing to `2π` are all `60°`: the hexagon `IsHex (x_0) (j ↦ τ(j − 1))` (BV-C6).
+   *Otherwise* `N ≥ 9(M + 1)` (`3 | N`), and for a pair `{v, w}` the levels `ℓ₀, ℓ₀ + k, ℓ₀ + 2k` (`k = 3(M + 1)`, `ℓ₀` the pair's residue,
+   `select_residue`) give three change points with that pair, consecutive gaps `> 60°` summing to `2π`, so every chord exceeds `1` (`select_chord`).
+
+Read against the informal claim (`select`'s docstring; BASE-V BV-L5, BV-C6, BV-P18): "a circle colouring with no swap point is the rotating hexagon, or for
+each pair of colours it has three change points with that pair, pairwise more than `60°` apart (chords longer than `1`); the points are the colouring's
+own" — **same**.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS). New names collision-free (`git grep` on `fs131-w5p`, `fs131-w5t`, `fs131-w4`, `main`).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 3 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T034254Z-1077466.log`; driver log `data/fs131/i5g/build-stage27.log`). Wave 5's sorry declarations: **26** (`BaseWalk` 4),
+mine 8. Axioms (`I5gAxioms27.lean` → `.out`): `select` and its 9 children on the standard three; control `l3_base` reads `sorryAx`. `scripts/Axioms.lean`:
+the 9 children added to the "FS131-I5g" block.
+
+**Re-pricing from the first two hard leaves**: `reduce` and `select` (both M–H/H in the plan) each took roughly 30–40k tokens and one build. The remaining
+leaves are map-level (planar geometry, sector charts, the linkage): `l3_base` is the linkage argument of BASE-V § 1b.3 and I expect it to be the largest
+of the set (a parametrized linkage loop, a discrete intermediate-value argument for the height difference, the band at the two partners of an
+intersection point).
+
+## Stage 27 — SAVED

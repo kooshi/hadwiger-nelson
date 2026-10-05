@@ -3537,6 +3537,15 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.CircleColouring.reduce_locConst
 #print axioms HadwigerNelson.Plane.CircleColouring.reduce_proper_off
 #print axioms HadwigerNelson.Plane.CircleColouring.reduce_int_eq_zero
+#print axioms HadwigerNelson.Plane.CircleColouring.select_bdd
+#print axioms HadwigerNelson.Plane.CircleColouring.select_firstPassage
+#print axioms HadwigerNelson.Plane.CircleColouring.select_unique
+#print axioms HadwigerNelson.Plane.CircleColouring.select_lt
+#print axioms HadwigerNelson.Plane.CircleColouring.select_window
+#print axioms HadwigerNelson.Plane.CircleColouring.select_window'
+#print axioms HadwigerNelson.Plane.CircleColouring.select_chord
+#print axioms HadwigerNelson.Plane.CircleColouring.select_residue
+#print axioms HadwigerNelson.Plane.CircleColouring.select_core
 
 #eval IO.println "=== PURCHASED ==="
 

@@ -536,13 +536,383 @@ theorem reduce (hns : ∀ x, ¬ C.IsSwap x) (𝓙 : Set (ℝ × ℝ)) (hfin : �
     · have hag := hagree' _ hcov
       exact hns x ⟨hxS.1, a, b, ha', hb', Or.inr ⟨((hvals _ hag b).1).mp hb2, ((hvals _ hag a).2).mp ha2⟩⟩
 
+/-! ### The selection's machinery (FS131-I5g): first passages of an integer lift (BV-L5's running maximum, read at its jumps), the window
+bounds from the band (BV-H1), the hexagon at increment `6` (BV-C6) and three far points per pair otherwise (BV-P18) -/
+
+section SelectAux
+
+variable {C}
+
+/-- A function locally constant off the change set is bounded above, off the change set, on every compact interval. -/
+theorem select_bdd {g : ℝ → ℤ} (hlc : ∀ y ∉ C.S, ∀ᶠ y' in 𝓝 y, g y' = g y) (a b : ℝ) :
+    ∃ B, ∀ y ∈ Icc a b, y ∉ C.S → g y ≤ B := by
+  refine isCompact_Icc.induction_on (p := fun t => ∃ B, ∀ y ∈ t, y ∉ C.S → g y ≤ B) ⟨0, by simp⟩ ?_ ?_ ?_
+  · intro s t hst ⟨B, hB⟩
+    exact ⟨B, fun y hy => hB y (hst hy)⟩
+  · intro s t ⟨B, hB⟩ ⟨B', hB'⟩
+    exact ⟨max B B', fun y hy hyS => hy.elim (fun h => (hB y h hyS).trans (le_max_left _ _))
+      (fun h => (hB' y h hyS).trans (le_max_right _ _))⟩
+  intro x _
+  obtain ⟨l, hl⟩ := exists_left_const hlc x
+  obtain ⟨r, hr⟩ := exists_right_const hlc x
+  have ht : ∀ᶠ y in 𝓝 x, (y < x → g y = l) ∧ (x < y → g y = r) := by
+    have a := eventually_nhdsWithin_iff.mp hl
+    have b := eventually_nhdsWithin_iff.mp hr
+    filter_upwards [a, b] with y h1 h2 using ⟨fun h => h1 h, fun h => h2 h⟩
+  refine ⟨_, mem_nhdsWithin_of_mem_nhds ht, max (max l r) (g x), fun y hy _ => ?_⟩
+  rcases lt_trichotomy y x with h | h | h
+  · rw [hy.1 h]; exact (le_max_left _ _).trans (le_max_left _ _)
+  · rw [h]; exact le_max_right _ _
+  · rw [hy.2 h]; exact (le_max_right _ _).trans (le_max_left _ _)
+
+/-- **First passage** of an integer lift through a level (BV-L5's running maximum, read at its jumps): with a positive increment `N` per
+period, every level `ℓ` has a point `x` left of which (off the change set) the lift stays below `ℓ`, with values `ℓ − 1` just left of `x`
+and `ℓ` just right of it. -/
+theorem select_firstPassage {g : ℝ → ℤ} (hlc : ∀ y ∉ C.S, ∀ᶠ y' in 𝓝 y, g y' = g y)
+    {N : ℤ} (hN : 0 < N) (hper : ∀ θ ∉ C.S, ∀ n : ℤ, g (θ + n * (2 * π)) = g θ + n * N)
+    (hjump : ∀ θ, ∀ᶠ a in 𝓝[<] θ, ∀ᶠ b in 𝓝[>] θ, |g b - g a| ≤ 1) (ℓ : ℤ) :
+    ∃ x, (∀ y < x, y ∉ C.S → g y < ℓ) ∧ (∀ᶠ y in 𝓝[<] x, g y = ℓ - 1) ∧ ∀ᶠ y in 𝓝[>] x, g y = ℓ := by
+  have hπ := Real.pi_pos
+  obtain ⟨θ₀, -, hg₀⟩ := C.exists_good_near 0 1 one_pos
+  have hθ₀ : θ₀ ∉ C.S := hg₀.notMem
+  obtain ⟨B, hB⟩ := select_bdd hlc θ₀ (θ₀ + 2 * π)
+  set A := {x | x ∉ C.S ∧ ℓ ≤ g x} with hA
+  have hne : A.Nonempty := by
+    refine ⟨θ₀ + ((|ℓ - g θ₀| : ℤ) : ℝ) * (2 * π), (C.mem_S_add_int _ θ₀).not.mpr hθ₀, ?_⟩
+    rw [hper θ₀ hθ₀]
+    have h1 : |ℓ - g θ₀| * 1 ≤ |ℓ - g θ₀| * N := mul_le_mul_of_nonneg_left (by omega) (abs_nonneg _)
+    have h2 := le_abs_self (ℓ - g θ₀)
+    linarith
+  have hbdd : BddBelow A := by
+    refine ⟨θ₀ + ((ℓ - B : ℤ) : ℝ) / N * (2 * π), fun x ⟨hxS, hx⟩ => ?_⟩
+    set n := ⌊(x - θ₀) / (2 * π)⌋
+    have h1 : (n : ℝ) ≤ (x - θ₀) / (2 * π) := Int.floor_le _
+    have h2 : (x - θ₀) / (2 * π) < n + 1 := Int.lt_floor_add_one _
+    have h1' : n * (2 * π) ≤ x - θ₀ := by rwa [le_div_iff₀ (by positivity)] at h1
+    have h2' : x - θ₀ < (n + 1) * (2 * π) := by rwa [div_lt_iff₀ (by positivity)] at h2
+    have hyS : x - n * (2 * π) ∉ C.S := fun h => hxS (by simpa using (C.mem_S_add_int n _).mpr h)
+    have hgy : g x = g (x - n * (2 * π)) + n * N := by
+      have := hper _ hyS n; rwa [sub_add_cancel] at this
+    have hyB := hB _ ⟨by linarith, by linarith⟩ hyS
+    have hint : ℓ - B ≤ n * N := by linarith
+    have hNr : (0 : ℝ) < N := by exact_mod_cast hN
+    have : ((ℓ - B : ℤ) : ℝ) / N ≤ n := by
+      rw [div_le_iff₀ hNr]; exact_mod_cast hint
+    nlinarith
+  refine ⟨sInf A, fun y hy hyS => ?_, ?_⟩
+  · by_contra hle; push Not at hle
+    exact absurd (csInf_le hbdd ⟨hyS, hle⟩) (not_le.mpr hy)
+  set x := sInf A
+  have hP1 : ∀ y < x, y ∉ C.S → g y < ℓ := fun y hy hyS => by
+    by_contra hle; push Not at hle
+    exact absurd (csInf_le hbdd ⟨hyS, hle⟩) (not_le.mpr hy)
+  have hxA : x ∉ A := by
+    rintro ⟨hxS, hx⟩
+    have hloc : ∀ᶠ y in 𝓝[<] x, g y = g x := nhdsWithin_le_nhds (hlc x hxS)
+    obtain ⟨y, h1, h2, h3⟩ := (hloc.and ((C.eventually_notMem_S_lt x).and self_mem_nhdsWithin)).exists
+    have := hP1 y h3 h2
+    omega
+  obtain ⟨l, hl⟩ := exists_left_const hlc x
+  obtain ⟨r, hr⟩ := exists_right_const hlc x
+  have hrℓ : ℓ ≤ r := by
+    obtain ⟨u, hu, hsub⟩ := mem_nhdsGT_iff_exists_Ioo_subset.mp hr
+    obtain ⟨a, haA, hau⟩ := exists_lt_of_csInf_lt hne (show x < u from hu)
+    have hxa : x ≤ a := csInf_le hbdd haA
+    have hxa' : x < a := lt_of_le_of_ne hxa fun h => hxA (h ▸ haA)
+    have := hsub ⟨hxa', hau⟩
+    simp only [mem_setOf_eq] at this
+    rw [← this]; exact haA.2
+  have hlℓ : l < ℓ := by
+    obtain ⟨y, h1, h2, h3⟩ := (hl.and ((C.eventually_notMem_S_lt x).and self_mem_nhdsWithin)).exists
+    rw [← h1]; exact hP1 y h3 h2
+  have hj : |r - l| ≤ 1 := by
+    obtain ⟨a, ha, hal⟩ := ((hjump x).and hl).exists
+    obtain ⟨b, hb, hbr⟩ := (ha.and hr).exists
+    rw [← hal, ← hbr]; exact hb
+  rw [abs_le] at hj
+  have hl' : l = ℓ - 1 := by omega
+  have hr' : r = ℓ := by omega
+  exact ⟨hl' ▸ hl, hr' ▸ hr⟩
+
+/-- Two first-passage points of one level coincide. -/
+theorem select_unique {g : ℝ → ℤ} {ℓ : ℤ} {x x' : ℝ} (h1 : ∀ y < x, y ∉ C.S → g y < ℓ) (h2 : ∀ᶠ y in 𝓝[>] x, g y = ℓ)
+    (h1' : ∀ y < x', y ∉ C.S → g y < ℓ) (h2' : ∀ᶠ y in 𝓝[>] x', g y = ℓ) : x = x' := by
+  have key : ∀ x x' : ℝ, (∀ᶠ y in 𝓝[>] x, g y = ℓ) → (∀ y < x', y ∉ C.S → g y < ℓ) → ¬ x < x' := by
+    intro x x' h2 h1' hlt
+    obtain ⟨y, hy1, hy2, hy3⟩ := (h2.and ((C.eventually_notMem_S_gt x).and (Ioo_mem_nhdsGT hlt))).exists
+    have := h1' y hy3.2 hy2
+    omega
+  rcases lt_trichotomy x x' with h | h | h
+  · exact absurd h (key x x' h2 h1')
+  · exact h
+  · exact absurd h (key x' x h2' h1)
+
+/-- First-passage points increase with the level. -/
+theorem select_lt {g : ℝ → ℤ} {ℓ ℓ' : ℤ} (hℓ : ℓ < ℓ') {x x' : ℝ} (h1 : ∀ y < x, y ∉ C.S → g y < ℓ)
+    (h2 : ∀ᶠ y in 𝓝[>] x, g y = ℓ) (h2' : ∀ᶠ y in 𝓝[>] x', g y = ℓ') : x < x' := by
+  by_contra hle; push Not at hle
+  rcases eq_or_lt_of_le hle with h | h
+  · subst h
+    obtain ⟨y, hy1, hy2⟩ := (h2.and h2').exists
+    omega
+  · obtain ⟨y, hy1, hy2, hy3⟩ := (h2'.and ((C.eventually_notMem_S_gt x').and (Ioo_mem_nhdsGT h))).exists
+    have := h1 y hy3.2 hy2
+    omega
+
+/-- **The window bound** (BV-P18's count): `3M + 3` levels past a first-passage point lie more than `60°` beyond it. -/
+theorem select_window {g : ℝ → ℤ} (hlc : ∀ y ∉ C.S, ∀ᶠ y' in 𝓝 y, g y' = g y) {M : ℤ}
+    (hband : ∀ z, z ∉ C.S → z + π / 3 ∉ C.S → 3 * M + 1 ≤ g (z + π / 3) - g z ∧ g (z + π / 3) - g z ≤ 3 * M + 2)
+    {ℓ : ℤ} {x x' : ℝ} (h1 : ∀ y < x, y ∉ C.S → g y < ℓ) (h2 : ∀ᶠ y in 𝓝[>] x, g y = ℓ)
+    (h2' : ∀ᶠ y in 𝓝[>] x', g y = ℓ + 3 * M + 3) : x + π / 3 < x' := by
+  -- just right of `x`, and everywhere left of it, the lift is at most `ℓ`
+  obtain ⟨u, hu, hsub⟩ := mem_nhdsGT_iff_exists_Ioo_subset.mp h2
+  have hP4 : ∀ z < u, z ∉ C.S → g z ≤ ℓ := by
+    intro z hz hzS
+    rcases lt_trichotomy z x with h | h | h
+    · exact (h1 z h hzS).le
+    · subst h
+      have hloc : ∀ᶠ y in 𝓝[>] z, g y = g z := nhdsWithin_le_nhds (hlc z hzS)
+      obtain ⟨y, hy1, hy2⟩ := (hloc.and h2).exists
+      omega
+    · exact (hsub ⟨h, hz⟩ : g z = ℓ).le
+  by_contra hle; push Not at hle
+  have hS' : ∀ᶠ y in 𝓝[>] x', y + -(π / 3) ∉ C.S :=
+    eventually_gt_add (C.eventually_notMem_S_gt (x' + -(π / 3)))
+  have hu' : x' < x' + (u - x) := by linarith [mem_Ioi.mp hu]
+  obtain ⟨y, hy1, hy2, hy3, hy4⟩ := (h2'.and ((C.eventually_notMem_S_gt x').and (hS'.and (Ioo_mem_nhdsGT hu')))).exists
+  have hz := hP4 (y + -(π / 3)) (by linarith [hy4.2]) hy3
+  have hb := (hband (y + -(π / 3)) hy3 (by rwa [neg_add_cancel_right])).2
+  rw [neg_add_cancel_right] at hb
+  omega
+
+/-- **The lower window** (BV-H1's band from below): `3M + 1` levels past a first-passage point are reached within `60°`. -/
+theorem select_window' {g : ℝ → ℤ} {M : ℤ}
+    (hband : ∀ z, z ∉ C.S → z + π / 3 ∉ C.S → 3 * M + 1 ≤ g (z + π / 3) - g z ∧ g (z + π / 3) - g z ≤ 3 * M + 2)
+    {ℓ : ℤ} {x x' : ℝ} (h2 : ∀ᶠ y in 𝓝[>] x, g y = ℓ) (h1' : ∀ y < x', y ∉ C.S → g y < ℓ + 3 * M + 1) :
+    x' ≤ x + π / 3 := by
+  refine le_of_forall_pos_lt_add fun ε hε => ?_
+  have hS' : ∀ᶠ y in 𝓝[>] x, y + π / 3 ∉ C.S := eventually_gt_add (C.eventually_notMem_S_gt (x + π / 3))
+  obtain ⟨y, hy1, hy2, hy3, hy4⟩ := (h2.and ((C.eventually_notMem_S_gt x).and (hS'.and
+    (Ioo_mem_nhdsGT (show x < x + ε by linarith))))).exists
+  have hb := (hband y hy2 hy3).1
+  by_contra hle; push Not at hle
+  have := h1' (y + π / 3) (by linarith [hy4.2]) hy3
+  omega
+
+/-- Chords of the unit circle between angles more than `60°` and less than `300°` apart are longer than `1`. -/
+theorem select_chord {a b : ℝ} (h1 : π / 3 < b - a) (h2 : b - a < 2 * π - π / 3) : 1 < ‖e a - e b‖ := by
+  have hπ := Real.pi_pos
+  have hc : Real.cos (a - b) < 1 / 2 := by
+    rw [show a - b = -(b - a) by ring, Real.cos_neg]
+    rcases le_or_gt (b - a) π with h | h
+    · have := Real.cos_lt_cos_of_nonneg_of_le_pi (by positivity) h h1
+      rwa [Real.cos_pi_div_three] at this
+    · rw [show b - a = 2 * π - (2 * π - (b - a)) by ring, Real.cos_two_pi_sub]
+      have := Real.cos_lt_cos_of_nonneg_of_le_pi (by positivity) (by linarith) (show π / 3 < 2 * π - (b - a) by linarith)
+      rwa [Real.cos_pi_div_three] at this
+  have hsq := norm_e_sub_e_sq a b
+  have h0 := norm_nonneg (e a - e b)
+  nlinarith
+
+
+/-- The pair residue: for a sign `τ` and two distinct colours, one residue `r` has `{τ (r − 1), τ r}` equal to them in some order. -/
+theorem select_residue {τ v w : ZMod 3} (hτ : τ = 1 ∨ τ = -1) (hvw : v ≠ w) :
+    ∃ r : ZMod 3, (τ * (r - 1) = v ∧ τ * r = w) ∨ (τ * (r - 1) = w ∧ τ * r = v) := by
+  rcases hτ with rfl | rfl <;> revert v w <;> decide
+
+/-- **The selection, over an integer lift with positive winding** (BV-L5's first passages, BV-C6, BV-P18): the hexagon when the increment
+per period is `6`, else three passage points per pair, pairwise more than `60°` apart. -/
+theorem select_core {g : ℝ → ℤ} {τ : ZMod 3} (hτ : τ = 1 ∨ τ = -1) (hcast : ∀ y ∉ C.S, C.c y = τ * (g y : ZMod 3))
+    (hlc : ∀ y ∉ C.S, ∀ᶠ y' in 𝓝 y, g y' = g y) (hjump : ∀ θ, ∀ᶠ a in 𝓝[<] θ, ∀ᶠ b in 𝓝[>] θ, |g b - g a| ≤ 1)
+    {N M : ℤ} (hper : ∀ θ ∉ C.S, ∀ n : ℤ, g (θ + n * (2 * π)) = g θ + n * N)
+    (hband : ∀ z, z ∉ C.S → z + π / 3 ∉ C.S → 3 * M + 1 ≤ g (z + π / 3) - g z ∧ g (z + π / 3) - g z ≤ 3 * M + 2)
+    (hNlo : 18 * M + 6 ≤ N) (hNhi : N ≤ 18 * M + 12) (h3 : 3 ∣ N) (hM : 0 ≤ M) :
+    (∃ ψ b, C.IsHex ψ b) ∨
+      ∀ v w : ZMod 3, v ≠ w → ∃ x : Fin 3 → ℝ, (∀ i, C.ChangeWith (x i) v w) ∧ ∀ i j, i ≠ j → 1 < ‖e (x i) - e (x j)‖ := by
+  have hπ := Real.pi_pos
+  have hN : 0 < N := by omega
+  choose xs hP1 hP3 hP2 using select_firstPassage hlc hN hper hjump
+  have hLV : ∀ ℓ, C.LeftVal (xs ℓ) (τ * ((ℓ - 1 : ℤ) : ZMod 3)) := fun ℓ => by
+    filter_upwards [hP3 ℓ, C.eventually_notMem_S_lt (xs ℓ)] with y h1 h2
+    rw [hcast y h2, h1]
+  have hRV : ∀ ℓ, C.RightVal (xs ℓ) (τ * (ℓ : ZMod 3)) := fun ℓ => by
+    filter_upwards [hP2 ℓ, C.eventually_notMem_S_gt (xs ℓ)] with y h1 h2
+    rw [hcast y h2, h1]
+  have hS : ∀ ℓ, xs ℓ ∈ C.S := by
+    intro ℓ; by_contra hx
+    have h1 : ∀ᶠ y in 𝓝[<] xs ℓ, g y = g (xs ℓ) := nhdsWithin_le_nhds (hlc _ hx)
+    have h2 : ∀ᶠ y in 𝓝[>] xs ℓ, g y = g (xs ℓ) := nhdsWithin_le_nhds (hlc _ hx)
+    obtain ⟨y, hy1, hy2⟩ := ((hP3 ℓ).and h1).exists
+    obtain ⟨y', hy1', hy2'⟩ := ((hP2 ℓ).and h2).exists
+    omega
+  have hmono : StrictMono xs := fun a b hab => select_lt hab (hP1 a) (hP2 a) (hP2 b)
+  have hperx : ∀ ℓ, xs (ℓ + N) = xs ℓ + 2 * π := by
+    intro ℓ
+    refine select_unique (hP1 (ℓ + N)) (hP2 (ℓ + N)) (fun y hy hyS => ?_) ?_
+    · have hyS' : y - 2 * π ∉ C.S := fun h => hyS (by simpa using (C.mem_S_add_int 1 _).mpr h)
+      have := hper _ hyS' 1
+      simp only [Int.cast_one, one_mul, sub_add_cancel] at this
+      have := hP1 ℓ (y - 2 * π) (by linarith) hyS'
+      omega
+    · have h : ∀ᶠ z in 𝓝[>] (xs ℓ + 2 * π + -(2 * π)), g z = ℓ ∧ z ∉ C.S := by
+        rw [add_neg_cancel_right]; exact (hP2 ℓ).and (C.eventually_notMem_S_gt _)
+      filter_upwards [eventually_gt_add h] with y ⟨hy1, hy2⟩
+      have := hper _ hy2 1
+      simp only [Int.cast_one, one_mul, neg_add_cancel_right] at this
+      omega
+  have hW1 : ∀ ℓ, xs ℓ + π / 3 < xs (ℓ + 3 * (M + 1)) := fun ℓ =>
+    select_window hlc hband (hP1 ℓ) (hP2 ℓ) (by rw [show ℓ + 3 * (M + 1) = ℓ + 3 * M + 3 by ring]; exact hP2 _)
+  by_cases h6 : N = 6
+  · left
+    have hM0 : M = 0 := by omega
+    subst hM0
+    have hW2 : ∀ ℓ, xs (ℓ + 1) ≤ xs ℓ + π / 3 := fun ℓ =>
+      select_window' hband (hP2 ℓ) (by simpa using hP1 (ℓ + 1))
+    have e6 := hperx 0
+    rw [h6] at e6
+    have a1 := hW2 0; have a2 := hW2 1; have a3 := hW2 2; have a4 := hW2 3; have a5 := hW2 4; have a6 := hW2 5
+    norm_num at a1 a2 a3 a4 a5 a6 e6
+    have hx : ∀ j : ℕ, j < 6 → xs j = xs 0 + j * (π / 3) := by
+      intro j hj
+      interval_cases j <;> norm_num <;> linarith
+    refine ⟨xs 0, fun j => τ * (j - 1), ?_, fun j hj => ?_⟩
+    · intro a b hab
+      have hτ' : τ * τ = 1 := by rcases hτ with rfl | rfl <;> decide
+      have := congrArg (τ * ·) hab
+      simp only [← mul_assoc, hτ', one_mul] at this
+      exact sub_left_injective this
+    · rw [← hx j hj]
+      refine ⟨?_, ?_⟩
+      · have := hLV j; push_cast at this ⊢; exact this
+      · have := hRV j; push_cast at this ⊢; simpa using this
+  · right
+    have h9 : 9 * (M + 1) ≤ N := by omega
+    intro v w hvw
+    obtain ⟨r, hr⟩ := select_residue hτ hvw
+    set k : ℤ := 3 * (M + 1) with hk
+    have hcast3 : ∀ i : ℤ, (((r.val : ℤ) + k * i : ℤ) : ZMod 3) = r := by
+      intro i
+      have : ((k : ℤ) : ZMod 3) = 0 := by
+        rw [hk]; push_cast; rw [show (3 : ZMod 3) = 0 from rfl, zero_mul]
+      push_cast; rw [this, zero_mul, add_zero]; simp
+    refine ⟨fun i => xs (r.val + k * (i : ℕ)), fun i => ⟨hS _, ?_⟩, ?_⟩
+    · have hl := hLV (r.val + k * (i : ℕ))
+      have hr' := hRV (r.val + k * (i : ℕ))
+      have hc := hcast3 ((i : ℕ) : ℤ)
+      rw [show (((r.val + k * (i : ℕ) - 1 : ℤ)) : ZMod 3) = (((r.val + k * (i : ℕ) : ℤ)) : ZMod 3) - 1 by push_cast; ring,
+        hc] at hl
+      rw [hc] at hr'
+      rcases hr with ⟨h1, h2⟩ | ⟨h1, h2⟩
+      · left; exact ⟨h1 ▸ hl, h2 ▸ hr'⟩
+      · right; exact ⟨h1 ▸ hl, h2 ▸ hr'⟩
+    · set ℓ₀ : ℤ := ((r.val : ℕ) : ℤ)
+      have d1 := hW1 ℓ₀
+      have d2 := hW1 (ℓ₀ + k)
+      have d3 : xs (ℓ₀ + 2 * k) + π / 3 < xs (ℓ₀ + N) := by
+        have := hW1 (ℓ₀ + 2 * k)
+        have hle : xs (ℓ₀ + 2 * k + 3 * (M + 1)) ≤ xs (ℓ₀ + N) := hmono.monotone (by omega)
+        linarith
+      rw [hperx] at d3
+      rw [show ℓ₀ + k + k = ℓ₀ + 2 * k by ring] at d2
+      have hx1 : xs (ℓ₀ + k * ((1 : ℕ) : ℤ)) = xs (ℓ₀ + k) := by simp
+      have hx2 : xs (ℓ₀ + k * ((2 : ℕ) : ℤ)) = xs (ℓ₀ + 2 * k) := by congr 1; push_cast; ring
+      have hx0 : xs (ℓ₀ + k * ((0 : ℕ) : ℤ)) = xs ℓ₀ := by simp
+      intro i j hij
+      fin_cases i <;> fin_cases j <;> simp only [ne_eq, not_true_eq_false] at hij <;>
+        dsimp only <;>
+        first
+        | (rw [hx0, hx1]; exact select_chord (by linarith) (by linarith))
+        | (rw [hx0, hx2]; exact select_chord (by linarith) (by linarith))
+        | (rw [hx1, hx0, norm_sub_rev]; exact select_chord (by linarith) (by linarith))
+        | (rw [hx1, hx2]; exact select_chord (by linarith) (by linarith))
+        | (rw [hx2, hx0, norm_sub_rev]; exact select_chord (by linarith) (by linarith))
+        | (rw [hx2, hx1, norm_sub_rev]; exact select_chord (by linarith) (by linarith))
+
+end SelectAux
+
 /-- **The selection** (`[SokolovVoronov2025]` Lemma 5, BV-C6 and Prop. 18, as BASE-V § 1a.2–1a.3 and FS110-CD § 2.5 derived them): a circle
 colouring with no swap point is the rotating hexagon, or for each pair of colours it has three change points with that pair, pairwise more than
 `60°` apart (chords longer than `1`). Circle-abstract; Lemma 5's recolouring keeps each kept point's pair, so the points are the colouring's own. -/
 theorem select (hns : ∀ x, ¬ C.IsSwap x) :
     (∃ ψ b, C.IsHex ψ b) ∨
       ∀ v w : ZMod 3, v ≠ w → ∃ x : Fin 3 → ℝ, (∀ i, C.ChangeWith (x i) v w) ∧ ∀ i j, i ≠ j → 1 < ‖e (x i) - e (x j)‖ := by
-  sorry
+  have hπ := Real.pi_pos
+  obtain ⟨L⟩ := exists_lift C
+  obtain ⟨θ₀, -, hg₀⟩ := C.exists_good_near 0 1 one_pos
+  have hθ₀S : θ₀ ∉ C.S := hg₀.notMem
+  have hT0 : ∀ j : ℕ, j < 6 → θ₀ + j * (π / 3) ∈ T0 C := fun j hj => by
+    refine ⟨hg₀ j hj, ?_⟩
+    have := hg₀.hex_notMem (i := j + 1) (by omega)
+    rwa [show θ₀ + ((j + 1 : ℕ) : ℝ) * (π / 3) = θ₀ + j * (π / 3) + π / 3 by push_cast; ring] at this
+  -- the band (BV-H1): no swap point keeps `D₀` in one band `{3M + 1, 3M + 2}`
+  obtain ⟨M, hMc⟩ : ∃ M, ∀ z ∈ T0 C, L.m 0 z = M :=
+    ⟨L.m 0 θ₀, fun z hz => m0_const L (hbig_of_noSwap L hns) z hz θ₀ (by simpa using hT0 0 (by norm_num))⟩
+  have hband : ∀ z, z ∉ C.S → z + π / 3 ∉ C.S →
+      3 * M + 1 ≤ L.f (z + π / 3) - L.f z ∧ L.f (z + π / 3) - L.f z ≤ 3 * M + 2 := by
+    intro z hz hz'
+    have h1 := hMc z ⟨hz, hz'⟩
+    have h2 := Lift.D0_mod_ne (L := L) hz hz'
+    unfold Lift.m at h1
+    rw [D0_eq] at h1 h2
+    omega
+  -- the increment per period
+  have hdvd : ∀ θ ∉ C.S, (3 : ℤ) ∣ L.f (θ + 2 * π) - L.f θ := by
+    intro θ hθ
+    have hθ' : θ + 2 * π ∉ C.S := fun h => hθ ((C.periodic_S θ).mp h)
+    have := (ZMod.intCast_zmod_eq_zero_iff_dvd (L.f (θ + 2 * π) - L.f θ) 3).mp (by
+      push_cast; rw [L.cast_eq _ hθ', L.cast_eq _ hθ, C.periodic θ, sub_self])
+    exact_mod_cast this
+  set N := L.f (θ₀ + 2 * π) - L.f θ₀ with hN
+  have hstep : ∀ θ ∉ C.S, L.f (θ + 2 * π) = L.f θ + N := by
+    intro θ hθ
+    have hW := Lift.W_eq_aux (L := L) hθ hθ₀S
+    unfold Lift.W at hW
+    have h1 := hdvd θ hθ
+    have h2 := hdvd θ₀ hθ₀S
+    omega
+  have hper : ∀ θ ∉ C.S, ∀ n : ℤ, L.f (θ + n * (2 * π)) = L.f θ + n * N := by
+    intro θ hθ n
+    induction n using Int.induction_on with
+    | zero => simp
+    | succ n ih =>
+      have hS : θ + (n : ℤ) * (2 * π) ∉ C.S := (C.mem_S_add_int n θ).not.mpr hθ
+      rw [show θ + (((n : ℤ) + 1 : ℤ) : ℝ) * (2 * π) = (θ + (n : ℤ) * (2 * π)) + 2 * π by push_cast; ring,
+        hstep _ hS, ih]
+      ring
+    | pred n ih =>
+      have hS : θ + ((-(n : ℤ) - 1 : ℤ) : ℝ) * (2 * π) ∉ C.S := (C.mem_S_add_int _ θ).not.mpr hθ
+      have := hstep _ hS
+      rw [show θ + ((-(n : ℤ) - 1 : ℤ) : ℝ) * (2 * π) + 2 * π = θ + ((-(n : ℤ) : ℤ) : ℝ) * (2 * π) by push_cast; ring,
+        ih] at this
+      linarith
+  -- the increment lies in `[18M + 6, 18M + 12]` (the band summed over a hexagon)
+  set a : ℕ → ℤ := fun j => L.f (θ₀ + j * (π / 3)) with ha
+  have hb : ∀ j : ℕ, j < 6 → 3 * M + 1 ≤ a (j + 1) - a j ∧ a (j + 1) - a j ≤ 3 * M + 2 := fun j hj => by
+    have := hband _ (hT0 j hj).1 (hT0 j hj).2
+    simp only [ha]
+    rwa [show θ₀ + ((j + 1 : ℕ) : ℝ) * (π / 3) = θ₀ + j * (π / 3) + π / 3 by push_cast; ring]
+  have ha0 : a 0 = L.f θ₀ := by simp [ha]
+  have ha6 : a 6 = L.f (θ₀ + 2 * π) := by simp only [ha]; congr 1; push_cast; ring
+  have b0 := hb 0 (by norm_num); have b1 := hb 1 (by norm_num); have b2 := hb 2 (by norm_num)
+  have b3 := hb 3 (by norm_num); have b4 := hb 4 (by norm_num); have b5 := hb 5 (by norm_num)
+  norm_num only at b0 b1 b2 b3 b4 b5
+  have hNlo : 18 * M + 6 ≤ N := by omega
+  have hNhi : N ≤ 18 * M + 12 := by omega
+  have h3N : (3 : ℤ) ∣ N := hdvd θ₀ hθ₀S
+  rcases lt_or_gt_of_ne (show N ≠ 0 by omega) with hneg | hpos
+  · -- negative winding: run the selection on the negated lift
+    refine select_core (g := fun θ => -L.f θ) (τ := -1) (N := -N) (M := -M - 1) (Or.inr rfl) (fun y hy => ?_)
+      (fun y hy => ?_) (fun θ => ?_) (fun θ hθ n => ?_) (fun z hz hz' => ?_) (by omega) (by omega) (dvd_neg.mpr h3N)
+      (by omega)
+    · push_cast; rw [L.cast_eq y hy]; ring
+    · filter_upwards [L.locallyConstant y hy] with y' h using by rw [h]
+    · filter_upwards [L.jump θ] with a' ha'
+      filter_upwards [ha'] with b' hb'
+      rwa [show -L.f b' - -L.f a' = -(L.f b' - L.f a') by ring, abs_neg]
+    · rw [hper θ hθ n]; ring
+    · have := hband z hz hz'; constructor <;> omega
+  · exact select_core (g := L.f) (τ := 1) (Or.inl rfl) (fun y hy => by rw [L.cast_eq y hy, one_mul]) L.locallyConstant
+      L.jump hper hband hNlo hNhi h3N (by omega)
 
 end CircleColouring
 
