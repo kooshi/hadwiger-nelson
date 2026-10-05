@@ -5,7 +5,10 @@
 
 ## Theorems this phase proved
 
-None yet (a planning job; see the last stage for any child proved).
+All [kernel] on `[propext, Classical.choice, Quot.sound]` (`data/fs131/kl/KLAxioms2.out`): `ArcMap.LocalStep.refl`, `ArcMap.LocalSeq.const`,
+`ArcMap.LocalSeq.dom_eq` (`Plane/ValidMap/Limit.lean`); `ArcMap.terminal_vertices` (`Plane/ValidMap/Terminal.lean`, FS112-N2-TERM's clause 2 in
+every terminal map). Proved **over open children** (no `sorry` of their own): `ArcMap.exists_terminalMap` (`Procedure`), `ArcMap.exists_red`,
+`ArcMap.exists_terminal`, `ArcMap.run_ends` (`Terminal`).
 
 ## Stage 1 — SAVED: the readback
 
@@ -158,3 +161,31 @@ Each is proved by re-opening a construction, after this branch merges `main`, in
   priority form (inside my module).
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the handoff to the implementer
+
+**Where.** Branch `fs131-w5c` (worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c`), at this stage's commit. Build with
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree; iterate on a scratch file importing
+the built module (`lake env lean`, ~6 s a run, never evidence).
+
+**What to prove** (the open children, § 3.1's routes; order cheapest re-pricing first): `LocalStep.mono`, `exists_stab` →
+`frozen` (with `arc_origin`) → `limitArcs_locallyFinite`, `limitCol_locallyConstant`, `eventually_agreesOn`, `limit_valid`,
+`limit_isModification` → the locality lemmas (with `tile_subset_ball_or_disjoint`) → `limit_isTerminalMap` → `not_available_of_not_isSite`,
+`IsClean.eventually_not_isSite` → `exists_clean` → `badCount_eq_zero_iff`, `badCount_lt_top`, `treatPts_inter_finite`,
+`mergeAvailable_of_bothKind` → (`Terminal`) `run_hornBoundsQR`, `stuckRun_ne_univ` (with `shadow_recursion`) → after the merge with `main`:
+`exists_vertexStep`, `exists_arcStep` over § 3.3's lemmas → `exists_terminalSeq`. Two implementers split as § 3.2 says.
+
+**What it may change**: add children anywhere in `Limit`, `Procedure`, `Terminal` (and § 3.3's lemmas in `Procedure` or a module between it
+and `Moves`/`MergeMove`); strengthen a hypothesis of `exists_vertexStep` to the priority form (F7) and of `exists_arcStep` if a bend needs it,
+since both are internal to the construction; move declarations within a file. **It may not**: change `exists_red`'s or `exists_terminal`'s
+statement, `IsModification`, `IsTerminalMap` or any wave-4 definition; a statement of `exists_terminalMap`, `terminal_vertices`, `run_ends`,
+`run_hornBoundsQR`, `stuckRun_ne_univ` changes only through Keryx. **Watch**: F6 (a lone horn shaveable only at `σ = ±1`) — if
+`exists_vertexStep`'s lone-horn case cannot be closed, stop and report the configuration; `exists_arcStep`'s last clause is question (5) —
+a failed proof is routed to the deriver, never weakened silently.
+
+**Vacuity and inhabitants**: `LocalSeq.const` inhabits `LocalSeq`; `exists_terminalMap`, `exists_clean`, the locality lemmas are `GENERIC`
+or inhabited at `sevenBrickMap` (`k = 7`); the stuck-run children are `GENERIC` (FS-115). Every new definition has a spec example except
+`badCount`/`IsMaxRingArc`/`treatPts`, whose examples (the one-colour plane: `badCount = 0`, `treatPts = ∅`) the implementer adds when it
+proves `badCount_eq_zero_iff`.
+
+## Stage 4 — SAVED
