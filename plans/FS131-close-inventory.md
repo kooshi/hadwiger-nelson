@@ -2599,3 +2599,47 @@ reason by the close.*
      sentence's attribution (`FS131-I2n`; in git at `b8402e46` and in items 270–271), nothing else; `--dupes` exit 0. **Held for the milestone's filing**: wave
      4's Frontier clause, its `LEDGER.md` regrades, its Proof Atlas grades (as wave 2's, item 271). **Freed slot → Woodall's landing job, FS131-WL1** (item 317
      (e): wave 4 has landed). Worktree `fs131-w4` joins the removal list after its cited gate logs are rescued.
+320. **E5's Q1 verdict, by message: NB3-END item 2 and FS114-CVB § 1.4 item 5 are DERIVED** (FS131-E5, mid-job; record `plans/FS131-E5-derivation.md` § 3,
+     commit `63a07fe4`; [hand], one mind, exact checks with planted faults that fire). Item 305's configuration (one `g`-sector at `S′` with cone `[α+π, α+2π]`, `c`
+     only as a `c`-horn along `−a` above it, `κ₄ < 1`) is refuted by validity alone, through two lemmas: **SH** — near `S′`, the shadow of a horn at `v` whose
+     `S′`-side bound is `ν ∈ (−1, 1)` is exactly `TanAbove S′ α (ν/(1+ν))` on the horn's side of the normal line (FS110 N4-SHADOW's `curvDown`, the parallel curve at
+     distance 1); (SH1) needs no side condition, (SH2) needs `σ·frameX > 0`; I5e's "closed upward" property is the vertical drop inside a unit disc; **SEP** — the
+     `H₋`-witnesses lie in `G`, so `G`'s half-arc `γ₋` at direction `α+π` has upward curvature above `f(−κ₄)`, and any `c`-horn along `−a` on `γ₋`'s `+n` side lies in
+     `TanAbove f(−κ₄)`, hence in `H₋`'s shadow: a `c`-pair at distance 1; at `κ₄ = 1`, U1 removes `α+π` from `c` at `S′` and `c ∉ P_cl(S′)`, also a contradiction.
+     `cv_class`'s "None" case by the mirror in the line through `E` along `a` (the shadow near `N` is `TanBelow N α (υ/(1−υ))`, `curvUp`): `h` has two sectors at
+     `E + n`, `g` two at `E − n`. **No statement change**: `n3_end_of_not_inType` and `cv_class` stand as written. **So**: the `Terminal` implementer is unblocked
+     (item 317 (e)) and takes the next free slot, with E5 § 3 as its route for the two leaves; FS112-N3-END and FS114-CV-HD (rows 135, 137) stand, the gap filled
+     at one mind. Receipt (Keryx): commit `63a07fe4` exists on `main` ("Q1 derived … NB3-END item 2"); the record's § 3.1–3.5 headings read. E5 goes on to Q2
+     (`bend_away`'s end case). Credit: E5.
+321. **FS131-E5 done: both steps hold, no statement changes** (harness ≈ 491k by the task notice; record `plans/FS131-E5-derivation.md`, Stages 1–5; report
+     `data/fs131/reports/FS131-E5.md`; commits `68ef4e85`, `b57b9cb8`, `63a07fe4`, `658b0b14`, `085ca4bd`, `8e999cf7`; tools `tools/fs131_e5_checks.py`,
+     `tools/fs131_e5_readback.py`). Every result [hand], one mind. **Q1** (item 320): e5-sh, e5-sep, e5-two-g-sectors (NB3-END item 2) and e5-cv-separation
+     (FS114-CVB § 1.4 item 5, `cv_class`'s "None" case); after deriving it, E5 found FS114-CV's CV-P (2) (`plans/FS114-CV-verification.md` l. 122–124), which
+     derives the same exclusion in one line by the dual shadow, so `cv_class`'s step now has two derivations by different routes; FS-112's records had none for
+     NB3-END item 2. **Q2**: `bend_away`'s end case at `q_A` holds with no new hypothesis (e5-bend-end) — start the new boundary tangent to ω(P) at `A` with
+     curvature `κ ∈ (0, 1)`, so every lens point lies on `P`'s side of the tangent at `A`; **Claim E** (e5-claim-e, the radical axis, exact): every point beyond the end
+     is nearer `A` than any lens point, so the region ω(A) bounds beyond the end is never reached; **e5-end-cap**: the arc side has the exact threshold
+     `κ > κ_Y/(1 − κ_Y)`, non-empty whenever the contact tile's curvature `κ_Y < 1/2`; at `κ_Y = 1/2` (R2 along an arc) no lens works, as N2-TAN says. **Receipt**
+     (Keryx): the six commits exist and `origin/main` is `8e999cf7`; the derive gate, run from `plans/`, "GATE: PASS (0 failures, 0 warnings)"; `tools/fs131_e5_checks.py`
+     run: "controls: 5 fired on their faults: 5" (END-CAP 0 of 108,085 violations, 685 with the fault planted). **Corrections owed** (drafts D1–D3, record § 5.3,
+     slots named): D1 FS112-N3-END — item 2's separation was asserted by N3 and NB3 and derived by neither; D2 FS112-N2-BENDS (N2-TAN) — the radius-2 arc in the
+     domain (item 291) and the end's tangent start with Claim E; D3 FS114-CV-HD / CV-EXISTS rest on CVB § 1.4 item 5, now derived. Rows 135 and 137 read both
+     steps and stand unchanged. **Generalizations**: e5-end-cap's threshold also covers every isolated interior R2 contact (replacing N2-TAN's cap estimates);
+     the localization of the `g`-witnesses at `S′` follows from the crossing argument with `hno`. **Predictions scored**: E5-P1 (0.85), P2 (0.80), P3 (0.75) all met,
+     Brier 0.042, registered after a mental sketch (informed, not blind). **Slips, E5's own, no redo**: an empty-anchor edit spliced the record (the gate refused
+     it; recovered exactly, nothing corrupted committed); the first END-CAP check could not fire (its plant showed it; fixed); CV-P (2) not read before deriving.
+     **Proposed**: a G92 instance (CV-P (2), read at its class, had repaired item 305 one milestone early). Credit: E5.
+322. **Rulings on E5's held items, and its slot.** (a) **D1–D3** are corrections to filed derivation records: held for the milestone's filing with the other
+     errata (items 264, 262 (a), 277, 288, 291), filed verbatim from record § 5.3 then. (b) **The G92 instance**: held for the filing, filed to
+     `plans/GROKKING-INSTANCES.md` verbatim with its source if it meets G92's form when read there. Alternative weighed: filing both now. Why: the front files
+     change once per filing (the milestone's one-commit filing rule), and nothing waits on them. Confidence: high. (c) **E5's slot → the `Terminal` implementer,
+     FS131-I5h**, in a new worktree `fs131-w5c` cut from `fs131-w5` at `75689a4c`: e5-sh and e5-sep as children, then `n3_end_of_not_inType` (E5 § 3.4),
+     `cv_class` (§ 3.5), the CV-HD cluster, `exists_red`, `exists_terminal`, then `cv_exists` (in `BaseDense`, its lines only). (d) **`bend_away`'s implementer**
+     is unblocked (E5 § 4: e5-claim-e and e5-end-cap its route) and joins the queue with IMM2, neither having a consumer. In flight after I5h's launch: 1 (WL1) +
+     1 (I5g) + 1 (IP4) + 1 (I5h) = 4.
+323. **Staffing: back to three slots** (Kooshi, 2026-10-05, mid-turn: *"We need to reduce the cap back to 3 subagents. […]
+     Let the current ones finish out though, just let the lane expire. […] it's worth a handoff and compaction again before we go
+     overnight."*). The fourth slot (item 211) is withdrawn. **Applied to launches, never to running work**: the four running jobs (WL1, I5g, IP4, I5h) finish
+     their briefs; the first slot to free is not refilled, and from then on at most three run. **Queue when a slot frees under three**: the freed lane's own
+     continuation if its leaves remain on the longest path (the planar chain, then wave 5's halves); else IMM2 (MERGE), then `bend_away`'s implementer (E5 § 4 its
+     route), then `disc1_local` after `fs131-w5p` merges back. Memory's staffing line rewritten. The handoff rewritten before a compaction, at Kooshi's word.
