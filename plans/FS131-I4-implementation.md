@@ -1728,6 +1728,25 @@ declarations, the same 3 pre-existing repeats (`data/fs131/g4/treedupes-g4-merge
 
 `main` moved to `7d8c5af7` meanwhile (two commits, `plans/` and `data/` only); merged again in the next stage, the gate re-run there.
 
+## Stage 48 — SAVED (FS131-G4): `main` merged again (`5816a11a`), the full gate re-run there, green; the landing
+
+**The second merge** (`5816a11a`, `origin/main` at `7d8c5af7`: two commits, `data/fs131/briefs/FS131-IP4-planar.md`, `plans/FS131-close-inventory.md`,
+`plans/SESSION-HANDOFF-2026-10-04.md`; no conflict). `git diff --stat 6193582a 5816a11a -- Proofs Proofs.lean scripts tools lakefile.toml lean-toolchain
+lake-manifest.json ARCHITECTURE.md`: empty — the gate's inputs are those of Stage 47's commit. **The full gate re-run on `5816a11a`**, all exit 0:
+- build: "build: OK — all 1760 modules already up to date, nothing built, 0 module(s) with warnings, 2s" (`build/gate/build/20261005T030527Z-856313.log`;
+  driver `data/fs131/g4/build-g4-final.log`) — the up-to-date probe's exit 0 against the oleans Stage 47's 10m45s build wrote; 0 warnings there and here;
+- `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'` over `Proofs/`: 0;
+- axioms: "axioms: OK — 3376 clean, 12 axiom-free, 4 imported, 5 declared purchase(s)" (`build/gate/axioms/20261005T030529Z-856603.log`; driver
+  `data/fs131/g4/axioms-final2.log`); `--self-test`: "OK — every planted fault fired, and every partner passed", 23 controls
+  (`build/gate/axioms-self-test/20261005T030533Z-857141.log`; driver `data/fs131/g4/axioms-selftest-final2.log`);
+- vacuity: "vacuity: OK", `declarations=10525 refutations-skipped=92 sites=705`, `vacuous=0 stale=0 declared=3 witnessed=27 generic=673 unknown=2`, baseline
+  header "match (9 of 9 compared)" (`build/gate/vacuity/20261005T030707Z-867776.log`; driver `data/fs131/g4/vacuity-final2.log`); `--self-test`: "OK — all 50
+  controls behaved" (`build/gate/vacuity-self-test/20261005T030818Z-873736.log`; driver `data/fs131/g4/vacuity-selftest-final2.log`);
+- `tools/check_architecture.py`: PASS (`data/fs131/g4/check-architecture-final.txt`); `python3 tools/fs131_k4_decls.py --check`: "495 names, 0 missing"
+  (`data/fs131/g4/k4decls-check-final.log`).
+The commits after `5816a11a` (this record, the report) touch `plans/` and `data/` only. **The landing**: `git push origin HEAD:main` from the worktree, a
+fast-forward (checked first: `origin/main` an ancestor of `HEAD`); the report gives the hash `main` was moved to.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -1908,3 +1927,35 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
 - Engine 3 and the bend (no row), the lens geometry, the clearness children — 56 theorems listed in Stage 43 and in `scripts/Axioms.lean`'s FS131-I4 block —
   `[propext, Classical.choice, Quot.sound]` each.
 
+## Theorems this phase proved (FS131-G4's; axioms from the gate's own receipt, `build/gate/axioms/20261005T030529Z-856603.log`)
+
+No row theorem: wave 4's statements are as I4n left them, less the three that left the wave. The vacuity step's evidence, each [kernel]:
+- `HadwigerNelson.Plane.ArcMap.unitArcPlane_not_condition5` — `¬ unitArcPlane.Condition5` (`Plane/ValidMap/Basic`) — `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.Plane.ArcMap.bowtie_not_isStuck_I` — `¬ bowtie.IsStuck I` (`Plane/ValidMap/BaseSteps`) — `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis` — `¬ bowtie.IsHorn I 0 (-1) 1 1` (`Plane/ValidMap/BaseSteps`) — `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.Plane.instIsEmptyAeProperRegionsZero` — `IsEmpty (AeProperRegions 0)` (`Plane/SVMap`) — `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.Plane.instIsEmptyAeProperRegionsOne` — `IsEmpty (AeProperRegions 1)`: one open dense class always holds two points at distance `1`
+  (`Plane/SVMap`) — `[propext, Classical.choice, Quot.sound]`.
+
+## Drafts for the front page (FS131-G4)
+
+*For Keryx to file; each names its slot and the log line it comes from. The Frontier clause, the `LEDGER.md` rows to regrade and the Proof Atlas grades for
+wave 4 are held for the milestone's filing, as wave 2's were (inventory item 271).*
+
+1. **`CLAUDE.md` § Trust ledger**, the sentence "the current audit reads 2512 clean and 5 declared purchases, and 4 imported (and 11 axiom-free; 2,532 records at
+   wave 2's landing, FS131-I2n, 2026-10-04)" becomes: "the current audit reads 3376 clean and 5 declared purchases, and 4 imported (and 12 axiom-free; 3,397
+   records at wave 4's landing, FS131-G4, 2026-10-05)". From `build/gate/axioms/20261005T030529Z-856603.log`'s digest (`data/fs131/g4/axioms-final2.log`):
+   "audited: 3397 records — 3376 clean on the standard axioms, 12 axiom-free, 4 imported (resting on a declared outside theorem), 5 declared purchase(s)".
+2. **`CLAUDE.md` § The gate**, the two count lines "`declarations=9376 refutations-skipped=64 sites=516`, `vacuous=0 stale=0 declared=3 witnessed=23 generic=488
+   unknown=2`." become "`declarations=10525 refutations-skipped=92 sites=705`, `vacuous=0 stale=0 declared=3 witnessed=27 generic=673 unknown=2`." From
+   `build/gate/vacuity/20261005T030707Z-867776.log`: "=== SCANNED === declarations=10525 refutations-skipped=92" and "=== TOTALS === sites=705 vacuous=0 stale=0
+   declared=3 witnessed=27 generic=673 unknown=2 untelescoped=0"; reconciled row for row against `main`'s run in Stage 47.
+3. **`scripts/vacuity-baseline.txt`'s header** — written by this job (Stage 47's commit): "#   declarations=10525  refutations-skipped=92  sites=705" and
+   "#   vacuous=0 stale=0 declared=3 witnessed=27 generic=673 unknown=2"; the gate's digest reads it as "match (9 of 9 compared)".
+4. **`tools/claude_md_fact_audit.py` `GATE_CHANGES`**, after the `(("1856", "5"), ("2512", "5"))` entry:
+   `(("2512", "5"), ("3376", "5")): "FS-131 wave 4's landing (FS131-G4; .claude/worktrees/fs131-w4/build/gate/axioms/20261005T030529Z-856603.log, gated commit 5816a11a): 3,397 records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases",`
+   (the same log line as draft 1).
+5. **`LEAN.md` § The gate**, "`--self-test` plants thirty-eight controls and watches each fire" becomes "`--self-test` plants fifty controls and watches each
+   fire". From `build/gate/vacuity-self-test/20261005T030818Z-873736.log`'s driver (`data/fs131/g4/vacuity-selftest-final2.log`): "==> vacuity self-test: OK —
+   all 50 controls behaved: every one fired, and the silent ones stayed silent." (38 on `main`; 12 added, controls 39–50.) The axiom self-test's count, 23, is
+   unchanged.
