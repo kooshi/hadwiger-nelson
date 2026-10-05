@@ -2699,7 +2699,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.fail_leavingCentre
 #print axioms HadwigerNelson.Plane.ArcMap.fail_colours
 #print axioms HadwigerNelson.Plane.ArcMap.anti
-#print axioms HadwigerNelson.Plane.ArcMap.n3_end
 #print axioms HadwigerNelson.Plane.bowtieArcs_nondegenerate
 #print axioms HadwigerNelson.Plane.bowtieArcs_locallyFinite
 #print axioms HadwigerNelson.Plane.bowtieCol_locallyConstant
