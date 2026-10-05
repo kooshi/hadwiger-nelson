@@ -1,0 +1,14 @@
+planted: dropped SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_chain :: F.IsHorn v α κ₁ κ₂ c
+SITE: main 516, branch 649, union 705, merged 704; 0 not in either parent, 1 of a parent missing
+  - SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_chain :: F.IsHorn v α κ₁ κ₂ c
+EVIDENCE: main 57, branch 60, union 66, merged 66; 0 not in either parent, 0 of a parent missing
+COUNT declarations: main 9376 + branch 9649 - base 8500 = 10525; merged 10525  ok
+COUNT refutations-skipped: main 64 + branch 85 - base 57 = 92; merged 92  ok
+COUNT sites: main 516 + branch 649 - base 460 = 705; merged 705  ok
+COUNT vacuous: main 0 + branch 0 - base 0 = 0; merged 0  ok
+COUNT stale: main 0 + branch 0 - base 0 = 0; merged 0  ok
+COUNT declared: main 3 + branch 3 - base 3 = 3; merged 3  ok
+COUNT witnessed: main 23 + branch 25 - base 21 = 27; merged 27  ok
+COUNT generic: main 488 + branch 619 - base 434 = 673; merged 673  ok
+COUNT unknown: main 2 + branch 2 - base 2 = 2; merged 2  ok
+FAIL (1)

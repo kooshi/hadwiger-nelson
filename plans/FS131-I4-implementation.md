@@ -1675,6 +1675,59 @@ exit 1, exactly the 12 new controls FAIL ("expected … and it is absent"), none
 - `tools/check_architecture.py`: PASS (`data/fs131/g4/check-architecture-pre.txt`); `python3 tools/fs131_k4_decls.py --check`: exit 0
   (`data/fs131/g4/k4decls-check-pre.log`).
 
+## Stage 47 — SAVED (FS131-G4): `main` merged (`42ca1740`), and the full gate green on the merged commit, every count reconciled
+
+**Before the merge**: `tools/fs131_qa1_dupes.py` (branch refs, `fs131-w4` at `e13835e2`): 17 names in two bodies' own files, none a collision this merge
+meets — 11 are `k4`/`w4` pairs (the skeleton `f620977c`, an ancestor of `fs131-w4`, against the block moved from `Contact` to `Cone`, item 254: one declaration);
+4 are `w4`/`ww` (`abs_dot_le`, `dot_add_left`, `dot_e_e`, `isOpen_shadow`: Woodall's branch is not on `main`; its later landing deletes its copies, item 142);
+`conj_e` is the pre-existing `Chord`/`SixFragment` repeat already on `main`; `framePt` is `w2:Plane/Slack` against `k4:Plane/ValidMap/Basic`, the skeleton's
+name, which `fs131-w4` no longer declares (Stage 45; `grep framePt Proofs/` on the merged tree: `Plane/Slack.lean` only)
+(`data/fs131/g4/qa1dupes-premerge.log`).
+
+**The merge** (`42ca1740`, `git merge --no-ff origin/main` at `b100fc6b`; a merge commit cannot take paths, so it was made after explicit `git add`s of the
+resolved files). Files both sides changed since `cff2c33e`: `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean` (auto-merged: both sides' additions;
+records 2,737 + 2,532 − 1,872 at the base = 3,397, no record twice; 199 imports, none twice), and `scripts/Vacuity.lean`, `scripts/vacuity-controls.lean`,
+`scripts/vacuity.sh` (conflicts, all three resolved by keeping both sides — wave 2's carrier entry, `trackedProps` line, controls 33–38 and `expect` lines first,
+then wave 4's; wave 2's closing `]` became `,`). In the same commit, item 271's owed tool defect: `scripts/vacuity.sh`'s banner said "twenty planted
+defects" for 38 controls; it now states no count and the self-test counts what it runs ("OK — all 50 controls behaved …"; the failing path "FAIL — n of m
+control(s)"). **Checks**: `tools/fs131_i4_mergestmts.py HEAD origin/main` (I4n's three-way statement check, used, not edited): 6,098 names, 0 mismatches, PASS;
+its `--plant`: "MISMATCH AeColouring.exists_fill", FAIL, exit 1 (`data/fs131/g4/mergestmts-g4.log`, `…-plant.log`); `tools/fs131_i4_treedupes.py`: 8,575
+declarations, the same 3 pre-existing repeats (`data/fs131/g4/treedupes-g4-merge.log`).
+
+**The full gate on the merged commit `42ca1740`** (the baseline header written after it, Stage 47's commit; `Proofs/` unchanged):
+- **Build**: "build: OK — 449 of 449 batches, 14 module(s) rebuilt, 0 module(s) with warnings, 10m45s", exit 0 (`build/gate/build/20261005T023736Z-648846.log`;
+  driver `data/fs131/g4/build-g4-merged.log`); `grep -c warning` on the full log: 0. **Sorry**: 0.
+- **Axioms**: "axioms: OK — 3376 clean, 12 axiom-free, 4 imported, 5 declared purchase(s)", exit 0; 3,397 records (`build/gate/axioms/20261005T025216Z-771937.log`;
+  driver `data/fs131/g4/axioms-merged.log`). Reconciled: clean 2,512 (`main`) + 2,720 (branch) − 1,856 (base) = 3,376; axiom-free 11 + 12 − 11 = 12 (wave 4's
+  `BranchGerms.fin3_adj`); imported 4 (wave 2's, unchanged: wave 4 declares no import); purchases 5 (unchanged). Wave 4's 865 records: 864 on the standard three
+  or fewer, 1 axiom-free; no `native_decide`, no `axiom`. **`--self-test`** (item 260): "23 controls … OK — every planted fault fired, and every partner passed",
+  exit 0, with `main`'s `scripts/axioms-controls.txt` unchanged — the counts its controls read (imported 4, declared 1, library 1; `banner_dropped`'s two
+  consequences) are wave 2's import, which wave 4 does not move, so no expected count needed fixing (`build/gate/axioms-self-test/20261005T025220Z-772373.log`;
+  driver `data/fs131/g4/axioms-selftest-merged.log`).
+- **Vacuity**: "vacuity: OK", exit 0: `declarations=10525 refutations-skipped=92 sites=705`, `vacuous=0 stale=0 declared=3 witnessed=27 generic=673 unknown=2`
+  (`build/gate/vacuity/20261005T025356Z-783452.log`; re-run after the baseline header, `build/gate/vacuity/20261005T025904Z-812893.log`, "recorded counts in
+  scripts/vacuity-baseline.txt's header: match (9 of 9 compared)"; drivers `data/fs131/g4/vacuity-merged.log`, `vacuity-final.log`). **Reconciled row for
+  row** by a new tool, `tools/fs131_g4_vacdiff.py` (`main`'s run `fs131-w2/build/gate/vacuity/20261004T225327Z-3129569.log`, the branch's Stage-46 run, the
+  merged run; base counts from the branch's `CLAUDE.md` at `cff2c33e`: 8500, 57, 460, 0, 0, 3, 21, 434, 2): SITE rows — `main` 516, branch 649, union 705,
+  merged 705, none outside the union and none missing; EVIDENCE rows — 57, 60, union 66, merged 66; every count = `main` + branch − base (PASS,
+  `data/fs131/g4/vacdiff-merged.log`). Its plant (one merged SITE row dropped): "1 of a parent missing", FAIL, exit 1 (`data/fs131/g4/vacdiff-merged-plant.log`).
+  **What changed against `main`'s recorded counts, explained**: declarations +1,149 (wave 4's declarations, the three deletions net, generated API included);
+  refutations-skipped +28 (wave 4's theorems concluding `False`, `nb4p` among them); sites +189, all wave 4's rows — 84 on the four new carriers (`IsHorn` 41
+  GENERIC + 1 WITNESSED, `Condition5` 25, `IsStuck` 7, `AeProperRegions` 9 GENERIC + 1 WITNESSED) and 105 on carriers already tracked (`Valid` 91 GENERIC,
+  `IsRingArc` 12 GENERIC + 1 WITNESSED, `Simple` 1 WITNESSED); witnessed +4 (`cuspFrag_isHorn`, `sevenBrickRegions`, `l60Frag_isRingArc`, `halfDisc_simple`);
+  generic +185; vacuous, stale, declared, unknown unchanged (0, 0, 3, 2: the baseline's two `hexShell` entries). Evidence +9: five emptiness proofs (this job's
+  `bowtie_not_isHorn_I_axis`, `bowtie_not_isStuck_I`, `unitArcPlane_not_condition5`, the two `AeProperRegions` instances) and four witnesses (the four above).
+  **`--self-test`**: "OK — all 50 controls behaved", exit 0 (`build/gate/vacuity-self-test/20261005T025507Z-789080.log`, and after the plant below
+  `…/20261005T030014Z-818800.log`; drivers `data/fs131/g4/vacuity-selftest-merged.log`, `vacuity-selftest-final.log`). **Negative control on the merged tree**:
+  `IsStuck` misspelt in `trackedProps`: "FAIL — 3 of 50 control(s) did not behave as designed", exactly controls 42–44, exit 1
+  (`data/fs131/g4/vacuity-selftest-merged-plant.log`), the file restored from a copy (`cmp` identical) before the final green run.
+- `tools/check_architecture.py`: PASS (`data/fs131/g4/check-architecture-merged.txt`); `python3 tools/fs131_k4_decls.py --check`: "495 names, 0 missing", exit 0
+  (`data/fs131/g4/k4decls-check-merged.log`).
+- **`scripts/vacuity-baseline.txt`'s header** written: `declarations=10525  refutations-skipped=92  sites=705`, `vacuous=0 stale=0 declared=3 witnessed=27
+  generic=673 unknown=2` (`scripts/gate_report.py header` on the merged run).
+
+`main` moved to `7d8c5af7` meanwhile (two commits, `plans/` and `data/` only); merged again in the next stage, the gate re-run there.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
