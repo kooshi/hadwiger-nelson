@@ -110,8 +110,12 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
   `mem_coneAt_inter_ball_of_re_neg`, `mem_coneAt_diff_closedBall_of_re_pos`, `exists_near_tangent`, `exists_tangent_colour`, `cor3_half`, `cor3_at`,
   `exists_crossings`.
 - The assembly's glue (`BaseDense`): `CircleColouring.mem_S_of_ne`, `CircleColouring.leftVal_of_not_mem`, `exists_eq_of_absent`, `BaseCtx.removable`, and
-  the periodicity lemmas `germ_add_int_mul`, `ringPt_add_int_mul`, `germPseudo_add_int_mul`, `ringArc_add_int_mul`, `IsRetArc.add_int_mul`,
+  (`BaseWalk` since stage 24) the periodicity lemmas `germ_add_int_mul`, `ringPt_add_int_mul`, `germPseudo_add_int_mul`, `ringArc_add_int_mul`, `IsRetArc.add_int_mul`,
   `IsRetArc.exists_Ico`.
+
+- Stage 24 (`data/fs131/i5f/build-stage24.log`; axioms `I5fAxioms24.out`), `Plane/ValidMap/BaseWalk`: `HadwigerNelson.Plane.ArcMap.BaseCtx.exists_pseudoCircle`
+  (NB3 steps 3–5, the bridge to a circle colouring with no swap); children `germPseudo_cw_iff`, `germPseudo_ccw_iff`, `BaseCtx.exists_germPseudo`; the
+  periodicity lemmas above moved here from `BaseDense` at this stage.
 
 Wired by FS131-I5f (axioms `[propext, sorryAx, Classical.choice, Quot.sound]`): `row134BaseUA` (= `BaseCtx.false`, the walk assembled over its leaves as
 stated), `BaseCtx.exists_endpoint_third`, `BaseCtx.third_ne`.
@@ -1064,3 +1068,70 @@ stopped by PID while still waiting, so that one build covers both leaves): **OK 
 on `fs131-w5p`, `fs131-w5t`, `fs131-w4`, `main` (by `git grep`).
 
 ## Stage 23 — SAVED
+
+## Stage 24 — SAVED: `exists_pseudoCircle` proved (a kernel theorem); the periodicity glue moved upstream to `BaseWalk`
+
+**`BaseCtx.exists_pseudoCircle` is proved as stated** (`Plane/ValidMap/BaseWalk`; axioms the standard three), on KB's plan A4's route with one change
+of construction: the change set is the set of **germ changes** (`S = {θ | no v has both germs g v}`) rather than "non-singleton or germs differ", since
+the statement's fifth clause asks that `S` hold only genuine changes. The colouring at `θ` is the clockwise germ's colour (`choose`), so the one-sided
+values are the germs' by construction; local constancy off `S` reads the two germs at `θ`; properness at `60°` is `pair_i` at a nearby angle where both
+points are singletons (inside the two counter-clockwise germs); no swap is `pair_ii` at `x`, `x ± 60°` (both pseudo-colours are the change's two colours,
+`pseudo_ncard_le_two`), its two outcomes refuted by H directly and through `noBoth`. `g` is an equivalence `ℤ/3 ≃ (P_cl(p))ᶜ`
+(`Fintype.equivOfCardEq`).
+
+Children (`BaseWalk`, a section after `germ_sub_two_pi`, before `retArc_partner`; standard three): `germPseudo_cw_iff`, `germPseudo_ccw_iff` (a germ's
+pseudo-colour in interval form), `BaseCtx.exists_germPseudo` (both germs of every point of `ω(p)` carry one pseudo-colour: the non-singleton points are
+finite, `pseudo_finite`, and on an open arc of singleton points the pseudo-colour is constant — each colour's set is closed and the arc preconnected,
+`isPreconnected_iff_subset_of_disjoint_closed`). The periodicity lemmas of stage 23 (`germ_add_int_mul`, `ringPt_add_int_mul`, `germPseudo_add_int_mul`,
+`ringArc_add_int_mul`, `IsRetArc.add_int_mul`, `IsRetArc.exists_Ico`) moved from `BaseDense` to this section verbatim (their full names unchanged, so
+`scripts/Axioms.lean`'s records stand); `exists_pseudoCircle` itself moved down into the same section, statement and docstring unchanged, because its proof
+reads `germPseudo_unique` and `pseudo_ncard_ne_one_of_change`, declared after its old place. Nothing between its old and new place cites it.
+
+`row134BaseUA` now rests, of my set, on `reduce`, `select`, `l3_base` and `bv_hex` (with the planar job's `retArcs_nested`, `exists_endpoint`,
+`exists_eleventh`).
+
+**Statements unchanged** (checked by script, `tools/fs131_i5_stmt_check.py 6e38803d`: every declaration of `Cor3`, `BaseWalk`, `BaseDense`, `HexRing`,
+`Dense` at the as-given commit keeps its statement text, new declarations allowed; **PASS**; `--self-test`: three plants — a hypothesis loosened in
+`cor3_local`, a conclusion loosened in `l3_base`, a declaration renamed in `HexRing` — each **fired**, the unplanted control passed). The planar job's
+fence holds: `retArcs_nested`, `exists_endpoint`, `exists_eleventh`, `exists_unenclosed_or_bad` byte-identical to `6e38803d`; `Terminal` and `MapGraph`
+untouched.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 3 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T030125Z-824312.log`, "Build completed successfully (5369 jobs)"; driver log `data/fs131/i5f/build-stage24.log`). Wave
+5's sorry declarations: **28** (`Terminal` 9, `Dense` 1, `HexRing` 6, `MapGraph` 3, `BaseWalk` 6, `BaseDense` 3), **12 mine**. Axioms read from this
+build's oleans (`data/fs131/i5f/I5fAxioms24.lean` → `I5fAxioms24.out`): `exists_pseudoCircle`, `exists_germPseudo`, `germPseudo_cw_iff`,
+`germPseudo_ccw_iff`, `IsRetArc.exists_Ico`, `germ_add_int_mul`, `BaseCtx.removable`, `cor3_local` on the standard three; `row134BaseUA` with `sorryAx`
+(wired); controls `reduce` `sorryAx`, `linkage_dot_ne_zero` clean. `tools/check_architecture.py`: PASS. `scripts/Axioms.lean`: three records added to the
+"FS131-I5f" block.
+
+**What is left of my set (12), and where it stands** (for wave 5's next implementer on this half):
+- **On `row134BaseUA`'s path** (it is wired; these four of mine, with the planar job's three, are what it rests on):
+  - `CircleColouring.reduce` (**M–H**, circle-abstract). Construction: on each `θ` whose `e θ` lies in some closed span `e '' Icc q.1 q.2`, `q ∈ 𝓙`,
+    recolour by the outer colour of the longest such `q` (spans containing one point are nested, so the longest contains the others; choose it by
+    `Finset.exists_max_image` on `q.2 − q.1`, reading `e θ` so the choice is `2π`-periodic); `C′.S := C.S` minus the closed spans. The step CD § 2.4
+    step 5 reads as "the partners of `I₁` have one-colour pseudo-colours" is derivable from `Removable` alone (checked by hand here, one mind): if
+    `x ∈ (s, t)` and `y = x ± 60°` had `LeftVal y v`, `RightVal y w`, the partner clause at points near `y` off `S` (finitely many per period) gives
+    `v, w ∉ {a, c}`, so `v = w`, the third colour — a partner of an interior point is never a genuine change point. Then step 5's six cases go
+    through on `C`'s properness (CD's "mono–mono") and the partner clause; no-swap for `C′` is `C`'s off the spans, and inside a span's interior
+    `C′` is constant, which the partner clause makes proper.
+  - `CircleColouring.select` (**H**, circle-abstract): BASE-V § 1a.2–1a.3 over wave 3's `Lift` (KB's plan B2).
+  - `BaseCtx.l3_base` (**H**): BASE-V § 1b.3's linkage band on the two pseudo-colourings, now available from `exists_pseudoCircle` at both centres
+    (KB's plan D5); `linkage_dot_ne_zero`'s docstring is to be rewritten then (item 274 (b)).
+  - `bv_hex` (**H**, six children; `p17_ua` is wired over it).
+- **Off that path**: `rot_out`, `rot_in`, `hex_regular` (FS112-ROTHEX's own clauses; the walk uses `p17_ua`/`bv_hex`, not N2-ROT's table — KB's note
+  10.5 (1)); `bv_nd`, `bv_l3` (FS114-BV-HEX's; `bv_nd1` is wired over `bv_nd`, and `l3_base` replaces `bv_l3` in the walk).
+- **`exists_preBend`** (`n3_base`'s pre-bend): needs `bend_toward` (`sorry` on this branch, proved on `fs131-w4` by I4n) iterated over the finitely
+  many inert arcs centred in `B̄(u, 1)`, **and** a bend form that keeps `u` cubic trichromatic and `UnenclosedC u` — E4-BEND-UN's "each bend is induced
+  by a homeomorphism of the plane fixing `u`". `bend_toward`'s conclusion gives agreement off an `ε`-thickening of the arc, `RingArcsWithin` and
+  region inclusions, but no homeomorphism, and an inert arc of `ω(P)` may end at `u` (`|u − P| = 1`), where agreement off the thickening says
+  nothing about `u`'s sectors. So the leaf needs the strengthened-bend child KB's plan § 2.3 owes; a question for the planner (below).
+- **`cv_exists`**: over `exists_terminal` (`Terminal`, `sorry`) and `dense3`; but `exists_terminal`'s clause 3 lets a run end within `1` of an (R2)
+  arc point, which a map with no four-colour vertex may have, so the contradiction needs CVB § 1.4 items 3–6 (a stuck vertex centres no unit arc; the
+  chain runs on along one axis) — the `stuckAlong_of_run` / `cv_l0` cluster of `Terminal`. Best taken with or after the `Terminal` implementer.
+- **`disc1_local`** (`Dense`): FS112-DISC1 on a fragment — the nesting of tiles about `x` inside `B̄(x, 1)`, planar topology. The planar job's
+  `exists_unenclosed_or_bad` does not give it (its bad points may be repeated-colour points with two colours, and `Dense` is upstream of `BaseDense`);
+  a candidate for the planar lane.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 24 — SAVED

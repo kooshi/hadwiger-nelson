@@ -3317,6 +3317,9 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.exists_endpoint_third
 #print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.third_ne
 #print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.false
+#print axioms HadwigerNelson.Plane.ArcMap.germPseudo_cw_iff
+#print axioms HadwigerNelson.Plane.ArcMap.germPseudo_ccw_iff
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.exists_germPseudo
 
 /-! ## FS-131 wave 5 (job FS131-I5b) — wave 5's second implementer: Lemma 1's children, the holed fragment -/
 

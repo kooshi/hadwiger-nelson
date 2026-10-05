@@ -12,7 +12,7 @@ pre-bend keeps it (`exists_preBend`, E4-BEND-UN); `localDense` chooses its verte
 FS112-DISC1's, so `localDense`, `dense3` and `cv_exists` keep their statements.
 
 The walk's assembly (job FS131-I5f) is `BaseCtx.false`, with its glue before it: change points of a circle colouring (`mem_S_of_ne`), the
-`2π`-periodicity of germs and returning arcs (`IsRetArc.exists_Ico`), the removability of returning arcs (`BaseCtx.removable`), an endpoint's
+`2π`-periodicity of returning arcs (`IsRetArc.exists_Ico`, in `Plane/ValidMap/BaseWalk`), the removability of returning arcs (`BaseCtx.removable`), an endpoint's
 third colour (`BaseCtx.exists_endpoint_third`) and Lemma 4's distinctness (`BaseCtx.third_ne`).
 -/
 
@@ -43,55 +43,6 @@ end CircleColouring
 namespace ArcMap
 
 variable {F : ArcMap 6} {u : ℂ}
-
-/-- Germs read angles modulo `2π`. -/
-theorem germ_add_int_mul (p : ℂ) (θ : ℝ) (m : ℤ) (s : Side) (δ : ℝ) : germ p (θ + 2 * π * m) s δ = germ p θ s δ := by
-  unfold germ
-  congr 1
-  funext t
-  simp only [ringPt]
-  rw [show θ + 2 * π * m + s.sign * t = (θ + s.sign * t) + 2 * π * m by ring, e_add_int_mul]
-
-/-- Ring points read angles modulo `2π`. -/
-theorem ringPt_add_int_mul (p : ℂ) (θ : ℝ) (m : ℤ) : ringPt p (θ + 2 * π * m) = ringPt p θ := by
-  simp only [ringPt, e_add_int_mul]
-
-/-- A germ's pseudo-colour reads its angle modulo `2π`. -/
-theorem germPseudo_add_int_mul {k : ℕ} {F : ArcMap k} {p : ℂ} {θ : ℝ} (m : ℤ) {s : Side} {a : Fin k} :
-    F.GermPseudo p (θ + 2 * π * m) s a ↔ F.GermPseudo p θ s a := by
-  simp only [GermPseudo, GermIn, germ_add_int_mul]
-
-/-- Closed ring arcs read their angles modulo `2π`. -/
-theorem ringArc_add_int_mul (p : ℂ) (s t : ℝ) (m : ℤ) : ringArc p (s + 2 * π * m) (t + 2 * π * m) = ringArc p s t := by
-  ext z
-  constructor
-  · rintro ⟨θ, hθ, rfl⟩
-    refine ⟨θ - 2 * π * m, ⟨by linarith [hθ.1], by linarith [hθ.2]⟩, ?_⟩
-    rw [← ringPt_add_int_mul p (θ - 2 * π * m) m, sub_add_cancel]
-  · rintro ⟨θ, hθ, rfl⟩
-    exact ⟨θ + 2 * π * m, ⟨by linarith [hθ.1], by linarith [hθ.2]⟩, ringPt_add_int_mul p θ m⟩
-
-/-- Returning arcs read their angles modulo `2π`. -/
-theorem IsRetArc.add_int_mul {k : ℕ} {F : ArcMap k} {p : ℂ} {s t : ℝ} (h : F.IsRetArc p s t) (m : ℤ) :
-    F.IsRetArc p (s + 2 * π * m) (t + 2 * π * m) := by
-  obtain ⟨hst, hst', a, c, hac, h1, h2, h3, h4, T₁, T₂, hT₁, hT₂, K, hK, hsK, htK, hKsub⟩ := h
-  refine ⟨by linarith, by linarith, a, c, hac, (germPseudo_add_int_mul m).mpr h1, (germPseudo_add_int_mul m).mpr h2,
-    (germPseudo_add_int_mul m).mpr h3, (germPseudo_add_int_mul m).mpr h4, T₁, T₂, hT₁, hT₂, K, hK, ?_, ?_, hKsub⟩
-  · rw [ringPt_add_int_mul]; exact hsK
-  · rw [ringPt_add_int_mul]; exact htK
-
-/-- Every returning arc is a translate by a multiple of `2π` of one starting in `[0, 2π)`. -/
-theorem IsRetArc.exists_Ico {k : ℕ} {F : ArcMap k} {p : ℂ} {s t : ℝ} (h : F.IsRetArc p s t) :
-    ∃ m : ℤ, s + 2 * π * m ∈ Ico 0 (2 * π) ∧ F.IsRetArc p (s + 2 * π * m) (t + 2 * π * m) := by
-  have hπ := Real.pi_pos
-  refine ⟨-⌊s / (2 * π)⌋, ⟨?_, ?_⟩, h.add_int_mul _⟩
-  · have h1 := Int.floor_le (s / (2 * π))
-    have h2 : (⌊s / (2 * π)⌋ : ℝ) * (2 * π) ≤ s := by rwa [le_div_iff₀ (by positivity)] at h1
-    push_cast; nlinarith
-  · have h1 := Int.lt_floor_add_one (s / (2 * π))
-    have h2 : s < ((⌊s / (2 * π)⌋ : ℝ) + 1) * (2 * π) := by rwa [div_lt_iff₀ (by positivity)] at h1
-    push_cast; nlinarith
-
 
 /-- The pseudo-colouring's injection `g` of `ℤ/3` into the colours absent at `u` is onto them (three of each). -/
 theorem exists_eq_of_absent {k : ℕ} {F : ArcMap k} {u : ℂ} (hu : (F.coloursAt u).ncard = 3) (hk : Nat.card (Fin k) = 6)

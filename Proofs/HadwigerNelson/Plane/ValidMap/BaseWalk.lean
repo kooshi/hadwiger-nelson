@@ -271,16 +271,6 @@ theorem BaseCtx.pseudo_finite (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ closedBall
         · exact absurd hc' h
       · rintro rfl; exact ⟨Or.inl rfl, hc⟩
 
-/-- **The bridge**: the pseudo-colouring of `ω(p)`, through an injection `g` of `ℤ/3` onto the colours absent at `p`, is a wave-3
-`CircleColouring` whose one-sided values are the germs' pseudo-colours, whose change set holds only genuine changes, and which has no swap
-point. (i) is `pair_i` (`u₁ = u₂ = p`); no swap is `pair_ii` at `x`, `σx` (FS112-N3-II) with `noBoth`, H and `pseudo_ncard_le_two` (or
-`bv_nd1`); finiteness is `pseudo_finite`; local constancy at singletons is the closedness of `{z : a ∈ P_cl(z)}`. -/
-theorem BaseCtx.exists_pseudoCircle (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ closedBall u 1) (hp3 : F.IsCubicTrichromatic p) :
-    ∃ (C : CircleColouring) (g : ZMod 3 → Fin 6), Function.Injective g ∧ (∀ v, g v ∉ F.coloursAt p) ∧
-      (∀ θ v, C.LeftVal θ v ↔ F.GermPseudo p θ .cw (g v)) ∧ (∀ θ v, C.RightVal θ v ↔ F.GermPseudo p θ .ccw (g v)) ∧
-      (∀ θ ∈ C.S, ¬ ∃ v, C.LeftVal θ v ∧ C.RightVal θ v) ∧ ∀ x, ¬ C.IsSwap x := by
-  sorry
-
 /-! ## C — the planar core (Prop. 19(b), the reduction's arcs, the eleventh point) -/
 
 /-- A tile whose closure holds points inside and outside `B̄(y, 1)` holds a point at distance exactly `1` from `y`. -/
@@ -342,6 +332,334 @@ theorem germ_sub_two_pi (p : ℂ) (θ : ℝ) (s : Side) (δ : ℝ) : germ p (θ 
   simp only [ringPt]
   rw [show e (θ + s.sign * t - 2 * π) = e (θ + s.sign * t - 2 * π + 2 * π) from (e_add_two_pi _).symm]
   ring_nf
+
+/-! ## A, continued — the bridge to a circle colouring (after the germ lemmas it reads) -/
+
+/-- Germs read angles modulo `2π`. -/
+theorem germ_add_int_mul (p : ℂ) (θ : ℝ) (m : ℤ) (s : Side) (δ : ℝ) : germ p (θ + 2 * π * m) s δ = germ p θ s δ := by
+  unfold germ
+  congr 1
+  funext t
+  simp only [ringPt]
+  rw [show θ + 2 * π * m + s.sign * t = (θ + s.sign * t) + 2 * π * m by ring, e_add_int_mul]
+
+/-- Ring points read angles modulo `2π`. -/
+theorem ringPt_add_int_mul (p : ℂ) (θ : ℝ) (m : ℤ) : ringPt p (θ + 2 * π * m) = ringPt p θ := by
+  simp only [ringPt, e_add_int_mul]
+
+/-- A germ's pseudo-colour reads its angle modulo `2π`. -/
+theorem germPseudo_add_int_mul {k : ℕ} {F : ArcMap k} {p : ℂ} {θ : ℝ} (m : ℤ) {s : Side} {a : Fin k} :
+    F.GermPseudo p (θ + 2 * π * m) s a ↔ F.GermPseudo p θ s a := by
+  simp only [GermPseudo, GermIn, germ_add_int_mul]
+
+/-- Closed ring arcs read their angles modulo `2π`. -/
+theorem ringArc_add_int_mul (p : ℂ) (s t : ℝ) (m : ℤ) : ringArc p (s + 2 * π * m) (t + 2 * π * m) = ringArc p s t := by
+  ext z
+  constructor
+  · rintro ⟨θ, hθ, rfl⟩
+    refine ⟨θ - 2 * π * m, ⟨by linarith [hθ.1], by linarith [hθ.2]⟩, ?_⟩
+    rw [← ringPt_add_int_mul p (θ - 2 * π * m) m, sub_add_cancel]
+  · rintro ⟨θ, hθ, rfl⟩
+    exact ⟨θ + 2 * π * m, ⟨by linarith [hθ.1], by linarith [hθ.2]⟩, ringPt_add_int_mul p θ m⟩
+
+/-- Returning arcs read their angles modulo `2π`. -/
+theorem IsRetArc.add_int_mul {k : ℕ} {F : ArcMap k} {p : ℂ} {s t : ℝ} (h : F.IsRetArc p s t) (m : ℤ) :
+    F.IsRetArc p (s + 2 * π * m) (t + 2 * π * m) := by
+  obtain ⟨hst, hst', a, c, hac, h1, h2, h3, h4, T₁, T₂, hT₁, hT₂, K, hK, hsK, htK, hKsub⟩ := h
+  refine ⟨by linarith, by linarith, a, c, hac, (germPseudo_add_int_mul m).mpr h1, (germPseudo_add_int_mul m).mpr h2,
+    (germPseudo_add_int_mul m).mpr h3, (germPseudo_add_int_mul m).mpr h4, T₁, T₂, hT₁, hT₂, K, hK, ?_, ?_, hKsub⟩
+  · rw [ringPt_add_int_mul]; exact hsK
+  · rw [ringPt_add_int_mul]; exact htK
+
+/-- Every returning arc is a translate by a multiple of `2π` of one starting in `[0, 2π)`. -/
+theorem IsRetArc.exists_Ico {k : ℕ} {F : ArcMap k} {p : ℂ} {s t : ℝ} (h : F.IsRetArc p s t) :
+    ∃ m : ℤ, s + 2 * π * m ∈ Ico 0 (2 * π) ∧ F.IsRetArc p (s + 2 * π * m) (t + 2 * π * m) := by
+  have hπ := Real.pi_pos
+  refine ⟨-⌊s / (2 * π)⌋, ⟨?_, ?_⟩, h.add_int_mul _⟩
+  · have h1 := Int.floor_le (s / (2 * π))
+    have h2 : (⌊s / (2 * π)⌋ : ℝ) * (2 * π) ≤ s := by rwa [le_div_iff₀ (by positivity)] at h1
+    push_cast; nlinarith
+  · have h1 := Int.lt_floor_add_one (s / (2 * π))
+    have h2 : s < ((⌊s / (2 * π)⌋ : ℝ) + 1) * (2 * π) := by rwa [div_lt_iff₀ (by positivity)] at h1
+    push_cast; nlinarith
+
+
+/-- A germ's pseudo-colour, clockwise, in interval form. -/
+theorem germPseudo_cw_iff {k : ℕ} {F : ArcMap k} {p : ℂ} {θ : ℝ} {a : Fin k} :
+    F.GermPseudo p θ .cw a ↔ ∃ δ > 0, ∀ φ ∈ Ioo (θ - δ) θ, F.pseudoColours p (ringPt p φ) = {a} := by
+  constructor
+  · rintro ⟨δ, hδ, hsub⟩
+    refine ⟨δ, hδ, fun φ hφ => ?_⟩
+    have hm : ringPt p φ ∈ germ p θ .cw δ :=
+      ⟨θ - φ, ⟨by linarith [hφ.2], by linarith [hφ.1]⟩, by simp only [Side.sign]; ring_nf⟩
+    exact hsub hm
+  · rintro ⟨δ, hδ, h⟩
+    refine ⟨δ, hδ, ?_⟩
+    rintro _ ⟨t, ht, rfl⟩
+    have := h (θ + Side.cw.sign * t) ⟨by simp only [Side.sign]; linarith [ht.2], by simp only [Side.sign]; linarith [ht.1]⟩
+    exact this
+
+/-- A germ's pseudo-colour, counter-clockwise, in interval form. -/
+theorem germPseudo_ccw_iff {k : ℕ} {F : ArcMap k} {p : ℂ} {θ : ℝ} {a : Fin k} :
+    F.GermPseudo p θ .ccw a ↔ ∃ δ > 0, ∀ φ ∈ Ioo θ (θ + δ), F.pseudoColours p (ringPt p φ) = {a} := by
+  constructor
+  · rintro ⟨δ, hδ, hsub⟩
+    refine ⟨δ, hδ, fun φ hφ => ?_⟩
+    have hm : ringPt p φ ∈ germ p θ .ccw δ :=
+      ⟨φ - θ, ⟨by linarith [hφ.1], by linarith [hφ.2]⟩, by simp only [Side.sign]; ring_nf⟩
+    exact hsub hm
+  · rintro ⟨δ, hδ, h⟩
+    refine ⟨δ, hδ, ?_⟩
+    rintro _ ⟨t, ht, rfl⟩
+    have := h (θ + Side.ccw.sign * t) ⟨by simp only [Side.sign]; linarith [ht.1], by simp only [Side.sign]; linarith [ht.2]⟩
+    exact this
+
+/-- **Both germs at every point of `ω(p)` carry one pseudo-colour** (NB3 steps 3–5 together): the non-singleton points are finitely many
+(`pseudo_finite`), so near `r(θ)` on each side every point has a single pseudo-colour, and on that open arc it is one colour (each colour's
+set is closed, `coloursAt` reading closures, and the arc is connected). -/
+theorem BaseCtx.exists_germPseudo (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ closedBall u 1) (hp3 : F.IsCubicTrichromatic p) (θ : ℝ)
+    (s : Side) : ∃ a, F.GermPseudo p θ s a := by
+  have hπ := Real.pi_pos
+  -- the non-singleton points of `ω(p)` form a finite set `Z`
+  set Z : Set ℂ := ringPt p '' {θ | θ ∈ Ico 0 (2 * π) ∧ (F.pseudoColours p (ringPt p θ)).ncard ≠ 1} with hZ
+  have hZfin : Z.Finite := (B.pseudo_finite hp hp3).image _
+  have hmemZ : ∀ φ, (F.pseudoColours p (ringPt p φ)).ncard ≠ 1 → ringPt p φ ∈ Z := by
+    intro φ hφ
+    have hm : φ + 2 * π * ((-⌊φ / (2 * π)⌋ : ℤ) : ℝ) ∈ Ico 0 (2 * π) := by
+      constructor
+      · have h1 := Int.floor_le (φ / (2 * π))
+        have h2 : (⌊φ / (2 * π)⌋ : ℝ) * (2 * π) ≤ φ := by rwa [le_div_iff₀ (by positivity)] at h1
+        push_cast; nlinarith
+      · have h1 := Int.lt_floor_add_one (φ / (2 * π))
+        have h2 : φ < ((⌊φ / (2 * π)⌋ : ℝ) + 1) * (2 * π) := by rwa [div_lt_iff₀ (by positivity)] at h1
+        push_cast; nlinarith
+    refine ⟨_, ⟨hm, ?_⟩, ringPt_add_int_mul p φ _⟩
+    rwa [ringPt_add_int_mul]
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp (hZfin.sdiff (t := {ringPt p θ})).isClosed.isOpen_compl (ringPt p θ)
+    (fun h => h.2 rfl)
+  set δ := min ε π with hδ
+  have hδ0 : 0 < δ := lt_min hε hπ
+  -- near `θ`, off `θ`, every point is a singleton point
+  have hsing : ∀ φ, 0 < |φ - θ| → |φ - θ| < δ → (F.pseudoColours p (ringPt p φ)).ncard = 1 := by
+    intro φ h0 h1
+    by_contra hne
+    have hz := hmemZ φ hne
+    have hle : |φ - θ| ≤ π := h1.le.trans (min_le_right _ _)
+    have hd := dist_ringPt_ringPt p hle
+    have hne' : ringPt p φ ≠ ringPt p θ := by
+      intro heq
+      rw [heq, dist_self] at hd
+      have : 0 < Real.sin (|φ - θ| / 2) := Real.sin_pos_of_pos_of_lt_pi (by linarith) (by linarith)
+      linarith
+    have hlt : dist (ringPt p φ) (ringPt p θ) < ε := by
+      rw [hd]
+      have := Real.sin_le (by linarith : (0:ℝ) ≤ |φ - θ| / 2)
+      linarith [min_le_left ε π]
+    exact hball (mem_ball.mpr hlt) ⟨hz, hne'⟩
+  -- on an open arc of singleton points the pseudo-colour is constant
+  have hconst : ∀ J : Set ℝ, IsPreconnected J → (∀ φ ∈ J, (F.pseudoColours p (ringPt p φ)).ncard = 1) → ∀ φ₀ ∈ J,
+      ∃ a, ∀ φ ∈ J, F.pseudoColours p (ringPt p φ) = {a} := by
+    intro J hJ hJs φ₀ hφ₀
+    obtain ⟨a, ha⟩ := Set.ncard_eq_one.mp (hJs φ₀ hφ₀)
+    have hcont : Continuous (ringPt p) := by unfold ringPt e; fun_prop
+    have hcl : ∀ b : Fin 6, IsClosed {φ : ℝ | b ∈ F.coloursAt (ringPt p φ)} := fun b =>
+      isClosed_closure.preimage hcont
+    set U := {φ : ℝ | a ∈ F.coloursAt (ringPt p φ)}
+    set V := ⋃ b ∈ ({b | b ≠ a ∧ b ∉ F.coloursAt p} : Set (Fin 6)), {φ : ℝ | b ∈ F.coloursAt (ringPt p φ)}
+    have hV : IsClosed V := (Set.toFinite _).isClosed_biUnion fun b _ => hcl b
+    have haP : ∀ φ, F.pseudoColours p (ringPt p φ) = {a} → a ∈ F.coloursAt (ringPt p φ) := fun φ h =>
+      (show a ∈ F.pseudoColours p (ringPt p φ) by rw [h]; exact mem_singleton a).1
+    have hau : a ∉ F.coloursAt p := (show a ∈ F.pseudoColours p (ringPt p φ₀) by rw [ha]; exact mem_singleton a).2
+    have hcover : J ⊆ U ∪ V := by
+      intro φ hφ
+      obtain ⟨b, hb⟩ := Set.ncard_eq_one.mp (hJs φ hφ)
+      have hbm : b ∈ F.pseudoColours p (ringPt p φ) := by rw [hb]; exact mem_singleton b
+      by_cases hba : b = a
+      · left; show a ∈ F.coloursAt (ringPt p φ); exact hba ▸ hbm.1
+      · right; exact mem_iUnion₂.mpr ⟨b, ⟨hba, hbm.2⟩, hbm.1⟩
+    have hdisj : J ∩ (U ∩ V) = ∅ := by
+      ext φ
+      simp only [mem_inter_iff, mem_empty_iff_false, iff_false, not_and]
+      intro hφ hφU hφV
+      obtain ⟨b, ⟨hba, hbp⟩, hb⟩ := mem_iUnion₂.mp hφV
+      obtain ⟨c, hc⟩ := Set.ncard_eq_one.mp (hJs φ hφ)
+      have h1 : a ∈ F.pseudoColours p (ringPt p φ) := ⟨hφU, hau⟩
+      have h2 : b ∈ F.pseudoColours p (ringPt p φ) := ⟨hb, hbp⟩
+      rw [hc] at h1 h2
+      exact hba ((mem_singleton_iff.mp h2).trans (mem_singleton_iff.mp h1).symm)
+    rcases isPreconnected_iff_subset_of_disjoint_closed.mp hJ U V (hcl a) hV hcover hdisj with hU | hV'
+    · refine ⟨a, fun φ hφ => ?_⟩
+      obtain ⟨b, hb⟩ := Set.ncard_eq_one.mp (hJs φ hφ)
+      have : a ∈ F.pseudoColours p (ringPt p φ) := ⟨hU hφ, hau⟩
+      rw [hb] at this ⊢
+      rw [mem_singleton_iff.mp this]
+    · exfalso
+      obtain ⟨b, ⟨hba, hbp⟩, hb⟩ := mem_iUnion₂.mp (hV' hφ₀)
+      have : b ∈ F.pseudoColours p (ringPt p φ₀) := ⟨hb, hbp⟩
+      rw [ha] at this
+      exact hba (mem_singleton_iff.mp this)
+  cases s with
+  | cw =>
+    obtain ⟨a, ha⟩ := hconst (Ioo (θ - δ) θ) isPreconnected_Ioo (fun φ hφ => hsing φ
+      (by rw [abs_of_neg (by linarith [hφ.2])]; linarith [hφ.2]) (by rw [abs_of_neg (by linarith [hφ.2])]; linarith [hφ.1]))
+      (θ - δ / 2) ⟨by linarith, by linarith⟩
+    exact ⟨a, germPseudo_cw_iff.mpr ⟨δ, hδ0, ha⟩⟩
+  | ccw =>
+    obtain ⟨a, ha⟩ := hconst (Ioo θ (θ + δ)) isPreconnected_Ioo (fun φ hφ => hsing φ
+      (by rw [abs_of_pos (by linarith [hφ.1])]; linarith [hφ.1]) (by rw [abs_of_pos (by linarith [hφ.1])]; linarith [hφ.2]))
+      (θ + δ / 2) ⟨by linarith, by linarith⟩
+    exact ⟨a, germPseudo_ccw_iff.mpr ⟨δ, hδ0, ha⟩⟩
+
+/-- **The bridge**: the pseudo-colouring of `ω(p)`, through an injection `g` of `ℤ/3` onto the colours absent at `p`, is a wave-3
+`CircleColouring` whose one-sided values are the germs' pseudo-colours, whose change set holds only genuine changes, and which has no swap
+point. (i) is `pair_i` (`u₁ = u₂ = p`); no swap is `pair_ii` at `x`, `σx` (FS112-N3-II) with `noBoth`, H and `pseudo_ncard_le_two` (or
+`bv_nd1`); finiteness is `pseudo_finite`; local constancy at singletons is the closedness of `{z : a ∈ P_cl(z)}`. -/
+theorem BaseCtx.exists_pseudoCircle (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ closedBall u 1) (hp3 : F.IsCubicTrichromatic p) :
+    ∃ (C : CircleColouring) (g : ZMod 3 → Fin 6), Function.Injective g ∧ (∀ v, g v ∉ F.coloursAt p) ∧
+      (∀ θ v, C.LeftVal θ v ↔ F.GermPseudo p θ .cw (g v)) ∧ (∀ θ v, C.RightVal θ v ↔ F.GermPseudo p θ .ccw (g v)) ∧
+      (∀ θ ∈ C.S, ¬ ∃ v, C.LeftVal θ v ∧ C.RightVal θ v) ∧ ∀ x, ¬ C.IsSwap x := by
+  classical
+  have hπ := Real.pi_pos
+  have hpu : dist p u ≤ 1 := hp
+  have hcov : F.Covers p 1 := fun z hz =>
+    B.covers (show z ∈ closedBall u 2 by rw [mem_closedBall] at hz ⊢; linarith [dist_triangle z p u])
+  have hring2 : ∀ φ, ringPt p φ ∈ closedBall u 2 := fun φ => by
+    rw [mem_closedBall]; linarith [dist_triangle (ringPt p φ) p u, dist_ringPt p φ]
+  -- `g`: `ℤ/3` onto the three colours absent at `p`
+  have hcard : Fintype.card (ZMod 3) = Fintype.card ↥(F.coloursAt p)ᶜ := by
+    rw [ZMod.card, ← Set.toFinset_card, ← Set.ncard_eq_toFinset_card', Set.ncard_compl, Nat.card_eq_fintype_card,
+      Fintype.card_fin, hp3.2]
+  obtain ⟨eqv, -⟩ : ∃ eqv : ZMod 3 ≃ ↥(F.coloursAt p)ᶜ, True := ⟨Fintype.equivOfCardEq hcard, trivial⟩
+  obtain ⟨g, hgdef⟩ : ∃ g : ZMod 3 → Fin 6, g = fun v => (eqv v : Fin 6) := ⟨_, rfl⟩
+  have hg : Function.Injective g := fun v w h => eqv.injective (Subtype.ext (by rw [hgdef] at h; exact h))
+  have hgu : ∀ v, g v ∉ F.coloursAt p := fun v => by rw [hgdef]; exact (eqv v).2
+  have hgon : ∀ j, j ∉ F.coloursAt p → ∃ v, g v = j := fun j hj => ⟨eqv.symm ⟨j, hj⟩, by rw [hgdef]; simp⟩
+  set P : ℝ → Set (Fin 6) := fun φ => F.pseudoColours p (ringPt p φ) with hP
+  have hgerm : ∀ θ s, ∃ v, F.GermPseudo p θ s (g v) := by
+    intro θ s
+    obtain ⟨a, ha⟩ := B.exists_germPseudo hp hp3 θ s
+    obtain ⟨v, rfl⟩ := hgon a ha.mem_pseudoColours.2
+    exact ⟨v, ha⟩
+  have huniq : ∀ {θ : ℝ} {s : Side} {v w : ZMod 3}, F.GermPseudo p θ s (g v) → F.GermPseudo p θ s (g w) → v = w :=
+    fun h h' => hg (germPseudo_unique h h')
+  -- the colouring: the clockwise germ's colour
+  choose c hc using fun θ => hgerm θ .cw
+  have hL0 : ∀ θ δ v, (∀ φ ∈ Ioo (θ - δ) θ, P φ = {g v}) → ∀ φ ∈ Ioo (θ - δ) θ, c φ = v := by
+    intro θ δ v h φ hφ
+    refine huniq (hc φ) (germPseudo_cw_iff.mpr ⟨φ - (θ - δ), by linarith [hφ.1], fun ψ hψ => h ψ ⟨?_, ?_⟩⟩)
+    · linarith [hψ.1]
+    · linarith [hψ.2, hφ.2]
+  have hR0 : ∀ θ δ v, (∀ φ ∈ Ioo θ (θ + δ), P φ = {g v}) → ∀ φ ∈ Ioo θ (θ + δ), c φ = v := by
+    intro θ δ v h φ hφ
+    refine huniq (hc φ) (germPseudo_cw_iff.mpr ⟨φ - θ, by linarith [hφ.1], fun ψ hψ => h ψ ⟨?_, ?_⟩⟩)
+    · linarith [hψ.1]
+    · linarith [hψ.2, hφ.2]
+  have hshift : ∀ θ s a, F.GermPseudo p (θ + 2 * π) s a ↔ F.GermPseudo p θ s a := fun θ s a => by
+    rw [show θ + 2 * π = θ + 2 * π * ((1 : ℤ) : ℝ) by push_cast; ring]; exact germPseudo_add_int_mul 1
+  set S : Set ℝ := {θ | ¬ ∃ v, F.GermPseudo p θ .cw (g v) ∧ F.GermPseudo p θ .ccw (g v)} with hS
+  have hLeft : ∀ θ v, (∀ᶠ φ in 𝓝[<] θ, c φ = v) ↔ F.GermPseudo p θ .cw (g v) := by
+    intro θ v
+    constructor
+    · intro h
+      obtain ⟨w, hw⟩ := hgerm θ .cw
+      obtain ⟨δ, hδ, hδP⟩ := germPseudo_cw_iff.mp hw
+      have h2 : ∀ᶠ φ in 𝓝[<] θ, c φ = w :=
+        Filter.mem_of_superset (Ioo_mem_nhdsLT (by linarith : θ - δ < θ)) fun φ hφ => hL0 θ δ w hδP φ hφ
+      obtain ⟨φ, h1, h2⟩ := (h.and h2).exists
+      rw [← h1.symm.trans h2] at hw
+      exact hw
+    · intro h
+      obtain ⟨δ, hδ, hδP⟩ := germPseudo_cw_iff.mp h
+      exact Filter.mem_of_superset (Ioo_mem_nhdsLT (by linarith : θ - δ < θ)) fun φ hφ => hL0 θ δ v hδP φ hφ
+  have hRight : ∀ θ v, (∀ᶠ φ in 𝓝[>] θ, c φ = v) ↔ F.GermPseudo p θ .ccw (g v) := by
+    intro θ v
+    constructor
+    · intro h
+      obtain ⟨w, hw⟩ := hgerm θ .ccw
+      obtain ⟨δ, hδ, hδP⟩ := germPseudo_ccw_iff.mp hw
+      have h2 : ∀ᶠ φ in 𝓝[>] θ, c φ = w :=
+        Filter.mem_of_superset (Ioo_mem_nhdsGT (by linarith : θ < θ + δ)) fun φ hφ => hR0 θ δ w hδP φ hφ
+      obtain ⟨φ, h1, h2⟩ := (h.and h2).exists
+      rw [← h1.symm.trans h2] at hw
+      exact hw
+    · intro h
+      obtain ⟨δ, hδ, hδP⟩ := germPseudo_ccw_iff.mp h
+      exact Filter.mem_of_superset (Ioo_mem_nhdsGT (by linarith : θ < θ + δ)) fun φ hφ => hR0 θ δ v hδP φ hφ
+  -- the two-element pseudo-colour at a change point
+  have hpair2 : ∀ φ (a b : ZMod 3), a ≠ b → F.GermPseudo p φ .cw (g a) → F.GermPseudo p φ .ccw (g b) →
+      P φ = {g a, g b} := by
+    intro φ a b hab ha hb
+    have hsub : ({g a, g b} : Set (Fin 6)) ⊆ P φ :=
+      insert_subset ha.mem_pseudoColours (singleton_subset_iff.mpr hb.mem_pseudoColours)
+    refine (Set.eq_of_subset_of_ncard_le hsub ?_).symm
+    rw [Set.ncard_pair (hg.ne hab)]
+    exact B.pseudo_ncard_le_two hp hp3 (dist_ringPt p φ)
+  have hd60 : ∀ φ ψ, |φ - ψ| = π / 3 → dist (ringPt p φ) (ringPt p ψ) = 1 := fun φ ψ h =>
+    ((dist_ringPt_ringPt_cmp_one p (by rw [h]; linarith)).1).mpr h
+  refine ⟨⟨c, S, fun θ => ?_, fun θ => ?_, ?_, ?_, ?_⟩, g, hg, hgu, hLeft, hRight, ?_, ?_⟩
+  · -- periodic
+    exact huniq ((hshift θ .cw _).mp (hc (θ + 2 * π))) (hc θ)
+  · -- periodic change set
+    simp only [hS, mem_setOf_eq, hshift]
+  · -- finitely many change points per period
+    refine (B.pseudo_finite hp hp3).subset ?_
+    rintro θ ⟨hθS, hθI⟩
+    refine ⟨hθI, ?_⟩
+    obtain ⟨v, hv⟩ := hgerm θ .cw
+    obtain ⟨w, hw⟩ := hgerm θ .ccw
+    have hvw : v ≠ w := fun h => hθS ⟨v, hv, h ▸ hw⟩
+    exact pseudo_ncard_ne_one_of_change (hg.ne hvw) hv hw
+  · -- locally constant off the change set
+    intro θ hθ
+    simp only [hS, mem_setOf_eq, not_not] at hθ
+    obtain ⟨v, hv, hv'⟩ := hθ
+    obtain ⟨δ₁, hδ₁, h₁⟩ := germPseudo_cw_iff.mp hv
+    obtain ⟨δ₂, hδ₂, h₂⟩ := germPseudo_ccw_iff.mp hv'
+    have hcθ : c θ = v := huniq (hc θ) hv
+    filter_upwards [Ioo_mem_nhds (by linarith [lt_min hδ₁ hδ₂] : θ - min δ₁ δ₂ < θ) (by linarith [lt_min hδ₁ hδ₂] : θ < θ + min δ₁ δ₂)]
+      with φ hφ
+    rw [hcθ]
+    rcases lt_trichotomy φ θ with h | rfl | h
+    · exact hL0 θ δ₁ v h₁ φ ⟨by linarith [hφ.1, min_le_left δ₁ δ₂], h⟩
+    · exact hcθ
+    · exact hR0 θ δ₂ v h₂ φ ⟨h, by linarith [hφ.2, min_le_right δ₁ δ₂]⟩
+  · -- proper at `60°`: FS112-N3-PAIRS (i)
+    intro θ hθ hθ' hcc
+    simp only [hS, mem_setOf_eq, not_not] at hθ hθ'
+    obtain ⟨v, hv, hv'⟩ := hθ
+    obtain ⟨w, hw, hw'⟩ := hθ'
+    have hvw : v = w := by rw [← huniq (hc θ) hv, ← huniq (hc (θ + π / 3)) hw]; exact hcc
+    subst hvw
+    obtain ⟨δ₁, hδ₁, h₁⟩ := germPseudo_ccw_iff.mp hv'
+    obtain ⟨δ₂, hδ₂, h₂⟩ := germPseudo_ccw_iff.mp hw'
+    set φ := θ + min δ₁ δ₂ / 2 with hφ
+    have hm := lt_min hδ₁ hδ₂
+    exact pair_i B.valid hp3 hp3 hcov hcov (by rw [dist_self]; norm_num) (dist_ringPt p φ) (dist_ringPt p (φ + π / 3))
+      (hd60 φ (φ + π / 3) (by rw [show φ - (φ + π / 3) = -(π / 3) by ring, abs_neg, abs_of_pos (by positivity)]))
+      (h₁ φ ⟨by linarith, by linarith [min_le_left δ₁ δ₂]⟩)
+      (h₂ (φ + π / 3) ⟨by linarith, by linarith [min_le_right δ₁ δ₂]⟩)
+  · -- the change set holds only genuine changes
+    intro θ hθ ⟨v, h1, h2⟩
+    exact hθ ⟨v, (hLeft θ v).mp h1, (hRight θ v).mp h2⟩
+  · -- no swap point: FS112-N3-PAIRS (ii), with NOBOTH and H
+    rintro x ⟨hxS, a, b, ha, hb, hy⟩
+    have hab : a ≠ b := fun h => hxS ⟨a, (hLeft x a).mp ha, h ▸ (hRight x b).mp hb⟩
+    have hPx := hpair2 x a b hab ((hLeft x a).mp ha) ((hRight x b).mp hb)
+    have hfin : ∀ y, |x - y| = π / 3 → (∀ᶠ φ in 𝓝[<] y, c φ = b) → (∀ᶠ φ in 𝓝[>] y, c φ = a) → False := by
+      intro y hxy hyb hya
+      have hPy := hpair2 y b a hab.symm ((hLeft y b).mp hyb) ((hRight y a).mp hya)
+      rw [Set.pair_comm] at hPy
+      have htr : ringPt p y ≠ p ∧ dist (ringPt p y) p ≠ 2 := ⟨fun h => by
+        have := dist_ringPt p y; rw [h, dist_self] at this; norm_num at this, by rw [dist_ringPt]; norm_num⟩
+      rcases pair_ii B.valid hp3 hp3 hcov hcov (dist_ringPt p x) (dist_ringPt p y) (hd60 x y hxy) htr (hg.ne hab) hPx hPy
+        with h4 | hboth
+      · exact Set.disjoint_left.mp B.hyp (hring2 x) (Or.inl ⟨B.covers (hring2 x), h4⟩)
+      · obtain ⟨θ₁, θ₂, hb'⟩ := hboth
+        exact Set.disjoint_left.mp B.hyp (hring2 y) (noBoth B.valid (B.covers (hring2 y)) hb' |>.elim
+          (fun h => Or.inl ⟨B.covers (hring2 y), h⟩) (fun h => Or.inr ⟨B.covers (hring2 y), h⟩))
+    rcases hy with ⟨h1, h2⟩ | ⟨h1, h2⟩
+    · exact hfin (x + π / 3) (by rw [show x - (x + π / 3) = -(π / 3) by ring, abs_neg, abs_of_pos (by positivity)]) h1 h2
+    · exact hfin (x - π / 3) (by rw [show x - (x - π / 3) = π / 3 by ring, abs_of_pos (by positivity)]) h1 h2
 
 /-- **The returning arcs are removable** (FS110-CD Lemma R step 3): for `x` inside a returning arc and `y = r(x ± 60°)`, `ω(y)` crosses `ω(u)`
 only at `x` within the arc, so it separates its ends; the `a`-tile and the `c`-tile, connected with both ends in their closures (through `K`),
