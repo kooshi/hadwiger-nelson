@@ -3221,6 +3221,20 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_exists_ray
 #print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_isRegularAt
 #print axioms HadwigerNelson.Plane.ArcMap.finite_frontier_fill_nonRegular
+#print axioms HadwigerNelson.Plane.ArcMap.BasedTrail.append
+#print axioms HadwigerNelson.Plane.ArcMap.BasedTrail.exists_start
+#print axioms HadwigerNelson.Plane.ArcMap.BasedTrail.insert
+#print axioms HadwigerNelson.Plane.ArcMap.exists_vertex_involution
+#print axioms HadwigerNelson.Plane.ArcMap.minimalPeriod_perm_pos
+#print axioms HadwigerNelson.Plane.ArcMap.pow_minimalPeriod_apply
+#print axioms HadwigerNelson.Plane.ArcMap.mem_orbList
+#print axioms HadwigerNelson.Plane.ArcMap.nodup_orbList
+#print axioms HadwigerNelson.Plane.ArcMap.orbList_closed
+#print axioms HadwigerNelson.Plane.ArcMap.pow_mem_of_closed
+#print axioms HadwigerNelson.Plane.ArcMap.basedTrail_orbList
+#print axioms HadwigerNelson.Plane.ArcMap.pow_sigma_pow
+#print axioms HadwigerNelson.Plane.ArcMap.sigma_ne_pow
+#print axioms HadwigerNelson.Plane.ArcMap.exists_euler
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 

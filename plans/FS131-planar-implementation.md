@@ -110,6 +110,11 @@ Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plan
   off them `∂ cl x̂` is regular; `ArcMap.IsSectorChart.eq_two_of_isRegularAt`
 - children: `ArcMap.IsTile.subset_fill_or_subset_compl`, `ArcMap.IsTile.isOpen_fill`, `ArcMap.IsSectorChart.exists_tile_superset`, `ArcMap.IsSectorChart.near_branch`,
   `ArcMap.IsSectorChart.gamma_inter_ball`, `ArcMap.branchPt_ne_of_ne`, `ArcMap.hasCurveStar_of_branches_finset`, `ArcMap.even_card_filter_ne_next`
+- **C6/C8** (stage-22 build `build/gate/build/20261005T063441Z-2002748.log`, receipt `data/fs131/rw/axioms-rw1b.txt`): `ArcMap.exists_euler` — an Euler
+  circuit of any port structure (two fixed-point-free involutions, connected through shared vertices); `ArcMap.sigma_ne_pow` — no orbit of `πA σ` holds a
+  port with its partner; `ArcMap.exists_vertex_involution`; `ArcMap.BasedTrail.insert`, `.append`, `.exists_start`; `ArcMap.basedTrail_orbList`,
+  `ArcMap.nodup_orbList`, `ArcMap.orbList_closed`, `ArcMap.mem_orbList`, `ArcMap.pow_sigma_pow`, `ArcMap.minimalPeriod_perm_pos`, `ArcMap.pow_minimalPeriod_apply`,
+  `ArcMap.pow_mem_of_closed`
 
 IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
@@ -1134,3 +1139,64 @@ C6/C8's pure combinatorics is begun in `data/fs131/rw/EulerScratch.lean` (import
 trail based at a point), `.append`, `.exists_start`, `.insert` (the insertion lemma, with membership and `Nodup`), and
 `exists_vertex_involution` (a vertex-preserving fixed-point-free pairing from even fibres). Left there: the orbit lists of `φ = πA ∘ σ`, the
 dihedral lemma, the merge induction. It moves into `MapGraph` when finished.
+
+## Stage 22 — SAVED (FS131-RW1): WALK's C6/C8 proved — the Euler circuit of the port structure, pure
+
+### 22.1 Proved (`MapGraph` § "WALK's C6/C8, pure", namespace `ArcMap`, over any finite type of ports)
+
+- **`exists_euler`** — with `σ` (other end of each edge) and `πA` (a pairing of the ports at each vertex) fixed-point-free involutions, and
+  the edges connected through shared vertices (`hconn`: every `σ`-closed nonempty proper set of ports shares a vertex with its complement),
+  some closed trail based at `vtx a₀` lists every port or its partner, never both, no port twice. Model of all its hypotheses at once: one
+  loop edge on `Fin 2` (the example after it).
+- **`sigma_ne_pow`** (the dihedral lemma): `σ d ≠ (πA σ)ⁿ d` — RL1's "never self-paired", with no geometry; `pow_sigma_pow` (`φᵏ (σ (φᵏ b)) = σ b`).
+- **`exists_vertex_involution`** — a vertex-preserving fixed-point-free involution exists when every vertex has evenly many ports (C3's parity).
+- `BasedTrail` (def: a closed trail based at a point; `IsChain` with head and last at the point), `BasedTrail.append`, `.exists_start`,
+  **`.insert`** (a trail based at an entry's start goes in before that entry — the one insertion lemma, used for orbits and for vertex-only
+  neighbours); `orbList` (def; spec example: it holds its start), `basedTrail_orbList`, `nodup_orbList`, `orbList_closed`, `mem_orbList`,
+  `minimalPeriod_perm_pos`, `pow_minimalPeriod_apply`, `pow_mem_of_closed`.
+
+Measured: about 20 minutes, about 300 lines, every lemma at most two attempts. (Developed in `data/fs131/rw/EulerScratch.lean`, then moved
+here verbatim; the scratch file is removed.)
+
+### 22.2 What is left of WALK, named, with the route (for the next session)
+
+- **C5a `port_arc`** (`CurveGraph`, beside the handshake; `port_pair` re-proved through it, its statement unchanged): `port_pair`'s
+  hypotheses give `γ, a < b`, `γ` continuous and injective on `[a, b]`, the component of `C'` through `p` equal to `γ '' [a, b]`, `γ a = p`,
+  `γ b` the partner. (`port_pair`'s proof already holds `γ` and `J = [a, b]`; in the case `γ b = p`, reverse `γ`.)
+- **C5b the port structure of `C = ∂ cl x̂`**: `V` = (`finite_frontier_fill_nonRegular`).toFinset ∪ {a point of `C`}; stars from
+  `frontier_fill_hasCurveStar` (`choose!`); `ρ`, ports and `σ` exactly as in `even_sum_deg`'s proof with `port_arc`; regularity off `V` from
+  `frontier_fill_isRegularAt`; every vertex has a port (`frontier_fill_exists_ray`), and evenly many.
+- **C5c the edges**: `R_d = closure (ray_d '' (0, ρ))`, with `w ∈ R_d, w ≠ v ⇒ w = ray_d ‖w − v‖` (sequential continuity at `‖w − v‖ ∈ (0, ρ]`);
+  `E_d = R_d ∪ Q_d ∪ R_{σ d}`; two distinct edges meet only in `V`; every point of `C` lies on an edge (a component of `C'` with no port is
+  open in `C` — `C` is locally connected, `frontier_fill_inter_ball` — and closed, against C2); the outer tile is constant along `E_d` minus its
+  ends (clopen there: at a non-vertex point a chart has two germs, `x` on one side).
+- **C5d `IsEdgeOf`** for `E_d` from `vtx d` to `vtx (σ d)`: pure point `γ((a+b)/2)`; radius below the chart radius there, below the distance to
+  the other edges and to `R_d ∪ R_{σ d} ∪ γ''([a, c−δ] ∪ [c+δ, b])`; `I = {t ∈ [a, b] | γ t ∈ ball}` is an interval (else `γ''[a, t]`, `γ''[t, b]`
+  split the preconnected `C ∩ ball`), `I = (c₁, c₂)`, `E₁ = R_d ∪ γ''[a, c₁]`, `E₂ = γ''[c₂, b] ∪ R_{σ d}`; the circle points and the
+  interleaving from the two-germ chart at the pure point (two cases: which branch `γ c₁` is); the sphere slices of `x` and of the tile are the
+  sectors' angle intervals at that radius.
+- **C7** `hconn` for the ports: a `σ`-closed set and its complement sharing no vertex give disjoint closed unions of edges covering `C`, against
+  C2.
+- **C10** the assembly: entries = the edges of `exists_euler`'s list, then each neighbour with no edge (it touches `C` only at vertices)
+  inserted once by `BasedTrail.insert`; the fields from `isChain_iff_getElem` and the closing condition (`rep`: only edge tiles repeat;
+  `apart`: each edge once; `mem`: ADJ and the coverage of `C`).
+
+Re-price of what is left: C5a 0.1, C5b–C5c 0.3–0.4, C5d 0.3, C7 0.05, C10 0.2 — **about 1 session**.
+
+### 22.3 The stage-22 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 19 s, `Proofs` 1.7 s), 9 modules with
+warnings, every warning `declaration uses 'sorry'`; `MapGraph`'s two `sorry` declarations are `IsBoundaryWalk.sep` (l. 1430, SEP's lane) and
+`exists_boundaryWalk` (l. 2265)** (`build/gate/build/20261005T063441Z-2002748.log`; driver log `data/fs131/rw/build-s22.log`; grep for
+`warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe line).
+
+Axioms against that build's oleans: `data/fs131/rw/AxiomsRW1b.lean` → `data/fs131/rw/axioms-rw1b.txt`, checked by `tools/fs131_ip_axioms.py`
+against `data/fs131/rw/axioms-rw1b-clean.txt` / `axioms-rw1b-sorry.txt`: **`OK: 33 clean on the standard three, 3 controls on sorryAx`**
+(`IsBoundaryWalk.sep`, `exists_boundaryWalk`, `filledGraph_ringList`); planted fault (`filledGraph_ringList` listed as clean) →
+`NOT CLEAN [… 'sorryAx']`, exit 1. `scripts/Axioms.lean`'s FS131-KP block gains the 14 new theorems under "-- FS131-RW1's children". No import
+changed, no module added. No `axiom`, no `native_decide`.
+
+### 22.4 Hand-back
+
+By the session's counter about 460k, past the brief's 400k guidance and under its 500k line: I hand back here, at a saved stage. Proved and
+left: § 22.1 and § 22.2. `IsBoundaryWalk` and `IsEdgeOf` are unchanged.

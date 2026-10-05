@@ -1440,6 +1440,317 @@ theorem IsBoundaryWalk.isRing {x : {T : Set ℂ // F.IsOuterTile T}} {r : List {
     Thomassen.IsRing F.filledGraph x r :=
   ⟨h.mem, h.cons, h.sep⟩
 
+/-! ### WALK's C6/C8, pure (FS131-RW1): an Euler circuit of the port structure -/
+
+section Euler
+
+variable {α β : Type*}
+
+
+/-- A closed trail based at `v`: consecutive entries chain (`en a = st b`), the first starts and the last ends at `v`. -/
+def BasedTrail (st en : α → β) (v : β) (L : List α) : Prop :=
+  ∃ h : L ≠ [], L.IsChain (fun a b => en a = st b) ∧ st (L.head h) = v ∧ en (L.getLast h) = v
+
+/-- Two closed trails based at one point concatenate. -/
+theorem BasedTrail.append {st en : α → β} {v : β} {A B : List α} (hA : BasedTrail st en v A) (hB : BasedTrail st en v B) :
+    BasedTrail st en v (A ++ B) := by
+  obtain ⟨hA0, hAc, hAh, hAl⟩ := hA
+  obtain ⟨hB0, hBc, hBh, hBl⟩ := hB
+  refine ⟨by simp [hA0], hAc.append hBc ?_, ?_, ?_⟩
+  · intro x hx y hy
+    rw [List.getLast?_eq_some_getLast hA0, Option.mem_def, Option.some_inj] at hx
+    rw [List.head?_eq_some_head hB0, Option.mem_def, Option.some_inj] at hy
+    rw [← hx, ← hy, hAl, hBh]
+  · rw [List.head_append_of_ne_nil hA0]; exact hAh
+  · rw [List.getLast_append_of_ne_nil _ hB0]; exact hBl
+
+/-- Each entry's end is some entry's start. -/
+theorem BasedTrail.exists_start {st en : α → β} {v : β} {L : List α} (hL : BasedTrail st en v L) {e : α} (he : e ∈ L) :
+    ∃ e' ∈ L, st e' = en e := by
+  obtain ⟨hL0, hLc, hLh, hLl⟩ := hL
+  obtain ⟨A, B, rfl⟩ := List.append_of_mem he
+  rcases B with _ | ⟨b, B⟩
+  · refine ⟨(A ++ [e]).head hL0, List.head_mem _, ?_⟩
+    rw [hLh, ← hLl, List.getLast_append_of_ne_nil _ (by simp)]; rfl
+  · refine ⟨b, by simp, ?_⟩
+    have h := (List.isChain_append.mp hLc).2.1
+    exact ((List.isChain_cons_cons.mp h).1).symm
+
+/-- **Insertion**: a closed trail based at the start of one of a trail's entries goes in before that entry. -/
+theorem BasedTrail.insert {st en : α → β} {v : β} {L : List α} (hL : BasedTrail st en v L) {e : α} (he : e ∈ L) {O : List α}
+    (hO : BasedTrail st en (st e) O) :
+    ∃ L', BasedTrail st en v L' ∧ (∀ a, a ∈ L' ↔ a ∈ L ∨ a ∈ O) ∧ (L.Nodup → O.Nodup → (∀ a ∈ O, a ∉ L) → L'.Nodup) := by
+  obtain ⟨hL0, hLc, hLh, hLl⟩ := hL
+  obtain ⟨hO0, hOc, hOh, hOl⟩ := hO
+  obtain ⟨A, B, rfl⟩ := List.append_of_mem he
+  have hAeB := List.isChain_append.mp hLc
+  have heB : (e :: B).IsChain (fun a b => en a = st b) := hAeB.2.1
+  have hOeB : (O ++ e :: B).IsChain (fun a b => en a = st b) := by
+    refine hOc.append heB fun x hx y hy => ?_
+    rw [List.getLast?_eq_some_getLast hO0, Option.mem_def, Option.some_inj] at hx
+    simp only [List.head?_cons, Option.mem_def, Option.some_inj] at hy
+    rw [← hx, ← hy, hOl]
+  refine ⟨A ++ (O ++ e :: B), ⟨by simp, hAeB.1.append hOeB fun x hx y hy => ?_, ?_, ?_⟩, fun a => ?_, fun hn hOn hdis => ?_⟩
+  · rw [List.head?_append_of_ne_nil _ hO0, List.head?_eq_some_head hO0, Option.mem_def, Option.some_inj] at hy
+    rw [← hy, hOh]
+    exact hAeB.2.2 x hx e (by simp)
+  · rcases A with _ | ⟨a, A⟩
+    · simp only [List.nil_append] at hLh ⊢
+      rw [List.head_append_of_ne_nil hO0, hOh]; exact hLh
+    · simpa using hLh
+  · rw [List.getLast_append_of_ne_nil _ (by simp), List.getLast_append_of_ne_nil _ (by simp)]
+    rw [List.getLast_append_of_ne_nil _ (by simp)] at hLl; exact hLl
+  · simp only [List.mem_append, List.mem_cons]; tauto
+  · rw [List.nodup_append] at hn ⊢
+    obtain ⟨hA, heB', hAd⟩ := hn
+    refine ⟨hA, List.nodup_append.mpr ⟨hOn, heB', fun x hx y hy => ?_⟩, fun x hx y hy => ?_⟩
+    · rintro rfl; exact hdis x hx (List.mem_append_right _ hy)
+    · rw [List.mem_append] at hy
+      rcases hy with hy | hy
+      · rintro rfl; exact hdis x hy (List.mem_append_left _ hx)
+      · exact hAd x hx y hy
+
+
+/-- **A vertex-preserving pairing exists when every vertex has evenly many ports**. -/
+theorem exists_vertex_involution [DecidableEq α] [DecidableEq β] (vtx : α → β) :
+    ∀ s : Finset α, (∀ b, Even (s.filter fun a => vtx a = b).card) →
+      ∃ f : α → α, ∀ a ∈ s, f a ∈ s ∧ f (f a) = a ∧ f a ≠ a ∧ vtx (f a) = vtx a := by
+  intro s
+  induction s using Finset.strongInduction with
+  | H s ih =>
+  intro hev
+  rcases s.eq_empty_or_nonempty with rfl | ⟨a, ha⟩
+  · exact ⟨id, fun a h => absurd h (Finset.notMem_empty a)⟩
+  have hfa : a ∈ s.filter fun x => vtx x = vtx a := Finset.mem_filter.mpr ⟨ha, rfl⟩
+  obtain ⟨a', ha', haa'⟩ : ∃ a' ∈ s.filter (fun x => vtx x = vtx a), a' ≠ a := by
+    by_contra h
+    push Not at h
+    have : (s.filter fun x => vtx x = vtx a) = {a} := Finset.eq_singleton_iff_unique_mem.mpr ⟨hfa, h⟩
+    have h1 := hev (vtx a)
+    rw [this, Finset.card_singleton] at h1
+    exact Nat.not_even_one h1
+  obtain ⟨ha's, hva'⟩ := Finset.mem_filter.mp ha'
+  set s' := (s.erase a).erase a' with hs'
+  have hs's : s' ⊂ s := (Finset.erase_ssubset (Finset.mem_erase.mpr ⟨haa', ha's⟩)).trans (Finset.erase_ssubset ha)
+  have hev' : ∀ b, Even (s'.filter fun x => vtx x = b).card := by
+    intro b
+    by_cases hb : b = vtx a
+    · have h1 : (s.filter fun x => vtx x = b) = insert a (insert a' (s'.filter fun x => vtx x = b)) := by
+        ext x; simp only [Finset.mem_filter, Finset.mem_insert, hs', Finset.mem_erase]
+        constructor
+        · rintro ⟨hx, rfl⟩; by_cases h1 : x = a; · exact Or.inl h1
+          by_cases h2 : x = a'; · exact Or.inr (Or.inl h2)
+          exact Or.inr (Or.inr ⟨⟨h2, h1, hx⟩, rfl⟩)
+        · rintro (rfl | rfl | ⟨⟨-, -, hx⟩, rfl⟩)
+          · exact ⟨ha, hb.symm⟩
+          · exact ⟨ha's, hva'.trans hb.symm⟩
+          · exact ⟨hx, rfl⟩
+      have h2 := hev b
+      rw [h1, Finset.card_insert_of_notMem (by simp [hs', Ne.symm haa']),
+        Finset.card_insert_of_notMem (by simp [hs'])] at h2
+      obtain ⟨m, hm⟩ := h2
+      exact ⟨m - 1, by omega⟩
+    · have h1 : (s'.filter fun x => vtx x = b) = s.filter fun x => vtx x = b := by
+        ext x; simp only [Finset.mem_filter, hs', Finset.mem_erase]
+        constructor
+        · rintro ⟨⟨-, -, hx⟩, h⟩; exact ⟨hx, h⟩
+        · rintro ⟨hx, h⟩
+          refine ⟨⟨fun h' => hb ?_, fun h' => hb ?_, hx⟩, h⟩
+          · rw [← h, h', hva']
+          · rw [← h, h']
+      rw [h1]; exact hev b
+  obtain ⟨f', hf'⟩ := ih s' hs's hev'
+  refine ⟨fun x => if x = a then a' else if x = a' then a else f' x, fun x hx => ?_⟩
+  by_cases hxa : x = a
+  · subst hxa; simp [haa', ha's, hva']
+  by_cases hxa' : x = a'
+  · subst hxa'; simp [haa', Ne.symm haa', ha, hva']
+  have hxs' : x ∈ s' := by simp [hs', hxa, hxa', hx]
+  obtain ⟨h1, h2, h3, h4⟩ := hf' x hxs'
+  have hfa : f' x ≠ a := fun h => by simp [hs', h] at h1
+  have hfa' : f' x ≠ a' := fun h => by simp [hs', h] at h1
+  simp only [hxa, hxa', if_false, hfa, hfa', h2]
+  exact ⟨Finset.mem_of_mem_erase (Finset.mem_of_mem_erase h1), trivial, h3, h4⟩
+
+
+section Orbits
+
+/-- The orbit of `d` under a permutation, as a list `d, φ d, φ² d, …`. -/
+noncomputable def orbList (φ : Equiv.Perm α) (d : α) : List α :=
+  (List.range (Function.minimalPeriod φ d)).map fun k => (φ ^ k) d
+
+theorem minimalPeriod_perm_pos [Finite α] (φ : Equiv.Perm α) (d : α) : 0 < Function.minimalPeriod φ d := by
+  apply Function.minimalPeriod_pos_of_mem_periodicPts
+  refine ⟨orderOf φ, orderOf_pos φ, ?_⟩
+  show (⇑φ)^[orderOf φ] d = d
+  rw [← Equiv.Perm.coe_pow, pow_orderOf_eq_one]; rfl
+
+theorem pow_minimalPeriod_apply (φ : Equiv.Perm α) (d : α) : (φ ^ Function.minimalPeriod φ d) d = d := by
+  rw [Equiv.Perm.coe_pow]; exact Function.iterate_minimalPeriod
+
+theorem mem_orbList {φ : Equiv.Perm α} {d a : α} : a ∈ orbList φ d ↔ ∃ k < Function.minimalPeriod φ d, (φ ^ k) d = a := by
+  simp [orbList]
+
+theorem nodup_orbList (φ : Equiv.Perm α) (d : α) : (orbList φ d).Nodup := by
+  refine List.Nodup.map_on (fun x hx y hy hxy => ?_) List.nodup_range
+  have h := Function.iterate_injOn_Iio_minimalPeriod (f := φ) (x := d)
+  simp only [List.mem_range] at hx hy
+  simp only [Equiv.Perm.coe_pow] at hxy
+  exact h hx hy hxy
+
+theorem orbList_closed [Finite α] (φ : Equiv.Perm α) (d : α) {a : α} (ha : a ∈ orbList φ d) : φ a ∈ orbList φ d := by
+  obtain ⟨k, hk, rfl⟩ := mem_orbList.mp ha
+  rw [mem_orbList]
+  by_cases hk1 : k + 1 < Function.minimalPeriod φ d
+  · exact ⟨k + 1, hk1, by rw [pow_succ', Equiv.Perm.mul_apply]⟩
+  · refine ⟨0, minimalPeriod_perm_pos φ d, ?_⟩
+    rw [pow_zero, Equiv.Perm.one_apply, ← Equiv.Perm.mul_apply, ← pow_succ', show k + 1 = Function.minimalPeriod φ d by omega,
+      pow_minimalPeriod_apply]
+
+theorem pow_mem_of_closed {φ : Equiv.Perm α} {S : List α} (h : ∀ a ∈ S, φ a ∈ S) {a : α} (ha : a ∈ S) :
+    ∀ k : ℕ, (φ ^ k) a ∈ S
+  | 0 => by simpa using ha
+  | k + 1 => by rw [pow_succ', Equiv.Perm.mul_apply]; exact h _ (pow_mem_of_closed h ha k)
+
+/-- An orbit of `φ = πA ∘ σ` is a closed trail: each port's arrival vertex is the next port's departure vertex. -/
+theorem basedTrail_orbList [Finite α] (σ πA : Equiv.Perm α) (vtx : α → β) (hAv : ∀ a, vtx (πA a) = vtx a) (d : α) :
+    BasedTrail vtx (fun a => vtx (σ a)) (vtx d) (orbList (πA * σ) d) := by
+  have hm := minimalPeriod_perm_pos (πA * σ) d
+  have hne : orbList (πA * σ) d ≠ [] := by
+    rw [Ne, orbList, List.map_eq_nil_iff, List.range_eq_nil]; omega
+  refine ⟨hne, List.isChain_iff_getElem.mpr fun i hi => ?_, ?_, ?_⟩
+  · simp only [orbList, List.getElem_map, List.getElem_range]
+    rw [pow_succ', Equiv.Perm.mul_apply, Equiv.Perm.mul_apply, hAv]
+  · rw [List.head_eq_getElem]; simp [orbList]
+  · rw [List.getLast_eq_getElem]
+    simp only [orbList, List.getElem_map, List.getElem_range, List.length_map, List.length_range]
+    rw [← hAv, ← Equiv.Perm.mul_apply πA σ, ← Equiv.Perm.mul_apply, ← pow_succ',
+      show Function.minimalPeriod (πA * σ) d - 1 + 1 = Function.minimalPeriod (πA * σ) d by omega, pow_minimalPeriod_apply]
+
+/-- `σ` reverses `φ = πA ∘ σ`: `φ^k (σ (φ^k b)) = σ b`. -/
+theorem pow_sigma_pow (σ πA : Equiv.Perm α) (hσ : ∀ a, σ (σ a) = a) (hA : ∀ a, πA (πA a) = a) :
+    ∀ (k : ℕ) (b : α), ((πA * σ) ^ k) (σ (((πA * σ) ^ k) b)) = σ b
+  | 0, b => by simp
+  | k + 1, b => by
+    have e1 : (πA * σ) ^ (k + 1) = (πA * σ) * (πA * σ) ^ k := pow_succ' _ _
+    have e2 : (πA * σ) ^ (k + 1) = (πA * σ) ^ k * (πA * σ) := pow_succ _ _
+    calc ((πA * σ) ^ (k + 1)) (σ (((πA * σ) ^ (k + 1)) b))
+        = (πA * σ) (((πA * σ) ^ k) (σ (((πA * σ) ^ k) ((πA * σ) b)))) := by
+          have e3 : ((πA * σ) ^ (k + 1)) b = ((πA * σ) ^ k) ((πA * σ) b) := by rw [e2]; rfl
+          have e4 : ∀ c, ((πA * σ) ^ (k + 1)) c = (πA * σ) (((πA * σ) ^ k) c) := fun c => by rw [e1]; rfl
+          rw [e3, e4]
+      _ = (πA * σ) (σ ((πA * σ) b)) := by rw [pow_sigma_pow σ πA hσ hA k]
+      _ = σ b := by simp only [Equiv.Perm.mul_apply, hσ, hA]
+
+/-- **No orbit of `φ` holds a port with its partner** (the dihedral lemma): were `σ d = φⁿ d`, then `σ` (n even) or `πA = φ σ` (n odd)
+would fix a point of the orbit. -/
+theorem sigma_ne_pow (σ πA : Equiv.Perm α) (hσ : ∀ a, σ (σ a) = a) (hσ1 : ∀ a, σ a ≠ a) (hA : ∀ a, πA (πA a) = a)
+    (hA1 : ∀ a, πA a ≠ a) (d : α) (n : ℕ) : σ d ≠ ((πA * σ) ^ n) d := by
+  intro h
+  obtain ⟨j, rfl | rfl⟩ := Nat.even_or_odd' n
+  · apply hσ1 (((πA * σ) ^ j) d)
+    apply ((πA * σ) ^ j).injective
+    rw [pow_sigma_pow σ πA hσ hA j d, h, two_mul, pow_add, Equiv.Perm.mul_apply]
+  · have hs : σ (((πA * σ) ^ (j + 1)) d) = ((πA * σ) ^ j) d := by
+      apply ((πA * σ) ^ (j + 1)).injective
+      rw [pow_sigma_pow σ πA hσ hA (j + 1) d, h, show 2 * j + 1 = (j + 1) + j by ring, pow_add, Equiv.Perm.mul_apply]
+    apply hA1 (((πA * σ) ^ (j + 1)) d)
+    calc πA (((πA * σ) ^ (j + 1)) d) = πA (σ (σ (((πA * σ) ^ (j + 1)) d))) := by rw [hσ]
+      _ = ((πA * σ) ^ (j + 1)) d := by rw [hs, pow_succ', Equiv.Perm.mul_apply, Equiv.Perm.mul_apply]
+
+/-- **An Euler circuit of the port structure** (WALK's C6/C8, pure): with `σ` (the other end of each edge) and `πA` (any pairing of the ports
+at each vertex) fixed-point-free involutions and the edges connected through shared vertices, some closed trail based at `vtx a₀` lists
+each edge once — every port or its partner, never both, no port twice. (Orbits of `πA ∘ σ` are closed trails holding no port with its
+partner, `sigma_ne_pow`; one absorbs the next at a shared vertex, `BasedTrail.insert`.) -/
+theorem exists_euler [Fintype α] [DecidableEq α] (σ πA : Equiv.Perm α) (vtx : α → β) (hσ : ∀ a, σ (σ a) = a)
+    (hσ1 : ∀ a, σ a ≠ a) (hA : ∀ a, πA (πA a) = a) (hA1 : ∀ a, πA a ≠ a) (hAv : ∀ a, vtx (πA a) = vtx a)
+    (hconn : ∀ S : Finset α, (∀ a ∈ S, σ a ∈ S) → S.Nonempty → (∃ a, a ∉ S) → ∃ a ∈ S, ∃ b ∉ S, vtx a = vtx b) (a₀ : α) :
+    ∃ L : List α, BasedTrail vtx (fun a => vtx (σ a)) (vtx a₀) L ∧ L.Nodup ∧ (∀ a, a ∈ L ∨ σ a ∈ L) ∧ (∀ a ∈ L, σ a ∉ L) := by
+  have hsig_orb : ∀ d a, a ∈ orbList (πA * σ) d → σ a ∉ orbList (πA * σ) d := by
+    intro d a ha hsa
+    obtain ⟨k, -, rfl⟩ := mem_orbList.mp ha
+    obtain ⟨j, -, hj⟩ := mem_orbList.mp hsa
+    apply sigma_ne_pow σ πA hσ hσ1 hA hA1 d (k + j)
+    rw [← pow_sigma_pow σ πA hσ hA k d, ← hj, pow_add, Equiv.Perm.mul_apply]
+  suffices key : ∀ n, ∀ L : List α, (BasedTrail vtx (fun a => vtx (σ a)) (vtx a₀) L ∧ L.Nodup ∧ (∀ a ∈ L, (πA * σ) a ∈ L) ∧
+      (∀ a ∈ L, σ a ∉ L)) → (Finset.univ.filter fun a => a ∉ L ∧ σ a ∉ L).card = n →
+      ∃ L' : List α, BasedTrail vtx (fun a => vtx (σ a)) (vtx a₀) L' ∧ L'.Nodup ∧ (∀ a, a ∈ L' ∨ σ a ∈ L') ∧ (∀ a ∈ L', σ a ∉ L') by
+    exact key _ (orbList (πA * σ) a₀) ⟨basedTrail_orbList σ πA vtx hAv a₀, nodup_orbList _ _, fun a ha => orbList_closed _ _ ha,
+      hsig_orb a₀⟩ rfl
+  intro n
+  induction n using Nat.strong_induction_on with
+  | _ n ih =>
+  rintro L ⟨hBT, hnd, hcl, hsf⟩ hn
+  by_cases hall : ∀ a, a ∈ L ∨ σ a ∈ L
+  · exact ⟨L, hBT, hnd, hall, hsf⟩
+  push Not at hall
+  obtain ⟨c₀, hc₀L, hc₀σ⟩ := hall
+  set S := L.toFinset ∪ L.toFinset.image σ with hS
+  have hmemS : ∀ a, a ∈ S ↔ a ∈ L ∨ σ a ∈ L := by
+    intro a
+    simp only [hS, Finset.mem_union, List.mem_toFinset, Finset.mem_image]
+    constructor
+    · rintro (h | ⟨b, hb, rfl⟩)
+      · exact Or.inl h
+      · exact Or.inr (by rw [hσ]; exact hb)
+    · rintro (h | h)
+      · exact Or.inl h
+      · exact Or.inr ⟨σ a, h, hσ a⟩
+  have hSσ : ∀ a ∈ S, σ a ∈ S := fun a ha => by
+    rw [hmemS] at ha ⊢; rw [hσ]; exact ha.symm
+  obtain ⟨b, hbS, c, hcS, hbc⟩ := hconn S hSσ ⟨_, (hmemS _).mpr (Or.inl (List.head_mem hBT.1))⟩
+    ⟨c₀, fun h => by rcases (hmemS c₀).mp h with h | h <;> contradiction⟩
+  have hcL : c ∉ L := fun h => hcS ((hmemS c).mpr (Or.inl h))
+  have hcσ : σ c ∉ L := fun h => hcS ((hmemS c).mpr (Or.inr h))
+  obtain ⟨e, heL, hev⟩ : ∃ e ∈ L, vtx e = vtx c := by
+    rcases (hmemS b).mp hbS with hb | hb
+    · exact ⟨b, hb, hbc⟩
+    · obtain ⟨e, heL, he⟩ := hBT.exists_start hb
+      exact ⟨e, heL, he.trans (by rw [hσ]; exact hbc)⟩
+  obtain ⟨L', hBT', hmem', hnd'⟩ := hBT.insert heL (O := orbList (πA * σ) c)
+    (by rw [hev]; exact basedTrail_orbList σ πA vtx hAv c)
+  have hdis : ∀ a ∈ orbList (πA * σ) c, a ∉ L := by
+    intro a ha haL
+    obtain ⟨k, hk, rfl⟩ := mem_orbList.mp ha
+    have := pow_mem_of_closed hcl haL (Function.minimalPeriod (πA * σ) c - k)
+    rw [← Equiv.Perm.mul_apply, ← pow_add, Nat.sub_add_cancel hk.le, pow_minimalPeriod_apply] at this
+    exact hcL this
+  have hcO : c ∈ orbList (πA * σ) c := mem_orbList.mpr ⟨0, minimalPeriod_perm_pos _ _, by simp⟩
+  refine ih _ ?_ L' ⟨hBT', hnd' hnd (nodup_orbList _ _) hdis, fun a ha => ?_, fun a ha hsa => ?_⟩ rfl
+  · rw [← hn]
+    refine Finset.card_lt_card ⟨fun a ha => ?_, fun h => ?_⟩
+    · simp only [Finset.mem_filter, Finset.mem_univ, true_and] at ha ⊢
+      exact ⟨fun h => ha.1 ((hmem' a).mpr (Or.inl h)), fun h => ha.2 ((hmem' _).mpr (Or.inl h))⟩
+    · have := h (Finset.mem_filter.mpr ⟨Finset.mem_univ c, hcL, hcσ⟩)
+      exact (Finset.mem_filter.mp this).2.1 ((hmem' c).mpr (Or.inr hcO))
+  · rcases (hmem' a).mp ha with h | h
+    · exact (hmem' _).mpr (Or.inl (hcl a h))
+    · exact (hmem' _).mpr (Or.inr (orbList_closed _ _ h))
+  · rcases (hmem' a).mp ha with h | h <;> rcases (hmem' _).mp hsa with h' | h'
+    · exact hsf a h h'
+    · obtain ⟨k, -, hk⟩ := mem_orbList.mp h'
+      apply hcσ
+      have := pow_mem_of_closed hcl h k
+      rwa [← hσ a, ← hk, pow_sigma_pow σ πA hσ hA k c] at this
+    · obtain ⟨k, -, rfl⟩ := mem_orbList.mp h
+      apply hcσ
+      have := pow_mem_of_closed hcl h' k
+      rwa [pow_sigma_pow σ πA hσ hA k c] at this
+    · exact hsig_orb c a h h'
+
+end Orbits
+
+-- A spec example for `orbList`: an orbit list holds its starting point.
+example : (0 : Fin 2) ∈ orbList (Equiv.swap 0 1) 0 := mem_orbList.mpr ⟨0, minimalPeriod_perm_pos _ _, rfl⟩
+
+/-- A model of `exists_euler`'s hypotheses, all at once: one loop edge (two ports, `σ = πA` the swap), one vertex. -/
+example : ∃ L : List (Fin 2), BasedTrail (fun _ => ()) (fun a => (fun _ => ()) (Equiv.swap (0 : Fin 2) 1 a)) () L ∧ L.Nodup ∧
+    (∀ a, a ∈ L ∨ Equiv.swap (0 : Fin 2) 1 a ∈ L) ∧ (∀ a ∈ L, Equiv.swap (0 : Fin 2) 1 a ∉ L) :=
+  exists_euler (Equiv.swap 0 1) (Equiv.swap 0 1) (fun _ => ()) (by decide) (by decide) (by decide) (by decide) (fun _ => rfl)
+    (fun S _ ⟨a, ha⟩ ⟨b, hb⟩ => ⟨a, ha, b, hb, rfl⟩) 0
+
+end Euler
+
 /-! ### WALK's children (FS131-RW1): the frontier of a filled tile -/
 
 /-- **WALK's C1: the frontier of a filled tile lies in the tile's closure** (FS131-RW1): a point of `cl x̂` off `cl x` lies in the closure
