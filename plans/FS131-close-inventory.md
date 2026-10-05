@@ -2902,3 +2902,27 @@ reason by the close.*
      (FS131-I5k): `cv_class` proved over `cv_hd`, `c_double` and a general form of E5 § 3.4; the handover", and the gate failed four quotations with "has no
      heading § 3.4". Worked around by addressing the heading's text up to "of E5" (gate PASS). Owed to agent-forge's `forge/STATUS.md` under Keryx with that
      repro, beside items 206 and 215's wrong-§ false pass.
+343. **FS131-IMM2 handed back** (Stage 5 SAVED, harness ≈ 440k by the task notice; record `fs131-w4mm`'s `plans/FS131-IMM-implementation.md`, Stages 4–5;
+     report `data/fs131/reports/FS131-IMM2.md`; commits `1b9d5d07`, `97a067b0`, `045c71c6`, pushed). **Result, [kernel] on the standard three**:
+     `ArcMap.Near.exists_gap` (FS110-W-MERGE's gap, record § 4.1–4.2: if `int D_c(v)` is non-empty and `c` has `n + 1 ≥ 2` sectors at `v`, two `c`-sectors
+     consecutive along the orbit after an excluded direction, every point of the gap between them near `v` clear for `c`), with 37 children — the cone
+     lemmas (`cone_mem_interior_of_between` in three cases, for any `K ⊆ ℂ` closed under sums and non-negative multiples), the orbit of `next` with lifted
+     directions (`BranchGerms.idx`, `lift`, `liftDir`, `liftDir_mono`, …), `gap_assemble`, `Near.gap_clear`. **MERGE not landed**: 4.3 (the map `F'`) and 4.4 (the
+     clauses) left; `exists_merge_aux` still believed true as written. **Receipt** (Keryx): the three commits exist and `origin/fs131-w4mm` is `045c71c6`; the
+     stage-5 build log (`build/gate/build/20261005T060420Z-1825986.log`) ends "Build completed successfully (5363 jobs)", 0 warnings other than `sorry`;
+     `MergeMove` 0 `sorry`; the diff on `Proofs/` since `7060fcc6` is `MergeMove` alone (+675); `data/fs131/imm/axioms-stage5.txt` parsed: 53 records, 52
+     standard (`exists_gap` among them), the control `exists_merge_aux` on `sorryAx`; `tools/fs131_im_statements.py --check` and `tools/fs131_im_split.py --check`
+     run by Keryx: PASS both; the scratch copies are gone (item 294's deletion done); `exists_gap`'s statement read against its docstring. **Prediction scored**:
+     IMM1 priced 4.1 + 4.2 at about 550 lines; about 650. **Plan revised** (record § 5.2, no statement): no phantom case in the colouring; rim germ points on
+     `trimArcs` by local finiteness; annulus pieces only over `(ρ/2, ρ]`; the sides lemma by convexity on one side and star-convexity on the other; the
+     `D_c(v′)` types by a clopen argument with finiteness of tiles near `B̄(v, ρ)`. **Tool**: `tools/fs131_imm_decls.py` (every `MergeMove` theorem has an axioms
+     line in both receipts; three plants fired). **Held**: (a) the successor restates `exists_gap`'s clause `b < a + X.n` as `b < X.n` (its own child, both cases
+     already prove it); (b) the continuation, record § 5.2, about 1,300–1,600 lines, two sessions; a draft of 4.3's first part at
+     `data/fs131/imm/wip/B.lean` (not in the library). Credit: IMM2, for the cone lemmas in general form.
+344. **Rulings on IMM2's held items, and its slot.** (a) **`exists_gap`'s clause restated: accepted** — a child of this lane's own, not a backlog statement;
+     the successor records the diff. Confidence: high. (b) **IMM2's slot → wave 5's non-`Terminal` continuation, FS131-I5m, on `fs131-w5` from I5j's Stage 33**
+     (`rot_in`, `bv_nd`, `bv_l3`, `exists_preBend`). Alternatives weighed: MERGE's continuation (IMM3), and the SEP lane. Why: MERGE is off wave 5's path, so by
+     item 323's queue a wave-5 lane with work left goes first; between I5j's four (about two sessions, `exists_preBend` H with E4-BEND-UN unread) and SEP
+     (1.5–2 planned, prices running high), slack is about equal and I5j's half was queued first (item 337). Confidence: medium (SEP first would be as good).
+     **Queue now**: the SEP lane FS131-RS1; MERGE's continuation FS131-IMM3 (record § 5.2); `bend_away`'s implementer; `disc1_local` after `fs131-w5p` merges back.
+     In flight after I5m's launch: 1 (RW1) + 1 (I5l) + 1 (I5m) = 3.
