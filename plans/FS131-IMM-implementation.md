@@ -720,3 +720,60 @@ does not own (`exists_rayMerge_aux`, pre-RAY) and the other modules' `sorry`s ar
 
 No front-page drafts: the brief withholds the gate from this job, and the `## Drafts for the front page` section belongs to the run that
 gates MERGE's landing.
+
+## Stage 13 — SAVED (FS131-ML1): the readback, the as-given build, and what this job may change
+
+*FS131-ML1 (de Bruijn, the implementer, on Opus) continues this record from here; brief `data/fs131/briefs/FS131-ML1-merge-land.md` (on `main`
+at `7e5e98a1`). Its job: MERGE's landing — merge `main` (wave 4 and Woodall landed) into `fs131-w4mm`, restore `exists_merge_aux` (`Moves`) and
+`exists_merge` (`Contact`) in ruling 269's form over `MergeMove`, the full gate on one commit, and a fast-forward of `main`.*
+
+### 13.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (`data/fs131/ml/quotes.py`: every `> ` line of the brief followed by a `> — source:` line, searched as an exact substring;
+inventory items in `plans/FS131-close-inventory.md` at `main`, the two statements at `c9623d04`), each **verbatim**:
+
+| quotation (a prefix) | source | line |
+|---|---|---|
+| "367. **FS131-IMM4 done: MERGE is proved** …" | `plans/FS131-close-inventory.md` (`main`) | 3187 |
+| "368. **Rulings on IMM4's held items, and its slot.** …" | the same | 3202 |
+| "295. **Ruling: MERGE leaves wave 4; …**" | the same | 2274 |
+| "269. **Ruling on item 268: …**" | the same | 1958 |
+| "348. **Ruling on item 347: MERGE returns to wave 5's path; …**" | the same | 2978 |
+| "318. **WAVE 4 LANDED on `main`, held in the kernel** …" | the same | 2570 |
+| "319. **Wave 4's filing, and the freed slot.** …" | the same | 2594 |
+| "326. **WOODALL'S CHAIN LANDED: FS131-WL1 done** …" | the same | 2677 |
+| "327. **Woodall's landing counts filed** …" | the same | 2704 |
+| "theorem exists_merge_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)" | `Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean` (`c9623d04`) | 585 |
+| "theorem exists_merge (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)" | `Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean` (`c9623d04`) | 1479 |
+
+Read: items 367–368, 295, 269, 348, 318–319, 326–327 in full; this record's Stages 1–12; wave 4's landing record (`fs131-w4`'s
+`plans/FS131-I4-implementation.md`, G4's Stages 44–48) and Woodall's (`fs131-ww`'s `plans/FS131-IW-implementation.md`, WL1's Stages 19, 21–22 and its
+drafts), whose order this landing follows.
+
+### 13.2 The branch builds as given
+
+`c9623d04`, under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK**, "all 1748 modules already up
+to date, nothing built, 4 module(s) with warnings, 2s", exit 0 (log `build/gate/build/20261005T085202Z-2839746.log`; driver `data/fs131/ml/build-asgiven.log`):
+29 warnings, every one `declaration uses 'sorry'` (`grep -v` of that phrase over the `warning:` lines: 0) — `BaseSteps` 7, `Contact` 4, `Moves` 1
+(l. 574 `exists_rayMerge_aux`, this branch's pre-RAY copy), `UnitArc` 17: all this branch's stale wave-4 copies, none in `MergeMove`.
+
+### 13.3 The merge as it stands, and what this job may and may not change
+
+**One merge base**, `73d31ad6` (`git merge-base --all HEAD origin/main`). **This branch's side** since it (`git diff --stat 73d31ad6 HEAD`): the new
+`MergeMove` (3,480 lines), `Moves` (its `MergeMove` import and `exists_merge_aux`'s proof, 24 lines), `Proofs.lean` (one import), `ARCHITECTURE.md`
+(`MergeMove`'s row, `Moves`' row), `scripts/Axioms.lean` (one block of 151 records just above `=== PURCHASED ===`), `tools/fs131_imm_*.py`.
+**`main`'s side**: wave 2, wave 4 (every leaf proved, `exists_merge`/`exists_merge_aux` deleted, `framePt → fromFrame`), Woodall, and the gate scripts'
+changes (34 files under `Proofs/`, `scripts/`, `ARCHITECTURE.md`). `Surgery` and `Cone` — `MergeMove`'s whole import closure in wave 4 — are unchanged on
+`main` since the base; `MergeMove` names no `framePt` (`grep`: 0), so the rename touches it nowhere; this branch's `scripts/Axioms.lean` carries two
+`framePt` records, both the base's, which the merge replaces with `main`'s renamed ones.
+
+**May**: take `main`'s side for every wave-4 module; restore `exists_merge_aux` in `Moves` with IMM's proof (and `Moves`' import of `MergeMove`) and
+`exists_merge` in `Contact` as a one-line citation of it, each statement and docstring byte-identical to `c9623d04`; `Contact`'s header line
+"* **FS110-W-MERGE**: `exists_merge`." and its section header `/-! ## FS110-W-MERGE -/`; `Moves`' module docstring back to naming MERGE (G4 Stage 45
+removed exactly that when it deleted `exists_merge_aux`); the `ARCHITECTURE.md` mentions (`Contact`'s and `Moves`' rows, `MergeMove`'s row) and the
+`Proofs.lean` import; `framePt → fromFrame` in this branch's own code if any uses it; delete identical copies (rename on this branch's side any that
+collide and differ); records in `scripts/Axioms.lean`; carriers and controls in `scripts/Vacuity.lean`, `scripts/vacuity-controls.lean`, the baseline's
+header; the axioms self-test's expected counts if this state moves them; `tools/fs131_ml_*.py`, `data/fs131/ml/`, this record, the report; `main` by
+fast-forward only. **May not**: any statement — no hypothesis, conclusion or definition the statements use; no `axiom`, no `native_decide`; `CLAUDE.md`,
+`LEAN.md`, `tools/claude_md_fact_audit.py`, `LEDGER.md` (drafts only); another job's tools (`tools/fs131_qa1_dupes.py`, `fs131_wl_mergestmts.py`,
+`fs131_im_statements.py`, `fs131_im_split.py`, `fs131_imm_*.py` are run, never edited).
