@@ -132,6 +132,8 @@ skeleton unchanged (`tools/fs131_rw_stmt_check.py`: all 148 declarations of `Map
 - `ArcMap.IsPortGraph.exists_shared_vertex` (**C7**) — on a connected set, the edges are connected through shared vertices
 - `ArcMap.isBoundaryWalk_of_trail`, `ArcMap.BasedTrail.insert_all`, `ArcMap.BasedTrail.map` (**C10**) — the assembly
 
+**FS131-RS1 (stages 27–)**, the boundary walk's SEP lane (brief `data/fs131/briefs/FS131-RS1-sep.md`, on `main`): none yet (filled at each saved stage).
+
 IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
 
@@ -1360,3 +1362,65 @@ walk it builds is an Euler circuit of the boundary graph of `∂ cl x̂` with ea
   `sevenBrickMap`); every site takes it at a variable set, vertex set and port data; register it when a theorem takes it at a concrete set."
 - The gate's recorded counts (`CLAUDE.md` § The gate, § Trust ledger) will move when this branch lands: 18 new audited records, all clean, and
   `exists_boundaryWalk` leaves the `sorryAx` side; I ran neither `axioms.sh` nor `vacuity.sh` (not this job's), so I give no counts.
+
+## Stage 27 — SAVED (FS131-RS1): the readback, and the route
+
+*de Bruijn, the implementer (FS131-RS1), 2026-10-05, from RW2's Stage 26. Brief: `data/fs131/briefs/FS131-RS1-sep.md` (main tree). Branch `fs131-w5p`,
+worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5p`, from `e27da6c1`.*
+
+### 27.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by `grep -cF` of each quotation's full text (the control: a planted absent string, `ABSENT-CONTROL-STRING-xyzzy`, counted 0):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors (main tree) | verbatim (1) |
+| `theorem IsBoundaryWalk.sep {x : {T : Set ℂ // F.IsOuterTile T}} {r : List {T : Set ℂ // F.IsOuterTile T}} {z : ℕ → ℂ}` | `MapGraph.lean` l. 1430 at `e27da6c1` | verbatim (1) |
+| "2. **SEP** (`IsBoundaryWalk.sep`): two positions of `y` are edge entries; …" | RL1's plan § 2.2 | verbatim (1) |
+| "- **Are `IsEdgeOf` / `IsBoundaryWalk` the statements SEP derives from?** …" and "- **SEP's space** is the cyclic arcs …" | RL1's plan § 4.1 | verbatim (1 each) |
+| "**SEP** (M–H, 1.2–1.5 over its six children, § 4.1). …" | RL1's plan § 4.2 | verbatim (1) |
+| "**May**: add children (statements of § 4.2, with spec examples), …" | RL1's plan § 4.4 | verbatim (1) |
+| items 338, 339, 351, 352, 277 (opening lines) | `plans/FS131-close-inventory.md` (main tree) l. 2846, 2867, 3008, 3028, 2040 | verbatim (1 each) |
+
+No mismatch. Read in full: RL1's plan (stages 1–4); RW1's and RW2's Stages 20–26 here; inventory items 277, 338, 339, 351, 352;
+`plans/STANDING-RULES.md`; `LEAN.md`; `RUNNING.md` § Building and § Make the gate fail, and watch it fail. WALK relies on SEP exactly as stated:
+`exists_boundaryWalk` produces an `IsBoundaryWalk` and `filledGraph_ringList` applies `IsBoundaryWalk.isRing = ⟨mem, cons, sep⟩` to it (§ 26.4).
+
+### 27.2 What I may and may not change (the brief's touches; ruling 352; RL1's plan § 4.4)
+
+**May**: prove `IsBoundaryWalk.sep` and add its children before it in `MapGraph` (each stated before proved, with a spec example where it carries a
+structure); add pure-topology children in `MapTopology` § F; change imports with `ARCHITECTURE.md` and `Proofs.lean`; extend the FS131-KP block of
+`scripts/Axioms.lean` above the `=== PURCHASED ===` banner; `tools/fs131_rs_*.py`, `data/fs131/rs/`, this record, `data/fs131/reports/FS131-RS1.md`.
+**May not**: change `IsBoundaryWalk`, `IsEdgeOf`, `IsPortGraph` or any other statement (a field SEP needs is a message to the coordinator),
+`exists_boundaryWalk`, `filledGraph_ringList`, `IsRing`, `PlanarLike`, `CurveGraph`, `Plane/PlaneTopology`, `BaseWalk`, `BaseDense`, RL1's plan file; add an
+`axiom` or `native_decide`; edit a file while a build of it runs; merge, take `main`, run the gate, touch `main`.
+
+### 27.3 The as-given build (`e27da6c1`, before any edit)
+
+My wrapper `data/fs131/rs/rs1-build.sh` (RW2's pattern; run from a snapshot copy under `build/`) writes `START` with the head and an `EXIT <status>` line.
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up to date, nothing built, 9 modules with warnings (every one `declaration
+uses 'sorry'`; `MapGraph`'s one at l. 1430 — `IsBoundaryWalk.sep`), `EXIT 0`** (`build/gate/build/20261005T075522Z-2516843.log`; driver log
+`data/fs131/rs/build-asgiven.log`).
+
+### 27.4 The route (mine, said here as the brief allows): `s = i`, `t = j`, no rotation; and one missing hypothesis replaced by a stronger lemma
+
+Reading RL1's § 2.2 against the statement:
+
+- **No rotation and no reduction to arcs are needed.** With `y` at `i < j`, `a` at `m ∈ (i, j)`, `b` at `n ∉ [i, j]`, take the pure point of `y`'s edge at
+  `i` itself and the second pure point `p j`. The walk forward from the hinge `z i` to `a` (positions `i+1 … m`) and forward from `b` back to the hinge
+  before `i` (positions `n …` cyclically to `i−1`) both avoid positions `i` and `j`; the appearances of `y` they pass are edge entries (`rep`, since `y` is
+  also at `i`) and are crossed along their edges, which miss the closed discs at `p i` and `p j` (`apart`). So `K₂` = the two pieces of `E i` off the disc,
+  the pieces of positions `i+1 … m`, the chain `S`, and the pieces of positions `n … i−1`, read mod the length; `K₁` = `x` and `y` off the disc with `p j`.
+  The wrap is handled by reading positions mod the length inside one chain lemma (`P (l % len)` over an interval of `ℕ`), where the only arithmetic is
+  `((l+1) % len + len − 1) % len = l % len`. So RL1's SEP-ROT (rotate the walk) and SEP-REDUCE (pick the last appearances) are replaced by the chain lemma's
+  mod-indexing and a two-case choice of the interval for `b`'s side (`n < i`: `[n, i−1]`; `n > j`: `[n, i+len−1]`).
+- **`IsBoundaryWalk.sep` carries no `F.Valid`, and an `ArcMap`'s tiles need not be bounded** (`IsTile` is a component of the interior points; boundedness
+  of tiles is `IsTile.closure_subset_closedBall_zero`, which takes `hF`). The held crossing lemma `inter_nonempty_of_interleaved_exterior` asks `K` bounded,
+  and `K₂` is built from tile closures, filled closures and edges, none bounded without `hF`. **No statement changes**: the crossing lemma holds for any
+  closed `K` — after the inversion, the closure of `ι '' K` adds at most the centre `u`, which `ι '' K'` never contains. New child **SEP-X**
+  (`MapTopology` § F), the crossing lemma outside a disc for a closed `K`, bounded or not.
+
+The children, in order: **SEP-CHAIN** (pure: the mod-indexed chain lemma), **SEP-X** (pure: the crossing lemma without boundedness) — re-priced after
+them — then **SEP-S** (a chain in `M̂ − x − y` gives a closed preconnected `S` inside the filled closures of its tiles), **SEP-K1** (pure: `K₁` is
+preconnected), **SEP-PIECE** (each position other than `i`, `j` has a closed preconnected piece holding its two hinges, off `x ∪ y`, off the open disc
+at `p i` and off `p j`; the tile's closure when the entry is not `y`, the edge when it is), then **SEP-CORE** = `IsBoundaryWalk.sep`'s body.
