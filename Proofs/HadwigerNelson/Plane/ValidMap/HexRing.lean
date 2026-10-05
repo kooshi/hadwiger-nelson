@@ -1482,17 +1482,6 @@ theorem p17_ua {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu :
   bv_hex hF (fun z hz => hc (closedBall_subset_closedBall (by norm_num) hz)) hu hR fun j _ hmem =>
     Set.disjoint_left.mp hH (show ringPt u _ ∈ closedBall u 2 by rw [mem_closedBall, dist_ringPt]; norm_num) hmem
 
-/-- **FS114-BV-HEX, (BV-L3)** (`[SokolovVoronov2025]` Lemma 3, `plans/BASE-V-verification.md` § 1b.3): no two points `u₁`, `u₂` of one
-three-colour multicolour at distance in `(1, 2)` have rings that are proper finite circle colourings (in the complementary triple, which at
-six colours is the absent colours). Read at the class the argument reads: nothing about the sectors at `u₁`, `u₂` (cusps, double cusps,
-any degree); the double-event points' adjacency (BV-ND's hypothesis) supplied by the base's hypothesis on the two circles — narrower than
-BV-ND's adjacency, which also admits degree-4 bichromatic points (reported, N-BVL3). A refutation: no model expected. -/
-theorem bv_l3 {F : ArcMap 6} (hF : F.Valid) {u₁ u₂ : ℂ} (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1)
-    (h3 : (F.coloursAt u₁).ncard = 3) (hsame : F.coloursAt u₁ = F.coloursAt u₂) (ht : 1 < dist u₁ u₂) (ht' : dist u₁ u₂ < 2)
-    (hR₁ : F.RingProper u₁) (hR₂ : F.RingProper u₂)
-    (hH : ∀ x, (dist x u₁ = 1 ∨ dist x u₂ = 1) → x ∉ F.fourSet ∪ F.repSet) : False := by
-  sorry
-
 /-- **BV-ND's step 1** (`plans/BASE-V-verification.md` § 1b.2): on the unit-distance linkage of `ω(u₁)` and `ω(u₂)` with
 `|u₁ − u₂| ∉ {1, 3}`, at least one of the two points moves with non-zero component along `e = x₀ − y₀`; at a switch of both colours (no
 turning point, `λ₁, λ₂ ≠ 0`) the two components are equal, so both are non-zero — so every switch of both colours at one configuration is a
@@ -1932,6 +1921,229 @@ theorem bv_nd1 (hF : F.Valid) {u : ℂ} {φ : ℝ} {α β : Fin k} (hαβ : α �
   · rw [dist_eq_norm, hdiff, norm_e]
   · rw [hdiff, hdot]; exact hcos1
   · rw [hdiff, hdot]; exact hcos2
+
+
+/-! ### The linkage to first order (children for `bv_l3`'s double events) -/
+
+/-- The displacement of a ring point, in the frame of `e a₀` (child of the linkage lemmas). -/
+theorem dot_ringPt_sub (u E : ℂ) (a₀ a : ℝ) :
+    dot (ringPt u a - ringPt u a₀) E =
+      (Real.cos (a - a₀) - 1) * (e a₀ * starRingEnd ℂ E).re + Real.sin (a - a₀) * dot (I * e a₀) E := by
+  have h : ringPt u a - ringPt u a₀ = e a₀ * (e (a - a₀) - 1) := by
+    simp only [ringPt]; rw [show a = a₀ + (a - a₀) by ring, e_add]; ring_nf
+  rw [h]
+  simp only [dot, Complex.mul_re, Complex.mul_im, Complex.sub_re, Complex.sub_im, re_e, im_e, Complex.one_re,
+    Complex.one_im, Complex.conj_re, Complex.conj_im, Complex.I_re, Complex.I_im]
+  ring
+
+/-- **The linkage to first order** (child of `bv_l3`, BASE-V § 1b.3 step 4's velocity reading): with `|r_{u₁}(a₀) − r_{u₂}(b₀)| = 1`,
+`E = r_{u₁}(a₀) − r_{u₂}(b₀)`, `D₁ = ⟨i e a₀, E⟩`, `D₂ = ⟨i e b₀, E⟩`, the squared distance of `r_{u₁}(a)`, `r_{u₂}(b)` is
+`1 + 2(D₁ sin(a − a₀) − D₂ sin(b − b₀))` up to `3((a − a₀)² + (b − b₀)²)`. -/
+theorem linkage_first_order (u₁ u₂ : ℂ) (a₀ b₀ : ℝ) (h1 : dist (ringPt u₁ a₀) (ringPt u₂ b₀) = 1) (a b : ℝ) :
+    |dist (ringPt u₁ a) (ringPt u₂ b) ^ 2 - 1 -
+        2 * (dot (I * e a₀) (ringPt u₁ a₀ - ringPt u₂ b₀) * Real.sin (a - a₀) -
+          dot (I * e b₀) (ringPt u₁ a₀ - ringPt u₂ b₀) * Real.sin (b - b₀))| ≤
+      3 * ((a - a₀) ^ 2 + (b - b₀) ^ 2) := by
+  set E := ringPt u₁ a₀ - ringPt u₂ b₀ with hE
+  set X := ringPt u₁ a - ringPt u₁ a₀ with hX
+  set Y := ringPt u₂ b - ringPt u₂ b₀ with hY
+  have hE1 : ‖E‖ = 1 := by rw [hE, ← dist_eq_norm, h1]
+  have hsum : ringPt u₁ a - ringPt u₂ b = E + (X - Y) := by rw [hE, hX, hY]; ring
+  have hsq : dist (ringPt u₁ a) (ringPt u₂ b) ^ 2 = 1 + 2 * dot X E - 2 * dot Y E + ‖X - Y‖ ^ 2 := by
+    rw [dist_eq_norm, hsum, norm_add_sq_real, hE1]
+    have : inner ℝ E (X - Y) = dot X E - dot Y E := by
+      rw [Complex.inner]
+      simp only [dot, ← Complex.sub_re, ← sub_mul]
+    rw [this]; ring
+  have hXn : ‖X‖ ≤ |a - a₀| := by
+    rw [hX, ← dist_eq_norm, dist_comm]; simp only [ringPt, dist_add_left]
+    rw [dist_eq_norm]; exact (norm_e_sub_e_le a₀ a).trans (by rw [abs_sub_comm])
+  have hYn : ‖Y‖ ≤ |b - b₀| := by
+    rw [hY, ← dist_eq_norm, dist_comm]; simp only [ringPt, dist_add_left]
+    rw [dist_eq_norm]; exact (norm_e_sub_e_le b₀ b).trans (by rw [abs_sub_comm])
+  have hXY : ‖X - Y‖ ^ 2 ≤ 2 * ((a - a₀) ^ 2 + (b - b₀) ^ 2) := by
+    have := norm_sub_le X Y
+    have h0 : ‖X - Y‖ ≤ |a - a₀| + |b - b₀| := this.trans (add_le_add hXn hYn)
+    have h0' : 0 ≤ ‖X - Y‖ := norm_nonneg _
+    nlinarith [sq_abs (a - a₀), sq_abs (b - b₀), abs_nonneg (a - a₀), abs_nonneg (b - b₀),
+      sq_nonneg (|a - a₀| - |b - b₀|)]
+  have hA : ∀ (w : ℂ) (t : ℝ), ‖w‖ = 1 → |(Real.cos t - 1) * w.re| ≤ t ^ 2 / 2 := by
+    intro w t hw
+    have hc1 := Real.cos_le_one t
+    have hc2 := Real.one_sub_sq_div_two_le_cos (x := t)
+    have hre : |w.re| ≤ 1 := hw ▸ Complex.abs_re_le_norm w
+    rw [abs_mul, abs_of_nonpos (by linarith)]
+    calc -(Real.cos t - 1) * |w.re| ≤ -(Real.cos t - 1) * 1 := mul_le_mul_of_nonneg_left hre (by linarith)
+      _ ≤ t ^ 2 / 2 := by linarith
+  have hn1 : ‖e a₀ * starRingEnd ℂ E‖ = 1 := by rw [norm_mul, norm_e, Complex.norm_conj, hE1, one_mul]
+  have hn2 : ‖e b₀ * starRingEnd ℂ E‖ = 1 := by rw [norm_mul, norm_e, Complex.norm_conj, hE1, one_mul]
+  have hdx := dot_ringPt_sub u₁ E a₀ a
+  have hdy := dot_ringPt_sub u₂ E b₀ b
+  have ha := hA _ (a - a₀) hn1
+  have hb := hA _ (b - b₀) hn2
+  rw [hsq, ← hX, ← hY] at *
+  rw [hdx, hdy]
+  rw [abs_le] at ha hb ⊢
+  constructor <;> nlinarith [norm_nonneg (X - Y)]
+
+/-- `sin t ≥ t / 2` on `[0, 1]` (child of the linkage lemmas). -/
+theorem half_le_sin {t : ℝ} (h0 : 0 ≤ t) (h1 : t ≤ 1) : t / 2 ≤ Real.sin t := by
+  rcases h0.eq_or_lt with rfl | h0
+  · simp
+  have := Real.sin_gt_sub_cube h0
+  have h3 : t ^ 3 ≤ t := by
+    have h2 : t ^ 2 ≤ 1 := by nlinarith
+    calc t ^ 3 = t * t ^ 2 := by ring
+      _ ≤ t * 1 := mul_le_mul_of_nonneg_left h2 h0.le
+      _ = t := mul_one t
+  linarith
+
+/-- **Two motions that both lengthen (or both shorten) the linkage leave it** (child of `bv_l3`): if moving `x = r_{u₁}(a₀)` on side `s₁`
+and `y = r_{u₂}(b₀)` on side `s₂` both increase `|x − y|` to first order (`s₁ D₁ > 0`, `s₂ D₂ < 0`), every pair of nearby points so moved is
+farther than `1` apart; if both decrease it, nearer. -/
+theorem linkage_cmp (u₁ u₂ : ℂ) (a₀ b₀ : ℝ) (h1 : dist (ringPt u₁ a₀) (ringPt u₂ b₀) = 1) (s₁ s₂ : Side) :
+    (0 < s₁.sign * dot (I * e a₀) (ringPt u₁ a₀ - ringPt u₂ b₀) → s₂.sign * dot (I * e b₀) (ringPt u₁ a₀ - ringPt u₂ b₀) < 0 →
+      ∃ δ > 0, ∀ t₁ ∈ Ioo 0 δ, ∀ t₂ ∈ Ioo 0 δ, 1 < dist (ringPt u₁ (a₀ + s₁.sign * t₁)) (ringPt u₂ (b₀ + s₂.sign * t₂))) ∧
+    (s₁.sign * dot (I * e a₀) (ringPt u₁ a₀ - ringPt u₂ b₀) < 0 → 0 < s₂.sign * dot (I * e b₀) (ringPt u₁ a₀ - ringPt u₂ b₀) →
+      ∃ δ > 0, ∀ t₁ ∈ Ioo 0 δ, ∀ t₂ ∈ Ioo 0 δ, dist (ringPt u₁ (a₀ + s₁.sign * t₁)) (ringPt u₂ (b₀ + s₂.sign * t₂)) < 1) := by
+  set D₁ := dot (I * e a₀) (ringPt u₁ a₀ - ringPt u₂ b₀)
+  set D₂ := dot (I * e b₀) (ringPt u₁ a₀ - ringPt u₂ b₀)
+  have hsin : ∀ (s : Side) (t : ℝ), Real.sin (s.sign * t) = s.sign * Real.sin t := fun s t => by
+    cases s <;> simp [Side.sign, Real.sin_neg]
+  have hsq : ∀ (s : Side) (t : ℝ), (s.sign * t) ^ 2 = t ^ 2 := fun s t => by cases s <;> simp [Side.sign]
+  have key : ∀ t₁ t₂ : ℝ, |dist (ringPt u₁ (a₀ + s₁.sign * t₁)) (ringPt u₂ (b₀ + s₂.sign * t₂)) ^ 2 - 1 -
+      2 * (s₁.sign * D₁ * Real.sin t₁ - s₂.sign * D₂ * Real.sin t₂)| ≤ 3 * (t₁ ^ 2 + t₂ ^ 2) := by
+    intro t₁ t₂
+    have := linkage_first_order u₁ u₂ a₀ b₀ h1 (a₀ + s₁.sign * t₁) (b₀ + s₂.sign * t₂)
+    rw [show a₀ + s₁.sign * t₁ - a₀ = s₁.sign * t₁ by ring, show b₀ + s₂.sign * t₂ - b₀ = s₂.sign * t₂ by ring,
+      hsin, hsin, hsq, hsq] at this
+    convert this using 3; ring
+  constructor
+  · intro hA hB
+    set m := min (s₁.sign * D₁) (-(s₂.sign * D₂)) with hm
+    have hm0 : 0 < m := lt_min hA (by linarith)
+    refine ⟨min 1 (m / 12), lt_min one_pos (by positivity), fun t₁ ht₁ t₂ ht₂ => ?_⟩
+    have h11 : t₁ < 1 := lt_of_lt_of_le ht₁.2 (min_le_left _ _)
+    have h21 : t₂ < 1 := lt_of_lt_of_le ht₂.2 (min_le_left _ _)
+    have h1m : t₁ < m / 12 := lt_of_lt_of_le ht₁.2 (min_le_right _ _)
+    have h2m : t₂ < m / 12 := lt_of_lt_of_le ht₂.2 (min_le_right _ _)
+    have hs1 := half_le_sin ht₁.1.le h11.le
+    have hs2 := half_le_sin ht₂.1.le h21.le
+    have hm1 : m ≤ s₁.sign * D₁ := min_le_left _ _
+    have hm2 : m ≤ -(s₂.sign * D₂) := min_le_right _ _
+    have e1 : m * (t₁ / 2) ≤ s₁.sign * D₁ * Real.sin t₁ :=
+      mul_le_mul hm1 hs1 (by linarith [ht₁.1]) (by linarith)
+    have e2 : m * (t₂ / 2) ≤ -(s₂.sign * D₂) * Real.sin t₂ :=
+      mul_le_mul hm2 hs2 (by linarith [ht₂.1]) (by linarith)
+    have hk := (abs_le.mp (key t₁ t₂)).1
+    have hq1 : t₁ ^ 2 ≤ t₁ * (m / 12) := by nlinarith [ht₁.1]
+    have hq2 : t₂ ^ 2 ≤ t₂ * (m / 12) := by nlinarith [ht₂.1]
+    have hgt : 1 < dist (ringPt u₁ (a₀ + s₁.sign * t₁)) (ringPt u₂ (b₀ + s₂.sign * t₂)) ^ 2 := by
+      nlinarith [ht₁.1, ht₂.1]
+    nlinarith [dist_nonneg (x := ringPt u₁ (a₀ + s₁.sign * t₁)) (y := ringPt u₂ (b₀ + s₂.sign * t₂))]
+  · intro hA hB
+    set m := min (-(s₁.sign * D₁)) (s₂.sign * D₂) with hm
+    have hm0 : 0 < m := lt_min (by linarith) hB
+    refine ⟨min 1 (m / 12), lt_min one_pos (by positivity), fun t₁ ht₁ t₂ ht₂ => ?_⟩
+    have h11 : t₁ < 1 := lt_of_lt_of_le ht₁.2 (min_le_left _ _)
+    have h21 : t₂ < 1 := lt_of_lt_of_le ht₂.2 (min_le_left _ _)
+    have h1m : t₁ < m / 12 := lt_of_lt_of_le ht₁.2 (min_le_right _ _)
+    have h2m : t₂ < m / 12 := lt_of_lt_of_le ht₂.2 (min_le_right _ _)
+    have hs1 := half_le_sin ht₁.1.le h11.le
+    have hs2 := half_le_sin ht₂.1.le h21.le
+    have hm1 : m ≤ -(s₁.sign * D₁) := min_le_left _ _
+    have hm2 : m ≤ s₂.sign * D₂ := min_le_right _ _
+    have e1 : m * (t₁ / 2) ≤ -(s₁.sign * D₁) * Real.sin t₁ :=
+      mul_le_mul hm1 hs1 (by linarith [ht₁.1]) (by linarith)
+    have e2 : m * (t₂ / 2) ≤ s₂.sign * D₂ * Real.sin t₂ :=
+      mul_le_mul hm2 hs2 (by linarith [ht₂.1]) (by linarith)
+    have hk := (abs_le.mp (key t₁ t₂)).2
+    have hq1 : t₁ ^ 2 ≤ t₁ * (m / 12) := by nlinarith [ht₁.1]
+    have hq2 : t₂ ^ 2 ≤ t₂ * (m / 12) := by nlinarith [ht₂.1]
+    have hlt : dist (ringPt u₁ (a₀ + s₁.sign * t₁)) (ringPt u₂ (b₀ + s₂.sign * t₂)) ^ 2 < 1 := by
+      nlinarith [ht₁.1, ht₂.1]
+    nlinarith [dist_nonneg (x := ringPt u₁ (a₀ + s₁.sign * t₁)) (y := ringPt u₂ (b₀ + s₂.sign * t₂))]
+
+/-- **At the end of `x`'s arc the linkage cannot be crossed by `x`** (child of `bv_l3`): when `y = r_{u₂}(b₀)` moves perpendicular to
+`E = x − y` (`D₂ = 0`, so `x = u₂ + 2 e b₀`, given `x ≠ u₂`), moving `y` never shortens `|x − y|` to first or second order, so a motion of `x`
+that lengthens it (`s₁ D₁ > 0`) takes every pair beyond `1`, whatever `y` does. -/
+theorem linkage_end (u₁ u₂ : ℂ) (a₀ b₀ : ℝ) (h1 : dist (ringPt u₁ a₀) (ringPt u₂ b₀) = 1) (hxu : ringPt u₁ a₀ ≠ u₂)
+    (hD₂ : dot (I * e b₀) (ringPt u₁ a₀ - ringPt u₂ b₀) = 0) (s₁ : Side)
+    (hD₁ : 0 < s₁.sign * dot (I * e a₀) (ringPt u₁ a₀ - ringPt u₂ b₀)) :
+    ∃ δ > 0, ∀ t₁ ∈ Ioo 0 δ, ∀ b, 1 < dist (ringPt u₁ (a₀ + s₁.sign * t₁)) (ringPt u₂ b) := by
+  set E := ringPt u₁ a₀ - ringPt u₂ b₀ with hE
+  set D₁ := dot (I * e a₀) E
+  have hE1 : ‖E‖ = 1 := by rw [hE, ← dist_eq_norm, h1]
+  -- `w = e b₀ conj E` is real (`D₂ = 0`) of modulus `1`, and not `−1` (else `x = u₂`)
+  set w := e b₀ * starRingEnd ℂ E with hw
+  have hw1 : ‖w‖ = 1 := by rw [hw, norm_mul, norm_e, Complex.norm_conj, hE1, one_mul]
+  have hwim : w.im = 0 := by
+    have : dot (I * e b₀) E = -w.im := by
+      simp only [dot, hw, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im]; ring
+    linarith
+  have hwre : w.re = 1 := by
+    have hsq : w.re ^ 2 = 1 := by
+      have h2 := Complex.sq_norm w
+      rw [hw1, Complex.normSq_apply, hwim] at h2; nlinarith
+    have hfac : (w.re - 1) * (w.re + 1) = 0 := by linear_combination hsq
+    rcases mul_eq_zero.mp hfac with h | hneg
+    · linarith
+    · exfalso
+      apply hxu
+      have hwm : w = -1 := Complex.ext (by simp; linarith) (by simp [hwim])
+      have hEE : E * starRingEnd ℂ E = 1 := by
+        rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, hE1]; norm_num
+      have hEeq : E = -e b₀ := by
+        have : e b₀ * (starRingEnd ℂ E * E) = -E := by rw [← mul_assoc, ← hw, hwm]; ring
+        rw [mul_comm (starRingEnd ℂ E) E, hEE, mul_one] at this
+        linear_combination this
+      have : ringPt u₁ a₀ = ringPt u₂ b₀ + E := by rw [hE]; ring
+      rw [this, hEeq]; simp only [ringPt]; ring
+  refine ⟨min 1 (s₁.sign * D₁), lt_min one_pos hD₁, fun t₁ ht₁ b => ?_⟩
+  have h11 : t₁ < 1 := lt_of_lt_of_le ht₁.2 (min_le_left _ _)
+  have h1D : t₁ < s₁.sign * D₁ := lt_of_lt_of_le ht₁.2 (min_le_right _ _)
+  set X := ringPt u₁ (a₀ + s₁.sign * t₁) - ringPt u₁ a₀ with hX
+  set Y := ringPt u₂ b - ringPt u₂ b₀ with hY
+  have hsum : ringPt u₁ (a₀ + s₁.sign * t₁) - ringPt u₂ b = E + (X - Y) := by rw [hE, hX, hY]; ring
+  have hsq : dist (ringPt u₁ (a₀ + s₁.sign * t₁)) (ringPt u₂ b) ^ 2 = 1 + 2 * dot X E - 2 * dot Y E + ‖X - Y‖ ^ 2 := by
+    rw [dist_eq_norm, hsum, norm_add_sq_real, hE1]
+    have : inner ℝ E (X - Y) = dot X E - dot Y E := by
+      rw [Complex.inner]
+      simp only [dot, ← Complex.sub_re, ← sub_mul]
+    rw [this]; ring
+  have hdy : dot Y E = Real.cos (b - b₀) - 1 := by
+    rw [hY, dot_ringPt_sub u₂ E b₀ b, hD₂, ← hw, hwre]; ring
+  have hdx : dot X E = (Real.cos t₁ - 1) * (e a₀ * starRingEnd ℂ E).re + s₁.sign * Real.sin t₁ * D₁ := by
+    rw [hX, dot_ringPt_sub u₁ E a₀ _, show a₀ + s₁.sign * t₁ - a₀ = s₁.sign * t₁ by ring]
+    cases s₁ <;> simp only [Side.sign, Real.cos_neg, Real.sin_neg, neg_mul, one_mul] <;> ring
+  have hA : |(e a₀ * starRingEnd ℂ E).re| ≤ 1 := by
+    have : ‖e a₀ * starRingEnd ℂ E‖ = 1 := by rw [norm_mul, norm_e, Complex.norm_conj, hE1, one_mul]
+    exact this ▸ Complex.abs_re_le_norm _
+  have hc1 := Real.cos_le_one t₁
+  have hc2 := Real.one_sub_sq_div_two_le_cos (x := t₁)
+  have hcb := Real.cos_le_one (b - b₀)
+  have hs := half_le_sin ht₁.1.le h11.le
+  have e1 : -(t₁ ^ 2 / 2) ≤ (Real.cos t₁ - 1) * (e a₀ * starRingEnd ℂ E).re := by
+    have := abs_le.mp hA
+    nlinarith
+  have e2 : (s₁.sign * D₁) * (t₁ / 2) ≤ s₁.sign * Real.sin t₁ * D₁ := by
+    have := mul_le_mul_of_nonneg_left hs hD₁.le
+    linarith
+  have hgt : 1 < dist (ringPt u₁ (a₀ + s₁.sign * t₁)) (ringPt u₂ b) ^ 2 := by
+    rw [hsq, hdx, hdy]
+    nlinarith [norm_nonneg (X - Y), ht₁.1]
+  nlinarith [dist_nonneg (x := ringPt u₁ (a₀ + s₁.sign * t₁)) (y := ringPt u₂ b)]
+
+/-- **FS114-BV-HEX, (BV-L3)** (`[SokolovVoronov2025]` Lemma 3, `plans/BASE-V-verification.md` § 1b.3): no two points `u₁`, `u₂` of one
+three-colour multicolour at distance in `(1, 2)` have rings that are proper finite circle colourings (in the complementary triple, which at
+six colours is the absent colours). Read at the class the argument reads: nothing about the sectors at `u₁`, `u₂` (cusps, double cusps,
+any degree); the double-event points' adjacency (BV-ND's hypothesis) supplied by the base's hypothesis on the two circles — narrower than
+BV-ND's adjacency, which also admits degree-4 bichromatic points (reported, N-BVL3). A refutation: no model expected. -/
+theorem bv_l3 {F : ArcMap 6} (hF : F.Valid) {u₁ u₂ : ℂ} (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1)
+    (h3 : (F.coloursAt u₁).ncard = 3) (hsame : F.coloursAt u₁ = F.coloursAt u₂) (ht : 1 < dist u₁ u₂) (ht' : dist u₁ u₂ < 2)
+    (hR₁ : F.RingProper u₁) (hR₂ : F.RingProper u₂)
+    (hH : ∀ x, (dist x u₁ = 1 ∨ dist x u₂ = 1) → x ∉ F.fourSet ∪ F.repSet) : False := by
+  sorry
 
 end ArcMap
 

@@ -3603,6 +3603,12 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Valid.pair_le
 #print axioms HadwigerNelson.Plane.ArcMap.Valid.pair_ge
 #print axioms HadwigerNelson.Plane.ArcMap.tangent_pair_ne_one
+-- FS131-I5m (stage 37): the linkage to first order, children for `bv_l3`
+#print axioms HadwigerNelson.Plane.ArcMap.dot_ringPt_sub
+#print axioms HadwigerNelson.Plane.ArcMap.linkage_first_order
+#print axioms HadwigerNelson.Plane.ArcMap.half_le_sin
+#print axioms HadwigerNelson.Plane.ArcMap.linkage_cmp
+#print axioms HadwigerNelson.Plane.ArcMap.linkage_end
 
 #eval IO.println "=== PURCHASED ==="
 

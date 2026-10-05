@@ -169,6 +169,9 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
   `sorryAx`, `linkage_dot_ne_zero` clean), `HexRing`: `HadwigerNelson.Plane.ArcMap.bv_nd` (FS114-BV-HEX's (BV-ND), BASE-V § 1b.2 steps 2–4, with unit
   arcs, at every `k`), and with it `bv_nd1`; children `sq_dist_germ`, `germ_dist_cmp_one`, `exists_chart_of_noRep`, `IsSectorChart.exists_sector_of_region`,
   `BranchGerms.next_adj`, `IsSectorChart.exists_shared`, `Valid.pair_le`, `Valid.pair_ge`, `tangent_pair_ne_one` (all `ArcMap.`).
+- Stage 37 (`data/fs131/i5m/build-stage37.log`; `build/gate/build/20261005T065125Z-2125030.log`; axioms `I5mAxioms37.out`, control `bv_l3` with
+  `sorryAx`, `linkage_dot_ne_zero` clean), `HexRing`, children for `bv_l3` (not yet consumed): `dot_ringPt_sub`, `linkage_first_order`, `half_le_sin`,
+  `linkage_cmp`, `linkage_end` (all `ArcMap.`).
 
 ## Stage 1 — SAVED: the readback
 
@@ -1649,3 +1652,59 @@ added to the "FS131-I5g" block (comment line names this stage). `tools/check_arc
 plan's M and M–H hold, low; the cost of `bv_l3` and `exists_preBend` is in their new content (stage 37), not in iteration.
 
 ## Stage 36 — SAVED
+
+## Stage 37 — SAVED: the linkage to first order (five children for `bv_l3`); `bv_l3` moved below `bv_nd`; the handoff
+
+**Why `bv_l3` needs new content.** `l3_base`'s route transfers (I5g's note), except at one input: its double-event step `hdbl` is `pair_ii`, which
+needs `u₁` cubic trichromatic (`pair_ii` reads `u₁`'s chart for "`d₁ ≠ d₂`"), and `bv_l3` has no sector hypothesis at `u₁`, `u₂` (cusps, double cusps,
+any degree — plan § 8.2's read-back). So `hdbl` must go through `bv_nd`, which needs the senses of motion: the new content is the velocity reading
+of the linkage. Its analytic core is proved here, as five children placed after `bv_nd1`, and **`bv_l3` (statement and `sorry` unchanged) is moved to
+the end of the file**, below `bv_nd` and these children, so its proof can cite them:
+- `linkage_first_order`: with `|r_{u₁}(a₀) − r_{u₂}(b₀)| = 1`, `E` their difference, `D₁ = ⟨i e a₀, E⟩`, `D₂ = ⟨i e b₀, E⟩`:
+  `| |r_{u₁}(a) − r_{u₂}(b)|² − 1 − 2(D₁ sin(a − a₀) − D₂ sin(b − b₀)) | ≤ 3((a − a₀)² + (b − b₀)²)` (from `dot_ringPt_sub`, an identity);
+- `linkage_cmp`: two motions that both lengthen the pair to first order (`s₁ D₁ > 0`, `s₂ D₂ < 0`) leave every nearby moved pair farther than `1`;
+  both shortening, nearer (`half_le_sin`: `sin t ≥ t/2` on `[0, 1]`);
+- `linkage_end`: at `D₂ = 0` (with `x ≠ u₂`, so `x = u₂ + 2 e b₀`) moving `y` never shortens the pair, so a lengthening motion of `x` takes every
+  pair beyond `1`, whatever `y` does.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T065125Z-2125030.log`; driver log `data/fs131/i5m/build-stage37.log`). Wave 5's sorry declarations: **20** (unchanged),
+mine 2 (`bv_l3`, `exists_preBend`). Axioms (`I5mAxioms37.lean` → `.out`): the five children, `bv_nd`, `rot_in` on the standard three; control `bv_l3`
+reads `sorryAx`, `linkage_dot_ne_zero` clean. `scripts/Axioms.lean`: the five children added to the "FS131-I5g" block (comment line names this
+stage). Statements unchanged (`tools/fs131_i5_stmt_check.py d61edefc`: PASS; the checker matches by name within a file, so the move is invisible
+to it, as it should be). New names collision-free on `origin/fs131-w5p`, `origin/fs131-w5c`, `origin/fs131-w4`, `main`. `tools/check_architecture.py`: PASS.
+
+### What is left of this half (2), for the next implementer
+
+- **`bv_l3`** (H; off the walk's path). The route, every input named:
+  1. *Rings.* `C_i := ringCircleColouring hF hc_i hno_i g hg` with **one** `g : Fin 6 → ZMod 3` injective on `(coloursAt u₁)ᶜ = (coloursAt u₂)ᶜ`
+     (`hsame`; `h3` makes it three colours); `hno_i : ∀ x, ¬ F.OnRingArc u_i x` from `RingProper`'s finiteness of `Γ ∩ ω(u_i)` (a lemma to write: a
+     ring arc puts infinitely many points of `Γ` on the circle). No relabelling (`link_relabel`) is needed: both rings read through `g`.
+  2. *`hgen`* (FS112-N3-PAIRS (i)'s place): two generic points off `Γ` at distance `1` with `L₁.f − L₂.f ≡ 0` have `g(col x) = g(col y)`, so one
+     colour (`InjOn`; both colours absent at `u₁` by `not_mem_coloursAt_of_mem_sphere`), against validity (both interior). No `pair_i`.
+  3. *No swap on `ω(u₂)`* (for the band): `RingProper`'s (ii) forbids two change points at distance `1` with one pair; an `IsSwap` gives two
+     (the `LeftVal`/`RightVal` values turn into `GermIn … (region c)` because the ring's points near a change point are off `Γ`, hence interior).
+  4. *The band* `3M + 1 ≤ D ≤ 3M + 2`: `l3_base`'s `hbandL`/`hbandR` verbatim (`hbig_of_noSwap`, `m0_const`, `D0_mod_ne`, `exists_T0_left/right`).
+  5. *`hdbl`* (the new step). At `s₀` with both jumps `±1` and a pair condition: if `|y₀ − u₁| = 2`, `exists_linkage`'s turning clause. Otherwise
+     take the one-sided sides of `φ` and `χ` at `s₀` (`link_val_left`, `link_val_right`) and a generic parameter in each one-sided neighbourhood (the
+     bad set is finite, as `link_path`'s `hbad`), where `hgen` holds. Under P1 (`l₁ ≡ l₂`, `r₁ ≡ r₂`) the admissible (x-side, y-side) pairs before
+     and after are `(l₁, r₂)`, `(r₁, l₂)`; under P2 (`l₁ ≡ r₂`, `r₁ ≡ l₂`) they are `(l₁, l₂)`, `(r₁, r₂)`. So: y on one side before and after ⟹
+     `χ` turns (the conclusion); x on one side ⟹ y too ⟹ the same; otherwise both cross — in opposite senses under P1, the same sense under P2.
+     For a crossing, with `D₁ = ⟨i e φ₀, E⟩`, `D₂ = ⟨i e χ₀, E⟩`: `D₁ = 0` forces `|y₀ − u₁| ∈ {0, 2}` (excluded: `y₀ = u₁` would give `t = 1`);
+     `D₂ = 0` forces `x₀ = u₂ + 2 e χ₀`, and `linkage_end` makes the crossing of `x` impossible (on its lengthening side every pair is beyond `1`,
+     against `|x(s) − y(s)| = 1`); a sign pattern where both motions lengthen or both shorten is refuted by `linkage_cmp` just after `s₀` (with
+     `t₁ = |φ(s) − φ₀|`, `t₂ = |χ(s) − χ₀|` small by continuity); the remaining pattern is a `DoubleEvent`, refuted by `bv_nd` with H at `x₀`, `y₀`
+     (`hH`): P2 with `D₁, D₂ > 0`: sides `ccw, ccw`, `α` the colour of `l₁`; P2 with `D₁, D₂ < 0`: `cw, cw`, `α` of `r₁`; P1 with `D₁ > 0 > D₂`:
+     `ccw, cw`, `α` of `l₁`; P1 with `D₁ < 0 < D₂`: `cw, ccw`, `α` of `r₁`. (`linkage_dot_ne_zero` is not needed on this route.)
+  6. *The rest*: `l3_base`'s two paths `[−θ_A, θ_A]`, `[θ_A, 2π − θ_A]`, the flips at `±θ_A`, the band at `P`'s partners and the closing `omega`,
+     verbatim, with `C₂` for `C₂'`.
+  Estimate: the `l3_base` copy is about 350 lines; steps 1, 3 and 5 are new, about 250 lines. H stands.
+- **`exists_preBend`** (H): the strengthened bend (ruling 317 (b)) — not attempted; E4-BEND-UN (`plans/FS131-E4-derivation.md`) not read in this job.
+
+**Route notes** (stages 35–37): the mirrors of stage-31/32 lemmas compile first time from a text substitution (`hex_side` → `hex_side_far` etc.); a
+lemma placed in a scratch file importing an *upstream* module (`BaseSteps`) can be iterated while a build of `HexRing` runs; `omega` does not see
+through `max n 1` after `simp` (state `ncard ≤ 1` by `exact` from `max 0 1`).
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 37 — SAVED
