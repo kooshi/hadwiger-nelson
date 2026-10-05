@@ -3031,3 +3031,27 @@ reason by the close.*
      planar chain and closes F-RING, `filledGraph_planarLike` and `cvb_thom_reduced`; both have slack against the `Terminal` and MERGE chains, and SEP was
      queued first. **`IsPortGraph`'s vacuity registration**: held for wave 5's landing job (the file is the gate's), with RW2's draft. Confidence: high. In flight
      after RS1's launch: 1 (IMM3) + 1 (I5n) + 1 (RS1) = 3.
+353. **FS131-IMM3 handed back** (Stage 9 SAVED, harness ≈ 375k by the task notice; record `fs131-w4mm`'s `plans/FS131-IMM-implementation.md`, Stages 6–9;
+     report `data/fs131/reports/FS131-IMM3.md`; commits `0cdac72c`, `c3f8c697`, `b0ca1bbd`, `a67164a7`, `8cae85bc`, pushed). **Results, [kernel] on the
+     standard three** (two on no axioms): `Near.exists_gap` restated with `b < X.n` (ruling 344 (a)); MERGE's definitions with spec examples (`gapGerm`,
+     `gapSec`, `branch`, `gapSet`, `Phantom`, `mergeCol`, `rimArc`, `mergeArcs`, `chain`); the map's arcs and colouring and **`merge_hlc`** (4.3 complete — local
+     constancy with no arc on `∂B(v, ρ)`, since a germ's rim point lies on the trimmed arcs by local finiteness, `branchPt_rim_mem_trimArcs`); six of 4.4's eight
+     clauses — `merge_agreesOff`, `merge_ringArcsWithin`, `merge_condition5`, `merge_valid`, `merge_coloursAt_self`, `merge_hasSectors`, and the rim's colour count
+     (`merge_coloursAt_rim`, `merge_ncard_coloursAt_rim`); 65 children in all. **`exists_merge_aux` not landed**: its body is now the assembly with no `sorry` of
+     its own, over two open leaves the job stated — `merge_not_hasRepeatedColour_rim` (the rim clause's `¬ HasRepeatedColour`) and `merge_allowedCone` (`D_c(v′)`
+     unchanged). **Receipt** (Keryx): the five commits exist and `origin/fs131-w4mm` is `8cae85bc`; the stage-9 build log
+     (`build/gate/build/20261005T074636Z-2448915.log`) ends "Build completed successfully (5363 jobs)", 0 warnings other than `sorry`; the `sorry` declarations by
+     grep are the two leaves (`MergeMove`) and `exists_rayMerge_aux` (`Moves`, this branch's pre-RAY copy, item 294); `data/fs131/imm/axioms-stage9.txt`: 121
+     records, 116 standard, 2 axiom-free, 3 on `sorryAx` (the two leaves and `exists_merge_aux`) — **coordinator's tool note**: my first parse counted 120,
+     because the pattern `'([^']+)' depends` misses names with an apostrophe (`BranchGerms.lift_succ'`); re-parsed with `^'(.+?)' depends` per line, it agrees;
+     `tools/fs131_im_statements.py --check`, `tools/fs131_im_split.py --check`, `tools/fs131_imm_decls.py --check` run by Keryx: PASS all three; `wip/B.lean` gone, a
+     new working file `data/fs131/imm/wip/C.lean` (iteration only) left for the successor. **Prediction scored**: IMM2 priced 4.3 + 4.4 at 1,300–1,600 lines; 4.3,
+     six clauses and the assembly took about 960, and the two leaves are priced at 500–600. **No statement defect.** **Held**: (a) both leaves are the lane's own
+     children; `merge_allowedCone`'s truth is IMM1's and IMM2's belief, untested here — a successor may restate either leaf, recording why; (b) `MergeMove` now
+     holds two `sorry` declarations. Credit: IMM3, for local constancy without a rim arc.
+354. **Ruling on IMM3's slot: MERGE's continuation, FS131-IMM4, on `fs131-w4mm` from Stage 9** — the two leaves (`merge_not_hasRepeatedColour_rim`, then
+     `merge_allowedCone`, record § 8.2 and § 9.2), so `exists_merge_aux` lands. Alternative weighed: resuming IMM3 by message (below its line at about 375k).
+     Why fresh: the leaves are 500–600 lines of hard topology, which would carry IMM3 past its line mid-proof; its record is complete. And against wave 5's
+     non-`Terminal` continuation: MERGE is on wave 5's path (item 348 (b)); I5m's two leaves have slack. Restating a leaf (held (a)) is allowed if a hypothesis is
+     missing, recorded with the counterexample — and a defect that reaches `exists_merge_aux`'s statement is a message to me. Confidence: high. **Delete
+     `data/fs131/imm/wip/C.lean`** once its content is in `MergeMove`. In flight after IMM4's launch: 1 (I5n) + 1 (RS1) + 1 (IMM4) = 3.
