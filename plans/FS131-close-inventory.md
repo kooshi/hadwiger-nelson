@@ -3472,3 +3472,30 @@ reason by the close.*
      weighed: the three remaining `exists_preBend` children or `bv_l3` first. Why: the construction (3,000–4,000 lines) is the longest piece left on this branch;
      the children and `bv_l3` can run on a branch cut from `fs131-w5` beside it (disjoint files). Confidence: high. In flight after KP2's launch: 1 (IL2) + 1 (IO1)
      + 1 (KP2) = 3.
+388. **FS131-IL2 done: the limit's lane A is complete** (harness ≈ 525k by the task notice; record `fs131-w5c`'s `plans/FS131-limit-kernel-plan.md`, Stages 9–11;
+     report `data/fs131/reports/FS131-IL2.md`; commits `8de90c86`, `5e3f16a5`, `729c55e4`, `8d84435e`, pushed). **Results, [kernel] on the standard three,
+     statements unchanged**: `exists_clean` (every valid map has a clean valid modification with the same colours at every point, through `ArcMap.clean` — the arcs
+     cut to their maximal sub-arcs of points with two or more colours; 36 children and 8 definitions, each with a spec example, `clean` with an adversary);
+     `treatPts_inter_finite`, `badCount_eq_zero_iff`, `badCount_lt_top` (with `hP`, item 380; `Procedure` now imports `UnitArc` for `l60_le`);
+     **`mergeAvailable_of_bothKind`** (N2-RED's parenthesis, a one-mind hand proof, now kernel-checked: a ring arc about `P` whose two side colours are both
+     carried at `P`, with at most three colours there, makes MERGE available — U1's two side cones belong to one third colour `d`, which has two sectors and a
+     non-degenerate allowed cone). **`Limit` holds no `sorry`.** **Receipt** (Keryx): `origin/fs131-w5c` is `8d84435e`; the build log
+     (`build/gate/build/20261005T104536Z-3456361.log`) ends "Build completed successfully (5372 jobs)", 0 warnings other than `sorry`; `sorry` by grep: `Limit` 0,
+     `Procedure` 3 (`exists_vertexStep`, held; `exists_arcStep`; `exists_terminalSeq`), `Terminal` 2 (lane B's); `data/fs131/il/IL2Axioms.out` parsed: 132 records,
+     123 standard (the five named among them), 7 on `sorryAx` through those open leaves. **Generalizations**: `badCount_lt_top` needs no cleanness (its `hc` kept,
+     referenced by `have _ := hc`); `mergeAvailable_of_bothKind` uses the plane hypothesis only for `P ∈ dom` and `F.Covers P 1`. **Prediction scored**:
+     `exists_clean` planned H (400–600 lines, one session), about 800 lines in well under a session; the finiteness lemmas M each, came out E–M (wave 3's
+     `RegularAt`/`finite_not_regular` held the local structure). **Tool defect**: `tools/fs131_i5h_stmt_check.py`'s single regex reads a `def … := {…}` through
+     to the next `:= by` (a false FAIL on `treatPts`; definitions compared only by accident) — fixed in IL2's copy `tools/fs131_il_stmt_check.py` (five plants
+     fire). **Slip, its own, caught**: a control's exit status first read through `| tail`. **For the merge with `main`**: `Limit`'s `Arc.ptL`, `Arc.paramsL`,
+     `Arc.subL` and four lemmas copy `main`'s `Surgery` `Arc.pt`, `Arc.params`, `Arc.sub`; `branchPt_mem_closure_sector_pair` duplicates `fs131-w5`'s
+     `BranchGerms.branchPt_mem_closure_sector`. Credit: IL2, for the cleaning step in one pass and N2-RED's parenthesis in the kernel.
+389. **Rulings on IL2's held items, and its slot.** (a) **`badCount_lt_top`'s `hc` dropped** by the next job that touches `Procedure` (a stronger theorem; its
+     only consumer is open). Confidence: high. (b) **IL2's slot → FS131-M6 on `fs131-w5c`: merge `origin/fs131-w5` (which now carries `main`, the planar chain and
+     the non-`Terminal` lane) into `fs131-w5c`**: since their base `75689a4c` they share six changed files (`ARCHITECTURE.md`, the I5 record, `BaseDense`,
+     `Contact`, `Proofs.lean`, `scripts/Axioms.lean`) — `Contact`'s `exists_merge` takes `main`'s proved version (statement identical, item 355); `framePt →
+     fromFrame` in `HornShadow`, `Terminal`, `FlankUA`'s `w5c` side; copies removed (`isPreconnected_hornSet_unit`, `IsHorn.isRingArc_lower_ua`, `Arc.ptL`/
+     `paramsL`/`subL`, `branchPt_mem_closure_sector_pair`, any the dupes tool finds); a three-way statement check; build; axioms print (`flankQ_*`, `c_double`,
+     `cv_class`, `c_ends` should drop to the standard three); then, as budget allows, lane B's `run_hornBoundsQR` and `stuckRun_ne_univ`. Alternative weighed:
+     merging `main` alone into `fs131-w5c`. Why: `fs131-w5` holds `main` plus every other wave-5 lane, so this one merge leaves only KP2's later `BendCollar`
+     commits and the procedure's last steps for wave 5's landing. Confidence: high. In flight after M6's launch: 1 (IO1) + 1 (KP2) + 1 (M6) = 3.
