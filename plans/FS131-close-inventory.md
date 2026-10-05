@@ -2515,3 +2515,26 @@ reason by the close.*
      three to four sessions left, against E5 plus the `Terminal` half at about three), and a continuation keeps the branch warm (item 301's reason).
      **Coordinator's slip**: item 311 fixed E5 to "the next slot that frees" without weighing which lane might free first; logged so the order is ruled per
      slot, not in advance. Confidence: medium-high. In flight after IP4's launch: 1 (G4) + 1 (IT1) + 1 (I5f) + 1 (IP4) = 4.
+314. **FS131-IT1 done: T-GRAPH is held** (harness ≈ 457k; record `fs131-w5t`'s `plans/FS131-IT1-thomassen.md`; report `data/fs131/reports/FS131-IT1.md`;
+     commits `9ee952c8` … `5604b532`, pushed). **Results, each [kernel] on the standard three**: `Thomassen.reduced_props_of_planarLike` (T-GRAPH, with `finSep`,
+     ruling 309) — read against the informal claim, for a graph with the planar properties `H` is connected, locally finite, locally Hamiltonian and infinite
+     (`[Thomassen1999]` pp. 851–852 with CVB B2 step 3's finiteness for his count); the owed inhabitant `triLattice_planarLike` (every field exercised; `finSep`
+     by empty interiors); **`ladder_adversary`** (the ladder satisfies every field but `finSep`, which fails, and `LocallyHamiltonian (reduced ladder)` fails — the
+     field is necessary); 73 theorems in all. **The move**: the `Thomassen` block now lives in `Proofs/HadwigerNelson/Thomassen.lean`, importing Mathlib only,
+     byte-identical to the original (`tools/fs131_it_move.py` PASS, both planted controls red). **F-SEP** `ArcMap.filledGraph_finSep` stated in `MapGraph` with
+     `sorry` beside `filledGraph_oneInf`, its sketch in the docstring, and added to `filledGraph_planarLike`; so `cvb_thom_reduced` now rests on six map-side
+     leaves (F-LOC, F-CONN, F-INF, F-RING, F-ONE, F-SEP). **Receipt** (Keryx): the seven commits exist and `origin/fs131-w5t` is `5604b532`; the stage-5 build log
+     (`build/gate/build/20261005T025622Z-795162.log`) ends "Build completed successfully (5404 jobs)", 0 warnings other than `sorry`; `sorry` in `Thomassen.lean`
+     by grep: 0; its imports are Mathlib's only; `finSep` read at the structure (l. 91) and the leaf at l. 1109–1111 (statement unchanged);
+     `data/fs131/it/axioms-it1-stage5.txt` parsed by script: 76 records, 74 within the standard three, the 2 partners (`filledGraph_finSep`, `cvb_thom_reduced`) on
+     `sorryAx`. **Generalization**: `exists_cycle_of_cyclic` (on any graph, a cyclic sequence of equal-or-adjacent entries with no interleaving and at least three
+     values is a cycle's vertex set) and a reachability layer for components of `G.induce S`. **Prediction scored**: the plan priced F-RING plus T-GRAPH at two to
+     three sessions; T-GRAPH alone took well under one, the ladder well under the half session allowed. **Tool defect, fixed**: its receipt checker failed loudly
+     ("NO RECORD") on a primed name. **Open check** (item 308): CVB B2 step 3's own text. **Held**: `MapGraph`'s module docstring still says the pure graph theory
+     lives there. Credit: IT1, for the counterexample and the adversary that proves the field necessary.
+315. **Rulings on IT1's held items, and its slot.** (a) **The merge**: FS131-IP4 merges `fs131-w5t` (at `5604b532`) into `fs131-w5p` at its next saved stage —
+     a brief amendment, keeping both sides where IT1's `MapGraph` hunks meet IP4's F-leaf proofs — and fixes `MapGraph`'s module docstring line in the same stage;
+     F-SEP then joins IP4's order beside F-LOC/CONN/INF/ONE (IT1's sketch in its docstring). Alternative weighed: merging at IP4's hand-back. Why: the hunks are
+     adjacent to lines IP4 is about to write, so the sooner the cheaper, and IP4 can then prove F-SEP on the same branch. Confidence: high. (b) **IT1's slot →
+     FS131-E5** (the re-derivation, items 306, 311, 313 (c)). `fs131-w5t` joins the removal list after the merge. In flight after E5's launch: 1 (G4) + 1 (I5f,
+     waiting on its build) + 1 (IP4) + 1 (E5) = 4.
