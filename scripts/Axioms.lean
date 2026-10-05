@@ -3100,6 +3100,30 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.AeProperRegions.IsRegion.chain_step
 #print axioms HadwigerNelson.Plane.AeProperRegions.IsRegion.dist_lt_one
 
+/-! ## FS-131 wave 5 (job FS131-IT1) — T-GRAPH: the reachability layer, the inhabitant of `PlanarLike`, the reduction's children; F-SEP (sorry until the planar chain lands it) -/
+
+#print axioms HadwigerNelson.Thomassen.ReachIn.refl
+#print axioms HadwigerNelson.Thomassen.ReachIn.symm
+#print axioms HadwigerNelson.Thomassen.ReachIn.trans
+#print axioms HadwigerNelson.Thomassen.ReachIn.of_adj
+#print axioms HadwigerNelson.Thomassen.ReachIn.mono
+#print axioms HadwigerNelson.Thomassen.ReachIn.left_mem
+#print axioms HadwigerNelson.Thomassen.ReachIn.right_mem
+#print axioms HadwigerNelson.Thomassen.reachIn_of_mem_support
+#print axioms HadwigerNelson.Thomassen.mem_of_reachIn_of_closed
+#print axioms HadwigerNelson.Thomassen.exists_exit
+#print axioms HadwigerNelson.Thomassen.reachable_induce_iff
+#print axioms HadwigerNelson.Thomassen.compIn_eq_of_reachIn
+#print axioms HadwigerNelson.Thomassen.supp_finite_iff
+#print axioms HadwigerNelson.Thomassen.mem_twoSepInterior_iff
+#print axioms HadwigerNelson.Thomassen.connected_induce_iff'
+#print axioms HadwigerNelson.Thomassen.triLattice_reachIn
+#print axioms HadwigerNelson.Thomassen.triLattice_offTwo_infinite
+#print axioms HadwigerNelson.Thomassen.triLattice_twoSepInterior
+#print axioms HadwigerNelson.Thomassen.triRing_isRing
+#print axioms HadwigerNelson.Thomassen.triLattice_planarLike
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_finSep
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

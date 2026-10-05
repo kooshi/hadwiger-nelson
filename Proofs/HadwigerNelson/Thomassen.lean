@@ -67,10 +67,13 @@ k − 1`"). -/
 def TwiceApart (r : List V) (y : V) : Prop :=
   ∃ i j : ℕ, i + 1 < j ∧ ¬ (i = 0 ∧ j + 1 = r.length) ∧ r[i]? = some y ∧ r[j]? = some y
 
-/-- **The planar properties Thomassen's reduction reads** (FS131-KP plan § 4; CVB B2 steps 1–3): locally finite, connected, infinite; a ring
-at every vertex, with `G − x − y` connected unless `y` appears twice apart in `x`'s ring; and for every pair exactly one infinite component of
-`G − x − y` (CVB step 2: "the complement of the compact connected `cl x̂ ∪ cl ŷ` has one unbounded component and every other component of
-`M − x − y` is finite"). The filled map graph of a valid plane map has them (`ArcMap.filledGraph_planarLike`); the reduction is
+/-- **The planar properties Thomassen's reduction reads** (FS131-KP plan § 4; CVB B2 steps 1–3; `finSep` added by ruling, inventory items
+308–309): locally finite, connected, infinite; a ring at every vertex, with `G − x − y` connected unless `y` appears twice apart in `x`'s ring;
+for every pair exactly one infinite component of `G − x − y` (CVB step 2: "the complement of the compact connected `cl x̂ ∪ cl ŷ` has one
+unbounded component and every other component of `M − x − y` is finite"); and every vertex in the interior of finitely many pairs (on a map:
+the tiles have diameter at most `1`, so a pair whose interior holds a tile lies near it). Without `finSep` the reduction fails: in the strong
+product of a ray with an edge, every other field holds, the levels are 2-separators nesting forever, none is maximal, and `H = G` is not locally
+Hamiltonian (FS131-IT1). The filled map graph of a valid plane map has them (`ArcMap.filledGraph_planarLike`); the reduction is
 `reduced_props_of_planarLike`. -/
 structure PlanarLike : Prop where
   /-- Locally finite. -/
@@ -83,15 +86,158 @@ structure PlanarLike : Prop where
   ring : ∀ x, ∃ r, IsRing G x r ∧ ∀ y, y ≠ x → ¬ TwiceApart r y → (G.induce (offTwo x y)).Connected
   /-- Exactly one infinite component of `G − x − y`. -/
   oneInf : ∀ x y, x ≠ y → ∃ c : (G.induce (offTwo x y)).ConnectedComponent, ¬ c.supp.Finite ∧ ∀ c', ¬ c'.supp.Finite → c' = c
+  /-- Every vertex lies in the interior of finitely many pairs (read by the maximal 2-separator above a 2-separator). -/
+  finSep : ∀ v, {p : V × V | v ∈ twoSepInterior G p.1 p.2}.Finite
+
+section Reduction
+
+/-! ## Reachability inside a vertex set -/
+
+/-- `a` reaches `b` by a walk of `G` whose vertices all lie in `S`. -/
+def ReachIn (S : Set V) (a b : V) : Prop := ∃ p : G.Walk a b, ∀ v ∈ p.support, v ∈ S
+
+variable {G}
+
+/-- A vertex of `S` reaches itself inside `S`. -/
+theorem ReachIn.refl {S : Set V} {a : V} (ha : a ∈ S) : ReachIn G S a a := ⟨.nil, by simpa using ha⟩
+
+/-- Reaching inside `S` is symmetric. -/
+theorem ReachIn.symm {S : Set V} {a b : V} (h : ReachIn G S a b) : ReachIn G S b a := by
+  obtain ⟨p, hp⟩ := h
+  exact ⟨p.reverse, fun v hv => hp v (by simpa using hv)⟩
+
+/-- Reaching inside `S` is transitive. -/
+theorem ReachIn.trans {S : Set V} {a b c : V} (h₁ : ReachIn G S a b) (h₂ : ReachIn G S b c) : ReachIn G S a c := by
+  obtain ⟨p, hp⟩ := h₁
+  obtain ⟨q, hq⟩ := h₂
+  refine ⟨p.append q, fun v hv => ?_⟩
+  rw [SimpleGraph.Walk.mem_support_append_iff] at hv
+  rcases hv with hv | hv
+  · exact hp v hv
+  · exact hq v hv
+
+/-- Adjacent vertices of `S` reach each other inside `S`. -/
+theorem ReachIn.of_adj {S : Set V} {a b : V} (ha : a ∈ S) (hb : b ∈ S) (hab : G.Adj a b) : ReachIn G S a b :=
+  ⟨.cons hab .nil, fun v hv => by
+    simp only [SimpleGraph.Walk.support_cons, SimpleGraph.Walk.support_nil, List.mem_cons, List.not_mem_nil,
+      or_false] at hv
+    rcases hv with rfl | rfl <;> assumption⟩
+
+/-- Reaching inside `S` is reaching inside any larger set. -/
+theorem ReachIn.mono {S T : Set V} (hST : S ⊆ T) {a b : V} (h : ReachIn G S a b) : ReachIn G T a b := by
+  obtain ⟨p, hp⟩ := h
+  exact ⟨p, fun v hv => hST (hp v hv)⟩
+
+/-- The start of a walk inside `S` is in `S`. -/
+theorem ReachIn.left_mem {S : Set V} {a b : V} (h : ReachIn G S a b) : a ∈ S := by
+  obtain ⟨p, hp⟩ := h
+  exact hp a p.start_mem_support
+
+/-- The end of a walk inside `S` is in `S`. -/
+theorem ReachIn.right_mem {S : Set V} {a b : V} (h : ReachIn G S a b) : b ∈ S := by
+  obtain ⟨p, hp⟩ := h
+  exact hp b p.end_mem_support
+
+/-- Every vertex of a walk inside `S` is reached inside `S` from the walk's start. -/
+theorem reachIn_of_mem_support {S : Set V} {a b : V} (p : G.Walk a b) (hp : ∀ v ∈ p.support, v ∈ S) :
+    ∀ v ∈ p.support, ReachIn G S a v := by
+  induction p with
+  | nil => intro v hv; simp only [SimpleGraph.Walk.support_nil, List.mem_singleton] at hv; subst hv
+           exact ReachIn.refl (hp _ (by simp))
+  | cons hadj q ih =>
+    intro v hv
+    simp only [SimpleGraph.Walk.support_cons, List.mem_cons] at hv
+    have hq : ∀ v ∈ q.support, v ∈ S := fun v hv => hp v (by simp [hv])
+    rcases hv with rfl | hv
+    · exact ReachIn.refl (hp _ (by simp))
+    · exact (ReachIn.of_adj (hp _ (by simp)) (hq _ q.start_mem_support) hadj).trans (ih hq v hv)
+
+/-- A set closed under adjacency inside `S` contains everything reached inside `S` from its points. -/
+theorem mem_of_reachIn_of_closed {S C : Set V} (hC : ∀ v w, v ∈ C → w ∈ S → G.Adj v w → w ∈ C) {a b : V} (ha : a ∈ C)
+    (h : ReachIn G S a b) : b ∈ C := by
+  obtain ⟨p, hp⟩ := h
+  induction p with
+  | nil => exact ha
+  | cons hadj q ih =>
+    exact ih (hC _ _ ha (hp _ (by simp)) hadj) (fun v hv => hp v (by simp [hv]))
+
+/-- A walk from inside `S` to outside leaves `S` along an edge: some vertex reached inside `S` is adjacent to a vertex of
+the walk outside `S`. -/
+theorem exists_exit {S : Set V} {a b : V} (p : G.Walk a b) (ha : a ∈ S) (hb : b ∉ S) :
+    ∃ z w, ReachIn G S a z ∧ G.Adj z w ∧ w ∉ S ∧ w ∈ p.support := by
+  induction p with
+  | nil => exact absurd ha hb
+  | @cons u u' _ hadj q ih =>
+    by_cases hu' : u' ∈ S
+    · obtain ⟨z, w, hz, hzw, hw, hwq⟩ := ih hu' hb
+      exact ⟨z, w, (ReachIn.of_adj ha hu' hadj).trans hz, hzw, hw, by simp [hwq]⟩
+    · exact ⟨u, u', ReachIn.refl ha, hadj, hu', by simp⟩
+
+/-- Reachability in the induced graph is reachability inside the set. -/
+theorem reachable_induce_iff {S : Set V} {a b : V} (ha : a ∈ S) (hb : b ∈ S) :
+    (G.induce S).Reachable ⟨a, ha⟩ ⟨b, hb⟩ ↔ ReachIn G S a b := by
+  constructor
+  · rintro ⟨p⟩
+    have key : ∀ (u w : S) (q : (G.induce S).Walk u w), ReachIn G S u w := by
+      intro u w q
+      induction q with
+      | nil => exact ReachIn.refl (Subtype.prop _)
+      | cons h q ih => exact (ReachIn.of_adj (Subtype.prop _) (Subtype.prop _) (SimpleGraph.induce_adj.mp h)).trans ih
+    exact key _ _ p
+  · rintro ⟨p, hp⟩
+    exact ⟨p.induce S hp⟩
+
+/-- The component of `a` inside `S`, as a set of vertices. -/
+def compIn (S : Set V) (a : V) : Set V := {b | ReachIn G S a b}
+
+/-- Vertices reaching each other inside `S` have the same component inside `S`. -/
+theorem compIn_eq_of_reachIn {S : Set V} {a b : V} (h : ReachIn G S a b) : compIn (G := G) S a = compIn (G := G) S b := by
+  ext c; exact ⟨fun hc => h.symm.trans hc, fun hc => h.trans hc⟩
+
+/-- A component of the induced graph is finite exactly when the component inside the set is. -/
+theorem supp_finite_iff {S : Set V} {a : V} (ha : a ∈ S) :
+    ((G.induce S).connectedComponentMk ⟨a, ha⟩).supp.Finite ↔ (compIn (G := G) S a).Finite := by
+  have hsupp : Subtype.val '' ((G.induce S).connectedComponentMk ⟨a, ha⟩).supp = compIn (G := G) S a := by
+    ext b
+    simp only [Set.mem_image, SimpleGraph.ConnectedComponent.mem_supp_iff, SimpleGraph.ConnectedComponent.eq, compIn,
+      Set.mem_setOf_eq]
+    constructor
+    · rintro ⟨⟨b, hb⟩, hr, rfl⟩
+      exact (reachable_induce_iff hb ha).mp hr |>.symm
+    · intro h
+      exact ⟨⟨b, h.right_mem⟩, (reachable_induce_iff _ _).mpr h.symm, rfl⟩
+  rw [← hsupp]
+  exact ⟨fun h => h.image _, fun h => h.of_finite_image Subtype.val_injective.injOn⟩
+
+/-- `int(x, y)` read through `compIn`: the vertices off `x` and `y` whose component in `G − x − y` is finite. -/
+theorem mem_twoSepInterior_iff {x y v : V} :
+    v ∈ twoSepInterior G x y ↔ v ∈ offTwo x y ∧ (compIn (G := G) (offTwo x y) v).Finite := by
+  constructor
+  · rintro ⟨hv, hf⟩; exact ⟨hv, (supp_finite_iff hv).mp hf⟩
+  · rintro ⟨hv, hf⟩; exact ⟨hv, (supp_finite_iff hv).mpr hf⟩
+
+/-- The induced graph on `S` is connected exactly when `S` is nonempty and any two of its vertices reach each other inside `S`. -/
+theorem connected_induce_iff' {S : Set V} :
+    (G.induce S).Connected ↔ S.Nonempty ∧ ∀ a b, a ∈ S → b ∈ S → ReachIn G S a b := by
+  rw [SimpleGraph.connected_iff]
+  constructor
+  · rintro ⟨hp, ⟨⟨a, ha⟩⟩⟩
+    exact ⟨⟨a, ha⟩, fun a b ha hb => (reachable_induce_iff ha hb).mp (hp _ _)⟩
+  · rintro ⟨⟨a, ha⟩, h⟩
+    exact ⟨fun a b => (reachable_induce_iff a.2 b.2).mpr (h a.1 b.1 a.2 b.2), ⟨⟨a, ha⟩⟩⟩
+
+end Reduction
 
 /-- **Thomassen's reduction, as pure graph theory** (`[Thomassen1999]` pp. 851–852 with CVB B2 step 3's replacement of the count by
 finiteness): for a graph with the planar properties, `H = reduced G` is connected, locally finite, locally Hamiltonian and infinite. The
-proof (plan § 4, leaf T-GRAPH): 2-separators are pairs with finite components; interiors nest (Thomassen: "`int(M, x, y) ⊆ int(M, u, v)`" when
-`x` or `y` lies in `int(M, u, v)`, from the rings' separation); a maximal 2-separator exists above every 2-separator (a strictly increasing
-chain of finite interiors containing a fixed vertex's neighbourhood is finite, by local finiteness and `oneInf`); `H` connected (a shortest
-path never enters an interior), locally finite (an induced subgraph); locally Hamiltonian (delete from `x`'s ring the vertices in interiors
-of 2-separators through `x`; the reduced cyclic sequence has no repetition and at least three entries, else `G` is finite by `oneInf`); infinite
-(every interior is finite and the maximal 2-separators' crucial edges are locally finite in number). -/
+proof (FS131-IT1, over FS131-KP plan § 4's route, with `finSep`): no cut vertex (the rings' consecutive clause); every 2-separator an edge (the
+rings' second part); every component of `G − x − y` adjacent to both `x` and `y`; interiors nest (Thomassen: "`int(M, x, y) ⊆ int(M, u, v)`"
+when `x` lies in `int(M, u, v)`; `oneInf`'s existence half); a vertex lies in the interior of at most one maximal pair; above every 2-separator a
+maximal one (`finSep`: of the finitely many pairs whose interior holds a fixed interior vertex, one of largest interior); `H` connected (each
+interior vertex sent to an end of its maximal pair), locally finite (an induced subgraph), infinite (a finite `H` has finitely many pairs, each
+with a finite interior); locally Hamiltonian (each entry of `x`'s ring sent to the vertex of `H` it stands for — itself, or the unique `y` in `H`
+with the entry in `int(x, y)`; the image has consecutive entries equal or adjacent, no interleaving value by the rings' separation and
+`oneInf`'s uniqueness half, and at least three values, and its runs collapse to a cycle on `x`'s neighbourhood in `H`). -/
 theorem reduced_props_of_planarLike (h : PlanarLike G) :
     (reduced G).Connected ∧ (∀ x, ((reduced G).neighborSet x).Finite) ∧ LocallyHamiltonian (reduced G) ∧ Infinite (reducedVerts G) := by
   sorry
@@ -565,6 +711,114 @@ theorem triLattice_hyps :
       omega
   · rw [ENat.card_eq_top_of_infinite]; exact le_top
 
+/-! ## The inhabitant: the triangular lattice has the planar properties -/
+
+/-- In the triangular lattice `G − x − y` is connected, for every pair: every vertex off `x` and `y` climbs a column free of both (its own,
+or one beside it) to a row above both, and that row is a path. -/
+theorem triLattice_reachIn {x y a b : ℤ × ℤ} (ha : a ∈ offTwo x y) (hb : b ∈ offTwo x y) :
+    ReachIn triLattice (offTwo x y) a b := by
+  set b₀ : ℤ := max x.2 y.2 + 1 with hb₀
+  have hR : ∀ p : ℤ × ℤ, triLattice.Adj p (p.1 + 1, p.2) := fun p => triLattice_adj.mpr (by simp)
+  have hU : ∀ p : ℤ × ℤ, triLattice.Adj p (p.1, p.2 + 1) := fun p => triLattice_adj.mpr (by simp)
+  have hUL : ∀ p : ℤ × ℤ, triLattice.Adj p (p.1 - 1, p.2 + 1) := fun p => triLattice_adj.mpr (by simp)
+  have hrowS : ∀ c : ℤ, (c, b₀) ∈ offTwo x y := fun c =>
+    ⟨fun h => by have := congrArg Prod.snd h; simp only at this; omega,
+     fun h => by have := congrArg Prod.snd h; simp only at this; omega⟩
+  -- the row `b₀` is a path off `x` and `y`
+  have hrow : ∀ c : ℤ, ReachIn triLattice (offTwo x y) (0, b₀) (c, b₀) := by
+    intro c
+    induction c using Int.induction_on with
+    | zero => exact ReachIn.refl (hrowS 0)
+    | succ n ih => exact ih.trans (ReachIn.of_adj (hrowS _) (hrowS _) (hR (n, b₀)))
+    | pred n ih =>
+      refine ih.trans (ReachIn.of_adj (hrowS _) (hrowS _) ?_)
+      have := hR (-(n : ℤ) - 1, b₀)
+      simp only [sub_add_cancel] at this
+      exact this.symm
+  -- a column free of `x` and `y` is a path off them, reaching the row
+  have hcol : ∀ c : ℤ, c ≠ x.1 → c ≠ y.1 → ∀ k : ℤ, ReachIn triLattice (offTwo x y) (c, b₀) (c, k) := by
+    intro c hcx hcy k
+    have hS : ∀ k : ℤ, (c, k) ∈ offTwo x y := fun k =>
+      ⟨fun h => hcx (congrArg Prod.fst h), fun h => hcy (congrArg Prod.fst h)⟩
+    induction k using Int.inductionOn' (b := b₀) with
+    | zero => exact ReachIn.refl (hS _)
+    | succ k _ ih => exact ih.trans (ReachIn.of_adj (hS _) (hS _) (hU (c, k)))
+    | pred k _ ih =>
+      refine ih.trans (ReachIn.of_adj (hS _) (hS _) ?_)
+      have := hU (c, k - 1)
+      simp only [sub_add_cancel] at this
+      exact this.symm
+  -- every vertex off `x` and `y` reaches the base point
+  have hbase : ∀ v, v ∈ offTwo x y → ReachIn triLattice (offTwo x y) (0, b₀) v := by
+    intro v hv
+    by_cases hfree : v.1 ≠ x.1 ∧ v.1 ≠ y.1
+    · exact (hrow v.1).trans (hcol v.1 hfree.1 hfree.2 v.2)
+    · by_cases hfree' : v.1 + 1 ≠ x.1 ∧ v.1 + 1 ≠ y.1
+      · have hS' : (v.1 + 1, v.2) ∈ offTwo x y :=
+          ⟨fun h => hfree'.1 (congrArg Prod.fst h), fun h => hfree'.2 (congrArg Prod.fst h)⟩
+        exact (hrow _).trans ((hcol _ hfree'.1 hfree'.2 v.2).trans (ReachIn.of_adj hS' hv (hR v).symm))
+      · have hfree'' : v.1 - 1 ≠ x.1 ∧ v.1 - 1 ≠ y.1 := by
+          constructor <;> omega
+        have hS' : (v.1 - 1, v.2 + 1) ∈ offTwo x y :=
+          ⟨fun h => hfree''.1 (congrArg Prod.fst h), fun h => hfree''.2 (congrArg Prod.fst h)⟩
+        exact (hrow _).trans ((hcol _ hfree''.1 hfree''.2 (v.2 + 1)).trans (ReachIn.of_adj hS' hv (hUL v).symm))
+  exact (hbase a ha).symm.trans (hbase b hb)
+
+theorem triLattice_offTwo_infinite (x y : ℤ × ℤ) : (offTwo x y).Infinite := by
+  have hS : offTwo x y = ({x, y} : Set (ℤ × ℤ))ᶜ := by ext v; simp [offTwo]
+  rw [hS]
+  exact (Set.toFinite _).infinite_compl
+
+/-- The triangular lattice has no 2-separator: every interior is empty. -/
+theorem triLattice_twoSepInterior (x y : ℤ × ℤ) : twoSepInterior triLattice x y = ∅ := by
+  ext v
+  simp only [Set.mem_empty_iff_false, iff_false]
+  intro hv
+  obtain ⟨hvS, hf⟩ := mem_twoSepInterior_iff.mp hv
+  exact triLattice_offTwo_infinite x y (hf.subset fun b hb => triLattice_reachIn hvS hb)
+
+/-- The ring of the triangular lattice at `x`: its hexagon, in order. -/
+def triRing (x : ℤ × ℤ) : List (ℤ × ℤ) :=
+  [(x.1 + 1, x.2), (x.1, x.2 + 1), (x.1 - 1, x.2 + 1), (x.1 - 1, x.2), (x.1, x.2 - 1), (x.1 + 1, x.2 - 1)]
+
+theorem triRing_isRing (x : ℤ × ℤ) : IsRing triLattice x (triRing x) := by
+  refine ⟨fun y => ?_, fun i a b ha hb => ?_, fun y i j hij hi hj => ?_⟩
+  · simp only [triRing, List.mem_cons, List.not_mem_nil, or_false, triLattice_adj, Prod.ext_iff]
+    omega
+  · simp only [triRing, List.length_cons, List.length_nil] at hb
+    right
+    rcases i with _ | _ | _ | _ | _ | _ | i <;>
+      simp only [triRing, List.getElem?_cons_succ, List.getElem?_cons_zero, Option.some.injEq, Nat.reduceAdd,
+        Nat.reduceMod, List.getElem?_nil] at ha hb <;> (try simp at ha) <;> subst ha <;> subst hb <;>
+      simp only [triLattice_adj] <;> omega
+  · exfalso
+    have hnd : (triRing x).Nodup := by
+      simp [triRing, Prod.ext_iff]
+      omega
+    exact List.nodup_iff_getElem?_ne_getElem?.mp hnd i j hij
+      (List.getElem?_eq_some_iff.mp hj).1 (hi.trans hj.symm)
+
+/-- **The inhabitant of `PlanarLike`**: the triangular lattice (rings its hexagons, no repeats; `G − x − y` always connected, so one
+infinite component and no 2-separator). Every field is exercised: the rings and `oneInf` at every vertex and pair, `finSep` with every
+interior empty. -/
+theorem triLattice_planarLike : PlanarLike triLattice where
+  locFin := triLattice_hyps.1
+  conn := triLattice_hyps.2.1
+  inf := inferInstance
+  ring x := ⟨triRing x, triRing_isRing x, fun y _ _ => connected_induce_iff'.mpr
+    ⟨⟨(max x.1 y.1 + 1, 0), fun h => by have := congrArg Prod.fst h; simp only at this; omega,
+      fun h => by have := congrArg Prod.fst h; simp only at this; omega⟩,
+     fun _ _ ha hb => triLattice_reachIn ha hb⟩⟩
+  oneInf x y _ := by
+    obtain ⟨v₀, hv₀⟩ := (triLattice_offTwo_infinite x y).nonempty
+    refine ⟨(triLattice.induce (offTwo x y)).connectedComponentMk ⟨v₀, hv₀⟩, fun hf => ?_, fun c' _ => ?_⟩
+    · rw [supp_finite_iff hv₀] at hf
+      exact triLattice_offTwo_infinite x y (hf.subset fun b hb => triLattice_reachIn hv₀ hb)
+    · obtain ⟨⟨v, hv⟩, rfl⟩ := c'.exists_rep
+      exact SimpleGraph.ConnectedComponent.sound ((reachable_induce_iff hv hv₀).mpr (triLattice_reachIn hv hv₀))
+  finSep v := by
+    simp only [triLattice_twoSepInterior, Set.mem_empty_iff_false, Set.setOf_false, Set.finite_empty]
+
 /-- A spec example for `triLattice`: `(0, 0)` and `(1, −1)` are adjacent, `(0, 0)` and `(1, 1)` are not. -/
 example : triLattice.Adj (0, 0) (1, -1) ∧ ¬ triLattice.Adj (0, 0) (1, 1) := by
   constructor
@@ -579,5 +833,18 @@ example : ∃ k, 0 < k ∧ k < 4 ∧ (fun i : ℕ => (i : ℤ)) k = 2 :=
 neighbours. -/
 example : ∃ c₁ c₂, c₁ ≠ c₂ ∧ triLattice.Adj (0, 0) c₁ ∧ triLattice.Adj (1, 0) c₁ ∧ triLattice.Adj (0, 0) c₂ ∧ triLattice.Adj (1, 0) c₂ :=
   triLattice_hyps.2.2.1.exists_two_common (by simp [triLattice])
+
+/-- A spec example for `ReachIn`: in the triangular lattice `(2, 0)` reaches `(-1, 0)` off `(0, 0)` and `(1, 0)`, and nothing reaches inside a
+set from outside it. -/
+example : ReachIn triLattice (offTwo (0, 0) (1, 0)) (2, 0) (-1, 0) ∧ ¬ ReachIn triLattice {v | v ≠ (0, 0)} (0, 0) (1, 0) :=
+  ⟨triLattice_reachIn (by simp [offTwo]) (by simp [offTwo]), fun h => h.left_mem rfl⟩
+
+/-- A spec example for `compIn`: in the triangular lattice the component of `(5, 5)` off `(0, 0)` and `(1, 0)` is everything off them. -/
+example : compIn (G := triLattice) (offTwo (0, 0) (1, 0)) (5, 5) = offTwo (0, 0) (1, 0) := by
+  ext b
+  exact ⟨fun hb => hb.right_mem, fun hb => triLattice_reachIn (by simp [offTwo]) hb⟩
+
+/-- A spec example for `triRing`: the hexagon at the origin, in order. -/
+example : triRing (0, 0) = [(1, 0), (0, 1), (-1, 1), (-1, 0), (0, -1), (1, -1)] := by decide
 
 end HadwigerNelson.Thomassen

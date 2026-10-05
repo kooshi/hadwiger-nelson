@@ -121,3 +121,29 @@ module.
 **Meanwhile, in scratch (not yet in the tree)**: the whole route of § 1.3 elaborates under `lake env lean` with `finSep` added — the reachability
 layer, the 2-separator lemmas, the collapse of a cyclic sequence to a cycle, `H`'s four properties, and `triLattice_planarLike`; no `sorry`. Next
 stage: the field (the ruling), then the inhabitant and the leaf into the module.
+
+## Stage 3 — SAVED: `finSep`, F-SEP stated, the reachability layer, the inhabitant
+
+- **The field** (ruling 309): `PlanarLike.finSep : ∀ v, {p : V × V | v ∈ twoSepInterior G p.1 p.2}.Finite`, exactly as proposed, with its field
+  docstring; `PlanarLike`'s docstring rewritten (the field, why it is needed, the counterexample in words) and `reduced_props_of_planarLike`'s
+  docstring rewritten to the route that reads `finSep` (§ 1.3's eight steps). Neither statement otherwise moved.
+- **`MapGraph`** (my extended touches only): `ArcMap.filledGraph_finSep` (leaf F-SEP) stated beside `filledGraph_oneInf`, `sorry`, its docstring
+  carrying my map-side sketch (one mind); `filledGraph_planarLike`'s constructor gains `filledGraph_finSep hF hP`, its docstring "five" → "six".
+- **The reachability layer** (`Thomassen`, `section Reduction`, `variable {G}` scoped to the section so the leaf's binders stay as they were):
+  `ReachIn G S a b` (a walk inside `S`) with `refl`, `symm`, `trans`, `of_adj`, `mono`, `left_mem`, `right_mem`; `reachIn_of_mem_support`,
+  `mem_of_reachIn_of_closed`, `exists_exit` (a walk leaving `S` leaves along an edge); `reachable_induce_iff` (the bridge to `G.induce S`);
+  `compIn`, `compIn_eq_of_reachIn`, `supp_finite_iff` (a component of `G.induce S` is finite iff its vertex set is), `mem_twoSepInterior_iff`,
+  `connected_induce_iff'`.
+- **The inhabitant `triLattice_planarLike : PlanarLike triLattice`**, every field exercised: rings `triRing x` (the hexagon, `triRing_isRing`),
+  and `G − x − y` connected for every pair (`triLattice_reachIn`: a column free of both, the vertex's own or one beside it, climbs to a row above
+  both), so `oneInf` holds with one component and `finSep` with every interior empty (`triLattice_twoSepInterior`). Children
+  `triLattice_offTwo_infinite`.
+- **Spec examples** for the new definitions: `ReachIn` (a positive and a negative), `compIn`, `triRing` (by `decide`).
+- `scripts/Axioms.lean`: block "FS-131 wave 5 (job FS131-IT1)" above `=== PURCHASED ===`, 21 records (20 `Thomassen` theorems and
+  `ArcMap.filledGraph_finSep`, `sorry` until the planar chain lands it).
+- **Build: OK — 447 of 447 batches, 3 modules rebuilt (`Thomassen`, `MapGraph`, `Proofs`), 12 with warnings, every warning `declaration uses
+  'sorry'` (0 others), exit 0** (`build/gate/build/20261005T022833Z-581152.log`, last line "Build completed successfully (5404 jobs)."; driver log
+  `data/fs131/it/build-stage3.log`). In `Thomassen` the one `sorry` left is the leaf (l. 241); in `MapGraph` the new F-SEP (l. 160) beside IP3's.
+- **Re-pricing from the first two leaves** (`LEAN.md`): the plan priced F-RING and T-GRAPH together at two to three sessions; T-GRAPH alone took
+  well under one (the whole route elaborated in scratch within this stage's span), so the plan's price was high by a factor of three or more — as
+  the cost model predicts.
