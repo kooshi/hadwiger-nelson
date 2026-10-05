@@ -3636,3 +3636,6 @@ reason by the close.*
 403. **Ruling on CG1's slot: `stuckRun_ne_univ` and the procedure's last steps on `fs131-w5c`** (queue (2)), brief to be written from M6's and IL2's — **held
      for the session after the compaction now due** (coordinator's context at 93%); the slot stays open until then. In flight: 1 (CC1, waiting on its build) +
      1 (IO3) = 2.
+404. **FS131-IO3 stopped on a server-side API error** (HTTP 529, overloaded), after Stage 11 (`5177c867`, readback) with uncommitted edits to `OpenMove`,
+     `AxiomsIO.lean`, `scripts/Axioms.lean`; **resumed by message** (the same mind, below its line), told its last committed stage and its uncommitted files.
+     Not a slip.
