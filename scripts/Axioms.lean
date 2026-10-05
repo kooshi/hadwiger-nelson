@@ -3099,6 +3099,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.discRetract_of_mem
 #print axioms HadwigerNelson.Plane.dist_discRetract_le
 #print axioms HadwigerNelson.Plane.isPreconnected_thickening
+#print axioms HadwigerNelson.Plane.inter_nonempty_of_interleaved_of_isClosed_left
 
 #eval IO.println "=== PURCHASED ==="
 

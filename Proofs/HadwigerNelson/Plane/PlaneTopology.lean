@@ -24,6 +24,7 @@ The plane topology wave 5's planar leaves read (job FS131-KP, `plans/FS131-plana
 * `inter_nonempty_of_interleaved` — **two continua in a closed disc joining interleaved points of its circle meet** (`retArcs_nested`).
   Proved (FS131-IX1) from the crossing for paths, `exists_eq_of_interleaved_paths` (a lift through `exp` over the parameter square),
   and an approximation of each continuum by a path in its thickening, pushed into the disc by `discRetract`.
+  `inter_nonempty_of_interleaved_of_isClosed_left`: the same with only one of the two continua closed.
 -/
 
 namespace HadwigerNelson.Plane
@@ -598,6 +599,61 @@ theorem inter_nonempty_of_interleaved {u : ℂ} {K K' : Set ℂ} (hK : IsClosed 
   obtain ⟨x, y, hxy⟩ := exists_eq_of_interleaved_paths h₁ h₂ h₃ h₄ γ γ' (fun x => (hγ x).1) (fun y => (hγ' y).1)
   exact Set.disjoint_left.mp hδd (hγ x).2 (hxy ▸ (hγ' y).2)
 
+/-- **The crossing lemma with only one continuum closed** (a generalization found by FS131-IX1): `K` closed and preconnected, `K'` merely
+preconnected, both in `B̄(u, 1)`, joining interleaved circle points, meet. Were they disjoint, `K'` would lie in one path component of
+`B̄(u, 1) ∖ K` (relatively open in the locally path-connected disc: a point of it sees the convex `ball z (infDist z K) ∩ B̄(u, 1)`), so a
+path in `B̄(u, 1) ∖ K` would join `r(s')` to `r(t')`; its range is a closed preconnected set disjoint from `K`, against
+`inter_nonempty_of_interleaved`. -/
+theorem inter_nonempty_of_interleaved_of_isClosed_left {u : ℂ} {K K' : Set ℂ} (hK : IsClosed K) (hKc : IsPreconnected K)
+    (hK'c : IsPreconnected K') (hKd : K ⊆ closedBall u 1) (hK'd : K' ⊆ closedBall u 1) {s s' t t' : ℝ} (h₁ : s < s') (h₂ : s' < t)
+    (h₃ : t < t') (h₄ : t' < s + 2 * π) (hs : ringPt u s ∈ K) (ht : ringPt u t ∈ K) (hs' : ringPt u s' ∈ K')
+    (ht' : ringPt u t' ∈ K') : (K ∩ K').Nonempty := by
+  by_contra hne
+  have hK'K : ∀ w ∈ K', w ∉ K := fun w hw hwK => hne ⟨w, hwK, hw⟩
+  set V := closedBall u 1 ∩ Kᶜ with hV
+  have hKne : K.Nonempty := ⟨_, hs⟩
+  -- a point of `V` is joined in `V` to every point of the disc near it
+  have near : ∀ z ∈ V, ∀ w ∈ closedBall u 1, dist w z < infDist z K → JoinedIn V z w := by
+    intro z hz w hw hwz
+    have hsub : ball z (infDist z K) ∩ closedBall u 1 ⊆ V := fun y hy =>
+      ⟨hy.2, fun hyK => (not_lt.mpr (infDist_le_dist_of_mem hyK)) (by rw [dist_comm]; exact hy.1)⟩
+    have hz' : z ∈ ball z (infDist z K) ∩ closedBall u 1 :=
+      ⟨mem_ball_self ((hK.notMem_iff_infDist_pos hKne).mp hz.2), hz.1⟩
+    exact (((convex_ball z _).inter (convex_closedBall u 1)).isPathConnected ⟨z, hz'⟩).joinedIn z hz' w
+      ⟨hwz, hw⟩ |>.mono hsub
+  set P := {z | JoinedIn V (ringPt u s') z} with hP
+  set U₁ := ⋃ z ∈ P, ball z (infDist z K) with hU₁
+  set U₂ := ⋃ z ∈ V \ P, ball z (infDist z K) with hU₂
+  have hV' : ∀ w ∈ K', w ∈ V := fun w hw => ⟨hK'd hw, hK'K w hw⟩
+  have hpos : ∀ z ∈ V, 0 < infDist z K := fun z hz => (hK.notMem_iff_infDist_pos hKne).mp hz.2
+  have hcov : K' ⊆ U₁ ∪ U₂ := by
+    intro w hw
+    by_cases hwP : w ∈ P
+    · exact Or.inl (mem_iUnion₂.mpr ⟨w, hwP, mem_ball_self (hpos w (hV' w hw))⟩)
+    · exact Or.inr (mem_iUnion₂.mpr ⟨w, ⟨hV' w hw, hwP⟩, mem_ball_self (hpos w (hV' w hw))⟩)
+  have hinP : ∀ w ∈ K', w ∈ U₁ → w ∈ P := by
+    intro w hw hwU
+    obtain ⟨z, hzP, hwz⟩ := mem_iUnion₂.mp hwU
+    exact JoinedIn.trans hzP (near z hzP.target_mem w (hK'd hw) hwz)
+  have hU₂ : ∀ w ∈ K', w ∈ U₁ → w ∉ U₂ := by
+    intro w hw hw1 hw2
+    obtain ⟨z, ⟨hzV, hzP⟩, hwz⟩ := mem_iUnion₂.mp hw2
+    exact hzP (JoinedIn.trans (hinP w hw hw1) (near z hzV w (hK'd hw) hwz).symm)
+  have hsub : K' ⊆ U₁ := by
+    have h := hK'c U₁ U₂ (isOpen_biUnion fun _ _ => isOpen_ball) (isOpen_biUnion fun _ _ => isOpen_ball) hcov
+    by_contra hnot
+    obtain ⟨w, hw, hwU⟩ := not_subset.mp hnot
+    obtain ⟨y, hy, hy1, hy2⟩ := h ⟨_, hs', mem_iUnion₂.mpr ⟨_, JoinedIn.refl (hV' _ hs'), mem_ball_self (hpos _ (hV' _ hs'))⟩⟩
+      ⟨w, hw, (hcov hw).resolve_left hwU⟩
+    exact hU₂ y hy hy1 hy2
+  have hj : JoinedIn V (ringPt u s') (ringPt u t') := hinP _ ht' (hsub ht')
+  set γ' := hj.somePath
+  obtain ⟨z, hzK, hzγ⟩ := inter_nonempty_of_interleaved hK (isCompact_range γ'.continuous).isClosed hKc
+    (isPreconnected_range γ'.continuous) hKd (by rintro _ ⟨x, rfl⟩; exact (hj.somePath_mem x).1) h₁ h₂ h₃ h₄ hs ht
+    ⟨0, γ'.source⟩ ⟨1, γ'.target⟩
+  obtain ⟨x, rfl⟩ := hzγ
+  exact (hj.somePath_mem x).2 hzK
+
 /-! ### Spec examples -/
 
 /-- A spec example for `exists_inter_of_finite_closed_cover`: `[0, 2]` covered by `[0, 1]` and `[1, 2]` has a point in both. -/
@@ -630,6 +686,19 @@ example : (segment ℝ (ringPt 0 0) (ringPt 0 π) ∩ segment ℝ (ringPt 0 (π 
     (convex_segment _ _).isPreconnected
     ((convex_closedBall 0 1).segment_subset (sphere_subset_closedBall (ringPt_mem_sphere 0 0))
       (sphere_subset_closedBall (ringPt_mem_sphere 0 π)))
+    ((convex_closedBall 0 1).segment_subset (sphere_subset_closedBall (ringPt_mem_sphere 0 _))
+      (sphere_subset_closedBall (ringPt_mem_sphere 0 _)))
+    (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos])
+    (left_mem_segment _ _ _) (right_mem_segment _ _ _) (left_mem_segment _ _ _) (right_mem_segment _ _ _)
+
+
+/-- The model for `inter_nonempty_of_interleaved_of_isClosed_left`: the two crossing diameters again (every hypothesis holds). -/
+example : (segment ℝ (ringPt 0 0) (ringPt 0 π) ∩ segment ℝ (ringPt 0 (π / 2)) (ringPt 0 (3 * π / 2))).Nonempty := by
+  have hc : IsClosed (segment ℝ (ringPt 0 0) (ringPt 0 π)) := by
+    rw [segment_eq_image' ℝ]; exact (isCompact_Icc.image (by fun_prop)).isClosed
+  exact inter_nonempty_of_interleaved_of_isClosed_left hc (convex_segment _ _).isPreconnected (convex_segment _ _).isPreconnected
+    ((convex_closedBall 0 1).segment_subset (sphere_subset_closedBall (ringPt_mem_sphere 0 _))
+      (sphere_subset_closedBall (ringPt_mem_sphere 0 _)))
     ((convex_closedBall 0 1).segment_subset (sphere_subset_closedBall (ringPt_mem_sphere 0 _))
       (sphere_subset_closedBall (ringPt_mem_sphere 0 _)))
     (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos])
