@@ -5441,6 +5441,24 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_inType_iff
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_outType_iff
 
+-- FS131-CC1: lane C of the collar bend — `Pushforward`'s supporting lemmas (the two-germ chart on a circle), and lane C's new children
+#print axioms HadwigerNelson.Plane.ArcMap.HasDegree.unique
+#print axioms HadwigerNelson.Plane.ArcMap.HasDegree.iff_eq
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.not_hasRepeatedColour_of_zero
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.hasRepeatedColour_iff
+#print axioms HadwigerNelson.Plane.ArcMap.curveAt_one_sub_eq_sphere
+#print axioms HadwigerNelson.Plane.ArcMap.branchPt_congr
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_nextβ_zero
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_nextβ_one
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_nextκ_zero
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_nextκ_one
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_mem_sector_zero
+#print axioms HadwigerNelson.Plane.ArcMap.circleGerms_mem_sector_one
+#print axioms HadwigerNelson.Plane.ArcMap.isSectorChart_circle
+#print axioms HadwigerNelson.Plane.ArcMap.exists_two_le_encard_fin_two_iff
+#print axioms HadwigerNelson.Plane.ArcMap.degree_of_circle
+#print axioms HadwigerNelson.Plane.ArcMap.exists_sphere_inter_ball_subset_openArc
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

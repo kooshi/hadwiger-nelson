@@ -1,0 +1,18 @@
+new theorem in Pushforward.lean: HasDegree.unique
+new theorem in Pushforward.lean: HasDegree.iff_eq
+new theorem in Pushforward.lean: IsSectorChart.not_hasRepeatedColour_of_zero
+new theorem in Pushforward.lean: IsSectorChart.hasRepeatedColour_iff
+new theorem in Pushforward.lean: curveAt_one_sub_eq_sphere
+new theorem in Pushforward.lean: branchPt_congr
+new def in Pushforward.lean: circleGerms
+new theorem in Pushforward.lean: circleGerms_nextβ_zero
+new theorem in Pushforward.lean: circleGerms_nextβ_one
+new theorem in Pushforward.lean: circleGerms_nextκ_zero
+new theorem in Pushforward.lean: circleGerms_nextκ_one
+new theorem in Pushforward.lean: circleGerms_mem_sector_zero
+new theorem in Pushforward.lean: circleGerms_mem_sector_one
+new theorem in Pushforward.lean: isSectorChart_circle
+new theorem in Pushforward.lean: exists_two_le_encard_fin_two_iff
+new theorem in Pushforward.lean: degree_of_circle
+new theorem in Pushforward.lean: exists_sphere_inter_ball_subset_openArc
+PASS
