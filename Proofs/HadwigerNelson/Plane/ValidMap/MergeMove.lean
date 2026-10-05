@@ -1152,12 +1152,12 @@ theorem gap_clear (hF : F.Valid) (hv : F.Covers v 1) {c : Fin k} (hc : c ∈ F.c
     · exact ⟨1, one_pos, fun t _ φ hφ => absurd (hφ.1.trans hφ.2) hlt⟩
 
 /-- **The gap** (FS110-W-MERGE, record § 4.1): if `int D_c(v)` is non-empty and `c` has `n + 1 ≥ 2` sectors at `v`, there are two
-`c`-sectors `idx s a` and `idx s b`, consecutive along the orbit (`a < b < a + n`, no `c`-sector strictly between), such that every
+`c`-sectors `idx s a` and `idx s b`, consecutive along the orbit (`a < b < n`, no `c`-sector strictly between), such that every
 point of the gap between them near `v` (directions from germ `idx s (a + 1)` to germ `idx s b`) is clear for `c`. The gap is the
 one after an excluded direction `e θs ∉ D_c(v)` (when `D_c(v)` is not the plane). -/
 theorem exists_gap (hF : F.Valid) (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)
     (hn : F.HasSectors v c (n + 1)) (hD : (interior (F.allowedCone v c)).Nonempty) :
-    ∃ s : Fin X.n, ∃ a b : ℕ, a < b ∧ b < a + X.n ∧ X.col (BranchGerms.idx s a) = c ∧
+    ∃ s : Fin X.n, ∃ a b : ℕ, a < b ∧ b < X.n ∧ X.col (BranchGerms.idx s a) = c ∧
       X.col (BranchGerms.idx s b) = c ∧ (∀ m, a < m → m < b → X.col (BranchGerms.idx s m) ≠ c) ∧
       ∃ ρc > 0, ∀ t ∈ Ioo 0 ρc, ∀ φ, X.G.liftDir s (a + 1) t ≤ φ → φ ≤ X.G.liftDir s b t →
         F.IsClear c (v + (t : ℂ) * e φ) := by
@@ -1249,6 +1249,690 @@ theorem exists_gap (hF : F.Valid) (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1
     have hhi : X.G.lift s b < θs + 2 * π :=
       lt_of_le_of_ne hhi' fun h => hθsK (by rw [← e_add_two_pi, ← h]; exact h2K)
     exact X.gap_clear hF hv hc hD hbv.1 hav.2 hbv.2.2 hθsK hlo hhi
+
+end Near
+
+end ArcMap
+
+end HadwigerNelson.Plane
+
+/-! ## FS131-IMM3: MERGE's map — definitions, the new arcs, the colouring and its local constancy (record § 5.2) -/
+
+namespace HadwigerNelson.Plane
+
+open Complex Real Set Filter Topology Metric
+
+/-! ## MERGE's map: the gap, the new arcs, the colouring (record § 5.2) -/
+
+namespace BranchGerms
+
+variable {n : ℕ} (G : BranchGerms n)
+
+/-- The germ indices of the gap after `idx s a`: `idx s m` for `a < m ≤ b`. -/
+def gapGerm (s : Fin n) (a b : ℕ) : Set (Fin n) := {j | ∃ m, a < m ∧ m ≤ b ∧ idx s m = j}
+
+/-- The sector indices of the gap after `idx s a`: `idx s m` for `a < m < b`. -/
+def gapSec (s : Fin n) (a b : ℕ) : Set (Fin n) := {i | ∃ m, a < m ∧ m < b ∧ idx s m = i}
+
+/-- Germ `j`'s branch out to `r`, without `v`. -/
+def branch (v : ℂ) (r : ℝ) (j : Fin n) : Set ℂ := branchPt v (G.β j) (G.κ j) '' Ioo 0 r
+
+/-- **The gap out to `r`**: its sectors and its germs' branches. -/
+def gapSet (v : ℂ) (s : Fin n) (a b : ℕ) (r : ℝ) : Set ℂ :=
+  (⋃ i ∈ gapSec s a b, G.sector v r i) ∪ ⋃ j ∈ gapGerm s a b, G.branch v r j
+
+/-- A germ is **phantom** (for the sector colours `col`) when the sectors on its two sides have one colour. -/
+def Phantom {k : ℕ} (col : Fin n → Fin k) (j : Fin n) : Prop := ∃ i, next i = j ∧ col i = col j
+
+/-- **MERGE's colouring** at the radius `ρ`: `c` on the gap out to `ρ/2`; on a germ's branch out to `ρ`, the colour of the sector
+after the germ; `Fcol` elsewhere. -/
+noncomputable def mergeCol {k : ℕ} (v : ℂ) (col : Fin n → Fin k) (Fcol : ℂ → Fin k) (s : Fin n) (a b : ℕ) (c : Fin k)
+    (ρ : ℝ) : ℂ → Fin k := fun z => by
+  classical
+  exact if z ∈ G.gapSet v s a b (ρ / 2) then c else if h : ∃ j, z ∈ G.branch v ρ j then col h.choose else Fcol z
+
+/-- **The rim arc** at `ρ/2` across the gap, from germ `idx s (a + 1)` to germ `idx s b`. -/
+noncomputable def rimArc (v : ℂ) (s : Fin n) (a b : ℕ) (ρ : ℝ) : Arc :=
+  .circ v (ρ / 2) (G.liftDir s (a + 1) (ρ / 2)) (G.liftDir s b (ρ / 2))
+
+/-- **MERGE's new arcs** at the radius `ρ`: the germs off the gap out to `ρ/2`; the non-phantom germs' pieces between `ρ/2` and `ρ`;
+and the rim arc at `ρ/2` across the gap when the gap has a sector. No arc on `∂B(v, ρ)`. -/
+noncomputable def mergeArcs {k : ℕ} (v : ℂ) (col : Fin n → Fin k) (s : Fin n) (a b : ℕ) (ρ : ℝ) : Set Arc :=
+  (fun j => germArc v (G.β j) (G.κ j) (ρ / 2)) '' (gapGerm s a b)ᶜ ∪
+    (⋃ j ∈ {j | ¬ Phantom col j}, (germArc v (G.β j) (G.κ j) ρ).outer v (ρ / 2)) ∪
+    {A | a + 1 < b ∧ A = G.rimArc v s a b ρ}
+
+theorem mem_gapGerm {s : Fin n} {a b : ℕ} {j : Fin n} : j ∈ gapGerm s a b ↔ ∃ m, a < m ∧ m ≤ b ∧ idx s m = j := Iff.rfl
+
+theorem mem_gapSec {s : Fin n} {a b : ℕ} {i : Fin n} : i ∈ gapSec s a b ↔ ∃ m, a < m ∧ m < b ∧ idx s m = i := Iff.rfl
+
+/-- **Every index is on the orbit once in `[a, a + n)`** (for `a < n`). -/
+theorem exists_rep (s : Fin n) {a : ℕ} (ha : a < n) (i : Fin n) : ∃ m, a ≤ m ∧ m < a + n ∧ idx s m = i := by
+  obtain ⟨m₀, hm₀, h⟩ := exists_idx_eq s i
+  rcases le_or_gt a m₀ with h1 | h1
+  · exact ⟨m₀, h1, by omega, h⟩
+  · exact ⟨m₀ + n, by omega, by omega, by rw [idx_add_n, h]⟩
+
+/-- The orbit is injective on `[a, a + n)`. -/
+theorem idx_inj {s : Fin n} {a m m' : ℕ} (h1 : a ≤ m) (h2 : m < a + n) (h3 : a ≤ m') (h4 : m' < a + n)
+    (he : idx s m = idx s m') : m = m' := by
+  rcases lt_trichotomy m m' with h | h | h
+  · exact absurd he (idx_ne h (by omega))
+  · exact h
+  · exact absurd he.symm (idx_ne h (by omega))
+
+/-- An index on the orbit at `m ∈ [a, a + n)` is a gap germ exactly when `a < m ≤ b` (for `b < a + n`). -/
+theorem idx_mem_gapGerm_iff {s : Fin n} {a b m : ℕ} (hb : b < a + n) (h1 : a ≤ m) (h2 : m < a + n) :
+    idx s m ∈ gapGerm s a b ↔ a < m ∧ m ≤ b := by
+  constructor
+  · rintro ⟨m', hm'1, hm'2, he⟩
+    have := idx_inj (by omega) (by omega) h1 h2 he
+    omega
+  · rintro ⟨h3, h4⟩; exact ⟨m, h3, h4, rfl⟩
+
+/-- An index on the orbit at `m ∈ [a, a + n)` is a gap sector exactly when `a < m < b` (for `b < a + n`). -/
+theorem idx_mem_gapSec_iff {s : Fin n} {a b m : ℕ} (hb : b < a + n) (h1 : a ≤ m) (h2 : m < a + n) :
+    idx s m ∈ gapSec s a b ↔ a < m ∧ m < b := by
+  constructor
+  · rintro ⟨m', hm'1, hm'2, he⟩
+    have := idx_inj (by omega) (by omega) h1 h2 he
+    omega
+  · rintro ⟨h3, h4⟩; exact ⟨m, h3, h4, rfl⟩
+
+/-- The germ after sector `idx s m` is phantom exactly when the two sectors beside it have one colour. -/
+theorem phantom_idx_succ_iff {k : ℕ} {col : Fin n → Fin k} {s : Fin n} {m : ℕ} :
+    Phantom col (idx s (m + 1)) ↔ col (idx s m) = col (idx s (m + 1)) := by
+  constructor
+  · rintro ⟨i, hi, hc⟩
+    rw [← next_idx] at hi
+    rw [← next_injective hi]; exact hc
+  · intro h; exact ⟨idx s m, next_idx s m, h⟩
+
+end BranchGerms
+
+-- spec examples for MERGE's definitions
+example : (⟨1, by omega⟩ : Fin 3) ∈ BranchGerms.gapGerm (⟨0, by omega⟩ : Fin 3) 0 1 :=
+  ⟨1, by omega, le_rfl, rfl⟩
+example : (⟨0, by omega⟩ : Fin 3) ∉ BranchGerms.gapGerm (⟨0, by omega⟩ : Fin 3) 0 2 := by
+  rintro ⟨m, h1, h2, he⟩
+  interval_cases m <;> simp [BranchGerms.idx, Fin.ext_iff] at he
+example : (⟨1, by omega⟩ : Fin 3) ∈ BranchGerms.gapSec (⟨0, by omega⟩ : Fin 3) 0 2 := ⟨1, by omega, by omega, rfl⟩
+example : (⟨1, by omega⟩ : Fin 3) ∉ BranchGerms.gapSec (⟨0, by omega⟩ : Fin 3) 0 1 := by
+  rintro ⟨m, h1, h2, -⟩; omega
+example (G : BranchGerms 3) (v : ℂ) (r : ℝ) (j : Fin 3) : G.branch v r j = branchPt v (G.β j) (G.κ j) '' Ioo 0 r := rfl
+example (G : BranchGerms 3) (v : ℂ) (r : ℝ) (s : Fin 3) :
+    G.gapSet v s 0 2 r = (⋃ i ∈ BranchGerms.gapSec s 0 2, G.sector v r i) ∪ ⋃ j ∈ BranchGerms.gapGerm s 0 2, G.branch v r j := rfl
+example : BranchGerms.Phantom (n := 2) (k := 2) (fun _ => 0) ⟨1, by omega⟩ := ⟨⟨0, by omega⟩, rfl, rfl⟩
+example : ¬ BranchGerms.Phantom (n := 2) (k := 2) (fun i => ⟨i.val, i.isLt⟩) ⟨1, by omega⟩ := by
+  rintro ⟨i, hi, hc⟩
+  have : i.val = 1 := by simpa [Fin.ext_iff] using hc
+  have h0 : BranchGerms.next i = ⟨0, by omega⟩ := by
+    unfold BranchGerms.next; rw [dif_neg (by omega)]
+  rw [h0] at hi; exact absurd hi (by simp)
+example (G : BranchGerms 3) (v : ℂ) (col : Fin 3 → Fin 2) (Fcol : ℂ → Fin 2) (s : Fin 3) (c : Fin 2) (ρ : ℝ) (z : ℂ)
+    (hz : z ∈ G.gapSet v s 0 2 (ρ / 2)) : G.mergeCol v col Fcol s 0 2 c ρ z = c := by
+  simp [BranchGerms.mergeCol, hz]
+example (G : BranchGerms 3) (v : ℂ) (col : Fin 3 → Fin 2) (Fcol : ℂ → Fin 2) (s : Fin 3) (c : Fin 2) (ρ : ℝ) (z : ℂ)
+    (hz : z ∉ G.gapSet v s 0 2 (ρ / 2)) (hb : ∀ j, z ∉ G.branch v ρ j) : G.mergeCol v col Fcol s 0 2 c ρ z = Fcol z := by
+  simp [BranchGerms.mergeCol, hz, hb]
+example (G : BranchGerms 3) (v : ℂ) (s : Fin 3) (ρ : ℝ) :
+    G.rimArc v s 0 2 ρ = .circ v (ρ / 2) (G.liftDir s 1 (ρ / 2)) (G.liftDir s 2 (ρ / 2)) := rfl
+example (G : BranchGerms 3) (v : ℂ) (col : Fin 3 → Fin 2) (s : Fin 3) (ρ : ℝ) :
+    G.rimArc v s 0 2 ρ ∈ G.mergeArcs v col s 0 2 ρ := Or.inr ⟨by omega, rfl⟩
+example (G : BranchGerms 3) (v : ℂ) (col : Fin 3 → Fin 2) (s : Fin 3) (ρ : ℝ) :
+    G.rimArc v s 0 1 ρ ∉ G.mergeArcs v col s 0 1 ρ ∨
+      G.rimArc v s 0 1 ρ ∈ (fun j => germArc v (G.β j) (G.κ j) (ρ / 2)) '' (BranchGerms.gapGerm s 0 1)ᶜ ∪
+        (⋃ j ∈ {j | ¬ BranchGerms.Phantom col j}, (germArc v (G.β j) (G.κ j) ρ).outer v (ρ / 2)) := by
+  by_cases h : G.rimArc v s 0 1 ρ ∈ G.mergeArcs v col s 0 1 ρ
+  · rcases h with h | ⟨h, -⟩
+    · exact Or.inr h
+    · omega
+  · exact Or.inl h
+
+namespace ArcMap
+
+namespace Near
+
+variable {k : ℕ} {F : ArcMap k} {v : ℂ} {X : F.Near v}
+
+/-- Half a small radius is small. -/
+theorem Small.half {ρ : ℝ} (h : X.Small ρ) : X.Small (ρ / 2) :=
+  ⟨by linarith [h.1], by linarith [h.1, h.2.1], by linarith [h.1, h.2.2.1], by linarith [h.1, h.2.2.2]⟩
+
+/-- A smaller positive radius is small. -/
+theorem Small.mono {ρ ρ' : ℝ} (h : X.Small ρ) (h0 : 0 < ρ') (hle : ρ' ≤ ρ) : X.Small ρ' :=
+  ⟨h0, hle.trans_lt h.2.1, hle.trans_lt h.2.2.1, hle.trans_lt h.2.2.2⟩
+
+/-- A branch point is at its distance from `v`. -/
+theorem dist_branchPt (j : Fin X.n) {t : ℝ} (ht : 0 ≤ t) : dist (branchPt v (X.G.β j) (X.G.κ j) t) v = t := by
+  rw [dist_eq_norm, norm_branchPt_sub v _ _ ht]
+
+/-- The outer pieces of germ `j`'s arc out to `ρ`, outside `B(v, ρ/2)`, lie on its branch between `ρ/2` and `ρ`. -/
+theorem outer_subset {ρ : ℝ} (h : X.Small ρ) (j : Fin X.n) :
+    ∀ A ∈ (X.germ ρ j).outer v (ρ / 2), A.carrier ⊆ branchPt v (X.G.β j) (X.G.κ j) '' Icc (ρ / 2) ρ := by
+  have hv : v ∈ (X.germ ρ j).carrier := by rw [carrier_germ h]; exact ⟨0, ⟨le_rfl, h.1.le⟩, by simp [branchPt]⟩
+  obtain ⟨h1, -⟩ := Arc.outer_spec (germArc_nondegenerate v _ _ h.1) hv (by linarith [h.1] : (0 : ℝ) < ρ / 2)
+  intro A hA z hz
+  obtain ⟨-, hsub, hd⟩ := h1 A hA
+  have hz' : z ∈ (X.germ ρ j).carrier := hsub hz
+  rw [carrier_germ h] at hz'
+  obtain ⟨t, ht, rfl⟩ := hz'
+  refine ⟨t, ⟨?_, ht.2⟩, rfl⟩
+  have := hd _ hz
+  rwa [dist_branchPt j ht.1] at this
+
+/-- A point of germ `j`'s branch between `ρ/2` (excluded) and `ρ` lies on an outer piece. -/
+theorem mem_outer {ρ : ℝ} (h : X.Small ρ) (j : Fin X.n) {t : ℝ} (ht : t ∈ Ioc (ρ / 2) ρ) :
+    branchPt v (X.G.β j) (X.G.κ j) t ∈ ⋃ A ∈ (X.germ ρ j).outer v (ρ / 2), A.carrier := by
+  have hv : v ∈ (X.germ ρ j).carrier := by rw [carrier_germ h]; exact ⟨0, ⟨le_rfl, h.1.le⟩, by simp [branchPt]⟩
+  obtain ⟨-, h2⟩ := Arc.outer_spec (germArc_nondegenerate v _ _ h.1) hv (by linarith [h.1] : (0 : ℝ) < ρ / 2)
+  have ht0 : 0 ≤ t := by linarith [ht.1, h.1]
+  refine h2 ⟨?_, ?_⟩
+  · show _ ∈ (X.germ ρ j).carrier
+    rw [carrier_germ h]; exact ⟨t, ⟨ht0, ht.2⟩, rfl⟩
+  · rw [mem_closedBall, dist_branchPt j ht0, not_le]; exact ht.1
+
+/-- A sector point is at a distance in `(0, r)` from `v`. -/
+theorem norm_of_mem_sector {r : ℝ} {i : Fin X.n} {z : ℂ} (hz : z ∈ X.G.sector v r i) : ‖z - v‖ ∈ Ioo 0 r := by
+  obtain ⟨t, ht, φ, -, rfl⟩ := hz
+  rw [add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg ht.1.le]; exact ht
+
+/-- A sector point inside a smaller radius is in the smaller sector. -/
+theorem mem_sector_of_lt {r r' : ℝ} {i : Fin X.n} {z : ℂ} (hz : z ∈ X.G.sector v r i) (hr' : ‖z - v‖ < r') :
+    z ∈ X.G.sector v r' i := by
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := hz
+  have : ‖v + (t : ℂ) * e φ - v‖ = t := by
+    rw [add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg ht.1.le]
+  exact ⟨t, ⟨ht.1, this ▸ hr'⟩, φ, hφ, rfl⟩
+
+/-- Sectors are monotone in the radius. -/
+theorem sector_mono {r r' : ℝ} (hr : r ≤ r') (i : Fin X.n) : X.G.sector v r i ⊆ X.G.sector v r' i := fun _ hz =>
+  mem_sector_of_lt hz ((norm_of_mem_sector hz).2.trans_le hr)
+
+/-- A sector point of a small radius is interior to `F`. -/
+theorem sector_subset_interiorPts {ρ : ℝ} (h : X.Small ρ) (i : Fin X.n) : X.G.sector v ρ i ⊆ F.interiorPts :=
+  fun _ hz => (X.hcol i ρ h.mem_Ioc hz).1
+
+/-- A sector point of a small radius is on no branch. -/
+theorem not_mem_branch_of_mem_sector {ρ r : ℝ} (h : X.Small ρ) {i : Fin X.n} {z : ℂ} (hz : z ∈ X.G.sector v ρ i)
+    (j : Fin X.n) : z ∉ X.G.branch v r j := by
+  rintro ⟨t, ht, rfl⟩
+  have hI := sector_subset_interiorPts h i hz
+  have ht' := norm_of_mem_sector hz
+  rw [norm_branchPt_sub v _ _ ht.1.le] at ht'
+  exact hI.2 (X.hC.branchPt_mem_Γ j ⟨ht.1, ht'.2.trans h.lt_r₀⟩).2
+
+/-- Two sectors of a small radius are disjoint. -/
+theorem sector_disjoint {ρ : ℝ} (h : X.Small ρ) {i i' : Fin X.n} {z : ℂ} (hz : z ∈ X.G.sector v ρ i)
+    (hz' : z ∈ X.G.sector v ρ i') : i = i' := by
+  by_contra hne
+  exact disjoint_left.mp (X.hC.disjoint ρ h.mem_Ioc i i' hne) hz hz'
+
+/-- A branch point of a small radius is on its own branch only. -/
+theorem eq_of_mem_branch {ρ : ℝ} (h : X.Small ρ) {j j' : Fin X.n} {t r : ℝ} (ht : t ∈ Ioo 0 ρ)
+    (hz : branchPt v (X.G.β j) (X.G.κ j) t ∈ X.G.branch v r j') : j' = j := by
+  obtain ⟨t', ht', he⟩ := hz
+  have := congrArg (fun z => ‖z - v‖) he
+  simp only [norm_branchPt_sub v _ _ ht'.1.le, norm_branchPt_sub v _ _ ht.1.le] at this
+  subst this
+  exact eq_of_branchPt_eq X.hdisj ⟨ht.1, ht.2.trans h.2.1⟩ he
+
+/-- A branch point of a small radius is in no sector. -/
+theorem branchPt_not_mem_sector {ρ : ℝ} (h : X.Small ρ) (j : Fin X.n) {t : ℝ} (ht : t ∈ Ioo 0 ρ) (i : Fin X.n) :
+    branchPt v (X.G.β j) (X.G.κ j) t ∉ X.G.sector v ρ i := fun hz =>
+  not_mem_branch_of_mem_sector h hz j ⟨t, ⟨ht.1, ht.2⟩, rfl⟩
+
+variable {s : Fin X.n} {a b : ℕ}
+
+/-- **A sector point in the gap set**: exactly when the sector is a gap sector and the point is inside `ρ'`. -/
+theorem mem_gapSet_of_mem_sector {ρ ρ' : ℝ} (h : X.Small ρ) (hρ' : ρ' ≤ ρ) {i : Fin X.n} {z : ℂ}
+    (hz : z ∈ X.G.sector v ρ i) : z ∈ X.G.gapSet v s a b ρ' ↔ i ∈ BranchGerms.gapSec s a b ∧ ‖z - v‖ < ρ' := by
+  constructor
+  · rintro (h1 | h1)
+    · obtain ⟨i', hi', hz'⟩ := mem_iUnion₂.mp h1
+      have := sector_disjoint h hz (sector_mono hρ' i' hz')
+      subst this; exact ⟨hi', (norm_of_mem_sector hz').2⟩
+    · obtain ⟨j, -, hz'⟩ := mem_iUnion₂.mp h1
+      exact absurd hz' (not_mem_branch_of_mem_sector h hz j)
+  · rintro ⟨hi, hr⟩
+    exact Or.inl (mem_iUnion₂.mpr ⟨i, hi, mem_sector_of_lt hz hr⟩)
+
+/-- **A branch point in the gap set**: exactly when its germ is a gap germ and it is inside `ρ'`. -/
+theorem branchPt_mem_gapSet_iff {ρ ρ' : ℝ} (h : X.Small ρ) (hρ' : ρ' ≤ ρ) (j : Fin X.n) {t : ℝ} (ht : t ∈ Ioo 0 ρ) :
+    branchPt v (X.G.β j) (X.G.κ j) t ∈ X.G.gapSet v s a b ρ' ↔ j ∈ BranchGerms.gapGerm s a b ∧ t < ρ' := by
+  constructor
+  · rintro (h1 | h1)
+    · obtain ⟨i', -, hz'⟩ := mem_iUnion₂.mp h1
+      exact absurd (sector_mono hρ' i' hz') (branchPt_not_mem_sector h j ht i')
+    · obtain ⟨j', hj', hz'⟩ := mem_iUnion₂.mp h1
+      have := eq_of_mem_branch h ht hz'
+      subst this
+      obtain ⟨t', ht', he⟩ := hz'
+      have := congrArg (fun z => ‖z - v‖) he
+      simp only [norm_branchPt_sub v _ _ ht'.1.le, norm_branchPt_sub v _ _ ht.1.le] at this
+      exact ⟨hj', this ▸ ht'.2⟩
+  · rintro ⟨hj, hr⟩
+    exact Or.inr (mem_iUnion₂.mpr ⟨j, hj, t, ⟨ht.1, hr⟩, rfl⟩)
+
+open Classical in
+/-- **MERGE's colour of a sector point** (inside a small `ρ`): `c` on the gap sectors inside `ρ/2`, the sector's colour otherwise. -/
+theorem mergeCol_of_mem_sector {ρ : ℝ} (h : X.Small ρ) {c : Fin k} {i : Fin X.n} {z : ℂ} (hz : z ∈ X.G.sector v ρ i) :
+    X.G.mergeCol v X.col F.col s a b c ρ z =
+      if i ∈ BranchGerms.gapSec s a b ∧ ‖z - v‖ < ρ / 2 then c else X.col i := by
+  classical
+  unfold BranchGerms.mergeCol
+  rw [mem_gapSet_of_mem_sector h (by linarith [h.1]) hz]
+  split_ifs with h1 h2
+  · rfl
+  · obtain ⟨j, hj⟩ := h2; exact absurd hj (not_mem_branch_of_mem_sector h hz j)
+  · have := (X.hcol i ρ h.mem_Ioc hz).2
+    simpa using this
+
+open Classical in
+/-- **MERGE's colour of a branch point** (inside a small `ρ`): `c` on the gap germs inside `ρ/2`, the colour of the sector after
+the germ otherwise. -/
+theorem mergeCol_branchPt {ρ : ℝ} (h : X.Small ρ) {c : Fin k} (j : Fin X.n) {t : ℝ} (ht : t ∈ Ioo 0 ρ) :
+    X.G.mergeCol v X.col F.col s a b c ρ (branchPt v (X.G.β j) (X.G.κ j) t) =
+      if j ∈ BranchGerms.gapGerm s a b ∧ t < ρ / 2 then c else X.col j := by
+  classical
+  unfold BranchGerms.mergeCol
+  rw [branchPt_mem_gapSet_iff h (by linarith [h.1]) j ht]
+  split_ifs with h1 h2
+  · rfl
+  · rw [eq_of_mem_branch h ht h2.choose_spec]
+  · exact absurd ⟨j, t, ht, rfl⟩ h2
+
+/-- **MERGE's colour off the small ball** is `F`'s. -/
+theorem mergeCol_of_not_mem {ρ : ℝ} (h : X.Small ρ) {c : Fin k} {z : ℂ} (hz : z ∉ ball v ρ) :
+    X.G.mergeCol v X.col F.col s a b c ρ z = F.col z := by
+  classical
+  have h1 : z ∉ X.G.gapSet v s a b (ρ / 2) := by
+    rintro (h1 | h1)
+    · obtain ⟨i, -, hz'⟩ := mem_iUnion₂.mp h1
+      exact hz (mem_ball.mpr (by rw [dist_eq_norm]; linarith [(norm_of_mem_sector hz').2, h.1]))
+    · obtain ⟨j, -, hz'⟩ := mem_iUnion₂.mp h1
+      exact hz (ball_subset_ball (by linarith [h.1]) (cutSet_subset_ball (X := X) hz'))
+  unfold BranchGerms.mergeCol
+  rw [if_neg h1, dif_neg (fun ⟨j, hj⟩ => hz (cutSet_subset_ball (X := X) hj))]
+
+end Near
+
+end ArcMap
+
+namespace BranchGerms
+
+variable {n : ℕ} (G : BranchGerms n)
+
+/-- **A full turn** adds `2π` to the lifted direction. -/
+theorem liftDir_add_n (s : Fin n) (m : ℕ) (t : ℝ) : G.liftDir s (m + n) t = G.liftDir s m t + 2 * π := by
+  unfold liftDir germDir; rw [lift_add_n, idx_add_n]; ring
+
+end BranchGerms
+
+namespace ArcMap
+
+namespace Near
+
+variable {k : ℕ} {F : ArcMap k} {v : ℂ} {X : F.Near v} {s : Fin X.n} {a b : ℕ}
+
+/-- The rim arc's carrier: the circle of radius `ρ/2` between the lifted directions of the gap's end germs. -/
+theorem carrier_rimArc (ρ : ℝ) :
+    (X.G.rimArc v s a b ρ).carrier = (fun θ : ℝ => v + ((ρ / 2 : ℝ) : ℂ) * e θ) ''
+      Icc (X.G.liftDir s (a + 1) (ρ / 2)) (X.G.liftDir s b (ρ / 2)) := rfl
+
+/-- The rim arc is non-degenerate when the gap has a sector. -/
+theorem rimArc_nondegenerate {ρ : ℝ} (h : X.Small ρ) (hab : a + 1 < b) (hbn : b < X.n) :
+    (X.G.rimArc v s a b ρ).Nondegenerate := by
+  have ht : ρ / 2 ∈ Ioo 0 X.s₀ := ⟨by linarith [h.1], by linarith [h.1, h.2.1]⟩
+  refine ⟨by linarith [h.1], X.G.liftDir_mono X.hord s ht hab, ?_⟩
+  have := (X.G.liftDir_mono X.hord s ht).monotone (show b ≤ a + 1 + X.n by omega)
+  rw [X.G.liftDir_add_n] at this; exact this
+
+/-- **Membership in MERGE's new arcs.** -/
+theorem mem_mergeArcs {ρ : ℝ} {A : Arc} :
+    A ∈ X.G.mergeArcs v X.col s a b ρ ↔ (∃ j ∉ BranchGerms.gapGerm s a b, A = X.germ (ρ / 2) j) ∨
+      (∃ j, ¬ BranchGerms.Phantom X.col j ∧ A ∈ (X.germ ρ j).outer v (ρ / 2)) ∨ (a + 1 < b ∧ A = X.G.rimArc v s a b ρ) := by
+  unfold BranchGerms.mergeArcs
+  simp only [mem_union, mem_image, mem_iUnion₂, mem_setOf_eq, mem_compl_iff]
+  constructor
+  · rintro ((⟨j, hj, rfl⟩ | ⟨j, hj, hA⟩) | hA)
+    · exact Or.inl ⟨j, hj, rfl⟩
+    · exact Or.inr (Or.inl ⟨j, hj, hA⟩)
+    · exact Or.inr (Or.inr hA)
+  · rintro (⟨j, hj, rfl⟩ | ⟨j, hj, hA⟩ | hA)
+    · exact Or.inl (Or.inl ⟨j, hj, rfl⟩)
+    · exact Or.inl (Or.inr ⟨j, hj, hA⟩)
+    · exact Or.inr hA
+
+/-- A germ's arc out to `ρ/2` lies on its arc out to `ρ`. -/
+theorem germ_half_subset {ρ : ℝ} (h : X.Small ρ) (j : Fin X.n) : (X.germ (ρ / 2) j).carrier ⊆ (X.germ ρ j).carrier := by
+  rw [carrier_germ h.half, carrier_germ h]
+  exact image_mono (Icc_subset_Icc le_rfl (by linarith [h.1]))
+
+/-- An outer piece lies on its germ's arc. -/
+theorem outer_subset_germ {ρ : ℝ} (h : X.Small ρ) (j : Fin X.n) {A : Arc} (hA : A ∈ (X.germ ρ j).outer v (ρ / 2)) :
+    A.carrier ⊆ (X.germ ρ j).carrier := by
+  intro z hz
+  obtain ⟨t, ht, rfl⟩ := outer_subset h j A hA hz
+  rw [carrier_germ h]; exact ⟨t, ⟨by linarith [ht.1, h.1], ht.2⟩, rfl⟩
+
+/-- **The new arcs other than the rim arc lie on germ arcs out to `ρ`.** -/
+theorem mergeArcs_cases {ρ : ℝ} (h : X.Small ρ) {A : Arc} (hA : A ∈ X.G.mergeArcs v X.col s a b ρ) :
+    (∃ j, A.carrier ⊆ (X.germ ρ j).carrier) ∨ (a + 1 < b ∧ A = X.G.rimArc v s a b ρ) := by
+  rcases mem_mergeArcs.mp hA with ⟨j, -, rfl⟩ | ⟨j, -, hA'⟩ | hA'
+  · exact Or.inl ⟨j, germ_half_subset h j⟩
+  · exact Or.inl ⟨j, outer_subset_germ h j hA'⟩
+  · exact Or.inr hA'
+
+theorem germ_subset_closedBall {ρ : ℝ} (h : X.Small ρ) (j : Fin X.n) : (X.germ ρ j).carrier ⊆ closedBall v ρ := by
+  rw [carrier_germ h]
+  rintro z ⟨t, ht, rfl⟩
+  rw [mem_closedBall, dist_branchPt j ht.1]; exact ht.2
+
+/-- MERGE's new arcs are non-degenerate. -/
+theorem mergeArcs_nondegenerate {ρ : ℝ} (h : X.Small ρ) (hbn : b < X.n) :
+    ∀ A ∈ X.G.mergeArcs v X.col s a b ρ, A.Nondegenerate := by
+  intro A hA
+  rcases mem_mergeArcs.mp hA with ⟨j, -, rfl⟩ | ⟨j, -, hA'⟩ | ⟨hab, rfl⟩
+  · exact germArc_nondegenerate v _ _ h.half.1
+  · have hv : v ∈ (X.germ ρ j).carrier := by rw [carrier_germ h]; exact ⟨0, ⟨le_rfl, h.1.le⟩, by simp [branchPt]⟩
+    exact ((Arc.outer_spec (germArc_nondegenerate v _ _ h.1) hv h.half.1).1 A hA').1
+  · exact rimArc_nondegenerate h hab hbn
+
+/-- MERGE's new arcs are finitely many. -/
+theorem mergeArcs_finite (ρ : ℝ) : (X.G.mergeArcs v X.col s a b ρ).Finite := by
+  unfold BranchGerms.mergeArcs
+  refine (((Set.toFinite _).image _).union ((Set.toFinite _).biUnion fun j _ => Arc.finite_outer _ _ _)).union ?_
+  exact (finite_singleton (X.G.rimArc v s a b ρ)).subset fun A hA => hA.2
+
+/-- MERGE's new arcs lie in the closed ball. -/
+theorem mergeArcs_subset_closedBall {ρ : ℝ} (h : X.Small ρ) :
+    ∀ A ∈ X.G.mergeArcs v X.col s a b ρ, A.carrier ⊆ closedBall v ρ := by
+  intro A hA
+  rcases mergeArcs_cases h hA with ⟨j, hj⟩ | ⟨-, rfl⟩
+  · exact hj.trans (germ_subset_closedBall h j)
+  · rintro z ⟨θ, -, rfl⟩
+    rw [mem_closedBall, dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real,
+      Real.norm_of_nonneg (by linarith [h.1])]
+    linarith [h.1]
+
+/-- MERGE's new unit arcs lie in `F`'s `Γ`. -/
+theorem mergeArcs_unit {ρ : ℝ} (h : X.Small ρ) :
+    ∀ A ∈ X.G.mergeArcs v X.col s a b ρ, A.IsUnitArc → A.carrier ∩ F.dom ⊆ F.Γ := by
+  intro A hA hu
+  rcases mergeArcs_cases h hA with ⟨j, hj⟩ | ⟨-, rfl⟩
+  · exact fun z hz => germ_subset_Γ h j (hj hz.1)
+  · exact absurd hu (by show ρ / 2 ≠ 1; linarith [h.2.2.2])
+
+/-- Under Condition 5, each of MERGE's new arcs meets each unit circle in the domain finitely often. -/
+theorem mergeArcs_condition5 {ρ : ℝ} (h : X.Small ρ) (hbn : b < X.n) :
+    F.Condition5 → ∀ A ∈ X.G.mergeArcs v X.col s a b ρ, ∀ p, (A.carrier ∩ F.dom ∩ sphere p 1).Finite := by
+  intro h5 A hA p
+  rcases mergeArcs_cases h hA with ⟨j, hj⟩ | ⟨hab, rfl⟩
+  · refine (finite_inter_sphere_of_subset_Γ X.hG h5 (C := A.carrier) (fun z hz => ⟨germ_subset_Γ h j (hj hz), ?_⟩) p).subset
+      fun z hz => ⟨hz.1.1, hz.2⟩
+    exact closedBall_subset_ball h.2.2.1 (germ_subset_closedBall h j (hj hz))
+  · rcases Arc.finite_inter_sphere_or_eq_circ _ (rimArc_nondegenerate h hab hbn) p with hf | ⟨θ₀, θ₁, heq⟩
+    · exact hf.subset fun z hz => ⟨hz.1.1, hz.2⟩
+    · simp only [BranchGerms.rimArc, Arc.circ.injEq] at heq; linarith [h.2.2.2, heq.2.1]
+
+end Near
+
+end ArcMap
+
+namespace ArcMap
+
+namespace Near
+
+variable {k : ℕ} {F : ArcMap k} {v : ℂ} {X : F.Near v} {s : Fin X.n} {a b : ℕ}
+
+/-- Every germ is the next of one. -/
+theorem exists_next_eq (j : Fin X.n) : ∃ p, BranchGerms.next p = j :=
+  Finite.injective_iff_surjective.mp BranchGerms.next_injective j
+
+/-- **A point of the punctured small ball** is in a sector or on a branch. -/
+theorem ball_cases {ρ : ℝ} (h : X.Small ρ) (hn : 0 < X.n) {z : ℂ} (hz : z ∈ ball v ρ) (hzv : z ≠ v) :
+    (∃ i, z ∈ X.G.sector v ρ i) ∨ ∃ j, ∃ t ∈ Ioo 0 ρ, z = branchPt v (X.G.β j) (X.G.κ j) t := by
+  have ht : ‖z - v‖ ∈ Ioo 0 ρ := ⟨norm_pos_iff.mpr (sub_ne_zero.mpr hzv), by rw [← dist_eq_norm]; exact hz⟩
+  by_cases hI : z ∈ F.interiorPts
+  · left
+    have : z ∈ ball v ρ ∩ F.interiorPts := ⟨hz, hI⟩
+    rw [X.hC.cover ρ h.mem_Ioc hn] at this
+    exact mem_iUnion.mp this
+  · right
+    obtain ⟨j, hj⟩ := X.hC.exists_branchPt_eq hzv (ball_subset_ball h.lt_r₀.le hz) hI
+    exact ⟨j, ‖z - v‖, ht, hj⟩
+
+/-- (M1) `v` lies on the new arcs (a germ off the gap is kept). -/
+theorem v_mem_mergeArcs {ρ : ℝ} (h : X.Small ρ) (hab : a < b) (hbn : b < X.n) :
+    v ∈ ⋃ A ∈ X.G.mergeArcs v X.col s a b ρ, A.carrier := by
+  refine mem_iUnion₂.mpr ⟨X.germ (ρ / 2) (BranchGerms.idx s a), mem_mergeArcs.mpr (Or.inl ⟨_, ?_, rfl⟩), ?_⟩
+  · rw [BranchGerms.idx_mem_gapGerm_iff (by omega) le_rfl (by omega)]; omega
+  · rw [carrier_germ h.half]; exact ⟨0, ⟨le_rfl, h.half.1.le⟩, by simp [branchPt]⟩
+
+/-- (M2) A branch point out to `ρ/2` of a germ off the gap lies on the new arcs. -/
+theorem branchPt_mem_mergeArcs_inner {ρ : ℝ} (h : X.Small ρ) {j : Fin X.n} (hj : j ∉ BranchGerms.gapGerm s a b) {t : ℝ}
+    (ht : t ∈ Ioc 0 (ρ / 2)) : branchPt v (X.G.β j) (X.G.κ j) t ∈ ⋃ A ∈ X.G.mergeArcs v X.col s a b ρ, A.carrier := by
+  refine mem_iUnion₂.mpr ⟨X.germ (ρ / 2) j, mem_mergeArcs.mpr (Or.inl ⟨_, hj, rfl⟩), ?_⟩
+  rw [carrier_germ h.half]; exact ⟨t, ⟨ht.1.le, ht.2⟩, rfl⟩
+
+/-- (M3) A branch point between `ρ/2` and `ρ` of a non-phantom germ lies on the new arcs. -/
+theorem branchPt_mem_mergeArcs_outer {ρ : ℝ} (h : X.Small ρ) {j : Fin X.n} (hj : ¬ BranchGerms.Phantom X.col j) {t : ℝ}
+    (ht : t ∈ Ioc (ρ / 2) ρ) : branchPt v (X.G.β j) (X.G.κ j) t ∈ ⋃ A ∈ X.G.mergeArcs v X.col s a b ρ, A.carrier := by
+  obtain ⟨A, hA, hz⟩ := mem_iUnion₂.mp (mem_outer h j ht)
+  exact mem_iUnion₂.mpr ⟨A, mem_mergeArcs.mpr (Or.inr (Or.inl ⟨j, hj, hA⟩)), hz⟩
+
+/-- (M4) A point of the circle of radius `ρ/2` between the gap's end germs lies on the rim arc. -/
+theorem mem_mergeArcs_rim {ρ : ℝ} (hab : a + 1 < b) {φ : ℝ} (hφ : φ ∈ Icc (X.G.liftDir s (a + 1) (ρ / 2)) (X.G.liftDir s b (ρ / 2))) :
+    v + ((ρ / 2 : ℝ) : ℂ) * e φ ∈ ⋃ A ∈ X.G.mergeArcs v X.col s a b ρ, A.carrier :=
+  mem_iUnion₂.mpr ⟨_, mem_mergeArcs.mpr (Or.inr (Or.inr ⟨hab, rfl⟩)), φ, hφ, rfl⟩
+
+/-- A gap germ's lifted direction lies between the gap's end germs'. -/
+theorem liftDir_gap_germ {t : ℝ} (ht : t ∈ Ioo 0 X.s₀) {m : ℕ} (h1 : a < m) (h2 : m ≤ b) :
+    X.G.liftDir s m t ∈ Icc (X.G.liftDir s (a + 1) t) (X.G.liftDir s b t) :=
+  ⟨(X.G.liftDir_mono X.hord s ht).monotone (by omega), (X.G.liftDir_mono X.hord s ht).monotone h2⟩
+
+/-- A gap sector's point has its lifted direction between the gap's end germs'. -/
+theorem exists_dir_of_mem_gapSec {ρ : ℝ} (h : X.Small ρ) {i : Fin X.n} (hi : i ∈ BranchGerms.gapSec s a b) {z : ℂ}
+    (hz : z ∈ X.G.sector v ρ i) : ∃ φ ∈ Icc (X.G.liftDir s (a + 1) ‖z - v‖) (X.G.liftDir s b ‖z - v‖),
+      z = v + ((‖z - v‖ : ℝ) : ℂ) * e φ := by
+  obtain ⟨m, h1, h2, rfl⟩ := hi
+  obtain ⟨t, ht, φ, hφ, rfl⟩ := (X.G.mem_sector_idx s m).mp hz
+  have hn : ‖v + (t : ℂ) * e φ - v‖ = t := by
+    rw [add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg ht.1.le]
+  rw [hn]
+  have ht' : t ∈ Ioo 0 X.s₀ := ⟨ht.1, ht.2.trans h.2.1⟩
+  exact ⟨φ, ⟨((X.G.liftDir_mono X.hord s ht').monotone (by omega : a + 1 ≤ m)).trans hφ.1.le,
+    hφ.2.le.trans ((X.G.liftDir_mono X.hord s ht').monotone (by omega : m + 1 ≤ b))⟩, rfl⟩
+
+/-- (iv) **A germ's point on the rim lies on the trimmed arcs**: the branch beyond `ρ` is on them, finitely many meet a
+neighbourhood, and their union is closed there. -/
+theorem branchPt_rim_mem_trimArcs {ρ ρ' : ℝ} (h' : X.Small ρ') (hρ : 0 < ρ) (hρρ' : ρ < ρ') (j : Fin X.n) :
+    branchPt v (X.G.β j) (X.G.κ j) ρ ∈ ⋃ B ∈ F.trimArcs v ρ, B.carrier := by
+  obtain ⟨-, h2, T, hT, hsub⟩ := F.trimArcs_spec X.mem_dom hρ
+  set S := {B | B ∈ F.trimArcs v ρ ∧ (B.carrier ∩ ball v X.ρ₀).Nonempty} with hS
+  have hSf : S.Finite := (X.hG.fin.union hT).subset fun B ⟨hB, hBn⟩ => by
+    rcases hsub hB with h1 | h1
+    · exact Or.inl ⟨h1, hBn⟩
+    · exact Or.inr h1
+  have hcl : IsClosed (⋃ B ∈ S, B.carrier) := hSf.isClosed_biUnion fun B _ => B.isClosed_carrier
+  have hmem : branchPt v (X.G.β j) (X.G.κ j) ρ ∈ ⋃ B ∈ S, B.carrier := by
+    refine hcl.mem_of_tendsto ((continuous_branchPt v _ _).continuousWithinAt.tendsto.mono_left
+      (nhdsWithin_mono _ subset_rfl) : Filter.Tendsto _ (𝓝[>] ρ) _) ?_
+    filter_upwards [Ioo_mem_nhdsGT hρρ'] with t ht
+    have ht0 : 0 ≤ t := by linarith [ht.1]
+    have hΓ := X.hC.branchPt_mem_Γ j ⟨by linarith [ht.1], ht.2.trans h'.lt_r₀⟩
+    have hnc : branchPt v (X.G.β j) (X.G.κ j) t ∉ closedBall v ρ := by
+      rw [mem_closedBall, dist_branchPt j ht0, not_le]; exact ht.1
+    obtain ⟨B, hB, hzB⟩ := mem_iUnion₂.mp (h2 ⟨hΓ.2, hnc⟩)
+    refine mem_iUnion₂.mpr ⟨B, ⟨hB, _, hzB, ?_⟩, hzB⟩
+    rw [mem_ball, dist_branchPt j ht0]; exact ht.2.trans h'.2.2.1
+  obtain ⟨B, hB, hz⟩ := mem_iUnion₂.mp hmem
+  exact mem_iUnion₂.mpr ⟨B, hB.1, hz⟩
+
+end Near
+
+end ArcMap
+
+namespace ArcMap
+
+namespace Near
+
+variable {k : ℕ} {F : ArcMap k} {v : ℂ} {X : F.Near v} {s : Fin X.n} {a b : ℕ}
+
+/-- The two sectors beside a gap germ are gap sectors or the gap's `c`-sectors. -/
+theorem gap_sides {c : Fin k} (hca : X.col (BranchGerms.idx s a) = c)
+    (hcb : X.col (BranchGerms.idx s b) = c) {p j : Fin X.n} (hpj : BranchGerms.next p = j)
+    (hj : j ∈ BranchGerms.gapGerm s a b) :
+    (p ∈ BranchGerms.gapSec s a b ∨ X.col p = c) ∧ (j ∈ BranchGerms.gapSec s a b ∨ X.col j = c) ∧
+      (a + 1 = b → p ∉ BranchGerms.gapSec s a b ∧ j ∉ BranchGerms.gapSec s a b) := by
+  obtain ⟨m, h1, h2, rfl⟩ := hj
+  obtain ⟨m', rfl⟩ : ∃ m', m = m' + 1 := ⟨m - 1, by omega⟩
+  have hp : p = BranchGerms.idx s m' := BranchGerms.next_injective (by rw [hpj, BranchGerms.next_idx])
+  subst hp
+  have hsec : ∀ i, i ∈ BranchGerms.gapSec s a b → a + 1 < b := fun i hi => by
+    obtain ⟨m'', h3, h4, -⟩ := hi; omega
+  refine ⟨?_, ?_, fun hab => ⟨fun hi => absurd (hsec _ hi) (by omega), fun hi => absurd (hsec _ hi) (by omega)⟩⟩
+  · rcases eq_or_lt_of_le (show a ≤ m' by omega) with h | h
+    · right; rw [← h, hca]
+    · left; exact ⟨m', h, by omega, rfl⟩
+  · rcases eq_or_lt_of_le (show m' + 1 ≤ b by omega) with h | h
+    · right; rw [h, hcb]
+    · left; exact ⟨m' + 1, h1, h, rfl⟩
+
+/-- **Local constancy of MERGE's colouring** off its arcs (record § 5.2 (v)). -/
+theorem merge_hlc {ρ ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) {c : Fin k} (hab : a < b) (hbn : b < X.n)
+    (hca : X.col (BranchGerms.idx s a) = c) (hcb : X.col (BranchGerms.idx s b) = c) :
+    ∀ x ∈ F.dom, x ∉ ⋃ A ∈ F.trimArcs v ρ ∪ X.G.mergeArcs v X.col s a b ρ, A.carrier →
+      ∀ᶠ y in 𝓝 x, X.G.mergeCol v X.col F.col s a b c ρ y = X.G.mergeCol v X.col F.col s a b c ρ x := by
+  classical
+  have hn : 0 < X.n := by omega
+  obtain ⟨-, h2, -⟩ := F.trimArcs_spec X.mem_dom h.1
+  intro x hx hxa
+  have hxA : x ∉ ⋃ A ∈ X.G.mergeArcs v X.col s a b ρ, A.carrier := fun hm => by
+    obtain ⟨A, hA, hxA⟩ := mem_iUnion₂.mp hm; exact hxa (mem_iUnion₂.mpr ⟨A, Or.inr hA, hxA⟩)
+  have hxT : x ∉ ⋃ B ∈ F.trimArcs v ρ, B.carrier := fun hm => by
+    obtain ⟨B, hB, hxB⟩ := mem_iUnion₂.mp hm; exact hxa (mem_iUnion₂.mpr ⟨B, Or.inl hB, hxB⟩)
+  have hρ2 : 0 < ρ / 2 := h.half.1
+  rcases lt_trichotomy (dist x v) ρ with hlt | heq | hgt
+  · -- inside the ball
+    have hxv : x ≠ v := fun hxv => hxA (by rw [hxv]; exact v_mem_mergeArcs h hab hbn)
+    have hxn : ‖x - v‖ = dist x v := (dist_eq_norm x v).symm
+    rcases ball_cases h hn hlt hxv with ⟨i, hi⟩ | ⟨j, t, ht, rfl⟩
+    · have hev : ∀ᶠ y in 𝓝 x, y ∈ X.G.sector v ρ i := (X.hC.isOpen ρ h.mem_Ioc i).mem_nhds hi
+      by_cases hig : i ∈ BranchGerms.gapSec s a b
+      · have hne : ‖x - v‖ ≠ ρ / 2 := by
+          intro he
+          obtain ⟨φ, hφ, hxφ⟩ := exists_dir_of_mem_gapSec h hig hi
+          have hab' : a + 1 < b := by obtain ⟨m, h3, h4, -⟩ := hig; omega
+          rw [he] at hφ hxφ
+          exact hxA (hxφ ▸ mem_mergeArcs_rim hab' hφ)
+        have hev2 : ∀ᶠ y in 𝓝 x, (‖y - v‖ < ρ / 2 ↔ ‖x - v‖ < ρ / 2) := by
+          rcases lt_or_gt_of_ne hne with hl | hg
+          · filter_upwards [isOpen_ball.mem_nhds (show x ∈ ball v (ρ / 2) by rw [mem_ball, ← hxn]; exact hl)] with y hy
+            rw [mem_ball, dist_eq_norm] at hy; exact ⟨fun _ => hl, fun _ => hy⟩
+          · filter_upwards [isClosed_closedBall.isOpen_compl.mem_nhds
+              (show x ∉ closedBall v (ρ / 2) by rw [mem_closedBall, ← hxn, not_le]; exact hg)] with y hy
+            rw [mem_compl_iff, mem_closedBall, dist_eq_norm, not_le] at hy
+            exact ⟨fun h1 => absurd h1 (not_lt.mpr hy.le), fun h1 => absurd h1 (not_lt.mpr hg.le)⟩
+        filter_upwards [hev, hev2] with y hy hy2
+        rw [mergeCol_of_mem_sector h hy, mergeCol_of_mem_sector h hi]; simp only [hy2]
+      · filter_upwards [hev] with y hy
+        rw [mergeCol_of_mem_sector h hy, mergeCol_of_mem_sector h hi, if_neg (fun h1 => hig h1.1),
+          if_neg (fun h1 => hig h1.1)]
+    · -- a branch point
+      obtain ⟨p, hpj⟩ := exists_next_eq j
+      obtain ⟨ε, hε, hball⟩ := X.hC.exists_ball_subset_of_branchPt X.hs₀.2 X.hdisj (r := ρ) ⟨h.1, h.2.1.le⟩ (p := p) ht
+      rw [hpj] at hball
+      have hev : ∀ᶠ y in 𝓝 (branchPt v (X.G.β j) (X.G.κ j) t), y ∈ X.G.sector v ρ p ∪ X.G.sector v ρ j ∪
+          branchPt v (X.G.β j) (X.G.κ j) '' Ioo 0 ρ := Filter.mem_of_superset (ball_mem_nhds _ hε) hball
+      have hxt : ‖branchPt v (X.G.β j) (X.G.κ j) t - v‖ = t := norm_branchPt_sub v _ _ ht.1.le
+      rw [mergeCol_branchPt h j ht]
+      have hout : ρ / 2 < t → ∀ᶠ y in 𝓝 (branchPt v (X.G.β j) (X.G.κ j) t),
+          X.G.mergeCol v X.col F.col s a b c ρ y = X.col j := by
+        intro htg
+        have hph : BranchGerms.Phantom X.col j := by
+          by_contra hph; exact hxA (branchPt_mem_mergeArcs_outer h hph ⟨htg, ht.2.le⟩)
+        have hpc : X.col p = X.col j := by
+          obtain ⟨i, hi, hc⟩ := hph; rw [← BranchGerms.next_injective (hi.trans hpj.symm)]; exact hc
+        filter_upwards [hev, isClosed_closedBall.isOpen_compl.mem_nhds (show branchPt v (X.G.β j) (X.G.κ j) t ∉
+          closedBall v (ρ / 2) by rw [mem_closedBall, dist_eq_norm, hxt, not_le]; exact htg)] with y hy hyb
+        rw [mem_compl_iff, mem_closedBall, dist_eq_norm, not_le] at hyb
+        rcases hy with (hy | hy) | ⟨t', ht', rfl⟩
+        · rw [mergeCol_of_mem_sector h hy, if_neg (fun h1 => (not_lt.mpr hyb.le) h1.2), hpc]
+        · rw [mergeCol_of_mem_sector h hy, if_neg (fun h1 => (not_lt.mpr hyb.le) h1.2)]
+        · rw [norm_branchPt_sub v _ _ ht'.1.le] at hyb
+          rw [mergeCol_branchPt h j ht', if_neg (fun h1 => (not_lt.mpr hyb.le) h1.2)]
+      by_cases hjg : j ∈ BranchGerms.gapGerm s a b
+      · obtain ⟨hps, hjs, h1b⟩ := gap_sides hca hcb hpj hjg
+        rcases lt_trichotomy t (ρ / 2) with htl | hte | htg
+        · rw [if_pos ⟨hjg, htl⟩]
+          filter_upwards [hev, isOpen_ball.mem_nhds (show branchPt v (X.G.β j) (X.G.κ j) t ∈ ball v (ρ / 2) by
+            rw [mem_ball, dist_eq_norm, hxt]; exact htl)] with y hy hyb
+          rw [mem_ball, dist_eq_norm] at hyb
+          rcases hy with (hy | hy) | ⟨t', ht', rfl⟩
+          · rw [mergeCol_of_mem_sector h hy]
+            rcases hps with hps | hps
+            · rw [if_pos ⟨hps, hyb⟩]
+            · split_ifs <;> [rfl; exact hps]
+          · rw [mergeCol_of_mem_sector h hy]
+            rcases hjs with hjs | hjs
+            · rw [if_pos ⟨hjs, hyb⟩]
+            · split_ifs <;> [rfl; exact hjs]
+          · rw [norm_branchPt_sub v _ _ ht'.1.le] at hyb
+            rw [mergeCol_branchPt h j ht', if_pos ⟨hjg, hyb⟩]
+        · by_cases hab1 : a + 1 < b
+          · exfalso
+            obtain ⟨m, h1, h2', rfl⟩ := hjg
+            have hφ := liftDir_gap_germ (s := s) (⟨ht.1, ht.2.trans h.2.1⟩ : t ∈ Ioo 0 X.s₀) h1 h2'
+            rw [hte] at hφ
+            apply hxA
+            rw [hte, X.G.branchPt_idx]
+            exact mem_mergeArcs_rim hab1 hφ
+          · have hab1' : a + 1 = b := by omega
+            obtain ⟨hpn, hjn⟩ := h1b hab1'
+            have hpc : X.col p = c := hps.resolve_left hpn
+            have hjc : X.col j = c := hjs.resolve_left hjn
+            rw [if_neg (fun h1 => absurd h1.2 (by linarith)), hjc]
+            filter_upwards [hev] with y hy
+            rcases hy with (hy | hy) | ⟨t', ht', rfl⟩
+            · rw [mergeCol_of_mem_sector h hy, if_neg (fun h1 => hpn h1.1), hpc]
+            · rw [mergeCol_of_mem_sector h hy, if_neg (fun h1 => hjn h1.1), hjc]
+            · rw [mergeCol_branchPt h j ht']; split_ifs <;> [rfl; exact hjc]
+        · rw [if_neg (fun h1 => absurd h1.2 (not_lt.mpr htg.le))]; exact hout htg
+      · rw [if_neg (fun h1 => hjg h1.1)]
+        rcases le_or_gt t (ρ / 2) with htl | htg
+        · exact absurd (branchPt_mem_mergeArcs_inner h hjg ⟨ht.1, htl⟩) hxA
+        · exact hout htg
+  · -- on the rim: interior to `F`, in one chart sector
+    have hxv : x ≠ v := fun hxv => by rw [hxv, dist_self] at heq; linarith [h.1]
+    have hxF : x ∈ F.interiorPts := by
+      refine ⟨hx, fun hxF => ?_⟩
+      have hxr : x ∈ ball v X.r₀ := by rw [mem_ball, heq]; exact h.lt_r₀
+      obtain ⟨j, hj⟩ := X.hC.exists_branchPt_eq hxv hxr (fun hI => hI.2 hxF)
+      rw [← dist_eq_norm, heq] at hj
+      exact hxT (hj ▸ branchPt_rim_mem_trimArcs h' h.1 hρρ' j)
+    obtain ⟨i, hi⟩ : ∃ i, x ∈ X.G.sector v ρ' i := by
+      have : x ∈ ball v ρ' ∩ F.interiorPts := ⟨by rw [mem_ball, heq]; exact hρρ', hxF⟩
+      rw [X.hC.cover ρ' h'.mem_Ioc hn] at this
+      exact mem_iUnion.mp this
+    have hcolx : ∀ y ∈ X.G.sector v ρ' i, ρ / 2 < ‖y - v‖ → X.G.mergeCol v X.col F.col s a b c ρ y = X.col i := by
+      intro y hy hyr
+      by_cases hyb : y ∈ ball v ρ
+      · have hy' := mem_sector_of_lt hy (by rwa [mem_ball, dist_eq_norm] at hyb)
+        rw [mergeCol_of_mem_sector h hy', if_neg (fun h1 => (not_lt.mpr hyr.le) h1.2)]
+      · rw [mergeCol_of_not_mem h hyb]; simpa using (X.hcol i ρ' h'.mem_Ioc hy).2
+    have hxr : ρ / 2 < ‖x - v‖ := by rw [← dist_eq_norm, heq]; linarith [h.1]
+    filter_upwards [(X.hC.isOpen ρ' h'.mem_Ioc i).mem_nhds hi, isClosed_closedBall.isOpen_compl.mem_nhds
+      (show x ∉ closedBall v (ρ / 2) by rw [mem_closedBall, dist_eq_norm, not_le]; exact hxr)] with y hy hyb
+    rw [mem_compl_iff, mem_closedBall, dist_eq_norm, not_le] at hyb
+    rw [hcolx y hy hyb, hcolx x hi hxr]
+  · -- off the closed ball: `F`'s colouring
+    have hxc : x ∉ closedBall v ρ := by rw [mem_closedBall, not_le]; exact hgt
+    have hxF : x ∉ ⋃ a ∈ F.arcs, a.carrier := fun hF => hxT (h2 ⟨hF, hxc⟩)
+    filter_upwards [F.locallyConstant x hx hxF, isClosed_closedBall.isOpen_compl.mem_nhds hxc] with y hy hyc
+    rw [mergeCol_of_not_mem h (fun hb => hyc (ball_subset_closedBall hb)),
+      mergeCol_of_not_mem h (fun hb => hxc (ball_subset_closedBall hb)), hy]
 
 end Near
 

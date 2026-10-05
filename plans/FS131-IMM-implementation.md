@@ -71,6 +71,21 @@ Definitions: `BranchGerms.idx`, `turns`, `lift`, `liftDir` (spec examples beside
 
 Still open: `exists_merge_aux` (§ 5.2).
 
+### FS131-IMM3 (stage 7; build `build/gate/build/20261005T071525Z-2257155.log`, axioms `data/fs131/imm/axioms-stage7.txt`, all in `MergeMove`)
+
+Each [kernel], reading exactly `[propext, Classical.choice, Quot.sound]` except `mem_gapGerm`, `mem_gapSec` (axiom-free):
+`BranchGerms.mem_gapGerm`, `mem_gapSec`, `exists_rep`, `idx_inj`, `idx_mem_gapGerm_iff`, `idx_mem_gapSec_iff`, `phantom_idx_succ_iff`, `liftDir_add_n`;
+`ArcMap.Near.Small.half`, `Small.mono`, `dist_branchPt`, `outer_subset`, `mem_outer`, `norm_of_mem_sector`, `mem_sector_of_lt`, `sector_mono`,
+`sector_subset_interiorPts`, `not_mem_branch_of_mem_sector`, `sector_disjoint`, `eq_of_mem_branch`, `branchPt_not_mem_sector`,
+`mem_gapSet_of_mem_sector`, `branchPt_mem_gapSet_iff`, `mergeCol_of_mem_sector`, `mergeCol_branchPt`, `mergeCol_of_not_mem`, `carrier_rimArc`,
+`rimArc_nondegenerate`, `mem_mergeArcs`, `germ_half_subset`, `outer_subset_germ`, `mergeArcs_cases`, `germ_subset_closedBall`,
+`mergeArcs_nondegenerate`, `mergeArcs_finite`, `mergeArcs_subset_closedBall`, `mergeArcs_unit`, `mergeArcs_condition5`, `exists_next_eq`,
+`ball_cases`, `v_mem_mergeArcs`, `branchPt_mem_mergeArcs_inner`, `branchPt_mem_mergeArcs_outer`, `mem_mergeArcs_rim`, `liftDir_gap_germ`,
+`exists_dir_of_mem_gapSec`, `branchPt_rim_mem_trimArcs`, `gap_sides`, **`merge_hlc`** (49 theorems). Restated: `ArcMap.Near.exists_gap`
+(clause `b < X.n`, ruling 344 (a)). Definitions: `BranchGerms.gapGerm`, `gapSec`, `branch`, `gapSet`, `Phantom`, `mergeCol`, `rimArc`,
+`mergeArcs` (spec examples beside them).
+
+
 ## Stage 1 — SAVED: the readback, the as-given build
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -383,3 +398,75 @@ Read: this record in full (IMM1's §§ 1–4, IMM2's §§ 4.0–5.2), inventory 
 up to date, nothing built", 2 s; warnings only `declaration uses 'sorry'` (`Moves` l. 574 `exists_rayMerge_aux`, l. 585 `exists_merge_aux`;
 `Contact`, `BaseSteps`, `UnitArc` as before). Log `build/gate/build/20261005T070047Z-2176958.log`; terminal output
 `data/fs131/imm/build-asgiven-imm3.log`.
+
+## Stage 7 — SAVED (FS131-IMM3): `exists_gap` restated; MERGE's definitions; 4.3 (i), (ii), (iii), (iv), (v) — the map's arcs, colouring and local constancy
+
+**`exists_gap`'s clause restated** (ruling 344 (a)), its diff in `MergeMove`:
+
+```
+-    ∃ s : Fin X.n, ∃ a b : ℕ, a < b ∧ b < a + X.n ∧ X.col (BranchGerms.idx s a) = c ∧
++    ∃ s : Fin X.n, ∃ a b : ℕ, a < b ∧ b < X.n ∧ X.col (BranchGerms.idx s a) = c ∧
+```
+
+and in its docstring "`a < b < a + n`" → "`a < b < n`". The proof is unchanged (both cases' `by omega` already read `b < X.n` from `Nat.find`'s spec).
+
+**Definitions** (IMM2's draft `data/fs131/imm/wip/B.lean`, now in `MergeMove`, the draft deleted), with spec examples beside them: `gapGerm`, `gapSec`,
+`branch`, `gapSet`, `Phantom`, `mergeCol`, `rimArc`, `mergeArcs`. The map is `F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ)
+(X.G.mergeCol v X.col F.col s a b c ρ) …` with no new definition for it: every clause lemma will take the surgery's proof arguments implicitly, as
+`Surgery`'s section does.
+
+**Proved** (sorry-free, listed under "Theorems this phase proved"):
+- **(iii) the colouring**: `mergeCol_of_mem_sector` (a sector point inside `ρ`: `c` iff a gap sector and inside `ρ/2`, else the sector's colour),
+  `mergeCol_branchPt` (a branch point: `c` iff a gap germ and inside `ρ/2`, else the colour after the germ), `mergeCol_of_not_mem` (`F`'s off
+  `B(v, ρ)`), over `mem_gapSet_of_mem_sector`, `branchPt_mem_gapSet_iff` and the chart facts `sector_disjoint`, `not_mem_branch_of_mem_sector`,
+  `eq_of_mem_branch`.
+- **(i) the arcs**: `mem_mergeArcs`, `mergeArcs_cases` (every new arc but the rim arc lies on a germ arc out to `ρ`), and the surgery's and the
+  clauses' obligations `mergeArcs_nondegenerate` (the rim arc by `liftDir_add_n`: `liftDir s b ≤ liftDir s (a+1) + 2π` since `b < a + 1 + n`),
+  `mergeArcs_finite`, `mergeArcs_subset_closedBall`, `mergeArcs_unit`, `mergeArcs_condition5`.
+- **(ii) membership**, the directions needed: `v_mem_mergeArcs` (M1), `branchPt_mem_mergeArcs_inner` (M2, a germ off the gap out to `ρ/2`),
+  `branchPt_mem_mergeArcs_outer` (M3, a non-phantom germ over `(ρ/2, ρ]`), `mem_mergeArcs_rim` (M4); `liftDir_gap_germ`,
+  `exists_dir_of_mem_gapSec` place gap points between the end germs' lifted directions; `ball_cases`.
+- **(iv)** `branchPt_rim_mem_trimArcs`: a germ's point at distance `ρ` lies on `F.trimArcs v ρ` — the branch beyond `ρ` is on `F`'s arcs off
+  `B̄(v, ρ)`, so on trimmed arcs meeting `B(v, ρ₀)`, finitely many (`GoodAt.fin` and `trimArcs_spec`'s finite `T`), whose union is closed.
+- **(v) `merge_hlc`**: the colouring is locally constant off `F.trimArcs v ρ ∪ mergeArcs` — inside `B(v, ρ)` by `ball_cases`: a sector point
+  (a gap sector point at radius exactly `ρ/2` is on the rim arc), a branch point (`exists_ball_subset_of_branchPt` and `gap_sides`: the sectors
+  beside a gap germ are gap sectors or the gap's `c`-sectors; at `ρ/2` a gap germ is on the rim arc unless `a + 1 = b`, when both sides are `c`;
+  beyond `ρ/2` a germ off the arcs is phantom); on the rim by (iv) (a rim point off the new map's arcs is `F`-interior, in one chart sector at a
+  radius `ρ' > ρ`); off `B̄(v, ρ)` as `surgery_hlc_of`. It takes `X.Small ρ'` with `ρ < ρ'` (room beyond the rim).
+
+**Re-priced from these parts** (standing order): 49 theorems in about 520 lines, every one compiled at the first or second attempt; the record's
+4.3 is done but for the surgery's instantiation. 4.4 is left (below), about 700–900 lines at this rate.
+
+### 7.1 The build, the axioms, the checks
+
+Under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK**, 446 of 446 batches, 3 modules rebuilt
+(`MergeMove` 16 s, `Moves`, `Proofs`), 8 min 25 s; "Build completed successfully (5363 jobs)"; warnings only `declaration uses 'sorry'` (`Moves` l. 574
+`exists_rayMerge_aux`, l. 585 `exists_merge_aux`; `Contact`, `BaseSteps`, `UnitArc` as before), none in `MergeMove`. Log
+`build/gate/build/20261005T071525Z-2257155.log`; terminal output `data/fs131/imm/build-stage7.log`. **Axioms** against that build's oleans
+(`lake env lean data/fs131/imm/AxiomsIMM.lean`, `data/fs131/imm/axioms-stage7.txt`): 103 records — 100 on exactly the standard three, 2 axiom-free
+(`mem_gapGerm`, `mem_gapSec`), and `exists_merge_aux` on `sorryAx` besides (the print's positive control). `tools/fs131_imm_decls.py --check`: before
+the receipt lines were added it failed, naming the 49 new theorems in both files (98 lines); after, PASS, 102 theorems. `tools/fs131_im_statements.py
+--check` PASS (diff empty); `tools/fs131_im_split.py --check` PASS. The 49 records are in `scripts/Axioms.lean`'s FS131-IMM1 block after `-- FS131-IMM3`.
+No `axiom`, no `native_decide`, no backlog statement changed.
+
+### 7.2 What is left (4.4 and the assembly), for whoever continues
+
+With `ρ' := ` a radius with `X.Small ρ'`, `ρ < ρ'`, `ρ < ρc` (exists_gap), write `F' := F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ)
+(X.G.mergeCol v X.col F.col s a b c ρ) X.mem_dom h.1 (mergeArcs_nondegenerate h hbn) (mergeArcs_finite ρ) (merge_hlc h' hρρ' h hab hbn hca hcb)`.
+- **AgreesOff, RingArcsWithin, Condition 5**: `surgery_agreesOff mergeArcs_subset_closedBall (fun z hz => mergeCol_of_not_mem …)`,
+  `surgery_ringArcsWithin mergeArcs_unit`, `surgery_condition5 (mergeArcs_condition5 h hbn)` — one line each.
+- **The interior points in `B(v, ρ)`**: `surgery_mem_arcs_iff_of_mem X.hG` reduces `F'`-interior to "off `⋃ mergeArcs`"; the converse of (M1)–(M4)
+  inside `B(v, ρ/2)` (an arc point there is `v` or a branch point of a germ off the gap: `mergeArcs_cases`, `outer_subset`, the rim arc at radius
+  `ρ/2`) gives, for `r < ρ/2`, `F'.interiorPts ∩ ball v r = (⋃ i ∉ merged, sector r i) ∪ (sector r (idx s a) ∪ sector r (idx s b) ∪ gapSet r)`.
+- **Valid**: `Valid.of_agreesOff` on `closedBall v ρ`: an `F'`-interior point is, by `ball_cases`, a sector point (clear for its sector's colour by
+  `isClear_col`, for `c` by `exists_gap` with `exists_dir_of_mem_gapSec`) or a branch point (clear for the colour after its germ by
+  `isClear_of_mem_closure` on `sector j`, for `c` by `exists_gap` with `branchPt_idx`, `liftDir_gap_germ`); a rim point is `F`-interior by (iv);
+  pairs inside are closer than `1`.
+- **`v` gains no colour**: every `F'`-interior point of `B(v, ρ)` has a chart sector's colour (`mergeCol_of_mem_sector`, `mergeCol_branchPt`), and
+  each chart sector's colour is at `v` (`mem_closure_sector`) — as `move_coloursAt_self`.
+- **HasSectors v c n**: `encard_sectorsOf_of_partition` at `r < ρ/2` with pieces indexed by `Fin X.n` (the merged piece at `idx s a`, `∅` at the gap
+  sectors and at `idx s b`, `sector r i` elsewhere); the merged piece is open (`exists_ball_subset_of_branchPt` at gap branch points) and preconnected
+  (induction along `m = a, …, b`, each gap germ's branch in the closure of both sectors beside it, as `cut_hasSectors`' `hMpre`); count `(n + 1) − 1`.
+- **The rim** (`x ∈ sphere v ρ`): `F'.coloursAt x ⊆ F.coloursAt x` as `move_coloursAt_sphere` (the colouring is `F`'s near `x` except on cut phantom
+  branches, whose colour is that of both sectors beside them), so `≤ 2`; and `¬ F'.HasRepeatedColour x` by the sides lemma (§ 5.2).
+- **`D_c(v′)` unchanged** (§ 5.2's route).
