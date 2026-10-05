@@ -3504,3 +3504,26 @@ reason by the close.*
      end-chart swap is unchanged); `hlen` follows from `l60_le` (KB2, item 378). The skeleton's assembly opens with `clear hlen hmax`, and no child takes `hmax`;
      its killing test is the children's proofs. Nothing downstream changes (`exists_preBend_step` supplies both), and the statement is unchanged. Record:
      `fs131-w5`'s `plans/FS131-collar-kernel-plan.md` § 2.2. Logged; no ruling needed.
+391. **FS131-IO1 handed back** (Stage 3 SAVED, harness ≈ 408k by the task notice; record `fs131-wop`'s `plans/FS131-IO-implementation.md`, Stages 1–3; report
+     `data/fs131/reports/FS131-IO1.md`; commits `86245080`, `3b5382ac`, `d3a242f0`, `7b24117b`, pushed). **Results, [kernel]**: `ArcMap.HasHornCount` settled in
+     E6's sector-set encoding, with `HasHornCount.eq` (its value is unique, which `acted_finitely`'s potential needs) and a spec example (the constant plane map
+     has `HasHornCount 0 0`); `ne_hornSet_of_interior_coneAt`; `Near.exists_openConfig` (E6-OPEN's steps 1–4 — the side from `cone_side`, the first sector of
+     positive angle, the ray, the clear wedge from `clear_near_end` — on both sides `σ = ±1`; step 3 needed no new geometry); four of the eight clauses
+     (`open_agreesOff`, `open_ringArcsWithin`, `open_condition5`, `open_coloursAt_self`) and the surgery's arc obligations. **`exists_open` assembled** (body
+     `sorry`-free) over five open leaves: `open_hlc`, `open_valid`, `open_degree_horns`, `open_rim`, `open_allowedCone` — none believed false; plan in record
+     § 3.3, each with a MERGE lemma as template (MERGE's own surgery lemmas cannot be reused directly: they need `col (idx s b) = c` at both gap ends, and here one
+     end is the partial sector). **Receipt** (Keryx): `origin/fs131-wop` is `7b24117b`; the stage-3 build log (`build/gate/build/20261005T110040Z-3551665.log`) ends
+     "Build completed successfully (5750 jobs)", 0 warnings other than `sorry`; `OpenMove`'s `sorry` declarations by grep are the five leaves; the diff on
+     `Proofs/` since `11a34d9d` is the new `OpenMove` alone (+740); `data/fs131/io/axioms-stage3.txt` parsed: 30 records, 23 within the standard three, the five
+     leaves and `exists_open` (control) on `sorryAx`. **A narrowing, the job's to settle**: `exists_open` takes `h1 : F.HasSectors v c 1` (the horn is lone),
+     which E6-OPEN's statement does not — E6's step 5 relied on `exists_clean` to remove arcs with `c` on both sides, and route (a) has no cleaning step; the
+     use site (E6-ROUTE's OPEN branch) is a lone horn. **Correction owed** (minor): E6-OPEN's entry's *not claimed* "that the horn's colour has one sector (the
+     statement does not need it)" holds only with a cleaning step (`plans/FS131-E6-derivation.md` § 4.7, entry e6-open). **Gate-rule gap**: no Lean example
+     satisfies `exists_open`'s hypotheses at once (E6's model would, unformalized; item 375 names the same for `exists_merge`). **Owed**: a positive spec example
+     for `HasHornCount` (`cuspFrag` has `HasHornCount 0 2`, about 40 lines). Credit: IO1, for the configuration on both sides with no new geometry.
+392. **Rulings on IO1's held items, and its slot.** (a) **The lone form `h1` is kept**: after MERGE is ruled out at `v`, a horn whose colour's cone is
+     non-degenerate has a single sector (two sectors with a non-degenerate cone make MERGE available), so E6-ROUTE's OPEN branch only ever meets a lone horn.
+     Alternative weighed: the general form with a MERGE case. Why not: no consumer needs it. Confidence: high. (b) **`HasHornCount` as E6 drafted it: kept**
+     (chart-independent, unique). (c) **IO1's slot → OPEN's continuation, FS131-IO2, on `fs131-wop`**: the five leaves in record § 3.3's order, and the positive
+     `HasHornCount` example. Alternative weighed: the remaining `exists_preBend` children with `bv_l3`. Why: OPEN is on the procedure's path to
+     `exists_terminalMap`; the others have slack. Confidence: high. In flight after IO2's launch: 1 (KP2) + 1 (M6) + 1 (IO2) = 3.
