@@ -2168,3 +2168,30 @@ reason by the close.*
      needs the tool. IMM1 is told by message of IM3's § 10.1 (the whole-circle arc, the phantom-germ rim crossing, annulus cuts) and of the audit block's place.
      Alternative weighed: a second planar implementer now. Why: IP1 has not yet measured the planar foundation, so a split would be guessed; wave 5's own lane is
      next in the queue and has 30 leaves. Confidence: medium-high. In flight: 1 (I4m) + 1 (IP1) + 1 (IMM1) + 1 (I5d) = 4.
+288. **FS131-I4m handed back** (Stage 40 SAVED, harness 466k by the task notice; report `fs131-w4`'s `data/fs131/reports/FS131-I4m.md`; commits `70075915`,
+     `e1c75f21`, `2fb1b451`, `a0c29483`). **Held, [kernel], the standard three**: FS112-N2-FLANK-Q's (R2) shadow clause `flankQ_upper_shadow`/`_lower_shadow`
+     (8 children: `r2Cross`, `Arc.finite_inter_sphere_two_or_subset`, `eventually_arcs_on_sphere_two`, `exists_polarBox_subset_region`,
+     `mem_shadow_of_crossing`, …), so **`flankQ_upper` and `flankQ_lower` have no `sorry` beneath**; FS112-NB4P `nb4p` (7 children: `germ_rotate_third`,
+     `straddlers_third`, `exists_opposite_cos_third`, …). **Left on `fs131-w4` (6)**: `Contact`'s three moves (SHAVE and RAY proved on `fs131-w4m`, MERGE with
+     IMM1), `UnitArc`'s `bend_toward`, `bend_away`, `BaseSteps`' `n3_end`. **Receipt (Keryx)**: the commits exist; `build/gate/build/20261005T001554Z-3797153.log`
+     ends "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `sorry` lines by count `Contact` 3, `UnitArc` 2, `BaseSteps` 1;
+     `axioms-i4m-39.txt` and `-40.txt` give `flankQ_upper`, `flankQ_lower`, `nb4p` on the standard three. **The `hQR` question**: `n3_end`'s proof does not need
+     FLANK-Q's dichotomy (one mind, Stage 38). **Correction owed (a reading, one mind)**: NB3-END's proof (`plans/FS112-NB3-verification.md` l. 230–243) splits on
+     "an upper bound of `H_±` is `+1`" and hands that case to item 1, which concludes "the chain is `{P_0}`", not `n3_end`'s statement; the statement splits on
+     an in-type `g`-tile at `N`, so the case `κ₂ = 1`, `g ∉ P_cl(N)` must go through items 2–5 with item 2's premise read as "no in-type `g`-tile at `N`".
+     **Generalizations**: the shadow clause reads neither validity nor the flank (`R₂ ⊆ cl(region g)` with `S′ ∈ dom` suffices, and Stage 36's cusp step is not
+     needed); `mem_shadow_of_crossing` is reusable; `nb4p` uses only the first half of `hnb`, and W1 (ii)'s `Q⁻ = Q⁺` is not needed. **For a planner**: `n3_end`'s
+     items 2–5 need unit-arc versions of `Contact`'s shadow and SHAVE lemmas (`flank_shadow_g`/`_h`, `flank_shadows`, `shaveAvailable_of_not_doublyShadowed`,
+     `stuck_structure` assume Condition 5 and curvatures in `(−1, 1)`; `n3_end`'s horn has `κ₁ = −1`, no Condition 5). **Price**: each bend about a session (engine
+     3, the cut, first); `n3_end` about two. Credit: I4m, for FLANK-Q and NB4P.
+289. **Rulings on I4m's items: `n3_end` moves to wave 5; the next wave-4 job merges the moves branch and proves the bends.** (a) **`n3_end`'s reading** (Stage 38)
+     is the route: no `hQR`; the split is on an in-type `g`-tile at `N`. The kernel checks it; no second mind is sent. (b) **`n3_end` moves, statement and
+     docstring verbatim, from wave 4's `BaseSteps` to wave 5's `Plane/ValidMap/Terminal`, beside `n3_end_chain`.** Alternative weighed: a wave-4 implementer
+     builds the unit-arc versions of `Contact`'s shadow and SHAVE lemmas inside wave 4 and proves `n3_end` there. Why: the unit-arc versions are exactly what
+     FS131-I5d is building now on `fs131-w5` for `stuck_flanks_ua` (item 287), so wave 4 would duplicate them; `n3_end` has no consumer in wave 4 (by grep) and its
+     only reader, `n3_end_chain`, is in wave 5's `Terminal`; and wave 4 then lands without a two-session leaf on its longest path. Both branches delete it from
+     `BaseSteps` identically (and its `#print axioms` record from `scripts/Axioms.lean`), so the later merge is clean; I5d adds it to `Terminal` in the same commit
+     as its own deletion. Confidence: medium-high — what would change it: a wave-4 consumer of `n3_end` (there is none at `a0c29483`). (c) **FS131-I4n** on
+     `fs131-w4`, in I4m's slot: merges `fs131-w4m` (at `67256973`: `Surgery`, SHAVE, RAY) into `fs131-w4`; makes `Contact`'s `exists_shave` and `exists_rayMerge`
+     cite `exists_shave_aux` and `exists_rayMerge_aux`; deletes `n3_end` per (b); proves `bend_toward` and `bend_away`, reading `Surgery`'s cut and surgery before
+     stating engine 3, so the cut is written once. Then wave 4 waits only on MERGE. In flight: 1 (IP1) + 1 (IMM1) + 1 (I5d) + 1 (I4n) = 4.

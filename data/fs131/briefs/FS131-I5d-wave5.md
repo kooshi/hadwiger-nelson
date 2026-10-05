@@ -86,3 +86,17 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 ./scripts/build.sh`; never `lake build`. Up to two builds from different worktrees may run at once when the slot admits them; four agents are building, so on exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never
 evidence; if you mirror oleans for iteration, use a scratch directory of your own (wave 4's `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w4/data/fs131/i4/iter.sh` reads it from the variable `S`). The worktree's
 `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`.
+
+
+## Amendment, 2026-10-04 — `n3_end` moves to wave 5 (inventory item 289)
+
+The ruling, whose first line is:
+
+> 289. **Rulings on I4m's items: `n3_end` moves to wave 5; the next wave-4 job merges the moves branch and proves the bends.** (a) **`n3_end`'s reading** (Stage 38)
+> — source: plans/FS131-close-inventory.md
+
+So add `n3_end` (FS112-N3-END), statement and docstring verbatim from wave 4's `BaseSteps`, to wave 5's `Plane/ValidMap/Terminal` beside `n3_end_chain`, and
+delete it from this branch's copy of `BaseSteps` (and its `#print axioms` line) in the same commit; it becomes one of your leaves. Its proof needs exactly the
+unit-arc versions of `Contact`'s shadow and SHAVE lemmas your `stuck_flanks_ua` builds (item 288), and FS131-I4m's Stage 38 on `fs131-w4` gives its route (no
+`hQR`; the split is on an in-type `g`-tile at `N`). You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can
+only review work it knows exists).
