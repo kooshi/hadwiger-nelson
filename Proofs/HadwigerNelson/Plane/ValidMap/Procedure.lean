@@ -138,4 +138,64 @@ theorem exists_terminalMap (hF : F.Valid) (hP : F.IsPlaneMap) :
 
 end ArcMap
 
+/-! ### Spec examples -/
+
+section Spec
+
+open ArcMap
+
+/-- The one-colour plane has no ring arc, so no maximal one (a spec example for `IsMaxRingArc`). -/
+example (j : Fin 2) (P : ℂ) (θ₁ θ₂ : ℝ) (c c' : Fin 2) :
+    ¬ (ArcMap.const univ isOpen_univ j).IsMaxRingArc P θ₁ θ₂ c c' := by
+  rintro ⟨⟨h12, hsub, -⟩, -⟩
+  have := hsub ⟨θ₁, ⟨le_rfl, h12.le⟩, rfl⟩
+  simp [ArcMap.Γ, ArcMap.const] at this
+
+/-- The one-colour plane's bad count is `0` everywhere (a spec example for `badCount`). -/
+example (j : Fin 2) (P : ℂ) : (ArcMap.const univ isOpen_univ j).badCount P = 0 := by
+  rw [ArcMap.badCount, encard_eq_zero, eq_empty_iff_forall_notMem]
+  rintro ⟨θ₁, θ₂⟩ ⟨c, c', ⟨⟨h12, hsub, -⟩, -⟩, -⟩
+  have := hsub ⟨θ₁, ⟨le_rfl, h12.le⟩, rfl⟩
+  simp [ArcMap.Γ, ArcMap.const] at this
+
+/-- **Adversary**: the centre of `unitArcPlane`'s unit arc is a treatment point (a spec example for `treatPts`: the centres of
+unit arcs are in it). -/
+example : (0 : ℂ) ∈ unitArcPlane.treatPts := by
+  refine Or.inr ⟨ringPt 0 0, 0, π, pi_pos, ⟨0, ⟨le_rfl, pi_pos.le⟩, rfl⟩, ?_⟩
+  rintro _ ⟨θ, hθ, rfl⟩
+  refine ⟨mem_univ _, mem_biUnion (mem_singleton _) ⟨θ, hθ, ?_⟩⟩
+  simp [ringPt]
+
+/-- The one-colour plane has no treatment point: no unit arc, and at each point the one sector is the ball, so no repeated
+colour and no horn (a spec example for `treatPts`). -/
+example (j : Fin 2) : (ArcMap.const univ isOpen_univ j).treatPts = ∅ := by
+  set F := ArcMap.const univ isOpen_univ j with hFdef
+  have hsec : ∀ v r S, 0 < r → F.IsSector v r S → S = ball v r := by
+    rintro v r S hr ⟨x, hx, rfl, -⟩
+    have hI : F.interiorPts ∩ ball v r = ball v r := by rw [hFdef, const_interiorPts, univ_inter]
+    rw [hI] at hx ⊢
+    exact (convex_ball v r).isPreconnected.connectedComponentIn hx
+  refine eq_empty_iff_forall_notMem.mpr fun v hv => ?_
+  rcases hv with ⟨-, ⟨c, hc⟩ | ⟨α, κ₁, κ₂, c, -, hH⟩⟩ | ⟨x, θ₁, θ₂, h12, -, hsub⟩
+  · obtain ⟨r, hr2, hr⟩ := (hc.and self_mem_nhdsWithin).exists
+    have hle : (F.sectorsOf v r c).encard ≤ 1 := by
+      refine (encard_le_encard (show F.sectorsOf v r c ⊆ {ball v r} from fun S hS =>
+        hsec v r S hr hS.1)).trans (by rw [encard_singleton])
+    have := hr2.trans hle
+    norm_num at this
+  · obtain ⟨r, ⟨hS, -⟩, hr⟩ := (hH.and self_mem_nhdsWithin).exists
+    have hr : (0 : ℝ) < r := hr
+    have heq := hsec v r _ hr hS
+    have hm : v - ((r / 2 : ℝ) : ℂ) * e α ∈ ball v r := by
+      rw [mem_ball, dist_eq_norm, sub_sub_cancel_left, norm_neg, norm_mul_e (by positivity)]; linarith
+    rw [← heq] at hm
+    have hx := hm.2.1
+    simp only [frameX, sub_sub_cancel_left, neg_mul, mul_assoc, conj_e_mul_e, mul_one, Complex.neg_re,
+      Complex.ofReal_re] at hx
+    linarith
+  · have := hsub ⟨θ₁, ⟨le_rfl, h12.le⟩, rfl⟩
+    simp [hFdef, ArcMap.Γ, ArcMap.const] at this
+
+end Spec
+
 end HadwigerNelson.Plane
