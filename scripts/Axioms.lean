@@ -3078,6 +3078,9 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.compl_outerDom_subset_closedBall
 #print axioms HadwigerNelson.Plane.ArcMap.outerDom_subset_of_encloses
 #print axioms HadwigerNelson.Plane.ArcMap.not_encloses_of_hull_eq
+#print axioms HadwigerNelson.Plane.BranchGerms.branchPt_mem_closure_sector
+#print axioms HadwigerNelson.Plane.BranchGerms.eq_or_next_eq_of_mem_closure_sector
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isRingArc_of_touch
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 

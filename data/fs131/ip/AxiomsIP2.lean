@@ -16,6 +16,10 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.ArcMap.exists_outermost
 #print axioms HadwigerNelson.Plane.ArcMap.unenclosed_of_rim_vertex
 #print axioms HadwigerNelson.Plane.ArcMap.exists_unenclosed_or_bad
--- partners (expected: sorryAx)
+#print axioms HadwigerNelson.Plane.BranchGerms.branchPt_mem_closure_sector
+#print axioms HadwigerNelson.Plane.BranchGerms.eq_or_next_eq_of_mem_closure_sector
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isRingArc_of_touch
+-- partners (expected: sorryAx); exists_eleventh_of rests on noBoth (wave 4's leaf, sorry at the pin)
+#print axioms HadwigerNelson.Plane.ArcMap.noBoth
 #print axioms HadwigerNelson.Plane.ArcMap.exists_eleventh_of
 #print axioms HadwigerNelson.Plane.ArcMap.localDense

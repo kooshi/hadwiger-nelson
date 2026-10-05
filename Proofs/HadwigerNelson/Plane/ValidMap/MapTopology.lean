@@ -197,6 +197,36 @@ theorem exists_far_side (G : BranchGerms n) (hn : 2 ≤ n) {ρ : ℝ} (hord : �
       · rw [hnk, dif_pos hk1]; exact hlt (Fin.mk_lt_mk.mpr hm2)
       · linarith [htop m, hle (show z0 ≤ k from Fin.mk_le_mk.mpr (Nat.zero_le _))]
 
+/-- **Branch points are closure points of the sectors they bound**: at a distance where the germs are strictly ordered, the point of germ `i`
+lies in the closure of sector `i`, and the point of the germ after `i` in the closure of sector `i` too. -/
+theorem branchPt_mem_closure_sector (G : BranchGerms n) {ρ : ℝ} (hord : ∀ s ∈ Ioo 0 ρ, ∀ i, G.dir i s < G.nextDir i s) (v : ℂ)
+    (i : Fin n) {s : ℝ} (hs : s ∈ Ioo 0 ρ) :
+    branchPt v (G.β i) (G.κ i) s ∈ closure (G.sector v ρ i) ∧
+      branchPt v (G.β (next i)) (G.κ (next i)) s ∈ closure (G.sector v ρ i) := by
+  have hgap := hord s hs i
+  have hmem : ∀ φ ∈ Ioo (G.dir i s) (G.nextDir i s), v + (s : ℂ) * e φ ∈ G.sector v ρ i := fun φ hφ => ⟨s, hs, φ, hφ, rfl⟩
+  have hcont : Continuous fun φ : ℝ => v + (s : ℂ) * e φ := by unfold e; fun_prop
+  constructor
+  · refine mem_closure_of_tendsto ((hcont.tendsto (G.dir i s)).mono_left (nhdsWithin_le_nhds (s := Ioi (G.dir i s)))) ?_
+    filter_upwards [Ioo_mem_nhdsGT hgap] with φ hφ
+    exact hmem φ hφ
+  · have hpt : branchPt v (G.β (next i)) (G.κ (next i)) s = v + (s : ℂ) * e (G.nextDir i s) := by
+      rw [branchPt_eq, e_nextDir]; rfl
+    rw [hpt]
+    refine mem_closure_of_tendsto ((hcont.tendsto (G.nextDir i s)).mono_left (nhdsWithin_le_nhds (s := Iio (G.nextDir i s)))) ?_
+    filter_upwards [Ioo_mem_nhdsLT hgap] with φ hφ
+    exact hmem φ hφ
+
+/-- **A branch point touches only the two sectors its germ bounds** (at least two germs, strictly ordered): if the point of germ `m` lies in
+the closure of sector `k`, then `k = m` or the germ after `k` is `m` (`exists_far_side`). -/
+theorem eq_or_next_eq_of_mem_closure_sector (G : BranchGerms n) (hn : 2 ≤ n) {ρ : ℝ}
+    (hord : ∀ s ∈ Ioo 0 ρ, ∀ i, G.dir i s < G.nextDir i s) (v : ℂ) {m k : Fin n} {s : ℝ} (hs : s ∈ Ioo 0 ρ)
+    (h : branchPt v (G.β m) (G.κ m) s ∈ closure (G.sector v ρ k)) : k = m ∨ next k = m := by
+  by_contra hc
+  push Not at hc
+  obtain ⟨O, hOo, -, -, hOd, -, hOm⟩ := G.exists_far_side hn hord v k
+  exact Set.disjoint_left.mp (hOd.closure_right hOo) (hOm m (Ne.symm hc.1) (Ne.symm hc.2) s hs) h
+
 -- The straight three-germ chart (directions `0`, `2π/3`, `4π/3`) is strictly ordered at every distance: a model of `exists_far_side`'s
 -- hypothesis `hord`, at every `ρ`.
 example : ∀ s : ℝ, ∀ i, (⟨![0, 2 * π / 3, 4 * π / 3], ![0, 0, 0]⟩ : BranchGerms 3).dir i s <
@@ -954,6 +984,198 @@ theorem tileOf_subset_ball (hF : F.Valid) {u : ℂ} {j : Fin k} {S T : Set ℂ} 
   rw [‹dist t' u = _›, h1] at this
   linarith
 
+/-- **A boundary on a unit circle, at a cubic touch point** (E4-RIM step 1's arc, for N3-NOBOTH): at a cubic trichromatic point `q` of the
+domain, a tile `A` of colour `a` inside `B(u, 1)` and a tile `Y` of colour `c` off `B̄(u, 1)`, both holding `q` in their closures, are adjacent
+sectors there; the branch between them lies on `ω(u)` (its points are closure points of both), and a short arc of it is an arc of `Γ` on `ω(u)` with
+inner colour `a` and outer colour `c` (near a branch point only the two sectors it bounds: `eq_or_next_eq_of_mem_closure_sector`). -/
+theorem exists_isRingArc_of_touch {u q : ℂ} (hq : q ∈ F.dom) (hcub : F.IsCubicTrichromatic q) {A Y : Set ℂ} {a c : Fin k}
+    (hA : F.TileOf a A) (hY : F.TileOf c Y) (hAb : A ⊆ ball u 1) (hYb : Disjoint Y (closedBall u 1)) (hqA : q ∈ closure A)
+    (hqY : q ∈ closure Y) : ∃ θ₁ θ₂, F.IsRingArc u θ₁ θ₂ a c := by
+  have hπ := Real.pi_pos
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hq
+  have hn3 : n = 3 := by
+    obtain ⟨r, h1, h2⟩ := (hcub.1.and hC.hasDegree).exists
+    rw [h1] at h2
+    have : max n 1 = 3 := by exact_mod_cast h2.symm
+    omega
+  subst hn3
+  obtain ⟨ρ', hρ', hord'⟩ :=
+    mem_nhdsGT_iff_exists_Ioo_subset.mp (G.eventually_dir_lt_nextDir hC.sorted hC.pos hC.curv)
+  set ρ := min (min ρ' r₀) (1 / 2) with hρdef
+  have hρ : ρ ∈ Ioc 0 r₀ :=
+    ⟨lt_min (lt_min hρ' hC.pos) (by norm_num), (min_le_left _ _).trans (min_le_right _ _)⟩
+  have hρ2 : ρ ≤ 1 / 2 := min_le_right _ _
+  have hord : ∀ s ∈ Ioo 0 ρ, ∀ i, G.dir i s < G.nextDir i s := fun s hs =>
+    hord' ⟨hs.1, hs.2.trans_le ((min_le_left _ _).trans (min_le_left _ _))⟩
+  have h3pos : (0 : ℕ) < 3 := by norm_num
+  obtain ⟨iA, hiA⟩ := hC.exists_sector_subset_tile h3pos hρ hA.1 hqA
+  obtain ⟨iY, hiY⟩ := hC.exists_sector_subset_tile h3pos hρ hY.1 hqY
+  have hYball : Disjoint Y (ball u 1) :=
+    Set.disjoint_left.mpr fun w hwY hwb => Set.disjoint_left.mp hYb hwY (ball_subset_closedBall hwb)
+  have hiAY : iA ≠ iY := by
+    rintro rfl
+    obtain ⟨w, hw⟩ := hC.sector_nonempty hρ iA
+    exact Set.disjoint_left.mp hYball (hiY hw) (hAb (hiA hw))
+  have hclA : closure A ⊆ closedBall u 1 := (closure_mono hAb).trans (closure_ball u one_ne_zero).subset
+  have hclY : closure Y ⊆ (ball u 1)ᶜ := (hYball.closure_left isOpen_ball).subset_compl_right
+  -- the branch between the two sectors: germ `m`, with `next i₁ = m` and `{i₁, m} = {iA, iY}`
+  have hadj : ∀ i j : Fin 3, i ≠ j → BranchGerms.next i = j ∨ BranchGerms.next j = i := by decide
+  obtain ⟨i₁, m, hnext, hpair⟩ : ∃ i₁ m : Fin 3, BranchGerms.next i₁ = m ∧ ((i₁ = iA ∧ m = iY) ∨ (i₁ = iY ∧ m = iA)) := by
+    rcases hadj iA iY hiAY with h | h
+    · exact ⟨iA, iY, h, Or.inl ⟨rfl, rfl⟩⟩
+    · exact ⟨iY, iA, h, Or.inr ⟨rfl, rfl⟩⟩
+  set p : ℝ → ℂ := fun s => branchPt q (G.β m) (G.κ m) s with hp
+  have hpcl : ∀ s ∈ Ioo 0 ρ, p s ∈ closure (G.sector q ρ iA) ∧ p s ∈ closure (G.sector q ρ iY) := by
+    intro s hs
+    have h1 := (G.branchPt_mem_closure_sector hord q m hs).1
+    have h2 := (G.branchPt_mem_closure_sector hord q i₁ hs).2
+    rw [hnext] at h2
+    rcases hpair with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+    · exact ⟨h2, h1⟩
+    · exact ⟨h1, h2⟩
+  have hponly : ∀ s ∈ Ioo 0 ρ, ∀ j, p s ∈ closure (G.sector q ρ j) → j = iA ∨ j = iY := by
+    intro s hs j hj
+    rcases G.eq_or_next_eq_of_mem_closure_sector (by norm_num) hord q hs hj with h | h
+    · rcases hpair with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+      · exact Or.inr h
+      · exact Or.inl h
+    · have := BranchGerms.next_injective (h.trans hnext.symm)
+      rcases hpair with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+      · exact Or.inl this
+      · exact Or.inr this
+  have hpq : ∀ s, 0 ≤ s → ‖p s - q‖ = s := fun s hs => norm_branchPt_sub q _ _ hs
+  have hp0 : p 0 = q := by simp [hp, branchPt]
+  -- the branch lies on `ω(u)`
+  have hunit : ∀ z, z ∈ closure A → z ∈ closure Y → ‖z - u‖ = 1 := by
+    intro z h1 h2
+    have h1' := hclA h1
+    have h2' := hclY h2
+    rw [mem_closedBall, dist_eq_norm] at h1'
+    rw [mem_compl_iff, mem_ball, dist_eq_norm, not_lt] at h2'
+    linarith
+  have hpu : ∀ s ∈ Ico 0 ρ, ‖p s - u‖ = 1 := by
+    intro s hs
+    rcases eq_or_lt_of_le hs.1 with h0 | hpos
+    · rw [← h0, hp0]; exact hunit q hqA hqY
+    · exact hunit _ (closure_mono hiA (hpcl s ⟨hpos, hs.2⟩).1) (closure_mono hiY (hpcl s ⟨hpos, hs.2⟩).2)
+  -- the sides along it
+  have hside : ∀ s ∈ Ioo 0 ρ, F.innerColours u (p s) = {a} ∧ F.outerColours u (p s) = {c} := by
+    intro s hs
+    have hpb : p s ∈ ball q ρ := by rw [mem_ball, dist_eq_norm, hpq s hs.1.le]; exact hs.2
+    have key : ∀ (U : Set ℂ) (c' : Fin k), p s ∈ closure (F.region c' ∩ U) →
+        ∃ j, (j = iA ∨ j = iY) ∧ ∃ w ∈ G.sector q ρ j, w ∈ U ∧ F.col w = c' := by
+      intro U c' h
+      have h' : p s ∈ closure (⋃ j, G.sector q ρ j ∩ (F.region c' ∩ U)) := by
+        refine closure_mono ?_ (isOpen_ball.inter_closure ⟨hpb, h⟩)
+        rintro w ⟨hwb, hwr, hwU⟩
+        have hw : w ∈ ball q ρ ∩ F.interiorPts := ⟨hwb, hwr.1⟩
+        rw [hC.cover ρ hρ h3pos] at hw
+        obtain ⟨j, hj⟩ := mem_iUnion.mp hw
+        exact mem_iUnion.mpr ⟨j, hj, hwr, hwU⟩
+      rw [closure_iUnion_of_finite] at h'
+      obtain ⟨j, hj⟩ := mem_iUnion.mp h'
+      obtain ⟨w, hwj, hwr, hwU⟩ : (G.sector q ρ j ∩ (F.region c' ∩ U)).Nonempty := by
+        by_contra hne
+        rw [not_nonempty_iff_eq_empty] at hne
+        rw [hne, closure_empty] at hj
+        exact hj
+      exact ⟨j, hponly s hs j (closure_mono inter_subset_left hj), w, hwj, hwU, hwr.2⟩
+    have hcolA : ∀ w ∈ G.sector q ρ iA, F.col w = a := fun w hw => hA.2 (hiA hw)
+    have hcolY : ∀ w ∈ G.sector q ρ iY, F.col w = c := fun w hw => hY.2 (hiY hw)
+    constructor
+    · ext c'
+      simp only [ArcMap.innerColours, mem_setOf_eq, mem_singleton_iff]
+      constructor
+      · intro h
+        obtain ⟨j, hj, w, hwj, hwU, hwc⟩ := key (ball u 1) c' h
+        rcases hj with rfl | rfl
+        · rw [← hwc, hcolA w hwj]
+        · exact absurd hwU (hclY (subset_closure (hiY hwj)))
+      · intro h; rw [h]
+        exact closure_mono (show A ⊆ F.region a ∩ ball u 1 from fun w hw => ⟨⟨hA.1.subset_interiorPts hw, hA.2 hw⟩, hAb hw⟩)
+          (closure_mono hiA (hpcl s hs).1)
+    · ext c'
+      simp only [ArcMap.outerColours, mem_setOf_eq, mem_singleton_iff]
+      constructor
+      · intro h
+        obtain ⟨j, hj, w, hwj, hwU, hwc⟩ := key (closedBall u 1)ᶜ c' h
+        rcases hj with rfl | rfl
+        · exact absurd (ball_subset_closedBall (hAb (hiA hwj))) hwU
+        · rw [← hwc, hcolY w hwj]
+      · intro h; rw [h]
+        exact closure_mono (show Y ⊆ F.region c \ closedBall u 1 from
+          fun w hw => ⟨⟨hY.1.subset_interiorPts hw, hY.2 hw⟩, fun hwc => Set.disjoint_left.mp hYb hw hwc⟩)
+          (closure_mono hiY (hpcl s hs).2)
+  -- the angle about `u` along the branch
+  have hqu : ‖q - u‖ = 1 := by have := hpu 0 ⟨le_rfl, hρ.1⟩; rwa [hp0] at this
+  have hqu0 : q - u ≠ 0 := fun h => by rw [h, norm_zero] at hqu; exact zero_ne_one hqu
+  have hn1 : ∀ s ∈ Ico 0 ρ, ‖(p s - u) / (q - u)‖ = 1 := fun s hs => by rw [norm_div, hqu, div_one, hpu s hs]
+  have hslit : ∀ s ∈ Ico 0 ρ, (p s - u) / (q - u) ∈ slitPlane := by
+    intro s hs
+    rw [mem_slitPlane_iff]
+    by_contra hcon
+    push Not at hcon
+    have hsq : ((p s - u) / (q - u)).re * ((p s - u) / (q - u)).re +
+        ((p s - u) / (q - u)).im * ((p s - u) / (q - u)).im = 1 := by
+      rw [← Complex.normSq_apply, ← Complex.sq_norm, hn1 s hs]; norm_num
+    have hre : ((p s - u) / (q - u)).re = -1 := by nlinarith [hcon.1, hcon.2]
+    have hw1 : (p s - u) / (q - u) = -1 := Complex.ext (by simp [hre]) (by simp [hcon.2])
+    rw [div_eq_iff hqu0] at hw1
+    have h2 : p s - q = -2 * (q - u) := by linear_combination hw1
+    have h3 : ‖p s - q‖ = 2 := by rw [h2, norm_mul, hqu]; norm_num
+    rw [hpq s hs.1] at h3
+    linarith [hs.2, hρ2]
+  set g : ℝ → ℝ := fun s => arg ((p s - u) / (q - u)) with hg
+  have hfc : Continuous fun s => (p s - u) / (q - u) :=
+    ((continuous_branchPt q _ _).sub continuous_const).div_const _
+  have hgc : ∀ s ∈ Ico 0 ρ, ContinuousAt g s := fun s hs =>
+    ContinuousAt.comp (f := fun s => (p s - u) / (q - u)) (Complex.continuousAt_arg (hslit s hs)) hfc.continuousAt
+  set θq := arg (q - u) with hθq
+  have hrec : ∀ s ∈ Ico 0 ρ, ringPt u (θq + g s) = p s := by
+    intro s hs
+    have h1 : (p s - u) / (q - u) = e (g s) := by
+      have := eq_polar_arg ((p s - u) / (q - u)); rw [hn1 s hs] at this; simpa using this
+    have h2 : q - u = e θq := by
+      have := eq_polar_arg (q - u); rw [hqu] at this; simpa using this
+    show u + e (θq + g s) = p s
+    rw [e_add, ← h2, ← h1]
+    field_simp
+    ring
+  have hinj : ∀ s ∈ Ico 0 ρ, ∀ s' ∈ Ico 0 ρ, g s = g s' → s = s' := by
+    intro s hs s' hs' h
+    have := (hrec s hs).symm.trans (h ▸ hrec s' hs')
+    rw [← hpq s hs.1, ← hpq s' hs'.1, this]
+  -- two radii, their angles, and every angle between
+  set s₁ := ρ / 4 with hs₁
+  set s₂ := ρ / 2 with hs₂
+  have hs₁m : s₁ ∈ Ico 0 ρ := ⟨by linarith [hρ.1], by linarith [hρ.1]⟩
+  have hs₂m : s₂ ∈ Ico 0 ρ := ⟨by linarith [hρ.1], by linarith [hρ.1]⟩
+  have hg12 : g s₁ ≠ g s₂ := fun h => by have := hinj _ hs₁m _ hs₂m h; linarith [hρ.1]
+  have hcon : ContinuousOn g (uIcc s₁ s₂) := fun s hs => by
+    rw [uIcc_of_le (by linarith [hρ.1])] at hs
+    exact (hgc s ⟨by linarith [hs.1, hρ.1], by linarith [hs.2, hρ.1]⟩).continuousWithinAt
+  have hivt := intermediate_value_uIcc hcon
+  have hfind : ∀ θ ∈ Icc (θq + min (g s₁) (g s₂)) (θq + max (g s₁) (g s₂)), ∃ s ∈ Ioo 0 ρ, ringPt u θ = p s := by
+    intro θ hθ
+    obtain ⟨s, hs, hgs⟩ := hivt (show θ - θq ∈ uIcc (g s₁) (g s₂) from ⟨by linarith [hθ.1], by linarith [hθ.2]⟩)
+    rw [uIcc_of_le (by linarith [hρ.1])] at hs
+    have hsm : s ∈ Ioo 0 ρ := ⟨by linarith [hs.1, hρ.1], by linarith [hs.2, hρ.1]⟩
+    refine ⟨s, hsm, ?_⟩
+    rw [← hrec s ⟨hsm.1.le, hsm.2⟩, hgs]; ring_nf
+  refine ⟨θq + min (g s₁) (g s₂), θq + max (g s₁) (g s₂), ⟨?_, ?_, ?_⟩⟩
+  · have := min_lt_max.mpr hg12; linarith
+  · rintro z ⟨θ, hθ, rfl⟩
+    obtain ⟨s, hs, hz⟩ := hfind θ hθ
+    rw [hz]
+    have hmem : p s ∈ (F.Γ ∩ ball q r₀) \ {q} := by
+      rw [hC.branches]
+      exact mem_iUnion.mpr ⟨m, s, ⟨hs.1, hs.2.trans_le hρ.2⟩, rfl⟩
+    exact hmem.1.1
+  · intro θ hθ
+    obtain ⟨s, hs, hz⟩ := hfind θ ⟨hθ.1.le, hθ.2.le⟩
+    rw [hz]
+    exact hside s hs
+
 /-- **The eleventh point** (FS131-E4 E4-RIM, all five steps; `BaseCtx.exists_eleventh`'s content with the context's fields as hypotheses).
 `R*` is the component of `u` in the union of the closures of the tiles of `u`'s colours meeting `B(u, 1)` (finitely many); its tiles lie in
 `B(u, 1)` (`tileOf_subset_ball`) and every tile of `u`'s colours touching it is one of them (N3-NOBOTH, `noBoth`, at a touching point on
@@ -964,7 +1186,192 @@ theorem exists_eleventh_of {F : ArcMap 6} {u : ℂ} (hF : F.Valid) (hcov : F.Cov
     (hH : F.BaseHyp u) (hE : F.UnenclosedC u) :
     ∃ q ∈ closedBall u 1, (F.coloursAt q).ncard = 3 ∧ (F.coloursAt q ∩ F.coloursAt u).ncard = 2 ∧
       ∀ j ∈ F.coloursAt q ∩ F.coloursAt u, ∀ T, F.TileOf j T → q ∈ closure T → T ⊆ ball u 1 := by
-  sorry
+  have hud : u ∈ F.dom := hcov (mem_closedBall_self (by norm_num))
+  have h1d : closedBall u 1 ⊆ F.dom := (closedBall_subset_closedBall (by norm_num)).trans hcov
+  have hgood : ∀ z ∈ closedBall u 1, z ∉ F.fourSet ∪ F.repSet := fun z hz hbad =>
+    Set.disjoint_left.mp hH (closedBall_subset_closedBall (by norm_num) hz) hbad
+  set C := F.coloursAt u with hCdef
+  have hcoluniq : ∀ {T : Set ℂ} {i j : Fin 6}, F.TileOf i T → F.TileOf j T → i = j := by
+    intro T i j hi hj
+    obtain ⟨w, hw⟩ := hi.1.nonempty
+    have h1 : F.col w = i := hi.2 hw
+    have h2 : F.col w = j := hj.2 hw
+    exact h1.symm.trans h2
+  -- (i) each colour of `u` has a tile at `u`
+  have htileAt : ∀ j ∈ C, ∃ S, F.TileOf j S ∧ u ∈ closure S := by
+    intro j hj
+    have hsub : F.region j ⊆ ⋃ T ∈ {T | F.TileOf j T}, closure T := by
+      intro z hz
+      have hT : F.IsTile (connectedComponentIn F.interiorPts z) := ⟨z, hz.1, rfl⟩
+      have h := hT.tileOf (mem_connectedComponentIn hz.1)
+      rw [show F.col z = j from hz.2] at h
+      exact mem_iUnion₂.mpr ⟨_, h, subset_closure (mem_connectedComponentIn hz.1)⟩
+    obtain ⟨S, hS, huS⟩ := exists_mem_closure_of_mem_closure_biUnion (fun T hT => hT.1) hud (closure_mono hsub hj)
+    exact ⟨S, hS, huS⟩
+  -- (ii) a tile of a colour of `u` meeting `B̄(u, 1)` lies in `B(u, 1)` (Lemma H(a))
+  have hinside : ∀ j ∈ C, ∀ T, F.TileOf j T → (T ∩ closedBall u 1).Nonempty → T ⊆ ball u 1 := by
+    rintro j hj T hT ⟨z, hzT, hzb⟩
+    obtain ⟨S, hS, huS⟩ := htileAt j hj
+    rw [← closure_ball u one_ne_zero] at hzb
+    obtain ⟨w, hwT, hwb⟩ := (_root_.mem_closure_iff.mp hzb) T hT.1.isOpen hzT
+    exact tileOf_subset_ball hF hS huS hT ⟨w, hwT, hwb⟩
+  have hcolAt : ∀ {P : Set ℂ} {z : ℂ}, F.IsTile P → z ∈ closure P → ∃ c, F.TileOf c P ∧ c ∈ F.coloursAt z := by
+    intro P z hP hzP
+    obtain ⟨p, hp⟩ := hP.nonempty
+    refine ⟨F.col p, hP.tileOf hp, ?_⟩
+    show z ∈ closure (F.region (F.col p))
+    exact closure_mono (show P ⊆ F.region (F.col p) from fun w hw => ⟨hP.subset_interiorPts hw, (hP.tileOf hp).2 hw⟩) hzP
+  -- (iii) the family, its union of closures `K₀`, and `u`'s component `R`
+  set 𝒯 := {T | (∃ j ∈ C, F.TileOf j T) ∧ (T ∩ ball u 1).Nonempty} with h𝒯
+  have h𝒯ball : ∀ T ∈ 𝒯, T ⊆ ball u 1 := by
+    rintro T ⟨⟨j, hj, hT⟩, w, hwT, hwb⟩
+    exact hinside j hj T hT ⟨w, hwT, ball_subset_closedBall hwb⟩
+  have h𝒯tile : ∀ T ∈ 𝒯, F.IsTile T := fun T hT => by obtain ⟨⟨j, -, hTj⟩, -⟩ := hT; exact hTj.1
+  have h𝒯fin : 𝒯.Finite := (finite_tiles_closure_inter (isCompact_closedBall u 1) h1d).subset fun T hT => by
+    obtain ⟨⟨j, hj, hTj⟩, w, hwT, hwb⟩ := hT
+    exact ⟨hTj.1, w, subset_closure hwT, ball_subset_closedBall hwb⟩
+  set K₀ := ⋃ T ∈ 𝒯, closure T with hK₀
+  have hK₀c : IsClosed K₀ := h𝒯fin.isClosed_biUnion fun _ _ => isClosed_closure
+  have hK₀b : K₀ ⊆ closedBall u 1 :=
+    iUnion₂_subset fun T hT => (closure_mono (h𝒯ball T hT)).trans (closure_ball u one_ne_zero).subset
+  have hat : ∀ S, F.IsTile S → u ∈ closure S → S ∈ 𝒯 := by
+    intro S hS huS
+    obtain ⟨c, hc, hcu⟩ := hcolAt hS huS
+    exact ⟨⟨c, hcu, hc⟩, (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨u, huS, mem_ball_self one_pos⟩⟩
+  obtain ⟨S₀, hS₀, huS₀⟩ := F.mem_closure_tile hud
+  have huK : u ∈ K₀ := mem_iUnion₂.mpr ⟨S₀, hat S₀ hS₀ huS₀, huS₀⟩
+  set R := connectedComponentIn K₀ u with hR
+  have hRpre : IsPreconnected R := isPreconnected_connectedComponentIn
+  have huR : u ∈ R := mem_connectedComponentIn huK
+  have hRK : R ⊆ K₀ := connectedComponentIn_subset _ _
+  have hRc : IsClosed R :=
+    isClosed_of_closure_subset (hRpre.closure.subset_connectedComponentIn (subset_closure huR) (closure_minimal hRK hK₀c))
+  have hRb : R ⊆ closedBall u 1 := hRK.trans hK₀b
+  have hRbd : Bornology.IsBounded R := isBounded_closedBall.subset hRb
+  have hinR : ∀ T ∈ 𝒯, (closure T ∩ R).Nonempty → closure T ⊆ R := by
+    rintro T hT ⟨z, hzT, hzR⟩
+    have hcl : closure T ⊆ K₀ := subset_biUnion_of_mem (u := fun T => closure T) hT
+    rw [hR, connectedComponentIn_eq hzR]
+    exact (h𝒯tile T hT).isPreconnected.closure.subset_connectedComponentIn hzT hcl
+  -- (iv) the unbounded component `W` of `Rᶜ` and its frontier
+  set z₀ : ℂ := u + 2 with hz₀def
+  have hz₀b : z₀ ∉ closedBall u 1 := by
+    rw [mem_closedBall, dist_eq_norm, hz₀def, add_sub_cancel_left]; norm_num
+  have hz₀R : z₀ ∉ R := fun h => hz₀b (hRb h)
+  set W := connectedComponentIn Rᶜ z₀ with hW
+  have hWo : IsOpen W := hRc.isOpen_compl.connectedComponentIn
+  have hcompW : (closedBall u 1)ᶜ ⊆ W :=
+    (isPreconnected_compl_closedBall u 1).subset_connectedComponentIn hz₀b (compl_subset_compl.mpr hRb)
+  have hWunb : ¬ Bornology.IsBounded W := fun hb => NormedSpace.unbounded_univ ℝ ℂ
+    (((isBounded_closedBall (x := u) (r := 1)).union hb).subset fun z _ => by
+      by_cases h : z ∈ closedBall u 1
+      · exact Or.inl h
+      · exact Or.inr (hcompW h))
+  have hWR : Disjoint W R := Set.disjoint_left.mpr fun z hz hzR => connectedComponentIn_subset _ _ hz hzR
+  set Φ := frontier W with hΦ
+  have hΦR : Φ ⊆ R := fun v hv => by simpa using frontier_connectedComponentIn_subset hRc.isOpen_compl z₀ hv
+  have hΦpre : IsPreconnected Φ := isPreconnected_frontier_connectedComponentIn hRc hRpre z₀
+  have hΦne : Φ.Nonempty := by
+    rw [hΦ, nonempty_frontier_iff]
+    exact ⟨⟨z₀, mem_connectedComponentIn hz₀R⟩, fun h => Set.disjoint_left.mp hWR (h ▸ mem_univ u : u ∈ W) huR⟩
+  -- (v) two family tiles meet on `Φ`
+  set s := {T | T ∈ 𝒯 ∧ (closure T ∩ Φ).Nonempty} with hs
+  have hsfin : s.Finite := h𝒯fin.subset fun T hT => hT.1
+  have hcov' : Φ ⊆ ⋃ T ∈ s, closure T := by
+    intro v hv
+    obtain ⟨T, hT, hvT⟩ := mem_iUnion₂.mp (hRK (hΦR hv))
+    exact mem_iUnion₂.mpr ⟨T, ⟨hT, v, hvT, hv⟩, hvT⟩
+  obtain ⟨v₀, hv₀⟩ := hΦne
+  obtain ⟨X, hXs, hv₀X⟩ := mem_iUnion₂.mp (hcov' hv₀)
+  obtain ⟨Y', hY's, hXY'⟩ : ∃ Y' ∈ s, X ≠ Y' := by
+    by_contra hall
+    push Not at hall
+    have hΦX : Φ ⊆ closure X := fun v hv => by
+      obtain ⟨Y', hY's, hvY'⟩ := mem_iUnion₂.mp (hcov' hv)
+      rwa [← hall Y' hY's] at hvY'
+    obtain ⟨⟨j, hj, hXj⟩, -⟩ := hXs.1
+    obtain ⟨j', hj', hjj'⟩ : ∃ j' ∈ C, j' ≠ j := by
+      by_contra hno
+      push Not at hno
+      have h1 := Set.ncard_le_ncard (show C ⊆ {j} from fun x hx => hno x hx) (Set.finite_singleton j)
+      rw [Set.ncard_singleton] at h1
+      have h3 : C.ncard = 3 := hu.2
+      omega
+    obtain ⟨S, hS, huS⟩ := htileAt j' hj'
+    have hSX : S ≠ X := fun h => hjj' (hcoluniq hS (h ▸ hXj))
+    obtain ⟨y, hy⟩ := hS.1.nonempty
+    have hyR : y ∈ R := hinR S (hat S hS.1 huS) ⟨u, huS, huR⟩ (subset_closure hy)
+    have hyX : y ∉ closure X := IsTile.subset_compl_closure hXj.1 hS.1 hSX hy
+    apply hE j hj X S hXj hS.1 huS y ⟨hy, hyX⟩
+    exact isBounded_connectedComponentIn_of_frontier_subset hRc hRbd isClosed_closure hWunb hΦX
+      (fun h => Set.disjoint_left.mp hWR h hyR) hyX
+  obtain ⟨T₀, hT₀s, T₁, hT₁s, hT₀₁, q, ⟨hqΦ, hqT₀⟩, hqT₁⟩ :=
+    exists_inter_of_finite_closed_cover hΦpre hsfin (fun T => closure T) (fun _ _ => isClosed_closure) hcov' hXs hY's hXY'
+      ⟨v₀, hv₀, hv₀X⟩ (by obtain ⟨w, hw1, hw2⟩ := hY's.2; exact ⟨w, hw2, hw1⟩)
+  have hqR : q ∈ R := hΦR hqΦ
+  have hqb : q ∈ closedBall u 1 := hRb hqR
+  have hqd : q ∈ F.dom := h1d hqb
+  have hT₀ := h𝒯tile T₀ hT₀s.1
+  have hT₁ := h𝒯tile T₁ hT₁s.1
+  -- (vi) a tile at `q` meets `W`; `q` is cubic trichromatic
+  obtain ⟨Y, hY, ⟨w, hwY, hwW⟩, hqY⟩ := exists_tile_mem_closure_of_mem_closure hWo hqd hqΦ.1
+  have hT₀R : closure T₀ ⊆ R := hinR T₀ hT₀s.1 ⟨q, hqT₀, hqR⟩
+  have hT₁R : closure T₁ ⊆ R := hinR T₁ hT₁s.1 ⟨q, hqT₁, hqR⟩
+  have hYT₀ : Y ≠ T₀ := fun h => Set.disjoint_left.mp hWR hwW (hT₀R (subset_closure (h ▸ hwY)))
+  have hYT₁ : Y ≠ T₁ := fun h => Set.disjoint_left.mp hWR hwW (hT₁R (subset_closure (h ▸ hwY)))
+  have hcubq := isCubicTrichromatic_of_three_tiles hqd hT₀ hT₁ hY hT₀₁ hYT₀.symm hYT₁.symm hqT₀ hqT₁ hqY (hgood q hqb)
+  obtain ⟨a, haT₀, haq⟩ := hcolAt hT₀ hqT₀
+  obtain ⟨b, hbT₁, hbq⟩ := hcolAt hT₁ hqT₁
+  obtain ⟨c, hcY, hcq⟩ := hcolAt hY hqY
+  have haC : a ∈ C := by obtain ⟨⟨j, hj, hj'⟩, -⟩ := hT₀s.1; exact hcoluniq hj' haT₀ ▸ hj
+  have hbC : b ∈ C := by obtain ⟨⟨j, hj, hj'⟩, -⟩ := hT₁s.1; exact hcoluniq hj' hbT₁ ▸ hj
+  -- (vii) `Y` carries no colour of `u`
+  have hcC : c ∉ C := by
+    intro hcC
+    by_cases hYb : (Y ∩ ball u 1).Nonempty
+    · exact Set.disjoint_left.mp hWR hwW (hinR Y ⟨⟨c, hcC, hcY⟩, hYb⟩ ⟨q, hqY, hqR⟩ (subset_closure hwY))
+    · have hYcb : Disjoint Y (closedBall u 1) := Set.disjoint_left.mpr fun z hzY hzb =>
+        hYb ⟨z, hzY, hinside c hcC Y hcY ⟨z, hzY, hzb⟩ hzY⟩
+      obtain ⟨θ₁, θ₂, harc⟩ := exists_isRingArc_of_touch hqd hcubq haT₀ hcY (h𝒯ball T₀ hT₀s.1) hYcb hqT₀ hqY
+      rcases noBoth hF hud ⟨a, c, harc, haC, hcC⟩ with h4 | hrep
+      · exact hgood u (mem_closedBall_self zero_le_one) (Or.inl ⟨hud, h4⟩)
+      · exact hgood u (mem_closedBall_self zero_le_one) (Or.inr ⟨hud, hrep⟩)
+  -- (viii) the colours
+  have hrep : ¬ F.HasRepeatedColour q := fun h => hgood q hqb (Or.inr ⟨hqd, h⟩)
+  have hab : a ≠ b := fun h => hrep (hasRepeatedColour_of_two_tiles hqd haT₀ (h ▸ hbT₁) hT₀₁ hqT₀ hqT₁)
+  have hac : a ≠ c := fun h => hcC (h ▸ haC)
+  have hbc : b ≠ c := fun h => hcC (h ▸ hbC)
+  have hq3 : F.coloursAt q = {a, b, c} := by
+    symm
+    apply Set.eq_of_subset_of_ncard_le
+    · exact insert_subset_iff.mpr ⟨haq, insert_subset_iff.mpr ⟨hbq, singleton_subset_iff.mpr hcq⟩⟩
+    · rw [hcubq.2, Set.ncard_eq_three.mpr ⟨a, b, c, hab, hac, hbc, rfl⟩]
+    · exact Set.toFinite _
+  have hinter : F.coloursAt q ∩ C = {a, b} := by
+    rw [hq3]
+    ext x
+    simp only [mem_inter_iff, mem_insert_iff, mem_singleton_iff]
+    constructor
+    · rintro ⟨h | h | h, hx⟩
+      · exact Or.inl h
+      · exact Or.inr h
+      · exact absurd (h ▸ hx) hcC
+    · rintro (h | h)
+      · exact ⟨Or.inl h, h ▸ haC⟩
+      · exact ⟨Or.inr (Or.inl h), h ▸ hbC⟩
+  refine ⟨q, hqb, hcubq.2, by rw [hinter]; exact Set.ncard_pair hab, ?_⟩
+  intro j hj T hT hqT
+  rw [hinter] at hj
+  rcases hj with h | h
+  · subst h
+    by_cases hTT₀ : T = T₀
+    · rw [hTT₀]; exact h𝒯ball T₀ hT₀s.1
+    · exact absurd (hasRepeatedColour_of_two_tiles hqd hT haT₀ hTT₀ hqT hqT₀) hrep
+  · rw [mem_singleton_iff] at h
+    subst h
+    by_cases hTT₁ : T = T₁
+    · rw [hTT₁]; exact h𝒯ball T₁ hT₁s.1
+    · exact absurd (hasRepeatedColour_of_two_tiles hqd hT hbT₁ hTT₁ hqT hqT₁) hrep
 
 /-! ## D — the common boundary of two tiles in a disc; arcs of one circle -/
 
