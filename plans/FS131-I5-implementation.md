@@ -580,3 +580,35 @@ of stage 2, met by the real merge). A tool defect, not a duplicate: its `FORK` s
 `sevenBrickMap_isTerminalMap` is now proved, so the planner's recommendation (`IsTerminalMap` and `QROnly` **IN**) can be taken without an `UNKNOWN`.
 
 ## Stage 13 — SAVED
+
+*Continued by FS131-I5d, wave 5's fourth implementer (de Bruijn, the implementer, on Opus), on branch `fs131-w5` in the same worktree. Brief:
+`data/fs131/briefs/FS131-I5d-wave5.md` (main tree), with its dated amendment (inventory items 288–289: `n3_end` moves to wave 5). Started 2026-10-04.
+Stages 1–13 above are FS131-I5's, I5b's and I5c's; mine start at 14.*
+
+## Stage 14 — SAVED: FS131-I5d's readback
+
+### 14.1 The brief's quotations against their sources (standing rule 3)
+
+| quotation (opening words) | source | result |
+|---|---|---|
+| Kooshi, "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors — read before pricing anything | verbatim (the paragraph continues with the FLT remark) |
+| "**What is left in this lane (30), and where it stands** (for wave 5's next implementer):" | this record, Stage 13 | verbatim |
+| "284. **FS131-I5c handed back** (Stage 13 SAVED, harness 525k by the task notice; report `fs131-w5`'s `data/fs131/reports/FS131-I5c.md`; commits `c10cf764`," | `plans/FS131-close-inventory.md` item 284 (main tree, l. 2122) | verbatim |
+| "287. **IM3's slot → wave 5's next implementer, FS131-I5d, on `fs131-w5`; IM3's MERGE findings relayed to IMM1 at once.** Choice: as the handoff queued (item 285):" | the inventory, item 287 (l. 2165) | verbatim |
+| "274. **Rulings on QA3's held items and the freed slot.** (a) **`InMK`**: restated when its first consumer is planned, not now (no theorem uses it; a definition" | the inventory, item 274 (l. 2013) | verbatim |
+| "**It may**: add children anywhere in the wave's modules — every child §§ 4, 9.1 name is an expected addition, and the shared ones may go to the" | `plans/FS131-w5-kernel-plan.md` § 10.2, paragraph 1 | verbatim |
+| (amendment) "289. **Rulings on I4m's items: `n3_end` moves to wave 5; the next wave-4 job merges the moves branch and proves the bends.** (a) **`n3_end`'s reading** (Stage 38)" | the inventory, item 289 (l. 2187) | verbatim |
+
+Items 258, 268–269, 274 (fence: `IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`, the three `cvb_*` leaves, `retArcs_nested`, `exists_endpoint`,
+`exists_eleventh`, `exists_unenclosed_or_bad`), 284–289 and I5c's Stages 10–13 read in full; FS131-I4m's Stage 38 on `origin/fs131-w4` (the `n3_end` route)
+read. No mismatch found. `n3_end`'s statement and docstring on this branch (`BaseSteps` l. 1641–1653) are identical to `origin/fs131-w4`'s (diff of l.
+1600–1670: empty).
+
+### 14.2 The as-given build (`728c3502`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit (it waited for the slot): **OK — all
+1752 modules already up to date, nothing built, 9 modules with warnings**, exit 0 (`build/gate/build/20261005T003227Z-3931639.log`; driver log
+`data/fs131/i5d/build-stage14-asgiven.log`). Every warning is `declaration uses 'sorry'`, 46: wave 5's `Terminal` 11, `Dense` 2, `HexRing` 7, `MapGraph` 3,
+`BaseWalk` 10, `BaseDense` 4 (**37**, the brief's count; less the planar seven, **30** mine), and wave 4's stale `Contact` 3, `UnitArc` 5, `BaseSteps` 1.
+
+## Stage 14 — SAVED
