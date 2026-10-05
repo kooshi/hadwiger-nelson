@@ -3564,3 +3564,5 @@ reason by the close.*
      move commit (`Pushforward`, C's `BendCollar` children, B0). Alternative weighed: C first (it works against G's statements while they are `sorry`). Why G
      first: the move must precede both, and G's `continuous_pushFun` and `collarArcs_carrier` are the hard leaves that decide the re-price. Confidence:
      medium-high. In flight after CG1's launch: 1 (M6) + 1 (IO2) + 1 (CG1) = 3.
+396. **FS131-CG1, by message: G's block moved** to `Plane/ValidMap/CollarMap` at commit `2736ab8c` on `fs131-w5` (pushed; build OK; statements checked by
+     `tools/fs131_cg_stmt.py --move`, 9 plants fired). Lane C's branch `fs131-w5k` is cut from it at the next free slot (item 395 (c)); its brief written now.
