@@ -2215,3 +2215,39 @@ reason by the close.*
      weighed: keep `bend_away` in wave 4 whatever its cost. Why: nothing consumes it, its repaired proof is above a session, and wave 4's landing gates Woodall's
      and wave 5's. **Correction owed** to FS112-N2-BENDS's hand statement: the radius-2 arc in the domain, which N2-TAN uses and never states. Confidence: high
      on the defect (the counterexample is concrete); medium-high on the repair.
+
+292. **FS131-IP1 done** (harness ≈ 394k; record `fs131-w5p`'s `plans/FS131-planar-implementation.md`, stages 1–5 SAVED; report `data/fs131/reports/FS131-IP1.md`;
+     commits `563ef2c9` … `01011037`, pushed). **Results, each [kernel] on the standard three, nothing imported**: unicoherence of ℂ
+     (`isPreconnected_inter_of_union_eq_univ`, `Plane/PlaneTopology`, through Mathlib's lifting theorem for the covering `Complex.exp : ℂ → ℂ ∖ {0}`);
+     FS131-E4's home theorem, wider than E4's form — no compactness, any component (`isPreconnected_frontier_connectedComponentIn`) — with the last exit
+     (`isBounded_connectedComponentIn_of_frontier_subset`) and four companions; **both clauses of FS114-CVB-PINCH** (`ArcMap.cvb_pinch_connected`,
+     `ArcMap.cvb_hole_disconnected`, `Plane/ValidMap/MapGraph`; `IsHoleOf` as item 277); `MapTopology` § A's six, `exists_rim_vertex`,
+     `isCubicTrichromatic_of_three_tiles`, `tileOf_subset_ball`, `GermPseudo.eq_of_cw`, `ringArc_cases`; `exists_unenclosed_or_bad`'s three joints — 32 declarations.
+     **Receipt** (Keryx): the nine commits exist and `origin/fs131-w5p` is `01011037`; the stage-5 build log (`build/gate/build/20261005T004641Z-4048849.log`)
+     ends "Build completed successfully (5399 jobs)" with 0 warnings other than `sorry`; `sorry` by grep: `PlaneTopology` 1, `MapTopology` 4, `MapGraph` 8,
+     `BaseWalk` 15 (3 of them planar, the rest wave 5's lane's); `data/fs131/ip/axioms-stage5.txt` parsed by script: 34 records, 32 on the standard three, the 2
+     controls (`exists_unenclosed_or_bad`, `inter_nonempty_of_interleaved`) showing `sorryAx`; statement read back — unicoherence as Kuratowski's (closed
+     preconnected `A`, `B` with `A ∪ B = univ` ⇒ `A ∩ B` preconnected). **Left, named**: `inter_nonempty_of_interleaved` (the crossing lemma; KP's sketch needs a
+     separation fact unicoherence does not give, record § 2.3); `exists_outermost`, `unenclosed_of_rim_vertex`, `exists_eleventh_of`, `exists_far_end`;
+     `not_isHoleOf_chain`, `isHoleOf_cluster`, F-LOC/CONN/INF/ONE, F-RING, T-GRAPH, `triLattice_planarLike` (owed inhabitant); `retArcs_not_interleaved`,
+     `retArcs_not_abut`, `endpoint_of_far_end`. **Re-price** (record § 5.3): 6.5–9.5 sessions; measured topology ran about three times under KP's table; BG, the
+     crossing lemma, F-RING and T-GRAPH keep KP's prices. **Generalizations** (errata): the last exit holds for any bounded `K` and any `R`;
+     `exists_mem_closure_of_mem_closure_biUnion` (tile closures locally finite on any map); `hasRepeatedColour_of_two_tiles` (any `k`). **Correction done**: KP's
+     docstring cited `IsPreconnected.inter_frontier_nonempty`, absent at the pin; IP1 added `inter_frontier_nonempty_of_isPreconnected` and rewrote the docstring.
+     **Tool**: `tools/fs131_ip_splice.py` (refuses on any statement difference; planted control REFUSED, exit 2). **Slips, no redo**: one `git add -N .` (nothing
+     staged, checked); a timing figure corrected in `6752cc22`. **Not reached**: the 60° question (FS110-CD Lemma E/R, CE R1–R4 unread). Credit: IP1, for
+     unicoherence through the exponential covering and E4's home theorem formalized wider than stated.
+293. **Rulings on IP1's held items, and its slot.** (a) The last exit's `hK`, `hR` → `_hK`, `_hR` **accepted** (rulings 185, 281 (a): a binder name is not part
+     of the type). (b) **IP1's slot → FS131-IP2 on `fs131-w5p`**, the map-level successor: `unenclosed_of_rim_vertex`, then `exists_outermost` (record § 5.4's
+     paper argument), then `exists_eleventh_of` (closing `exists_unenclosed_or_bad` and `exists_eleventh`); then BG + PATH, `exists_far_end`, and
+     `endpoint_of_far_end` after the 60° reading; F-LOC/CONN/INF/ONE; the two adversaries; F-RING after BG; `retArcs_not_abut` and `retArcs_not_interleaved` last
+     (the latter over the crossing lemma, cited as given). Not `Plane/PlaneTopology` and not `MapGraph`'s `namespace HadwigerNelson.Thomassen` block (lines 36–595
+     at `01011037`). (c) **The crossing lemma → its own job, FS131-IX1**, in a new worktree `fs131-w5x` cut from `fs131-w5p` at `01011037`, taking **the next slot
+     that frees**; its route is the implementer's, with one constraint from the schedule: route (b) needs the boundary graph BG, which IP2 builds later, so IX1
+     works a route that does not wait on BG (route (a) or any other it finds, after grepping Mathlib for anything that gives the crossing directly). (d) **T-GRAPH
+     → its own job later**, its first act moving the `HadwigerNelson.Thomassen` block verbatim into its own module (checked by script), so IP2 and it never share
+     a hunk. (e) **Slot order after IX1**: wave 4's merge-and-gate job when I4n and IMM1 are both done, then wave 5's next implementer if I5d hands back with
+     leaves left, then T-GRAPH. Alternative weighed: one implementer through the whole planar chain serially (6.5–9.5 sessions). Why: the chain is wave 5's
+     longest path, and the crossing lemma (the only leaf in its file) and T-GRAPH (pure graph theory) run beside the map-level leaves without sharing a file,
+     taking 1–2 and 2–3 sessions off it. Confidence: high on the split; medium on the crossing lemma's price (no route in hand; it would change if Mathlib holds a
+     two-dimensional fixed-point or Jordan-type theorem at the pin). In flight after IP2's launch: 1 (I4n) + 1 (IMM1) + 1 (I5d) + 1 (IP2) = 4.
