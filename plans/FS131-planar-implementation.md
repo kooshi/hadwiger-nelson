@@ -25,7 +25,19 @@ Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plan
 - `ArcMap.GermPseudo.eq_of_cw`, `ringArc_cases` (`Plane/ValidMap/MapTopology`)
 - children `ArcMap.exists_mem_closure_of_mem_closure_biUnion`, `ArcMap.isOpen_outerDom`, `ArcMap.outerDom_eq_connectedComponentIn`, `ArcMap.IsTile.closure_subset_closedBall_zero`, `ArcMap.exists_not_mem_closedBall_zero`, `ArcMap.IsSectorChart.exists_sector_subset_tile`, `ArcMap.hasRepeatedColour_of_two_tiles`, `ringArc_add_two_pi_mul` (`Plane/ValidMap/MapTopology`)
 
-Thirty-two declarations in all. `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
+**FS131-IP2 (stages 6–)**, all [kernel] (stage-7 build `f0e0c249`, `build/gate/build/20261005T012057Z-111415.log`), each on exactly the standard three
+(`data/fs131/ip/axioms-ip2-stage7.txt`, checked by `tools/fs131_ip_axioms.py`):
+
+- `ArcMap.exists_unenclosed_or_bad` — **FS131-E4's E4-OUTERMOST, whole** (`Plane/ValidMap/BaseDense`; its last two leaves below)
+- `ArcMap.exists_outermost` — E4-OUTERMOST steps 1–2 (`Plane/ValidMap/MapTopology`)
+- `ArcMap.unenclosed_of_rim_vertex` — E4-OUTERMOST step 5 (`Plane/ValidMap/MapTopology`)
+- `ArcMap.not_encloses_of_hull_eq` — enclosure strictly grows hulls (KP's owed child) (`Plane/ValidMap/MapTopology`)
+- `ArcMap.exists_ball_two_tiles` — points with three tiles in their closure are isolated (`Plane/ValidMap/MapTopology`)
+- children `ArcMap.outerDom_subset_of_encloses`, `ArcMap.compl_outerDom_subset_closedBall`, `ArcMap.IsSectorChart.exists_sector_mem_closure`,
+  `BranchGerms.exists_far_side`, `BranchGerms.eventually_dir_lt_nextDir`, `BranchGerms.dir_lt_dir`, `BranchGerms.dir_le_dir`,
+  `BranchGerms.dir_lt_dir_zero_add`, `BranchGerms.next_injective` (`Plane/ValidMap/MapTopology`)
+
+IP1's thirty-two declarations and IP2's fourteen. `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
 
 ## Stage 1 — SAVED: the readback
@@ -302,3 +314,88 @@ proved as written goes to Keryx at once. The 60° question is answered here befo
 
 Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1753 modules already up to date, nothing built, 11 modules with warnings, every warning
 `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T010519Z-4684.log`; driver log `data/fs131/ip/build-ip2-asgiven.log`).
+
+## Stage 7 — SAVED: `unenclosed_of_rim_vertex`, `exists_outermost`; `exists_unenclosed_or_bad` closed
+
+### 7.1 Proved
+
+- **`unenclosed_of_rim_vertex`.** The chart at the cubic `v` has three germs (`HasDegree v 3` against `IsSectorChart.hasDegree`); below some radius
+  the germs are strictly ordered (new child `BranchGerms.eventually_dir_lt_nextDir`: a direction gap persists by continuity, germs of one direction
+  are ordered by curvature at every distance). `T`, `X`, `Y` hold three distinct sectors, so they are the only tiles at `v`. For `S = X` (or `Y`)
+  and a tile `T'`: `T' = T` is `X ⊆ outerDom T`; `v ∉ cl T'` joins `X` to `T` by a small disc; `v ∈ cl T'` forces `T' = Y`, and then `X` and `T`
+  both meet **the far side of `Y`'s sector** (new child `BranchGerms.exists_far_side`: the second sector of the two-germ chart of `Y`'s bounding
+  germs — open, connected, missing `Y`'s sector, holding every other sector and every other germ's branch points; built from the library's
+  `isOpen_sector`, `isPreconnected_sector`, `sector_disjoint` on a `BranchGerms 2`). Either way `X`'s point and a point of `T` share a component of
+  `(cl T')ᶜ`, unbounded by `hno`. IP1's case "`T' = Y`" was the only geometry, as priced.
+- **`exists_outermost`.** Candidates: tiles with `x` in the hull. A disc holding a closure holds the hull (child `compl_outerDom_subset_closedBall`);
+  a tile's closure lies within `1` of each of its points, so `x` in the hull puts the closure, then the hull, in `B̄(x, 1)` — **no convex hulls
+  needed** (KP's `compl_outerDom_subset_convexHull` is not used). Finitely many candidates (`finite_tiles_closure_inter`); one with a maximal hull
+  (`Set.Finite.exists_maximalFor`); enclosure grows hulls (child `outerDom_subset_of_encloses`, record § 5.4's paper argument) and strictly
+  (`not_encloses_of_hull_eq`).
+- **`not_encloses_of_hull_eq` — the route.** Strictness is **false for open connected sets in general** (two of Wada's lakes have one outer
+  frontier and enclose each other), so it must read the map's regularity. IP1's sketch read "finitely many vertices in a compact disc", which
+  nothing here holds yet. The route taken: **points with three tiles in their closure are isolated** (`exists_ball_two_tiles`: in a chart ball, a
+  point off the centre is interior, or on one branch, whose closure meets only the two sectors that branch bounds — `exists_far_side` again; child
+  `IsSectorChart.exists_sector_mem_closure`). Were the hulls equal, every point of the common rim would carry `T`, `T'` and a tile of the outer domain;
+  the rim is preconnected, so isolation makes it one point, and a one-point rim would split `ℂ ∖ {p}` (Mathlib's
+  `isConnected_compl_singleton_of_one_lt_rank`; new import `Mathlib.Analysis.Normed.Module.Connected` in `MapTopology`, no project import changed).
+- **`exists_unenclosed_or_bad`** (`BaseDense`) needs nothing more: its three joints (IP1), `exists_rim_vertex`, `isCubicTrichromatic_of_three_tiles`
+  and the two leaves above. **E4-OUTERMOST is [kernel]** on the standard three. (`localDense`, its consumer, still rests on `n3_base`, wave 5's lane.)
+- Spec example: the straight three-germ chart satisfies `exists_far_side`'s hypothesis (an `example` beside it).
+
+### 7.2 The stage-7 build and the receipt
+
+`f0e0c249` under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 446 of 446 batches, 5 modules rebuilt (`MapTopology` 4.1 s, `BaseWalk`, `MapGraph`,
+`BaseDense`, `Proofs`), 11 modules with warnings, every warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T012057Z-111415.log`;
+`data/fs131/ip/build-stage7.log`; grep for `warning|error` minus `sorry` lines leaves only Lake's `--no-build` probe line). Axioms
+(`data/fs131/ip/AxiomsIP2.lean` → `data/fs131/ip/axioms-ip2-stage7.txt`): **14 records on the standard three, the 2 partners (`exists_eleventh_of`,
+`localDense`) on `sorryAx`**, checked by the new `tools/fs131_ip_axioms.py` (fails on a record off the standard three, a control without `sorryAx`, a
+missing record, or an unexpected record). Planted faults, both watched to fire: a `sorry` control listed as clean → `NOT CLEAN`, exit 1; a clean
+record listed as a control → `CONTROL SHOWS NO sorryAx`, exit 1. `scripts/Axioms.lean`'s FS131-KP block gains IP2's eleven children (under "--
+FS131-IP2's added children"). `sorry` declarations left in `MapTopology`: `exists_eleventh_of`, `exists_far_end`.
+
+### 7.3 Re-priced after the first two leaves
+
+Both leaves closed on iteration in well under a session's tenth each once the shared child (`exists_far_side`) existed; the child itself (≈ 130
+lines with its index lemmas) was most of the cost. **The sector chart is now the reusable engine**: `exists_far_side` and `exists_ball_two_tiles`
+answer, from any chart, "which sectors does this point touch". Re-price of what is left (implementer sessions): `exists_eleventh_of` 0.3 — its
+plan is written (§ 7.5), the one new geometric child being the ring arc at a touch point on `ω(u)`; F-LOC/CONN/INF/ONE 0.4; the adversaries 0.3;
+**BG + PATH 0.6–1** (cheaper than KP's table: the vertex set of a compact disc is finite by `exists_ball_two_tiles` and compactness, which is BG's
+hardest finiteness); `exists_far_end` 0.3 over BG; `endpoint_of_far_end` **1 or more** (§ 7.4: it needs the orientation of the boundary at an exit,
+a Jordan-type step); `retArcs_not_abut`, `retArcs_not_interleaved` 0.5 over PATH; F-RING 1–2 (not measured).
+
+### 7.4 The 60° question (brief, done-means 3), read before `endpoint_of_far_end`
+
+Read: FS110-CD § 2.3 (the inward continuation, Lemma E), § 2.4 (Lemma R), § 3.0 items 1–3; FS110-CE § E3 (D5 items 1–2, R1–R4), `plans/FS110-derivation.md`
+FS110-CE3, -CE4, -CE6. **Answer: yes — a two-colour exit that is a return returns within 60° of `r(θ)`.** CD Lemma R step 1: "`|b − b′| < 1`: both lie in
+the closure of the `a`-region along `β` (F3 gives `≤ 1`), and `= 1` would put two `{a,c}` circle points at unit distance (bi–bi)"; CB D5 item 1 as CE
+quotes it: "Its ends are < 1 apart (the a-tile along it has diameter ≤ 1; = 1 is (P′)) … their arcs (< 60°) nest or are disjoint". A chord below `1` is
+an angle below `60°`, which is `IsRetArc`'s bound. So the leaf is not stopped; no message sent.
+
+**Two route findings for `endpoint_of_far_end` (not statement defects; for the coordinator):**
+1. `exists_far_end`'s second disjunct, `q ≠ r(θ) ∧ dist q u = 1`, also admits **spike touches** (CE's SPIKE and spike corners: the `a|c` boundary
+   touches `ω(u)` from inside and the circle does not change colour, CE3), where no returning pair exists (CE R1: the path continues), and three-colour
+   V-out vertices of `ω(u)`. From such a `q` no endpoint follows. `endpoint_of_far_end`'s conclusion does not mention `q`, so the statement stays true
+   (it is `exists_endpoint`'s conclusion), but its proof must **re-select** the far end: the handshake's odd vertices on `ω(u)` are exactly the points
+   where one branch of the `T₁|T₂` boundary lies in the closed disc (a spike touch has two, even). Plan: a strong child of `exists_far_end` returning
+   an odd vertex, used by both leaves.
+2. At a genuine exit `q = r(φ)`, `IsRetArc` needs the germs' pseudo-colours in the right orientation (`c` inside `[θ, φ]` at both ends): CD's step 2
+   ("`β ∪ I` bounds a region `Q`", tightened in § 3.0 item 1 by pushing `β` off `ω(u)`) — a Jordan-type step. It may follow from the crossing lemma
+   (two continua in the disc joining interleaved circle points meet), applied to the `c`-tile's side and the `a`-tile's side; not yet worked.
+
+### 7.5 `exists_eleventh_of`, planned (for whoever takes it next, if I do not finish it)
+
+E4-RIM over the pieces now held: (i) each colour of `u` has a tile at `u` (`exists_mem_closure_of_mem_closure_biUnion` over the tiles of that
+colour); (ii) a tile of a colour of `u` meeting `B̄(u, 1)` lies in `B(u, 1)` (`tileOf_subset_ball`, `closure_ball`); (iii) `𝒯` = tiles of `u`'s
+colours meeting `B(u, 1)`, finite; `K₀` the union of their closures, `R*` the component of `u` (closed: its closure is preconnected in `K₀`); a
+member whose closure meets `R*` has its closure in `R*`; (iv) `W` the component of `R*ᶜ` through `u + 2` (holds `(B̄(u, 1))ᶜ`), `Φ = frontier W`,
+preconnected, compact, nonempty; (v) one member alone on `Φ` would enclose a tile at `u` of another colour (the last exit) against `UnenclosedC u`;
+two meet at `q ∈ Φ` (`exists_inter_of_finite_closed_cover`); (vi) a tile `Y` at `q` meets `W` (`exists_tile_mem_closure_of_mem_closure`), so `Y` is
+neither member; `q` is cubic trichromatic (`isCubicTrichromatic_of_three_tiles`, H at `q`); (vii) `Y` has no colour of `u`: if it met `B(u, 1)` it
+would be a member inside `R*`; else `Y` misses `B̄(u, 1)` and touches the member `T₀ ⊆ B(u, 1)` at `q ∈ ω(u)` — **the one new child**: at a cubic
+`q`, a tile inside `B(u, 1)` and a tile off `B̄(u, 1)` touching there are adjacent sectors whose common branch lies on `ω(u)`, and a short arc of it is
+an `IsRingArc u θ₁ θ₂ a c` (branch points are closure points of both sectors and of no other — `exists_far_side`; the angle about `u` is
+`arg ((p s − u)/(q − u))`, continuous since the chord stays below `1`, injective, so its image holds an interval); then `BothKind` and `noBoth`
+(wave 4's leaf, `sorry` at the pin, used by statement) give a bad point at `u`, against H; (viii) the colours: `{a, b, c}` with `c ∉ P_cl(u)`,
+two in common, and a second tile of `a` at `q` would be a repeated colour. `exists_eleventh_of` will carry `sorryAx` through `noBoth` until that
+leaf lands.
