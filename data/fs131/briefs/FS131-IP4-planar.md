@@ -101,3 +101,18 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 ./scripts/build.sh`; never `lake build`. Up to two builds from different worktrees may run at once when the slot admits them; four agents are building, so on
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) under a small slot is for iteration only, never
 evidence. The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`.
+
+## Amendment, 2026-10-05 — T-GRAPH is held; merge its branch, and F-SEP joins your order (inventory items 314–315)
+
+FS131-IT1 proved `reduced_props_of_planarLike` on `fs131-w5t` (`5604b532`), with `PlanarLike`'s new field `finSep`, and stated the map-side leaf
+`ArcMap.filledGraph_finSep` (F-SEP) in `MapGraph` beside `filledGraph_oneInf`. The ruling:
+
+> 315. **Rulings on IT1's held items, and its slot.** (a) **The merge**: FS131-IP4 merges `fs131-w5t` (at `5604b532`) into `fs131-w5p` at its next saved stage —
+> — source: plans/FS131-close-inventory.md
+
+For you: at your next saved stage, `git merge fs131-w5t` into `fs131-w5p` (keep both sides where IT1's `MapGraph` hunks — the import, the moved block's
+deletion, `filledGraph_finSep` and the constructor line — meet yours; one import line in `Proofs.lean`, one block each in `scripts/Axioms.lean`, IT1's
+`Thomassen` row and amended `MapGraph` row in `ARCHITECTURE.md`), fix `MapGraph`'s module docstring where it says the pure graph theory lives there, build,
+and record it as its own stage. Then F-SEP is in your order beside F-LOC/CONN/INF/ONE, its sketch in its docstring (one mind). Your touches extend to the
+merge's files and to `filledGraph_finSep`; the lines between `filledGraph_oneInf` and `filledGraph_planarLike` are now yours. You start no agents of your own
+(standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

@@ -5,7 +5,7 @@
 brief: FS131-E5
   identity: Ephodos — your agent file (`.claude/agents/ephodos.md`) is your identity and your lane's workflow; its § A derivation job is this job
   role: derive two fixed questions to a verdict each — derived, realized (the configuration exhibited exactly), or a GAP at a named step with a repaired statement — and trace what each answer does to FS112-N3-END, FS114-CV-HD, FS112-N2-BENDS and rows 135 and 137
-  launch: in the next free slot (inventory item 306), beside de Bruijn implementers on their own branches
+  launch: now (inventory items 306, 311, 313 (c), 315 (b)), beside de Bruijn implementers on their own branches
   mission: § Why this job
   statements: § The questions
   acceptance: § Done means
