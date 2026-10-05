@@ -1238,3 +1238,15 @@ My wrapper `data/fs131/rw/rw2-build.sh` (run from a snapshot copy under `build/`
 Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up to date, nothing built, 9 modules with warnings (every one
 `declaration uses 'sorry'`; `MapGraph`'s two at l. 1430 — `IsBoundaryWalk.sep` — and l. 2265 — `exists_boundaryWalk`), `EXIT 0`**
 (`build/gate/build/20261005T065106Z-2122697.log`; driver log `data/fs131/rw/build-rw2-asgiven.log`).
+
+## Stage 24 — SAVED (FS131-RW2): C5a — `port_arc`, and `port_pair` re-proved over it
+
+- **`port_arc`** (`Plane/CurveGraph`, beside the handshake): `port_pair`'s hypotheses give `γ`, `a < b`, `γ` continuous and injective on `[a, b]`,
+  the component of `C'` through the port `p` equal to `γ '' [a, b]`, `γ a = p`, `γ b` a port, and no third port on the component. It is `port_pair`'s
+  old body with its last step changed: where the old proof found `p = γ b`, the arc is read backwards (`t ↦ γ (a + b − t)`).
+- **`port_pair`** re-proved in four lines over `port_arc`; **its statement is byte-identical** — `tools/fs131_rw_stmt_check.py 515e28af
+  Proofs/HadwigerNelson/Plane/CurveGraph.lean:port_pair` → `SAME (601 bytes)`, `PASS`; planted faults (the conclusion's disjuncts swapped in the
+  tree; a declaration name that does not exist) → `CHANGED` and `MISSING`, `FAIL`, exit 1, the file restored and compared byte-for-byte.
+- The build: under the slot (40 GiB, 8 cpus, `BATCH=4`), **OK — 447 of 447 batches, 6 modules rebuilt (`CurveGraph` 5.2 s, `MapTopology` 13 s,
+  `BaseWalk` 3.0 s, `MapGraph` 19 s, `BaseDense` 1.5 s, `Proofs` 1.5 s), 9 with warnings, every one `declaration uses 'sorry'`, `EXIT 0`, 8 min 49 s
+  wall** (`build/gate/build/20261005T070132Z-2178471.log`; driver log `data/fs131/rw/build-rw2-c5a.log`). One attempt.

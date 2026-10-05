@@ -398,15 +398,17 @@ theorem isOpen_setOf_agree (C : Set ℂ) (Pr : Set ℂ → Prop) :
     _ = (L' ∩ ball z ε) ∩ ball z' (ε / 2) := by rw [← inter_assoc, hzε]
     _ = L' ∩ ball z' (ε / 2) := by rw [inter_assoc, inter_eq_right.mpr hsub]
 
-/-- **Each port has exactly one partner** (the heart of the handshake): with the vertices `N` cut out by discs of radius `ρ`, what is left,
-`C'`, is regular; the component of `C'` through a port `p` lies in one curve, is an arc of it, and holds exactly two ports, its ends. -/
-theorem port_pair {C C' P : Set ℂ} {N : Finset ℂ} {ρ : ℝ} (hρ : 0 < ρ) (hC'c : IsCompact C')
+/-- **The arc of a port** (FS131-RW2, WALK's C5a; the body of `port_pair`, its arc exposed): with the vertices `N` cut out by discs of radius
+`ρ`, what is left, `C'`, is regular; the component of `C'` through a port `p` is an arc `γ '' [a, b]` of one curve, `γ` injective on
+`[a, b]`, from `γ a = p` to a second port `γ b`, and holds no other port. -/
+theorem port_arc {C C' P : Set ℂ} {N : Finset ℂ} {ρ : ℝ} (hρ : 0 < ρ) (hC'c : IsCompact C')
     (hC' : C' = C \ ⋃ v ∈ N, ball v ρ) (hreg : ∀ z ∈ C', IsRegularAt C z)
     (hP : ∀ z, z ∈ P ↔ z ∈ C ∧ ∃ v ∈ N, dist z v = ρ)
     (hray : ∀ p ∈ P, ∃ v ∈ N, ∃ (f : ℝ → ℂ) (r : ℝ), ρ < r ∧ ContinuousOn f (Ioo 0 r) ∧
       (∀ s ∈ Ioo 0 r, ‖f s - v‖ = s) ∧ f ρ = p ∧ ∃ ε > 0, C ∩ ball p ε = f '' Ioo 0 r ∩ ball p ε)
     (hsep : ∀ v ∈ N, ∀ v' ∈ N, v ≠ v' → 2 * ρ < dist v v') {p : ℂ} (hp : p ∈ P) :
-    ∃ q ∈ P, q ≠ p ∧ q ∈ connectedComponentIn C' p ∧ ∀ q' ∈ P, q' ∈ connectedComponentIn C' p → q' = p ∨ q' = q := by
+    ∃ (γ : ℝ → ℂ) (a b : ℝ), a < b ∧ Continuous γ ∧ InjOn γ (Icc a b) ∧ connectedComponentIn C' p = γ '' Icc a b ∧ γ a = p ∧
+      γ b ∈ P ∧ ∀ q' ∈ P, q' ∈ connectedComponentIn C' p → q' = p ∨ q' = γ b := by
   classical
   have hC'C : C' ⊆ C := by rw [hC']; exact sdiff_subset
   have hnotball : ∀ z ∈ C', ∀ v ∈ N, ¬ dist z v < ρ := by
@@ -711,22 +713,49 @@ theorem port_pair {C C' P : Set ℂ} {N : Finset ℂ} {ρ : ℝ} (hρ : 0 < ρ) 
       have h2 : a ≤ t - δ / 2 := csInf_le hJc.bddBelow h1
       linarith
   obtain ⟨htpab, hab⟩ := hports tp htpJ (htp ▸ hp)
-  have hγab : γ a ≠ γ b := fun h => hab.ne (hγinj haJ.1 hbJ.1 h)
   have huniq : ∀ q' ∈ P, q' ∈ Q → q' = γ a ∨ q' = γ b := by
     intro q' hq' hq'Q
     obtain ⟨t', ht', rfl⟩ : q' ∈ γ '' J := hQJ ▸ hq'Q
     rcases (hports t' ht' hq').1 with rfl | rfl
     · exact Or.inl rfl
     · exact Or.inr rfl
+  have hQab : Q = γ '' Icc a b := by rw [hQJ, hJeq]
+  have hinjab : InjOn γ (Icc a b) := hγinj.mono (Icc_subset_Icc haJ.1.1 hbJ.1.2)
   rcases htpab with rfl | rfl
-  · refine ⟨γ b, hbP, fun h => hγab (htp.trans h.symm).symm.symm, hbJ.2, fun q' hq' hq'Q => ?_⟩
+  · refine ⟨γ, a, b, hab, hγc, hinjab, hQab, htp, hbP, fun q' hq' hq'Q => ?_⟩
     rcases huniq q' hq' hq'Q with h | h
     · exact Or.inl (h.trans htp)
     · exact Or.inr h
-  · refine ⟨γ a, haP, fun h => hγab (h.trans htp.symm), haJ.2, fun q' hq' hq'Q => ?_⟩
-    rcases huniq q' hq' hq'Q with h | h
-    · exact Or.inr h
-    · exact Or.inl (h.trans htp)
+  · -- the arc read backwards, so that it starts at `p`
+    have hrefl : ∀ t ∈ Icc a b, a + b - t ∈ Icc a b := fun t ht => ⟨by linarith [ht.2], by linarith [ht.1]⟩
+    refine ⟨fun t => γ (a + b - t), a, b, hab, hγc.comp (by fun_prop), fun t₁ h₁ t₂ h₂ he => ?_, ?_,
+      by simp only [add_sub_cancel_left]; exact htp, by simp only [add_sub_cancel_right]; exact haP, fun q' hq' hq'Q => ?_⟩
+    · have := hinjab (hrefl t₁ h₁) (hrefl t₂ h₂) he
+      linarith
+    · rw [hQab]
+      ext w
+      constructor
+      · rintro ⟨t, ht, rfl⟩
+        exact ⟨a + b - t, hrefl t ht, by simp only [sub_sub_cancel]⟩
+      · rintro ⟨t, ht, rfl⟩
+        exact ⟨a + b - t, hrefl t ht, rfl⟩
+    · rcases huniq q' hq' hq'Q with h | h
+      · exact Or.inr (by simp only [add_sub_cancel_right]; exact h)
+      · exact Or.inl (h.trans htp)
+
+/-- **Each port has exactly one partner** (the heart of the handshake): with the vertices `N` cut out by discs of radius `ρ`, what is left,
+`C'`, is regular; the component of `C'` through a port `p` lies in one curve, is an arc of it, and holds exactly two ports, its ends. -/
+theorem port_pair {C C' P : Set ℂ} {N : Finset ℂ} {ρ : ℝ} (hρ : 0 < ρ) (hC'c : IsCompact C')
+    (hC' : C' = C \ ⋃ v ∈ N, ball v ρ) (hreg : ∀ z ∈ C', IsRegularAt C z)
+    (hP : ∀ z, z ∈ P ↔ z ∈ C ∧ ∃ v ∈ N, dist z v = ρ)
+    (hray : ∀ p ∈ P, ∃ v ∈ N, ∃ (f : ℝ → ℂ) (r : ℝ), ρ < r ∧ ContinuousOn f (Ioo 0 r) ∧
+      (∀ s ∈ Ioo 0 r, ‖f s - v‖ = s) ∧ f ρ = p ∧ ∃ ε > 0, C ∩ ball p ε = f '' Ioo 0 r ∩ ball p ε)
+    (hsep : ∀ v ∈ N, ∀ v' ∈ N, v ≠ v' → 2 * ρ < dist v v') {p : ℂ} (hp : p ∈ P) :
+    ∃ q ∈ P, q ≠ p ∧ q ∈ connectedComponentIn C' p ∧ ∀ q' ∈ P, q' ∈ connectedComponentIn C' p → q' = p ∨ q' = q := by
+  obtain ⟨γ, a, b, hab, -, hinj, hQ, hγa, hγb, huniq⟩ := port_arc hρ hC'c hC' hreg hP hray hsep hp
+  refine ⟨γ b, hγb, fun h => hab.ne (hinj ⟨le_rfl, hab.le⟩ ⟨hab.le, le_rfl⟩ (hγa.trans h.symm)), ?_, huniq⟩
+  rw [hQ]
+  exact ⟨b, ⟨hab.le, le_rfl⟩, rfl⟩
 
 /-- **The handshake** (BG): in a compact set with a curve star of `n z` rays at each point `z`, the degrees at the non-regular points have an
 even sum. The ports of the vertices (their rays' points at a small radius `ρ`) number `∑ n v` and are paired by `port_pair`. -/
