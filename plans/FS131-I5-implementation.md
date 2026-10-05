@@ -1441,3 +1441,30 @@ All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5i/
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 31 — SAVED
+
+## Stage 32 — SAVED (FS131-I5k): the readback
+
+*FS131-I5k, wave 5's third `Terminal` implementer (Opus), continuing FS131-I5i's work on branch `fs131-w5c` in
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c` from `33320123`. Brief: `data/fs131/briefs/FS131-I5k-terminal.md` (main tree). My set (ruling
+335), in its order: `n3_end_four_colours` and `n3_end_bothKind` (NB3-END items 3–5), `cv_class`, the CV-HD cluster (`cv_hd_main`, `y3_end_needs`, `cv_hd`,
+`c_double`, `c_ends`), `exists_red`, `exists_terminal`, `cv_exists` (`BaseDense`, its lines only).*
+
+### 32.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script, `tools/fs131_i5h_quotes.py` (I5h's checker, in my touches): **12 quotations, 0 failures** — `CLAUDE.md` § Counter-priors; the
+inventory's items 334, 335, 288, 274, 295; this record's Stage 31 (three bullets: `n3_end_of_not_inType`, `cv_class`, the CV-HD cluster); NB3's N3-END
+heading (`plans/FS112-NB3-verification.md`); E5's § 3.5 heading; the plan's § 10.2 ("It may"). `--self-test` (a one-letter plant in the first quotation):
+**fired** (1 failure reported), the unplanted run passed.
+
+Read in full: I5h's Stage 28; I5i's Stages 29–31; inventory items 288 (the case-split correction: `κ₂ = 1`, `g ∉ P_cl(N)` goes through items 2–5), 289,
+334, 335; NB3's N3-END entry (`plans/FS112-NB3-verification.md` l. 221–243) and its divergence table rows 2–4 (l. 286–288); E5's § 3.2–3.5
+(`plans/FS131-E5-derivation.md` l. 221–298); the plan's §§ 3.2, 8.2, 10.1–10.2. No mismatch found.
+
+### 32.2 The as-given build (`33320123`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1755 modules already up
+to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T051846Z-1623760.log`; driver log
+`data/fs131/i5k/build-stage32-asgiven.log`). Every warning `declaration uses 'sorry'`: `Terminal` 10 (my ten), `Dense` 1, `HexRing` 6, `BaseWalk` 5,
+`BaseDense` 3 (`cv_exists` among them), `MapGraph` 3 — wave 5 **28**, I5i's count; wave 4's stale `Contact`, `UnitArc`.
+
+## Stage 32 — SAVED
