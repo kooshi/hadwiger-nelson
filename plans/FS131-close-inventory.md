@@ -2706,3 +2706,27 @@ reason by the close.*
      on `main` from the landing. Both digests re-run after the edit: "match" against `CLAUDE.md` (axioms: clean, purchases, imported; vacuity: 9 of 9).
      `tools/claude_md_fact_audit.py --base 563e8e98`: 13 losses, every one a superseded count or wave 4's attribution (the old vacuity lines, 3376, 3397,
      10525, 673, 705, FS131-G4) — expected, as at item 319; `--dupes`: the standing repeats only. Kooshi push-notified.
+328. **FS131-I5h handed back** (Stage 28 SAVED, harness ≈ 387k by the task notice; record `fs131-w5c`'s `plans/FS131-I5-implementation.md`, Stages 27–28;
+     report `data/fs131/reports/FS131-I5h.md`; commits `1f0cedc4`, `197f2d0d`, `72149b07`, pushed). **Results, [kernel] on the standard three**: E5's two lemmas
+     in the new module `Plane/ValidMap/HornShadow` (26 declarations, no `sorry`) — **SH1 in a stronger, global form** (`tanAbove_S_of_dist_le_one`: any point
+     within 1 of a point above the ν-circle at `v`, `ν > −1`, lies above the `f(ν)`-circle at `S′ = v − n`; no localization, no horn, no vertical-drop step),
+     its mirror at `N` and the horn forms; **SH2 as E5 states it**, widened to `r ≤ 1/2` (`mem_shadow_hornSet_S`, `_add_pi_S`, `_N`, `_add_pi_N`); **SEP**,
+     stated without the map as the unit pair it produces (`sep_S`, `sep_add_pi_S` — the form `n3_end_of_not_inType` reads — `sep_N`, `sep_add_pi_N`), needing
+     one shadow point below γ, not a sequence (`lt_of_tanAbove_tanBelow`). No step of E5's derivation failed in Lean; no statement changed. **None of its ten
+     leaves closed** (`n3_end_of_not_inType`, `cv_class`, `cv_hd_main`, `y3_end_needs`, `cv_hd`, `c_double`, `c_ends`, `exists_red`, `exists_terminal`,
+     `cv_exists`). **Receipt** (Keryx): the three commits exist and `origin/fs131-w5c` is `72149b07`; the stage-28 build log
+     (`build/gate/build/20261005T041051Z-1283678.log`) ends "Build completed successfully (5370 jobs)", 0 warnings other than `sorry`; `HornShadow` 0 `sorry`
+     by grep; `git diff 75689a4c HEAD -- Proofs/` is the new `HornShadow` and one import line in `Terminal`, so no statement moved; `data/fs131/i5h/I5hAxioms28.out`
+     parsed by script: 28 records, 27 within the standard three, the control `n3_end_of_not_inType` on `sorryAx`; `tanAbove_S_of_dist_le_one`'s statement read
+     against its docstring. **Name note**: `isPreconnected_hornSet_unit` (`main`'s `Surgery` has `isPreconnected_hornSet`, more general) — may be replaced by
+     `main`'s after wave 5 merges `main`. **Re-price** (record Stage 28): the repeated-colour conclusion of `n3_end_of_not_inType` (E5 § 3.4 over the local
+     structure at `S′`, E5's F2–F6) one session; NB3-END items 3–5 (NB3's, one mind; E5 did not re-derive them) a second; the CV-HD cluster and the limit
+     constructions H as planned. **Held for the merge**: `fs131-w5c` touches `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean` (block "FS131-I5h" directly
+     after I5g's — adjacent lines, keep both), `Terminal`'s import, the new `HornShadow`. **Tools**: `tools/fs131_i5h_quotes.py` (11 quotations verbatim,
+     plant fired), `tools/fs131_i5h_stmt_check.py` (statements of `Terminal`, `BaseDense`, `FlankUA` unchanged since `75689a4c`; three plants fired). Credit: I5h,
+     for SH1's global form.
+329. **Ruling on I5h's slot: the `Terminal` continuation, FS131-I5i, on `fs131-w5c` from Stage 28.** In flight after it: 1 (I5g) + 1 (IP5) + 1 (I5i) = 3. Choice:
+     the freed lane's own continuation (item 323's queue rule), in record Stage 28's "What is left" order — `n3_end_of_not_inType` (its repeated colour over E5's
+     F2–F6 and `sep_add_pi_S`, then NB3-END items 3–5), `cv_class`, the CV-HD cluster, `exists_red`, `exists_terminal`, `cv_exists`. Alternative weighed: IMM2
+     (MERGE), next in the queue. Why: the `Terminal` lane is now the longest path to wave 5's landing (about two sessions for `n3_end_of_not_inType` alone, then
+     the H cluster and the limit constructions, against the planar chain's eight leaves at about two), and MERGE has no consumer in wave 5. Confidence: high.
