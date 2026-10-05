@@ -2538,3 +2538,32 @@ reason by the close.*
      adjacent to lines IP4 is about to write, so the sooner the cheaper, and IP4 can then prove F-SEP on the same branch. Confidence: high. (b) **IT1's slot →
      FS131-E5** (the re-derivation, items 306, 311, 313 (c)). `fs131-w5t` joins the removal list after the merge. In flight after E5's launch: 1 (G4) + 1 (I5f,
      waiting on its build) + 1 (IP4) + 1 (E5) = 4.
+316. **FS131-I5f handed back** (Stage 24 SAVED, harness ≈ 569k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 22–24;
+     report `data/fs131/reports/FS131-I5f.md`; commits `e144e6f8`, `58a03d6e`, `53a5d492`, `d61edefc`, pushed; the harness's safety review of its actions timed
+     out, so this receipt also checked that its Lean edits stayed inside its touches). **Results, each [kernel] on the standard three, statements unchanged**:
+     **`cor3_local`** (its hypotheses suffice — I5e's reading under ruling 218 (b) confirmed; read against N3-COR3, `plans/FS112-NB3-verification.md` § 1.4: the
+     same), so **`cor3`** (FS112-N3-COR3), `pseudo_ncard_le_two_of_baseHyp`, `BaseCtx.pseudo_ncard_le_two` (NB3 step 5), `rot_noThird` and `BaseCtx.cor3_base` are
+     kernel theorems; **`BaseCtx.exists_pseudoCircle`** (NB3 steps 3–5: a wave-3 circle colouring with no swap point); about twenty children. **`row134BaseUA`
+     wired**: it equals `BaseCtx.false`, the walk assembled per KB's plan F1, over four of this half's leaves (`reduce`, `select`, `l3_base`, `bv_hex`) and the
+     planar job's three (`retArcs_nested`, `exists_endpoint`, `exists_eleventh`) — a composition check: every leaf's hypotheses were supplied by the others'
+     conclusions, no statement defect. **Receipt** (Keryx): the four commits exist and `origin/fs131-w5` is `d61edefc`; the working tree is clean; the Lean files
+     changed since `6e38803d` are `Cor3`, `BaseWalk`, `BaseDense` and `scripts/Axioms.lean` only; the stage-24 build log
+     (`build/gate/build/20261005T030125Z-824312.log`) ends "Build completed successfully (5369 jobs)", 0 warnings other than `sorry`; `sorry` by grep:
+     `Terminal` 9, `Dense` 1, `HexRing` 6, `MapGraph` 3, `BaseWalk` 6, `BaseDense` 3, `Cor3` 0 — 28; `tools/fs131_i5_stmt_check.py 6e38803d` run by Keryx: PASS;
+     `data/fs131/i5f/I5fAxioms23.out` (17 records, 14 within the standard three, controls `BaseCtx.false`, `row134BaseUA`, `l3_base` on `sorryAx`) and
+     `I5fAxioms24.out` (11 records, 9, controls `row134BaseUA`, `reduce`). **Generalization**: `exists_ringArc_of_sides`, `exists_tangent_colour`, `cor3_half`,
+     `cor3_at` hold at every `k`; six colours enter `cor3_local` only through "every colour is carried at `u` or `u′`". **Questions**: (1) `exists_preBend` needs a
+     bend keeping `u` cubic trichromatic and `UnenclosedC u` (E4-BEND-UN's homeomorphism fixing `u`), which `bend_toward`'s conclusion does not give — the
+     strengthened-bend child KB's plan § 2.3 owes; (2) `cv_exists` needs CVB § 1.4 items 3–6 (the `Terminal` cluster); (3) `disc1_local` is planar topology,
+     not reachable from `exists_unenclosed_or_bad`. **Hand check** (one mind, record "What is left"): CD § 2.4 step 5 follows from `Removable` alone, so
+     `reduce` looks provable as stated. **Correction owed, the coordinator's slip**: item 311 says "16 leaves"; the half has 15. Credit: I5f, for the crossing
+     proof of `cor3_local` and the composition check.
+317. **Rulings on I5f's questions, and its slot.** (a) **I5f's slot → FS131-I5g on `fs131-w5`**, the same half: `row134BaseUA`'s four first (`reduce` by I5f's
+     construction, `select`, `l3_base`, `bv_hex`), then `rot_out`, `rot_in`, `hex_regular`, `bv_nd`, `bv_l3`, then `exists_preBend`. (b) **The strengthened bend**:
+     I5g states it as a child of `exists_preBend` (plan § 10.2 allows children), reads it back against E4-BEND-UN, and attempts it after the others, citing
+     `bend_toward` as given; if it needs more than wave 4's bend machinery offers, it messages me. Alternative weighed: a planner job first. Why: the source
+     (E4-BEND-UN) fixes the child's content, and a planner would take a slot for one statement. Confidence: medium. (c) **`cv_exists` → the `Terminal`
+     implementer** (its lines in `BaseDense`, which I5g leaves alone). (d) **`disc1_local` → the planar lane**, after `fs131-w5p` merges back into `fs131-w5`
+     (its tools — sector charts, `exists_ball_two_tiles` — live on `fs131-w5p`); queued. Alternative weighed: I5g now, without those tools. Confidence:
+     medium. (e) The next slot is ruled when it frees (item 313's slip): Woodall's landing if wave 4 has landed, else the `Terminal` implementer if E5 has
+     reported, else IMM2. In flight after I5g's launch: 1 (G4) + 1 (IP4) + 1 (E5) + 1 (I5g) = 4.
