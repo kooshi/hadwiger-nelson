@@ -3253,6 +3253,21 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 /-! ## FS-131 wave 5 (job FS131-I5d) — wave 5's fourth implementer: `n3_end` (moved from wave 4's `BaseSteps`, inventory item 289), the unit-arc flank lemmas -/
 
 #print axioms HadwigerNelson.Plane.ArcMap.n3_end
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_angleIcc_add_pi
+#print axioms HadwigerNelson.Plane.ArcMap.shadow_of_not_shave
+#print axioms HadwigerNelson.Plane.ArcMap.not_outType_N_of_flankAbove_one
+#print axioms HadwigerNelson.Plane.ArcMap.not_outType_S_of_flankBelow_neg_one
+#print axioms HadwigerNelson.Plane.ArcMap.srcG_of_shadow
+#print axioms HadwigerNelson.Plane.ArcMap.srcH_of_shadow
+#print axioms HadwigerNelson.Plane.ArcMap.dot_nonneg_of_srcG
+#print axioms HadwigerNelson.Plane.ArcMap.dot_nonpos_of_srcH
+#print axioms HadwigerNelson.Plane.ArcMap.region_near_of_inType
+#print axioms HadwigerNelson.Plane.ArcMap.dist_N_S
+#print axioms HadwigerNelson.Plane.ArcMap.region_far_S_of_srcG
+#print axioms HadwigerNelson.Plane.ArcMap.region_far_N_of_srcH
+#print axioms HadwigerNelson.Plane.ArcMap.flank_ne_of_shadows
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isRingArc_of_onRingArc
+#print axioms HadwigerNelson.Plane.ArcMap.hasSectors_one_of_contacts
 
 /-! ## FS-131 wave 5 (job FS131-I5b) — wave 5's second implementer: Lemma 1's children, the holed fragment -/
 

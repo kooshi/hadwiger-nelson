@@ -629,3 +629,55 @@ exit 0 (`build/gate/build/20261005T003637Z-3957634.log`; driver log `data/fs131/
 `UnitArc` 5; `BaseSteps` 0.
 
 ## Stage 15 — SAVED
+
+## Stage 16 — SAVED: `stuck_flanks_ua` proved (so `stuck_structure_ua` is a kernel theorem), `cv_l0` proved, the shared child; a new module `Plane/ValidMap/FlankUA`
+
+**The route for the flank step, with no Condition 5 and no curvature function** (FS114-CV § 1.4's re-derivation of N4-STUCK (ii), read directly). Wave 4's
+route passed through `shaveAvailable_of_not_doublyShadowed` (the shadow as `TanBelow σ_g` / `TanAbove σ_h`, built from sector charts at `S′`/`N` under
+Condition 5). The unit-arc form needs much less:
+1. **No SHAVE, read directly** (`shadow_of_not_shave`): if the tip of a horn were clear for its upper flank's colour `g` near `v`, SHAVE is available with
+   the split arc at the horn's own lower bound (`σ = κ₁`: every tip point is "above σ", so clear for `g` suffices); for `h`, `σ = κ₂`. So each flank colour
+   shadows the horn at every scale. This is the only use of the move's precondition.
+2. **The sources** (`srcG_of_shadow`, `srcH_of_shadow`): wave 4's `shadow_source_near_poles` (no Condition 5) localizes the shadow at `N` or `S′`. At
+   `κ₂ < 1`, wave 4's `horn_shadow_near_S` puts it at `S′`, out-type by `outType_S_of_mem_closure`; at `κ₂ = 1` it is at `N` or `S′`, and at `N` the
+   contact is in-type because the flank lies inside `B(N, 1)` (`not_outType_N_of_flankAbove_one`: an out-type tile at `N` would be unit-near the flank,
+   hence within `1` of `v`). Mirror for `h`. So `g` is in-type at `N` or out-type at `S′`, `h` in-type at `S′` or out-type at `N`; their allowed cones lie in
+   `d·n ≥ 0`, `d·n ≤ 0` (`dot_nonneg_of_srcG`, `dot_nonpos_of_srcH`).
+3. **`g ≠ h`** (`flank_ne_of_shadows`): one colour on both flanks is out-type at both poles (as the lower flank by `outType_N_of_mem_closure`, as the upper
+   by `outType_S_of_mem_closure`), which `κ₂ = 1` or `κ₁ = −1` forbids; off those bounds wave 4's `horn_not_shadowed_near_N`, `_S` keep the tip out of
+   its shadow near both poles.
+4. **The turned horn's flanks are the same two** — by directions, replacing wave 4's `false_of_all_outType` step: `−n` lies in some colour's cone, not
+   `c`'s (out-type at `S′`) nor `g`'s (`d·n ≥ 0`); were the `−e α` horn's `+n` flank `h`, its own source would put `h`'s cone in `d·n ≥ 0` too. Mirror.
+5. **Contacts, one sector each, degree 4**: `e α`, `e (α + π)` and `n` lie in `D_g`, so every contact of `g` is on the normal line — in-type at `N` or
+   out-type at `S′` (wave 4's `hiiig` with the in-type case at `N` admitted); then `d·n > 0` is inside `D_g` (`hasSectors_one_of_contacts`), and no MERGE
+   leaves one sector. `h` the mirror. Degree `4` by wave 4's `hasDegree_of_three_colours`.
+6. **The sides** (ruling 252's form (b)): `c` by `region_far_of_outType`; the flanks by `region_far_N_of_srcH` / `region_far_S_of_srcG` — an out-type
+   source by `region_far_of_outType`, an in-type one by `region_near_of_inType` (the class near `v` stays in `B̄(S′, 1)`, which misses `B(N, 1)`).
+
+**Leaves proved** (statements unchanged, read back against plan § 3.2 and I5c's Stage 10: same statements): `stuck_flanks_ua` (`Terminal`); with it
+`stuck_structure_ua` reads the standard three. **`cv_l0`** (`Terminal`, FS114-CV-HD's CV-L0): a unit arc of `ω(E)` holds a constant-sided sub-arc (the
+child below); `QROnly` makes it (Q) or (R2), so its outer colour is carried at `E`; wave 3's `ringArc_cone_outer` puts that colour's cone at `E` in an
+angular interval of width `π − ℓ < π` (`not_mem_angleIcc_add_pi`), while `stuck_structure_ua` gives every colour at `E` both `α` and `α + π` (horns for
+`c`, flanks for `g` and `h`); finiteness by wave 3's `finite_ringΓ_off_ringArc`. **The shared child `exists_isRingArc_of_onRingArc`** (plan § 9.1, for
+`cv_l0` and `pseudo_nonempty`): stated with the sub-arc inside any ball `B(x, ε)` (both consumers need it near `x`); proved from wave 4's
+`exists_isRingArc_of_subset_Γ`.
+
+**The new module** `Plane/ValidMap/FlankUA` (imports `Contact`, `UnitArc`; imported by `Terminal`): 15 theorems (`not_mem_angleIcc_add_pi`,
+`shadow_of_not_shave`, `not_outType_N_of_flankAbove_one`, `not_outType_S_of_flankBelow_neg_one`, `srcG_of_shadow`, `srcH_of_shadow`, `dot_nonneg_of_srcG`,
+`dot_nonpos_of_srcH`, `region_near_of_inType`, `dist_N_S`, `region_far_S_of_srcG`, `region_far_N_of_srcH`, `flank_ne_of_shadows`,
+`exists_isRingArc_of_onRingArc`, `hasSectors_one_of_contacts`), each with an inhabitant note (`bowtie` at `0`, `quadRing`); a spec example for
+`angleIcc`. It is the shared infrastructure `n3_end` will read (inventory item 289): a second implementer could work there beside the rest of wave 5.
+`Proofs.lean`, `ARCHITECTURE.md` (its row; `Terminal`'s Imports cell), `scripts/Axioms.lean` (block "FS131-I5d": the 15) updated;
+`tools/check_architecture.py`: PASS. Name collisions: none (each new name declared once in `Proofs/`, by `rg`).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 6 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T005549Z-4120781.log`; driver log `data/fs131/i5d/build-stage16.log`). Wave 5's sorry declarations: **36** (`Terminal` 10,
+`Dense` 2, `HexRing` 7, `MapGraph` 3, `BaseWalk` 10, `BaseDense` 4), **29 this lane's**. Axioms (`data/fs131/i5d/I5dAxioms16.lean`, output
+`I5dAxioms16.out`, read from this build's oleans): every theorem above and `stuck_structure_ua` on `[propext, Classical.choice, Quot.sound]`; the control
+`n3_end` reads `sorryAx`.
+
+**Re-pricing** (brief item 2, from the first two hard leaves): `stuck_flanks_ua` was the wave's "one hard piece" of `stuck_structure_ua` (I5c: S–V Prop. 7
+with a horn arc on `ω(v ± n)`); it came to about 280 lines of `FlankUA` and 230 of proof, first-time clean in scratch, because the SHAVE precondition read
+at `σ = κ₁`, `κ₂` replaces the whole `σ_g`/`σ_h` machinery. `cv_l0`: 30 lines over wave 3's U1 cone. Both well under the plan's H/M.
+
+## Stage 16 — SAVED
