@@ -2796,3 +2796,24 @@ reason by the close.*
      and the branch is its own. Confidence: high. (d) **IP5's slot → RL1.** Alternative weighed: IMM2 (MERGE). Why: wave 5 needs F-RING (via
      `filledGraph_planarLike` and `cvb_thom_reduced`); MERGE has no consumer in wave 5. In flight after RL1's launch: 1 (I5i) + 1 (I5j) + 1 (RL1) = 3.
      **The merge of `fs131-w5p` into `fs131-w5`** waits until no agent is working in `fs131-w5`'s tree (I5j is), and then takes RL1's branch state.
+334. **FS131-I5i handed back: NB3-END item 2 is held** (Stage 31 SAVED, harness ≈ 439k by the task notice; record `fs131-w5c`'s `plans/FS131-I5-implementation.md`,
+     Stages 29–31; report `data/fs131/reports/FS131-I5i.md` — **filed by Keryx** from the hand-back text at `33320123`, the job saying the harness refused its own
+     write of that file; commits `d3283661`, `c9611f57`, `712d2e25`, pushed). **Result, [kernel] on the standard three**: `ArcMap.flank_two_sectors_at_S`
+     (NB3-END item 2, E5 § 3.4 `e5-two-g-sectors`: in `n3_end_of_not_inType`'s setting the upper flank colour has at least two sectors at `S′ = v − n` for every
+     small radius) — **the GAP of items 305–306 is closed in the kernel**; every step of E5 § 3.2–3.4 (F1–F6, SEP at `κ₄ < 1`, U1 at `κ₄ = 1`) went through, none
+     failed. 24 children, all standard: the witness directions exact (`witness_dir_real`, replacing I5e's limit argument), U1's cone forms
+     (`coneAt_S_subset_of_horn`, `coneAt_N_subset_of_horn`), E5's F2 (`far_of_outType_chart`), F6's chart and angle lemmas. **`n3_end_of_not_inType` is assembled**
+     over `flank_two_sectors_at_S` and two new children carrying its hypotheses verbatim: `n3_end_four_colours` (NB3-END items 3–4) and `n3_end_bothKind` (item
+     5) — so wave 5 counts 28 `sorry` declarations on `fs131-w5c` (27 at launch). **Receipt** (Keryx): the commits exist and `origin/fs131-w5c` was `712d2e25`; the
+     stage-31 build log (`build/gate/build/20261005T050511Z-1542012.log`) ends "Build completed successfully (5370 jobs)", 0 warnings other than `sorry`;
+     `Terminal`'s ten `sorry` declarations by grep are the eight not started plus the two new children; `HornShadow` 0; `tools/fs131_i5h_stmt_check.py 72149b07`
+     run by Keryx: PASS; `data/fs131/i5i/I5iAxioms31.out` parsed by script: 28 records, 25 standard (`flank_two_sectors_at_S` among them), the 3 on `sorryAx` the two
+     children and `n3_end_of_not_inType`; `flank_two_sectors_at_S`'s statement read against its docstring. **Generalization**: F2 follows from out-type contact plus
+     the sector chart for any colour at any point (`far_of_outType_chart`), not E5's connectedness argument. **Prediction scored**: I5h priced item 2 at one
+     session; it took about 130k tokens. I5i prices items 3–5 at about one session. **Tool friction**: the harness refused the job's write of its report file
+     (other jobs' report writes succeed; cause unknown) — the coordinator files from the hand-back when it recurs. Credit: I5i, for closing the GAP that held
+     `Terminal` for a day.
+335. **Ruling on I5i's slot: the `Terminal` continuation, FS131-I5k, on `fs131-w5c` from Stage 31.** In flight after it: 1 (I5j) + 1 (RL1) + 1 (I5k) = 3. Order:
+     `n3_end_four_colours` and `n3_end_bothKind` (NB3-END items 3–5, NB3's one mind — a failed step goes back to Ephodos), then `cv_class` (its "None" case this
+     stage's argument mirrored at `N`), the CV-HD cluster, `exists_red`, `exists_terminal`, `cv_exists`. Alternative weighed: IMM2 (MERGE). Why: this half is
+     still the longest path to wave 5's landing; MERGE has no consumer in wave 5. Confidence: high.

@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–333 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–335 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **333**.
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **335**.
 >
 > **Held in the kernel, on `main`**: waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -17,10 +17,11 @@ that judge the milestone, written before any job).*
 >   `rot_in`, `bv_nd`, `bv_l3`, then `exists_preBend` over the strengthened-bend child. Brief `data/fs131/briefs/FS131-I5j-wave5.md`.
 > - **FS131-RL1** (`fs131-w5p`, de Bruijn's planner): the boundary walk `filledGraph_ringList`, the planar chain's last leaf — route, children with `sorry`,
 >   a plan per child, the implementer's handoff (record `plans/FS131-ringlist-kernel-plan.md`). Brief `data/fs131/briefs/FS131-RL1-ringlist.md`.
-> - **FS131-I5i** (`fs131-w5c`): wave 5's `Terminal` half from I5h's Stage 28 — `n3_end_of_not_inType` (repeated colour, then NB3-END items 3–5), `cv_class`,
->   the CV-HD cluster, `exists_red`, `exists_terminal`, `cv_exists`. Brief `data/fs131/briefs/FS131-I5i-terminal.md`.
+> - **FS131-I5k** (`fs131-w5c`): wave 5's `Terminal` half from I5i's Stage 31 — `n3_end_four_colours` and `n3_end_bothKind` (NB3-END items 3–5), `cv_class`,
+>   the CV-HD cluster, `exists_red`, `exists_terminal`, `cv_exists`. Brief `data/fs131/briefs/FS131-I5k-terminal.md`.
 >
-> **Done since the compaction**: **FS131-IP5** (items 332–333: F-LOC, F-CONN, F-INF, F-ONE, F-SEP and both adversaries in the kernel, Janiszewski for holes;
+> **Done since the compaction**: **FS131-I5i** (items 334–335: NB3-END item 2 held in the kernel, `flank_two_sectors_at_S`; `n3_end_of_not_inType` over two
+> children; report filed by Keryx); **FS131-IP5** (items 332–333: F-LOC, F-CONN, F-INF, F-ONE, F-SEP and both adversaries in the kernel, Janiszewski for holes;
 > F-RING over one child, the boundary walk); **FS131-I5g** (items 330–331: `reduce`, `select`, `l3_base` in the kernel; 7 leaves left; `exists_linkage`'s heartbeat option
 > accepted); **FS131-WL1** (items 326–327: Woodall's chain landed, counts filed); **FS131-I5h** (item 328: E5's SH and SEP in the
 > kernel, `Plane/ValidMap/HornShadow`; its ten leaves not started); **FS131-IP4** (item 324): `endpoint_of_far_end` and both `retArcs` proved on `fs131-w5p`, PATH replaced by `orient`; 8
@@ -94,7 +95,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 |---|---|---|---|
 | FS131-I5j (wave 5's non-`Terminal` half from I5g's Stage 29; items 330–331) | Opus | `data/fs131/briefs/FS131-I5j-wave5.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-I5j.md` |
 | FS131-RL1 (planner: the boundary walk on `fs131-w5p`; items 332–333) | Opus | `data/fs131/briefs/FS131-RL1-ringlist.md` | branch `fs131-w5p`'s `data/fs131/reports/FS131-RL1.md` |
-| FS131-I5i (wave 5's `Terminal` half from I5h's Stage 28; items 328–329) | Opus | `data/fs131/briefs/FS131-I5i-terminal.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-I5i.md` |
+| FS131-I5k (wave 5's `Terminal` half from I5i's Stage 31; items 334–335) | Opus | `data/fs131/briefs/FS131-I5k-terminal.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-I5k.md` |
 
 
 **Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.
