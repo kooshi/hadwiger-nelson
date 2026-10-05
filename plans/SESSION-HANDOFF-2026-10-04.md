@@ -1,23 +1,21 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-04 by Keryx at Kooshi's word ("Please update the handoff, and I'll compact."). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–291 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–293 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05 early):** inventory items run to **291**. **Landed on `main`, held in the kernel**: waves 1,
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05 early):** inventory items run to **293**. **Landed on `main`, held in the kernel**: waves 1,
 > 2 (item 270; counts filed, item 271), 3 (item 157); Lebesgue (151); `localSectors` (171). **Staffing**: four Opus slots (item 211; no fifth, item 255).
 > **Running (4)**: **FS131-I4n** (`fs131-w4`: merge `fs131-w4m` — `Surgery`, SHAVE, RAY, all proved (item 286) — cite the two moves in `Contact`, delete
 > `n3_end` (moved to wave 5, item 289), prove `bend_toward`, `bend_away_whole` directly, then `bend_away` repaired with the radius-2 arc in the domain (items
 > 290–291; it leaves wave 4 for its own job if not done when MERGE lands)); **FS131-IMM1** (`fs131-w4mm`: MERGE, `exists_merge_aux`, children in a new
 > `MergeMove`; told IM3's § 10.1 findings — whole-circle arc, phantom-germ rim crossing needs annulus cuts; items 285–287); **FS131-I5d** (`fs131-w5`:
 > `stuck_flanks_ua` first — unit-arc versions of wave 4's flank/SHAVE lemmas — then `exists_isRingArc_of_onRingArc`, then the lane's 30 plus `n3_end`, which it
-> adds to `Terminal` and deletes from its `BaseSteps` copy; items 284, 287, 289); **FS131-IP1** (`fs131-w5p`: the planar implementer, KP's plan § 5.1 order,
-> unicoherence first; reads FS110-CD Lemma E/R and CE R1–R4 before `endpoint_of_far_end` and messages if the 60° bound fails; items 282–283).
-> **Wave 4 after I4n and IMM1**: one merge-and-gate job — `fs131-w4mm` → `fs131-w4` (trivial `scripts/Axioms.lean` conflict: records above the `=== PURCHASED
+> adds to `Terminal` and deletes from its `BaseSteps` copy; items 284, 287, 289); **FS131-IP2** (`fs131-w5p`: the planar chain's map-level leaves, from IP1's Stage 5 — `unenclosed_of_rim_vertex`, `exists_outermost`, `exists_eleventh_of`, then BG + PATH, `exists_far_end`, `endpoint_of_far_end` after the 60° reading, F-LOC/CONN/INF/ONE, adversaries, F-RING, the two `retArcs`; not `Plane/PlaneTopology`, not `MapGraph`'s `Thomassen` block; items 292–293). **Ready for the next free slot: FS131-IX1**, the crossing lemma, brief `data/fs131/briefs/FS131-IX1-crossing.md` (gated), worktree `fs131-w5x` cut from `01011037` with its build copied (item 293 (c)). **Slot order after IX1**: wave 4's merge-and-gate when I4n and IMM1 are both done, then wave 5's next implementer if I5d leaves leaves, then T-GRAPH (moves the `Thomassen` block to its own module first; item 293 (d)). **Wave 4 after I4n and IMM1**: one merge-and-gate job — `fs131-w4mm` → `fs131-w4` (trivial `scripts/Axioms.lean` conflict: records above the `=== PURCHASED
 > ===` banner, never after), `exists_merge`'s citation, `tools/fs131_k4_decls.py` taught `_root_.` names (item 281 (b)), the gate (re-run the axiom self-test,
 > item 260; carriers incl. `AeProperRegions` IN, item 144; vacuity notes on `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N`, items 252, 266;
 > `framePt` collision with wave 2's `Plane/Slack` — wave 4 renames, item 271; merge wave 2's carriers), the landing, push notify; then Woodall's landing job
-> (item 190). **Next free slot otherwise**: a second planar implementer if IP1 recommends a split (F-RING, T-GRAPH, crossing lemma). **Wave 5 lands** after
+> (item 190). **Wave 5 lands** after
 > wave 4 and after `fs131-w5p` merges back (planar chain six to nine sessions, the longest path; I5c left 37 leaves, 30 the lane's). **Waves 6–10** not
 > started; wave 10 independent. **Held for the filing**: wave 2's drafts 5–7 (item 271); rows 134/135/137 (item 227); errata to FS112-N3-PAIRS (I4k's draft,
 > item 264), N4-RAY's route (262 (a)), FS112-N2-BENDS (radius-2 arc in the domain, 291), CVB's frame (phantom arcs, 277), NB3-END's case split (288);
@@ -51,7 +49,7 @@ that judge the milestone, written before any job).*
 | Woodall's chain (FS106-WO, -TW, -AE-MAP6) | **all five Woodall modules sorry-free** (item 190); the chain theorems wait only on wave 4's statements; **idle** — after wave 4 lands, one Opus job: merge `main`, delete the identical copies, QA2-1's merged `sevenBrickMap`, gate, landing | `.claude/worktrees/fs131-ww` |
 | the maps-six GAPs (Ephodos) | **FS131-E1 done** (items 106–107): both bypassed for arc maps by E1-NO45 [hand, one mind]; corrections filed | record `plans/FS131-E1-derivation.md` |
 | Lebesgue's covering theorem (FS131-LEB) | **LANDED on `main`** (item 151; `33471a75`): held in the kernel, standard three; wave 4 discharges its `sorry` in one line | `Proofs/HadwigerNelson/Topology/` |
-| wave 5 (13 rows + the base) | 37 leaves on `fs131-w5` (I5c, item 284), 30 the lane's (I5d running) plus `n3_end`; the planar seven on `fs131-w5p` (KP planned, item 282; IP1 running) | `.claude/worktrees/fs131-w5`, `fs131-w5p` |
+| wave 5 (13 rows + the base) | 37 leaves on `fs131-w5` (I5c, item 284), 30 the lane's (I5d running) plus `n3_end`; the planar seven on `fs131-w5p` (KP planned, item 282; IP1 proved both pinch-and-hole clauses and the foundation, item 292; IP2 running; the crossing lemma to IX1 on `fs131-w5x`, item 293) | `.claude/worktrees/fs131-w5`, `fs131-w5p` |
 | waves 6–10 (111 rows) | not started; wave 10 (arithmetic) depends on nothing in waves 4–9 and can be planned whenever a slot frees; wave 9 bound by item 89's note and item 96's vacuity rule | plan § 7 |
 
 **The finding with bearing** (items 88, 91): the repaired proof of "maps need six" has two GAPs — step 7 open in every class (even with no unit-arc boundaries),
@@ -67,7 +65,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 |---|---|---|---|
 | FS131-I4n (wave 4 on `fs131-w4`: the moves branch merged, two citations, `n3_end` moved out, the two bends; items 288–289) | Opus | `data/fs131/briefs/FS131-I4n-wave4.md` | branch `fs131-w4`'s `data/fs131/reports/FS131-I4n.md` |
 | FS131-I5d (wave 5's fourth implementer: `stuck_flanks_ua`, then `exists_isRingArc_of_onRingArc`, then the lane's 30 plus `n3_end`, moved in from wave 4 (item 289); items 284, 287) | Opus | `data/fs131/briefs/FS131-I5d-wave5.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-I5d.md` |
-| FS131-IP1 (the planar implementer: `PlaneTopology`, `MapTopology`, the seven planar leaves; items 282–283) | Opus | `data/fs131/briefs/FS131-IP1-planar.md` | branch `fs131-w5p`'s `data/fs131/reports/FS131-IP1.md` |
+| FS131-IP2 (the planar chain's map-level leaves, from IP1's Stage 5; items 292–293) | Opus | `data/fs131/briefs/FS131-IP2-planar.md` | branch `fs131-w5p`'s `data/fs131/reports/FS131-IP2.md` |
 | FS131-IMM1 (wave 4's MERGE in parallel, `MergeMove`; item 285) | Opus | `data/fs131/briefs/FS131-IMM1-merge.md` | branch `fs131-w4mm`'s `data/fs131/reports/FS131-IMM1.md` |
 
 
