@@ -913,6 +913,192 @@ theorem coneAt_N_subset_of_horn (hF : F.Valid) {v : ℂ} {α κ₁ : ℝ} {c : F
   obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hI
   exact mem_iUnion.mpr ⟨m, by constructor <;> linarith⟩
 
+/-- **An upper flank above `ω(N)` holds radial segments just inside `ω(N)`**: if `g` flanks a horn at `v` whose upper arc is on `ω(N)`,
+then for every direction from `N` within a small angle past `α − π/2`, the points of that ray at distance slightly less than `1` from `N`
+lie in `g`'s class (the mirror of `horn_radial_N` on the inner side). Model of the hypothesis: `bowtie` at `0`, `α = 0`, upper flank `0`
+(`bowtie_flanks`). -/
+theorem flank_radial_N {v : ℂ} {α : ℝ} {g : Fin k} (hg : F.IsFlankAbove v α 1 g) :
+    ∃ φ₀ > (0 : ℝ), ∀ x ∈ Ioo 0 φ₀, ∃ η₀ > (0 : ℝ), ∀ t ∈ Ioo (1 - η₀) 1,
+      v + e (α + π / 2) + (t : ℂ) * e (α - π / 2 + x) ∈ F.region g := by
+  have hπ := Real.pi_pos
+  obtain ⟨κ', hκ', hev⟩ := hg
+  obtain ⟨r₀, hr₀sub, hr₀⟩ := (hev.and self_mem_nhdsWithin).exists
+  have hr₀' : (0 : ℝ) < r₀ := hr₀
+  set r := min r₀ 1 with hr
+  have hr0 : 0 < r := lt_min hr₀' one_pos
+  have hr1 : r ≤ 1 := min_le_right _ _
+  have hrr : r ≤ r₀ := min_le_left _ _
+  refine ⟨r / 2, by positivity, fun x hx => ?_⟩
+  have hxpi : x < π := by linarith [hx.2, Real.pi_gt_three]
+  have hcos1 : Real.cos x < 1 := by
+    have := Real.cos_lt_cos_of_nonneg_of_le_pi (le_refl 0) hxpi.le hx.1
+    rwa [Real.cos_zero] at this
+  set A := 1 - Real.cos x with hA
+  have hA0 : 0 < A := by rw [hA]; linarith
+  have hAx : A ≤ x ^ 2 / 2 := by rw [hA]; linarith [Real.one_sub_sq_div_two_le_cos (x := x)]
+  have hA2 : A ≤ 2 := by rw [hA]; linarith [Real.neg_one_le_cos x]
+  have hsin : 0 < Real.sin x := Real.sin_pos_of_pos_of_lt_pi hx.1 hxpi
+  set δ := κ' - 1 with hδ
+  have hδ0 : 0 < δ := by rw [hδ]; linarith
+  refine ⟨min (r / 2) (min (1 / 2) (δ * A / 4)), lt_min (by positivity) (lt_min (by norm_num) (by positivity)),
+    fun t ht => ?_⟩
+  set u := 1 - t with hu
+  have hu0 : 0 < u := by rw [hu]; linarith [ht.2]
+  have hu1 : u < r / 2 := by rw [hu]; linarith [ht.1, min_le_left (r / 2) (min (1 / 2) (δ * A / 4))]
+  have hu2 : u < 1 / 2 := by
+    rw [hu]; linarith [ht.1, min_le_right (r / 2) (min (1 / 2) (δ * A / 4)), min_le_left (1 / 2 : ℝ) (δ * A / 4)]
+  have hu3 : u < δ * A / 4 := by
+    rw [hu]; linarith [ht.1, min_le_right (r / 2) (min (1 / 2) (δ * A / 4)), min_le_right (1 / 2 : ℝ) (δ * A / 4)]
+  have ht' : t = 1 - u := by rw [hu]; ring
+  apply hr₀sub
+  rw [N_add_eq_framePt]
+  have hq : (t * Real.sin x) ^ 2 + (1 - t * Real.cos x) ^ 2 = u ^ 2 + 2 * (1 - u) * A := by
+    rw [framePt_normSq_aux, ht', hA]; ring
+  have hY : 1 - t * Real.cos x = u + A - u * A := by rw [ht', hA]; ring
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · -- the distance from `v`
+    have hn := frame_normSq v α (framePt v α (t * Real.sin x) (1 - t * Real.cos x))
+    rw [frameX_framePt, frameY_framePt, hq, ← dist_eq_norm] at hn
+    have hlt : u ^ 2 + 2 * (1 - u) * A < r₀ ^ 2 := by
+      have hx2 : x < r / 2 := hx.2
+      have : x ^ 2 < r ^ 2 / 4 := by nlinarith [mul_lt_mul'' hx2 hx2 hx.1.le hx.1.le]
+      have : u ^ 2 < r ^ 2 / 4 := by nlinarith
+      have : r ^ 2 ≤ r₀ ^ 2 := by nlinarith
+      nlinarith
+    nlinarith [dist_nonneg (x := framePt v α (t * Real.sin x) (1 - t * Real.cos x)) (y := v)]
+  · show 0 < frameX v α _
+    rw [frameX_framePt]
+    have : 0 < t := by rw [ht']; linarith
+    positivity
+  · show 0 < tanHeight 1 (frameX v α _) (frameY v α _)
+    rw [frameX_framePt, frameY_framePt]
+    unfold tanHeight
+    rw [hq, hY]
+    nlinarith
+  · show tanHeight κ' (frameX v α _) (frameY v α _) < 0
+    rw [frameX_framePt, frameY_framePt]
+    unfold tanHeight
+    rw [hq, hY]
+    have hκ'e : κ' = 1 + δ := by rw [hδ]; ring
+    rw [hκ'e]
+    nlinarith [mul_pos hδ0 hA0, sq_nonneg u, mul_pos hu0 hδ0]
+
+
+/-- **A lower flank below `ω(S′)` holds radial segments just inside `ω(S′)`** (the mirror of `flank_radial_N`): if `h` flanks a horn at `v`
+whose lower arc is on `ω(S′)`, then for every direction from `S′` within a small angle before `α + π/2`, the points of that ray at distance
+slightly less than `1` from `S′` lie in `h`'s class. Model of the hypothesis: `bowtie` at `0`, `α = 0`, lower flank `2`
+(`bowtie_flanks`). -/
+theorem flank_radial_S {v : ℂ} {α : ℝ} {h : Fin k} (hh : F.IsFlankBelow v α (-1) h) :
+    ∃ φ₀ > (0 : ℝ), ∀ x ∈ Ioo 0 φ₀, ∃ η₀ > (0 : ℝ), ∀ t ∈ Ioo (1 - η₀) 1,
+      v - e (α + π / 2) + (t : ℂ) * e (α + π / 2 - x) ∈ F.region h := by
+  have hπ := Real.pi_pos
+  obtain ⟨κ', hκ', hev⟩ := hh
+  obtain ⟨r₀, hr₀sub, hr₀⟩ := (hev.and self_mem_nhdsWithin).exists
+  have hr₀' : (0 : ℝ) < r₀ := hr₀
+  set r := min r₀ 1 with hr
+  have hr0 : 0 < r := lt_min hr₀' one_pos
+  have hr1 : r ≤ 1 := min_le_right _ _
+  have hrr : r ≤ r₀ := min_le_left _ _
+  refine ⟨r / 2, by positivity, fun x hx => ?_⟩
+  have hxpi : x < π := by linarith [hx.2, Real.pi_gt_three]
+  have hcos1 : Real.cos x < 1 := by
+    have := Real.cos_lt_cos_of_nonneg_of_le_pi (le_refl 0) hxpi.le hx.1
+    rwa [Real.cos_zero] at this
+  set A := 1 - Real.cos x with hA
+  have hA0 : 0 < A := by rw [hA]; linarith
+  have hAx : A ≤ x ^ 2 / 2 := by rw [hA]; linarith [Real.one_sub_sq_div_two_le_cos (x := x)]
+  have hA2 : A ≤ 2 := by rw [hA]; linarith [Real.neg_one_le_cos x]
+  have hsin : 0 < Real.sin x := Real.sin_pos_of_pos_of_lt_pi hx.1 hxpi
+  set δ := -1 - κ' with hδ
+  have hδ0 : 0 < δ := by rw [hδ]; linarith
+  refine ⟨min (r / 2) (min (1 / 2) (δ * A / 4)), lt_min (by positivity) (lt_min (by norm_num) (by positivity)),
+    fun t ht => ?_⟩
+  set u := 1 - t with hu
+  have hu0 : 0 < u := by rw [hu]; linarith [ht.2]
+  have hu1 : u < r / 2 := by rw [hu]; linarith [ht.1, min_le_left (r / 2) (min (1 / 2) (δ * A / 4))]
+  have hu2 : u < 1 / 2 := by
+    rw [hu]; linarith [ht.1, min_le_right (r / 2) (min (1 / 2) (δ * A / 4)), min_le_left (1 / 2 : ℝ) (δ * A / 4)]
+  have hu3 : u < δ * A / 4 := by
+    rw [hu]; linarith [ht.1, min_le_right (r / 2) (min (1 / 2) (δ * A / 4)), min_le_right (1 / 2 : ℝ) (δ * A / 4)]
+  have ht' : t = 1 - u := by rw [hu]; ring
+  apply hr₀sub
+  rw [S_add_eq_framePt]
+  have hq : (t * Real.sin x) ^ 2 + (t * Real.cos x - 1) ^ 2 = u ^ 2 + 2 * (1 - u) * A := by
+    have := framePt_normSq_aux (t := t) (x := x)
+    rw [show (t * Real.cos x - 1) ^ 2 = (1 - t * Real.cos x) ^ 2 by ring, this, ht', hA]; ring
+  have hY : t * Real.cos x - 1 = -(u + A - u * A) := by rw [ht', hA]; ring
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · have hn := frame_normSq v α (framePt v α (t * Real.sin x) (t * Real.cos x - 1))
+    rw [frameX_framePt, frameY_framePt, hq, ← dist_eq_norm] at hn
+    have hlt : u ^ 2 + 2 * (1 - u) * A < r₀ ^ 2 := by
+      have hx2 : x < r / 2 := hx.2
+      have : x ^ 2 < r ^ 2 / 4 := by nlinarith [mul_lt_mul'' hx2 hx2 hx.1.le hx.1.le]
+      have : u ^ 2 < r ^ 2 / 4 := by nlinarith
+      have : r ^ 2 ≤ r₀ ^ 2 := by nlinarith
+      nlinarith
+    nlinarith [dist_nonneg (x := framePt v α (t * Real.sin x) (t * Real.cos x - 1)) (y := v)]
+  · show 0 < frameX v α _
+    rw [frameX_framePt]
+    have : 0 < t := by rw [ht']; linarith
+    positivity
+  · show 0 < tanHeight κ' (frameX v α _) (frameY v α _)
+    rw [frameX_framePt, frameY_framePt]
+    unfold tanHeight
+    rw [hq, hY]
+    have hκ'e : κ' = -1 - δ := by rw [hδ]; ring
+    rw [hκ'e]
+    nlinarith [mul_pos hδ0 hA0, sq_nonneg u, mul_pos hu0 hδ0]
+  · show tanHeight (-1) (frameX v α _) (frameY v α _) < 0
+    rw [frameX_framePt, frameY_framePt]
+    unfold tanHeight
+    rw [hq, hY]
+    nlinarith
+
+/-- **U1 for an upper flank at `N`, the cone form** (the inner colour of a unit arc of `ω(N)` faces it): a flank above a horn whose upper
+arc is on `ω(N)` puts its colour's cone at `N` in `[α + π + φ, α + 2π]` for some `φ ∈ (0, π)` (`flank_radial_N` with
+`Valid.cos_nonneg_of_radial_inner`; FS131-I5n, for CVB § 1.6's branch `G_N`). Model of the hypotheses: `bowtie` at `0` (`bowtie_valid`,
+`bowtie_flanks`). -/
+theorem coneAt_N_subset_of_flankAbove (hF : F.Valid) {v : ℂ} {α : ℝ} {g : Fin k} (hg : F.IsFlankAbove v α 1 g) :
+    ∃ φ, 0 < φ ∧ φ < π ∧ coneAt (F.region g) (v + e (α + π / 2)) ⊆ angleIcc (α + π + φ) (α + 2 * π) := by
+  have hπ := Real.pi_pos
+  obtain ⟨φ₀, hφ₀, hrad⟩ := flank_radial_N hg
+  set φ := min φ₀ 1 with hφ
+  have hφ0 : 0 < φ := lt_min hφ₀ one_pos
+  have hφπ : φ < π := lt_of_le_of_lt (min_le_right _ _) (by linarith [Real.pi_gt_three])
+  refine ⟨φ, hφ0, hφπ, fun γ hγ => ?_⟩
+  have hI : γ ∈ angleIcc (α - π / 2 + φ - π / 2) (α - π / 2 + π / 2) := by
+    refine mem_angleIcc_of_cos_nonneg (by linarith) fun θ hθ => ?_
+    obtain ⟨η₀, hη₀, hseg⟩ := hrad (θ - (α - π / 2)) ⟨by linarith [hθ.1], by linarith [hθ.2, min_le_left φ₀ 1]⟩
+    have hseg' : ∀ t ∈ Ioo (1 - η₀) 1, v + e (α + π / 2) + (t : ℂ) * e θ ∈ closure (F.region g) := fun t ht => by
+      have := hseg t ht
+      rw [show α - π / 2 + (θ - (α - π / 2)) = θ by ring] at this
+      exact subset_closure this
+    exact hF.cos_nonneg_of_radial_inner hη₀ hseg' γ hγ
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hI
+  exact mem_iUnion.mpr ⟨m - 1, by push_cast; constructor <;> linarith⟩
+
+/-- **U1 for a lower flank at `S′`, the cone form** (the mirror of `coneAt_N_subset_of_flankAbove`): a flank below a horn whose lower arc
+is on `ω(S′)` puts its colour's cone at `S′` in `[α, α + π − φ]` for some `φ ∈ (0, π)`. Model of the hypotheses: `bowtie` at `0`
+(`bowtie_valid`, `bowtie_flanks`). -/
+theorem coneAt_S_subset_of_flankBelow (hF : F.Valid) {v : ℂ} {α : ℝ} {h : Fin k} (hh : F.IsFlankBelow v α (-1) h) :
+    ∃ φ, 0 < φ ∧ φ < π ∧ coneAt (F.region h) (v - e (α + π / 2)) ⊆ angleIcc α (α + π - φ) := by
+  have hπ := Real.pi_pos
+  obtain ⟨φ₀, hφ₀, hrad⟩ := flank_radial_S hh
+  set φ := min φ₀ 1 with hφ
+  have hφ0 : 0 < φ := lt_min hφ₀ one_pos
+  have hφπ : φ < π := lt_of_le_of_lt (min_le_right _ _) (by linarith [Real.pi_gt_three])
+  refine ⟨φ, hφ0, hφπ, fun γ hγ => ?_⟩
+  have hI : γ ∈ angleIcc (α + π / 2 - π / 2) (α + π / 2 - φ + π / 2) := by
+    refine mem_angleIcc_of_cos_nonneg (by linarith) fun θ hθ => ?_
+    obtain ⟨η₀, hη₀, hseg⟩ := hrad (α + π / 2 - θ) ⟨by linarith [hθ.2], by linarith [hθ.1, min_le_left φ₀ 1]⟩
+    have hseg' : ∀ t ∈ Ioo (1 - η₀) 1, v - e (α + π / 2) + (t : ℂ) * e θ ∈ closure (F.region h) := fun t ht => by
+      have := hseg t ht
+      rw [show α + π / 2 - (α + π / 2 - θ) = θ by ring] at this
+      exact subset_closure this
+    exact hF.cos_nonneg_of_radial_inner hη₀ hseg' γ hγ
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hI
+  exact mem_iUnion.mpr ⟨m, by constructor <;> linarith⟩
+
 end ArcMap
 
 /-! ## Spec examples -/

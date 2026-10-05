@@ -146,6 +146,20 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`, all in `Plane/Val
 
 None of my ten leaves is closed yet (stage 28, "What is left").
 
+### FS131-I5n (wave 5's fifth `Terminal` implementer)
+
+*Kernel-checked on the build of stage 41 (`data/fs131/i5n/build-stage41.log`; `build/gate/build/20261005T072751Z-2311355.log`); axioms read from that
+build's oleans (`data/fs131/i5n/I5nAxioms41.lean`, output `I5nAxioms41.out`; controls `y3_end_needs` and `exists_merge` with `sorryAx`,
+`upper_bounds_of_inType_N` clean).*
+
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
+- `HadwigerNelson.Plane.ArcMap.cv_hd_main_inType` (`Plane/ValidMap/Terminal`) — FS114-CV-HD's main clause, branch `G_N` (CVB § 1.6).
+- U1 for a flank (`Plane/ValidMap/HornShadow`): `ArcMap.flank_radial_N`, `ArcMap.flank_radial_S`, `ArcMap.coneAt_N_subset_of_flankAbove`,
+  `ArcMap.coneAt_S_subset_of_flankBelow`.
+- Children (`Terminal`): `mem_coneAt_of_e_eq`, `not_mem_angleIcc_of_gap`, `mem_angleIoo_of_e_ne`, `mem_angleIoo_half`, `BranchGerms.exists_succ`,
+  `BranchGerms.exists_pred`, `BranchGerms.Mono.false_of_full`, `ArcMap.IsSectorChart.card_le_encard_sectorsOf`, `ArcMap.mergeAvailable_of_two_sectors`,
+  `ArcMap.IsSectorChart.exists_index_of_mem_coloursAt`.
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -1877,3 +1891,69 @@ successfully (5370 jobs)"; its one `error:` line is the up-to-date probe's "targ
 unchanged in status); `Terminal`'s: 4, as at launch.
 
 ## Stage 40 — SAVED
+
+## Stage 41 — SAVED (FS131-I5n): `cv_hd_main_inType` proved (CVB § 1.6's branch `G_N`), a kernel theorem
+
+**What this stage proves.** `cv_hd_main_inType` no longer uses `sorry`, and reads no open leaf: it is a kernel theorem on the standard three. No
+statement changed (its docstring's route sentence now describes the route taken); no `axiom`; no `native_decide`. Fourteen children added, all kernel.
+
+**The route, against CVB § 1.6 "Branch `G_N`"** (every step went through; none failed). CVB counts seven colours at `N`: `c, g, h`, the ring colours
+`r₊ ≠ r₋`, the upper neighbours `x₁ ≠ x₂` of `Q±`. In Lean the count is the same in kind with the **four sectors flanking `Q±` in the sector chart at
+`N`** in place of the ring tiles (no chart lemma for the ring tiles is needed):
+
+| step | Lean |
+|---|---|
+| `N` stuck, `h` exactly two sectors `Q±` along `±e α` | `lower_flank_horns_at_N` (I5l) |
+| `c`'s cone at `N` in the pinch about `+n` (U1, CVB "`c`'s sectors at `N` lie in the pinch around `+n`") | `coneAt_N_subset_of_horn` (the `+e α` horn) and `coneAt_S_subset_of_horn` in the frame turned by `π` |
+| `g`'s cone at `N` in the pinch about `−n` (CVB: "`g` in-type, in U1's inner cone facing `−n`") | **new**: `coneAt_N_subset_of_flankAbove` (the flank above the `+e α` horn, upper arc on `ω(N)`) and `coneAt_S_subset_of_flankBelow` in the turned frame (the flank `g` below the `−e α` horn, its arc on `ω(N)`), each from a radial segment just inside `ω(N)` (`flank_radial_N`/`_S`) and `Valid.cos_nonneg_of_radial_inner` |
+| `Q±` as chart sectors `ip`, `im`; the sectors just after and before each (`a`, `b`, `c'`, `d`) | `index_of_isSector_hornSet`; **new** `BranchGerms.exists_succ`, `exists_pred` |
+| each of the four colours carries `α` or `α + π` in its cone, so is not `c` or `g` (U1) | `coneAt_mono`, **new** `mem_coneAt_of_e_eq`, `not_mem_angleIcc_of_gap` |
+| … nor `h` (three chart sectors of `h` against `HasSectors N h 2`) | **new** `IsSectorChart.card_le_encard_sectorsOf` |
+| so absent at `E = N − n`, and two of them equal on distinct sectors is MERGE at `N` (CVB's repeated W-MERGE step) | `mergeAvailable_of_not_mem_pole` through **new** `mergeAvailable_of_two_sectors` |
+| distinct sectors: `ip ≠ im`, flanks off `Q±`, `a ≠ d`, `b ≠ c'` by their germs; `a ≠ b`, `c' ≠ d` by sortedness (a sector a whole turn wide leaves no room for `Q∓`) | **new** `BranchGerms.Mono.false_of_full`, `mem_angleIoo_of_e_ne` |
+| `a ≠ c'` (the upper side is not one sector): `c` has a sector there, inside the open upper half-turn | **new** `IsSectorChart.exists_index_of_mem_coloursAt`, `mem_angleIoo_half`, `Mono.disjoint` |
+| `b ≠ d` (the lower side is not one sector): `g` has a sector there, inside the open lower half-turn — CVB's "the `g`-sector separates them through the bottom" | the same, in the turned frame |
+| seven distinct colours in `Fin 6` | `List.Nodup.length_le_card` |
+
+**A generalization** (for the report): the proof reads only `g ∈ P_cl(N)` from `G_N` (`hGN.1.2.2`), not the in-type clause, and no curvature bound of
+`Q±`. So `κ₂ = 1`, `κ₃ = −1`, `¬H_S` and `g ∈ P_cl(N)` already give seven colours at `N` — consistent with YB3 § 3.1 Step 3's sharpening (a), which in the
+`¬G_N` branch puts `g ∉ P_cl(N)`. **U1 for the inner colour** (`coneAt_N_subset_of_flankAbove`) is new infrastructure: the existing U1 lemmas bound the
+outer colour.
+
+**Children added** (`Plane/ValidMap/HornShadow`, after `coneAt_N_subset_of_horn`): `flank_radial_N`, `flank_radial_S`, `coneAt_N_subset_of_flankAbove`,
+`coneAt_S_subset_of_flankBelow`. (`Plane/ValidMap/Terminal`, a new section "Angles mod `2π` and germ order" before the first `namespace ArcMap`):
+`mem_coneAt_of_e_eq`, `not_mem_angleIcc_of_gap`, `mem_angleIoo_of_e_ne`, `mem_angleIoo_half`, `BranchGerms.exists_succ`, `BranchGerms.exists_pred`,
+`BranchGerms.Mono.false_of_full`; (`Terminal`, after `mergeAvailable_of_not_mem_pole`): `IsSectorChart.card_le_encard_sectorsOf`,
+`mergeAvailable_of_two_sectors`, `IsSectorChart.exists_index_of_mem_coloursAt`. Names checked unique by `git grep` over `main`, `origin/fs131-w5`,
+`origin/fs131-w5p`, `origin/fs131-ww`, `origin/fs131-w4mm`, `origin/fs131-w5c` (each ref verified; positive controls `lower_flank_horns_at_N`,
+`exists_flank_after` found). Models in the docstrings of the hypothesis-carrying ones: `bowtie` at `0` (`bowtie_valid`, `bowtie_flanks`).
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 72149b07`: **PASS** (exit 0).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 6 modules rebuilt, 8 with warnings, every warning `declaration uses
+'sorry'`**, exit 0, 9 min 1 s (`build/gate/build/20261005T072751Z-2311355.log`, ends "Build completed successfully (5370 jobs)"; driver log
+`data/fs131/i5n/build-stage41.log`). `Terminal`'s `sorry` declarations: **3** (`exists_red`, `exists_terminal`, `y3_end_needs`); wave 5 **20**
+(`Terminal` 3, `BaseDense` 2, `BaseWalk` 5, `HexRing` 6, `MapGraph` 3, `Dense` 1; 21 at launch).
+
+**Axioms, read from this build's oleans** (`data/fs131/i5n/I5nAxioms41.lean` → `I5nAxioms41.out`, 12 GiB slot, exit 0): the fourteen children and
+`cv_hd_main_inType` on `[propext, Classical.choice, Quot.sound]`; `cv_hd_main`, `cv_hd` read `sorryAx` (through `y3_end_needs`, now their only open
+input on this route); controls: `y3_end_needs` and `exists_merge` read `sorryAx`, `upper_bounds_of_inType_N` the standard three. `scripts/Axioms.lean`:
+the fourteen new records added to the "FS131-I5h" block (`cv_hd_main_inType` had its record).
+
+**Re-pricing** (the brief: "from your first two hard leaves"). `cv_hd_main_inType` cost about 90k tokens of context with its fourteen children, most
+of it reading the chart and cone toolkit; the elaboration went through at the first full attempt after three small fixes. The chart helpers now in
+place (`card_le_encard_sectorsOf`, `mergeAvailable_of_two_sectors`, `exists_index_of_mem_coloursAt`, `exists_succ`/`exists_pred`) carry the counting
+part of `y3_end_needs`'s Step 3 directly; its Step 4 (shadows at `N + n`) is new work.
+
+### Theorems this phase proved
+
+All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5n/I5nAxioms41.out`):
+- `HadwigerNelson.Plane.ArcMap.cv_hd_main_inType` (`Plane/ValidMap/Terminal.lean`) — FS114-CV-HD's main clause, branch `G_N` (CVB § 1.6): seven
+  colours at `N`.
+- `ArcMap.flank_radial_N`, `ArcMap.flank_radial_S`, `ArcMap.coneAt_N_subset_of_flankAbove`, `ArcMap.coneAt_S_subset_of_flankBelow`
+  (`Plane/ValidMap/HornShadow.lean`) — U1 for a flank colour (the inner colour of a unit arc faces it).
+- `mem_coneAt_of_e_eq`, `not_mem_angleIcc_of_gap`, `mem_angleIoo_of_e_ne`, `mem_angleIoo_half`, `BranchGerms.exists_succ`, `BranchGerms.exists_pred`,
+  `BranchGerms.Mono.false_of_full`, `ArcMap.IsSectorChart.card_le_encard_sectorsOf`, `ArcMap.mergeAvailable_of_two_sectors`,
+  `ArcMap.IsSectorChart.exists_index_of_mem_coloursAt` (`Terminal`).
+
+## Stage 41 — SAVED

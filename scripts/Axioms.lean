@@ -3625,6 +3625,21 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.dot_eq_zero_of_antipodal_contact
 #print axioms HadwigerNelson.Plane.ArcMap.mergeAvailable_of_not_mem_pole
 #print axioms HadwigerNelson.Plane.ArcMap.lower_flank_horns_at_N
+-- FS131-I5n (extending this block): CV-HD's branch `G_N` — U1 for a flank (`HornShadow`), angles and germ order, chart sector counts (`Terminal`)
+#print axioms HadwigerNelson.Plane.ArcMap.flank_radial_N
+#print axioms HadwigerNelson.Plane.ArcMap.flank_radial_S
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_N_subset_of_flankAbove
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_S_subset_of_flankBelow
+#print axioms HadwigerNelson.Plane.mem_coneAt_of_e_eq
+#print axioms HadwigerNelson.Plane.not_mem_angleIcc_of_gap
+#print axioms HadwigerNelson.Plane.mem_angleIoo_of_e_ne
+#print axioms HadwigerNelson.Plane.mem_angleIoo_half
+#print axioms HadwigerNelson.Plane.BranchGerms.exists_succ
+#print axioms HadwigerNelson.Plane.BranchGerms.exists_pred
+#print axioms HadwigerNelson.Plane.BranchGerms.Mono.false_of_full
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.card_le_encard_sectorsOf
+#print axioms HadwigerNelson.Plane.ArcMap.mergeAvailable_of_two_sectors
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_index_of_mem_coloursAt
 
 #eval IO.println "=== PURCHASED ==="
 
