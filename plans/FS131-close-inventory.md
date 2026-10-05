@@ -2490,3 +2490,28 @@ reason by the close.*
      slot that freed is wave 5's own lane, which would otherwise stand idle with 16 leaves open that need no re-derivation, while the `Terminal` half waits on
      E5 either way; Woodall's landing converts finished work and blocks nothing downstream. Confidence: medium-high; it would change if the planar chain
      finished first, making the `Terminal` half the longest path. In flight after I5f's launch: 1 (G4) + 1 (IP3) + 1 (IT1) + 1 (I5f) = 4.
+312. **FS131-IP3 handed back** (Stage 11 SAVED, harness ≈ 557k by the task notice — past its 500k line, at the first saved stage after it noticed; record
+     `fs131-w5p`'s `plans/FS131-planar-implementation.md`, Stages 9–11; report `data/fs131/reports/FS131-IP3.md`; commits `c0d12324`, `99b47e9f` (the merge of
+     `fs131-w5x`), `8adb6188`, `29004f08`, `daf22610`, `7b5e8ed6`, pushed). **Results, each [kernel] on the standard three**: `ArcMap.exists_far_end` (statement
+     unchanged; `hF` renamed `_hF`, unread), read against FS110-CD Lemma E's parity step as KP corrected it; **the boundary graph BG as a handshake**,
+     `even_sum_deg` and `exists_finset_even_sum_deg` with `port_pair`, `finite_nonRegular`, `branch_locally_curve`, in the new module `Plane/CurveGraph` — a
+     compact set with a curve star at every point has finitely many non-regular points, whose degrees have an even sum (no `SimpleGraph`, no Jordan-type
+     theorem); `ArcMap.exists_inner_branch` (at a two-colour change point of ω(u) one branch enters the disc and the other leaves); 31 more children. **The crossing
+     lemma is now held on `fs131-w5p`** (the merge, no conflict, build OK). **Receipt** (Keryx): the six commits exist and `origin/fs131-w5p` is `7b5e8ed6`; the
+     stage-11 build log (`build/gate/build/20261005T023343Z-612010.log`) ends "Build completed successfully (5404 jobs)", 0 warnings other than `sorry`; `sorry` by
+     grep: `PlaneTopology` 0, `CurveGraph` 0, `MapTopology` 0, `MapGraph` 8, `BaseWalk` 15, `BaseDense` 3; `data/fs131/ip/axioms-ip3-stage11.txt` parsed by script:
+     36 records, 34 within the standard three, the 2 controls (`endpoint_of_far_end`, `exists_endpoint`) on `sorryAx`. **Generalizations**: `exists_far_end` needs
+     no validity; the handshake holds for any compact set of line and circle pieces, no map or colours. **Prediction scored**: BG with `exists_far_end` took about
+     40 minutes, 1,770 lines and one build, against KP's 1–2 sessions. **Re-price** (record § 11.3): PATH 0.3; the strong child 0.3; `retArcs_not_interleaved` 0.2;
+     `retArcs_not_abut` 0.2; `endpoint_of_far_end` about 1; F-LOC/CONN/INF/ONE 0.4; adversaries 0.3; F-RING 1–2 (unmeasured). **Route note**: the orientation step
+     at an exit is not given directly by the crossing lemma (the natural continua lie in the tiles and may leave the disc); IP3's proposed route is PATH's
+     parametrized boundary path, along which "the `a`-tile on the left" propagates by continuity. **Slip, its own**: handed back past the line (stage saved first).
+     Credit: IP3, for the handshake without general curve theory.
+313. **Rulings on IP3's held items, and its slot.** (a) `exists_far_end`'s `hF` → `_hF` **accepted** (rulings 185, 281 (a)). (b) **IP3's slot → FS131-IP4 on
+     `fs131-w5p`**, from Stage 11, in ruling 301's order as IP3 re-priced it: PATH and the strong child first (both feed `endpoint_of_far_end` and the two
+     `retArcs`), then `endpoint_of_far_end` (the orientation step by IP3's PATH route or another), the two `retArcs`, F-LOC/CONN/INF/ONE, the adversaries, F-RING.
+     (c) **E5 takes the next slot after this one** (likely G4's), then Woodall's landing, then the `Terminal` implementer. This revises item 311's "E5 in the next
+     slot that frees". Alternative weighed: E5 in this slot, IP4 at the next. Why: the slot that freed is the planar chain's, still the longest path (about
+     three to four sessions left, against E5 plus the `Terminal` half at about three), and a continuation keeps the branch warm (item 301's reason).
+     **Coordinator's slip**: item 311 fixed E5 to "the next slot that frees" without weighing which lane might free first; logged so the order is ruled per
+     slot, not in advance. Confidence: medium-high. In flight after IP4's launch: 1 (G4) + 1 (IT1) + 1 (I5f) + 1 (IP4) = 4.
