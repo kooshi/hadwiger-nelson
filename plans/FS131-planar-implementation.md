@@ -98,7 +98,18 @@ Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plan
   `mem_closure_of_path`, `eventually_path_mem`, `mem_disc_minus_iff`, `mem_closure_disc_minus`, `mem_closure_disc_minus_tangent`, `sq_norm_sub_ofReal`,
   `norm_le_iff_sq`, `compl_closure_disc_minus_subset`, `closure_disc_minus_subset`, `sq_facts`
 
-**FS131-RW1 (stages 20–)**, the boundary walk's WALK lane (brief `data/fs131/briefs/FS131-RW1-walk.md`, on `main`): filled in at each saved stage below.
+**FS131-RW1 (stages 20–)**, the boundary walk's WALK lane (brief `data/fs131/briefs/FS131-RW1-walk.md`, on `main`), all [kernel] (stage-21 build
+`build/gate/build/20261005T062106Z-1897325.log`), each on exactly the standard three (`data/fs131/rw/axioms-rw1a.txt`, checked by
+`tools/fs131_ip_axioms.py`); all in `Plane/ValidMap/MapGraph`, statements of the skeleton unchanged:
+
+- `ArcMap.filledGraph_adj_iff` (**ADJ**) — two outer tiles are adjacent in `M̂` exactly when their own closures meet
+- `ArcMap.frontier_closure_fill_subset` (**C1**) — `∂ cl x̂ ⊆ cl x`; `ArcMap.isPreconnected_frontier_closure_fill` (**C2**) — `∂ cl x̂` is connected
+- **C3**: `ArcMap.frontier_fill_hasCurveStar` — `∂ cl x̂` has a curve star of an even number of rays at each of its points; `ArcMap.frontier_fill_inter_ball`,
+  `ArcMap.frontier_fill_branch_iff`, `ArcMap.frontier_fill_chart_pos`, `ArcMap.frontier_fill_exists_ray`
+- **C4**: `ArcMap.finite_frontier_fill_nonRegular` — finitely many vertices (points of `∂ cl x̂` where `Γ` is no curve); `ArcMap.frontier_fill_isRegularAt` —
+  off them `∂ cl x̂` is regular; `ArcMap.IsSectorChart.eq_two_of_isRegularAt`
+- children: `ArcMap.IsTile.subset_fill_or_subset_compl`, `ArcMap.IsTile.isOpen_fill`, `ArcMap.IsSectorChart.exists_tile_superset`, `ArcMap.IsSectorChart.near_branch`,
+  `ArcMap.IsSectorChart.gamma_inter_ball`, `ArcMap.branchPt_ne_of_ne`, `ArcMap.hasCurveStar_of_branches_finset`, `ArcMap.even_card_filter_ne_next`
 
 IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
@@ -1046,3 +1057,80 @@ Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up
 uses 'sorry'`; `MapGraph`'s three at l. 1349, 1372, 1392 — ADJ, SEP, WALK), exit 0** (`build/gate/build/20261005T055726Z-1813684.log`; driver log
 `data/fs131/rw/build-asgiven.log`).
 
+## Stage 21 — SAVED (FS131-RW1): ADJ proved; WALK's C1–C4 proved; re-priced; the route for C5–C10 shortened
+
+### 21.1 Proved (all in `MapGraph`, statements of the skeleton unchanged)
+
+- **ADJ `filledGraph_adj_iff`** (as stated; `hP` only — no `hF`, so RL1's route through `fill_subset_hole` was not usable): each tile lies off the
+  other's filled closure (`IsOuterTile.disjoint_closure_fill`), so its closure misses the closure of the other's holes
+  (`disjoint_closure_sUnion_holes`); a common point of `cl x̂ ∩ cl ŷ` off `cl x ∩ cl y` would lie in a hole of both, and then the component `D` of
+  `(cl x)ᶜ` at it lies in `x`'s holes, hence off `cl y`, hence in `y`'s holes — its frontier lies in `cl x` and in `cl (holes of y)`, which miss, so
+  `D` is clopen and nonempty, the plane, against `x ∩ D = ∅`. One attempt, about 10 minutes.
+- **C1 `frontier_closure_fill_subset`**: `frontier (cl x̂) ⊆ cl x`.
+- **C2 `isPreconnected_frontier_closure_fill`**: `C = frontier (cl x̂)` is preconnected (unicoherence on `cl x̂` and `cl (cl x̂)ᶜ`; the latter is
+  connected, a closed split giving a hole of `cl x̂`).
+- **C3** (the local structure at `z ∈ C`, for any chart at `z` and a radius where its germs are strictly ordered):
+  `frontier_fill_chart_pos` (a chart at a point of `C` has a germ), `frontier_fill_branch_iff` (a branch lies in `C` iff its two sectors are on
+  opposite sides of `cl x̂`), `frontier_fill_inter_ball` (`C ∩ B(z, r)` is `z` and those branches), `frontier_fill_exists_ray` (at least one),
+  `frontier_fill_hasCurveStar` (**`C` has a curve star of an even number of rays at each of its points**). Children:
+  `IsTile.subset_fill_or_subset_compl`, `IsTile.isOpen_fill`, `IsSectorChart.exists_tile_superset`, `IsSectorChart.near_branch`,
+  `branchPt_ne_of_ne`, `hasCurveStar_of_branches_finset`, `even_card_filter_ne_next` (side changes around a cycle are even; spec example at
+  `Fin 2`).
+- **C4** `finite_frontier_fill_nonRegular` (the points of `C` where `Γ` is not a curve are finitely many — the vertices),
+  `frontier_fill_isRegularAt` (off them `C` is regular: `IsSectorChart.eq_two_of_isRegularAt` — two germs where `Γ` is a curve — with
+  `frontier_fill_exists_ray` and the parity puts both branches in `C`, so `C = Γ` there); child `IsSectorChart.gamma_inter_ball`.
+
+### 21.2 A shorter route for C5–C10 (mine, said here as the brief allows): SEP reads no facial order
+
+RL1's plan builds the *facial* walk (angles as runs of outer sectors, `πA` the other end of an outer angle, one orbit of each `πE`-pair,
+in-angle insertion, vertex appearances dropped). Reading SEP's argument (`IsBoundaryWalk.sep`'s docstring; RL1 § 2.2) field by field: it uses
+only `hinge`, `edgeOf`, `rep`, `apart` and the crossing lemma at the pure point of one of the repeated tile's edges — **never the order in
+which the walk meets the edges**. Every list meeting `IsBoundaryWalk`'s fields is a ring. So WALK needs only *some* walk with the fields, and
+the cheapest is an **Euler circuit of the boundary graph with each vertex-only neighbour inserted once at one of its vertices**:
+
+- *Edges*: the port pairs (`port_pair`) at a radius `ρ` about the vertex set `V = (non-regular points of Γ on C) ∪ {z₀}`; the edge of a port
+  `d` is `E_d = R_d ∪ Q_d ∪ R_{σ d}` (the closed radial piece of `d`'s ray, the component of `C'` through `d`, the other end's radial piece),
+  its pure point a middle point of `Q_d`, its tile the outer tile there. Distinct edges meet only at vertices, so `apart` holds for any
+  radius below the distance from the pure point to the other edges.
+- *Transitions*: `πA` **any** fixed-point-free involution on the ports preserving the vertex (it exists because the number of ports at each
+  vertex is even — `frontier_fill_hasCurveStar`); no angles, no orientation. `φ = πA ∘ σ`; an orbit of `φ` is a closed trail (each port's
+  arrival vertex is the next port's departure vertex).
+- *No orbit is its own reverse*, combinatorially: if `σ d = φ^n d`, then `σ φ^k = φ^{-k} σ` gives a fixed point of `σ` (`n` even, at
+  `φ^{n/2} d`) or of `πA = φ σ` (`n` odd, at `φ^{(n+1)/2} d`). (RL1's "never self-paired" holds; this is its proof, with no geometry.)
+- *Merging*: a closed trail based at `v` (`IsChain` with head/last at `v`) absorbs an orbit at any vertex it visits by list insertion
+  (`A ++ O ++ e :: B`); the invariant (nodup, `φ`-closed, no port with its partner) is kept; connectivity of `C` (C2) supplies an uncovered
+  edge at a visited vertex while one is left (C7). Then each neighbour with no edge (it touches `C` only at vertices) is inserted once, as a
+  one-entry trail based at a vertex in its closure. `rep` holds because only edge tiles repeat, `apart` because each edge appears once.
+
+Consequences: C5's angles and interior tile lists, C6's choice of one orbit per pair by geometry, C9 (dropping vertex appearances) all go;
+C8 becomes one insertion lemma used twice.
+
+### 21.3 Re-priced after ADJ and C1–C4 (implementer sessions, Opus)
+
+Measured: ADJ about 10 minutes; C1–C4 about 25 minutes, about 470 lines, one build. What is left, priced from that: **C5** (the port structure
+from `port_pair`, refactored to expose the arc `Q = γ '' [a, b]`; `E_d`; the outer tile constant along `E_d`; every point of `C` on an edge;
+`IsEdgeOf` with `E₁`, `E₂` cut at the parameters where `γ` leaves the pure disc, the interleaving from the chart at the pure point) **0.6–0.8**;
+**C6/C8** (the pure lemma: `πA` from even fibres, orbit lists, the dihedral lemma, the insertion lemma, the merge induction) **0.3–0.4**; **C7**
+(connectivity, from C2 and the coverage of `C` by edges) **0.1**; **C10** (the fields from the entries list; vertex-only tiles) **0.2–0.3**.
+**Total ≈ 1.2–1.6 sessions** against RL1's 4–6 for WALK.
+
+### 21.4 The stage-21 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 18 s, `Proofs` 1.7 s), 9 modules with
+warnings, every warning `declaration uses 'sorry'`; `MapGraph`'s two `sorry` declarations are `IsBoundaryWalk.sep` (l. 1430, SEP's lane) and
+`exists_boundaryWalk` (l. 1954); exit 0** (`build/gate/build/20261005T062106Z-1897325.log`; driver log `data/fs131/rw/build-s21.log`; grep for
+`warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe line).
+
+Axioms against that build's oleans: `data/fs131/rw/AxiomsRW1a.lean` (importing `MapGraph`, `pp.fullNames`) → `data/fs131/rw/axioms-rw1a.txt`,
+checked by `tools/fs131_ip_axioms.py` (IP2's checker, run, not edited) against `data/fs131/rw/axioms-rw1a-clean.txt` /
+`axioms-rw1a-sorry.txt`: **`OK: 19 clean on the standard three, 3 controls on sorryAx`** (`IsBoundaryWalk.sep`, `exists_boundaryWalk`,
+`filledGraph_ringList`); planted fault (`exists_boundaryWalk` listed as clean) → `NOT CLEAN [… 'sorryAx']`, exit 1. `scripts/Axioms.lean`'s
+FS131-KP block gains the 18 new children under "-- FS131-RW1's children" (`filledGraph_adj_iff` was already listed). No import changed, no
+module added (`ARCHITECTURE.md` untouched). No `axiom`, no `native_decide`.
+
+### 21.5 Next, and a working file
+
+C6/C8's pure combinatorics is begun in `data/fs131/rw/EulerScratch.lean` (imports Mathlib only; elaborates clean): `BasedTrail` (a closed
+trail based at a point), `.append`, `.exists_start`, `.insert` (the insertion lemma, with membership and `Nodup`), and
+`exists_vertex_involution` (a vertex-preserving fixed-point-free pairing from even fibres). Left there: the orbit lists of `φ = πA ∘ σ`, the
+dihedral lemma, the merge induction. It moves into `MapGraph` when finished.

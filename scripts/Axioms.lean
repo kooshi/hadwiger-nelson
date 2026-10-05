@@ -3202,6 +3202,25 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.sep
 #print axioms HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.isRing
 #print axioms HadwigerNelson.Plane.ArcMap.exists_boundaryWalk
+-- FS131-RW1's children (WALK: the frontier of a filled tile)
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_closure_fill_subset
+#print axioms HadwigerNelson.Plane.ArcMap.isPreconnected_frontier_closure_fill
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.subset_fill_or_subset_compl
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.isOpen_fill
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_tile_superset
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.near_branch
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_chart_pos
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_branch_iff
+#print axioms HadwigerNelson.Plane.ArcMap.branchPt_ne_of_ne
+#print axioms HadwigerNelson.Plane.ArcMap.hasCurveStar_of_branches_finset
+#print axioms HadwigerNelson.Plane.ArcMap.even_card_filter_ne_next
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_inter_ball
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_hasCurveStar
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.gamma_inter_ball
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.eq_two_of_isRegularAt
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_exists_ray
+#print axioms HadwigerNelson.Plane.ArcMap.frontier_fill_isRegularAt
+#print axioms HadwigerNelson.Plane.ArcMap.finite_frontier_fill_nonRegular
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 

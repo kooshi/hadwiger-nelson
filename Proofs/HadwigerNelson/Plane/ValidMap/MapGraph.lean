@@ -1348,7 +1348,65 @@ structure IsBoundaryWalk (F : ArcMap k) (x : {T : Set ℂ // F.IsOuterTile T}) (
 closures lies on no hole's inside (a hole of one meets neither the other tile nor its holes), so on both tiles' closures. -/
 theorem filledGraph_adj_iff (hP : F.IsPlaneMap) {x y : {T : Set ℂ // F.IsOuterTile T}} :
     F.filledGraph.Adj x y ↔ x ≠ y ∧ (closure x.1 ∩ closure y.1).Nonempty := by
-  sorry
+  refine ⟨fun ⟨hne, z, hzx, hzy⟩ => ⟨hne, ?_⟩, fun ⟨hne, z, hzx, hzy⟩ =>
+    ⟨hne, z, closure_mono (subset_fill _) hzx, closure_mono (subset_fill _) hzy⟩⟩
+  have hne' : y.1 ≠ x.1 := fun h => hne (Subtype.ext h).symm
+  set Hx := ⋃₀ {Hc | IsHoleOf x.1 Hc} with hHx
+  set Hy := ⋃₀ {Hc | IsHoleOf y.1 Hc} with hHy
+  -- each tile lies off the other's filled closure, so off the other's holes, and its closure misses theirs
+  have hsepx := disjoint_closure_sUnion_holes hP x.2.1
+  have hsepy := disjoint_closure_sUnion_holes hP y.2.1
+  have hyR : y.1 ⊆ (closure x.1)ᶜ \ Hx := fun w hw =>
+    have h := Set.disjoint_left.mp (IsOuterTile.disjoint_closure_fill x.2.1 y.2 hne') hw
+    ⟨fun h' => h (closure_mono (subset_fill _) h'), fun h' => h (subset_closure (Or.inr h'))⟩
+  have hxR : x.1 ⊆ (closure y.1)ᶜ \ Hy := fun w hw =>
+    have h := Set.disjoint_left.mp (IsOuterTile.disjoint_closure_fill y.2.1 x.2 (fun h => hne (Subtype.ext h))) hw
+    ⟨fun h' => h (closure_mono (subset_fill _) h'), fun h' => h (subset_closure (Or.inr h'))⟩
+  have hyHx : Disjoint (closure y.1) (closure Hx) := hsepx.symm.mono_left (closure_mono hyR)
+  have hxHy : Disjoint (closure x.1) (closure Hy) := hsepy.symm.mono_left (closure_mono hxR)
+  have hfx : closure (fill x.1) = closure x.1 ∪ closure Hx := closure_union
+  have hfy : closure (fill y.1) = closure y.1 ∪ closure Hy := closure_union
+  rw [hfx] at hzx
+  rw [hfy] at hzy
+  rcases hzx with hzx | hzx <;> rcases hzy with hzy | hzy
+  · exact ⟨z, hzx, hzy⟩
+  · exact absurd hzy (Set.disjoint_left.mp hxHy hzx)
+  · exact absurd hzx (Set.disjoint_left.mp hyHx hzy)
+  -- `z` lies in a hole of both: the component `D` of `(cl x)ᶜ` at `z` lies in `x`'s holes, so off `cl y`, so in `y`'s holes; its
+  -- frontier lies in `cl x` and in `cl Hy`, which miss — so `D` is clopen, hence the plane, against `x ∩ D = ∅`
+  have hzx' : z ∉ closure x.1 := fun h => Set.disjoint_left.mp hxHy h hzy
+  have hzHx : z ∈ Hx := by
+    by_contra h
+    exact Set.disjoint_left.mp hsepx hzx (subset_closure ⟨hzx', h⟩)
+  obtain ⟨Hc, hHc, hzHc⟩ := hzHx
+  set D := connectedComponentIn (closure x.1)ᶜ z with hD
+  have hDHx : D ⊆ Hx := (hHc.connectedComponentIn_subset hzHc).trans (subset_sUnion_of_mem hHc)
+  have hDy : D ⊆ (closure y.1)ᶜ := fun w hw hwy => Set.disjoint_left.mp hyHx hwy (subset_closure (hDHx hw))
+  have hzy' : z ∉ closure y.1 := hDy (mem_connectedComponentIn hzx')
+  have hzHy : z ∈ Hy := by
+    by_contra h
+    exact Set.disjoint_left.mp hsepy hzy (subset_closure ⟨hzy', h⟩)
+  obtain ⟨Hc', hHc', hzHc'⟩ := hzHy
+  have hDHy : D ⊆ Hy := (isPreconnected_connectedComponentIn.subset_connectedComponentIn
+    (mem_connectedComponentIn hzx') hDy |>.trans (hHc'.connectedComponentIn_subset hzHc')).trans (subset_sUnion_of_mem hHc')
+  have hfr : frontier D = ∅ := by
+    rw [eq_empty_iff_forall_notMem]
+    intro w hw
+    have h1 : w ∈ closure x.1 := by
+      simpa using frontier_connectedComponentIn_subset isClosed_closure.isOpen_compl z hw
+    exact Set.disjoint_left.mp hxHy h1 (closure_mono hDHy hw.1)
+  have hDo : IsOpen D := isClosed_closure.isOpen_compl.connectedComponentIn
+  have hDc : IsClosed D := by
+    rw [← closure_subset_iff_isClosed]
+    intro w hw
+    by_contra hwD
+    have : w ∈ frontier D := ⟨hw, by rwa [hDo.interior_eq]⟩
+    rw [hfr] at this
+    exact this
+  rcases isClopen_iff.mp ⟨hDc, hDo⟩ with h | h
+  · exact absurd (h ▸ mem_connectedComponentIn hzx' : z ∈ (∅ : Set ℂ)) (notMem_empty z)
+  · obtain ⟨w, hw⟩ := x.2.1.nonempty
+    exact absurd (subset_closure hw) (connectedComponentIn_subset _ _ (h ▸ mem_univ w : w ∈ D))
 
 /-- **Clause 2 of the ring from the hinges** (FS131-RL1, child **CONS**): consecutive entries of a boundary walk are equal or adjacent —
 their closures share the hinge, and a tile's closure lies in its filled closure. -/
@@ -1381,6 +1439,510 @@ theorem IsBoundaryWalk.isRing {x : {T : Set ℂ // F.IsOuterTile T}} {r : List {
     {E : ℕ → Set ℂ} {p : ℕ → ℂ} {ρ : ℕ → ℝ} {edge : ℕ → Prop} (h : F.IsBoundaryWalk x r z E p ρ edge) :
     Thomassen.IsRing F.filledGraph x r :=
   ⟨h.mem, h.cons, h.sep⟩
+
+/-! ### WALK's children (FS131-RW1): the frontier of a filled tile -/
+
+/-- **WALK's C1: the frontier of a filled tile lies in the tile's closure** (FS131-RW1): a point of `cl x̂` off `cl x` lies in the closure
+of `x`'s holes, so in a hole (the holes are separated from the rest of the complement, `disjoint_closure_sUnion_holes`), which is open
+and inside `x̂`. -/
+theorem frontier_closure_fill_subset (hP : F.IsPlaneMap) {X : Set ℂ} (hX : F.IsTile X) :
+    frontier (closure (fill X)) ⊆ closure X := by
+  intro w hw
+  by_contra hwX
+  set Hs := ⋃₀ {Hc | IsHoleOf X Hc} with hHs
+  have hHo : IsOpen Hs := isOpen_sUnion fun Hc hH => IsHoleOf.isOpen hH
+  have hw1 : w ∈ closure X ∪ closure Hs := by
+    have := hw.1
+    rwa [closure_closure, show closure (fill X) = closure X ∪ closure Hs from closure_union] at this
+  have hwH : w ∈ closure Hs := hw1.resolve_left hwX
+  have hwHs : w ∈ Hs := by
+    by_contra h
+    exact Set.disjoint_left.mp (disjoint_closure_sUnion_holes hP hX) hwH (subset_closure ⟨hwX, h⟩)
+  have hsub : Hs ⊆ closure (fill X) := fun z hz => subset_closure (Or.inr hz)
+  exact hw.2 (interior_maximal hsub hHo hwHs)
+
+/-- **WALK's C2: the frontier of a filled tile is connected** (FS131-RW1): unicoherence (`isPreconnected_inter_of_union_eq_univ`) on `cl x̂`
+and the closure of its complement, which is connected — a closed split of it would cut off a bounded part of the complement separated from
+the rest, a hole of `cl x̂`, against `not_isHoleOf_closure_fill`. -/
+theorem isPreconnected_frontier_closure_fill (hF : F.Valid) (hP : F.IsPlaneMap) {X : Set ℂ} (hX : F.IsTile X) :
+    IsPreconnected (frontier (closure (fill X))) := by
+  set K := closure (fill X) with hKdef
+  have hK : IsClosed K := isClosed_closure
+  rw [frontier_eq_closure_inter_closure, hK.closure_eq]
+  refine isPreconnected_inter_of_union_eq_univ hK isClosed_closure (isPreconnected_closure_fill hX) ?_
+    (eq_univ_of_forall fun z => by
+      by_cases hz : z ∈ K
+      · exact Or.inl hz
+      · exact Or.inr (subset_closure hz))
+  obtain ⟨R, hR⟩ := (isBounded_closure_fill hF hX).subset_closedBall 0
+  -- a closed split `P ∪ Q` of `cl Kᶜ` with the far side in `P` makes `Kᶜ ∩ Q` a hole of `K`
+  have key : ∀ P Q : Set ℂ, IsClosed P → IsClosed Q → closure Kᶜ ⊆ P ∪ Q → Disjoint P Q → (closedBall (0 : ℂ) R)ᶜ ⊆ P →
+      (closure Kᶜ ∩ Q).Nonempty → False := by
+    intro P Q hPc hQc hcov hPQ hfar hQne
+    obtain ⟨q, hqs, hqQ⟩ := hQne
+    have hqP : q ∉ P := fun h => Set.disjoint_left.mp hPQ h hqQ
+    obtain ⟨k, hkP, hkK⟩ := mem_closure_iff.mp hqs Pᶜ hPc.isOpen_compl hqP
+    have hkQ : k ∈ Q := (hcov (subset_closure hkK)).resolve_left hkP
+    refine not_isHoleOf_closure_fill hP hX (Kᶜ ∩ Q) ⟨⟨k, hkK, hkQ⟩, ?_, ?_, ?_⟩
+    · rw [← hKdef, hK.closure_eq]; exact inter_subset_left
+    · refine (isBounded_closedBall (x := (0 : ℂ)) (r := R)).subset fun w hw => ?_
+      by_contra hw'
+      exact Set.disjoint_left.mp hPQ (hfar hw') hw.2
+    · rw [← hKdef, hK.closure_eq]
+      refine Disjoint.mono (closure_minimal inter_subset_right hQc) (closure_minimal (fun w hw => ?_) hPc) hPQ.symm
+      exact (hcov (subset_closure hw.1)).resolve_right fun h => hw.2 ⟨hw.1, h⟩
+  rw [isPreconnected_closed_iff]
+  intro u v hu hv hcov hun hvn
+  by_contra hne
+  rw [not_nonempty_iff_eq_empty] at hne
+  have hdis : Disjoint (closure Kᶜ ∩ u) (closure Kᶜ ∩ v) := by
+    rw [Set.disjoint_iff_inter_eq_empty, show closure Kᶜ ∩ u ∩ (closure Kᶜ ∩ v) = closure Kᶜ ∩ (u ∩ v) by
+      ext; simp only [mem_inter_iff]; tauto, hne]
+  have hcov' : closure Kᶜ ⊆ (closure Kᶜ ∩ u) ∪ (closure Kᶜ ∩ v) := fun z hz =>
+    (hcov hz).elim (fun h => Or.inl ⟨hz, h⟩) (fun h => Or.inr ⟨hz, h⟩)
+  have hfarK : (closedBall (0 : ℂ) R)ᶜ ⊆ closure Kᶜ := fun w hw => subset_closure fun h => hw (hR h)
+  rcases subset_or_subset_of_closed (isPreconnected_compl_closedBall 0 R) (isClosed_closure.inter hu)
+      (isClosed_closure.inter hv) (hfarK.trans hcov') (fun w _ hw => Set.disjoint_left.mp hdis hw.1 hw.2) with h | h
+  · exact key _ _ (isClosed_closure.inter hu) (isClosed_closure.inter hv) hcov' hdis (fun w hw => (h hw).1)
+      (by obtain ⟨w, hw⟩ := hvn; exact ⟨w, hw.1, hw⟩)
+  · exact key _ _ (isClosed_closure.inter hv) (isClosed_closure.inter hu) (by rw [union_comm]; exact hcov') hdis.symm
+      (fun w hw => (h hw).1) (by obtain ⟨w, hw⟩ := hun; exact ⟨w, hw.1, hw⟩)
+
+/-- A tile lies in a filled tile or off its closure (`subset_fill_of_inter`). -/
+theorem IsTile.subset_fill_or_subset_compl {X T : Set ℂ} (hX : F.IsTile X) (hT : F.IsTile T) :
+    T ⊆ fill X ∨ T ⊆ (closure (fill X))ᶜ := by
+  by_cases h : (T ∩ closure (fill X)).Nonempty
+  · exact Or.inl (subset_fill_of_inter hX hT h)
+  · exact Or.inr fun w hw hwK => h ⟨w, hw, hwK⟩
+
+/-- A filled tile is open. -/
+theorem IsTile.isOpen_fill {X : Set ℂ} (hX : F.IsTile X) : IsOpen (fill X) :=
+  hX.isOpen.union (isOpen_sUnion fun _ hH => IsHoleOf.isOpen hH)
+
+/-- Each sector of a chart lies in one tile. -/
+theorem IsSectorChart.exists_tile_superset {n : ℕ} {G : BranchGerms n} {z : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G z r₀) (hn : 0 < n)
+    {r : ℝ} (hr : r ∈ Ioc 0 r₀) (i : Fin n) : ∃ T, F.IsTile T ∧ G.sector z r i ⊆ T := by
+  obtain ⟨w, hw⟩ := hC.sector_nonempty hr i
+  have hwI := hC.sector_subset_interiorPts hn hr i hw
+  exact ⟨_, ⟨w, hwI, rfl⟩, hC.sector_subset_tile_of_mem hn hr ⟨w, hwI, rfl⟩ hw (mem_connectedComponentIn hwI)⟩
+
+/-- **Near a branch point only the two sectors its germ bounds are present** (at a radius where the germs are strictly ordered): a small
+ball about the point of the germ after `i` lies in the chart's ball and meets no sector but `i` and the one after it. -/
+theorem IsSectorChart.near_branch {n : ℕ} {G : BranchGerms n} {z : ℂ} {r₀ : ℝ} (_hC : F.IsSectorChart G z r₀) {r : ℝ}
+    (hord : ∀ s ∈ Ioo 0 r, ∀ i, G.dir i s < G.nextDir i s) (i : Fin n) {s : ℝ} (hs : s ∈ Ioo 0 r) :
+    ∃ δ > 0, ball (branchPt z (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s) δ ⊆ ball z r ∧
+      ∀ j, (G.sector z r j ∩ ball (branchPt z (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s) δ).Nonempty →
+        j = i ∨ j = BranchGerms.next i := by
+  set w := branchPt z (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s with hw
+  have hwb : w ∈ ball z r := by rw [mem_ball, dist_eq_norm, hw, norm_branchPt_sub _ _ _ hs.1.le]; exact hs.2
+  have hfar : ∀ j, j ≠ i → j ≠ BranchGerms.next i → w ∉ closure (G.sector z r j) := by
+    intro j hji hjn hwj
+    by_cases hn2 : 2 ≤ n
+    · rcases G.eq_or_next_eq_of_mem_closure_sector hn2 hord z hs hwj with h | h
+      · exact hjn h
+      · exact hji (BranchGerms.next_injective h)
+    · have : n = 1 := by have := i.pos; omega
+      subst this
+      exact hji (Subsingleton.elim _ _)
+  have hev : ∀ᶠ y in 𝓝 w, y ∈ ball z r ∧ ∀ j, j ≠ i → j ≠ BranchGerms.next i → y ∉ closure (G.sector z r j) :=
+    (show ∀ᶠ y in 𝓝 w, y ∈ ball z r from isOpen_ball.mem_nhds hwb).and (eventually_all.mpr fun j => by
+      by_cases hj : j ≠ i ∧ j ≠ BranchGerms.next i
+      · exact Filter.Eventually.mono (isClosed_closure.isOpen_compl.mem_nhds (hfar j hj.1 hj.2)) fun y hy _ _ => hy
+      · exact Eventually.of_forall fun y h1 h2 => absurd ⟨h1, h2⟩ hj)
+  obtain ⟨δ, hδ, hδP⟩ := Metric.eventually_nhds_iff.mp hev
+  refine ⟨δ, hδ, fun y hy => (hδP hy).1, fun j ⟨y, hyS, hyb⟩ => ?_⟩
+  by_contra hj
+  push Not at hj
+  exact (hδP hyb).2 j hj.1 hj.2 (subset_closure hyS)
+
+/-- **WALK's C3, the sectors**: at a point of `C = ∂ cl x̂`, each sector of a chart lies in `x̂` or off `cl x̂`, and there is at least one
+germ (a point with no germ is interior to its tile, which is then `x`, so interior to `cl x̂`). -/
+theorem frontier_fill_chart_pos (hP : F.IsPlaneMap) {X : Set ℂ} (hX : F.IsTile X) {z : ℂ} (hz : z ∈ frontier (closure (fill X)))
+    {n : ℕ} {G : BranchGerms n} {r₀ : ℝ} (hC : F.IsSectorChart G z r₀) : 0 < n := by
+  by_contra h0
+  have hball := hC.empty (by omega)
+  have hzX : z ∈ closure X := frontier_closure_fill_subset hP hX hz
+  obtain ⟨a, haX, hab⟩ := (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨z, hzX, mem_ball_self hC.pos⟩
+  have h1 : ball z r₀ ⊆ X := by
+    obtain ⟨x, hx, hXx⟩ := hX
+    rw [hXx, connectedComponentIn_eq (hXx ▸ haX)]
+    exact (convex_ball z r₀).isPreconnected.subset_connectedComponentIn hab hball
+  exact hz.2 (interior_maximal (h1.trans ((subset_fill X).trans subset_closure)) isOpen_ball (mem_ball_self hC.pos))
+
+/-- **WALK's C3, a branch is in `C` exactly when its two sectors are on opposite sides of `cl x̂`** (FS131-RW1). -/
+theorem frontier_fill_branch_iff {X : Set ℂ} (hX : F.IsTile X) {n : ℕ} {G : BranchGerms n} {z : ℂ} {r₀ : ℝ}
+    (hC : F.IsSectorChart G z r₀) (hn : 0 < n) {r : ℝ} (hr : r ∈ Ioc 0 r₀) (hord : ∀ s ∈ Ioo 0 r, ∀ i, G.dir i s < G.nextDir i s)
+    (i : Fin n) {s : ℝ} (hs : s ∈ Ioo 0 r) :
+    branchPt z (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s ∈ frontier (closure (fill X)) ↔
+      ¬ (G.sector z r i ⊆ (closure (fill X))ᶜ ↔ G.sector z r (BranchGerms.next i) ⊆ (closure (fill X))ᶜ) := by
+  set K := closure (fill X) with hKdef
+  set w := branchPt z (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s with hw
+  have hw1 : w ∈ closure (G.sector z r i) := (G.branchPt_mem_closure_sector hord z i hs).2
+  have hw2 : w ∈ closure (G.sector z r (BranchGerms.next i)) := (G.branchPt_mem_closure_sector hord z (BranchGerms.next i) hs).1
+  have hcases : ∀ j, G.sector z r j ⊆ fill X ∨ G.sector z r j ⊆ Kᶜ := fun j => by
+    obtain ⟨T, hT, hjT⟩ := hC.exists_tile_superset hn hr j
+    rcases IsTile.subset_fill_or_subset_compl hX hT with h | h
+    · exact Or.inl (hjT.trans h)
+    · exact Or.inr (hjT.trans h)
+  have hne : ∀ j, ¬ (G.sector z r j ⊆ fill X ∧ G.sector z r j ⊆ Kᶜ) := fun j ⟨h1, h2⟩ => by
+    obtain ⟨y, hy⟩ := hC.sector_nonempty hr j
+    exact h2 hy (subset_closure (h1 hy))
+  obtain ⟨δ, hδ, hδb, hδS⟩ := hC.near_branch hord i hs
+  have hcl : ∀ y ∈ ball w δ, y ∈ closure (G.sector z r i) ∪ closure (G.sector z r (BranchGerms.next i)) := by
+    intro y hy
+    obtain ⟨j, hj⟩ := hC.mem_closure_some_sector hn hr (hδb hy)
+    rcases hδS j ((closure_inter_open_nonempty_iff isOpen_ball).mp ⟨y, hj, hy⟩) with rfl | rfl
+    · exact Or.inl hj
+    · exact Or.inr hj
+  constructor
+  · intro hwK hsame
+    rcases hcases i with hi | hi
+    · have hni : G.sector z r (BranchGerms.next i) ⊆ fill X := (hcases _).resolve_right fun h =>
+        hne i ⟨hi, hsame.mpr h⟩
+      refine hwK.2 (interior_maximal (fun y hy => ?_) isOpen_ball (mem_ball_self hδ))
+      rcases hcl y hy with h | h
+      · exact closure_mono hi h
+      · exact closure_mono hni h
+    · have hni := hsame.mp hi
+      have hwf : w ∈ closure (fill X) := by have := hwK.1; rwa [hKdef, closure_closure] at this
+      obtain ⟨y, hyf, hyb⟩ := (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨w, hwf, mem_ball_self hδ⟩
+      rcases hcl y hyb with h | h
+      · obtain ⟨t, htS, htf⟩ := (closure_inter_open_nonempty_iff (hX.isOpen_fill)).mp ⟨y, h, hyf⟩
+        exact hi htS (subset_closure htf)
+      · obtain ⟨t, htS, htf⟩ := (closure_inter_open_nonempty_iff (hX.isOpen_fill)).mp ⟨y, h, hyf⟩
+        exact hni htS (subset_closure htf)
+  · intro hdiff
+    rw [frontier_eq_closure_inter_closure, isClosed_closure.closure_eq]
+    rcases hcases i with hi | hi
+    · have hni : G.sector z r (BranchGerms.next i) ⊆ Kᶜ := (hcases _).resolve_left fun h =>
+        hdiff ⟨fun h' => absurd ⟨hi, h'⟩ (hne i), fun h' => absurd ⟨h, h'⟩ (hne _)⟩
+      exact ⟨closure_mono hi hw1, closure_mono hni hw2⟩
+    · have hni : G.sector z r (BranchGerms.next i) ⊆ fill X := (hcases _).resolve_right fun h =>
+        hdiff ⟨fun _ => h, fun _ => hi⟩
+      exact ⟨closure_mono hni hw2, closure_mono hi hw1⟩
+
+/-- Distinct germs, strictly ordered at a distance, have distinct points there (`hasCurveStar_of_branches`'s step). -/
+theorem branchPt_ne_of_ne {n : ℕ} (G : BranchGerms n) {r : ℝ} (hord : ∀ s ∈ Ioo 0 r, ∀ i, G.dir i s < G.nextDir i s)
+    (v : ℂ) {i j : Fin n} (hij : i ≠ j) {s : ℝ} (hs : s ∈ Ioo 0 r) :
+    branchPt v (G.β i) (G.κ i) s ≠ branchPt v (G.β j) (G.κ j) s := by
+  have hπ := Real.pi_pos
+  have key : ∀ i j : Fin n, i < j → branchPt v (G.β i) (G.κ i) s ≠ branchPt v (G.β j) (G.κ j) s := by
+    intro i j hij h
+    rw [branchPt_eq, branchPt_eq, polar_eq_iff hs.1 hs.1] at h
+    have h1 := G.dir_lt_dir (hord s hs) hij
+    have h2 := G.dir_lt_dir_zero_add (hord s hs) j
+    have h3 := G.dir_le_dir (hord s hs) (show (⟨0, j.pos⟩ : Fin n) ≤ i from Fin.mk_le_mk.mpr (Nat.zero_le _))
+    have he : e (G.dir j s - G.dir i s) = 1 := by
+      rw [show G.dir j s - G.dir i s = G.dir j s + -G.dir i s by ring, e_add]
+      have : e (germDir (G.β j) (G.κ j) s) = e (germDir (G.β i) (G.κ i) s) := h.2.symm
+      change e (germDir (G.β j) (G.κ j) s) * e (-germDir (G.β i) (G.κ i) s) = 1
+      rw [this, ← e_add, add_neg_cancel]; simp [e]
+    refine e_ne_one (by linarith) ?_ he
+    rw [abs_lt]; constructor <;> linarith
+  rcases lt_or_gt_of_ne hij with h | h
+  · exact key i j h
+  · exact (key j i h).symm
+
+/-- **A curve star from some of a chart's branches**: if near `v` the set `C` is `v` and the branches of the germs in `S`, it has a
+curve star of `S.card` rays at `v`. -/
+theorem hasCurveStar_of_branches_finset {C : Set ℂ} {v : ℂ} {n : ℕ} (G : BranchGerms n) (S : Finset (Fin n)) {r : ℝ} (hr : 0 < r)
+    (hord : ∀ s ∈ Ioo 0 r, ∀ i, G.dir i s < G.nextDir i s) (hcurv : ∀ i, |G.κ i| * r < 2)
+    (heq : C ∩ ball v r = insert v (⋃ i ∈ S, branchPt v (G.β i) (G.κ i) '' Ioo 0 r)) : HasCurveStar C v S.card := by
+  set f : Fin S.card → Fin n := fun j => (S.equivFin.symm j).1 with hf
+  have hfinj : Function.Injective f := fun a b h => S.equivFin.symm.injective (Subtype.ext h)
+  refine ⟨r, hr, fun j => branchPt v (G.β (f j)) (G.κ (f j)), fun j => (continuous_branchPt v _ _).continuousOn,
+    fun j s hs => norm_branchPt_sub v _ _ hs.1.le, fun a b hab s hs => branchPt_ne_of_ne G hord v (hfinj.ne hab) hs, ?_,
+    fun j s hs => branch_locally_curve v _ _ (hcurv _) hs⟩
+  rw [heq]
+  congr 1
+  ext w
+  simp only [mem_iUnion, exists_prop]
+  constructor
+  · rintro ⟨i, hi, hw⟩
+    exact ⟨S.equivFin ⟨i, hi⟩, by simpa [hf] using hw⟩
+  · rintro ⟨j, hw⟩
+    exact ⟨f j, (S.equivFin.symm j).2, hw⟩
+
+/-- **Side changes around a cycle are even in number**: for any property of the indices, the indices where it differs from the next one's
+are evenly many (in `ZMod 2` each counts the property at both ends, and `next` is a bijection). -/
+theorem even_card_filter_ne_next {n : ℕ} (p : Fin n → Prop) [DecidablePred p] :
+    Even (Finset.univ.filter fun i => ¬ (p i ↔ p (BranchGerms.next i))).card := by
+  have hbij : Function.Bijective (BranchGerms.next : Fin n → Fin n) :=
+    ⟨BranchGerms.next_injective, Finite.injective_iff_surjective.mp BranchGerms.next_injective⟩
+  set g : Fin n → ZMod 2 := fun i => if p i then 1 else 0 with hg
+  have hterm : ∀ i, ((if ¬ (p i ↔ p (BranchGerms.next i)) then 1 else 0 : ℕ) : ZMod 2) = g i + g (BranchGerms.next i) := by
+    intro i
+    simp only [hg]
+    by_cases h1 : p i <;> by_cases h2 : p (BranchGerms.next i) <;> simp only [h1, h2] <;> decide
+  have hsum : ((Finset.univ.filter fun i => ¬ (p i ↔ p (BranchGerms.next i))).card : ZMod 2) = 0 := by
+    rw [Finset.card_filter, Nat.cast_sum]
+    simp_rw [hterm]
+    rw [Finset.sum_add_distrib, hbij.sum_comp g, ← two_mul]
+    exact zero_mul _
+  exact (ZMod.natCast_eq_zero_iff_even).mp hsum
+
+-- A spec example for `even_card_filter_ne_next`: around two indices, the property "is `0`" changes twice.
+example : (Finset.univ.filter fun i : Fin 2 => ¬ ((i = 0) ↔ (BranchGerms.next i = 0))).card = 2 := by decide
+
+/-- **WALK's C3: the frontier of a filled tile near one of its points** (FS131-RW1): at `z ∈ C = ∂ cl x̂`, out to a radius where a chart's
+germs are strictly ordered, `C` is `z` and the branches whose two sectors lie on opposite sides of `cl x̂` — so `C` has a curve star there,
+of an even number of rays. -/
+theorem frontier_fill_inter_ball (hP : F.IsPlaneMap) {X : Set ℂ} (hX : F.IsTile X) {z : ℂ} (hz : z ∈ frontier (closure (fill X)))
+    {n : ℕ} {G : BranchGerms n} {r₀ : ℝ} (hC : F.IsSectorChart G z r₀) {r : ℝ} (hr : r ∈ Ioc 0 r₀)
+    (hord : ∀ s ∈ Ioo 0 r, ∀ i, G.dir i s < G.nextDir i s) [DecidablePred fun i => G.sector z r i ⊆ (closure (fill X))ᶜ] :
+    frontier (closure (fill X)) ∩ ball z r = insert z (⋃ i ∈ Finset.univ.filter fun i =>
+      ¬ (G.sector z r i ⊆ (closure (fill X))ᶜ ↔ G.sector z r (BranchGerms.next i) ⊆ (closure (fill X))ᶜ),
+      branchPt z (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) '' Ioo 0 r) := by
+  have hn := frontier_fill_chart_pos hP hX hz hC
+  have hsurj : Function.Surjective (BranchGerms.next : Fin n → Fin n) :=
+    Finite.injective_iff_surjective.mp BranchGerms.next_injective
+  apply Subset.antisymm
+  · rintro w ⟨hwK, hwb⟩
+    by_cases hwz : w = z
+    · exact Or.inl hwz
+    right
+    have hwb₀ : w ∈ ball z r₀ := ball_subset_ball hr.2 hwb
+    have hwΓ : w ∈ ⋃ a ∈ F.arcs, a.carrier := by
+      by_contra hwi
+      have hwI : w ∈ F.interiorPts := ⟨hC.subdom hwb₀, hwi⟩
+      have hw' : w ∈ ball z r ∩ F.interiorPts := ⟨hwb, hwI⟩
+      rw [hC.cover r hr hn] at hw'
+      obtain ⟨j, hj⟩ := mem_iUnion.mp hw'
+      obtain ⟨T, hT, hjT⟩ := hC.exists_tile_superset hn hr j
+      rcases IsTile.subset_fill_or_subset_compl hX hT with h | h
+      · exact hwK.2 (interior_maximal ((hjT.trans h).trans subset_closure) (hC.isOpen r hr j) hj)
+      · exact h (hjT hj) (by simpa using frontier_subset_closure hwK)
+    have hmem : w ∈ (F.Γ ∩ ball z r₀) \ {z} := ⟨⟨⟨hC.subdom hwb₀, hwΓ⟩, hwb₀⟩, hwz⟩
+    rw [hC.branches] at hmem
+    obtain ⟨m, s, hs, rfl⟩ := mem_iUnion.mp hmem
+    have hsr : s ∈ Ioo 0 r := ⟨hs.1, by
+      have := norm_branchPt_sub z (G.β m) (G.κ m) hs.1.le
+      rw [mem_ball, dist_eq_norm, this] at hwb; exact hwb⟩
+    obtain ⟨i, rfl⟩ := hsurj m
+    refine mem_iUnion₂.mpr ⟨i, Finset.mem_filter.mpr ⟨Finset.mem_univ _, ?_⟩, s, hsr, rfl⟩
+    exact (frontier_fill_branch_iff hX hC hn hr hord i hsr).mp hwK
+  · rintro w (rfl | hw)
+    · exact ⟨hz, mem_ball_self hr.1⟩
+    obtain ⟨i, hi, s, hs, rfl⟩ := mem_iUnion₂.mp hw
+    refine ⟨(frontier_fill_branch_iff hX hC hn hr hord i hs).mpr (Finset.mem_filter.mp hi).2, ?_⟩
+    rw [mem_ball, dist_eq_norm, norm_branchPt_sub _ _ _ hs.1.le]; exact hs.2
+
+/-- **WALK's C3, the star**: `C = ∂ cl x̂` has at each of its points a curve star of an even number of rays. -/
+theorem frontier_fill_hasCurveStar (hP : F.IsPlaneMap) {X : Set ℂ} (hX : F.IsTile X) {z : ℂ}
+    (hz : z ∈ frontier (closure (fill X))) : ∃ d, Even d ∧ HasCurveStar (frontier (closure (fill X))) z d := by
+  classical
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F (show z ∈ F.dom by rw [hP]; exact mem_univ z)
+  obtain ⟨u, hu, hsub⟩ := mem_nhdsGT_iff_exists_Ioo_subset.mp (G.eventually_dir_lt_nextDir hC.sorted hC.pos hC.curv)
+  set r := min u r₀ with hrdef
+  have hr : r ∈ Ioc 0 r₀ := ⟨lt_min hu hC.pos, min_le_right _ _⟩
+  have hord : ∀ s ∈ Ioo 0 r, ∀ i, G.dir i s < G.nextDir i s := fun s hs => hsub ⟨hs.1, hs.2.trans_le (min_le_left _ _)⟩
+  set S := Finset.univ.filter fun i =>
+    ¬ (G.sector z r i ⊆ (closure (fill X))ᶜ ↔ G.sector z r (BranchGerms.next i) ⊆ (closure (fill X))ᶜ) with hS
+  refine ⟨(S.image BranchGerms.next).card, ?_, ?_⟩
+  · rw [Finset.card_image_of_injective _ BranchGerms.next_injective]
+    exact even_card_filter_ne_next _
+  · refine hasCurveStar_of_branches_finset G (S.image BranchGerms.next) hr.1 hord
+      (fun i => (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans_lt (hC.curv i)) ?_
+    rw [Finset.set_biUnion_finset_image]
+    exact frontier_fill_inter_ball hP hX hz hC hr hord
+
+/-- **A chart's ball meets `Γ` in its point and its branches** (at any radius up to the chart's, when there is a germ). -/
+theorem IsSectorChart.gamma_inter_ball {n : ℕ} {G : BranchGerms n} {z : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G z r₀) (hn : 0 < n)
+    {r : ℝ} (hr : r ∈ Ioc 0 r₀) : F.Γ ∩ ball z r = insert z (⋃ i, branchPt z (G.β i) (G.κ i) '' Ioo 0 r) := by
+  ext y
+  constructor
+  · rintro ⟨hyΓ, hyb⟩
+    by_cases hyz : y = z
+    · exact Or.inl hyz
+    right
+    have hmem : y ∈ (F.Γ ∩ ball z r₀) \ {z} := ⟨⟨hyΓ, ball_subset_ball hr.2 hyb⟩, hyz⟩
+    rw [hC.branches] at hmem
+    obtain ⟨m, s, hs, rfl⟩ := mem_iUnion.mp hmem
+    refine mem_iUnion.mpr ⟨m, s, ⟨hs.1, ?_⟩, rfl⟩
+    have := norm_branchPt_sub z (G.β m) (G.κ m) hs.1.le
+    rw [mem_ball, dist_eq_norm, this] at hyb; exact hyb
+  · rintro (rfl | hy)
+    · exact ⟨hC.mem_Γ.mpr hn, mem_ball_self hr.1⟩
+    obtain ⟨i, s, hs, rfl⟩ := mem_iUnion.mp hy
+    have hmem : branchPt z (G.β i) (G.κ i) s ∈ ⋃ i, branchPt z (G.β i) (G.κ i) '' Ioo 0 r₀ :=
+      mem_iUnion.mpr ⟨i, s, ⟨hs.1, hs.2.trans_le hr.2⟩, rfl⟩
+    rw [← hC.branches] at hmem
+    refine ⟨hmem.1.1, ?_⟩
+    rw [mem_ball, dist_eq_norm, norm_branchPt_sub _ _ _ hs.1.le]; exact hs.2
+
+/-- **At a point where `Γ` is a curve, a chart has two germs** (FS131-RW1, for C4): the curve has two points at each small distance, each on
+a branch, and three germs would put three points of one small circle on the curve. -/
+theorem IsSectorChart.eq_two_of_isRegularAt {n : ℕ} {G : BranchGerms n} {z : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G z r₀) (hn : 0 < n)
+    {r : ℝ} (hr : r ∈ Ioc 0 r₀) (hord : ∀ s ∈ Ioo 0 r, ∀ i, G.dir i s < G.nextDir i s) (hreg : IsRegularAt F.Γ z) : n = 2 := by
+  obtain ⟨L, hL, ε, hε, hΓL⟩ := hreg
+  have heq := hC.gamma_inter_ball hn hr
+  have hzΓ : z ∈ F.Γ := hC.mem_Γ.mpr hn
+  have hzL : z ∈ L := by
+    have : z ∈ F.Γ ∩ ball z ε := ⟨hzΓ, mem_ball_self hε⟩
+    rw [hΓL] at this; exact this.1
+  obtain ⟨s₀, hs₀, htwo⟩ := hL.exists_two_mem_sphere hzL
+  set s := min (min s₀ ε) r / 2 with hsdef
+  have hm : 0 < min (min s₀ ε) r := lt_min (lt_min hs₀ hε) hr.1
+  have hs0 : 0 < s := half_pos hm
+  have hss₀ : s < s₀ := by linarith [min_le_left (min s₀ ε) r, min_le_left s₀ ε]
+  have hsε : s < ε := by linarith [min_le_left (min s₀ ε) r, min_le_right s₀ ε]
+  have hsr : s < r := by linarith [min_le_right (min s₀ ε) r]
+  -- a point of `L` at distance `s` is the point of some germ
+  have hongerm : ∀ p ∈ L, ‖p - z‖ = s → ∃ i, p = branchPt z (G.β i) (G.κ i) s := by
+    intro p hp hps
+    have hpΓ : p ∈ F.Γ ∩ ball z r := by
+      have : p ∈ L ∩ ball z ε := ⟨hp, by rw [mem_ball, dist_eq_norm, hps]; exact hsε⟩
+      rw [← hΓL] at this
+      exact ⟨this.1, by rw [mem_ball, dist_eq_norm, hps]; exact hsr⟩
+    rw [heq] at hpΓ
+    rcases hpΓ with rfl | hp'
+    · rw [sub_self, norm_zero] at hps; exact absurd hps.symm hs0.ne'
+    · obtain ⟨i, s', hs', rfl⟩ := mem_iUnion.mp hp'
+      have : s' = s := (norm_branchPt_sub z (G.β i) (G.κ i) hs'.1.le).symm.trans hps
+      exact ⟨i, by rw [this]⟩
+  -- a germ's point at distance `s` lies on `L`
+  have honL : ∀ i, branchPt z (G.β i) (G.κ i) s ∈ L := by
+    intro i
+    have h1 : branchPt z (G.β i) (G.κ i) s ∈ F.Γ ∩ ball z r := by
+      rw [heq]; exact Or.inr (mem_iUnion.mpr ⟨i, s, ⟨hs0, hsr⟩, rfl⟩)
+    have h2 : branchPt z (G.β i) (G.κ i) s ∈ F.Γ ∩ ball z ε :=
+      ⟨h1.1, by rw [mem_ball, dist_eq_norm, norm_branchPt_sub _ _ _ hs0.le]; exact hsε⟩
+    rw [hΓL] at h2; exact h2.1
+  obtain ⟨p₁, hp₁, p₂, hp₂, hne, h1, h2⟩ := htwo s ⟨hs0, hss₀⟩
+  obtain ⟨i₁, rfl⟩ := hongerm p₁ hp₁ h1
+  obtain ⟨i₂, rfl⟩ := hongerm p₂ hp₂ h2
+  have hi12 : i₁ ≠ i₂ := fun h => hne (by rw [h])
+  have hge : 2 ≤ n := by
+    by_contra h
+    have : n = 1 := by omega
+    subst this
+    exact hi12 (Subsingleton.elim _ _)
+  by_contra hne2
+  have h3 : 3 ≤ n := by omega
+  have hsph : IsCurve (sphere z s) := Or.inr ⟨z, s, hs0, rfl⟩
+  have hd : ∀ a b : Fin n, a ≠ b → branchPt z (G.β a) (G.κ a) s ≠ branchPt z (G.β b) (G.κ b) s :=
+    fun a b hab => branchPt_ne_of_ne G hord z hab ⟨hs0, hsr⟩
+  have hon : ∀ i, branchPt z (G.β i) (G.κ i) s ∈ L ∩ sphere z s := fun i =>
+    ⟨honL i, by rw [mem_sphere, dist_eq_norm, norm_branchPt_sub _ _ _ hs0.le]⟩
+  have hLs := hL.eq_of_three hsph (hd ⟨0, by omega⟩ ⟨1, by omega⟩ (by simp [Fin.ext_iff]))
+    (hd ⟨0, by omega⟩ ⟨2, by omega⟩ (by simp [Fin.ext_iff])) (hd ⟨1, by omega⟩ ⟨2, by omega⟩ (by simp [Fin.ext_iff]))
+    (hon _) (hon _) (hon _)
+  have : z ∈ sphere z s := hLs ▸ hzL
+  rw [mem_sphere, dist_self] at this
+  exact hs0.ne this
+
+/-- **At a point of `C = ∂ cl x̂` some branch is in `C`** (FS131-RW1): with every sector on one side, `z` is interior to `cl x̂` or off it. -/
+theorem frontier_fill_exists_ray {X : Set ℂ} (hX : F.IsTile X) {z : ℂ} (hz : z ∈ frontier (closure (fill X)))
+    {n : ℕ} {G : BranchGerms n} {r₀ : ℝ} (hC : F.IsSectorChart G z r₀) (hn : 0 < n) {r : ℝ} (hr : r ∈ Ioc 0 r₀) :
+    ∃ i, ¬ (G.sector z r i ⊆ (closure (fill X))ᶜ ↔ G.sector z r (BranchGerms.next i) ⊆ (closure (fill X))ᶜ) := by
+  set K := closure (fill X) with hKdef
+  by_contra hall
+  push Not at hall
+  have hcases : ∀ j, G.sector z r j ⊆ fill X ∨ G.sector z r j ⊆ Kᶜ := fun j => by
+    obtain ⟨T, hT, hjT⟩ := hC.exists_tile_superset hn hr j
+    rcases IsTile.subset_fill_or_subset_compl hX hT with h | h
+    · exact Or.inl (hjT.trans h)
+    · exact Or.inr (hjT.trans h)
+  -- all sectors on the side of sector `0`
+  have hsame : ∀ j, (G.sector z r j ⊆ Kᶜ ↔ G.sector z r ⟨0, hn⟩ ⊆ Kᶜ) := by
+    have hiter : ∀ m : ℕ, ∀ j : Fin n, j.val = m → (G.sector z r j ⊆ Kᶜ ↔ G.sector z r ⟨0, hn⟩ ⊆ Kᶜ) := by
+      intro m
+      induction m with
+      | zero => intro j hj; rw [show j = ⟨0, hn⟩ from Fin.ext hj]
+      | succ m ih =>
+        intro j hj
+        have hm : m < n := by omega
+        have hnext : BranchGerms.next (⟨m, hm⟩ : Fin n) = j := by
+          have h1 : (⟨m, hm⟩ : Fin n).val + 1 < n := by show m + 1 < n; omega
+          unfold BranchGerms.next; rw [dif_pos h1]; exact Fin.ext hj.symm
+        rw [← hnext, ← hall ⟨m, hm⟩]; exact ih _ rfl
+    exact fun j => hiter j.val j rfl
+  have hne : ∀ j, ¬ (G.sector z r j ⊆ fill X ∧ G.sector z r j ⊆ Kᶜ) := fun j ⟨h1, h2⟩ => by
+    obtain ⟨y, hy⟩ := hC.sector_nonempty hr j
+    exact h2 hy (subset_closure (h1 hy))
+  by_cases h0 : G.sector z r ⟨0, hn⟩ ⊆ Kᶜ
+  · -- every sector off `cl x̂`: `x̂` misses the ball
+    have hzf : z ∈ closure (fill X) := by have := frontier_subset_closure hz; rwa [hKdef, closure_closure] at this
+    obtain ⟨y, hyf, hyb⟩ := (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨z, hzf, mem_ball_self hr.1⟩
+    obtain ⟨j, hj⟩ := hC.mem_closure_some_sector hn hr hyb
+    obtain ⟨t, htS, htf⟩ := (closure_inter_open_nonempty_iff hX.isOpen_fill).mp ⟨y, hj, hyf⟩
+    exact (hsame j).mpr h0 htS (subset_closure htf)
+  · -- every sector in `x̂`: the ball lies in `cl x̂`
+    refine hz.2 (interior_maximal (fun y hy => ?_) isOpen_ball (mem_ball_self hr.1))
+    obtain ⟨j, hj⟩ := hC.mem_closure_some_sector hn hr hy
+    have hjf : G.sector z r j ⊆ fill X := (hcases j).resolve_right fun h => h0 ((hsame j).mp h)
+    exact closure_mono hjf hj
+
+/-- **WALK's C4: off the vertices `C` is regular** (FS131-RW1): at a point of `C` where `Γ` is a curve, a chart has two germs, some branch
+is in `C`, and so (the side changes being even) both are: `C` is `Γ` there. -/
+theorem frontier_fill_isRegularAt (hP : F.IsPlaneMap) {X : Set ℂ} (hX : F.IsTile X) {z : ℂ} (hz : z ∈ frontier (closure (fill X)))
+    (hreg : IsRegularAt F.Γ z) : IsRegularAt (frontier (closure (fill X))) z := by
+  classical
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F (show z ∈ F.dom by rw [hP]; exact mem_univ z)
+  obtain ⟨u, hu, hsub⟩ := mem_nhdsGT_iff_exists_Ioo_subset.mp (G.eventually_dir_lt_nextDir hC.sorted hC.pos hC.curv)
+  have hr : min u r₀ ∈ Ioc 0 r₀ := ⟨lt_min hu hC.pos, min_le_right _ _⟩
+  have hord : ∀ s ∈ Ioo 0 (min u r₀), ∀ i, G.dir i s < G.nextDir i s := fun s hs => hsub ⟨hs.1, hs.2.trans_le (min_le_left _ _)⟩
+  have hn := frontier_fill_chart_pos hP hX hz hC
+  have h2 := hC.eq_two_of_isRegularAt hn hr hord hreg
+  subst h2
+  set S := Finset.univ.filter fun i : Fin 2 =>
+    ¬ (G.sector z (min u r₀) i ⊆ (closure (fill X))ᶜ ↔ G.sector z (min u r₀) (BranchGerms.next i) ⊆ (closure (fill X))ᶜ) with hS
+  have hSall : S = Finset.univ := by
+    obtain ⟨i, hi⟩ := frontier_fill_exists_ray hX hz hC hn hr
+    have hi' : i ∈ S := Finset.mem_filter.mpr ⟨Finset.mem_univ _, hi⟩
+    have hev := even_card_filter_ne_next (fun i : Fin 2 => G.sector z (min u r₀) i ⊆ (closure (fill X))ᶜ)
+    rw [← hS] at hev
+    have hpos : 0 < S.card := Finset.card_pos.mpr ⟨i, hi'⟩
+    have hle : S.card ≤ 2 := (Finset.card_le_univ S).trans (by simp)
+    have hc : S.card = 2 := by obtain ⟨m, hm⟩ := hev; omega
+    exact Finset.eq_univ_of_card S (by simpa using hc)
+  have heq := frontier_fill_inter_ball hP hX hz hC hr hord
+  rw [← hS, hSall] at heq
+  have hnextU : (⋃ i ∈ (Finset.univ : Finset (Fin 2)), branchPt z (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) '' Ioo 0 (min u r₀)) =
+      ⋃ i, branchPt z (G.β i) (G.κ i) '' Ioo 0 (min u r₀) := by
+    ext w
+    simp only [Finset.mem_univ, iUnion_true, mem_iUnion]
+    constructor
+    · rintro ⟨i, hi⟩; exact ⟨_, hi⟩
+    · rintro ⟨i, hi⟩
+      obtain ⟨j, rfl⟩ := (Finite.injective_iff_surjective.mp (BranchGerms.next_injective (n := 2))) i
+      exact ⟨j, hi⟩
+  rw [hnextU, ← hC.gamma_inter_ball hn hr] at heq
+  obtain ⟨L, hL, ε, hε, hΓL⟩ := hreg
+  refine ⟨L, hL, min ε (min u r₀), lt_min hε hr.1, ?_⟩
+  have e1 : ball z (min ε (min u r₀)) = ball z ε ∩ ball z (min u r₀) := by ext y; simp [mem_ball]
+  rw [e1, show frontier (closure (fill X)) ∩ (ball z ε ∩ ball z (min u r₀)) =
+      (frontier (closure (fill X)) ∩ ball z (min u r₀)) ∩ ball z ε by ext; simp only [mem_inter_iff]; tauto, heq,
+    show F.Γ ∩ ball z (min u r₀) ∩ ball z ε = (F.Γ ∩ ball z ε) ∩ ball z (min u r₀) by ext; simp only [mem_inter_iff]; tauto, hΓL]
+  ext; simp only [mem_inter_iff]; tauto
+
+/-- **WALK's C4: the vertices** (FS131-RW1): the points of `C = ∂ cl x̂` where `Γ` is not a curve are finitely many — `Γ` has a curve star at
+each point of `C` (a chart's branches), regular off its centre, and finitely many star discs cover the compact `C`. -/
+theorem finite_frontier_fill_nonRegular (hF : F.Valid) (hP : F.IsPlaneMap) {X : Set ℂ} (hX : F.IsTile X) :
+    {z | z ∈ frontier (closure (fill X)) ∧ ¬ IsRegularAt F.Γ z}.Finite := by
+  have hCc : IsCompact (frontier (closure (fill X))) :=
+    (isBounded_closure_fill hF hX).isCompact_closure.of_isClosed_subset isClosed_frontier frontier_subset_closure
+  have h' : ∀ z ∈ frontier (closure (fill X)), ∃ r > 0, ∀ w ∈ F.Γ ∩ ball z r, w ≠ z → IsRegularAt F.Γ w := by
+    intro z hz
+    obtain ⟨r₀, n, G, hC⟩ := localSectors F (show z ∈ F.dom by rw [hP]; exact mem_univ z)
+    obtain ⟨u, hu, hsub⟩ := mem_nhdsGT_iff_exists_Ioo_subset.mp (G.eventually_dir_lt_nextDir hC.sorted hC.pos hC.curv)
+    have hr : min u r₀ ∈ Ioc 0 r₀ := ⟨lt_min hu hC.pos, min_le_right _ _⟩
+    have hord : ∀ s ∈ Ioo 0 (min u r₀), ∀ i, G.dir i s < G.nextDir i s := fun s hs =>
+      hsub ⟨hs.1, hs.2.trans_le (min_le_left _ _)⟩
+    have hn := frontier_fill_chart_pos hP hX hz hC
+    exact (hasCurveStar_of_branches G hr.1 hord (fun i => (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans_lt (hC.curv i))
+      (hC.gamma_inter_ball hn hr)).isRegularAt
+  choose! r hr hreg using h'
+  obtain ⟨t, htC, hcov⟩ := hCc.elim_nhds_subcover (fun z => ball z (r z)) fun z hz => ball_mem_nhds z (hr z hz)
+  refine t.finite_toSet.subset ?_
+  rintro z ⟨hzC, hzr⟩
+  obtain ⟨x, hx, hzx⟩ := mem_iUnion₂.mp (hcov hzC)
+  by_contra hzt
+  have hne : z ≠ x := fun h' => hzt (h' ▸ hx)
+  have hzΓ : z ∈ F.Γ := by
+    obtain ⟨r₀, n, G, hC⟩ := localSectors F (show z ∈ F.dom by rw [hP]; exact mem_univ z)
+    exact hC.mem_Γ.mpr (frontier_fill_chart_pos hP hX hzC hC)
+  exact hzr (hreg x (htC x hx) z ⟨hzΓ, hzx⟩ hne)
 
 /-- **Every filled outer tile has a boundary walk** (FS131-RL1, child **WALK**; plan § 3–4). The construction, over the finite boundary
 graph of `C = ∂ cl x̂` (`Plane/CurveGraph`): `C` is compact and connected (unicoherence, `cl x̂` without holes), a curve star at each point
