@@ -1,0 +1,21 @@
+slot: admitted bash: mem 30 GiB (hard cap), cpus 8,9,10,11
+REFUTATION HadwigerNelson.Plane.false_of_changePt_landing
+REFUTATION HadwigerNelson.Plane.ArcMap.step5_lt
+REFUTATION HadwigerNelson.Plane.ArcMap.false_of_four_le_sectors
+REFUTATION HadwigerNelson.Plane.ArcMap.step6
+REFUTATION HadwigerNelson.Plane.false_of_collars_closed
+REFUTATION HadwigerNelson.Plane.ArcMap.aeMap6_of_condition5
+REFUTATION HadwigerNelson.Plane.false_of_dense_unit_pair
+REFUTATION HadwigerNelson.Plane.woodall_step4
+REFUTATION HadwigerNelson.Plane.townsend_lemma
+REFUTATION HadwigerNelson.Plane.woodall_thm6
+REFUTATION HadwigerNelson.Plane.ArcMap.SectorsAt.false_of_ncard_le_two_on_arc
+REFUTATION HadwigerNelson.Plane.ArcMap.recolour_valid
+REFUTATION HadwigerNelson.Plane.false_of_cos_eq_zero_on_Icc
+REFUTATION HadwigerNelson.Plane.ArcMap.threeSectorDisc_valid
+REFUTATION HadwigerNelson.Plane.ArcMap.aeMap6_normal
+REFUTATION HadwigerNelson.Plane.ArcMap.aeMap6
+REFUTATION HadwigerNelson.Plane.ArcMap.aeMap6_merged
+REFUTATION HadwigerNelson.Plane.ArcMap.wedgeMerge_valid
+REFUTATION HadwigerNelson.Plane.offDirs_of_isoRad
+WOODALL declarations=326 refutations=19

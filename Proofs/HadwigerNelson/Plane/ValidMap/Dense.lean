@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Terminal
 import Proofs.HadwigerNelson.Plane.ValidMap.HexRing
 import Proofs.HadwigerNelson.Plane.ValidMap.Cor3
+import Proofs.HadwigerNelson.Plane.FalconerReduction
 
 /-!
 # Density: discs of radius 1 and 3, row 134's base with unit arcs, a four-colour vertex in every valid map
@@ -33,21 +34,11 @@ theorem IsRegOf.subset {q : Fin k × Set ℂ} (h : IsRegOf cls q) : q.2 ⊆ cls 
 theorem IsRegOf.isPreconnected {q : Fin k × Set ℂ} (h : IsRegOf cls q) : IsPreconnected q.2 := by
   obtain ⟨y, -, hq⟩ := h; rw [hq]; exact isPreconnected_connectedComponentIn
 
-/-- A class with no two points at distance exactly `1` has no unit pairs (`AeProperRegions.unitPairsNull_cls`, class by class). -/
-theorem unitPairsNull_of_dist_ne_one {W : Set ℂ} (hne : ∀ x ∈ W, ∀ y ∈ W, dist x y ≠ 1) : UnitPairsNull W := by
-  have h : unitPairSet W = ∅ := by
-    ext q
-    simp only [unitPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
-    intro h1 h2
-    exact hne _ h1 _ h2 (by rw [dist_self_add_right, norm_e])
-  unfold UnitPairsNull
-  rw [h, MeasureTheory.measure_empty]
-
 /-- One link of a chain of regions of one colour (`AeProperRegions.IsRegion.chain_step` for a family of classes). -/
 theorem IsRegOf.chain_step (hO : ∀ j, IsOpen (cls j)) (hne : ∀ j, ∀ x ∈ cls j, ∀ y ∈ cls j, dist x y ≠ 1) {j : Fin k}
     {C C' : Set ℂ} (h : IsRegOf cls (j, C)) (h' : IsRegOf cls (j, C')) (hmeet : (closure C ∩ closure C').Nonempty) {x : ℂ}
     (hx : x ∈ cls j) (hnear : ∀ s ∈ C, dist x s < 1) : ∀ s ∈ C', dist x s < 1 :=
-  Plane.chain_step (hO j) (unitPairsNull_of_dist_ne_one (hne j)) h.subset h'.subset h'.isPreconnected hx hnear hmeet
+  Plane.chain_step (hO j) (unitPairsNull_of_no_unit_pair (hne j)) h.subset h'.subset h'.isPreconnected hx hnear hmeet
 
 /-- A region has every two points nearer than `1` (`AeProperRegions.IsRegion.dist_lt_one` for a family of classes). -/
 theorem IsRegOf.dist_lt_one (hne : ∀ j, ∀ x ∈ cls j, ∀ y ∈ cls j, dist x y ≠ 1) {q : Fin k × Set ℂ} (h : IsRegOf cls q) :

@@ -1191,6 +1191,571 @@ UnitArc 5, BaseSteps 1 (`n3_end`) — and no other warning.
 `∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x` is unsatisfiable and becomes `F'.coloursAt v ⊆ F.coloursAt v` on `fs131-w4m`; a proof of `n3_end`
 reads only that vertex instance.
 
+## Stage 36 — SAVED (FS131-I4l): engine 5 (upper), and `flankQ_upper` proved over one named child, its (R2) shadow clause; 9 `sorry` left on the branch (Contact 3, UnitArc 5, BaseSteps 1)
+
+**Engine 5, the upper bound** (`ArcMap.IsHorn.isRingArc_upper`, plan § 13.1 item 5, in `UnitArc` before FLANK-Q; consumers `flankQ_upper`, `n3_end`,
+wave 5's C-DOUBLE): a horn `IsHorn v α κ₁ 1 c` with an upper flank `g` is bounded by an arc of `Γ` on `ω(N)` from `v` with constant sides `g` inside,
+`c` outside. Route as Stage 28 gave it: on `O = {dist(·, v) < r, frameX > 0, TanAbove κ₁, TanBelow κ′}` the horn and the flank fill everything off
+`ω(N)`; the arc's points (`ringPt N (α − π/2 + t) = framePt v α (sin t) (1 − cos t)`, child `normalPt_add_eq_framePt`, the radial points
+`N + ρ e(α − π/2 + t)` at frame `(ρ sin t, 1 − ρ cos t)`) lie in `O` for `0 < t ≤ min (r/2) 1`; such a point, or `v`, if interior, would have a ball of
+interior points meeting the horn, hence inside the horn's component (the `IsSector` equality), yet holding points inside `ω(N)`; so the closed arc is in
+`Γ`, clean (arcs near it lie on `ω(N)`), and `isRingArc_of_clean` applies; its side colours are read at the arc's middle from the radial points
+`N + (1 ∓ s) e(m)`. No validity read.
+
+**`flankQ_upper`** now reads: engine 5 for the arc; the side colours of an arc with constant sides are unique (read at its middle), so `hQR`'s (Q) or
+(R2) arc is the flank's. (Q): `g ∈ P_cl(N)`, its tile `T` at `N` (`mem_coloursAt_iff_exists_tileOf`) is unit-near every flank tile (unit-far is refuted at
+`N`, a flank point being inside `B(N, 1)`), so every point of `T` is within `1` of every flank point, hence `T ⊆ B̄(v, 1)`, and `T` is open: `T ⊆ B(v, 1)`.
+(R2): `S′ = N + 2e(α − π/2)` is `R₂`'s point at `v`, so in `closure (region g)`; a `g`-tile at `S′` is unit-far from every flank tile (flank points have
+`frameY > 0`, so are farther than `1` from `S′`), so its points are at least `1` from `v`, and being open it misses `B̄(v, 1)`: out-type. The shadow clause
+is the one child left, **`flankQ_upper_shadow`** (`sorry`): `F.Valid`, `F.Covers v 1`, the upper flank, `α − π/2 < θ₂` and
+`radiusTwoArc N (α − π/2) θ₂ ⊆ closure (region g)` ⟹ `∀ᶠ r in 𝓝[>] 0, hornSet v α κ₁ 1 r ⊆ shadow (region g)` — the horn read only as a set.
+`hcN` is unread (as § 13.3 (e) foresaw for the (R2) branch's `c`-contact; FLANK-Q's statement keeps it).
+
+**Ruling 244 (c): Stage 28's step (iii) run — it holds (one mind, on paper, not formalized), by a route that needs no chart at `S′`.** Write
+`p_s = N + 2e(α − π/2 + s)`.
+1. *The cusp* (Stage 28 (i)): for small `s > 0` some ball about `p_s` holds no point of `region g` inside `B(N, 2)`. For `q` there,
+   `q′ = N + (|q − N| − 1)(q − N)/|q − N|` is at distance exactly `1` from `q`; `q ↦ q′` is continuous and `q′(p_s)` is the arc point `a(s)`, inside the open
+   set `{dist(·, v) < r_f, frameX > 0, TanBelow κ′}` (`r_f` a flank radius); with `|q′ − N| = |q − N| − 1 < 1`, `q′` is a flank point: a `g`–`g` unit pair.
+2. Hence the points of `R₂` near `S′` (`s > 0`) are in `Γ`: an interior one would be `g` (it lies in `closure (region g)`), with `g`-points just inside radius 2.
+3. *Generic points*: finitely many arcs meet a neighbourhood of `S′`; each lies on `sphere N 2` or meets it in finitely many points (wave 3's
+   `Arc.finite_inter_sphere_or_eq_circ` after the homothety `z ↦ (z + N)/2`, which takes `sphere N 2` to `ω(N)` and arcs to arcs). So some `s_min > 0`
+   has, for `0 < s < s_min`, a ball about `p_s` in which every arc point lies on `sphere N 2`.
+4. *The outer side is `g`*: a polar rectangle `{N + ρ e(φ) : 2 < ρ < 2 + η, |φ − φ_s| < η′}` in that ball is preconnected and free of arcs, so of one
+   colour; the `g`-points near `p_s` lie in it (by 1–2; angles by continuity of `arg` near the positive reals), so it is `g`'s.
+5. *The crossing*: for `z` in the horn, `w = z − N = |w| e(α − π/2 + s_w)` with `|w| > 1` (`TanBelow 1`) and `s_w > 0` small (`frameX > 0`);
+   `s_c = s_w + arccos((3 + |w|²)/(4|w|))` puts `p_{s_c}` on `ω(z)` (`|2e − w|² = 4 + |w|² − 4|w| cos = 1`), and `s_c → 0` as `z → v`; for `r` small
+   every horn point has `s_c ∈ (0, min(s_min, θ₂ − (α − π/2)))`. The crossing is transversal (`sin(s_c − s_w) ≠ 0`), so `ω(z)` enters the rectangle at
+   `p_{s_c}`: a point of `region g` at distance exactly `1` from `z`.
+So Stage 28's worry — "a cusp sector of another colour below `R₂`" — does not block: below `R₂` near `S′` there is no `g` at all (1), and above it, at the
+generic points the horn's circles reach, one colour carries `R₂` in its closure. Special points of `R₂` are avoided by taking `r` small (5). The mirror
+(`flankQ_lower_shadow`) is the same with `N ↔ S′`. Price: about 300–400 lines (the homothety of arcs, the clean ball, the cusp, the rectangle, the
+crossing) — a session.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 618 names, 3 added (`normalPt_add_eq_framePt`, `IsHorn.isRingArc_upper`, `flankQ_upper_shadow`); `--check`
+exit 0. **Statements**: `tools/fs131_i4_stmts.py 111830c8 …UnitArc.lean` 120 old, 123 new, 3 added, 0 changed, exit 0.
+**Axioms** (`data/fs131/i4/axioms-i4l-36.txt`, this stage's oleans, not a gate log): `normalPt_add_eq_framePt`, `IsHorn.isRingArc_upper` the standard
+three; `flankQ_upper` reads `sorryAx` through `flankQ_upper_shadow` only. **Build**: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s)
+with warnings, 9m57s", exit 0 (`build/gate/build/20261004T230630Z-3278350.log`; driver log `data/fs131/i4/build-i4l-stage36.log`): 9 distinct
+`declaration uses sorry` — Contact 3, UnitArc 5 (`bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower`, `nb4p`), BaseSteps 1 — and no other
+warning.
+
+## Stage 37 — SAVED (FS131-I4l): engine 5 (lower), and `flankQ_lower` proved over its (R2) shadow child; 9 `sorry` left on the branch (Contact 3, UnitArc 5, BaseSteps 1), and the handoff
+
+**The mirror, proved directly** (plan § 13.3 (c)): `normalPt_sub_add_eq_framePt` (`S′ + ρ e(α + π/2 − t)` at frame `(ρ sin t, −(1 − ρ cos t))`),
+`ArcMap.IsHorn.isRingArc_lower` (a horn `IsHorn v α (−1) κ₂ c` with a lower flank `h` is bounded by an arc of `Γ` on `ω(S′)` ending at `v`, inner `h`,
+outer `c` — the bound `n3_end`'s horn has), and `flankQ_lower` over the child **`flankQ_lower_shadow`** (`sorry`; the hypotheses of
+`flankQ_upper_shadow` with `N ↔ S′`: `radiusTwoArc S′ θ₁ (α + π/2) ⊆ closure (region h)` ⟹ `h` shadows the horn near `v`). (Q): the `h`-tile at `S′`
+is Siamese with the flank (flank points inside `B(S′, 1)`), so in `B(v, 1)`. (R2): `N = S′ + 2e(α + π/2)` is `R₂`'s point at `v`; flank points have
+`frameY < 0`, so are farther than `1` from `N`, and an `h`-tile at `N` is unit-far from them: out-type. `hcS` unread, as `hcN` above.
+
+**What is left (6 in this job's files): UnitArc `bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `nb4p`; BaseSteps `n3_end`.**
+`pair_i` is proved; `flankQ_upper`, `flankQ_lower` are proved over their shadow children.
+- **`flankQ_upper_shadow`, `flankQ_lower_shadow`**: Stage 36's five steps (the cusp, `R₂` in `Γ`, generic points by the homothety `z ↦ (z + N)/2` and
+  `Arc.finite_inter_sphere_or_eq_circ`, the polar rectangle, the crossing). Write the homothety of arcs and the clean-ball lemma once, generically in the
+  centre, and both mirrors use them; the cusp and the crossing are per side. Price: a session for both.
+- **`n3_end`**: unblocked by the merge (`woodallCone`, `exists_merge`, and now `IsHorn.isRingArc_lower` for its horn's lower arc on `ω(v − n)`); reads
+  `exists_merge`'s vertex clause `F'.coloursAt v ⊆ F.coloursAt v` only (inventory items 268–269). NB3-END's items 1–5 (`plans/FS112-NB3-verification.md`
+  l. 221–243) are its route; `n3_end` carries no `hQR`, so FLANK-Q's conclusions are not available to it as stated — read item 1 against that first.
+- **The bends, `nb4p`**: as Stage 24 left them.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 621 names, 3 added; `--check` exit 0. **Statements**: `tools/fs131_i4_stmts.py c8b8b382 …UnitArc.lean`
+123 old, 126 new, 3 added, 0 changed, exit 0; against `d391f480` (the job's start): `UnitArc` 6 added, 0 changed; `BaseSteps` 6 added, 0 changed;
+`Contact` 150 added, 1 changed (`stuck_structure`, IC5's, ruling 252), allowed. **Duplicates**: `tools/fs131_i4_treedupes.py` — 7,541 declarations
+(7,529 + the 12 added), the same 3 pre-existing repeats. **Axioms** (`data/fs131/i4/axioms-i4l-37.txt`, this stage's oleans, not a gate log):
+`normalPt_sub_add_eq_framePt`, `IsHorn.isRingArc_lower` the standard three; `flankQ_lower` reads `sorryAx` through `flankQ_lower_shadow` only. No
+`native_decide`, no axiom, no import changed in this job. **Build**: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with warnings,
+9m52s", exit 0 (`build/gate/build/20261004T232508Z-3414461.log`; driver log `data/fs131/i4/build-i4l-stage37.log`): 9 distinct `declaration uses sorry` —
+Contact 3 (the moves), UnitArc 5 (`bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `nb4p`), BaseSteps 1 (`n3_end`) — and no
+other warning.
+
+**Re-pricing** (this job, about 250k tokens of work after the readback): the merge and its checks about 40k; `pair_i` about 60k (one pass of children,
+one of the core, both nearly first-time clean); engine 5 and the two FLANK-Q assemblies about 70k, the mirror a third of the first side.
+
+## Stage 38 — SAVED (FS131-I4m): readback, the as-given build, and `n3_end`'s `hQR` question
+
+*FS131-I4m (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4m-wave4.md` on `main`) continues this record from `68ca5f0f`. Its
+leaves: `UnitArc`'s `bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `nb4p`, and `BaseSteps`' `n3_end`. `Contact.lean` is not
+edited here.*
+
+**The brief's quotations against their sources** (standing rule 3). Four blocks: (1) item 280 — `plans/FS131-close-inventory.md` on `main` (line 2071):
+**matches as a truncation**. (2) item 281 — same file (line 2089): **matches as a truncation**. (3) "**What is left (6 in this job's files): UnitArc
+`bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `nb4p`; BaseSteps `n3_end`.**" — this record, Stage 37: **matches exactly**.
+(4) "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the" —
+`plans/FS131-w4-kernel-plan.md` § 14.2 (line 887): **matches as a truncation**. Items 268–269 read in full (on this branch `exists_merge` still carries the
+off-rim clause; the ruled vertex clause is `fs131-w4m`'s). No mismatch.
+
+**The worktree as given** (`68ca5f0f`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK —
+all 1744 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0 (`build/gate/build/20261004T234345Z-3556418.log`; driver log
+`data/fs131/i4/build-i4m-readback.log`): 9 `declaration uses sorry` — Contact 3 (l. 4064, 4078, 4094), UnitArc 5 (l. 2645, 2658, 3427, 3736, 4182),
+BaseSteps 1 (l. 1648) — and no other warning.
+
+**`n3_end`'s question (brief, Done means 2): does its proof need FLANK-Q's (Q)/(R2) dichotomy? — No, on my reading (one mind).** NB3-END item 1
+(`plans/FS112-NB3-verification.md` l. 230–231) splits on "an upper bound of `H_±` is `+1`" against "both upper bounds are `< 1`", and concludes in the first
+case only that the chain is `{P_0}` — the clause `n3_end` does not state (finding N-END-CHAIN, plan § 8.2). The Lean statement splits differently: its second
+disjunct is "the flank colour `g` is a contact at `N`, in-type, `κ₂ = 1`, and every `c`-horn along `α + π` has `κ₃ = −1`". So item 1 serves only as a case
+split, and the split the proof needs is on `g` at `N`:
+- **`g ∈ P_cl(N)`**: the contact is in-type or out-type (`contact_inType_or_outType`). Out-type forces `κ₂ < 1`: at `κ₂ = 1` the flank lies inside `B(N, 1)`,
+  so a `g`-tile at `N` is unit-near the flank tile (N-E2) and lies in `B̄(v, 1)` — FLANK-Q's (Q)-branch argument, which reads `g ∈ P_cl(N)` and never (Q).
+  In-type forces `κ₂ = 1` (`κ₂ ≤ 1` by `woodallCone`, since `HasSectors v c 2` and no MERGE give `int D_c(v) = ∅`; `κ₂ ≥ 1` by N-E2 of the in-type tile against
+  the flank) and `κ₃ = −1` (`flankQ_both`, which carries no `hQR`, or N-E2 against the `−a` horn's `+n` flank directly). The second disjunct.
+- **no in-type `g`-tile at `N`** — which includes `κ₂ = 1` with `g ∉ P_cl(N)`, i.e. FLANK-Q's (R2) branch or the out-contact arc `hQR` would exclude: the first
+  disjunct, by items 2–5. Item 2 reads "upper bound `< 1`" only to exclude an in-type `g`-tile at `N` ("the flank is not in `B̄(N, 1)`"); with no `g`-tile at
+  `N` at all its conclusion (`g`-tiles at `S′` tangent to `±a`, out-type) follows the same way, and items 3–5 never read the upper bound. **This extends NB3's
+  text** (which leaves the case `κ₂ = 1`, `g ∉ P_cl(N)` to item 1, whose conclusion is not the statement's) — a reading, one mind, not a statement defect.
+So no hypothesis is missing for `hQR`'s sake, and I send no message. **What the leaf does need**: NB3 items 2–5 for a horn whose lower arc is a unit arc
+(`κ₁ = −1`) with no Condition 5. Contact's shadow machinery — `flank_shadow_g`/`_h`, `flank_shadows`, `shaveAvailable_of_not_doublyShadowed`,
+`stuck_structure` — assumes Condition 5 and curvatures in `(−1, 1)`, so none applies; the SHAVE analysis, the `g`-sectors at `S′`, N3-DEG at `S′` (the
+non-strict `woodallCone`, no Condition 5, does apply), the colours `y ≠ z` and the in-type `y`-tile at `P_{−2}` are new work: a `stuck_structure`-sized leaf.
+
+**Order of this job**: the two shadow leaves first (one route, both mirrors), then the others as the budget allows.
+
+## Stage 39 — SAVED (FS131-I4m): `flankQ_upper_shadow`, `flankQ_lower_shadow` — FLANK-Q is sorry-free; 7 `sorry` left on the branch (Contact 3, UnitArc 3, BaseSteps 1)
+
+**The shadow clause proved, both mirrors, on a shorter route than Stage 36's.** Stage 36's step 1 (the cusp: no `g` inside `B(N, 2)` near `R₂`, by
+validity against the flank) is not needed, and with it neither validity nor the flank is read: at a point `p` of `R₂` where the arcs nearby lie on
+the circle of radius `2` about `N`, the two sides of that circle near `p` are each one colour, and `p ∈ cl(region g)` makes one of them `g`; `ω(z)`
+crosses the circle at `p` transversally, so it enters **both** sides, and the intermediate value theorem in the `g` side gives a `g`-point at distance
+exactly `1` from `z`. Children, in `UnitArc` (the first five before `namespace ArcMap` ahead of FLANK-Q, the rest just before `flankQ_upper_shadow`):
+- `r2Cross` (def: `arg u + arccos((3 + ‖u‖²)/(4‖u‖))`, with a spec example at `u = 2`), `sq_norm_two_e_sub` (`‖2e(t) − u‖² = 4 + ‖u‖² − 4‖u‖cos(t − arg u)`),
+  `r2Cross_spec` (for `1 < ‖u‖ < 3`, `Im u > 0`: `0 < arg u < r2Cross u < arg u + π/2`, inside `ω(u)` between `arg u` and the crossing, outside from it
+  to `arg u + π`), `continuousAt_r2Cross_one`, `r2Cross_one` — the crossing angle and its limit `0` at `u = 1`.
+- `Arc.finite_inter_sphere_two_or_subset` (the homothety `z ↦ (z + C)/2` carried through wave 3's `Arc.finite_inter_sphere_or_eq_circ`: a
+  nondegenerate arc meets `sphere C 2` finitely or lies on it); `ArcMap.eventually_arcs_on_sphere_two` (at `C + 2e(θ₀)` in the domain, for every
+  `θ ≠ θ₀` near `θ₀` the point `C + 2e(θ)` is in the domain and some ball about it meets the arcs only on the circle).
+- `ArcMap.exists_polarBox_subset_region` (at such a point in `cl(region g)`, the polar box just outside or just inside the circle lies in `region g`;
+  the boxes are images of products of intervals, so preconnected; a `g`-point near `p` is put in polar form with `arg` continuous at `2`);
+  `ArcMap.mem_shadow_of_crossing` (with points of the circle at angles arbitrarily near `p`'s both inside and outside `ω(z)`, `z ∈ shadow (region g)`).
+- `flankQ_upper_shadow`: `u = (z − N)/e(α − π/2)` is `(1 − frameY) + i·frameX`, so `Im u > 0` on the horn and `‖u‖ = dist z N > 1`; `u → 1` at `v`,
+  so the crossing angle tends to `0` uniformly on small horns; the crossing point `N + 2e(α − π/2 + r2Cross u)` lies in `R₂` and off the finitely many
+  special points. `flankQ_lower_shadow`: the same at `S′` with `conj u` and the angle `α + π/2 − r2Cross (conj u)`.
+`hF` and `hg` are unread in both (bound by `have _ :=`, as FLANK-Q's `hcN`); `hv` is read once, for `S′` (resp. `N`) in the domain.
+Read against § 12.2 and Stage 36's statement: same statements (`tools/fs131_i4_stmts.py 70075915 …UnitArc.lean`: 126 old, 134 new, 8 added, 0 changed,
+exit 0). With them **`flankQ_upper`, `flankQ_lower` read the standard three**.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 629 names, 8 added; `--check` exit 0. **Duplicates**: `tools/fs131_i4_treedupes.py` — 7,550 declarations
+(7,541 + the 9 added: 8 theorems and `r2Cross`), the same 3 pre-existing repeats. **Axioms** (`data/fs131/i4/axioms-i4m-39.txt`, this stage's
+oleans, not a gate log): the eight children, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `flankQ_upper`, `flankQ_lower` — all
+`[propext, Classical.choice, Quot.sound]`. No `native_decide`, no axiom, no import changed. **Build**: "build: OK — 444 of 444 batches, 3 module(s)
+rebuilt, 3 module(s) with warnings, 10m0s", exit 0 (`build/gate/build/20261005T000153Z-3696869.log`; driver log `data/fs131/i4/build-i4m-stage39.log`):
+7 distinct `declaration uses sorry` — Contact 3 (the moves), UnitArc 3 (`bend_toward`, `bend_away`, `nb4p`), BaseSteps 1 (`n3_end`) — and no other
+warning.
+
+**Re-pricing**: Stage 36 priced the pair at "a session, 300–400 lines"; it took about 490 lines and about 40k tokens, nearly first-time clean, because
+the cusp step dropped out.
+
+## Stage 40 — SAVED (FS131-I4m): `nb4p` (FS112-NB4P); 6 `sorry` left on the branch (Contact 3, UnitArc 2, BaseSteps 1), and the handoff
+
+**`nb4p` proved**, on NB-4's own route (`plans/FS110-NB-verification.md` § 2.3) with W1 (ii)'s corrections (`plans/FS112-N-proof.md` § 2.1), read in full
+before planning, as § 13.5 asked. The half-plane step is wave 3's GERM-R lemmas (`Valid.cone_re_nonpos_of_germ` / `_nonneg_of_germ`) applied at `v`
+itself, so no tile is needed except in (3). Children, in `UnitArc`:
+- `sq_norm_e_add_e`, `e_add_third_add_e_sub_third` (`e(a + 60°) + e(a − 60°) = e(a)`, so `y_k` is the point of `ω(y_{k+1})` at angle `θ − 60°`);
+  `cos_int_mul_third_pos`, `cos_int_mul_third_neg` (the sign of `cos(m·60°)` by `m mod 6`); `exists_opposite_cos_third` (NB-4's closing count as a sign
+  table: for orbit indices `j ≠ l` and a parity `p`, some `k ∈ {p, p + 2, p + 4}` has `cos((j − k)·60°)`, `cos((l − k)·60°)` of opposite strict signs —
+  `interval_cases` and `decide` over the 60 cases).
+- `ArcMap.germ_rotate_third` (the ring rotates its colours: a germ of `ω(v)` in class `c`, and `r(θ + 60°)` on no arc of `Γ` on `ω(v)` ⟹ the same-side germ
+  there lies in a class `d ≠ c` absent at `v`; `germ_dichotomy`, N-E1, validity at distance `1`).
+- `ArcMap.straddlers_third` (W1 (ii)'s (1) and (3) with NB-4's half-planes: the germ of `ω(y_{k+1})` at `y_k` inside `B(v, 1)` lies in one colour `i`, the
+  outer germ in `o ≠ i`; both colours of `v`, carried at `y_k`, not at `y_{k+1}`; `v`'s class of `i` approaches `v` only facing `y_k`, that of `o` only
+  facing away. `i ≠ o` by N-E2: the inner germ's tile is unit-near `v`'s `i`-tile, the outer germ's unit-far, so that tile lies on `ω(y_k)` — empty
+  interior, `interior_sphere`).
+- `nb4p`: (1) `germS_absent` gives the two absent colours `X`, `X'`; the ring alternates `X | X'` / `X' | X` at `y_0, …, y_5` (induction, `hring`), so
+  every `y_j`, `j ≤ 6`, carries both; (2) `straddlers_third` at each `k < 6` (`hnb`'s first half); (3) the pairs `Q_k = {i_k, o_k}` alternate:
+  `Q_{k+1} ⊆ P_cl(v) ∖ Q_k`, both of size two, so `Q_{k+1} = P_cl(v) ∖ Q_k` and `Q_{k+2} = Q_k` — every colour of `v` is a straddler at the three orbit
+  points of one parity; (4) by the sign table each colour's cone at `v` holds at most one of the six orbit directions; (5) every direction is in some
+  colour's cone (`exists_mem_coneAt_region`), so six directions inject into four colours.
+**Generalization**: `hnb`'s second half (no arc of `ω(y_{j−1})` through `y_j`) is never read — W1 (ii)'s equality `Q⁻_{k+1} = Q⁺_{k+1}` is not needed,
+since the alternation of the `+` pairs alone gives the parity classes. Read against § 12.2 and the row: same statement.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 636 names, 7 added; `--check` exit 0. **Statements**: `tools/fs131_i4_stmts.py e1c75f21 …UnitArc.lean` 134
+old, 141 new, 7 added, 0 changed, exit 0; planted control (nb4p's `hv` changed to `Covers v 2` in the working file): "1 changed, CHANGED nb4p", exit 1;
+file restored byte for byte, re-run exit 0. **Duplicates**: `tools/fs131_i4_treedupes.py` — 7,557 declarations (7,550 + 7), the same 3 repeats.
+**Axioms** (`data/fs131/i4/axioms-i4m-40.txt`, this stage's oleans, not a gate log): the seven children and `nb4p`, all `[propext, Classical.choice,
+Quot.sound]`. No `native_decide`, no axiom, no import changed. **Build**: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with
+warnings, 10m11s", exit 0 (`build/gate/build/20261005T001554Z-3797153.log`; driver log `data/fs131/i4/build-i4m-stage40.log`): 6 distinct `declaration
+uses sorry` — Contact 3 (the moves), UnitArc 2 (`bend_toward`, `bend_away`), BaseSteps 1 (`n3_end`) — and no other warning.
+
+**What is left (3 in this job's files): UnitArc `bend_toward`, `bend_away`; BaseSteps `n3_end`.** Contact's three moves are IM3's.
+- **The bends** (plan § 13.5, Stage 24): engine 3 (the cut, `exists_cut_ringArc`, not yet stated) removes the open arc from every arc of `ω(P)`; the new
+  map adds the bent arc and recolours the lens; engines 1–2 give validity from the clearness and `RingArcsWithin`; the clearness is N2-ENV (proved) with
+  N2-SIGN; the cap at the ends is N2-TOWARD's corner/tangent start; for `bend_away` the tangent bend at isolated R2 contacts (N2-TAN, `TAN` exact in
+  `tools/fs112_n2_checks.py`). Each is a construction, not a reduction: price a session each, the cut first.
+- **`n3_end`**: Stage 38's reading — no `hQR` needed; split on "an in-type `g`-tile at `N`" (second disjunct: `κ₂ = 1` by `woodallCone` and N-E2,
+  `κ₃ = −1` by `flankQ_both`) against its absence (first disjunct by NB3 items 2–5). The obstacle is infrastructure: every shadow and SHAVE lemma in
+  `Contact` (`flank_shadow_g`/`_h`, `flank_shadows`, `shaveAvailable_of_not_doublyShadowed`, `stuck_structure`) assumes Condition 5 and curvatures in
+  `(−1, 1)`, and `n3_end`'s horn has `κ₁ = −1` with no Condition 5. What applies as is: `woodallCone` (non-strict), `contact_inType_or_outType`,
+  `outType_N_of_flankAbove`/`outType_S_of_flankBelow`, `IsHorn.exists_flankAbove`/`_flankBelow`, `flankQ_both`, `flank_siamese_of_inType`,
+  `inType_shadows_horn`, `noBoth`, and the two shadow lemmas of Stage 39 (`mem_shadow_of_crossing` is the general "a circle crossing a class's closure
+  where the arcs are on a circle" engine). The new work is item 2 at a unit-arc bound (which `g`-contacts can shadow the horn near `v`: only `g`-tiles at
+  `S′` tangent to `±a`, out-type), item 3 (`woodallCone` at `S′` for `g`, `Terminal` there), item 4 (the colours `y ≠ z` beside `g`'s `+a` horn at `S′`, the
+  SHAVE contradiction for `z = y`) and item 5 (the in-type `y`-tile at `P_{−2}`, Siamese to the lower flank, putting the horn's lower arc on `ω(P_{−2})`;
+  `noBoth`). Price: a `stuck_structure`-sized leaf, two sessions.
+
+**Re-pricing**: `nb4p` (§ 13.5's H, "the one leaf whose derivation must be re-read in full") took about 360 lines and about 60k tokens, first build clean
+after six scratch iterations; wave 3's GERM-R lemmas did the geometric half.
+
+## Stage 41 — SAVED (FS131-I4n): readback, the as-given build, and `bend_away`'s statement defect (sent to Keryx)
+
+*FS131-I4n (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-I4n-wave4.md` on `main`) continues this record from `a0c29483`.
+Its job: merge `fs131-w4m` (at `67256973`), make `Contact` cite SHAVE and RAY, move `n3_end` to wave 5 (item 289 (b)), prove `bend_toward` and
+`bend_away`.*
+
+**The brief's quotations against their sources** (standing rule 3). Five blocks: (1) "**What is left (3 in this job's files): UnitArc `bend_toward`,
+`bend_away`; BaseSteps `n3_end`.** Contact's three moves are IM3's." — this record, Stage 40: **matches exactly**. (2) item 288 — `plans/FS131-close-inventory.md`
+on `main` (l. 2171): **matches as a truncation**. (3) item 289 (l. 2187): **matches as a truncation**. (4) item 286 (l. 2148): **matches as a truncation**.
+(5) "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the" —
+`plans/FS131-w4-kernel-plan.md` § 14.2 (l. 887): **matches as a truncation**. `origin/fs131-w4m` is at `67256973` as the brief says. Items 288–289 read in
+full; I4m's Stages 38–40 and IM's record §§ 3, 6–10 (on `fs131-w4m`) read. No mismatch.
+
+**The worktree as given** (`a0c29483`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK —
+all 1744 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0 (`build/gate/build/20261005T003233Z-3932168.log`; driver log
+`data/fs131/i4/build-i4n-readback.log`): 6 `declaration uses sorry` — Contact 3 (l. 4064, 4078, 4094), UnitArc 2 (l. 2645, 2658), BaseSteps 1 (l. 1648) —
+and no other warning.
+
+**`bend_away` is false as written — a statement defect, sent to Keryx at this stage (message to "main").** Nothing in the statement puts the radius-2 arc
+`R₂(ᾱ)` in `F.dom`, and off the domain `closure (F.region c)` may meet `R₂(ᾱ)` in an infinite nowhere-dense set of angles; then `C₂` holds no non-degenerate
+interval and the conclusion demands the whole open arc be bent away, which no `F'` can do. **Counterexample** (`k = 2`, `c ≠ c'`, `P = 0`, `θ₁ = 0`,
+`θ₂ = ℓ = 0.1`, `η`, `δ` small): `K = {0.05} ∪ {0.05 + 0.001/n : n ≥ 1}`, `f = infDist · K`; `N = {ρe(φ) : 1 − η < ρ < 1 + η, −η < φ < ℓ + η}`,
+`Y = {ρe(φ) : 0 < φ < ℓ, 2 + f(φ) < ρ < 2 + f(φ) + δ}`, `dom = N ∪ Y`; one arc `circ 0 1 (−η) (ℓ + η)`; colour `c` on `N`'s inside and on `Y`, `c'` on
+`N`'s outside. Valid (inner pairs `< 1`: angular gap `< π/3`, radii `< 1`; inner–`Y` `> 1`; `Y` and `N`'s outside of diameter `< 1`); `IsRingArc 0 0 ℓ c c'`;
+`c ∉ coloursAt 0`; `C₂ = K` (the closure of `Y` meets the radius-2 circle where `f = 0`, points not in `dom`). For any `F'` with `AgreesOff F
+(thickening ε ᾱ)` (`ε < η/2`) and `F'.region j ⊆ F.region j` for `j ≠ c`: (1) if `r(φ)`, `φ ∈ K`, is `F'`-interior its colour is `c` (it lies on `F.Γ`),
+so by local constancy `z = (1 + s)e(φ)` is `F'`-interior of colour `c` for small `s > 0`, while `w = (2 + s)e(φ) ∈ Y` is untouched, of colour `c`, at
+distance `1`: `F'` invalid; (2) otherwise `r(K) ⊆ F'.Γ`; near `r(0.05)` finitely many `F'`-arcs, so one holds infinitely many points of `r(K)`, hence is
+`circ 0 1 θa θb` (`Arc.finite_inter_sphere_or_eq_circ`), and a point of `K` with parameter inside `(θa, θb)` is `F'.OnRingArc`, needing a non-degenerate
+interval inside `K`. **Likely repair** (Keryx's and the planner's call): `(hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom)` — the derivation's "`C₂` is a finite union
+of points and closed arcs" (FS112-N-proof N2-TAN) reads local finiteness there. **`bend_away_whole` is true as stated** with no domain hypothesis (`R₂`
+compact and disjoint from the closed class: positive distance; N2-ENV-away clears the lens), but today it is proved *through* `bend_away`; I proposed to
+prove it directly, statement unchanged, on the mirrored lens of `bend_toward`. No other Lean consumer of `bend_away` (grep on `fs131-w4`, `-w5`, `-w5p`,
+`-w4mm`). **`bend_toward` is true as stated, on my reading**: the lens's far colour `c'` is kept off by `c' ∉ coloursAt P` (a positive distance from `P`,
+for N2-ENV toward) and by N2-SIGN with N2-ENV's near clause; nothing reads the domain beyond a thickening of `ᾱ`.
+
+**The plan for `bend_toward`** (the construction, fixed before writing): the new boundary is one circular arc through `A`, `B` of radius `R > 1`, centre
+`C = P − d e(φ_m)` (`φ_m` the arc's middle angle, `h = ℓ/2`, `R² = 1 + 2d cos h + d²`, `d` small); the lens is `L = {z : |z − P| ≤ 1, R < |z − C|}`, which
+holds the open arc `O` and lies in the circular segment beyond the chord; in polar form `z = P + (1 − s)e(φ)`, `|φ − φ_m| < h` and `s < 2d·Δ(φ)`, so N2-ENV's
+profile is met by `2d ≤ ψ`. The arcs of `F'`: every arc of `F` not of the form `circ P 1 _ _` kept; each `circ P 1 θa θb` replaced by its sub-arcs over
+`[θa, θb] ∩ [θ₂ + 2πm, θ₁ + 2π(m + 1)]` for `m = ⌊(θa − θ₂)/2π⌋` and `m + 1` (non-degenerate ones; a dropped single point is `A` or `B`, on the new arc);
+the new arc `circ C R (φ_m − γ) (φ_m + γ)`, `γ = arccos((d² + R² − 1)/(2dR))`, whose carrier is exactly `sphere C R ∩ closedBall P 1`. Colour `c'` on `L`,
+`F`'s elsewhere. Validity by engine 1 (lens points clear: N2-ENV toward and near, N2-SIGN; points of `O` by `ne1_region`; two lens points are never at
+distance `1`, `|φ − φ'| < π/3`); no unit arc by engine 2. `Surgery`'s `Near.exists_cut` and `ArcMap.surgery` are ball-centred (they trim `B(v, ρ)` and add
+`∂B(v, ρ)`) and do not serve a cut along `ω(P)`; its `Arc.sub`, `Arc.nondegenerate_sub`, `Arc.carrier_sub` do, and are reused.
+
+## Stage 42 — SAVED (FS131-I4n): `fs131-w4m` merged; `Contact` cites SHAVE and RAY; `n3_end` moved to wave 5; the ruling on `bend_away`
+
+**Keryx's ruling on `bend_away` (inventory items 290–291, message of this stage)**: the repair is adopted — `bend_away` gains the hypothesis that the
+radius-2 arc `radiusTwoArc P θ₁ θ₂` lies in `F.dom`, with its docstring rewritten; `bend_away_whole` is proved directly on `bend_toward`'s lens mirrored,
+statement unchanged; order: `bend_toward`, `bend_away_whole`, the repaired `bend_away`; if the repaired leaf is not done when MERGE lands it moves out
+of wave 4. The statement change is made in the commit that proves `bend_away_whole` directly (so no proved leaf regresses to `sorry` meanwhile).
+**On the smallest hypothesis** (Keryx asked): the arc in the domain is a neighbourhood of it for free (the arc is compact, the domain open), so
+nothing more is needed for `C₂` to be locally a finite union of points and closed intervals.
+
+**The merge** (`8c50673c`, made without paths): `git merge origin/fs131-w4m` at `67256973`. `Contact` merged cleanly. Conflicts only in
+`ARCHITECTURE.md` (both sides kept: `fs131-w4m`'s `Contact`, `Cone`, `Surgery`, `Moves` rows — the two `Contact` descriptions were identical, `w4m`'s
+Imports cell adds `Cone` — and `fs131-w4`'s `UnitArc` row with its `Sectors` import) and `scripts/Axioms.lean` (both audit blocks, IC5's then IM's,
+above the `=== PURCHASED ===` banner; records 2509 + 2539 − 2368 at the base = 2680, no record twice). Item 244's `localSectors_disj` is kept
+(`LocalStructure` l. 4608). **Checks**: `tools/fs131_i4_treedupes.py` — 7,749 declarations, the same 3 pre-existing repeats as both parents
+(`data/fs131/i4/treedupes-i4n-merge.log`); `tools/fs131_qa1_dupes.py` — the same 6 cross-body names as at I4l's merge (it reads branch refs, not the
+working tree; `data/fs131/i4/qa1dupes-i4n-merge.log`); **the statement comparison against both parents** — a new tool,
+`tools/fs131_i4_mergestmts.py` (every theorem statement of `Proofs/`, keyed by name so files may move, checked three-way: a side that changed a
+name's statements from the merge base wins, both changing it is a conflict, and the merged tree must hold exactly the result): 5,416 names, 0
+mismatches, PASS (`data/fs131/i4/mergestmts-i4n.log`); **planted control** (`--plant`: one statement `fs131-w4m` added, altered in the merged view):
+"MISMATCH Arc.finite_inter_sphere_of_not_isUnitArc", FAIL, exit 1 (`data/fs131/i4/mergestmts-i4n-plant.log`), beside the faithful run's PASS;
+`tools/fs131_im_statements.py --check` and `tools/fs131_im_split.py --check` PASS; `tools/check_architecture.py` PASS
+(`data/fs131/i4/check-architecture-i4n-merge.txt`). **Build**: "build: OK — 446 of 446 batches, 5 module(s) rebuilt, 4 module(s) with warnings,
+9m35s", exit 0 (`build/gate/build/20261005T004304Z-4022253.log`; driver log `data/fs131/i4/build-i4n-merge.log`): `sorry` only — UnitArc 2, Contact 3,
+BaseSteps 1, Moves 1 (`exists_merge_aux`).
+
+**The citations** (`7011ce9e`): `Contact` imports `Plane/ValidMap/Moves` (no cycle: `Moves` → `Surgery` → `Cone`), and `exists_shave`, `exists_rayMerge`
+are `exact exists_shave_aux …`, `exact exists_rayMerge_aux …` (statements identical, `tools/fs131_im_statements.py --check` PASS); `exists_merge` stays
+`sorry`. `ARCHITECTURE.md`'s `Contact` Imports cell gains `Moves`; `check_architecture` PASS.
+
+**`n3_end` moved out** (`addf6e8e`, item 289 (b)): its section header, docstring and declaration deleted from `BaseSteps` and its record from
+`scripts/Axioms.lean` — the resulting `BaseSteps.lean` is **byte-identical** to FS131-I5d's on `fs131-w5` (`4a126455`, `diff` empty), so the later merge is
+clean. (I5d left `BaseSteps`' module docstring, l. 20, and `ARCHITECTURE.md`'s `BaseSteps` row still naming `n3_end`; I left them identical for the
+same reason — a stale mention for whoever merges the waves.)
+
+**Build of both** (one run): "build: OK — 446 of 446 batches, 3 module(s) rebuilt, 3 module(s) with warnings, 10m0s", exit 0
+(`build/gate/build/20261005T010142Z-4169366.log`; driver log `data/fs131/i4/build-i4n-cite.log`): `sorry` only — UnitArc 2 (`bend_toward`, `bend_away`),
+Contact 1 (`exists_merge`), Moves 1 (`exists_merge_aux`); none in `BaseSteps`.
+
+**The bends in scratch** (`data/fs131/i4/scratch-i4n/Cut.lean`, against the real oleans, iteration only): engine 3 (`cutArcs` and its lemmas), the
+generic bend (`bendMap` and its five transfer lemmas), the lens geometry, and `bend_toward'`, `bend_away_whole'` elaborate sorry-free, both printing
+`[propext, Classical.choice, Quot.sound]`; 17 s, 3.4 GB. They go into `UnitArc` next.
+
+## Stage 43 — SAVED (FS131-I4n): `bend_toward` and `bend_away_whole` proved (engine 3, the generic bend, the lens geometry); `bend_away` repaired and left `sorry` — it leaves wave 4 (items 291 (d), 295 (b))
+
+**The amendment of 2026-10-05** (inventory items 294–295), read back: its quotation of item 295's first line, and the 2026-10-04 amendment's of item 291's,
+match `plans/FS131-close-inventory.md` on `main` (l. 2274, 2210) as truncations. For this job: `bend_away`'s trigger is my hand-back; `exists_merge` and
+`exists_merge_aux` stay `sorry` (the merge-and-gate job deletes them).
+
+**Engine 3 and the bend** (in `UnitArc`, a block before `r2Contacts`; the namespace `ArcMap` is closed for the geometry and reopened):
+- *The cut* — `cutArcs F P θ₁ θ₂` (defs `cutLo`, `cutHi`): every arc of `F` that is not an arc `circ P 1 θa θb` of `ω(P)` kept; each arc of `ω(P)` replaced by
+  its non-degenerate pieces over `[θa, θb] ∩ [θ₂ + 2πm, θ₁ + 2π(m + 1)]`, `m ∈ ℤ`. Lemmas: `cutArcs_nondegenerate`, `cutArcs_subset`, `finite_cut_pieces`,
+  `cutArcs_locallyFinite`, `ringPt_mem_openArc_iff`, `disjoint_piece_openArc` (pieces miss `r((θ₁, θ₂))`), `mem_cut_of_mem_circ` (off the open arc and its
+  two ends, a point of an arc of `ω(P)` is on a piece — a dropped single-point piece is an end), `mem_cutArcs_iff`, `exists_kept_of_mem_openArc`.
+- *The generic bend* — `bendMap F P θ₁ θ₂ a L j` (the cut, one new arc `a`, colour `j` on the lens `L`: `bendCol`) and its transfer lemmas, each over named
+  hypotheses on `L` and `a` only: `bend_hlc` (local constancy — inside the lens off `ω(P)` by openness; at the open arc, the lens on one side and `F`'s class
+  of `j` on the other, `hside`, `hcol`; off the lens `F`'s, `closure L ⊆ L ∪ a.carrier`), `bendMap_interiorPts`, `bendMap_agreesOff`,
+  `bendMap_ringArcsWithin` (engine 2), `bendMap_valid` (engine 1: the lens clear for `j`, no unit pair in it), `bendMap_region`, `bendMap_not_onRingArc`
+  (near a point of the open arc only kept arcs of `F` meet `ω(P)`, finitely often, `Arc.finite_inter_sphere_or_eq_circ`; the domain read only at the open
+  arc). `Surgery`'s `ArcMap.surgery` and `Near.exists_cut` are ball-centred (they trim `B(v, ρ)` and add `∂B(v, ρ)`), so they do not serve a cut along
+  `ω(P)`; none of `Surgery` is imported.
+- *The lens geometry* (outside `ArcMap`): `cos_sub_cos_le_sub`, `abs_le_of_cos_le`, `abs_lt_of_cos_lt`; the profiles `polar_toward(_strict)`,
+  `polar_away(_strict)` (from `1 − ‖w‖² ≤ 2d(Re w − cos h)`, resp. `‖w‖² − 1 ≤ …`, `d ≤ 1/2`: `|arg w| ≤ h` and depth `≤ 2d(h − |arg w|)`); the frame along
+  `e φ` (`norm_frameDir`, `eq_polar_frameDir`, `dist_sq_sub_dir`, `dist_sq_add_dir`, `re_frameDir_ringPt`, `re_frameDir_sub_dir`, `re_frameDir_add_dir`);
+  **`carrier_circ_arccos`** (the arc `circ C R (φ ∓ arccos(τ/R))` is the circle's part with component `≥ τ` along `e φ`), whence `toward_carrier` (the
+  circle about `P − d e(φ_m)` of squared radius `1 + 2d cos h + d²` inside `B̄(P, 1)`) and `away_carrier` (about `P + d e(φ_m)`, `1 − 2d cos h + d²`, outside
+  `B(P, 1)`); `toward_polar(_strict)`, `away_polar(_strict)`, `toward_pairs` (two toward lens points: `|z − z'|² < ρ² + ρ'² − ρρ' ≤ 1`),
+  `dist_polar_polar_sq`, `dist_polar_ringPt`, `min_add_sub_eq`, `le_on_Icc_of_Ioo`, `ge_on_Icc_of_Ioo`, `one_add_le_two_cos`, `away_mem_lens` (an away lens
+  point lies in `B̄(A, 1) ∩ B̄(B, 1)`), and in `ArcMap` `mem_thickening_ringArc_of_polar`, `away_circle_facts`, `away_pairs`.
+- *Clearness* (N2-TOWARD's, N2-AWAY's): `toward_clear` (a near point of the outer class lies in `B̄(A, 1) ∩ B̄(B, 1)` by N2-SIGN and `le/ge_on_Icc_of_Ioo`,
+  within `< 1` of the lens point by `n2_env_near`; a far one in `B(P, r)` by `n2_env_toward`, which the class misses since `c' ∉ coloursAt P`); `away_clear`
+  (the same with `n2_env_near_away` off `B(P, r)` and `n2_env_away`'s `r`-neighbourhood of `R₂(ᾱ)`, which the class misses by `hR2`); `away_lens_clear`
+  (points of `ω(P)` in the lens by `ne1_region`).
+
+**`bend_toward`** (FS112-N2-BENDS, N2-TOWARD), statement unchanged: `ℓ ≤ 60°` by `l60_le`; `r` the distance of the outer class from `P`; `ψ₁`, `ψ₂` from
+`n2_env_toward`, `n2_env_near`; `d = min(ψ₁, ψ₂, ε)/4`; the lens `L = {|z − P| ≤ 1, 1 + 2d cos h + d² < |z − (P − d e(φ_m))|²}` (in polar form inside the
+angle with depth `< 2dΔ`), the new arc `toward_carrier`'s; `bendMap` with `j = c'`, `S = (B̄(P, 1))ᶜ`. **`bend_away_whole`** (N2-AWAY), statement
+unchanged, now proved directly (it no longer cites `bend_away`): the mirror, `r` below the class's distances from `P` and from the compact `R₂(ᾱ)` and `≤ 1/2`,
+`d = min(ψ₁, ψ₂, ε, 1/2)/5 ≤ 1/10`, `L = {1 ≤ |z − P|, |z − (P + d e(φ_m))|² < 1 − 2d cos h + d²}`, `j = c`, `S = B(P, 1)`; the pairs by `away_pairs`. The
+declaration's single heartbeat budget forced the clearness and the pairs into children (`away_lens_clear`, `away_pairs`, `away_circle_facts`), per LEAN.md.
+
+**`bend_away`**: the ruled repair applied (items 290–291 (a)) — `(hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom)` after `hin`, docstring rewritten (the repair, its
+reason, the Stage-41 counterexample's address); otherwise unchanged (`tools/fs131_i4_stmts.py a0c29483…`: 1 changed, `ALLOWED bend_away`). **Not proved; it
+leaves wave 4 at this hand-back** (items 291 (d), 295 (b)). What its proof needs, for its job (my reading, one mind, not a derivation): (1) `C₂(ᾱ)` is a finite
+union of points and closed intervals — local finiteness at the compact `R₂(ᾱ) ⊆ dom` with I4m's `Arc.finite_inter_sphere_two_or_subset`; (2) the set to clear
+is `(θ₁, θ₂)` minus the non-degenerate components of `C₂`, a finite union of open intervals; (3) the lens over each is `B̄`-intersection of finitely many
+discs (corner circles at free ends as here; at each isolated contact `w₀` and at each component end, a disc of radius `1/κ > 1` containing `B(P, 1)` and
+tangent at `r(w₀)`) minus `B(P, 1)`, its boundary arcs cut by half-planes (`carrier_circ_arccos`), `bendMap` unchanged; (4) clearness at an isolated contact
+`q₀ = P + 2e(w₀)`: the inner class near `q₀` is far (N2-SIGN), so outside `⋃_{w ∈ int α} B(r(w), 1)`, and its sectors at `q₀` (wave 3's chart at `q₀`) rise
+linearly or with a tangent germ of curvature `< 1/2` (curvature `1/2` on a side is an interval of `C₂` there); with `1 − κ` small against that rise the cap
+of `ω(z)` beyond radius 2 misses them — an inf-convolution inequality `ε₀x² − c(y − x)² < Gy²`; (5) **at an end of the arc** the uncovered region near
+`q_A` is bounded by `ω(A)` (curvature `1`, tangent to the radius-2 circle at `q_A`) on the far side, so a class hugging `ω(A)` from outside is not covered by
+(4)'s curvature `< 1/2` analysis; N2-AWAY says "the end vertex's own blocker is exactly R2 at the end" [hand, one mind] — this step should be re-derived
+before the kernel work starts. Price: two to three sessions, (4) and (5) the risk.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 582 names, 56 added (the new theorems), `--check` 0 missing. **Spec examples** for the five new definitions:
+`cutLo`/`cutHi` values, the cut of `unitArcPlane`'s arc `r([0, π])` at `(π/3, 2π/3)` (the piece `r([2π/3, π])` present, the whole arc absent), `bendCol` on the
+one-colour plane, `bendMap`'s fields. **Statements**: `tools/fs131_i4_stmts.py 89af8b63 …UnitArc.lean --allow bend_away` — 141 old, 197 new, 56 added,
+0 removed, 1 changed (`ALLOWED bend_away`), exit 0. **Duplicates**: `tools/fs131_i4_treedupes.py` — 7,809 declarations (7,749 − `n3_end` + 56 theorems + 5
+definitions), the same 3 pre-existing repeats (a docstring line beginning `class` read as a declaration by the textual scanner was reworded). No import
+changed; `check_architecture` PASS. No `axiom`, no `native_decide`.
+
+**Build**: "build: OK — 446 of 446 batches, 3 module(s) rebuilt, 3 module(s) with warnings, 10m3s", exit 0 (`build/gate/build/20261005T012209Z-120054.log`;
+driver log `data/fs131/i4/build-i4n-bends.log`): `sorry` only — UnitArc 1 (`bend_away`, l. 3973), Contact 1 (`exists_merge`), Moves 1 (`exists_merge_aux`).
+**Axioms** (`data/fs131/i4/axioms-i4n-43.txt`, from `data/fs131/i4/axioms-i4n-43.lean` against this build's oleans, not a gate log): 62 records —
+`bend_toward`, `bend_away_whole`, `exists_shave`, `exists_rayMerge` and the 56 children exactly `[propext, Classical.choice, Quot.sound]`; `bend_away` and
+`exists_merge` `sorryAx` besides.
+
+**What is left on `fs131-w4` (3 `sorry`)**: `bend_away` (leaves wave 4 at this hand-back, items 291 (d), 295 (b)); `exists_merge`, `exists_merge_aux` (the
+merge-and-gate job deletes them, item 295 (a)).
+
+## Stage 44 — SAVED (FS131-G4): readback, the as-given build, and what this job may change
+
+*FS131-G4 (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-G4-land.md` on `main`) continues this record from `71cca146`.
+Its job: wave 4's landing — delete the three declarations that left the wave, rename `framePt`, teach `tools/fs131_k4_decls.py` `_root_.` names, register
+wave 4's vacuity carriers beside wave 2's and settle the vacuity notes, the full gate on one commit, merge `main`, the gate again, and fast-forward `main`.*
+
+**The brief's quotations against their sources** (standing rule 3), each read in `plans/FS131-close-inventory.md` at `main` (`6403c145`) unless named:
+item 297 (l. 2307), item 296 (l. 2285), item 295 (l. 2274), item 291 (l. 2210), item 281 (l. 2089), item 271 (l. 1980), item 260 (l. 1863), item 252
+(l. 1807), item 266 (l. 1927), item 144 (l. 892), item 270 (l. 1966): each **matches as a truncation** (the brief quotes each item's first line). The
+brief's parenthetical summaries read against the items in full: item 297's tasks (three deletions with their records, the `_root_.` tool fix, the
+`framePt` rename, the carriers, the vacuity notes, the gate with both self-tests, the merge with `fs131_qa1_dupes.py`, the fast-forward) — as item 297
+says; item 281 (b), item 271's `framePt` clause (`Plane/Slack` l. 2800 against `Plane/ValidMap/Basic` l. 44) and its carrier clause, item 260's
+re-run clause, items 252 and 266's vacuity notes, item 144 (b)'s carriers — each as the item says. The plan's two quotations
+(`plans/FS131-w4-kernel-plan.md` § 14.4 items 1 and 3, l. 919, l. 925 on this branch): **match exactly** (item 1 as a truncation). No mismatch.
+I read the record's Stages 41–43 and the plan's § 14 in full.
+
+**The worktree as given** (`71cca146`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK —
+all 1747 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0 (`build/gate/build/20261005T013928Z-247025.log`; driver log
+`data/fs131/g4/build-g4-readback.log`): 3 warnings, all `declaration uses sorry` — UnitArc l. 3973 (`bend_away`), Moves l. 1667 (`exists_merge_aux`),
+Contact l. 1525 (`exists_merge`). `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'` over `Proofs/`: those three lines (UnitArc 3980, Moves 1673, Contact
+1531). `lebesgue_covering_square` is no longer `sorry` (FS131-LEB landed; `SVMap` l. 468 cites `LebesgueCovering.lebesgue_covering_square`).
+`python3 tools/fs131_k4_decls.py --check`: "495 names, 2 missing", exit 1 — the two `_root_.` theorems of `Contact` (l. 368, l. 975), read as
+`HadwigerNelson.Plane.ArcMap._root_.HadwigerNelson.Plane.BranchGerms.frameY_lt_of_mem` and `…lt_frameY_of_mem` (item 281 (b)'s defect, reproduced).
+
+**What this job may change** (the brief's touches and § 14.2): the three deletions — `ArcMap.bend_away` (`UnitArc`), `ArcMap.exists_merge` (`Contact`),
+`ArcMap.exists_merge_aux` (`Moves`) — each with its docstring and its `#print axioms` record, and the header lines that name them (`Contact`'s
+"* **FS110-W-MERGE**: `exists_merge`."; `UnitArc`'s bends line; `Moves`' module docstring), nothing else of their modules; the `framePt` rename with
+every use; inhabitants and docstring lines the vacuity step needs, in wave 4's modules; `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`,
+`scripts/Vacuity.lean`, `scripts/vacuity.sh`, `scripts/vacuity-baseline.txt`, `scripts/axioms-controls.txt`, `tools/fs131_k4_decls.py`, `tools/fs131_g4_*.py`,
+`data/fs131/g4/`, this record, the report; `main` by fast-forward only. **What it may not**: any statement (no hypothesis, conclusion or definition the
+statements use changes; `framePt`'s rename changes a name, not a definition), any `axiom`, `CLAUDE.md`, `LEAN.md`, `tools/claude_md_fact_audit.py`, another
+job's tools. `Near.RayConfig.exists_merge` (`Moves` l. 1481, proved, read by `exists_rayMerge_of_clear`) is a different declaration and stays.
+
+## Stage 45 — SAVED (FS131-G4): the three declarations deleted, `framePt` renamed `fromFrame`, `tools/fs131_k4_decls.py` taught `_root_.` names; 0 `sorry`
+
+**The deletions** (items 291 (d), 295 (a), 297): `ArcMap.bend_away` (`UnitArc`), `ArcMap.exists_merge` (`Contact`), `ArcMap.exists_merge_aux` (`Moves`), each with
+its docstring, and their three `#print axioms` records in `scripts/Axioms.lean` (exact-line matches; `Near.RayConfig.exists_merge` and `bend_away_whole` kept).
+Header lines: `Contact`'s "* **FS110-W-MERGE**: `exists_merge`." and its now-empty section header `/-! ## FS110-W-MERGE -/` (I4n's precedent for `n3_end`'s);
+`UnitArc`'s bends line now names `bend_toward`, `bend_away_whole`; `Moves`' module docstring (title "SHAVE and MERGE-RAY (FS110-N4-SHAVE, N4-RAY)", and the
+list of `_aux` statements without `exists_merge_aux`). `ARCHITECTURE.md`: `Contact`'s row drops "FS110-W-MERGE (`exists_merge`)"; `Moves`' row names the two
+moves and says W-MERGE left wave 4 (item 295 (a)). Nothing else in the three modules changed (`git diff`: 51 lines deleted, 4 rewritten). The deleted text is
+on `71cca146` and on `fs131-w4mm` / `fs131-w4ba` for the later landings. **Consequence for another job's tool** (not edited, not a gate check of this
+brief): `tools/fs131_im_statements.py --check` now fails on `exists_merge` ("statement missing (Moves)") by design of item 295 (a); IMM2's landing restores
+both statements and its check.
+
+**The rename** (item 271): wave 4's `HadwigerNelson.Plane.framePt` (`Plane/ValidMap/Basic` l. 44, colliding with wave 2's `Plane/Slack` l. 2800, a different
+definition) is now **`fromFrame`** — "the point from frame coordinates", the inverse of `frameX`, `frameY` (`frameX v α (fromFrame v α x y) = x`). Every
+identifier containing `framePt` in wave 4's three files was renamed by one substitution `framePt → fromFrame` (102 occurrences in `Basic`, `UnitArc`, `Moves`,
+`scripts/Axioms.lean`, `ARCHITECTURE.md`; 102 after): the definition, `frameX_fromFrame`, `frameY_fromFrame` (root and `RayGap` copies), `sq_dist_fromFrame`,
+`normalPt_add_eq_fromFrame`, `normalPt_sub_add_eq_fromFrame`, `tanHeight_one_fromFrame`, and their seven records. The definition's body is unchanged.
+`fromFrame` occurs nowhere on `main`, `fs131-w5`, `-w5p`, `-w5x`, `-w4mm`, `-w4ba`, `-ww` (`git grep`, 0 each). **For wave 5's merges**: `fs131-w5`'s
+`ValidMap/FlankUA` (and the copies of `Basic`/`UnitArc`/`Moves` on `-w5p`, `-w5x`, `-w4mm`, `-ww`) use `framePt` and its lemma names; after this landing they
+take the same substitution in their own files. Where such a file imports `Plane/Slack` (wave 2's `framePt (x : ℂ) (θ s t : ℝ)`, same arity), a missed
+`framePt` would elaborate against the other definition — a merge check should grep `framePt` in wave 4 and 5's files and find none.
+
+**The tool** (item 281 (b)): `tools/fs131_k4_decls.py` resolves a theorem written `_root_.X` to `X` (`qualify`). Before: "495 names, 2 missing" (the two
+`_root_.` theorems of `Contact`, Stage 44). Controls: `--plant-root` (the resolution off) "FIRED (2 missing, 2 _root_ names)", exit 0 — two-sided: it must
+miss exactly the `_root_.` names and no other (`data/fs131/g4/k4decls-plant-root.log`); a planted dropped record (`BranchGerms.frameY_lt_of_mem`'s line removed
+from a copy-restored `scripts/Axioms.lean`) — `--check` "493 names, 1 missing", exit 1 (`data/fs131/g4/k4decls-plant-drop.log`; the file restored, `cmp`
+identical); the faithful `--check` "493 names, 0 missing", exit 0 (`data/fs131/g4/k4decls-check.log`) — 493 = 495 − `bend_away` − `exists_merge`
+(`exists_merge_aux` is in `Moves`, outside K4's five modules). The old `--plant` (namespaces dropped) still fires (491 missing).
+
+**Build**: "build: OK — 446 of 446 batches, 11 module(s) rebuilt, 0 module(s) with warnings, 11m7s", exit 0 (`build/gate/build/20261005T014409Z-283282.log`;
+driver log `data/fs131/g4/build-g4-deletions.log`): 0 warnings (`grep -c warning` on the full log: 0). `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'` over
+`Proofs/`: 0. `tools/check_architecture.py`: PASS (`data/fs131/g4/check-architecture-g4-45.txt`). `tools/fs131_i4_treedupes.py`: 7,806 declarations (7,809 − 3),
+the same 3 pre-existing repeats (`data/fs131/g4/treedupes-g4-45.log`).
+
+**The ruling of this stage** (inventory item 304, brief amendment of 2026-10-05; its first line matches `plans/FS131-close-inventory.md` on `main` l. 2404 as a
+truncation): my message to Keryx — the vacuity note on `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N` can be settled neither way here
+(`VACUITY DECLARED:` reads STALE on any site whose carrier is not proved empty, and these sites are GENERIC; no theorem empties the local class; a model is a
+bowtie-sized construction, sketched in the message) — is ruled: docstring notes naming `stuck_chain` (FS110-N4-FIN) as the refutation on a whole terminal
+plane map, no marker, no model; the sketch goes to the inventory as a stub to write. Item 144 (b): `AeProperRegions` is this job's (item 153 moved the vacuity
+half to each wave's landing; the brief's "done by FS131-T3" is the coordinator's slip, acknowledged); `CPColouring` lives only on `main` (wave 2), so its
+entry is merged at the merge.
+
+## Stage 46 — SAVED (FS131-G4): wave 4's carriers registered, the stuck notes settled as ruled, and the full gate green on the pre-merge tree
+
+**The vacuity notes** (items 252, 266; ruling 304): no marker, no model. The three docstrings now say no model is held, none is expected, and name the
+refutation on a whole terminal plane map — `stuck_structure`: "... and none is expected: it is a step inside FS110-N4-PROP's proof by contradiction — on a
+whole terminal plane map the configuration is refuted along the normal line (`stuck_chain`, whose chain `n4_fin`, FS110-N4-FIN, refutes)"; `stuck_pole_N` and
+`stuck_structure_flanks` the same sentence (the latter's old "(`stuck_chain`, FS110-N4-FIN)" made exact: `stuck_chain` is N4-PROP, `n4_fin` is N4-FIN). No
+consumer reads any of the three outside a refutation: in wave 4 only `stuck_structure` → `stuck_structure_flanks` → `stuck_pole_N` and `stuck_chain`'s chain;
+on `fs131-w5`, `-w5p`, `-w5x`, `-ww`, `-w4mm` they appear in docstrings only (`git grep`, Stage 45's message).
+
+**The carriers** (`scripts/Vacuity.lean`, the procedure "How a later wave registers its carriers"; my decisions, recorded in the file as "Wave 4's carriers
+(FS131-G4 …)"). **IN** — each with a closed piece of evidence in the library and three controls:
+- `ArcMap.IsHorn`: refuted by `ArcMap.bowtie_not_isHorn_I_axis : ¬ bowtie.IsHorn I 0 (-1) 1 1` (new, `BaseSteps`, a closed instance of
+  `bowtie_not_isHorn_I`, whose variable angles make it no evidence); inhabited by `cuspFrag_isHorn`. Controls 39–41.
+- `ArcMap.IsStuck`: refuted by `ArcMap.bowtie_not_isStuck_I : ¬ bowtie.IsStuck I` (new, `BaseSteps`, `bowtie_isStuck`'s second clause; the conjunction is no
+  evidence). Controls 42–44.
+- `ArcMap.Condition5`: refuted by `ArcMap.unitArcPlane_not_condition5 : ¬ unitArcPlane.Condition5` (new, `Basic`: the arc `r([0, π])` meets `ω(0)` in the
+  infinite set `spherePt 0 1 '' (0, π)`, `injOn_spherePt`). Controls 45–47.
+- `Plane.AeProperRegions` (items 144 (b), 153): `instIsEmptyAeProperRegionsZero : IsEmpty (AeProperRegions 0)` (the empty union is not dense) and
+  `instIsEmptyAeProperRegionsOne : IsEmpty (AeProperRegions 1)` (new, `SVMap`: the class is open and dense, so some `z` near `x + 1` has `z − 1` in a ball about
+  `x` inside the class, two points of one class at distance `1`); inhabited at `7` by `sevenBrickRegions`. Controls 48–50.
+**OUT** (reasons in the file): `Terminal`, `TerminalOn` (the plan recommended IN; refuting either at a concrete map needs a map with an available move, which
+no theorem exhibits, and every site is at a variable map — register when `¬ X.Terminal` is a theorem); the three move preconditions; the sector, flank,
+contact and clearness predicates; the four unit-arc contact kinds and `IsR2Arc` (built on the tracked `IsRingArc`); `Condition6`, `InMK`; `AgreesOff`,
+`RingArcsWithin`; `IsCoveringPair`; `ArcMap.Near`, `Near.Small`, `Near.RayConfig`; `IsLeavingCentre`, `StripHolds`, `MIn`, `AeProperRegions.IsRegion`. Records for
+the five new declarations added to `scripts/Axioms.lean`; `tools/fs131_k4_decls.py --check` "495 names, 0 missing" (493 + the two `BaseSteps` theorems).
+Controls numbered 39–50 to follow wave 2's 33–38 on `main` (the pre-merge tree lacks those; the merge joins them).
+
+**Controls watched**: the self-test's 12 new lines all `ok` (each `VACUOUS` from its refutation, each `GENERIC` at a variable instance, each `UNKNOWN` at an
+instance no closed theorem decides). **Negative control**: the four names misspelt in `trackedProps` (`IsHornX`, …) in the real file, the self-test re-run:
+exit 1, exactly the 12 new controls FAIL ("expected … and it is absent"), none of the others (`data/fs131/g4/vacuity-selftest-plant-misspelt.log`; full output
+`build/gate/vacuity-self-test/20261005T023001Z-589589.log`); the file restored from a copy, `cmp` identical.
+
+**The full gate on the pre-merge tree** (the tree of this stage's commit; `Proofs/`, `scripts/`, `tools/` unchanged after the runs):
+- **Build**: "build: OK — 446 of 446 batches, 11 module(s) rebuilt, 0 module(s) with warnings, 11m18s", exit 0 (`build/gate/build/20261005T021339Z-489606.log`;
+  driver `data/fs131/g4/build-g4-carriers.log`); `grep -c warning` on the full log: 0 (its one "error" line is the up-to-date probe's `--no-build` refusal,
+  which starts the walk).
+- **Sorry**: `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'` over `Proofs/`: 0.
+- **Axioms**: "axioms: OK — 2720 clean, 12 axiom-free, 0 imported, 5 declared purchase(s)", exit 0; 2,737 records, every one clean or a declared purchase;
+  purchases the same five (rung A's spindle, no wave-4 record); no `native_decide` (`build/gate/axioms/20261005T022537Z-572085.log`; driver
+  `data/fs131/g4/axioms-pre.log`). `--self-test`: "every planted fault fired, and every partner passed", 23 controls, exit 0 (the branch's own
+  `axioms-controls.txt`, T3's, counts 0/0/0 — this tree has no import; `build/gate/axioms-self-test/20261005T022541Z-572334.log`; driver
+  `data/fs131/g4/axioms-selftest-pre.log`).
+- **Vacuity**: "vacuity: OK", exit 0: `declarations=9649 refutations-skipped=85 sites=649`, `vacuous=0 stale=0 declared=3 witnessed=25 generic=619 unknown=2`
+  (`build/gate/vacuity/20261005T022706Z-578881.log`; driver `data/fs131/g4/vacuity-pre.log`). Of the 649 sites, 84 are the four new carriers' — `IsHorn` 41
+  GENERIC + 1 WITNESSED (`cuspFrag_isHorn`), `Condition5` 25 GENERIC, `IsStuck` 7 GENERIC, `AeProperRegions` 9 GENERIC + 1 WITNESSED (`sevenBrickRegions`);
+  `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N` read GENERIC on `Valid`, `Condition5`, `IsStuck`, `IsHorn`. The reconciliation against `main`'s
+  recorded counts is made on the merged run (Stage 47). `--self-test`: OK, 44 `ok` lines (the branch's 32 controls and `silent` lines, and the 12 new), exit 0
+  (`build/gate/vacuity-self-test/20261005T022806Z-580417.log`; driver `data/fs131/g4/vacuity-selftest-pre.log`).
+- `tools/check_architecture.py`: PASS (`data/fs131/g4/check-architecture-pre.txt`); `python3 tools/fs131_k4_decls.py --check`: exit 0
+  (`data/fs131/g4/k4decls-check-pre.log`).
+
+## Stage 47 — SAVED (FS131-G4): `main` merged (`42ca1740`), and the full gate green on the merged commit, every count reconciled
+
+**Before the merge**: `tools/fs131_qa1_dupes.py` (branch refs, `fs131-w4` at `e13835e2`): 17 names in two bodies' own files, none a collision this merge
+meets — 11 are `k4`/`w4` pairs (the skeleton `f620977c`, an ancestor of `fs131-w4`, against the block moved from `Contact` to `Cone`, item 254: one declaration);
+4 are `w4`/`ww` (`abs_dot_le`, `dot_add_left`, `dot_e_e`, `isOpen_shadow`: Woodall's branch is not on `main`; its later landing deletes its copies, item 142);
+`conj_e` is the pre-existing `Chord`/`SixFragment` repeat already on `main`; `framePt` is `w2:Plane/Slack` against `k4:Plane/ValidMap/Basic`, the skeleton's
+name, which `fs131-w4` no longer declares (Stage 45; `grep framePt Proofs/` on the merged tree: `Plane/Slack.lean` only)
+(`data/fs131/g4/qa1dupes-premerge.log`).
+
+**The merge** (`42ca1740`, `git merge --no-ff origin/main` at `b100fc6b`; a merge commit cannot take paths, so it was made after explicit `git add`s of the
+resolved files). Files both sides changed since `cff2c33e`: `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean` (auto-merged: both sides' additions;
+records 2,737 + 2,532 − 1,872 at the base = 3,397, no record twice; 199 imports, none twice), and `scripts/Vacuity.lean`, `scripts/vacuity-controls.lean`,
+`scripts/vacuity.sh` (conflicts, all three resolved by keeping both sides — wave 2's carrier entry, `trackedProps` line, controls 33–38 and `expect` lines first,
+then wave 4's; wave 2's closing `]` became `,`). In the same commit, item 271's owed tool defect: `scripts/vacuity.sh`'s banner said "twenty planted
+defects" for 38 controls; it now states no count and the self-test counts what it runs ("OK — all 50 controls behaved …"; the failing path "FAIL — n of m
+control(s)"). **Checks**: `tools/fs131_i4_mergestmts.py HEAD origin/main` (I4n's three-way statement check, used, not edited): 6,098 names, 0 mismatches, PASS;
+its `--plant`: "MISMATCH AeColouring.exists_fill", FAIL, exit 1 (`data/fs131/g4/mergestmts-g4.log`, `…-plant.log`); `tools/fs131_i4_treedupes.py`: 8,575
+declarations, the same 3 pre-existing repeats (`data/fs131/g4/treedupes-g4-merge.log`).
+
+**The full gate on the merged commit `42ca1740`** (the baseline header written after it, Stage 47's commit; `Proofs/` unchanged):
+- **Build**: "build: OK — 449 of 449 batches, 14 module(s) rebuilt, 0 module(s) with warnings, 10m45s", exit 0 (`build/gate/build/20261005T023736Z-648846.log`;
+  driver `data/fs131/g4/build-g4-merged.log`); `grep -c warning` on the full log: 0. **Sorry**: 0.
+- **Axioms**: "axioms: OK — 3376 clean, 12 axiom-free, 4 imported, 5 declared purchase(s)", exit 0; 3,397 records (`build/gate/axioms/20261005T025216Z-771937.log`;
+  driver `data/fs131/g4/axioms-merged.log`). Reconciled: clean 2,512 (`main`) + 2,720 (branch) − 1,856 (base) = 3,376; axiom-free 11 + 12 − 11 = 12 (wave 4's
+  `BranchGerms.fin3_adj`); imported 4 (wave 2's, unchanged: wave 4 declares no import); purchases 5 (unchanged). Wave 4's 865 records: 864 on the standard three
+  or fewer, 1 axiom-free; no `native_decide`, no `axiom`. **`--self-test`** (item 260): "23 controls … OK — every planted fault fired, and every partner passed",
+  exit 0, with `main`'s `scripts/axioms-controls.txt` unchanged — the counts its controls read (imported 4, declared 1, library 1; `banner_dropped`'s two
+  consequences) are wave 2's import, which wave 4 does not move, so no expected count needed fixing (`build/gate/axioms-self-test/20261005T025220Z-772373.log`;
+  driver `data/fs131/g4/axioms-selftest-merged.log`).
+- **Vacuity**: "vacuity: OK", exit 0: `declarations=10525 refutations-skipped=92 sites=705`, `vacuous=0 stale=0 declared=3 witnessed=27 generic=673 unknown=2`
+  (`build/gate/vacuity/20261005T025356Z-783452.log`; re-run after the baseline header, `build/gate/vacuity/20261005T025904Z-812893.log`, "recorded counts in
+  scripts/vacuity-baseline.txt's header: match (9 of 9 compared)"; drivers `data/fs131/g4/vacuity-merged.log`, `vacuity-final.log`). **Reconciled row for
+  row** by a new tool, `tools/fs131_g4_vacdiff.py` (`main`'s run `fs131-w2/build/gate/vacuity/20261004T225327Z-3129569.log`, the branch's Stage-46 run, the
+  merged run; base counts from the branch's `CLAUDE.md` at `cff2c33e`: 8500, 57, 460, 0, 0, 3, 21, 434, 2): SITE rows — `main` 516, branch 649, union 705,
+  merged 705, none outside the union and none missing; EVIDENCE rows — 57, 60, union 66, merged 66; every count = `main` + branch − base (PASS,
+  `data/fs131/g4/vacdiff-merged.log`). Its plant (one merged SITE row dropped): "1 of a parent missing", FAIL, exit 1 (`data/fs131/g4/vacdiff-merged-plant.log`).
+  **What changed against `main`'s recorded counts, explained**: declarations +1,149 (wave 4's declarations, the three deletions net, generated API included);
+  refutations-skipped +28 (wave 4's theorems concluding `False`, `nb4p` among them); sites +189, all wave 4's rows — 84 on the four new carriers (`IsHorn` 41
+  GENERIC + 1 WITNESSED, `Condition5` 25, `IsStuck` 7, `AeProperRegions` 9 GENERIC + 1 WITNESSED) and 105 on carriers already tracked (`Valid` 91 GENERIC,
+  `IsRingArc` 12 GENERIC + 1 WITNESSED, `Simple` 1 WITNESSED); witnessed +4 (`cuspFrag_isHorn`, `sevenBrickRegions`, `l60Frag_isRingArc`, `halfDisc_simple`);
+  generic +185; vacuous, stale, declared, unknown unchanged (0, 0, 3, 2: the baseline's two `hexShell` entries). Evidence +9: five emptiness proofs (this job's
+  `bowtie_not_isHorn_I_axis`, `bowtie_not_isStuck_I`, `unitArcPlane_not_condition5`, the two `AeProperRegions` instances) and four witnesses (the four above).
+  **`--self-test`**: "OK — all 50 controls behaved", exit 0 (`build/gate/vacuity-self-test/20261005T025507Z-789080.log`, and after the plant below
+  `…/20261005T030014Z-818800.log`; drivers `data/fs131/g4/vacuity-selftest-merged.log`, `vacuity-selftest-final.log`). **Negative control on the merged tree**:
+  `IsStuck` misspelt in `trackedProps`: "FAIL — 3 of 50 control(s) did not behave as designed", exactly controls 42–44, exit 1
+  (`data/fs131/g4/vacuity-selftest-merged-plant.log`), the file restored from a copy (`cmp` identical) before the final green run.
+- `tools/check_architecture.py`: PASS (`data/fs131/g4/check-architecture-merged.txt`); `python3 tools/fs131_k4_decls.py --check`: "495 names, 0 missing", exit 0
+  (`data/fs131/g4/k4decls-check-merged.log`).
+- **`scripts/vacuity-baseline.txt`'s header** written: `declarations=10525  refutations-skipped=92  sites=705`, `vacuous=0 stale=0 declared=3 witnessed=27
+  generic=673 unknown=2` (`scripts/gate_report.py header` on the merged run).
+
+`main` moved to `7d8c5af7` meanwhile (two commits, `plans/` and `data/` only); merged again in the next stage, the gate re-run there.
+
+## Stage 48 — SAVED (FS131-G4): `main` merged again (`5816a11a`), the full gate re-run there, green; the landing
+
+**The second merge** (`5816a11a`, `origin/main` at `7d8c5af7`: two commits, `data/fs131/briefs/FS131-IP4-planar.md`, `plans/FS131-close-inventory.md`,
+`plans/SESSION-HANDOFF-2026-10-04.md`; no conflict). `git diff --stat 6193582a 5816a11a -- Proofs Proofs.lean scripts tools lakefile.toml lean-toolchain
+lake-manifest.json ARCHITECTURE.md`: empty — the gate's inputs are those of Stage 47's commit. **The full gate re-run on `5816a11a`**, all exit 0:
+- build: "build: OK — all 1760 modules already up to date, nothing built, 0 module(s) with warnings, 2s" (`build/gate/build/20261005T030527Z-856313.log`;
+  driver `data/fs131/g4/build-g4-final.log`) — the up-to-date probe's exit 0 against the oleans Stage 47's 10m45s build wrote; 0 warnings there and here;
+- `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'` over `Proofs/`: 0;
+- axioms: "axioms: OK — 3376 clean, 12 axiom-free, 4 imported, 5 declared purchase(s)" (`build/gate/axioms/20261005T030529Z-856603.log`; driver
+  `data/fs131/g4/axioms-final2.log`); `--self-test`: "OK — every planted fault fired, and every partner passed", 23 controls
+  (`build/gate/axioms-self-test/20261005T030533Z-857141.log`; driver `data/fs131/g4/axioms-selftest-final2.log`);
+- vacuity: "vacuity: OK", `declarations=10525 refutations-skipped=92 sites=705`, `vacuous=0 stale=0 declared=3 witnessed=27 generic=673 unknown=2`, baseline
+  header "match (9 of 9 compared)" (`build/gate/vacuity/20261005T030707Z-867776.log`; driver `data/fs131/g4/vacuity-final2.log`); `--self-test`: "OK — all 50
+  controls behaved" (`build/gate/vacuity-self-test/20261005T030818Z-873736.log`; driver `data/fs131/g4/vacuity-selftest-final2.log`);
+- `tools/check_architecture.py`: PASS (`data/fs131/g4/check-architecture-final.txt`); `python3 tools/fs131_k4_decls.py --check`: "495 names, 0 missing"
+  (`data/fs131/g4/k4decls-check-final.log`).
+**`main` moved twice more while this ran, `plans/` and `data/` only each time** (`ba3019d5`: items 314–315; `aa628f8e`: items 316–317). Merged at `4fa41167`
+(`ba3019d5`), and the full gate re-run there, all exit 0: build "all 1760 modules already up to date, nothing built, 0 module(s) with warnings"
+(`build/gate/build/20261005T031207Z-890606.log`); 0 `sorry`; axioms "OK — 3376 clean, 12 axiom-free, 4 imported, 5 declared purchase(s)"
+(`build/gate/axioms/20261005T031209Z-891011.log`), `--self-test` OK, 23 controls (`build/gate/axioms-self-test/20261005T031213Z-891584.log`); vacuity "OK", the
+same nine counts, header "match (9 of 9 compared)" (`build/gate/vacuity/20261005T031346Z-903019.log`), `--self-test` "all 50 controls behaved"
+(`build/gate/vacuity-self-test/20261005T031456Z-909085.log`); `check_architecture` PASS, `fs131_k4_decls.py --check` 0 missing (drivers
+`data/fs131/g4/*-final3.*`). **The gated commit is `4fa41167`.** Each re-run takes about seven minutes and `main` has moved during each, always in `plans/` and
+`data/`; so the last merge (`aa628f8e`, and any later one before the push) is made and pushed at once, on the check that it changes no gate input
+(`git diff --name-only 4fa41167 HEAD -- . ':!plans' ':!data'` empty) — the precedent of wave 2's plans-only merge `54d408c6` after its gated `40f4b4ef`
+(item 270). **The landing**: `git push origin HEAD:main` from the worktree, a fast-forward (checked first: `origin/main` an ancestor of `HEAD`); the hand-back
+gives the hash.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -1334,3 +1899,72 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
 - FS112-N3-PAIRS (ii): `ArcMap.pair_ii` — the standard three. Read against § 8.2: same statement; binders `h₂`, `hc₂`, `hy` renamed `_h₂`, `_hc₂`, `_hy` (accepted).
 - Children (no row), the standard three: `ArcMap.stripHolds_of_two_branches`, `ArcMap.IsSectorChart.exists_isRingArc_of_along`, `ArcMap.exists_along_of_side`,
   `ArcMap.exists_colour_near`, `ArcMap.closure_sector_subset_of_side`, `ArcMap.exists_side_germs_of_transversal`, `ArcMap.half_colour_or_bothKind`.
+
+## Theorems this phase proved (FS131-I4l's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4l-*.txt`, not a gate log)
+
+- FS112-N3-PAIRS (i): `HadwigerNelson.Plane.ArcMap.pair_i` — `[propext, Classical.choice, Quot.sound]`. Read against § 8.2 and the row as amended by
+  ruling 258: same statement (cubic trichromatic `u₁`, `u₂` covering their unit discs, `|u₁ − u₂| < 3`, a unit pair `x ∈ ω(u₁)`, `y ∈ ω(u₂)` with
+  `c′(x) = c′(y) = {a}`: impossible); `h3` is read exactly at the collinear configuration.
+- Children (no row), the standard three: `HadwigerNelson.Plane.eq_midpoint_of_dist`, `finite_sphere_inter_sphere_half`, `exists_mem_Ioo_ringPt_not_mem`;
+  `ArcMap.mem_closure_region_of_pseudo`, `ArcMap.finite_not_stripHolds`, `ArcMap.pair_i_of_transversal` (BaseSteps).
+- Engine 5: `HadwigerNelson.Plane.ArcMap.IsHorn.isRingArc_upper`, `ArcMap.IsHorn.isRingArc_lower` — the standard three each (no row; plan § 13.1 item 5).
+  Children: `normalPt_add_eq_framePt`, `normalPt_sub_add_eq_framePt` — the standard three (UnitArc).
+- FS112-N2-FLANK-Q, the upper and lower bounds: `ArcMap.flankQ_upper`, `ArcMap.flankQ_lower` — `[propext, sorryAx, Classical.choice, Quot.sound]`
+  **(over sorry: `flankQ_upper_shadow`, `flankQ_lower_shadow`, their (R2) shadow clauses)**. Read against § 12.2: same statements.
+
+## Theorems this phase proved (FS131-I4m's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4m-*.txt`, not a gate log)
+
+- FS112-N2-FLANK-Q, the (R2) shadow clause: `HadwigerNelson.Plane.ArcMap.flankQ_upper_shadow`, `ArcMap.flankQ_lower_shadow` — `[propext, Classical.choice,
+  Quot.sound]` each. Read against § 12.2 and Stage 36's statements: same statements (`R₂` in the closure of the flank colour's class ⟹ that class shadows the
+  horn near `v`); validity and the flank hypothesis are not read. With them **`ArcMap.flankQ_upper`, `ArcMap.flankQ_lower` read the standard three**.
+- Children (no row), the standard three: `r2Cross` (def), `sq_norm_two_e_sub`, `r2Cross_spec`, `continuousAt_r2Cross_one`, `r2Cross_one`,
+  `Arc.finite_inter_sphere_two_or_subset`, `ArcMap.eventually_arcs_on_sphere_two`, `ArcMap.exists_polarBox_subset_region`, `ArcMap.mem_shadow_of_crossing` (UnitArc).
+- FS112-NB4P: `HadwigerNelson.Plane.ArcMap.nb4p` — `[propext, Classical.choice, Quot.sound]`. Read against § 12.2 and the row: same statement (a valid
+  six-coloured map, a point `v` of exactly four colours covering `B̄(v, 1)`, a change point `y₀` of its ring, no orbit point on an arc of `Γ` on `ω(v)` or on
+  an arc of `ω(y_{j±1})`: contradiction); the `ω(y_{j−1})` half of `hnb` is not read.
+- Children (no row), the standard three: `sq_norm_e_add_e`, `e_add_third_add_e_sub_third`, `cos_int_mul_third_pos`, `cos_int_mul_third_neg`,
+  `exists_opposite_cos_third`, `ArcMap.germ_rotate_third`, `ArcMap.straddlers_third` (UnitArc).
+
+## Theorems this phase proved (FS131-I4n's; axioms from `#print axioms` against the stage-43 build's oleans, `data/fs131/i4/axioms-i4n-43.txt`, not a gate log)
+
+- FS112-N2-BENDS, N2-TOWARD: `HadwigerNelson.Plane.ArcMap.bend_toward` — `[propext, Classical.choice, Quot.sound]`. Read against § 12.2 and the row: same statement (for every
+  `ε > 0` a valid map agreeing with `F` off the `ε`-neighbourhood of the closed arc, no unit arc created, no interior point of the arc on an arc of `Γ` on
+  `ω(P)`, only the outer colour gains points and only inside `B̄(P, 1)` near the arc).
+- FS112-N2-BENDS, N2-AWAY as the row states it: `ArcMap.bend_away_whole` — `[propext, Classical.choice, Quot.sound]`. Same statement; now proved directly (no longer over `bend_away`).
+- FS110-N4-SHAVE and N4-RAY at `Contact`'s statements: `ArcMap.exists_shave`, `ArcMap.exists_rayMerge` — `[propext, Classical.choice, Quot.sound]` each (by `exists_shave_aux`,
+  `exists_rayMerge_aux`, FS131-IM3's, after the merge).
+- Engine 3 and the bend (no row), the lens geometry, the clearness children — 56 theorems listed in Stage 43 and in `scripts/Axioms.lean`'s FS131-I4 block —
+  `[propext, Classical.choice, Quot.sound]` each.
+
+## Theorems this phase proved (FS131-G4's; axioms from the gate's own receipt, `build/gate/axioms/20261005T030529Z-856603.log`)
+
+No row theorem: wave 4's statements are as I4n left them, less the three that left the wave. The vacuity step's evidence, each [kernel]:
+- `HadwigerNelson.Plane.ArcMap.unitArcPlane_not_condition5` — `¬ unitArcPlane.Condition5` (`Plane/ValidMap/Basic`) — `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.Plane.ArcMap.bowtie_not_isStuck_I` — `¬ bowtie.IsStuck I` (`Plane/ValidMap/BaseSteps`) — `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis` — `¬ bowtie.IsHorn I 0 (-1) 1 1` (`Plane/ValidMap/BaseSteps`) — `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.Plane.instIsEmptyAeProperRegionsZero` — `IsEmpty (AeProperRegions 0)` (`Plane/SVMap`) — `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.Plane.instIsEmptyAeProperRegionsOne` — `IsEmpty (AeProperRegions 1)`: one open dense class always holds two points at distance `1`
+  (`Plane/SVMap`) — `[propext, Classical.choice, Quot.sound]`.
+
+## Drafts for the front page (FS131-G4)
+
+*For Keryx to file; each names its slot and the log line it comes from. The Frontier clause, the `LEDGER.md` rows to regrade and the Proof Atlas grades for
+wave 4 are held for the milestone's filing, as wave 2's were (inventory item 271).*
+
+1. **`CLAUDE.md` § Trust ledger**, the sentence "the current audit reads 2512 clean and 5 declared purchases, and 4 imported (and 11 axiom-free; 2,532 records at
+   wave 2's landing, FS131-I2n, 2026-10-04)" becomes: "the current audit reads 3376 clean and 5 declared purchases, and 4 imported (and 12 axiom-free; 3,397
+   records at wave 4's landing, FS131-G4, 2026-10-05)". From `build/gate/axioms/20261005T030529Z-856603.log`'s digest (`data/fs131/g4/axioms-final2.log`):
+   "audited: 3397 records — 3376 clean on the standard axioms, 12 axiom-free, 4 imported (resting on a declared outside theorem), 5 declared purchase(s)".
+2. **`CLAUDE.md` § The gate**, the two count lines "`declarations=9376 refutations-skipped=64 sites=516`, `vacuous=0 stale=0 declared=3 witnessed=23 generic=488
+   unknown=2`." become "`declarations=10525 refutations-skipped=92 sites=705`, `vacuous=0 stale=0 declared=3 witnessed=27 generic=673 unknown=2`." From
+   `build/gate/vacuity/20261005T030707Z-867776.log`: "=== SCANNED === declarations=10525 refutations-skipped=92" and "=== TOTALS === sites=705 vacuous=0 stale=0
+   declared=3 witnessed=27 generic=673 unknown=2 untelescoped=0"; reconciled row for row against `main`'s run in Stage 47.
+3. **`scripts/vacuity-baseline.txt`'s header** — written by this job (Stage 47's commit): "#   declarations=10525  refutations-skipped=92  sites=705" and
+   "#   vacuous=0 stale=0 declared=3 witnessed=27 generic=673 unknown=2"; the gate's digest reads it as "match (9 of 9 compared)".
+4. **`tools/claude_md_fact_audit.py` `GATE_CHANGES`**, after the `(("1856", "5"), ("2512", "5"))` entry:
+   `(("2512", "5"), ("3376", "5")): "FS-131 wave 4's landing (FS131-G4; .claude/worktrees/fs131-w4/build/gate/axioms/20261005T030529Z-856603.log, gated commit 5816a11a): 3,397 records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases",`
+   (the same log line as draft 1).
+5. **`LEAN.md` § The gate**, "`--self-test` plants thirty-eight controls and watches each fire" becomes "`--self-test` plants fifty controls and watches each
+   fire". From `build/gate/vacuity-self-test/20261005T030818Z-873736.log`'s driver (`data/fs131/g4/vacuity-selftest-final2.log`): "==> vacuity self-test: OK —
+   all 50 controls behaved: every one fired, and the silent ones stayed silent." (38 on `main`; 12 added, controls 39–50.) The axiom self-test's count, 23, is
+   unchanged.

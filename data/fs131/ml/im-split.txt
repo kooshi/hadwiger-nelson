@@ -1,0 +1,4 @@
+ok: source lines 25-2087 (2063 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean is the fixed header, the block, and the fixed footer, byte for byte
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean declares none of the 116 moved names
+PASS

@@ -1,0 +1,11 @@
+IDENTICAL exists_merge_aux (Moves.lean): 848 bytes
+IDENTICAL exists_merge (Contact.lean): 1101 bytes
+ok   Moves imports MergeMove
+ok   Contact's header names exists_merge
+ok   Proofs.lean imports MergeMove
+ok   ARCHITECTURE has MergeMove's row
+ok   ARCHITECTURE's Contact row names exists_merge
+ok   ARCHITECTURE's Moves row names exists_merge_aux
+ok   Axioms records ArcMap.exists_merge
+ok   Axioms records ArcMap.exists_merge_aux
+restore: PASS

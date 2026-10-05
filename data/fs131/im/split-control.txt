@@ -1,0 +1,30 @@
+== control 1: Surgery's Near.Small changed (ρ < 1 / 2 -> ρ < 1 / 3)
+1
+FAIL: source lines 25-2087 are not found verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean
+FAIL: Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean differs from the text regenerated from 9ffc2aba
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean declares none of the 116 moved names
+FAIL: 2 check(s) failed
+exit 1
+wrote Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean (2087 lines) and Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean (60 lines)
+== control 2: a moved declaration copied back into Moves
+ok: source lines 25-2087 (2063 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean is the fixed header, the block, and the fixed footer, byte for byte
+FAIL: Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean declares 1 moved name(s) again: ['isClear_col']
+FAIL: 1 check(s) failed
+exit 1
+== control 3: Moves no longer imports Surgery
+wrote Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean (2087 lines) and Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean (60 lines)
+ok: source lines 25-2087 (2063 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean is the fixed header, the block, and the fixed footer, byte for byte
+FAIL: Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean does not import Surgery
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean declares none of the 116 moved names
+FAIL: 1 check(s) failed
+exit 1
+== restored
+wrote Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean (2087 lines) and Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean (60 lines)
+ok: source lines 25-2087 (2063 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Surgery.lean is the fixed header, the block, and the fixed footer, byte for byte
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean declares none of the 116 moved names
+ok: Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean is 9ffc2aba's minus exactly l. 25-2088, with `import Proofs.HadwigerNelson.Plane.ValidMap.Surgery` and the new module doc
+PASS
+exit 0

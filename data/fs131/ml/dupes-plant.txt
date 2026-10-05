@@ -1,0 +1,3 @@
+IDENTICAL HadwigerNelson.Plane.ArcMap.exists_rayMerge_aux  ours PLANTED-IDENTICAL.lean:3  main Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean:1655
+DIFFERS HadwigerNelson.Plane.ArcMap.exists_shave_aux  ours PLANTED-DIFFERS.lean:3  main Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean:1635
+own files 2 (Plane/ValidMap/MergeMove.lean, Plane/ValidMap/Moves.lean); 194 own declarations; 8857 names at origin/main; 2 pair(s)

@@ -1,0 +1,30 @@
+'HadwigerNelson.Plane.ArcMap.exists_shave_aux' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.BranchGerms.ne_next_of_nextβ_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.horn_index' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.encard_col_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_shave_of_flankAbove' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_shave_of_flankBelow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.Arc.finite_inter_sphere_of_not_isUnitArc' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.mem_germArc_iff_of_mem_hornSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_shaveArcs_carrier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.shaveArcs_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.shaveArcs_nondegenerate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.shaveArcs_not_isUnitArc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.shaveArcs_subset_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.shaveCol_of_not_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.shaveCol_of_above' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.shaveCol_of_not_above' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.shaveCol_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.not_mem_interiorPts_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.shave_mem_interiorPts_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.coloursAt_subset_of_mem_closure_sector' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.shave_hasSectors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.Near.shave_hlc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_shave_recolour' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_rayMerge_aux' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_merge_aux' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+exit 0

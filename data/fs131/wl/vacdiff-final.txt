@@ -1,0 +1,6 @@
+main rows 771, merged rows 830, lost 0, added 59
+  added EVIDENCE EMPTY: 4
+  added EVIDENCE WITNESS: 5
+  added SITE GENERIC: 45
+  added SITE WITNESSED: 5
+PASS

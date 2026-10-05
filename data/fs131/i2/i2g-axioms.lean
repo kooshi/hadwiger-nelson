@@ -1,0 +1,39 @@
+import Proofs
+ #print axioms HadwigerNelson.Arith.ideal_le_of_mul_le
+ #print axioms HadwigerNelson.Plane.volume_closedBall_ofReal
+ #print axioms HadwigerNelson.Plane.densityRatio_le_of_unit_dist
+ #print axioms HadwigerNelson.Plane.tendsto_mul_nhdsGT
+ #print axioms HadwigerNelson.Plane.tendsto_densityRatio_compl_of_mem
+ #print axioms HadwigerNelson.Plane.mem_densitySet_of_tendsto_compl
+ #print axioms HadwigerNelson.Plane.measurable_densityRatio_centre
+ #print axioms HadwigerNelson.Plane.densitySet_iff_rat
+ #print axioms HadwigerNelson.Plane.sum_densityRatio_eq_one
+ #print axioms HadwigerNelson.Plane.exists_mem_essClosure_of_cover
+ #print axioms HadwigerNelson.Plane.densityRatio_le_one
+ #print axioms HadwigerNelson.Plane.densitySet_mono
+ #print axioms HadwigerNelson.Plane.exists_unit_pair_of_conull
+ #print axioms HadwigerNelson.Plane.ae_arcLength_shift
+ #print axioms HadwigerNelson.Plane.densitySet_disjoint
+ #print axioms HadwigerNelson.Plane.unitPairsNull_of_no_unit_pair
+ #print axioms HadwigerNelson.Plane.dist_rot
+ #print axioms HadwigerNelson.Plane.shift_re
+ #print axioms HadwigerNelson.Plane.shift_im
+ #print axioms HadwigerNelson.Arith.exists_powerBasis_of_root
+ #print axioms HadwigerNelson.Arith.exists_coords_of_quadratic
+ #print axioms moserSpindle_cnf_unsat
+ #print axioms moserSpindle_not_colorable_three_lrat
+ #print axioms moserSpindleCubes_unsat
+ #print axioms moserSpindle_not_colorable_three_cubes
+ #print axioms four_le_chromaticNumber_plane_certified
+#print axioms HadwigerNelson.Plane.falconer_reduction
+#print axioms HadwigerNelson.Plane.le_chiM_of_falconerFan
+#print axioms HadwigerNelson.Plane.measurableSet_densitySet
+#print axioms HadwigerNelson.Plane.essClosure_dist_ne_one_of_mem_densitySet
+#print axioms HadwigerNelson.Plane.not_rotate_ae_eq_compl
+#print axioms HadwigerNelson.Plane.fan_tip_ae_mem
+#print axioms HadwigerNelson.Plane.keptAt_of_dist_le
+#print axioms HadwigerNelson.Plane.bandFree_periodize
+#print axioms HadwigerNelson.Arith.comap_conductor_sup_eq_top
+#print axioms HadwigerNelson.Arith.exists_dyadic_coeffs
+#print axioms HadwigerNelson.Arith.minpoly_eq_of_root
+#print axioms HadwigerNelson.Plane.exists_not_uniform_kept

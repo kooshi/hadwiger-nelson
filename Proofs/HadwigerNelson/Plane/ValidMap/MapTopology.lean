@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.HexRing
+import Proofs.HadwigerNelson.Plane.ValidMap.Surgery
 import Proofs.HadwigerNelson.Plane.Tiles
 import Proofs.HadwigerNelson.Plane.PlaneTopology
 import Proofs.HadwigerNelson.Plane.CurveGraph
@@ -61,12 +62,6 @@ theorem eventually_dir_lt_nextDir (G : BranchGerms n) (hS : G.Sorted) {r₀ : �
     have := Real.arcsin_lt_arcsin (hb _ (hcurv i)).1 hlt (hb _ hnext).2
     simp only [nextDir, dir, germDir, heq]
     linarith
-
-/-- `next` is injective: the germ after `i` determines `i`. -/
-theorem next_injective : Function.Injective (next : Fin n → Fin n) := by
-  intro i j h
-  unfold next at h
-  split_ifs at h with hi hj hj <;> simp only [Fin.ext_iff] at h <;> ext <;> omega
 
 /-- **The directions at one distance increase with the index**, where consecutive ones do. -/
 theorem dir_lt_dir (G : BranchGerms n) {s : ℝ} (hs : ∀ i, G.dir i s < G.nextDir i s) {i j : Fin n} (hij : i < j) :
@@ -1545,14 +1540,6 @@ theorem hasCurveStar_of_branches {C : Set ℂ} {v : ℂ} {n : ℕ} (G : BranchGe
 /-- In `Fin 2`, an element other than one of two distinct elements is the other. -/
 theorem fin_two_eq_of_ne {a b c : Fin 2} (hab : a ≠ b) (hca : c ≠ a) : c = b := by
   revert a b c; decide
-
-/-- An interior point carries only its own colour. -/
-theorem coloursAt_subset_of_mem_interiorPts {z : ℂ} (hz : z ∈ F.interiorPts) : F.coloursAt z ⊆ {F.col z} := by
-  intro j hj
-  have hev := F.locallyConstant z hz.1 hz.2
-  obtain ⟨y, hy, hyj⟩ := mem_closure_iff_nhds.mp hj _ hev
-  rw [mem_singleton_iff, ← hyj.2]
-  exact hy
 
 /-- **At a two-colour change point of `ω(u)` one branch enters the disc and the other leaves it** (the germ change: the clockwise germ of
 `ω(u)` lies in the `a`-sector and the counter-clockwise one in the `c`-sector, so arcs of circles about `u` just inside and just outside `ω(u)`

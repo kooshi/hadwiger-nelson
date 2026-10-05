@@ -433,6 +433,30 @@ structure AeProperRegions (k : ℕ) where
   locallyFinite : ∀ x, ∃ t ∈ 𝓝 x,
     {C : Set ℂ | ∃ j, ∃ y ∈ cls j, C = connectedComponentIn (cls j) y ∧ (C ∩ t).Nonempty}.Finite
 
+/-- No region-only a.e.-proper map with no colour: the union of no classes is empty, and the empty set is not dense in `ℂ`. With the
+next instance, the vacuity scan's evidence that `AeProperRegions k` is empty at `k ≤ 1` (`scripts/Vacuity.lean`, wave 4's
+carriers); `sevenBrickRegions` inhabits it at `7`. -/
+instance instIsEmptyAeProperRegionsZero : IsEmpty (AeProperRegions 0) :=
+  ⟨fun R => by
+    have h := R.dense
+    rw [Set.iUnion_of_empty] at h
+    obtain ⟨x, hx⟩ := h.nonempty
+    exact hx⟩
+
+/-- **Adversary**: no region-only a.e.-proper map with one colour. The class is open and dense, so near `x + 1` it has a point `z`
+with `z − 1` in a ball about `x` inside the class: two points of one class at distance `1`. -/
+instance instIsEmptyAeProperRegionsOne : IsEmpty (AeProperRegions 1) :=
+  ⟨fun R => by
+    have hd : Dense (R.cls 0) := by
+      have h := R.dense
+      rwa [show (⋃ j, R.cls j) = R.cls 0 from by ext z; simp [Fin.exists_fin_one]] at h
+    obtain ⟨x, hx⟩ := hd.nonempty
+    obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp (R.isOpen_cls 0) x hx
+    obtain ⟨z, hzS, hz⟩ := hd.exists_mem_open isOpen_ball ⟨x + 1, mem_ball_self hε⟩
+    refine R.dist_ne_one 0 z hzS (z - 1) (hball ?_) (by simp)
+    rw [mem_ball, dist_eq_norm] at hz ⊢
+    rwa [show z - 1 - x = z - (x + 1) by ring]⟩
+
 /-- The multicolour reads the closures of the classes: with classes `B(0, 1)` and `B(2, 1)`, both colours are at `1`. -/
 example : multicolour (![ball (0 : ℂ) 1, ball 2 1] : Fin 2 → Set ℂ) 1 = univ := by
   ext j

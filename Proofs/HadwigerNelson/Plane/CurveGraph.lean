@@ -912,8 +912,9 @@ theorem e_arg_mul_e {c : ℝ} (hc : 0 < c) (φ : ℝ) : e (arg ((c : ℂ) * e φ
   have hc0 : (c : ℂ) ≠ 0 := by exact_mod_cast hc.ne'
   exact (mul_left_cancel₀ hc0 h1).symm
 
-/-- A branch point reads its direction modulo `2π`. -/
-theorem branchPt_congr {v : ℂ} {β₁ β₂ : ℝ} (h : e β₁ = e β₂) (κ t : ℝ) : branchPt v β₁ κ t = branchPt v β₂ κ t := by
+/-- A branch point reads its direction modulo `2π`. Module-local: the public statement is `Plane/ValidMap/Moves`'s `branchPt_congr_dir`, which
+this module does not import (FS131-M5). -/
+private theorem branchPt_congr {v : ℂ} {β₁ β₂ : ℝ} (h : e β₁ = e β₂) (κ t : ℝ) : branchPt v β₁ κ t = branchPt v β₂ κ t := by
   simp only [branchPt, e_add, h]
 
 /-- **Every branch germ is a curve germ**: `(β, κ)` with `|κ| r < 2` is the germ of a line or a circle through `v` on one side. -/

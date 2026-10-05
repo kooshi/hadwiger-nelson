@@ -1,0 +1,4 @@
+REPEAT HadwigerNelson.Plane.conj_e Proofs/HadwigerNelson/Plane/Chord.lean:276 | Proofs/HadwigerNelson/Plane/SixFragment.lean:342
+REPEAT HadwigerNelson.bindings Proofs/HadwigerNelson/Instances/DeGrey/Narrow1420.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow1423.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow630.lean:1398 | Proofs/HadwigerNelson/Instances/DeGrey/Narrow633.lean:1395
+REPEAT HadwigerNelson.with Proofs/HadwigerNelson/Additive.lean:70 | Proofs/HadwigerNelson/Motion.lean:442
+1764 files, 8862 declarations, 8857 names, 3 repeated

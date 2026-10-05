@@ -993,6 +993,8 @@ derivation: FS129-OR1-LOCALDENSE
 
 Rests on it: FS129-OR1-DISCF-NS. Its input FS112-DISC1 is now a case of FS106-TS-T (FS129-SR2-DISC1TS). The class may be empty (no fragment on a disc of radius 3 is held); then it is vacuous, and it constrains exactly the YES side's objects (FS116-O1-YESLIM).
 
+*Erratum (2026-10-04, FS131-E4).* The statement stands. Its *uses only* line read FS112-N3-BASE at FS112-DISC1's vertex, where the base's eleventh point is open if that vertex is enclosed; the proof now reads E4-OUTERMOST and E4-N3BASE-UN (`plans/FS131-E4-derivation.md`), radius 3 kept.
+
 derivation: FS129-OR1-DISCF-NS
   statement: if for some R > 0 no non-Siamese simple valid six-coloured fragment exists on a closed disc of radius R about a vertex of at least four
     colours, then no non-Siamese simple valid six-coloured fragment exists on any closed disc of radius R + 3

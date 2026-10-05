@@ -1,0 +1,4 @@
+main rows 830, merged rows 845, lost 0, added 15 (167 MERGE names)
+  added SITE GENERIC on F.Condition5: 2
+  added SITE GENERIC on F.Valid: 13
+vacdiff: PASS

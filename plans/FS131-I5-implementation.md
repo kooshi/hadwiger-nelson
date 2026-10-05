@@ -2075,3 +2075,79 @@ Merge base `111830c8`; this branch changed 319 files since, `main` 539; **both**
 `BaseDense` 7, `BendCollar` 1, `Contact` 3, `HexRing` 1, `Terminal` 9, `UnitArc` 5, and `Packed` 1 (a word in a docstring, not a term).
 
 ## Stage 47 — SAVED
+
+## Stage 48 — SAVED (FS131-M5): `main` merged (wave 4, Woodall, MERGE); copies removed; checked; the build green
+
+`git merge --no-ff --no-commit origin/main` (at `ddad786d`; one merge base `111830c8`) into `fs131-w5` (at `e6ba8923`). Git took `main`'s side for every
+wave-4 module by itself — this branch never touched `Basic`, `Contact`, `UnitArc` after the fork, so their stale copies (`Contact` 3 `sorry`, `UnitArc` 5)
+were replaced by `main`'s proved files — and brought `Surgery`, `Cone`, `Moves`, `MergeMove`, Woodall's five modules, wave 2's and the Falconer modules.
+`BaseSteps`, the one proof file both sides changed, merged clean: both deleted `n3_end` identically (this branch moved it to `Terminal`), and `main` added
+`bowtie_not_isStuck_I`, `bowtie_not_isHorn_I_axis`. **No declaration this branch added to a wave-4 module** (it added none after the fork). Three conflicts,
+each two blocks appended at one place, **kept both, ours first**: `Proofs.lean` (wave 5's thirteen imports; Woodall's five), `ARCHITECTURE.md` (wave 5's
+fifteen rows; Woodall's five), `scripts/Axioms.lean` (wave 5's blocks; `Moves`' and later blocks).
+
+### 48.1 The rename and the copies
+
+- **`framePt → fromFrame`** in `FlankUA`, the only wave-5 file using it (29 occurrences, among them its own lemma names: `N_add_eq_framePt`,
+  `S_add_eq_framePt`, `framePt_normSq_aux` → `…fromFrame…`), and their three records in `scripts/Axioms.lean`. After the merge `framePt` occurs only in
+  wave 2's `Plane/Slack` (and its record `dist_framePt_sq`); no wave-5 module's import closure reaches `Slack`, so even a missed occurrence could not
+  resolve to it. **Note for `fs131-w5c`**: its `HornShadow`, `Terminal`, `FlankUA` use `framePt` and need the same rename at their merge.
+- **Copies.** New tool `tools/fs131_m5_dupes.py` (comments and docstrings stripped first, namespaces tracked, binder names alpha-normalized): every
+  declaration of a file this branch changed since the fork, not declared at the fork, against every name and every theorem statement of `main`. Before
+  the merge (`data/fs131/m5/dupes-premerge.txt`): **three NAME collisions and two STATEMENT copies**, each of a lemma new on `main` since the fork:
+  - NAME `BranchGerms.next_injective` and `ArcMap.coloursAt_subset_of_mem_interiorPts` (`MapTopology` / `main`'s `Surgery`; statements equal up to binder
+    names) — **deleted from `MapTopology`**, which now imports `Plane/ValidMap/Surgery` (adds `Cone`, `Surgery` to its closure, nothing else; no cycle); the
+    uses (`MapTopology` 4, `MapGraph` 5) cite `main`'s unchanged.
+  - NAME `e_mul_e_neg` (`PlaneTopology` / `main`'s wave-2 `Slack`, identical) — importing `Slack` would put ten wave-2 measure-theory modules under the
+    planar chain's root, so **`PlaneTopology`'s copy is made `private`** (module-local: its name is mangled, no collision), its docstring naming `Slack`'s.
+    The common home of both is `Plane/Basic` (beside `e_add`), a `main` file outside this job: a correction owed.
+  - STATEMENT `unitPairsNull_of_dist_ne_one` (`Dense`, I5o's helper) = `main`'s `unitPairsNull_of_no_unit_pair` (`FalconerReduction`) — **deleted**; `Dense`
+    imports `Plane/FalconerReduction` (adds `Cover`, `FalconerFan`, `UnitAvoiding`, `FalconerReduction`) and its one use cites `main`'s.
+  - STATEMENT `branchPt_congr` (`CurveGraph`) = `main`'s `branchPt_congr_dir` (`Moves`) — importing `Moves` would put seventeen modules, all of wave 4's
+    surgery, under the planar foundation, so **`CurveGraph`'s copy is made `private`**, its docstring naming `Moves`'. Common home: `Plane/LocalStructure`
+    (where `branchPt` lives), a `main` file: a correction owed.
+  - After the rename one more: STATEMENT `ArcMap.N_add_eq_fromFrame` (`FlankUA`) = `main`'s `normalPt_add_eq_fromFrame` (`UnitArc`, already in `FlankUA`'s
+    closure) — **deleted**, its one use cites `main`'s.
+  - The tool also reported a NAME `ArcMap.near` through QA1's parser (`tools/fs131_ml_dupes.py`, run before writing mine): a docstring line beginning
+    "class near `y`" read as a `class` declaration on both sides — no declaration; mine strips docstrings and does not report it.
+  - Records: the five ours-side `#print axioms` lines of the deleted or private copies removed (`next_injective`, `coloursAt_subset_of_mem_interiorPts`,
+    `unitPairsNull_of_dist_ne_one`, `e_mul_e_neg`, `branchPt_congr`, and `ArcMap.N_add_eq_fromFrame`); `main`'s lines kept, none twice.
+  - `ARCHITECTURE.md`: the Imports cells of `MapTopology` (+ `Plane/ValidMap/Surgery`) and `Dense` (+ `Plane/FalconerReduction`); `tools/check_architecture.py`
+    failed on exactly those two before the edit (its control) and **PASS** after (`data/fs131/m5/arch-check.txt`).
+  - Not removed (reported, `STATEMENT-OLD`, informational): `ArcMap.dist_sq_re_im` (`BaseWalk`) and `ArcMap.norm_sq_eq_re_im` (`HexRing`) repeat lemmas
+    declared at the fork (`SixFragment`, `Chord`, `UnitArc`) — repeats the merge does not create, in files this job does not touch beyond the merge.
+  - I5h's `isPreconnected_hornSet_unit` is not on this branch (it is `fs131-w5c`'s `HornShadow`): for that branch's merge.
+- After: **`tools/fs131_m5_dupes.py`: 0 NAME/STATEMENT pairs**, 2 PRIVATE (the two module-local copies), 4 STATEMENT-OLD, 4 CONCL candidates read by hand (none
+  a copy: `IsRegOf.dist_lt_one` vs `SVMap`'s `IsRegion.dist_lt_one` are different predicates; `Terminal`'s `flankQ_*_of_qrOnly` are the unconditional
+  forms of `UnitArc`'s, by design) (`dupes-merged.txt`). `--plant` (a re-declared `main` name, `main`'s `isPreconnected_hornSet` statement under a new name,
+  a docstring line "class e_mul_e_neg"): reports exactly the first two, exit 1 (`dupes-plant.txt`).
+
+### 48.2 The checks
+
+- **Files, byte for byte** — new tool `tools/fs131_m5_merge_check.py`: every file `main` alone changed equals `main`'s; every file this branch alone
+  changed equals ours after the declared edits (each old text occurring exactly as often as declared); `BaseSteps` equals `git merge-file`'s clean merge;
+  `Proofs.lean`'s imports and `scripts/Axioms.lean`'s records are the three-way merges of the sides' sets (ours' records renamed, the copies' dropped, the
+  moved `n3_end` kept — a set-level merge would drop it: its line moved on our side, its old place deleted on `main`'s), none twice; `ARCHITECTURE.md`
+  row by row three-way, up to the two Imports cells. **PASS, 1783 files** (`data/fs131/m5/merge-check-selftest.txt`). `--self-test`: a byte in `Surgery`, an
+  extra line in `FlankUA`, a dropped import, a doubled record, a reverted Imports cell — each FIRED naming its file; the unplanted run PASS.
+- **Statements, three-way** (`tools/fs131_wl_mergestmts.py HEAD origin/main --rename framePt=fromFrame`, WL1's, run): 7,126 names, 0 base conflicts,
+  **6 reported, each this job's declared change**: `N_add_eq_fromFrame`, `next_injective`, `unitPairsNull_of_dist_ne_one` "merged {} expected {…}" (the
+  deleted copies), `coloursAt_subset_of_mem_interiorPts` CONFLICT (added on both sides; `main`'s kept), `e_mul_e_neg` "merged 2 expected 1" (`Slack`'s and
+  the private copy), `n3_end` "merged 1 expected {}" (moved to `Terminal` on this branch, statement verbatim; `main` deleted `BaseSteps`' copy)
+  (`mergestmts.txt`). `--plant`: a seventh, `AeColouring.exists_fill`, exit 1 (`mergestmts-plant.txt`). `tools/fs131_i5_stmt_check.py d61edefc`: PASS
+  (`stmt-check-48.txt`).
+- **The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 44 modules rebuilt, 4 with warnings, every warning `declaration uses 'sorry'`**
+  (`BaseDense`, `BendCollar`, `HexRing`, `Terminal`), exit 0, 14 min 31 s (`build/gate/build/20261005T100515Z-3256459.log`, "Build completed successfully
+  (5788 jobs)"; driver log `data/fs131/m5/build-merge.log`).
+- **Axioms** (`data/fs131/m5/M5Axioms48.lean` → `.out`, 12 GiB slot, against the merged build): **on the standard three** — wave 4's seven leaves this branch
+  carried as stale `sorry`: `exists_shave`, `exists_rayMerge`, `exists_merge`, `bend_toward`, `flankQ_upper`, `flankQ_lower`, `nb4p` (`bend_away` is deleted
+  on `main`, unused here); the consumers of the renamed and de-duplicated declarations: `S_add_eq_fromFrame`, `fromFrame_normSq_aux`, `horn_radial_N`,
+  `horn_radial_S`, `exists_ball_two_tiles`, `exists_isRingArc_of_touch`, `exists_inner_branch`, `IsRegOf.chain_step`, `exists_eq_of_interleaved_paths`,
+  `exists_curveGerm_eq`; wave 5's held `row134BaseUA`, `cvb_thom`, `disc1_local`, `not_hasRepeatedColour_of_mem_interiorPts`. **Controls on `sorryAx`**:
+  `exists_preBend`, `n3_base`, `bend_toward_collar`, `bv_l3`.
+- **`sorry` by file** (`grep -rcw`; `sorry-counts-before.txt` → `sorry-counts-after.txt`): `Contact` 3 → 0, `UnitArc` 5 → 0 (`main`'s); `BaseDense` 7,
+  `BendCollar` 1, `HexRing` 1, `Terminal` 9 unchanged; `Packed` 1, `Cover` 1, `CoverExamples` 2 are docstring words ("sorry-free"), not terms.
+
+Statements unchanged on both sides but for the copies removed; no `axiom`, no `native_decide`.
+
+## Stage 48 — SAVED

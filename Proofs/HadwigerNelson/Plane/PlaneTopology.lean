@@ -344,8 +344,8 @@ disjoint, `x + iy ↦ γ(x) − γ'(y)` would lift through `exp` over the simply
 square, computed edge by edge from principal arguments, is `−2π`, not `0`. Two disjoint continua would have disjoint `δ`-thickenings, and
 paths in the `δ/2`-thickenings pushed into the disc by the radial retraction `discRetract` would be disjoint paths of that kind. -/
 
-/-- `e θ · e (−θ) = 1`. -/
-theorem e_mul_e_neg (θ : ℝ) : e θ * e (-θ) = 1 := by
+/-- `e θ · e (−θ) = 1`. Module-local: the public statement is `Plane/Slack`'s `e_mul_e_neg`, which this module does not import (FS131-M5). -/
+private theorem e_mul_e_neg (θ : ℝ) : e θ * e (-θ) = 1 := by
   rw [← e_add, add_neg_cancel]; simp [e]
 
 /-- The principal argument of `1 − e x` for `0 < x < 2π` is `(x − π)/2`: `1 − e x = 2 cos θ · e θ` with `θ = (x − π)/2 ∈ (−π/2, π/2)`. -/
