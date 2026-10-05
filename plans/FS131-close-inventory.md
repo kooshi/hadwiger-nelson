@@ -2926,3 +2926,30 @@ reason by the close.*
      (1.5–2 planned, prices running high), slack is about equal and I5j's half was queued first (item 337). Confidence: medium (SEP first would be as good).
      **Queue now**: the SEP lane FS131-RS1; MERGE's continuation FS131-IMM3 (record § 5.2); `bend_away`'s implementer; `disc1_local` after `fs131-w5p` merges back.
      In flight after I5m's launch: 1 (RW1) + 1 (I5l) + 1 (I5m) = 3.
+345. **FS131-RW1 handed back** (Stage 22 SAVED, harness ≈ 463k by the task notice; record `fs131-w5p`'s `plans/FS131-planar-implementation.md`, Stages 20–22;
+     report `data/fs131/reports/FS131-RW1.md`; commits `aba04665`, `66e56bed`, `10d94ad1`, `515e28af`, pushed). **Results, [kernel] on the standard three,
+     statements unchanged**: **ADJ** `filledGraph_adj_iff` (by a route needing only `hP`: a common point off `cl x ∩ cl y` would lie in a hole of both, whose
+     complementary component would have empty frontier — RL1's route through `fill_subset_hole` needed `hF`); WALK's **C1** `frontier_closure_fill_subset`, **C2**
+     `isPreconnected_frontier_closure_fill`, **C3** `frontier_fill_hasCurveStar` (an even curve star at every frontier point), **C4**
+     `finite_frontier_fill_nonRegular` and `frontier_fill_isRegularAt`, and **C6/C8** `exists_euler` (any finite port structure — two fixed-point-free
+     involutions, edges connected through shared vertices — has an Euler circuit; `sigma_ne_pow` needs no geometry). 33 declarations. **A shorter route**
+     (record § 21.2): SEP as stated reads only the walk's fields, never the order of its edges, so any list meeting `IsBoundaryWalk` is a ring, and WALK needs
+     only an Euler circuit of the boundary graph with each edgeless neighbour inserted once — RL1's angles, outer-angle pairing and appearance-dropping are not
+     needed; `IsBoundaryWalk` and `IsEdgeOf` unchanged. **Receipt** (Keryx): the four commits exist and `origin/fs131-w5p` is `515e28af`; the stage-22 build log
+     (`build/gate/build/20261005T063441Z-2002748.log`) ends "Build completed successfully (5405 jobs)", 0 warnings other than `sorry`; `MapGraph`'s `sorry`
+     declarations by grep are exactly `IsBoundaryWalk.sep` and `exists_boundaryWalk`; `MapTopology` 0, `CurveGraph` 0; `filledGraph_adj_iff`,
+     `exists_boundaryWalk`, `IsBoundaryWalk.sep`, `filledGraph_ringList`, `IsBoundaryWalk` and `IsEdgeOf` compared by script against `f86e174e`: identical;
+     `data/fs131/rw/axioms-rw1b.txt` parsed: 36 records, 33 standard (the six named among them), the three controls on `sorryAx`. **Prediction scored**: RL1's
+     plan priced WALK at 4–6 sessions; ADJ, C1–C4 and C6/C8 took about 55 minutes, and the rest (C5a–C5d, C7, C10) is re-priced at about one session (record
+     § 22.2). **Housekeeping** (Keryx): RW1 left three log-watching loops polling `data/fs131/rw/build-s22.log` for an `EXIT` line its wrapper never wrote; after
+     the hand-back, each confirmed by its command line, they were stopped by PID (2005364, 2011157, 2017102) — they read a log and did no work, so nothing is
+     forfeited. **Held**: (a) the next WALK session, from Stage 22, record § 22.2; (b) C5a's `port_arc` in `CurveGraph` with IP3's `port_pair` re-proved over it,
+     its statement unchanged. **For the SEP lane**: WALK relies on `IsBoundaryWalk.sep` exactly as stated, for every walk meeting the fields. Credit: RW1, for
+     seeing that SEP needs no facial order.
+346. **Rulings on RW1's held items, and its slot.** (a) **`port_pair` re-proved over `port_arc`: accepted** — its statement unchanged, the new proof checked
+     by the build and the axioms print like any other; the statement check is the receipt. Confidence: high. (b) **RW1's slot → the WALK continuation,
+     FS131-RW2, on `fs131-w5p` from Stage 22** (C5a–C5d, C7, C10, `exists_boundaryWalk`'s body). Alternative weighed: the SEP lane first (1.5–2 planned). Why:
+     WALK's remaining price is measured from this lane's own leaves (about one session), while SEP's is a plan price, and this plan's prices have run about
+     five times high; the measured longer piece goes first, in its warm tree. Confidence: medium (SEP first would cost little either way). (c) **The SEP lane
+     FS131-RS1 takes the next free slot**, on a new branch `fs131-w5s` cut from `fs131-w5p` at RW2's then-current commit, or on `fs131-w5p` itself after RW2 if
+     RW2 has finished by then. In flight after RW2's launch: 1 (I5l) + 1 (I5m) + 1 (RW2) = 3.
