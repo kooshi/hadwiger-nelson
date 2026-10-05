@@ -3399,4 +3399,104 @@ theorem circ_local {u : ℂ} {φ : ℝ} {a c : Fin k} (hac : a ≠ c) {T₁ T₂
 
 end ArcMap
 
+/-! ## F — the boundary walk's topology (FS131-RL1): an open connected set off a disc, and the crossing lemma outside a disc -/
+
+/-- **A connected set stays connected off a disc whose circle it meets in a connected set** (FS131-RL1, for the boundary walk's
+separation: a tile off a small disc at a pure point of its edge). No openness is needed: a closed split of `U ∖ B(c, r)` with the circle's
+part on one side extends, by the closed disc, to a closed split of `U`. -/
+theorem isPreconnected_diff_ball {U : Set ℂ} (hUc : IsPreconnected U) {c : ℂ} {r : ℝ}
+    (hS : IsPreconnected (U ∩ sphere c r)) (hSne : (U ∩ sphere c r).Nonempty) : IsPreconnected (U \ ball c r) := by
+  rw [isPreconnected_iff_subset_of_disjoint_closed]
+  intro u v hu hv hcov hdisj
+  have hSsub : U ∩ sphere c r ⊆ U \ ball c r := fun w hw =>
+    ⟨hw.1, fun hb => (lt_irrefl r) (by rw [mem_ball] at hb; have h2 := hw.2; rw [mem_sphere] at h2; linarith)⟩
+  -- the sphere's part lies on one side, say `u`
+  have key : ∀ {u v : Set ℂ}, IsClosed u → IsClosed v → U \ ball c r ⊆ u ∪ v → U \ ball c r ∩ (u ∩ v) = ∅ →
+      U ∩ sphere c r ⊆ u → U \ ball c r ⊆ u := by
+    intro u v hu hv hcov hdisj hSu
+    have hA : IsClosed (u ∪ closedBall c r) := hu.union isClosed_closedBall
+    have hB : IsClosed (v ∩ (ball c r)ᶜ) := hv.inter isOpen_ball.isClosed_compl
+    have hUAB : U ⊆ (u ∪ closedBall c r) ∪ (v ∩ (ball c r)ᶜ) := by
+      intro w hw
+      by_cases hwc : w ∈ closedBall c r
+      · exact Or.inl (Or.inr hwc)
+      · have hwb : w ∉ ball c r := fun h => hwc (ball_subset_closedBall h)
+        rcases hcov ⟨hw, hwb⟩ with h | h
+        · exact Or.inl (Or.inl h)
+        · exact Or.inr ⟨h, hwb⟩
+    have hUd : U ∩ ((u ∪ closedBall c r) ∩ (v ∩ (ball c r)ᶜ)) = ∅ := by
+      ext w
+      simp only [mem_inter_iff, mem_union, mem_compl_iff, mem_empty_iff_false, iff_false, not_and]
+      intro hw hA' hwv hwb
+      rcases hA' with hwu | hwc
+      · have : w ∈ U \ ball c r ∩ (u ∩ v) := ⟨⟨hw, hwb⟩, hwu, hwv⟩
+        rw [hdisj] at this; exact this
+      · have hws : w ∈ U ∩ sphere c r := ⟨hw, by
+          rw [mem_sphere]; rw [mem_closedBall] at hwc; rw [mem_ball, not_lt] at hwb; linarith⟩
+        have : w ∈ U \ ball c r ∩ (u ∩ v) := ⟨hSsub hws, hSu hws, hwv⟩
+        rw [hdisj] at this; exact this
+    rcases (isPreconnected_iff_subset_of_disjoint_closed.mp hUc) _ _ hA hB hUAB hUd with h | h
+    · intro w hw
+      rcases h hw.1 with hwu | hwc
+      · exact hwu
+      · refine hSu ⟨hw.1, ?_⟩
+        rw [mem_sphere]; rw [mem_closedBall] at hwc; have := hw.2; rw [mem_ball, not_lt] at this; linarith
+    · obtain ⟨w, hw⟩ := hSne
+      have : w ∈ U \ ball c r ∩ (u ∩ v) := ⟨hSsub hw, hSu hw, (h hw.1).1⟩
+      rw [hdisj] at this; exact absurd this (notMem_empty w)
+  rcases (isPreconnected_iff_subset_of_disjoint_closed.mp hS) u v hu hv (hSsub.trans hcov)
+      (by rw [eq_empty_iff_forall_notMem]; intro w hw
+          have : w ∈ U \ ball c r ∩ (u ∩ v) := ⟨hSsub hw.1, hw.2⟩
+          rw [hdisj] at this; exact this) with h | h
+  · exact Or.inl (key hu hv hcov hdisj h)
+  · exact Or.inr (key hv hu (by rw [union_comm]; exact hcov) (by rw [inter_comm v u]; exact hdisj) h)
+
+/-- **The crossing lemma outside a disc** (FS131-RL1, the separation step of the boundary walk): a closed bounded preconnected `K` and a
+preconnected `K'`, both off the open disc `B(u, R)`, joining interleaved points of its circle, meet. The inversion
+`z ↦ u + R² / conj (z − u)` fixes the circle, carries the outside of the disc into the closed disc, and is its own inverse there; then
+`inter_nonempty_of_interleaved_radius`. -/
+theorem inter_nonempty_of_interleaved_exterior {u : ℂ} {R : ℝ} (hR : 0 < R) {K K' : Set ℂ} (hK : IsClosed K)
+    (hKb : Bornology.IsBounded K) (hKc : IsPreconnected K) (hK'c : IsPreconnected K') (hKd : K ⊆ (ball u R)ᶜ)
+    (hK'd : K' ⊆ (ball u R)ᶜ) {s s' t t' : ℝ} (h₁ : s < s') (h₂ : s' < t) (h₃ : t < t') (h₄ : t' < s + 2 * π)
+    (hs : polarPt u R s ∈ K) (ht : polarPt u R t ∈ K) (hs' : polarPt u R s' ∈ K') (ht' : polarPt u R t' ∈ K') :
+    (K ∩ K').Nonempty := by
+  set ι : ℂ → ℂ := fun z => u + ((R : ℂ) ^ 2) / (starRingEnd ℂ) (z - u) with hι
+  have hfar : ∀ z ∈ (ball u R)ᶜ, z - u ≠ 0 := fun z hz h => by
+    rw [mem_compl_iff, mem_ball, dist_eq_norm, h, norm_zero, not_lt] at hz; linarith
+  have hcont : ContinuousOn ι (ball u R)ᶜ := by
+    refine continuousOn_const.add (continuousOn_const.div (by fun_prop) fun z hz => ?_)
+    rw [map_ne_zero]; exact hfar z hz
+  have hnorm : ∀ z, z - u ≠ 0 → ‖ι z - u‖ = R ^ 2 / ‖z - u‖ := fun z hz => by
+    simp only [hι, add_sub_cancel_left, norm_div, norm_pow, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hR,
+      Complex.norm_conj]
+  have hinv : ∀ z, z - u ≠ 0 → ι (ι z) = z := fun z hz => by
+    have hc : (starRingEnd ℂ) (z - u) ≠ 0 := by rwa [map_ne_zero]
+    have hRc : (R : ℂ) ≠ 0 := by exact_mod_cast hR.ne'
+    simp only [hι, add_sub_cancel_left, map_div₀, map_pow, Complex.conj_ofReal, Complex.conj_conj]
+    field_simp
+    ring
+  have hball : ∀ S ⊆ (ball u R)ᶜ, ι '' S ⊆ closedBall u R := by
+    rintro S hS _ ⟨z, hz, rfl⟩
+    have hz' := hS hz
+    rw [mem_closedBall, dist_eq_norm, hnorm z (hfar z hz')]
+    rw [mem_compl_iff, mem_ball, dist_eq_norm, not_lt] at hz'
+    rw [div_le_iff₀ (by linarith)]; nlinarith
+  have hpt : ∀ a, ι (polarPt u R a) = polarPt u R a := fun a => by
+    have hRc : (R : ℂ) ≠ 0 := by exact_mod_cast hR.ne'
+    have he : e a * (starRingEnd ℂ) (e a) = 1 := by rw [mul_comm]; exact conj_mul_self_e a
+    simp only [hι, polarPt, add_sub_cancel_left, map_mul, Complex.conj_ofReal]
+    congr 1
+    have hce : (starRingEnd ℂ) (e a) ≠ 0 := by intro h; rw [h, mul_zero] at he; exact zero_ne_one he
+    rw [div_eq_iff (mul_ne_zero hRc hce)]
+    linear_combination (-(R : ℂ) ^ 2) * he
+  have hKcpt : IsCompact K := isCompact_of_isClosed_isBounded hK hKb
+  obtain ⟨w, hw, hw'⟩ := inter_nonempty_of_interleaved_radius (u := u) (R := R) (K := ι '' K) (K' := ι '' K') hR
+    ((hKcpt.image_of_continuousOn (hcont.mono hKd)).isClosed) (hKc.image _ (hcont.mono hKd))
+    (hK'c.image _ (hcont.mono hK'd)) (hball K hKd) (hball K' hK'd) h₁ h₂ h₃ h₄ ⟨_, hs, hpt s⟩ ⟨_, ht, hpt t⟩
+    ⟨_, hs', hpt s'⟩ ⟨_, ht', hpt t'⟩
+  obtain ⟨z, hz, rfl⟩ := hw
+  obtain ⟨z', hz', hzz'⟩ := hw'
+  have : z' = z := by rw [← hinv z' (hfar z' (hK'd hz')), hzz', hinv z (hfar z (hKd hz))]
+  exact ⟨z, hz, this ▸ hz'⟩
+
 end HadwigerNelson.Plane

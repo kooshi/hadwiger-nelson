@@ -74,8 +74,10 @@ for every pair exactly one infinite component of `G − x − y` (CVB step 2: "t
 unbounded component and every other component of `M − x − y` is finite"); and every vertex in the interior of finitely many pairs (on a map:
 the tiles have diameter at most `1`, so a pair whose interior holds a tile lies near it). Without `finSep` the reduction fails: in the strong
 product of a ray with an edge, every other field holds, the levels are 2-separators nesting forever, none is maximal, and `H = G` is not locally
-Hamiltonian (`ladder_adversary`, FS131-IT1). The filled map graph of a valid plane map has them (`ArcMap.filledGraph_planarLike`); the reduction is
-`reduced_props_of_planarLike`. -/
+Hamiltonian (`ladder_adversary`, FS131-IT1). The ring field's second part constrains non-neighbours only: a ring with each entry repeated in place
+is a ring in which every neighbour appears twice apart (`ArcMap.isRing_flatMap_replicate_four`, FS131-IP5), so "connected unless twice apart" is
+owed only for `y` not adjacent to `x`; the reduction needs no more. The filled map graph of a valid plane map has them
+(`ArcMap.filledGraph_planarLike`); the reduction is `reduced_props_of_planarLike`. -/
 structure PlanarLike : Prop where
   /-- Locally finite. -/
   locFin : ∀ x, (G.neighborSet x).Finite

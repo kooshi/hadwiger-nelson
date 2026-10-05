@@ -1299,17 +1299,112 @@ theorem twiceApart_flatMap_replicate_four {V : Type*} {r : List V} {y : V} (hy :
   · rw [getElem?_flatMap_replicate_four, show 4 * k / 4 = k by omega, List.getElem?_eq_getElem hk]
   · rw [getElem?_flatMap_replicate_four, show (4 * k + 2) / 4 = k by omega, List.getElem?_eq_getElem hk]
 
+/-! ### The boundary walk (FS131-RL1's skeleton; plan `plans/FS131-ringlist-kernel-plan.md`)
+
+The ring at `x` is read off a **boundary walk** (`IsBoundaryWalk`): a cyclic list of `x`'s neighbours, each joined to the next by a
+*hinge* (a point in both closures), in which a tile listed twice is listed only at **edges** (`IsEdgeOf`) — closed arcs of `cl x ∩ cl y`
+with a *pure point*, near which only `x`, `y` and the edge are present. The walk is built from the finite boundary graph of `∂ cl x̂`
+(`exists_boundaryWalk`); its repeated tiles separate by the crossing lemma outside a small disc at a pure point
+(`IsBoundaryWalk.sep`, over `inter_nonempty_of_interleaved_exterior`). -/
+
+/-- **`E` is an edge of `x` with `y` from `u` to `w`, with pure point `p` at radius `ρ`** (FS131-RL1): `E` is closed, preconnected, in
+`cl x ∩ cl y` and off `x ∪ y`, holds `u`, `w`, `p`; the open disc `B(p, ρ)` holds only `x`, `y` and `E`, meets its circle in a nonempty
+connected arc of `x` and one of `y`; and `E` off the disc is two closed connected pieces, one holding `u`, the other `w`, whose circle points
+`r(θ₁)`, `r(θ₃)` interleave with two circle points `r(θ₂)`, `r(θ₄)` of `x ∪ y`. On a map: a maximal arc of `∂ cl x̂` with `x` on one
+side and the tile `y` on the other, `p` any point of it off the boundary graph's vertices. -/
+def IsEdgeOf (x y E : Set ℂ) (u w p : ℂ) (ρ : ℝ) : Prop :=
+  IsClosed E ∧ IsPreconnected E ∧ E ⊆ closure x ∩ closure y ∧ Disjoint E (x ∪ y) ∧ u ∈ E ∧ w ∈ E ∧ p ∈ E ∧ 0 < ρ ∧
+    ball p ρ ⊆ x ∪ y ∪ E ∧ IsPreconnected (x ∩ sphere p ρ) ∧ (x ∩ sphere p ρ).Nonempty ∧ IsPreconnected (y ∩ sphere p ρ) ∧
+    (y ∩ sphere p ρ).Nonempty ∧
+    ∃ E₁ E₂ : Set ℂ, E \ ball p ρ = E₁ ∪ E₂ ∧ IsClosed E₁ ∧ IsPreconnected E₁ ∧ IsClosed E₂ ∧ IsPreconnected E₂ ∧ u ∈ E₁ ∧
+      w ∈ E₂ ∧ ∃ θ₁ θ₂ θ₃ θ₄ : ℝ, θ₁ < θ₂ ∧ θ₂ < θ₃ ∧ θ₃ < θ₄ ∧ θ₄ < θ₁ + 2 * π ∧ polarPt p ρ θ₁ ∈ E₁ ∧
+        polarPt p ρ θ₂ ∈ x ∪ y ∧ polarPt p ρ θ₃ ∈ E₂ ∧ polarPt p ρ θ₄ ∈ x ∪ y
+
+/-- A spec example for `IsEdgeOf`: no edge has a pure point at radius `0` (the disc must be honest). -/
+example (x y E : Set ℂ) (u w p : ℂ) : ¬ IsEdgeOf x y E u w p 0 := fun h => lt_irrefl _ h.2.2.2.2.2.2.2.1
+
+/-- **A boundary walk at the outer tile `x`** (FS131-RL1): a list `r` of outer tiles (read cyclically) with hinges `z k`, edges `E k`, pure
+points `p k` at radii `ρ k`, and the entries `edge k` that are edge entries, such that: the entries are exactly `x`'s neighbours in `M̂`;
+the hinge after entry `k` lies in the closures of entry `k` and entry `k + 1`; an edge entry's edge is an edge of `x` with its tile from
+the previous hinge to its own; a tile listed at two positions is an edge entry at both; and the closed disc at an edge entry's pure point
+misses every other edge entry's edge. Inhabitant: `exists_boundaryWalk` supplies one at every outer tile of every valid plane map
+(`sevenBrickMap` among them); the theorems reading this structure (`IsBoundaryWalk.cons`, `.sep`, `.isRing`) take that as their model. -/
+structure IsBoundaryWalk (F : ArcMap k) (x : {T : Set ℂ // F.IsOuterTile T}) (r : List {T : Set ℂ // F.IsOuterTile T}) (z : ℕ → ℂ)
+    (E : ℕ → Set ℂ) (p : ℕ → ℂ) (ρ : ℕ → ℝ) (edge : ℕ → Prop) : Prop where
+  /-- The entries are exactly `x`'s neighbours. -/
+  mem : ∀ y, y ∈ r ↔ F.filledGraph.Adj x y
+  /-- The hinge after each entry lies in its closure and the next entry's. -/
+  hinge : ∀ (j : ℕ) (a b : {T : Set ℂ // F.IsOuterTile T}), r[j]? = some a → r[(j + 1) % r.length]? = some b →
+    z j ∈ closure a.1 ∩ closure b.1
+  /-- An edge entry's edge runs from the previous hinge to its own. -/
+  edgeOf : ∀ (j : ℕ) (a : {T : Set ℂ // F.IsOuterTile T}), r[j]? = some a → edge j →
+    IsEdgeOf x.1 a.1 (E j) (z ((j + r.length - 1) % r.length)) (z j) (p j) (ρ j)
+  /-- A tile listed twice is listed only at edges. -/
+  rep : ∀ (i j : ℕ) (a : {T : Set ℂ // F.IsOuterTile T}), i ≠ j → r[i]? = some a → r[j]? = some a → edge i ∧ edge j
+  /-- The closed disc at an edge entry's pure point misses every other edge entry's edge. -/
+  apart : ∀ j, j < r.length → edge j → ∀ i, i < r.length → i ≠ j → edge i → Disjoint (E i) (closedBall (p j) (ρ j))
+
+/-- **Two outer tiles are adjacent in `M̂` exactly when their own closures meet** (FS131-RL1, child **ADJ**): a common point of the filled
+closures lies on no hole's inside (a hole of one meets neither the other tile nor its holes), so on both tiles' closures. -/
+theorem filledGraph_adj_iff (hP : F.IsPlaneMap) {x y : {T : Set ℂ // F.IsOuterTile T}} :
+    F.filledGraph.Adj x y ↔ x ≠ y ∧ (closure x.1 ∩ closure y.1).Nonempty := by
+  sorry
+
+/-- **Clause 2 of the ring from the hinges** (FS131-RL1, child **CONS**): consecutive entries of a boundary walk are equal or adjacent —
+their closures share the hinge, and a tile's closure lies in its filled closure. -/
+theorem IsBoundaryWalk.cons {x : {T : Set ℂ // F.IsOuterTile T}} {r : List {T : Set ℂ // F.IsOuterTile T}} {z : ℕ → ℂ}
+    {E : ℕ → Set ℂ} {p : ℕ → ℂ} {ρ : ℕ → ℝ} {edge : ℕ → Prop} (h : F.IsBoundaryWalk x r z E p ρ edge) (i : ℕ)
+    (a b : {T : Set ℂ // F.IsOuterTile T}) (ha : r[i]? = some a) (hb : r[(i + 1) % r.length]? = some b) :
+    a = b ∨ F.filledGraph.Adj a b := by
+  by_cases hab : a = b
+  · exact Or.inl hab
+  · obtain ⟨h1, h2⟩ := h.hinge i a b ha hb
+    exact Or.inr ⟨hab, z i, closure_mono (subset_fill _) h1, closure_mono (subset_fill _) h2⟩
+
+/-- **Clause 3 of the ring: a repeated tile separates** (FS131-RL1, child **SEP**). Say `y` is listed at `i < j`, `a` strictly between and
+`b` strictly outside, joined in `M̂ − x − y` by a chain whose filled closures make a continuum `S` off `x ∪ y`. Both positions are edge
+entries (`rep`). In the cyclic arcs between consecutive appearances of `y`, let `a` sit after the appearance `s` and `b` after `t ≠ s`.
+At the pure point `p s` of the edge `E s`: `K₂` = the piece of `E s` from its circle point to its far hinge, the entries from there to `a`,
+`S`, the entries from `b` onward to the near hinge of `E s` (crossing later appearances of `y` along their edges, never their tile), and
+the other piece of `E s` — closed, bounded, connected, off `x`, `y`, the disc and the pure point `p t`; `K₁` = `x` and `y` off the disc
+with `p t` (connected: `isPreconnected_diff_ball`). They join interleaved circle points and are disjoint, against
+`inter_nonempty_of_interleaved_exterior`. -/
+theorem IsBoundaryWalk.sep {x : {T : Set ℂ // F.IsOuterTile T}} {r : List {T : Set ℂ // F.IsOuterTile T}} {z : ℕ → ℂ}
+    {E : ℕ → Set ℂ} {p : ℕ → ℂ} {ρ : ℕ → ℝ} {edge : ℕ → Prop} (h : F.IsBoundaryWalk x r z E p ρ edge) :
+    ∀ (y : {T : Set ℂ // F.IsOuterTile T}) (i j : ℕ), i < j → r[i]? = some y → r[j]? = some y → ∀ (m n : ℕ) (a b : _), i < m → m < j →
+      (n < i ∨ j < n) → r[m]? = some a → r[n]? = some b → ∀ (ha : a ∈ Thomassen.offTwo x y) (hb : b ∈ Thomassen.offTwo x y),
+        ¬ (F.filledGraph.induce (Thomassen.offTwo x y)).Reachable ⟨a, ha⟩ ⟨b, hb⟩ := by
+  sorry
+
+/-- **A boundary walk is a ring** (FS131-RL1): clause 1 is `mem`, clause 2 `IsBoundaryWalk.cons`, clause 3 `IsBoundaryWalk.sep`. -/
+theorem IsBoundaryWalk.isRing {x : {T : Set ℂ // F.IsOuterTile T}} {r : List {T : Set ℂ // F.IsOuterTile T}} {z : ℕ → ℂ}
+    {E : ℕ → Set ℂ} {p : ℕ → ℂ} {ρ : ℕ → ℝ} {edge : ℕ → Prop} (h : F.IsBoundaryWalk x r z E p ρ edge) :
+    Thomassen.IsRing F.filledGraph x r :=
+  ⟨h.mem, h.cons, h.sep⟩
+
+/-- **Every filled outer tile has a boundary walk** (FS131-RL1, child **WALK**; plan § 3–4). The construction, over the finite boundary
+graph of `C = ∂ cl x̂` (`Plane/CurveGraph`): `C` is compact and connected (unicoherence, `cl x̂` without holes), a curve star at each point
+(each branch of the sector chart there is in `C` exactly when `x` is on one side and a tile of `(cl x̂)ᶜ` on the other); its vertices
+are the points where `Γ` is not regular (one added point if none), its edges the port pairs (`port_pair`), each with one tile on its
+outer side; its *angles* are the runs of outer sectors between consecutive rays of `C` at a vertex. Edges and angles make a 2-regular
+structure, whose cycles (one direction each) are walks; cycles sharing a vertex are merged by inserting one inside an angle of the other,
+which splits no edge; a tile's vertex appearances are dropped when it has an edge, and all but one when it has none. -/
+theorem exists_boundaryWalk (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :
+    ∃ (r : List {T : Set ℂ // F.IsOuterTile T}) (z : ℕ → ℂ) (E : ℕ → Set ℂ) (p : ℕ → ℂ) (ρ : ℕ → ℝ) (edge : ℕ → Prop),
+      F.IsBoundaryWalk x r z E p ρ edge := by
+  sorry
+
 /-- **The boundary walk of a filled tile** (F-RING's remaining child; FS131-IP5's reduction of F-RING, by statement exactly F-RING's first
 conjunct): every filled outer tile `x̂` has a ring — its neighbours listed so that cyclically consecutive entries are equal or adjacent, and any
 two appearances of a neighbour `y` separate, in `M̂ − x − y`, the entries between from those outside (Thomassen's rule: a repeated neighbour is
-listed only at its edge contacts). The planned route (FS131-KP plan § 4, one mind, not formalized): the walk around the frontier of `x̂` — the
-outer frontier and the frontiers of the bounded complementary components that are not holes, joined at their pinch points — over the finite
-boundary graph (`Plane/CurveGraph`), separation by `isPreconnected_frontier_connectedComponentIn` and the crossing lemma; IP4's observation
-(record § 15.3): one-sidedness along a continuum (`orient`) may replace the walk in the separation step. **H**; its own job is Keryx's call
-(record § 19). -/
+listed only at its edge contacts). Read off a boundary walk (`exists_boundaryWalk`, `IsBoundaryWalk.isRing`; FS131-RL1's plan,
+`plans/FS131-ringlist-kernel-plan.md`): the walk around `∂ cl x̂` — every complementary component's frontier, joined at pinch points — over
+the finite boundary graph (`Plane/CurveGraph`), its repeated tiles separated by the crossing lemma outside a disc at a pure point of an edge
+(`inter_nonempty_of_interleaved_exterior`). -/
 theorem filledGraph_ringList (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :
     ∃ r, Thomassen.IsRing F.filledGraph x r := by
-  sorry
+  obtain ⟨r, z, E, p, ρ, edge, hW⟩ := exists_boundaryWalk hF hP x
+  exact ⟨r, hW.isRing⟩
 
 /-- **Rings from boundary walks** (leaf F-RING, the planar heart of CVB B2 step 2): every filled outer tile `x̂` has a ring — the outer
 boundary walk of `x̂` (`frontier (outerDom x)`, preconnected), listing the tiles met at each pass (sector charts), each repeated tile only at

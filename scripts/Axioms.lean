@@ -3194,6 +3194,14 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.isRing_flatMap_replicate_four
 #print axioms HadwigerNelson.Plane.ArcMap.twiceApart_flatMap_replicate_four
 #print axioms HadwigerNelson.Plane.ArcMap.filledGraph_ringList
+-- FS131-RL1's children (the boundary walk)
+#print axioms HadwigerNelson.Plane.isPreconnected_diff_ball
+#print axioms HadwigerNelson.Plane.inter_nonempty_of_interleaved_exterior
+#print axioms HadwigerNelson.Plane.ArcMap.filledGraph_adj_iff
+#print axioms HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.cons
+#print axioms HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.sep
+#print axioms HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.isRing
+#print axioms HadwigerNelson.Plane.ArcMap.exists_boundaryWalk
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 
