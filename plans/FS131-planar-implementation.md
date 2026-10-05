@@ -435,3 +435,49 @@ odd vertex; the orientation at an exit is a Jordan-type step); F-LOC/CONN/INF/ON
 `retArcs_not_abut`, `retArcs_not_interleaved`. **For the coordinator** (done-means 5): BG does not exist yet, so whether the crossing lemma's route (b)
 is cheap through it is not measured; what is held now that bears on it is `exists_ball_two_tiles` (vertices of a compact disc are finitely many, by
 isolation and compactness), BG's hardest finiteness. F-RING not reached, not measured.
+
+## Stage 9 — SAVED: FS131-IP3's readback (the third implementer, from IP2's Stage 8)
+
+*de Bruijn, the implementer (FS131-IP3), 2026-10-05. Brief: `data/fs131/briefs/FS131-IP3-planar.md` (main tree). Same branch and worktree; I append
+stages from here. Read in full at launch: the brief, `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building and § Make the gate fail, this record
+(stages 1–8), KP's plan (all six stages, §§ 3–5 among them), inventory items 277, 293, 300, 301.*
+
+### 9.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by `grep -F` of each quotation's full text (planted absent string `ABSENT-CONTROL-STRING-xyzzy` reported `MISS`, the control):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| inventory item 300 (truncated at "Stages 6–8;") | `plans/FS131-close-inventory.md` (main tree) l. 2350 | verbatim |
+| inventory item 301 (truncated at "BG with PATH,") | same, l. 2371 | verbatim |
+| inventory item 293 (truncated at "a binder name is not part") | same, l. 2240 | verbatim |
+| "Both leaves closed on iteration in well under a session's tenth each … (≈ 130" | this record § 7.3 | verbatim |
+| finding 1 ("1. `exists_far_end`'s second disjunct, … the `a|c` boundary") | this record § 7.4 | verbatim |
+| finding 2 ("2. At a genuine exit `q = r(φ)`, … CD's step 2") | this record § 7.4 | verbatim |
+| "**Work order** (each step unblocks the next; re-price after the first two):" | KP's plan § 5.1 | verbatim |
+| "**May:** add children (with spec examples; …), change imports (updating `ARCHITECTURE.md`'s" | KP's plan § 5.2 | verbatim |
+| inventory item 277 (truncated at "KP's") | `plans/FS131-close-inventory.md` l. 2040 | verbatim |
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors | verbatim |
+
+No mismatch.
+
+### 9.2 What I may and may not change (the brief's touches, ruling 301, ruling 293 (b), KP's plan § 5.2)
+
+**May:** prove the `sorry`s left at `02e85433` in the files my touches name — `MapTopology`'s `exists_far_end`; in `MapGraph` outside the
+`namespace HadwigerNelson.Thomassen` block: `not_isHoleOf_chain`, `isHoleOf_cluster`, `filledGraph_locallyFinite`, `_connected`, `_infinite`, `_rings`,
+`_oneInf`; in `BaseWalk` `endpoint_of_far_end`, `retArcs_not_abut`, `retArcs_not_interleaved` (the last over the crossing lemma as given, carrying `sorryAx`
+until FS131-IX1 merges) — adding children beside them with spec examples (BG and PATH where I choose: `MapTopology` § D, `MapGraph` outside the
+`Thomassen` block, or a new module importing nothing under `Plane/PlaneTopology` beyond what `MapTopology` imports); imports (with `ARCHITECTURE.md`'s
+Imports cell and `scripts/Axioms.lean`'s FS131-KP block above `=== PURCHASED ===`); `Proofs.lean`, this record, `tools/fs131_ip_*.py`, `data/fs131/ip/`,
+`data/fs131/reports/FS131-IP3.md`. A later leaf of ruling 301's order may go first when cheaper, said here.
+
+**May not:** change any statement of KP's job (plan §§ 3.2, 4.1) or any definition they use (`IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`, `IsRing`,
+`TwiceApart`, `PlanarLike`, `outerDom`, `EnclosesTile`), nor any statement outside this job; no new `axiom`, no `native_decide`; nothing in
+`Plane/PlaneTopology` (FS131-IX1's) or inside the `HadwigerNelson.Thomassen` block (T-GRAPH's later job); not KP's plan file; not the other `sorry`s in
+`BaseWalk`/`BaseDense` (wave 5's lane, `fs131-w5`); no merge into `fs131-w5`, no taking `main`, no gate run, nothing on `main`; no file edited while a build
+of it runs. A leaf that cannot be proved as written goes to Keryx at once.
+
+### 9.3 The as-given build (`02e85433`, before any edit)
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1753 modules already up to date, nothing built, 11 modules with warnings, every warning
+`declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T014928Z-325388.log`; driver log `data/fs131/ip/build-ip3-asgiven.log`).
