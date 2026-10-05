@@ -938,3 +938,43 @@ per job).
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 21 — SAVED
+
+## Stage 22 — SAVED: FS131-I5f's readback
+
+*FS131-I5f, wave 5's sixth implementer (Opus), resuming this record at its first unsaved stage (Stage 21 SAVED, `6e38803d`). Brief:
+`data/fs131/briefs/FS131-I5f-wave5.md` (main tree). My set (ruling 311, I5e's split): `HexRing`'s six (`rot_out`, `rot_in`, `hex_regular`, `bv_hex`,
+`bv_l3`, `bv_nd`), `Cor3`'s `cor3_local`, `BaseWalk`'s four (`exists_pseudoCircle`, `CircleColouring.reduce`, `CircleColouring.select`, `l3_base`),
+`Dense`'s `disc1_local`, `BaseDense`'s three (`row134BaseUA`, `exists_preBend`, `cv_exists`) — 15. Never `Terminal`, never the planar job's seven.
+
+### 22.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (each `> ` line of the brief searched verbatim in the file its `— source:` line names; main tree for `CLAUDE.md` and the inventory,
+the worktree for the plan and this record):
+
+| quotation (opening words) | source | result |
+|---|---|---|
+| Kooshi, "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors | verbatim |
+| "**What is left in this lane (24), and where it stands** (for wave 5's next implementers):" | this record, Stage 21 | verbatim |
+| "**A split for a second wave-5 implementer** (ruling 299 (e)), by file, so the two trees merge in disjoint hunks: one implementer on **`Terminal`**" | this record, Stage 21 | verbatim |
+| "310. **FS131-I5e handed back** (Stage 21 SAVED, harness ≈ 401k by the task notice; record" | `plans/FS131-close-inventory.md` item 310 (l. 2472) | verbatim |
+| "311. **Ruling: I5e's slot → FS131-I5f, wave 5's non-`Terminal` half; E5 takes the next slot, whatever wave 4's state.** Choice: I5f on `fs131-w5` takes I5e's" | the inventory, item 311 (l. 2486) | verbatim |
+| "218. **Rulings on KB's and IC1's held items** (four parts each, compressed where the alternative is plain)." | the inventory, item 218 (l. 1562) | verbatim |
+| "274. **Rulings on QA3's held items and the freed slot.** (a) **`InMK`**: restated when its first consumer is planned, not now (no theorem uses it; a definition" | the inventory, item 274 (l. 2013) | verbatim |
+| "**It may**: add children anywhere in the wave's modules — every child §§ 4, 9.1 name is an expected addition, and the shared ones may go to the" | `plans/FS131-w5-kernel-plan.md` § 10.2 (l. 470) | verbatim |
+| "295. **Ruling: MERGE leaves wave 4; the freed slot goes to FS131-IX1 as ruled.** Choice: (a) wave 4 lands without `exists_merge` — at wave 4's merge-and-gate," | the inventory, item 295 (l. 2274) | verbatim |
+
+Items 218, 258, 274, 284, 295, 299, 310, 311 read in full; I5e's Stages 19–21 read. **One count differs, a finding about the ruling, not the brief**:
+item 311 says the lane "would otherwise stand idle with 16 leaves open that need no re-derivation"; the brief says 15, and the build's warnings give 15
+(below). Not material.
+
+### 22.2 The as-given build (`6e38803d`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit (it waited for the slot):
+**OK — all 1754 modules already up to date, nothing built, 9 modules with warnings**, exit 0 (`build/gate/build/20261005T022500Z-568829.log`; driver log
+`data/fs131/i5f/build-stage22-asgiven.log`). Every warning is `declaration uses 'sorry'`, 39: wave 5's `Terminal` 9, `Dense` 1, `Cor3` 1, `HexRing` 6,
+`MapGraph` 3, `BaseWalk` 7, `BaseDense` 4 (**31**, the brief's count; less the planar job's seven and `Terminal`'s nine, **15** mine), and wave 4's stale
+`Contact` 3, `UnitArc` 5.
+
+Iteration script: `data/fs131/i5f/iter.sh` (I5e's, re-pointed at its own scratch mirror `/home/kooshi/scratch-w5f`, outside the repository).
+
+## Stage 22 — SAVED
