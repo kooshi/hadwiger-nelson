@@ -774,3 +774,38 @@ three; `n3_end` and its child read `sorryAx` (the control).
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 18 — SAVED
+
+## Stage 19 — SAVED: FS131-I5e's readback
+
+*FS131-I5e, wave 5's fifth implementer (Opus), resuming this record at its first unsaved stage (Stage 18 SAVED, `a804de21`). Brief:
+`data/fs131/briefs/FS131-I5e-wave5.md` (main tree).*
+
+### 19.1 The brief's quotations against their sources (standing rule 3)
+
+| quotation (opening words) | source | result |
+|---|---|---|
+| Kooshi, "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors — read before pricing anything (l. 119) | verbatim |
+| "**What is left in this lane (26), and where it stands** (for wave 5's next implementer):" | this record, Stage 18 | verbatim |
+| "298. **FS131-I5d handed back** (Stage 18 SAVED, harness ≈ 599k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 14–18;" | `plans/FS131-close-inventory.md` item 298 (main tree, l. 2318) | verbatim |
+| "299. **Rulings on I5d's held items, and its slot.** (a) **`rot_noThird`'s block**: wave 5's next implementer moves `cor3` — statement, docstring and proof (a" | the inventory, item 299 (l. 2337) | verbatim |
+| "- **no in-type upper flank at `N`** (the first disjunct): the child `n3_end_of_not_inType`, `sorry` — NB3-END items 2–5 with item 2's premise read as I4m" | this record, Stage 18 (l. 747) | verbatim |
+| "288. **FS131-I4m handed back** (Stage 40 SAVED, harness 466k by the task notice; report `fs131-w4`'s `data/fs131/reports/FS131-I4m.md`; commits `70075915`," | the inventory, item 288 (l. 2171) | verbatim |
+| "218. **Rulings on KB's and IC1's held items** (four parts each, compressed where the alternative is plain)." | the inventory, item 218 (l. 1562) | verbatim |
+| "274. **Rulings on QA3's held items and the freed slot.** (a) **`InMK`**: restated when its first consumer is planned, not now (no theorem uses it; a definition" | the inventory, item 274 (l. 2013) | verbatim |
+| "**It may**: add children anywhere in the wave's modules — every child §§ 4, 9.1 name is an expected addition, and the shared ones may go to the" | `plans/FS131-w5-kernel-plan.md` § 10.2, paragraph 1 (l. 470) | verbatim |
+
+Items 218, 258, 268–269, 274 (the planar fence: `IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`, the three `cvb_*` leaves, `retArcs_nested`,
+`exists_endpoint`, `exists_eleventh`, `exists_unenclosed_or_bad`), 284, 288–289, 295, 298–299 read in full; I5d's Stages 14–18 read; NB3-END
+(`plans/FS112-NB3-verification.md` l. 222–243) read. No mismatch found. The brief's remark that nothing in wave 5 may cite `exists_merge` (item 295): by
+`rg`, no wave-5 module cites it.
+
+### 19.2 The as-given build (`a804de21`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit (it waited for the slot): **OK — all
+1753 modules already up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T014933Z-325834.log`; driver log
+`data/fs131/i5e/build-stage19-asgiven.log`). Every warning is `declaration uses 'sorry'`, 41: wave 5's `Terminal` 9, `Dense` 2, `HexRing` 7, `MapGraph` 3,
+`BaseWalk` 8, `BaseDense` 4 (**33**, the brief's count; less the planar seven, **26** this lane's), and wave 4's stale `Contact` 3, `UnitArc` 5.
+
+Iteration script: `data/fs131/i5e/iter.sh` (I5d's, re-pointed at its own scratch mirror `/home/kooshi/scratch-w5e`, outside the repository).
+
+## Stage 19 — SAVED
