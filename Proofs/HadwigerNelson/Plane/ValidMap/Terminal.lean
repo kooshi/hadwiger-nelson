@@ -28,12 +28,43 @@ open Complex Real Set Filter Topology Metric
 
 /-! ## Angle arithmetic at `S′` (FS131-I5i) -/
 
+/-- An integer between `1/2` and `1` (as a real) is `1`. -/
+theorem int_eq_one_of_real {t : ℤ} (h1 : (1 : ℝ) / 2 ≤ t) (h2 : (t : ℝ) ≤ 1) : t = 1 := by
+  have a : 0 < t := by exact_mod_cast (show (0 : ℝ) < t by linarith)
+  have b : t ≤ 1 := by exact_mod_cast h2
+  omega
+
+/-- An integer between `0` and `1/2` (as a real) is `0`. -/
+theorem int_eq_zero_of_real {t : ℤ} (h1 : (0 : ℝ) ≤ t) (h2 : (t : ℝ) ≤ 1 / 2) : t = 0 := by
+  have a : 0 ≤ t := by exact_mod_cast h1
+  have b : t < 1 := by exact_mod_cast (show (t : ℝ) < 1 by linarith)
+  omega
+
+/-- `|κ s / 2| < 1` below a chart radius `r₀` with `|κ| r₀ < 2` (so `arcsin (κ s / 2)` is strictly inside `(−π/2, π/2)`). -/
+theorem abs_half_lt_one {κ s r₀ : ℝ} (hc : |κ| * r₀ < 2) (hs0 : 0 ≤ s) (hs : s < r₀) : |κ * s / 2| < 1 := by
+  rw [abs_div, abs_mul, abs_of_nonneg hs0, abs_two]
+  have : |κ| * s ≤ |κ| * r₀ := mul_le_mul_of_nonneg_left hs.le (abs_nonneg κ)
+  rw [div_lt_one two_pos]; linarith
+
 /-- An arc of directions `[b₀, b₁]` inside the closed lower half-turn `[α + π, α + 2π]` and holding both `α` and `α + π` is that half-turn
 (E5 § 3.4: "its cone lies in `[α + π, α + 2π]` and holds both ends, so it **is** `[α + π, α + 2π]`"). -/
 theorem angleIcc_eq_lower_half {α b₀ b₁ : ℝ} (h01 : b₀ ≤ b₁)
     (hsub : angleIcc b₀ b₁ ⊆ angleIcc (α + π) (α + 2 * π)) (hα : α ∈ angleIcc b₀ b₁) (hαπ : α + π ∈ angleIcc b₀ b₁) :
     ∃ m : ℤ, b₀ = α + π + 2 * π * m ∧ b₁ = α + 2 * π + 2 * π * m := by
-  sorry
+  have hπ := Real.pi_pos
+  obtain ⟨j, hj1, hj2⟩ := ArcMap.exists_lift_of_Icc_subset_angleIcc (A := α + π) (B := α + 2 * π) (by linarith) h01
+    ((Icc_subset_angleIcc b₀ b₁).trans hsub)
+  obtain ⟨k, hk1, hk2⟩ := mem_iUnion.mp hα
+  obtain ⟨k', hk1', hk2'⟩ := mem_iUnion.mp hαπ
+  have e1 : -k - j = 1 := int_eq_one_of_real (by push_cast; nlinarith) (by push_cast; nlinarith)
+  have e2 : -k' - j = 0 := int_eq_zero_of_real (by push_cast; nlinarith) (by push_cast; nlinarith)
+  have e1' : (k : ℝ) = -1 - j := by have : ((-k - j : ℤ) : ℝ) = 1 := by exact_mod_cast e1
+                                    push_cast at this; linarith
+  have e2' : (k' : ℝ) = -j := by have : ((-k' - j : ℤ) : ℝ) = 0 := by exact_mod_cast e2
+                                 push_cast at this; linarith
+  refine ⟨j, ?_, ?_⟩
+  · rw [e2'] at hk1'; nlinarith
+  · rw [e1'] at hk2; nlinarith
 
 /-- An arc of directions inside `[α + π, α + 2π − φ]` (U1's cone at `S′`) whose arc meets no interior direction of the lower half-turn
 `(α + π, α + 2π)` is the single direction `α + π` (E5 § 3.4: "hence equal to `{α + π}`"). -/
@@ -41,7 +72,27 @@ theorem angle_pinch {α φ b b' : ℝ} {m : ℤ} (hφ : 0 < φ) (hφπ : φ < π
     (hsub : angleIcc b b' ⊆ angleIcc (α + π) (α + 2 * π - φ))
     (hdisj : Disjoint (angleIcc b b') (angleIoo (α + π + 2 * π * m) (α + 2 * π + 2 * π * m))) :
     b' = b ∧ ∃ m' : ℤ, b = α + π + 2 * π * m' := by
-  sorry
+  have hπ := Real.pi_pos
+  have key : ∀ x ∈ Icc b b', ∃ k : ℤ, x = α + π + 2 * π * k := by
+    intro x hx
+    have hxI := Icc_subset_angleIcc b b' hx
+    obtain ⟨k, hk1, hk2⟩ := mem_iUnion.mp (hsub hxI)
+    refine ⟨k, ?_⟩
+    by_contra hne
+    have hlt : α + π + 2 * π * k < x := lt_of_le_of_ne hk1 (Ne.symm hne)
+    refine Set.disjoint_left.mp hdisj hxI (mem_iUnion.mpr ⟨k - m, ?_, ?_⟩) <;> push_cast <;> nlinarith
+  obtain ⟨k₀, hk₀⟩ := key b ⟨le_rfl, hbb⟩
+  refine ⟨?_, k₀, hk₀⟩
+  by_contra hne
+  have hlt : b < b' := lt_of_le_of_ne hbb (Ne.symm hne)
+  set x := b + min (b' - b) π / 2 with hx
+  have hm0 : 0 < min (b' - b) π := lt_min (by linarith) hπ
+  obtain ⟨k₁, hk₁⟩ := key x ⟨by rw [hx]; linarith, by rw [hx]; linarith [min_le_left (b' - b) π]⟩
+  have h1 : (0 : ℝ) < ((k₁ - k₀ : ℤ) : ℝ) := by push_cast; nlinarith
+  have h2 : ((k₁ - k₀ : ℤ) : ℝ) < 1 := by push_cast; nlinarith [min_le_right (b' - b) π]
+  have h1' : 0 < k₁ - k₀ := by exact_mod_cast h1
+  have h2' : k₁ - k₀ < 1 := by exact_mod_cast h2
+  omega
 
 namespace ArcMap
 
@@ -658,14 +709,81 @@ more than `i`'s first one — else the two sectors meet at small radius. -/
 theorem nextκ_le_of_disjoint {P : ℂ} {n : ℕ} {G : BranchGerms n} {r₀ : ℝ} (hC : F.IsSectorChart G P r₀) {i j : Fin n}
     (hij : i ≠ j) (hj : G.nextβ j = G.β j) (hji : e (G.β j) = e (G.β i)) (hi : G.nextβ i = G.β i + π) :
     G.nextκ j ≤ G.κ i := by
-  sorry
+  have hπ := Real.pi_pos
+  by_contra hlt
+  push Not at hlt
+  have hκj : G.κ j < G.nextκ j := by
+    rcases hC.sorted.2 j with h | h
+    · rw [hj] at h; exact absurd h (lt_irrefl _)
+    · exact h.2
+  set s := r₀ / 2 with hsdef
+  have hs0 : 0 < s := by rw [hsdef]; linarith [hC.pos]
+  have hsr : s < r₀ := by rw [hsdef]; linarith [hC.pos]
+  set x := (max (G.κ i) (G.κ j) + G.nextκ j) / 2 with hx
+  have hx1 : max (G.κ i) (G.κ j) < x := by rw [hx]; linarith [max_lt hlt hκj]
+  have hx2 : x < G.nextκ j := by rw [hx]; linarith [max_lt hlt hκj]
+  have hbi := abs_half_lt_one (hC.curv i) hs0.le hsr
+  have hbj := abs_half_lt_one (hC.curv j) hs0.le hsr
+  have hbn := abs_half_lt_one (hC.curv (BranchGerms.next j)) hs0.le hsr
+  have hbni := abs_half_lt_one (hC.curv (BranchGerms.next i)) hs0.le hsr
+  rw [← BranchGerms.nextκ_eq] at hbn hbni
+  rw [abs_lt] at hbi hbj hbn hbni
+  have hxs1 : -1 ≤ x * s / 2 := by nlinarith [le_max_left (G.κ i) (G.κ j)]
+  have hxs2 : x * s / 2 ≤ 1 := by nlinarith
+  have hai : Real.arcsin (G.κ i * s / 2) < Real.arcsin (x * s / 2) :=
+    Real.arcsin_lt_arcsin hbi.1.le (by nlinarith [le_max_left (G.κ i) (G.κ j)]) hxs2
+  have haj : Real.arcsin (G.κ j * s / 2) < Real.arcsin (x * s / 2) :=
+    Real.arcsin_lt_arcsin hbj.1.le (by nlinarith [le_max_right (G.κ i) (G.κ j)]) hxs2
+  have han : Real.arcsin (x * s / 2) < Real.arcsin (G.nextκ j * s / 2) :=
+    Real.arcsin_lt_arcsin hxs1 (by nlinarith) hbn.2.le
+  have hxpi : Real.arcsin (x * s / 2) < π / 2 := by rw [Real.arcsin_lt_pi_div_two]; nlinarith
+  have hni := Real.neg_pi_div_two_le_arcsin (G.nextκ i * s / 2)
+  set y := P + (s : ℂ) * e (G.β j + Real.arcsin (x * s / 2)) with hy
+  have hyj : y ∈ G.sector P r₀ j :=
+    ⟨s, ⟨hs0, hsr⟩, G.β j + Real.arcsin (x * s / 2), ⟨by linarith, by rw [hj]; linarith⟩, rfl⟩
+  have hey : e (G.β j + Real.arcsin (x * s / 2)) = e (G.β i + Real.arcsin (x * s / 2)) := by
+    rw [e_add, e_add, hji]
+  have hyi : y ∈ G.sector P r₀ i :=
+    ⟨s, ⟨hs0, hsr⟩, G.β i + Real.arcsin (x * s / 2), ⟨by linarith, by rw [hi]; linarith⟩, by rw [hy, hey]⟩
+  exact Set.disjoint_left.mp (hC.disjoint r₀ ⟨hC.pos, le_rfl⟩ i j hij) hyi hyj
 
 /-- **A point of the lower half-disc sector on the `−a` side lies below its first germ** (sign care: a germ of direction `α + π` and
 curvature `κ` is the arc of upward curvature `−κ` in the frame at `α`). -/
 theorem tanBelow_of_mem_sector {P : ℂ} {α : ℝ} {n : ℕ} {G : BranchGerms n} {r₀ : ℝ} (hC : F.IsSectorChart G P r₀)
     {i : Fin n} {m : ℤ} (hβ : G.β i = α + π + 2 * π * m) (hnb : G.nextβ i = G.β i + π) {r : ℝ} (hr : r ∈ Ioc 0 r₀)
     {y : ℂ} (hy : y ∈ G.sector P r i) (hx : frameX P α y < 0) : TanBelow P α (-G.κ i) y := by
-  sorry
+  have hπ := Real.pi_pos
+  obtain ⟨s, hs, φ, hφ, rfl⟩ := hy
+  obtain ⟨hX, hY⟩ := frame_polar P α s φ
+  have hb := abs_half_lt_one (hC.curv i) hs.1.le (lt_of_lt_of_le hs.2 hr.2)
+  rw [abs_lt] at hb
+  set θ := φ - G.β i with hθ
+  have hφα : φ - α = θ + π + 2 * π * m := by rw [hθ, hβ]; ring
+  have hcos : Real.cos (φ - α) = -Real.cos θ := by
+    rw [hφα, show θ + π + 2 * π * (m : ℝ) = (θ + π) + (m : ℤ) * (2 * π) by ring, Real.cos_add_int_mul_two_pi,
+      Real.cos_add_pi]
+  have hsin : Real.sin (φ - α) = -Real.sin θ := by
+    rw [hφα, show θ + π + 2 * π * (m : ℝ) = (θ + π) + (m : ℤ) * (2 * π) by ring, Real.sin_add_int_mul_two_pi,
+      Real.sin_add_pi]
+  have hθ1 : Real.arcsin (G.κ i * s / 2) < θ := by rw [hθ]; linarith [hφ.1]
+  have hθ2 : θ < π + Real.arcsin (G.nextκ i * s / 2) := by rw [hθ]; linarith [hφ.2, hnb]
+  have ha1 := Real.neg_pi_div_two_le_arcsin (G.κ i * s / 2)
+  have ha2 := Real.arcsin_le_pi_div_two (G.nextκ i * s / 2)
+  have hcθ : 0 < Real.cos θ := by
+    rw [hX, hcos] at hx; nlinarith [hs.1]
+  have hθ3 : θ < π / 2 := by
+    by_contra hge; push Not at hge
+    have : Real.cos θ ≤ 0 := Real.cos_nonpos_of_pi_div_two_le_of_le hge (by linarith)
+    linarith
+  have hsinθ : G.κ i * s / 2 < Real.sin θ := by
+    have := Real.sin_lt_sin_of_lt_of_le_pi_div_two ha1 hθ3.le hθ1
+    rwa [Real.sin_arcsin hb.1.le hb.2.le] at this
+  unfold TanBelow tanHeight
+  rw [hX, hY, hcos, hsin]
+  have hs2 : (s * -Real.cos θ) ^ 2 + (s * -Real.sin θ) ^ 2 = s ^ 2 := by
+    nlinarith [Real.sin_sq_add_cos_sq θ]
+  rw [hs2]
+  nlinarith [hs.1]
 
 /-- **A horn sector along `−a` reaches the point above every arc of upward curvature `−κ` with `κ` at least its upper germ's
 curvature** (on the `−a` side, arbitrarily near the point). -/
@@ -673,7 +791,53 @@ theorem exists_tanAbove_of_sector {P : ℂ} {α κ : ℝ} {n : ℕ} {G : BranchG
     (hC : F.IsSectorChart G P r₀) {j : Fin n} {m : ℤ} (hβ : G.β j = α + π + 2 * π * m) (hnb : G.nextβ j = G.β j)
     (hκ : G.nextκ j ≤ κ) {r : ℝ} (hr : r ∈ Ioc 0 r₀) :
     ∀ ρ > 0, ∃ y ∈ G.sector P r j, dist y P < ρ ∧ frameX P α y < 0 ∧ TanAbove P α (-κ) y := by
-  sorry
+  intro ρ hρ
+  have hπ := Real.pi_pos
+  set s := min ρ r / 2 with hsdef
+  have hs0 : 0 < s := by have := lt_min hρ hr.1; rw [hsdef]; linarith
+  have hsr : s < r := by rw [hsdef]; linarith [min_le_right ρ r, hr.1]
+  have hsρ : s < ρ := by rw [hsdef]; linarith [min_le_left ρ r, hρ]
+  have hκj : G.κ j < G.nextκ j := by
+    rcases hC.sorted.2 j with h | h
+    · rw [hnb] at h; exact absurd h (lt_irrefl _)
+    · exact h.2
+  have hb1 := abs_half_lt_one (hC.curv j) hs0.le (lt_of_lt_of_le hsr hr.2)
+  have hb2 := abs_half_lt_one (hC.curv (BranchGerms.next j)) hs0.le (lt_of_lt_of_le hsr hr.2)
+  rw [← BranchGerms.nextκ_eq] at hb2
+  rw [abs_lt] at hb1 hb2
+  set A := Real.arcsin (G.κ j * s / 2) with hA
+  set B := Real.arcsin (G.nextκ j * s / 2) with hB
+  have hAB : A < B := Real.arcsin_lt_arcsin hb1.1.le (by nlinarith) hb2.2.le
+  have hA1 : -(π / 2) < A := by rw [hA, Real.neg_pi_div_two_lt_arcsin]; linarith
+  have hB1 : B < π / 2 := by rw [hB, Real.arcsin_lt_pi_div_two]; linarith
+  set θ := (A + B) / 2 with hθ
+  set φ := G.β j + θ with hφ
+  obtain ⟨hX, hY⟩ := frame_polar P α s φ
+  have hφα : φ - α = θ + π + 2 * π * m := by rw [hφ, hβ]; ring
+  have hcos : Real.cos (φ - α) = -Real.cos θ := by
+    rw [hφα, show θ + π + 2 * π * (m : ℝ) = (θ + π) + (m : ℤ) * (2 * π) by ring, Real.cos_add_int_mul_two_pi,
+      Real.cos_add_pi]
+  refine ⟨P + (s : ℂ) * e φ, ⟨s, ⟨hs0, hsr⟩, φ, ⟨by rw [hφ, hθ]; linarith, by rw [hnb, hφ, hθ]; linarith⟩, rfl⟩,
+    ?_, ?_, ?_⟩
+  · rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hs0,
+      mul_one]
+    exact hsρ
+  · rw [hX, hcos]
+    have : 0 < Real.cos θ := Real.cos_pos_of_mem_Ioo ⟨by rw [hθ]; linarith, by rw [hθ]; linarith⟩
+    nlinarith
+  · have hsin : Real.sin (φ - α) = -Real.sin θ := by
+      rw [hφα, show θ + π + 2 * π * (m : ℝ) = (θ + π) + (m : ℤ) * (2 * π) by ring, Real.sin_add_int_mul_two_pi,
+        Real.sin_add_pi]
+    have hsinθ : Real.sin θ < G.nextκ j * s / 2 := by
+      have := Real.sin_lt_sin_of_lt_of_le_pi_div_two (by rw [hθ]; linarith) hB1.le (show θ < B by rw [hθ]; linarith)
+      rwa [hB, Real.sin_arcsin hb2.1.le hb2.2.le] at this
+    have hκs : G.nextκ j * s / 2 ≤ κ * s / 2 := by nlinarith
+    unfold TanAbove tanHeight
+    rw [hX, hY, hcos, hsin]
+    have hs2 : (s * -Real.cos θ) ^ 2 + (s * -Real.sin θ) ^ 2 = s ^ 2 := by
+      nlinarith [Real.sin_sq_add_cos_sq θ]
+    rw [hs2]
+    nlinarith
 
 /-- **The opposite horn** (N4-STUCK (i) read at a given horn's axis): at a stuck vertex where `c` has two sectors, a `c`-horn along `e α`
 has a partner `c`-horn along `e (α + π)`, with bounds in `[−1, 1]`. -/

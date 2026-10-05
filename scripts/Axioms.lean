@@ -3566,6 +3566,33 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.sep_add_pi_S
 #print axioms HadwigerNelson.Plane.sep_N
 #print axioms HadwigerNelson.Plane.sep_add_pi_N
+-- FS131-I5i (extending this block): the witnesses at the antipode, the cones at `S′`, NB3-END item 2 (`HornShadow`, `Terminal`)
+#print axioms HadwigerNelson.Plane.witness_dir_aux1
+#print axioms HadwigerNelson.Plane.witness_dir_aux2
+#print axioms HadwigerNelson.Plane.witness_dir_aux3
+#print axioms HadwigerNelson.Plane.witness_dir_real
+#print axioms HadwigerNelson.Plane.dirDist_sq_frame
+#print axioms HadwigerNelson.Plane.witness_dir_pt
+#print axioms HadwigerNelson.Plane.angle_pinch_false
+#print axioms HadwigerNelson.Plane.coneAt_subset_of_far
+#print axioms HadwigerNelson.Plane.exists_witness_dir
+#print axioms HadwigerNelson.Plane.int_eq_one_of_real
+#print axioms HadwigerNelson.Plane.int_eq_zero_of_real
+#print axioms HadwigerNelson.Plane.abs_half_lt_one
+#print axioms HadwigerNelson.Plane.angleIcc_eq_lower_half
+#print axioms HadwigerNelson.Plane.angle_pinch
+#print axioms HadwigerNelson.Plane.ArcMap.witness_near_S_upper
+#print axioms HadwigerNelson.Plane.ArcMap.witness_near_S_lower
+#print axioms HadwigerNelson.Plane.ArcMap.far_of_outType_chart
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_S_subset_of_horn
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_N_subset_of_horn
+#print axioms HadwigerNelson.Plane.ArcMap.nextκ_le_of_disjoint
+#print axioms HadwigerNelson.Plane.ArcMap.tanBelow_of_mem_sector
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tanAbove_of_sector
+#print axioms HadwigerNelson.Plane.ArcMap.exists_horn_add_pi_of_stuck
+#print axioms HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S
+#print axioms HadwigerNelson.Plane.ArcMap.n3_end_four_colours
+#print axioms HadwigerNelson.Plane.ArcMap.n3_end_bothKind
 
 #eval IO.println "=== PURCHASED ==="
 

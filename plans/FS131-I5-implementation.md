@@ -1391,3 +1391,53 @@ inequality, about 15k tokens, the cost all in `nlinarith` heartbeats until split
 `S′` and `v − 2n`, U1, SHAVE's clearness): about one session.
 
 ## Stage 30 — SAVED
+
+## Stage 31 — SAVED (FS131-I5i): the five chart and angle children proved, so `flank_two_sectors_at_S` (NB3-END item 2) is a kernel theorem; the handover
+
+**Folded in** (proved in scratch during Stage 30's build, now in `Terminal`): `angleIcc_eq_lower_half` (over `ArcMap.exists_lift_of_Icc_subset_angleIcc`),
+`angle_pinch`, `ArcMap.nextκ_le_of_disjoint` (if the horn's upper germ curved more than the half-disc's first germ, the point
+`S′ + s e(β + arcsin(x s/2))` for `x` between them would lie in both sectors at `s = r₀/2`, against `IsSectorChart.disjoint`),
+`ArcMap.tanBelow_of_mem_sector`, `ArcMap.exists_tanAbove_of_sector` (through wave 4's `frame_polar` and `Real.sin_arcsin`), and three helpers
+`int_eq_one_of_real`, `int_eq_zero_of_real`, `abs_half_lt_one`. Nothing of `flank_two_sectors_at_S` rests on `sorry` now.
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 72149b07`: **PASS**. `tools/check_architecture.py`: **PASS** (no new module).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`Terminal`, `Dense`, `BaseWalk`, `BaseDense`,
+`Proofs`), 8 with warnings, every warning `declaration uses 'sorry'`**, exit 0, 8 min 38 s (`build/gate/build/20261005T050511Z-1542012.log`; driver log
+`data/fs131/i5i/build-stage31.log`). Distinct `sorry` declarations: `Terminal` **10** (`exists_red`, `exists_terminal`, `cv_hd_main`, `cv_hd`, `cv_class`,
+`y3_end_needs`, `c_ends`, `c_double`, `n3_end_four_colours`, `n3_end_bothKind`), `Dense` 1, `HexRing` 6, `MapGraph` 3, `BaseWalk` 5, `BaseDense` 3 — wave 5
+**28** (27 at launch: the leaf `n3_end_of_not_inType` replaced by two smaller children); wave 4's stale `Contact` 3, `UnitArc` 5.
+
+**Axioms, read from this build's oleans** (`data/fs131/i5i/I5iAxioms31.lean` → `I5iAxioms31.out`, run under a 12 GiB slot, exit 0): 28 records; the 24
+proved declarations of this job on `[propext, Classical.choice, Quot.sound]`, among them `ArcMap.flank_two_sectors_at_S`; `n3_end_four_colours`,
+`n3_end_bothKind` and the control `n3_end_of_not_inType` read `sorryAx` (the reader sees the failure the print guards against); the control
+`linkage_dot_ne_zero` the standard three. `scripts/Axioms.lean`: the "FS131-I5h" block extended by a commented line and 26 records, above the
+`=== PURCHASED ===` banner.
+
+### Theorems this phase proved
+
+All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5i/I5iAxioms31.out`):
+- `HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S` (`Plane/ValidMap/Terminal.lean`) — NB3-END item 2, E5 § 3.4 (`e5-two-g-sectors`): in
+  `n3_end_of_not_inType`'s setting the upper flank colour has at least two sectors at `S′ = v − n` for every small radius.
+- `ArcMap.exists_horn_add_pi_of_stuck` (`Terminal`) — the opposite horn at a stuck vertex, at exactly `α + π`, bounds in `[−1, 1]`.
+- `ArcMap.nextκ_le_of_disjoint`, `ArcMap.tanBelow_of_mem_sector`, `ArcMap.exists_tanAbove_of_sector`, `angleIcc_eq_lower_half`, `angle_pinch`,
+  `int_eq_one_of_real`, `int_eq_zero_of_real`, `abs_half_lt_one` (`Terminal`) — the chart at `S′` (E5's F6) and its angle arithmetic.
+- `witness_dir_real` (with `witness_dir_aux1`–`aux3`), `dirDist_sq_frame`, `witness_dir_pt`, `exists_witness_dir` (`HornShadow`) — E5's F3–F4, the
+  witnesses' directions, exact.
+- `coneAt_subset_of_far`, `ArcMap.far_of_outType_chart` (`HornShadow`) — E5's F2 (cone and pointwise forms).
+- `ArcMap.coneAt_S_subset_of_horn`, `ArcMap.coneAt_N_subset_of_horn`, `angle_pinch_false` (`HornShadow`) — U1's cone forms, E5's F5.
+- `ArcMap.witness_near_S_upper`, `ArcMap.witness_near_S_lower` (`HornShadow`) — the localization at `S′` (E5's F3).
+
+### What is left of my set (10), and where it stands (for the next `Terminal` implementer)
+
+- **`n3_end_of_not_inType`**: assembled; open only through `n3_end_four_colours` (NB3-END items 3–4: `S′` terminal makes `g`'s two sectors horns along
+  `±a` — `woodallCone_isHorn_ua` at `S′`, as `exists_horn_add_pi_of_stuck` does at `v` —, then the colours `y` below and `z` above `g`'s `+a` horn,
+  `z ≠ y` by SHAVE) and `n3_end_bothKind` (item 5: the `y`-shadow on that horn, an in-type `y`-tile at `v − 2n` Siamese to the lower flank).
+  `flank_two_sectors_at_S` returns the flank colour `g` with its two sectors; the chart at `S′` and U1's cone forms are ready.
+- **`cv_class`**: its "None" disjunct is E5 § 3.5 — this stage's argument mirrored at `N` (`sep_N`, `sep_add_pi_N`; the witness, cone and chart lemmas
+  here have frame-turned forms: `witness_near_S_lower` is already the `α + π` reading). Its bowtie disjunct over `cv_hd`.
+- **`cv_hd_main`, `y3_end_needs`, `cv_hd`, `c_double`, `c_ends`, `exists_red`, `exists_terminal`, `cv_exists`**: not started; Stage 28's notes stand.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 31 — SAVED
