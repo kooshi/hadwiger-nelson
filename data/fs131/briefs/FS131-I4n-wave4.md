@@ -90,3 +90,14 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 several trees are building today, so on exit 75 wait ten minutes and retry. `lake env lean` (with § 14.1's flags) is for iteration only, never evidence.
 The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`. You start no agents of your own
 (standing rule 1).
+
+
+## Amendment, 2026-10-04 — `bend_away`'s statement (inventory items 290–291)
+
+Your finding is logged as item 290 and ruled in item 291, whose first line is:
+
+> 291. **Ruling on item 290: `bend_away` gains the domain hypothesis; `bend_away_whole` is proved directly; `bend_away` leaves wave 4 if it is not done when MERGE
+> — source: plans/FS131-close-inventory.md
+
+Your touches gain `bend_away`'s statement (that one hypothesis and its docstring) and `bend_away_whole`'s proof. You start no agents of your own (standing rule
+1: delegation is one level deep, because the coordinator can only review work it knows exists).

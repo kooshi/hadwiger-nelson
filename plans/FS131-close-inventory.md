@@ -2195,3 +2195,23 @@ reason by the close.*
      `fs131-w4`, in I4m's slot: merges `fs131-w4m` (at `67256973`: `Surgery`, SHAVE, RAY) into `fs131-w4`; makes `Contact`'s `exists_shave` and `exists_rayMerge`
      cite `exists_shave_aux` and `exists_rayMerge_aux`; deletes `n3_end` per (b); proves `bend_toward` and `bend_away`, reading `Surgery`'s cut and surgery before
      stating engine 3, so the cut is written once. Then wave 4 waits only on MERGE. In flight: 1 (IP1) + 1 (IMM1) + 1 (I5d) + 1 (I4n) = 4.
+290. **Statement defect — `bend_away` (FS112-N2-BENDS's away clause; `UnitArc` l. 2658 at `a0c29483`) is false as written: the radius-2 arc is not assumed in
+     the domain** (FS131-I4n, by message, 2026-10-04). Off `F.dom`, `closure (F.region c)` can meet `R₂(ᾱ)` in an infinite nowhere-dense closed set, so
+     `r2Contacts` holds no non-degenerate interval and the conclusion asks the whole open arc to bend away. I4n's counterexample (`k = 2`, `P = 0`, arc `circ 0 1`
+     on `(−η, ℓ + η)`, `ℓ = 0.1`): `K ⊆ [0.04, 0.06]` infinite closed with empty interior (`{0.05} ∪ {0.05 + 0.001/n}`), `f = infDist · K`, `dom = N ∪ Y` with
+     `N` a thin annulus about the arc and `Y = {ρe(φ) : 0 < φ < ℓ, 2 + f(φ) < ρ < 2 + f(φ) + δ}`, colour `c` inside `N` and on `Y`, `c'` outside — valid, `IsRingArc`
+     holds, `c ∉ coloursAt 0`, `C₂ = K`; no `F'` exists: (1) a point `r(φ)`, `φ ∈ K`, interior in `F'` forces `(1+s)e(φ)` and `(2+s)e(φ) ∈ Y` both colour `c` at
+     distance 1; (2) otherwise `r(K) ⊆ F'.Γ`, local finiteness puts infinitely many on one arc, `Arc.finite_inter_sphere_or_eq_circ` makes it `circ 0 1 θa θb`, and
+     the conclusion needs an interval inside `K`. **Proposed repair**: a hypothesis putting `R₂(ᾱ)` in `F.dom` (the derivation reads to radius 2: N2-TAN's "C₂ …
+     a finite union of points and closed arcs" needs local finiteness there, `plans/FS112-N-proof.md`). Even repaired, N2-TAN's tangent bend needs the sector
+     structure of `c`'s class at each isolated contact — above the planner's "a session". **Unaffected**: `bend_away_whole` is true as stated (`R₂` disjoint from
+     `closure (region c)`, a positive distance apart; N2-ENV-away clears the lens), today proved through `bend_away`; I4n proposes a direct proof, statement
+     unchanged. Nothing in Lean consumes `bend_away` (I4n, by grep on `fs131-w4`, `-w5`, `-w5p`, `-w4mm`). Credit: I4n, for the counterexample.
+291. **Ruling on item 290: `bend_away` gains the domain hypothesis; `bend_away_whole` is proved directly; `bend_away` leaves wave 4 if it is not done when MERGE
+     lands.** Choice: (a) add to `bend_away` a hypothesis that the radius-2 arc on which `r2Contacts` is read lies in `F.dom` (I4n states it with the library's
+     own name for that arc), docstring rewritten to say so; (b) `bend_away_whole` proved directly on `bend_toward`'s lens construction mirrored, statement
+     unchanged, so it no longer rests on `bend_away`; (c) order: `bend_toward`, then `bend_away_whole`, then the repaired `bend_away`; (d) if the repaired
+     `bend_away` is not proved when MERGE lands, it moves out of wave 4 like `n3_end` (item 289) — to its own job — so wave 4 lands without it. Alternative
+     weighed: keep `bend_away` in wave 4 whatever its cost. Why: nothing consumes it, its repaired proof is above a session, and wave 4's landing gates Woodall's
+     and wave 5's. **Correction owed** to FS112-N2-BENDS's hand statement: the radius-2 arc in the domain, which N2-TAN uses and never states. Confidence: high
+     on the defect (the counterexample is concrete); medium-high on the repair.
