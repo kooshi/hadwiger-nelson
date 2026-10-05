@@ -2017,7 +2017,8 @@ sectors: `H₊`'s `h`-shadow comes from an `h`-sector at `N` tangent to `+a`, `H
 would fill the upper half-turn at `N`, and a `c`-sector at `N` (whose directions look up) would be a horn along `±a`, beside it — so
 its shadow reaches `H₊` or `H₋`, or it overlaps the `h`-sector. No model of its hypotheses is held in the library: like
 `stuck_structure`, whose step it is, it reads a stuck configuration with Condition 5, and the one stuck fragment held (`bowtie_isStuck`)
-has unit arcs. -/
+has unit arcs. None is expected: on a whole terminal plane map the configuration is refuted along the normal line (`stuck_chain`, whose
+chain `n4_fin`, FS110-N4-FIN, refutes). -/
 theorem stuck_pole_N (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c g h : Fin k}
     (h3N : (F.coloursAt (v + e (α + π / 2))).ncard ≤ 3)
     (Hu : F.IsHorn v α κ₁ κ₂ c) (Hd : F.IsHorn v (α + π) κ₃ κ₄ c)
@@ -2291,8 +2292,9 @@ form (a)): `stuck_structure`'s conclusion, and `g` flanks `H₊` from above and 
 colours at `v`; the turned horn's flanks are the same two (else every colour at `v` is out-type at one pole, `false_of_all_outType`);
 `D_g(v)` holds `±a` and `n`, so `g`'s only contact is out-type at `S′`, and no MERGE leaves `g` one sector (`h` the mirror); degree `4`;
 the sides by out-type contacts (`region_far_of_outType`); the poles by `stuck_pole_N`, at `α` and at `α + π`. No model of its
-hypotheses is held in the library (the one stuck fragment held, `bowtie_isStuck`, has unit arcs and fails Condition 5); on a whole plane
-map they are refuted along the normal line (`stuck_chain`, FS110-N4-FIN). -/
+hypotheses is held in the library (the one stuck fragment held, `bowtie_isStuck`, has unit arcs and fails Condition 5), and none is
+expected: on a whole terminal plane map they are refuted along the normal line (`stuck_chain`, whose chain `n4_fin`, FS110-N4-FIN,
+refutes). -/
 theorem stuck_structure_flanks (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} (hv : F.Covers v 2)
     (h3 : ∀ x ∈ closedBall v 1, (F.coloursAt x).ncard ≤ 3) (hst : F.IsStuck v) {c : Fin k} {m : ℕ} (hm : 2 ≤ m)
     (hc : F.HasSectors v c m) :
@@ -2598,7 +2600,9 @@ on one side of the axis, `κ₂ < 0`: `plans/FS131-close-inventory.md` item 252)
 out-type at `S′` only, `h`'s out-type at `N` only, `c`'s out-type at both; `P_cl(N) = {c, h, r}` with `r ∉ P_cl(v)` and `h`
 with at least two sectors at `N`, and `P_cl(S′) = {c, g, r′}` with `r′ ∉ P_cl(v)` and `g` with at least two sectors at `S′`. Proved
 with the flank form of the sides as `stuck_structure_flanks`. No model of its hypotheses is held in the library (the one stuck fragment
-held, `bowtie_isStuck`, has unit arcs and fails Condition 5). -/
+held, `bowtie_isStuck`, has unit arcs and fails Condition 5), and none is expected: it is a step inside FS110-N4-PROP's proof by
+contradiction — on a whole terminal plane map the configuration is refuted along the normal line (`stuck_chain`, whose chain `n4_fin`,
+FS110-N4-FIN, refutes). -/
 theorem stuck_structure (hF : F.Valid) (h5 : F.Condition5) {v : ℂ} (hv : F.Covers v 2)
     (h3 : ∀ x ∈ closedBall v 1, (F.coloursAt x).ncard ≤ 3) (hst : F.IsStuck v) {c : Fin k} {m : ℕ} (hm : 2 ≤ m)
     (hc : F.HasSectors v c m) :

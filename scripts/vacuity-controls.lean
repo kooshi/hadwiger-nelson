@@ -156,4 +156,42 @@ theorem planted_generic_hub {k : ℕ} (F : Plane.ArcMap k) (p : ℂ) (ψ : ℝ) 
 /-- CONTROL 32 — `IsHub` at a concrete instance nothing decides. `UNKNOWN`. -/
 theorem planted_unknown_hub (_h : Plane.sixFrag.IsHub 0 (Real.pi / 4)) : (1 : ℕ) = 1 := rfl
 
+/-- CONTROL 39 — wave 4's `IsHorn` at the instance `bowtie_not_isHorn_I_axis` refutes (no horn at `i`). `VACUOUS`. -/
+theorem planted_vacuous_horn (_h : Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 40 — `IsHorn` at a variable map: `GENERIC`. -/
+theorem planted_generic_horn {k : ℕ} (F : Plane.ArcMap k) (v : ℂ) (α κ₁ κ₂ : ℝ) (c : Fin k)
+    (_h : F.IsHorn v α κ₁ κ₂ c) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 41 — `IsHorn` at `−i`, where no closed theorem refutes it (`bowtie_not_isHorn_negI` is stated over variable angles and
+curvatures, so it is no evidence). `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_horn (_h : Plane.bowtie.IsHorn (-Complex.I) 0 (-1) 1 1) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 42 — wave 4's `IsStuck` at the instance `bowtie_not_isStuck_I` refutes. `VACUOUS`. -/
+theorem planted_vacuous_stuck (_h : Plane.bowtie.IsStuck Complex.I) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 43 — `IsStuck` at a variable map: `GENERIC`. -/
+theorem planted_generic_stuck {k : ℕ} (F : Plane.ArcMap k) (v : ℂ) (_h : F.IsStuck v) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 44 — `IsStuck` at `−i` (false — `bowtie_isStuck`'s third clause — but no closed `¬ P` says so). `UNKNOWN`. -/
+theorem planted_unknown_stuck (_h : Plane.bowtie.IsStuck (-Complex.I)) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 45 — wave 4's `Condition5` at the map `unitArcPlane_not_condition5` refutes. `VACUOUS`. -/
+theorem planted_vacuous_condition5 (_h : Plane.ArcMap.unitArcPlane.Condition5) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 46 — `Condition5` at a variable map: `GENERIC`. -/
+theorem planted_generic_condition5 {k : ℕ} (F : Plane.ArcMap k) (_h : F.Condition5) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 47 — `Condition5` at `segPlane` (true, its one arc a segment, but proved nowhere). `UNKNOWN`. -/
+theorem planted_unknown_condition5 (_h : Plane.ArcMap.segPlane.Condition5) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 48 — wave 4's `AeProperRegions` at `1` colour: emptiness by an `instance` (the adversary). `VACUOUS`. -/
+theorem planted_vacuous_aeRegions (_R : Plane.AeProperRegions 1) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 49 — `AeProperRegions k` at a variable `k`: `GENERIC`. -/
+theorem planted_generic_aeRegions {k : ℕ} (_R : Plane.AeProperRegions k) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 50 — `AeProperRegions` at a `k` nothing decides. `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_aeRegions (_R : Plane.AeProperRegions 4) (x : ℂ) : x = x := rfl
+
 end HadwigerNelson

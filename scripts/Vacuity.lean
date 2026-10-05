@@ -267,6 +267,27 @@ Two exclusions are worth their reasons, because both look like obvious additions
   reads `GENERIC` everywhere, like `IsTile`; register it when a theorem takes it at a concrete instance or proves a
   refutation `¬ F.IsSectorChart G v r₀` as a theorem.
 
+* **Wave 4's carriers (FS131-G4, by the procedure below; the plan's recommendation, `plans/FS131-w4-kernel-plan.md` § 14.3).** **IN**:
+  `ArcMap.IsHorn` — refuted at a concrete map by a theorem (`bowtie_not_isHorn_I_axis`: the bowtie has no horn at `i`), inhabited by
+  `cuspFrag_isHorn`; controls 39–41. `ArcMap.IsStuck` — refuted at a concrete map (`bowtie_not_isStuck_I`), inhabited at the bowtie's
+  centre (`bowtie_isStuck`'s first clause); controls 42–44. `ArcMap.Condition5` — refuted at a concrete map (`unitArcPlane_not_condition5`:
+  a unit arc meets `ω(0)` in infinitely many points); controls 45–47. `Plane.AeProperRegions` — the `AeColouring` case again, a structure
+  whose emptiness is a theorem (`IsEmpty (AeProperRegions 0)`, `IsEmpty (AeProperRegions 1)`, both `instance`s) and whose inhabitant at `7`
+  is a definition (`sevenBrickRegions`); controls 48–50 (inventory items 144 (b), 153). **OUT**: `ArcMap.Terminal`, `ArcMap.TerminalOn` —
+  refuting either at a concrete map needs a map with an available move (a colour with two sectors and an open allowed cone, or a horn),
+  which no theorem of the library exhibits, and every site takes them at a variable map (`stuck_chain`, `stuck_neighbour`); the objects whose
+  existence is the question (a terminal plane map with a stuck vertex) are a conjunction across binders, which this scan cannot see;
+  register them when a refutation `¬ X.Terminal` is proved as a theorem. `ArcMap.MergeAvailable`, `RayAvailable`, `ShaveAvailable` (taken
+  negated, inside `IsStuck` and `TerminalOn`); `IsFlankAbove`, `IsFlankBelow`, `DoublyShadowed`, `IsContact`, `InType`, `OutType`, `IsSector`,
+  `HasSectors`, `HasDegree`, `HasRepeatedColour`, `IsCubicTrichromatic`, `IsClear`, `TanAbove`, `TanBelow` (facts about a point's sectors,
+  flanks and contacts, decided where they occur, at a variable map at every site, like `IsSectorChart`); `InContact`, `OutContact`,
+  `BothKind`, `Inert`, `IsR2Arc` (an `IsRingArc` with a colour clause: the tracked `IsRingArc` already audits the arc); `Condition6`,
+  `InMK` (satisfied by the one-colour plane, Basic's spec examples, with no refutation stated as a theorem); `AgreesOff`, `RingArcsWithin`
+  (relations between two maps, reflexive, so never empty at `F' = F`, and conclusions of the moves); `IsCoveringPair` (taken negated);
+  `ArcMap.Near` (a chart near a point: data, built where it is used) and `Near.Small`, `Near.RayConfig` (predicates of that data, at a
+  variable chart at every site); `IsLeavingCentre`, `StripHolds`, `MIn`, `AeProperRegions.IsRegion` (predicates of a point or a set
+  variable, `GENERIC` at every site, with no `¬ P` theorem at a concrete instance).
+
 **How a later wave registers its carriers.** A new structure or predicate that a theorem may take as a
 hypothesis gets a line in the list above, by this procedure: (1) decide it IN or OUT and write the decision with
 its reason, in the `UDCert` / `AeColouring` style — IN iff "does one exist" is a theorem rather than a
@@ -288,7 +309,10 @@ def trackedProps : List Name :=
    `HadwigerNelson.Plane.ArcMap.NonSiamese, `HadwigerNelson.Plane.ArcMap.Simple,
    -- wave 3's ring vocabulary (FS131-I3h)
    `HadwigerNelson.Plane.ArcMap.IsRingArc, `HadwigerNelson.Plane.ArcMap.IsQArc,
-   `HadwigerNelson.Plane.ArcMap.IsChangePoint, `HadwigerNelson.Plane.ArcMap.IsHub]
+   `HadwigerNelson.Plane.ArcMap.IsChangePoint, `HadwigerNelson.Plane.ArcMap.IsHub,
+   -- wave 4's valid-map vocabulary (FS131-G4)
+   `HadwigerNelson.Plane.ArcMap.IsHorn, `HadwigerNelson.Plane.ArcMap.IsStuck,
+   `HadwigerNelson.Plane.ArcMap.Condition5, `HadwigerNelson.Plane.AeProperRegions]
 
 /-- A carrier or a statement as one line of text, for the report. Called where its binders are still in
 scope: outside the telescope a generic carrier's variables print as `_fvar.N`, whose numbering shifts

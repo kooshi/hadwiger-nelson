@@ -147,6 +147,18 @@ if [[ "${1:-}" == "--self-test" ]]; then
   expect VACUOUS planted_vacuous_hub      "IsHub at r(90°) = i: no change point there"
   expect_site GENERIC planted_generic_hub "IsHub at a variable map: parametric"
   expect UNKNOWN planted_unknown_hub      "IsHub at a sixFrag instance nothing decides: the load-bearing half"
+  expect VACUOUS planted_vacuous_horn     "IsHorn at i, which bowtie_not_isHorn_I_axis refutes (wave 4, FS131-G4)"
+  expect_site GENERIC planted_generic_horn "IsHorn at a variable map: parametric"
+  expect UNKNOWN planted_unknown_horn     "IsHorn at -i, which no closed theorem refutes: the load-bearing half"
+  expect VACUOUS planted_vacuous_stuck    "IsStuck at i, which bowtie_not_isStuck_I refutes"
+  expect_site GENERIC planted_generic_stuck "IsStuck at a variable map: parametric"
+  expect UNKNOWN planted_unknown_stuck    "IsStuck at -i, which no closed theorem refutes: the load-bearing half"
+  expect VACUOUS planted_vacuous_condition5 "Condition5 at unitArcPlane, which unitArcPlane_not_condition5 refutes"
+  expect_site GENERIC planted_generic_condition5 "Condition5 at a variable map: parametric"
+  expect UNKNOWN planted_unknown_condition5 "Condition5 at segPlane, true but proved nowhere: the load-bearing half"
+  expect VACUOUS planted_vacuous_aeRegions "AeProperRegions 1: emptiness by an instance, the adversary"
+  expect_site GENERIC planted_generic_aeRegions "AeProperRegions k at a variable k: parametric"
+  expect UNKNOWN planted_unknown_aeRegions "AeProperRegions at a k nothing refutes: the load-bearing half"
   silent planted_arrow_false              "a genuine refutation P → False over the empty carrier stays skipped"
 
   if [[ "${fails}" -gt 0 ]]; then

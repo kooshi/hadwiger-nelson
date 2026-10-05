@@ -1624,6 +1624,57 @@ plane map, no marker, no model; the sketch goes to the inventory as a stub to wr
 half to each wave's landing; the brief's "done by FS131-T3" is the coordinator's slip, acknowledged); `CPColouring` lives only on `main` (wave 2), so its
 entry is merged at the merge.
 
+## Stage 46 — SAVED (FS131-G4): wave 4's carriers registered, the stuck notes settled as ruled, and the full gate green on the pre-merge tree
+
+**The vacuity notes** (items 252, 266; ruling 304): no marker, no model. The three docstrings now say no model is held, none is expected, and name the
+refutation on a whole terminal plane map — `stuck_structure`: "... and none is expected: it is a step inside FS110-N4-PROP's proof by contradiction — on a
+whole terminal plane map the configuration is refuted along the normal line (`stuck_chain`, whose chain `n4_fin`, FS110-N4-FIN, refutes)"; `stuck_pole_N` and
+`stuck_structure_flanks` the same sentence (the latter's old "(`stuck_chain`, FS110-N4-FIN)" made exact: `stuck_chain` is N4-PROP, `n4_fin` is N4-FIN). No
+consumer reads any of the three outside a refutation: in wave 4 only `stuck_structure` → `stuck_structure_flanks` → `stuck_pole_N` and `stuck_chain`'s chain;
+on `fs131-w5`, `-w5p`, `-w5x`, `-ww`, `-w4mm` they appear in docstrings only (`git grep`, Stage 45's message).
+
+**The carriers** (`scripts/Vacuity.lean`, the procedure "How a later wave registers its carriers"; my decisions, recorded in the file as "Wave 4's carriers
+(FS131-G4 …)"). **IN** — each with a closed piece of evidence in the library and three controls:
+- `ArcMap.IsHorn`: refuted by `ArcMap.bowtie_not_isHorn_I_axis : ¬ bowtie.IsHorn I 0 (-1) 1 1` (new, `BaseSteps`, a closed instance of
+  `bowtie_not_isHorn_I`, whose variable angles make it no evidence); inhabited by `cuspFrag_isHorn`. Controls 39–41.
+- `ArcMap.IsStuck`: refuted by `ArcMap.bowtie_not_isStuck_I : ¬ bowtie.IsStuck I` (new, `BaseSteps`, `bowtie_isStuck`'s second clause; the conjunction is no
+  evidence). Controls 42–44.
+- `ArcMap.Condition5`: refuted by `ArcMap.unitArcPlane_not_condition5 : ¬ unitArcPlane.Condition5` (new, `Basic`: the arc `r([0, π])` meets `ω(0)` in the
+  infinite set `spherePt 0 1 '' (0, π)`, `injOn_spherePt`). Controls 45–47.
+- `Plane.AeProperRegions` (items 144 (b), 153): `instIsEmptyAeProperRegionsZero : IsEmpty (AeProperRegions 0)` (the empty union is not dense) and
+  `instIsEmptyAeProperRegionsOne : IsEmpty (AeProperRegions 1)` (new, `SVMap`: the class is open and dense, so some `z` near `x + 1` has `z − 1` in a ball about
+  `x` inside the class, two points of one class at distance `1`); inhabited at `7` by `sevenBrickRegions`. Controls 48–50.
+**OUT** (reasons in the file): `Terminal`, `TerminalOn` (the plan recommended IN; refuting either at a concrete map needs a map with an available move, which
+no theorem exhibits, and every site is at a variable map — register when `¬ X.Terminal` is a theorem); the three move preconditions; the sector, flank,
+contact and clearness predicates; the four unit-arc contact kinds and `IsR2Arc` (built on the tracked `IsRingArc`); `Condition6`, `InMK`; `AgreesOff`,
+`RingArcsWithin`; `IsCoveringPair`; `ArcMap.Near`, `Near.Small`, `Near.RayConfig`; `IsLeavingCentre`, `StripHolds`, `MIn`, `AeProperRegions.IsRegion`. Records for
+the five new declarations added to `scripts/Axioms.lean`; `tools/fs131_k4_decls.py --check` "495 names, 0 missing" (493 + the two `BaseSteps` theorems).
+Controls numbered 39–50 to follow wave 2's 33–38 on `main` (the pre-merge tree lacks those; the merge joins them).
+
+**Controls watched**: the self-test's 12 new lines all `ok` (each `VACUOUS` from its refutation, each `GENERIC` at a variable instance, each `UNKNOWN` at an
+instance no closed theorem decides). **Negative control**: the four names misspelt in `trackedProps` (`IsHornX`, …) in the real file, the self-test re-run:
+exit 1, exactly the 12 new controls FAIL ("expected … and it is absent"), none of the others (`data/fs131/g4/vacuity-selftest-plant-misspelt.log`; full output
+`build/gate/vacuity-self-test/20261005T023001Z-589589.log`); the file restored from a copy, `cmp` identical.
+
+**The full gate on the pre-merge tree** (the tree of this stage's commit; `Proofs/`, `scripts/`, `tools/` unchanged after the runs):
+- **Build**: "build: OK — 446 of 446 batches, 11 module(s) rebuilt, 0 module(s) with warnings, 11m18s", exit 0 (`build/gate/build/20261005T021339Z-489606.log`;
+  driver `data/fs131/g4/build-g4-carriers.log`); `grep -c warning` on the full log: 0 (its one "error" line is the up-to-date probe's `--no-build` refusal,
+  which starts the walk).
+- **Sorry**: `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'` over `Proofs/`: 0.
+- **Axioms**: "axioms: OK — 2720 clean, 12 axiom-free, 0 imported, 5 declared purchase(s)", exit 0; 2,737 records, every one clean or a declared purchase;
+  purchases the same five (rung A's spindle, no wave-4 record); no `native_decide` (`build/gate/axioms/20261005T022537Z-572085.log`; driver
+  `data/fs131/g4/axioms-pre.log`). `--self-test`: "every planted fault fired, and every partner passed", 23 controls, exit 0 (the branch's own
+  `axioms-controls.txt`, T3's, counts 0/0/0 — this tree has no import; `build/gate/axioms-self-test/20261005T022541Z-572334.log`; driver
+  `data/fs131/g4/axioms-selftest-pre.log`).
+- **Vacuity**: "vacuity: OK", exit 0: `declarations=9649 refutations-skipped=85 sites=649`, `vacuous=0 stale=0 declared=3 witnessed=25 generic=619 unknown=2`
+  (`build/gate/vacuity/20261005T022706Z-578881.log`; driver `data/fs131/g4/vacuity-pre.log`). Of the 649 sites, 84 are the four new carriers' — `IsHorn` 41
+  GENERIC + 1 WITNESSED (`cuspFrag_isHorn`), `Condition5` 25 GENERIC, `IsStuck` 7 GENERIC, `AeProperRegions` 9 GENERIC + 1 WITNESSED (`sevenBrickRegions`);
+  `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N` read GENERIC on `Valid`, `Condition5`, `IsStuck`, `IsHorn`. The reconciliation against `main`'s
+  recorded counts is made on the merged run (Stage 47). `--self-test`: OK, 44 `ok` lines (the branch's 32 controls and `silent` lines, and the 12 new), exit 0
+  (`build/gate/vacuity-self-test/20261005T022806Z-580417.log`; driver `data/fs131/g4/vacuity-selftest-pre.log`).
+- `tools/check_architecture.py`: PASS (`data/fs131/g4/check-architecture-pre.txt`); `python3 tools/fs131_k4_decls.py --check`: exit 0
+  (`data/fs131/g4/k4decls-check-pre.log`).
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;

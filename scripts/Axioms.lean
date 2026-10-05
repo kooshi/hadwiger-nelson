@@ -2638,6 +2638,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 #print axioms HadwigerNelson.Plane.ArcMap.const_isSector_ball
 #print axioms HadwigerNelson.Plane.ArcMap.const_not_isSector_far
+#print axioms HadwigerNelson.Plane.ArcMap.unitArcPlane_not_condition5
 
 /-! ## FS-131 wave 4 (job FS131-K4) — the skeleton: stuck chains, contacts and the local moves, the unit-arc calculus (sorry until wave 4's implementer lands it) -/
 
@@ -2688,6 +2689,8 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.sevenBrickMap_isPlaneMap
 #print axioms HadwigerNelson.Plane.sevenBrickMap_valid
 #print axioms HadwigerNelson.Plane.sevenBrickRegions
+#print axioms HadwigerNelson.Plane.instIsEmptyAeProperRegionsZero
+#print axioms HadwigerNelson.Plane.instIsEmptyAeProperRegionsOne
 
 /-! ## FS-131 wave 4 (job FS131-K4b) — the base's steps with unit arcs and the bowtie fragment (sorry until wave 4's implementer lands it) -/
 
@@ -2711,6 +2714,8 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.bowtie_inType
 #print axioms HadwigerNelson.Plane.ArcMap.bowtie_neighbours
 #print axioms HadwigerNelson.Plane.ArcMap.bowtie_isStuck
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_not_isStuck_I
+#print axioms HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis
 #print axioms HadwigerNelson.Plane.ArcMap.bowtie_terminalOn
 #print axioms HadwigerNelson.Plane.ArcMap.bowtie_unitArcEnds
 

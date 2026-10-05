@@ -749,6 +749,18 @@ example : unitArcPlane.RingArcsWithin unitArcPlane ∧
   have := hsub hm
   simp [Γ, const] at this
 
+/-- **Adversary of Condition 5**: `unitArcPlane`'s arc is a unit arc, meeting `ω(0)` in infinitely many points of the domain. A closed
+refutation, so the vacuity scan reads `Condition5` as refutable at a concrete map (`scripts/Vacuity.lean`, wave 4's carriers). -/
+theorem unitArcPlane_not_condition5 : ¬ unitArcPlane.Condition5 := by
+  intro h
+  have hfin := h (Arc.circ 0 1 0 π) (mem_singleton _) 0
+  have hinj : InjOn (spherePt 0 1) (Ioo 0 π) :=
+    (injOn_spherePt 0 one_pos 0).mono (Ioo_subset_Ioo_right (by linarith [pi_pos]))
+  refine ((Ioo_infinite pi_pos).image hinj) (hfin.subset ?_)
+  rintro _ ⟨θ, hθ, rfl⟩
+  refine ⟨⟨⟨θ, Ioo_subset_Icc_self hθ, rfl⟩, mem_univ _⟩, ?_⟩
+  simp [spherePt, norm_e]
+
 /-- A map with one segment: the plane, one colour, the segment `[0, 1]` as its only arc. -/
 noncomputable def segPlane : ArcMap 1 where
   dom := univ
