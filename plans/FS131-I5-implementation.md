@@ -558,6 +558,12 @@ docstring edit, `build-stage13.log`, also OK). Axioms (`data/fs131/i5c/I5cAxioms
 on `sorryAx` through their named children (the control). Wave 5's sorry declarations: **37** (`Terminal` 11, `Dense` 2, `HexRing` 7, `MapGraph` 3,
 `BaseWalk` 10, `BaseDense` 4), against 39; the planar job's seven among them, so **30 left in this lane**. `tools/check_architecture.py`: PASS.
 
+**Duplicates after stage 13** (`tools/fs131_i5_dupes.py`, `data/fs131/i5c/i5-dupes-stage13.txt`): exit 1, 602 "collisions", **every one in wave 4's own files**
+(`Contact` 302, `BaseSteps` 212, `UnitArc` 81, `Basic` 4, `Sectors` 2, `LocalStructure` 1), none in a wave-5 file. The tool reads "wave 5's own files" as
+those changed since the fork `9a8de899`, which after stage 10's merge include wave 4's merged files — so it compares wave 4 with itself (the red control
+of stage 2, met by the real merge). A tool defect, not a duplicate: its `FORK` should move to the merge base, or its file set be wave 5's eight modules
+(FS131-I5's tool, not edited here).
+
 **What is left in this lane (30), and where it stands** (for wave 5's next implementer):
 - **the flank step** `stuck_flanks_ua` — the one hard piece of `stuck_structure_ua` (S–V Prop. 7 with a horn arc on `ω(v ± n)`); then the seven chain leaves
   that read it: `cv_l0` (also needs a constant-sides sub-arc of an `OnRingArc`, plan § 9.1's `exists_isRingArc_of_onRingArc`), `cv_hd_main`, `cv_hd`,
