@@ -5,7 +5,28 @@
 
 ## Theorems this phase proved
 
-(Filled stage by stage; each line: declaration, grade, axioms.)
+All [kernel] (stage-5 build `146a8d63`, `build/gate/build/20261005T004641Z-4048849.log`), each on exactly `[propext, Classical.choice,
+Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plane`; `ArcMap.` where shown.
+
+- `isPreconnected_inter_of_union_eq_univ` — **the plane is unicoherent** (`Plane/PlaneTopology`)
+- `isPreconnected_frontier_connectedComponentIn` — the frontier of a component of the complement of a closed preconnected set is preconnected (`Plane/PlaneTopology`)
+- `isPreconnected_compl_connectedComponentIn` — the complement of such a component is preconnected (`Plane/PlaneTopology`)
+- `isBounded_connectedComponentIn_of_frontier_subset` — the last exit (`Plane/PlaneTopology`)
+- `connectedComponentIn_eq_of_not_isBounded` — one unbounded complementary component (`Plane/PlaneTopology`)
+- `exists_inter_of_finite_closed_cover` — two of finitely many closed sets meet on a preconnected set they cover (`Plane/PlaneTopology`)
+- `isPreconnected_compl_closedBall` (`Plane/PlaneTopology`)
+- children `eq_of_intValued_of_isPreconnected`, `inter_frontier_nonempty_of_isPreconnected`, `frontier_connectedComponentIn_subset`, `compl_closedBall_subset_connectedComponentIn` (`Plane/PlaneTopology`)
+- `ArcMap.cvb_pinch_connected` — FS114-CVB-PINCH's pinch clause (`Plane/ValidMap/MapGraph`)
+- `ArcMap.cvb_hole_disconnected` — FS114-CVB-PINCH's hole clause (`Plane/ValidMap/MapGraph`)
+- `ArcMap.IsTile.subset_compl_closure`, `ArcMap.IsTile.subset_or_subset_of_separated`, `ArcMap.exists_tile_inter_of_isOpen`, `ArcMap.exists_tile_mem_closure_of_mem_closure`, `ArcMap.mem_of_touch_closed`, `ArcMap.finite_tiles_closure_inter` — § A (`Plane/ValidMap/MapTopology`)
+- `ArcMap.exists_rim_vertex` — E4-OUTERMOST step 3 (`Plane/ValidMap/MapTopology`)
+- `ArcMap.isCubicTrichromatic_of_three_tiles` — E4-OUTERMOST step 4, E4-RIM step 5 (`Plane/ValidMap/MapTopology`)
+- `ArcMap.tileOf_subset_ball` — Lemma H(a), any `k` (`Plane/ValidMap/MapTopology`)
+- `ArcMap.GermPseudo.eq_of_cw`, `ringArc_cases` (`Plane/ValidMap/MapTopology`)
+- children `ArcMap.exists_mem_closure_of_mem_closure_biUnion`, `ArcMap.isOpen_outerDom`, `ArcMap.outerDom_eq_connectedComponentIn`, `ArcMap.IsTile.closure_subset_closedBall_zero`, `ArcMap.exists_not_mem_closedBall_zero`, `ArcMap.IsSectorChart.exists_sector_subset_tile`, `ArcMap.hasRepeatedColour_of_two_tiles`, `ringArc_add_two_pi_mul` (`Plane/ValidMap/MapTopology`)
+
+Thirty-two declarations in all. `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
+`unenclosed_of_rim_vertex`.
 
 ## Stage 1 — SAVED: the readback
 
@@ -169,3 +190,68 @@ ten new children (a comment line "FS131-IP1's added children" heads them).
 | `MapGraph` | `filledGraph_locallyFinite`, `_connected`, `_infinite`, `_oneInf` | F-LOC/CONN/INF/ONE, over § A–B |
 | `MapGraph` | `filledGraph_rings` (F-RING), `reduced_props_of_planarLike` (T-GRAPH), `triLattice_planarLike` (owed inhabitant) | not started |
 | `BaseWalk` | `retArcs_not_interleaved`, `retArcs_not_abut`, `endpoint_of_far_end` | over the crossing lemma, PATH, and the CD/CE reading |
+
+## Stage 5 — SAVED: `isCubicTrichromatic_of_three_tiles`, the stage-5 build, and what is handed on
+
+### 5.1 Proved
+
+**`isCubicTrichromatic_of_three_tiles`**, over two new shared children in `MapTopology` § B: **`IsSectorChart.exists_sector_subset_tile`** (a
+tile whose closure holds the chart's point contains a sector of every radius `r ∈ (0, r₀]`: a sector meeting the tile is preconnected inside the
+interior points, so inside the tile's component) and **`hasRepeatedColour_of_two_tiles`** (two distinct tiles of one colour at `v` give
+`HasRepeatedColour v`: two disjoint nonempty sectors of that colour at every small radius; with no germ the ball is one tile). Then three
+distinct tiles at a good point have three distinct colours, `coloursAt` has at most three (not in `fourSet`), and
+`isCubicTrichromatic_of_three_of_noRep` finishes. The same child is the first half of `unenclosed_of_rim_vertex` (a cubic vertex's tiles are
+exactly the three holding its three sectors).
+
+### 5.2 The stage-5 build and the receipt
+
+`146a8d63`: **OK — 446 of 446 batches, 5 modules rebuilt, 11 modules with warnings, every warning `declaration uses 'sorry'`, exit 0**
+(`build/gate/build/20261005T004641Z-4048849.log`; `data/fs131/ip/build-stage5.log`). No warning of any other kind in the saved log (grep for
+`warning|error` minus the `sorry` lines and Lake's `--no-build` probe line: empty). Axiom check `data/fs131/ip/axioms-stage5.txt`: 32 records on
+exactly the standard three; the two partners on `sorryAx` (`exists_unenclosed_or_bad`, `inter_nonempty_of_interleaved`) show it.
+`tools/check_architecture.py`: PASS, exit 0 (`data/fs131/ip/check-architecture.txt`; no project import changed). `sorry` lines left:
+`PlaneTopology` 1, `MapTopology` 4.
+
+### 5.3 Measured cost, and the chain re-priced
+
+Wall clock for stages 2–5, excluding build queues: about 2.5 hours for 32 declarations (≈ 1,100 lines), two of the seven planar leaves closed
+outright (`cvb_pinch_connected`, `cvb_hole_disconnected`) and 15 of the 23 topology leaves (`PlaneTopology` 7 of 8, `MapTopology` 11 of 15)
+with `exists_unenclosed_or_bad`'s joints. Every leaf with a textbook proof over Mathlib's connectedness API closed on its first or second
+iteration; the price driver is not topology but the map's local structure (sector charts) and the two finite-graph constructions.
+
+| what is left | price (implementer sessions, this job's measured rate) | why |
+|---|---|---|
+| `unenclosed_of_rim_vertex` | 0.3 | `exists_sector_subset_tile` gives the three tiles; the one case needing geometry is `T' = Y` (the `T|X` branch near `v` misses `cl Y`: the sector of `Y` is bounded by the other two branches) — read `G.sector`'s definition first |
+| `exists_outermost` (with `not_encloses_of_hull_eq`, `compl_outerDom_subset_convexHull`) | 0.5–0.8 | hull monotonicity under enclosure is plain topology (worked out on paper below); strictness needs the sector picture at a non-vertex point of the common outer frontier |
+| `exists_eleventh_of` | 0.4 | all its topology is now proved; E4-RIM's steps over `tileOf_subset_ball`, `noBoth`, the last exit and the finite cover |
+| F-LOC, F-CONN, F-INF, F-ONE | 0.5 | over § A–B as built |
+| `not_isHoleOf_chain`, `isHoleOf_cluster` | 0.3–0.5 | concrete norm geometry |
+| BG + PATH + `exists_far_end` + `endpoint_of_far_end` (with the CD/CE reading) | 1.5–2 | the finite boundary graph is new infrastructure |
+| the crossing lemma, then `retArcs_not_interleaved`, `retArcs_not_abut` | 1–2 | route open (§ 2.3); over PATH once BG exists |
+| F-RING, T-GRAPH, `triLattice_planarLike` | 2–3 (not measured) | not started |
+
+Total left: about 6.5–9.5 sessions at the low end of KP's price for the whole chain — the topology came in well under KP's table and the
+local-structure and graph pieces are where the time goes. **Not measured, as the brief asked**: F-RING and T-GRAPH from their first
+children — I did not reach them; the row above is read from the statements, not measured.
+
+### 5.4 Worked on paper, for the successor (`exists_outermost`)
+
+If `T'` encloses `T` (`y ∈ T \ cl T'` in a bounded component `B'` of `(cl T')ᶜ`), then `T ≠ T'`, `T ⊆ B'`, and the unbounded component `W'`
+of `(cl T')ᶜ` misses `cl T` (`W' ∩ B' = ∅`, `W' ∩ cl T' = ∅`, `cl T ⊆ B' ∪ cl T'`), so `W' ⊆ outerDom T` and **hull `T ⊆` hull `T'`**. If the hulls
+are equal, `outerDom T = outerDom T'` and its frontier lies in `cl T ∩ cl T'`; it is preconnected (the frontier lemma) with at least two
+points (a one-point frontier would split `ℂ ∖ {p}`), so it is infinite and has a point off the finitely many vertices of a compact disc, where
+the sector chart has two sectors, one of `T` and one of `T'` — and that point is in the closure of the outer domain, which meets neither tile:
+contradiction. Then the finite family of tiles whose closures meet `B̄(x, 1)` (`finite_tiles_closure_inter`), ordered by hull inclusion, has a
+maximal member containing `x` in its hull; it is enclosed by none.
+
+### 5.5 For the coordinator
+
+- **F-RING and T-GRAPH: each deserves its own job** (judged from the statements, not measured). T-GRAPH (`reduced_props_of_planarLike`, with
+  the owed inhabitant `triLattice_planarLike`) is pure graph theory, with KP's recorded risk that `PlanarLike` may need one more field; F-RING
+  needs the boundary graph BG first.
+- **What a second implementer could take now, without sharing a file with whoever continues `MapTopology`/`BaseWalk`**: the crossing lemma
+  `inter_nonempty_of_interleaved` — the only leaf left in `Plane/PlaneTopology`, which nothing else in this chain will edit (a route
+  decision first: § 2.3). T-GRAPH is disjoint from the map-level leaves but lives in `MapGraph`'s `Thomassen` block; it shares a file with
+  F-LOC/CONN/INF/ONE and the adversaries unless Keryx moves the `Thomassen` block to its own module.
+- **The 60° question** (`endpoint_of_far_end`): not reached; FS110-CD Lemma E/R and FS110-CE R1–R4 not read by this job.
+- **Binder renames**: the last exit's `hK`, `hR` → `_hK`, `_hR` (§ 2.1; type unchanged).
