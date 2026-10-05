@@ -3540,3 +3540,27 @@ reason by the close.*
      `exists_open`'s and `HasHornCount`'s statements are unchanged. Alternative weighed: a hypothesis on `open_allowedCone` that the assembly supplies. Why the
      field: the configuration is where clearness is produced, and every leaf reads it from there. Confidence: high. Credit: IO2, for the counterexample before a
      proof was attempted against the false form. Sent to IO2 by message.
+394. **FS131-KP2 done: the collar bend planned** (planner; harness ≈ 452k by the task notice; record `fs131-w5`'s `plans/FS131-collar-kernel-plan.md`; report
+     `data/fs131/reports/FS131-KP2.md`; commits `385b5ad3`, `0946809f`, `4ced8071`, `4cb6c601`, `b2ccfb7b`, pushed). **Skeleton**: `bend_toward_collar` (statement
+     byte-identical to `ae881022`, checked by Keryx's script) proved as an assembly — `exists_collarFit`, then one clause lemma per clause — over 53 named `sorry`
+     children in three modules (`RadialPush` 20, `Pushforward` 7, `BendCollar` 26); a plan, a route and a price each; about 4,750 lines, split by file between
+     two implementers. **[kernel], standard three**: `push1_mid`, `push1_of_not_mem`, `tangRad_zero`, `ArcMap.collarArcs_locallyFinite`. **No clause D1 cannot
+     meet.** **Design change to D1**: the bent map is `F`'s image under the homeomorphism (`ArcMap.pushforward`, colour `F.col ∘ h⁻¹`), so clauses 2–6 and R3
+     become topology; `main`'s `bendMap`/`bend_hlc` are not reused (its cut engine and `Valid.of_agreesOff` are); the crescent containment and I5o's bi-Lipschitz
+     condition are not needed. **The degree and repeated-colour clauses derive from** `ArcMap.hasDegree_iff_of_charts` (two charts with the same colour word
+     give the same degree and the same repeated-colour answer; the four places a point can be are four instances). **Receipt** (Keryx): `origin/fs131-w5` is
+     `b2ccfb7b`; the build log (`build/gate/build/20261005T111648Z-3669160.log`) ends "Build completed successfully (5790 jobs)", 0 warnings other than `sorry`;
+     `sorry` by grep: `RadialPush` 20, `Pushforward` 7, `BendCollar` 26; `data/fs131/kp2/KP2Axioms.out`: the four named standard, the controls on `sorryAx`.
+     **Correction owed**: KB2's record § 44.3 calls `toward_clear` "main-only, ~30 lines to re-prove" — since M5 it is public on this branch. **Stub**: B0
+     `collarModel`, a model map satisfying `bend_toward_collar`'s hypotheses with `c ≠ c′` (`CollarFit`'s inhabitant; implementer C). **Tools**:
+     `tools/fs131_kp2_quotes.py`, `tools/fs131_kp2_stmt.py` (plants fired). **Held**: the split — **G** (geometry: `RadialPush` and 12 `BendCollar` children,
+     about 2,250 lines) and **C** (charts and sides: `Pushforward`, 14 `BendCollar` children and B0, about 2,500 lines), both in `BendCollar` in disjoint
+     declarations; optionally G's block moved first into a new upstream module `Plane/ValidMap/CollarMap.lean`, statements verbatim. Credit: KP2, for the
+     pushforward design that turned most clauses into topology.
+395. **Rulings on KP2's held items, and its slot.** (a) **G's block moves to `Plane/ValidMap/CollarMap.lean`** (upstream of `BendCollar`), statements verbatim,
+     checked by script, as G's first stage — so the two lanes never share a file. Confidence: high. (b) **KP2's slot → lane G, FS131-CG1, on `fs131-w5`**: the
+     move, then `RadialPush` in the plan's order (`push1_push1`, `polarAngle_polar`, the inverses, `continuous_pushFun`, the `tangRad` family, `collarArcs_carrier`),
+     then the map-level children in `CollarMap`. (c) **Lane C, FS131-CC1, takes the next free slot**, on a new branch `fs131-w5k` cut from `fs131-w5` after G's
+     move commit (`Pushforward`, C's `BendCollar` children, B0). Alternative weighed: C first (it works against G's statements while they are `sorry`). Why G
+     first: the move must precede both, and G's `continuous_pushFun` and `collarArcs_carrier` are the hard leaves that decide the re-price. Confidence:
+     medium-high. In flight after CG1's launch: 1 (M6) + 1 (IO2) + 1 (CG1) = 3.
