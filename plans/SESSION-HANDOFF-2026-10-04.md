@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–364 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–366 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **364**.
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **366**.
 >
 > **Held in the kernel, on `main`**: waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -21,7 +21,7 @@ that judge the milestone, written before any job).*
 >   path. Brief `data/fs131/briefs/FS131-IMM4-merge.md`.
 >
 > **Done since the compaction**: **FS131-I5p** (items 361–362: `y3_end_needs_of_not_mem` in the kernel, so `y3_end_needs`, `cv_hd_main`, `cv_hd` hold;
-> `exists_red`, `exists_terminal` need the limit infrastructure); I5o's two findings on the strengthened bend (items 363–364, to Ephodos); **FS131-RS1** (items 357–358: **SEP held — the planar chain is complete**; F-RING, `filledGraph_planarLike`,
+> `exists_red`, `exists_terminal` need the limit infrastructure); I5o's two findings on the strengthened bend (items 363–366: one retracted, one narrowed by `BaseHyp`; no Ephodos job); **FS131-RS1** (items 357–358: **SEP held — the planar chain is complete**; F-RING, `filledGraph_planarLike`,
 > `cvb_thom_reduced`, `cvb_thom` on the standard three on `fs131-w5p`); **FS131-I5n** (items 355–356: MERGE's statement swapped on `fs131-w5c`; `cv_hd_main_inType` and `seven_colours_at_N` in the
 > kernel; `y3_end_needs` over `y3_end_needs_of_not_mem`); **FS131-IMM3** (items 353–354: MERGE's map and six of eight clauses in the kernel; `exists_merge_aux` assembled over two
 > open leaves); **FS131-RW2** (items 351–352: **WALK held** — `exists_boundaryWalk` on the standard three; F-RING, `filledGraph_planarLike`,
@@ -43,8 +43,7 @@ that judge the milestone, written before any job).*
 > `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'`; the axioms print parsed by script from the job's data file; one statement read back); log the item; rule the
 > slot per item 323. **At each landing** (as WL1's, items 326–327): read the saved gate logs, file the drafts with `scripts/gate_report.py axioms|vacuity` and `tools/claude_md_fact_audit.py --base <last CLAUDE.md commit>` run **before** committing, push notify Kooshi.
 >
-> **Queue for the next freed slot (items 358, 360, 364)**: **FS131-E6** (Ephodos: E4-BEND-UN's iteration re-derived — the measure, `α°` meeting same-colour
-> boundaries, whether "no new inert arc" is read upstream; item 364 (a)); then the freed lane's own continuation if on wave 5's path; **FS131-KB2**, the strengthened bend's construction (a multi-arc lens with a horn-shaped tip and the homeomorphism; after I5o's hand-back, from its notes;
+> **Queue for the next freed slot (items 358, 360, 366)**: the freed lane's own continuation if on wave 5's path; then **FS131-KB2**, the strengthened bend's construction (a multi-arc lens with a horn-shaped tip and the homeomorphism; after I5o's hand-back, from its notes;
 > a non-constructible collar goes to Ephodos — item 360 (b)) — on wave 5's path; else MERGE's
 > landing job once IMM4 lands (merge `main` into `fs131-w4mm`, restore `exists_merge`/`exists_merge_aux` in ruling 269's form, `framePt → fromFrame`, the gate); then **`bend_away`'s implementer** (branch `fs131-w4ba` at
 > `71cca146`; E5 § 4 — e5-claim-e and e5-end-cap — its route; lands on its own); then **`disc1_local`** (planar, after `fs131-w5p` merges back into `fs131-w5`).

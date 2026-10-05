@@ -3166,3 +3166,21 @@ reason by the close.*
      medium. (b) **I5o states the child in the form it believes true** (R1–R3 in place of "no new inert arc", and the hypothesis that `α°` holds no point of
      another arc of `Γ`, if it judges so), with its reasons in the record, and proves `exists_preBend` over it only where E6's answer cannot change the route;
      otherwise it leaves `exists_preBend` `sorry` with full notes. Sent to I5o by message.
+365. **FS131-I5o, by message: a correction to item 363 — finding (1) retracted, finding (2) narrowed.** (1) **Retracted** (one retraction, I5o's): a unit arc
+     centred on `α°` never carries `c` on a side — near `Q ∈ α°`, `c` fills an open half-disc on `α`'s inner side, and if `c` lay on a side of `β ⊆ ω(Q)`, points
+     `x = Q + δn` and `y = Q + (1 ∓ η)e(t)` give `|x − y|² − 1 = ∓2η − 2δ⟨e(t), n⟩ + O(δ² + η² + δη)`, so for every `t` but the normal direction the intermediate
+     value theorem yields two `c`-points at distance exactly 1, against `F.Valid`; centres in the lens (a full `c`-disc) are excluded the same way; centres on the
+     new boundary only gain `c'`; at `A`, `B` and elsewhere colours are kept — so with R1, "no new inert arc" holds for the collar bend, and ruling 360's original
+     clause stands. (2) **Narrowed**: a vertex of `Γ` on `α°` (a same-colour boundary crossing, tangent to, or ending on `α`) makes that point a repeated-colour
+     point (`c` or `c'` gets two sectors there), and since `α° ⊆ B̄(u, 2)`, `BaseHyp u` excludes it; so under the base's hypotheses `hfree` (`Γ` is `ω(P)` near
+     each point of `α°`) follows from `BaseHyp u` and local finiteness, the collar exists along `α°`, and `BaseHyp` survives each bend (carried by `h`, which fixes
+     `Γ` off `α°`). The general-map caveat stands for the construction lemma's own hypotheses only. Edge for the construction job: `Covers u 2` leaves room beyond
+     `B̄(u, 2)` because the domain is open, so `thickening ε α` stays in the domain for small `ε`. **I5o's plan**: the child with `hfree` and `hmax` as hypotheses,
+     "no new inert arc" and R1–R3 as conclusions (it elaborates in scratch); then `bv_l3`; then, budget permitting, `exists_preBend` over the child, a finiteness
+     child, and the `hfree`-from-`BaseHyp` lemma. Credit: I5o, for checking its own finding against validity and saying so at once.
+366. **Ruling on item 365: FS131-E6 withdrawn; KB2 unblocked.** (a) No Ephodos job: finding (1) is retracted by its author with a validity argument, and
+     finding (2) cannot arise under `exists_preBend`'s hypotheses; both are now carried by the child's hypotheses and a lemma I5o states (`hfree` from
+     `BaseHyp` and local finiteness), so the kernel checks them — a gap surfaces as an unprovable leaf, routed then. Alternative weighed: keeping E6 as a check of
+     I5o's correction (one mind). Why not: Workflow 3.1 makes the kernel the second check, and E6 would derive what the next jobs formalize anyway. Confidence:
+     medium-high. (b) **The strengthened bend's construction FS131-KB2** takes the next free slot that is not a wave-5 lane's own continuation, from I5o's
+     notes, with the child's hypotheses `hfree` and `hmax`. (c) Item 364 (b)'s caution to I5o is lifted: it may prove `exists_preBend` over the child.
