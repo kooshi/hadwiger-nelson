@@ -2444,3 +2444,28 @@ reason by the close.*
      (`data/fs131/claims-E5.md`) is revised now — `cv_class`'s statement, CVB § 1.4 item 5 and § 1.7's "None" case added by script, Q1 extended to cover
      `cv_class` and to trace FS114-CV-HD and row 137. Alternative weighed: a separate job for `cv_class`. Why: one exclusion, one derivation. Confidence: high.
      Credit: I5e.
+308. **IT1's statement defect, by message, at its readback** (FS131-IT1, before any edit): **`reduced_props_of_planarLike` (T-GRAPH) is false as written**;
+     `PlanarLike` does not stop 2-separators nesting forever, and then no maximal 2-separator exists, `H = G`, and local Hamiltonicity fails. The step that
+     breaks is the docstring's "a maximal 2-separator exists above every 2-separator (a strictly increasing chain of finite interiors … is finite, by local
+     finiteness and `oneInf`)". **Counterexample**: the strong product of the ray with `K₂` — `V = ℕ × Bool`, `(n,s) ~ (m,t)` iff `(n = m ∧ s ≠ t) ∨ |n − m| = 1`;
+     every field of `PlanarLike` holds (rings `[(0,¬s),(1,s),(1,¬s)]` at level 0 and `[(n+1,s),(n+1,¬s),(n,¬s),(n−1,¬s),(n−1,s),(n,¬s)]` above, the one repeat
+     `TwiceApart`; `oneInf` with `G − L_n` split into the finite levels below and the infinite levels above); the 2-separators are the levels `L_n`, `n ≥ 1`,
+     `int(L_n)` the levels below, none maximal, so `reducedVerts = univ`; at `(1,0)` the neighbourhood has no Hamiltonian cycle. As a plane map: the half-annuli
+     `n ≤ |z| ≤ n+1`, unbounded tiles, which a valid map excludes (a tile has diameter at most 1). **Proposed field**: `finSep : ∀ v, {p : V × V | v ∈
+     twoSepInterior G p.1 p.2}.Finite`, read by the maximal-above step (the pair of largest interior among the finitely many whose interior holds a fixed vertex
+     of `int(x, y)` is maximal, by nesting). **Its map side** (IT1's sketch, one mind): if `v ∈ int(x, y)` then `x ~ y` by the rings, `v̂` lies in a bounded
+     component of `ℂ ∖ (cl x̂ ∪ cl ŷ)`, hence in that compact set's hull, so `cl x̂` and `cl ŷ` meet `B̄(p, 3)` for any `p ∈ cl v̂`, and only finitely many tiles do
+     (`finite_tiles_closure_inter`). The triangular lattice satisfies it vacuously. IT1 checked the rest of the route on paper with the field and found no other
+     gap. **To check at the filing**: whether FS114-CVB B2 step 3's own text derives a maximal 2-separator from the map's properties (then only KP's abstraction
+     lost it) or from the listed ones only (then a correction is owed there too). Credit: IT1, for the counterexample at the readback.
+309. **Ruling on item 308: `PlanarLike` gains the field `finSep`, as proposed.** Choice: (a) the field added to `PlanarLike` (KP's foreseen shape: "if T-GRAPH
+     needs one more planar property, `PlanarLike` gains a field … a statement change inside this job's vocabulary, no row statement moves"), docstrings of the
+     structure and of `reduced_props_of_planarLike` rewritten to the route that reads it, the leaf's statement otherwise unchanged; (b) IT1 states the map-side
+     leaf **`filledGraph_finSep`** in `MapGraph` beside `filledGraph_oneInf` with `sorry`, and adds it to `filledGraph_planarLike`'s constructor, so the branch
+     builds — its proof goes to the planar chain after `fs131-w5t` merges into `fs131-w5p`, unless IT1 finishes T-GRAPH with budget to spare, when it may prove
+     it in that theorem's lines alone (IT1's sketch above); (c) **the ladder as an adversary** (`PlanarLike` without the field holds and the reduction fails;
+     `¬ finSep ladder`), in the new module, after the two leaves, if it costs under about half a session. Alternatives weighed: finiteness as a hypothesis of
+     the leaf instead of a field (it moves the leaf's statement and leaves `PlanarLike` too weak for any other reader); a clause in `oneInf` (it hides a
+     separate property inside another). Why: the field is the property the step reads, and the map supplies it. Confidence: high on the defect (the
+     counterexample is concrete and the failing step named); medium-high on the field's sufficiency (one mind, on paper). **For the merge**: `fs131-w5t`'s new
+     theorem and constructor change sit beside IP3's proofs of the F-leaves in `MapGraph` — expect an adjacent-hunk conflict, resolved keeping both.

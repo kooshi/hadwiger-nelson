@@ -166,3 +166,16 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) under a small slot is for iteration only, never
 evidence. The worktree's `.lake/build` is its own copy (from `fs131-w5x`; the first build rebuilds what differs); never replace it with a symlink. Nothing with
 a `sorry` reaches `main`.
+
+## Amendment, 2026-10-05 — `PlanarLike` gains `finSep` (inventory items 308–309)
+
+Your statement defect is logged as item 308 (with credit) and ruled:
+
+> 309. **Ruling on item 308: `PlanarLike` gains the field `finSep`, as proposed.** Choice: (a) the field added to `PlanarLike` (KP's foreseen shape: "if T-GRAPH
+> — source: plans/FS131-close-inventory.md
+
+(the ruling continues there). For you: add the field `finSep` to `PlanarLike` as you proposed, rewrite the two docstrings, state `filledGraph_finSep` in
+`MapGraph` beside `filledGraph_oneInf` (with `sorry`) and add it to `filledGraph_planarLike`'s constructor; then your order is unchanged (the move,
+`triLattice_planarLike`, `reduced_props_of_planarLike`), and after them the ladder adversary if it is cheap, and `filledGraph_finSep`'s proof if budget
+remains. Your touches extend to those `MapGraph` lines (the new theorem and the constructor) and to the ladder in your new module. You start no agents of your
+own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
