@@ -1708,3 +1708,28 @@ through `max n 1` after `simp` (state `ncard ≤ 1` by `exact` from `max 0 1`).
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 37 — SAVED
+
+## Stage 38 — SAVED (FS131-I5o): the readback, and the as-given build
+
+*FS131-I5o, wave 5's non-`Terminal` lane (Opus), resuming this record at its first unsaved stage (Stage 37 SAVED, `1b4a75d8`; branch head `f33ef153`).
+Brief: `data/fs131/briefs/FS131-I5o-wave5.md` (main tree). My set (ruling 358): merge `fs131-w5p` (at `5086e856`) into `fs131-w5` and check it; then
+`bv_l3`, `exists_preBend` (over the strengthened-bend child, ruling 317 (b)), `disc1_local`. Never `Terminal`, `cv_exists`, `main`, `framePt → fromFrame`,
+the gate, or any statement on either side of the merge.
+
+### 38.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_i5_quote_check.py` (I5j's, run, not edited) on the brief: **13 quotations, 13 verbatim**, exit 0 (`data/fs131/i5o/quote-check-38.txt`);
+`--plant` (one letter changed in the first) reports it MISMATCH (`quote-check-38-plant.txt`). The thirteen: `CLAUDE.md` § Counter-priors; inventory
+items 358, 357, 349, 317, 226, 274, 295; this record's Stage 37 (the `bv_l3` and `exists_preBend` bullets); `Dense.lean`'s `disc1_local` docstring opening
+and its statement line; the kernel plan § 10.2's "**It may**" line. Items 226, 274, 295, 317, 349, 357, 358 read in full; I5m's Stages 34–37 read; RS1's
+Stage 29 on `fs131-w5p` (`plans/FS131-planar-implementation.md`) read.
+
+### 38.2 The as-given build (`f33ef153`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1754 modules already
+up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T082731Z-2684723.log`; driver log
+`data/fs131/i5o/build-stage38-asgiven.log`). Every warning is `declaration uses 'sorry'`: wave 5's `Terminal` 9, `MapGraph` 3, `BaseWalk` 3, `BaseDense` 3,
+`HexRing` 1, `Dense` 1 (**20**, item 349's count), and wave 4's stale `Contact` 3, `UnitArc` 5. `tools/fs131_i5_stmt_check.py d61edefc`: PASS
+(`data/fs131/i5o/stmt-check-38.txt`).
+
+## Stage 38 — SAVED
