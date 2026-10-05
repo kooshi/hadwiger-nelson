@@ -2078,7 +2078,7 @@ Merge base `111830c8`; this branch changed 319 files since, `main` 539; **both**
 
 ## Stage 48 — SAVED (FS131-M5): `main` merged (wave 4, Woodall, MERGE); copies removed; checked; the build green
 
-`git merge --no-ff --no-commit origin/main` (at `ddad786d`; one merge base `111830c8`) into `fs131-w5` (at `e6ba8923`). Git took `main`'s side for every
+`git merge --no-ff --no-commit origin/main` into `fs131-w5` (at `e6ba8923`; one merge base `111830c8`). `origin/main` was **`1be5d622`** when the merge ran — `ddad786d` (the brief's) plus inventory item 380, `plans/` only (another session's fetch moved the shared ref); the commit subject's "ddad786d" is that slip, the merge's second parent is `1be5d622`, and every check below ran against it. Git took `main`'s side for every
 wave-4 module by itself — this branch never touched `Basic`, `Contact`, `UnitArc` after the fork, so their stale copies (`Contact` 3 `sorry`, `UnitArc` 5)
 were replaced by `main`'s proved files — and brought `Surgery`, `Cone`, `Moves`, `MergeMove`, Woodall's five modules, wave 2's and the Falconer modules.
 `BaseSteps`, the one proof file both sides changed, merged clean: both deleted `n3_end` identically (this branch moved it to `Terminal`), and `main` added
