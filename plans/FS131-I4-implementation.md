@@ -1744,8 +1744,17 @@ lake-manifest.json ARCHITECTURE.md`: empty — the gate's inputs are those of St
   controls behaved" (`build/gate/vacuity-self-test/20261005T030818Z-873736.log`; driver `data/fs131/g4/vacuity-selftest-final2.log`);
 - `tools/check_architecture.py`: PASS (`data/fs131/g4/check-architecture-final.txt`); `python3 tools/fs131_k4_decls.py --check`: "495 names, 0 missing"
   (`data/fs131/g4/k4decls-check-final.log`).
-The commits after `5816a11a` (this record, the report) touch `plans/` and `data/` only. **The landing**: `git push origin HEAD:main` from the worktree, a
-fast-forward (checked first: `origin/main` an ancestor of `HEAD`); the report gives the hash `main` was moved to.
+**`main` moved twice more while this ran, `plans/` and `data/` only each time** (`ba3019d5`: items 314–315; `aa628f8e`: items 316–317). Merged at `4fa41167`
+(`ba3019d5`), and the full gate re-run there, all exit 0: build "all 1760 modules already up to date, nothing built, 0 module(s) with warnings"
+(`build/gate/build/20261005T031207Z-890606.log`); 0 `sorry`; axioms "OK — 3376 clean, 12 axiom-free, 4 imported, 5 declared purchase(s)"
+(`build/gate/axioms/20261005T031209Z-891011.log`), `--self-test` OK, 23 controls (`build/gate/axioms-self-test/20261005T031213Z-891584.log`); vacuity "OK", the
+same nine counts, header "match (9 of 9 compared)" (`build/gate/vacuity/20261005T031346Z-903019.log`), `--self-test` "all 50 controls behaved"
+(`build/gate/vacuity-self-test/20261005T031456Z-909085.log`); `check_architecture` PASS, `fs131_k4_decls.py --check` 0 missing (drivers
+`data/fs131/g4/*-final3.*`). **The gated commit is `4fa41167`.** Each re-run takes about seven minutes and `main` has moved during each, always in `plans/` and
+`data/`; so the last merge (`aa628f8e`, and any later one before the push) is made and pushed at once, on the check that it changes no gate input
+(`git diff --name-only 4fa41167 HEAD -- . ':!plans' ':!data'` empty) — the precedent of wave 2's plans-only merge `54d408c6` after its gated `40f4b4ef`
+(item 270). **The landing**: `git push origin HEAD:main` from the worktree, a fast-forward (checked first: `origin/main` an ancestor of `HEAD`); the hand-back
+gives the hash.
 
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
