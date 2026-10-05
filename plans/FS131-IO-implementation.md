@@ -5,7 +5,32 @@
 
 ## Theorems this phase proved
 
-(Filled at each saved stage; see the stages below.)
+Kernel-checked in this job's stage-3 build (`build/gate/build/20261005T110040Z-3551665.log`), axioms printed against that build's oleans
+(`lake env lean data/fs131/io/AxiomsIO.lean`, `data/fs131/io/axioms-stage3.txt`), all in `Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean`;
+each reads exactly `[propext, Classical.choice, Quot.sound]` unless noted:
+
+- `HadwigerNelson.Plane.ArcMap.HasHornCount.eq` — [kernel] — the horn count is unique
+- `HadwigerNelson.Plane.ArcMap.HasDegree.eq` — [kernel] — the degree is unique
+- `HadwigerNelson.Plane.ne_hornSet_of_interior_coneAt` — [kernel] — a set whose cone at `v` has an interior direction is no horn set
+- `HadwigerNelson.Plane.exists_small_arcsin` — [kernel] — a uniform bound on `arcsin (κ t / 2)` for small `t`
+- `HadwigerNelson.Plane.BranchGerms.idx_idx` — [kernel], `[propext]` — re-basing the orbit
+- `HadwigerNelson.Plane.BranchGerms.turns_idx` — [kernel], `[propext, Quot.sound]`
+- `HadwigerNelson.Plane.BranchGerms.liftDir_idx`, `BranchGerms.lift_idx` — [kernel] — lifted directions under re-basing
+- `HadwigerNelson.Plane.BranchGerms.openWedge_subset_ball`, `BranchGerms.openRim_subset_sphere` — [kernel]
+- `HadwigerNelson.Plane.ArcMap.Near.col_mem_coloursAt` — [kernel] — a chart sector's colour is carried at `v`
+- `HadwigerNelson.Plane.ArcMap.Near.exists_openConfig_up` — [kernel] — **E6-OPEN's steps 2–4 on the side `σ = +1`**: the first sector of
+  positive angle after a lone cusp, the ray inside it, and the clear wedge from `clear_near_end`
+- `HadwigerNelson.Plane.ArcMap.Near.exists_openConfig_down` — [kernel] — the same on the side `σ = −1` (the orbit re-based at the first
+  sector of positive angle before the cusp)
+- `HadwigerNelson.Plane.ArcMap.Near.exists_openConfig` — [kernel] — **E6-OPEN's steps 1–4**: at a lone horn whose colour's allowed cone has
+  interior, OPEN's configuration exists (N3-CONF, `cone_side`, then the side's lemma)
+- `HadwigerNelson.Plane.ArcMap.Near.openRay_subset_closedBall`, `openRay_nondegenerate`, `openRim_nondegenerate`,
+  `openArcs_subset_closedBall`, `openArcs_finite`, `openArcs_nondegenerate` — [kernel] — the surgery's arc obligations
+- `HadwigerNelson.Plane.ArcMap.Near.open_agreesOff`, `open_ringArcsWithin`, `open_condition5` — [kernel] — three of the move's clauses
+- `HadwigerNelson.Plane.ArcMap.Near.open_coloursAt_self` — [kernel] — `v` gains no colour
+
+Not yet proved (each `sorry`; their axioms read `sorryAx`, and so does `ArcMap.exists_open` through them — the print's positive control):
+`open_hlc`, `open_valid`, `open_degree_horns`, `open_rim`, `open_allowedCone`.
 
 ## Stage 1 — SAVED (FS131-IO1): the readback, the as-given build, and what this job may change
 
@@ -129,3 +154,72 @@ clauses). Log `build/gate/build/20261005T103947Z-3423705.log`; terminal output `
 with the 16 new theorems. No existing declaration changed, no `axiom`, no `native_decide`.
 
 ## Stage 2 — SAVED (FS131-IO1)
+
+## Stage 3 — SAVED (FS131-IO1): the configuration proved (E6-OPEN's steps 1–4); the arcs; four clauses; five leaves left
+
+### 3.1 What was proved
+
+- **`exists_openConfig`** (record § 2.3) in full, over two side lemmas. The side: `e (β p)` is in `D_c(v)` (`e_mem_allowedCone_of_col`,
+  N3-CONF), and `cone_side` gives the interior case (taken as `σ = +1`) or a side `σ = ±1`. On `σ = +1` (`exists_openConfig_up`): `b` is
+  the least `m ≥ 1` with `lift p m < lift p (m + 1)` (it exists below `n`, since the lifts gain `2π` in a turn and the horn gains none);
+  the sectors between are cusps, so `lift p b = lift p 1`; `clear_near_end` at the horn's upper germ (`base_before`) gives `ε, ρ₁`; the ray
+  is `ψ = lift p b + ψ₁` with `ψ₁ = min ε gap / 2`, and `ρc` is small enough that every germ's direction is within `ψ₁` of its tangent
+  (`exists_small_arcsin`). On `σ = −1` (`exists_openConfig_down`): the least `b ≥ 1` with the sector `idx p (n − b)` of positive angle,
+  the orbit re-based at `s = idx p (n − b)` (`idx_idx`, `lift_idx`, `liftDir_idx`: a re-based lift differs by a constant multiple of `2π`),
+  so `idx s b = p`; `clear_near_end` at the horn's lower germ (`base_after`) with `σ = −1`; `ψ = lift s 1 − ψ₁`. E6-OPEN's step 3 ("the
+  wedge is clear — a kernel lemma already") holds as derived: `clear_near_end` gave the whole clear region on both sides, with no new
+  geometry.
+- **The arcs**: `openArcs_nondegenerate` (MERGE's arcs, the ray, and the rim arc across the wedge — its ends `liftDir s b (ρ/2) < ψ` and
+  within one turn by `liftDir_add_n`), `openArcs_finite`, `openArcs_subset_closedBall`.
+- **Clauses**: `open_agreesOff` (the wedge lies in `B(v, ρ/2)`, so off `B̄(v, ρ)` the colouring is `mergeCol`'s, which is `F`'s),
+  `open_ringArcsWithin` (MERGE's unit arcs are germ pieces; the ray is a segment; the rim arc has radius `ρ/2 < 1`), `open_condition5`,
+  `open_coloursAt_self` (every colour of the new map in the punctured disc is `c` or a chart sector's; `v` is on the ray, so not interior).
+- **Re-priced** after these parts: 25 theorems in about 420 lines, every one compiled within two attempts.
+
+### 3.2 The build, the axioms, the checks
+
+Under the slot: **OK** — 451 of 451 batches, 2 modules rebuilt (`OpenMove`, `Proofs`), 8 min 20 s; warnings only `declaration uses 'sorry'`,
+the five in `OpenMove` (l. 568 `open_hlc`, 636 `open_valid`, 672 `open_degree_horns`, 682 `open_rim`, 693 `open_allowedCone`). Log
+`build/gate/build/20261005T110040Z-3551665.log`; terminal output `data/fs131/io/build-stage3.log`. **Axioms** against that build's oleans
+(`scripts/slot.py --mem 16 --cpus 4 -- lake env lean data/fs131/io/AxiomsIO.lean`, the 30 records of `scripts/Axioms.lean`'s FS131-IO1 block;
+`data/fs131/io/axioms-stage3.txt`, parsed with wrapped lines rejoined): **30 records — 22 on exactly the standard three, 2 on fewer
+(`idx_idx` on `[propext]`, `turns_idx` on `[propext, Quot.sound]`), 6 with `sorryAx` (the five leaves and `exists_open`, the control: the
+print sees the `sorry` beneath the assembly), 0 foreign.** `tools/check_architecture.py`: PASS. No existing declaration changed, no `axiom`,
+no `native_decide`.
+
+### 3.3 What is left, and the plan (for whoever continues; no statement of `exists_open` changes)
+
+Five leaves, each stated in `OpenMove` for `F.surgery v ρ (X.G.openArcs …) (X.G.openCol …) hv hρ hA hAf hlc` with the surgery's arguments
+implicit, and each taking `cfg : X.OpenConfig c up s b ψ ρc`, `X.Small ρ`, `ρ ≤ ρc` (and `X.Small ρ'`, `ρ < ρ'` where MERGE's analogue does).
+In every one the map is MERGE's for the gap `s, 0, b` outside the closed wedge `cl W` (`W = openWedge`, inside `B(v, ρ/2)`), so each proof
+is MERGE's (`MergeMove`, the lemma named) with the wedge added; the facts about `W` needed throughout are: `W` is open; its points are
+sector points of the partial sector `idx s (rayPos up b)` at radius `< ρ/2` with direction on the horn's side of `ψ`; `W ∪ chain` is
+`sectorBetween` from the horn's outer germ to the ray (`(lift s 0, κ (idx s 0))` to `(ψ, 0)` for `up`, `(ψ, 0)` to
+`(lift s (b+1), κ (idx s (b+1)))` otherwise), with `mem_sector_idx`. MERGE's hypotheses `hca`, `hcb` (both ends `c`) fail here — one end is
+the partial sector — so MERGE's surgery lemmas cannot be instantiated; their proofs are the template.
+
+1. **`open_hlc`** (template `merge_hlc`, ~130 lines): add the cases a point of `W` (open, constant `c`); a point of the gap germ
+   `idx s (rayPos up b)` or `idx s 1`/`idx s b` inside `ρ/2` bordering `W` (`exists_ball_subset_of_branchPt`: its ball meets the gap side,
+   `c` by `mergeCol`, and the partial sector's side within `W`, `c`); a point of the partial sector off `cl W` (`F`'s colour). The ray and the
+   rim arc are arcs. Needs a small lemma: near a branch point of the partial sector's gap germ at radius `t < ρ/2`, the partial sector's
+   points are in `W` (their direction is below `liftDir … t + η < ψ`).
+2. **`open_valid`** (template `merge_valid`): `Valid.of_agreesOff` on `B̄(v, ρ)`; a recoloured point is a gap point or a wedge point,
+   both with direction in the configuration's clear range (`cfg.clear`); the rest as MERGE.
+3. **`open_degree_horns`** (template `merge_hasSectors`, the partition at `r < ρ/2` by `encard_sectorsOf_of_partition`; here
+   `isSector_iff_of_partition` with pieces indexed by `Fin X.n`: the merged piece `chain ∪ W` at the horn's index, the rest of the partial
+   sector at its index, `∅` at the swallowed sectors', `sector r i` elsewhere). Then `m' = n − (b − 1) ≤ n` (`IsSectorChart.hasDegree`,
+   `HasDegree.eq`) and the horn sets: unchanged chart sectors keep their status; the merged piece and the rest of the partial sector have an
+   interior direction (`ne_hornSet_of_interior_coneAt`; their cones contain an interval at `ψ`); the horn was a horn set
+   (`sectorBetween_eq_hornSet` with `cfg.cusp`), so `j' ≤ j − 1`.
+4. **`open_rim`** (template `merge_not_hasRepeatedColour_rim`, `merge_ncard_coloursAt_rim`): near a rim point the new map equals MERGE's
+   (the wedge, ray and rim arc lie in `B̄(v, ρ/2)`); the proof of each MERGE child it cites that is surgery-specific
+   (`mem_merge_interiorPts_of_mem`, `branchPt_mem_merge_interiorPts_iff`) is re-run for `openArcs` (they read only arcs outside
+   `B̄(v, ρ/2)`, where `openArcs` is `mergeArcs`); `sides_preconnected` is reused as is.
+5. **`open_allowedCone`** (template `merge_allowedCone` and its 19 children): the chain becomes `chain ∪ W ∪` the horn, open and clear for
+   `c` (`cfg.clear`), so `dist_ne_one_of_isOpen_isClear` keeps it off `ω(v′)`; the tile facts as MERGE's.
+
+**Owed besides**: the positive spec example for `HasHornCount` (§ 2.1); an inhabitant note for `exists_open` (LEAN.md § The gate asks
+for a model of the hypotheses — `cuspFrag` at `0` has a lone horn? no: colour `1` has two horns there; FS131-E6's model is the instance,
+not yet in Lean; as with `exists_merge`, item 375's gate-rule gap).
+
+## Stage 3 — SAVED (FS131-IO1)
