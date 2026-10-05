@@ -347,3 +347,43 @@ modules already up to date, nothing built, 10 modules with warnings**, exit 0 (`
 call moves.
 
 ## Stage 8 — SAVED (FS131-IL1)
+
+---
+
+# FS131-IL2 — the implementer, lane A continued (`exists_clean`, the three finiteness lemmas, `mergeAvailable_of_bothKind`)
+
+*de Bruijn, the implementer (Opus), on branch `fs131-w5c` from `6a792494`. Brief: `data/fs131/briefs/FS131-IL2-limit.md` (main tree).*
+
+## Theorems this phase proved (FS131-IL2)
+
+(Filled at each saved stage.)
+
+## Stage 9 — SAVED (FS131-IL2): the readback and the as-given build
+
+### 9.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script with IL1's checker, run unchanged (`tools/fs131_il_quotes.py`, in my touches): **12 quotations, 0 failures**
+(`data/fs131/il/il2-quotes.txt`) — `CLAUDE.md` § Counter-priors; this record's § 8.2 bullets for `exists_clean`, `treatPts_inter_finite`,
+`badCount_eq_zero_iff`, `badCount_lt_top`, `mergeAvailable_of_bothKind`; the inventory's items 380, 381, 382, 383, 373, 374 (main tree).
+`--self-test` (one letter planted in the first quotation): **fired** (1 failure; `data/fs131/il/il2-quotes-selftest.txt`). No mismatch.
+
+Read in full: KL1's §§ 2.1, 3.1, 4 (Stages 2–4) and IL1's Stages 5–8 of this record; `Procedure.lean`; `Limit.lean`'s statements, the sites
+section and `exists_clean`; `ArcMap` (`Plane/ArcMap.lean`); `IsModification`, `QROnly`, `IsTerminalMap` (`Chain.lean`); `IsRingArc`, `IsQArc`,
+`innerColours`, `OnRingArc` (`LocalMap.lean`); `IsR2Arc`, `AgreesOff`, `RingArcsWithin` (`ValidMap/Basic.lean`); `GoodAt`, `exists_goodAt`,
+`IsSectorChart`, `isSectorChart_of`, `Arc.branch_mem_of_mem` (`LocalStructure.lean`); inventory items 373, 374, 380–383.
+
+### 9.2 The as-given build (`6a792494`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1757
+modules already up to date, nothing built, 10 modules with warnings**, exit 0 (`build/gate/build/20261005T101037Z-3279589.log`; driver log
+`data/fs131/il/build-il2-stage9-asgiven.log`). Open `sorry` in my files: `Limit` 1 (`exists_clean`), `Procedure` 7 (four mine:
+`badCount_eq_zero_iff`, `badCount_lt_top`, `treatPts_inter_finite`, `mergeAvailable_of_bothKind`; three not: `exists_vertexStep` (held, item
+383 (b)), `exists_arcStep`, `exists_terminalSeq`).
+
+### 9.3 A first observation on `exists_clean` before building
+
+`Γ' = E` is forced, not chosen: if the new map keeps every point's colours and `x ∈ E` (two colours) were interior in the new map, the new
+colour would be constant near `x` and `x` would carry one colour. So the presentation — `E` as a locally finite union of arcs — cannot be
+avoided, and the work is IL1's (i)–(ii).
+
+## Stage 9 — SAVED (FS131-IL2)
