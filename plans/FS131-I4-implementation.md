@@ -1549,6 +1549,39 @@ driver log `data/fs131/i4/build-i4n-bends.log`): `sorry` only — UnitArc 1 (`be
 **What is left on `fs131-w4` (3 `sorry`)**: `bend_away` (leaves wave 4 at this hand-back, items 291 (d), 295 (b)); `exists_merge`, `exists_merge_aux` (the
 merge-and-gate job deletes them, item 295 (a)).
 
+## Stage 44 — SAVED (FS131-G4): readback, the as-given build, and what this job may change
+
+*FS131-G4 (de Bruijn, the implementer, on Opus 5.5; brief `data/fs131/briefs/FS131-G4-land.md` on `main`) continues this record from `71cca146`.
+Its job: wave 4's landing — delete the three declarations that left the wave, rename `framePt`, teach `tools/fs131_k4_decls.py` `_root_.` names, register
+wave 4's vacuity carriers beside wave 2's and settle the vacuity notes, the full gate on one commit, merge `main`, the gate again, and fast-forward `main`.*
+
+**The brief's quotations against their sources** (standing rule 3), each read in `plans/FS131-close-inventory.md` at `main` (`6403c145`) unless named:
+item 297 (l. 2307), item 296 (l. 2285), item 295 (l. 2274), item 291 (l. 2210), item 281 (l. 2089), item 271 (l. 1980), item 260 (l. 1863), item 252
+(l. 1807), item 266 (l. 1927), item 144 (l. 892), item 270 (l. 1966): each **matches as a truncation** (the brief quotes each item's first line). The
+brief's parenthetical summaries read against the items in full: item 297's tasks (three deletions with their records, the `_root_.` tool fix, the
+`framePt` rename, the carriers, the vacuity notes, the gate with both self-tests, the merge with `fs131_qa1_dupes.py`, the fast-forward) — as item 297
+says; item 281 (b), item 271's `framePt` clause (`Plane/Slack` l. 2800 against `Plane/ValidMap/Basic` l. 44) and its carrier clause, item 260's
+re-run clause, items 252 and 266's vacuity notes, item 144 (b)'s carriers — each as the item says. The plan's two quotations
+(`plans/FS131-w4-kernel-plan.md` § 14.4 items 1 and 3, l. 919, l. 925 on this branch): **match exactly** (item 1 as a truncation). No mismatch.
+I read the record's Stages 41–43 and the plan's § 14 in full.
+
+**The worktree as given** (`71cca146`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`): "build: OK —
+all 1747 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0 (`build/gate/build/20261005T013928Z-247025.log`; driver log
+`data/fs131/g4/build-g4-readback.log`): 3 warnings, all `declaration uses sorry` — UnitArc l. 3973 (`bend_away`), Moves l. 1667 (`exists_merge_aux`),
+Contact l. 1525 (`exists_merge`). `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'` over `Proofs/`: those three lines (UnitArc 3980, Moves 1673, Contact
+1531). `lebesgue_covering_square` is no longer `sorry` (FS131-LEB landed; `SVMap` l. 468 cites `LebesgueCovering.lebesgue_covering_square`).
+`python3 tools/fs131_k4_decls.py --check`: "495 names, 2 missing", exit 1 — the two `_root_.` theorems of `Contact` (l. 368, l. 975), read as
+`HadwigerNelson.Plane.ArcMap._root_.HadwigerNelson.Plane.BranchGerms.frameY_lt_of_mem` and `…lt_frameY_of_mem` (item 281 (b)'s defect, reproduced).
+
+**What this job may change** (the brief's touches and § 14.2): the three deletions — `ArcMap.bend_away` (`UnitArc`), `ArcMap.exists_merge` (`Contact`),
+`ArcMap.exists_merge_aux` (`Moves`) — each with its docstring and its `#print axioms` record, and the header lines that name them (`Contact`'s
+"* **FS110-W-MERGE**: `exists_merge`."; `UnitArc`'s bends line; `Moves`' module docstring), nothing else of their modules; the `framePt` rename with
+every use; inhabitants and docstring lines the vacuity step needs, in wave 4's modules; `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`,
+`scripts/Vacuity.lean`, `scripts/vacuity.sh`, `scripts/vacuity-baseline.txt`, `scripts/axioms-controls.txt`, `tools/fs131_k4_decls.py`, `tools/fs131_g4_*.py`,
+`data/fs131/g4/`, this record, the report; `main` by fast-forward only. **What it may not**: any statement (no hypothesis, conclusion or definition the
+statements use changes; `framePt`'s rename changes a name, not a definition), any `axiom`, `CLAUDE.md`, `LEAN.md`, `tools/claude_md_fact_audit.py`, another
+job's tools. `Near.RayConfig.exists_merge` (`Moves` l. 1481, proved, read by `exists_rayMerge_of_clear`) is a different declaration and stays.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
