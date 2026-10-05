@@ -2415,3 +2415,24 @@ reason by the close.*
      sketch. **Coordinator's slip**: G4's brief relayed item 144 (b) as done by FS131-T3, but item 153 moved the vacuity half (`CPColouring`, `AeProperRegions`) to
      each wave's landing; G4 registers `AeProperRegions` IN with `IsEmpty (AeProperRegions 0)` and `IsEmpty (AeProperRegions 1)` — accepted. Credit: G4, for the
      correction and the model sketch.
+
+305. **I5e's GAP at NB3-END item 2, by message** (FS131-I5e, mid-job, 2026-10-05) — the step behind `n3_end_of_not_inType`'s repeated colour; not a
+     counterexample. The step (`plans/FS112-NB3-verification.md` l. 234–237): "`c ∈ P_cl(S′)` (N3-DEG at `v`), its sectors in `α`'s away cone (U1), below: the
+     two `g`-tiles are **two sectors** of `g` at `S′`." What is missing (frame at `v` along `a = e α`, `n = e(α + π/2)`, `S′ = v − n`): the horn `H` has lower bound
+     `−1`, so its lower arc lies on `ω(S′)`, but only on the `+a` side of `v`; U1 on that arc puts `c`'s cone at `S′` in the closed interval `[α+π, α+2π−φ]`
+     (I5d's `not_antipodal_coneAt_S_of_horn`), which contains the direction of `−a`. So the text does not exclude: one `g`-sector at `S′` with cone `[α+π, α+2π]`
+     (the closed lower half-plane), shadowing both `H` and `H₋`, and `c` carried at `S′` only by a `c`-horn along `−a` on the `+n` side of that sector (cone
+     `{α+π}`) — then the "two sectors" are one and `HasRepeatedColour (v − n)` does not follow. It can occur only when `H₋`'s bound on the `S′` side is `κ₄ < 1`
+     (at `κ₄ = 1`, `H₋`'s arc continues along `ω(S′)` past `v` and U1 excludes `−a`). **I5e's repair, one mind, leading order only**: `y = S′ + s·e(α+π−θ)` has a
+     point of `H₋` at distance exactly 1 iff `θ/s > τ(κ₄) = −κ₄ / (2(1−κ₄))` (the minimum over `x` of `(s−x)²/2 − κ₄x²/2`); the `g`-points shadowing `H₋` near
+     `S′` have `θ/s > τ`; the `c`-horn lies on their `+n` side at larger `θ`, so its points meet `H₋` at distance 1 — a monochromatic unit pair in `c`. An exact
+     version needs the shadow of `H₋` near `S′` closed upward in `Y` at fixed `X` (the mirror of NB3 item 4's "downward closed"). Wave 4's analogue
+     (`sector_shadow_S`, `flank_shadow_g_chart`) assumes Condition 5 and `κ₁ > −1`, so nothing transfers. I5e worked out the shadow witnesses' limit directions
+     at `S′` (`+a` from below for `H`, `−a` for `H₋`) and records them under the leaf. Credit: I5e.
+306. **Ruling on item 305, and the next derivation job.** Choice: `n3_end_of_not_inType` stays `sorry` in I5e's job and goes to an Ephodos re-derivation,
+     **FS131-E5**, which also takes `bend_away`'s end case at `q_A` (item 296), so one deriver's slot serves both: for each, derive the step, or exhibit the
+     configuration exactly, or repair the statement and trace its consumers. **Slot**: the next one that frees, unless wave 4 has landed by then, in which case
+     Woodall's landing job takes it and E5 the one after; then the second wave-5 implementer, IMM2, and `bend_away`'s implementer (on E5's verdict).
+     Alternative weighed: I5e formalizes its repair now. Why declined: one mind, leading order only, and the closure property it needs is not derived; the
+     hand step must exist before the kernel can check it. Confidence: high on the routing; medium on the order (it would change if wave 5's other leaves finish
+     before the planar chain, making `n3_end` the longest path). I5e was told by message (credit and ruling), and goes on with its other leaves.
