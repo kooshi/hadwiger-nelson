@@ -147,3 +147,38 @@ stage: the field (the ruling), then the inhabitant and the leaf into the module.
 - **Re-pricing from the first two leaves** (`LEAN.md`): the plan priced F-RING and T-GRAPH together at two to three sessions; T-GRAPH alone took
   well under one (the whole route elaborated in scratch within this stage's span), so the plan's price was high by a factor of three or more — as
   the cost model predicts.
+
+## Stage 4 — SAVED: T-GRAPH proved — `reduced_props_of_planarLike` on the standard three
+
+**`HadwigerNelson.Thomassen.reduced_props_of_planarLike`** is proved, statement unchanged (with `PlanarLike` as ruled), on exactly
+`[propext, Classical.choice, Quot.sound]`. Its proof is the one-line assembly of four children; all live in `Thomassen`'s `section Reduction`:
+
+- **Cyclic sequences** (generic over any type and graph): `NoInterleave` (no value `y` at positions `i < j` with others between and outside),
+  `NoInterleave.sublist`; `collapse` (runs of equal entries to one) with `collapse_sublist`, `mem_collapse`, `head?_collapse`, `getLast?_collapse`,
+  `isChain_collapse`; **`exists_cycle_of_chain`** (a closing chain of distinct adjacent entries with no interleaving value and three values is a
+  cycle, through `Walk.ofSupport`) and **`exists_cycle_of_cyclic`** (consecutive entries equal or adjacent, cyclically, no interleaving, three
+  values ⟹ a cycle on exactly the values).
+- **2-separators under `PlanarLike`**: `offTwo_comm`, `twoSepInterior_comm`, `twoSepInterior_subset_offTwo`, `mem_twoSepInterior_of_reachIn`,
+  `mem_twoSepInterior_or_of_adj`; `PlanarLike.offTwo_infinite`, `.reachIn_of_adj_adj`, **`.reachIn_ne`** (no cut vertex), `.twoSepInterior_self`,
+  `.ne_of_mem_twoSepInterior`, **`.adj_of_mem_twoSepInterior`** (every 2-separator an edge), `.exists_adj_left`, `.exists_adj_right` (every
+  component adjacent to both ends), `.twoSepInterior_finite`, **`.twoSepInterior_subset`** (interiors nest), `.eq_or_eq_of_mem`,
+  **`.eq_of_mem_maximal`** (one maximal pair per interior vertex), **`.exists_maximal_above`** (the step that reads `finSep`),
+  `.not_mem_twoSepInterior`; `mem_reducedVerts_of_maximal`, `exists_maximal_of_not_mem`.
+- **`H`**: `exists_reducedVerts_mem_twoSepInterior`, `exists_eq_of_cross_up`, `exists_eq_of_cross_down` (discrete crossings),
+  `PlanarLike.exists_adj`, **`.reduced_locallyFinite`**, **`.reducedVerts_infinite`**, **`.reduced_connected`**,
+  `.eq_of_mem_twoSepInterior_of_mem_reducedVerts`, `.exists_adj_mem_reducedVerts_ne`, **`.reduced_locallyHamiltonian`**.
+- Spec examples for `collapse` (by `decide`) and `NoInterleave` (one interleaving list, one not); `Mathlib.Data.List.NodupEquivFin` imported.
+- `scripts/Axioms.lean`: the FS131-IT1 block gains the 39 new theorems (59 `Thomassen` records and F-SEP in all).
+- **Build: OK — 447 of 447 batches, 3 modules rebuilt (`Thomassen`, `MapGraph`, `Proofs`), 11 with warnings, every warning `declaration uses
+  'sorry'` (0 others), exit 0** (`build/gate/build/20261005T024305Z-686079.log`, last line "Build completed successfully (5404 jobs)."; driver log
+  `data/fs131/it/build-stage4.log`). `Thomassen` is `sorry`-free (11 modules with warnings, down from 12).
+- **Axioms receipt against this build's oleans** (`tools/fs131_it_axioms.py`; `data/fs131/it/AxiomsIT1.lean`, generated from the Axioms block;
+  output `data/fs131/it/axioms-it1-stage4.txt`, verdict `data/fs131/it/axioms-it1-stage4-check.txt`): **OK — 62 clean records on the standard
+  three or fewer** (the 59 block records, the leaf, `lemma1`, `triLattice_hyps`), **2 partners on `sorryAx`** (`ArcMap.filledGraph_finSep`,
+  `ArcMap.cvb_thom_reduced`). Self-test: the partner listed as clean and a clean record listed as partner are both caught. **Tool defect found by
+  its first run and fixed**: the record parser's `'([^']+)'` could not read a name with a prime (`connected_induce_iff'`), and the check failed
+  loudly with "NO RECORD" — repaired to a lazy match up to `' depends`.
+- **The statement read aloud against the informal claim**: for a graph with the planar properties, the graph `H` obtained by deleting the
+  interior of every maximal 2-separator is connected, locally finite, locally Hamiltonian (every vertex's neighbourhood in `H` is the vertex set of
+  a cycle of `H`) and infinite — `[Thomassen1999]` pp. 851–852's conclusion before Lemma 1, with CVB B2 step 3's finiteness in place of the count.
+  `cvb_thom_reduced` (`MapGraph`) is now a reduction to the six F-leaves alone.

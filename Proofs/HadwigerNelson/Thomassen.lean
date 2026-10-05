@@ -4,6 +4,7 @@ import Mathlib.Combinatorics.SimpleGraph.Connectivity.Subgraph
 import Mathlib.Combinatorics.SimpleGraph.Metric
 import Mathlib.Combinatorics.Enumerative.DoubleCounting
 import Mathlib.Tactic.NormNum
+import Mathlib.Data.List.NodupEquivFin
 
 /-!
 # Thomassen's reduction, as pure graph theory
@@ -226,6 +227,873 @@ theorem connected_induce_iff' {S : Set V} :
   · rintro ⟨⟨a, ha⟩, h⟩
     exact ⟨fun a b => (reachable_induce_iff a.2 b.2).mpr (h a.1 b.1 a.2 b.2), ⟨⟨a, ha⟩⟩⟩
 
+
+/-! ## Cyclic sequences: collapsing runs to a cycle -/
+
+/-- No value `y` interleaves with two other values: there are no positions `i < m < j` and `n` outside `[i, j]` with `y` at `i`
+and `j` and values other than `y` at `m` and `n`. -/
+def NoInterleave {W : Type*} (s : List W) : Prop :=
+  ∀ (y a b : W) (i m j n : ℕ), i < m → m < j → (n < i ∨ j < n) → s[i]? = some y → s[m]? = some a → s[j]? = some y →
+    s[n]? = some b → a = y ∨ b = y
+
+/-- A sublist of a sequence with no interleaving value has none. -/
+theorem NoInterleave.sublist {W : Type*} {s u : List W} (hs : NoInterleave s) (hu : List.Sublist u s) : NoInterleave u := by
+  obtain ⟨f, hf⟩ := List.sublist_iff_exists_orderEmbedding_getElem?_eq.mp hu
+  intro y a b i m j n him hmj hn hi hm hj hn'
+  rw [hf] at hi hm hj hn'
+  refine hs y a b (f i) (f m) (f j) (f n) (f.strictMono him) (f.strictMono hmj) ?_ hi hm hj hn'
+  rcases hn with hn | hn
+  · exact Or.inl (f.strictMono hn)
+  · exact Or.inr (f.strictMono hn)
+
+/-- Collapse each run of equal consecutive entries to one entry (the run's last). -/
+def collapse {W : Type*} [DecidableEq W] : List W → List W
+  | [] => []
+  | [a] => [a]
+  | a :: b :: l => if a = b then collapse (b :: l) else a :: collapse (b :: l)
+
+section Collapse
+
+variable {W : Type*} [DecidableEq W]
+
+/-- `collapse l` is a sublist of `l`. -/
+theorem collapse_sublist : ∀ l : List W, List.Sublist (collapse l) l
+  | [] => by simp [collapse]
+  | [a] => by simp [collapse]
+  | a :: b :: l => by
+    unfold collapse
+    split_ifs
+    · exact (collapse_sublist (b :: l)).cons a
+    · exact (collapse_sublist (b :: l)).cons_cons a
+
+/-- `collapse` keeps every value. -/
+theorem mem_collapse : ∀ (l : List W) (y : W), y ∈ collapse l ↔ y ∈ l
+  | [] => by simp [collapse]
+  | [a] => by simp [collapse]
+  | a :: b :: l => by
+    intro y
+    unfold collapse
+    split_ifs with hab
+    · subst hab; rw [mem_collapse (a :: l) y]; simp
+    · rw [List.mem_cons, mem_collapse (b :: l) y]; simp
+
+/-- `collapse` keeps the first entry. -/
+theorem head?_collapse : ∀ l : List W, (collapse l).head? = l.head?
+  | [] => by simp [collapse]
+  | [a] => by simp [collapse]
+  | a :: b :: l => by
+    unfold collapse
+    split_ifs with hab
+    · subst hab; rw [head?_collapse (a :: l)]; simp
+    · simp
+
+/-- `collapse` keeps the last entry. -/
+theorem getLast?_collapse : ∀ l : List W, (collapse l).getLast? = l.getLast?
+  | [] => by simp [collapse]
+  | [a] => by simp [collapse]
+  | a :: b :: l => by
+    unfold collapse
+    split_ifs with hab
+    · rw [getLast?_collapse (b :: l)]; simp
+    · have hh := head?_collapse (b :: l)
+      have hl := getLast?_collapse (b :: l)
+      cases hc : collapse (b :: l) with
+      | nil => rw [hc] at hh; simp at hh
+      | cons c t => rw [hc] at hl; rw [List.getLast?_cons_cons, hl, List.getLast?_cons_cons]
+
+/-- Consecutive entries equal or `R`-related become distinct and `R`-related. -/
+theorem isChain_collapse {R : W → W → Prop} :
+    ∀ l : List W, l.IsChain (fun a b => a = b ∨ R a b) → (collapse l).IsChain (fun a b => a ≠ b ∧ R a b)
+  | [] => by simp [collapse]
+  | [a] => by simp [collapse]
+  | a :: b :: l => by
+    intro hl
+    rw [List.isChain_cons_cons] at hl
+    unfold collapse
+    split_ifs with hab
+    · exact isChain_collapse (b :: l) hl.2
+    · have ih := isChain_collapse (b :: l) hl.2
+      have hhead := head?_collapse (b :: l)
+      cases hc : collapse (b :: l) with
+      | nil => simp
+      | cons c t =>
+        rw [hc] at ih hhead
+        simp only [List.head?_cons, Option.some.injEq] at hhead
+        subst hhead
+        rw [List.isChain_cons_cons]
+        exact ⟨⟨hab, hl.1.resolve_left hab⟩, ih⟩
+
+end Collapse
+
+/-- A nonempty chain of distinct adjacent entries, closing up (the last adjacent to the first), with no value interleaving and at least three
+distinct values, is a cycle. -/
+theorem exists_cycle_of_chain {W : Type*} (H : SimpleGraph W) (u : List W) (hne : u ≠ [])
+    (hc : u.IsChain (fun a b => a ≠ b ∧ H.Adj a b)) (hw : H.Adj (u.getLast hne) (u.head hne)) (hni : NoInterleave u)
+    (h3 : ∃ a b c, a ∈ u ∧ b ∈ u ∧ c ∈ u ∧ a ≠ b ∧ a ≠ c ∧ b ≠ c) :
+    ∃ (a : W) (p : H.Walk a a), p.IsCycle ∧ ∀ y, y ∈ p.support ↔ y ∈ u := by
+  classical
+  have hlen : 0 < u.length := List.length_pos_of_ne_nil hne
+  -- no repetition
+  have hnd : u.Nodup := by
+    rw [List.nodup_iff_getElem?_ne_getElem?]
+    intro i j hij hj heq
+    have hi : i < u.length := by omega
+    have hy : u[i]? = some u[i] := List.getElem?_eq_getElem hi
+    have hyj : u[j]? = some u[i] := heq ▸ hy
+    have hi1 : i + 1 < u.length := by omega
+    have hadj1 := List.isChain_iff_getElem.mp hc i hi1
+    have hm : i + 1 < j := by
+      by_contra hcon
+      have hji : j = i + 1 := by omega
+      subst hji
+      rw [List.getElem?_eq_getElem hi1, Option.some.injEq] at hyj
+      exact hadj1.1 hyj.symm
+    rcases Nat.eq_zero_or_pos i with hi0 | hi0
+    · subst hi0
+      have hjl : j < u.length - 1 := by
+        by_contra hcon
+        have hjl : j = u.length - 1 := by omega
+        subst hjl
+        rw [List.getElem?_eq_getElem hj, Option.some.injEq] at hyj
+        apply hw.ne
+        rw [List.getLast_eq_getElem, List.head_eq_getElem, hyj]
+      rcases hni u[0] u[1] u[u.length - 1] 0 1 j (u.length - 1) (by omega) hm (Or.inr hjl) hy
+          (List.getElem?_eq_getElem hi1) hyj (List.getElem?_eq_getElem (by omega)) with h' | h'
+      · exact hadj1.1 h'.symm
+      · apply hw.ne
+        rw [List.getLast_eq_getElem, List.head_eq_getElem, h']
+    · have hprev := List.isChain_iff_getElem.mp hc (i - 1) (by omega)
+      have hii : i - 1 + 1 = i := by omega
+      simp only [hii] at hprev
+      rcases hni u[i] u[i + 1] u[i - 1] i (i + 1) j (i - 1) (by omega) hm (Or.inl (by omega)) hy
+          (List.getElem?_eq_getElem hi1) hyj (List.getElem?_eq_getElem (by omega)) with h' | h'
+      · exact hadj1.1 h'.symm
+      · exact hprev.1 h'
+  -- at least three entries
+  have h3' : 3 ≤ u.length := by
+    obtain ⟨a, b, c, ha, hb, hc', hab, hac, hbc⟩ := h3
+    have hsub : ({a, b, c} : Finset W) ⊆ u.toFinset := by
+      intro z hz; simp only [Finset.mem_insert, Finset.mem_singleton] at hz
+      rw [List.mem_toFinset]; rcases hz with rfl | rfl | rfl <;> assumption
+    have := Finset.card_le_card hsub
+    rw [List.toFinset_card_of_nodup hnd, Finset.card_insert_of_notMem (by simp [hab, hac]),
+      Finset.card_insert_of_notMem (by simp [hbc]), Finset.card_singleton] at this
+    omega
+  -- the cycle: the path along `u`, closed by the edge from its last entry to its first
+  let p := SimpleGraph.Walk.ofSupport u hne (hc.imp fun _ _ h => h.2)
+  have hpath : p.IsPath := by
+    rw [SimpleGraph.Walk.isPath_def, SimpleGraph.Walk.support_ofSupport]; exact hnd
+  refine ⟨u.getLast hne, .cons hw p, ?_, ?_⟩
+  · rw [SimpleGraph.Walk.cons_isCycle_iff]
+    refine ⟨hpath, fun he => ?_⟩
+    rw [Sym2.eq_swap] at he
+    have := hpath.length_eq_one_of_mem_edges he
+    rw [SimpleGraph.Walk.length_ofSupport] at this
+    omega
+  · intro y
+    rw [SimpleGraph.Walk.support_cons, SimpleGraph.Walk.support_ofSupport, List.mem_cons]
+    constructor
+    · rintro (rfl | hy)
+      · exact List.getLast_mem hne
+      · exact hy
+    · exact Or.inr
+
+/-- **A cyclic sequence collapses to a cycle**: consecutive entries (cyclically) equal or adjacent, no value interleaving, at least three
+distinct values — then the values are the vertex set of a cycle. -/
+theorem exists_cycle_of_cyclic {W : Type*} (H : SimpleGraph W) (s : List W)
+    (hchain : ∀ (i : ℕ) (a b : W), s[i]? = some a → s[(i + 1) % s.length]? = some b → a = b ∨ H.Adj a b)
+    (hnoint : NoInterleave s) (h3 : ∃ a b c, a ∈ s ∧ b ∈ s ∧ c ∈ s ∧ a ≠ b ∧ a ≠ c ∧ b ≠ c) :
+    ∃ (a : W) (p : H.Walk a a), p.IsCycle ∧ ∀ y, y ∈ p.support ↔ y ∈ s := by
+  classical
+  obtain ⟨a₀, b₀, c₀, ha₀, hb₀, hc₀, hab, hac, hbc⟩ := h3
+  have hne : s ≠ [] := List.ne_nil_of_mem ha₀
+  have hlen : 0 < s.length := List.length_pos_of_ne_nil hne
+  have hlin : s.IsChain (fun a b => a = b ∨ H.Adj a b) := by
+    rw [List.isChain_iff_getElem]
+    intro i hi
+    exact hchain i _ _ (List.getElem?_eq_getElem (by omega))
+      (by rw [Nat.mod_eq_of_lt hi]; exact List.getElem?_eq_getElem hi)
+  have hwrap : s.getLast hne = s.head hne ∨ H.Adj (s.getLast hne) (s.head hne) := by
+    refine hchain (s.length - 1) _ _ ?_ ?_
+    · rw [List.getLast_eq_getElem]; exact List.getElem?_eq_getElem _
+    · rw [Nat.sub_add_cancel hlen, Nat.mod_self, List.head_eq_getElem]; exact List.getElem?_eq_getElem _
+  set t := collapse s with ht
+  have htc : t.IsChain (fun a b => a ≠ b ∧ H.Adj a b) := isChain_collapse s hlin
+  have htmem : ∀ y, y ∈ t ↔ y ∈ s := mem_collapse s
+  have htne : t ≠ [] := fun h' => by simpa [h'] using (htmem a₀).mpr ha₀
+  have hthead : t.head htne = s.head hne := by
+    have := head?_collapse s
+    rw [← ht, List.head?_eq_some_head htne, List.head?_eq_some_head hne] at this
+    exact Option.some.inj this
+  have htlast : t.getLast htne = s.getLast hne := by
+    have := getLast?_collapse s
+    rw [← ht, List.getLast?_eq_some_getLast htne, List.getLast?_eq_some_getLast hne] at this
+    exact Option.some.inj this
+  have htni : NoInterleave t := hnoint.sublist (collapse_sublist s)
+  by_cases hhl : t.head htne = t.getLast htne
+  · -- drop the head: it is also the last entry
+    have httl : t.tail ≠ [] := by
+      intro h'
+      have hsing : t = [t.head htne] := by
+        have := List.cons_head_tail htne
+        rw [h'] at this
+        exact this.symm
+      have ha := (htmem a₀).mpr ha₀
+      have hb := (htmem b₀).mpr hb₀
+      rw [hsing, List.mem_singleton] at ha hb
+      exact hab (ha.trans hb.symm)
+    have hmemtl : ∀ y, y ∈ t.tail ↔ y ∈ s := by
+      intro y
+      rw [← htmem y]
+      constructor
+      · exact List.mem_of_mem_tail
+      · intro hy
+        rw [← List.cons_head_tail htne, List.mem_cons] at hy
+        rcases hy with rfl | hy
+        · rw [hhl, ← List.getLast_tail httl]; exact List.getLast_mem httl
+        · exact hy
+    have hct : t.tail.IsChain (fun a b => a ≠ b ∧ H.Adj a b) := htc.tail
+    have hwt : H.Adj (t.tail.getLast httl) (t.tail.head httl) := by
+      rw [List.getLast_tail httl, ← hhl]
+      have h01 := htc
+      rw [← List.cons_head_tail htne, ← List.cons_head_tail httl, List.isChain_cons_cons] at h01
+      exact h01.1.2
+    obtain ⟨a, p, hp, hsupp⟩ := exists_cycle_of_chain H t.tail httl hct hwt (htni.sublist (List.tail_sublist t))
+      ⟨a₀, b₀, c₀, (hmemtl a₀).mpr ha₀, (hmemtl b₀).mpr hb₀, (hmemtl c₀).mpr hc₀, hab, hac, hbc⟩
+    exact ⟨a, p, hp, fun y => (hsupp y).trans (hmemtl y)⟩
+  · have hwt : H.Adj (t.getLast htne) (t.head htne) := by
+      rcases hwrap with h' | h'
+      · exact absurd (by rw [hthead, htlast, h']) hhl
+      · rw [hthead, htlast]; exact h'
+    obtain ⟨a, p, hp, hsupp⟩ := exists_cycle_of_chain H t htne htc hwt htni
+      ⟨a₀, b₀, c₀, (htmem a₀).mpr ha₀, (htmem b₀).mpr hb₀, (htmem c₀).mpr hc₀, hab, hac, hbc⟩
+    exact ⟨a, p, hp, fun y => (hsupp y).trans (htmem y)⟩
+
+/-! ## The 2-separators of a graph with the planar properties -/
+
+/-- `offTwo` is symmetric. -/
+theorem offTwo_comm (x y : V) : offTwo x y = offTwo y x := by
+  ext v; simp only [offTwo, Set.mem_setOf_eq]; exact and_comm
+
+/-- `int(x, y)` is symmetric. -/
+theorem twoSepInterior_comm (x y : V) : twoSepInterior G x y = twoSepInterior G y x := by
+  ext v; simp only [mem_twoSepInterior_iff, offTwo_comm x y]
+
+/-- `int(x, y)` misses `x` and `y`. -/
+theorem twoSepInterior_subset_offTwo (x y : V) : twoSepInterior G x y ⊆ offTwo x y := fun _ hv => hv.1
+
+/-- A vertex reached inside `offTwo x y` from an interior vertex is interior. -/
+theorem mem_twoSepInterior_of_reachIn {x y v w : V} (hv : v ∈ twoSepInterior G x y) (hw : ReachIn G (offTwo x y) v w) :
+    w ∈ twoSepInterior G x y := by
+  obtain ⟨-, hf⟩ := mem_twoSepInterior_iff.mp hv
+  exact mem_twoSepInterior_iff.mpr ⟨hw.right_mem, compIn_eq_of_reachIn hw ▸ hf⟩
+
+/-- A neighbour of an interior vertex is interior, or one of the two separating vertices. -/
+theorem mem_twoSepInterior_or_of_adj {x y v w : V} (hv : v ∈ twoSepInterior G x y) (hvw : G.Adj v w) :
+    w ∈ twoSepInterior G x y ∨ w = x ∨ w = y := by
+  by_cases hw : w ∈ offTwo x y
+  · exact Or.inl (mem_twoSepInterior_of_reachIn hv (ReachIn.of_adj hv.1 hw hvw))
+  · simp only [offTwo, Set.mem_setOf_eq, not_and_or, not_not] at hw
+    exact Or.inr hw
+
+section PlanarLike
+
+variable (h : PlanarLike G)
+include h
+
+/-- Infinitely many vertices are off any two. -/
+theorem PlanarLike.offTwo_infinite (x y : V) : (offTwo x y).Infinite := by
+  have hS : offTwo x y = ({x, y} : Set V)ᶜ := by
+    ext v; simp [offTwo]
+  haveI := h.inf
+  rw [hS]
+  exact (Set.toFinite _).infinite_compl
+
+/-- Any two neighbours of `x` are joined off `x`: the ring's consecutive entries are equal or adjacent. -/
+theorem PlanarLike.reachIn_of_adj_adj {x z₁ z₂ : V} (h₁ : G.Adj x z₁) (h₂ : G.Adj x z₂) :
+    ReachIn G {v | v ≠ x} z₁ z₂ := by
+  obtain ⟨r, ⟨hmem, hcons, -⟩, -⟩ := h.ring x
+  have hne : ∀ z ∈ r, z ∈ {v | v ≠ x} := fun z hz => ((hmem z).mp hz).ne'
+  have hlen : 0 < r.length := List.length_pos_of_mem ((hmem z₁).mpr h₁)
+  have key : ∀ i (hi : i < r.length), ReachIn G {v | v ≠ x} (r[0]'hlen) (r[i]'hi) := by
+    intro i
+    induction i with
+    | zero => intro _; exact ReachIn.refl (hne _ (List.getElem_mem _))
+    | succ i ih =>
+      intro hi
+      have h' := hcons i r[i] r[i + 1] (List.getElem?_eq_getElem (by omega))
+        (by rw [Nat.mod_eq_of_lt hi]; exact List.getElem?_eq_getElem hi)
+      refine (ih (by omega)).trans ?_
+      rcases h' with h' | h'
+      · rw [h']; exact ReachIn.refl (hne _ (List.getElem_mem _))
+      · exact ReachIn.of_adj (hne _ (List.getElem_mem _)) (hne _ (List.getElem_mem _)) h'
+  obtain ⟨i, hi, rfl⟩ := List.getElem_of_mem ((hmem z₁).mpr h₁)
+  obtain ⟨j, hj, rfl⟩ := List.getElem_of_mem ((hmem z₂).mpr h₂)
+  exact (key i hi).symm.trans (key j hj)
+
+/-- **No cut vertex**: `G − x` is connected. -/
+theorem PlanarLike.reachIn_ne {x a b : V} (ha : a ≠ x) (hb : b ≠ x) : ReachIn G {v | v ≠ x} a b := by
+  have hexit : ∀ c, c ≠ x → ∃ z, ReachIn G {v | v ≠ x} c z ∧ G.Adj x z := by
+    intro c hc
+    obtain ⟨p⟩ := h.conn.preconnected c x
+    obtain ⟨z, w, hz, hzw, hw, -⟩ := exists_exit (S := {v | v ≠ x}) p hc (by simp)
+    simp only [Set.mem_setOf_eq, not_not] at hw
+    subst hw
+    exact ⟨z, hz, hzw.symm⟩
+  obtain ⟨z₁, hz₁, h₁⟩ := hexit a ha
+  obtain ⟨z₂, hz₂, h₂⟩ := hexit b hb
+  exact hz₁.trans ((h.reachIn_of_adj_adj h₁ h₂).trans hz₂.symm)
+
+/-- `int(x, x)` is empty: `G − x` is connected and infinite. -/
+theorem PlanarLike.twoSepInterior_self (x : V) : twoSepInterior G x x = ∅ := by
+  ext v
+  simp only [Set.mem_empty_iff_false, iff_false]
+  intro hv
+  obtain ⟨hvS, hf⟩ := mem_twoSepInterior_iff.mp hv
+  refine h.offTwo_infinite x x (hf.subset fun b hb => ?_)
+  have hS : {w : V | w ≠ x} = offTwo x x := by ext w; simp [offTwo]
+  have := h.reachIn_ne hvS.1 hb.1
+  rw [hS] at this
+  exact this
+
+/-- A nonempty interior has two distinct ends. -/
+theorem PlanarLike.ne_of_mem_twoSepInterior {x y v : V} (hv : v ∈ twoSepInterior G x y) : x ≠ y := by
+  rintro rfl; rw [h.twoSepInterior_self] at hv; exact hv
+
+/-- **Every 2-separator is an edge**: a nonempty interior makes `y` appear twice apart in `x`'s ring. -/
+theorem PlanarLike.adj_of_mem_twoSepInterior {x y v : V} (hv : v ∈ twoSepInterior G x y) : G.Adj x y := by
+  have hxy := h.ne_of_mem_twoSepInterior hv
+  obtain ⟨r, ⟨hmem, -, -⟩, hconn⟩ := h.ring x
+  by_cases htw : TwiceApart r y
+  · obtain ⟨i, -, -, -, hi, -⟩ := htw
+    exact (hmem y).mp (List.mem_of_getElem? hi)
+  · exfalso
+    obtain ⟨-, hall⟩ := connected_induce_iff'.mp (hconn y hxy.symm htw)
+    obtain ⟨hvS, hf⟩ := mem_twoSepInterior_iff.mp hv
+    exact h.offTwo_infinite x y (hf.subset fun b hb => hall v b hvS hb)
+
+/-- Every component of `G − x − y` is adjacent to `x` (and, by symmetry, to `y`). -/
+theorem PlanarLike.exists_adj_left {x y a : V} (hxy : x ≠ y) (ha : a ∈ offTwo x y) :
+    ∃ z, ReachIn G (offTwo x y) a z ∧ G.Adj z x := by
+  obtain ⟨p, hp⟩ := h.reachIn_ne (x := y) ha.2 hxy
+  obtain ⟨z, w, hz, hzw, hw, hwp⟩ := exists_exit (S := offTwo x y) p ha (by simp [offTwo])
+  have hwy : w ≠ y := hp w hwp
+  have hwx : w = x := by
+    by_contra hwx; exact hw ⟨hwx, hwy⟩
+  subst hwx
+  exact ⟨z, hz, hzw⟩
+
+/-- Every component of `G − x − y` is adjacent to `y`. -/
+theorem PlanarLike.exists_adj_right {x y a : V} (hxy : x ≠ y) (ha : a ∈ offTwo x y) :
+    ∃ z, ReachIn G (offTwo x y) a z ∧ G.Adj z y := by
+  rw [offTwo_comm] at ha ⊢
+  exact h.exists_adj_left hxy.symm ha
+
+/-- Interiors are finite. -/
+theorem PlanarLike.twoSepInterior_finite (x y : V) : (twoSepInterior G x y).Finite := by
+  by_cases hxy : x = y
+  · subst hxy; rw [h.twoSepInterior_self]; exact Set.finite_empty
+  refine (((h.locFin x).inter_of_left (twoSepInterior G x y)).biUnion
+    (t := fun e => compIn (G := G) (offTwo x y) e) fun e he => (mem_twoSepInterior_iff.mp he.2).2).subset ?_
+  intro v hv
+  obtain ⟨e, hve, hex⟩ := h.exists_adj_left hxy hv.1
+  exact Set.mem_biUnion (x := e) ⟨hex.symm, mem_twoSepInterior_of_reachIn hv hve⟩ hve.symm
+
+/-- **Interiors nest** (`[Thomassen1999]` p. 852: "`int(M, x, y) ⊆ int(M, u, v)`"): if `x` lies in the interior of `{u, w}`, every interior
+of a pair through `x` lies in it. -/
+theorem PlanarLike.twoSepInterior_subset {u w x y : V} (hx : x ∈ twoSepInterior G u w) :
+    twoSepInterior G x y ⊆ twoSepInterior G u w := by
+  intro z hz
+  have huw := h.ne_of_mem_twoSepInterior hx
+  have hxy := h.ne_of_mem_twoSepInterior hz
+  have hadj : G.Adj x y := h.adj_of_mem_twoSepInterior hz
+  obtain ⟨hxS, hxfin⟩ := mem_twoSepInterior_iff.mp hx
+  have hy : ReachIn G (offTwo u w) x y ∨ y ∉ offTwo u w := by
+    by_cases hyS : y ∈ offTwo u w
+    · exact Or.inl (ReachIn.of_adj hxS hyS hadj)
+    · exact Or.inr hyS
+  -- the infinite component of `G − u − w`
+  obtain ⟨c, hcinf, -⟩ := h.oneInf u w huw
+  obtain ⟨⟨i₀, hi₀⟩, hc⟩ := c.exists_rep
+  replace hc : (G.induce (offTwo u w)).connectedComponentMk ⟨i₀, hi₀⟩ = c := hc
+  have hIinf : ¬ (compIn (G := G) (offTwo u w) i₀).Finite := by
+    rw [← supp_finite_iff hi₀, hc]; exact hcinf
+  -- it avoids `x`'s component
+  have hIx : ∀ v, ReachIn G (offTwo u w) i₀ v → ¬ ReachIn G (offTwo u w) x v := by
+    intro v hv hvx
+    exact hIinf (by rw [compIn_eq_of_reachIn (hv.trans hvx.symm)]; exact hxfin)
+  -- so it lies in `G − x − y`
+  have hIT : ∀ v, ReachIn G (offTwo u w) i₀ v → ReachIn G (offTwo x y) i₀ v := by
+    intro v hv
+    obtain ⟨p, hp⟩ := hv
+    refine ⟨p, fun q hq => ?_⟩
+    have hq' := reachIn_of_mem_support p hp q hq
+    refine ⟨?_, ?_⟩
+    · rintro rfl; exact hIx _ hq' (ReachIn.refl hxS)
+    · rintro rfl
+      rcases hy with hy | hy
+      · exact hIx _ hq' hy
+      · exact hy hq'.right_mem
+  have hJinf : ¬ (compIn (G := G) (offTwo x y) i₀).Finite := fun hf => hIinf (hf.subset fun v hv => hIT v hv)
+  -- `u` and `w`, when other than `y`, are in that infinite component
+  have huJ : u ≠ y → ReachIn G (offTwo x y) i₀ u := by
+    intro huy
+    obtain ⟨e, he, heu⟩ := h.exists_adj_left huw hi₀
+    exact (hIT e he).trans (ReachIn.of_adj (hIT e he).right_mem ⟨fun hux => hxS.1 hux.symm, huy⟩ heu)
+  have hwJ : w ≠ y → ReachIn G (offTwo x y) i₀ w := by
+    intro hwy
+    obtain ⟨e, he, hew⟩ := h.exists_adj_right huw hi₀
+    exact (hIT e he).trans (ReachIn.of_adj (hIT e he).right_mem ⟨fun hwx => hxS.2 hwx.symm, hwy⟩ hew)
+  obtain ⟨hzT, hzfin⟩ := mem_twoSepInterior_iff.mp hz
+  -- `z`'s component of `G − x − y` avoids `u` and `w`
+  have hzi : ∀ v, ReachIn G (offTwo x y) z v → v ≠ u ∧ v ≠ w := by
+    intro v hv
+    have hnot : ¬ ReachIn G (offTwo x y) i₀ v := fun h' =>
+      hJinf (by rw [compIn_eq_of_reachIn (h'.trans hv.symm)]; exact hzfin)
+    refine ⟨?_, ?_⟩
+    · rintro rfl
+      by_cases huy : v = y
+      · exact hv.right_mem.2 huy
+      · exact hnot (huJ huy)
+    · rintro rfl
+      by_cases hwy : v = y
+      · exact hv.right_mem.2 hwy
+      · exact hnot (hwJ hwy)
+  -- and reaches `x`, inside `G − u − w`
+  obtain ⟨e, hze, hex⟩ := h.exists_adj_left hxy hzT
+  have hzeS : ReachIn G (offTwo u w) z e := by
+    obtain ⟨p, hp⟩ := hze
+    exact ⟨p, fun q hq => hzi q (reachIn_of_mem_support p hp q hq)⟩
+  have hzx : ReachIn G (offTwo u w) z x := hzeS.trans (ReachIn.of_adj hzeS.right_mem hxS hex)
+  exact mem_twoSepInterior_of_reachIn hx hzx.symm
+
+/-- Two pairs whose interiors share a vertex, neither pair's ends inside the other's interior: an end of the first is an end of the second. -/
+theorem PlanarLike.eq_or_eq_of_mem {x y u w v : V} (hv : v ∈ twoSepInterior G x y) (hv' : v ∈ twoSepInterior G u w)
+    (hu : u ∉ twoSepInterior G x y) (hw : w ∉ twoSepInterior G x y) (hx : x ∉ twoSepInterior G u w) : x = u ∨ x = w := by
+  have hxy := h.ne_of_mem_twoSepInterior hv
+  -- `v`'s component of `G − x − y` avoids `u` and `w`
+  have hD : ∀ q, ReachIn G (offTwo x y) v q → q ∈ offTwo u w := by
+    intro q hq
+    have hqi := mem_twoSepInterior_of_reachIn hv hq
+    exact ⟨fun hqu => hu (hqu ▸ hqi), fun hqw => hw (hqw ▸ hqi)⟩
+  obtain ⟨e, hve, hex⟩ := h.exists_adj_left hxy hv.1
+  have hveT : ReachIn G (offTwo u w) v e := by
+    obtain ⟨p, hp⟩ := hve
+    exact ⟨p, fun q hq => hD q (reachIn_of_mem_support p hp q hq)⟩
+  by_contra hne
+  push Not at hne
+  have hxT : x ∈ offTwo u w := ⟨hne.1, hne.2⟩
+  exact hx (mem_twoSepInterior_of_reachIn hv' (hveT.trans (ReachIn.of_adj hveT.right_mem hxT hex)))
+
+/-- **A vertex lies in the interior of at most one maximal pair.** -/
+theorem PlanarLike.eq_of_mem_maximal {x y u w v : V} (hm : IsMaximalTwoSep G x y) (hm' : IsMaximalTwoSep G u w)
+    (hv : v ∈ twoSepInterior G x y) (hv' : v ∈ twoSepInterior G u w) : (x = u ∧ y = w) ∨ (x = w ∧ y = u) := by
+  obtain ⟨hxu, hyu⟩ := hm.2 u w hm'.1
+  obtain ⟨hux, hwx⟩ := hm'.2 x y hm.1
+  have hx := h.eq_or_eq_of_mem hv hv' hux hwx hxu
+  have hy := h.eq_or_eq_of_mem (x := y) (y := x) (twoSepInterior_comm (G := G) x y ▸ hv) hv'
+    (twoSepInterior_comm (G := G) x y ▸ hux) (twoSepInterior_comm (G := G) x y ▸ hwx) hyu
+  have hxy := h.ne_of_mem_twoSepInterior hv
+  rcases hx with rfl | rfl <;> rcases hy with rfl | rfl
+  · exact absurd rfl hxy
+  · exact Or.inl ⟨rfl, rfl⟩
+  · exact Or.inr ⟨rfl, rfl⟩
+  · exact absurd rfl hxy
+
+/-- **Above every 2-separator a maximal one** (the step `finSep` is read by): of the finitely many pairs whose interior holds a fixed vertex
+of `int(x, y)` and contains `int(x, y)`, one of largest interior is maximal, by nesting. -/
+theorem PlanarLike.exists_maximal_above {x y : V} (hs : IsTwoSep G x y) :
+    ∃ u w, IsMaximalTwoSep G u w ∧ twoSepInterior G x y ⊆ twoSepInterior G u w := by
+  obtain ⟨v₀, hv₀⟩ := hs.2
+  set P : Set (V × V) := {p | IsTwoSep G p.1 p.2 ∧ twoSepInterior G x y ⊆ twoSepInterior G p.1 p.2} with hP
+  have hPfin : P.Finite := (h.finSep v₀).subset fun p hp => hp.2 hv₀
+  obtain ⟨p, ⟨hp2, hpsub⟩, hpmax⟩ :=
+    hPfin.exists_maximalFor (fun p => (twoSepInterior G p.1 p.2).ncard) P ⟨(x, y), hs, subset_rfl⟩
+  refine ⟨p.1, p.2, ⟨hp2, fun u' w' hs' => ⟨fun h1 => ?_, fun h2 => ?_⟩⟩, hpsub⟩
+  · have hsub := h.twoSepInterior_subset (y := p.2) h1
+    have hlt : (twoSepInterior G p.1 p.2).ncard < (twoSepInterior G u' w').ncard :=
+      Set.ncard_lt_ncard (Set.ssubset_iff_subset_ne.mpr ⟨hsub, fun heq => (heq ▸ h1).1.1 rfl⟩)
+        (h.twoSepInterior_finite u' w')
+    have := hpmax (j := (u', w')) ⟨hs', hpsub.trans hsub⟩ hlt.le
+    simp only at this
+    omega
+  · have hsub := h.twoSepInterior_subset (y := p.1) h2
+    rw [twoSepInterior_comm (G := G) p.2 p.1] at hsub
+    have hlt : (twoSepInterior G p.1 p.2).ncard < (twoSepInterior G u' w').ncard :=
+      Set.ncard_lt_ncard (Set.ssubset_iff_subset_ne.mpr ⟨hsub, fun heq => (heq ▸ h2).1.2 rfl⟩)
+        (h.twoSepInterior_finite u' w')
+    have := hpmax (j := (u', w')) ⟨hs', hpsub.trans hsub⟩ hlt.le
+    simp only at this
+    omega
+
+/-- A vertex of `H` lies in no interior at all. -/
+theorem PlanarLike.not_mem_twoSepInterior {v x y : V} (hv : v ∈ reducedVerts G) : v ∉ twoSepInterior G x y := by
+  intro hvi
+  obtain ⟨u, w, hm, hsub⟩ := h.exists_maximal_above ⟨h.ne_of_mem_twoSepInterior hvi, v, hvi⟩
+  exact hv u w hm (hsub hvi)
+
+end PlanarLike
+
+/-- The ends of a maximal 2-separator are vertices of `H`. -/
+theorem mem_reducedVerts_of_maximal {x y : V} (hm : IsMaximalTwoSep G x y) :
+    x ∈ reducedVerts G ∧ y ∈ reducedVerts G :=
+  ⟨fun u w hm' => (hm.2 u w hm'.1).1, fun u w hm' => (hm.2 u w hm'.1).2⟩
+
+/-- A vertex outside `H` lies in the interior of a maximal 2-separator. -/
+theorem exists_maximal_of_not_mem {v : V} (hv : v ∉ reducedVerts G) :
+    ∃ p : V × V, IsMaximalTwoSep G p.1 p.2 ∧ v ∈ twoSepInterior G p.1 p.2 := by
+  simp only [reducedVerts, Set.mem_setOf_eq, not_forall, not_not] at hv
+  obtain ⟨x, y, hm, hvi⟩ := hv
+  exact ⟨(x, y), hm, hvi⟩
+
+/-! ## `H`: connected, locally finite, infinite, locally Hamiltonian -/
+
+/-- A neighbour of a vertex `x` of `H` that is not in `H` lies in `int(x, y)` for some `y` in `H`. -/
+theorem exists_reducedVerts_mem_twoSepInterior {x z : V} (hx : x ∈ reducedVerts G) (hxz : G.Adj x z) (hz : z ∉ reducedVerts G) :
+    ∃ y, y ∈ reducedVerts G ∧ z ∈ twoSepInterior G x y := by
+  obtain ⟨p, hm, hzi⟩ := exists_maximal_of_not_mem hz
+  rcases mem_twoSepInterior_or_of_adj hzi hxz.symm with hxi | hx1 | hx2
+  · exact absurd hxi (hx _ _ hm)
+  · exact ⟨p.2, (mem_reducedVerts_of_maximal hm).2, hx1 ▸ hzi⟩
+  · exact ⟨p.1, (mem_reducedVerts_of_maximal hm).1, hx2 ▸ twoSepInterior_comm (G := G) p.1 p.2 ▸ hzi⟩
+
+/-- A discrete crossing, upward: a sequence in `P ∪ {y}` at `lo` and outside it at `hi`, leaving `P` only onto `y`, is `y` in `[lo, hi)`. -/
+theorem exists_eq_of_cross_up {W : Type*} (g : ℕ → W) (P : W → Prop) (y : W) {lo hi : ℕ} (hlh : lo ≤ hi)
+    (step : ∀ k, lo ≤ k → k < hi → P (g k) → ¬ P (g (k + 1)) → g (k + 1) = y)
+    (hlo : P (g lo) ∨ g lo = y) (hhi : ¬ P (g hi)) (hhi' : g hi ≠ y) : ∃ k, lo ≤ k ∧ k < hi ∧ g k = y := by
+  induction hi, hlh using Nat.le_induction with
+  | base => rcases hlo with h' | h' <;> contradiction
+  | succ hi hlh ih =>
+    by_cases hP : P (g hi)
+    · exact absurd (step hi hlh (Nat.lt_succ_self hi) hP hhi) hhi'
+    · by_cases hy : g hi = y
+      · exact ⟨hi, hlh, Nat.lt_succ_self hi, hy⟩
+      · obtain ⟨k, hk1, hk2, hk3⟩ := ih (fun k hk hk' => step k hk (by omega)) hP hy
+        exact ⟨k, hk1, by omega, hk3⟩
+
+/-- A discrete crossing, downward. -/
+theorem exists_eq_of_cross_down {W : Type*} (g : ℕ → W) (P : W → Prop) (y : W) {lo hi : ℕ} (hlh : lo ≤ hi)
+    (step : ∀ k, lo ≤ k → k < hi → P (g (k + 1)) → ¬ P (g k) → g k = y)
+    (hhi : P (g hi) ∨ g hi = y) (hlo : ¬ P (g lo)) (hlo' : g lo ≠ y) : ∃ k, lo < k ∧ k ≤ hi ∧ g k = y := by
+  induction hi, hlh using Nat.le_induction with
+  | base => rcases hhi with h' | h' <;> contradiction
+  | succ hi hlh ih =>
+    rcases hhi with hP | hy
+    · by_cases hP' : P (g hi)
+      · obtain ⟨k, hk1, hk2, hk3⟩ := ih (fun k hk hk' => step k hk (by omega)) (Or.inl hP')
+        exact ⟨k, hk1, by omega, hk3⟩
+      · have hy := step hi hlh (Nat.lt_succ_self hi) hP hP'
+        obtain ⟨k, hk1, hk2, hk3⟩ := ih (fun k hk hk' => step k hk (by omega)) (Or.inr hy)
+        exact ⟨k, hk1, by omega, hk3⟩
+    · exact ⟨hi + 1, by omega, le_rfl, hy⟩
+
+section Reduced
+
+variable (h : PlanarLike G)
+include h
+
+/-- Every vertex has a neighbour. -/
+theorem PlanarLike.exists_adj (x : V) : ∃ z, G.Adj x z := by
+  haveI := h.inf
+  obtain ⟨w, hw⟩ := exists_ne x
+  obtain ⟨p⟩ := h.conn.preconnected x w
+  cases p with
+  | nil => exact absurd rfl hw
+  | cons hadj _ => exact ⟨_, hadj⟩
+
+/-- **`H` is locally finite**: an induced subgraph of a locally finite graph. -/
+theorem PlanarLike.reduced_locallyFinite (x : reducedVerts G) : ((reduced G).neighborSet x).Finite := by
+  have hS : (reduced G).neighborSet x = Subtype.val ⁻¹' G.neighborSet x.1 := by
+    ext y; rfl
+  rw [hS]
+  exact (h.locFin x.1).preimage Subtype.val_injective.injOn
+
+/-- **`H` is infinite**: a finite `H` would have finitely many pairs, each with a finite interior, and they cover `G`. -/
+theorem PlanarLike.reducedVerts_infinite : (reducedVerts G).Infinite := by
+  intro hfin
+  haveI := h.inf
+  refine Set.infinite_univ (α := V)
+    ((hfin.union ((hfin.prod hfin).biUnion fun p _ => h.twoSepInterior_finite p.1 p.2)).subset ?_)
+  intro v _
+  by_cases hv : v ∈ reducedVerts G
+  · exact Or.inl hv
+  · obtain ⟨p, hm, hvi⟩ := exists_maximal_of_not_mem hv
+    exact Or.inr (Set.mem_biUnion (x := p) ⟨(mem_reducedVerts_of_maximal hm).1, (mem_reducedVerts_of_maximal hm).2⟩ hvi)
+
+/-- **`H` is connected**: send each interior vertex to one end of its maximal pair; adjacent vertices go to equal or adjacent ones. -/
+theorem PlanarLike.reduced_connected : (reduced G).Connected := by
+  classical
+  obtain ⟨k₀, hk₀⟩ := h.reducedVerts_infinite.nonempty
+  have hpick : ∀ v, ∃ a : reducedVerts G, (v ∈ reducedVerts G → a.1 = v) ∧
+      (v ∉ reducedVerts G → ∃ b, IsMaximalTwoSep G a.1 b ∧ v ∈ twoSepInterior G a.1 b) := by
+    intro v
+    by_cases hv : v ∈ reducedVerts G
+    · exact ⟨⟨v, hv⟩, fun _ => rfl, fun h' => absurd hv h'⟩
+    · obtain ⟨p, hm, hvi⟩ := exists_maximal_of_not_mem hv
+      exact ⟨⟨p.1, (mem_reducedVerts_of_maximal hm).1⟩, fun h' => absurd h' hv, fun _ => ⟨p.2, hm, hvi⟩⟩
+  choose φ hφ₁ hφ₂ using hpick
+  have hone : ∀ v w, v ∉ reducedVerts G → G.Adj v w → φ v = φ w ∨ (reduced G).Adj (φ v) (φ w) := by
+    intro v w hv hvw
+    obtain ⟨b, hm, hvi⟩ := hφ₂ v hv
+    have hbK := (mem_reducedVerts_of_maximal hm).2
+    have hab : G.Adj (φ v).1 b := h.adj_of_mem_twoSepInterior hvi
+    rcases mem_twoSepInterior_or_of_adj hvi hvw with hwi | hwa | hwb
+    · have hwK : w ∉ reducedVerts G := fun hwK => hwK _ _ hm hwi
+      obtain ⟨b', hm', hwi'⟩ := hφ₂ w hwK
+      rcases h.eq_of_mem_maximal hm hm' hwi hwi' with ⟨h1, -⟩ | ⟨h1, h2⟩
+      · exact Or.inl (Subtype.ext h1)
+      · right; show G.Adj (φ v).1 (φ w).1; rw [← h2]; exact hab
+    · have hwK : w ∈ reducedVerts G := hwa ▸ (φ v).2
+      exact Or.inl (Subtype.ext (by rw [hφ₁ w hwK, hwa]))
+    · have hwK : w ∈ reducedVerts G := hwb ▸ hbK
+      right; show G.Adj (φ v).1 (φ w).1; rw [hφ₁ w hwK, hwb]; exact hab
+  have hstep : ∀ v w, G.Adj v w → φ v = φ w ∨ (reduced G).Adj (φ v) (φ w) := by
+    intro v w hvw
+    by_cases hv : v ∈ reducedVerts G
+    · by_cases hw : w ∈ reducedVerts G
+      · right; show G.Adj (φ v).1 (φ w).1; rw [hφ₁ v hv, hφ₁ w hw]; exact hvw
+      · rcases hone w v hw hvw.symm with h1 | h1
+        · exact Or.inl h1.symm
+        · exact Or.inr h1.symm
+    · exact hone v w hv hvw
+  have hwalk : ∀ a b (p : G.Walk a b), (reduced G).Reachable (φ a) (φ b) := by
+    intro a b p
+    induction p with
+    | nil => rfl
+    | cons hadj q ih =>
+      rcases hstep _ _ hadj with heq | hadj'
+      · rw [heq]; exact ih
+      · exact hadj'.reachable.trans ih
+  have hφK : ∀ a : reducedVerts G, φ a.1 = a := fun a => Subtype.ext (hφ₁ a.1 a.2)
+  haveI : Nonempty (reducedVerts G) := ⟨⟨k₀, hk₀⟩⟩
+  refine ⟨fun a b => ?_⟩
+  obtain ⟨p⟩ := h.conn.preconnected a.1 b.1
+  have := hwalk _ _ p
+  rwa [hφK a, hφK b] at this
+
+/-- That `y` is unique. -/
+theorem PlanarLike.eq_of_mem_twoSepInterior_of_mem_reducedVerts {x y₁ y₂ z : V} (hx : x ∈ reducedVerts G) (hy₁ : y₁ ∈ reducedVerts G) (hy₂ : y₂ ∈ reducedVerts G)
+    (h₁ : z ∈ twoSepInterior G x y₁) (h₂ : z ∈ twoSepInterior G x y₂) : y₁ = y₂ := by
+  rw [twoSepInterior_comm] at h₁ h₂
+  rcases h.eq_or_eq_of_mem h₁ h₂ (h.not_mem_twoSepInterior hy₂) (h.not_mem_twoSepInterior hx)
+      (h.not_mem_twoSepInterior hy₁) with h' | h'
+  · exact h'
+  · exact absurd h' (h.ne_of_mem_twoSepInterior h₁)
+
+/-- A vertex of `H` has a neighbour in `H` other than any two of its neighbours: otherwise it would lie in the interior of the pair. -/
+theorem PlanarLike.exists_adj_mem_reducedVerts_ne {x a b : V} (hx : x ∈ reducedVerts G) (ha : G.Adj x a) (hb : G.Adj x b) :
+    ∃ z, G.Adj x z ∧ z ∈ reducedVerts G ∧ z ≠ a ∧ z ≠ b := by
+  by_contra hno
+  push Not at hno
+  have hkept : ∀ z, G.Adj x z → z ∈ reducedVerts G → z = a ∨ z = b := fun z hz hzK => by
+    by_cases hza : z = a
+    · exact Or.inl hza
+    · exact Or.inr (hno z hz hzK hza)
+  set C : Set V := {x} ∪ twoSepInterior G x a ∪ twoSepInterior G x b with hC
+  have hCfin : C.Finite :=
+    ((Set.finite_singleton x).union (h.twoSepInterior_finite x a)).union (h.twoSepInterior_finite x b)
+  have hclosed : ∀ v w, v ∈ C → w ∈ offTwo a b → G.Adj v w → w ∈ C := by
+    intro v w hv hw hvw
+    rcases hv with (hv | hv) | hv
+    · rw [Set.mem_singleton_iff] at hv
+      subst hv
+      by_cases hwK : w ∈ reducedVerts G
+      · rcases hkept w hvw hwK with rfl | rfl
+        · exact absurd rfl hw.1
+        · exact absurd rfl hw.2
+      · obtain ⟨y, hyK, hwy⟩ := exists_reducedVerts_mem_twoSepInterior hx hvw hwK
+        rcases hkept y (h.adj_of_mem_twoSepInterior hwy) hyK with rfl | rfl
+        · exact Or.inl (Or.inr hwy)
+        · exact Or.inr hwy
+    · rcases mem_twoSepInterior_or_of_adj hv hvw with hwi | hwx | hwa
+      · exact Or.inl (Or.inr hwi)
+      · exact Or.inl (Or.inl hwx)
+      · exact absurd hwa hw.1
+    · rcases mem_twoSepInterior_or_of_adj hv hvw with hwi | hwx | hwb
+      · exact Or.inr hwi
+      · exact Or.inl (Or.inl hwx)
+      · exact absurd hwb hw.2
+  have hxab : x ∈ offTwo a b := ⟨ha.ne, hb.ne⟩
+  have hxi : x ∈ twoSepInterior G a b := mem_twoSepInterior_iff.mpr
+    ⟨hxab, hCfin.subset fun w hw => mem_of_reachIn_of_closed hclosed (Or.inl (Or.inl rfl)) hw⟩
+  exact h.not_mem_twoSepInterior hx hxi
+
+/-- **`H` is locally Hamiltonian**: map each entry of `x`'s ring to the vertex of `H` it stands for (itself, or the unique `y` in `H` with
+the entry in `int(x, y)`); the image has consecutive entries equal or adjacent, no value interleaving (the ring's separation and `oneInf`'s
+uniqueness), and at least three values, so it collapses to a cycle on `x`'s neighbourhood in `H`. -/
+theorem PlanarLike.reduced_locallyHamiltonian : LocallyHamiltonian (reduced G) := by
+  classical
+  intro x
+  obtain ⟨r, ⟨hmem, hcons, hsep⟩, -⟩ := h.ring x.1
+  -- the vertex of `H` an entry stands for
+  have hpick : ∀ z, ∃ a : reducedVerts G, (z ∈ reducedVerts G → a.1 = z) ∧
+      (z ∉ reducedVerts G → G.Adj x.1 z → z ∈ twoSepInterior G x.1 a.1) := by
+    intro z
+    by_cases hz : z ∈ reducedVerts G
+    · exact ⟨⟨z, hz⟩, fun _ => rfl, fun h' => absurd hz h'⟩
+    · by_cases hxz : G.Adj x.1 z
+      · obtain ⟨y, hyK, hzy⟩ := exists_reducedVerts_mem_twoSepInterior x.2 hxz hz
+        exact ⟨⟨y, hyK⟩, fun h' => absurd h' hz, fun _ _ => hzy⟩
+      · exact ⟨x, fun h' => absurd h' hz, fun _ h' => absurd h' hxz⟩
+  choose π hπ₁ hπ₂ using hpick
+  have hπeq : ∀ z (y : reducedVerts G), G.Adj x.1 z → (π z = y ↔ z = y.1 ∨ z ∈ twoSepInterior G x.1 y.1) := by
+    intro z y hz
+    constructor
+    · rintro rfl
+      by_cases hzK : z ∈ reducedVerts G
+      · exact Or.inl (hπ₁ z hzK).symm
+      · exact Or.inr (hπ₂ z hzK hz)
+    · rintro (rfl | hzi)
+      · exact Subtype.ext (hπ₁ _ y.2)
+      · have hzK : z ∉ reducedVerts G := fun hzK => h.not_mem_twoSepInterior hzK hzi
+        exact Subtype.ext (h.eq_of_mem_twoSepInterior_of_mem_reducedVerts x.2 (π z).2 y.2 (hπ₂ z hzK hz) hzi)
+  have hπadj : ∀ z, G.Adj x.1 z → G.Adj x.1 (π z).1 := by
+    intro z hz
+    rcases (hπeq z (π z) hz).mp rfl with h' | h'
+    · rw [← h']; exact hz
+    · exact h.adj_of_mem_twoSepInterior h'
+  have hradj : ∀ i z, r[i]? = some z → G.Adj x.1 z := fun i z hi => (hmem z).mp (List.mem_of_getElem? hi)
+  set s := r.map π with hs
+  have hsget : ∀ (i : ℕ) (A : reducedVerts G), s[i]? = some A → ∃ z, r[i]? = some z ∧ π z = A := by
+    intro i A hA
+    rw [hs, List.getElem?_map, Option.map_eq_some_iff] at hA
+    exact hA
+  -- consecutive entries
+  have hstep : ∀ z z', G.Adj x.1 z → G.Adj x.1 z' → (z = z' ∨ G.Adj z z') →
+      π z = π z' ∨ (reduced G).Adj (π z) (π z') := by
+    intro z z' hz hz' hzz'
+    rcases hzz' with rfl | hzz'
+    · exact Or.inl rfl
+    by_cases hzK : z ∈ reducedVerts G <;> by_cases hz'K : z' ∈ reducedVerts G
+    · right; show G.Adj (π z).1 (π z').1; rw [hπ₁ z hzK, hπ₁ z' hz'K]; exact hzz'
+    · left
+      have hz'i := hπ₂ z' hz'K hz'
+      rcases mem_twoSepInterior_or_of_adj hz'i hzz'.symm with hzi | hzx | hzy
+      · exact absurd hzi (h.not_mem_twoSepInterior hzK)
+      · exact absurd hzx hz.ne'
+      · exact Subtype.ext (by rw [hπ₁ z hzK, hzy])
+    · left
+      have hzi := hπ₂ z hzK hz
+      rcases mem_twoSepInterior_or_of_adj hzi hzz' with hz'i | hz'x | hz'y
+      · exact absurd hz'i (h.not_mem_twoSepInterior hz'K)
+      · exact absurd hz'x hz'.ne'
+      · exact Subtype.ext (by rw [hπ₁ z' hz'K, hz'y])
+    · left
+      have hzi := hπ₂ z hzK hz
+      rcases mem_twoSepInterior_or_of_adj hzi hzz' with hz'i | hz'x | hz'y
+      · exact ((hπeq z' (π z) hz').mpr (Or.inr hz'i)).symm
+      · exact absurd hz'x hz'.ne'
+      · exact absurd (hz'y ▸ (π z).2) hz'K
+  have hchain : ∀ (i : ℕ) (A B : reducedVerts G), s[i]? = some A → s[(i + 1) % s.length]? = some B →
+      A = B ∨ (reduced G).Adj A B := by
+    intro i A B hA hB
+    obtain ⟨z, hz, rfl⟩ := hsget i A hA
+    rw [hs, List.length_map] at hB
+    obtain ⟨z', hz', rfl⟩ := hsget ((i + 1) % r.length) B (by rw [hs]; exact hB)
+    exact hstep z z' (hradj _ _ hz) (hradj _ _ hz') (hcons i z z' hz hz')
+  -- no interleaving
+  have hnoint : NoInterleave s := by
+    intro Y A B i m j n him hmj hn hi hm hj hn'
+    by_contra hne
+    push Not at hne
+    obtain ⟨hAY, hBY⟩ := hne
+    obtain ⟨zi, hzi, hπi⟩ := hsget i Y hi
+    obtain ⟨zm, hzm, hπm⟩ := hsget m A hm
+    obtain ⟨zj, hzj, hπj⟩ := hsget j Y hj
+    obtain ⟨zn, hzn, hπn⟩ := hsget n B hn'
+    set y := Y.1 with hy
+    have hxy : x.1 ≠ y := by
+      have := hπadj zi (hradj _ _ hzi); rw [hπi] at this; exact this.ne
+    set P : V → Prop := fun v => v ∈ twoSepInterior G x.1 y with hP
+    set g : ℕ → V := fun k => r.getD k x.1 with hg
+    have hgk : ∀ k, k < r.length → r[k]? = some (g k) := by
+      intro k hk; simp only [hg, List.getD_eq_getElem?_getD, List.getElem?_eq_getElem hk, Option.getD_some]
+    have hlen : ∀ k z, r[k]? = some z → k < r.length := fun k z hk => by
+      by_contra hc; rw [List.getElem?_eq_none (by omega)] at hk; simp at hk
+    have hil := hlen i zi hzi
+    have hml := hlen m zm hzm
+    have hjl := hlen j zj hzj
+    have hnl := hlen n zn hzn
+    have hgi : g i = zi := Option.some.inj ((hgk i hil).symm.trans hzi)
+    have hgm : g m = zm := Option.some.inj ((hgk m hml).symm.trans hzm)
+    have hgj : g j = zj := Option.some.inj ((hgk j hjl).symm.trans hzj)
+    -- membership in `y`'s fibre
+    have hfib : ∀ k, k < r.length → (π (g k) = Y ↔ g k = y ∨ P (g k)) := fun k hk =>
+      hπeq (g k) Y (hradj k _ (hgk k hk))
+    have hcross : ∀ k, k + 1 < r.length → (P (g k) → ¬ P (g (k + 1)) → g (k + 1) = y) ∧
+        (P (g (k + 1)) → ¬ P (g k) → g k = y) := by
+      intro k hk
+      have hk' := hgk k (by omega)
+      have hk1 := hgk (k + 1) hk
+      have hc := hcons k (g k) (g (k + 1)) hk' (by rw [Nat.mod_eq_of_lt hk]; exact hk1)
+      have hxk := hradj k _ hk'
+      have hxk1 := hradj (k + 1) _ hk1
+      refine ⟨fun h1 h2 => ?_, fun h1 h2 => ?_⟩
+      · rcases hc with hc | hc
+        · exact absurd (hc ▸ h1) h2
+        · rcases mem_twoSepInterior_or_of_adj h1 hc with h3 | h3 | h3
+          · exact absurd h3 h2
+          · exact absurd h3 hxk1.ne'
+          · exact h3
+      · rcases hc with hc | hc
+        · exact absurd (hc ▸ h1) h2
+        · rcases mem_twoSepInterior_or_of_adj h1 hc.symm with h3 | h3 | h3
+          · exact absurd h3 h2
+          · exact absurd h3 hxk.ne'
+          · exact h3
+    have hmout : ¬ P (g m) ∧ g m ≠ y := by
+      have := (hfib m hml).not.mp (by rw [hgm, hπm]; exact hAY)
+      push Not at this
+      exact ⟨this.2, this.1⟩
+    have hiin : P (g i) ∨ g i = y := ((hfib i hil).mp (by rw [hgi, hπi])).symm
+    have hjin : P (g j) ∨ g j = y := ((hfib j hjl).mp (by rw [hgj, hπj])).symm
+    -- the real appearances of `y` around `m`
+    obtain ⟨i', hi'1, hi'2, hgi'⟩ := exists_eq_of_cross_up g P y him.le
+      (fun k hk hk' => (hcross k (by omega)).1) hiin hmout.1 hmout.2
+    obtain ⟨j', hj'1, hj'2, hgj'⟩ := exists_eq_of_cross_down g P y hmj.le
+      (fun k hk hk' => (hcross k (by omega)).2) hjin hmout.1 hmout.2
+    have hgn : g n = zn := Option.some.inj ((hgk n hnl).symm.trans hzn)
+    have hnout : ¬ P zn ∧ zn ≠ y := by
+      have := (hfib n hnl).not.mp (by rw [hgn, hπn]; exact hBY)
+      push Not at this
+      rw [hgn] at this
+      exact ⟨this.2, this.1⟩
+    have hzmS : zm ∈ offTwo x.1 y := ⟨(hradj m zm hzm).ne', hgm ▸ hmout.2⟩
+    have hznS : zn ∈ offTwo x.1 y := ⟨(hradj n zn hzn).ne', hnout.2⟩
+    have hsep' := hsep y i' j' (by omega) (by rw [hgk i' (by omega), hgi']) (by rw [hgk j' (by omega), hgj'])
+      m n zm zn hi'2 hj'1 (by omega) hzm hzn hzmS hznS
+    -- against `oneInf`: both lie in the one infinite component
+    obtain ⟨c, -, huniq⟩ := h.oneInf x.1 y hxy
+    have hinf : ∀ v (hv : v ∈ offTwo x.1 y), ¬ P v → (G.induce (offTwo x.1 y)).connectedComponentMk ⟨v, hv⟩ = c := by
+      intro v hv hPv
+      exact huniq _ fun hf => hPv ⟨hv, hf⟩
+    exact hsep' (SimpleGraph.ConnectedComponent.exact
+      ((hinf zm hzmS (hgm ▸ hmout.1)).trans (hinf zn hznS hnout.1).symm))
+  -- three values
+  have h3 : ∃ a b c, a ∈ s ∧ b ∈ s ∧ c ∈ s ∧ a ≠ b ∧ a ≠ c ∧ b ≠ c := by
+    have hkin : ∀ z (hz : z ∈ reducedVerts G), G.Adj x.1 z → (⟨z, hz⟩ : reducedVerts G) ∈ s := by
+      intro z hz hxz
+      rw [hs, List.mem_map]
+      exact ⟨z, (hmem z).mpr hxz, Subtype.ext (hπ₁ z hz)⟩
+    obtain ⟨z₀, hz₀⟩ := h.exists_adj x.1
+    obtain ⟨z₁, h1, hK1, -, -⟩ := h.exists_adj_mem_reducedVerts_ne x.2 hz₀ hz₀
+    obtain ⟨z₂, h2, hK2, hne2, -⟩ := h.exists_adj_mem_reducedVerts_ne x.2 h1 h1
+    obtain ⟨z₃, h3, hK3, hne31, hne32⟩ := h.exists_adj_mem_reducedVerts_ne x.2 h1 h2
+    refine ⟨⟨z₁, hK1⟩, ⟨z₂, hK2⟩, ⟨z₃, hK3⟩, hkin _ _ h1, hkin _ _ h2, hkin _ _ h3, ?_, ?_, ?_⟩
+    · intro he; exact hne2 (congrArg Subtype.val he).symm
+    · intro he; exact hne31 (congrArg Subtype.val he).symm
+    · intro he; exact hne32 (congrArg Subtype.val he).symm
+  obtain ⟨a, p, hp, hsupp⟩ := exists_cycle_of_cyclic (reduced G) s hchain hnoint h3
+  refine ⟨a, p, hp, fun y => (hsupp y).trans ?_⟩
+  rw [hs, List.mem_map]
+  constructor
+  · rintro ⟨z, hz, rfl⟩
+    exact hπadj z ((hmem z).mp hz)
+  · intro hxy
+    exact ⟨y.1, (hmem y.1).mpr hxy, Subtype.ext (hπ₁ _ y.2)⟩
+
+end Reduced
+
 end Reduction
 
 /-- **Thomassen's reduction, as pure graph theory** (`[Thomassen1999]` pp. 851–852 with CVB B2 step 3's replacement of the count by
@@ -239,8 +1107,8 @@ with a finite interior); locally Hamiltonian (each entry of `x`'s ring sent to t
 with the entry in `int(x, y)`; the image has consecutive entries equal or adjacent, no interleaving value by the rings' separation and
 `oneInf`'s uniqueness half, and at least three values, and its runs collapse to a cycle on `x`'s neighbourhood in `H`). -/
 theorem reduced_props_of_planarLike (h : PlanarLike G) :
-    (reduced G).Connected ∧ (∀ x, ((reduced G).neighborSet x).Finite) ∧ LocallyHamiltonian (reduced G) ∧ Infinite (reducedVerts G) := by
-  sorry
+    (reduced G).Connected ∧ (∀ x, ((reduced G).neighborSet x).Finite) ∧ LocallyHamiltonian (reduced G) ∧ Infinite (reducedVerts G) :=
+  ⟨h.reduced_connected, h.reduced_locallyFinite, h.reduced_locallyHamiltonian, h.reducedVerts_infinite.to_subtype⟩
 
 /-! ## Lemma 1's two local facts, and the discrete intermediate value theorem they share -/
 
@@ -846,5 +1714,20 @@ example : compIn (G := triLattice) (offTwo (0, 0) (1, 0)) (5, 5) = offTwo (0, 0)
 
 /-- A spec example for `triRing`: the hexagon at the origin, in order. -/
 example : triRing (0, 0) = [(1, 0), (0, 1), (-1, 1), (-1, 0), (0, -1), (1, -1)] := by decide
+
+/-- A spec example for `collapse`: runs go, order and the wrap stay. -/
+example : collapse [1, 1, 2, 2, 2, 3, 1, 1] = [1, 2, 3, 1] := by decide
+
+/-- A spec example for `NoInterleave`: `[1, 2, 1, 3]` interleaves (`1 … 2 … 1 … 3`); `[1, 1, 2]` does not. -/
+example : ¬ NoInterleave [1, 2, 1, 3] ∧ NoInterleave [1, 1, 2] := by
+  refine ⟨fun h => ?_, ?_⟩
+  · have := h 1 2 3 0 1 2 3 (by omega) (by omega) (Or.inr (by omega)) rfl rfl rfl rfl
+    omega
+  · intro y a b i m j n him hmj hn hi hm hj hn'
+    have hj3 : j < 3 := (List.getElem?_eq_some_iff.mp hj).1
+    obtain rfl : i = 0 := by omega
+    obtain rfl : j = 2 := by omega
+    simp only [List.getElem?_cons_zero, List.getElem?_cons_succ, Option.some.injEq] at hi hj
+    omega
 
 end HadwigerNelson.Thomassen
