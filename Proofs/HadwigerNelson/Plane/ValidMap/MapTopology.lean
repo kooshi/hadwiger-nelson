@@ -25,6 +25,179 @@ namespace HadwigerNelson.Plane
 
 open Complex Real Set Filter Topology Metric
 
+/-! ## Germs near their vertex: the cyclic order, and the far side of a sector -/
+
+namespace BranchGerms
+
+variable {n : ℕ}
+
+/-- **Near the vertex the germs are strictly ordered**: for sorted germs that are graphs over the radius out to `r₀`, at every small distance
+each germ's direction lies strictly below the next one's (a gap in direction persists by continuity; germs of one direction are ordered by
+curvature at every distance). -/
+theorem eventually_dir_lt_nextDir (G : BranchGerms n) (hS : G.Sorted) {r₀ : ℝ} (hr₀ : 0 < r₀) (hcurv : ∀ i, |G.κ i| * r₀ < 2) :
+    ∀ᶠ s in 𝓝[>] (0 : ℝ), ∀ i, G.dir i s < G.nextDir i s := by
+  rw [eventually_all]
+  intro i
+  rcases hS.2 i with hlt | ⟨heq, hκ⟩
+  · have hlim : Tendsto (fun s => G.nextDir i s - G.dir i s) (𝓝 0) (𝓝 (G.nextβ i - G.β i)) := by
+      have h := ((G.continuous_nextDir i).sub (G.continuous_dir i)).tendsto 0
+      have h0 : (G.nextDir i - G.dir i) 0 = G.nextβ i - G.β i := by simp [nextDir, dir]
+      rw [h0] at h
+      exact h
+    filter_upwards [(hlim.eventually_const_lt (show (0 : ℝ) < G.nextβ i - G.β i by linarith)).filter_mono
+      nhdsWithin_le_nhds] with s hs
+    linarith
+  · filter_upwards [Ioo_mem_nhdsGT hr₀] with s hs
+    have hb : ∀ κ : ℝ, |κ| * r₀ < 2 → -1 ≤ κ * s / 2 ∧ κ * s / 2 ≤ 1 := by
+      intro κ hκr
+      have h2 : |κ * s| ≤ |κ| * r₀ := by
+        rw [abs_mul, abs_of_pos hs.1]; exact mul_le_mul_of_nonneg_left hs.2.le (abs_nonneg _)
+      constructor <;> cases abs_le.mp (h2.trans hκr.le) <;> linarith
+    have hnext : |G.nextκ i| * r₀ < 2 := by unfold nextκ; split_ifs <;> exact hcurv _
+    have hlt : G.κ i * s / 2 < G.nextκ i * s / 2 := by
+      have := mul_lt_mul_of_pos_right hκ hs.1; linarith
+    have := Real.arcsin_lt_arcsin (hb _ (hcurv i)).1 hlt (hb _ hnext).2
+    simp only [nextDir, dir, germDir, heq]
+    linarith
+
+/-- `next` is injective: the germ after `i` determines `i`. -/
+theorem next_injective : Function.Injective (next : Fin n → Fin n) := by
+  intro i j h
+  unfold next at h
+  split_ifs at h with hi hj hj <;> simp only [Fin.ext_iff] at h <;> ext <;> omega
+
+/-- **The directions at one distance increase with the index**, where consecutive ones do. -/
+theorem dir_lt_dir (G : BranchGerms n) {s : ℝ} (hs : ∀ i, G.dir i s < G.nextDir i s) {i j : Fin n} (hij : i < j) :
+    G.dir i s < G.dir j s := by
+  obtain ⟨i, hi⟩ := i
+  obtain ⟨j, hj⟩ := j
+  have hij' : i < j := hij
+  clear hij
+  induction j with
+  | zero => omega
+  | succ j ih =>
+    have hstep : G.dir ⟨j, by omega⟩ s < G.dir ⟨j + 1, hj⟩ s := by
+      have := hs ⟨j, by omega⟩
+      rw [nextDir_eq] at this
+      simpa only [hj, dite_true] using this
+    rcases Nat.lt_succ_iff_lt_or_eq.mp hij' with h | h
+    · exact (ih (by omega) h).trans hstep
+    · subst h; exact hstep
+
+/-- The weak form of `dir_lt_dir`. -/
+theorem dir_le_dir (G : BranchGerms n) {s : ℝ} (hs : ∀ i, G.dir i s < G.nextDir i s) {i j : Fin n} (hij : i ≤ j) :
+    G.dir i s ≤ G.dir j s := by
+  rcases eq_or_lt_of_le hij with rfl | h
+  · exact le_rfl
+  · exact (G.dir_lt_dir hs h).le
+
+/-- **Every direction at one distance lies below the first one turn on**, where consecutive ones increase. -/
+theorem dir_lt_dir_zero_add (G : BranchGerms n) {s : ℝ} (hs : ∀ i, G.dir i s < G.nextDir i s) (j : Fin n) :
+    G.dir j s < G.dir ⟨0, j.pos⟩ s + 2 * π := by
+  have hlast := hs ⟨n - 1, by have := j.pos; omega⟩
+  rw [nextDir_eq] at hlast
+  simp only [show ¬ (n - 1 + 1 < n) by have := j.pos; omega, dite_false] at hlast
+  exact (G.dir_le_dir hs (show j ≤ ⟨n - 1, _⟩ from Fin.mk_le_mk.mpr (by have := j.is_lt; omega))).trans_lt hlast
+
+/-- **The far side of a sector**: where the germs (at least two) are strictly ordered, the sectors other than sector `k`, and the branch points
+of the germs other than `k`'s two, lie in one open connected subset of `B(v, ρ)` missing sector `k` — the second sector of the two-germ chart
+of `k`'s bounding germs. -/
+theorem exists_far_side (G : BranchGerms n) (hn : 2 ≤ n) {ρ : ℝ} (hord : ∀ s ∈ Ioo 0 ρ, ∀ i, G.dir i s < G.nextDir i s)
+    (v : ℂ) (k : Fin n) : ∃ O : Set ℂ, IsOpen O ∧ IsPreconnected O ∧ O ⊆ ball v ρ ∧ Disjoint O (G.sector v ρ k) ∧
+      (∀ j, j ≠ k → G.sector v ρ j ⊆ O) ∧
+      ∀ m, m ≠ k → m ≠ next k → ∀ s ∈ Ioo 0 ρ, branchPt v (G.β m) (G.κ m) s ∈ O := by
+  have hπ := Real.pi_pos
+  set G2 : BranchGerms 2 := ⟨![G.β k, G.nextβ k], ![G.κ k, G.nextκ k]⟩ with hG2
+  have hd0 : ∀ s, G2.dir 0 s = G.dir k s := fun s => rfl
+  have hn0 : ∀ s, G2.nextDir 0 s = G.nextDir k s := fun s => rfl
+  have hd1 : ∀ s, G2.dir 1 s = G.nextDir k s := fun s => rfl
+  have hn1 : ∀ s, G2.nextDir 1 s = G.dir k s + 2 * π := fun s => by
+    show germDir (G.β k + 2 * π) (G.κ k) s = _
+    rw [germDir_add_two_pi]; rfl
+  have hs0 : G2.sector v ρ 0 = G.sector v ρ k := rfl
+  set z0 : Fin n := ⟨0, by omega⟩ with hz0
+  -- the angular facts at one distance
+  have hnk : ∀ s, G.nextDir k s = if h : k.val + 1 < n then G.dir ⟨k.val + 1, h⟩ s else G.dir z0 s + 2 * π := fun s =>
+    G.nextDir_eq k s
+  have hnext_k : next k = if h : k.val + 1 < n then ⟨k.val + 1, h⟩ else z0 := rfl
+  have hord2 : ∀ s ∈ Ioo 0 ρ, ∀ i, G2.dir i s < G2.nextDir i s := by
+    intro s hs i
+    have hlt : ∀ {i j : Fin n}, i < j → G.dir i s < G.dir j s := fun h => G.dir_lt_dir (hord s hs) h
+    have hle : ∀ {i j : Fin n}, i ≤ j → G.dir i s ≤ G.dir j s := fun h => G.dir_le_dir (hord s hs) h
+    have htop := G.dir_lt_dir_zero_add (hord s hs)
+    rcases (by decide : ∀ i : Fin 2, i = 0 ∨ i = 1) i with rfl | rfl
+    · rw [hd0, hn0]; exact hord s hs k
+    · rw [hd1, hn1, hnk]
+      split_ifs with h
+      · have := htop ⟨k.val + 1, h⟩
+        have := hle (show z0 ≤ k from Fin.mk_le_mk.mpr (Nat.zero_le _))
+        linarith
+      · have := hlt (show z0 < k from Fin.mk_lt_mk.mpr (by omega))
+        linarith
+  refine ⟨G2.sector v ρ 1, G2.isOpen_sector ρ 1, G2.isPreconnected_sector hord2 le_rfl 1, G2.sector_subset_ball 1,
+    hs0 ▸ G2.sector_disjoint hord2 le_rfl (by decide), ?_, ?_⟩
+  · intro j hj z hz
+    obtain ⟨s, hs, φ, hφ, rfl⟩ := hz
+    refine ⟨s, hs, ?_⟩
+    show ∃ φ' ∈ Ioo (G2.dir 1 s) (G2.nextDir 1 s), _ = _
+    rw [hd1, hn1]
+    have hφ' : φ ∈ Ioo (G.dir j s) (G.nextDir j s) := hφ
+    have hlt : ∀ {i j : Fin n}, i < j → G.dir i s < G.dir j s := fun h => G.dir_lt_dir (hord s hs) h
+    have hle : ∀ {i j : Fin n}, i ≤ j → G.dir i s ≤ G.dir j s := fun h => G.dir_le_dir (hord s hs) h
+    have htop := G.dir_lt_dir_zero_add (hord s hs)
+    have hnj := G.nextDir_eq j s
+    have h0k := hle (show z0 ≤ k from Fin.mk_le_mk.mpr (Nat.zero_le _))
+    have h0j := hle (show z0 ≤ j from Fin.mk_le_mk.mpr (Nat.zero_le _))
+    rcases lt_or_gt_of_ne hj with hjk | hjk
+    · -- `j < k`: one turn on
+      refine ⟨φ + 2 * π, ⟨?_, ?_⟩, by rw [e_add_two_pi]⟩
+      · rw [hnk]; split_ifs with h
+        · linarith [htop ⟨k.val + 1, h⟩, hφ'.1]
+        · linarith [hφ'.1]
+      · have hj1 : j.val + 1 < n := by have := k.is_lt; have : j.val < k.val := hjk; omega
+        rw [hnj, dif_pos hj1] at hφ'
+        have := hle (show (⟨j.val + 1, hj1⟩ : Fin n) ≤ k from Fin.mk_le_mk.mpr hjk)
+        linarith [hφ'.2]
+    · -- `k < j`
+      refine ⟨φ, ⟨?_, ?_⟩, rfl⟩
+      · have hk1 : k.val + 1 < n := by have := j.is_lt; have : k.val < j.val := hjk; omega
+        rw [hnk, dif_pos hk1]
+        have := hle (show (⟨k.val + 1, hk1⟩ : Fin n) ≤ j from Fin.mk_le_mk.mpr hjk)
+        linarith [hφ'.1]
+      · rw [hnj] at hφ'
+        split_ifs at hφ' with h
+        · linarith [htop ⟨j.val + 1, h⟩, hφ'.2]
+        · linarith [hφ'.2]
+  · intro m hmk hmn s hs
+    refine ⟨s, hs, ?_⟩
+    show ∃ φ' ∈ Ioo (G2.dir 1 s) (G2.nextDir 1 s), _ = _
+    rw [hd1, hn1]
+    have hlt : ∀ {i j : Fin n}, i < j → G.dir i s < G.dir j s := fun h => G.dir_lt_dir (hord s hs) h
+    have hle : ∀ {i j : Fin n}, i ≤ j → G.dir i s ≤ G.dir j s := fun h => G.dir_le_dir (hord s hs) h
+    have htop := G.dir_lt_dir_zero_add (hord s hs)
+    rcases lt_or_gt_of_ne hmk with hmk' | hmk'
+    · -- `m < k`: one turn on
+      refine ⟨G.dir m s + 2 * π, ⟨?_, by linarith [hlt hmk']⟩, by rw [e_add_two_pi]; rfl⟩
+      rw [hnk]; split_ifs with h
+      · linarith [htop ⟨k.val + 1, h⟩, hle (show z0 ≤ m from Fin.mk_le_mk.mpr (Nat.zero_le _))]
+      · have hm0 : m ≠ z0 := by rw [hnext_k, dif_neg h] at hmn; exact hmn
+        have : z0 < m := Fin.mk_lt_mk.mpr (by
+          have : m.val ≠ 0 := fun h0 => hm0 (Fin.ext h0)
+          omega)
+        linarith [hlt this]
+    · -- `k < m`
+      have hk1 : k.val + 1 < n := by have := m.is_lt; have : k.val < m.val := hmk'; omega
+      have hm2 : k.val + 1 < m.val := by
+        rw [hnext_k, dif_pos hk1] at hmn
+        have : m.val ≠ k.val + 1 := fun h => hmn (Fin.ext h)
+        have : k.val < m.val := hmk'
+        omega
+      refine ⟨G.dir m s, ⟨?_, ?_⟩, rfl⟩
+      · rw [hnk, dif_pos hk1]; exact hlt (Fin.mk_lt_mk.mpr hm2)
+      · linarith [htop m, hle (show z0 ≤ k from Fin.mk_le_mk.mpr (Nat.zero_le _))]
+
+end BranchGerms
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
@@ -363,7 +536,110 @@ sectors of `T*` and the tile at `v` with the arc between them, connects them off
 theorem unenclosed_of_rim_vertex {T X Y : Set ℂ} {v : ℂ} (hv : v ∈ F.dom) (hT : F.IsTile T) (hX : F.IsTile X) (hY : F.IsTile Y)
     (hXY : X ≠ Y) (hXo : X ⊆ outerDom T) (hYo : Y ⊆ outerDom T) (hvT : v ∈ closure T) (hvX : v ∈ closure X) (hvY : v ∈ closure Y)
     (hcub : F.IsCubicTrichromatic v) (hno : ∀ T', F.IsTile T' → ¬ EnclosesTile T' T) : F.Unenclosed v := by
-  sorry
+  have hTX : T ≠ X := fun h => by
+    obtain ⟨w, hw⟩ := hX.nonempty
+    exact (hXo hw).1 (subset_closure (h.symm ▸ hw : w ∈ T))
+  have hTY : T ≠ Y := fun h => by
+    obtain ⟨w, hw⟩ := hY.nonempty
+    exact (hYo hw).1 (subset_closure (h.symm ▸ hw : w ∈ T))
+  -- the chart at `v` has three germs
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hv
+  have hn3 : n = 3 := by
+    obtain ⟨r, h1, h2⟩ := (hcub.1.and hC.hasDegree).exists
+    rw [h1] at h2
+    have : max n 1 = 3 := by exact_mod_cast h2.symm
+    omega
+  subst hn3
+  -- strictly ordered below some `ρ ≤ r₀`
+  obtain ⟨ρ', hρ', hord'⟩ :=
+    mem_nhdsGT_iff_exists_Ioo_subset.mp (G.eventually_dir_lt_nextDir hC.sorted hC.pos hC.curv)
+  set ρ := min ρ' r₀ with hρdef
+  have hρ : ρ ∈ Ioc 0 r₀ := ⟨lt_min hρ' hC.pos, min_le_right _ _⟩
+  have hord : ∀ s ∈ Ioo 0 ρ, ∀ i, G.dir i s < G.nextDir i s := fun s hs =>
+    hord' ⟨hs.1, hs.2.trans_le (min_le_left _ _)⟩
+  have h3pos : (0 : ℕ) < 3 := by norm_num
+  -- each tile at `v` holds a sector at radius `ρ`; distinct tiles, distinct sectors
+  have hsec : ∀ A, F.IsTile A → v ∈ closure A → ∃ i, G.sector v ρ i ⊆ A := fun A hA hvA =>
+    hC.exists_sector_subset_tile h3pos hρ hA hvA
+  have hdist : ∀ {A B : Set ℂ} {i j : Fin 3}, F.IsTile A → F.IsTile B → A ≠ B → G.sector v ρ i ⊆ A →
+      G.sector v ρ j ⊆ B → i ≠ j := by
+    rintro A B i j hA hB hAB hi hj rfl
+    obtain ⟨w, hw⟩ := hC.sector_nonempty hρ i
+    exact hAB (hA.eq_of_mem hB (hi hw) (hj hw))
+  obtain ⟨iT, hiT⟩ := hsec T hT hvT
+  obtain ⟨iX, hiX⟩ := hsec X hX hvX
+  obtain ⟨iY, hiY⟩ := hsec Y hY hvY
+  have hfin : ∀ a b c j : Fin 3, a ≠ b → a ≠ c → b ≠ c → j = a ∨ j = b ∨ j = c := by decide
+  have hTXi := hdist hT hX hTX hiT hiX
+  have hTYi := hdist hT hY hTY hiT hiY
+  have hXYi := hdist hX hY hXY hiX hiY
+  -- every tile at `v` is `T`, `X` or `Y`
+  have hthree : ∀ S, F.IsTile S → v ∈ closure S → S = T ∨ S = X ∨ S = Y := by
+    intro S hS hvS
+    obtain ⟨i, hi⟩ := hsec S hS hvS
+    obtain ⟨w, hw⟩ := hC.sector_nonempty hρ i
+    have hwS := hi hw
+    have hw' : w ∈ ball v ρ ∩ F.interiorPts := ⟨G.sector_subset_ball i hw, hS.subset_interiorPts hwS⟩
+    rw [hC.cover ρ hρ h3pos] at hw'
+    obtain ⟨j, hj⟩ := mem_iUnion.mp hw'
+    rcases hfin iT iX iY j hTXi hTYi hXYi with rfl | rfl | rfl
+    · exact Or.inl (hS.eq_of_mem hT hwS (hiT hj))
+    · exact Or.inr (Or.inl (hS.eq_of_mem hX hwS (hiX hj)))
+    · exact Or.inr (Or.inr (hS.eq_of_mem hY hwS (hiY hj)))
+  -- a tile `A` of `T`'s outer domain at `v`: every point of `A` off a tile's closure is in an unbounded component (the tile is `T`, the third
+  -- tile `B` — then `A` and `T` meet the far side of `B`'s sector — or misses `v`, and a small disc joins `A` to `T`)
+  have key : ∀ A B : Set ℂ, ∀ iA iB : Fin 3, F.IsTile A → F.IsTile B → A ≠ B → T ≠ A → T ≠ B → A ⊆ outerDom T →
+      v ∈ closure A → G.sector v ρ iA ⊆ A → G.sector v ρ iB ⊆ B → iT ≠ iA → iT ≠ iB → iA ≠ iB →
+      (∀ S, F.IsTile S → v ∈ closure S → S = T ∨ S = A ∨ S = B) →
+      ∀ T', F.IsTile T' → ∀ y ∈ A \ closure T', ¬ Bornology.IsBounded (connectedComponentIn (closure T')ᶜ y) := by
+    intro A B iA iB hA hB hAB hTA hTB hAo hvA hiA hiB hTAi hTBi hABi h3 T' hT' y hy
+    by_cases hT'T : T' = T
+    · subst hT'T; exact (hAo hy.1).2
+    have hT'A : T' ≠ A := fun h => hy.2 (h ▸ subset_closure hy.1)
+    obtain ⟨t, ht⟩ := hT.nonempty
+    have hTc : T ⊆ (closure T')ᶜ := IsTile.subset_compl_closure hT' hT (Ne.symm hT'T)
+    have hAc : A ⊆ (closure T')ᶜ := IsTile.subset_compl_closure hT' hA (Ne.symm hT'A)
+    obtain ⟨P, hPpre, hPsub, hyP, htP⟩ : ∃ P : Set ℂ, IsPreconnected P ∧ P ⊆ (closure T')ᶜ ∧ y ∈ P ∧ t ∈ P := by
+      by_cases hvT' : v ∈ closure T'
+      · have hT'B : T' = B := by
+          rcases h3 T' hT' hvT' with h | h | h
+          · exact absurd h hT'T
+          · exact absurd h hT'A
+          · exact h
+        obtain ⟨O, hOo, hOpre, hOball, hOdisj, hOsub, -⟩ := G.exists_far_side (by norm_num) hord v iB
+        have hOB : Disjoint O B := by
+          rw [Set.disjoint_left]
+          intro w hwO hwB
+          have hw : w ∈ ball v ρ ∩ F.interiorPts := ⟨hOball hwO, hB.subset_interiorPts hwB⟩
+          rw [hC.cover ρ hρ h3pos] at hw
+          obtain ⟨j, hj⟩ := mem_iUnion.mp hw
+          rcases hfin iT iA iB j hTAi hTBi hABi with rfl | rfl | rfl
+          · exact hTB (hT.eq_of_mem hB (hiT hj) hwB)
+          · exact hAB (hA.eq_of_mem hB (hiA hj) hwB)
+          · exact Set.disjoint_left.mp hOdisj hwO hj
+        have hOc : O ⊆ (closure T')ᶜ := by
+          rw [hT'B]; exact (hOB.closure_right hOo).subset_compl_right
+        obtain ⟨a, ha⟩ := hC.sector_nonempty hρ iA
+        obtain ⟨b, hb⟩ := hC.sector_nonempty hρ iT
+        have haO := hOsub iA hABi ha
+        have hbO := hOsub iT hTBi hb
+        refine ⟨A ∪ O ∪ T, ?_, union_subset (union_subset hAc hOc) hTc, Or.inl (Or.inl hy.1), Or.inr ht⟩
+        exact (hA.isPreconnected.union a (hiA ha) haO hOpre).union b (Or.inr hbO) (hiT hb) hT.isPreconnected
+      · obtain ⟨ε, hε, hεsub⟩ := Metric.isOpen_iff.mp isClosed_closure.isOpen_compl v hvT'
+        obtain ⟨a, haA, ha⟩ := (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨v, hvA, mem_ball_self hε⟩
+        obtain ⟨b, hbT, hb⟩ := (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨v, hvT, mem_ball_self hε⟩
+        refine ⟨A ∪ ball v ε ∪ T, ?_, union_subset (union_subset hAc hεsub) hTc, Or.inl (Or.inl hy.1), Or.inr ht⟩
+        exact (hA.isPreconnected.union a haA ha (convex_ball v ε).isPreconnected).union b (Or.inr hb) hbT
+          hT.isPreconnected
+    have hPc : P ⊆ connectedComponentIn (closure T')ᶜ y := hPpre.subset_connectedComponentIn hyP hPsub
+    rw [connectedComponentIn_eq (hPc htP)]
+    exact fun hb => hno T' hT' ⟨t, ⟨ht, hTc ht⟩, hb⟩
+  intro T' S hT' hS hvS y hy
+  rcases hthree S hS hvS with rfl | rfl | rfl
+  · exact fun hb => hno T' hT' ⟨y, hy, hb⟩
+  · exact key S Y iX iY hX hY hXY hTX hTY hXo hvX hiX hiY hTXi hTYi hXYi hthree T' hT' y hy
+  · exact key S X iY iX hY hX hXY.symm hTY hTX hYo hvY hiY hiX hTYi hTXi hXYi.symm
+      (fun S' hS' hvS' => (hthree S' hS' hvS').imp_right Or.symm) T' hT' y hy
 
 /-! ## C — the rim of `u`'s component (FS131-E4 E4-RIM: the eleventh point) -/
 
