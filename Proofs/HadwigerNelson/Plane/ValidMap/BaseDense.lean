@@ -75,11 +75,16 @@ theorem exists_unenclosed_or_bad {k : ℕ} {F : ArcMap k} (hF : F.Valid) {x : �
   have hdom : (outerDom T)ᶜ ⊆ F.dom := hhull.trans ((closedBall_subset_closedBall (by linarith)).trans hx)
   obtain ⟨X, Y, v, hX, hY, hXY, hXo, hYo, hvfr, hvT, hvX, hvY⟩ := exists_rim_vertex hF hT hdom hno
   -- the rim lies in the hull (`outerDom T` is open: a union of components of an open set)
-  have hvx : v ∈ closedBall x 1 := hhull (sorry : v ∈ (outerDom T)ᶜ)
+  have hvx : v ∈ closedBall x 1 :=
+    hhull fun hv => ((isOpen_outerDom T).inter_frontier_eq.subset ⟨hv, hvfr⟩ : v ∈ (∅ : Set ℂ))
   have hvd : v ∈ F.dom := hx (closedBall_subset_closedBall (by linarith) hvx)
   -- `T` misses its outer domain
-  have hTX : T ≠ X := sorry
-  have hTY : T ≠ Y := sorry
+  have hTX : T ≠ X := fun h => by
+    obtain ⟨w, hw⟩ := hX.nonempty
+    exact (hXo hw).1 (subset_closure (h.symm ▸ hw : w ∈ T))
+  have hTY : T ≠ Y := fun h => by
+    obtain ⟨w, hw⟩ := hY.nonempty
+    exact (hYo hw).1 (subset_closure (h.symm ▸ hw : w ∈ T))
   have hcub := isCubicTrichromatic_of_three_tiles hvd hT hX hY hTX hTY hXY hvT hvX hvY (hbad v hvx)
   exact ⟨v, hvx, hcub, unenclosed_of_rim_vertex hvd hT hX hY hXY hXo hYo hvT hvX hvY hcub hno⟩
 
