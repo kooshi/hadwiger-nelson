@@ -5,7 +5,14 @@ Started 2026-10-05 03:07 UTC (the brief's 2026-10-05 is UTC). No fences (invento
 
 ## Theorems this phase proved
 
-*(Filled at each stage.)* None at Stage 1.
+All [hand], one mind (FS131-E5), each with exact checks whose planted faults fire (`tools/fs131_e5_checks.py`); statements in § 3.6 and § 4.4.
+- `e5-sh` — the shadow of a horn at its antipode is bounded by the concentric circle of curvature `ν/(1 + ν)` (on the horn's side of the normal line): § 3.1.
+- `e5-sep` — a sector at `S′` meeting a `c`-horn's shadow leaves no `c`-horn of that direction above it: § 3.3.
+- `e5-two-g-sectors` — NB3-END item 2: `g` has two sectors at `S′` in `n3_end_of_not_inType`'s setting; item 305's configuration refuted: § 3.4.
+- `e5-cv-separation` — FS114-CVB § 1.4 item 5 and `cv_class`'s "None" case: `h` twice at `E + n`, `g` twice at `E − n`: § 3.5.
+- `e5-claim-e` — beyond an arc's end, every point is nearer the end than any point on the centre's side of its tangent line: § 4.1.
+- `e5-end-cap` — the arc side at the end (and at any isolated contact): the exact threshold `κ > κ_Y/(1 − κ_Y)`: § 4.2.
+- `e5-bend-end` — `bend_away`'s end case goes through by a tangent start; no new hypothesis: § 4.3.
 
 ## Fence log
 
@@ -445,3 +452,90 @@ control: e5-end-cap-grid
   fault: python3 ../tools/fs131_e5_checks.py end-cap --plant
 
 ## Stage 4 — SAVED
+
+## Stage 5 — SAVED: audit, trace, drafts, predictions scored
+
+### 5.1 The selection audit (G21: both answers flatter; audited at the rate of a disappointing one)
+
+- **Q1, every input re-read.** (F2) uses only that the upper `g`-sector at `v` contains `v + tn` and directions on both sides of every tilted tangent — true
+  of a sector with cone `[α, α + π]`. (F3)'s localization is self-contained: the same crossing argument clears every `g`-contact on `ω(v)` but `S′` (a
+  `g`-point near `w ∈ ω(v) ∖ {N, S′}` crosses the upper sector; near `N` it must lie in `B(v, 1)`, and a `g`-tile at `N` leaving `B(v, 1)` crosses `ω(v)` at a
+  third point), so with `hno` the witnesses go to `S′` without I5e's lemmas. SEP's last step needs `K` above `γ₋` — forced, since `G` holds no arc. The only
+  inputs taken at their filed grade: N3-DEG (`c ∈ P_cl(S′)`) and the local structure at a point of the domain.
+- **Q2, every input re-read.** Claim E is an identity plus two signs, no limit. The arc-side threshold is the triangle inequality. The classification of
+  `Y_j`'s `P`-ward half-arc on the arc side into radius-2 / transversal / tangent with `κ_Y < 1/2` uses only that far points there lie outside `B(P, 2)`.
+  The only inputs taken at their filed grade: N2-SIGN and N2-ENV's near and away clauses (two minds; `n2_env_near_away` already kernel, I4n).
+- **The instruments.** END-CAP's first version could not fire (its grid started at `px = 2` and its plant sat on the threshold at `κ_Y = 0`); its plant was
+  seen not to fire, both defects fixed, and the plant fires (685). SH-SAMPLE has two faults that fire (the curvUp map, 138 of 150; the endpoint clause
+  dropped, 136 of 150 — the second confirms the *not claimed* line of `e5-sh`).
+- **A held derivation found late.** FS114-CV's CV-P (2) (`plans/FS114-CV-verification.md` l. 122–124) derives the same exclusion at `S` in one line by
+  N4-SHADOW read upward ("its upper arc, of curvature `κ_c` above `Q+`'s `κ_Q`, would shadow `E` below `f̃(κ_c) > f̃(κ_Q) > λ+`, i.e. on `H+`"). I read it after
+  Stage 3's commit (`63a07fe4`); my route is the dual (the shadow of `H₋` at `S′`, read downward), exact in both halves. So `cv_class`'s step has two
+  derivations by different routes, E5 blind to CV's; NB3-END item 2 had none in FS-112's records, and CV-P is the same statement in FS-114's frame.
+
+### 5.2 The trace
+
+| filed result | reads the step? | fate | draft |
+|---|---|---|---|
+| **FS112-N3-END** (`plans/FS112-derivation.md` l. 186–198) | yes — its item 2 (NB3) and item 1 (N3: "separated by `c` below"), both asserted, neither derived | **stands, TRUE, statement unchanged**; item 2's separation now derived (E5, one mind; FS114-CV's CV-P (2) for the same statement in FS-114's frame) | erratum D1 |
+| **FS114-CV-HD** (CV-CLASS) and **FS114-CV-EXISTS** (`plans/FS114-derivation.md` l. 25–80) | yes — CV-EXISTS's argument is CVB § 1.4, whose item 5 drives the chain on (item 6) to N4-FIN; CV-CLASS reads item 5 through § 1.7's "None" | **stand, statements unchanged**; item 5's exclusion and two-sector conclusion now derived exactly (E5), beside CV's CV-P (2) | note D3 |
+| **FS112-N2-BENDS**, N2-TAN (`plans/FS112-derivation.md` l. 87–90) | yes — N2-TAN's "an isolated point `w₀` of `C₂` (interior, or an end of `α`)" | **stands**; at an end it needs a tangent start of curvature in `(0, 1)` and Claim E for the beyond side, not the radius-2 comparison; the domain hypothesis is item 291's correction, still owed | erratum D2 |
+| **row 135** | yes — through N3-END (its chain lemmas) and N2-RED (whole-arc bends, ends included) | **unchanged** (statement, grade words, addresses) | none |
+| **row 137** | yes — through CV-EXISTS (CVB § 1.4 item 5) and CV-HD | **unchanged** | none |
+
+**Lean-level statements: no change.** `n3_end`, `n3_end_of_not_inType`, `cv_class` and `bend_away` (with `hdom`) stand as in the claim list. What the
+implementers need, in order: for `Terminal`, `e5-sh` (two lemmas, in `hornSet`, `tanHeight`, `shadow`) and `e5-sep`, then § 3.4 for
+`n3_end_of_not_inType`'s repeated colour and § 3.5 (with the reflection `Y ↦ −Y`) for `cv_class`'s first two clauses; for `bend_away`, `e5-claim-e` (no
+smallness) and `e5-end-cap`, which also serves every isolated interior contact in place of N2-TAN's cap asymptotics (I4n's "inf-convolution inequality").
+
+### 5.3 Drafts for Keryx (each names its slot; I edit none of these files)
+
+**D1 — `plans/FS112-derivation.md`, after the FS112-N3-END entry (after the line ending "*Rests on it:* FS112-C-ENDS. *Prior art:* not found in print.
+*Kernel:* stub — with FS-114."):**
+> *Erratum (FS131-E5, 2026-10-04).* Item 2's separation — "the two `g`-tiles are two sectors of `g` at `S′`" — was asserted by N3 (item 1, "separated by `c`
+> below") and NB3 (item 2, "its sectors in `α`'s away cone (U1), below") and derived by neither: U1 leaves `c`'s cone at `S′` in `[α+π, α+2π−ℓ]`, which holds the
+> direction of `−a`, so one `g`-sector with cone `[α+π, α+2π]` and `c` only as a horn along `−a` above it was not excluded (FS131-I5e, inventory item 305). It is
+> excluded by validity: the shadow of the horn `H₋` near `S′` is bounded by the concentric circle of curvature `f(−κ₄)` (N4-SHADOW's map), the `H₋`-witnesses
+> in the `g`-sector put its upper arc above that circle, and a `c`-horn above it lies in the shadow (`plans/FS131-E5-derivation.md` § 3, `e5-sh`, `e5-sep`,
+> `e5-two-g-sectors`; hand, one mind, exact checks). The same statement in FS-114's frame is FS114-CV's CV-P (2) (`plans/FS114-CV-verification.md`
+> l. 122–124), by the dual shadow. The statement and its other items stand.
+
+**D2 — `plans/FS112-derivation.md`, after the FS112-N2-BENDS entry (after "*Rests on it:* FS112-N2-RED; the inert-arc pre-bend of FS112-N3-BASE. *Prior
+art:* not found in print. *Kernel:* stub — with FS-114."):**
+> *Erratum (FS131-E5, 2026-10-04).* Two precisions to N2-TAN. (1) Its "C₂ … a finite union of points and closed arcs" reads local finiteness along `R₂(ᾱ)`:
+> the radius-2 arc must lie in the map's domain (FS131-I4n's counterexample, inventory items 290–291). (2) At an **end** `A` the tangent bend needs a start of
+> curvature `κ ∈ (0, 1)`, so that the lens lies on `P`'s side of the tangent line to `ω(P)` at `A`; then every point beyond the end is nearer `A` than any lens
+> point (the radical axis), and the region beyond the end that `ω(A)` bounds is never reached, whatever the inner colour does there; on the arc side the bend
+> clears a contact tile tangent to the radius-2 circle with curvature `κ_Y < 1/2` exactly when its lens lies on `P`'s side of the circle through `A` of
+> curvature `κ_Y/(1 − κ_Y)` (the triangle inequality), which also replaces the cap asymptotics at interior contacts (`plans/FS131-E5-derivation.md` § 4,
+> `e5-claim-e`, `e5-end-cap`, `e5-bend-end`; hand, one mind, exact checks). The statement stands.
+
+**D3 — `plans/FS114-derivation.md`, after the FS114-CV-HD entry's "Rests on it" paragraph:**
+> *Note (FS131-E5, 2026-10-04).* FS114-CVB § 1.4 item 5's exclusion — `c`'s sectors at `N` not in the `±a` stacks below `Q±` — on which CV-EXISTS (CVB § 1.4
+> items 5–7) and CV-CLASS's second case (CVB § 1.7) rest, was stated there in one line; it is derived exactly in `plans/FS131-E5-derivation.md` § 3.5
+> (`e5-cv-separation`, over `e5-sep`; hand, one mind, blind to the next reference), and in one line by FS114-CV's CV-P (2) (the dual shadow). The two-sector
+> conclusions at `E ± n` need neither CVB's "ring tiles below" nor `|P_cl(N)| ≤ 3`. Statements unchanged.
+
+No ledger row, grokking, stub or bibliography row is drafted: no statement, grade word or address in rows 135 and 137 changes. **Proposed grokking
+instance** (for `plans/GROKKING-INSTANCES.md` § G92, if Keryx judges it one): FS114-CV's CV-P (2) held, in FS-114's frame, the step FS-112's N3-END lacked;
+read at its class (the shadow of a horn at its antipode, any stuck vertex, either side) it was the repair of item 305 one milestone early.
+
+### 5.4 Predictions scored
+
+| id | p | outcome |
+|---|---|---|
+| E5-P1 (Q1, NB3-END item 2 derived exactly, no statement change) | 0.85 | **met** |
+| E5-P2 (Q1, CVB § 1.4 item 5 by the same lemma, `cv_class` unchanged) | 0.80 | **met** |
+| E5-P3 (Q2, the end case by a tangent start, `bend_away` unchanged) | 0.75 | **met** |
+
+Brier 0.042 over three, all met; the predictions were informed (registered after a sketch, § 1.4), so they score the sketch, not a blind prior.
+
+### 5.5 Slips (mine)
+
+1. A record edit replaced the empty string (an anchor found before its block), splicing a block between every character; the gate refused the file, the
+   text was recovered exactly by splitting on the inserted block (`head` a prefix of the recovered text, 10,449 characters appended — Stage 4's), and nothing
+   corrupted was committed.
+2. END-CAP's first version could not fire (§ 5.1); caught by its plant.
+3. FS114-CV's CV-P (2) was not read before deriving (§ 5.1): the brief did not list it, but the step's statement had a home in FS-114's records.
+
+## Stage 5 — SAVED
