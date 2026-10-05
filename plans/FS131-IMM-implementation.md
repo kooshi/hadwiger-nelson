@@ -115,6 +115,17 @@ Each [kernel], reading exactly `[propext, Classical.choice, Quot.sound]`: `exist
 `merge_outType_iff`, and the leaf **`ArcMap.Near.merge_allowedCone`** (20 theorems); with them **`HadwigerNelson.Plane.ArcMap.exists_merge_aux`
 (in `Moves`) reads exactly the standard three** — MERGE has no `sorry` beneath.
 
+### FS131-ML1 (MERGE's landing; gated commit `df473bfe`, landed on `main` at `f8dea5ca`; axioms read from the gate's saved log `build/gate/axioms/20261005T092312Z-2984691.log`, copy `data/fs131/ml/axioms-receipt-final.log`)
+
+- `HadwigerNelson.Plane.ArcMap.exists_merge` (`Plane/ValidMap/Contact`) — [kernel], exactly `[propext, Classical.choice, Quot.sound]` — FS110-W-MERGE in
+  ruling 269's form, restored byte-identical to `c9623d04` and proved here by citing `exists_merge_aux`; read against FS110-W-MERGE's docstring and ruling 269
+  (Stage 16): valid `F` near `B̄(v, 1)`, `c` with `n + 1 ≥ 2` sectors at `v`, `int D_c(v) ≠ ∅` ⟹ a valid `F'` equal to `F` off `B̄(v, ρ)`,
+  no unit arc created, Condition 5 kept, `n` sectors of `c` at `v`, no colour gained at `v`, at most three colours and none repeated on the rim,
+  `D_c(v′)` unchanged for `v′ ∉ B̄(v, ρ)`.
+- `HadwigerNelson.Plane.ArcMap.exists_merge_aux` (`Plane/ValidMap/Moves`) — [kernel], exactly the standard three — the same statement, IMM's proof over
+  `MergeMove`, now on `main`.
+- `MergeMove`'s 151 theorems (FS131-IMM1–IMM4's, listed above) — [kernel] on `main`: 138 on exactly the standard three, 11 on fewer, 2 on none.
+
 ## Stage 1 — SAVED: the readback, the as-given build
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -879,3 +890,50 @@ are the up-to-date probe's "target is out-of-date" (5 of 5), which starts the wa
 
 **The baseline header** (`scripts/vacuity-baseline.txt`, written in Stage 14's commit from `scripts/gate_report.py header` on the merged run):
 `declarations=11026  refutations-skipped=113  sites=770` / `vacuous=0 stale=0 declared=3 witnessed=32 generic=733 unknown=2`.
+
+## Stage 16 — SAVED (FS131-ML1): the landing — `main` fast-forwarded to `f8dea5ca`
+
+`origin/main` stayed at `3d6319ad` through Stage 15 (`git fetch`; `git log HEAD..origin/main` empty). Checked before the push: `origin/main` an
+ancestor of `HEAD` (`git merge-base --is-ancestor`); `git diff --name-only df473bfe HEAD -- . ':!plans' ':!data'` = `tools/fs131_ml_axioms.py` alone —
+a new checker no gate script reads (`grep -rl fs131_ml_axioms scripts/ lakefile.toml`: none), so no gate input changed after the gated commit
+`df473bfe`. **`git push origin HEAD:main`: `3d6319ad..f8dea5ca`, a fast-forward**; `origin/main` = `f8dea5ca` after it. No background process is
+left running (the build, the gate scripts and the waiters all exited; the one monitor was stopped).
+
+**Read against the informal statement, aloud** (the gate item no automation replaces): `exists_merge`'s hypotheses are `F.Valid` (no two interior
+points of one colour at distance exactly 1), `F.Covers v 1` (the map is defined on a neighbourhood of `B̄(v, 1)`), `1 ≤ n`, `F.HasSectors v c (n + 1)`
+(`c` has `n + 1 ≥ 2` sectors at `v` for all small radii) and `(interior (F.allowedCone v c)).Nonempty`; its conclusion is a radius `ρ > 0` and a map
+`F'` that is valid, agrees with `F` off `B̄(v, ρ)`, has its ring arcs within `F`'s (no unit arc created), keeps Condition 5 when `F` has it, gives `c`
+exactly `n` sectors at `v`, adds no colour at `v` (`F'.coloursAt v ⊆ F.coloursAt v`), puts at most three colours and no repeated colour at every
+rim point, and leaves `D_c(v′)` unchanged for every `v′ ∉ B̄(v, ρ)`. That is FS110-W-MERGE as its docstring and ruling 269 state it — "no other point's
+allowed cone changes" is stated off the closed disc, the ruled form; Condition 5 is not assumed. No model of its hypotheses exists in the library
+(nor of `exists_shave`'s or `exists_rayMerge`'s, already on `main`): the vacuity scan reads its sites `GENERIC` at a variable map, and the docstring,
+held byte-identical by this brief, carries no note — an inventory line in the report.
+
+## Drafts for the front page (FS131-ML1)
+
+Each with its slot and the log line it comes from (gated commit `df473bfe`). Drafts 1 and 2 were applied to a scratch copy of `main`'s `CLAUDE.md`
+and read by `scripts/gate_report.py` against the gated run's saved logs: Trust ledger "match (clean, purchases and imported compared)"; § The gate
+"match (9 of 9 compared)" (the unedited `CLAUDE.md`: "RECORDED COUNT IS STALE … 3633 clean → 3784").
+
+1. **`CLAUDE.md` § Trust ledger**, the words "the current audit reads 3633 clean and 5 declared purchases, and 4 imported (and 12 axiom-free; 3,654
+   records at Woodall's landing, FS131-WL1, 2026-10-05)" become: "the current audit reads 3784 clean and 5 declared purchases, and 4 imported (and 14
+   axiom-free; 3,807 records at MERGE's landing, FS131-ML1, 2026-10-05)". From `data/fs131/ml/axioms-final.log`: "audited: 3807 records — 3784 clean on the
+   standard axioms, 14 axiom-free, 4 imported (resting on a declared outside theorem), 5 declared purchase(s)" and "==> axioms: OK — 3784 clean, 14
+   axiom-free, 4 imported, 5 declared purchase(s)".
+2. **`CLAUDE.md` § The gate**, the two count lines "`declarations=10851 refutations-skipped=111 sites=755`, `vacuous=0 stale=0 declared=3 witnessed=32
+   generic=718 unknown=2`" become "`declarations=11026 refutations-skipped=113 sites=770`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=733
+   unknown=2`". From `data/fs131/ml/vacuity-final.log`: "scanned: declarations=11026  refutations-skipped=113" and "sites:   sites=770  vacuous=0  stale=0
+   declared=3  witnessed=32  generic=733  unknown=2".
+3. **`scripts/vacuity-baseline.txt`'s header** (written, this branch, now on `main`): "#   declarations=11026  refutations-skipped=113  sites=770" / "#
+   vacuous=0 stale=0 declared=3 witnessed=32 generic=733 unknown=2" — the digest's "recorded counts in scripts/vacuity-baseline.txt's header: match (9 of
+   9 compared)".
+4. **`tools/claude_md_fact_audit.py`'s `GATE_CHANGES`**, after the `(("3376", "5"), ("3633", "5"))` entry:
+   `(("3633", "5"), ("3784", "5")): "FS-131 MERGE's landing (FS131-ML1; .claude/worktrees/fs131-w4mm/build/gate/axioms/20261005T092312Z-2984691.log, copy
+   data/fs131/ml/axioms-receipt-final.log, gated commit df473bfe): 3,807 records, 3,784 clean, 14 axiom-free, 4 imported, 5 purchases",`
+5. **`LEAN.md` § The gate**: no change — the vacuity self-test still plants sixty-two controls ("==> vacuity self-test: OK — all 62 controls behaved",
+   `data/fs131/ml/vacuity-selftest-final.log`) and the axiom audit 23 ("==> axioms self-test: 23 controls", `data/fs131/ml/axioms-selftest-final.log`).
+6. **Held for the milestone's filing** (as wave 4's and Woodall's): `LEDGER.md` § B's line "FS110-W-MERGE | row 134 | … | hand; two minds: N3; NB3,
+   blind | …" gains **[kernel]** — `HadwigerNelson.Plane.ArcMap.exists_merge` (`Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean`), in ruling 269's form
+   (`F'.coloursAt v ⊆ F.coloursAt v` for the off-rim clause), by `exists_merge_aux` (`Plane/ValidMap/Moves`) over `Plane/ValidMap/MergeMove`, on the
+   standard three, resting on no outside theorem and no hypothesis beyond its statement's (FS131-IMM1–IMM4, landed by FS131-ML1, gated commit `df473bfe`);
+   the Frontier line and the Proof Atlas grade for FS110-W-MERGE move with it.
