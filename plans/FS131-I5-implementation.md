@@ -1319,3 +1319,34 @@ Wave 5's sorry declarations: **25** (`BaseWalk` 3 — the planar job's `retArcs_
 **`row134BaseUA` now rests, of this half, on `bv_hex` alone** (through `hex_base` → `p17_ua`), with the planar job's three.
 
 ## Stage 28 — SAVED
+
+## Stage 29 — SAVED: the handoff (what is left of this half, and where it stands)
+
+`tools/check_architecture.py`: PASS (no module added; imports unchanged). The working tree is clean at the stage-28 commit.
+
+**What is left of my set (7)**, for wave 5's next implementer on this half:
+- **`bv_hex`** (**H**; the last of this half on `row134BaseUA`'s path — with the planar job's three, all `row134BaseUA` now rests on). BASE-V § 1a.4
+  steps 1–6. Step 6's count reads the tangent cones of `u`'s three sectors as closed angular intervals summing to `2π` (horns of angle `0` allowed):
+  the shared child **`coneAt_of_cubic`** (plan § 9.1, `hex_regular`'s child too) does not exist yet — only `Simple.coneAt_eq_angleIcc`
+  (`Plane/LocalStructure` l. 2463) for simple maps, and `IsJordanDomain.coneAt_eq_angleIcc` (l. 386). Build it first, from the sector chart of a cubic
+  trichromatic vertex (`IsCubicTrichromatic.chart`, `Plane/ValidMap/BaseSteps` l. 407). Step 5 is `Valid.cone_re_nonneg_of_germ`'s pattern
+  (`Plane/RingGerm` l. 134) along the outward radial. Step 4's exactly-unit pair `x_j + s t`, `x_{j+1} + s t` needs open neighbourhoods inside the two
+  cones (the colour at the point itself is not read); `hF.dist_ne_one_of_isOpen_subset_closure` (used in `BaseSteps`) is the tool.
+- **`rot_out`, `rot_in`** (M each), **`hex_regular`** (M, over `coneAt_of_cubic`), **`bv_nd`** (M–H: BASE-V § 1b.2 steps 2–4, the unit-arc tangency
+  computation of step 4), **`bv_l3`** (H; off the walk's path — `l3_base` replaced it there). For `bv_l3` the stage-28 machinery transfers: with
+  `RingProper` the two rings are wave 3's `ringCircleColouring`s, `exists_linkage` and `link_path` apply verbatim, and `hdbl` is `bv_nd` (or
+  `pair_ii`, which `bv_l3`'s hypothesis H on the circles supports, as in `l3_base`).
+- **`exists_preBend`** (H): needs the strengthened bend (ruling 317 (b): a child of `exists_preBend`, read back against E4-BEND-UN, citing
+  `bend_toward` as given). Not attempted in this job.
+
+**Route notes for the next implementer** (from stages 26–28):
+- Circle-abstract arguments go fastest as lemmas over a family or an integer function with explicit hypotheses (`reduce_*`, `select_*`,
+  `link_path`), assembled in the leaf's proof.
+- A long `set`-based construction exhausts the declaration's heartbeat budget (it is cumulative); `clear_value` the `set` variables once their
+  defining equations are recorded, keep `nlinarith` off goals that mention them, and split facts into lemmas over the defining equations
+  (`link_fibres`, `link_flip`, …). `exists_linkage` still needs 300000 (measured) and carries `set_option maxHeartbeats 400000 in`.
+- Iteration: `data/fs131/i5g/iter.sh` (scratch mirror `/home/kooshi/scratch-w5g`); a scratch file importing `BaseWalk` compiles in seconds.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 29 — SAVED
