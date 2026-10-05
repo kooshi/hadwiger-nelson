@@ -89,3 +89,84 @@ derivation: e5-bend-end
   handoff: none — a conjecture
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: recognition, run on each claim (`ephodos-recognition`, invoked fresh)
+
+### 2.1 Q1 — the stall read, and the stranger
+
+**The stall.** A step asserted by both minds and derived by neither: N3's "two `g`-sectors … separated by `c` below and by `r′` or `h` above"
+(`plans/FS112-N-proof.md` l. 860–861) and NB3's "`c ∈ P_cl(S′)` …, its sectors in `α`'s away cone (U1), below: the two `g`-tiles are **two sectors**"
+(`plans/FS112-NB3-verification.md` l. 236–237); CVB's "not in the `±a` stacks below `Q±` (such a sector would shadow part of `H±`, against N-E0)"
+(`plans/FS114-CVB-verification.md` l. 100). I5e's leading-order repair names the missing property: a monotonicity ("closed upward") of a shadow near `S′`.
+Shape of the stall: *an answer found (to leading order) and not derived* — the property is a fact about one circle family, said in the costume of tiles.
+
+**For a stranger — a differential geometer.** *Let `C` be a circle (or line) through the origin `v`, tangent there to the `x`-axis, of signed curvature `ν ∈
+(−1, 1)` (positive when its centre lies on the `+y` side), and let `A` be a short open arc of `C` with one end at `v`, on the side `x < 0`. Let `S′ = (0, −1)`.
+Describe, near `S′`, the set of points `y` with `dist(y, A) < 1`.* This is **the 1-neighbourhood of a circular arc, i.e. a parallel (offset) curve**: away
+from the arc's endpoints it is bounded by the concentric circle at distance 1, whose curvature is `ν/(1 + ν)` — the classical curvature of a parallel curve at
+distance `d`, `κ/(1 + dκ)` (recalled, not read; re-derived exactly below) — and beyond the endpoint `v` by the unit circle about `v`. In this project's own
+words it is **FS110-N4-SHADOW's curvature map `f(λ) = λ/(1 + λ)`** ("an arc at `P_{k+1}` of upward curvature `λ` shadows at `P_k` along the concentric circle of
+curvature `f(λ)`", `curvDown` in `ValidMap/Basic.lean`) — held, two minds, one blind — used so far only along a stuck chain, never at a chain's end between
+two sectors of one point.
+
+### 2.2 Q1 — the features, sorted (receipts: the argument of § 3, and the controls of `tools/fs131_e5_checks.py`)
+
+| feature | sort | receipt |
+|---|---|---|
+| validity (N-E0: no `c`-point at distance 1 from `H₋`) | determines | consumed at the last step; the planted fault in SEP-SAMPLE (a `c`-point allowed in the shadow) is the configuration of item 305 |
+| `H₋`'s bound on the `S′` side, `κ₄`, through `ν₄ = −κ₄` | determines | the shadow's curvature is `f(ν₄)`; at `κ₄ = 1` the shadow is a full one-sided neighbourhood (U1 instead) |
+| the `H₋`-witnesses lying in the `g`-sector `G` at `S′` | determines | consumed as "`G` meets the shadow", hence `μ_G > f(ν₄)` |
+| one `g`-sector with cone `[α+π, α+2π]` (item 305's case) | consumed only through "every other sector along `−a` lies on `G`'s `+n` side" | the order of circles tangent at `S′` (exact) |
+| `c ∈ P_cl(S′)`, its cone in the closed lower half-plane | determines | the `c`-horn `K` exists and is tangent to `±a`; N3-DEG and U1 |
+| terminality at `S′`, six colours, Condition 5 | accompany | the argument runs without them |
+| `H`'s lower bound `κ₁ = −1` | accompanies the separation; determines only which side `c` can sit on | with `κ₁ > −1` the same lemma applied to `H` excludes a `c`-horn along `+a` (§ 3.4, the CVB use) |
+| `hno` (no in-type `g` at `N`) | determines the localization of the witnesses at `S′` | a `g`-tile at `N` would be in-type (§ 3.2) |
+| the stuck structure at `v` (flanks filling the half-discs) | determines "`g` near `S′` lies outside `B̄(v, 1)`" | § 3.2 |
+
+### 2.3 Q1 — homes, tested
+
+1. **This project's own: FS110-N4-SHADOW** (the curvature map `f`). *Old proofs apply at once:* the shadow of a circle-bounded set is the offset of its
+   boundary circle — nothing changes but the reading point (`S′`, a chain's end). *Exceptions vanish:* `κ₄ = 1` is `f(−1) = −∞`, the limit (U1); the
+   CVB mirror at `N` is `f̃(υ) = υ/(1 − υ)` (`curvUp`), the same map read upward. *Predicts a neighbour:* at `N` the shadow of `H₊` is
+   `TanBelow N α f̃(υ₊)` — CVB's item 5 with no new idea (checked in § 3.4). **Adopted.**
+2. **Classical differential geometry: parallel curves.** The same object, with no tiles; supplies the formula and its exact form (concentric circles).
+   Merged with 1: one dictionary (`upward curvature ν` ↔ signed curvature; `shadow near S′` ↔ `1-neighbourhood seen from the far side`).
+3. **Mathematical morphology (dilation by the unit disc).** The shadow of `H₋` is `(H₋ ⊕ B) ∖ (complement)`-type: `{y : dist(y, H₋) < 1}` minus the points
+   whose unit disc swallows `H₋`. Tested: it explains why only the **boundary arc** nearest `S′` matters (the vertical drop, § 3.1 (D)), and predicts nothing
+   more. Kept as the reason for step (D), not as a home.
+
+**The transfer, its one changed step named.** N4-SHADOW's use compared a horn at `P_{k+1}` with the sector at `P_k` that shadows it. Here the comparison is
+**between two sectors of one point `S′`** (the shadowing `g`-sector `G` and the `c`-horn `K`), through the strict order of circles tangent at `S′`. And the
+arc has an **endpoint at `v`**, so the identity "shadow = above the concentric circle" holds only on the horn's side of the normal line (`frameX < 0` for
+`H₋`); that is the half (E2) needs, and (E1) needs none.
+
+### 2.4 Q2 — the stall read, and the stranger
+
+**The stall.** I4n's reading (`fs131-w4ba`, record l. 1532–1535): "at an end of the arc the uncovered region near `q_A` is bounded by `ω(A)` (curvature `1`,
+tangent to the radius-2 circle at `q_A`) on the far side, so a class hugging `ω(A)` from outside is not covered by (4)'s curvature `< 1/2` analysis". Shape:
+*a known theorem that almost applies* (N2-TAN), one hypothesis (the radius-2 comparison) failing beyond the end.
+
+**For a stranger — a plane geometer.** *Two unit circles `ω(A)`, `ω(z)` with centres a small distance apart; where does the disc `B̄(z, 1)` stick out of
+`B(A, 1)`?* This is **the radical axis**: for two circles of equal radius it is the perpendicular bisector of the centres, and `B̄(z, 1) ∖ B(A, 1)` lies in the
+closed half-plane on `z`'s side of it — exactly, `2p·(z − A) ≥ |z|² − |A|²` (with `P = 0`). For `z` on `P`'s side of the tangent line to `ω(P)` at `A`, that
+half-plane misses the quadrant beyond the arc's end on `A`'s side of `P` (§ 4.1, Claim E).
+
+### 2.5 Q2 — the features, sorted
+
+| feature | sort | receipt |
+|---|---|---|
+| the lens lies on `P`'s side of the tangent line at `A` (tangent start of curvature `κ > 0`) | determines | Claim E's hypothesis; the planted fault (a corner lens, height `≍ ψδ`) reaches beyond the end — NB2's "blocks a wedge lens" |
+| the far tile's boundary beyond the end (hugging `ω(A)` or not) | **accompanies** | Claim E holds for every point beyond the end outside `B(A, 1)`, whatever its tile; I4n's worry is about this feature |
+| the far tile's boundary on the arc side, curvature `κ_Y < 1/2` against the radius-2 circle | determines | N2-TAN's cap comparison, one-sided (§ 4.2) |
+| `hdom` | determines | `C₂` a finite union of points and closed intervals; the sector structure at `q_A` |
+| `A` a vertex, or an interior point of a longer arc of `Γ` on `ω(P)` (`IsRingArc` does not ask maximality) | accompanies | Claim E reads no arc beyond `A` |
+| the inner/outer tiles' sectors at `A` (a horn of `T_out` bounded by `σ`) | determines the admissible `κ` interval `(max(0, κ_σ, κ*), 1)` | nonempty since `κ_σ < 1` |
+
+**Home:** N2-TAN itself (two minds), with the radical axis supplying the one changed step — at an end, the beyond side is not compared with the radius-2
+circle at all; it is empty for the tangent-start lens.
+
+**Prior art for both:** the parallel-curve curvature and the radical axis are classical (recalled, not read); their use here is internal to this project's
+calculus of valid arc maps, whose lemmas are not found in print (`plans/FS112-derivation.md` marks every FS112 lemma so). No search run for these
+two local lemmas beyond that; the entries say "partly".
+
+## Stage 2 — SAVED
