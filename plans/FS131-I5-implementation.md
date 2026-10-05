@@ -1742,3 +1742,72 @@ standard three: `upper_bounds_of_inType_N`, `stuck_turned_frame`, `stuck_structu
 - `ArcMap.cv_exists` (`Plane/ValidMap/BaseDense.lean`) — FS114-CV-EXISTS, proved **over** `exists_terminal` (open) and `dense3`.
 
 ## Stage 37 — SAVED
+
+## Stage 38 — SAVED (FS131-I5l): the shared first step of the two `G_N`-level leaves, the MERGE engine; the CV-HD block placed after NB3-END's lemmas; the handover
+
+**What this stage proves.** Three children for the two open CV-HD-level leaves, all kernel theorems on the standard three: `dot_eq_zero_of_antipodal_contact`
+(the perpendicularity engine of `stuckAlong_of_run`, stated alone), `mergeAvailable_of_not_mem_pole` (CVB § 1.6's repeated step "`D_r(N)` has interior
+unless it is the line `±a`, which needs a contact at `E`; W-MERGE"), and `lower_flank_horns_at_N` (CVB § 1.4 item 5 / § 1.6 and YB3 § 3.1 Steps 2–3:
+with `κ₃ = −1` and `¬H_S`, the point `N` is stuck with at least four colours and `h` has exactly two sectors there, cusp horns `Q±` along `±e α` with
+bounds in `[−1, 1]` and out-type contacts at `N + n` and `E`). No statement changed; no `axiom`; no `native_decide`.
+
+**A block moved** (statements untouched): `upper_bounds_of_inType_N` … `c_double` (the CV-HD main clause, its `G_N` child, `y3_end_needs`, `cv_hd`,
+`c_double`) now sit after NB3-END's lemmas, under the section "FS114-CV-HD's main clause and equivalences, FS112-Y3-END-NEEDS, FS112-C-DOUBLE (placed
+after NB3-END's lemmas, which their open leaves read)", so the open leaves may cite `flank_two_sectors_at_S`, `n3_end_four_colours`, `n3_end_bothKind`
+and the three new children. `cv_l0` stays in place.
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 72149b07`: **PASS** (exit 0). New names unique by `git grep` over `main`, `origin/fs131-w5`,
+`origin/fs131-w5p`, `origin/fs131-ww`, `origin/fs131-w4mm`.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses
+'sorry'`**, exit 0, 8 min 42 s (`build/gate/build/20261005T064611Z-2087752.log`, ends "Build completed successfully (5370 jobs)"; its one `error:` line
+is the up-to-date probe's "target is out-of-date"; driver log `data/fs131/i5l/build-stage38.log`). `Terminal`'s `sorry` declarations: **4**
+(`exists_red`, `exists_terminal`, `y3_end_needs`, `cv_hd_main_inType`); wave 5 **21** (`Terminal` 4, `BaseDense` 2, `BaseWalk` 5, `HexRing` 6,
+`MapGraph` 3, `Dense` 1); 25 at my launch.
+
+**Axioms, read from this build's oleans** (`data/fs131/i5l/I5lAxioms38.lean` → `I5lAxioms38.out`, 12 GiB slot, exit 0): the three new children on
+`[propext, Classical.choice, Quot.sound]`; the moved `cv_hd`, `c_double` read `sorryAx` (over the open leaves); controls: `cv_hd_main_inType` reads
+`sorryAx`, `upper_bounds_of_inType_N` the standard three. `scripts/Axioms.lean`: the three records added to the "FS131-I5h" block.
+
+### Theorems this phase proved
+
+All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5l/I5lAxioms38.out`):
+- `HadwigerNelson.Plane.ArcMap.dot_eq_zero_of_antipodal_contact` (`Plane/ValidMap/Terminal.lean`) — a contact on `ω(w)` is perpendicular to an
+  antipodal pair of the colour's cone at `w`.
+- `ArcMap.mergeAvailable_of_not_mem_pole` (`Terminal`) — W-MERGE at `w` for a colour with two or more sectors, a cone direction `β`, and absent at one
+  of `w ± e(β + π/2)`.
+- `ArcMap.lower_flank_horns_at_N` (`Terminal`) — the lower flank's two horns `Q±` at `N` along `±e α`, `N` stuck with four or more colours.
+
+### The handover: what is proved, what is left (for the next `Terminal` implementer)
+
+**Proved over open leaves this session**: `cv_hd` (over `cv_hd_main`), `cv_hd_main` (over `cv_hd_main_inType`, `y3_end_needs`), `c_double` (over
+`cv_hd`), `c_ends` (over `cv_class` → `cv_hd`), `cv_exists` (over `exists_terminal`). `chainVertex_neighbours_of_noFour`, `stuckRun_eq_univ_of_noFour`,
+`c_double` also read `sorryAx` through this branch's stale `flankQ_upper`/`flankQ_lower` (proved on `main`; they collapse at the merge).
+
+**Left (4 in `Terminal`, none in `BaseDense`'s lines of this lane)**:
+1. **`cv_hd_main_inType`** (H; CVB § 1.6 "Branch `G_N`"). Route in Lean: `lower_flank_horns_at_N` gives `Q±` (the `h`-horns at `N` along `±a`), `N`
+   stuck, `≥ 4` colours; `c, g, h ∈ P_cl(N)` (`horn_poles_contact`, `G_N`, `Q±`). The ring tiles: `cv_l0` at `E` makes `Γ ∩ ω(E)` finite, so the arc of
+   `ω(E)` just right (left) of `N` lies in one tile `T₊` (`T₋`), whose colour `r₊` (`r₋`) is not carried at `E` (N-E1, `ne1_region`: a point of the
+   class at distance `1` from `E`) and is carried at `N` (the arc accumulates at `N`; colour constant along it by `IsPreconnected.constant` on the
+   interior points). Distinctness, each by `mergeAvailable_of_not_mem_pole` at `N` with `β = α` (the pole `N − n = E` carries none of `r±, x₁, x₂`):
+   `r₊ ≠ r₋`, `x₁ ∉ {r₊, r₋}`, `x₂ ∉ {r₊, r₋, x₁}` — each needs the two sectors to be **distinct sectors at `N`**, which is the real work: read the
+   sector chart at `N` (`localSectors`, `IsSectorChart`; a horn's flanks are the chart's adjacent indices, `IsSectorChart.exists_flank_after` /
+   `_before`), with `c`'s sectors confined to the pinch about `+n` (U1, `ringArc_cone_outer`, the arcs of `ω(N)` bounding `E`'s horns have outer
+   colour `c`) and `g`'s below `ω(E)` (in-type at `N`), so no sector at `N` wraps from the `+a` side to the `−a` side. `x₁, x₂ ∉ {c, g, h}`: `≠ h`
+   (a flank is not the horn's colour), `≠ c` (outside the pinch), `≠ g` (CVB: an out-type `g`-contact of `ω(E)` at `N` would force `D_g(E) ⊆ {d·n ≤ 0}`).
+   Seven colours in `Fin 6`: `Finset.card_le_univ`. Price: one session.
+2. **`y3_end_needs`** (H; YB3 § 3.1 Steps 3–4). Step 2 is `lower_flank_horns_at_N` (its hypotheses are exactly `y3_end_needs`'s with `κ₂ = 1`).
+   Step 3 at `N`: the upper flanks `x₁ ≠ x₂` and the lower flank `y` of `Q±`, five colours `{c, h, x₁, x₂, y}` (distinctness by
+   `mergeAvailable_of_not_mem_pole`, and `IsHorn` flank facts); Step 4 at `N + n`: no SHAVE at `N` needs an in-type `x₁` at `N + n` (so `Q₊`'s upper arc
+   is on `ω(N + n)`: `upper_bounds_of_inType_N`'s argument one level up) and an out-type `y` at `N + n` tangent to `±a`; then `y`'s two sectors at `N + n`
+   are horns (`lower_flank_horns_at_N`'s pattern one level up, or `stuck_horns_ua` and `dot_eq_zero_of_antipodal_contact`) with upper flanks
+   `z₁ ≠ z₂` outside the five — seven colours. YB3's FLANK-at-`N` sharpening (b) (contact arcs of `ω(N)`) is the step most likely to need a new
+   chart lemma. Price: one session.
+3. **`exists_red`, `exists_terminal`** (H, the limit constructions): **both cite W-MERGE (`exists_merge`)** — N2-RED merges at the centre of every
+   both-kind arc with three colours there (neither bend applies), and N2-TERM's `Terminal` clause needs every available MERGE performed. Ruling 295
+   bars `exists_merge` from wave 5 ("it would change if wave 5's skeleton came to cite `exists_merge` before wave 4's merge-and-gate starts"), and
+   `main` no longer declares it. Held for the coordinator; not started.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 38 — SAVED

@@ -3622,6 +3622,9 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.four_or_stuck_of_chainVertex
 #print axioms HadwigerNelson.Plane.ArcMap.chainVertex_neighbours_of_noFour
 #print axioms HadwigerNelson.Plane.ArcMap.stuckRun_eq_univ_of_noFour
+#print axioms HadwigerNelson.Plane.ArcMap.dot_eq_zero_of_antipodal_contact
+#print axioms HadwigerNelson.Plane.ArcMap.mergeAvailable_of_not_mem_pole
+#print axioms HadwigerNelson.Plane.ArcMap.lower_flank_horns_at_N
 
 #eval IO.println "=== PURCHASED ==="
 
