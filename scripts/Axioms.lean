@@ -3085,6 +3085,21 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.AeProperRegions.IsRegion.chain_step
 #print axioms HadwigerNelson.Plane.AeProperRegions.IsRegion.dist_lt_one
 
+/-! ## FS-131 wave 5 (job FS131-IX1) — the crossing lemma's children (`inter_nonempty_of_interleaved` itself is in FS131-KP's block) -/
+
+#print axioms HadwigerNelson.Plane.e_mul_e_neg
+#print axioms HadwigerNelson.Plane.arg_one_sub_e
+#print axioms HadwigerNelson.Plane.arg_one_sub_e_of_neg
+#print axioms HadwigerNelson.Plane.re_pos_of_mem_closedBall
+#print axioms HadwigerNelson.Plane.ringPt_sub_ringPt_mul_e_neg
+#print axioms HadwigerNelson.Plane.im_sub_eq_arg_sub
+#print axioms HadwigerNelson.Plane.exists_eq_of_interleaved_paths
+#print axioms HadwigerNelson.Plane.continuous_discRetract
+#print axioms HadwigerNelson.Plane.discRetract_mem
+#print axioms HadwigerNelson.Plane.discRetract_of_mem
+#print axioms HadwigerNelson.Plane.dist_discRetract_le
+#print axioms HadwigerNelson.Plane.isPreconnected_thickening
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

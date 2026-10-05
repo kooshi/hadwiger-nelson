@@ -1,3 +1,5 @@
+-- FS131-IX1 iteration scratch: the crossing lemma's children and proof (the leaf as `inter_nonempty_of_interleaved'`), spliced into
+-- `Plane/PlaneTopology.lean` by `tools/fs131_ix_splice.py`. Against the post-splice olean it no longer elaborates (duplicate names).
 import Proofs.HadwigerNelson.Plane.PlaneTopology
 import Mathlib.Topology.MetricSpace.Thickening
 
@@ -155,5 +157,81 @@ theorem exists_eq_of_interleaved_paths {u : ℂ} {s s' t t' : ℝ} (h₁ : s < s
   rw [arg_one_sub_e (by linarith) (by linarith), arg_one_sub_e (by linarith) (by linarith)] at e4
   simp only [sub_im] at e1 e2 e3 e4
   linarith [Real.pi_pos]
+
+noncomputable def discRetract (u z : ℂ) : ℂ := u + (((max 1 ‖z - u‖)⁻¹ : ℝ) : ℂ) * (z - u)
+
+theorem continuous_discRetract (u : ℂ) : Continuous (discRetract u) := by
+  have hm : ∀ z : ℂ, max 1 ‖z - u‖ ≠ 0 := fun z => (lt_of_lt_of_le one_pos (le_max_left _ _)).ne'
+  exact continuous_const.add ((Complex.continuous_ofReal.comp
+    ((continuous_const.max (continuous_norm.comp (continuous_id.sub continuous_const))).inv₀ hm)).mul
+    (continuous_id.sub continuous_const))
+
+theorem discRetract_mem (u z : ℂ) : discRetract u z ∈ closedBall u 1 := by
+  have hm : 0 < max 1 ‖z - u‖ := lt_of_lt_of_le one_pos (le_max_left _ _)
+  rw [mem_closedBall, dist_eq_norm, discRetract, add_sub_cancel_left, norm_mul, Complex.norm_real,
+    Real.norm_of_nonneg (inv_nonneg.mpr hm.le), inv_mul_le_iff₀ hm, mul_one]
+  exact le_max_right _ _
+
+theorem discRetract_of_mem {u z : ℂ} (hz : z ∈ closedBall u 1) : discRetract u z = z := by
+  rw [mem_closedBall, dist_eq_norm] at hz
+  rw [discRetract, max_eq_left hz]; simp
+
+theorem dist_discRetract_le {u k : ℂ} (hk : k ∈ closedBall u 1) (z : ℂ) :
+    dist (discRetract u z) k ≤ 2 * dist z k := by
+  by_cases h : ‖z - u‖ ≤ 1
+  · rw [discRetract_of_mem (by rwa [mem_closedBall, dist_eq_norm])]
+    linarith [dist_nonneg (x := z) (y := k)]
+  · push Not at h
+    set n := ‖z - u‖ with hn
+    have hn0 : 0 < n := by linarith
+    have hdz : dist (discRetract u z) z = n - 1 := by
+      have : discRetract u z - z = (((n⁻¹ - 1 : ℝ)) : ℂ) * (z - u) := by
+        rw [discRetract, max_eq_right h.le]; push_cast; ring
+      rw [dist_eq_norm, this, norm_mul, Complex.norm_real, ← hn, Real.norm_eq_abs,
+        abs_of_nonpos (by rw [sub_nonpos]; exact inv_le_one_of_one_le₀ h.le)]
+      field_simp
+      ring
+    have hku : ‖k - u‖ ≤ 1 := by rwa [mem_closedBall, dist_eq_norm] at hk
+    have htri : n ≤ dist z k + ‖k - u‖ := by
+      rw [hn, dist_eq_norm]
+      calc ‖z - u‖ = ‖(z - k) + (k - u)‖ := by ring_nf
+        _ ≤ ‖z - k‖ + ‖k - u‖ := norm_add_le _ _
+    calc dist (discRetract u z) k ≤ dist (discRetract u z) z + dist z k := dist_triangle _ _ _
+      _ ≤ 2 * dist z k := by rw [hdz]; linarith
+
+theorem isPreconnected_thickening {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] {K : Set E}
+    (hK : IsPreconnected K) {δ : ℝ} (hδ : 0 < δ) : IsPreconnected (thickening δ K) := by
+  rcases K.eq_empty_or_nonempty with rfl | ⟨x₀, hx₀⟩
+  · rw [thickening_empty]; exact isPreconnected_empty
+  refine isPreconnected_of_forall x₀ fun y hy => ?_
+  obtain ⟨k, hk, hyk⟩ := mem_thickening_iff.mp hy
+  refine ⟨K ∪ ball k δ, union_subset (self_subset_thickening hδ K) (ball_subset_thickening hk δ), Or.inl hx₀,
+    Or.inr (mem_ball.mpr hyk), ?_⟩
+  exact hK.union k hk (mem_ball_self hδ) (convex_ball k δ).isPreconnected
+
+theorem inter_nonempty_of_interleaved' {u : ℂ} {K K' : Set ℂ} (hK : IsClosed K) (hK' : IsClosed K') (hKc : IsPreconnected K)
+    (hK'c : IsPreconnected K') (hKd : K ⊆ closedBall u 1) (hK'd : K' ⊆ closedBall u 1) {s s' t t' : ℝ} (h₁ : s < s') (h₂ : s' < t)
+    (h₃ : t < t') (h₄ : t' < s + 2 * π) (hs : ringPt u s ∈ K) (ht : ringPt u t ∈ K) (hs' : ringPt u s' ∈ K')
+    (ht' : ringPt u t' ∈ K') : (K ∩ K').Nonempty := by
+  by_contra hne
+  have hdisj : Disjoint K K' := Set.disjoint_iff_inter_eq_empty.mpr (not_nonempty_iff_eq_empty.mp hne)
+  have hKcpt : IsCompact K := isCompact_of_isClosed_isBounded hK (isBounded_closedBall.subset hKd)
+  obtain ⟨δ, hδ, hδd⟩ := hdisj.exists_thickenings hKcpt hK'
+  have path_of : ∀ {L : Set ℂ}, IsPreconnected L → L ⊆ closedBall u 1 → ∀ {a b : ℝ}, ringPt u a ∈ L →
+      ringPt u b ∈ L → ∃ γ : Path (ringPt u a) (ringPt u b), ∀ x, γ x ∈ closedBall u 1 ∧ γ x ∈ thickening δ L := by
+    intro L hL hLd a b ha hb
+    have hδ2 : 0 < δ / 2 := by linarith
+    have hU : IsPathConnected (thickening (δ / 2) L) :=
+      (isOpen_thickening.isConnected_iff_isPathConnected).mp
+        ⟨⟨_, self_subset_thickening hδ2 L ha⟩, isPreconnected_thickening hL hδ2⟩
+    have hj := hU.joinedIn _ (self_subset_thickening hδ2 L ha) _ (self_subset_thickening hδ2 L hb)
+    refine ⟨(hj.somePath.map (continuous_discRetract u)).cast (discRetract_of_mem (hLd ha)).symm
+      (discRetract_of_mem (hLd hb)).symm, fun x => ⟨discRetract_mem u _, ?_⟩⟩
+    obtain ⟨k, hk, hk'⟩ := mem_thickening_iff.mp (hj.somePath_mem x)
+    exact mem_thickening_iff.mpr ⟨k, hk, lt_of_le_of_lt (dist_discRetract_le (hLd hk) _) (by linarith)⟩
+  obtain ⟨γ, hγ⟩ := path_of hKc hKd hs ht
+  obtain ⟨γ', hγ'⟩ := path_of hK'c hK'd hs' ht'
+  obtain ⟨x, y, hxy⟩ := exists_eq_of_interleaved_paths h₁ h₂ h₃ h₄ γ γ' (fun x => (hγ x).1) (fun y => (hγ' y).1)
+  exact Set.disjoint_left.mp hδd (hγ x).2 (hxy ▸ (hγ' y).2)
 
 end HadwigerNelson.Plane
