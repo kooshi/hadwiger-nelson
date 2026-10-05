@@ -33,23 +33,69 @@ variable {k : ℕ} {F : ArcMap k}
 
 /-- A tile other than `T` lies off `T`'s closure (it is open and disjoint from `T`). -/
 theorem IsTile.subset_compl_closure {T T' : Set ℂ} (hT : F.IsTile T) (hT' : F.IsTile T') (hne : T' ≠ T) : T' ⊆ (closure T)ᶜ := by
-  sorry
+  have hdisj : Disjoint T' T := by
+    rw [Set.disjoint_left]
+    intro w hw' hw
+    exact hne (hT'.eq_of_mem hT hw' hw)
+  exact (hdisj.closure_right hT'.isOpen).subset_compl_right
 
 /-- A tile inside the union of two sets with disjoint closures lies inside one of them (it is preconnected). -/
 theorem IsTile.subset_or_subset_of_separated {T A B : Set ℂ} (hT : F.IsTile T) (hsep : Disjoint (closure A) (closure B))
     (hcov : T ⊆ A ∪ B) : T ⊆ A ∨ T ⊆ B := by
-  sorry
+  by_contra h
+  push Not at h
+  obtain ⟨⟨a, haT, haA⟩, ⟨b, hbT, hbB⟩⟩ : (T ∩ Aᶜ).Nonempty ∧ (T ∩ Bᶜ).Nonempty :=
+    ⟨Set.not_subset.mp h.1 |>.imp fun x hx => ⟨hx.1, hx.2⟩, Set.not_subset.mp h.2 |>.imp fun x hx => ⟨hx.1, hx.2⟩⟩
+  have hbA : b ∈ closure A := subset_closure ((hcov hbT).resolve_right hbB)
+  have haB : a ∈ closure B := subset_closure ((hcov haT).resolve_left haA)
+  obtain ⟨w, -, hwA, hwB⟩ := isPreconnected_closed_iff.mp hT.isPreconnected _ _ isClosed_closure isClosed_closure
+    (fun x hx => (hcov hx).imp (fun h => subset_closure h) (fun h => subset_closure h)) ⟨b, hbT, hbA⟩ ⟨a, haT, haB⟩
+  exact Set.disjoint_left.mp hsep hwA hwB
 
 /-- Every nonempty open subset of the domain meets a tile (`dense_interiorPts`). -/
 theorem exists_tile_inter_of_isOpen {U : Set ℂ} (hU : IsOpen U) (hUd : U ⊆ F.dom) (hne : U.Nonempty) :
     ∃ T, F.IsTile T ∧ (T ∩ U).Nonempty := by
-  sorry
+  obtain ⟨z, hz⟩ := hne
+  obtain ⟨w, hwU, hw⟩ := mem_closure_iff.mp (F.dense_interiorPts (hUd hz)) U hU hz
+  exact ⟨connectedComponentIn F.interiorPts w, ⟨w, hw, rfl⟩, w, mem_connectedComponentIn hw, hwU⟩
+
+/-- **Tile closures are locally finite**: a closure point in the domain of the union of the closures of any family of tiles is a closure
+point of one of them (`finite_tiles_near`: near `z` only finitely many tiles, and a tile missing `B(z, r)` has its closure missing it). -/
+theorem exists_mem_closure_of_mem_closure_biUnion {S : Set (Set ℂ)} (hS : ∀ T ∈ S, F.IsTile T) {z : ℂ} (hz : z ∈ F.dom)
+    (hzS : z ∈ closure (⋃ T ∈ S, closure T)) : ∃ T ∈ S, z ∈ closure T := by
+  obtain ⟨r, hr, hfin⟩ := F.finite_tiles_near hz
+  by_contra hno
+  push Not at hno
+  have hfin' : {T | T ∈ S ∧ (T ∩ ball z r).Nonempty}.Finite := hfin.subset fun T hT => ⟨hS T hT.1, hT.2⟩
+  have hcl : IsClosed (⋃ T ∈ {T | T ∈ S ∧ (T ∩ ball z r).Nonempty}, closure T) :=
+    hfin'.isClosed_biUnion fun _ _ => isClosed_closure
+  have hzn : z ∉ ⋃ T ∈ {T | T ∈ S ∧ (T ∩ ball z r).Nonempty}, closure T := by
+    simp only [mem_iUnion₂]
+    rintro ⟨T, hT, hzT⟩
+    exact hno T hT.1 hzT
+  have hnhds : ball z r ∩ (⋃ T ∈ {T | T ∈ S ∧ (T ∩ ball z r).Nonempty}, closure T)ᶜ ∈ 𝓝 z :=
+    inter_mem (ball_mem_nhds z hr) (hcl.isOpen_compl.mem_nhds hzn)
+  obtain ⟨w, ⟨hwb, hwn⟩, hwS⟩ := mem_closure_iff_nhds.mp hzS _ hnhds
+  obtain ⟨T, hT, hwT⟩ := mem_iUnion₂.mp hwS
+  by_cases hTb : (T ∩ ball z r).Nonempty
+  · exact hwn (mem_iUnion₂.mpr ⟨T, ⟨hT, hTb⟩, hwT⟩)
+  · exact hTb ((closure_inter_open_nonempty_iff isOpen_ball).mp ⟨w, hwT, hwb⟩)
 
 /-- **A closure point of an open set is a closure point of a tile meeting it** (`finite_tiles_near`: near `z` finitely many tiles, whose
 closures' union is closed and holds the interior points of `U` near `z`). -/
 theorem exists_tile_mem_closure_of_mem_closure {U : Set ℂ} (hU : IsOpen U) {z : ℂ} (hz : z ∈ F.dom) (hzU : z ∈ closure U) :
     ∃ T, F.IsTile T ∧ (T ∩ U).Nonempty ∧ z ∈ closure T := by
-  sorry
+  set S := {T | F.IsTile T ∧ (T ∩ U).Nonempty} with hSdef
+  have hz' : z ∈ closure (⋃ T ∈ S, closure T) := by
+    refine closure_mono (biUnion_mono subset_rfl fun _ _ => subset_closure) ?_
+    rw [_root_.mem_closure_iff]
+    intro o ho hzo
+    obtain ⟨w, ⟨hwo, hwd⟩, hwU⟩ := _root_.mem_closure_iff.mp hzU _ (ho.inter F.isOpen_dom) ⟨hzo, hz⟩
+    obtain ⟨T, hT, v, hvT, ⟨hvo, -⟩, hvU⟩ := exists_tile_inter_of_isOpen ((ho.inter F.isOpen_dom).inter hU)
+      (fun x hx => hx.1.2) ⟨w, ⟨hwo, hwd⟩, hwU⟩
+    exact ⟨v, hvo, mem_iUnion₂.mpr ⟨T, ⟨hT, v, hvT, hvU⟩, hvT⟩⟩
+  obtain ⟨T, ⟨hT, hTU⟩, hzT⟩ := exists_mem_closure_of_mem_closure_biUnion (fun T hT => hT.1) hz hz'
+  exact ⟨T, hT, hTU, hzT⟩
 
 /-- **Inside an open preconnected set the tiles are chained by touching closures**: if every tile meeting `U` lies in `U`, a nonempty set
 `P` of tiles in `U`, closed under passing to a tile in `U` whose closure meets a member's, holds every tile in `U`. (The closures of the tiles
@@ -58,12 +104,45 @@ theorem mem_of_touch_closed {U : Set ℂ} (hU : IsOpen U) (hUc : IsPreconnected 
     (hin : ∀ T, F.IsTile T → (T ∩ U).Nonempty → T ⊆ U) (P : Set (Set ℂ)) (hP : ∀ T ∈ P, F.IsTile T ∧ T ⊆ U) (hne : P.Nonempty)
     (hcl : ∀ T ∈ P, ∀ T', F.IsTile T' → T' ⊆ U → (closure T ∩ closure T').Nonempty → T' ∈ P) :
     ∀ T, F.IsTile T → T ⊆ U → T ∈ P := by
-  sorry
+  intro T₀ hT₀ hT₀U
+  by_contra hT₀P
+  set X := ⋃ T ∈ P, closure T with hX
+  set Q := {T | F.IsTile T ∧ T ⊆ U ∧ T ∉ P} with hQ
+  set Y := ⋃ T ∈ Q, closure T with hY
+  -- a point of `U` in the closure of `X` (of `Y`) is in the closure of a tile of `P` (of `Q`)
+  have hXc : ∀ z ∈ U, z ∈ closure X → ∃ T ∈ P, z ∈ closure T := fun z hzU hz =>
+    exists_mem_closure_of_mem_closure_biUnion (fun T hT => (hP T hT).1) (hUd hzU) hz
+  have hYc : ∀ z ∈ U, z ∈ closure Y → ∃ T ∈ Q, z ∈ closure T := fun z hzU hz =>
+    exists_mem_closure_of_mem_closure_biUnion (fun T hT => hT.1) (hUd hzU) hz
+  -- every point of `U` is in the closure of a tile inside `U`
+  have hcov : U ⊆ closure X ∪ closure Y := by
+    intro z hzU
+    obtain ⟨T, hT, hzT⟩ := F.mem_closure_tile (hUd hzU)
+    have hTU : T ⊆ U := hin T hT (by
+      rw [inter_comm]; exact (closure_inter_open_nonempty_iff hU).mp ⟨z, hzT, hzU⟩ |>.mono (by
+        rintro x ⟨h1, h2⟩; exact ⟨h2, h1⟩))
+    by_cases hTP : T ∈ P
+    · exact Or.inl (subset_closure (mem_iUnion₂.mpr ⟨T, hTP, hzT⟩))
+    · exact Or.inr (subset_closure (mem_iUnion₂.mpr ⟨T, ⟨hT, hTU, hTP⟩, hzT⟩))
+  obtain ⟨T₁, hT₁⟩ := hne
+  obtain ⟨x₁, hx₁⟩ := (hP T₁ hT₁).1.nonempty
+  obtain ⟨x₀, hx₀⟩ := hT₀.nonempty
+  obtain ⟨z, hzU, hzX, hzY⟩ := isPreconnected_closed_iff.mp hUc _ _ isClosed_closure isClosed_closure hcov
+    ⟨x₁, (hP T₁ hT₁).2 hx₁, subset_closure (mem_iUnion₂.mpr ⟨T₁, hT₁, subset_closure hx₁⟩)⟩
+    ⟨x₀, hT₀U hx₀, subset_closure (mem_iUnion₂.mpr ⟨T₀, ⟨hT₀, hT₀U, hT₀P⟩, subset_closure hx₀⟩)⟩
+  obtain ⟨T, hTP, hzT⟩ := hXc z hzU hzX
+  obtain ⟨T', ⟨hT', hT'U, hT'P⟩, hzT'⟩ := hYc z hzU hzY
+  exact hT'P (hcl T hTP T' hT' hT'U ⟨z, hzT, hzT'⟩)
 
 /-- **Finitely many tiles have closures meeting a compact subset of the domain** (`finite_tiles_near` and a finite subcover). -/
 theorem finite_tiles_closure_inter {K : Set ℂ} (hK : IsCompact K) (hKd : K ⊆ F.dom) :
     {T | F.IsTile T ∧ (closure T ∩ K).Nonempty}.Finite := by
-  sorry
+  choose! r hr hfin using fun z (hz : z ∈ K) => F.finite_tiles_near (hKd hz)
+  obtain ⟨t, htK, hcov⟩ := hK.elim_nhds_subcover (fun z => ball z (r z)) fun z hz => ball_mem_nhds z (hr z hz)
+  refine (t.finite_toSet.biUnion fun z hz => hfin z (htK z hz)).subset ?_
+  rintro T ⟨hT, w, hwT, hwK⟩
+  obtain ⟨z, hz, hwz⟩ := mem_iUnion₂.mp (hcov hwK)
+  exact mem_iUnion₂.mpr ⟨z, hz, hT, (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨w, hwT, hwz⟩⟩
 
 /-! ## B — the outer domain and the outermost tile (FS131-E4 E4-OUTERMOST) -/
 
