@@ -2674,3 +2674,35 @@ reason by the close.*
      measured from its first child, the three docstrings of item 324 fixed) — unless the lane that frees is wave 5's and its own leaves are then the longer path,
      ruled at that hand-back; then IMM2, `bend_away`'s implementer, `disc1_local`. Alternative weighed: refilling now with IP5, since the planar chain is the
      longest path. Why not: Kooshi set three for usage, and the four running jobs were allowed to finish only as a wind-down. Confidence: high.
+326. **WOODALL'S CHAIN LANDED: FS131-WL1 done** (harness ≈ 484k by the task notice; record `fs131-ww`'s `plans/FS131-IW-implementation.md`, Stages 18–22 and
+     "Drafts for the front page (FS131-WL1)"; report `data/fs131/reports/FS131-WL1.md`; commits `22eaa004`, `59e2da98`, `cde9ceb9`, `a5ca88d0`, `08e64ae5` (the
+     gated commit), `4ae3bdbb`, `9b616acb`, `2b91cf2d` (= `main`, a plain fast-forward from `6eee2d07`)). **Held in the kernel, on the standard three, statements
+     unchanged**: `ArcMap.aeMap6` (FS106-AE-MAP6: no map of the plane bounded by a locally finite family of segments and circular arcs, coloured with at most
+     five colours, is almost-everywhere proper), `ArcMap.aeMap6_of_condition5`, `woodall_thm6` (FS106-WO, Woodall's Theorem 6 for arc maps), with
+     `woodall_step4`, `townsend_lemma` (FS106-TW), `ArcMap.false_of_four_le_sectors` (E1-NO45), `ArcMap.exists_woodallMerged` (E3-BALL), `step5_lt`, `step6` —
+     257 Woodall records, every one on exactly the standard three; no outside theorem, no hypothesis. **QA2-1's model on the whole plane**:
+     `sevenBrickMap_woodallModel` (valid, a map of the plane, Condition 5, `WoodallNormal univ`, `WoodallMerged univ`, three colours at `0` — every hypothesis
+     of the four `aeMap6` forms but `k ≤ 5`, at `k = 7`) and `sevenBrickMap_thm6Model`; `sevenBrickMap_tJunction` (the brick map's points of three or more
+     colours are exactly its T-junctions); four adversaries (a picture, so a normal form, exists only at a point of the map's domain). **The gate on
+     `08e64ae5`** (Keryx, from the saved logs): the build log `.claude/worktrees/fs131-ww/build/gate/build/20261005T035201Z-1162343.log` ends "Build completed
+     successfully (5748 jobs)", 0 warnings; the gate's up-to-date check (`…/build/20261005T041255Z-1296636.log`) "All targets up-to-date (5748 jobs)"; the
+     axioms digest (`scripts/gate_report.py axioms` on `…/axioms/20261005T041304Z-1297413.log` against wave 4's) — 3,654 records, 3,633 clean, 12 axiom-free,
+     4 imported, 5 purchases; 257 changes, every one an added CLEAN record; the vacuity digest (against wave 4's `…/fs131-w4/build/gate/vacuity/20261005T031346Z-903019.log`)
+     — `declarations=10851 refutations-skipped=111 sites=755`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=718 unknown=2`, the baseline header matching
+     9 of 9, 59 rows added, none lost; the self-tests' logs end OK (axioms 23 controls, vacuity 62). The gated commit is an ancestor of `main`, and no `.lean`
+     file differs between it and `2b91cf2d`; `sorry` in `Proofs/` by grep: 0; `woodall_thm6`'s statement read against its docstring. **Generalization**:
+     `ArcMap.coneAt_region_of_sectors` gives `SectorsAt`'s cone clause for any arc map whose open sectors lie in their colour classes and cover the interior
+     points near the centre. **Item 318's correction (1) is done on `fs131-ww`** (`framePt → fromFrame` in `Woodall/NoFourFive`); still owed on `fs131-w5`,
+     `fs131-w5p`, `fs131-w5c`, `fs131-w4mm`. **Corrections owed**: `ARCHITECTURE.md`'s rows for `Woodall/Collar`, `NoFourFive`, `Merge`, `Steps` still say
+     "skeleton" (left so the landed gate inputs equal the gated commit's; for the next job that touches them, or the filing). **Tool defects**:
+     `tools/fs131_i4_mergestmts.py` assumes one merge base (21 spurious failures here; WL1's `tools/fs131_wl_mergestmts.py` uses git's virtual base, leaving 3
+     binder-name copies); the vacuity scan reads a conclusion through its definition, so `F.Valid` theorems count as refutations and `WoodallMerged K` /
+     `WoodallNormal K` inhabitants are not collected as witnesses (nothing lost today; noted in `scripts/Vacuity.lean`). **Slip, its own**: merge commit
+     `08e64ae5` carries git's default message without the attribution lines (not amended, rightly: no rewriting of pushed history). **Held for the filing**
+     (draft 6): `LEDGER.md` row 132's arc-map clause to [kernel], and the Frontier and Proof Atlas grades for FS106-WO, FS106-TW, FS106-AE-MAP6, E1-NO45 with
+     it. Credit: WL1, for the whole-plane model and for watching the new vacuity controls fail.
+327. **Woodall's landing counts filed** (Keryx, drafts 1, 2, 4, 5 verbatim): `CLAUDE.md` § Trust ledger (3633 clean, 3,654 records, FS131-WL1) and § The gate's
+     two count lines; `LEAN.md` § The gate ("sixty-two controls"); `GATE_CHANGES` `(("3376", "5"), ("3633", "5"))`. Draft 3 (the baseline header) was already
+     on `main` from the landing. Both digests re-run after the edit: "match" against `CLAUDE.md` (axioms: clean, purchases, imported; vacuity: 9 of 9).
+     `tools/claude_md_fact_audit.py --base 563e8e98`: 13 losses, every one a superseded count or wave 4's attribution (the old vacuity lines, 3376, 3397,
+     10525, 673, 705, FS131-G4) — expected, as at item 319; `--dupes`: the standing repeats only. Kooshi push-notified.
