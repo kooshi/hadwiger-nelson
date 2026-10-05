@@ -1811,3 +1811,36 @@ All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5l/
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 38 — SAVED
+
+## Stage 39 — SAVED (FS131-I5n): the readback
+
+*FS131-I5n, wave 5's fifth `Terminal` implementer (Opus), continuing FS131-I5l's work on branch `fs131-w5c` in
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c` from `6d316ef2`. Brief: `data/fs131/briefs/FS131-I5n-terminal.md` (main tree). My set (ruling
+350): first ruling 348 (a)'s swap of `exists_merge`'s statement in `Contact` for `fs131-w4mm`'s ruling-269 text, then `cv_hd_main_inType`,
+`y3_end_needs`, `exists_red`, `exists_terminal`.*
+
+### 39.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script, `tools/fs131_i5h_quotes.py` (I5h's checker, in my touches): **12 quotations, 0 failures** — `CLAUDE.md` § Counter-priors; this
+record's Stage 38 (three handover items: `cv_hd_main_inType`, `y3_end_needs`, the limit constructions); `fs131-w4mm`'s `Contact.lean` (`exists_merge`'s
+first line); the inventory's items 347, 268, 269, 348, 350, 274; the plan's § 10.2 ("It may"). `--self-test` (a one-letter plant in the first quotation):
+**fired** (1 failure reported), the unplanted run passed (exit 0).
+
+Read in full: I5l's Stages 35–38; inventory items 268, 269, 274, 347–350; FS114-CVB §§ 1.4–1.6 (`plans/FS114-CVB-verification.md` l. 100–175: CV-EXISTS's
+items 5–7, CV-L0, CV-HD both branches and "Hence"); YB3 § 3.1 (`plans/FS112-YB3-verification.md` l. 154–229: Steps 1–4, the shadow cases (i)–(ii),
+BOWTIE, the corrected statement); the plan's rows for `exists_terminal` and `exists_red` (§ 3.2, l. 122–123) and § 9.1's row (l. 391), § 2.2's
+"valid modification" row (the adversary). No mismatch found.
+
+**The stale MERGE, confirmed by script before the swap** (`tools/fs131_i5n_merge_swap.py --check`, new, against the committed ref `origin/fs131-w4mm` =
+`0cdac72c`, never that tree's working copy, which FS131-IMM3 edits): exit 1, the two blocks differ at exactly the clause of item 268 (`(∀ x ∉ sphere v ρ,
+F'.coloursAt x ⊆ F.coloursAt x)` here, `F'.coloursAt v ⊆ F.coloursAt v` there) and the docstring phrase ruling 269 rewrites ("no point off the disc's rim
+gains a colour" here, "`v` gains no colour" there). Nothing in `fs131-w5c` cites `exists_merge` (`git grep -n "exists_merge\b"`: its declaration only).
+
+### 39.2 The as-given build (`6d316ef2`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1755 modules already up
+to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T070437Z-2195522.log`; driver log
+`data/fs131/i5n/build-stage39-asgiven.log`). `Terminal`'s warnings: 4 (`exists_red` l. 650, `exists_terminal` l. 662, `y3_end_needs` l. 2169,
+`cv_hd_main_inType` l. 2182) — I5l's count.
+
+## Stage 39 — SAVED
