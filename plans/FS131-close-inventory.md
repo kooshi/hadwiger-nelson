@@ -2843,3 +2843,32 @@ reason by the close.*
      Why: that half has slack and finishes before the `Terminal` half whenever it starts; MERGE is FS-131 work with no other route to its landing, and runs
      independent of wave 5. Confidence: medium-high (it changes if the `Terminal` half's re-price at its next hand-back drops below two sessions: then I5j's
      continuation takes the next slot ahead of `bend_away`'s implementer).
+338. **FS131-RL1 done: the boundary walk planned** (planner; stage 4 SAVED, harness ≈ 395k by the task notice; record `fs131-w5p`'s
+     `plans/FS131-ringlist-kernel-plan.md`; report `data/fs131/reports/FS131-RL1.md`; commits `d6c5f3e2`, `ae3d43dd`, `919afaba`, `f86e174e`, pushed).
+     **Skeleton**: `filledGraph_ringList` (statement unchanged) proved in two lines over **WALK** `exists_boundaryWalk` (every outer tile of a valid plane map
+     has a boundary walk) and **SEP** `IsBoundaryWalk.sep` (a tile the walk lists twice separates the entries between its positions from those outside), WALK
+     reading **ADJ** `filledGraph_adj_iff`; the new vocabulary `IsEdgeOf` / `IsBoundaryWalk` (this job's own). **[kernel], standard three**:
+     `isPreconnected_diff_ball`, `inter_nonempty_of_interleaved_exterior` (the crossing lemma for continua outside a disc, by inversion), `IsBoundaryWalk.cons`.
+     **Route** (plan § 2.2): SEP by the crossing lemma outside a small disc at the middle of one of `y`'s edges with `x` — no Jordan-type theorem, no `orient`;
+     WALK as two fixed-point-free involutions on ports (edges, angles), `φ = πA ∘ πE` conjugated to `φ⁻¹` by the edge involution, so orbits pair off and one
+     of each pair is chosen — no orientation lemma. **Traps found** (plan § 2.1, corrections to sketches only): listing every tile around every boundary vertex
+     is not a ring (sectors `x|y|m|y|c` at a vertex: `m` and `c` both touch it, so they are adjacent) — keep appearances along shared edges and list a
+     vertex-only tile once (Thomassen's rule, as `IsRing`'s docstring states); joining a pocket's walk by swapping successors at a pinch splits an edge — insert
+     it between two consecutive tiles at the pinch vertex. **Plan** (§ 4.2): ADJ 0.2; SEP 1.5 over six children; WALK 4–6 over C1–C10 (C5, the boundary
+     structure, the longest at 1.5–2); about 7–8 implementer sessions before re-pricing. **Receipt** (Keryx): the four commits exist and `origin/fs131-w5p` is
+     `f86e174e`; the skeleton's build log (`build/gate/build/20261005T054411Z-1735164.log`) ends "Build completed successfully (5405 jobs)", 0 warnings other than
+     `sorry`; `MapGraph`'s `sorry` declarations by grep are exactly ADJ, SEP, WALK; `MapTopology` 0; seven `MapGraph` statements at `b6f9e761` and `HEAD` compared
+     by script, all identical (`filledGraph_ringList`, `filledGraph_rings`, `filledGraph_planarLike`, `cvb_thom_reduced`, `cvb_thom`, F-SEP, F-ONE);
+     `data/fs131/rl/axioms-rl1.txt` parsed by script: 8 records, the three proved standard, the five over the leaves on `sorryAx`; `Thomassen.lean`'s diff is
+     `PlanarLike`'s docstring note only (ruling 333 (c), done). **No statement defect**; the leaf believed true (Thomassen's ring). **Held**: (a) two lanes — SEP
+     with ADJ (≈ 1.5–2) and WALK (≈ 5–6), disjoint hunks in `MapGraph`, conflicting only in the append-only FS131-KP block; (b) the implementer may change
+     `IsBoundaryWalk`'s fields or `IsEdgeOf`'s clauses (this job's vocabulary) if the construction cannot meet them and SEP does not read them, reporting it.
+     Credit: RL1, for the crossing lemma outside a disc and the two traps.
+339. **Rulings on RL1's held items, and its slot.** (a) **RL1's slot → the WALK lane, FS131-RW1, on `fs131-w5p`**: ADJ first (the warm-up, measured, since
+     WALK's C10 reads it), then C1–C4, re-priced, then C5–C10. Alternative weighed: the SEP lane first. Why: WALK is now the longest path to wave 5's landing
+     (5–6 sessions planned against SEP's 1.5–2), so it starts first; plan prices have run 5–30× high on this branch (items 312, 324), so its re-price after C1–C4
+     decides more. Confidence: high. (b) **The SEP lane, FS131-RS1**, on a new branch `fs131-w5s` cut from `fs131-w5p` (at the commit RW1 has then, so ADJ comes
+     along), joins the queue for the next freed slot, beside I5j's continuation — whichever lane's re-price then shows less slack goes first. (c)
+     **`IsBoundaryWalk` / `IsEdgeOf` changes**: allowed to the WALK lane as RL1's handoff says (only where the construction cannot meet a field or clause and SEP
+     does not read it), each reported in the record; once an SEP lane runs in parallel, any such change is messaged to me first, since SEP reads those fields.
+     Why: the vocabulary is this job's own, and SEP's proof is the only reader. Confidence: high. In flight after RW1's launch: 1 (I5k) + 1 (IMM2) + 1 (RW1) = 3.
