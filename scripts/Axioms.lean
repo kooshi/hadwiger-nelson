@@ -3521,6 +3521,23 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.add_e_ne_sub_e
 #print axioms HadwigerNelson.Plane.ArcMap.stuck_structure_flanks
 
+/-! ## FS-131 wave 5 (job FS131-I5g) — wave 5's seventh implementer: the base's circle-abstract leaves (`reduce`, `select`), `l3_base`, the hexagonal ring -/
+
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_leftVal_add_int_mul
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_rightVal_add_int_mul
+#print axioms HadwigerNelson.Plane.CircleColouring.Removable.add_int_mul
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_nearOnly
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_exists_max
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_left_uncov
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_right_uncov
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_zmod3
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_partner_noChange
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_leftVal_ne
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_vals_of_const
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_locConst
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_proper_off
+#print axioms HadwigerNelson.Plane.CircleColouring.reduce_int_eq_zero
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -96,6 +96,243 @@ after (BV-C6's `n = 6` case; Prop. 17's configuration). -/
 def IsHex (ψ : ℝ) (b : ZMod 3 → ZMod 3) : Prop :=
   Function.Injective b ∧ ∀ j : ℕ, j < 6 → C.LeftVal (ψ + j * (π / 3)) (b j) ∧ C.RightVal (ψ + j * (π / 3)) (b (j + 1))
 
+/-! ### The reduction's machinery (FS131-I5g): a locally finite, nested-or-disjoint family of short spans, its maximal members, and a
+colouring that is the outer colour on each maximal span and the original colour elsewhere -/
+
+section ReduceAux
+
+variable {C}
+
+/-- Left values are invariant under the period. -/
+theorem reduce_leftVal_add_int_mul {x : ℝ} (n : ℤ) {v : ZMod 3} : C.LeftVal (x + n * (2 * π)) v ↔ C.LeftVal x v := by
+  constructor
+  · intro h
+    filter_upwards [eventually_lt_add (x := x) (a := n * (2 * π)) h] with y hy
+    rwa [C.periodic.int_mul n y] at hy
+  · intro h
+    have h' : ∀ᶠ y in 𝓝[<] (x + n * (2 * π) + -(n * (2 * π))), C.c y = v := by rw [add_neg_cancel_right]; exact h
+    filter_upwards [eventually_lt_add (x := x + n * (2 * π)) (a := -(n * (2 * π))) h'] with y hy
+    rwa [show y + -(n * (2 * π)) = y - n * (2 * π) by ring, C.periodic.sub_int_mul_eq n] at hy
+
+/-- Right values are invariant under the period. -/
+theorem reduce_rightVal_add_int_mul {x : ℝ} (n : ℤ) {v : ZMod 3} : C.RightVal (x + n * (2 * π)) v ↔ C.RightVal x v := by
+  constructor
+  · intro h
+    filter_upwards [eventually_gt_add (x := x) (a := n * (2 * π)) h] with y hy
+    rwa [C.periodic.int_mul n y] at hy
+  · intro h
+    have h' : ∀ᶠ y in 𝓝[>] (x + n * (2 * π) + -(n * (2 * π))), C.c y = v := by rw [add_neg_cancel_right]; exact h
+    filter_upwards [eventually_gt_add (x := x + n * (2 * π)) (a := -(n * (2 * π))) h'] with y hy
+    rwa [show y + -(n * (2 * π)) = y - n * (2 * π) by ring, C.periodic.sub_int_mul_eq n] at hy
+
+/-- A removable arc shifted by a whole number of periods is removable. -/
+theorem Removable.add_int_mul {s t : ℝ} (h : C.Removable s t) (n : ℤ) :
+    C.Removable (s + n * (2 * π)) (t + n * (2 * π)) := by
+  obtain ⟨hst, hts, hs, ht, a, c, hac, h1, h2, h3, h4, hpart⟩ := h
+  refine ⟨by linarith, by linarith, (C.mem_S_add_int n s).mpr hs, (C.mem_S_add_int n t).mpr ht, a, c, hac,
+    (reduce_leftVal_add_int_mul n).mpr h1, (reduce_rightVal_add_int_mul n).mpr h2, (reduce_leftVal_add_int_mul n).mpr h3,
+    (reduce_rightVal_add_int_mul n).mpr h4, ?_⟩
+  intro x hx y hy hyS
+  have hx' : x - n * (2 * π) ∈ Ioo s t := ⟨by linarith [hx.1], by linarith [hx.2]⟩
+  have hyS' : y - n * (2 * π) ∉ C.S := by
+    rw [← C.mem_S_add_int n]; simpa using hyS
+  have := hpart _ hx' (y - n * (2 * π)) (by rcases hy with rfl | rfl <;> [left; right] <;> ring) hyS'
+  rwa [C.periodic.sub_int_mul_eq n] at this
+
+/-- Near `x`, only members of a locally finite family of short closed intervals that contain `x` cover. -/
+theorem reduce_nearOnly {𝓚 : Set (ℝ × ℝ)} (hlen : ∀ p ∈ 𝓚, p.1 < p.2 ∧ p.2 ≤ p.1 + 2)
+    (hlf : ∀ a b : ℝ, {p ∈ 𝓚 | p.1 ∈ Icc a b}.Finite) (x : ℝ) :
+    ∀ᶠ y in 𝓝 x, ∀ p ∈ 𝓚, y ∈ Icc p.1 p.2 → x ∈ Icc p.1 p.2 := by
+  set A := {p ∈ 𝓚 | p.1 ∈ Icc (x - 3) (x + 1)}
+  have hA : A.Finite := hlf _ _
+  have h1 : ∀ᶠ y in 𝓝 x, ∀ p ∈ A, x ∉ Icc p.1 p.2 → y ∉ Icc p.1 p.2 := by
+    rw [Filter.eventually_all_finite hA]
+    intro p _
+    by_cases hx : x ∈ Icc p.1 p.2
+    · exact Filter.Eventually.of_forall fun y h => absurd hx h
+    · filter_upwards [isClosed_Icc.isOpen_compl.mem_nhds hx] with y hy _ using hy
+  have h2 : Ioo (x - 1) (x + 1) ∈ 𝓝 x := Ioo_mem_nhds (by linarith) (by linarith)
+  filter_upwards [h1, h2] with y hy hy2 p hp hyp
+  by_contra hxp
+  have hpA : p ∈ A := ⟨hp, by constructor <;> linarith [hyp.1, hyp.2, (hlen p hp).2, hy2.1, hy2.2]⟩
+  exact hy p hpA hxp hyp
+
+/-- A covered point lies in a maximal member: one that holds every member meeting it. -/
+theorem reduce_exists_max {𝓚 : Set (ℝ × ℝ)} (hlen : ∀ p ∈ 𝓚, p.1 < p.2 ∧ p.2 ≤ p.1 + 2)
+    (hnest : ∀ p ∈ 𝓚, ∀ p' ∈ 𝓚, Disjoint (Icc p.1 p.2) (Icc p'.1 p'.2) ∨ Icc p.1 p.2 ⊆ Icc p'.1 p'.2 ∨
+      Icc p'.1 p'.2 ⊆ Icc p.1 p.2)
+    (hlf : ∀ a b : ℝ, {p ∈ 𝓚 | p.1 ∈ Icc a b}.Finite) {θ : ℝ} (h : ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2) :
+    ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2 ∧ ∀ p' ∈ 𝓚, (Icc p'.1 p'.2 ∩ Icc p.1 p.2).Nonempty → Icc p'.1 p'.2 ⊆ Icc p.1 p.2 := by
+  set A := {p ∈ 𝓚 | θ ∈ Icc p.1 p.2}
+  have hA : A.Finite := (hlf (θ - 2) θ).subset fun p ⟨hp, hθ⟩ =>
+    ⟨hp, by constructor <;> linarith [hθ.1, hθ.2, (hlen p hp).2]⟩
+  obtain ⟨p₀, hp₀⟩ := h
+  obtain ⟨p, hpA, hmax⟩ := hA.toFinset.exists_max_image (fun p => p.2 - p.1) ⟨p₀, hA.mem_toFinset.mpr hp₀⟩
+  rw [hA.mem_toFinset] at hpA
+  refine ⟨p, hpA.1, hpA.2, fun p' hp' hne => ?_⟩
+  rcases hnest p' hp' p hpA.1 with hd | hs | hs
+  · exact absurd hne (Set.not_nonempty_iff_eq_empty.mpr (Set.disjoint_iff_inter_eq_empty.mp hd))
+  · exact hs
+  · have hp'A : p' ∈ A := ⟨hp', hs hpA.2⟩
+    have hl := hmax p' (hA.mem_toFinset.mpr hp'A)
+    rw [Icc_subset_Icc_iff (hlen p hpA.1).1.le] at hs
+    rw [Icc_subset_Icc_iff (hlen p' hp').1.le]
+    constructor <;> linarith [hs.1, hs.2]
+
+
+/-- Left of a maximal member's left end, no member covers. -/
+theorem reduce_left_uncov {𝓚 : Set (ℝ × ℝ)} (hlen : ∀ p ∈ 𝓚, p.1 < p.2 ∧ p.2 ≤ p.1 + 2)
+    (hlf : ∀ a b : ℝ, {p ∈ 𝓚 | p.1 ∈ Icc a b}.Finite) {p : ℝ × ℝ} (hp : p ∈ 𝓚)
+    (hmax : ∀ p' ∈ 𝓚, (Icc p'.1 p'.2 ∩ Icc p.1 p.2).Nonempty → Icc p'.1 p'.2 ⊆ Icc p.1 p.2) :
+    ∀ᶠ y in 𝓝[<] p.1, ∀ p' ∈ 𝓚, y ∉ Icc p'.1 p'.2 := by
+  filter_upwards [nhdsWithin_le_nhds (reduce_nearOnly hlen hlf p.1), self_mem_nhdsWithin] with y hy hyl p' hp' hyp'
+  have hsub := hmax p' hp' ⟨p.1, hy p' hp' hyp', le_rfl, (hlen p hp).1.le⟩
+  exact absurd (mem_Iio.mp hyl) (not_lt.mpr (hsub hyp').1)
+
+/-- Right of a maximal member's right end, no member covers. -/
+theorem reduce_right_uncov {𝓚 : Set (ℝ × ℝ)} (hlen : ∀ p ∈ 𝓚, p.1 < p.2 ∧ p.2 ≤ p.1 + 2)
+    (hlf : ∀ a b : ℝ, {p ∈ 𝓚 | p.1 ∈ Icc a b}.Finite) {p : ℝ × ℝ} (hp : p ∈ 𝓚)
+    (hmax : ∀ p' ∈ 𝓚, (Icc p'.1 p'.2 ∩ Icc p.1 p.2).Nonempty → Icc p'.1 p'.2 ⊆ Icc p.1 p.2) :
+    ∀ᶠ y in 𝓝[>] p.2, ∀ p' ∈ 𝓚, y ∉ Icc p'.1 p'.2 := by
+  filter_upwards [nhdsWithin_le_nhds (reduce_nearOnly hlen hlf p.2), self_mem_nhdsWithin] with y hy hyl p' hp' hyp'
+  have hsub := hmax p' hp' ⟨p.2, hy p' hp' hyp', (hlen p hp).1.le, le_rfl⟩
+  exact absurd (mem_Ioi.mp hyl) (not_lt.mpr (hsub hyp').2)
+
+/-- Three colours: two values avoiding two distinct colours agree. -/
+theorem reduce_zmod3 {a c v w : ZMod 3} (hac : a ≠ c) (hv : v ≠ a ∧ v ≠ c) (hw : w ≠ a ∧ w ≠ c) : v = w := by
+  revert a c v w; decide
+
+/-- **A partner of an inner point is no genuine change point** (FS131-I5f's hand check of CD § 2.4 step 5, from the partner clause
+alone): if every point `y = x ± 60°` off `S` with `x ∈ (s, t)` avoids `a` and `c`, then at any `x` of `(s, t) ± 60°` the one-sided values
+agree. -/
+theorem reduce_partner_noChange {s t : ℝ} {a c : ZMod 3} (hac : a ≠ c)
+    (hpart : ∀ x ∈ Ioo s t, ∀ y, (y = x + π / 3 ∨ y = x - π / 3) → y ∉ C.S → C.c y ≠ a ∧ C.c y ≠ c)
+    {δ : ℝ} (hδ : δ = π / 3 ∨ δ = -(π / 3)) {x : ℝ} (hx : x ∈ Ioo (s + δ) (t + δ)) {v w : ZMod 3}
+    (hv : C.LeftVal x v) (hw : C.RightVal x w) : v = w := by
+  have hU : ∀ᶠ y in 𝓝 x, y ∈ Ioo (s + δ) (t + δ) := isOpen_Ioo.mem_nhds hx
+  have key : ∀ z ∈ Ioo (s + δ) (t + δ), z ∉ C.S → C.c z ≠ a ∧ C.c z ≠ c := fun z hz hzS =>
+    hpart (z - δ) ⟨by linarith [hz.1], by linarith [hz.2]⟩ z (by rcases hδ with rfl | rfl <;> [left; right] <;> ring) hzS
+  obtain ⟨z₁, hz₁v, hz₁S, hz₁U⟩ := (hv.and ((C.eventually_notMem_S_lt x).and (nhdsWithin_le_nhds hU))).exists
+  obtain ⟨z₂, hz₂w, hz₂S, hz₂U⟩ := (hw.and ((C.eventually_notMem_S_gt x).and (nhdsWithin_le_nhds hU))).exists
+  have h1 := key z₁ hz₁U hz₁S
+  have h2 := key z₂ hz₂U hz₂S
+  rw [hz₁v] at h1; rw [hz₂w] at h2
+  exact reduce_zmod3 hac h1 h2
+
+/-- A circle colouring's values just left of `x` and of `x + 60°` differ (properness). -/
+theorem reduce_leftVal_ne (D : CircleColouring) {x : ℝ} {v w : ZMod 3} (hv : D.LeftVal x v) (hw : D.LeftVal (x + π / 3) w) :
+    v ≠ w := by
+  have hw' : ∀ᶠ z in 𝓝[<] x, D.c (z + π / 3) = w := eventually_lt_add hw
+  have hS' : ∀ᶠ z in 𝓝[<] x, z + π / 3 ∉ D.S := eventually_lt_add (D.eventually_notMem_S_lt (x + π / 3))
+  obtain ⟨z, h1, h2, h3, h4⟩ := (hv.and (hw'.and ((D.eventually_notMem_S_lt x).and hS'))).exists
+  intro hvw
+  exact D.proper z h3 h4 (by rw [h1, h2, hvw])
+
+/-- At a point where a circle colouring is locally constant, its one-sided values are its value there. -/
+theorem reduce_vals_of_const (D : CircleColouring) {x : ℝ} (h : ∀ᶠ y in 𝓝 x, D.c y = D.c x) {v w : ZMod 3}
+    (hv : D.LeftVal x v) (hw : D.RightVal x w) : v = w := by
+  obtain ⟨z₁, h1, h1'⟩ := (hv.and (nhdsWithin_le_nhds h)).exists
+  obtain ⟨z₂, h2, h2'⟩ := (hw.and (nhdsWithin_le_nhds h)).exists
+  rw [← h1, ← h2, h1', h2']
+
+section Generic
+
+variable {𝓚 : Set (ℝ × ℝ)} {c' : ℝ → ZMod 3}
+
+/-- **Local constancy of the reduced colouring** off the reduced change set. -/
+theorem reduce_locConst (hrem : ∀ p ∈ 𝓚, C.Removable p.1 p.2) (hlen : ∀ p ∈ 𝓚, p.1 < p.2 ∧ p.2 ≤ p.1 + 2)
+    (hnest : ∀ p ∈ 𝓚, ∀ p' ∈ 𝓚, Disjoint (Icc p.1 p.2) (Icc p'.1 p'.2) ∨ Icc p.1 p.2 ⊆ Icc p'.1 p'.2 ∨
+      Icc p'.1 p'.2 ⊆ Icc p.1 p.2)
+    (hlf : ∀ a b : ℝ, {p ∈ 𝓚 | p.1 ∈ Icc a b}.Finite)
+    (hc1 : ∀ θ, (∀ p ∈ 𝓚, θ ∉ Icc p.1 p.2) → c' θ = C.c θ)
+    (hc2 : ∀ p ∈ 𝓚, (∀ p' ∈ 𝓚, (Icc p'.1 p'.2 ∩ Icc p.1 p.2).Nonempty → Icc p'.1 p'.2 ⊆ Icc p.1 p.2) →
+      ∀ θ ∈ Icc p.1 p.2, C.LeftVal p.1 (c' θ))
+    {θ : ℝ} (hθ : θ ∉ C.S ∨ ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2) : ∀ᶠ y in 𝓝 θ, c' y = c' θ := by
+  by_cases hcov : ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2
+  · obtain ⟨p, hp, hθp, hmax⟩ := reduce_exists_max hlen hnest hlf hcov
+    obtain ⟨-, -, -, -, a, c, -, h1a, -, -, h2a, -⟩ := hrem p hp
+    have hval : ∀ y ∈ Icc p.1 p.2, c' y = a := fun y hy => LeftVal.unique (hc2 p hp hmax y hy) h1a
+    have hlt := (hlen p hp).1
+    suffices h : ∀ᶠ y in 𝓝 θ, c' y = a by
+      filter_upwards [h] with y hy using hy.trans (hval θ hθp).symm
+    rcases eq_or_lt_of_le hθp.1 with h1 | h1
+    · -- the left end
+      rw [← h1, ← nhdsLT_sup_nhdsGE, Filter.eventually_sup]
+      refine ⟨?_, ?_⟩
+      · filter_upwards [reduce_left_uncov hlen hlf hp hmax, h1a] with y hy hya
+        rw [hc1 y hy, hya]
+      · filter_upwards [Icc_mem_nhdsGE hlt] with y hy using hval y hy
+    rcases eq_or_lt_of_le hθp.2 with h2 | h2
+    · -- the right end
+      rw [h2, ← nhdsLE_sup_nhdsGT, Filter.eventually_sup]
+      refine ⟨?_, ?_⟩
+      · filter_upwards [Icc_mem_nhdsLE hlt] with y hy using hval y hy
+      · filter_upwards [reduce_right_uncov hlen hlf hp hmax, h2a] with y hy hya
+        rw [hc1 y hy, hya]
+    · filter_upwards [Icc_mem_nhds h1 h2] with y hy using hval y hy
+  · push Not at hcov
+    have hθS : θ ∉ C.S := hθ.resolve_right (by push Not; exact hcov)
+    filter_upwards [reduce_nearOnly hlen hlf θ, C.locallyConstant θ hθS] with y hy hyc
+    rw [hc1 θ hcov, hc1 y fun p hp hyp => hcov p hp (hy p hp hyp), hyc]
+
+/-- **Properness of the reduced colouring** at two points off the original change set. -/
+theorem reduce_proper_off (hrem : ∀ p ∈ 𝓚, C.Removable p.1 p.2) (hlen : ∀ p ∈ 𝓚, p.1 < p.2 ∧ p.2 ≤ p.1 + 2)
+    (hnest : ∀ p ∈ 𝓚, ∀ p' ∈ 𝓚, Disjoint (Icc p.1 p.2) (Icc p'.1 p'.2) ∨ Icc p.1 p.2 ⊆ Icc p'.1 p'.2 ∨
+      Icc p'.1 p'.2 ⊆ Icc p.1 p.2)
+    (hlf : ∀ a b : ℝ, {p ∈ 𝓚 | p.1 ∈ Icc a b}.Finite)
+    (hc1 : ∀ θ, (∀ p ∈ 𝓚, θ ∉ Icc p.1 p.2) → c' θ = C.c θ)
+    (hc2 : ∀ p ∈ 𝓚, (∀ p' ∈ 𝓚, (Icc p'.1 p'.2 ∩ Icc p.1 p.2).Nonempty → Icc p'.1 p'.2 ⊆ Icc p.1 p.2) →
+      ∀ θ ∈ Icc p.1 p.2, C.LeftVal p.1 (c' θ))
+    {y : ℝ} (hy : y ∉ C.S) (hy' : y + π / 3 ∉ C.S) : c' y ≠ c' (y + π / 3) := by
+  have hio : ∀ p ∈ 𝓚, C.Removable p.1 p.2 → ∀ z, z ∉ C.S → z ∈ Icc p.1 p.2 → z ∈ Ioo p.1 p.2 := by
+    rintro p - ⟨-, -, hs, ht, -⟩ z hz hzp
+    exact ⟨lt_of_le_of_ne hzp.1 fun h => hz (h ▸ hs), lt_of_le_of_ne hzp.2 fun h => hz (h.symm ▸ ht)⟩
+  by_cases h1 : ∃ p ∈ 𝓚, y ∈ Icc p.1 p.2 <;> by_cases h2 : ∃ p ∈ 𝓚, y + π / 3 ∈ Icc p.1 p.2
+  · obtain ⟨p, hp, hyp, hmax⟩ := reduce_exists_max hlen hnest hlf h1
+    obtain ⟨p', hp', hyp', hmax'⟩ := reduce_exists_max hlen hnest hlf h2
+    have hyo := hio p hp (hrem p hp) y hy hyp
+    have hyo' := hio p' hp' (hrem p' hp') _ hy' hyp'
+    obtain ⟨-, -, -, -, a, c, hac, h1a, h1c, -, -, hpart⟩ := hrem p hp
+    obtain ⟨-, -, -, -, a', c₂, hac', h1a', h1c', -, -, hpart'⟩ := hrem p' hp'
+    rw [LeftVal.unique (hc2 p hp hmax y hyp) h1a, LeftVal.unique (hc2 p' hp' hmax' _ hyp') h1a']
+    have hA : p'.1 ≤ p.1 + π / 3 := by
+      by_contra hlt; push Not at hlt
+      exact hac' (reduce_partner_noChange hac hpart (Or.inl rfl) ⟨hlt, by linarith [hyo'.1, hyo.2]⟩ h1a' h1c')
+    have hB : p.1 ≤ p'.1 - π / 3 := by
+      by_contra hlt; push Not at hlt
+      exact hac (reduce_partner_noChange hac' hpart' (Or.inr rfl) ⟨by linarith, by linarith [hyo.1, hyo'.2]⟩ h1a h1c)
+    have heq : p.1 + π / 3 = p'.1 := by linarith
+    rw [← heq] at h1a'
+    exact reduce_leftVal_ne C h1a h1a'
+  · obtain ⟨p, hp, hyp, hmax⟩ := reduce_exists_max hlen hnest hlf h1
+    have hyo := hio p hp (hrem p hp) y hy hyp
+    obtain ⟨-, -, -, -, a, c, -, h1a, -, -, -, hpart⟩ := hrem p hp
+    push Not at h2
+    rw [LeftVal.unique (hc2 p hp hmax y hyp) h1a, hc1 _ h2]
+    exact (hpart y hyo (y + π / 3) (Or.inl rfl) hy').1.symm
+  · obtain ⟨p, hp, hyp, hmax⟩ := reduce_exists_max hlen hnest hlf h2
+    have hyo := hio p hp (hrem p hp) _ hy' hyp
+    obtain ⟨-, -, -, -, a, c, -, h1a, -, -, -, hpart⟩ := hrem p hp
+    push Not at h1
+    rw [LeftVal.unique (hc2 p hp hmax _ hyp) h1a, hc1 _ h1]
+    exact (hpart _ hyo y (Or.inr (by ring)) hy).1
+  · push Not at h1 h2
+    rw [hc1 _ h1, hc1 _ h2]
+    exact C.proper y hy hy'
+
+end Generic
+
+
+/-- An integer multiple of `2π` shorter than `2π` is zero. -/
+theorem reduce_int_eq_zero {n : ℤ} (h : |(n : ℝ) * (2 * π)| < 2 * π) : n = 0 := by
+  have hπ := Real.pi_pos
+  rw [abs_mul, abs_of_pos (by positivity : (0 : ℝ) < 2 * π)] at h
+  have h1 : |(n : ℝ)| < 1 := by nlinarith [abs_nonneg (n : ℝ)]
+  have : |n| < 1 := by exact_mod_cast h1
+  exact Int.abs_lt_one_iff.mp this
+
+end ReduceAux
+
 /-- **The circle-only reduction** (FS110-CD Lemma R steps 4–5; CE's R3): recolouring each maximal arc of a finite, pairwise nested-or-disjoint
 family of removable arcs by its outer colour leaves a circle colouring with no swap point, whose change points are change points of the
 original outside the arcs' closed spans, with the same one-sided colours. Circle-abstract. -/
@@ -104,7 +341,200 @@ theorem reduce (hns : ∀ x, ¬ C.IsSwap x) (𝓙 : Set (ℝ × ℝ)) (hfin : �
       e '' Icc q'.1 q'.2 ⊆ e '' Icc q.1 q.2) :
     ∃ C' : CircleColouring, (∀ x, ¬ C'.IsSwap x) ∧
       ∀ x ∈ C'.S, x ∈ C.S ∧ (∀ q ∈ 𝓙, e x ∉ e '' Icc q.1 q.2) ∧ ∀ v, (C'.LeftVal x v ↔ C.LeftVal x v) ∧ (C'.RightVal x v ↔ C.RightVal x v) := by
-  sorry
+  classical
+  have hπ := Real.pi_pos
+  have hπ3 : π / 3 < 2 := by linarith [Real.pi_lt_four]
+  -- the periodic family of real spans
+  set 𝓚 : Set (ℝ × ℝ) := {p | ∃ q ∈ 𝓙, ∃ m : ℤ, p = (q.1 + m * (2 * π), q.2 + m * (2 * π))} with h𝓚
+  have hremK : ∀ p ∈ 𝓚, C.Removable p.1 p.2 := by
+    rintro p ⟨q, hq, m, rfl⟩; exact (hrem q hq).add_int_mul m
+  have hlenK : ∀ p ∈ 𝓚, p.1 < p.2 ∧ p.2 ≤ p.1 + 2 := fun p hp =>
+    ⟨(hremK p hp).1, by linarith [(hremK p hp).2.1]⟩
+  have hlen3 : ∀ p ∈ 𝓚, p.2 < p.1 + π / 3 := fun p hp => (hremK p hp).2.1
+  have hperK : ∀ p ∈ 𝓚, ∀ n : ℤ, (p.1 + n * (2 * π), p.2 + n * (2 * π)) ∈ 𝓚 := by
+    rintro p ⟨q, hq, m, rfl⟩ n
+    exact ⟨q, hq, m + n, by simp only [Prod.mk.injEq]; push_cast; constructor <;> ring⟩
+  have hlfK : ∀ a b : ℝ, {p ∈ 𝓚 | p.1 ∈ Icc a b}.Finite := by
+    intro a b
+    refine (hfin.biUnion fun q _ => ((Set.finite_Icc ⌊(a - q.1) / (2 * π)⌋ ⌈(b - q.1) / (2 * π)⌉).image
+      fun m : ℤ => (q.1 + m * (2 * π), q.2 + m * (2 * π)))).subset ?_
+    rintro p ⟨⟨q, hq, m, rfl⟩, hpa, hpb⟩
+    simp only [mem_iUnion, mem_image, mem_Icc]
+    refine ⟨q, hq, m, ⟨?_, ?_⟩, rfl⟩
+    · have : (a - q.1) / (2 * π) ≤ m := by rw [div_le_iff₀ (by positivity)]; linarith
+      exact Int.cast_le.mp ((Int.floor_le _).trans this)
+    · have : (m : ℝ) ≤ (b - q.1) / (2 * π) := by rw [le_div_iff₀ (by positivity)]; linarith
+      exact Int.cast_le.mp (this.trans (Int.le_ceil _))
+  -- the shift lemma: a point of a short span whose `e` lies in another short span meeting it lies in it
+  have hshift : ∀ (a' b' w z z' : ℝ), b' - a' < π / 3 → w ∈ Icc a' b' → z' ∈ Icc a' b' → e z' = e z → |z - w| ≤ π / 3 →
+      z ∈ Icc a' b' := by
+    intro a' b' w z z' hl hw hz' hze hzw
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp hze
+    have hn0 : n = 0 := reduce_int_eq_zero (by
+      rw [show (n : ℝ) * (2 * π) = z' - z by linarith, abs_lt]
+      rw [abs_le] at hzw
+      constructor <;> linarith [hw.1, hw.2, hz'.1, hz'.2])
+    subst hn0
+    simp only [Int.cast_zero, zero_mul, add_zero] at hn
+    exact hn ▸ hz'
+  have heshift : ∀ (x : ℝ) (m : ℤ), e (x + m * (2 * π)) = e x := fun x m => e_eq_e_iff.mpr ⟨m, rfl⟩
+  have hnestK : ∀ p ∈ 𝓚, ∀ p' ∈ 𝓚, Disjoint (Icc p.1 p.2) (Icc p'.1 p'.2) ∨ Icc p.1 p.2 ⊆ Icc p'.1 p'.2 ∨
+      Icc p'.1 p'.2 ⊆ Icc p.1 p.2 := by
+    -- the image of a shifted span
+    have himg : ∀ q : ℝ × ℝ, ∀ m : ℤ, e '' Icc (q.1 + m * (2 * π)) (q.2 + m * (2 * π)) = e '' Icc q.1 q.2 := by
+      intro q m
+      ext z
+      simp only [mem_image, mem_Icc]
+      constructor
+      · rintro ⟨x, hx, rfl⟩
+        exact ⟨x - m * (2 * π), ⟨by linarith [hx.1], by linarith [hx.2]⟩, by
+          rw [← heshift (x - m * (2 * π)) m, sub_add_cancel]⟩
+      · rintro ⟨x, hx, rfl⟩
+        exact ⟨x + m * (2 * π), ⟨by linarith [hx.1], by linarith [hx.2]⟩, heshift x m⟩
+    -- a nested image, with a common point, nests the real spans
+    have hsub : ∀ p ∈ 𝓚, ∀ p' ∈ 𝓚, (Icc p.1 p.2 ∩ Icc p'.1 p'.2).Nonempty →
+        e '' Icc p.1 p.2 ⊆ e '' Icc p'.1 p'.2 → Icc p.1 p.2 ⊆ Icc p'.1 p'.2 := by
+      intro p hp p' hp' ⟨w, hw, hw'⟩ himp
+      have hl' : p'.2 - p'.1 < π / 3 := by linarith [hlen3 p' hp']
+      have hend : ∀ z ∈ Icc p.1 p.2, z ∈ Icc p'.1 p'.2 := by
+        intro z hz
+        obtain ⟨z', hz', hze⟩ := himp ⟨z, hz, rfl⟩
+        refine hshift _ _ w z z' hl' hw' hz' hze ?_
+        rw [abs_le]; constructor <;> linarith [hz.1, hz.2, hw.1, hw.2, hlen3 p hp]
+      exact fun z hz => hend z hz
+    intro p hp p' hp'
+    by_cases hd : Disjoint (Icc p.1 p.2) (Icc p'.1 p'.2)
+    · exact Or.inl hd
+    have hne : (Icc p.1 p.2 ∩ Icc p'.1 p'.2).Nonempty := Set.not_disjoint_iff_nonempty_inter.mp hd
+    obtain ⟨q, hq, m, rfl⟩ := hp
+    obtain ⟨q', hq', m', rfl⟩ := hp'
+    rcases hnest q hq q' hq' with hdis | hs | hs
+    · exfalso
+      obtain ⟨w, hw, hw'⟩ := hne
+      have h1 : e w ∈ e '' Icc q.1 q.2 := by rw [← himg q m]; exact ⟨w, hw, rfl⟩
+      have h2 : e w ∈ e '' Icc q'.1 q'.2 := by rw [← himg q' m']; exact ⟨w, hw', rfl⟩
+      exact Set.disjoint_left.mp hdis h1 h2
+    · right; left
+      refine hsub _ ⟨q, hq, m, rfl⟩ _ ⟨q', hq', m', rfl⟩ hne ?_
+      simp only; rw [himg q m, himg q' m']; exact hs
+    · right; right
+      refine hsub _ ⟨q', hq', m', rfl⟩ _ ⟨q, hq, m, rfl⟩ (by rwa [Set.inter_comm]) ?_
+      simp only; rw [himg q m, himg q' m']; exact hs
+  have hcovE : ∀ θ, ∀ q ∈ 𝓙, e θ ∈ e '' Icc q.1 q.2 → ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2 := by
+    rintro θ q hq ⟨z, hz, hze⟩
+    obtain ⟨n, hn⟩ := e_eq_e_iff.mp hze
+    refine ⟨(q.1 + ((-n : ℤ) : ℝ) * (2 * π), q.2 + ((-n : ℤ) : ℝ) * (2 * π)), ⟨q, hq, -n, rfl⟩, ?_, ?_⟩ <;>
+      push_cast <;> linarith [hz.1, hz.2]
+  -- the colouring: the outer colour of the maximal span, else the original colour
+  choose outer houter using fun x => exists_left_const C.locallyConstant x
+  have hmaxex := fun θ (h : ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2) => reduce_exists_max hlenK hnestK hlfK h
+  choose P hPK hPθ hPmax using hmaxex
+  set c' : ℝ → ZMod 3 := fun θ => if h : ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2 then outer (P θ h).1 else C.c θ with hc'
+  have hc1 : ∀ θ, (∀ p ∈ 𝓚, θ ∉ Icc p.1 p.2) → c' θ = C.c θ := by
+    intro θ h
+    have : ¬ ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2 := by push Not; exact h
+    simp only [hc', dif_neg this]
+  have hc2 : ∀ p ∈ 𝓚, (∀ p' ∈ 𝓚, (Icc p'.1 p'.2 ∩ Icc p.1 p.2).Nonempty → Icc p'.1 p'.2 ⊆ Icc p.1 p.2) →
+      ∀ θ ∈ Icc p.1 p.2, C.LeftVal p.1 (c' θ) := by
+    intro p hp hmax θ hθ
+    have h : ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2 := ⟨p, hp, hθ⟩
+    have hval : c' θ = outer (P θ h).1 := by simp only [hc', dif_pos h]
+    have hs1 := hmax _ (hPK θ h) ⟨θ, hPθ θ h, hθ⟩
+    have hs2 := hPmax θ h p hp ⟨θ, hθ, hPθ θ h⟩
+    rw [Icc_subset_Icc_iff (hlenK _ (hPK θ h)).1.le] at hs1
+    rw [Icc_subset_Icc_iff (hlenK p hp).1.le] at hs2
+    have : (P θ h).1 = p.1 := le_antisymm hs2.1 hs1.1
+    rw [hval, ← this]
+    exact houter _
+  have hcovper : ∀ θ, (∃ p ∈ 𝓚, θ + 2 * π ∈ Icc p.1 p.2) ↔ ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2 := by
+    intro θ; constructor
+    · rintro ⟨p, hp, h⟩
+      refine ⟨_, hperK p hp (-1), ?_, ?_⟩ <;> push_cast <;> linarith [h.1, h.2]
+    · rintro ⟨p, hp, h⟩
+      refine ⟨_, hperK p hp 1, ?_, ?_⟩ <;> push_cast <;> linarith [h.1, h.2]
+  set S' : Set ℝ := {θ | θ ∈ C.S ∧ ¬ ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2} with hS'
+  have hlc : ∀ θ, θ ∉ S' → ∀ᶠ y in 𝓝 θ, c' y = c' θ := by
+    intro θ hθ
+    refine reduce_locConst hremK hlenK hnestK hlfK hc1 hc2 ?_
+    by_cases hS : θ ∈ C.S
+    · right; by_contra hno; exact hθ ⟨hS, hno⟩
+    · left; exact hS
+  have hprop : ∀ θ, θ ∉ S' → θ + π / 3 ∉ S' → c' θ ≠ c' (θ + π / 3) := by
+    intro θ h1 h2
+    have e1 := hlc θ h1
+    have e2 : ∀ᶠ y in 𝓝 θ, c' (y + π / 3) = c' (θ + π / 3) :=
+      ((continuous_add_const (π / 3)).tendsto θ).eventually (hlc _ h2)
+    have hS2 : ∀ᶠ y in 𝓝[<] θ, y + π / 3 ∉ C.S := eventually_lt_add (C.eventually_notMem_S_lt (θ + π / 3))
+    have e1' : ∀ᶠ y in 𝓝[<] θ, c' y = c' θ := nhdsWithin_le_nhds e1
+    have e2' : ∀ᶠ y in 𝓝[<] θ, c' (y + π / 3) = c' (θ + π / 3) := nhdsWithin_le_nhds e2
+    obtain ⟨y, hy1, hy2, hy3, hy4⟩ := ((C.eventually_notMem_S_lt θ).and (hS2.and (e1'.and e2'))).exists
+    rw [← hy3, ← hy4]
+    exact reduce_proper_off hremK hlenK hnestK hlfK hc1 hc2 hy1 hy2
+  have hper : Function.Periodic c' (2 * π) := by
+    intro θ
+    by_cases hcov : ∃ p ∈ 𝓚, θ ∈ Icc p.1 p.2
+    · obtain ⟨p, hp, hθp, hmax⟩ := reduce_exists_max hlenK hnestK hlfK hcov
+      have hp' : (p.1 + 2 * π, p.2 + 2 * π) ∈ 𝓚 := by simpa using hperK p hp 1
+      have hmax' : ∀ p' ∈ 𝓚, (Icc p'.1 p'.2 ∩ Icc (p.1 + 2 * π) (p.2 + 2 * π)).Nonempty →
+          Icc p'.1 p'.2 ⊆ Icc (p.1 + 2 * π) (p.2 + 2 * π) := by
+        intro p' hp'' ⟨w, hw, hw'⟩
+        have hm : (p'.1 - 2 * π, p'.2 - 2 * π) ∈ 𝓚 := by
+          have := hperK p' hp'' (-1); push_cast at this; simpa [sub_eq_add_neg] using this
+        have hsub := hmax _ hm ⟨w - 2 * π, ⟨by linarith [hw.1], by linarith [hw.2]⟩,
+          ⟨by linarith [hw'.1], by linarith [hw'.2]⟩⟩
+        intro z hz
+        have := hsub (show z - 2 * π ∈ Icc (p'.1 - 2 * π) (p'.2 - 2 * π) from ⟨by linarith [hz.1], by linarith [hz.2]⟩)
+        exact ⟨by linarith [this.1], by linarith [this.2]⟩
+      have h1 := hc2 _ hp' hmax' (θ + 2 * π) ⟨by linarith [hθp.1], by linarith [hθp.2]⟩
+      have h2 := hc2 p hp hmax θ hθp
+      have h1' : C.LeftVal p.1 (c' (θ + 2 * π)) := by
+        have := (reduce_leftVal_add_int_mul (x := p.1) 1).mp (by simpa using h1)
+        exact this
+      exact LeftVal.unique h1' h2
+    · have hcov' : ¬ ∃ p ∈ 𝓚, θ + 2 * π ∈ Icc p.1 p.2 := fun h => hcov ((hcovper θ).mp h)
+      push Not at hcov hcov'
+      rw [hc1 _ hcov', hc1 _ hcov, C.periodic θ]
+  let C' : CircleColouring :=
+    { c := c', S := S', periodic := hper, periodic_S := fun θ => by simp only [hS', mem_setOf_eq, C.periodic_S, hcovper]
+      finite_S := C.finite_S.subset fun θ h => ⟨h.1.1, h.2⟩
+      locallyConstant := hlc, proper := hprop }
+  have hagree' : ∀ x, (¬ ∃ p ∈ 𝓚, x ∈ Icc p.1 p.2) → ∀ᶠ y in 𝓝 x, c' y = C.c y := by
+    intro x hx
+    push Not at hx
+    filter_upwards [reduce_nearOnly hlenK hlfK x] with y hy
+    exact hc1 y fun p hp hyp => hx p hp (hy p hp hyp)
+  have hvals : ∀ x, (∀ᶠ y in 𝓝 x, c' y = C.c y) → ∀ v,
+      (C'.LeftVal x v ↔ C.LeftVal x v) ∧ (C'.RightVal x v ↔ C.RightVal x v) := by
+    intro x hx v
+    refine ⟨⟨fun h => ?_, fun h => ?_⟩, ⟨fun h => ?_, fun h => ?_⟩⟩
+    · filter_upwards [h, nhdsWithin_le_nhds hx] with y h1 h2
+      rw [← h2]; exact h1
+    · filter_upwards [h, nhdsWithin_le_nhds hx] with y h1 h2
+      show c' y = v
+      rw [h2]; exact h1
+    · filter_upwards [h, nhdsWithin_le_nhds hx] with y h1 h2
+      rw [← h2]; exact h1
+    · filter_upwards [h, nhdsWithin_le_nhds hx] with y h1 h2
+      show c' y = v
+      rw [h2]; exact h1
+  refine ⟨C', ?_, fun x hx => ⟨hx.1, fun q hq hqe => hx.2 (hcovE x q hq hqe), hvals x (hagree' x hx.2)⟩⟩
+  rintro x ⟨hxS, a, b, ha, hb, hsw⟩
+  have hxa := hagree' x hxS.2
+  have ha' := ((hvals x hxa a).1).mp ha
+  have hb' := ((hvals x hxa b).2).mp hb
+  rcases hsw with ⟨hb2, ha2⟩ | ⟨hb2, ha2⟩
+  · have hab : a ≠ b := reduce_leftVal_ne C' ha hb2
+    by_cases hcov : ∃ p ∈ 𝓚, x + π / 3 ∈ Icc p.1 p.2
+    · have hnot : x + π / 3 ∉ S' := fun h => h.2 hcov
+      exact hab (reduce_vals_of_const C' (hlc _ hnot) hb2 ha2).symm
+    · have hag := hagree' _ hcov
+      exact hns x ⟨hxS.1, a, b, ha', hb', Or.inl ⟨((hvals _ hag b).1).mp hb2, ((hvals _ hag a).2).mp ha2⟩⟩
+  · have hab : b ≠ a := reduce_leftVal_ne C' hb2 (by rwa [sub_add_cancel])
+    by_cases hcov : ∃ p ∈ 𝓚, x - π / 3 ∈ Icc p.1 p.2
+    · have hnot : x - π / 3 ∉ S' := fun h => h.2 hcov
+      exact hab (reduce_vals_of_const C' (hlc _ hnot) hb2 ha2)
+    · have hag := hagree' _ hcov
+      exact hns x ⟨hxS.1, a, b, ha', hb', Or.inr ⟨((hvals _ hag b).1).mp hb2, ((hvals _ hag a).2).mp ha2⟩⟩
 
 /-- **The selection** (`[SokolovVoronov2025]` Lemma 5, BV-C6 and Prop. 18, as BASE-V § 1a.2–1a.3 and FS110-CD § 2.5 derived them): a circle
 colouring with no swap point is the rotating hexagon, or for each pair of colours it has three change points with that pair, pairwise more than

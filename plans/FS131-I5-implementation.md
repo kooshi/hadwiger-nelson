@@ -120,6 +120,17 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
 Wired by FS131-I5f (axioms `[propext, sorryAx, Classical.choice, Quot.sound]`): `row134BaseUA` (= `BaseCtx.false`, the walk assembled over its leaves as
 stated), `BaseCtx.exists_endpoint_third`, `BaseCtx.third_ne`.
 
+### FS131-I5g (wave 5's seventh implementer)
+
+*Each stage's build and axiom read named in its line; axioms read from that build's oleans (`data/fs131/i5g/I5gAxioms<stage>.lean`, output `.out`).*
+
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
+- Stage 26 (`data/fs131/i5g/build-stage26.log`; `build/gate/build/20261005T033138Z-1000357.log`; axioms `I5gAxioms26.out`, control `select` with
+  `sorryAx`), `Plane/ValidMap/BaseWalk`: `HadwigerNelson.Plane.CircleColouring.reduce` (FS110-CD Lemma R steps 4–5, CE's R3); children
+  `reduce_leftVal_add_int_mul`, `reduce_rightVal_add_int_mul`, `Removable.add_int_mul`, `reduce_nearOnly`, `reduce_exists_max`, `reduce_left_uncov`,
+  `reduce_right_uncov`, `reduce_zmod3`, `reduce_partner_noChange`, `reduce_leftVal_ne`, `reduce_vals_of_const`, `reduce_locConst`, `reduce_proper_off`,
+  `reduce_int_eq_zero` (all `CircleColouring.`).
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -1175,3 +1186,39 @@ d61edefc`: PASS; `--self-test`: three plants fired, the control passed.
 Iteration script: `data/fs131/i5g/iter.sh` (I5f's, re-pointed at its own scratch mirror `/home/kooshi/scratch-w5g`, outside the repository).
 
 ## Stage 25 — SAVED
+
+## Stage 26 — SAVED: `CircleColouring.reduce` proved (a kernel theorem)
+
+**`reduce` is proved as stated** (`Plane/ValidMap/BaseWalk`; axioms the standard three), on I5f's construction (Stage 24, "What is left"), circle-abstract:
+1. *The periodic family.* `𝓚 = {(q.1 + 2πm, q.2 + 2πm) | q ∈ 𝓙, m ∈ ℤ}`: every member removable (`Removable.add_int_mul`), shorter than `60°`, locally finite
+   (finitely many with left end in any `[a, b]`), and **nested or disjoint as real intervals** — from `hnest` on the circle, since two short spans that meet
+   in `ℝ` and whose `e`-images nest are nested (a point whose `e` lies in a span of length `< 60°` meeting it lies in it: `e_eq_e_iff`, the integer is `0`).
+2. *Maximal members* (`reduce_exists_max`): every covered `θ` lies in a member that holds every member meeting it (the longest member containing `θ`).
+   Near any `x` only members containing `x` cover (`reduce_nearOnly`), so left of a maximal member's left end and right of its right end nothing is covered
+   (`reduce_left_uncov`, `reduce_right_uncov`).
+3. *The colouring.* `c′ θ` = the colour just left of the maximal member's left end when `θ` is covered, else `c θ`; `S′ = {θ ∈ S | θ uncovered}`.
+   Locally constant off `S′` (`reduce_locConst`: interior points, and the two ends, where the outside colour is the outer colour `a` on both sides —
+   `LeftVal s a`, `RightVal t a`); `2π`-periodic (a maximal member shifted by `2π` is maximal).
+4. *Proper* (`reduce_proper_off`, after moving both points off `S` by local constancy): uncovered–uncovered is `C.proper`; covered–uncovered is the
+   partner clause; covered–covered: **I5f's hand check is formalized** as `reduce_partner_noChange` — at a point of `(s, t) ± 60°` the one-sided values
+   agree (both avoid `a` and `c`, three colours) — so the second span's left end is not inside the first's `+60°` shift, nor the first's inside the
+   second's `−60°` shift, which forces `s′ = s + 60°`, and `C.proper` just left of `s` separates the two outer colours.
+5. *No swap*: at `x ∈ S′` the two colourings agree near `x`; if `x ± 60°` is uncovered they agree there too and a swap of `C′` is one of `C` (`hns`); if
+   it is covered `C′` is locally constant there, so its one-sided values agree, while a swap needs them distinct (properness of `C′`, `reduce_leftVal_ne`).
+6. The conclusion's clauses: `S′ ⊆ S`; `e x` in no span's image (else `x` covered); one-sided values equal `C`'s (agreement near `x`).
+
+Read against the informal claim (FS110-CD Lemma R steps 4–5): "recolouring each maximal arc of a finite, pairwise nested-or-disjoint family of removable
+arcs by its outer colour leaves a circle colouring with no swap point, whose change points are change points of the original outside the arcs' closed
+spans, with the same one-sided colours" — **same**; the colouring built is exactly that recolouring.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS). New names collision-free on `fs131-w5p`, `fs131-w5t`, `fs131-w4`, `main` (`git grep`).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 3 modules rebuilt (`BaseWalk`, `BaseDense`, `Proofs`), 8 with warnings, every
+warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T033138Z-1000357.log`; driver log `data/fs131/i5g/build-stage26.log`). Wave 5's
+sorry declarations: **27** (`BaseWalk` 5), mine 9. Axioms (`data/fs131/i5g/I5gAxioms26.lean` → `.out`): `reduce` and its 14 children on the standard three;
+control `select` reads `sorryAx`. `scripts/Axioms.lean`: a block "FS131-I5g" (above the `=== PURCHASED ===` banner) with the 14 children (`reduce`'s own
+record is KB's).
+
+**Re-pricing** (first hard leaf): `reduce` took about 30k tokens of context, about a third of an implementer session's working budget — M–H as planned.
+
+## Stage 26 — SAVED
