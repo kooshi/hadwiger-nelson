@@ -1200,3 +1200,41 @@ changed, no module added. No `axiom`, no `native_decide`.
 
 By the session's counter about 460k, past the brief's 400k guidance and under its 500k line: I hand back here, at a saved stage. Proved and
 left: § 22.1 and § 22.2. `IsBoundaryWalk` and `IsEdgeOf` are unchanged.
+
+## Stage 23 — SAVED (FS131-RW2): the readback
+
+*de Bruijn, the implementer (FS131-RW2), 2026-10-05, from RW1's Stage 22. Brief: `data/fs131/briefs/FS131-RW2-walk.md` (main tree). Branch `fs131-w5p`,
+worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5p`.*
+
+### 23.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by `grep -cF` of each quotation's full text (the control: a planted absent string, `ABSENT-CONTROL-STRING-xyzzy`, counted 0, exit 1):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors (main tree) | verbatim (1) |
+| `theorem exists_boundaryWalk (hF : F.Valid) (hP : F.IsPlaneMap) (x : {T : Set ℂ // F.IsOuterTile T}) :` | `MapGraph.lean` l. 2265 at `515e28af` | verbatim (1) |
+| the six lines of § 22.2 (C5a, C5b, C5c, C5d, C7, C10, each truncated as quoted) | this record § 22.2 | verbatim (1 each) |
+| items 345, 346, 339, 277 (opening lines) | `plans/FS131-close-inventory.md` (main tree) l. 2929, 2949, 2867, 2040 | verbatim (1 each) |
+
+No mismatch. Read in full: RW1's Stages 20–22 here; RL1's plan §§ 2 and 4; inventory items 277, 339, 345, 346; `plans/STANDING-RULES.md`; `LEAN.md`;
+`RUNNING.md` § Building and § Make the gate fail, and watch it fail.
+
+### 23.2 What I may and may not change (the brief's touches; rulings 339 (c), 346 (a))
+
+**May**: prove `exists_boundaryWalk` and add its children beside it in `MapGraph` (§ 22.2's C5a–C5d, C7, C10, each stated before proved, with a spec
+example where it carries a structure); add `port_arc` in `CurveGraph` and re-prove `port_pair` over it, **its statement byte-identical**; add
+pure-topology children in `MapTopology` § F; change imports with `ARCHITECTURE.md`; extend the FS131-KP block of `scripts/Axioms.lean` above the
+`=== PURCHASED ===` banner; `tools/fs131_rw_*.py`, `data/fs131/rw/`, this record, `data/fs131/reports/FS131-RW2.md`. Change `IsBoundaryWalk`'s fields or
+`IsEdgeOf`'s clauses **only** where the construction cannot meet them and SEP does not read them, and — an SEP lane may now run in parallel — only
+after messaging the coordinator first.
+**May not**: change `IsBoundaryWalk.sep` or its children, `filledGraph_ringList`, `IsRing`, `PlanarLike`, `Plane/PlaneTopology`, `BaseWalk`,
+`BaseDense`, RL1's plan file, any statement outside this lane; add an `axiom` or `native_decide`; edit a file while a build of it runs; merge, take
+`main`, run the gate, touch `main`.
+
+### 23.3 The as-given build (`515e28af`, before any edit)
+
+My wrapper `data/fs131/rw/rw2-build.sh` (run from a snapshot copy under `build/`) writes `START` and an `EXIT <status>` line to its driver log.
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1755 modules already up to date, nothing built, 9 modules with warnings (every one
+`declaration uses 'sorry'`; `MapGraph`'s two at l. 1430 — `IsBoundaryWalk.sep` — and l. 2265 — `exists_boundaryWalk`), `EXIT 0`**
+(`build/gate/build/20261005T065106Z-2122697.log`; driver log `data/fs131/rw/build-rw2-asgiven.log`).
