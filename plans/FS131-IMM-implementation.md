@@ -173,3 +173,34 @@ build's oleans (`data/fs131/imm/axioms-stage3.txt`, 16 records): the 15 children
 `exists_merge_aux` reads `sorryAx` besides. No `axiom`, no `native_decide`. The 15 records are in `scripts/Axioms.lean`'s FS131-IMM1 block
 (above the PURCHASED banner). `tools/fs131_im_statements.py --check` PASS (diffs empty), `tools/fs131_im_split.py --check` PASS,
 `tools/check_architecture.py` PASS. Scratch files (`data/fs131/imm/scratch/`) are working copies, now in `MergeMove`.
+
+## Stage 4 — SAVED (FS131-IMM2): the readback, the as-given build
+
+*FS131-IMM2 (de Bruijn, the implementer, on Opus) continues this record from here; brief `data/fs131/briefs/FS131-IMM2-merge.md` (on `main`).*
+
+### 4.0.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (exact substring search), each **verbatim**:
+
+| quotation (a prefix) | source | line |
+|---|---|---|
+| "theorem exists_merge_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)" | `Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean` (this branch) | 585 |
+| "**Verdict on the statement**: believed **TRUE** as written (ruling 269's form); no defect found. The rim clause" | this record § 4 | 109 |
+| "**4.1 The gap's choice and `K`'s geometry** (≈ 400 lines). If `K = univ`, …" | this record § 4 | 114 |
+| "**4.3 The map `F'`** (≈ 500 lines; `Near.move` and `Near.exists_cut` add the whole circle …" | this record § 4 | 134 |
+| "294. **FS131-IMM1 done at its line, MERGE not yet proved** …" | `plans/FS131-close-inventory.md` (on `main`) | 2255 |
+| "269. **Ruling on item 268: …**" | the same | 1958 |
+| "286. **FS131-IM3 handed back** …" | the same | 2148 |
+| "295. **Ruling: MERGE leaves wave 4; …**" | the same | 2274 |
+| "337. **Ruling on I5j's slot: MERGE's continuation, FS131-IMM2, …**" | the same | 2839 |
+| "**It may**: add children anywhere in the wave's modules — …" | `.claude/worktrees/fs131-w4/plans/FS131-w4-kernel-plan.md` § 14.2 | 887 |
+
+Read: this record in full, inventory items 269, 286, 294, 295, 337.
+
+### 4.0.2 The branch builds as given
+
+`7060fcc6`, under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK**, "all 1748 modules already
+up to date, nothing built", 2 s; warnings only `declaration uses 'sorry'` (`Moves` l. 574 `exists_rayMerge_aux`, l. 585 `exists_merge_aux`;
+`Contact`, `BaseSteps`, `UnitArc` as before). Log `build/gate/build/20261005T054213Z-1726483.log`; terminal output
+`data/fs131/imm/build-asgiven-imm2.log`. The scratch copies `data/fs131/imm/scratch/{Push,End,Gap}.lean` are deleted (each of their 13 declarations
+checked present in `MergeMove` by name first).
