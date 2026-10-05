@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–366 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–368 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **366**.
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **368**.
 >
 > **Held in the kernel, on `main`**: waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -17,10 +17,11 @@ that judge the milestone, written before any job).*
 >   lives), `exists_red` and `exists_terminal` laid out (record `plans/FS131-limit-kernel-plan.md`). Brief `data/fs131/briefs/FS131-KL1-limit.md`.
 > - **FS131-I5o** (`fs131-w5`): merge `fs131-w5p` (the finished planar chain) into `fs131-w5` and check it; then `bv_l3`, `exists_preBend`, `disc1_local`.
 >   Brief `data/fs131/briefs/FS131-I5o-wave5.md`.
-> - **FS131-IMM4** (`fs131-w4mm`): MERGE's last two clauses (`merge_not_hasRepeatedColour_rim`, `merge_allowedCone`), so `exists_merge_aux` lands; on wave 5's
->   path. Brief `data/fs131/briefs/FS131-IMM4-merge.md`.
+> - **FS131-ML1** (`fs131-w4mm`): MERGE's landing — `main` merged in, `exists_merge_aux` and `exists_merge` restored in ruling 269's form, the full gate,
+>   `main` fast-forwarded, drafts of the counts. Brief `data/fs131/briefs/FS131-ML1-merge-land.md`. **On its landing, file the counts as WL1's were.**
 >
-> **Done since the compaction**: **FS131-I5p** (items 361–362: `y3_end_needs_of_not_mem` in the kernel, so `y3_end_needs`, `cv_hd_main`, `cv_hd` hold;
+> **Done since the compaction**: **FS131-IMM4** (items 367–368: **MERGE proved** — `exists_merge_aux` on exactly the standard three; `MergeMove` free of
+> `sorry`); **FS131-I5p** (items 361–362: `y3_end_needs_of_not_mem` in the kernel, so `y3_end_needs`, `cv_hd_main`, `cv_hd` hold;
 > `exists_red`, `exists_terminal` need the limit infrastructure); I5o's two findings on the strengthened bend (items 363–366: one retracted, one narrowed by `BaseHyp`; no Ephodos job); **FS131-RS1** (items 357–358: **SEP held — the planar chain is complete**; F-RING, `filledGraph_planarLike`,
 > `cvb_thom_reduced`, `cvb_thom` on the standard three on `fs131-w5p`); **FS131-I5n** (items 355–356: MERGE's statement swapped on `fs131-w5c`; `cv_hd_main_inType` and `seven_colours_at_N` in the
 > kernel; `y3_end_needs` over `y3_end_needs_of_not_mem`); **FS131-IMM3** (items 353–354: MERGE's map and six of eight clauses in the kernel; `exists_merge_aux` assembled over two
@@ -107,7 +108,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 |---|---|---|---|
 | FS131-KL1 (planner: the limit constructions on `fs131-w5c`; items 361–362) | Opus | `data/fs131/briefs/FS131-KL1-limit.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-KL1.md` |
 | FS131-I5o (merge `fs131-w5p` into `fs131-w5`; `bv_l3`, `exists_preBend`, `disc1_local`; items 357–358) | Opus | `data/fs131/briefs/FS131-I5o-wave5.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-I5o.md` |
-| FS131-IMM4 (MERGE's last two clauses on `fs131-w4mm`; items 353–354) | Opus | `data/fs131/briefs/FS131-IMM4-merge.md` | branch `fs131-w4mm`'s `data/fs131/reports/FS131-IMM4.md` |
+| FS131-ML1 (MERGE's landing on `fs131-w4mm`; items 367–368) | Opus | `data/fs131/briefs/FS131-ML1-merge-land.md` | branch `fs131-w4mm`'s `data/fs131/reports/FS131-ML1.md` |
 
 
 **Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.

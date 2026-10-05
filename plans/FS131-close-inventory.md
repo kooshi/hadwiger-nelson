@@ -3184,3 +3184,25 @@ reason by the close.*
      I5o's correction (one mind). Why not: Workflow 3.1 makes the kernel the second check, and E6 would derive what the next jobs formalize anyway. Confidence:
      medium-high. (b) **The strengthened bend's construction FS131-KB2** takes the next free slot that is not a wave-5 lane's own continuation, from I5o's
      notes, with the child's hypotheses `hfree` and `hmax`. (c) Item 364 (b)'s caution to I5o is lifted: it may prove `exists_preBend` over the child.
+367. **FS131-IMM4 done: MERGE is proved** (harness ≈ 472k by the task notice; record `fs131-w4mm`'s `plans/FS131-IMM-implementation.md`, Stages 10–12; report
+     `data/fs131/reports/FS131-IMM4.md`; commits `833db8e9`, `686b26e2`, `5be53bf6`, `c9623d04`, pushed). **Results, [kernel] on the standard three**:
+     `Near.merge_not_hasRepeatedColour_rim` (after MERGE no rim point of `B̄(v, ρ)` has a colour with two sectors at every small radius) and
+     `Near.merge_allowedCone` (`D_c(v′)` unchanged for `v′ ∉ B̄(v, ρ)`), so **`exists_merge_aux` (FS110-W-MERGE in ruling 269's form) carries no `sorry` beneath**,
+     statement unchanged; 31 children; `MergeMove` holds no `sorry`. **Receipt** (Keryx): the four commits exist and `origin/fs131-w4mm` is `c9623d04`; the stage-12
+     build log (`build/gate/build/20261005T083812Z-2758320.log`) ends "Build completed successfully (5363 jobs)", 0 warnings other than `sorry`, none in `MergeMove`
+     (the `sorry` warnings are this branch's stale wave-4 copies and `exists_rayMerge_aux`, the pre-RAY copy); `data/fs131/imm/axioms-stage12.txt` parsed with
+     wrapped lines rejoined: 153 records — 139 exactly the standard three (`exists_merge_aux` among them), 11 on fewer, 2 on none, 1 on `sorryAx` (the control
+     `exists_rayMerge_aux`); `tools/fs131_im_statements.py --check`, `tools/fs131_im_split.py --check`, `tools/fs131_imm_decls.py --check` run by Keryx: PASS all
+     three; `wip/` gone. **Generalization**: the sides lemma needs no sign split — for `w₀` on a circle of curvature `κ` with `|κ| r ≤ 2/5`, each side of
+     `B(w₀, r)` is star-convex about `w₀ + σ(r/2)g` (`isPreconnected_side_plane`, `isPreconnected_side`, `sides_preconnected`), reusable at SHAVE's and RAY's rim
+     clauses. **Cosmetic**: `merge_allowedCone` never uses `F.Covers v 1`; its binder renamed `_hv1`, type and the assembly's call unchanged. **Prediction
+     scored**: IMM3 priced the two leaves at 500–600 lines; about 1,040. **Correction (wording)**: IMM3's stage-9 "116 on exactly the standard three" counted 11
+     records on fewer axioms. **Tool**: `tools/fs131_imm_axioms.py` (rejoins Lean's wrapped lines, parses names with apostrophes; self-test fails on a planted
+     `sorry`, a foreign axiom, a missing control, an empty parse). Credit: IMM4, for the sides lemma in one form and the axioms parser that fixes my own.
+368. **Rulings on IMM4's held items, and its slot.** (a) **`_hv1`: kept** — the type is unchanged and dropping the hypothesis would change the assembly's call
+     for nothing. Confidence: high. (b) **IMM4's slot → MERGE's landing, FS131-ML1, on `fs131-w4mm`**: merge `main` in; take `main`'s wave-4 modules (RAY, SHAVE
+     and every leaf proved there) and restore `exists_merge_aux` in `Moves` (IMM's proof, over `MergeMove`) and `exists_merge` in `Contact` as a one-line citation
+     of it, both in ruling 269's form, with `Contact`'s header line and the `ARCHITECTURE.md` mentions (item 295 (a)); add `MergeMove` to `Proofs.lean` and
+     `ARCHITECTURE.md`; apply `framePt → fromFrame` on the branch's side (item 318's correction (1)); delete identical copies; the full gate on one commit; fast-
+     forward `main`; drafts of the counts. Alternative weighed: the strengthened bend's construction KB2. Why: wave 5's landing waits for MERGE's (item 348 (b)),
+     and this lane's own continuation is on that path (item 366's queue). Confidence: high. In flight after ML1's launch: 1 (I5o) + 1 (KL1) + 1 (ML1) = 3.
