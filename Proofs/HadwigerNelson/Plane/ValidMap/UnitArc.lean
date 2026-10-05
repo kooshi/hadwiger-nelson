@@ -15,7 +15,7 @@ reads six colours). The frame at a horn's vertex `v` is the foundation's: `a = e
 * **FS114-L60-LE**: L60-LE (`l60_le`), L60-EQ (`l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners`, `l60_eq_third`), L60-REAL (`l60Frag`,
   `l60_real`).
 * **FS112-N2-BENDS** with FS112-BEND merged: N2-SIGN (`n2_sign`), N2-ENV (`n2_env_toward`, `n2_env_away`, `n2_env_near`,
-  `n2_env_near_away`), the bends (`bend_toward`, `bend_away`, `bend_away_whole`).
+  `n2_env_near_away`), the bends (`bend_toward`, `bend_away_whole`).
 * **FS112-ISO** (`isoFrag`, `iso`); **FS112-FLANK** (`inType_shadows_horn`, `flank_siamese_of_inType`; its third clause, the bowtie's
   witness, is `flank_incomplete_bowtie` in `Plane/ValidMap/BaseSteps`); **FS112-N2-FLANK-Q** (`flankQ_upper`, `flankQ_lower`,
   `flankQ_both`).
@@ -26,19 +26,19 @@ namespace HadwigerNelson.Plane
 
 open Complex Real Set Filter Topology Metric
 
-/-- `framePt` has the `x` coordinate it is built from. -/
-theorem frameX_framePt (v : ℂ) (α x y : ℝ) : frameX v α (framePt v α x y) = x := by
+/-- `fromFrame` has the `x` coordinate it is built from. -/
+theorem frameX_fromFrame (v : ℂ) (α x y : ℝ) : frameX v α (fromFrame v α x y) = x := by
   have hce := conj_e_mul_e α
-  unfold frameX framePt
+  unfold frameX fromFrame
   have : (v + ((x : ℂ) + (y : ℂ) * I) * e α - v) * starRingEnd ℂ (e α) = (x : ℂ) + (y : ℂ) * I := by
     calc _ = ((x : ℂ) + (y : ℂ) * I) * (e α * starRingEnd ℂ (e α)) := by ring
       _ = _ := by rw [hce, mul_one]
   rw [this]; simp
 
-/-- `framePt` has the `y` coordinate it is built from. -/
-theorem frameY_framePt (v : ℂ) (α x y : ℝ) : frameY v α (framePt v α x y) = y := by
+/-- `fromFrame` has the `y` coordinate it is built from. -/
+theorem frameY_fromFrame (v : ℂ) (α x y : ℝ) : frameY v α (fromFrame v α x y) = y := by
   have hce := conj_e_mul_e α
-  unfold frameY framePt
+  unfold frameY fromFrame
   have : (v + ((x : ℂ) + (y : ℂ) * I) * e α - v) * starRingEnd ℂ (e α) = (x : ℂ) + (y : ℂ) * I := by
     calc _ = ((x : ℂ) + (y : ℂ) * I) * (e α * starRingEnd ℂ (e α)) := by ring
       _ = _ := by rw [hce, mul_one]
@@ -67,10 +67,10 @@ parabola `y = s x²/2`, which lie above every arc of curvature `m < s` and below
 theorem exists_mem_hornSet_aboveBelow (v : ℂ) (α : ℝ) {κ₁ κ₂ s m r : ℝ} (hr : 0 < r) (h1 : κ₁ < s) (h2 : s < κ₂)
     (hm : m ≠ s) :
     ∃ z ∈ hornSet v α κ₁ κ₂ r, (m < s → TanAbove v α m z) ∧ (s < m → TanBelow v α m z) := by
-  have hc : Continuous fun t : ℝ => framePt v α t (s * t ^ 2 / 2) := by unfold framePt; fun_prop
-  have hdist : ∀ᶠ t in 𝓝 (0 : ℝ), dist (framePt v α t (s * t ^ 2 / 2)) v < r := by
+  have hc : Continuous fun t : ℝ => fromFrame v α t (s * t ^ 2 / 2) := by unfold fromFrame; fun_prop
+  have hdist : ∀ᶠ t in 𝓝 (0 : ℝ), dist (fromFrame v α t (s * t ^ 2 / 2)) v < r := by
     have := hc.tendsto 0
-    have h0 : framePt v α 0 (s * 0 ^ 2 / 2) = v := by simp [framePt]
+    have h0 : fromFrame v α 0 (s * 0 ^ 2 / 2) = v := by simp [fromFrame]
     rw [h0] at this
     exact (Metric.tendsto_nhds.mp this) r hr
   have e1 := eventually_hornPt_pos h1
@@ -83,15 +83,15 @@ theorem exists_mem_hornSet_aboveBelow (v : ℂ) (α : ℝ) {κ₁ κ₂ s m r : 
       exact ⟨fun h => absurd h (not_lt.mpr hgt.le), fun _ => ht⟩
   have hall : ∀ᶠ t in 𝓝[>] (0 : ℝ), 0 < s - κ₁ - κ₁ * s ^ 2 * t ^ 2 / 4 ∧ s - κ₂ - κ₂ * s ^ 2 * t ^ 2 / 4 < 0 ∧
       ((m < s → 0 < s - m - m * s ^ 2 * t ^ 2 / 4) ∧ (s < m → s - m - m * s ^ 2 * t ^ 2 / 4 < 0)) ∧ t ∈ Ioi (0 : ℝ) ∧
-      dist (framePt v α t (s * t ^ 2 / 2)) v < r := by
+      dist (fromFrame v α t (s * t ^ 2 / 2)) v < r := by
     filter_upwards [e1, e2, e3, eventually_mem_nhdsWithin, hdist.filter_mono nhdsWithin_le_nhds] with t a b c d e
     exact ⟨a, b, c, d, e⟩
   obtain ⟨t, ht1, ht2, ht3, ht0, hd⟩ := hall.exists
   have ht0' : 0 < t := ht0
-  have hX : frameX v α (framePt v α t (s * t ^ 2 / 2)) = t := frameX_framePt v α _ _
-  have hY : frameY v α (framePt v α t (s * t ^ 2 / 2)) = s * t ^ 2 / 2 := frameY_framePt v α _ _
+  have hX : frameX v α (fromFrame v α t (s * t ^ 2 / 2)) = t := frameX_fromFrame v α _ _
+  have hY : frameY v α (fromFrame v α t (s * t ^ 2 / 2)) = s * t ^ 2 / 2 := frameY_fromFrame v α _ _
   have hpos : 0 < t ^ 2 / 2 := by positivity
-  refine ⟨framePt v α t (s * t ^ 2 / 2), ⟨hd, by rw [hX]; exact ht0', ?_, ?_⟩, ?_, ?_⟩
+  refine ⟨fromFrame v α t (s * t ^ 2 / 2), ⟨hd, by rw [hX]; exact ht0', ?_, ?_⟩, ?_, ?_⟩
   · unfold TanAbove; rw [hX, hY, tanHeight_hornPt]; exact mul_pos hpos ht1
   · unfold TanBelow; rw [hX, hY, tanHeight_hornPt]; exact mul_neg_of_pos_of_neg hpos ht2
   · intro h; unfold TanAbove; rw [hX, hY, tanHeight_hornPt]; exact mul_pos hpos (ht3.1 h)
@@ -3961,24 +3961,6 @@ theorem bend_toward (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} 
   · exact Or.inl h1
   · exact Or.inr ⟨hLU h1, mem_closedBall.mpr h1.1⟩
 
-/-- **FS112-N2-BENDS**, the away bend with the tangent bend (N2-AWAY and N2-TAN; FS112-BEND's away case is its special case): if the
-inner colour is not carried at the centre and the radius-2 arc `R₂(ᾱ)` lies in the domain, the arc bends away from `P` everywhere but
-along the arcs of R2 contact — for every `ε > 0` there is a valid map agreeing with `F` off the `ε`-neighbourhood of the closed arc and
-creating no unit arc, in which an interior point of the arc still on an arc of `Γ` on `ω(P)` lies in a non-degenerate interval of `C₂(ᾱ)`
-("isolated R2 contacts are cleared by a tangent bend, and only R2 along an arc blocks"), no colour but the inner one gains points, and
-the inner one only outside `B(P, 1)` near the arc. The domain hypothesis is inventory items 290–291's repair: off the domain the inner
-class's closure may meet `R₂(ᾱ)` in an infinite nowhere-dense set of angles, and then no local modification removes the arc
-(the counterexample: `plans/FS131-I4-implementation.md`, Stage 41); with `R₂(ᾱ)` in the domain, `C₂(ᾱ)` is locally a finite union of
-points and closed intervals. -/
-theorem bend_away (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
-    (hin : c ∉ F.coloursAt P) (hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom) {ε : ℝ} (hε : 0 < ε) :
-    ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (thickening ε (ringArc P θ₁ θ₂)) ∧ F'.RingArcsWithin F ∧
-      (∀ θ ∈ Ioo θ₁ θ₂, F'.OnRingArc P (ringPt P θ) →
-        ∃ a b, a < b ∧ θ ∈ Icc a b ∧ Icc a b ⊆ F.r2Contacts P θ₁ θ₂ c) ∧
-      (∀ j, j ≠ c → F'.region j ⊆ F.region j) ∧
-      F'.region c ⊆ F.region c ∪ (thickening ε (ringArc P θ₁ θ₂) \ ball P 1) := by
-  sorry
-
 /-- **FS112-N2-BENDS**, the away bend as the row states it (N2-AWAY): if the inner colour is not carried at the centre and no point of
 the radius-2 arc `R₂(ᾱ)` lies in the closure of its class, the whole arc bends away — no interior point of it is left on an arc of
 `Γ` on `ω(P)`. Proved directly on the away lens (`bendMap` with the circle about `P + d e(φ_m)` through the arc's ends), with no domain
@@ -4677,27 +4659,27 @@ end ArcMap
 
 /-- **The radial points of `ω(N)` from `v`, in the frame at `v`** (child of engine 5): `N + ρ e(α − π/2 + t)` has frame coordinates
 `(ρ sin t, 1 − ρ cos t)`, `N = v + e(α + π/2)`; at `ρ = 1` the arc of `ω(N)` leaving `v` along `e α`. -/
-theorem normalPt_add_eq_framePt (v : ℂ) (α ρ t : ℝ) :
-    v + e (α + π / 2) + (ρ : ℂ) * e (α - π / 2 + t) = framePt v α (ρ * Real.sin t) (1 - ρ * Real.cos t) := by
+theorem normalPt_add_eq_fromFrame (v : ℂ) (α ρ t : ℝ) :
+    v + e (α + π / 2) + (ρ : ℂ) * e (α - π / 2 + t) = fromFrame v α (ρ * Real.sin t) (1 - ρ * Real.cos t) := by
   have h1 : e (α + π / 2) = I * e α := e_add_pi_div_two α
   have h2 : e (α - π / 2 + t) = -(I * e α * e t) := by
     have := e_add_pi (α - π / 2 + t)
     rw [show α - π / 2 + t + π = (α + π / 2) + t by ring, e_add, h1] at this
     linear_combination this
   rw [h2, h1, e_eq t]
-  unfold framePt
+  unfold fromFrame
   simp only [Complex.ofReal_mul, Complex.ofReal_sub, Complex.ofReal_one]
   linear_combination (-((ρ : ℂ) * (Real.sin t : ℂ) * e α)) * Complex.I_sq
 
 /-- **The radial points of `ω(S′)` from `v`, in the frame at `v`** (child of engine 5, the lower bound): `S′ + ρ e(α + π/2 − t)` has
 frame coordinates `(ρ sin t, −(1 − ρ cos t))`, `S′ = v − e(α + π/2)`; at `ρ = 1` the arc of `ω(S′)` leaving `v` along `e α`. -/
-theorem normalPt_sub_add_eq_framePt (v : ℂ) (α ρ t : ℝ) :
-    v - e (α + π / 2) + (ρ : ℂ) * e (α + π / 2 - t) = framePt v α (ρ * Real.sin t) (-(1 - ρ * Real.cos t)) := by
+theorem normalPt_sub_add_eq_fromFrame (v : ℂ) (α ρ t : ℝ) :
+    v - e (α + π / 2) + (ρ : ℂ) * e (α + π / 2 - t) = fromFrame v α (ρ * Real.sin t) (-(1 - ρ * Real.cos t)) := by
   have h1 : e (α + π / 2) = I * e α := e_add_pi_div_two α
   have h2 : e (α + π / 2 - t) = I * e α * e (-t) := by
     rw [show α + π / 2 - t = (α + π / 2) + -t by ring, e_add, h1]
   rw [h2, h1, e_eq (-t), Real.cos_neg, Real.sin_neg]
-  unfold framePt
+  unfold fromFrame
   simp only [Complex.ofReal_mul, Complex.ofReal_sub, Complex.ofReal_one, Complex.ofReal_neg]
   linear_combination (-((ρ : ℂ) * (Real.sin t : ℂ) * e α)) * Complex.I_sq
 
@@ -4946,14 +4928,14 @@ theorem IsHorn.isRingArc_upper {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {c
   have hτ0 : 0 < τ := lt_min (by linarith [hr0.1]) one_pos
   have hτr : τ ≤ r / 2 := min_le_left _ _
   have hτ1 : τ ≤ 1 := min_le_right _ _
-  have hapt : ∀ t, ringPt N (α - π / 2 + t) = framePt v α (Real.sin t) (1 - Real.cos t) := fun t => by
-    have := normalPt_add_eq_framePt v α 1 t
+  have hapt : ∀ t, ringPt N (α - π / 2 + t) = fromFrame v α (Real.sin t) (1 - Real.cos t) := fun t => by
+    have := normalPt_add_eq_fromFrame v α 1 t
     rw [ofReal_one, one_mul, one_mul, one_mul] at this
     rw [ringPt, ← this]
   have hadist : ∀ t, 0 ≤ t → dist (ringPt N (α - π / 2 + t)) v ≤ t := by
     intro t ht
     have h := frame_normSq v α (ringPt N (α - π / 2 + t))
-    rw [hapt, frameX_framePt, frameY_framePt, ← hapt, ← dist_eq_norm] at h
+    rw [hapt, frameX_fromFrame, frameY_fromFrame, ← hapt, ← dist_eq_norm] at h
     have hc := Real.one_sub_sq_div_two_le_cos (x := t)
     have hsc := Real.sin_sq_add_cos_sq t
     have h2 : dist (ringPt N (α - π / 2 + t)) v ^ 2 ≤ t ^ 2 := by nlinarith
@@ -4966,10 +4948,10 @@ theorem IsHorn.isRingArc_upper {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {c
     have hsin : 0 < Real.sin t := Real.sin_pos_of_pos_of_lt_pi ht.1 (by linarith [ht.2, hτ1])
     have hsc := Real.sin_sq_add_cos_sq t
     refine ⟨by linarith [hadist t ht.1.le, hr0.1, ht.2, hτr], ?_, ?_, ?_⟩
-    · rw [hapt, frameX_framePt]; exact hsin
-    · unfold TanAbove; rw [hapt, frameX_framePt, frameY_framePt]; unfold tanHeight
+    · rw [hapt, frameX_fromFrame]; exact hsin
+    · unfold TanAbove; rw [hapt, frameX_fromFrame, frameY_fromFrame]; unfold tanHeight
       nlinarith
-    · unfold TanBelow; rw [hapt, frameX_framePt, frameY_framePt]; unfold tanHeight
+    · unfold TanBelow; rw [hapt, frameX_fromFrame, frameY_fromFrame]; unfold tanHeight
       nlinarith
   -- the arc points are not interior points
   have hnotI : ∀ t ∈ Ioc 0 τ, ringPt N (α - π / 2 + t) ∉ F.interiorPts := by
@@ -5000,14 +4982,14 @@ theorem IsHorn.isRingArc_upper {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {c
       ⟨hball (ball_subset_ball (min_le_left _ _) hz), ball_subset_ball (min_le_right _ _) hz⟩
     obtain ⟨p, hpB, hpH⟩ := mem_closure_iff.mp hvH (ball v δ') isOpen_ball (mem_ball_self hδ'0)
     have hsub := hjoin (ball v δ') (convex_ball v δ').isPreconnected hBsub p hpB hpH
-    have hq : framePt v α (-(δ' / 2)) 0 ∈ ball v δ' := by
+    have hq : fromFrame v α (-(δ' / 2)) 0 ∈ ball v δ' := by
       rw [mem_ball, dist_eq_norm]
-      unfold framePt
+      unfold fromFrame
       rw [show v + ((((-(δ' / 2) : ℝ) : ℂ) + ((0 : ℝ) : ℂ) * I)) * e α - v = ((-(δ' / 2) : ℝ) : ℂ) * e α by push_cast; ring,
         norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_neg, abs_of_pos (by linarith)]
       linarith
     have := (hsub hq).2.1
-    rw [frameX_framePt] at this
+    rw [frameX_fromFrame] at this
     linarith
   have hdomv : ∀ z, dist z v < r → z ∈ F.dom := fun z hz => hv (by rw [mem_closedBall]; linarith [hr0.2])
   have hΓ : ringArc N (α - π / 2) (α - π / 2 + τ) ⊆ F.Γ := by
@@ -5016,7 +4998,7 @@ theorem IsHorn.isRingArc_upper {v : ℂ} (hv : F.Covers v 1) {α κ₁ : ℝ} {c
     rcases (show 0 ≤ θ - (α - π / 2) by linarith [hθ.1]).eq_or_lt with h0 | hpos
     · have hθ0 : θ = α - π / 2 := by linarith
       have hv' : ringPt N θ = v := by
-        rw [hθ0, show α - π / 2 = α - π / 2 + 0 by ring, hapt]; simp [framePt]
+        rw [hθ0, show α - π / 2 = α - π / 2 + 0 by ring, hapt]; simp [fromFrame]
       rw [hv']
       exact ⟨hdomv v (by rw [dist_self]; exact hr0.1), not_not.mp fun h => hvnotI ⟨hdomv v (by rw [dist_self]; exact hr0.1), h⟩⟩
     · have ht : θ - (α - π / 2) ∈ Ioc 0 τ := ⟨hpos, by linarith [hθ.2]⟩
@@ -5530,14 +5512,14 @@ theorem IsHorn.isRingArc_lower {v : ℂ} (hv : F.Covers v 1) {α κ₂ : ℝ} {c
   have hτ0 : 0 < τ := lt_min (by linarith [hr0.1]) one_pos
   have hτr : τ ≤ r / 2 := min_le_left _ _
   have hτ1 : τ ≤ 1 := min_le_right _ _
-  have hapt : ∀ t, ringPt S (α + π / 2 - t) = framePt v α (Real.sin t) (-(1 - Real.cos t)) := fun t => by
-    have := normalPt_sub_add_eq_framePt v α 1 t
+  have hapt : ∀ t, ringPt S (α + π / 2 - t) = fromFrame v α (Real.sin t) (-(1 - Real.cos t)) := fun t => by
+    have := normalPt_sub_add_eq_fromFrame v α 1 t
     rw [ofReal_one, one_mul, one_mul, one_mul] at this
     rw [ringPt, ← this]
   have hadist : ∀ t, 0 ≤ t → dist (ringPt S (α + π / 2 - t)) v ≤ t := by
     intro t ht
     have h := frame_normSq v α (ringPt S (α + π / 2 - t))
-    rw [hapt, frameX_framePt, frameY_framePt, ← hapt, ← dist_eq_norm] at h
+    rw [hapt, frameX_fromFrame, frameY_fromFrame, ← hapt, ← dist_eq_norm] at h
     have hc := Real.one_sub_sq_div_two_le_cos (x := t)
     have hsc := Real.sin_sq_add_cos_sq t
     have h2 : dist (ringPt S (α + π / 2 - t)) v ^ 2 ≤ t ^ 2 := by nlinarith
@@ -5550,10 +5532,10 @@ theorem IsHorn.isRingArc_lower {v : ℂ} (hv : F.Covers v 1) {α κ₂ : ℝ} {c
     have hsin : 0 < Real.sin t := Real.sin_pos_of_pos_of_lt_pi ht.1 (by linarith [ht.2, hτ1])
     have hsc := Real.sin_sq_add_cos_sq t
     refine ⟨by linarith [hadist t ht.1.le, hr0.1, ht.2, hτr], ?_, ?_, ?_⟩
-    · rw [hapt, frameX_framePt]; exact hsin
-    · unfold TanAbove; rw [hapt, frameX_framePt, frameY_framePt]; unfold tanHeight
+    · rw [hapt, frameX_fromFrame]; exact hsin
+    · unfold TanAbove; rw [hapt, frameX_fromFrame, frameY_fromFrame]; unfold tanHeight
       nlinarith
-    · unfold TanBelow; rw [hapt, frameX_framePt, frameY_framePt]; unfold tanHeight
+    · unfold TanBelow; rw [hapt, frameX_fromFrame, frameY_fromFrame]; unfold tanHeight
       nlinarith
   have hnotI : ∀ t ∈ Ioc 0 τ, ringPt S (α + π / 2 - t) ∉ F.interiorPts := by
     intro t ht hI
@@ -5583,14 +5565,14 @@ theorem IsHorn.isRingArc_lower {v : ℂ} (hv : F.Covers v 1) {α κ₂ : ℝ} {c
       ⟨hball (ball_subset_ball (min_le_left _ _) hz), ball_subset_ball (min_le_right _ _) hz⟩
     obtain ⟨p, hpB, hpH⟩ := mem_closure_iff.mp hvH (ball v δ') isOpen_ball (mem_ball_self hδ'0)
     have hsub := hjoin (ball v δ') (convex_ball v δ').isPreconnected hBsub p hpB hpH
-    have hq : framePt v α (-(δ' / 2)) 0 ∈ ball v δ' := by
+    have hq : fromFrame v α (-(δ' / 2)) 0 ∈ ball v δ' := by
       rw [mem_ball, dist_eq_norm]
-      unfold framePt
+      unfold fromFrame
       rw [show v + ((((-(δ' / 2) : ℝ) : ℂ) + ((0 : ℝ) : ℂ) * I)) * e α - v = ((-(δ' / 2) : ℝ) : ℂ) * e α by push_cast; ring,
         norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_neg, abs_of_pos (by linarith)]
       linarith
     have := (hsub hq).2.1
-    rw [frameX_framePt] at this
+    rw [frameX_fromFrame] at this
     linarith
   have hdomv : ∀ z, dist z v < r → z ∈ F.dom := fun z hz => hv (by rw [mem_closedBall]; linarith [hr0.2])
   have hΓ : ringArc S (α + π / 2 - τ) (α + π / 2) ⊆ F.Γ := by
@@ -5599,7 +5581,7 @@ theorem IsHorn.isRingArc_lower {v : ℂ} (hv : F.Covers v 1) {α κ₂ : ℝ} {c
     rcases (show 0 ≤ α + π / 2 - θ by linarith [hθ.2]).eq_or_lt with h0 | hpos
     · have hθ0 : θ = α + π / 2 := by linarith
       have hv' : ringPt S θ = v := by
-        rw [hθ0, show α + π / 2 = α + π / 2 - 0 by ring, hapt]; simp [framePt]
+        rw [hθ0, show α + π / 2 = α + π / 2 - 0 by ring, hapt]; simp [fromFrame]
       rw [hv']
       exact ⟨hdomv v (by rw [dist_self]; exact hr0.1), not_not.mp fun h => hvnotI ⟨hdomv v (by rw [dist_self]; exact hr0.1), h⟩⟩
     · have ht : α + π / 2 - θ ∈ Ioc 0 τ := ⟨hpos, by linarith [hθ.1]⟩

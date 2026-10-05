@@ -1,10 +1,10 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Surgery
 
 /-!
-# The local moves at a point: SHAVE, MERGE-RAY and MERGE (FS110-N4-SHAVE, N4-RAY, W-MERGE)
+# The local moves at a point: SHAVE and MERGE-RAY (FS110-N4-SHAVE, N4-RAY)
 
-Wave 4's three simplifying moves (`plans/FS131-w4-kernel-plan.md` §§ 3.2, 13; inventory item 236), proved under `Contact`'s exact
-statements as `exists_shave_aux`, `exists_rayMerge_aux`, `exists_merge_aux`, which `Contact`'s leaves cite. Each move is a local
+Wave 4's simplifying moves (`plans/FS131-w4-kernel-plan.md` §§ 3.2, 13; inventory item 236), proved under `Contact`'s exact
+statements as `exists_shave_aux`, `exists_rayMerge_aux`, which `Contact`'s leaves cite. Each move is a local
 surgery at `v`: the same domain, the arcs cut inside a small disc about `v` and new arcs added there, the colouring changed only on the
 recoloured region; validity is engine 1 (`Valid.of_agreesOff`) over the move's clearness, "no unit arc created" is engine 2
 (`ringArcsWithin_of_Γ_subset`), and the sector count at `v` is a partition of the new map's interior points near `v`.
@@ -546,7 +546,7 @@ end ArcMap
 
 /-! ## MERGE-RAY (`exists_rayMerge_aux`): the gap's clearness and the merge with the nearest `c`-horn (FS131-IM3)
 
-The first conjunct, `ray_clear`, is record § 3.3's exact argument over parabola points `framePt v α X (μ X²/2)` of each horn
+The first conjunct, `ray_clear`, is record § 3.3's exact argument over parabola points `fromFrame v α X (μ X²/2)` of each horn
 (`RayGap`): a unit circle about a point of `c` through a gap point has each horn inside it or outside it, and each of the four
 cases dies. The merge corrects N4-RAY's route (inventory item 262 (a)): among the `c`-horns along `α` above the lower horn (the upper
 horn and every chart sector of colour `c` in the gap) the one of least lower curvature is merged with the lower horn — by the cut when
@@ -557,28 +557,28 @@ germ of direction `α` with curvature in `[κ₂, κ₃]` (`Near.RayConfig.exist
 
 namespace RayGap
 
-/-- `framePt` has the `x` coordinate it is built from. -/
-theorem frameX_framePt (v : ℂ) (α x y : ℝ) : frameX v α (framePt v α x y) = x := by
+/-- `fromFrame` has the `x` coordinate it is built from. -/
+theorem frameX_fromFrame (v : ℂ) (α x y : ℝ) : frameX v α (fromFrame v α x y) = x := by
   have hce := conj_e_mul_e α
-  unfold frameX framePt
+  unfold frameX fromFrame
   have : (v + ((x : ℂ) + (y : ℂ) * I) * e α - v) * starRingEnd ℂ (e α) = (x : ℂ) + (y : ℂ) * I := by
     calc _ = ((x : ℂ) + (y : ℂ) * I) * (e α * starRingEnd ℂ (e α)) := by ring
       _ = _ := by rw [hce, mul_one]
   rw [this]; simp
 
-/-- `framePt` has the `y` coordinate it is built from. -/
-theorem frameY_framePt (v : ℂ) (α x y : ℝ) : frameY v α (framePt v α x y) = y := by
+/-- `fromFrame` has the `y` coordinate it is built from. -/
+theorem frameY_fromFrame (v : ℂ) (α x y : ℝ) : frameY v α (fromFrame v α x y) = y := by
   have hce := conj_e_mul_e α
-  unfold frameY framePt
+  unfold frameY fromFrame
   have : (v + ((x : ℂ) + (y : ℂ) * I) * e α - v) * starRingEnd ℂ (e α) = (x : ℂ) + (y : ℂ) * I := by
     calc _ = ((x : ℂ) + (y : ℂ) * I) * (e α * starRingEnd ℂ (e α)) := by ring
       _ = _ := by rw [hce, mul_one]
   rw [this]; simp
 
 /-- The squared distance from a frame point to `y`, in the frame. -/
-theorem sq_dist_framePt (v : ℂ) (α x yy : ℝ) (y : ℂ) :
-    dist (framePt v α x yy) y ^ 2 = (x - frameX v α y) ^ 2 + (yy - frameY v α y) ^ 2 := by
-  rw [sq_dist_frame v α, frameX_framePt, frameY_framePt]
+theorem sq_dist_fromFrame (v : ℂ) (α x yy : ℝ) (y : ℂ) :
+    dist (fromFrame v α x yy) y ^ 2 = (x - frameX v α y) ^ 2 + (yy - frameY v α y) ^ 2 := by
+  rw [sq_dist_frame v α, frameX_fromFrame, frameY_fromFrame]
 
 /-- The height of the parabola point `(t, μ t²/2)` above the arc of curvature `κ`. -/
 theorem tanHeight_parab (κ μ t : ℝ) : tanHeight κ t (μ * t ^ 2 / 2) = (t ^ 2 / 2) * (μ - κ - κ * μ ^ 2 * t ^ 2 / 4) := by
@@ -586,27 +586,27 @@ theorem tanHeight_parab (κ μ t : ℝ) : tanHeight κ t (μ * t ^ 2 / 2) = (t ^
 
 /-- **The parabola of curvature `μ` runs inside the horn** `hornSet v α κ₁ κ₂ R` near `v`, for `κ₁ < μ < κ₂`. -/
 theorem exists_parab_mem_hornSet (v : ℂ) (α : ℝ) {κ₁ κ₂ μ R : ℝ} (hR : 0 < R) (h1 : κ₁ < μ) (h2 : μ < κ₂) :
-    ∃ δ > 0, ∀ X ∈ Ioo 0 δ, framePt v α X (μ * X ^ 2 / 2) ∈ hornSet v α κ₁ κ₂ R := by
+    ∃ δ > 0, ∀ X ∈ Ioo 0 δ, fromFrame v α X (μ * X ^ 2 / 2) ∈ hornSet v α κ₁ κ₂ R := by
   have hc1 : Continuous fun t : ℝ => μ - κ₁ - κ₁ * μ ^ 2 * t ^ 2 / 4 := by fun_prop
   have hc2 : Continuous fun t : ℝ => μ - κ₂ - κ₂ * μ ^ 2 * t ^ 2 / 4 := by fun_prop
-  have hcP : Continuous fun t : ℝ => framePt v α t (μ * t ^ 2 / 2) := by unfold framePt; fun_prop
+  have hcP : Continuous fun t : ℝ => fromFrame v α t (μ * t ^ 2 / 2) := by unfold fromFrame; fun_prop
   have e1 : ∀ᶠ t in 𝓝 (0 : ℝ), 0 < μ - κ₁ - κ₁ * μ ^ 2 * t ^ 2 / 4 :=
     (hc1.tendsto 0).eventually (lt_mem_nhds (by simp; linarith))
   have e2 : ∀ᶠ t in 𝓝 (0 : ℝ), μ - κ₂ - κ₂ * μ ^ 2 * t ^ 2 / 4 < 0 :=
     (hc2.tendsto 0).eventually (gt_mem_nhds (by simp; linarith))
-  have e3 : ∀ᶠ t in 𝓝 (0 : ℝ), dist (framePt v α t (μ * t ^ 2 / 2)) v < R := by
-    have h0 : framePt v α 0 (μ * 0 ^ 2 / 2) = v := by simp [framePt]
+  have e3 : ∀ᶠ t in 𝓝 (0 : ℝ), dist (fromFrame v α t (μ * t ^ 2 / 2)) v < R := by
+    have h0 : fromFrame v α 0 (μ * 0 ^ 2 / 2) = v := by simp [fromFrame]
     have := hcP.tendsto 0
     rw [h0] at this
     exact (Metric.tendsto_nhds.mp this) R hR
-  have hall : ∀ᶠ t in 𝓝[>] (0 : ℝ), framePt v α t (μ * t ^ 2 / 2) ∈ hornSet v α κ₁ κ₂ R := by
+  have hall : ∀ᶠ t in 𝓝[>] (0 : ℝ), fromFrame v α t (μ * t ^ 2 / 2) ∈ hornSet v α κ₁ κ₂ R := by
     filter_upwards [(e1.and (e2.and e3)).filter_mono nhdsWithin_le_nhds, self_mem_nhdsWithin] with t ht ht0
     obtain ⟨a, b, d⟩ := ht
     have ht0' : (0 : ℝ) < t := ht0
     have hpos : 0 < t ^ 2 / 2 := by positivity
-    refine ⟨d, by rw [frameX_framePt]; exact ht0', ?_, ?_⟩
-    · unfold TanAbove; rw [frameX_framePt, frameY_framePt, tanHeight_parab]; exact mul_pos hpos a
-    · unfold TanBelow; rw [frameX_framePt, frameY_framePt, tanHeight_parab]; exact mul_neg_of_pos_of_neg hpos b
+    refine ⟨d, by rw [frameX_fromFrame]; exact ht0', ?_, ?_⟩
+    · unfold TanAbove; rw [frameX_fromFrame, frameY_fromFrame, tanHeight_parab]; exact mul_pos hpos a
+    · unfold TanBelow; rw [frameX_fromFrame, frameY_fromFrame, tanHeight_parab]; exact mul_neg_of_pos_of_neg hpos b
   obtain ⟨δ, hδ, hsub⟩ := (mem_nhdsGT_iff_exists_Ioo_subset.mp hall)
   exact ⟨δ, hδ, fun X hX => hsub hX⟩
 
@@ -615,17 +615,17 @@ curvatures `μ, μ' ∈ (−1, 1)` are both inside `B(y, 1)` or both outside `B�
 outside otherwise). -/
 theorem exists_same_side {v y : ℂ} {α μ μ' : ℝ} (hyv : dist y v = 1) (hμ : |μ| < 1) (hμ' : |μ'| < 1) {δ : ℝ}
     (hδ : 0 < δ) :
-    ∃ X ∈ Ioo 0 δ, (dist (framePt v α X (μ * X ^ 2 / 2)) y < 1 ∧ dist (framePt v α X (μ' * X ^ 2 / 2)) y < 1) ∨
-      (1 < dist (framePt v α X (μ * X ^ 2 / 2)) y ∧ 1 < dist (framePt v α X (μ' * X ^ 2 / 2)) y) := by
+    ∃ X ∈ Ioo 0 δ, (dist (fromFrame v α X (μ * X ^ 2 / 2)) y < 1 ∧ dist (fromFrame v α X (μ' * X ^ 2 / 2)) y < 1) ∨
+      (1 < dist (fromFrame v α X (μ * X ^ 2 / 2)) y ∧ 1 < dist (fromFrame v α X (μ' * X ^ 2 / 2)) y) := by
   set a := frameX v α y
   set b := frameY v α y
   have hab : a ^ 2 + b ^ 2 = 1 := by
     have := sq_dist_frame v α y v
     rw [hyv, frameX_self, frameY_self] at this; simp only [sub_zero] at this; linarith
   have hb : |b| ≤ 1 := by rw [abs_le]; constructor <;> nlinarith [sq_nonneg a]
-  have hd : ∀ (m X : ℝ), dist (framePt v α X (m * X ^ 2 / 2)) y ^ 2 =
+  have hd : ∀ (m X : ℝ), dist (fromFrame v α X (m * X ^ 2 / 2)) y ^ 2 =
       1 + X ^ 2 - 2 * a * X + m ^ 2 * X ^ 4 / 4 - b * m * X ^ 2 := fun m X => by
-    rw [sq_dist_framePt]; nlinarith [hab]
+    rw [sq_dist_fromFrame]; nlinarith [hab]
   have hbm : ∀ m : ℝ, |m| < 1 → b * m < 1 := fun m hm => by
     have := abs_mul b m
     have h' : |b * m| < 1 := by rw [abs_mul]; nlinarith [abs_nonneg b, abs_nonneg m]
@@ -641,7 +641,7 @@ theorem exists_same_side {v y : ℂ} {α μ μ' : ℝ} (hyv : dist y v = 1) (hμ
     have hX0 : 0 < X := lt_min (by linarith) (by linarith)
     have hXa : X ≤ a / 4 := min_le_right _ _
     have hX1 : X ≤ 1 / 4 := by nlinarith [hab, sq_nonneg b]
-    have key : ∀ m : ℝ, |m| < 1 → dist (framePt v α X (m * X ^ 2 / 2)) y < 1 := fun m hm => by
+    have key : ∀ m : ℝ, |m| < 1 → dist (fromFrame v α X (m * X ^ 2 / 2)) y < 1 := fun m hm => by
       have h1 := hd m X
       have h2 := hm2 m hm
       have h3 := hbm' m hm
@@ -651,18 +651,18 @@ theorem exists_same_side {v y : ℂ} {α μ μ' : ℝ} (hyv : dist y v = 1) (hμ
           have := mul_le_mul_of_nonneg_left hX2 (sq_nonneg X); nlinarith
         nlinarith [sq_nonneg m, sq_nonneg X]
       have h5 : 0 < 2 * a * X - (X ^ 2 + m ^ 2 * X ^ 4 / 4 - b * m * X ^ 2) := by nlinarith
-      nlinarith [dist_nonneg (x := framePt v α X (m * X ^ 2 / 2)) (y := y)]
+      nlinarith [dist_nonneg (x := fromFrame v α X (m * X ^ 2 / 2)) (y := y)]
     exact ⟨X, ⟨hX0, lt_of_le_of_lt (min_le_left _ _) (by linarith)⟩, Or.inl ⟨key μ hμ, key μ' hμ'⟩⟩
   · -- behind or abeam: both outside
     set X := δ / 2 with hX
     have hX0 : 0 < X := by linarith
-    have key : ∀ m : ℝ, |m| < 1 → 1 < dist (framePt v α X (m * X ^ 2 / 2)) y := fun m hm => by
+    have key : ∀ m : ℝ, |m| < 1 → 1 < dist (fromFrame v α X (m * X ^ 2 / 2)) y := fun m hm => by
       have h1 := hd m X
       have h3 := hbm m hm
       have h4 : 0 ≤ m ^ 2 * X ^ 4 / 4 := by positivity
       have h5 : 0 < X ^ 2 * (1 - b * m) := mul_pos (by positivity) (by linarith)
-      have h6 : 1 < dist (framePt v α X (m * X ^ 2 / 2)) y ^ 2 := by nlinarith
-      nlinarith [dist_nonneg (x := framePt v α X (m * X ^ 2 / 2)) (y := y)]
+      have h6 : 1 < dist (fromFrame v α X (m * X ^ 2 / 2)) y ^ 2 := by nlinarith
+      nlinarith [dist_nonneg (x := fromFrame v α X (m * X ^ 2 / 2)) (y := y)]
     exact ⟨X, ⟨hX0, by linarith⟩, Or.inr ⟨key μ hμ, key μ' hμ'⟩⟩
 
 /-- A non-negative number below `1` has square below `1`. -/
@@ -800,7 +800,7 @@ theorem abeam_identity {x y X Y μ : ℝ} (hab : (X - x) ^ 2 + (Y - y) ^ 2 = 1) 
 
 /-- **The abeam case**: if `y`'s offset `(a, b)` from `t = (x, yt)` is a unit vector with `|b| ≤ 3x²/4`, the parabola point of curvature
 `μ` at abscissa `x + a x / 2` lies inside `B(y, 1)`; so a set holding those parabola points cannot lie outside `B̄(y, 1)`. -/
-theorem abeam_contra {v y : ℂ} {α μ x yt δ : ℝ} {S : Set ℂ} (hP : ∀ X ∈ Ioo 0 δ, framePt v α X (μ * X ^ 2 / 2) ∈ S)
+theorem abeam_contra {v y : ℂ} {α μ x yt δ : ℝ} {S : Set ℂ} (hP : ∀ X ∈ Ioo 0 δ, fromFrame v α X (μ * X ^ 2 / 2) ∈ S)
     (hout : S ⊆ {z | 1 < dist z y}) (hμ : |μ| < 1) (hx : 0 < x) (hx4 : x < 1 / 4) (hxδ : 3 * x / 2 < δ)
     (hytx : |yt| ≤ x ^ 2) (hab : (frameX v α y - x) ^ 2 + (frameY v α y - yt) ^ 2 = 1)
     (hbx : |frameY v α y - yt| ≤ 3 * x ^ 2 / 4) : False := by
@@ -809,11 +809,11 @@ theorem abeam_contra {v y : ℂ} {α μ x yt δ : ℝ} {S : Set ℂ} (hP : ∀ X
   have hx'0 : x / 2 ≤ x + (frameX v α y - x) * x / 2 := by have := abs_le.mp ha1; nlinarith
   have hx'1 : x + (frameX v α y - x) * x / 2 ≤ 3 * x / 2 := by have := abs_le.mp ha1; nlinarith
   have hQm := hP (x + (frameX v α y - x) * x / 2) ⟨by linarith, by linarith⟩
-  have o3 : 1 < dist (framePt v α (x + (frameX v α y - x) * x / 2)
+  have o3 : 1 < dist (fromFrame v α (x + (frameX v α y - x) * x / 2)
       (μ * (x + (frameX v α y - x) * x / 2) ^ 2 / 2)) y := hout hQm
-  have o3' : 1 < dist (framePt v α (x + (frameX v α y - x) * x / 2)
+  have o3' : 1 < dist (fromFrame v α (x + (frameX v α y - x) * x / 2)
       (μ * (x + (frameX v α y - x) * x / 2) ^ 2 / 2)) y ^ 2 := one_lt_sq o3
-  rw [sq_dist_framePt, abeam_identity hab] at o3'
+  rw [sq_dist_fromFrame, abeam_identity hab] at o3'
   have hdx := abs_abeam_height hμ (by linarith) hx'1 hytx
   have := abeam_inside (a := frameX v α y - x) (b := frameY v α y - yt) hab hx hx4 hbx hdx
   linarith
@@ -912,7 +912,7 @@ theorem ray_clear (hF : F.Valid) {v : ℂ} {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c
   have hu₂p : 0 < μ' * x ^ 2 / 2 - yt := RayGap.parab_above hκ3 hB hytx hx hx1 (by linarith)
   have hd₁ := RayGap.vertical_identity (m := μ * x ^ 2 / 2) hab
   have hd₂ := RayGap.vertical_identity (m := μ' * x ^ 2 / 2) hab
-  rw [← RayGap.sq_dist_framePt] at hd₁ hd₂
+  rw [← RayGap.sq_dist_fromFrame] at hd₁ hd₂
   have hdn : ∀ p : ℂ, dist p y < 1 → dist p y ^ 2 < 1 := fun p h => RayGap.sq_lt_one dist_nonneg h
   have hdp : ∀ p : ℂ, 1 < dist p y → 1 < dist p y ^ 2 := fun p h => RayGap.one_lt_sq h
   -- the mixed case puts `y` on `ω(v)`, where both horns fall on one side
@@ -1661,16 +1661,6 @@ theorem exists_rayMerge_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ�
       F'.HasSectors v c n ∧ F'.coloursAt v ⊆ F.coloursAt v ∧ ∀ x ∈ sphere v ρ, (F'.coloursAt x).ncard ≤ 3 := by
   have hcl := ray_clear hF h23 hH hH' h1 h4
   exact ⟨hcl, exists_rayMerge_of_clear hF hv hn h23 hH hH' h1 h4 hcl⟩
-
-/-- **FS110-W-MERGE** (`exists_merge`'s statement, copied by `tools/fs131_im_statements.py`): if `int D_c(v)` is non-empty and `c`
-has `n + 1 ≥ 2` sectors at `v`, recolouring a gap inside `D_c(v)` near `v` merges two of them. `Contact`'s `exists_merge` cites it. -/
-theorem exists_merge_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)
-    (hn : F.HasSectors v c (n + 1)) (hD : (interior (F.allowedCone v c)).Nonempty) :
-    ∃ ρ > 0, ∃ F' : ArcMap k, F'.Valid ∧ F'.AgreesOff F (closedBall v ρ) ∧ F'.RingArcsWithin F ∧
-      (F.Condition5 → F'.Condition5) ∧ F'.HasSectors v c n ∧ F'.coloursAt v ⊆ F.coloursAt v ∧
-      (∀ x ∈ sphere v ρ, (F'.coloursAt x).ncard ≤ 3 ∧ ¬ F'.HasRepeatedColour x) ∧
-      ∀ v' ∉ closedBall v ρ, F'.allowedCone v' c = F.allowedCone v' c := by
-  sorry
 
 end ArcMap
 

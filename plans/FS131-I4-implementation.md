@@ -1582,6 +1582,48 @@ every use; inhabitants and docstring lines the vacuity step needs, in wave 4's m
 statements use changes; `framePt`'s rename changes a name, not a definition), any `axiom`, `CLAUDE.md`, `LEAN.md`, `tools/claude_md_fact_audit.py`, another
 job's tools. `Near.RayConfig.exists_merge` (`Moves` l. 1481, proved, read by `exists_rayMerge_of_clear`) is a different declaration and stays.
 
+## Stage 45 — SAVED (FS131-G4): the three declarations deleted, `framePt` renamed `fromFrame`, `tools/fs131_k4_decls.py` taught `_root_.` names; 0 `sorry`
+
+**The deletions** (items 291 (d), 295 (a), 297): `ArcMap.bend_away` (`UnitArc`), `ArcMap.exists_merge` (`Contact`), `ArcMap.exists_merge_aux` (`Moves`), each with
+its docstring, and their three `#print axioms` records in `scripts/Axioms.lean` (exact-line matches; `Near.RayConfig.exists_merge` and `bend_away_whole` kept).
+Header lines: `Contact`'s "* **FS110-W-MERGE**: `exists_merge`." and its now-empty section header `/-! ## FS110-W-MERGE -/` (I4n's precedent for `n3_end`'s);
+`UnitArc`'s bends line now names `bend_toward`, `bend_away_whole`; `Moves`' module docstring (title "SHAVE and MERGE-RAY (FS110-N4-SHAVE, N4-RAY)", and the
+list of `_aux` statements without `exists_merge_aux`). `ARCHITECTURE.md`: `Contact`'s row drops "FS110-W-MERGE (`exists_merge`)"; `Moves`' row names the two
+moves and says W-MERGE left wave 4 (item 295 (a)). Nothing else in the three modules changed (`git diff`: 51 lines deleted, 4 rewritten). The deleted text is
+on `71cca146` and on `fs131-w4mm` / `fs131-w4ba` for the later landings. **Consequence for another job's tool** (not edited, not a gate check of this
+brief): `tools/fs131_im_statements.py --check` now fails on `exists_merge` ("statement missing (Moves)") by design of item 295 (a); IMM2's landing restores
+both statements and its check.
+
+**The rename** (item 271): wave 4's `HadwigerNelson.Plane.framePt` (`Plane/ValidMap/Basic` l. 44, colliding with wave 2's `Plane/Slack` l. 2800, a different
+definition) is now **`fromFrame`** — "the point from frame coordinates", the inverse of `frameX`, `frameY` (`frameX v α (fromFrame v α x y) = x`). Every
+identifier containing `framePt` in wave 4's three files was renamed by one substitution `framePt → fromFrame` (102 occurrences in `Basic`, `UnitArc`, `Moves`,
+`scripts/Axioms.lean`, `ARCHITECTURE.md`; 102 after): the definition, `frameX_fromFrame`, `frameY_fromFrame` (root and `RayGap` copies), `sq_dist_fromFrame`,
+`normalPt_add_eq_fromFrame`, `normalPt_sub_add_eq_fromFrame`, `tanHeight_one_fromFrame`, and their seven records. The definition's body is unchanged.
+`fromFrame` occurs nowhere on `main`, `fs131-w5`, `-w5p`, `-w5x`, `-w4mm`, `-w4ba`, `-ww` (`git grep`, 0 each). **For wave 5's merges**: `fs131-w5`'s
+`ValidMap/FlankUA` (and the copies of `Basic`/`UnitArc`/`Moves` on `-w5p`, `-w5x`, `-w4mm`, `-ww`) use `framePt` and its lemma names; after this landing they
+take the same substitution in their own files. Where such a file imports `Plane/Slack` (wave 2's `framePt (x : ℂ) (θ s t : ℝ)`, same arity), a missed
+`framePt` would elaborate against the other definition — a merge check should grep `framePt` in wave 4 and 5's files and find none.
+
+**The tool** (item 281 (b)): `tools/fs131_k4_decls.py` resolves a theorem written `_root_.X` to `X` (`qualify`). Before: "495 names, 2 missing" (the two
+`_root_.` theorems of `Contact`, Stage 44). Controls: `--plant-root` (the resolution off) "FIRED (2 missing, 2 _root_ names)", exit 0 — two-sided: it must
+miss exactly the `_root_.` names and no other (`data/fs131/g4/k4decls-plant-root.log`); a planted dropped record (`BranchGerms.frameY_lt_of_mem`'s line removed
+from a copy-restored `scripts/Axioms.lean`) — `--check` "493 names, 1 missing", exit 1 (`data/fs131/g4/k4decls-plant-drop.log`; the file restored, `cmp`
+identical); the faithful `--check` "493 names, 0 missing", exit 0 (`data/fs131/g4/k4decls-check.log`) — 493 = 495 − `bend_away` − `exists_merge`
+(`exists_merge_aux` is in `Moves`, outside K4's five modules). The old `--plant` (namespaces dropped) still fires (491 missing).
+
+**Build**: "build: OK — 446 of 446 batches, 11 module(s) rebuilt, 0 module(s) with warnings, 11m7s", exit 0 (`build/gate/build/20261005T014409Z-283282.log`;
+driver log `data/fs131/g4/build-g4-deletions.log`): 0 warnings (`grep -c warning` on the full log: 0). `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'` over
+`Proofs/`: 0. `tools/check_architecture.py`: PASS (`data/fs131/g4/check-architecture-g4-45.txt`). `tools/fs131_i4_treedupes.py`: 7,806 declarations (7,809 − 3),
+the same 3 pre-existing repeats (`data/fs131/g4/treedupes-g4-45.log`).
+
+**The ruling of this stage** (inventory item 304, brief amendment of 2026-10-05; its first line matches `plans/FS131-close-inventory.md` on `main` l. 2404 as a
+truncation): my message to Keryx — the vacuity note on `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N` can be settled neither way here
+(`VACUITY DECLARED:` reads STALE on any site whose carrier is not proved empty, and these sites are GENERIC; no theorem empties the local class; a model is a
+bowtie-sized construction, sketched in the message) — is ruled: docstring notes naming `stuck_chain` (FS110-N4-FIN) as the refutation on a whole terminal
+plane map, no marker, no model; the sketch goes to the inventory as a stub to write. Item 144 (b): `AeProperRegions` is this job's (item 153 moved the vacuity
+half to each wave's landing; the brief's "done by FS131-T3" is the coordinator's slip, acknowledged); `CPColouring` lives only on `main` (wave 2), so its
+entry is merged at the merge.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;

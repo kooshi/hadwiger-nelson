@@ -1,0 +1,4 @@
+plant (_root_ resolution off): FIRED (2 missing, 2 _root_ names)
+  HadwigerNelson.Plane.ArcMap._root_.HadwigerNelson.Plane.BranchGerms.frameY_lt_of_mem
+  HadwigerNelson.Plane.ArcMap._root_.HadwigerNelson.Plane.BranchGerms.lt_frameY_of_mem
+plant-root exit=0

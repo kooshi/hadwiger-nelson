@@ -11,7 +11,7 @@ vocabulary of FS-110's N3–N4 rounds (`plans/FS110-N-proof.md` § Continuation 
   `N = v + n`, `S′ = v − n`, `P_k = v + kn` are `v + k * n` with `n = e (α + π / 2)`.
 * **Upward curvature.** The circle (or line) through `v` tangent to `a` with upward curvature `κ` is `tanHeight κ = 0`, and
   "above it" is `tanHeight κ > 0` (exact, not second order: every boundary arc is a circle or a line). The unit circles `ω(N)`
-  and `ω(S′)` are the curvatures `1` and `−1` (`tanHeight_one_framePt`).
+  and `ω(S′)` are the curvatures `1` and `−1` (`tanHeight_one_fromFrame`).
 * **A horn** along `e α` between the arcs of curvatures `κ₁ < κ₂` is `hornSet v α κ₁ κ₂ r`; `IsHorn` says it is, for all small
   `r`, a sector of the map of one colour. A cusp horn has the single direction `α` as its cone.
 * **Sectors** (`IsSector`): the components of the interior points in `B(v, r)` whose closure holds `v`; `HasSectors v c n` and
@@ -41,7 +41,7 @@ noncomputable def frameX (v : ℂ) (α : ℝ) (z : ℂ) : ℝ := ((z - v) * star
 noncomputable def frameY (v : ℂ) (α : ℝ) (z : ℂ) : ℝ := ((z - v) * starRingEnd ℂ (e α)).im
 
 /-- The point with frame coordinates `(x, y)`: `v + (x + y i) e α`. -/
-noncomputable def framePt (v : ℂ) (α x y : ℝ) : ℂ := v + ((x : ℂ) + (y : ℂ) * I) * e α
+noncomputable def fromFrame (v : ℂ) (α x y : ℝ) : ℂ := v + ((x : ℂ) + (y : ℂ) * I) * e α
 
 /-- The height of `(x, y)` above the circle through the origin tangent to the `x`-axis with upward curvature `κ` (the line
 `y = 0` when `κ = 0`): `y − κ (x² + y²)/2`. The circle is its zero set; its centre side, near the origin, is the positive side

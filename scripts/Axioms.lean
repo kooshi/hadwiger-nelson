@@ -2659,7 +2659,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.shaveAvailable_of_not_doublyShadowed
 #print axioms HadwigerNelson.Plane.ArcMap.exists_shave
 #print axioms HadwigerNelson.Plane.ArcMap.exists_rayMerge
-#print axioms HadwigerNelson.Plane.ArcMap.exists_merge
 #print axioms HadwigerNelson.Plane.ArcMap.stuck_structure
 #print axioms HadwigerNelson.Plane.ArcMap.stuck_chain
 #print axioms HadwigerNelson.Plane.ArcMap.lock
@@ -2732,7 +2731,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.n2_env_near
 #print axioms HadwigerNelson.Plane.ArcMap.n2_env_near_away
 #print axioms HadwigerNelson.Plane.ArcMap.bend_toward
-#print axioms HadwigerNelson.Plane.ArcMap.bend_away
 #print axioms HadwigerNelson.Plane.ArcMap.bend_away_whole
 #print axioms HadwigerNelson.Plane.ArcMap.isOpen_isoDom
 #print axioms HadwigerNelson.Plane.ArcMap.isoCol_locallyConstant
@@ -2820,10 +2818,10 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.eventually_arcs_on_sphere_two
 #print axioms HadwigerNelson.Plane.ArcMap.exists_polarBox_subset_region
 #print axioms HadwigerNelson.Plane.ArcMap.mem_shadow_of_crossing
-#print axioms HadwigerNelson.Plane.normalPt_sub_add_eq_framePt
+#print axioms HadwigerNelson.Plane.normalPt_sub_add_eq_fromFrame
 #print axioms HadwigerNelson.Plane.ArcMap.IsHorn.isRingArc_lower
 #print axioms HadwigerNelson.Plane.ArcMap.flankQ_lower_shadow
-#print axioms HadwigerNelson.Plane.normalPt_add_eq_framePt
+#print axioms HadwigerNelson.Plane.normalPt_add_eq_fromFrame
 #print axioms HadwigerNelson.Plane.ArcMap.IsHorn.isRingArc_upper
 #print axioms HadwigerNelson.Plane.ArcMap.flankQ_upper_shadow
 #print axioms HadwigerNelson.Plane.eq_midpoint_of_dist
@@ -3129,8 +3127,8 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.dot_sub
 #print axioms HadwigerNelson.Plane.dot_nonneg_of_coneAt_subset
 #print axioms HadwigerNelson.Plane.dot_nonpos_of_coneAt_subset
-#print axioms HadwigerNelson.Plane.frameX_framePt
-#print axioms HadwigerNelson.Plane.frameY_framePt
+#print axioms HadwigerNelson.Plane.frameX_fromFrame
+#print axioms HadwigerNelson.Plane.frameY_fromFrame
 #print axioms HadwigerNelson.Plane.tanHeight_hornPt
 #print axioms HadwigerNelson.Plane.eventually_hornPt_pos
 #print axioms HadwigerNelson.Plane.eventually_hornPt_neg
@@ -3365,7 +3363,6 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 
 #print axioms HadwigerNelson.Plane.ArcMap.exists_shave_aux
 #print axioms HadwigerNelson.Plane.ArcMap.exists_rayMerge_aux
-#print axioms HadwigerNelson.Plane.ArcMap.exists_merge_aux
 #print axioms HadwigerNelson.Plane.e_sub_e_two_mul
 #print axioms HadwigerNelson.Plane.branchPt_eq_circle
 #print axioms HadwigerNelson.Plane.abs_half_le_one
@@ -3494,9 +3491,9 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.exists_shave_recolour
 
 -- FS131-IM3: MERGE-RAY's children (Moves)
-#print axioms HadwigerNelson.Plane.RayGap.frameX_framePt
-#print axioms HadwigerNelson.Plane.RayGap.frameY_framePt
-#print axioms HadwigerNelson.Plane.RayGap.sq_dist_framePt
+#print axioms HadwigerNelson.Plane.RayGap.frameX_fromFrame
+#print axioms HadwigerNelson.Plane.RayGap.frameY_fromFrame
+#print axioms HadwigerNelson.Plane.RayGap.sq_dist_fromFrame
 #print axioms HadwigerNelson.Plane.RayGap.tanHeight_parab
 #print axioms HadwigerNelson.Plane.RayGap.exists_parab_mem_hornSet
 #print axioms HadwigerNelson.Plane.RayGap.exists_same_side
