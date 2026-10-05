@@ -181,6 +181,7 @@ import Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
 import Proofs.HadwigerNelson.Plane.ValidMap.Chain
 import Proofs.HadwigerNelson.Plane.ValidMap.HexRing
 import Proofs.HadwigerNelson.Plane.ValidMap.MapTopology
+import Proofs.HadwigerNelson.Thomassen
 import Proofs.HadwigerNelson.Plane.ValidMap.MapGraph
 import Proofs.HadwigerNelson.Plane.ValidMap.Terminal
 import Proofs.HadwigerNelson.Plane.ValidMap.Dense

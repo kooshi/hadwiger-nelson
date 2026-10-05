@@ -96,3 +96,28 @@ to the route that reads it; `filledGraph_finSep` is stated in `MapGraph` beside 
 constructor. Order: the move, `triLattice_planarLike`, `reduced_props_of_planarLike`; then the ladder adversary if under about half a session; then
 `filledGraph_finSep`'s proof, in that theorem's lines alone, if budget remains. My touches extend to those `MapGraph` lines and to the ladder in the new
 module.
+
+## Stage 2 — SAVED: the move
+
+- **The module**: `Proofs/HadwigerNelson/Thomassen.lean` (namespace `HadwigerNelson.Thomassen`, the path mirroring the namespace; `Thomassen` is no
+  Mathlib root namespace, `LEAN.md` § Searching — Lean). It imports **Mathlib only**: `MapGraph`'s five Mathlib imports plus
+  `Mathlib.Tactic.NormNum` (the block's `norm_num`, reached in `MapGraph` through its project imports). Its own module docstring heads it; the block
+  follows byte for byte.
+- **`MapGraph`**: the block (lines 36–595 at `02e85433`) and the one blank line after it deleted; `import Proofs.HadwigerNelson.Thomassen` added after
+  its last import. Nothing else touched (its module docstring still describes the pure graph theory; left as is, by the brief's "only").
+- **Checked by `tools/fs131_it_move.py`** against `git show 02e85433:…/MapGraph.lean`: the block (29,612 bytes) occurs exactly once, verbatim, in the
+  new module; the new `MapGraph` equals the original minus the block and its blank line, plus the one import line. `data/fs131/it/move-check.txt`:
+  **PASS, exit 0.** Controls (`--plant`, `data/fs131/it/move-check-plant.txt`): plant A (one character of the block changed in the module, `∧` → `∨` in
+  `offTwo`) reports FAIL "block occurs 0 times"; plant B (one space added to `MapGraph`'s remainder) reports FAIL at line 37; both red as they must.
+- `Proofs.lean`: `import Proofs.HadwigerNelson.Thomassen` before `MapGraph`'s. `ARCHITECTURE.md`: a new `Thomassen` row (Imports `—`); `MapGraph`'s
+  row says the pure graph theory moved, its Imports cell gains `Thomassen`. `tools/check_architecture.py`: **PASS, exit 0**
+  (`data/fs131/it/arch-check-stage2.txt`); control: a copy without `Thomassen` in `MapGraph`'s Imports cell fails with "imports of
+  Plane/ValidMap/MapGraph: … real-only ['Thomassen']". `scripts/Axioms.lean`: unchanged at this stage (no declaration renamed or added; it imports
+  `Proofs`); my "FS131-IT1" block comes with the first new declarations.
+- **Build: OK — 447 of 447 batches, 3 modules rebuilt (`Thomassen`, `Plane.ValidMap.MapGraph`, `Proofs`), 12 with warnings, every warning
+  `declaration uses 'sorry'` (0 others), exit 0** (`build/gate/build/20261005T021654Z-510811.log`, last line "Build completed successfully (5404
+  jobs)."; driver log `data/fs131/it/build-stage2.log`).
+
+**Meanwhile, in scratch (not yet in the tree)**: the whole route of § 1.3 elaborates under `lake env lean` with `finSep` added — the reachability
+layer, the 2-separator lemmas, the collapse of a cyclic sequence to a cycle, `H`'s four properties, and `triLattice_planarLike`; no `sorry`. Next
+stage: the field (the ruling), then the inhabitant and the leaf into the module.
