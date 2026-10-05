@@ -4695,7 +4695,7 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_inType_iff
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_outType_iff
 
-/-! ## FS-131, `OpenMove` (job FS131-IO1) — OPEN, the fifth move (children `sorry` until the implementer closes them) -/
+/-! ## FS-131, `OpenMove` (jobs FS131-IO1, IO2, IO3) — OPEN, the fifth move -/
 -- FS131-IO1
 #print axioms HadwigerNelson.Plane.ArcMap.HasHornCount.eq
 #print axioms HadwigerNelson.Plane.ArcMap.HasDegree.eq
@@ -4788,6 +4788,22 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.openCol_of_mem_sector_out
 #print axioms HadwigerNelson.Plane.ArcMap.Near.open_coloursAt_rim
 #print axioms HadwigerNelson.Plane.ArcMap.Near.open_not_hasRepeatedColour_rim
+-- FS131-IO3
+#print axioms HadwigerNelson.Plane.closure_sectorBetween_subset
+#print axioms HadwigerNelson.Plane.ArcMap.Near.closure_gapSet_subset_gapSet
+#print axioms HadwigerNelson.Plane.ArcMap.Near.OpenConfig.exists_clearSet
+#print axioms HadwigerNelson.Plane.ArcMap.Near.OpenConfig.v_mem_closure_region
+#print axioms HadwigerNelson.Plane.ArcMap.Near.mem_open_interiorPts_of_sector_off
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_region_of_region
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_region_cases
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_region_subset
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_isContact_iff
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_exists_tile
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_tile_split
+#print axioms HadwigerNelson.Plane.ArcMap.Near.v_mem_closure_open_tile
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_tile_cover
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_inType_iff
+#print axioms HadwigerNelson.Plane.ArcMap.Near.open_outType_iff
 
 #eval IO.println "=== PURCHASED ==="
 

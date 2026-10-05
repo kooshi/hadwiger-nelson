@@ -519,3 +519,43 @@ already up to date, nothing built, 1 module(s) with warnings"** (the one `sorry`
 `build/gate/build/20261005T121321Z-4119716.log`, terminal output `data/fs131/io/build-io3-0.log`.
 
 ## Stage 11 — SAVED (FS131-IO3)
+
+## Stage 12 — SAVED (FS131-IO3): `open_allowedCone` proved; `exists_open` on the standard three
+
+**The route** (IO2's § 10.3 item 1, every child MERGE's with the wedge added; MERGE's surgery lemmas cannot be instantiated, one end of the gap
+being the partial sector, so each is re-run for `openArcs`/`openCol`). New theorems, all in `OpenMove.lean`:
+
+- `closure_sectorBetween_subset` (generic): the closure of `sectorBetween v β₁ κ₁ β₂ κ₂ r` lies in the image of the compact region
+  `{(t, φ) : t ∈ [0, r], germDir β₁ κ₁ t ≤ φ ≤ germDir β₂ κ₂ t}` (bounded since `arcsin ∈ [−π/2, π/2]`).
+- `Near.closure_gapSet_subset_gapSet`: the closure of the gap out to `ρ/2` lies in `{v}` and the gap out to `ρ` (MERGE's
+  `closure_gapSet_subset` with the chain replaced by the gap: a gap sector's two germs are gap germs).
+- `Near.OpenConfig.exists_clearSet` — **the open clear set**: with `η` from `cfg.margin`, `U = sectorBetween v (lift s 0) κ₀ (ψ + η) 0 ρ`
+  (`up`) or `sectorBetween v (ψ − η) 0 (lift s (b+1)) κ_{b+1} ρ` (`¬ up`) is open, clear for `c` (a direction inside the horn's sector by
+  validity, `isClear_col`; one in the clear range by `cfg.clear`; one in the margin by `cfg.margin`), inside `B(v, ρ)`, and holds the
+  closures of the recoloured gap and wedge off `v` (`cfg.ray` and strict monotonicity of the lifted directions place them strictly inside
+  `U`'s range). This is where IO2's `margin` field is consumed.
+- `Near.OpenConfig.v_mem_closure_region`: `v` is in the closure of `F`'s class of `c` (the horn's sector).
+- Surgery section: `mem_open_interiorPts_of_sector_off` (a chart-sector point off the partial sector and the gap is interior to OPEN's map,
+  at any radius below `ρ`, the rim arc at `ρ/2` included), `open_region_of_region` (`F`'s class of `c` survives: inside `B(v, ρ)` it is the
+  horn's sector, by `lone`), `open_region_cases`, `open_region_subset`, `open_isContact_iff`, `open_exists_tile`, `open_tile_split` (from
+  `open_valid`), `v_mem_closure_open_tile` (through `open_partition`: near `v` a new `c`-point lies in OPEN's sectors, and of colour `c`
+  only the merged piece, which is preconnected, interior, and holds the horn's sector), `open_tile_cover`, `open_inType_iff`,
+  `open_outType_iff`.
+- `open_allowedCone`: the assembly, `merge_allowedCone`'s text over the OPEN children. **No statement changed**: the diff against
+  `276aeaff` removes exactly one line (`sorry`) and adds the fifteen theorems and the proof.
+
+**The build** (under the slot, `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, source unchanged since
+07:29:45, before the build's start): **OK** — 451 of 451 batches, 2 modules rebuilt (`OpenMove` 8.6 s, `Proofs`), **0 modules with
+warnings**, 8 min 37 s, exit 0, "Build completed successfully (5750 jobs)"; log `build/gate/build/20261005T123016Z-33946.log`, terminal
+output `data/fs131/io/build-io3-1.log`. `grep sorry OpenMove.lean`: 0.
+
+**Axioms** against that build's oleans (`data/fs131/io/iter.sh data/fs131/io/AxiomsIO.lean`: IO1's 30 records, IO2's 60, this job's 15;
+`data/fs131/io/axioms-io3.txt`), classified by `tools/fs131_io_axioms.py --expect 105` with no `--sorry` allowance
+(`data/fs131/io/axioms-io3-classified.txt`, exit 0): **105 records — 103 on exactly `[propext, Classical.choice, Quot.sound]`, 2 on fewer
+(`idx_idx` on `[propext]`, `turns_idx` on `[propext, Quot.sound]`), 0 `sorryAx`, 0 foreign**; `Near.open_allowedCone` and
+`ArcMap.exists_open` read exactly the standard three (IO2's print read `sorryAx` on both). **Control**: the same print with `sorryAx`
+planted into `exists_open`'s record makes the classifier exit 1 naming it (`SORRY-UNEXPECTED`). `scripts/Axioms.lean`'s OPEN block gains a
+`-- FS131-IO3` list of the fifteen (its banner no longer says the children are `sorry`); `tools/check_architecture.py`: PASS (no new module).
+The new names: `data/fs131/io/io3-new-decls.txt` (`tools/fs131_io_decls.py` against `276aeaff`).
+
+## Stage 12 — SAVED (FS131-IO3)

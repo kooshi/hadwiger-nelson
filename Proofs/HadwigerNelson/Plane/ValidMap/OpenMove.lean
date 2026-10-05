@@ -679,6 +679,34 @@ theorem _root_.HadwigerNelson.Plane.polar_eq_of_abs_lt {v : ℂ} {t t' φ φ' : 
   have h3 : m = 0 := Int.abs_lt_one_iff.mp (by exact_mod_cast h2)
   rw [hm, h3]; simp
 
+/-- **The closure of a sector between two germs** lies in the image of the closed region `t ∈ [0, r]`, `φ` between the two germs'
+directions at `t` (the region is compact, `arcsin` being bounded). -/
+theorem _root_.HadwigerNelson.Plane.closure_sectorBetween_subset (v : ℂ) (β₁ κ₁ β₂ κ₂ r : ℝ) :
+    closure (sectorBetween v β₁ κ₁ β₂ κ₂ r) ⊆
+      {z | ∃ t ∈ Icc 0 r, ∃ φ, germDir β₁ κ₁ t ≤ φ ∧ φ ≤ germDir β₂ κ₂ t ∧ z = v + (t : ℂ) * e φ} := by
+  have hcont : ∀ β κ : ℝ, Continuous fun t => germDir β κ t := fun β κ => continuous_germDir β κ
+  set K : Set (ℝ × ℝ) := ({p | 0 ≤ p.1} ∩ {p | p.1 ≤ r}) ∩
+    ({p | germDir β₁ κ₁ p.1 ≤ p.2} ∩ {p | p.2 ≤ germDir β₂ κ₂ p.1}) with hK
+  have hKc : IsClosed K :=
+    ((isClosed_le continuous_const continuous_fst).inter (isClosed_le continuous_fst continuous_const)).inter
+      ((isClosed_le ((hcont β₁ κ₁).comp continuous_fst) continuous_snd).inter
+        (isClosed_le continuous_snd ((hcont β₂ κ₂).comp continuous_fst)))
+  have hKsub : K ⊆ Icc 0 r ×ˢ Icc (β₁ - π / 2) (β₂ + π / 2) := by
+    rintro ⟨t, φ⟩ ⟨⟨h0, hr⟩, h1, h2⟩
+    simp only [mem_setOf_eq, germDir] at h0 hr h1 h2
+    refine ⟨⟨h0, hr⟩, ?_, ?_⟩
+    · linarith [Real.neg_pi_div_two_le_arcsin (κ₁ * t / 2)]
+    · linarith [Real.arcsin_le_pi_div_two (κ₂ * t / 2)]
+  have hKk : IsCompact K := (isCompact_Icc.prod isCompact_Icc).of_isClosed_subset hKc hKsub
+  have hg : Continuous fun p : ℝ × ℝ => v + (p.1 : ℂ) * e p.2 :=
+    continuous_const.add ((Complex.continuous_ofReal.comp continuous_fst).mul (continuous_e.comp continuous_snd))
+  have hcl : IsClosed ((fun p : ℝ × ℝ => v + (p.1 : ℂ) * e p.2) '' K) := (hKk.image hg).isClosed
+  refine (closure_minimal ?_ hcl).trans ?_
+  · rintro z ⟨t, ht, φ, hφ, rfl⟩
+    exact ⟨(t, φ), ⟨⟨ht.1.le, ht.2.le⟩, hφ.1.le, hφ.2.le⟩, rfl⟩
+  · rintro _ ⟨⟨t, φ⟩, ⟨⟨h0, hr⟩, h1, h2⟩, rfl⟩
+    exact ⟨t, ⟨h0, hr⟩, φ, h1, h2, rfl⟩
+
 theorem _root_.HadwigerNelson.Plane.BranchGerms.isOpen_openWedge {n : ℕ} (G : BranchGerms n) (v : ℂ) (up : Bool) (s : Fin n)
     (b : ℕ) (ψ ρ : ℝ) : IsOpen (G.openWedge v up s b ψ ρ) := by
   unfold BranchGerms.openWedge; split_ifs <;> exact isOpen_sectorBetween _ _ _ _ _ _
@@ -1573,6 +1601,165 @@ theorem OpenConfig.openSectors_facts (cfg : X.OpenConfig c up s b ψ ρc) {r : �
   · rw [← sector_eq_hornSet_iff hr₀ i]
     exact ⟨fun hh => ⟨hh.2, h1, h1', h3⟩, fun hh => ⟨X.hC.sector_nonempty hr₀ i, hh.1⟩⟩
 
+/-- **The closure of the gap out to `ρ/2`** lies in `{v}` and the gap out to `ρ` (a gap sector's closure points off `v` are in the
+sector or on its two germs, both gap germs). -/
+theorem closure_gapSet_subset_gapSet {a : ℕ} {ρ : ℝ} (h : X.Small ρ) :
+    closure (X.G.gapSet v s a b (ρ / 2)) ⊆ {v} ∪ X.G.gapSet v s a b ρ := by
+  have hsec : ∀ m, a < m → m < b → X.G.sector v ρ (BranchGerms.idx s m) ⊆ X.G.gapSet v s a b ρ := fun m h1 h2 z hz =>
+    Or.inl (mem_iUnion₂.mpr ⟨_, ⟨m, h1, h2, rfl⟩, hz⟩)
+  have hger : ∀ m, a < m → m ≤ b → ∀ t ∈ Ioo 0 ρ,
+      branchPt v (X.G.β (BranchGerms.idx s m)) (X.G.κ (BranchGerms.idx s m)) t ∈ X.G.gapSet v s a b ρ :=
+    fun m h1 h2 t ht => Or.inr (mem_iUnion₂.mpr ⟨_, ⟨m, h1, h2, rfl⟩, ⟨t, ht, rfl⟩⟩)
+  unfold BranchGerms.gapSet
+  rw [closure_union, (Set.toFinite _).closure_biUnion, (Set.toFinite _).closure_biUnion]
+  refine union_subset (iUnion₂_subset fun i hi => ?_) (iUnion₂_subset fun j hj => ?_)
+  · obtain ⟨m, h1, h2, rfl⟩ := hi
+    intro z hz
+    have hz' := closure_mono (sector_mono (by linarith [h.1] : ρ / 2 ≤ ρ) _) hz
+    have hzle := (BranchGerms.mem_closure_sector hz).1
+    by_cases hzv : z = v
+    · exact Or.inl hzv
+    · right
+      have hz0 : 0 < ‖z - v‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hzv)
+      have hzρ : ‖z - v‖ < ρ := by linarith [h.1]
+      rcases BranchGerms.closure_sector_cases hz' hz0 hzρ with h3 | h3 | h3
+      · exact hsec m h1 h2 h3
+      · rw [h3]; exact hger m h1 h2.le _ ⟨hz0, hzρ⟩
+      · rw [BranchGerms.next_idx] at h3
+        rw [h3]; exact hger (m + 1) (by omega) (by omega) _ ⟨hz0, hzρ⟩
+  · obtain ⟨m, h1, h2, rfl⟩ := hj
+    intro z hz
+    have hz' : z ∈ branchPt v (X.G.β (BranchGerms.idx s m)) (X.G.κ (BranchGerms.idx s m)) '' Icc 0 (ρ / 2) :=
+      closure_minimal (image_mono Ioo_subset_Icc_self) (isCompact_Icc.image (continuous_branchPt v _ _)).isClosed hz
+    obtain ⟨t, ht, rfl⟩ := hz'
+    rcases eq_or_lt_of_le ht.1 with h0 | h0
+    · left; rw [← h0]; simp [branchPt]
+    · right; exact hger m h1 h2 t ⟨h0, by linarith [ht.2, h.1]⟩
+
+/-- **The open clear set about OPEN's recoloured set** (with the margin `η` of `OpenConfig.margin`): for `up`, the points between the
+horn's outer germ `idx s 0` and the direction `ψ + η`; otherwise between `ψ − η` and the horn's outer germ `idx s (b + 1)`; out to `ρ`.
+It is open, clear for `c` (the horn's points by validity, the rest by `clear` and `margin`), inside `B(v, ρ)`, and it holds the closures
+of the recoloured gap and wedge off `v`. -/
+theorem OpenConfig.exists_clearSet (hF : F.Valid) (cfg : X.OpenConfig c up s b ψ ρc) {ρ : ℝ} (h : X.Small ρ) (hρc : ρ ≤ ρc) :
+    ∃ U : Set ℂ, IsOpen U ∧ (∀ z ∈ U, F.IsClear c z) ∧ U ⊆ ball v ρ ∧
+      closure (X.G.gapSet v s 0 b (ρ / 2)) ⊆ {v} ∪ U ∧ closure (X.G.openWedge v up s b ψ ρ) ⊆ {v} ∪ U := by
+  obtain ⟨η, hη, hmar⟩ := cfg.margin
+  have hb1 := cfg.hb1
+  have hcl := cfg.clear
+  have hray := cfg.ray
+  have hhorn : ∀ i, ∀ z ∈ X.G.sector v ρ i, X.col i = c → F.IsClear c z := fun i z hz hic => by
+    have hzr := X.hcol i ρ h.mem_Ioc hz
+    have : F.col z = c := hzr.2.trans hic
+    rw [← this]; exact isClear_col hF hzr.1
+  have hmono : ∀ {t : ℝ}, t ∈ Ioo 0 ρ → StrictMono fun m => X.G.liftDir s m t := fun ht =>
+    X.G.liftDir_mono X.hord s ⟨ht.1, ht.2.trans h.2.1⟩
+  have hball : ∀ {t φ : ℝ}, t ∈ Ioo 0 ρ → v + (t : ℂ) * e φ ∈ ball v ρ := fun ht => by
+    rw [mem_ball, dist_eq_norm, add_sub_cancel_left, norm_mul_e ht.1.le]; exact ht.2
+  -- the closure of the wedge, off `v`, in polar form
+  have hW : ∀ z ∈ closure (X.G.openWedge v up s b ψ ρ), z = v ∨ ∃ t ∈ Ioo 0 ρ, ∃ φ,
+      (if up then X.G.liftDir s b t ≤ φ ∧ φ ≤ ψ else ψ ≤ φ ∧ φ ≤ X.G.liftDir s 1 t) ∧ z = v + (t : ℂ) * e φ := by
+    intro z hz
+    have hz' : z ∈ closure (if up then sectorBetween v (X.G.lift s b) (X.G.κ (BranchGerms.idx s b)) ψ 0 (ρ / 2)
+        else sectorBetween v ψ 0 (X.G.lift s 1) (X.G.κ (BranchGerms.idx s 1)) (ρ / 2)) := hz
+    cases up
+    · simp only [Bool.false_eq_true, if_false] at hz' ⊢
+      obtain ⟨t, ht, φ, h1, h2, rfl⟩ := closure_sectorBetween_subset _ _ _ _ _ _ hz'
+      rcases eq_or_lt_of_le ht.1 with h0 | h0
+      · left; rw [← h0]; simp
+      · right; refine ⟨t, ⟨h0, by linarith [ht.2, h.1]⟩, φ, ⟨?_, h2⟩, rfl⟩
+        simpa [germDir] using h1
+    · simp only [if_true] at hz' ⊢
+      obtain ⟨t, ht, φ, h1, h2, rfl⟩ := closure_sectorBetween_subset _ _ _ _ _ _ hz'
+      rcases eq_or_lt_of_le ht.1 with h0 | h0
+      · left; rw [← h0]; simp
+      · right; refine ⟨t, ⟨h0, by linarith [ht.2, h.1]⟩, φ, ⟨h1, ?_⟩, rfl⟩
+        simpa [germDir] using h2
+  -- the gap out to `ρ`, in polar form
+  have hG : ∀ z ∈ X.G.gapSet v s 0 b ρ, ∃ t ∈ Ioo 0 ρ, ∃ φ ∈ Icc (X.G.liftDir s 1 t) (X.G.liftDir s b t),
+      z = v + (t : ℂ) * e φ := by
+    rintro z (hz | hz)
+    · obtain ⟨i, hi, hzi⟩ := mem_iUnion₂.mp hz
+      obtain ⟨φ, hφ, hzφ⟩ := exists_dir_of_mem_gapSec h hi hzi
+      rw [zero_add] at hφ
+      exact ⟨_, norm_of_mem_sector hzi, φ, hφ, hzφ⟩
+    · obtain ⟨j, ⟨m, h1, h2, rfl⟩, t, ht, rfl⟩ := mem_iUnion₂.mp hz
+      have hφ := liftDir_gap_germ (s := s) (⟨ht.1, ht.2.trans h.2.1⟩ : t ∈ Ioo 0 X.s₀) h1 h2
+      rw [zero_add] at hφ
+      exact ⟨t, ht, _, hφ, X.G.branchPt_idx v s m t⟩
+  cases up
+  · -- `σ = −1`: the horn is `idx s b`, the partial sector `idx s 0`
+    simp only [Bool.false_eq_true, if_false, BranchGerms.rayPos, zero_add] at hcl hray hmar hW
+    have hhb : X.col (BranchGerms.idx s b) = c := cfg.col_horn
+    refine ⟨sectorBetween v (ψ - η) 0 (X.G.lift s (b + 1)) (X.G.κ (BranchGerms.idx s (b + 1))) ρ, isOpen_sectorBetween _ _ _ _ _ _,
+      ?_, ?_, ?_, ?_⟩
+    · rintro z ⟨t, ht, φ, hφ, rfl⟩
+      simp only [zero_mul, zero_div, Real.arcsin_zero, add_zero, mem_Ioo] at hφ
+      have hφ2 : φ < X.G.liftDir s (b + 1) t := hφ.2
+      have htc : t ∈ Ioo 0 ρc := ⟨ht.1, ht.2.trans_le hρc⟩
+      by_cases h1 : φ ≤ ψ
+      · exact hmar t htc φ hφ.1.le h1
+      by_cases h2 : φ ≤ X.G.liftDir s b t
+      · exact hcl t htc φ (not_le.mp h1).le h2
+      · exact hhorn _ _ ((X.G.mem_sector_idx s b).mpr ⟨t, ht, φ, ⟨not_le.mp h2, hφ2⟩, rfl⟩) hhb
+    · rintro z ⟨t, ht, φ, -, rfl⟩; exact hball ht
+    · intro z hz
+      rcases closure_gapSet_subset_gapSet h hz with hz | hz
+      · exact Or.inl hz
+      · right
+        obtain ⟨t, ht, φ, hφ, rfl⟩ := hG z hz
+        have htc : t ∈ Ioo 0 ρc := ⟨ht.1, ht.2.trans_le hρc⟩
+        refine ⟨t, ht, φ, ⟨?_, ?_⟩, rfl⟩
+        · simp only [zero_mul, zero_div, Real.arcsin_zero, add_zero]; linarith [(hray t htc).2, hφ.1]
+        · show φ < X.G.liftDir s (b + 1) t
+          linarith [hφ.2, hmono ht (Nat.lt_succ_self b)]
+    · intro z hz
+      rcases hW z hz with rfl | ⟨t, ht, φ, hφ, rfl⟩
+      · exact Or.inl rfl
+      · right
+        refine ⟨t, ht, φ, ⟨?_, ?_⟩, rfl⟩
+        · simp only [zero_mul, zero_div, Real.arcsin_zero, add_zero]; linarith [hφ.1]
+        · show φ < X.G.liftDir s (b + 1) t
+          linarith [hφ.2, hmono ht (show 1 < b + 1 by omega)]
+  · -- `σ = +1`: the horn is `idx s 0`, the partial sector `idx s b`
+    simp only [if_true, BranchGerms.rayPos] at hcl hray hmar hW
+    have hh0 : X.col (BranchGerms.idx s 0) = c := cfg.col_horn
+    refine ⟨sectorBetween v (X.G.lift s 0) (X.G.κ (BranchGerms.idx s 0)) (ψ + η) 0 ρ, isOpen_sectorBetween _ _ _ _ _ _,
+      ?_, ?_, ?_, ?_⟩
+    · rintro z ⟨t, ht, φ, hφ, rfl⟩
+      simp only [zero_mul, zero_div, Real.arcsin_zero, add_zero, mem_Ioo] at hφ
+      have hφ1 : X.G.liftDir s 0 t < φ := hφ.1
+      have htc : t ∈ Ioo 0 ρc := ⟨ht.1, ht.2.trans_le hρc⟩
+      by_cases h1 : φ < X.G.liftDir s 1 t
+      · exact hhorn _ _ ((X.G.mem_sector_idx s 0).mpr ⟨t, ht, φ, ⟨hφ1, h1⟩, rfl⟩) hh0
+      by_cases h2 : φ ≤ ψ
+      · exact hcl t htc φ (not_lt.mp h1) h2
+      · exact hmar t htc φ (not_le.mp h2).le hφ.2.le
+    · rintro z ⟨t, ht, φ, -, rfl⟩; exact hball ht
+    · intro z hz
+      rcases closure_gapSet_subset_gapSet h hz with hz | hz
+      · exact Or.inl hz
+      · right
+        obtain ⟨t, ht, φ, hφ, rfl⟩ := hG z hz
+        have htc : t ∈ Ioo 0 ρc := ⟨ht.1, ht.2.trans_le hρc⟩
+        refine ⟨t, ht, φ, ⟨?_, ?_⟩, rfl⟩
+        · show X.G.liftDir s 0 t < φ
+          linarith [hφ.1, hmono ht zero_lt_one]
+        · simp only [zero_mul, zero_div, Real.arcsin_zero, add_zero]; linarith [(hray t htc).1, hφ.2]
+    · intro z hz
+      rcases hW z hz with rfl | ⟨t, ht, φ, hφ, rfl⟩
+      · exact Or.inl rfl
+      · right
+        refine ⟨t, ht, φ, ⟨?_, ?_⟩, rfl⟩
+        · show X.G.liftDir s 0 t < φ
+          linarith [hφ.1, hmono ht (show 0 < b by omega)]
+        · simp only [zero_mul, zero_div, Real.arcsin_zero, add_zero]; linarith [hφ.2]
+
+/-- `v` is in the closure of `F`'s class of `c` (the horn's sector). -/
+theorem OpenConfig.v_mem_closure_region (cfg : X.OpenConfig c up s b ψ ρc) {ρ : ℝ} (h : X.Small ρ) :
+    v ∈ closure (F.region c) :=
+  closure_mono (s := X.G.sector v ρ (BranchGerms.idx s (BranchGerms.hornPos up b)))
+    (fun _ hy => cfg.col_horn ▸ X.hcol _ ρ h.mem_Ioc hy) (X.hC.mem_closure_sector h.mem_Ioc _)
+
 /-! ## OPEN's clauses -/
 
 section Surgery
@@ -2170,6 +2357,368 @@ theorem open_rim (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small 
   exact (ncard_le_ncard (open_coloursAt_rim h' hρρ' h hn hx) (toFinite _)).trans
     ((X.hC.ncard_coloursAt_le_two X.hs₀ X.hdisj hxv hxs).trans (by norm_num))
 
+/-- **A point of a chart sector off the partial sector and off the gap is interior to OPEN's map** (it is interior to `F`; the rim
+arc runs through gap sectors, the ray and the wedge's rim arc through the partial sector or on its gap germ). -/
+theorem mem_open_interiorPts_of_sector_off (cfg : X.OpenConfig c up s b ψ ρc) (h : X.Small ρ) (hρc : ρ ≤ ρc) {i : Fin X.n}
+    (hi : i ≠ BranchGerms.idx s (BranchGerms.rayPos up b)) (hig : i ∉ BranchGerms.gapSec s 0 b) {z : ℂ}
+    (hz : z ∈ X.G.sector v ρ i) :
+    z ∈ (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).interiorPts := by
+  have hzb : z ∈ ball v ρ := by rw [mem_ball, dist_eq_norm]; exact (norm_of_mem_sector hz).2
+  refine (mem_open_interiorPts_iff h hzb).mpr fun hzA => ?_
+  have hzF := sector_subset_interiorPts h i hz
+  have hρ2 : ρ / 2 ∈ Ioo 0 ρ := ⟨by linarith [h.1], by linarith [h.1]⟩
+  have hρ2c : ρ / 2 ∈ Ioo 0 ρc := ⟨hρ2.1, hρ2.2.trans_le hρc⟩
+  obtain ⟨A, hA, hzA'⟩ := mem_iUnion₂.mp hzA
+  rcases hA with hA | rfl | rfl
+  · rcases mergeArcs_cases h hA with ⟨j, hj⟩ | ⟨-, rfl⟩
+    · exact hzF.2 (germ_subset_Γ h j (hj hzA')).2
+    · exact hig (gapSec_of_mem_rimArc h (by have := cfg.hb1; omega) hz hzA')
+  · obtain ⟨t, ht, rfl⟩ := eq_of_mem_openRay h.1 hzA'
+    have ht0 := (norm_of_mem_sector hz).1
+    rw [add_sub_cancel_left, norm_mul_e ht.1] at ht0
+    have hray : v + (t : ℂ) * e ψ ∈ X.G.sector v ρ (BranchGerms.idx s (BranchGerms.rayPos up b)) :=
+      (X.G.mem_sector_idx s _).mpr ⟨t, ⟨ht0, by linarith [ht.2, h.1]⟩, ψ,
+        cfg.ray t ⟨ht0, by linarith [ht.2, h.1, hρc]⟩, rfl⟩
+    exact hi (sector_disjoint h hz hray)
+  · have hray := cfg.ray (ρ / 2) hρ2c
+    cases up
+    · simp only [BranchGerms.openRim, Bool.false_eq_true, if_false] at hzA'
+      simp only [BranchGerms.rayPos, Bool.false_eq_true, if_false, zero_add] at hray hi
+      obtain ⟨θ, hθ, rfl⟩ := hzA'
+      rcases eq_or_lt_of_le hθ.2 with he | hlt
+      · rw [he] at hz; beta_reduce at hz; rw [← X.G.branchPt_idx] at hz
+        exact branchPt_not_mem_sector h _ hρ2 i hz
+      · exact hi (sector_disjoint h hz ((X.G.mem_sector_idx s 0).mpr
+          ⟨ρ / 2, hρ2, θ, ⟨hray.1.trans_le hθ.1, by simpa using hlt⟩, rfl⟩))
+    · simp only [BranchGerms.openRim, if_true] at hzA'
+      simp only [BranchGerms.rayPos, if_true] at hray hi
+      obtain ⟨θ, hθ, rfl⟩ := hzA'
+      rcases eq_or_lt_of_le hθ.1 with he | hlt
+      · rw [← he] at hz; beta_reduce at hz; rw [← X.G.branchPt_idx] at hz
+        exact branchPt_not_mem_sector h _ hρ2 i hz
+      · exact hi (sector_disjoint h hz ((X.G.mem_sector_idx s b).mpr
+          ⟨ρ / 2, hρ2, θ, ⟨hlt, hθ.2.trans_lt hray.2⟩, rfl⟩))
+
+/-- **`F`'s colour class of `c` survives OPEN**: inside `B(v, ρ)` its points are the horn's (`lone`), interior to the new map and
+still coloured `c` (the horn is no gap sector and misses the wedge); outside, the maps agree. -/
+theorem open_region_of_region (cfg : X.OpenConfig c up s b ψ ρc) (h : X.Small ρ) (hρc : ρ ≤ ρc) {z : ℂ} (hz : z ∈ F.region c) :
+    z ∈ (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).region c := by
+  have hn : 0 < X.n := by have := cfg.hbn; omega
+  have hzc : F.col z = c := hz.2
+  obtain ⟨hhr, hhg, -⟩ := cfg.idx_facts
+  by_cases hzb : z ∈ ball v ρ
+  · have hzv : z ≠ v := fun he => hz.1.2 (he ▸ (X.mem_Γ hn).2)
+    rcases ball_cases h hn hzb hzv with ⟨i, hi⟩ | ⟨j, t, ht, rfl⟩
+    · have hic : X.col i = c := by rw [← (X.hcol i ρ h.mem_Ioc hi).2, hzc]
+      obtain rfl := cfg.lone i hic
+      refine ⟨mem_open_interiorPts_of_sector_off cfg h hρc hhr hhg hi, ?_⟩
+      show X.G.openCol v X.col F.col up s b ψ c ρ z = c
+      have hzW : z ∉ X.G.openWedge v up s b ψ ρ := fun hW =>
+        hhr (sector_disjoint h hi (openWedge_subset_sector cfg h hρc hW))
+      rw [openCol_of_not_mem hzW, mergeCol_of_mem_sector h hi]
+      split_ifs <;> [rfl; exact hic]
+    · exact absurd (X.hC.branchPt_mem_Γ j ⟨ht.1, ht.2.trans h.lt_r₀⟩).2 hz.1.2
+  · have hzr : ρ / 2 < ‖z - v‖ := by rw [mem_ball, dist_eq_norm, not_lt] at hzb; linarith [h.1]
+    refine ⟨mem_open_interiorPts_of_mem h hz.1 hzr, ?_⟩
+    show X.G.openCol v X.col F.col up s b ψ c ρ z = c
+    rw [openCol_of_not_mem (fun hW => hzb (ball_subset_ball (by linarith [h.1])
+      (X.G.openWedge_subset_ball v up s b ψ ρ hW))), mergeCol_of_not_mem h hzb]
+    exact hzc
+
+/-- **OPEN's colour class of `c`**: each of its points is in `F`'s class, in the wedge, in the gap out to `ρ/2`, or a cut branch point
+inside `ρ` of a germ with `c` after it (MERGE's `merge_region_cases`, the wedge in front). -/
+theorem open_region_cases (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) {z : ℂ}
+    (hz : z ∈ (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).region c) :
+    z ∈ F.region c ∨ z ∈ X.G.openWedge v up s b ψ ρ ∨ z ∈ X.G.gapSet v s 0 b (ρ / 2) ∨
+      ∃ j, X.col j = c ∧ ∃ t ∈ Ioo 0 ρ, z = branchPt v (X.G.β j) (X.G.κ j) t := by
+  have hn : 0 < X.n := by have := cfg.hbn; omega
+  obtain ⟨hzI, hzc⟩ := hz
+  have hzc' : X.G.openCol v X.col F.col up s b ψ c ρ z = c := hzc
+  by_cases hzW : z ∈ X.G.openWedge v up s b ψ ρ
+  · exact Or.inr (Or.inl hzW)
+  rw [openCol_of_not_mem hzW] at hzc'
+  rcases lt_trichotomy (dist z v) ρ with hlt | heq | hgt
+  · have hzv : z ≠ v := by
+      rintro rfl; exact (mem_open_interiorPts_iff h hlt).mp hzI v_mem_openArcs
+    rcases ball_cases h hn hlt hzv with ⟨i, hi⟩ | ⟨j, t, ht, rfl⟩
+    · rw [mergeCol_of_mem_sector h hi] at hzc'
+      split_ifs at hzc' with hg
+      · exact Or.inr (Or.inr (Or.inl ((mem_gapSet_of_mem_sector h (by linarith [h.1]) hi).mpr hg)))
+      · left
+        have h1 : F.col z = X.col i := (X.hcol i ρ h.mem_Ioc hi).2
+        exact ⟨sector_subset_interiorPts h i hi, by show F.col z = c; rw [h1, hzc']⟩
+    · rw [mergeCol_branchPt h j ht] at hzc'
+      split_ifs at hzc' with hg
+      · exact Or.inr (Or.inr (Or.inl ((branchPt_mem_gapSet_iff h (by linarith [h.1]) j ht).mpr hg)))
+      · exact Or.inr (Or.inr (Or.inr ⟨j, hzc', t, ht, rfl⟩))
+  · left
+    refine ⟨mem_interiorPts_of_open_rim h' hρρ' heq hzI, ?_⟩
+    show F.col z = c
+    rw [← mergeCol_of_not_mem h (c := c) (s := s) (a := 0) (b := b) (by rw [mem_ball, heq]; exact lt_irrefl ρ)]
+    exact hzc'
+  · left
+    have hzc2 : z ∉ closedBall v ρ := by rw [mem_closedBall, not_le]; exact hgt
+    have hA' := (open_agreesOff (X := X) (s := s) (b := b) (c := c) (up := up) (ψ := ψ) (hv := hv) (hρ := hρ) (hA := hA)
+      (hAf := hAf) (hlc := hlc) h).2 z hzc2
+    refine ⟨hA'.1.mpr hzI, ?_⟩
+    show F.col z = c
+    rw [hA'.2]; exact hzc
+
+/-- **OPEN's colour class of `c`** lies in the closure of `F`'s, the gap out to `ρ/2` and the wedge. -/
+theorem open_region_subset (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) :
+    (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).region c ⊆
+      closure (F.region c) ∪ (X.G.gapSet v s 0 b (ρ / 2) ∪ X.G.openWedge v up s b ψ ρ) := by
+  intro z hz
+  rcases open_region_cases cfg h' hρρ' h hz with h1 | h1 | h1 | ⟨j, hj, t, ht, rfl⟩
+  · exact Or.inl (subset_closure h1)
+  · exact Or.inr (Or.inr h1)
+  · exact Or.inr (Or.inl h1)
+  · exact Or.inl (hj ▸ cutSet_subset_closure h ⟨t, ht, rfl⟩)
+
+/-- **The contacts of `c` at a point off `B̄(v, ρ)` are unchanged by OPEN**: `F`'s class lies in the new one, and a closure point of
+the new class off the closure of `F`'s is `v` (in the closure of `F`'s class) or a point of the open clear set
+(`OpenConfig.exists_clearSet`), at distance `≠ 1` from every closure point of `F`'s class. -/
+theorem open_isContact_iff (hF : F.Valid) (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ')
+    (h : X.Small ρ) (hρc : ρ ≤ ρc) {v' : ℂ} (hv' : v' ∉ closedBall v ρ) (w : ℂ) :
+    (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).IsContact v' c w ↔
+      F.IsContact v' c w := by
+  obtain ⟨U, hUo, hUc, hUb, hUg, hUw⟩ := cfg.exists_clearSet hF h hρc
+  have hcl : closure ((F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf
+      hlc).region c) ⊆ closure (F.region c) ∪ ({v} ∪ U) := by
+    refine (closure_mono (open_region_subset cfg h' hρρ' h)).trans ?_
+    rw [closure_union, closure_closure, closure_union]
+    exact union_subset_union_right _ (union_subset hUg hUw)
+  have hvF := cfg.v_mem_closure_region h
+  constructor
+  · rintro ⟨hc', hd, hw'⟩
+    have hc : c ∈ F.coloursAt v' := by
+      rcases hcl hc' with h1 | h1 | h1
+      · exact h1
+      · exact absurd (by rw [mem_singleton_iff.mp h1]; exact mem_closedBall_self h.1.le) hv'
+      · exact absurd (ball_subset_closedBall (hUb h1)) hv'
+    refine ⟨hc, hd, ?_⟩
+    rcases hcl hw' with h1 | h1 | h1
+    · exact h1
+    · rw [mem_singleton_iff.mp h1]; exact hvF
+    · exact absurd hd (dist_ne_one_of_isOpen_isClear hUo hUc h1 hc)
+  · rintro ⟨hc, hd, hw⟩
+    exact ⟨closure_mono (fun z hz => open_region_of_region cfg h hρc hz) hc, hd,
+      closure_mono (fun z hz => open_region_of_region cfg h hρc hz) hw⟩
+
+/-- **Each `c`-tile of `F` lies in a `c`-tile of OPEN's map.** -/
+theorem open_exists_tile (cfg : X.OpenConfig c up s b ψ ρc) (h : X.Small ρ) (hρc : ρ ≤ ρc) {T : Set ℂ} (hT : F.TileOf c T) :
+    ∃ T', (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).TileOf c T' ∧
+      T ⊆ T' := by
+  set F' := F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc with hF'
+  obtain ⟨y, hy⟩ := hT.1.nonempty
+  have hreg : ∀ z ∈ T, z ∈ F'.region c := fun z hz => open_region_of_region cfg h hρc (hT.subset_region hz)
+  have hyI := (hreg y hy).1
+  refine ⟨_, ?_, hT.1.isPreconnected.subset_connectedComponentIn hy fun z hz => (hreg z hz).1⟩
+  have hT1 : F'.IsTile (connectedComponentIn F'.interiorPts y) := ⟨y, hyI, rfl⟩
+  have h1 := hT1.tileOf (mem_connectedComponentIn hyI)
+  rwa [show F'.col y = c from (hreg y hy).2] at h1
+
+/-- **A `c`-tile of OPEN's map lies inside or outside the unit circle about a point of the closure of its colour class** (the new map
+is valid, `open_valid`). -/
+theorem open_tile_split (hF : F.Valid) (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ')
+    (h : X.Small ρ) (hρc : ρ ≤ ρc) {T' : Set ℂ}
+    (hT' : (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).TileOf c T')
+    {v' : ℂ}
+    (hv' : v' ∈ closure ((F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf
+      hlc).region c)) :
+    T' ⊆ ball v' 1 ∨ Disjoint T' (closedBall v' 1) := by
+  have hval := open_valid (hv := hv) (hρ := hρ) (hA := hA) (hAf := hAf) (hlc := hlc) hF cfg h' hρρ' h hρc
+  have hne : ∀ z ∈ T', dist v' z ≠ 1 := fun z hz => by
+    rw [dist_comm]; exact ne1_region hval hv' (hT'.subset_region hz)
+  rcases preconnected_dist_lt_or_gt hT'.1.isPreconnected hne with h1 | h1
+  · left; intro z hz; rw [mem_ball, dist_comm]; exact h1 z hz
+  · right; rw [disjoint_left]; intro z hz hz'; rw [mem_closedBall, dist_comm] at hz'; linarith [h1 z hz]
+
+/-- **A `c`-tile of OPEN's map at `v` holds the horn's sector** (so `v` is in the closure of its part in `F`'s class): near `v` its
+points are in OPEN's sectors (`open_partition`) of colour `c`, which is the merged piece alone, and the piece, preconnected and in the
+new interior, lies in the tile and holds the horn's sector. -/
+theorem v_mem_closure_open_tile (cfg : X.OpenConfig c up s b ψ ρc) (h : X.Small ρ) (hρc : ρ ≤ ρc) {T' : Set ℂ}
+    (hT' : (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).TileOf c T')
+    (hvT : v ∈ closure T') : v ∈ closure (T' ∩ F.region c) := by
+  have hρ2 : ρ / 2 ≤ ρ := by linarith [h.1]
+  have hr : ρ / 2 ∈ Ioc 0 (ρ / 2) := ⟨h.half.1, le_rfl⟩
+  have hr2 : ρ / 2 ∈ Ioc 0 X.r₀ := ⟨h.half.1, hρ2.trans h.lt_r₀.le⟩
+  have hr2c : ρ / 2 ≤ ρc := hρ2.trans hρc
+  obtain ⟨hhr, -, hrg⟩ := cfg.idx_facts
+  have hpart := open_partition (hv := hv) (hρ := hρ) (hA := hA) (hAf := hAf) (hlc := hlc) cfg h hρc hr
+  obtain ⟨z, hzb, hzT⟩ := mem_closure_iff.mp hvT (ball v (ρ / 2)) isOpen_ball (mem_ball_self h.half.1)
+  have hzI := (hT'.subset_region hzT).1
+  have hzc : X.G.openCol v X.col F.col up s b ψ c ρ z = c := (hT'.subset_region hzT).2
+  have hzr : ‖z - v‖ < ρ / 2 := by rw [← dist_eq_norm]; exact hzb
+  have hzU : z ∈ ⋃ i, openSectors X up s b ψ (ρ / 2) i := by rw [← hpart]; exact ⟨hzI, hzb⟩
+  obtain ⟨i, hi⟩ := mem_iUnion.mp hzU
+  -- a point of a sector of `F` off the partial sector and the gap, at colour `c`, is in the horn's sector
+  have hoff : ∀ i', z ∈ X.G.sector v ρ i' → i' ≠ BranchGerms.idx s (BranchGerms.rayPos up b) →
+      i' ∉ BranchGerms.gapSec s 0 b → i' = BranchGerms.idx s (BranchGerms.hornPos up b) := fun i' hi' hir hig => by
+    have hzW : z ∉ X.G.openWedge v up s b ψ ρ := fun hW => hir (sector_disjoint h hi' (openWedge_subset_sector cfg h hρc hW))
+    rw [openCol_of_not_mem hzW, mergeCol_of_mem_sector h hi', if_neg (fun h1 => hig h1.1)] at hzc
+    exact cfg.lone i' hzc
+  have hzP : z ∈ X.G.openPiece v up s b ψ (ρ / 2) := by
+    rcases openSectors_cases (X := X) (s := s) (b := b) up ψ (ρ / 2) i with ⟨-, h1⟩ | ⟨h1, h2, h3⟩ | ⟨-, -, -, h3⟩ |
+      ⟨h1, h2, h3, h4⟩
+    · rwa [h1] at hi
+    · rw [h3] at hi
+      have hzs := sector_mono hρ2 _ (cfg.rest_subset_sector hr2c hi)
+      have hzW : z ∉ X.G.openWedge v up s b ψ ρ := fun hW =>
+        disjoint_left.mp (disjoint_openWedge_openRest cfg h) hW (X.G.mem_openRest_of_lt hi (by linarith [h.1]))
+      rw [openCol_of_not_mem hzW, mergeCol_of_mem_sector h hzs, if_neg (fun h1 => hrg h1.1)] at hzc
+      exact absurd (cfg.lone _ hzc) (fun he => hhr he.symm)
+    · rw [h3] at hi; exact absurd hi (notMem_empty z)
+    · rw [h4] at hi
+      exact absurd (hoff i (sector_mono hρ2 _ hi) h2 h3) h1
+  have hPI : X.G.openPiece v up s b ψ (ρ / 2) ⊆
+      (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).interiorPts :=
+    fun y hy => by
+      have hy' : y ∈ ⋃ i, openSectors X up s b ψ (ρ / 2) i := by
+        refine mem_iUnion.mpr ⟨BranchGerms.idx s (BranchGerms.hornPos up b), ?_⟩
+        rcases openSectors_cases (X := X) (s := s) (b := b) up ψ (ρ / 2) (BranchGerms.idx s (BranchGerms.hornPos up b)) with
+          ⟨-, h1⟩ | ⟨h1, -⟩ | ⟨h1, -⟩ | ⟨h1, -⟩
+        · rw [h1]; exact hy
+        all_goals exact absurd rfl h1
+      rw [← hpart] at hy'
+      exact hy'.1
+  have hsub : X.G.openPiece v up s b ψ (ρ / 2) ⊆ T' :=
+    hT'.1.subset_of_preconnected (cfg.isPreconnected_piece_rest hr2c).1 hPI hzP hzT
+  exact closure_mono (s := X.G.sector v (ρ / 2) (BranchGerms.idx s (BranchGerms.hornPos up b))) (t := T' ∩ F.region c)
+    (fun _ hy => ⟨hsub (cfg.horn_subset_piece hr2c hy), cfg.col_horn ▸ X.hcol _ (ρ / 2) hr2 hy⟩)
+    (X.hC.mem_closure_sector hr2 _)
+
+/-- **A `c`-tile of OPEN's map at a contact holds a `c`-tile of `F` at that contact** (MERGE's `merge_tile_cover` with the wedge added):
+the new tile's points are in the closure of its part in `F`'s class, the gap out to `ρ/2` or the wedge; the closures of the last two lie
+in `{v}` (handled by `v_mem_closure_open_tile`) and the open clear set, which meets no unit circle about a point of the class's closure;
+and the new tile holds finitely many tiles of `F`. -/
+theorem open_tile_cover (hF : F.Valid) (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ')
+    (h : X.Small ρ) (hρc : ρ ≤ ρc) {T' : Set ℂ}
+    (hT' : (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).TileOf c T')
+    {v' w : ℂ} (hv' : v' ∈ closure (F.region c)) (hw : dist w v' = 1) (hwT : w ∈ closure T') :
+    ∃ T, F.TileOf c T ∧ T ⊆ T' ∧ w ∈ closure T := by
+  set F' := F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc with hF'
+  have hreg : ∀ z ∈ F.region c, z ∈ F'.region c := fun z hz => open_region_of_region cfg h hρc hz
+  -- each `c`-tile of `F` meeting `T'` lies in it
+  have hsubT : ∀ T, F.TileOf c T → (T ∩ T').Nonempty → T ⊆ T' := fun T hT ⟨y, hyT, hyT'⟩ =>
+    hT'.1.subset_of_preconnected hT.1.isPreconnected (fun z hz => (hreg z (hT.subset_region hz)).1) hyT hyT'
+  by_cases hTB : (T' ∩ closedBall v ρ).Nonempty
+  swap
+  · -- `T'` misses the disc: it is a tile of `F`
+    obtain ⟨y, hy⟩ := hT'.1.nonempty
+    have hsubF : T' ⊆ F.region c := fun z hz => by
+      have hzc : z ∉ closedBall v ρ := fun hzc => hTB ⟨z, hz, hzc⟩
+      have hA' := (open_agreesOff (X := X) (s := s) (b := b) (c := c) (up := up) (ψ := ψ) (hv := hv) (hρ := hρ) (hA := hA)
+        (hAf := hAf) (hlc := hlc) h).2 z hzc
+      refine ⟨hA'.1.mpr (hT'.subset_region hz).1, ?_⟩
+      show F.col z = c
+      rw [hA'.2]; exact (hT'.subset_region hz).2
+    obtain ⟨hT0, hyT0⟩ := tileOf_component (hsubF hy)
+    have h1 : T' ⊆ connectedComponentIn F.interiorPts y :=
+      hT0.1.subset_of_preconnected hT'.1.isPreconnected (fun z hz => (hsubF hz).1) hy hyT0
+    have h2 := hsubT _ hT0 ⟨y, hyT0, hy⟩
+    exact ⟨_, hT0, h2, (Subset.antisymm h1 h2) ▸ hwT⟩
+  obtain ⟨U, hUo, hUc, -, hUg, hUw⟩ := cfg.exists_clearSet hF h hρc
+  -- (1) the new tile lies in the closure of its part in `F`'s class, the gap and the wedge
+  have hstep1 : T' ⊆ closure (T' ∩ F.region c) ∪ (X.G.gapSet v s 0 b (ρ / 2) ∪ X.G.openWedge v up s b ψ ρ) := by
+    intro z hz
+    rcases open_region_cases cfg h' hρρ' h (hT'.subset_region hz) with h1 | h1 | h1 | ⟨j, hj, t, ht, rfl⟩
+    · exact Or.inl (subset_closure ⟨hz, h1⟩)
+    · exact Or.inr (Or.inr h1)
+    · exact Or.inr (Or.inl h1)
+    · left
+      obtain ⟨δ, hδ, hδI⟩ := Metric.isOpen_iff.mp F'.isOpen_interiorPts _ (hT'.subset_region hz).1
+      have hball : ball (branchPt v (X.G.β j) (X.G.κ j) t) δ ⊆ T' :=
+        hT'.1.subset_of_preconnected (convex_ball _ δ).isPreconnected hδI (mem_ball_self hδ) hz
+      have hcl := IsSectorChart.branchPt_mem_closure_sector_after (v := v) X.hord h.2.1.le j ht
+      refine closure_mono ?_ (isOpen_ball.inter_closure ⟨mem_ball_self hδ, hcl⟩)
+      rintro y ⟨hy1, hy2⟩
+      exact ⟨hball hy1, hj ▸ X.hcol j ρ h.mem_Ioc hy2⟩
+  -- (2) the contact is a closure point of that part
+  have hwF : w ∈ closure (T' ∩ F.region c) := by
+    have hw2 : w ∈ closure (T' ∩ F.region c) ∪ (closure (X.G.gapSet v s 0 b (ρ / 2)) ∪
+        closure (X.G.openWedge v up s b ψ ρ)) := by
+      have := closure_mono hstep1 hwT
+      rwa [closure_union, closure_closure, closure_union] at this
+    rcases hw2 with hw2 | hw2
+    · exact hw2
+    · rcases (union_subset hUg hUw) hw2 with hwv | hwU
+      · rw [mem_singleton_iff.mp hwv] at hwT ⊢
+        exact v_mem_closure_open_tile cfg h hρc hT' hwT
+      · exact absurd hw (dist_ne_one_of_isOpen_isClear hUo hUc hwU hv')
+  -- (3) finitely many tiles of `F` cover that part
+  set S := {T | F.TileOf c T ∧ T ⊆ T'} with hS
+  have hcov : T' ∩ F.region c ⊆ ⋃ T ∈ S, T := by
+    rintro z ⟨hzT, hzF⟩
+    obtain ⟨hTz, hzTz⟩ := tileOf_component hzF
+    exact mem_iUnion₂.mpr ⟨_, ⟨hTz, hsubT _ hTz ⟨z, hzTz, hzT⟩⟩, hzTz⟩
+  have hr₁ : ρ < (ρ + X.ρ₀) / 2 := by linarith [h.2.2.1]
+  have hfin : S.Finite := by
+    refine (finite_tiles_ball_of_goodAt X.hG (r := (ρ + X.ρ₀) / 2) (by linarith [h.1]) (by linarith [h.2.2.1])).subset ?_
+    rintro T ⟨hT, hTT'⟩
+    refine ⟨hT.1, ?_⟩
+    by_contra hTn
+    have hT'U : T' ⊆ T ∪ (closure T)ᶜ := by
+      intro z hz
+      by_cases hzT : z ∈ T
+      · exact Or.inl hzT
+      · right
+        intro hzc
+        by_cases hzb : z ∈ ball v ((ρ + X.ρ₀) / 2)
+        · obtain ⟨y, hyb, hyT⟩ := mem_closure_iff.mp hzc _ isOpen_ball hzb
+          exact hTn ⟨y, hyT, hyb⟩
+        · have hzcb : z ∉ closedBall v ρ := fun h1 => hzb (closedBall_subset_ball hr₁ h1)
+          have hA' := (open_agreesOff (X := X) (s := s) (b := b) (c := c) (up := up) (ψ := ψ) (hv := hv) (hρ := hρ) (hA := hA)
+            (hAf := hAf) (hlc := hlc) h).2 z hzcb
+          exact hzT (hT.1.mem_of_mem_closure (hA'.1.mpr (hT'.subset_region hz).1) hzc)
+    rcases hT'.1.isPreconnected.subset_or_subset hT.1.isOpen isClosed_closure.isOpen_compl
+        (disjoint_compl_right.mono_right (compl_subset_compl.mpr subset_closure)) hT'U with h1 | h1
+    · obtain ⟨z, hzT', hzc⟩ := hTB
+      exact hTn ⟨z, h1 hzT', closedBall_subset_ball hr₁ hzc⟩
+    · obtain ⟨y, hy⟩ := hT.1.nonempty
+      exact h1 (hTT' hy) (subset_closure hy)
+  have : w ∈ ⋃ T ∈ S, closure T := by rw [← hfin.closure_biUnion]; exact closure_mono hcov hwF
+  obtain ⟨T, hT, hwT⟩ := mem_iUnion₂.mp this
+  exact ⟨T, hT.1, hT.2, hwT⟩
+
+/-- **The in-type contacts of `c` at a contact of `F` are unchanged by OPEN.** -/
+theorem open_inType_iff (hF : F.Valid) (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ')
+    (h : X.Small ρ) (hρc : ρ ≤ ρc) {v' w : ℂ} (hw : F.IsContact v' c w) :
+    (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).InType v' c w ↔
+      F.InType v' c w := by
+  have hv'' : v' ∈ closure ((F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA
+      hAf hlc).region c) :=
+    closure_mono (fun z hz => open_region_of_region cfg h hρc hz) hw.1
+  constructor
+  · intro hin T hT hwT
+    obtain ⟨T', hT', hTT'⟩ := open_exists_tile (hv := hv) (hρ := hρ) (hA := hA) (hAf := hAf) (hlc := hlc) cfg h hρc hT
+    exact hTT'.trans (hin T' hT' (closure_mono hTT' hwT))
+  · intro hin T' hT' hwT'
+    obtain ⟨T, hT, hTT', hwT⟩ := open_tile_cover hF cfg h' hρρ' h hρc hT' hw.1 hw.2.1 hwT'
+    obtain ⟨y, hy⟩ := hT.1.nonempty
+    rcases open_tile_split hF cfg h' hρρ' h hρc hT' hv'' with h1 | h1
+    · exact h1
+    · exact absurd (ball_subset_closedBall (hin T hT hwT hy)) (disjoint_left.mp h1 (hTT' hy))
+
+/-- **The out-type contacts of `c` at a contact of `F` are unchanged by OPEN.** -/
+theorem open_outType_iff (hF : F.Valid) (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ')
+    (h : X.Small ρ) (hρc : ρ ≤ ρc) {v' w : ℂ} (hw : F.IsContact v' c w) :
+    (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf hlc).OutType v' c w ↔
+      F.OutType v' c w := by
+  have hv'' : v' ∈ closure ((F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA
+      hAf hlc).region c) :=
+    closure_mono (fun z hz => open_region_of_region cfg h hρc hz) hw.1
+  constructor
+  · intro hout T hT hwT
+    obtain ⟨T', hT', hTT'⟩ := open_exists_tile (hv := hv) (hρ := hρ) (hA := hA) (hAf := hAf) (hlc := hlc) cfg h hρc hT
+    exact (hout T' hT' (closure_mono hTT' hwT)).mono_left hTT'
+  · intro hout T' hT' hwT'
+    obtain ⟨T, hT, hTT', hwT⟩ := open_tile_cover hF cfg h' hρρ' h hρc hT' hw.1 hw.2.1 hwT'
+    obtain ⟨y, hy⟩ := hT.1.nonempty
+    rcases open_tile_split hF cfg h' hρρ' h hρc hT' hv'' with h1 | h1
+    · exact absurd (ball_subset_closedBall (h1 (hTT' hy))) (disjoint_left.mp (hout T hT hwT) hy)
+    · exact h1
+
 /-- **`D_c(v′)` is unchanged off the disc** (`merge_allowedCone`'s route): the recoloured set's closure lies in `{v}` and an open
 set of points clear for `c`, so no contact of `c` moves (`dist_ne_one_of_isOpen_isClear`), and the tiles keep their types. -/
 theorem open_allowedCone (hF : F.Valid) (cfg : X.OpenConfig c up s b ψ ρc) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ')
@@ -2177,7 +2726,21 @@ theorem open_allowedCone (hF : F.Valid) (cfg : X.OpenConfig c up s b ψ ρc) {ρ
     ∀ v' ∉ closedBall v ρ,
       (F.surgery v ρ (X.G.openArcs v X.col up s b ψ ρ) (X.G.openCol v X.col F.col up s b ψ c ρ) hv hρ hA hAf
         hlc).allowedCone v' c = F.allowedCone v' c := by
-  sorry
+  intro v' hv'
+  have hci := open_isContact_iff (hv := hv) (hρ := hρ) (hA := hA) (hAf := hAf) (hlc := hlc) hF cfg h' hρρ' h hρc hv'
+  have hin := fun {w : ℂ} (hw : F.IsContact v' c w) => open_inType_iff (hv := hv) (hρ := hρ) (hA := hA) (hAf := hAf)
+    (hlc := hlc) hF cfg h' hρρ' h hρc hw
+  have hout := fun {w : ℂ} (hw : F.IsContact v' c w) => open_outType_iff (hv := hv) (hρ := hρ) (hA := hA) (hAf := hAf)
+    (hlc := hlc) hF cfg h' hρρ' h hρc hw
+  ext d
+  constructor
+  · intro hd w hw
+    obtain ⟨h1, h2⟩ := hd w ((hci w).mpr hw)
+    exact ⟨fun hi => h1 ((hin hw).mpr hi), fun ho => h2 ((hout hw).mpr ho)⟩
+  · intro hd w hw'
+    have hw := (hci w).mp hw'
+    obtain ⟨h1, h2⟩ := hd w hw
+    exact ⟨fun hi => h1 ((hin hw).mp hi), fun ho => h2 ((hout hw).mp ho)⟩
 
 end Surgery
 
