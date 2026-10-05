@@ -1343,6 +1343,56 @@ warning.
 **Re-pricing**: Stage 36 priced the pair at "a session, 300–400 lines"; it took about 490 lines and about 40k tokens, nearly first-time clean, because
 the cusp step dropped out.
 
+## Stage 40 — SAVED (FS131-I4m): `nb4p` (FS112-NB4P); 6 `sorry` left on the branch (Contact 3, UnitArc 2, BaseSteps 1), and the handoff
+
+**`nb4p` proved**, on NB-4's own route (`plans/FS110-NB-verification.md` § 2.3) with W1 (ii)'s corrections (`plans/FS112-N-proof.md` § 2.1), read in full
+before planning, as § 13.5 asked. The half-plane step is wave 3's GERM-R lemmas (`Valid.cone_re_nonpos_of_germ` / `_nonneg_of_germ`) applied at `v`
+itself, so no tile is needed except in (3). Children, in `UnitArc`:
+- `sq_norm_e_add_e`, `e_add_third_add_e_sub_third` (`e(a + 60°) + e(a − 60°) = e(a)`, so `y_k` is the point of `ω(y_{k+1})` at angle `θ − 60°`);
+  `cos_int_mul_third_pos`, `cos_int_mul_third_neg` (the sign of `cos(m·60°)` by `m mod 6`); `exists_opposite_cos_third` (NB-4's closing count as a sign
+  table: for orbit indices `j ≠ l` and a parity `p`, some `k ∈ {p, p + 2, p + 4}` has `cos((j − k)·60°)`, `cos((l − k)·60°)` of opposite strict signs —
+  `interval_cases` and `decide` over the 60 cases).
+- `ArcMap.germ_rotate_third` (the ring rotates its colours: a germ of `ω(v)` in class `c`, and `r(θ + 60°)` on no arc of `Γ` on `ω(v)` ⟹ the same-side germ
+  there lies in a class `d ≠ c` absent at `v`; `germ_dichotomy`, N-E1, validity at distance `1`).
+- `ArcMap.straddlers_third` (W1 (ii)'s (1) and (3) with NB-4's half-planes: the germ of `ω(y_{k+1})` at `y_k` inside `B(v, 1)` lies in one colour `i`, the
+  outer germ in `o ≠ i`; both colours of `v`, carried at `y_k`, not at `y_{k+1}`; `v`'s class of `i` approaches `v` only facing `y_k`, that of `o` only
+  facing away. `i ≠ o` by N-E2: the inner germ's tile is unit-near `v`'s `i`-tile, the outer germ's unit-far, so that tile lies on `ω(y_k)` — empty
+  interior, `interior_sphere`).
+- `nb4p`: (1) `germS_absent` gives the two absent colours `X`, `X'`; the ring alternates `X | X'` / `X' | X` at `y_0, …, y_5` (induction, `hring`), so
+  every `y_j`, `j ≤ 6`, carries both; (2) `straddlers_third` at each `k < 6` (`hnb`'s first half); (3) the pairs `Q_k = {i_k, o_k}` alternate:
+  `Q_{k+1} ⊆ P_cl(v) ∖ Q_k`, both of size two, so `Q_{k+1} = P_cl(v) ∖ Q_k` and `Q_{k+2} = Q_k` — every colour of `v` is a straddler at the three orbit
+  points of one parity; (4) by the sign table each colour's cone at `v` holds at most one of the six orbit directions; (5) every direction is in some
+  colour's cone (`exists_mem_coneAt_region`), so six directions inject into four colours.
+**Generalization**: `hnb`'s second half (no arc of `ω(y_{j−1})` through `y_j`) is never read — W1 (ii)'s equality `Q⁻_{k+1} = Q⁺_{k+1}` is not needed,
+since the alternation of the `+` pairs alone gives the parity classes. Read against § 12.2 and the row: same statement.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 636 names, 7 added; `--check` exit 0. **Statements**: `tools/fs131_i4_stmts.py e1c75f21 …UnitArc.lean` 134
+old, 141 new, 7 added, 0 changed, exit 0; planted control (nb4p's `hv` changed to `Covers v 2` in the working file): "1 changed, CHANGED nb4p", exit 1;
+file restored byte for byte, re-run exit 0. **Duplicates**: `tools/fs131_i4_treedupes.py` — 7,557 declarations (7,550 + 7), the same 3 repeats.
+**Axioms** (`data/fs131/i4/axioms-i4m-40.txt`, this stage's oleans, not a gate log): the seven children and `nb4p`, all `[propext, Classical.choice,
+Quot.sound]`. No `native_decide`, no axiom, no import changed. **Build**: "build: OK — 444 of 444 batches, 3 module(s) rebuilt, 3 module(s) with
+warnings, 10m11s", exit 0 (`build/gate/build/20261005T001554Z-3797153.log`; driver log `data/fs131/i4/build-i4m-stage40.log`): 6 distinct `declaration
+uses sorry` — Contact 3 (the moves), UnitArc 2 (`bend_toward`, `bend_away`), BaseSteps 1 (`n3_end`) — and no other warning.
+
+**What is left (3 in this job's files): UnitArc `bend_toward`, `bend_away`; BaseSteps `n3_end`.** Contact's three moves are IM3's.
+- **The bends** (plan § 13.5, Stage 24): engine 3 (the cut, `exists_cut_ringArc`, not yet stated) removes the open arc from every arc of `ω(P)`; the new
+  map adds the bent arc and recolours the lens; engines 1–2 give validity from the clearness and `RingArcsWithin`; the clearness is N2-ENV (proved) with
+  N2-SIGN; the cap at the ends is N2-TOWARD's corner/tangent start; for `bend_away` the tangent bend at isolated R2 contacts (N2-TAN, `TAN` exact in
+  `tools/fs112_n2_checks.py`). Each is a construction, not a reduction: price a session each, the cut first.
+- **`n3_end`**: Stage 38's reading — no `hQR` needed; split on "an in-type `g`-tile at `N`" (second disjunct: `κ₂ = 1` by `woodallCone` and N-E2,
+  `κ₃ = −1` by `flankQ_both`) against its absence (first disjunct by NB3 items 2–5). The obstacle is infrastructure: every shadow and SHAVE lemma in
+  `Contact` (`flank_shadow_g`/`_h`, `flank_shadows`, `shaveAvailable_of_not_doublyShadowed`, `stuck_structure`) assumes Condition 5 and curvatures in
+  `(−1, 1)`, and `n3_end`'s horn has `κ₁ = −1` with no Condition 5. What applies as is: `woodallCone` (non-strict), `contact_inType_or_outType`,
+  `outType_N_of_flankAbove`/`outType_S_of_flankBelow`, `IsHorn.exists_flankAbove`/`_flankBelow`, `flankQ_both`, `flank_siamese_of_inType`,
+  `inType_shadows_horn`, `noBoth`, and the two shadow lemmas of Stage 39 (`mem_shadow_of_crossing` is the general "a circle crossing a class's closure
+  where the arcs are on a circle" engine). The new work is item 2 at a unit-arc bound (which `g`-contacts can shadow the horn near `v`: only `g`-tiles at
+  `S′` tangent to `±a`, out-type), item 3 (`woodallCone` at `S′` for `g`, `Terminal` there), item 4 (the colours `y ≠ z` beside `g`'s `+a` horn at `S′`, the
+  SHAVE contradiction for `z = y`) and item 5 (the in-type `y`-tile at `P_{−2}`, Siamese to the lower flank, putting the horn's lower arc on `ω(P_{−2})`;
+  `noBoth`). Price: a `stuck_structure`-sized leaf, two sessions.
+
+**Re-pricing**: `nb4p` (§ 13.5's H, "the one leaf whose derivation must be re-read in full") took about 360 lines and about 60k tokens, first build clean
+after six scratch iterations; wave 3's GERM-R lemmas did the geometric half.
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -1498,3 +1548,16 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   Children: `normalPt_add_eq_framePt`, `normalPt_sub_add_eq_framePt` — the standard three (UnitArc).
 - FS112-N2-FLANK-Q, the upper and lower bounds: `ArcMap.flankQ_upper`, `ArcMap.flankQ_lower` — `[propext, sorryAx, Classical.choice, Quot.sound]`
   **(over sorry: `flankQ_upper_shadow`, `flankQ_lower_shadow`, their (R2) shadow clauses)**. Read against § 12.2: same statements.
+
+## Theorems this phase proved (FS131-I4m's; axioms from `#print axioms` against the stage builds' oleans, `data/fs131/i4/axioms-i4m-*.txt`, not a gate log)
+
+- FS112-N2-FLANK-Q, the (R2) shadow clause: `HadwigerNelson.Plane.ArcMap.flankQ_upper_shadow`, `ArcMap.flankQ_lower_shadow` — `[propext, Classical.choice,
+  Quot.sound]` each. Read against § 12.2 and Stage 36's statements: same statements (`R₂` in the closure of the flank colour's class ⟹ that class shadows the
+  horn near `v`); validity and the flank hypothesis are not read. With them **`ArcMap.flankQ_upper`, `ArcMap.flankQ_lower` read the standard three**.
+- Children (no row), the standard three: `r2Cross` (def), `sq_norm_two_e_sub`, `r2Cross_spec`, `continuousAt_r2Cross_one`, `r2Cross_one`,
+  `Arc.finite_inter_sphere_two_or_subset`, `ArcMap.eventually_arcs_on_sphere_two`, `ArcMap.exists_polarBox_subset_region`, `ArcMap.mem_shadow_of_crossing` (UnitArc).
+- FS112-NB4P: `HadwigerNelson.Plane.ArcMap.nb4p` — `[propext, Classical.choice, Quot.sound]`. Read against § 12.2 and the row: same statement (a valid
+  six-coloured map, a point `v` of exactly four colours covering `B̄(v, 1)`, a change point `y₀` of its ring, no orbit point on an arc of `Γ` on `ω(v)` or on
+  an arc of `ω(y_{j±1})`: contradiction); the `ω(y_{j−1})` half of `hnb` is not read.
+- Children (no row), the standard three: `sq_norm_e_add_e`, `e_add_third_add_e_sub_third`, `cos_int_mul_third_pos`, `cos_int_mul_third_neg`,
+  `exists_opposite_cos_third`, `ArcMap.germ_rotate_third`, `ArcMap.straddlers_third` (UnitArc).

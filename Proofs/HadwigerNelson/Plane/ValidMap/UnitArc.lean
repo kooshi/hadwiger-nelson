@@ -3363,6 +3363,61 @@ example : r2Cross 2 = Real.arccos (7 / 8) := by
   simp only [r2Cross, Complex.norm_ofNat]
   norm_num
 
+/-- `cos(m·60°)` is positive when `m ≡ 0, ±1 (mod 6)`. -/
+theorem cos_int_mul_third_pos {m : ℤ} (h : m % 6 = 0 ∨ m % 6 = 1 ∨ m % 6 = 5) : 0 < Real.cos (m * (π / 3)) := by
+  have hm : (m : ℝ) * (π / 3) = ((m % 6 : ℤ) : ℝ) * (π / 3) + ((m / 6 : ℤ) : ℝ) * (2 * π) := by
+    have := Int.emod_add_mul_ediv m 6
+    have h' : ((m % 6 : ℤ) : ℝ) + 6 * ((m / 6 : ℤ) : ℝ) = m := by exact_mod_cast this
+    rw [← h']; ring
+  rw [hm, Real.cos_add_int_mul_two_pi]
+  rcases h with h | h | h <;> rw [h] <;> push_cast
+  · simp
+  · rw [one_mul, Real.cos_pi_div_three]; norm_num
+  · rw [show (5 : ℝ) * (π / 3) = -(π / 3) + (1 : ℤ) * (2 * π) by push_cast; ring, Real.cos_add_int_mul_two_pi,
+      Real.cos_neg, Real.cos_pi_div_three]; norm_num
+
+/-- `cos(m·60°)` is negative when `m ≡ 2, 3, 4 (mod 6)`. -/
+theorem cos_int_mul_third_neg {m : ℤ} (h : m % 6 = 2 ∨ m % 6 = 3 ∨ m % 6 = 4) : Real.cos (m * (π / 3)) < 0 := by
+  have hm : (m : ℝ) * (π / 3) = ((m % 6 : ℤ) : ℝ) * (π / 3) + ((m / 6 : ℤ) : ℝ) * (2 * π) := by
+    have := Int.emod_add_mul_ediv m 6
+    have h' : ((m % 6 : ℤ) : ℝ) + 6 * ((m / 6 : ℤ) : ℝ) = m := by exact_mod_cast this
+    rw [← h']; ring
+  rw [hm, Real.cos_add_int_mul_two_pi]
+  rcases h with h | h | h <;> rw [h] <;> push_cast
+  · rw [show (2 : ℝ) * (π / 3) = π - π / 3 by ring, Real.cos_pi_sub, Real.cos_pi_div_three]; norm_num
+  · rw [show (3 : ℝ) * (π / 3) = π by ring, Real.cos_pi]; norm_num
+  · rw [show (4 : ℝ) * (π / 3) = π / 3 + π by ring, Real.cos_add_pi, Real.cos_pi_div_three]; norm_num
+
+/-- **The sign table of NB-4's last step**: for distinct orbit indices `j ≠ l` and a parity `p`, some `k ∈ {p, p + 2, p + 4}` sees
+`r(ψ + j·60°)` and `r(ψ + l·60°)` on opposite sides — `cos((j − k)·60°)` and `cos((l − k)·60°)` have opposite strict signs. -/
+theorem exists_opposite_cos_third {j l p : ℕ} (hj : j < 6) (hl : l < 6) (hp : p < 2) (hjl : j ≠ l) :
+    ∃ i < 3, Real.cos (((j : ℤ) - (p + 2 * i : ℕ)) * (π / 3)) * Real.cos (((l : ℤ) - (p + 2 * i : ℕ)) * (π / 3)) < 0 := by
+  have key : ∃ i < 3, (((j : ℤ) - (p + 2 * i : ℕ)) % 6 ∈ ({0, 1, 5} : Finset ℤ) ∧ ((l : ℤ) - (p + 2 * i : ℕ)) % 6 ∈ ({2, 3, 4} : Finset ℤ)) ∨
+      (((j : ℤ) - (p + 2 * i : ℕ)) % 6 ∈ ({2, 3, 4} : Finset ℤ) ∧ ((l : ℤ) - (p + 2 * i : ℕ)) % 6 ∈ ({0, 1, 5} : Finset ℤ)) := by
+    interval_cases j <;> interval_cases l <;> interval_cases p <;> simp at hjl <;> decide
+  obtain ⟨i, hi, h⟩ := key
+  refine ⟨i, hi, ?_⟩
+  simp only [Finset.mem_insert, Finset.mem_singleton] at h
+  push_cast at h ⊢
+  rcases h with ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · exact mul_neg_of_pos_of_neg (by exact_mod_cast cos_int_mul_third_pos (m := (j : ℤ) - (p + 2 * i)) (by exact_mod_cast h1))
+      (by exact_mod_cast cos_int_mul_third_neg (m := (l : ℤ) - (p + 2 * i)) (by exact_mod_cast h2))
+  · exact mul_neg_of_neg_of_pos (by exact_mod_cast cos_int_mul_third_neg (m := (j : ℤ) - (p + 2 * i)) (by exact_mod_cast h1))
+      (by exact_mod_cast cos_int_mul_third_pos (m := (l : ℤ) - (p + 2 * i)) (by exact_mod_cast h2))
+
+
+/-- The squared norm of a sum of two unit vectors: `‖e a + e b‖² = 2 + 2 cos(a − b)`. -/
+theorem sq_norm_e_add_e (a b : ℝ) : ‖e a + e b‖ ^ 2 = 2 + 2 * Real.cos (a - b) := by
+  rw [Complex.sq_norm, Complex.normSq_apply, e_eq, e_eq, Real.cos_sub]
+  simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+    Complex.I_re, Complex.I_im]
+  nlinarith [Real.cos_sq_add_sin_sq a, Real.cos_sq_add_sin_sq b]
+
+/-- The two unit vectors `60°` on either side of `e a` add up to `e a`. -/
+theorem e_add_third_add_e_sub_third (a : ℝ) : e (a + π / 3) + e (a - π / 3) = e a := by
+  rw [e_eq, e_eq, e_eq, Real.cos_add, Real.cos_sub, Real.sin_add, Real.sin_sub, Real.cos_pi_div_three]
+  push_cast; ring
+
 namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
@@ -4661,6 +4716,147 @@ theorem a4six (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {a b : Fin k} (hab : 
     · exact hθ1
     · exact hθ2
 
+/-- **The ring rotates its colours** (child of NB4P): if the germ of `ω(v)` on side `s` of `r(θ)` lies in the class of `c`, and
+`r(θ + 60°)` is on no arc of `Γ` on `ω(v)`, the germ on side `s` of `r(θ + 60°)` lies in the class of a colour `d ≠ c` absent at
+`v`. -/
+theorem germ_rotate_third (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {θ : ℝ} {s : Side} {c : Fin k}
+    (hg : GermIn v θ s (F.region c)) (hna : ¬ F.OnRingArc v (ringPt v (θ + π / 3))) :
+    ∃ d, d ≠ c ∧ d ∉ F.coloursAt v ∧ GermIn v (θ + π / 3) s (F.region d) := by
+  have hdom : ringPt v (θ + π / 3) ∈ F.dom := hv (sphere_subset_closedBall (ringPt_mem_sphere v _))
+  rcases F.germ_dichotomy hdom s with ⟨d, hd⟩ | ⟨θ₁, θ₂, c₁, c₂, hA, hgA⟩
+  · refine ⟨d, ?_, ?_, hd⟩
+    · rintro rfl
+      obtain ⟨δ, hδ, h1⟩ := hg
+      obtain ⟨δ', hδ', h2⟩ := hd
+      set t := min δ δ' / 2 with ht
+      have ht0 : 0 < t := by positivity
+      have htδ : t < δ := by have := min_le_left δ δ'; linarith
+      have htδ' : t < δ' := by have := min_le_right δ δ'; linarith
+      have hz1 : ringPt v (θ + s.sign * t) ∈ F.region d := h1 ⟨t, ⟨ht0, htδ⟩, rfl⟩
+      have hz2 : ringPt v (θ + π / 3 + s.sign * t) ∈ F.region d := h2 ⟨t, ⟨ht0, htδ'⟩, rfl⟩
+      have hd1 : dist (ringPt v (θ + s.sign * t)) (ringPt v (θ + π / 3 + s.sign * t)) = 1 := by
+        rw [show θ + π / 3 + s.sign * t = (θ + s.sign * t) + 1 * (π / 3) by ring]
+        exact dist_ringPt_third v _ 1 (Or.inl rfl)
+      exact hF _ hz1.1 _ hz2.1 hd1 (hz1.2.trans hz2.2.symm)
+    · obtain ⟨z, hz, hzs⟩ := GermIn.exists_mem_sphere hd
+      exact not_mem_coloursAt_of_mem_sphere hF hzs hz
+  · exact absurd ⟨θ₁, θ₂, hA.1, mem_ringArc_of_germIn hgA, hA.2.1⟩ hna
+
+/-- **The straddlers of `ω(y_{k+1})` at `y_k`** (child of NB4P; `plans/FS112-N-proof.md` § 2.1 W1 (ii), (1) and (3), with NB-4's half-plane
+step): let `y_k = r(θ)` and `y_{k+1} = r(θ + 60°)` on `ω(v)`, both absent colours `X`, `X'` carried at `y_{k+1}`, and `y_k` on no arc of `Γ`
+on `ω(y_{k+1})`. Then the germ of `ω(y_{k+1})` at `y_k` inside `B(v, 1)` lies in one colour `i`, the one outside `B̄(v, 1)` in one colour
+`o ≠ i`; both are colours of `v` carried at `y_k` and not at `y_{k+1}`; and `v`'s class of `i` approaches `v` only along directions facing
+`y_k`, that of `o` only along directions facing away. -/
+theorem straddlers_third (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {θ : ℝ} {X X' : Fin k}
+    (hcompl : (F.coloursAt v)ᶜ = {X, X'})
+    (hX : X ∈ F.coloursAt (ringPt v (θ + π / 3))) (hX' : X' ∈ F.coloursAt (ringPt v (θ + π / 3)))
+    (hna : ¬ F.OnRingArc (ringPt v (θ + π / 3)) (ringPt v θ)) :
+    ∃ i o, i ≠ o ∧ i ∈ F.coloursAt v ∧ o ∈ F.coloursAt v ∧
+      i ∉ F.coloursAt (ringPt v (θ + π / 3)) ∧ o ∉ F.coloursAt (ringPt v (θ + π / 3)) ∧
+      i ∈ F.coloursAt (ringPt v θ) ∧ o ∈ F.coloursAt (ringPt v θ) ∧
+      (∀ β ∈ coneAt (F.region i) v, 0 ≤ Real.cos (β - θ)) ∧ (∀ β ∈ coneAt (F.region o) v, Real.cos (β - θ) ≤ 0) := by
+  have hπ := Real.pi_pos
+  set p := ringPt v (θ + π / 3) with hp
+  set φ₀ := θ - π / 3 with hφ₀
+  have hpt : ringPt p φ₀ = ringPt v θ := by
+    rw [hp, hφ₀]; unfold ringPt; rw [add_assoc, e_add_third_add_e_sub_third]
+  have hvd : v ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  have hdom : ringPt p φ₀ ∈ F.dom := by rw [hpt]; exact hv (sphere_subset_closedBall (ringPt_mem_sphere v _))
+  have hgerm : ∀ s, ∃ c, GermIn p φ₀ s (F.region c) := by
+    intro s
+    rcases F.germ_dichotomy hdom s with h | ⟨θ₁, θ₂, c₁, c₂, hA, hgA⟩
+    · exact h
+    · exact absurd ⟨θ₁, θ₂, hA.1, hpt ▸ mem_ringArc_of_germIn hgA, hA.2.1⟩ hna
+  obtain ⟨i, hi⟩ := hgerm .cw
+  obtain ⟨o, ho⟩ := hgerm .ccw
+  have hnotp : ∀ s c, GermIn p φ₀ s (F.region c) → c ∉ F.coloursAt p := by
+    intro s c hg
+    obtain ⟨z, hz, hzs⟩ := GermIn.exists_mem_sphere hg
+    exact not_mem_coloursAt_of_mem_sphere hF hzs hz
+  have hinv : ∀ c, c ∉ F.coloursAt p → c ∈ F.coloursAt v := by
+    intro c hc
+    by_contra h
+    have : c ∈ (F.coloursAt v)ᶜ := h
+    rw [hcompl] at this
+    rcases this with rfl | rfl
+    · exact hc hX
+    · exact hc hX'
+  have haty : ∀ s c, GermIn p φ₀ s (F.region c) → c ∈ F.coloursAt (ringPt v θ) := by
+    intro s c ⟨δ, hδ, hsub⟩
+    rw [← hpt]; exact closure_mono hsub (ringPt_mem_closure_germ p φ₀ s hδ)
+  -- distances from `v` to the two germs
+  have hdv : ∀ φ, dist v (ringPt p φ) ^ 2 = 2 + 2 * Real.cos (θ + π / 3 - φ) := by
+    intro φ
+    rw [hp, dist_eq_norm, show v - ringPt (ringPt v (θ + π / 3)) φ = -(e (θ + π / 3) + e φ) by unfold ringPt; ring, norm_neg,
+      sq_norm_e_add_e]
+  have hc23 : Real.cos (2 * π / 3) = -(1 / 2) := by
+    rw [show 2 * π / 3 = π - π / 3 by ring, Real.cos_pi_sub, Real.cos_pi_div_three]
+  have hin_d : ∀ t ∈ Ioo 0 (π / 3), dist v (ringPt p (φ₀ + Side.cw.sign * t)) < 1 := by
+    intro t ht
+    have hcos : Real.cos (2 * π / 3 + t) < -(1 / 2) := by
+      rw [← hc23]; exact Real.cos_lt_cos_of_nonneg_of_le_pi (by positivity) (by linarith [ht.2]) (by linarith [ht.1])
+    have h := hdv (φ₀ + Side.cw.sign * t)
+    rw [show θ + π / 3 - (φ₀ + Side.cw.sign * t) = 2 * π / 3 + t by rw [hφ₀]; simp [Side.sign]; ring] at h
+    nlinarith [dist_nonneg (x := v) (y := ringPt p (φ₀ + Side.cw.sign * t))]
+  have hout_d : ∀ t ∈ Ioo 0 (π / 3), 1 < dist v (ringPt p (φ₀ + Side.ccw.sign * t)) := by
+    intro t ht
+    have hcos : -(1 / 2) < Real.cos (2 * π / 3 - t) := by
+      rw [← hc23]; exact Real.cos_lt_cos_of_nonneg_of_le_pi (by linarith [ht.2]) (by linarith) (by linarith [ht.1])
+    have h := hdv (φ₀ + Side.ccw.sign * t)
+    rw [show θ + π / 3 - (φ₀ + Side.ccw.sign * t) = 2 * π / 3 - t by rw [hφ₀]; simp [Side.sign]; ring] at h
+    nlinarith [dist_nonneg (x := v) (y := ringPt p (φ₀ + Side.ccw.sign * t))]
+  have hy1 : ‖v - ringPt p φ₀‖ = 1 := by
+    rw [hpt, ← dist_eq_norm, dist_comm]; exact dist_ringPt v θ
+  have hre : ∀ β, ((v - ringPt p φ₀) * starRingEnd ℂ (e β)).re = -Real.cos (β - θ) := by
+    intro β
+    rw [hpt, show v - ringPt v θ = -e θ by unfold ringPt; ring, neg_mul, Complex.neg_re, re_e_mul_conj_e,
+      ← Real.cos_neg, neg_sub]
+  have hconeI : ∀ β ∈ coneAt (F.region i) v, 0 ≤ Real.cos (β - θ) := by
+    intro β hβ
+    have := Valid.cone_re_nonpos_of_germ hF (hi.mono subset_closure) hy1 ⟨π / 3, by positivity, hin_d⟩ β hβ
+    rw [hre] at this; linarith
+  have hconeO : ∀ β ∈ coneAt (F.region o) v, Real.cos (β - θ) ≤ 0 := by
+    intro β hβ
+    have := Valid.cone_re_nonneg_of_germ hF (ho.mono subset_closure) hy1 ⟨π / 3, by positivity, hout_d⟩ β hβ
+    rw [hre] at this; linarith
+  refine ⟨i, o, ?_, hinv i (hnotp _ _ hi), hinv o (hnotp _ _ ho), hnotp _ _ hi, hnotp _ _ ho, haty _ _ hi, haty _ _ ho,
+    hconeI, hconeO⟩
+  -- an inner and an outer straddler at one point never share a colour (N-E2 against `v`'s tile of that colour)
+  rintro rfl
+  obtain ⟨Tv, hTv, hvTv⟩ := (F.mem_coloursAt_iff_exists_tileOf hvd).mp (hinv i (hnotp _ _ hi))
+  -- the tile of a germ: it holds the germ, so has `y_k` in its closure
+  have htile : ∀ s, GermIn p φ₀ s (F.region i) → ∃ t ∈ Ioo 0 (π / 3), ∃ T, F.TileOf i T ∧
+      ringPt p (φ₀ + s.sign * t) ∈ T ∧ ringPt v θ ∈ closure T := by
+    intro s ⟨δ, hδ, hsub⟩
+    set t := min δ (π / 3) / 2 with ht
+    have ht0 : 0 < t := by positivity
+    have htδ : t < δ := by have := min_le_left δ (π / 3); linarith
+    have htπ : t < π / 3 := by have := min_le_right δ (π / 3); linarith
+    have hzg : ringPt p (φ₀ + s.sign * t) ∈ germ p φ₀ s δ := ⟨t, ⟨ht0, htδ⟩, rfl⟩
+    have hz := hsub hzg
+    have hgT : germ p φ₀ s δ ⊆ connectedComponentIn F.interiorPts (ringPt p (φ₀ + s.sign * t)) :=
+      (isPreconnected_germ p φ₀ s δ).subset_connectedComponentIn hzg (hsub.trans (F.region_subset_interiorPts i))
+    have hT : F.IsTile (connectedComponentIn F.interiorPts (ringPt p (φ₀ + s.sign * t))) := ⟨_, hz.1, rfl⟩
+    have hTi := hT.tileOf (mem_connectedComponentIn hz.1)
+    rw [show F.col (ringPt p (φ₀ + s.sign * t)) = i from hz.2] at hTi
+    exact ⟨t, ⟨ht0, htπ⟩, _, hTi, mem_connectedComponentIn hz.1,
+      hpt ▸ closure_mono hgT (ringPt_mem_closure_germ p φ₀ s hδ)⟩
+  obtain ⟨t₁, ht₁, Tin, hTin, hz₁, hyin⟩ := htile .cw hi
+  obtain ⟨t₂, ht₂, Tout, hTout, hz₂, hyout⟩ := htile .ccw ho
+  have hnear := unitNear_of_mem_closure hF hTin hTv (subset_closure hz₁) hvTv (by rw [dist_comm]; exact hin_d t₁ ht₁)
+  have hfar := unitFar_of_mem_closure hF hTout hTv (subset_closure hz₂) hvTv (by rw [dist_comm]; exact hout_d t₂ ht₂)
+  have hsph : Tv ⊆ sphere (ringPt v θ) 1 := by
+    intro b hb
+    have h1 : dist (ringPt v θ) b ≤ 1 :=
+      closure_minimal (fun a ha => (hnear a ha b hb).le) (isClosed_le (continuous_id.dist continuous_const) continuous_const) hyin
+    have h2 : 1 ≤ dist (ringPt v θ) b :=
+      closure_minimal (fun a ha => (hfar a ha b hb).le) (isClosed_le continuous_const (continuous_id.dist continuous_const)) hyout
+    rw [mem_sphere, dist_comm]; linarith
+  have hint := interior_maximal hsph hTv.1.isOpen
+  rw [interior_sphere _ one_ne_zero] at hint
+  obtain ⟨b, hb⟩ := hTv.1.nonempty
+  exact hint hb
+
 /-- **FS112-NB4P** (NB-4 corrected): at a point `v` of exactly four colours of a valid six-coloured map, let `y₀ = r(ψ)` be a change
 point of its ring (a covering pair with `v`, automatically) and `y_j = r(ψ + j·60°)` its `σ_v`-orbit. If no orbit point lies on an arc
 of `Γ` on `ω(v)` (closed arcs, so ends included), and no arc of `Γ` on `ω(y_{j±1})` has `y_j` on it, contradiction. The bound on the
@@ -4672,7 +4868,158 @@ theorem nb4p {G : ArcMap 6} (hF : G.Valid) {v : ℂ} (hv : G.Covers v 1) (h4 : (
       ¬ G.OnRingArc (ringPt v (ψ + ((j : ℝ) + 1) * (π / 3))) (ringPt v (ψ + j * (π / 3))) ∧
         ¬ G.OnRingArc (ringPt v (ψ + ((j : ℝ) - 1) * (π / 3))) (ringPt v (ψ + j * (π / 3)))) :
     False := by
-  sorry
+  classical
+  have hπ := Real.pi_pos
+  obtain ⟨-, hcompl⟩ := germS_absent hF hv (by omega) (by omega) hy
+  have hXX' : X ≠ X' := hy.2.1
+  have hvd : v ∈ G.dom := hv (mem_closedBall_self zero_le_one)
+  set P := G.coloursAt v with hP
+  have hangle : ∀ j : ℕ, ψ + ((j + 1 : ℕ) : ℝ) * (π / 3) = ψ + j * (π / 3) + π / 3 := by intro j; push_cast; ring
+  -- Step 1: the ring's colours alternate between the two absent colours at every orbit point
+  have hrot : ∀ θ s (c c' : Fin 6), ({c, c'} : Set (Fin 6)) = {X, X'} → c ≠ c' → GermIn v θ s (G.region c) →
+      ¬ G.OnRingArc v (ringPt v (θ + π / 3)) → GermIn v (θ + π / 3) s (G.region c') := by
+    intro θ s c c' hcc hne hg hna
+    obtain ⟨d, hdc, hdv, hd⟩ := germ_rotate_third hF hv hg hna
+    have : d ∈ ({c, c'} : Set (Fin 6)) := by rw [hcc, ← hcompl]; exact hdv
+    rcases this with rfl | rfl
+    · exact absurd rfl hdc
+    · exact hd
+  have halt : ∀ j : ℕ, j ≤ 5 → ∃ c c', ({c, c'} : Set (Fin 6)) = {X, X'} ∧ c ≠ c' ∧
+      GermIn v (ψ + j * (π / 3)) .ccw (G.region c) ∧ GermIn v (ψ + j * (π / 3)) .cw (G.region c') := by
+    intro j hj
+    induction j with
+    | zero => exact ⟨X, X', rfl, hXX', by simpa using hy.2.2.1, by simpa using hy.2.2.2⟩
+    | succ j ih =>
+      obtain ⟨c, c', hcc, hne, hg1, hg2⟩ := ih (by omega)
+      have hna : ¬ G.OnRingArc v (ringPt v (ψ + j * (π / 3) + π / 3)) := by
+        have := hring (j + 1) (by omega); rwa [hangle] at this
+      rw [hangle]
+      refine ⟨c', c, by rw [Set.pair_comm]; exact hcc, hne.symm, hrot _ _ c c' hcc hne hg1 hna, ?_⟩
+      exact hrot _ _ c' c (by rw [Set.pair_comm]; exact hcc) hne.symm hg2 hna
+  have hcl : ∀ θ s c, GermIn v θ s (G.region c) → c ∈ G.coloursAt (ringPt v θ) := by
+    intro θ s c ⟨δ, hδ, hsub⟩
+    exact closure_mono hsub (ringPt_mem_closure_germ v θ s hδ)
+  have hXy : ∀ j : ℕ, j ≤ 6 → X ∈ G.coloursAt (ringPt v (ψ + j * (π / 3))) ∧ X' ∈ G.coloursAt (ringPt v (ψ + j * (π / 3))) := by
+    intro j hj
+    have h05 : ∀ j : ℕ, j ≤ 5 → X ∈ G.coloursAt (ringPt v (ψ + j * (π / 3))) ∧ X' ∈ G.coloursAt (ringPt v (ψ + j * (π / 3))) := by
+      intro j hj
+      obtain ⟨c, c', hcc, -, hg1, hg2⟩ := halt j hj
+      have h1 := hcl _ _ _ hg1
+      have h2 := hcl _ _ _ hg2
+      have hX : X ∈ ({c, c'} : Set (Fin 6)) := by rw [hcc]; exact Or.inl rfl
+      have hX' : X' ∈ ({c, c'} : Set (Fin 6)) := by rw [hcc]; exact Or.inr rfl
+      constructor
+      · rcases hX with rfl | rfl <;> assumption
+      · rcases hX' with rfl | rfl <;> assumption
+    rcases Nat.lt_or_ge j 6 with h | h
+    · exact h05 j (by omega)
+    · have hj6 : j = 6 := by omega
+      subst hj6
+      have : ringPt v (ψ + ((6 : ℕ) : ℝ) * (π / 3)) = ringPt v (ψ + ((0 : ℕ) : ℝ) * (π / 3)) := by
+        unfold ringPt; push_cast; rw [show ψ + 6 * (π / 3) = ψ + 0 * (π / 3) + 2 * π by ring, e_add_two_pi]
+      rw [this]; exact h05 0 (by omega)
+  -- Step 2: the straddlers of `ω(y_{k+1})` at `y_k`
+  have hS : ∀ k : ℕ, ∃ i o : Fin 6, k < 6 → (i ≠ o ∧ i ∈ P ∧ o ∈ P ∧
+      i ∉ G.coloursAt (ringPt v (ψ + ((k + 1 : ℕ) : ℝ) * (π / 3))) ∧ o ∉ G.coloursAt (ringPt v (ψ + ((k + 1 : ℕ) : ℝ) * (π / 3))) ∧
+      i ∈ G.coloursAt (ringPt v (ψ + k * (π / 3))) ∧ o ∈ G.coloursAt (ringPt v (ψ + k * (π / 3))) ∧
+      (∀ β ∈ coneAt (G.region i) v, 0 ≤ Real.cos (β - (ψ + k * (π / 3)))) ∧
+      (∀ β ∈ coneAt (G.region o) v, Real.cos (β - (ψ + k * (π / 3))) ≤ 0)) := by
+    intro k
+    rcases Nat.lt_or_ge k 6 with hk | hk
+    · have hX2 := hXy (k + 1) (by omega)
+      rw [hangle] at hX2 ⊢
+      have hna := (hnb k hk).1
+      rw [show ψ + ((k : ℝ) + 1) * (π / 3) = ψ + k * (π / 3) + π / 3 by ring] at hna
+      obtain ⟨i, o, h⟩ := straddlers_third hF hv hcompl hX2.1 hX2.2 hna
+      exact ⟨i, o, fun _ => h⟩
+    · exact ⟨X, X, fun h => absurd h (by omega)⟩
+  choose I O hIO using hS
+  -- Step 3: the straddler pairs alternate between two complementary halves of `P`
+  set Q : ℕ → Set (Fin 6) := fun k => {I k, O k} with hQ
+  have hQP : ∀ k, k < 6 → Q k ⊆ P := by
+    intro k hk; rintro _ (rfl | rfl)
+    · exact (hIO k hk).2.1
+    · exact (hIO k hk).2.2.1
+  have hQ2 : ∀ k, k < 6 → (Q k).ncard = 2 := fun k hk => Set.ncard_pair (hIO k hk).1
+  have hPfin : P.Finite := Set.toFinite _
+  have hstep : ∀ k, k < 5 → Q (k + 1) = P \ Q k := by
+    intro k hk
+    have hsub : Q (k + 1) ⊆ P \ Q k := by
+      intro x hx
+      refine ⟨hQP (k + 1) (by omega) hx, ?_⟩
+      have hxy : x ∈ G.coloursAt (ringPt v (ψ + ((k + 1 : ℕ) : ℝ) * (π / 3))) := by
+        rcases hx with rfl | rfl
+        · exact (hIO (k + 1) (by omega)).2.2.2.2.2.1
+        · exact (hIO (k + 1) (by omega)).2.2.2.2.2.2.1
+      rintro (rfl | rfl)
+      · exact (hIO k (by omega)).2.2.2.1 hxy
+      · exact (hIO k (by omega)).2.2.2.2.1 hxy
+    refine Set.eq_of_subset_of_ncard_le hsub ?_ hPfin.sdiff
+    rw [Set.ncard_sdiff (hQP k (by omega)), h4, hQ2 k (by omega), hQ2 (k + 1) (by omega)]
+  have hback : ∀ k, k < 4 → Q (k + 2) = Q k := by
+    intro k hk
+    have h1 : Q (k + 2) = P \ Q (k + 1) := hstep (k + 1) (by omega)
+    rw [h1, hstep k (by omega), Set.sdiff_sdiff_cancel_left (hQP k (by omega))]
+  have e1 : Q 1 = P \ Q 0 := hstep 0 (by omega)
+  have e2 : Q 2 = Q 0 := hback 0 (by omega)
+  have e4 : Q 4 = Q 0 := (hback 2 (by omega)).trans e2
+  have e3 : Q 3 = Q 1 := hback 1 (by omega)
+  have e5 : Q 5 = Q 1 := (hback 3 (by omega)).trans e3
+  -- each colour of `v` is a straddler at three orbit points of one parity
+  set Str : ℕ → Fin 6 → Prop := fun k A => (∀ β ∈ coneAt (G.region A) v, 0 ≤ Real.cos (β - (ψ + k * (π / 3)))) ∨
+    (∀ β ∈ coneAt (G.region A) v, Real.cos (β - (ψ + k * (π / 3))) ≤ 0) with hStr
+  have hStrQ : ∀ k, k < 6 → ∀ A ∈ Q k, Str k A := by
+    intro k hk A hA
+    rcases hA with rfl | rfl
+    · exact Or.inl (hIO k hk).2.2.2.2.2.2.2.1
+    · exact Or.inr (hIO k hk).2.2.2.2.2.2.2.2
+  have hpar : ∀ A ∈ P, ∃ p < 2, ∀ i < 3, Str (p + 2 * i) A := by
+    intro A hA
+    by_cases h0 : A ∈ Q 0
+    · refine ⟨0, by omega, fun i hi => ?_⟩
+      interval_cases i
+      · exact hStrQ 0 (by omega) A h0
+      · exact hStrQ 2 (by omega) A (by rw [e2]; exact h0)
+      · exact hStrQ 4 (by omega) A (by rw [e4]; exact h0)
+    · have h1 : A ∈ Q 1 := by rw [e1]; exact ⟨hA, h0⟩
+      refine ⟨1, by omega, fun i hi => ?_⟩
+      interval_cases i
+      · exact hStrQ 1 (by omega) A h1
+      · exact hStrQ 3 (by omega) A (by rw [e3]; exact h1)
+      · exact hStrQ 5 (by omega) A (by rw [e5]; exact h1)
+  -- Step 4: each colour of `v` approaches `v` along at most one of the six orbit directions
+  have hone : ∀ A ∈ P, ∀ j l : ℕ, j < 6 → l < 6 → ψ + j * (π / 3) ∈ coneAt (G.region A) v →
+      ψ + l * (π / 3) ∈ coneAt (G.region A) v → j = l := by
+    intro A hA j l hj hl hjc hlc
+    by_contra hjl
+    obtain ⟨p, hp, hS3⟩ := hpar A hA
+    obtain ⟨i, hi, hneg⟩ := exists_opposite_cos_third hj hl hp hjl
+    have hcj : Real.cos (ψ + j * (π / 3) - (ψ + ((p + 2 * i : ℕ) : ℝ) * (π / 3))) =
+        Real.cos (((j : ℤ) - (p + 2 * i : ℕ)) * (π / 3)) := by congr 1; push_cast; ring
+    have hcl' : Real.cos (ψ + l * (π / 3) - (ψ + ((p + 2 * i : ℕ) : ℝ) * (π / 3))) =
+        Real.cos (((l : ℤ) - (p + 2 * i : ℕ)) * (π / 3)) := by congr 1; push_cast; ring
+    rcases hS3 i hi with h | h
+    · have a1 := h _ hjc; have a2 := h _ hlc
+      rw [hcj] at a1; rw [hcl'] at a2
+      nlinarith [mul_nonneg a1 a2]
+    · have a1 := h _ hjc; have a2 := h _ hlc
+      rw [hcj] at a1; rw [hcl'] at a2
+      nlinarith [mul_nonneg_of_nonpos_of_nonpos a1 a2]
+  -- Step 5: six directions, four colours
+  have hC : ∀ j : ℕ, ∃ c, ψ + j * (π / 3) ∈ coneAt (G.region c) v := fun j => G.exists_mem_coneAt_region hvd _
+  choose C hCc using hC
+  have hCP : ∀ j, C j ∈ P := fun j => mem_closure_of_mem_coneAt (hCc j)
+  have hinj : Set.InjOn C (Finset.range 6 : Set ℕ) := by
+    intro j hj l hl hjl
+    simp only [Finset.coe_range, mem_Iio] at hj hl
+    exact hone (C j) (hCP j) j l hj hl (hCc j) (hjl ▸ hCc l)
+  have hcard : (Finset.range 6).card ≤ P.toFinset.card := by
+    rw [← Finset.card_image_of_injOn hinj]
+    refine Finset.card_le_card fun c hc => ?_
+    obtain ⟨j, -, rfl⟩ := Finset.mem_image.mp hc
+    exact Set.mem_toFinset.mpr (hCP j)
+  rw [Finset.card_range, ← Set.ncard_eq_toFinset_card', h4] at hcard
+  omega
 
 end ArcMap
 
