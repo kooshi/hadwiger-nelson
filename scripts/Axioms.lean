@@ -5526,6 +5526,9 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.exists_terminalMap
 #print axioms HadwigerNelson.Plane.ArcMap.terminal_vertices
 #print axioms HadwigerNelson.Plane.ArcMap.run_ends
+#print axioms HadwigerNelson.Plane.BranchGerms.horn_cases_four
+#print axioms HadwigerNelson.Plane.ArcMap.horn_flanks_of_isChainVertex
+#print axioms HadwigerNelson.Plane.ArcMap.hornBoundsQR_of_isChainVertex
 #print axioms HadwigerNelson.Plane.ArcMap.run_hornBoundsQR
 #print axioms HadwigerNelson.Plane.ArcMap.stuckRun_ne_univ
 

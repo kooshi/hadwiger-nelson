@@ -3491,6 +3491,83 @@ theorem run_ends {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : ℝ} (hv 
     rw [dist_eq_norm, show v + ((j - 1 : ℤ) : ℂ) * e (α + π / 2) - (v + (j : ℂ) * e (α + π / 2)) = -e (α + π / 2) by
       push_cast; ring, norm_neg, norm_e]
 
+/-- **Two horns among four germs** (the index bookkeeping of a stuck vertex's chart): on a cycle of four indices, if the germs at `iu` and
+the index after it share a direction (`P = true`), the germs at `ip` and the index after it share another (`P = false`), then an index
+whose next germ shares its direction is `iu` or `ip`. -/
+theorem _root_.HadwigerNelson.Plane.BranchGerms.horn_cases_four {n : ℕ} (hn : n = 4) :
+    ∀ P : Fin n → Bool, ∀ iu ip i : Fin n, P iu = true → P (BranchGerms.next iu) = true → P ip = false →
+      P (BranchGerms.next ip) = false → P (BranchGerms.next i) = P i → i = iu ∨ i = ip := by
+  subst hn
+  decide
+
+/-- **Every horn at a chain vertex is one of the two-sector colour's**: at a stuck vertex with at most three colours, a horn of any
+colour along any direction is a horn of the colour with two sectors (`stuck_structure_ua`'s), whose sector chart has four germs (degree
+`4`); so its colour has two sectors and it carries the stuck structure's flanks along its own direction. Inhabitant of the hypotheses:
+`bowtie` at `0` (`bowtie_isStuck`, `bowtie_coloursAt_zero`, `bowtie_isHorn`). -/
+theorem horn_flanks_of_isChainVertex (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1) (hw : F.IsChainVertex w) {β a b : ℝ}
+    {d : Fin k} (H : F.IsHorn w β a b d) :
+    F.HasSectors w d 2 ∧ ∃ g h : Fin k, F.IsFlankAbove w β b g ∧ F.IsFlankBelow w β a h := by
+  obtain ⟨hst, h3⟩ := hw
+  obtain ⟨c, m, hm, hc⟩ := hst.2.2.2
+  obtain ⟨α₀, κ₁, κ₂, κ₃, κ₄, g, h, Hu, Hd, -, -, -, -, hc2, hdeg, -, -, -, -, fa, fb, fa', fb', -⟩ :=
+    stuck_structure_ua hF hv hst h3 hm hc
+  have hwd : w ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  obtain ⟨X⟩ := exists_near hwd
+  -- the chart has four germs: the degree is `4`
+  have hn4 : X.n = 4 := by
+    obtain ⟨r, h1, h2⟩ := (hdeg.and X.hC.hasDegree).exists
+    rw [h1] at h2
+    have : (4 : ℕ) = max X.n 1 := by exact_mod_cast h2
+    omega
+  obtain ⟨iu, hβu, hnβu, hκu, hnκu, hcu, -⟩ := X.horn_index Hu
+  obtain ⟨ip, hβp, hnβp, hκp, hnκp, hcp, -⟩ := X.horn_index Hd
+  obtain ⟨i, hβi, hnβi, hκi, hnκi, hci, -⟩ := X.horn_index H
+  classical
+  let P : Fin X.n → Bool := fun j => decide (e (X.G.β j) = e α₀)
+  have hnext : ∀ j, X.G.nextβ j = X.G.β j → e (X.G.β (BranchGerms.next j)) = e (X.G.β j) := fun j hj => by
+    rw [← BranchGerms.e_nextβ, hj]
+  have hpne : e (α₀ + π) ≠ e α₀ := e_add_pi_ne α₀
+  have hPu : P iu = true := by simp [P, hβu]
+  have hPu' : P (BranchGerms.next iu) = true := by simp [P, hnext iu hnβu, hβu]
+  have hPp : P ip = false := by simp [P, hβp, hpne]
+  have hPp' : P (BranchGerms.next ip) = false := by simp [P, hnext ip hnβp, hβp, hpne]
+  have hPi : P (BranchGerms.next i) = P i := by simp [P, hnext i hnβi]
+  rcases BranchGerms.horn_cases_four hn4 P iu ip i hPu hPu' hPp hPp' hPi with rfl | rfl
+  · -- the horn along `α₀`
+    have hdc : d = c := hci.symm.trans hcu
+    have ha : a = κ₁ := hκi.symm.trans hκu
+    have hb : b = κ₂ := hnκi.symm.trans hnκu
+    have he : e α₀ = e β := hβu.symm.trans hβi
+    subst hdc ha hb
+    exact ⟨hc2, g, h, fa.congr he, fb.congr he⟩
+  · -- the horn along `α₀ + π`
+    have hdc : d = c := hci.symm.trans hcp
+    have ha : a = κ₃ := hκi.symm.trans hκp
+    have hb : b = κ₄ := hnκi.symm.trans hnκp
+    have he : e (α₀ + π) = e β := hβp.symm.trans hβi
+    subst hdc ha hb
+    exact ⟨hc2, h, g, fa'.congr he, fb'.congr he⟩
+
+/-- **Every horn bound `±1` at a chain vertex of a terminal map sits on a (Q) or (R2) arc**, along every direction: the horn is the
+two-sector colour's, with its flanks and out-type pole contacts (`horn_flanks_of_isChainVertex`, `horn_poles_contact`), so FLANK-Q
+(`flankQ_upper_of_qrOnly`, `flankQ_lower_of_qrOnly`) applies. No model of a chain vertex in a terminal valid plane map is known
+(`GENERIC`, FS-115); `bowtie` at `0` inhabits the local hypotheses on a fragment. -/
+theorem hornBoundsQR_of_isChainVertex (hM : F.IsTerminalMap) {w : ℂ} (hw : F.IsChainVertex w) (β : ℝ) :
+    F.HornBoundsQR w β := by
+  obtain ⟨hF, hP, -, hQR⟩ := hM
+  have hv : F.Covers w 1 := fun z _ => by rw [hP]; exact mem_univ z
+  refine ⟨fun κ₁ d H => ?_, fun κ₂ d H => ?_⟩
+  · obtain ⟨hd2, g, -, fa, -⟩ := horn_flanks_of_isChainVertex hF hv hw H
+    obtain ⟨hN, -⟩ := horn_poles_contact hF hv hw.1.1 le_rfl hd2 H
+    obtain ⟨θ₂, hθ, -, hQ | hR⟩ := flankQ_upper_of_qrOnly hF hQR hv H fa hN
+    · exact ⟨θ₂, hθ, Or.inl hQ.1⟩
+    · exact ⟨θ₂, hθ, Or.inr hR.1⟩
+  · obtain ⟨hd2, -, h, -, fb⟩ := horn_flanks_of_isChainVertex hF hv hw H
+    obtain ⟨-, hS⟩ := horn_poles_contact hF hv hw.1.1 le_rfl hd2 H
+    obtain ⟨θ₁, hθ, -, hQ | hR⟩ := flankQ_lower_of_qrOnly hF hQR hv H fb hS
+    · exact ⟨θ₁, hθ, Or.inl hQ.1⟩
+    · exact ⟨θ₁, hθ, Or.inr hR.1⟩
+
 /-- **N2-TERM's clause 3, the horn bounds, in every terminal six-map**: at each vertex of a stuck run, every horn bound `±1` along
 `±e α` sits on a (Q) or an (R2) arc. The run vertex is stuck along `±e α` (`stuckAlong_of_mem_stuckRun`); a horn there is one of the
 two-sector colour's (`stuck_structure_at_axis`), whose flank and pole contact are `stuck_structure_ua`'s; then
@@ -3499,7 +3576,12 @@ theorem run_hornBoundsQR {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : �
     (h3 : (F.coloursAt v).ncard ≤ 3) :
     ∀ j ∈ F.stuckRun v α, F.HornBoundsQR (v + (j : ℂ) * e (α + π / 2)) α ∧
       F.HornBoundsQR (v + (j : ℂ) * e (α + π / 2)) (α + π) := by
-  sorry
+  -- neither the axis nor the colour count at `v` is read: every run vertex is a chain vertex (`hornBoundsQR_of_isChainVertex`)
+  have _ := hv
+  have _ := h3
+  intro j hj
+  exact ⟨hornBoundsQR_of_isChainVertex hM (isChainVertex_of_mem_stuckRun hj) α,
+    hornBoundsQR_of_isChainVertex hM (isChainVertex_of_mem_stuckRun hj) (α + π)⟩
 
 /-- **N2-TERM's clause 3, finiteness, in every terminal six-map: no stuck run is bi-infinite** (FS110-N4-FIN under unit arcs,
 FS112-N2-RAY). Along a bi-infinite run every vertex is stuck along `±e α` (`stuckAlong_of_mem_stuckRun`); no horn bound is `±1`, for

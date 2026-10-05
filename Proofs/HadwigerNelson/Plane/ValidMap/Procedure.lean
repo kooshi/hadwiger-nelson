@@ -377,11 +377,11 @@ theorem badCount_eq_zero_iff (hF : F.Valid) (hP : F.IsPlaneMap) (P : ℂ) :
     · exact hQ h'
     · exact hR h'
 
-/-- **Finitely many maximal arcs about a point** of a clean valid map of the plane: the ends of a maximal arc are irregular angles of
-the ring (`IsMaxRingArc.not_regularAt`), finitely many in a bounded range (`finite_not_regular`), and a maximal arc starts in `[0, 2π)`
-and is at most `60°` long (`l60_le`). The plane hypothesis (inventory item 380) gives `ω(P)` in the domain; cleanness is not used. -/
-theorem badCount_lt_top (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) (P : ℂ) : F.badCount P < ⊤ := by
-  have _ := hc
+/-- **Finitely many maximal arcs about a point** of a valid map of the plane: the ends of a maximal arc are irregular angles of the
+ring (`IsMaxRingArc.not_regularAt`), finitely many in a bounded range (`finite_not_regular`), and a maximal arc starts in `[0, 2π)` and
+is at most `60°` long (`l60_le`). The plane hypothesis (inventory item 380) gives `ω(P)` in the domain; no cleanness is needed (its
+hypothesis dropped by inventory item 389 (a)). -/
+theorem badCount_lt_top (hF : F.Valid) (hP : F.IsPlaneMap) (P : ℂ) : F.badCount P < ⊤ := by
   have hπ := Real.pi_pos
   rw [badCount, encard_lt_top_iff]
   have hcov : F.Covers P 1 := fun z _ => by rw [hP]; trivial

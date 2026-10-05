@@ -3231,3 +3231,62 @@ blocks at the head kept, `fs131-w5`'s first).
 Statements unchanged on both sides but for the four copies removed and the declared renames; no `axiom`, no `native_decide`.
 
 ## Stage 53 — SAVED
+
+## Stage 54 — SAVED (FS131-M6): `run_hornBoundsQR` proved (with a stronger form at every chain vertex); `badCount_lt_top`'s `hc` dropped
+
+**`run_hornBoundsQR`** is a kernel theorem on the standard three, over three new declarations placed before it in `Terminal`:
+- **`BranchGerms.horn_cases_four`** — on a cycle of four indices, if the germs at `iu` and at the index after it share one direction and those at `ip`
+  and after it another, an index whose next germ shares its direction is `iu` or `ip` (a Bool-valued colouring of `Fin 4` and three indices: `decide`;
+  control: the same claim with conclusion `i = iu` alone is refused).
+- **`horn_flanks_of_isChainVertex`** — at a chain vertex (stuck, `≤ 3` colours), **a horn of any colour along any direction** is one of the two-sector
+  colour's two horns: the chart (`Near`) has four germs (degree `4` from `stuck_structure_ua`, against `IsSectorChart.hasDegree`), the three horns'
+  chart indices (`Near.horn_index`) fall under `horn_cases_four` with the direction test `e (β j) = e α₀` (`BranchGerms.e_nextβ`, `e_add_pi_ne`), so the
+  horn's colour has two sectors and the structure's flanks lie above and below it at its own bounds (`IsFlankAbove.congr`, `IsFlankBelow.congr`).
+- **`hornBoundsQR_of_isChainVertex`** — in a terminal map, `HornBoundsQR w β` at **every chain vertex `w` and every direction `β`**: the horn's
+  pole contacts (`horn_poles_contact`) and FLANK-Q (`flankQ_upper_of_qrOnly`, `flankQ_lower_of_qrOnly`).
+- `run_hornBoundsQR` is then two applications at `v + j n` (`isChainVertex_of_mem_stuckRun`), along `α` and `α + π`. Its hypotheses `hv`
+  (`StuckAlong v α`) and `h3` are not read (`have _ :=`, IL2's form for `hc`): **a generalization** — the clause holds at every chain vertex, along every
+  direction, with no run.
+
+KL1's route (§ 3.1) planned "`IsHorn` uniqueness at a chart index"; the step that needed thought was that the horn's colour is arbitrary (`HornBoundsQR`
+quantifies over every `d`), settled by the four-germ count rather than by sector colours.
+
+**`badCount_lt_top`**: its unused `(hc : F.IsClean)` removed (ruling 389 (a): a stronger theorem; no Lean consumer), its docstring updated, the
+`have _ := hc` line gone. `tools/fs131_il_stmt_check.py 06f39aef` (IL2's, run): exactly one statement changed, `badCount_lt_top` (`stmt-check-54.txt`,
+exit 1 as it must be for a ruled change); the three new declarations are additions.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 456 of 456 batches, 6 modules rebuilt, 5 with warnings, every warning `declaration uses
+'sorry'`** (`Terminal`'s only at `stuckRun_ne_univ`), exit 0, 9 min 18 s (`build/gate/build/20261005T114745Z-3978587.log`; its one `error:` line is
+the up-to-date probe's; driver log `data/fs131/m6/build-stage54.log`). **Axioms** (`data/fs131/m6/M6Axioms54.lean` → `.out`): on the standard three —
+`BranchGerms.horn_cases_four`, `horn_flanks_of_isChainVertex`, `hornBoundsQR_of_isChainVertex`, `run_hornBoundsQR`, `badCount_lt_top`; controls on
+`sorryAx`: `stuckRun_ne_univ`, `exists_terminal`. Records added to `scripts/Axioms.lean` before `run_hornBoundsQR`'s. `sorry`: `Terminal` 2 → 1.
+
+## Stage 54 — SAVED
+
+## Stage 55 — SAVED (FS131-M6): the hand-back
+
+### Theorems this phase proved (FS131-M6)
+
+All [kernel], `[propext, Classical.choice, Quot.sound]`, in `Plane/ValidMap/Terminal`:
+- `HadwigerNelson.Plane.ArcMap.run_hornBoundsQR` — N2-TERM's clause 3, the horn bounds: at each vertex of a stuck run of a terminal six-map, every
+  horn bound `±1` along `±e α` sits on a (Q) or (R2) arc.
+- `HadwigerNelson.Plane.ArcMap.hornBoundsQR_of_isChainVertex` — the same at every chain vertex of a terminal map, along every direction.
+- `HadwigerNelson.Plane.ArcMap.horn_flanks_of_isChainVertex` — every horn at a chain vertex is a horn of the two-sector colour, with flanks at its bounds.
+- `HadwigerNelson.Plane.BranchGerms.horn_cases_four` — the four-germ index bookkeeping.
+- In `Plane/ValidMap/Procedure`: `HadwigerNelson.Plane.ArcMap.badCount_lt_top`, now with no cleanness hypothesis (statement strengthened by ruling).
+- On this branch after the merge (proved on `main`, now the files here; standard three against this branch's build, Stage 53): `flankQ_upper`,
+  `flankQ_lower`, `exists_merge`, and through them `cv_class`, `c_double`, `c_ends`.
+
+**Left — `stuckRun_ne_univ`**, not attempted (budget). Route, KL1's § 3.1 with what Stage 54 adds: along `univ` every `P_j = v + j n` is a chain vertex
+with a horn along `α` (`horn_flanks_of_isChainVertex` gives its colour's two sectors and its flanks; take `λ_j < υ_j` its bounds, in `[−1, 1]` by
+`stuck_structure_ua`); **no bound is `±1`**: a bound `υ_j = 1` gives, by `hornBoundsQR_of_isChainVertex`, a (Q) or (R2) arc of `ω(P_j + n) = ω(P_{j+1})`,
+a unit arc centred at the chain vertex `P_{j+1}`, which `cv_l0` forbids (`λ_j = −1` likewise at `P_{j−1}`) — this part is now short. **The open child is
+`shadow_recursion`**: `λ_j ≤ curvDown λ_{j+1}` and `curvUp υ_{j−1} ≤ υ_j`. No SHAVE at `P_j` makes each flank shadow the horn at every scale
+(`shadow_of_not_shave`, `FlankUA`, no Condition 5); `srcG_of_shadow`/`srcH_of_shadow` put the source at `P_{j±1}` (strict bounds: `κ₂ < 1` gives the
+out-type case at `S′`); the step still to write is the one wave 4's `stuck_chain` never made in Lean: identify the source colour's class near `P_{j±1}`
+with a side of `P_{j±1}`'s horn and apply the N4-SHADOW geometry (`Cone.lean`'s far-side lemmas, `shadow_hornSet_subset_S`/`_N`) to get the
+concentric-circle bound; then `n4_fin`. Price: M–H, one session.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 55 — SAVED
