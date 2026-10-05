@@ -1,0 +1,96 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 8,9,10,11,12,13,14,15
+==> build: this run's full output: build/gate/build/20261005T032321Z-944708.log
+    ⚠ [3528/3588] Replayed Proofs.HadwigerNelson.Plane.SVMap
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:38:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:46:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:107:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:122:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:128:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:146:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:151:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:163:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:169:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:175:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:181:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:199:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:203:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/SVMap.lean:208:8: declaration uses `sorry`
+    ⚠ [3529/3588] Replayed Proofs.HadwigerNelson.Plane.StuckChain
+    warning: Proofs/HadwigerNelson/Plane/StuckChain.lean:19:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/StuckChain.lean:24:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/StuckChain.lean:32:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/StuckChain.lean:39:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/StuckChain.lean:45:8: declaration uses `sorry`
+    ⚠ [3530/3588] Replayed Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:130:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:137:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:145:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:153:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:160:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:170:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:181:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:253:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:257:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:262:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:279:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:283:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:287:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:292:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:296:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:301:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:305:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:309:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:314:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:318:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:323:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean:331:8: declaration uses `sorry`
+    ⚠ [3531/3588] Replayed Proofs.HadwigerNelson.Plane.ValidMap.Contact
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:34:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:53:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:59:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:64:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:82:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:95:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:104:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:118:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:129:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:140:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:154:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:170:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:186:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:206:8: declaration uses `sorry`
+    ⚠ [3532/3588] Replayed Proofs.HadwigerNelson.Plane.ValidMap.UnitArc
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:33:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:53:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:64:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:78:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:85:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:93:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:104:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:132:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:136:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:152:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:161:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:168:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:175:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:181:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:193:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:206:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:218:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:232:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:236:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:261:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:272:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:280:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:294:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:312:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:329:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:344:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:355:8: declaration uses `sorry`
+    All targets up-to-date (5361 jobs).
+==> build: OK — all 1748 modules already up to date, nothing built, 5 module(s) with warnings, 2s
+    full output: build/gate/build/20261005T032321Z-944708.log

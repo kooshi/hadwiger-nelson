@@ -542,3 +542,29 @@ amendment asks for is still an explicit inhabitant with every clause exercised.
 
 None: no milestone state moved (the gate has not run; wave 4's skeleton still carries `sorry` on this branch). Slot, when the chain's gate runs:
 `CLAUDE.md` § The gate and § Trust ledger get the counts, and the FS106-WO, FS106-TW, FS106-AE-MAP6 and E1-NO45 ledger rows are regraded then.
+
+## Stage 18 — SAVED (FS131-WL1): the readback; the build as given
+
+*Brief `data/fs131/briefs/FS131-WL1-woodall-land.md` (on `main`); the landing implementer, de Bruijn on Opus 5.5; branch `fs131-ww` at `792434f0`;
+`origin/main` at `a573a140` (wave 4 landed at `60ff1843`; since then `563e8e98`, `03c4d0b7`, `a573a140`: the filing, this brief, a handoff).*
+
+**The brief's quotations** (standing rule 3), each checked with `grep -cF` (one hit each) and its item read whole:
+- items 190, 172, 318, 319, 270, 271 of `plans/FS131-close-inventory.md` (main): opening lines verbatim (lines 1324, 1194, 2570, 2594 read whole);
+- the QA2-1 paragraph of `data/fs131/briefs/FS131-IWd-woodall-merge.md` (line 62, read through line 65): verbatim;
+- the three chain theorems and their docstrings in `Proofs/HadwigerNelson/Plane/Woodall/Steps.lean`: every quoted line is a whole line of the file
+  (`grep -cxF`, 15 lines, one hit each). **No mismatch.**
+
+Read: this record's stages 12–17, `plans/FS131-W-kernel-plan.md` § 14 (14.1–14.4), item 318's corrections owed (the first, `framePt → fromFrame` on every
+unmerged branch's side, is this job's).
+
+**The build as given** (`792434f0`, before any edit): OK — all 1748 modules up to date, nothing built, 5 modules with warnings, 2 s, exit 0
+(`build/gate/build/20261005T032321Z-944708.log`; driver log `data/fs131/wl/build0.log`). The 86 warnings are all `declaration uses 'sorry'`, all in wave
+4's five skeleton modules on this branch (`SVMap` 14, `StuckChain` 5, `ValidMap/BaseSteps` 22, `ValidMap/Contact` 16, `ValidMap/UnitArc` 29); none in
+`Plane/Woodall/`.
+
+**What I may change**: the merge's files (conflicts resolved both sides kept unless they collide); in the five Woodall modules, the rename
+`framePt → fromFrame`, the deletion of identical copies (and renames on this side of any that collide and differ), children and the QA2-1 model (no
+definition or statement changes); `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`, `scripts/Vacuity.lean`, `scripts/vacuity-controls.lean`,
+`scripts/vacuity-baseline.txt`, this record, `tools/fs131_wl_*.py`, `data/fs131/wl/`, my report; `main` by fast-forward only. **What I may not**: any
+statement or definition of the Woodall modules or of wave 4, any new `axiom`, any `native_decide`; `CLAUDE.md`, `LEAN.md`, `tools/claude_md_fact_audit.py`
+(drafts only); nothing with a `sorry` reaches `main`; no force-push.
