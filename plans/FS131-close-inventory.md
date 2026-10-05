@@ -2599,3 +2599,15 @@ reason by the close.*
      sentence's attribution (`FS131-I2n`; in git at `b8402e46` and in items 270–271), nothing else; `--dupes` exit 0. **Held for the milestone's filing**: wave
      4's Frontier clause, its `LEDGER.md` regrades, its Proof Atlas grades (as wave 2's, item 271). **Freed slot → Woodall's landing job, FS131-WL1** (item 317
      (e): wave 4 has landed). Worktree `fs131-w4` joins the removal list after its cited gate logs are rescued.
+320. **E5's Q1 verdict, by message: NB3-END item 2 and FS114-CVB § 1.4 item 5 are DERIVED** (FS131-E5, mid-job; record `plans/FS131-E5-derivation.md` § 3,
+     commit `63a07fe4`; [hand], one mind, exact checks with planted faults that fire). Item 305's configuration (one `g`-sector at `S′` with cone `[α+π, α+2π]`, `c`
+     only as a `c`-horn along `−a` above it, `κ₄ < 1`) is refuted by validity alone, through two lemmas: **SH** — near `S′`, the shadow of a horn at `v` whose
+     `S′`-side bound is `ν ∈ (−1, 1)` is exactly `TanAbove S′ α (ν/(1+ν))` on the horn's side of the normal line (FS110 N4-SHADOW's `curvDown`, the parallel curve at
+     distance 1); (SH1) needs no side condition, (SH2) needs `σ·frameX > 0`; I5e's "closed upward" property is the vertical drop inside a unit disc; **SEP** — the
+     `H₋`-witnesses lie in `G`, so `G`'s half-arc `γ₋` at direction `α+π` has upward curvature above `f(−κ₄)`, and any `c`-horn along `−a` on `γ₋`'s `+n` side lies in
+     `TanAbove f(−κ₄)`, hence in `H₋`'s shadow: a `c`-pair at distance 1; at `κ₄ = 1`, U1 removes `α+π` from `c` at `S′` and `c ∉ P_cl(S′)`, also a contradiction.
+     `cv_class`'s "None" case by the mirror in the line through `E` along `a` (the shadow near `N` is `TanBelow N α (υ/(1−υ))`, `curvUp`): `h` has two sectors at
+     `E + n`, `g` two at `E − n`. **No statement change**: `n3_end_of_not_inType` and `cv_class` stand as written. **So**: the `Terminal` implementer is unblocked
+     (item 317 (e)) and takes the next free slot, with E5 § 3 as its route for the two leaves; FS112-N3-END and FS114-CV-HD (rows 135, 137) stand, the gap filled
+     at one mind. Receipt (Keryx): commit `63a07fe4` exists on `main` ("Q1 derived … NB3-END item 2"); the record's § 3.1–3.5 headings read. E5 goes on to Q2
+     (`bend_away`'s end case). Credit: E5.
