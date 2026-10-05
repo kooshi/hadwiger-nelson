@@ -4940,6 +4940,8 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.bend_toward_collar
 -- FS131-KB2 (stage 45): `exists_preBend`'s iteration — the measure's children (sorry but the last) and the step
 #print axioms HadwigerNelson.Plane.ArcMap.finite_maxRingArcs
+#print axioms HadwigerNelson.Plane.exists_shift_of_ringArc_subset
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.shift
 #print axioms HadwigerNelson.Plane.ArcMap.exists_maxRingArc
 #print axioms HadwigerNelson.Plane.ArcMap.hfree_of_baseHyp
 #print axioms HadwigerNelson.Plane.ArcMap.ncard_coloursAt_le_two_of_mem_openArc

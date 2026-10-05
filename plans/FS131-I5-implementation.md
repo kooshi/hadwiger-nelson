@@ -2169,3 +2169,51 @@ Statements unchanged; no new declarations.
 `cv_exists` — exit 0, 8 min 14 s (`build/gate/build/20261005T102236Z-3314484.log`; driver log `data/fs131/m5/build-stage49.log`). Axioms: in Stage 50's print.
 
 ## Stage 49 — SAVED
+
+## Stage 50 — SAVED (FS131-M5): `exists_maxRingArc` proved, over two new helpers
+
+Statement unchanged. New, before it in `BaseDense` (names free on `HEAD`, `origin/main`, `origin/fs131-w5c` by `git grep`):
+- **`exists_shift_of_ringArc_subset`** (namespace `Plane`): if `ringArc P a b ⊆ ringArc P s t`, `a ≤ b` and `t − s < 2π`, then for some `n : ℤ`,
+  `s + 2πn ≤ a` and `b ≤ t + 2πn` — the lift of `a` fixes `n`; were `b` past `t + 2πn`, the parameter `min b (t + 2πn + δ)`, `δ` half the gap
+  `2π − (t − s)`, would have no lift into `[s, t]` (`e_eq_e_iff`). No bound on `b − a` is needed.
+- **`IsRingArc.shift`**: a ring arc read with both ends shifted by `2πn` is a ring arc with the same sides (`ringArc_add_two_pi_mul`, `ringPt_add_int_mul`).
+- **`exists_maxRingArc`**: `a` = the infimum of the left ends, `b` = the supremum of the right ends, over the lifts `[s, t] ⊇ [θ₁, θ₂]` of ring arcs with
+  sides `c, c'` (bounded by `l60_le`: `θ₂ − π/3 ≤ s`, `t ≤ θ₁ + π/3`). Every `φ ∈ (a, b)` lies inside one member (`exists_lt_of_csInf_lt`,
+  `exists_lt_of_lt_csSup`, or `(θ₁, θ₂)` itself), which gives `r(φ) ∈ Γ` and its sides; the two ends are in `Γ` because the arc lies in the domain
+  (`ω(P) ⊆ B̄(u, 2)`) and `Γ` is closed there (`ringArc_subset_Γ_of_finite`, the ends as the finite set). Maximality: an arc with these sides containing
+  `[a, b]` is, after the shift `exists_shift_of_ringArc_subset` gives, a member, so its ends are `a` and `b`. (The domain hypothesis is exactly what
+  inventory item 380's counterexample says such a statement needs: `ω(P) ⊆ dom`, here from `Covers u 2` and `P ∈ B̄(u, 1)`.)
+
+Elaborated first in `data/fs131/m5/scratch/MaxArc.lean` (deleted now; its content is in the library). `tools/fs131_i5_stmt_check.py d61edefc`: PASS
+(`data/fs131/m5/stmt-check-50.txt`). `scripts/Axioms.lean`: the two helpers' records before `exists_maxRingArc`'s.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 2 modules rebuilt (`BaseDense`, `Proofs`), 4 with warnings, every warning
+`declaration uses 'sorry'`**, exit 0, 8 min 21 s (`build/gate/build/20261005T103209Z-3367893.log`, "Build completed successfully (5788 jobs)"; driver log
+`data/fs131/m5/build-stage50.log`). **Axioms** (`data/fs131/m5/M5Axioms50.lean` → `.out`, 12 GiB slot): **on the standard three** —
+`ncard_coloursAt_le_two_of_mem_openArc`, `unenclosedC_of_homeomorph`, `exists_maxRingArc`, `exists_shift_of_ringArc_subset`, `IsRingArc.shift`; **controls on
+`sorryAx`**: `hfree_of_baseHyp`, `exists_preBend_step`, `exists_preBend`. `BaseDense`'s `sorry` 7 → 4: `finite_maxRingArcs`, `hfree_of_baseHyp`,
+`maxRingArcs_subset_of_bend`, `cv_exists` (the `Terminal` lane's stale copy).
+
+## Stage 50 — SAVED
+
+## Stage 51 — SAVED (FS131-M5): the hand-back
+
+### Theorems this phase proved (FS131-M5)
+
+All [kernel], `[propext, Classical.choice, Quot.sound]`, in `Plane/ValidMap/BaseDense`:
+- `HadwigerNelson.Plane.ArcMap.ncard_coloursAt_le_two_of_mem_openArc` — an interior point of a constant-sided unit arc carries at most its two side colours.
+- `HadwigerNelson.Plane.ArcMap.unenclosedC_of_homeomorph` — `UnenclosedC u` is carried by a homeomorphism of the plane fixing `u`, the identity off a bounded set,
+  that carries interior points, colours and colour sets (E4-BEND-UN's argument).
+- `HadwigerNelson.Plane.ArcMap.exists_maxRingArc` — every unit arc centred in `B̄(u, 1)` of a valid fragment covering `B̄(u, 2)` lies in a maximal one with its sides.
+- Helpers: `HadwigerNelson.Plane.exists_shift_of_ringArc_subset`, `HadwigerNelson.Plane.ArcMap.IsRingArc.shift`.
+- On this branch after the merge (proved on `main`, now the files here): wave 4's `exists_shave`, `exists_rayMerge`, `exists_merge`, `bend_toward`, `flankQ_upper`,
+  `flankQ_lower`, `nb4p` — on the standard three against this branch's build (Stage 48).
+
+**Left**: `hfree_of_baseHyp` — route, not attempted for budget: at `x = r(θ)`, `BaseHyp u` puts `x ∉ fourSet ∪ repSet` (`dist x u ≤ 2`), so
+`exists_chart_of_noRep` (`HexRing`) gives a chart with sector colours injective; each sector colour is carried at `x`, and the colours at `x` lie in `{c, c'}`
+(`ncard_coloursAt_le_two_of_mem_openArc`'s first step, worth factoring out as `coloursAt_subset_of_mem_openArc`), so at most two germs; both of `ω(P)`'s
+germs at `x` are germs of the chart (the arc near `x` lies in `Γ`), so the branches are the circle's (same tangent: `curveAt_eq_of_same`, `curve_inter` in
+`LocalStructure` for the curvature), and `Γ ∩ B(x, r₀) ⊆ ω(P)`. Also left: `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`, and `bend_toward_collar`'s
+construction (ruling 379 (c): a planner pass first). **Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 51 — SAVED
