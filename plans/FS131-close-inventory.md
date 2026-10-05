@@ -2987,3 +2987,21 @@ reason by the close.*
      slot without waiting for its proof. Confidence: medium (the two chains are within a session of each other). (d) **Queue**: the `Terminal` continuation
      FS131-I5n (with (a) as its first step) at the next free slot, then the SEP lane FS131-RS1, then `bend_away`'s implementer, `disc1_local`. In flight after
      IMM3's launch: 1 (I5m) + 1 (RW2) + 1 (IMM3) = 3.
+349. **FS131-I5m handed back** (Stage 37 SAVED, harness ≈ 423k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 34–37; report
+     `data/fs131/reports/FS131-I5m.md`; commits `8300e47b`, `74bebb85`, `05cb1e64`, `1b4a75d8`, `f33ef153`, pushed). **Results, [kernel] on the standard three,
+     statements unchanged**: `rot_in` (FS110-N2-ROT's inward row, unit arcs allowed, under H); `bv_nd` (BV-ND, every `k`, any centres, unit arcs, at cusps), so
+     `bv_nd1` is kernel too; the linkage to first order (`linkage_first_order`, `linkage_cmp`, `linkage_end`), for `bv_l3`; 18 children (`BranchGerms.next_adj`
+     on `[propext]` alone). **Receipt** (Keryx): the five commits exist and `origin/fs131-w5` is `f33ef153`; the latest build log
+     (`build/gate/build/20261005T065125Z-2125030.log`) ends "Build completed successfully (5369 jobs)", 0 warnings other than `sorry`; `sorry` by grep:
+     `BaseWalk` 3, `BaseDense` 3, `Dense` 1, `HexRing` 1, `MapGraph` 3, `Terminal` 9 — 20 (22 at launch); `tools/fs131_i5_stmt_check.py d61edefc` run by Keryx:
+     PASS; `I5mAxioms35/36/37.out` parsed: `rot_in`, `bv_nd`, `bv_nd1`, `linkage_first_order` standard, the controls (`bv_nd` at 35, `bv_l3` at 36–37) on `sorryAx`.
+     **Generalization**: `bv_nd` uses only `ω(u₂)`'s motion direction at `y₀` along `x₀ − y₀`, and at `x₀` only that both colours are present (in its docstring).
+     **`bv_l3` moved** within `HexRing` below `bv_nd` (statement and `sorry` unchanged): its double events go through `bv_nd`, since `pair_ii` needs `u₁` cubic
+     trichromatic and `bv_l3` assumes nothing of `u₁`'s sectors. **Left (2)**: `bv_l3` (H; about 350 lines from `l3_base` plus 250 new, route in record Stage
+     37, no statement defect) and `exists_preBend` (H; E4-BEND-UN not yet read). Credit: I5m, for `bv_nd`.
+350. **Ruling on I5m's slot: the `Terminal` continuation, FS131-I5n, on `fs131-w5c` from I5l's Stage 38**, as item 348 (d) queued: first ruling 348 (a)'s swap
+     (the stale `exists_merge` in `fs131-w5c`'s `Contact` replaced by `fs131-w4mm`'s ruling-269 text, by script), then `cv_hd_main_inType`, `y3_end_needs`,
+     `exists_red`, `exists_terminal`. Alternative weighed: I5m's continuation (`bv_l3`, `exists_preBend`, about two sessions). Why: the `Terminal` half's four H
+     leaves are the longer and are on wave 5's path beside MERGE; I5m's two wait with the SEP lane. **Queue now**: the SEP lane FS131-RS1, wave 5's
+     non-`Terminal` continuation FS131-I5o (`bv_l3`, `exists_preBend`), `bend_away`'s implementer, `disc1_local`. In flight after I5n's launch: 1 (RW2) + 1
+     (IMM3) + 1 (I5n) = 3.
