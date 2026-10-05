@@ -298,6 +298,167 @@ eleventh point's sentence (p. 28) is proved from `UnenclosedC u` (E4-RIM). A ref
 spent). -/
 theorem row134BaseUA : Row134BaseUA := fun _ _ hF h2 hu hH hI hE => BaseCtx.false ⟨hF, h2, hu, hH, hI, hE⟩
 
+/-! ## `exists_preBend`'s iteration (job FS131-KB2; `plans/FS131-I5-implementation.md` § 41.3): the measure, its children, one bend -/
+
+/-- **The maximal constant-sided unit arcs centred in `B̄(u, 1)`**, as sets — `exists_preBend`'s measure (record § 41.3). A set of
+positive length on a unit circle determines its centre, and its interior points their side colours, so counting sets counts arcs. -/
+def maxRingArcs (F : ArcMap k) (u : ℂ) : Set (Set ℂ) :=
+  {S | ∃ P ∈ closedBall u 1, ∃ θ₁ θ₂ c c', F.IsRingArc P θ₁ θ₂ c c' ∧ S = ringArc P θ₁ θ₂ ∧
+    ∀ θ₁' θ₂', ringArc P θ₁ θ₂ ⊆ ringArc P θ₁' θ₂' → F.IsRingArc P θ₁' θ₂' c c' → ringArc P θ₁' θ₂' = ringArc P θ₁ θ₂}
+
+/-- A map with no arcs has no maximal unit arc (the measure's spec example). -/
+example (u : ℂ) : (ArcMap.const univ isOpen_univ (0 : Fin 1)).maxRingArcs u = ∅ := by
+  refine eq_empty_of_forall_notMem fun S hS => ?_
+  obtain ⟨P, -, θ₁, θ₂, c, c', hA, -⟩ := hS
+  have h := hA.2.1 ⟨θ₁, ⟨le_rfl, hA.1.le⟩, rfl⟩
+  simp [Γ, ArcMap.const] at h
+
+/-- **Finitely many maximal arcs** (record § 41.3's finiteness child): in a valid fragment covering `B̄(u, 2)` the maximal constant-sided
+unit arcs centred in `B̄(u, 1)` are finitely many — their ends lie among the ends of the finitely many arcs meeting `B̄(u, 2)` and the
+points where two of their curves cross (elsewhere `Γ` is locally one unit circle with constant sides, and the arc extends), and an arc of
+length at most `π/3` (`l60_le`) is fixed by its centre and ends. `GENERIC`. -/
+theorem finite_maxRingArcs (hF : F.Valid) {u : ℂ} (hu : F.Covers u 2) : (F.maxRingArcs u).Finite := by
+  sorry
+
+/-- **Every unit arc centred in `B̄(u, 1)` lies in a maximal one with its sides** (record § 41.3): the arcs of `ω(P)` with sides `c, c'`
+containing it, of length at most `π/3` (`l60_le`), have an infimum and a supremum of ends, and the closed arc between them lies in `Γ`
+(closed in the domain, which holds `B̄(u, 2)`) with the same sides at its interior points. `GENERIC`. -/
+theorem exists_maxRingArc (hF : F.Valid) {u P : ℂ} (hu : F.Covers u 2) (hP : P ∈ closedBall u 1) {θ₁ θ₂ : ℝ} {c c' : Fin k}
+    (hA : F.IsRingArc P θ₁ θ₂ c c') :
+    ∃ a b, ringArc P θ₁ θ₂ ⊆ ringArc P a b ∧ F.IsRingArc P a b c c' ∧
+      ∀ θ₁' θ₂', ringArc P a b ⊆ ringArc P θ₁' θ₂' → F.IsRingArc P θ₁' θ₂' c c' → ringArc P θ₁' θ₂' = ringArc P a b := by
+  sorry
+
+/-- **`hfree` from the base's hypothesis** (record § 41.2 item 4, inventory item 365 (2)): near each interior point `x` of a unit arc
+centred in `B̄(u, 1)` — so `x ∈ B̄(u, 2)` — `Γ` is the arc's circle, else a further germ of `Γ` at `x` would split one side's colour into two
+sectors there (`x` a repeated-colour point), against `BaseHyp u`. `GENERIC`. -/
+theorem hfree_of_baseHyp (hF : F.Valid) {u P : ℂ} (hu : F.Covers u 2) (hH : F.BaseHyp u) (hP : P ∈ closedBall u 1)
+    {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c') :
+    ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1 := by
+  sorry
+
+/-- **An interior point of a unit arc carries at most its two side colours**: near it the arc's circle lies in `Γ`, so each colour class
+approaches it from inside or from outside the circle. `GENERIC`. -/
+theorem ncard_coloursAt_le_two_of_mem_openArc {P : ℂ} {θ₁ θ₂ θ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
+    (hθ : θ ∈ Ioo θ₁ θ₂) : (F.coloursAt (ringPt P θ)).ncard ≤ 2 := by
+  sorry
+
+/-- **An interior point has no repeated colour**: near it the one sector is a ball. `GENERIC`. -/
+theorem not_hasRepeatedColour_of_mem_interiorPts {x : ℂ} (hx : x ∈ F.interiorPts) : ¬ F.HasRepeatedColour x := by
+  rintro ⟨c, hc⟩
+  obtain ⟨r₀, hr₀, hball⟩ := Metric.isOpen_iff.mp F.isOpen_interiorPts x hx
+  obtain ⟨r, h2, hr⟩ := (hc.and (Ioo_mem_nhdsGT hr₀)).exists
+  have hU : F.interiorPts ∩ ball x r = ball x r := inter_eq_right.mpr ((ball_subset_ball hr.2.le).trans hball)
+  have hsub : F.sectorsOf x r c ⊆ {ball x r} := by
+    rintro S ⟨⟨y, hy, rfl, -⟩, -⟩
+    rw [mem_singleton_iff, hU]
+    rw [hU] at hy
+    exact Subset.antisymm (connectedComponentIn_subset _ _)
+      ((convex_ball x r).isPreconnected.subset_connectedComponentIn hy subset_rfl)
+  have h1 := (Set.encard_le_encard hsub).trans_eq (encard_singleton _)
+  have : (2 : ℕ∞) ≤ 1 := h2.trans h1
+  exact absurd this (by norm_num)
+
+/-- **The measure drops by the bent arc** (record § 41.3): a maximal arc `β` of the bent map `M` is one of `F`'s (R1), inside a maximal
+`γ` of `F` (`exists_maxRingArc`); `γ ≠ α` (R3), `γ°` misses `α°` (same centre and sides: maximal arcs that overlap merge; other sides cannot
+overlap; another centre: `hfree`), so `γ` is an arc of `M` (R2) and `β = γ`. `GENERIC`. -/
+theorem maxRingArcs_subset_of_bend (hF : F.Valid) {M : ArcMap k} (hM : M.Valid) {u P : ℂ} (hu : F.Covers u 2)
+    (hMu : M.Covers u 2) (hP : P ∈ closedBall u 1) {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c')
+    (hmax : ∀ θ₁' θ₂', ringArc P θ₁ θ₂ ⊆ ringArc P θ₁' θ₂' → F.IsRingArc P θ₁' θ₂' c c' →
+      ringArc P θ₁' θ₂' = ringArc P θ₁ θ₂)
+    (hfree : ∀ θ ∈ Ioo θ₁ θ₂, ∃ r > 0, F.Γ ∩ ball (ringPt P θ) r ⊆ sphere P 1)
+    (hR1 : ∀ Q a b d d', M.IsRingArc Q a b d d' → F.IsRingArc Q a b d d')
+    (hR2 : ∀ Q a b d d', F.IsRingArc Q a b d d' → Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂) →
+      M.IsRingArc Q a b d d')
+    (hR3 : ∀ θ ∈ Ioo θ₁ θ₂, ¬ M.OnRingArc P (ringPt P θ)) :
+    M.maxRingArcs u ⊆ F.maxRingArcs u \ {ringArc P θ₁ θ₂} := by
+  sorry
+
+/-- **`UnenclosedC` is carried by a homeomorphism of the plane that is the identity off a bounded set and fixes `u`** (E4-BEND-UN's
+argument): the bent map's tiles are the images of `F`'s, closures and complements are carried, and boundedness is kept. `GENERIC`. -/
+theorem unenclosedC_of_homeomorph {M : ArcMap k} {h : ℂ ≃ₜ ℂ} {u : ℂ} {K : Set ℂ} (hK : Bornology.IsBounded K)
+    (hhK : ∀ z ∉ K, h z = z) (hu : h u = u)
+    (hint : ∀ z, (h z ∈ M.interiorPts ↔ z ∈ F.interiorPts) ∧ (z ∈ F.interiorPts → M.col (h z) = F.col z))
+    (hcol : ∀ z, M.coloursAt (h z) = F.coloursAt z) (hE : F.UnenclosedC u) : M.UnenclosedC u := by
+  sorry
+
+/-- **One pre-bend** (record § 41.3's step): if an inert unit arc is centred within `1` of `u`, its maximal extension `α` is bent toward
+its centre by `bend_toward_collar` (with `hfree` from `BaseHyp u` and `hlen` from `l60_le`); the bent map keeps every hypothesis of
+`exists_preBend` (`h` fixes `u`, which lies on `Γ` off `α°`; a point moved into `B̄(u, 2)` was an interior point) and has strictly fewer
+maximal arcs centred in `B̄(u, 1)`. A step inside a refutation: no model expected. -/
+theorem exists_preBend_step (hF : F.Valid) {u : ℂ} (hu2 : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
+    (hE : F.UnenclosedC u) (hI : ¬ F.NoInertNear u) :
+    ∃ M : ArcMap k, M.Valid ∧ M.Covers u 2 ∧ M.IsCubicTrichromatic u ∧ M.BaseHyp u ∧ M.UnenclosedC u ∧
+      M.maxRingArcs u ⊂ F.maxRingArcs u := by
+  classical
+  simp only [NoInertNear, not_forall, not_not, exists_prop] at hI
+  obtain ⟨P, hP, θ₁, θ₂, c, c', hA, -, hc'⟩ := hI
+  obtain ⟨a, b, -, hA', hmax⟩ := exists_maxRingArc hF hu2 hP hA
+  have hfree := hfree_of_baseHyp hF hu2 hH hP hA'
+  have hlen : b - a < 2 * π := by have := l60_le hF hA'; linarith [Real.pi_pos]
+  have hαd : ringArc P a b ⊆ F.dom := fun z hz => (hA'.2.1 hz).1
+  have hαc : IsCompact (ringArc P a b) := isCompact_Icc.image (by unfold ringPt e; fun_prop)
+  obtain ⟨ε, hε, hεd⟩ := hαc.exists_thickening_subset_open F.isOpen_dom hαd
+  obtain ⟨M, h, hMv, hdom, hsupp, hfix, hint, hcol, hdeg, hrep, hR1, hR2, hR3, -⟩ :=
+    bend_toward_collar hF hA' hc' hlen hmax hfree hε
+  have hMcov : M.Covers u 2 := by rw [Covers, hdom]; exact hu2
+  -- `u` lies on `Γ` (three colours), off the open arc (two colours there): `h` fixes it
+  have hud : u ∈ F.dom := hu2 (mem_closedBall_self (by norm_num))
+  have huΓ : u ∈ F.Γ := by
+    by_contra hΓ
+    have hI' : u ∈ F.interiorPts := ⟨hud, fun h' => hΓ ⟨hud, h'⟩⟩
+    have h3 := hu.2
+    rw [coloursAt_eq_of_mem_interiorPts hI', Set.ncard_singleton] at h3
+    omega
+  have huα : u ∉ ringPt P '' Ioo a b := by
+    rintro ⟨θ, hθ, hθu⟩
+    have h2 := ncard_coloursAt_le_two_of_mem_openArc hA' hθ
+    rw [hθu] at h2
+    have h3 := hu.2
+    omega
+  have hhu : h u = u := hfix u huΓ huα
+  have hMu : M.IsCubicTrichromatic u := by
+    have h1 := (hdeg u 3).mpr hu.1
+    have h2 := hcol u
+    rw [hhu] at h1 h2
+    exact ⟨h1, h2 ▸ hu.2⟩
+  have hMH : M.BaseHyp u := by
+    rw [BaseHyp, Set.disjoint_left]
+    intro z hz hzbad
+    have hzw : h (h.symm z) = z := h.apply_symm_apply z
+    have hcw : M.coloursAt z = F.coloursAt (h.symm z) := by rw [← hcol (h.symm z), hzw]
+    have hrw : M.HasRepeatedColour z ↔ F.HasRepeatedColour (h.symm z) := by rw [← hrep (h.symm z), hzw]
+    by_cases hwB : h.symm z ∈ closedBall u 2
+    · have hwd : h.symm z ∈ F.dom := hu2 hwB
+      refine Set.disjoint_left.mp hH hwB ?_
+      rcases hzbad with ⟨-, h4⟩ | ⟨-, hr⟩
+      · exact Or.inl ⟨hwd, hcw ▸ h4⟩
+      · exact Or.inr ⟨hwd, hrw.mp hr⟩
+    · -- a moved point: an interior point of `F`
+      have hmoved : h (h.symm z) ≠ h.symm z := fun heq => hwB (by rw [← heq, hzw]; exact hz)
+      have hwt : h.symm z ∈ thickening ε (ringArc P a b) := by
+        by_contra hc; exact hmoved (hsupp _ hc)
+      have hwd : h.symm z ∈ F.dom := hεd hwt
+      have hwI : h.symm z ∈ F.interiorPts := by
+        refine ⟨hwd, fun hwa => ?_⟩
+        by_cases hwα : h.symm z ∈ ringPt P '' Ioo a b
+        · obtain ⟨θ, -, hθ⟩ := hwα
+          apply hwB
+          rw [← hθ, mem_closedBall]
+          have h1 : dist (ringPt P θ) P = 1 := by simp [ringPt, dist_eq_norm]
+          have := dist_triangle (ringPt P θ) P u
+          rw [mem_closedBall] at hP
+          linarith
+        · exact hmoved (hfix _ ⟨hwd, hwa⟩ hwα)
+      rcases hzbad with ⟨-, h4⟩ | ⟨-, hr⟩
+      · rw [hcw, coloursAt_eq_of_mem_interiorPts hwI, Set.ncard_singleton] at h4; omega
+      · exact not_hasRepeatedColour_of_mem_interiorPts hwI (hrw.mp hr)
+  have hME : M.UnenclosedC u :=
+    unenclosedC_of_homeomorph hαc.isBounded.thickening (fun z hz => hsupp z hz) hhu hint hcol hE
+  have hαmax : ringArc P a b ∈ F.maxRingArcs u := ⟨P, hP, a, b, c, c', hA', rfl, hmax⟩
+  have hsub := maxRingArcs_subset_of_bend hF hMv hu2 hMcov hP hA' hmax hfree hR1 hR2 hR3
+  exact ⟨M, hMv, hMcov, hMu, hMH, hME, hsub.trans_ssubset (Set.sdiff_singleton_ssubset.mpr hαmax)⟩
+
 /-- **The inert pre-bend** (FS112-N3-BASE's first step, NB3 § 1.4 step 4; FS112-N2-BENDS' toward bend; FS131-E4 E4-BEND-UN for the last
 conjunct): the inert unit arcs centred within `1` of `u` — finitely many, by local finiteness on `B̄(u, 2)` — are bent toward their centres, each
 lens inside a collar of its arc in the inner tile, and the bends iterated until none is left. The result is a valid fragment covering `B̄(u, 2)` in
@@ -308,7 +469,20 @@ inside a refutation: no model expected. -/
 theorem exists_preBend {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hu2 : F.Covers u 2) (hu : F.IsCubicTrichromatic u) (hH : F.BaseHyp u)
     (hE : F.UnenclosedC u) :
     ∃ M : ArcMap 6, M.Valid ∧ M.Covers u 2 ∧ M.IsCubicTrichromatic u ∧ M.BaseHyp u ∧ M.NoInertNear u ∧ M.UnenclosedC u := by
-  sorry
+  classical
+  -- strong induction on the number of maximal unit arcs centred in `B̄(u, 1)` (finite: `finite_maxRingArcs`)
+  have key : ∀ n, ∀ G : ArcMap 6, (G.maxRingArcs u).ncard = n → G.Valid → G.Covers u 2 → G.IsCubicTrichromatic u →
+      G.BaseHyp u → G.UnenclosedC u → ∃ M : ArcMap 6, M.Valid ∧ M.Covers u 2 ∧ M.IsCubicTrichromatic u ∧ M.BaseHyp u ∧
+        M.NoInertNear u ∧ M.UnenclosedC u := by
+    intro n
+    induction n using Nat.strong_induction_on with
+    | _ n ih =>
+      intro G hn hG hG2 hGu hGH hGE
+      by_cases hI : G.NoInertNear u
+      · exact ⟨G, hG, hG2, hGu, hGH, hI, hGE⟩
+      obtain ⟨M, hM, hM2, hMu, hMH, hME, hlt⟩ := exists_preBend_step hG hG2 hGu hGH hGE hI
+      exact ih _ (hn ▸ Set.ncard_lt_ncard hlt (finite_maxRingArcs hG hG2)) M rfl hM hM2 hMu hMH hME
+  exact key _ F rfl hF hu2 hu hH hE
 
 /-- **FS112-N3-BASE** (caution C116: a regrade only), **with FS131-E4's hypothesis** (repair (b), inventory item 227): in a valid six-coloured
 fragment covering `B̄(u, 2)`, a cubic trichromatic vertex `u` whose disc `B̄(u, 2)` holds no vertex of at least four colours and none with a

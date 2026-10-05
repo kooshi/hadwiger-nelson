@@ -3869,6 +3869,15 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.closedSquare_subset_closedBall
 -- FS131-KB2 (stage 44): the collar bend, `exists_preBend`'s child (sorry until constructed)
 #print axioms HadwigerNelson.Plane.ArcMap.bend_toward_collar
+-- FS131-KB2 (stage 45): `exists_preBend`'s iteration — the measure's children (sorry but the last) and the step
+#print axioms HadwigerNelson.Plane.ArcMap.finite_maxRingArcs
+#print axioms HadwigerNelson.Plane.ArcMap.exists_maxRingArc
+#print axioms HadwigerNelson.Plane.ArcMap.hfree_of_baseHyp
+#print axioms HadwigerNelson.Plane.ArcMap.ncard_coloursAt_le_two_of_mem_openArc
+#print axioms HadwigerNelson.Plane.ArcMap.maxRingArcs_subset_of_bend
+#print axioms HadwigerNelson.Plane.ArcMap.unenclosedC_of_homeomorph
+#print axioms HadwigerNelson.Plane.ArcMap.exists_preBend_step
+#print axioms HadwigerNelson.Plane.ArcMap.not_hasRepeatedColour_of_mem_interiorPts
 
 /-! ## FS-131 wave 5 (job FS131-IX1) — the crossing lemma's children (`inter_nonempty_of_interleaved` itself is in FS131-KP's block) -/
 

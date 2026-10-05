@@ -2002,3 +2002,46 @@ Before building, each clause was checked for an edge case that could make it fal
 (`stmt-check-44.txt`); `tools/check_architecture.py`: PASS; `tools/fs131_kb_stmt_move.py` after the deletion: PASS.
 
 ## Stage 44 — SAVED
+
+## Stage 45 — SAVED (FS131-KB2): `exists_preBend` proved over the collar bend and six named children
+
+`exists_preBend`'s `sorry` is replaced by record § 41.3's iteration (statement unchanged): strong induction on `(G.maxRingArcs u).ncard`, each step
+`exists_preBend_step`, which applies `bend_toward_collar` to the maximal extension of an inert arc and checks every hypothesis on the bent map. New, all in
+`BaseDense` before `exists_preBend` (names collision-free on `HEAD`, `origin/main`, `origin/fs131-w5c`, `origin/fs131-w4mm` by `git grep`):
+- `maxRingArcs F u` — the maximal constant-sided unit arcs centred in `B̄(u, 1)`, as sets; spec example: a map with no arcs has none.
+- **`exists_preBend_step`** — proved over the children: the inert arc's maximal extension `α` (`exists_maxRingArc`), `hfree` (`hfree_of_baseHyp`), `hlen`
+  (`l60_le`), `ε` with `thickening ε α ⊆ dom` (`IsCompact.exists_thickening_subset_open`); `h u = u` (`u ∈ Γ` by its three colours, `u ∉ α°` by
+  `ncard_coloursAt_le_two_of_mem_openArc`, then clause 4); cubic trichromatic by clauses 6–7 at `u`; `BaseHyp u` (a point of `B̄(u, 2)` whose preimage lies
+  outside it was moved, so lies in the thickening and off `Γ ∖ α°`, and not on `α° ⊆ B̄(u, 2)`: an interior point, one colour, no repeated colour);
+  `UnenclosedC u` (`unenclosedC_of_homeomorph`, `K` the thickening); the measure drops (`maxRingArcs_subset_of_bend`, and `α` is one of `F`'s maximal arcs).
+- **`not_hasRepeatedColour_of_mem_interiorPts`** — proved (near an interior point the one sector is a ball).
+- Children left `sorry`, each stated with its route in its docstring: `finite_maxRingArcs` (the finiteness child), `exists_maxRingArc` (sup of ends),
+  `hfree_of_baseHyp` (a third germ at `x ∈ α°` makes a repeated colour), `ncard_coloursAt_le_two_of_mem_openArc`, `maxRingArcs_subset_of_bend` (R1–R3,
+  maximality, `hfree`), `unenclosedC_of_homeomorph` (E4-BEND-UN's argument).
+
+So `n3_base`, `localDense`, `dense3` now rest on `bend_toward_collar` and these six, nothing else open (`row134BaseUA` is on the standard three).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 448 of 448 batches, 2 modules rebuilt (`BaseDense`, `Proofs`), 6 with warnings, every warning
+`declaration uses 'sorry'`**, exit 0, 8 min 20 s (`build/gate/build/20261005T093152Z-3016959.log`; driver log `data/fs131/kb/build-stage45.log`). `BaseDense`'s
+`sorry` declarations: the six children (lines 320, 326, 335, 342, 365, 379) and `cv_exists` (the stale copy, the `Terminal` lane's); `exists_preBend` and
+`exists_preBend_step` carry none of their own. **Axioms** (`data/fs131/kb/KBAxioms45.lean` → `.out`, 12 GiB slot): `not_hasRepeatedColour_of_mem_interiorPts` and
+`row134BaseUA` on the standard three; controls on `sorryAx`: `exists_preBend_step`, `exists_preBend`, `n3_base`, `bend_toward_collar`. `scripts/Axioms.lean`: the
+eight new theorems after the stage-44 line. `tools/fs131_i5_stmt_check.py d61edefc`: PASS (`stmt-check-45.txt`; `exists_preBend`'s statement unchanged);
+`tools/fs131_kb_stmt_move.py`: PASS; `tools/check_architecture.py`: PASS.
+
+## Stage 45 — SAVED
+
+## Stage 46 — SAVED (FS131-KB2): the hand-back
+
+### Theorems this phase proved (FS131-KB2)
+
+- `HadwigerNelson.Plane.ArcMap.not_hasRepeatedColour_of_mem_interiorPts` — [kernel], `[propext, Classical.choice, Quot.sound]` — `Plane/ValidMap/BaseDense`
+- `HadwigerNelson.Plane.ArcMap.exists_preBend` (FS112-N3-BASE's pre-bend, E4-BEND-UN's iteration) and `exists_preBend_step` — proved **over** `bend_toward_collar`
+  and six stated children (`finite_maxRingArcs`, `exists_maxRingArc`, `hfree_of_baseHyp`, `ncard_coloursAt_le_two_of_mem_openArc`, `maxRingArcs_subset_of_bend`,
+  `unenclosedC_of_homeomorph`); on `sorryAx` through them — not kernel theorems yet.
+- Stated with `sorry`: `bend_toward_collar` (landed verbatim, `Plane/ValidMap/BendCollar`) and the six children.
+
+**Left (the construction and six children)**: `bend_toward_collar`'s construction (design § 44.3, priced there at 3,000–4,000 lines) and the six children above
+(each docstring names its route). **Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 46 — SAVED
