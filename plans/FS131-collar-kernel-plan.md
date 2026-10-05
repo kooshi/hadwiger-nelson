@@ -328,3 +328,32 @@ KP2's row it holds five declarations the children's statements use: `CollarFit.p
 between `CollarFit` and `kin_subset` and stays in `BendCollar`. Nothing else moves.
 
 ## Stage 7 — SAVED (FS131-CG1)
+
+## Stage 8 — SAVED (FS131-CG1): G's block moved to `Plane/ValidMap/CollarMap`
+
+**The move** (ruling 395 (a)): the new module `Proofs/HadwigerNelson/Plane/ValidMap/CollarMap.lean` holds, in `BendCollar`'s order and byte for
+byte, the section note `## The collar's fit to the map`, the structure `CollarFit`, and the block from `CollarFit.kin_subset` to
+`CollarFit.map_valid` (17 declarations: KP2's twelve for lane G with `CollarFit.pushProfiles`, `CollarFit.homeo`, `collarArcs`,
+`collarArcs_locallyFinite`, `CollarFit.map`), inside the same `namespace HadwigerNelson.Plane` / `namespace ArcMap` / `section Collar` and the
+same `variable` lines, so every declaration keeps its full name. It imports what `BendCollar` imported (`Chain`, `UnitArc`, `LocalStructure`,
+`RadialPush`, `Pushforward`), so names resolve as before. `BendCollar.lean` is the skeleton's with those lines deleted and one line added,
+`import Proofs.HadwigerNelson.Plane.ValidMap.CollarMap`; `exists_collarFit` (lane C's) stays there. `Proofs.lean` imports `CollarMap` before
+`BendCollar`; `ARCHITECTURE.md` has a `CollarMap` row and `BendCollar`'s Imports cell gains it (`tools/check_architecture.py`: PASS, exit 0,
+`data/fs131/cg/arch-move.txt`). `scripts/Axioms.lean` needs no change for the move (full names unchanged).
+
+**The check**: `tools/fs131_cg_stmt.py --move` (new) splits the skeleton's `RadialPush` and `BendCollar` at `b2ccfb7b` and the working tree into
+declaration chunks and requires (1) each of the 76 declarations in exactly one layout file, the right one, and in no other file under
+`Proofs/` that did not declare that name at `b2ccfb7b`; (2) each statement byte-identical (a theorem's docstring and header to the `:=`; a
+`def`'s or `structure`'s whole text; each spec `example`); (3) the section note byte-identical in `CollarMap`; (4) `BendCollar.lean` exactly the
+skeleton's minus the moved lines plus the import (so `bend_toward_collar`'s block is unchanged with it); (5) no `axiom` and no `native_decide`
+in the four modules; and with `--move`, the moved text with its proofs byte-identical. **PASS** (`data/fs131/cg/stmt-move.txt`).
+`--self-test` (`stmt-move-selftest.txt`): a changed hypothesis in a moved theorem, a changed docstring letter, a changed definition body, a
+changed section note, an edit to `BendCollar`, an `axiom` line, a `native_decide`, a moved declaration duplicated in `BendCollar`, a moved
+declaration deleted — **9 of 9 fired, each naming its culprit**; the unplanted partner PASS. Without `--move` the same check runs at every later
+stage (statements only, since proofs change).
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 4 modules rebuilt (`CollarMap`, `BendCollar`, `BaseDense`, `Proofs`), 7
+with warnings, every warning `declaration uses 'sorry'`**, exit 0, 8 min 30 s (`build/gate/build/20261005T113306Z-3842169.log`, which ends "Build
+completed successfully (5791 jobs)"; driver log `data/fs131/cg/build-move.log`).
+
+## Stage 8 — SAVED (FS131-CG1)
