@@ -1,0 +1,5 @@
+'HadwigerNelson.Plane.ArcMap.n2_env_away' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.n2_env_away_height' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.n2_env_away_core' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.n2_env_away_end' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.eq_polar_of_frameX_pos' depends on axioms: [propext, Classical.choice, Quot.sound]

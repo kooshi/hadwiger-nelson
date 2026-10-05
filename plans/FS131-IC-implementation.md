@@ -41,6 +41,15 @@ Axioms from `#print axioms` against the stage-2 build's oleans (`data/fs131/ic/a
   for every point near `v` on the `+a` side, not only the horn's), `ArcMap.IsSectorChart.exists_lift_lower` / `_upper` (an out-type colour's sectors at a pole look away
   from `v`), `ArcMap.outType_S_of_mem_closure` / `outType_N_of_mem_closure`.
 
+- FS110-N4-STUCK (FS131-IC5, Stage 14): `HadwigerNelson.Plane.ArcMap.stuck_structure` — [kernel] `[propext, Classical.choice, Quot.sound]`
+  (`data/fs131/ic/axioms-ic5-stage14.txt`), with its sides clause as ruled (inventory item 252, form (b)); read against plan § 3.2's row: same statement
+  otherwise. With it FS110-N4-PROP, `ArcMap.stuck_chain`, and its three step children `stuck_neighbour`, `stuck_flip`, `stuck_step` are [kernel]
+  `[propext, Classical.choice, Quot.sound]`. Form (a) of the ruling, the flank form, with the whole structure: `ArcMap.stuck_structure_flanks`, same axioms.
+- 33 children (FS131-IC5, Stage 14), each [kernel] `[propext, Classical.choice, Quot.sound]`, among them `ArcMap.stuck_pole_N` (N4-STUCK (iv) at a pole),
+  `ArcMap.flank_ne_of_doublyShadowed` (`g ≠ h` by N4-FLANK's mechanism), `ArcMap.flank_shadow_g_chart` / `_h_chart` (N4-FLANK over a given chart, the
+  tangent sector exposed), `ArcMap.false_of_third_point`, `ArcMap.false_of_all_outType`, `ArcMap.region_far_of_outType`, `ArcMap.hasDegree_of_three_colours`,
+  `ArcMap.exists_tile_dir`, `ArcMap.IsSectorChart.neg_one_lt_of_outType_N` / `lt_one_of_outType_S`.
+
 ## Stage 1 — SAVED: the readback, the as-given build
 
 **The brief's four quotations against their sources** (standing rule 3):
@@ -488,3 +497,170 @@ by `have _ := …` (the convention of `UnitArc`).
 `data/fs131/ic/Scratch7.lean` is the iteration copy (it redeclares the new names, so it no longer elaborates against `Contact`; nothing builds it).
 
 **Re-pricing**: `flank_shadows` took about 120k of context, about a session as IC3 priced it; the mirror half was cheap once the first half stood.
+
+## Stage 12 — SAVED (FS131-IC4 stage 3): the hand-back
+
+**Proved in this job (FS131-IC4)**: `flank_shadows` (N4-FLANK), sorry-free, and with it `shaveAvailable_of_not_doublyShadowed`; 25 children (Stage 11). **Left (4)**:
+`stuck_structure`, `exists_shave`, `exists_rayMerge`, `exists_merge` — the moves untouched (item 236: a parallel implementer's, IC1's Stage 2 items 3–4 stand). The build
+log and the axioms print against its oleans are Stage 11's (`build/gate/build/20261004T212953Z-2540733.log`, `data/fs131/ic/axioms-ic4-stage11.txt`). Branch
+`fs131-w4c` is ready for the merge into `fs131-w4` (records in their own block headed "FS131-IC4" in `scripts/Axioms.lean`, after IC3's; no import, module or
+`ARCHITECTURE.md` change in this job). I did not merge or run wave 4's gate. I stopped at my context line (about 440k of 500k), not at a wall.
+
+**`stuck_structure`, the route** (my reading for the successor; none changes a statement):
+1. `stuck_horns` gives `H₊` (along `α`, `κ₁ < κ₂`), `H₋` (along `α + π`, `κ₃ < κ₄`), `HasSectors v c 2`, out-type `c` at `N` and `S′`. Flanks by
+   `IsHorn.exists_flankAbove/Below`: `g₊`, `h₊` for `H₊`; for `H₋` in its frame, the `IsFlankAbove v (α + π) κ₄` colour is on the global `−n` side and the
+   `IsFlankBelow v (α + π) κ₃` colour on the `+n` side, and `v + e(α + π + π/2) = S′`.
+2. No flank colour is `c`: a `c`-coloured flank band lies in a `c`-sector other than `H₊` (disjoint, by `tanHeight`) and `H₋` (cones `{α}`, `{α + π}`:
+   `e_eq_of_mem_coneAt_hornSet`) — a third `c`-sector against `HasSectors v c 2`.
+3. `¬ ShaveAvailable` and `shaveAvailable_of_not_doublyShadowed` (now sorry-free) make both horns doubly shadowed; a doubly shadowed band gives horn points arbitrarily near
+   `v` in both shadows (`exists_mem_hornSet_near`), so `outType_S_of_shadow` / `outType_N_of_shadow`: `g₊` out at `S′`, `h₊` out at `N`, and for `H₋` the global-below
+   colour out at `N`, the global-above out at `S′`.
+4. **`g ≠ h` does not follow from `flank_shadows`' statement**: with `g = h = k` the whole horn may lie in `k`'s shadow (`σ_g = κ₂`, `σ_h = κ₁`) and the statement is met.
+   It follows from the mechanism, which Stage 11 made lemmas: the converse `shadow_of_tangent_sector_S` holds at every point near `v` on the `+a` side outside `B̄(S′, 1)`,
+   lower-flank points included, so a `g`-shadow reaching the horn (which needs a tangent `g`-sector at `S′` with `f̃(υ) > κ₁`, `sector_shadow_S`) reaches the lower flank,
+   coloured `h = g` — against validity (the derivation's N4-SHAVE "`g = h`" case). Expose the tangent sector as a child of `flank_shadow_g` (`σ_g > κ₁ ⟹ ∃` a tangent
+   `g`-sector with `f̃(υ) = σ_g`, read off `Finset.max'_mem`), then a small `flank_ne_of_doublyShadowed`.
+5. (ii) `P_cl(v) = {c, g, h}` by `h3` at `v` and step 3's types (the derivation's "if `g₋ = h₊` …" paragraph); degree 4 through the chart at `v`: each sector's colour is in
+   `{c, g, h}`, `g`'s cones lie in `{d·n ≥ 0}` and `h`'s in `{d·n ≤ 0}` (`coneAt_subset_allowedCone`), `g` and `h` have one sector each (two would give `int D = ∅` by no
+   MERGE, then `woodallCone` horns, but `α ± π/2` lie in their cones), so the degree is `2 + 1 + 1` (a counting child over the chart's sectors, `encard_sectors`).
+6. (iii) `D_g(v)` contains `e(φ)` for `φ ∈ (α, α + π)` (the `g`-sector's cone), so a `g`-contact is `v ± n`; in-type at `N` is Siamese with the `g`-sector (`false_of_pole`,
+   flank points outside `B̄(N, 1)`), so `S′`, out-type. Mirror for `h`.
+7. (iv) at `N`: `c` (stuck_horns), `h` (step 3) and a ring colour `r` — Condition 5 and local finiteness leave `ω(v)`'s points near `N` interior, their colours outside
+   `P_cl(v)` (N-E1, `ne1_region`), and one of finitely many accumulates at `N`; `h3` at `N` gives `{c, h, r}`. **Two `h`-sectors at `N`**: `sector_shadow_N` /
+   `shadow_of_tangent_sector_N` give a tangent `h`-sector at `N` along `+a` (lower germ `α + 2πm`, it shadows `H₊`) and, in the frame `α + π`, one along `−a`; one sector
+   holding both would span `N`'s upper half (`exists_lift_upper`: `h`'s sectors at `N` look up), leaving no room for `c` at `N` (its sectors at `N` look up too — `v` is an
+   out-type `c`-contact of `N` — and one in the `+a` stack below the tangent `h`-sector would shadow `H₊`, by `sector_shadow_N`'s mechanism applied to `c`, against validity).
+   The mirror at `S′` in the frame `α + π`.
+Price: about two sessions; (iv)'s two-sector clause is most of it, (ii)'s degree count next.
+
+**The coordinator's ruling, received after the hand-back** (inventory items 236 and 247 (c)): the three moves now belong to FS131-IM1, on branch `fs131-w4m` from this branch's
+`d4f946ae`, in a new module `Plane/ValidMap/Moves` upstream of `Contact`, proved as `…_aux` lemmas under their exact statements; `Contact.lean`'s three move leaves stay
+`sorry` here and become one-line citations at the merge, on Keryx's word. This job left them untouched, as the ruling asks. The remaining work on this branch is `stuck_structure`
+(Stage 12's route); where it needs a move's conclusion it uses the move's statement as it stands in `Contact` — the route above needs none.
+
+## Stage 13 — SAVED (FS131-IC5 stage 1): the readback, the as-given build, and a statement defect sent
+
+Implementer: de Bruijn on Opus 5.5 (job FS131-IC5), resuming this record at its last SAVED stage (Stage 12, commit `67c9f5a3`, with the ruling note of
+`addcfbf3` after it; `git log -- plans/FS131-IC-implementation.md` agrees). Brief `data/fs131/briefs/FS131-IC5-contact.md` (on `main`).
+
+**The brief's quotations against their sources** (standing rule 3; the brief says four, it quotes five):
+1. "**It may**: add children anywhere in the wave's modules — the seven engines and every child § 13 names are expected additions (the engines in the"
+   — `.claude/worktrees/fs131-w4/plans/FS131-w4-kernel-plan.md` § 14.2, line 887: **matches as a truncation** (this tree's copy identical, `diff` empty).
+2. "**`stuck_structure`, the route** (my reading for the successor; none changes a statement):" — this record, Stage 12, line 500: **matches**.
+3. "1. `stuck_horns` gives `H₊` (along `α`, `κ₁ < κ₂`), `H₋` (along `α + π`, `κ₃ < κ₄`), `HasSectors v c 2`, out-type `c` at `N` and `S′`. Flanks by" — this record,
+   Stage 12, line 501: **matches as a truncation**.
+4. "236. **Ruling: `Contact` splits once more, when a slot frees** — the three moves (`exists_shave`, `exists_rayMerge`, `exists_merge`) to a parallel implementer in a"
+   — `plans/FS131-close-inventory.md` on `main`, line 1692: **matches as a truncation**.
+5. "194. **Ruling: wave 4 splits by file** (item 191's condition met: six leaves a session on wave 4's last two sessions, 39 left). Choice: the next wave-4
+   implementer" — `plans/FS131-close-inventory.md` on `main`, line 1358: **matches as a truncation**.
+A slip in the brief (not a quotation): "check the four quotations" — there are five; all match.
+
+**What I may change** (plan § 14.2, the brief's `touches`): add children anywhere in `Contact`, in a new module of my own (`Plane/ValidMap/ContactAux`, imported
+by `Contact`) and in the foundation `Plane/ValidMap/Basic` (additions only, statements unchanged); engine 2 only as the exact hunk of `fs131-w4`'s `3f7ea033`;
+`Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean` (my own block, headed "FS131-IC5"), this record, `tools/fs131_ic_*.py`, `data/fs131/ic/`,
+`data/fs131/reports/FS131-IC5.md`. **What I may not change**: any statement of plan §§ 3.2, 7.2 (`stuck_structure`'s hypotheses and conclusion; Condition 5 and the
+three-colour hypothesis stay named hypotheses), any definition of `Basic`, the read-back conventions; `UnitArc`, `BaseSteps`, `SVMap`, `StuckChain` (FS131-I4i's,
+on `fs131-w4`); the three moves (FS131-IM1's, item 236), which stay `sorry` here; no new `axiom`, no `native_decide`; no merge into `fs131-w4`, no wave-4 gate, no
+push to `main`. A leaf that cannot be proved as written goes to Keryx at once, and I go on with the rest.
+
+**The worktree as given** (`addcfbf3`, nothing edited): `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`; admitted after a wait
+for two other trees' builds): "build: OK — all 1744 modules already up to date, nothing built, 3 module(s) with warnings, 2s", exit 0
+(`build/gate/build/20261004T214853Z-2680583.log`; driver log `data/fs131/ic/build-ic5-readback.log`) — IC4's stage-11 oleans are current. 28 distinct `declaration
+uses sorry` warnings replayed: `Contact` 4 (`exists_shave`, `exists_rayMerge`, `exists_merge`, `stuck_structure`), `UnitArc` 17, `BaseSteps` 7; no error.
+
+**A statement defect, sent to Keryx at once (this stage).** `stuck_structure`'s sides clause, `∀ᶠ ρ in 𝓝[>] 0, ∀ z ∈ F.interiorPts ∩ ball v ρ, (0 < frameY v α z →
+F.col z = g ∨ F.col z = c) ∧ (frameY v α z < 0 → F.col z = h ∨ F.col z = c)`, is point-level, read through `frameY`; the derivation's (ii) ("one `g`-sector filling
+the side `(z − v)·n > 0`", `plans/FS110-N-proof.md` § 2.4) is direction-level. Nothing in the hypotheses fixes the curvatures' signs. With `κ₂ < 0` the upper
+flank band of `H₊` (`IsFlankAbove v α κ₂ g`, given by `IsHorn.exists_flankAbove`) holds the branch points `branchPt v α m s`, `κ₂ < m < min(κ', 0)` — interior points
+of colour `g`, arbitrarily near `v`, at `frameY = m s²/2 < 0` — while the conclusion asks `g ≠ h`, `g ≠ c`. Likewise `κ₁ > 0` (lower flank `h` at `frameY > 0`), and
+for `H₋` in its frame `κ₃ > 0` or `κ₄ < 0`; swapping `α ↔ α + π` does not help. So the clause holds exactly when `κ₁ ≤ 0 ≤ κ₂` and `κ₃ ≤ 0 ≤ κ₄`, which no
+hypothesis forces (N4-SHADOW's `σ_g = f̃(υ)`, `σ_h = f(μ)` range over `(−1, 1)`; N4-FIN's chain is global). **No explicit counterexample constructed**: it would be any
+stuck fragment satisfying the hypotheses with `κ₂ < 0`, and no model of `stuck_structure`'s hypotheses exists in the library (the bowtie has unit arcs). The same
+clause is in wave 5's `stuck_structure_ua` (`fs131-w5`, `fs131-w5b`, `Plane/ValidMap/Terminal.lean` line 57). No wave-4 consumer reads it (`stuck_step`,
+`stuck_flip`, `stuck_neighbour` discard it). Repairs offered (the planner's choice): (a) the flank form wave 5 already states beside it, `IsFlankAbove v α κ₂ g ∧
+IsFlankBelow v α κ₁ h ∧ IsFlankAbove v (α + π) κ₄ h ∧ IsFlankBelow v (α + π) κ₃ g`; (b) point-level outside a parabola, `(‖z − v‖ ^ 2 / 2 < frameY v α z → F.col z = g) ∧
+(frameY v α z < -(‖z − v‖ ^ 2 / 2) → F.col z = h)`, true for curvatures in `[−1, 1]`; (c) drop the clause. **Meanwhile**: every other clause as a sorry-free child, the
+sides clause left as `stuck_structure`'s only `sorry` until the ruling, and (a), (b) proved as lemmas so either becomes a citation.
+
+## Stage 14 — SAVED (FS131-IC5 stage 2): `stuck_structure` proved (sides clause as ruled, item 252), 33 children; 3 `sorry` left in `Contact` (the moves)
+
+**The statement change, as ruled** (inventory items 251–252; the brief's amendment of 2026-10-04): `stuck_structure`'s sides clause was
+`(0 < frameY v α z → F.col z = g ∨ F.col z = c) ∧ (frameY v α z < 0 → F.col z = h ∨ F.col z = c)`; it is now form (b),
+`(‖z − v‖ ^ 2 / 2 < frameY v α z → F.col z = g) ∧ (frameY v α z < -(‖z − v‖ ^ 2 / 2) → F.col z = h)`, under the same
+`∀ᶠ ρ in 𝓝[>] 0, ∀ z ∈ F.interiorPts ∩ ball v ρ`; the docstring's sentence "the interior points near `v` above the axis of colour `g` or `c` and
+below it of colour `h` or `c`" now reads "the interior points near `v` above the parabola `frameY = ‖z − v‖²/2` of colour `g` and below
+`frameY = −‖z − v‖²/2` of colour `h`", with the reason and item 252 cited. No other statement changed. **Why** (Stage 13's finding): the
+derivation's (ii) is directional — "`v` has degree 4: `H_+`, one `g`-sector filling the side `(z − v)·n > 0`, `H_−`, one `h`-sector filling the
+other side" (`plans/FS110-N-proof.md` § 2.4, lines 846–847) — and read through `frameY` pointwise it fails whenever a horn lies on one side of the
+axis: with `κ₂ < 0` the upper flank band of `H₊` (colour `g`) holds points at `frameY < 0`; likewise `κ₁ > 0`, and `κ₃ > 0` or `κ₄ < 0` for
+`H₋`. Form (b) says it outside the parabolas `frameY = ±‖z − v‖²/2`, i.e. inside `B(N, 1)` and `B(S′, 1)` (`tanAbove_one_iff`,
+`tanBelow_neg_one_iff`), where no horn reaches for curvatures in `[−1, 1]`. Form (a), the flank form, is proved too, as
+`stuck_structure_flanks`'s last four clauses. Wave 5's `stuck_structure_ua` is not touched (another branch; its implementer applies the ruling).
+
+**Proved** (no other statement changed, no new axiom, no `native_decide`): **FS110-N4-STUCK, `ArcMap.stuck_structure`**, read against plan § 3.2's
+row ("N4-STUCK (i)–(iv) in full (horns with curvatures in `(−1, 1)`, `s_c = 2`, degree 4, `P_cl(v) = {c, g, h}`, the two sides' colours, the
+contacts of `g`, `h`, `c`, `P_cl(N)`, `P_cl(S′)`, two sectors of `h` at `N` and of `g` at `S′`)"): same statement, with the sides clause as ruled.
+With it `stuck_neighbour`, `stuck_flip`, `stuck_step` and **FS110-N4-PROP, `ArcMap.stuck_chain`** are sorry-free. Route (IC4's Stage 12, each
+step a child; developed in `data/fs131/ic/Scratch8.lean`, then moved into `Contact` after the `/-! ## FS110-N4-STUCK -/` header, below line
+1030 and away from the three lemmas item 254 fences):
+1. `stuck_horns` (IC3) for `H₊`, `H₋`; the four flank colours (`IsHorn.exists_flankAbove/Below`), none `c` — **`false_of_third_point`**: a
+   `c`-point near `v` off both horns lies in a third `c`-sector (**`exists_sector_of_mem`**, every interior point near `v` is in a sector at
+   `v`; **`IsSector.subset_region`**, sectors are monochromatic).
+2. No SHAVE: both horns doubly shadowed (`shaveAvailable_of_not_doublyShadowed`); so `g` is out-type at `S′`, `h` at `N`, and in the turned frame
+   `H₋`'s flanks at `N` and `S′` (`outType_S_of_shadow`, `outType_N_of_shadow`, the poles turned by **`sub_e_add_pi_add`**, **`add_e_add_pi_add`**).
+3. `g ≠ h` from N4-FLANK's mechanism, not from `flank_shadows`' statement (IC4's point 4): **`flank_ne_of_doublyShadowed`**, over
+   **`flank_shadow_g_chart`** — `flank_shadow_g` over a given chart at `S′`, with the tangent sector exposed when `σ_g > κ₁`
+   (`flank_shadow_g`'s proof moved there unchanged, plus that clause; `flank_shadow_g` now cites it, statement unchanged; likewise
+   **`flank_shadow_h_chart`** and `flank_shadow_h`). Were the flanks one colour, the tangent `g`-sector's shadow (`shadow_of_tangent_sector_S`)
+   would cover lower-flank points of that colour.
+4. `P_cl(v) = {c, g, h}` by `h3` at `v`; the turned horn's flanks are `h` (the `−n` side) and `g`: otherwise every colour at `v` is out-type at one
+   pole — **`false_of_all_outType`**: the pole's own direction is some colour's (`ArcMap.exists_mem_coneAt_region`, wave 3), whose allowed cone
+   excludes it.
+5. (iii): `D_g(v)` holds `e α`, `e(α + π)` (the flanks' axes) and `n` (the only colour that can carry the direction `α + π/2`), so a `g`-contact
+   has `frameX = 0`, is `N` or `S′`, and is out-type at `S′` — in-type at `N` is excluded by **`outType_N_of_flankAbove`** (the IC3 shape, for an
+   upper flank at `N`). Mirror for `h` (**`outType_S_of_flankBelow`**).
+6. One sector each for `g` and `h`: no MERGE, since (iii) puts the open half-plane `{d·(S′ − v) < 0}` in `D_g(v)`; at least one by
+   **`eventually_one_le_sectorsOf`**. Degree `4`: **`hasDegree_of_three_colours`** (every sector carries a colour of `v`).
+7. The sides (form (b)): near `v` every interior point carries a colour of `v` (**`eventually_col_mem_coloursAt`**), and a colour out-type at a pole
+   keeps its class near `v` off that pole's unit disc (**`region_far_of_outType`**: the tile at the pole lies beyond `B̄(v, 1)`, so intermediate
+   values along it would give a unit pair). Inside `B(N, 1)` neither `c` nor `h` lives near `v`: the point is `g`; inside `B(S′, 1)`, `h`.
+8. The poles: **`stuck_pole_N`** at `α` and, turned, at `α + π` (`IsHorn.congr`, **`IsFlankAbove.congr`**, **`DoublyShadowed.congr`**). The ring
+   colour is the tile at `N` in the direction of `v` (**`exists_tile_dir`**, over the sorted germs' cover **`BranchGerms.exists_mem_angleIcc`**;
+   **`exists_dist_lt_one_of_coneAt`** puts its points in `B(v, 1)`), so it is no out-type contact and, by (iii) and the out-types, no in-type one.
+   Two `h`-sectors: the tangent sectors of `H₊`'s and `H₋`'s `h`-shadows (`flank_shadow_h_chart`, `flank_shadow_g_chart` turned, over one chart at
+   `N`); if they are one, it fills the upper half-turn at `N` (`Mono.nextβ_le_add`), so a `c`-sector there has its directions on the axis
+   (`dot_nonpos_of_coneAt_subset` with `c` out-type at `N`, `Mono.disjoint`, **`sin_nonpos_of_not_mem_angleIoo`**) and is a horn along `+a` or `−a`;
+   below the tangent germ its shadow reaches `H₊` (`shadow_of_tangent_sector_N`, curvature above `−1` by **`IsSectorChart.neg_one_lt_of_outType_N`**,
+   **`curvDown_lt_curvDown`**), beyond it `H₋` (`shadow_of_tangent_sector_S` turned, **`IsSectorChart.lt_one_of_outType_S`**, **`curvUp_lt_curvUp`**),
+   and otherwise it overlaps the `h`-sector (**`BranchGerms.branchPt_mem_sector`**). The two curvature lemmas are `sector_shadow_N`/`_S`'s steps
+   made lemmas for any out-type colour; those two proofs are untouched.
+**Condition 5** enters through `stuck_horns`, `flank_shadow_*` and the two curvature lemmas only (the brief: kept a named hypothesis).
+`stuck_structure_flanks` carries the proof and states the flank form too; `stuck_structure` cites it.
+
+**Build of this stage**: `./scripts/build.sh` under `scripts/slot.py --mem 40 --cpus 8` (`MEMMAX=40G BATCH=4`; admitted after a wait for other trees' builds):
+"build: OK — 444 of 444 batches, 2 module(s) rebuilt, 3 module(s) with warnings, 8m48s", exit 0 (`build/gate/build/20261004T222053Z-2888227.log`; driver log
+`data/fs131/ic/build-ic5-stage14.log`). 27 distinct `declaration uses sorry` warnings — `Contact` 3 (`exists_shave`, `exists_rayMerge`, `exists_merge`, FS131-IM1's),
+`UnitArc` 17, `BaseSteps` 7 (as given on this branch) — and no other warning or error (the one `error:` line is the driver's `lake build --no-build` probe). Nothing
+was edited while it ran. **Axioms** against its oleans (`lake env lean data/fs131/ic/AxiomsIC5.lean`, `pp.fullNames`; output `data/fs131/ic/axioms-ic5-stage14.txt`;
+not a gate log): all 180 theorems of `Contact`; 177 read `[propext, Classical.choice, Quot.sound]`; the three moves read `sorryAx` besides (the print's positive
+control: a live `sorry` shows). **Records**: `tools/fs131_ic5_addrecords.py` (IC4's tool, its own block headed "FS131-IC5" in `scripts/Axioms.lean`): 180 names, 33
+added, `--check` exit 0; negative control `--plant --check` exit 1 (watched). No import or module changed (`ARCHITECTURE.md` untouched). Names checked against
+`main`, `fs131-w4`, `fs131-w4m`, `fs131-w5`, `fs131-w5b`: no collision. The hunks in `Contact` all lie at line 3249 or below of `d4f946ae` (inventory items 254 and 263
+fence l. 26–2593); the insertion after the `/-! ## FS110-N4-STUCK -/` header keeps two unchanged lines between it and `exists_merge`'s `sorry`, which IM1's merge
+replaces. `data/fs131/ic/Scratch8.lean` is the iteration copy (it redeclares the new names, so it no longer elaborates against `Contact`; nothing builds it).
+
+**Re-pricing** (the brief's order, from the first two hard leaves): `stuck_pole_N` and the assembly were the two hard leaves, about 60k and 40k of work over the
+helpers; the whole of `stuck_structure` took one session, readback and finding included, against IC4's "about two sessions" — the route held, and
+`region_far_of_outType` (an intermediate-value argument on one out-type tile) replaced the chart analysis the sides and (iv)'s ring colour would otherwise have cost.
+
+## Stage 15 — SAVED (FS131-IC5 stage 3): the handover
+
+**Proved in this job (FS131-IC5)**: `stuck_structure` (FS110-N4-STUCK, its sides clause as ruled), and with it `stuck_chain` (FS110-N4-PROP) and its three step
+children sorry-free; 33 children. **Left in `Contact` (3)**: `exists_shave`, `exists_rayMerge`, `exists_merge` — FS131-IM1's on `fs131-w4m` (item 236), cited here at
+the merge on Keryx's word. The build log and the axioms print against its oleans are Stage 14's (`build/gate/build/20261004T222053Z-2888227.log`,
+`data/fs131/ic/axioms-ic5-stage14.txt`). Branch `fs131-w4c` is ready for the merge into `fs131-w4` (records in their own block headed "FS131-IC5" in
+`scripts/Axioms.lean`, after IC4's; no import, module or `ARCHITECTURE.md` change). I did not merge or run wave 4's gate.
+
+**For the merging implementer**: the vacuity scan's carriers (plan § 14.3) meet two new theorems with structure hypotheses and no model in the library —
+`stuck_structure_flanks` and `stuck_pole_N` (stuck configurations with Condition 5; the bowtie has unit arcs) — whose docstrings say so, as `stuck_structure`'s now
+does; `false_of_third_point` and `false_of_all_outType` conclude `False` (refutations, skipped by the scan).

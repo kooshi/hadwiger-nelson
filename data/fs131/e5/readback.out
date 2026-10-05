@@ -1,0 +1,20 @@
+lean blocks in the claim list: 5
+  ok       claim-list lean block 0 vs a804de21:Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean
+  ok       claim-list lean block 1 vs a804de21:Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean
+  ok       claim-list lean block 2 vs 71cca146:Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean
+  ok       claim-list lean block 3 vs 71cca146:Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean
+  ok       claim-list lean block 4 vs a804de21:Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean
+  ok       NB3 excerpt piece 0
+  ok       NB3 excerpt piece 1
+  ok       NB3 excerpt piece 2
+  ok       NB3 excerpt piece 3
+  ok       NB3 excerpt piece 4
+  ok       NB3 excerpt piece 4
+  ok       CVB 1.4 item 5
+  ok       CVB 1.7 None case
+  ok       brief question **Q1 — N
+  ok       brief question **Q2 — `
+  ok       brief inventory 305.
+  ok       brief inventory 296.
+  ok       brief inventory 306.
+checks: 18  failures: 0

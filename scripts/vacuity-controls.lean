@@ -156,4 +156,99 @@ theorem planted_generic_hub {k : ℕ} (F : Plane.ArcMap k) (p : ℂ) (ψ : ℝ) 
 /-- CONTROL 32 — `IsHub` at a concrete instance nothing decides. `UNKNOWN`. -/
 theorem planted_unknown_hub (_h : Plane.sixFrag.IsHub 0 (Real.pi / 4)) : (1 : ℕ) = 1 := rfl
 
+/-- CONTROL 33 — wave 2's `CPColouring` at `1` colour: emptiness by an `instance` (the adversary). `VACUOUS`. -/
+theorem planted_vacuous_cp (_c : Plane.CPColouring 1) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 34 — `CPColouring k` at a variable `k`: `GENERIC`. -/
+theorem planted_generic_cp {k : ℕ} (_c : Plane.CPColouring k) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 35 — `CPColouring` at a `k` nothing refutes. `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_cp (_c : Plane.CPColouring 3) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 36 — wave 2's `SemiconcaveWith` at the instance `not_semiconcaveWith_one_lowerArc` refutes. `VACUOUS`. -/
+theorem planted_vacuous_semiconcave
+    (_h : Plane.SemiconcaveWith 1 (fun s : ℝ => 1 - Real.sqrt (1 - s ^ 2)) (Set.Ioo (1 / 10) (1 / 5))) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 37 — `SemiconcaveWith` at variable arguments: `GENERIC`. -/
+theorem planted_generic_semiconcave {K : ℝ} {u : ℝ → ℝ} {J : Set ℝ} (_h : Plane.SemiconcaveWith K u J) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 38 — `SemiconcaveWith` at a concrete instance nothing decides (true, `0 ≤ 0`, but no theorem says so). `UNKNOWN`. -/
+theorem planted_unknown_semiconcave (_h : Plane.SemiconcaveWith 0 (fun _ : ℝ => (0 : ℝ)) Set.univ) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 39 — wave 4's `IsHorn` at the instance `bowtie_not_isHorn_I_axis` refutes (no horn at `i`). `VACUOUS`. -/
+theorem planted_vacuous_horn (_h : Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 40 — `IsHorn` at a variable map: `GENERIC`. -/
+theorem planted_generic_horn {k : ℕ} (F : Plane.ArcMap k) (v : ℂ) (α κ₁ κ₂ : ℝ) (c : Fin k)
+    (_h : F.IsHorn v α κ₁ κ₂ c) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 41 — `IsHorn` at `−i`, where no closed theorem refutes it (`bowtie_not_isHorn_negI` is stated over variable angles and
+curvatures, so it is no evidence). `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_horn (_h : Plane.bowtie.IsHorn (-Complex.I) 0 (-1) 1 1) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 42 — wave 4's `IsStuck` at the instance `bowtie_not_isStuck_I` refutes. `VACUOUS`. -/
+theorem planted_vacuous_stuck (_h : Plane.bowtie.IsStuck Complex.I) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 43 — `IsStuck` at a variable map: `GENERIC`. -/
+theorem planted_generic_stuck {k : ℕ} (F : Plane.ArcMap k) (v : ℂ) (_h : F.IsStuck v) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 44 — `IsStuck` at `−i` (false — `bowtie_isStuck`'s third clause — but no closed `¬ P` says so). `UNKNOWN`. -/
+theorem planted_unknown_stuck (_h : Plane.bowtie.IsStuck (-Complex.I)) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 45 — wave 4's `Condition5` at the map `unitArcPlane_not_condition5` refutes. `VACUOUS`. -/
+theorem planted_vacuous_condition5 (_h : Plane.ArcMap.unitArcPlane.Condition5) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 46 — `Condition5` at a variable map: `GENERIC`. -/
+theorem planted_generic_condition5 {k : ℕ} (F : Plane.ArcMap k) (_h : F.Condition5) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 47 — `Condition5` at `segPlane` (true, its one arc a segment, but proved nowhere). `UNKNOWN`. -/
+theorem planted_unknown_condition5 (_h : Plane.ArcMap.segPlane.Condition5) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 48 — wave 4's `AeProperRegions` at `1` colour: emptiness by an `instance` (the adversary). `VACUOUS`. -/
+theorem planted_vacuous_aeRegions (_R : Plane.AeProperRegions 1) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 49 — `AeProperRegions k` at a variable `k`: `GENERIC`. -/
+theorem planted_generic_aeRegions {k : ℕ} (_R : Plane.AeProperRegions k) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 50 — `AeProperRegions` at a `k` nothing decides. `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_aeRegions (_R : Plane.AeProperRegions 4) (x : ℂ) : x = x := rfl
+
+/-- CONTROL 51 — Woodall's `SectorsAt` at the instance `threeSectorDisc_not_sectorsAt_one` refutes (`1` is off the domain). `VACUOUS`. -/
+theorem planted_vacuous_sectorsAt (_h : Plane.ArcMap.threeSectorDisc.SectorsAt 1 1 ![0, 2 * Real.pi] ![0]) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 52 — `SectorsAt` at a variable map: `GENERIC`. -/
+theorem planted_generic_sectorsAt {k : ℕ} (F : Plane.ArcMap k) (v : ℂ) (n : ℕ) (d : Fin (n + 1) → ℝ) (c : Fin n → Fin k)
+    (_h : F.SectorsAt v n d c) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 53 — `SectorsAt` at `halfDisc`'s centre with one sector (false — two colours approach — but no closed theorem says so).
+`UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_sectorsAt (_h : Plane.halfDisc.SectorsAt 0 1 ![0, 2 * Real.pi] ![0]) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 54 — `NiceAt` at the point `threeSectorDisc_not_niceAt_one` refutes. `VACUOUS`. -/
+theorem planted_vacuous_niceAt (_h : Plane.ArcMap.threeSectorDisc.NiceAt 1) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 55 — `NiceAt` at a variable map: `GENERIC`. -/
+theorem planted_generic_niceAt {k : ℕ} (F : Plane.ArcMap k) (v : ℂ) (_h : F.NiceAt v) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 56 — `NiceAt` at `1/4` on `halfDisc`'s segment (true, two sectors, but proved nowhere). `UNKNOWN`. -/
+theorem planted_unknown_niceAt (_h : Plane.halfDisc.NiceAt (1 / 4)) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 57 — `WoodallMerged` at the map `puncturedThreeSectorDisc_not_woodallMerged` refutes. `VACUOUS`. -/
+theorem planted_vacuous_merged (_h : Plane.ArcMap.puncturedThreeSectorDisc.WoodallMerged Set.univ) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 58 — `WoodallMerged` at a variable map: `GENERIC`. -/
+theorem planted_generic_merged {k : ℕ} (F : Plane.ArcMap k) (K : Set ℂ) (_h : F.WoodallMerged K) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 59 — `WoodallMerged` on `halfDisc` (true — no point carries three colours — but proved nowhere). `UNKNOWN`. -/
+theorem planted_unknown_merged (_h : Plane.halfDisc.WoodallMerged Set.univ) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 60 — `WoodallNormal` at the map `puncturedThreeSectorDisc_not_woodallNormal` refutes. `VACUOUS`. -/
+theorem planted_vacuous_normal (_h : Plane.ArcMap.puncturedThreeSectorDisc.WoodallNormal Set.univ) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 61 — `WoodallNormal` at a variable map: `GENERIC`. -/
+theorem planted_generic_normal {k : ℕ} (F : Plane.ArcMap k) (K : Set ℂ) (_h : F.WoodallNormal K) : (1 : ℕ) = 1 := rfl
+
+/-- CONTROL 62 — `WoodallNormal` on `halfDisc` (true, but proved nowhere). `UNKNOWN`, never `VACUOUS`: the load-bearing half. -/
+theorem planted_unknown_normal (_h : Plane.halfDisc.WoodallNormal Set.univ) : (1 : ℕ) = 1 := rfl
+
 end HadwigerNelson

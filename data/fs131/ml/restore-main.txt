@@ -1,0 +1,11 @@
+FAIL exists_merge_aux: 0 occurrence(s) here, 1 at c9623d04
+FAIL exists_merge: 0 occurrence(s) here, 1 at c9623d04
+FAIL Moves imports MergeMove
+FAIL Contact's header names exists_merge
+FAIL Proofs.lean imports MergeMove
+FAIL ARCHITECTURE has MergeMove's row
+FAIL ARCHITECTURE's Contact row names exists_merge
+FAIL ARCHITECTURE's Moves row names exists_merge_aux
+FAIL Axioms records ArcMap.exists_merge
+FAIL Axioms records ArcMap.exists_merge_aux
+restore: FAIL (10)

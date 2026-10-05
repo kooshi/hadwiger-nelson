@@ -666,6 +666,9 @@ GATE_CHANGES: dict[tuple, str] = {
     (("1285", "5"), ("1292", "5")): "FS131-LEB's landing gate (Lebesgue's covering theorem; .claude/worktrees/fs131-leb/build/gate/axioms/20261004T130707Z-3747446.log): 1,308 records, 1,292 clean, 11 axiom-free, 5 purchases",
     (("1292", "5"), ("1794", "5")): "FS-131 wave 3's landing, gated with FS131-T3's repair (build/gate/axioms/20261004T141303Z-4086598.log): 1,810 records, 1,794 clean, 11 axiom-free, 0 imported, 5 purchases",
     (("1794", "5"), ("1856", "5")): "localSectors' landing (FS131-I3i; .claude/worktrees/fs131-w3b/build/gate/axioms, gated commit 746a7b80): 1,872 records, 1,856 clean, 11 axiom-free, 0 imported, 5 purchases",
+    (("1856", "5"), ("2512", "5")): "FS-131 wave 2's landing (FS131-I2n; .claude/worktrees/fs131-w2/build/gate/axioms/20261004T225322Z-3123760.log, gated commit 40f4b4ef): 2,532 records, 2,512 clean, 11 axiom-free, 4 imported, 5 purchases",
+    (("2512", "5"), ("3376", "5")): "FS-131 wave 4's landing (FS131-G4; .claude/worktrees/fs131-w4/build/gate/axioms/20261005T030529Z-856603.log, gated commit 5816a11a): 3,397 records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases",
+    (("3376", "5"), ("3633", "5")): "FS-131 Woodall's landing (FS131-WL1; .claude/worktrees/fs131-ww/build/gate/axioms/20261005T041304Z-1297413.log, copy data/fs131/wl/axioms-receipt-final.log, gated commit 08e64ae5): 3,654 records, 3,633 clean, 12 axiom-free, 4 imported, 5 purchases",
 }
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")

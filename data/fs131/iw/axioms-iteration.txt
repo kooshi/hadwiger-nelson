@@ -1,0 +1,162 @@
+'HadwigerNelson.Plane.angleIcc_zero_two_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.coneAt_univ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.const_sectorsAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.sectorsAt_one_colour' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.const_woodallNormal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.const_woodallMerged' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.not_woodallNormal_of_repeat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isOpen_annSector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_annSector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isOpen_collar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.collar_subset_collar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_collar_of_collarAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_unit_pair_collar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_changePt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sphere_meets_of_collarAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.woodall_step4' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.not_woodall_step4_two_thirds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.townsend_lemma' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.collarAt_shadow_outer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.collarAt_shadow_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.col_not_mem_of_mem_shadow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.subset_closure_of_subset_shadow' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_sectorsAt' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.coloursAt_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_woodallMerged' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.step5_lt' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.aeMap6_merged' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.step6' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_three_le_sectors' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.aeMap6_normal' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.aeMap6' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.aeMap6_of_condition5' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.woodall_thm6' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_le_one_of_subset_closure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_mem_collar_of_dist_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_Ioo_avoiding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_coneAt_annSector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.collarAt_shadow_of_parabola' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_dist_eq_one' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_collarAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_shadow_inner_of_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_shadow_outer_of_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.not_mem_range_of_crossesAt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_side_colours_of_not_crossesAt' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_closure_colour_of_arc' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.false_of_ncard_le_two_on_arc' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.exists_mem_Ico' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.not_mem_coloursAt_of_mem_Ioo' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.exists_parabola_region' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.exists_normal_collarAt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.absent_at_normal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.exists_two_absent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.false_of_four_le_sectors' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.e_mul_conj_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.eq_add_norm_mul_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.eventually_abs_arg_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.eventually_norm_sub_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.Rim.radii_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_collar_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_pos_le_finset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_polar_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_chord_angle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isOpen_shadow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.false_of_dense_unit_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.norm_sq_mul_e_add_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.abs_dot_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dot_add_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dot_sub_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dot_sub_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dot_real_mul_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dot_e_e' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.norm_sub_real_mul_e_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mem_shadow_of_preconnected' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dot_cone_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isPreconnected_collar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.eventually_collarAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CollarAt.interior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.false_of_changePt_landing' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_changePt_band' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.false_of_collars_closed' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.finite_bad_radii' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_sq_polar_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.dist_sq_polar_polar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.norm_sq_framePt_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.e_add_int_mul_two_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.one_sub_e_two_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.one_sub_e_neg_two_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CollarAt.mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.shadow_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.CollarAt.inter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.prev_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.d_prev_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.eq_of_edge_mem_angleIcc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.finite_roots_quartic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.framePt_re' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.framePt_im' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.Arc.finite_inter_parabola' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.eq_of_edge_mem_angleIcc' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.sum_width_aux' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sum_width' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.width_eq_pi_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.not_mem_shadow_of_mem_region' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_mem_interiorPts_of_isOpen' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_near_sphere_sides' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.mem_closure_inside_of_colour' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_inside_colour' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.exists_prev_dir' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_prev_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_prev_outer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_cur_dir' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_cur_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_cur_outer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.coneAt_nonempty_of_mem_closure_region' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.finRotate_ne_symm' depends on axioms: [propext, Classical.choice, Quot.sound]

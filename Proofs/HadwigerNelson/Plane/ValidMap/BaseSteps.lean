@@ -178,28 +178,1253 @@ namespace ArcMap
 
 variable {k : ℕ} {F : ArcMap k}
 
+/-! ## The colours near a vertex, and a cubic trichromatic vertex's sectors -/
+
+/-- **Near a point of the domain every interior point carries a colour of the point** (child, from `localSectors`: the interior points
+of a small ball are the sectors, each with the point in its closure). -/
+theorem exists_ball_col_mem_coloursAt {x : ℂ} (hx : x ∈ F.dom) :
+    ∃ r > 0, ball x r ⊆ F.dom ∧ ∀ z ∈ F.interiorPts ∩ ball x r, F.col z ∈ F.coloursAt x := by
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hx
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  refine ⟨r₀, hC.pos, hC.subdom, fun z hz => ?_⟩
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · have hball : ball x r₀ ⊆ F.interiorPts := hC.empty hn
+    have hxI : x ∈ F.interiorPts := hball (mem_ball_self hC.pos)
+    have : F.col z = F.col x :=
+      (convex_ball x r₀).isPreconnected.constant (F.continuousOn_col.mono hball) hz.2 (mem_ball_self hC.pos)
+    rw [this]
+    exact subset_closure ⟨hxI, rfl⟩
+  · have hz' : z ∈ ⋃ i, G.sector x r₀ i := by rw [← hC.cover r₀ hr₀ hn]; exact ⟨hz.2, hz.1⟩
+    obtain ⟨i, hi⟩ := mem_iUnion.mp hz'
+    have hsub : G.sector x r₀ i ⊆ F.region (F.col z) := fun w hw =>
+      ⟨hC.sector_subset_interiorPts hn hr₀ i hw,
+        (hC.isPreconnected r₀ hr₀ i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hr₀ i)) hw hi⟩
+    exact closure_mono hsub (hC.mem_closure_sector hr₀ i)
+
+/-- **A cubic trichromatic vertex carries no repeated colour** (child): its three sectors carry its three colours, one each. -/
+theorem IsCubicTrichromatic.not_hasRepeatedColour {u : ℂ} (h : F.IsCubicTrichromatic u) (hu : u ∈ F.dom) :
+    ¬ F.HasRepeatedColour u := by
+  classical
+  rintro ⟨c, hc⟩
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hu
+  have hI : ∀ᶠ r in 𝓝[>] (0 : ℝ), r ∈ Ioc 0 r₀ := Ioc_mem_nhdsGT hC.pos
+  obtain ⟨r, hr1, hr2, hr3, hr⟩ := (hI.and (hC.hasDegree.and (h.1.and hc))).exists
+  have hrI : r ∈ Ioc 0 r₀ := hr1
+  have hn3 : max n 1 = 3 := by
+    have := hr2.symm.trans hr3
+    exact_mod_cast this
+  have hn : 0 < n := by omega
+  have hn' : n = 3 := by omega
+  choose q hq using fun i => hC.sector_nonempty hrI i
+  set f : Fin n → Fin k := fun i => F.col (q i) with hf
+  have hcolsec : ∀ i, ∀ w ∈ G.sector u r i, F.col w = f i := fun i w hw =>
+    (hC.isPreconnected r hrI i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hrI i)) hw (hq i)
+  -- every colour at `u` is a sector's colour
+  have hsub : F.coloursAt u ⊆ ↑(Finset.univ.image f) := by
+    intro j hj
+    obtain ⟨β, hβ⟩ := coneAt_region_nonempty hj
+    obtain ⟨i, -, hi⟩ := hC.exists_sector_of_mem_coneAt_region hn hrI hβ
+    have : f i = j := ((hcolsec i (q i) (hq i)).symm.trans (hi (hq i)).2 : F.col (q i) = j)
+    rw [Finset.coe_image]
+    exact ⟨i, by simp, this⟩
+  have hcard : (Finset.univ.image f).card = (Finset.univ : Finset (Fin n)).card := by
+    have h1 := Set.ncard_le_ncard hsub (Finset.finite_toSet _)
+    rw [Set.ncard_coe_finset, h.2] at h1
+    have h2 := Finset.card_image_le (s := (Finset.univ : Finset (Fin n))) (f := f)
+    rw [Finset.card_univ, Fintype.card_fin] at h2 ⊢
+    omega
+  have hinj : Set.InjOn f (Finset.univ : Finset (Fin n)) := Finset.card_image_iff.mp hcard
+  have hle : (F.sectorsOf u r c).encard ≤ 1 := by
+    rw [Set.encard_le_one_iff]
+    rintro S S' ⟨hS, hSc⟩ ⟨hS', hSc'⟩
+    obtain ⟨i, rfl⟩ := (hC.isSector_iff hn hrI).mp hS
+    obtain ⟨i', rfl⟩ := (hC.isSector_iff hn hrI).mp hS'
+    have hfi : f i = c := (hcolsec i (q i) (hq i)).symm.trans (hSc (hq i))
+    have hfi' : f i' = c := (hcolsec i' (q i') (hq i')).symm.trans (hSc' (hq i'))
+    rw [hinj (by simp) (by simp) (hfi.trans hfi'.symm)]
+  have := hr.trans hle
+  norm_num at this
+
+end ArcMap
+
+/-! ## The germs of a cubic trichromatic vertex and their votes (FS131-I4k)
+
+Children of FS112-N3-PAIRS, -N3-FAIL and -N3-ANTI: the two-zeros algebra of a germ against a unit circle through its base
+(`germ_eq_of_two_on_circle`, `branchPt_two_sin`), the chart of a cubic trichromatic vertex (`IsCubicTrichromatic.chart`), the isolation
+of a branch near its points (`IsSectorChart.exists_ball_branch`, over `localSectors_disj`) and the arc of `Γ` along a germ tangent to a
+unit circle (`IsSectorChart.exists_isRingArc_of_along`), S–V Prop. 10's vote (`stripHolds_of_two_branches`,
+`exists_branch_on_circle_of_not_stripHolds`, `exists_along_of_side`), the crossing at a vertex (`closure_sector_subset_of_side`), and
+the two halves of a unit circle crossing `ω(u)` transversally (`exists_side_germs_of_transversal`, `half_colour_or_bothKind`). -/
+
+/-- A branch point of a germ lies in the closure of the sector after it and of the sector before it (child): at radius `s` the
+sector's angular slice is the open interval between its two germs' directions, non-empty when the directions are ordered. -/
+theorem BranchGerms.mem_closure_sector_of_lt {n : ℕ} {G : BranchGerms n} {v : ℂ} {r s : ℝ} (hs : s ∈ Ioo 0 r) (i : Fin n)
+    (hlt : G.dir i s < G.nextDir i s) :
+    v + (s : ℂ) * e (G.dir i s) ∈ closure (G.sector v r i) ∧ v + (s : ℂ) * e (G.nextDir i s) ∈ closure (G.sector v r i) := by
+  set f : ℝ → ℂ := fun φ => v + (s : ℂ) * e φ with hf
+  have hfc : Continuous f := by rw [hf]; unfold e; fun_prop
+  have hsub : f '' Ioo (G.dir i s) (G.nextDir i s) ⊆ G.sector v r i := by
+    rintro _ ⟨φ, hφ, rfl⟩; exact ⟨s, hs, φ, hφ, rfl⟩
+  have hcl : f '' Icc (G.dir i s) (G.nextDir i s) ⊆ closure (G.sector v r i) := by
+    rw [← closure_Ioo hlt.ne]
+    exact (image_closure_subset_closure_image hfc).trans (closure_mono hsub)
+  exact ⟨hcl ⟨_, left_mem_Icc.mpr hlt.le, rfl⟩, hcl ⟨_, right_mem_Icc.mpr hlt.le, rfl⟩⟩
+
+/-- Among three germs, two distinct ones bound every sector (child). -/
+theorem BranchGerms.fin3_adj : ∀ i k l : Fin 3, k ≠ l →
+    (i = k ∨ BranchGerms.next i = k) ∨ (i = l ∨ BranchGerms.next i = l) := by decide
+
+/-- The squared distance from `q` of a branch point, in the frame of its germ's direction (child). -/
+theorem sq_dist_branchPt (u q : ℂ) (β κ s : ℝ) : dist (branchPt u β κ s) q ^ 2 =
+    (((u - q) * starRingEnd ℂ (e β)).re + s * Real.cos (Real.arcsin (κ * s / 2))) ^ 2 +
+      (((u - q) * starRingEnd ℂ (e β)).im + s * Real.sin (Real.arcsin (κ * s / 2))) ^ 2 := by
+  set a := Real.arcsin (κ * s / 2)
+  have h1 : (branchPt u β κ s - q) * starRingEnd ℂ (e β) = (u - q) * starRingEnd ℂ (e β) + (s : ℂ) * e a := by
+    rw [branchPt, e_add]
+    have := conj_e_mul_e β
+    linear_combination ((s : ℂ) * e a) * this
+  have h2 : dist (branchPt u β κ s) q = ‖(u - q) * starRingEnd ℂ (e β) + (s : ℂ) * e a‖ := by
+    rw [← h1, norm_mul, Complex.norm_conj, norm_e, mul_one, dist_eq_norm]
+  rw [h2, Complex.sq_norm, Complex.normSq_apply]
+  simp only [Complex.add_re, Complex.add_im, Complex.re_ofReal_mul, Complex.im_ofReal_mul, re_e, im_e]
+  ring
+
+/-- Real algebra for `germ_eq_of_two_on_circle` (child). -/
+theorem germ_circle_real {p r κ s C : ℝ} (hpr : p ^ 2 + r ^ 2 = 1) (hC : C ^ 2 = 1 - (κ * s / 2) ^ 2) (hs : 0 < s)
+    (hd : (p + s * C) ^ 2 + (r + s * (κ * s / 2)) ^ 2 = 1) :
+    4 * p ^ 2 = s ^ 2 * (p ^ 2 * κ ^ 2 + (1 + r * κ) ^ 2) := by
+  have e1 : s * (2 * p * C + s * (1 + r * κ)) = 0 := by linear_combination hd - hpr - s ^ 2 * hC
+  have e2 : 2 * p * C + s * (1 + r * κ) = 0 := (mul_eq_zero.mp e1).resolve_left hs.ne'
+  linear_combination (-4 * p ^ 2) * hC + (2 * p * C - s * (1 + r * κ)) * e2
+
+/-- **A germ with two branch points on a unit circle through its base lies along it** (child, the two-zeros algebra): if the
+germ `(β, κ)` at `u ∈ ω(q)` has branch points on `ω(q)` at two distinct positive distances, its curvature is `±1` and its
+direction is the circle's tangent `e β = i κ (u − q)`. -/
+theorem germ_eq_of_two_on_circle {u q : ℂ} (hq : dist u q = 1) {β κ s₁ s₂ : ℝ} (h1 : 0 < s₁) (h2 : 0 < s₂)
+    (h12 : s₁ ≠ s₂) (hκ1 : |κ| * s₁ ≤ 2) (hκ2 : |κ| * s₂ ≤ 2)
+    (hd1 : dist (branchPt u β κ s₁) q = 1) (hd2 : dist (branchPt u β κ s₂) q = 1) :
+    (κ = 1 ∨ κ = -1) ∧ e β = I * κ * (u - q) := by
+  set y := (u - q) * starRingEnd ℂ (e β) with hy
+  have hpr : y.re ^ 2 + y.im ^ 2 = 1 := by
+    have : ‖y‖ = 1 := by rw [hy, norm_mul, Complex.norm_conj, norm_e, mul_one, ← dist_eq_norm, hq]
+    have h := Complex.sq_norm y
+    rw [this, Complex.normSq_apply] at h
+    nlinarith [h]
+  have key : ∀ s, 0 < s → |κ| * s ≤ 2 → dist (branchPt u β κ s) q = 1 →
+      4 * y.re ^ 2 = s ^ 2 * (y.re ^ 2 * κ ^ 2 + (1 + y.im * κ) ^ 2) := by
+    intro s hs hκ hd
+    have hmem : κ * s / 2 ∈ Icc (-1 : ℝ) 1 := by
+      have : |κ * s / 2| ≤ 1 := by
+        rw [abs_div, abs_mul, abs_of_pos hs, abs_two]; linarith
+      exact ⟨by linarith [neg_abs_le (κ * s / 2)], by linarith [le_abs_self (κ * s / 2)]⟩
+    have hsin : Real.sin (Real.arcsin (κ * s / 2)) = κ * s / 2 := Real.sin_arcsin hmem.1 hmem.2
+    have hC : Real.cos (Real.arcsin (κ * s / 2)) ^ 2 = 1 - (κ * s / 2) ^ 2 := by
+      have := Real.sin_sq_add_cos_sq (Real.arcsin (κ * s / 2))
+      rw [hsin] at this; linarith
+    have hsq := sq_dist_branchPt u q β κ s
+    rw [hd, hsin] at hsq
+    exact germ_circle_real hpr hC hs (by rw [← hy] at hsq; linarith)
+  have k1 := key s₁ h1 hκ1 hd1
+  have k2 := key s₂ h2 hκ2 hd2
+  set M := y.re ^ 2 * κ ^ 2 + (1 + y.im * κ) ^ 2 with hM
+  have hM0 : M = 0 := by
+    have hsq : s₁ ^ 2 ≠ s₂ ^ 2 := by
+      intro h
+      exact h12 (by nlinarith [sq_nonneg (s₁ - s₂), sq_nonneg (s₁ + s₂)])
+    have : (s₁ ^ 2 - s₂ ^ 2) * M = 0 := by linear_combination k2 - k1
+    exact (mul_eq_zero.mp this).resolve_left (sub_ne_zero.mpr hsq)
+  have hp : y.re = 0 := by nlinarith [k1]
+  have hrk : 1 + y.im * κ = 0 := by
+    have : (1 + y.im * κ) ^ 2 = 0 := by rw [hM, hp] at hM0; linarith [hM0]
+    exact pow_eq_zero_iff (two_ne_zero) |>.mp this
+  have hr2 : y.im ^ 2 = 1 := by rw [hp] at hpr; linarith
+  have hκr : κ = -y.im := by nlinarith [hrk, hr2]
+  have hκ2' : κ ^ 2 = 1 := by rw [hκr]; linarith [hr2]
+  refine ⟨?_, ?_⟩
+  · have : (κ - 1) * (κ + 1) = 0 := by linear_combination hκ2'
+    rcases mul_eq_zero.mp this with h | h
+    · left; linarith
+    · right; linarith
+  · -- `y = −i κ`, `u − q = y e β`
+    have hyv : y = -I * κ := by
+      apply Complex.ext
+      · simp [hp]
+      · simp [hκr]
+    have hw : u - q = y * e β := by
+      rw [hy, mul_assoc, mul_comm (starRingEnd ℂ (e β)), conj_e_mul_e, mul_one]
+    rw [hw, hyv]
+    have hk : (κ : ℂ) ^ 2 = 1 := by exact_mod_cast hκ2'
+    linear_combination (-e β) * hk + ((κ : ℂ) ^ 2 * e β) * I_mul_I
+
+/-- **Along the circle** (child): a germ at `u ∈ ω(q)` of curvature `σ = ±1` tangent to `ω(q)` (`e β = i σ (u − q)`) has its branch point
+at distance `2 sin (t/2)` at the ring point `t` along `ω(q)` from `u` in the sense `σ`. -/
+theorem branchPt_two_sin {u q : ℂ} {β σ : ℝ} (hσ : σ = 1 ∨ σ = -1) (hβ : e β = I * σ * (u - q)) {t : ℝ}
+    (ht0 : 0 ≤ t) (htπ : t ≤ π) :
+    branchPt u β σ (2 * Real.sin (t / 2)) = q + (u - q) * e (σ * t) := by
+  have hπ := Real.pi_pos
+  have h1 : Real.arcsin (Real.sin (t / 2)) = t / 2 := Real.arcsin_sin (by linarith) (by linarith)
+  have harc : Real.arcsin (σ * (2 * Real.sin (t / 2)) / 2) = σ * (t / 2) := by
+    rcases hσ with rfl | rfl
+    · rw [show (1 : ℝ) * (2 * Real.sin (t / 2)) / 2 = Real.sin (t / 2) by ring, h1]; ring
+    · rw [show (-1 : ℝ) * (2 * Real.sin (t / 2)) / 2 = -Real.sin (t / 2) by ring, Real.arcsin_neg, h1]; ring
+  rw [branchPt, harc, e_add, hβ]
+  have hσ2 : (σ : ℂ) ^ 2 = 1 := by rcases hσ with rfl | rfl <;> norm_num
+  have hid : 1 + 2 * (Real.sin (t / 2) : ℂ) * (I * σ) * e (σ * (t / 2)) = e (σ * t) := by
+    rw [e_eq, e_eq]
+    have hc : Real.cos (σ * t) = 1 - 2 * Real.sin (t / 2) ^ 2 := by
+      rcases hσ with rfl | rfl
+      · rw [one_mul, show t = 2 * (t / 2) by ring, Real.cos_two_mul, show 2 * (t / 2) / 2 = t / 2 by ring]
+        linarith [Real.sin_sq_add_cos_sq (t / 2)]
+      · rw [show (-1) * t = -(2 * (t / 2)) by ring, Real.cos_neg, Real.cos_two_mul]
+        linarith [Real.sin_sq_add_cos_sq (t / 2)]
+    have hs : Real.sin (σ * t) = σ * (2 * Real.sin (t / 2) * Real.cos (t / 2)) := by
+      rcases hσ with rfl | rfl
+      · rw [one_mul, one_mul, show t = 2 * (t / 2) by ring, Real.sin_two_mul, show 2 * (t / 2) / 2 = t / 2 by ring]
+      · rw [show (-1) * t = -(2 * (t / 2)) by ring, Real.sin_neg, Real.sin_two_mul]; ring
+    have hc' : Real.cos (σ * (t / 2)) = Real.cos (t / 2) := by
+      rcases hσ with rfl | rfl
+      · rw [one_mul]
+      · rw [neg_one_mul, Real.cos_neg]
+    have hs' : Real.sin (σ * (t / 2)) = σ * Real.sin (t / 2) := by
+      rcases hσ with rfl | rfl
+      · rw [one_mul, one_mul]
+      · rw [neg_one_mul, neg_one_mul, Real.sin_neg]
+    rw [hc, hs, hc', hs']
+    set a := Real.sin (t / 2)
+    set b := Real.cos (t / 2)
+    push_cast
+    linear_combination (2 * (a : ℂ) ^ 2 * I ^ 2) * hσ2 + (2 * (a : ℂ) ^ 2) * I_mul_I
+  have : u + ((2 * Real.sin (t / 2) : ℝ) : ℂ) * (I * σ * (u - q) * e (σ * (t / 2))) =
+      q + (u - q) * (1 + 2 * (Real.sin (t / 2) : ℂ) * (I * σ) * e (σ * (t / 2))) := by push_cast; ring
+  rw [this, hid]
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- **The chart of a cubic trichromatic vertex** (child): three germs whose branches never meet at one distance, and three sectors of
+three distinct colours, which are all the colours at the vertex. -/
+theorem IsCubicTrichromatic.chart {u : ℂ} (h : F.IsCubicTrichromatic u) (hu : u ∈ F.dom) :
+    ∃ r₀, ∃ G : BranchGerms 3, F.IsSectorChart G u r₀ ∧
+      (∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) ∧
+      ∃ f : Fin 3 → Fin k, Function.Injective f ∧ (∀ i, G.sector u r₀ i ⊆ F.region (f i)) ∧
+        ∀ c ∈ F.coloursAt u, ∃ i, f i = c := by
+  classical
+  obtain ⟨r₀, n, G, hC, hdisj⟩ := localSectors_disj F hu
+  have hn3 : n = 3 := by
+    obtain ⟨r, hr2, hr3⟩ := (hC.hasDegree.and h.1).exists
+    have : max n 1 = 3 := by exact_mod_cast hr2.symm.trans hr3
+    omega
+  subst hn3
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  have hn : (0 : ℕ) < 3 := by norm_num
+  choose q hq using fun i => hC.sector_nonempty hr₀ i
+  set f : Fin 3 → Fin k := fun i => F.col (q i) with hf
+  have hsec : ∀ i, G.sector u r₀ i ⊆ F.region (f i) := fun i w hw =>
+    ⟨hC.sector_subset_interiorPts hn hr₀ i hw,
+      (hC.isPreconnected r₀ hr₀ i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hr₀ i)) hw (hq i)⟩
+  have hsub : ∀ c ∈ F.coloursAt u, ∃ i, f i = c := by
+    intro c hc
+    obtain ⟨β, hβ⟩ := coneAt_region_nonempty hc
+    obtain ⟨i, -, hi⟩ := hC.exists_sector_of_mem_coneAt_region hn hr₀ hβ
+    exact ⟨i, (hi (hq i)).2⟩
+  have hinj : Function.Injective f := by
+    have hsub' : F.coloursAt u ⊆ ↑(Finset.univ.image f) := fun c hc => by
+      obtain ⟨i, hi⟩ := hsub c hc; rw [Finset.coe_image]; exact ⟨i, by simp, hi⟩
+    have h1 := Set.ncard_le_ncard hsub' (Finset.finite_toSet _)
+    rw [Set.ncard_coe_finset, h.2] at h1
+    have h2 : (Finset.univ.image f).card ≤ 3 := (Finset.card_image_le).trans (by simp)
+    have hcard : (Finset.univ.image f).card = (Finset.univ : Finset (Fin 3)).card := by
+      rw [Finset.card_univ, Fintype.card_fin]; omega
+    intro i j hij
+    exact Finset.card_image_iff.mp hcard (by simp) (by simp) hij
+  exact ⟨r₀, G, hC, hdisj, f, hinj, hsec, hsub⟩
+
+/-- **Near a branch point the arcs are its branch** (child): in a chart whose branches never meet at one distance, a small ball about
+a branch point lies in the domain and meets the arcs only on that point's own branch. -/
+theorem IsSectorChart.exists_ball_branch {n : ℕ} {G : BranchGerms n} {u : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G u r₀)
+    (hdisj : ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) (k₀ : Fin n) {s₀ : ℝ} (hs₀ : s₀ ∈ Ioo 0 r₀) :
+    ∃ δ > 0, ball (branchPt u (G.β k₀) (G.κ k₀) s₀) δ ⊆ F.dom ∧
+      ∀ z ∈ ball (branchPt u (G.β k₀) (G.κ k₀) s₀) δ, z ∈ ⋃ a ∈ F.arcs, a.carrier →
+        ∃ s ∈ Ioo 0 r₀, z = branchPt u (G.β k₀) (G.κ k₀) s := by
+  set b₀ := branchPt u (G.β k₀) (G.κ k₀) s₀ with hb₀
+  have hb₀u : dist b₀ u = s₀ := by rw [hb₀, dist_eq_norm, norm_branchPt_sub _ _ _ hs₀.1.le]
+  have hsep : ∀ j, j ≠ k₀ → ∀ᶠ δ in 𝓝[>] (0 : ℝ), ∀ s ∈ Ioo 0 r₀, δ ≤ dist (branchPt u (G.β j) (G.κ j) s) b₀ := by
+    intro j hj
+    have hne : branchPt u (G.β j) (G.κ j) s₀ ≠ b₀ := by
+      intro h
+      rw [hb₀, branchPt_eq, branchPt_eq] at h
+      exact hdisj j k₀ hj s₀ hs₀ ((polar_eq_iff hs₀.1 hs₀.1).mp h).2
+    set d := dist (branchPt u (G.β j) (G.κ j) s₀) b₀ with hd
+    have hd0 : 0 < d := dist_pos.mpr hne
+    obtain ⟨η, hη, hηc⟩ := Metric.continuous_iff.mp (continuous_branchPt u (G.β j) (G.κ j)) s₀ (d / 2) (half_pos hd0)
+    filter_upwards [Ioo_mem_nhdsGT (lt_min hη (half_pos hd0))] with δ hδ s hs
+    by_contra hlt
+    push Not at hlt
+    have hδη : δ < η := hδ.2.trans_le (min_le_left _ _)
+    have hδd : δ < d / 2 := hδ.2.trans_le (min_le_right _ _)
+    rcases lt_or_ge (dist s s₀) η with h1 | h1
+    · have h2 := hηc s h1
+      have h3 := dist_triangle (branchPt u (G.β j) (G.κ j) s₀) (branchPt u (G.β j) (G.κ j) s) b₀
+      rw [dist_comm (branchPt u (G.β j) (G.κ j) s₀) (branchPt u (G.β j) (G.κ j) s)] at h3
+      linarith
+    · have h2 : |s - s₀| ≤ dist (branchPt u (G.β j) (G.κ j) s) b₀ := by
+        have := abs_norm_sub_norm_le (branchPt u (G.β j) (G.κ j) s - u) (b₀ - u)
+        rw [norm_branchPt_sub _ _ _ hs.1.le, hb₀, norm_branchPt_sub _ _ _ hs₀.1.le] at this
+        rw [dist_eq_norm]; simpa using this
+      rw [Real.dist_eq] at h1
+      linarith
+  have hev : ∀ᶠ δ in 𝓝[>] (0 : ℝ), (0 < δ ∧ δ ≤ min s₀ (r₀ - s₀)) ∧
+      ∀ j, j ≠ k₀ → ∀ s ∈ Ioo 0 r₀, δ ≤ dist (branchPt u (G.β j) (G.κ j) s) b₀ := by
+    refine Filter.Eventually.and ?_ ?_
+    · filter_upwards [Ioo_mem_nhdsGT (lt_min hs₀.1 (sub_pos.mpr hs₀.2))] with δ hδ using ⟨hδ.1, hδ.2.le⟩
+    · refine Filter.eventually_all.mpr fun j => ?_
+      by_cases hj : j = k₀
+      · exact Filter.Eventually.of_forall fun _ h => absurd hj h
+      · exact (hsep j hj).mono fun _ h _ => h
+  obtain ⟨δ, ⟨hδ0, hδm⟩, hδsep⟩ := hev.exists
+  have hball : ∀ z ∈ ball b₀ δ, z ∈ ball u r₀ ∧ z ≠ u := by
+    intro z hz
+    rw [mem_ball] at hz
+    have h1 := dist_triangle z b₀ u
+    have h2 := dist_triangle b₀ z u
+    rw [dist_comm b₀ z] at h2
+    have hm1 := min_le_left s₀ (r₀ - s₀)
+    have hm2 := min_le_right s₀ (r₀ - s₀)
+    refine ⟨by rw [mem_ball]; linarith, ?_⟩
+    rintro rfl
+    rw [dist_comm] at hz
+    linarith
+  refine ⟨δ, hδ0, fun z hz => hC.subdom (hball z hz).1, fun z hz hza => ?_⟩
+  have hmem : z ∈ (F.Γ ∩ ball u r₀) \ {u} :=
+    ⟨⟨⟨hC.subdom (hball z hz).1, hza⟩, (hball z hz).1⟩, (hball z hz).2⟩
+  rw [hC.branches] at hmem
+  obtain ⟨j, s, hs, rfl⟩ := mem_iUnion.mp hmem
+  by_cases hj : j = k₀
+  · subst hj; exact ⟨s, hs, rfl⟩
+  · have := hδsep j hj s hs
+    rw [mem_ball] at hz
+    linarith
+
+/-- **The vote, two germs at once** (child, S–V Prop. 10's place): at a cubic trichromatic vertex `u` (its chart, its three sectors of
+the three colours of `u`), if two distinct germs have their branch points at distance `s` both inside `ω(q)`, the outer strip holds at
+`q`; both outside, the inner. Two germs bound all three sectors, so every colour of `u` is barred from that side near `q`: a sector of
+colour `c` reaching from `u` to a branch point on the other side of `ω(z)` holds a point at distance exactly `1` from `z`. -/
+theorem stripHolds_of_two_branches (hF : F.Valid) {u q : ℂ} {r₀ : ℝ} {G : BranchGerms 3}
+    (hC : F.IsSectorChart G u r₀) (hord : ∀ s ∈ Ioo 0 r₀, ∀ i, G.dir i s < G.nextDir i s)
+    {f : Fin 3 → Fin k} (hsec : ∀ i, G.sector u r₀ i ⊆ F.region (f i)) (hcol : ∀ c ∈ F.coloursAt u, ∃ i, f i = c)
+    {s : ℝ} (hs0 : s ∈ Ioo 0 r₀) {k₁ k₂ : Fin 3} (hne : k₁ ≠ k₂)
+    (h : (dist (branchPt u (G.β k₁) (G.κ k₁) s) q < 1 ∧ dist (branchPt u (G.β k₂) (G.κ k₂) s) q < 1) ∨
+      (1 < dist (branchPt u (G.β k₁) (G.κ k₁) s) q ∧ 1 < dist (branchPt u (G.β k₂) (G.κ k₂) s) q)) :
+    F.StripHolds u q := by
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  have hadj : ∀ i l, (i = l ∨ BranchGerms.next i = l) →
+      branchPt u (G.β l) (G.κ l) s ∈ closure (G.sector u r₀ i) := by
+    rintro i l (rfl | rfl)
+    · exact (BranchGerms.mem_closure_sector_of_lt hs0 i (hord s hs0 i)).1
+    · rw [branchPt_eq]
+      have : e (germDir (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s) = e (G.nextDir i s) :=
+        (G.e_nextDir i s).symm
+      rw [this]; exact (BranchGerms.mem_closure_sector_of_lt hs0 i (hord s hs0 i)).2
+  have hcross : ∀ i z, z ∈ F.region (f i) → ∀ b ∈ closure (G.sector u r₀ i),
+      (dist z u < 1 → dist z b < 1) ∧ (1 < dist z u → 1 < dist z b) := by
+    intro i z hz b hb
+    have hpc : IsPreconnected (closure (G.sector u r₀ i)) := (hC.isPreconnected r₀ hr₀ i).closure
+    have hu := hC.mem_closure_sector hr₀ i
+    rcases hF.dist_lt_or_gt_of_isPreconnected hz hpc (closure_mono (hsec i)) with h | h
+    · exact ⟨fun _ => h b hb, fun h' => absurd (h u hu) (by linarith)⟩
+    · exact ⟨fun h' => absurd (h u hu) (by linarith), fun _ => h b hb⟩
+  set d : Fin 3 → ℝ := fun l => dist (branchPt u (G.β l) (G.κ l) s) q with hd
+  have hpick : ∀ z ∈ F.interiorPts, F.col z ∈ F.coloursAt u → ∃ i l, z ∈ F.region (f i) ∧ (l = k₁ ∨ l = k₂) ∧
+      branchPt u (G.β l) (G.κ l) s ∈ closure (G.sector u r₀ i) := by
+    intro z hz hzc
+    obtain ⟨i, hi⟩ := hcol _ hzc
+    have hzr : z ∈ F.region (f i) := ⟨hz, hi.symm⟩
+    rcases BranchGerms.fin3_adj i k₁ k₂ hne with h | h
+    · exact ⟨i, k₁, hzr, Or.inl rfl, hadj i k₁ h⟩
+    · exact ⟨i, k₂, hzr, Or.inr rfl, hadj i k₂ h⟩
+  rcases h with ⟨h1, h2⟩ | ⟨h1', h2'⟩
+  · refine ⟨min (1 - d k₁) (1 - d k₂), lt_min (by linarith) (by linarith), Or.inr ?_⟩
+    rintro z ⟨⟨hzI, hzq⟩, hzu⟩ hzc
+    obtain ⟨i, l, hzr, hl, hb⟩ := hpick z hzI hzc
+    have hzu' : 1 < dist z u := by simpa [mem_closedBall, not_le] using hzu
+    have hgt := (hcross i z hzr _ hb).2 hzu'
+    have htri := dist_triangle z q (branchPt u (G.β l) (G.κ l) s)
+    rw [mem_ball] at hzq
+    rw [dist_comm q] at htri
+    have hdl : d l + dist z q < 1 := by
+      rcases hl with rfl | rfl
+      · linarith [min_le_left (1 - d l) (1 - d k₂)]
+      · linarith [min_le_right (1 - d k₁) (1 - d l)]
+    have : dist (branchPt u (G.β l) (G.κ l) s) q = d l := rfl
+    linarith
+  · refine ⟨min (d k₁ - 1) (d k₂ - 1), lt_min (by linarith) (by linarith), Or.inl ?_⟩
+    rintro z ⟨⟨hzI, hzq⟩, hzu⟩ hzc
+    obtain ⟨i, l, hzr, hl, hb⟩ := hpick z hzI hzc
+    rw [mem_ball] at hzu hzq
+    have hlt := (hcross i z hzr _ hb).1 hzu
+    have htri := dist_triangle (branchPt u (G.β l) (G.κ l) s) z q
+    rw [dist_comm _ z] at htri
+    have hdl : 1 + dist z q < d l := by
+      rcases hl with rfl | rfl
+      · linarith [min_le_left (d l - 1) (d k₂ - 1)]
+      · linarith [min_le_right (d k₁ - 1) (d l - 1)]
+    have : dist (branchPt u (G.β l) (G.κ l) s) q = d l := rfl
+    linarith
+
+/-- **The vote at a cubic trichromatic vertex** (child, S–V Prop. 10's place): where the strip fails at `q`, at every radius below the
+chart's some germ's branch point lies on `ω(q)` (`stripHolds_of_two_branches` on two germs on one side). -/
+theorem exists_branch_on_circle_of_not_stripHolds (hF : F.Valid) {u q : ℂ} {r₀ : ℝ} {G : BranchGerms 3}
+    (hC : F.IsSectorChart G u r₀) (hord : ∀ s ∈ Ioo 0 r₀, ∀ i, G.dir i s < G.nextDir i s)
+    {f : Fin 3 → Fin k} (hsec : ∀ i, G.sector u r₀ i ⊆ F.region (f i)) (hcol : ∀ c ∈ F.coloursAt u, ∃ i, f i = c)
+    (hs : ¬ F.StripHolds u q) {s : ℝ} (hs0 : s ∈ Ioo 0 r₀) :
+    ∃ l, dist (branchPt u (G.β l) (G.κ l) s) q = 1 := by
+  by_contra hno
+  push Not at hno
+  set d : Fin 3 → ℝ := fun l => dist (branchPt u (G.β l) (G.κ l) s) q with hd
+  obtain ⟨k₁, k₂, hne, heq⟩ := Fintype.exists_ne_map_eq_of_card_lt (fun l : Fin 3 => decide (d l < 1)) (by simp)
+  have hiff : d k₁ < 1 ↔ d k₂ < 1 := by simpa using heq
+  apply hs
+  refine stripHolds_of_two_branches hF hC hord hsec hcol hs0 hne ?_
+  by_cases h1 : d k₁ < 1
+  · exact Or.inl ⟨h1, hiff.mp h1⟩
+  · exact Or.inr ⟨lt_of_le_of_ne (not_lt.mp h1) (hno k₁).symm,
+      lt_of_le_of_ne (not_lt.mp fun h => h1 (hiff.mpr h)) (hno k₂).symm⟩
+
+/-- **The arc along a germ tangent to a unit circle** (child): in a chart at `u ∈ ω(q)` whose branches never meet at one distance, a
+germ of curvature `±1` tangent to `ω(q)` gives an arc of `Γ` on `ω(q)` with constant sides ending at `u`, whose interior points are
+that germ's branch points (each has a ball meeting the arcs only on the branch, which lies on `ω(q)`). -/
+theorem IsSectorChart.exists_isRingArc_of_along {n : ℕ} {G : BranchGerms n} {u q : ℂ} {r₀ : ℝ}
+    (hC : F.IsSectorChart G u r₀) (hdisj : ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s))
+    (huq : dist u q = 1) {k₀ : Fin n} (hσ : G.κ k₀ = 1 ∨ G.κ k₀ = -1) (hβ : e (G.β k₀) = I * G.κ k₀ * (u - q)) :
+    ∃ θ₁ θ₂ c c', F.IsRingArc q θ₁ θ₂ c c' ∧ (ringPt q θ₁ = u ∨ ringPt q θ₂ = u) ∧
+      ∀ θ ∈ Ioo θ₁ θ₂, ∃ s ∈ Ioo 0 r₀, ringPt q θ = branchPt u (G.β k₀) (G.κ k₀) s := by
+  have hπ := Real.pi_pos
+  have hr0 := hC.pos
+  set σ := G.κ k₀ with hσdef
+  have hσabs : |σ| = 1 := by rcases hσ with h | h <;> rw [h] <;> norm_num
+  have hr2 : r₀ < 2 := by have := hC.curv k₀; rw [← hσdef, hσabs, one_mul] at this; exact this
+  set ψ := arg (u - q) with hψdef
+  have hψ : ringPt q ψ = u := ringPt_arg_sub huq
+  have heψ : e ψ = u - q := by rw [← hψ, ringPt]; ring
+  have hring : ∀ t, 0 ≤ t → t ≤ π → ringPt q (ψ + σ * t) = branchPt u (G.β k₀) σ (2 * Real.sin (t / 2)) := by
+    intro t ht0 htπ
+    rw [branchPt_two_sin hσ hβ ht0 htπ, ringPt, e_add, heψ]
+  have hon : ∀ s ∈ Ioo 0 r₀, dist (branchPt u (G.β k₀) σ s) q = 1 := by
+    intro s hs'
+    have hs2 : s / 2 ∈ Icc (-1 : ℝ) 1 := ⟨by linarith [hs'.1], by linarith [hs'.2]⟩
+    set t := 2 * Real.arcsin (s / 2) with ht
+    have ht0 : 0 ≤ t := by have := Real.arcsin_nonneg.mpr (by linarith [hs'.1] : (0:ℝ) ≤ s / 2); linarith
+    have htπ : t ≤ π := by have := Real.arcsin_le_pi_div_two (s / 2); linarith
+    have hst : 2 * Real.sin (t / 2) = s := by
+      rw [ht, show 2 * Real.arcsin (s / 2) / 2 = Real.arcsin (s / 2) by ring, Real.sin_arcsin hs2.1 hs2.2]; ring
+    rw [← hst, ← hring t ht0 htπ]
+    exact dist_ringPt q _
+  set τ := min (r₀ / 2) 1 with hτ
+  have hτ0 : 0 < τ := lt_min (by linarith) one_pos
+  have hτr : τ < r₀ := (min_le_left _ _).trans_lt (by linarith)
+  have hτπ : τ < π := (min_le_right _ _).trans_lt (by linarith [Real.pi_gt_three])
+  have hsr : ∀ t, 0 < t → t ≤ τ → 2 * Real.sin (t / 2) ∈ Ioo 0 r₀ := fun t ht htτ => by
+    refine ⟨?_, ?_⟩
+    · have := Real.sin_pos_of_pos_of_lt_pi (by linarith : 0 < t / 2) (by linarith); linarith
+    · have := Real.sin_le (by linarith : (0:ℝ) ≤ t / 2); linarith
+  have hpt : ∀ t, 0 ≤ t → t ≤ τ → ringPt q (ψ + σ * t) ∈ F.Γ ∧ (0 < t → (∃ s ∈ Ioo 0 r₀,
+      ringPt q (ψ + σ * t) = branchPt u (G.β k₀) (G.κ k₀) s) ∧ ∃ δ > 0,
+      ball (ringPt q (ψ + σ * t)) δ ⊆ F.dom ∧ ∀ z ∈ ball (ringPt q (ψ + σ * t)) δ, z ∈ ⋃ a ∈ F.arcs, a.carrier → dist z q = 1) := by
+    intro t ht0 htτ
+    have htπ : t ≤ π := htτ.trans hτπ.le
+    refine ⟨?_, fun htpos => ⟨⟨_, hsr t htpos htτ, hring t ht0 htπ⟩, ?_⟩⟩
+    · rcases ht0.eq_or_lt with rfl | htpos
+      · rw [mul_zero, add_zero, hψ]; exact hC.mem_Γ.mpr k₀.pos
+      · rw [hring t ht0 htπ]
+        have hmem : branchPt u (G.β k₀) (G.κ k₀) (2 * Real.sin (t / 2)) ∈
+            ⋃ i, branchPt u (G.β i) (G.κ i) '' Ioo 0 r₀ :=
+          mem_iUnion.mpr ⟨k₀, _, hsr t htpos htτ, rfl⟩
+        rw [← hC.branches] at hmem
+        exact hmem.1.1
+    · obtain ⟨δ, hδ, hdom, hbr⟩ := hC.exists_ball_branch hdisj k₀ (hsr t htpos htτ)
+      rw [hring t ht0 htπ]
+      refine ⟨δ, hδ, hdom, fun z hz hza => ?_⟩
+      obtain ⟨s', hs', rfl⟩ := hbr z hz hza
+      exact hon s' hs'
+  rcases hσ with h1 | h1
+  · have hφ : ∀ φ, ψ + σ * (φ - ψ) = φ := fun φ => by rw [h1]; ring
+    have hΓ : ringArc q ψ (ψ + τ) ⊆ F.Γ := by
+      rintro _ ⟨φ, hφm, rfl⟩
+      have := (hpt (φ - ψ) (by linarith [hφm.1]) (by linarith [hφm.2])).1
+      rwa [hφ] at this
+    obtain ⟨c, c', hR⟩ := isRingArc_of_clean (by linarith) hΓ fun θ hθ => by
+      have := ((hpt (θ - ψ) (by linarith [hθ.1]) (by linarith [hθ.2])).2 (by linarith [hθ.1])).2
+      rwa [hφ] at this
+    refine ⟨ψ, ψ + τ, c, c', hR, Or.inl hψ, fun θ hθ => ?_⟩
+    have := ((hpt (θ - ψ) (by linarith [hθ.1]) (by linarith [hθ.2])).2 (by linarith [hθ.1])).1
+    rwa [hφ] at this
+  · have hφ : ∀ φ, ψ + σ * (ψ - φ) = φ := fun φ => by rw [h1]; ring
+    have hΓ : ringArc q (ψ - τ) ψ ⊆ F.Γ := by
+      rintro _ ⟨φ, hφm, rfl⟩
+      have := (hpt (ψ - φ) (by linarith [hφm.2]) (by linarith [hφm.1])).1
+      rwa [hφ] at this
+    obtain ⟨c, c', hR⟩ := isRingArc_of_clean (by linarith) hΓ fun θ hθ => by
+      have := ((hpt (ψ - θ) (by linarith [hθ.2]) (by linarith [hθ.1])).2 (by linarith [hθ.2])).2
+      rwa [hφ] at this
+    refine ⟨ψ - τ, ψ, c, c', hR, Or.inr hψ, fun θ hθ => ?_⟩
+    have := ((hpt (ψ - θ) (by linarith [hθ.2]) (by linarith [hθ.1])).2 (by linarith [hθ.2])).1
+    rwa [hφ] at this
+
+/-- **A side's bounding germs: one lies along `ω(q)`** (child): where the strip fails at `q`, if the branch points of two distinct
+germs all lie in `B̄(q, 1)`, or all outside `B(q, 1)`, one of the two germs has curvature `±1` and is tangent to `ω(q)`. Off that,
+each germ meets `ω(q)` at one radius at most (`germ_eq_of_two_on_circle`), so at some radius both lie strictly on one side, and the
+vote makes the strip hold. -/
+theorem exists_along_of_side (hF : F.Valid) {u q : ℂ} {r₀ : ℝ} {G : BranchGerms 3}
+    (hC : F.IsSectorChart G u r₀) (hord : ∀ s ∈ Ioo 0 r₀, ∀ i, G.dir i s < G.nextDir i s)
+    {f : Fin 3 → Fin k} (hsec : ∀ i, G.sector u r₀ i ⊆ F.region (f i)) (hcol : ∀ c ∈ F.coloursAt u, ∃ i, f i = c)
+    (hs : ¬ F.StripHolds u q) (huq : dist u q = 1) {g₁ g₂ : Fin 3} (hne : g₁ ≠ g₂)
+    (hside : (∀ s ∈ Ioo 0 r₀, dist (branchPt u (G.β g₁) (G.κ g₁) s) q ≤ 1 ∧ dist (branchPt u (G.β g₂) (G.κ g₂) s) q ≤ 1) ∨
+      (∀ s ∈ Ioo 0 r₀, 1 ≤ dist (branchPt u (G.β g₁) (G.κ g₁) s) q ∧ 1 ≤ dist (branchPt u (G.β g₂) (G.κ g₂) s) q)) :
+    ∃ g, (g = g₁ ∨ g = g₂) ∧ (G.κ g = 1 ∨ G.κ g = -1) ∧ e (G.β g) = I * G.κ g * (u - q) := by
+  have hr0 := hC.pos
+  by_contra hno
+  push Not at hno
+  have hrad : ∀ m : Fin 3, r₀ * ((m : ℝ) + 1) / 4 ∈ Ioo 0 r₀ := fun m => by
+    have hm : (m : ℝ) ≤ 2 := by exact_mod_cast Nat.lt_succ_iff.mp m.isLt
+    refine ⟨by positivity, ?_⟩
+    rw [div_lt_iff₀ (by norm_num)]; nlinarith
+  have hcurv : ∀ g, ∀ s ∈ Ioo 0 r₀, |G.κ g| * s ≤ 2 := fun g s hs' =>
+    (mul_le_mul_of_nonneg_left hs'.2.le (abs_nonneg _)).trans (hC.curv g).le
+  have hne' : ∀ m₁ m₂ : Fin 3, m₁ ≠ m₂ → r₀ * ((m₁ : ℝ) + 1) / 4 ≠ r₀ * ((m₂ : ℝ) + 1) / 4 := by
+    intro m₁ m₂ hm h
+    have h' : r₀ * ((m₁ : ℝ) + 1) = r₀ * ((m₂ : ℝ) + 1) := by linarith
+    have h'' := mul_left_cancel₀ hr0.ne' h'
+    apply hm; ext; exact_mod_cast (by linarith : (m₁ : ℝ) = m₂)
+  -- a germ on `ω(q)` at two radii lies along it
+  have halong : ∀ g, (g = g₁ ∨ g = g₂) → ∀ m₁ m₂ : Fin 3, m₁ ≠ m₂ →
+      dist (branchPt u (G.β g) (G.κ g) (r₀ * ((m₁ : ℝ) + 1) / 4)) q = 1 →
+      dist (branchPt u (G.β g) (G.κ g) (r₀ * ((m₂ : ℝ) + 1) / 4)) q = 1 → False := by
+    intro g hg m₁ m₂ hm h1 h2
+    obtain ⟨hσ, hβ⟩ := germ_eq_of_two_on_circle huq (hrad m₁).1 (hrad m₂).1 (hne' m₁ m₂ hm)
+      (hcurv g _ (hrad m₁)) (hcurv g _ (hrad m₂)) h1 h2
+    exact hno g hg hσ hβ
+  -- some radius has both off `ω(q)`
+  obtain ⟨m, hm1, hm2⟩ : ∃ m : Fin 3, dist (branchPt u (G.β g₁) (G.κ g₁) (r₀ * ((m : ℝ) + 1) / 4)) q ≠ 1 ∧
+      dist (branchPt u (G.β g₂) (G.κ g₂) (r₀ * ((m : ℝ) + 1) / 4)) q ≠ 1 := by
+    by_contra hall
+    push Not at hall
+    obtain ⟨m₁, m₂, hm, heq⟩ := Fintype.exists_ne_map_eq_of_card_lt
+      (fun m : Fin 3 => decide (dist (branchPt u (G.β g₁) (G.κ g₁) (r₀ * ((m : ℝ) + 1) / 4)) q = 1)) (by simp)
+    have hiff : dist (branchPt u (G.β g₁) (G.κ g₁) (r₀ * ((m₁ : ℝ) + 1) / 4)) q = 1 ↔
+        dist (branchPt u (G.β g₁) (G.κ g₁) (r₀ * ((m₂ : ℝ) + 1) / 4)) q = 1 := by simpa using heq
+    by_cases h1 : dist (branchPt u (G.β g₁) (G.κ g₁) (r₀ * ((m₁ : ℝ) + 1) / 4)) q = 1
+    · exact halong g₁ (Or.inl rfl) m₁ m₂ hm h1 (hiff.mp h1)
+    · exact halong g₂ (Or.inr rfl) m₁ m₂ hm (hall m₁ h1) (hall m₂ (fun h => h1 (hiff.mpr h)))
+  apply hs
+  refine stripHolds_of_two_branches hF hC hord hsec hcol (hrad m) hne ?_
+  rcases hside with h | h
+  · exact Or.inl ⟨lt_of_le_of_ne (h _ (hrad m)).1 hm1, lt_of_le_of_ne (h _ (hrad m)).2 hm2⟩
+  · exact Or.inr ⟨lt_of_le_of_ne (h _ (hrad m)).1 (Ne.symm hm1), lt_of_le_of_ne (h _ (hrad m)).2 (Ne.symm hm2)⟩
+
+/-- A colour of `u` that occurs on one side of `ω(u)` arbitrarily near `q` (child, from `¬ StripHolds`). -/
+theorem exists_colour_near {u q : ℂ} {A : Set ℂ}
+    (h : ∀ ε > 0, ∃ z ∈ F.interiorPts ∩ ball q ε ∩ A, F.col z ∈ F.coloursAt u) :
+    ∃ c ∈ F.coloursAt u, q ∈ closure (F.region c ∩ A) := by
+  by_contra hno
+  push Not at hno
+  have hev : ∀ᶠ δ in 𝓝[>] (0 : ℝ), 0 < δ ∧ ∀ c ∈ F.coloursAt u, ∀ z ∈ F.region c ∩ A, δ ≤ dist z q := by
+    refine (eventually_mem_nhdsWithin).and ((eventually_all_finite (Set.toFinite _)).mpr fun c hc => ?_)
+    obtain ⟨ε, hε, hball⟩ := Metric.mem_nhds_iff.mp (isOpen_compl_iff.mpr isClosed_closure |>.mem_nhds (hno c hc))
+    filter_upwards [Ioo_mem_nhdsGT hε] with δ hδ z hz
+    by_contra hlt
+    push Not at hlt
+    exact hball (by rw [mem_ball]; exact hlt.trans hδ.2) (subset_closure hz)
+  obtain ⟨δ, hδ0, hδ⟩ := hev.exists
+  obtain ⟨z, ⟨⟨hzI, hzq⟩, hzA⟩, hzc⟩ := h δ hδ0
+  have := hδ _ hzc z ⟨⟨hzI, rfl⟩, hzA⟩
+  rw [mem_ball] at hzq
+  linarith
+
+/-- **A colour of `u` on one side of `ω(u)` at `x` confines its sector** (child, the crossing at a vertex): if `f i`, the colour of the
+`i`-th sector of the chart at `u`, approaches `x` from inside `ω(u)`, the sector's closure lies in `B̄(x, 1)`; from outside, its
+closure lies outside `B(x, 1)`. A point `z` of colour `f i` inside `ω(u)` has `u` within `1`, so the whole closed sector is (the
+crossing engine); `z → x` closes the bound. -/
+theorem closure_sector_subset_of_side (hF : F.Valid) {u x : ℂ} {r₀ : ℝ} {G : BranchGerms 3}
+    (hC : F.IsSectorChart G u r₀) {f : Fin 3 → Fin k} (hsec : ∀ i, G.sector u r₀ i ⊆ F.region (f i)) (i : Fin 3) :
+    (x ∈ closure (F.region (f i) ∩ ball u 1) → closure (G.sector u r₀ i) ⊆ closedBall x 1) ∧
+      (x ∈ closure (F.region (f i) \ closedBall u 1) → closure (G.sector u r₀ i) ⊆ {w | 1 ≤ dist w x}) := by
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  have hpc : IsPreconnected (closure (G.sector u r₀ i)) := (hC.isPreconnected r₀ hr₀ i).closure
+  have hu := hC.mem_closure_sector hr₀ i
+  refine ⟨fun hin w hw => ?_, fun hout w hw => ?_⟩
+  · rw [mem_closedBall]
+    by_contra hgt
+    push Not at hgt
+    obtain ⟨z, ⟨hzr, hzu⟩, hzq⟩ := Metric.mem_closure_iff.mp hin (dist w x - 1) (by linarith)
+    rw [mem_ball] at hzu
+    rcases hF.dist_lt_or_gt_of_isPreconnected hzr hpc (closure_mono (hsec i)) with h | h
+    · have := h w hw
+      have := dist_triangle w z x
+      rw [dist_comm x z] at hzq
+      linarith [dist_comm w z]
+    · linarith [h u hu]
+  · show 1 ≤ dist w x
+    by_contra hlt
+    push Not at hlt
+    obtain ⟨z, ⟨hzr, hzu⟩, hzq⟩ := Metric.mem_closure_iff.mp hout (1 - dist w x) (by linarith)
+    have hzu' : 1 < dist z u := by simpa [mem_closedBall, not_le] using hzu
+    rcases hF.dist_lt_or_gt_of_isPreconnected hzr hpc (closure_mono (hsec i)) with h | h
+    · linarith [h u hu]
+    · have := h w hw
+      have := dist_triangle z x w
+      rw [dist_comm x z] at hzq
+      linarith [dist_comm x w]
+
+/-- **A unit circle through `x` crossing `ω(u)` transversally** (child): if `x ∈ ω(u) ∩ ω(y)` with `y ≠ u` and `|y − u| ≠ 2`, the
+points of `ω(y)` just on one side of `x` lie strictly inside `ω(u)` and those just on the other strictly outside. With
+`ζ = (x − u) conj (x − y) = P + iQ`, `|y + e(φ₀ + t) − u|² = 1 + 2(1 − P)(1 − cos t) + 2Q sin t`, and transversality is `Q ≠ 0`. -/
+theorem exists_side_germs_of_transversal {u x y : ℂ} (hx : dist x u = 1) (hxy : dist x y = 1) (hyu : y ≠ u)
+    (hy2 : dist y u ≠ 2) : ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧ ∃ t₀ > 0, ∀ t ∈ Ioo 0 t₀,
+      dist (ringPt y (arg (x - y) + σ * t)) u < 1 ∧ 1 < dist (ringPt y (arg (x - y) - σ * t)) u := by
+  have hπ := Real.pi_pos
+  set φ₀ := arg (x - y) with hφ₀
+  have hx0 : ringPt y φ₀ = x := ringPt_arg_sub hxy
+  have hv : e φ₀ = x - y := by rw [← hx0, ringPt]; ring
+  set ζ := (x - u) * starRingEnd ℂ (e φ₀) with hζ
+  have hζn : ‖ζ‖ = 1 := by rw [hζ, norm_mul, Complex.norm_conj, norm_e, mul_one, ← dist_eq_norm, hx]
+  have hPQ : ζ.re ^ 2 + ζ.im ^ 2 = 1 := by
+    have h := Complex.sq_norm ζ
+    rw [hζn, Complex.normSq_apply] at h; nlinarith [h]
+  have hP : ζ.re ≤ 1 := by nlinarith [sq_nonneg ζ.im, sq_nonneg (ζ.re - 1)]
+  -- the squared distance along `ω(y)`
+  have hd : ∀ t, dist (ringPt y (φ₀ + t)) u ^ 2 = 1 + 2 * (1 - ζ.re) * (1 - Real.cos t) + 2 * ζ.im * Real.sin t := by
+    intro t
+    have h1 : (ringPt y (φ₀ + t) - u) * starRingEnd ℂ (e φ₀) = ζ + (e t - 1) := by
+      rw [ringPt, e_add, hζ]
+      have := conj_e_mul_e φ₀
+      have hy : y = x - e φ₀ := by rw [hv]; ring
+      rw [hy]
+      linear_combination (e t - 1) * this
+    have h2 : dist (ringPt y (φ₀ + t)) u = ‖ζ + (e t - 1)‖ := by
+      rw [← h1, norm_mul, Complex.norm_conj, norm_e, mul_one, dist_eq_norm]
+    rw [h2, Complex.sq_norm, Complex.normSq_apply]
+    simp only [Complex.add_re, Complex.add_im, Complex.sub_re, Complex.sub_im, re_e, im_e, Complex.one_re, Complex.one_im]
+    nlinarith [Real.sin_sq_add_cos_sq t, hPQ]
+  -- transversality: `Q ≠ 0`
+  have hQ : ζ.im ≠ 0 := by
+    intro hQ
+    have hP2 : ζ.re = 1 ∨ ζ.re = -1 := by
+      have : (ζ.re - 1) * (ζ.re + 1) = 0 := by rw [hQ] at hPQ; linear_combination hPQ
+      rcases mul_eq_zero.mp this with h | h
+      · left; linarith
+      · right; linarith
+    have hw : x - u = ζ * e φ₀ := by
+      rw [hζ, mul_assoc, mul_comm (starRingEnd ℂ (e φ₀)), conj_e_mul_e, mul_one]
+    have hζr : ζ = (ζ.re : ℂ) := by apply Complex.ext <;> simp [hQ]
+    rcases hP2 with h | h
+    · apply hyu
+      rw [hζr, h, hv] at hw; push_cast at hw; linear_combination hw
+    · apply hy2
+      rw [hζr, h, hv] at hw; push_cast at hw
+      have : y - u = 2 * (y - x) := by linear_combination hw
+      rw [dist_eq_norm, this, norm_mul, ← dist_eq_norm, dist_comm, hxy]; norm_num
+  set Q := ζ.im with hQdef
+  refine ⟨-(Q / |Q|), ?_, min (π / 2) (2 * |Q| / π), lt_min (by linarith) (by positivity), fun t ht => ?_⟩
+  · rcases lt_or_gt_of_ne hQ with h | h
+    · left; rw [abs_of_neg h, div_neg, div_self hQ]; ring
+    · right; rw [abs_of_pos h, div_self hQ]
+  have ht1 : t < π / 2 := ht.2.trans_le (min_le_left _ _)
+  have ht2 : t < 2 * |Q| / π := ht.2.trans_le (min_le_right _ _)
+  have hsin : 2 / π * t ≤ Real.sin t := Real.mul_le_sin ht.1.le ht1.le
+  have hsinpos : 0 < Real.sin t := Real.sin_pos_of_pos_of_lt_pi ht.1 (by linarith)
+  have hcos : 1 - t ^ 2 / 2 ≤ Real.cos t := Real.one_sub_sq_div_two_le_cos
+  have hcos1 : Real.cos t ≤ 1 := Real.cos_le_one t
+  have hQQ : Q * (Q / |Q|) = |Q| := by
+    rw [mul_div_assoc', ← sq, ← sq_abs, sq, mul_div_assoc, div_self (abs_ne_zero.mpr hQ), mul_one]
+  have hσsq : (Q / |Q|) ^ 2 = 1 := by rw [div_pow, sq_abs, div_self (pow_ne_zero 2 hQ)]
+  have hcos_neg : ∀ τ, Real.cos (-(Q / |Q|) * τ) = Real.cos τ := fun τ => by
+    rcases lt_or_gt_of_ne hQ with h | h
+    · rw [abs_of_neg h, div_neg, div_self hQ, neg_neg, one_mul]
+    · rw [abs_of_pos h, div_self hQ, neg_one_mul, Real.cos_neg]
+  have hsin_neg : ∀ τ, Real.sin (-(Q / |Q|) * τ) = -(Q / |Q|) * Real.sin τ := fun τ => by
+    rcases lt_or_gt_of_ne hQ with h | h
+    · rw [abs_of_neg h, div_neg, div_self hQ, neg_neg, one_mul, one_mul]
+    · rw [abs_of_pos h, div_self hQ, neg_one_mul, neg_one_mul, Real.sin_neg]
+  have hQabs : 0 < |Q| := abs_pos.mpr hQ
+  constructor
+  · have h := hd (-(Q / |Q|) * t)
+    rw [hcos_neg, hsin_neg] at h
+    have hlt : dist (ringPt y (φ₀ + -(Q / |Q|) * t)) u ^ 2 < 1 := by
+      have : 2 * Q * (-(Q / |Q|) * Real.sin t) = -2 * |Q| * Real.sin t := by
+        rw [show 2 * Q * (-(Q / |Q|) * Real.sin t) = -2 * (Q * (Q / |Q|)) * Real.sin t by ring, hQQ]
+      rw [h, this]
+      have hPlo : -1 ≤ ζ.re := by nlinarith [sq_nonneg ζ.im, sq_nonneg (ζ.re + 1)]
+      have e1 : 2 * (1 - ζ.re) * (1 - Real.cos t) ≤ 2 * t ^ 2 := by nlinarith
+      have e2 : 2 * |Q| * (2 / π * t) ≤ 2 * |Q| * Real.sin t := by nlinarith
+      have e3 : 2 * t ^ 2 < 2 * |Q| * (2 / π * t) := by
+        have : t * π < 2 * |Q| := by rwa [lt_div_iff₀ hπ] at ht2
+        have : 2 * t ^ 2 * π < 2 * |Q| * (2 * t) := by nlinarith [ht.1]
+        rw [show 2 * |Q| * (2 / π * t) = 2 * |Q| * (2 * t) / π by ring, lt_div_iff₀ hπ]; linarith
+      linarith
+    have := dist_nonneg (x := ringPt y (φ₀ + -(Q / |Q|) * t)) (y := u)
+    nlinarith
+  · have h := hd (-(-(Q / |Q|)) * t)
+    rw [neg_neg] at h
+    have hcos' : Real.cos (Q / |Q| * t) = Real.cos t := by
+      rcases lt_or_gt_of_ne hQ with h' | h'
+      · rw [abs_of_neg h', div_neg, div_self hQ, neg_one_mul, Real.cos_neg]
+      · rw [abs_of_pos h', div_self hQ, one_mul]
+    have hsin' : Real.sin (Q / |Q| * t) = Q / |Q| * Real.sin t := by
+      rcases lt_or_gt_of_ne hQ with h' | h'
+      · rw [abs_of_neg h', div_neg, div_self hQ, neg_one_mul, neg_one_mul, Real.sin_neg]
+      · rw [abs_of_pos h', div_self hQ, one_mul, one_mul]
+    rw [hcos', hsin'] at h
+    have hgt : 1 < dist (ringPt y (φ₀ - -(Q / |Q|) * t)) u ^ 2 := by
+      rw [show φ₀ - -(Q / |Q|) * t = φ₀ + Q / |Q| * t by ring, h]
+      have : 2 * Q * (Q / |Q| * Real.sin t) = 2 * |Q| * Real.sin t := by
+        rw [show 2 * Q * (Q / |Q| * Real.sin t) = 2 * (Q * (Q / |Q|)) * Real.sin t by ring, hQQ]
+      rw [this]
+      have : 0 ≤ 2 * (1 - ζ.re) * (1 - Real.cos t) := by
+        apply mul_nonneg (mul_nonneg (by norm_num) (by linarith)) (by linarith)
+      nlinarith
+    have := dist_nonneg (x := ringPt y (φ₀ - -(Q / |Q|) * t)) (y := u)
+    nlinarith
+
+/-- **One half of `ω(y)` at `x`** (child of N3-II): if the points of `ω(y)` just on one side of `x` lie in an open set `A`, then near
+`x` either some interior point of `A` has a colour outside `{a, b}`, or `y` is the centre of a both-kind arc. A half avoiding interior
+points lies in `Γ`, and a sub-arc of it with constant sides (`exists_isRingArc_of_subset_Γ`) has side colours from `{a, b}` (then
+both-kind, `a, b` carried at `y`) or one outside; an interior point of the half has a colour outside `{a, b}` by N-E1 at `y`. -/
+theorem half_colour_or_bothKind (hF : F.Valid) {x y : ℂ} (hxy : dist x y = 1) {a b : Fin k}
+    (hay : a ∈ F.coloursAt y) (hby : b ∈ F.coloursAt y) {A : Set ℂ} (hA : IsOpen A) {σ t₀ : ℝ} (hσ : σ = 1 ∨ σ = -1)
+    (ht₀ : 0 < t₀) (hhalf : ∀ t ∈ Ioo 0 t₀, ringPt y (arg (x - y) + σ * t) ∈ A) {ε : ℝ} (hε : 0 < ε)
+    (hdom : ball x ε ⊆ F.dom) :
+    (∃ θ₁ θ₂, F.BothKind y θ₁ θ₂) ∨ ∃ z ∈ F.interiorPts ∩ ball x ε ∩ A, F.col z ≠ a ∧ F.col z ≠ b := by
+  set φ₀ := arg (x - y) with hφ₀
+  have hx0 : ringPt y φ₀ = x := ringPt_arg_sub hxy
+  set t₂ := min (t₀ / 2) (ε / 2) with ht₂
+  have ht₂0 : 0 < t₂ := lt_min (by linarith) (by linarith)
+  set t₁ := t₂ / 2 with ht₁
+  -- the closed arc `{φ₀ + σ t : t ∈ [t₁, t₂]}`, in `A ∩ B(x, ε)`
+  have hpt : ∀ t ∈ Icc t₁ t₂, ringPt y (φ₀ + σ * t) ∈ ball x ε ∩ A := by
+    intro t ht
+    refine ⟨?_, hhalf t ⟨by linarith [ht.1], by linarith [ht.2, min_le_left (t₀ / 2) (ε / 2)]⟩⟩
+    rw [mem_ball, ← hx0]
+    refine (dist_ringPt_ringPt_le y _ _).trans_lt ?_
+    have : |φ₀ + σ * t - φ₀| = t := by
+      rcases hσ with rfl | rfl <;> simp [abs_of_pos (show 0 < t by linarith [ht.1])]
+    rw [this]; linarith [ht.2, min_le_right (t₀ / 2) (ε / 2)]
+  -- the arc as `ringArc y θ₁ θ₂`
+  obtain ⟨θ₁, θ₂, h12, harc⟩ : ∃ θ₁ θ₂, θ₁ < θ₂ ∧ ∀ θ ∈ Icc θ₁ θ₂, ringPt y θ ∈ ball x ε ∩ A := by
+    rcases hσ with rfl | rfl
+    · refine ⟨φ₀ + t₁, φ₀ + t₂, by linarith, fun θ hθ => ?_⟩
+      have := hpt (θ - φ₀) ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+      rwa [show φ₀ + 1 * (θ - φ₀) = θ by ring] at this
+    · refine ⟨φ₀ - t₂, φ₀ - t₁, by linarith, fun θ hθ => ?_⟩
+      have := hpt (φ₀ - θ) ⟨by linarith [hθ.2], by linarith [hθ.1]⟩
+      rwa [show φ₀ + -1 * (φ₀ - θ) = θ by ring] at this
+  by_cases hΓ : ringArc y θ₁ θ₂ ⊆ F.Γ
+  · obtain ⟨α, β, c, c', hα, hαβ, hβ, hR⟩ := exists_isRingArc_of_subset_Γ h12 hΓ
+    set m := (α + β) / 2 with hm
+    have hmI : m ∈ Ioo α β := ⟨by linarith, by linarith⟩
+    have hmA := harc m ⟨by linarith, by linarith⟩
+    have hopen : IsOpen (ball x ε ∩ A) := isOpen_ball.inter hA
+    -- a side colour has points of its class in `B(x, ε) ∩ A`
+    have hnear : ∀ j, ringPt y m ∈ closure (F.region j) → ∃ z ∈ F.interiorPts ∩ ball x ε ∩ A, F.col z = j := by
+      intro j hj
+      obtain ⟨z, hzO, hz⟩ := mem_closure_iff.mp hj _ hopen hmA
+      exact ⟨z, ⟨⟨hz.1, hzO.1⟩, hzO.2⟩, hz.2⟩
+    have hc : ringPt y m ∈ closure (F.region c) := by
+      have : c ∈ F.innerColours y (ringPt y m) := by rw [(hR.2.2 m hmI).1]; rfl
+      exact closure_mono inter_subset_left this
+    have hc' : ringPt y m ∈ closure (F.region c') := by
+      have : c' ∈ F.outerColours y (ringPt y m) := by rw [(hR.2.2 m hmI).2]; rfl
+      exact closure_mono sdiff_subset this
+    by_cases hcab : (c = a ∨ c = b) ∧ (c' = a ∨ c' = b)
+    · left
+      refine ⟨α, β, c, c', hR, ?_, ?_⟩
+      · rcases hcab.1 with rfl | rfl <;> assumption
+      · rcases hcab.2 with rfl | rfl <;> assumption
+    · right
+      rw [not_and_or] at hcab
+      rcases hcab with h | h
+      · obtain ⟨z, hz, hzc⟩ := hnear c hc
+        push Not at h
+        exact ⟨z, hz, hzc ▸ h.1, hzc ▸ h.2⟩
+      · obtain ⟨z, hz, hzc⟩ := hnear c' hc'
+        push Not at h
+        exact ⟨z, hz, hzc ▸ h.1, hzc ▸ h.2⟩
+  · right
+    obtain ⟨_, ⟨θ, hθ, rfl⟩, hnot⟩ := not_subset.mp hΓ
+    have hmem := harc θ hθ
+    have hI : ringPt y θ ∈ F.interiorPts := ⟨hdom hmem.1, fun h => hnot ⟨hdom hmem.1, h⟩⟩
+    refine ⟨ringPt y θ, ⟨⟨hI, hmem.1⟩, hmem.2⟩, fun h => ?_, fun h => ?_⟩
+    · exact ne1_region hF hay ⟨hI, h⟩ (dist_ringPt y θ)
+    · exact ne1_region hF hby ⟨hI, h⟩ (dist_ringPt y θ)
+
+end ArcMap
+
+/-! ## Moving a unit pair along two unit circles (children of FS112-N3-PAIRS (i), FS131-I4l) -/
+
+/-- **Two points at unit distance from `u` and from each other, the second at distance `2` from `u`**: the first is the midpoint
+(child of N3-I; Apollonius: `|x − (u + y)/2|² = |x − u|²/2 + |x − y|²/2 − |u − y|²/4 = 0`). -/
+theorem eq_midpoint_of_dist {u x y : ℂ} (hx : dist x u = 1) (hxy : dist x y = 1) (hy : dist y u = 2) : x = (u + y) / 2 := by
+  have hsq : ∀ z w : ℂ, dist z w ^ 2 = (z.re - w.re) ^ 2 + (z.im - w.im) ^ 2 := by
+    intro z w; rw [Complex.dist_eq, Complex.sq_norm, Complex.normSq_apply]; simp only [Complex.sub_re, Complex.sub_im]; ring
+  have e1 := hsq x u
+  have e2 := hsq x y
+  have e3 := hsq y u
+  rw [hx] at e1; rw [hxy] at e2; rw [hy] at e3
+  have h0 : (x.re - (u.re + y.re) / 2) ^ 2 + (x.im - (u.im + y.im) / 2) ^ 2 = 0 := by
+    linear_combination (-(1 : ℝ) / 2) * e1 + (-(1 : ℝ) / 2) * e2 + (1 / 4 : ℝ) * e3
+  have hre : x.re - (u.re + y.re) / 2 = 0 := by
+    nlinarith [sq_nonneg (x.re - (u.re + y.re) / 2), sq_nonneg (x.im - (u.im + y.im) / 2)]
+  have him : x.im - (u.im + y.im) / 2 = 0 := by
+    nlinarith [sq_nonneg (x.re - (u.re + y.re) / 2), sq_nonneg (x.im - (u.im + y.im) / 2)]
+  apply Complex.ext
+  · simp only [Complex.div_ofNat_re, Complex.add_re]; linarith
+  · simp only [Complex.div_ofNat_im, Complex.add_im]; linarith
+
+/-- **A unit circle meets a circle of radius `1/2` in finitely many points** (child of N3-I; wave 3's
+`Arc.finite_inter_sphere_or_eq_circ` on the whole circle of radius `1/2`, which is no arc of a unit circle). -/
+theorem finite_sphere_inter_sphere_half (u m : ℂ) : {z | dist z u = 1 ∧ dist z m = 1 / 2}.Finite := by
+  have hπ := Real.pi_pos
+  rcases Arc.finite_inter_sphere_or_eq_circ (Arc.circ m (1 / 2) (-π) π) ⟨by norm_num, by linarith, by linarith⟩ u with
+    h | ⟨θ₀, θ₁, h⟩
+  · refine h.subset ?_
+    rintro z ⟨hzu, hzm⟩
+    refine ⟨⟨arg (z - m), ⟨(neg_pi_lt_arg _).le, arg_le_pi _⟩, ?_⟩, by rw [mem_sphere]; exact hzu⟩
+    have h := eq_polar_arg (z - m)
+    rw [← dist_eq_norm, hzm] at h
+    show m + ((1 / 2 : ℝ) : ℂ) * e (arg (z - m)) = z
+    linear_combination -h
+  · injection h with h1 h2
+    norm_num at h2
+
+/-- **A point of an open interval whose ring point avoids a countable set** (child of N3-I: the angles of the set's points are
+countably many, `countable_ringPt_preimage`, and an open interval has positive length). -/
+theorem exists_mem_Ioo_ringPt_not_mem {B : Set ℂ} (hB : B.Countable) (p : ℂ) {a b : ℝ} (hab : a < b) :
+    ∃ θ ∈ Ioo a b, ringPt p θ ∉ B := by
+  by_contra hno
+  push Not at hno
+  have hS : (ringPt p ⁻¹' B).Countable := by
+    have : ringPt p ⁻¹' B = ⋃ c ∈ B, ringPt p ⁻¹' {c} := by ext θ; simp
+    rw [this]; exact hB.biUnion fun c _ => ArcMap.countable_ringPt_preimage p c
+  have h0 := (hS.mono fun θ hθ => hno θ hθ).measure_zero MeasureTheory.volume
+  rw [Real.volume_Ioo, ENNReal.ofReal_eq_zero] at h0
+  linarith
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- **Near a point of `ω(u)` whose pseudo-colour is `{a}`, every point of `ω(u)` lies in the closure of `a`'s class** (child of N3-I):
+an interior point of `ω(u)` near `y` has a colour of `y` that `u` does not carry (N-E1 at `u`), so `a`; an arc of `Γ` on `ω(u)` near `y`
+holds a ring arc with constant sides (`exists_isRingArc_of_subset_Γ`) whose side colours are colours of `y`, both carried at `u` only if
+the arc is both-kind (NOBOTH: then `u` would not be cubic trichromatic), so one is `a`. The points of `ω(u)` near `y` in the closure
+are dense there, and the closure is closed. -/
+theorem mem_closure_region_of_pseudo (hF : F.Valid) {u y : ℂ} (hu : F.IsCubicTrichromatic u) (hc : F.Covers u 1)
+    (hy : dist y u = 1) {a : Fin k} (hay : F.pseudoColours u y = {a}) :
+    ∃ r > 0, ∀ y', dist y' u = 1 → dist y' y < r → y' ∈ closure (F.region a) := by
+  have hud : u ∈ F.dom := hc (mem_closedBall_self zero_le_one)
+  have hyd : y ∈ F.dom := hc (by rw [mem_closedBall, hy])
+  obtain ⟨r, hr, hrdom, hrcol⟩ := F.exists_ball_col_mem_coloursAt hyd
+  have hmem : ∀ c, c ∈ F.pseudoColours u y ↔ c = a := fun c => by rw [hay]; rfl
+  -- a colour not carried at `u` at a point near `y` is `a`
+  have hnear : ∀ z ∈ ball y r, ∀ c ∈ F.coloursAt z, c ∉ F.coloursAt u → c = a := by
+    intro z hz c hcz hcu
+    obtain ⟨w, hwball, hwreg⟩ := mem_closure_iff.mp hcz (ball y r) isOpen_ball hz
+    have hcy : c ∈ F.coloursAt y := by
+      have := hrcol w ⟨hwreg.1, hwball⟩
+      rwa [hwreg.2] at this
+    exact (hmem c).mp ⟨hcy, hcu⟩
+  have hnot : ¬ (4 ≤ (F.coloursAt u).ncard ∨ F.HasRepeatedColour u) := by
+    rintro (h | h)
+    · rw [hu.2] at h; norm_num at h
+    · exact hu.not_hasRepeatedColour hud h
+  -- every closed sub-arc of `ω(u)` near `y` meets the closure of `a`'s class
+  have harc : ∀ θ₁ θ₂, θ₁ < θ₂ → ringArc u θ₁ θ₂ ⊆ ball y r →
+      ∃ θ ∈ Icc θ₁ θ₂, ringPt u θ ∈ closure (F.region a) := by
+    intro θ₁ θ₂ h12 hsub
+    by_cases hΓ : ringArc u θ₁ θ₂ ⊆ F.Γ
+    · obtain ⟨α, β, c, c', hα, hαβ, hβ, hR⟩ := exists_isRingArc_of_subset_Γ h12 hΓ
+      set m := (α + β) / 2 with hm
+      have hmI : m ∈ Ioo α β := ⟨by linarith, by linarith⟩
+      have hmb : ringPt u m ∈ ball y r := hsub ⟨m, ⟨by linarith, by linarith⟩, rfl⟩
+      have hc0 : c ∈ F.coloursAt (ringPt u m) := by
+        have : c ∈ F.innerColours u (ringPt u m) := by rw [(hR.2.2 m hmI).1]; rfl
+        exact closure_mono inter_subset_left this
+      have hc0' : c' ∈ F.coloursAt (ringPt u m) := by
+        have : c' ∈ F.outerColours u (ringPt u m) := by rw [(hR.2.2 m hmI).2]; rfl
+        exact closure_mono sdiff_subset this
+      refine ⟨m, ⟨by linarith, by linarith⟩, ?_⟩
+      by_cases hcu : c ∈ F.coloursAt u
+      · by_cases hcu' : c' ∈ F.coloursAt u
+        · exact absurd (noBoth hF hud ⟨c, c', hR, hcu, hcu'⟩) hnot
+        · rw [← hnear _ hmb c' hc0' hcu']; exact hc0'
+      · rw [← hnear _ hmb c hc0 hcu]; exact hc0
+    · obtain ⟨_, ⟨θ, hθ, rfl⟩, hnotΓ⟩ := not_subset.mp hΓ
+      have hb := hsub ⟨θ, hθ, rfl⟩
+      have hI : ringPt u θ ∈ F.interiorPts := ⟨hrdom hb, fun h => hnotΓ ⟨hrdom hb, h⟩⟩
+      refine ⟨θ, hθ, subset_closure ⟨hI, ?_⟩⟩
+      have hcu : F.col (ringPt u θ) ∉ F.coloursAt u := fun h =>
+        ne1_region hF h ⟨hI, rfl⟩ (dist_ringPt u θ)
+      exact hnear _ hb _ (subset_closure ⟨hI, rfl⟩) hcu
+  refine ⟨r, hr, fun y' hy' hyr => ?_⟩
+  rw [← closure_closure, Metric.mem_closure_iff]
+  intro ε hε
+  have hy'eq : ringPt u (arg (y' - u)) = y' := ringPt_arg_sub hy'
+  set θ' := arg (y' - u) with hθ'
+  set δ := min (ε / 2) ((r - dist y' y) / 2) with hδ
+  have hδ0 : 0 < δ := lt_min (by linarith) (by linarith)
+  have hδ1 := min_le_left (ε / 2) ((r - dist y' y) / 2)
+  have hδ2 := min_le_right (ε / 2) ((r - dist y' y) / 2)
+  have hsub : ringArc u θ' (θ' + δ) ⊆ ball y r := by
+    rintro _ ⟨φ, hφ, rfl⟩
+    rw [mem_ball]
+    have h1 := dist_ringPt_ringPt_le u φ θ'
+    rw [hy'eq] at h1
+    have h2 : |φ - θ'| ≤ δ := by rw [abs_le]; constructor <;> linarith [hφ.1, hφ.2]
+    have := dist_triangle (ringPt u φ) y' y
+    linarith
+  obtain ⟨θ, hθ, hcl⟩ := harc θ' (θ' + δ) (by linarith) hsub
+  refine ⟨ringPt u θ, hcl, ?_⟩
+  have h1 := dist_ringPt_ringPt_le u θ' θ
+  rw [hy'eq] at h1
+  have h2 : |θ' - θ| ≤ δ := by rw [abs_le]; constructor <;> linarith [hθ.1, hθ.2]
+  linarith
+
+/-- **The strip fails at finitely many points of `ω(u)`** (child of N3-I): at a cubic trichromatic `u`, a point `q ∈ ω(u)` where the
+strip fails is `u + I κ e(β)` for a germ `(β, κ)` of the chart at `u` with `κ = ±1` — four radii and three germs give one germ with
+branch points on `ω(q)` at two radii (`exists_branch_on_circle_of_not_stripHolds`), and then `e β = I κ (u − q)`
+(`germ_eq_of_two_on_circle`). -/
+theorem finite_not_stripHolds (hF : F.Valid) {u : ℂ} (hu : F.IsCubicTrichromatic u) (hc : F.Covers u 1) :
+    {q | dist q u = 1 ∧ ¬ F.StripHolds u q}.Finite := by
+  have hud : u ∈ F.dom := hc (mem_closedBall_self zero_le_one)
+  obtain ⟨r₀, G, hC, hdisj, f, -, hsec, hcol⟩ := hu.chart hud
+  have hord := G.dir_lt_nextDir hC.sorted hC.curv hdisj
+  have hr0 := hC.pos
+  refine (Set.finite_range fun g : Fin 3 => u + I * (G.κ g : ℂ) * e (G.β g)).subset ?_
+  rintro q ⟨hq, hs⟩
+  have hrad : ∀ m : Fin 4, r₀ * ((m : ℝ) + 1) / 5 ∈ Ioo 0 r₀ := fun m => by
+    have hm : (m : ℝ) ≤ 3 := by exact_mod_cast Nat.lt_succ_iff.mp m.isLt
+    refine ⟨by positivity, ?_⟩
+    rw [div_lt_iff₀ (by norm_num)]; nlinarith
+  choose l hl using fun m : Fin 4 => exists_branch_on_circle_of_not_stripHolds hF hC hord hsec hcol hs (hrad m)
+  obtain ⟨m₁, m₂, hm, hlm⟩ := Fintype.exists_ne_map_eq_of_card_lt l (by simp)
+  set k₀ := l m₁ with hk₀
+  have hcurv : ∀ s ∈ Ioo 0 r₀, |G.κ k₀| * s ≤ 2 := fun s hs' =>
+    (mul_le_mul_of_nonneg_left hs'.2.le (abs_nonneg _)).trans (hC.curv k₀).le
+  have hs12 : r₀ * ((m₁ : ℝ) + 1) / 5 ≠ r₀ * ((m₂ : ℝ) + 1) / 5 := by
+    intro h
+    have h' : r₀ * ((m₁ : ℝ) + 1) = r₀ * ((m₂ : ℝ) + 1) := by linarith
+    have h'' := mul_left_cancel₀ hr0.ne' h'
+    apply hm; ext; exact_mod_cast (by linarith : (m₁ : ℝ) = m₂)
+  have hl2 := hl m₂
+  rw [← hlm] at hl2
+  have huq : dist u q = 1 := by rw [dist_comm]; exact hq
+  obtain ⟨hσ, hβ⟩ := germ_eq_of_two_on_circle huq (hrad m₁).1 (hrad m₂).1 hs12 (hcurv _ (hrad m₁)) (hcurv _ (hrad m₂))
+    (hl m₁) hl2
+  refine ⟨k₀, ?_⟩
+  have hκ : ((G.κ k₀ : ℝ) : ℂ) ^ 2 = 1 := by rcases hσ with h | h <;> rw [h] <;> norm_num
+  show u + I * (G.κ k₀ : ℂ) * e (G.β k₀) = q
+  rw [hβ]
+  linear_combination (u - q) * ((G.κ k₀ : ℝ) : ℂ) ^ 2 * Complex.I_sq - (u - q) * hκ
+
+/-- **N3-I where `ω(x)` crosses `ω(u₂)` transversally at `y`** (child of FS112-N3-PAIRS (i), `|x − u₂| ≠ 2`). Move `x` to a nearby
+`x′ ∈ ω(u₁)` where the strip holds and whose partner cannot be tangent (the bad points are finitely many:
+`finite_not_stripHolds`, `finite_sphere_inter_sphere_half`); the intermediate value theorem along `ω(u₂)` near `y` gives `y′` with
+`|x′ − y′| = 1`, in the closure of `a`'s class (`mem_closure_region_of_pseudo`). On the strip's side of `ω(u₁)` near `x′` every interior
+point has colour `a`, so that side is an open set inside the closure of `a`'s class, and `ω(y′)`, transversal at `x′`, enters it at a
+point at distance exactly `1` from `y′` (`Valid.dist_ne_one_of_isOpen_subset_closure`). -/
+theorem pair_i_of_transversal (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromatic u₁) (h₂ : F.IsCubicTrichromatic u₂)
+    (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1) (hx : dist x u₁ = 1) (hy : dist y u₂ = 1) (hxy : dist x y = 1) {a : Fin k}
+    (hax : F.pseudoColours u₁ x = {a}) (hay : F.pseudoColours u₂ y = {a}) (htx : dist x u₂ ≠ 2) : False := by
+  have hmemx : ∀ c, c ∈ F.pseudoColours u₁ x ↔ c = a := fun c => by rw [hax]; rfl
+  have hmemy : ∀ c, c ∈ F.pseudoColours u₂ y ↔ c = a := fun c => by rw [hay]; rfl
+  have hax' := (hmemx a).mpr rfl
+  have hay' := (hmemy a).mpr rfl
+  -- `y ≠ u₁` and `x ≠ u₂`: `a` is carried at `y` and at `x`, at neither centre
+  have hyu₁ : y ≠ u₁ := by rintro rfl; exact hax'.2 hay'.1
+  have hxu₂ : x ≠ u₂ := by rintro rfl; exact hay'.2 hax'.1
+  have hxd : x ∈ F.dom := hc₁ (by rw [mem_closedBall, hx])
+  obtain ⟨r₁, hr₁, hr₁dom, hr₁col⟩ := F.exists_ball_col_mem_coloursAt hxd
+  have hcolA : ∀ z ∈ F.interiorPts ∩ ball x r₁, F.col z ∉ F.coloursAt u₁ → F.col z = a := fun z hz hzu =>
+    (hmemx _).mp ⟨hr₁col z hz, hzu⟩
+  obtain ⟨r₂, hr₂, hr₂cl⟩ := mem_closure_region_of_pseudo hF h₂ hc₂ hy hay
+  -- `ω(x)` crosses `ω(u₂)` transversally at `y`
+  have hyx : dist y x = 1 := by rw [dist_comm]; exact hxy
+  obtain ⟨σ, hσ, t₀, ht₀, hside⟩ := exists_side_germs_of_transversal hyx hy (Ne.symm hxu₂) (by rwa [dist_comm])
+  have hy0 : ringPt u₂ (arg (y - u₂)) = y := ringPt_arg_sub hy
+  set φ₀ := arg (y - u₂) with hφ₀
+  have hdyu : 0 < dist y u₁ := dist_pos.mpr hyu₁
+  set t₁ := min (t₀ / 2) (min (r₂ / 2) (dist y u₁ / 2)) with ht₁
+  have hm1 := min_le_left (t₀ / 2) (min (r₂ / 2) (dist y u₁ / 2))
+  have hm2 := min_le_right (t₀ / 2) (min (r₂ / 2) (dist y u₁ / 2))
+  have hm3 := min_le_left (r₂ / 2) (dist y u₁ / 2)
+  have hm4 := min_le_right (r₂ / 2) (dist y u₁ / 2)
+  have ht₁0 : 0 < t₁ := lt_min (by linarith) (lt_min (by linarith) (by linarith))
+  obtain ⟨hplus0, hminus0⟩ := hside t₁ ⟨ht₁0, by linarith⟩
+  set dP := dist (ringPt u₂ (φ₀ + σ * t₁)) x with hdP
+  set dM := dist (ringPt u₂ (φ₀ - σ * t₁)) x with hdM
+  set η := min (min ((1 - dP) / 2) ((dM - 1) / 2)) (r₁ / 2) with hη
+  have hη1 := min_le_left (min ((1 - dP) / 2) ((dM - 1) / 2)) (r₁ / 2)
+  have hη2 := min_le_right (min ((1 - dP) / 2) ((dM - 1) / 2)) (r₁ / 2)
+  have hη3 := min_le_left ((1 - dP) / 2) ((dM - 1) / 2)
+  have hη4 := min_le_right ((1 - dP) / 2) ((dM - 1) / 2)
+  have hη0 : 0 < η := lt_min (lt_min (by linarith) (by linarith)) (by linarith)
+  have hx0 : ringPt u₁ (arg (x - u₁)) = x := ringPt_arg_sub hx
+  set θ₀ := arg (x - u₁) with hθ₀
+  -- the bad points of `ω(u₁)`: where the strip fails, and where a partner on `ω(u₂)` would be tangent
+  set B : Set ℂ := {q | dist q u₁ = 1 ∧ ¬ F.StripHolds u₁ q} ∪ {z | dist z u₁ = 1 ∧ dist z ((u₁ + u₂) / 2) = 1 / 2} with hB
+  have hBc : B.Countable :=
+    ((finite_not_stripHolds hF h₁ hc₁).union (finite_sphere_inter_sphere_half u₁ ((u₁ + u₂) / 2))).countable
+  obtain ⟨θ, hθ, hθB⟩ := exists_mem_Ioo_ringPt_not_mem hBc u₁ (show θ₀ - η < θ₀ + η by linarith)
+  have hx'u : dist (ringPt u₁ θ) u₁ = 1 := dist_ringPt u₁ θ
+  have hx'x : dist (ringPt u₁ θ) x < η := by
+    have h1 := dist_ringPt_ringPt_le u₁ θ θ₀
+    rw [hx0] at h1
+    have : |θ - θ₀| < η := by rw [abs_lt]; constructor <;> linarith [hθ.1, hθ.2]
+    linarith
+  set x' := ringPt u₁ θ with hx'
+  -- the partner `y'` on `ω(u₂)` near `y`, by the intermediate value theorem
+  have hcont : Continuous fun t : ℝ => dist (ringPt u₂ (φ₀ + σ * t)) x' := by
+    unfold ringPt e; fun_prop
+  have hplus : dist (ringPt u₂ (φ₀ + σ * t₁)) x' < 1 := by
+    have := dist_triangle (ringPt u₂ (φ₀ + σ * t₁)) x x'
+    rw [dist_comm x x'] at this
+    linarith
+  have hminus : 1 < dist (ringPt u₂ (φ₀ + σ * -t₁)) x' := by
+    have := dist_triangle (ringPt u₂ (φ₀ - σ * t₁)) x' x
+    rw [show φ₀ + σ * -t₁ = φ₀ - σ * t₁ by ring]
+    linarith
+  obtain ⟨t, htI, ht⟩ : ∃ t ∈ Icc (-t₁) t₁, dist (ringPt u₂ (φ₀ + σ * t)) x' = 1 :=
+    intermediate_value_Icc' (show -t₁ ≤ t₁ by linarith) hcont.continuousOn ⟨hplus.le, hminus.le⟩
+  have hy'u : dist (ringPt u₂ (φ₀ + σ * t)) u₂ = 1 := dist_ringPt u₂ _
+  have hy'y : dist (ringPt u₂ (φ₀ + σ * t)) y ≤ t₁ := by
+    have h1 := dist_ringPt_ringPt_le u₂ (φ₀ + σ * t) φ₀
+    rw [hy0] at h1
+    have h2 : |φ₀ + σ * t - φ₀| ≤ t₁ := by
+      rw [show φ₀ + σ * t - φ₀ = σ * t by ring, abs_mul]
+      have : |σ| = 1 := by rcases hσ with rfl | rfl <;> norm_num
+      rw [this, one_mul, abs_le]; exact ⟨htI.1, htI.2⟩
+    linarith
+  set y' := ringPt u₂ (φ₀ + σ * t) with hy'
+  have hy'cl : y' ∈ closure (F.region a) := hr₂cl y' hy'u (by linarith)
+  have hy'u₁ : y' ≠ u₁ := by
+    intro h
+    rw [h, dist_comm] at hy'y
+    linarith
+  have hx'y' : dist x' y' = 1 := by rw [dist_comm]; exact ht
+  have hy'2 : dist y' u₁ ≠ 2 := by
+    intro h2
+    apply hθB
+    right
+    refine ⟨hx'u, ?_⟩
+    have hmid := eq_midpoint_of_dist hx'u hx'y' h2
+    show dist x' ((u₁ + u₂) / 2) = 1 / 2
+    rw [hmid, dist_eq_norm, show (u₁ + y') / 2 - (u₁ + u₂) / 2 = (y' - u₂) / 2 by ring, norm_div, ← dist_eq_norm, hy'u]
+    norm_num
+  have hstrip : F.StripHolds u₁ x' := by
+    by_contra hns
+    exact hθB (Or.inl ⟨hx'u, hns⟩)
+  -- the strip at `x'`: one side of `ω(u₁)` near `x'` has only `a`
+  obtain ⟨ε, hε, hS⟩ := hstrip
+  set ε' := min ε (r₁ / 2) with hε'
+  have hε'1 := min_le_left ε (r₁ / 2)
+  have hε'2 := min_le_right ε (r₁ / 2)
+  have hε'0 : 0 < ε' := lt_min hε (by linarith)
+  have hballx : ball x' ε' ⊆ ball x r₁ := by
+    intro z hz
+    rw [mem_ball] at hz ⊢
+    have := dist_triangle z x' x
+    linarith
+  -- `ω(y')` crosses `ω(u₁)` transversally at `x'`
+  obtain ⟨σ', hσ', t₀', ht₀', hside'⟩ := exists_side_germs_of_transversal hx'u hx'y' hy'u₁ hy'2
+  have hx'0 : ringPt y' (arg (x' - y')) = x' := ringPt_arg_sub hx'y'
+  set ψ := arg (x' - y') with hψ
+  set τ := min (t₀' / 2) (ε' / 2) with hτ
+  have hτ1 := min_le_left (t₀' / 2) (ε' / 2)
+  have hτ2 := min_le_right (t₀' / 2) (ε' / 2)
+  have hτ0 : 0 < τ := lt_min (by linarith) (by linarith)
+  obtain ⟨hin', hout'⟩ := hside' τ ⟨hτ0, by linarith⟩
+  have hσ'abs : |σ'| = 1 := by rcases hσ' with rfl | rfl <;> norm_num
+  have hnear : ∀ s : ℝ, |s| ≤ τ → ringPt y' (ψ + s) ∈ ball x' ε' := by
+    intro s hs
+    rw [mem_ball]
+    have h1 := dist_ringPt_ringPt_le y' (ψ + s) ψ
+    rw [hx'0, show ψ + s - ψ = s by ring] at h1
+    linarith
+  -- an open side inside the closure of `a`'s class holds no point at distance `1` from `y'`
+  have key : ∀ O : Set ℂ, IsOpen O → O ⊆ ball x' ε' → (∀ z ∈ F.interiorPts ∩ O, F.col z ∉ F.coloursAt u₁) →
+      ∀ m ∈ O, dist m y' = 1 → False := by
+    intro O hO hOsub hOcol m hm hmy
+    have hOd : O ⊆ closure (F.region a) := by
+      intro z hz
+      have hzd : z ∈ F.dom := hr₁dom (hballx (hOsub hz))
+      refine closure_mono ?_ (hO.inter_closure ⟨hz, F.dense_interiorPts hzd⟩)
+      rintro w ⟨hwO, hwI⟩
+      exact ⟨hwI, hcolA w ⟨hwI, hballx (hOsub hwO)⟩ (hOcol w ⟨hwI, hwO⟩)⟩
+    exact hF.dist_ne_one_of_isOpen_subset_closure hy'cl hO hOd hm (by rw [dist_comm]; exact hmy)
+  rcases hS with hin | hout
+  · refine key (ball x' ε' ∩ ball u₁ 1) (isOpen_ball.inter isOpen_ball) inter_subset_left ?_ (ringPt y' (ψ + σ' * τ))
+      ⟨hnear _ (by rw [abs_mul, hσ'abs, one_mul, abs_of_pos hτ0]), by rw [mem_ball]; exact hin'⟩ (dist_ringPt _ _)
+    rintro z ⟨hzI, hzb, hzu⟩
+    exact hin z ⟨⟨hzI, ball_subset_ball hε'1 hzb⟩, hzu⟩
+  · refine key (ball x' ε' \ closedBall u₁ 1) (isOpen_ball.sdiff isClosed_closedBall) sdiff_subset ?_
+      (ringPt y' (ψ - σ' * τ))
+      ⟨by rw [sub_eq_add_neg]; exact hnear _ (by rw [abs_neg, abs_mul, hσ'abs, one_mul, abs_of_pos hτ0]), ?_⟩
+      (dist_ringPt _ _)
+    · rintro z ⟨hzI, hzb, hzu⟩
+      exact hout z ⟨⟨hzI, ball_subset_ball hε'1 hzb⟩, hzu⟩
+    · rw [mem_closedBall, not_le]; exact hout'
+
 /-! ## FS112-N3-PAIRS -/
 
-/-- **FS112-N3-PAIRS** (i), N3-I (CB's (i) never fails): for cubic trichromatic `u₁`, `u₂` and a unit pair `x ∈ ω(u₁)`,
-`y ∈ ω(u₂)`, the pseudo-colours `c′(x) = c′(y) = {a}` are impossible (no transversality hypothesis; `u₁ = u₂` allowed). Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
+/-- **FS112-N3-PAIRS** (i), N3-I (CB's (i) never fails): for cubic trichromatic `u₁`, `u₂` at distance below `3` and a unit pair
+`x ∈ ω(u₁)`, `y ∈ ω(u₂)`, the pseudo-colours `c′(x) = c′(y) = {a}` are impossible (`u₁ = u₂` allowed). The hypothesis `h3 : dist u₁ u₂ < 3`
+(inventory item 258) excludes exactly the isolated unit pair — `u₁, x, y, u₂` collinear at spacing `1`, where N3-I's perturbation has no
+nearby pair to move to (FS131-I4k, item 257); beyond `3` there is no unit pair. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
 theorem pair_i (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromatic u₁) (h₂ : F.IsCubicTrichromatic u₂)
-    (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1) (hx : dist x u₁ = 1) (hy : dist y u₂ = 1) (hxy : dist x y = 1) {a : Fin k}
+    (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1) (h3 : dist u₁ u₂ < 3) (hx : dist x u₁ = 1) (hy : dist y u₂ = 1) (hxy : dist x y = 1) {a : Fin k}
     (hax : F.pseudoColours u₁ x = {a}) (hay : F.pseudoColours u₂ y = {a}) : False := by
-  sorry
+  by_cases htx : dist x u₂ = 2
+  · -- then `y` is the midpoint of `x` and `u₂`, so `ω(y)` crosses `ω(u₁)` transversally unless `|u₁ − u₂| = 3`
+    have hty : dist y u₁ ≠ 2 := by
+      intro hty
+      have hm1 := eq_midpoint_of_dist hx hxy hty
+      have hm2 := eq_midpoint_of_dist hy (by rw [dist_comm]; exact hxy) htx
+      have : u₂ - u₁ = 3 * (y - x) := by
+        have e1 : 2 * x = u₁ + y := by rw [hm1]; ring
+        have e2 : 2 * y = u₂ + x := by rw [hm2]; ring
+        linear_combination e1 - e2
+      have h3' : dist u₁ u₂ = 3 := by
+        rw [dist_comm, dist_eq_norm, this, norm_mul, ← dist_eq_norm, dist_comm, hxy]; norm_num
+      linarith
+    exact pair_i_of_transversal hF h₂ h₁ hc₂ hc₁ hy hx (by rw [dist_comm]; exact hxy) hay hax hty
+  · exact pair_i_of_transversal hF h₁ h₂ hc₁ hc₂ hx hy hxy hax hay htx
 
 /-- **FS112-N3-PAIRS** (ii), N3-II: for a unit pair `x ∈ ω(u₁)`, `y ∈ ω(u₂)` with `c′(x) = c′(y) = {a, b}` and `ω(y)` transversal
 to `ω(u₁)` at `x` (`y ≠ u₁`, `|y − u₁| ≠ 2`), `x` carries at least four colours or `y` is the centre of a both-kind unit arc. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
-theorem pair_ii (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromatic u₁) (h₂ : F.IsCubicTrichromatic u₂)
-    (hc₁ : F.Covers u₁ 1) (hc₂ : F.Covers u₂ 1) (hx : dist x u₁ = 1) (hy : dist y u₂ = 1) (hxy : dist x y = 1)
+theorem pair_ii (hF : F.Valid) {u₁ u₂ x y : ℂ} (h₁ : F.IsCubicTrichromatic u₁) (_h₂ : F.IsCubicTrichromatic u₂)
+    (hc₁ : F.Covers u₁ 1) (_hc₂ : F.Covers u₂ 1) (hx : dist x u₁ = 1) (_hy : dist y u₂ = 1) (hxy : dist x y = 1)
     (htr : y ≠ u₁ ∧ dist y u₁ ≠ 2) {a b : Fin k} (hab : a ≠ b) (hax : F.pseudoColours u₁ x = {a, b})
     (hay : F.pseudoColours u₂ y = {a, b}) :
     4 ≤ (F.coloursAt x).ncard ∨ ∃ θ₁ θ₂, F.BothKind y θ₁ θ₂ := by
-  sorry
+  classical
+  by_contra hno
+  rw [not_or] at hno
+  obtain ⟨h4, hboth⟩ := hno
+  have hmemx : ∀ c, c ∈ F.pseudoColours u₁ x ↔ c = a ∨ c = b := fun c => by rw [hax]; simp
+  have hmemy : ∀ c, c ∈ F.pseudoColours u₂ y ↔ c = a ∨ c = b := fun c => by rw [hay]; simp
+  have hay' : a ∈ F.coloursAt y := ((hmemy a).mpr (Or.inl rfl)).1
+  have hby' : b ∈ F.coloursAt y := ((hmemy b).mpr (Or.inr rfl)).1
+  have hax' := (hmemx a).mpr (Or.inl rfl)
+  have hbx' := (hmemx b).mpr (Or.inr rfl)
+  have hxd : x ∈ F.dom := hc₁ (by rw [mem_closedBall, hx])
+  obtain ⟨r, hr, hrdom, hrcol⟩ := F.exists_ball_col_mem_coloursAt hxd
+  -- a colour near `x` outside `{a, b}` is a colour of `u₁`
+  have hcu : ∀ z ∈ F.interiorPts ∩ ball x r, F.col z ≠ a → F.col z ≠ b → F.col z ∈ F.coloursAt u₁ := by
+    intro z hz hza hzb
+    by_contra hnot
+    rcases (hmemx _).mp ⟨hrcol z hz, hnot⟩ with h | h
+    · exact hza h
+    · exact hzb h
+  obtain ⟨σ, hσ, t₀, ht₀, hside⟩ := exists_side_germs_of_transversal hx hxy htr.1 htr.2
+  have hσ' : -σ = 1 ∨ -σ = -1 := by rcases hσ with rfl | rfl <;> norm_num
+  -- each side of `ω(u₁)` at `x` carries a colour of `u₁`
+  have hsideCol : ∀ (A : Set ℂ), IsOpen A → ∀ τ, (τ = 1 ∨ τ = -1) →
+      (∀ t ∈ Ioo 0 t₀, ringPt y (arg (x - y) + τ * t) ∈ A) → ∃ d ∈ F.coloursAt u₁, x ∈ closure (F.region d ∩ A) := by
+    intro A hA τ hτ hhalf
+    apply exists_colour_near
+    intro ε hε
+    rcases half_colour_or_bothKind hF hxy hay' hby' hA hτ ht₀ hhalf (lt_min hε hr)
+        ((ball_subset_ball (min_le_right _ _)).trans hrdom) with hb | ⟨z, ⟨⟨hzI, hzb⟩, hzA⟩, hza, hzb'⟩
+    · exact absurd hb hboth
+    · have hzr : z ∈ ball x r := ball_subset_ball (min_le_right _ _) hzb
+      exact ⟨z, ⟨⟨hzI, ball_subset_ball (min_le_left _ _) hzb⟩, hzA⟩, hcu z ⟨hzI, hzr⟩ hza hzb'⟩
+  obtain ⟨d₁, hd₁u, hd₁⟩ := hsideCol (ball u₁ 1) isOpen_ball σ hσ fun t ht => by
+    rw [mem_ball]; exact (hside t ht).1
+  obtain ⟨d₂, hd₂u, hd₂⟩ := hsideCol (closedBall u₁ 1)ᶜ isClosed_closedBall.isOpen_compl (-σ) hσ' fun t ht => by
+    rw [mem_compl_iff, mem_closedBall, not_le, show arg (x - y) + -σ * t = arg (x - y) - σ * t by ring]
+    exact (hside t ht).2
+  -- the two side colours differ: one sector cannot lie on both sides of `ω(x)`
+  have hd12 : d₁ ≠ d₂ := by
+    rintro rfl
+    obtain ⟨r₀, G, hC, -, f, -, hsec, hcol⟩ := h₁.chart (hc₁ (mem_closedBall_self zero_le_one))
+    obtain ⟨i, rfl⟩ := hcol d₁ hd₁u
+    have hin := (closure_sector_subset_of_side hF hC hsec i).1 hd₁
+    have hout := (closure_sector_subset_of_side hF hC hsec i).2 hd₂
+    have hsph : G.sector u₁ r₀ i ⊆ sphere x 1 := fun w hw => by
+      have h1 := hin (subset_closure hw)
+      have h2 : 1 ≤ dist w x := hout (subset_closure hw)
+      rw [mem_closedBall] at h1
+      exact le_antisymm h1 h2
+    have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+    have := (hC.isOpen r₀ hr₀ i).subset_interior_iff.mpr hsph
+    rw [interior_sphere x one_ne_zero] at this
+    obtain ⟨w, hw⟩ := hC.sector_nonempty hr₀ i
+    exact this hw
+  -- four colours at `x`
+  apply h4
+  have hsub : (({a, b, d₁, d₂} : Finset (Fin k)) : Set (Fin k)) ⊆ F.coloursAt x := by
+    intro c hc
+    simp only [Finset.coe_insert, Finset.coe_singleton, mem_insert_iff, mem_singleton_iff] at hc
+    rcases hc with rfl | rfl | rfl | rfl
+    · exact hax'.1
+    · exact hbx'.1
+    · exact closure_mono inter_subset_left hd₁
+    · exact closure_mono inter_subset_left hd₂
+  have hcard : ({a, b, d₁, d₂} : Finset (Fin k)).card = 4 := by
+    have ha1 : a ≠ d₁ := fun h => hax'.2 (h ▸ hd₁u)
+    have ha2 : a ≠ d₂ := fun h => hax'.2 (h ▸ hd₂u)
+    have hb1 : b ≠ d₁ := fun h => hbx'.2 (h ▸ hd₁u)
+    have hb2 : b ≠ d₂ := fun h => hbx'.2 (h ▸ hd₂u)
+    rw [Finset.card_insert_of_notMem (by simp [hab, ha1, ha2]), Finset.card_insert_of_notMem (by simp [hb1, hb2]),
+      Finset.card_insert_of_notMem (by simp [hd12]), Finset.card_singleton]
+  have := Set.ncard_le_ncard hsub (Set.toFinite _)
+  rwa [Set.ncard_coe_finset, hcard] at this
 
 /-- **FS112-N3-PAIRS**, N3-P′: two cubic trichromatic vertices with one multicolour are never at distance `1`. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
-theorem pair_P' (hF : F.Valid) {u u' : ℂ} (h : F.IsCubicTrichromatic u) (h' : F.IsCubicTrichromatic u') (hu : u ∈ F.dom)
+theorem pair_P' (hF : F.Valid) {u u' : ℂ} (_h : F.IsCubicTrichromatic u) (h' : F.IsCubicTrichromatic u') (hu : u ∈ F.dom)
     (hu' : u' ∈ F.dom) (hcol : F.coloursAt u = F.coloursAt u') : dist u u' ≠ 1 := by
-  sorry
+  intro hd
+  obtain ⟨r, hr, hrdom, hrcol⟩ := F.exists_ball_col_mem_coloursAt hu
+  set θu := arg (u - u') with hθu
+  have hu_eq : ringPt u' θu = u := ringPt_arg_sub hd
+  -- `ω(u')` near `u` lies in `Γ`: an interior point there would carry a colour of `u'` at distance `1` from it (N-E1)
+  have hnear : ∀ φ, |φ - θu| < r → ringPt u' φ ∈ ball u r := fun φ hφ => by
+    rw [mem_ball, ← hu_eq]; exact (dist_ringPt_ringPt_le u' φ θu).trans_lt hφ
+  have hΓ : ringArc u' θu (θu + r / 2) ⊆ F.Γ := by
+    rintro _ ⟨φ, hφ, rfl⟩
+    have hb := hnear φ (by rw [abs_lt]; constructor <;> linarith [hφ.1, hφ.2])
+    have hdom := hrdom hb
+    refine ⟨hdom, ?_⟩
+    by_contra hnot
+    have hI : ringPt u' φ ∈ F.interiorPts := ⟨hdom, hnot⟩
+    have hc := hrcol _ ⟨hI, hb⟩
+    rw [hcol] at hc
+    exact ne1_region hF hc ⟨hI, rfl⟩ (dist_ringPt u' φ)
+  obtain ⟨a, b, c, c', ha, hab, hb, hR⟩ := exists_isRingArc_of_subset_Γ (by linarith) hΓ
+  -- the side colours are colours of `u`, hence of `u'`
+  set m := (a + b) / 2 with hm
+  have hmI : m ∈ Ioo a b := ⟨by linarith, by linarith⟩
+  have hmb : dist (ringPt u' m) u < r / 2 + r / 4 := by
+    rw [← hu_eq]
+    have := dist_ringPt_ringPt_le u' m θu
+    have : |m - θu| ≤ r / 2 := abs_le.mpr ⟨by linarith, by linarith⟩
+    linarith
+  have hside : ∀ j, ringPt u' m ∈ closure (F.region j) → j ∈ F.coloursAt u' := by
+    intro j hj
+    obtain ⟨z, hz, hzd⟩ := Metric.mem_closure_iff.mp hj (r / 4) (by linarith)
+    have hzb : z ∈ ball u r := by
+      rw [mem_ball]; linarith [dist_triangle z (ringPt u' m) u, dist_comm z (ringPt u' m)]
+    have hzj : F.col z = j := hz.2
+    rw [← hcol, ← hzj]; exact hrcol z ⟨hz.1, hzb⟩
+  have hc : c ∈ F.coloursAt u' := by
+    have : c ∈ F.innerColours u' (ringPt u' m) := by rw [(hR.2.2 m hmI).1]; rfl
+    exact hside c (closure_mono inter_subset_left this)
+  have hc' : c' ∈ F.coloursAt u' := by
+    have : c' ∈ F.outerColours u' (ringPt u' m) := by rw [(hR.2.2 m hmI).2]; rfl
+    exact hside c' (closure_mono sdiff_subset this)
+  rcases noBoth hF hu' ⟨c, c', hR, hc, hc'⟩ with h4 | hrep
+  · rw [h'.2] at h4; norm_num at h4
+  · exact h'.not_hasRepeatedColour hu' hrep
 
 /-! ## FS112-N3-FAIL -/
 
@@ -207,7 +1432,33 @@ theorem pair_P' (hF : F.Valid) {u u' : ℂ} (h : F.IsCubicTrichromatic u) (h' : 
 `u`. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). -/
 theorem fail_leavingCentre (hF : F.Valid) {u q : ℂ} (hu : F.IsCubicTrichromatic u) (hc : F.Covers u 1) (hq : dist q u = 1)
     (hs : ¬ F.StripHolds u q) : F.IsLeavingCentre u q := by
-  sorry
+  have hud : u ∈ F.dom := hc (mem_closedBall_self zero_le_one)
+  obtain ⟨r₀, G, hC, hdisj, f, -, hsec, hcol⟩ := hu.chart hud
+  have hord := G.dir_lt_nextDir hC.sorted hC.curv hdisj
+  have hr0 := hC.pos
+  -- four radii, three germs: one germ has branch points on `ω(q)` at two radii
+  have hrad : ∀ m : Fin 4, r₀ * ((m : ℝ) + 1) / 5 ∈ Ioo 0 r₀ := fun m => by
+    have hm : (m : ℝ) ≤ 3 := by exact_mod_cast Nat.lt_succ_iff.mp m.isLt
+    refine ⟨by positivity, ?_⟩
+    rw [div_lt_iff₀ (by norm_num)]; nlinarith
+  choose l hl using fun m : Fin 4 => exists_branch_on_circle_of_not_stripHolds hF hC hord hsec hcol hs (hrad m)
+  obtain ⟨m₁, m₂, hm, hlm⟩ := Fintype.exists_ne_map_eq_of_card_lt l (by simp)
+  set k₀ := l m₁ with hk₀
+  have hcurv : ∀ s ∈ Ioo 0 r₀, |G.κ k₀| * s ≤ 2 := fun s hs' =>
+    (mul_le_mul_of_nonneg_left hs'.2.le (abs_nonneg _)).trans (hC.curv k₀).le
+  have hs12 : r₀ * ((m₁ : ℝ) + 1) / 5 ≠ r₀ * ((m₂ : ℝ) + 1) / 5 := by
+    intro h
+    have h' : r₀ * ((m₁ : ℝ) + 1) = r₀ * ((m₂ : ℝ) + 1) := by linarith
+    have h'' := mul_left_cancel₀ hr0.ne' h'
+    apply hm; ext; exact_mod_cast (by linarith : (m₁ : ℝ) = m₂)
+  have hl2 := hl m₂
+  rw [← hlm] at hl2
+  have huq : dist u q = 1 := by rw [dist_comm]; exact hq
+  obtain ⟨hσ, hβ⟩ := germ_eq_of_two_on_circle huq (hrad m₁).1 (hrad m₂).1 hs12 (hcurv _ (hrad m₁)) (hcurv _ (hrad m₂))
+    (hl m₁) hl2
+  -- the arc of `ω(q)` along that germ ends at `u`
+  obtain ⟨θ₁, θ₂, c, c', hR, hend, -⟩ := hC.exists_isRingArc_of_along hdisj huq hσ hβ
+  exact ⟨hq, θ₁, θ₂, c, c', hR, hend⟩
 
 /-- **FS112-N3-FAIL**, the colours: where the strip fails at `q`, the colours of `c(u)` occurring inside `ω(u)` near `q` are among the
 inner colours of the arcs of `ω(q)` leaving `u`, those occurring outside among their outer colours, and each side carries at least one
@@ -216,7 +1467,111 @@ theorem fail_colours (hF : F.Valid) {u q : ℂ} (hu : F.IsCubicTrichromatic u) (
     (hs : ¬ F.StripHolds u q) :
     (F.innerColours u q ∩ F.coloursAt u).Nonempty ∧ F.innerColours u q ∩ F.coloursAt u ⊆ F.leavingInner u q ∧
       (F.outerColours u q ∩ F.coloursAt u).Nonempty ∧ F.outerColours u q ∩ F.coloursAt u ⊆ F.leavingOuter u q := by
-  sorry
+  have hud : u ∈ F.dom := hc (mem_closedBall_self zero_le_one)
+  obtain ⟨r₀, G, hC, hdisj, f, -, hsec, hcol⟩ := hu.chart hud
+  have hord := G.dir_lt_nextDir hC.sorted hC.curv hdisj
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  have huq : dist u q = 1 := by rw [dist_comm]; exact hq
+  have hns : ∀ ε > 0, (∃ z ∈ F.interiorPts ∩ ball q ε ∩ ball u 1, F.col z ∈ F.coloursAt u) ∧
+      ∃ z ∈ F.interiorPts ∩ ball q ε ∩ (closedBall u 1)ᶜ, F.col z ∈ F.coloursAt u := by
+    intro ε hε
+    by_contra hno
+    rw [not_and_or] at hno
+    apply hs
+    refine ⟨ε, hε, ?_⟩
+    rcases hno with h | h
+    · left; intro z hz hzc; exact h ⟨z, hz, hzc⟩
+    · right; intro z hz hzc; exact h ⟨z, ⟨hz.1, hz.2⟩, hzc⟩
+  have hcross : ∀ i z, z ∈ F.region (f i) → ∀ b ∈ closure (G.sector u r₀ i),
+      (dist z u < 1 → dist z b < 1) ∧ (1 < dist z u → 1 < dist z b) := by
+    intro i z hz b hb
+    have hpc : IsPreconnected (closure (G.sector u r₀ i)) := (hC.isPreconnected r₀ hr₀ i).closure
+    have hu := hC.mem_closure_sector hr₀ i
+    rcases hF.dist_lt_or_gt_of_isPreconnected hz hpc (closure_mono (hsec i)) with h | h
+    · exact ⟨fun _ => h b hb, fun h' => absurd (h u hu) (by linarith)⟩
+    · exact ⟨fun h' => absurd (h u hu) (by linarith), fun _ => h b hb⟩
+  -- the bounding germs' branch points lie in the closure of their sector
+  have hbd : ∀ i, ∀ s ∈ Ioo 0 r₀, branchPt u (G.β i) (G.κ i) s ∈ closure (G.sector u r₀ i) ∧
+      branchPt u (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s ∈ closure (G.sector u r₀ i) := by
+    intro i s hs0
+    refine ⟨(BranchGerms.mem_closure_sector_of_lt hs0 i (hord s hs0 i)).1, ?_⟩
+    rw [branchPt_eq]
+    have : e (germDir (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s) = e (G.nextDir i s) :=
+      (G.e_nextDir i s).symm
+    rw [this]; exact (BranchGerms.mem_closure_sector_of_lt hs0 i (hord s hs0 i)).2
+  have hnext : ∀ i : Fin 3, i ≠ BranchGerms.next i := by decide
+  -- the arc along the germ beside sector `i` on that side, whose side colour is `f i`
+  have harc : ∀ i, ∀ g, (g = i ∨ g = BranchGerms.next i) → (G.κ g = 1 ∨ G.κ g = -1) →
+      e (G.β g) = I * G.κ g * (u - q) → ∃ θ₁ θ₂ c c', F.IsRingArc q θ₁ θ₂ c c' ∧ (ringPt q θ₁ = u ∨ ringPt q θ₂ = u) ∧
+        ringPt q ((θ₁ + θ₂) / 2) ∈ closure (G.sector u r₀ i) := by
+    intro i g hg hσ hβ
+    obtain ⟨θ₁, θ₂, c, c', hR, hend, hint⟩ := hC.exists_isRingArc_of_along hdisj huq hσ hβ
+    obtain ⟨s, hs0, hsx⟩ := hint ((θ₁ + θ₂) / 2) ⟨by linarith [hR.1], by linarith [hR.1]⟩
+    refine ⟨θ₁, θ₂, c, c', hR, hend, ?_⟩
+    rw [hsx]
+    rcases hg with rfl | rfl
+    · exact (hbd g s hs0).1
+    · exact (hbd i s hs0).2
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · obtain ⟨c, hc, hq'⟩ := exists_colour_near (fun ε hε => (hns ε hε).1)
+    exact ⟨c, hq', hc⟩
+  · rintro c ⟨hcin, hcu⟩
+    obtain ⟨i, rfl⟩ := hcol c hcu
+    -- the sector of `f i` lies in `B̄(q, 1)`
+    have hcl : closure (G.sector u r₀ i) ⊆ closedBall q 1 := by
+      intro w hw
+      rw [mem_closedBall]
+      by_contra hgt
+      push Not at hgt
+      obtain ⟨z, ⟨hzr, hzu⟩, hzq⟩ := Metric.mem_closure_iff.mp hcin (dist w q - 1) (by linarith)
+      rw [mem_ball] at hzu
+      have := (hcross i z hzr w hw).1 hzu
+      have := dist_triangle w z q
+      rw [dist_comm q z] at hzq
+      linarith [dist_comm w z]
+    have hsub : G.sector u r₀ i ⊆ ball q 1 := by
+      rw [← interior_closedBall q one_ne_zero]
+      exact (hC.isOpen r₀ hr₀ i).subset_interior_iff.mpr (subset_closure.trans hcl)
+    obtain ⟨g, hg, hσ, hβ⟩ := exists_along_of_side hF hC hord hsec hcol hs huq (hnext i)
+      (Or.inl fun s hs0 => ⟨hcl (hbd i s hs0).1, hcl (hbd i s hs0).2⟩)
+    obtain ⟨θ₁, θ₂, c, c', hR, hend, hmid⟩ := harc i g hg hσ hβ
+    have hin : f i ∈ F.innerColours q (ringPt q ((θ₁ + θ₂) / 2)) :=
+      closure_mono (subset_inter (hsec i) hsub) hmid
+    rw [(hR.2.2 _ ⟨by linarith [hR.1], by linarith [hR.1]⟩).1] at hin
+    rw [mem_singleton_iff.mp hin]
+    exact ⟨θ₁, θ₂, c', hR, hend⟩
+  · obtain ⟨c, hc, hq'⟩ := exists_colour_near (fun ε hε => (hns ε hε).2)
+    refine ⟨c, ?_, hc⟩
+    exact hq'
+  · rintro c ⟨hcout, hcu⟩
+    obtain ⟨i, rfl⟩ := hcol c hcu
+    have hcl : closure (G.sector u r₀ i) ⊆ {w | 1 ≤ dist w q} := by
+      intro w hw
+      show 1 ≤ dist w q
+      by_contra hlt
+      push Not at hlt
+      obtain ⟨z, ⟨hzr, hzu⟩, hzq⟩ := Metric.mem_closure_iff.mp hcout (1 - dist w q) (by linarith)
+      have hzu' : 1 < dist z u := by simpa [mem_closedBall, not_le] using hzu
+      have := (hcross i z hzr w hw).2 hzu'
+      have := dist_triangle z q w
+      rw [dist_comm q z] at hzq
+      linarith [dist_comm q w]
+    have hsub : G.sector u r₀ i ⊆ (closedBall q 1)ᶜ := by
+      intro w hw
+      have hint : w ∈ interior {w | 1 ≤ dist w q} :=
+        (hC.isOpen r₀ hr₀ i).subset_interior_iff.mpr (subset_closure.trans hcl) hw
+      have hcompl : {w : ℂ | 1 ≤ dist w q} = (ball q 1)ᶜ := by ext w; simp [mem_ball, not_lt]
+      rw [hcompl, interior_compl, closure_ball q one_ne_zero] at hint
+      exact hint
+    obtain ⟨g, hg, hσ, hβ⟩ := exists_along_of_side hF hC hord hsec hcol hs huq (hnext i)
+      (Or.inr fun s hs0 => ⟨hcl (hbd i s hs0).1, hcl (hbd i s hs0).2⟩)
+    obtain ⟨θ₁, θ₂, c, c', hR, hend, hmid⟩ := harc i g hg hσ hβ
+    have hout : f i ∈ F.outerColours q (ringPt q ((θ₁ + θ₂) / 2)) := by
+      show ringPt q ((θ₁ + θ₂) / 2) ∈ closure (F.region (f i) \ closedBall q 1)
+      exact closure_mono (t := F.region (f i) \ closedBall q 1) (fun w hw => ⟨hsec i hw, hsub hw⟩) hmid
+    rw [(hR.2.2 _ ⟨by linarith [hR.1], by linarith [hR.1]⟩).2] at hout
+    rw [mem_singleton_iff.mp hout]
+    exact ⟨θ₁, θ₂, c, hR, hend⟩
 
 /-! ## FS112-N3-ANTI -/
 
@@ -224,22 +1579,64 @@ theorem fail_colours (hF : F.Valid) {u q : ℂ} (hu : F.IsCubicTrichromatic u) (
 are both M-in. Inhabitant of `IsCubicTrichromatic` on a valid map of the plane: `sevenBrick_corner_isCubicTrichromatic` (`Plane/SVMap`). With one M-in point: `sevenBrick_corner_mIn` (the antipodal second is the refuted clause). -/
 theorem anti (hF : F.Valid) {u x y : ℂ} (hu : F.IsCubicTrichromatic u) (hc : F.Covers u 1) (hx : dist x u = 1)
     (hy : dist y u = 1) (hxy : dist x y = 2) (h1 : F.MIn u x) (h2 : F.MIn u y) : False := by
-  sorry
-
-/-! ## FS112-N3-END -/
-
-/-- **FS112-N3-END** (NB3's corrected form): in a terminal valid map of the plane, let `v` be stuck with exactly three colours, its
-two-sector colour `c` having a horn along `e α` whose lower arc has curvature `−1` (an arc of `ω(v − n)`). Then either `v − n` carries
-at least four colours and a repeated colour and `v − 2n` is the centre of a both-kind unit arc, or the upper flank colour `g` is
-in-type at `v + n` and both horns' upper arcs lie on `ω(v + n)` (`κ₂ = 1`; for the horn along `−a` its lower arc in its own frame).
-The row's "and the chain is the single vertex" needs wave 5's stuck-chain vocabulary and is not stated here (§ 8 of the plan). -/
-theorem n3_end (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v : ℂ} {α κ₂ : ℝ} {c : Fin k} (hst : F.IsStuck v)
-    (h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α (-1) κ₂ c) :
-    (4 ≤ (F.coloursAt (v - e (α + π / 2))).ncard ∧ F.HasRepeatedColour (v - e (α + π / 2)) ∧
-        ∃ θ₁ θ₂, F.BothKind (v - 2 * e (α + π / 2)) θ₁ θ₂) ∨
-      ∃ g, F.IsFlankAbove v α κ₂ g ∧ F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2)) ∧ κ₂ = 1 ∧
-        ∀ κ₃ κ₄, F.IsHorn v (α + π) κ₃ κ₄ c → κ₃ = -1 := by
-  sorry
+  have hud : u ∈ F.dom := hc (mem_closedBall_self zero_le_one)
+  obtain ⟨r₀, G, hC, hdisj, f, -, hsec, hcol⟩ := hu.chart hud
+  have hord := G.dir_lt_nextDir hC.sorted hC.curv hdisj
+  obtain ⟨c₁, hc₁, hx₁⟩ := h1
+  obtain ⟨c₂, hc₂, hy₂⟩ := h2
+  obtain ⟨i, rfl⟩ := hcol c₁ hc₁
+  obtain ⟨j, rfl⟩ := hcol c₂ hc₂
+  have hi := (closure_sector_subset_of_side hF hC hsec i).1 hx₁
+  have hj := (closure_sector_subset_of_side hF hC hsec j).1 hy₂
+  set s := r₀ / 2 with hs
+  have hs0 : s ∈ Ioo 0 r₀ := ⟨by linarith [hC.pos], by linarith [hC.pos]⟩
+  -- `u` is the midpoint of `x` and `y`, so a branch point at distance `s > 0` is beyond `ω(x)` or beyond `ω(y)`
+  have hsq : ∀ z w : ℂ, dist z w ^ 2 = (z.re - w.re) ^ 2 + (z.im - w.im) ^ 2 := by
+    intro z w; rw [Complex.dist_eq, Complex.sq_norm, Complex.normSq_apply]; simp only [Complex.sub_re, Complex.sub_im]; ring
+  have ex := hsq x u
+  have ey := hsq y u
+  have exy := hsq x y
+  rw [hx] at ex; rw [hy] at ey; rw [hxy] at exy
+  have hzero : ((x.re - u.re) + (y.re - u.re)) ^ 2 + ((x.im - u.im) + (y.im - u.im)) ^ 2 = 0 := by nlinarith
+  have hre : x.re + y.re = 2 * u.re := by nlinarith [sq_nonneg ((x.re - u.re) + (y.re - u.re)), sq_nonneg ((x.im - u.im) + (y.im - u.im))]
+  have him : x.im + y.im = 2 * u.im := by nlinarith [sq_nonneg ((x.re - u.re) + (y.re - u.re)), sq_nonneg ((x.im - u.im) + (y.im - u.im))]
+  have hpar : ∀ b : ℂ, dist b x ^ 2 + dist b y ^ 2 = 2 * dist b u ^ 2 + 2 := by
+    intro b
+    rw [hsq b x, hsq b y, hsq b u]
+    have hyre : y.re = 2 * u.re - x.re := by linarith
+    have hyim : y.im = 2 * u.im - x.im := by linarith
+    rw [hyre, hyim]; nlinarith [ex]
+  have hbeyond : ∀ g : Fin 3, 1 < dist (branchPt u (G.β g) (G.κ g) s) x ∨ 1 < dist (branchPt u (G.β g) (G.κ g) s) y := by
+    intro g
+    by_contra hno
+    push Not at hno
+    have hbu : dist (branchPt u (G.β g) (G.κ g) s) u = s := by
+      rw [dist_eq_norm, norm_branchPt_sub _ _ _ hs0.1.le]
+    have := hpar (branchPt u (G.β g) (G.κ g) s)
+    rw [hbu] at this
+    nlinarith [hno.1, hno.2, dist_nonneg (x := branchPt u (G.β g) (G.κ g) s) (y := x),
+      dist_nonneg (x := branchPt u (G.β g) (G.κ g) s) (y := y), hs0.1]
+  have hadj : ∀ i l, (i = l ∨ BranchGerms.next i = l) →
+      branchPt u (G.β l) (G.κ l) s ∈ closure (G.sector u r₀ i) := by
+    rintro i l (rfl | rfl)
+    · exact (BranchGerms.mem_closure_sector_of_lt hs0 i (hord s hs0 i)).1
+    · rw [branchPt_eq]
+      have : e (germDir (G.β (BranchGerms.next i)) (G.κ (BranchGerms.next i)) s) = e (G.nextDir i s) :=
+        (G.e_nextDir i s).symm
+      rw [this]; exact (BranchGerms.mem_closure_sector_of_lt hs0 i (hord s hs0 i)).2
+  obtain ⟨g₁, g₂, hne, heq⟩ := Fintype.exists_ne_map_eq_of_card_lt
+    (fun g : Fin 3 => decide (1 < dist (branchPt u (G.β g) (G.κ g) s) x)) (by simp)
+  have hiff : 1 < dist (branchPt u (G.β g₁) (G.κ g₁) s) x ↔ 1 < dist (branchPt u (G.β g₂) (G.κ g₂) s) x := by
+    simpa using heq
+  by_cases hg : 1 < dist (branchPt u (G.β g₁) (G.κ g₁) s) x
+  · rcases BranchGerms.fin3_adj i g₁ g₂ hne with h | h
+    · have := hi (hadj i g₁ h); rw [mem_closedBall] at this; linarith
+    · have := hi (hadj i g₂ h); rw [mem_closedBall] at this; linarith [hiff.mp hg]
+  · have hg₁ : 1 < dist (branchPt u (G.β g₁) (G.κ g₁) s) y := (hbeyond g₁).resolve_left hg
+    have hg₂ : 1 < dist (branchPt u (G.β g₂) (G.κ g₂) s) y := (hbeyond g₂).resolve_left fun h => hg (hiff.mpr h)
+    rcases BranchGerms.fin3_adj j g₁ g₂ hne with h | h
+    · have := hj (hadj j g₁ h); rw [mem_closedBall] at this; linarith
+    · have := hj (hadj j g₂ h); rw [mem_closedBall] at this; linarith
 
 end ArcMap
 
@@ -2651,6 +4048,14 @@ theorem bowtie_isStuck : bowtie.IsStuck 0 ∧ ¬ bowtie.IsStuck I ∧ ¬ bowtie.
   refine ⟨⟨bowtie_not_merge_zero, bowtie_not_ray_zero, bowtie_not_shave_zero, 1, 2, le_rfl, bowtie_coloursAt_zero.2⟩, ?_, ?_⟩
   · rintro ⟨-, -, -, c, n, h2, hn⟩; have := bowtie_hasSectors_le_one (Or.inl rfl) hn; omega
   · rintro ⟨-, -, -, c, n, h2, hn⟩; have := bowtie_hasSectors_le_one (Or.inr rfl) hn; omega
+
+/-- `bowtie_isStuck`'s second clause as a closed refutation: `N = i` is not stuck. The vacuity scan's evidence that `IsStuck` is
+refutable at a concrete map (`scripts/Vacuity.lean`, wave 4's carriers). -/
+theorem bowtie_not_isStuck_I : ¬ bowtie.IsStuck I := bowtie_isStuck.2.1
+
+/-- `bowtie_not_isHorn_I` at one closed instance (the horn the bowtie has at `0`, asked at `i`). The vacuity scan's evidence that
+`IsHorn` is refutable at a concrete map (`scripts/Vacuity.lean`, wave 4's carriers). -/
+theorem bowtie_not_isHorn_I_axis : ¬ bowtie.IsHorn I 0 (-1) 1 1 := bowtie_not_isHorn_I 0 (-1) 1 1
 
 /-- **No MERGE, MERGE-RAY or SHAVE applies at `E`, `E ± n`.** -/
 theorem bowtie_terminalOn : bowtie.TerminalOn {0, I, -I} := by

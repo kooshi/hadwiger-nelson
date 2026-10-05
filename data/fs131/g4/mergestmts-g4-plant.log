@@ -1,0 +1,4 @@
+planted: AeColouring.exists_fill
+MISMATCH AeColouring.exists_fill: merged {"(c : AeColouring k) {j : Fin k} {x : ℂ} {η : ℝ} (hx : x ∈ essClosure (c.cls j)) (hη : 0 < η) (hfree : volume (densitySet (c.cls j) ∩ unitAnnulus x η) = 0) : ∃ c' : AeColouring k, c'.col = c.fillCol x (η / 2) j PLANTED": 1} expected {"(c : AeColouring k) {j : Fin k} {x : ℂ} {η : ℝ} (hx : x ∈ essClosure (c.cls j)) (hη : 0 < η) (hfree : volume (densitySet (c.cls j) ∩ unitAnnulus x η) = 0) : ∃ c' : AeColouring k, c'.col = c.fillCol x (η / 2) j": 1}
+6098 names; base cff2c33e; 1 mismatches/conflicts
+FAIL

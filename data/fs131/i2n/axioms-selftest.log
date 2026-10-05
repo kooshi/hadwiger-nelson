@@ -1,0 +1,68 @@
+slot: admitted axioms.sh: mem 30 GiB (hard cap), cpus 2,3,10,11
+==> axioms-self-test: this run's full output: build/gate/axioms-self-test/20261004T221030Z-2808168.log
+==> axioms self-test: 23 controls, each planted in a copy of scripts/Axioms.lean
+    FAIL  baseline — passed; expected COUNTS imported=0 expected COUNTS declared=0 expected COUNTS library=0 digest 'old': expected exit 0 and 'match (clean and purchases compared; the sentence is in its older form', got exit 0
+            got: COUNTS clean=2450 free=11 imported=4 purchased=5 declared=1 library=1 native=10 records=2470
+    FAIL  imported_declared — passed; expected COUNTS imported=1 expected COUNTS declared=1 expected COUNTS library=1 digest 'old': expected exit 0 and 'the sentence is in its older form, which records no imported count, and the audit has 1 imported', got exit 0
+            got: COUNTS clean=2450 free=11 imported=5 purchased=5 declared=2 library=2 native=10 records=2471
+    ok    imported_undeclared — failed (2 FAIL line(s))
+            FAIL undeclared-in-imported 't3c_imported_user' carries t3c_ax_b, which is not the standard three and not a declared import
+            FAIL undeclared-library-axiom t3c_ax_b is an axiom of the library and no declareImport names it
+    ok    clean_undeclared — failed (2 FAIL line(s))
+            FAIL undeclared-in-clean 't3c_clean_user' carries t3c_ax_a, which is not the standard three and not a declared import
+            FAIL undeclared-library-axiom t3c_ax_a is an axiom of the library and no declareImport names it
+    ok    import_in_clean — failed (1 FAIL line(s))
+            FAIL import-in-clean 't3c_imported_user' carries the declared import t3c_import: move its record under IMPORTED
+    ok    arch_missing — failed (1 FAIL line(s))
+            FAIL arch-missing t3c_import is declared and ARCHITECTURE.md § Trust does not name it in backticks (LEAN.md § Assumptions item 4)
+    ok    stale_declaration — failed (1 FAIL line(s))
+            FAIL stale-declaration t3c_import is declared and no audited record carries it: audit its consumers, or delete the axiom
+    ok    declared_twice — failed (1 FAIL line(s))
+            FAIL declared-twice t3c_import is declared 2 times
+    ok    stale_import — failed (1 FAIL line(s))
+            FAIL stale-import 'HadwigerNelson.four_le_chromaticNumber_plane' carries no declared import: its record belongs under CLEAN
+    ok    native_in_imported — failed (2 FAIL line(s))
+            FAIL native-in-imported 'HadwigerNelson.moserSpindle_cnf_unsat' carries the native purchase HadwigerNelson.moserSpindle_cnf_unsat._native.native_decide.ax_1_1 (a record with a native axiom belongs und
+            FAIL stale-import 'HadwigerNelson.moserSpindle_cnf_unsat' carries no declared import: its record belongs under CLEAN
+    ok    library_undeclared — failed (1 FAIL line(s))
+            FAIL undeclared-library-axiom t3c_unaudited is an axiom of the library and no declareImport names it
+    FAIL  library_accounting — failed (3 FAIL line(s)); expected no 'FAIL undeclared-library-axiom' an unforeseen 'FAIL declared-not-in-library' an unforeseen 'FAIL undeclared-library-axiom'
+            got: FAIL declared-not-in-library HadwigerNelson.Plane.falconer_lemma2_nonempty is declared but the library lists no such axiom
+            got: FAIL undeclared-library-axiom t3c_unaudited is an axiom of the library and no declareImport names it
+            got: FAIL library-accounting LIBRARY SUMMARY counts 2 axioms and 1 LIBRARY AXIOM lines were read
+            got: COUNTS clean=2450 free=11 imported=4 purchased=5 declared=1 library=1 native=10 records=2470
+    ok    declare_not_axiom — did not elaborate
+            /tmp/tmp.EaO4MVWfAT/declare_not_axiom.lean:206:0: error: declareImport: HadwigerNelson.four_le_chromaticNumber_plane is not an `axiom`; only an axiom is an imported outside theorem
+    ok    declare_outside_library — did not elaborate
+            /tmp/tmp.EaO4MVWfAT/declare_outside_library.lean:206:0: error: declareImport: propext is not declared in the library (a module under `Proofs`); an axiom of a dependency is not ours to declare
+    ok    declare_no_doc — did not elaborate
+            /tmp/tmp.EaO4MVWfAT/declare_no_doc.lean:207:0: error: declareImport: t3c_import has no docstring; LEAN.md § Assumptions item 1 asks it to name its bibliography key, section and page
+    ok    declare_no_key — did not elaborate
+            /tmp/tmp.EaO4MVWfAT/declare_no_key.lean:208:0: error: declareImport: t3c_import's docstring names no bibliography key of the form [Author2024]; LEAN.md § Assumptions item 1
+    ok    declare_typo — did not elaborate
+            /tmp/tmp.EaO4MVWfAT/declare_typo.lean:206:33: error(lean.unknownIdentifier): Unknown constant `t3c_no_such_axiom`
+    ok    sorry — failed (1 FAIL line(s))
+            FAIL sorry CLEAN 't3c_sorry' carries sorryAx
+    ok    native_in_clean — failed (1 FAIL line(s))
+            FAIL native-in-clean 'HadwigerNelson.moserSpindle_cnf_unsat' carries the native purchase HadwigerNelson.moserSpindle_cnf_unsat._native.native_decide.ax_1_1
+    ok    stale_purchase — failed (2 FAIL line(s))
+            FAIL stale-purchase 'HadwigerNelson.four_le_chromaticNumber_plane' carries no native axiom: a stale ledger entry
+            FAIL purchase-ledgers the source ledger and the environment ledger disagree ('<' = a docstring says 'Trust purchase' and scripts/Axioms.lean never audits it; '>' = audited as PURCHASED and its docstri
+    ok    purchased_undeclared — failed (3 FAIL line(s))
+            FAIL undeclared-in-purchased 't3c_mixed' carries t3c_ax_c, which is not the standard three, not native, and not a declared import
+            FAIL undeclared-library-axiom t3c_ax_c is an axiom of the library and no declareImport names it
+            FAIL purchase-ledgers the source ledger and the environment ledger disagree ('<' = a docstring says 'Trust purchase' and scripts/Axioms.lean never audits it; '>' = audited as PURCHASED and its docstri
+    ok    outside_banners — failed (1 FAIL line(s))
+            FAIL outside-banners 'HadwigerNelson.four_le_chromaticNumber_plane' is printed before the first banner
+    FAIL  banner_dropped — failed (6 FAIL line(s)); an unforeseen 'FAIL outside-banners' an unforeseen 'FAIL stale-declaration'
+            got: FAIL banners === IMPORTED === printed 0 time(s), not once: scripts/Axioms.lean did not run to completion, or its banners changed
+            got: FAIL outside-banners 'HadwigerNelson.Plane.falconer_reduction' is printed before the first banner
+            got: FAIL outside-banners 'HadwigerNelson.Plane.le_chiM_of_falconerFan' is printed before the first banner
+            got: FAIL outside-banners 'HadwigerNelson.Plane.exists_mem_falconerE' is printed before the first banner
+            got: FAIL outside-banners 'HadwigerNelson.Plane.fan_tip_ae_mem' is printed before the first banner
+            got: FAIL stale-declaration HadwigerNelson.Plane.falconer_lemma2_nonempty is declared and no audited record carries it: audit its consumers, or delete the axiom
+            got: COUNTS clean=2450 free=11 imported=0 purchased=5 declared=1 library=1 native=10 records=2470
+==> axioms self-test: FAIL — 4 of 23 control(s) did not behave as designed.
+    The gate cannot be trusted until every one of these behaves. Never tune a control until it agrees.
+    every control's output: build/gate/axioms-self-test/20261004T221030Z-2808168.log
+exit=1

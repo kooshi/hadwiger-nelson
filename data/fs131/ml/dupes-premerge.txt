@@ -1,0 +1,1 @@
+own files 2 (Plane/ValidMap/MergeMove.lean, Plane/ValidMap/Moves.lean); 192 own declarations; 8857 names at origin/main; 0 pair(s)

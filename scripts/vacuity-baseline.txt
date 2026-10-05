@@ -22,8 +22,8 @@
 #
 # Counts to hold, because a silent change in them is this gate's own failure mode (FS-28 D1,
 # where a shadowed match arm dropped witnessed 8 -> 1 and still printed a plausible report):
-#   declarations=8500  refutations-skipped=57  sites=460
-#   vacuous=0 stale=0 declared=3 witnessed=21 generic=434 unknown=2
+#   declarations=10851  refutations-skipped=111  sites=755
+#   vacuous=0 stale=0 declared=3 witnessed=32 generic=718 unknown=2
 # The declaration count is the library's alone: the audit's own declarations stopped being counted on
 # 2026-09-11, because editing the audit moved the number with the library unchanged.
 

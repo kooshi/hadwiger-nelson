@@ -1,0 +1,5 @@
+CONFLICT dot_add_left: both sides changed its statements
+CONFLICT dot_e_e: both sides changed its statements
+CONFLICT isOpen_shadow: both sides changed its statements
+6319 names; bases f01c964d f620977c 05cb0a3e; renames [('framePt', 'fromFrame')]; 3 mismatches/conflicts, 0 base conflicts
+FAIL

@@ -1,0 +1,4423 @@
+import Proofs.HadwigerNelson.Plane.Suprema
+import Proofs.HadwigerNelson.Plane.CPColouring
+import Proofs.HadwigerNelson.Plane.FalconerReduction
+import Mathlib.MeasureTheory.Measure.Lebesgue.VolumeOfBalls
+import Mathlib.MeasureTheory.Measure.ContinuousPreimage
+import Mathlib.MeasureTheory.Measure.Decomposition.RadonNikodym
+import Mathlib.Analysis.Normed.Module.WeakDual
+import Mathlib.Analysis.InnerProductSpace.Dual
+import Mathlib.MeasureTheory.Function.L2Space
+import Mathlib.MeasureTheory.Measure.SeparableMeasure
+
+/-!
+# Rescaling, the suprema's limits, the equivalence, kept points, the face lemma (FS-131 wave 2)
+
+Rows: **FS111-V0-RESCALE**, **FS129-SR2-SUPK** (carrying FS106-SUP), **FS106-EQ**, **FS106-COMP** (second clause),
+**FS106-REM**, **FS121-D4-FACE** (with FS121-V5-FACE-SHARP's hypothesis), **FS121-V5-FACE-SHARP**.
+Plan: `plans/FS131-w2-kernel-plan.md` § 4.
+
+**Named hypothesis from outside the backlog** (`plans/FS131-kernel-plan.md` § 7.4): `Row130M1`, FS-103's M1 in its
+hard direction (`χ_m⁰(ℝ²) ≤ k ⟹ χ_CP(ℝ²) ≤ k`, row 130's last equality; [hand, two minds]) — a stationary limit of
+translates (Krylov–Bogolyubov) with the Rajchman step. It enters only FS106-EQ's `χ_CP` clause; its own path to the kernel is
+a separate planner-and-implementer job (FS-103's M1 module). The easy direction is formalized here unconditionally.
+-/
+
+namespace HadwigerNelson.Plane
+
+open Complex Set MeasureTheory Filter Topology Metric
+
+variable {k : ℕ}
+
+/-- `x` is **kept** at scale `ε` for the class `A` with threshold `η`: the balls of radii `ε/2` and `2ε` about `x` are at
+least `1 − η` full of `Ã` (FS106-TQ § 2.2). -/
+def KeptAt (A : Set ℂ) (η ε : ℝ) (x : ℂ) : Prop :=
+  ∀ ρ ∈ ({ε / 2, 2 * ε} : Set ℝ), ENNReal.ofReal (1 - η) * volume (ball x ρ) ≤ volume (ball x ρ ∩ densitySet A)
+
+/-- The open half-box `{x − s e + t e⊥ : 0 < s < ε, |t| < ε}`, `e = e θ`, `e⊥ = i e θ`. -/
+def halfBox (x : ℂ) (θ ε : ℝ) : Set ℂ :=
+  {z | ∃ s t : ℝ, 0 < s ∧ s < ε ∧ |t| < ε ∧ z = x + e θ * (-s + t * I)}
+
+/-- The open far box `{x + s e + t e⊥ : g < s < g + ε′, |t| < ρ}`. -/
+def farBox (x : ℂ) (θ g ε' ρ : ℝ) : Set ℂ :=
+  {z | ∃ s t : ℝ, g < s ∧ s < g + ε' ∧ |t| < ρ ∧ z = x + e θ * (s + t * I)}
+
+/-! ## FS131-K2c: children of the remaining leaves
+
+Each child was stated and priced in `plans/FS131-w2-kernel-plan.md` § 12 (route, Mathlib names confirmed with `#check`, order),
+and each leaf is closed from its children by the assembly the plan describes. -/
+
+/-- The area of a disc, in `ofReal` form. -/
+theorem volume_ball_ofReal (z : ℂ) {ρ : ℝ} (hρ : 0 ≤ ρ) : volume (ball z ρ) = ENNReal.ofReal (ρ ^ 2 * Real.pi) := by
+  rw [Complex.volume_ball, ENNReal.ofReal_mul (sq_nonneg ρ), ENNReal.ofReal_pow hρ, ← NNReal.coe_real_pi,
+    ENNReal.ofReal_coe_nnreal]
+
+/-! ### Radius bands and the pair mass at one radius (`exists_tight`, SUPK's upper bound) -/
+
+/-- The pairs of `A` at a distance in `[a, b]` are `Leb ⊗ Leb`-null (the radius form of `BandNull`). -/
+def IccPairNull (A : Set ℂ) (a b : ℝ) : Prop :=
+  (volume.prod volume) {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b} = 0
+
+/-- `BandNull A ε` is `IccPairNull` on the radius band `[1 − ε, 1 + ε]` (by definition). -/
+theorem bandNull_iff_iccPairNull (A : Set ℂ) (ε : ℝ) : BandNull A ε ↔ IccPairNull A (1 - ε) (1 + ε) := Iff.rfl
+
+/-- The mass of the pairs `(x, θ)`, `x ∈ A ∩ B(0, R)`, `x + r e θ ∈ A` (`Leb ⊗ σ`): the unit-pair mass at radius `r`. -/
+noncomputable def pairMass (A : Set ℂ) (R r : ℝ) : ENNReal :=
+  (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ A ∩ ball 0 R ∧ q.1 + (r : ℂ) * e q.2 ∈ A}
+
+/-- Null pairs on a radius band are null on every sub-band. -/
+theorem IccPairNull.mono {A : Set ℂ} {a b a' b' : ℝ} (h : IccPairNull A a b) (ha : a ≤ a') (hb : b' ≤ b) :
+    IccPairNull A a' b' := by
+  exact
+  measure_mono_null (fun q (hq : q ∈ {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a' ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b'}) =>
+    (⟨hq.1, hq.2.1, ha.trans hq.2.2.1, hq.2.2.2.trans hb⟩ : q ∈ {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b})) h
+
+/-- Null pairs on two adjacent radius bands are null on their union. -/
+theorem IccPairNull.union {A : Set ℂ} {a b c : ℝ} (h1 : IccPairNull A a b) (h2 : IccPairNull A b c) :
+    IccPairNull A a c := by
+  refine measure_mono_null (t := {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b} ∪
+    {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ b ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ c}) ?_ (measure_union_null h1 h2)
+  intro q hq
+  rcases le_total (dist q.1 q.2) b with h | h
+  · exact Or.inl ⟨hq.1, hq.2.1, hq.2.2.1, h⟩
+  · exact Or.inr ⟨hq.1, hq.2.1, h, hq.2.2.2⟩
+
+/-- The pairs at one exact distance are `Leb ⊗ Leb`-null (a circle is null in each slice). -/
+theorem volume_prod_dist_eq_null (r : ℝ) : (volume.prod volume) {q : ℂ × ℂ | dist q.1 q.2 = r} = 0 := by
+  have hm : MeasurableSet {q : ℂ × ℂ | dist q.1 q.2 = r} :=
+    (isClosed_eq (continuous_fst.dist continuous_snd) continuous_const).measurableSet
+  rw [Measure.measure_prod_null hm]
+  refine Eventually.of_forall fun x => ?_
+  have : Prod.mk x ⁻¹' {q : ℂ × ℂ | dist q.1 q.2 = r} = sphere x r := by
+    ext y; simp only [mem_preimage, mem_setOf_eq, mem_sphere]; rw [dist_comm]
+  show volume (Prod.mk x ⁻¹' _) = 0
+  rw [this]
+  exact Measure.addHaar_sphere volume x r
+
+/-- Null on `[a', b]` for every `a' > a` gives null on `[a, b]` (a countable union and one null sphere). -/
+theorem iccPairNull_of_forall_lt {A : Set ℂ} {a b : ℝ} (h : ∀ a', a < a' → a' ≤ b → IccPairNull A a' b) :
+    IccPairNull A a b := by
+  unfold IccPairNull at h ⊢
+  by_cases hab : a < b
+  · -- a countable union over `a + (b - a)/(n+2)` plus the sphere at `a`
+    refine measure_mono_null (t := {q : ℂ × ℂ | dist q.1 q.2 = a} ∪ ⋃ n : ℕ,
+      {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ a + (b - a) / (n + 2) ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b}) ?_ ?_
+    · intro q hq
+      rcases eq_or_lt_of_le hq.2.2.1 with h1 | h1
+      · exact Or.inl h1.symm
+      · right
+        obtain ⟨n, hn⟩ := exists_nat_gt ((b - a) / (dist q.1 q.2 - a))
+        refine mem_iUnion.2 ⟨n, hq.1, hq.2.1, ?_, hq.2.2.2⟩
+        have hpos : 0 < dist q.1 q.2 - a := by linarith
+        have h2 : (b - a) / ((n : ℝ) + 2) ≤ dist q.1 q.2 - a := by
+          rw [div_le_iff₀ (by positivity)]
+          rw [div_lt_iff₀ hpos] at hn
+          nlinarith
+        linarith
+    · refine measure_union_null (volume_prod_dist_eq_null a) (measure_iUnion_null fun n => h _ ?_ ?_)
+      · have : 0 < (b - a) / ((n : ℝ) + 2) := by apply div_pos <;> [linarith; positivity]
+        linarith
+      · have : (b - a) / ((n : ℝ) + 2) ≤ b - a := by
+          rw [div_le_iff₀ (by positivity)]; nlinarith [(by positivity : (0:ℝ) ≤ n), sub_pos.2 hab]
+        linarith
+  · by_cases hab' : a = b
+    · subst hab'
+      refine measure_mono_null (fun q hq => ?_) (volume_prod_dist_eq_null a)
+      exact le_antisymm hq.2.2.2 hq.2.2.1
+    · have : b < a := lt_of_le_of_ne (not_lt.1 hab) (Ne.symm hab')
+      refine measure_mono_null (fun q hq => ?_) (measure_empty (μ := volume.prod volume))
+      exact absurd (hq.2.2.1.trans hq.2.2.2) (not_le.2 this)
+
+/-- Null unit pairs is the vanishing of the unit-radius pair mass over every disc about the origin. -/
+theorem unitPairsNull_iff_pairMass {A : Set ℂ} : UnitPairsNull A ↔ ∀ R : ℝ, pairMass A R 1 = 0 := by
+  constructor
+  · intro h R
+    refine measure_mono_null (fun q hq => ?_) h
+    refine ⟨hq.1.1, ?_⟩
+    simpa using hq.2
+  · intro h
+    refine measure_mono_null (t := ⋃ n : ℕ, {q : ℂ × ℝ | q.1 ∈ A ∩ ball 0 n ∧ q.1 + ((1 : ℝ) : ℂ) * e q.2 ∈ A})
+      (fun q hq => ?_) (measure_iUnion_null fun n => h n)
+    obtain ⟨n, hn⟩ := exists_nat_gt ‖q.1‖
+    refine mem_iUnion.2 ⟨n, ⟨hq.1, by simpa using hn⟩, by simpa using hq.2⟩
+
+open scoped symmDiff in
+/-- Measures of `S ∩ X i` converge when `X i` converges to `Y` in measure (`S` of finite measure). -/
+theorem tendsto_measure_inter_of_symmDiff {α ι : Type*} [MeasurableSpace α] {μ : Measure α} {l : Filter ι}
+    {S Y : Set α} {X : ι → Set α} (hS : μ S ≠ ⊤) (h : Tendsto (fun i => μ (X i ∆ Y)) l (𝓝 0)) :
+    Tendsto (fun i => μ (S ∩ X i)) l (𝓝 (μ (S ∩ Y))) := by
+  have hY : μ (S ∩ Y) ≠ ⊤ := ne_top_of_le_ne_top hS (measure_mono inter_subset_left)
+  rw [ENNReal.tendsto_nhds hY]
+  intro ε hε
+  filter_upwards [h (Iic_mem_nhds hε)] with i hi
+  have hd : μ ((S ∩ X i) ∆ (S ∩ Y)) ≤ ε := by
+    rw [← inter_symmDiff_distrib_left]
+    exact (measure_mono inter_subset_right).trans hi
+  have hd' : μ ((S ∩ Y) ∆ (S ∩ X i)) ≤ ε := by rw [symmDiff_comm]; exact hd
+  constructor
+  · have := (le_measure_symmDiff (μ := μ) (s₁ := S ∩ Y) (s₂ := S ∩ X i)).trans hd'
+    rw [tsub_le_iff_right] at this
+    rw [tsub_le_iff_right]
+    rwa [add_comm]
+  · have := (le_measure_symmDiff (μ := μ) (s₁ := S ∩ X i) (s₂ := S ∩ Y)).trans hd
+    rw [tsub_le_iff_right] at this
+    rwa [add_comm] at this
+
+/-- **Continuity of the pair mass in the radius** (I2c's finding): `L¹` continuity of translation
+(`MeasureTheory.Lp.instContinuousVAddDomAddAct`, or `MemLp.exists_hasCompactSupport_eLpNorm_sub_le` and uniform
+continuity), integrated over the angle. -/
+theorem continuous_pairMass {A : Set ℂ} (hA : MeasurableSet A) (R : ℝ) : Continuous (pairMass A R) := by
+  rw [continuous_iff_continuousAt]
+  intro r0
+  set E : ℝ → Set (ℂ × ℝ) := fun r => {q : ℂ × ℝ | q.1 ∈ A ∩ ball 0 R ∧ q.1 + (r : ℂ) * e q.2 ∈ A} with hE
+  have hEm : ∀ r, MeasurableSet (E r) := by
+    intro r
+    refine (measurable_fst (hA.inter measurableSet_ball)).inter ?_
+    exact (measurable_fst.add (measurable_const.mul (continuous_e.measurable.comp measurable_snd))) hA
+  have hpm : ∀ r, pairMass A R r = ∫⁻ θ, volume ((fun x => (x, θ)) ⁻¹' E r) ∂arcLength :=
+    fun r => Measure.prod_apply_symm (hEm r)
+  rw [ContinuousAt, funext hpm]
+  refine tendsto_lintegral_filter_of_dominated_convergence (l := 𝓝 r0) (fun _ => volume (ball (0 : ℂ) R))
+    (Eventually.of_forall fun r => measurable_measure_prodMk_right (hEm r))
+    (Eventually.of_forall fun r => Eventually.of_forall fun θ => measure_mono fun x hx => hx.1.2) ?_ ?_
+  · rw [lintegral_const]
+    exact ENNReal.mul_ne_top measure_ball_lt_top.ne (measure_ne_top _ _)
+  refine Eventually.of_forall fun θ => ?_
+  set A' : Set ℂ := A ∩ ball (0 : ℂ) (R + |r0| + 1) with hA'
+  have hA'm : MeasurableSet A' := hA.inter measurableSet_ball
+  have hA'f : volume A' ≠ ⊤ := ((measure_mono inter_subset_right).trans_lt measure_ball_lt_top).ne
+  set F : C(ℝ, C(ℂ, ℂ)) := ContinuousMap.curry ⟨fun p : ℝ × ℂ => p.2 + (p.1 : ℂ) * e θ, by fun_prop⟩ with hFdef
+  have hF : ∀ r x, F r x = x + (r : ℂ) * e θ := fun r x => rfl
+  have hmp : ∀ r, MeasurePreserving (F r) volume volume := fun r => by
+    have : (F r : ℂ → ℂ) = fun x => x + (r : ℂ) * e θ := funext (hF r)
+    rw [this]; exact measurePreserving_add_right volume _
+  have hsd := tendsto_measure_symmDiff_preimage_nhds_zero (μ := volume) (ν := volume) (F.continuous.tendsto r0)
+    (Eventually.of_forall hmp) (hmp r0) hA'm.nullMeasurableSet hA'f
+  have hslice : ∀ r, |r - r0| < 1 → (fun x => (x, θ)) ⁻¹' E r = (A ∩ ball 0 R) ∩ (F r) ⁻¹' A' := by
+    intro r hr
+    ext x
+    simp only [hE, mem_preimage, mem_setOf_eq, mem_inter_iff, hA', hF, mem_ball, dist_zero_right]
+    constructor
+    · rintro ⟨⟨hx1, hx2⟩, hx3⟩
+      refine ⟨⟨hx1, hx2⟩, hx3, ?_⟩
+      calc ‖x + (r : ℂ) * e θ‖ ≤ ‖x‖ + ‖(r : ℂ) * e θ‖ := norm_add_le _ _
+        _ = ‖x‖ + |r| := by rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs]
+        _ < R + |r0| + 1 := by
+          have := abs_sub_abs_le_abs_sub r r0
+          linarith
+    · rintro ⟨⟨hx1, hx2⟩, hx3, -⟩
+      exact ⟨⟨hx1, hx2⟩, hx3⟩
+  have hev : ∀ᶠ r in 𝓝 r0, |r - r0| < 1 := by
+    have : Ioo (r0 - 1) (r0 + 1) ∈ 𝓝 r0 := Ioo_mem_nhds (by linarith) (by linarith)
+    filter_upwards [this] with r hr
+    rw [abs_lt]; constructor <;> linarith [hr.1, hr.2]
+  have hlim := tendsto_measure_inter_of_symmDiff (S := A ∩ ball (0 : ℂ) R)
+    (((measure_mono inter_subset_right).trans_lt measure_ball_lt_top).ne) hsd
+  rw [hslice r0 (by simp)]
+  refine hlim.congr' ?_
+  filter_upwards [hev] with r hr
+  rw [hslice r hr]
+
+/-- The angle measure of a circle's points in `A`, read on `(−π, π)` about the antipodal angle (`e (θ + π) = −e θ`). -/
+theorem arcLength_eq_volume_Ioo {A : Set ℂ} (hA : MeasurableSet A) (x : ℂ) (r : ℝ) :
+    arcLength {θ | x + (r : ℂ) * e θ ∈ A} = volume ({θ | x - (r : ℂ) * e θ ∈ A} ∩ Ioo (-Real.pi) Real.pi) := by
+  have hS : MeasurableSet {θ : ℝ | x + (r : ℂ) * e θ ∈ A} :=
+    (measurable_const.add (measurable_const.mul continuous_e.measurable)) hA
+  rw [arcLength, Measure.restrict_apply hS]
+  rw [← measure_preimage_add_right volume Real.pi]
+  have hpre : (fun θ => θ + Real.pi) ⁻¹' ({θ | x + (r : ℂ) * e θ ∈ A} ∩ Ico 0 (2 * Real.pi)) =
+      {θ | x - (r : ℂ) * e θ ∈ A} ∩ Ico (-Real.pi) Real.pi := by
+    ext θ
+    simp only [mem_preimage, mem_inter_iff, mem_setOf_eq, mem_Ico, e_add_pi]
+    constructor
+    · rintro ⟨h1, h2, h3⟩; exact ⟨by simpa [sub_eq_add_neg] using h1, by linarith, by linarith⟩
+    · rintro ⟨h1, h2, h3⟩; exact ⟨by simpa [sub_eq_add_neg] using h1, by linarith, by linarith⟩
+  rw [hpre]
+  exact measure_congr (ae_eq_set_inter (ae_eq_refl _) Ioo_ae_eq_Ico.symm)
+
+/-- **Polar coordinates about `x`**: the radius-weighted angle measure of `A`'s points on the circles about `x` with radii in
+`(a, b)` is at most the area of `A` in the closed annulus (`Complex.lintegral_comp_polarCoord_symm`). -/
+theorem lintegral_Ioo_angle_le {A : Set ℂ} (hA : MeasurableSet A) (x : ℂ) {a b : ℝ} (ha : 0 < a) :
+    ∫⁻ r in Ioo a b, ENNReal.ofReal r * volume ({θ | x - (r : ℂ) * e θ ∈ A} ∩ Ioo (-Real.pi) Real.pi) ≤
+      volume {y | y ∈ A ∧ a ≤ dist x y ∧ dist x y ≤ b} := by
+  set W : Set ℂ := {w | x - w ∈ A ∧ a < ‖w‖ ∧ ‖w‖ < b} with hW
+  have hWm : MeasurableSet W :=
+    ((measurable_const.sub measurable_id) hA).inter ((measurableSet_lt measurable_const measurable_norm).inter
+      (measurableSet_lt measurable_norm measurable_const))
+  set f : ℂ → ENNReal := W.indicator 1 with hf
+  have hfm : Measurable f := measurable_one.indicator hWm
+  have hpe : ∀ p : ℝ × ℝ, Complex.polarCoord.symm p = (p.1 : ℂ) * e p.2 := by
+    intro p; rw [Complex.polarCoord_symm_apply, e_eq]
+  have hsl : ∀ r ∈ Ioo a b, ENNReal.ofReal r * volume ({θ | x - (r : ℂ) * e θ ∈ A} ∩ Ioo (-Real.pi) Real.pi) =
+      ∫⁻ θ in Ioo (-Real.pi) Real.pi, ENNReal.ofReal r • f (Complex.polarCoord.symm (r, θ)) := by
+    intro r hr
+    have hr0 : 0 < r := ha.trans hr.1
+    have hθ : MeasurableSet {θ : ℝ | x - (r : ℂ) * e θ ∈ A} :=
+      (measurable_const.sub (measurable_const.mul continuous_e.measurable)) hA
+    have hfe : ∀ θ, f (Complex.polarCoord.symm (r, θ)) = {θ : ℝ | x - (r : ℂ) * e θ ∈ A}.indicator 1 θ := by
+      intro θ
+      have hn : ‖(r : ℂ) * e θ‖ = r := by rw [norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_of_nonneg hr0.le]
+      rw [hpe]
+      simp only [hf, indicator, hW, mem_setOf_eq]
+      have hn1 : a < ‖(r : ℂ) * e θ‖ := by rw [hn]; exact hr.1
+      have hn2 : ‖(r : ℂ) * e θ‖ < b := by rw [hn]; exact hr.2
+      split_ifs with h1 h2 h2
+      · rfl
+      · exact absurd h1.1 h2
+      · exact absurd ⟨h2, hn1, hn2⟩ h1
+      · rfl
+    simp_rw [smul_eq_mul, hfe]
+    rw [lintegral_const_mul _ (measurable_one.indicator hθ), lintegral_indicator_one hθ, Measure.restrict_apply hθ]
+  have hmeas : Measurable fun p : ℝ × ℝ => ENNReal.ofReal p.1 • f (Complex.polarCoord.symm p) :=
+    by
+      have : (fun p : ℝ × ℝ => ENNReal.ofReal p.1 • f (Complex.polarCoord.symm p)) =
+          fun p : ℝ × ℝ => ENNReal.ofReal p.1 • f ((p.1 : ℂ) * e p.2) := funext fun p => by rw [hpe]
+      rw [this]
+      exact (ENNReal.measurable_ofReal.comp measurable_fst).smul (hfm.comp
+        ((continuous_ofReal.comp continuous_fst).mul (continuous_e.comp continuous_snd)).measurable)
+  calc ∫⁻ r in Ioo a b, ENNReal.ofReal r * volume ({θ | x - (r : ℂ) * e θ ∈ A} ∩ Ioo (-Real.pi) Real.pi)
+      = ∫⁻ r in Ioo a b, ∫⁻ θ in Ioo (-Real.pi) Real.pi, ENNReal.ofReal r • f (Complex.polarCoord.symm (r, θ)) :=
+        setLIntegral_congr_fun measurableSet_Ioo hsl
+    _ = ∫⁻ p in Ioo a b ×ˢ Ioo (-Real.pi) Real.pi, ENNReal.ofReal p.1 • f (Complex.polarCoord.symm p) := by
+        rw [Measure.volume_eq_prod, ← Measure.prod_restrict, lintegral_prod _ hmeas.aemeasurable]
+    _ ≤ ∫⁻ p in Complex.polarCoord.target, ENNReal.ofReal p.1 • f (Complex.polarCoord.symm p) := by
+        refine lintegral_mono_set ?_
+        rw [Complex.polarCoord_target]
+        exact prod_mono (fun r hr => ha.trans hr.1) subset_rfl
+    _ = ∫⁻ w, f w := Complex.lintegral_comp_polarCoord_symm f
+    _ = volume W := lintegral_indicator_one hWm
+    _ ≤ volume {y | y ∈ A ∧ a ≤ dist x y ∧ dist x y ≤ b} := by
+        have hpre : W = (fun w => x - w) ⁻¹' {y | y ∈ A ∧ a < dist x y ∧ dist x y < b} := by
+          ext w; simp only [hW, mem_setOf_eq, mem_preimage, dist_eq_norm, sub_sub_cancel]
+        have hm2 : MeasurableSet {y | y ∈ A ∧ a < dist x y ∧ dist x y < b} :=
+          hA.inter ((measurableSet_lt measurable_const (measurable_const.dist measurable_id)).inter
+            (measurableSet_lt (measurable_const.dist measurable_id) measurable_const))
+        rw [hpre, (volume.measurePreserving_sub_left x).measure_preimage hm2.nullMeasurableSet]
+        exact measure_mono fun y hy => ⟨hy.1, hy.2.1.le, hy.2.2.le⟩
+
+/-- **Polar coordinates for pairs** (`Complex.lintegral_comp_polarCoord_symm` and Tonelli): a radius band null in
+`Leb ⊗ Leb` has null pair mass at almost every radius inside it. -/
+theorem ae_pairMass_eq_zero {A : Set ℂ} (hA : MeasurableSet A) {a b : ℝ} (ha : 0 < a) (h : IccPairNull A a b) (R : ℝ) :
+    ∀ᵐ r ∂volume, r ∈ Ioo a b → pairMass A R r = 0 := by
+  set J : ℂ × ℝ → ENNReal := fun p => volume ({θ | p.1 - (p.2 : ℂ) * e θ ∈ A} ∩ Ioo (-Real.pi) Real.pi) with hJ
+  have hJm : Measurable J := by
+    have hWm : MeasurableSet {q : (ℂ × ℝ) × ℝ | q.1.1 - (q.1.2 : ℂ) * e q.2 ∈ A ∧ q.2 ∈ Ioo (-Real.pi) Real.pi} :=
+      ((measurable_fst.comp measurable_fst).sub ((continuous_ofReal.measurable.comp (measurable_snd.comp measurable_fst)).mul
+        (continuous_e.measurable.comp measurable_snd)) hA).inter (measurable_snd measurableSet_Ioo)
+    exact measurable_measure_prodMk_left hWm
+  have hpm : ∀ r, pairMass A R r = ∫⁻ x, (A ∩ ball 0 R).indicator (fun x => J (x, r)) x := by
+    intro r
+    have hEm : MeasurableSet {q : ℂ × ℝ | q.1 ∈ A ∩ ball 0 R ∧ q.1 + (r : ℂ) * e q.2 ∈ A} :=
+      (measurable_fst (hA.inter measurableSet_ball)).inter
+        ((measurable_fst.add (measurable_const.mul (continuous_e.measurable.comp measurable_snd))) hA)
+    rw [pairMass, Measure.prod_apply hEm]
+    refine lintegral_congr fun x => ?_
+    by_cases hx : x ∈ A ∩ ball 0 R
+    · rw [indicator_of_mem hx]
+      simp only [hJ]
+      rw [← arcLength_eq_volume_Ioo hA x r]
+      congr 1; ext θ; simp only [mem_preimage, mem_setOf_eq]; exact ⟨fun h => h.2, fun h => ⟨hx, h⟩⟩
+    · rw [indicator_of_notMem hx]
+      exact measure_mono_null (fun θ hθ => hx hθ.1) measure_empty
+  set P : Set (ℂ × ℂ) := {q | q.1 ∈ A ∧ q.2 ∈ A ∧ a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b} with hP
+  have hPm : MeasurableSet P :=
+    (measurable_fst hA).inter ((measurable_snd hA).inter
+      ((measurableSet_le measurable_const (measurable_fst.dist measurable_snd)).inter
+        (measurableSet_le (measurable_fst.dist measurable_snd) measurable_const)))
+  have hG : Measurable fun q : ℝ × ℂ => ENNReal.ofReal q.1 * (A ∩ ball 0 R).indicator (fun x => J (x, q.1)) q.2 := by
+    refine (ENNReal.measurable_ofReal.comp measurable_fst).mul ?_
+    have : (fun q : ℝ × ℂ => (A ∩ ball 0 R).indicator (fun x => J (x, q.1)) q.2) =
+        (Prod.snd ⁻¹' (A ∩ ball 0 R)).indicator (fun q : ℝ × ℂ => J (q.2, q.1)) := by
+      funext q; rfl
+    rw [this]
+    exact (hJm.comp (measurable_snd.prodMk measurable_fst)).indicator (measurable_snd (hA.inter measurableSet_ball))
+  have hint : ∫⁻ r in Ioo a b, ENNReal.ofReal r * pairMass A R r = 0 := by
+    refine le_antisymm ?_ bot_le
+    calc ∫⁻ r in Ioo a b, ENNReal.ofReal r * pairMass A R r
+        = ∫⁻ r in Ioo a b, ∫⁻ x, ENNReal.ofReal r * (A ∩ ball 0 R).indicator (fun x => J (x, r)) x := by
+          refine lintegral_congr fun r => ?_
+          rw [hpm r, lintegral_const_mul]
+          exact (hJm.comp (measurable_id.prodMk measurable_const)).indicator (hA.inter measurableSet_ball)
+      _ = ∫⁻ x, ∫⁻ r in Ioo a b, ENNReal.ofReal r * (A ∩ ball 0 R).indicator (fun x => J (x, r)) x :=
+          lintegral_lintegral_swap hG.aemeasurable
+      _ ≤ ∫⁻ x, volume (Prod.mk x ⁻¹' P) := by
+          refine lintegral_mono fun x => ?_
+          by_cases hx : x ∈ A ∩ ball 0 R
+          · simp only [indicator_of_mem hx]
+            refine (lintegral_Ioo_angle_le hA x ha).trans (le_of_eq ?_)
+            congr 1; ext y; simp [hP, hx.1]
+          · simp only [indicator_of_notMem hx, mul_zero, lintegral_zero]
+            exact bot_le
+      _ = (volume.prod volume) P := (Measure.prod_apply hPm).symm
+      _ = 0 := h
+  have hcm : Measurable fun r => ENNReal.ofReal r * pairMass A R r :=
+    ENNReal.measurable_ofReal.mul (continuous_pairMass hA R).measurable
+  have hae := (lintegral_eq_zero_iff hcm).1 hint
+  rw [Filter.EventuallyEq, ae_restrict_iff' measurableSet_Ioo] at hae
+  filter_upwards [hae] with r hr hrI
+  have h0 := hr hrI
+  simp only [Pi.zero_apply, mul_eq_zero, ENNReal.ofReal_eq_zero] at h0
+  rcases h0 with h0 | h0
+  · exact absurd h0 (not_le.2 (ha.trans hrI.1))
+  · exact h0
+
+/-- From `ae_pairMass_eq_zero` and `continuous_pairMass`: null at every radius of the closed band. -/
+theorem pairMass_eq_zero_of_iccPairNull {A : Set ℂ} (hA : MeasurableSet A) {a b : ℝ} (ha : 0 < a) (hab : a < b)
+    (h : IccPairNull A a b) (R : ℝ) : ∀ r ∈ Icc a b, pairMass A R r = 0 := by
+  intro r hr
+  have hc := continuous_pairMass hA R
+  have hae := ae_pairMass_eq_zero hA ha h R
+  have hZ : IsClosed {r | pairMass A R r = 0} := isClosed_eq hc continuous_const
+  have hO : IsOpen (Ioo a b ∩ {r | pairMass A R r = 0}ᶜ) := isOpen_Ioo.inter hZ.isOpen_compl
+  have hnull : volume (Ioo a b ∩ {r | pairMass A R r = 0}ᶜ) = 0 := by
+    rw [ae_iff] at hae
+    refine measure_mono_null (fun r hr => ?_) hae
+    simp only [mem_setOf_eq, Classical.not_imp]
+    exact ⟨hr.1, hr.2⟩
+  have hempty := (hO.measure_eq_zero_iff volume).mp hnull
+  have hsub : Ioo a b ⊆ {r | pairMass A R r = 0} := by
+    intro r hr'
+    by_contra hn
+    have : r ∈ Ioo a b ∩ {r | pairMass A R r = 0}ᶜ := ⟨hr', hn⟩
+    rw [hempty] at this
+    exact this
+  have hIcc : Icc a b ⊆ {r | pairMass A R r = 0} := by
+    rw [← closure_Ioo hab.ne]
+    exact closure_minimal hsub hZ
+  exact hIcc hr
+
+/-- Rescaling by `s`: radius bands of `x ↦ A (s x)` are radius bands of `A` scaled by `s` (volume scales by `s⁴`). -/
+theorem iccPairNull_preimage_mul {A : Set ℂ} {s a b : ℝ} (hs : 0 < s) :
+    IccPairNull ((fun x : ℂ => (s : ℂ) * x) ⁻¹' A) a b ↔ IccPairNull A (s * a) (s * b) := by
+  unfold IccPairNull
+  set E : Set (ℂ × ℂ) := {q | q.1 ∈ A ∧ q.2 ∈ A ∧ s * a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ s * b} with hE
+  have hpre : {q : ℂ × ℂ | q.1 ∈ (fun x : ℂ => (s : ℂ) * x) ⁻¹' A ∧ q.2 ∈ (fun x : ℂ => (s : ℂ) * x) ⁻¹' A ∧
+      a ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ b} = (fun q : ℂ × ℂ => s • q) ⁻¹' E := by
+    ext ⟨x, y⟩
+    have hd : dist ((s : ℂ) * x) ((s : ℂ) * y) = s * dist x y := by
+      rw [dist_eq_norm, dist_eq_norm, ← mul_sub, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hs]
+    simp only [mem_setOf_eq, mem_preimage, Prod.smul_mk, Complex.real_smul, hE, hd]
+    constructor
+    · rintro ⟨h1, h2, h3, h4⟩; exact ⟨h1, h2, by nlinarith, by nlinarith⟩
+    · rintro ⟨h1, h2, h3, h4⟩; exact ⟨h1, h2, by nlinarith, by nlinarith⟩
+  rw [hpre, Measure.addHaar_preimage_smul (volume.prod volume) hs.ne']
+  constructor
+  · intro h0
+    rcases mul_eq_zero.mp h0 with h | h
+    · exfalso
+      rw [ENNReal.ofReal_eq_zero] at h
+      have : 0 < |(s ^ Module.finrank ℝ (ℂ × ℂ))⁻¹| := abs_pos.2 (inv_ne_zero (pow_ne_zero _ hs.ne'))
+      linarith
+    · exact h
+  · intro h0; rw [h0, mul_zero]
+
+/-- The rescaled colouring `x ↦ c (s x)` is an `AeColouring` when `c`'s pair mass at radius `s` vanishes. -/
+theorem AeColouring.exists_rescale (c : AeColouring k) {s : ℝ} (hs : 0 < s)
+    (h : ∀ j R, pairMass (c.cls j) R s = 0) : ∃ c' : AeColouring k, ∀ x, c'.col x = c.col ((s : ℂ) * x) := by
+  refine ⟨⟨fun x => c.col ((s : ℂ) * x), c.measurable.comp (measurable_const_mul _), fun j => ?_⟩, fun x => rfl⟩
+  have hP : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ c.cls j ∧ q.1 + ((s : ℝ) : ℂ) * e q.2 ∈ c.cls j} = 0 := by
+    refine measure_mono_null (t := ⋃ n : ℕ, {q : ℂ × ℝ | q.1 ∈ c.cls j ∩ ball 0 n ∧ q.1 + ((s : ℝ) : ℂ) * e q.2 ∈ c.cls j})
+      (fun q hq => ?_) (measure_iUnion_null fun n => h j n)
+    obtain ⟨n, hn⟩ := exists_nat_gt ‖q.1‖
+    exact mem_iUnion.2 ⟨n, ⟨hq.1, by simpa using hn⟩, hq.2⟩
+  have hqmp : Measure.QuasiMeasurePreserving (Prod.map (fun x : ℂ => s • x) id) (volume.prod arcLength)
+      (volume.prod arcLength) :=
+    MeasureTheory.QuasiMeasurePreserving.prodMap (Measure.quasiMeasurePreserving_smul volume hs.ne')
+      (Measure.QuasiMeasurePreserving.id arcLength)
+  refine measure_mono_null ?_ (hqmp.preimage_null hP)
+  rintro ⟨x, θ⟩ ⟨hx, hy⟩
+  refine ⟨?_, ?_⟩
+  · simpa [AeColouring.cls, Complex.real_smul] using hx
+  · simpa [AeColouring.cls, Complex.real_smul, mul_add] using hy
+
+/-- A class of positive measure has non-null pairs at distances in `[a, 1]` for some `a > 0` (a density point `x` and
+`r ≤ 1/2` with density `≥ 9/10` in `B(x, r)` give positive mass to pairs at distance in `[r/2, 2r]`). -/
+theorem AeColouring.exists_pos_not_iccPairNull (c : AeColouring k) : ∃ a > 0, ∃ j, ¬ IccPairNull (c.cls j) a 1 := by
+  have hcov : (⋃ j, c.cls j) = univ := by
+    ext x; simp only [mem_iUnion, mem_univ, iff_true]; exact ⟨c.col x, rfl⟩
+  obtain ⟨j, hj⟩ : ∃ j, volume (c.cls j) ≠ 0 := by
+    by_contra h
+    push Not at h
+    have h0 : volume (univ : Set ℂ) = 0 := by rw [← hcov]; exact measure_iUnion_null h
+    rw [Measure.measure_univ_eq_zero] at h0
+    exact (NeZero.ne (volume : Measure ℂ)) h0
+  set A := c.cls j with hAdef
+  have hAm : MeasurableSet A := c.measurable (measurableSet_singleton j)
+  haveI : (ae (volume.restrict A)).NeBot := ae_neBot.2 (by rwa [Ne, Measure.restrict_eq_zero])
+  obtain ⟨x, hx⟩ := (ae_restrict_mem_densitySet A).exists
+  have hev : ∀ᶠ r in 𝓝[>] (0 : ℝ), (1 / 2 : ENNReal) < densityRatio A x r :=
+    hx.eventually (lt_mem_nhds (by norm_num))
+  obtain ⟨r, hr, hr0⟩ := (hev.and (Ioo_mem_nhdsGT (by norm_num : (0 : ℝ) < 1 / 2))).exists
+  have hrpos : 0 < r := hr0.1
+  set A1 := A ∩ closedBall x r with hA1def
+  have hA1m : MeasurableSet A1 := hAm.inter measurableSet_closedBall
+  have hcb : volume (closedBall x r) = ENNReal.ofReal (r ^ 2 * Real.pi) := by
+    rw [← volume_ball_ofReal x hrpos.le, Complex.volume_ball, Complex.volume_closedBall]
+  have hA1 : ENNReal.ofReal (r ^ 2 * Real.pi / 2) < volume A1 := by
+    unfold densityRatio at hr
+    rw [ENNReal.lt_div_iff_mul_lt (Or.inl (measure_closedBall_pos volume x hrpos).ne')
+      (Or.inl measure_closedBall_lt_top.ne), hcb] at hr
+    refine lt_of_eq_of_lt ?_ hr
+    rw [div_eq_mul_inv, ENNReal.ofReal_mul (by positivity), mul_comm, one_div,
+      ENNReal.ofReal_inv_of_pos (by norm_num), ENNReal.ofReal_ofNat]
+  refine ⟨r / 4, by positivity, j, fun hN => ?_⟩
+  have hsub : A1 ×ˢ A1 ⊆ {q : ℂ × ℂ | q.1 ∈ A1 ∧ dist q.2 q.1 < r / 4} ∪
+      {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ r / 4 ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ 1} := by
+    rintro ⟨p, q⟩ ⟨hp, hq⟩
+    by_cases h : dist p q < r / 4
+    · left; exact ⟨hp, by rw [dist_comm]; exact h⟩
+    · right
+      refine ⟨hp.1, hq.1, not_lt.1 h, ?_⟩
+      have h1 := mem_closedBall.1 hp.2
+      have h2 := mem_closedBall.1 hq.2
+      have := dist_triangle p x q
+      rw [dist_comm x q] at this
+      simp only at h1 h2 ⊢
+      linarith [hr0.2]
+  have hm : MeasurableSet {q : ℂ × ℂ | q.1 ∈ A1 ∧ dist q.2 q.1 < r / 4} :=
+    (measurable_fst hA1m).inter (measurableSet_lt (continuous_snd.dist continuous_fst).measurable measurable_const)
+  have hS : (volume.prod volume) {q : ℂ × ℂ | q.1 ∈ A1 ∧ dist q.2 q.1 < r / 4} ≤
+      volume A1 * ENNReal.ofReal ((r / 4) ^ 2 * Real.pi) := by
+    rw [Measure.prod_apply hm]
+    calc ∫⁻ p, volume (Prod.mk p ⁻¹' {q : ℂ × ℂ | q.1 ∈ A1 ∧ dist q.2 q.1 < r / 4}) ≤
+          ∫⁻ p, A1.indicator (fun _ => ENNReal.ofReal ((r / 4) ^ 2 * Real.pi)) p := by
+          refine lintegral_mono fun p => ?_
+          by_cases hp : p ∈ A1
+          · rw [indicator_of_mem hp, ← volume_ball_ofReal p (by positivity)]
+            exact measure_mono fun q hq => hq.2
+          · rw [indicator_of_notMem hp]
+            exact (measure_mono_null (fun q hq => hp hq.1) measure_empty).le
+      _ = _ := by rw [lintegral_indicator_const hA1m, mul_comm]
+  have key : volume A1 * volume A1 ≤ volume A1 * ENNReal.ofReal ((r / 4) ^ 2 * Real.pi) := by
+    rw [← Measure.prod_prod]
+    calc (volume.prod volume) (A1 ×ˢ A1) ≤ _ := measure_mono hsub
+      _ ≤ _ + _ := measure_union_le _ _
+      _ = (volume.prod volume) {q : ℂ × ℂ | q.1 ∈ A1 ∧ dist q.2 q.1 < r / 4} := by
+          rw [show (volume.prod volume) {q : ℂ × ℂ | q.1 ∈ A ∧ q.2 ∈ A ∧ r / 4 ≤ dist q.1 q.2 ∧ dist q.1 q.2 ≤ 1} = 0
+            from hN, add_zero]
+      _ ≤ _ := hS
+  have hA1fin : volume A1 ≠ ⊤ := ((measure_mono inter_subset_right).trans_lt measure_closedBall_lt_top).ne
+  have hA1pos : volume A1 ≠ 0 := (lt_of_le_of_lt bot_le hA1).ne'
+  have h1 := (ENNReal.mul_le_mul_iff_right hA1pos hA1fin).1 key
+  have h2 : ENNReal.ofReal ((r / 4) ^ 2 * Real.pi) < ENNReal.ofReal (r ^ 2 * Real.pi / 2) := by
+    rw [ENNReal.ofReal_lt_ofReal_iff (by positivity)]
+    nlinarith [Real.pi_pos, mul_pos hrpos hrpos]
+  exact absurd (h1.trans_lt (h2.trans hA1)) (lt_irrefl _)
+
+/-! ### SUPK: the upper bounds, windows, kept points, periodization -/
+
+/-- A band-null measurable class (`0 < ε < 1`) has null unit pairs (`pairMass_eq_zero_of_iccPairNull` at `r = 1`). -/
+theorem bandNull_unitPairsNull {A : Set ℂ} (hA : MeasurableSet A) {ε : ℝ} (hε0 : 0 < ε) (hε1 : ε < 1)
+    (h : BandNull A ε) : UnitPairsNull A := by
+  have hI : IccPairNull A (1 - ε) (1 + ε) := (bandNull_iff_iccPairNull A ε).1 h
+  have hP := pairMass_eq_zero_of_iccPairNull hA (by linarith) (by linarith) hI
+  exact unitPairsNull_iff_pairMass.2 fun R => hP R 1 ⟨by linarith, by linarith⟩
+
+/-- `µ_k(ε) ≤ µ_k⁰` for `0 < ε < 1`: a band-null family has null unit pairs (`bandNull_unitPairsNull`). -/
+theorem mu_le_muZero (k : ℕ) {ε : ℝ} (hε0 : 0 < ε) (hε1 : ε < 1) : mu k ε ≤ muZero k := by
+  refine iSup₂_le fun C hC => le_iSup₂_of_le (f := fun C (_ : IsPartialColouring C ∧ ∀ j, UnitPairsNull (C j)) =>
+    upperDensity (⋃ j, C j)) C ⟨hC.1, fun j => bandNull_unitPairsNull (hC.1.1 j) hε0 hε1 (hC.2 j)⟩ le_rfl
+
+/-- A band-free class is band-null. -/
+theorem bandNull_of_bandFree {A : Set ℂ} {ε : ℝ} (h : BandFree A ε) : BandNull A ε := by
+  have : bandPairSet A ε = ∅ := by
+    ext q
+    simp only [bandPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+    intro hx hy h1 h2
+    rcases h _ hx _ hy with h3 | h3 <;> linarith
+  rw [BandNull, this, measure_empty]
+
+/-- `µ_k^tile(ε) ≤ µ_k(ε)`: band-free classes are band-null. -/
+theorem muTile_le_mu (k : ℕ) (ε : ℝ) : muTile k ε ≤ mu k ε := by
+  refine iSup_le fun C => iSup_le fun h => ?_
+  exact le_iSup₂_of_le C ⟨h.1, fun j => bandNull_of_bandFree (h.2.2 j)⟩ le_rfl
+
+/-- `µ_k^per(ε) ≤ µ_k^tile(ε)`: a periodic tiled family is a tiled family. -/
+theorem muPer_le_muTile (k : ℕ) (ε : ℝ) : muPer k ε ≤ muTile k ε := by
+  refine iSup_le fun C => iSup_le fun h => ?_
+  exact le_iSup₂_of_le C ⟨h.1, h.2.1, h.2.2.2⟩ le_rfl
+
+/-- The half-open square window `[z, z + ℓ)²`. -/
+def squareWin (z : ℂ) (ℓ : ℝ) : Set ℂ := {w | z.re ≤ w.re ∧ w.re < z.re + ℓ ∧ z.im ≤ w.im ∧ w.im < z.im + ℓ}
+
+/-- Almost every point of a measurable set is kept at every small scale (Lebesgue density: `ae_restrict_mem_densitySet`,
+with `volume_densitySet_diff` and `volume_diff_densitySet`). -/
+theorem ae_eventually_keptAt {A : Set ℂ} (hA : MeasurableSet A) {η : ℝ} (hη : 0 < η) :
+    ∀ᵐ x ∂(volume.restrict A), ∀ᶠ ε in 𝓝[>] (0 : ℝ), KeptAt A η ε x := by
+  filter_upwards [ae_restrict_mem_densitySet A] with x hx
+  have hlt : ENNReal.ofReal (1 - η) < 1 := by rw [ENNReal.ofReal_lt_one]; linarith
+  have hev : ∀ᶠ r in 𝓝[>] (0 : ℝ), ENNReal.ofReal (1 - η) < densityRatio A x r := hx.eventually (lt_mem_nhds hlt)
+  have hsc : ∀ c : ℝ, 0 < c → Tendsto (fun ε : ℝ => c * ε) (𝓝[>] 0) (𝓝[>] 0) := by
+    intro c hc
+    refine tendsto_nhdsWithin_of_tendsto_nhds_of_eventually_within _ ?_ ?_
+    · have : Tendsto (fun ε : ℝ => c * ε) (𝓝 0) (𝓝 (c * 0)) := (continuous_const.mul continuous_id).tendsto 0
+      rw [mul_zero] at this
+      exact this.mono_left nhdsWithin_le_nhds
+    · filter_upwards [self_mem_nhdsWithin] with ε hε
+      exact mul_pos hc hε
+  filter_upwards [(hsc (1 / 2) (by norm_num)).eventually hev, (hsc 2 (by norm_num)).eventually hev, self_mem_nhdsWithin]
+    with ε he1 he2 hε0
+  intro ρ hρ
+  have hε0' : (0 : ℝ) < ε := hε0
+  have hρ0 : 0 < ρ := by rcases hρ with rfl | rfl <;> positivity
+  have hd : ENNReal.ofReal (1 - η) < densityRatio A x ρ := by
+    rcases hρ with rfl | rfl
+    · simpa [div_eq_inv_mul] using he1
+    · exact he2
+  have e1 : volume (ball x ρ) = volume (closedBall x ρ) := by rw [Complex.volume_ball, Complex.volume_closedBall]
+  have e2 : volume (ball x ρ ∩ densitySet A) = volume (A ∩ closedBall x ρ) := by
+    rw [measure_congr (ae_eq_set_inter (ae_eq_refl (ball x ρ)) (ae_eq_set.2 ⟨volume_diff_densitySet hA, volume_densitySet_diff hA⟩).symm), inter_comm]
+    refine le_antisymm (measure_mono (inter_subset_inter_right _ ball_subset_closedBall)) ?_
+    calc volume (A ∩ closedBall x ρ) ≤ volume (A ∩ ball x ρ ∪ sphere x ρ) := by
+          refine measure_mono fun y hy => ?_
+          by_cases h : y ∈ ball x ρ
+          · exact Or.inl ⟨hy.1, h⟩
+          · right
+            rw [mem_sphere]
+            rw [mem_ball, not_lt] at h
+            exact le_antisymm (mem_closedBall.1 hy.2) h
+      _ ≤ volume (A ∩ ball x ρ) + volume (sphere x ρ) := measure_union_le _ _
+      _ = volume (A ∩ ball x ρ) := by rw [Measure.addHaar_sphere volume x ρ, add_zero]
+  rw [e1, e2]
+  have hpos : volume (closedBall x ρ) ≠ 0 := (measure_closedBall_pos volume x hρ0).ne'
+  have hfin : volume (closedBall x ρ) ≠ ⊤ := measure_closedBall_lt_top.ne
+  exact (ENNReal.le_div_iff_mul_le (Or.inl hpos) (Or.inl hfin)).1 hd.le
+
+/-- Keeping is robust: kept at threshold `η/2` gives kept at `η` within `ηε/12` (`ball x ρ ⊆ ball x' (ρ + d)`, so the
+lost area is at most `π(2ρd + d²) ≤ 3πρd`). -/
+theorem keptAt_of_dist_le {A : Set ℂ} {η ε : ℝ} (hε : 0 < ε) (hη : 0 ≤ η) (hη1 : η ≤ 1) {x x' : ℂ}
+    (hx : KeptAt A (η / 2) ε x) (hd : dist x x' ≤ η * ε / 12) : KeptAt A η ε x' := by
+  intro ρ hρ
+  have hρ' : ε / 2 ≤ ρ := by rcases hρ with rfl | rfl <;> [exact le_rfl; linarith]
+  have hρ0 : 0 < ρ := by linarith
+  set d := dist x x' with hdd
+  have hd0 : 0 ≤ d := dist_nonneg
+  have hdρ : d ≤ η * ρ / 4 := by nlinarith
+  have hdρ' : d ≤ ρ := by nlinarith
+  have h1 := hx ρ hρ
+  set D := densitySet A
+  have hsub : ball x (ρ - d) ⊆ ball x' ρ := by
+    intro y hy
+    rw [mem_ball] at hy ⊢
+    have := dist_triangle y x x'
+    linarith
+  have hsplit : volume (ball x ρ ∩ D) ≤ volume (ball x (ρ - d) ∩ D) + volume (ball x ρ \ ball x (ρ - d)) := by
+    refine le_trans (measure_mono ?_) (measure_union_le _ _)
+    intro y hy
+    by_cases hy' : y ∈ ball x (ρ - d)
+    · exact Or.inl ⟨hy', hy.2⟩
+    · exact Or.inr ⟨hy.1, hy'⟩
+  have hdiff : volume (ball x ρ \ ball x (ρ - d)) = ENNReal.ofReal ((ρ ^ 2 - (ρ - d) ^ 2) * Real.pi) := by
+    rw [measure_sdiff (ball_subset_ball (by linarith)) measurableSet_ball.nullMeasurableSet measure_ball_lt_top.ne,
+      volume_ball_ofReal x hρ0.le, volume_ball_ofReal x (by linarith), ← ENNReal.ofReal_sub _ (by positivity)]
+    congr 1; ring
+  rw [volume_ball_ofReal x hρ0.le, ← ENNReal.ofReal_mul (by linarith)] at h1
+  rw [volume_ball_ofReal x' hρ0.le, ← ENNReal.ofReal_mul (by linarith)]
+  have h2 : ENNReal.ofReal ((1 - η / 2) * (ρ ^ 2 * Real.pi)) ≤
+      volume (ball x (ρ - d) ∩ D) + ENNReal.ofReal ((ρ ^ 2 - (ρ - d) ^ 2) * Real.pi) :=
+    h1.trans (hsplit.trans (by rw [hdiff]))
+  have h3 := tsub_le_iff_right.mpr h2
+  have hb : 0 ≤ (ρ ^ 2 - (ρ - d) ^ 2) * Real.pi := mul_nonneg (by nlinarith) Real.pi_pos.le
+  rw [← ENNReal.ofReal_sub _ hb] at h3
+  refine le_trans ?_ (h3.trans (measure_mono (inter_subset_inter_left _ hsub)))
+  refine ENNReal.ofReal_le_ofReal ?_
+  have hkey : 0 ≤ η * ρ ^ 2 / 2 - (ρ ^ 2 - (ρ - d) ^ 2) := by nlinarith [mul_nonneg hd0 hd0, mul_nonneg hη hρ0.le]
+  nlinarith [mul_nonneg hkey Real.pi_pos.le]
+
+/-- The periodization of `T` with period `L` in both coordinates. -/
+def periodize (T : Set ℂ) (L : ℝ) : Set ℂ := {x | ∃ m n : ℤ, x - ((m * L : ℝ) + (n * L : ℝ) * I) ∈ T}
+
+/-- A periodized set is periodic with its period. -/
+theorem isPeriodicSet_periodize (T : Set ℂ) (L : ℝ) : IsPeriodicSet L (periodize T L) := by
+  intro x
+  constructor
+  · constructor
+    · rintro ⟨m, n, h⟩
+      exact ⟨m - 1, n, by convert h using 1; push_cast; ring⟩
+    · rintro ⟨m, n, h⟩
+      exact ⟨m + 1, n, by convert h using 1; push_cast; ring⟩
+  · constructor
+    · rintro ⟨m, n, h⟩
+      exact ⟨m, n - 1, by convert h using 1; push_cast; ring⟩
+    · rintro ⟨m, n, h⟩
+      exact ⟨m, n + 1, by convert h using 1; push_cast; ring⟩
+
+/-- Periodizing a measurable set gives a measurable set (a countable union of translates). -/
+theorem measurableSet_periodize {T : Set ℂ} (hT : MeasurableSet T) (L : ℝ) : MeasurableSet (periodize T L) := by
+  have : periodize T L = ⋃ (m : ℤ) (n : ℤ), (fun x : ℂ => x - (((m * L : ℝ) : ℂ) + ((n * L : ℝ) : ℂ) * I)) ⁻¹' T := by
+    ext x; simp [periodize]
+  rw [this]
+  exact MeasurableSet.iUnion fun m => MeasurableSet.iUnion fun n => (measurable_id.sub_const _) hT
+
+/-- The real part of the lattice shift `mL + (nL) i`. -/
+theorem shift_re (m n : ℤ) (L : ℝ) : (((m * L : ℝ) : ℂ) + ((n * L : ℝ) : ℂ) * I).re = m * L := by simp
+
+/-- The imaginary part of the lattice shift `mL + (nL) i`. -/
+theorem shift_im (m n : ℤ) (L : ℝ) : (((m * L : ℝ) : ℂ) + ((n * L : ℝ) : ℂ) * I).im = n * L := by simp
+
+/-- Periodizing a union of `h`-grid cells at a period `N h` keeps it a union of `h`-grid cells. -/
+theorem isGridUnion_periodize {T : Set ℂ} {h : ℝ} (hh : 0 < h) {N : ℕ} (hT : IsGridUnion h T) :
+    IsGridUnion h (periodize T (N * h)) := by
+  intro x ⟨m, n, hx⟩ y hy
+  refine ⟨m, n, hT _ hx ?_⟩
+  obtain ⟨h1, h2⟩ := hy
+  have key : ∀ (a : ℝ) (j : ℤ), ⌊(a - (j : ℝ) * (N * h)) / h⌋ = ⌊a / h⌋ - j * N := by
+    intro a j
+    have : (a - (j : ℝ) * (N * h)) / h = a / h - ((j * N : ℤ) : ℝ) := by
+      push_cast; field_simp
+    rw [this, Int.floor_sub_intCast]
+  simp only [gridCell, mem_setOf_eq, Complex.sub_re, Complex.sub_im, shift_re, shift_im, key]
+  exact ⟨by rw [h1], by rw [h2]⟩
+
+/-- Copies of a window of side `ℓ` at period `ℓ + 2` are `2` apart, beyond every band distance when `ε < 1`. -/
+theorem bandFree_periodize {T : Set ℂ} {z : ℂ} {ℓ ε : ℝ} (hT : T ⊆ squareWin z ℓ) (hε : ε < 1) (h : BandFree T ε) :
+    BandFree (periodize T (ℓ + 2)) ε := by
+  intro x ⟨m, n, hx⟩ y ⟨m', n', hy⟩
+  have h1 := hT hx
+  have h2 := hT hy
+  simp only [squareWin, mem_setOf_eq, Complex.sub_re, Complex.sub_im, shift_re, shift_im] at h1 h2
+  have hℓ : 0 ≤ ℓ := by have := h1.1; have := h1.2.1; linarith
+  by_cases hm : m = m'
+  · by_cases hn : n = n'
+    · subst hm; subst hn
+      have := h _ hx _ hy
+      have e : dist (x - (((m * (ℓ + 2) : ℝ) : ℂ) + ((n * (ℓ + 2) : ℝ) : ℂ) * I))
+          (y - (((m * (ℓ + 2) : ℝ) : ℂ) + ((n * (ℓ + 2) : ℝ) : ℂ) * I)) = dist x y := by
+        rw [dist_eq_norm, dist_eq_norm]; congr 1; ring
+      rwa [e] at this
+    · right
+      have hd : 2 ≤ |y.im - x.im| := by
+        rcases lt_or_gt_of_ne hn with hlt | hlt
+        · have : (n : ℝ) + 1 ≤ n' := by exact_mod_cast hlt
+          rw [abs_of_nonneg (by nlinarith)]; nlinarith
+        · have : (n' : ℝ) + 1 ≤ n := by exact_mod_cast hlt
+          rw [abs_of_nonpos (by nlinarith)]; nlinarith
+      have := Complex.abs_im_le_norm (y - x)
+      rw [Complex.sub_im] at this
+      rw [dist_eq_norm, ← norm_neg, neg_sub]
+      linarith
+  · right
+    have hd : 2 ≤ |y.re - x.re| := by
+      rcases lt_or_gt_of_ne hm with hlt | hlt
+      · have : (m : ℝ) + 1 ≤ m' := by exact_mod_cast hlt
+        rw [abs_of_nonneg (by nlinarith)]; nlinarith
+      · have : (m' : ℝ) + 1 ≤ m := by exact_mod_cast hlt
+        rw [abs_of_nonpos (by nlinarith)]; nlinarith
+    have := Complex.abs_re_le_norm (y - x)
+    rw [Complex.sub_re] at this
+    rw [dist_eq_norm, ← norm_neg, neg_sub]
+    linarith
+
+/-- Disjoint sets inside one window of side `ℓ` stay disjoint when periodized at period `ℓ + 2`. -/
+theorem disjoint_periodize {T T' : Set ℂ} {z : ℂ} {ℓ : ℝ} (hT : T ⊆ squareWin z ℓ) (hT' : T' ⊆ squareWin z ℓ)
+    (h : Disjoint T T') : Disjoint (periodize T (ℓ + 2)) (periodize T' (ℓ + 2)) := by
+  rw [Set.disjoint_left]
+  rintro x ⟨m, n, hx⟩ ⟨m', n', hx'⟩
+  have h1 := hT hx
+  have h2 := hT' hx'
+  simp only [squareWin, mem_setOf_eq, Complex.sub_re, Complex.add_re, Complex.ofReal_re, Complex.mul_re,
+    Complex.I_re, Complex.ofReal_im, Complex.I_im, Complex.sub_im, Complex.add_im, Complex.mul_im] at h1 h2
+  have hℓ : ℓ + 2 > 0 := by
+    have := h1.1; have := h1.2.1; linarith
+  have hm : m = m' := by
+    by_contra hne
+    rcases lt_or_gt_of_ne hne with hlt | hlt
+    · have : (m : ℝ) + 1 ≤ m' := by exact_mod_cast hlt
+      nlinarith [h1.1, h1.2.1, h2.1, h2.2.1]
+    · have : (m' : ℝ) + 1 ≤ m := by exact_mod_cast hlt
+      nlinarith [h1.1, h1.2.1, h2.1, h2.2.1]
+  have hn : n = n' := by
+    by_contra hne
+    rcases lt_or_gt_of_ne hne with hlt | hlt
+    · have : (n : ℝ) + 1 ≤ n' := by exact_mod_cast hlt
+      nlinarith [h1.2.2.1, h1.2.2.2, h2.2.2.1, h2.2.2.2]
+    · have : (n' : ℝ) + 1 ≤ n := by exact_mod_cast hlt
+      nlinarith [h1.2.2.1, h1.2.2.2, h2.2.2.1, h2.2.2.2]
+  subst hm; subst hn
+  exact Set.disjoint_left.1 h hx hx'
+
+/-- Periodization commutes with unions. -/
+theorem iUnion_periodize {T : Fin k → Set ℂ} (L : ℝ) : ⋃ j, periodize (T j) L = periodize (⋃ j, T j) L := by
+  ext x
+  simp only [periodize, mem_iUnion, mem_setOf_eq]
+  constructor
+  · rintro ⟨j, m, n, h⟩; exact ⟨m, n, j, h⟩
+  · rintro ⟨m, n, j, h⟩; exact ⟨j, m, n, h⟩
+
+/-- The half-open window is measurable. -/
+theorem measurableSet_squareWin (z : ℂ) (ℓ : ℝ) : MeasurableSet (squareWin z ℓ) := by
+  simp only [squareWin, Set.setOf_and]
+  exact (measurableSet_le measurable_const Complex.measurable_re).inter
+    ((measurableSet_lt Complex.measurable_re measurable_const).inter
+      ((measurableSet_le measurable_const Complex.measurable_im).inter
+        (measurableSet_lt Complex.measurable_im measurable_const)))
+
+/-- The half-open window of side `ℓ ≥ 0` has area `ℓ²`. -/
+theorem volume_squareWin (z : ℂ) {ℓ : ℝ} (hℓ : 0 ≤ ℓ) : volume (squareWin z ℓ) = ENNReal.ofReal (ℓ ^ 2) := by
+  have : squareWin z ℓ = Complex.measurableEquivRealProd ⁻¹' (Ico z.re (z.re + ℓ) ×ˢ Ico z.im (z.im + ℓ)) := by
+    ext w
+    simp [squareWin, Complex.measurableEquivRealProd, and_assoc]
+  rw [this, Complex.volume_preserving_equiv_real_prod.measure_preimage
+      (measurableSet_Ico.prod measurableSet_Ico).nullMeasurableSet,
+    Measure.volume_eq_prod, Measure.prod_prod, Real.volume_Ico, Real.volume_Ico, ← ENNReal.ofReal_mul (by linarith)]
+  congr 1; ring
+
+/-- The ratio of the areas of two discs about the origin. -/
+theorem volume_ball_div_volume_ball {r R : ℝ} (hr : 0 ≤ r) (hR : 0 < R) :
+    volume (ball (0 : ℂ) r) / volume (ball (0 : ℂ) R) = ENNReal.ofReal ((r / R) ^ 2) := by
+  rw [volume_ball_ofReal 0 hr, volume_ball_ofReal 0 hR.le, ← ENNReal.ofReal_div_of_pos (by positivity)]
+  congr 1
+  field_simp
+
+/-- `((R + c)/R)² → 1` as `R → ∞`. -/
+theorem tendsto_sq_add_div (c : ℝ) : Tendsto (fun R : ℝ => ENNReal.ofReal (((R + c) / R) ^ 2)) atTop (𝓝 1) := by
+  rw [← ENNReal.ofReal_one]
+  refine ENNReal.tendsto_ofReal ?_
+  have h0 : Tendsto (fun R : ℝ => c / R) atTop (𝓝 0) := tendsto_const_nhds.div_atTop tendsto_id
+  have h : Tendsto (fun R : ℝ => 1 + c / R) atTop (𝓝 1) := by
+    simpa using (tendsto_const_nhds (x := (1 : ℝ))).add h0
+  have h2 : Tendsto (fun R : ℝ => (1 + c / R) ^ 2) atTop (𝓝 1) := by simpa using h.pow 2
+  refine h2.congr' ?_
+  filter_upwards [eventually_gt_atTop 0] with R hR
+  congr 1
+  field_simp
+
+/-- **The window lemma**: a set of upper density above `d` fills some `ℓ`-grid square of side `ℓ` to at least `d`, for
+every integer side `ℓ` (average over the grid squares meeting a large ball `B(0, R)`; `ℓ/R → 0`). -/
+theorem exists_squareWin_dense {S : Set ℂ} (hS : MeasurableSet S) {d : ℝ} (hd : ENNReal.ofReal d < upperDensity S)
+    (ℓ : ℕ) (hℓ : 0 < ℓ) :
+    ∃ p q : ℤ, ENNReal.ofReal (d * (ℓ : ℝ) ^ 2) ≤ volume (S ∩ squareWin ((ℓ * p : ℝ) + (ℓ * q : ℝ) * I) ℓ) := by
+  have _ := hS -- idle: the window bound needs no measurability (outer measure suffices)
+  by_contra hcon
+  push Not at hcon
+  have hd0 : 0 ≤ d := by
+    by_contra h
+    push Not at h
+    have h0 := hcon 0 0
+    rw [ENNReal.ofReal_of_nonpos (by nlinarith [sq_nonneg (ℓ : ℝ)])] at h0
+    exact absurd h0 (not_lt.2 bot_le)
+  have hl : (0 : ℝ) < ℓ := by exact_mod_cast hℓ
+  set W : ℤ × ℤ → Set ℂ := fun pq => squareWin ((ℓ * pq.1 : ℝ) + (ℓ * pq.2 : ℝ) * I) ℓ with hW
+  have hWm : ∀ pq, MeasurableSet (W pq) := fun pq => measurableSet_squareWin _ _
+  have hWv : ∀ pq, volume (W pq) = ENNReal.ofReal ((ℓ : ℝ) ^ 2) := fun pq => volume_squareWin _ hl.le
+  have hWS : ∀ pq, volume (S ∩ W pq) ≤ ENNReal.ofReal d * volume (W pq) := by
+    intro pq
+    rw [hWv, ← ENNReal.ofReal_mul hd0]
+    exact (hcon pq.1 pq.2).le
+  have hmemW : ∀ x : ℂ, x ∈ W (⌊x.re / ℓ⌋, ⌊x.im / ℓ⌋) := by
+    intro x
+    have a1 := Int.floor_le (x.re / ℓ)
+    have a2 := Int.lt_floor_add_one (x.re / ℓ)
+    have a3 := Int.floor_le (x.im / ℓ)
+    have a4 := Int.lt_floor_add_one (x.im / ℓ)
+    rw [le_div_iff₀ hl] at a1 a3
+    rw [div_lt_iff₀ hl] at a2 a4
+    simp only [hW, squareWin, mem_setOf_eq, Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im]
+    refine ⟨?_, ?_, ?_, ?_⟩ <;> nlinarith
+  have hdistW : ∀ pq, ∀ x ∈ W pq, ∀ y ∈ W pq, dist x y < 2 * ℓ := by
+    intro pq x hx y hy
+    simp only [hW, squareWin, mem_setOf_eq, Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im] at hx hy
+    rw [dist_eq_norm]
+    calc ‖x - y‖ ≤ |(x - y).re| + |(x - y).im| := Complex.norm_le_abs_re_add_abs_im _
+      _ < ℓ + ℓ := by
+          refine add_lt_add ?_ ?_ <;> rw [abs_lt] <;> simp only [Complex.sub_re, Complex.sub_im] <;>
+            constructor <;> linarith
+      _ = 2 * ℓ := by ring
+  have hdisj : ∀ pq pq' x, x ∈ W pq → x ∈ W pq' → pq = pq' := by
+    have hfl : ∀ (a : ℝ) (m : ℤ), (ℓ : ℝ) * m ≤ a → a < ℓ * m + ℓ → m = ⌊a / ℓ⌋ := by
+      intro a m h1 h2
+      symm; rw [Int.floor_eq_iff, le_div_iff₀ hl, div_lt_iff₀ hl]; constructor <;> linarith
+    intro pq pq' x hx hx'
+    simp only [hW, squareWin, mem_setOf_eq, Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im] at hx hx'
+    simp only [mul_zero, sub_zero, mul_one, zero_add, add_zero] at hx hx'
+    exact Prod.ext ((hfl _ _ hx.1 hx.2.1).trans (hfl _ _ hx'.1 hx'.2.1).symm)
+      ((hfl _ _ hx.2.2.1 hx.2.2.2).trans (hfl _ _ hx'.2.2.1 hx'.2.2.2).symm)
+  have hbound : ∀ R, volume (S ∩ ball 0 R) ≤ ENNReal.ofReal d * volume (ball (0 : ℂ) (R + 2 * ℓ)) := by
+    intro R
+    set I' : Set (ℤ × ℤ) := {pq | W pq ⊆ ball 0 (R + 2 * ℓ)} with hI'
+    have hcount : I'.Countable := Set.to_countable _
+    have hsub : S ∩ ball 0 R ⊆ ⋃ pq ∈ I', S ∩ W pq := by
+      intro x hx
+      refine mem_iUnion₂.2 ⟨(⌊x.re / ℓ⌋, ⌊x.im / ℓ⌋), fun y hy => ?_, hx.1, hmemW x⟩
+      have := hdistW _ y hy x (hmemW x)
+      have hx2 := mem_ball.1 hx.2
+      rw [mem_ball]
+      linarith [dist_triangle y x 0]
+    calc volume (S ∩ ball 0 R) ≤ volume (⋃ pq ∈ I', S ∩ W pq) := measure_mono hsub
+      _ ≤ ∑' pq : I', volume (S ∩ W pq) := measure_biUnion_le _ hcount _
+      _ ≤ ∑' pq : I', ENNReal.ofReal d * volume (W pq) := ENNReal.tsum_le_tsum fun pq => hWS pq
+      _ = ENNReal.ofReal d * volume (⋃ pq ∈ I', W pq) := by
+          rw [ENNReal.tsum_mul_left, measure_biUnion hcount (fun pq _ pq' _ hne =>
+            Set.disjoint_left.2 fun x hx hx' => hne (hdisj pq pq' x hx hx')) (fun pq _ => hWm pq)]
+      _ ≤ _ := by gcongr; exact iUnion₂_subset fun pq hpq => hpq
+  have hlim : Tendsto (fun R : ℝ => ENNReal.ofReal d * ENNReal.ofReal (((R + 2 * ℓ) / R) ^ 2)) atTop
+      (𝓝 (ENNReal.ofReal d * 1)) :=
+    ENNReal.Tendsto.const_mul (tendsto_sq_add_div (2 * ℓ)) (Or.inr ENNReal.ofReal_ne_top)
+  rw [mul_one] at hlim
+  have hle : upperDensity S ≤ ENNReal.ofReal d := by
+    rw [upperDensity, ← hlim.limsup_eq]
+    refine limsup_le_limsup ?_
+    filter_upwards [eventually_gt_atTop 0] with R hR
+    rw [← volume_ball_div_volume_ball (by positivity) hR, ← mul_div_assoc]
+    exact ENNReal.div_le_div_right (hbound R) _
+  exact absurd hd (not_lt.2 hle)
+
+/-- **Upper density from a tiling** (the squeeze both periodic densities read): if the translates `g + D`, `g ∈ G`, of a
+measurable set `D` of diameter at most `δ` and positive area tile the plane, and `S` is measurable and invariant under each
+`g ∈ G`, then `d̄(S) = |S ∩ D| / |D|` — the windows inside `B(0, R)` cover `B(0, R − δ)`, and a window holds `S` in that ratio. -/
+theorem upperDensity_of_tiling {D S : Set ℂ} {G : Set ℂ} (hG : G.Countable) (hD : MeasurableSet D) (hS : MeasurableSet S)
+    {δ : ℝ} (hδ : ∀ x ∈ D, ∀ y ∈ D, dist x y ≤ δ) (hD0 : volume D ≠ 0)
+    (hdisj : ∀ g ∈ G, ∀ g' ∈ G, ∀ x, x - g ∈ D → x - g' ∈ D → g = g')
+    (hcov : ∀ x, ∃ g ∈ G, x - g ∈ D) (hper : ∀ g ∈ G, ∀ x, x + g ∈ S ↔ x ∈ S) :
+    upperDensity S = volume (S ∩ D) / volume D := by
+  obtain ⟨x₀, hx₀⟩ : D.Nonempty := nonempty_of_measure_ne_zero hD0
+  have hδ0 : 0 ≤ δ := le_trans dist_nonneg (hδ x₀ hx₀ x₀ hx₀)
+  have hDtop : volume D ≠ ⊤ := by
+    refine ne_top_of_le_ne_top (measure_closedBall_lt_top (x := x₀) (r := δ)).ne (measure_mono fun y hy => ?_)
+    rw [mem_closedBall]; exact hδ y hy x₀ hx₀
+  set ρ := volume (S ∩ D) / volume D with hρ
+  have hρtop : ρ ≠ ⊤ := ENNReal.div_ne_top (measure_ne_top_of_subset inter_subset_right hDtop) hD0
+  set Dg : ℂ → Set ℂ := fun g => (fun x => x - g) ⁻¹' D with hDg
+  have hDgm : ∀ g, MeasurableSet (Dg g) := fun g => (measurable_id.sub_const g) hD
+  have hvolDg : ∀ g, volume (Dg g) = volume D := fun g => by
+    simp only [hDg, sub_eq_add_neg]; exact measure_preimage_add_right _ _ _
+  have hvolSDg : ∀ g ∈ G, volume (S ∩ Dg g) = ρ * volume D := by
+    intro g hg
+    have : S ∩ Dg g = (fun x => x - g) ⁻¹' (S ∩ D) := by
+      ext x
+      simp only [hDg, mem_inter_iff, mem_preimage]
+      have e := hper g hg (x - g)
+      rw [sub_add_cancel] at e
+      exact ⟨fun h => ⟨e.1 h.1, h.2⟩, fun h => ⟨e.2 h.1, h.2⟩⟩
+    rw [this, hρ, ENNReal.div_mul_cancel hD0 hDtop]
+    simp only [sub_eq_add_neg]; exact measure_preimage_add_right _ _ _
+  -- the windows inside a ball
+  set U : ℝ → Set ℂ := fun R => ⋃ g ∈ {g | g ∈ G ∧ Dg g ⊆ ball 0 R}, Dg g with hU
+  have hpd : ∀ R, ({g | g ∈ G ∧ Dg g ⊆ ball 0 R} : Set ℂ).PairwiseDisjoint Dg := by
+    intro R g hg g' hg' hne
+    refine Set.disjoint_left.2 fun x hx hx' => hne (hdisj g hg.1 g' hg'.1 x hx hx')
+  have hcount : ∀ R, ({g | g ∈ G ∧ Dg g ⊆ ball 0 R} : Set ℂ).Countable := fun R => hG.mono fun g hg => hg.1
+  have hSU : ∀ R, volume (S ∩ U R) = ρ * volume (U R) := by
+    intro R
+    rw [hU, inter_iUnion₂, measure_biUnion (hcount R) (fun g hg g' hg' hne => (hpd R hg hg' hne).mono inter_subset_right
+      inter_subset_right) (fun g _ => hS.inter (hDgm g)), measure_biUnion (hcount R) (hpd R) (fun g _ => hDgm g),
+      ← ENNReal.tsum_mul_left]
+    refine tsum_congr fun g => ?_
+    rw [hvolSDg g g.2.1, hvolDg]
+  have hUsub : ∀ R, U R ⊆ ball 0 R := fun R => iUnion₂_subset fun g hg => hg.2
+  have hUsup : ∀ R, ball 0 (R - δ) ⊆ U R := by
+    intro R x hx
+    obtain ⟨g, hg, hxg⟩ := hcov x
+    refine mem_iUnion₂.2 ⟨g, ⟨hg, fun y hy => ?_⟩, hxg⟩
+    have h1 : dist y x ≤ δ := by
+      have := hδ _ hy _ hxg
+      rwa [dist_sub_right] at this
+    rw [mem_ball] at hx ⊢
+    linarith [dist_triangle y x 0]
+  -- the squeeze
+  have hlo : ∀ R, ρ * volume (ball (0 : ℂ) (R - δ)) ≤ volume (S ∩ ball 0 R) := fun R =>
+    calc ρ * volume (ball (0 : ℂ) (R - δ)) ≤ ρ * volume (U R) := by gcongr; exact hUsup R
+      _ = volume (S ∩ U R) := (hSU R).symm
+      _ ≤ _ := measure_mono (inter_subset_inter_right _ (hUsub R))
+  have hhi : ∀ R, volume (S ∩ ball 0 R) ≤ ρ * volume (ball (0 : ℂ) (R + δ)) := fun R =>
+    calc volume (S ∩ ball 0 R) ≤ volume (S ∩ U (R + δ)) := by
+          refine measure_mono (inter_subset_inter_right _ ?_)
+          have := hUsup (R + δ); rwa [add_sub_cancel_right] at this
+      _ = ρ * volume (U (R + δ)) := hSU _
+      _ ≤ _ := by gcongr; exact hUsub _
+  have hT : Tendsto (fun R : ℝ => volume (S ∩ ball 0 R) / volume (ball (0 : ℂ) R)) atTop (𝓝 ρ) := by
+    have h1 : Tendsto (fun R : ℝ => ρ * ENNReal.ofReal (((R + -δ) / R) ^ 2)) atTop (𝓝 (ρ * 1)) :=
+      ENNReal.Tendsto.const_mul (tendsto_sq_add_div (-δ)) (Or.inr hρtop)
+    have h2 : Tendsto (fun R : ℝ => ρ * ENNReal.ofReal (((R + δ) / R) ^ 2)) atTop (𝓝 (ρ * 1)) :=
+      ENNReal.Tendsto.const_mul (tendsto_sq_add_div δ) (Or.inr hρtop)
+    rw [mul_one] at h1 h2
+    refine tendsto_of_tendsto_of_tendsto_of_le_of_le' h1 h2 ?_ ?_
+    · filter_upwards [eventually_gt_atTop δ] with R hR
+      have hR0 : 0 < R := lt_of_le_of_lt hδ0 hR
+      rw [← sub_eq_add_neg, ← volume_ball_div_volume_ball (by linarith) hR0, ← mul_div_assoc]
+      exact ENNReal.div_le_div_right (hlo R) _
+    · filter_upwards [eventually_gt_atTop δ] with R hR
+      have hR0 : 0 < R := lt_of_le_of_lt hδ0 hR
+      rw [← volume_ball_div_volume_ball (by linarith) hR0, ← mul_div_assoc]
+      exact ENNReal.div_le_div_right (hhi R) _
+  exact hT.limsup_eq
+
+/-- The half-open parallelogram `{s v₁ + t v₂ : s, t ∈ [0, 1)}`. -/
+def parallelogram (v₁ v₂ : ℂ) : Set ℂ :=
+  {x | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧ x = s * v₁ + t * v₂}
+
+/-- The lattice point `m v₁ + n v₂`. -/
+noncomputable def latticePt (v₁ v₂ : ℂ) (mn : ℤ × ℤ) : ℂ := ((mn.1 : ℝ) : ℂ) * v₁ + ((mn.2 : ℝ) : ℂ) * v₂
+
+/-- **The lattice tiling by half-open parallelograms** (coordinates in the basis `v₁, v₂`): the parallelogram is measurable,
+of positive area and diameter at most `‖v₁‖ + ‖v₂‖`, and its lattice translates cover the plane, each point once. -/
+theorem parallelogram_tiling {v₁ v₂ : ℂ} (hv : LinearIndependent ℝ ![v₁, v₂]) :
+    MeasurableSet (parallelogram v₁ v₂) ∧ volume (parallelogram v₁ v₂) ≠ 0 ∧
+      (∀ x ∈ parallelogram v₁ v₂, ∀ y ∈ parallelogram v₁ v₂, dist x y ≤ ‖v₁‖ + ‖v₂‖) ∧
+      (∀ x, ∃ mn, x - latticePt v₁ v₂ mn ∈ parallelogram v₁ v₂) ∧
+      ∀ mn mn' x, x - latticePt v₁ v₂ mn ∈ parallelogram v₁ v₂ → x - latticePt v₁ v₂ mn' ∈ parallelogram v₁ v₂ →
+        mn = mn' := by
+  set b := basisOfLinearIndependentOfCardEqFinrank hv (by simp [Complex.finrank_real_complex]) with hb
+  have hb0 : b 0 = v₁ := by simp [hb]
+  have hb1 : b 1 = v₂ := by simp [hb]
+  set φ := b.equivFun with hφ
+  have hsymm : ∀ f : Fin 2 → ℝ, φ.symm f = (f 0 : ℂ) * v₁ + (f 1 : ℂ) * v₂ := by
+    intro f
+    rw [hφ, b.equivFun_symm_apply, Fin.sum_univ_two, hb0, hb1, Complex.real_smul, Complex.real_smul]
+  have hφst : ∀ s t : ℝ, φ ((s : ℂ) * v₁ + (t : ℂ) * v₂) = ![s, t] := by
+    intro s t
+    rw [show (s : ℂ) * v₁ + (t : ℂ) * v₂ = φ.symm ![s, t] by rw [hsymm]; simp, LinearEquiv.apply_symm_apply]
+  have hxφ : ∀ x : ℂ, x = (φ x 0 : ℂ) * v₁ + (φ x 1 : ℂ) * v₂ := by
+    intro x; rw [← hsymm, LinearEquiv.symm_apply_apply]
+  have hφc : Continuous φ := LinearMap.continuous_of_finiteDimensional φ.toLinearMap
+  have hDφ : parallelogram v₁ v₂ = {x | φ x 0 ∈ Ico (0 : ℝ) 1 ∧ φ x 1 ∈ Ico (0 : ℝ) 1} := by
+    ext x
+    constructor
+    · rintro ⟨s, t, hs, ht, rfl⟩
+      rw [mem_setOf_eq, hφst]; exact ⟨hs, ht⟩
+    · rintro ⟨h0, h1⟩
+      exact ⟨_, _, h0, h1, hxφ x⟩
+  have hφg : ∀ x mn, φ (x - latticePt v₁ v₂ mn) = ![φ x 0 - mn.1, φ x 1 - mn.2] := by
+    intro x mn
+    rw [map_sub, latticePt, hφst]
+    ext i; fin_cases i <;> simp
+  have hfl : ∀ (a : ℝ) (m : ℤ), a - m ∈ Ico (0 : ℝ) 1 → m = ⌊a⌋ := by
+    intro a m ⟨h1, h2⟩
+    symm; rw [Int.floor_eq_iff]; constructor <;> linarith
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · rw [hDφ]
+    exact (measurableSet_Ico.preimage ((continuous_apply 0).comp hφc).measurable).inter
+      (measurableSet_Ico.preimage ((continuous_apply 1).comp hφc).measurable)
+  · have hO : IsOpen {x : ℂ | φ x 0 ∈ Ioo (0 : ℝ) 1 ∧ φ x 1 ∈ Ioo (0 : ℝ) 1} :=
+      (isOpen_Ioo.preimage ((continuous_apply 0).comp hφc)).inter (isOpen_Ioo.preimage ((continuous_apply 1).comp hφc))
+    have hne : ((1 / 2 : ℝ) : ℂ) * v₁ + ((1 / 2 : ℝ) : ℂ) * v₂ ∈
+        {x : ℂ | φ x 0 ∈ Ioo (0 : ℝ) 1 ∧ φ x 1 ∈ Ioo (0 : ℝ) 1} := by
+      rw [mem_setOf_eq, hφst]; norm_num
+    refine (lt_of_lt_of_le (hO.measure_pos volume ⟨_, hne⟩) (measure_mono ?_)).ne'
+    rw [hDφ]
+    exact fun x hx => ⟨Ioo_subset_Ico_self hx.1, Ioo_subset_Ico_self hx.2⟩
+  · rintro x ⟨s, t, hs, ht, rfl⟩ y ⟨s', t', hs', ht', rfl⟩
+    have e : (s : ℂ) * v₁ + t * v₂ - (s' * v₁ + t' * v₂) = ((s - s' : ℝ) : ℂ) * v₁ + ((t - t' : ℝ) : ℂ) * v₂ := by
+      push_cast; ring
+    rw [dist_eq_norm, e]
+    refine (norm_add_le _ _).trans ?_
+    rw [norm_mul, norm_mul, Complex.norm_real, Complex.norm_real, Real.norm_eq_abs, Real.norm_eq_abs]
+    have h1 : |s - s'| ≤ 1 := by rw [abs_le]; constructor <;> linarith [hs.1, hs.2, hs'.1, hs'.2]
+    have h2 : |t - t'| ≤ 1 := by rw [abs_le]; constructor <;> linarith [ht.1, ht.2, ht'.1, ht'.2]
+    have := mul_le_mul_of_nonneg_right h1 (norm_nonneg v₁)
+    have := mul_le_mul_of_nonneg_right h2 (norm_nonneg v₂)
+    linarith
+  · intro x
+    refine ⟨(⌊φ x 0⌋, ⌊φ x 1⌋), ?_⟩
+    rw [hDφ, mem_setOf_eq, hφg]
+    simp only [Matrix.cons_val_zero, Matrix.cons_val_one]
+    exact ⟨⟨by linarith [Int.floor_le (φ x 0)], by linarith [Int.lt_floor_add_one (φ x 0)]⟩,
+      ⟨by linarith [Int.floor_le (φ x 1)], by linarith [Int.lt_floor_add_one (φ x 1)]⟩⟩
+  · intro mn mn' x hx hx'
+    rw [hDφ, mem_setOf_eq, hφg] at hx hx'
+    simp only [Matrix.cons_val_zero, Matrix.cons_val_one] at hx hx'
+    exact Prod.ext ((hfl _ _ hx.1).trans (hfl _ _ hx'.1).symm) ((hfl _ _ hx.2).trans (hfl _ _ hx'.2).symm)
+
+/-- The unit square's parallelogram holds its centre and not its far corner; lattice points are integer combinations. -/
+example : ((1 / 2 : ℝ) : ℂ) * 1 + ((1 / 2 : ℝ) : ℂ) * I ∈ parallelogram 1 I ∧ latticePt 1 I (2, 3) = 2 + 3 * I := by
+  refine ⟨⟨1 / 2, 1 / 2, by norm_num, by norm_num, rfl⟩, ?_⟩
+  simp [latticePt]
+
+/-- **The density of a lattice-periodic set** (stage 9.2's `upperDensity_of_periodic`): for an `ℝ`-basis `v₁, v₂` and a
+measurable `S` invariant under `ℤv₁ + ℤv₂`, `d̄(S) = |S ∩ D| / |D|` with `D = {s v₁ + t v₂ : s, t ∈ [0, 1)}` (count the
+translates of `D` inside and meeting `B(0, R)`; `ZLattice.covolume.tendsto_card_div_pow`). Carries DISC7's density and
+`upperDensity_periodize`. -/
+theorem upperDensity_of_periodic {v₁ v₂ : ℂ} (hv : LinearIndependent ℝ ![v₁, v₂]) {S : Set ℂ} (hS : MeasurableSet S)
+    (hper : ∀ x, (x + v₁ ∈ S ↔ x ∈ S) ∧ (x + v₂ ∈ S ↔ x ∈ S)) :
+    upperDensity S = volume (S ∩ {x | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧ x = s * v₁ + t * v₂}) /
+      volume {x : ℂ | ∃ s t : ℝ, s ∈ Ico (0 : ℝ) 1 ∧ t ∈ Ico (0 : ℝ) 1 ∧ x = s * v₁ + t * v₂} := by
+  obtain ⟨hDm, hD0, hδ, hcov, hdisj⟩ := parallelogram_tiling hv
+  have hshift : ∀ (v : ℂ), (∀ x, x + v ∈ S ↔ x ∈ S) → ∀ (m : ℤ) x, x + ((m : ℝ) : ℂ) * v ∈ S ↔ x ∈ S := by
+    intro v hv0 m
+    induction m using Int.induction_on with
+    | zero => intro x; simp
+    | succ m ih =>
+      intro x
+      calc x + (((m + 1 : ℤ) : ℝ) : ℂ) * v ∈ S ↔ (x + v) + (((m : ℤ) : ℝ) : ℂ) * v ∈ S := by
+            rw [show x + (((m + 1 : ℤ) : ℝ) : ℂ) * v = (x + v) + (((m : ℤ) : ℝ) : ℂ) * v by push_cast; ring]
+        _ ↔ x ∈ S := by rw [ih, hv0]
+    | pred m ih =>
+      intro x
+      calc x + (((-(m : ℤ) - 1 : ℤ) : ℝ) : ℂ) * v ∈ S
+          ↔ x + (((-(m : ℤ) - 1 : ℤ) : ℝ) : ℂ) * v + v ∈ S := (hv0 _).symm
+        _ ↔ x + (((-(m : ℤ) : ℤ) : ℝ) : ℂ) * v ∈ S := by
+            rw [show x + (((-(m : ℤ) - 1 : ℤ) : ℝ) : ℂ) * v + v = x + (((-(m : ℤ) : ℤ) : ℝ) : ℂ) * v by push_cast; ring]
+        _ ↔ x ∈ S := ih x
+  refine upperDensity_of_tiling (G := Set.range (latticePt v₁ v₂)) (Set.countable_range _) hDm hS hδ hD0 ?_ ?_ ?_
+  · rintro _ ⟨mn, rfl⟩ _ ⟨mn', rfl⟩ x hx hx'
+    rw [hdisj mn mn' x hx hx']
+  · intro x
+    obtain ⟨mn, h⟩ := hcov x
+    exact ⟨_, ⟨mn, rfl⟩, h⟩
+  · rintro _ ⟨⟨m, n⟩, rfl⟩ x
+    have h1 := hshift v₁ (fun x => (hper x).1) m
+    have h2 := hshift v₂ (fun x => (hper x).2) n
+    simp only [latticePt]
+    rw [← add_assoc, h2, h1]
+
+/-- A set inside a window of side `ℓ`, periodized at `ℓ + 2`, has upper density its area over `(ℓ + 2)²`. -/
+theorem upperDensity_periodize {T : Set ℂ} (hT : MeasurableSet T) {z : ℂ} {ℓ : ℝ} (hℓ : 0 < ℓ)
+    (hTw : T ⊆ squareWin z ℓ) : upperDensity (periodize T (ℓ + 2)) = volume T / ENNReal.ofReal ((ℓ + 2) ^ 2) := by
+  set L := ℓ + 2 with hLdef
+  have hL : 0 < L := by linarith
+  set g : ℤ × ℤ → ℂ := fun mn => ((mn.1 * L : ℝ) : ℂ) + ((mn.2 * L : ℝ) : ℂ) * I with hg
+  have hgre : ∀ mn, (g mn).re = mn.1 * L := fun mn => by simp [hg]
+  have hgim : ∀ mn, (g mn).im = mn.2 * L := fun mn => by simp [hg]
+  have hfl : ∀ (a b : ℝ) (m : ℤ), a ≤ b - m * L → b - m * L < a + L → m = ⌊(b - a) / L⌋ := by
+    intro a b m h1 h2
+    symm; rw [Int.floor_eq_iff]
+    constructor
+    · rw [le_div_iff₀ hL]; linarith
+    · rw [div_lt_iff₀ hL]; linarith
+  have hT' : MeasurableSet (periodize T L) := measurableSet_periodize hT L
+  have key := upperDensity_of_tiling (D := squareWin z L) (S := periodize T L) (G := Set.range g) (δ := 2 * L)
+    (Set.countable_range g) (measurableSet_squareWin z L) hT'
+    (fun x hx y hy => by
+      obtain ⟨h1, h2, h3, h4⟩ := hx
+      obtain ⟨h5, h6, h7, h8⟩ := hy
+      rw [dist_eq_norm]
+      calc ‖x - y‖ ≤ |(x - y).re| + |(x - y).im| := Complex.norm_le_abs_re_add_abs_im _
+        _ ≤ L + L := by
+          refine add_le_add ?_ ?_ <;> rw [abs_le] <;> simp only [Complex.sub_re, Complex.sub_im] <;>
+            constructor <;> linarith
+        _ = 2 * L := by ring)
+    (by rw [volume_squareWin z hL.le]; simp; positivity)
+    (by
+      rintro _ ⟨mn, rfl⟩ _ ⟨mn', rfl⟩ x ⟨h1, h2, h3, h4⟩ ⟨h5, h6, h7, h8⟩
+      simp only [Complex.sub_re, Complex.sub_im, hgre, hgim] at h1 h2 h3 h4 h5 h6 h7 h8
+      have e1 := hfl _ _ _ h1 h2
+      have e2 := hfl _ _ _ h3 h4
+      have e3 := hfl _ _ _ h5 h6
+      have e4 := hfl _ _ _ h7 h8
+      have : mn = mn' := Prod.ext (e1.trans e3.symm) (e2.trans e4.symm)
+      rw [this])
+    (fun x => by
+      refine ⟨g (⌊(x.re - z.re) / L⌋, ⌊(x.im - z.im) / L⌋), ⟨_, rfl⟩, ?_⟩
+      have a1 := Int.floor_le ((x.re - z.re) / L)
+      have a2 := Int.lt_floor_add_one ((x.re - z.re) / L)
+      have a3 := Int.floor_le ((x.im - z.im) / L)
+      have a4 := Int.lt_floor_add_one ((x.im - z.im) / L)
+      rw [le_div_iff₀ hL] at a1 a3
+      rw [div_lt_iff₀ hL] at a2 a4
+      refine ⟨?_, ?_, ?_, ?_⟩ <;> simp only [Complex.sub_re, Complex.sub_im, hgre, hgim] <;> nlinarith)
+    (by
+      rintro _ ⟨⟨m, n⟩, rfl⟩ x
+      constructor
+      · rintro ⟨m', n', h⟩
+        refine ⟨m' - m, n' - n, ?_⟩
+        convert h using 1; simp only [hg]; push_cast; ring
+      · rintro ⟨m', n', h⟩
+        refine ⟨m' + m, n' + n, ?_⟩
+        convert h using 1; simp only [hg]; push_cast; ring)
+  have hSD : periodize T L ∩ squareWin z L = T := by
+    ext x
+    constructor
+    · rintro ⟨⟨m, n, hx⟩, hxD⟩
+      have hw := hTw hx
+      obtain ⟨h1, h2, h3, h4⟩ := hw
+      obtain ⟨h5, h6, h7, h8⟩ := hxD
+      simp only [Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im, Complex.ofReal_re,
+        Complex.ofReal_im, Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im] at h1 h2 h3 h4
+      have hm : m = 0 := by
+        have e1 : (m : ℝ) * L < L := by nlinarith
+        have e2 : -L < (m : ℝ) * L := by nlinarith
+        have : (m : ℝ) < 1 := by nlinarith
+        have : (-1 : ℝ) < m := by nlinarith
+        have : m < 1 := by exact_mod_cast ‹(m : ℝ) < 1›
+        have : -1 < m := by exact_mod_cast ‹(-1 : ℝ) < m›
+        omega
+      have hn : n = 0 := by
+        have e1 : (n : ℝ) * L < L := by nlinarith
+        have e2 : -L < (n : ℝ) * L := by nlinarith
+        have : (n : ℝ) < 1 := by nlinarith
+        have : (-1 : ℝ) < n := by nlinarith
+        have : n < 1 := by exact_mod_cast ‹(n : ℝ) < 1›
+        have : -1 < n := by exact_mod_cast ‹(-1 : ℝ) < n›
+        omega
+      subst hm; subst hn
+      simpa using hx
+    · intro hx
+      refine ⟨⟨0, 0, by simpa using hx⟩, ?_⟩
+      obtain ⟨h1, h2, h3, h4⟩ := hTw hx
+      exact ⟨h1, by linarith, h3, by linarith⟩
+  rw [key, hSD, volume_squareWin z hL.le]
+
+/-- **Inner pixelation of the kept sets**: in a window of `N × N` cells of side `h` (`h√2 ≤ ηε/12`), the cells meeting the
+`η/2`-kept set of some class, each given its least such class, are a tiled partial colouring inside the window whose
+classes lie in the `η`-kept sets (`keptAt_of_dist_le`) and which covers the window's `η/2`-kept points. -/
+theorem exists_tiled_kept {C : Fin k → Set ℂ} {η ε h : ℝ} (hh : 0 < h) (hhε : h * √2 ≤ η * ε / 12) (hη : 0 ≤ η)
+    (hη1 : η ≤ 1) (hε : 0 < ε) (p q : ℤ) (N : ℕ) :
+    ∃ T : Fin k → Set ℂ, IsPartialColouring T ∧ (∀ j, IsGridUnion h (T j)) ∧
+      (∀ j, T j ⊆ squareWin ((p * h : ℝ) + (q * h : ℝ) * I) (N * h)) ∧ (∀ j, T j ⊆ {x | KeptAt (C j) η ε x}) ∧
+      squareWin ((p * h : ℝ) + (q * h : ℝ) * I) (N * h) ∩ ⋃ j, {x | KeptAt (C j) (η / 2) ε x} ⊆ ⋃ j, T j := by
+  classical
+  set f : ℂ → ℤ × ℤ := fun y => (⌊y.re / h⌋, ⌊y.im / h⌋) with hf
+  have hfm : Measurable f :=
+    ((Int.measurable_floor.comp (Complex.measurable_re.div_const h))).prodMk
+      (Int.measurable_floor.comp (Complex.measurable_im.div_const h))
+  set K : Fin k → ℤ × ℤ → Prop := fun i c => ∃ x, f x = c ∧ KeptAt (C i) (η / 2) ε x with hK
+  set A : Fin k → Set (ℤ × ℤ) := fun j => {c | p ≤ c.1 ∧ c.1 < p + N ∧ q ≤ c.2 ∧ c.2 < q + N ∧ K j c ∧
+    ∀ i < j, ¬ K i c} with hA
+  have hwin : ∀ y : ℂ, y ∈ squareWin ((p * h : ℝ) + (q * h : ℝ) * I) (N * h) ↔
+      p ≤ (f y).1 ∧ (f y).1 < p + N ∧ q ≤ (f y).2 ∧ (f y).2 < q + N := by
+    intro y
+    simp only [squareWin, mem_setOf_eq, hf, Complex.add_re, Complex.add_im, Complex.ofReal_re, Complex.ofReal_im,
+      Complex.mul_re, Complex.mul_im, Complex.I_re, Complex.I_im, mul_zero, sub_zero, mul_one, zero_add, add_zero]
+    rw [Int.le_floor, Int.floor_lt, Int.le_floor, Int.floor_lt, le_div_iff₀ hh, div_lt_iff₀ hh, le_div_iff₀ hh,
+      div_lt_iff₀ hh]
+    push_cast
+    constructor
+    · rintro ⟨h1, h2, h3, h4⟩; refine ⟨by linarith, by linarith, by linarith, by linarith⟩
+    · rintro ⟨h1, h2, h3, h4⟩; refine ⟨by linarith, by linarith, by linarith, by linarith⟩
+  have hcell : ∀ x y : ℂ, f x = f y → dist x y ≤ h * √2 := by
+    intro x y hxy
+    simp only [hf, Prod.mk.injEq] at hxy
+    have hre : |x.re - y.re| < h := by
+      have a1 := Int.floor_le (x.re / h); have a2 := Int.lt_floor_add_one (x.re / h)
+      have a3 := Int.floor_le (y.re / h); have a4 := Int.lt_floor_add_one (y.re / h)
+      rw [hxy.1] at a1 a2
+      rw [le_div_iff₀ hh] at a1 a3; rw [div_lt_iff₀ hh] at a2 a4
+      rw [abs_lt]; constructor <;> nlinarith
+    have him : |x.im - y.im| < h := by
+      have a1 := Int.floor_le (x.im / h); have a2 := Int.lt_floor_add_one (x.im / h)
+      have a3 := Int.floor_le (y.im / h); have a4 := Int.lt_floor_add_one (y.im / h)
+      rw [hxy.2] at a1 a2
+      rw [le_div_iff₀ hh] at a1 a3; rw [div_lt_iff₀ hh] at a2 a4
+      rw [abs_lt]; constructor <;> nlinarith
+    rw [Complex.dist_eq_re_im, show h * √2 = √(h ^ 2 + h ^ 2) by
+      rw [← two_mul, Real.sqrt_mul' _ (sq_nonneg h), Real.sqrt_sq hh.le, mul_comm]]
+    refine Real.sqrt_le_sqrt ?_
+    have h1 := sq_lt_sq' (abs_lt.1 hre).1 (abs_lt.1 hre).2
+    have h2 := sq_lt_sq' (abs_lt.1 him).1 (abs_lt.1 him).2
+    linarith
+  refine ⟨fun j => f ⁻¹' A j, ⟨fun j => hfm (Set.to_countable _).measurableSet, ?_⟩, ?_, ?_, ?_, ?_⟩
+  · intro i j hij
+    refine Set.disjoint_left.2 fun y hi hj => ?_
+    simp only [mem_preimage, hA, mem_setOf_eq] at hi hj
+    rcases lt_or_gt_of_ne hij with h' | h'
+    · exact hj.2.2.2.2.2 i h' hi.2.2.2.2.1
+    · exact hi.2.2.2.2.2 j h' hj.2.2.2.2.1
+  · intro j x hx z hz
+    have hfz : f z = f x := by
+      simp only [gridCell, mem_setOf_eq] at hz
+      simp only [hf, hz.1, hz.2]
+    simp only [mem_preimage] at hx ⊢
+    rwa [hfz]
+  · intro j y hy
+    simp only [mem_preimage, hA, mem_setOf_eq] at hy
+    exact (hwin y).2 ⟨hy.1, hy.2.1, hy.2.2.1, hy.2.2.2.1⟩
+  · intro j y hy
+    simp only [mem_preimage, hA, mem_setOf_eq] at hy
+    obtain ⟨x, hxy, hx⟩ := hy.2.2.2.2.1
+    exact keptAt_of_dist_le hε hη hη1 hx ((hcell x y hxy).trans hhε)
+  · rintro y ⟨hyw, hyk⟩
+    obtain ⟨j₀, hj₀⟩ := mem_iUnion.1 hyk
+    have hex : ∃ n : ℕ, ∃ hn : n < k, K ⟨n, hn⟩ (f y) := ⟨j₀.val, j₀.isLt, y, rfl, by simpa using hj₀⟩
+    set n := Nat.find hex with hn
+    obtain ⟨hnk, hKn⟩ := Nat.find_spec hex
+    refine mem_iUnion.2 ⟨⟨n, hnk⟩, ?_⟩
+    simp only [mem_preimage, hA, mem_setOf_eq]
+    obtain ⟨w1, w2, w3, w4⟩ := (hwin y).1 hyw
+    refine ⟨w1, w2, w3, w4, hKn, fun i hi hKi => ?_⟩
+    have := Nat.find_min hex (show i.val < n from hi)
+    exact this ⟨i.isLt, hKi⟩
+
+/-! ### `keptAt_band`: the two cases -/
+
+/-- A measurable set equals its density set up to a null set. -/
+theorem ae_eq_densitySet {A : Set ℂ} (hA : MeasurableSet A) : A =ᵐ[volume] densitySet A :=
+  ae_eq_set.2 ⟨volume_diff_densitySet hA, volume_densitySet_diff hA⟩
+
+/-- The kept-ball inequality read for `A` itself, and the hole bound it gives. -/
+theorem keptBall_of_le {A : Set ℂ} (hA : MeasurableSet A) {x : ℂ} {ρ η : ℝ} (hη0 : 0 ≤ η) (hη1 : η ≤ 1)
+    (h : ENNReal.ofReal (1 - η) * volume (ball x ρ) ≤ volume (ball x ρ ∩ densitySet A)) :
+    ENNReal.ofReal (1 - η) * volume (ball x ρ) ≤ volume (ball x ρ ∩ A) ∧
+      volume (ball x ρ \ A) ≤ ENNReal.ofReal η * volume (ball x ρ) := by
+  have h1 : volume (ball x ρ ∩ A) = volume (ball x ρ ∩ densitySet A) :=
+    measure_congr (ae_eq_set_inter (ae_eq_refl _) (ae_eq_densitySet hA))
+  rw [← h1] at h
+  refine ⟨h, ?_⟩
+  have hsplit := measure_inter_add_sdiff (μ := volume) (ball x ρ) hA
+  have hfin : volume (ball x ρ) ≠ ⊤ := measure_ball_lt_top.ne
+  have hsum : ENNReal.ofReal (1 - η) * volume (ball x ρ) + ENNReal.ofReal η * volume (ball x ρ) = volume (ball x ρ) := by
+    rw [← add_mul, ← ENNReal.ofReal_add (by linarith) hη0]; simp
+  have hc : ENNReal.ofReal (1 - η) * volume (ball x ρ) ≠ ⊤ := ENNReal.mul_ne_top ENNReal.ofReal_ne_top hfin
+  rw [← ENNReal.add_le_add_iff_left hc, hsum]
+  calc _ ≤ volume (ball x ρ ∩ A) + volume (ball x ρ \ A) := by gcongr
+    _ = _ := hsplit
+
+/-- `keptAt_band` at `ε ≤ 1/2` (FS106-TQ § 2.2): `twoBall_pairs_ge` at `r = ε` on `Ã` (null unit pairs by
+`UnitPairsNull.congr_ae`) gives unit-pair mass `≥ ε³(π(1 − η)/2 − 2π²η) > 0`, since `η < 1/(1 + 4π)`. -/
+theorem keptAt_band_le_half {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {η : ℝ} (hη0 : 0 ≤ η)
+    (hη : η < 1 / (1 + 4 * Real.pi)) {ε : ℝ} (hε : 0 < ε) (hε2 : ε ≤ 1 / 2) {x y : ℂ} (hx : KeptAt A η ε x)
+    (hy : KeptAt A η ε y) : dist x y < 1 - ε ∨ 1 + ε < dist x y := by
+  by_contra hcon
+  push Not at hcon
+  have habs : |dist x y - 1| ≤ ε := abs_le.2 ⟨by linarith [hcon.1], by linarith [hcon.2]⟩
+  have hp := twoBall_pairs_ge hA hε hε2 habs
+  have hpi := Real.pi_pos
+  have hη1 : η ≤ 1 := by
+    have : 1 / (1 + 4 * Real.pi) ≤ 1 := by rw [div_le_one (by positivity)]; linarith
+    linarith
+  have hz : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ A ∩ ball x (ε / 2) ∧ q.1 + e q.2 ∈ A ∩ ball y (2 * ε)} = 0 :=
+    measure_mono_null (fun q hq => (⟨hq.1.1, hq.2.1⟩ : q ∈ unitPairSet A)) hnull
+  rw [hz, zero_add] at hp
+  obtain ⟨hx1, -⟩ := keptBall_of_le hA hη0 hη1 (hx (ε / 2) (by simp))
+  obtain ⟨-, hy2⟩ := keptBall_of_le hA hη0 hη1 (hy (2 * ε) (by simp))
+  have hv1 := fun (z : ℂ) (ρ : ℝ) (h : 0 ≤ ρ) => volume_ball_ofReal z h
+  have hmain : ENNReal.ofReal (2 * ε) * (ENNReal.ofReal (1 - η) * ENNReal.ofReal ((ε / 2) ^ 2 * Real.pi)) ≤
+      ENNReal.ofReal (Real.pi * ε / 2) * (ENNReal.ofReal η * ENNReal.ofReal ((2 * ε) ^ 2 * Real.pi)) := by
+    rw [hv1 x _ (by positivity)] at hx1
+    rw [hv1 y _ (by positivity)] at hy2
+    calc _ ≤ ENNReal.ofReal (2 * ε) * volume (A ∩ ball x (ε / 2)) := by
+          rw [inter_comm]; gcongr
+      _ ≤ _ := hp
+      _ ≤ _ := by gcongr
+  rw [← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity),
+    ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity),
+    ENNReal.ofReal_le_ofReal_iff (by positivity)] at hmain
+  have hε3 : 0 < ε ^ 3 := by positivity
+  have : η * (1 + 4 * Real.pi) < 1 := by
+    rwa [lt_div_iff₀ (by positivity)] at hη
+  nlinarith [mul_pos hε3 hpi, mul_pos (mul_pos hε3 hpi) hpi]
+
+/-- At `ε > 1/2` no point is kept: `B(x, 2ε)` has radius `> 1`, `arcLength_bigBall_ge` gives its pairs mass `≥ (2π/3)|B|`,
+and filling `1 − η` of it with `Ã` leaves unit-pair mass `≥ ((2π/3)(1 − η) − 2πη)|B| > 0` for `η < 1/4`. -/
+theorem not_keptAt_of_half_lt {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {η : ℝ} (hη0 : 0 ≤ η)
+    (hη : η < 1 / 4) {ε : ℝ} (hε : 1 / 2 < ε) (x : ℂ) : ¬ KeptAt A η ε x := by
+  intro hk
+  have hpi := Real.pi_pos
+  have hη1 : η ≤ 1 := by linarith
+  obtain ⟨hx1, hx2⟩ := keptBall_of_le hA hη0 hη1 (hk (2 * ε) (by simp))
+  set B := ball x (2 * ε) with hB
+  set U := A ∩ B with hU
+  have hUm : MeasurableSet U := hA.inter measurableSet_ball
+  have hBm : MeasurableSet B := measurableSet_ball
+  have hN : MeasurableSet (B \ A) := hBm.diff hA
+  have hlow : ENNReal.ofReal (2 * Real.pi / 3) * volume U ≤
+      (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B} := by
+    rw [pairs_eq_lintegral hUm hBm]
+    calc _ = ∫⁻ u in U, ENNReal.ofReal (2 * Real.pi / 3) := by
+          rw [lintegral_const, Measure.restrict_apply_univ, mul_comm]
+      _ ≤ _ := setLIntegral_mono' hUm fun u hu =>
+          arcLength_bigBall_ge (by linarith) hu.2
+  have hup : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B} ≤
+      ENNReal.ofReal (2 * Real.pi) * volume (B \ A) := by
+    have hsub : {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B} ⊆
+        {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ A} ∪ {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B \ A} := by
+      intro q hq
+      by_cases h : q.1 + e q.2 ∈ A
+      · exact Or.inl ⟨hq.1, h⟩
+      · exact Or.inr ⟨hq.1, hq.2, h⟩
+    have h0 : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ A} = 0 :=
+      measure_mono_null (fun q hq => (⟨hq.1.1, hq.2⟩ : q ∈ unitPairSet A)) hnull
+    have h1 : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ U ∧ q.1 + e q.2 ∈ B \ A} ≤
+        ENNReal.ofReal (2 * Real.pi) * volume (B \ A) :=
+      pairs_le_of_arc hUm hN fun v => by
+        calc arcLength {θ | v - e θ ∈ U} ≤ arcLength univ := measure_mono (subset_univ _)
+          _ = _ := by simp [arcLength, Real.volume_Ico]
+    calc _ ≤ _ := measure_mono hsub
+      _ ≤ _ := measure_union_le _ _
+      _ ≤ 0 + _ := by rw [h0]; gcongr
+      _ = _ := zero_add _
+  have hv1 : volume B = ENNReal.ofReal ((2 * ε) ^ 2 * Real.pi) := volume_ball_ofReal x (by positivity)
+  have hmain : ENNReal.ofReal (2 * Real.pi / 3) * (ENNReal.ofReal (1 - η) * volume B) ≤
+      ENNReal.ofReal (2 * Real.pi) * (ENNReal.ofReal η * volume B) := by
+    calc _ ≤ ENNReal.ofReal (2 * Real.pi / 3) * volume U := by
+          rw [hU, inter_comm]; gcongr
+      _ ≤ _ := hlow.trans hup
+      _ ≤ _ := by gcongr
+  rw [hv1, ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity),
+    ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity),
+    ENNReal.ofReal_le_ofReal_iff (by positivity)] at hmain
+  have hq : 0 < (2 * ε) ^ 2 * Real.pi := by positivity
+  nlinarith [mul_pos hq hpi]
+
+/-- **FS106-REM**, first clause (one class, G92): for a measurable `A` with null unit pairs, any `η < 1/(1 + 4π)` and every
+`ε > 0`, two points kept at scale `ε` are never at a distance in `[1 − ε, 1 + ε]`. (The row reads kept points of one
+colour of a partial colouring; membership of the points in `A` is not used — a generalization.) -/
+theorem keptAt_band {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {η : ℝ} (hη0 : 0 ≤ η)
+    (hη : η < 1 / (1 + 4 * Real.pi)) {ε : ℝ} (hε : 0 < ε) {x y : ℂ} (hx : KeptAt A η ε x) (hy : KeptAt A η ε y) :
+    dist x y < 1 - ε ∨ 1 + ε < dist x y := by
+  rcases le_or_gt ε (1 / 2) with h | h
+  · exact keptAt_band_le_half hA hnull hη0 hη hε h hx hy
+  · exfalso
+    have h4 : η < 1 / 4 := lt_of_lt_of_le hη (by
+      apply one_div_le_one_div_of_le (by norm_num); linarith [Real.pi_gt_three])
+    exact not_keptAt_of_half_lt hA hnull hη0 h4 h x hx
+
+/-- **SUPK's lower bound** (FS106-TQ § 3.2, by windows instead of Lemma T): every value below `µ_k⁰` is eventually below
+`µ_k^per(ε)`. Assembly: a family with null unit pairs of density `> d`; `exists_squareWin_dense` at an integer side `ℓ`;
+`ae_eventually_keptAt` and dominated convergence on the window at `η = 1/20`; `exists_tiled_kept` at `h = 1/N`;
+`keptAt_band` (band-free); `periodize` at period `ℓ + 2` (`bandFree_periodize`, `isGridUnion_periodize`,
+`upperDensity_periodize`); `ℓ²/(ℓ + 2)² → 1`. -/
+theorem eventually_le_muPer (k : ℕ) {d : ENNReal} (hd : d < muZero k) : ∀ᶠ ε in 𝓝[>] (0 : ℝ), d ≤ muPer k ε := by
+  obtain ⟨C, hC⟩ := lt_iSup_iff.1 hd
+  obtain ⟨⟨hCp, hCn⟩, hCd⟩ := lt_iSup_iff.1 hC
+  set S := ⋃ j, C j with hSdef
+  have hSm : MeasurableSet S := MeasurableSet.iUnion hCp.1
+  obtain ⟨b, hb0, hdb, hbS⟩ := ENNReal.lt_iff_exists_real_btwn.1 hCd
+  obtain ⟨a, ha0, hda, hab⟩ := ENNReal.lt_iff_exists_real_btwn.1 hdb
+  have hab' : a < b := (ENNReal.ofReal_lt_ofReal_iff_of_nonneg ha0).1 hab
+  set c := (a + b) / 2 with hc
+  -- the window's side
+  set ℓ : ℕ := ⌈8 * a / (c - a)⌉₊ + 1 with hℓdef
+  have hℓ : 0 < ℓ := Nat.succ_pos _
+  have hℓr : (1 : ℝ) ≤ ℓ := by exact_mod_cast hℓ
+  have hℓc : 8 * a ≤ (c - a) * ℓ := by
+    have h1 : 8 * a / (c - a) ≤ ℓ := by
+      rw [hℓdef]; push_cast; linarith [Nat.le_ceil (8 * a / (c - a))]
+    rw [div_le_iff₀ (by rw [hc]; linarith)] at h1
+    linarith
+  have hℓa : a * ((ℓ : ℝ) + 2) ^ 2 ≤ c * (ℓ : ℝ) ^ 2 := by nlinarith
+  obtain ⟨p, q, hW⟩ := exists_squareWin_dense hSm hbS ℓ hℓ
+  set W := squareWin ((ℓ * p : ℝ) + (ℓ * q : ℝ) * I) ℓ with hWdef
+  -- almost every point of `S` is eventually kept for its class
+  set η : ℝ := 1 / 20 with hη
+  have hη0 : 0 < η := by norm_num
+  have hae : ∀ᵐ x ∂volume, ∀ j, x ∈ C j → ∀ᶠ ε in 𝓝[>] (0 : ℝ), KeptAt (C j) (η / 2) ε x :=
+    ae_all_iff.2 fun j => (ae_restrict_iff' (hCp.1 j)).1 (ae_eventually_keptAt (hCp.1 j) (by positivity))
+  set G : ℕ → Set ℂ := fun n => {x | x ∈ S ∩ W ∧ ∃ j, ∀ ε ∈ Ioo (0 : ℝ) (1 / ((n : ℝ) + 1)), KeptAt (C j) (η / 2) ε x}
+    with hG
+  have hGmono : Monotone G := by
+    intro n m hnm x ⟨hx, j, hj⟩
+    refine ⟨hx, j, fun ε hε => hj ε ⟨hε.1, hε.2.trans_le ?_⟩⟩
+    have : (n : ℝ) ≤ m := by exact_mod_cast hnm
+    exact one_div_le_one_div_of_le (by positivity) (by linarith)
+  have hSW : volume (S ∩ W) ≤ volume (⋃ n, G n) := by
+    refine measure_mono_ae ?_
+    filter_upwards [hae] with x hx hxSW
+    obtain ⟨j, hj⟩ := mem_iUnion.1 hxSW.1
+    obtain ⟨t, ht, hts⟩ := (nhdsGT_basis (0 : ℝ)).eventually_iff.1 (hx j hj)
+    obtain ⟨n, hn⟩ := exists_nat_one_div_lt ht
+    exact mem_iUnion.2 ⟨n, hxSW, j, fun ε hε => hts ⟨hε.1, hε.2.trans hn⟩⟩
+  rw [hGmono.measure_iUnion] at hSW
+  have hcb : ENNReal.ofReal (c * (ℓ : ℝ) ^ 2) < volume (S ∩ W) := by
+    refine lt_of_lt_of_le ?_ hW
+    have : (0 : ℝ) < (ℓ : ℝ) ^ 2 := by positivity
+    rw [ENNReal.ofReal_lt_ofReal_iff (mul_pos (by linarith) this)]
+    nlinarith
+  obtain ⟨n, hn⟩ := lt_iSup_iff.1 (hcb.trans_le hSW)
+  -- the scale
+  set ε₀ : ℝ := 1 / (2 * ((n : ℝ) + 1)) with hε₀
+  have hε₀0 : 0 < ε₀ := by positivity
+  have hε₀n : ε₀ < 1 / ((n : ℝ) + 1) := by
+    rw [hε₀]; exact one_div_lt_one_div_of_lt (by positivity) (by linarith [(by positivity : (0 : ℝ) ≤ n)])
+  have hε₀1 : ε₀ < 1 := by
+    refine hε₀n.trans_le ?_
+    rw [div_le_one (by positivity)]; linarith [(by positivity : (0 : ℝ) ≤ n)]
+  -- the pixel
+  set M : ℕ := ⌈12 * √2 / (η * ε₀)⌉₊ + 1 with hMdef
+  have hM : (0 : ℝ) < M := by positivity
+  have hMh : (1 / (M : ℝ)) * √2 ≤ η * ε₀ / 12 := by
+    have h1 : 12 * √2 / (η * ε₀) ≤ M := by
+      rw [hMdef]; push_cast; linarith [Nat.le_ceil (12 * √2 / (η * ε₀))]
+    rw [div_le_iff₀ (by positivity)] at h1
+    rw [one_div_mul_eq_div, div_le_iff₀ hM]
+    calc √2 = 12 * √2 / 12 := by ring
+      _ ≤ (M * (η * ε₀)) / 12 := by gcongr
+      _ = η * ε₀ / 12 * (M : ℝ) := by ring
+  obtain ⟨T, hTp, hTg, hTw, hTk, hTc⟩ := exists_tiled_kept (C := C) (one_div_pos.2 hM) hMh hη0.le (by norm_num)
+    hε₀0 ((ℓ : ℤ) * M * p) ((ℓ : ℤ) * M * q) (ℓ * M)
+  have e1 : ((((ℓ : ℤ) * M * p : ℤ) : ℝ) * (1 / (M : ℝ))) = (ℓ : ℝ) * p := by push_cast; field_simp
+  have e2 : ((((ℓ : ℤ) * M * q : ℤ) : ℝ) * (1 / (M : ℝ))) = (ℓ : ℝ) * q := by push_cast; field_simp
+  have e3 : (((ℓ * M : ℕ) : ℝ) * (1 / (M : ℝ))) = (ℓ : ℝ) := by push_cast; field_simp
+  rw [e1, e2, e3] at hTw hTc
+  -- band-free
+  have hπ : η < 1 / (1 + 4 * Real.pi) := by
+    rw [hη, div_lt_div_iff₀ (by norm_num) (by positivity)]
+    linarith [Real.pi_lt_four]
+  have hTb : ∀ j, BandFree (T j) ε₀ := fun j x hx y hy =>
+    keptAt_band (hCp.1 j) (hCn j) hη0.le hπ hε₀0 (hTk j hx) (hTk j hy)
+  -- periodize
+  set T' : Fin k → Set ℂ := fun j => periodize (T j) ((ℓ : ℝ) + 2) with hT'
+  have hT'p : IsPartialColouring T' :=
+    ⟨fun j => measurableSet_periodize (hTp.1 j) _, fun i j hij => disjoint_periodize (hTw i) (hTw j) (hTp.2 hij)⟩
+  have hT't : IsTiled T' := by
+    refine ⟨1 / (M : ℝ), one_div_pos.2 hM, fun j => ?_⟩
+    have : ((ℓ : ℝ) + 2) = (((ℓ + 2) * M : ℕ) : ℝ) * (1 / (M : ℝ)) := by
+      push_cast; field_simp
+    simp only [hT']
+    rw [this]
+    exact isGridUnion_periodize (one_div_pos.2 hM) (hTg j)
+  have hT'per : IsPeriodic T' := ⟨(ℓ : ℝ) + 2, by positivity, fun j => isPeriodicSet_periodize _ _⟩
+  have hUw : (⋃ j, T j) ⊆ W := iUnion_subset hTw
+  have hUm : MeasurableSet (⋃ j, T j) := MeasurableSet.iUnion hTp.1
+  have hdens : ENNReal.ofReal a ≤ upperDensity (⋃ j, T' j) := by
+    simp only [hT']
+    rw [iUnion_periodize, upperDensity_periodize hUm (by positivity) hUw]
+    have hG : G n ⊆ ⋃ j, T j := by
+      rintro x ⟨⟨hxS, hxW⟩, j, hj⟩
+      exact hTc ⟨hxW, mem_iUnion.2 ⟨j, hj ε₀ ⟨hε₀0, hε₀n⟩⟩⟩
+    calc ENNReal.ofReal a ≤ ENNReal.ofReal (c * (ℓ : ℝ) ^ 2 / ((ℓ : ℝ) + 2) ^ 2) := by
+          rw [ENNReal.ofReal_le_ofReal_iff (by positivity), le_div_iff₀ (by positivity)]
+          exact hℓa
+      _ = ENNReal.ofReal (c * (ℓ : ℝ) ^ 2) / ENNReal.ofReal (((ℓ : ℝ) + 2) ^ 2) :=
+          ENNReal.ofReal_div_of_pos (by positivity)
+      _ ≤ _ := by gcongr; exact hn.le.trans (measure_mono hG)
+  filter_upwards [Ioc_mem_nhdsGT hε₀0] with ε hε
+  refine hda.le.trans (hdens.trans (le_iSup₂_of_le (f := fun C (_ : IsPartialColouring C ∧ IsTiled C ∧ IsPeriodic C ∧
+    ∀ j, BandFree (C j) ε) => upperDensity (⋃ j, C j)) T' ⟨hT'p, hT't, hT'per, fun j => ?_⟩ le_rfl))
+  intro x hx y hy
+  rcases bandFree_periodize (hTw j) hε₀1 (hTb j) x hx y hy with h | h
+  · left; linarith [hε.2]
+  · right; linarith [hε.2]
+
+
+/-! ### CP colourings: a jointly measurable modification (`chiM0_le_chiCP`, `CPColouring.tendsto_not_kept`) -/
+
+/-- Stationarity moves a pair to the origin. -/
+theorem CPColouring.law_ne_shift (c : CPColouring k) (x y : ℂ) :
+    c.law {f | f x ≠ f y} = c.law {f | f 0 ≠ f (y - x)} := by
+  have hm : MeasurableSet {f : ℂ → Fin k | f 0 ≠ f (y - x)} :=
+    (measurableSet_eq_fun (measurable_pi_apply 0) (measurable_pi_apply (y - x))).compl
+  conv_rhs => rw [← c.map_shift x]
+  rw [Measure.map_apply (measurable_shiftCol x) hm]
+  congr 1
+  ext f
+  simp [shiftCol]
+
+/-- **Uniform continuity in probability** (stationarity and `tendsto_ne` at `0`). -/
+theorem CPColouring.exists_unif (c : CPColouring k) {δ : ENNReal} (hδ : 0 < δ) :
+    ∃ r > (0 : ℝ), ∀ x y : ℂ, dist x y < r → c.law {f | f x ≠ f y} < δ := by
+  obtain ⟨r, hr, h⟩ := Metric.eventually_nhds_iff.mp ((c.tendsto_ne 0).eventually (gt_mem_nhds hδ))
+  refine ⟨r, hr, fun x y hxy => ?_⟩
+  rw [c.law_ne_shift]
+  refine h ?_
+  rw [dist_eq_norm, sub_zero, ← dist_eq_norm, dist_comm]
+  exact hxy
+
+/-- The lower-left corner of the grid cell of side `h` containing `x`. -/
+noncomputable def gridPoint (h : ℝ) (x : ℂ) : ℂ := ((h * ⌊x.re / h⌋ : ℝ) : ℂ) + ((h * ⌊x.im / h⌋ : ℝ) : ℂ) * I
+
+/-- The grid point of `x` at mesh `h` lies within `2h` of `x`. -/
+theorem dist_gridPoint_lt {h : ℝ} (hh : 0 < h) (x : ℂ) : dist (gridPoint h x) x < 2 * h := by
+  have h1 : ∀ t : ℝ, |h * ⌊t / h⌋ - t| < h := by
+    intro t
+    have a := Int.floor_le (t / h)
+    have b := Int.lt_floor_add_one (t / h)
+    have a' : h * ⌊t / h⌋ ≤ t := by
+      have := mul_le_mul_of_nonneg_left a hh.le
+      rwa [mul_div_cancel₀ _ hh.ne'] at this
+    have b' : t < h * ⌊t / h⌋ + h := by
+      have := mul_lt_mul_of_pos_left b hh
+      rw [mul_div_cancel₀ _ hh.ne', mul_add, mul_one] at this
+      exact this
+    rw [abs_lt]; constructor <;> linarith
+  rw [dist_eq_norm]
+  calc ‖gridPoint h x - x‖ ≤ |(gridPoint h x - x).re| + |(gridPoint h x - x).im| :=
+        Complex.norm_le_abs_re_add_abs_im _
+    _ < h + h := by
+        refine add_lt_add ?_ ?_
+        · simpa [gridPoint] using h1 x.re
+        · simpa [gridPoint] using h1 x.im
+    _ = 2 * h := by ring
+
+/-- `(f, x) ↦ f (gridPoint h x)` is jointly measurable (`gridPoint h` takes countably many values on measurable cells). -/
+theorem measurable_eval_gridPoint {h : ℝ} (hh : 0 < h) :
+    Measurable fun p : (ℂ → Fin k) × ℂ => p.1 (gridPoint h p.2) := by
+  have _ := hh
+  have h1 : Measurable fun x : ℂ => (⌊x.re / h⌋, ⌊x.im / h⌋) :=
+    (Int.measurable_floor.comp (Complex.measurable_re.div_const h)).prodMk
+      (Int.measurable_floor.comp (Complex.measurable_im.div_const h))
+  have h2 : Measurable fun q : (ℂ → Fin k) × (ℤ × ℤ) =>
+      q.1 (((h * q.2.1 : ℝ) : ℂ) + ((h * q.2.2 : ℝ) : ℂ) * I) :=
+    measurable_from_prod_countable_left fun ab =>
+      measurable_pi_apply (((h * ab.1 : ℝ) : ℂ) + ((h * ab.2 : ℝ) : ℂ) * I)
+  exact h2.comp (measurable_fst.prodMk (h1.comp measurable_snd))
+
+/-- **The modification** (FS106-TQ § 2.3 step 1): scales `h_m` with `P(f x ≠ f (gridPoint h_m x)) ≤ 2^{−m}`
+(`CPColouring.exists_unif`), Borel–Cantelli (`MeasureTheory.measure_limsup_atTop_eq_zero`) at each `x`, and `ct f x` the
+eventual value of `f (gridPoint h_m x)` (measurable fibres: `measurable_to_countable'`). -/
+theorem CPColouring.exists_modification (c : CPColouring k) :
+    ∃ ct : (ℂ → Fin k) → ℂ → Fin k, Measurable (Function.uncurry ct) ∧ ∀ x, c.law {f | ct f x ≠ f x} = 0 := by
+  classical
+  rcases Nat.eq_zero_or_pos k with rfl | hk
+  · exact ⟨fun f x => f x, Subsingleton.measurable, fun x => by simp⟩
+  have hsc : ∀ m : ℕ, ∃ h > (0 : ℝ), ∀ x : ℂ, c.law {f | f (gridPoint h x) ≠ f x} < (1 / 2 : ENNReal) ^ m := by
+    intro m
+    obtain ⟨r, hr, hu⟩ := c.exists_unif (δ := (1 / 2 : ENNReal) ^ m) (ENNReal.pow_pos (by norm_num) m)
+    refine ⟨r / 2, by positivity, fun x => hu _ _ ?_⟩
+    have := dist_gridPoint_lt (h := r / 2) (by positivity) x
+    linarith
+  choose hs hs0 hsl using hsc
+  set g : ℕ → (ℂ → Fin k) × ℂ → Fin k := fun m p => p.1 (gridPoint (hs m) p.2) with hg
+  have hgm : ∀ m, Measurable (g m) := fun m => measurable_eval_gridPoint (hs0 m)
+  set E : Fin k → Set ((ℂ → Fin k) × ℂ) := fun j => {p | ∀ᶠ m in atTop, g m p = j} with hE
+  have hEm : ∀ j, MeasurableSet (E j) := by
+    intro j
+    have : E j = ⋃ N : ℕ, ⋂ m : ℕ, ⋂ (_ : N ≤ m), {p | g m p = j} := by
+      ext p; simp [hE, Filter.eventually_atTop]
+    rw [this]
+    exact MeasurableSet.iUnion fun N => MeasurableSet.iInter fun m => MeasurableSet.iInter fun _ =>
+      hgm m (measurableSet_singleton j)
+  have hEu : ∀ p i j, p ∈ E i → p ∈ E j → i = j := by
+    intro p i j hi hj
+    obtain ⟨m, hm1, hm2⟩ := (Filter.Eventually.and hi hj).exists
+    exact hm1.symm.trans hm2
+  set ct : (ℂ → Fin k) → ℂ → Fin k := fun f x =>
+    if h : ∃ j, (f, x) ∈ E j then h.choose else ⟨0, hk⟩ with hct
+  have hct_eq : ∀ p j, p ∈ E j → ct p.1 p.2 = j := by
+    intro p j hj
+    have h : ∃ j, (p.1, p.2) ∈ E j := ⟨j, hj⟩
+    simp only [hct, dif_pos h]
+    exact hEu _ _ _ h.choose_spec hj
+  have hct_ne : ∀ p, (∀ j, p ∉ E j) → ct p.1 p.2 = ⟨0, hk⟩ := by
+    intro p hp
+    simp only [hct]
+    rw [dif_neg]
+    rintro ⟨j, hj⟩
+    exact hp j hj
+  refine ⟨ct, ?_, ?_⟩
+  · refine measurable_to_countable' fun j0 => ?_
+    have : Function.uncurry ct ⁻¹' {j0} = E j0 ∪ ((⋃ i, E i)ᶜ ∩ {_q | (⟨0, hk⟩ : Fin k) = j0}) := by
+      ext q
+      simp only [mem_preimage, mem_singleton_iff, mem_union, mem_inter_iff, mem_compl_iff, mem_iUnion, not_exists,
+        mem_setOf_eq]
+      constructor
+      · intro hq
+        by_cases h : ∃ j, q ∈ E j
+        · obtain ⟨j, hj⟩ := h
+          left
+          have := hct_eq q j hj
+          have hq' : ct q.1 q.2 = j0 := hq
+          rw [this] at hq'
+          rwa [← hq']
+        · right
+          push Not at h
+          refine ⟨h, ?_⟩
+          rw [← hct_ne q h]
+          exact hq
+      · rintro (hq | ⟨hq1, hq2⟩)
+        · exact hct_eq q j0 hq
+        · show ct q.1 q.2 = j0
+          rw [hct_ne q hq1]; exact hq2
+    rw [this]
+    exact (hEm j0).union ((MeasurableSet.iUnion hEm).compl.inter (MeasurableSet.const _))
+  · intro x
+    have hsum : ∑' m, c.law {f | f (gridPoint (hs m) x) ≠ f x} ≠ ⊤ := by
+      refine ne_top_of_le_ne_top (b := ∑' m : ℕ, (1 / 2 : ENNReal) ^ m) ?_
+        (ENNReal.tsum_le_tsum fun m => (hsl m x).le)
+      rw [ENNReal.tsum_geometric]
+      simp
+    apply ae_iff.mp
+    filter_upwards [ae_eventually_notMem hsum] with f hf
+    have : (f, x) ∈ E (f x) := by
+      simp only [hE, mem_setOf_eq, hg]
+      filter_upwards [hf] with m hm
+      simpa using hm
+    exact hct_eq (f, x) (f x) this
+
+
+/-- **Realisations are a.e.-proper** (TQ § 2.3 step 3): Tonelli on `law ⊗ volume ⊗ arcLength` and `c.proper`. -/
+theorem CPColouring.ae_unitPairsNull_of_modification (c : CPColouring k) {ct : (ℂ → Fin k) → ℂ → Fin k}
+    (hct : Measurable (Function.uncurry ct)) (hmod : ∀ x, c.law {f | ct f x ≠ f x} = 0) :
+    ∀ᵐ f ∂c.law, ∀ j, UnitPairsNull (ct f ⁻¹' {j}) := by
+  set S : Set ((ℂ → Fin k) × (ℂ × ℝ)) := {p | ct p.1 p.2.1 = ct p.1 (p.2.1 + e p.2.2)} with hS
+  have h1 : Measurable fun p : (ℂ → Fin k) × (ℂ × ℝ) => ct p.1 p.2.1 :=
+    hct.comp (measurable_fst.prodMk (measurable_fst.comp measurable_snd))
+  have h2 : Measurable fun p : (ℂ → Fin k) × (ℂ × ℝ) => ct p.1 (p.2.1 + e p.2.2) :=
+    hct.comp (measurable_fst.prodMk ((measurable_fst.comp measurable_snd).add
+      (continuous_e.measurable.comp (measurable_snd.comp measurable_snd))))
+  have hSm : MeasurableSet S := measurableSet_eq_fun h1 h2
+  have hq0 : ∀ q : ℂ × ℝ, c.law ((fun f => (f, q)) ⁻¹' S) = 0 := by
+    intro q
+    have hp := c.proper q.1 (e q.2) (norm_e q.2)
+    refine measure_mono_null ?_ (measure_union_null (measure_union_null hp (hmod q.1)) (hmod (q.1 + e q.2)))
+    intro f hf
+    simp only [mem_preimage, hS, mem_setOf_eq] at hf
+    by_cases h1 : ct f q.1 = f q.1
+    · by_cases h2 : ct f (q.1 + e q.2) = f (q.1 + e q.2)
+      · left; left
+        show f q.1 = f (q.1 + e q.2)
+        rw [← h1, ← h2]; exact hf
+      · right; exact h2
+    · left; right; exact h1
+  have hzero : (c.law.prod (volume.prod arcLength)) S = 0 := by
+    rw [Measure.prod_apply_symm hSm]
+    simp [hq0]
+  rw [Measure.prod_apply hSm] at hzero
+  have := (lintegral_eq_zero_iff (measurable_measure_prodMk_left hSm)).1 hzero
+  filter_upwards [this] with f hf j
+  refine measure_mono_null (fun q hq => ?_) hf
+  show ct f q.1 = ct f (q.1 + e q.2)
+  exact hq.1.trans hq.2.symm
+
+/-- The expected disagreement with the origin over a ball (Tonelli and the modification); with Markov
+(`MeasureTheory.meas_ge_le_lintegral_div`) and `CPColouring.exists_unif` it gives `CPColouring.tendsto_not_kept`. -/
+theorem CPColouring.lintegral_ball_ne (c : CPColouring k) {ct : (ℂ → Fin k) → ℂ → Fin k}
+    (hct : Measurable (Function.uncurry ct)) (hmod : ∀ x, c.law {f | ct f x ≠ f x} = 0) (ρ : ℝ) :
+    ∫⁻ f, volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) ∂c.law = ∫⁻ y in ball (0 : ℂ) ρ, c.law {f | f y ≠ f 0} := by
+  set E : Set ((ℂ → Fin k) × ℂ) := {p | p.2 ∈ ball (0 : ℂ) ρ ∧ ct p.1 p.2 ≠ ct p.1 0} with hE
+  have h0 : Measurable fun p : (ℂ → Fin k) × ℂ => ct p.1 0 := hct.comp (measurable_fst.prodMk measurable_const)
+  have hEm : MeasurableSet E :=
+    (measurable_snd measurableSet_ball).inter (measurableSet_eq_fun hct h0).compl
+  have hL : ∫⁻ f, volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) ∂c.law = (c.law.prod volume) E := by
+    rw [Measure.prod_apply hEm]
+    rfl
+  rw [hL, Measure.prod_apply_symm hEm, ← lintegral_indicator measurableSet_ball]
+  refine lintegral_congr fun y => ?_
+  by_cases hy : y ∈ ball (0 : ℂ) ρ
+  · rw [indicator_of_mem hy]
+    have hae : (fun f : ℂ → Fin k => (f, y)) ⁻¹' E =ᵐ[c.law] {f | f y ≠ f 0} := by
+      have h1 : ∀ᵐ f ∂c.law, ct f y = f y := by
+        rw [ae_iff]; simpa using hmod y
+      have h2 : ∀ᵐ f ∂c.law, ct f 0 = f 0 := by
+        rw [ae_iff]; simpa using hmod 0
+      filter_upwards [h1, h2] with f hf1 hf2
+      show ((f, y) ∈ E) = (f y ≠ f 0)
+      simp only [hE, mem_setOf_eq]
+      rw [hf1, hf2]
+      exact propext ⟨fun h => h.2, fun h => ⟨hy, h⟩⟩
+    exact measure_congr hae
+  · rw [indicator_of_notMem hy]
+    have : (fun f : ℂ → Fin k => (f, y)) ⁻¹' E = ∅ := by
+      ext f
+      simp only [hE, mem_preimage, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+      exact fun h => absurd h hy
+    rw [this, measure_empty]
+
+/-! ### The compactness argument (`exists_bandNull_aeCover_of_mu_eq_one`, `chiM0_le_iff_muZero_eq_one`) -/
+
+/-- Weak-* convergence in `L^∞` against integrable test functions. -/
+def WeakStarTendsto (g : ℕ → ℂ → ℝ) (F : ℂ → ℝ) : Prop :=
+  ∀ φ : ℂ → ℝ, Integrable φ → Tendsto (fun m => ∫ x, g m x * φ x) atTop (𝓝 (∫ x, F x * φ x))
+
+/-- **Weak sequential compactness in `L²(μ)`** (`μ` finite): `[0, 1]`-valued measurable families have a common subsequence
+converging weakly in `L²(μ)`, against every square-integrable test function (sequential Banach–Alaoglu on
+`Fin k → L²(μ)`, separable, and the Riesz representation). -/
+theorem exists_L2_weak_subseq {μ : Measure ℂ} [IsFiniteMeasure μ] (g : ℕ → Fin k → ℂ → ℝ)
+    (hg : ∀ m j, Measurable (g m j)) (h01 : ∀ m j x, 0 ≤ g m j x ∧ g m j x ≤ 1) :
+    ∃ (σ : ℕ → ℕ) (F : Fin k → ℂ → ℝ), StrictMono σ ∧ (∀ j, Measurable (F j)) ∧ (∀ j, MemLp (F j) 2 μ) ∧
+      ∀ j (ψ : ℂ → ℝ), MemLp ψ 2 μ →
+        Tendsto (fun m => ∫ x, g (σ m) j x * ψ x ∂μ) atTop (𝓝 (∫ x, F j x * ψ x ∂μ)) := by
+  classical
+  haveI : Fact ((2 : ENNReal) ≠ ⊤) := ⟨ENNReal.ofNat_ne_top⟩
+  have hmem : ∀ m j, MemLp (g m j) 2 μ := fun m j =>
+    MemLp.of_bound (hg m j).aestronglyMeasurable 1 (Eventually.of_forall fun x => by
+      rw [Real.norm_eq_abs, abs_le]; constructor <;> linarith [(h01 m j x).1, (h01 m j x).2])
+  set u : ℕ → Fin k → Lp ℝ 2 μ := fun m j => (hmem m j).toLp with hudef
+  set c : ℝ := (measureUnivNNReal μ : ℝ) ^ (2 : ENNReal).toReal⁻¹ * 1 with hc
+  have hc0 : 0 ≤ c := by positivity
+  have hu : ∀ m j, ‖u m j‖ ≤ c := fun m j => Lp.norm_le_of_ae_bound zero_le_one (by
+    filter_upwards [(hmem m j).coeFn_toLp] with x hx
+    rw [hx, Real.norm_eq_abs, abs_le]; constructor <;> linarith [(h01 m j x).1, (h01 m j x).2])
+  set Λ : ℕ → StrongDual ℝ (Fin k → Lp ℝ 2 μ) := fun m =>
+    ∑ j, (innerSL ℝ (u m j)).comp (ContinuousLinearMap.proj j) with hΛdef
+  have hΛ : ∀ m ψ, Λ m ψ = ∑ j, inner ℝ (u m j) (ψ j) := by
+    intro m ψ; simp [hΛdef]
+  have hΛn : ∀ m, ‖Λ m‖ ≤ k * c := by
+    intro m
+    refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun ψ => ?_
+    rw [hΛ]
+    calc ‖∑ j, inner ℝ (u m j) (ψ j)‖ ≤ ∑ j, ‖inner ℝ (u m j) (ψ j)‖ := norm_sum_le _ _
+      _ ≤ ∑ _j : Fin k, c * ‖ψ‖ := by
+          refine Finset.sum_le_sum fun j _ => ?_
+          refine (norm_inner_le_norm _ _).trans ?_
+          exact mul_le_mul (hu m j) (norm_le_pi_norm ψ j) (norm_nonneg _) hc0
+      _ = k * c * ‖ψ‖ := by simp [mul_assoc]
+  obtain ⟨a, -, σ, hσ, hlim⟩ := WeakDual.isSeqCompact_closedBall ℝ (Fin k → Lp ℝ 2 μ) 0 (k * c)
+    (x := fun m => StrongDual.toWeakDual (Λ m)) (fun m => by
+      simpa [mem_closedBall, dist_zero_right] using hΛn m)
+  set Fj : Fin k → Lp ℝ 2 μ := fun j => (InnerProductSpace.toDual ℝ (Lp ℝ 2 μ)).symm
+    ((WeakDual.toStrongDual a).comp (ContinuousLinearMap.single ℝ (fun _ : Fin k => Lp ℝ 2 μ) j)) with hFj
+  have hconv : ∀ j (ψ : Lp ℝ 2 μ), Tendsto (fun m => inner ℝ (u (σ m) j) ψ) atTop (𝓝 (inner ℝ (Fj j) ψ)) := by
+    intro j ψ
+    have h1 := ((WeakDual.eval_continuous (Pi.single j ψ)).tendsto a).comp hlim
+    have e1 : ∀ m, ((fun x : WeakDual ℝ (Fin k → Lp ℝ 2 μ) => x (Pi.single j ψ)) ∘
+        ((fun m => StrongDual.toWeakDual (Λ m)) ∘ σ)) m = inner ℝ (u (σ m) j) ψ := by
+      intro m
+      simp only [Function.comp_apply]
+      show Λ (σ m) (Pi.single j ψ) = _
+      rw [hΛ, Finset.sum_eq_single j]
+      · simp
+      · intro i _ hij; simp [Pi.single_eq_of_ne hij]
+      · simp
+    have e2 : a (Pi.single j ψ) = inner ℝ (Fj j) ψ := by
+      rw [hFj, InnerProductSpace.toDual_symm_apply]
+      rfl
+    rw [← e2]
+    exact h1.congr e1
+  refine ⟨σ, fun j => Fj j, hσ, fun j => (Lp.stronglyMeasurable _).measurable, fun j => Lp.memLp _, fun j ψ hψ => ?_⟩
+  have e3 : ∀ (v : Lp ℝ 2 μ) (f : ℂ → ℝ), (v : ℂ → ℝ) =ᵐ[μ] f →
+      inner ℝ v hψ.toLp = ∫ x, f x * ψ x ∂μ := by
+    intro v f hvf
+    rw [L2.inner_def]
+    refine integral_congr_ae ?_
+    filter_upwards [hvf, hψ.coeFn_toLp] with x h1 h2
+    rw [h1, h2]; simp [mul_comm]
+  have := hconv j hψ.toLp
+  rw [e3 (Fj j) _ (ae_eq_refl _)] at this
+  refine this.congr fun m => ?_
+  exact e3 _ _ (hmem (σ m) j).coeFn_toLp
+
+/-- **Weak-* sequential compactness** of `[0, 1]`-valued families (Hilbert weak compactness in `L²(B(0, n))`,
+`WeakDual.isSeqCompact_closedBall` through `InnerProductSpace.toDual`, then a diagonal over `n` and density of `L² ∩ L¹`
+in `L¹`). -/
+theorem exists_weakStar_subseq (g : ℕ → Fin k → ℂ → ℝ) (hg : ∀ m j, Measurable (g m j))
+    (h01 : ∀ m j x, 0 ≤ g m j x ∧ g m j x ≤ 1) :
+    ∃ (σ : ℕ → ℕ) (F : Fin k → ℂ → ℝ), StrictMono σ ∧ (∀ j, Measurable (F j)) ∧
+      (∀ j, ∀ᵐ x ∂volume, 0 ≤ F j x ∧ F j x ≤ 1) ∧ ∀ j, WeakStarTendsto (fun m => g (σ m) j) (F j) := by
+  -- the weight `w = (1 + ‖x‖)^{-3}` and the finite measure `μ = w · Leb`
+  set w : ℂ → ℝ := fun x => (1 + ‖x‖) ^ (-3 : ℝ) with hwdef
+  have hwpos : ∀ x, 0 < w x := fun x => Real.rpow_pos_of_pos (by positivity) _
+  have hwint : Integrable w := integrable_one_add_norm (by rw [Complex.finrank_real_complex]; norm_num)
+  have hwm : Measurable w := by
+    have : Continuous w := Continuous.rpow_const (continuous_const.add continuous_norm) fun x => Or.inl (by positivity)
+    exact this.measurable
+  set w' : ℂ → NNReal := fun x => (w x).toNNReal with hw'def
+  have hw'm : Measurable w' := hwm.real_toNNReal
+  set μ : Measure ℂ := volume.withDensity fun x => (w' x : ENNReal) with hμdef
+  haveI : IsFiniteMeasure μ := isFiniteMeasure_withDensity (by
+    have := hwint.lintegral_lt_top
+    simpa [hw'def, ENNReal.ofReal] using this.ne)
+  have hint : ∀ f : ℂ → ℝ, ∫ x, f x ∂μ = ∫ x, w x * f x := by
+    intro f
+    rw [hμdef, integral_withDensity_eq_integral_smul hw'm]
+    congr 1; ext x
+    rw [NNReal.smul_def, smul_eq_mul, hw'def, Real.coe_toNNReal _ (hwpos x).le]
+  have hac : volume ≪ μ := withDensity_absolutelyContinuous' hw'm.coe_nnreal_ennreal.aemeasurable
+    (Eventually.of_forall fun x => by simp [hw'def, hwpos x])
+  obtain ⟨σ, F, hσ, hFm, hFL, hlim⟩ := exists_L2_weak_subseq (μ := μ) g hg h01
+  -- `0 ≤ F ≤ 1` almost everywhere
+  have hbd01 : ∀ j, ∀ᵐ x ∂μ, 0 ≤ F j x ∧ F j x ≤ 1 := by
+    intro j
+    have hFi : Integrable (F j) μ := (hFL j).integrable one_le_two
+    have hind : ∀ S : Set ℂ, MeasurableSet S → MemLp (S.indicator (1 : ℂ → ℝ)) 2 μ := fun S hS =>
+      MemLp.of_bound ((measurable_const.indicator hS).aestronglyMeasurable) 1
+        (Eventually.of_forall fun x => by
+          by_cases hx : x ∈ S <;> simp [hx])
+    have hlimS : ∀ S : Set ℂ, MeasurableSet S →
+        Tendsto (fun m => ∫ x in S, g (σ m) j x ∂μ) atTop (𝓝 (∫ x in S, F j x ∂μ)) := by
+      intro S hS
+      have := hlim j _ (hind S hS)
+      have e : ∀ u : ℂ → ℝ, ∫ x, u x * S.indicator 1 x ∂μ = ∫ x in S, u x ∂μ := by
+        intro u; rw [← integral_indicator hS]; congr 1; ext x; by_cases hx : x ∈ S <;> simp [hx]
+      simpa only [e] using this
+    have hS0 : MeasurableSet {x | F j x < 0} := measurableSet_lt (hFm j) measurable_const
+    have hS1 : MeasurableSet {x | 1 < F j x} := measurableSet_lt measurable_const (hFm j)
+    have h0 : μ {x | F j x < 0} = 0 := by
+      have hge : 0 ≤ ∫ x in {x | F j x < 0}, F j x ∂μ :=
+        ge_of_tendsto (hlimS _ hS0) (Eventually.of_forall fun m => setIntegral_nonneg hS0 fun x _ => (h01 _ j x).1)
+      have hle : ∫ x in {x | F j x < 0}, -F j x ∂μ = 0 := by
+        refine le_antisymm ?_ (setIntegral_nonneg hS0 fun x hx => by simp only [mem_setOf_eq] at hx; linarith)
+        rw [integral_neg]; linarith
+      have hae := (setIntegral_eq_zero_iff_of_nonneg_ae ((ae_restrict_iff' hS0).2 (Eventually.of_forall
+        fun x hx => by simp only [mem_setOf_eq] at hx; simp only [Pi.zero_apply, Pi.neg_apply]; linarith)) hFi.neg.integrableOn).1 hle
+      have h' : ∀ᵐ x ∂μ, x ∉ {x | F j x < 0} := by
+        filter_upwards [(ae_restrict_iff' hS0).1 hae] with x hx hxS
+        have := hx hxS
+        simp only [Pi.zero_apply, Pi.neg_apply, neg_eq_zero] at hxS this
+        linarith
+      simpa using ae_iff.1 h'
+    have h1 : μ {x | 1 < F j x} = 0 := by
+      have hS1fin : μ {x | 1 < F j x} ≠ ⊤ := measure_ne_top _ _
+      have hle0 : ∫ x in {x | 1 < F j x}, F j x ∂μ ≤ μ.real {x | 1 < F j x} := by
+        refine le_of_tendsto (hlimS _ hS1) (Eventually.of_forall fun m => ?_)
+        calc ∫ x in {x | 1 < F j x}, g (σ m) j x ∂μ ≤ ∫ x in {x | 1 < F j x}, (1 : ℝ) ∂μ :=
+              setIntegral_mono_on (((MemLp.of_bound (hg (σ m) j).aestronglyMeasurable 1 (Eventually.of_forall fun x => by rw [Real.norm_eq_abs, abs_le]; constructor <;> linarith [(h01 (σ m) j x).1, (h01 (σ m) j x).2])).integrable one_le_two).integrableOn) (integrableOn_const hS1fin) hS1
+                (fun x _ => (h01 _ j x).2)
+          _ = _ := by simp
+      have hFi1 : IntegrableOn (fun x => F j x - 1) {x | 1 < F j x} μ := (hFi.sub (integrable_const 1)).integrableOn
+      have hz : ∫ x in {x | 1 < F j x}, (F j x - 1) ∂μ = 0 := by
+        refine le_antisymm ?_ (setIntegral_nonneg hS1 fun x hx => by simp only [mem_setOf_eq] at hx; linarith)
+        rw [integral_sub hFi.integrableOn (integrableOn_const hS1fin), setIntegral_const, smul_eq_mul, mul_one]
+        linarith
+      have hae := (setIntegral_eq_zero_iff_of_nonneg_ae ((ae_restrict_iff' hS1).2 (Eventually.of_forall
+        fun x hx => by simp only [mem_setOf_eq] at hx; simp only [Pi.zero_apply]; linarith)) hFi1).1 hz
+      have h' : ∀ᵐ x ∂μ, x ∉ {x | 1 < F j x} := by
+        filter_upwards [(ae_restrict_iff' hS1).1 hae] with x hx hxS
+        have := hx hxS
+        simp only [Pi.zero_apply] at hxS this
+        linarith
+      simpa using ae_iff.1 h'
+    have a0 : ∀ᵐ x ∂μ, 0 ≤ F j x := ae_iff.2 (by simpa [not_le] using h0)
+    have a1 : ∀ᵐ x ∂μ, F j x ≤ 1 := ae_iff.2 (by simpa [not_le] using h1)
+    filter_upwards [a0, a1] with x h0x h1x
+    exact ⟨h0x, h1x⟩
+  refine ⟨σ, F, hσ, hFm, fun j => hac.ae_le (hbd01 j), fun j φ hφ => ?_⟩
+  have hFb : ∀ᵐ x ∂volume, |F j x| ≤ 1 := by
+    filter_upwards [hac.ae_le (hbd01 j)] with x hx
+    rw [abs_le]; constructor <;> linarith [hx.1, hx.2]
+  have hgb : ∀ m x, |g (σ m) j x| ≤ 1 := fun m x => by
+    rw [abs_le]; constructor <;> linarith [(h01 (σ m) j x).1, (h01 (σ m) j x).2]
+  set φ' := hφ.1.mk φ with hφ'def
+  have hφφ' : φ =ᵐ[volume] φ' := hφ.1.ae_eq_mk
+  have hφ'm : Measurable φ' := hφ.1.stronglyMeasurable_mk.measurable
+  have hφ'i : Integrable φ' := hφ.congr hφφ'
+  have eg : ∀ u : ℂ → ℝ, ∫ x, u x * φ x = ∫ x, u x * φ' x := fun u =>
+    integral_congr_ae (by filter_upwards [hφφ'] with x hx; rw [hx])
+  show Tendsto (fun m => ∫ x, g (σ m) j x * φ x) atTop (𝓝 (∫ x, F j x * φ x))
+  simp only [eg]
+  -- the truncations
+  set T : ℕ → Set ℂ := fun N => {x | ‖x‖ < N ∧ |φ' x| ≤ N} with hTdef
+  have hTm : ∀ N, MeasurableSet (T N) := fun N =>
+    (measurableSet_lt continuous_norm.measurable measurable_const).inter
+      (measurableSet_le (continuous_abs.measurable.comp hφ'm) measurable_const)
+  set φN : ℕ → ℂ → ℝ := fun N => (T N).indicator φ' with hφNdef
+  have hφNm : ∀ N, Measurable (φN N) := fun N => hφ'm.indicator (hTm N)
+  have hφNi : ∀ N, Integrable (φN N) := fun N => hφ'i.indicator (hTm N)
+  have hdiff : Tendsto (fun N => ∫ x, |φ' x - φN N x|) atTop (𝓝 0) := by
+    have := tendsto_integral_of_dominated_convergence (F := fun N x => |φ' x - φN N x|) (f := fun _ => 0)
+      (fun x => |φ' x|) (fun N => (continuous_abs.measurable.comp (hφ'm.sub (hφNm N))).aestronglyMeasurable)
+      hφ'i.abs (fun N => Eventually.of_forall fun x => by
+        rw [Real.norm_eq_abs, abs_abs]
+        by_cases hx : x ∈ T N
+        · simp [hφNdef, hx]
+        · simp [hφNdef, hx])
+      (Eventually.of_forall fun x => by
+        obtain ⟨N₀, hN₀⟩ := exists_nat_gt (max ‖x‖ |φ' x|)
+        refine tendsto_const_nhds.congr' ?_
+        filter_upwards [eventually_ge_atTop N₀] with N hN
+        have hN' : (N₀ : ℝ) ≤ N := by exact_mod_cast hN
+        have hx : x ∈ T N := ⟨by linarith [le_max_left ‖x‖ |φ' x|], by linarith [le_max_right ‖x‖ |φ' x|]⟩
+        simp [hφNdef, hx])
+    simpa using this
+  -- each truncation divided by the weight is a bounded test function in `L²(μ)`
+  have hψ : ∀ N : ℕ, MemLp (fun x => φN N x / w x) 2 μ := by
+    intro N
+    refine MemLp.of_bound ((hφNm N).div hwm).aestronglyMeasurable ((N : ℝ) * (1 + N) ^ 3)
+      (Eventually.of_forall fun x => ?_)
+    rw [Real.norm_eq_abs]
+    by_cases hx : x ∈ T N
+    · obtain ⟨hx1, hx2⟩ := hx
+      have hw1 : 1 / w x = (1 + ‖x‖) ^ 3 := by
+        rw [hwdef]; simp only
+        rw [Real.rpow_neg (by positivity), one_div, inv_inv]
+        norm_cast
+      have hφx : φN N x = φ' x := by simp [hφNdef, T, hx1, hx2]
+      rw [hφx, div_eq_mul_one_div, hw1, abs_mul, abs_of_nonneg (by positivity : (0 : ℝ) ≤ (1 + ‖x‖) ^ 3)]
+      have : (1 + ‖x‖) ^ 3 ≤ (1 + (N : ℝ)) ^ 3 := by gcongr
+      calc |φ' x| * (1 + ‖x‖) ^ 3 ≤ N * (1 + (N : ℝ)) ^ 3 := by
+            exact mul_le_mul hx2 this (by positivity) (by positivity)
+        _ = _ := rfl
+    · have : φN N x = 0 := by simp [hφNdef, hx]
+      rw [this, zero_div, abs_zero]; positivity
+  have hconvN : ∀ N : ℕ, Tendsto (fun m => ∫ x, g (σ m) j x * φN N x) atTop (𝓝 (∫ x, F j x * φN N x)) := by
+    intro N
+    have := hlim j _ (hψ N)
+    have e : ∀ u : ℂ → ℝ, ∫ x, u x * (φN N x / w x) ∂μ = ∫ x, u x * φN N x := by
+      intro u; rw [hint]; congr 1; ext x
+      have := (hwpos x).ne'
+      field_simp
+    simpa only [e] using this
+  -- `ε/3`
+  rw [Metric.tendsto_atTop]
+  intro ε hε
+  obtain ⟨N, hN⟩ := (Metric.tendsto_atTop.1 hdiff) (ε / 3) (by positivity)
+  obtain ⟨M, hM⟩ := (Metric.tendsto_atTop.1 (hconvN N)) (ε / 3) (by positivity)
+  refine ⟨M, fun m hm => ?_⟩
+  have hNN := hN N le_rfl
+  have hMM := hM m hm
+  rw [Real.dist_eq, sub_zero, abs_of_nonneg (integral_nonneg fun x => abs_nonneg _)] at hNN
+  rw [Real.dist_eq] at hMM ⊢
+  have hdi : Integrable (fun x => |φ' x - φN N x|) := (hφ'i.sub (hφNi N)).abs
+  have bnd : ∀ u : ℂ → ℝ, Measurable u → (∀ᵐ x ∂volume, |u x| ≤ 1) →
+      |(∫ x, u x * φ' x) - ∫ x, u x * φN N x| ≤ ∫ x, |φ' x - φN N x| := by
+    intro u hu hu1
+    have hu1' : ∀ᵐ x ∂volume, ‖u x‖ ≤ 1 := by simpa [Real.norm_eq_abs] using hu1
+    have i1 : Integrable (fun x => u x * φ' x) := hφ'i.bdd_mul hu.aestronglyMeasurable hu1'
+    have i2 : Integrable (fun x => u x * φN N x) := (hφNi N).bdd_mul hu.aestronglyMeasurable hu1'
+    have e : (∫ x, u x * φ' x) - ∫ x, u x * φN N x = ∫ x, (u x * φ' x - u x * φN N x) := (integral_sub i1 i2).symm
+    rw [e, ← Real.norm_eq_abs]
+    refine norm_integral_le_of_norm_le hdi ?_
+    filter_upwards [hu1] with x hx
+    rw [Real.norm_eq_abs, ← mul_sub, abs_mul]
+    exact mul_le_of_le_one_left (abs_nonneg _) hx
+  have b1 := bnd _ (hg (σ m) j) (Eventually.of_forall (hgb m))
+  have b2 : |(∫ x, F j x * φN N x) - ∫ x, F j x * φ' x| ≤ ∫ x, |φ' x - φN N x| := by
+    rw [abs_sub_comm]; exact bnd _ (hFm j) hFb
+  calc |(∫ x, g (σ m) j x * φ' x) - ∫ x, F j x * φ' x|
+      ≤ |(∫ x, g (σ m) j x * φ' x) - ∫ x, g (σ m) j x * φN N x| +
+        |(∫ x, g (σ m) j x * φN N x) - ∫ x, F j x * φN N x| + |(∫ x, F j x * φN N x) - ∫ x, F j x * φ' x| := by
+        have := abs_sub_le (∫ x, g (σ m) j x * φ' x) (∫ x, g (σ m) j x * φN N x) (∫ x, F j x * φ' x)
+        have := abs_sub_le (∫ x, g (σ m) j x * φN N x) (∫ x, F j x * φN N x) (∫ x, F j x * φ' x)
+        linarith
+    _ < ε / 3 + ε / 3 + ε / 3 := by linarith
+    _ = ε := by ring
+
+/-- The convolution `u ⋆ κ` (in the form `x ↦ ∫ u(x + w) κ(w) dw`) of an a.e.-bounded measurable `u` with an integrable kernel:
+a.e.-strongly measurable, bounded by `‖κ‖₁` everywhere, and equal to `∫ u(y) κ(y − x) dy`. -/
+theorem conv_props {u : ℂ → ℝ} (hu : Measurable u) (hb : ∀ᵐ x ∂volume, |u x| ≤ 1) {κ : ℂ → ℝ} (hκ : Integrable κ) :
+    AEStronglyMeasurable (fun x => ∫ w, u (x + w) * κ w) volume ∧
+      (∀ x, |∫ w, u (x + w) * κ w| ≤ ∫ w, ‖κ w‖) ∧
+      ∀ x, ∫ w, u (x + w) * κ w = ∫ y, u y * κ (y - x) := by
+  refine ⟨?_, fun x => ?_, fun x => ?_⟩
+  · refine AEStronglyMeasurable.integral_prod_right' (f := fun p : ℂ × ℂ => u (p.1 + p.2) * κ p.2) ?_
+    exact (hu.comp measurable_add).aestronglyMeasurable.mul
+      (hκ.1.comp_quasiMeasurePreserving Measure.quasiMeasurePreserving_snd)
+  · rw [← Real.norm_eq_abs]
+    refine norm_integral_le_of_norm_le hκ.norm ?_
+    have hq : ∀ᵐ w ∂volume, |u (x + w)| ≤ 1 :=
+      (measurePreserving_add_left volume x).quasiMeasurePreserving.ae hb
+    filter_upwards [hq] with w hw
+    rw [norm_mul, Real.norm_eq_abs (u _)]
+    exact mul_le_of_le_one_left (norm_nonneg _) hw
+  · have := integral_add_left_eq_self (μ := volume) (fun y => u y * κ (y - x)) x
+    simp only [add_sub_cancel_left] at this
+    exact this
+
+/-- **Convolution forms with an integrable kernel are weak-* continuous on bounded families** (no decay needed — QB § 2.3:
+`g_m ∗ κ → F ∗ κ` pointwise and boundedly, then dominated convergence on the ball). -/
+theorem convForm_tendsto {g : ℕ → ℂ → ℝ} {F : ℂ → ℝ} (hg : ∀ m, Measurable (g m)) (hb : ∀ m x, |g m x| ≤ 1)
+    (hFm : Measurable F) (hF : ∀ᵐ x ∂volume, |F x| ≤ 1) (hw : WeakStarTendsto g F) {κ : ℂ → ℝ} (hκ : Integrable κ)
+    (R : ℝ) :
+    Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * ∫ w, g m (x + w) * κ w) atTop
+      (𝓝 (∫ x in ball (0 : ℂ) R, F x * ∫ w, F (x + w) * κ w)) := by
+  set K := ∫ w, ‖κ w‖ with hK
+  set h : ℕ → ℂ → ℝ := fun m x => ∫ w, g m (x + w) * κ w with hh
+  set h0 : ℂ → ℝ := fun x => ∫ w, F (x + w) * κ w with hh0
+  have Pg := fun m => conv_props (hg m) (Eventually.of_forall (hb m)) hκ
+  have P0 := conv_props hFm hF hκ
+  have hBfin : volume (ball (0 : ℂ) R) ≠ ⊤ := measure_ball_lt_top.ne
+  set μB := volume.restrict (ball (0 : ℂ) R) with hμB
+  haveI : IsFiniteMeasure μB := ⟨by rw [hμB, Measure.restrict_apply_univ]; exact measure_ball_lt_top⟩
+  -- pointwise convergence of the convolutions
+  have hpt : ∀ x, Tendsto (fun m => h m x) atTop (𝓝 (h0 x)) := by
+    intro x
+    simp only [hh, hh0, (Pg _).2.2 x, P0.2.2 x]
+    exact hw _ (hκ.comp_sub_right x)
+  -- the bounded pieces are integrable on the ball
+  have hint : ∀ (a b : ℂ → ℝ), AEStronglyMeasurable a μB → AEStronglyMeasurable b μB → (∀ x, |a x| ≤ 1) →
+      (∀ x, |b x| ≤ 2 * K) → Integrable (fun x => a x * b x) μB := by
+    intro a b ha hb' ha1 hb1
+    refine Integrable.bdd_mul (c := 1) ?_ ha (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact ha1 x)
+    exact (integrable_const (2 * K)).mono' hb' (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hb1 x)
+  have hK0 : 0 ≤ K := integral_nonneg fun w => norm_nonneg _
+  have hbh : ∀ m x, |h m x| ≤ 2 * K := fun m x => ((Pg m).2.1 x).trans (by linarith)
+  have hbh0 : ∀ x, |h0 x| ≤ 2 * K := fun x => (P0.2.1 x).trans (by linarith)
+  have hdiff : Tendsto (fun m => ∫ x, |h m x - h0 x| ∂μB) atTop (𝓝 0) := by
+    have := tendsto_integral_of_dominated_convergence (μ := μB) (F := fun m x => |h m x - h0 x|) (f := fun _ => 0)
+      (fun _ => 4 * K) (fun m => ((Pg m).1.restrict.sub P0.1.restrict).norm) (integrable_const _)
+      (fun m => Eventually.of_forall fun x => by
+        rw [Real.norm_eq_abs, abs_abs]
+        calc |h m x - h0 x| ≤ |h m x| + |h0 x| := abs_sub _ _
+          _ ≤ 4 * K := by linarith [hbh m x, hbh0 x])
+      (Eventually.of_forall fun x => by
+        have := ((hpt x).sub_const (h0 x)).abs
+        simpa using this)
+    simpa using this
+  -- the cross term by weak-* convergence against `1_B h0`
+  have hcross : Tendsto (fun m => ∫ x, g m x * h0 x ∂μB) atTop (𝓝 (∫ x, F x * h0 x ∂μB)) := by
+    have hφ : Integrable ((ball (0 : ℂ) R).indicator h0) := by
+      refine (Measure.integrableOn_of_bounded hBfin P0.1 (M := 2 * K) (Eventually.of_forall fun x => ?_)).integrable_indicator
+        measurableSet_ball
+      rw [Real.norm_eq_abs]; exact hbh0 x
+    have e : ∀ u : ℂ → ℝ, ∫ x, u x * h0 x ∂μB = ∫ x, u x * (ball (0 : ℂ) R).indicator h0 x := by
+      intro u
+      rw [hμB, ← integral_indicator measurableSet_ball]
+      congr 1; ext x
+      by_cases hx : x ∈ ball (0 : ℂ) R <;> simp [hx]
+    simp_rw [e]
+    exact hw _ hφ
+  have hsplit : ∀ m, ∫ x, g m x * h m x ∂μB = ∫ x, g m x * (h m x - h0 x) ∂μB + ∫ x, g m x * h0 x ∂μB := by
+    intro m
+    rw [← integral_add]
+    · congr 1; ext x; ring
+    · exact hint _ _ (hg m).aestronglyMeasurable ((Pg m).1.restrict.sub P0.1.restrict) (hb m)
+        (fun x => (abs_sub _ _).trans (by linarith [hbh m x, hbh0 x, (Pg m).2.1 x, P0.2.1 x]))
+    · exact hint _ _ (hg m).aestronglyMeasurable P0.1.restrict (hb m) hbh0
+  have hsmall : Tendsto (fun m => ∫ x, g m x * (h m x - h0 x) ∂μB) atTop (𝓝 0) := by
+    refine squeeze_zero_norm (fun m => ?_) hdiff
+    refine norm_integral_le_of_norm_le ?_ (Eventually.of_forall fun x => ?_)
+    · exact (integrable_const (4 * K)).mono' ((Pg m).1.restrict.sub P0.1.restrict).norm
+        (Eventually.of_forall fun x => by
+          rw [Real.norm_eq_abs, abs_abs]
+          exact (abs_sub _ _).trans (by linarith [hbh m x, hbh0 x]))
+    · rw [norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+      exact mul_le_of_le_one_left (abs_nonneg _) (hb m x)
+  show Tendsto (fun m => ∫ x, g m x * h m x ∂μB) atTop (𝓝 (∫ x, F x * h0 x ∂μB))
+  simp_rw [hsplit]
+  simpa using hsmall.add hcross
+
+/-- The law of `e φ − e θ` under `arcLength ⊗ arcLength` is absolutely continuous (`twoCircle_preimage_null` at
+`r₁ = r₂ = 1`, `e φ − e θ = e φ + e (θ + π)`). Stated with its density, for `integral_circleAvg_sq`. -/
+theorem exists_twoCircle_density : ∃ ρ : ℂ → ℝ, Integrable ρ ∧ (∀ w, 0 ≤ ρ w) ∧
+    ∀ N : Set ℂ, MeasurableSet N →
+      (arcLength.prod arcLength) {p : ℝ × ℝ | e p.2 - e p.1 ∈ N} = ENNReal.ofReal (∫ w in N, ρ w) := by
+  set T : ℝ × ℝ → ℂ := fun p => e p.2 - e p.1 with hT
+  have hTm : Measurable T := (continuous_e.comp continuous_snd).sub (continuous_e.comp continuous_fst) |>.measurable
+  set ν : Measure ℂ := Measure.map T (arcLength.prod arcLength) with hν
+  have hac : ν ≪ volume := by
+    refine Measure.AbsolutelyContinuous.mk fun N hN h0 => ?_
+    rw [hν, Measure.map_apply hTm hN]
+    -- `e p.2 - e p.1 = e (p.1 + π) + e p.2`, and `arcLength ⊗ arcLength ≤ volume`
+    have hle : arcLength.prod arcLength ≤ (volume : Measure (ℝ × ℝ)) := by
+      rw [Measure.volume_eq_prod]
+      exact Measure.prod_mono Measure.restrict_le_self Measure.restrict_le_self
+    refine le_antisymm ((hle _).trans (le_of_eq ?_)) bot_le
+    · set sh : ℝ × ℝ → ℝ × ℝ := fun p => (p.1 + Real.pi, p.2) with hsh
+      have hshp : MeasurePreserving sh volume volume := by
+        rw [Measure.volume_eq_prod]
+        exact (measurePreserving_add_right volume Real.pi).prod (MeasurePreserving.id volume)
+      have hpre : T ⁻¹' N = sh ⁻¹' ((fun q : ℝ × ℝ => (0 : ℂ) + ((1 : ℝ) : ℂ) * e q.1 + ((1 : ℝ) : ℂ) * e q.2) ⁻¹' N) := by
+        ext p
+        simp only [hT, hsh, mem_preimage, Complex.ofReal_one, one_mul, zero_add]
+        have : e (p.1 + Real.pi) = -e p.1 := by
+          simp [e, add_mul, Complex.exp_add, Complex.exp_pi_mul_I]
+        rw [this, neg_add_eq_sub]
+      rw [hpre, hshp.measure_preimage (by
+        exact ((measurable_const.add ((continuous_ofReal.measurable.comp measurable_const).mul
+          (continuous_e.measurable.comp measurable_fst))).add ((continuous_ofReal.measurable.comp measurable_const).mul
+          (continuous_e.measurable.comp measurable_snd))) hN |>.nullMeasurableSet)]
+      exact twoCircle_preimage_null 0 one_pos one_pos h0
+  haveI : IsFiniteMeasure ν := Measure.isFiniteMeasure_map _ _
+  refine ⟨fun w => (ν.rnDeriv volume w).toReal, ?_, fun w => ENNReal.toReal_nonneg, fun N hN => ?_⟩
+  · refine integrable_toReal_of_lintegral_ne_top (Measure.measurable_rnDeriv _ _).aemeasurable ?_
+    rw [Measure.lintegral_rnDeriv hac]
+    exact measure_ne_top _ _
+  · rw [ofReal_integral_eq_lintegral_ofReal]
+    · have : ∫⁻ w in N, ENNReal.ofReal (ν.rnDeriv volume w).toReal = ∫⁻ w in N, ν.rnDeriv volume w := by
+        refine lintegral_congr_ae ?_
+        filter_upwards [ae_restrict_of_ae (Measure.rnDeriv_ne_top ν volume)] with w hw
+        exact ENNReal.ofReal_toReal hw
+      rw [this, Measure.setLIntegral_rnDeriv' hac hN, hν, Measure.map_apply hTm hN]
+      rfl
+    · refine Integrable.integrableOn ?_
+      refine integrable_toReal_of_lintegral_ne_top (Measure.measurable_rnDeriv _ _).aemeasurable ?_
+      rw [Measure.lintegral_rnDeriv hac]
+      exact measure_ne_top _ _
+    · exact Eventually.of_forall fun w => ENNReal.toReal_nonneg
+
+/-- **`T*T` has an integrable kernel** (Fubini): for bounded measurable `h` supported in a ball,
+`∫ |∫_θ h(x + e θ)|² dx = ∫ h(y) ∫ h(y + w) ρ(w) dw dy` with `ρ` the two-circle density. -/
+theorem integral_circleAvg_sq {ρ : ℂ → ℝ} (hρ : Integrable ρ)
+    (hρN : ∀ N : Set ℂ, MeasurableSet N →
+      (arcLength.prod arcLength) {p : ℝ × ℝ | e p.2 - e p.1 ∈ N} = ENNReal.ofReal (∫ w in N, ρ w))
+    {h : ℂ → ℝ} (hh : Measurable h) (hb : ∀ x, |h x| ≤ 2) {R : ℝ} (hs : ∀ x, R < ‖x‖ → h x = 0) :
+    ∫ x, (∫ θ in Ico 0 (2 * Real.pi), h (x + e θ)) ^ 2 = ∫ y, h y * ∫ w, h (y + w) * ρ w := by
+  set μ2 : Measure (ℝ × ℝ) := arcLength.prod arcLength with hμ2
+  set T : ℝ × ℝ → ℂ := fun p => e p.2 - e p.1 with hT
+  have hTm : Measurable T :=
+    ((continuous_e.comp continuous_snd).sub (continuous_e.comp continuous_fst)).measurable
+  -- a measurable version of `ρ`
+  set ρ' : ℂ → ℝ := hρ.1.mk ρ with hρ'
+  have hρ'm : Measurable ρ' := hρ.1.stronglyMeasurable_mk.measurable
+  have hρρ' : ρ =ᵐ[volume] ρ' := hρ.1.ae_eq_mk
+  have hρ'i : Integrable ρ' := hρ.congr hρρ'
+  have hset : ∀ N : Set ℂ, ∫ w in N, ρ w = ∫ w in N, ρ' w := fun N =>
+    integral_congr_ae (ae_restrict_of_ae hρρ')
+  have hN' : ∀ N : Set ℂ, MeasurableSet N → μ2 (T ⁻¹' N) = ENNReal.ofReal (∫ w in N, ρ' w) := fun N hN => by
+    rw [← hset]; exact hρN N hN
+  -- `ρ'` is non-negative almost everywhere
+  have hnn : ∀ᵐ w ∂volume, 0 ≤ ρ' w := by
+    set P : Set ℂ := {w | 0 ≤ ρ' w} with hP
+    have hPm : MeasurableSet P := measurableSet_le measurable_const hρ'm
+    have h1 : μ2 univ = ENNReal.ofReal (∫ w, ρ' w) := by
+      have := hN' univ MeasurableSet.univ
+      rwa [preimage_univ, Measure.restrict_univ] at this
+    have h3 : μ2 (T ⁻¹' Pᶜ) = 0 := by
+      rw [hN' _ hPm.compl, ENNReal.ofReal_eq_zero]
+      exact setIntegral_nonpos hPm.compl fun w hw => le_of_lt (not_le.1 hw)
+    have h2 : μ2 univ = ENNReal.ofReal (∫ w in P, ρ' w) := by
+      rw [← measure_add_measure_compl (hTm hPm), ← preimage_compl, h3, add_zero, hN' _ hPm]
+    have hpos : μ2 univ ≠ 0 := by
+      rw [hμ2, ← univ_prod_univ, Measure.prod_prod]
+      have : arcLength univ ≠ 0 := by
+        rw [arcLength, Measure.restrict_apply_univ, Real.volume_Ico, ne_eq, ENNReal.ofReal_eq_zero, not_le]
+        linarith [Real.pi_pos]
+      exact mul_ne_zero this this
+    have hI0 : 0 < ∫ w, ρ' w := by
+      rw [h1] at hpos; exact ENNReal.ofReal_pos.1 (pos_iff_ne_zero.2 hpos)
+    have hIP : 0 ≤ ∫ w in P, ρ' w := setIntegral_nonneg hPm fun w hw => hw
+    have heq : ∫ w, ρ' w = ∫ w in P, ρ' w :=
+      (ENNReal.ofReal_eq_ofReal_iff hI0.le hIP).1 (h1.symm.trans h2)
+    have hc : ∫ w in Pᶜ, ρ' w = 0 := by
+      have := integral_add_compl hPm hρ'i
+      linarith
+    have hc' : ∫ w in Pᶜ, -ρ' w = 0 := by rw [integral_neg, hc, neg_zero]
+    have hz := (setIntegral_eq_zero_iff_of_nonneg_ae
+      ((ae_restrict_iff' hPm.compl).2 (Eventually.of_forall fun w hw => by
+        simp only [Pi.zero_apply, Pi.neg_apply, Left.nonneg_neg_iff]; exact le_of_lt (not_le.1 hw)))
+      hρ'i.neg.integrableOn).1 hc'
+    filter_upwards [(ae_restrict_iff' hPm.compl).1 hz] with w hw
+    by_contra hneg
+    have := hw hneg
+    simp only [Pi.neg_apply, Pi.zero_apply, neg_eq_zero] at this
+    exact hneg (le_of_eq this.symm)
+  -- the law of `T` has density `ρ'`
+  have hmap : Measure.map T μ2 = volume.withDensity (fun w => ENNReal.ofReal (ρ' w)) := by
+    refine Measure.ext fun N hN => ?_
+    rw [Measure.map_apply hTm hN, withDensity_apply _ hN,
+      ← ofReal_integral_eq_lintegral_ofReal hρ'i.integrableOn (ae_restrict_of_ae hnn)]
+    exact hN' N hN
+  -- Step 1: the inner integral as an integral over pairs of angles
+  have hstep1 : ∀ y, ∫ w, h (y + w) * ρ w = ∫ p, h (y + T p) ∂μ2 := by
+    intro y
+    have hf : Measurable fun w => h (y + w) := hh.comp (measurable_const_add y)
+    rw [← integral_map hTm.aemeasurable hf.aestronglyMeasurable, hmap]
+    have := integral_withDensity_eq_integral_smul (μ := volume) hρ'm.real_toNNReal (fun w => h (y + w))
+    rw [show (fun w => ENNReal.ofReal (ρ' w)) = fun w => ((ρ' w).toNNReal : ENNReal) from rfl, this]
+    refine integral_congr_ae ?_
+    filter_upwards [hρρ', hnn] with w hw hw0
+    rw [NNReal.smul_def, smul_eq_mul, Real.coe_toNNReal _ hw0, hw, mul_comm]
+  -- the two integrability facts
+  have hbd : ∀ (r : ℝ) (f : ℂ × (ℝ × ℝ) → ℝ), Measurable f →
+      (∀ q, ‖f q‖ ≤ (closedBall (0 : ℂ) r).indicator (fun _ => (4 : ℝ)) q.1) → Integrable f (volume.prod μ2) := by
+    intro r f hf hfb
+    have hI : Integrable ((closedBall (0 : ℂ) r).indicator (fun _ => (4 : ℝ))) :=
+      (integrableOn_const (measure_closedBall_lt_top.ne)).integrable_indicator measurableSet_closedBall
+    exact (hI.comp_fst μ2).mono' hf.aestronglyMeasurable (Eventually.of_forall hfb)
+  have hint1 : Integrable (Function.uncurry fun (y : ℂ) (p : ℝ × ℝ) => h y * h (y + T p)) (volume.prod μ2) := by
+    refine hbd R _ ((hh.comp measurable_fst).mul (hh.comp (measurable_fst.add (hTm.comp measurable_snd)))) fun q => ?_
+    show ‖h q.1 * h (q.1 + T q.2)‖ ≤ _
+    by_cases hq : q.1 ∈ closedBall (0 : ℂ) R
+    · rw [indicator_of_mem hq, norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+      nlinarith [hb q.1, hb (q.1 + T q.2), abs_nonneg (h q.1), abs_nonneg (h (q.1 + T q.2))]
+    · rw [indicator_of_notMem hq, hs q.1 (by simpa using hq), zero_mul, norm_zero]
+  have hint2 : Integrable (Function.uncurry fun (x : ℂ) (p : ℝ × ℝ) => h (x + e p.1) * h (x + e p.2))
+      (volume.prod μ2) := by
+    refine hbd (R + 1) _ ((hh.comp (measurable_fst.add (continuous_e.measurable.comp (measurable_fst.comp
+      measurable_snd)))).mul (hh.comp (measurable_fst.add (continuous_e.measurable.comp (measurable_snd.comp
+      measurable_snd))))) fun q => ?_
+    show ‖h (q.1 + e q.2.1) * h (q.1 + e q.2.2)‖ ≤ _
+    by_cases hq : q.1 ∈ closedBall (0 : ℂ) (R + 1)
+    · rw [indicator_of_mem hq, norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+      nlinarith [hb (q.1 + e q.2.1), hb (q.1 + e q.2.2), abs_nonneg (h (q.1 + e q.2.1)),
+        abs_nonneg (h (q.1 + e q.2.2))]
+    · have hq' : R + 1 < ‖q.1‖ := by simpa using hq
+      have : R < ‖q.1 + e q.2.1‖ := by
+        have := norm_sub_norm_le q.1 (-e q.2.1)
+        rw [sub_neg_eq_add, norm_neg, norm_e] at this
+        linarith
+      rw [indicator_of_notMem hq, hs _ this, zero_mul, norm_zero]
+  -- assemble
+  calc ∫ x, (∫ θ in Ico 0 (2 * Real.pi), h (x + e θ)) ^ 2
+      = ∫ x, ∫ p, h (x + e p.1) * h (x + e p.2) ∂μ2 := by
+        refine integral_congr_ae (Eventually.of_forall fun x => ?_)
+        simp only [hμ2]
+        rw [integral_prod_mul (fun θ => h (x + e θ)) (fun θ => h (x + e θ)), sq]
+        rfl
+    _ = ∫ p, ∫ x, h (x + e p.1) * h (x + e p.2) ∂volume ∂μ2 := integral_integral_swap hint2
+    _ = ∫ p, ∫ y, h y * h (y + T p) ∂volume ∂μ2 := by
+        refine integral_congr_ae (Eventually.of_forall fun p => ?_)
+        show ∫ x, h (x + e p.1) * h (x + e p.2) = ∫ y, h y * h (y + T p)
+        rw [← integral_add_right_eq_self (fun y => h y * h (y + T p)) (e p.1)]
+        congr 1; ext x
+        simp only [hT]
+        congr 2; ring
+    _ = ∫ y, ∫ p, h y * h (y + T p) ∂μ2 ∂volume := (integral_integral_swap hint1).symm
+    _ = ∫ y, h y * ∫ w, h (y + w) * ρ w := by
+        refine integral_congr_ae (Eventually.of_forall fun y => ?_)
+        show ∫ p, h y * h (y + T p) ∂μ2 = h y * ∫ w, h (y + w) * ρ w
+        rw [hstep1 y, integral_const_mul]
+
+/-- A null set of the plane meets almost every unit circle in an arc-null set (Fubini on `(x, θ) ↦ x + e θ`). -/
+theorem ae_arcLength_null {N : Set ℂ} (hN : MeasurableSet N) (h0 : volume N = 0) :
+    ∀ᵐ x ∂volume, arcLength {θ | x + e θ ∈ N} = 0 := by
+  set S : Set (ℂ × ℝ) := {p | p.1 + e p.2 ∈ N} with hS
+  have hSm : MeasurableSet S := (measurable_fst.add (continuous_e.measurable.comp measurable_snd)) hN
+  have hz : (volume.prod arcLength) S = 0 := by
+    rw [Measure.prod_apply_symm hSm]
+    have : ∀ θ : ℝ, volume ((fun x => (x, θ)) ⁻¹' S) = 0 := by
+      intro θ
+      have : (fun x => (x, θ)) ⁻¹' S = (· + e θ) ⁻¹' N := rfl
+      rw [this, measure_preimage_add_right]; exact h0
+    simp [this]
+  exact (Measure.measure_prod_null hSm).1 hz
+
+/-- **The Rajchman step, Fourier-free**: the unit form is weak-* continuous on `[0, 1]`-valued families supported in a fixed
+ball (`integral_circleAvg_sq` and `convForm_tendsto` at `κ = ρ` make `T g_m → T F` in `L²`). -/
+theorem unitForm_tendsto {g : ℕ → ℂ → ℝ} {F : ℂ → ℝ} (hg : ∀ m, Measurable (g m)) (h01 : ∀ m x, 0 ≤ g m x ∧ g m x ≤ 1)
+    (hFm : Measurable F) (hF : ∀ᵐ x ∂volume, 0 ≤ F x ∧ F x ≤ 1) (hw : WeakStarTendsto g F) (R : ℝ) :
+    Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * ∫ θ in Ico 0 (2 * Real.pi), g m (x + e θ)) atTop
+      (𝓝 (∫ x in ball (0 : ℂ) R, F x * ∫ θ in Ico 0 (2 * Real.pi), F (x + e θ))) := by
+  -- the circle average and its two basic facts
+  set Tc : (ℂ → ℝ) → ℂ → ℝ := fun u x => ∫ θ in Ico 0 (2 * Real.pi), u (x + e θ) with hTc
+  have hTcm : ∀ u : ℂ → ℝ, Measurable u → StronglyMeasurable (Tc u) := fun u hu =>
+    (hu.comp (measurable_fst.add (continuous_e.measurable.comp measurable_snd))).stronglyMeasurable.integral_prod_right'
+  have hTcb : ∀ u : ℂ → ℝ, (∀ z, |u z| ≤ 1) → ∀ x, |Tc u x| ≤ 2 * Real.pi := fun u hu x => by
+    have := norm_integral_le_of_norm_le_const (μ := arcLength) (f := fun θ => u (x + e θ)) (C := 1)
+      (Eventually.of_forall fun θ => by rw [Real.norm_eq_abs]; exact hu _)
+    rw [Real.norm_eq_abs, one_mul, measureReal_def, arcLength, Measure.restrict_apply_univ, Real.volume_Ico,
+      ENNReal.toReal_ofReal (by linarith [Real.pi_pos]), sub_zero] at this
+    exact this
+  have hBfin : ∀ r : ℝ, volume (ball (0 : ℂ) r) ≠ ⊤ := fun r => measure_ball_lt_top.ne
+  -- the clamped limit
+  set G : ℂ → ℝ := fun x => max 0 (min (F x) 1) with hG
+  have hGm : Measurable G := measurable_const.max (hFm.min measurable_const)
+  have hG01 : ∀ x, 0 ≤ G x ∧ G x ≤ 1 := fun x => ⟨le_max_left _ _, max_le zero_le_one (min_le_right _ _)⟩
+  have hFG : F =ᵐ[volume] G := by
+    filter_upwards [hF] with x hx
+    simp only [hG, min_eq_left hx.2, max_eq_right hx.1]
+  have hwG : WeakStarTendsto g G := fun φ hφ => by
+    have : ∫ x, F x * φ x = ∫ x, G x * φ x := by
+      refine integral_congr_ae ?_
+      filter_upwards [hFG] with x hx
+      rw [hx]
+    rw [← this]; exact hw φ hφ
+  -- the target, with `G` in place of `F`
+  have hTFG : ∀ᵐ x ∂volume, Tc F x = Tc G x := by
+    have hN : MeasurableSet {x | F x ≠ G x} := (measurableSet_eq_fun hFm hGm).compl
+    have h0 : volume {x | F x ≠ G x} = 0 := ae_iff.1 hFG
+    filter_upwards [ae_arcLength_null hN h0] with x hx
+    refine integral_congr_ae ?_
+    exact ae_iff.2 hx
+  have htarget : ∫ x in ball (0 : ℂ) R, F x * Tc F x = ∫ x in ball (0 : ℂ) R, G x * Tc G x := by
+    refine integral_congr_ae (ae_restrict_of_ae ?_)
+    filter_upwards [hFG, hTFG] with x h1 h2
+    rw [h1, h2]
+  -- the truncated differences
+  set hm : ℕ → ℂ → ℝ := fun m => (ball (0 : ℂ) (R + 1)).indicator (fun z => g m z - G z) with hhm
+  have hmm : ∀ m, Measurable (hm m) := fun m => ((hg m).sub hGm).indicator measurableSet_ball
+  have hmb : ∀ m z, |hm m z| ≤ 1 := fun m z => by
+    simp only [hhm]
+    by_cases hz : z ∈ ball (0 : ℂ) (R + 1)
+    · rw [indicator_of_mem hz, abs_sub_le_iff]
+      constructor <;> linarith [h01 m z, hG01 z]
+    · rw [indicator_of_notMem hz, abs_zero]; exact zero_le_one
+  have hms : ∀ m z, R + 1 < ‖z‖ → hm m z = 0 := fun m z hz =>
+    indicator_of_notMem (by rw [mem_ball_zero_iff]; exact not_lt.2 hz.le) _
+  -- on the ball, the circle average of the difference is the difference of the averages
+  have hmem : ∀ x ∈ ball (0 : ℂ) R, ∀ θ : ℝ, x + e θ ∈ ball (0 : ℂ) (R + 1) := fun x hx θ => by
+    rw [mem_ball_zero_iff] at hx ⊢
+    calc ‖x + e θ‖ ≤ ‖x‖ + ‖e θ‖ := norm_add_le _ _
+      _ < R + 1 := by rw [norm_e]; linarith
+  have hintθ : ∀ (u : ℂ → ℝ), Measurable u → (∀ z, |u z| ≤ 1) → ∀ x,
+      Integrable (fun θ => u (x + e θ)) arcLength := fun u hu hb x =>
+    Integrable.of_bound ((hu.comp (measurable_const_add x |>.comp continuous_e.measurable)).aestronglyMeasurable) 1
+      (Eventually.of_forall fun θ => by rw [Real.norm_eq_abs]; exact hb _)
+  have hG1 : ∀ z, |G z| ≤ 1 := fun z => abs_le.2 ⟨by linarith [hG01 z], (hG01 z).2⟩
+  have hg1 : ∀ m z, |g m z| ≤ 1 := fun m z => abs_le.2 ⟨by linarith [h01 m z], (h01 m z).2⟩
+  have hsplitT : ∀ m, ∀ x ∈ ball (0 : ℂ) R, Tc (g m) x = Tc (hm m) x + Tc G x := fun m x hx => by
+    have : Tc (hm m) x = Tc (g m) x - Tc G x := by
+      show ∫ θ, hm m (x + e θ) ∂arcLength = (∫ θ, g m (x + e θ) ∂arcLength) - ∫ θ, G (x + e θ) ∂arcLength
+      rw [← integral_sub (hintθ _ (hg m) (hg1 m) x) (hintθ _ hGm hG1 x)]
+      refine integral_congr_ae (Eventually.of_forall fun θ => ?_)
+      simp only [hhm]
+      rw [indicator_of_mem (hmem x hx θ)]
+    linarith
+  -- Step 1: `∫ (T hm)² → 0` (`T*T` is convolution with the two-circle density)
+  obtain ⟨ρ, hρ, hρ0, hρN⟩ := exists_twoCircle_density
+  set K := ∫ w, ‖ρ w‖ with hK
+  set c : ℕ → ℂ → ℝ := fun m y => ∫ w, hm m (y + w) * ρ w with hc
+  have Pc := fun m => conv_props (hmm m) (Eventually.of_forall (hmb m)) hρ
+  have hsq : ∀ m, ∫ x, (Tc (hm m) x) ^ 2 = ∫ y, hm m y * c m y := fun m =>
+    integral_circleAvg_sq hρ hρN (hmm m) (fun z => (hmb m z).trans one_le_two) (hms m)
+  have hcpt : ∀ y, Tendsto (fun m => c m y) atTop (𝓝 0) := by
+    intro y
+    set φ : ℂ → ℝ := (ball (0 : ℂ) (R + 1)).indicator (fun z => ρ (z - y)) with hφ
+    have hφi : Integrable φ := (hρ.comp_sub_right y).indicator measurableSet_ball
+    have he : ∀ m, c m y = (∫ z, g m z * φ z) - ∫ z, G z * φ z := fun m => by
+      show ∫ w, hm m (y + w) * ρ w = _
+      rw [(Pc m).2.2 y, ← integral_sub
+        (hφi.bdd_mul (hg m).aestronglyMeasurable (Eventually.of_forall fun z => by rw [Real.norm_eq_abs]; exact hg1 m z))
+        (hφi.bdd_mul hGm.aestronglyMeasurable (Eventually.of_forall fun z => by rw [Real.norm_eq_abs]; exact hG1 z))]
+      refine integral_congr_ae (Eventually.of_forall fun z => ?_)
+      simp only [hhm, hφ]
+      by_cases hz : z ∈ ball (0 : ℂ) (R + 1)
+      · rw [indicator_of_mem hz, indicator_of_mem hz]; ring
+      · rw [indicator_of_notMem hz, indicator_of_notMem hz]; ring
+    simp_rw [he]
+    have := (hwG φ hφi).sub_const (∫ z, G z * φ z)
+    rwa [sub_self] at this
+  have hSq : Tendsto (fun m => ∫ x, (Tc (hm m) x) ^ 2) atTop (𝓝 0) := by
+    simp_rw [hsq]
+    have hK0 : 0 ≤ K := integral_nonneg fun w => norm_nonneg _
+    haveI : IsFiniteMeasure (volume.restrict (ball (0 : ℂ) (R + 1))) :=
+      ⟨by rw [Measure.restrict_apply_univ]; exact measure_ball_lt_top⟩
+    have hdom : Tendsto (fun m => ∫ y in ball (0 : ℂ) (R + 1), |c m y|) atTop (𝓝 0) := by
+      have := tendsto_integral_of_dominated_convergence (μ := volume.restrict (ball (0 : ℂ) (R + 1)))
+        (F := fun m y => |c m y|) (f := fun _ => 0) (fun _ => K) (fun m => (Pc m).1.restrict.norm)
+        (integrable_const K) (fun m => Eventually.of_forall fun y => by
+          rw [Real.norm_eq_abs, abs_abs]; exact (Pc m).2.1 y)
+        (Eventually.of_forall fun y => by simpa using (hcpt y).abs)
+      simpa using this
+    refine squeeze_zero_norm (fun m => ?_) hdom
+    rw [← setIntegral_eq_integral_of_forall_compl_eq_zero (s := ball (0 : ℂ) (R + 1)) (fun y hy => by
+      simp only [hhm]; rw [indicator_of_notMem hy, zero_mul])]
+    refine norm_integral_le_of_norm_le ?_ (Eventually.of_forall fun y => ?_)
+    · exact Measure.integrableOn_of_bounded (hBfin _) (Pc m).1.norm (M := K)
+        (Eventually.of_forall fun y => by rw [Real.norm_eq_abs, abs_abs]; exact (Pc m).2.1 y)
+    · rw [norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+      exact mul_le_of_le_one_left (abs_nonneg _) (hmb m y)
+  -- Step 2: `∫_{B_R} |T hm| → 0`
+  have hTm1 : ∀ m z, |Tc (hm m) z| ≤ 2 * Real.pi := fun m => hTcb _ (hmb m)
+  have hsupp : ∀ m x, R + 2 < ‖x‖ → Tc (hm m) x = 0 := fun m x hx => by
+    simp only [hTc]
+    refine (integral_congr_ae (Eventually.of_forall fun θ => ?_)).trans (integral_zero _ _)
+    refine hms m _ ?_
+    have := norm_sub_norm_le x (-e θ)
+    rw [sub_neg_eq_add, norm_neg, norm_e] at this
+    show R + 1 < ‖x + e θ‖
+    linarith
+  have hsqi : ∀ m, Integrable (fun x => (Tc (hm m) x) ^ 2) := fun m => by
+    have hI : Integrable ((closedBall (0 : ℂ) (R + 2)).indicator (fun _ => (2 * Real.pi) ^ 2)) :=
+      (integrableOn_const (measure_closedBall_lt_top.ne)).integrable_indicator measurableSet_closedBall
+    refine hI.mono' ((hTcm _ (hmm m)).aestronglyMeasurable.pow 2) (Eventually.of_forall fun x => ?_)
+    by_cases hx : x ∈ closedBall (0 : ℂ) (R + 2)
+    · rw [indicator_of_mem hx, Real.norm_eq_abs, abs_pow]
+      exact pow_le_pow_left₀ (abs_nonneg _) (hTm1 m x) 2
+    · rw [indicator_of_notMem hx, hsupp m x (by simpa using hx)]; simp
+  have hL1 : Tendsto (fun m => ∫ x in ball (0 : ℂ) R, |Tc (hm m) x|) atTop (𝓝 0) := by
+    set V := volume.real (ball (0 : ℂ) R) with hV
+    have hV0 : 0 ≤ V := measureReal_nonneg
+    refine tendsto_order.2 ⟨fun a ha => Eventually.of_forall fun m => lt_of_lt_of_le ha
+      (setIntegral_nonneg measurableSet_ball fun x _ => abs_nonneg _), fun a ha => ?_⟩
+    set δ := a / (V + 1) with hδ
+    have hδ0 : 0 < δ := div_pos ha (by linarith)
+    filter_upwards [(tendsto_order.1 hSq).2 (δ * a) (mul_pos hδ0 ha)] with m hm'
+    have hpt : ∀ x, |Tc (hm m) x| ≤ (Tc (hm m) x) ^ 2 / (2 * δ) + δ / 2 := fun x => by
+      rw [div_add_div _ _ (by positivity) (by positivity), le_div_iff₀ (by positivity)]
+      nlinarith [sq_nonneg (|Tc (hm m) x| - δ), sq_abs (Tc (hm m) x)]
+    have hiB : IntegrableOn (fun x => (Tc (hm m) x) ^ 2 / (2 * δ) + δ / 2) (ball (0 : ℂ) R) :=
+      ((hsqi m).div_const _).integrableOn.add (integrableOn_const (hBfin R))
+    calc ∫ x in ball (0 : ℂ) R, |Tc (hm m) x|
+        ≤ ∫ x in ball (0 : ℂ) R, ((Tc (hm m) x) ^ 2 / (2 * δ) + δ / 2) :=
+          setIntegral_mono_on (Measure.integrableOn_of_bounded (hBfin R)
+            (hTcm _ (hmm m)).aestronglyMeasurable.norm (M := 2 * Real.pi)
+            (Eventually.of_forall fun x => by rw [Real.norm_eq_abs, abs_abs]; exact hTm1 m x))
+            hiB measurableSet_ball fun x _ => hpt x
+      _ = (∫ x in ball (0 : ℂ) R, (Tc (hm m) x) ^ 2) / (2 * δ) + δ / 2 * V := by
+          rw [integral_add ((hsqi m).div_const _).integrableOn (integrableOn_const (hBfin R)), integral_div,
+            setIntegral_const, smul_eq_mul]
+          ring
+      _ ≤ (∫ x, (Tc (hm m) x) ^ 2) / (2 * δ) + δ / 2 * V := by
+          have hle := setIntegral_le_integral (s := ball (0 : ℂ) R) (hsqi m)
+            (Eventually.of_forall fun x => sq_nonneg (Tc (hm m) x))
+          have h2δ : 0 < 2 * δ := by positivity
+          linarith [(div_le_div_iff_of_pos_right h2δ).2 hle]
+      _ < (δ * a) / (2 * δ) + δ / 2 * (V + 1) := by
+          gcongr
+          · linarith
+      _ = a := by
+          rw [hδ]; field_simp; ring
+  -- Step 3: assemble
+  have hTGb : ∀ x, |Tc G x| ≤ 2 * Real.pi := hTcb _ hG1
+  have hψ : Integrable ((ball (0 : ℂ) R).indicator (Tc G)) :=
+    (Measure.integrableOn_of_bounded (hBfin R) (hTcm _ hGm).aestronglyMeasurable (M := 2 * Real.pi)
+      (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hTGb x)).integrable_indicator measurableSet_ball
+  have hind : ∀ u : ℂ → ℝ, ∫ x in ball (0 : ℂ) R, u x * Tc G x = ∫ x, u x * (ball (0 : ℂ) R).indicator (Tc G) x := by
+    intro u
+    rw [← integral_indicator measurableSet_ball]
+    congr 1; ext x
+    by_cases hx : x ∈ ball (0 : ℂ) R <;> simp [hx]
+  have hsecond : Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * Tc G x) atTop
+      (𝓝 (∫ x in ball (0 : ℂ) R, G x * Tc G x)) := by
+    simp_rw [hind]; exact hwG _ hψ
+  have hfirst : Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * Tc (hm m) x) atTop (𝓝 0) := by
+    refine squeeze_zero_norm (fun m => ?_) hL1
+    refine norm_integral_le_of_norm_le (Measure.integrableOn_of_bounded (hBfin R)
+      (hTcm _ (hmm m)).aestronglyMeasurable.norm (M := 2 * Real.pi)
+      (Eventually.of_forall fun x => by rw [Real.norm_eq_abs, abs_abs]; exact hTm1 m x))
+      (Eventually.of_forall fun x => ?_)
+    rw [norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+    exact mul_le_of_le_one_left (abs_nonneg _) (hg1 m x)
+  have hsplit : ∀ m, ∫ x in ball (0 : ℂ) R, g m x * Tc (g m) x =
+      (∫ x in ball (0 : ℂ) R, g m x * Tc (hm m) x) + ∫ x in ball (0 : ℂ) R, g m x * Tc G x := fun m => by
+    have h1 : IntegrableOn (fun x => g m x * Tc (hm m) x) (ball (0 : ℂ) R) := by
+      exact (Measure.integrableOn_of_bounded (hBfin R) (hTcm _ (hmm m)).aestronglyMeasurable (M := 2 * Real.pi)
+        (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hTm1 m x)).bdd_mul
+        (hg m).aestronglyMeasurable (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hg1 m x)
+    have h2 : IntegrableOn (fun x => g m x * Tc G x) (ball (0 : ℂ) R) := by
+      exact (Measure.integrableOn_of_bounded (hBfin R) (hTcm _ hGm).aestronglyMeasurable (M := 2 * Real.pi)
+        (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hTGb x)).bdd_mul
+        (hg m).aestronglyMeasurable (Eventually.of_forall fun x => by rw [Real.norm_eq_abs]; exact hg1 m x)
+    rw [← integral_add h1 h2]
+    refine setIntegral_congr_fun measurableSet_ball fun x hx => ?_
+    rw [hsplitT m x hx]; ring
+  show Tendsto (fun m => ∫ x in ball (0 : ℂ) R, g m x * Tc (g m) x) atTop (𝓝 (∫ x in ball (0 : ℂ) R, F x * Tc F x))
+  rw [htarget]
+  simp_rw [hsplit]
+  simpa using hfirst.add hsecond
+
+/-- The averaging step: some disc of radius `r` about a point of `B(0, R − r)` meets the complement of `S` in at most the
+average, `|B(0, r)| · |B(0, R) ∖ S| / |B(0, R − r)|`. -/
+theorem exists_ball_diff_le_avg {S : Set ℂ} (hS : MeasurableSet S) {r R : ℝ} (hr : 0 < r) (hrR : r < R) :
+    ∃ v ∈ ball (0 : ℂ) (R - r), volume (ball v r \ S) ≤
+      volume (ball (0 : ℂ) r) * volume (ball (0 : ℂ) R \ S) / volume (ball (0 : ℂ) (R - r)) := by
+  set E : Set (ℂ × ℂ) := {q | dist q.2 q.1 < r ∧ q.2 ∉ S} with hE
+  have hEm : MeasurableSet E :=
+    (measurableSet_lt (continuous_snd.dist continuous_fst).measurable measurable_const).inter
+      (measurable_snd hS.compl)
+  have hsl : ∀ v, Prod.mk v ⁻¹' E = ball v r \ S := fun v => by ext x; simp [hE, mem_ball]
+  set B' := ball (0 : ℂ) (R - r) with hB'
+  have hB'0 : volume B' ≠ 0 := (measure_ball_pos volume _ (by linarith)).ne'
+  have hB'top : volume B' ≠ ⊤ := measure_ball_lt_top.ne
+  have hf : Measurable fun v => volume (Prod.mk v ⁻¹' E) := measurable_measure_prodMk_left hEm
+  have hint : ∫⁻ v in B', volume (Prod.mk v ⁻¹' E) ≤ volume (ball (0 : ℂ) r) * volume (ball (0 : ℂ) R \ S) := by
+    rw [← Measure.prod_apply hEm, Measure.prod_apply_symm hEm]
+    calc ∫⁻ x, (volume.restrict B') ((fun v => (v, x)) ⁻¹' E) ≤
+          ∫⁻ x, (ball (0 : ℂ) R \ S).indicator (fun _ => volume (ball (0 : ℂ) r)) x := by
+          refine lintegral_mono fun x => ?_
+          by_cases hx : x ∈ ball (0 : ℂ) R \ S
+          · rw [indicator_of_mem hx, Measure.restrict_apply' measurableSet_ball]
+            calc volume ((fun v => (v, x)) ⁻¹' E ∩ B') ≤ volume (ball x r) := by
+                  refine measure_mono fun v hv => ?_
+                  simp only [hE, mem_inter_iff, mem_preimage, mem_setOf_eq] at hv
+                  rw [mem_ball, dist_comm]; exact hv.1.1
+              _ = _ := by
+                  rw [volume_ball_ofReal x hr.le, volume_ball_ofReal 0 hr.le]
+          · rw [indicator_of_notMem hx, nonpos_iff_eq_zero, Measure.restrict_apply' measurableSet_ball]
+            refine measure_mono_null (fun v hv => ?_) measure_empty
+            simp only [hE, mem_inter_iff, mem_preimage, mem_setOf_eq, mem_ball, dist_zero_right] at hv
+            refine hx ⟨?_, hv.1.2⟩
+            rw [mem_ball, dist_zero_right]
+            have := norm_sub_norm_le x v
+            rw [← dist_eq_norm] at this
+            linarith [hv.1.1, hv.2]
+      _ = _ := by
+          rw [lintegral_indicator_const (measurableSet_ball.diff hS), mul_comm]
+  obtain ⟨v, hv, hle⟩ := exists_le_setLAverage hB'0 hB'top hf.aemeasurable
+  refine ⟨v, hv, ?_⟩
+  rw [← hsl v]
+  refine hle.trans ?_
+  rw [setLAverage_eq]
+  exact ENNReal.div_le_div_right hint _
+
+/-- **Translates with vanishing holes**: if partial colourings with a translation-invariant class property reach upper
+density `1`, translates of them leave holes tending to `0` in every ball (`upperDensity` at origin-centred balls, an
+averaging over centres in `B(0, R − r)`). -/
+theorem exists_translates_small_hole {P : (Fin k → Set ℂ) → Prop}
+    (hP : ∀ C (v : ℂ), P C → P fun j => (· + v) ⁻¹' C j)
+    (h : (⨆ (C : Fin k → Set ℂ) (_ : IsPartialColouring C ∧ P C), upperDensity (⋃ j, C j)) = 1) :
+    ∃ C : ℕ → Fin k → Set ℂ, (∀ m, IsPartialColouring (C m) ∧ P (C m)) ∧
+      ∀ R : ℝ, Tendsto (fun m => volume (ball (0 : ℂ) R \ ⋃ j, C m j)) atTop (𝓝 0) := by
+  have key : ∀ r : ℝ, 0 < r → ∀ η : ℝ, 0 < η → ∃ C : Fin k → Set ℂ, (IsPartialColouring C ∧ P C) ∧
+      volume (ball (0 : ℂ) r \ ⋃ j, C j) ≤ ENNReal.ofReal η := by
+    intro r hr η hη
+    set δ : ℝ := η / (4 * (r ^ 2 * Real.pi)) with hδ
+    have hδ0 : 0 < δ := by positivity
+    have hlt : ENNReal.ofReal (1 - δ) < ⨆ (C : Fin k → Set ℂ) (_ : IsPartialColouring C ∧ P C), upperDensity (⋃ j, C j) := by
+      rw [h, ENNReal.ofReal_lt_one]; linarith
+    obtain ⟨C, hC⟩ := lt_iSup_iff.1 hlt
+    obtain ⟨hCP, hCd⟩ := lt_iSup_iff.1 hC
+    set S := ⋃ j, C j with hSdef
+    have hSm : MeasurableSet S := MeasurableSet.iUnion hCP.1.1
+    obtain ⟨R, hR, hRS⟩ := Filter.frequently_atTop.1 (frequently_lt_of_lt_limsup (by isBoundedDefault) hCd) (2 * r)
+    have hR0 : 0 < R := by linarith
+    have hBR0 : volume (ball (0 : ℂ) R) ≠ 0 := (measure_ball_pos volume _ hR0).ne'
+    have hBRt : volume (ball (0 : ℂ) R) ≠ ⊤ := measure_ball_lt_top.ne
+    -- the hole of `S` in `B(0, R)`
+    have hhole : volume (ball (0 : ℂ) R \ S) ≤ ENNReal.ofReal δ * volume (ball (0 : ℂ) R) := by
+      have h1 : ENNReal.ofReal (1 - δ) * volume (ball (0 : ℂ) R) ≤ volume (S ∩ ball 0 R) := by
+        have := (ENNReal.lt_div_iff_mul_lt (Or.inl hBR0) (Or.inl hBRt)).1 hRS
+        exact this.le
+      have hsplit := measure_inter_add_sdiff (μ := volume) (ball (0 : ℂ) R) hSm
+      have hsum : volume (ball (0 : ℂ) R) ≤
+          ENNReal.ofReal (1 - δ) * volume (ball (0 : ℂ) R) + ENNReal.ofReal δ * volume (ball (0 : ℂ) R) := by
+        rw [← add_mul]
+        calc volume (ball (0 : ℂ) R) = 1 * volume (ball (0 : ℂ) R) := (one_mul _).symm
+          _ ≤ _ := by
+              gcongr
+              calc (1 : ENNReal) = ENNReal.ofReal (1 - δ + δ) := by rw [sub_add_cancel, ENNReal.ofReal_one]
+                _ ≤ _ := ENNReal.ofReal_add_le
+      have hfin : volume (ball (0 : ℂ) R ∩ S) ≠ ⊤ := measure_ne_top_of_subset inter_subset_left hBRt
+      refine (ENNReal.add_le_add_iff_left hfin).1 ?_
+      rw [hsplit]
+      refine hsum.trans ?_
+      rw [inter_comm] at h1
+      gcongr
+    obtain ⟨v, -, hv⟩ := exists_ball_diff_le_avg hSm hr (by linarith : r < R)
+    have hRr : 0 < R - r := by linarith
+    have hbound : volume (ball v r \ S) ≤ ENNReal.ofReal η := by
+      refine hv.trans ?_
+      calc volume (ball (0 : ℂ) r) * volume (ball (0 : ℂ) R \ S) / volume (ball (0 : ℂ) (R - r)) ≤
+            volume (ball (0 : ℂ) r) * (ENNReal.ofReal δ * volume (ball (0 : ℂ) R)) / volume (ball (0 : ℂ) (R - r)) := by
+            gcongr
+        _ = volume (ball (0 : ℂ) r) * ENNReal.ofReal δ * (volume (ball (0 : ℂ) R) / volume (ball (0 : ℂ) (R - r))) := by
+            rw [← mul_assoc, mul_div_assoc]
+        _ = ENNReal.ofReal (r ^ 2 * Real.pi * δ * (R / (R - r)) ^ 2) := by
+            have e1 : volume (ball (0 : ℂ) R) / volume (ball (0 : ℂ) (R - r)) = ENNReal.ofReal ((R / (R - r)) ^ 2) := by
+              rw [volume_ball_ofReal 0 hR0.le, volume_ball_ofReal 0 hRr.le, ← ENNReal.ofReal_div_of_pos (by positivity)]
+              congr 1; field_simp
+            rw [e1, volume_ball_ofReal 0 hr.le, ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul (by positivity)]
+        _ ≤ ENNReal.ofReal η := by
+            refine ENNReal.ofReal_le_ofReal ?_
+            have h2 : R / (R - r) ≤ 2 := by rw [div_le_iff₀ hRr]; linarith
+            have h3 : (R / (R - r)) ^ 2 ≤ 4 := by
+              have : 0 ≤ R / (R - r) := by positivity
+              nlinarith
+            have h4 : r ^ 2 * Real.pi * δ * 4 = η := by
+              rw [hδ]; field_simp
+            calc r ^ 2 * Real.pi * δ * (R / (R - r)) ^ 2 ≤ r ^ 2 * Real.pi * δ * 4 := by gcongr
+              _ = η := h4
+    refine ⟨fun j => (· + v) ⁻¹' C j, ⟨⟨fun j => (measurable_id.add_const v) (hCP.1.1 j), fun i j hij =>
+      (hCP.1.2 hij).preimage _⟩, hP C v hCP.2⟩, ?_⟩
+    have hpre : ball (0 : ℂ) r \ ⋃ j, (· + v) ⁻¹' C j = (· + v) ⁻¹' (ball v r \ S) := by
+      ext x
+      simp only [Set.mem_sdiff, mem_ball, mem_iUnion, mem_preimage, hSdef, dist_eq_norm, add_sub_cancel_right, sub_zero]
+    rw [hpre, measure_preimage_add_right]
+    exact hbound
+  choose C hC hhole using fun m : ℕ => key ((m : ℝ) + 1) (by positivity) (1 / ((m : ℝ) + 1)) (by positivity)
+  refine ⟨C, hC, fun R => ?_⟩
+  have hlim : Tendsto (fun m : ℕ => ENNReal.ofReal (1 / ((m : ℝ) + 1))) atTop (𝓝 0) := by
+    rw [← ENNReal.ofReal_zero]
+    exact ENNReal.tendsto_ofReal tendsto_one_div_add_atTop_nhds_zero_nat
+  refine tendsto_of_tendsto_of_tendsto_of_le_of_le' tendsto_const_nhds hlim (Eventually.of_forall fun m => bot_le) ?_
+  obtain ⟨m₀, hm₀⟩ := exists_nat_ge R
+  filter_upwards [eventually_ge_atTop m₀] with m hm
+  refine le_trans (measure_mono (sdiff_subset_sdiff_left (ball_subset_ball ?_))) (hhole m)
+  have : (m₀ : ℝ) ≤ m := by exact_mod_cast hm
+  linarith
+
+/-- The weak-* limit of the indicator families of `exists_translates_small_hole` sums to `1` almost everywhere. -/
+theorem ae_sum_eq_one_of_weakStar {C : ℕ → Fin k → Set ℂ} (hC : ∀ m, IsPartialColouring (C m))
+    (hhole : ∀ R : ℝ, Tendsto (fun m => volume (ball (0 : ℂ) R \ ⋃ j, C m j)) atTop (𝓝 0)) {F : Fin k → ℂ → ℝ}
+    (hFm : ∀ j, Measurable (F j)) (hw : ∀ j, WeakStarTendsto (fun m => (C m j).indicator 1) (F j)) :
+    ∀ᵐ x ∂volume, ∑ j, F j x = 1 := by
+  have hGm : Measurable fun x => ∑ j, F j x := Finset.measurable_sum _ fun j _ => hFm j
+  -- on a bounded set where every `F j` is bounded, `∫_B ∑ F j = |B|`
+  have key : ∀ B : Set ℂ, MeasurableSet B → ∀ n : ℝ, B ⊆ ball 0 n → ∀ M : ℝ, (∀ x ∈ B, ∀ j, |F j x| ≤ M) →
+      ∫ x in B, ∑ j, F j x = volume.real B := by
+    intro B hB n hBn M hM
+    have hBfin : volume B ≠ ⊤ := measure_ne_top_of_subset hBn measure_ball_lt_top.ne
+    have hφ : Integrable (B.indicator (1 : ℂ → ℝ)) :=
+      (integrableOn_const hBfin).integrable_indicator hB
+    have hFi : ∀ j, IntegrableOn (F j) B := fun j =>
+      Measure.integrableOn_of_bounded hBfin (hFm j).aestronglyMeasurable (M := M)
+        ((ae_restrict_iff' hB).2 (Eventually.of_forall fun x hx => by rw [Real.norm_eq_abs]; exact hM x hx j))
+    have hsum := tendsto_finsetSum Finset.univ (fun j (_ : j ∈ Finset.univ) => hw j _ hφ)
+    have hL : ∀ m, ∑ j, ∫ x, (C m j).indicator 1 x * B.indicator 1 x = volume.real (B ∩ ⋃ j, C m j) := by
+      intro m
+      have : ∀ j, ∫ x, (C m j).indicator 1 x * B.indicator (1 : ℂ → ℝ) x = volume.real (C m j ∩ B) := by
+        intro j
+        rw [← integral_indicator_one ((hC m).1 j |>.inter hB), inter_indicator_one]
+        rfl
+      simp_rw [this]
+      rw [inter_iUnion, ← measureReal_biUnion_finset (s := Finset.univ) (f := fun j => C m j ∩ B)]
+      · simp only [Finset.mem_univ, iUnion_true]
+        simp_rw [inter_comm (C m _) B]
+      · intro i _ j _ hij
+        exact ((hC m).2 hij).mono inter_subset_left inter_subset_left
+      · exact fun j _ => ((hC m).1 j).inter hB
+    have hU : ∀ m, MeasurableSet (⋃ j, C m j) := fun m => MeasurableSet.iUnion (hC m).1
+    have hconv : Tendsto (fun m => volume.real (B ∩ ⋃ j, C m j)) atTop (𝓝 (volume.real B)) := by
+      have hdiff : Tendsto (fun m => volume.real (B \ ⋃ j, C m j)) atTop (𝓝 0) := by
+        have h0 : Tendsto (fun m => volume (B \ ⋃ j, C m j)) atTop (𝓝 0) :=
+          tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds (hhole n) (fun m => bot_le)
+            (fun m => measure_mono (sdiff_subset_sdiff_left hBn))
+        have := (ENNReal.tendsto_toReal ENNReal.zero_ne_top).comp h0
+        simpa [Measure.real, Function.comp_def] using this
+      have : ∀ m, volume.real (B ∩ ⋃ j, C m j) = volume.real B - volume.real (B \ ⋃ j, C m j) := by
+        intro m; rw [← measureReal_inter_add_sdiff (hU m) hBfin]; ring
+      simp_rw [this]
+      simpa using (tendsto_const_nhds (x := volume.real B)).sub hdiff
+    have hR : ∑ j, ∫ x, F j x * B.indicator 1 x = ∫ x in B, ∑ j, F j x := by
+      have : ∀ j, ∫ x, F j x * B.indicator (1 : ℂ → ℝ) x = ∫ x in B, F j x := by
+        intro j
+        rw [← integral_indicator hB]
+        congr 1; ext x
+        by_cases hx : x ∈ B <;> simp [hx]
+      simp_rw [this]
+      rw [integral_finsetSum _ fun j _ => hFi j]
+    rw [← hR]
+    refine tendsto_nhds_unique hsum ?_
+    simp_rw [hL]
+    exact hconv
+  -- a bounded set where every `F j` is bounded and `s (∑ F j − 1) > 0` is null
+  have hnull : ∀ B : Set ℂ, MeasurableSet B → ∀ n : ℝ, B ⊆ ball 0 n → ∀ M : ℝ, (∀ x ∈ B, ∀ j, |F j x| ≤ M) →
+      ∀ σ : ℝ, (∀ x ∈ B, 0 < σ * (∑ j, F j x - 1)) → volume B = 0 := by
+    intro B hB n hBn M hM σ hσ
+    have hBfin : volume B ≠ ⊤ := measure_ne_top_of_subset hBn measure_ball_lt_top.ne
+    have hGi : IntegrableOn (fun x => ∑ j, F j x) B := by
+      refine integrable_finsetSum _ fun j _ => ?_
+      exact Measure.integrableOn_of_bounded hBfin (hFm j).aestronglyMeasurable (M := M)
+        ((ae_restrict_iff' hB).2 (Eventually.of_forall fun x hx => by rw [Real.norm_eq_abs]; exact hM x hx j))
+    have hfi : IntegrableOn (fun x => σ * (∑ j, F j x - 1)) B :=
+      (hGi.sub (integrableOn_const hBfin)).const_mul σ
+    have hint0 : ∫ x in B, σ * (∑ j, F j x - 1) = 0 := by
+      rw [integral_const_mul, integral_sub hGi (integrableOn_const hBfin), key B hB n hBn M hM, setIntegral_const,
+        smul_eq_mul, mul_one, sub_self, mul_zero]
+    have hae := (setIntegral_eq_zero_iff_of_nonneg_ae
+      ((ae_restrict_iff' hB).2 (Eventually.of_forall fun x hx => (hσ x hx).le)) hfi).1 hint0
+    have h' : ∀ᵐ x ∂volume, x ∉ B := by
+      filter_upwards [(ae_restrict_iff' hB).1 hae] with x hx hxB
+      exact (hσ x hxB).ne' (hx hxB)
+    simpa using ae_iff.1 h'
+  have hbd : ∀ M : ℝ, MeasurableSet {x | ∀ j, |F j x| ≤ M} := fun M => by
+    rw [setOf_forall]
+    exact MeasurableSet.iInter fun j => measurableSet_le (continuous_abs.measurable.comp (hFm j)) measurable_const
+  have hcov : {x | ∑ j, F j x ≠ 1} ⊆ ⋃ (n : ℕ) (M : ℕ),
+      ((ball 0 n ∩ {x | ∀ j, |F j x| ≤ M} ∩ {x | 0 < 1 * (∑ j, F j x - 1)}) ∪
+        (ball 0 n ∩ {x | ∀ j, |F j x| ≤ M} ∩ {x | 0 < (-1) * (∑ j, F j x - 1)})) := by
+    intro x hx
+    obtain ⟨n, hn⟩ := exists_nat_gt ‖x‖
+    obtain ⟨M, hM⟩ := exists_nat_ge (∑ j, |F j x|)
+    refine mem_iUnion₂.2 ⟨n, M, ?_⟩
+    have hb : ∀ j, |F j x| ≤ M := fun j =>
+      (Finset.single_le_sum (fun i _ => abs_nonneg (F i x)) (Finset.mem_univ j)).trans hM
+    have hxn : x ∈ ball (0 : ℂ) n := by rw [mem_ball, dist_zero_right]; exact hn
+    rcases lt_or_gt_of_ne hx with h | h
+    · right; exact ⟨⟨hxn, hb⟩, by show 0 < (-1) * (∑ j, F j x - 1); linarith⟩
+    · left; exact ⟨⟨hxn, hb⟩, by show 0 < 1 * (∑ j, F j x - 1); linarith⟩
+  rw [ae_iff]
+  refine measure_mono_null hcov (measure_iUnion_null fun n => measure_iUnion_null fun M => measure_union_null ?_ ?_)
+  · exact hnull _ ((measurableSet_ball.inter (hbd M)).inter (measurableSet_lt measurable_const
+      (measurable_const.mul (hGm.sub measurable_const)))) n (fun x hx => hx.1.1) M (fun x hx => hx.1.2) 1 (fun x hx => hx.2)
+  · exact hnull _ ((measurableSet_ball.inter (hbd M)).inter (measurableSet_lt measurable_const
+      (measurable_const.mul (hGm.sub measurable_const)))) n (fun x hx => hx.1.1) M (fun x hx => hx.1.2) (-1) (fun x hx => hx.2)
+
+/-- **Selection**: from weights summing to `1`, a measurable colour of positive weight (argmax over `Fin k`). -/
+theorem exists_selection {F : Fin k → ℂ → ℝ} (hF : ∀ j, Measurable (F j)) (hsum : ∀ᵐ x ∂volume, ∑ j, F j x = 1)
+    (hpos : ∀ j, ∀ᵐ x ∂volume, 0 ≤ F j x) : ∃ c : ℂ → Fin k, Measurable c ∧ ∀ᵐ x ∂volume, 0 < F (c x) x := by
+  classical
+  rcases Nat.eq_zero_or_pos k with rfl | hk
+  · exfalso
+    have : ∀ᵐ x ∂(volume : Measure ℂ), False := by
+      filter_upwards [hsum] with x hx
+      simp at hx
+    rw [ae_iff] at this
+    simp at this
+  · set j₀ : Fin k := ⟨0, hk⟩
+    set c : ℂ → Fin k := fun x =>
+      if h : ∃ j, 0 < F j x then (Finset.univ.filter fun j => 0 < F j x).min' (by
+        obtain ⟨j0, hj0⟩ := h; exact ⟨j0, Finset.mem_filter.2 ⟨Finset.mem_univ _, hj0⟩⟩) else j₀ with hc
+    have hmeasPos : ∀ j, MeasurableSet {x | 0 < F j x} := fun j => measurableSet_lt measurable_const (hF j)
+    have hpre : ∀ j, c ⁻¹' {j} = ({x | 0 < F j x} ∩ ⋂ i ∈ Finset.univ.filter (· < j), {x | ¬ 0 < F i x}) ∪
+        (if j = j₀ then {x | ∀ i, ¬ 0 < F i x} else ∅) := by
+      intro j
+      ext x
+      simp only [mem_preimage, mem_singleton_iff, hc]
+      by_cases h : ∃ j, 0 < F j x
+      · rw [dif_pos h]
+        have hne : ¬ ∀ i, ¬ 0 < F i x := by push Not; exact h
+        constructor
+        · intro hj
+          left
+          have hmem := Finset.min'_mem (Finset.univ.filter fun j => 0 < F j x) (by
+            obtain ⟨j0, hj0⟩ := h; exact ⟨j0, Finset.mem_filter.2 ⟨Finset.mem_univ _, hj0⟩⟩)
+          rw [hj] at hmem
+          refine ⟨(Finset.mem_filter.1 hmem).2, mem_iInter₂.2 fun i hi => ?_⟩
+          intro hi'
+          have := Finset.min'_le (Finset.univ.filter fun j => 0 < F j x) i (Finset.mem_filter.2 ⟨Finset.mem_univ _, hi'⟩)
+          rw [hj] at this
+          exact absurd (Finset.mem_filter.1 hi).2 (not_lt.2 this)
+        · rintro (⟨hj, hlt⟩ | hj)
+          · refine le_antisymm (Finset.min'_le (Finset.univ.filter fun j => 0 < F j x) j
+              (Finset.mem_filter.2 ⟨Finset.mem_univ _, hj⟩)) ?_
+            refine Finset.le_min' _ _ _ fun i hi => ?_
+            by_contra hlt'
+            push Not at hlt'
+            exact (mem_iInter₂.1 hlt i (by simp [hlt'])) (Finset.mem_filter.1 hi).2
+          · split_ifs at hj with hjj
+            · exact absurd hj hne
+            · exact hj.elim
+      · rw [dif_neg h]
+        push Not at h
+        constructor
+        · intro hj
+          right
+          rw [if_pos hj.symm]
+          exact fun i => not_lt.2 (h i)
+        · rintro (⟨hj, -⟩ | hj)
+          · exact absurd hj (not_lt.2 (h j))
+          · split_ifs at hj with hjj
+            · exact hjj.symm
+            · exact hj.elim
+    refine ⟨c, measurable_to_countable' fun j => ?_, ?_⟩
+    · rw [hpre]
+      refine ((hmeasPos j).inter (Finset.measurableSet_biInter _ fun i _ => (hmeasPos i).compl)).union ?_
+      split_ifs
+      · rw [setOf_forall]; exact MeasurableSet.iInter fun i => (hmeasPos i).compl
+      · exact MeasurableSet.empty
+    · filter_upwards [hsum, ae_all_iff.2 hpos] with x hx hx0
+      by_cases h : ∃ j, 0 < F j x
+      · simp only [hc, dif_pos h]
+        exact (Finset.mem_filter.1 (Finset.min'_mem (Finset.univ.filter fun j => 0 < F j x) _)).2
+      · exfalso
+        push Not at h
+        have : ∑ j, F j x ≤ 0 := Finset.sum_nonpos fun j _ => h j
+        linarith
+
+/-- Band-nullity is invariant under translation. -/
+theorem bandNull_preimage_add {A : Set ℂ} {ε : ℝ} (h : BandNull A ε) (v : ℂ) : BandNull ((· + v) ⁻¹' A) ε := by
+  let E : ℂ × ℂ ≃ᵐ ℂ × ℂ := MeasurableEquiv.prodCongr (MeasurableEquiv.addRight v) (MeasurableEquiv.addRight v)
+  have hE : MeasurePreserving E (volume.prod volume) (volume.prod volume) :=
+    (measurePreserving_add_right volume v).prod (measurePreserving_add_right volume v)
+  have : bandPairSet ((· + v) ⁻¹' A) ε = E ⁻¹' bandPairSet A ε := by
+    ext ⟨a, b⟩
+    simp only [bandPairSet, mem_setOf_eq, mem_preimage, E, MeasurableEquiv.prodCongr, MeasurableEquiv.coe_mk,
+      Equiv.prodCongr_apply, MeasurableEquiv.addRight, Equiv.coe_addRight, Prod.map_apply, dist_add_right]
+  rw [BandNull, this, hE.measure_preimage_equiv]; exact h
+
+/-- Null unit pairs is invariant under translation. -/
+theorem unitPairsNull_preimage_add {A : Set ℂ} (h : UnitPairsNull A) (v : ℂ) : UnitPairsNull ((· + v) ⁻¹' A) := by
+  have hmp : MeasurePreserving (fun q : ℂ × ℝ => (q.1 + v, q.2)) (volume.prod arcLength) (volume.prod arcLength) :=
+    (measurePreserving_add_right volume v).prod (MeasurePreserving.id _)
+  let E : ℂ × ℝ ≃ᵐ ℂ × ℝ := MeasurableEquiv.prodCongr (MeasurableEquiv.addRight v) (MeasurableEquiv.refl ℝ)
+  have hE : MeasurePreserving E (volume.prod arcLength) (volume.prod arcLength) := hmp
+  have : unitPairSet ((· + v) ⁻¹' A) = E ⁻¹' unitPairSet A := by
+    ext ⟨u, θ⟩
+    simp only [unitPairSet, mem_setOf_eq, mem_preimage, E, MeasurableEquiv.prodCongr, MeasurableEquiv.coe_mk,
+      Equiv.prodCongr_apply, MeasurableEquiv.addRight, Equiv.coe_addRight, Prod.map_apply]
+    simp [add_right_comm]
+  rw [UnitPairsNull, this, hE.measure_preimage_equiv]; exact h
+
+/-! ### `face`: circles about the points near `y` meet the boxes -/
+
+/-- An open set met by the unit circle about `u` is met in a set of directions of positive measure. -/
+theorem arcLength_pos_of_isOpen {U : Set ℂ} (hU : IsOpen U) {u : ℂ} (h : ∃ φ : ℝ, u + e φ ∈ U) :
+    0 < arcLength {θ : ℝ | u + e θ ∈ U} := by
+  obtain ⟨φ, hφ⟩ := h
+  have hme : Continuous (fun θ : ℝ => u + e θ) := by unfold e; fun_prop
+  have hV : IsOpen {θ : ℝ | u + e θ ∈ U} := hU.preimage hme
+  have hper : ∀ θ, θ + 2 * Real.pi ∈ {θ : ℝ | u + e θ ∈ U} ↔ θ ∈ {θ : ℝ | u + e θ ∈ U} := by
+    intro θ; simp only [mem_setOf_eq, e_add_two_pi]
+  rw [arcLength_eq_window hV.measurableSet hper (φ - Real.pi)]
+  obtain ⟨δ, hδ, hball⟩ := Metric.isOpen_iff.1 hV φ hφ
+  set δ' := min δ Real.pi with hδ'
+  have hδ'0 : 0 < δ' := lt_min hδ Real.pi_pos
+  have hsub : Ioo (φ - δ') (φ + δ') ⊆ {θ : ℝ | u + e θ ∈ U} ∩ Ioc (φ - Real.pi) (φ - Real.pi + 2 * Real.pi) := by
+    intro θ hθ
+    have hd : dist θ φ < δ' := by rw [Real.dist_eq, abs_lt]; constructor <;> linarith [hθ.1, hθ.2]
+    refine ⟨hball (lt_of_lt_of_le hd (min_le_left _ _)), ?_, ?_⟩
+    · linarith [hθ.1, min_le_right δ Real.pi]
+    · linarith [hθ.2, min_le_right δ Real.pi]
+  refine lt_of_lt_of_le ?_ (measure_mono hsub)
+  rw [Real.volume_Ioo]; simp [hδ'0]
+
+/-- `e θ · e (−θ) = 1`. -/
+theorem e_mul_e_neg (θ : ℝ) : e θ * e (-θ) = 1 := by
+  rw [← e_add, add_neg_cancel]; simp [e]
+
+/-- The image of an open set under the rigid motion `w ↦ x + e θ w` is open. -/
+theorem isOpen_rotImage (x : ℂ) (θ : ℝ) {W : Set ℂ} (hW : IsOpen W) : IsOpen {z : ℂ | ∃ w ∈ W, z = x + e θ * w} := by
+  have hc : Continuous (fun z : ℂ => (z - x) * e (-θ)) := by fun_prop
+  have : {z : ℂ | ∃ w ∈ W, z = x + e θ * w} = (fun z : ℂ => (z - x) * e (-θ)) ⁻¹' W := by
+    ext z
+    constructor
+    · rintro ⟨w, hw, rfl⟩
+      show (x + e θ * w - x) * e (-θ) ∈ W
+      have : (x + e θ * w - x) * e (-θ) = w := by
+        calc (x + e θ * w - x) * e (-θ) = (e θ * e (-θ)) * w := by ring
+          _ = w := by rw [e_mul_e_neg, one_mul]
+      rwa [this]
+    · intro h
+      refine ⟨(z - x) * e (-θ), h, ?_⟩
+      calc z = x + (z - x) * (e θ * e (-θ)) := by rw [e_mul_e_neg]; ring
+        _ = _ := by ring
+  rw [this]; exact hW.preimage hc
+
+/-- The point `x + e θ (−s + t i)` of the half-box frame. -/
+noncomputable def framePt (x : ℂ) (θ s t : ℝ) : ℂ := x + e θ * (-s + t * I)
+
+/-- A convex combination of two numbers in `[lo, hi]` lies in `[lo, hi]`. -/
+theorem convex_combo_mem {l a b lo hi : ℝ} (hl : l ∈ Icc (0 : ℝ) 1) (ha : lo ≤ a) (ha' : a ≤ hi) (hb : lo ≤ b)
+    (hb' : b ≤ hi) : lo ≤ (1 - l) * a + l * b ∧ (1 - l) * a + l * b ≤ hi := by
+  obtain ⟨h0, h1⟩ := hl
+  constructor <;> nlinarith [mul_nonneg (sub_nonneg.2 h1) (sub_nonneg.2 ha), mul_nonneg h0 (sub_nonneg.2 hb),
+    mul_nonneg (sub_nonneg.2 h1) (sub_nonneg.2 ha'), mul_nonneg h0 (sub_nonneg.2 hb')]
+
+/-- If a point of the open half-box is strictly inside and another strictly outside the unit circle about `y'`, the circle
+meets the half-box (intermediate value theorem along the segment). -/
+theorem exists_circle_point_halfBox {x : ℂ} {θ ε : ℝ} {y' : ℂ} {s₁ t₁ s₂ t₂ : ℝ}
+    (hs₁ : 0 < s₁) (hs₁' : s₁ < ε) (ht₁ : |t₁| < ε) (hs₂ : 0 < s₂) (hs₂' : s₂ < ε) (ht₂ : |t₂| < ε)
+    (hlt : dist (framePt x θ s₁ t₁) y' < 1) (hgt : 1 < dist (framePt x θ s₂ t₂) y') :
+    ∃ φ : ℝ, y' + e φ ∈ halfBox x θ ε := by
+  have hcont : ContinuousOn (fun l : ℝ => dist (framePt x θ ((1 - l) * s₁ + l * s₂) ((1 - l) * t₁ + l * t₂)) y')
+      (Icc 0 1) := by
+    refine Continuous.continuousOn ?_
+    unfold framePt; fun_prop
+  obtain ⟨l, hl, hl1⟩ := intermediate_value_Icc (zero_le_one' ℝ) hcont
+    (show (1 : ℝ) ∈ Icc _ _ from ⟨by simpa using hlt.le, by simpa using hgt.le⟩)
+  set s := (1 - l) * s₁ + l * s₂ with hs
+  set t := (1 - l) * t₁ + l * t₂ with ht
+  have hl1' : dist (framePt x θ s t) y' = 1 := hl1
+  have hz : framePt x θ s t - y' = e ((framePt x θ s t - y').arg) := by
+    have := self_eq_norm_mul_e_arg (framePt x θ s t - y')
+    rw [← dist_eq_norm, hl1'] at this
+    simpa using this
+  refine ⟨(framePt x θ s t - y').arg, ?_⟩
+  have : y' + e ((framePt x θ s t - y').arg) = framePt x θ s t := by rw [← hz]; ring
+  rw [this]
+  have hsb := convex_combo_mem (a := s₁) (b := s₂) (lo := min s₁ s₂) (hi := max s₁ s₂) hl (min_le_left _ _)
+    (le_max_left _ _) (min_le_right _ _) (le_max_right _ _)
+  have htb := convex_combo_mem (a := t₁) (b := t₂) (lo := -max |t₁| |t₂|) (hi := max |t₁| |t₂|) hl
+    (neg_le_of_abs_le (le_max_left _ _)) (le_of_abs_le (le_max_left _ _)) (neg_le_of_abs_le (le_max_right _ _))
+    (le_of_abs_le (le_max_right _ _))
+  refine ⟨s, t, ?_, ?_, ?_, rfl⟩
+  · exact lt_of_lt_of_le (lt_min hs₁ hs₂) hsb.1
+  · exact lt_of_le_of_lt hsb.2 (max_lt hs₁' hs₂')
+  · exact abs_le.2 ⟨htb.1, htb.2⟩ |>.trans_lt (max_lt ht₁ ht₂)
+
+/-- For a unit vector `(a, b) ≠ (1, 0)`, the box `(0, ε) × (−ε, ε)` meets both sides of the unit circle about `(−a, b)`. -/
+theorem exists_frame_sides {a b ε : ℝ} (hε : 0 < ε) (hab : a ^ 2 + b ^ 2 = 1) (hne : ¬(a = 1 ∧ b = 0)) :
+    ∃ s₁ t₁ s₂ t₂ : ℝ, 0 < s₁ ∧ s₁ < ε ∧ |t₁| < ε ∧ 0 < s₂ ∧ s₂ < ε ∧ |t₂| < ε ∧
+      (s₁ + a) ^ 2 + (t₁ - b) ^ 2 < 1 ∧ 1 < (s₂ + a) ^ 2 + (t₂ - b) ^ 2 := by
+  by_cases hb : b = 0
+  · have ha : a = -1 := by
+      have h1 : (a - 1) * (a + 1) = 0 := by rw [hb] at hab; nlinarith
+      rcases mul_eq_zero.1 h1 with h | h
+      · exact absurd ⟨by linarith, hb⟩ hne
+      · linarith
+    set τ := min 1 (ε / 2) with hτ
+    have hτ0 : 0 < τ := lt_min one_pos (by positivity)
+    have hτ1 : τ ≤ 1 := min_le_left _ _
+    have hτε : τ ≤ ε / 2 := min_le_right _ _
+    refine ⟨τ, 0, τ ^ 2 / 2, τ, hτ0, by linarith, by simp [hε], by positivity, by nlinarith, ?_, ?_, ?_⟩
+    · rw [abs_of_pos hτ0]; linarith
+    · rw [ha, hb]; nlinarith
+    · rw [ha, hb]; nlinarith [pow_pos hτ0 4]
+  · have hβ : 0 < |b| := abs_pos.2 hb
+    set β := |b| with hβd
+    set σ := b / β with hσ
+    have hσ2 : σ ^ 2 = 1 := by
+      rw [hσ, div_pow, hβd, sq_abs]; field_simp
+    have hσb : σ * b = β := by
+      rw [hσ, hβd]; rcases lt_or_gt_of_ne hb with h | h
+      · rw [abs_of_neg h]; field_simp
+      · rw [abs_of_pos h]; field_simp
+    have hσabs : |σ| = 1 := by
+      have : |σ| ^ 2 = 1 := by rw [sq_abs]; exact hσ2
+      nlinarith [abs_nonneg σ]
+    set τ := min (min 1 (β / 4)) (ε / 2) with hτ
+    have hτ0 : 0 < τ := lt_min (lt_min one_pos (by positivity)) (by positivity)
+    have hτ1 : τ ≤ 1 := (min_le_left _ _).trans (min_le_left _ _)
+    have hτβ : τ ≤ β / 4 := (min_le_left _ _).trans (min_le_right _ _)
+    have hτε : τ ≤ ε / 2 := min_le_right _ _
+    have ha1 : a ^ 2 ≤ 1 := by nlinarith [sq_nonneg b]
+    have ha2 : -1 ≤ a ∧ a ≤ 1 := by constructor <;> nlinarith [sq_nonneg b]
+    refine ⟨τ ^ 2, σ * τ, τ ^ 2, -(σ * τ), by positivity, by nlinarith, ?_, by positivity, by nlinarith, ?_, ?_, ?_⟩
+    · rw [abs_mul, hσabs, abs_of_pos hτ0]; linarith
+    · rw [abs_neg, abs_mul, hσabs, abs_of_pos hτ0]; linarith
+    · have : (τ ^ 2 + a) ^ 2 + (σ * τ - b) ^ 2 = τ ^ 4 + 2 * τ ^ 2 * a + a ^ 2 + τ ^ 2 * σ ^ 2 - 2 * τ * (σ * b) + b ^ 2 := by ring
+      rw [this, hσ2, hσb]
+      have hτ2 : τ ^ 2 ≤ 1 := by nlinarith
+      have h4 : τ ^ 4 ≤ τ ^ 2 := by nlinarith [pow_pos hτ0 2]
+      nlinarith [mul_pos hτ0 hβ, mul_le_mul_of_nonneg_left hτβ hτ0.le]
+    · have : (τ ^ 2 + a) ^ 2 + (-(σ * τ) - b) ^ 2 = τ ^ 4 + 2 * τ ^ 2 * a + a ^ 2 + τ ^ 2 * σ ^ 2 + 2 * τ * (σ * b) + b ^ 2 := by ring
+      rw [this, hσ2, hσb]
+      nlinarith [mul_pos hτ0 hβ, mul_le_mul_of_nonneg_left hτβ hτ0.le, pow_pos hτ0 4]
+
+/-- A point `y` at distance `1` from `x`, read in the frame at `x`: `y = x + e θ (a + b i)`, `a² + b² = 1`. -/
+theorem frame_coords {x y : ℂ} (θ : ℝ) (hxy : dist x y = 1) :
+    ∃ a b : ℝ, y = x + e θ * (a + b * I) ∧ a ^ 2 + b ^ 2 = 1 := by
+  set w : ℂ := (y - x) * e (-θ) with hw
+  refine ⟨w.re, w.im, ?_, ?_⟩
+  · rw [Complex.re_add_im, hw]
+    calc y = x + (y - x) * (e θ * e (-θ)) := by rw [e_mul_e_neg]; ring
+      _ = _ := by ring
+  · have h1 : ‖w‖ = 1 := by
+      rw [hw, norm_mul, norm_e, mul_one, ← dist_eq_norm, dist_comm]; exact hxy
+    have := Complex.sq_norm w
+    rw [h1, Complex.normSq_apply] at this
+    nlinarith
+
+/-- Under `2g − g² ≤ ρ²` the box `(g, g + ε′) × (−ρ, ρ)` meets the unit circle about `(1 + u, v)` (`0 ≤ u < g`, `|v| < ρ`, `(u, v) ≠ 0`). -/
+theorem exists_far_point {g ε' ρ u v : ℝ} (hg : 0 < g) (hg1 : g < 1) (hε' : 0 < ε') (hρ : 0 < ρ)
+    (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2) (hu0 : 0 ≤ u) (hug : u < g) (hvρ : |v| < ρ) (hne : ¬(u = 0 ∧ v = 0)) :
+    ∃ σ τ : ℝ, g < σ ∧ σ < g + ε' ∧ |τ| < ρ ∧ (σ - (1 + u)) ^ 2 + (τ - v) ^ 2 = 1 := by
+  set q : ℝ := ρ * |v| / (1 - g) with hq
+  have h1g : 0 < 1 - g := by linarith
+  have hq0 : 0 ≤ q := by positivity
+  have huq : 0 < u + q := by
+    rcases hu0.lt_or_eq with h | h
+    · linarith
+    · have hv : v ≠ 0 := fun hv => hne ⟨h.symm, hv⟩
+      have : 0 < |v| := abs_pos.2 hv
+      have : 0 < q := by positivity
+      linarith
+  set δ : ℝ := min (min (ε' / 2) ((1 - g) / 2)) ((u + q) / 2) with hδ
+  have hδ0 : 0 < δ := lt_min (lt_min (by positivity) (by linarith)) (by linarith)
+  have hδ1 : δ ≤ ε' / 2 := (min_le_left _ _).trans (min_le_left _ _)
+  have hδ2 : δ ≤ (1 - g) / 2 := (min_le_left _ _).trans (min_le_right _ _)
+  have hδ3 : δ ≤ (u + q) / 2 := min_le_right _ _
+  set h : ℝ := g + δ - u with hh
+  have hh0 : 0 < h := by linarith
+  have hh1 : h < 1 := by linarith
+  set κ : ℝ := Real.sqrt (2 * h - h ^ 2) with hκ
+  have hψ : 0 ≤ 2 * h - h ^ 2 := by nlinarith
+  have hκ2 : κ ^ 2 = 2 * h - h ^ 2 := Real.sq_sqrt hψ
+  have hκ0 : 0 ≤ κ := Real.sqrt_nonneg _
+  -- the key inequality `κ < ρ + |v|`
+  have hkey : 2 * h - h ^ 2 < (ρ + |v|) ^ 2 := by
+    have hw : 2 * h - h ^ 2 - (2 * g - g ^ 2) = (δ - u) * (2 - h - g) := by rw [hh]; ring
+    have h2hg : 0 < 2 - h - g := by linarith
+    by_cases hv : v = 0
+    · have hq' : q = 0 := by rw [hq, hv]; simp
+      have hu : 0 < u := lt_of_le_of_ne hu0 (fun h0 => hne ⟨h0.symm, hv⟩)
+      have : δ - u < 0 := by linarith
+      have : (δ - u) * (2 - h - g) < 0 := mul_neg_of_neg_of_pos this h2hg
+      rw [hv]; simp; nlinarith
+    · have hvpos : 0 < |v| := abs_pos.2 hv
+      by_cases hw0 : δ - u ≤ 0
+      · have : (δ - u) * (2 - h - g) ≤ 0 := mul_nonpos_of_nonpos_of_nonneg hw0 h2hg.le
+        nlinarith [sq_nonneg |v|, mul_pos hρ hvpos]
+      · push Not at hw0
+        have hwq : δ - u ≤ q / 2 := by linarith
+        have h2 : 2 - h - g ≤ 2 * (1 - g) := by linarith
+        have : (δ - u) * (2 - h - g) ≤ (q / 2) * (2 * (1 - g)) :=
+          mul_le_mul hwq h2 h2hg.le (by linarith)
+        have hq2 : q * (1 - g) = ρ * |v| := by rw [hq]; field_simp
+        nlinarith [sq_nonneg |v|, mul_pos hρ hvpos]
+  have hκlt : κ < ρ + |v| := by
+    by_contra hcon; push Not at hcon
+    nlinarith [mul_self_le_mul_self (by positivity) hcon]
+  have hvabs := abs_lt.1 hvρ
+  by_cases hv0 : 0 ≤ v
+  · refine ⟨g + δ, v - κ, by linarith, by linarith, ?_, ?_⟩
+    · rw [abs_lt]; rw [abs_of_nonneg hv0] at hκlt; constructor <;> linarith
+    · have : (g + δ - (1 + u)) ^ 2 = (h - 1) ^ 2 := by rw [hh]; ring
+      rw [this, show (v - κ - v) ^ 2 = κ ^ 2 by ring, hκ2]; ring
+  · push Not at hv0
+    refine ⟨g + δ, v + κ, by linarith, by linarith, ?_, ?_⟩
+    · rw [abs_lt]; rw [abs_of_neg hv0] at hκlt; constructor <;> linarith
+    · have : (g + δ - (1 + u)) ^ 2 = (h - 1) ^ 2 := by rw [hh]; ring
+      rw [this, show (v + κ - v) ^ 2 = κ ^ 2 by ring, hκ2]; ring
+
+/-- A point at distance `1` from `y′` is `y′ + e φ` for some angle `φ`. -/
+theorem exists_phi_of_dist_eq_one {z y' : ℂ} (h : dist z y' = 1) : ∃ φ : ℝ, y' + e φ = z := by
+  have := self_eq_norm_mul_e_arg (z - y')
+  rw [← dist_eq_norm, h] at this
+  exact ⟨(z - y').arg, by rw [← one_mul (e _)]; simp at this; rw [← this]; ring⟩
+
+/-- `‖a + b i‖² = a² + b²`. -/
+theorem norm_sq_re_im (a b : ℝ) : ‖(a : ℂ) + (b : ℂ) * I‖ ^ 2 = a ^ 2 + b ^ 2 := by
+  rw [Complex.sq_norm, Complex.normSq_apply]; simp; ring
+
+/-- The squared distance from `framePt x θ s t` to `x + e θ (a + b i)` is `(s + a)² + (t − b)²`. -/
+theorem dist_framePt_sq (x : ℂ) (θ s t a b : ℝ) :
+    dist (framePt x θ s t) (x + e θ * (a + b * I)) ^ 2 = (s + a) ^ 2 + (t - b) ^ 2 := by
+  have h : framePt x θ s t - (x + e θ * (a + b * I)) = e θ * ((((-(s + a)) : ℝ) : ℂ) + ((t - b : ℝ) : ℂ) * I) := by
+    unfold framePt; push_cast; ring
+  rw [dist_eq_norm, h, norm_mul, norm_e, one_mul, Complex.sq_norm, Complex.normSq_apply]
+  simp
+  ring
+
+/-- **The face key lemma** (I2b): an open `U` lying a.e. in a measurable `A`, a support point `y` of `A`, and every unit
+circle about the points of a ball about `y` (off a null set) meeting `U`, contradict null unit pairs (Tonelli: the pairs
+from `A ∩ B(y, r)` into `U ∩ A` have positive mass, each circle meeting the open `U` in a positive arc). -/
+theorem not_unitPairsNull_of_circles_meet {A U N : Set ℂ} (hA : MeasurableSet A) (hU : IsOpen U)
+    (hUA : volume (U \ A) = 0) {y : ℂ} (hy : y ∈ essSupport A) {r : ℝ} (hr : 0 < r) (hN : volume N = 0)
+    (hmeet : ∀ y' ∈ ball y r, y' ∉ N → ∃ φ : ℝ, y' + e φ ∈ U) : ¬ UnitPairsNull A := by
+  intro hnull
+  set S := A ∩ ball y r with hS
+  have hSm : MeasurableSet S := hA.inter measurableSet_ball
+  have hpos : 0 < volume S := hy r hr
+  have hz : (volume.prod arcLength) {q : ℂ × ℝ | q.1 ∈ S ∧ q.1 + e q.2 ∈ A} = 0 :=
+    measure_mono_null (fun q hq => (⟨hq.1.1, hq.2⟩ : q ∈ unitPairSet A)) hnull
+  rw [pairs_eq_lintegral hSm hA] at hz
+  have hme : Measurable (fun θ : ℝ => e θ) := by unfold e; fun_prop
+  have hUA' : MeasurableSet (U \ A) := hU.measurableSet.diff hA
+  have hnullS : (volume.prod arcLength) {q : ℂ × ℝ | q.1 + e q.2 ∈ U \ A} = 0 := volume_prod_shift_null hUA
+  have hmS : MeasurableSet {q : ℂ × ℝ | q.1 + e q.2 ∈ U \ A} :=
+    (measurable_fst.add (hme.comp measurable_snd)) hUA'
+  have hae1 : ∀ᵐ u ∂volume, arcLength {θ : ℝ | u + e θ ∈ U \ A} = 0 := by
+    have := (Measure.measure_prod_null hmS).1 hnullS
+    exact this
+  have hae2 : ∀ᵐ u ∂volume, u ∉ N := measure_eq_zero_iff_ae_notMem.1 hN
+  have hpos' : ∀ᵐ u ∂(volume.restrict S), 0 < phi A u := by
+    filter_upwards [ae_restrict_of_ae hae1, ae_restrict_of_ae hae2, ae_restrict_mem hSm] with u h1 h2 hu
+    obtain ⟨φ, hφ⟩ := hmeet u hu.2 h2
+    have h0 := arcLength_pos_of_isOpen hU ⟨φ, hφ⟩
+    refine lt_of_lt_of_le h0 ?_
+    calc arcLength {θ : ℝ | u + e θ ∈ U}
+        ≤ arcLength ({θ : ℝ | u + e θ ∈ A} ∪ {θ : ℝ | u + e θ ∈ U \ A}) := by
+          refine measure_mono fun θ hθ => ?_
+          by_cases h : u + e θ ∈ A
+          · exact Or.inl h
+          · exact Or.inr ⟨hθ, h⟩
+      _ ≤ arcLength {θ : ℝ | u + e θ ∈ A} + arcLength {θ : ℝ | u + e θ ∈ U \ A} := measure_union_le _ _
+      _ = phi A u := by rw [h1, add_zero]; rfl
+  have hne : volume.restrict S ≠ 0 := by
+    intro h
+    have := congrArg (fun μ => μ univ) h
+    simp only [Measure.restrict_apply_univ, Measure.coe_zero, Pi.zero_apply] at this
+    exact hpos.ne' this
+  haveI := ae_neBot.2 hne
+  have h0 := (lintegral_eq_zero_iff (measurable_phi hA)).1 hz
+  obtain ⟨u, hu1, hu2⟩ := (hpos'.and h0).exists
+  simp at hu2
+  exact hu1.ne' hu2
+
+/-- The half-box is open. -/
+theorem isOpen_halfBox (x : ℂ) (θ ε : ℝ) : IsOpen (halfBox x θ ε) := by
+  have hW : IsOpen {w : ℂ | 0 < -w.re ∧ -w.re < ε ∧ |w.im| < ε} := by
+    have h1 : IsOpen {w : ℂ | 0 < -w.re} := isOpen_lt continuous_const Complex.continuous_re.neg
+    have h2 : IsOpen {w : ℂ | -w.re < ε} := isOpen_lt Complex.continuous_re.neg continuous_const
+    have h3 : IsOpen {w : ℂ | |w.im| < ε} := isOpen_lt (continuous_abs.comp Complex.continuous_im) continuous_const
+    exact h1.inter (h2.inter h3)
+  have : halfBox x θ ε = {z : ℂ | ∃ w ∈ {w : ℂ | 0 < -w.re ∧ -w.re < ε ∧ |w.im| < ε}, z = x + e θ * w} := by
+    ext z
+    constructor
+    · rintro ⟨s, t, hs, hse, ht, rfl⟩
+      refine ⟨-s + t * I, ?_, rfl⟩
+      simp [hs, hse, ht]
+    · rintro ⟨w, ⟨h1, h2, h3⟩, rfl⟩
+      refine ⟨-w.re, w.im, h1, h2, h3, ?_⟩
+      congr 2
+      apply Complex.ext <;> simp
+  rw [this]; exact isOpen_rotImage x θ hW
+
+/-- The far box is open. -/
+theorem isOpen_farBox (x : ℂ) (θ g ε' ρ : ℝ) : IsOpen (farBox x θ g ε' ρ) := by
+  have hW : IsOpen {w : ℂ | g < w.re ∧ w.re < g + ε' ∧ |w.im| < ρ} := by
+    have h1 : IsOpen {w : ℂ | g < w.re} := isOpen_lt continuous_const Complex.continuous_re
+    have h2 : IsOpen {w : ℂ | w.re < g + ε'} := isOpen_lt Complex.continuous_re continuous_const
+    have h3 : IsOpen {w : ℂ | |w.im| < ρ} := isOpen_lt (continuous_abs.comp Complex.continuous_im) continuous_const
+    exact h1.inter (h2.inter h3)
+  have : farBox x θ g ε' ρ = {z : ℂ | ∃ w ∈ {w : ℂ | g < w.re ∧ w.re < g + ε' ∧ |w.im| < ρ}, z = x + e θ * w} := by
+    ext z
+    constructor
+    · rintro ⟨s, t, hs, hse, ht, rfl⟩
+      refine ⟨s + t * I, ?_, rfl⟩
+      simp [hs, hse, ht]
+    · rintro ⟨w, ⟨h1, h2, h3⟩, rfl⟩
+      refine ⟨w.re, w.im, h1, h2, h3, ?_⟩
+      congr 2
+      apply Complex.ext <;> simp
+  rw [this]; exact isOpen_rotImage x θ hW
+
+/-- **The face geometry**, away from the normal: for `dist x y = 1`, `y ≠ x + e θ`, the unit circles about the points near
+`y` cross the face of the half-box into it (the circle about `y` passes through `x` with a tangent not along the face, or
+with its curvature towards the half-box when `y = x − e θ`). -/
+theorem circles_meet_halfBox {x y : ℂ} {θ ε : ℝ} (hε : 0 < ε) (hxy : dist x y = 1) (hy : y ≠ x + e θ) :
+    ∃ r > (0 : ℝ), ∀ y' ∈ ball y r, ∃ φ : ℝ, y' + e φ ∈ halfBox x θ ε := by
+  obtain ⟨a, b, hyd, hab⟩ := frame_coords θ hxy
+  have hne : ¬(a = 1 ∧ b = 0) := by
+    rintro ⟨rfl, rfl⟩
+    apply hy; rw [hyd]; simp
+  obtain ⟨s₁, t₁, s₂, t₂, hs₁, hs₁', ht₁, hs₂, hs₂', ht₂, h1, h2⟩ := exists_frame_sides hε hab hne
+  have hd1 : dist (framePt x θ s₁ t₁) y < 1 := by
+    rw [hyd]
+    have := dist_framePt_sq x θ s₁ t₁ a b
+    by_contra hcon; push Not at hcon
+    nlinarith [dist_nonneg (x := framePt x θ s₁ t₁) (y := x + e θ * (a + b * I))]
+  have hd2 : 1 < dist (framePt x θ s₂ t₂) y := by
+    rw [hyd]
+    have := dist_framePt_sq x θ s₂ t₂ a b
+    by_contra hcon; push Not at hcon
+    nlinarith [dist_nonneg (x := framePt x θ s₂ t₂) (y := x + e θ * (a + b * I))]
+  refine ⟨min (1 - dist (framePt x θ s₁ t₁) y) (dist (framePt x θ s₂ t₂) y - 1), lt_min (by linarith) (by linarith), ?_⟩
+  intro y' hy'
+  rw [mem_ball] at hy'
+  have hr1 := lt_of_lt_of_le hy' (min_le_left _ _)
+  have hr2 := lt_of_lt_of_le hy' (min_le_right _ _)
+  refine exists_circle_point_halfBox hs₁ hs₁' ht₁ hs₂ hs₂' ht₂ ?_ ?_
+  · linarith [dist_triangle (framePt x θ s₁ t₁) y y', dist_comm y y']
+  · linarith [dist_triangle (framePt x θ s₂ t₂) y' y]
+
+/-- **The face geometry at the normal** (I2b's case split, item 37's regime): for `y = x + e θ`, circles about `y'` nearer
+than `1` along `e θ` meet the half-box, farther ones (and those at the same height off the normal) meet the far box by the
+corner condition `(1 − g)² + ρ² ≥ 1`; the exceptional set is the one point `y`. -/
+theorem circles_meet_boxes_at_normal {x : ℂ} {θ ε ε' g ρ : ℝ} (hε : 0 < ε) (hε' : 0 < ε') (hg : 0 < g) (hg1 : g < 1)
+    (hρ : 0 < ρ) (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2) :
+    ∃ r > (0 : ℝ), ∀ y' ∈ ball (x + e θ) r, y' ≠ x + e θ →
+      ∃ φ : ℝ, y' + e φ ∈ halfBox x θ ε ∪ farBox x θ g ε' ρ := by
+  refine ⟨min (min ε g) ρ, lt_min (lt_min hε hg) hρ, ?_⟩
+  intro y' hy' hne
+  rw [mem_ball] at hy'
+  set w : ℂ := (y' - x) * e (-θ) with hw
+  have hyw : y' = x + e θ * w := by
+    calc y' = x + (y' - x) * (e θ * e (-θ)) := by rw [e_mul_e_neg]; ring
+      _ = _ := by rw [hw]; ring
+  set u : ℝ := w.re - 1 with hu
+  set v : ℝ := w.im with hv
+  have hwd : w = ((1 + u : ℝ) : ℂ) + (v : ℂ) * I := by
+    apply Complex.ext <;> simp [hu, hv]
+  have hdist : dist y' (x + e θ) = ‖w - 1‖ := by
+    rw [dist_eq_norm, hyw]
+    have : x + e θ * w - (x + e θ) = e θ * (w - 1) := by ring
+    rw [this, norm_mul, norm_e, one_mul]
+  have hu' : |u| ≤ ‖w - 1‖ := by
+    have := Complex.abs_re_le_norm (w - 1); simpa [hu] using this
+  have hv' : |v| ≤ ‖w - 1‖ := by
+    have := Complex.abs_im_le_norm (w - 1); simpa [hv] using this
+  have hr : ‖w - 1‖ < min (min ε g) ρ := by rw [← hdist]; exact hy'
+  have hrε := lt_of_lt_of_le hr ((min_le_left _ _).trans (min_le_left _ _))
+  have hrg := lt_of_lt_of_le hr ((min_le_left _ _).trans (min_le_right _ _))
+  have hrρ := lt_of_lt_of_le hr (min_le_right _ _)
+  rcases lt_or_ge u 0 with hu0 | hu0
+  · refine ⟨θ + Real.pi, Or.inl ⟨-u, v, by linarith [(abs_lt.1 (lt_of_le_of_lt hu' hrε)).1], by linarith [(abs_lt.1 (lt_of_le_of_lt hu' hrε)).1], ?_, ?_⟩⟩
+    · exact lt_of_le_of_lt hv' hrε
+    · rw [e_add_pi, hyw, hwd]; push_cast; ring
+  · have hnz : ¬(u = 0 ∧ v = 0) := by
+      rintro ⟨h1, h2⟩
+      apply hne
+      rw [hyw, hwd, h1, h2]; simp
+    obtain ⟨σ, τ, h1, h2, h3, h4⟩ := exists_far_point hg hg1 hε' hρ hsharp hu0
+      (lt_of_le_of_lt (le_abs_self u) (lt_of_le_of_lt hu' hrg)) (lt_of_le_of_lt hv' hrρ) hnz
+    set z : ℂ := x + e θ * ((σ : ℂ) + (τ : ℂ) * I) with hz
+    have hzd : dist z y' = 1 := by
+      rw [dist_eq_norm, hz, hyw, hwd]
+      have : x + e θ * ((σ : ℂ) + (τ : ℂ) * I) - (x + e θ * (((1 + u : ℝ) : ℂ) + (v : ℂ) * I)) =
+          e θ * ((((σ - (1 + u)) : ℝ) : ℂ) + ((τ - v : ℝ) : ℂ) * I) := by push_cast; ring
+      rw [this, norm_mul, norm_e, one_mul]
+      have hs := norm_sq_re_im (σ - (1 + u)) (τ - v)
+      rw [h4] at hs
+      exact (pow_eq_one_iff_of_nonneg (norm_nonneg _) two_ne_zero).1 (by simpa using hs)
+    obtain ⟨φ, hφ⟩ := exists_phi_of_dist_eq_one hzd
+    exact ⟨φ, Or.inr ⟨σ, τ, h1, h2, h3, by rw [hφ]⟩⟩
+
+
+/-! ### `exists_face_fails` (ruling, inventory item 86): the explicit class -/
+
+/-- FACE-SHARP's failure class: the half-box, the far box and a box `Q` just beyond `x + e θ`. -/
+def faceFailClass (x : ℂ) (θ ε g ε' ρ δ : ℝ) : Set ℂ :=
+  halfBox x θ ε ∪ farBox x θ g ε' ρ ∪ {z | ∃ s t : ℝ, 1 < s ∧ s < 1 + δ ∧ |t| < δ ∧ z = x + e θ * (s + t * I)}
+
+/-- `|a| < b` gives `a² < b²`. -/
+theorem sq_lt_of_abs_lt' {a b : ℝ} (h : |a| < b) : a ^ 2 < b ^ 2 := by
+  have := abs_nonneg a; nlinarith [sq_abs a]
+
+/-- Piece conditions of the failure class in frame coordinates. -/
+def PieceH (ε σ τ : ℝ) : Prop := -ε < σ ∧ σ < 0 ∧ |τ| < ε
+
+/-- The far-box piece, in frame coordinates. -/
+def PieceF (g ε' ρ σ τ : ℝ) : Prop := g < σ ∧ σ < g + ε' ∧ |τ| < ρ
+
+/-- The `Q` piece, in frame coordinates. -/
+def PieceQ (δ σ τ : ℝ) : Prop := 1 < σ ∧ σ < 1 + δ ∧ |τ| < δ
+
+/-- `|a| < c` and `|b| < d` give `|a − b| < c + d`. -/
+theorem abs_sub_lt_of_abs_lt {a b c d : ℝ} (h1 : |a| < c) (h2 : |b| < d) : |a - b| < c + d :=
+  lt_of_le_of_lt (abs_sub _ _) (by linarith)
+
+/-- Under the stated margins no two points of the face-failure pieces `H`, `F`, `Q` are at distance `1` (frame coordinates). -/
+theorem real_no_unit {g ρ ε ε' δ : ℝ} (hg : 0 < g) (hε' : 0 < ε')
+    (hHH : 5 * ε ^ 2 < 1) (hFF : ε' ^ 2 + 4 * ρ ^ 2 < 1) (hQQ : 5 * δ ^ 2 < 1)
+    (hHF : (g + ε' + ε) ^ 2 + (ρ + ε) ^ 2 < 1) (hFQ : (1 - g + δ) ^ 2 + (ρ + δ) ^ 2 < 1)
+    (hg' : ε' < 1 - g) :
+    (∀ σ τ σ' τ', PieceH ε σ τ → PieceH ε σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) ∧
+    (∀ σ τ σ' τ', PieceH ε σ τ → PieceF g ε' ρ σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) ∧
+    (∀ σ τ σ' τ', PieceH ε σ τ → PieceQ δ σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) ∧
+    (∀ σ τ σ' τ', PieceF g ε' ρ σ τ → PieceF g ε' ρ σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) ∧
+    (∀ σ τ σ' τ', PieceF g ε' ρ σ τ → PieceQ δ σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) ∧
+    (∀ σ τ σ' τ', PieceQ δ σ τ → PieceQ δ σ' τ' → (σ - σ') ^ 2 + (τ - τ') ^ 2 ≠ 1) := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    have h1 : (σ - σ') ^ 2 < ε ^ 2 := sq_lt_of_abs_lt' (abs_lt.2 ⟨by linarith, by linarith⟩)
+    have h2 : (τ - τ') ^ 2 < (ε + ε) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
+    intro h; nlinarith
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    have h1 : (σ - σ') ^ 2 < (g + ε' + ε) ^ 2 := sq_lt_of_abs_lt' (abs_lt.2 ⟨by linarith, by linarith⟩)
+    have h2 : (τ - τ') ^ 2 < (ε + ρ) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
+    intro h; nlinarith
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    intro h; nlinarith [sq_nonneg (τ - τ')]
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    have h1 : (σ - σ') ^ 2 < ε' ^ 2 := sq_lt_of_abs_lt' (abs_lt.2 ⟨by linarith, by linarith⟩)
+    have h2 : (τ - τ') ^ 2 < (ρ + ρ) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
+    intro h; nlinarith
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    have h1 : (σ - σ') ^ 2 < (1 - g + δ) ^ 2 := sq_lt_of_abs_lt' (abs_lt.2 ⟨by linarith, by linarith⟩)
+    have h2 : (τ - τ') ^ 2 < (ρ + δ) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
+    intro h; nlinarith
+  · rintro σ τ σ' τ' ⟨a1, a2, a3⟩ ⟨b1, b2, b3⟩
+    have h1 : (σ - σ') ^ 2 < δ ^ 2 := sq_lt_of_abs_lt' (abs_lt.2 ⟨by linarith, by linarith⟩)
+    have h2 : (τ - τ') ^ 2 < (δ + δ) ^ 2 := sq_lt_of_abs_lt' (abs_sub_lt_of_abs_lt a3 b3)
+    intro h; nlinarith
+
+/-- Squared distance in a rotated frame is the squared distance of the frame coordinates. -/
+theorem frame_dist_sq (x : ℂ) (θ σ τ σ' τ' : ℝ) :
+    dist (x + e θ * ((σ : ℂ) + (τ : ℂ) * I)) (x + e θ * ((σ' : ℂ) + (τ' : ℂ) * I)) ^ 2 =
+      (σ - σ') ^ 2 + (τ - τ') ^ 2 := by
+  have : x + e θ * ((σ : ℂ) + (τ : ℂ) * I) - (x + e θ * ((σ' : ℂ) + (τ' : ℂ) * I)) =
+      e θ * (((σ - σ' : ℝ) : ℂ) + ((τ - τ' : ℝ) : ℂ) * I) := by push_cast; ring
+  rw [dist_eq_norm, this, norm_mul, norm_e, one_mul, norm_sq_re_im]
+
+/-- A point of the face-failure class has frame coordinates in one of its pieces `H`, `F`, `Q`. -/
+theorem mem_faceFailClass_iff {x : ℂ} {θ ε g ε' ρ δ : ℝ} {z : ℂ} (hz : z ∈ faceFailClass x θ ε g ε' ρ δ) :
+    ∃ σ τ : ℝ, z = x + e θ * ((σ : ℂ) + (τ : ℂ) * I) ∧
+      (PieceH ε σ τ ∨ PieceF g ε' ρ σ τ ∨ PieceQ δ σ τ) := by
+  rcases hz with (⟨s, t, hs, hs', ht, rfl⟩ | ⟨s, t, hs, hs', ht, rfl⟩) | ⟨s, t, hs, hs', ht, rfl⟩
+  · exact ⟨-s, t, by push_cast; ring_nf, Or.inl ⟨by linarith, by linarith, ht⟩⟩
+  · exact ⟨s, t, rfl, Or.inr (Or.inl ⟨hs, hs', ht⟩)⟩
+  · exact ⟨s, t, rfl, Or.inr (Or.inr ⟨hs, hs', ht⟩)⟩
+
+/-- **No unit pair at all** in the failure class, for small `ε, ε', δ`: each piece has diameter `< 1` (`2ρ < 1`);
+half-box to far box `< 1` (`g² + ρ² < 1`); far box to `Q` `< 1` (`(1 − g)² + ρ² < 1`, i.e. `ρ² < 2g − g²`); half-box to
+`Q` `> 1`. -/
+theorem exists_faceFailClass_noUnitPairs {g ρ : ℝ} (hg : 0 < g) (hρ : 0 < ρ) (hlt : ρ ^ 2 < 2 * g - g ^ 2)
+    (hρ2 : 2 * ρ < 1) (hgρ : g ^ 2 + ρ ^ 2 < 1) (x : ℂ) (θ : ℝ) :
+    ∃ ε ε' δ : ℝ, 0 < ε ∧ 0 < ε' ∧ 0 < δ ∧
+      ∀ z ∈ faceFailClass x θ ε g ε' ρ δ, ∀ w ∈ faceFailClass x θ ε g ε' ρ δ, dist z w ≠ 1 := by
+  have hg1 : g < 1 := by nlinarith
+  have hc1 : 0 < 1 - 4 * ρ ^ 2 := by nlinarith
+  have hc2 : 0 < 1 - g ^ 2 - ρ ^ 2 := by linarith
+  have hc3 : 0 < 2 * g - g ^ 2 - ρ ^ 2 := by linarith
+  set c : ℝ := min (1 - 4 * ρ ^ 2) (min (1 - g ^ 2 - ρ ^ 2) (2 * g - g ^ 2 - ρ ^ 2)) with hc
+  have hc0 : 0 < c := lt_min hc1 (lt_min hc2 hc3)
+  have hcc1 : c ≤ 1 - 4 * ρ ^ 2 := min_le_left _ _
+  have hcc2 : c ≤ 1 - g ^ 2 - ρ ^ 2 := (min_le_right _ _).trans (min_le_left _ _)
+  have hcc3 : c ≤ 2 * g - g ^ 2 - ρ ^ 2 := (min_le_right _ _).trans (min_le_right _ _)
+  have hcle : c ≤ 1 := by nlinarith [sq_nonneg ρ]
+  set η : ℝ := c / 12 with hη
+  have hη0 : 0 < η := by positivity
+  have hη1 : η ≤ 1 / 12 := by rw [hη]; linarith
+  have hρ1 : ρ < 1 / 2 := by linarith
+  have hη12 : η = c / 12 := hη
+  have hF : 5 * η ^ 2 < 1 := by nlinarith
+  have hFF : η ^ 2 + 4 * ρ ^ 2 < 1 := by
+    have : η ^ 2 ≤ η * (1 / 12) := by nlinarith
+    linarith
+  have hHF : (g + η + η) ^ 2 + (ρ + η) ^ 2 < 1 := by
+    have e : (g + η + η) ^ 2 + (ρ + η) ^ 2 = g ^ 2 + ρ ^ 2 + η * (4 * g + 5 * η + 2 * ρ) := by ring
+    have : η * (4 * g + 5 * η + 2 * ρ) ≤ η * 6 := mul_le_mul_of_nonneg_left (by linarith) hη0.le
+    rw [e]; linarith
+  have hFQ : (1 - g + η) ^ 2 + (ρ + η) ^ 2 < 1 := by
+    have e : (1 - g + η) ^ 2 + (ρ + η) ^ 2 =
+        1 - (2 * g - g ^ 2 - ρ ^ 2) + η * (2 * (1 - g) + 2 * η + 2 * ρ) := by ring
+    have : η * (2 * (1 - g) + 2 * η + 2 * ρ) ≤ η * 4 := mul_le_mul_of_nonneg_left (by linarith) hη0.le
+    rw [e]; linarith
+  have hg' : η < 1 - g := by
+    have h1 : 1 - g ^ 2 = (1 - g) * (1 + g) := by ring
+    have h2 : (1 - g) * (1 + g) ≤ (1 - g) * 2 := mul_le_mul_of_nonneg_left (by linarith) (by linarith)
+    linarith [sq_nonneg ρ]
+  obtain ⟨hHH', hHF', hHQ', hFF', hFQ', hQQ'⟩ := real_no_unit (g := g) (ρ := ρ) (ε := η) (ε' := η) (δ := η)
+    hg hη0 hF hFF hF hHF hFQ hg'
+  refine ⟨η, η, η, hη0, hη0, hη0, ?_⟩
+  intro z hz w hw hd
+  obtain ⟨σ, τ, rfl, hp⟩ := mem_faceFailClass_iff hz
+  obtain ⟨σ', τ', rfl, hp'⟩ := mem_faceFailClass_iff hw
+  have hsq := frame_dist_sq x θ σ τ σ' τ'
+  rw [hd, one_pow] at hsq
+  have hsq' : (σ' - σ) ^ 2 + (τ' - τ) ^ 2 = 1 := by nlinarith
+  rcases hp with h1 | h1 | h1 <;> rcases hp' with h2 | h2 | h2
+  · exact hHH' _ _ _ _ h1 h2 hsq.symm
+  · exact hHF' _ _ _ _ h1 h2 hsq.symm
+  · exact hHQ' _ _ _ _ h1 h2 hsq.symm
+  · exact hHF' _ _ _ _ h2 h1 hsq'
+  · exact hFF' _ _ _ _ h1 h2 hsq.symm
+  · exact hFQ' _ _ _ _ h1 h2 hsq.symm
+  · exact hHQ' _ _ _ _ h2 h1 hsq'
+  · exact hFQ' _ _ _ _ h2 h1 hsq'
+  · exact hQQ' _ _ _ _ h1 h2 hsq.symm
+
+/-- A measurable set with no unit pair is one class of an `AeColouring 10` (the rest coloured by `sq9`). -/
+theorem exists_aeColouring_of_noUnitPairs {D : Set ℂ} (hD : MeasurableSet D) (h : ∀ z ∈ D, ∀ w ∈ D, dist z w ≠ 1) :
+    ∃ c : AeColouring 10, c.cls 9 = D := by
+  classical
+  let col : ℂ → Fin 10 := fun z => if z ∈ D then Fin.last 9 else Fin.castSucc (sq9Col z)
+  have hmeas : Measurable col :=
+    Measurable.ite hD measurable_const ((measurable_of_finite (Fin.castSucc (n := 9))).comp measurable_sq9Col)
+  have hlast : col ⁻¹' {Fin.last 9} = D := by
+    ext z; simp only [mem_preimage, mem_singleton_iff, col]
+    split_ifs with hz
+    · simp [hz]
+    · simp only [hz, iff_false]
+      intro h
+      have h1 := congrArg Fin.val h
+      have h2 := (sq9Col z).2
+      simp at h1; omega
+  refine ⟨⟨col, hmeas, fun j => ?_⟩, ?_⟩
+  · refine Fin.lastCases ?_ (fun j' => ?_) j
+    · rw [hlast]
+      have : unitPairSet D = ∅ := by
+        ext ⟨z, θ⟩
+        simp only [unitPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+        intro hz hw
+        exact h _ hz _ hw (by simp [dist_eq_norm])
+      rw [UnitPairsNull, this, measure_empty]
+    · refine (sq9.unitPairsNull j').mono ?_
+      intro z hz
+      simp only [mem_preimage, mem_singleton_iff, col] at hz ⊢
+      split_ifs at hz with hzD
+      · exfalso
+        have h1 := congrArg Fin.val hz
+        have h2 := j'.2
+        simp at h1; omega
+      · exact Fin.castSucc_injective _ hz
+  · exact hlast
+
+/-- The box `Q` of the failure class is open. -/
+theorem isOpen_faceQ (x : ℂ) (θ δ : ℝ) :
+    IsOpen {z : ℂ | ∃ s t : ℝ, 1 < s ∧ s < 1 + δ ∧ |t| < δ ∧ z = x + e θ * (s + t * I)} := by
+  have h1 : IsOpen {w : ℂ | 1 < w.re} := isOpen_lt continuous_const Complex.continuous_re
+  have h2 : IsOpen {w : ℂ | w.re < 1 + δ} := isOpen_lt Complex.continuous_re continuous_const
+  have h3 : IsOpen {w : ℂ | |w.im| < δ} := isOpen_lt (continuous_abs.comp Complex.continuous_im) continuous_const
+  have := isOpen_rotImage x θ (h1.inter (h2.inter h3))
+  convert this using 1
+  ext z
+  constructor
+  · rintro ⟨s, t, hs, hs', ht, rfl⟩
+    exact ⟨s + t * I, ⟨by simpa using hs, by simpa using hs', by simpa using ht⟩, rfl⟩
+  · rintro ⟨w, ⟨h1, h2, h3⟩, rfl⟩
+    refine ⟨w.re, w.im, h1, h2, h3, ?_⟩
+    congr 2; apply Complex.ext <;> simp
+
+/-- The face-failure class is measurable (it is open). -/
+theorem measurableSet_faceFailClass (x : ℂ) (θ ε g ε' ρ δ : ℝ) : MeasurableSet (faceFailClass x θ ε g ε' ρ δ) := by
+  exact (((isOpen_halfBox x θ ε).union (isOpen_farBox x θ g ε' ρ)).union (isOpen_faceQ x θ δ)).measurableSet
+
+/-- `x + e θ` is in the support of the failure class (every ball about it meets `Q` in an open set). -/
+theorem add_e_mem_essSupport_faceFailClass (x : ℂ) (θ ε g ε' ρ : ℝ) {δ : ℝ} (hδ : 0 < δ) :
+    x + e θ ∈ essSupport (faceFailClass x θ ε g ε' ρ δ) := by
+  intro r hr
+  set η : ℝ := min δ r / 2 with hη
+  have hη0 : 0 < η := by positivity
+  have hηδ : η < δ := by have := min_le_left δ r; linarith
+  have hηr : η < r := by have := min_le_right δ r; linarith
+  have hz : x + e θ * ((1 + η : ℝ) + (0 : ℝ) * I) ∈ ball (x + e θ) r ∩
+      {z : ℂ | ∃ s t : ℝ, 1 < s ∧ s < 1 + δ ∧ |t| < δ ∧ z = x + e θ * (s + t * I)} := by
+    refine ⟨?_, 1 + η, 0, by linarith, by linarith, by simpa using hδ, rfl⟩
+    rw [mem_ball, dist_eq_norm]
+    have : x + e θ * (((1 + η : ℝ) : ℂ) + ((0 : ℝ) : ℂ) * I) - (x + e θ) = ((η : ℝ) : ℂ) * e θ := by
+      push_cast; ring
+    rw [this, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hη0]
+    exact hηr
+  have hpos := (isOpen_ball.inter (isOpen_faceQ x θ δ)).measure_pos volume ⟨_, hz⟩
+  refine lt_of_lt_of_le hpos (measure_mono ?_)
+  intro w hw
+  exact ⟨Or.inr hw.2, hw.1⟩
+
+/-- **FS111-V0-RESCALE**: if an a.e.-proper measurable `k`-colouring exists, a tight one exists. -/
+theorem AeColouring.exists_tight (c : AeColouring k) : ∃ c' : AeColouring k, c'.Tight := by
+  set G : Set ℝ := {a | a ≤ 1 ∧ ∀ j, IccPairNull (c.cls j) a 1} with hG
+  obtain ⟨a₀, ha₀, j₀, hj₀⟩ := c.exists_pos_not_iccPairNull
+  have h1G : (1 : ℝ) ∈ G :=
+    ⟨le_rfl, fun j => measure_mono_null (fun q hq => le_antisymm hq.2.2.2 hq.2.2.1) (volume_prod_dist_eq_null 1)⟩
+  have hlow : ∀ a ∈ G, a₀ ≤ a := by
+    intro a ha
+    by_contra hlt
+    push Not at hlt
+    exact hj₀ ((ha.2 j₀).mono hlt.le le_rfl)
+  have hbdd : BddBelow G := ⟨a₀, hlow⟩
+  set a' := sInf G with ha'
+  have ha'0 : 0 < a' := lt_of_lt_of_le ha₀ (le_csInf ⟨1, h1G⟩ hlow)
+  have ha'1 : a' ≤ 1 := csInf_le hbdd h1G
+  have ha'G : ∀ j, IccPairNull (c.cls j) a' 1 := by
+    intro j
+    refine iccPairNull_of_forall_lt fun a'' h1 h2 => ?_
+    obtain ⟨g, hg, hga⟩ := exists_lt_of_csInf_lt ⟨1, h1G⟩ h1
+    exact (hg.2 j).mono hga.le le_rfl
+  have hpm : ∀ j R, pairMass (c.cls j) R a' = 0 := by
+    intro j R
+    rcases lt_or_eq_of_le ha'1 with hlt | heq
+    · exact pairMass_eq_zero_of_iccPairNull (c.measurableSet_cls j) ha'0 hlt (ha'G j) R a' ⟨le_rfl, hlt.le⟩
+    · rw [heq]; exact unitPairsNull_iff_pairMass.1 (c.unitPairsNull j) R
+  obtain ⟨c', hc'⟩ := c.exists_rescale ha'0 hpm
+  refine ⟨c', fun ε hε hs => ?_⟩
+  have hcls : ∀ j, c'.cls j = (fun x : ℂ => (a' : ℂ) * x) ⁻¹' c.cls j := fun j => by
+    ext x; simp [AeColouring.cls, hc']
+  have hnull : ∀ j, IccPairNull (c.cls j) (a' * (1 - ε)) (a' * (1 + ε)) := fun j => by
+    have := hs j
+    rw [bandNull_iff_iccPairNull, hcls, iccPairNull_preimage_mul ha'0] at this
+    exact this
+  have hmem : a' * (1 - ε) ∈ G :=
+    ⟨by nlinarith, fun j => ((hnull j).mono le_rfl (by nlinarith : a' ≤ a' * (1 + ε))).union (ha'G j)⟩
+  have := csInf_le hbdd hmem
+  nlinarith
+
+/-- **FS111-V0-RESCALE**, second clause: a tight a.e.-proper `k`-colouring exists iff `χ_m⁰(ℝ²) ≤ k`. -/
+theorem exists_tight_iff_chiM0_le : (∃ c : AeColouring k, c.Tight) ↔ chiM0 ≤ k := by
+  constructor
+  · rintro ⟨c, -⟩; exact chiM0_le c
+  · intro h
+    have hm : ∃ m ≤ k, Nonempty (AeColouring m) := by
+      by_contra hcon
+      push Not at hcon
+      have : ((k + 1 : ℕ) : ℕ∞) ≤ chiM0 := by
+        refine le_iInf₂ fun m ⟨c⟩ => ?_
+        have : k < m := by
+          by_contra hmk
+          exact (hcon m (not_lt.1 hmk)).false c
+        exact_mod_cast this
+      have h2 := this.trans h
+      have : k + 1 ≤ k := by exact_mod_cast h2
+      omega
+    obtain ⟨m, hmk, ⟨c⟩⟩ := hm
+    obtain ⟨c', -⟩ : ∃ c' : AeColouring k, True := by
+      refine ⟨⟨fun z => Fin.castLE hmk (c.col z), ?_, fun j => ?_⟩, trivial⟩
+      · exact (measurable_of_finite (Fin.castLE hmk)).comp c.measurable
+      · by_cases hj : ∃ j', Fin.castLE hmk j' = j
+        · obtain ⟨j', rfl⟩ := hj
+          have : (fun z => Fin.castLE hmk (c.col z)) ⁻¹' {Fin.castLE hmk j'} = c.col ⁻¹' {j'} := by
+            ext z; simp [(Fin.castLE_injective hmk).eq_iff]
+          rw [this]; exact c.unitPairsNull j'
+        · have : (fun z => Fin.castLE hmk (c.col z)) ⁻¹' {j} = ∅ := by
+            ext z; simp only [mem_preimage, mem_singleton_iff, mem_empty_iff_false, iff_false]
+            exact fun h => hj ⟨_, h⟩
+          rw [this]
+          have : UnitPairsNull (∅ : Set ℂ) := by
+            rw [UnitPairsNull, show unitPairSet (∅ : Set ℂ) = ∅ by ext q; simp [unitPairSet], measure_empty]
+          exact this
+    exact AeColouring.exists_tight c'
+
+/-- **FS129-SR2-SUPK** (carrying FS106-SUP's first clause, at every `k`): `µ_k⁰ = lim_{ε→0} µ_k(ε)`. -/
+theorem tendsto_mu (k : ℕ) : Tendsto (mu k) (𝓝[>] 0) (𝓝 (muZero k)) := by
+  rw [tendsto_order]
+  constructor
+  · intro a ha
+    obtain ⟨d, had, hd⟩ := exists_between ha
+    filter_upwards [eventually_le_muPer k hd] with ε hε
+    exact lt_of_lt_of_le had (hε.trans ((muPer_le_muTile k ε).trans (muTile_le_mu k ε)))
+  · intro a ha
+    filter_upwards [Ioo_mem_nhdsGT (by norm_num : (0 : ℝ) < 1)] with ε hε
+    exact lt_of_le_of_lt (mu_le_muZero k hε.1 hε.2) ha
+
+/-- **FS129-SR2-SUPK**: `µ_k⁰ = lim_{ε→0} µ_k^tile(ε)`. -/
+theorem tendsto_muTile (k : ℕ) : Tendsto (muTile k) (𝓝[>] 0) (𝓝 (muZero k)) := by
+  rw [tendsto_order]
+  constructor
+  · intro a ha
+    obtain ⟨d, had, hd⟩ := exists_between ha
+    filter_upwards [eventually_le_muPer k hd] with ε hε
+    exact lt_of_lt_of_le had (hε.trans (muPer_le_muTile k ε))
+  · intro a ha
+    filter_upwards [Ioo_mem_nhdsGT (by norm_num : (0 : ℝ) < 1)] with ε hε
+    exact lt_of_le_of_lt ((muTile_le_mu k ε).trans (mu_le_muZero k hε.1 hε.2)) ha
+
+/-- **FS129-SR2-SUPK**: `µ_k⁰ = lim_{ε→0} µ_k^per(ε)`. -/
+theorem tendsto_muPer (k : ℕ) : Tendsto (muPer k) (𝓝[>] 0) (𝓝 (muZero k)) := by
+  rw [tendsto_order]
+  constructor
+  · intro a ha
+    obtain ⟨d, had, hd⟩ := exists_between ha
+    filter_upwards [eventually_le_muPer k hd] with ε hε
+    exact lt_of_lt_of_le had hε
+  · intro a ha
+    filter_upwards [Ioo_mem_nhdsGT (by norm_num : (0 : ℝ) < 1)] with ε hε
+    exact lt_of_le_of_lt (((muPer_le_muTile k ε).trans (muTile_le_mu k ε)).trans (mu_le_muZero k hε.1 hε.2)) ha
+
+/-- FS-103's M1, hard direction, as the named hypothesis FS106-EQ's `χ_CP` clause reads (outside the backlog). -/
+def Row130M1 : Prop := ∀ k : ℕ, chiM0 ≤ k → chiCP ≤ k
+
+/-- FS-103's M1, easy direction (TQ § 2.3, steps 1 and 3): a CP `k`-colouring has a jointly measurable modification whose
+realisations are a.e.-proper, so `χ_m⁰(ℝ²) ≤ χ_CP(ℝ²)`. Formalized here; no hypothesis. -/
+theorem chiM0_le_chiCP : chiM0 ≤ chiCP := by
+  refine le_iInf₂ fun k ⟨c⟩ => ?_
+  obtain ⟨ct, hct, hmod⟩ := c.exists_modification
+  obtain ⟨f, hf⟩ := (c.ae_unitPairsNull_of_modification hct hmod).exists
+  have hmeas : Measurable (ct f) := hct.comp (measurable_const.prodMk measurable_id)
+  exact chiM0_le ⟨ct f, hmeas, hf⟩
+
+/-- **FS106-EQ**, (a) ⟺ (c), and FS106-COMP's first clause as (c) ⟹ (a) at every `k` (SR2 item 11):
+`χ_m⁰(ℝ²) ≤ k ⟺ µ_k⁰ = 1`. -/
+theorem chiM0_le_iff_muZero_eq_one (k : ℕ) : chiM0 ≤ k ↔ muZero k = 1 := by
+  classical
+  constructor
+  · intro hk
+    obtain ⟨c, -⟩ := exists_tight_iff_chiM0_le.2 hk
+    exact le_antisymm (muZero_le_one k) (one_le_muZero c)
+  intro h1
+  obtain ⟨C, hCP, hhole⟩ := exists_translates_small_hole (P := fun C : Fin k → Set ℂ => ∀ j, UnitPairsNull (C j))
+    (fun C v hC j => unitPairsNull_preimage_add (hC j) v) h1
+  set g : ℕ → Fin k → ℂ → ℝ := fun m j => (C m j).indicator 1 with hgdef
+  have hgm : ∀ m j, Measurable (g m j) := fun m j => measurable_const.indicator ((hCP m).1.1 j)
+  have hg01 : ∀ m j x, 0 ≤ g m j x ∧ g m j x ≤ 1 := fun m j x => by
+    by_cases hx : x ∈ C m j <;> simp [hgdef, hx]
+  obtain ⟨σ, F, hσ, hFm, hF01, hw⟩ := exists_weakStar_subseq g hgm hg01
+  have hsum : ∀ᵐ x ∂volume, ∑ j, F j x = 1 :=
+    ae_sum_eq_one_of_weakStar (C := fun m => C (σ m)) (fun m => (hCP (σ m)).1) (fun R => (hhole R).comp hσ.tendsto_atTop)
+      hFm hw
+  have hUm : ∀ A : Set ℂ, MeasurableSet A → MeasurableSet (unitPairSet A) := fun A hA =>
+    (measurable_fst hA).inter ((measurable_fst.add (continuous_e.measurable.comp measurable_snd)) hA)
+  -- the unit form of each `g m j` vanishes
+  have hgz : ∀ m j R, ∫ x in ball (0 : ℂ) R, g m j x * ∫ θ in Ico 0 (2 * Real.pi), g m j (x + e θ) = 0 := by
+    intro m j R
+    have hsl := (Measure.measure_prod_null (hUm _ ((hCP m).1.1 j))).1 ((hCP m).2 j)
+    refine integral_eq_zero_of_ae ?_
+    filter_upwards [ae_restrict_of_ae hsl] with x hx
+    by_cases hxC : x ∈ C m j
+    · have hin : ∫ θ in Ico 0 (2 * Real.pi), g m j (x + e θ) = 0 := by
+        refine integral_eq_zero_of_ae ?_
+        refine measure_mono_null (fun θ hθ => ?_) hx
+        simp only [Pi.zero_apply] at hθ
+        by_cases h1 : x + e θ ∈ C m j
+        · exact ⟨hxC, h1⟩
+        · exact absurd (by simp [hgdef, h1]) hθ
+      simp [hin]
+    · simp [hgdef, hxC]
+  -- the unit form of each `F j` vanishes, and pointwise
+  have hFb : ∀ j, ∀ᵐ x ∂volume, |F j x| ≤ 1 := fun j => (hF01 j).mono fun x hx => by
+    rw [abs_le]; constructor <;> linarith [hx.1, hx.2]
+  have hNj : ∀ j, MeasurableSet {y | ¬ (0 ≤ F j y ∧ F j y ≤ 1)} := fun j =>
+    ((measurableSet_le measurable_const (hFm j)).inter (measurableSet_le (hFm j) measurable_const)).compl
+  have hcirc : ∀ j, ∀ᵐ x ∂volume, ∀ᵐ θ ∂arcLength, 0 ≤ F j (x + e θ) ∧ F j (x + e θ) ≤ 1 := by
+    intro j
+    filter_upwards [ae_arcLength_null (hNj j) (ae_iff.1 (hF01 j))] with x hx
+    exact ae_iff.2 hx
+  have hF0 : ∀ j, ∀ᵐ x ∂volume, F j x * ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ) = 0 := by
+    intro j
+    have hTm : AEStronglyMeasurable (fun x => ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ)) volume :=
+      AEStronglyMeasurable.integral_prod_right' (f := fun p : ℂ × ℝ => F j (p.1 + e p.2))
+        ((hFm j).comp (measurable_fst.add (continuous_e.measurable.comp measurable_snd))).aestronglyMeasurable
+    have hball : ∀ n : ℕ, ∀ᵐ x ∂(volume.restrict (ball (0 : ℂ) n)),
+        F j x * ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ) = 0 := by
+      intro n
+      have hlim := unitForm_tendsto (g := fun m => g (σ m) j) (fun m => hgm _ j) (fun m x => hg01 (σ m) j x)
+        (hFm j) (hF01 j) (hw j) n
+      have hz : ∫ x in ball (0 : ℂ) n, F j x * ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ) = 0 := by
+        refine tendsto_nhds_unique hlim ?_
+        simp only [hgz]
+        exact tendsto_const_nhds
+      refine (setIntegral_eq_zero_iff_of_nonneg_ae ?_ ?_).1 hz
+      · filter_upwards [ae_restrict_of_ae (hF01 j), ae_restrict_of_ae (hcirc j)] with x hx hxc
+        exact mul_nonneg hx.1 (integral_nonneg_of_ae (hxc.mono fun θ hθ => hθ.1))
+      · refine Measure.integrableOn_of_bounded measure_ball_lt_top.ne ((hFm j).aestronglyMeasurable.mul hTm)
+          (M := 1 * (2 * Real.pi)) ?_
+        filter_upwards [ae_restrict_of_ae (hFb j), ae_restrict_of_ae (hcirc j)] with x hx hxc
+        rw [norm_mul, Real.norm_eq_abs]
+        refine mul_le_mul hx ?_ (norm_nonneg _) zero_le_one
+        have := norm_integral_le_of_norm_le_const (μ := arcLength) (C := 1) (f := fun θ => F j (x + e θ))
+          (hxc.mono fun θ hθ => by rw [Real.norm_eq_abs, abs_le]; constructor <;> linarith [hθ.1, hθ.2])
+        refine this.trans_eq ?_
+        simp [arcLength, Measure.real, Real.volume_Ico, Real.pi_pos.le]
+    have hall : ∀ᵐ x ∂volume, ∀ n : ℕ, x ∈ ball (0 : ℂ) n → F j x * ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ) = 0 :=
+      ae_all_iff.2 fun n => (ae_restrict_iff' measurableSet_ball).1 (hball n)
+    filter_upwards [hall] with x hx
+    obtain ⟨n, hn⟩ := exists_nat_gt ‖x‖
+    exact hx n (by rw [mem_ball, dist_zero_right]; exact hn)
+  -- selection
+  obtain ⟨c, hcm, hcpos⟩ := exists_selection hFm hsum (fun j => (hF01 j).mono fun x hx => hx.1)
+  have hN1m : MeasurableSet {y | ¬ 0 < F (c y) y} := by
+    have : {y | ¬ 0 < F (c y) y} = ⋃ j, (c ⁻¹' {j} ∩ {y | ¬ 0 < F j y}) := by
+      ext y; simp only [mem_setOf_eq, mem_iUnion, mem_inter_iff, mem_preimage, mem_singleton_iff]
+      exact ⟨fun h => ⟨c y, rfl, h⟩, fun ⟨j, hj, h⟩ => hj ▸ h⟩
+    rw [this]
+    exact MeasurableSet.iUnion fun j => (hcm (measurableSet_singleton j)).inter
+      (measurableSet_lt measurable_const (hFm j)).compl
+  have hN1 : volume {y | ¬ 0 < F (c y) y} = 0 := ae_iff.1 hcpos
+  refine chiM0_le ⟨c, hcm, fun j => ?_⟩
+  rw [UnitPairsNull, Measure.measure_prod_null (hUm _ (hcm (measurableSet_singleton j)))]
+  filter_upwards [hcpos, hF0 j, ae_arcLength_null hN1m hN1, hcirc j] with x hxpos hx0 hxN hxc
+  by_cases hxD : c x = j
+  · have hFx : 0 < F j x := hxD ▸ hxpos
+    have hconv0 : ∫ θ in Ico 0 (2 * Real.pi), F j (x + e θ) = 0 := by
+      rcases mul_eq_zero.1 hx0 with h | h
+      · exact absurd h hFx.ne'
+      · exact h
+    have hint : Integrable (fun θ => F j (x + e θ)) arcLength := by
+      refine Integrable.of_bound (C := 1) ((hFm j).comp (measurable_const.add continuous_e.measurable)).aestronglyMeasurable ?_
+      filter_upwards [hxc] with θ hθ
+      rw [Real.norm_eq_abs, abs_le]; constructor <;> linarith [hθ.1, hθ.2]
+    have hae := (integral_eq_zero_iff_of_nonneg_ae (hxc.mono fun θ hθ => hθ.1) hint).1 hconv0
+    refine measure_mono_null (fun θ hθ => ?_) (measure_union_null (ae_iff.1 hae) hxN)
+    simp only [mem_preimage, unitPairSet, mem_setOf_eq, mem_singleton_iff] at hθ
+    obtain ⟨-, hθD⟩ := hθ
+    by_cases hFy : 0 < F j (x + e θ)
+    · left; simp only [mem_setOf_eq, Pi.zero_apply]; exact hFy.ne'
+    · right; simp only [mem_setOf_eq]; rw [hθD]; exact hFy
+  · refine measure_mono_null (fun θ hθ => ?_) measure_empty
+    simp only [mem_preimage, unitPairSet, mem_setOf_eq, mem_singleton_iff] at hθ
+    exact absurd hθ.1 hxD
+
+/-- **FS106-EQ**, (a) ⟺ (b), given FS-103's M1 (`Row130M1`, named): `χ_m⁰(ℝ²) ≤ k ⟺ χ_CP(ℝ²) ≤ k`. -/
+theorem chiM0_le_iff_chiCP_le (hM1 : Row130M1) (k : ℕ) : chiM0 ≤ k ↔ chiCP ≤ k :=
+  ⟨hM1 k, fun h => chiM0_le_chiCP.trans h⟩
+
+/-- **FS106-EQ**, (c) ⟺ (d) (SUPK at the value `1`): `µ_k⁰ = 1 ⟺ lim_{ε→0} µ_k(ε) = 1`. -/
+theorem muZero_eq_one_iff_tendsto (k : ℕ) : muZero k = 1 ↔ Tendsto (mu k) (𝓝[>] 0) (𝓝 1) := by
+  constructor
+  · intro h; rw [← h]; exact tendsto_mu k
+  · intro h; exact tendsto_nhds_unique (tendsto_mu k) h |>.symm ▸ rfl
+
+/-- A band-free class (no pair at a distance in `[1 − ε, 1 + ε]`, `ε ≥ 0`) has null unit pairs. -/
+theorem unitPairsNull_of_bandFree {A : Set ℂ} {ε : ℝ} (hε : 0 ≤ ε) (h : BandFree A ε) : UnitPairsNull A := by
+  rw [UnitPairsNull]
+  have : unitPairSet A = ∅ := by
+    ext q
+    simp only [unitPairSet, mem_setOf_eq, mem_empty_iff_false, iff_false, not_and]
+    intro hx hy
+    have hd : dist q.1 (q.1 + e q.2) = 1 := by rw [dist_eq_norm, sub_add_cancel_left, norm_neg, norm_e]
+    rcases h _ hx _ hy with h1 | h1 <;> linarith
+  rw [this, measure_empty]
+
+/-- **FS106-EQ**, (a) ⟺ (e): `χ_m⁰(ℝ²) ≤ k` iff for every `δ > 0` there are `ε > 0` and a periodic partial `k`-colouring by
+half-open grid squares with no monochromatic pair at any distance in `[1 − ε, 1 + ε]`, covering upper density at least
+`1 − δ`. -/
+theorem chiM0_le_iff_periodic (k : ℕ) :
+    chiM0 ≤ k ↔ ∀ δ > 0, ∃ ε > 0, ∃ C : Fin k → Set ℂ, IsPartialColouring C ∧ IsTiled C ∧ IsPeriodic C ∧
+      (∀ j, BandFree (C j) ε) ∧ 1 - ENNReal.ofReal δ ≤ upperDensity (⋃ j, C j) := by
+  constructor
+  · intro h δ hδ
+    have hz : muZero k = 1 := (chiM0_le_iff_muZero_eq_one k).1 h
+    have hlim := tendsto_muPer k
+    rw [hz] at hlim
+    have hlt : 1 - ENNReal.ofReal δ < 1 := ENNReal.sub_lt_self (by simp) one_ne_zero (by simpa using hδ)
+    have hev := hlim.eventually (lt_mem_nhds hlt)
+    obtain ⟨ε, hε, hεpos⟩ := (hev.and self_mem_nhdsWithin).exists
+    obtain ⟨C, hC⟩ := lt_iSup_iff.1 hε
+    obtain ⟨hCp, hdens⟩ := lt_iSup_iff.1 hC
+    exact ⟨ε, hεpos, C, hCp.1, hCp.2.1, hCp.2.2.1, hCp.2.2.2, hdens.le⟩
+  · intro h
+    refine (chiM0_le_iff_muZero_eq_one k).2 (le_antisymm (muZero_le_one k) ?_)
+    refine ENNReal.le_of_forall_pos_le_add fun r hr _ => ?_
+    obtain ⟨ε, hε, C, hCp, hCt, hCper, hCb, hd⟩ := h (r : ℝ) (by exact_mod_cast hr)
+    have hle : upperDensity (⋃ j, C j) ≤ muZero k :=
+      le_iSup₂ (f := fun C (_ : IsPartialColouring C ∧ ∀ j, UnitPairsNull (C j)) => upperDensity (⋃ j, C j)) C
+        ⟨hCp, fun j => unitPairsNull_of_bandFree hε.le (hCb j)⟩
+    have h3 : 1 - ENNReal.ofReal (r : ℝ) ≤ muZero k := hd.trans hle
+    rw [tsub_le_iff_right, ENNReal.ofReal_coe_nnreal] at h3
+    exact h3
+
+/-- **FS106-EQ**, at `k = 6`: `χ_m⁰(ℝ²) ≥ 7 ⟺ lim_{ε→0} µ₆(ε) < 1` (the limit is the supremum over `ε > 0`, `µ₆` being
+antitone). -/
+theorem seven_le_chiM0_iff : 7 ≤ chiM0 ↔ (⨆ ε > (0 : ℝ), mu 6 ε) < 1 := by
+  have hlim : muZero 6 = ⨆ ε > (0 : ℝ), mu 6 ε := by
+    have h1 := (antitone_mu 6).tendsto_nhdsGT 0
+    rw [sSup_image] at h1
+    exact tendsto_nhds_unique (tendsto_mu 6) h1
+  have hle : (⨆ ε > (0 : ℝ), mu 6 ε) ≤ 1 := iSup₂_le fun ε _ => mu_le_one 6 ε
+  have h7 : (7 : ℕ∞) ≤ chiM0 ↔ ¬ chiM0 ≤ 6 := by
+    rw [not_le]
+    have := ENat.add_one_le_iff (m := 6) (n := chiM0) (by decide)
+    rwa [show (6 : ℕ∞) + 1 = 7 by norm_num] at this
+  have h6 : chiM0 ≤ 6 ↔ muZero 6 = 1 := by exact_mod_cast chiM0_le_iff_muZero_eq_one 6
+  rw [h7, h6, hlim]
+  constructor
+  · intro h; exact lt_of_le_of_ne hle h
+  · intro h h1; exact h.ne h1
+
+/-- `[Voronov2023]` Thm 1.1 (Euclidean norm, six colours), as a statement: for every `ε > 0` no six-colouring of the plane
+is proper for the forbidden interval `[1 − ε, 1 + ε]` (D-VPROP). Named here, not imported (FS106-COMP's clause is an
+equivalence, not a use). -/
+def Voronov11 : Prop :=
+  ∀ ε > 0, ¬ ∃ f : ℂ → Fin 6, ∀ x y, 1 - ε ≤ dist x y → dist x y ≤ 1 + ε → f x ≠ f y
+
+/-- **FS106-SUP's attainment clause, at the value FS106-COMP reads** (carried content of FS129-SR2-SUPK's merged row, inventory
+item 23): if `µ_k(ε) = 1`, some partial `k`-colouring whose classes are band-null at `ε` covers almost every point. QB § 2.7
+reaches it through SUP's stationary attaining family (mean coverage `1`); FS106-QB § 2.4's compactness argument for (c) ⟹ (a)
+gives it directly at every `k` — translates to windows of small hole measure, a weak-* limit, the band form continuous because
+its kernel `1_{annulus}` is `L¹` (no Rajchman step, no Krylov–Bogolyubov), and support selection. -/
+theorem exists_bandNull_aeCover_of_mu_eq_one {k : ℕ} {ε : ℝ} (hε : 0 < ε) (h : mu k ε = 1) :
+    ∃ C : Fin k → Set ℂ, IsPartialColouring C ∧ (∀ j, BandNull (C j) ε) ∧ ∀ᵐ x ∂volume, ∃ j, x ∈ C j := by
+  have _ := hε -- idle: the compactness argument reads no sign of `ε`
+  classical
+  obtain ⟨C, hCP, hhole⟩ := exists_translates_small_hole (P := fun C : Fin k → Set ℂ => ∀ j, BandNull (C j) ε)
+    (fun C v hC j => bandNull_preimage_add (hC j) v) h
+  set g : ℕ → Fin k → ℂ → ℝ := fun m j => (C m j).indicator 1 with hgdef
+  have hgm : ∀ m j, Measurable (g m j) := fun m j => measurable_const.indicator ((hCP m).1.1 j)
+  have hg01 : ∀ m j x, 0 ≤ g m j x ∧ g m j x ≤ 1 := fun m j x => by
+    by_cases hx : x ∈ C m j <;> simp [hgdef, hx]
+  obtain ⟨σ, F, hσ, hFm, hF01, hw⟩ := exists_weakStar_subseq g hgm hg01
+  have hsum : ∀ᵐ x ∂volume, ∑ j, F j x = 1 :=
+    ae_sum_eq_one_of_weakStar (C := fun m => C (σ m)) (fun m => (hCP (σ m)).1) (fun R => (hhole R).comp hσ.tendsto_atTop)
+      hFm hw
+  -- the band kernel
+  set A : Set ℂ := {w | 1 - ε ≤ ‖w‖ ∧ ‖w‖ ≤ 1 + ε} with hAdef
+  have hAm : MeasurableSet A :=
+    (measurableSet_le measurable_const continuous_norm.measurable).inter
+      (measurableSet_le continuous_norm.measurable measurable_const)
+  set κ : ℂ → ℝ := A.indicator 1 with hκdef
+  have hκi : Integrable κ := by
+    refine (integrableOn_const ?_).integrable_indicator hAm
+    refine measure_ne_top_of_subset (fun w hw => ?_) (measure_closedBall_lt_top (x := (0 : ℂ)) (r := 1 + ε)).ne
+    rw [mem_closedBall, dist_zero_right]; exact hw.2
+  have hκ0 : ∀ w, 0 ≤ κ w := fun w => by by_cases hw : w ∈ A <;> simp [hκdef, hw]
+  -- the band form of each `g m j` vanishes
+  have hgz : ∀ m j R, ∫ x in ball (0 : ℂ) R, g m j x * ∫ w, g m j (x + w) * κ w = 0 := by
+    intro m j R
+    have hB := (hCP m).2 j
+    have hBm : MeasurableSet (bandPairSet (C m j) ε) :=
+      (measurable_fst ((hCP m).1.1 j)).inter ((measurable_snd ((hCP m).1.1 j)).inter
+        ((measurableSet_le measurable_const (continuous_fst.dist continuous_snd).measurable).inter
+          (measurableSet_le (continuous_fst.dist continuous_snd).measurable measurable_const)))
+    have hsl := (Measure.measure_prod_null hBm).1 hB
+    refine integral_eq_zero_of_ae ?_
+    filter_upwards [ae_restrict_of_ae hsl] with x hx
+    by_cases hxC : x ∈ C m j
+    · have hin : ∫ w, g m j (x + w) * κ w = 0 := by
+        refine integral_eq_zero_of_ae ?_
+        have hnull : volume ((fun w => x + w) ⁻¹' (Prod.mk x ⁻¹' bandPairSet (C m j) ε)) = 0 := by
+          rw [measure_preimage_add]; exact hx
+        refine measure_mono_null (fun w hw => ?_) hnull
+        simp only [Pi.zero_apply] at hw
+        by_cases h1 : x + w ∈ C m j
+        · by_cases h2 : w ∈ A
+          · simp only [mem_preimage, bandPairSet, mem_setOf_eq]
+            refine ⟨hxC, h1, ?_, ?_⟩
+            · rw [dist_eq_norm, sub_add_cancel_left, norm_neg]; exact h2.1
+            · rw [dist_eq_norm, sub_add_cancel_left, norm_neg]; exact h2.2
+          · exact absurd (by simp [hκdef, h2]) hw
+        · exact absurd (by simp [hgdef, h1]) hw
+      simp [hin]
+    · simp [hgdef, hxC]
+  -- so the band form of each `F j` vanishes, and pointwise
+  have hFb : ∀ j, ∀ᵐ x ∂volume, |F j x| ≤ 1 := fun j => (hF01 j).mono fun x hx => by
+    rw [abs_le]; constructor <;> linarith [hx.1, hx.2]
+  have hF0 : ∀ j, ∀ᵐ x ∂volume, F j x * ∫ w, F j (x + w) * κ w = 0 := by
+    intro j
+    have P0 := conv_props (hFm j) (hFb j) hκi
+    have hinner : ∀ x, 0 ≤ ∫ w, F j (x + w) * κ w := fun x => by
+      refine integral_nonneg_of_ae ?_
+      filter_upwards [(measurePreserving_add_left volume x).quasiMeasurePreserving.ae (hF01 j)] with w hw
+      exact mul_nonneg hw.1 (hκ0 w)
+    have hball : ∀ n : ℕ, ∀ᵐ x ∂(volume.restrict (ball (0 : ℂ) n)), F j x * ∫ w, F j (x + w) * κ w = 0 := by
+      intro n
+      have hlim := convForm_tendsto (g := fun m => g (σ m) j) (fun m => hgm _ j)
+        (fun m x => by rw [abs_le]; constructor <;> linarith [(hg01 (σ m) j x).1, (hg01 (σ m) j x).2])
+        (hFm j) (hFb j) (hw j) hκi n
+      have hz : ∫ x in ball (0 : ℂ) n, F j x * ∫ w, F j (x + w) * κ w = 0 := by
+        refine tendsto_nhds_unique hlim ?_
+        simp only [hgz]
+        exact tendsto_const_nhds
+      refine (setIntegral_eq_zero_iff_of_nonneg_ae ?_ ?_).1 hz
+      · filter_upwards [ae_restrict_of_ae (hF01 j)] with x hx
+        exact mul_nonneg hx.1 (hinner x)
+      · refine Measure.integrableOn_of_bounded measure_ball_lt_top.ne ((hFm j).aestronglyMeasurable.mul P0.1)
+          (M := ∫ w, ‖κ w‖) ?_
+        filter_upwards [ae_restrict_of_ae (hFb j)] with x hx
+        rw [norm_mul, Real.norm_eq_abs, Real.norm_eq_abs]
+        exact mul_le_of_le_one_left (abs_nonneg _) hx |>.trans (P0.2.1 x) |> fun h => by
+          calc |F j x| * |∫ w, F j (x + w) * κ w| ≤ 1 * |∫ w, F j (x + w) * κ w| := by gcongr
+            _ ≤ _ := by rw [one_mul]; exact P0.2.1 x
+    have hall : ∀ᵐ x ∂volume, ∀ n : ℕ, x ∈ ball (0 : ℂ) n → F j x * ∫ w, F j (x + w) * κ w = 0 :=
+      ae_all_iff.2 fun n => (ae_restrict_iff' measurableSet_ball).1 (hball n)
+    filter_upwards [hall] with x hx
+    obtain ⟨n, hn⟩ := exists_nat_gt ‖x‖
+    exact hx n (by rw [mem_ball, dist_zero_right]; exact hn)
+  -- selection
+  obtain ⟨c, hcm, hcpos⟩ := exists_selection hFm hsum (fun j => (hF01 j).mono fun x hx => hx.1)
+  refine ⟨fun j => c ⁻¹' {j}, ⟨fun j => hcm (measurableSet_singleton j), fun i j hij =>
+    Set.disjoint_left.2 fun x hi hj => hij (hi.symm.trans hj)⟩, fun j => ?_, Eventually.of_forall fun x => ⟨c x, rfl⟩⟩
+  have hDm : MeasurableSet (c ⁻¹' {j}) := hcm (measurableSet_singleton j)
+  have hBm : MeasurableSet (bandPairSet (c ⁻¹' {j}) ε) :=
+    (measurable_fst hDm).inter ((measurable_snd hDm).inter
+      ((measurableSet_le measurable_const (continuous_fst.dist continuous_snd).measurable).inter
+        (measurableSet_le (continuous_fst.dist continuous_snd).measurable measurable_const)))
+  have hN1 : volume {y | ¬ 0 < F (c y) y} = 0 := ae_iff.1 hcpos
+  rw [BandNull, Measure.measure_prod_null hBm]
+  filter_upwards [hcpos, hF0 j] with x hxpos hx0
+  by_cases hxD : c x = j
+  · have hFx : 0 < F j x := hxD ▸ hxpos
+    have hconv0 : ∫ w, F j (x + w) * κ w = 0 := by
+      rcases mul_eq_zero.1 hx0 with h | h
+      · exact absurd h hFx.ne'
+      · exact h
+    have hint : Integrable (fun w => F j (x + w) * κ w) := by
+      refine hκi.bdd_mul ((hFm j).comp (measurable_const_add x)).aestronglyMeasurable (c := 1) ?_
+      filter_upwards [(measurePreserving_add_left volume x).quasiMeasurePreserving.ae (hFb j)] with w hw
+      rwa [Real.norm_eq_abs]
+    have hnn : 0 ≤ᵐ[volume] fun w => F j (x + w) * κ w := by
+      filter_upwards [(measurePreserving_add_left volume x).quasiMeasurePreserving.ae (hF01 j)] with w hw
+      exact mul_nonneg hw.1 (hκ0 w)
+    have hae := (integral_eq_zero_iff_of_nonneg_ae hnn hint).1 hconv0
+    · have hN2 : volume ((fun y => y - x) ⁻¹' {w | F j (x + w) * κ w ≠ 0}) = 0 := by
+        simp only [sub_eq_add_neg]
+        rw [measure_preimage_add_right]
+        exact ae_iff.1 hae
+      refine measure_mono_null (fun y hy => ?_) (measure_union_null hN1 hN2)
+      simp only [mem_preimage, bandPairSet, mem_setOf_eq, mem_singleton_iff] at hy
+      obtain ⟨-, hyD, hy1, hy2⟩ := hy
+      by_cases hFy : 0 < F j y
+      · right
+        simp only [mem_preimage, mem_setOf_eq, add_sub_cancel]
+        have hyA : y - x ∈ A := by
+          refine ⟨?_, ?_⟩ <;> rw [← dist_eq_norm, dist_comm] <;> assumption
+        simp only [hκdef, indicator_of_mem hyA, Pi.one_apply, mul_one]
+        exact hFy.ne'
+      · left
+        simp only [mem_setOf_eq]
+        rw [hyD]; exact hFy
+  · refine measure_mono_null (fun y hy => ?_) measure_empty
+    simp only [mem_preimage, bandPairSet, mem_setOf_eq, mem_singleton_iff] at hy
+    exact absurd hy.1 hxD
+
+open Classical in
+/-- COMP, `⟹`: if `µ₆(ε) < 1` for every `ε > 0`, no six-colouring is proper on a band (the closures of the colour
+classes, made disjoint, are a band-free partial colouring covering everything, so `µ₆(ε/2) = 1`). -/
+theorem voronov11_of_forall_mu_lt (H : ∀ ε > (0 : ℝ), mu 6 ε < 1) : Voronov11 := by
+  intro ε hε ⟨f, hf⟩
+  set cl : Fin 6 → Set ℂ := fun j => closure (f ⁻¹' {j}) with hcl
+  have h1 : ∀ j, ∀ x ∈ cl j, ∀ y ∈ cl j, dist x y ≤ 1 - ε ∨ 1 + ε ≤ dist x y := by
+    intro j x hx y hy
+    by_contra hcon
+    push Not at hcon
+    have hxy : (x, y) ∈ closure ((f ⁻¹' {j}) ×ˢ (f ⁻¹' {j})) := by
+      rw [closure_prod_eq]; exact ⟨hx, hy⟩
+    have hopen : IsOpen {q : ℂ × ℂ | 1 - ε < dist q.1 q.2 ∧ dist q.1 q.2 < 1 + ε} :=
+      (isOpen_lt continuous_const (continuous_fst.dist continuous_snd)).inter
+        (isOpen_lt (continuous_fst.dist continuous_snd) continuous_const)
+    have hmem : (x, y) ∈ {q : ℂ × ℂ | 1 - ε < dist q.1 q.2 ∧ dist q.1 q.2 < 1 + ε} := ⟨hcon.1, hcon.2⟩
+    obtain ⟨q, hq1, hq2⟩ := mem_closure_iff.1 hxy _ hopen hmem
+    exact hf q.1 q.2 hq1.1.le hq1.2.le (by rw [mem_prod] at hq2; exact (hq2.1.trans hq2.2.symm))
+  set C : Fin 6 → Set ℂ := fun j => cl j \ ⋃ i < j, cl i with hC
+  have hCm : ∀ j, MeasurableSet (C j) := fun j =>
+    isClosed_closure.measurableSet.diff (MeasurableSet.biUnion (countable_univ.mono (subset_univ _))
+      fun i _ => isClosed_closure.measurableSet)
+  have hcov : ⋃ j, C j = univ := by
+    refine eq_univ_of_forall fun x => ?_
+    have hne : (Finset.univ.filter fun j => x ∈ cl j).Nonempty := ⟨f x, by simp [hcl]; exact subset_closure rfl⟩
+    set j0 := (Finset.univ.filter fun j => x ∈ cl j).min' hne
+    have hj0 : x ∈ cl j0 := by
+      have := Finset.min'_mem _ hne; simpa using this
+    refine mem_iUnion.2 ⟨j0, hj0, ?_⟩
+    simp only [mem_iUnion, not_exists]
+    intro i hi hxi
+    have : j0 ≤ i := Finset.min'_le _ i (by simpa using hxi)
+    exact absurd hi (not_lt.2 this)
+  have hdis : Pairwise (Function.onFun Disjoint C) := by
+    intro i j hij
+    wlog h : i < j generalizing i j
+    · exact (this hij.symm (lt_of_le_of_ne (not_lt.1 h) hij.symm)).symm
+    refine disjoint_left.2 fun x hxi hxj => hxj.2 (mem_iUnion₂.2 ⟨i, h, hxi.1⟩)
+  have hfree : ∀ j, BandFree (C j) (ε / 2) := by
+    intro j x hx y hy
+    rcases h1 j x hx.1 y hy.1 with h | h
+    · left; linarith
+    · right; linarith
+  have hle : (1 : ENNReal) ≤ mu 6 (ε / 2) := by
+    calc (1 : ENNReal) = upperDensity (⋃ j, C j) := by rw [hcov, upperDensity_univ]
+      _ ≤ mu 6 (ε / 2) := le_iSup₂ (f := fun C (_ : IsPartialColouring C ∧ ∀ j, BandNull (C j) (ε / 2)) =>
+          upperDensity (⋃ j, C j)) C ⟨⟨hCm, hdis⟩, fun j => bandNull_of_bandFree (hfree j)⟩
+  exact absurd (H (ε / 2) (by linarith)) (not_lt.2 hle)
+
+
+open Classical in
+/-- COMP, `⟸`, through the attainment lemma: the supports of the classes of an a.e.-covering band-null partial colouring
+cover the plane, and the least index of a support containing `x` is a six-colouring proper on `[1 − ε/2, 1 + ε/2]`. -/
+theorem mu_lt_of_voronov11 (hV : Voronov11) {ε : ℝ} (hε : 0 < ε) : mu 6 ε < 1 := by
+  by_contra hcon
+  have h1 : mu 6 ε = 1 := le_antisymm (mu_le_one 6 ε) (not_lt.1 hcon)
+  obtain ⟨C, hCp, hband, hae⟩ := exists_bandNull_aeCover_of_mu_eq_one hε h1
+  -- the supports cover the plane
+  have hcl : IsClosed (⋃ j, essSupport (C j)) := isClosed_iUnion_of_finite fun j => isClosed_essSupport _
+  have hfull : ⋃ j, essSupport (C j) = univ := by
+    by_contra hne
+    have hopen : IsOpen (⋃ j, essSupport (C j))ᶜ := hcl.isOpen_compl
+    have hnonempty : (⋃ j, essSupport (C j))ᶜ.Nonempty := by
+      rwa [nonempty_iff_ne_empty, Ne, compl_empty_iff]
+    have hpos := hopen.measure_pos volume hnonempty
+    refine hpos.ne' (measure_mono_null (t := {x | ¬ ∃ j, x ∈ C j} ∪ ⋃ j, C j \ essSupport (C j)) ?_ ?_)
+    · intro x hx
+      by_cases hx' : ∃ j, x ∈ C j
+      · obtain ⟨j, hj⟩ := hx'
+        right
+        refine mem_iUnion.2 ⟨j, hj, fun hs => hx (mem_iUnion.2 ⟨j, hs⟩)⟩
+      · exact Or.inl hx'
+    · exact measure_union_null (by simpa [ae_iff] using hae)
+        (measure_iUnion_null fun j => volume_diff_essSupport (C j))
+  set f : ℂ → Fin 6 := fun x => if h : ∃ j, x ∈ essSupport (C j) then Classical.choose h else 0 with hf
+  have hfs : ∀ x, x ∈ essSupport (C (f x)) := by
+    intro x
+    have h : ∃ j, x ∈ essSupport (C j) := by
+      have : x ∈ ⋃ j, essSupport (C j) := by rw [hfull]; trivial
+      simpa using this
+    simp only [hf, dif_pos h]
+    exact Classical.choose_spec h
+  refine hV (ε / 2) (by linarith) ⟨f, fun x y h1 h2 hxy => ?_⟩
+  set j := f x
+  have hy : y ∈ essSupport (C j) := by rw [hxy]; exact hfs y
+  have hx : x ∈ essSupport (C j) := hfs x
+  refine absurd (hband j) ?_
+  unfold BandNull
+  set r : ℝ := ε / 4 with hr4
+  have hr : 0 < r := by positivity
+  have hsub : (C j ∩ ball x r) ×ˢ (C j ∩ ball y r) ⊆ bandPairSet (C j) ε := by
+    rintro ⟨a, b⟩ ⟨⟨ha, hax⟩, hb, hby⟩
+    rw [mem_ball] at hax hby
+    refine ⟨ha, hb, ?_, ?_⟩
+    · show 1 - ε ≤ dist a b
+      have t1 := dist_triangle4 x a b y
+      rw [dist_comm x a] at t1
+      simp only at hax hby
+      linarith [hr4]
+    · show dist a b ≤ 1 + ε
+      have t1 := dist_triangle4 a x y b
+      rw [dist_comm y b] at t1
+      simp only at hax hby
+      linarith [hr4]
+  have hpos : 0 < (volume.prod volume) ((C j ∩ ball x r) ×ˢ (C j ∩ ball y r)) := by
+    rw [Measure.prod_prod]
+    exact ENNReal.mul_pos (hx r hr).ne' (hy r hr).ne'
+  exact fun h0 => hpos.ne' (measure_mono_null hsub h0)
+
+/-- **FS106-COMP**, second clause: "`µ₆(ε) < 1` for every `ε > 0`" is equivalent to `[Voronov2023]` Thm 1.1. -/
+theorem forall_mu_six_lt_one_iff : (∀ ε > (0 : ℝ), mu 6 ε < 1) ↔ Voronov11 := by
+  exact ⟨voronov11_of_forall_mu_lt, fun hV ε hε => mu_lt_of_voronov11 hV hε⟩
+
+/-- **Markov at one radius**: if `P(f y ≠ f 0) ≤ δ` on `B(0, ρ)`, the realisations whose disagreement with the origin fills at
+least the fraction `η` of `B(0, ρ)` have probability at most `δ / η` (`CPColouring.lintegral_ball_ne` and
+`MeasureTheory.meas_ge_le_lintegral_div`). -/
+theorem CPColouring.law_ge_ball_ne_le (c : CPColouring k) {ct : (ℂ → Fin k) → ℂ → Fin k}
+    (hct : Measurable (Function.uncurry ct)) (hmod : ∀ x, c.law {f | ct f x ≠ f x} = 0) {η ρ : ℝ} (hη0 : 0 < η)
+    (hρ : 0 < ρ) {δ : ENNReal} (hδ : ∀ y ∈ ball (0 : ℂ) ρ, c.law {f | f y ≠ f 0} ≤ δ) :
+    c.law {f | ENNReal.ofReal η * volume (ball (0 : ℂ) ρ) ≤ volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0})} ≤
+      δ / ENNReal.ofReal η := by
+  have hV0 : volume (ball (0 : ℂ) ρ) ≠ 0 := (measure_ball_pos volume 0 hρ).ne'
+  have hVt : volume (ball (0 : ℂ) ρ) ≠ ⊤ := measure_ball_lt_top.ne
+  have hη' : ENNReal.ofReal η ≠ 0 := by simpa using hη0
+  have hmeas : Measurable fun f => volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) := by
+    set E : Set ((ℂ → Fin k) × ℂ) := {p | p.2 ∈ ball (0 : ℂ) ρ ∧ ct p.1 p.2 ≠ ct p.1 0}
+    have h0 : Measurable fun p : (ℂ → Fin k) × ℂ => ct p.1 0 := hct.comp (measurable_fst.prodMk measurable_const)
+    have hEm : MeasurableSet E := (measurable_snd measurableSet_ball).inter (measurableSet_eq_fun hct h0).compl
+    exact measurable_measure_prodMk_left hEm
+  refine (meas_ge_le_lintegral_div hmeas.aemeasurable (mul_ne_zero hη' hV0)
+    (ENNReal.mul_ne_top ENNReal.ofReal_ne_top hVt)).trans ?_
+  rw [c.lintegral_ball_ne hct hmod ρ]
+  have hI : ∫⁻ y in ball (0 : ℂ) ρ, c.law {f | f y ≠ f 0} ≤ δ * volume (ball (0 : ℂ) ρ) := by
+    calc _ ≤ ∫⁻ _ in ball (0 : ℂ) ρ, δ := setLIntegral_mono measurable_const hδ
+      _ = δ * volume (ball (0 : ℂ) ρ) := setLIntegral_const _ _
+  calc _ ≤ δ * volume (ball (0 : ℂ) ρ) / (ENNReal.ofReal η * volume (ball (0 : ℂ) ρ)) := by gcongr
+    _ = δ / ENNReal.ofReal η := ENNReal.mul_div_mul_right _ _ hV0 hVt
+
+/-- **FS106-REM**, second clause: for a CP colouring, `P(0 is not kept at scale ε) → 0`, "kept" read in a jointly
+measurable modification `c̃` of the realisations. -/
+theorem CPColouring.tendsto_not_kept (c : CPColouring k) {η : ℝ} (hη0 : 0 < η) :
+    ∃ ct : (ℂ → Fin k) → ℂ → Fin k, Measurable (Function.uncurry ct) ∧ (∀ x, c.law {f | ct f x ≠ f x} = 0) ∧
+      Tendsto (fun ε => c.law {f | ¬ KeptAt (ct f ⁻¹' {ct f 0}) η ε 0}) (𝓝[>] 0) (𝓝 0) := by
+  obtain ⟨ct, hct, hmod⟩ := c.exists_modification
+  refine ⟨ct, hct, hmod, ?_⟩
+  rcases le_or_gt 1 η with h1 | h1
+  · have hk : ∀ ε f, KeptAt (ct f ⁻¹' {ct f 0}) η ε 0 := by
+      intro ε f ρ _
+      rw [ENNReal.ofReal_of_nonpos (by linarith), zero_mul]; exact bot_le
+    simp only [hk, not_true_eq_false, setOf_false, measure_empty]
+    exact tendsto_const_nhds
+  rw [ENNReal.tendsto_nhds_zero]
+  intro δ hδ
+  obtain ⟨t, ht0, ht, htδ⟩ := ENNReal.lt_iff_exists_real_btwn.1 hδ
+  have ht0' : 0 < t := by simpa using ht
+  set δ' : ENNReal := ENNReal.ofReal (η * t / 2) with hδ'
+  have hδ'0 : 0 < δ' := by rw [hδ', ENNReal.ofReal_pos]; positivity
+  obtain ⟨r, hr, hu⟩ := c.exists_unif hδ'0
+  have hev : Ioo 0 (r / 2) ∈ 𝓝[>] (0 : ℝ) := Ioo_mem_nhdsGT (by positivity)
+  filter_upwards [hev] with ε hε
+  obtain ⟨hε0, hεr⟩ := hε
+  have key : ∀ ρ, 0 < ρ → ρ < r → c.law {f | ENNReal.ofReal η * volume (ball (0 : ℂ) ρ) ≤
+      volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0})} ≤ ENNReal.ofReal (t / 2) := by
+    intro ρ hρ hρr
+    refine (c.law_ge_ball_ne_le hct hmod hη0 hρ (δ := δ') fun y hy => (hu y 0 ?_).le).trans ?_
+    · rw [mem_ball] at hy; linarith
+    · rw [hδ', ← ENNReal.ofReal_div_of_pos hη0]
+      refine le_of_eq (congrArg ENNReal.ofReal ?_)
+      field_simp
+  have hsub : {f | ¬ KeptAt (ct f ⁻¹' {ct f 0}) η ε 0} ⊆
+      {f | ENNReal.ofReal η * volume (ball (0 : ℂ) (ε / 2)) ≤
+        volume (ball (0 : ℂ) (ε / 2) ∩ {y | ct f y ≠ ct f 0})} ∪
+      {f | ENNReal.ofReal η * volume (ball (0 : ℂ) (2 * ε)) ≤
+        volume (ball (0 : ℂ) (2 * ε) ∩ {y | ct f y ≠ ct f 0})} := by
+    intro f hf
+    simp only [KeptAt, not_forall, mem_setOf_eq] at hf
+    obtain ⟨ρ, hρ, hlt⟩ := hf
+    have hA : MeasurableSet (ct f ⁻¹' {ct f 0}) :=
+      (hct.comp (measurable_const.prodMk measurable_id)) (measurableSet_singleton _)
+    have hgoal : ENNReal.ofReal η * volume (ball (0 : ℂ) ρ) ≤ volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) := by
+      have e1 : volume (ball (0 : ℂ) ρ ∩ densitySet (ct f ⁻¹' {ct f 0})) =
+          volume (ball (0 : ℂ) ρ ∩ ct f ⁻¹' {ct f 0}) :=
+        measure_congr (ae_eq_set_inter (ae_eq_refl _) (ae_eq_densitySet hA).symm)
+      have e2 : volume (ball (0 : ℂ) ρ ∩ ct f ⁻¹' {ct f 0}) + volume (ball (0 : ℂ) ρ ∩ {y | ct f y ≠ ct f 0}) =
+          volume (ball (0 : ℂ) ρ) := measure_inter_add_sdiff (ball (0 : ℂ) ρ) hA
+      have e3 : ENNReal.ofReal (1 - η) * volume (ball (0 : ℂ) ρ) + ENNReal.ofReal η * volume (ball (0 : ℂ) ρ) =
+          volume (ball (0 : ℂ) ρ) := by
+        rw [← add_mul, ← ENNReal.ofReal_add (by linarith) hη0.le, sub_add_cancel, ENNReal.ofReal_one, one_mul]
+      rw [e1] at hlt
+      by_contra hcon
+      push Not at hcon hlt
+      have hVt : volume (ball (0 : ℂ) ρ) ≠ ⊤ := measure_ball_lt_top.ne
+      have := ENNReal.add_lt_add hlt hcon
+      rw [e2, e3] at this
+      exact lt_irrefl _ this
+    rcases hρ with rfl | rfl
+    · exact Or.inl hgoal
+    · exact Or.inr hgoal
+  calc c.law {f | ¬ KeptAt (ct f ⁻¹' {ct f 0}) η ε 0}
+      ≤ c.law _ := measure_mono hsub
+    _ ≤ _ + _ := measure_union_le _ _
+    _ ≤ ENNReal.ofReal (t / 2) + ENNReal.ofReal (t / 2) :=
+        add_le_add (key _ (by positivity) (by linarith)) (key _ (by positivity) (by linarith))
+    _ = ENNReal.ofReal t := by rw [← ENNReal.ofReal_add (by positivity) (by positivity)]; ring_nf
+    _ ≤ δ := htδ.le
+
+/-! ### `exists_not_uniform_kept`: the stripe colouring
+
+A route simpler than the plan's fringe colouring (§ 17.1; the implementer's choice): squares of side `1/2` coloured mod `4`
+in each coordinate make every colouring that refines them proper at every unit pair, and inside them stripes of width
+`1/(⌊y.im⌋₊ + 1)` in `N` colours cycle, so high enough up every ball meets its own colour in about `1/N` of its area. -/
+
+/-- Integer stripes of one residue mod `N` meet an open interval of length `K` in measure at most `K/N + 2`. -/
+theorem volume_floor_emod_le {N : ℕ} (hN : 0 < N) (c0 : ℤ) (b : ℝ) {K : ℝ} (hK : 0 ≤ K) :
+    volume {w : ℝ | w ∈ Ioo b (b + K) ∧ ⌊w⌋ % (N : ℤ) = c0} ≤ ENNReal.ofReal (K / N + 2) := by
+  have hNz : (0 : ℤ) < N := by exact_mod_cast hN
+  have hNr : (0 : ℝ) < N := by exact_mod_cast hN
+  set p : ℤ := ⌊b⌋
+  set n0 : ℤ := p + (c0 - p) % (N : ℤ)
+  set J : ℕ := ⌊K / N⌋₊ + 2
+  have hsub : {w : ℝ | w ∈ Ioo b (b + K) ∧ ⌊w⌋ % (N : ℤ) = c0} ⊆
+      ⋃ m ∈ Finset.range J, Ico ((n0 + m * N : ℤ) : ℝ) ((n0 + m * N : ℤ) + 1) := by
+    rintro w ⟨⟨hw1, hw2⟩, hwc⟩
+    set n := ⌊w⌋ with hn
+    have hpn : p ≤ n := Int.floor_mono hw1.le
+    set d := n - p with hd
+    have hd0 : 0 ≤ d := by omega
+    have hdK : (d : ℝ) < K + 1 := by
+      have h1 : (n : ℝ) ≤ w := Int.floor_le w
+      have h2 : b < (p : ℝ) + 1 := Int.lt_floor_add_one b
+      have : (d : ℝ) = n - p := by push_cast [hd]; ring
+      linarith
+    have hr : (c0 - p) % (N : ℤ) = d % N := by
+      rw [← hwc, hd, Int.sub_emod, Int.emod_emod, ← Int.sub_emod]
+    have hdecomp : d = d % N + N * (d / N) := (Int.emod_add_mul_ediv d N).symm
+    have hq0 : 0 ≤ d / N := Int.ediv_nonneg hd0 hNz.le
+    set m : ℕ := (d / N).toNat with hm
+    have hmq : (m : ℤ) = d / N := Int.toNat_of_nonneg hq0
+    have hnm : n = n0 + m * N := by
+      simp only [n0, hr, hmq]; rw [hd] at hdecomp ⊢; linarith
+    have hmJ : m < J := by
+      have h1 : (m : ℝ) * N ≤ d := by
+        have : (m : ℤ) * N ≤ d := by
+          rw [hmq]; have := Int.emod_nonneg d hNz.ne'; linarith [mul_comm (N : ℤ) (d / N)]
+        exact_mod_cast this
+      have h2 : (m : ℝ) < K / N + 1 := by
+        have h3 : (m : ℝ) < (K + 1) / N := by rw [lt_div_iff₀ hNr]; linarith
+        have h4 : (K + 1) / N ≤ K / N + 1 := by
+          rw [add_div]
+          have : (1 : ℝ) / N ≤ 1 := by rw [div_le_one hNr]; exact_mod_cast hN
+          linarith
+        linarith
+      have h5 : K / N < (⌊K / N⌋₊ : ℝ) + 1 := Nat.lt_floor_add_one _
+      have h6 : (m : ℝ) < (J : ℝ) := by simp only [J]; push_cast; linarith
+      exact_mod_cast h6
+    refine mem_iUnion₂.2 ⟨m, Finset.mem_range.2 hmJ, ?_⟩
+    rw [← hnm]
+    exact ⟨Int.floor_le w, Int.lt_floor_add_one w⟩
+  refine (measure_mono hsub).trans ((measure_biUnion_finset_le _ _).trans ?_)
+  simp only [Real.volume_Ico, add_sub_cancel_left, ENNReal.ofReal_one, Finset.sum_const, Finset.card_range,
+    nsmul_eq_mul, mul_one]
+  rw [← ENNReal.ofReal_natCast]
+  refine ENNReal.ofReal_le_ofReal ?_
+  simp only [J]; push_cast
+  have := Nat.floor_le (div_nonneg hK hNr.le)
+  linarith
+
+/-- Scaled stripes: width `1/M`, one residue mod `N`, in an open interval of length `L`. -/
+theorem volume_floor_mul_emod_le {N : ℕ} (hN : 0 < N) (c0 : ℤ) (a : ℝ) {L M : ℝ} (hL : 0 ≤ L) (hM : 0 < M) :
+    volume {u : ℝ | u ∈ Ioo a (a + L) ∧ ⌊u * M⌋ % (N : ℤ) = c0} ≤ ENNReal.ofReal (L / N + 2 / M) := by
+  have heq : {u : ℝ | u ∈ Ioo a (a + L) ∧ ⌊u * M⌋ % (N : ℤ) = c0} =
+      (fun u => u * M) ⁻¹' {w : ℝ | w ∈ Ioo (a * M) (a * M + L * M) ∧ ⌊w⌋ % (N : ℤ) = c0} := by
+    ext u
+    simp only [mem_setOf_eq, mem_preimage, mem_Ioo]
+    constructor
+    · rintro ⟨⟨h1, h2⟩, h3⟩; exact ⟨⟨by nlinarith, by nlinarith⟩, h3⟩
+    · rintro ⟨⟨h1, h2⟩, h3⟩
+      refine ⟨⟨?_, ?_⟩, h3⟩
+      · by_contra h; push Not at h; nlinarith
+      · by_contra h; push Not at h; nlinarith
+  rw [heq, Real.volume_preimage_mul_right hM.ne']
+  calc ENNReal.ofReal |M⁻¹| * volume _ ≤ ENNReal.ofReal M⁻¹ * ENNReal.ofReal (L * M / N + 2) := by
+        rw [abs_of_pos (inv_pos.2 hM)]
+        exact mul_le_mul_right (volume_floor_emod_le hN c0 (a * M) (mul_nonneg hL hM.le)) _
+    _ = ENNReal.ofReal (L / N + 2 / M) := by
+        rw [← ENNReal.ofReal_mul (inv_nonneg.2 hM.le)]
+        congr 1
+        field_simp
+
+/-- Row-dependent stripes: the stripe index of `y` in the row at height `y.im`, width `1/(⌊y.im⌋₊ + 1)`. -/
+noncomputable def stripeIdx (y : ℂ) : ℤ := ⌊y.re * ((⌊y.im⌋₊ : ℝ) + 1)⌋
+
+/-- The stripe index is measurable (floors of measurable maps). -/
+theorem measurable_stripeIdx : Measurable stripeIdx := by
+  unfold stripeIdx
+  have h : Measurable fun y : ℂ => ((⌊y.im⌋₊ : ℕ) : ℝ) :=
+    (measurable_of_countable _).comp (Nat.measurable_floor.comp Complex.measurable_im)
+  exact Int.measurable_floor.comp (Complex.measurable_re.mul (h.add measurable_const))
+
+/-- A box of half-side `ρ` about `x` meets one stripe residue mod `N` in measure at most `2ρ (2ρ/N + 2/M)` when every row
+meeting the box has stripe width at most `1/M`. -/
+theorem volume_box_stripe_le {N : ℕ} (hN : 0 < N) (c0 : ℤ) (x : ℂ) {ρ M : ℝ} (hρ : 0 < ρ) (hM : 0 < M)
+    (hrow : ∀ v : ℝ, |v - x.im| < ρ → M ≤ (⌊v⌋₊ : ℝ) + 1) :
+    volume {y : ℂ | |y.re - x.re| < ρ ∧ |y.im - x.im| < ρ ∧ stripeIdx y % (N : ℤ) = c0} ≤
+      ENNReal.ofReal (2 * ρ) * ENNReal.ofReal (2 * ρ / N + 2 / M) := by
+  set T : Set (ℝ × ℝ) := {q | |q.1 - x.re| < ρ ∧ |q.2 - x.im| < ρ ∧ ⌊q.1 * ((⌊q.2⌋₊ : ℝ) + 1)⌋ % (N : ℤ) = c0}
+    with hT
+  have hpre : {y : ℂ | |y.re - x.re| < ρ ∧ |y.im - x.im| < ρ ∧ stripeIdx y % (N : ℤ) = c0} =
+      measurableEquivRealProd ⁻¹' T := by ext y; rfl
+  have hf : Measurable fun q : ℝ × ℝ => ⌊q.1 * ((⌊q.2⌋₊ : ℝ) + 1)⌋ :=
+    Int.measurable_floor.comp (measurable_fst.mul
+      (((measurable_of_countable (fun n : ℕ => (n : ℝ))).comp (Nat.measurable_floor.comp measurable_snd)).add
+        measurable_const))
+  have hm1 : Measurable fun q : ℝ × ℝ => |q.1 - x.re| := continuous_abs.measurable.comp (measurable_fst.sub_const _)
+  have hm2 : Measurable fun q : ℝ × ℝ => |q.2 - x.im| := continuous_abs.measurable.comp (measurable_snd.sub_const _)
+  have hTm : MeasurableSet T := by
+    have hc : Measurable fun _ : ℝ × ℝ => ρ := measurable_const
+    have := (measurableSet_lt hm1 hc).inter ((measurableSet_lt hm2 hc).inter
+      (((measurable_of_countable (fun n : ℤ => n % (N : ℤ))).comp hf) (measurableSet_singleton c0)))
+    exact this
+  rw [hpre, Complex.volume_preserving_equiv_real_prod.measure_preimage hTm.nullMeasurableSet, Measure.volume_eq_prod,
+    Measure.prod_apply_symm hTm]
+  calc ∫⁻ v, volume ((fun u => (u, v)) ⁻¹' T) ≤
+        ∫⁻ v, (Ioo (x.im - ρ) (x.im + ρ)).indicator (fun _ => ENNReal.ofReal (2 * ρ / N + 2 / M)) v := by
+        refine lintegral_mono fun v => ?_
+        by_cases hv : v ∈ Ioo (x.im - ρ) (x.im + ρ)
+        · rw [indicator_of_mem hv]
+          have hv' : |v - x.im| < ρ := by rw [abs_lt]; constructor <;> linarith [hv.1, hv.2]
+          have hMv : 0 < (⌊v⌋₊ : ℝ) + 1 := by positivity
+          calc volume ((fun u => (u, v)) ⁻¹' T) ≤ volume {u : ℝ | u ∈ Ioo (x.re - ρ) (x.re - ρ + 2 * ρ) ∧
+                ⌊u * ((⌊v⌋₊ : ℝ) + 1)⌋ % (N : ℤ) = c0} := by
+                refine measure_mono fun u hu => ?_
+                obtain ⟨h1, -, h3⟩ := hu
+                rw [abs_lt] at h1
+                exact ⟨⟨by linarith [h1.1], by linarith [h1.2]⟩, h3⟩
+            _ ≤ ENNReal.ofReal (2 * ρ / N + 2 / ((⌊v⌋₊ : ℝ) + 1)) :=
+                volume_floor_mul_emod_le hN c0 _ (by positivity) hMv
+            _ ≤ ENNReal.ofReal (2 * ρ / N + 2 / M) := by
+                refine ENNReal.ofReal_le_ofReal ?_
+                have h4 : 2 / ((⌊v⌋₊ : ℝ) + 1) ≤ 2 / M := div_le_div_of_nonneg_left (by norm_num) hM (hrow v hv')
+                linarith
+        · rw [indicator_of_notMem hv]
+          refine (measure_mono_null (fun u hu => ?_) measure_empty).le
+          obtain ⟨-, h2, -⟩ := hu
+          rw [abs_lt] at h2
+          exact hv ⟨by linarith [h2.1], by linarith [h2.2]⟩
+    _ = ENNReal.ofReal (2 * ρ / N + 2 / M) * volume (Ioo (x.im - ρ) (x.im + ρ)) :=
+        lintegral_indicator_const measurableSet_Ioo _
+    _ = _ := by rw [Real.volume_Ioo, mul_comm]; congr 2; ring
+
+/-- **The stripe colouring** with `n + 1` stripe colours: squares of side `1/2` coloured mod `4` in each coordinate (two
+squares of one colour are at least `3/2` apart, and a square has diameter `√2/2 < 1`), each row striped by `stripeIdx`
+mod `n + 1` (stripes of width `1/(⌊y.im⌋₊ + 1)`, finer as the row rises). -/
+noncomputable def stripeCol (n : ℕ) (y : ℂ) : Fin 4 × Fin 4 × Fin (n + 1) :=
+  (⟨(⌊2 * y.re⌋ % 4).toNat, by omega⟩, ⟨(⌊2 * y.im⌋ % 4).toNat, by omega⟩,
+    ⟨(stripeIdx y % ((n + 1 : ℕ) : ℤ)).toNat, (Int.toNat_lt' (Nat.succ_pos n)).2
+      (Int.emod_lt_of_pos _ (by positivity))⟩)
+
+/-- The origin has colour `(0, 0, 0)`; the point `3/4 + (3/2) i` has colour `(1, 3, 1)` with two stripe colours (stripe index
+`⌊(3/4) · 2⌋ = 1`). -/
+example : stripeCol 1 0 = (0, 0, 0) ∧ stripeCol 1 ((3 / 4 : ℝ) + (3 / 2 : ℝ) * I) = (1, 3, 1) := by
+  constructor
+  · simp [stripeCol, stripeIdx]
+  · have h1 : ⌊(3 / 2 : ℝ)⌋₊ = 1 := by rw [Nat.floor_eq_iff (by norm_num)]; norm_num
+    have h2 : ⌊(3 / 4 : ℝ) * ((1 : ℕ) + 1)⌋ = 1 := by rw [Int.floor_eq_iff]; norm_num
+    simp [stripeCol, stripeIdx]
+    norm_num
+    refine ⟨rfl, ?_⟩
+    rw [h1, h2]
+    rfl
+
+/-- The stripe colouring is measurable (each coordinate factors through a floor into a countable type). -/
+theorem measurable_stripeCol (n : ℕ) : Measurable (stripeCol n) := by
+  unfold stripeCol
+  refine Measurable.prodMk ?_ (Measurable.prodMk ?_ ?_)
+  · exact (measurable_of_countable (fun m : ℤ => (⟨(m % 4).toNat, by omega⟩ : Fin 4))).comp
+      (Int.measurable_floor.comp (Complex.measurable_re.const_mul 2))
+  · exact (measurable_of_countable (fun m : ℤ => (⟨(m % 4).toNat, by omega⟩ : Fin 4))).comp
+      (Int.measurable_floor.comp (Complex.measurable_im.const_mul 2))
+  · exact (measurable_of_countable (fun m : ℤ => (⟨(m % ((n + 1 : ℕ) : ℤ)).toNat,
+      (Int.toNat_lt' (Nat.succ_pos n)).2 (Int.emod_lt_of_pos _ (by positivity))⟩ : Fin (n + 1)))).comp
+      measurable_stripeIdx
+
+/-- **The stripe colouring is proper at every unit pair**: one colour mod `4` in both coordinates and distance at most `1`
+force one square of side `1/2`, whose diameter is `√2/2 < 1`. -/
+theorem stripeCol_ne_of_dist_eq_one (n : ℕ) {x y : ℂ} (h : dist x y = 1) : stripeCol n x ≠ stripeCol n y := by
+  intro hc
+  have key : ∀ a b : ℝ, |a - b| ≤ 1 → (⌊2 * a⌋ % 4).toNat = (⌊2 * b⌋ % 4).toNat → |a - b| < 1 / 2 := by
+    intro a b hab he
+    have e1 := Int.floor_le (2 * a); have e2 := Int.lt_floor_add_one (2 * a)
+    have e3 := Int.floor_le (2 * b); have e4 := Int.lt_floor_add_one (2 * b)
+    rw [abs_le] at hab
+    have hd1 : ((⌊2 * a⌋ - ⌊2 * b⌋ : ℤ) : ℝ) < 3 := by push_cast; linarith
+    have hd2 : (-3 : ℝ) < ((⌊2 * a⌋ - ⌊2 * b⌋ : ℤ) : ℝ) := by push_cast; linarith
+    have hd1' : ⌊2 * a⌋ - ⌊2 * b⌋ < 3 := by exact_mod_cast hd1
+    have hd2' : -3 < ⌊2 * a⌋ - ⌊2 * b⌋ := by exact_mod_cast hd2
+    have heq : ⌊2 * a⌋ = ⌊2 * b⌋ := by omega
+    have := Int.abs_sub_lt_one_of_floor_eq_floor heq
+    rw [abs_lt] at this ⊢
+    constructor <;> linarith [this.1, this.2]
+  have h1 : (⌊2 * x.re⌋ % 4).toNat = (⌊2 * y.re⌋ % 4).toNat := by
+    have := congrArg (fun p => (p.1 : ℕ)) hc; simpa [stripeCol] using this
+  have h2 : (⌊2 * x.im⌋ % 4).toNat = (⌊2 * y.im⌋ % 4).toNat := by
+    have := congrArg (fun p => (p.2.1 : ℕ)) hc; simpa [stripeCol] using this
+  have hd : dist x y = √((x.re - y.re) ^ 2 + (x.im - y.im) ^ 2) := Complex.dist_eq_re_im x y
+  have hsq : (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2 = 1 := by
+    have := congrArg (· ^ 2) (hd.symm.trans h)
+    simpa [Real.sq_sqrt (by positivity : (0 : ℝ) ≤ (x.re - y.re) ^ 2 + (x.im - y.im) ^ 2)] using this
+  have hre : |x.re - y.re| ≤ 1 := by
+    rw [abs_le]; constructor <;> nlinarith [sq_nonneg (x.im - y.im)]
+  have him : |x.im - y.im| ≤ 1 := by
+    rw [abs_le]; constructor <;> nlinarith [sq_nonneg (x.re - y.re)]
+  have r1 := abs_lt.1 (key _ _ hre h1)
+  have r2 := abs_lt.1 (key _ _ him h2)
+  nlinarith [r1.1, r1.2, r2.1, r2.2]
+
+/-- **FS106-REM**, third clause (ruling `plans/FS131-close-inventory.md` item 63: `η < 1` added, since at `η ≥ 1` every point
+is kept): the uniform form is FALSE — some measurable colouring proper at every unit pair has, at every `ε`, translates
+of the unit square holding non-kept points of measure bounded below. The row names FS106-TQ's control C2 (the zigzag
+colouring); the witness proved here is the stripe colouring `stripeCol` (squares of side `1/2` mod `4`, striped ever finer
+as rows rise), whose every point of the unit square high enough is non-kept at radius `ε/2`. -/
+theorem exists_not_uniform_kept {η : ℝ} (hη0 : 0 < η) (hη : η < 1) :
+    ∃ (k : ℕ) (f : ℂ → Fin k), Measurable f ∧ (∀ x y, dist x y = 1 → f x ≠ f y) ∧ ∃ m > (0 : ENNReal),
+      ∀ ε > (0 : ℝ), ∃ z : ℂ, m ≤ volume {x | x - z ∈ {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧ 0 ≤ w.im ∧ w.im ≤ 1} ∧
+        ¬ KeptAt (f ⁻¹' {f x}) η ε x} := by
+  have hη1 : 0 < 1 - η := by linarith
+  set n : ℕ := ⌈4 / (1 - η)⌉₊ with hn
+  have hN : (4 : ℝ) / ((n + 1 : ℕ) : ℝ) ≤ 1 - η := by
+    have h4 : 4 / (1 - η) ≤ n := Nat.le_ceil _
+    rw [div_le_iff₀ hη1] at h4
+    rw [div_le_iff₀ (by positivity)]
+    push_cast
+    nlinarith
+  set Q : Set ℂ := {w : ℂ | 0 ≤ w.re ∧ w.re ≤ 1 ∧ 0 ≤ w.im ∧ w.im ≤ 1} with hQ
+  set eqv := Fintype.equivFin (Fin 4 × Fin 4 × Fin (n + 1))
+  refine ⟨Fintype.card (Fin 4 × Fin 4 × Fin (n + 1)), fun y => eqv (stripeCol n y),
+    (measurable_of_countable _).comp (measurable_stripeCol n),
+    fun x y h hc => stripeCol_ne_of_dist_eq_one n h (eqv.injective hc), volume Q, ?_, ?_⟩
+  · have hsub : ball ((1 / 2 : ℂ) + (1 / 2 : ℂ) * I) (1 / 2) ⊆ Q := by
+      intro w hw
+      rw [mem_ball, dist_eq_norm] at hw
+      have h1 := Complex.abs_re_le_norm (w - ((1 / 2 : ℂ) + (1 / 2 : ℂ) * I))
+      have h2 := Complex.abs_im_le_norm (w - ((1 / 2 : ℂ) + (1 / 2 : ℂ) * I))
+      simp only [sub_re, add_re, mul_re, I_re, I_im, sub_im, add_im, mul_im] at h1 h2
+      norm_num at h1 h2
+      rw [abs_le'] at h1 h2
+      exact ⟨by linarith [h1.1, h1.2], by linarith [h1.1, h1.2], by linarith [h2.1, h2.2], by linarith [h2.1, h2.2]⟩
+    exact (measure_ball_pos volume _ (by norm_num)).trans_le (measure_mono hsub)
+  intro ε hε
+  set ρ : ℝ := ε / 2 with hρdef
+  have hρ : 0 < ρ := by positivity
+  set M : ℝ := 4 / ((1 - η) * ρ) with hMdef
+  have hM : 0 < M := by positivity
+  set Y : ℝ := ρ + M + 1 with hY
+  have not_kept : ∀ x, x - (Y : ℂ) * I ∈ Q → ¬ KeptAt ((fun y => eqv (stripeCol n y)) ⁻¹' {eqv (stripeCol n x)}) η ε x := by
+    intro x hx hk
+    have hxim : Y ≤ x.im := by
+      have := hx.2.2.1
+      simp only [sub_im, mul_im, ofReal_re, I_im, ofReal_im, I_re] at this
+      linarith
+    have hA : (fun y => eqv (stripeCol n y)) ⁻¹' {eqv (stripeCol n x)} = stripeCol n ⁻¹' {stripeCol n x} := by
+      ext y; simp [eqv.injective.eq_iff]
+    rw [hA] at hk
+    have hAm : MeasurableSet (stripeCol n ⁻¹' {stripeCol n x}) := measurable_stripeCol n (measurableSet_singleton _)
+    have h1 := hk ρ (Or.inl rfl)
+    rw [measure_congr (ae_eq_set_inter (ae_eq_refl _) (ae_eq_densitySet hAm).symm)] at h1
+    set c0 : ℤ := stripeIdx x % ((n + 1 : ℕ) : ℤ)
+    have hsub : ball x ρ ∩ stripeCol n ⁻¹' {stripeCol n x} ⊆
+        {y : ℂ | |y.re - x.re| < ρ ∧ |y.im - x.im| < ρ ∧ stripeIdx y % ((n + 1 : ℕ) : ℤ) = c0} := by
+      rintro y ⟨hy1, hy2⟩
+      rw [mem_ball, dist_eq_norm] at hy1
+      refine ⟨?_, ?_, ?_⟩
+      · have := Complex.abs_re_le_norm (y - x); rw [sub_re] at this; linarith
+      · have := Complex.abs_im_le_norm (y - x); rw [sub_im] at this; linarith
+      · have h3 := congrArg (fun p => (p.2.2 : ℕ)) (show stripeCol n y = stripeCol n x from hy2)
+        simp only [stripeCol] at h3
+        have hNz : (0 : ℤ) < ((n + 1 : ℕ) : ℤ) := by positivity
+        have e1 := Int.emod_nonneg (stripeIdx y) hNz.ne'
+        have e2 := Int.emod_nonneg (stripeIdx x) hNz.ne'
+        simp only [c0]
+        omega
+    have hrow : ∀ v : ℝ, |v - x.im| < ρ → M ≤ (⌊v⌋₊ : ℝ) + 1 := by
+      intro v hv
+      rw [abs_lt] at hv
+      have := Nat.lt_floor_add_one v
+      linarith [hv.1]
+    have hb := volume_box_stripe_le (Nat.succ_pos n) c0 x hρ hM hrow
+    have hlt : ENNReal.ofReal (2 * ρ) * ENNReal.ofReal (2 * ρ / ((n + 1 : ℕ) : ℝ) + 2 / M) <
+        ENNReal.ofReal (1 - η) * volume (ball x ρ) := by
+      rw [volume_ball_ofReal x hρ.le, ← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul hη1.le]
+      refine (ENNReal.ofReal_lt_ofReal_iff (by positivity)).2 ?_
+      have h2M : 2 / M = (1 - η) * ρ / 2 := by rw [hMdef]; field_simp; ring
+      have hNle : 2 * ρ / ((n + 1 : ℕ) : ℝ) ≤ (1 - η) * ρ / 2 := by
+        have : 2 * ρ / ((n + 1 : ℕ) : ℝ) = ρ / 2 * (4 / ((n + 1 : ℕ) : ℝ)) := by ring
+        rw [this]
+        nlinarith
+      rw [h2M]
+      nlinarith [Real.pi_gt_three, mul_pos hη1 (mul_pos hρ hρ)]
+    exact absurd (h1.trans ((measure_mono hsub).trans hb)) (not_le.2 hlt)
+  refine ⟨(Y : ℂ) * I, le_of_eq ?_⟩
+  have hall : {x | x - (Y : ℂ) * I ∈ Q ∧ ¬ KeptAt ((fun y => eqv (stripeCol n y)) ⁻¹' {eqv (stripeCol n x)}) η ε x} =
+      (fun x => x + -((Y : ℂ) * I)) ⁻¹' Q := by
+    ext x
+    simp only [mem_setOf_eq, mem_preimage, ← sub_eq_add_neg]
+    exact ⟨fun h => h.1, fun h => ⟨h, not_kept x h⟩⟩
+  rw [hall, measure_preimage_add_right]
+
+/-- **FS121-D4-FACE** with **FS121-V5-FACE-SHARP**'s hypothesis `ρ² ≥ 2g − g²` (SR1 item 6), one class (G92: the argument
+reads only `A`'s own unit pairs): if the half-box and the far box lie almost everywhere in `A`, no point of `supp A` is at
+distance exactly `1` from `x`. The far box lies between `x` and `x + e` (`g < 1`; ruling, `plans/FS131-close-inventory.md` item
+37: for `g > 2` the sharp hypothesis holds for every `ρ` and the clause is false — a far box beyond `x + 2e` meets no unit circle
+about the points near `x + e`). -/
+theorem face {A : Set ℂ} (hA : MeasurableSet A) (hnull : UnitPairsNull A) {x : ℂ} {θ ε ε' g ρ : ℝ} (hε : 0 < ε)
+    (hε' : 0 < ε') (hg : 0 < g) (hg1 : g < 1) (hρ : 0 < ρ) (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2)
+    (hhalf : volume (halfBox x θ ε \ A) = 0) (hfar : volume (farBox x θ g ε' ρ \ A) = 0) :
+    ∀ y ∈ essSupport A, dist x y ≠ 1 := by
+  intro y hy hxy
+  by_cases hyn : y = x + e θ
+  · obtain ⟨r, hr, hm⟩ := circles_meet_boxes_at_normal hε hε' hg hg1 hρ hsharp
+    refine not_unitPairsNull_of_circles_meet hA ((isOpen_halfBox x θ ε).union (isOpen_farBox x θ g ε' ρ)) ?_ hy hr
+      (N := {y}) (measure_singleton y) ?_ hnull
+    · rw [union_sdiff_distrib]; exact measure_union_null hhalf hfar
+    · intro y' hy' hy'N
+      exact hm y' (hyn ▸ hy') (fun h => hy'N (by rw [hyn]; exact h))
+  · obtain ⟨r, hr, hm⟩ := circles_meet_halfBox hε hxy hyn
+    exact not_unitPairsNull_of_circles_meet hA (isOpen_halfBox x θ ε) hhalf hy hr (N := ∅) (by simp)
+      (fun y' hy' _ => hm y' hy') hnull
+
+/-- A set filling a half-box behind `x` almost everywhere has positive upper density at `x`. -/
+theorem upperDensityAt_pos_of_halfBox {A : Set ℂ} {x : ℂ} {θ ε : ℝ} (hε : 0 < ε)
+    (hhalf : volume (halfBox x θ ε \ A) = 0) : 0 < upperDensityAt A x := by
+  have hev : ∀ᶠ r in 𝓝[>] (0 : ℝ), (1 / 16 : ENNReal) ≤ densityRatio A x r := by
+    have : Ioo (0 : ℝ) ε ∈ 𝓝[>] (0 : ℝ) := Ioo_mem_nhdsGT hε
+    filter_upwards [this] with r hr
+    have hr0 : 0 < r := hr.1
+    have hεr : r < ε := hr.2
+    set c : ℂ := x - ((r / 2 : ℝ) : ℂ) * e θ with hc
+    have hne : e θ ≠ 0 := by
+      intro h; have := norm_e θ; rw [h, norm_zero] at this; exact zero_ne_one this
+    have hsub : ball c (r / 4) ⊆ halfBox x θ ε := by
+      intro w hw
+      rw [mem_ball, dist_eq_norm] at hw
+      set q : ℂ := (w - x) / e θ with hq
+      have hqn : ‖q + ((r / 2 : ℝ) : ℂ)‖ < r / 4 := by
+        have : q + ((r / 2 : ℝ) : ℂ) = (w - c) / e θ := by
+          rw [hc, hq]; field_simp; ring
+        rw [this, norm_div, norm_e, div_one]; exact hw
+      have h1 : |q.re + r / 2| < r / 4 := by
+        have := Complex.abs_re_le_norm (q + ((r / 2 : ℝ) : ℂ)); rw [Complex.add_re, Complex.ofReal_re] at this; linarith
+      have h2 : |q.im| < r / 4 := by
+        have := Complex.abs_im_le_norm (q + ((r / 2 : ℝ) : ℂ)); rw [Complex.add_im, Complex.ofReal_im, add_zero] at this; linarith
+      rw [abs_lt] at h1 h2
+      refine ⟨-q.re, q.im, by linarith [h1.1, h1.2], by linarith [h1.1, h1.2], ?_, ?_⟩
+      · rw [abs_lt]; constructor <;> linarith [h2.1, h2.2]
+      · have : (-((-q.re : ℝ) : ℂ) + (q.im : ℂ) * I) = q := by
+          apply Complex.ext <;> simp
+        rw [this, hq]; field_simp; ring
+    have hcl : ball c (r / 4) ⊆ closedBall x r := by
+      intro w hw
+      rw [mem_ball] at hw
+      rw [mem_closedBall]
+      have h3 : dist c x = r / 2 := by
+        rw [hc, dist_eq_norm, sub_sub_cancel_left, norm_neg, norm_mul, norm_e, mul_one, Complex.norm_real,
+          Real.norm_eq_abs, abs_of_pos (by linarith)]
+      linarith [dist_triangle w c x]
+    have hmeas : volume (ball c (r / 4)) ≤ volume (A ∩ closedBall x r) := by
+      have h4 : volume (ball c (r / 4) \ A) = 0 :=
+        measure_mono_null (t := halfBox x θ ε \ A) (fun w hw => ⟨hsub hw.1, hw.2⟩) hhalf
+      calc volume (ball c (r / 4)) ≤ volume (ball c (r / 4) ∩ A) + volume (ball c (r / 4) \ A) :=
+            measure_le_inter_add_sdiff _ _ _
+        _ = volume (ball c (r / 4) ∩ A) := by rw [h4, add_zero]
+        _ ≤ volume (A ∩ closedBall x r) := measure_mono fun w hw => ⟨hw.2, hcl hw.1⟩
+    unfold densityRatio
+    refine (ENNReal.le_div_iff_mul_le (Or.inl (measure_closedBall_pos volume x hr0).ne') (Or.inl measure_closedBall_lt_top.ne)).2 ?_
+    refine le_trans ?_ hmeas
+    rw [Complex.volume_ball, Complex.volume_closedBall]
+    have h4 : ENNReal.ofReal (r / 4) = ENNReal.ofReal r / 4 := by
+      rw [ENNReal.ofReal_div_of_pos (by norm_num)]; simp
+    rw [h4, div_eq_mul_inv (ENNReal.ofReal r), mul_pow, ← ENNReal.inv_pow]
+    have h16 : (4 : ENNReal) ^ 2 = 16 := by norm_num
+    rw [h16, one_div]
+    refine le_of_eq ?_
+    ring
+  exact lt_of_lt_of_le (by norm_num) (le_limsup_of_frequently_le hev.frequently)
+
+/-- **FS121-D4-FACE**, last clause: so in a saturated colouring the colour has density `1` at `x` (`g < 1`, ruling item 37). -/
+theorem face_densitySet {C : Fin k → Set ℂ} (hadm : IsAdmissible C) (hsat : Saturated C) {j : Fin k} {x : ℂ}
+    {θ ε ε' g ρ : ℝ} (hε : 0 < ε) (hε' : 0 < ε') (hg : 0 < g) (hg1 : g < 1) (hρ : 0 < ρ)
+    (hsharp : 2 * g - g ^ 2 ≤ ρ ^ 2)
+    (hhalf : volume (halfBox x θ ε \ C j) = 0) (hfar : volume (farBox x θ g ε' ρ \ C j) = 0) :
+    x ∈ densitySet (C j) := by
+  have hA := hadm j
+  have hpos := upperDensityAt_pos_of_halfBox hε hhalf
+  by_contra hx
+  obtain ⟨y, hy, hxy⟩ := hsat j x ⟨hpos, hx⟩
+  rw [← essSupport_eq_closure_densitySet] at hy
+  exact face hA.1 hA.2 hε hε' hg hg1 hρ hsharp hhalf hfar y hy hxy
+
+/-- **FS121-V5-FACE-SHARP**, its failure half: whenever `ρ² < 2g − g²` the first clause fails for some a.e.-proper colouring
+(V5 § 2.2's explicit colouring at `g = 1/10`, `ρ = 2/5`, generalized). Ruling, `plans/FS131-close-inventory.md` item 86:
+`2ρ < 1` and `g² + ρ² < 1` added — outside them the far box holds unit pairs, or the half-box and far box together do, so no
+class of an a.e.-proper colouring holds both (counterexamples `g = 1, ρ = 9/10` and `g = 19/20, ρ = 9/20`). -/
+theorem exists_face_fails {g ρ : ℝ} (hg : 0 < g) (hρ : 0 < ρ) (hlt : ρ ^ 2 < 2 * g - g ^ 2) (hρ2 : 2 * ρ < 1)
+    (hgρ : g ^ 2 + ρ ^ 2 < 1) :
+    ∃ (k : ℕ) (c : AeColouring k) (j : Fin k) (x : ℂ) (θ ε ε' : ℝ), 0 < ε ∧ 0 < ε' ∧
+      volume (halfBox x θ ε \ c.cls j) = 0 ∧ volume (farBox x θ g ε' ρ \ c.cls j) = 0 ∧
+      ∃ y ∈ essSupport (c.cls j), dist x y = 1 := by
+  obtain ⟨ε, ε', δ, hε, hε', hδ, hno⟩ := exists_faceFailClass_noUnitPairs hg hρ hlt hρ2 hgρ 0 0
+  have hD := measurableSet_faceFailClass 0 0 ε g ε' ρ δ
+  obtain ⟨c, hc⟩ := exists_aeColouring_of_noUnitPairs hD hno
+  refine ⟨10, c, 9, 0, 0, ε, ε', hε, hε', ?_, ?_, e 0, ?_, ?_⟩
+  · rw [hc]; exact measure_mono_null (fun z hz => (hz.2 (Or.inl (Or.inl hz.1))).elim) measure_empty
+  · rw [hc]; exact measure_mono_null (fun z hz => (hz.2 (Or.inl (Or.inr hz.1))).elim) measure_empty
+  · rw [hc]
+    simpa using add_e_mem_essSupport_faceFailClass 0 0 ε g ε' ρ hδ
+  · simp [dist_eq_norm]
+
+end HadwigerNelson.Plane

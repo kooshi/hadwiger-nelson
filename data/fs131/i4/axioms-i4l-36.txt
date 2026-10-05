@@ -1,0 +1,4 @@
+'HadwigerNelson.Plane.normalPt_add_eq_framePt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsHorn.isRingArc_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.flankQ_upper' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.flankQ_upper_shadow' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
