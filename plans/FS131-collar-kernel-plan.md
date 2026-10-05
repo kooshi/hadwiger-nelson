@@ -470,7 +470,7 @@ children above become kernel theorems with no change on this branch. No gate run
 
 **Front-page drafts**: none this job — the milestone closes at the gate, after lane C; the counts and ledger rows are drafted then.
 
-**Re-price, final**: lane G came in at ~1,330 lines of Lean (`RadialPush` +900 over the skeleton, `CollarMap` +330, the tools aside) against the
-plan's 2,250 — about 0.6×.
+**Re-price, final**: lane G came in at ~1,190 lines of Lean (`git diff --stat b2ccfb7b`: `RadialPush` +905 −20, `CollarMap` 463 of which 156
+are the moved block; the tools aside) against the plan's 2,250 — about 0.53×.
 
 ## Stage 11 — SAVED (FS131-CG1)
