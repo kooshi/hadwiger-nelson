@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Chain
+import Proofs.HadwigerNelson.Plane.Tiles
 
 /-!
 # The limit of a locally finite sequence of local steps (FS131-KL1)
@@ -98,26 +99,251 @@ theorem onRingArc_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) (hW : IsOpen W) {p x 
   · exact ⟨h.1 ▸ hz'.1, fun hzI => hz'.2 ((h.2 z fun hc => hc (hsub hz)).1.mp hzI)⟩
   · exact ⟨h.1.symm ▸ hz'.1, fun hzI => hz'.2 ((h.2 z fun hc => hc (hsub hz)).1.mpr hzI)⟩
 
+/-- Two maps agreeing on `W` have the same interior points in each subset of `W`. -/
+theorem interiorPts_inter_eq_of_agreesOn (h : M.AgreesOff F Wᶜ) {U : Set ℂ} (hU : U ⊆ W) :
+    M.interiorPts ∩ U = F.interiorPts ∩ U := by
+  ext z
+  constructor
+  · rintro ⟨hz, hzU⟩; exact ⟨(h.2 z fun hc => hc (hU hzU)).1.mpr hz, hzU⟩
+  · rintro ⟨hz, hzU⟩; exact ⟨(h.2 z fun hc => hc (hU hzU)).1.mp hz, hzU⟩
+
+/-- Closure membership in a colour class cut by any set, at a point of the open set `W`, is read on `W`. -/
+theorem mem_closure_region_inter_iff (h : M.AgreesOff F Wᶜ) (hW : IsOpen W) {x : ℂ} (hx : x ∈ W) (j : Fin k)
+    (A : Set ℂ) : x ∈ closure (M.region j ∩ A) ↔ x ∈ closure (F.region j ∩ A) := by
+  refine mem_closure_iff_of_inter_eq hW hx ?_
+  rw [inter_right_comm, region_inter_eq_of_agreesOn h, inter_right_comm]
+
+/-- **Sectors are read in their ball.** -/
+theorem isSector_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) {v : ℂ} {r : ℝ} (hr : ball v r ⊆ W) {S : Set ℂ} :
+    M.IsSector v r S ↔ F.IsSector v r S := by
+  unfold IsSector
+  rw [interiorPts_inter_eq_of_agreesOn h hr]
+
+/-- A sector lies in its ball. -/
+theorem IsSector.subset_ball {G : ArcMap k} {v : ℂ} {r : ℝ} {S : Set ℂ} (hS : G.IsSector v r S) : S ⊆ ball v r := by
+  obtain ⟨x, -, rfl, -⟩ := hS
+  exact (connectedComponentIn_subset _ _).trans inter_subset_right
+
+/-- **The sectors of one colour are read in their ball.** -/
+theorem sectorsOf_eq_of_agreesOn (h : M.AgreesOff F Wᶜ) {v : ℂ} {r : ℝ} (hr : ball v r ⊆ W) (c : Fin k) :
+    M.sectorsOf v r c = F.sectorsOf v r c := by
+  ext S
+  simp only [sectorsOf, mem_setOf_eq]
+  constructor
+  · rintro ⟨hS, hc⟩
+    refine ⟨(isSector_iff_of_agreesOn h hr).mp hS, fun z hz => ?_⟩
+    have := hc hz
+    simp only [mem_preimage, mem_singleton_iff] at this ⊢
+    rw [← this]; exact (h.2 z fun hc' => hc' (hr (hS.subset_ball hz))).2
+  · rintro ⟨hS, hc⟩
+    refine ⟨(isSector_iff_of_agreesOn h hr).mpr hS, fun z hz => ?_⟩
+    have := hc hz
+    simp only [mem_preimage, mem_singleton_iff] at this ⊢
+    rw [← this]; exact (h.2 z fun hc' => hc' (hr (hS.subset_ball hz))).2.symm
+
+/-- Small radii: eventually in `𝓝[>] 0`, the ball of radius `r` about `v` lies in `W` (given `B̄(v, 3) ⊆ W`). -/
+theorem eventually_ball_subset {v : ℂ} (hv : closedBall v 3 ⊆ W) : ∀ᶠ r in 𝓝[>] (0 : ℝ), ball v r ⊆ W ∧ r < 1 := by
+  filter_upwards [Ioo_mem_nhdsGT (show (0 : ℝ) < 1 by norm_num)] with r hr
+  exact ⟨(ball_subset_closedBall.trans (closedBall_subset_closedBall (by linarith [hr.2]))).trans hv, hr.2⟩
+
+/-- **`s_c(v)` is read near `v`.** -/
+theorem hasSectors_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) {v : ℂ} (hv : closedBall v 3 ⊆ W) (c : Fin k) (n : ℕ) :
+    M.HasSectors v c n ↔ F.HasSectors v c n := by
+  refine eventually_congr ?_
+  filter_upwards [eventually_ball_subset hv] with r hr
+  rw [sectorsOf_eq_of_agreesOn h hr.1]
+
+/-- **A repeated colour is read near `v`.** -/
+theorem hasRepeatedColour_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) {v : ℂ} (hv : closedBall v 3 ⊆ W) :
+    M.HasRepeatedColour v ↔ F.HasRepeatedColour v := by
+  refine exists_congr fun c => eventually_congr ?_
+  filter_upwards [eventually_ball_subset hv] with r hr
+  rw [sectorsOf_eq_of_agreesOn h hr.1]
+
+/-- A horn set lies in its ball. -/
+theorem hornSet_subset_ball (v : ℂ) (α κ₁ κ₂ r : ℝ) : hornSet v α κ₁ κ₂ r ⊆ ball v r := fun _ hz => hz.1
+
+/-- **Horns are read near `v`.** -/
+theorem isHorn_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) {v : ℂ} (hv : closedBall v 3 ⊆ W) (α κ₁ κ₂ : ℝ) (c : Fin k) :
+    M.IsHorn v α κ₁ κ₂ c ↔ F.IsHorn v α κ₁ κ₂ c := by
+  refine and_congr_right fun _ => eventually_congr ?_
+  filter_upwards [eventually_ball_subset hv] with r hr
+  refine and_congr (isSector_iff_of_agreesOn h hr.1) ⟨fun hc z hz => ?_, fun hc z hz => ?_⟩
+  · have := hc hz
+    simp only [mem_preimage, mem_singleton_iff] at this ⊢
+    rw [← this]; exact (h.2 z fun hc' => hc' (hr.1 (hornSet_subset_ball _ _ _ _ _ hz))).2
+  · have := hc hz
+    simp only [mem_preimage, mem_singleton_iff] at this ⊢
+    rw [← this]; exact (h.2 z fun hc' => hc' (hr.1 (hornSet_subset_ball _ _ _ _ _ hz))).2.symm
+
+/-- A set inside `W` lies in one map's colour class exactly when in the other's. -/
+theorem subset_region_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) {A : Set ℂ} (hA : A ⊆ W) (j : Fin k) :
+    A ⊆ M.region j ↔ A ⊆ F.region j := by
+  constructor <;> intro hsub z hz
+  · have : z ∈ M.region j ∩ W := ⟨hsub hz, hA hz⟩
+    rw [region_inter_eq_of_agreesOn h] at this; exact this.1
+  · have : z ∈ F.region j ∩ W := ⟨hsub hz, hA hz⟩
+    rw [← region_inter_eq_of_agreesOn h] at this; exact this.1
+
+/-- **Flanks are read near `v`.** -/
+theorem isFlankAbove_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) {v : ℂ} (hv : closedBall v 3 ⊆ W) (α κ₂ : ℝ) (g : Fin k) :
+    M.IsFlankAbove v α κ₂ g ↔ F.IsFlankAbove v α κ₂ g := by
+  refine exists_congr fun κ' => and_congr_right fun _ => eventually_congr ?_
+  filter_upwards [eventually_ball_subset hv] with r hr
+  exact subset_region_iff_of_agreesOn h ((hornSet_subset_ball _ _ _ _ _).trans hr.1) g
+
+theorem isFlankBelow_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) {v : ℂ} (hv : closedBall v 3 ⊆ W) (α κ₁ : ℝ) (g : Fin k) :
+    M.IsFlankBelow v α κ₁ g ↔ F.IsFlankBelow v α κ₁ g := by
+  refine exists_congr fun κ' => and_congr_right fun _ => eventually_congr ?_
+  filter_upwards [eventually_ball_subset hv] with r hr
+  exact subset_region_iff_of_agreesOn h ((hornSet_subset_ball _ _ _ _ _).trans hr.1) g
+
+/-- **Clearness at a point of `B(v, 1)` is read in `B̄(v, 2)`.** -/
+theorem isClear_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) {v z : ℂ} (hv : closedBall v 3 ⊆ W) (hz : z ∈ ball v 1)
+    (g : Fin k) : M.IsClear g z ↔ F.IsClear g z := by
+  have hW : ∀ y, dist z y = 1 → y ∈ W := fun y hy => hv (by
+    rw [mem_closedBall]; rw [mem_ball] at hz
+    linarith [dist_triangle y z v, dist_comm y z])
+  constructor <;> intro hc y hy hyz
+  · have : y ∈ F.region g ∩ W := ⟨hy, hW y hyz⟩
+    rw [← region_inter_eq_of_agreesOn h] at this; exact hc y this.1 hyz
+  · have : y ∈ M.region g ∩ W := ⟨hy, hW y hyz⟩
+    rw [region_inter_eq_of_agreesOn h] at this; exact hc y this.1 hyz
+
+/-- **Tiles near `W`'s core are shared** (validity: a tile lies in the unit disc about each point of its closure). -/
+theorem isTile_of_agreesOn (hM : M.Valid) (hF : F.Valid) (h : M.AgreesOff F Wᶜ) {T : Set ℂ} (hT : M.IsTile T) {x : ℂ}
+    (hx : x ∈ closure T) (hxW : ball x 1 ⊆ W) : F.IsTile T := by
+  have hTW : T ⊆ W := (hT.subset_ball hM hx).trans hxW
+  have hTF : T ⊆ F.interiorPts := fun z hz => by
+    have : z ∈ M.interiorPts ∩ W := ⟨hT.subset_interiorPts hz, hTW hz⟩
+    rw [interiorPts_inter_eq_of_agreesOn h subset_rfl] at this; exact this.1
+  obtain ⟨y, hy⟩ := hT.nonempty
+  have hTy : T = connectedComponentIn M.interiorPts y := by
+    obtain ⟨y', -, hTeq⟩ := hT
+    rw [hTeq] at hy ⊢; exact connectedComponentIn_eq hy
+  have hT' : F.IsTile (connectedComponentIn F.interiorPts y) := ⟨y, hTF hy, rfl⟩
+  have h1 : T ⊆ connectedComponentIn F.interiorPts y := hT.isPreconnected.subset_connectedComponentIn hy hTF
+  have h2 : connectedComponentIn F.interiorPts y ⊆ T := by
+    have hsubW : connectedComponentIn F.interiorPts y ⊆ W := (hT'.subset_ball hF (closure_mono h1 hx)).trans hxW
+    have hsubM : connectedComponentIn F.interiorPts y ⊆ M.interiorPts := fun z hz => by
+      have : z ∈ F.interiorPts ∩ W := ⟨hT'.subset_interiorPts hz, hsubW hz⟩
+      rw [← interiorPts_inter_eq_of_agreesOn h subset_rfl] at this; exact this.1
+    rw [hTy]
+    exact isPreconnected_connectedComponentIn.subset_connectedComponentIn (mem_connectedComponentIn (hTF hy)) hsubM
+  rw [Subset.antisymm h1 h2]; exact hT'
+
+/-- **Tiles of one colour near `W`'s core are shared.** -/
+theorem tileOf_iff_of_agreesOn (hM : M.Valid) (hF : F.Valid) (h : M.AgreesOff F Wᶜ) {T : Set ℂ} {x : ℂ}
+    (hx : x ∈ closure T) (hxW : ball x 1 ⊆ W) (c : Fin k) : M.TileOf c T ↔ F.TileOf c T := by
+  have key : ∀ {G G' : ArcMap k}, G.Valid → G'.Valid → G.AgreesOff G' Wᶜ → G.TileOf c T → G'.TileOf c T := by
+    intro G G' hG hG' hGG' ⟨hT, hc⟩
+    refine ⟨isTile_of_agreesOn hG hG' hGG' hT hx hxW, fun z hz => ?_⟩
+    have := hc hz
+    simp only [mem_preimage, mem_singleton_iff] at this ⊢
+    rw [← this]
+    exact (hGG'.2 z fun hc' => hc' (hxW (hT.subset_ball hG hx hz))).2
+  exact ⟨key hM hF h, key hF hM h.symm⟩
+
+/-- **In- and out-type at a contact are read in `B(v, 2)`** (valid maps). -/
+theorem inType_iff_of_agreesOn (hM : M.Valid) (hF : F.Valid) (h : M.AgreesOff F Wᶜ) {v w : ℂ}
+    (hv : closedBall v 3 ⊆ W) (hw : dist w v = 1) (c : Fin k) :
+    (M.InType v c w ↔ F.InType v c w) ∧ (M.OutType v c w ↔ F.OutType v c w) := by
+  have hwW : ball w 1 ⊆ W := fun y hy => hv (by
+    rw [mem_closedBall]; rw [mem_ball] at hy; linarith [dist_triangle y w v])
+  refine ⟨⟨fun hin T hT hwT => hin T ((tileOf_iff_of_agreesOn hM hF h hwT hwW c).mpr hT) hwT,
+    fun hin T hT hwT => hin T ((tileOf_iff_of_agreesOn hM hF h hwT hwW c).mp hT) hwT⟩,
+    ⟨fun hout T hT hwT => hout T ((tileOf_iff_of_agreesOn hM hF h hwT hwW c).mpr hT) hwT,
+    fun hout T hT hwT => hout T ((tileOf_iff_of_agreesOn hM hF h hwT hwW c).mp hT) hwT⟩⟩
+
+/-- **The allowed cone is read in `B̄(v, 3)`** (valid maps). -/
+theorem allowedCone_eq_of_agreesOn (hM : M.Valid) (hF : F.Valid) (h : M.AgreesOff F Wᶜ) (hW : IsOpen W) {v : ℂ}
+    (hv : closedBall v 3 ⊆ W) (c : Fin k) : M.allowedCone v c = F.allowedCone v c := by
+  have hvW : v ∈ W := hv (mem_closedBall_self (by norm_num))
+  have hcont : ∀ w, M.IsContact v c w ↔ F.IsContact v c w := by
+    intro w
+    unfold IsContact
+    refine and_congr (by rw [coloursAt_eq_of_agreesOn h hW hvW]) (and_congr_right fun hw => ?_)
+    have hwW : w ∈ W := hv (by rw [mem_closedBall, hw]; norm_num)
+    exact mem_closure_iff_of_inter_eq hW hwW (region_inter_eq_of_agreesOn h c)
+  ext d
+  simp only [allowedCone, mem_setOf_eq]
+  refine forall_congr' fun w => ?_
+  rw [hcont w]
+  refine imp_congr_right fun hw => ?_
+  obtain ⟨hin, hout⟩ := inType_iff_of_agreesOn hM hF h hv hw.2.1 c
+  rw [hin, hout]
+
 /-- **MERGE's availability is read in `B̄(v, 3)`** (valid maps: in- and out-type through the tile dichotomy at a carried colour). -/
 theorem mergeAvailable_iff_of_agreesOn (hM : M.Valid) (hF : F.Valid) (h : M.AgreesOff F Wᶜ) (hW : IsOpen W) {v : ℂ}
     (hv : closedBall v 3 ⊆ W) : M.MergeAvailable v ↔ F.MergeAvailable v := by
-  sorry
+  unfold MergeAvailable
+  refine exists_congr fun c => exists_congr fun n => and_congr_right fun _ => ?_
+  rw [hasSectors_iff_of_agreesOn h hv c n, allowedCone_eq_of_agreesOn hM hF h hW hv c]
 
 /-- **MERGE-RAY's availability is read near `v`** (horns only). -/
 theorem rayAvailable_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) (hW : IsOpen W) {v : ℂ} (hv : closedBall v 3 ⊆ W) :
     M.RayAvailable v ↔ F.RayAvailable v := by
-  sorry
+  have _ := hW
+  unfold RayAvailable
+  simp only [isHorn_iff_of_agreesOn h hv]
 
 /-- **SHAVE's availability is read in `B̄(v, 3)`** (horns, flanks, and clearness on unit circles about points near `v`). -/
 theorem shaveAvailable_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) (hW : IsOpen W) {v : ℂ} (hv : closedBall v 3 ⊆ W) :
     M.ShaveAvailable v ↔ F.ShaveAvailable v := by
-  sorry
+  have _ := hW
+  unfold ShaveAvailable
+  simp only [isHorn_iff_of_agreesOn h hv, isFlankAbove_iff_of_agreesOn h hv, isFlankBelow_iff_of_agreesOn h hv]
+  refine exists_congr fun c => exists_congr fun g => exists_congr fun hh => exists_congr fun α =>
+    exists_congr fun κ₁ => exists_congr fun κ₂ => exists_congr fun σ => and_congr_right fun _ =>
+    and_congr_right fun _ => and_congr_right fun _ => and_congr_right fun _ => and_congr_right fun _ =>
+    eventually_congr ?_
+  filter_upwards [eventually_ball_subset hv] with r hr
+  refine forall₂_congr fun z hz => ?_
+  have hz1 : z ∈ ball v 1 := ball_subset_ball hr.2.le (hornSet_subset_ball _ _ _ _ _ hz)
+  rw [isClear_iff_of_agreesOn h hv hz1, isClear_iff_of_agreesOn h hv hz1]
+
+/-- **Ring arcs with their sides are read near the ring** (`B̄(p, 3) ⊆ W`). -/
+theorem isRingArc_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) (hW : IsOpen W) {p : ℂ} (hp : closedBall p 3 ⊆ W)
+    (θ₁ θ₂ : ℝ) (c c' : Fin k) : M.IsRingArc p θ₁ θ₂ c c' ↔ F.IsRingArc p θ₁ θ₂ c c' := by
+  have hpt : ∀ θ, ringPt p θ ∈ W := fun θ => hp (by rw [mem_closedBall, dist_ringPt]; norm_num)
+  have hring : ringArc p θ₁ θ₂ ⊆ W := by
+    rintro _ ⟨θ, -, rfl⟩; exact hpt θ
+  unfold IsRingArc
+  rw [onRingArc_iff_of_agreesOn h hW (x := p) hring]
+  refine and_congr_right fun _ => and_congr_right fun _ => forall₂_congr fun θ _ => ?_
+  have hin : M.innerColours p (ringPt p θ) = F.innerColours p (ringPt p θ) := by
+    ext j; exact mem_closure_region_inter_iff h hW (hpt θ) j _
+  have hout : M.outerColours p (ringPt p θ) = F.outerColours p (ringPt p θ) := by
+    ext j; simp only [outerColours, mem_setOf_eq, Set.sdiff_eq]; exact mem_closure_region_inter_iff h hW (hpt θ) j _
+  rw [hin, hout]
+
+/-- **(Q) arcs are read near the ring.** -/
+theorem isQArc_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) (hW : IsOpen W) {p : ℂ} (hp : closedBall p 3 ⊆ W)
+    (θ₁ θ₂ : ℝ) : M.IsQArc p θ₁ θ₂ ↔ F.IsQArc p θ₁ θ₂ := by
+  have hpW : p ∈ W := hp (mem_closedBall_self (by norm_num))
+  unfold IsQArc
+  simp only [isRingArc_iff_of_agreesOn h hW hp, coloursAt_eq_of_agreesOn h hW hpW]
+
+/-- **(R2) arcs are read in `B̄(p, 3)`** (the radius-2 witness at distance `2`). -/
+theorem isR2Arc_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) (hW : IsOpen W) {p : ℂ} (hp : closedBall p 3 ⊆ W)
+    (θ₁ θ₂ : ℝ) : M.IsR2Arc p θ₁ θ₂ ↔ F.IsR2Arc p θ₁ θ₂ := by
+  have hpW : p ∈ W := hp (mem_closedBall_self (by norm_num))
+  have h2 : radiusTwoArc p θ₁ θ₂ ⊆ W := by
+    rintro _ ⟨θ, -, rfl⟩
+    refine hp ?_
+    rw [mem_closedBall, dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e]; norm_num
+  unfold IsR2Arc
+  simp only [isRingArc_iff_of_agreesOn h hW hp, coloursAt_eq_of_agreesOn h hW hpW]
+  refine exists₂_congr fun c c' => and_congr_right fun _ => and_congr_right fun _ => and_congr_right fun _ => ?_
+  constructor <;> intro hsub z hz
+  · exact (mem_closure_iff_of_inter_eq hW (h2 hz) (region_inter_eq_of_agreesOn h c)).mp (hsub hz)
+  · exact (mem_closure_iff_of_inter_eq hW (h2 hz) (region_inter_eq_of_agreesOn h c)).mpr (hsub hz)
 
 /-- **The ring arcs about `P` and their (Q)/(R2) kinds are read in `B̄(P, 3)`** (sides, colours at `P`, the radius-2 witness). -/
 theorem qrAt_iff_of_agreesOn (h : M.AgreesOff F Wᶜ) (hW : IsOpen W) {P : ℂ} (hP : closedBall P 3 ⊆ W) :
     (∀ θ₁ θ₂ c c', M.IsRingArc P θ₁ θ₂ c c' → M.IsQArc P θ₁ θ₂ ∨ M.IsR2Arc P θ₁ θ₂) ↔
       (∀ θ₁ θ₂ c c', F.IsRingArc P θ₁ θ₂ c c' → F.IsQArc P θ₁ θ₂ ∨ F.IsR2Arc P θ₁ θ₂) := by
-  sorry
+  simp only [isRingArc_iff_of_agreesOn h hW hP, isQArc_iff_of_agreesOn h hW hP, isR2Arc_iff_of_agreesOn h hW hP]
 
 end Locality
 
@@ -451,7 +677,17 @@ theorem limit_isTerminalMap (hP : (S.F 0).IsPlaneMap) (hval : ∀ n, (S.F n).Val
     (hev : ∀ v, ∀ᶠ n in atTop, ¬ (S.F n).MergeAvailable v ∧ ¬ (S.F n).RayAvailable v ∧ ¬ (S.F n).ShaveAvailable v ∧
       ∀ θ₁ θ₂ c c', (S.F n).IsRingArc v θ₁ θ₂ c c' → (S.F n).IsQArc v θ₁ θ₂ ∨ (S.F n).IsR2Arc v θ₁ θ₂) :
     S.limit.IsTerminalMap := by
-  sorry
+  have hlv := S.limit_valid hval
+  have hK : ∀ v, closedBall v 3 ⊆ (S.F 0).dom := fun v => by rw [hP]; exact subset_univ _
+  refine ⟨hlv, hP, fun v _ => ?_, fun P θ₁ θ₂ c c' hA => ?_⟩
+  · obtain ⟨W, hWo, hKW, hag⟩ := S.eventually_agreesOn (isCompact_closedBall v 3) (hK v)
+    obtain ⟨n, hn1, hm, hr, hs, -⟩ := (hag.and (hev v)).exists
+    exact ⟨fun h => hm ((mergeAvailable_iff_of_agreesOn hlv (hval n) hn1 hWo hKW).mp h),
+      fun h => hr ((rayAvailable_iff_of_agreesOn hn1 hWo hKW).mp h),
+      fun h => hs ((shaveAvailable_iff_of_agreesOn hn1 hWo hKW).mp h)⟩
+  · obtain ⟨W, hWo, hKW, hag⟩ := S.eventually_agreesOn (isCompact_closedBall P 3) (hK P)
+    obtain ⟨n, hn1, -, -, -, hq⟩ := (hag.and (hev P)).exists
+    exact (qrAt_iff_of_agreesOn hn1 hWo hKW).mpr hq θ₁ θ₂ c c' hA
 
 end LocalSeq
 
@@ -471,7 +707,10 @@ variable {F}
 /-- Off the sites no move is available (MERGE needs two sectors of one colour; MERGE-RAY and SHAVE need a horn). -/
 theorem not_available_of_not_isSite {x : ℂ} (hx : x ∈ F.dom) (hs : ¬ F.IsSite x) :
     ¬ F.MergeAvailable x ∧ ¬ F.RayAvailable x ∧ ¬ F.ShaveAvailable x := by
-  sorry
+  refine ⟨fun ⟨c, n, hn, hsec, _⟩ => hs ⟨hx, Or.inl ⟨c, hsec.mono fun r hr => ?_⟩⟩,
+    fun ⟨c, α, κ₁, κ₂, _, _, _, h1, _⟩ => hs ⟨hx, Or.inr ⟨α, κ₁, κ₂, c, h1⟩⟩,
+    fun ⟨c, _, _, α, κ₁, κ₂, _, h1, _⟩ => hs ⟨hx, Or.inr ⟨α, κ₁, κ₂, c, h1⟩⟩⟩
+  rw [hr]; exact_mod_cast hn
 
 /-- **A clean map's sites are isolated** (in a sector chart every point of the punctured ball is interior or on one branch with two
 colours across it: one sector each side, no horn). -/
