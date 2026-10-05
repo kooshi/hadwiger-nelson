@@ -580,6 +580,51 @@ theorem Valid.cone_re_nonneg_of_preconnected (hF : F.Valid) {c : Fin k} {S : Set
     have hB' := (abs_le.mp hB).2
     linarith
 
+/-- **The half-plane lemma along a connected set, near case** (child of `rot_in`'s step 5; `Valid.cone_re_nonpos_of_germ` with the germ
+replaced by any preconnected set in the closure of the class of `c` that has `w₀` in its closure and a point nearer than `1` to `y`): with
+`|y − w₀| = 1`, the class approaches `y` only along directions `β` with `Re((y − w₀) conj e β) ≤ 0`. -/
+theorem Valid.cone_re_nonpos_of_preconnected (hF : F.Valid) {c : Fin k} {S : Set ℂ} (hS : IsPreconnected S)
+    (hSc : S ⊆ closure (F.region c)) {w₀ y : ℂ} (hw₀ : w₀ ∈ closure S) (hy : ‖y - w₀‖ = 1)
+    (hnear : ∃ w₁ ∈ S, dist y w₁ < 1) :
+    ∀ β ∈ coneAt (F.region c) y, ((y - w₀) * (starRingEnd ℂ) (e β)).re ≤ 0 := by
+  intro β hβ
+  by_contra hneg
+  push Not at hneg
+  obtain ⟨w₁, hw₁S, hm⟩ := hnear
+  set κ := ((y - w₀) * (starRingEnd ℂ) (e β)).re with hκ
+  have hκ0 : 0 < κ := hneg
+  set ε := min (1 - dist y w₁) (κ / 2) with hε
+  have hε0 : 0 < ε := lt_min (by linarith) (by linarith)
+  obtain ⟨z, hz, hzy, hzd, hzu⟩ := hβ ε hε0
+  have hh : z - y ≠ 0 := sub_ne_zero.mpr hzy
+  have hhn : ‖z - y‖ < ε := by rwa [← dist_eq_norm]
+  rcases hF.dist_lt_or_gt_of_isPreconnected hz hS hSc with hlt | hgt
+  · have hz0 : dist z w₀ ≤ 1 := by
+      have hcl : closure S ⊆ {s : ℂ | dist z s ≤ 1} :=
+        closure_minimal (fun s hs => (hlt s hs).le) (isClosed_le (continuous_const.dist continuous_id) continuous_const)
+      exact hcl hw₀
+    have hexp := cone_expand (d := y - w₀) (h := z - y) hy hh hzu
+    have hsum : y - w₀ + (z - y) = z - w₀ := by ring
+    rw [hsum] at hexp
+    obtain ⟨hA, hB⟩ := hexp
+    have hz1 : ‖z - w₀‖ ^ 2 ≤ 1 := by
+      rw [← dist_eq_norm]
+      have := dist_nonneg (x := z) (y := w₀)
+      nlinarith
+    have hpos : 0 < ‖z - y‖ := norm_pos_iff.mpr hh
+    have h0 : 2 * ((y - w₀) * (starRingEnd ℂ) ((z - y) / (‖z - y‖ : ℂ))).re + ‖z - y‖ ≤ 0 := by
+      by_contra hn; push Not at hn
+      have := mul_pos hpos hn
+      linarith
+    have hε' : ε ≤ κ / 2 := min_le_right _ _
+    have hB' := (abs_le.mp hB).1
+    linarith
+  · have h1 := hgt w₁ hw₁S
+    have h2 := dist_triangle z y w₁
+    have h3 : dist z y < ε := hzd
+    have : ε ≤ 1 - dist y w₁ := min_le_left _ _
+    linarith
+
 /-- A germ of pseudo-colour `{a}` lies in the closure of the class of `a`. -/
 theorem GermPseudo.germIn_closure {u : ℂ} {θ : ℝ} {s : Side} {a : Fin k} (h : F.GermPseudo u θ s a) :
     GermIn u θ s (closure (F.region a)) := by
@@ -633,6 +678,36 @@ theorem hex_side (hF : F.Valid) {u : ℂ} {θ' : ℝ} {s : Side} {q : Fin k}
     have h2 := dist_triangle z x (ringPt u (θ' + s.sign * (min δ δ₁ / 2)))
     linarith
 
+/-- **BV-HEX step 1 mirrored, the far side bound** (child of `rot_in`): if the germ of `ω(u)` on side `s` of `y = r(θ′)` lies in the
+closure of the class of `q`, and its points are farther than `1` from `x`, then near `x` the class of `q` stays outside `B(y, 1)`: a point
+`z` of colour `q` near `x` with `|z − y| < 1` sees the germ's points both nearer and farther than `1`, and the germ is connected. -/
+theorem hex_side_far (hF : F.Valid) {u : ℂ} {θ' : ℝ} {s : Side} {q : Fin k}
+    (hg : GermIn u θ' s (closure (F.region q))) {x : ℂ} {δ₁ : ℝ} (hδ₁ : 0 < δ₁)
+    (hfar : ∀ t ∈ Ioo 0 δ₁, 1 < dist x (ringPt u (θ' + s.sign * t))) :
+    ∃ ρ > 0, ∀ z ∈ F.region q, dist z x < ρ → 1 ≤ dist z (ringPt u θ') := by
+  obtain ⟨δ, hδ, hsub⟩ := hg
+  have hδ'0 : 0 < min δ δ₁ := lt_min hδ hδ₁
+  have hw₁x : 1 < dist x (ringPt u (θ' + s.sign * (min δ δ₁ / 2))) :=
+    hfar _ ⟨by linarith, lt_of_lt_of_le (show min δ δ₁ / 2 < min δ δ₁ by linarith) (min_le_right _ _)⟩
+  refine ⟨dist x (ringPt u (θ' + s.sign * (min δ δ₁ / 2))) - 1, by linarith, fun z hz hzx => ?_⟩
+  by_contra hnear
+  push Not at hnear
+  have hS : germ u θ' s (min δ δ₁) ⊆ closure (F.region q) := (germ_mono (min_le_left _ _)).trans hsub
+  rcases hF.dist_lt_or_gt_of_isPreconnected hz (isPreconnected_germ u θ' s _) hS with hlt | hgt
+  · have h1 := hlt _ ⟨min δ δ₁ / 2, ⟨by linarith, by linarith⟩, rfl⟩
+    have h2 := dist_triangle x z (ringPt u (θ' + s.sign * (min δ δ₁ / 2)))
+    rw [dist_comm x z] at h2
+    linarith
+  · have ht0 : 0 < min (min δ δ₁ / 2) ((1 - dist z (ringPt u θ')) / 2) := lt_min (by linarith) (by linarith)
+    have htδ : min (min δ δ₁ / 2) ((1 - dist z (ringPt u θ')) / 2) ∈ Ioo 0 (min δ δ₁) :=
+      ⟨ht0, lt_of_le_of_lt (min_le_left _ _) (by linarith)⟩
+    have h1 := hgt _ ⟨_, htδ, rfl⟩
+    have h2 := dist_triangle z (ringPt u θ')
+      (ringPt u (θ' + s.sign * min (min δ δ₁ / 2) ((1 - dist z (ringPt u θ')) / 2)))
+    have h3 := dist_ringPt_germ_le u θ' s ht0.le
+    have : min (min δ δ₁ / 2) ((1 - dist z (ringPt u θ')) / 2) ≤ (1 - dist z (ringPt u θ')) / 2 := min_le_right _ _
+    linarith
+
 /-- Distances in the frame of `e φ` at `u`. -/
 theorem dist_eFrame (u : ℂ) (φ : ℝ) (w w' : ℂ) : dist (u + e φ * w) (u + e φ * w') = ‖w - w'‖ := by
   rw [dist_eq_norm, add_sub_add_left_eq_sub, ← mul_sub, norm_mul, norm_e, one_mul]
@@ -665,6 +740,19 @@ theorem dist_radial_hex (u : ℂ) (φ : ℝ) {s : ℝ} (hs : 0 < s) {α : ℝ} (
       nlinarith [Real.sq_sqrt (show (0 : ℝ) ≤ 3 by norm_num)]
   have h1 : 1 < ‖((1 + s : ℝ) : ℂ) - e α‖ ^ 2 := by rw [hsq]; nlinarith
   nlinarith [norm_nonneg (((1 + s : ℝ) : ℂ) - e α)]
+
+/-- **The inward radial of a hexagon point lies inside both neighbouring unit discs** (`|x − s n − r(φ ± 60°)|² = 1 − s + s²`, `0 < s < 1`). -/
+theorem dist_radial_hex_in (u : ℂ) (φ : ℝ) {s : ℝ} (hs : 0 < s) (hs1 : s < 1) {α : ℝ} (hα : α = π / 3 ∨ α = -(π / 3)) :
+    dist (ringPt u φ - s * e φ) (ringPt u (φ + α)) < 1 := by
+  have hxs : ringPt u φ - s * e φ = u + e φ * ((1 - s : ℝ) : ℂ) := by simp only [ringPt]; push_cast; ring
+  rw [hxs, ringPt_frame, dist_eFrame]
+  have hsq : ‖((1 - s : ℝ) : ℂ) - e α‖ ^ 2 = 1 - s + s ^ 2 := by
+    rw [norm_sq_eq_re_im]
+    obtain ⟨a1, a2, a3, a4, -, -, -, -⟩ := e_hex_re_im
+    rcases hα with rfl | rfl <;> simp only [Complex.sub_re, Complex.sub_im, Complex.ofReal_re, Complex.ofReal_im, a1, a2, a3, a4] <;>
+      nlinarith [Real.sq_sqrt (show (0 : ℝ) ≤ 3 by norm_num)]
+  have h1 : ‖((1 - s : ℝ) : ℂ) - e α‖ ^ 2 < 1 := by rw [hsq]; nlinarith
+  nlinarith [norm_nonneg (((1 - s : ℝ) : ℂ) - e α)]
 
 /-- **BV-HEX steps 1–3 and 5 at one point** (`plans/BASE-V-verification.md` § 1a.4): at `x = r(φ)` with pseudo-colour `{p, q}`, the germ
 just clockwise of `r(φ + 60°)` pseudo-coloured `q` and the germ just counter-clockwise of `r(φ − 60°)` pseudo-coloured `p`, and fewer than
@@ -797,6 +885,141 @@ theorem hex_point (hF : F.Valid) {u : ℂ} {φ : ℝ} {p q : Fin k} (hpq : p ≠
   have : dot (e φ) (e β) = dot (e β) (e φ) := by rw [dot_e_e, dot_e_e, ← Real.cos_neg]; ring_nf
   rw [← this]
   show (e φ * (starRingEnd ℂ) (e β)).re ≤ 0
+  linarith
+
+/-- **BV-HEX steps 1–3 and 5 at one point, mirrored inward** (child of `rot_in`): at `x = r(φ)` with pseudo-colour `{p, q}`, the germ just
+counter-clockwise of `r(φ + 60°)` pseudo-coloured `p` and the germ just clockwise of `r(φ − 60°)` pseudo-coloured `q`, and fewer than four
+colours at `x`: near `x`, inside `B(r(φ ± 60°), 1)` (the inward cone, which holds the inward radial), every interior point has one colour
+`c`, a colour of `u` (`p` near `x` stays outside `B(r(φ + 60°), 1)`, `q` outside `B(r(φ − 60°), 1)`, by `hex_side_far`); and `c`'s cone at
+`u` lies in the closed half-plane toward `x` (along the inward radial, `Valid.cone_re_nonpos_of_preconnected`). -/
+theorem hex_point_in (hF : F.Valid) {u : ℂ} {φ : ℝ} {p q : Fin k} (hpq : p ≠ q) (hxd : ringPt u φ ∈ F.dom)
+    (hps : F.pseudoColours u (ringPt u φ) = {p, q})
+    (hp : F.GermPseudo u (φ + π / 3) .ccw p) (hq : F.GermPseudo u (φ - π / 3) .cw q)
+    (h4 : ringPt u φ ∉ F.fourSet) :
+    ∃ c ∈ F.coloursAt u, F.coloursAt (ringPt u φ) = {p, q, c} ∧ ∃ ρ > 0, ρ < 1 ∧ ball (ringPt u φ) ρ ⊆ F.dom ∧
+      (∀ z ∈ F.interiorPts, dist z (ringPt u φ) < ρ → dist z (ringPt u (φ + π / 3)) < 1 →
+        dist z (ringPt u (φ - π / 3)) < 1 → F.col z = c) ∧
+      ∀ β ∈ coneAt (F.region c) u, 0 ≤ dot (e β) (e φ) := by
+  have hπ := Real.pi_pos
+  set x := ringPt u φ with hx
+  -- step 1 mirrored, on both sides
+  have hchord : ∀ t ∈ Ioo (0 : ℝ) (π / 3), ∀ θ : ℝ, |φ - θ| = π / 3 + t → 1 < dist x (ringPt u θ) := by
+    intro t ht θ hθ
+    exact ((dist_ringPt_ringPt_cmp_one u (by rw [hθ]; linarith [ht.2])).2.2).mpr (by rw [hθ]; linarith [ht.1])
+  obtain ⟨ρ₁, hρ₁, hside₁⟩ := hex_side_far hF hp.germIn_closure (by positivity : (0 : ℝ) < π / 3) fun t ht =>
+    hchord t ht _ (by simp only [Side.sign]; rw [show φ - (φ + π / 3 + 1 * t) = -(π / 3 + t) by ring, abs_neg,
+      abs_of_pos (by linarith [ht.1])])
+  obtain ⟨ρ₂, hρ₂, hside₂⟩ := hex_side_far hF hq.germIn_closure (by positivity : (0 : ℝ) < π / 3) fun t ht =>
+    hchord t ht _ (by simp only [Side.sign]; rw [show φ - (φ - π / 3 + -1 * t) = π / 3 + t by ring,
+      abs_of_pos (by linarith [ht.1])])
+  obtain ⟨r₀, hr₀, hr₀d, hr₀c⟩ := exists_ball_col_mem_coloursAt hxd
+  set ρ := min (min (min ρ₁ ρ₂) r₀) (1 / 2) with hρ
+  have hρ0 : 0 < ρ := lt_min (lt_min (lt_min hρ₁ hρ₂) hr₀) (by norm_num)
+  have hρ1 : ρ < 1 := lt_of_le_of_lt (min_le_right _ _) (by norm_num)
+  have hρr₀ : ρ ≤ r₀ := (min_le_left _ _).trans (min_le_right _ _)
+  have hρρ₁ : ρ ≤ ρ₁ := (min_le_left _ _).trans ((min_le_left _ _).trans (min_le_left _ _))
+  have hρρ₂ : ρ ≤ ρ₂ := (min_le_left _ _).trans ((min_le_left _ _).trans (min_le_right _ _))
+  have hρd : ball x ρ ⊆ F.dom := (ball_subset_ball hρr₀).trans hr₀d
+  -- the colours of the inward cone near `x`: colours of `x`, neither `p` nor `q`, hence colours of `u`
+  have hcone : ∀ z ∈ F.interiorPts, dist z x < ρ → dist z (ringPt u (φ + π / 3)) < 1 →
+      dist z (ringPt u (φ - π / 3)) < 1 → F.col z ∈ F.coloursAt x ∧ F.col z ∈ F.coloursAt u := by
+    intro z hzI hzx h1 h2
+    have hzx₀ : F.col z ∈ F.coloursAt x := hr₀c z ⟨hzI, lt_of_lt_of_le hzx hρr₀⟩
+    refine ⟨hzx₀, ?_⟩
+    by_contra hcu
+    have hmem : F.col z ∈ F.pseudoColours u x := ⟨hzx₀, hcu⟩
+    rw [hps] at hmem
+    rcases hmem with h | h
+    · have := hside₁ z ⟨hzI, h⟩ (lt_of_lt_of_le hzx hρρ₁); linarith
+    · have := hside₂ z ⟨hzI, h⟩ (lt_of_lt_of_le hzx hρρ₂); linarith
+  have hradx : ∀ s : ℝ, dist (x - s * e φ) x = |s| := fun s => by
+    rw [dist_eq_norm, sub_sub_cancel_left, norm_neg, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs]
+  set K : Set ℂ := {z | dist z x < ρ ∧ dist z (ringPt u (φ + π / 3)) < 1 ∧ dist z (ringPt u (φ - π / 3)) < 1} with hK
+  have hKo : IsOpen K := by
+    refine (isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+      ((isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+        (isOpen_lt (continuous_id.dist continuous_const) continuous_const))
+  have hKd : K ⊆ F.dom := fun z hz => hρd hz.1
+  have hradK : ∀ s ∈ Ioo 0 ρ, x - s * e φ ∈ K := fun s hs => by
+    have hs1 : s < 1 := lt_trans hs.2 hρ1
+    refine ⟨by rw [hradx, abs_of_pos hs.1]; exact hs.2, dist_radial_hex_in u φ hs.1 hs1 (Or.inl rfl), ?_⟩
+    have := dist_radial_hex_in u φ hs.1 hs1 (Or.inr rfl); rwa [← sub_eq_add_neg] at this
+  -- an interior point of the cone, and its colour `c`
+  obtain ⟨z₁, hz₁I, hz₁K⟩ : ∃ z₁ ∈ F.interiorPts, z₁ ∈ K := by
+    have hm := hradK (ρ / 2) ⟨by linarith, by linarith⟩
+    obtain ⟨r, hr, hrK⟩ := Metric.isOpen_iff.mp hKo _ hm
+    obtain ⟨w, hw, hwd⟩ := Metric.mem_closure_iff.mp (dense_interiorPts F (hKd hm)) r hr
+    exact ⟨w, hw, hrK (by rw [mem_ball, dist_comm]; exact hwd)⟩
+  obtain ⟨hc1, hc2⟩ := hcone z₁ hz₁I hz₁K.1 hz₁K.2.1 hz₁K.2.2
+  set c := F.col z₁
+  -- the colours of `x` are `p`, `q`, `c`, so the cone has one colour
+  have hpx : p ∈ F.coloursAt x ∧ p ∉ F.coloursAt u := by
+    have : p ∈ F.pseudoColours u x := by rw [hps]; exact mem_insert p _
+    exact this
+  have hqx : q ∈ F.coloursAt x ∧ q ∉ F.coloursAt u := by
+    have : q ∈ F.pseudoColours u x := by rw [hps]; simp
+    exact this
+  have hone : ∀ c' ∈ F.coloursAt x, c' ∈ F.coloursAt u → c' = c := by
+    intro c' hc'x hc'u
+    by_contra hne
+    have hsub : ({p, q, c, c'} : Set (Fin k)) ⊆ F.coloursAt x := by
+      intro y hy; simp only [mem_insert_iff, mem_singleton_iff] at hy
+      rcases hy with rfl | rfl | rfl | rfl
+      exacts [hpx.1, hqx.1, hc1, hc'x]
+    have hpc : p ≠ c := fun h => hpx.2 (h ▸ hc2)
+    have hqc : q ≠ c := fun h => hqx.2 (h ▸ hc2)
+    have hpc' : p ≠ c' := fun h => hpx.2 (h ▸ hc'u)
+    have hqc' : q ≠ c' := fun h => hqx.2 (h ▸ hc'u)
+    have h4' : ({p, q, c, c'} : Set (Fin k)).ncard = 4 := by
+      rw [Set.ncard_insert_of_notMem (by simp [hpq, hpc, hpc']), Set.ncard_insert_of_notMem (by simp [hqc, hqc']),
+        Set.ncard_pair (Ne.symm hne)]
+    exact h4 ⟨hxd, h4' ▸ Set.ncard_le_ncard hsub⟩
+  have hKc : ∀ z ∈ K, z ∈ F.interiorPts → F.col z = c := fun z hz hzI => by
+    obtain ⟨h1, h2⟩ := hcone z hzI hz.1 hz.2.1 hz.2.2
+    exact hone _ h1 h2
+  have hcolx : F.coloursAt x = {p, q, c} := by
+    ext c'
+    simp only [mem_insert_iff, mem_singleton_iff]
+    constructor
+    · intro hc'
+      by_cases hu' : c' ∈ F.coloursAt u
+      · exact Or.inr (Or.inr (hone c' hc' hu'))
+      · have : c' ∈ F.pseudoColours u x := ⟨hc', hu'⟩
+        rw [hps] at this
+        rcases this with h | h
+        · exact Or.inl h
+        · exact Or.inr (Or.inl h)
+    · rintro (rfl | rfl | rfl)
+      exacts [hpx.1, hqx.1, hc1]
+  refine ⟨c, hc2, hcolx, ρ, hρ0, hρ1, hρd, fun z hzI hzx h1 h2 => hKc z ⟨hzx, h1, h2⟩ hzI, ?_⟩
+  -- step 5 mirrored: the polar bound, along the inward radial
+  have hKcl := subset_closure_region_of_isOpen hKo hKd hKc
+  set R : Set ℂ := (fun s : ℝ => x - s * e φ) '' Ioo 0 ρ with hR
+  have hRc : IsPreconnected R :=
+    isPreconnected_Ioo.image _ (by fun_prop : Continuous fun s : ℝ => x - s * e φ).continuousOn
+  have hRK : R ⊆ closure (F.region c) := by
+    rintro _ ⟨s, hs, rfl⟩; exact hKcl (hradK s hs)
+  have hxR : x ∈ closure R := by
+    rw [Metric.mem_closure_iff]
+    intro ε hε
+    refine ⟨x - (min (ε / 2) (ρ / 2)) * e φ, ⟨_, ⟨lt_min (by linarith) (by linarith), by
+      linarith [min_le_right (ε / 2) (ρ / 2)]⟩, rfl⟩, ?_⟩
+    rw [dist_comm, hradx, abs_of_pos (lt_min (by linarith) (by linarith))]
+    linarith [min_le_left (ε / 2) (ρ / 2)]
+  have hux : ‖u - x‖ = 1 := by rw [← dist_eq_norm, dist_comm, hx, dist_ringPt]
+  have hnear : ∃ w₁ ∈ R, dist u w₁ < 1 := by
+    refine ⟨x - ((ρ / 2 : ℝ) : ℂ) * e φ, ⟨ρ / 2, ⟨by linarith, by linarith⟩, rfl⟩, ?_⟩
+    have : u - (x - (ρ / 2 : ℝ) * e φ) = -(((1 - ρ / 2 : ℝ) : ℂ) * e φ) := by rw [hx]; simp only [ringPt]; push_cast; ring
+    rw [dist_eq_norm, this, norm_neg, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_pos (by linarith)]
+    linarith
+  intro β hβ
+  have h := hF.cone_re_nonpos_of_preconnected hRc hRK hxR hux hnear β hβ
+  have hux' : u - x = -e φ := by rw [hx]; simp only [ringPt]; ring
+  rw [hux', neg_mul, Complex.neg_re] at h
+  have : dot (e φ) (e β) = dot (e β) (e φ) := by rw [dot_e_e, dot_e_e, ← Real.cos_neg]; ring_nf
+  rw [← this]
+  show 0 ≤ (e φ * (starRingEnd ℂ) (e β)).re
   linarith
 
 /-- **BV-HEX step 4, consecutive cones** (`plans/BASE-V-verification.md` § 1a.4 step 4): the outward cones at two consecutive points
@@ -1008,7 +1231,104 @@ theorem rot_in {F : ArcMap 6} (hF : F.Valid) {u : ℂ} (hc : F.Covers u 2) (hu :
         dist z (ringPt u (ψ + π / 3)) < 1 → dist z (ringPt u (ψ - π / 3)) < 1 → F.col z = g) ∧
       (∀ T, F.TileOf g T → ringPt u ψ ∈ closure T → T ⊆ ball u 1) ∧
       ∀ β ∈ coneAt (F.region g) u, 0 ≤ dot (e β) (ringPt u ψ - u) := by
-  sorry
+  have hπ := Real.pi_pos
+  have hxu : ringPt u ψ ∈ closedBall u 2 := by rw [mem_closedBall, dist_ringPt]; norm_num
+  have hxd : ringPt u ψ ∈ F.dom := hc hxu
+  have hps := rot_noThird hF hc hu hH hpq hp hq
+  obtain ⟨g, hg, hcolx, ρ, hρ, hρ1, hρd, hK, hcone⟩ := hex_point_in hF hpq hxd hps hBp hBm
+    (fun h => Set.disjoint_left.mp hH hxu (Or.inl h))
+  refine ⟨g, hg, hcolx, ⟨ρ, hρ, fun z hz h1 h2 => hK z hz.1 hz.2 h1 h2⟩, ?_, fun β hβ => ?_⟩
+  swap
+  · rw [show ringPt u ψ - u = e ψ by simp only [ringPt]; ring]; exact hcone β hβ
+  intro T hT hxT
+  -- `x` is cubic trichromatic: its colours are `p`, `q`, `g`, none repeated (H)
+  have hpu : p ∉ F.coloursAt u := (show p ∈ F.pseudoColours u (ringPt u ψ) by rw [hps]; exact mem_insert p _).2
+  have hqu : q ∉ F.coloursAt u := (show q ∈ F.pseudoColours u (ringPt u ψ) by rw [hps]; simp).2
+  have h3 : (F.coloursAt (ringPt u ψ)).ncard = 3 := by
+    rw [hcolx, Set.ncard_insert_of_notMem (by
+      simp only [mem_insert_iff, mem_singleton_iff, not_or]; exact ⟨hpq, fun h => hpu (h ▸ hg)⟩),
+      Set.ncard_pair (fun h : q = g => hqu (h ▸ hg))]
+  have hxc := isCubicTrichromatic_of_three_of_noRep hxd h3 fun hr => Set.disjoint_left.mp hH hxu (Or.inr ⟨hxd, hr⟩)
+  obtain ⟨r₀, G, hC, -, f, hf, hsec, -⟩ := hxc.chart hxd
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  have hsec_of : ∀ v ∈ F.interiorPts, dist v (ringPt u ψ) < r₀ → ∃ i, v ∈ G.sector (ringPt u ψ) r₀ i := fun v hv hvd => by
+    have : v ∈ ball (ringPt u ψ) r₀ ∩ F.interiorPts := ⟨hvd, hv⟩
+    rw [hC.cover r₀ hr₀ (by norm_num)] at this
+    exact mem_iUnion.mp this
+  -- the tile meets the `g`-sector of `x`
+  obtain ⟨w, hwT, hwd⟩ := Metric.mem_closure_iff.mp hxT r₀ hC.pos
+  obtain ⟨i, hwi⟩ := hsec_of w (hT.1.subset_interiorPts hwT) (by rw [dist_comm]; exact hwd)
+  have hfi : f i = g := by rw [← (hsec i hwi).2]; exact hT.2 hwT
+  -- an interior point of the inward cone, of colour `g`, inside `ω(u)`: it lies in the `g`-sector
+  set s := min ρ r₀ / 2 with hs
+  have hs0 : 0 < s := by have := lt_min hρ hC.pos; linarith
+  have hsρ : s < min ρ r₀ := by linarith [lt_min hρ hC.pos]
+  have hs1 : s < 1 := by have := min_le_left ρ r₀; linarith
+  set K : Set ℂ := {z | dist z (ringPt u ψ) < min ρ r₀ ∧ dist z (ringPt u (ψ + π / 3)) < 1 ∧
+    dist z (ringPt u (ψ - π / 3)) < 1 ∧ dist z u < 1} with hKdef
+  have hKo : IsOpen K := (isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+    ((isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+      ((isOpen_lt (continuous_id.dist continuous_const) continuous_const).inter
+        (isOpen_lt (continuous_id.dist continuous_const) continuous_const)))
+  have hmK : ringPt u ψ - s * e ψ ∈ K := by
+    refine ⟨?_, dist_radial_hex_in u ψ hs0 hs1 (Or.inl rfl), ?_, ?_⟩
+    · rw [dist_eq_norm, sub_sub_cancel_left, norm_neg, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs,
+        abs_of_pos hs0]; exact hsρ
+    · rw [sub_eq_add_neg (ψ : ℝ)]; exact dist_radial_hex_in u ψ hs0 hs1 (Or.inr rfl)
+    · rw [show ringPt u ψ - s * e ψ = u + ((1 - s : ℝ) : ℂ) * e ψ by simp only [ringPt]; push_cast; ring, dist_eq_norm,
+        add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith)]
+      linarith
+  obtain ⟨v, hvI, hvK⟩ : ∃ v ∈ F.interiorPts, v ∈ K := by
+    obtain ⟨r, hr, hrK⟩ := Metric.isOpen_iff.mp hKo _ hmK
+    have hmd : ringPt u ψ - s * e ψ ∈ F.dom := hρd (lt_of_lt_of_le hmK.1 (min_le_left _ _))
+    obtain ⟨v, hv, hvd⟩ := Metric.mem_closure_iff.mp (dense_interiorPts F hmd) r hr
+    exact ⟨v, hv, hrK (by rw [mem_ball, dist_comm]; exact hvd)⟩
+  have hvg : F.col v = g := hK v hvI (lt_of_lt_of_le hvK.1 (min_le_left _ _)) hvK.2.1 hvK.2.2.1
+  obtain ⟨j, hvj⟩ := hsec_of v hvI (lt_of_lt_of_le hvK.1 (min_le_right _ _))
+  have hji : j = i := hf (by rw [hfi, ← (hsec j hvj).2, hvg])
+  subst hji
+  -- the tile with the sector is connected, in the closure of `g`, and reaches inside `ω(u)`: so it stays inside
+  have hS : IsPreconnected (T ∪ G.sector (ringPt u ψ) r₀ j) :=
+    hT.1.isPreconnected.union w hwT hwi (hC.isPreconnected r₀ hr₀ j)
+  have hScl : T ∪ G.sector (ringPt u ψ) r₀ j ⊆ closure (F.region g) := by
+    rintro t (ht | ht)
+    · exact subset_closure ⟨hT.1.subset_interiorPts ht, hT.2 ht⟩
+    · exact subset_closure (hfi ▸ hsec j ht)
+  have hnear : ∀ t ∈ T, dist u t ≤ 1 := by
+    intro t ht
+    by_contra hlt
+    push Not at hlt
+    have hvu : dist u v < 1 := by rw [dist_comm]; exact hvK.2.2.2
+    obtain ⟨z, hz, hzu⟩ := Metric.mem_closure_iff.mp hg (min (dist u t - 1) (1 - dist u v) / 2) (by
+      have := lt_min (show 0 < dist u t - 1 by linarith) (show 0 < 1 - dist u v by linarith); linarith)
+    have hm1 := min_le_left (dist u t - 1) (1 - dist u v)
+    have hm2 := min_le_right (dist u t - 1) (1 - dist u v)
+    rcases hF.dist_lt_or_gt_of_isPreconnected hz hS hScl with hlt' | hgt'
+    · have := hlt' t (Or.inl ht)
+      have := dist_triangle u z t
+      linarith
+    · have := hgt' v (Or.inr hvj)
+      have := dist_triangle z u v
+      rw [dist_comm z u] at this
+      linarith
+  intro t ht
+  rw [mem_ball]
+  by_contra hge
+  push Not at hge
+  have h1 := hnear t ht
+  rw [dist_comm] at h1
+  obtain ⟨η, hη, hηT⟩ := Metric.isOpen_iff.mp hT.1.isOpen t ht
+  set η' := min η 1 / 2 with hη'
+  have hη'0 : 0 < η' := by positivity
+  have htu : ‖t - u‖ = 1 := by rw [← dist_eq_norm]; linarith
+  have ht' : t + (η' : ℂ) * (t - u) ∈ T := hηT (by
+    rw [mem_ball, dist_eq_norm, add_sub_cancel_left, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hη'0,
+      htu, mul_one]
+    have := min_le_left η 1; linarith)
+  have := hnear _ ht'
+  rw [dist_eq_norm, show u - (t + (η' : ℂ) * (t - u)) = -(((1 + η' : ℝ) : ℂ) * (t - u)) by push_cast; ring, norm_neg,
+    norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by linarith), htu, mul_one] at this
+  linarith
 
 /-- **FS112-ROTHEX, N2-HEX** (FS110-N2-HEX, `plans/FS110-N-proof.md` § 4.4, "sector geometry at `u`"): at a cubic trichromatic `u`, if each of
 the six points `x_j = r(ψ + 60°j)` is *served* — some sector of `u` lies in the closed half-plane away from `x_j` — then `u` is **regular**

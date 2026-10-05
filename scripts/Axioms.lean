@@ -3588,6 +3588,11 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.hex_point
 #print axioms HadwigerNelson.Plane.ArcMap.hex_adjacent
 #print axioms HadwigerNelson.Plane.ArcMap.dist_radial_hex
+-- FS131-I5m (stage 35): `rot_in`'s children, BV-HEX's steps mirrored inward
+#print axioms HadwigerNelson.Plane.ArcMap.hex_side_far
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonpos_of_preconnected
+#print axioms HadwigerNelson.Plane.ArcMap.dist_radial_hex_in
+#print axioms HadwigerNelson.Plane.ArcMap.hex_point_in
 
 #eval IO.println "=== PURCHASED ==="
 

@@ -157,6 +157,15 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
   `sorryAx`, `linkage_dot_ne_zero` clean), `HexRing`: `HadwigerNelson.Plane.ArcMap.rot_out` (FS112-ROTHEX, N2-ROT's outward row (A+, A−)); child
   `dist_radial_hex`.
 
+### FS131-I5m (wave 5's ninth implementer)
+
+*Each stage's build and axiom read named in its line; axioms read from that build's oleans (`data/fs131/i5m/I5mAxioms<stage>.lean`, output `.out`).*
+
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
+- Stage 35 (`data/fs131/i5m/build-stage35.log`; `build/gate/build/20261005T062507Z-1929717.log`; axioms `I5mAxioms35.out`, control `bv_nd` with
+  `sorryAx`, `linkage_dot_ne_zero` clean), `Plane/ValidMap/HexRing`: `HadwigerNelson.Plane.ArcMap.rot_in` (FS112-ROTHEX, N2-ROT's inward row (B+, B−));
+  children `hex_side_far`, `Valid.cone_re_nonpos_of_preconnected`, `dist_radial_hex_in`, `hex_point_in` (all `ArcMap.`).
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -1562,3 +1571,38 @@ up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/
 `Contact` 3, `UnitArc` 5. `tools/fs131_i5_stmt_check.py d61edefc`: PASS.
 
 ## Stage 34 — SAVED
+
+## Stage 35 — SAVED: `rot_in` proved (a kernel theorem)
+
+**`rot_in` is proved as stated** (FS112-ROTHEX, N2-ROT's inward row (B+, B−); `Plane/ValidMap/HexRing`), as I5j's route note planned: the mirror of
+`rot_out`. New children, each a mirror of a stage-31/32 lemma:
+- `hex_side_far` (`hex_side` mirrored: a germ in the closure of `q` whose points are **farther** than `1` from `x` keeps the class of `q` near `x`
+  outside `B(y, 1)`; the same connectedness argument, the two cases swapped);
+- `Valid.cone_re_nonpos_of_preconnected` (`Valid.cone_re_nonneg_of_preconnected` mirrored, with a point of the set **nearer** than `1` to `y`, as
+  `Valid.cone_re_nonpos_of_germ` mirrors `_nonneg_`);
+- `dist_radial_hex_in` (the inward radial `x − s e φ` lies inside both neighbouring unit discs: `|·|² = 1 − s + s²`, `0 < s < 1`);
+- `hex_point_in` (`hex_point` mirrored: under (B+) — the germ counter-clockwise of `r(φ + 60°)` pseudo-coloured `p`, at chord `60° + t` — and (B−),
+  near `x` the inward cone `{z : |z − r(φ ± 60°)| < 1}` has one colour `c ∈ P_cl(u)`, `P_cl(x) = {p, q, c}`, and `c`'s cone at `u` lies in the closed
+  half-plane toward `x`, along the inward radial; the radius is kept below `1/2` so the radial stays inside `ω(u)`).
+
+`rot_in` itself is `rot_out`'s proof with the tile clause mirrored: `x` is cubic trichromatic (three colours, H); a `g`-tile `T` at `x` meets the
+`g`-sector of `x`'s chart, which holds an interior point `v` of the inward cone inside `ω(u)` (`|v − u| < 1`); `T` with the sector is connected, in
+the closure of `g`, and validity against points of `g` near `u` keeps every point of `T` within `1` of `u`; `T` is open, so a point at distance
+exactly `1` would have a neighbour of `T` beyond `1` along `t − u` — so `T ⊆ B(u, 1)`. Read against the informal claim (FS110-N2-ROT's inward row,
+with unit arcs under H; plan § 8.2): "`x` carries `p`, `q` and one colour `g` of `u`; `g` fills the inward cone (the directions `(150°, 210°)`);
+every `g`-tile at `x` lies in `B(u, 1)`; `u`'s `g`-sector lies in the closed half-plane toward `x`" — **same**.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS). New names collision-free (`git grep` of each full theorem name on
+`origin/fs131-w5p`, `origin/fs131-w5c`, `origin/fs131-w4`, `main`: none).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`HexRing`, `Dense`, `BaseWalk`, `BaseDense`, `Proofs`), 8
+with warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T062507Z-1929717.log`; driver log
+`data/fs131/i5m/build-stage35.log`). Wave 5's sorry declarations (distinct sites): **21** (`HexRing` 2: `bv_l3`, `bv_nd`), mine 3. Axioms
+(`data/fs131/i5m/I5mAxioms35.lean` → `.out`, read against the build's oleans under a 12 GiB slot): `rot_in` and its four children, `rot_out` on the
+standard three; control `bv_nd` reads `sorryAx`, `linkage_dot_ne_zero` clean. `scripts/Axioms.lean`: the four children added to the "FS131-I5g"
+block (a comment line names this stage), above the `=== PURCHASED ===` banner. `tools/check_architecture.py`: PASS.
+
+**Re-pricing (first leaf)**: `rot_in` took about 40k tokens of context and one iteration round (every child compiled first time from its mirror):
+M holds, low.
+
+## Stage 35 — SAVED
