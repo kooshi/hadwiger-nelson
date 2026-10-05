@@ -2023,3 +2023,27 @@ flank colour (`coneAt_N_subset_of_flankAbove`, `coneAt_S_subset_of_flankBelow`, 
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 42 — SAVED
+
+## Stage 43 — SAVED (FS131-I5p): the readback
+
+*FS131-I5p, wave 5's sixth `Terminal` implementer (Opus), continuing FS131-I5n's work on branch `fs131-w5c` in
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c` from `da09c260`. Brief: `data/fs131/briefs/FS131-I5p-terminal.md` (main tree). My set (ruling
+356): `y3_end_needs_of_not_mem`, then `exists_red`, `exists_terminal` (citing `exists_merge` in ruling 269's form only).*
+
+### 43.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script, `tools/fs131_i5h_quotes.py` (I5h's checker, in my touches): **12 quotations, 0 failures** — `CLAUDE.md` § Counter-priors; the three
+leaves' first lines in `Terminal.lean`; this record's Stage 42 (two handover items); the inventory's items 355, 347, 348, 356, 274; the plan's § 10.2 ("It
+may"). `--self-test` (a one-letter plant in the first quotation): **fired** (1 failure reported); the unplanted run passed (exit 0).
+
+Read in full: I5l's Stage 38; I5n's Stages 39–42; inventory items 268, 269, 274, 347, 348, 355, 356; YB3 § 3.1 (`plans/FS112-YB3-verification.md`, Steps
+1–4, the corrected statement). No mismatch found.
+
+### 43.2 The as-given build (`da09c260`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1755 modules already up
+to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T081034Z-2600880.log`; driver log
+`data/fs131/i5p/build-stage43-asgiven.log`). `Terminal`'s warnings: 3 (`exists_red` l. 799, `exists_terminal` l. 811, `y3_end_needs_of_not_mem` l. 2605) —
+I5n's count.
+
+## Stage 43 — SAVED
