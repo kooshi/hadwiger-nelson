@@ -3527,3 +3527,16 @@ reason by the close.*
      (chart-independent, unique). (c) **IO1's slot → OPEN's continuation, FS131-IO2, on `fs131-wop`**: the five leaves in record § 3.3's order, and the positive
      `HasHornCount` example. Alternative weighed: the remaining `exists_preBend` children with `bv_l3`. Why: OPEN is on the procedure's path to
      `exists_terminalMap`; the others have slack. Confidence: high. In flight after IO2's launch: 1 (KP2) + 1 (M6) + 1 (IO2) = 3.
+393. **FS131-IO2, by message: `open_allowedCone` is false as stated; a one-field repair to `OpenConfig`.** Why: in OPEN's new map the closure of the
+     recoloured wedge `W` contains the ray points `w = v + t·e(ψ)`, `0 < t ≤ ρ/2`, new contacts at any `v′` with `dist(w, v′) = 1` in `cl (F.region c)`; MERGE's
+     route needs an open set of `c`-clear points around every closure point of the recoloured set (`dist_ne_one_of_isOpen_isClear`), but `OpenConfig.clear`
+     gives clearness only for `φ ∈ [lower, ψ]` (or `[ψ, upper]`), closed at `ψ`. **Counterexample** (by hand; `k = 3`, `v = 0`, up, `s = 0`, `b = 1`, `ψ = 0`):
+     `dom` = `ball(0, r₁)` ∪ a small neighbourhood of the rectangle `R = {0 < Re y < ρc, 1 < Im y < 1 + δ}`; in the ball two arcs tangent at 0 along `α = −π/4`
+     (a cusp horn of colour `c`, the only `c`-sector), the rest of the ball `c₂`; `R` coloured `c`, the rest of the second piece `c₃` — valid (horn points have
+     `Im < 0`, `R`'s `Im > 1`); every `OpenConfig` field holds; for `v′ = t₀ + i` (`t₀ ∈ (0, ρ/2]`), `w = t₀` is a new out-type contact, `F.allowedCone v′ c = univ`
+     but the new cone is `{Im d ≥ 0}`. `exists_open` stays true: `exists_openConfig`'s `ψ = lift + ψ₁` with `ψ₁ ≤ ε/2` lies strictly inside `clear_near_end`'s
+     range. **Proposed repair**: a field `margin : ∃ η > 0, ∀ t ∈ Ioo 0 ρc, ∀ φ, (if up then ψ else ψ − η) ≤ φ → φ ≤ (if up then ψ + η else ψ) → F.IsClear c
+     (v + t * e φ)` on `OpenConfig`, proved in `exists_openConfig_up/down` with `η = ψ₁`. **Ruling: accepted** — `OpenConfig` is this lane's own definition;
+     `exists_open`'s and `HasHornCount`'s statements are unchanged. Alternative weighed: a hypothesis on `open_allowedCone` that the assembly supplies. Why the
+     field: the configuration is where clearness is produced, and every leaf reads it from there. Confidence: high. Credit: IO2, for the counterexample before a
+     proof was attempted against the false form. Sent to IO2 by message.
