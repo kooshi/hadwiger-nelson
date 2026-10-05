@@ -3299,3 +3299,30 @@ reason by the close.*
      `limit_isTerminalMap`, the clean lemmas, `exists_clean`), then `Procedure`'s finiteness lemmas and `mergeAvailable_of_bothKind`. Implementer B joins the queue
      (on a branch cut from `fs131-w5c`, since one writer per tree). Why: the limit is the longest chain to wave 5's landing, and it is independent of F6.
      Confidence: high. In flight after IL1's launch: 1 (ML1) + 1 (KB2) + 1 (IL1) = 3.
+375. **MERGE LANDED on `main`, held in the kernel: FS131-ML1 done** (harness ≈ 334k by the task notice; record `fs131-w4mm`'s `plans/FS131-IMM-implementation.md`,
+     Stages 13–16 and "Drafts for the front page (FS131-ML1)"; report `data/fs131/reports/FS131-ML1.md`; commits `1eddfdd4`, `b9305232` (merge of `main` at
+     `7e5e98a1`), `a6c248c9`, `df473bfe` (merge of `main` at `3d6319ad`; the gated commit), `f8dea5ca` (the landing), `56f00f21`, `ca4dcfa2` (= `main`, by
+     fast-forward only)). **Held, exactly the standard three**: `ArcMap.exists_merge` (FS110-W-MERGE in ruling 269's form; statement and docstring
+     byte-identical to `c9623d04`; proof `exact exists_merge_aux hF hv hn1 hn hD`), `ArcMap.exists_merge_aux` (IMM's proof over `MergeMove`), and `MergeMove`'s 151
+     theorems — 153 MERGE records (140 exactly standard, 11 on fewer, 2 on none). The merge took `main`'s side for every wave-4 module and restored the two
+     declarations by script (`tools/fs131_ml_restore.py`: byte-identical, complete); no identical copies or collisions (`tools/fs131_ml_dupes.py`); the three-way
+     statement check's only mismatches are the two restored; item 318's correction (1) had nothing to rename (no `framePt` in `MergeMove` or the restored code).
+     **The gate on `df473bfe`** (Keryx, from the saved logs): the full build after the merge (`.claude/worktrees/fs131-w4mm/build/gate/build/20261005T085902Z-2875622.log`)
+     ends "Build completed successfully (5749 jobs)", 0 warnings, and the gate's up-to-date check (`…/20261005T092305Z-2984013.log`) "All targets up-to-date";
+     the axioms digest against Woodall's landing log: 3,807 records — 3,784 clean, 14 axiom-free, 4 imported, 5 purchases — 153 changes, every one an added
+     CLEAN record; the vacuity digest: `declarations=11026 refutations-skipped=113 sites=770`, `vacuous=0 stale=0 declared=3 witnessed=32 generic=733
+     unknown=2`, the baseline header matching 9 of 9, no row lost (15 added, MERGE's GENERIC sites); the self-tests' logs (axioms 23, vacuity 62); the gated
+     commit is an ancestor of `main`, and outside `plans/` and `data/` the only file differing from `ca4dcfa2` is `tools/fs131_ml_axioms.py` (no gate script reads
+     it); `sorry` in `Proofs/` by grep: 0. **Prediction scored** (ML1's): 3,784 clean, 14 axiom-free, 4 imported, 5 purchases, predicted from IMM4's receipt —
+     met exactly. **Vacuity**: no new carrier tracked (`BranchGerms.Phantom` and `MergeMove`'s data definitions left out, reasons in `scripts/Vacuity.lean`).
+     **Tools**: `tools/fs131_ml_dupes.py`, `tools/fs131_ml_restore.py`, `tools/fs131_ml_vacdiff.py`, `tools/fs131_ml_axioms.py`, each shown failing on a plant.
+     **Tool defect**: `tools/fs131_qa1_dupes.py` has a fixed branch list, blind to `fs131-w4mm` and later. **Gate-rule gap** (not a falsity): no example in
+     the library satisfies `exists_merge`'s hypotheses together (a valid map covering `B̄(v, 1)` with a colour of `≥ 2` sectors at `v` and `int D_c(v) ≠ ∅`) —
+     the same for `exists_shave` and `exists_rayMerge`, already on `main`; `LEAN.md` § The gate asks for such an example or a docstring note (owed, a later job).
+     **Correction owed**: `ARCHITECTURE.md`'s `MergeMove` row names only IMM1–IMM2's children. **Held for the filing** (draft 6): `LEDGER.md` § B's FS110-W-MERGE
+     line to [kernel], with its Frontier and Proof Atlas grades. Credit: ML1, for the predicted counts met exactly and the restore checked by script.
+376. **MERGE's landing counts filed** (Keryx, drafts 1, 2, 4 verbatim): `CLAUDE.md` § Trust ledger (3784 clean, 14 axiom-free, 3,807 records, FS131-ML1) and
+     § The gate's two count lines; `GATE_CHANGES` `(("3633", "5"), ("3784", "5"))`; draft 3 (the baseline header) already on `main`; `LEAN.md` unchanged (62
+     and 23 controls). Both digests re-run after the edit: "match" (axioms: clean, purchases, imported; vacuity: 9 of 9). `tools/claude_md_fact_audit.py --base
+     bdb8d318`: 13 losses, every one a superseded count or Woodall's attribution (10851, 755, 718, 111, 3633, 3654, FS131-WL1) — expected. **Wave 5's landing now
+     waits on wave 5 alone**: MERGE is on `main`. Kooshi push-notified.
