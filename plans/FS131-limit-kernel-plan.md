@@ -189,3 +189,43 @@ or inhabited at `sevenBrickMap` (`k = 7`); the stuck-run children are `GENERIC` 
 proves `badCount_eq_zero_iff`.
 
 ## Stage 4 — SAVED
+
+---
+
+# FS131-IL1 — the implementer, lane A (`Limit`, then `Procedure`'s finiteness lemmas)
+
+*de Bruijn, the implementer (Opus), on branch `fs131-w5c` from `8a42a2e0`. Brief: `data/fs131/briefs/FS131-IL1-limit.md` (main tree).*
+
+## Theorems this phase proved (FS131-IL1)
+
+None yet (updated at each saved stage).
+
+## Stage 5 — SAVED (FS131-IL1): the readback and the as-given build
+
+### 5.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script, `tools/fs131_il_quotes.py` (a copy of KL1's checker under this job's prefix): **11 quotations, 0 failures**
+(`data/fs131/il/quotes.txt`) — `CLAUDE.md` § Counter-priors; the first lines of `LocalSeq`, `frozen`, `limit_isModification` (`Limit.lean`);
+this record's Stage 4 "What to prove" and "What it may change" and § 3.2's price line; the inventory's items 371–374 (main tree). `--self-test`
+(one letter planted in the first quotation): **fired** (1 failure), exit 0 for the self-test (`data/fs131/il/quotes-selftest.txt`). No mismatch.
+
+Read in full: this record (KL1's §§ 1–4); `Limit.lean`, `Procedure.lean` at `8a42a2e0`; `Chain.lean`; `ArcMap.lean`; `ValidMap/Basic.lean`'s
+definitions and engine 1; `LocalMap`'s ring vocabulary; `IsSectorChart` and `localSectors_disj` (`LocalStructure`); `Sectors.lean`'s chart
+lemmas; `contact_inType_or_outType` (`Contact`, read only); `ne1_region`, `IsTile.subset_ball` (`Tiles`); inventory items 371–374.
+
+### 5.2 The as-given build (`8a42a2e0`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1757
+modules already up to date, nothing built, 10 modules with warnings**, exit 0 (`build/gate/build/20261005T092713Z-3005915.log`; driver log
+`data/fs131/il/build-stage1-asgiven.log`). Open `sorry` children in my two files: 18 in `Limit`, 7 in `Procedure` (KL1's count).
+
+### 5.3 Route notes before the first leaf
+
+- **Locality needs no domain hypothesis, through tile size.** In a valid map every tile lies in `B(x, 1)` for each point `x` of its closure
+  (`IsTile.subset_ball`, `Tiles`), so a tile at a point of `B̄(v, 2)` lies in `B(v, 3) ⊆ W`; two valid maps agreeing on `W` have the same such
+  tiles. That reads `InType`/`OutType` at contacts without KL1's `tile_subset_ball_or_disjoint` (kept as an option, not needed).
+- **The limit agrees with a late stage on any set the late supports miss**, not only near compact parts of the domain: `LocallyFinite U` is
+  over all of `ℂ`, and pointwise stabilization of arcs at `z ∈ dom` is `frozen` at `{z}`. So `coloursAt` passes at every point, the domain's
+  frontier included (`limit_isModification`'s third clause quantifies over all `x`).
+
+## Stage 5 — SAVED (FS131-IL1)
