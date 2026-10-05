@@ -2281,3 +2281,36 @@ reason by the close.*
      landing and wave 5's base for nothing that reads it; the same reason moved `n3_end` (item 289) and `bend_away` (item 291 (d)). Cost: one restore at MERGE's
      landing (a conflict where `main` deleted the two declarations and `fs131-w4mm` proves one). Confidence: medium-high; it would change if wave 5's skeleton
      came to cite `exists_merge` before wave 4's merge-and-gate starts. In flight after IX1's launch: 1 (I4n) + 1 (I5d) + 1 (IP2) + 1 (IX1) = 4.
+
+296. **FS131-I4n done** (harness ≈ 563k; record `fs131-w4`'s `plans/FS131-I4-implementation.md`, Stages 41–43; report `data/fs131/reports/FS131-I4n.md`; commits
+     `3fe6bf11`, `8c50673c` (merge of `fs131-w4m`), `7011ce9e`, `addf6e8e`, `89af8b63`, `0d4e5eec`, `71cca146`, pushed). **Results, each [kernel] on the standard
+     three, statements unchanged**: FS112-N2-BENDS's N2-TOWARD `ArcMap.bend_toward`; N2-AWAY as the row states it, `ArcMap.bend_away_whole`, now proved directly
+     (needs no domain hypothesis); FS110-N4-SHAVE and N4-RAY at `Contact`'s statements (`exists_shave`, `exists_rayMerge`, citing IM3's `…_aux`); 56 theorems and
+     5 definitions in all (engine 3, the cut `cutArcs`; the generic bend `bendMap` and its transfer lemmas; the lens geometry; the clearness children). `fs131-w4m`
+     merged (conflicts only in `ARCHITECTURE.md` and `scripts/Axioms.lean`, both sides kept; statements checked three-way against both parents, 5,416 names, 0
+     mismatches, by the new `tools/fs131_i4_mergestmts.py`, whose planted control went red); `n3_end` deleted from `BaseSteps`, the file byte-identical to I5d's
+     `4a126455` (item 289 (b)). **`bend_away`** repaired as ruled (`hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom`, item 291 (a)), **not proved**, so it leaves wave 4 (items
+     291 (d), 295 (b)). **Receipt** (Keryx): the seven commits exist and `origin/fs131-w4` is `71cca146`; the build log
+     (`build/gate/build/20261005T012209Z-120054.log`) ends "Build completed successfully (5362 jobs)", 0 warnings other than `sorry`; `sorry` by grep over
+     `Plane/ValidMap/`: exactly 3 — `UnitArc` (`bend_away`), `Contact` (`exists_merge`), `Moves` (`exists_merge_aux`); `data/fs131/i4/axioms-i4n-43.txt` parsed by
+     script: 62 records, 60 on the standard three, `bend_away` and `exists_merge` on `sorryAx`; `bend_away`'s repaired statement read at `UnitArc` l. 3973–3974.
+     **Saved for its own job**: branch `fs131-w4ba` at `71cca146` keeps the repaired statement. **Its route, on I4n's reading (one mind)**: C₂ a finite union of
+     points and closed intervals; the lens an intersection of discs tangent to the arc at the isolated contacts (`carrier_circ_arccos`, `bendMap` reused); at an
+     isolated contact the inner class's sectors rising from the radius-2 circle with curvature below 1/2 except along an interval of C₂; **the end case at `q_A`
+     to be re-derived before kernel work** (ω(A) bounds the uncovered region beyond the arc's end); two to three sessions. **Correction owed**: FS112-N2-BENDS's
+     N2-TAN to state the radius-2 arc in the domain (item 291). **Generalization**: `bendMap` reads the domain only at the open arc; its transfer lemmas take any
+     lens and new arc meeting the named hypotheses. **Tool defect owed**: `tools/fs131_i4_treedupes.py` (through QA1's textual `qualified_decls`) reads a
+     docstring line beginning `class` as a declaration (I4n reworded the docstring). **For the merges**: `BaseSteps`' module docstring (l. 20) and `ARCHITECTURE.md`'s
+     `BaseSteps` row still name `n3_end`, identical with I5d's branch — cleaned at wave 5's merge; `fs131-w5p` and `fs131-w4mm` carry older copies of `UnitArc`'s bend
+     statements, so their merges meet `bend_away`'s new hypothesis and the new block before `r2Contacts`. Credit: I4n, for the counterexample (item 290), the direct
+     proof of `bend_away_whole`, and the three-way merge check.
+297. **Ruling: I4n's slot → FS131-G4, wave 4's landing.** Choice: one Opus implementer on `fs131-w4`: delete `bend_away` (`UnitArc`), `exists_merge` (`Contact`)
+     and `exists_merge_aux` (`Moves`) with their `scripts/Axioms.lean` records (items 291 (d), 295 (a)); teach `tools/fs131_k4_decls.py` `_root_.` names (item 281
+     (b)); rename wave 4's `framePt` (item 271); register wave 4's carriers and merge wave 2's (the second of waves 2 and 4 to land); settle the vacuity notes on
+     `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N` (items 252, 266); the full gate on one commit (zero warnings, axioms with `--self-test` re-run per
+     item 260, vacuity with `--self-test`, `check_architecture.py`, `fs131_k4_decls.py --check`); merge `main` in (`tools/fs131_qa1_dupes.py`), the gate re-run,
+     and `main` fast-forwarded from the worktree as wave 2's landing did (item 270), never force-pushed; drafts of the counts for the filing. Alternative weighed:
+     the plan's § 14.4 step 3, where Keryx fast-forwards after reading the logs — declined for the same reason as at wave 2: the landing implementer holds the
+     green commit, and I read the saved logs before filing either way. **Afterwards**: Woodall's landing job (item 190) in the next free slot; `bend_away`'s own
+     job (an Ephodos re-derivation of the end case at `q_A`, then an implementer on `fs131-w4ba`) after IMM2 and T-GRAPH, since nothing consumes it. Confidence:
+     high. In flight after G4's launch: 1 (G4) + 1 (I5d) + 1 (IP2) + 1 (IX1) = 4.
