@@ -1895,3 +1895,24 @@ clause; the two values differ because the clockwise germs are `1` apart). Left f
 by the velocity reading, I5m's children), and the band-and-linkage argument (steps 4 and 6).
 
 ## Stage 41 — SAVED
+
+## Stage 42 — SAVED (FS131-I5o): the hand-back
+
+### Theorems this phase proved (FS131-I5o)
+
+- `HadwigerNelson.Plane.ArcMap.disc1_local` (FS112-DISC1 on a fragment) — [kernel], `[propext, Classical.choice, Quot.sound]` — `Plane/ValidMap/Dense`
+- `HadwigerNelson.Plane.exists_three_le_multicolour_square` (FS106-TS-T on a square, classes given directly) — [kernel], standard three — `Dense`
+- `HadwigerNelson.Plane.ArcMap.exists_three_le_coloursAt_square` (TS-T on a square inside a fragment) — [kernel], standard three — `Dense`
+- `HadwigerNelson.Plane.ArcMap.closedSquare_subset_closedBall` — [kernel], standard three — `Dense`
+- `HadwigerNelson.Plane.IsRegOf.subset`, `.isPreconnected`, `.chain_step`, `.dist_lt_one`, `HadwigerNelson.Plane.unitPairsNull_of_dist_ne_one` — [kernel],
+  standard three — `Dense`
+- By the merge (proved on `fs131-w5p` by the planar jobs; on the standard three on this branch's merged build, Stage 39): `row134BaseUA`, `BaseCtx.false`,
+  `BaseCtx.retArcs_nested`, `BaseCtx.exists_endpoint`, `BaseCtx.exists_eleventh`, `exists_unenclosed_or_bad`, `cvb_thom_reduced`, `cvb_thom`,
+  `cvb_pinch_connected`, `cvb_hole_disconnected`, `IsBoundaryWalk.sep`, `filledGraph_ringList`, `filledGraph_planarLike`.
+- Compiled in scratch only, not in the library (no audit): `not_onRingArc_of_finite`, `ringCircle_val_germ`, `ringCircle_noSwap`
+  (`data/fs131/i5o/RingScratch.lean`); stated with `sorry`: `bend_toward_collar` (`data/fs131/i5o/BendCollar.lean`).
+
+**Left in my set (2)**: `bv_l3` (needs a ruling on its module, § 41.4; route and two steps ready), `exists_preBend` (over the collar bend, § 41.1–41.3; the
+construction is its own job). **Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 42 — SAVED
