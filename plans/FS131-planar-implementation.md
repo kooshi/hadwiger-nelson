@@ -636,3 +636,53 @@ it as its own stage. No tracked file had been edited since stage 12, so this is 
   6.9 s, `Proofs`), 9 modules with warnings, every warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T031127Z-886054.log`;
   `data/fs131/ip/build-ip4-merge-w5t.log`; grep for `warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe line).
 - F-SEP (`filledGraph_finSep`) joins my order beside F-LOC/CONN/INF/ONE.
+
+## Stage 14 — SAVED: one-sidedness (`orient`), and both `retArcs` leaves closed — PATH not needed
+
+### 14.1 The order, and why PATH was replaced
+
+Item 313 (b) put PATH (each component of the `T₁|T₂` boundary in the disc is a path) first, as the shared child of `endpoint_of_far_end`'s orientation
+step and of both `retArcs`. Working the orientation step (IP2's finding 2, IP3's route note) showed that what all three leaves read is not that the
+component is a path but that **its one side is one class**: a continuum `C` joining two circle points, with a tile `T` on one side along all of `C`, cannot
+have that tile on the counter-clockwise side at both ends. That is provable from the crossing lemma (held) with no parametrization and no Jordan-type
+theorem, so I proved it first (`orient`) and took the two `retArcs` — now the cheapest leaves — before `endpoint_of_far_end` (the brief allows a later
+leaf first when cheaper). PATH is not built and, as far as these three leaves go, not needed (F-RING not examined yet).
+
+### 14.2 Proved
+
+- **`orient_aux` / `orient`** (`MapTopology` § E, pure topology over `inter_nonempty_of_interleaved_of_isClosed_left`): `C ⊆ B̄(u, 1)` closed and
+  preconnected, `T` open, `C ∩ T = ∅`, `C ⊆ cl T`, `T ∩ B(z, r)` preconnected for small `r` at every `z ∈ C`; then two distinct points `r(θ)`, `r(φ)` of `C`
+  cannot both have the counter-clockwise germ of `ω(u)` in `cl T ∖ C` and the clockwise germ off `cl T`. The proof: extend `C` by each point's clockwise
+  germ and a radial segment out to `ω(u, R)`, `R = 1 + η` (so the extension `C'` misses `T`); the counter-clockwise germ and a radial segment join the
+  `T`-side near each point to `ω(u, R)` at angle `θ + t₀`, resp. `φ + t₀`, off `C'`; those two points are not joined off `C'` (the crossing lemma at radius
+  `R`: `θ − t₀ < θ + t₀ < φ − t₀ < φ + t₀`); but `{z ∈ C : the T-side near z is joined to the first}` and its complement in `C` are both open (one-sidedness),
+  so `C` would be split. Children: `inter_nonempty_of_interleaved_radius` (the crossing lemma moved by a homothety; model: two crossing diameters of the
+  disc of radius `2`), `polarPt_ne_of_sub`, `ringPt_eq_polarPt`; `ArcMap.tile_side` (with no repeated colour, a tile is one sector near a point of its
+  closure, the only tile of its colour there), `ArcMap.germ_side` (at a change point `a → c` the counter-clockwise germ is in `cl T₂ ∖ cl T₁`, the clockwise
+  one off `cl T₂`), `ArcMap.IsSectorChart.sector_subset_tile_of_mem`, `ArcMap.TileOf.eq_colour`, `ArcMap.GermPseudo.congr_e`, `ArcMap.GermPseudo.eq_of_same`.
+- **`BaseCtx.orient_pair`** (`BaseWalk`, beside the leaves): in the base's context, a closed preconnected `C ⊆ cl T₁ ∩ cl T₂ ∩ B̄(u, 1)` holds no two
+  distinct change points both from `a` (clockwise) to `c` (counter-clockwise).
+- **`retArcs_not_interleaved`** (statement unchanged): the closures of the two joining continua meet (the crossing lemma); if a tile of the second pair is
+  neither tile of the first, the meeting point carries three tiles, so it is cubic trichromatic with three pseudo-colours, disjoint from `u`'s and within `1`
+  of `u` — `cor3` puts a four-colour point in `B̄(u, 2)`, against H (inlined: `cor3_base` stands later in the file, so it is not cited); if the pairs share
+  their tiles, in the same order `r(s′)` and in the swapped order `r(t′)` is a second change point `a → c` on `cl K ∪ cl K′` — `orient_pair`.
+- **`retArcs_not_abut`** (statement unchanged): at the common end the germs make the second pair `(c, a)` (`GermPseudo.eq_of_same`), its tiles the first
+  pair's swapped (no repeated colour), and `r(s)`, `r(t′)` are two change points `a → c` on `cl K ∪ cl K′` — `orient_pair`. **On the standard three.**
+- `retArcs_nested` now rests only on these two (and `ringArc_cases`).
+
+### 14.3 The stage-14 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`MapTopology` 12 s, `BaseWalk` 2.6 s, `MapGraph`, `BaseDense`,
+`Proofs`), 9 modules with warnings, every warning `declaration uses 'sorry'`; `MapTopology` built with no warning; exit 0**
+(`build/gate/build/20261005T032249Z-941152.log`; `data/fs131/ip/build-ip4-s14a.log`). Axioms: `data/fs131/ip/AxiomsIP4.lean` →
+`data/fs131/ip/axioms-ip4-stage14.txt`, checked by `tools/fs131_ip_axioms.py` against `data/fs131/ip/axioms-ip4-names.txt`: **13 records on the standard
+three (the 12 children and `retArcs_not_abut`); the 4 controls on `sorryAx`: `retArcs_not_interleaved` and `retArcs_nested` (through `cor3`, wave 5's leaf,
+printed beside them as the source), `endpoint_of_far_end` (open), `cor3`**; planted fault (`retArcs_not_interleaved` listed as clean) → `NOT CLEAN …`, exit 1.
+`scripts/Axioms.lean`'s FS131-KP block gains the 12 children (under "-- FS131-IP4's added children").
+
+### 14.4 Re-priced after the first two leaves
+
+Wall clock from stage 12's commit (≈ 02:55Z) to this stage (03:41Z), with stage 13's merge build inside it: about 45 minutes, about 650 lines, one build.
+**Re-price of what is left** (implementer sessions): `endpoint_of_far_end` 0.5 (its local case list at circle points is written, `circ_local` iteration-green
+but for its last case split; then the handshake, the distance bound and the assembly); F-LOC/CONN/INF/ONE and F-SEP 0.5; the adversaries 0.2; F-RING
+unmeasured (whether `orient`'s class argument replaces boundary walks there is the first thing to look at).

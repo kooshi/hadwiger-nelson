@@ -3116,6 +3116,19 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.fin_two_eq_of_ne
 #print axioms HadwigerNelson.Plane.ArcMap.coloursAt_subset_of_mem_interiorPts
 #print axioms HadwigerNelson.Plane.ArcMap.exists_inner_branch
+-- FS131-IP4's added children (`MapTopology` § E, one-sidedness: the orientation step; `BaseWalk`'s `orient_pair`)
+#print axioms HadwigerNelson.Plane.ringPt_eq_polarPt
+#print axioms HadwigerNelson.Plane.polarPt_ne_of_sub
+#print axioms HadwigerNelson.Plane.inter_nonempty_of_interleaved_radius
+#print axioms HadwigerNelson.Plane.orient_aux
+#print axioms HadwigerNelson.Plane.orient
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.sector_subset_tile_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.tile_side
+#print axioms HadwigerNelson.Plane.ArcMap.germ_side
+#print axioms HadwigerNelson.Plane.ArcMap.TileOf.eq_colour
+#print axioms HadwigerNelson.Plane.ArcMap.GermPseudo.congr_e
+#print axioms HadwigerNelson.Plane.ArcMap.GermPseudo.eq_of_same
+#print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.orient_pair
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 

@@ -2045,4 +2045,488 @@ theorem ringArc_cases (u : ℂ) {s t s' t' : ℝ} (hst : s < t) (hst' : t < s + 
     · exact Or.inr (Or.inr (Or.inl (by unfold ringArc; exact image_mono (Icc_subset_Icc h3.le h4))))
     · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨n, Or.inl ⟨h3, h2, h4⟩⟩)))
 
+
+/-! ## E — one-sidedness: the orientation step (FS131-IP4) -/
+
+/-- A point of the unit circle is the polar point at radius `1`. -/
+theorem ringPt_eq_polarPt (u : ℂ) (θ : ℝ) : ringPt u θ = polarPt u 1 θ := by
+  simp [ringPt, polarPt]
+
+/-- Polar points at positive radii whose angles differ by less than a turn (and not at all) are distinct. -/
+theorem polarPt_ne_of_sub {u : ℂ} {ρ ρ' a b : ℝ} (hρ : 0 < ρ) (hρ' : 0 < ρ') (h0 : 0 < a - b) (h1 : a - b < 2 * π) :
+    polarPt u ρ a ≠ polarPt u ρ' b := by
+  intro h
+  have hn : ‖polarPt u ρ a - u‖ = ‖polarPt u ρ' b - u‖ := by rw [h]
+  rw [norm_polarPt_sub, norm_polarPt_sub, abs_of_pos hρ, abs_of_pos hρ'] at hn
+  subst hn
+  have he : e a = e b := by
+    have h2 : (ρ : ℂ) * e a = (ρ : ℂ) * e b := by
+      have := congrArg (· - u) h
+      simpa [polarPt] using this
+    exact mul_left_cancel₀ (by exact_mod_cast hρ.ne') h2
+  refine e_ne_one (t := a - b) h0.ne' (by rw [abs_of_pos h0]; exact h1) ?_
+  rw [sub_eq_add_neg, e_add, he, ← e_add, add_neg_cancel]
+  simp [e]
+
+/-- **The crossing lemma on a circle of any radius** (`inter_nonempty_of_interleaved_of_isClosed_left`, moved by the homothety about `u`):
+a closed preconnected `K` and a preconnected `K'` in `B̄(u, R)`, joining interleaved points of `ω(u, R)`, meet. -/
+theorem inter_nonempty_of_interleaved_radius {u : ℂ} {R : ℝ} (hR : 0 < R) {K K' : Set ℂ} (hK : IsClosed K)
+    (hKc : IsPreconnected K) (hK'c : IsPreconnected K') (hKd : K ⊆ closedBall u R) (hK'd : K' ⊆ closedBall u R)
+    {s s' t t' : ℝ} (h₁ : s < s') (h₂ : s' < t) (h₃ : t < t') (h₄ : t' < s + 2 * π) (hs : polarPt u R s ∈ K)
+    (ht : polarPt u R t ∈ K) (hs' : polarPt u R s' ∈ K') (ht' : polarPt u R t' ∈ K') : (K ∩ K').Nonempty := by
+  have hRc : (R : ℂ) ≠ 0 := by exact_mod_cast hR.ne'
+  set g : ℂ → ℂ := fun z => u + (z - u) / R with hg
+  set h : ℂ → ℂ := fun w => u + R * (w - u) with hh
+  have hgh : ∀ w, g (h w) = w := fun w => by simp only [hg, hh]; field_simp; ring
+  have hhg : ∀ z, h (g z) = z := fun z => by simp only [hg, hh]; field_simp; ring
+  have hgc : Continuous g := by simp only [hg]; fun_prop
+  have hhc : Continuous h := by simp only [hh]; fun_prop
+  have himg : ∀ S : Set ℂ, g '' S = h ⁻¹' S := fun S =>
+    congrFun (Set.image_eq_preimage_of_inverse (f := g) (g := h) hhg hgh) S
+  have hball : ∀ S ⊆ closedBall u R, g '' S ⊆ closedBall u 1 := by
+    rintro S hS _ ⟨z, hz, rfl⟩
+    have hz' := hS hz
+    rw [mem_closedBall, dist_eq_norm] at hz' ⊢
+    simp only [hg, add_sub_cancel_left, norm_div, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hR]
+    rw [div_le_one hR]
+    exact hz'
+  have hpt : ∀ a, g (polarPt u R a) = ringPt u a := fun a => by
+    simp only [hg, polarPt, ringPt, add_sub_cancel_left]
+    field_simp
+  obtain ⟨w, hw, hw'⟩ := inter_nonempty_of_interleaved_of_isClosed_left (u := u) (K := g '' K) (K' := g '' K')
+    (by rw [himg]; exact hK.preimage hhc) (hKc.image _ hgc.continuousOn) (hK'c.image _ hgc.continuousOn) (hball K hKd)
+    (hball K' hK'd) h₁ h₂ h₃ h₄ ⟨_, hs, hpt s⟩ ⟨_, ht, hpt t⟩ ⟨_, hs', hpt s'⟩ ⟨_, ht', hpt t'⟩
+  obtain ⟨z, hz, rfl⟩ := hw
+  obtain ⟨z', hz', hzz'⟩ := hw'
+  have : z' = z := by rw [← hhg z', hzz', hhg]
+  exact ⟨z, hz, this ▸ hz'⟩
+
+/-- **The one-sidedness of a separating continuum** (the orientation step, `exists_endpoint`'s exit and both `retArcs_not_*`; FS131-IP4,
+over the crossing lemma, no Jordan-type theorem): let `C ⊆ B̄(u, 1)` be closed and preconnected, and `T` open, disjoint from `C`, with every
+point of `C` in `cl T` and `T` one-sided there (`T ∩ B(z, r)` preconnected for small `r`). Two distinct points `r(θ)`, `r(φ)` of `C` cannot
+both have the counter-clockwise germ of `ω(u)` in `cl T ∖ C` and the clockwise one off `cl T`. Proof for `θ < φ < θ + 2π`: extend `C` by the
+clockwise germs and radial segments to `ω(u, R)`, `R = 1 + η`, giving `C'` with points at angles `θ − t₀`, `φ − t₀` of `ω(u, R)`; the
+points at `θ + t₀`, `φ + t₀` are reached from the `T`-side near `r(θ)` and near `r(φ)` along the counter-clockwise germs, so they are not
+joined off `C'` (the crossing lemma at radius `R`); but along the preconnected `C` the `T`-side's class off `C'` is locally constant. -/
+theorem orient_aux {u : ℂ} {T C : Set ℂ} (hTo : IsOpen T) (hC : IsClosed C) (hCc : IsPreconnected C) (hCd : C ⊆ closedBall u 1)
+    (hCT : Disjoint C T) (hcl : C ⊆ closure T) (hloc : ∀ z ∈ C, ∃ r₀ > 0, ∀ r ∈ Ioc 0 r₀, IsPreconnected (T ∩ ball z r))
+    {θ φ : ℝ} (hθφ : θ < φ) (hφθ : φ < θ + 2 * π) (hx : ringPt u θ ∈ C) (hq : ringPt u φ ∈ C)
+    (hx₁ : ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (θ + t) ∈ closure T \ C) (hx₂ : ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (θ - t) ∉ closure T)
+    (hq₁ : ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (φ + t) ∈ closure T \ C) (hq₂ : ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (φ - t) ∉ closure T) :
+    False := by
+  have hπ := Real.pi_pos
+  obtain ⟨δ₁, hδ₁, hx₁⟩ := hx₁
+  obtain ⟨δ₂, hδ₂, hx₂⟩ := hx₂
+  obtain ⟨δ₃, hδ₃, hq₁⟩ := hq₁
+  obtain ⟨δ₄, hδ₄, hq₂⟩ := hq₂
+  set m := min (min (min δ₁ δ₂) (min δ₃ δ₄)) (min ((φ - θ) / 2) ((θ + 2 * π - φ) / 2)) with hm
+  have hm0 : 0 < m := lt_min (lt_min (lt_min hδ₁ hδ₂) (lt_min hδ₃ hδ₄)) (lt_min (by linarith) (by linarith))
+  have hm1 : m ≤ δ₁ := (min_le_left _ _).trans ((min_le_left _ _).trans (min_le_left _ _))
+  have hm2 : m ≤ δ₂ := (min_le_left _ _).trans ((min_le_left _ _).trans (min_le_right _ _))
+  have hm3 : m ≤ δ₃ := (min_le_left _ _).trans ((min_le_right _ _).trans (min_le_left _ _))
+  have hm4 : m ≤ δ₄ := (min_le_left _ _).trans ((min_le_right _ _).trans (min_le_right _ _))
+  have hm5 : m ≤ (φ - θ) / 2 := (min_le_right _ _).trans (min_le_left _ _)
+  have hm6 : m ≤ (θ + 2 * π - φ) / 2 := (min_le_right _ _).trans (min_le_right _ _)
+  set t₀ := m / 2 with ht₀
+  have ht₀0 : 0 < t₀ := half_pos hm0
+  have ht₀m : t₀ < m := half_lt_self hm0
+  -- the clockwise germ points and the radius
+  have hTne : (closure T).Nonempty := ⟨_, hcl hx⟩
+  have hgx : ringPt u (θ - t₀) ∉ closure T := hx₂ t₀ ⟨ht₀0, by linarith⟩
+  have hgq : ringPt u (φ - t₀) ∉ closure T := hq₂ t₀ ⟨ht₀0, by linarith⟩
+  have hεx := (isClosed_closure.notMem_iff_infDist_pos hTne).mp hgx
+  have hεq := (isClosed_closure.notMem_iff_infDist_pos hTne).mp hgq
+  set η := min (infDist (ringPt u (θ - t₀)) (closure T)) (infDist (ringPt u (φ - t₀)) (closure T)) / 2 with hη
+  have hη0 : 0 < η := half_pos (lt_min hεx hεq)
+  have hηx : η < infDist (ringPt u (θ - t₀)) (closure T) := by
+    have := min_le_left (infDist (ringPt u (θ - t₀)) (closure T)) (infDist (ringPt u (φ - t₀)) (closure T)); linarith
+  have hηq : η < infDist (ringPt u (φ - t₀)) (closure T) := by
+    have := min_le_right (infDist (ringPt u (θ - t₀)) (closure T)) (infDist (ringPt u (φ - t₀)) (closure T)); linarith
+  set R := 1 + η with hR
+  have hR0 : 0 < R := by linarith
+  -- the extensions `Λ α`: the clockwise germ, then the radial segment out to `ω(u, R)`
+  set Λ : ℝ → Set ℂ := fun α => ringPt u '' Icc (α - t₀) α ∪ (fun ρ : ℝ => polarPt u ρ (α - t₀)) '' Icc 1 R with hΛ
+  have hcontR : ∀ α : ℝ, Continuous fun s : ℝ => ringPt u (α + s) := fun α => by unfold ringPt e; fun_prop
+  have hcontR' : Continuous fun s : ℝ => ringPt u s := by unfold ringPt e; fun_prop
+  have hcontP : ∀ β : ℝ, Continuous fun ρ : ℝ => polarPt u ρ β := fun β => by unfold polarPt e; fun_prop
+  have hΛc : ∀ α, IsCompact (Λ α) := fun α =>
+    (isCompact_Icc.image hcontR').union (isCompact_Icc.image (hcontP _))
+  have hΛpre : ∀ α, IsPreconnected (Λ α) := by
+    intro α
+    refine IsPreconnected.union (ringPt u (α - t₀)) ⟨α - t₀, ⟨le_rfl, by linarith⟩, rfl⟩
+      ⟨1, ⟨le_rfl, by linarith⟩, (ringPt_eq_polarPt u _).symm⟩ (isPreconnected_Icc.image _ hcontR'.continuousOn)
+      (isPreconnected_Icc.image _ (hcontP _).continuousOn)
+  have hΛα : ∀ α, ringPt u α ∈ Λ α := fun α => Or.inl ⟨α, ⟨by linarith, le_rfl⟩, rfl⟩
+  have hΛe : ∀ α, polarPt u R (α - t₀) ∈ Λ α := fun α => Or.inr ⟨R, ⟨by linarith, le_rfl⟩, rfl⟩
+  have hΛd : ∀ α, Λ α ⊆ closedBall u R := by
+    intro α z hz
+    rcases hz with ⟨s, -, rfl⟩ | ⟨ρ, hρ, rfl⟩
+    · rw [mem_closedBall, dist_ringPt]; linarith
+    · rw [mem_closedBall, dist_eq_norm, norm_polarPt_sub, abs_of_pos (by linarith [hρ.1])]; exact hρ.2
+  -- every point of `Λ α` is a polar point at radius `≥ 1` with angle in `[α − t₀, α]`
+  have hΛform : ∀ α z, z ∈ Λ α → ∃ ρ β, 1 ≤ ρ ∧ β ∈ Icc (α - t₀) α ∧ z = polarPt u ρ β := by
+    intro α z hz
+    rcases hz with ⟨s, hs, rfl⟩ | ⟨ρ, hρ, rfl⟩
+    · exact ⟨1, s, le_rfl, hs, ringPt_eq_polarPt u s⟩
+    · exact ⟨ρ, α - t₀, hρ.1, ⟨le_rfl, by linarith⟩, rfl⟩
+  have hnotΛ : ∀ α γ ρ, 0 < ρ → (∀ β ∈ Icc (α - t₀) α, (0 < γ - β ∧ γ - β < 2 * π) ∨ (0 < β - γ ∧ β - γ < 2 * π)) →
+      polarPt u ρ γ ∉ Λ α := by
+    intro α γ ρ hρ hang hmem
+    obtain ⟨ρ', β, hρ', hβ, heq⟩ := hΛform α _ hmem
+    rcases hang β hβ with h | h
+    · exact polarPt_ne_of_sub hρ (by linarith) h.1 h.2 heq
+    · exact polarPt_ne_of_sub (by linarith) hρ h.1 h.2 heq.symm
+  -- `Λ α` misses `T`
+  have hΛT : ∀ α, (∀ t ∈ Ioc 0 t₀, ringPt u (α - t) ∉ closure T) → ringPt u α ∉ T →
+      η < infDist (ringPt u (α - t₀)) (closure T) → Disjoint (Λ α) T := by
+    intro α hgerm hαT hηα
+    rw [Set.disjoint_left]
+    rintro z (⟨s, hs, rfl⟩ | ⟨ρ, hρ, rfl⟩) hzT
+    · by_cases hsα : s = α
+      · exact hαT (hsα ▸ hzT)
+      · have h := hgerm (α - s) ⟨by linarith [lt_of_le_of_ne hs.2 hsα], by linarith [hs.1]⟩
+        rw [show α - (α - s) = s by ring] at h
+        exact h (subset_closure hzT)
+    · have hd : dist (polarPt u ρ (α - t₀)) (ringPt u (α - t₀)) ≤ η := by
+        have := dist_polarPt_ringPt_le u ρ (α - t₀) (α - t₀)
+        rw [sub_self, abs_zero, add_zero, abs_of_nonneg (by linarith [hρ.1])] at this
+        linarith [hρ.2]
+      have := infDist_le_dist_of_mem (x := ringPt u (α - t₀)) (subset_closure hzT)
+      rw [dist_comm] at this
+      linarith
+  have hxT : ringPt u θ ∉ T := fun h => Set.disjoint_left.mp hCT hx h
+  have hqT : ringPt u φ ∉ T := fun h => Set.disjoint_left.mp hCT hq h
+  have hΛxT := hΛT θ (fun t ht => hx₂ t ⟨ht.1, by linarith [ht.2]⟩) hxT hηx
+  have hΛqT := hΛT φ (fun t ht => hq₂ t ⟨ht.1, by linarith [ht.2]⟩) hqT hηq
+  -- the extended continuum
+  set C' := C ∪ Λ θ ∪ Λ φ with hC'
+  have hC'c : IsClosed C' := (hC.union (hΛc θ).isClosed).union (hΛc φ).isClosed
+  have hC'pre : IsPreconnected C' :=
+    (hCc.union (ringPt u θ) hx (hΛα θ) (hΛpre θ)).union (ringPt u φ) (Or.inl hq) (hΛα φ) (hΛpre φ)
+  have hC'd : C' ⊆ closedBall u R := by
+    refine union_subset (union_subset (hCd.trans (closedBall_subset_closedBall (by linarith))) (hΛd θ)) (hΛd φ)
+  have hC'T : Disjoint C' T := (hCT.union_left hΛxT).union_left hΛqT
+  have hC'ne : C'.Nonempty := ⟨_, Or.inl (Or.inl hx)⟩
+  set V' := closedBall u R \ C' with hV'
+  -- the points reached along the counter-clockwise germs avoid `C'`
+  have hoffC : ∀ ρ γ, 1 ≤ ρ → ρ ≤ R → (ρ = 1 → ringPt u γ ∉ C) → polarPt u ρ γ ∉ C := by
+    intro ρ γ hρ1 hρR h1 hmem
+    rcases eq_or_lt_of_le hρ1 with h | h
+    · subst h; exact h1 rfl (by rw [ringPt_eq_polarPt]; exact hmem)
+    · have := hCd hmem
+      rw [mem_closedBall, dist_eq_norm, norm_polarPt_sub, abs_of_pos (by linarith)] at this
+      linarith
+  have hθoff : ∀ ρ ∈ Icc 1 R, ∀ t ∈ Ioc 0 t₀, polarPt u ρ (θ + t) ∉ C' := by
+    intro ρ hρ t ht hmem
+    rcases hmem with (hmem | hmem) | hmem
+    · exact hoffC ρ (θ + t) hρ.1 hρ.2 (fun _ => (hx₁ t ⟨ht.1, by linarith [ht.2]⟩).2) hmem
+    · refine hnotΛ θ (θ + t) ρ (by linarith [hρ.1]) (fun β hβ => Or.inl ⟨by linarith [hβ.2, ht.1], ?_⟩) hmem
+      linarith [hβ.1, ht.2]
+    · refine hnotΛ φ (θ + t) ρ (by linarith [hρ.1]) (fun β hβ => Or.inr ⟨by linarith [hβ.1, ht.2], ?_⟩) hmem
+      linarith [hβ.2, ht.1]
+  have hφoff : ∀ ρ ∈ Icc 1 R, ∀ t ∈ Ioc 0 t₀, polarPt u ρ (φ + t) ∉ C' := by
+    intro ρ hρ t ht hmem
+    rcases hmem with (hmem | hmem) | hmem
+    · exact hoffC ρ (φ + t) hρ.1 hρ.2 (fun _ => (hq₁ t ⟨ht.1, by linarith [ht.2]⟩).2) hmem
+    · refine hnotΛ θ (φ + t) ρ (by linarith [hρ.1]) (fun β hβ => Or.inl ⟨by linarith [hβ.2, ht.1], ?_⟩) hmem
+      linarith [hβ.1, ht.2]
+    · refine hnotΛ φ (φ + t) ρ (by linarith [hρ.1]) (fun β hβ => Or.inl ⟨by linarith [hβ.2, ht.1], ?_⟩) hmem
+      linarith [hβ.1, ht.2]
+  -- the `T`-side near a point of `C` lies off `C'`
+  have hsideV : ∀ z ∈ C, ∀ r ≤ η, T ∩ ball z r ⊆ V' := by
+    intro z hz r hr v hv
+    refine ⟨?_, fun h => Set.disjoint_left.mp hC'T h hv.1⟩
+    have h1 := hCd hz
+    rw [mem_closedBall] at h1 ⊢
+    have h2 := mem_ball.mp hv.2
+    linarith [dist_triangle v z u]
+  -- the `T`-side near `r(α)` is joined off `C'` to `ω(u, R)` at angle `α + t₀`
+  have hside : ∀ α : ℝ, ringPt u α ∈ C → (∀ t ∈ Ioc 0 t₀, ringPt u (α + t) ∈ closure T) →
+      (∀ ρ ∈ Icc 1 R, ∀ t ∈ Ioc 0 t₀, polarPt u ρ (α + t) ∉ C') →
+      ∃ r > 0, ∀ v ∈ T ∩ ball (ringPt u α) r, JoinedIn V' (polarPt u R (α + t₀)) v := by
+    intro α hα hcl' hoff
+    obtain ⟨r₀, hr₀, hpre⟩ := hloc _ hα
+    set r := min r₀ η with hr
+    have hr0 : 0 < r := lt_min hr₀ hη0
+    have hSV := hsideV _ hα r (min_le_right _ _)
+    set t₁ := min t₀ (r / 4) with ht₁
+    have ht₁0 : 0 < t₁ := lt_min ht₀0 (by linarith)
+    have ht₁t₀ : t₁ ≤ t₀ := min_le_left _ _
+    have ht₁r : t₁ ≤ r / 4 := min_le_right _ _
+    have hg₁T : ringPt u (α + t₁) ∈ closure T := hcl' t₁ ⟨ht₁0, ht₁t₀⟩
+    have hg₁C' : ringPt u (α + t₁) ∉ C' := by
+      rw [ringPt_eq_polarPt]; exact hoff 1 ⟨le_rfl, by linarith⟩ t₁ ⟨ht₁0, ht₁t₀⟩
+    have hε' := (hC'c.notMem_iff_infDist_pos hC'ne).mp hg₁C'
+    obtain ⟨w₀, hw₀T, hw₀d⟩ := Metric.mem_closure_iff.mp hg₁T (min (infDist (ringPt u (α + t₁)) C') (r / 4))
+      (lt_min hε' (by linarith))
+    have hg₁x : dist (ringPt u (α + t₁)) (ringPt u α) ≤ t₁ := by
+      rw [dist_eq_norm, show ringPt u (α + t₁) - ringPt u α = e (α + t₁) - e α by simp [ringPt]]
+      have := norm_e_sub_e_le (α + t₁) α
+      rwa [show α + t₁ - α = t₁ by ring, abs_of_pos ht₁0] at this
+    have hw₀S : w₀ ∈ T ∩ ball (ringPt u α) r := by
+      refine ⟨hw₀T, ?_⟩
+      rw [mem_ball]
+      have := min_le_right (infDist (ringPt u (α + t₁)) C') (r / 4)
+      rw [dist_comm] at hw₀d
+      linarith [dist_triangle w₀ (ringPt u (α + t₁)) (ringPt u α)]
+    -- `w₀` to the germ point, inside a ball missing `C'`
+    have hJ1 : JoinedIn V' w₀ (ringPt u (α + t₁)) := by
+      set Bl := ball (ringPt u (α + t₁)) (infDist (ringPt u (α + t₁)) C') ∩ closedBall u R with hBl
+      have hBlV : Bl ⊆ V' := fun y hy => ⟨hy.2, fun hyC => by
+        have := infDist_le_dist_of_mem (x := ringPt u (α + t₁)) hyC
+        have h2 := mem_ball.mp hy.1
+        rw [dist_comm] at h2
+        linarith⟩
+      have hw₀Bl : w₀ ∈ Bl := by
+        refine ⟨?_, (hSV hw₀S).1⟩
+        rw [mem_ball, dist_comm]
+        exact lt_of_lt_of_le hw₀d (min_le_left _ _)
+      have hg₁Bl : ringPt u (α + t₁) ∈ Bl :=
+        ⟨mem_ball_self hε', by rw [mem_closedBall, dist_ringPt]; linarith⟩
+      exact (((convex_ball _ _).inter (convex_closedBall _ _)).isPathConnected ⟨_, hw₀Bl⟩).joinedIn _ hw₀Bl _ hg₁Bl
+        |>.mono hBlV
+    -- along the germ
+    have hJ2 : JoinedIn V' (ringPt u (α + t₁)) (ringPt u (α + t₀)) := by
+      have hP : IsPathConnected ((fun s : ℝ => ringPt u (α + s)) '' Icc t₁ t₀) :=
+        ((convex_Icc t₁ t₀).isPathConnected (nonempty_Icc.mpr ht₁t₀)).image' (hcontR α).continuousOn
+      refine (hP.joinedIn _ ⟨t₁, ⟨le_rfl, ht₁t₀⟩, rfl⟩ _ ⟨t₀, ⟨ht₁t₀, le_rfl⟩, rfl⟩).mono ?_
+      rintro _ ⟨s, hs, rfl⟩
+      refine ⟨by rw [mem_closedBall, dist_ringPt]; linarith, ?_⟩
+      show ringPt u (α + s) ∉ C'
+      rw [ringPt_eq_polarPt]
+      exact hoff 1 ⟨le_rfl, by linarith⟩ s ⟨by linarith [hs.1], hs.2⟩
+    -- out along the radius
+    have hJ3 : JoinedIn V' (ringPt u (α + t₀)) (polarPt u R (α + t₀)) := by
+      have hP : IsPathConnected ((fun ρ : ℝ => polarPt u ρ (α + t₀)) '' Icc 1 R) :=
+        ((convex_Icc 1 R).isPathConnected (nonempty_Icc.mpr (by linarith))).image' (hcontP _).continuousOn
+      refine (hP.joinedIn _ ⟨1, ⟨le_rfl, by linarith⟩, (ringPt_eq_polarPt u _).symm⟩ _
+        ⟨R, ⟨by linarith, le_rfl⟩, rfl⟩).mono ?_
+      rintro _ ⟨ρ, hρ, rfl⟩
+      refine ⟨?_, hoff ρ hρ t₀ ⟨ht₀0, le_rfl⟩⟩
+      rw [mem_closedBall, dist_eq_norm, norm_polarPt_sub, abs_of_pos (by linarith [hρ.1])]
+      exact hρ.2
+    refine ⟨r, hr0, fun v hv => ?_⟩
+    have hSpc : IsPathConnected (T ∩ ball (ringPt u α) r) :=
+      (hTo.inter isOpen_ball).isConnected_iff_isPathConnected.mp ⟨⟨w₀, hw₀S⟩, hpre r ⟨hr0, min_le_left _ _⟩⟩
+    have hJ4 : JoinedIn V' w₀ v := (hSpc.joinedIn _ hw₀S _ hv).mono hSV
+    exact hJ3.symm.trans (hJ2.symm.trans (hJ1.symm.trans hJ4))
+  -- the two radial ends are not joined off `C'` (the crossing lemma at radius `R`)
+  have hNJ : ¬ JoinedIn V' (polarPt u R (θ + t₀)) (polarPt u R (φ + t₀)) := by
+    intro hJ
+    set γ := hJ.somePath
+    obtain ⟨z, hzC', hzγ⟩ := inter_nonempty_of_interleaved_radius (K := C') (K' := range γ) hR0 hC'c hC'pre
+      (isPreconnected_range γ.continuous) hC'd (fun y ⟨s, hs⟩ => hs ▸ (hJ.somePath_mem s).1)
+      (s := θ - t₀) (s' := θ + t₀) (t := φ - t₀) (t' := φ + t₀) (by linarith) (by linarith) (by linarith) (by linarith)
+      (Or.inl (Or.inr (hΛe θ))) (Or.inr (hΛe φ)) ⟨0, γ.source⟩ ⟨1, γ.target⟩
+    obtain ⟨s, rfl⟩ := hzγ
+    exact (hJ.somePath_mem s).2 hzC'
+  -- the class of the `T`-side is locally constant along `C`
+  set UA := {w : ℂ | ∃ r > 0, ∀ v ∈ T ∩ ball w r, JoinedIn V' (polarPt u R (θ + t₀)) v} with hUA
+  set UB := {w : ℂ | ∃ r > 0, ∀ v ∈ T ∩ ball w r, ¬ JoinedIn V' (polarPt u R (θ + t₀)) v} with hUB
+  have hshrink : ∀ (P : ℂ → Prop) (w : ℂ) (r : ℝ), 0 < r → (∀ v ∈ T ∩ ball w r, P v) →
+      ∀ w' ∈ ball w (r / 2), ∀ v ∈ T ∩ ball w' (r / 2), P v := by
+    intro P w r hr h w' hw' v hv
+    refine h v ⟨hv.1, ?_⟩
+    rw [mem_ball] at hw' ⊢
+    have := mem_ball.mp hv.2
+    linarith [dist_triangle v w' w]
+  have hUAo : IsOpen UA := by
+    rw [Metric.isOpen_iff]
+    rintro w ⟨r, hr, hw⟩
+    exact ⟨r / 2, half_pos hr, fun w' hw' => ⟨r / 2, half_pos hr, hshrink _ w r hr hw w' hw'⟩⟩
+  have hUBo : IsOpen UB := by
+    rw [Metric.isOpen_iff]
+    rintro w ⟨r, hr, hw⟩
+    exact ⟨r / 2, half_pos hr, fun w' hw' => ⟨r / 2, half_pos hr, hshrink _ w r hr hw w' hw'⟩⟩
+  have hcov : C ⊆ UA ∪ UB := by
+    intro z hz
+    obtain ⟨r₀, hr₀, hpre⟩ := hloc z hz
+    set r := min r₀ η with hr
+    have hr0 : 0 < r := lt_min hr₀ hη0
+    have hSV := hsideV z hz r (min_le_right _ _)
+    by_cases hex : ∃ v ∈ T ∩ ball z r, JoinedIn V' (polarPt u R (θ + t₀)) v
+    · obtain ⟨v₀, hv₀, hJ₀⟩ := hex
+      have hSpc : IsPathConnected (T ∩ ball z r) :=
+        (hTo.inter isOpen_ball).isConnected_iff_isPathConnected.mp ⟨⟨v₀, hv₀⟩, hpre r ⟨hr0, min_le_left _ _⟩⟩
+      exact Or.inl ⟨r, hr0, fun v hv => hJ₀.trans ((hSpc.joinedIn _ hv₀ _ hv).mono hSV)⟩
+    · push Not at hex
+      exact Or.inr ⟨r, hr0, hex⟩
+  have hdisj : C ∩ (UA ∩ UB) = ∅ := by
+    rw [Set.eq_empty_iff_forall_notMem]
+    rintro z ⟨hz, ⟨r₁, hr₁, h₁⟩, ⟨r₂, hr₂, h₂⟩⟩
+    obtain ⟨v, hvT, hvd⟩ := Metric.mem_closure_iff.mp (hcl hz) (min r₁ r₂) (lt_min hr₁ hr₂)
+    have hv1 : v ∈ ball z r₁ := by rw [mem_ball, dist_comm]; exact lt_of_lt_of_le hvd (min_le_left _ _)
+    have hv2 : v ∈ ball z r₂ := by rw [mem_ball, dist_comm]; exact lt_of_lt_of_le hvd (min_le_right _ _)
+    exact h₂ v ⟨hvT, hv2⟩ (h₁ v ⟨hvT, hv1⟩)
+  have hxA : ringPt u θ ∈ UA :=
+    hside θ hx (fun t ht => (hx₁ t ⟨ht.1, by linarith [ht.2]⟩).1) hθoff
+  have hqB : ringPt u φ ∈ UB := by
+    obtain ⟨r, hr, h⟩ := hside φ hq (fun t ht => (hq₁ t ⟨ht.1, by linarith [ht.2]⟩).1) hφoff
+    exact ⟨r, hr, fun v hv hJ => hNJ (hJ.trans (h v hv).symm)⟩
+  rcases isPreconnected_iff_subset_of_disjoint.mp hCc UA UB hUAo hUBo hcov hdisj with h | h
+  · exact (Set.eq_empty_iff_forall_notMem.mp hdisj) _ ⟨hq, h hq, hqB⟩
+  · exact (Set.eq_empty_iff_forall_notMem.mp hdisj) _ ⟨hx, hxA, h hx⟩
+
+/-- **The model of `inter_nonempty_of_interleaved_radius`'s hypotheses** (every hypothesis at once): the two crossing diameters of the disc of
+radius `2` about `0`, from angle `0` to `π` and from `π/2` to `3π/2`. -/
+example : (segment ℝ (polarPt 0 2 0) (polarPt 0 2 π) ∩ segment ℝ (polarPt 0 2 (π / 2)) (polarPt 0 2 (3 * π / 2))).Nonempty := by
+  have hc : IsClosed (segment ℝ (polarPt 0 2 0) (polarPt 0 2 π)) := by
+    rw [segment_eq_image' ℝ]; exact (isCompact_Icc.image (by fun_prop)).isClosed
+  have hm : ∀ x : ℝ, polarPt 0 2 x ∈ closedBall (0 : ℂ) 2 := fun x => by
+    rw [mem_closedBall, dist_eq_norm, norm_polarPt_sub, abs_of_pos two_pos]
+  exact inter_nonempty_of_interleaved_radius two_pos hc (convex_segment _ _).isPreconnected (convex_segment _ _).isPreconnected
+    ((convex_closedBall 0 2).segment_subset (hm _) (hm _)) ((convex_closedBall 0 2).segment_subset (hm _) (hm _))
+    (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos])
+    (left_mem_segment _ _ _) (right_mem_segment _ _ _) (left_mem_segment _ _ _) (right_mem_segment _ _ _)
+
+/-- A spec example for `polarPt_ne_of_sub`: the points `2` and `2i` of the circle of radius `2` differ. -/
+example : polarPt 0 2 (π / 2) ≠ polarPt 0 2 0 :=
+  polarPt_ne_of_sub two_pos two_pos (by linarith [Real.pi_pos]) (by linarith [Real.pi_pos])
+
+/-- **The one-sidedness of a separating continuum**, any two angles (`orient_aux` after reducing `φ` into `(θ, θ + 2π)`). -/
+theorem orient {u : ℂ} {T C : Set ℂ} (hTo : IsOpen T) (hC : IsClosed C) (hCc : IsPreconnected C) (hCd : C ⊆ closedBall u 1)
+    (hCT : Disjoint C T) (hcl : C ⊆ closure T) (hloc : ∀ z ∈ C, ∃ r₀ > 0, ∀ r ∈ Ioc 0 r₀, IsPreconnected (T ∩ ball z r))
+    {θ φ : ℝ} (hx : ringPt u θ ∈ C) (hq : ringPt u φ ∈ C) (hxq : ringPt u θ ≠ ringPt u φ)
+    (hx₁ : ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (θ + t) ∈ closure T \ C) (hx₂ : ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (θ - t) ∉ closure T)
+    (hq₁ : ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (φ + t) ∈ closure T \ C) (hq₂ : ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (φ - t) ∉ closure T) :
+    False := by
+  obtain ⟨ψ, hψ, heψ⟩ := exists_mem_Icc_e_eq θ φ
+  have hshift : ∀ t, ringPt u (ψ + t) = ringPt u (φ + t) := fun t => by simp only [ringPt, e_add, heψ]
+  have hshift' : ∀ t, ringPt u (ψ - t) = ringPt u (φ - t) := fun t => by
+    simp only [ringPt, sub_eq_add_neg, e_add, heψ]
+  have hψφ : ringPt u ψ = ringPt u φ := by simpa using hshift 0
+  have hθψ : θ < ψ := lt_of_le_of_ne hψ.1 fun h => hxq (by rw [← hψφ, h])
+  have hψθ : ψ < θ + 2 * π := lt_of_le_of_ne hψ.2 fun h => hxq (by rw [← hψφ, h, ringPt, ringPt, e_add_two_pi])
+  refine orient_aux hTo hC hCc hCd hCT hcl hloc hθψ hψθ hx (hψφ ▸ hq) hx₁ hx₂ ?_ ?_
+  · obtain ⟨δ, hδ, h⟩ := hq₁; exact ⟨δ, hδ, fun t ht => hshift t ▸ h t ht⟩
+  · obtain ⟨δ, hδ, h⟩ := hq₂; exact ⟨δ, hδ, fun t ht => hshift' t ▸ h t ht⟩
+
+namespace ArcMap
+
+variable {k : ℕ} {F : ArcMap k}
+
+/-- A tile meeting a sector of a chart holds the whole sector (the sector is preconnected inside the interior points). -/
+theorem IsSectorChart.sector_subset_tile_of_mem {n : ℕ} {G : BranchGerms n} {z : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G z r₀)
+    (hn : 0 < n) {r : ℝ} (hr : r ∈ Ioc 0 r₀) {A : Set ℂ} (hA : F.IsTile A) {j : Fin n} {w : ℂ} (hw : w ∈ G.sector z r j)
+    (hwA : w ∈ A) : G.sector z r j ⊆ A := by
+  obtain ⟨x, hx, rfl⟩ := hA
+  rw [connectedComponentIn_eq hwA]
+  exact (hC.isPreconnected r hr j).subset_connectedComponentIn hw (hC.sector_subset_interiorPts hn hr j)
+
+/-- **A tile is one-sided at a point with no repeated colour**: near a point `z` of the domain in the closure of a tile `T` of colour `c`,
+with no repeated colour, `T ∩ B(z, r)` is one sector (or the whole disc), hence preconnected, and `T` is the only tile of colour `c` meeting
+`B(z, r)`; the disc lies in the domain. -/
+theorem tile_side {z : ℂ} (hz : z ∈ F.dom) (hnr : ¬ F.HasRepeatedColour z) {c : Fin k} {T : Set ℂ} (hT : F.TileOf c T)
+    (hzT : z ∈ closure T) :
+    ∃ r₀ > 0, ball z r₀ ⊆ F.dom ∧ ∀ r ∈ Ioc 0 r₀, IsPreconnected (T ∩ ball z r) ∧
+      ∀ T', F.TileOf c T' → (T' ∩ ball z r).Nonempty → T' = T := by
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F hz
+  refine ⟨r₀, hC.pos, hC.subdom, fun r hr => ?_⟩
+  obtain ⟨a, haT, hab⟩ := (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨z, hzT, mem_ball_self hr.1⟩
+  by_cases hn : n = 0
+  · -- no germ: the disc is interior, inside `T`
+    have hball : ball z r ⊆ F.interiorPts := (ball_subset_ball hr.2).trans (hC.empty hn)
+    have hsub : ball z r ⊆ T := by
+      obtain ⟨x, hx, hTx⟩ := hT.1
+      rw [hTx, connectedComponentIn_eq (hTx ▸ haT)]
+      exact (convex_ball z r).isPreconnected.subset_connectedComponentIn hab hball
+    refine ⟨by rw [inter_eq_right.mpr hsub]; exact (convex_ball z r).isPreconnected, fun T' hT' ⟨w, hwT', hwb⟩ => ?_⟩
+    exact hT'.1.eq_of_mem hT.1 hwT' (hsub hwb)
+  have hn0 : 0 < n := Nat.pos_of_ne_zero hn
+  obtain ⟨i, hi⟩ := hC.exists_sector_subset_tile hn0 hr hT.1 hzT
+  -- a tile of colour `c` meeting the disc holds a sector, which is `i`
+  have hsec : ∀ T', F.TileOf c T' → ∀ w ∈ T' ∩ ball z r, ∃ j, w ∈ G.sector z r j ∧ G.sector z r j ⊆ T' ∧ j = i := by
+    intro T' hT' w ⟨hwT', hwb⟩
+    have hw : w ∈ ball z r ∩ F.interiorPts := ⟨hwb, hT'.1.subset_interiorPts hwT'⟩
+    rw [hC.cover r hr hn0] at hw
+    obtain ⟨j, hj⟩ := mem_iUnion.mp hw
+    have hjT' := hC.sector_subset_tile_of_mem hn0 hr hT'.1 hj hwT'
+    refine ⟨j, hj, hjT', ?_⟩
+    by_contra hji
+    obtain ⟨y, hy⟩ := hC.sector_nonempty hr i
+    exact hnr (hC.hasRepeatedColour_of_col_eq hn0 hr hji hj hy (by rw [hT'.2 (hjT' hj), hT.2 (hi hy)]))
+  have heq : T ∩ ball z r = G.sector z r i := by
+    apply Subset.antisymm
+    · intro w hw
+      obtain ⟨j, hj, -, rfl⟩ := hsec T hT w hw
+      exact hj
+    · intro w hw
+      exact ⟨hi hw, G.sector_subset_ball i hw⟩
+  refine ⟨heq ▸ hC.isPreconnected r hr i, fun T' hT' ⟨w, hw⟩ => ?_⟩
+  obtain ⟨j, hj, hjT', rfl⟩ := hsec T' hT' w hw
+  exact hT'.1.eq_of_mem hT.1 (hjT' hj) (hi hj)
+
+/-- **The germs of a change point, read through the tiles**: at a change point `r(θ)` of the pseudo-colouring of `ω(u)` from `a` (clockwise)
+to `c` (counter-clockwise), with `T₂` the `c`-tile there and no repeated colour at `r(θ)`, the counter-clockwise germ lies in `cl T₂` and
+off `cl T₁` (any `a`-tile `T₁`), and the clockwise germ off `cl T₂`. -/
+theorem germ_side {u : ℂ} {θ : ℝ} {a c : Fin k} (hac : a ≠ c) (ha : F.GermPseudo u θ .cw a) (hc : F.GermPseudo u θ .ccw c)
+    {T₁ T₂ : Set ℂ} (h₁ : F.TileOf a T₁) (h₂ : F.TileOf c T₂) (hxd : ringPt u θ ∈ F.dom) (hnr : ¬ F.HasRepeatedColour (ringPt u θ))
+    (hx₂ : ringPt u θ ∈ closure T₂) :
+    (∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (θ + t) ∈ closure T₂ \ closure T₁) ∧
+      ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (θ - t) ∉ closure T₂ := by
+  obtain ⟨r₀, hr₀, hdom, hside⟩ := tile_side hxd hnr h₂ hx₂
+  obtain ⟨δa, hδa, hga⟩ := ha
+  obtain ⟨δc, hδc, hgc⟩ := hc
+  have hmemA : ∀ t ∈ Ioo 0 δa, F.pseudoColours u (ringPt u (θ - t)) = {a} := fun t ht =>
+    hga ⟨t, ht, by simp only [Side.sign]; congr 1; ring⟩
+  have hmemC : ∀ t ∈ Ioo 0 δc, F.pseudoColours u (ringPt u (θ + t)) = {c} := fun t ht =>
+    hgc ⟨t, ht, by simp only [Side.sign, one_mul]⟩
+  have hau : a ∉ F.coloursAt u := by
+    have : a ∈ F.pseudoColours u (ringPt u (θ - δa / 2)) := by
+      rw [hmemA _ ⟨half_pos hδa, half_lt_self hδa⟩]; rfl
+    exact this.2
+  have hcu : c ∉ F.coloursAt u := by
+    have : c ∈ F.pseudoColours u (ringPt u (θ + δc / 2)) := by
+      rw [hmemC _ ⟨half_pos hδc, half_lt_self hδc⟩]; rfl
+    exact this.2
+  refine ⟨⟨min δc r₀, lt_min hδc hr₀, fun t ht => ⟨?_, fun hT₁ => ?_⟩⟩, ⟨δa, hδa, fun t ht hT₂ => ?_⟩⟩
+  · have htc : t ∈ Ioo 0 δc := ⟨ht.1, ht.2.trans_le (min_le_left _ _)⟩
+    have hp : c ∈ F.coloursAt (ringPt u (θ + t)) := by
+      have : c ∈ F.pseudoColours u (ringPt u (θ + t)) := by rw [hmemC t htc]; rfl
+      exact this.1
+    have hpb : ringPt u (θ + t) ∈ ball (ringPt u θ) r₀ := by
+      rw [mem_ball, dist_eq_norm, show ringPt u (θ + t) - ringPt u θ = e (θ + t) - e θ by simp [ringPt]]
+      have := norm_e_sub_e_le (θ + t) θ
+      rw [show θ + t - θ = t by ring, abs_of_pos ht.1] at this
+      linarith [ht.2.trans_le (min_le_right _ _)]
+    obtain ⟨T', hT', hpT'⟩ := (F.mem_coloursAt_iff_exists_tileOf (hdom hpb)).mp hp
+    have hT'ne : (T' ∩ ball (ringPt u θ) r₀).Nonempty :=
+      (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨_, hpT', hpb⟩
+    rw [← (hside r₀ ⟨hr₀, le_rfl⟩).2 T' hT' hT'ne]
+    exact hpT'
+  · have htc : t ∈ Ioo 0 δc := ⟨ht.1, ht.2.trans_le (min_le_left _ _)⟩
+    have : a ∈ F.pseudoColours u (ringPt u (θ + t)) := ⟨mem_coloursAt_of_tileOf h₁ hT₁, hau⟩
+    rw [hmemC t htc, mem_singleton_iff] at this
+    exact hac this
+  · have : c ∈ F.pseudoColours u (ringPt u (θ - t)) := ⟨mem_coloursAt_of_tileOf h₂ hT₂, hcu⟩
+    rw [hmemA t ht, mem_singleton_iff] at this
+    exact hac this.symm
+
+/-- A tile has one colour. -/
+theorem TileOf.eq_colour {c c' : Fin k} {T : Set ℂ} (h : F.TileOf c T) (h' : F.TileOf c' T) : c = c' := by
+  obtain ⟨y, hy⟩ := h.1.nonempty
+  exact (h.2 hy).symm.trans (h'.2 hy)
+
+/-- `GermPseudo` reads only the point `r(θ)`: it is unchanged when `θ` moves by a turn. -/
+theorem GermPseudo.congr_e {u : ℂ} {θ θ' : ℝ} (he : e θ = e θ') {s : Side} {a : Fin k}
+    (h : F.GermPseudo u θ s a) : F.GermPseudo u θ' s a := by
+  obtain ⟨δ, hδ, hg⟩ := h
+  refine ⟨δ, hδ, fun z hz => hg ?_⟩
+  obtain ⟨t, ht, rfl⟩ := hz
+  exact ⟨t, ht, by simp only [ringPt, e_add, he]⟩
+
+/-- A germ has one pseudo-colour, on either side. -/
+theorem GermPseudo.eq_of_same {u : ℂ} {θ : ℝ} {s : Side} {a c : Fin k} (ha : F.GermPseudo u θ s a)
+    (hc : F.GermPseudo u θ s c) : a = c := by
+  obtain ⟨δ₁, hδ₁, h₁⟩ := ha
+  obtain ⟨δ₂, hδ₂, h₂⟩ := hc
+  have hδ : 0 < min δ₁ δ₂ := lt_min hδ₁ hδ₂
+  obtain ⟨z, hz⟩ : (germ u θ s (min δ₁ δ₂)).Nonempty :=
+    ⟨_, mem_image_of_mem _ (show min δ₁ δ₂ / 2 ∈ Ioo 0 (min δ₁ δ₂) from ⟨by linarith, by linarith⟩)⟩
+  have e₁ : F.pseudoColours u z = {a} := h₁ (germ_mono (min_le_left _ _) hz)
+  have e₂ : F.pseudoColours u z = {c} := h₂ (germ_mono (min_le_right _ _) hz)
+  exact Set.singleton_eq_singleton_iff.mp (e₁.symm.trans e₂)
+
+end ArcMap
+
 end HadwigerNelson.Plane

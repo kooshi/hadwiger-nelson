@@ -174,6 +174,33 @@ theorem BaseCtx.retArcs_finite (B : F.BaseCtx u) :
     {q : ℝ × ℝ | q.1 ∈ Ico 0 (2 * π) ∧ F.IsRetArc u q.1 q.2}.Finite := by
   sorry
 
+/-- **Two change points of one `a|c` boundary with the same orientation are impossible** (the orientation step, over `orient`): in the base's
+context, a closed preconnected `C` inside `cl T₁ ∩ cl T₂ ∩ B̄(u, 1)` (`T₁` an `a`-tile, `T₂` a `c`-tile) cannot hold two distinct change
+points `r(θ)`, `r(φ)` of the pseudo-colouring of `ω(u)` both from `a` (clockwise) to `c` (counter-clockwise). -/
+theorem BaseCtx.orient_pair (B : F.BaseCtx u) {a c : Fin 6} (hac : a ≠ c) {T₁ T₂ : Set ℂ} (h₁ : F.TileOf a T₁)
+    (h₂ : F.TileOf c T₂) {C : Set ℂ} (hC : IsClosed C) (hCc : IsPreconnected C)
+    (hCsub : C ⊆ closure T₁ ∩ closure T₂ ∩ closedBall u 1) {θ φ : ℝ} (hx : ringPt u θ ∈ C) (hq : ringPt u φ ∈ C)
+    (hxq : ringPt u θ ≠ ringPt u φ) (ha : F.GermPseudo u θ .cw a) (hc : F.GermPseudo u θ .ccw c)
+    (ha' : F.GermPseudo u φ .cw a) (hc' : F.GermPseudo u φ .ccw c) : False := by
+  have hdom : ∀ z ∈ closedBall u 1, z ∈ F.dom := fun z hz => B.covers (closedBall_subset_closedBall (by norm_num) hz)
+  have hnr : ∀ z ∈ closedBall u 1, ¬ F.HasRepeatedColour z := fun z hz hr =>
+    Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hz) (Or.inr ⟨hdom z hz, hr⟩)
+  have hne : T₂ ≠ T₁ := fun h => hac (h₁.eq_colour (h ▸ h₂)) |>.elim
+  have hCT : Disjoint C T₂ := Set.disjoint_left.mpr fun z hz hzT =>
+    IsTile.subset_compl_closure h₁.1 h₂.1 hne hzT (hCsub hz).1.1
+  have hloc : ∀ z ∈ C, ∃ r₀ > 0, ∀ r ∈ Ioc 0 r₀, IsPreconnected (T₂ ∩ ball z r) := by
+    intro z hz
+    obtain ⟨r₀, hr₀, -, h⟩ := tile_side (hdom z (hCsub hz).2) (hnr z (hCsub hz).2) h₂ (hCsub hz).1.2
+    exact ⟨r₀, hr₀, fun r hr => (h r hr).1⟩
+  have hfacts : ∀ α : ℝ, ringPt u α ∈ C → F.GermPseudo u α .cw a → F.GermPseudo u α .ccw c →
+      (∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (α + t) ∈ closure T₂ \ C) ∧ ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (α - t) ∉ closure T₂ := by
+    intro α hα haα hcα
+    obtain ⟨⟨δ, hδ, h⟩, h'⟩ := germ_side hac haα hcα h₁ h₂ (hdom _ (hCsub hα).2) (hnr _ (hCsub hα).2) (hCsub hα).1.2
+    exact ⟨⟨δ, hδ, fun t ht => ⟨(h t ht).1, fun hC' => (h t ht).2 (hCsub hC').1.1⟩⟩, h'⟩
+  obtain ⟨hx₁, hx₂⟩ := hfacts θ hx ha hc
+  obtain ⟨hq₁, hq₂⟩ := hfacts φ hq ha' hc'
+  exact orient h₂.1.isOpen hC hCc (fun z hz => (hCsub hz).2) hCT (fun z hz => (hCsub hz).1.2) hloc hx hq hxq hx₁ hx₂ hq₁ hq₂
+
 /-- **Returning arcs do not interleave** (FS110-CB D5 item 1; FS131-KP plan § 4, leaf NEST-X): with `s < s' + 2πn < t < t' + 2πn`, the
 closures of the two joining continua meet (`inter_nonempty_of_interleaved`, after the shift by `2πn`), at a point `z` of `B̄(u, 1)` in the
 closures of the `a`- and `c`-tiles of both pairs. If the pairs' tiles differ, `z` carries two tiles of one colour (a repeated colour) or a
@@ -182,14 +209,149 @@ fourth colour, against H. If they are the same two tiles, both continua lie in o
 point of `ω(u)`) is a path with two ends — not four. -/
 theorem BaseCtx.retArcs_not_interleaved (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t') (n : ℤ)
     (hi : s < s' + 2 * π * n ∧ s' + 2 * π * n < t ∧ t < t' + 2 * π * n) : False := by
-  sorry
+  obtain ⟨hst, hst', a, c, hac, ha, hc, hc₂, ha₂, T₁, T₂, h₁, h₂, K, hK, hsK, htK, hKsub⟩ := h
+  obtain ⟨hst₁, hst₁', a', c', hac', ha', hc', hc₂', ha₂', T₁', T₂', h₁', h₂', K', hK', hsK', htK', hK'sub⟩ := h'
+  have hπ := Real.pi_pos
+  have hper : ∀ x : ℝ, ringPt u (x + 2 * π * n) = ringPt u x := fun x => by simp only [ringPt, e_add_int_mul]
+  have hdom : ∀ z ∈ closedBall u 1, z ∈ F.dom := fun z hz => B.covers (closedBall_subset_closedBall (by norm_num) hz)
+  have hgood : ∀ z ∈ closedBall u 1, z ∉ F.fourSet ∪ F.repSet := fun z hz =>
+    Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hz)
+  have hcl : ∀ {L : Set ℂ} {A₁ A₂ : Set ℂ}, L ⊆ closure A₁ ∩ closure A₂ ∩ closedBall u 1 →
+      closure L ⊆ closure A₁ ∩ closure A₂ ∩ closedBall u 1 := fun hL =>
+    closure_minimal hL ((isClosed_closure.inter isClosed_closure).inter isClosed_closedBall)
+  have hKc := hcl hKsub
+  have hK'c := hcl hK'sub
+  obtain ⟨z, hzK, hzK'⟩ := inter_nonempty_of_interleaved (u := u) isClosed_closure isClosed_closure hK.isPreconnected.closure
+    hK'.isPreconnected.closure (fun y hy => (hKc hy).2) (fun y hy => (hK'c hy).2) hi.1 hi.2.1 hi.2.2 (by linarith)
+    (subset_closure hsK) (subset_closure htK) (by rw [hper]; exact subset_closure hsK') (by rw [hper]; exact subset_closure htK')
+  have hzB := (hKc hzK).2
+  -- the pseudo-colours are not `u`'s
+  have hnotu : ∀ {θ : ℝ} {s : Side} {j : Fin 6}, F.GermPseudo u θ s j → j ∉ F.coloursAt u := by
+    intro θ s j hj
+    obtain ⟨δ, hδ, hg⟩ := hj
+    have : j ∈ F.pseudoColours u (ringPt u (θ + s.sign * (δ / 2))) := by
+      rw [hg ⟨δ / 2, ⟨half_pos hδ, half_lt_self hδ⟩, rfl⟩]; rfl
+    exact this.2
+  have hne12 : T₁ ≠ T₂ := fun h => hac (h₁.eq_colour (h ▸ h₂))
+  -- a third tile at `z` makes `z` a cubic trichromatic point complementary to `u` at distance `≤ 1`
+  have hthird : ∀ T₃ d, F.TileOf d T₃ → z ∈ closure T₃ → d ∉ F.coloursAt u → T₃ ≠ T₁ → T₃ ≠ T₂ → False := by
+    intro T₃ d h₃ hz₃ hdu h31 h32
+    have hcub : F.IsCubicTrichromatic z :=
+      isCubicTrichromatic_of_three_tiles (hdom z hzB) h₁.1 h₂.1 h₃.1 hne12 h31.symm h32.symm (hKc hzK).1.1 (hKc hzK).1.2 hz₃
+        (hgood z hzB)
+    have hnr : ¬ F.HasRepeatedColour z := fun hr => hgood z hzB (Or.inr ⟨hdom z hzB, hr⟩)
+    have hdiff : ∀ {A A' : Set ℂ} {j j' : Fin 6}, F.TileOf j A → F.TileOf j' A' → z ∈ closure A → z ∈ closure A' → A ≠ A' →
+        j ≠ j' := fun hA hA' hzA hzA' hAA' hjj => hnr (hasRepeatedColour_of_two_tiles (hdom z hzB) hA (hjj ▸ hA') hAA' hzA hzA')
+    have hsub : ({a, c, d} : Set (Fin 6)) ⊆ F.coloursAt z := by
+      intro j hj
+      rcases hj with rfl | rfl | rfl
+      · exact mem_coloursAt_of_tileOf h₁ (hKc hzK).1.1
+      · exact mem_coloursAt_of_tileOf h₂ (hKc hzK).1.2
+      · exact mem_coloursAt_of_tileOf h₃ hz₃
+    have h3 : ({a, c, d} : Set (Fin 6)).ncard = 3 :=
+      Set.ncard_eq_three.mpr ⟨a, c, d, hac, hdiff h₁ h₃ (hKc hzK).1.1 hz₃ h31.symm,
+        hdiff h₂ h₃ (hKc hzK).1.2 hz₃ h32.symm, rfl⟩
+    have heq : ({a, c, d} : Set (Fin 6)) = F.coloursAt z :=
+      Set.eq_of_subset_of_ncard_le hsub (by rw [h3, hcub.2]) (Set.toFinite _)
+    have hdis : Disjoint (F.coloursAt z) (F.coloursAt u) := by
+      rw [← heq, Set.disjoint_left]
+      rintro j (rfl | rfl | rfl)
+      · exact hnotu ha
+      · exact hnotu hc
+      · exact hdu
+    -- `cor3` (FS112-N3-COR3) puts a four-colour point within `1` of `z`, inside `B̄(u, 2)`
+    have hcov : ∀ {q : ℂ}, q ∈ closedBall u 1 → F.Covers q 1 := fun {q} hq y hy =>
+      B.covers (show y ∈ closedBall u 2 by rw [mem_closedBall] at hq hy ⊢; linarith [dist_triangle y q u])
+    obtain ⟨qp, qm, -, hq⟩ := cor3 B.valid hcub B.cubic (hcov hzB) (hcov (mem_closedBall_self zero_le_one)) hdis
+      (by rw [mem_closedBall] at hzB; linarith)
+    obtain ⟨hqp, -, h4, -⟩ := hq qp (by simp)
+    have hqu : qp ∈ closedBall u 2 := by
+      rw [mem_closedBall] at hzB ⊢; linarith [dist_triangle qp z u]
+    exact Set.disjoint_left.mp B.hyp hqu (Or.inl ⟨B.covers hqu, h4⟩)
+  by_cases h1 : T₁' ≠ T₁ ∧ T₁' ≠ T₂
+  · exact hthird T₁' a' h₁' (hK'c hzK').1.1 (hnotu ha') h1.1 h1.2
+  by_cases h2 : T₂' ≠ T₁ ∧ T₂' ≠ T₂
+  · exact hthird T₂' c' h₂' (hK'c hzK').1.2 (hnotu hc') h2.1 h2.2
+  push Not at h1 h2
+  have hne' : T₁' ≠ T₂' := fun h => hac' (h₁'.eq_colour (h ▸ h₂'))
+  set C := closure K ∪ closure K' with hCdef
+  have hCc : IsPreconnected C := hK.isPreconnected.closure.union z hzK hzK' hK'.isPreconnected.closure
+  have hCcl : IsClosed C := isClosed_closure.union isClosed_closure
+  have hdist : ∀ x : ℝ, s < x → x < s + 2 * π → ringPt u s ≠ ringPt u x := fun x h0 h1 h => by
+    rw [ringPt_eq_polarPt, ringPt_eq_polarPt] at h
+    exact polarPt_ne_of_sub one_pos one_pos (by linarith) (by linarith) h.symm
+  rcases eq_or_ne T₁' T₁ with hT1 | hT1
+  · -- the same tiles in the same order: `r(s′)` is a second change point from `a` to `c`
+    have hT2 : T₂' = T₂ := by
+      rcases eq_or_ne T₂' T₁ with h | h
+      · exact absurd (hT1.trans h.symm) hne'
+      · exact h2 h
+    subst hT1 hT2
+    have haa : a' = a := h₁'.eq_colour h₁
+    have hcc : c' = c := h₂'.eq_colour h₂
+    subst haa hcc
+    refine B.orient_pair hac h₁ h₂ hCcl hCc (union_subset hKc hK'c) (subset_closure hsK |> Or.inl)
+      (subset_closure hsK' |> Or.inr) ?_ ha hc ha' hc'
+    rw [← hper s']
+    exact hdist _ hi.1 (by linarith)
+  · -- the same tiles swapped: `r(t′)` is a second change point from `a` to `c`
+    have hT1' : T₁' = T₂ := h1 hT1
+    have hT2' : T₂' = T₁ := by
+      by_contra h
+      exact hne' (hT1'.trans (h2 h).symm)
+    subst hT1' hT2'
+    have hca : a' = c := h₁'.eq_colour h₂
+    have hac' : c' = a := h₂'.eq_colour h₁
+    subst hca hac'
+    refine B.orient_pair hac h₁ h₂ hCcl hCc (union_subset hKc (fun y hy => ⟨⟨(hK'c hy).1.2, (hK'c hy).1.1⟩, (hK'c hy).2⟩))
+      (subset_closure hsK |> Or.inl) (subset_closure htK' |> Or.inr) ?_ ha hc hc₂' ha₂'
+    rw [← hper t']
+    exact hdist _ (by linarith) (by linarith)
 
 /-- **Returning arcs do not abut** (FS131-KP plan § 4, leaf NEST-A): at a common end `p = r(t) = r(s')` the germs force the second pair to be `(c, a)` (`GermPseudo.eq_of_cw`), so its tiles are the
 first pair's (one sector per colour at `p`, under H); both continua then lie in one component of the `T₁|T₂` boundary in `B̄(u, 1)`, a path
 (child PATH) with three ends `r(s)`, `p`, `r(t')`. -/
 theorem BaseCtx.retArcs_not_abut (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetArc u s t) (h' : F.IsRetArc u s' t')
     (hab : ringPt u t = ringPt u s') : False := by
-  sorry
+  obtain ⟨hst, hst', a, c, hac, ha, hc, hc₂, ha₂, T₁, T₂, h₁, h₂, K, hK, hsK, htK, hKsub⟩ := h
+  obtain ⟨hst₁, hst₁', a', c', hac', ha', hc', hc₂', ha₂', T₁', T₂', h₁', h₂', K', hK', hsK', htK', hK'sub⟩ := h'
+  have hπ := Real.pi_pos
+  have he : e t = e s' := by
+    have := congrArg (· - u) hab
+    simpa [ringPt] using this
+  obtain ⟨m, hm⟩ := e_eq_e_iff.mp he
+  -- the germs at the common end make the second pair `(c, a)`
+  have hca : a' = c := GermPseudo.eq_of_same (ha'.congr_e he.symm) hc₂
+  have hac'' : c' = a := GermPseudo.eq_of_same (hc'.congr_e he.symm) ha₂
+  subst hca hac''
+  -- and its tiles the first pair's, swapped (one sector per colour at the common end)
+  have hp : ringPt u t ∈ closedBall u 1 := (hKsub htK).2
+  have hpd : ringPt u t ∈ F.dom := B.covers (closedBall_subset_closedBall (by norm_num) hp)
+  have hnr : ¬ F.HasRepeatedColour (ringPt u t) := fun hr =>
+    Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hp) (Or.inr ⟨hpd, hr⟩)
+  have hpK' : ringPt u t ∈ K' := hab ▸ hsK'
+  have hT1 : T₁' = T₂ := by
+    by_contra hne
+    exact hnr (hasRepeatedColour_of_two_tiles hpd h₁' h₂ hne (hK'sub hpK').1.1 (hKsub htK).1.2)
+  have hT2 : T₂' = T₁ := by
+    by_contra hne
+    exact hnr (hasRepeatedColour_of_two_tiles hpd h₂' h₁ hne (hK'sub hpK').1.2 (hKsub htK).1.1)
+  subst hT1 hT2
+  have hcl : ∀ {L : Set ℂ} {A₁ A₂ : Set ℂ}, L ⊆ closure A₁ ∩ closure A₂ ∩ closedBall u 1 →
+      closure L ⊆ closure A₁ ∩ closure A₂ ∩ closedBall u 1 := fun hL =>
+    closure_minimal hL ((isClosed_closure.inter isClosed_closure).inter isClosed_closedBall)
+  have hKc := hcl hKsub
+  have hK'c := hcl hK'sub
+  -- `r(s)` and `r(t′)` are two change points from `a` to `c` on the continuum `cl K ∪ cl K′`
+  refine B.orient_pair hac h₁ h₂ (isClosed_closure.union isClosed_closure)
+    (hK.isPreconnected.closure.union (ringPt u t) (subset_closure htK) (subset_closure hpK') hK'.isPreconnected.closure)
+    (union_subset hKc (fun y hy => ⟨⟨(hK'c hy).1.2, (hK'c hy).1.1⟩, (hK'c hy).2⟩)) (Or.inl (subset_closure hsK))
+    (Or.inr (subset_closure htK')) ?_ ha hc hc₂' ha₂'
+  have hper : ringPt u (t' + m * (2 * π)) = ringPt u t' := by
+    simp only [ringPt]; rw [show t' + m * (2 * π) = t' + 2 * π * m by ring, e_add_int_mul]
+  rw [← hper, ringPt_eq_polarPt, ringPt_eq_polarPt]
+  intro h0
+  exact polarPt_ne_of_sub one_pos one_pos (a := t' + m * (2 * π)) (b := s) (by linarith) (by linarith) h0.symm
 
 /-- **The returning arcs nest or are disjoint** (FS110-CB D5 item 1, "paths do not cross; their arcs nest or are disjoint"; FS110-CD Lemma R
 step 4) — **planar core**: interleaved ends would make the `a`-tile of one pair cross the boundary of the other's tiles away from a
