@@ -4,7 +4,7 @@
 
 brief: FS131-E5
   identity: Ephodos — your agent file (`.claude/agents/ephodos.md`) is your identity and your lane's workflow; its § A derivation job is this job
-  role: derive two fixed questions to a verdict each — derived, realized (the configuration exhibited exactly), or a GAP at a named step with a repaired statement — and trace what each answer does to FS112-N3-END, FS112-N2-BENDS and row 135
+  role: derive two fixed questions to a verdict each — derived, realized (the configuration exhibited exactly), or a GAP at a named step with a repaired statement — and trace what each answer does to FS112-N3-END, FS114-CV-HD, FS112-N2-BENDS and rows 135 and 137
   launch: in the next free slot (inventory item 306), beside de Bruijn implementers on their own branches
   mission: § Why this job
   statements: § The questions
@@ -22,7 +22,8 @@ step of a filed hand proof that they could not take. Both steps sit under row 13
 first is in FS112-N3-END, the end of a stuck chain: NB3-END's item 2 says two tiles of the flank colour at `S′` are two sectors there, and FS131-I5e found a
 configuration the text does not exclude, in which they are one sector, with a repair checked only to leading order. The second is in FS112-N2-BENDS: the
 tangent bend `bend_away`, already repaired once (FS131-I4n's counterexample: the radius-2 arc must lie in the domain), has an end case at `q_A` that I4n asked
-to have re-derived before anyone formalizes it. Neither implementer built a counterexample to a statement; each named the step.
+to have re-derived before anyone formalizes it. Neither implementer built a counterexample to a statement; each named the step. I5e then found the same exclusion stated, in one line and
+not derived, in FS114-CVB § 1.4 item 5, which `cv_class` (FS114-CV-HD, under row 137) reads — so Q1 covers it too (inventory item 307).
 
 ## Why this job
 
@@ -42,10 +43,10 @@ statements, and their consumers must be traced. Kooshi: *"A proven theorem about
 
 ## The questions
 
-The claim list is `data/fs131/claims-E5.md`: `n3_end`, `n3_end_of_not_inType`, NB3-END items 1–5 and `bend_away`, each copied by script, then the two
+The claim list is `data/fs131/claims-E5.md`: `n3_end`, `n3_end_of_not_inType`, NB3-END items 1–5, `cv_class` with FS114-CVB § 1.4 item 5 and § 1.7, and `bend_away`, each copied by script, then the two
 questions. Read it whole. The questions:
 
-> **Q1 — NB3-END item 2.** In `n3_end_of_not_inType`'s setting, does "the two `g`-tiles are two sectors of `g` at `S′`" hold — in particular in item 305's configuration (one `g`-sector at `S′` with cone `[α+π, α+2π]`, `c` carried at `S′` only by a `c`-horn along `−a` on the `+n` side of it, possible only when `κ₄ < 1`)? Answer with a derivation of the step (I5e's leading-order repair, made exact with the closure property it names, or another), or that configuration exhibited exactly, or a repaired statement of `n3_end_of_not_inType` and `n3_end` with what changes in FS112-N3-END and in row 135.
+> **Q1 — NB3-END item 2.** In `n3_end_of_not_inType`'s setting, does "the two `g`-tiles are two sectors of `g` at `S′`" hold — in particular in item 305's configuration (one `g`-sector at `S′` with cone `[α+π, α+2π]`, `c` carried at `S′` only by a `c`-horn along `−a` on the `+n` side of it, possible only when `κ₄ < 1`)? Answer with a derivation of the step (I5e's leading-order repair, made exact with the closure property it names, or another), or that configuration exhibited exactly, or a repaired statement of `n3_end_of_not_inType` and `n3_end` with what changes in FS112-N3-END and in row 135. The same exclusion is FS114-CVB § 1.4 item 5's "not in the `±a` stacks below `Q±` (such a sector would shadow part of `H±`, against N-E0)", stated there in one line, which `cv_class`'s second disjunct reads through § 1.7's "None" case (item 307): answer for it too — derived, or `cv_class` repaired, with what changes in FS114-CV-HD and row 137.
 > — source: data/fs131/claims-E5.md § The questions
 
 > **Q2 — `bend_away`'s end case.** In `bend_away`'s setting, at the arc's end `q_A`, where `ω(A)` (curvature 1) bounds the uncovered region beyond the arc's end (item 296's fourth piece), does the tangent bend go through? Answer with a derivation of the end case, or a configuration exhibited exactly, or a repaired statement of `bend_away`, with what changes in FS112-N2-BENDS (N2-TAN) and in row 135.
@@ -62,7 +63,7 @@ questions. Read it whole. The questions:
    handoff). A realized configuration is exhibited exactly — its tiles, its arcs, its colouring — and its validity and the setting's hypotheses checked by
    exact arithmetic or computer algebra with a control that goes red on a planted fault (no search; a step a search could decide is a `search request` in your
    report).
-3. **The trace**: for each answer, whether FS112-N3-END, FS112-N2-BENDS and row 135 as filed read the step; their fate; and any corrected statement drafted for
+3. **The trace**: for each answer, whether FS112-N3-END, FS114-CV-HD, FS112-N2-BENDS and rows 135 and 137 as filed read the step; their fate; and any corrected statement drafted for
    me to file (its slot named) — including, if a repair is needed, the exact Lean-level change to the statements in the claim list.
 4. Your record in stages headed "Stage n — SAVED", committed by explicit path; your derive gate (`.claude/skills/ephodos/scripts/derive_gate.py all
    plans/FS131-E5-derivation.md`, from `plans/`) green; the report in standing rule 11's form. Stopping at a saved stage with a question left, named, is a

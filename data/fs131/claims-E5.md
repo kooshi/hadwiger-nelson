@@ -86,10 +86,44 @@ with
 def r2Contacts (P : ℂ) (θ₁ θ₂ : ℝ) (c : Fin k) : Set ℝ := {θ ∈ Icc θ₁ θ₂ | P + 2 * e θ ∈ closure (F.region c)}
 ```
 
-### The two findings — `plans/FS131-close-inventory.md` items 305 (the GAP at NB3-END item 2) and 296 (`bend_away`'s route and its end case), read there in full
+### `cv_class` — branch `fs131-w5` at `a804de21`, `Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean` (added 2026-10-05, before any launch: item 307)
+
+```lean
+/-- **FS114-CV-HD, (CV-CLASS)**: a stuck vertex of a terminal valid six-coloured map (three colours, horns of `c` along `±e α`, upper
+flank `g`, lower flank `h`) is a bowtie — all four horn arcs unit arcs, both neighbours carrying at least four colours and centring
+both-kind arcs, a one-vertex chain — or carries `g` twice at `E − n` and `h` twice at `E + n`, each neighbour stuck or with at least four
+colours. Model of the local hypotheses (the bowtie case): `bowtie` at `0`. -/
+theorem cv_class {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.coloursAt E).ncard = 3)
+    {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₃ κ₄ : ℝ} (hH : F.IsHorn E α κ₁ κ₂ c)
+    (hH' : F.IsHorn E (α + π) κ₃ κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α κ₂ g) (hh : F.IsFlankBelow E α κ₁ h) :
+    (κ₂ = 1 ∧ κ₃ = -1 ∧ κ₁ = -1 ∧ κ₄ = 1 ∧
+        4 ≤ (F.coloursAt (E + e (α + π / 2))).ncard ∧ 4 ≤ (F.coloursAt (E - e (α + π / 2))).ncard ∧
+        (∃ θ₁ θ₂, F.BothKind (E + e (α + π / 2)) θ₁ θ₂) ∧ (∃ θ₁ θ₂, F.BothKind (E - e (α + π / 2)) θ₁ θ₂) ∧
+        F.stuckRun E α = {0}) ∨
+      ((∀ᶠ r in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf (E - e (α + π / 2)) r g).encard) ∧
+        (∀ᶠ r in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf (E + e (α + π / 2)) r h).encard) ∧
+        (F.IsStuck (E + e (α + π / 2)) ∨ 4 ≤ (F.coloursAt (E + e (α + π / 2))).ncard) ∧
+        (F.IsStuck (E - e (α + π / 2)) ∨ 4 ≤ (F.coloursAt (E - e (α + π / 2))).ncard)) := by
+```
+
+### FS114-CVB § 1.4 item 5 — `plans/FS114-CVB-verification.md` l. 99–102 (added 2026-10-05: item 307)
+
+5. **N4-STUCK (iii)–(iv) hold at `E`.** `c ∈ P_cl(N)` out-type (N3-DEG); `c`'s sectors at `N` lie in `d·n ≥ 0` (the horns are an out-type `c`-contact of
+   `ω(N)` at `E`) and not in the `±a` stacks below `Q±` (such a sector would shadow part of `H±`, against N-E0); the arcs of `ω(E)` leaving `N` lie in tiles
+   at `N` (item 3), which cross `ω(E)`, so a ring colour `r ∉ {c, g, h}` sits below; with `|P_cl(N)| ≤ 3` (the hypothesis), `P_cl(N) = {c, h, r}`. Going
+   from `Q₊` to `Q₋` over the top meets `c`, under the bottom `r`: **`h` has two sectors at `N`.**
+
+### FS114-CVB § 1.7, the "None" case — `plans/FS114-CVB-verification.md` l. 184–187 (added 2026-10-05: item 307)
+
+both-kind, hence (Q) in `M*` (N2-TERM item 1), at least four colours; likewise `S′`; neither is stuck (§1.5: they centre unit arcs), so the chain is `{E}`.
+**None:** FLANK holds at `E` on both sides as in §1.4 item 4, so `Q±` exist at `N` and the mirror tiles at `S′`, and §1.4 item 5's separation (`c` over the
+top, ring tiles below) gives `h` two sectors at `N` and `g` two at `S′` — with no use of `|P_cl(N)| ≤ 3`. A vertex with a repeated colour is stuck or has at
+least four colours (N2-TERM item 2). ∎ **Control** (`tools/fs112_yb3_frags.py bowtie`, unedited, exit 0; `data/fs114/fs114-cvb/bowtie-control.out`): ACCEPT,
+
+### The findings — `plans/FS131-close-inventory.md` items 305 (the GAP at NB3-END item 2), 307 (the same exclusion in FS114-CVB, under `cv_class`) and 296 (`bend_away`'s route and its end case), read there in full
 
 ## The questions
 
-**Q1 — NB3-END item 2.** In `n3_end_of_not_inType`'s setting, does "the two `g`-tiles are two sectors of `g` at `S′`" hold — in particular in item 305's configuration (one `g`-sector at `S′` with cone `[α+π, α+2π]`, `c` carried at `S′` only by a `c`-horn along `−a` on the `+n` side of it, possible only when `κ₄ < 1`)? Answer with a derivation of the step (I5e's leading-order repair, made exact with the closure property it names, or another), or that configuration exhibited exactly, or a repaired statement of `n3_end_of_not_inType` and `n3_end` with what changes in FS112-N3-END and in row 135.
+**Q1 — NB3-END item 2.** In `n3_end_of_not_inType`'s setting, does "the two `g`-tiles are two sectors of `g` at `S′`" hold — in particular in item 305's configuration (one `g`-sector at `S′` with cone `[α+π, α+2π]`, `c` carried at `S′` only by a `c`-horn along `−a` on the `+n` side of it, possible only when `κ₄ < 1`)? Answer with a derivation of the step (I5e's leading-order repair, made exact with the closure property it names, or another), or that configuration exhibited exactly, or a repaired statement of `n3_end_of_not_inType` and `n3_end` with what changes in FS112-N3-END and in row 135. The same exclusion is FS114-CVB § 1.4 item 5's "not in the `±a` stacks below `Q±` (such a sector would shadow part of `H±`, against N-E0)", stated there in one line, which `cv_class`'s second disjunct reads through § 1.7's "None" case (item 307): answer for it too — derived, or `cv_class` repaired, with what changes in FS114-CV-HD and row 137.
 
 **Q2 — `bend_away`'s end case.** In `bend_away`'s setting, at the arc's end `q_A`, where `ω(A)` (curvature 1) bounds the uncovered region beyond the arc's end (item 296's fourth piece), does the tangent bend go through? Answer with a derivation of the end case, or a configuration exhibited exactly, or a repaired statement of `bend_away`, with what changes in FS112-N2-BENDS (N2-TAN) and in row 135.

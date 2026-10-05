@@ -2436,3 +2436,11 @@ reason by the close.*
      Alternative weighed: I5e formalizes its repair now. Why declined: one mind, leading order only, and the closure property it needs is not derived; the
      hand step must exist before the kernel can check it. Confidence: high on the routing; medium on the order (it would change if wave 5's other leaves finish
      before the planar chain, making `n3_end` the longest path). I5e was told by message (credit and ruling), and goes on with its other leaves.
+307. **I5e's follow-up on item 305, by message**: the exclusion NB3-END item 2 lacks is stated, in one line and not derived, in `plans/FS114-CVB-verification.md`
+     § 1.4 item 5 (l. 99–102): "`c`'s sectors at `N` lie in `d·n ≥ 0` … and not in the `±a` stacks below `Q±` (such a sector would shadow part of `H±`, against
+     N-E0)" — I5e's repair (a `c`-sector in the `±a` stack meets the horn of its own colour at distance 1). Two consequences: the ordering ("in the stack"
+     relative to the shadowing tiles) is not derived in CVB either; and **`cv_class`** (`Terminal`; FS114-CV-HD) rests on the same claim — its second disjunct
+     ("`g` twice at `E − n`, `h` twice at `E + n`", CVB § 1.7 l. 186) reads item 5's separation. **Ruled**: E5 has not launched, so its claim list
+     (`data/fs131/claims-E5.md`) is revised now — `cv_class`'s statement, CVB § 1.4 item 5 and § 1.7's "None" case added by script, Q1 extended to cover
+     `cv_class` and to trace FS114-CV-HD and row 137. Alternative weighed: a separate job for `cv_class`. Why: one exclusion, one derivation. Confidence: high.
+     Credit: I5e.
