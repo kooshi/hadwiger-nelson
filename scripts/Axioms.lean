@@ -3268,6 +3268,19 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.flank_ne_of_shadows
 #print axioms HadwigerNelson.Plane.ArcMap.exists_isRingArc_of_onRingArc
 #print axioms HadwigerNelson.Plane.ArcMap.hasSectors_one_of_contacts
+#print axioms HadwigerNelson.Plane.ArcMap.N_add_eq_framePt
+#print axioms HadwigerNelson.Plane.ArcMap.S_add_eq_framePt
+#print axioms HadwigerNelson.Plane.ArcMap.framePt_normSq_aux
+#print axioms HadwigerNelson.Plane.ArcMap.horn_radial_N
+#print axioms HadwigerNelson.Plane.ArcMap.horn_radial_S
+#print axioms HadwigerNelson.Plane.ArcMap.not_antipodal_coneAt_N_of_horn
+#print axioms HadwigerNelson.Plane.ArcMap.not_antipodal_coneAt_S_of_horn
+#print axioms HadwigerNelson.Plane.ArcMap.horn_poles_contact
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_eq_of_mem_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.abs_le_norm_e_sub_one
+#print axioms HadwigerNelson.Plane.ArcMap.sphere_near_mem_ringArc
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.coloursAt_eq
+#print axioms HadwigerNelson.Plane.ArcMap.chainVertex_antipodal
 
 /-! ## FS-131 wave 5 (job FS131-I5b) — wave 5's second implementer: Lemma 1's children, the holed fragment -/
 

@@ -681,3 +681,35 @@ with a horn arc on `ω(v ± n)`); it came to about 280 lines of `FlankUA` and 23
 at `σ = κ₁`, `κ₂` replaces the whole `σ_g`/`σ_h` machinery. `cv_l0`: 30 lines over wave 3's U1 cone. Both well under the plan's H/M.
 
 ## Stage 16 — SAVED
+
+## Stage 17 — SAVED: `n3_end_chain`, `pseudo_nonempty`, `pseudo_finite` proved (so `retArcs_finite` is a kernel theorem)
+
+- **`n3_end_chain`** (`Terminal`, item 74's chain clause). Route (NB3-END item 1, N112-END's argument, U1 read through the horn itself): both unit bounds
+  of `c`'s horn put radial segments of the horn just outside `ω(N)` and just outside `ω(S′)` (`horn_radial_N`, `horn_radial_S`: explicit frame
+  coordinates `(t sin x, 1 − t cos x)`, `(t sin x, t cos x − 1)`), so wave 3's `cos_nonpos_of_radial_outer` confines `c`'s cone at each pole to an angular
+  interval shorter than `π` (`not_antipodal_coneAt_N_of_horn`, `_S_`); `c` is carried at both poles (`horn_poles_contact`: `woodallCone`'s contacts at the
+  horn's own axis); and at a chain vertex every colour has both directions of one axis in its cone (`chainVertex_antipodal`, over `stuck_structure_ua`).
+  So neither `v ± n` is a chain vertex. **Generalization (reported)**: the proof reads only `hst`, `h3`, `hc2` and the two unit bounds of `hH` — `hT`,
+  the flank `hg` and the in-type contact `hgN` are unread (bound by `have _ :=`): the chain clause holds at every stuck vertex of a valid plane map whose
+  two-sector colour has a horn with bounds `−1` and `1`.
+- **`BaseCtx.pseudo_nonempty`** (`BaseWalk`, NB3 step 3, the route I5c named): with `P_cl(x) ⊆ P_cl(p)`, the (P) sweep (`not_mem_coloursAt_of_tile_dist`)
+  keeps every interior point off `ω(p)` near `x`, so an arc of `ω(p)` through `x` lies in `Γ`; the shared child gives a constant-sided sub-arc near `x`, both
+  of whose side colours are colours of `x`, hence of `p`: a both-kind arc centred at `p`, against `noBoth` and H. (`not_mem_coloursAt_of_tile_dist`, I5c's
+  child, moved up within `BaseWalk` to precede its new consumer; statement unchanged.)
+- **`BaseCtx.pseudo_finite`** (`BaseWalk`, NB3 step 4): the angles off wave 3's `RegularAt` are finitely many (`finite_not_regular`); at a regular angle
+  the point is interior (its one colour, absent at `p` by `not_mem_coloursAt_of_mem_sphere`: `coloursAt_eq_of_mem_interiorPts`) or interior to a
+  constant-sided arc, where the colours are the two side colours (`IsRingArc.coloursAt_eq`, through `sphere_near_mem_ringArc`) and exactly one is at
+  `p` (`NoInertNear`; `noBoth` with H). With it I5c's wiring `retArcs_finite` reads the standard three.
+
+Children added (statements new; inhabitant notes in their docstrings): in `FlankUA` — `N_add_eq_framePt`, `S_add_eq_framePt`, `framePt_normSq_aux`,
+`horn_radial_N`, `horn_radial_S`, `not_antipodal_coneAt_N_of_horn`, `not_antipodal_coneAt_S_of_horn`, `horn_poles_contact`,
+`coloursAt_eq_of_mem_interiorPts`, `abs_le_norm_e_sub_one`, `sphere_near_mem_ringArc`, `IsRingArc.coloursAt_eq`; in `Terminal` — `chainVertex_antipodal`.
+`scripts/Axioms.lean` (block "FS131-I5d") and `ARCHITECTURE.md` (`FlankUA`'s row) updated; `tools/check_architecture.py`: PASS; names collision-free (`rg`).
+Statements of the three leaves read back against plan §§ 3.2, 8.2 and KB's § 3.2: same statements.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 6 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T011148Z-52561.log`; driver log `data/fs131/i5d/build-stage17.log`). Wave 5's sorry declarations: **33** (`Terminal` 9,
+`Dense` 2, `HexRing` 7, `MapGraph` 3, `BaseWalk` 8, `BaseDense` 4), **26 this lane's**. Axioms (`data/fs131/i5d/I5dAxioms17.lean` → `I5dAxioms17.out`): the
+three leaves, every child, `not_mem_coloursAt_of_tile_dist` and `retArcs_finite` on the standard three; the control `exists_pseudoCircle` reads `sorryAx`.
+
+## Stage 17 — SAVED

@@ -359,6 +359,355 @@ theorem exists_isRingArc_of_onRingArc {p x : ℂ} (h : F.OnRingArc p x) {ε : �
     _ ≤ ε / 2 := abs_le.mpr ⟨by linarith, by linarith⟩
     _ < ε := by linarith
 
+/-- The point `N + t e(α − π/2 + x)` in the frame at `v` along `e α`: `(t sin x, 1 − t cos x)`. -/
+theorem N_add_eq_framePt (v : ℂ) (α t x : ℝ) :
+    v + e (α + π / 2) + (t : ℂ) * e (α - π / 2 + x) = framePt v α (t * Real.sin x) (1 - t * Real.cos x) := by
+  unfold framePt
+  rw [e_add α (π / 2), show α - π / 2 + x = α + (x - π / 2) by ring, e_add α (x - π / 2), e_eq (π / 2), e_eq (x - π / 2),
+    Real.cos_pi_div_two, Real.sin_pi_div_two, Real.cos_sub_pi_div_two, Real.sin_sub_pi_div_two]
+  push_cast
+  ring
+
+/-- The point `S′ + t e(α + π/2 − x)` in the frame at `v` along `e α`: `(t sin x, t cos x − 1)`. -/
+theorem S_add_eq_framePt (v : ℂ) (α t x : ℝ) :
+    v - e (α + π / 2) + (t : ℂ) * e (α + π / 2 - x) = framePt v α (t * Real.sin x) (t * Real.cos x - 1) := by
+  unfold framePt
+  rw [e_add α (π / 2), show α + π / 2 - x = α + (π / 2 - x) by ring, e_add α (π / 2 - x), e_eq (π / 2), e_eq (π / 2 - x),
+    Real.cos_pi_div_two, Real.sin_pi_div_two, Real.cos_pi_div_two_sub, Real.sin_pi_div_two_sub]
+  push_cast
+  ring
+
+/-- The squared distance from `v` of a point at distance `t` from a pole, at angle `x` off the direction of `v`. -/
+theorem framePt_normSq_aux {t x : ℝ} : (t * Real.sin x) ^ 2 + (1 - t * Real.cos x) ^ 2 =
+    (t - 1) ^ 2 + 2 * t * (1 - Real.cos x) := by
+  have := Real.sin_sq_add_cos_sq x
+  linear_combination t ^ 2 * this
+
+/-- **A horn bounded above by `ω(N)` holds radial segments just outside `ω(N)`**: for every direction from `N` within a small angle `φ₀`
+past the direction `α − π/2` of `v`, the points of that ray at distance slightly more than `1` from `N` lie in the horn, so in its
+colour's class. Inhabitant of the hypotheses: `bowtie` at `0`, `α = 0` (`bowtie_isHorn`). -/
+theorem horn_radial_N {v : ℂ} {α κ₁ : ℝ} {c : Fin k} (hH : F.IsHorn v α κ₁ 1 c) (h1 : -1 ≤ κ₁) :
+    ∃ φ₀ > (0 : ℝ), ∀ x ∈ Ioo 0 φ₀, ∃ η₀ > (0 : ℝ), ∀ t ∈ Ioo (1 : ℝ) (1 + η₀),
+      v + e (α + π / 2) + (t : ℂ) * e (α - π / 2 + x) ∈ F.region c := by
+  have hπ := Real.pi_pos
+  obtain ⟨r₀, hr₀sub, hr₀⟩ := (hH.eventually_subset_region.and self_mem_nhdsWithin).exists
+  have hr₀' : (0 : ℝ) < r₀ := hr₀
+  set r := min r₀ 1 with hr
+  have hr0 : 0 < r := lt_min hr₀' one_pos
+  have hr1 : r ≤ 1 := min_le_right _ _
+  have hrr : r ≤ r₀ := min_le_left _ _
+  refine ⟨r / 2, by positivity, fun x hx => ?_⟩
+  have hk1 : κ₁ < 1 := hH.1
+  have hxpi : x < π := by linarith [hx.2, Real.pi_gt_three]
+  have hcos1 : Real.cos x < 1 := by
+    have := Real.cos_lt_cos_of_nonneg_of_le_pi (le_refl 0) hxpi.le hx.1
+    rwa [Real.cos_zero] at this
+  set A := 1 - Real.cos x with hA
+  have hA0 : 0 < A := by rw [hA]; linarith
+  have hAx : A ≤ x ^ 2 / 2 := by rw [hA]; linarith [Real.one_sub_sq_div_two_le_cos (x := x)]
+  have hsin : 0 < Real.sin x := Real.sin_pos_of_pos_of_lt_pi hx.1 hxpi
+  refine ⟨min (r / 2) (A * (1 - κ₁) / 4), lt_min (by positivity) (by nlinarith), fun t ht => ?_⟩
+  set u := t - 1 with hu
+  have hu0 : 0 < u := by rw [hu]; linarith [ht.1]
+  have hu1 : u < r / 2 := by rw [hu]; linarith [ht.2, min_le_left (r / 2) (A * (1 - κ₁) / 4)]
+  have hu2 : u < A * (1 - κ₁) / 4 := by rw [hu]; linarith [ht.2, min_le_right (r / 2) (A * (1 - κ₁) / 4)]
+  have ht' : t = 1 + u := by rw [hu]; ring
+  apply hr₀sub
+  rw [N_add_eq_framePt]
+  have hq : (t * Real.sin x) ^ 2 + (1 - t * Real.cos x) ^ 2 = u ^ 2 + 2 * (1 + u) * A := by
+    rw [framePt_normSq_aux, ht', hA]; ring
+  have hcosx : -1 ≤ Real.cos x := Real.neg_one_le_cos x
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · -- the distance from `v`
+    have hn := frame_normSq v α (framePt v α (t * Real.sin x) (1 - t * Real.cos x))
+    rw [frameX_framePt, frameY_framePt, hq, ← dist_eq_norm] at hn
+    have hlt : u ^ 2 + 2 * (1 + u) * A < r₀ ^ 2 := by
+      have hx2 : x < r / 2 := hx.2
+      have : x ^ 2 < r ^ 2 / 4 := by nlinarith [mul_lt_mul'' hx2 hx2 hx.1.le hx.1.le]
+      nlinarith
+    nlinarith [dist_nonneg (x := framePt v α (t * Real.sin x) (1 - t * Real.cos x)) (y := v)]
+  · show 0 < frameX v α _
+    rw [frameX_framePt]
+    nlinarith
+  · show 0 < tanHeight κ₁ (frameX v α _) (frameY v α _)
+    rw [frameX_framePt, frameY_framePt]
+    unfold tanHeight
+    rw [hq]
+    have hY : 1 - t * Real.cos x = A - u * Real.cos x := by rw [ht', hA]; ring
+    rw [hY]
+    have hA2 : A ≤ 2 := by rw [hA]; linarith
+    have hk' : κ₁ ≤ 1 := hk1.le
+    nlinarith [mul_le_mul_of_nonneg_left hcosx hu0.le, mul_le_mul_of_nonneg_left (Real.cos_le_one x) hu0.le,
+      mul_nonneg hu0.le hA0.le, sq_nonneg u]
+  · show tanHeight 1 (frameX v α _) (frameY v α _) < 0
+    rw [frameX_framePt, frameY_framePt]
+    unfold tanHeight
+    rw [hq]
+    have hY : 1 - t * Real.cos x = A - u * Real.cos x := by rw [ht', hA]; ring
+    rw [hY]
+    nlinarith [sq_nonneg u, mul_pos hu0 hA0, Real.cos_le_one x]
+
+/-- **A horn bounded below by `ω(S′)` holds radial segments just outside `ω(S′)`** (the mirror of `horn_radial_N`): for directions from
+`S′` within a small angle before `α + π/2`, the points at distance slightly more than `1` from `S′` lie in the horn's colour's class. -/
+theorem horn_radial_S {v : ℂ} {α κ₂ : ℝ} {c : Fin k} (hH : F.IsHorn v α (-1) κ₂ c) (h2 : κ₂ ≤ 1) :
+    ∃ φ₀ > (0 : ℝ), ∀ x ∈ Ioo 0 φ₀, ∃ η₀ > (0 : ℝ), ∀ t ∈ Ioo (1 : ℝ) (1 + η₀),
+      v - e (α + π / 2) + (t : ℂ) * e (α + π / 2 - x) ∈ F.region c := by
+  have hπ := Real.pi_pos
+  obtain ⟨r₀, hr₀sub, hr₀⟩ := (hH.eventually_subset_region.and self_mem_nhdsWithin).exists
+  have hr₀' : (0 : ℝ) < r₀ := hr₀
+  set r := min r₀ 1 with hr
+  have hr0 : 0 < r := lt_min hr₀' one_pos
+  have hr1 : r ≤ 1 := min_le_right _ _
+  have hrr : r ≤ r₀ := min_le_left _ _
+  refine ⟨r / 2, by positivity, fun x hx => ?_⟩
+  have hk2 : -1 < κ₂ := hH.1
+  have hxpi : x < π := by linarith [hx.2, Real.pi_gt_three]
+  have hcos1 : Real.cos x < 1 := by
+    have := Real.cos_lt_cos_of_nonneg_of_le_pi (le_refl 0) hxpi.le hx.1
+    rwa [Real.cos_zero] at this
+  set A := 1 - Real.cos x with hA
+  have hA0 : 0 < A := by rw [hA]; linarith
+  have hAx : A ≤ x ^ 2 / 2 := by rw [hA]; linarith [Real.one_sub_sq_div_two_le_cos (x := x)]
+  have hsin : 0 < Real.sin x := Real.sin_pos_of_pos_of_lt_pi hx.1 hxpi
+  refine ⟨min (r / 2) (A * (1 + κ₂) / 4), lt_min (by positivity) (by nlinarith), fun t ht => ?_⟩
+  set u := t - 1 with hu
+  have hu0 : 0 < u := by rw [hu]; linarith [ht.1]
+  have hu1 : u < r / 2 := by rw [hu]; linarith [ht.2, min_le_left (r / 2) (A * (1 + κ₂) / 4)]
+  have hu2 : u < A * (1 + κ₂) / 4 := by rw [hu]; linarith [ht.2, min_le_right (r / 2) (A * (1 + κ₂) / 4)]
+  have ht' : t = 1 + u := by rw [hu]; ring
+  apply hr₀sub
+  rw [S_add_eq_framePt]
+  have hq : (t * Real.sin x) ^ 2 + (t * Real.cos x - 1) ^ 2 = u ^ 2 + 2 * (1 + u) * A := by
+    have := framePt_normSq_aux (t := t) (x := x)
+    rw [show (t * Real.cos x - 1) ^ 2 = (1 - t * Real.cos x) ^ 2 by ring, this, ht', hA]; ring
+  have hcosx : -1 ≤ Real.cos x := Real.neg_one_le_cos x
+  have hY : t * Real.cos x - 1 = -(A - u * Real.cos x) := by rw [ht', hA]; ring
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · have hn := frame_normSq v α (framePt v α (t * Real.sin x) (t * Real.cos x - 1))
+    rw [frameX_framePt, frameY_framePt, hq, ← dist_eq_norm] at hn
+    have hlt : u ^ 2 + 2 * (1 + u) * A < r₀ ^ 2 := by
+      have hx2 : x < r / 2 := hx.2
+      have : x ^ 2 < r ^ 2 / 4 := by nlinarith [mul_lt_mul'' hx2 hx2 hx.1.le hx.1.le]
+      nlinarith
+    nlinarith [dist_nonneg (x := framePt v α (t * Real.sin x) (t * Real.cos x - 1)) (y := v)]
+  · show 0 < frameX v α _
+    rw [frameX_framePt]
+    nlinarith
+  · show 0 < tanHeight (-1) (frameX v α _) (frameY v α _)
+    rw [frameX_framePt, frameY_framePt]
+    unfold tanHeight
+    rw [hq, hY]
+    nlinarith [sq_nonneg u, mul_pos hu0 hA0, Real.cos_le_one x]
+  · show tanHeight κ₂ (frameX v α _) (frameY v α _) < 0
+    rw [frameX_framePt, frameY_framePt]
+    unfold tanHeight
+    rw [hq, hY]
+    have hA2 : A ≤ 2 := by rw [hA]; linarith
+    nlinarith [mul_le_mul_of_nonneg_left hcosx hu0.le, mul_le_mul_of_nonneg_left (Real.cos_le_one x) hu0.le,
+      mul_nonneg hu0.le hA0.le, sq_nonneg u]
+
+/-- **A horn on `ω(N)` keeps its colour's cone at `N` shorter than `π`** (N112-END's step, U1 read through the horn instead of a ring arc):
+the radial segments of `horn_radial_N` put every direction of the colour's class at `N` at a non-acute angle to every direction just past
+`α − π/2`, so the cone at `N` holds no antipodal pair. -/
+theorem not_antipodal_coneAt_N_of_horn (hF : F.Valid) {v : ℂ} {α κ₁ : ℝ} {c : Fin k} (hH : F.IsHorn v α κ₁ 1 c)
+    (h1 : -1 ≤ κ₁) {β : ℝ} (hβ : β ∈ coneAt (F.region c) (v + e (α + π / 2))) :
+    β + π ∉ coneAt (F.region c) (v + e (α + π / 2)) := by
+  have hπ := Real.pi_pos
+  obtain ⟨φ₀, hφ₀, hrad⟩ := horn_radial_N hH h1
+  set φ := min φ₀ 1 with hφ
+  have hφ0 : 0 < φ := lt_min hφ₀ one_pos
+  have hφπ : φ < π := lt_of_le_of_lt (min_le_right _ _) (by linarith [Real.pi_gt_three])
+  have hI : ∀ γ ∈ coneAt (F.region c) (v + e (α + π / 2)), γ - π ∈ angleIcc (α - π / 2 + φ - π / 2) (α - π / 2 + π / 2) := by
+    intro γ hγ
+    refine mem_angleIcc_of_cos_nonneg (by linarith) fun θ hθ => ?_
+    obtain ⟨η₀, hη₀, hseg⟩ := hrad (θ - (α - π / 2)) ⟨by linarith [hθ.1], by linarith [hθ.2, min_le_left φ₀ 1]⟩
+    have hseg' : ∀ t ∈ Ioo 1 (1 + η₀), v + e (α + π / 2) + (t : ℂ) * e θ ∈ closure (F.region c) := fun t ht => by
+      have := hseg t ht
+      rw [show α - π / 2 + (θ - (α - π / 2)) = θ by ring] at this
+      exact subset_closure this
+    have := hF.cos_nonpos_of_radial_outer hη₀ hseg' γ hγ
+    rw [show γ - π - θ = (γ - θ) - π by ring, Real.cos_sub_pi]
+    linarith
+  intro hβ'
+  have h1' := hI β hβ
+  have h2' := hI (β + π) hβ'
+  rw [show β + π - π = (β - π) + π by ring] at h2'
+  exact not_mem_angleIcc_add_pi (by linarith) h1' h2'
+
+/-- **A horn on `ω(S′)` keeps its colour's cone at `S′` shorter than `π`** (the mirror of `not_antipodal_coneAt_N_of_horn`). -/
+theorem not_antipodal_coneAt_S_of_horn (hF : F.Valid) {v : ℂ} {α κ₂ : ℝ} {c : Fin k} (hH : F.IsHorn v α (-1) κ₂ c)
+    (h2 : κ₂ ≤ 1) {β : ℝ} (hβ : β ∈ coneAt (F.region c) (v - e (α + π / 2))) :
+    β + π ∉ coneAt (F.region c) (v - e (α + π / 2)) := by
+  have hπ := Real.pi_pos
+  obtain ⟨φ₀, hφ₀, hrad⟩ := horn_radial_S hH h2
+  set φ := min φ₀ 1 with hφ
+  have hφ0 : 0 < φ := lt_min hφ₀ one_pos
+  have hφπ : φ < π := lt_of_le_of_lt (min_le_right _ _) (by linarith [Real.pi_gt_three])
+  have hI : ∀ γ ∈ coneAt (F.region c) (v - e (α + π / 2)), γ - π ∈ angleIcc (α + π / 2 - π / 2) (α + π / 2 - φ + π / 2) := by
+    intro γ hγ
+    refine mem_angleIcc_of_cos_nonneg (by linarith) fun θ hθ => ?_
+    obtain ⟨η₀, hη₀, hseg⟩ := hrad (α + π / 2 - θ) ⟨by linarith [hθ.2], by linarith [hθ.1, min_le_left φ₀ 1]⟩
+    have hseg' : ∀ t ∈ Ioo 1 (1 + η₀), v - e (α + π / 2) + (t : ℂ) * e θ ∈ closure (F.region c) := fun t ht => by
+      have := hseg t ht
+      rw [show α + π / 2 - (α + π / 2 - θ) = θ by ring] at this
+      exact subset_closure this
+    have := hF.cos_nonpos_of_radial_outer hη₀ hseg' γ hγ
+    rw [show γ - π - θ = (γ - θ) - π by ring, Real.cos_sub_pi]
+    linarith
+  intro hβ'
+  have h1' := hI β hβ
+  have h2' := hI (β + π) hβ'
+  rw [show β + π - π = (β - π) + π by ring] at h2'
+  exact not_mem_angleIcc_add_pi (by linarith) h1' h2'
+
+/-- **A horn of a two-sector colour, at a vertex with no MERGE, has out-type contacts of its colour at both its poles** (N3-DEG through
+wave 4's `woodallCone`, read at the horn's own axis: `woodallCone`'s axis is the horn's up to `π`). Inhabitant of the hypotheses: `bowtie` at
+`0` (`bowtie_not_merge_zero`, `bowtie_coloursAt_zero`, `bowtie_isHorn`). -/
+theorem horn_poles_contact (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hM : ¬ F.MergeAvailable v) {c : Fin k} {m : ℕ}
+    (hm : 2 ≤ m) (hc : F.HasSectors v c m) {α κ₁ κ₂ : ℝ} (hH : F.IsHorn v α κ₁ κ₂ c) :
+    (F.IsContact v c (v + e (α + π / 2)) ∧ F.OutType v c (v + e (α + π / 2))) ∧
+      (F.IsContact v c (v - e (α + π / 2)) ∧ F.OutType v c (v - e (α + π / 2))) := by
+  have hcv : c ∈ F.coloursAt v := mem_closure_of_mem_coneAt hH.mem_coneAt_region
+  have hD : interior (F.allowedCone v c) = ∅ := by
+    by_contra hne
+    exact hM ⟨c, m, hm, hc, nonempty_iff_ne_empty.mpr hne⟩
+  obtain ⟨α', hN, hS, hev⟩ := woodallCone hF hv hcv hD
+  obtain ⟨r, ⟨hr1, hr2⟩, hr0⟩ := ((hev.and hH.2).and self_mem_nhdsWithin).exists
+  obtain ⟨β, hβ, κ, κ', -, -, -, hSeq⟩ := hr1 _ hr2
+  have hr0' : (0 : ℝ) < r := hr0
+  have heq : e α = e β := by
+    have := mem_coneAt_hornSet v α hH.1 hr0'
+    rw [hSeq] at this
+    exact (e_eq_of_mem_coneAt_hornSet this)
+  have hn : e (α + π / 2) = e (β + π / 2) := by rw [e_add, e_add, heq]
+  rw [hn]
+  simp only [mem_insert_iff, mem_singleton_iff] at hβ
+  rcases hβ with rfl | rfl
+  · exact ⟨hN, hS⟩
+  · rw [add_e_add_pi_add, sub_e_add_pi_add]; exact ⟨hS, hN⟩
+
+/-- **An interior point carries exactly its own colour**: its tile is an open neighbourhood of one colour. -/
+theorem coloursAt_eq_of_mem_interiorPts {x : ℂ} (hx : x ∈ F.interiorPts) : F.coloursAt x = {F.col x} := by
+  ext j
+  simp only [mem_singleton_iff]
+  constructor
+  · intro hj
+    obtain ⟨hT, hxT⟩ := tileOf_component (⟨hx, mem_singleton _⟩ : x ∈ F.region (F.col x))
+    obtain ⟨z, hzT, hzj⟩ := (_root_.mem_closure_iff.mp hj) _ hT.1.isOpen hxT
+    have h1 : F.col z = j := hzj.2
+    have h2 : F.col z = F.col x := hT.2 hzT
+    rw [← h1, h2]
+  · rintro rfl
+    exact subset_closure ⟨hx, mem_singleton _⟩
+
+/-- `‖e s − 1‖` controls `|s|` on `(−π, π]`: `|s| ≤ (π/2) ‖e s − 1‖`. -/
+theorem abs_le_norm_e_sub_one {s : ℝ} (h1 : -π < s) (h2 : s ≤ π) : |s| ≤ π / 2 * ‖e s - 1‖ := by
+  have hπ := Real.pi_pos
+  have hn : ‖e s - 1‖ = 2 * |Real.sin (s / 2)| := by
+    have hsq : ‖e s - 1‖ ^ 2 = (2 * |Real.sin (s / 2)|) ^ 2 := by
+      rw [Complex.sq_norm, Complex.normSq_apply, e_eq]
+      simp only [Complex.sub_re, Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.I_re, Complex.ofReal_im,
+        Complex.I_im, Complex.one_re, Complex.sub_im, Complex.add_im, Complex.mul_im, Complex.one_im]
+      rw [mul_pow, sq_abs]
+      have hc : Real.cos s = 1 - 2 * Real.sin (s / 2) ^ 2 := by
+        have h1 := Real.cos_two_mul (s / 2)
+        have h2 := Real.sin_sq_add_cos_sq (s / 2)
+        rw [show 2 * (s / 2) = s by ring] at h1
+        linarith
+      have hs := Real.sin_sq_add_cos_sq s
+      nlinarith [hc, hs]
+    have h0 : 0 ≤ ‖e s - 1‖ := norm_nonneg _
+    have h0' : 0 ≤ 2 * |Real.sin (s / 2)| := by positivity
+    nlinarith [sq_nonneg (‖e s - 1‖ - 2 * |Real.sin (s / 2)|), sq_nonneg (‖e s - 1‖ + 2 * |Real.sin (s / 2)|)]
+  rw [hn]
+  rcases lt_trichotomy s 0 with hs | rfl | hs
+  · have := sin_half_ge (s := -s) (by linarith) (by linarith)
+    rw [show -s / 2 = -(s / 2) by ring, Real.sin_neg] at this
+    rw [abs_of_neg hs, abs_of_neg (by linarith [div_pos (show 0 < -s by linarith) hπ])]
+    have : -s ≤ π * -Real.sin (s / 2) := by rwa [div_le_iff₀ hπ, mul_comm] at this
+    nlinarith
+  · simp
+  · rcases lt_or_eq_of_le h2 with h2' | rfl
+    · have := sin_half_ge (s := s) hs h2'
+      rw [abs_of_pos hs, abs_of_pos (by linarith [div_pos hs hπ])]
+      have : s ≤ π * Real.sin (s / 2) := by rwa [div_le_iff₀ hπ, mul_comm] at this
+      nlinarith
+    · rw [show π / 2 = π / 2 by rfl, Real.sin_pi_div_two, abs_one, abs_of_pos hπ]
+      linarith
+
+/-- **Points of `ω(p)` near an interior point of an arc of it lie on the arc.** -/
+theorem sphere_near_mem_ringArc {p : ℂ} {θ₁ θ₂ θ : ℝ} (hθ : θ ∈ Ioo θ₁ θ₂) :
+    ∃ δ > 0, ∀ z ∈ sphere p 1, dist z (ringPt p θ) < δ → z ∈ ringArc p θ₁ θ₂ := by
+  have hπ := Real.pi_pos
+  set m := min (θ - θ₁) (θ₂ - θ) with hm
+  have hm0 : 0 < m := lt_min (by linarith [hθ.1]) (by linarith [hθ.2])
+  set m' := min m 1 with hm'
+  have hm'0 : 0 < m' := lt_min hm0 one_pos
+  refine ⟨m' / π, by positivity, fun z hz hzd => ?_⟩
+  set w := (z - p) * starRingEnd ℂ (e θ) with hw
+  have hzp : ‖z - p‖ = 1 := by rw [← dist_eq_norm]; exact hz
+  have hw1 : ‖w‖ = 1 := by rw [hw, norm_mul, RCLike.norm_conj, norm_e, hzp, mul_one]
+  have hwe : w = e (arg w) := by
+    have := eq_polar_arg w
+    rw [hw1] at this
+    simpa using this
+  have hzw : z - p = e θ * w := by
+    rw [hw, ← mul_assoc, mul_comm (e θ), mul_assoc, conj_e_mul_e, mul_one]
+  set s := arg w with hs
+  have hz' : z = ringPt p (θ + s) := by
+    rw [ringPt, e_add, ← hwe, ← hzw]; ring
+  have hds : dist z (ringPt p θ) = ‖e s - 1‖ := by
+    rw [hz', ringPt, ringPt, dist_add_left, dist_eq_norm, e_add,
+      show e θ * e s - e θ = e θ * (e s - 1) by ring, norm_mul, norm_e, one_mul]
+  have hsb := abs_le_norm_e_sub_one (s := s) (Complex.neg_pi_lt_arg w) (Complex.arg_le_pi w)
+  rw [← hds] at hsb
+  have hs2 : |s| < m' / 2 := by
+    calc |s| ≤ π / 2 * dist z (ringPt p θ) := hsb
+      _ < π / 2 * (m' / π) := by gcongr
+      _ = m' / 2 := by field_simp
+  have hsm : |s| < m := by linarith [min_le_left m 1]
+  rw [hz']
+  refine ⟨θ + s, ⟨?_, ?_⟩, rfl⟩
+  · linarith [(abs_lt.mp hsm).1, min_le_left (θ - θ₁) (θ₂ - θ)]
+  · linarith [(abs_lt.mp hsm).2, min_le_right (θ - θ₁) (θ₂ - θ)]
+
+/-- **The colours at an interior point of a constant-sided arc are its two side colours**: near the point, `ω(p)` lies in `Γ`, so every
+class reaching the point does so from inside or from outside the circle. Inhabitant of the hypotheses: `quadRing` (`quadRing_isRingArc`). -/
+theorem IsRingArc.coloursAt_eq {p : ℂ} {θ₁ θ₂ θ : ℝ} {c c' : Fin k} (hR : F.IsRingArc p θ₁ θ₂ c c') (hθ : θ ∈ Ioo θ₁ θ₂) :
+    F.coloursAt (ringPt p θ) = {c, c'} := by
+  obtain ⟨hin, hout⟩ := hR.2.2 θ hθ
+  ext j
+  simp only [mem_insert_iff, mem_singleton_iff]
+  constructor
+  · intro hj
+    have hsplit : F.region j ⊆ (F.region j ∩ ball p 1) ∪ (F.region j \ closedBall p 1) ∪ (F.region j ∩ sphere p 1) := by
+      intro z hz
+      rcases lt_trichotomy (dist z p) 1 with h | h | h
+      · exact Or.inl (Or.inl ⟨hz, h⟩)
+      · exact Or.inr ⟨hz, h⟩
+      · exact Or.inl (Or.inr ⟨hz, fun h' => absurd (mem_closedBall.mp h') (not_le.mpr h)⟩)
+    have h := closure_mono hsplit hj
+    rw [closure_union, closure_union] at h
+    rcases h with (h | h) | h
+    · left
+      have : j ∈ F.innerColours p (ringPt p θ) := h
+      rw [hin] at this
+      exact this
+    · right
+      have : j ∈ F.outerColours p (ringPt p θ) := h
+      rw [hout] at this
+      exact this
+    · exfalso
+      obtain ⟨δ, hδ, hsph⟩ := sphere_near_mem_ringArc (p := p) hθ
+      obtain ⟨z, ⟨hzj, hzs⟩, hzd⟩ := Metric.mem_closure_iff.mp h δ hδ
+      have hzΓ := hR.2.1 (hsph z hzs (by rw [dist_comm]; exact hzd))
+      exact hzj.1.2 hzΓ.2
+  · rintro (rfl | rfl)
+    · have : j ∈ F.innerColours p (ringPt p θ) := by rw [hin]; exact mem_singleton _
+      exact closure_mono inter_subset_left this
+    · have : j ∈ F.outerColours p (ringPt p θ) := by rw [hout]; exact mem_singleton _
+      exact closure_mono sdiff_subset this
+
 /-- **One sector, by a half-plane of contacts**: a colour carried at `v` whose every contact `w` on `ω(v)` is in-type with `w − v = u` or
 out-type with `w − v = −u` (`‖u‖ = 1`) has the open half-plane `d·u > 0` in its allowed cone, so `u` is interior to it; with no MERGE at
 `v` it has exactly one sector (wave 4's `stuck_structure_flanks` step `hone`, with an in-type contact allowed). Inhabitant of the

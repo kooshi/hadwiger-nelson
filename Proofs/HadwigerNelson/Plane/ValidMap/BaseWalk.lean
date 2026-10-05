@@ -122,6 +122,18 @@ variable {F : ArcMap 6} {u : ℂ}
 
 /-! ## A — the pseudo-colouring of `ω(p)` at a cubic trichromatic `p ∈ B̄(u, 1)` -/
 
+/-- **The (P) sweep**: in a valid map, a colour whose tile holds a point at distance exactly `1` from `y` is not carried at `y` (a point of its
+class near `y`, translated, would sit in the tile at distance `1`). Any `k`. -/
+theorem not_mem_coloursAt_of_tile_dist {k : ℕ} {F : ArcMap k} (hF : F.Valid) {a : Fin k} {T : Set ℂ} (hT : F.TileOf a T) {t y : ℂ}
+    (ht : t ∈ T) (h1 : dist t y = 1) : a ∉ F.coloursAt y := by
+  intro hay
+  obtain ⟨δ, hδ, hδT⟩ := Metric.isOpen_iff.mp hT.1.isOpen t ht
+  obtain ⟨y', hy', hy'd⟩ := Metric.mem_closure_iff.mp hay δ hδ
+  have hmem : t + (y' - y) ∈ T := hδT (by rw [mem_ball, dist_eq_norm, add_sub_cancel_left, ← dist_eq_norm, dist_comm]; exact hy'd)
+  refine hF _ (hT.1.subset_interiorPts hmem) y' hy'.1 ?_ (by rw [hT.2 hmem, hy'.2])
+  rw [dist_eq_norm, show t + (y' - y) - y' = t - y by ring, ← dist_eq_norm, h1]
+
+
 /-- Under H a point of `B̄(u, 2)` with three colours is cubic trichromatic (no repeated colour: one sector per colour; K5b's child
 `isCubicTrichromatic_of_three_of_noRep` with `BaseHyp`). -/
 theorem BaseCtx.cubic_of_three (B : F.BaseCtx u) {x : ℂ} (hx : x ∈ closedBall u 2) (h3 : (F.coloursAt x).ncard = 3) :
@@ -133,7 +145,67 @@ theorem BaseCtx.cubic_of_three (B : F.BaseCtx u) {x : ℂ} (hx : x ∈ closedBal
 in `Γ` on both sides with both sides' colours in `P_cl(p)` — a both-kind arc centred at `p`, against `noBoth` and H. -/
 theorem BaseCtx.pseudo_nonempty (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ closedBall u 1) (hp3 : F.IsCubicTrichromatic p) {x : ℂ}
     (hx : dist x p = 1) : (F.pseudoColours p x).Nonempty := by
-  sorry
+  have hF := B.valid
+  by_contra hne
+  rw [not_nonempty_iff_eq_empty, pseudoColours, sdiff_eq_empty] at hne
+  have hpu : dist p u ≤ 1 := hp
+  have hxd : x ∈ F.dom := B.covers (by rw [mem_closedBall]; linarith [dist_triangle x p u])
+  have hpd : p ∈ F.dom := B.covers (closedBall_subset_closedBall (by norm_num) hp)
+  -- near `x` every interior point carries a colour of `x`, hence of `p`
+  obtain ⟨ρ, hcol, hρ⟩ := ((eventually_col_mem_coloursAt x).and self_mem_nhdsWithin).exists
+  have hρ0 : (0 : ℝ) < ρ := hρ
+  obtain ⟨δd, hδd, hdom⟩ := Metric.isOpen_iff.mp F.isOpen_dom x hxd
+  set ρ' := min ρ δd with hρ'
+  have hρ'0 : 0 < ρ' := lt_min hρ0 hδd
+  -- every point of `ω(p)` near `x` lies on `Γ`: an interior point there would carry a colour of `p` at distance `1` from `p`
+  have hΓ : ∀ y, dist y p = 1 → dist y x < ρ' → y ∈ F.Γ := by
+    intro y hy hyx
+    have hyd : y ∈ F.dom := hdom (lt_of_lt_of_le hyx (min_le_right _ _))
+    by_contra hyΓ
+    have hyI : y ∈ F.interiorPts := ⟨hyd, fun h => hyΓ ⟨hyd, h⟩⟩
+    have hc := hcol y ⟨hyI, mem_ball.mpr (lt_of_lt_of_le hyx (min_le_left _ _))⟩
+    obtain ⟨hT, hyT⟩ := tileOf_component (⟨hyI, mem_singleton _⟩ : y ∈ F.region (F.col y))
+    exact not_mem_coloursAt_of_tile_dist hF hT hyT hy (hne hc)
+  -- so `x` lies on an arc of `Γ` on `ω(p)`
+  have hxe : ringPt p (arg (x - p)) = x := by
+    have h := eq_polar_arg (x - p)
+    rw [← dist_eq_norm, hx] at h
+    simp only [ofReal_one, one_mul] at h
+    rw [ringPt, ← h]; ring
+  have hon : F.OnRingArc p x := by
+    refine ⟨arg (x - p) - ρ' / 2, arg (x - p) + ρ' / 2, by linarith, ⟨arg (x - p), ⟨by linarith, by linarith⟩, hxe⟩, ?_⟩
+    rintro _ ⟨ψ, hψ, rfl⟩
+    refine hΓ _ (by rw [ringPt, dist_eq_norm, add_sub_cancel_left, norm_e]) ?_
+    rw [← hxe, ringPt, ringPt, dist_add_left, dist_eq_norm]
+    calc ‖e ψ - e (arg (x - p))‖ ≤ |ψ - arg (x - p)| := norm_e_sub_e_le _ _
+      _ ≤ ρ' / 2 := abs_le.mpr ⟨by linarith [hψ.1], by linarith [hψ.2]⟩
+      _ < ρ' := by linarith
+  -- a constant-sided arc near `x`: both its side colours are colours of `x`, hence of `p`
+  obtain ⟨a, b, d, d', hab, hR, hsub⟩ := exists_isRingArc_of_onRingArc hon (half_pos hρ'0)
+  have hmid : (a + b) / 2 ∈ Ioo a b := ⟨by linarith, by linarith⟩
+  have hyx : dist (ringPt p ((a + b) / 2)) x < ρ' / 2 := hsub ⟨_, Ioo_subset_Icc_self hmid, rfl⟩
+  have hnear : ∀ (j : Fin 6) (O : Set ℂ), ringPt p ((a + b) / 2) ∈ closure (F.region j ∩ O) → j ∈ F.coloursAt p := by
+    intro j O hj
+    obtain ⟨z, hz, hzy⟩ := Metric.mem_closure_iff.mp hj (ρ' / 2) (half_pos hρ'0)
+    have hzx : dist z x < ρ := by
+      have := dist_triangle z (ringPt p ((a + b) / 2)) x
+      rw [dist_comm] at hzy
+      linarith [min_le_left ρ δd]
+    have := hcol z ⟨hz.1.1, mem_ball.mpr hzx⟩
+    rw [show F.col z = j from hz.1.2] at this
+    exact hne this
+  have hd : d ∈ F.coloursAt p := hnear d (ball p 1) (by
+    have : d ∈ F.innerColours p (ringPt p ((a + b) / 2)) := by rw [(hR.2.2 _ hmid).1]; exact mem_singleton _
+    exact this)
+  have hd' : d' ∈ F.coloursAt p := hnear d' (closedBall p 1)ᶜ (by
+    have : d' ∈ F.outerColours p (ringPt p ((a + b) / 2)) := by rw [(hR.2.2 _ hmid).2]; exact mem_singleton _
+    rw [outerColours, mem_setOf_eq, Set.sdiff_eq] at this
+    exact this)
+  -- a both-kind arc centred at `p`: against `noBoth` and H
+  rcases noBoth hF hpd ⟨d, d', hR, hd, hd'⟩ with h4 | hrep
+  · rw [hp3.2] at h4
+    norm_num at h4
+  · exact Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hp) (Or.inr ⟨hpd, hrep⟩)
 
 /-- **`|c′| ≤ 2`** on `ω(p)` (FS112-N3-3; NB3 step 5): three pseudo-colours make `x` cubic trichromatic and complementary to `p` at distance
 `1`; `cor3` then puts four colours at the rhombus corners, inside `B̄(u, 2)`, against H. -/
@@ -146,7 +218,58 @@ theorem BaseCtx.pseudo_ncard_le_two (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ clos
 (`NoInertNear`, `p ∈ B̄(u, 1)`) nor both-kind (`noBoth`, H). -/
 theorem BaseCtx.pseudo_finite (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ closedBall u 1) (hp3 : F.IsCubicTrichromatic p) :
     {θ | θ ∈ Ico 0 (2 * π) ∧ (F.pseudoColours p (ringPt p θ)).ncard ≠ 1}.Finite := by
-  sorry
+  have hF := B.valid
+  have hpu : dist p u ≤ 1 := hp
+  have hcov : F.Covers p 1 := fun z hz =>
+    B.covers (show z ∈ closedBall u 2 by rw [mem_closedBall] at hz ⊢; linarith [dist_triangle z p u])
+  have hpd : p ∈ F.dom := hcov (mem_closedBall_self zero_le_one)
+  refine (F.finite_not_regular hcov (2 * π)).subset ?_
+  rintro θ ⟨hθ, hne⟩
+  refine ⟨Ico_subset_Icc_self hθ, fun hreg => hne ?_⟩
+  have hxd : ringPt p θ ∈ F.dom := hcov (by rw [mem_closedBall, dist_ringPt])
+  rcases hreg with hΓ | ⟨θ₁, θ₂, c, c', hR, φ, hφ, he⟩
+  · -- off `Γ`: an interior point, its one colour absent at `p`
+    have hI : ringPt p θ ∈ F.interiorPts := ⟨hxd, fun h => hΓ ⟨hxd, h⟩⟩
+    have hab : F.col (ringPt p θ) ∉ F.coloursAt p :=
+      not_mem_coloursAt_of_mem_sphere hF (by rw [mem_sphere, dist_ringPt]) ⟨hI, mem_singleton _⟩
+    rw [pseudoColours, coloursAt_eq_of_mem_interiorPts hI]
+    refine Set.ncard_eq_one.mpr ⟨F.col (ringPt p θ), ?_⟩
+    ext j
+    simp only [Set.mem_sdiff, mem_singleton_iff]
+    constructor
+    · exact fun h => h.1
+    · rintro rfl
+      exact ⟨rfl, hab⟩
+  · -- on a constant-sided arc: exactly one side colour at `p` (not inert, not both-kind)
+    have hx : ringPt p θ = ringPt p φ := by rw [ringPt, ringPt, he]
+    rw [hx, pseudoColours, hR.coloursAt_eq hφ]
+    have hnI := B.noInert p hp θ₁ θ₂
+    have hnB : ¬ (c ∈ F.coloursAt p ∧ c' ∈ F.coloursAt p) := fun ⟨h1, h2⟩ => by
+      rcases noBoth hF hpd ⟨c, c', hR, h1, h2⟩ with h4 | hrep
+      · rw [hp3.2] at h4
+        norm_num at h4
+      · exact Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hp) (Or.inr ⟨hpd, hrep⟩)
+    by_cases hc : c ∈ F.coloursAt p
+    · have hc' : c' ∉ F.coloursAt p := fun h => hnB ⟨hc, h⟩
+      refine Set.ncard_eq_one.mpr ⟨c', ?_⟩
+      ext j
+      simp only [Set.mem_sdiff, mem_insert_iff, mem_singleton_iff]
+      constructor
+      · rintro ⟨rfl | rfl, h⟩
+        · exact absurd hc h
+        · rfl
+      · rintro rfl; exact ⟨Or.inr rfl, hc'⟩
+    · have hc' : c' ∈ F.coloursAt p := by
+        by_contra h
+        exact hnI ⟨c, c', hR, hc, h⟩
+      refine Set.ncard_eq_one.mpr ⟨c, ?_⟩
+      ext j
+      simp only [Set.mem_sdiff, mem_insert_iff, mem_singleton_iff]
+      constructor
+      · rintro ⟨rfl | rfl, h⟩
+        · rfl
+        · exact absurd hc' h
+      · rintro rfl; exact ⟨Or.inl rfl, hc⟩
 
 /-- **The bridge**: the pseudo-colouring of `ω(p)`, through an injection `g` of `ℤ/3` onto the colours absent at `p`, is a wave-3
 `CircleColouring` whose one-sided values are the germs' pseudo-colours, whose change set holds only genuine changes, and which has no swap
@@ -159,17 +282,6 @@ theorem BaseCtx.exists_pseudoCircle (B : F.BaseCtx u) {p : ℂ} (hp : p ∈ clos
   sorry
 
 /-! ## C — the planar core (Prop. 19(b), the reduction's arcs, the eleventh point) -/
-
-/-- **The (P) sweep**: in a valid map, a colour whose tile holds a point at distance exactly `1` from `y` is not carried at `y` (a point of its
-class near `y`, translated, would sit in the tile at distance `1`). Any `k`. -/
-theorem not_mem_coloursAt_of_tile_dist {k : ℕ} {F : ArcMap k} (hF : F.Valid) {a : Fin k} {T : Set ℂ} (hT : F.TileOf a T) {t y : ℂ}
-    (ht : t ∈ T) (h1 : dist t y = 1) : a ∉ F.coloursAt y := by
-  intro hay
-  obtain ⟨δ, hδ, hδT⟩ := Metric.isOpen_iff.mp hT.1.isOpen t ht
-  obtain ⟨y', hy', hy'd⟩ := Metric.mem_closure_iff.mp hay δ hδ
-  have hmem : t + (y' - y) ∈ T := hδT (by rw [mem_ball, dist_eq_norm, add_sub_cancel_left, ← dist_eq_norm, dist_comm]; exact hy'd)
-  refine hF _ (hT.1.subset_interiorPts hmem) y' hy'.1 ?_ (by rw [hT.2 hmem, hy'.2])
-  rw [dist_eq_norm, show t + (y' - y) - y' = t - y by ring, ← dist_eq_norm, h1]
 
 /-- A tile whose closure holds points inside and outside `B̄(y, 1)` holds a point at distance exactly `1` from `y`. -/
 theorem IsTile.exists_dist_eq_one {k : ℕ} {F : ArcMap k} {T : Set ℂ} (hT : F.IsTile T) {x₁ x₂ y : ℂ} (h₁ : x₁ ∈ closure T)

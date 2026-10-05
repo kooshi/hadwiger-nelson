@@ -434,6 +434,22 @@ theorem stuck_structure_ua (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hst : F
     stuck_flanks_ua hF hv hst h3 Hu Hd h1 h2 h3' h4 hc2 hN hS
   exact ⟨α, κ₁, κ₂, κ₃, κ₄, g, h, Hu, Hd, h1, h2, h3', h4, hc2, hdeg, hcol, hgh, hgc, hhc, fa, fb, fa', fb', hsides, hN, hS⟩
 
+/-- **Every colour at a chain vertex approaches it along both directions of one axis** (`stuck_structure_ua`: `c`'s two horns, `g` and `h`
+flanking both). Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_isStuck`, `bowtie_coloursAt_zero`). -/
+theorem chainVertex_antipodal (hF : F.Valid) {E : ℂ} (hv : F.Covers E 1) (hst : F.IsStuck E)
+    (h3 : (F.coloursAt E).ncard ≤ 3) :
+    ∃ α : ℝ, ∀ j ∈ F.coloursAt E, α ∈ coneAt (F.region j) E ∧ α + π ∈ coneAt (F.region j) E := by
+  obtain ⟨c, m, hm, hc⟩ := hst.2.2.2
+  obtain ⟨α, κ₁, κ₂, κ₃, κ₄, g, h, Hu, Hd, -, -, -, -, -, -, hcol, -, -, -, fa, fb, fa', fb', -⟩ :=
+    stuck_structure_ua hF hv hst h3 hm hc
+  refine ⟨α, fun j hj => ?_⟩
+  rw [hcol] at hj
+  simp only [mem_insert_iff, mem_singleton_iff] at hj
+  rcases hj with rfl | rfl | rfl
+  · exact ⟨Hu.mem_coneAt_region, Hd.mem_coneAt_region⟩
+  · exact ⟨fa.mem_coneAt, fb'.mem_coneAt⟩
+  · exact ⟨fb.mem_coneAt, fa'.mem_coneAt⟩
+
 /-! ## FS112-N2-TERM, with FS112-N2-RED as its lemma -/
 
 /-- **FS112-N2-RED** (merged into FS112-N2-TERM as its lemma, SR2 item 13): every valid map of the plane has a valid modification —
@@ -637,7 +653,37 @@ theorem n3_end_chain (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v : �
     (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α (-1) 1 c)
     (hg : F.IsFlankAbove v α 1 g) (hgN : F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2))) :
     F.stuckRun v α = {0} := by
-  sorry
+  -- the run's chain clause reads only the two unit bounds of `c`'s horn (not `hT`, the flank, nor the in-type contact)
+  have _ := hT
+  have _ := hg
+  have _ := hgN
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  obtain ⟨⟨hcN, -⟩, ⟨hcS, -⟩⟩ := horn_poles_contact hF (hvC v) hst.1 le_rfl hc2 hH
+  have hNo : ¬ F.IsChainVertex (v + e (α + π / 2)) := fun ⟨hstN, h3N⟩ => by
+    obtain ⟨β, hβ⟩ := chainVertex_antipodal hF (hvC _) hstN h3N
+    obtain ⟨h1, h2⟩ := hβ c hcN.2.2
+    exact not_antipodal_coneAt_N_of_horn hF hH le_rfl h1 h2
+  have hSo : ¬ F.IsChainVertex (v - e (α + π / 2)) := fun ⟨hstS, h3S⟩ => by
+    obtain ⟨β, hβ⟩ := chainVertex_antipodal hF (hvC _) hstS h3S
+    obtain ⟨h1, h2⟩ := hβ c hcS.2.2
+    exact not_antipodal_coneAt_S_of_horn hF hH le_rfl h1 h2
+  ext j
+  simp only [stuckRun, mem_setOf_eq, mem_singleton_iff]
+  constructor
+  · intro hj
+    by_contra hj0
+    rcases lt_or_gt_of_ne hj0 with hlt | hgt
+    · have := hj (-1) (by omega) (by omega)
+      rw [show v + ((-1 : ℤ) : ℂ) * e (α + π / 2) = v - e (α + π / 2) by push_cast; ring] at this
+      exact hSo this
+    · have := hj 1 (by omega) (by omega)
+      rw [show v + ((1 : ℤ) : ℂ) * e (α + π / 2) = v + e (α + π / 2) by push_cast; ring] at this
+      exact hNo this
+  · rintro rfl i hi1 hi2
+    have hi : i = 0 := by omega
+    subst hi
+    rw [show v + ((0 : ℤ) : ℂ) * e (α + π / 2) = v by push_cast; ring]
+    exact ⟨hst, h3.le⟩
 
 end ArcMap
 
