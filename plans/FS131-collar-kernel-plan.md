@@ -7,8 +7,13 @@
 
 ## Theorems this phase proved
 
-None yet (updated at each saved stage). A planning job: it lays `bend_toward_collar` out as named children with `sorry` at each; a child
-short enough to prove here is proved and listed here with its grade and address.
+A planning job; four small children closed in the skeleton, each [kernel] on `[propext, Classical.choice, Quot.sound]`
+(`data/fs131/kp2/KP2Axioms.out`): `HadwigerNelson.Plane.push1_mid`, `HadwigerNelson.Plane.push1_of_not_mem`,
+`HadwigerNelson.Plane.tangRad_zero` (`Plane/ValidMap/RadialPush`), `HadwigerNelson.Plane.ArcMap.collarArcs_locallyFinite`
+(`Plane/ValidMap/BendCollar`). Proved with no `sorry` of their own but resting on the `pushforward` definition's sorry'd field:
+`ArcMap.pushforward_Γ`, `pushforward_mem_interiorPts_iff`, `pushforward_col_apply`, `CollarFit.pushProfiles`. **`bend_toward_collar` is
+proved over 53 named children** (20 in `RadialPush`, 7 in `Pushforward`, 26 in `BendCollar`), so it rests on `sorryAx` through them —
+not a kernel theorem yet.
 
 ## Stage 1 — SAVED: the readback, the as-given build, and what this job plans
 
@@ -259,3 +264,16 @@ first guessed wrong were corrected there: `localSectors_disj` is `HadwigerNelson
   `degree_openArc`.
 
 ## Stage 5 — SAVED
+
+## Stage 6 — SAVED: the build, and the hand-back
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 3 modules rebuilt, 6 with warnings, every warning `declaration uses
+'sorry'`** (0 others), exit 0, 8 min 45 s (`build/gate/build/20261005T111648Z-3669160.log`; driver log `data/fs131/kp2/build-skel2.log`).
+The first skeleton build (`build-skel1.log`, OK) showed two unused-variable warnings (`hlen`, `hmax`), fixed by the convention of § 2.2.
+`sorry` declarations by module: `RadialPush` 20, `Pushforward` 7, `BendCollar` 26 (`bend_toward_collar` itself none). Axioms:
+`data/fs131/kp2/KP2Axioms.out` — the four closed children on the standard three, the control `bend_toward_collar` on `sorryAx`.
+`tools/fs131_kp2_stmt.py`: PASS; `tools/check_architecture.py`: exit 0.
+
+**Left**: the 53 children, split as § 5.2, and the child B0 (`collarModel`), to be stated by implementer C.
+
+## Stage 6 — SAVED
