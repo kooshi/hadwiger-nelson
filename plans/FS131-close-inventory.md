@@ -2817,3 +2817,29 @@ reason by the close.*
      `n3_end_four_colours` and `n3_end_bothKind` (NB3-END items 3–5, NB3's one mind — a failed step goes back to Ephodos), then `cv_class` (its "None" case this
      stage's argument mirrored at `N`), the CV-HD cluster, `exists_red`, `exists_terminal`, `cv_exists`. Alternative weighed: IMM2 (MERGE). Why: this half is
      still the longest path to wave 5's landing; MERGE has no consumer in wave 5. Confidence: high.
+336. **FS131-I5j handed back** (Stage 33 SAVED, harness ≈ 440k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 30–33; report
+     `data/fs131/reports/FS131-I5j.md`; commits `7045c8b9`, `9dcfc939`, `ad8ff032`, `298a3c0b`, pushed). **Results, [kernel] on the standard three, statements
+     unchanged**: `ArcMap.coneAt_of_cubic` (the shared child: at a cubic trichromatic vertex the three colours' tangent cones are the chart's contiguous closed
+     intervals `[β₀, β₁]`, `[β₁, β₂]`, `[β₂, β₀ + 2π]`; spec example at the brick corner); `hex_regular` (FS110-N2-HEX; the proof always gives the first
+     disjunct); `bv_hex` (FS114-BV-HEX, BASE-V § 1a.4 steps 1–6, at every `k`) — so `p17_ua` and `BaseCtx.hex_base` are kernel theorems and **`row134BaseUA`
+     rests only on the planar three** (`retArcs_nested`, `exists_endpoint`, `exists_eleventh`), the first two proved on `fs131-w5p` (item 324); `rot_out`
+     (FS112-ROTHEX's outward row, with unit arcs, under H); 26 children; `l3_base`'s docstring corrected (item 330). **Receipt** (Keryx): the four commits exist
+     and `origin/fs131-w5` is `298a3c0b`; the stage-32 build log (`build/gate/build/20261005T052713Z-1651689.log`) ends "Build completed successfully (5369
+     jobs)", 0 warnings other than `sorry`; `sorry` by grep: `BaseWalk` 3, `BaseDense` 3, `Dense` 1, `HexRing` 3, `MapGraph` 3, `Terminal` 9 — 22; the diff on
+     `Proofs/` since `f0c6ba67` removes only `sorry` lines and two docstring lines; `tools/fs131_i5_stmt_check.py d61edefc` run by Keryx: PASS; the receipts
+     parsed by script — `I5jAxioms31.out` (26 records; `coneAt_of_cubic`, `hex_regular`, `bv_hex`, `p17_ua`, `hex_base` standard; controls `rot_out`,
+     `row134BaseUA` on `sorryAx`), `I5jAxioms32.out` (`rot_out` standard; control `rot_in` on `sorryAx`); `coneAt_of_cubic`'s statement read against its docstring.
+     **Correction owed** (for the filing): F-HEXCUSP (`plans/FS131-w5-kernel-plan.md` § 8.4, and FS112-ROTHEX's read-back in § 8.2) cannot happen at a cubic
+     vertex — the three cones are contiguous, and an antipodal double cusp needs four branches — so `hex_regular`'s second disjunct is vacuous (the statement
+     stays true); N2-HEX holds as FS-110 wrote it for degree 3. **Generalization**: BV-HEX's steps 1–3 need only "fewer than four colours" at each `x_k`, not
+     H's repeated-colour half (not stated as a theorem). **Tool**: `tools/fs131_i5_quote_check.py` (a brief's quotations against their sources; plant fired).
+     **Name note**: `ArcMap.dist_eFrame` (renamed from `dist_frame`, which `main`'s `MaximalCover` declares). **Left (4)**: `rot_in` (M, the mirror of
+     `rot_out`), `bv_nd` (M–H), `bv_l3` (H), `exists_preBend` (H) — none on `row134BaseUA`'s path; routes in record Stage 33. Credit: I5j, for `coneAt_of_cubic`
+     and for finding F-HEXCUSP empty.
+337. **Ruling on I5j's slot: MERGE's continuation, FS131-IMM2, on `fs131-w4mm` from IMM1's stage 3.** In flight after it: 1 (RL1) + 1 (I5k) + 1 (IMM2) = 3.
+     Choice: item 323's queue read on its letter — the freed lane's own leaves are not on the longest path (I5j's four, about two sessions, against the
+     `Terminal` half's ten, about four to five, and the boundary walk's planner plus implementer), so the slot goes to IMM2: MERGE (`exists_merge_aux`) proved
+     from IMM1's record § 4, on its branch, without its landing (a later landing job, on my word, as WL1 was). Alternative weighed: I5j's continuation now.
+     Why: that half has slack and finishes before the `Terminal` half whenever it starts; MERGE is FS-131 work with no other route to its landing, and runs
+     independent of wave 5. Confidence: medium-high (it changes if the `Terminal` half's re-price at its next hand-back drops below two sessions: then I5j's
+     continuation takes the next slot ahead of `bend_away`'s implementer).
