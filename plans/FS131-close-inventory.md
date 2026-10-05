@@ -3499,3 +3499,8 @@ reason by the close.*
      `cv_class`, `c_ends` should drop to the standard three); then, as budget allows, lane B's `run_hornBoundsQR` and `stuckRun_ne_univ`. Alternative weighed:
      merging `main` alone into `fs131-w5c`. Why: `fs131-w5` holds `main` plus every other wave-5 lane, so this one merge leaves only KP2's later `BendCollar`
      commits and the procedure's last steps for wave 5's landing. Confidence: high. In flight after M6's launch: 1 (IO1) + 1 (KP2) + 1 (M6) = 3.
+390. **FS131-KP2, by message: a generalization (planner's reading, not yet kernel)** — `bend_toward_collar`'s construction never reads `hmax`: maximality is
+     what `exists_preBend`'s measure needs, not what the bend needs (a non-maximal arc bends the same way; at an end where `α` continues with the same sides the
+     end-chart swap is unchanged); `hlen` follows from `l60_le` (KB2, item 378). The skeleton's assembly opens with `clear hlen hmax`, and no child takes `hmax`;
+     its killing test is the children's proofs. Nothing downstream changes (`exists_preBend_step` supplies both), and the statement is unchanged. Record:
+     `fs131-w5`'s `plans/FS131-collar-kernel-plan.md` § 2.2. Logged; no ruling needed.
