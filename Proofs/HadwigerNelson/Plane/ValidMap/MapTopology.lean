@@ -3499,4 +3499,110 @@ theorem inter_nonempty_of_interleaved_exterior {u : ℂ} {R : ℝ} (hR : 0 < R) 
   have : z' = z := by rw [← hinv z' (hfar z' (hK'd hz')), hzz', hinv z (hfar z (hKd hz))]
   exact ⟨z, hz, this ▸ hz'⟩
 
+/-- **The previous index of a successor, read mod `len`** (FS131-RS1, for SEP's chain lemma): `((l + 1) mod len) − 1 mod len = l mod len`. -/
+theorem mod_prev_succ {len : ℕ} (hlen : 0 < len) (l : ℕ) : ((l + 1) % len + len - 1) % len = l % len := by
+  obtain ⟨k, q, hq, rfl⟩ : ∃ k q, q < len ∧ l = q + len * k :=
+    ⟨l / len, l % len, Nat.mod_lt _ hlen, by rw [add_comm]; exact (Nat.div_add_mod l len).symm⟩
+  rw [show q + len * k + 1 = (q + 1) + len * k by ring, Nat.add_mul_mod_self_left, Nat.add_mul_mod_self_left,
+    Nat.mod_eq_of_lt hq]
+  rcases Nat.lt_or_ge (q + 1) len with h | h
+  · rw [Nat.mod_eq_of_lt h, show q + 1 + len - 1 = q + len by omega, Nat.add_mod_right, Nat.mod_eq_of_lt hq]
+  · rw [show q + 1 = len by omega, Nat.mod_self, zero_add, Nat.mod_eq_of_lt (by omega)]; omega
+
+/-- A spec example for `mod_prev_succ`: at the wrap, position `4` of a five-entry walk is the previous of position `0`. -/
+example : ((4 + 1) % 5 + 5 - 1) % 5 = 4 % 5 := mod_prev_succ (by norm_num) 4
+
+/-- **SEP-CHAIN: pieces chained by their hinges, read mod the length, are connected** (FS131-RS1, for the boundary walk's separation). If
+each piece `P l` (`l < len`) is preconnected and holds the hinge before it, `z ((l + len − 1) mod len)`, and its own hinge `z l`, then the
+pieces over any interval of `ℕ`, read mod `len`, have a preconnected union — consecutive pieces share a hinge (`mod_prev_succ`), and the
+interval may run past the end of the walk and wrap. -/
+theorem isPreconnected_biUnion_Icc_mod {X : Type*} [TopologicalSpace X] {len : ℕ} (hlen : 0 < len) {P : ℕ → Set X}
+    {z : ℕ → X} (hP : ∀ l < len, IsPreconnected (P l)) (hprev : ∀ l < len, z ((l + len - 1) % len) ∈ P l)
+    (hnext : ∀ l < len, z l ∈ P l) (l₁ l₂ : ℕ) : IsPreconnected (⋃ l ∈ Icc l₁ l₂, P (l % len)) := by
+  refine IsPreconnected.biUnion_of_chain ordConnected_Icc (fun l _ => hP _ (Nat.mod_lt _ hlen)) fun l _ _ => ?_
+  refine ⟨z (l % len), hnext _ (Nat.mod_lt _ hlen), ?_⟩
+  rw [Order.succ_eq_add_one, ← mod_prev_succ hlen l]
+  exact hprev _ (Nat.mod_lt _ hlen)
+
+/-- **SEP-X: the crossing lemma outside a disc, for a closed `K`, bounded or not** (FS131-RS1; `inter_nonempty_of_interleaved_exterior`
+without `IsBounded K`): a closed preconnected `K` and a preconnected `K'`, both off the open disc `B(u, R)`, joining interleaved points of its
+circle, meet. After the inversion `ι z = u + R² / conj (z − u)` the closure of `ι '' K` is closed, preconnected and in the closed disc, and it adds
+at most the centre `u` to `ι '' K` (on `ℂ ∖ {u}` the inversion is its own continuous inverse, and `K` is closed), which `ι '' K'` never contains;
+then `inter_nonempty_of_interleaved_radius`. It is needed because `IsBoundaryWalk.sep` carries no `F.Valid`, so the tiles it builds `K` from
+need not be bounded. -/
+theorem inter_nonempty_of_interleaved_exterior_of_isClosed {u : ℂ} {R : ℝ} (hR : 0 < R) {K K' : Set ℂ} (hK : IsClosed K)
+    (hKc : IsPreconnected K) (hK'c : IsPreconnected K') (hKd : K ⊆ (ball u R)ᶜ)
+    (hK'd : K' ⊆ (ball u R)ᶜ) {s s' t t' : ℝ} (h₁ : s < s') (h₂ : s' < t) (h₃ : t < t') (h₄ : t' < s + 2 * π)
+    (hs : polarPt u R s ∈ K) (ht : polarPt u R t ∈ K) (hs' : polarPt u R s' ∈ K') (ht' : polarPt u R t' ∈ K') :
+    (K ∩ K').Nonempty := by
+  set ι : ℂ → ℂ := fun z => u + ((R : ℂ) ^ 2) / (starRingEnd ℂ) (z - u) with hι
+  have hfar : ∀ z ∈ (ball u R)ᶜ, z - u ≠ 0 := fun z hz h => by
+    rw [mem_compl_iff, mem_ball, dist_eq_norm, h, norm_zero, not_lt] at hz; linarith
+  have hcontAt : ∀ z, z - u ≠ 0 → ContinuousAt ι z := fun z hz => by
+    refine continuousAt_const.add (continuousAt_const.div (by fun_prop) ?_)
+    rw [map_ne_zero]; exact hz
+  have hcont : ContinuousOn ι (ball u R)ᶜ := fun z hz => (hcontAt z (hfar z hz)).continuousWithinAt
+  have hnorm : ∀ z, z - u ≠ 0 → ‖ι z - u‖ = R ^ 2 / ‖z - u‖ := fun z hz => by
+    simp only [hι, add_sub_cancel_left, norm_div, norm_pow, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hR,
+      Complex.norm_conj]
+  have hne : ∀ z, z - u ≠ 0 → ι z - u ≠ 0 := fun z hz h => by
+    have := hnorm z hz
+    rw [h, norm_zero] at this
+    exact (div_pos (pow_pos hR 2) (norm_pos_iff.mpr hz)).ne' this.symm
+  have hinv : ∀ z, z - u ≠ 0 → ι (ι z) = z := fun z hz => by
+    have hc : (starRingEnd ℂ) (z - u) ≠ 0 := by rwa [map_ne_zero]
+    have hRc : (R : ℂ) ≠ 0 := by exact_mod_cast hR.ne'
+    simp only [hι, add_sub_cancel_left, map_div₀, map_pow, Complex.conj_ofReal, Complex.conj_conj]
+    field_simp
+    ring
+  have hball : ∀ S ⊆ (ball u R)ᶜ, ι '' S ⊆ closedBall u R := by
+    rintro S hS _ ⟨z, hz, rfl⟩
+    have hz' := hS hz
+    rw [mem_closedBall, dist_eq_norm, hnorm z (hfar z hz')]
+    rw [mem_compl_iff, mem_ball, dist_eq_norm, not_lt] at hz'
+    rw [div_le_iff₀ (by linarith)]; nlinarith
+  have hpt : ∀ a, ι (polarPt u R a) = polarPt u R a := fun a => by
+    have hRc : (R : ℂ) ≠ 0 := by exact_mod_cast hR.ne'
+    have he : e a * (starRingEnd ℂ) (e a) = 1 := by rw [mul_comm]; exact conj_mul_self_e a
+    simp only [hι, polarPt, add_sub_cancel_left, map_mul, Complex.conj_ofReal]
+    congr 1
+    have hce : (starRingEnd ℂ) (e a) ≠ 0 := by intro h; rw [h, mul_zero] at he; exact zero_ne_one he
+    rw [div_eq_iff (mul_ne_zero hRc hce)]
+    linear_combination (-(R : ℂ) ^ 2) * he
+  -- the closure of the inverted `K` adds at most the centre
+  have hcl : ∀ w ∈ closure (ι '' K), w - u ≠ 0 → w ∈ ι '' K := fun w hw hwu => by
+    have hsub : ι '' K ⊆ ι ⁻¹' K := by
+      rintro _ ⟨z, hz, rfl⟩
+      show ι (ι z) ∈ K
+      rw [hinv z (hfar z (hKd hz))]; exact hz
+    have h1 : ι w ∈ closure (ι '' (ι ⁻¹' K)) := mem_closure_image (hcontAt w hwu) (closure_mono hsub hw)
+    have h2 : ι w ∈ K := hK.closure_subset (closure_mono (image_preimage_subset ι K) h1)
+    exact ⟨ι w, h2, hinv w hwu⟩
+  obtain ⟨w, hw, hw'⟩ := inter_nonempty_of_interleaved_radius (u := u) (R := R) (K := closure (ι '' K)) (K' := ι '' K') hR
+    isClosed_closure (hKc.image _ (hcont.mono hKd)).closure (hK'c.image _ (hcont.mono hK'd))
+    (closure_minimal (hball K hKd) isClosed_closedBall) (hball K' hK'd) h₁ h₂ h₃ h₄
+    (subset_closure ⟨_, hs, hpt s⟩) (subset_closure ⟨_, ht, hpt t⟩) ⟨_, hs', hpt s'⟩ ⟨_, ht', hpt t'⟩
+  obtain ⟨z', hz', rfl⟩ := hw'
+  obtain ⟨z, hz, hzz⟩ := hcl _ hw (hne z' (hfar z' (hK'd hz')))
+  have : z' = z := by rw [← hinv z' (hfar z' (hK'd hz')), ← hzz, hinv z (hfar z (hKd hz))]
+  exact ⟨z, hz, this ▸ hz'⟩
+
+/-- **SEP-K1: two connected sets off a disc, joined at a point of both closures off the closed disc, are connected** (FS131-RS1, the boundary
+walk's `K₁`): if `x` and `y` are preconnected and each meets the circle `∂B(c, r)` in a nonempty preconnected set, and `q ∈ cl x ∩ cl y` lies
+off `B̄(c, r)`, then `(x ∖ B(c, r)) ∪ (y ∖ B(c, r)) ∪ {q}` is preconnected (`isPreconnected_diff_ball`, and `q` is in the closure of each part,
+since near `q` both sets lie off the closed disc). -/
+theorem isPreconnected_union_insert_diff_ball {x y : Set ℂ} (hx : IsPreconnected x) (hy : IsPreconnected y) {c : ℂ} {r : ℝ}
+    (hxS : IsPreconnected (x ∩ sphere c r)) (hxSne : (x ∩ sphere c r).Nonempty) (hyS : IsPreconnected (y ∩ sphere c r))
+    (hySne : (y ∩ sphere c r).Nonempty) {q : ℂ} (hqx : q ∈ closure x) (hqy : q ∈ closure y) (hq : q ∉ closedBall c r) :
+    IsPreconnected (insert q (x \ ball c r) ∪ insert q (y \ ball c r)) := by
+  have key : ∀ {w : Set ℂ}, IsPreconnected w → IsPreconnected (w ∩ sphere c r) → (w ∩ sphere c r).Nonempty →
+      q ∈ closure w → IsPreconnected (insert q (w \ ball c r)) := fun {w} hw hwS hwSne hqw => by
+    have hq' : q ∈ closure (w \ ball c r) :=
+      closure_mono (fun v (hv : v ∈ (closedBall c r)ᶜ ∩ w) =>
+        (⟨hv.2, fun hb => hv.1 (ball_subset_closedBall hb)⟩ : v ∈ w \ ball c r))
+        (isClosed_closedBall.isOpen_compl.inter_closure (⟨hq, hqw⟩ : q ∈ (closedBall c r)ᶜ ∩ closure w))
+    exact (isPreconnected_diff_ball hw hwS hwSne).subset_closure (subset_insert _ _)
+      (insert_subset_iff.mpr ⟨hq', subset_closure⟩)
+  exact IsPreconnected.union q (mem_insert _ _) (mem_insert _ _) (key hx hxS hxSne hqx) (key hy hyS hySne hqy)
+
 end HadwigerNelson.Plane

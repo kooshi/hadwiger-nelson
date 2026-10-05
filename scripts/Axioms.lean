@@ -3255,6 +3255,11 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.BasedTrail.map
 #print axioms HadwigerNelson.Plane.ArcMap.BasedTrail.insert_all
 #print axioms HadwigerNelson.Plane.ArcMap.isBoundaryWalk_of_trail
+-- FS131-RS1's children (SEP: the repeated tile separates)
+#print axioms HadwigerNelson.Plane.mod_prev_succ
+#print axioms HadwigerNelson.Plane.isPreconnected_biUnion_Icc_mod
+#print axioms HadwigerNelson.Plane.inter_nonempty_of_interleaved_exterior_of_isClosed
+#print axioms HadwigerNelson.Plane.isPreconnected_union_insert_diff_ball
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 

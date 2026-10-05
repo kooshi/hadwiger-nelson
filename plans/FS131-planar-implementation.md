@@ -1424,3 +1424,35 @@ The children, in order: **SEP-CHAIN** (pure: the mod-indexed chain lemma), **SEP
 them — then **SEP-S** (a chain in `M̂ − x − y` gives a closed preconnected `S` inside the filled closures of its tiles), **SEP-K1** (pure: `K₁` is
 preconnected), **SEP-PIECE** (each position other than `i`, `j` has a closed preconnected piece holding its two hinges, off `x ∪ y`, off the open disc
 at `p i` and off `p j`; the tile's closure when the entry is not `y`, the edge when it is), then **SEP-CORE** = `IsBoundaryWalk.sep`'s body.
+
+## Stage 28 — SAVED (FS131-RS1): SEP-CHAIN, SEP-X and SEP-K1 proved (pure, `MapTopology` § F); the rest elaborates in the working file
+
+### 28.1 Proved (`Plane/ValidMap/MapTopology` § F, namespace `HadwigerNelson.Plane`; nothing else changed)
+
+- **`isPreconnected_biUnion_Icc_mod`** (**SEP-CHAIN**): pieces `P l` (`l < len`), each preconnected and holding the hinge before it
+  `z ((l + len − 1) % len)` and its own `z l`, have a preconnected union over any interval of `ℕ` read mod `len` (Mathlib's
+  `IsPreconnected.biUnion_of_chain`); helper **`mod_prev_succ`** (`((l+1) % len + len − 1) % len = l % len`, spec example at the wrap of a
+  five-entry walk). It replaces RL1's SEP-ROT: the wrap is read mod the length instead of rotating the walk's five fields.
+- **`inter_nonempty_of_interleaved_exterior_of_isClosed`** (**SEP-X**, new — § 27.4): the crossing lemma outside a disc for a closed `K`, bounded or
+  not; the closure of the inverted `K` adds at most the centre, which the inverted `K'` misses.
+- **`isPreconnected_union_insert_diff_ball`** (**SEP-K1**): `(x ∖ B) ∪ (y ∖ B) ∪ {q}` is preconnected when `x`, `y` are and each meets the circle in a
+  nonempty preconnected set, and `q ∈ cl x ∩ cl y` lies off the closed disc.
+
+Each elaborated at the first or second attempt (two annotation fixes in SEP-K1). `scripts/Axioms.lean`'s FS131-KP block gains the four under
+"-- FS131-RS1's children".
+
+### 28.2 The stage-28 build
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`), my wrapper writing its `EXIT` line: **OK — 447 of 447 batches, 5 modules rebuilt (`MapTopology` 13 s,
+`BaseWalk` 2.0 s, `MapGraph` 21 s, `BaseDense` 1.5 s, `Proofs` 1.5 s), 9 modules with warnings, every one `declaration uses 'sorry'`, `EXIT 0`, 8 min
+46 s** (`build/gate/build/20261005T075938Z-2536495.log`; driver log `data/fs131/rs/build-s28.log`). `MapTopology` has no warning; `MapGraph`'s one is
+l. 1430, `IsBoundaryWalk.sep`.
+
+### 28.3 Re-priced after the first two (done-means 2)
+
+Measured: SEP-CHAIN and SEP-X about 10 minutes together (each first attempt but for one `Nat` lemma), SEP-K1 about 5. Against the stage-28 oleans,
+the rest — **SEP-S** (`exists_isClosed_of_reachable_offTwo`), the helper `IsEdgeOf.disjoint_closure_ball`, **SEP-PIECE**
+(`IsBoundaryWalk.exists_piece`, with `mod_succ_prev`) and **SEP-CORE** (`IsBoundaryWalk.sep`'s body, as `sep'`) — already elaborates in the working
+file `data/fs131/rs/SepScratch.lean`, on the standard three by `#print axioms` there (one fix: unfolding the interval's lower end before
+`split_ifs`). So the re-price is moot: what is left is moving them into `MapGraph` before `IsBoundaryWalk.sep`, the build and the receipt —
+**about 0.1 session**, against RL1's 1.2–1.5 for SEP.
