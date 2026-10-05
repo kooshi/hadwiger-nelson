@@ -2119,3 +2119,29 @@ reason by the close.*
      `934bc81c`, so it is possible). Why: the planar chain (six to nine sessions) is the longest path to wave 5's landing and through it to waves 6–9, while a
      parallel MERGE saves about two sessions on wave 4, whose landing waits on I4m's six leaves as well. Confidence: medium — what would change it: IP1's first
      measurements putting the planar chain well under wave 4's remaining length. In flight: 1 (I5c) + 1 (IM3) + 1 (I4m) + 1 (IP1) = 4.
+284. **FS131-I5c handed back** (Stage 13 SAVED, harness 525k by the task notice; report `fs131-w5`'s `data/fs131/reports/FS131-I5c.md`; commits `c10cf764`,
+     `45991831` (the merge of `fs131-w4` at `111830c8`), `0b39ea7a`, `2af2edf3`, `358ff7de`, `728c3502`). **Done**: `fs131-w4` merged (one `ARCHITECTURE.md`
+     conflict, both sides kept); ruling 252's form (b) applied to `stuck_structure_ua` (the only statement changed). **Held, [kernel], the standard three**:
+     `sevenBrickMap_isTerminalMap` (the brick map is terminal: no colour has two sectors, no horn, `QROnly` vacuous), `not_row134BaseUA_seven`,
+     `BaseCtx.vin_antipodal` (FS110-CD Thm D2 (i), by Lemma H's distance step, simpler than KB's route), `BaseCtx.eleventh_antipodal` (D2 (ii)),
+     `BaseCtx.retArc_partner` (Lemma R step 3, the (P) sweep as `not_mem_coloursAt_of_tile_dist`), `stuck_horns_ua` and `woodallCone_isHorn_ua` (N4-STUCK (i)
+     with unit arcs: wave 4's horn analysis goes through, curvatures in `[−1, 1]`, Condition 5 entering only through `woodallCone_strict`), and a new module
+     `Plane/ValidMap/BrickMap` (41 theorems: the brick map's point classification). Proved over `sorry` children: `stuck_structure_ua` (over the new child
+     `stuck_flanks_ua`), `retArcs_finite` (over `pseudo_finite`), `hex_base` (over `rot_noThird`, `bv_hex`). **Wave 5: 44 → 37** (`Terminal` 11, `Dense` 2,
+     `HexRing` 7, `MapGraph` 3, `BaseWalk` 10, `BaseDense` 4; 30 this lane's, 7 the planar job's). **Receipt (Keryx)**: the commits exist;
+     `build/gate/build/20261005T000636Z-3731746.log` ends "Build completed successfully (5367 jobs)", 0 warnings other than `sorry`; the counts above match by grep
+     (`BrickMap` 0); `data/fs131/i5c/I5cAxioms13.out` gives the five named theorems on the standard three and `stuck_structure_ua` on `sorryAx` besides.
+     **Generalizations** (every `k`): `dist_le_one_of_mem_region`, `not_mem_coloursAt_of_tile_dist`. **Pricing correction**: `stuck_structure_ua`'s hard part is
+     exactly `stuck_flanks_ua` (S–V Prop. 7's flank argument when a horn arc lies on `ω(v ± n)`); wave 4's `shaveAvailable_of_not_doublyShadowed`,
+     `flank_ne_of_doublyShadowed` and `outType_*_of_shadow` assume Condition 5 or strict curvature bounds, so each needs a unit-arc version. **Tool defect**:
+     `tools/fs131_i5_dupes.py` reports 602 false collisions after the merge (it treats every file changed since the fork `9a8de899` as wave 5's; fix: FORK to the
+     merge base, or limit to wave 5's modules). **Shared child owed**: `exists_isRingArc_of_onRingArc` (plan § 9.1) for `pseudo_nonempty` and `cv_l0`. Still owed:
+     `linkage_dot_ne_zero`'s docstring (item 274 (b)), by whoever proves `l3_base`. **For the gate**: `IsTerminalMap`'s inhabitant is proved, so plan § 10.3's IN
+     recommendation leaves no UNKNOWN. Credit: I5c, for the brick infrastructure and the merge.
+285. **Ruling: I5c's slot → the parallel MERGE implementer FS131-IMM1 on a new branch `fs131-w4mm`; wave 5's next implementer takes the next slot.** Choice: as
+     item 283 said. `fs131-w4mm` is cut from `fs131-w4m` at `73d31ad6` (IM3's Stage 9: SHAVE proved, `Surgery` split in); worktree created, `.lake/build` copied
+     from the idle `fs131-w4c`. IMM1 proves `exists_merge_aux` only, its children in a new module `Plane/ValidMap/MergeMove` (importing `Surgery`, upstream of
+     `Moves`), touching `Moves` only for that import and `exists_merge_aux`'s proof body; FS131-IM3 is told not to edit `exists_merge_aux` and to take RAY next.
+     Alternative weighed: wave 5's next implementer now (a lane keeps its slot, item 199 (c)). Why: IM3 proved SHAVE in one stage, so RAY and MERGE in parallel
+     cut wave 4's remaining moves from about 3.5 sessions to about 2, and wave 4's landing gates Woodall's and wave 5's; wave 5's own lane has slack, since the
+     planar chain (six to nine sessions) bounds its landing. Confidence: medium-high. In flight: 1 (IM3) + 1 (I4m) + 1 (IP1) + 1 (IMM1) = 4.

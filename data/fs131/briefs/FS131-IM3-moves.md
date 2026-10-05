@@ -96,3 +96,15 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 ./scripts/build.sh`; never `lake build`. Up to two builds from different worktrees may run at once when the slot admits them; on exit 75 wait ten minutes and
 retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence; mirror oleans in a scratch directory of your
 own. The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`.
+
+
+## Amendment, 2026-10-04 — MERGE goes to a parallel implementer (inventory item 285)
+
+The ruling, whose first line is:
+
+> 285. **Ruling: I5c's slot → the parallel MERGE implementer FS131-IMM1 on a new branch `fs131-w4mm`; wave 5's next implementer takes the next slot.** Choice: as
+> — source: plans/FS131-close-inventory.md
+
+So prove RAY next, and do not edit `exists_merge_aux` or add MERGE's children; FS131-IMM1 proves MERGE on `fs131-w4mm`, cut from your `73d31ad6`, with its
+children in a new module `Plane/ValidMap/MergeMove`. Add new declarations to `Surgery` only at its end, so both branches merge cleanly. You start no agents of
+your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
