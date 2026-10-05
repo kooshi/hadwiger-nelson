@@ -210,6 +210,10 @@ structure OpenConfig (X : F.Near v) (c : Fin k) (up : Bool) (s : Fin X.n) (b : �
   /-- Below `ρc` every point between the horn's inner germ and the ray is clear for `c`. -/
   clear : ∀ t ∈ Ioo 0 ρc, ∀ φ, (if up then X.G.liftDir s 1 t else ψ) ≤ φ →
     φ ≤ (if up then ψ else X.G.liftDir s b t) → F.IsClear c (v + (t : ℂ) * e φ)
+  /-- Below `ρc` the clear range reaches past the ray by a margin (so every point of the ray has a clear neighbourhood; FS131-IO2,
+  inventory item 393: without it `open_allowedCone` fails when the clear range ends exactly at the ray). -/
+  margin : ∃ η > 0, ∀ t ∈ Ioo 0 ρc, ∀ φ, (if up then ψ else ψ - η) ≤ φ → φ ≤ (if up then ψ + η else ψ) →
+    F.IsClear c (v + (t : ℂ) * e φ)
 
 /-- The colour of a chart sector is carried at `v`. -/
 theorem col_mem_coloursAt (X : F.Near v) (i : Fin X.n) : X.col i ∈ F.coloursAt v :=
@@ -288,7 +292,7 @@ theorem exists_openConfig_up (hF : F.Valid) (hv : F.Covers v 1) (X : F.Near v) {
   have hρc1 : ρc ≤ ρ₁ := (min_le_left _ _).trans (min_le_left _ _)
   have hρcs : ρc ≤ X.s₀ := (min_le_left _ _).trans (min_le_right _ _)
   have hρca : ρc ≤ ρa := min_le_right _ _
-  refine ⟨b, X.G.lift p b + ψ₁, ρc, ⟨hb1, hbn, hρc0, hρcs, ?_, ?_, ?_, ?_, ?_⟩⟩
+  refine ⟨b, X.G.lift p b + ψ₁, ρc, ⟨hb1, hbn, hρc0, hρcs, ?_, ?_, ?_, ?_, ?_, ?_⟩⟩
   · show X.G.lift p 0 = X.G.lift p (0 + 1)
     rw [zero_add, hl01]
   · show X.col (BranchGerms.idx p 0) = c
@@ -316,6 +320,15 @@ theorem exists_openConfig_up (hF : F.Valid) (hv : F.Covers v 1) (X : F.Near v) {
         have : X.G.liftDir p 1 t = X.G.lift p 1 + Real.arcsin (X.G.κ (BranchGerms.idx p 1) * t / 2) := rfl
         linarith [(abs_lt.mp h1).1]
       rw [abs_le]; constructor <;> linarith
+  · refine ⟨ψ₁, hψ₁0, fun t ht φ hφ1 hφ2 => ?_⟩
+    simp only [if_true] at hφ1 hφ2
+    have hta : t ∈ Ioo 0 ρa := ⟨ht.1, ht.2.trans_le hρca⟩
+    have h1 := harc t hta _ hK1
+    have hdir : X.G.liftDir p 1 t = X.G.lift p 1 + Real.arcsin (X.G.κ (BranchGerms.idx p 1) * t / 2) := rfl
+    refine hcl t ⟨ht.1, ht.2.trans_le hρc1⟩ φ ?_ ?_
+    · have : X.G.liftDir p 1 t = germDir (X.G.lift p 1) (X.G.κ (BranchGerms.idx p 1)) t := rfl
+      linarith [(abs_lt.mp h1).2]
+    · rw [abs_le]; constructor <;> linarith
 
 
 /-! ### Re-basing the orbit -/
@@ -440,7 +453,7 @@ theorem exists_openConfig_down (hF : F.Valid) (hv : F.Covers v 1) (X : F.Near v)
   have hρcs : ρc ≤ X.s₀ := (min_le_left _ _).trans (min_le_right _ _)
   have hρca : ρc ≤ ρa := min_le_right _ _
   have hlone' : ∀ i, X.col i = c → i = BranchGerms.idx s b := fun i hi => by rw [hsb]; exact hlone i hi
-  refine ⟨s, b, X.G.lift s 1 - ψ₁, ρc, ⟨hb1, hbn, hρc0, hρcs, hcusp_s, hcb, hlone', ?_, ?_⟩⟩
+  refine ⟨s, b, X.G.lift s 1 - ψ₁, ρc, ⟨hb1, hbn, hρc0, hρcs, hcusp_s, hcb, hlone', ?_, ?_, ?_⟩⟩
   · intro t ht
     show X.G.liftDir s 0 t < X.G.lift s 1 - ψ₁ ∧ X.G.lift s 1 - ψ₁ < X.G.liftDir s (0 + 1) t
     have hta : t ∈ Ioo 0 ρa := ⟨ht.1, ht.2.trans_le hρca⟩
@@ -462,6 +475,15 @@ theorem exists_openConfig_down (hF : F.Valid) (hv : F.Covers v 1) (X : F.Near v)
         have : X.G.liftDir s b t = X.G.lift s b + Real.arcsin (X.G.κ (BranchGerms.idx s b) * t / 2) := rfl
         linarith [(abs_lt.mp hb').2]
       rw [abs_le]; constructor <;> linarith
+  · refine ⟨ψ₁, hψ₁0, fun t ht φ hφ1 hφ2 => ?_⟩
+    simp only [Bool.false_eq_true, if_false] at hφ1 hφ2
+    have hta : t ∈ Ioo 0 ρa := ⟨ht.1, ht.2.trans_le hρca⟩
+    have hb' := harc t hta _ hKb
+    have hdir : X.G.liftDir s b t = X.G.lift s b + Real.arcsin (X.G.κ (BranchGerms.idx s b) * t / 2) := rfl
+    refine hcl t ⟨ht.1, ht.2.trans_le hρc1⟩ φ ?_ ?_
+    · have : X.G.liftDir s b t = germDir (X.G.lift s b) (X.G.κ (BranchGerms.idx s b)) t := rfl
+      linarith [(abs_lt.mp hb').1]
+    · rw [abs_le]; constructor <;> linarith
 
 /-- **OPEN's configuration exists** at a lone horn whose colour's allowed cone has interior (E6-OPEN's steps 1–4): the horn's
 direction is allowed (N3-CONF), `cone_side` gives the side, the first sector of positive angle on that side is the partial

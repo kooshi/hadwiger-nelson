@@ -234,7 +234,7 @@ instance, is not yet in Lean; the same gap item 375 names for `exists_merge`).
 | quotation (first words) | source | result |
 |---|---|---|
 | "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors | **matches** |
-| "theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c : Fin k}" | `OpenMove.lean` l. 712 at `7b24117b` | **matches** |
+| "theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c : Fin k}" | `OpenMove.lean` l. 713 at `7b24117b` | **matches** |
 | "1. **`open_hlc`** (template `merge_hlc`, ~130 lines): add the cases a point of `W` (open, constant `c`); a point of the gap germ" | this record § 3.3 | **matches** |
 | "2. **`open_valid`** (template `merge_valid`): `Valid.of_agreesOff` on `B̄(v, ρ)`; a recoloured point is a gap point or a wedge point," | § 3.3 | **matches** |
 | "3. **`open_degree_horns`** (template `merge_hasSectors`, the partition at `r < ρ/2` by `encard_sectorsOf_of_partition`; here" | § 3.3 | **matches** |
@@ -260,3 +260,47 @@ already up to date, nothing built, 1 module(s) with warnings"** (the five `sorry
 log `build/gate/build/20261005T111305Z-3633604.log`, terminal output `data/fs131/io/build-io2-0.log`.
 
 ## Stage 4 — SAVED (FS131-IO2)
+
+## Stage 5 — SAVED (FS131-IO2): `open_allowedCone` false as stated; the margin field added (ruling: inventory item 393)
+
+### 5.1 The defect
+
+`open_allowedCone` (for every `cfg : X.OpenConfig c up s b ψ ρc`) is false as IO1 stated it, because `OpenConfig.clear` stops exactly at the
+ray: it gives clearness for `φ ∈ [lower, ψ]` (`up`) or `[ψ, upper]` (`¬ up`), closed at `ψ`, never on a neighbourhood of a ray point. The
+closure of the recoloured wedge holds the ray points `w = v + t e(ψ)`, `0 < t ≤ ρ/2`, so they are new contacts at any `v′` with `dist w v′ = 1`
+and `v′ ∈ closure (F.region c)`; MERGE's route needs an open clear set about every closure point of the recoloured set
+(`dist_ne_one_of_isOpen_isClear`).
+
+**Counterexample** (sent to the coordinator mid-job): `k = 3`, `v = 0`, `up`, `s = 0`, `b = 1`, `ψ = 0`. `dom = ball(0, r₁) ∪` a small
+neighbourhood of the rectangle `R = {0 < Re y < ρc, 1 < Im y < 1 + δ}` (`r₁, δ, ρc` small). In `ball(0, r₁)`: two germs, circular arcs tangent at
+`0` along `α = −π/4` (a cusp horn of colour `c`, the only `c`-sector), colour `c₂` elsewhere in the ball; `R` has colour `c`, the rest of
+the second piece `c₃`. Valid: horn points have `Im < 0`, `R`'s `Im > 1`; every other class has diameter `< 1`. `cfg`: `hb1`, `hbn`, `cusp`,
+`col_horn`, `lone` immediate; `ray` (`L₁(t) ≈ −π/4 < 0 < L₂(t) ≈ 7π/4`); `clear` (for `Im z ≤ 0` and `y ∈ R`, `|z − y| ≥ Im y − Im z > 1`).
+For any small `ρ`, `t₀ ∈ (0, ρ/2]` and `v′ = t₀ + i` (`∉ B̄(0, ρ)`, `∈ closure R`): `w = t₀ ∈ closure W`, `dist w v′ = 1`, so `w` is a new contact,
+out-type (the merged tile lies in `{Im < 0}`, missing `B̄(v′, 1) ⊆ {Im ≥ 0}`); `F` has no `c`-contact at `v′` (horn closure points other
+than `0` have `Im < 0`; `diam R < 1`), so `F.allowedCone v′ c = univ`, while the new cone is `{d : dot d (w − v′) ≤ 0} = {Im d ≥ 0}`, missing
+`−i`. `exists_open` itself is true: `exists_openConfig` puts `ψ = lift ± ψ₁` with `ψ₁ ≤ ε/2`, strictly inside `clear_near_end`'s range
+`|φ − lift| ≤ ε`.
+
+### 5.2 The repair (accepted by the coordinator, item 393)
+
+`OpenConfig` (IO1's, unchanged):
+
+```lean
+  clear : ∀ t ∈ Ioo 0 ρc, ∀ φ, (if up then X.G.liftDir s 1 t else ψ) ≤ φ →
+    φ ≤ (if up then ψ else X.G.liftDir s b t) → F.IsClear c (v + (t : ℂ) * e φ)
+```
+
+and one field added after it:
+
+```lean
+  margin : ∃ η > 0, ∀ t ∈ Ioo 0 ρc, ∀ φ, (if up then ψ else ψ - η) ≤ φ → φ ≤ (if up then ψ + η else ψ) →
+    F.IsClear c (v + (t : ℂ) * e φ)
+```
+
+proved in `exists_openConfig_up` and `exists_openConfig_down` with `η = ψ₁` (`ψ ± ψ₁ = lift ± 2ψ₁` stays within `ε`; the `σ`-side condition
+holds as for `clear`). The diff is `data/fs131/io/margin.diff` (65 lines: the field, and one bullet in each side lemma). `exists_open`'s and
+`HasHornCount`'s statements are unchanged; no other declaration changed. Iteration (`lake env lean`, never evidence): the file elaborates with
+the five leaves still `sorry`.
+
+## Stage 5 — SAVED (FS131-IO2)
