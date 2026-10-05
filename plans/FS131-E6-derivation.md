@@ -76,3 +76,97 @@ derivation: e6-question
   verdict: stalls at: stage 1 — nothing derived yet; the configuration and the route are stage 2's
 
 ## Stage 1 — SAVED
+
+## Stage 2 — SAVED: recognition (`ephodos-recognition`, invoked fresh), run on the claim
+
+### 2.1 The stall, read
+
+No argument has been tried yet; the stall is KL1's: "every shave there adds an arc of `ω(v ± n)`". Its shape is *a known theorem that almost
+applies* — `exists_shave` and `horn_bounds_of_noMerge` cover every horn but this one, and the hypothesis that fails (`−1 ≤ κ₁`, `κ₂ ≤ 1`) is
+consumed only through `woodallCone`, which reads `int D_c(v) = ∅`, not the sector count (§ 1.1).
+
+### 2.2 For a stranger (a geometer who works on partitions of the plane avoiding one distance)
+
+*The plane is cut by finitely many circular arcs and segments near every point into open regions, each coloured, so that no two interior points
+of one colour are at distance exactly `1`. For a colour `x` let `X` be its set and `X ⊕ S¹ = {z : dist(z, X ∩ ·) = 1 somewhere}` its unit
+shadow: a point may take colour `x` exactly when it lies outside `X ⊕ S¹`. At a boundary point `v` one region of colour `c` is a cusp between
+two circles tangent at `v` to the direction `a`, of curvatures `κ₁ < κ₂`; directly above it is colour `g`, below it colour `h`. To remove
+the cusp from `v` by recolouring it with `g` and `h` one needs a curve through `v`, tangent to `a`, with the part of the cusp above it
+outside `G ⊕ S¹` and the part below outside `H ⊕ S¹`. Near `v` both shadows are bounded by curves tangent to `a` (the unit offsets of the
+`g`- and `h`-regions touching the unit circle `ω(v)` at its poles `v ± n`). Can the two offsets coincide with the unit circle `ω(v + n)`
+inside the cusp, so that the only admissible curve is a unit circle — which is forbidden as a new boundary? And if so, what else removes
+the cusp?*
+
+Words the stranger stops at: "horn" (struck: a cusp sector), "flank" (struck: the regions adjacent along the cusp's arcs), "SHAVE",
+"modification", "terminal" (struck: the procedure's vocabulary), "allowed cone `D_c(v)`" (kept: it is a determiner, the cone of directions
+at `v` not in the unit shadows of the `c`-regions touching `ω(v)` — the stranger's field calls a region of this kind a contact of `X` with
+the circle, and the cone the intersection of the contacts' half-planes).
+
+**This is a coincidence of two unit offsets at the pole of `ω(v)`.** The offset of a circle of radius `R` about a point on the normal line
+is the concentric circle of radius `R − 1` (FS110-N4-SHADOW, re-read: `f̃(υ) = υ/(1 − υ)` going up, `f(λ) = λ/(1 + λ)` going down); the offset of
+a *corner* (a region at `N` meeting `N` in a positive angle away from `±a`) is `ω(N)` itself — the limit `f(∞) = 1`. So the `h`-shadow from
+`N` is bounded by a circle of curvature at most `1`, reaching `1` exactly for a corner at `N`; the `g`-shadow from `S′` is bounded by a circle
+of curvature `f̃(υ)`, which is `1` exactly at `υ = 1/2`, a region at `S′` bounded by the circle of radius `2` about `N`.
+
+### 2.3 The features, sorted (receipts: the argument step that consumes each, or the control that varies it; stage 3 plants the controls)
+
+| feature | sort | receipt |
+|---|---|---|
+| (D1) an `h`-region at `N`, out-type, meeting `N` away from the `+a` tangent (a corner) | **determines** | its shadow near `v` on the `+a` side is exactly `B(N, 1)` (§ 3.2, computed); a tangent `h`-region at `N` of curvature `λ > −1` casts `f(λ) < 1`, puts `h`-shadow below `ω(N)` and kills `σ = 1`; no `h` at `N` leaves `σ` free up to `κ₂` — control `e6-sigma-up` |
+| (D2) a `g`-region at `S′`, out-type, bounded on the `+a` side by the circle of radius `2` about `N` (curvature `1/2` at `S′`) | **determines** | its shadow near `v` on the `+a` side is exactly the outside of `B̄(N, 1)`; curvature `υ < 1/2` at `S′` gives `f̃(υ) < 1` and frees `σ ∈ [f̃(υ), 1)` — control `e6-sigma-down`. (An in-type `g`-region at `N`, FS112-FLANK's Siamese case, is a second source of the same shadow; not used in the model) |
+| (D3) the horn crosses `ω(N)`: `κ₁ < 1 < κ₂` | **determines** | F6's own clause; with `κ₂ ≤ 1` the admissible `σ = 1` is the horn's own arc (FS112-WALK row 7) |
+| (D4) the horn's colour has one sector at `v` | **splits**: consumed only as "`int D_c(v) ≠ ∅`" | the bound `κ₂ ≤ 1` comes from `woodallCone`, which needs `int D_c(v) = ∅` and nothing else (§ 1.1); a colour of two sectors with `int D_c(v) ≠ ∅` is MERGE's (priority, F7). So the determiner is the cone, not the count |
+| the curvatures `κ₁`, `κ₂` themselves | accompanies | any `κ₁ < 1 < κ₂` with (D1)–(D2): the admissible set is `{1}` (§ 3.2's computation holds for every such pair) |
+| the number of colours `k` | accompanies | the model (§ 3.1) uses `c, g, h` and a background of fresh colours; nothing in § 3.2 reads `k` |
+| Condition 5 | accompanies | the model has no arc of radius `1` (`e6-no-unit-arc`): F6 occurs under Condition 5 too |
+| the rest of the map (other vertices, `c`'s other regions) | accompanies the occurrence; **determines the repair's degree count** | § 3.4: with an in-type `c`-contact constraining `D_c(v)` to an open half-plane about `e(π/4)`, no colour can be removed from `v` locally |
+
+### 2.4 Homes, each with its dictionary and its test
+
+**H1 — FS110's shadow calculus at its boundary values** (own home). Dictionary: `h`-shadow boundary ↔ `f(λ)` of the `h`-region's arc at `N`,
+with the corner as `λ = ∞`; `g`-shadow boundary ↔ `f̃(υ)` at `S′`; the admissible splits ↔ `[σ_g, σ_h]` (NB4 § 2.3). *Old proofs apply at once:*
+yes — N4-FLANK's list read for a horn whose arcs are not in `(−1, 1)`. *Exceptions vanish:* the residual case is the endpoint `σ_g = σ_h = 1`,
+no clause. *Predicts a neighbour:* `σ_h ≤ 1` for every `h`-region at `N` and `σ_g ≥ −1` for every `g`-region at `S′` (the maps `f`, `f̃` never
+cross `±1` the other way), so the upper residual case needs `h` at `N` cornered and the lower one `g` at `S′` cornered — checked in the model
+(§ 3.2). *Both ways:* yes. **Adopted for the occurrence.** It also shows a precision owed: NB4 § 2.3's "`[σ_g, σ_h] ⊂ (−1, 1)`", carried by
+NB4's D3 to single horns ("the §2.3 criterion is unchanged"), holds only for horns with bounds in `(−1, 1)`.
+
+**H2 — FS-112's unit-arc calculus: the interface SHAVE would create is an (R2) arc.** Dictionary: the new arc `ω(N) ∩ horn` ↔ a unit arc
+centred at `N` with inner colour `g` (inside `ω(N)`) and outer colour `h`; (D1) ↔ "the centre carries the outer colour" (out-kind); (D2) ↔ "the
+inner colour's class holds the whole radius-2 arc `R₂(ᾱ)`" (the `g`-region along the circle of radius `2` about `N` at `S′`). So when
+`g ∉ P_cl(N)` the forced interface is exactly an **(R2) arc** — the kind FS112-N2-BENDS says no bend removes (toward: the outer colour is at
+`N`; away: R2 along the arc) and FS112-N2-FLANK-Q says every horn bound `±1` sits on. *Predicts:* after such a shave, `g`'s lower bound at
+`v` is exactly `1` on an (R2) arc — the structure `exists_terminal`'s clause 3 allows. *Consequence for the route:* the shave's product is a
+terminal-shaped arc, but `IsModification` forbids creating any unit arc, so this home **kills the repair "shave and keep the arc"** under the
+statement as fixed; it does not decide occurrence. Adopted as the reading of why F6 is not an accident.
+
+**H3 — Woodall's step 3 / FS110-W-MERGE, with one sector** (the repair's home; prior art in print: `[SokolovVoronov2025]` Prop. 7, the
+polygonal form — recolour the triangle between two boundary segments of one colour, held PDF, read 2026-10-05 l. 317–333 of my extraction).
+Dictionary: W-MERGE's gap between two `c`-sectors inside `int D_c(v)` ↔ a wedge between the horn and a chosen ray inside `int D_c(v)`;
+N3-CLEAR (directions interior to `D_c(v)` are clear near `v`) ↔ the same; N3-UP (an out-type region at a pole shadows a monotone set) ↔
+the second-order sliver beside the horn. *Old proofs apply:* all but one step. **The changed step, named:** W-MERGE's gap is bounded on both
+sides by `c`, so its clearness near the horn's side is inherited from the other `c`-sector; a wedge beside a lone horn has a free side, and
+near the horn's own direction `α` the wedge is clear only if the contacts tight at `α` — the poles `N`, `S′` — shadow monotone sets that
+cannot reach the wedge without reaching the horn. FS110 § 2.8 sketched this ("a single `c`-horn … opens into a positive-angle sector by
+recolouring a thin wedge on the interior side (N3-CLEAR, N3-UP)") for `D_c(v)` a half-plane; FS110-NB4-CS (one mind) used it as a sketch.
+*Predicts a neighbour:* the opening never lowers the degree when no sector lies inside the wedge — so a route counting degree alone cannot
+use it (§ 3.4). **Adopted for the repair.**
+
+**H4 — saturated colourings and contact (G84, G85).** Dictionary: a horn tip carved by unit circles ↔ G84's contact mechanism. Test: G84 is
+about maximal or saturated colourings, and SHAVE's tip is neither; nothing transfers that H1–H3 do not already give. **Killed** (it explains,
+predicts nothing here).
+
+### 2.5 The class each statement belongs to
+
+- **Occurrence** (E6-OCCURS): every `k ≥ 3` plus a background, Condition 5 or not — the determiners are (D1)–(D3) with the cone free.
+- **The repair** (E6-OPEN): every horn whose colour's allowed cone has non-empty interior, at a vertex of a valid map covering `B̄(v, 1)` —
+  the lone horn and the F6 case are instances, not hypotheses; F6 itself needs no clause of its own once E6-CONE (F6 ⟹ `int D_c(v) ≠ ∅`) is
+  derived.
+- **The degree count** (E6-NODROP): one instance suffices to refute `exists_vertexStep`'s degree clause; the class statement is "OPEN lowers
+  the horn count and not the degree", the measure owed is degree plus horns (NB4's D3: "count `Φ + #horns`").
+
+Recognition's verdict: the description under which the answer is forced is *the coincidence of two unit offsets at a pole, and its repair is
+a one-sector Woodall merge*. Dispatched to stage 3 (the derivations and the exact model). Not dispatched to `ephodos-invention`: no
+collision of held descriptions; H2's (R2) reading and `IsModification` do not contradict, they exclude one repair.
+
+## Stage 2 — SAVED
