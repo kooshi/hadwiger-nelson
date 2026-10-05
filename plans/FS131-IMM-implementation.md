@@ -351,3 +351,35 @@ other by — an `F'`-`c`-tile `T′` misses `ω(v′)` (`ne1_region` for `F'`), 
 `T′ ∩ F.region c` (a cut-branch point of `T′` has a convex `F'`-interior ball inside `T′`), and `T′ ∩ F.region c` is a finite union of
 `F`-tiles: a tile of `T′` whose closure misses `B̄(v, ρ)` is clopen in `T′`, hence `T′` itself, and the others meet a finite cover of the
 compact `B̄(v, ρ)` by `finite_tiles_near` balls.
+
+## Stage 6 — SAVED (FS131-IMM3): the readback, the as-given build
+
+*FS131-IMM3 (de Bruijn, the implementer, on Opus) continues this record from here; brief `data/fs131/briefs/FS131-IMM3-merge.md` (on `main`).*
+
+### 6.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (exact substring search), each **verbatim**:
+
+| quotation (a prefix) | source | line |
+|---|---|---|
+| "theorem exists_merge_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k} {n : ℕ} (hn1 : 1 ≤ n)" | `Proofs/HadwigerNelson/Plane/ValidMap/Moves.lean` (this branch) | 585 |
+| "**First, an easy strengthening of my own lemma**: `exists_gap` proves `b < X.n` in both cases; …" | this record § 5.2 | 305 |
+| "**Definitions, on the chart's plain data** (so each can have a spec example; …" | this record § 5.2 | 308 |
+| "**4.3 the map** `F' = F.surgery v ρ (mergeArcs) (mergeCol) …`: (i) the arcs: …" | this record § 5.2 | 317 |
+| "343. **FS131-IMM2 handed back** …" | `plans/FS131-close-inventory.md` (on `main`) | 2905 |
+| "344. **Rulings on IMM2's held items, and its slot.** …" | the same | 2922 |
+| "347. **FS131-I5l handed back** …" | the same | 2956 |
+| "348. **Ruling on item 347: MERGE returns to wave 5's path; …**" | the same | 2978 |
+| "269. **Ruling on item 268: …**" | the same | 1958 |
+| "294. **FS131-IMM1 done at its line, MERGE not yet proved** …" | the same | 2255 |
+| "**It may**: add children anywhere in the wave's modules — …" | `.claude/worktrees/fs131-w4/plans/FS131-w4-kernel-plan.md` § 14.2 | 887 |
+
+Read: this record in full (IMM1's §§ 1–4, IMM2's §§ 4.0–5.2), inventory items 269, 294, 343–348, the draft `data/fs131/imm/wip/B.lean`, and
+`Surgery`'s surgery API (`trimArcs`, `surgery`, `surgery_agreesOff`, `surgery_ringArcsWithin`, `surgery_condition5`, `surgery_hlc_of`).
+
+### 6.2 The branch builds as given
+
+`045c71c6`, under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK**, "all 1748 modules already
+up to date, nothing built", 2 s; warnings only `declaration uses 'sorry'` (`Moves` l. 574 `exists_rayMerge_aux`, l. 585 `exists_merge_aux`;
+`Contact`, `BaseSteps`, `UnitArc` as before). Log `build/gate/build/20261005T070047Z-2176958.log`; terminal output
+`data/fs131/imm/build-asgiven-imm3.log`.
