@@ -3730,6 +3730,66 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.not_isSite_of_goodAt
 #print axioms HadwigerNelson.Plane.Arc.curve_eq_of_mem
 
+-- FS131-IL2 (lane A of the limit, continued): the clean map (`Plane/ValidMap/Limit`), the finiteness lemmas and the both-kind lemma
+-- (`Plane/ValidMap/Procedure`)
+#print axioms HadwigerNelson.Plane.Arc.continuous_ptL
+#print axioms HadwigerNelson.Plane.Arc.carrier_eq_imageL
+#print axioms HadwigerNelson.Plane.Arc.carrier_subL
+#print axioms HadwigerNelson.Plane.Arc.nondegenerate_subL
+#print axioms HadwigerNelson.Plane.Arc.isCompact_paramsL
+#print axioms HadwigerNelson.Plane.Arc.ordConnected_paramsL
+#print axioms HadwigerNelson.Plane.Arc.finite_ptL_eq
+#print axioms HadwigerNelson.Plane.isClosed_ordConnectedComponent
+#print axioms HadwigerNelson.Plane.ordConnectedComponent_eq_Icc
+#print axioms HadwigerNelson.Plane.eventually_finite_components
+#print axioms HadwigerNelson.Plane.isPreconnected_ball_diff_singleton
+#print axioms HadwigerNelson.Plane.halfDiscMono_essSet
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.eventually_coloursAt_subset
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_eq_singleton_of_interior
+#print axioms HadwigerNelson.Plane.ArcMap.essSet_subset_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.exists_coloursAt_eq_singleton
+#print axioms HadwigerNelson.Plane.ArcMap.eventually_coloursAt_eq_singleton
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_dom_diff_essSet
+#print axioms HadwigerNelson.Plane.ArcMap.notMem_essSet_of_isolated
+#print axioms HadwigerNelson.Plane.ArcMap.branchPt_mem_closure_sector_pair
+#print axioms HadwigerNelson.Plane.ArcMap.germs_le_two_of_goodAt
+#print axioms HadwigerNelson.Plane.ArcMap.eventually_essSet_iff_of_goodAt
+#print axioms HadwigerNelson.Plane.ArcMap.isClosed_essParams
+#print axioms HadwigerNelson.Plane.ArcMap.essComp_eq_Icc
+#print axioms HadwigerNelson.Plane.ArcMap.cleanArcs_nondegenerate
+#print axioms HadwigerNelson.Plane.ArcMap.essParams_eventually_iff
+#print axioms HadwigerNelson.Plane.ArcMap.eventually_clean_near
+#print axioms HadwigerNelson.Plane.ArcMap.cleanArcs_locallyFinite
+#print axioms HadwigerNelson.Plane.ArcMap.essSet_subset_cleanArcs
+#print axioms HadwigerNelson.Plane.ArcMap.dom_inter_cleanArcs
+#print axioms HadwigerNelson.Plane.ArcMap.cleanCol_eq
+#print axioms HadwigerNelson.Plane.ArcMap.clean_Γ
+#print axioms HadwigerNelson.Plane.ArcMap.clean_interiorPts
+#print axioms HadwigerNelson.Plane.ArcMap.region_subset_clean_region
+#print axioms HadwigerNelson.Plane.ArcMap.clean_region_subset_closure
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_clean
+#print axioms HadwigerNelson.Plane.ArcMap.clean_valid
+#print axioms HadwigerNelson.Plane.ArcMap.clean_isClean
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_add_int
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_add_int
+#print axioms HadwigerNelson.Plane.ArcMap.radiusTwoArc_add_int
+#print axioms HadwigerNelson.Plane.ArcMap.isRingArc_add_int
+#print axioms HadwigerNelson.Plane.ArcMap.isQArc_add_int
+#print axioms HadwigerNelson.Plane.ArcMap.isR2Arc_add_int
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.sides_eq
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.mono
+#print axioms HadwigerNelson.Plane.ArcMap.mem_Ioo_or_of_overlap
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.union
+#print axioms HadwigerNelson.Plane.ArcMap.IsQArc.of_subarc
+#print axioms HadwigerNelson.Plane.ArcMap.IsR2Arc.of_subarc
+#print axioms HadwigerNelson.Plane.ArcMap.isClosed_Γ_of_isPlaneMap
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isMaxRingArc
+#print axioms HadwigerNelson.Plane.ArcMap.IsMaxRingArc.not_regularAt
+#print axioms HadwigerNelson.Plane.ArcMap.finite_sites_inter_compact
+#print axioms HadwigerNelson.Plane.ArcMap.infinite_ringArc
+#print axioms HadwigerNelson.Plane.ArcMap.finite_centres_inter_compact
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

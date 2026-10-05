@@ -1385,7 +1385,7 @@ theorem isOpen_dom_diff_essSet : IsOpen (F.dom \ F.essSet) := by
 
 /-- **An isolated point of the domain's essential set is not essential**: if no other point of a disc about `x` is essential,
 the one colour of the punctured disc (connected) is the only colour at `x`. -/
-theorem not_mem_essSet_of_isolated {x : ℂ} {ε : ℝ} (hε : 0 < ε) (hball : ball x ε ⊆ F.dom)
+theorem notMem_essSet_of_isolated {x : ℂ} {ε : ℝ} (hε : 0 < ε) (hball : ball x ε ⊆ F.dom)
     (hiso : ∀ z ∈ ball x ε, z ≠ x → z ∉ F.essSet) : x ∉ F.essSet := by
   rintro ⟨hxd, h2⟩
   by_cases hxI : x ∈ F.interiorPts
@@ -1660,7 +1660,7 @@ theorem essSet_subset_cleanArcs : F.essSet ⊆ ⋃ b ∈ F.cleanArcs, b.carrier 
   by_contra hno
   obtain ⟨ρ₀, hG⟩ := F.exists_goodAt hx.1
   obtain ⟨ε, hε, hε0⟩ := ((eventually_clean_near hG).and (Ioo_mem_nhdsGT hG.pos)).exists
-  refine not_mem_essSet_of_isolated hε0.1 ((ball_subset_ball hε0.2.le).trans hG.subdom) ?_ hx
+  refine notMem_essSet_of_isolated hε0.1 ((ball_subset_ball hε0.2.le).trans hG.subdom) ?_ hx
   intro z hz hzx hzE
   obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp (essSet_subset_Γ hzE).2
   have ha𝒜 : a ∈ {a | a ∈ F.arcs ∧ (a.carrier ∩ ball x ρ₀).Nonempty} :=
@@ -1842,6 +1842,94 @@ example (F : ArcMap 2) : (LocalSeq.const F).limitArcs ⊆ F.arcs := fun _ ha => 
 example (j : Fin 2) : (ArcMap.const univ isOpen_univ j).IsClean := by
   intro x hx
   simp [ArcMap.Γ, ArcMap.const] at hx
+
+/-- The parametrisation of a segment is affine (a spec example for `Arc.ptL`). -/
+example : (Arc.seg 0 2).ptL (1 / 2) = 1 := by norm_num [Arc.ptL]
+
+/-- A circular arc's parameters are its angles (a spec example for `Arc.paramsL`). -/
+example : (Arc.circ 0 1 0 π).paramsL = Icc 0 π := rfl
+
+/-- A sub-arc of a circular arc keeps its circle (a spec example for `Arc.subL`). -/
+example : (Arc.circ 0 1 0 π).subL 1 2 = Arc.circ 0 1 1 2 := rfl
+
+/-- A sub-arc of a segment is the segment between the two parameters' points (a spec example for `Arc.subL`). -/
+example : (Arc.seg 0 2).subL 0 (1 / 2) = Arc.seg 0 1 := by norm_num [Arc.subL]
+
+/-- **`halfDiscMono` has no essential point**: its segment carries colour `0` on both sides (a spec example for `essSet`). -/
+theorem halfDiscMono_essSet : halfDiscMono.essSet = ∅ := by
+  rw [eq_empty_iff_forall_notMem]
+  rintro x ⟨-, h2⟩
+  have hsub : halfDiscMono.coloursAt x ⊆ {0} := by
+    intro j hj
+    obtain ⟨z, hz, -⟩ := Metric.mem_closure_iff.mp hj 1 one_pos
+    have h : halfDiscMono.col z = j := hz.2
+    rw [mem_singleton_iff, ← h]
+    rfl
+  have := ncard_le_ncard hsub (toFinite _)
+  rw [ncard_singleton] at this
+  omega
+
+/-- **Cleaning drops a one-coloured arc**: the clean map of `halfDiscMono` has no `Γ` (a spec example for `cleanArcs` and
+`clean`). -/
+example : halfDiscMono.clean.Γ = ∅ := by
+  rw [clean_Γ, halfDiscMono_essSet]
+
+/-- The essential parameters of `halfDiscMono`'s segment: its start lies off the domain, so it is one; its midpoint `0` lies in the
+domain with one colour, so it is not (a spec example for `essParams`). -/
+example : (0 : ℝ) ∈ halfDiscMono.essParams (Arc.seg (-1 / 2) (1 / 2)) ∧
+    (1 / 2 : ℝ) ∉ halfDiscMono.essParams (Arc.seg (-1 / 2) (1 / 2)) := by
+  refine ⟨⟨⟨le_rfl, zero_le_one⟩, Or.inl ?_⟩, ?_⟩
+  · show (-1 / 2 : ℂ) + ((0 : ℝ) : ℂ) * (1 / 2 - -1 / 2) ∉ ball 0 (1 / 3)
+    rw [mem_ball_zero_iff]
+    norm_num
+  · rintro ⟨-, h | h⟩
+    · apply h
+      show (-1 / 2 : ℂ) + ((1 / 2 : ℝ) : ℂ) * (1 / 2 - -1 / 2) ∈ ball 0 (1 / 3)
+      rw [mem_ball_zero_iff]
+      norm_num
+    · rw [halfDiscMono_essSet] at h
+      exact h
+
+/-- **Adversary**: cleaning keeps a two-coloured arc — the origin, on `halfDisc`'s segment between its two colours, stays on the
+clean map's `Γ` (a spec example for `essSet` and `clean`). -/
+example : (0 : ℂ) ∈ halfDisc.clean.Γ := by
+  have key : ∀ s : ℝ, (s = 1 ∨ s = -1) → ∀ ε > 0, ∃ t : ℝ, t ≠ 0 ∧ |t| < 1 / 3 ∧ |t| < ε ∧
+      (0 < s * t) := by
+    intro s hs ε hε
+    refine ⟨s * min (ε / 2) (1 / 6), ?_, ?_, ?_, ?_⟩
+    · rcases hs with rfl | rfl <;> positivity
+    · rcases hs with rfl | rfl <;>
+      · simp only [one_mul, neg_one_mul, abs_neg]
+        rw [abs_of_pos (by positivity)]
+        exact lt_of_le_of_lt (min_le_right _ _) (by norm_num)
+    · rcases hs with rfl | rfl <;>
+      · simp only [one_mul, neg_one_mul, abs_neg]
+        rw [abs_of_pos (by positivity)]
+        exact lt_of_le_of_lt (min_le_left _ _) (by linarith)
+    · rcases hs with rfl | rfl <;> nlinarith [lt_min (half_pos hε) (by norm_num : (0 : ℝ) < 1 / 6)]
+  have hall : halfDisc.coloursAt 0 = univ := by
+    ext j
+    simp only [ArcMap.coloursAt, mem_setOf_eq, mem_univ, iff_true, Metric.mem_closure_iff]
+    intro ε hε
+    have hs : ((if j = 1 then 1 else -1 : ℝ) = 1 ∨ (if j = 1 then 1 else -1 : ℝ) = -1) := by
+      split_ifs <;> simp
+    obtain ⟨t, ht0, ht1, htε, hst⟩ := key _ hs ε hε
+    refine ⟨(t : ℂ) * I, ⟨halfDisc_I_mul_mem ht0 ht1, ?_⟩, ?_⟩
+    · simp only [mem_preimage, mem_singleton_iff, halfDisc, mul_im, ofReal_re, I_im, mul_one,
+        ofReal_im, I_re, mul_zero, add_zero]
+      fin_cases j
+      · simp at hst; simp [not_lt.mpr (by linarith : t ≤ 0)]
+      · simp at hst; simp [hst]
+    · simpa [Complex.norm_mul, Complex.norm_I, Complex.norm_real] using htε
+  rw [clean_Γ]
+  refine ⟨mem_ball_self (by norm_num), ?_⟩
+  rw [hall, ncard_univ, Nat.card_eq_fintype_card, Fintype.card_fin]
+
+/-- The clean colour of an interior point is its colour (a spec example for `cleanCol`). -/
+example : halfDisc.cleanCol (((1 / 6 : ℝ) : ℂ) * I) = 1 := by
+  have hI := halfDisc_I_mul_mem (t := 1 / 6) (by norm_num) (by rw [abs_of_pos (by norm_num)]; norm_num)
+  rw [cleanCol_eq (coloursAt_eq_singleton_of_interior hI)]
+  simp [halfDisc]
 
 end Spec
 

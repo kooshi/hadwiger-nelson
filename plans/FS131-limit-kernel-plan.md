@@ -356,7 +356,25 @@ call moves.
 
 ## Theorems this phase proved (FS131-IL2)
 
-(Filled at each saved stage.)
+All [kernel], read against the stage-11 build's oleans (`data/fs131/il/IL2Axioms.out`, Stage 11): each on `[propext, Classical.choice,
+Quot.sound]` or a subset.
+- **My brief's five leaves**: `ArcMap.exists_clean` (`Plane/ValidMap/Limit`); `ArcMap.treatPts_inter_finite`, `ArcMap.badCount_eq_zero_iff`,
+  `ArcMap.badCount_lt_top`, `ArcMap.mergeAvailable_of_bothKind` (`Plane/ValidMap/Procedure`).
+- Children in `Limit`: `Arc.continuous_ptL`, `Arc.carrier_eq_imageL`, `Arc.carrier_subL`, `Arc.nondegenerate_subL` (copies of `main`'s `Surgery`
+  lemmas), `Arc.isCompact_paramsL`, `Arc.ordConnected_paramsL`, `Arc.finite_ptL_eq`; `isClosed_ordConnectedComponent`,
+  `ordConnectedComponent_eq_Icc`, `eventually_finite_components`, `isPreconnected_ball_diff_singleton`; `ArcMap.coloursAt_nonempty`,
+  `.eventually_coloursAt_subset`, `.coloursAt_eq_singleton_of_interior`, `.essSet_subset_Γ`, `.exists_coloursAt_eq_singleton`,
+  `.eventually_coloursAt_eq_singleton`, `.isOpen_dom_diff_essSet`, `.notMem_essSet_of_isolated`, `.branchPt_mem_closure_sector_pair`,
+  `.germs_le_two_of_goodAt`, `.eventually_essSet_iff_of_goodAt`, `.isClosed_essParams`, `.essComp_eq_Icc`, `.cleanArcs_nondegenerate`,
+  `.essParams_eventually_iff`, `.eventually_clean_near`, `.cleanArcs_locallyFinite`, `.essSet_subset_cleanArcs`, `.dom_inter_cleanArcs`,
+  `.cleanCol_eq`, `.clean_Γ`, `.clean_interiorPts`, `.region_subset_clean_region`, `.clean_region_subset_closure`, `.coloursAt_clean`,
+  `.clean_valid`, `.clean_isClean`; `halfDiscMono_essSet` (spec).
+- Children in `Procedure`: `ArcMap.ringPt_add_int`, `.ringArc_add_int`, `.radiusTwoArc_add_int`, `.isRingArc_add_int`, `.isQArc_add_int`,
+  `.isR2Arc_add_int`, `.IsRingArc.sides_eq`, `.IsRingArc.mono`, `.mem_Ioo_or_of_overlap`, `.IsRingArc.union`, `.IsQArc.of_subarc`,
+  `.IsR2Arc.of_subarc`, `.isClosed_Γ_of_isPlaneMap`, `.exists_isMaxRingArc`, `.IsMaxRingArc.not_regularAt`, `.finite_sites_inter_compact`,
+  `.infinite_ringArc`, `.finite_centres_inter_compact`.
+- Definitions (each with a spec example): `Arc.ptL`, `Arc.paramsL`, `Arc.subL`, `ArcMap.essSet`, `.essParams`, `.cleanArcs`, `.cleanCol`,
+  `.clean`.
 
 ## Stage 9 — SAVED (FS131-IL2): the readback and the as-given build
 
@@ -424,3 +442,71 @@ avoided, and the work is IL1's (i)–(ii).
   allowed cone's interior is `woodallCone`'s contrapositive, two sectors from the chart's cone intervals, `Mono.disjoint`).
 
 ## Stage 10 — SAVED (FS131-IL2)
+
+## Stage 11 — SAVED (FS131-IL2): the three finiteness lemmas and `mergeAvailable_of_bothKind` proved; the handover
+
+### 11.1 What was proved (statements unchanged; `Procedure` now imports `Plane/ValidMap/UnitArc`)
+
+- **`badCount_eq_zero_iff`**: `←` from the definition; `→` by `exists_isMaxRingArc` — the ring arcs with the same sides containing a given one
+  are directed (`IsRingArc.union`), at most `60°` long (`l60_le`, hence the new import), and their union is one: its interior angles lie in a
+  member, its ends are limits of points of `Γ`, closed in a plane map (`isClosed_Γ_of_isPlaneMap`, where item 380's `hP` is spent); a whole
+  turn normalises the start to `[0, 2π)` (`isRingArc_add_int`). (Q) and (R2) pass to sub-arcs with constant sides (`IsQArc.of_subarc`,
+  `IsR2Arc.of_subarc`) and through turns.
+- **`badCount_lt_top`**: the ends of a maximal arc are **irregular angles** of the ring (`IsMaxRingArc.not_regularAt`: at a regular end the
+  arc would unite with the arc through it, `RingGerm`'s `RegularAt`), and the irregular angles of a bounded range are finitely many
+  (`finite_not_regular`, wave 3); a maximal arc starts in `[0, 2π)` and is at most `60°` long. **Cleanness is not used** (`hc` is kept and
+  referenced by `have _ := hc`; a generalization for the coordinator).
+- **`treatPts_inter_finite`**: sites — isolated (`IsClean.eventually_not_isSite`), so finitely many in a compact part of the domain
+  (`finite_sites_inter_compact`); centres — a centre in `K` has a ring arc in `cthickening 1 K` (compact, in the domain: `hP`), met by finitely
+  many arcs; the ring arc is infinite (`infinite_ringArc`), so one of them meets `ω(v)` infinitely often and is an arc of `ω(v)`
+  (`Arc.finite_inter_sphere_or_eq_circ`): the centres are among the finitely many centres of those arcs (`finite_centres_inter_compact`).
+- **`mergeAvailable_of_bothKind`** (N2-RED's parenthesis, one mind's hand proof — now kernel-checked; no configuration failed): the side
+  colours differ (U1 puts their cones in the facing and the away intervals, `disj_lifts`); every direction of the two open side cones is a
+  direction of a colour other than `c`, `c'` (`ringArc_sideCone_other`), and at most three colours make it one colour `d`; `d` has **two
+  sectors** — in the chart at `P` a single `d`-sector's cone interval would hold a direction of each side cone, so (its length at most `2π`)
+  the facing or the away interval strictly inside it, with a direction of `c` or `c'` there, against `Mono.disjoint`; and `d`'s **allowed cone
+  has interior** — else every `d`-sector is a horn along one axis (`woodallCone`), but two directions of one side cone `w/2` apart are not both
+  `α + nπ`. The proof uses `hP` only for `P ∈ dom` and `F.Covers P 1`.
+
+### 11.2 The build and the receipt (the handover)
+
+- **Build** (code at this stage's commit): `slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` — **OK, 447 of 447 batches,
+  7 modules rebuilt, 9 with warnings, every warning `declaration uses 'sorry'`**, 8 min 51 s, exit 0 (`build/gate/build/20261005T104536Z-3456361.log`,
+  which ends "Build completed successfully (5372 jobs)"; driver log `data/fs131/il/build-il2-stage11.log`). `sorry` declarations in lane A's files:
+  `Limit` 0; `Procedure` 3 — `exists_vertexStep` (held, item 383 (b)), `exists_arcStep`, `exists_terminalSeq` (none in my brief); `Terminal` 2 (lane B's).
+- **Axioms**, read against that build's oleans (`data/fs131/il/IL2Axioms.lean` → `IL2Axioms.out`, `slot.py --mem 12 --cpus 2 -- lake env lean`,
+  exit 0; summary `data/fs131/il/IL2Axioms-summary.txt` by `tools/fs131_il_axsum.py`, exit 0): **132 records (IL1's 75 and my 57) — 125 on the
+  standard three or fewer, 7 through `sorryAx`, 0 other.** The seven: `exists_vertexStep`, `exists_arcStep`, `exists_terminalSeq`, and through them
+  `exists_terminalMap`, `run_ends`, `run_hornBoundsQR`, `stuckRun_ne_univ`. My five leaves each print `[propext, Classical.choice, Quot.sound]`.
+  **Control on `sorryAx`**: `exists_vertexStep`, a `sorry` by construction, prints `sorryAx`, so the print sees it; the summary's parse, run with
+  `sorryAx` planted into the first standard record, counted `(124, 8)` instead of `(125, 7)` (fired, `IL2Axioms-selftest.txt`); and a source with
+  one print command the output lacks made it exit 1 (`MISMATCH: 76 print commands but 75 records`, on IL1's files).
+- **Statements unchanged**: `tools/fs131_il_stmt_check.py 6a792494` — every declaration of `Limit`, `Procedure`, `Terminal`, `Chain` at `6a792494`
+  present with the same statement (a definition's whole body compared) — **PASS**, exit 0 (`data/fs131/il/il2-stmt-check.txt`); `--self-test`:
+  five plants (a hypothesis of `badCount_lt_top` dropped, `exists_clean`'s conclusion reversed, `mergeAvailable_of_bothKind` renamed, `treatPts`'s
+  body changed, `IsModification`'s signature changed) each **fired**, the unplanted control PASS (`il2-stmt-check-selftest.txt`). FS131-I5h's
+  checker, which this copies, read a `def … := {…}` up to the next `:= by`, so a lemma inserted after `treatPts` read as a change to it (a false
+  FAIL); fixed in my copy, the original left as it is (rule 7).
+- **Map**: `ARCHITECTURE.md` rows `Limit` (stage 10) and `Procedure` (description; Imports cell gains `Plane/ValidMap/UnitArc`);
+  `tools/check_architecture.py` PASS, exit 0 (`data/fs131/il/arch-il2-stage11.txt`); with the new import removed from the cell it failed,
+  naming `Procedure` (control), then PASS again on the restored row.
+- **Receipt**: 57 records appended to the "FS131-I5h" block of `scripts/Axioms.lean` (heading "FS131-IL2"), above `=== PURCHASED ===`; the five
+  leaves were already listed by KL1. I ran no gate (my brief).
+- **Spec examples** (`Limit`'s Spec section): `Arc.ptL`, `Arc.paramsL`, `Arc.subL` (two); `essSet` (`halfDiscMono_essSet`: a one-coloured segment
+  has no essential point); `clean` (`halfDiscMono.clean.Γ = ∅`) and its **adversary** (`0 ∈ halfDisc.clean.Γ`: a two-coloured segment is kept);
+  `essParams` (the segment's start, off the domain, is essential; its midpoint is not); `cleanCol` (an interior point keeps its colour).
+
+### 11.3 What is left (lane A: nothing of my brief)
+
+All five children of my brief are proved. Left in `Procedure`, none mine: `exists_vertexStep` (its degree clause held, item 383 (b); E6 derives
+OPEN), `exists_arcStep`, `exists_terminalSeq`; in `Terminal`, lane B's `run_hornBoundsQR`, `stuckRun_ne_univ`.
+
+### 11.4 Notes for the merge with `main`
+
+- `Arc.ptL`, `Arc.paramsL`, `Arc.subL`, `Arc.continuous_ptL`, `Arc.carrier_eq_imageL`, `Arc.carrier_subL`, `Arc.nondegenerate_subL` (`Limit`) are
+  `main`'s `Surgery` `Arc.pt`, `Arc.params`, `Arc.sub` and lemmas copied under suffixed names: delete them at the merge and rename their uses (all
+  in `Limit`'s clean section and its spec examples). `branchPt_mem_closure_sector_pair` is `fs131-w5`'s `BranchGerms.branchPt_mem_closure_sector`
+  (`MapTopology`), re-proved under another name.
+- `germs_le_two_of_goodAt` is the at-most-two-germs argument inside IL1's `not_isSite_of_goodAt`, factored out; that proof can call it.
+
+## Stage 11 — SAVED (FS131-IL2)
