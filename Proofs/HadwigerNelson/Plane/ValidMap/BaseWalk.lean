@@ -195,6 +195,42 @@ theorem germPseudo_unique {k : ℕ} {F : ArcMap k} {u : ℂ} {θ : ℝ} {s : Sid
   rw [h1] at h2
   exact Set.singleton_injective h2
 
+/-- **A change point of the pseudo-colouring is not a singleton point**: germs of two different pseudo-colours on its two sides put both colours
+at the point (colours are closed), neither carried at `u`. -/
+theorem pseudo_ncard_ne_one_of_change {k : ℕ} {F : ArcMap k} {u : ℂ} {θ : ℝ} {a c : Fin k} (hac : a ≠ c)
+    (ha : F.GermPseudo u θ .cw a) (hc : F.GermPseudo u θ .ccw c) : (F.pseudoColours u (ringPt u θ)).ncard ≠ 1 := by
+  have hmem : ∀ {s : Side} {j : Fin k}, F.GermPseudo u θ s j → j ∈ F.pseudoColours u (ringPt u θ) := by
+    intro s j ⟨δ, hδ, hsub⟩
+    have hcl : ringPt u θ ∈ closure (germ u θ s δ) := ringPt_mem_closure_germ u θ s hδ
+    have hj : germ u θ s δ ⊆ closure (F.region j) := fun z hz => by
+      have := hsub hz
+      simp only [mem_setOf_eq] at this
+      have hz' : j ∈ F.pseudoColours u z := by rw [this]; exact mem_singleton j
+      exact hz'.1
+    have hnot : j ∉ F.coloursAt u := by
+      obtain ⟨z, hz⟩ : (germ u θ s δ).Nonempty := ⟨_, ⟨δ / 2, ⟨by linarith, by linarith⟩, rfl⟩⟩
+      have := hsub hz
+      simp only [mem_setOf_eq] at this
+      have hz' : j ∈ F.pseudoColours u z := by rw [this]; exact mem_singleton j
+      exact hz'.2
+    exact ⟨closure_minimal hj isClosed_closure hcl, hnot⟩
+  intro h1
+  obtain ⟨x, hx⟩ := Set.ncard_eq_one.mp h1
+  have h1' := hmem ha
+  have h2' := hmem hc
+  rw [hx] at h1' h2'
+  exact hac (h1'.trans h2'.symm)
+
+/-- The germs at `θ − 2π` are the germs at `θ`. -/
+theorem germ_sub_two_pi (p : ℂ) (θ : ℝ) (s : Side) (δ : ℝ) : germ p (θ - 2 * π) s δ = germ p θ s δ := by
+  unfold germ
+  congr 1
+  funext t
+  rw [show θ - 2 * π + s.sign * t = θ + s.sign * t - 2 * π by ring]
+  simp only [ringPt]
+  rw [show e (θ + s.sign * t - 2 * π) = e (θ + s.sign * t - 2 * π + 2 * π) from (e_add_two_pi _).symm]
+  ring_nf
+
 /-- **The returning arcs are removable** (FS110-CD Lemma R step 3): for `x` inside a returning arc and `y = r(x ± 60°)`, `ω(y)` crosses `ω(u)`
 only at `x` within the arc, so it separates its ends; the `a`-tile and the `c`-tile, connected with both ends in their closures (through `K`),
 meet `ω(y)`, so neither colour is at `y` (the (P) sweep) and `c′(y)` is the third colour. The colour pattern at the ends is in `IsRetArc`. -/
@@ -228,7 +264,21 @@ theorem BaseCtx.retArc_partner (B : F.BaseCtx u) {s t : ℝ} (hR : F.IsRetArc u 
 /-- **Finitely many returning arcs** (FS110-CD Lemma R): their ends are change points of the pseudo-colouring, finitely many per period. -/
 theorem BaseCtx.retArcs_finite (B : F.BaseCtx u) :
     {q : ℝ × ℝ | q.1 ∈ Ico 0 (2 * π) ∧ F.IsRetArc u q.1 q.2}.Finite := by
-  sorry
+  set S := {θ | θ ∈ Ico 0 (2 * π) ∧ (F.pseudoColours u (ringPt u θ)).ncard ≠ 1} with hS
+  have hfin : S.Finite := B.pseudo_finite (mem_closedBall_self zero_le_one) B.cubic
+  refine (hfin.prod (hfin.union (hfin.image fun θ => θ + 2 * π))).subset ?_
+  rintro ⟨s, t⟩ ⟨hs, hst, hst', a, c, hac, ha, hc, hc', ha', -⟩
+  have hπ := Real.pi_pos
+  refine ⟨⟨hs, pseudo_ncard_ne_one_of_change hac ha hc⟩, ?_⟩
+  have ht := pseudo_ncard_ne_one_of_change hac.symm hc' ha'
+  rcases lt_or_ge t (2 * π) with h | h
+  · exact Or.inl ⟨⟨by linarith [hs.1], h⟩, ht⟩
+  · refine Or.inr ⟨t - 2 * π, ⟨⟨by linarith, by linarith [hs.2]⟩, ?_⟩, by ring⟩
+    have hc'' : F.GermPseudo u (t - 2 * π) .cw c := by
+      obtain ⟨δ, hδ, h'⟩ := hc'; exact ⟨δ, hδ, by rw [germ_sub_two_pi]; exact h'⟩
+    have ha'' : F.GermPseudo u (t - 2 * π) .ccw a := by
+      obtain ⟨δ, hδ, h'⟩ := ha'; exact ⟨δ, hδ, by rw [germ_sub_two_pi]; exact h'⟩
+    exact pseudo_ncard_ne_one_of_change hac.symm hc'' ha''
 
 /-- **The returning arcs nest or are disjoint** (FS110-CB D5 item 1, "paths do not cross; their arcs nest or are disjoint"; FS110-CD Lemma R
 step 4) — **planar core**: interleaved ends would make the `a`-tile of one pair cross the boundary of the other's tiles away from a
@@ -540,7 +590,16 @@ map — its six points keep their germs — so `p17_ua` (or `bv_hex`) refutes it
 theorem BaseCtx.hex_base (B : F.BaseCtx u) {C : CircleColouring} {g : ZMod 3 → Fin 6} (hg : Function.Injective g)
     (hL : ∀ θ v, C.LeftVal θ v → F.GermPseudo u θ .cw (g v)) (hR : ∀ θ v, C.RightVal θ v → F.GermPseudo u θ .ccw (g v))
     {ψ : ℝ} {b : ZMod 3 → ZMod 3} (hhex : C.IsHex ψ b) : False := by
-  sorry
+  obtain ⟨hb, hh⟩ := hhex
+  refine p17_ua B.valid B.covers B.cubic B.hyp (ψ := ψ) (b := g ∘ b) ⟨hg.comp hb, fun j hj => ?_⟩
+  obtain ⟨hl, hr⟩ := hh j hj
+  have h1 := hL _ _ hl
+  have h2 := hR _ _ hr
+  have hne : g (b j) ≠ g (b (j + 1)) := by
+    refine hg.ne (hb.ne fun h => ?_)
+    have h' : (1 : ZMod 3) = 0 := by linear_combination -h
+    exact absurd h' (by decide)
+  exact ⟨rot_noThird B.valid B.covers B.cubic B.hyp hne h1 h2, h1, h2⟩
 
 /-! ## E — the count -/
 

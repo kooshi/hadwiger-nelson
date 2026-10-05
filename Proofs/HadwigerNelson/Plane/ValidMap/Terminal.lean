@@ -49,6 +49,129 @@ variable {k : ℕ} {F : ArcMap k}
 
 /-! ## The unit-arc stuck structure (supporting lemma: FS112-WALK's row 5, N4-STUCK (i)–(ii) with unit arcs) -/
 
+/-- **FS110-N3-DEG's cone as horns, unit arcs allowed** (wave 4's `woodallCone_isHorn` with `woodallCone` for `woodallCone_strict`: no
+Condition 5, curvatures in `[−1, 1]`): with `int D_c(v) = ∅`, every `c`-sector at `v` is a `c`-horn along `±a`. -/
+theorem woodallCone_isHorn_ua (hF : F.Valid) {v : ℂ} {c : Fin k} (hv : F.Covers v 1)
+    (hc : c ∈ F.coloursAt v) (hD : interior (F.allowedCone v c) = ∅) :
+    ∃ α : ℝ, (F.IsContact v c (v + e (α + π / 2)) ∧ F.OutType v c (v + e (α + π / 2))) ∧
+      (F.IsContact v c (v - e (α + π / 2)) ∧ F.OutType v c (v - e (α + π / 2))) ∧
+      ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ S ∈ F.sectorsOf v r c, ∃ β ∈ ({α, α + π} : Set ℝ), ∃ κ₁ κ₂,
+        -1 ≤ κ₁ ∧ κ₂ ≤ 1 ∧ F.IsHorn v β κ₁ κ₂ c ∧ S = hornSet v β κ₁ κ₂ r := by
+  obtain ⟨α, hN, hS, hev⟩ := woodallCone hF hv hc hD
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F (hv (mem_closedBall_self zero_le_one))
+  refine ⟨α, hN, hS, ?_⟩
+  filter_upwards [hev, Ioc_mem_nhdsGT hC.pos] with r hr hrr S hS'
+  obtain ⟨β, hβ, κ₁, κ₂, h1, h12, h2, hSeq⟩ := hr S hS'
+  have hSec : F.IsSector v r (hornSet v β κ₁ κ₂ r) := hSeq ▸ hS'.1
+  obtain ⟨i, -, -, -, -, hsec⟩ := hC.index_of_isSector_hornSet hrr h12 hSec
+  have hn : 0 < n := i.pos
+  obtain ⟨g, hg⟩ := hC.exists_col i
+  -- the sector's colour is `c`
+  have hgc : g = c := by
+    obtain ⟨z, hz⟩ := hC.sector_nonempty hrr i
+    have hz' : z ∈ S := by rw [hSeq, ← hsec r hrr]; exact hz
+    have h1 := (hg r hrr hz).2
+    have h2 := hS'.2 hz'
+    exact h1.symm.trans h2
+  refine ⟨β, hβ, κ₁, κ₂, h1, h2, ⟨h12, ?_⟩, hSeq⟩
+  filter_upwards [Ioc_mem_nhdsGT hC.pos] with r' hr'
+  rw [← hsec r' hr']
+  refine ⟨(hC.isSector_iff hn hr').mpr ⟨i, rfl⟩, fun z hz => ?_⟩
+  have := (hg r' hr' hz).2
+  rw [hgc] at this
+  exact this
+
+/-- **N4-STUCK (i) with unit arcs** (wave 4's `stuck_horns` over `woodallCone_isHorn_ua`: no Condition 5, curvatures in `[−1, 1]`): at a stuck
+vertex the colour with two or more sectors has exactly two, horns along `±a`, with out-type contacts at both poles. -/
+theorem stuck_horns_ua (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hst : F.IsStuck v) {c : Fin k}
+    {m : ℕ} (hm : 2 ≤ m) (hc : F.HasSectors v c m) :
+    ∃ α κ₁ κ₂ κ₃ κ₄ : ℝ, F.IsHorn v α κ₁ κ₂ c ∧ F.IsHorn v (α + π) κ₃ κ₄ c ∧ -1 ≤ κ₁ ∧ κ₂ ≤ 1 ∧ -1 ≤ κ₃ ∧ κ₄ ≤ 1 ∧
+      F.HasSectors v c 2 ∧ (F.IsContact v c (v + e (α + π / 2)) ∧ F.OutType v c (v + e (α + π / 2))) ∧
+      (F.IsContact v c (v - e (α + π / 2)) ∧ F.OutType v c (v - e (α + π / 2))) := by
+  have hvd : v ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  obtain ⟨hM, hR, hSh, -⟩ := hst
+  have hD : interior (F.allowedCone v c) = ∅ := by
+    by_contra hne
+    exact hM ⟨c, m, hm, hc, nonempty_iff_ne_empty.mpr hne⟩
+  have hcv : c ∈ F.coloursAt v := by
+    obtain ⟨r, hr, -⟩ := (hc.and self_mem_nhdsWithin).exists
+    have h1 : 1 < (F.sectorsOf v r c).encard := by rw [hr]; exact_mod_cast hm
+    obtain ⟨S, -, hS, -, -⟩ := one_lt_encard_iff.mp h1
+    have hS' : F.IsSector v r S ∧ S ⊆ F.col ⁻¹' {c} := hS
+    obtain ⟨⟨x, -, hSx, hvS⟩, hSc⟩ := hS'
+    have hSr : S ⊆ F.region c := fun z hz =>
+      ⟨by rw [hSx] at hz; exact (connectedComponentIn_subset _ _ hz).1, hSc hz⟩
+    exact closure_mono hSr hvS
+  obtain ⟨α, hN, hS, hev⟩ := woodallCone_isHorn_ua hF hv hcv hD
+  obtain ⟨r, ⟨hrH, hrm⟩, hr⟩ := ((hev.and hc).and self_mem_nhdsWithin).exists
+  have h1 : 1 < (F.sectorsOf v r c).encard := by rw [hrm]; exact_mod_cast hm
+  obtain ⟨x, y, hx, hy, hxy⟩ := one_lt_encard_iff.mp h1
+  obtain ⟨βx, hβx, a₁, a₂, ha₁, ha₂, Hx, hxe⟩ := hrH x hx
+  obtain ⟨βy, hβy, b₁, b₂, hb₁, hb₂, Hy, hye⟩ := hrH y hy
+  -- one sector per ray
+  have huniq : ∀ S ∈ F.sectorsOf v r c, ∀ β κ₁ κ₂, F.IsHorn v β κ₁ κ₂ c → S = hornSet v β κ₁ κ₂ r →
+      ∀ S' ∈ F.sectorsOf v r c, ∀ κ₁' κ₂', F.IsHorn v β κ₁' κ₂' c → S' = hornSet v β κ₁' κ₂' r → S = S' := by
+    intro S _ β κ₁ κ₂ H hSe S' _ κ₁' κ₂' H' hSe'
+    obtain ⟨e1, e2⟩ := horn_unique_of_stuck hF hvd hR hSh H H'
+    rw [hSe, hSe', e1, e2]
+  have hβne : βx ≠ βy := by
+    intro he
+    rw [he] at Hx hxe
+    exact hxy (huniq x hx βy a₁ a₂ Hx hxe y hy b₁ b₂ Hy hye)
+  -- at most two sectors
+  have hsub : F.sectorsOf v r c ⊆ {x, y} := by
+    intro S hS'
+    obtain ⟨β, hβ, κ₁, κ₂, -, -, H, hSe⟩ := hrH S hS'
+    have hβ' : β = βx ∨ β = βy := by
+      simp only [mem_insert_iff, mem_singleton_iff] at hβ hβx hβy
+      rcases hβ with rfl | rfl <;> rcases hβx with rfl | rfl <;> rcases hβy with rfl | rfl <;>
+        first | exact Or.inl rfl | exact Or.inr rfl | exact absurd rfl hβne
+    rcases hβ' with rfl | rfl
+    · exact Or.inl (huniq S hS' β κ₁ κ₂ H hSe x hx a₁ a₂ Hx hxe)
+    · exact Or.inr (huniq S hS' β κ₁ κ₂ H hSe y hy b₁ b₂ Hy hye)
+  have hm2 : m = 2 := by
+    have hle : (F.sectorsOf v r c).encard ≤ 2 :=
+      (encard_le_encard hsub).trans ((encard_insert_le _ _).trans (by rw [encard_singleton]; rfl))
+    rw [hrm] at hle
+    have : m ≤ 2 := by exact_mod_cast hle
+    omega
+  have hc2 : F.HasSectors v c 2 := hm2 ▸ hc
+  simp only [mem_insert_iff, mem_singleton_iff] at hβx hβy
+  rcases hβx with rfl | rfl
+  · have hβy' : βy = βx + π := by
+      rcases hβy with h | h
+      · exact absurd h.symm hβne
+      · exact h
+    rw [hβy'] at Hy
+    exact ⟨βx, a₁, a₂, b₁, b₂, Hx, Hy, ha₁, ha₂, hb₁, hb₂, hc2, hN, hS⟩
+  · have hβy' : βy = α := by
+      rcases hβy with h | h
+      · exact h
+      · exact absurd h.symm hβne
+    rw [hβy'] at Hy
+    exact ⟨α, b₁, b₂, a₁, a₂, Hy, Hx, hb₁, hb₂, ha₁, ha₂, hc2, hN, hS⟩
+
+
+/-- **N4-STUCK (ii) with unit arcs: the flanks** — the open part of `stuck_structure_ua` once `stuck_horns_ua` has given the horns. At a stuck vertex
+with at most three colours whose two-sector colour `c` has horns along `±e α` (curvatures in `[−1, 1]`) and out-type contacts at both poles: the
+flank colours are two, `g` on the `+n` side of both horns and `h` on the `−n` side, distinct and other than `c`; they and `c` are the colours at `v`;
+the degree is `4`; and off the parabola `|frameY| = ‖z − v‖²/2` the `+n` side is `g` and the `−n` side `h` (ruling 252's form (b)). FS110-N4-FLANK and
+N4-SHAVE with unit arcs (S–V Prop. 7's flank argument): wave 4's `stuck_structure_flanks` proves it under Condition 5 with strict curvatures, where
+a horn arc on `ω(v ± n)` cannot occur; the unit-arc case needs the doubly-shadowed step (`shaveAvailable_of_not_doublyShadowed`,
+`flank_ne_of_doublyShadowed`) in a form that allows a horn arc on `ω(v ± n)`. Since two `c`-sectors are exactly these two horns, the statement is
+`stuck_structure_ua`'s conclusion at this axis (the other axis `α + π` is the same configuration with `g ↔ h`). A step of `stuck_structure_ua`'s
+proof. Inhabitant of the hypotheses: `bowtie` at `0` (`bowtie_isStuck`, `bowtie_coloursAt_zero`), with the horns `stuck_horns_ua` gives there. -/
+theorem stuck_flanks_ua (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard ≤ 3)
+    {c : Fin k} {α κ₁ κ₂ κ₃ κ₄ : ℝ} (Hu : F.IsHorn v α κ₁ κ₂ c) (Hd : F.IsHorn v (α + π) κ₃ κ₄ c)
+    (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1) (h3' : -1 ≤ κ₃) (h4 : κ₄ ≤ 1) (hc2 : F.HasSectors v c 2)
+    (hN : F.IsContact v c (v + e (α + π / 2)) ∧ F.OutType v c (v + e (α + π / 2)))
+    (hS : F.IsContact v c (v - e (α + π / 2)) ∧ F.OutType v c (v - e (α + π / 2))) :
+    ∃ g h : Fin k, F.HasDegree v 4 ∧ F.coloursAt v = {c, g, h} ∧ g ≠ h ∧ g ≠ c ∧ h ≠ c ∧
+      F.IsFlankAbove v α κ₂ g ∧ F.IsFlankBelow v α κ₁ h ∧ F.IsFlankAbove v (α + π) κ₄ h ∧ F.IsFlankBelow v (α + π) κ₃ g ∧
+      (∀ᶠ ρ in 𝓝[>] (0 : ℝ), ∀ z ∈ F.interiorPts ∩ ball v ρ,
+        (‖z - v‖ ^ 2 / 2 < frameY v α z → F.col z = g) ∧ (frameY v α z < -(‖z - v‖ ^ 2 / 2) → F.col z = h)) := by
+  sorry
+
 /-- **N4-STUCK (i)–(ii) with unit arcs** (FS112-WALK, row 5; used by FS114-CV's and CVB's arguments as "N4-STUCK's structure (i)–(ii) …
 in `[−1, 1]`", `plans/FS114-CVB-verification.md` § 1.3). Not a backlog row (FS112-WALK is declined, a verdict table): a supporting lemma
 of wave 5. At a stuck vertex `v` of a valid map with at most three colours there, the colour `c` with two or more sectors has exactly two,
@@ -68,7 +191,10 @@ theorem stuck_structure_ua (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) (hst : F
         (‖z - v‖ ^ 2 / 2 < frameY v α z → F.col z = g) ∧ (frameY v α z < -(‖z - v‖ ^ 2 / 2) → F.col z = h)) ∧
       (F.IsContact v c (v + e (α + π / 2)) ∧ F.OutType v c (v + e (α + π / 2))) ∧
       (F.IsContact v c (v - e (α + π / 2)) ∧ F.OutType v c (v - e (α + π / 2))) := by
-  sorry
+  obtain ⟨α, κ₁, κ₂, κ₃, κ₄, Hu, Hd, h1, h2, h3', h4, hc2, hN, hS⟩ := stuck_horns_ua hF hv hst hm hc
+  obtain ⟨g, h, hdeg, hcol, hgh, hgc, hhc, fa, fb, fa', fb', hsides⟩ :=
+    stuck_flanks_ua hF hv hst h3 Hu Hd h1 h2 h3' h4 hc2 hN hS
+  exact ⟨α, κ₁, κ₂, κ₃, κ₄, g, h, Hu, Hd, h1, h2, h3', h4, hc2, hdeg, hcol, hgh, hgc, hhc, fa, fb, fa', fb', hsides, hN, hS⟩
 
 /-! ## FS112-N2-TERM, with FS112-N2-RED as its lemma -/
 
