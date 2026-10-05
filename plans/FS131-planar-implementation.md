@@ -617,3 +617,22 @@ cell and `scripts/Axioms.lean`'s FS131-KP block above `=== PURCHASED ===`); `Pro
 
 Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1754 modules already up to date, nothing built, 9 modules with warnings, every warning
 `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T025209Z-771307.log`; driver log `data/fs131/ip/build-ip4-asgiven.log`).
+
+## Stage 13 — SAVED: `fs131-w5t` merged (T-GRAPH, held), as the brief's amendment rules
+
+The brief's amendment (2026-10-05, inventory items 314–315; ruling 315 (a) quoted there and checked verbatim against `plans/FS131-close-inventory.md`, main
+tree, l. 2535, by script): at the next saved stage, merge `fs131-w5t` (at `5604b532`) into `fs131-w5p`, fix `MapGraph`'s module docstring line, build, record
+it as its own stage. No tracked file had been edited since stage 12, so this is that stage.
+
+- **Merge**: `git merge origin/fs131-w5t` (`5604b532`, FS131-IT1's report) at `bf27d9a4`. Two conflicts, both append-only: `ARCHITECTURE.md` (resolved to IP3's
+  `MapTopology` row — Imports with `Plane/CurveGraph` — then IT1's new `Thomassen` row and IT1's amended `MapGraph` row, Imports with `Thomassen`) and
+  `scripts/Axioms.lean` (both blocks kept: FS131-IX1's, then FS131-IT1's, both above `=== PURCHASED ===`). `MapGraph.lean` and `Proofs.lean` merged
+  without conflict (IT1's import line, the moved block's deletion, `filledGraph_finSep` and its constructor line; one `import Proofs.HadwigerNelson.Thomassen`).
+- **`MapGraph`'s module docstring**: "**Pure graph theory** (namespace `HadwigerNelson.Thomassen`, over Mathlib's `SimpleGraph`):" replaced by "**Pure
+  graph theory** — not in this file: module `Thomassen` (`Proofs/HadwigerNelson/Thomassen.lean`, namespace `HadwigerNelson.Thomassen`, over Mathlib's
+  `SimpleGraph`; moved there verbatim by job FS131-IT1), which this file imports and reads:" (the bullets that follow describe what it reads).
+- `tools/check_architecture.py`: PASS (`data/fs131/ip/check-architecture-ip4-merge.txt`).
+- **Build** (the merged tree, under the slot, 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 3 modules rebuilt (`Thomassen` 6.5 s, `MapGraph`
+  6.9 s, `Proofs`), 9 modules with warnings, every warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T031127Z-886054.log`;
+  `data/fs131/ip/build-ip4-merge-w5t.log`; grep for `warning|error` minus the `sorry` lines leaves only Lake's `--no-build` probe line).
+- F-SEP (`filledGraph_finSep`) joins my order beside F-LOC/CONN/INF/ONE.
