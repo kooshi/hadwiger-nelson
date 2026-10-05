@@ -3055,3 +3055,25 @@ reason by the close.*
      non-`Terminal` continuation: MERGE is on wave 5's path (item 348 (b)); I5m's two leaves have slack. Restating a leaf (held (a)) is allowed if a hypothesis is
      missing, recorded with the counterexample — and a defect that reaches `exists_merge_aux`'s statement is a message to me. Confidence: high. **Delete
      `data/fs131/imm/wip/C.lean`** once its content is in `MergeMove`. In flight after IMM4's launch: 1 (I5n) + 1 (RS1) + 1 (IMM4) = 3.
+355. **FS131-I5n handed back** (Stage 42 SAVED, harness ≈ 429k by the task notice; record `fs131-w5c`'s `plans/FS131-I5-implementation.md`, Stages 39–42;
+     report `data/fs131/reports/FS131-I5n.md`; commits `81e0d2fc`, `334bd33d`, `330edb65`, `a7fd6df5`, `da09c260`, pushed). **Ruling 348 (a)'s swap done**:
+     `exists_merge` in `fs131-w5c`'s `Contact` carries `fs131-w4mm`'s ruling-269 statement and docstring, copied by script, `sorry` body kept; of `Contact`'s 180
+     statements only it changed (`tools/fs131_i5n_merge_swap.py`, self-test fired). **Results, [kernel] on the standard three**: `cv_hd_main_inType`
+     (FS114-CV-HD's main clause, branch `G_N`, CVB § 1.6: seven distinct colours at `N` — `c`, `g`, `h` and the four chart sectors either side of the two
+     `h`-horns `Q±`, in place of CVB's ring tiles `r±`), as a corollary of `seven_colours_at_N` (the same count reading `G_N` only as `g ∈ P_cl(N)`); U1 for a
+     flank colour (`flank_radial_N/S`, `coneAt_N_subset_of_flankAbove`, `coneAt_S_subset_of_flankBelow` — the inner colour of a unit arc, where U1's lemmas bounded
+     only the outer); `lower_flank_horns_at_N_of` (I5l's lemma over `Valid`, `IsPlaneMap`, `Terminal`; `lower_flank_horns_at_N` now its corollary, statement
+     unchanged); a chart and angle toolkit (17 children). `y3_end_needs` proved over one open child, `y3_end_needs_of_not_mem` (the case `g ∉ P_cl(N)`, YB3 § 3.1
+     Steps 3–4); its case `g ∈ P_cl(N)` closed by `seven_colours_at_N`. **Receipt** (Keryx): `origin/fs131-w5c` is `da09c260`; the final build log
+     (`build/gate/build/20261005T075711Z-2522128.log`) ends "Build completed successfully (5370 jobs)", 0 warnings other than `sorry`; `Terminal`'s `sorry`
+     declarations by grep: `y3_end_needs_of_not_mem`, `exists_red`, `exists_terminal`; `exists_merge`'s statement on `fs131-w5c` compared by script with
+     `fs131-w4mm`'s `Contact`: identical; `tools/fs131_i5h_stmt_check.py 72149b07` run by Keryx: PASS (it reads only `Terminal`, `BaseDense`, `FlankUA`, so it does
+     not see the swap — I5n's own check does); `data/fs131/i5n/I5nAxioms42.out` parsed: `cv_hd_main_inType`, `seven_colours_at_N` standard, the rest of its eleven
+     on `sorryAx` through `y3_end_needs_of_not_mem` and `exists_merge` (controls). **Generalization**: CVB § 1.6's branch `G_N` needs only `g ∈ P_cl(N)` — no in-type
+     clause, no curvature bound on `Q±` (agreeing with YB3 § 3.1 Step 3 (a)). **Finding**: for `g ∉ P_cl(N)`, the count at `N` alone gives at most six colours,
+     so YB3's Step 4 at `N + n` is needed (route in record Stage 42, one session). Wave 5 at 20 `sorry` declarations on this branch (21 at launch). Credit: I5n,
+     for the seven colours from `g ∈ P_cl(N)` alone.
+356. **Ruling on I5n's slot: the `Terminal` continuation, FS131-I5p, on `fs131-w5c` from Stage 42** — `y3_end_needs_of_not_mem` (YB3 § 3.1 Steps 3–4, the
+     record's route), then `exists_red` and `exists_terminal` (citing `exists_merge` in ruling 269's form only). The non-`Terminal` continuation keeps the name
+     FS131-I5o (item 350's queue). Alternative weighed: I5o (`bv_l3`, `exists_preBend`). Why: the `Terminal` half's three H leaves, two of them limit
+     constructions, are still the longest lane; I5o's two have slack. Confidence: high. In flight after I5p's launch: 1 (RS1) + 1 (IMM4) + 1 (I5p) = 3.
