@@ -1798,3 +1798,100 @@ more is true by the proof: the point lies within `3√2/5` of `x`, for any valid
 d61edefc`: PASS; `tools/check_architecture.py`: PASS. Wave 5's `sorry` declarations: **12** (mine left: `bv_l3`, `exists_preBend`).
 
 ## Stage 40 — SAVED
+
+## Stage 41 — SAVED (FS131-I5o): the strengthened bend stated (scratch, elaborated); notes for its construction and for `exists_preBend`; `bv_l3`'s placement; two of `bv_l3`'s steps compiled
+
+### 41.1 The strengthened bend, as stated (rulings 359–360, 363–366)
+
+`data/fs131/i5o/BendCollar.lean` (imports `Chain`; elaborates, one `sorry`; **not in the library** — `exists_preBend` stays `sorry`, so the statement would
+be an unused leaf): `ArcMap.bend_toward_collar`. Hypotheses: `F.Valid`; `F.IsRingArc P θ₁ θ₂ c c'` with `c' ∉ F.coloursAt P`; `θ₂ − θ₁ < 2π`; **`hmax`** (no
+ring arc at `P` with the same sides strictly contains `α`, as sets); **`hfree`** (near each point of `α°`, `Γ ⊆ ω(P)`); `ε > 0`. Conclusions: `M` and a
+homeomorphism `h : ℂ ≃ₜ ℂ` with `M.Valid`, `M.dom = F.dom`; `h = id` off `thickening ε α`; `h` fixes every point of `F.Γ` off `α°`; `h` carries interior points to
+interior points of the same colour; hence (stated) `M.coloursAt (h z) = F.coloursAt z`, `M.HasDegree (h z) n ↔ F.HasDegree z n`, `M.HasRepeatedColour (h z)
+↔ F.HasRepeatedColour z`; **R1** every ring arc of `M` is one of `F` with the same sides; **R2** every ring arc of `F` whose open arc misses `α°` is one of `M`;
+**R3** no point of `α°` is on a unit arc of `M` at `P`; and **no new inert arc** (`M.Inert Q a b → F.Inert Q a b`).
+
+**Read back against E4-BEND-UN** (`plans/FS131-E4-derivation.md`, its derivation block and § Argument): E4's "the toward-bend of a whole inert unit arc …
+with its lens chosen inside a collar of the arc in its inner tile" — the child bends a whole maximal constant-sided arc whose outer colour is absent at `P`
+(the toward bend's own hypothesis; inert is stronger, and is what `exists_preBend` supplies); E4's "uses only: that the bend is induced by a homeomorphism of
+the plane supported in a small neighbourhood of the lens's closure, fixing the arc's ends, carrying each old tile onto the new tile of the same index" — the
+`h` clauses (support in `thickening ε α`, the ends and all of `Γ ∖ α°` fixed, interior points and colours carried point by point, which is "each old tile
+onto the new tile of the same index"); E4's conclusion "keeps `Unenclosed u`" — follows from the `h` clauses (a homeomorphism carries bounded components of
+`ℂ ∖ cl T` to bounded components of `ℂ ∖ cl h(T)`; `h u = u` because `u ∈ Γ ∖ α°`), not stated as a clause: the iteration derives it. **Beyond E4**: the
+transport of colours, degrees and repeated colours (`exists_preBend`'s docstring: "no point gains a colour or a sector"), and R1–R3 with no new inert arc,
+which the iteration's measure needs (§ 41.3). **Same**, with those additions.
+
+### 41.2 Notes for the construction job (the collar bend)
+
+1. **Why `bendMap` cannot give the collar** (wave 4, `UnitArc` on `main`, `bendMap P θ₁ θ₂ a L j`): the bent map has exactly one new `Arc` `a` through both
+   ends `A = r(θ₁)`, `B = r(θ₂)`, and the lens is bounded by `α` and `a`. Two distinct circles (or a circle and a line) through `A` and `B` cross
+   transversally at `A`, so every `bendMap` lens has a positive opening angle at each tip. **The horn end**: the inner tile's sector at `A` beside `α` is
+   bounded by `α` and the next ray `ρ` of `Γ` at `A`; if `ρ` is tangent to `α` at `A` (an internally tangent circle, curvature `κ_ρ > 1` — the only arcs that
+   can be tangent to `ω(P)` at `A` on the inner side: a segment or a circle of curvature `< 1` tangent at `A` lies outside `B(P, 1)` near `A`), the sector is a
+   horn of width `O(t²)` and no positive-angle wedge fits in it. Main's crescent then swallows the horn's tip and a wedge of the tile beyond `ρ`: at `A` with
+   colours `{c, c', d}`, `c` can be lost at `A`, and `a` crosses `ρ`, making new vertices. So the collar needs a lens bounded by several arcs.
+2. **The construction in mind.** (a) *The lens boundary*: at a horn end, a circle arc through `A` tangent to `α` with curvature strictly between `1` and `κ_ρ`
+   — it lies strictly between `α` and `ρ` near `A` (second order); at a transversal end, a circle arc through `A` at an angle smaller than the sector's; in
+   the middle, an arc inside the collar; the joins inside `T_in` (corners are degree-2 points with colours `{c, c'}`, harmless). So `bendMap` generalized to a
+   finite set of new arcs. (b) *Validity*: for a small crescent parameter `d`, the collar lens can be chosen inside main's crescent `L` (its tips lie in `L`'s
+   wedge, its middle under `L`'s depth), so main's clearness (`IsClear c'` on `L`) and "no unit pair inside `L`" apply to the subset. (c) *The homeomorphism*:
+   a radial push in polar coordinates about `P`, `h(P + ρ e(θ)) = P + ψ_θ(ρ) e(θ)` for `θ ∈ (θ₁, θ₂)`, `ψ_θ` a piecewise-linear homeomorphism of
+   `[1 − w_in(θ), 1 + w_out(θ)]` fixing the ends and sending `1 ↦ 1 − ℓ(θ)`, the identity elsewhere; `w_in`, `w_out` are collar widths in `T_in`, `T_out`
+   (`→ 0` at an end whose sector on that side is a horn), `ℓ < w_in` the lens depth (`ρ = 1 − ℓ(θ)` is the lens boundary). Continuity at the ends needs `w, ℓ →
+   0` there; bi-Lipschitz near the ends if `ℓ/w_in` stays bounded away from `1`, which is what transporting sector counts (metric: balls) needs.
+   (d) *The collar exists* along `α°` by `hfree` and local finiteness (a uniform strip over each compact sub-arc of `α°`), and at the ends inside the two
+   sectors beside `α`.
+3. **"No new inert arc" holds — the validity argument** (my first report said otherwise; corrected, items 365–366). Colours change only at points of `α°`
+   (`{c, c'} → {c'}`), of the lens (`{c} → {c'}`) and of the new boundary (`{c} → {c, c'}`: a gain, harmless). Let `β ⊆ ω(Q)` be a unit arc with `Q ∈ α°`. Near
+   `Q` the colour `c` fills an open half-disc `H` on `α`'s inner side. If `c` lay on β's inner (outer) side: `x = Q + δn ∈ H`, `y = Q + (1 ∓ η)e(t)` on β's `c`
+   side, `|x − y|² − 1 = ∓2η − 2δ⟨e(t), n⟩ + O(δ² + η² + δη)`; for every `t` but the one normal direction some `n ∈ H` gives the needed sign, and the
+   intermediate value theorem in `η` gives two `c`-points at distance exactly `1` — against validity. So a unit arc centred on `α°` never carries `c` on a side;
+   non-inert in `F`, it carries `c'`, which `Q` keeps. A centre in the lens has a whole `c`-disc around it: the same argument excludes `c` on any side. With R1
+   (sides kept), nothing becomes inert.
+4. **The fake-boundary vertex — and why `exists_preBend` never meets it.** If an arc `δ` of `Γ` meets `α` at an interior point `x` (crossing, tangent, or
+   ending there), constant sides force `δ` to have one colour on both sides near `x` (a crossing needs `c = c'`; a tangency from inside needs `c` on both sides of
+   `δ`); near `x`, `cl T_in` is two cusps pinched at `x`, not `α° × [0, 1)`, and a homeomorphism fixing `Γ ∖ α°` cannot move `α°` off a crossing point
+   (`h(x) = x` by continuity along `δ`). **But such an `x` is a repeated-colour point** (`c` or `c'` has at least two sectors at `x`), and `α° ⊆ B̄(u, 2)` (`P ∈
+   B̄(u, 1)`), so `BaseHyp u` excludes it; likewise `c = c'` makes every point of `α°` a repeated-colour point. So under the base's hypotheses `hfree` follows
+   from `BaseHyp u` and local finiteness (arcs not through `x` keep a positive distance), and `c ≠ c'`. In a general map, splitting `α` at the finitely many
+   such vertices (each piece is constant-sided with a free interior, but not maximal — R2 then needs the piece's ends, interior points of `α`, handled: the
+   remaining piece of `α` stays a ring arc because sides are read only at interior points) or pinching the lens at them would be needed; `exists_preBend`
+   does not need either.
+5. **The `Covers u 2` edge**: `α ⊆ B̄(u, 2)` may touch `∂B̄(u, 2)` (when `|P − u| = 1`); the domain is open and contains `B̄(u, 2)`, so `thickening ε α ⊆ F.dom`
+   for small `ε`, and the collar lives in the domain; bad points outside `B̄(u, 2)` are fixed by `h` (they lie in `Γ ∖ α°`), so `BaseHyp u` is kept.
+6. **Full circles** (`hlen`): a whole inert circle `ω(P) ⊆ Γ` has no ends; it needs its own case (an annular lens bounded by a concentric circle of radius
+   `1 − δ`, a radial push with no end conditions).
+
+### 41.3 `exists_preBend` over the child — the route (not formalized this job)
+
+Strong induction on **`N(F)` = the number of maximal constant-sided unit arcs (any sides) centred in `B̄(u, 1)`** — a finiteness child to state: finitely many
+arcs of `F.arcs` meet `B̄(u, 2)` (local finiteness on a compact set), each positive-length unit arc of `Γ` lies on one of their circles, and the
+constant-sided maximal sub-arcs on each are finitely many (their ends are among finitely many break points); with it, every ring arc lies in a maximal one.
+Step: if no inert arc is centred in `B̄(u, 1)`, stop (`M = F`). Else extend one to its maximal ring arc `α` (same sides, same centre, so inert), check
+`hlen` (else the full-circle case), `hmax`, `hfree` (§ 41.2 item 4 from `BaseHyp u`), choose `ε` with `thickening ε α ⊆ F.dom` and `u ∉ thickening` unless
+`u ∈ {A, B}` (in either case `h u = u`: `u ∈ Γ ∖ α°`, since `u` has three colours and points of `α°` two), and bend. Invariants: `Valid`, `Covers u 2`
+(same domain), `IsCubicTrichromatic u` (colours and degree at `h u = u`), `BaseHyp u` (bad points of `M` are `h`-images of bad points of `F`, which are in
+`Γ ∖ α°`, so fixed), `UnenclosedC u` (homeomorphism invariance, § 41.1). **The count drops**: a maximal ring arc `β` of `M` is a ring arc of `F` (R1), inside a
+maximal `γ` of `F`; `γ ≠ α` (R3 and `β` of positive length); `γ°` misses `α°` (same centre: overlapping maximal arcs with the same sides merge; other sides
+cannot overlap; another centre: `hfree`); so `γ` is a ring arc of `M` (R2) and `β = γ` by maximality in `M` — an injection into `F`'s maximal arcs minus `α`.
+At the end no inert arc is centred in `B̄(u, 1)`: `NoInertNear u`. Children to state with it: the finiteness child, `hfree_of_baseHyp`, the full-circle bend.
+
+### 41.4 `bv_l3`: its placement blocks the route as written
+
+`bv_l3` is in `Plane/ValidMap/HexRing`, which imports neither `Plane/RingBand` (`ringCircleColouring`, the band lemmas `hbig_of_noSwap`, `m0_const`, `D0_mod_ne`,
+`exists_T0_left/right`) nor `Plane/ValidMap/BaseWalk` (`exists_linkage`, `link_path`, `link_val_left/right`, `l3_base`'s argument); `HexRing` is upstream of
+`BaseWalk` (`BaseWalk → Dense → HexRing`), so I5m's route (Stage 37) cannot be written in `HexRing`. **Nothing consumes `bv_l3`** (`git grep`: docstrings only).
+Proposal for a ruling: move `bv_l3`, statement verbatim, to the end of `BaseWalk` (after `l3_base`) or to `BaseDense`; I5m's linkage children stay in `HexRing`
+(`BaseWalk` sees them). A move-aware statement check is needed (the lane's `fs131_i5_stmt_check.py` matches by name within each file; I5e's
+`fs131_i5_cor3_move.py` is the model). And a shorter route than copying `l3_base` (about 350 lines): extract its band-and-linkage argument into one lemma over the
+two inputs that differ — `hgen` (generic pairs not `0 mod 3`) and `hdbl` (a double switch makes `χ` turn) — so `l3_base` and `bv_l3` are each a short proof
+over it.
+
+**Two of `bv_l3`'s new steps, compiled** (`data/fs131/i5o/RingScratch.lean`, importing `RingBand` and `HexRing`; elaborates with no `sorry`; ready for
+`bv_l3`'s new home): `not_onRingArc_of_finite` (step 1: a ring meeting `Γ` finitely carries no arc of `Γ` — from `RingProper`'s first clause);
+`ringCircle_val_germ` (the bridge: a one-sided value of `ringCircleColouring` is a germ of the map in one absent colour's class, sent to that value by `g`);
+`ringCircle_noSwap` (step 3: a proper ring has no swap point — a swap gives two change points at distance `1` with one pair, against `RingProper`'s second
+clause; the two values differ because the clockwise germs are `1` apart). Left for `bv_l3`: step 2 (`hgen` through one `g` on both rings), step 5 (`hdbl`
+by the velocity reading, I5m's children), and the band-and-linkage argument (steps 4 and 6).
+
+## Stage 41 — SAVED
