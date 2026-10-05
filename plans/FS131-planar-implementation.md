@@ -99,3 +99,73 @@ does the work), but applying it to the crossing needs `A ∪ B` to separate two 
 to weigh at step 5: (a) no-retraction (`D̄ → ∂D` with degree one cannot exist, provable with the same lifting theorem on `ℂ`) plus a
 Poincaré–Miranda-type construction from disjoint `K`, `K'`; (b) the boundary graph BG (step 4) making both continua unions of arc pieces, where
 the crossing becomes a finite planar-graph fact. Recorded here so step 5 starts from it.
+
+## Stage 3 — SAVED: `MapTopology` § A, and two of the seven planar leaves closed (`cvb_hole_disconnected`, `cvb_pinch_connected`)
+
+### 3.1 The stage-2/3 build
+
+`1779e981` under the slot (40 GiB, 8 cpus, `BATCH=4`, queued about 15 minutes behind two builds): **OK — 446 of 446 batches, 6 modules
+rebuilt (`PlaneTopology` 2.2 s, `MapTopology` 1.6 s, `BaseWalk` 1.9 s, `MapGraph` 9.4 s, `BaseDense` 1.5 s, `Proofs`), 11 modules with
+warnings, every warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T002316Z-3863003.log`; driver log
+`data/fs131/ip/build-stage3.log`).
+
+### 3.2 Proved
+
+- **`MapTopology` § A, all six leaves**: `IsTile.subset_compl_closure` (open and disjoint, `Disjoint.closure_right`),
+  `IsTile.subset_or_subset_of_separated` (`isPreconnected_closed_iff` on the two closures), `exists_tile_inter_of_isOpen`
+  (`dense_interiorPts`), `exists_tile_mem_closure_of_mem_closure` and `mem_of_touch_closed` (both over the new shared child
+  **`exists_mem_closure_of_mem_closure_biUnion`**: a closure point in the domain of the union of the closures of any family of tiles is a
+  closure point of one of them — `finite_tiles_near`, the only place local finiteness enters), `finite_tiles_closure_inter`
+  (`IsCompact.elim_nhds_subcover`).
+- **`cvb_hole_disconnected`** (row FS114-CVB-PINCH's hole clause): KP's four joints, then the boundary dart of a walk
+  (`SimpleGraph.Walk.exists_boundary_dart`, confirmed at the pin). The skeleton's comment shape is kept; ≈ 75 lines.
+- **`cvb_pinch_connected`** (the pinch clause): KP's plan through the separation. `P` = tiles reachable from a far tile `A` in `M − T`;
+  `Y` = the union of the components of `(cl T)ᶜ` holding a tile of `P` (open, saturated), `Hc` = the rest; every tile in such a component is
+  in `P` (`mem_of_touch_closed` on the component); a common closure point of `Hc` and `Y` gives touching tiles on both sides, so `Hc` and `Y`
+  are separated; `Y` holds the complement of a large disc, so `Hc` is bounded — a hole unless empty. Local finiteness is read only through
+  `exists_mem_closure_of_mem_closure_biUnion` at one point (KP's claim, confirmed). ≈ 150 lines. KP's two in-proof `have`s (`hbd`, `hne`) are
+  absorbed into the restructured proof (in-proof joints, no statement).
+
+## Stage 4 — SAVED: §§ B–D pieces, `exists_unenclosed_or_bad`'s joints
+
+### 4.1 The stage-4 build
+
+`f587bfea`: **OK — 446 of 446 batches, 5 modules rebuilt (`MapTopology` 3.6 s, `BaseWalk`, `MapGraph` 9.7 s, `BaseDense`, `Proofs`), 11 modules
+with warnings, every warning `declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T003356Z-3939265.log`; `data/fs131/ip/build-stage4.log`).
+
+### 4.2 Proved
+
+- **`exists_rim_vertex`** (E4-OUTERMOST step 3, KP's narrower hypotheses): the rim `Φ = frontier (outerDom T)` is preconnected (the frontier
+  lemma), compact, in `cl T` and nonempty; the tiles of the outer domain touching it are finitely many and cover it; one alone would enclose `T`
+  (the last exit, against `hno`), so two meet on `Φ` (`exists_inter_of_finite_closed_cover`). ≈ 75 lines. New shared children in § B:
+  **`isOpen_outerDom`**, **`outerDom_eq_connectedComponentIn`** (for a set whose closure lies in `B̄(0, R)`, the outer domain is the component
+  through any point outside it), `IsTile.closure_subset_closedBall_zero`, `exists_not_mem_closedBall_zero`.
+- **`tileOf_subset_ball`** (Lemma H(a), any `k`): `endpoint_dist_ge`'s connectedness argument, then openness makes `≤ 1` strict.
+- **`GermPseudo.eq_of_cw`**: two germs of positive length share a point.
+- **`ringArc_cases`**: shift the second arc by `2πn`, `n = ⌊(s − s' + π)/2π⌋`, to start within `π` of `s`; the eight order cases; disjoint
+  real intervals give disjoint arcs because two angles of the two arcs differ by less than `2π` (`e_eq_e_iff`). New child
+  `ringArc_add_two_pi_mul`.
+- **`exists_unenclosed_or_bad`'s three joints** (`BaseDense`): the rim misses the open outer domain (`IsOpen.inter_frontier_eq`); `T` misses
+  its outer domain, so `T ≠ X`, `T ≠ Y`. The leaf itself still rests on `exists_outermost`, `isCubicTrichromatic_of_three_tiles` and
+  `unenclosed_of_rim_vertex`.
+
+### 4.3 The axiom check (iteration, against the stage-4 oleans)
+
+`data/fs131/ip/AxiomsIP.lean` (output `data/fs131/ip/axioms-stage4.txt`, `pp.fullNames`): all 29 declarations proved by this job on exactly
+`[propext, Classical.choice, Quot.sound]`; the two partners that must show `sorryAx` do (`exists_unenclosed_or_bad`, whose `exists_outermost`
+is open, and `inter_nonempty_of_interleaved`) — the check sees a `sorry` when there is one. `scripts/Axioms.lean`'s FS131-KP block gains the
+ten new children (a comment line "FS131-IP1's added children" heads them).
+
+### 4.4 The leaves left (named)
+
+| file | leaf | state |
+|---|---|---|
+| `PlaneTopology` | `inter_nonempty_of_interleaved` (the crossing lemma) | route open (§ 2.3) |
+| `MapTopology` § B | `exists_outermost` | owes `not_encloses_of_hull_eq` (sector charts at non-vertex points of the common outer frontier) and the finite-chain argument |
+| `MapTopology` § B | `isCubicTrichromatic_of_three_tiles`, `unenclosed_of_rim_vertex` | both need one shared child: a tile whose closure holds `v` contains a sector of `v`'s chart at every small radius, distinct tiles distinct sectors (`IsSectorChart.cover`, `.disjoint`, `.isSector_iff`) — then two tiles of one colour give `HasRepeatedColour`, and a cubic vertex has exactly its three tiles |
+| `MapTopology` § C | `exists_eleventh_of` | E4-RIM's five steps; all its topology is now proved (§§ A–B children, the last exit) |
+| `MapTopology` § D | `exists_far_end` | BG + PATH (the finite boundary graph) |
+| `MapGraph` | `not_isHoleOf_chain`, `isHoleOf_cluster` | concrete geometry (adversaries) |
+| `MapGraph` | `filledGraph_locallyFinite`, `_connected`, `_infinite`, `_oneInf` | F-LOC/CONN/INF/ONE, over § A–B |
+| `MapGraph` | `filledGraph_rings` (F-RING), `reduced_props_of_planarLike` (T-GRAPH), `triLattice_planarLike` (owed inhabitant) | not started |
+| `BaseWalk` | `retArcs_not_interleaved`, `retArcs_not_abut`, `endpoint_of_far_end` | over the crossing lemma, PATH, and the CD/CE reading |

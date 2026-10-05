@@ -3053,6 +3053,17 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.retArcs_not_abut
 #print axioms HadwigerNelson.Plane.ArcMap.BaseCtx.endpoint_of_far_end
 #print axioms HadwigerNelson.Thomassen.reduced_props_of_planarLike
+-- FS131-IP1's added children
+#print axioms HadwigerNelson.Plane.eq_of_intValued_of_isPreconnected
+#print axioms HadwigerNelson.Plane.inter_frontier_nonempty_of_isPreconnected
+#print axioms HadwigerNelson.Plane.frontier_connectedComponentIn_subset
+#print axioms HadwigerNelson.Plane.compl_closedBall_subset_connectedComponentIn
+#print axioms HadwigerNelson.Plane.ringArc_add_two_pi_mul
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_closure_of_mem_closure_biUnion
+#print axioms HadwigerNelson.Plane.ArcMap.isOpen_outerDom
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.closure_subset_closedBall_zero
+#print axioms HadwigerNelson.Plane.ArcMap.exists_not_mem_closedBall_zero
+#print axioms HadwigerNelson.Plane.ArcMap.outerDom_eq_connectedComponentIn
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 
