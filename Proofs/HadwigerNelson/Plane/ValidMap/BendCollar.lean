@@ -27,6 +27,90 @@ section Collar
 
 variable {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} {ε R' R R'' : ℝ}
 
+/-- **A polar band over a closed angle interval is compact**: `{P + t e(θ) : θ ∈ [θa, θb], f θ ≤ t ≤ g θ}` with `f ≤ g` continuous is the
+image of `[θa, θb] × [0, 1]` under `(θ, s) ↦ P + (f θ + s (g θ − f θ)) e(θ)`. -/
+theorem isCompact_polarSet_Icc (P : ℂ) {θa θb : ℝ} {f g : ℝ → ℝ} (hf : Continuous f) (hg : Continuous g)
+    (hfg : ∀ θ ∈ Icc θa θb, f θ ≤ g θ) : IsCompact (polarSet P (Icc θa θb) fun θ => Icc (f θ) (g θ)) := by
+  have hK : IsCompact (Icc θa θb ×ˢ Icc (0 : ℝ) 1) := isCompact_Icc.prod isCompact_Icc
+  have hr : Continuous fun p : ℝ × ℝ => f p.1 + p.2 * (g p.1 - f p.1) :=
+    (hf.comp continuous_fst).add (continuous_snd.mul ((hg.comp continuous_fst).sub (hf.comp continuous_fst)))
+  have hcont : Continuous fun p : ℝ × ℝ => P + ((f p.1 + p.2 * (g p.1 - f p.1) : ℝ) : ℂ) * e p.1 :=
+    continuous_const.add ((Complex.continuous_ofReal.comp hr).mul (continuous_e.comp continuous_fst))
+  convert hK.image hcont using 1
+  ext z
+  constructor
+  · rintro ⟨θ, hθ, t, ht, rfl⟩
+    rcases eq_or_lt_of_le (hfg θ hθ) with heq | hlt
+    · refine ⟨(θ, 0), ⟨hθ, ⟨le_rfl, zero_le_one⟩⟩, ?_⟩
+      have : t = f θ := le_antisymm (heq ▸ ht.2) ht.1
+      simp [this]
+    · refine ⟨(θ, (t - f θ) / (g θ - f θ)), ⟨hθ, ⟨div_nonneg (by linarith [ht.1]) (by linarith), ?_⟩⟩, ?_⟩
+      · rw [div_le_one (by linarith)]; linarith [ht.2]
+      · have hne : g θ - f θ ≠ 0 := by linarith
+        show P + ((f θ + (t - f θ) / (g θ - f θ) * (g θ - f θ) : ℝ) : ℂ) * e θ = P + (t : ℂ) * e θ
+        rw [div_mul_cancel₀ _ hne, add_sub_cancel]
+  · rintro ⟨⟨θ, s⟩, ⟨hθ, hs⟩, rfl⟩
+    refine ⟨θ, hθ, f θ + s * (g θ - f θ), ⟨?_, ?_⟩, rfl⟩
+    · nlinarith [hfg θ hθ, hs.1]
+    · nlinarith [hfg θ hθ, hs.2]
+
+/-- At an end of an arc of at most `60°`, the ring point is off the open arc. -/
+theorem ringPt_not_mem_openArc_of_end {P : ℂ} {θ₁ θ₂ θ : ℝ} (hℓ : θ₂ - θ₁ ≤ π / 3) (hθ : θ ∈ Icc θ₁ θ₂)
+    (hθ' : θ ∉ Ioo θ₁ θ₂) : ringPt P θ ∉ ringPt P '' Ioo θ₁ θ₂ := by
+  have hπ := Real.pi_pos
+  rw [ringPt_mem_openArc_iff]
+  rintro ⟨n, hn⟩
+  have h1 : (n : ℝ) * (2 * π) < π / 3 := by linarith [hn.1, hθ.2]
+  have h2 : -(π / 3) < (n : ℝ) * (2 * π) := by linarith [hn.2, hθ.1]
+  have hn0 : n = 0 := by
+    have : (n : ℝ) < 1 := by nlinarith
+    have : (-1 : ℝ) < n := by nlinarith
+    have h3 : n < 1 := by exact_mod_cast ‹(n : ℝ) < 1›
+    have h4 : -1 < n := by exact_mod_cast ‹(-1 : ℝ) < n›
+    omega
+  subst hn0
+  simp only [Int.cast_zero, zero_mul, sub_zero] at hn
+  exact hθ' hn
+
+/-- The collar's profiles are at most `1`. -/
+theorem CollarFit.lensProf_le_one (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') (θ : ℝ) : lensProf θ₁ θ₂ R θ ≤ 1 := by
+  by_cases hθ : θ ∈ Ioo θ₁ θ₂
+  · exact (hfit.pushProfiles.inside θ hθ).2.2.1.le
+  · exact (hfit.pushProfiles.off θ hθ).2.1.le
+
+/-- **The closed lens is compact**: `{P + t e(θ) : θ ∈ [θ₁, θ₂], lensProf θ ≤ t ≤ 1}`. -/
+theorem CollarFit.isClosed_closedLens (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') :
+    IsClosed (polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1) :=
+  (isCompact_polarSet_Icc P hfit.pushProfiles.cont_l continuous_const fun θ _ => hfit.lensProf_le_one θ).isClosed
+
+/-- The lens with its boundary lies in the closed lens. -/
+theorem CollarFit.lens_subset_closedLens (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') :
+    lensSet P θ₁ θ₂ R ∪ lensCurve P θ₁ θ₂ R ⊆ polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1 := by
+  rintro z (⟨θ, hθ, t, ht, rfl⟩ | ⟨θ, hθ, t, ht, rfl⟩)
+  · exact ⟨θ, Ioo_subset_Icc_self hθ, t, ⟨ht.1.le, ht.2⟩, rfl⟩
+  · rw [mem_singleton_iff] at ht
+    exact ⟨θ, hθ, t, ⟨ht.ge, ht ▸ hfit.lensProf_le_one θ⟩, rfl⟩
+
+/-- **Closures are local**: where two maps have the same interior points and colours on an open set about `x`, the closures at `x` of
+their classes (met with any set `S`) agree. -/
+theorem mem_closure_region_inter_iff_of_agree {F' : ArcMap k} {x : ℂ} {O : Set ℂ} (hO : IsOpen O) (hx : x ∈ O)
+    (hI : ∀ z ∈ O, z ∈ F'.interiorPts ↔ z ∈ F.interiorPts) (hc : ∀ z ∈ O, F'.col z = F.col z) (d : Fin k) (S : Set ℂ) :
+    x ∈ closure (F'.region d ∩ S) ↔ x ∈ closure (F.region d ∩ S) := by
+  have heq : O ∩ (F'.region d ∩ S) = O ∩ (F.region d ∩ S) := by
+    ext z
+    constructor
+    · rintro ⟨hzO, ⟨hzI, hzc⟩, hzS⟩
+      refine ⟨hzO, ⟨(hI z hzO).mp hzI, ?_⟩, hzS⟩
+      show F.col z = d
+      rw [← hc z hzO]; exact hzc
+    · rintro ⟨hzO, ⟨hzI, hzc⟩, hzS⟩
+      refine ⟨hzO, ⟨(hI z hzO).mpr hzI, ?_⟩, hzS⟩
+      show F'.col z = d
+      rw [hc z hzO]; exact hzc
+  have key : ∀ A : Set ℂ, x ∈ closure A ↔ x ∈ closure (O ∩ A) := fun A =>
+    ⟨fun h => hO.inter_closure ⟨hx, h⟩, fun h => closure_mono inter_subset_right h⟩
+  rw [key, heq, ← key]
+
 /-- **The collar exists** (the F-dependent choice; plan § 4, child C1). Route: `R` close to `1` puts the lens under `bend_toward`'s
 profile (`one_sub_lensProf_le` against `n2_env_toward`, `n2_env_near` with `r` from `hout`), so `toward_clear` gives `clear`; `R'`, `R''`
 close to `1` make the collar thin (`one_sub_tangRad_le`, `tangRad_sub_one_le`): within `ε`, inside the domain (a compact arc in an open
@@ -86,22 +170,99 @@ theorem CollarFit.map_degree_end (hF : F.Valid) (hfit : CollarFit F P θ₁ θ�
     (∀ n, hfit.map.HasDegree v n ↔ F.HasDegree v n) ∧ (hfit.map.HasRepeatedColour v ↔ F.HasRepeatedColour v) := by
   sorry
 
+/-- **The collar is closed** (`isCompact_polarSet_Icc`: its profiles are continuous and ordered). -/
+theorem CollarFit.isClosed_collarK (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') : IsClosed (collarK P θ₁ θ₂ R' R'') := by
+  have hp := hfit.pushProfiles
+  refine (isCompact_polarSet_Icc P hp.cont_a hp.cont_b fun θ _ => ?_).isClosed
+  by_cases hθ : θ ∈ Ioo θ₁ θ₂
+  · obtain ⟨-, h1, h2, h3⟩ := hp.inside θ hθ
+    linarith
+  · rw [(hp.off θ hθ).1, (hp.off θ hθ).2.2]
+
+/-- **Degrees and repeated colours are carried** (clauses 6 and 7 together), by the place of `z`: an interior point of `F` goes to one of
+the bent map (degree `1`, no repeated colour on either side); off the closed collar the homeomorphism is the identity on a ball, where
+the maps agree (`hasDegree_iff_of_agree`); on the collar and on `Γ` the point is on `α` (`free`) — on `α°` both sides are two-letter
+words `c`, `c'` (`degree_openArc`, `map_degree_lensCurve` at `h z`, `homeo_ringPt`), at an end `h` fixes it (`map_degree_end`). -/
+theorem CollarFit.map_degree_and_repeated (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') (z : ℂ) :
+    (∀ n, hfit.map.HasDegree (hfit.homeo z) n ↔ F.HasDegree z n) ∧
+      (hfit.map.HasRepeatedColour (hfit.homeo z) ↔ F.HasRepeatedColour z) := by
+  -- no repeated colour at an interior point (its chart has no germ)
+  have hnorep : ∀ {G : ArcMap k} {v : ℂ}, v ∈ G.interiorPts → ¬ G.HasRepeatedColour v := by
+    intro G v hv
+    obtain ⟨r₀, m, Gm, hC⟩ := localSectors G hv.1
+    have hm : m = 0 := by
+      by_contra hm
+      exact hv.2 (hC.mem_Γ.mpr (Nat.pos_of_ne_zero hm)).2
+    exact hC.not_hasRepeatedColour_of_zero hm
+  by_cases hzI : z ∈ F.interiorPts
+  · have hzM : hfit.homeo z ∈ hfit.map.interiorPts := (pushforward_mem_interiorPts_iff z).mpr hzI
+    exact ⟨fun n => (hasDegree_iff_of_mem_interiorPts hzM n).trans (hasDegree_iff_of_mem_interiorPts hzI n).symm,
+      iff_of_false (hnorep hzM) (hnorep hzI)⟩
+  by_cases hzK : z ∈ collarK P θ₁ θ₂ R' R''
+  · -- on `α`
+    have hzΓ : z ∈ F.Γ := ⟨hfit.sub_dom hzK, by_contra fun h => hzI ⟨hfit.sub_dom hzK, h⟩⟩
+    obtain ⟨θ, hθ, rfl⟩ := hfit.free ⟨hzΓ, hzK⟩
+    by_cases hθ' : θ ∈ Ioo θ₁ θ₂
+    · rw [hfit.homeo_ringPt hθ']
+      have hFd := hfit.degree_openArc hθ'
+      have hMd := hfit.map_degree_lensCurve hθ'
+      exact ⟨fun n => (hMd.1 n).trans (hFd.1 n).symm, hMd.2.trans hFd.2.symm⟩
+    · have hfix := hfit.homeo_fix_Γ hzΓ (ringPt_not_mem_openArc_of_end hfit.short hθ hθ')
+      rw [hfix]
+      refine hfit.map_degree_end hF ?_
+      rcases eq_or_lt_of_le hθ.1 with h1 | h1
+      · exact Or.inl (by rw [h1])
+      · exact Or.inr (by rw [le_antisymm hθ.2 (not_lt.mp fun h2 => hθ' ⟨h1, h2⟩)])
+  · -- off the closed collar the homeomorphism is the identity on a ball
+    obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp hfit.isClosed_collarK.isOpen_compl z hzK
+    have hid : ∀ x ∈ ball z r, hfit.homeo.symm x = x := fun x hx => (hfit.homeo_eq_self (hball hx)).2
+    rw [(hfit.homeo_eq_self hzK).1]
+    refine hasDegree_iff_of_agree hr (fun x hx => ?_) (fun x hx _ => ?_)
+    · have := (pushforward_mem_interiorPts_iff (hfit.homeo.symm x) :
+        hfit.homeo (hfit.homeo.symm x) ∈ hfit.map.interiorPts ↔ hfit.homeo.symm x ∈ F.interiorPts)
+      rwa [hfit.homeo.apply_symm_apply, hid x hx] at this
+    · show F.col (hfit.homeo.symm x) = F.col x
+      rw [hid x hx]
+
 /-- **Degrees are carried** (clause 6). Route, by the place of `z`: off the collar the maps agree near `z` (`homeo_eq_self` on a ball,
 `hasDegree_iff_of_agree`); at interior points of the collar both are interior (`hasDegree_iff_of_mem_interiorPts`); on the open arc
 `degree_openArc` and `map_degree_lensCurve` at `h z` (`homeo_ringPt`); at the ends `map_degree_end` (`h` fixes them). -/
 theorem CollarFit.map_hasDegree (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') (z : ℂ) (n : ℕ) :
     hfit.map.HasDegree (hfit.homeo z) n ↔ F.HasDegree z n := by
-  sorry
+  exact (hfit.map_degree_and_repeated hF z).1 n
 
 /-- **Repeated colours are carried** (clause 7; the same cases, with `not_hasRepeatedColour_of_mem_interiorPts` at interior points). -/
 theorem CollarFit.map_hasRepeatedColour (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') (z : ℂ) :
     hfit.map.HasRepeatedColour (hfit.homeo z) ↔ F.HasRepeatedColour z := by
-  sorry
+  exact (hfit.map_degree_and_repeated hF z).2
 
 /-- **No unit arc is created**: the bent map's `Γ` lies in `F`'s and the lens boundary's two arcs, of radius `R ≠ 1`
 (`ringArcsWithin_of_Γ_subset`, `germArc_isUnitArc_iff`). -/
 theorem CollarFit.map_ringArcsWithin (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') : hfit.map.RingArcsWithin F := by
-  sorry
+  obtain ⟨hR', hR'R, hR1, -⟩ := hfit.params
+  have hR : 0 < R := by linarith
+  have hR1' : 1 / R ≠ 1 := fun h => by rw [div_eq_one_iff_eq hR.ne'] at h; linarith
+  refine ringArcsWithin_of_Γ_subset (A' := {collarArcA P θ₁ θ₂ R, collarArcB P θ₁ θ₂ R}) rfl
+    (fun a ha => hfit.collarArcs_nondegenerate a (Or.inr ha))
+    (fun x _ => ⟨univ, univ_mem, (Set.toFinite ({collarArcA P θ₁ θ₂ R, collarArcB P θ₁ θ₂ R} : Set Arc)).subset
+      fun a ha => ha.1⟩) ?_ ?_
+  · intro a ha
+    rcases ha with rfl | rfl
+    · unfold collarArcA
+      rw [germArc_isUnitArc_iff, abs_of_pos (by positivity)]
+      exact hR1'
+    · unfold collarArcB
+      rw [germArc_isUnitArc_iff, abs_neg, abs_of_pos (by positivity)]
+      exact hR1'
+  · intro z hz
+    rw [hfit.map_Γ] at hz
+    rcases hz with ⟨hzΓ, -⟩ | hzL
+    · exact Or.inl hzΓ
+    · right
+      rw [← collarArcs_carrier (by linarith) hR1 hfit.ring.1 hfit.short] at hzL
+      rcases hzL with h | h
+      · exact mem_iUnion₂.mpr ⟨_, Or.inl rfl, h⟩
+      · exact mem_iUnion₂.mpr ⟨_, Or.inr rfl, h⟩
 
 /-- **The sides of a unit circle through an end are kept**: near `A` the two maps differ only on the collar's horn (with `α`), which misses
 `ω(Q)` for `Q ≠ P` (its germs at `A` are `α`'s direction with curvature near `1`; `ω(Q)`'s there have another direction or curvature
@@ -111,42 +272,323 @@ theorem CollarFit.sides_end (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c
     hfit.map.innerColours Q x = F.innerColours Q x ∧ hfit.map.outerColours Q x = F.outerColours Q x := by
   sorry
 
+/-- **The sides at a point of `F.Γ` off the open arc are kept** (the common step of R1 and R2): off the closed lens the two maps agree
+near the point (`map_agreesOff`, closures being local); on it, such a point is an end of `α` (the open collar is interior in `F`), where
+`sides_end` applies for a centre other than `P`. -/
+theorem CollarFit.sides_eq (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q x : ℂ} (hxΓ : x ∈ F.Γ)
+    (hxO : x ∉ ringPt P '' Ioo θ₁ θ₂) (hQ : (x = ringPt P θ₁ ∨ x = ringPt P θ₂) → Q ≠ P) :
+    hfit.map.innerColours Q x = F.innerColours Q x ∧ hfit.map.outerColours Q x = F.outerColours Q x := by
+  have hp := hfit.pushProfiles
+  by_cases hxV : x ∈ polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1
+  · obtain ⟨ψ, hψ, t, ht, hxe⟩ := hxV
+    by_cases hψ' : ψ ∈ Ioo θ₁ θ₂
+    · exfalso
+      rcases eq_or_lt_of_le ht.2 with ht1 | ht1
+      · subst ht1
+        exact hxO ⟨ψ, hψ', by rw [hxe]; simp [ringPt]⟩
+      · exact (hfit.kin_subset ⟨ψ, hψ', t, ⟨(hp.inside ψ hψ').2.1.le.trans ht.1, ht1⟩, hxe⟩).1.2 hxΓ.2
+    · have ht1 : t = 1 := le_antisymm ht.2 ((hp.off ψ hψ').2.1 ▸ ht.1)
+      have hxe' : x = ringPt P ψ := by rw [hxe, ht1]; simp [ringPt]
+      have hend : x = ringPt P θ₁ ∨ x = ringPt P θ₂ := by
+        rcases eq_or_lt_of_le hψ.1 with h1 | h1
+        · exact Or.inl (hxe'.trans (by rw [h1]))
+        · exact Or.inr (hxe'.trans (by rw [le_antisymm hψ.2 (not_lt.mp fun h2 => hψ' ⟨h1, h2⟩)]))
+      exact hfit.sides_end hF (hQ hend) hend
+  · have hO : IsOpen (polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1)ᶜ := hfit.isClosed_closedLens.isOpen_compl
+    have hag : ∀ z ∈ (polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1)ᶜ,
+        (z ∈ hfit.map.interiorPts ↔ z ∈ F.interiorPts) ∧ hfit.map.col z = F.col z :=
+      fun z hz => ⟨(hfit.map_agreesOff.2 z fun hzU => hz (hfit.lens_subset_closedLens hzU)).1.symm,
+        (hfit.map_agreesOff.2 z fun hzU => hz (hfit.lens_subset_closedLens hzU)).2.symm⟩
+    have hloc := fun j S => mem_closure_region_inter_iff_of_agree hO hxV (fun z hz => (hag z hz).1)
+      (fun z hz => (hag z hz).2) j S
+    refine ⟨Set.ext fun j => hloc j (ball Q 1), Set.ext fun j => ?_⟩
+    show x ∈ closure (hfit.map.region j \ closedBall Q 1) ↔ x ∈ closure (F.region j \ closedBall Q 1)
+    rw [sdiff_eq, sdiff_eq]
+    exact hloc j (closedBall Q 1)ᶜ
+
 /-- **R1** (clause 8). Route: the arc lies in `F`'s `Γ` (`map_ringArcsWithin`); its interior points are off `α°` (`α° ∩ M.Γ = ∅`) and off
 `β°` (`β° ⊆ F`'s interior points), so off the collar — where the maps agree near the point — or at an end (`sides_end`; `Q ≠ P`, since a
 ring arc of `ω(P)` in the bent map misses `α°` and lies in `F`'s). -/
 theorem CollarFit.map_R1 (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
     (h : hfit.map.IsRingArc Q a b d d') : F.IsRingArc Q a b d d' := by
-  sorry
+  obtain ⟨hab, hsub, hsides⟩ := h
+  obtain ⟨hR', hR'R, hR1, -⟩ := hfit.params
+  have hR : 0 < R := by linarith
+  have hp := hfit.pushProfiles
+  -- the closed arc lies in `F.Γ`: it meets the two collar arcs (radius `R ≠ 1`) finitely, and off them `M.Γ ⊆ F.Γ`
+  have hfinA : ∀ a' ∈ ({collarArcA P θ₁ θ₂ R, collarArcB P θ₁ θ₂ R} : Set Arc), (a'.carrier ∩ sphere Q 1).Finite := by
+    intro a' ha'
+    rcases a'.finite_inter_sphere_or_eq_circ (hfit.collarArcs_nondegenerate a' (Or.inr ha')) Q with h | ⟨θa, θb, he⟩
+    · exact h
+    · exfalso
+      have hu : a'.IsUnitArc := by rw [he]; rfl
+      rcases ha' with rfl | rfl
+      · unfold collarArcA at hu
+        rw [germArc_isUnitArc_iff, abs_of_pos (by positivity), div_eq_one_iff_eq hR.ne'] at hu
+        linarith
+      · unfold collarArcB at hu
+        rw [germArc_isUnitArc_iff, abs_neg, abs_of_pos (by positivity), div_eq_one_iff_eq hR.ne'] at hu
+        linarith
+  have hC : (((collarArcA P θ₁ θ₂ R).carrier ∪ (collarArcB P θ₁ θ₂ R).carrier) ∩ sphere Q 1).Finite := by
+    rw [union_inter_distrib_right]
+    exact (hfinA _ (Or.inl rfl)).union (hfinA _ (Or.inr rfl))
+  have hΓF : ringArc Q a b ⊆ F.Γ := by
+    refine F.ringArc_subset_Γ_of_finite hab (fun y hy => (hsub hy).1) hC ?_
+    rintro y ⟨hy, hyC⟩
+    have hyM := hsub hy
+    rw [hfit.map_Γ] at hyM
+    rcases hyM with ⟨hyΓ, -⟩ | hyL
+    · exact hyΓ
+    · refine absurd ⟨?_, ?_⟩ hyC
+      · rw [collarArcs_carrier (by linarith) hR1 hfit.ring.1 hfit.short]; exact hyL
+      · obtain ⟨θ, -, rfl⟩ := hy; exact ringPt_mem_sphere _ _
+  refine ⟨hab, hΓF, fun θ hθ => ?_⟩
+  have hxΓ : ringPt Q θ ∈ F.Γ := hΓF ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩
+  have hxM : ringPt Q θ ∈ hfit.map.Γ := hsub ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩
+  obtain ⟨hMin, hMout⟩ := hsides θ hθ
+  by_cases hxV : ringPt Q θ ∈ polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1
+  · -- on the closed lens and on `F.Γ`, a point of the bent map's `Γ` is an end of `α`
+    obtain ⟨ψ, hψ, t, ht, hxe⟩ := hxV
+    by_cases hψ' : ψ ∈ Ioo θ₁ θ₂
+    · exfalso
+      rcases eq_or_lt_of_le ht.2 with ht1 | ht1
+      · subst ht1
+        exact (hfit.map_lens ⟨ψ, hψ', 1, ⟨(hp.inside ψ hψ').2.2.1, le_rfl⟩, hxe⟩).1.2 hxM.2
+      · exact (hfit.kin_subset ⟨ψ, hψ', t, ⟨(hp.inside ψ hψ').2.1.le.trans ht.1, ht1⟩, hxe⟩).1.2 hxΓ.2
+    · have ht1 : t = 1 := le_antisymm ht.2 ((hp.off ψ hψ').2.1 ▸ ht.1)
+      have hxe' : ringPt Q θ = ringPt P ψ := by rw [hxe, ht1]; simp [ringPt]
+      have hψe : ψ = θ₁ ∨ ψ = θ₂ := by
+        rcases eq_or_lt_of_le hψ.1 with h1 | h1
+        · exact Or.inl h1.symm
+        · exact Or.inr (le_antisymm hψ.2 (not_lt.mp fun h2 => hψ' ⟨h1, h2⟩))
+      -- `Q ≠ P`: an arc of `ω(P)` in the bent map's `Γ` through an end would continue into the open arc, interior there
+      have hQ : Q ≠ P := by
+        rintro rfl
+        have he : e θ = e ψ := add_left_cancel hxe'
+        have h12 := hfit.ring.1
+        rcases hψe with rfl | rfl
+        · set s := min ((b - θ) / 2) ((θ₂ - ψ) / 2) with hs
+          have hs0 : 0 < s := lt_min (by linarith [hθ.2]) (by linarith)
+          have hs1 : s < b - θ := lt_of_le_of_lt (min_le_left _ _) (by linarith [hθ.2])
+          have hs2 : s < θ₂ - ψ := lt_of_le_of_lt (min_le_right _ _) (by linarith)
+          have hmem := hsub ⟨θ + s, ⟨by linarith [hθ.1], by linarith⟩, rfl⟩
+          have hpt : ringPt Q (θ + s) = ringPt Q (ψ + s) := by simp only [ringPt, e_add, he]
+          rw [hpt] at hmem
+          exact (hfit.map_lens ⟨ψ + s, ⟨by linarith, by linarith⟩, 1,
+            ⟨(hp.inside (ψ + s) ⟨by linarith, by linarith⟩).2.2.1, le_rfl⟩, by simp [ringPt]⟩).1.2 hmem.2
+        · set s := min ((θ - a) / 2) ((ψ - θ₁) / 2) with hs
+          have hs0 : 0 < s := lt_min (by linarith [hθ.1]) (by linarith)
+          have hs1 : s < θ - a := lt_of_le_of_lt (min_le_left _ _) (by linarith [hθ.1])
+          have hs2 : s < ψ - θ₁ := lt_of_le_of_lt (min_le_right _ _) (by linarith)
+          have hmem := hsub ⟨θ - s, ⟨by linarith, by linarith [hθ.2]⟩, rfl⟩
+          have hpt : ringPt Q (θ - s) = ringPt Q (ψ - s) := by
+            simp only [ringPt, sub_eq_add_neg, e_add, he]
+          rw [hpt] at hmem
+          exact (hfit.map_lens ⟨ψ - s, ⟨by linarith, by linarith⟩, 1,
+            ⟨(hp.inside (ψ - s) ⟨by linarith, by linarith⟩).2.2.1, le_rfl⟩, by simp [ringPt]⟩).1.2 hmem.2
+      have hend : ringPt Q θ = ringPt P θ₁ ∨ ringPt Q θ = ringPt P θ₂ := by
+        rcases hψe with rfl | rfl
+        · exact Or.inl hxe'
+        · exact Or.inr hxe'
+      obtain ⟨hin, hout⟩ := hfit.sides_end hF hQ hend
+      exact ⟨hin ▸ hMin, hout ▸ hMout⟩
+  · -- off the closed lens the two maps agree near the point
+    have hO : IsOpen (polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1)ᶜ := hfit.isClosed_closedLens.isOpen_compl
+    have hag : ∀ z ∈ (polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1)ᶜ,
+        (z ∈ hfit.map.interiorPts ↔ z ∈ F.interiorPts) ∧ hfit.map.col z = F.col z :=
+      fun z hz => ⟨(hfit.map_agreesOff.2 z fun hzU => hz (hfit.lens_subset_closedLens hzU)).1.symm,
+        (hfit.map_agreesOff.2 z fun hzU => hz (hfit.lens_subset_closedLens hzU)).2.symm⟩
+    have hloc := fun j S => mem_closure_region_inter_iff_of_agree hO hxV (fun z hz => (hag z hz).1)
+      (fun z hz => (hag z hz).2) j S
+    refine ⟨?_, ?_⟩
+    · rw [← hMin]
+      ext j
+      exact (hloc j (ball Q 1)).symm
+    · rw [← hMout]
+      ext j
+      show ringPt Q θ ∈ closure (F.region j \ closedBall Q 1) ↔ ringPt Q θ ∈ closure (hfit.map.region j \ closedBall Q 1)
+      rw [sdiff_eq, sdiff_eq]
+      exact (hloc j (closedBall Q 1)ᶜ).symm
 
 /-- **R2** (clause 9). Route: the closed arc misses `α°` (its open part by hypothesis; an end on `α°` would put an arc of `ω(Q) ≠ ω(P)` in
 `Γ` near a point of `α°`, against `free_open`), so it lies in the bent map's `Γ` (`map_Γ`); sides as in `map_R1`. -/
 theorem CollarFit.map_R2 (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ} {d d' : Fin k}
     (h : F.IsRingArc Q a b d d') (hd : Disjoint (ringPt Q '' Ioo a b) (ringPt P '' Ioo θ₁ θ₂)) :
     hfit.map.IsRingArc Q a b d d' := by
-  sorry
+  obtain ⟨hab, hsub, hsides⟩ := h
+  have h12 := hfit.ring.1
+  -- no point of the closed arc lies on `α°`: near such a point `Γ` is `ω(P)` (`free_open`), whose points there are on `α°`, and the
+  -- open arc of `ω(Q)` reaches it
+  have hoff : ∀ θ ∈ Icc a b, ringPt Q θ ∉ ringPt P '' Ioo θ₁ θ₂ := by
+    intro θ hθ hmem
+    obtain ⟨ψ, hψ, hψe⟩ := hmem
+    obtain ⟨r₁, hr₁, hfr⟩ := hfit.free_open ψ hψ
+    obtain ⟨r₃, hr₃, hsph⟩ := exists_sphere_inter_ball_subset_openArc (p := P) hψ
+    have hr : 0 < min r₁ r₃ := lt_min hr₁ hr₃
+    obtain ⟨θ', hθ', hd'⟩ : ∃ θ' ∈ Ioo a b, dist (ringPt Q θ') (ringPt Q θ) < min r₁ r₃ := by
+      have hba : 0 < b - a := by linarith
+      set t := min 1 (min r₁ r₃ / (b - a)) with ht
+      have ht0 : 0 < t := lt_min one_pos (div_pos hr hba)
+      have ht1 : t ≤ 1 := min_le_left _ _
+      have htr : t * (b - a) ≤ min r₁ r₃ := by
+        have := min_le_right 1 (min r₁ r₃ / (b - a))
+        rw [le_div_iff₀ hba] at this
+        linarith
+      refine ⟨θ + t * ((a + b) / 2 - θ), ⟨?_, ?_⟩, ?_⟩
+      · nlinarith [mul_pos ht0 hba, mul_nonneg (sub_nonneg.mpr ht1) (sub_nonneg.mpr hθ.1)]
+      · nlinarith [mul_pos ht0 hba, mul_nonneg (sub_nonneg.mpr ht1) (sub_nonneg.mpr hθ.2)]
+      · refine lt_of_le_of_lt (dist_ringPt_ringPt_le Q _ _) ?_
+        rw [show θ + t * ((a + b) / 2 - θ) - θ = t * ((a + b) / 2 - θ) by ring, abs_mul, abs_of_pos ht0]
+        have : |(a + b) / 2 - θ| ≤ (b - a) / 2 := abs_le.mpr ⟨by linarith [hθ.2], by linarith [hθ.1]⟩
+        nlinarith
+    have hz : ringPt Q θ' ∈ F.Γ := hsub ⟨θ', Ioo_subset_Icc_self hθ', rfl⟩
+    rw [← hψe] at hd'
+    have h1 : ringPt Q θ' ∈ sphere P 1 := hfr ⟨hz, lt_of_lt_of_le hd' (min_le_left _ _)⟩
+    exact disjoint_left.mp hd ⟨θ', hθ', rfl⟩ (hsph ⟨h1, lt_of_lt_of_le hd' (min_le_right _ _)⟩)
+  refine ⟨hab, fun y ⟨θ, hθ, hy⟩ => ?_, fun θ hθ => ?_⟩
+  · rw [hfit.map_Γ, ← hy]
+    exact Or.inl ⟨hsub ⟨θ, hθ, rfl⟩, hoff θ hθ⟩
+  · -- the sides: `sides_eq`, with `Q ≠ P` at an end (an arc of `ω(P)` through an end continues into `α°`)
+    have hQ : (ringPt Q θ = ringPt P θ₁ ∨ ringPt Q θ = ringPt P θ₂) → Q ≠ P := by
+      rintro hend rfl
+      rcases hend with hxe | hxe
+      · have he : e θ = e θ₁ := add_left_cancel hxe
+        set s := min ((b - θ) / 2) ((θ₂ - θ₁) / 2) with hs
+        have hs0 : 0 < s := lt_min (by linarith [hθ.2]) (by linarith)
+        have hs1 : s < b - θ := lt_of_le_of_lt (min_le_left _ _) (by linarith [hθ.2])
+        have hs2 : s < θ₂ - θ₁ := lt_of_le_of_lt (min_le_right _ _) (by linarith)
+        have hpt : ringPt Q (θ + s) = ringPt Q (θ₁ + s) := by simp only [ringPt, e_add, he]
+        exact disjoint_left.mp hd ⟨θ + s, ⟨by linarith [hθ.1], by linarith⟩, rfl⟩
+          ⟨θ₁ + s, ⟨by linarith, by linarith⟩, hpt.symm⟩
+      · have he : e θ = e θ₂ := add_left_cancel hxe
+        set s := min ((θ - a) / 2) ((θ₂ - θ₁) / 2) with hs
+        have hs0 : 0 < s := lt_min (by linarith [hθ.1]) (by linarith)
+        have hs1 : s < θ - a := lt_of_le_of_lt (min_le_left _ _) (by linarith [hθ.1])
+        have hs2 : s < θ₂ - θ₁ := lt_of_le_of_lt (min_le_right _ _) (by linarith)
+        have hpt : ringPt Q (θ - s) = ringPt Q (θ₂ - s) := by simp only [ringPt, sub_eq_add_neg, e_add, he]
+        exact disjoint_left.mp hd ⟨θ - s, ⟨by linarith, by linarith [hθ.2]⟩, rfl⟩
+          ⟨θ₂ - s, ⟨by linarith, by linarith⟩, hpt.symm⟩
+    obtain ⟨hin, hout⟩ := hfit.sides_eq hF (hsub ⟨θ, Ioo_subset_Icc_self hθ, rfl⟩) (hoff θ (Ioo_subset_Icc_self hθ)) hQ
+    rw [hin, hout]
+    exact hsides θ hθ
 
 /-- **R3** (clause 10): the open arc lies in the lens, interior in the bent map (`map_lens`), so off its `Γ`. -/
 theorem CollarFit.map_R3 (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {θ : ℝ} (hθ : θ ∈ Ioo θ₁ θ₂) :
     ¬ hfit.map.OnRingArc P (ringPt P θ) := by
-  sorry
+  rintro ⟨a, b, -, hx, hsub⟩
+  have hL : ringPt P θ ∈ lensSet P θ₁ θ₂ R :=
+    ⟨θ, hθ, 1, ⟨(hfit.pushProfiles.inside θ hθ).2.2.1, le_rfl⟩, by simp [ringPt]⟩
+  exact (hfit.map_lens hL).1.2 (hsub hx).2
 
 /-- **Only `c` is lost, and only on the lens**: every colour `F` carries at `Q` the bent map carries, but `c`, which it can lose only at a
 point of `lensSet` (the open lens or the open arc). -/
 theorem CollarFit.coloursAt_subset (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') (Q : ℂ) :
     F.coloursAt Q ⊆ hfit.map.coloursAt Q ∪ {c} ∧ (c ∈ F.coloursAt Q → c ∉ hfit.map.coloursAt Q → Q ∈ lensSet P θ₁ θ₂ R) := by
-  sorry
+  have hp := hfit.pushProfiles
+  have hAg := hfit.map_agreesOff
+  have hcol : ∀ z, hfit.map.coloursAt (hfit.homeo z) = F.coloursAt z := fun z => pushforward_coloursAt z
+  -- in `F` the closed lens holds no interior point of a colour other than `c`
+  have hUc : ∀ z ∈ lensSet P θ₁ θ₂ R ∪ lensCurve P θ₁ θ₂ R, z ∈ F.interiorPts → F.col z = c := by
+    have hin : ∀ θ ∈ Ioo θ₁ θ₂, ∀ t, lensProf θ₁ θ₂ R θ ≤ t → t < 1 → F.col (P + (t : ℂ) * e θ) = c := fun θ hθ t h1 h2 =>
+      (hfit.kin_subset ⟨θ, hθ, t, ⟨(hp.inside θ hθ).2.1.le.trans h1, h2⟩, rfl⟩).2
+    have hring : ∀ θ ∈ Icc θ₁ θ₂, P + ((1 : ℝ) : ℂ) * e θ ∉ F.interiorPts := fun θ hθ hI =>
+      hI.2 (hfit.ring.2.1 ⟨θ, hθ, by simp [ringPt]⟩).2
+    rintro z (⟨θ, hθ, t, ht, rfl⟩ | ⟨θ, hθ, t, ht, rfl⟩) hz
+    · rcases eq_or_lt_of_le ht.2 with rfl | ht1
+      · exact absurd hz (hring θ (Ioo_subset_Icc_self hθ))
+      · exact hin θ hθ t ht.1.le ht1
+    · rw [mem_singleton_iff] at ht
+      subst ht
+      by_cases hθ' : θ ∈ Ioo θ₁ θ₂
+      · exact hin θ hθ' _ le_rfl (hp.inside θ hθ').2.2.1
+      · rw [(hp.off θ hθ').2.1] at hz
+        exact absurd hz (hring θ hθ)
+  refine ⟨fun j hj => ?_, fun hcF hcM => ?_⟩
+  · by_cases hjc : j = c
+    · exact Or.inr hjc
+    · refine Or.inl (closure_mono (fun z hz => ?_) hj)
+      have hzU : z ∉ lensSet P θ₁ θ₂ R ∪ lensCurve P θ₁ θ₂ R := fun hzU =>
+        hjc ((hz.2 : F.col z = j).symm.trans (hUc z hzU hz.1))
+      obtain ⟨hI, hc⟩ := hAg.2 z hzU
+      exact ⟨hI.mp hz.1, by show hfit.map.col z = j; rw [← hc]; exact hz.2⟩
+  · by_contra hQ
+    apply hcM
+    by_cases hQV : Q ∈ polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1
+    · obtain ⟨θ, hθ, t, ht, rfl⟩ := hQV
+      by_cases hθ' : θ ∈ Ioo θ₁ θ₂
+      · -- on the open lens boundary: the image of a point of the open arc
+        have htl : t = lensProf θ₁ θ₂ R θ := by
+          by_contra hne
+          exact hQ ⟨θ, hθ', t, ⟨lt_of_le_of_ne ht.1 (Ne.symm hne), ht.2⟩, rfl⟩
+        rw [htl, ← hfit.homeo_ringPt hθ', hcol]
+        have : c ∈ F.innerColours P (ringPt P θ) := by rw [(hfit.ring.2.2 θ hθ').1]; exact mem_singleton _
+        exact closure_mono inter_subset_left this
+      · -- at an end: a point of `Γ` off the open arc, fixed by the homeomorphism
+        have ht1 : t = 1 := le_antisymm ht.2 ((hp.off θ hθ').2.1 ▸ ht.1)
+        have hQe : P + (t : ℂ) * e θ = ringPt P θ := by rw [ht1]; simp [ringPt]
+        rw [hQe] at hcF ⊢
+        have hfix := hfit.homeo_fix_Γ (hfit.ring.2.1 ⟨θ, hθ, rfl⟩) (ringPt_not_mem_openArc_of_end hfit.short hθ hθ')
+        rw [← hfix, hcol]
+        exact hcF
+    · -- off the closed lens the two maps agree near `Q`
+      have hcl : Q ∈ closure (F.region c ∩ (polarSet P (Icc θ₁ θ₂) fun θ => Icc (lensProf θ₁ θ₂ R θ) 1)ᶜ) :=
+        hfit.isClosed_closedLens.isOpen_compl.inter_closure ⟨hQV, hcF⟩ |> fun h => by
+          rw [inter_comm]; exact h
+      refine closure_mono (fun z hz => ?_) hcl
+      have hzU : z ∉ lensSet P θ₁ θ₂ R ∪ lensCurve P θ₁ θ₂ R := fun hzU => hz.2 (hfit.lens_subset_closedLens hzU)
+      obtain ⟨hI, hc⟩ := hAg.2 z hzU
+      exact ⟨hI.mp hz.1.1, by show hfit.map.col z = c; rw [← hc]; exact hz.1.2⟩
 
 /-- **A unit arc centred on the lens carries no `c` on a side**: centred on the open arc by `lock` (the class of `c` meets `ω(Q)` in at
 most two points); centred in the open lens, an open subset of `c`'s class, by `Valid.dist_ne_one_of_isOpen_subset_closure`. -/
 theorem CollarFit.side_ne_inner_of_mem_lens (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ}
     (hQ : Q ∈ lensSet P θ₁ θ₂ R) {a b : ℝ} {d d' : Fin k} (h : F.IsRingArc Q a b d d') : d ≠ c ∧ d' ≠ c := by
-  sorry
+  suffices key : ¬ ∀ θ ∈ Ioo a b, ringPt Q θ ∈ closure (F.region c) by
+    refine ⟨fun hd => key fun θ hθ => ?_, fun hd => key fun θ hθ => ?_⟩
+    · have : d ∈ F.innerColours Q (ringPt Q θ) := by rw [(h.2.2 θ hθ).1]; exact mem_singleton _
+      rw [hd] at this
+      exact closure_mono inter_subset_left this
+    · have : d' ∈ F.outerColours Q (ringPt Q θ) := by rw [(h.2.2 θ hθ).2]; exact mem_singleton _
+      rw [hd] at this
+      exact closure_mono sdiff_subset this
+  intro hall
+  obtain ⟨ψ, hψ, t, ht, rfl⟩ := hQ
+  rcases eq_or_lt_of_le ht.2 with ht1 | ht1
+  · -- centred on the open arc: `lock` leaves the class of `c` two points on the unit circle
+    subst ht1
+    have hQe : P + ((1 : ℝ) : ℂ) * e ψ = ringPt P ψ := by simp [ringPt]
+    rw [hQe] at hall
+    have hlock := (lock hF hfit.ring hψ).2.1
+    have hsub : Ioo a b ⊆ ringPt (ringPt P ψ) ⁻¹' {P, P + 2 * e ψ} := fun θ hθ =>
+      hlock ⟨hall θ hθ, ringPt_mem_sphere _ _⟩
+    have hcount : (ringPt (ringPt P ψ) ⁻¹' {P, P + 2 * e ψ}).Countable := by
+      rw [show ({P, P + 2 * e ψ} : Set ℂ) = {P} ∪ {P + 2 * e ψ} from rfl, preimage_union]
+      exact (countable_ringPt_preimage _ _).union (countable_ringPt_preimage _ _)
+    have h0 := (hcount.mono hsub).measure_zero MeasureTheory.volume
+    rw [Real.volume_Ioo, ENNReal.ofReal_eq_zero] at h0
+    linarith [h.1]
+  · -- centred in the open lens, an open part of the class of `c`
+    have hQc : P + (t : ℂ) * e ψ ∈ F.region c :=
+      hfit.kin_subset ⟨ψ, hψ, t, ⟨(hfit.pushProfiles.inside ψ hψ).2.1.le.trans ht.1.le, ht1⟩, rfl⟩
+    obtain ⟨θ, hθ⟩ := nonempty_Ioo.mpr h.1
+    exact Valid.dist_ne_one_of_isOpen_subset_closure hF (hall θ hθ) (F.isOpen_region c) subset_closure hQc
+      (dist_ringPt _ _)
 
 /-- **No inert arc is created** (clause 11): an inert arc of the bent map is a ring arc of `F` with the same sides (`map_R1`), neither side
 `c` where `c` was lost (`coloursAt_subset`, `side_ne_inner_of_mem_lens`), so neither side is carried at its centre in `F`. -/
 theorem CollarFit.map_inert (hF : F.Valid) (hfit : CollarFit F P θ₁ θ₂ c c' ε R' R R'') {Q : ℂ} {a b : ℝ}
     (h : hfit.map.Inert Q a b) : F.Inert Q a b := by
-  sorry
+  obtain ⟨d, d', hA, hd, hd'⟩ := h
+  have hFA := hfit.map_R1 hF hA
+  have key : ∀ x, (x = d ∨ x = d') → x ∉ hfit.map.coloursAt Q → x ∉ F.coloursAt Q := by
+    intro x hx hxM hxF
+    have hxc : x = c := ((hfit.coloursAt_subset Q).1 hxF).resolve_left hxM
+    rw [hxc] at hxF hxM
+    have hne := hfit.side_ne_inner_of_mem_lens hF ((hfit.coloursAt_subset Q).2 hxF hxM) hFA
+    rcases hx with hx | hx
+    · exact hne.1 (hx.symm.trans hxc)
+    · exact hne.2 (hx.symm.trans hxc)
+  exact ⟨d, d', hFA, key d (Or.inl rfl) hd, key d' (Or.inr rfl) hd'⟩
 
 end Collar
 

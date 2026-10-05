@@ -17,7 +17,12 @@ Each [kernel], on exactly `[propext, Classical.choice, Quot.sound]` (stage 2: `d
   `ArcMap.IsSectorChart.hasRepeatedColour_iff`, `ArcMap.curveAt_one_sub_eq_sphere`, `ArcMap.branchPt_congr`, `ArcMap.circleGerms_nextβ_zero`,
   `…_nextβ_one`, `…_nextκ_zero`, `…_nextκ_one`, `ArcMap.circleGerms_mem_sector_zero`, `…_one`, **`ArcMap.isSectorChart_circle`**,
   `ArcMap.exists_two_le_encard_fin_two_iff`, **`ArcMap.degree_of_circle`**, `ArcMap.exists_sphere_inter_ball_subset_openArc`.
-- `Plane/ValidMap/BendCollar`: **`ArcMap.CollarFit.degree_openArc`**.
+- `Plane/ValidMap/BendCollar`: **`ArcMap.CollarFit.degree_openArc`**; and (stage 3, `data/fs131/cc/CCAxioms3.out`)
+  `ArcMap.isCompact_polarSet_Icc`, `ArcMap.ringPt_not_mem_openArc_of_end`, `ArcMap.mem_closure_region_inter_iff_of_agree`.
+- Proved with no `sorry` of their own, resting on open children (lane G's statements, lane C's four open leaves), so on `sorryAx` until
+  those land (stage 3): `CollarFit.map_R1`, `map_R2`, `map_R3`, `map_inert`, `coloursAt_subset`, `side_ne_inner_of_mem_lens`,
+  `map_ringArcsWithin`, `map_hasDegree`, `map_hasRepeatedColour`, and the helpers `CollarFit.sides_eq`, `map_degree_and_repeated`,
+  `lensProf_le_one`, `isClosed_closedLens`, `isClosed_collarK`, `lens_subset_closedLens`. Not kernel theorems yet.
 
 ## Stage 1 — SAVED (FS131-CC1): the readback, the as-given build, and what this job may change
 
@@ -137,3 +142,73 @@ theorem, a duplicated theorem, an edit to the assembly, an edit outside the layo
 fired, each naming its culprit**; the unplanted partner PASS.
 
 ## Stage 2 — SAVED (FS131-CC1)
+
+## Stage 3 — SAVED (FS131-CC1): R1, R2, R3, inert, the colours lost, the sides on the lens, no new unit arc, and the case split of the degree clauses
+
+### 3.1 What was proved (`BendCollar`; statements unchanged)
+
+Taken out of KP2's order, as the brief allows: the children that read only lane G's statements and the chart lemmas of stage 2 came first,
+so that the hard leaves left (`exists_collarFit`'s C4, `map_degree_end`, `sides_end`, `map_degree_lensCurve`) are the only open ones.
+
+- **`CollarFit.map_ringArcsWithin`** — `ringArcsWithin_of_Γ_subset` with the two collar arcs (radius `R ≠ 1`: `germArc_isUnitArc_iff`),
+  `map_Γ` and `collarArcs_carrier`.
+- **`CollarFit.map_R3`** — `α°` lies in `lensSet`, interior in the bent map (`map_lens`).
+- **`CollarFit.coloursAt_subset`** — off the closed lens the maps agree near the point (the closed lens is closed); on its boundary
+  the point is `h` of a point of `α°` or an end fixed by `h`, and `pushforward_coloursAt` carries `c` there; in `F` the closed lens holds no
+  interior point of a colour other than `c` (`kin_subset`), so every other colour is kept.
+- **`CollarFit.side_ne_inner_of_mem_lens`** — centred on `α°`: `lock` puts every interior point of the arc in two points, against the
+  countable fibres of `ringPt` and the positive length of `(a, b)`; centred in the open lens: `Valid.dist_ne_one_of_isOpen_subset_closure`
+  with the open class of `c`.
+- **`CollarFit.map_inert`** — `map_R1`, then `coloursAt_subset` and `side_ne_inner_of_mem_lens`.
+- **`CollarFit.map_R1`** — the closed arc lies in `F.Γ` by finiteness against the two radius-`R` arcs (`Arc.finite_inter_sphere_or_eq_circ`,
+  `ringArc_subset_Γ_of_finite`; not through `map_ringArcsWithin`, whose statement gives each point its own sub-arc only); its sides: off the
+  closed lens by locality, at an end by `sides_end` (`Q ≠ P`: an arc of `ω(P)` in the bent map's `Γ` through an end would run into `α°`).
+- **`CollarFit.map_R2`** — no point of the closed arc is on `α°` (near one, `Γ` is `ω(P)` by `free_open` and its points there are on `α°`,
+  which the open arc of `ω(Q)` then meets); the sides by `sides_eq`.
+- **`CollarFit.map_hasDegree`, `CollarFit.map_hasRepeatedColour`** — both from one case split, `CollarFit.map_degree_and_repeated`: an
+  interior point of `F` goes to one of the bent map (degree `1`, no repeated colour); off the closed collar `h` is the identity on a ball
+  (`hasDegree_iff_of_agree`); on the collar a point of `Γ` is on `α` (`free`): on `α°` `degree_openArc` against `map_degree_lensCurve`, at an
+  end `map_degree_end`.
+
+New supporting declarations: `isCompact_polarSet_Icc` (a polar band over a closed angle interval is compact), `ringPt_not_mem_openArc_of_end`,
+`CollarFit.lensProf_le_one`, `CollarFit.isClosed_closedLens`, `CollarFit.lens_subset_closedLens`, `CollarFit.isClosed_collarK`,
+`mem_closure_region_inter_iff_of_agree` (closures are local), `CollarFit.sides_eq` (R1's and R2's common step), `CollarFit.map_degree_and_repeated`.
+
+`hmax` is read by none of them (KP2's reading, inventory item 390, survives this stage's children).
+
+### 3.2 What is left in lane C, with the route each is ready for
+
+Four `sorry`s in `BendCollar` and the child B0, every other declaration of lane C proved over them and lane G's statements:
+
+| child | state | route ready for a successor |
+|---|---|---|
+| `CollarFit.map_degree_lensCurve` | open | off the crossing `X`: `degree_of_circle` at `v = P + lensProf θ · e θ` with the circle `C_A` (or `C_B`). `M.Γ` near `v` is `h(F.Γ ∩ U)` for a small ball `U` about `ringPt P θ` (`pushforward_Γ`; `h(U)` is a neighbourhood of `v`), which is `h(α° ∩ U) ⊆ lensCurve`; the lens curve near `v` is `C_A`'s circle (`lensProf` is the `A` term on `[θ₁, θ_m]`: `tangRad R u` increases with `cos u`; `tangRad_spec` gives `⊆`; the converse by `eq_polar_local` and the uniqueness of the positive root, whose product with the other root is `1 − 2R < 0`). Colours: inside `C_A` near `v` the images of the inner collar (`kin_subset`, `pushforward_col_apply`) carry `c`; outside, the lens (`map_lens`) carries `c'`. At `X` a second two-germ chart, of two circles crossing (not yet built). About 300 lines. |
+| `CollarFit.map_degree_end` | open | KP2's route (plan § 4): `F`'s chart at the end by `localSectors_disj`, `α`'s germ replaced by `C_A`'s (`isSectorChart_of`), the colour word kept, then `hasDegree_iff_of_charts` (proved). About 350 lines. |
+| `CollarFit.sides_end` | open | KP2's route: the collar's horn at the end is preconnected (`isPreconnected_hornSet`) and misses `ω(Q)`, `Q ≠ P`. About 200 lines. |
+| `exists_collarFit` | open | KP2's C1–C4 (plan § 4); C4 (end freeness) shares the end germ's identification with `map_degree_end`. About 450 lines. |
+| B0 `collarModel` | not stated | plan § 4: a disc of diameter `< 1` about `r([0, π/6])`, the arcs `ω(0)` across it and the two radial segments at the ends, colours swapping across each, `c ≠ c'`; then `exists_collarFit` at it inhabits `CollarFit`. About 150 lines. |
+
+### 3.3 The build, the axioms, the statements, and two notes
+
+**Build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 455 of 455 batches, 3 modules rebuilt (`BendCollar`, `BaseDense`, `Proofs`), 6 with
+warnings, every warning `declaration uses 'sorry'`**, exit 0, 8 min 17 s (`build/gate/build/20261005T123523Z-79691.log`, which ends "Build
+completed successfully (5791 jobs)"; driver log `data/fs131/cc/build-stage3.log`). `BendCollar`'s `sorry` declarations: four — lines 120
+(`exists_collarFit`), 157 (`map_degree_lensCurve`), 168 (`map_degree_end`), 270 (`sides_end`).
+
+**Axioms** against that build's oleans (`data/fs131/cc/CCAxioms3.lean` → `.out`): on exactly the standard three — `isCompact_polarSet_Icc`,
+`ringPt_not_mem_openArc_of_end`, `mem_closure_region_inter_iff_of_agree`, `CollarFit.degree_openArc`. On `sorryAx`, as they must be while
+their inputs are open — `CollarFit.lensProf_le_one`, `isClosed_closedLens`, `isClosed_collarK`, `lens_subset_closedLens` (through lane G's
+`pushProfiles_collar`), `map_ringArcsWithin`, `map_R3`, `coloursAt_subset`, `side_ne_inner_of_mem_lens` (also lane G's map-level
+children), `sides_eq`, `map_R1`, `map_R2`, `map_inert` (also `sides_end`), `map_degree_and_repeated`, `map_hasDegree`,
+`map_hasRepeatedColour` (also `map_degree_lensCurve`, `map_degree_end`); controls `sides_end`, `bend_toward_collar` on `sorryAx`.
+`scripts/Axioms.lean`: the nine new supporting theorems added to the "FS131-CC1" block.
+
+**Statements**: `tools/fs131_cc_stmt.py`: **PASS** (`data/fs131/cc/stmt-stage3.txt`); its self-test re-run on this tree: 11 of 11 plants
+fired, the partner PASS (`stmt-selftest3.txt`).
+
+**Notes.** (1) A limit of my check, not of a statement: `fs131_cc_stmt.py` reads a theorem's statement up to `:= by`, so a term-mode proof of
+an unchanged statement reads as a change (it did, for `map_hasDegree` and `map_hasRepeatedColour`). The two proofs are written `:= by exact …`;
+the check was not loosened. (2) Lane G's `pushProfiles_collar` is the one leaf under nearly every map-level child of this lane; when lane G
+proves it, `lensProf_le_one`, both closedness lemmas and `lens_subset_closedLens` come off `sorryAx` with no change here.
+
+## Stage 3 — SAVED (FS131-CC1)

@@ -5458,6 +5458,15 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.exists_two_le_encard_fin_two_iff
 #print axioms HadwigerNelson.Plane.ArcMap.degree_of_circle
 #print axioms HadwigerNelson.Plane.ArcMap.exists_sphere_inter_ball_subset_openArc
+#print axioms HadwigerNelson.Plane.ArcMap.isCompact_polarSet_Icc
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_not_mem_openArc_of_end
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.lensProf_le_one
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.isClosed_closedLens
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.lens_subset_closedLens
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_region_inter_iff_of_agree
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.isClosed_collarK
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.sides_eq
+#print axioms HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_and_repeated
 
 #eval IO.println "=== PURCHASED ==="
 
