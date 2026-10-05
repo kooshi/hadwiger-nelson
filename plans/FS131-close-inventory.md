@@ -3103,3 +3103,23 @@ reason by the close.*
      state; one job keeps the slot busy. Confidence: medium-high. **No `main`, no `framePt → fromFrame`** in this merge: neither branch carries wave 2's
      landing (checked: `6f20e12f` is an ancestor of neither), so the rename waits for wave 5's landing. In flight after I5o's launch: 1 (IMM4) + 1 (I5p) +
      1 (I5o) = 3.
+359. **FS131-I5o, by message (mid-job): `exists_preBend`'s strengthened bend needs more than wave 4's bend machinery** — ruling 317 (b)'s trigger. (1)
+     `bend_toward`'s statement, cited as given, bounds regions only (no sectors, no colours at the arc's ends or at centres), so it cannot carry the iteration:
+     it cannot keep `IsCubicTrichromatic u` at an arc end, `BaseHyp u`, or `NoInertNear u`. (2) **`main`'s `bendMap` cannot give E4-BEND-UN's collar in
+     general**: it adds one arc `a` through both ends, and two distinct circles (or a circle and a line) through `A` and `B` cross transversally, so every
+     `bendMap` lens has a positive opening angle at each tip; where the inner tile's sector at `A` beside `α` is a horn, no such lens lies in `T_in ∪ α°` (the lens
+     swallows the horn's tip and a wedge of the next tile; `A` can lose `c`, and `a` crosses the tangent arc). E4-BEND-UN's own *not claimed* line left exactly
+     this open: "that every bend N2-BENDS allows has its lens in a collar (a lens may be chosen so; the existing bend lemma is not re-read for it)" — checked
+     now: `bendMap`'s lens cannot be so chosen at a horn end. (3) I5o's proposal: state the strengthened bend as a child, read back against E4-BEND-UN — one whole
+     inert arc; the bent map with a homeomorphism `h` of ℂ supported in `thickening ε α`, fixing `A` and `B`, carrying each tile onto a tile of the same colour
+     (so `coloursAt` and sectors at `h x` are those at `x`); `bend_toward`'s metric clauses; no new inert arc — prove `exists_preBend` over it and a finiteness
+     child (finitely many maximal inert arcs centred in `B̄(u, 1)`), and leave the child `sorry` for a construction job (a lens bounded by several arcs, a
+     horn-shaped tip). (4) Order: `disc1_local` before `bv_l3`. Merge status: no conflict beyond keeping both sides; the statement check over both parents
+     passes (504 keys); the merged build running. Credit: I5o, for testing E4-BEND-UN's open line against the landed construction.
+360. **Ruling on item 359.** (a) **Accepted: the strengthened bend as a stated child of `exists_preBend`**, read back against E4-BEND-UN in I5o's record, with
+     `exists_preBend` proved over it and the finiteness child; both may stay `sorry` if time runs out, named. Alternative weighed: an Ephodos derivation of the
+     collar lens before any Lean. Why: the child's content is E4-BEND-UN's (derived, one mind); what is new is only its construction at a horn tip, which is
+     geometry a construction job can attempt and report on. Confidence: medium. (b) **The construction becomes its own job** (FS131-KB2, a de Bruijn implementer,
+     queued after I5o's hand-back): build the multi-arc lens with a horn-shaped tip and the homeomorphism; if it finds the collar lens is not always
+     constructible, it stops and reports with the configuration, and that goes to an Ephodos re-derivation of E4-BEND-UN's open line. This leaf joins wave 5's
+     path. (c) **Order** `disc1_local` before `bv_l3`: accepted (the brief leaves order to the job). Sent to I5o by message.
