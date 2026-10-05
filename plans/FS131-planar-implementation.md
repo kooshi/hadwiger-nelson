@@ -570,3 +570,50 @@ the one I would try) and the bi–bi exclusion of a chord exactly `1`; F-LOC/CON
 
 `endpoint_of_far_end` (strong child, orientation step, bi–bi — § 11.3); PATH; F-LOC, F-CONN, F-INF, F-ONE; `not_isHoleOf_chain`, `isHoleOf_cluster`; F-RING;
 `retArcs_not_abut`, `retArcs_not_interleaved`. All in this branch's files as before; `MapTopology` has none left.
+
+## Stage 12 — SAVED: FS131-IP4's readback (the fourth implementer, from IP3's Stage 11)
+
+*de Bruijn, the implementer (FS131-IP4), 2026-10-05. Brief: `data/fs131/briefs/FS131-IP4-planar.md` (main tree). Same branch and worktree; I append
+stages from here. Read in full at launch: the brief, `plans/STANDING-RULES.md`, `LEAN.md`, `RUNNING.md` § Building and § Make the gate fail, this record
+(stages 1–11; 6–11 closely), KP's plan §§ 3–6, inventory items 277, 300, 309, 312, 313; for `endpoint_of_far_end`, FS110-CD §§ 2.0–2.4 and § 3.0, FS110-CE
+§ E3 (R1–R4).*
+
+### 12.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script (each `>` block's text, joined, against the source's text with its lines' indentation joined; planted absent string
+`ABSENT-CONTROL-STRING-xyzzy` reported `MISS`, the control):
+
+| quotation in the brief | source | result |
+|---|---|---|
+| inventory item 312 (truncated at "record") | `plans/FS131-close-inventory.md` (main tree) l. 2493 | verbatim |
+| inventory item 313 (truncated at "FS131-IP4 on") | same, l. 2510 | verbatim |
+| "Wall clock from stage 10's commit (02:06Z) … one" | this record § 11.3 | verbatim |
+| finding 2 ("2. At a genuine exit `q = r(φ)`, … CD's step 2") | this record § 7.4 | verbatim |
+| inventory item 300 (truncated at "Stages 6–8;") | `plans/FS131-close-inventory.md` l. 2350 | verbatim |
+| inventory item 309 (truncated at "if T-GRAPH") | same, l. 2461 | verbatim |
+| "**Work order** (each step unblocks the next; re-price after the first two):" | KP's plan § 5.1 | verbatim |
+| "**May:** add children (with spec examples; …), change imports (updating `ARCHITECTURE.md`'s" | KP's plan § 5.2 | verbatim |
+| inventory item 277 (truncated at "KP's") | `plans/FS131-close-inventory.md` l. 2040 | verbatim |
+| Kooshi on pricing ("Do not consider Lean formalization a cost. …") | `CLAUDE.md` § Counter-priors | verbatim |
+
+No mismatch.
+
+### 12.2 What I may and may not change (the brief's touches, ruling 313 (b), ruling 309, KP's plan § 5.2)
+
+**May:** prove the `sorry`s left at `7b5e8ed6` in the files my touches name — in `BaseWalk` `endpoint_of_far_end`, `retArcs_not_interleaved`,
+`retArcs_not_abut` (KP's plan § 5.1's three; not the other twelve, wave 5's lane); in `MapGraph` outside the `namespace HadwigerNelson.Thomassen` block:
+`not_isHoleOf_chain`, `isHoleOf_cluster`, `filledGraph_locallyFinite`, `_connected`, `_infinite`, `_rings`, `_oneInf` — adding children beside them with
+spec examples (PATH and the strong child of `exists_far_end` in `MapTopology` § D or `Plane/CurveGraph`, my choice); imports (with `ARCHITECTURE.md`'s Imports
+cell and `scripts/Axioms.lean`'s FS131-KP block above `=== PURCHASED ===`); `Proofs.lean`, this record, `tools/fs131_ip_*.py`, `data/fs131/ip/`,
+`data/fs131/reports/FS131-IP4.md`. A later leaf of item 313 (b)'s order may go first when cheaper, said here.
+
+**May not:** change any statement of KP's job (plan §§ 3.2, 4.1) or any definition they use (`IsHoleOf`, `fill`, `IsOuterTile`, `filledGraph`, `IsRing`,
+`TwiceApart`, `PlanarLike`, `outerDom`, `EnclosesTile`, and `IsRetArc`, `IsEndpoint`, `VIn`, `BaseCtx`), nor any statement outside this job; no new
+`axiom`, no `native_decide`; nothing in `Plane/PlaneTopology`, inside the `HadwigerNelson.Thomassen` block, or between `filledGraph_oneInf` and
+`filledGraph_planarLike` (IT1 adds `filledGraph_finSep` there on `fs131-w5t`; not mine to prove); not KP's plan file; no merge into `fs131-w5`, no taking
+`main`, no gate run, nothing on `main`; no file edited while a build of it runs. A leaf that cannot be proved as written goes to Keryx at once.
+
+### 12.3 The as-given build (`7b5e8ed6`, before any edit)
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — all 1754 modules already up to date, nothing built, 9 modules with warnings, every warning
+`declaration uses 'sorry'`, exit 0** (`build/gate/build/20261005T025209Z-771307.log`; driver log `data/fs131/ip/build-ip4-asgiven.log`).
