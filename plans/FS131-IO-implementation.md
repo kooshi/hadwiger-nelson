@@ -38,8 +38,18 @@ FS131-IO2 (Stages 4–10; build and axioms print in § 10.2):
 - 56 children, listed in `data/fs131/io/io2-new-decls.txt` — [kernel]; `exists_openConfig_up`, `_down` re-proved over `OpenConfig`'s two new
   fields `ray0` and `margin` (Stages 5 and 7)
 
-Not yet proved (`sorry`; its axioms read `sorryAx`, and so does `ArcMap.exists_open` through it — the print's positive control):
-`open_allowedCone` (route in § 10.3).
+FS131-IO3 (Stages 11–15; build and axioms print in § 15.2):
+
+- `HadwigerNelson.Plane.ArcMap.Near.open_allowedCone` — [kernel] — OPEN leaves every allowed cone of `c` off `B̄(v, ρ)` unchanged (E6-OPEN
+  step 10); so **`HadwigerNelson.Plane.ArcMap.exists_open` — [kernel], exactly the standard three** (E6-OPEN whole)
+- 15 children, listed in `data/fs131/io/io3-new-decls.txt` — [kernel], each exactly the standard three: `closure_sectorBetween_subset`,
+  `Near.closure_gapSet_subset_gapSet`, `Near.OpenConfig.exists_clearSet`, `Near.OpenConfig.v_mem_closure_region`,
+  `Near.mem_open_interiorPts_of_sector_off`, `Near.open_region_of_region`, `Near.open_region_cases`, `Near.open_region_subset`,
+  `Near.open_isContact_iff`, `Near.open_exists_tile`, `Near.open_tile_split`, `Near.v_mem_closure_open_tile`, `Near.open_tile_cover`,
+  `Near.open_inType_iff`, `Near.open_outType_iff`
+- the positive spec example `cuspFrag.HasHornCount 0 2` (an `example`, kernel-checked in the build)
+
+Nothing in `OpenMove` is left `sorry`.
 
 ## Stage 1 — SAVED (FS131-IO1): the readback, the as-given build, and what this job may change
 
@@ -585,3 +595,50 @@ as read on `main` records MERGE's landing and its vacuity digest ("no new carrie
 docstring (`Contact.lean` l. 1513–1524) carries no inhabitant note — so the note cites E6's model only. Iteration (`lake env lean`): exit 0.
 
 ## Stage 14 — SAVED (FS131-IO3)
+
+## Stage 15 — SAVED (FS131-IO3): the handover — OPEN proved whole
+
+*Handed back here at Kooshi's halt ; this
+job's three items were done before it, so nothing of the brief is left.*
+
+### 15.1 Theorems this phase proved (FS131-IO3)
+
+All in `Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean`, kernel-checked in § 15.2's build, axioms printed against its oleans:
+
+- `HadwigerNelson.Plane.ArcMap.Near.open_allowedCone` — [kernel], `[propext, Classical.choice, Quot.sound]` — `D_c(v′)` unchanged off
+  `B̄(v, ρ)` (read against E6-OPEN's last clause: "no other point's allowed cone for `c` changes", for every `v′ ∉ B̄(v, ρ)`)
+- `HadwigerNelson.Plane.ArcMap.exists_open` — [kernel], `[propext, Classical.choice, Quot.sound]` — **FS131-E6-OPEN** (its statement
+  unchanged since IO1, read against E6-OPEN clause by clause in § 2.2)
+- the 15 children of § 12 (`data/fs131/io/io3-new-decls.txt`) — [kernel], each `[propext, Classical.choice, Quot.sound]`
+- `example : ArcMap.cuspFrag.HasHornCount 0 2` — [kernel] — the positive spec example (§ 13)
+
+### 15.2 The build, the axioms, the checks
+
+- **Build** (under the slot, `scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`, at `864e41b7`'s tree):
+  **OK** — 451 of 451 batches, 2 modules rebuilt (`OpenMove` 9.7 s, `Proofs`), **0 modules with warnings**, 8 min 16 s, exit 0, "Build
+  completed successfully (5750 jobs)"; log `build/gate/build/20261005T124448Z-133559.log`, terminal output `data/fs131/io/build-io3-2.log`.
+  `grep sorry OpenMove.lean`: 0.
+- **Axioms** against that build's oleans (`data/fs131/io/iter.sh data/fs131/io/AxiomsIO.lean`, `data/fs131/io/axioms-io3-final.txt`),
+  classified by `tools/fs131_io_axioms.py --expect 105` with no `sorryAx` allowed (`data/fs131/io/axioms-io3-final-classified.txt`,
+  exit 0): **105 records — 103 exactly the standard three, 2 on fewer (`BranchGerms.idx_idx` `[propext]`, `BranchGerms.turns_idx`
+  `[propext, Quot.sound]`), 0 `sorryAx`, 0 foreign.** Every `OpenMove` theorem is within the standard three.
+- **Control**: the same print with `sorryAx` planted into `exists_open`'s record (`data/fs131/io/axioms-io3-planted.txt`) makes the
+  classifier exit 1, naming it `SORRY-UNEXPECTED` (`data/fs131/io/axioms-io3-planted-classified.txt`). The spec example's control (claiming
+  `HasHornCount 0 1`) went red at its last `rfl` (§ 13).
+- `tools/check_architecture.py`: PASS (no new module). `scripts/Axioms.lean`: the OPEN block's banner no longer says the children are
+  `sorry`, and a `-- FS131-IO3` list of the 15 new theorems follows IO2's. No `axiom`, no `native_decide`; no statement in the skeleton
+  changed (`OpenConfig` as IO2 left it); no declaration of `main`, `MergeMove`, `Moves`, `Contact` touched.
+- **A correction to Stage 14's text**: `exists_merge`'s docstring is `Contact.lean` l. 1520–1524, not 1513–1524.
+
+### 15.3 What is left, and the next step
+
+Of this brief: nothing. Of OPEN's landing, for the coordinator (not this job's to run): the full gate on a branch carrying `fs131-wop`
+(build, zero `sorry`, `scripts/axioms.sh` and its self-test, `scripts/vacuity.sh` and its self-test with its counts reconciled — the new
+theorems' binders, among them `cfg : X.OpenConfig …` and the surgery's, will read as new sites — and the linters), then the landing on
+`main` with the procedure job that cites `exists_open` (ruling 401). Owed besides, not this job's: a Lean model of `exists_open`'s
+hypotheses (FS131-E6's twelve-colour map, § 3.1), the inhabitant the docstring note says is missing. **Next step for a successor starting
+cold**: read this stage, check out `fs131-wop` at its last commit, build it once under the slot (expect "all … up to date" or two modules
+rebuilt and 0 warnings), re-run `data/fs131/io/iter.sh data/fs131/io/AxiomsIO.lean` into a file and classify it with
+`tools/fs131_io_axioms.py <file> --expect 105` (expect exit 0, 103 exactly standard), then hand `fs131-wop` to the gate.
+
+## Stage 15 — SAVED (FS131-IO3)
