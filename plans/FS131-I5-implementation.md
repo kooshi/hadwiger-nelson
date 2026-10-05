@@ -153,6 +153,9 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
   `eq_floor_of_floor_eq_ceil`, `hex_real_core`, `angleIcc_add_int_mul`, `hex_cones_of_serve`, `subset_closure_region_of_isOpen`,
   `Valid.cone_re_nonneg_of_preconnected`, `GermPseudo.germIn_closure`, `germPseudo_add_two_pi`, `ringPt_add_two_pi'`, `hex_side`, `dist_frame`,
   `ringPt_frame`, `norm_sq_eq_re_im`, `e_hex_re_im`, `hex_point`, `hex_adjacent` (all `ArcMap.`).
+- Stage 32 (`data/fs131/i5j/build-stage32.log`; `build/gate/build/20261005T052713Z-1651689.log`; axioms `I5jAxioms32.out`, control `rot_in` with
+  `sorryAx`, `linkage_dot_ne_zero` clean), `HexRing`: `HadwigerNelson.Plane.ArcMap.rot_out` (FS112-ROTHEX, N2-ROT's outward row (A+, A−)); child
+  `dist_radial_hex`.
 
 ## Stage 1 — SAVED: the readback
 
@@ -1465,3 +1468,59 @@ the "FS131-I5g" block (a comment line names this stage), above the `=== PURCHASE
 iteration rounds each — the plan's M and M–H hold; the arithmetic count (planned "finite real arithmetic") was the expensive part of `hex_regular`.
 
 ## Stage 31 — SAVED
+
+## Stage 32 — SAVED: `rot_out` proved (a kernel theorem); `dist_frame` renamed `dist_eFrame`
+
+**`rot_out` is proved as stated** (FS112-ROTHEX, N2-ROT's outward row (A+, A−); `Plane/ValidMap/HexRing`). It is `hex_point` at the change point
+`x = r(ψ)`: `rot_noThird` gives `c′(x) = {p, q}`, (A+) and (A−) are exactly `hex_point`'s two germ inputs, and H (no four colours at `x ∈ B̄(u, 2)`)
+its colour bound — so `g` is the outward cone's colour, `P_cl(x) = {p, q, g}` (a clause added to `hex_point`'s conclusion), `g` fills the cone, and
+`g`'s cone at `u` faces away from `x` (step 5). The tile clause is new: `x` is cubic trichromatic (three colours, no repeated colour by H), so a
+`g`-tile `T` at `x` meets the `g`-sector of `x`'s chart, which holds an interior point of the outward cone beyond `ω(u)`; `T` with the sector is
+connected and in the closure of `g`, so by validity against points of `g` near `u` every point of `T` is at distance at least `1` from `u`, and `T`
+is open, so it misses `B̄(u, 1)`. New child: `dist_radial_hex` (the outward radial's distances, factored out of `hex_point`). Read against the
+informal claim (FS110-N2-ROT's outward row, with unit arcs under H): "`x` carries `p`, `q` and one colour `g` of `u`; `g` fills the outward cone; every
+`g`-tile at `x` misses `B̄(u, 1)`; `u`'s `g`-sector lies in the closed half-plane away from `x`" — **same**.
+
+**`dist_frame` → `dist_eFrame`** (`main` has `HadwigerNelson.Plane.dist_frame`, wave 2's `MaximalCover`; distinct full names, but `open ArcMap` inside
+`HadwigerNelson.Plane` would make the short name ambiguous after the merge). `scripts/Axioms.lean` updated, `dist_radial_hex` added to the block.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS; `hex_point` is this job's own child, its conclusion widened by one clause and
+its one consumer, `bv_hex`, updated). New names collision-free (`git grep` on `fs131-w5p`, `fs131-w5c`, `fs131-w4`, `main`).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T052713Z-1651689.log`; driver log `data/fs131/i5j/build-stage32.log`). Wave 5's sorry declarations (distinct sites):
+**22** (`HexRing` 3: `rot_in`, `bv_l3`, `bv_nd`), mine 4. Axioms (`I5jAxioms32.lean` → `.out`): `rot_out`, `hex_point`, `dist_radial_hex`, `dist_eFrame`,
+`bv_hex`, `hex_regular`, `rot_noThird` on the standard three; control `rot_in` reads `sorryAx`, `linkage_dot_ne_zero` clean.
+
+## Stage 32 — SAVED
+
+## Stage 33 — SAVED: the handoff (what is left of this half, and where it stands)
+
+The working tree is clean at the stage-32 commit. `tools/check_architecture.py`: PASS (no module added; imports unchanged).
+
+**What is left of my set (4)**, for wave 5's next implementer on this half (none is on `row134BaseUA`'s path, which now rests only on the planar
+job's three):
+- **`rot_in`** (M): the mirror of `rot_out` (stage 32). Children to add, each a mirror of a stage-31 lemma: `hex_side_far` (a germ in the closure of
+  `p` whose points are **farther** than `1` from `x` — here the germ just counter-clockwise of `r(ψ + 60°)`, at chord `60° + t` — keeps the class of `p`
+  near `x` outside `B(r(ψ + 60°), 1)`; same proof as `hex_side`, the two cases swapped); `hex_point_in` (the **inward** cone `{z : |z − r(ψ ± 60°)| < 1}`,
+  which holds the inward radial `x − s e ψ`, `|·|² = 1 − s + s²` for `0 < s < 1`); `Valid.cone_re_nonpos_of_preconnected` (the mirror of
+  `Valid.cone_re_nonneg_of_preconnected` with a point **nearer** than `1`, as `Valid.cone_re_nonpos_of_germ` mirrors `_nonneg_`); the tile clause
+  mirrored (the tile with the `g`-sector reaches inside `ω(u)`, so all its points are within `1` of `u`, and `T` is open, so `T ⊆ B(u, 1)`).
+- **`bv_nd`** (M–H): BASE-V § 1b.2 steps 2–4. H at `x₀`, `y₀` (no four colours, no repeated colour) makes each cubic or interior; step 2 is
+  `hF.dist_lt_or_gt_of_isPreconnected` over the `α`- and `β`-sectors (the event's germs lie in the open regions, `GermIn … (F.region α)`); step 4 is
+  the tangency identity `|a(s) − b(±s)|²` (`tools/base_v_linkage.py`, K3, K4), the frame lemmas `dist_eFrame`, `ringPt_frame`, `norm_sq_eq_re_im`
+  of stage 31 serve its distances.
+- **`bv_l3`** (H): I5g's note stands — with `RingProper` the rings are wave 3's `ringCircleColouring`s, `exists_linkage` and `link_path` apply as in
+  `l3_base`, and `hdbl` is `pair_ii` (H on the circles) or `bv_nd`.
+- **`exists_preBend`** (H): the strengthened bend (ruling 317 (b)), not attempted in this job; E4-BEND-UN not read here.
+
+**Route notes** (from stages 31–32):
+- A count over `3⁶` assignments is beyond `omega` (200000 heartbeats both as one call and as 729 split calls); a `Finset` card argument with small
+  `omega` calls closes it (`hex_int_core`).
+- `hex_point` packages BV-HEX's steps 1–3 and 5 at one point and serves both `bv_hex` and `rot_out`; its inward mirror is `rot_in`'s main child.
+- `convert … using 2` on `GermPseudo` splits the angle sum (`ψ + jπ/3 + π/3` against `ψ + (j+1)π/3`) into wrong subgoals; rewrite the angle and the
+  `ZMod 3` index first (`bv_hex`'s `hcw`, `hccw`).
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 33 — SAVED

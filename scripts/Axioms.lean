@@ -3581,12 +3581,13 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.germPseudo_add_two_pi
 #print axioms HadwigerNelson.Plane.ArcMap.ringPt_add_two_pi'
 #print axioms HadwigerNelson.Plane.ArcMap.hex_side
-#print axioms HadwigerNelson.Plane.ArcMap.dist_frame
+#print axioms HadwigerNelson.Plane.ArcMap.dist_eFrame
 #print axioms HadwigerNelson.Plane.ArcMap.ringPt_frame
 #print axioms HadwigerNelson.Plane.ArcMap.norm_sq_eq_re_im
 #print axioms HadwigerNelson.Plane.ArcMap.e_hex_re_im
 #print axioms HadwigerNelson.Plane.ArcMap.hex_point
 #print axioms HadwigerNelson.Plane.ArcMap.hex_adjacent
+#print axioms HadwigerNelson.Plane.ArcMap.dist_radial_hex
 
 #eval IO.println "=== PURCHASED ==="
 
