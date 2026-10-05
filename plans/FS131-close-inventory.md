@@ -2730,3 +2730,32 @@ reason by the close.*
      F2–F6 and `sep_add_pi_S`, then NB3-END items 3–5), `cv_class`, the CV-HD cluster, `exists_red`, `exists_terminal`, `cv_exists`. Alternative weighed: IMM2
      (MERGE), next in the queue. Why: the `Terminal` lane is now the longest path to wave 5's landing (about two sessions for `n3_end_of_not_inType` alone, then
      the H cluster and the limit constructions, against the planar chain's eight leaves at about two), and MERGE has no consumer in wave 5. Confidence: high.
+330. **FS131-I5g handed back** (Stage 29 SAVED, harness ≈ 715k by the task notice — its own estimate ≈ 330k; budgets are guidance; record `fs131-w5`'s
+     `plans/FS131-I5-implementation.md`, Stages 25–29; report `data/fs131/reports/FS131-I5g.md`; commits `a57c9569`, `75689a4c`, `52940b25`, `8d8c8b9a`,
+     `f0c6ba67`, pushed). **Results, [kernel] on the standard three, statements unchanged**: `CircleColouring.reduce` (FS110-CD Lemma R steps 4–5 / CE R3; I5f's
+     hand check of CD § 2.4 step 5 is now the lemma `reduce_partner_noChange`); `CircleColouring.select` (`[SokolovVoronov2025]` Lemma 5, BV-C6, Prop. 18 —
+     by first-passage points, not BV-L5's recolouring; the increment per period is bounded, `18M + 6 ≤ N ≤ 18M + 12`); `ArcMap.BaseCtx.l3_base` (BV-L3 in
+     pseudo-colour form, rings with contact arcs allowed) **with no velocity argument** — BV-ND's μ ≠ 0 and QA3 § 2.4 d's turning-point step replaced by
+     `pair_ii`, and BASE-V's genericity of `P` by the band read at both of `P`'s partners, so `linkage_dot_ne_zero` is not cited; 43 children.
+     `linkage_dot_ne_zero`'s docstring rewritten per QA3 § 2.4 d (item 274 (b)). **Receipt** (Keryx): the five commits exist and `origin/fs131-w5` is
+     `f0c6ba67`; the stage-28 build log (`build/gate/build/20261005T043331Z-1353383.log`) ends "Build completed successfully (5369 jobs)", 0 warnings other than
+     `sorry`; `sorry` by grep: `BaseWalk` 3 (the planar three, proved on `fs131-w5p`), `BaseDense` 3, `Dense` 1, `HexRing` 6, `MapGraph` 3, `Terminal` 9 — 25;
+     the diff on `Proofs/` since `d61edefc` is `BaseWalk` (+2,093, the only removed lines three `sorry`) and `HexRing`'s one docstring; the receipts parsed by
+     script — `reduce` standard in `I5gAxioms26.out`, `select` standard in `I5gAxioms27.out` (on `sorryAx` in 26: the control), `l3_base` standard in
+     `I5gAxioms28.out` (24 records, 22 standard, the controls `row134BaseUA` and `bv_hex` on `sorryAx`). **Generalization**: `link_path` (the band of
+     `L₁(φ) − L₂(χ)` is constant along any path with finite fibres) needs no map; it applies to `bv_l3` once its rings are circle colourings. **Correction owed**
+     (the next implementer on `fs131-w5`): `l3_base`'s docstring lists `linkage_dot_ne_zero` among its inputs, which the proof does not use. **Held**: (1)
+     `exists_linkage` carries `set_option maxHeartbeats 400000 in` (measured: passes at 300000, fails at the default 200000); (2) `bv_hex` and `hex_regular`
+     share a child that does not exist, `coneAt_of_cubic` (the tangent cones of a cubic trichromatic vertex are three closed angular intervals summing to
+     `2π`; only `Simple.coneAt_eq_angleIcc` exists). **Left (7)**: `bv_hex` (H; the last of this half on `row134BaseUA`'s path), `rot_out`, `rot_in`,
+     `hex_regular`, `bv_nd`, `bv_l3`, `exists_preBend` — routes in record Stage 29. **Merge note**: `BaseWalk` is edited on both `fs131-w5` (I5g's leaves) and
+     `fs131-w5p` (the planar three and IP5's three docstrings) — different declarations, so the merge's hunks should be disjoint, but the file is shared, not
+     disjoint as the handoff said. Credit: I5g, for `l3_base` without the velocity argument.
+331. **Rulings on I5g's held items, and its slot.** (a) **`set_option maxHeartbeats 400000 in` on `exists_linkage`: accepted.** Alternative weighed: splitting
+     the proof under the default budget. Why: it is measured (300000 passes), scoped to one declaration, the build passed with no other warning, and the
+     library already carries the option (`Hexagram.lean`, `Strip.lean`, the Heule CNF segments); a later implementer may split it if it touches the proof.
+     Confidence: high. (b) **I5g's slot → FS131-I5j on `fs131-w5`**, the same half, from Stage 29: `coneAt_of_cubic` first, then `bv_hex` and `hex_regular` over
+     it (one unit of work, as I5g proposed), then `rot_out`, `rot_in`, `bv_nd`, `bv_l3`, then `exists_preBend` over the strengthened-bend child (ruling 317 (b));
+     `l3_base`'s docstring fixed at its first build. Alternative weighed: IMM2 (MERGE), next in the queue. Why: wave 5 lands only when all three lanes finish,
+     this half's seven leaves (about two to three sessions) are on that path, and MERGE has no consumer in wave 5. Confidence: high. In flight after I5j's
+     launch: 1 (IP5) + 1 (I5i) + 1 (I5j) = 3.
