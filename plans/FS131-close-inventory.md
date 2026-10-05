@@ -3206,3 +3206,96 @@ reason by the close.*
      `ARCHITECTURE.md`; apply `framePt → fromFrame` on the branch's side (item 318's correction (1)); delete identical copies; the full gate on one commit; fast-
      forward `main`; drafts of the counts. Alternative weighed: the strengthened bend's construction KB2. Why: wave 5's landing waits for MERGE's (item 348 (b)),
      and this lane's own continuation is on that path (item 366's queue). Confidence: high. In flight after ML1's launch: 1 (I5o) + 1 (KL1) + 1 (ML1) = 3.
+369. **FS131-I5o handed back: `row134BaseUA` is held on `fs131-w5`** (Stage 42 SAVED, harness ≈ 384k by the task notice; record `fs131-w5`'s
+     `plans/FS131-I5-implementation.md`, Stages 38–42; report `data/fs131/reports/FS131-I5o.md`; commits `956c1cd2`, `0a4a0b46` (the merge of `fs131-w5p` at
+     `5086e856`), `e5b85cb5`, `ba286731`, `4a0e5c28`, pushed). **The merge**: two conflicts (`ARCHITECTURE.md`, `scripts/Axioms.lean`), both sides kept; every
+     declaration of the seven named files byte-identical to the side that changed it (504 keys, 17 one-sided files compared whole; `tools/fs131_i5o_merge_check.py`,
+     plants fired). **With it, on the standard three on `fs131-w5`**: `row134BaseUA` (row 134's base step with unit arcs) and `BaseCtx.false`, `BaseWalk`'s planar
+     three (`retArcs_nested`, `exists_endpoint`, `exists_eleventh`), `MapGraph`'s leaves, `cvb_thom`, `cvb_thom_reduced`, `IsBoundaryWalk.sep`,
+     `filledGraph_ringList`, `filledGraph_planarLike`. **`disc1_local`** (FS112-DISC1 on a fragment) **[kernel]**, standard three, statement unchanged — Lebesgue's
+     argument (FS106-TS-T) on a closed square of side 6/5 inside `B̄(x, 1)`, its point within `3√2/5` of `x`. **Not landed**: `exists_preBend` (the strengthened
+     bend `bend_toward_collar` stated in the form believed true, elaborated in `data/fs131/i5o/BendCollar.lean`, not in the library — hypotheses `hmax`, `hfree`;
+     conclusions: a colour-carrying homeomorphism, R1–R3, no new inert arc; the iteration's route, a strong induction on the number of maximal constant-sided
+     unit arcs centred in `B̄(u, 1)`, in record § 41.3; construction notes in § 41.2, including full inert circles as a separate case); `bv_l3` — **a GAP at its
+     placement**: `HexRing` imports neither `RingBand` nor `BaseWalk`, which its route needs, so it cannot be written there (steps 1 and 3 compile in
+     `data/fs131/i5o/RingScratch.lean`). **Receipt** (Keryx): the merge commit `0a4a0b46` has parents `956c1cd2` and `5086e856`; `origin/fs131-w5` is `4a0e5c28`; the
+     latest build log (`build/gate/build/20261005T084436Z-2794592.log`) ends "Build completed successfully (5408 jobs)", 0 warnings other than `sorry`; `sorry` by
+     grep: `BaseWalk` 0, `MapGraph` 0, `Dense` 0, `HexRing` 1 (`bv_l3`), `BaseDense` 2 (`exists_preBend`, and `cv_exists`'s stale copy — proved on `fs131-w5c`),
+     `Terminal` 9 (stale; the `Terminal` lane is `fs131-w5c`); `I5oAxioms39.out` parsed: 16 records, 13 standard (`row134BaseUA` and the ten named among them), the
+     controls `exists_preBend`, `bv_l3`, `localDense` on `sorryAx`; `I5oAxioms40.out`: `disc1_local` standard; `data/fs131/i5o/merge-check.txt` ends PASS.
+     **Generalization**: TS-T holds on any square of side greater than 1 inside a valid fragment's domain. **Route proposal**: extract `l3_base`'s band-and-linkage
+     argument as one lemma over its two differing inputs (`hgen`, `hdbl`), so `l3_base` and `bv_l3` are short proofs over it. **Process note**: the merge was
+     committed with `git commit -i <paths>` (git refuses a partial commit during a merge); every path named. Credit: I5o, for the merge with a three-way check.
+370. **Rulings on I5o's held items, and its slot.** (a) **`bv_l3` moves**, statement verbatim, to `BaseWalk` after `l3_base` (where its route's inputs live),
+     with a cross-file statement check; and `l3_base`'s argument extracted as I5o proposes, `l3_base`'s statement unchanged. Alternative weighed: `BaseDense`.
+     Why: `BaseWalk` holds `l3_base` and the band lemmas; nothing reads `bv_l3`, so the move breaks no consumer. Confidence: high. (b) **`bend_toward_collar`
+     stays in `data/` until its construction job lands it** as `exists_preBend`'s child (a `sorry` leaf nothing uses would only add a warning). Confidence:
+     high. (c) **`git commit -i <paths>` for a merge: accepted** — standing rule 6's point, every path named, is met. (d) **I5o's slot → the strengthened bend's
+     construction, FS131-KB2, on `fs131-w5`**: `bend_toward_collar` landed in a module of its own upstream of `BaseDense`, constructed (the multi-arc collar lens,
+     the radial push, full circles as their own case), then `exists_preBend` over it (the iteration of § 41.3, the finiteness child, `hfree` from `BaseHyp`).
+     Alternative weighed: `bv_l3` first. Why: the bend and the iteration are the longer chain (H, then H), on wave 5's path; `bv_l3` (about one session with the
+     extraction) follows at the next slot, on a branch cut from `fs131-w5` if KB2 still holds the tree. Confidence: medium-high. In flight after KB2's launch:
+     1 (KL1) + 1 (ML1) + 1 (KB2) = 3.
+371. **FS131-KL1 (the limit planner), by message: N4-TERM's count does not descend over `main`'s SHAVE as built; a clean step is owed; `exists_red` has a shorter
+     route.** (1) **A descent defect in a construction, not a statement**: `main`'s `exists_shave_recolour` builds `F' := X.move hs univ …` (`Moves.lean`, case 3)
+     with `K = univ`, keeping every germ at `v`, the horn's two bounding germs among them; after the tip is recoloured `g` above `σ` and `h` below, those germs
+     have one colour on both sides, `g` and `h` each gain a sector at `v`, so `Φ(v) = Σ (s_c − 1)⁺` rises by 1 or 2 and the degree at `v` rises by 1 — not down,
+     as FS110 N4-SHAVE's "Φ(v) down by one" says; the new `g`-tip is again a horn flanked by `g` and `h`, so SHAVE can loop. `exists_shave`'s statement is fine;
+     only N4-TERM's termination fails over this construction. (2) **The full rim circle**: `Near.move` (`Surgery`) adds the whole circle `∂B(v, ρ)` as an arc,
+     which off the recoloured region has one colour on both sides, so every such rim point has a repeated colour and MERGE is generically available at a continuum
+     of points — this hits SHAVE and RAY; MERGE's own construction (`mergeArcs`: phantom germs dropped, a rim arc across the gap only) proves "no repeated colour on
+     the rim" and is the template. (3) **The input map**: an arbitrary valid plane map may carry arcs with one colour on both sides (`ArcMap` allows them, item
+     363), each point a repeated-colour point — uncountably many sites, so N4-TERM's "enumerate the vertices" fails. **KL1's plan**: one generic `ArcMap.clean`
+     (drop the parts of `Γ` where at most one colour is present; `coloursAt`, validity and `RingArcsWithin` unchanged), applied to `F` first and after each move —
+     each move becomes clean-after-move, repairing (1) and (2) without rebuilding SHAVE or RAY; each move must still export new lemmas (an arc-level locality
+     clause; at most 3 colours, no repeated colour and no horn at the points of `closedBall v ρ` other than `v`; the degree at `v` strictly down after `clean`), a
+     list for `main`'s `Moves` and `fs131-w4mm`'s `MergeMove` in KL1's record; nothing edited outside its touches. (4) **Shorter route**: `exists_red` is a
+     corollary of one construction, `exists_terminalMap` (for every `k`, a valid plane map has `M` with `F.IsModification M` and `M.IsTerminalMap`, which contains
+     `Valid` and `QROnly`); `exists_terminal` is that construction plus three theorems about every terminal map at six colours (clause 2 from
+     `isStuck_of_hasRepeatedColour` and `isCubicTrichromatic_of_three_of_noRep`; clause 3's ends from `c_ends` and horn bounds from `flankQ_*_of_qrOnly`; clause
+     3's "run not bi-infinite" a new child — N4-SHADOW's curvature recursion along the run, `±1` excluded by `cv_l0`, then `n4_fin`); one limit construction
+     instead of two; at `k ≥ 7`, `exists_red` is immediate with the seven-brick map. (5) **A question for the deriver, routed with its report**: the interleaved
+     count needs that a bend of `α` about `P` changes no other ring arc's type except where a centre on `α°` loses a colour — in particular an (R2) witness is
+     never cut by a bend's lens (the hand proof says "radius 1 against radius 2"; KL1's sketch, one mind: `R2(β)` cannot cross `α°`, because past `α` it would lie
+     in `T_out`); the kernel will check it as a child. Credit: KL1, for finding the descent defect before an implementer built on it.
+372. **Rulings on item 371.** (a) **`ArcMap.clean` accepted** as the plan's repair, with the moves' new exported lemmas as **new declarations only** (no landed
+     statement changes) — proved, not in `main`'s modules directly, but on wave 5's branch after it merges `main` (MERGE landed by then, item 348 (b)), in a new
+     module downstream of `Moves` and `MergeMove` that reads their constructions; if a lemma needs a construction's private detail, the planner says which, and
+     that is a message to me. Alternative weighed: a separate small landing on `main` for the moves' lemmas. Why: wave 5's landing merges `main` anyway, and one
+     landing is cheaper than two. Confidence: medium-high. (b) **The shorter route accepted**: `exists_red` and `exists_terminal` over one `exists_terminalMap`,
+     statements unchanged. Confidence: high. (c) **(5) needs no Ephodos job now**: the planner states it as a child, and the kernel checks it; a failed proof is
+     routed then. Confidence: medium. (d) **Correction owed** (for the filing, with the other errata): FS110-N-proof's N4-SHAVE "Φ(v) down by one" holds for the
+     move up to `clean`, not for `main`'s construction as built; and the same for RAY's full rim circle. Sent to KL1 by message.
+373. **FS131-KL1 done: the limit constructions planned** (planner; stage 4 SAVED, harness ≈ 418k by the task notice; record `fs131-w5c`'s
+     `plans/FS131-limit-kernel-plan.md`; report `data/fs131/reports/FS131-KL1.md`; commits `80962972`, `cc769b53`, `9b7ebe9d`, `1d1a40aa`, `8a42a2e0`,
+     pushed). **Skeleton**: `exists_red` and `exists_terminal` (statements unchanged, compared by script against `ff6e917f`) proved over one construction,
+     `exists_terminalMap` (every `k`: a valid plane map has a modification that is a terminal valid map), itself over named `sorry` children — the limit in the
+     new module `Plane/ValidMap/Limit` (`LocalStep`, `LocalSeq`, the pivot `frozen`, `limit`, `limit_valid`, `limit_isModification`, `limit_isTerminalMap`, six
+     locality lemmas, `exists_clean`), the procedure in the new module `Plane/ValidMap/Procedure` (`exists_vertexStep`, `exists_arcStep`, `exists_terminalSeq`,
+     the finiteness lemmas, `mergeAvailable_of_bothKind`), and two theorems about every terminal six-map in `Terminal` (`run_hornBoundsQR`, `stuckRun_ne_univ`).
+     **[kernel], standard three**: `LocalStep.refl`, `LocalSeq.const`, `LocalSeq.dom_eq`, `limitArcs_nondegenerate`, `terminal_vertices` (N2-TERM's clause 2 in
+     every terminal map); proved over open children: `exists_terminalMap`, `exists_red`, `exists_terminal`, `run_ends`. **Receipt** (Keryx): the five commits
+     exist and `origin/fs131-w5c` is `8a42a2e0`; the build log (`build/gate/build/20261005T090553Z-2902958.log`) ends "Build completed successfully (5372 jobs)", 0
+     warnings other than `sorry`; the open children by grep: 18 in `Limit`, 7 in `Procedure`, 2 in `Terminal`; `data/fs131/kl/KLAxioms2.out` parsed: 37 records,
+     the five named standard; `tools/fs131_i5h_stmt_check.py da09c260`: PASS. **Findings** (record § 3.4): the moves' statements as given do not yield
+     `IsModification` (nothing constrains the points of the open disc other than `v`) — new exported lemmas, record § 3.3, two of which read construction
+     detail no statement exports (`merge_step`: `MergeMove`'s colours and sectors at points of the open disc off the rim; `bend_step`: `bendMap`'s arc set);
+     **F6, a statement risk**: `ShaveAvailable` allows a lone horn (its colour has a single sector at `v`, so no curvature bound applies); if its only admissible
+     split is `σ = ±1` strictly between `κ₁` and `κ₂`, every shave there adds a unit arc, which `IsModification` forbids — FS112-WALK row 7 covers only bounds
+     inside `[−1, 1]`; either the configuration cannot occur in a valid map (still to derive), or `Terminal` cannot be reached there by the moves; no
+     counterexample built; **F7**: RAY needs MERGE first (`RayAvailable` has no clearness clause), so `exists_vertexStep` takes a priority form, internal to the
+     construction. Two one-mind steps stated as children for the kernel to check: `witness_not_cross` (item 371 (5)) and `mergeAvailable_of_bothKind` (N2-RED's
+     parenthesis). **Price**: five to seven implementer sessions; two can split by file — **A**: `Limit` then `Procedure`'s finiteness lemmas; **B**: `Terminal`'s
+     two children now, then `exists_vertexStep`/`exists_arcStep` after the merge with `main`; `exists_terminalSeq` last. Spec examples owed for `badCount`,
+     `IsMaxRingArc`, `treatPts`. Credit: KL1, for one limit construction where the plan had two, and for F6 before an implementer met it.
+374. **Rulings on KL1's held items, and its slot.** (a) **The moves' new lemmas** are proved on wave 5's branch after it merges `main` (ruling 372 (a)): in a
+     module downstream of `Moves`/`MergeMove`/`UnitArc` where the needed definitions are public, else as new declarations appended to the construction's own
+     file on that branch (no statement of a landed declaration changes). Confidence: high. (b) **F6 → an Ephodos derivation, FS131-E6, at the next free slot**:
+     whether a lone horn, `ShaveAvailable` at `v` with every admissible split at `σ = ±1` strictly between `κ₁` and `κ₂`, can occur in a valid map (and in a
+     map reached by the procedure); if it can, what N4-TERM's route does there (another move, or a defect in `exists_terminal`). Alternative weighed: the
+     implementer meets it first as a child of `exists_vertexStep`. Why: it is a question about the backlog statement's truth, not about Lean, and implementer B
+     reaches `exists_vertexStep` only after the merge with `main` — the derivation has time to land first. Confidence: medium-high. (c) **KL1's slot →
+     implementer A, FS131-IL1, on `fs131-w5c`**: `Limit` (the plan's order: `LocalStep.mono`, `exists_stab`, `frozen`, its consumers, the locality lemmas,
+     `limit_isTerminalMap`, the clean lemmas, `exists_clean`), then `Procedure`'s finiteness lemmas and `mergeAvailable_of_bothKind`. Implementer B joins the queue
+     (on a branch cut from `fs131-w5c`, since one writer per tree). Why: the limit is the longest chain to wave 5's landing, and it is independent of F6.
+     Confidence: high. In flight after IL1's launch: 1 (ML1) + 1 (KB2) + 1 (IL1) = 3.
