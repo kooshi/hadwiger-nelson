@@ -515,7 +515,7 @@ tree, by `grep -F`): at the next saved stage, merge `fs131-w5x` into `fs131-w5p`
 ### 11.1 Proved
 
 - **`Plane/CurveGraph`** (new module, imports `Plane/LocalStructure`; `ARCHITECTURE.md` row added, `Proofs.lean` import added; `MapTopology` now imports it,
-  its Imports cell unchanged in spirit — `tools/check_architecture.py`: PASS). BG is built as **the handshake for compact sets made of lines and circles**,
+  the `MapTopology` row's Imports cell gains `Plane/CurveGraph` — `tools/check_architecture.py`: FAIL before that edit (real-only `Plane/CurveGraph`, the check firing), PASS after, `data/fs131/ip/check-architecture-ip3.txt`). BG is built as **the handshake for compact sets made of lines and circles**,
   not as a `SimpleGraph`: a compact `C` with a *curve star* at each point (finitely many rays leaving the point, each a continuous graph over the distance,
   pairwise disjoint, each locally a piece of a line or circle) has finitely many non-regular points (`finite_nonRegular`: off its centre a star is regular),
   and their degrees have an even sum (`even_sum_deg`). The proof cuts each vertex out by a disc of radius `ρ`; the rays' points on the circles are the
