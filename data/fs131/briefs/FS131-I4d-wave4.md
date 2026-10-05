@@ -78,3 +78,10 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 several trees are building today, so on exit 75 wait ten minutes and retry. `lake env lean` (with § 14.1's flags) is for iteration only, never evidence.
 The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`. You start no agents of your own
 (standing rule 1).
+
+## Amendment 2026-10-04 (Keryx) — `lock`, ruled
+
+Ruled as `plans/FS131-close-inventory.md` item 177: clause 1 (and clause 2) by your route, no N-E2; **clause 3 restated locally**, as FS112-LOCK's row reads
+("from outside `B(P, 2)`"): the tile lies outside `B(P, 2)` near `P + 2e(θ)` — `∃ δ > 0, Disjoint (T ∩ ball (P + 2e(θ)) δ) (ball P 2)` or an equivalent form of
+your choosing, its docstring saying so with the item number. If one of the three bends needs more than the local form, stop that leaf and message me with
+the step. You still start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

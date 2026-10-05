@@ -267,6 +267,23 @@ Two exclusions are worth their reasons, because both look like obvious additions
   reads `GENERIC` everywhere, like `IsTile`; register it when a theorem takes it at a concrete instance or proves a
   refutation `¬ F.IsSectorChart G v r₀` as a theorem.
 
+* **Wave 2's carriers (FS131-I2n, by the procedure below).** **IN**: `Plane.CPColouring` — the `AeColouring` case again, a
+  structure whose emptiness is a theorem (`IsEmpty (CPColouring 0)`, `IsEmpty (CPColouring 1)`, both `instance`s, which the evidence
+  collector reads as it reads `AeColouring`'s) and whose inhabitant at `9` is a theorem (`nonempty_cpColouring_nine`); controls 33–35.
+  `Plane.SemiconcaveWith` — refuted at a concrete instance by a theorem (`not_semiconcaveWith_one_lowerArc`: the lower unit arc is
+  not `1`-semiconcave on `(1/10, 1/5)`), so a theorem taking it at a refuted instance is a real defect; controls 36–38. **OUT**,
+  each a predicate of a set, family, function or field variable, `GENERIC` at every site, with no `¬ P` theorem at a concrete
+  instance: `AeLE`, `IsAdmissible`, `IsAeCover`, `IsMaximalCover`, `IsSelection`, `IsRegularMUA`, `IsFreeFor`, `IsContactFor`,
+  `Saturated`, `SaturatedPos`, `BandNull`, `BandFree`, `IsGridUnion`, `IsPeriodicSet`, `IsPartialColouring`, `IsTiled`,
+  `IsPeriodic`, `IsLowerGraphOf`, `CurvatureLeOne`, `IsMaxIn`, `KeptAt`, `IccPairNull`, `WeakStarTendsto`, `G1Bounds`,
+  `CPColouring.RotationInvariant`, `IsUsablePrime`, `IsPlaceHom`, `NoAffFieldHyp`, `DyadicSqrt3Conclusion`; `AeColouring.Tight`
+  and `AeColouring.HasSlack` (positive facts at concrete colourings, `sq9_tight`, `exists_r7`, and no refutation stated as a
+  theorem — register them when one is); `PieceH`, `PieceF`, `PieceQ`, `hcFlank` (inequalities between numbers, decided where
+  they occur); `Row130M1` and `Voronov11`, closed propositions consumed as named hypotheses — the first an outside hand result
+  (`LEAN.md` § Assumptions: it leaves when discharged), the second a form of the open question itself (`forall_mu_six_lt_one_iff`),
+  so tracking either would add `UNKNOWN` sites nobody can discharge, which the shrink-only baseline cannot hold. The sets and
+  data of `Plane/CoverExamples` (`hcSet`, `hcBand`, `hcN0`, `hcKZ`, `r7Col`, `sq9`, …) are never binder types.
+
 * **Wave 4's carriers (FS131-G4, by the procedure below; the plan's recommendation, `plans/FS131-w4-kernel-plan.md` § 14.3).** **IN**:
   `ArcMap.IsHorn` — refuted at a concrete map by a theorem (`bowtie_not_isHorn_I_axis`: the bowtie has no horn at `i`), inhabited by
   `cuspFrag_isHorn`; controls 39–41. `ArcMap.IsStuck` — refuted at a concrete map (`bowtie_not_isStuck_I`), inhabited at the bowtie's
@@ -310,6 +327,8 @@ def trackedProps : List Name :=
    -- wave 3's ring vocabulary (FS131-I3h)
    `HadwigerNelson.Plane.ArcMap.IsRingArc, `HadwigerNelson.Plane.ArcMap.IsQArc,
    `HadwigerNelson.Plane.ArcMap.IsChangePoint, `HadwigerNelson.Plane.ArcMap.IsHub,
+   -- wave 2's measurable vocabulary (FS131-I2n)
+   `HadwigerNelson.Plane.CPColouring, `HadwigerNelson.Plane.SemiconcaveWith,
    -- wave 4's valid-map vocabulary (FS131-G4)
    `HadwigerNelson.Plane.ArcMap.IsHorn, `HadwigerNelson.Plane.ArcMap.IsStuck,
    `HadwigerNelson.Plane.ArcMap.Condition5, `HadwigerNelson.Plane.AeProperRegions]

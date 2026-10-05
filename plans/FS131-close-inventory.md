@@ -1226,3 +1226,1267 @@ reason by the close.*
 176. **Brief FS131-I4d, wave 4's fourth implementer** (Opus; `data/fs131/briefs/FS131-I4d-wave4.md`, gated PASS): merge `main`, the bridge and
      `exists_hasDegree_of_mem_dom`, QA2's four items, `lock` clause 1, the rest, the carrier, the gate and the landing. Launched in I4c's slot: 1 (I2i) + 1 (IWc) +
      1 (I4d) = 3.
+177. **FS131-I4d mid-job, on `ArcMap.lock`** (FS112-LOCK; `fs131-w4`, `Plane/ValidMap/UnitArc.lean`): (1) **clause 1 closes with no N-E2** — `IsRingArc`'s
+     constant-sides clause applies at `w = r(θ)` itself, so the outer colours at `w` are `{c′}`; for `y` in the closure of `c′`'s region with `|y − w| = 1`, `y ≠ P`,
+     `ω(y)` has points outside `B̄(P, 1)` arbitrarily near `w`, and a point `z″` of `c′`'s region near `y` (off the finitely many unit-arc centres) yields a
+     `c′`-coloured unit pair — item 143's second gap closed; clause 2 the same on the inner side. (2) **Clause 3 as stated looks false globally for short arcs**:
+     `∀ T, TileOf c T → P + 2e(θ) ∈ closure T → Disjoint T (ball P 2)` fails at its counter-configuration (`P = 0`, `θ = 0`, arc `r([−0.01, 0.01])`, a
+     `c`-tile `T = B(m, 1/2)` minus the unit discs about the arc, `m = (2 + 1.95 e^{0.3i})/2`, containing `t = 1.95 e^{0.3i}`; cross distances to the inner tile
+     ≥ 1.0024 by float sample — a sanity check, not exact). Keryx's receipt: the hand row (`plans/FS112-derivation.md` line 72) reads "a tile of either side
+     colour touches `ω(w)` only at `P`, or — the inner colour only — at `P + 2e_w`, **from outside `B(P, 2)`**" — a statement about how the tile approaches the
+     contact point, so the Lean clause's whole-tile `Disjoint T (ball P 2)` is stronger than the row: a formalization slip, not a hand defect. **Ruling**: clause
+     3 restated locally, as the row reads — the tile lies outside `B(P, 2)` near `P + 2e(θ)` (`∃ δ > 0, Disjoint (T ∩ ball (P + 2e(θ)) δ) (ball P 2)`, or an
+     equivalent form the implementer chooses, saying so); if a consumer (FS112-BEND, FS112-N2-BENDS — the three bends) needs more than the local form, message
+     me with the step, and it goes to a deriver. Alternative weighed: a deriver first. Why not: the row already says "from outside", which is local, and the
+     global form is refuted. Confidence: medium-high (the counter-configuration is a float sample; the local form is what both of the row's minds proved).
+178. **FS131-I4d handed back at stage 8, harness ≈ 436k** (report on its branch; `fs131-w4` at `c1255fc5`, checked): `main` merged (`05968b36`); **[kernel], standard three**:
+     `exists_hasDegree_of_mem_dom` (TS-T's vertex step; `ts_t_trichromatic`, `ts_t_degree_three` sorry-free; `Plane/SVMap` has no `sorry`); **the bridge to
+     `localSectors`**, a new module `Plane/ValidMap/Sectors` (`IsSectorChart.isSector_iff`, `hasDegree` = `max n 1` for every small `r`, `sectorBetween_eq_hornSet`,
+     and item 136's dichotomy `isSector_cone_or_horn`; general `isSector_iff_of_partition`, `encard_sectors_of_partition`); **QA2's items**:
+     `sevenBrick_corner_isCubicTrichromatic` and `sevenBrick_corner_mIn` (modelling `pair_i`, `pair_ii`, `pair_P′`, `fail_*`, `anti` on a valid plane map at `k = 7`),
+     `halfDisc_simple`/`halfDisc_two_tiles`, **`cuspFrag_isHorn`** (the library's first proved horn, with `cuspFrag_valid`), `stuck_chain`'s docstring naming `n4_fin`;
+     `lock` clauses 1–2's route written, clause 3 restated under item 177 (`lock` itself still `sorry`; nothing in the library uses it). 51 → 50 (Contact 10,
+     UnitArc 20, BaseSteps 20). Keryx's receipts: build log `build/gate/build/20261004T160421Z-559067.log` (w4) "Build completed successfully (5359 jobs)"; 50 `sorry`
+     by count; `data/fs131/i4/axioms-i4d.txt` prints the brick-corner theorems and `halfDisc_simple` on the standard three; the log's non-`sorry` warnings are four
+     older linter warnings in `UnitArc` (unused `hF` at 234 and 236; `push_cast` does nothing at 664 and 666) — **to clear before the gate**. Slip (I4d's): the merge
+     commit made without paths (git requires it for a merge; standing rule 6 forbids it) — its index held only the conflict resolution and a log. Collisions with
+     `fs131-ww`: `abs_dot_le`, `dot_add_left`, `dot_e_e`, `isOpen_shadow` (identical; the second to land resolves). Generalization: the bowtie leaves can follow
+     `cuspFrag_isHorn`'s pattern (near `E = 0` only its two unit arcs). **Next**: FS131-I4e (Opus) — `lock` first, the bowtie near `E`, then § 14.1's order.
+179. **Brief FS131-I4e, wave 4's fifth implementer** (Opus; `data/fs131/briefs/FS131-I4e-wave4.md`, gated PASS): `lock`, the bowtie near `E` by the cusp pattern,
+     the rest; the four older linter warnings and the carrier before the gate. Launched in I4d's slot: 1 (I2i) + 1 (IWc) + 1 (I4e) = 3.
+180. **FS131-IWc handed back at stage 12, harness ≈ 494k** (report on its branch; `fs131-ww` at `ca6ec757`, checked): **20 of its 23 leaves proved**, statements unchanged,
+     standard three by iteration print — **E3-W (`clear_wedge`)** with an exact bound; **E3-BALL (`exists_woodallMerged`) proved as a composition** of its children
+     (the first composition check: the children fit together), `sorryAx` only through `exists_merge_at`; **`Plane/Woodall/Basic` sorry-free** — T1–T5, so
+     `threeSectorDisc` really satisfies `WoodallMerged univ` and `WoodallNormal univ`, `halfDisc` satisfies `NiceAt 0`, and the phantom adversaries rest on proved
+     leaves; the merge at a wedge valid, Condition 5 kept, nothing changed off its ball; locality; the local data (`exists_dirColourAt`); at most two colours away
+     from a good ball's centre, so three-colour points are finite on compacts; the data and three cone facts after a merge. Ruling 167 (b) applied
+     (`NiceAt.normal` private, record removed). Left: `niceAt_of_dirColourAt` (H−, 250–400 lines), `wedgeMerge_niceAt` (H−, 200–350; needs a curvilinear form of
+     `coneAt_annSector_eq` — the cone where a circle crosses a line or circle transversally — which the plan did not price), `exists_merge_at` (M+, 150–250, by a
+     simpler measure than the plan's: `μ = ∑_{δ ∈ D} (number of colours whose cone holds δ) − 1`, no decreasing radii). Keryx's receipts: build log
+     `build/gate/build/20261004T161928Z-665717.log` (ww) "Build completed successfully (5361 jobs)"; `sorry` Basic 0, Merge 3, Steps 0, NoFourFive 0, Collar 0;
+     `tools/fs131_w3_decls.py --check` "188 theorems, 188 records; 0 missing, 0 stale". Correction owed to W's plan § 14.4 (the simpler measure; a route, not a
+     statement). Moved into `Basic` (names and statements unchanged): `mem_coneAt_annSector`, `norm_real_mul_e`, `polar_inj`, `e_ne_e_of_lt`,
+     `closure_annSector_subset`. QA2-1 (the brick-map model) waits for wave 4's `sevenBrickMap` on this branch. **Next**: FS131-IWd (Opus) on the three leaves.
+181. **Brief FS131-IWd, Woodall's last three leaves** (Opus; `data/fs131/briefs/FS131-IWd-woodall-merge.md`, gated PASS): `niceAt_of_dirColourAt`, `wedgeMerge_niceAt`
+     (with the curvilinear cone child), `exists_merge_at`; after wave 4 lands, the merge of `main` (this branch deletes its identical colliding copies), QA2-1's
+     brick-map model, the gate and the landing. Launched in IWc's slot: 1 (I2i) + 1 (I4e) + 1 (IWd) = 3.
+182. **FS131-I2i handed back at stage 18, harness ≈ 402k** (report on its branch; `fs131-w2` at `f5e83938`, checked): 53 → 46. **[kernel], standard three**: **FS106-REM, all
+     three clauses** — `keptAt_band`, `CPColouring.tendsto_not_kept`, and `exists_not_uniform_kept` (the uniform form is false: a measurable colouring proper at
+     *every* unit pair with a whole unit square of non-kept points at every scale), witnessed by a simpler colouring than the plan's (`stripeCol`: squares of side
+     1/2 coloured `(⌊2 re⌋ mod 4, ⌊2 im⌋ mod 4)`, which makes any refinement proper at every unit pair, refined by stripes — the fringe-to-fringe pairs of § 17.1
+     never arise, so no deriver was needed); **FS111-V0-RESCALE** (`exists_tight`, `exists_tight_iff_chiM0_le`); **`chiM0_le_chiCP`** (FS106-EQ's easy direction,
+     `χ_m⁰(ℝ²) ≤ χ_CP(ℝ²)`), through a jointly measurable modification of every CP colouring (`exists_modification`, `ae_unitPairsNull_of_modification`) and
+     `continuous_pairMass` (via Mathlib's `tendsto_measure_symmDiff_preimage_nhds_zero`). **Owed docstrings done**: 86 wave-2 theorems and FALC-HOSTS (iv)'s frame
+     docstring; tool `tools/fs131_i2_docs.py` (self-test plants a fault). Keryx's receipts: build log `build/gate/build/20261004T162337Z-697910.log` (w2) "Build
+     completed successfully (5722 jobs)", no warning but `sorry`; 46 `sorry` by count; `data/fs131/i2/i2i-axioms.txt` prints `chiM0_le_chiCP`, `keptAt_band`,
+     `exists_not_uniform_kept` on the standard three; `fs131_i2_docs.py` "0 undocumented wave-2 theorems in 13 files". Left: Slack 12 (SUPK's lower bound ×3,
+     the compactness block ×9), CoverExamples 34 (R7 8, (G1) 4, HC/IRREG 22); the vacuity carriers (recommendation recorded: IN `CPColouring`, inhabited at 9;
+     OUT the family and set predicates by T1's rule). Slip (I2i's): `tools/fs131_qa1_quality.py` rewrites its JSON when run — restored, not committed.
+     **Next**: FS131-I2j (Opus).
+183. **Brief FS131-I2j, wave 2's tenth implementer** (Opus; `data/fs131/briefs/FS131-I2j-wave2.md`, gated PASS): the 46 lines, the vacuity carriers, the gate and the
+     landing. Launched in I2i's slot: 1 (I4e) + 1 (IWd) + 1 (I2j) = 3.
+184. **FS131-I4e handed back at stage 11, harness ≈ 389k** (report `data/fs131/reports/FS131-I4e.md` on `fs131-w4`; branch at `9a8de899`, checked): 50 → 45.
+     **[kernel], standard three**: **FS112-LOCK** (`ArcMap.lock`) — clauses 1–2 as the row, clause 3 in item 177's local form; one new engine
+     (`ArcMap.Valid.dist_ne_one_of_isOpen_subset_closure`: a point in the closure of a class is never at distance 1 from an open set inside that closure, by wave
+     3's crossing engine), reusable by `u1_shadow` and the bends; none of the three bends needed more than the local clause 3. **Over `sorry`** (through the
+     structure field `bowtieCol_locallyConstant`): FS112-BOWTIE at `E` — `bowtie_isHorn`, `bowtie_flanks`, `bowtie_coloursAt_zero`, `bowtie_mem_dom`, and the
+     partition `bowtie_partition` (r ≤ 1/13); `cuspFrag_isHorn`'s data factored as `cuspPiece_data`, statement unchanged; `interior_line_eq_empty`,
+     `dense_compl_four_lines`. `UnitArc`'s three old linter warnings cleared. Keryx's receipts: build log `build/gate/build/20261004T165111Z-843230.log` (w4)
+     "Build completed successfully (5359 jobs)", 0 warnings other than `declaration uses sorry`; `sorry` lines by count Contact 10, UnitArc 19, BaseSteps 16
+     (`Packed.lean`'s one hit is a docstring, as on `main`); `data/fs131/i4/axioms-i4e.txt` prints `ArcMap.lock` on `[propext, Classical.choice, Quot.sound]`;
+     `lock`'s statement read against the row's three clauses. Re-pricing: `lock` ≈ 25k (planned M), the three bowtie-at-E leaves ≈ 35k, `bowtie_mem_dom` ≈ 15k;
+     `bowtieCol_locallyConstant` (11 tiles) and `bowtie_valid` (21 pairs) heavier. Slips (I4e's): a build read a half-edited `BaseSteps` (rebuilt clean); my brief's
+     warning line numbers were off (236, 666, 706 at `c1255fc5`). **Next**: FS131-I4f (Opus), `bowtieCol_locallyConstant` first.
+185. **Ruling: `l60_eq_third`'s binder `hF` → `_hF` accepted** (I4e's held question). Choice: accept. Alternative weighed: restore `hF` and silence the linter
+     another way (an `omit`-style restructure or a local `set_option linter.unusedVariables false`). Why: a binder name is not part of a theorem's type, so the
+     statement is unchanged, and the underscore records truthfully that the proof never uses validity; a linter option hides that, and the build is green either
+     way. Confidence: high. A generalization for errata (no statement change now): L60-EQ's third tile holds with no `F.Valid` hypothesis.
+186. **Brief FS131-I4f, wave 4's sixth implementer** (Opus; `data/fs131/briefs/FS131-I4f-wave4.md`, derived by script from I4e's, gated PASS): `bowtieCol_locallyConstant`
+     first, then the bowtie and the rest in Stage 11's order, the gate and the landing. Launched in I4e's slot: 1 (I2j) + 1 (IWd) + 1 (I4f) = 3.
+187. **FS131-I2j handed back at stage 21, harness ≈ 397k** (report `data/fs131/reports/FS131-I2j.md` on `fs131-w2`; branch at `9e32ab1d`, checked): 46 → 36.
+     **[kernel], standard three**: **FS129-SR2-SUPK** (`tendsto_mu`, `tendsto_muTile`, `tendsto_muPer`: µ_k(ε), µ_k^tile(ε), µ_k^per(ε) → µ_k⁰ as ε → 0⁺) and with
+     it `muZero_eq_one_iff_tendsto` (FS106-EQ (c) ⟺ (d)); **FS106-SUP's attainment clause** (`exists_bandNull_aeCover_of_mu_eq_one`) and through it **FS106-COMP**
+     (`forall_mu_six_lt_one_iff`: (∀ ε > 0, µ₆(ε) < 1) ⟺ Voronov11); the compactness children `exists_twoCircle_density`, `exists_translates_small_hole`,
+     `ae_sum_eq_one_of_weakStar`, `convForm_tendsto`, `exists_weakStar_subseq` and five new children. **Assembled, over `sorry`** (through `unitForm_tendsto`):
+     `chiM0_le_iff_muZero_eq_one` (FS106-EQ (a) ⟺ (c)), `chiM0_le_iff_periodic`, `seven_le_chiM0_iff`, YESLIM's `chiM0_le_of_fragments`. Keryx's receipts: build log
+     `build/gate/build/20261004T171540Z-968137.log` (w2) "Build completed successfully (5732 jobs)", 36 distinct warnings (each printed twice), all `declaration uses
+     sorry`; `sorry` lines by count Slack 2, CoverExamples 34; `data/fs131/i2/i2j-axioms.txt` prints the three `tendsto_*`, `exists_bandNull_aeCover_of_mu_eq_one`
+     and `muZero_eq_one_iff_tendsto` on the standard three and `chiM0_le_iff_muZero_eq_one` with `sorryAx`. Generalizations for errata: `hε` unused in
+     `exists_bandNull_aeCover_of_mu_eq_one` (kept, `have _ := hε`); `ae_sum_eq_one_of_weakStar` needs no bound on the limit; `exists_squareWin_dense`'s measurability
+     unused; `eventually_le_muPer` needs one scale (µ_k^per grows as ε shrinks). Re-pricing: SUPK's lower bound ≈ 25k (plan 115k), `exists_weakStar_subseq` ≈ 35k
+     (plan 50k), `convForm_tendsto` ≈ 6k (plan 30k). `Plane/Slack` now imports `Plane/FalconerReduction` and five Mathlib modules; `ARCHITECTURE.md` updated,
+     `check_architecture.py` passes. Left: Slack 2 (`integral_circleAvg_sq`, `unitForm_tendsto` — routes in Stage 21), CoverExamples 34; the carriers (Stage 18's
+     recommendation stands), the gate, the landing. **Next**: FS131-I2k (Opus).
+188. **Slip (Keryx's): I2j's brief carried a stale amendment** — item 134's Dyadic `hi` change, copied forward from an earlier brief, had already been applied by
+     FS131-I2g (record Stage 10). I2j checked all five declarations and changed nothing (credit: I2j). Fix: I2k's brief drops the amendment.
+189. **Brief FS131-I2k, wave 2's eleventh implementer** (Opus; `data/fs131/briefs/FS131-I2k-wave2.md`, derived by script from I2j's, stale amendment dropped,
+     gated PASS): Slack's two leaves, CoverExamples' 34, the carriers, the gate and the landing. Launched in I2j's slot: 1 (I4f) + 1 (IWd) + 1 (I2k) = 3.
+190. **FS131-IWd handed back at stage 17, harness 595k** (the agent's own figure "≈300" read low; report `data/fs131/reports/FS131-IWd.md` on `fs131-ww`; branch at
+     `792434f0`, checked): **all three `Merge` leaves proved, statements unchanged; all five Woodall modules (`Basic`, `Collar`, `NoFourFive`, `Merge`, `Steps`)
+     sorry-free**. **[kernel], standard three** (iteration print `data/fs131/iwd/axioms-iteration.txt`, not a gate log): `niceAt_of_dirColourAt` (`h3` not needed),
+     `wedgeMerge_niceAt` (no transversality needed), `exists_merge_at` (E3-NICE, by strong induction on ∑ over directions of (colours approaching − 1)), and
+     **`exists_woodallMerged` (E3-BALL) on proved children**. The chain theorems `aeMap6`, `aeMap6_of_condition5`, `woodall_thm6` still print `sorryAx`, only through
+     wave 4's open statements in `Plane/SVMap` (`lemmaL`, `ts_t`, …). Keryx's receipts: build log `build/gate/build/20261004T172813Z-1058816.log` (ww) "Build
+     completed successfully (5361 jobs)", 0 warnings other than `sorry`, and every `sorry` warning in wave 4's five modules, none in `Plane/Woodall/`; `sorry`
+     lines in the five Woodall files by count 0; the iteration print shows the four on the standard three and `aeMap6` with `sorryAx`. Corrections owed (route
+     notes, no statement change): `plans/FS131-W-kernel-plan.md` § 14.3's transversal crossing is unneeded (`niceAt_of_crossing` has no transversality
+     hypothesis); § 14.4's measure replaced by stage 11's (as item 180). Generalization: `niceAt_of_crossing` holds for any arc map. Name note:
+     `ArcMap.GoodAt.exists_sides` vs `Plane/RingBand`'s `exists_sides` — full names differ, no collision. **Left on `fs131-ww`** (item 181's item 3): after wave 4
+     lands — merge `main`, delete the identical copies (`abs_dot_le`, `dot_add_left`, `dot_e_e`, `isOpen_shadow`), `tools/fs131_qa1_dupes.py`, QA2-1's explicit
+     merged `sevenBrickMap` inhabitant (a merged form exists by theorem now that `exists_woodallMerged` holds for every `k`), the gate, the landing.
+191. **Ruling: IWd's slot goes to wave 5's planner (FS131-K5), now.** Choice: launch the planner. Alternative weighed: a second wave-4 implementer on a branch
+     of its own taking `Contact` (10 leaves, disjoint from I4f's `BaseSteps`), to land wave 4 — and so Woodall — sooner. Why: waves 5–10 (124 rows) are serial
+     behind planning, so a planner started now shortens the milestone more than a faster wave-4 landing, which unblocks only Woodall's landing; wave 4's statements
+     stand, so wave 5 can plan on them (item 75's reason for waiting is met). Confidence: medium — a measured split of wave 4 could still pay if I4f's
+     re-pricing shows its 45 leaves need more than two more sessions. **Item 17 (b)'s `Row134Base` stub** (default "written before wave 5's planner") is drafted by
+     K5 as a deliverable, since wave 5 is its consumer (FS112-N3-BASE) and K1's § 7.4 holds the material; Keryx files it.
+192. **Brief FS131-K5, wave 5's planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K5-wave5.md`, gated PASS): the foundation (stuck chains, `F(M)`, `R(M)`,
+     `Row134Base` as a `Prop`), the 13 rows' skeleton with C-DOUBLE + Y3-END-NEEDS (item 69), FLANK-Q's unconditional form (item 79), N3-END's chain clause
+     (item 74), leaf plans, the obligation pass, the handoff, and the `Row134Base` stub draft (item 191). Worktree `fs131-w5` from `fs131-w4` at `9a8de899`
+     (`.lake/build` copied from `fs131-ww`). Launched in IWd's slot: 1 (I2k) + 1 (I4f) + 1 (K5) = 3.
+193. **FS131-I4f handed back at stage 14, harness ≈ 380k** (report `data/fs131/reports/FS131-I4f.md` on `fs131-w4`; branch at `8a184ec1`, checked): 45 → 39.
+     **[kernel], standard three**: **FS112-BOWTIE's fragment** — `bowtieCol_locallyConstant` (so the structure `bowtie` is sorry-free, and I4e's `bowtie_isHorn`,
+     `bowtie_flanks`, `bowtie_coloursAt_zero`, `bowtie_mem_dom` now read the standard three), `ArcMap.bowtie_valid` (YB3's pairs), `bowtie_doublyShadowed` (band
+     the whole horn), `bowtie_inType`, `bowtie_unitArcEnds`, `bowtie_neighbours` (P_cl(i) = {0,1,3,4}, P_cl(−i) = {2,1,3,4}, one sector per colour). Keryx's
+     receipts: build log `build/gate/build/20261004T174227Z-1140038.log` (w4) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `sorry`
+     lines by count Contact 10, UnitArc 19, BaseSteps 10; `data/fs131/i4/axioms-i4f.txt` prints `bowtieCol_locallyConstant`, `bowtie_valid`, `bowtie_isHorn`,
+     `bowtie_neighbours`, `bowtie_unitArcEnds` on the standard three. Generalization: `ArcMap.coloursAt_hasSectors_of_tiles` (any arc map: n disjoint convex open
+     one-colour tiles with distinct colours, each with `v` in its closure, give P_cl(v) and one sector per colour), reusable by wave 5. Route note: I4e's planned
+     route for the colouring was not needed (membership in nine open tiles suffices). **Correction owed** (to Stage 11's handoff): `n2_env_near` is not "one
+     identity" — it needs a lens estimate with `s ≤ ψ·Δ(φ)` near the ends. Slip (Keryx's): I4f's brief said "four quotations" and quoted five. Left: the bowtie's
+     moves (3, one engine: a horn at E is a cusp horn with flanks G, H), UnitArc 19, Contact 10, the base's steps 7 — routes in Stage 14.
+194. **Ruling: wave 4 splits by file** (item 191's condition met: six leaves a session on wave 4's last two sessions, 39 left). Choice: the next wave-4 implementer
+     (FS131-I4g, in `fs131-w4`) takes `BaseSteps` and `UnitArc` only (29 leaves); `Contact` (10 leaves) is reserved for a parallel implementer in a worktree of its
+     own branched from `fs131-w4`, with its own record file, launched in the next free slot; the two branches merge before the gate (`scripts/Axioms.lean`'s
+     appended records the only expected conflict). Alternative weighed: keep one implementer on all 39 in series. Why: the files are disjoint, wave 4 gates
+     Woodall's landing and wave 5's implementer, and at six a session the serial path is about six more sessions. Confidence: medium — the split pays only if a
+     slot frees while I4g still has work; if none does, I4g's successor simply takes `Contact` too.
+195. **Brief FS131-I4g, wave 4's seventh implementer** (Opus; `data/fs131/briefs/FS131-I4g-wave4.md`, derived by script from I4f's, gated PASS): the bowtie's
+     moves, `UnitArc` and `BaseSteps` (29), not `Contact` (item 194). Launched in I4f's slot: 1 (I2k) + 1 (K5) + 1 (I4g) = 3.
+196. **FS131-K5 mid-job, five findings** (message 2026-10-04; record `plans/FS131-w5-kernel-plan.md` §§ 2.2, 3.4 on `fs131-w5`): **F-BASE** — `Row134Base` stated at the
+     unit-arc class after the inert pre-bend (a valid six-coloured fragment covering `B̄(u, 2)`: `BaseHyp u ∧ NoInertNear u` impossible), because the Condition-5
+     base (S–V Cor. 1 as FS-110 repaired it) does not compose — FS112-N3-BASE's walk swaps Condition 5 out step by step inside the base's proof, and an (R2)
+     arc and the in/out arcs at leaving centres survive every bend; K5 proposed that the walk's assembly (N3-BASE's table) move to the `Row134Base` job.
+     **F-WALK5** — N4-STUCK (i)–(ii) with unit arcs (FS112-WALK's row 5; FS112-WALK declined) is read by CV-L0, CV-HD, CV-CLASS, C-ENDS, N2-TERM's chain
+     clause and CV-EXISTS; formalized in wave 5 as the supporting lemma `stuck_structure_ua` (the pattern of items 8 and 53). **R-CDOUBLE** (item 69's
+     question) — "terminal valid map" = `IsTerminalMap` (wave 4's `Terminal` plus N2-TERM's clause 1), proved as a corollary of CV-HD's cycle and clause 1
+     (FS114-CV's route); `y3_end_needs` used inside CV-HD's branch `¬G_N`. **R-CHAIN** — a chain vertex is stuck with at most three colours (N2-TERM's split);
+     no row's words change. **R-MOD** — "valid modification" = `IsModification` (same domain, no unit arc created, every point of ≥ 4 colours keeps them).
+     Generalizations for errata: N3-COR3 on fragments covering `B̄(u, 1)`, `B̄(u′, 1)`; DISC1TS gives three colours (more than degree 3); the base and
+     LOCALDENSE's input on fragments covering `B̄(u, 2)`; N2-RED, CV-L0, FLANK-Q unconditional and N3-END's chain clause at every `k`. Risk noted:
+     `bend_toward` moves end vertices, so the pre-bend at an inert arc ending at `u` may move `u`. State: 10 of 13 rows stated (ROTHEX, BV-HEX, CVB-THOM not
+     yet); the obligation pass owed to a successor planner.
+197. **Ruling on F-BASE: the unit-arc statement stays, as an intermediate `Prop` proved inside FS-131 — not as the outside hypothesis.** Choice: K5's unit-arc
+     form is wave 5's intermediate statement (a name that does not read as the outside hypothesis, e.g. `Row134BaseUA`, K5's call); the walk's assembly
+     (N3-BASE's table) is a wave-5 theorem proving it, so FS112-N3-BASE's Lean proof is the pre-bend plus the walk; the named outside hypotheses are only the
+     pieces of `[SokolovVoronov2025]` (in FS-110's repaired forms) that the walk uses **by statement**, each a named `Prop`; any piece the walk reads inside a
+     proof is ours to formalize. Alternative weighed: K5's proposal — the unit-arc form as `Row134Base` itself, the walk moved to the separate `Row134Base`
+     job. Why: § What "Closed" means, item 3 — no hand result of ours is left as a hypothesis unless it is outside the backlog and named; N3-BASE (and its walk)
+     is a wave-5 *formalize* row, so it cannot sit inside a named hypothesis at the close, and K5's form would make N3-BASE's Lean proof a restatement of its
+     hypothesis. Confidence: high on the principle; medium on the residual's size — the fact that would change the shape: if the walk reads S–V's proofs
+     throughout, the residual is S–V Cor. 1's whole argument; that is still to be placed inside FS-131 (a wave-5b planner), and the stub then covers nothing.
+     F-WALK5, R-CDOUBLE, R-CHAIN and R-MOD accepted as stated (confidence high). Amendment appended to `data/fs131/briefs/FS131-K5-wave5.md`.
+198. **FS131-K5 handed back at stage 6 (partial), harness ≈ 455k** (report `data/fs131/reports/FS131-K5.md` on `fs131-w5`; branch at `3f7b5a14`, checked):
+     **the foundation `Plane/ValidMap/Chain` sorry-free** (`StuckAlong`, `IsChainVertex`, `stuckRun` and three lemmas; `fourSet` = F(M), `repSet` = R(M);
+     `QROnly`, `IsTerminalMap`; `IsModification` with refl/trans; `BaseHyp`, `NoInertNear`; `Row134BaseUA`), a spec example each on the one-colour plane;
+     **the skeleton: 10 of 13 rows stated, 24 `sorry` leaves** (`Terminal` 14: `exists_red`, `exists_terminal`, FLANK-Q unconditional, CV-HD's four, `c_ends`,
+     `c_double`, `stuck_structure_ua`, `y3_end_needs`, `n3_end_chain`, the inhabitant `sevenBrickMap_isTerminalMap`; `Dense` 10: DISC1TS's three, `cor3`,
+     `row134BaseUA` as one leaf, `n3_base`, `localDense`, `dense3`, `cv_exists` with no hypothesis, the control `not_row134BaseUA_seven`), each read back in plan
+     § 3.2. Keryx's receipts: build log `build/gate/build/20261004T181052Z-1316464.log` (w5) "Build completed successfully (5362 jobs)", 0 warnings other than
+     `sorry`; `sorry` lines by count Chain 0, Terminal 14, Dense 10; `Row134BaseUA`'s Lean text read (`∀ F u, Valid → Covers u 2 → IsCubicTrichromatic u →
+     BaseHyp u → NoInertNear u → False`). **F-BASE's residual** (item 197's question): on FS112-N3-BASE's table every piece of `[SokolovVoronov2025]` is read
+     inside a proof, none by statement — **the whole base is ours to formalize** (unconfirmed against FS110-CB, -CD, -CE, -CC and BASE-V; a pure
+     circle-colouring lemma cited without re-proof would be the one by-statement kind). The stub draft (`data/fs131/k5/STUB-row134-base-lean.md` on
+     `fs131-w5`) now covers nothing outside and serves as the brief's input for an in-milestone planner job (40–60 leaves estimated). Slip (K5's): the
+     stage-1 "as given" build already included its new files. Not yet stated: FS112-ROTHEX, FS114-BV-HEX (four clauses), FS114-CVB-THOM; owed: the obligation
+     pass, `#check` of Mathlib names, `row134BaseUA`'s leaves (plan § 5.1 items 0–5). **Correction owed** to `plans/FS131-kernel-plan.md` § 7.1 and § 7.4:
+     `Row134Base` is no longer a named outside hypothesis (item 197; this item), at the milestone's filing.
+199. **Rulings on K5's held items** (four parts each).
+     (a) **`row134BaseUA` gets its own planner job inside FS-131 (FS131-KB)**, after wave 5's successor planner has stated ROTHEX and BV-HEX, which the walk
+     reads. Alternative weighed: give the base's leaves to the successor planner too. Why: K5 estimates 40–60 leaves, and the successor already has three rows,
+     the obligation pass and the handoff — one context would not hold both. Confidence: high. Item 17 (b)'s stub is **declined**: nothing stays outside (item
+     198), so there is no future milestone to stub; K5's draft is KB's input.
+     (b) **`NoInertNear` (exclude only inert arcs not ending at `u`?) is the base planner's call**, since `Row134BaseUA` is an intermediate of ours and the
+     change alters no row's words; KB reports it. Alternative weighed: rule it now. Why: it turns on whether the walk needs `u` fixed, which only the base's
+     planner will read. Confidence: high.
+     (c) **The free slot goes to wave 5's successor planner (FS131-K5b), revising item 194**: `Contact` waits for a slot that frees when a lane ends (wave 2's
+     landing, or a planner's). Alternative weighed: item 194's order (the `Contact` implementer now). Why: a slot frees only when a lane ends, since every
+     implementer's hand-back is followed by a successor in the same slot; wave 5's planning is upstream of its 13 rows and the base, while `Contact` shortens
+     wave 4 by about a session and a half, which gates only the landings. Confidence: medium — the fact that would change it: wave 4's remaining leaves
+     proving slower than six a session, making wave 4 the milestone's longest path.
+200. **Brief FS131-K5b, wave 5's second planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-K5b-wave5.md`, derived by script from K5's, gated PASS): K5's
+     § 5.1 items 1–5 — ROTHEX, BV-HEX's four clauses, CVB-THOM stated; the obligation pass with `#check`; the handoff in wave 4's § 14 form. Not item 0 (the
+     base, FS131-KB's). Launched in K5's slot (item 199 (c)): 1 (I2k) + 1 (I4g) + 1 (K5b) = 3.
+201. **FS131-I2k handed back at stage 23, harness ≈ 398k** (report `data/fs131/reports/FS131-I2k.md` on `fs131-w2`; branch at `1cc25e27`, checked): 36 → 23.
+     **`Plane/Slack` sorry-free.** **[kernel] on the branch, standard three** (not yet the gate): `integral_circleAvg_sq`, `unitForm_tendsto` (the Rajchman
+     step; needs neither Cauchy–Schwarz nor `ρ` even — dominated convergence), and through them **FS106-EQ (a) ⟺ (c), `chiM0_le_iff_muZero_eq_one`
+     (`χ_m⁰(ℝ²) ≤ k ⟺ µ_k⁰ = 1`, every `k`)**, `chiM0_le_iff_periodic`, **`seven_le_chiM0_iff` (`7 ≤ χ_m⁰ ⟺ ⨆_{ε>0} µ₆(ε) < 1` — row 131's equivalence)** and
+     FS116-O1-YESLIM's `chiM0_le_of_fragments`; (G1) for § 1.6's gap (`hcGap_eq_of_gap`, `differentiable_hcGap`, `hcGap_bounds`, `hcGap_lowerParabola`, six
+     children; so `g1Bounds_hcGap`, `hcZ0_spec` sorry-free), `exists_near_hcFace`, `hcUpTri_frame`, `frontier_essSupport_pos` (FS111-M3-IRREG (3), general
+     form), `r7Col_mem_tile`; `hc_band_components`, `hc_isRegularMUA`, `hc_irreg` assembled over 16 open HC children. Keryx's receipts: build log
+     `build/gate/build/20261004T181256Z-1328058.log` (w2, the newest) "Build completed successfully (5732 jobs)", 23 distinct warnings, all `declaration uses
+     sorry`, no other kind; `sorry` lines by count Slack 0, CoverExamples 23; `data/fs131/i2/i2k-axioms.txt` prints `unitForm_tendsto`,
+     `integral_circleAvg_sq`, `chiM0_le_iff_muZero_eq_one`, `seven_le_chiM0_iff`, `chiM0_le_of_fragments` on the standard three and `hc_irreg` with `sorryAx`;
+     the two headline statements read against FS106-EQ (`Plane/Slack.lean` l. 3485, 3645). Generalization: `integral_circleAvg_sq` needs no `ρ ≥ 0`
+     (a.e. from `hρN`). Re-pricing: the block cost about a quarter of K2d's table. Slip (I2k's): the build at `e74a5e98` read a half-edited CoverExamples —
+     not evidence; clean builds at `0ad70eba`, `925a8bd5`. **Carrier question for the gate** (to I2l): `IsEmpty (CPColouring 0)`, `IsEmpty (CPColouring 1)` are
+     `instance`s — check that the vacuity scan takes an instance as evidence, else add theorem forms; `SemiconcaveWith` has a concrete refutation
+     (`not_semiconcaveWith_one_lowerArc`), so a candidate for IN under T1's refutation clause; survey in Stage 23 "Not done". Left: CoverExamples 23 (R7 7,
+     HC/IRREG 16), the carriers, the gate, the landing. **Next**: FS131-I2l (Opus).
+202. **Brief FS131-I2l, wave 2's twelfth implementer** (Opus; `data/fs131/briefs/FS131-I2l-wave2.md`, derived by script from I2k's, gated PASS): CoverExamples' 23,
+     the carriers (with item 201's two points), the gate and the landing. Launched in I2k's slot: 1 (I4g) + 1 (K5b) + 1 (I2l) = 3.
+203. **FS131-K5b mid-job, while stating ROTHEX and BV-HEX** (message 2026-10-04; record `plans/FS131-w5-kernel-plan.md` § 8 on `fs131-w5`): **correction owed
+     (F-HEXCUSP)** to FS110-N2-HEX as FS112-ROTHEX carries it ("a purely rotating ring forces `u` regular", `plans/FS110-N-proof.md` § 4.4): the count
+     "a sector of angle α serves at most ⌊(180° − α)/60°⌋ + 1 of the six points" gives 4 + 4 + 0 at angles (0°, 0°, 360°), a case N2-HEX never lists — a cubic
+     trichromatic **antipodal double cusp** serves all six points, and H allows it; the Lean statement `hex_regular` (`Plane/ValidMap/HexRing`) concludes
+     "regular or an antipodal double cusp". No consumer affected as far as K5b sees: FS110-N3-P17 reads only "two consecutive rotation points served by one
+     sector" (a horn serves four consecutive points), and BV-HEX handles cusps directly (§ 1a.4 step 6). Errata line owed to FS-110's record at the filing.
+     **Generalizations for errata**: G-BVHEX — BV-HEX at every `k`, on a fragment covering `B̄(u, 1)`, with H read only at the six points `x_j` (stated so as
+     `bv_hex`), and a second, shorter route to ROTHEX's Prop. 17 clause with no N2-ROT, N2-HEX or NOBOTH (`p17_ua` from `bv_hex`); G-BVND — BV-ND for any two
+     centres once the double event is defined at a configuration with both tangential components nonzero, `1 < t < 2` entering only through
+     `linkage_dot_ne_zero` (`t ∉ {1, 3}`), BV-ND1 the instance `u₁ = u₂`. Narrowing, no action (N-BVL3): `bv_l3` takes H on both circles; the walk supplies it.
+     No ruling needed: the corrected statement is the honest one and no row's consumer changes (Keryx; confidence high).
+204. **FS131-I4g handed back at stage 17, harness ≈ 418k** (report `data/fs131/reports/FS131-I4g.md` on `fs131-w4`; branch at `68f34f18`, checked): its files 29 →
+     24 (BaseSteps 10 → 7, UnitArc 19 → 17); `Contact` untouched (diff against `8a184ec1` empty). **[kernel] on the branch, standard three**: FS112-BOWTIE's
+     `bowtie_isStuck` (E stuck, ±i not), `bowtie_terminalOn` (no MERGE, MERGE-RAY or SHAVE at 0, ±i), FS112-FLANK's last clause `flank_incomplete_bowtie`,
+     FS112-U1's `u1_shadow`, L60-REAL's `l60Col_locallyConstant` (`l60Frag` sorry-free), with 39 children. Keryx's receipts: build log
+     `build/gate/build/20261004T182956Z-1435730.log` (w4) "Build completed successfully (5359 jobs)", 34 distinct warnings, all `sorry`, no other kind; `sorry`
+     lines by count Contact 10, UnitArc 17, BaseSteps 7; `data/fs131/i4/axioms-i4g*.txt` print the five on the standard three. Generalization: the ray engine
+     (`eventually_ray_not_mem_hornSet`, `IsSector.disjoint_of_rays`; any arc map — no horn at a vertex whose sectors are convex tiles, in one line). Route note:
+     `noBoth`'s `c ≠ c′` is forced by wave 3's `ringArc_cone_inner/outer` (not a new hypothesis). Imports: `BaseSteps` now imports `UnitArc` (allowed by § 14.2;
+     `ARCHITECTURE.md` updated, check passes); `n3_end` will need `Contact`'s `woodallCone` and `exists_merge`, so `BaseSteps` imports `Contact` after the
+     `Contact` branch merges — a sequencing point. Slip (I4g's): a waiter's `pgrep -f` fallback self-matched (RUNNING.md's trap); nothing lost. Rate: five
+     wave-4 leaves this session (six, five, five on the last three) — item 199 (c)'s condition ("slower than six a session") is met.
+205. **Held for Kooshi (staffing), default queue**: a fourth Opus slot would run wave 4's `Contact` implementer (item 194) now, in parallel. Measurement: wave 4
+     closes about five leaves a session with 34 left (about seven serial sessions, about five with the split); three jobs wait on slots that free only when a lane
+     ends (wave 4's `Contact`, the base's planner FS131-KB, wave 5's implementer). **Default if he says nothing**: no fourth slot; the queue runs in item 199 (c)'s
+     order as lanes end (K5b's slot next goes to `Contact`, since wave 4 is now the slower path). Raised at his next check-in, not by notification (efficiency,
+     not a blocker). Recommendation: a fourth slot for the backlog's duration (confidence medium).
+206. **Brief FS131-I4h, wave 4's eighth implementer** (Opus; `data/fs131/briefs/FS131-I4h-wave4.md`, derived by script from I4g's, gated PASS): `UnitArc` and
+     `BaseSteps`' 24 in Stage 17's order (`n3_end` after `Contact` merges or last), not `Contact`. Launched in I4g's slot: 1 (I2l) + 1 (K5b) + 1 (I4h) = 3.
+     **Tool defect (the brief gate, a false pass)**: my first draft quoted two Stage-17 lines under source lines naming Stage 14's heading, and the gate passed
+     it — it appears to accept a quotation found anywhere after the named heading, not only within its section. Caught by reading the draft; fixed before launch.
+     Owed: a repro filed in agent-forge (`forge/STATUS.md` under Keryx).
+207. **FS131-K5b done, harness ≈ 411k** (report `data/fs131/reports/FS131-K5b.md` on `fs131-w5`; branch at `764cc558`, checked): **wave 5 is fully planned but
+     for the base's leaves.** Stated and read back: FS112-ROTHEX (`Plane/ValidMap/HexRing`: `rot_noThird`, `rot_out`, `rot_in`, `hex_regular` with item 203's
+     double-cusp disjunct, `p17_ua` widened to the germ form), FS114-BV-HEX's four clauses (`bv_hex`, `bv_l3`, `bv_nd` with `linkage_dot_ne_zero`, `bv_nd1`;
+     item 203's widenings and narrowing), FS114-CVB-THOM with CVB-PINCH (`Plane/ValidMap/MapGraph`: `cvb_thom_reduced`, `cvb_thom`, `cvb_pinch_connected`
+     widened to every hole-free tile, `cvb_hole_disconnected`, `exists_holed_valid_fragment`); Thomassen's Lemma 1 planned **formalized**, not an axiom. The
+     obligation pass over all 41 statements: no statement changes; two missing children named (`stuckAlong_of_run`, `shaveAvailable_of_flanks_eq`); Mathlib
+     names confirmed (`data/fs131/k5/K5bChecks.lean`, exit 0). The handoff is plan § 10 (wave 4's § 14 form). Keryx's receipts: build log
+     `build/gate/build/20261004T183935Z-1476479.log` (w5) "Build completed successfully (5364 jobs)", 0 warnings other than `sorry`; `sorry` lines by count Chain 0,
+     Terminal 14, Dense 10, HexRing 10, MapGraph 7 (41); no `axiom` in the new modules. Slip (K5's plan § 4, found by K5b): leaves 3 and 11 cite
+     `IsHorn.isRingArc_upper`, which does not exist — use `flankQ_upper_of_qrOnly`'s conclusion. **Question for FS131-KB**: `bv_l3` needs `RingProper` (no arc of
+     Γ along either circle), as BASE-V's BV-L3 does; the walk's step 8 at a pigeonhole vertex whose circle carries an in- or out-contact arc then has no Lemma 3 as
+     stated — KB settles first whether such arcs can occur there, or a Lemma 3 tolerating them is needed (plan § 10.5). Carriers recommended (for wave 5's gate):
+     IN `IsTerminalMap`, `QROnly`, `HexRing` (refuted-only), `RingProper`, `LocallyHamiltonian`; OUT `IsModification`, `BaseHyp`, `NoInertNear`, `DoubleEvent`,
+     `GermPseudo`, `IsHoleOf`. **Prediction registered** (scored at the close): wave 5 short of the base is three to four implementer sessions;
+     `cvb_thom_reduced` alone one to two (planar core; Mathlib has no Jordan curve theorem, checked by grep).
+208. **Rulings on K5b's held items.** (a) **`cvb_thom_reduced` is not split off yet**: wave 5's implementer prices it from its first two children (plan § 9.1)
+     and I decide then. Alternative weighed: its own implementer job now. Why: a split before any pricing guesses at the size, and no slot is free for it.
+     Confidence: high. (b) The carriers' in/out recommendation goes to wave 5's implementer at its gate, under T1's procedure (no ruling now). (c) **K5b's slot
+     goes to wave 4's `Contact` implementer, FS131-IC1** (item 205's order). Its worktree `fs131-w4c` branches from `fs131-w4` at `68f34f18` with its own record
+     `plans/FS131-IC-implementation.md`; it merges into `fs131-w4` before wave 4's gate.
+209. **Brief FS131-IC1, wave 4's `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC1-contact.md`, gated PASS): `Contact`'s 10 leaves on `fs131-w4c`
+     (from `fs131-w4` at `68f34f18`; `.lake/build` copied from `fs131-w5`), own record `plans/FS131-IC-implementation.md`; no merge and no gate of its own (the
+     second of IC1 and I4h to finish merges, on Keryx's word). Launched in K5b's slot: 1 (I2l) + 1 (I4h) + 1 (IC1) = 3. Queue: FS131-KB (the base's planner),
+     wave 5's implementer.
+210. **Item 205 updated**: `Contact` took K5b's slot (item 209), so the fourth slot, if Kooshi grants it, would run the base's planner FS131-KB (or wave 5's
+     implementer) now instead. Default and recommendation unchanged.
+211. **Kooshi grants a fourth Opus slot for the rest of the backlog** (2026-10-04, at item 205's question): *"I'll accept a fourth for the rest of the backlog.
+     We have a little headroom."* Staffing for FS-131 is now four Opus-agent slots (a Sonnet agent counts half). The fourth goes to the base's planner
+     FS131-KB now (item 210); wave 5's implementer is next in the queue.
+212. **Brief FS131-KB, the base's planner** (`debruijn`, Opus; `data/fs131/briefs/FS131-KB-base.md`, gated PASS): confirm no by-statement use of
+     `[SokolovVoronov2025]` (FS110-CB, -CD, -CE, -CC, BASE-V), settle `NoInertNear`'s scope (item 199 (b)) and Lemma 3 with contact arcs (item 207), lay out
+     `row134BaseUA`'s proof as a skeleton, plan per leaf, obligation pass, handoff. Worktree `fs131-w5b` from `fs131-w5` at `764cc558` (`.lake/build` copied from
+     `fs131-w5`); merges into `fs131-w5` on Keryx's word. Launched in the fourth slot (item 211): 1 (I2l) + 1 (I4h) + 1 (IC1) + 1 (KB) = 4.
+213. **FS131-KB mid-job, six findings** (message 2026-10-04; record `plans/FS131-w5base-kernel-plan.md` on `fs131-w5b`): **GAP-ELEVEN — a GAP at a named step of
+     FS112-N3-BASE's walk** (so of `row134BaseUA`'s proof; one mind, a planner's reading; not a counterexample): the 10 + 1 pigeonhole needs an eleventh
+     trichromatic point `q ∈ B̄(u, 1)` with two colours of `c(u)` and one other; every source gets it on the outer rim of `R*` (the `c(u)`-component of `u`)
+     once tiles are simply connected — S–V p. 28 ("on the boundary of the union of three regions of colors 1, 2, 3 whose vertex is u, there is at least one
+     more trichromatic point (Fig. 6)"), Voronov 2023 Lemma 6.1 ("all regions are 1-connected", Obs. 2.2, hole-filling), FS110-CB D5 item 6, FS110-CE E6
+     ("after hole-filling"), FS112-N3-3. In the local base `u` is fixed and H holds only on `B̄(u, 2)`, so hole-filling can destroy `u`: a tile `R°` of a colour
+     of `u` enclosing `u` inside `B(u, 1)`, with `u`'s other tiles in its hole, leaves `R*`'s outer rim bordering `R°` alone; no local contradiction found.
+     FS110-CD § 2.6 and § 2.8 item 2 named this multiply connected case and left it unsettled. Repairs proposed if not excluded: (a) a no-enclosure hypothesis
+     on `Row134BaseUA`, `localDense` choosing an un-enclosed `u` (perhaps radius 4); (b) `BaseHyp` at radius 3. The skeleton isolates it as one leaf,
+     `exists_eleventh`. **Question 2 settled**: in- and out-contact unit arcs can occur on pigeonhole vertices' circles, so `bv_l3`'s `RingProper` fails there;
+     the walk needs Lemma 3 in pseudo-colour form, stated as `l3_base` in the base module ((i), (ii) from `pair_i`, `pair_ii`; finiteness from `NoInertNear`;
+     core shared with `bv_l3`, which stays as stated). **Question 1 settled**: `NoInertNear` stays (the walk reads it at pigeonhole centres on `ω(u)`, where an
+     inert arc may end at `u`); the cost falls on `n3_base`'s pre-bend — a strengthened-bend child keeping `u` cubic trichromatic with the same colours (NB3 step
+     4), no statement change. **Confirmation**: no piece of `[SokolovVoronov2025]` used purely by statement except the eleventh-point sentence, which cannot be
+     an axiom (it is the step in question, and it rests on simple connectivity). **Size**: the planar core (Prop. 19(b)'s endpoints, the circle-only reduction's
+     colour pattern and nesting, the eleventh point) needs boundary-path topology; Mathlib has no Jordan curve theorem at the pin — the same kind of work as
+     CVB-THOM's planar core; KB suggests one shared infrastructure job (the finite boundary graph of an `ArcMap` in a compact disc, then the handshake lemma).
+     **Routing** (Keryx): GAP-ELEVEN → an Ephodos job (FS131-E4) in the next free slot, ahead of wave 5's implementer, since it bears on rows 135 and 137 —
+     its questions: is the enclosure case excluded under H at a fixed `u`; if not, which repair holds and what it costs `localDense`, N3-DENSE3 and CV-EXISTS;
+     and do rows 134, 135, 137 as filed rest on the local form at a fixed `u` or on the global form after hole-filling. Rulings on items 2–5 at KB's hand-back.
+214. **FS131-I2l handed back at stage 25, harness ≈ 498k** (report `data/fs131/reports/FS131-I2l.md` on `fs131-w2`; branch at `63ffebec`, checked): 23 → 16.
+     **[kernel] on the branch, standard three**: **FS111-M-R7 sorry-free** — `r7_aeColouring` (R7 a measurable seven-colouring with null monochromatic unit
+     pairs), `exists_r7` (tight and saturated), `r7Cls_isMaximalCover` (FS111-VMW-R7-MAX), `r7Cls_saturated`; the seven R7 children; 45 new children, two
+     general (`reuleaux_unitPair` for any unit equilateral triangle; `phi_pos_of_star` / `phi_pos_of_mem_open` for any measurable set). Keryx's receipts: build
+     log `build/gate/build/20261004T192247Z-1722400.log` (w2) "Build completed successfully (5732 jobs)", 16 distinct warnings, all `sorry`, no other kind;
+     `sorry` lines by count: CoverExamples 16, no other file; `data/fs131/i2/i2l-axioms.txt` prints `r7_aeColouring`, `exists_r7`, `r7Cls_isMaximalCover` on the
+     standard three and `hc_irreg` with `sorryAx`. Route correction (to K2d's plan § 16, R7 row): the density route for `r7_boundary_lattice` was not needed —
+     all three down colours are in the support at every lattice point, and only the seventh colour must be shown absent near `λ₀`. Re-pricing: R7's seven
+     leaves ≈ 75k against K2d's 280k. Left: HC/IRREG 16, the carriers (the `IsEmpty (CPColouring 0/1)` instance question still open), the gate, the landing.
+     **Next**: FS131-I2m (Opus), in the same slot.
+215. **Brief FS131-I2m, wave 2's thirteenth implementer** (Opus; `data/fs131/briefs/FS131-I2m-wave2.md`, derived by script from I2l's, gated PASS): HC/IRREG's 16,
+     the carriers, the gate and the landing. Launched in I2l's slot: 1 (I4h) + 1 (IC1) + 1 (KB) + 1 (I2m) = 4. **Second instance of item 206's gate defect**: my
+     script's global rename turned the quoted source heading "(FS131-I2l)" into "(FS131-I2m)", a heading that does not exist, and the gate passed it; caught by
+     reading the draft, fixed before launch. The gate's § check is evidently by prefix or looser; the agent-forge repro is owed (item 206).
+216. **FS131-KB handed back at stage 5, harness ≈ 462k** (report `data/fs131/reports/FS131-KB.md` on `fs131-w5b`; branch at `49ed9cc4`, checked): **the base
+     planned as 19 `sorry` leaves** in `Plane/ValidMap/BaseWalk` (the bundled context `BaseCtx`; the pseudo-colouring facts A0–A4 with the bridge to wave 3's
+     `CircleColouring`; the circle-only reduction and `select`; the planar core C1–C5; the refuters D1–D6; the count E1), and `row134BaseUA` with its four
+     consumers moved, names and statements unchanged, into `Plane/ValidMap/BaseDense`. Keryx's receipts: build log `build/gate/build/20261004T193142Z-1794581.log`
+     (w5b) "Build completed successfully (5366 jobs)", 0 warnings other than `sorry`; `sorry` lines by count BaseWalk 19, BaseDense 5, Dense 5. Its findings as in
+     item 213 (GAP-ELEVEN isolated as the one leaf `BaseCtx.exists_eleventh`; `l3_base` sharing `linkage_band` with `bv_l3`; `NoInertNear` unchanged), plus:
+     **`cor3` needs `B̄(x, 1)` covered at both vertices**, which the base cannot supply at `x ∈ ω(p)`, `p ∈ B̄(u, 1)` (its |c′| ≤ 2 leaf) — `cor3`'s argument reads
+     only small discs, so a local variant or a weaker hypothesis is owed. Slips (KB's): the as-given build ran after the skeleton was written; the obligation
+     pass and the `#check`s not run (budget). **Tool defect**: `RUNNING.md` § Building points to ".claude/agents/debruijn.md § Building Lean", which does not
+     exist — the text is `LEAN.md` § Building. **Stub to mint**: a shared planar-infrastructure job (the finite boundary graph of an `ArcMap` in a compact disc,
+     with its handshake lemma; Mathlib has no Jordan curve theorem at the pin), serving the base's C3 `retArcs_nested`, C4 `exists_endpoint` and
+     `cvb_thom_reduced`'s boundary walks.
+217. **FS131-IC1 handed back at stage 3, harness ≈ 442k** (report `data/fs131/reports/FS131-IC1.md` on `fs131-w4c`; branch at `7bb8837b`, checked): `Contact` 10 → 6.
+     **[kernel] on the branch, standard three**: FS110-N3-DEG with unit arcs (`ArcMap.woodallCone`, curvatures in [−1, 1]) and as filed (`woodallCone_strict`,
+     Condition 5), FS110-N3-CONF (iii) / N3-CLEAR (`clear_of_subset_interior_allowedCone`), 35 children (among them `woodall_contacts`); FS110-N4-SHAVE's
+     criterion `shaveAvailable_of_not_doublyShadowed` proved over `flank_shadows` (open). Keryx's receipts: build log `build/gate/build/20261004T193115Z-1790239.log`
+     (w4c) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `Contact` 6 `sorry` lines by count; `data/fs131/ic/axioms-stage3.txt`
+     prints the three on the standard three and `shaveAvailable_of_not_doublyShadowed` with `sorryAx`. **Corrections owed** (route notes, no statement change):
+     wave 4's plan § 13.1 engine 3 ("the moves never delete an arc") is wrong for `exists_rayMerge` and `exists_merge` — each needs a cut at `v` (arcs through
+     `v` replaced by at most three pieces), so both cost more than "M–H"; `exists_shave` does not assume `g ≠ c` or `h ≠ c`, so the case `g = c`, `σ < κ₂` needs
+     the same cut — no statement change, since wave 5 applies SHAVE wherever `ShaveAvailable` holds. `stuck_structure` (ii) needs N4-FLANK's mechanism (doubly
+     shadowed ⟹ out-type `h`-tile at N, out-type `g`-tile at S′) as a child, from which `flank_shadows` follows; most of that leaf's work is contacts near N or S′.
+     New tool `tools/fs131_ic_addrecords.py` (negative control watched). Imports: `Contact` now imports `Plane/SVMap`; `BaseSteps` may import `Contact` (no
+     cycle). **Shared lemma** `ringArcsWithin_of_Γ_subset` (engine 2) is written nowhere yet; Contact's moves and I4h's bends both need it. Slip (Keryx's): IC1's
+     brief's first line was I4h's title (carried over by my script); IC1 worked from the header and body.
+218. **Rulings on KB's and IC1's held items** (four parts each, compressed where the alternative is plain).
+     (a) **GAP-ELEVEN → an Ephodos derivation job, FS131-E4, now, in KB's slot**; no statement change to `Row134BaseUA` before its verdict. Alternative weighed:
+     repair (b) or (c) by ruling now. Why: (b) changes rows (radius 4) and (c) changes the base's statement — both need the deriver's reading of whether the
+     enclosure case can occur and of what rows 134, 135, 137 as filed rest on. Confidence: high.
+     (b) **`cor3`'s local variant**: the base's implementer adds it as a new lemma (`cor3_local`, reading small discs only); `cor3` keeps its statement. Alternative:
+     weaken `cor3`'s hypothesis (a wave-5 statement change). Why: a child is always allowed and changes no row. Confidence: high.
+     (c) **The planar-infrastructure job**: accepted, queued after wave 5's implementer (it serves only the base's C3–C4 and `cvb_thom_reduced`, both priced late).
+     Confidence: medium. (d) **KB's owed obligation pass and `#check`s** go to the base's implementer as its first stage, not a separate planner (the skeleton
+     is small). Confidence: medium. (e) **`fs131-w5b` merges into `fs131-w5`** as the first step of wave 5's implementer. (f) **IC1's slot → FS131-IC2** (Contact's
+     6). (g) **`ringArcsWithin_of_Γ_subset`**: one name, in `Plane/ValidMap/Basic`; whichever of I4h and IC2 needs it first writes it under exactly that name;
+     the merge deletes an identical copy (`tools/fs131_qa1_dupes.py`) or keeps one and adapts. I4h told by message.
+219. **Brief FS131-IC2, wave 4's second `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC2-contact.md`, derived by script from IC1's, title line fixed,
+     gated PASS): `Contact`'s 6 on `fs131-w4c`, no merge or gate of its own. Launched in IC1's slot. Note: IC1 prices each of the 6 at about a session, so
+     `Contact` (not `BaseSteps`/`UnitArc`) is now wave 4's long pole.
+220. **Claim list and brief FS131-E4, the deriver on GAP-ELEVEN** (Ephodos, Opus; `data/fs131/claims-E4.md`, every source copied by script;
+     `data/fs131/briefs/FS131-E4-eleventh-point.md`, gated PASS): Q1 the enclosure case under the base's hypotheses (exclusion or exact configuration), Q2 the
+     count without the eleventh point, Q3 the repair and its cost, Q4 whether rows 134, 135, 137 as filed read the local base. Launched in KB's slot: 1 (I2m) +
+     1 (I4h) + 1 (IC2) + 1 (E4) = 4. **Announcement rule for E4's verdict** (written before its report): a configuration counts as realized only if it is given
+     exactly and its validity and the base's hypotheses are checked by exact arithmetic with a red control; a derivation counts as one mind; any change to a filed
+     row is reported to Kooshi with its mind count, and filed only at the milestone's filing.
+221. **FS131-I4h handed back at stage 21, harness ≈ 440k** (report `data/fs131/reports/FS131-I4h.md` on `fs131-w4`; branch at `22820927`, checked): its files 24 →
+     19 (BaseSteps 7, UnitArc 12). **[kernel] on the branch, standard three**: FS114-L60-LE's L60-REAL (`ArcMap.l60_real`: the fragment valid, the arc `r([0, 60°])`
+     of `ω(0)` an arc of Γ with constant sides 0 inside, 1 outside, a neighbourhood of it in the domain) and **FS112-N2-BENDS's N2-ENV sorry-free** —
+     `n2_env_toward` (ψ = min(1, r/9)), `n2_env_away` (ψ = min(1/2, r/4)), `n2_env_near` (ψ = (1 − cos(ℓ/2))/π), `n2_env_near_away` — with 31 children (a general
+     Reuleaux diameter bound `dist_le_one_of_mem_reul`, the lens estimate `lens_dot_ge`, the sine gap `sin_add_sin_sub_sin_ge`). Keryx's receipts: build log
+     `build/gate/build/20261004T193948Z-1860590.log` (w4) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `sorry` lines by count
+     Contact 10 (IC2's, on `fs131-w4c`), UnitArc 12, BaseSteps 7; `data/fs131/i4/axioms-i4h-*.txt` print the five on the standard three. Route notes: N2-ENV
+     near is a lens estimate (I4f's correction confirmed); `n2_env_away` works on the whole arc with an end frame at each end. **Tool defect repaired** (I4h's):
+     `data/fs131/i4/iter.sh`, `chk.sh` had a hard-coded scratch mirror two parallel implementers would share; now read from `S`. Honest gap: L60-REAL's probe tool
+     `tools/fs114_l60_check.py FRAG` not re-run (the proof covers every pair class). Engine 2 not reached (item 218 (g) carried). **Technique filed** to
+     `LEAN.md` § Searching — Lean: `nlinarith` heartbeats in a large context — state each inequality as a small real-variable lemma.
+222. **Brief FS131-I4i, wave 4's ninth implementer** (Opus; `data/fs131/briefs/FS131-I4i-wave4.md`, derived by script from I4h's — source headings checked to name
+     real headings after the rename — gated PASS): `UnitArc` and `BaseSteps`' 19 in Stage 21's order (engine 2 first). Launched in I4h's slot: 1 (I2m) + 1 (IC2)
+     + 1 (E4) + 1 (I4i) = 4.
+223. **Engine 2 written once** (item 218 (g)): FS131-I4i wrote `ringArcsWithin_of_Γ_subset` in `Plane/ValidMap/Basic` on `fs131-w4` (`3f7ea033`, Basic.lean only,
+     112 lines; checked by `git show --stat`); Keryx relayed to FS131-IC2 to bring that exact hunk onto `fs131-w4c` if needed before the merge, so the copies are
+     identical.
+224. **FS131-IC2 handed back at stage 6, harness ≈ 351k** (report `data/fs131/reports/FS131-IC2.md` on `fs131-w4c`; branch at `c7249cc7`, checked): `Contact` 6 → 5.
+     **Over `stuck_structure`'s statement** (open): FS110-N4-STUCK's N4-PROP `ArcMap.stuck_chain` (`IsStuck (v + j n)` for every `j ∈ ℤ`, read against plan
+     § 3.2) and three step children (`stuck_neighbour`, `stuck_flip`, `stuck_step`). **[kernel] on the branch, standard three**: 10 children
+     (`e_eq_of_mem_coneAt_hornSet` — a horn approaches its base point exactly along its axis; `exists_hasSectors`; `shaveAvailable_of_adjacent_horns`; …). Keryx's
+     receipts: build log `build/gate/build/20261004T200630Z-1991775.log` (w4c) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `Contact`
+     5 `sorry` lines by count; `data/fs131/ic/axioms-ic2-stage6.txt` prints `stuck_chain` with `sorryAx`, `exists_hasSectors` and
+     `shaveAvailable_of_adjacent_horns` on the standard three. **Corrections owed** (route notes, no statement change, to wave 4's plan § 13.5 and § 4 item 14):
+     "no RAY ⟹ one horn per ray" misses two `c`-horns on one ray sharing an arc with `c` on both sides — SHAVE with upper flank `c` covers it (`RayAvailable`
+     needs `κ₂ < κ₃` strictly); `woodallCone_strict` gives horn curvatures per radius while `IsHorn` needs them fixed — the sector chart supplies them. Next
+     children named: `IsHorn.exists_flanks`, `stuck_cone`. Engine 2 not brought over (no move worked yet). Left: `flank_shadows`, `exists_shave`,
+     `exists_rayMerge`, `exists_merge`, `stuck_structure` — about a session each (IC1's estimate stands). **Next**: FS131-IC3 (Opus), same slot.
+225. **Brief FS131-IC3, wave 4's third `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC3-contact.md`, derived by script from IC2's, gated PASS): `Contact`'s
+     5 on `fs131-w4c` (`stuck_cone` and `IsHorn.exists_flanks` first, per IC2), engine 2 brought over verbatim when needed. Launched in IC2's slot: 1 (I2m) + 1
+     (I4i) + 1 (E4) + 1 (IC3) = 4.
+226. **FS131-E4 done, harness ≈ 480k** (report `data/fs131/reports/FS131-E4.md`; record `plans/FS131-E4-derivation.md`; commits `fffe465f` … `e2928a7b`, checked;
+     derive gate PASS, 0 failures, 3 "prior art owed" warnings, both tool controls fire). **Q1 (enclosure under `BaseCtx`) — GAP, stalls** (E4-Q1): every
+     hypothesis read inside `B̄(u, 0.34)` holds in an exact enclosure model (`tools/fs131_e4_enclosure_model.py`), so no local exclusion exists; no configuration
+     on `B̄(u, 2)` exhibited. **Q2 (the count without the eleventh point) — GAP, stalls** (E4-Q2): types alone never force a collision (`tools/fs131_e4_count.py`);
+     smallest open form: can an enclosed `u` have its nine selected endpoints of nine distinct multicolours? **Derived [hand], one mind each**: **E4-RIM** — the
+     eleventh point exists at any `u` no tile of one of `u`'s colours encloses (`UnenclosedC u`; prior art `[Voronov2023]` Lemma 6.1 under 1-connectedness);
+     **E4-OUTERMOST** — within 1 of any point of a valid fragment there is a bad point or a cubic trichromatic vertex no tile encloses (any `k`); **E4-N3BASE-UN**
+     — FS112-N3-BASE with `UnenclosedC u` added (over the walk's other steps at their grade); E4-BEND-UN (the pre-bend keeps it; a sketch at the collar push);
+     **E4-LOCALDENSE** [derived] — `localDense`'s statement, radius 3, re-proved over E4-OUTERMOST and E4-N3BASE-UN. **Q3**: repair (b) at radius 3 — only
+     `Row134BaseUA` and `n3_base` gain `F.UnenclosedC u` (`BaseCtx` a field); `localDense`, `dense3`, `cv_exists` keep their statements; (c) dominated; the Lean text
+     drafted in record § 5.2 (with `exists_unenclosed_or_bad` and four children; one planar lemma — the outer frontier of a plane continuum is connected — not in
+     Mathlib). **Q4**: row 134 rests on the hole-filled global form (FS110-CLOSURE → COR1-NOD2, CB D5 item 6) — **stands**; row 135's headline (DENSE3) ran the base
+     at FS112-DISC1's vertex, which may be enclosed — **headline stands with the repaired proof; its base clause as filed is a GAP at an enclosed vertex**; row 137
+     — **stands** (rests on DENSE3's statement). Predictions scored: repairs met (P4 0.80, P5 0.85), closures not (P1 0.15, P2 0.02, P3 0.10); mean Brier 0.019.
+     Keryx's receipts: derive gate run (PASS); the drafted Lean text and the § 5.4 drafts read in full. Slip (E4's, self-caught): a line citation corrected
+     before commit.
+227. **Ruling: repair (b) adopted as drafted** (E4 § 5.2). Choice: `UnenclosedC` on `Row134BaseUA` and `n3_base`, `BaseCtx.unenclosed`, `localDense`'s proof
+     through `exists_unenclosed_or_bad`, no radius change; the base at an enclosed vertex (E4-Q2's open form) left open. Alternative weighed: hold the statements
+     until the grid search (search queue 7) decides E4-Q1 at a resolution. Why: every consumer's statement survives under (b), so nothing waits on the open
+     case, and the kernel will check E4-RIM and E4-OUTERMOST (one mind each) when they are formalized. Confidence: high. **Filed now**: E4's errata 4 and 5,
+     verbatim, under FS112-N3-BASE (`plans/FS112-derivation.md`) and FS129-OR1-LOCALDENSE (`plans/FS129-derivation.md`); search request 7 in
+     `plans/SEARCH-QUEUE.md`. **Filed at the milestone's filing** (item 220's rule): `LEDGER.md` rows 135 (base clause and grade bracket), 137 (grade bracket),
+     134 (optional precision) from E4 § 5.4 items 1–3. **Applied by wave 5's implementer** as its first step after merging `fs131-w5b`: E4 § 5.2's Lean change.
+     The planar lemma joins the planar-infrastructure job (item 218 (c)). Optional stub (is `Row134BaseUA` true without `UnenclosedC`?): declined for now — no
+     filed headline needs it; the search request carries the question. Prior-art debt: E4-OUTERMOST, E4-BEND-UN, E4-LOCALDENSE owed (in-house); bibliography read
+     status for `[Voronov2023]` Obs. 2.2, Lemma 6.1 and `[SokolovVoronov2025]` pp. 27–28 (re-read first-hand 2026-10-04) to note at the filing.
+228. **Brief FS131-I5, wave 5's first implementer** (Opus; `data/fs131/briefs/FS131-I5-wave5.md`, gated PASS): merge `fs131-w5b` into `fs131-w5`, apply E4's repair
+     (item 227) verbatim, the base's owed obligation pass (item 218 (d)), then wave 5's leaves in plan § 10.1's order; `cvb_thom_reduced` priced from its first
+     two children (item 208 (a)); no gate or landing (after wave 4). Launched in E4's slot: 1 (I2m) + 1 (I4i) + 1 (IC3) + 1 (I5) = 4. Kooshi notified of E4's
+     verdict by push (rows 134, 137 stand; row 135's headline stands, its base clause needs the condition) per item 220's rule.
+229. **FS131-I4i handed back at stage 24, harness ≈ 422k** (report `data/fs131/reports/FS131-I4i.md` on `fs131-w4`; branch at `e16f5b2c`, checked): its files 19 →
+     14 (UnitArc 7, BaseSteps 7). **[kernel] on the branch, standard three**: FS114-L60-LE's first clause `l60_le` (a unit arc with constant sides has
+     θ₂ − θ₁ ≤ π/3), **FS112-N3-NOBOTH** `noBoth` (with the domain hypothesis), L60-EQ's `l60_eq_inner`, `l60_eq_outer`, `l60_eq_corners` (so `l60_eq_third`
+     now reads the standard three), engine 2 `ringArcsWithin_of_Γ_subset` (with a spec example), 15 supporting lemmas. Keryx's receipts: build log
+     `build/gate/build/20261004T201515Z-2044743.log` (w4) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `sorry` lines by count
+     UnitArc 7, BaseSteps 7; `data/fs131/i4/axioms-i4i-24.txt` has no `sorryAx` and prints `l60_le`, `noBoth`, `l60_eq_corners`, engine 2 on the standard three.
+     **Correction owed** (route note, wave 4's plan § 13.1 and § 13.5): engine 6 ("the wave's second-hardest statement") is not needed — L60-LE and L60-EQ follow
+     from wave 3's crossing engine `Valid.dist_lt_or_gt_of_isPreconnected` (the open arc lies in the closure of each side colour); engine 6 not written.
+     Declaration order: `l60_eq_inner/outer/corners` moved below the `l60Frag` helpers they use, statements and docstrings verbatim (checked by script) — accepted,
+     no tool reads the order (`tools/fs131_k4_decls.py --check` exits 0). Imports: `UnitArc` now imports `Sectors`. Left: UnitArc 7 (the three bends,
+     `flankQ_upper/lower`, `a4six`, `nb4p`), BaseSteps 7 (`pair_P'` first; the vote leaves need a shared three-germs lemma; `n3_end` after `fs131-w4c` merges).
+230. **Brief FS131-I4j, wave 4's tenth implementer** (Opus; `data/fs131/briefs/FS131-I4j-wave4.md`, derived by script from I4i's, gated PASS; a stale "Where I4f left
+     it" corrected by reading): `UnitArc` and `BaseSteps`' 14 in Stage 24's order (`pair_P'` first). Launched in I4i's slot: 1 (I2m) + 1 (IC3) + 1 (I5) + 1 (I4j) = 4.
+231. **FS131-I5 mid-job, a definition defect in KB's skeleton** (message 2026-10-04): `BaseCtx.retArcs_nested` (`Plane/ValidMap/BaseWalk`) cannot be proved by any
+     local route, because KB's path-free `IsRetArc u s t` (one `a`-tile and one `c`-tile with `r(s)`, `r(t)` in both closures, plus the germ pattern) admits
+     returning pairs whose `a|c` boundary returns outside `B̄(u, 1)`. Smallest configuration: one `a`-tile and one `c`-tile (both colours absent at `u`) whose
+     common boundary crosses `ω(u)` at 0°, 20°, 40° (ring `a | c | a | c`): `IsRetArc u 0 20` with `(a, c)` and `IsRetArc u 20 40` with `(c, a)` both hold, the
+     closed arcs meet only at `r(20°)`, and nesting fails; `reduce`'s conclusion fails with abutting arcs, and `exists_endpoint`'s `hout` wrongly excludes `r(40°)`.
+     The statement holds only because `BaseCtx` is empty (that is `row134BaseUA`). Source definition, checked: FS110-CD Lemma R (`plans/FS110-CD-verification.md`
+     § 2.4, l. 200) — "Let `(b, b′)` be a returning pair joined by `β` (an `a|c` boundary path in the closed disc)." Credit: I5.
+232. **Ruling: `IsRetArc` gains CD's β** — some connected `K` with `r(s), r(t) ∈ K ⊆ closure T₁ ∩ closure T₂ ∩ closedBall u 1`. Choice: I5 makes the definition
+     change in `Plane/ValidMap/BaseWalk` (with its docstring citing CD § 2.4 and this item), and nesting follows CD's step 4 (planar-core work, with C3).
+     Alternative weighed: send the definition to a deriver. Why: the Lean definition dropped a clause its source states explicitly, so the repair is a faithful
+     transcription, not new mathematics; `IsRetArc` is the base skeleton's own vocabulary (not `Chain`'s, `HexRing`'s or `MapGraph`'s, which § 10.2 protects), and
+     no row statement changes. Confidence: high. Amendment appended to `data/fs131/briefs/FS131-I5-wave5.md`.
+233. **FS131-I2m handed back at stage 27, harness ≈ 541k** (report `data/fs131/reports/FS131-I2m.md` on `fs131-w2`; branch at `57c26bd0`, checked): CoverExamples 16 →
+     5. **[kernel] on the branch, standard three**: FS111-M3-HC's (G2) `hcUp_slivers` and (G3) `hcBandTop_bounds`, `lt_hcBandTop_iff`, `continuousOn_hcBandTop`,
+     `hcBand_component_iff` (so **FS111-M3-HC's second clause `hc_band_components` is sorry-free**); § 2.3's `hc_band_dist_lt_one` and `hc_unitAvoiding` (no two
+     points of int HC at distance 1); Lemma NL `hc_lemmaNL`; `isClosed_hcSet`, `closure_interior_hcSet`, `volume_frontier_hcSet`; 70 children (the block kit:
+     `hcBlock_sep` — distinct blocks ≥ 1 apart, `hcBlock_dist_le_one`, local finiteness, `volume_graph_eq_zero`). Keryx's receipts: build log
+     `build/gate/build/20261004T203429Z-2166305.log` (w2) "Build completed successfully (5732 jobs)", 5 distinct warnings, all `sorry`, no other kind; CoverExamples
+     5 `sorry` lines by count; `data/fs131/i2/i2m-axioms.txt` prints `hc_band_components`, `hc_unitAvoiding`, `hc_lemmaNL` on the standard three and `hc_irreg`
+     with `sorryAx`. Generalizations for errata: Lemma NL needs no nearest-point argument (an exterior disc directly below at `(s, 2 + g s)`, any `R ≤ 2`, from
+     (G1)'s lower parabola alone); unit-avoidance of int HC needs only block separation ≥ 1 and block diameter ≤ 1. Route (not yet written): IRREG (2) from
+     `hc_exclusion` and `HC = cl int HC` by an annulus argument, no Baire. New import `Mathlib.Analysis.Convex.Measure` (Mathlib, not listed in
+     `ARCHITECTURE.md`'s project-only Imports cell). Seven new definitions with spec examples. Left: `hc_sausage_cover` (B1), `hc_exclusion` (B2), `hc_ae_phi_pos`,
+     `hc_free_pos`, `hc_free_subset_nowhereDense`; the carriers (I2k's two open points); the gate; the landing. **Next**: FS131-I2n (Opus), same slot.
+234. **Brief FS131-I2n, wave 2's fourteenth implementer** (Opus; `data/fs131/briefs/FS131-I2n-wave2.md`, derived by script from I2m's, source headings checked,
+     gated PASS): the last 5 HC/IRREG leaves, the carriers, the gate and the landing. Launched in I2m's slot: 1 (I4j) + 1 (IC3) + 1 (I5) + 1 (I2n) = 4.
+235. **FS131-IC3 handed back at stage 9, harness ≈ 423k** (report `data/fs131/reports/FS131-IC3.md` on `fs131-w4c`; branch at `923c8ad6`, checked): **no `Contact` leaf
+     closed; 44 children, all standard three**, among them **`stuck_horns` = N4-STUCK (i)** (at a stuck vertex under Condition 5 covering `B̄(v, 1)`, a colour
+     with ≥ 2 sectors has exactly two, horns along α and α + π with curvatures in (−1, 1), out-type contacts at N and S′; read against N4-STUCK (i) and
+     `stuck_structure`'s first seven clauses plus its two out-type clauses, its doubly-shadowed clause left to `flank_shadows`), `woodallCone_isHorn` (IC2's
+     finding 2), `IsHorn.exists_flankAbove/Below` (IC2's finding 1), and N4-FLANK's localization chain (`shadow_source_near_poles`, `horn_shadow_near_S/N`,
+     `outType_S/N_of_shadow`). Keryx's receipts: build log `build/gate/build/20261004T204837Z-2282147.log` (w4c) "Build completed successfully (5359 jobs)", 0
+     warnings other than `sorry`; `Contact` 5 `sorry` lines by count; `data/fs131/ic/axioms-ic3-stage8.txt` prints `stuck_horns`, `woodallCone_isHorn`,
+     `outType_N_of_shadow` on the standard three. Generalization: `shadow_source_near_poles` needs neither Condition 5 nor finitely many contacts (compactness of
+     the class's closure). Slips (IC3's): its own build killed twice by PID (only time lost); a Stage-7 count corrected. **Re-pricing**: the five at about 4.5–5
+     sessions (`stuck_structure` 1.5, `flank_shadows` 1, each move 1) — `Contact` is wave 4's long pole.
+236. **Ruling: `Contact` splits once more, when a slot frees** — the three moves (`exists_shave`, `exists_rayMerge`, `exists_merge`) to a parallel implementer in a
+     new module upstream of `Contact` (say `Plane/ValidMap/Moves`, importing `Basic`, `Sectors`, `SVMap` — the availability predicates live in `Basic`), proving
+     the three under their exact statements as `…_aux` lemmas that `Contact`'s leaves then cite in one line each, at the merge. Until a slot frees (wave 2's
+     landing is next), FS131-IC4 takes `stuck_structure` and `flank_shadows` first and the moves only after. Alternative weighed: keep `Contact` serial (about five
+     sessions). Why: the moves read nothing of `Contact`'s own (engine 2 and the charts are in the foundation), so the split is clean and takes about three sessions
+     off wave 4's longest path. Confidence: medium — the fact that would change it: a move needing a `Contact` lemma (then that lemma moves to `Moves` too).
+237. **Brief FS131-IC4, wave 4's fourth `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC4-contact.md`, derived by script from IC3's, gated PASS):
+     `stuck_structure` and `flank_shadows` first, the moves only if no parallel implementer has taken them (item 236). Launched in IC3's slot: 1 (I2n) + 1 (I4j) +
+     1 (I5) + 1 (IC4) = 4.
+238. **FS131-I5 handed back at stage 6, harness ≈ 442k** (report `data/fs131/reports/FS131-I5.md` on `fs131-w5`; branch at `7b049700`, checked): **`fs131-w5b` merged**
+     (`160b04f6`, no conflicts; `tools/fs131_i5_dupes.py` added — QA1's tool has no wave-5 entry — 0 collisions, controls watched); **E4's repair applied
+     verbatim** (`UnenclosedC`, `Unenclosed` in `Chain`; `Row134BaseUA`, `n3_base`, `not_row134BaseUA_seven` gain it; `BaseCtx.unenclosed`; children
+     `exists_preBend`, `exists_unenclosed_or_bad` stated; `localDense` routed through E4-OUTERMOST); **`IsRetArc` gains CD's β** (items 231–232); **the base's
+     obligation pass**: every `BaseWalk`/`BaseDense` statement derives once the two repairs are in (notes: `exists_endpoint`'s second `hc` disjunct never holds;
+     the assembly calls `hex_base` on the unreduced colouring; `pseudo_ncard_le_two` through `cor3_local`); 29 Mathlib names confirmed (no unicoherence lemma, no
+     Jordan curve theorem). Wave 5: 60 → 46. **[kernel] on the branch, standard three**: `linkage_dot_ne_zero`, `endpoint_dist_ge`, `eleventh_type`,
+     `isCubicTrichromatic_of_three_of_noRep`, `BaseCtx.cubic_of_three`, `disc1ts`, `disc1ts_degree` (FS129-SR2-DISC1TS), `Thomassen.triLattice_hyps`,
+     `triLattice_adj`, `Unenclosed.unenclosedC`; **over open children**: `p17_ua`, `bv_nd1`, `flankQ_upper/lower_of_qrOnly`, `cvb_thom`, `BaseCtx.cor3_base`,
+     `n3_base`, `localDense`, `dense3`. Keryx's receipts: build log `build/gate/build/20261004T205348Z-2322842.log` (w5) "Build completed successfully (5366
+     jobs)", 0 warnings other than `sorry` (91 distinct: wave 5's 46 plus wave 4's 45 at `9a8de899`); `sorry` lines by count Chain 0, Terminal 12, Dense 3, HexRing 7,
+     MapGraph 5, BaseWalk 15, BaseDense 4 (46); `data/fs131/i5/I5Axioms.out` prints `disc1ts`, `linkage_dot_ne_zero`, `triLattice_hyps` on the standard three and
+     `n3_base` with `sorryAx`. Slip (K5's, fixed by I5 outside its block, accepted): the record `HadwigerNelson.Plane.row134BaseUA` named a constant that never
+     existed (`ArcMap.row134BaseUA`); all 72 wave-5 records now resolve. `Thomassen.lemma1`'s proof written out to transcribe from `[Thomassen1999]` pp. 850–851
+     (two shared lemmas (C), (L); 300–400 lines). Not reached: any H leaf, so no re-price; `cvb_thom_reduced` un-priced. Question for a later lane: `cor3_local`'s
+     exact covering hypothesis needs NB3-COR3's argument read.
+239. **Ruling: the planar core goes to the planar-infrastructure job** — `cvb_thom_reduced`, `retArcs_nested`, `exists_endpoint`, `exists_eleventh`,
+     `exists_unenclosed_or_bad`, with the shared planar lemma (the outer frontier of a plane continuum is connected; or the outer face of a connected finite plane
+     graph has connected boundary). Alternative weighed: leave `cvb_thom_reduced` to wave 5's next implementer to price first (item 208 (a)). Why: all five read the
+     same boundary-path topology Mathlib lacks, so one job building it once serves them all, and wave 5's implementers proceed on everything else. Confidence:
+     high. The job is queued after the moves' parallel implementer (item 236), both waiting for slots that free when a lane ends. Wave 5's next implementer,
+     FS131-I5b, skips these five.
+240. **Brief FS131-I5b, wave 5's second implementer** (Opus; `data/fs131/briefs/FS131-I5b-wave5.md`, derived by script from I5's, gated PASS): wave 5's 41 leaves less
+     the planar core, in I5's Stage 6 order (`Thomassen.lemma1` first, its proof planned). Launched in I5's slot: 1 (I2n) + 1 (I4j) + 1 (IC4) + 1 (I5b) = 4.
+241. **FS131-I5b mid-job, a definition defect in `MapGraph`** (message 2026-10-04): **`cvb_hole_disconnected` is false as written**, because Lean's `IsHoleOf` is weaker
+     than CVB's "a boundary component of x disjoint from its outer one". Counterexample at `k = 7` (credit: I5b): in `sevenBrickMap`'s brick (0,0), centre
+     `c = 2/5 + (3/10)i`, add three whole circles as arcs — radius 1/4 about `c` (disc D0), radius 1/16 about `c + 1/16` (D1) and about `c + 3/16` (D2); D1, D2
+     touch at `c + 1/8`, D2 touches D0's circle from inside at `c + 1/4`; colouring unchanged, so still `Valid` and `IsPlaneMap`. `T = ball c (1/4) ∖ (D̄1 ∪ D̄2)`;
+     `(closure T)ᶜ` has components open D1, open D2 and `|z − c| > 1/4`, so `IsHoleOf T (open D1)` holds, yet `mapGraph ∖ T` stays connected (R1 ~ R2 ~ R3 ~ the
+     bricks) — while `∂T` is connected, so in CVB's sense T has no hole. I5b's proposed repair: quantify the last clause over every other complementary
+     component, not only the unbounded ones. `cvb_pinch_connected` looks true as written. `IsHoleOf` feeds `fill`, `IsOuterTile`, `filledGraph`, and so
+     `cvb_thom_reduced`.
+242. **Ruling: `IsHoleOf`'s repair goes to the planar-infrastructure job, as its first question; `cvb_hole_disconnected` joins that job's leaves.** Choice: defer
+     the definition, and I5b skips the leaf (it already has). Alternative weighed: adopt I5b's repair now. Why: I5b's repair makes a cluster of bounded components
+     whose closures touch one another but miss the outer boundary into no hole at all, though CVB counts it as one boundary component disjoint from the outer —
+     so `fill` might leave a CVB-hole unfilled; the faithful definition (holes as boundary components, or as clusters of complementary components chained by
+     touching closures) is a design question for the job that owns `fill`, `IsOuterTile`, `filledGraph` and `cvb_thom_reduced`, read against
+     `plans/FS114-CVB-verification.md` § 1.9. Confidence: medium — the fact that would change it: CVB's consumers never meet a cluster (then I5b's repair suffices).
+243. **FS131-I4j handed back at stage 28, harness ≈ 426k** (report `data/fs131/reports/FS131-I4j.md` on `fs131-w4`; branch at `cd0fe492`, checked): its files 14 → 11
+     (UnitArc 5, BaseSteps 6). **[kernel] on the branch, standard three**: FS112-N3-PAIRS's **N3-P′** `pair_P'` (two cubic trichromatic vertices with one
+     multicolour are never at distance 1), **FS112-A4SIX** `a4six`, the ring-arc engine `isRingArc_of_clean` / `exists_clean_subArc` /
+     `exists_isRingArc_of_subset_Γ`, engine 7 `exists_coveringPoint_of_window`, and helpers; `bend_away_whole` proved over `bend_away` (open). Keryx's receipts:
+     build log `build/gate/build/20261004T210939Z-2417914.log` (w4) "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `sorry` lines by count
+     UnitArc 5, BaseSteps 6; `data/fs131/i4/axioms-i4j-26.txt` prints `pair_P'` and `-27.txt` prints `a4six` on the standard three (no `sorryAx` in either);
+     `-28.txt` prints `bend_away_whole` with `sorryAx`. Generalizations: the ring-arc engine supplies `IsRingArc` for `pair_ii`, `fail_leavingCentre`, `flankQ_*`,
+     `n3_end` (the plan's engine 5 assumed horns alone would); engine 7 needs no finiteness of Γ on the window. **Possible statement defect, not confirmed**
+     (one mind's reading, I4j's): `flankQ_upper/lower`'s (R2) shadow clause reads more than `IsR2Arc` gives (`R₂ ⊆ cl(region g)` only); I4j reads that the
+     clause still follows via the chart at S′ (Stage 28 step (iii)) — if that step fails, a hypothesis is missing. **Proposal**: a new theorem `localSectors_disj`
+     in `Plane/LocalStructure` (distinct germs never meet at one distance, which `localSectors`' proof establishes), `localSectors` its corollary, statement
+     unchanged; `fail_leavingCentre` needs it.
+244. **Rulings on I4j's held items.** (a) `pair_P'`'s unused binder `h` → `_h` accepted (ruling 185's reasons: a binder name is not part of the type).
+     Confidence: high. (b) `localSectors_disj` accepted as a new theorem in `Plane/LocalStructure` on `fs131-w4` with `localSectors` re-derived from it, statement
+     unchanged; it lands with wave 4. Alternative: a separate lemma re-proving disjointness outside `LocalStructure`. Why: the fact is already established
+     inside `localSectors`' proof, so exposing it costs one rebuild and duplicates nothing. Confidence: high. (c) The (R2) reading: no ruling — the next
+     implementer runs Stage 28's step (iii) and reports at once if it fails.
+245. **Brief FS131-I4k, wave 4's eleventh implementer** (Opus; `data/fs131/briefs/FS131-I4k-wave4.md`, derived by script from I4j's, `LocalStructure` added to its
+     touches for item 244 (b), gated PASS): `UnitArc` and `BaseSteps`' 11 in Stage 28's order. Launched in I4j's slot: 1 (I2n) + 1 (IC4) + 1 (I5b) + 1 (I4k) = 4.
+246. **FS131-I5b handed back at stage 8, harness ≈ 379k** (report `data/fs131/reports/FS131-I5b.md` on `fs131-w5`; branch at `0db34854`, checked): wave 5 46 → 44.
+     **[kernel] on the branch, standard three**: **`Thomassen.lemma1`** (`[Thomassen1999]` p. 850, Lemma 1: a connected, locally finite, locally Hamiltonian graph
+     with at least 13 vertices has a vertex of degree ≥ 6 — formalized, no axiom) with children `exists_two_common`, `two_mid`, `exists_eq_of_steps(_up)`; and
+     FS114-CVB-PINCH's last clause **`exists_holed_valid_fragment`** (a valid six-coloured fragment covering `B̄(0, 1/2)` with a holed tile — `holedFrag`, the
+     annulus 1/4 < |z| < 1/2 about the disc |z| < 1/4, four quadrant colours outside). Keryx's receipts: build log `build/gate/build/20261004T212909Z-2535131.log`
+     (w5) "Build completed successfully (5366 jobs)", 0 warnings other than `sorry`; `sorry` lines by count Terminal 12, Dense 3, HexRing 7, MapGraph 3, BaseWalk
+     15, BaseDense 4 (44); `data/fs131/i5b/I5bAxioms.out` prints `lemma1` and `exists_holed_valid_fragment` on the standard three and `cvb_thom` with `sorryAx`.
+     Generalization: `lemma1`'s count needs no maximum-degree vertex (one case for all; the icosahedron shows 13 is load-bearing). `cvb_hole_disconnected`'s defect
+     as item 241. **Re-pricing**: both leaves the plan's M at its price; the 39 left sit on four unbuilt infrastructures — the brick map's point classification
+     (`sevenBrickMap_isTerminalMap`, `not_row134BaseUA_seven`; 400–600 lines), sector-chart geometry at a point (`bv_nd`, `bv_nd1`, `hex_regular`), the stuck
+     structure (`stuck_structure_ua` and the seven chain leaves), the limit constructions (`exists_red`, `exists_terminal`); `disc1_local` needs a fragment form of
+     TS-T's regions. `cvb_pinch_connected` looks true but needs planar topology of the planar core's kind.
+247. **Rulings on I5b's held items and the slot.** (a) `IsHoleOf` / `cvb_hole_disconnected`: as item 242 (the planar job's first question). (b)
+     **`cvb_pinch_connected` joins the planar-infrastructure job** (seven leaves now: the five of item 239, `cvb_hole_disconnected`, `cvb_pinch_connected`).
+     Confidence: high. (c) **I5b's slot goes to the moves' parallel implementer, FS131-IM1 (item 236), now; wave 5 resumes in the next slot that frees** (wave 2's
+     landing). Alternative weighed: a wave-5 successor in the same slot (the rule of item 199 (c): a lane keeps its slot). Why: wave 5 cannot land before wave 4,
+     and splitting the moves off takes about three sessions off wave 4's longest path (item 236), while pausing wave 5 for one slot-turn costs it about one;
+     I5b also stopped below its line with its remaining leaves gated on unbuilt infrastructure. Confidence: medium — the fact that would change it: wave 2's landing
+     slipping by several sessions, which would leave wave 5 idle too long.
+248. **Brief FS131-IM1, wave 4's moves** (Opus; `data/fs131/briefs/FS131-IM1-moves.md`, gated PASS): `exists_shave`, `exists_rayMerge`, `exists_merge` as `…_aux` under
+     their exact statements in a new module `Plane/ValidMap/Moves` upstream of `Contact`, on `fs131-w4m` (from `fs131-w4c` at `d4f946ae`, IC4's stage 11;
+     `.lake/build` copied from `fs131-w5b`); engine 2's hunk brought over first; no edit to `Contact`, no merge, no gate. Launched in I5b's slot (item 247 (c)):
+     1 (I2n) + 1 (I4k) + 1 (IC4) + 1 (IM1) = 4. IC4 told the moves are taken.
+249. **FS131-IC4 handed back at stage 12, harness ≈ 444k** (report `data/fs131/reports/FS131-IC4.md` on `fs131-w4c`; branch at `67c9f5a3`, checked): `Contact` 5 → 4.
+     **[kernel] on the branch, standard three**: **FS110-N4-SHADOW's N4-FLANK `flank_shadows`** (in the horn near `v`, the points in the `g`-class's shadow are those
+     below a tangent circle of curvature `σ_g ∈ [κ₁, κ₂]`, the `h`-class's above one of curvature `σ_h ∈ [κ₁, κ₂]`), so **FS110-N4-SHAVE's criterion
+     `shaveAvailable_of_not_doublyShadowed` is sorry-free**; 25 children (`flank_shadow_g/_h`, `sector_shadow_S/_N`, `shadow_of_tangent_sector_S/_N`,
+     `IsSectorChart.exists_lift_lower/_upper`). Keryx's receipts: build log `build/gate/build/20261004T212953Z-2540733.log` (w4c) "Build completed successfully (5359
+     jobs)", 0 warnings other than `sorry`; `Contact` 4 `sorry` lines by count; `data/fs131/ic/axioms-ic4-stage11.txt` prints `flank_shadows` and
+     `shaveAvailable_of_not_doublyShadowed` on the standard three. Generalization: `flank_shadows` uses neither `g ≠ c`, `h ≠ c` nor the horn beyond `κ₁ < κ₂`
+     (kept, `have _ := …`); Condition 5 only rules out a pole germ of curvature ±1. Route note: `stuck_structure`'s `g ≠ h` does not follow from `flank_shadows`'
+     statement but from its mechanism, now supplied by `shadow_of_tangent_sector_S/_N` — no statement change. Tool defect fixed in IC4's copy: IC1–IC3's records
+     tools read `theorem _root_.X` as `<ns>._root_.X`. Left: `stuck_structure` (about two sessions; route in Stage 12), and the moves (IM1's). **Slip (Keryx's)**:
+     my message telling IC4 the moves were taken reached it as it handed back and resumed it (the harness reported "Resuming agent"); it billed IC4's context with
+     no work lost — the rule against messaging a finished agent, broken by timing; next time, check the hand-back queue before messaging a running agent.
+250. **IC4's resumed turn** (item 249's slip) added one record commit, `addcfbf3` (a note recording ruling 236 on the branch; checked by `git diff --stat`: the
+     record only). **Brief FS131-IC5, wave 4's fifth `Contact` implementer** (Opus; `data/fs131/briefs/FS131-IC5-contact.md`, derived by script from IC4's, at
+     `addcfbf3`, gated PASS): `stuck_structure` by IC4's Stage-12 route; the moves stay IM1's. Launched in IC4's slot: 1 (I2n) + 1 (I4k) + 1 (IM1) + 1 (IC5) = 4.
+     Wave 5 waits for the next free slot (item 247 (c)).
+251. **FS131-IC5 mid-job, a statement defect in `stuck_structure`'s sides clause** (message 2026-10-04; `Contact.lean` on `fs131-w4c` at `addcfbf3`, l. 4065): the clause
+     `∀ᶠ ρ, ∀ z ∈ interiorPts ∩ ball v ρ, (0 < frameY v α z → col z = g ∨ col z = c) ∧ (frameY v α z < 0 → col z = h ∨ col z = c)` is stated point by point,
+     while the derivation's (ii) is directional — "one `g`-sector filling the side `(z − v)·n > 0`" (`plans/FS110-N-proof.md` l. 846). With `κ₂ < 0` the upper
+     flank band of `H₊` holds `g`-points arbitrarily near `v` with `frameY = m s²/2 < 0` (and `g ≠ h`, `g ≠ c`), so the clause fails at every radius; likewise
+     `κ₁ > 0`, and for `H₋`. It holds exactly when `κ₁ ≤ 0 ≤ κ₂` and `κ₃ ≤ 0 ≤ κ₄`, which nothing forces (N4-SHADOW's `σ_g`, `σ_h` take every value in (−1, 1)). No
+     counterexample built: **the library holds no model of `stuck_structure`'s hypotheses at all** (the bowtie has unit arcs, so fails Condition 5). The same
+     clause is in wave 5's `stuck_structure_ua` (`Plane/ValidMap/Terminal.lean` l. 57 on `fs131-w5`), with curvatures up to ±1. No wave-4 consumer reads it
+     (`stuck_step`, `stuck_flip`, `stuck_neighbour` discard it). Repairs offered: (a) the flank form (as `stuck_structure_ua` already states beside it); (b) the
+     point form outside the parabola, `(‖z − v‖²/2 < frameY v α z → col z = g) ∧ (frameY v α z < −‖z − v‖²/2 → col z = h)`, true for curvatures in [−1, 1]
+     since both horns lie in `|frameY| ≤ ‖z − v‖²/2`; (c) drop it. Credit: IC5.
+252. **Ruling: the sides clause becomes form (b), in `stuck_structure` and in `stuck_structure_ua`.** Choice: (b), the point form outside the parabola. Alternative
+     weighed: (a) alone, or (c). Why: (b) says what the derivation says — the side off the horns is filled by `g` above and `h` below — in the clause's own pointwise
+     idiom; (a) says only that a flank band lies beside each horn, weaker than "filling the side"; (c) drops content the row states. `stuck_structure_ua` keeps
+     its flank conjuncts as well. Confidence: medium-high — the fact that would change it: a wave-5 consumer reading the clause at points inside the parabola
+     band (then (a) is added beside (b)). IC5 applies it on `fs131-w4c`; wave 5's next implementer applies it on `fs131-w5`. **Vacuity note for wave 4's gate**:
+     `stuck_structure`'s hypothesis class (a stuck vertex under Condition 5 covering `B̄(v, 2)`, at most three colours on `B̄(v, 1)`) has no model in the library;
+     the gate's implementer either builds one or writes `VACUITY DECLARED:` with the theorem that empties it (row 134 empties Condition-5 six-maps of the plane,
+     but not obviously these local fragments at every `k`).
+253. **FS131-IM1 mid-job: the moves do read `Contact` lemmas** (message 2026-10-04) — item 236's confidence fact met. All three read the branch-point and horn algebra
+     (`Contact.lean` l. 788–1030 at `d4f946ae`: `hornSet_congr`, `tanHeight_branchPt`, `branchPt_mem_hornSet`, `exists_small_s`, …) and three single lemmas
+     (`hornSet_mono_radius` l. 1717, `not_mem_interiorPts_of_mem_closure_sector` l. 1374, `IsSector.eq_of_mem` l. 2628); `exists_merge`'s clearness is N3-CLEAR and
+     N3-UP, the N3-CONF block at `Contact`'s head (l. 27–785). Each reads nothing of `Contact` below l. 1030. IM1's proposal: move `Contact`'s head (l. 27–1030) and
+     the three single lemmas, as one block, into a module upstream of both `Contact` and `Moves`.
+254. **Ruling: the block moves upstream on `fs131-w4m`, into `Plane/ValidMap/Cone`.** Choice: IM1 creates `Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean`
+     (importing what `Contact` imports) holding `Contact`'s l. 27–1030 and the three single lemmas **verbatim** (statements, proofs, docstrings, namespaces), deletes
+     them from `Contact.lean` on `fs131-w4m`, makes `Contact` and `Moves` import `Cone`, and updates `Proofs.lean`, `ARCHITECTURE.md`; the `scripts/Axioms.lean`
+     records are by name and unchanged. **FS131-IC5 (on `fs131-w4c`) does not edit those lines** (the head block and the three lemmas) and adds its children below
+     l. 1030 away from them, so the later merge of `fs131-w4m` into `fs131-w4c` meets disjoint hunks. Alternative weighed: a copy in `Cone` with `Contact` untouched
+     until the merge. Why: two modules declaring the same names cannot both be imported (the library root imports every module), so the copy would break the
+     branch's build; a move on one branch with the other branch fenced off those lines merges cleanly. Confidence: medium-high — the fact that would change it:
+     IC5 needing to edit a moved lemma (then it messages me first). IM1's brief amended; IC5 told by message.
+255. **Kooshi, 2026-10-04 (verbatim)**, on the definitions audit (interim report's one decision): *"That audit is approved, but no special slot. It must use one of the
+     4, as we have no usage headroom for a fifth."* Ruled (Keryx): the audit, FS131-QA3, takes **the next slot that frees**, ahead of wave 5's next implementer and
+     the planar-infrastructure job — those two build on the very definitions it reads (wave 5's `Chain`, `Terminal`, `Dense`, `HexRing`, `MapGraph`, `BaseWalk`,
+     `BaseDense`), so auditing first saves sessions built on a faulty definition. Alternative weighed: run it after wave 5 resumes. Why: four of today's five
+     definition faults (items 231, 241, 251, and 158 before) cost a session each after an implementer built on them. Confidence: medium-high. Brief written now
+     (`data/fs131/briefs/FS131-QA3-definitions.md`), launched when a slot frees; staffing stays at four.
+256. **Item 255 sharpened: QA3 takes wave 2's slot** when FS131-I2n hands back (landed or not), not the first slot of any lane. Why: wave 4's three lanes are the
+     milestone's longest path and nothing in waves 4–5 waits on wave 2, so wave 2's last steps (5 leaves, the carriers, the gate) can wait one slot-turn; if I2n
+     lands wave 2, its slot is free anyway. Wave 2's successor, if one is needed, and wave 5's next implementer then follow as slots free. Confidence: medium.
+257. **Statement finding — `pair_i` (FS112-N3-PAIRS (i), `Plane/ValidMap/BaseSteps` on `fs131-w4`) has a GAP at one configuration** (FS131-I4k, by message,
+     2026-10-04). N3-I's step "a failure at `(x, y)` would recur at nearby unit pairs `(x′, y′)` with `x′` not a leaving centre" (`plans/FS112-N-proof.md` l. 766–769)
+     needs unit pairs near `(x, y)`; they form a curve through it except when `(x, y)` is a strict minimum of `|x′ − y′|`, which happens exactly when
+     `|u₁ − u₂| = 3` with `u₁, x, y, u₂` collinear at spacing 1: there `(x, y)` is isolated and `ω(y)` is tangent to `ω(u₁)` at `x` from outside, so CB's strip argument
+     reaches only an outer-side strip. I4k's local picture `u₁ = 0, x = 1, y = 2, u₂ = 3`, both strips inner, shows no contradiction; no whole fragment built — **a GAP
+     plus a suspected defect, not FALSE**. Consumers read (Keryx, by grep on `fs131-w5`): `BaseCtx.exists_pseudoCircle` (`BaseWalk` l. 153, `u₁ = u₂ = p`) and
+     `BaseCtx.l3_base` (l. 276, `1 < dist u₁ u₂ < 2`) — **neither reaches `|u₁ − u₂| = 3`**. Also from I4k: `fail_leavingCentre` landed (Stage 30, `bf00c377`);
+     `fail_colours`, `anti`, `pair_ii` proved, building (Stage 31); `pair_ii`'s unused binders renamed `_h₂`, `_hc₂`, `_hy` (held for a ruling).
+258. **Ruling on item 257: `pair_i` gains `(h3 : dist u₁ u₂ < 3)`.** Choice: add the hypothesis `dist u₁ u₂ < 3`, which excludes exactly I4k's isolated configuration
+     (for `|u₁ − u₂| > 3` no unit pair exists, so `< 3` and `≠ 3` agree); the docstring's "no transversality hypothesis" is rewritten to name it; the axioms record
+     is by name and unchanged. Alternatives weighed: (1) I4k's `dist y u₁ ≠ 2` (`pair_ii`'s `htr` form); (2) keep the statement and send the isolated case to an Ephodos
+     job. Why: both consumers meet `dist u₁ u₂ < 3` outright (0, and below 2), whereas `dist y u₁ ≠ 2` would move tangent-pair avoidance into `l3_base`'s proof; and
+     by I4k's own account the perturbation is needed anyway where the strip fails, and away from `|u₁ − u₂| = 3` the unit pairs near a tangent pair form a curve along
+     which tangency recurs at most twice (`|u₁ + 2e^{iθ} − u₂| = 1` has at most two roots) — Keryx's inference, labelled so, for I4k to confirm or refute. (2) is
+     declined: no consumer reads the isolated case. **Fallback**: if the tangent case at `|u₁ − u₂| < 3` resists, take (1) and say so in the report, and `l3_base`'s
+     implementer is told to discharge `dist y u₁ ≠ 2`. Confidence: medium — what would change it: the tangent case resisting the perturbation. **Erratum owed** to
+     FS112-N3-PAIRS ("(i)'s unconditional form"): drafted by I4k in its report, filed at the milestone's filing. **Wave 5's next brief** carries the new hypothesis
+     (`l3_base` discharges it from `ht'`). `pair_ii`'s renames `_h₂`, `_hc₂`, `_hy` accepted (ruling 185's reasons: a binder name is not part of the type).
+259. **Tool finding — the axiom gate's self-test is tied to `main`'s state** (FS131-I2n, by message, 2026-10-04). `scripts/axioms.sh --self-test` fails 4 of 23
+     controls on `fs131-w2` because `scripts/axioms-controls.txt` (FS131-T3, `a09b2254`) was written for a library with no declared import, and wave 2 is the first
+     branch carrying one (`falconer_lemma2_nonempty`, four IMPORTED records); the gate itself is green at `b0d18832` ("OK — 2450 clean, 11 axiom-free, 4 imported,
+     5 declared purchase(s)", 2470 records). Receipt (Keryx): `fs131-w2`'s `data/fs131/i2n/axioms-selftest.log` ends "axioms self-test: FAIL — 4 of 23 control(s)
+     did not behave as designed", and `banner_dropped`'s unforeseen lines are the four falconer records outside the banners and the stale declaration — state, not
+     the plant mechanism. **Tool defect owed**: the `baseline` and `imported_declared` controls hard-code counts (`imported=0 declared=0 library=0`), so every new
+     import or library axiom breaks them again; they should read the expected counts from the shipped run. Owner: a tooling job after the milestone's waves land
+     (or the next implementer whose branch adds an import).
+260. **Ruling on item 259: I2n applies its fix on `fs131-w2`.** Choice: accept I2n's four edits to `scripts/axioms-controls.txt` — (1)/(2) counts and digest
+     texts set to the shipped state (4/1/1, 5/2/2); (3) `## drop-output LIBRARY AXIOM t3c_unaudited`; (4) `## expect FAIL outside-banners falconer_reduction` and
+     `## expect FAIL stale-declaration falconer_lemma2_nonempty` — each shown red before and green after; touches extended to that file. Alternative weighed: a
+     separate T3-owner job for the file, wave 2 landing without it. Why: T3 is finished; a self-test landing red on `main` would hide the next real failure, and
+     I2n's edits keep each control's intent and two-sidedness; the deeper fix (item 259's owed defect) is not needed to land. Confidence: high. **At wave 4's
+     landing** (the second of waves 2 and 4 to land), whoever merges re-runs the self-test, since wave 4's counts differ.
+261. **FS131-IM1 handed back** (Stage 3 SAVED, harness ≈ 390k; report `fs131-w4m`'s `data/fs131/reports/FS131-IM1.md`, commits `47efc1e0`, `8d075e9c`, `dbedaf97`).
+     **The three moves not proved** (each `sorry`; none false, no statement defect); planned in the record (`plans/FS131-IM-implementation.md` § 3, on `fs131-w4m`).
+     **Held, [kernel], the standard three**: `germArc` with `carrier_germArc`, `germArc_nondegenerate`, `germArc_isUnitArc_iff` (an arc whose carrier is exactly the
+     branch `branchPt v β κ '' [0, ρ]`; a unit arc iff `|κ| = 1`) and `ArcMap.isClear_of_mem_closure` (a limit of points clear for `c` is clear for `c`), in `Moves`.
+     Engine 2 brought over (Basic byte-identical to `3f7ea033`'s); the ruled block move done (`Cone`, whole declarations l. 26–1056 plus the three single lemmas,
+     checked by `tools/fs131_im_move_cone.py`, negative control watched red); the three `…_aux` statements copied by `tools/fs131_im_statements.py` (empty diff,
+     control watched red). **Receipt (Keryx)**: the commits exist; `build/gate/build/20261004T220917Z-2800792.log` ends "Build completed successfully (5361
+     jobs)", 79 `sorry` warnings and 0 other warnings; `sorry` lines by count: `Moves` 3, `Cone` 0, `Contact` 4; `data/fs131/im/axioms-stage3.txt` gives the four
+     new lemmas `[propext, Classical.choice, Quot.sound]` and the three `…_aux` `sorryAx` besides. Results (record § 3): one surgery design for all three moves (the
+     cut re-adds the kept chart branches as germ arcs; an old arc through `v` minus the open ball is at most four arcs, by the chord formula; SHAVE and RAY may add
+     the whole rim circle as an arc, MERGE may not, by its `¬HasRepeatedColour` rim clause); SHAVE's open cases (`g = c`, `h = c`) provable with no statement
+     change (§ 3.2); N4-RAY's clearness as exact frame algebra, three cases [hand, one mind, a sketch] (§ 3.3). **Re-priced**: SHAVE about three implementer
+     sessions, RAY two more on SHAVE's machinery, MERGE two to three — against IC1's "about a session each"; most of it shared machinery (the old-arc pieces outside
+     the ball, the modified map, the sector-count partition, the rim-colour bound); § 3.5 orders SHAVE's next five children. Credit: IM1 found that ruling 236's
+     premise was wrong a second time (item 262 (b)), and planned the shared surgery that makes three moves one construction.
+262. **Corrections, slips and a tool defect from IM1's report.** (a) **Correction owed — N4-RAY's route**: recolouring the whole gap merges every `c`-sector
+     between, leaving `n − m` sectors, not `n`; RAY must merge `H₁` with the nearest `c`-horn above it, which the statement's `∃` allows (record § 3.3); erratum to
+     N4-RAY's hand route at the filing. (b) **Slip (Keryx's) — ruling 236's premise "the moves read nothing of `Contact`'s own" was wrong twice**: N3-CONF and the
+     horn algebra (items 253–254), and now SHAVE's sector count, which needs `Contact`'s horn-chart lemmas (`hornSet_curv_eq`, `IsHorn.exists_chart_index`,
+     `IsSectorChart.exists_col`, `IsSectorChart.exists_flank_after`/`_before`, `IsHorn.exists_flankAbove`/`_Below`, `IsSectorChart.index_of_isSector_hornSet`, l.
+     2252–2633 at `d4f946ae`, and `e_eq_of_mem_coneAt_hornSet`, l. 1058). (c) **Slip (Keryx's) — ruling 254's range "l. 27–1030" split declarations** (it began on
+     `frameX_add_smul`'s first line, whose docstring is l. 26, and ended inside `mem_coneAt_hornSet`); IM1 moved whole declarations, l. 26–1056. Lesson: name a
+     moved range by its first and last declarations, not by line numbers. (d) **Tool defect**: `tools/fs131_k4_decls.py` lists two `_root_`-prefixed names as
+     missing and exits 0 (predates IM1).
+263. **Ruling: the second move is a prefix move, into `Cone`, by IM1's successor on `fs131-w4m`.** Choice: FS131-IM2 moves **every declaration of `Contact` from
+     `e_eq_of_mem_coneAt_hornSet` through `IsSectorChart.index_of_isSector_hornSet`** (d4f946ae's l. 1057–2593, whole declarations with their docstrings and the
+     `namespace`/`variable` lines they sit under; the single lemma already moved stays moved) verbatim into `Cone`, deleting them from `Contact`, which reopens its
+     namespace before `woodallCone_isHorn`. Alternative weighed: IM1's proposal, moving only the horn-chart lemmas' dependency closure, computed by parsing the
+     proofs. Why: a prefix of a Lean file depends only on what precedes it, so moving the whole remaining prefix is valid by construction and needs no dependency
+     analysis, which IM1 found over-counts; the cost is lemmas in `Cone` that `Moves` never cites, which is harmless. The prefix stops before `woodallCone_isHorn`
+     (l. 2594), a child of `stuck_structure`, so FS131-IC5 keeps every lemma it may need to touch. IC5's hunks on `fs131-w4c` all lie at or below d4f946ae's
+     l. 3252 (Keryx, `git diff -U0 d4f946ae` in that tree), so the merge stays disjoint; IC5 is told by message not to edit d4f946ae's l. 1057–2593 either. No
+     `private` declaration lies in the range (Keryx, by grep), so nothing changes visibility. Confidence: medium-high — what would change it: IC5 needing to edit a
+     declaration in the range (then it messages first). **Wave 4's moves are now its longest path** (about seven to eight implementer sessions); once SHAVE's shared
+     machinery lands, I will weigh splitting RAY and MERGE into parallel modules downstream of it.
+264. **FS131-I4k handed back** (Stage 32 SAVED, harness ≈ 440k; report `fs131-w4`'s `data/fs131/reports/FS131-I4k.md`; commits `2d8b88c5`, `bf00c377`,
+     `ff32b839`, `59b14271`, `d391f480`). **Held, [kernel], the standard three**: `fail_leavingCentre`, `fail_colours` (FS112-N3-FAIL; the row's "exactly" read as
+     "only", as its docstring says), `anti` (FS112-N3-ANTI), `pair_ii` (FS112-N3-PAIRS (ii)), and `localSectors_disj` in wave 3's `Plane/LocalStructure` (ruling
+     244 (b); `localSectors` now derived from it, statement unchanged). `pair_i` carries ruling 258's `h3 : dist u₁ u₂ < 3`, builds, and is `sorry`. **Left in its
+     files (7)**: `UnitArc`'s `bend_toward`, `bend_away`, `flankQ_upper`, `flankQ_lower`, `nb4p`; `BaseSteps`' `pair_i`, `n3_end` (`n3_end` waits for `fs131-w4c`'s
+     `woodallCone` and `exists_merge` to merge). **Receipt (Keryx)**: the commits exist; `build/gate/build/20261004T221211Z-2818124.log` (after Stage 32's commit)
+     ends "Build completed successfully (5359 jobs)", 54 `sorry` warnings, 0 other warnings; `sorry` lines by count: `BaseSteps` 2, `UnitArc` 5, `LocalStructure` 0;
+     `data/fs131/i4/axioms-i4k-31.txt` gives the four N3 leaves, and `axioms-i4k-30.txt` `localSectors_disj` and `localSectors`, `[propext, Classical.choice,
+     Quot.sound]`; line 967 of `BaseSteps` carries `h3`. **Prediction scored — item 258's inference confirmed on paper** (one mind): the critical points of
+     `|x′ − y′|` on `ω(u₁) × ω(u₂)` are the four collinear configurations, with values `d − 2, d, d, d + 2`; the value 1 is critical only at `d = 3` (an isolated
+     minimum) and at `d = 1` (saddles, the level set two crossing curves, not isolated); tangency needs `y′ ∈ ω(u₂) ∩ sphere(u₁, 2)`, at most two points.
+     **Generalization**: the kernel proofs of `anti` and `pair_ii` are shorter than the derivation's (`anti` by `|b − x|² + |b − y|² = 2|b − u|² + 2`, no strip;
+     `pair_ii` from the two halves of `ω(y)`, reading neither the strip nor N3-FAIL). **Shared children**, all on the standard three (`fin3_adj` by `decide`, no
+     axiom): the chart, the germ-on-circle algebra, the vote, the arc of Γ along a tangent germ, the crossing at a vertex, the halves of a transversal circle
+     (record Stages 30–31). **New tool**: `tools/fs131_i4_stmts.py` compares every theorem statement against a revision (planted fault fired, exit 1). **Erratum
+     draft** to FS112-N3-PAIRS, "(i)'s unconditional form", is in the report (§ ERRATUM DRAFT), filed verbatim at the milestone's filing. **Held**:
+     `localSectors_disj` sits in wave 3's `LocalStructure`, already on `main`, and lands with wave 4 — the merge with `main` must keep it (editing that file rebuilds
+     every plane module: 11 min). Credit: I4k found N3-I's isolated pair, and confirmed the repair's inference on paper.
+265. **Slots (revising item 256): QA3 takes I4k's slot now; the I4 lane's successor takes wave 2's slot when I2n hands back.** Two slots freed together (IM1's,
+     I4k's). Choice: IM1's slot → FS131-IM2 (the second move and the moves, item 263); I4k's slot → FS131-QA3 at once. Alternative weighed: item 256's order (QA3
+     waits for wave 2's slot; I4k's successor now). Why: wave 4 lands only when its moves do (about seven to eight sessions, item 261), so the I4 lane's six
+     provable leaves are off the longest path and lose nothing by waiting one slot-turn, while QA3 audits the definitions wave 5 will build on (item 255's reason).
+     Confidence: medium-high. In flight: 1 (I2n) + 1 (IC5) + 1 (IM2) + 1 (QA3) = 4.
+266. **FS131-IC5 handed back, done** (harness ≈ 510k; report `fs131-w4c`'s `data/fs131/reports/FS131-IC5.md`; commits `9988cbb8`, `f3a5c724`, `f975677b`).
+     **Held, [kernel], the standard three**: FS110-N4-STUCK `stuck_structure` (the sides clause in ruling 252's form (b), docstring rewritten), FS110-N4-PROP
+     `stuck_chain` with `stuck_neighbour`, `stuck_flip`, `stuck_step`, and ruling 252's form (a) as `stuck_structure_flanks` (which `stuck_structure` cites), with 33
+     children (`stuck_pole_N`, `flank_ne_of_doublyShadowed`, `flank_shadow_g_chart`/`_h_chart` — the old proofs moved, old statements unchanged and citing them —
+     `false_of_third_point`, `false_of_all_outType`, `region_far_of_outType`, `hasDegree_of_three_colours`). **`Contact` now has 3 `sorry`, the three moves**
+     (FS131-IM2's). **Receipt (Keryx)**: the commits exist; `build/gate/build/20261004T222053Z-2888227.log` ends "Build completed successfully (5359 jobs)", 95
+     `sorry` warnings and 0 others (the branch's own copies of `UnitArc` 17 and `BaseSteps` 7 predate I4's work); `sorry` lines by count `Contact` 3;
+     `data/fs131/ic/axioms-ic5-stage14.txt` gives the four named theorems `[propext, Classical.choice, Quot.sound]` and exactly 3 records on `sorryAx`; the first
+     hunk against `d4f946ae` is at l. 3252. **Generalization**: `region_far_of_outType` — a colour out-type at `w ∈ ω(v)` stays outside `B(w, 1)` near `v`, by one
+     intermediate-value argument along one tile, no Condition 5, no chart. **For the gate**: `stuck_structure_flanks` and `stuck_pole_N` carry structure
+     hypotheses with no model in the library (the one stuck fragment held, the bowtie, has unit arcs and fails Condition 5), as their docstrings say — the vacuity
+     scan's treatment is the merging implementer's call (item 252's note). **Slips (Keryx's, a pattern)**: IC5's brief said "four quotations" for five, and I4k's
+     "six" for seven — briefs no longer state a count of quotations. Credit: IC5 found the sides clause's defect (item 251) and proved both of ruling 252's forms.
+267. **Ruling: `fs131-w4c` merges into `fs131-w4` now, as the I4 lane's successor's first stage; the moves branch merges into `fs131-w4` later.** Choice: FS131-I4l
+     merges `fs131-w4c` (at `f975677b`) into `fs131-w4`, resolving the only two files both sides changed since `68f34f18` — `scripts/Axioms.lean` and
+     `ARCHITECTURE.md`, each by keeping both sides' additions (Keryx, `git diff --name-only` against the merge base) — checks with `tools/fs131_qa1_dupes.py` and
+     `tools/fs131_i4_stmts.py`, builds, and then proves `n3_end` (which needs `Contact`'s `woodallCone` and `exists_merge`; it may cite `exists_merge` while that is
+     still `sorry`), `UnitArc`'s five and `pair_i`. `fs131-w4m` (IM2) later merges into `fs131-w4` instead of `fs131-w4c`; its Contact hunks (the prefix deletion,
+     d4f946ae l. 26–2593) stay disjoint from IC5's (l. 3249 and below). Alternative weighed: item 236's order, merging `fs131-w4m` into `fs131-w4c` first and then
+     `fs131-w4c` into `fs131-w4` at the end. Why: the `Contact` lane is finished apart from the moves, `n3_end` waits only on this merge, and one branch carrying
+     everything but the moves leaves a single merge for the end. Confidence: medium-high — what would change it: a conflict beyond those two files (then I4l stops
+     and messages me). IC5's slot → I4l: 1 (I2n) + 1 (IM2) + 1 (QA3) + 1 (I4l) = 4.
+268. **Statement defect — `exists_merge` (FS110-W-MERGE) is unsatisfiable as stated** (FS131-QA3, by message, 2026-10-04; record `plans/FS131-QA3-audit.md`
+     stage 2). Its clause `(∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x)` covers the open disc `B(v, ρ)`, including the gap MERGE recolours, where points
+     change colour by design: at an interior point the clause forces `F'` to keep `F`'s colour, so `F'`'s `c`-region near `v` stays inside the closures of `F`'s
+     `n + 1` sectors and `F'.HasSectors v c n` fails. QA3's concrete model: `dom = ball 0 2`, an X of two segments at 0 with quadrants I, III coloured 0 and II, IV
+     coloured 1, 2, a grid of side 1/4 elsewhere, each cell its own colour — valid, covers `B̄(0, 1)`, `HasSectors 0 0 2`, `allowedCone 0 0 = univ`. Source: the
+     row (`plans/FS110-N-proof.md` l. 528) says "types only shrink", and inside the disc the only existing vertex is `v`. **Receipt (Keryx)**: `fs131-w4c`'s
+     `Contact.lean` l. 4097 carries the clause; `exists_shave` (l. 4071) and `exists_rayMerge` (l. 4084) carry `F'.coloursAt v ⊆ F.coloursAt v` instead; the row
+     reads as quoted. Nothing proved reads the clause (QA3, by grep). Also from QA3: `exists_merge`'s `D_c` and rim clauses hold; wave 5's definitions show no new
+     defect so far (stage 2). Credit: QA3 found it before IM2 spent a session on an unprovable leaf.
+269. **Ruling on item 268: `exists_merge` and `exists_merge_aux` take `F'.coloursAt v ⊆ F.coloursAt v` in place of the off-rim clause.** Choice: IM2 replaces the
+     clause in both copies on `fs131-w4m` (`Contact`'s `exists_merge`, `Moves`' `exists_merge_aux`), rewrites `exists_merge`'s docstring phrase "no point off the
+     disc's rim gains a colour" to say `v` gains no colour, and re-runs `tools/fs131_im_statements.py` (empty diff); IM2's touches extend to those lines of
+     `Contact`. FS131-I4l's `n3_end` uses only the new form (the old clause implies it at `x = v`, so a proof from the new form survives either way). Alternative
+     weighed: off the closed disc only (`∀ x ∉ closedBall v ρ`), which `AgreesOff` already gives and which drops the vertex clause the sibling moves carry. Why:
+     the row's "types only shrink" is about existing vertices, and inside the disc that is `v` alone; the sibling moves already state it so; the rim is the next
+     clause. Confidence: high. At the final merge of `fs131-w4m` into `fs131-w4`, `exists_merge`'s statement hunk lies above its `sorry` and IC5's insertion two
+     lines below it (item 266), so they stay disjoint.
+270. **WAVE 2 LANDED on `main`, held in the kernel** (FS131-I2n, done, harness ≈ 330k; report `fs131-w2`'s `data/fs131/reports/FS131-I2n.md`; `origin/main`
+     fast-forwarded to `6f20e12f`). The last leaves: `hc_sausage_cover` (FS111-M3 § 2.4 B1), `hc_exclusion` (B2), `hc_ae_phi_pos`, `hc_free_pos` (FS111-M3-IRREG
+     (1), by a Lebesgue density point of `Z` and Fubini in an edge frame), `hc_free_subset_nowhereDense` (IRREG (2)); with them `hc_isRegularMUA`, `hc_irreg`,
+     `not_forall_isRegularMUA` (MUA-REG-U is false) and `not_forall_fix_converse` have no `sorry` beneath. Wave 2's 28 rows have 64 declarations
+     (`data/fs131/i2n/row-axioms2.txt`, read by `tools/fs131_i2n_row_axioms.py`, self-test fires on both planted faults): all on the standard three except
+     `falconer_reduction` and `le_chiM_of_falconerFan` (FS129-SA1-FALC-RED), which also rest on `falconer_lemma2_nonempty` (`[Falconer1981]` Lemma 2 (i), p. 185),
+     the one declared import. **Receipt (Keryx)**: local `main` fast-forwarded to `6f20e12f`; `sorry` lines in `Proofs/` by count: 0; in `fs131-w2`,
+     `build/gate/build/20261004T225532Z-3162433.log` "All targets up-to-date (5732 jobs)", 0 warnings; `data/fs131/i2n/axioms-gate3.log` "axioms: OK — 2512 clean,
+     11 axiom-free, 4 imported, 5 declared purchase(s)" (full log `build/gate/axioms/20261004T225322Z-3123760.log`, gated commit `40f4b4ef`, the later merge
+     `54d408c6` plans-only); vacuity `=== TOTALS === sites=516 vacuous=0 stale=0 declared=3 witnessed=23 generic=488 unknown=2` with `declarations=9376
+     refutations-skipped=64`; both self-tests exit 0 (axioms 23 of 23 after item 260's fix — red log `…/axioms-self-test/20261004T221030Z-2808168.log`, green
+     `…T222158Z-2896287.log`, green after the merge `…T224905Z-3098517.log`; vacuity 38 of 38). Carriers (FS131-T1's procedure): IN `Plane.CPColouring`,
+     `Plane.SemiconcaveWith`; OUT the rest, each with its reason in `scripts/Vacuity.lean`; controls 33–38 new. Credit: wave 2's implementers, I2a–I2n, and
+     I2n for the landing and the self-test diagnosis (item 259).
+271. **Wave 2's filing and its held items.** **Filed now** (this commit, from I2n's drafts 1–4, record "Drafts for the front page (FS131-I2n)"): `CLAUDE.md`
+     § Trust ledger (2512 clean, 4 imported, 2,532 records), § The gate (`declarations=9376 refutations-skipped=64 sites=516`, `… witnessed=23 generic=488 …`),
+     `scripts/vacuity-baseline.txt`'s header, `LEAN.md` § The gate ("thirty-eight controls"), `GATE_CHANGES` (1856 → 2512). **Receipts, read before the
+     commit**: `gate_report.py axioms` — Trust ledger "match (clean, purchases and imported compared)"; `gate_report.py vacuity` — baseline header and § The gate
+     "match (9 of 9 compared)"; fact audit `--base a02b88f7` — 16 losses, every one the superseded counts and the superseded sentence's attribution
+     (`localSectors`, `FS131-I3i`, `FS131-T3's`; in git at `a02b88f7` and in items 157, 171), nothing else; `--dupes` unchanged. **Held for the milestone's
+     filing**: draft 5 (the Frontier's "What the kernel holds" clause for wave 2), draft 6 (the 28 `LEDGER.md` rows to regrade, listed there), draft 7 (the Proof
+     Atlas grades). **Accepted** (I2n's held items): the six `expect` lines added to `scripts/vacuity.sh` outside its touches (T1's procedure step 3 requires them);
+     `Row130M1` and `Voronov11` left out of the vacuity scan on purpose (tracking them adds UNKNOWN sites nobody can discharge; their truth rests on the planner's
+     read-back); merge `54d408c6`'s default message. **Tool defect owed**: `scripts/vacuity.sh`'s banner still says "twenty planted defects" for 38. **For wave 4's
+     landing**: `HadwigerNelson.Plane.framePt` is declared in wave 2's `Plane/Slack` l. 2800 and in wave 4's `Plane/ValidMap/Basic` l. 44 — wave 4 renames
+     (`data/fs131/i2n/dupes.log`). The second of waves 2 and 4 to land merges the first's vacuity carriers (handoff § 4). Wave 2's worktree `fs131-w2` joins the
+     removal list after its cited gate logs are rescued.
+272. **Wave 2's slot → wave 5's third implementer, FS131-I5c, on `fs131-w5`; it merges `fs131-w4` once that branch holds the `Contact` lane.** Choice: I5c works
+     wave 5's 44 leaves (I5b's Stage 8: `Terminal` 12, `Dense` 3, `HexRing` 7, `MapGraph` 3, `BaseWalk` 15, `BaseDense` 4) less the planar job's seven (items 239,
+     242, 247 (b)), in I5b's four infrastructures (Stage 8's re-pricing: the brick map's point classification; sector-chart geometry; the stuck structure; the
+     limit constructions); its first code stage merges `origin/fs131-w4` as soon as it contains `f975677b` (FS131-I4l's merge of the `Contact` lane, item 267), so
+     wave 5 reads the proved `stuck_structure` (form (b), item 252; form (a) as `stuck_structure_flanks`) and `pair_i` with `h3` (item 258), and applies ruling 252 to
+     `stuck_structure_ua`; until then it works the brick map and sector-chart leaves. Alternative weighed: the planar-infrastructure job first (it repairs
+     `IsHoleOf`, item 242). Why: the stuck structure carries about nine of wave 5's leaves and is proved on wave 4 now, while the planar job's seven leaves feed
+     only `cvb_*` and the eleventh-point chain; QA3's audit of wave 5's definitions found no new defect so far (item 268). Confidence: medium-high. In flight:
+     1 (IM2) + 1 (QA3) + 1 (I4l) + 1 (I5c) = 4. The planar job takes the next slot.
+273. **FS131-QA3 done** (harness ≈ 255k; report `data/fs131/reports/FS131-QA3.md`, record `plans/FS131-QA3-audit.md`; commits `f0e41a11`, `efe68c61`, `a711e04c`,
+     `63ed8c0a`, `7abff9b9`, all present). 99 definitions (41 wave 5, 58 wave 4) and 31 clause families read against their sources, an adversarial instance tried
+     for each: **97 match; the other 2 were known and ruled** (`IsRetArc`, repaired, item 232; `IsHoleOf`, item 242). **Findings**: QA3-1, `exists_merge`'s
+     colour clause false (items 268–269, applied on `fs131-w4m` at `de8842c6`); QA3-2 (minor), `InMK` bounds arcs per unit disc where the source's 𝓜_K bounds
+     arcs per tile and tiles per unit disc, so `InMK` is 𝓜_K only up to `K ↦ O(K²)`, and no theorem uses it (the source's three bounds drafted in § 4.2 row 2).
+     Wave 5 has no new definition or clause defect; its recorded readings (R-CHAIN, R-CDOUBLE, R-MOD, G-BVHEX, G-BVND, N-BVL3, F-HEXCUSP) are harmless for their
+     consumers. Exact checks in scratch Lean against `fs131-w5`'s oleans (`data/fs131/qa3/QA3Checks.lean`; planted fault fired): `exists_endpoint`'s second `hc`
+     disjunct is dead; `HornBoundsQR`'s arcs start and end at the run vertex. Notes for later jobs (§ 2.4): phantom arcs make no statement false (`F.Clean` is
+     optional); `linkage_dot_ne_zero`'s docstring overstates its statement (`bv_l3`/`l3_base`'s implementer supplies the turning-point step); item 242's repair is
+     bound both ways (f). New tool: `tools/fs131_qa3_census.py` (4 controls, planted fault fired). Credit: QA3, for finding `exists_merge`'s defect before IM2
+     reached it.
+274. **Rulings on QA3's held items and the freed slot.** (a) **`InMK`**: restated when its first consumer is planned, not now (no theorem uses it; a definition
+     restated with no consumer has no reader to check it against). Correction owed, filed at the milestone's close if still unconsumed. Confidence: high.
+     (b) **`linkage_dot_ne_zero`'s docstring**: FS131-I5c fixes it when it reaches `l3_base` (docstring only; told by a brief amendment). (c) **`stuck_structure_ua`**:
+     already owed by I5c (item 272). (d) **QA3's slot → the planar-infrastructure planner, FS131-KP**, on a new branch `fs131-w5p` cut from `fs131-w5` at `0db34854`
+     (worktree created, `.lake/build` copied from the idle `fs131-w5b`). Choice: a planner first — the faithful `IsHoleOf` (item 242's design question, bound both
+     ways by QA3's note f), the shared planar lemma or lemmas Mathlib lacks, and a skeleton reducing the seven leaves to them, with a plan per leaf — then an
+     implementer. Alternative weighed: an implementer straight away (items 239, 242 named "the planar-infrastructure job" without saying which lane). Why: the job
+     opens with a definition's design and a choice of route through plane topology (a continuum's outer frontier, or a finite plane graph's outer face) that the
+     planners have not priced; planning and building in separate minds is the standing rule for exactly this. Fence for I5c: it does not edit `IsHoleOf`, `fill`,
+     `IsOuterTile`, `filledGraph`, the three `cvb_*` leaves in `MapGraph`, nor `retArcs_nested`, `exists_endpoint`, `exists_eleventh` (`BaseWalk`) or
+     `exists_unenclosed_or_bad` (`BaseDense`), so `fs131-w5p` merges back in disjoint hunks. Confidence: medium-high. In flight: 1 (IM2) + 1 (I4l) + 1 (I5c) + 1 (KP)
+     = 4.
+275. **Kooshi, 2026-10-04 (verbatim)**, after wave 2's landing notification: *"I just saw the notification and got caught up. Great work so far! You and every
+     agent. I'm very grateful."* Recorded here for every job of this milestone (credit goes in the inventory, never in a message to a finished agent).
+276. **FS131-KP mid-job: its choice for `IsHoleOf`, sent before the change** (message, 2026-10-04). The definition: `Hc.Nonempty ∧ Hc ⊆ (closure T)ᶜ ∧
+     Bornology.IsBounded Hc ∧ Disjoint (closure Hc) (closure ((closure T)ᶜ \ Hc))` — a nonempty bounded part of the complement of `T`'s closure whose closure
+     misses the closure of the rest; so `Hc` is open and a union of whole clusters of complementary components (chained by touching closures) not containing the
+     unbounded one; a hole need not be a single cluster (no consumer needs it). **Bound both ways** (QA3's note f): every CVB hole is counted, item 242's touching
+     pair of discs included (I5b's repair counted neither, which would make `cvb_pinch_connected` false); I5b's chain is not a hole (any separated part holding
+     `D₁` holds `D₂`, then the unbounded component). "No hole" is then "the complementary components, joined when their closures touch, form one connected
+     graph". **Finding**: CVB's "a boundary component of `x` disjoint from its outer one" assumes its frame (every arc separates two colours); `ArcMap` allows
+     phantom arcs, and an annulus tile cut by a phantom radial slit has connected `∂T` yet disconnects `M` when removed — so the faithful definition reads the
+     complement of `cl T`, not the components of `∂T`. **Statements changed: none.** One proof needs its last lines rewritten: `exists_holed_valid_fragment`
+     (statement unchanged), outside KP's touches. Inhabitant: `holedFrag`'s annulus with the disc `|z| < 1/4`; adversary: I5b's chain as a plane-set example.
+     **Re-priced**: `cvb_pinch_connected` and `cvb_hole_disconnected` need no Jordan-type theorem under this definition — local facts already held
+     (`finite_tiles_near`, `dense_interiorPts`, tile diameter at most 1) plus one lemma (inside an open connected set, tiles are joined by chains of tiles whose
+     closures meet): M each, not H. Credit: KP, for the definition and the phantom-slit case.
+277. **Ruling on item 276: adopt KP's `IsHoleOf`; KP may rewrite `exists_holed_valid_fragment`'s proof.** Choice: the separated-part definition as sent; KP's
+     touches gain `exists_holed_valid_fragment`'s proof (statement unchanged). Alternatives weighed: I5b's repair (the last clause over every other component),
+     which misses touching clusters (item 242's fear, confirmed); a definition by the boundary components of `cl T`, CVB's own words, which phantom slits break.
+     Why: it is bound both ways as QA3 required, changes no statement, survives `ArcMap`'s phantom arcs, and turns two H leaves into M. Keryx's check of the
+     hole clause, one step: a tile other than `T` is open and disjoint from `T`, so it lies in `(cl T)ᶜ`, in one component, hence inside `Hc` or inside its
+     complement, and two tiles on opposite sides have disjoint closures — so no edge of `M − T` crosses a hole, as `cvb_hole_disconnected` needs. Confidence:
+     medium-high — what would change it: infinitely many complementary components making "no separated bounded part" weaker than "the cluster graph is
+     connected", which `cvb_pinch_connected`'s plan must then handle through the separation directly. CVB's frame note (phantom arcs) goes to the errata at the
+     filing.
+278. **FS131-IM2 handed back** (Stage 6 SAVED, harness ≈ 505k; report `fs131-w4m`'s `data/fs131/reports/FS131-IM2.md`; commits `aee53d57`, `fe10562b`,
+     `4e9bd505`, `de8842c6`, `37f29db8`, `6c7573dd`, `9ffc2aba`). **Done**: the second move (item 263; d4f946ae l. 1058–2592, whole declarations, into `Cone`,
+     checked byte for byte by `tools/fs131_im_move_cone.py`, three new controls watched red); item 269 applied in both copies (`tools/fs131_im_statements.py`
+     empty diffs, both IM tools now read a table of ruled amendments, `tools/fs131_im_amend.py`). **Held, [kernel]**: 93 machinery theorems in `Moves` (the chart
+     near its point, `eventually_ord`, `ncard_coloursAt_le_two`, `col_eq_of_flankAbove`/`_Below`, `Arc.outer_spec`, `ArcMap.surgery` with agreement off the
+     ball, no new unit arc and Condition 5, `encard_sectorsOf_of_partition`, `ArcMap.Near` and `Near.move`) and `Near.exists_cut` (cutting a germ's branch whose
+     two side sectors share colour `c` gives a valid map agreeing off `B̄(v, ρ)`, no new unit arc, Condition 5 kept, one `c`-sector fewer at `v`, no colour added at
+     `v`, at most two colours on the circle). **The three moves: not proved.** **Receipt (Keryx)**: the commits exist;
+     `build/gate/build/20261004T231602Z-3342967.log` ends "Build completed successfully (5361 jobs)", 107 `sorry` warnings and 0 others; `sorry` lines by count
+     `Moves` 3, `Cone` 0, `Contact` 4 (this branch's copy predates IC5); `data/fs131/im/axioms-stage6.txt`: 96 records, exactly 3 on `sorryAx`, `Near.exists_cut`
+     on the standard three. **Re-priced** (record § 6.3): SHAVE's two cut cases about 60 lines of glue each, its recolouring case about half a session; RAY about
+     1.5 sessions; MERGE about two (it cannot use the full rim circle). **Corrections**: SHAVE's table in IM1's § 3.2 is wrong for `g = c` and `h = c` (the cut alone
+     merges, no recolouring, `hclear` not read; § 6.3 replaces it). **Generalization**: `eventually_ord` recovers branch disjointness and germ order below some
+     radius from `Sorted` alone, for any chart. **Tool defect**: `tools/check_architecture.py` exits 1 on "purchase ledgers disagree" (its check [5]) on this
+     branch, before IM2's edits as well — for whoever lands wave 4 (`main`'s gate passed it at wave 2's landing). Credit: IM2, for the shared surgery and the cut.
+279. **Ruling: the moves' machinery becomes `Plane/ValidMap/Surgery`, and FS131-IM3 continues on `fs131-w4m`.** Choice: IM3 first moves IM2's machinery (`Moves`
+     from "The chart near its point" through `Near.exists_cut`) verbatim into a new module `Plane/ValidMap/Surgery` upstream of `Moves`, checked byte for byte;
+     then SHAVE's three cases, RAY and MERGE in § 6.3's order. When a second slot frees, MERGE may go to a parallel implementer on its own branch cut from
+     `fs131-w4m` after the split, editing only `exists_merge_aux` and children beside it. Alternative weighed: keep the machinery in `Moves` and run the three
+     moves serially. Why: IM2 found the machinery reads only `Cone` and wave 3, so the split is clean, costs one checked move, shortens `Moves`' rebuilds, and
+     lets two implementers work the moves without sharing a file's growing machinery; serial work leaves wave 4's longest path at about four sessions.
+     Confidence: medium-high. IM2's slot → IM3: 1 (I4l) + 1 (I5c) + 1 (KP) + 1 (IM3) = 4.
+280. **FS131-I4l handed back** (Stage 37 SAVED, harness 511k by the task notice; report `fs131-w4`'s `data/fs131/reports/FS131-I4l.md`; commits `efd70aa6`,
+     `d33d0b33` (the merge, made without paths), `54852de9`, `111830c8`, `c8b8b382`, `ea413a23`, `68ca5f0f`). **Done**: `fs131-w4c` merged into `fs131-w4` (item
+     267; only `ARCHITECTURE.md` conflicted, each side's row kept; `scripts/Axioms.lean` keeps both; no statement changed, no duplicate name). **Held, [kernel],
+     the standard three**: FS112-N3-PAIRS (i) `pair_i` — **TRUE**, with ruling 258's `h3` read only at the collinear configuration (children
+     `eq_midpoint_of_dist`, `finite_sphere_inter_sphere_half`, `exists_mem_Ioo_ringPt_not_mem`, `mem_closure_region_of_pseudo`, `finite_not_stripHolds`,
+     `pair_i_of_transversal`); engine 5 `IsHorn.isRingArc_upper`/`_lower` (plan § 13.1 item 5). FS112-N2-FLANK-Q `flankQ_upper`/`flankQ_lower` proved over one
+     child each, the (R2) shadow clause `flankQ_upper_shadow`/`flankQ_lower_shadow` (`sorry`). **Receipt (Keryx)**: the commits exist; `fs131-w4c`'s head
+     `f975677b` is an ancestor of the branch; `build/gate/build/20261004T232508Z-3414461.log` ends "Build completed successfully (5359 jobs)", 26 `sorry` warnings and
+     0 others; `sorry` lines by count `Contact` 3, `UnitArc` 5, `BaseSteps` 1; `axioms-i4l-35.txt` gives `pair_i`, `axioms-i4l-36.txt` and `-37.txt` give engine 5
+     on the standard three, `flankQ_*` on `sorryAx` besides. **Left on the branch (9)**: `Contact`'s three moves (IM3's, on `fs131-w4m`); `UnitArc`'s
+     `bend_toward`, `bend_away`, `flankQ_upper_shadow`, `flankQ_lower_shadow`, `nb4p`; `BaseSteps`' `n3_end`. **Ruling 244 (c)'s step (iii) holds** (one mind, on
+     paper, five steps in record Stage 36: no `g` inside `B(N, 2)` near `R₂` by the cusp argument; `R₂` near `S′` in Γ; generic points by the homothety
+     `z ↦ (z + N)/2`; a polar rectangle outside `R₂` all `g`; transversal crossings once `r` is small) — about a session for both mirrors. **Generalizations**:
+     `mem_closure_region_of_pseudo` replaces N3-I's "c′ ≡ {a} near x" by a closed-set fact; engine 5 reads no validity hypothesis; FLANK-Q never reads `hcN`/`hcS`.
+     **Tool defect**: `tools/fs131_k4_decls.py --check` exits 1 on the merged branch, not resolving `theorem _root_.X` (`BranchGerms.frameY_lt_of_mem`,
+     `lt_frameY_of_mem`); I4's `tools/fs131_i4_addrecords.py` now resolves it. **New tool**: `tools/fs131_i4_treedupes.py` (every qualified name in a tree;
+     planted control fired; counts reconcile 7,378 + 7,447 − 7,296 = 7,529). **Question**: `n3_end` carries no `hQR`, so FLANK-Q's (Q)/(R2) dichotomy is not
+     available inside it — check NB3-END item 1 (`plans/FS112-NB3-verification.md` l. 221–243) before planning it. Credit: I4l, for the merge and `pair_i`.
+281. **Rulings on I4l's held items, and its slot.** (a) `flankQ_upper`'s `hcN` and `flankQ_lower`'s `hcS` renamed `_hcN`, `_hcS` (ruling 185's reasons: a binder
+     name is not part of the type). (b) **`tools/fs131_k4_decls.py`** learns to resolve `_root_.` names, with a control, by whichever implementer runs wave 4's
+     gate (touches extended then); alternative weighed: accepting `tools/fs131_i4_addrecords.py --check` in its place — declined, since the gate's plan § 14.4
+     names K4's tool and one checker should hold the list. Confidence: high. (c) **I4l's slot → FS131-I4m** on `fs131-w4`: the six leaves, the shadow clause by I4l's
+     Stage 36 route, `n3_end` after checking the `hQR` question first (message me if NB3-END item 1 needs the dichotomy, since then a hypothesis is missing).
+     Alternative weighed: a parallel MERGE implementer now (item 279) — not yet possible, since its branch must be cut after IM3's `Surgery` split; it takes the
+     next slot that frees after that commit. Confidence: medium-high. In flight: 1 (I5c) + 1 (KP) + 1 (IM3) + 1 (I4m) = 4.
+282. **FS131-KP done** (harness ≈ 430k; record `fs131-w5p`'s `plans/FS131-planar-kernel-plan.md`; report `data/fs131/reports/FS131-KP.md`; commits `397a89de` …
+     `d0868ff5`). **`IsHoleOf` repaired** as ruled (item 277); `exists_holed_valid_fragment` re-proved, statement unchanged, the inhabitant; adversaries
+     `not_isHoleOf_chain` (I5b's chain) and `isHoleOf_cluster` (item 242's cluster) stated with `sorry`; "no hole ⟺ `mapGraph − T` connected", the pinch proof
+     reading local finiteness at one point only (item 277's caveat does not arise). **The route**: unicoherence of ℂ is provable here from Mathlib's lifting
+     theorem for coverings over a simply connected space (`IsCoveringMap.existsUnique_continuousMap_lifts`, `Circle.isCoveringMap_exp`, `SimplyConnectedSpace ℂ`,
+     confirmed with `#check`), so **nothing is imported**; E4's home theorem (the frontier of a complementary component of a continuum is connected) follows and
+     is planned; the two `cvb_*` pinch/hole leaves need no Jordan-type theorem; `exists_eleventh` and `exists_unenclosed_or_bad` need unicoherence and a last-exit
+     lemma; `retArcs_nested` a crossing lemma (hard); `exists_endpoint` and `cvb_thom_reduced`'s rings a handshake on a finite boundary graph; `cvb_thom_reduced`
+     splits into graph theory over `Thomassen.PlanarLike` plus `filledGraph_planarLike`. **The skeleton**: two new modules, `Plane/PlaneTopology` (8 `sorry`) and
+     `Plane/ValidMap/MapTopology` (15); four of the seven leaves are now proofs over named children (`cvb_thom_reduced`, `retArcs_nested`, `exists_endpoint`,
+     `exists_eleventh`), three carry annotated `sorry` steps. **Price**: six to nine implementer sessions (plan § 4.2). **Receipt (Keryx)**: the commits exist;
+     `build/gate/build/20261004T234604Z-3574873.log` ends "Build completed successfully (5395 jobs)", 0 warnings other than `sorry`; `sorry` lines by count
+     `PlaneTopology` 8, `MapTopology` 15. **Correction, fixed by the obligation pass**: `exists_far_end` as first written was false when `r(θ)` itself carries three
+     colours; restated (a skeleton statement of this job). **Generalizations**: `exists_rim_vertex` needs no bad-point hypothesis; the frontier lemma holds for any
+     component of the complement of any closed preconnected set, no compactness. **Question**: `endpoint_of_far_end`'s exit case needs FS110-CD Lemma E/R and
+     FS110-CE R1–R4 — does a two-colour exit return within 60° of `r(θ)`, as `IsRetArc`'s bound requires? **Stub candidates**: F-RING, T-GRAPH and the crossing
+     lemma may each deserve a job once measured. **Draft for `LEAN.md` § Searching — Lean** (plan § 5.4): held until wave 5 lands, since it names a module not on
+     `main`. Slips (KP's): the as-given build did not run separately; the first skeleton build failed on untyped binders, fixed. Credit: KP, for finding that
+     the plane topology needs no import.
+283. **Ruling: KP's slot → the planar implementer FS131-IP1 on `fs131-w5p`; the parallel MERGE implementer takes the next slot.** Choice: IP1 works plan § 5.1's
+     order (the plane-topology foundation and unicoherence first, measured; then `MapTopology` § A and the two `cvb_*` pinch/hole leaves with the adversaries; then
+     §§ B–C), re-prices after the first two leaves, and reads FS110-CD Lemma E/R and FS110-CE R1–R4 before `endpoint_of_far_end` (messaging me if the 60° bound
+     fails, since then `IsRetArc`'s statement is in question). Alternative weighed: the parallel MERGE implementer now (item 279; IM3's split is committed at
+     `934bc81c`, so it is possible). Why: the planar chain (six to nine sessions) is the longest path to wave 5's landing and through it to waves 6–9, while a
+     parallel MERGE saves about two sessions on wave 4, whose landing waits on I4m's six leaves as well. Confidence: medium — what would change it: IP1's first
+     measurements putting the planar chain well under wave 4's remaining length. In flight: 1 (I5c) + 1 (IM3) + 1 (I4m) + 1 (IP1) = 4.
+284. **FS131-I5c handed back** (Stage 13 SAVED, harness 525k by the task notice; report `fs131-w5`'s `data/fs131/reports/FS131-I5c.md`; commits `c10cf764`,
+     `45991831` (the merge of `fs131-w4` at `111830c8`), `0b39ea7a`, `2af2edf3`, `358ff7de`, `728c3502`). **Done**: `fs131-w4` merged (one `ARCHITECTURE.md`
+     conflict, both sides kept); ruling 252's form (b) applied to `stuck_structure_ua` (the only statement changed). **Held, [kernel], the standard three**:
+     `sevenBrickMap_isTerminalMap` (the brick map is terminal: no colour has two sectors, no horn, `QROnly` vacuous), `not_row134BaseUA_seven`,
+     `BaseCtx.vin_antipodal` (FS110-CD Thm D2 (i), by Lemma H's distance step, simpler than KB's route), `BaseCtx.eleventh_antipodal` (D2 (ii)),
+     `BaseCtx.retArc_partner` (Lemma R step 3, the (P) sweep as `not_mem_coloursAt_of_tile_dist`), `stuck_horns_ua` and `woodallCone_isHorn_ua` (N4-STUCK (i)
+     with unit arcs: wave 4's horn analysis goes through, curvatures in `[−1, 1]`, Condition 5 entering only through `woodallCone_strict`), and a new module
+     `Plane/ValidMap/BrickMap` (41 theorems: the brick map's point classification). Proved over `sorry` children: `stuck_structure_ua` (over the new child
+     `stuck_flanks_ua`), `retArcs_finite` (over `pseudo_finite`), `hex_base` (over `rot_noThird`, `bv_hex`). **Wave 5: 44 → 37** (`Terminal` 11, `Dense` 2,
+     `HexRing` 7, `MapGraph` 3, `BaseWalk` 10, `BaseDense` 4; 30 this lane's, 7 the planar job's). **Receipt (Keryx)**: the commits exist;
+     `build/gate/build/20261005T000636Z-3731746.log` ends "Build completed successfully (5367 jobs)", 0 warnings other than `sorry`; the counts above match by grep
+     (`BrickMap` 0); `data/fs131/i5c/I5cAxioms13.out` gives the five named theorems on the standard three and `stuck_structure_ua` on `sorryAx` besides.
+     **Generalizations** (every `k`): `dist_le_one_of_mem_region`, `not_mem_coloursAt_of_tile_dist`. **Pricing correction**: `stuck_structure_ua`'s hard part is
+     exactly `stuck_flanks_ua` (S–V Prop. 7's flank argument when a horn arc lies on `ω(v ± n)`); wave 4's `shaveAvailable_of_not_doublyShadowed`,
+     `flank_ne_of_doublyShadowed` and `outType_*_of_shadow` assume Condition 5 or strict curvature bounds, so each needs a unit-arc version. **Tool defect**:
+     `tools/fs131_i5_dupes.py` reports 602 false collisions after the merge (it treats every file changed since the fork `9a8de899` as wave 5's; fix: FORK to the
+     merge base, or limit to wave 5's modules). **Shared child owed**: `exists_isRingArc_of_onRingArc` (plan § 9.1) for `pseudo_nonempty` and `cv_l0`. Still owed:
+     `linkage_dot_ne_zero`'s docstring (item 274 (b)), by whoever proves `l3_base`. **For the gate**: `IsTerminalMap`'s inhabitant is proved, so plan § 10.3's IN
+     recommendation leaves no UNKNOWN. Credit: I5c, for the brick infrastructure and the merge.
+285. **Ruling: I5c's slot → the parallel MERGE implementer FS131-IMM1 on a new branch `fs131-w4mm`; wave 5's next implementer takes the next slot.** Choice: as
+     item 283 said. `fs131-w4mm` is cut from `fs131-w4m` at `73d31ad6` (IM3's Stage 9: SHAVE proved, `Surgery` split in); worktree created, `.lake/build` copied
+     from the idle `fs131-w4c`. IMM1 proves `exists_merge_aux` only, its children in a new module `Plane/ValidMap/MergeMove` (importing `Surgery`, upstream of
+     `Moves`), touching `Moves` only for that import and `exists_merge_aux`'s proof body; FS131-IM3 is told not to edit `exists_merge_aux` and to take RAY next.
+     Alternative weighed: wave 5's next implementer now (a lane keeps its slot, item 199 (c)). Why: IM3 proved SHAVE in one stage, so RAY and MERGE in parallel
+     cut wave 4's remaining moves from about 3.5 sessions to about 2, and wave 4's landing gates Woodall's and wave 5's; wave 5's own lane has slack, since the
+     planar chain (six to nine sessions) bounds its landing. Confidence: medium-high. In flight: 1 (IM3) + 1 (I4m) + 1 (IP1) + 1 (IMM1) = 4.
+286. **FS131-IM3 handed back** (Stage 10 SAVED, harness 538k by the task notice; report `fs131-w4m`'s `data/fs131/reports/FS131-IM3.md`; commits `8ab4f838`,
+     `934bc81c`, `73d31ad6`, `530b3ac6`, `67256973`). **Held, [kernel], the standard three**: FS110-N4-SHAVE `exists_shave_aux` (two cuts when a flank has the
+     horn's colour, one recolouring otherwise; 22 children) and FS110 N4-RAY `exists_rayMerge_aux` (the gap's clearness `ray_clear`, made exact with parabola
+     points of each horn; the merge with item 262 (a)'s correction — the lower horn joins the nearest `c`-horn above it, by the cut when adjacent, else by
+     recolouring the horn spanning both; 46 children). **Done**: the split (item 279), `Moves` l. 25–2087 at `9ffc2aba` verbatim into `Plane/ValidMap/Surgery`
+     (checked by `tools/fs131_im_split.py`, three controls watched red). **Receipt (Keryx)**: the commits exist; `build/gate/build/20261005T001350Z-3780541.log`
+     ends "Build completed successfully (5362 jobs)", 0 warnings other than `sorry`; `sorry` lines by count `Moves` 1 (`exists_merge_aux`, IMM1's), `Surgery` 0;
+     `data/fs131/im/axioms-stage10.txt` gives `exists_shave_aux` and `exists_rayMerge_aux` on the standard three, `exists_merge_aux` on `sorryAx` besides.
+     **Corrections**: (a) **item 278's "tool defect" was not one** — IM1 had put its audit block in `scripts/Axioms.lean` just after the `=== PURCHASED ===`
+     banner, so `check_architecture` rightly failed and `axioms.sh` would have failed every moves record at the gate; IM3 moved the block above the banner and the
+     check passes (both runs saved, `data/fs131/im/check-architecture-{before,after}-axioms-move.txt`); (b) **slip (Keryx's) — item 279's range** ("The chart near
+     its point" through `Near.exists_cut`) left out IM1's l. 25–244, which the machinery uses; IM3 moved l. 25–2087; (c) IM1's § 3.3 clearness route ("the
+     vertical line") is replaced by parabola points and a fresh abscissa (`exists_same_side`). **For MERGE (record § 10.1)**: `Near.move` and `Near.exists_cut`
+     add the whole circle `∂B(v, ρ)` as an arc, so neither serves MERGE as is; the rim clause `¬ F'.HasRepeatedColour x` fails where a germ at `v` has one colour
+     on both sides (a phantom germ, which `ArcMap` allows) unless that germ is cut in a thin annulus inside `ρ` — IM3 believes the statement true with annulus cuts,
+     and MERGE's price rises above two sessions. **Generalization**: `Near.sector_subset_hornSet_of_meets`, `Near.horn_of_sector_subset_hornSet`. **For the
+     merge**: expect a trivial `scripts/Axioms.lean` conflict with `fs131-w4mm` (both append records above the PURCHASED banner). Credit: IM3, for SHAVE and RAY.
+287. **IM3's slot → wave 5's next implementer, FS131-I5d, on `fs131-w5`; IM3's MERGE findings relayed to IMM1 at once.** Choice: as the handoff queued (item 285):
+     I5d works wave 5's 30 own leaves, `stuck_flanks_ua` first (its unit-arc versions of wave 4's three flank lemmas), then the shared child
+     `exists_isRingArc_of_onRingArc` (for `pseudo_nonempty`, `cv_l0`), then the rest in I5c's order; it repairs `tools/fs131_i5_dupes.py`'s FORK (item 284) if it
+     needs the tool. IMM1 is told by message of IM3's § 10.1 (the whole-circle arc, the phantom-germ rim crossing, annulus cuts) and of the audit block's place.
+     Alternative weighed: a second planar implementer now. Why: IP1 has not yet measured the planar foundation, so a split would be guessed; wave 5's own lane is
+     next in the queue and has 30 leaves. Confidence: medium-high. In flight: 1 (I4m) + 1 (IP1) + 1 (IMM1) + 1 (I5d) = 4.
+288. **FS131-I4m handed back** (Stage 40 SAVED, harness 466k by the task notice; report `fs131-w4`'s `data/fs131/reports/FS131-I4m.md`; commits `70075915`,
+     `e1c75f21`, `2fb1b451`, `a0c29483`). **Held, [kernel], the standard three**: FS112-N2-FLANK-Q's (R2) shadow clause `flankQ_upper_shadow`/`_lower_shadow`
+     (8 children: `r2Cross`, `Arc.finite_inter_sphere_two_or_subset`, `eventually_arcs_on_sphere_two`, `exists_polarBox_subset_region`,
+     `mem_shadow_of_crossing`, …), so **`flankQ_upper` and `flankQ_lower` have no `sorry` beneath**; FS112-NB4P `nb4p` (7 children: `germ_rotate_third`,
+     `straddlers_third`, `exists_opposite_cos_third`, …). **Left on `fs131-w4` (6)**: `Contact`'s three moves (SHAVE and RAY proved on `fs131-w4m`, MERGE with
+     IMM1), `UnitArc`'s `bend_toward`, `bend_away`, `BaseSteps`' `n3_end`. **Receipt (Keryx)**: the commits exist; `build/gate/build/20261005T001554Z-3797153.log`
+     ends "Build completed successfully (5359 jobs)", 0 warnings other than `sorry`; `sorry` lines by count `Contact` 3, `UnitArc` 2, `BaseSteps` 1;
+     `axioms-i4m-39.txt` and `-40.txt` give `flankQ_upper`, `flankQ_lower`, `nb4p` on the standard three. **The `hQR` question**: `n3_end`'s proof does not need
+     FLANK-Q's dichotomy (one mind, Stage 38). **Correction owed (a reading, one mind)**: NB3-END's proof (`plans/FS112-NB3-verification.md` l. 230–243) splits on
+     "an upper bound of `H_±` is `+1`" and hands that case to item 1, which concludes "the chain is `{P_0}`", not `n3_end`'s statement; the statement splits on
+     an in-type `g`-tile at `N`, so the case `κ₂ = 1`, `g ∉ P_cl(N)` must go through items 2–5 with item 2's premise read as "no in-type `g`-tile at `N`".
+     **Generalizations**: the shadow clause reads neither validity nor the flank (`R₂ ⊆ cl(region g)` with `S′ ∈ dom` suffices, and Stage 36's cusp step is not
+     needed); `mem_shadow_of_crossing` is reusable; `nb4p` uses only the first half of `hnb`, and W1 (ii)'s `Q⁻ = Q⁺` is not needed. **For a planner**: `n3_end`'s
+     items 2–5 need unit-arc versions of `Contact`'s shadow and SHAVE lemmas (`flank_shadow_g`/`_h`, `flank_shadows`, `shaveAvailable_of_not_doublyShadowed`,
+     `stuck_structure` assume Condition 5 and curvatures in `(−1, 1)`; `n3_end`'s horn has `κ₁ = −1`, no Condition 5). **Price**: each bend about a session (engine
+     3, the cut, first); `n3_end` about two. Credit: I4m, for FLANK-Q and NB4P.
+289. **Rulings on I4m's items: `n3_end` moves to wave 5; the next wave-4 job merges the moves branch and proves the bends.** (a) **`n3_end`'s reading** (Stage 38)
+     is the route: no `hQR`; the split is on an in-type `g`-tile at `N`. The kernel checks it; no second mind is sent. (b) **`n3_end` moves, statement and
+     docstring verbatim, from wave 4's `BaseSteps` to wave 5's `Plane/ValidMap/Terminal`, beside `n3_end_chain`.** Alternative weighed: a wave-4 implementer
+     builds the unit-arc versions of `Contact`'s shadow and SHAVE lemmas inside wave 4 and proves `n3_end` there. Why: the unit-arc versions are exactly what
+     FS131-I5d is building now on `fs131-w5` for `stuck_flanks_ua` (item 287), so wave 4 would duplicate them; `n3_end` has no consumer in wave 4 (by grep) and its
+     only reader, `n3_end_chain`, is in wave 5's `Terminal`; and wave 4 then lands without a two-session leaf on its longest path. Both branches delete it from
+     `BaseSteps` identically (and its `#print axioms` record from `scripts/Axioms.lean`), so the later merge is clean; I5d adds it to `Terminal` in the same commit
+     as its own deletion. Confidence: medium-high — what would change it: a wave-4 consumer of `n3_end` (there is none at `a0c29483`). (c) **FS131-I4n** on
+     `fs131-w4`, in I4m's slot: merges `fs131-w4m` (at `67256973`: `Surgery`, SHAVE, RAY) into `fs131-w4`; makes `Contact`'s `exists_shave` and `exists_rayMerge`
+     cite `exists_shave_aux` and `exists_rayMerge_aux`; deletes `n3_end` per (b); proves `bend_toward` and `bend_away`, reading `Surgery`'s cut and surgery before
+     stating engine 3, so the cut is written once. Then wave 4 waits only on MERGE. In flight: 1 (IP1) + 1 (IMM1) + 1 (I5d) + 1 (I4n) = 4.
+290. **Statement defect — `bend_away` (FS112-N2-BENDS's away clause; `UnitArc` l. 2658 at `a0c29483`) is false as written: the radius-2 arc is not assumed in
+     the domain** (FS131-I4n, by message, 2026-10-04). Off `F.dom`, `closure (F.region c)` can meet `R₂(ᾱ)` in an infinite nowhere-dense closed set, so
+     `r2Contacts` holds no non-degenerate interval and the conclusion asks the whole open arc to bend away. I4n's counterexample (`k = 2`, `P = 0`, arc `circ 0 1`
+     on `(−η, ℓ + η)`, `ℓ = 0.1`): `K ⊆ [0.04, 0.06]` infinite closed with empty interior (`{0.05} ∪ {0.05 + 0.001/n}`), `f = infDist · K`, `dom = N ∪ Y` with
+     `N` a thin annulus about the arc and `Y = {ρe(φ) : 0 < φ < ℓ, 2 + f(φ) < ρ < 2 + f(φ) + δ}`, colour `c` inside `N` and on `Y`, `c'` outside — valid, `IsRingArc`
+     holds, `c ∉ coloursAt 0`, `C₂ = K`; no `F'` exists: (1) a point `r(φ)`, `φ ∈ K`, interior in `F'` forces `(1+s)e(φ)` and `(2+s)e(φ) ∈ Y` both colour `c` at
+     distance 1; (2) otherwise `r(K) ⊆ F'.Γ`, local finiteness puts infinitely many on one arc, `Arc.finite_inter_sphere_or_eq_circ` makes it `circ 0 1 θa θb`, and
+     the conclusion needs an interval inside `K`. **Proposed repair**: a hypothesis putting `R₂(ᾱ)` in `F.dom` (the derivation reads to radius 2: N2-TAN's "C₂ …
+     a finite union of points and closed arcs" needs local finiteness there, `plans/FS112-N-proof.md`). Even repaired, N2-TAN's tangent bend needs the sector
+     structure of `c`'s class at each isolated contact — above the planner's "a session". **Unaffected**: `bend_away_whole` is true as stated (`R₂` disjoint from
+     `closure (region c)`, a positive distance apart; N2-ENV-away clears the lens), today proved through `bend_away`; I4n proposes a direct proof, statement
+     unchanged. Nothing in Lean consumes `bend_away` (I4n, by grep on `fs131-w4`, `-w5`, `-w5p`, `-w4mm`). Credit: I4n, for the counterexample.
+291. **Ruling on item 290: `bend_away` gains the domain hypothesis; `bend_away_whole` is proved directly; `bend_away` leaves wave 4 if it is not done when MERGE
+     lands.** Choice: (a) add to `bend_away` a hypothesis that the radius-2 arc on which `r2Contacts` is read lies in `F.dom` (I4n states it with the library's
+     own name for that arc), docstring rewritten to say so; (b) `bend_away_whole` proved directly on `bend_toward`'s lens construction mirrored, statement
+     unchanged, so it no longer rests on `bend_away`; (c) order: `bend_toward`, then `bend_away_whole`, then the repaired `bend_away`; (d) if the repaired
+     `bend_away` is not proved when MERGE lands, it moves out of wave 4 like `n3_end` (item 289) — to its own job — so wave 4 lands without it. Alternative
+     weighed: keep `bend_away` in wave 4 whatever its cost. Why: nothing consumes it, its repaired proof is above a session, and wave 4's landing gates Woodall's
+     and wave 5's. **Correction owed** to FS112-N2-BENDS's hand statement: the radius-2 arc in the domain, which N2-TAN uses and never states. Confidence: high
+     on the defect (the counterexample is concrete); medium-high on the repair.
+
+292. **FS131-IP1 done** (harness ≈ 394k; record `fs131-w5p`'s `plans/FS131-planar-implementation.md`, stages 1–5 SAVED; report `data/fs131/reports/FS131-IP1.md`;
+     commits `563ef2c9` … `01011037`, pushed). **Results, each [kernel] on the standard three, nothing imported**: unicoherence of ℂ
+     (`isPreconnected_inter_of_union_eq_univ`, `Plane/PlaneTopology`, through Mathlib's lifting theorem for the covering `Complex.exp : ℂ → ℂ ∖ {0}`);
+     FS131-E4's home theorem, wider than E4's form — no compactness, any component (`isPreconnected_frontier_connectedComponentIn`) — with the last exit
+     (`isBounded_connectedComponentIn_of_frontier_subset`) and four companions; **both clauses of FS114-CVB-PINCH** (`ArcMap.cvb_pinch_connected`,
+     `ArcMap.cvb_hole_disconnected`, `Plane/ValidMap/MapGraph`; `IsHoleOf` as item 277); `MapTopology` § A's six, `exists_rim_vertex`,
+     `isCubicTrichromatic_of_three_tiles`, `tileOf_subset_ball`, `GermPseudo.eq_of_cw`, `ringArc_cases`; `exists_unenclosed_or_bad`'s three joints — 32 declarations.
+     **Receipt** (Keryx): the nine commits exist and `origin/fs131-w5p` is `01011037`; the stage-5 build log (`build/gate/build/20261005T004641Z-4048849.log`)
+     ends "Build completed successfully (5399 jobs)" with 0 warnings other than `sorry`; `sorry` by grep: `PlaneTopology` 1, `MapTopology` 4, `MapGraph` 8,
+     `BaseWalk` 15 (3 of them planar, the rest wave 5's lane's); `data/fs131/ip/axioms-stage5.txt` parsed by script: 34 records, 32 on the standard three, the 2
+     controls (`exists_unenclosed_or_bad`, `inter_nonempty_of_interleaved`) showing `sorryAx`; statement read back — unicoherence as Kuratowski's (closed
+     preconnected `A`, `B` with `A ∪ B = univ` ⇒ `A ∩ B` preconnected). **Left, named**: `inter_nonempty_of_interleaved` (the crossing lemma; KP's sketch needs a
+     separation fact unicoherence does not give, record § 2.3); `exists_outermost`, `unenclosed_of_rim_vertex`, `exists_eleventh_of`, `exists_far_end`;
+     `not_isHoleOf_chain`, `isHoleOf_cluster`, F-LOC/CONN/INF/ONE, F-RING, T-GRAPH, `triLattice_planarLike` (owed inhabitant); `retArcs_not_interleaved`,
+     `retArcs_not_abut`, `endpoint_of_far_end`. **Re-price** (record § 5.3): 6.5–9.5 sessions; measured topology ran about three times under KP's table; BG, the
+     crossing lemma, F-RING and T-GRAPH keep KP's prices. **Generalizations** (errata): the last exit holds for any bounded `K` and any `R`;
+     `exists_mem_closure_of_mem_closure_biUnion` (tile closures locally finite on any map); `hasRepeatedColour_of_two_tiles` (any `k`). **Correction done**: KP's
+     docstring cited `IsPreconnected.inter_frontier_nonempty`, absent at the pin; IP1 added `inter_frontier_nonempty_of_isPreconnected` and rewrote the docstring.
+     **Tool**: `tools/fs131_ip_splice.py` (refuses on any statement difference; planted control REFUSED, exit 2). **Slips, no redo**: one `git add -N .` (nothing
+     staged, checked); a timing figure corrected in `6752cc22`. **Not reached**: the 60° question (FS110-CD Lemma E/R, CE R1–R4 unread). Credit: IP1, for
+     unicoherence through the exponential covering and E4's home theorem formalized wider than stated.
+293. **Rulings on IP1's held items, and its slot.** (a) The last exit's `hK`, `hR` → `_hK`, `_hR` **accepted** (rulings 185, 281 (a): a binder name is not part
+     of the type). (b) **IP1's slot → FS131-IP2 on `fs131-w5p`**, the map-level successor: `unenclosed_of_rim_vertex`, then `exists_outermost` (record § 5.4's
+     paper argument), then `exists_eleventh_of` (closing `exists_unenclosed_or_bad` and `exists_eleventh`); then BG + PATH, `exists_far_end`, and
+     `endpoint_of_far_end` after the 60° reading; F-LOC/CONN/INF/ONE; the two adversaries; F-RING after BG; `retArcs_not_abut` and `retArcs_not_interleaved` last
+     (the latter over the crossing lemma, cited as given). Not `Plane/PlaneTopology` and not `MapGraph`'s `namespace HadwigerNelson.Thomassen` block (lines 36–595
+     at `01011037`). (c) **The crossing lemma → its own job, FS131-IX1**, in a new worktree `fs131-w5x` cut from `fs131-w5p` at `01011037`, taking **the next slot
+     that frees**; its route is the implementer's, with one constraint from the schedule: route (b) needs the boundary graph BG, which IP2 builds later, so IX1
+     works a route that does not wait on BG (route (a) or any other it finds, after grepping Mathlib for anything that gives the crossing directly). (d) **T-GRAPH
+     → its own job later**, its first act moving the `HadwigerNelson.Thomassen` block verbatim into its own module (checked by script), so IP2 and it never share
+     a hunk. (e) **Slot order after IX1**: wave 4's merge-and-gate job when I4n and IMM1 are both done, then wave 5's next implementer if I5d hands back with
+     leaves left, then T-GRAPH. Alternative weighed: one implementer through the whole planar chain serially (6.5–9.5 sessions). Why: the chain is wave 5's
+     longest path, and the crossing lemma (the only leaf in its file) and T-GRAPH (pure graph theory) run beside the map-level leaves without sharing a file,
+     taking 1–2 and 2–3 sessions off it. Confidence: high on the split; medium on the crossing lemma's price (no route in hand; it would change if Mathlib holds a
+     two-dimensional fixed-point or Jordan-type theorem at the pin). In flight after IP2's launch: 1 (I4n) + 1 (IMM1) + 1 (I5d) + 1 (IP2) = 4.
+
+294. **FS131-IMM1 done at its line, MERGE not yet proved** (harness ≈ 543k; record `fs131-w4mm`'s `plans/FS131-IMM-implementation.md`, stages 1–3 SAVED;
+     report `data/fs131/reports/FS131-IMM1.md`; commits `a58ae315`, `b292eb6c`, `6c031212`, `7060fcc6`, pushed). **Results, each [kernel] on the standard three**,
+     in the new module `Plane/ValidMap/MergeMove`: `ArcMap.clear_of_push` (N3-CLEAR at a boundary direction by N3-UP, the base point any closure point of a
+     `c`-tile at `v`, no cusp horn), `ArcMap.push_contacts_of_mem_allowedCone` (its contact hypothesis, `μ = min (sin ψ / 2) (1/4)`, `γ = α + σπ/2`),
+     `ArcMap.clear_near_end` (the gap's clearness at an interior or a boundary end), and 12 children, among them `dist_ne_one_of_isOpen_isClear` (for the
+     `D_c(v′)` clause) — 15 theorems and the definition `hgt`. **Receipt** (Keryx): the four commits exist and `origin/fs131-w4mm` is `7060fcc6`; the stage-3
+     build log (`build/gate/build/20261005T010522Z-5176.log`) ends "Build completed successfully (5363 jobs)", 0 warnings other than `sorry`, none in
+     `MergeMove`; `sorry` by grep: `MergeMove` 0, `Moves` 2 (`exists_merge_aux`, and `exists_rayMerge_aux` in this branch's pre-RAY copy, which `fs131-w4m`'s
+     proof replaces at the merge); `data/fs131/imm/axioms-stage3.txt` parsed by script: 16 records, 15 on the standard three, `exists_merge_aux` showing `sorryAx`.
+     **Statement**: no defect found; `exists_merge_aux` believed true as written (ruling 269's form). **Left**: MERGE itself, planned in record § 4 (the gap
+     chosen through the antipode of an interior direction of `D_c(v)`; its clearness assembled; `F'` built — germ arcs to `ρ/2`, annulus pieces only for germs
+     whose two sides differ in colour, rim arcs at `ρ/2` over the gap, no arc on `∂B(v, ρ)`; each clause, with a "sides lemma" for the rim clause and a
+     tile-by-tile argument for `D_c(v′)`), priced at about 2,000–2,500 lines, two to three sessions. **Corrections owed** to FS110-N-proof § 2.2 (W-MERGE): (1)
+     the recoloured region stays inside `B(v, ρ/2)` and any germ with one colour on both sides is cut in the annulus just inside `ρ`, else the rim clause fails
+     (IM3's § 10.1 finding, item 286, confirmed independently); (2) "`cl R ∩ ω(v′) ⊆ {v}`" rests on an unstated fact, that a whole neighbourhood of `cl R ∖ {v}`
+     is clear (`dist_ne_one_of_isOpen_isClear`). **Generalization**: N3-UP's push needs no cusp horn. **Coordinator's slip**: IMM1's brief allowed new
+     declarations at the end of `Surgery`, but `tools/fs131_im_split.py --check` holds `Surgery` byte for byte to its split; IMM1 put every MERGE child in
+     `MergeMove` (accepted; `Moves` imports it, so the merge with `fs131-w4m`'s `Surgery` meets no conflict). **To delete at MERGE's landing**: the scratch copies
+     `data/fs131/imm/scratch/{Push,End,Gap}.lean`, which duplicate `MergeMove`. Credit: IMM1, for the push without a cusp horn and for the second correction.
+295. **Ruling: MERGE leaves wave 4; the freed slot goes to FS131-IX1 as ruled.** Choice: (a) wave 4 lands without `exists_merge` — at wave 4's merge-and-gate,
+     `Contact`'s `exists_merge` and `Moves`' `exists_merge_aux` (both `sorry` on `fs131-w4`) are deleted from `fs131-w4`, and MERGE lands later from
+     `fs131-w4mm` as its own small landing (merge `main` in, restore the two statements, the gate), like Lebesgue's (item 151); (b) the merge-and-gate job starts
+     at I4n's hand-back, and `bend_away`'s trigger (item 291 (d)) becomes I4n's hand-back, since MERGE no longer lands with wave 4; (c) IMM1's slot → FS131-IX1
+     (ruling 293 (c)); MERGE's successor, FS131-IMM2, from record § 4 on `fs131-w4mm`, takes a slot after wave 4's merge-and-gate and Woodall's landing job.
+     Alternative weighed: keep MERGE in wave 4 and give IMM2 this slot. Why: nothing in Lean consumes `exists_merge` on any branch (grep on `fs131-w4`,
+     `fs131-w4mm`, `fs131-w5`, `fs131-w5p`, `fs131-ww`: only `Contact`'s header list names it), so holding wave 4 two to three sessions for it delays Woodall's
+     landing and wave 5's base for nothing that reads it; the same reason moved `n3_end` (item 289) and `bend_away` (item 291 (d)). Cost: one restore at MERGE's
+     landing (a conflict where `main` deleted the two declarations and `fs131-w4mm` proves one). Confidence: medium-high; it would change if wave 5's skeleton
+     came to cite `exists_merge` before wave 4's merge-and-gate starts. In flight after IX1's launch: 1 (I4n) + 1 (I5d) + 1 (IP2) + 1 (IX1) = 4.
+
+296. **FS131-I4n done** (harness ≈ 563k; record `fs131-w4`'s `plans/FS131-I4-implementation.md`, Stages 41–43; report `data/fs131/reports/FS131-I4n.md`; commits
+     `3fe6bf11`, `8c50673c` (merge of `fs131-w4m`), `7011ce9e`, `addf6e8e`, `89af8b63`, `0d4e5eec`, `71cca146`, pushed). **Results, each [kernel] on the standard
+     three, statements unchanged**: FS112-N2-BENDS's N2-TOWARD `ArcMap.bend_toward`; N2-AWAY as the row states it, `ArcMap.bend_away_whole`, now proved directly
+     (needs no domain hypothesis); FS110-N4-SHAVE and N4-RAY at `Contact`'s statements (`exists_shave`, `exists_rayMerge`, citing IM3's `…_aux`); 56 theorems and
+     5 definitions in all (engine 3, the cut `cutArcs`; the generic bend `bendMap` and its transfer lemmas; the lens geometry; the clearness children). `fs131-w4m`
+     merged (conflicts only in `ARCHITECTURE.md` and `scripts/Axioms.lean`, both sides kept; statements checked three-way against both parents, 5,416 names, 0
+     mismatches, by the new `tools/fs131_i4_mergestmts.py`, whose planted control went red); `n3_end` deleted from `BaseSteps`, the file byte-identical to I5d's
+     `4a126455` (item 289 (b)). **`bend_away`** repaired as ruled (`hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom`, item 291 (a)), **not proved**, so it leaves wave 4 (items
+     291 (d), 295 (b)). **Receipt** (Keryx): the seven commits exist and `origin/fs131-w4` is `71cca146`; the build log
+     (`build/gate/build/20261005T012209Z-120054.log`) ends "Build completed successfully (5362 jobs)", 0 warnings other than `sorry`; `sorry` by grep over
+     `Plane/ValidMap/`: exactly 3 — `UnitArc` (`bend_away`), `Contact` (`exists_merge`), `Moves` (`exists_merge_aux`); `data/fs131/i4/axioms-i4n-43.txt` parsed by
+     script: 62 records, 60 on the standard three, `bend_away` and `exists_merge` on `sorryAx`; `bend_away`'s repaired statement read at `UnitArc` l. 3973–3974.
+     **Saved for its own job**: branch `fs131-w4ba` at `71cca146` keeps the repaired statement. **Its route, on I4n's reading (one mind)**: C₂ a finite union of
+     points and closed intervals; the lens an intersection of discs tangent to the arc at the isolated contacts (`carrier_circ_arccos`, `bendMap` reused); at an
+     isolated contact the inner class's sectors rising from the radius-2 circle with curvature below 1/2 except along an interval of C₂; **the end case at `q_A`
+     to be re-derived before kernel work** (ω(A) bounds the uncovered region beyond the arc's end); two to three sessions. **Correction owed**: FS112-N2-BENDS's
+     N2-TAN to state the radius-2 arc in the domain (item 291). **Generalization**: `bendMap` reads the domain only at the open arc; its transfer lemmas take any
+     lens and new arc meeting the named hypotheses. **Tool defect owed**: `tools/fs131_i4_treedupes.py` (through QA1's textual `qualified_decls`) reads a
+     docstring line beginning `class` as a declaration (I4n reworded the docstring). **For the merges**: `BaseSteps`' module docstring (l. 20) and `ARCHITECTURE.md`'s
+     `BaseSteps` row still name `n3_end`, identical with I5d's branch — cleaned at wave 5's merge; `fs131-w5p` and `fs131-w4mm` carry older copies of `UnitArc`'s bend
+     statements, so their merges meet `bend_away`'s new hypothesis and the new block before `r2Contacts`. Credit: I4n, for the counterexample (item 290), the direct
+     proof of `bend_away_whole`, and the three-way merge check.
+297. **Ruling: I4n's slot → FS131-G4, wave 4's landing.** Choice: one Opus implementer on `fs131-w4`: delete `bend_away` (`UnitArc`), `exists_merge` (`Contact`)
+     and `exists_merge_aux` (`Moves`) with their `scripts/Axioms.lean` records (items 291 (d), 295 (a)); teach `tools/fs131_k4_decls.py` `_root_.` names (item 281
+     (b)); rename wave 4's `framePt` (item 271); register wave 4's carriers and merge wave 2's (the second of waves 2 and 4 to land); settle the vacuity notes on
+     `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N` (items 252, 266); the full gate on one commit (zero warnings, axioms with `--self-test` re-run per
+     item 260, vacuity with `--self-test`, `check_architecture.py`, `fs131_k4_decls.py --check`); merge `main` in (`tools/fs131_qa1_dupes.py`), the gate re-run,
+     and `main` fast-forwarded from the worktree as wave 2's landing did (item 270), never force-pushed; drafts of the counts for the filing. Alternative weighed:
+     the plan's § 14.4 step 3, where Keryx fast-forwards after reading the logs — declined for the same reason as at wave 2: the landing implementer holds the
+     green commit, and I read the saved logs before filing either way. **Afterwards**: Woodall's landing job (item 190) in the next free slot; `bend_away`'s own
+     job (an Ephodos re-derivation of the end case at `q_A`, then an implementer on `fs131-w4ba`) after IMM2 and T-GRAPH, since nothing consumes it. Confidence:
+     high. In flight after G4's launch: 1 (G4) + 1 (I5d) + 1 (IP2) + 1 (IX1) = 4.
+
+298. **FS131-I5d handed back** (Stage 18 SAVED, harness ≈ 599k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 14–18;
+     report `data/fs131/reports/FS131-I5d.md`; commits `ad23e51a`, `4a126455`, `0e1670f5`, `49dc0893`, `74478fd8`, `a804de21`, pushed). **Results, each [kernel] on
+     the standard three, statements unchanged**: `stuck_flanks_ua` (N4-STUCK (ii) with unit arcs), so I5c's wiring `stuck_structure_ua` is [kernel]; `cv_l0`
+     (FS114-CV-HD's CV-L0); `n3_end_chain` (FS112-N3-END's chain clause); `BaseCtx.pseudo_nonempty`, `BaseCtx.pseudo_finite` (NB3 steps 3–4), so I5c's wiring
+     `BaseCtx.retArcs_finite` (FS110-CD Lemma R) is [kernel]; the shared child `exists_isRingArc_of_onRingArc` (stated with the sub-arc inside any `B(x, ε)`); a new
+     module `Plane/ValidMap/FlankUA` (29 theorems, the unit-arc flank, horn and ring-point lemmas) and `chainVertex_antipodal`. **`n3_end`** moved into `Terminal`
+     verbatim (item 289) and proved over one new child: the in-type-flank case proved (`κ₂ = 1` and the `−e α` horn's `+n` bound `−1`); the other case is the
+     child **`n3_end_of_not_inType`** (`sorry`; NB3-END items 2–5, on I4m's reading, item 288). **Receipt** (Keryx): the six commits exist and `origin/fs131-w5` is
+     `a804de21`; the stage-18 build log (`build/gate/build/20261005T013008Z-182604.log`) ends "Build completed successfully (5368 jobs)", 0 warnings other than
+     `sorry`; `sorry` by grep: `Terminal` 9, `Dense` 2, `HexRing` 7, `MapGraph` 3, `BaseWalk` 8, `BaseDense` 4, `FlankUA` 0 — 33, of them 26 the lane's and 7 the
+     planar job's; `data/fs131/i5d/I5dAxioms16.out`, `-17.out`, `-18.out` parsed by script (19, 19 and 6 records), every record on the standard three but the
+     controls (`n3_end`, `exists_pseudoCircle`, `n3_end_of_not_inType`) on `sorryAx`. **Generalizations**: `n3_end_chain` reads only `hst`, `h3`, `hc2` and the
+     horn's two unit bounds (any stuck vertex of a valid plane map whose two-sector colour has a horn bounded by `−1` and `1`); the flank half of N4-STUCK (ii)
+     needs neither Condition 5 nor wave 4's `σ` machinery (SHAVE tested at the horn's own bounds), which `stuck_pole_N` still needs. **Statement defect (module
+     order)**: `rot_noThird` (`HexRing` l. 180–186) is documented as resting on `cor3`, which lives in `Dense`, downstream of `HexRing`; `rot_out` and `rot_in`
+     read `rot_noThird`, so all three are blocked until `cor3` moves upstream or another route is found. **Question**: `pseudo_ncard_le_two` needs `cor3_local`
+     (ruling 218 (b)), not yet stated; plain `cor3` needs `Covers x 1`, which `B̄(u, 2)` does not give at `x ∈ ω(p)`. **For the merges**: `BaseSteps`' docstring
+     l. 20 and `ARCHITECTURE.md`'s `BaseSteps` row (item 296). **Tool defect still owed**: `tools/fs131_i5_dupes.py`'s FORK (item 284); I5d checked new names
+     with `rg`. Credit: I5d, for the flank route without Condition 5 and for finding the module-order block.
+299. **Rulings on I5d's held items, and its slot.** (a) **`rot_noThird`'s block**: wave 5's next implementer moves `cor3` — statement, docstring and proof (a
+     `sorry`) verbatim, checked by script — into a module `HexRing` imports (a new `Plane/ValidMap/Cor3`, or `HexRing` itself), if every name its statement uses
+     is upstream of `HexRing`; else it messages me with the names that are not. Alternative weighed: another route for `rot_noThird` with no `cor3`. Why: the
+     hand proof (N2-ROT, N3-BASE step 10) rests on `cor3`; moving a statement is a layout change, which plan § 10.2 allows; a new route is a derivation.
+     Confidence: high. (b) **`n3_end_of_not_inType` is the implementer's leaf, no planner first**: NB3-END items 2–5 read with item 288's correction, I5d's Stage
+     18 notes as the starting point; if a step fails as written, stop and message (it then goes to Ephodos). Alternative weighed: a planner job first. Why: I4m and
+     I5d both read the route and named its four pieces; a planner would take a slot for a leaf priced at a session. Confidence: medium-high. (c) **`cor3_local`**
+     stated by the implementer as ruling 218 (b) says, for `pseudo_ncard_le_two`. (d) **I5d's slot → FS131-I5e on `fs131-w5`**: (a), then (b), then the lane's
+     other leaves in the order it judges. (e) **A second wave-5 implementer** (made possible by `FlankUA` being its own module) joins the slot queue: after
+     Woodall's landing job, the order is T-GRAPH, the second wave-5 implementer (in its own worktree, on files I5e's brief does not touch, split by me at its
+     launch), IMM2, then `bend_away`'s job. Why: T-GRAPH is unstarted and would become the longest path; MERGE and `bend_away` have no consumer. Confidence:
+     medium. In flight after I5e's launch: 1 (G4) + 1 (IP2) + 1 (IX1) + 1 (I5e) = 4.
+
+300. **FS131-IP2 handed back** (Stage 8 SAVED, harness ≈ 460k by the task notice; record `fs131-w5p`'s `plans/FS131-planar-implementation.md`, Stages 6–8;
+     report `data/fs131/reports/FS131-IP2.md`; commits `7da12d5e` … `02e85433`, pushed). **Results, each [kernel] on the standard three or fewer, statements
+     unchanged**: **FS131-E4's E4-OUTERMOST whole**, `ArcMap.exists_unenclosed_or_bad` (`Plane/ValidMap/BaseDense`), over `ArcMap.exists_outermost` (steps 1–2)
+     and `ArcMap.unenclosed_of_rim_vertex` (step 5); KP's owed child `ArcMap.not_encloses_of_hull_eq` (false for open connected sets in general — Wada's lakes —
+     and proved through the map's regularity); `ArcMap.exists_ball_two_tiles` (points with three tiles in their closure are isolated, so a compact disc holds
+     finitely many vertices — BG's hardest finiteness); 12 more children. **E4-RIM**, `ArcMap.exists_eleventh_of` (so `BaseCtx.exists_eleventh`), proved but on
+     `sorryAx` through this branch's copy of `noBoth` (FS112-N3-NOBOTH), which is proved on `fs131-w4` (`UnitArc` l. 507) and arrives when this branch takes wave
+     4. **The 60° question: yes** — a two-colour exit that is a return comes back within 60° of `r(θ)` (FS110-CD Lemma R step 1; CB D5 item 1 as FS110-CE quotes
+     it: ends less than 1 apart, a chord below 1 an angle below 60°). **Receipt** (Keryx): the eight commits exist and `origin/fs131-w5p` is `02e85433`; the
+     stage-8 build log (`build/gate/build/20261005T013504Z-210720.log`) ends "Build completed successfully (5403 jobs)", 0 warnings other than `sorry`; `sorry`
+     by grep: `PlaneTopology` 1 (IX1's leaf), `MapTopology` 1 (`exists_far_end`), `MapGraph` 8, `BaseWalk` 15, `BaseDense` 3; `data/fs131/ip/axioms-ip2-stage8.txt`
+     parsed by script: 20 records, 16 on the standard three, `BranchGerms.next_injective` on `[propext, Quot.sound]` (a subset), and the 3 controls (`noBoth`,
+     `exists_eleventh_of`, `localDense`) on `sorryAx`. **Generalization**: `exists_outermost` needs no convex hulls (a disc holding a set's closure holds its
+     hull), so KP's `compl_outerDom_subset_convexHull` is unneeded. **Correction owed** (to IP1's record § 5.4): strictness goes through the isolation of
+     three-tile points, not "finitely many vertices in a disc", and cannot be pure topology (Wada's lakes). **Route findings for `endpoint_of_far_end`** (record
+     § 7.4; not statement defects): (1) `exists_far_end`'s disjunct `q ≠ r(θ) ∧ dist q u = 1` also admits spike touches and three-colour V-out vertices, from
+     which no endpoint follows — the statement stays true (its conclusion does not mention `q`) but the proof must re-select the far end as an odd vertex of the
+     boundary graph (a strong child of `exists_far_end`); (2) at a genuine exit, `IsRetArc` needs the germs' orientation (CD § 2.4 step 2, § 3.0 item 1), a
+     Jordan-type step that may follow from the crossing lemma. **Re-price** (record § 7.3): BG + PATH 0.6–1 session; `exists_far_end` 0.3; `endpoint_of_far_end`
+     1 or more; F-LOC/CONN/INF/ONE 0.4; adversaries 0.3; the two `retArcs` 0.5; F-RING 1–2 (unmeasured). **Tool**: `tools/fs131_ip_axioms.py` (each record against
+     "standard three" or "must show `sorryAx`"; both planted faults fired). Credit: IP2, for the isolation of three-tile points and the two route findings.
+301. **Ruling: IP2's slot → FS131-IP3 on `fs131-w5p`, the planar chain continued.** Choice: IP3 takes ruling 293 (b)'s remaining order — BG with PATH,
+     `exists_far_end` with IP2's strong child (an odd vertex of the boundary graph), `endpoint_of_far_end` (the orientation step by whatever route it finds,
+     citing the crossing lemma `inter_nonempty_of_interleaved` as given if that route serves — it is FS131-IX1's, on `fs131-w5x`), F-LOC/CONN/INF/ONE, the
+     adversaries, F-RING, the two `retArcs`; and, once BG exists, it records whether the crossing lemma's route (b) through BG is cheap, so a stalled IX1 can be
+     re-routed. Alternative weighed: the queued T-GRAPH or the second wave-5 implementer in this slot. Why: this chain is the longest path to wave 5's landing,
+     and a continuation keeps the branch's state warm; the queue of item 299 (e) moves one slot later. Confidence: high. In flight after IP3's launch: 1 (G4) +
+     1 (IX1) + 1 (I5e) + 1 (IP3) = 4.
+
+302. **FS131-IX1 done: the crossing lemma is held** (harness ≈ 307k; record `fs131-w5x`'s `plans/FS131-IX1-crossing.md`; report
+     `data/fs131/reports/FS131-IX1.md`; commits `6444238b`, `fd601d6a`, `585d02ba`, `35fc52eb`, `0e0bc764`, `6db4fe3d`, pushed). **Results, each [kernel] on the
+     standard three**: `inter_nonempty_of_interleaved` (statement byte-identical to `01011037`, by `tools/fs131_ix_stmtcheck.py`), so `Plane/PlaneTopology` has no
+     `sorry`; the generalization `inter_nonempty_of_interleaved_of_isClosed_left` (only `K` need be closed; not claimed when neither is); the path form
+     `exists_eq_of_interleaved_paths`; eleven children and the definition `discRetract`. **Route (c)**, neither of IP1's: for paths, if two were disjoint,
+     `x + iy ↦ γ(x) − γ'(y)` would lift through `exp` over the parameter square while its argument changes by `−2π` around the square's edges; for continua,
+     disjoint compact sets have disjoint `δ`-thickenings, and paths in the `δ/2`-thickenings pushed into the disc by the radial retraction would be such paths.
+     **Receipt** (Keryx): the six commits exist and `origin/fs131-w5x` is `6db4fe3d`; the build log (`build/gate/build/20261005T014018Z-251367.log`) ends "Build
+     completed successfully (5399 jobs)", 0 warnings other than `sorry`; `sorry` in `PlaneTopology` by grep: 0; `data/fs131/ix/axioms-stage3.txt` parsed by script:
+     15 records, 14 on the standard three, the control `retArcs_not_interleaved` on `sorryAx`; the statement read at l. 577–580 against the brief's quotation —
+     the same. **Prediction scored**: KP priced the lemma at "one session, possibly its own job"; it took about 20 minutes and one 9-minute build, about thirty
+     times less. **Corrections owed**: the leaf's docstring is rewritten — its statement sentences kept, the planned route replaced by the route taken (no
+     statement change); IP1's record § 2.3 route (a) does not need a Poincaré–Miranda-type construction (the lift is over the paths' parameter square), and IP1's
+     objection to KP's Phragmén–Brouwer route holds (ℝ³ is unicoherent and the crossing fails there). **Prior-art debt**: the path step has the shape of
+     Maehara's proof of the crossing lemma for the Jordan curve theorem, named from memory — filed as `BIBLIOGRAPHY.md` § A `[Maehara1984]`, **[title
+     unverified]**, not held, not read; nothing rests on it and no docstring cites it. **Tool defects owed**: IP1's control string `ABSENT-CONTROL-STRING-xyzzy`
+     now appears in IP1's record, so a grep control using it can never fire there (use a fresh string per run); `tools/bib_audit.py` flags `[Author2024]` in
+     `plans/FS131-T3-axioms.md` l. 88, a placeholder in prose (pre-existing). **Slip, no redo**: a queued build stopped before it started; the slot wrapper had
+     its own process group and was stopped by PID. Credit: IX1, for the parameter-square lift.
+303. **Rulings on IX1's held items.** (a) The generalization, the rewritten docstring and `ARCHITECTURE.md`'s `Plane/PlaneTopology` row **accepted**. (b) **The
+     merge**: FS131-IP3 merges `fs131-w5x` (at `6db4fe3d`) into `fs131-w5p` at its next saved stage — a brief amendment, both sides kept in `scripts/Axioms.lean`
+     and `ARCHITECTURE.md` — so the crossing lemma is held on the planar branch before `endpoint_of_far_end` and the two `retArcs` cite it. Alternative weighed:
+     merging at wave 5's merge-back. Why: IP3 is fenced from `PlaneTopology` already, so the merge meets disjoint hunks, and citing a held lemma beats citing a
+     `sorry`. Confidence: high. (c) **IX1's slot → T-GRAPH**, FS131-IT1, as queued (item 299 (e)); Woodall's landing waits on wave 4. `fs131-w5x` joins the
+     removal list after the merge.
+304. **G4's question, by message, and the ruling.** G4 (FS131-G4, mid-job): the vacuity note on `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N`
+     (items 252, 266) can be settled neither way inside the brief — `VACUITY DECLARED:` reads STALE in `scripts/Vacuity.lean`'s `audit` on every site whose
+     carrier is not proved empty, and no theorem empties the class (row 134 refutes Condition-5 six-maps of the plane, not local fragments; the class is empty at
+     `k ≤ 3` only); a model is a bowtie-sized construction. G4's sketch of one, one mind, not derived: `v = 0`, `α = 0`; `c`'s cusp horns along `±1` bounded by
+     the curvature `±1/2` circles (centres `±2i`); `g` above, `h` below; `g`'s far tile outside the circle of radius 3 about `2i`, `h`'s outside the one about
+     `−2i` (validity by the triangle inequality, `|z − w| > 3 − 2`); both shadows cover the band of curvature in `[−1/4, 1/4]`, so neither horn shaves; `c` also in
+     90° out-type wedges above `+i` and below `−i`; ring colours just inside the unit circle at `±i`; the rest of `B̄(0, 2.1)` small tiles of distinct colours.
+     **Ruling** (sent to G4): land with the docstring notes `LEAN.md` § The gate allows ("Where none is expected (a step inside a proof by contradiction), the
+     docstring says so with the theorem that refutes the configuration"), each naming `stuck_chain` (FS110-N4-FIN). Alternatives weighed: the marker (STALE by
+     design, and false); holding the landing for the model (several sessions). Why: the three are consumed only inside refutations. Confidence: medium-high; it
+     would change if a consumer reads one outside a refutation — then a model is owed before wave 5 lands. **Stub to write**: the stuck-fragment model, from G4's
+     sketch. **Coordinator's slip**: G4's brief relayed item 144 (b) as done by FS131-T3, but item 153 moved the vacuity half (`CPColouring`, `AeProperRegions`) to
+     each wave's landing; G4 registers `AeProperRegions` IN with `IsEmpty (AeProperRegions 0)` and `IsEmpty (AeProperRegions 1)` — accepted. Credit: G4, for the
+     correction and the model sketch.
+
+305. **I5e's GAP at NB3-END item 2, by message** (FS131-I5e, mid-job, 2026-10-05) — the step behind `n3_end_of_not_inType`'s repeated colour; not a
+     counterexample. The step (`plans/FS112-NB3-verification.md` l. 234–237): "`c ∈ P_cl(S′)` (N3-DEG at `v`), its sectors in `α`'s away cone (U1), below: the
+     two `g`-tiles are **two sectors** of `g` at `S′`." What is missing (frame at `v` along `a = e α`, `n = e(α + π/2)`, `S′ = v − n`): the horn `H` has lower bound
+     `−1`, so its lower arc lies on `ω(S′)`, but only on the `+a` side of `v`; U1 on that arc puts `c`'s cone at `S′` in the closed interval `[α+π, α+2π−φ]`
+     (I5d's `not_antipodal_coneAt_S_of_horn`), which contains the direction of `−a`. So the text does not exclude: one `g`-sector at `S′` with cone `[α+π, α+2π]`
+     (the closed lower half-plane), shadowing both `H` and `H₋`, and `c` carried at `S′` only by a `c`-horn along `−a` on the `+n` side of that sector (cone
+     `{α+π}`) — then the "two sectors" are one and `HasRepeatedColour (v − n)` does not follow. It can occur only when `H₋`'s bound on the `S′` side is `κ₄ < 1`
+     (at `κ₄ = 1`, `H₋`'s arc continues along `ω(S′)` past `v` and U1 excludes `−a`). **I5e's repair, one mind, leading order only**: `y = S′ + s·e(α+π−θ)` has a
+     point of `H₋` at distance exactly 1 iff `θ/s > τ(κ₄) = −κ₄ / (2(1−κ₄))` (the minimum over `x` of `(s−x)²/2 − κ₄x²/2`); the `g`-points shadowing `H₋` near
+     `S′` have `θ/s > τ`; the `c`-horn lies on their `+n` side at larger `θ`, so its points meet `H₋` at distance 1 — a monochromatic unit pair in `c`. An exact
+     version needs the shadow of `H₋` near `S′` closed upward in `Y` at fixed `X` (the mirror of NB3 item 4's "downward closed"). Wave 4's analogue
+     (`sector_shadow_S`, `flank_shadow_g_chart`) assumes Condition 5 and `κ₁ > −1`, so nothing transfers. I5e worked out the shadow witnesses' limit directions
+     at `S′` (`+a` from below for `H`, `−a` for `H₋`) and records them under the leaf. Credit: I5e.
+306. **Ruling on item 305, and the next derivation job.** Choice: `n3_end_of_not_inType` stays `sorry` in I5e's job and goes to an Ephodos re-derivation,
+     **FS131-E5**, which also takes `bend_away`'s end case at `q_A` (item 296), so one deriver's slot serves both: for each, derive the step, or exhibit the
+     configuration exactly, or repair the statement and trace its consumers. **Slot**: the next one that frees, unless wave 4 has landed by then, in which case
+     Woodall's landing job takes it and E5 the one after; then the second wave-5 implementer, IMM2, and `bend_away`'s implementer (on E5's verdict).
+     Alternative weighed: I5e formalizes its repair now. Why declined: one mind, leading order only, and the closure property it needs is not derived; the
+     hand step must exist before the kernel can check it. Confidence: high on the routing; medium on the order (it would change if wave 5's other leaves finish
+     before the planar chain, making `n3_end` the longest path). I5e was told by message (credit and ruling), and goes on with its other leaves.
+307. **I5e's follow-up on item 305, by message**: the exclusion NB3-END item 2 lacks is stated, in one line and not derived, in `plans/FS114-CVB-verification.md`
+     § 1.4 item 5 (l. 99–102): "`c`'s sectors at `N` lie in `d·n ≥ 0` … and not in the `±a` stacks below `Q±` (such a sector would shadow part of `H±`, against
+     N-E0)" — I5e's repair (a `c`-sector in the `±a` stack meets the horn of its own colour at distance 1). Two consequences: the ordering ("in the stack"
+     relative to the shadowing tiles) is not derived in CVB either; and **`cv_class`** (`Terminal`; FS114-CV-HD) rests on the same claim — its second disjunct
+     ("`g` twice at `E − n`, `h` twice at `E + n`", CVB § 1.7 l. 186) reads item 5's separation. **Ruled**: E5 has not launched, so its claim list
+     (`data/fs131/claims-E5.md`) is revised now — `cv_class`'s statement, CVB § 1.4 item 5 and § 1.7's "None" case added by script, Q1 extended to cover
+     `cv_class` and to trace FS114-CV-HD and row 137. Alternative weighed: a separate job for `cv_class`. Why: one exclusion, one derivation. Confidence: high.
+     Credit: I5e.
+308. **IT1's statement defect, by message, at its readback** (FS131-IT1, before any edit): **`reduced_props_of_planarLike` (T-GRAPH) is false as written**;
+     `PlanarLike` does not stop 2-separators nesting forever, and then no maximal 2-separator exists, `H = G`, and local Hamiltonicity fails. The step that
+     breaks is the docstring's "a maximal 2-separator exists above every 2-separator (a strictly increasing chain of finite interiors … is finite, by local
+     finiteness and `oneInf`)". **Counterexample**: the strong product of the ray with `K₂` — `V = ℕ × Bool`, `(n,s) ~ (m,t)` iff `(n = m ∧ s ≠ t) ∨ |n − m| = 1`;
+     every field of `PlanarLike` holds (rings `[(0,¬s),(1,s),(1,¬s)]` at level 0 and `[(n+1,s),(n+1,¬s),(n,¬s),(n−1,¬s),(n−1,s),(n,¬s)]` above, the one repeat
+     `TwiceApart`; `oneInf` with `G − L_n` split into the finite levels below and the infinite levels above); the 2-separators are the levels `L_n`, `n ≥ 1`,
+     `int(L_n)` the levels below, none maximal, so `reducedVerts = univ`; at `(1,0)` the neighbourhood has no Hamiltonian cycle. As a plane map: the half-annuli
+     `n ≤ |z| ≤ n+1`, unbounded tiles, which a valid map excludes (a tile has diameter at most 1). **Proposed field**: `finSep : ∀ v, {p : V × V | v ∈
+     twoSepInterior G p.1 p.2}.Finite`, read by the maximal-above step (the pair of largest interior among the finitely many whose interior holds a fixed vertex
+     of `int(x, y)` is maximal, by nesting). **Its map side** (IT1's sketch, one mind): if `v ∈ int(x, y)` then `x ~ y` by the rings, `v̂` lies in a bounded
+     component of `ℂ ∖ (cl x̂ ∪ cl ŷ)`, hence in that compact set's hull, so `cl x̂` and `cl ŷ` meet `B̄(p, 3)` for any `p ∈ cl v̂`, and only finitely many tiles do
+     (`finite_tiles_closure_inter`). The triangular lattice satisfies it vacuously. IT1 checked the rest of the route on paper with the field and found no other
+     gap. **To check at the filing**: whether FS114-CVB B2 step 3's own text derives a maximal 2-separator from the map's properties (then only KP's abstraction
+     lost it) or from the listed ones only (then a correction is owed there too). Credit: IT1, for the counterexample at the readback.
+309. **Ruling on item 308: `PlanarLike` gains the field `finSep`, as proposed.** Choice: (a) the field added to `PlanarLike` (KP's foreseen shape: "if T-GRAPH
+     needs one more planar property, `PlanarLike` gains a field … a statement change inside this job's vocabulary, no row statement moves"), docstrings of the
+     structure and of `reduced_props_of_planarLike` rewritten to the route that reads it, the leaf's statement otherwise unchanged; (b) IT1 states the map-side
+     leaf **`filledGraph_finSep`** in `MapGraph` beside `filledGraph_oneInf` with `sorry`, and adds it to `filledGraph_planarLike`'s constructor, so the branch
+     builds — its proof goes to the planar chain after `fs131-w5t` merges into `fs131-w5p`, unless IT1 finishes T-GRAPH with budget to spare, when it may prove
+     it in that theorem's lines alone (IT1's sketch above); (c) **the ladder as an adversary** (`PlanarLike` without the field holds and the reduction fails;
+     `¬ finSep ladder`), in the new module, after the two leaves, if it costs under about half a session. Alternatives weighed: finiteness as a hypothesis of
+     the leaf instead of a field (it moves the leaf's statement and leaves `PlanarLike` too weak for any other reader); a clause in `oneInf` (it hides a
+     separate property inside another). Why: the field is the property the step reads, and the map supplies it. Confidence: high on the defect (the
+     counterexample is concrete and the failing step named); medium-high on the field's sufficiency (one mind, on paper). **For the merge**: `fs131-w5t`'s new
+     theorem and constructor change sit beside IP3's proofs of the F-leaves in `MapGraph` — expect an adjacent-hunk conflict, resolved keeping both.
+310. **FS131-I5e handed back** (Stage 21 SAVED, harness ≈ 401k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 19–21;
+     report `data/fs131/reports/FS131-I5e.md`; commits `38fe7c4e`, `62523b33`, `a1babf0b`, `6e38803d`, pushed). **`cor3` moved** verbatim to the new module
+     `Plane/ValidMap/Cor3` (ruling 299 (a); `tools/fs131_i5_cor3_move.py` PASS at `62523b33`, its self-test 5 of 5 planted faults fired); `HexRing` and `Dense`
+     import it. **[kernel], standard three**: `GermPseudo.mem_pseudoColours`. **Stated**: `cor3_local` (ruling 218 (b); `cor3`'s statement with `Covers u 1`,
+     `Covers u' 1` replaced by `u`, `u'` and every common unit point in the domain — I5e's reading of what N3-COR3 reads, one mind; **if its proof needs a larger
+     disc, the statement comes back through me**). **Proved over `cor3_local`** (on `sorryAx` until it lands): `cor3`, `pseudo_ncard_le_two_of_baseHyp` (a new
+     child), `BaseCtx.pseudo_ncard_le_two` (NB3 step 5), `rot_noThird` (so `rot_out`, `rot_in` are unblocked). **The GAP** at NB3-END item 2 (items 305, 307),
+     with the shadow witnesses' limit directions in the record § 20.2. **Receipt** (Keryx): the four commits exist and `origin/fs131-w5` is `6e38803d`; the
+     stage-21 build log (`build/gate/build/20261005T020618Z-432319.log`) ends "Build completed successfully (5369 jobs)", 0 warnings other than `sorry`; `sorry`
+     by grep: `Terminal` 9, `Dense` 1, `HexRing` 6, `MapGraph` 3, `BaseWalk` 7, `BaseDense` 4, `Cor3` 1 — 31, of them 24 the lane's; `data/fs131/i5e/I5eAxioms21.out`
+     read: `mem_pseudoColours` and the control `linkage_dot_ne_zero` on the standard three, the five over `cor3_local` on `sorryAx`. **The split it proposes**
+     (record Stage 21): one implementer on `Terminal` (after the re-derivation), the other on `HexRing`, `Cor3`, `BaseWalk`'s four, `Dense`'s `disc1_local` and
+     `BaseDense`'s three — disjoint files, one `scripts/Axioms.lean` block each. **Slip, I5e's own**: most of its budget went on reading for `n3_end` before the
+     GAP surfaced. Credit: I5e, for the GAP and for finding the same exclusion under `cv_class`.
+311. **Ruling: I5e's slot → FS131-I5f, wave 5's non-`Terminal` half; E5 takes the next slot, whatever wave 4's state.** Choice: I5f on `fs131-w5` takes I5e's
+     second set (`HexRing`, `Cor3`, `BaseWalk`'s four, `Dense`'s `disc1_local`, `BaseDense`'s three); E5 (the re-derivation, item 306) launches in the next
+     slot that frees; then Woodall's landing job; then the `Terminal` implementer in its own worktree, on E5's verdict; then IMM2 and `bend_away`'s job. This
+     revises item 306's order, which put Woodall's landing ahead of E5 if wave 4 had landed. Alternative weighed: E5 in this slot, as item 306 said. Why: the
+     slot that freed is wave 5's own lane, which would otherwise stand idle with 16 leaves open that need no re-derivation, while the `Terminal` half waits on
+     E5 either way; Woodall's landing converts finished work and blocks nothing downstream. Confidence: medium-high; it would change if the planar chain
+     finished first, making the `Terminal` half the longest path. In flight after I5f's launch: 1 (G4) + 1 (IP3) + 1 (IT1) + 1 (I5f) = 4.

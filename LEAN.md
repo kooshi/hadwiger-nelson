@@ -139,6 +139,8 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 
 - Never name a namespace `HadwigerNelson.X` after a Mathlib root namespace a module opens (`Topology`, `Set`, `Real`, `Complex`, `Filter`, `Metric`, …): inside `namespace HadwigerNelson…`, `open X` then opens `HadwigerNelson.X` instead of Mathlib's `X`, silently (measured at v4.32.0: `data/fs131/leb/NamespaceShadow.lean`). None exists today.
 - At the pin `push_neg` is deprecated; write `push Not`.
+- `nlinarith` exhausts its heartbeats in a large context even when the certificate is small, and one declaration shares one heartbeat budget: state each
+  inequality as a small real-variable lemma carrying only its own hypotheses, then apply it (FS131-I4h, five leaves).
 
 - **A failed `exact?` is not an absence.** It proves the shape you asked for was not found; vary the statement (`= true` versus
   `decide (…)`, an iff versus an implication) first. **And Mathlib is not the whole library:** `grep -rn "<name-fragment>" $(lean
@@ -169,7 +171,7 @@ the characteristic failure here:
   run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness not proved), which fail unconditionally before the baseline;
   `GENERIC` (parametric, where **no inhabitant witness can exist** — the caller's obligation); `UNKNOWN` (counted, never silent, and the
   only thing the baseline may hold). The counts and the baseline's two entries are recorded in `CLAUDE.md` § The gate, where
-  `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants twenty controls
+  `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants thirty-eight controls
   and watches each fire; the load-bearing one — the same carrier family at an instantiation nothing refutes — must read `UNKNOWN`,
   never `VACUOUS`.
 - **Every gate keeps what it computed — read it before re-running one.** `build.sh`, `axioms.sh`, `vacuity.sh` and `lean4checker.sh`
