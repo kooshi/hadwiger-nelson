@@ -219,7 +219,7 @@ the partial sector — so MERGE's surgery lemmas cannot be instantiated; their p
    `c` (`cfg.clear`), so `dist_ne_one_of_isOpen_isClear` keeps it off `ω(v′)`; the tile facts as MERGE's.
 
 **Owed besides**: the positive spec example for `HasHornCount` (§ 2.1); an inhabitant note for `exists_open` (LEAN.md § The gate asks
-for a model of the hypotheses — `cuspFrag` at `0` has a lone horn? no: colour `1` has two horns there; FS131-E6's model is the instance,
-not yet in Lean; as with `exists_merge`, item 375's gate-rule gap).
+for a model of the hypotheses together; `cuspFrag` is not one — its colour `1` has two horns at `0` — and FS131-E6's model, the
+instance, is not yet in Lean; the same gap item 375 names for `exists_merge`).
 
 ## Stage 3 — SAVED (FS131-IO1)
