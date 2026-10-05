@@ -2314,3 +2314,35 @@ reason by the close.*
      green commit, and I read the saved logs before filing either way. **Afterwards**: Woodall's landing job (item 190) in the next free slot; `bend_away`'s own
      job (an Ephodos re-derivation of the end case at `q_A`, then an implementer on `fs131-w4ba`) after IMM2 and T-GRAPH, since nothing consumes it. Confidence:
      high. In flight after G4's launch: 1 (G4) + 1 (I5d) + 1 (IP2) + 1 (IX1) = 4.
+
+298. **FS131-I5d handed back** (Stage 18 SAVED, harness ≈ 599k by the task notice; record `fs131-w5`'s `plans/FS131-I5-implementation.md`, Stages 14–18;
+     report `data/fs131/reports/FS131-I5d.md`; commits `ad23e51a`, `4a126455`, `0e1670f5`, `49dc0893`, `74478fd8`, `a804de21`, pushed). **Results, each [kernel] on
+     the standard three, statements unchanged**: `stuck_flanks_ua` (N4-STUCK (ii) with unit arcs), so I5c's wiring `stuck_structure_ua` is [kernel]; `cv_l0`
+     (FS114-CV-HD's CV-L0); `n3_end_chain` (FS112-N3-END's chain clause); `BaseCtx.pseudo_nonempty`, `BaseCtx.pseudo_finite` (NB3 steps 3–4), so I5c's wiring
+     `BaseCtx.retArcs_finite` (FS110-CD Lemma R) is [kernel]; the shared child `exists_isRingArc_of_onRingArc` (stated with the sub-arc inside any `B(x, ε)`); a new
+     module `Plane/ValidMap/FlankUA` (29 theorems, the unit-arc flank, horn and ring-point lemmas) and `chainVertex_antipodal`. **`n3_end`** moved into `Terminal`
+     verbatim (item 289) and proved over one new child: the in-type-flank case proved (`κ₂ = 1` and the `−e α` horn's `+n` bound `−1`); the other case is the
+     child **`n3_end_of_not_inType`** (`sorry`; NB3-END items 2–5, on I4m's reading, item 288). **Receipt** (Keryx): the six commits exist and `origin/fs131-w5` is
+     `a804de21`; the stage-18 build log (`build/gate/build/20261005T013008Z-182604.log`) ends "Build completed successfully (5368 jobs)", 0 warnings other than
+     `sorry`; `sorry` by grep: `Terminal` 9, `Dense` 2, `HexRing` 7, `MapGraph` 3, `BaseWalk` 8, `BaseDense` 4, `FlankUA` 0 — 33, of them 26 the lane's and 7 the
+     planar job's; `data/fs131/i5d/I5dAxioms16.out`, `-17.out`, `-18.out` parsed by script (19, 19 and 6 records), every record on the standard three but the
+     controls (`n3_end`, `exists_pseudoCircle`, `n3_end_of_not_inType`) on `sorryAx`. **Generalizations**: `n3_end_chain` reads only `hst`, `h3`, `hc2` and the
+     horn's two unit bounds (any stuck vertex of a valid plane map whose two-sector colour has a horn bounded by `−1` and `1`); the flank half of N4-STUCK (ii)
+     needs neither Condition 5 nor wave 4's `σ` machinery (SHAVE tested at the horn's own bounds), which `stuck_pole_N` still needs. **Statement defect (module
+     order)**: `rot_noThird` (`HexRing` l. 180–186) is documented as resting on `cor3`, which lives in `Dense`, downstream of `HexRing`; `rot_out` and `rot_in`
+     read `rot_noThird`, so all three are blocked until `cor3` moves upstream or another route is found. **Question**: `pseudo_ncard_le_two` needs `cor3_local`
+     (ruling 218 (b)), not yet stated; plain `cor3` needs `Covers x 1`, which `B̄(u, 2)` does not give at `x ∈ ω(p)`. **For the merges**: `BaseSteps`' docstring
+     l. 20 and `ARCHITECTURE.md`'s `BaseSteps` row (item 296). **Tool defect still owed**: `tools/fs131_i5_dupes.py`'s FORK (item 284); I5d checked new names
+     with `rg`. Credit: I5d, for the flank route without Condition 5 and for finding the module-order block.
+299. **Rulings on I5d's held items, and its slot.** (a) **`rot_noThird`'s block**: wave 5's next implementer moves `cor3` — statement, docstring and proof (a
+     `sorry`) verbatim, checked by script — into a module `HexRing` imports (a new `Plane/ValidMap/Cor3`, or `HexRing` itself), if every name its statement uses
+     is upstream of `HexRing`; else it messages me with the names that are not. Alternative weighed: another route for `rot_noThird` with no `cor3`. Why: the
+     hand proof (N2-ROT, N3-BASE step 10) rests on `cor3`; moving a statement is a layout change, which plan § 10.2 allows; a new route is a derivation.
+     Confidence: high. (b) **`n3_end_of_not_inType` is the implementer's leaf, no planner first**: NB3-END items 2–5 read with item 288's correction, I5d's Stage
+     18 notes as the starting point; if a step fails as written, stop and message (it then goes to Ephodos). Alternative weighed: a planner job first. Why: I4m and
+     I5d both read the route and named its four pieces; a planner would take a slot for a leaf priced at a session. Confidence: medium-high. (c) **`cor3_local`**
+     stated by the implementer as ruling 218 (b) says, for `pseudo_ncard_le_two`. (d) **I5d's slot → FS131-I5e on `fs131-w5`**: (a), then (b), then the lane's
+     other leaves in the order it judges. (e) **A second wave-5 implementer** (made possible by `FlankUA` being its own module) joins the slot queue: after
+     Woodall's landing job, the order is T-GRAPH, the second wave-5 implementer (in its own worktree, on files I5e's brief does not touch, split by me at its
+     launch), IMM2, then `bend_away`'s job. Why: T-GRAPH is unstarted and would become the longest path; MERGE and `bend_away` have no consumer. Confidence:
+     medium. In flight after I5e's launch: 1 (G4) + 1 (IP2) + 1 (IX1) + 1 (I5e) = 4.
