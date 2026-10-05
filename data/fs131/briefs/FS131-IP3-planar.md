@@ -100,3 +100,15 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 ./scripts/build.sh`; never `lake build`. Up to two builds from different worktrees may run at once when the slot admits them; four agents are building, so on
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) under a small slot is for iteration only, never
 evidence. The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`.
+
+## Amendment, 2026-10-05 — the crossing lemma is held; merge its branch (inventory items 302–303)
+
+FS131-IX1 proved `inter_nonempty_of_interleaved` on `fs131-w5x` (`6db4fe3d`), with a generalization (only one continuum closed). The ruling:
+
+> 303. **Rulings on IX1's held items.** (a) The generalization, the rewritten docstring and `ARCHITECTURE.md`'s `Plane/PlaneTopology` row **accepted**. (b) **The
+> — source: plans/FS131-close-inventory.md
+
+For you: at your next saved stage, `git merge fs131-w5x` into `fs131-w5p` (both sides kept in `scripts/Axioms.lean` — each block above the `=== PURCHASED ===`
+banner — and in `ARCHITECTURE.md`), build, and record it as its own stage; then cite the held lemma where your order reads the crossing. Your touches extend to
+the merge's files; `Plane/PlaneTopology` stays not yours to edit. You start no agents of your own (standing rule 1: delegation is one level deep, because the
+coordinator can only review work it knows exists).

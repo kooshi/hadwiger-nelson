@@ -2375,3 +2375,43 @@ reason by the close.*
      re-routed. Alternative weighed: the queued T-GRAPH or the second wave-5 implementer in this slot. Why: this chain is the longest path to wave 5's landing,
      and a continuation keeps the branch's state warm; the queue of item 299 (e) moves one slot later. Confidence: high. In flight after IP3's launch: 1 (G4) +
      1 (IX1) + 1 (I5e) + 1 (IP3) = 4.
+
+302. **FS131-IX1 done: the crossing lemma is held** (harness ≈ 307k; record `fs131-w5x`'s `plans/FS131-IX1-crossing.md`; report
+     `data/fs131/reports/FS131-IX1.md`; commits `6444238b`, `fd601d6a`, `585d02ba`, `35fc52eb`, `0e0bc764`, `6db4fe3d`, pushed). **Results, each [kernel] on the
+     standard three**: `inter_nonempty_of_interleaved` (statement byte-identical to `01011037`, by `tools/fs131_ix_stmtcheck.py`), so `Plane/PlaneTopology` has no
+     `sorry`; the generalization `inter_nonempty_of_interleaved_of_isClosed_left` (only `K` need be closed; not claimed when neither is); the path form
+     `exists_eq_of_interleaved_paths`; eleven children and the definition `discRetract`. **Route (c)**, neither of IP1's: for paths, if two were disjoint,
+     `x + iy ↦ γ(x) − γ'(y)` would lift through `exp` over the parameter square while its argument changes by `−2π` around the square's edges; for continua,
+     disjoint compact sets have disjoint `δ`-thickenings, and paths in the `δ/2`-thickenings pushed into the disc by the radial retraction would be such paths.
+     **Receipt** (Keryx): the six commits exist and `origin/fs131-w5x` is `6db4fe3d`; the build log (`build/gate/build/20261005T014018Z-251367.log`) ends "Build
+     completed successfully (5399 jobs)", 0 warnings other than `sorry`; `sorry` in `PlaneTopology` by grep: 0; `data/fs131/ix/axioms-stage3.txt` parsed by script:
+     15 records, 14 on the standard three, the control `retArcs_not_interleaved` on `sorryAx`; the statement read at l. 577–580 against the brief's quotation —
+     the same. **Prediction scored**: KP priced the lemma at "one session, possibly its own job"; it took about 20 minutes and one 9-minute build, about thirty
+     times less. **Corrections owed**: the leaf's docstring is rewritten — its statement sentences kept, the planned route replaced by the route taken (no
+     statement change); IP1's record § 2.3 route (a) does not need a Poincaré–Miranda-type construction (the lift is over the paths' parameter square), and IP1's
+     objection to KP's Phragmén–Brouwer route holds (ℝ³ is unicoherent and the crossing fails there). **Prior-art debt**: the path step has the shape of
+     Maehara's proof of the crossing lemma for the Jordan curve theorem, named from memory — filed as `BIBLIOGRAPHY.md` § A `[Maehara1984]`, **[title
+     unverified]**, not held, not read; nothing rests on it and no docstring cites it. **Tool defects owed**: IP1's control string `ABSENT-CONTROL-STRING-xyzzy`
+     now appears in IP1's record, so a grep control using it can never fire there (use a fresh string per run); `tools/bib_audit.py` flags `[Author2024]` in
+     `plans/FS131-T3-axioms.md` l. 88, a placeholder in prose (pre-existing). **Slip, no redo**: a queued build stopped before it started; the slot wrapper had
+     its own process group and was stopped by PID. Credit: IX1, for the parameter-square lift.
+303. **Rulings on IX1's held items.** (a) The generalization, the rewritten docstring and `ARCHITECTURE.md`'s `Plane/PlaneTopology` row **accepted**. (b) **The
+     merge**: FS131-IP3 merges `fs131-w5x` (at `6db4fe3d`) into `fs131-w5p` at its next saved stage — a brief amendment, both sides kept in `scripts/Axioms.lean`
+     and `ARCHITECTURE.md` — so the crossing lemma is held on the planar branch before `endpoint_of_far_end` and the two `retArcs` cite it. Alternative weighed:
+     merging at wave 5's merge-back. Why: IP3 is fenced from `PlaneTopology` already, so the merge meets disjoint hunks, and citing a held lemma beats citing a
+     `sorry`. Confidence: high. (c) **IX1's slot → T-GRAPH**, FS131-IT1, as queued (item 299 (e)); Woodall's landing waits on wave 4. `fs131-w5x` joins the
+     removal list after the merge.
+304. **G4's question, by message, and the ruling.** G4 (FS131-G4, mid-job): the vacuity note on `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N`
+     (items 252, 266) can be settled neither way inside the brief — `VACUITY DECLARED:` reads STALE in `scripts/Vacuity.lean`'s `audit` on every site whose
+     carrier is not proved empty, and no theorem empties the class (row 134 refutes Condition-5 six-maps of the plane, not local fragments; the class is empty at
+     `k ≤ 3` only); a model is a bowtie-sized construction. G4's sketch of one, one mind, not derived: `v = 0`, `α = 0`; `c`'s cusp horns along `±1` bounded by
+     the curvature `±1/2` circles (centres `±2i`); `g` above, `h` below; `g`'s far tile outside the circle of radius 3 about `2i`, `h`'s outside the one about
+     `−2i` (validity by the triangle inequality, `|z − w| > 3 − 2`); both shadows cover the band of curvature in `[−1/4, 1/4]`, so neither horn shaves; `c` also in
+     90° out-type wedges above `+i` and below `−i`; ring colours just inside the unit circle at `±i`; the rest of `B̄(0, 2.1)` small tiles of distinct colours.
+     **Ruling** (sent to G4): land with the docstring notes `LEAN.md` § The gate allows ("Where none is expected (a step inside a proof by contradiction), the
+     docstring says so with the theorem that refutes the configuration"), each naming `stuck_chain` (FS110-N4-FIN). Alternatives weighed: the marker (STALE by
+     design, and false); holding the landing for the model (several sessions). Why: the three are consumed only inside refutations. Confidence: medium-high; it
+     would change if a consumer reads one outside a refutation — then a model is owed before wave 5 lands. **Stub to write**: the stuck-fragment model, from G4's
+     sketch. **Coordinator's slip**: G4's brief relayed item 144 (b) as done by FS131-T3, but item 153 moved the vacuity half (`CPColouring`, `AeProperRegions`) to
+     each wave's landing; G4 registers `AeProperRegions` IN with `IsEmpty (AeProperRegions 0)` and `IsEmpty (AeProperRegions 1)` — accepted. Credit: G4, for the
+     correction and the model sketch.

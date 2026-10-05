@@ -127,3 +127,15 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 ./scripts/build.sh`; never `lake build`. The gate scripts run the same way (`scripts/axioms.sh` and `scripts/vacuity.sh` under the slot, as `LEAN.md` § The gate
 says). Up to two builds from different worktrees may run at once when the slot admits them; four agents are building, so on exit 75 wait ten minutes and
 retry. The worktree's `.lake/build` is its own copy; never replace it with a symlink. Nothing with a `sorry` reaches `main`.
+
+## Amendment, 2026-10-05 — the vacuity note, and item 144 (b) (inventory item 304)
+
+Your question by message is logged and ruled:
+
+> 304. **G4's question, by message, and the ruling.** G4 (FS131-G4, mid-job): the vacuity note on `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N`
+> — source: plans/FS131-close-inventory.md
+
+(the ruling continues there). For you: the docstring notes on `stuck_structure` and `stuck_pole_N` (and `stuck_structure_flanks`, which has one), no marker,
+no model; `AeProperRegions` registered IN as you proposed; `CPColouring` the same way if wave 4 carries it, else merged with `main`'s entry. Done means item 3
+reads accordingly; everything else stands. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only
+review work it knows exists).
