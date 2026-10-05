@@ -1319,3 +1319,29 @@ a second for items 3–5.
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 28 — SAVED
+
+## Stage 29 — SAVED (FS131-I5i): the readback
+
+*FS131-I5i, wave 5's second `Terminal` implementer (Opus), continuing FS131-I5h's work on branch `fs131-w5c` in
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c` from `72149b07`. Brief: `data/fs131/briefs/FS131-I5i-terminal.md` (main tree). My set (ruling 329),
+in its order: `n3_end_of_not_inType` (the repeated colour first, E5 § 3.4; then NB3-END items 3–5), `cv_class`, the CV-HD cluster (`cv_hd_main`,
+`y3_end_needs`, `cv_hd`, `c_double`, `c_ends`), `exists_red`, `exists_terminal`, `cv_exists` (`BaseDense`, its lines only).*
+
+### 29.1 The brief's quotations against their sources (standing rule 3)
+
+Checked by script, `tools/fs131_i5h_quotes.py` (I5h's checker, in my touches; each run of `> ` lines searched verbatim, whitespace folded, in the file its
+`— source:` line names): **12 quotations, 0 failures** — `CLAUDE.md` § Counter-priors; the inventory's items 328, 329, 321, 274, 295; this record's Stage 28
+(three bullets: `n3_end_of_not_inType`, `cv_class`, the CV-HD cluster); E5's record § 3.4 and § 3.5 headings; the plan's § 10.2 ("It may"). `--self-test`
+(a one-letter plant in the first quotation): **fired** (1 failure reported), the unplanted run passed.
+
+Read in full: I5h's Stages 27–28; E5's record § 3 (§§ 3.1–3.6); I5d's and I5e's notes under `n3_end` (Stages 18 and 20.2); inventory items 274, 295, 321,
+328, 329; the plan's §§ 3.2, 4, 8.2 (and § 9.1's rows for this half); NB3-END items 1–5 (`plans/FS112-NB3-verification.md` l. 222–243). No mismatch found.
+
+### 29.2 The as-given build (`72149b07`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1755 modules already up
+to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T042632Z-1343653.log`; driver log
+`data/fs131/i5i/build-stage29-asgiven.log`). Every warning `declaration uses 'sorry'`: wave 5's `Terminal` 9, `Dense` 1, `HexRing` 6, `MapGraph` 3,
+`BaseWalk` 5, `BaseDense` 3 (**27**, I5h's count; mine 10: `Terminal`'s 9 and `cv_exists`), and wave 4's stale `Contact` 3, `UnitArc` 5.
+
+## Stage 29 — SAVED
