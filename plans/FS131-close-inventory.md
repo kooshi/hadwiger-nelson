@@ -3206,3 +3206,33 @@ reason by the close.*
      `ARCHITECTURE.md`; apply `framePt → fromFrame` on the branch's side (item 318's correction (1)); delete identical copies; the full gate on one commit; fast-
      forward `main`; drafts of the counts. Alternative weighed: the strengthened bend's construction KB2. Why: wave 5's landing waits for MERGE's (item 348 (b)),
      and this lane's own continuation is on that path (item 366's queue). Confidence: high. In flight after ML1's launch: 1 (I5o) + 1 (KL1) + 1 (ML1) = 3.
+369. **FS131-I5o handed back: `row134BaseUA` is held on `fs131-w5`** (Stage 42 SAVED, harness ≈ 384k by the task notice; record `fs131-w5`'s
+     `plans/FS131-I5-implementation.md`, Stages 38–42; report `data/fs131/reports/FS131-I5o.md`; commits `956c1cd2`, `0a4a0b46` (the merge of `fs131-w5p` at
+     `5086e856`), `e5b85cb5`, `ba286731`, `4a0e5c28`, pushed). **The merge**: two conflicts (`ARCHITECTURE.md`, `scripts/Axioms.lean`), both sides kept; every
+     declaration of the seven named files byte-identical to the side that changed it (504 keys, 17 one-sided files compared whole; `tools/fs131_i5o_merge_check.py`,
+     plants fired). **With it, on the standard three on `fs131-w5`**: `row134BaseUA` (row 134's base step with unit arcs) and `BaseCtx.false`, `BaseWalk`'s planar
+     three (`retArcs_nested`, `exists_endpoint`, `exists_eleventh`), `MapGraph`'s leaves, `cvb_thom`, `cvb_thom_reduced`, `IsBoundaryWalk.sep`,
+     `filledGraph_ringList`, `filledGraph_planarLike`. **`disc1_local`** (FS112-DISC1 on a fragment) **[kernel]**, standard three, statement unchanged — Lebesgue's
+     argument (FS106-TS-T) on a closed square of side 6/5 inside `B̄(x, 1)`, its point within `3√2/5` of `x`. **Not landed**: `exists_preBend` (the strengthened
+     bend `bend_toward_collar` stated in the form believed true, elaborated in `data/fs131/i5o/BendCollar.lean`, not in the library — hypotheses `hmax`, `hfree`;
+     conclusions: a colour-carrying homeomorphism, R1–R3, no new inert arc; the iteration's route, a strong induction on the number of maximal constant-sided
+     unit arcs centred in `B̄(u, 1)`, in record § 41.3; construction notes in § 41.2, including full inert circles as a separate case); `bv_l3` — **a GAP at its
+     placement**: `HexRing` imports neither `RingBand` nor `BaseWalk`, which its route needs, so it cannot be written there (steps 1 and 3 compile in
+     `data/fs131/i5o/RingScratch.lean`). **Receipt** (Keryx): the merge commit `0a4a0b46` has parents `956c1cd2` and `5086e856`; `origin/fs131-w5` is `4a0e5c28`; the
+     latest build log (`build/gate/build/20261005T084436Z-2794592.log`) ends "Build completed successfully (5408 jobs)", 0 warnings other than `sorry`; `sorry` by
+     grep: `BaseWalk` 0, `MapGraph` 0, `Dense` 0, `HexRing` 1 (`bv_l3`), `BaseDense` 2 (`exists_preBend`, and `cv_exists`'s stale copy — proved on `fs131-w5c`),
+     `Terminal` 9 (stale; the `Terminal` lane is `fs131-w5c`); `I5oAxioms39.out` parsed: 16 records, 13 standard (`row134BaseUA` and the ten named among them), the
+     controls `exists_preBend`, `bv_l3`, `localDense` on `sorryAx`; `I5oAxioms40.out`: `disc1_local` standard; `data/fs131/i5o/merge-check.txt` ends PASS.
+     **Generalization**: TS-T holds on any square of side greater than 1 inside a valid fragment's domain. **Route proposal**: extract `l3_base`'s band-and-linkage
+     argument as one lemma over its two differing inputs (`hgen`, `hdbl`), so `l3_base` and `bv_l3` are short proofs over it. **Process note**: the merge was
+     committed with `git commit -i <paths>` (git refuses a partial commit during a merge); every path named. Credit: I5o, for the merge with a three-way check.
+370. **Rulings on I5o's held items, and its slot.** (a) **`bv_l3` moves**, statement verbatim, to `BaseWalk` after `l3_base` (where its route's inputs live),
+     with a cross-file statement check; and `l3_base`'s argument extracted as I5o proposes, `l3_base`'s statement unchanged. Alternative weighed: `BaseDense`.
+     Why: `BaseWalk` holds `l3_base` and the band lemmas; nothing reads `bv_l3`, so the move breaks no consumer. Confidence: high. (b) **`bend_toward_collar`
+     stays in `data/` until its construction job lands it** as `exists_preBend`'s child (a `sorry` leaf nothing uses would only add a warning). Confidence:
+     high. (c) **`git commit -i <paths>` for a merge: accepted** — standing rule 6's point, every path named, is met. (d) **I5o's slot → the strengthened bend's
+     construction, FS131-KB2, on `fs131-w5`**: `bend_toward_collar` landed in a module of its own upstream of `BaseDense`, constructed (the multi-arc collar lens,
+     the radial push, full circles as their own case), then `exists_preBend` over it (the iteration of § 41.3, the finiteness child, `hfree` from `BaseHyp`).
+     Alternative weighed: `bv_l3` first. Why: the bend and the iteration are the longer chain (H, then H), on wave 5's path; `bv_l3` (about one session with the
+     extraction) follows at the next slot, on a branch cut from `fs131-w5` if KB2 still holds the tree. Confidence: medium-high. In flight after KB2's launch:
+     1 (KL1) + 1 (ML1) + 1 (KB2) = 3.
