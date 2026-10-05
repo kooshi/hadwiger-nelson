@@ -2838,7 +2838,12 @@ variable {k : ℕ} {F : ArcMap k}
 `v`) whose colour's allowed cone `D_c(v)` has non-empty interior, recolouring with `c` a thin wedge beside the horn, on a side
 where `D_c(v)` has interior directions, gives a valid map, equal to `F` off a small disc about `v`, creating no unit arc (so
 Condition 5 is kept), in which `v` gains no colour, `v`'s degree does not rise and it has at least one horn fewer, the new points
-on the rim carry at most three colours with none repeated, and no other point's allowed cone for `c` changes. -/
+on the rim carry at most three colours with none repeated, and no other point's allowed cone for `c` changes.
+
+**Inhabitant** (`LEAN.md` § The gate): none in Lean yet. FS131-E6's model (`plans/FS131-E6-derivation.md` § 3.1–3.3: a valid plane map
+in twelve colours with `v = 0`, `IsHorn 0 0 0 2 c`, `HasSectors 0 c 1`, `D_c(0)` a closed half-plane, degree `3` and one horn) satisfies
+every hypothesis at once, at [hand] grade with exact checks, and is not formalized. `ArcMap.cuspFrag` is no model: its domain is
+`B(0, 1/2)`, so `hv` fails at `0`, and its colour `1` has two horn sectors there, so `h1` fails. -/
 theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c : Fin k}
     (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : F.HasSectors v c 1) (hD : (interior (F.allowedCone v c)).Nonempty) {m j : ℕ}
     (hm : F.HasDegree v m) (hj : F.HasHornCount v j) {δ : ℝ} (hδ : 0 < δ) :

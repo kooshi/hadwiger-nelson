@@ -573,3 +573,15 @@ and 3 (`B(0, r) ∩ B(±i, 1)`) hold `t e(δ)` for every small `t` at each `δ �
 Evidence so far: iteration only (`lake env lean` on `OpenMove.lean`, exit 0, no warning); the real build comes with Stage 14.
 
 ## Stage 13 — SAVED (FS131-IO3)
+
+## Stage 14 — SAVED (FS131-IO3): `exists_open`'s inhabitant note
+
+A paragraph appended to `ArcMap.exists_open`'s docstring (the statement untouched; the diff is the docstring's last line and five added
+lines): no Lean model satisfies its hypotheses at once yet; FS131-E6's model (`plans/FS131-E6-derivation.md` § 3.1–3.3: a valid plane map in
+twelve colours, `v = 0`, `IsHorn 0 0 0 2 c`, `HasSectors 0 c 1`, `D_c(0)` a closed half-plane, degree `3`, one horn) satisfies all of them at
+[hand] grade with exact checks and is not formalized; `cuspFrag` is no model (`hv` fails, its domain being `B(0, 1/2)`; `h1` fails, colour `1`
+having two horn sectors at `0`). **A pointer not confirmed**: IO1's § 3.3 says item 375 names "the same gap" for `exists_merge`; item 375
+as read on `main` records MERGE's landing and its vacuity digest ("no new carrier tracked") but no inhabitant gap, and `exists_merge`'s
+docstring (`Contact.lean` l. 1513–1524) carries no inhabitant note — so the note cites E6's model only. Iteration (`lake env lean`): exit 0.
+
+## Stage 14 — SAVED (FS131-IO3)
