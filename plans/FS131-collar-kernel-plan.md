@@ -277,3 +277,54 @@ The first skeleton build (`build-skel1.log`, OK) showed two unused-variable warn
 **Left**: the 53 children, split as § 5.2, and the child B0 (`collarModel`), to be stated by implementer C.
 
 ## Stage 6 — SAVED
+
+---
+
+# FS131-CG1 — lane G of the collar bend (de Bruijn, the implementer)
+
+*Job FS131-CG1, de Bruijn (Opus 5.5), launched 2026-10-05 on branch `fs131-w5` at `b2ccfb7b` (worktree
+`/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5`). Brief `data/fs131/briefs/FS131-CG1-collar.md` (on `main`), with
+`plans/STANDING-RULES.md`, `LEAN.md` and `RUNNING.md` § Building and § Make the gate fail. No fence. Working files `data/fs131/cg/`; tools
+`tools/fs131_cg_*.py`. Stages from 7 on are this job's.*
+
+## Theorems this phase proved (FS131-CG1)
+
+None yet (filled at each saved stage).
+
+## Stage 7 — SAVED (FS131-CG1): the readback and the as-given build
+
+### 7.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_cg_quotes.py` reads each quotation from the brief itself (the `> ` line above each `> — source:` line) and requires it verbatim in
+the source the brief names: `BendCollar.lean` and KP2's plan at `b2ccfb7b`, `CLAUDE.md` and the inventory on `main`. Result
+`data/fs131/cg/quotes.txt`: **PASS, 10 of 10 verbatim**. `--self-test` (`data/fs131/cg/quotes-selftest.txt`): one changed character in each
+quotation in turn, and one quotation pointed at a source that does not hold it — **11 of 11 plants fired**, the unplanted partner PASS.
+
+| # | quotation (opening words) | source | result |
+|---|---|---|---|
+| 1 | "Do not consider Lean formalization a cost. …" | `CLAUDE.md` § Counter-priors | verbatim |
+| 2 | "theorem bend_toward_collar (hF : F.Valid) {P : ℂ} …" | `BendCollar.lean` at `b2ccfb7b` | verbatim (its first line) |
+| 3–5 | the G row of § 5.2, G's order, "Merging" | this plan § 5.2 at `b2ccfb7b` | verbatim |
+| 6–10 | items 394, 395, 390, 378, 386 (first lines) | `plans/FS131-close-inventory.md` on `main` | verbatim |
+
+No mismatch. One note, not about the brief: inventory item 390 (beyond the quoted first line) says the assembly "opens with `clear hlen hmax`";
+the skeleton at `b2ccfb7b` reads `have _ := hlen`, `have _ := hmax` (this plan § 2.2: the `clear` left the unused-variable linter firing). A
+wording slip in the inventory, for the coordinator.
+
+Read in full: this plan (Stages 1–6), KB2's design (`plans/FS131-I5-implementation.md` § 44), `RadialPush.lean`, `BendCollar.lean`.
+
+### 7.2 The as-given build (`b2ccfb7b`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`: **OK — all 1783 modules already up to date, nothing built, 6
+modules with warnings, every warning `declaration uses 'sorry'`**, exit 0 (`build/gate/build/20261005T113025Z-3836086.log`; driver log
+`data/fs131/cg/build-asgiven.log`).
+
+### 7.3 What the move carries
+
+G's block in `BendCollar` at `b2ccfb7b` runs from `CollarFit.kin_subset` to `CollarFit.map_valid` (lines 71–162). Besides the twelve children of
+KP2's row it holds five declarations the children's statements use: `CollarFit.pushProfiles` (proved), `CollarFit.homeo` (def), `collarArcs`
+(def), `collarArcs_locallyFinite` (proved), `CollarFit.map` (def). And every statement in the block takes `CollarFit`, so the structure
+`CollarFit` (with the section note `## The collar's fit to the map` that describes it) moves upstream too. `exists_collarFit` (lane C's) sits
+between `CollarFit` and `kin_subset` and stays in `BendCollar`. Nothing else moves.
+
+## Stage 7 — SAVED (FS131-CG1)
