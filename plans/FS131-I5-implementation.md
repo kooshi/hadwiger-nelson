@@ -1916,3 +1916,26 @@ by the velocity reading, I5m's children), and the band-and-linkage argument (ste
 construction is its own job). **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 42 — SAVED
+
+## Stage 43 — SAVED (FS131-KB2): the readback, and the as-given build
+
+*FS131-KB2, the strengthened bend's construction (Opus), continuing this record from Stage 42 (`4a0e5c28`). Brief:
+`data/fs131/briefs/FS131-KB2-bend.md` (main tree). My set (ruling 370 (d)): land `bend_toward_collar` (I5o's statement) in a module of its own upstream of
+`BaseDense`, construct it, then `exists_preBend` over it. Never `HexRing`, `BaseWalk`, `Terminal`, `Dense`, `MapGraph`, wave 4's stale modules, `main`, or the
+gate.*
+
+### 43.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_i5_quote_check.py` (I5j's, run, not edited) on the brief: **15 quotations, 15 verbatim**, exit 0 (`data/fs131/kb/quote-check-43.txt`); `--plant`
+reports 1 not verbatim (`quote-check-43-plant.txt`). The fifteen: `CLAUDE.md` § Counter-priors; `exists_preBend`'s first line (`BaseDense`); `bend_toward_collar`'s
+first line (`data/fs131/i5o/BendCollar.lean`); E4-BEND-UN's index line; this record's § 41.2 items 1, 2, 6; inventory items 359, 360, 365, 366, 369, 370, 317;
+the kernel plan § 10.2's "**It may**" line. Read in full: items 317, 359–370; this record's Stages 38–42; E4-BEND-UN's derivation block and § Argument
+(`plans/FS131-E4-derivation.md`); `BaseDense` whole; the scratch child whole.
+
+### 43.2 The as-given build (`4a0e5c28`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1758 modules already
+up to date, nothing built, 5 modules with warnings**, exit 0 (`build/gate/build/20261005T085919Z-2876965.log`; driver log
+`data/fs131/kb/build-stage43-asgiven.log`); every warning `declaration uses 'sorry'`. `tools/fs131_i5_stmt_check.py d61edefc`: PASS (`data/fs131/kb/stmt-check-43.txt`).
+
+## Stage 43 — SAVED
