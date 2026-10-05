@@ -214,7 +214,8 @@ exactly the standard three; the two partners on `sorryAx` (`exists_unenclosed_or
 
 ### 5.3 Measured cost, and the chain re-priced
 
-Wall clock for stages 2–5, excluding build queues: about 2.5 hours for 32 declarations (≈ 1,100 lines), two of the seven planar leaves closed
+Wall clock for stages 2–5: about 50 minutes (stage 1's commit at 00:08Z to stage 5's at 00:57Z), of which about 30 were three builds and
+their queues, for 32 declarations (≈ 1,100 lines) in about a third of this session's context; two of the seven planar leaves closed
 outright (`cvb_pinch_connected`, `cvb_hole_disconnected`) and 15 of the 23 topology leaves (`PlaneTopology` 7 of 8, `MapTopology` 11 of 15)
 with `exists_unenclosed_or_bad`'s joints. Every leaf with a textbook proof over Mathlib's connectedness API closed on its first or second
 iteration; the price driver is not topology but the map's local structure (sector charts) and the two finite-graph constructions.
@@ -230,8 +231,9 @@ iteration; the price driver is not topology but the map's local structure (secto
 | the crossing lemma, then `retArcs_not_interleaved`, `retArcs_not_abut` | 1–2 | route open (§ 2.3); over PATH once BG exists |
 | F-RING, T-GRAPH, `triLattice_planarLike` | 2–3 (not measured) | not started |
 
-Total left: about 6.5–9.5 sessions at the low end of KP's price for the whole chain — the topology came in well under KP's table and the
-local-structure and graph pieces are where the time goes. **Not measured, as the brief asked**: F-RING and T-GRAPH from their first
+Total left: about 6.5–9.5 sessions. The measured pieces (topology over Mathlib's connectedness API) ran about three times under KP's table
+(this one session did what KP priced at about 2.5); the unmeasured pieces — BG, the crossing lemma, F-RING, T-GRAPH — keep KP's prices, since
+nothing here measured them, and they are where the time now goes. **Not measured, as the brief asked**: F-RING and T-GRAPH from their first
 children — I did not reach them; the row above is read from the statements, not measured.
 
 ### 5.4 Worked on paper, for the successor (`exists_outermost`)
