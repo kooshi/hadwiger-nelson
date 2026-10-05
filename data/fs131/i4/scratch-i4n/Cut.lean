@@ -867,8 +867,8 @@ theorem mem_thickening_ringArc_of_polar {P z : ℂ} {θ₁ θ₂ β ρ ε : ℝ}
 
 /-- **The toward lens point is clear for the outer colour** (N2-TOWARD's clearness): a point `P + (1 − s) e(φ)` of the lens profile
 `0 < s ≤ ψ Δ(φ)` is at distance `≠ 1` from the outer class — a near point of the class (inside a unit disc about the arc) lies in
-`B̄(A, 1) ∩ B̄(B, 1)` (N2-SIGN), within `< 1` of the lens point (N2-ENV near); a far one lies, by N2-ENV toward, in `B(P, r)`, which the
-class misses. -/
+`B̄(A, 1) ∩ B̄(B, 1)` (N2-SIGN), within `< 1` of the lens point (N2-ENV near); a far one lies, by N2-ENV toward, in `B(P, r)`, which
+the class misses. -/
 theorem toward_clear (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c') {r ψ₁ ψ₂ : ℝ}
     (hr : ∀ y ∈ F.region c', r ≤ dist y P)
     (henv : ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ) →
@@ -1087,9 +1087,9 @@ theorem bend_toward' (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
 
 
 /-- **The away lens point is clear for the inner colour** (N2-AWAY's clearness): a point `P + (1 + s) e(φ)` of the lens profile is
-at distance `≠ 1` from the inner class — a near point of the class lies in `B̄(A, 1) ∩ B̄(B, 1)` (N2-SIGN), off `B(P, r)` (which the
-class misses) within `< 1` of the lens point (N2-ENV near, away); a far one lies, by N2-ENV away, within `r` of `R₂(ᾱ)`, which the
-class misses. -/
+at distance `≠ 1` from the inner class — a near point of the class lies in `B̄(A, 1) ∩ B̄(B, 1)` (N2-SIGN), off `B(P, r)` (which
+the class misses) within `< 1` of the lens point (N2-ENV near, away); a far one lies, by N2-ENV away, within `r` of `R₂(ᾱ)`, which
+the class misses. -/
 theorem away_clear (hF : F.Valid) {P : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k} (hA : F.IsRingArc P θ₁ θ₂ c c') {r ψ₁ ψ₂ : ℝ}
     (hr : ∀ y ∈ F.region c, r ≤ dist y P) (hr2 : ∀ y ∈ F.region c, y ∉ thickening r (radiusTwoArc P θ₁ θ₂))
     (henv : ∀ φ ∈ Ioo θ₁ θ₂, ∀ s, 0 < s → s ≤ ψ₁ * min (φ - θ₁) (θ₂ - φ) →

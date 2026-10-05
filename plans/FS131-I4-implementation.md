@@ -1481,6 +1481,74 @@ Contact 1 (`exists_merge`), Moves 1 (`exists_merge_aux`); none in `BaseSteps`.
 generic bend (`bendMap` and its five transfer lemmas), the lens geometry, and `bend_toward'`, `bend_away_whole'` elaborate sorry-free, both printing
 `[propext, Classical.choice, Quot.sound]`; 17 s, 3.4 GB. They go into `UnitArc` next.
 
+## Stage 43 — SAVED (FS131-I4n): `bend_toward` and `bend_away_whole` proved (engine 3, the generic bend, the lens geometry); `bend_away` repaired and left `sorry` — it leaves wave 4 (items 291 (d), 295 (b))
+
+**The amendment of 2026-10-05** (inventory items 294–295), read back: its quotation of item 295's first line, and the 2026-10-04 amendment's of item 291's,
+match `plans/FS131-close-inventory.md` on `main` (l. 2274, 2210) as truncations. For this job: `bend_away`'s trigger is my hand-back; `exists_merge` and
+`exists_merge_aux` stay `sorry` (the merge-and-gate job deletes them).
+
+**Engine 3 and the bend** (in `UnitArc`, a block before `r2Contacts`; the namespace `ArcMap` is closed for the geometry and reopened):
+- *The cut* — `cutArcs F P θ₁ θ₂` (defs `cutLo`, `cutHi`): every arc of `F` that is not an arc `circ P 1 θa θb` of `ω(P)` kept; each arc of `ω(P)` replaced by
+  its non-degenerate pieces over `[θa, θb] ∩ [θ₂ + 2πm, θ₁ + 2π(m + 1)]`, `m ∈ ℤ`. Lemmas: `cutArcs_nondegenerate`, `cutArcs_subset`, `finite_cut_pieces`,
+  `cutArcs_locallyFinite`, `ringPt_mem_openArc_iff`, `disjoint_piece_openArc` (pieces miss `r((θ₁, θ₂))`), `mem_cut_of_mem_circ` (off the open arc and its
+  two ends, a point of an arc of `ω(P)` is on a piece — a dropped single-point piece is an end), `mem_cutArcs_iff`, `exists_kept_of_mem_openArc`.
+- *The generic bend* — `bendMap F P θ₁ θ₂ a L j` (the cut, one new arc `a`, colour `j` on the lens `L`: `bendCol`) and its transfer lemmas, each over named
+  hypotheses on `L` and `a` only: `bend_hlc` (local constancy — inside the lens off `ω(P)` by openness; at the open arc, the lens on one side and `F`'s class
+  of `j` on the other, `hside`, `hcol`; off the lens `F`'s, `closure L ⊆ L ∪ a.carrier`), `bendMap_interiorPts`, `bendMap_agreesOff`,
+  `bendMap_ringArcsWithin` (engine 2), `bendMap_valid` (engine 1: the lens clear for `j`, no unit pair in it), `bendMap_region`, `bendMap_not_onRingArc`
+  (near a point of the open arc only kept arcs of `F` meet `ω(P)`, finitely often, `Arc.finite_inter_sphere_or_eq_circ`; the domain read only at the open
+  arc). `Surgery`'s `ArcMap.surgery` and `Near.exists_cut` are ball-centred (they trim `B(v, ρ)` and add `∂B(v, ρ)`), so they do not serve a cut along
+  `ω(P)`; none of `Surgery` is imported.
+- *The lens geometry* (outside `ArcMap`): `cos_sub_cos_le_sub`, `abs_le_of_cos_le`, `abs_lt_of_cos_lt`; the profiles `polar_toward(_strict)`,
+  `polar_away(_strict)` (from `1 − ‖w‖² ≤ 2d(Re w − cos h)`, resp. `‖w‖² − 1 ≤ …`, `d ≤ 1/2`: `|arg w| ≤ h` and depth `≤ 2d(h − |arg w|)`); the frame along
+  `e φ` (`norm_frameDir`, `eq_polar_frameDir`, `dist_sq_sub_dir`, `dist_sq_add_dir`, `re_frameDir_ringPt`, `re_frameDir_sub_dir`, `re_frameDir_add_dir`);
+  **`carrier_circ_arccos`** (the arc `circ C R (φ ∓ arccos(τ/R))` is the circle's part with component `≥ τ` along `e φ`), whence `toward_carrier` (the
+  circle about `P − d e(φ_m)` of squared radius `1 + 2d cos h + d²` inside `B̄(P, 1)`) and `away_carrier` (about `P + d e(φ_m)`, `1 − 2d cos h + d²`, outside
+  `B(P, 1)`); `toward_polar(_strict)`, `away_polar(_strict)`, `toward_pairs` (two toward lens points: `|z − z'|² < ρ² + ρ'² − ρρ' ≤ 1`),
+  `dist_polar_polar_sq`, `dist_polar_ringPt`, `min_add_sub_eq`, `le_on_Icc_of_Ioo`, `ge_on_Icc_of_Ioo`, `one_add_le_two_cos`, `away_mem_lens` (an away lens
+  point lies in `B̄(A, 1) ∩ B̄(B, 1)`), and in `ArcMap` `mem_thickening_ringArc_of_polar`, `away_circle_facts`, `away_pairs`.
+- *Clearness* (N2-TOWARD's, N2-AWAY's): `toward_clear` (a near point of the outer class lies in `B̄(A, 1) ∩ B̄(B, 1)` by N2-SIGN and `le/ge_on_Icc_of_Ioo`,
+  within `< 1` of the lens point by `n2_env_near`; a far one in `B(P, r)` by `n2_env_toward`, which the class misses since `c' ∉ coloursAt P`); `away_clear`
+  (the same with `n2_env_near_away` off `B(P, r)` and `n2_env_away`'s `r`-neighbourhood of `R₂(ᾱ)`, which the class misses by `hR2`); `away_lens_clear`
+  (points of `ω(P)` in the lens by `ne1_region`).
+
+**`bend_toward`** (FS112-N2-BENDS, N2-TOWARD), statement unchanged: `ℓ ≤ 60°` by `l60_le`; `r` the distance of the outer class from `P`; `ψ₁`, `ψ₂` from
+`n2_env_toward`, `n2_env_near`; `d = min(ψ₁, ψ₂, ε)/4`; the lens `L = {|z − P| ≤ 1, 1 + 2d cos h + d² < |z − (P − d e(φ_m))|²}` (in polar form inside the
+angle with depth `< 2dΔ`), the new arc `toward_carrier`'s; `bendMap` with `j = c'`, `S = (B̄(P, 1))ᶜ`. **`bend_away_whole`** (N2-AWAY), statement
+unchanged, now proved directly (it no longer cites `bend_away`): the mirror, `r` below the class's distances from `P` and from the compact `R₂(ᾱ)` and `≤ 1/2`,
+`d = min(ψ₁, ψ₂, ε, 1/2)/5 ≤ 1/10`, `L = {1 ≤ |z − P|, |z − (P + d e(φ_m))|² < 1 − 2d cos h + d²}`, `j = c`, `S = B(P, 1)`; the pairs by `away_pairs`. The
+declaration's single heartbeat budget forced the clearness and the pairs into children (`away_lens_clear`, `away_pairs`, `away_circle_facts`), per LEAN.md.
+
+**`bend_away`**: the ruled repair applied (items 290–291 (a)) — `(hdom : radiusTwoArc P θ₁ θ₂ ⊆ F.dom)` after `hin`, docstring rewritten (the repair, its
+reason, the Stage-41 counterexample's address); otherwise unchanged (`tools/fs131_i4_stmts.py a0c29483…`: 1 changed, `ALLOWED bend_away`). **Not proved; it
+leaves wave 4 at this hand-back** (items 291 (d), 295 (b)). What its proof needs, for its job (my reading, one mind, not a derivation): (1) `C₂(ᾱ)` is a finite
+union of points and closed intervals — local finiteness at the compact `R₂(ᾱ) ⊆ dom` with I4m's `Arc.finite_inter_sphere_two_or_subset`; (2) the set to clear
+is `(θ₁, θ₂)` minus the non-degenerate components of `C₂`, a finite union of open intervals; (3) the lens over each is `B̄`-intersection of finitely many
+discs (corner circles at free ends as here; at each isolated contact `w₀` and at each component end, a disc of radius `1/κ > 1` containing `B(P, 1)` and
+tangent at `r(w₀)`) minus `B(P, 1)`, its boundary arcs cut by half-planes (`carrier_circ_arccos`), `bendMap` unchanged; (4) clearness at an isolated contact
+`q₀ = P + 2e(w₀)`: the inner class near `q₀` is far (N2-SIGN), so outside `⋃_{w ∈ int α} B(r(w), 1)`, and its sectors at `q₀` (wave 3's chart at `q₀`) rise
+linearly or with a tangent germ of curvature `< 1/2` (curvature `1/2` on a side is an interval of `C₂` there); with `1 − κ` small against that rise the cap
+of `ω(z)` beyond radius 2 misses them — an inf-convolution inequality `ε₀x² − c(y − x)² < Gy²`; (5) **at an end of the arc** the uncovered region near
+`q_A` is bounded by `ω(A)` (curvature `1`, tangent to the radius-2 circle at `q_A`) on the far side, so a class hugging `ω(A)` from outside is not covered by
+(4)'s curvature `< 1/2` analysis; N2-AWAY says "the end vertex's own blocker is exactly R2 at the end" [hand, one mind] — this step should be re-derived
+before the kernel work starts. Price: two to three sessions, (4) and (5) the risk.
+
+**Records**: `tools/fs131_i4_addrecords.py` — 582 names, 56 added (the new theorems), `--check` 0 missing. **Spec examples** for the five new definitions:
+`cutLo`/`cutHi` values, the cut of `unitArcPlane`'s arc `r([0, π])` at `(π/3, 2π/3)` (the piece `r([2π/3, π])` present, the whole arc absent), `bendCol` on the
+one-colour plane, `bendMap`'s fields. **Statements**: `tools/fs131_i4_stmts.py 89af8b63 …UnitArc.lean --allow bend_away` — 141 old, 197 new, 56 added,
+0 removed, 1 changed (`ALLOWED bend_away`), exit 0. **Duplicates**: `tools/fs131_i4_treedupes.py` — 7,809 declarations (7,749 − `n3_end` + 56 theorems + 5
+definitions), the same 3 pre-existing repeats (a docstring line beginning `class` read as a declaration by the textual scanner was reworded). No import
+changed; `check_architecture` PASS. No `axiom`, no `native_decide`.
+
+**Build**: "build: OK — 446 of 446 batches, 3 module(s) rebuilt, 3 module(s) with warnings, 10m3s", exit 0 (`build/gate/build/20261005T012209Z-120054.log`;
+driver log `data/fs131/i4/build-i4n-bends.log`): `sorry` only — UnitArc 1 (`bend_away`, l. 3973), Contact 1 (`exists_merge`), Moves 1 (`exists_merge_aux`).
+**Axioms** (`data/fs131/i4/axioms-i4n-43.txt`, from `data/fs131/i4/axioms-i4n-43.lean` against this build's oleans, not a gate log): 62 records —
+`bend_toward`, `bend_away_whole`, `exists_shave`, `exists_rayMerge` and the 56 children exactly `[propext, Classical.choice, Quot.sound]`; `bend_away` and
+`exists_merge` `sorryAx` besides.
+
+**What is left on `fs131-w4` (3 `sorry`)**: `bend_away` (leaves wave 4 at this hand-back, items 291 (d), 295 (b)); `exists_merge`, `exists_merge_aux` (the
+merge-and-gate job deletes them, item 295 (a)).
+
 ## Theorems this phase proved (Stage 4's additions; `#print axioms` prints against the real build's oleans, not a gate log)
 
 - FS112-ISO: `HadwigerNelson.Plane.ArcMap.iso` (+ `isoCol_locallyConstant`) — read against the row: same statement (`isoFrag` valid; the arc `r([−1/8, 1/8])` has constant sides `0` inside, `1` outside;
@@ -1649,3 +1717,15 @@ None yet: the milestone is not Closed (60 leaves remain, 59 without `lebesgue_co
   an arc of `ω(y_{j±1})`: contradiction); the `ω(y_{j−1})` half of `hnb` is not read.
 - Children (no row), the standard three: `sq_norm_e_add_e`, `e_add_third_add_e_sub_third`, `cos_int_mul_third_pos`, `cos_int_mul_third_neg`,
   `exists_opposite_cos_third`, `ArcMap.germ_rotate_third`, `ArcMap.straddlers_third` (UnitArc).
+
+## Theorems this phase proved (FS131-I4n's; axioms from `#print axioms` against the stage-43 build's oleans, `data/fs131/i4/axioms-i4n-43.txt`, not a gate log)
+
+- FS112-N2-BENDS, N2-TOWARD: `HadwigerNelson.Plane.ArcMap.bend_toward` — `[propext, Classical.choice, Quot.sound]`. Read against § 12.2 and the row: same statement (for every
+  `ε > 0` a valid map agreeing with `F` off the `ε`-neighbourhood of the closed arc, no unit arc created, no interior point of the arc on an arc of `Γ` on
+  `ω(P)`, only the outer colour gains points and only inside `B̄(P, 1)` near the arc).
+- FS112-N2-BENDS, N2-AWAY as the row states it: `ArcMap.bend_away_whole` — `[propext, Classical.choice, Quot.sound]`. Same statement; now proved directly (no longer over `bend_away`).
+- FS110-N4-SHAVE and N4-RAY at `Contact`'s statements: `ArcMap.exists_shave`, `ArcMap.exists_rayMerge` — `[propext, Classical.choice, Quot.sound]` each (by `exists_shave_aux`,
+  `exists_rayMerge_aux`, FS131-IM3's, after the merge).
+- Engine 3 and the bend (no row), the lens geometry, the clearness children — 56 theorems listed in Stage 43 and in `scripts/Axioms.lean`'s FS131-I4 block —
+  `[propext, Classical.choice, Quot.sound]` each.
+
