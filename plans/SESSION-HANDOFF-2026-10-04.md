@@ -1,27 +1,28 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–323 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–325 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **323**.
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **325**.
 >
 > **Held in the kernel, on `main`**: waves 1, 2, 3 and **4** (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
 >
-> **Staffing (item 323)**: **three slots** again (Kooshi's word). Four jobs are running and finish their briefs; **the first
-> slot to free is not refilled**; from then on at most three run.
+> **Staffing (item 323)**: **three slots** again (Kooshi's word). The first slot to free (IP4's, item 325) was not refilled;
+> three run now, and every slot that frees from here is refilled from the queue.
 >
-> **Running (4)** — each reports to "main" by hand-back; its report file is on its branch:
+> **Running (3)** — each reports to "main" by hand-back; its report file is on its branch:
 > - **FS131-WL1** (`fs131-ww`): Woodall's landing — merge `main`, `framePt → fromFrame` on the branch's side, delete identical copies, QA2-1's brick-map model,
 >   the full gate, fast-forward `main`, drafts of the counts. Brief `data/fs131/briefs/FS131-WL1-woodall-land.md`.
 > - **FS131-I5g** (`fs131-w5`): wave 5's non-`Terminal` half — `reduce` (proved, stage 26), `select`, `l3_base`, `bv_hex` (with the planar three, all that
 >   `row134BaseUA` rests on), then `rot_out`, `rot_in`, `hex_regular`, `bv_nd`, `bv_l3`, then `exists_preBend` over a strengthened-bend child stated against
 >   E4-BEND-UN. Brief `data/fs131/briefs/FS131-I5g-wave5.md`.
-> - **FS131-IP4** (`fs131-w5p`): the planar chain from IP3's Stage 11 — merge `fs131-w5t` (T-GRAPH) at its next saved stage and take F-SEP; PATH and the strong
->   child, `endpoint_of_far_end`, the two `retArcs`, F-LOC/CONN/INF/ONE, adversaries, F-RING. Brief `data/fs131/briefs/FS131-IP4-planar.md` (two amendments).
 > - **FS131-I5h** (`fs131-w5c`, new, cut from `fs131-w5` at `75689a4c`): wave 5's `Terminal` half — E5's e5-sh and e5-sep as children, `n3_end_of_not_inType`,
 >   `cv_class`, the CV-HD cluster, `exists_red`, `exists_terminal`, then `cv_exists`. Brief `data/fs131/briefs/FS131-I5h-terminal.md`.
+>
+> **Done since the compaction**: **FS131-IP4** (item 324): `endpoint_of_far_end` and both `retArcs` proved on `fs131-w5p`, PATH replaced by `orient`; 8
+> `MapGraph` leaves left (F-LOC, F-CONN, F-INF, F-ONE, F-SEP, the two adversaries, F-RING), record § 15.3 their routes.
 >
 > **On each hand-back**: review by artifact (commits exist and pushed; the build log's last line and warnings; `sorry` by
 > `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'`; the axioms print parsed by script from the job's data file; one statement read back); log the item; rule the
@@ -29,8 +30,8 @@ that judge the milestone, written before any job).*
 > § Trust ledger and § The gate, `LEAN.md` control count, `GATE_CHANGES`), run `scripts/gate_report.py axioms|vacuity` and `tools/claude_md_fact_audit.py
 > --base <last CLAUDE.md commit>` **before** committing (expect only the superseded counts lost), push notify Kooshi.
 >
-> **Queue for a freed slot under three (item 323)**: the freed lane's own continuation if its leaves remain on the longest path (the planar chain first,
-> then wave 5's two halves); else **IMM2** (MERGE on `fs131-w4mm`, from its record § 4: 2–3 sessions; restores `exists_merge`, `exists_merge_aux`, `Contact`'s
+> **Queue for the next freed slot (items 323, 325)**: **FS131-IP5**, the planar continuation on `fs131-w5p` from Stage 15 (its brief to write from IP4's,
+> item 324's leaves and docstring fixes), unless the lane that frees is wave 5's and its own leaves are then the longer path; else **IMM2** (MERGE on `fs131-w4mm`, from its record § 4: 2–3 sessions; restores `exists_merge`, `exists_merge_aux`, `Contact`'s
 > header line, the `ARCHITECTURE.md` mentions, and applies `framePt → fromFrame`; lands on its own); then **`bend_away`'s implementer** (branch `fs131-w4ba` at
 > `71cca146`; E5 § 4 — e5-claim-e and e5-end-cap — its route; lands on its own); then **`disc1_local`** (planar, after `fs131-w5p` merges back into `fs131-w5`).
 >
@@ -87,13 +88,12 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 **Statement problems so far** (all ruled; none had anything built on it): from derivations or merges — items 18–19, 34, 37, 39, 86; Lean slips — 48, 57, 61,
 63, 72, 77, 100; a gap — 56; table edges missed — 69, 79; a non-result in the backlog — item 5 (R1). About 35 generalizations logged for errata.
 
-## 3. Running now (4 running, finishing out; the cap is three, item 323)
+## 3. Running now (3, at the cap; items 323, 325)
 
 | job | model | brief | reports to |
 |---|---|---|---|
 | FS131-WL1 (Woodall's landing on `fs131-ww`; items 190, 319) | Opus | `data/fs131/briefs/FS131-WL1-woodall-land.md` | branch `fs131-ww`'s `data/fs131/reports/FS131-WL1.md` |
 | FS131-I5g (wave 5's non-`Terminal` half, continued; items 316–317) | Opus | `data/fs131/briefs/FS131-I5g-wave5.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-I5g.md` |
-| FS131-IP4 (the planar chain from IP3's Stage 11; items 312–313) | Opus | `data/fs131/briefs/FS131-IP4-planar.md` | branch `fs131-w5p`'s `data/fs131/reports/FS131-IP4.md` |
 | FS131-I5h (wave 5's `Terminal` half, on `fs131-w5c`; items 320–322) | Opus | `data/fs131/briefs/FS131-I5h-terminal.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-I5h.md` |
 
 
