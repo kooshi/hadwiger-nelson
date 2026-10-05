@@ -2567,3 +2567,35 @@ reason by the close.*
      (its tools — sector charts, `exists_ball_two_tiles` — live on `fs131-w5p`); queued. Alternative weighed: I5g now, without those tools. Confidence:
      medium. (e) The next slot is ruled when it frees (item 313's slip): Woodall's landing if wave 4 has landed, else the `Terminal` implementer if E5 has
      reported, else IMM2. In flight after I5g's launch: 1 (G4) + 1 (IP4) + 1 (E5) + 1 (I5g) = 4.
+318. **WAVE 4 LANDED on `main`, held in the kernel** (FS131-G4, done, harness ≈ 462k; report `fs131-w4`'s `data/fs131/reports/FS131-G4.md`; record Stages 44–48;
+     `origin/main` fast-forwarded to `60ff1843`, gated commit `4fa41167` — `fs131-w4` with `main` at `ba3019d5` merged in; the gate also green on `42ca1740` and
+     `5816a11a`). **The gate**: build OK, 0 warnings, 0 `sorry` in `Proofs/`; axioms OK — 3,397 records, 3,376 clean, 12 axiom-free, 4 imported, 5 declared
+     purchases; every wave-4 record within the standard three (865 records: 864 on a subset of the three, 1 on none); no `native_decide`, no new `axiom`; axioms
+     `--self-test` 23 of 23; vacuity OK (`declarations=10525 refutations-skipped=92 sites=705`, `vacuous=0 stale=0 declared=3 witnessed=27 generic=673 unknown=2`),
+     `--self-test` 50 of 50; `check_architecture` PASS; `fs131_k4_decls.py --check` 495 names, 0 missing. **Deleted** (statements kept on `fs131-w4ba`,
+     `fs131-w4mm`): `bend_away`, `exists_merge`, `exists_merge_aux`, with docstrings, records and header lines; three-way statement check 6,098 names, 0
+     mismatches. **`framePt` renamed `fromFrame`** on wave 4's side (102 occurrences); only wave 2's `Plane/Slack.framePt` remains. **`_root_.` names** resolved by
+     `fs131_k4_decls.py` (control `--plant-root`). **Carriers**: IN `ArcMap.IsHorn`, `ArcMap.IsStuck`, `ArcMap.Condition5`, `Plane.AeProperRegions`, each with a
+     closed refutation or emptiness instance on the standard three (`bowtie_not_isHorn_I_axis`, `bowtie_not_isStuck_I`, `unitArcPlane_not_condition5`,
+     `IsEmpty (AeProperRegions 0/1)`) and three controls (39–50); OUT the rest, `Terminal`/`TerminalOn` among them (no theorem refutes either at a concrete map);
+     wave 2's `CPColouring` merged in from `main`. **Vacuity notes** on `stuck_structure`, `stuck_structure_flanks`, `stuck_pole_N` settled per item 304 (each
+     docstring names `stuck_chain` and `n4_fin`). **Counts reconciled**: the merged scan is the union of `main`'s and the branch's (705 = 516 ∪ 649; checked by
+     the new `tools/fs131_g4_vacdiff.py`, planted fault caught); clean 2,512 + 2,720 − 1,856 = 3,376. **Receipt** (Keryx): `origin/main` = `60ff1843`, a
+     descendant of my last commit; `git diff --name-only 4fa41167 origin/main` outside `plans/` and `data/` is empty, so no gate input changed after the gated
+     commit (no re-run needed); `sorry` files under `Proofs/` on `main` by grep: 0; the saved logs read — `data/fs131/g4/axioms-final3.log` "axioms: OK — 3376
+     clean, 12 axiom-free, 4 imported, 5 declared purchase(s)", `axioms-selftest-final3.log` "OK — every planted fault fired, and every partner passed",
+     `vacuity-final3.log` "vacuity: OK", `vacuity-selftest-final3.log` "OK — all 50 controls behaved", `build-g4-final3.log` exit 0, 0 warnings. **Tool defects
+     fixed**: `scripts/vacuity.sh`'s banner (item 271) now counts what it runs; `fs131_k4_decls.py`'s `_root_.` (item 281 (b)). **Tool defect owed**:
+     `scripts/vacuity-controls.lean` numbers two blocks CONTROL 33–36 (wave 3's `IsQArc`, wave 2's). **Corrections owed**: (1) every branch not yet merged —
+     `fs131-w5`'s `FlankUA` and the copies of `Basic`/`UnitArc`/`Moves` on `fs131-w5p`, `fs131-w4mm`, `fs131-ww` — applies `framePt → fromFrame` in its own files
+     at its merge (a missed one would elaborate against wave 2's `Plane/Slack.framePt`, which takes the same number of arguments); (2) `tools/fs131_im_statements.py
+     --check` now fails on `exists_merge` (deleted) until MERGE's landing restores both statements, `Contact`'s header line and the `ARCHITECTURE.md` mentions.
+     **Stub to write**: the stuck-fragment model (item 304). Credit: G4, for the reconciliation tool and the per-merge gate re-runs.
+319. **Wave 4's filing, and the freed slot.** **Filed now** (this commit, from G4's drafts 1–2, 4–5, record "Drafts for the front page (FS131-G4)", draft 3
+     written by G4): `CLAUDE.md` § Trust ledger (3376 clean, 12 axiom-free, 3,397 records at wave 4's landing), § The gate (`declarations=10525
+     refutations-skipped=92 sites=705`, `… witnessed=27 generic=673 …`), `LEAN.md` § The gate ("fifty controls"), `GATE_CHANGES` (2512 → 3376). **Receipts, read
+     before the commit**: `gate_report.py axioms` on the gated run — Trust ledger "match (clean, purchases and imported compared)"; `gate_report.py vacuity` —
+     baseline header and § The gate "match (9 of 9 compared)"; fact audit `--base b8402e46` — 14 losses, every one the superseded counts and the superseded
+     sentence's attribution (`FS131-I2n`; in git at `b8402e46` and in items 270–271), nothing else; `--dupes` exit 0. **Held for the milestone's filing**: wave
+     4's Frontier clause, its `LEDGER.md` regrades, its Proof Atlas grades (as wave 2's, item 271). **Freed slot → Woodall's landing job, FS131-WL1** (item 317
+     (e): wave 4 has landed). Worktree `fs131-w4` joins the removal list after its cited gate logs are rescued.
