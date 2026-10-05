@@ -370,6 +370,44 @@ theorem BaseCtx.retArcs_nested (B : F.BaseCtx u) {s t s' t' : ℝ} (h : F.IsRetA
   · exact (B.retArcs_not_abut h h' hab).elim
   · exact (B.retArcs_not_abut h' h hab).elim
 
+/-- **The colours of a point of `B̄(u, 1)` carrying two pseudo-colours `a`, `c`**: `a`, `c` and colours of `u` (a third colour off `u`'s would make
+it a cubic trichromatic point complementary to `u` within `1`, and `cor3` puts a four-colour point in `B̄(u, 2)`, against H). -/
+theorem BaseCtx.colours_sub (B : F.BaseCtx u) {z : ℂ} (hz : z ∈ closedBall u 1) {a c : Fin 6} (hac : a ≠ c)
+    (ha : a ∈ F.coloursAt z) (hc : c ∈ F.coloursAt z) (hau : a ∉ F.coloursAt u) (hcu : c ∉ F.coloursAt u) :
+    ∀ j ∈ F.coloursAt z, j = a ∨ j = c ∨ j ∈ F.coloursAt u := by
+  intro j hj
+  by_contra hcon
+  push Not at hcon
+  obtain ⟨hja, hjc, hju⟩ := hcon
+  have hzd : z ∈ F.dom := B.covers (closedBall_subset_closedBall (by norm_num) hz)
+  have hgood : z ∉ F.fourSet ∪ F.repSet := Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hz)
+  have hnr : ¬ F.HasRepeatedColour z := fun hr => hgood (Or.inr ⟨hzd, hr⟩)
+  have hle : (F.coloursAt z).ncard ≤ 3 := by
+    by_contra h; push Not at h; exact hgood (Or.inl ⟨hzd, h⟩)
+  have hsub : ({a, c, j} : Set (Fin 6)) ⊆ F.coloursAt z := by
+    intro i hi; rcases hi with rfl | rfl | rfl
+    · exact ha
+    · exact hc
+    · exact hj
+  have h3 : ({a, c, j} : Set (Fin 6)).ncard = 3 := Set.ncard_eq_three.mpr ⟨a, c, j, hac, Ne.symm hja, Ne.symm hjc, rfl⟩
+  have heq : ({a, c, j} : Set (Fin 6)) = F.coloursAt z :=
+    Set.eq_of_subset_of_ncard_le hsub (by rw [h3]; exact hle) (Set.toFinite _)
+  have hcub : F.IsCubicTrichromatic z := isCubicTrichromatic_of_three_of_noRep hzd (by rw [← heq, h3]) hnr
+  have hdis : Disjoint (F.coloursAt z) (F.coloursAt u) := by
+    rw [← heq, Set.disjoint_left]
+    rintro i (rfl | rfl | rfl)
+    · exact hau
+    · exact hcu
+    · exact hju
+  have hcov : ∀ {q : ℂ}, q ∈ closedBall u 1 → F.Covers q 1 := fun {q} hq y hy =>
+    B.covers (show y ∈ closedBall u 2 by rw [mem_closedBall] at hq hy ⊢; linarith [dist_triangle y q u])
+  obtain ⟨qp, qm, -, hq⟩ := cor3 B.valid hcub B.cubic (hcov hz) (hcov (mem_closedBall_self zero_le_one)) hdis
+    (by rw [mem_closedBall] at hz; linarith)
+  obtain ⟨hqp, -, h4, -⟩ := hq qp (by simp)
+  have hqu : qp ∈ closedBall u 2 := by
+    rw [mem_closedBall] at hz ⊢; linarith [dist_triangle qp z u]
+  exact Set.disjoint_left.mp B.hyp hqu (Or.inl ⟨B.covers hqu, h4⟩)
+
 /-- **The far end gives an endpoint** (FS110-CD Lemma E, FS110-CE R1–R4; FS131-KP plan § 4, leaf END-C): a far end `q` of the `a|c` boundary
 from `r(θ)` (`exists_far_end`) with three colours in `B(u, 1)` is an endpoint outright; a three-colour point on `ω(u)` (`r(θ)` itself
 included) is V-in (its colour of `u` has a tile meeting `B(u, 1)`: CE R2, R4), an endpoint; a two-colour exit `q ≠ r(θ)` closes a returning
@@ -381,7 +419,236 @@ theorem BaseCtx.endpoint_of_far_end (B : F.BaseCtx u) {θ : ℝ} {a c : Fin 6} (
     (h₁ : F.TileOf a T₁) (h₂ : F.TileOf c T₂) (hx₁ : ringPt u θ ∈ closure T₁) (hx₂ : ringPt u θ ∈ closure T₂) {q : ℂ}
     (hq : q ∈ connectedComponentIn (closure T₁ ∩ closure T₂ ∩ closedBall u 1) (ringPt u θ))
     (hq3 : (F.coloursAt q).ncard = 3 ∨ (q ≠ ringPt u θ ∧ dist q u = 1)) : ∃ p, F.IsEndpoint u (ringPt u θ) a c p := by
-  sorry
+  classical
+  have hπ := Real.pi_pos
+  set x := ringPt u θ with hx
+  set K := closure T₁ ∩ closure T₂ ∩ closedBall u 1 with hKdef
+  set C := connectedComponentIn K x with hCdef
+  have hKsub : ∀ {z}, z ∈ K → z ∈ closure T₁ ∧ z ∈ closure T₂ ∧ z ∈ closedBall u 1 := fun hz => ⟨hz.1.1, hz.1.2, hz.2⟩
+  -- the given far end, if it has three colours inside the disc, is an endpoint outright
+  have hshort : (F.coloursAt q).ncard = 3 → q ∈ ball u 1 → ∃ p, F.IsEndpoint u x a c p := fun h3 hqb =>
+    ⟨q, h3, Or.inl hqb, T₁, T₂, h₁, h₂, hx₁, hx₂, (hKsub (connectedComponentIn_subset _ _ hq)).1,
+      (hKsub (connectedComponentIn_subset _ _ hq)).2.1⟩
+  have main : ∃ p, F.IsEndpoint u x a c p := by
+    by_contra hno
+    have hdomB : ∀ z ∈ closedBall u 1, z ∈ F.dom := fun z hz => B.covers (closedBall_subset_closedBall (by norm_num) hz)
+    have hgood : ∀ z ∈ closedBall u 1, z ∉ F.fourSet ∪ F.repSet := fun z hz =>
+      Set.disjoint_left.mp B.hyp (closedBall_subset_closedBall (by norm_num) hz)
+    have hnr : ∀ z ∈ closedBall u 1, ¬ F.HasRepeatedColour z := fun z hz hr => hgood z hz (Or.inr ⟨hdomB z hz, hr⟩)
+    have hle3 : ∀ z ∈ closedBall u 1, (F.coloursAt z).ncard ≤ 3 := fun z hz => by
+      by_contra h; push Not at h; exact hgood z hz (Or.inl ⟨hdomB z hz, h⟩)
+    have hnotu : ∀ {θ' : ℝ} {s : Side} {j : Fin 6}, F.GermPseudo u θ' s j → j ∉ F.coloursAt u := by
+      intro θ' s j hj
+      obtain ⟨δ, hδ, hg⟩ := hj
+      have : j ∈ F.pseudoColours u (ringPt u (θ' + s.sign * (δ / 2))) := by
+        rw [hg ⟨δ / 2, ⟨half_pos hδ, half_lt_self hδ⟩, rfl⟩]; rfl
+      exact this.2
+    have hau := hnotu ha
+    have hcu := hnotu hc
+    have hne : T₁ ≠ T₂ := fun h => hac (h₁.eq_colour (h ▸ h₂))
+    have hxu : dist x u = 1 := dist_ringPt u θ
+    have hxB : x ∈ closedBall u 1 := by rw [mem_closedBall, hxu]
+    have hxK : x ∈ K := ⟨⟨hx₁, hx₂⟩, hxB⟩
+    have hcolK : ∀ z ∈ K, ∀ j ∈ F.coloursAt z, j = a ∨ j = c ∨ j ∈ F.coloursAt u := fun z hz =>
+      B.colours_sub (hKsub hz).2.2 hac (mem_coloursAt_of_tileOf h₁ (hKsub hz).1) (mem_coloursAt_of_tileOf h₂ (hKsub hz).2.1) hau hcu
+    have hpseudoK : ∀ z ∈ K, F.pseudoColours u z = {a, c} := by
+      intro z hz
+      ext j
+      simp only [pseudoColours, Set.mem_sdiff, mem_insert_iff, mem_singleton_iff]
+      constructor
+      · rintro ⟨hj, hju⟩
+        rcases hcolK z hz j hj with h | h | h
+        · exact Or.inl h
+        · exact Or.inr h
+        · exact absurd h hju
+      · rintro (rfl | rfl)
+        · exact ⟨mem_coloursAt_of_tileOf h₁ (hKsub hz).1, hau⟩
+        · exact ⟨mem_coloursAt_of_tileOf h₂ (hKsub hz).2.1, hcu⟩
+    -- a third tile at a point of `K` misses the closed disc (else the point is an endpoint: inside, or V-in)
+    have hVout : ∀ z ∈ K, ∀ j T, F.TileOf j T → z ∈ closure T → j ≠ a → j ≠ c → Disjoint T (closedBall u 1) := by
+      intro z hz j T hT hzT hja hjc
+      have hzB := (hKsub hz).2.2
+      have hjz : j ∈ F.coloursAt z := mem_coloursAt_of_tileOf hT hzT
+      have h3 : (F.coloursAt z).ncard = 3 := by
+        refine le_antisymm (hle3 z hzB) ?_
+        have hsub : ({a, c, j} : Set (Fin 6)) ⊆ F.coloursAt z := by
+          intro i hi
+          rcases hi with rfl | rfl | rfl
+          · exact mem_coloursAt_of_tileOf h₁ (hKsub hz).1
+          · exact mem_coloursAt_of_tileOf h₂ (hKsub hz).2.1
+          · exact hjz
+        have := Set.ncard_le_ncard hsub (Set.toFinite _)
+        rwa [Set.ncard_eq_three.mpr ⟨a, c, j, hac, Ne.symm hja, Ne.symm hjc, rfl⟩] at this
+      have hendpt : (z ∈ ball u 1 ∨ F.VIn u z) → False := fun h =>
+        hno ⟨z, h3, h, T₁, T₂, h₁, h₂, hx₁, hx₂, (hKsub hz).1, (hKsub hz).2.1⟩
+      have hzu : dist z u = 1 := by
+        by_contra h
+        exact hendpt (Or.inl (lt_of_le_of_ne (mem_closedBall.mp hzB) h))
+      have hju : j ∈ F.coloursAt u := by
+        rcases hcolK z hz j hjz with h | h | h
+        · exact absurd h hja
+        · exact absurd h hjc
+        · exact h
+      exact disjoint_closedBall_of_isOpen hT.1.isOpen
+        (Set.disjoint_left.mpr fun w hwT hwb => hendpt (Or.inr ⟨hzu, j, hju, T, hT, hzT, w, hwT, hwb⟩))
+    -- the points of `ω(u)` in `cl T₁ ∩ cl T₂` are finitely many (`pseudo_finite`), so isolated
+    have hiso : ∀ z, ∃ ε > 0, ∀ w ∈ ball z ε, w ≠ z → w ∈ closure T₁ → w ∈ closure T₂ → ‖w - u‖ ≠ 1 := by
+      have hfin := B.pseudo_finite (mem_closedBall_self zero_le_one) B.cubic
+      set W := closure T₁ ∩ closure T₂ ∩ sphere u 1 with hW
+      have hWfin : W.Finite := by
+        refine (hfin.image (ringPt u)).subset ?_
+        rintro w ⟨⟨hw1, hw2⟩, hws⟩
+        rw [mem_sphere, dist_eq_norm] at hws
+        obtain ⟨θ', hθ', rfl⟩ := exists_Ico_ringPt hws
+        refine ⟨θ', ⟨hθ', ?_⟩, rfl⟩
+        have hsub : ({a, c} : Set (Fin 6)) ⊆ F.pseudoColours u (ringPt u θ') :=
+          insert_subset_iff.mpr ⟨⟨mem_coloursAt_of_tileOf h₁ hw1, hau⟩, singleton_subset_iff.mpr ⟨mem_coloursAt_of_tileOf h₂ hw2, hcu⟩⟩
+        have := Set.ncard_le_ncard hsub (Set.toFinite _)
+        rw [Set.ncard_pair hac] at this
+        omega
+      intro z
+      have hcl : IsClosed (W \ {z}) := (hWfin.subset sdiff_subset).isClosed
+      obtain ⟨ε, hε, hεb⟩ := Metric.isOpen_iff.mp hcl.isOpen_compl z (fun h => h.2 rfl)
+      exact ⟨ε, hε, fun w hw hwz hw1 hw2 hwu => hεb hw ⟨⟨⟨hw1, hw2⟩, by rw [mem_sphere, dist_eq_norm]; exact hwu⟩, hwz⟩⟩
+    have hKc : IsCompact K := (isCompact_closedBall u 1).inter_left (isClosed_closure.inter isClosed_closure)
+    have hxC : x ∈ C := mem_connectedComponentIn hxK
+    have hCK : C ⊆ K := connectedComponentIn_subset _ _
+    have hCcl : IsClosed C := isClosed_of_closure_subset
+      (isPreconnected_connectedComponentIn.closure.subset_connectedComponentIn (subset_closure hxC)
+        (closure_minimal hCK hKc.isClosed))
+    have hCc : IsCompact C := hKc.of_isClosed_subset hCcl hCK
+    -- the stars: two rays inside the disc; at a circle point, one ray exactly at a change point
+    have hstar : ∀ z ∈ C, ∃ d : ℕ, d ≤ 2 ∧ HasCurveStar C z d ∧ (dist z u < 1 → d = 2) ∧
+        (dist z u = 1 → ∃ φ, z = ringPt u φ ∧ (d = 1 ↔ ∃ δ > 0,
+          (∀ t ∈ Ioo 0 δ, ringPt u (φ - t) ∈ closure T₁ \ closure T₂ ∧ ringPt u (φ + t) ∈ closure T₂ \ closure T₁) ∨
+          (∀ t ∈ Ioo 0 δ, ringPt u (φ - t) ∈ closure T₂ \ closure T₁ ∧ ringPt u (φ + t) ∈ closure T₁ \ closure T₂))) := by
+      intro z hz
+      have hzK := hCK hz
+      have hzB := (hKsub hzK).2.2
+      rcases lt_or_eq_of_le (mem_closedBall.mp hzB) with hzu | hzu
+      · have h2 : (F.coloursAt z).ncard = 2 := by
+          have hsub : F.coloursAt z ⊆ {a, c} := by
+            intro j hj
+            by_contra hjac
+            simp only [mem_insert_iff, mem_singleton_iff, not_or] at hjac
+            obtain ⟨T, hT, hzT⟩ := (F.mem_coloursAt_iff_exists_tileOf (hdomB z hzB)).mp hj
+            obtain ⟨w, hwT, hwb⟩ := (closure_inter_open_nonempty_iff isOpen_ball).mp ⟨z, hzT, mem_ball.mpr hzu⟩
+            exact Set.disjoint_left.mp (hVout z hzK j T hT hzT hjac.1 hjac.2) hwT (ball_subset_closedBall hwb)
+          refine le_antisymm ?_ ?_
+          · have := Set.ncard_le_ncard hsub (Set.toFinite _); rwa [Set.ncard_pair hac] at this
+          · have := Set.ncard_le_ncard (show ({a, c} : Set (Fin 6)) ⊆ F.coloursAt z from
+              insert_subset_iff.mpr ⟨mem_coloursAt_of_tileOf h₁ (hKsub hzK).1,
+                singleton_subset_iff.mpr (mem_coloursAt_of_tileOf h₂ (hKsub hzK).2.1)⟩) (Set.toFinite _)
+            rwa [Set.ncard_pair hac] at this
+        exact ⟨2, le_rfl, (inner_star hzu (hdomB z hzB) (hnr z hzB) h2 h₁ h₂ hne (hKsub hzK).1 (hKsub hzK).2.1).connectedComponentIn hz,
+          fun _ => rfl, fun h => absurd h (ne_of_lt hzu)⟩
+      · obtain ⟨φ, -, rfl⟩ := exists_Ico_ringPt (show ‖z - u‖ = 1 by rw [← dist_eq_norm]; exact hzu)
+        obtain ⟨d, hd2, hdstar, hdiff⟩ := circ_local hac h₁ h₂ (hdomB _ hzB) (hnr _ hzB) (hle3 _ hzB) (hKsub hzK).1 (hKsub hzK).2.1
+          (fun j T hT hzT hja hjc => hVout _ hzK j T hT hzT hja hjc) (hiso _)
+        exact ⟨d, hd2, hdstar.connectedComponentIn hz, fun h => absurd hzu (ne_of_lt h), fun _ => ⟨φ, rfl, hdiff⟩⟩
+    choose! deg hdeg2 hdegstar hdegin hdegcirc using hstar
+    obtain ⟨N, hN, heven⟩ := exists_finset_even_sum_deg hCc hdegstar
+    -- the degree at `x` is `1`: its germs lie in different tiles
+    have hx1 : deg x = 1 := by
+      obtain ⟨φx, hφx, hiffx⟩ := hdegcirc x hxC hxu
+      rw [hiffx]
+      obtain ⟨⟨δ₁, hδ₁, hccw⟩, ⟨δ₃, hδ₃, hcw₂⟩⟩ := germ_side hac ha hc h₁ h₂ (hdomB x hxB) (hnr x hxB) hx₂
+      obtain ⟨δ₂, hδ₂, hcw₁⟩ := germ_side_cw ha h₁ (hdomB x hxB) (hnr x hxB) hx₁
+      have he : e φx = e θ := by
+        have := congrArg (· - u) hφx
+        simp only [hx, ringPt, add_sub_cancel_left] at this
+        exact this.symm
+      have hp : ∀ t, ringPt u (φx + t) = ringPt u (θ + t) := fun t => by simp only [ringPt, e_add, he]
+      have hm : ∀ t, ringPt u (φx - t) = ringPt u (θ - t) := fun t => by simp only [ringPt, sub_eq_add_neg, e_add, he]
+      refine ⟨min δ₁ (min δ₂ δ₃), lt_min hδ₁ (lt_min hδ₂ hδ₃), Or.inl fun t ht => ⟨?_, ?_⟩⟩
+      · rw [hm]
+        exact ⟨hcw₁ t ⟨ht.1, ht.2.trans_le ((min_le_right _ _).trans (min_le_left _ _))⟩,
+          hcw₂ t ⟨ht.1, ht.2.trans_le ((min_le_right _ _).trans (min_le_right _ _))⟩⟩
+      · rw [hp]
+        exact hccw t ⟨ht.1, ht.2.trans_le (min_le_left _ _)⟩
+    have hxN : x ∈ N := (hN x).mpr ⟨hxC, not_isRegularAt_of_hasCurveStar_one (hx1 ▸ hdegstar x hxC)⟩
+    -- the handshake: a second odd vertex
+    obtain ⟨q', hq'N, hq'x, hq'odd⟩ : ∃ q' ∈ N, q' ≠ x ∧ Odd (deg q') := by
+      by_contra hcon
+      have hev : ∀ v ∈ N.erase x, Even (deg v) := fun v hv => by
+        by_contra h
+        exact hcon ⟨v, Finset.mem_of_mem_erase hv, Finset.ne_of_mem_erase hv, Nat.not_even_iff_odd.mp h⟩
+      rw [← Finset.add_sum_erase N _ hxN, hx1] at heven
+      exact Nat.not_even_one ((Nat.even_add.mp heven).mpr (Finset.even_sum _ hev))
+    have hq'C : q' ∈ C := ((hN q').mp hq'N).1
+    have hq'K := hCK hq'C
+    have hq'B := (hKsub hq'K).2.2
+    have hq'u : dist q' u = 1 := by
+      rcases lt_or_eq_of_le (mem_closedBall.mp hq'B) with h | h
+      · have := hdegin q' hq'C h
+        rw [this] at hq'odd
+        exact absurd hq'odd (by decide)
+      · exact h
+    have hd1 : deg q' = 1 := by
+      have := hdeg2 q' hq'C
+      obtain ⟨m, hm⟩ := hq'odd
+      omega
+    -- the far end is less than `1` from `x` (a tile's diameter; `= 1` is FS112-N3-PAIRS (ii) with `noBoth`)
+    have hdist : dist x q' < 1 := by
+      have hle : dist x q' ≤ 1 := by
+        have := IsTile.closure_subset_closedBall B.valid h₁.1 hx₁ (hKsub hq'K).1
+        rw [mem_closedBall, dist_comm] at this
+        exact this
+      refine lt_of_le_of_ne hle fun h1 => ?_
+      have hcov1 : F.Covers u 1 := fun y hy => B.covers (closedBall_subset_closedBall (by norm_num) hy)
+      rcases pair_ii B.valid B.cubic B.cubic hcov1 hcov1 hxu hq'u h1
+          ⟨fun h => by rw [h, dist_self] at hq'u; norm_num at hq'u, by rw [hq'u]; norm_num⟩ hac (hpseudoK x hxK)
+          (hpseudoK q' hq'K) with h4 | ⟨θ₁, θ₂, hboth⟩
+      · exact absurd (hle3 x hxB) (not_le.mpr (by omega))
+      · rcases noBoth B.valid (hdomB q' hq'B) hboth with h4 | hr
+        · exact absurd (hle3 q' hq'B) (not_le.mpr (by omega))
+        · exact hnr q' hq'B hr
+    obtain ⟨φ, hφ, hiffq⟩ := hdegcirc q' hq'C hq'u
+    obtain ⟨δ, hδ, hG⟩ := hiffq.mp hd1
+    subst hφ
+    have hq'd := hdomB _ hq'B
+    have hcolq := hcolK _ hq'K
+    have hcolq' : ∀ j ∈ F.coloursAt (ringPt u φ), j = c ∨ j = a ∨ j ∈ F.coloursAt u := fun j hj => by
+      rcases hcolq j hj with h | h | h
+      · exact Or.inr (Or.inl h)
+      · exact Or.inl h
+      · exact Or.inr (Or.inr h)
+    have hm1 : ∀ t : ℝ, φ + Side.cw.sign * t = φ - t := fun t => by simp only [Side.sign]; ring
+    have hp1 : ∀ t : ℝ, φ + Side.ccw.sign * t = φ + t := fun t => by simp only [Side.sign, one_mul]
+    rcases hG with hG | hG
+    · -- the same orientation as at `x`: two change points `a → c` on `C`
+      have haq : F.GermPseudo u φ .cw a := germPseudo_of_side h₁ h₂ hq'd (hnr _ hq'B) (hKsub hq'K).2.1 hau hcolq hδ
+        (fun t ht => by rw [hm1]; exact (hG t ht).1)
+      have hcq : F.GermPseudo u φ .ccw c := germPseudo_of_side h₂ h₁ hq'd (hnr _ hq'B) (hKsub hq'K).1 hcu hcolq' hδ
+        (fun t ht => by rw [hp1]; exact (hG t ht).2)
+      exact B.orient_pair hac h₁ h₂ hCcl isPreconnected_connectedComponentIn (fun z hz => hCK hz) hxC hq'C
+        (Ne.symm hq'x) ha hc haq hcq
+    · -- the opposite orientation: a returning pair through `x`, against `hout`
+      have hcq : F.GermPseudo u φ .cw c := germPseudo_of_side h₂ h₁ hq'd (hnr _ hq'B) (hKsub hq'K).1 hcu hcolq' hδ
+        (fun t ht => by rw [hm1]; exact (hG t ht).1)
+      have haq : F.GermPseudo u φ .ccw a := germPseudo_of_side h₁ h₂ hq'd (hnr _ hq'B) (hKsub hq'K).2.1 hau hcolq hδ
+        (fun t ht => by rw [hp1]; exact (hG t ht).2)
+      obtain ⟨φ', hφ', heφ'⟩ := exists_mem_Icc_e_eq (θ - π) φ
+      have hq'φ' : ringPt u φ = ringPt u φ' := by simp only [ringPt, heφ']
+      have habs : |φ' - θ| ≤ π := abs_le.mpr ⟨by linarith [hφ'.1], by linarith [hφ'.2]⟩
+      have hlt : |φ' - θ| < π / 3 :=
+        ((dist_ringPt_ringPt_cmp_one u habs).2.1).mp (by rw [← hq'φ', dist_comm]; exact hdist)
+      have hφ'θ : φ' ≠ θ := fun h => hq'x (by rw [hq'φ', h])
+      have hcq' := hcq.congr_e heφ'.symm
+      have haq' := haq.congr_e heφ'.symm
+      have hCconn : IsConnected C := ⟨⟨x, hxC⟩, isPreconnected_connectedComponentIn⟩
+      have hq'C' : ringPt u φ' ∈ C := hq'φ' ▸ hq'C
+      rcases lt_or_gt_of_ne hφ'θ with hlt' | hgt'
+      · exact hout φ' θ ⟨hlt', by linarith [(abs_lt.mp hlt).1], c, a, Ne.symm hac, hcq', haq', ha, hc, T₂, T₁, h₂, h₁, C,
+          hCconn, hq'C', hxC, fun z hz => ⟨⟨(hKsub (hCK hz)).2.1, (hKsub (hCK hz)).1⟩, (hKsub (hCK hz)).2.2⟩⟩
+          ⟨θ, ⟨hlt'.le, le_rfl⟩, rfl⟩
+      · exact hout θ φ' ⟨hgt', by linarith [(abs_lt.mp hlt).2], a, c, hac, ha, hc, hcq', haq', T₁, T₂, h₁, h₂, C, hCconn,
+          hxC, hq'C', fun z hz => hCK hz⟩ ⟨θ, ⟨le_rfl, hgt'.le⟩, rfl⟩
+  rcases hq3 with h3 | -
+  · by_cases hqb : q ∈ ball u 1
+    · exact hshort h3 hqb
+    · exact main
+  · exact main
 
 /-- **A non-returning change point has an endpoint** (`[SokolovVoronov2025]` Prop. 19(b) as FS110-CD Lemma E and FS110-CE R1–R4 repaired it,
 path-free in its conclusion) — **planar core**: a change point `r(θ)` of the pseudo-colouring of `ω(u)` with pair `{a, c}`, outside every returning

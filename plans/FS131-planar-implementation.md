@@ -56,6 +56,25 @@ Quot.sound]` (`data/fs131/ip/axioms-stage5.txt`). Namespace `HadwigerNelson.Plan
 - `ArcMap.IsSectorChart.eq_two`, `.inter_closure_two`, `.hasRepeatedColour_of_col_eq`, `.col_mem_coloursAt`, `.col_eq_of_mem_sector`,
   `ArcMap.hasCurveStar_of_branches`, `ArcMap.coloursAt_subset_of_mem_interiorPts`, `ArcMap.fin_two_eq_of_ne` (`MapTopology` § D)
 
+**FS131-IP4 (stages 12–)**, all [kernel] (stage-14 build `build/gate/build/20261005T032249Z-941152.log`, stage-15 build
+`build/gate/build/20261005T040047Z-1228628.log`), on the standard three except where `sorryAx` is named (`data/fs131/ip/axioms-ip4-stage14.txt`,
+`data/fs131/ip/axioms-ip4-stage15.txt`, checked by `tools/fs131_ip_axioms.py`):
+
+- `ArcMap.BaseCtx.retArcs_not_abut` — **NEST-A**, as stated (`Plane/ValidMap/BaseWalk`); standard three
+- `ArcMap.BaseCtx.retArcs_not_interleaved` — **NEST-X**, as stated (`Plane/ValidMap/BaseWalk`); `sorryAx` only through `cor3` (wave 5's leaf, used by
+  statement); so `retArcs_nested` rests on `cor3` alone
+- `ArcMap.BaseCtx.endpoint_of_far_end` — **END-C**, as stated (`Plane/ValidMap/BaseWalk`), hence `exists_endpoint` (FS110-CD Lemma E with CE R1–R4);
+  `sorryAx` only through `pseudo_finite`, `pair_ii`, `noBoth`, `cor3` (waves 4–5's leaves, used by statement)
+- `orient_aux`, `orient` — **one-sidedness**: a continuum in `B̄(u, 1)` with an open set one-sided along it cannot have that set on the counter-clockwise side of
+  two of its circle points (`Plane/ValidMap/MapTopology` § E); `ArcMap.BaseCtx.orient_pair` (`BaseWalk`)
+- `ArcMap.circ_local` — the common boundary of two tiles at a point of `ω(u)`: a star of at most two rays in the closed disc, one exactly at a change point
+  (`MapTopology`)
+- children `inter_nonempty_of_interleaved_radius`, `polarPt_ne_of_sub`, `ringPt_eq_polarPt`, `branch_side`, `hasCurveStar_zero`, `exists_annular_out`,
+  `exists_annular_in`, `subset_or_subset_of_closed`, `side_contra`, `exists_Ico_ringPt`, `disjoint_closedBall_of_isOpen`, `BranchGerms.shared_germ3`,
+  `ArcMap.tile_side`, `ArcMap.germ_side`, `ArcMap.germ_side_cw`, `ArcMap.germPseudo_of_side`, `ArcMap.inner_star`, `ArcMap.coloursAt_subset_near`,
+  `ArcMap.IsSectorChart.sector_subset_tile_of_mem`, `.tile_inter_ball_eq`, `.mem_closure_some_sector`, `ArcMap.TileOf.eq_colour`,
+  `ArcMap.GermPseudo.congr_e`, `.eq_of_same` (`MapTopology`); `ArcMap.BaseCtx.colours_sub` (`BaseWalk`; `sorryAx` through `cor3`)
+
 IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
 
@@ -686,3 +705,72 @@ Wall clock from stage 12's commit (≈ 02:55Z) to this stage (03:41Z), with stag
 **Re-price of what is left** (implementer sessions): `endpoint_of_far_end` 0.5 (its local case list at circle points is written, `circ_local` iteration-green
 but for its last case split; then the handshake, the distance bound and the assembly); F-LOC/CONN/INF/ONE and F-SEP 0.5; the adversaries 0.2; F-RING
 unmeasured (whether `orient`'s class argument replaces boundary walks there is the first thing to look at).
+
+## Stage 15 — SAVED: `endpoint_of_far_end` proved — the far end re-selected as an odd vertex, its orientation by `orient_pair`
+
+### 15.1 Proved
+
+- **`endpoint_of_far_end`** (statement unchanged; it now closes `exists_endpoint`, FS110-CD Lemma E with CE's R1–R4). By contradiction, with no endpoint:
+  every point of `K = cl T₁ ∩ cl T₂ ∩ B̄(u, 1)` carries `a`, `c` and colours of `u` (`colours_sub`: a third colour off `u`'s is `cor3`'s configuration);
+  a third tile at a point of `K` misses `B̄(u, 1)` (else the point is an endpoint — inside, or V-in); the points of `ω(u)` in `cl T₁ ∩ cl T₂` are finitely
+  many (`pseudo_finite`, used by statement), so isolated. On the component `C` of `r(θ)` in `K` every point has a curve star: two rays inside the disc
+  (`inner_star`), and at a point of `ω(u)` a star of `d ≤ 2` rays with `d = 1` exactly when the two germs of `ω(u)` lie in different tiles' closures
+  (`circ_local`). At `r(θ)` the germs differ (`germ_side`, `germ_side_cw`), so `d = 1`; the handshake (`exists_finset_even_sum_deg`, IP3's BG) gives a
+  second odd vertex `q′`, on `ω(u)`, a change point between `a` and `c` (IP2's finding 1: the far end re-selected as an odd vertex, so spikes and V-out
+  touches never arise). Its germs' pseudo-colours (`germPseudo_of_side`): if `q′` runs `a → c` like `r(θ)`, `orient_pair` refutes it; so it runs `c → a`.
+  `|r(θ) − q′| ≤ 1` (one `a`-tile's closure), and `= 1` is FS112-N3-PAIRS (ii) (`pair_ii`) with `noBoth` (the bi–bi exclusion), so the angle is below `60°`
+  (`dist_ringPt_ringPt_cmp_one`), and `(r(θ), q′)` with the continuum `C` is a returning pair whose arc holds `r(θ)` — against `hout`. The given far end `q`
+  is used only for the shortcut "three colours inside the disc is an endpoint at once" (its other cases need no `q`).
+- **`circ_local`** (`MapTopology`, the D-cut at a general circle point; FS110-CD § 2.3's case list): at `r(φ)` in the closures of an `a`-tile and a `c`-tile,
+  no repeated colour, at most three colours, every other tile there off `B̄(u, 1)`, no other point of `ω(u) ∩ cl T₁ ∩ cl T₂` nearby: the common boundary in
+  the closed disc is a star of `d ≤ 2` rays, and `d = 1` iff the germs lie in different closures. Two germs (two colours) or three (three colours, via the
+  shared germs of `shared_germ3`); each branch strictly inside or outside (`branch_side`: `‖b(s) − u‖² − 1 = s(s + 2Re(conj(z − u) e(β + arcsin(κs/2))))`,
+  exactly `s²(1 − κ Im P)` when tangent); a germ of `ω(u)` lies in one closure (`subset_or_subset_of_closed`); "same germs" is refuted at `d = 1` by
+  `side_contra` (a tile's one sector near `z`, missing `ω(u)`, cannot reach both sides) and forced at `d ∈ {0, 2}` by a thin annular sector inside or outside
+  (`exists_annular_in`, `exists_annular_out`). Children: `hasCurveStar_zero`, `exists_Ico_ringPt`, `disjoint_closedBall_of_isOpen`,
+  `IsSectorChart.tile_inter_ball_eq`, `IsSectorChart.mem_closure_some_sector`, `coloursAt_subset_near`; in `BaseWalk` `BaseCtx.colours_sub`.
+- **Generalization** (for the record): `circ_local` and `orient` are pure statements about an `ArcMap` with any number of colours; nothing of the base
+  enters them.
+
+### 15.2 The stage-15 build and the receipt
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`MapTopology` 13 s, `BaseWalk` 2.0 s, `MapGraph`, `BaseDense`,
+`Proofs`), 9 modules with warnings, every warning `declaration uses 'sorry'`; `MapTopology` built with no warning; `BaseWalk`'s 12 `sorry` declarations are
+all wave 5's lane's (`reduce`, `select`, `pseudo_*`, `exists_pseudoCircle`, `retArc_partner`, `retArcs_finite`, `vin_antipodal`, `eleventh_antipodal`,
+`l3_base`, `hex_base`); exit 0** (`build/gate/build/20261005T040047Z-1228628.log`; `data/fs131/ip/build-ip4-s15.log`; grep for `warning|error` minus the
+`sorry` lines leaves only Lake's `--no-build` probe line). `tools/check_architecture.py`: PASS (`data/fs131/ip/check-architecture-ip4-s15.txt`; the
+`MapTopology` and `BaseWalk` rows' descriptions gain IP4's sentences, no Imports cell changed).
+
+Axioms: `data/fs131/ip/AxiomsIP4b.lean` → `data/fs131/ip/axioms-ip4-stage15.txt`, checked by `tools/fs131_ip_axioms.py` against
+`data/fs131/ip/axioms-ip4b-names.txt`: **17 records on the standard three (the 16 new `MapTopology` children and `retArcs_not_abut`); 8 controls on
+`sorryAx`: `colours_sub` (through `cor3`), `endpoint_of_far_end` and `exists_endpoint` (through `pseudo_finite`, `pair_ii`, `noBoth`, `cor3`, all used by
+statement), `retArcs_nested`, and the four sources themselves printed beside them**; planted fault (`endpoint_of_far_end` listed as clean) → `NOT CLEAN …`,
+exit 1. `scripts/Axioms.lean`'s FS131-KP block gains the 17 children. So **every `sorryAx` left under the three leaves comes from wave 4's or wave 5's own
+leaves used by statement** (`pseudo_finite`, `pair_ii`, `noBoth`, `cor3`); the planar chain adds none.
+
+### 15.3 Leaves left (named), and for the coordinator (done-means 4)
+
+Left in this branch's files: **F-LOC, F-CONN, F-INF, F-ONE, F-SEP** (`MapGraph`), **`not_isHoleOf_chain`, `isHoleOf_cluster`**, **F-RING**. Worked on paper,
+for the successor (not formalized):
+- **F-INF and F-CONN** read one lemma: *every point of the plane lies in the closure of an outer tile*. `exists_outermost` (E4-OUTERMOST steps 1–2, held)
+  gives, at any point, a tile there enclosed by no tile; a tile inside a hole `Hc` of `T′` is enclosed by `T′` (its component in `(cl T′)ᶜ` lies in the
+  separated, bounded `Hc`), so that tile is outer. Then F-INF: outer fills are bounded (`fill T ⊆ (outerDom T)ᶜ ⊆ B̄(p, 1)`: a hole misses the unbounded
+  component, which is connected and so lies on one side of the separation), and they cover the plane. F-CONN: `mem_of_touch_closed` on `ℂ` with the outer
+  tiles' closures.
+- **F-LOC**: `fill x ⊆ B̄(p, 1)` (as above), so a neighbour's filled closure meets `B̄(p, 1)` and its tile meets `B̄(p, 3)`; `finite_tiles_closure_inter`.
+- **The two adversaries** both need `(cl T)ᶜ ⊆ (B̄(0,1))ᶜ ∪ B(c₁, ¼) ∪ B(c₂, ¼)` for `T = B(0, 1) ∖ (B̄(c₁, ¼) ∪ B̄(c₂, ¼))` (every other point is a limit of
+  `T`: outward along the radius from a small disc's centre, or `1 − δ + i√δ` at the touching point `1`); then a separated part of `(cl T)ᶜ` is a union of
+  those three connected open pieces, and the touching points decide.
+- **F-RING: not reached, not measured** (done-means 4 asks for a measurement from its first child; I have none to give). One observation for the
+  coordinator's call: the class argument of `orient` (a tile's side of a separating continuum is one class off it, by the crossing lemma) is the tool
+  F-RING's separation clause ("`M̂ − x − y` is connected unless `y` appears twice apart") most plausibly needs; boundary walks may not.
+
+### 15.4 Measured cost
+
+Wall clock from stage 14's commit (03:41Z) to this stage (04:12Z): about 30 minutes of writing plus one 9-minute build, about 1,050 lines (`MapTopology` + ≈ 820, `BaseWalk` + ≈ 230), one build.
+`circ_local` (≈ 520 lines) was most of it; `endpoint_of_far_end`'s assembly over it took one iteration.
+
+### 15.5 Hand-back
+
+By the session's token counter I am at about 660k, past the brief's 500k line (I noticed at this stage; the line was crossed inside `circ_local`'s
+iterations, with no stage then saveable). I hand back here, at a saved stage, with the leaves of § 15.3 named. Slip, mine: the line passed unwatched.
