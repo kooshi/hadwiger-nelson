@@ -1,0 +1,7 @@
+Proofs/HadwigerNelson/Packed.lean:1
+Proofs/HadwigerNelson/Plane/ValidMap/BaseDense.lean:7
+Proofs/HadwigerNelson/Plane/ValidMap/BendCollar.lean:1
+Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean:3
+Proofs/HadwigerNelson/Plane/ValidMap/HexRing.lean:1
+Proofs/HadwigerNelson/Plane/ValidMap/Terminal.lean:9
+Proofs/HadwigerNelson/Plane/ValidMap/UnitArc.lean:5

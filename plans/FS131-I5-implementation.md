@@ -2045,3 +2045,33 @@ eight new theorems after the stage-44 line. `tools/fs131_i5_stmt_check.py d61ede
 (each docstring names its route). **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 46 — SAVED
+
+## Stage 47 — SAVED (FS131-M5): the readback, and the as-given build
+
+*FS131-M5, wave 5's sync (Opus), continuing this record from Stage 46 (`caada347`). Brief: `data/fs131/briefs/FS131-M5-sync.md` (main tree). My set (ruling
+379 (a)–(b)): merge `main` into `fs131-w5` (`main`'s side for every wave-4 module, `framePt → fromFrame` in wave 5's files, identical copies removed, checked),
+then, as budget allows, four `BaseDense` children of `exists_preBend`. Never `main`, `BendCollar`'s statement, `HexRing`/`BaseWalk` beyond the merge,
+`Terminal`, or the gate scripts' recorded counts.*
+
+### 47.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_i5_quote_check.py` (I5j's, run, not edited) on the brief: **11 quotations, 11 verbatim**, exit 0 (`data/fs131/m5/quote-check.txt`); `--plant`
+reports 1 not verbatim, exit 0 as the control expects (`quote-check-plant.txt`). The eleven: `CLAUDE.md` § Counter-priors; inventory items 379, 378, 318, 375,
+358, 369; the first lines of `ncard_coloursAt_le_two_of_mem_openArc`, `unenclosedC_of_homeomorph`, `exists_maxRingArc`, `hfree_of_baseHyp` (`BaseDense` at
+`caada347`). Read in full: items 318, 375–379; this record's Stages 39 and 43–46; ML1's Stage 14 (`fs131-w4mm`'s `plans/FS131-IMM-implementation.md`: it
+took `main`'s side for every wave-4 module, restored two declarations by script, checked dupes before the merge with a new tool and statements three-way
+with `tools/fs131_wl_mergestmts.py`).
+
+### 47.2 The as-given build (`caada347`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1759 modules already
+up to date, nothing built, 6 modules with warnings**, exit 0 (`build/gate/build/20261005T094501Z-3096603.log`; driver log `data/fs131/m5/build-asgiven.log`);
+every warning `declaration uses 'sorry'`.
+
+### 47.3 The ground before the merge
+
+Merge base `111830c8`; this branch changed 319 files since, `main` 539; **both**: `ARCHITECTURE.md`, `Proofs.lean`, `scripts/Axioms.lean`,
+`Proofs/HadwigerNelson/Plane/ValidMap/BaseSteps.lean` — as the brief says. `sorry` by file (`grep -rcw`, `data/fs131/m5/sorry-counts-before.txt`):
+`BaseDense` 7, `BendCollar` 1, `Contact` 3, `HexRing` 1, `Terminal` 9, `UnitArc` 5, and `Packed` 1 (a word in a docstring, not a term).
+
+## Stage 47 — SAVED
