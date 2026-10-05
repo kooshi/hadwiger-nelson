@@ -1524,3 +1524,41 @@ job's three):
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 33 — SAVED
+
+## Stage 34 — SAVED: FS131-I5m's readback
+
+*FS131-I5m, wave 5's ninth implementer (Opus), resuming this record at its first unsaved stage (Stage 33 SAVED, `ad8ff032`; branch head `298a3c0b`).
+Brief: `data/fs131/briefs/FS131-I5m-wave5.md` (main tree). My set (ruling 344 (b)): `rot_in`, then `bv_nd`, `bv_l3`, then `BaseDense`'s `exists_preBend`
+over the strengthened-bend child (ruling 317 (b)) — 4 `sorry` declarations. Never `Terminal`, `cv_exists`, `disc1_local`, or the planar jobs' declarations.
+
+### 34.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_i5_quote_check.py` (I5j's) on the brief: **12 quotations, 12 verbatim**, exit 0; `--plant` (one letter changed in the first quotation)
+reports it MISMATCH, exit 0 under `--plant` only when caught.
+
+| quotation (opening words) | source | result |
+|---|---|---|
+| "Do not consider Lean formalization a cost. …" | `CLAUDE.md` § Counter-priors | verbatim |
+| "- **`rot_in`** (M): the mirror of `rot_out` (stage 32). …" | this record, Stage 33 | verbatim |
+| "- **`bv_nd`** (M–H): BASE-V § 1b.2 steps 2–4. …" | this record, Stage 33 | verbatim |
+| "- **`bv_l3`** (H): I5g's note stands — …" | this record, Stage 33 | verbatim |
+| "- **`exists_preBend`** (H): the strengthened bend (ruling 317 (b)), …" | this record, Stage 33 | verbatim |
+| "336. **FS131-I5j handed back** …" | `plans/FS131-close-inventory.md` item 336 | verbatim |
+| "344. **Rulings on IMM2's held items, and its slot.** …" | the inventory, item 344 | verbatim |
+| "317. **Rulings on I5f's questions, and its slot.** …" | the inventory, item 317 | verbatim |
+| "226. **FS131-E4 done, harness ≈ 480k** …" | the inventory, item 226 | verbatim |
+| "274. **Rulings on QA3's held items and the freed slot.** …" | the inventory, item 274 | verbatim |
+| "**It may**: add children anywhere in the wave's modules — …" | `plans/FS131-w5-kernel-plan.md` § 10.2 | verbatim |
+| "295. **Ruling: MERGE leaves wave 4; …" | the inventory, item 295 | verbatim |
+
+Items 226, 274, 295, 317, 336, 344 read in full; I5j's Stages 30–33 and I5g's Stage 29 read; the kernel plan's §§ 3.2, 8.2, 10.2 read.
+
+### 34.2 The as-given build (`298a3c0b`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1754 modules already
+up to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/20261005T061811Z-1883588.log`; driver log
+`data/fs131/i5m/build-stage34-asgiven.log`). Every warning is `declaration uses 'sorry'`: wave 5's `Terminal` 9, `HexRing` 3, `MapGraph` 3, `BaseWalk` 3,
+`BaseDense` 3, `Dense` 1 (**22**, item 336's count; mine 4: `HexRing`'s `rot_in`, `bv_nd`, `bv_l3` and `BaseDense`'s `exists_preBend`), and wave 4's stale
+`Contact` 3, `UnitArc` 5. `tools/fs131_i5_stmt_check.py d61edefc`: PASS.
+
+## Stage 34 — SAVED
