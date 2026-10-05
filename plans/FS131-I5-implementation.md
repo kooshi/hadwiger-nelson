@@ -2047,3 +2047,82 @@ to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/202
 I5n's count.
 
 ## Stage 43 — SAVED
+
+## Stage 44 — SAVED (FS131-I5p): `y3_end_needs_of_not_mem` proved, so `y3_end_needs`, `cv_hd_main` and `cv_hd` are kernel theorems; the handover
+
+**What this stage proves.** `y3_end_needs_of_not_mem` (YB3 § 3.1 Steps 3–4, the case `g ∉ P_cl(N)`) no longer uses `sorry`. With it, `y3_end_needs`,
+`cv_hd_main` and `cv_hd` read no open leaf: kernel theorems on the standard three. No statement changed; no `axiom`; no `native_decide`. Seven children
+added, all kernel; one existing proof (`flank_two_sectors_at_S_gen`) re-routed through its new generalization, statement unchanged.
+
+**The route, against YB3 § 3.1** (every step went through in Lean; none failed):
+
+| YB3 | Lean |
+|---|---|
+| Step 3: at `N`, `h`'s two horns `Q±`, upper flanks `x₁ ≠ x₂`, lower flank(s), all outside `{c, h}` | `seven_colours_at_N`'s chart count, unchanged, with `x ≠ g` read from `x ∈ P_cl(N)` and `g ∉ P_cl(N)` in place of U1 for `g` |
+| Step 3 (a): the lower side is one colour `y` | **case split on the two lower chart colours `y₁ = y₂`**: if they differ, `c, g, h, x₁, y₁, x₂, y₂` are seven distinct colours (MERGE separates `y₁`, `y₂` on their sectors) — no step needed beyond `seven_colours_at_N`'s |
+| Step 4: an `x₁`-shadow on `Q₊` comes from an in-type `x₁` at `N + n`, so `Q₊`'s upper arc is on `ω(N + n)` | `shadow_of_not_shave` at `N`, `srcG_of_shadow` (the out-type alternative sits at `E`, where `x₁` is absent), `outType_N_of_flankAbove`: `μ₂ = 1`; the mirror for `x₂` on `Q₋` (`srcH_of_shadow`, `outType_S_of_flankBelow`): `μ₃ = −1` |
+| `y` has two sectors at `N + n` | **new** `flank_two_sectors_at_S_of_flanks` (E5 § 3.4 with its three-colour hypothesis replaced by the flank facts it reads) at `N` in the frame turned by `π`; the chart flanks named by **new** `IsSectorChart.isFlankAbove_of_col`/`isFlankBelow_of_col` |
+| no MERGE: `y`-horns `R±` along `±a` at `N + n` | `isStuck_of_hasRepeatedColour`; **new** `horns_of_two_sectors_at` (the second half of `lower_flank_horns_at_N_of`, at any point) |
+| upper flanks `z₁, z₂` of `R±`: not `y`, not `h` (pinch) | the `three` count; U1 at `N + n` for `h` (`coneAt_N_subset_of_horn`, `coneAt_S_subset_of_horn` turned, now that `μ₂ = 1`, `μ₃ = −1`) |
+| not `c`, `x₁`, `x₂` ("their sectors at `N` have `d·n > 0`, while `z_i`'s tile at `N + n` lies outside `B̄(N, 1)`") | **new** `not_inType_S_of_flankAbove`/`not_inType_N_of_flankBelow` (a flank above a bound `≥ −1` is outside `B̄(N, 1)`): against the in-type `x₁`, `x₂` contacts of Step 4 directly; for `c`, the contact would be out-type and `coneAt_subset_allowedCone` bars `c`'s direction at `N` (in the open upper half-turn, **new** `cos_pos_of_mem_angleIoo`) |
+| `z₁, z₂` outside the five, so the seventh colour | both are `g` (pigeonhole in `Fin 6`); two `g`-sectors at `N + n` separated by `h`'s (`mem_angleIoo_half`), `g` absent at the pole `N`: MERGE at `N + n` (`mergeAvailable_of_two_sectors`) |
+
+**A simplification over YB3's Step 4** (for the report): `z₁ ≠ z₂` is never proved separately — both are forced to be `g`, and two `g`-sectors give the
+MERGE; and YB3's sharpening (b) (`N` centres unit arcs of length `≥ 180°`) is not needed.
+
+**Children added** (all in `Plane/ValidMap/Terminal`): `cos_pos_of_mem_angleIoo` (angle section); `flank_two_sectors_at_S_of_flanks` (before
+`flank_two_sectors_at_S_gen`, which now cites it); `IsSectorChart.isFlankAbove_of_col`, `IsSectorChart.isFlankBelow_of_col` (copies of `Contact`'s
+`exists_flank_after`/`_before` with the colour named), `not_inType_S_of_flankAbove`, `not_inType_N_of_flankBelow`, `horns_of_two_sectors_at` (before
+`lower_flank_horns_at_N_of`). Names checked unique by `git grep` over `main` (`3ef0895c`), `origin/fs131-w5`, `origin/fs131-w5p`, `origin/fs131-ww`,
+`origin/fs131-w4mm`, `origin/fs131-w5c` (each ref resolved; positive control `lower_flank_horns_at_N_of` found). Models in the docstrings: `bowtie`
+(`bowtie_flanks`) for the two flank lemmas; `bowtie` at `0` for `horns_of_two_sectors_at`'s point hypotheses, `Covers` the caller's.
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 72149b07`: **PASS** (exit 0, `data/fs131/i5p/stmt-check-44.txt`); and against my launch commit,
+`tools/fs131_i5h_stmt_check.py da09c260` (so I5n's `y3_end_needs_of_not_mem`, added after `72149b07`, is covered): **PASS** (`stmt-check-44-da09.txt`),
+`--self-test`: all three plants **fired**, unplanted control PASS. `tools/fs131_i5n_merge_swap.py --check`: **IDENTICAL** (`merge-swap-44.txt`).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses
+'sorry'`**, exit 0, 8 min 48 s (`build/gate/build/20261005T082921Z-2689945.log`, ends "Build completed successfully (5370 jobs)"; its one `error:` line is
+the up-to-date probe's "target is out-of-date"; driver log `data/fs131/i5p/build-stage44.log`). `Terminal`'s `sorry` declarations: **2** (`exists_red`
+l. 806, `exists_terminal` l. 818); wave 5 **19** (`Terminal` 2, `BaseDense` 2, `BaseWalk` 5, `HexRing` 6, `MapGraph` 3, `Dense` 1; 20 at launch).
+
+**Axioms, read from this build's oleans** (`data/fs131/i5p/I5pAxioms44.lean` → `I5pAxioms44.out`, 12 GiB slot, exit 0): `y3_end_needs_of_not_mem`, the
+seven children, `flank_two_sectors_at_S_gen`, `y3_end_needs`, `cv_hd_main`, `cv_hd`, `seven_colours_at_N` on `[propext, Classical.choice, Quot.sound]`.
+`cv_class`, `c_double`, `c_ends` read `sorryAx` through this branch's stale wave-4 `flankQ_upper`/`flankQ_lower` only (printed: `flankQ_upper_of_qrOnly`,
+`flankQ_lower_of_qrOnly` read `sorryAx`; `main`'s `UnitArc` has no `sorry`), as I5l recorded. Controls: `exists_red`, `exists_terminal`, `exists_merge`
+read `sorryAx`. `scripts/Axioms.lean`: the seven new records added to the "FS131-I5h" block.
+
+**Re-pricing.** `y3_end_needs_of_not_mem` cost about 110k tokens of context, most of it reading the shadow, flank and chart toolkit; the whole proof
+(about 330 lines with its children, a scratch file importing the built `Terminal`) elaborated at the third attempt, after two one-line fixes (a stray
+copied docstring line; an `rintro rfl` that substituted the wrong variable). Iterating on a scratch file that imports the built module took about 6 s
+per run, against about 9 min per build: the cheap loop for this lane.
+
+### Theorems this phase proved
+
+All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5p/I5pAxioms44.out`), in `Plane/ValidMap/Terminal.lean`:
+- `HadwigerNelson.Plane.ArcMap.y3_end_needs_of_not_mem` — FS112-Y3-END-NEEDS's case `g ∉ P_cl(N)` (YB3 § 3.1 Steps 3–4); with it, now closed beneath:
+  `ArcMap.y3_end_needs` (FS112-Y3-END-NEEDS, corrected, inventory item 69), `ArcMap.cv_hd_main` (FS114-CV-HD's main clause), `ArcMap.cv_hd`
+  (FS114-CV-HD's equivalences).
+- `ArcMap.flank_two_sectors_at_S_of_flanks` — E5 § 3.4 at any bounds over the flanks (no three-colour hypothesis).
+- `ArcMap.horns_of_two_sectors_at` — a repeated colour at a stuck point, carried at a pole, has two horns along that pole's axis.
+- `ArcMap.not_inType_S_of_flankAbove`, `ArcMap.not_inType_N_of_flankBelow` — a flank beyond a bound `∓1` is never in-type at the vertex, seen
+  from the pole.
+- `ArcMap.IsSectorChart.isFlankAbove_of_col`, `ArcMap.IsSectorChart.isFlankBelow_of_col` — a chart sector's colour is the flank colour at its germ.
+- `cos_pos_of_mem_angleIoo` — a direction in the open upper half-turn has positive `n`-component.
+
+### The handover: what is proved, what is left (for the next `Terminal` implementer)
+
+**Proved this session**: the `Terminal` half's CV-HD/Y3 block is closed in the kernel — `y3_end_needs`, `cv_hd_main`, `cv_hd` on the standard three
+(`cv_class`, `c_double`, `c_ends` too once `main`'s `flankQ_*` arrive at the merge).
+
+**Left (2 in `Terminal`)**: **`exists_red`, `exists_terminal`** (H, the limit constructions; not started). They may cite `exists_merge` in ruling 269's
+form (ruling 348 (a)); `exists_merge` is itself open (wave 4's MERGE lane). What I read of them: `IsModification` (`Chain.lean`) asks the same domain,
+`RingArcsWithin` (no unit arc created) and `coloursAt_subset` at points of `≥ 4` colours only — it does not ask `M` to agree with `F` anywhere else, the
+"weak" reading of plan § 2.2. The plan's route (§ 4 leaves 2–3, § 9.1 l. 391): a locally finite count descending per move inside a ball, the limit by
+local eventual constancy; N2-RED also needs the whole-arc bends (`bend_toward`, `bend_away` are open on this branch's stale `UnitArc`) and N2-TERM N4-TERM's
+`Φ`. Price: one to two sessions each, as I5n wrote; the limit of a sequence of `ArcMap`s (its arcs locally finite, its colouring valid) is the new
+infrastructure and is not in the repository.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 44 — SAVED

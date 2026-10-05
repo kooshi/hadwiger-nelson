@@ -286,6 +286,13 @@ theorem mem_angleIoo_half {β β' x α φ φ' : ℝ} (he : e β = e α) (he' : e
   subst hkk
   refine mem_iUnion.mpr ⟨k' - m₂, ?_, ?_⟩ <;> push_cast <;> nlinarith
 
+/-- A direction strictly inside the upper half-turn `(α, α + π)` (mod `2π`) has positive `n`-component, `n = e (α + π/2)`. -/
+theorem cos_pos_of_mem_angleIoo {x α : ℝ} (hx : x ∈ angleIoo α (α + π)) : 0 < Real.cos (x - (α + π / 2)) := by
+  obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp hx
+  have : x - (α + π / 2) = (x - α - 2 * π * m - π / 2) + (m : ℤ) * (2 * π) := by ring
+  rw [this, Real.cos_add_int_mul_two_pi, Real.cos_sub_pi_div_two]
+  exact Real.sin_pos_of_pos_of_lt_pi (by linarith) (by linarith)
+
 namespace BranchGerms
 
 variable {n : ℕ} (G : BranchGerms n)
@@ -1733,15 +1740,16 @@ theorem flank_coneAt_S (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {α κ₂ : 
   refine ⟨y, hy, hyS, hyε, ?_⟩
   simpa using hdir
 
-/-- **E5 § 3.4 at any bounds** (E5 § 3.5's "by § 3.4's argument with `cv_class`'s bounds"): at a stuck vertex with three colours whose
-two-sector colour `c` has horns along `±e α` with bounds in `[−1, 1]`, an upper flank `g` with no in-type contact at `N` has at least two
-sectors at `S′ = v − n` for every small radius. `flank_two_sectors_at_S`'s argument (E5's F1–F6), with both ends of the half-disc closed:
-a `c`-horn along `−a` at `S′` by SEP with the `−a` horn (`κ₄ < 1`) or U1 (`κ₄ = 1`), one along `+a` by SEP with the `+a` horn (`κ₁ > −1`,
-`sep_S`) or U1 (`κ₁ = −1`). A step inside a refutation-shaped row: no model expected. -/
-theorem flank_two_sectors_at_S_gen (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c g : Fin k}
-    (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α κ₁ κ₂ c)
+/-- **E5 § 3.4 at any bounds, over the flanks** (`flank_two_sectors_at_S_gen` with its three-colour hypothesis replaced by what it is used for:
+the upper flank `g` of the `+a` horn is the lower flank of the `−a` horn, and each horn has a flank on the other side, of any colours): at a
+stuck vertex whose two-sector colour `c` has horns along `±e α` with bounds in `[−1, 1]`, a flank `g ≠ c` on the `+n` side of both horns with no
+in-type contact at `N` has at least two sectors at `S′ = v − n` for every small radius. FS131-I5p, for YB3 § 3.1 Step 4 at a vertex with five
+colours. A step inside a refutation-shaped row: no model expected. -/
+theorem flank_two_sectors_at_S_of_flanks (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c g h₁ h₂ : Fin k}
+    (hst : F.IsStuck v) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α κ₁ κ₂ c)
     (Hd : F.IsHorn v (α + π) κ₃ κ₄ c) (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1) (h3' : -1 ≤ κ₃) (h4 : κ₄ ≤ 1)
-    (hgu : F.IsFlankAbove v α κ₂ g)
+    (hgu : F.IsFlankAbove v α κ₂ g) (hgd : F.IsFlankBelow v (α + π) κ₃ g) (hhu : F.IsFlankBelow v α κ₁ h₁)
+    (hhd : F.IsFlankAbove v (α + π) κ₄ h₂) (hgc : g ≠ c)
     (hno : ¬ (F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2)))) :
     ∀ᶠ r in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf (v - e (α + π / 2)) r g).encard := by
   have hπ := Real.pi_pos
@@ -1750,11 +1758,6 @@ theorem flank_two_sectors_at_S_gen (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} 
   set S := v - e (α + π / 2) with hSdef
   set N := v + e (α + π / 2) with hNdef
   obtain ⟨hcN, hcS⟩ := horn_poles_contact hF hv hst.1 le_rfl hc2 hH
-  obtain ⟨g₀, h, -, -, -, hgc₀, -, hg₀u, hhu, hhd, hgd₀, -⟩ :=
-    stuck_flanks_ua hF hv hst h3.le hH Hd h1 h2 h3' h4 hc2 hcN hcS
-  have hgg₀ : g₀ = g := hg₀u.unique hgu
-  have hgc : g ≠ c := hgg₀ ▸ hgc₀
-  have hgd : F.IsFlankBelow v (α + π) κ₃ g := hgg₀ ▸ hgd₀
   have hgv : g ∈ F.coloursAt v := mem_closure_of_mem_coneAt hgu.mem_coneAt
   have hNv : dist N v = 1 := by rw [hNdef, dist_eq_norm, add_sub_cancel_left, norm_e]
   -- `N` is not in `g`'s closure when a bound reaches `ω(N)` from the `g` side
@@ -1939,6 +1942,26 @@ theorem flank_two_sectors_at_S_gen (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} 
     have := hU1' (hconej hβjmem)
     rw [show α + π + π = α + 2 * π by ring] at this
     exact angle_pinch_false hφ' hφ'π ⟨m', hβj⟩ this
+
+/-- **E5 § 3.4 at any bounds** (E5 § 3.5's "by § 3.4's argument with `cv_class`'s bounds"): at a stuck vertex with three colours whose
+two-sector colour `c` has horns along `±e α` with bounds in `[−1, 1]`, an upper flank `g` with no in-type contact at `N` has at least two
+sectors at `S′ = v − n` for every small radius. `flank_two_sectors_at_S`'s argument (E5's F1–F6), with both ends of the half-disc closed:
+a `c`-horn along `−a` at `S′` by SEP with the `−a` horn (`κ₄ < 1`) or U1 (`κ₄ = 1`), one along `+a` by SEP with the `+a` horn (`κ₁ > −1`,
+`sep_S`) or U1 (`κ₁ = −1`). A step inside a refutation-shaped row: no model expected. -/
+theorem flank_two_sectors_at_S_gen (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {α κ₁ κ₂ κ₃ κ₄ : ℝ} {c g : Fin k}
+    (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α κ₁ κ₂ c)
+    (Hd : F.IsHorn v (α + π) κ₃ κ₄ c) (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1) (h3' : -1 ≤ κ₃) (h4 : κ₄ ≤ 1)
+    (hgu : F.IsFlankAbove v α κ₂ g)
+    (hno : ¬ (F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2)))) :
+    ∀ᶠ r in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf (v - e (α + π / 2)) r g).encard := by
+  -- `flank_two_sectors_at_S_of_flanks`, its flanks read from the three colours at `v` (`stuck_flanks_ua`)
+  have hv : F.Covers v 1 := fun z _ => by rw [hP]; exact mem_univ z
+  obtain ⟨hcN, hcS⟩ := horn_poles_contact hF hv hst.1 le_rfl hc2 hH
+  obtain ⟨g₀, h, -, -, -, hgc₀, -, hg₀u, hhu, hhd, hgd₀, -⟩ :=
+    stuck_flanks_ua hF hv hst h3.le hH Hd h1 h2 h3' h4 hc2 hcN hcS
+  have hgg₀ : g₀ = g := hg₀u.unique hgu
+  subst hgg₀
+  exact flank_two_sectors_at_S_of_flanks hF hP hst hc2 hH Hd h1 h2 h3' h4 hgu hgd₀ hhu hhd hgc₀ hno
 
 /-- **NB3-END items 3–4** (`plans/FS112-NB3-verification.md` l. 238–241; NB3's, one mind, not re-derived by E5): in `n3_end_of_not_inType`'s
 setting `S′ = v − n` carries at least four colours. Proved by a shorter route than NB3's items 3–4 (FS131-I5k): `S′` has a repeated colour
@@ -2307,6 +2330,207 @@ theorem IsSectorChart.exists_index_of_mem_coloursAt {n : ℕ} {G : BranchGerms n
     rw [hC.cone r₀ hr₀ i]; exact Icc_subset_angleIcc _ _ ⟨le_rfl, hC.sorted.mono i⟩
   exact coneAt_mono (hj' r₀ hr₀) w this
 
+/-- **The flank after a germ, in the sector's colour** (`IsSectorChart.exists_flank_after` with the colour named: the thin horn above the germ lies
+in sector `j`, hence in the class of `j`'s colour). Charts exist at every point of the domain (`localSectors`). -/
+theorem IsSectorChart.isFlankAbove_of_col {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G v r₀)
+    {j : Fin n} {α κ : ℝ} (hβ : e (G.β j) = e α) (hκ : G.κ j = κ) {g : Fin k}
+    (hg : ∀ r ∈ Ioc 0 r₀, G.sector v r j ⊆ F.region g) : F.IsFlankAbove v α κ g := by
+  obtain ⟨m, hm⟩ := e_eq_e_iff.mp hβ
+  have hcj : ∀ r ∈ Ioc 0 r₀, |κ| * r ≤ 2 := fun r hr => by
+    rw [← hκ]; exact (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans (hC.curv j).le
+  rcases hC.sorted.2 j with hlt | ⟨heq, hκ'⟩
+  · -- a gap after the germ: a thin horn above it lies in sector `j`
+    have hd : 0 < G.nextβ j - G.β j := sub_pos.mpr hlt
+    obtain ⟨η, hη, hηa⟩ := exists_abs_arcsin_lt (half_pos hd)
+    have hr₁ : 0 < min r₀ (min (1 / (|κ + 1| + 1)) (min (η / (|κ + 1| + 1)) (η / (|G.nextκ j| + 1)))) := by
+      have := hC.pos; positivity
+    refine ⟨κ + 1, by linarith, ?_⟩
+    filter_upwards [Ioo_mem_nhdsGT hr₁] with r hr
+    have hrr₀ : r ∈ Ioc 0 r₀ := ⟨hr.1, hr.2.le.trans (min_le_left _ _)⟩
+    have hr2 : r < min (1 / (|κ + 1| + 1)) (min (η / (|κ + 1| + 1)) (η / (|G.nextκ j| + 1))) :=
+      lt_of_lt_of_le hr.2 (min_le_right _ _)
+    have h2 : |κ + 1| * r ≤ 2 := by
+      have := abs_half_lt one_pos hr.1 (lt_of_lt_of_le hr2 (min_le_left _ _))
+      rw [abs_div, abs_mul, abs_of_pos hr.1, abs_two] at this; linarith
+    intro z hz
+    apply hg r hrr₀
+    rw [← sectorBetween_eq_hornSet v α κ (κ + 1) r (hcj r hrr₀) h2] at hz
+    obtain ⟨s, hs, φ, hφ, rfl⟩ := hz
+    have hsr : s < r := hs.2
+    have ha1 := hηa _ (abs_half_lt hη hs.1 (lt_trans hsr (lt_of_lt_of_le hr2
+      ((min_le_right _ _).trans (min_le_left _ _)))))
+    have ha2 := hηa _ (abs_half_lt hη hs.1 (lt_trans hsr (lt_of_lt_of_le hr2
+      ((min_le_right _ _).trans (min_le_right _ _)))))
+    rw [abs_lt] at ha1 ha2
+    refine ⟨s, hs, φ + 2 * π * m, ⟨?_, ?_⟩, ?_⟩
+    · rw [hm, hκ]; linarith [hφ.1]
+    · show φ + 2 * π * m < G.nextβ j + Real.arcsin (G.nextκ j * s / 2)
+      linarith [hφ.2]
+    · rw [e_add_int_mul]
+  · -- the next germ has the same direction: sector `j` is the horn above the germ
+    refine ⟨G.nextκ j, hκ ▸ hκ', ?_⟩
+    filter_upwards [Ioc_mem_nhdsGT hC.pos] with r hr
+    have h2 : |G.nextκ j| * r ≤ 2 := (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans (hC.curv_next j).le
+    have h1 : |G.κ j| * r ≤ 2 := by rw [hκ]; exact hcj r hr
+    have hsec : G.sector v r j = hornSet v α κ (G.nextκ j) r := by
+      show sectorBetween v (G.β j) (G.κ j) (G.nextβ j) (G.nextκ j) r = _
+      rw [← heq, sectorBetween_eq_hornSet v _ _ _ r h1 h2, hornSet_congr hβ, hκ]
+    rw [← hsec]; exact hg r hr
+
+/-- **The flank before a germ, in the sector's colour** (`IsSectorChart.exists_flank_before` with the colour named). Charts exist at every point of the domain (`localSectors`). -/
+theorem IsSectorChart.isFlankBelow_of_col {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G v r₀)
+    {p : Fin n} {α κ : ℝ} (hβ : e (G.nextβ p) = e α) (hκ : G.nextκ p = κ) {h : Fin k}
+    (hh : ∀ r ∈ Ioc 0 r₀, G.sector v r p ⊆ F.region h) : F.IsFlankBelow v α κ h := by
+  obtain ⟨m, hm⟩ := e_eq_e_iff.mp hβ
+  have hcp : ∀ r ∈ Ioc 0 r₀, |κ| * r ≤ 2 := fun r hr => by
+    rw [← hκ]; exact (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans (hC.curv_next p).le
+  rcases hC.sorted.2 p with hlt | ⟨heq, hκ'⟩
+  · have hd : 0 < G.nextβ p - G.β p := sub_pos.mpr hlt
+    obtain ⟨η, hη, hηa⟩ := exists_abs_arcsin_lt (half_pos hd)
+    have hr₁ : 0 < min r₀ (min (1 / (|κ - 1| + 1)) (min (η / (|κ - 1| + 1)) (η / (|G.κ p| + 1)))) := by
+      have := hC.pos; positivity
+    refine ⟨κ - 1, by linarith, ?_⟩
+    filter_upwards [Ioo_mem_nhdsGT hr₁] with r hr
+    have hrr₀ : r ∈ Ioc 0 r₀ := ⟨hr.1, hr.2.le.trans (min_le_left _ _)⟩
+    have hr2 : r < min (1 / (|κ - 1| + 1)) (min (η / (|κ - 1| + 1)) (η / (|G.κ p| + 1))) :=
+      lt_of_lt_of_le hr.2 (min_le_right _ _)
+    have h1 : |κ - 1| * r ≤ 2 := by
+      have := abs_half_lt one_pos hr.1 (lt_of_lt_of_le hr2 (min_le_left _ _))
+      rw [abs_div, abs_mul, abs_of_pos hr.1, abs_two] at this; linarith
+    intro z hz
+    apply hh r hrr₀
+    rw [← sectorBetween_eq_hornSet v α (κ - 1) κ r h1 (hcp r hrr₀)] at hz
+    obtain ⟨s, hs, φ, hφ, rfl⟩ := hz
+    have hsr : s < r := hs.2
+    have ha1 := hηa _ (abs_half_lt hη hs.1 (lt_trans hsr (lt_of_lt_of_le hr2
+      ((min_le_right _ _).trans (min_le_left _ _)))))
+    have ha2 := hηa _ (abs_half_lt hη hs.1 (lt_trans hsr (lt_of_lt_of_le hr2
+      ((min_le_right _ _).trans (min_le_right _ _)))))
+    rw [abs_lt] at ha1 ha2
+    refine ⟨s, hs, φ + 2 * π * m, ⟨?_, ?_⟩, ?_⟩
+    · show G.β p + Real.arcsin (G.κ p * s / 2) < φ + 2 * π * m
+      linarith [hφ.1]
+    · show φ + 2 * π * m < G.nextβ p + Real.arcsin (G.nextκ p * s / 2)
+      rw [hm, hκ]; linarith [hφ.2]
+    · rw [e_add_int_mul]
+  · refine ⟨G.κ p, hκ ▸ hκ', ?_⟩
+    filter_upwards [Ioc_mem_nhdsGT hC.pos] with r hr
+    have h1 : |G.κ p| * r ≤ 2 := (mul_le_mul_of_nonneg_left hr.2 (abs_nonneg _)).trans (hC.curv p).le
+    have h2 : |G.nextκ p| * r ≤ 2 := by rw [hκ]; exact hcp r hr
+    have hβ' : e (G.β p) = e α := by rw [heq]; exact hβ
+    have hsec : G.sector v r p = hornSet v α (G.κ p) κ r := by
+      show sectorBetween v (G.β p) (G.κ p) (G.nextβ p) (G.nextκ p) r = _
+      rw [← heq, sectorBetween_eq_hornSet v _ _ _ r h1 h2, hornSet_congr hβ', hκ]
+    rw [← hsec]; exact hh r hr
+
+/-- **An upper flank above a bound `κ ≥ −1` is never in-type at `v`, seen from `S′`**: its band lies outside `B̄(S′, 1)` and has `v` in its
+closure (the mirror of `not_outType_v_of_flankBelow_neg_one`). FS131-I5p, for YB3 § 3.1 Step 4. Model of the hypotheses: `bowtie` at `0`,
+`α = 0`, colour `0` (`bowtie_flanks`). -/
+theorem not_inType_S_of_flankAbove {v : ℂ} {α κ : ℝ} {g : Fin k} (hg : F.IsFlankAbove v α κ g) (hκ : -1 ≤ κ) :
+    ¬ F.InType (v - e (α + π / 2)) g v := by
+  intro hin
+  obtain ⟨κ', hκ', hev⟩ := hg
+  set ρ := min (1 / 2) (1 / (|κ| + |κ'| + 1)) with hρ
+  have hρ0 : 0 < ρ := lt_min (by norm_num) (by positivity)
+  obtain ⟨r, hr, hr0⟩ := (hev.and (Ioc_mem_nhdsGT hρ0)).exists
+  have hb : ∀ x : ℝ, |x| ≤ |κ| + |κ'| → |x| * r ≤ 2 := by
+    intro x hx
+    have h1 : r ≤ 1 / (|κ| + |κ'| + 1) := hr0.2.trans (min_le_right _ _)
+    have h2 : |x| * r ≤ |x| * (1 / (|κ| + |κ'| + 1)) := mul_le_mul_of_nonneg_left h1 (abs_nonneg _)
+    have h3 : |x| * (1 / (|κ| + |κ'| + 1)) ≤ 1 := by
+      rw [mul_one_div, div_le_one (by positivity)]; linarith
+    linarith
+  have hpre := isPreconnected_hornSet_of_abs_le (v := v) (α := α) hκ'
+    (hb κ (by linarith [abs_nonneg κ'])) (hb κ' (by linarith [abs_nonneg κ]))
+  obtain ⟨z₀, hz₀, -, -⟩ := exists_mem_hornSet_aboveBelow v α (κ₁ := κ) (κ₂ := κ') (s := (κ + κ') / 2)
+    (m := (κ + κ') / 2 + 1) hr0.1 (by linarith) (by linarith) (by intro h'; linarith)
+  have hsubI : hornSet v α κ κ' r ⊆ F.interiorPts := fun z hz => (hr hz).1
+  have hT : F.IsTile (connectedComponentIn F.interiorPts z₀) := ⟨z₀, hsubI hz₀, rfl⟩
+  have hz₀T : z₀ ∈ connectedComponentIn F.interiorPts z₀ := mem_connectedComponentIn (hsubI hz₀)
+  have hTg : F.TileOf g (connectedComponentIn F.interiorPts z₀) := by
+    have := hT.tileOf hz₀T
+    rwa [show F.col z₀ = g from (hr hz₀).2] at this
+  have hsub : hornSet v α κ κ' r ⊆ connectedComponentIn F.interiorPts z₀ :=
+    hpre.subset_connectedComponentIn hz₀ hsubI
+  have hvcl : v ∈ closure (connectedComponentIn F.interiorPts z₀) :=
+    closure_mono hsub (mem_closure_of_mem_coneAt (mem_coneAt_hornSet v α hκ' hr0.1))
+  have hball := hin _ hTg hvcl hz₀T
+  have hfar : 1 < dist z₀ (v - e (α + π / 2)) := (tanAbove_neg_one_iff v α z₀).mp (hz₀.2.2.1.mono hκ)
+  rw [mem_ball] at hball
+  linarith
+
+/-- **A lower flank below a bound `κ ≤ 1` is never in-type at `v`, seen from `N`** (the mirror of `not_inType_S_of_flankAbove`). FS131-I5p,
+for YB3 § 3.1 Step 4. Model of the hypotheses: `bowtie` at `0`, `α = 0`, colour `2` (`bowtie_flanks`). -/
+theorem not_inType_N_of_flankBelow {v : ℂ} {α κ : ℝ} {h : Fin k} (hh : F.IsFlankBelow v α κ h) (hκ : κ ≤ 1) :
+    ¬ F.InType (v + e (α + π / 2)) h v := by
+  intro hin
+  obtain ⟨κ', hκ', hev⟩ := hh
+  set ρ := min (1 / 2) (1 / (|κ| + |κ'| + 1)) with hρ
+  have hρ0 : 0 < ρ := lt_min (by norm_num) (by positivity)
+  obtain ⟨r, hr, hr0⟩ := (hev.and (Ioc_mem_nhdsGT hρ0)).exists
+  have hb : ∀ x : ℝ, |x| ≤ |κ| + |κ'| → |x| * r ≤ 2 := by
+    intro x hx
+    have h1 : r ≤ 1 / (|κ| + |κ'| + 1) := hr0.2.trans (min_le_right _ _)
+    have h2 : |x| * r ≤ |x| * (1 / (|κ| + |κ'| + 1)) := mul_le_mul_of_nonneg_left h1 (abs_nonneg _)
+    have h3 : |x| * (1 / (|κ| + |κ'| + 1)) ≤ 1 := by
+      rw [mul_one_div, div_le_one (by positivity)]; linarith
+    linarith
+  have hpre := isPreconnected_hornSet_of_abs_le (v := v) (α := α) hκ'
+    (hb κ' (by linarith [abs_nonneg κ])) (hb κ (by linarith [abs_nonneg κ']))
+  obtain ⟨z₀, hz₀, -, -⟩ := exists_mem_hornSet_aboveBelow v α (κ₁ := κ') (κ₂ := κ) (s := (κ' + κ) / 2)
+    (m := (κ' + κ) / 2 + 1) hr0.1 (by linarith) (by linarith) (by intro h'; linarith)
+  have hsubI : hornSet v α κ' κ r ⊆ F.interiorPts := fun z hz => (hr hz).1
+  have hT : F.IsTile (connectedComponentIn F.interiorPts z₀) := ⟨z₀, hsubI hz₀, rfl⟩
+  have hz₀T : z₀ ∈ connectedComponentIn F.interiorPts z₀ := mem_connectedComponentIn (hsubI hz₀)
+  have hTh : F.TileOf h (connectedComponentIn F.interiorPts z₀) := by
+    have := hT.tileOf hz₀T
+    rwa [show F.col z₀ = h from (hr hz₀).2] at this
+  have hsub : hornSet v α κ' κ r ⊆ connectedComponentIn F.interiorPts z₀ :=
+    hpre.subset_connectedComponentIn hz₀ hsubI
+  have hvcl : v ∈ closure (connectedComponentIn F.interiorPts z₀) :=
+    closure_mono hsub (mem_closure_of_mem_coneAt (mem_coneAt_hornSet v α hκ' hr0.1))
+  have hball := hin _ hTh hvcl hz₀T
+  have hfar : 1 < dist z₀ (v + e (α + π / 2)) := (tanBelow_one_iff v α z₀).mp (hz₀.2.2.2.mono hκ)
+  rw [mem_ball] at hball
+  linarith
+
+/-- **A repeated colour at a stuck point, carried at a pole, has two horns along that pole's axis** (N3-DEG at the point, `stuck_horns_ua`,
+the axis by `dot_eq_zero_of_antipodal_contact` at the contact `w − n`): exactly two sectors, cusp horns along `±e α` with bounds in
+`[−1, 1]` and out-type contacts at `w ± n`. The second half of `lower_flank_horns_at_N_of`, at any point (FS131-I5p, for YB3 § 3.1 Step 4).
+Model of the hypotheses at the point: `bowtie` at `0`, colour `1`, `α = 0` (`bowtie_valid`, `bowtie_isStuck`, `bowtie_coloursAt_zero`,
+`bowtie_outType_one`); `Covers` is the caller's (every point of a plane map). -/
+theorem horns_of_two_sectors_at (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1) (hst : F.IsStuck w) {j : Fin k}
+    (h2 : ∀ᶠ r in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf w r j).encard) {α : ℝ}
+    (hjS : w - e (α + π / 2) ∈ closure (F.region j)) :
+    F.HasSectors w j 2 ∧ ∃ μ₁ μ₂ μ₃ μ₄ : ℝ, F.IsHorn w α μ₁ μ₂ j ∧ F.IsHorn w (α + π) μ₃ μ₄ j ∧
+      -1 ≤ μ₁ ∧ μ₂ ≤ 1 ∧ -1 ≤ μ₃ ∧ μ₄ ≤ 1 ∧
+      (F.IsContact w j (w + e (α + π / 2)) ∧ F.OutType w j (w + e (α + π / 2))) ∧
+      (F.IsContact w j (w - e (α + π / 2)) ∧ F.OutType w j (w - e (α + π / 2))) := by
+  have hwd : w ∈ F.dom := hv (mem_closedBall_self zero_le_one)
+  obtain ⟨m, hm⟩ := exists_hasSectors hwd j
+  have hm2 : 2 ≤ m := by
+    obtain ⟨r, hr1, hr2⟩ := (hm.and h2).exists
+    have : (2 : ℕ∞) ≤ m := hr1 ▸ hr2
+    exact_mod_cast this
+  obtain ⟨β, μ₁, μ₂, μ₃, μ₄, Hu, Hd, h1, h2', h3', h4', hh2', hcN, hcS⟩ := stuck_horns_ua hF hv hst hm2 hm
+  have hEN : dist (w - e (α + π / 2)) w = 1 := by
+    rw [dist_eq_norm, sub_sub_cancel_left, norm_neg, norm_e]
+  have hdot := dot_eq_zero_of_antipodal_contact hF hv hjS hEN Hu.mem_coneAt_region Hd.mem_coneAt_region
+  rw [sub_sub_cancel_left, dot_neg_right, dot_e_e] at hdot
+  have hsin : Real.sin (β - α) = 0 := by
+    have : Real.cos (β - (α + π / 2)) = 0 := by linarith
+    rwa [show β - (α + π / 2) = (β - α) - π / 2 by ring, Real.cos_sub_pi_div_two] at this
+  rcases e_eq_or_of_sin_sub_eq_zero hsin with he | he
+  · have he' : e (β + π) = e (α + π) := by rw [e_add_pi', e_add_pi', he]
+    have hn : e (β + π / 2) = e (α + π / 2) := by rw [e_add_pi_div_two, e_add_pi_div_two, he]
+    rw [hn] at hcS hcN
+    exact ⟨hh2', μ₁, μ₂, μ₃, μ₄, Hu.congr he, Hd.congr he', h1, h2', h3', h4', hcN, hcS⟩
+  · have he' : e (β + π) = e α := by rw [e_add_pi', he, e_add_pi', neg_neg]
+    have hn : e (β + π / 2) = -e (α + π / 2) := by rw [e_add_pi_div_two, e_add_pi_div_two, he, e_add_pi']; ring
+    rw [hn, sub_neg_eq_add] at hcS
+    rw [hn, ← sub_eq_add_neg] at hcN
+    exact ⟨hh2', μ₃, μ₄, μ₁, μ₂, Hd.congr he', Hu.congr he, h3', h4', h1, h2', hcS, hcN⟩
+
 /-- **The lower flank's two horns at `N`, over `Valid`, `IsPlaneMap` and `Terminal`** (`lower_flank_horns_at_N` with `QROnly` not read, for
 `y3_end_needs`'s hypotheses, which carry no `QROnly`; FS131-I5n moved I5l's proof here unchanged). A step inside a refutation: no model expected. -/
 theorem lower_flank_horns_at_N_of {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {E : ℂ} (hst : F.IsStuck E)
@@ -2599,16 +2823,372 @@ theorem seven_colours_at_N {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (hT
   simp at this
 
 /-- **FS112-Y3-END-NEEDS, the case `g ∉ P_cl(N)`** (`plans/FS112-YB3-verification.md` § 3.1 Steps 3–4, with Step 3's sharpening (a)): the case
-of `y3_end_needs` that `seven_colours_at_N` leaves. YB3's levels: `P_cl(N) = {c, h, x₁, x₂, y}` (Step 3); no SHAVE at `N` needs an in-type `x₁`
-at `N + n` and an out-type `y` at `N + n` tangent to `±a`, whose two sectors there are horns with upper flanks `z₁ ≠ z₂` outside the five — a
-seventh colour (Step 4). Open (FS131-I5n's reduction of `y3_end_needs`). A step inside a proof by contradiction: no model expected. -/
+of `y3_end_needs` that `seven_colours_at_N` leaves. Route (FS131-I5p): the four chart sectors flanking the `h`-horns `Q±` at `N` carry colours
+`x₁` (above `Q₊`), `y₁` (below `Q₊`), `x₂` (above `Q₋`), `y₂` (below `Q₋`), distinct from `c`, `h` and from each other as in `seven_colours_at_N`
+(the lower pair excepted), all carried at `N` while `g` is not; so `y₁ ≠ y₂` gives seven colours. Otherwise `y = y₁ = y₂` flanks both horns from
+below (YB3's `y`) and Step 4 runs at `M = N + n`: no SHAVE at `N` puts in-type `x₁`- and `x₂`-contacts at `M` (`srcG_of_shadow`,
+`srcH_of_shadow`, as `x_i ∉ P_cl(E)`), so `Q±`'s upper arcs lie on `ω(M)`; E5 § 3.4 at `N` in the turned frame gives `y` two sectors at `M`
+(`flank_two_sectors_at_S_of_flanks`), so `M` is stuck with `y`-horns `R±` along `±e α` (`horns_of_two_sectors_at`); the upper flanks `z₁`, `z₂` of
+`R±` are not `y` (two sectors), not `h` (U1 at `M`), not `x₁`, `x₂` (their tiles at `M` lie outside `B̄(N, 1)`, `not_inType_S_of_flankAbove`,
+`not_inType_N_of_flankBelow`), not `c` (an out-type `c`-contact at `M` would bar `c`'s directions at `N`), so both are `g`, on two sectors at `M`
+separated by `h`'s, with `g ∉ P_cl(N)`: MERGE at `M`. A step inside a proof by contradiction: no model expected. -/
 theorem y3_end_needs_of_not_mem {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {E : ℂ} (hst : F.IsStuck E)
     (h3 : (F.coloursAt E).ncard = 3) {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₄ : ℝ}
     (hH : F.IsHorn E α κ₁ 1 c) (hH' : F.IsHorn E (α + π) (-1) κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α 1 g)
     (hh : F.IsFlankBelow E α κ₁ h)
     (hnoH : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2))))
     (hgN : g ∉ F.coloursAt (E + e (α + π / 2))) : False := by
-  sorry
+  have hπ := Real.pi_pos
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  have hdom : ∀ x, x ∈ F.dom := fun x => by rw [hP]; exact mem_univ x
+  obtain ⟨h1, -⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH
+  obtain ⟨-, h4⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH'
+  obtain ⟨hcN, hcS⟩ := horn_poles_contact hF (hvC E) hst.1 le_rfl hc2 hH
+  -- `P_cl(E) = {c, g, h}`, and `g` flanks the `−e α` horn from its `N` side
+  obtain ⟨g₁, h₁, -, hcolE, hgh, hgc, hhc, hg₁, hh₁, -, -, -⟩ :=
+    stuck_flanks_ua hF (hvC E) hst h3.le hH hH' h1 le_rfl le_rfl h4 hc2 hcN hcS
+  have hgg : g = g₁ := (hg₁.unique hg).symm
+  have hhh : h = h₁ := (IsFlankBelow.unique hh₁ hh).symm
+  subst hgg hhh
+  -- the lower flank's two horns `Q±` at `N`, which is stuck
+  obtain ⟨hstN, -, hhN2, μ₁, μ₂, μ₃, μ₄, Qp, Qm, hμ₁, hμ₂, hμ₃, hμ₄, hhM, -⟩ :=
+    lower_flank_horns_at_N_of hF hP hT hst h3 hc2 hH hH' hg hh hnoH
+  set N := E + e (α + π / 2) with hNdef
+  have hNE : N - e (α + π / 2) = E := by rw [hNdef]; ring
+  have hNE' : N + e (α + π + π / 2) = E := by rw [add_e_add_pi_add, hNE]
+  -- U1 at `N`: `c`'s cone in the pinch about `+n`, `g`'s in the pinch about `−n`
+  obtain ⟨φc, hφc, -, hconeC1⟩ := coneAt_N_subset_of_horn hF hH h1
+  obtain ⟨φc', hφc', -, hconeC2⟩ := coneAt_S_subset_of_horn hF hH' h4
+  rw [sub_e_add_pi_add] at hconeC2
+  have hαc : α ∉ coneAt (F.region c) N := fun hα =>
+    not_mem_angleIcc_of_gap (-1) (by push_cast; linarith) (by push_cast; linarith) (hconeC1 hα)
+  have hαπc : α + π ∉ coneAt (F.region c) N := fun hα =>
+    not_mem_angleIcc_of_gap (-1) (by push_cast; linarith) (by push_cast; linarith) (hconeC2 hα)
+  -- the sector chart at `N`, and `Q±` in it
+  obtain ⟨r₀, n, G, hC⟩ := localSectors F (hdom N)
+  have hMo := hC.sorted.mono
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  obtain ⟨rq, ⟨⟨hSp, hSpc⟩, ⟨hSm, hSmc⟩⟩, hrq⟩ := ((Qp.2.and Qm.2).and (Ioc_mem_nhdsGT hC.pos)).exists
+  obtain ⟨ip, hβp, hnp, hκp, hnκp, hsecp⟩ := hC.index_of_isSector_hornSet hrq Qp.1 hSp
+  obtain ⟨im, hβm, hnm, hκm, hnκm, hsecm⟩ := hC.index_of_isSector_hornSet hrq Qm.1 hSm
+  have hn : 0 < n := ip.pos
+  -- the colour of a chart sector, read at one radius
+  have colEq : ∀ (i : Fin n) (j j' : Fin 6), (∀ r ∈ Ioc 0 r₀, G.sector N r i ⊆ F.region j) →
+      (∀ r ∈ Ioc 0 r₀, G.sector N r i ⊆ F.region j') → j = j' := by
+    intro i j j' hj hj'
+    obtain ⟨z, hz⟩ := hC.sector_nonempty hr₀ i
+    exact ((hj r₀ hr₀ hz).2).symm.trans (hj' r₀ hr₀ hz).2
+  have colQ : ∀ i : Fin n, ∀ {ν₁ ν₂ β : ℝ}, (∀ r' ∈ Ioc 0 r₀, G.sector N r' i = hornSet N β ν₁ ν₂ r') →
+      hornSet N β ν₁ ν₂ rq ⊆ F.col ⁻¹' {h} → ∀ r ∈ Ioc 0 r₀, G.sector N r i ⊆ F.region h := by
+    intro i ν₁ ν₂ β hsec hsub
+    obtain ⟨h', hh'⟩ := hC.exists_col i
+    obtain ⟨z, hz⟩ := hC.sector_nonempty hrq i
+    have hzh : F.col z = h := by rw [hsec rq hrq] at hz; exact hsub hz
+    have : h' = h := ((hh' rq hrq (by rw [hsec rq hrq] at hz ⊢; exact hz)).2).symm.trans hzh
+    exact this ▸ hh'
+  have colp := colQ ip hsecp hSpc
+  have colm := colQ im hsecm hSmc
+  -- the four sectors flanking `Q±`
+  obtain ⟨a, hβa, hκa⟩ := G.exists_succ ip
+  obtain ⟨b, hβb, hκb⟩ := G.exists_pred ip
+  obtain ⟨c', hβc', hκc'⟩ := G.exists_pred im
+  obtain ⟨d, hβd, hκd⟩ := G.exists_succ im
+  rw [hnp, hβp] at hβa
+  rw [hβp] at hβb
+  rw [hβm] at hβc'
+  rw [hnm, hβm] at hβd
+  rw [hnκp] at hκa
+  rw [hκp] at hκb
+  rw [hκm] at hκc'
+  rw [hnκm] at hκd
+  have hne : e α ≠ e (α + π) := (e_add_pi_ne α).symm
+  -- index distinctness from the germs
+  have hipm : ip ≠ im := fun heq => hne (by rw [← hβp, ← hβm, heq])
+  have hap : a ≠ ip := fun heq => by rw [heq, hκp] at hκa; exact absurd hκa (ne_of_lt Qp.1)
+  have ham : a ≠ im := fun heq => hne (by rw [← hβa, ← hβm, heq])
+  have hbp : b ≠ ip := fun heq => by rw [heq, hnκp] at hκb; exact absurd hκb.symm (ne_of_lt Qp.1)
+  have hbm : b ≠ im := fun heq => hne (by rw [← hβb, ← hβm, ← hnm, heq])
+  have hcm : c' ≠ im := fun heq => by rw [heq, hnκm] at hκc'; exact absurd hκc'.symm (ne_of_lt Qm.1)
+  have hcp : c' ≠ ip := fun heq => hne (by rw [← hβc', ← hβp, ← hnp, heq])
+  have hdm : d ≠ im := fun heq => by rw [heq, hκm] at hκd; exact absurd hκd (ne_of_lt Qm.1)
+  have hdp : d ≠ ip := fun heq => hne (by rw [← hβd, ← hβp, heq])
+  have had : a ≠ d := fun heq => hne (by rw [← hβa, ← hβd, heq])
+  have hbc : b ≠ c' := fun heq => hne (by rw [← hβb, ← hβc', heq])
+  have hab : a ≠ b := by
+    intro heq
+    subst heq
+    rcases hC.sorted.2 a with hlt | ⟨-, hκlt⟩
+    · exact hMo.false_of_full ham (hβa.trans hβb.symm) hlt (by rw [hβm, hβa]; exact hne.symm)
+    · rw [hκa, hκb] at hκlt; exact absurd hκlt (not_lt.mpr Qp.1.le)
+  have hcd : c' ≠ d := by
+    intro heq
+    subst heq
+    rcases hC.sorted.2 c' with hlt | ⟨-, hκlt⟩
+    · exact hMo.false_of_full hcp (hβd.trans hβc'.symm) hlt (by rw [hβp, hβd]; exact hne)
+    · rw [hκd, hκc'] at hκlt; exact absurd hκlt (not_lt.mpr Qm.1.le)
+  -- their colours, and a direction of each along the axis
+  obtain ⟨xa, hxa⟩ := hC.exists_col a
+  obtain ⟨xb, hxb⟩ := hC.exists_col b
+  obtain ⟨xc, hxc⟩ := hC.exists_col c'
+  obtain ⟨xd, hxd⟩ := hC.exists_col d
+  have coneβ : ∀ (i : Fin n) (j : Fin 6), (∀ r ∈ Ioc 0 r₀, G.sector N r i ⊆ F.region j) → G.β i ∈ coneAt (F.region j) N := by
+    intro i j hj
+    have : G.β i ∈ coneAt (G.sector N r₀ i) N := by
+      rw [hC.cone r₀ hr₀ i]; exact Icc_subset_angleIcc _ _ ⟨le_rfl, hMo i⟩
+    exact coneAt_mono (hj r₀ hr₀) N this
+  have coneNβ : ∀ (i : Fin n) (j : Fin 6), (∀ r ∈ Ioc 0 r₀, G.sector N r i ⊆ F.region j) →
+      G.nextβ i ∈ coneAt (F.region j) N := by
+    intro i j hj
+    have : G.nextβ i ∈ coneAt (G.sector N r₀ i) N := by
+      rw [hC.cone r₀ hr₀ i]; exact Icc_subset_angleIcc _ _ ⟨hMo i, le_rfl⟩
+    exact coneAt_mono (hj r₀ hr₀) N this
+  have hαa : α ∈ coneAt (F.region xa) N := mem_coneAt_of_e_eq hβa (coneβ a xa hxa)
+  have hαb : α ∈ coneAt (F.region xb) N := mem_coneAt_of_e_eq hβb (coneNβ b xb hxb)
+  have hαc' : α + π ∈ coneAt (F.region xc) N := mem_coneAt_of_e_eq hβc' (coneNβ c' xc hxc)
+  have hαd : α + π ∈ coneAt (F.region xd) N := mem_coneAt_of_e_eq hβd (coneβ d xd hxd)
+  -- none is `c` or `g` (U1 at `N`), nor `h` (`h` has exactly the two sectors `Q±` at `N`)
+  obtain ⟨r2, hr2e, hr2⟩ := (hhN2.and (Ioc_mem_nhdsGT hC.pos)).exists
+  have three : ∀ i : Fin n, i ≠ ip → i ≠ im → (∀ r ∈ Ioc 0 r₀, G.sector N r i ⊆ F.region h) → False := by
+    intro i hip him hi
+    have hle := hC.card_le_encard_sectorsOf hr2 {ip, im, i} (by
+      intro l hl
+      rcases Finset.mem_insert.mp hl with rfl | hl
+      · exact colp r2 hr2
+      rcases Finset.mem_insert.mp hl with rfl | hl
+      · exact colm r2 hr2
+      rw [Finset.mem_singleton.mp hl]; exact hi r2 hr2)
+    rw [hr2e, Finset.card_insert_of_notMem (by simp [hipm, hip.symm]), Finset.card_pair (Ne.symm him)] at hle
+    norm_num at hle
+  have hxac : xa ≠ c := by rintro rfl; exact hαc hαa
+  have hxbc : xb ≠ c := by rintro rfl; exact hαc hαb
+  have hxcc : xc ≠ c := by rintro rfl; exact hαπc hαc'
+  have hxdc : xd ≠ c := by rintro rfl; exact hαπc hαd
+  have hxag : xa ≠ g := by rintro rfl; exact hgN (mem_closure_of_mem_coneAt hαa)
+  have hxbg : xb ≠ g := by rintro rfl; exact hgN (mem_closure_of_mem_coneAt hαb)
+  have hxcg : xc ≠ g := by rintro rfl; exact hgN (mem_closure_of_mem_coneAt hαc')
+  have hxdg : xd ≠ g := by rintro rfl; exact hgN (mem_closure_of_mem_coneAt hαd)
+  have hxah : xa ≠ h := by rintro rfl; exact three a hap ham hxa
+  have hxbh : xb ≠ h := by rintro rfl; exact three b hbp hbm hxb
+  have hxch : xc ≠ h := by rintro rfl; exact three c' hcp hcm hxc
+  have hxdh : xd ≠ h := by rintro rfl; exact three d hdp hdm hxd
+  have hnotE : ∀ j : Fin 6, j ≠ c → j ≠ g → j ≠ h → E ∉ closure (F.region j) := by
+    intro j hjc hjg hjh hj
+    have hj' : j ∈ F.coloursAt E := hj
+    rw [hcolE] at hj'
+    simp only [mem_insert_iff, mem_singleton_iff] at hj'
+    rcases hj' with rfl | rfl | rfl
+    exacts [hjc rfl, hjg rfl, hjh rfl]
+  -- two sectors of one of these colours at `N`: W-MERGE at `N` (the pole `N − n = E` carries none of them)
+  have mergeα : ∀ i i' : Fin n, i ≠ i' → ∀ j : Fin 6, (∀ r ∈ Ioc 0 r₀, G.sector N r i ⊆ F.region j) →
+      (∀ r ∈ Ioc 0 r₀, G.sector N r i' ⊆ F.region j) → α ∈ coneAt (F.region j) N → E ∉ closure (F.region j) → False :=
+    fun i i' hii j hi hi' hα hE =>
+      hstN.1 (mergeAvailable_of_two_sectors hF (hvC N) hC hii hi hi' hα (Or.inr (by rwa [hNE])))
+  have mergeαπ : ∀ i i' : Fin n, i ≠ i' → ∀ j : Fin 6, (∀ r ∈ Ioc 0 r₀, G.sector N r i ⊆ F.region j) →
+      (∀ r ∈ Ioc 0 r₀, G.sector N r i' ⊆ F.region j) → α + π ∈ coneAt (F.region j) N → E ∉ closure (F.region j) → False :=
+    fun i i' hii j hi hi' hα hE =>
+      hstN.1 (mergeAvailable_of_two_sectors hF (hvC N) hC hii hi hi' hα (Or.inl (by rwa [hNE'])))
+  have hxab : xa ≠ xb := by
+    rintro rfl; exact mergeα a b hab xa hxa hxb hαa (hnotE xa hxac hxag hxah)
+  have hxad : xa ≠ xd := by
+    rintro rfl; exact mergeα a d had xa hxa hxd hαa (hnotE xa hxac hxag hxah)
+  have hxbc' : xb ≠ xc := by
+    rintro rfl; exact mergeα b c' hbc xb hxb hxc hαb (hnotE xb hxbc hxbg hxbh)
+  have hxcd : xc ≠ xd := by
+    rintro rfl; exact mergeαπ c' d hcd xc hxc hxd hαc' (hnotE xc hxcc hxcg hxch)
+  -- the upper side has a sector of `c` besides `a`
+  have hac : a ≠ c' := by
+    intro heq
+    subst heq
+    obtain ⟨ic, hic, hβic⟩ := hC.exists_index_of_mem_coloursAt hn hcN.1.2.2
+    have hica : a ≠ ic := by
+      rintro rfl; exact hxac (colEq a xa c hxa hic)
+    have hx2 : G.β ic ∈ angleIcc α (α + π - φc') := by
+      obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp (hconeC2 hβic)
+      exact mem_iUnion.mpr ⟨m + 1, by push_cast; linarith, by push_cast; linarith⟩
+    have := mem_angleIoo_half hβa hβc' (hMo a) (hMo.nextβ_le_add a) hφc hφc' (hconeC1 hβic) hx2
+    exact Set.disjoint_left.mp (hMo.disjoint hica) (Icc_subset_angleIcc _ _ ⟨le_rfl, hMo ic⟩) this
+  have hxac' : xa ≠ xc := by
+    rintro rfl; exact mergeα a c' hac xa hxa hxc hαa (hnotE xa hxac hxag hxah)
+  -- seven distinct colours in `Fin 6`
+  -- the lower side: two colours give seven at `N` with `g`, which is not carried there
+  by_cases hbd : xb = xd
+  swap
+  · have hnd : [c, g, h, xa, xb, xc, xd].Nodup := by
+      simp only [List.nodup_cons, List.mem_cons, List.not_mem_nil, or_false, not_or, List.nodup_nil, and_true]
+      exact ⟨⟨hgc.symm, hhc.symm, hxac.symm, hxbc.symm, hxcc.symm, hxdc.symm⟩,
+        ⟨hgh, hxag.symm, hxbg.symm, hxcg.symm, hxdg.symm⟩, ⟨hxah.symm, hxbh.symm, hxch.symm, hxdh.symm⟩,
+        ⟨hxab, hxac', hxad⟩, ⟨hxbc', hbd⟩, hxcd, not_false⟩
+    have := hnd.length_le_card
+    simp at this
+  -- one colour `y = xb` below both horns `Q±` (YB3's `y`): YB3 § 3.1 Step 4 at `M = N + n`
+  have hxd' : ∀ r ∈ Ioc 0 r₀, G.sector N r d ⊆ F.region xb := hbd ▸ hxd
+  have flA : F.IsFlankAbove N α μ₂ xa := hC.isFlankAbove_of_col hβa hκa hxa
+  have flB : F.IsFlankBelow N α μ₁ xb := hC.isFlankBelow_of_col hβb hκb hxb
+  have flC : F.IsFlankBelow N (α + π) μ₃ xc := hC.isFlankBelow_of_col hβc' hκc' hxc
+  have flD : F.IsFlankAbove N (α + π) μ₄ xb := hC.isFlankAbove_of_col hβd hκd hxd'
+  have hxaE := hnotE xa hxac hxag hxah
+  have hxbE := hnotE xb hxbc hxbg hxbh
+  have hxcE := hnotE xc hxcc hxcg hxch
+  set M := N + e (α + π / 2) with hMdef
+  have hMN : M - e (α + π / 2) = N := by rw [hMdef]; ring
+  have hMN' : M + e (α + π + π / 2) = N := by rw [add_e_add_pi_add, hMN]
+  -- no SHAVE at `N`: the upper flanks' shadows come from in-type contacts at `M`, so `Q±`'s upper arcs lie on `ω(M)`
+  obtain ⟨shA, -⟩ := shadow_of_not_shave hstN.2.2.1 Qp flA flB
+  have hinA : F.IsContact N xa M ∧ F.InType N xa M := by
+    rcases srcG_of_shadow hF (hvC N) hμ₁ Qp.1 hμ₂ flA shA with hin | hout
+    · exact hin
+    · exact absurd (by have := hout.1.2.2; rwa [hNE] at this) hxaE
+  have hμ₂1 : μ₂ = 1 := by
+    by_contra hne'
+    exact (contact_inType_or_outType hF (hvC N) hinA.1).2
+      ⟨hinA.2, outType_N_of_flankAbove hF (hvC N) (lt_of_le_of_ne hμ₂ hne') flA hinA.1.2.2⟩
+  obtain ⟨-, shC⟩ := shadow_of_not_shave hstN.2.2.1 Qm flD flC
+  have hinC : F.IsContact N xc (N - e (α + π + π / 2)) ∧ F.InType N xc (N - e (α + π + π / 2)) := by
+    rcases srcH_of_shadow hF (hvC N) hμ₃ Qm.1 hμ₄ flC shC with hin | hout
+    · exact hin
+    · exact absurd (by have := hout.1.2.2; rwa [hNE'] at this) hxcE
+  have hμ₃1 : μ₃ = -1 := by
+    by_contra hne'
+    exact (contact_inType_or_outType hF (hvC N) hinC.1).2
+      ⟨hinC.2, outType_S_of_flankBelow hF (hvC N) (lt_of_le_of_ne hμ₃ (Ne.symm hne')) flC hinC.1.2.2⟩
+  rw [sub_e_add_pi_add] at hinC
+  -- `y` has two sectors at `M` (E5 § 3.4 at `N`, in the frame turned by `π`)
+  have hαα : e α = e (α + π + π) := by
+    rw [show α + π + π = α + 2 * π * ((1 : ℤ) : ℝ) by push_cast; ring, e_add_int_mul]
+  have hy2 : ∀ᶠ r in 𝓝[>] (0 : ℝ), 2 ≤ (F.sectorsOf M r xb).encard := by
+    have := flank_two_sectors_at_S_of_flanks hF hP hstN hhN2 Qm (Qp.congr hαα) hμ₃ hμ₄ hμ₁ hμ₂ flD (flB.congr hαα) flC
+      (flA.congr hαα) hxbh (fun hx => hxbE (by have := hx.1.2.2; rwa [hNE'] at this))
+    rwa [sub_e_add_pi_add] at this
+  -- `M` is stuck, and `y`'s two sectors there are horns `R±` along `±e α`
+  have hstM : F.IsStuck M := isStuck_of_hasRepeatedColour hT (hdom M) ⟨xb, hy2⟩
+  obtain ⟨hyM2, ν₁, ν₂, ν₃, ν₄, Rp, Rm, hν₁, -, -, hν₄, -, -⟩ :=
+    horns_of_two_sectors_at hF (hvC M) hstM hy2 (α := α) (by rw [hMN]; exact mem_closure_of_mem_coneAt hαb)
+  -- U1 at `M` for `h`: its cone there lies in the pinch about `+n`
+  subst hμ₂1 hμ₃1
+  obtain ⟨φh, hφh, -, hconeH1⟩ := coneAt_N_subset_of_horn hF Qp hμ₁
+  obtain ⟨φh', hφh', -, hconeH2⟩ := coneAt_S_subset_of_horn hF Qm hμ₄
+  rw [sub_e_add_pi_add] at hconeH2
+  have hαh : α ∉ coneAt (F.region h) M := fun hα =>
+    not_mem_angleIcc_of_gap (-1) (by push_cast; linarith) (by push_cast; linarith) (hconeH1 hα)
+  have hαπh : α + π ∉ coneAt (F.region h) M := fun hα =>
+    not_mem_angleIcc_of_gap (-1) (by push_cast; linarith) (by push_cast; linarith) (hconeH2 hα)
+  -- the sector chart at `M`, `R±` in it, and the sectors just after `R₊` and just before `R₋` (the upper flanks `z₁`, `z₂`)
+  obtain ⟨r₁, n', G', hC'⟩ := localSectors F (hdom M)
+  have hMo' := hC'.sorted.mono
+  have hr₁ : r₁ ∈ Ioc 0 r₁ := ⟨hC'.pos, le_rfl⟩
+  obtain ⟨rq', ⟨⟨hSp', hSpc'⟩, ⟨hSm', hSmc'⟩⟩, hrq'⟩ := ((Rp.2.and Rm.2).and (Ioc_mem_nhdsGT hC'.pos)).exists
+  obtain ⟨jp, hβjp, hnjp, hκjp, hnκjp, hsecjp⟩ := hC'.index_of_isSector_hornSet hrq' Rp.1 hSp'
+  obtain ⟨jm, hβjm, hnjm, hκjm, hnκjm, hsecjm⟩ := hC'.index_of_isSector_hornSet hrq' Rm.1 hSm'
+  have hn' : 0 < n' := jp.pos
+  have colEq' : ∀ (i : Fin n') (j j' : Fin 6), (∀ r ∈ Ioc 0 r₁, G'.sector M r i ⊆ F.region j) →
+      (∀ r ∈ Ioc 0 r₁, G'.sector M r i ⊆ F.region j') → j = j' := by
+    intro i j j' hj hj'
+    obtain ⟨z, hz⟩ := hC'.sector_nonempty hr₁ i
+    exact ((hj r₁ hr₁ hz).2).symm.trans (hj' r₁ hr₁ hz).2
+  have colQ' : ∀ i : Fin n', ∀ {ν₁ ν₂ β : ℝ}, (∀ r' ∈ Ioc 0 r₁, G'.sector M r' i = hornSet M β ν₁ ν₂ r') →
+      hornSet M β ν₁ ν₂ rq' ⊆ F.col ⁻¹' {xb} → ∀ r ∈ Ioc 0 r₁, G'.sector M r i ⊆ F.region xb := by
+    intro i ν₁ ν₂ β hsec hsub
+    obtain ⟨h', hh'⟩ := hC'.exists_col i
+    obtain ⟨z, hz⟩ := hC'.sector_nonempty hrq' i
+    have hzh : F.col z = xb := by rw [hsec rq' hrq'] at hz; exact hsub hz
+    have : h' = xb := ((hh' rq' hrq' (by rw [hsec rq' hrq'] at hz ⊢; exact hz)).2).symm.trans hzh
+    exact this ▸ hh'
+  have colp' := colQ' jp hsecjp hSpc'
+  have colm' := colQ' jm hsecjm hSmc'
+  obtain ⟨a₂, hβa₂, hκa₂⟩ := G'.exists_succ jp
+  obtain ⟨c₂, hβc₂, hκc₂⟩ := G'.exists_pred jm
+  rw [hnjp, hβjp] at hβa₂
+  rw [hβjm] at hβc₂
+  rw [hnκjp] at hκa₂
+  rw [hκjm] at hκc₂
+  have hjpm : jp ≠ jm := fun heq => hne (by rw [← hβjp, ← hβjm, heq])
+  have ha₂p : a₂ ≠ jp := fun heq => by rw [heq, hκjp] at hκa₂; exact absurd hκa₂ (ne_of_lt Rp.1)
+  have ha₂m : a₂ ≠ jm := fun heq => hne (by rw [← hβa₂, ← hβjm, heq])
+  have hc₂m : c₂ ≠ jm := fun heq => by rw [heq, hnκjm] at hκc₂; exact absurd hκc₂.symm (ne_of_lt Rm.1)
+  have hc₂p : c₂ ≠ jp := fun heq => hne (by rw [← hβc₂, ← hβjp, ← hnjp, heq])
+  obtain ⟨z₁, hz₁⟩ := hC'.exists_col a₂
+  obtain ⟨z₂, hz₂⟩ := hC'.exists_col c₂
+  have hαz₁ : α ∈ coneAt (F.region z₁) M := by
+    have : G'.β a₂ ∈ coneAt (G'.sector M r₁ a₂) M := by
+      rw [hC'.cone r₁ hr₁ a₂]; exact Icc_subset_angleIcc _ _ ⟨le_rfl, hMo' a₂⟩
+    exact mem_coneAt_of_e_eq hβa₂ (coneAt_mono (hz₁ r₁ hr₁) M this)
+  have hαz₂ : α + π ∈ coneAt (F.region z₂) M := by
+    have : G'.nextβ c₂ ∈ coneAt (G'.sector M r₁ c₂) M := by
+      rw [hC'.cone r₁ hr₁ c₂]; exact Icc_subset_angleIcc _ _ ⟨hMo' c₂, le_rfl⟩
+    exact mem_coneAt_of_e_eq hβc₂ (coneAt_mono (hz₂ r₁ hr₁) M this)
+  -- neither is `y` (`y` has exactly the two sectors `R±` at `M`), nor `h` (U1)
+  obtain ⟨r2', hr2e', hr2'⟩ := (hyM2.and (Ioc_mem_nhdsGT hC'.pos)).exists
+  have three' : ∀ i : Fin n', i ≠ jp → i ≠ jm → (∀ r ∈ Ioc 0 r₁, G'.sector M r i ⊆ F.region xb) → False := by
+    intro i hip him hi
+    have hle := hC'.card_le_encard_sectorsOf hr2' {jp, jm, i} (by
+      intro l hl
+      rcases Finset.mem_insert.mp hl with rfl | hl
+      · exact colp' r2' hr2'
+      rcases Finset.mem_insert.mp hl with rfl | hl
+      · exact colm' r2' hr2'
+      rw [Finset.mem_singleton.mp hl]; exact hi r2' hr2')
+    rw [hr2e', Finset.card_insert_of_notMem (by simp [hjpm, hip.symm]), Finset.card_pair (Ne.symm him)] at hle
+    norm_num at hle
+  have hz₁y : z₁ ≠ xb := by rintro rfl; exact three' a₂ ha₂p ha₂m hz₁
+  have hz₂y : z₂ ≠ xb := by rintro rfl; exact three' c₂ hc₂p hc₂m hz₂
+  have hz₁h : z₁ ≠ h := by rintro rfl; exact hαh hαz₁
+  have hz₂h : z₂ ≠ h := by rintro rfl; exact hαπh hαz₂
+  -- their tiles at `M` lie outside `B̄(N, 1)`: not `x₁`, `x₂` (in-type at `M`), nor `c` (an out-type `c`-contact at `M` would bar `c`'s
+  -- directions above `±e α` at `N`)
+  have hnz₁ : ¬ F.InType N z₁ M := by
+    have := not_inType_S_of_flankAbove (hC'.isFlankAbove_of_col hβa₂ hκa₂ hz₁) (hν₁.trans Rp.1.le)
+    rwa [hMN] at this
+  have hnz₂ : ¬ F.InType N z₂ M := by
+    have := not_inType_N_of_flankBelow (hC'.isFlankBelow_of_col hβc₂ hκc₂ hz₂) (Rm.1.le.trans hν₄)
+    rwa [hMN'] at this
+  have hz₁a : z₁ ≠ xa := by rintro rfl; exact hnz₁ hinA.2
+  have hz₂a : z₂ ≠ xa := by rintro rfl; exact hnz₂ hinA.2
+  have hz₁c' : z₁ ≠ xc := by rintro rfl; exact hnz₁ hinC.2
+  have hz₂c' : z₂ ≠ xc := by rintro rfl; exact hnz₂ hinC.2
+  have hcM : ∀ z : Fin 6, z = c → ¬ F.InType N z M → M ∈ closure (F.region z) → False := by
+    intro z hz hnin hMcl
+    rw [hz] at hnin hMcl
+    have hcont : F.IsContact N c M := ⟨hcN.1.2.2, by rw [hMdef, dist_eq_norm, add_sub_cancel_left, norm_e], hMcl⟩
+    have hout : F.OutType N c M := ((contact_inType_or_outType hF (hvC N) hcont).1).resolve_left hnin
+    obtain ⟨ic, -, hβic⟩ := hC.exists_index_of_mem_coloursAt hn hcN.1.2.2
+    have hA := (coneAt_subset_allowedCone hF (hvC N) hβic M hcont).2 hout
+    rw [hMdef, add_sub_cancel_left, dot_e_e] at hA
+    have hx2 : G.β ic ∈ angleIcc α (α + π - φc') := by
+      obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp (hconeC2 hβic)
+      exact mem_iUnion.mpr ⟨m + 1, by push_cast; linarith, by push_cast; linarith⟩
+    have hIoo := mem_angleIoo_half (β := α) (β' := α + π) rfl rfl (by linarith) (by linarith) hφc hφc' (hconeC1 hβic) hx2
+    exact absurd hA (not_le.mpr (cos_pos_of_mem_angleIoo hIoo))
+  have hz₁c : z₁ ≠ c := fun he => hcM z₁ he hnz₁ (mem_closure_of_mem_coneAt hαz₁)
+  have hz₂c : z₂ ≠ c := fun he => hcM z₂ he hnz₂ (mem_closure_of_mem_coneAt hαz₂)
+  -- so both are `g`, the sixth colour
+  have sixth : ∀ z : Fin 6, z ≠ c → z ≠ h → z ≠ xa → z ≠ xb → z ≠ xc → z = g := by
+    intro z hzc hzh hza hzb hzc'
+    by_contra hzg
+    have hnd : [c, h, xa, xb, xc, g, z].Nodup := by
+      simp only [List.nodup_cons, List.mem_cons, List.not_mem_nil, or_false, not_or, List.nodup_nil, and_true]
+      exact ⟨⟨hhc.symm, hxac.symm, hxbc.symm, hxcc.symm, hgc.symm, Ne.symm hzc⟩,
+        ⟨hxah.symm, hxbh.symm, hxch.symm, hgh.symm, Ne.symm hzh⟩, ⟨hxab, hxac', hxag, Ne.symm hza⟩,
+        ⟨hxbc', hxbg, Ne.symm hzb⟩, ⟨hxcg, Ne.symm hzc'⟩, Ne.symm hzg, not_false⟩
+    have := hnd.length_le_card
+    simp at this
+  have hz₁g := sixth z₁ hz₁c hz₁h hz₁a hz₁y hz₁c'
+  have hz₂g := sixth z₂ hz₂c hz₂h hz₂a hz₂y hz₂c'
+  -- the two `g`-sectors at `M` are distinct (an `h`-sector lies between them, in the pinch), and `g` is absent at `N = M − n`: MERGE at `M`
+  have hhMcl : h ∈ F.coloursAt M := hhM.1.2.2
+  have hac₂ : a₂ ≠ c₂ := by
+    intro heq
+    subst heq
+    obtain ⟨ih, hih, hβih⟩ := hC'.exists_index_of_mem_coloursAt hn' hhMcl
+    have hiha : a₂ ≠ ih := by
+      rintro rfl; exact hz₁h (colEq' a₂ z₁ h hz₁ hih)
+    have hx2 : G'.β ih ∈ angleIcc α (α + π - φh') := by
+      obtain ⟨m, hm1, hm2⟩ := mem_iUnion.mp (hconeH2 hβih)
+      exact mem_iUnion.mpr ⟨m + 1, by push_cast; linarith, by push_cast; linarith⟩
+    have := mem_angleIoo_half hβa₂ hβc₂ (hMo' a₂) (hMo'.nextβ_le_add a₂) hφh hφh' (hconeH1 hβih) hx2
+    exact Set.disjoint_left.mp (hMo'.disjoint hiha) (Icc_subset_angleIcc _ _ ⟨le_rfl, hMo' ih⟩) this
+  rw [hz₁g] at hz₁ hαz₁
+  rw [hz₂g] at hz₂
+  exact hstM.1 (mergeAvailable_of_two_sectors hF (hvC M) hC' hac₂ hz₁ hz₂ hαz₁ (Or.inr (by rw [hMN]; exact hgN)))
 
 /-- **FS112-Y3-END-NEEDS, corrected** (`plans/FS112-YB3-verification.md` § 3.1, YB3-NEEDS; the form FS114-CVB's `¬G_N` branch reads,
 `plans/FS114-CVB-verification.md` § 1.6): in a terminal valid six-coloured map of the plane, a stuck vertex `E` with three colours whose
