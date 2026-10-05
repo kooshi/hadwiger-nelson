@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–346 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–348 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **346**.
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **348**.
 >
 > **Held in the kernel, on `main`**: waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -17,10 +17,12 @@ that judge the milestone, written before any job).*
 >   child. Brief `data/fs131/briefs/FS131-I5m-wave5.md`.
 > - **FS131-RW2** (`fs131-w5p`): WALK finished — C5a–C5d, C7, C10 and `exists_boundaryWalk` (RW1's record § 22.2; about one session). Brief
 >   `data/fs131/briefs/FS131-RW2-walk.md`.
-> - **FS131-I5l** (`fs131-w5c`): wave 5's `Terminal` half from I5k's Stage 34 — `cv_hd` over `cv_hd_main` and `y3_end_needs`, `c_double`, `c_ends`, `exists_red`,
->   `exists_terminal`, `cv_exists`. Brief `data/fs131/briefs/FS131-I5l-terminal.md`.
+> - **FS131-IMM3** (`fs131-w4mm`): MERGE finished — `exists_gap` restated, the definitions, 4.3 the map, 4.4 the clauses, `exists_merge_aux` (IMM2's record § 5.2);
+>   **now on wave 5's path** (item 348). Brief `data/fs131/briefs/FS131-IMM3-merge.md`.
 >
-> **Done since the compaction**: **FS131-RW1** (items 345–346: ADJ, WALK's C1–C4 and the Euler circuit in the kernel; SEP reads no facial order, so WALK
+> **Done since the compaction**: **FS131-I5l** (items 347–348: `cv_hd`, `c_double`, `c_ends`, `cv_exists` over named open leaves; `exists_red` and
+> `exists_terminal` need W-MERGE — ruling 295 reversed by its own condition; **the stale `exists_merge` on the wave-5 branches is item 268's unsatisfiable form**:
+> cite only ruling 269's, copied from `fs131-w4mm`; wave 5's landing waits for MERGE's); **FS131-RW1** (items 345–346: ADJ, WALK's C1–C4 and the Euler circuit in the kernel; SEP reads no facial order, so WALK
 > is an Euler circuit plus insertions; about one session left); **FS131-IMM2** (items 343–344: MERGE's gap chosen and proved clear, `Near.exists_gap`; 4.3–4.4 left, about two sessions,
 > record § 5.2); **FS131-I5k** (items 340–341: NB3-END items 3–5 in the kernel, so FS112-N3-END (`n3_end`) has no `sorry` beneath; `cv_class`
 > over `cv_hd`, `c_double`; merge notes for the landing); **FS131-RL1** (items 338–339: the boundary walk planned — WALK and SEP over ADJ; two lanes; the crossing lemma outside a
@@ -36,12 +38,12 @@ that judge the milestone, written before any job).*
 > `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'`; the axioms print parsed by script from the job's data file; one statement read back); log the item; rule the
 > slot per item 323. **At each landing** (as WL1's, items 326–327): read the saved gate logs, file the drafts with `scripts/gate_report.py axioms|vacuity` and `tools/claude_md_fact_audit.py --base <last CLAUDE.md commit>` run **before** committing, push notify Kooshi.
 >
-> **Queue for the next freed slot (items 323, 339, 341, 344, 346)**: **the SEP lane FS131-RS1** first (SEP's six children, on a new branch `fs131-w5s` cut from `fs131-w5p` at RW2's
-> then-current commit, or on `fs131-w5p` itself if RW2 has finished; brief from RL1's plan § 4.4), unless the freed lane is the `Terminal` half with leaves left;
-> then **MERGE's continuation FS131-IMM3** (record § 5.2 on `fs131-w4mm`; restate `exists_gap`'s `b < a + X.n` as `b < X.n` first); then **`bend_away`'s implementer** (branch `fs131-w4ba` at
+> **Queue for the next freed slot (items 346, 348)**: **the `Terminal` continuation FS131-I5n** (from I5l's Stage 38: first replace the stale `exists_merge`
+> in `fs131-w5c`'s `Contact` by `fs131-w4mm`'s ruling-269 text, by script; then `cv_hd_main_inType`, `y3_end_needs`, `exists_red`, `exists_terminal`); then **the SEP
+> lane FS131-RS1** (on `fs131-w5p` after RW2, or a branch `fs131-w5s` cut from it; brief from RL1's plan § 4.4); then **`bend_away`'s implementer** (branch `fs131-w4ba` at
 > `71cca146`; E5 § 4 — e5-claim-e and e5-end-cap — its route; lands on its own); then **`disc1_local`** (planar, after `fs131-w5p` merges back into `fs131-w5`).
 >
-> **Merges ahead**: `fs131-w5t` → `fs131-w5p` (IP4, by amendment); then `fs131-w5p` → `fs131-w5` and `fs131-w5c` → `fs131-w5` on Keryx's word when their
+> **Merges ahead** (MERGE lands on `main` before wave 5's landing, or merges into wave 5 at it — item 348 (b)): `fs131-w5t` → `fs131-w5p` (IP4, by amendment); then `fs131-w5p` → `fs131-w5` and `fs131-w5c` → `fs131-w5` on Keryx's word when their
 > jobs finish (disjoint files except `BaseWalk`, edited on `fs131-w5` and `fs131-w5p` in different declarations, item 330; one `scripts/Axioms.lean` block each); then wave 5's landing job (merge `main`, `framePt → fromFrame` in `FlankUA` and the
 > branch copies, the gate, land). **Every unmerged branch applies `framePt → fromFrame` at its merge** (item 318's correction (1); a miss elaborates against
 > wave 2's `Plane/Slack.framePt`).
@@ -100,7 +102,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 |---|---|---|---|
 | FS131-I5m (wave 5's non-`Terminal` half from I5j's Stage 33; items 343–344) | Opus | `data/fs131/briefs/FS131-I5m-wave5.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-I5m.md` |
 | FS131-RW2 (WALK finished on `fs131-w5p`; items 345–346) | Opus | `data/fs131/briefs/FS131-RW2-walk.md` | branch `fs131-w5p`'s `data/fs131/reports/FS131-RW2.md` |
-| FS131-I5l (wave 5's `Terminal` half from I5k's Stage 34; items 340–341) | Opus | `data/fs131/briefs/FS131-I5l-terminal.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-I5l.md` |
+| FS131-IMM3 (MERGE finished on `fs131-w4mm`; items 347–348) | Opus | `data/fs131/briefs/FS131-IMM3-merge.md` | branch `fs131-w4mm`'s `data/fs131/reports/FS131-IMM3.md` |
 
 
 **Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.

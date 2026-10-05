@@ -2953,3 +2953,37 @@ reason by the close.*
      five times high; the measured longer piece goes first, in its warm tree. Confidence: medium (SEP first would cost little either way). (c) **The SEP lane
      FS131-RS1 takes the next free slot**, on a new branch `fs131-w5s` cut from `fs131-w5p` at RW2's then-current commit, or on `fs131-w5p` itself after RW2 if
      RW2 has finished by then. In flight after RW2's launch: 1 (I5l) + 1 (I5m) + 1 (RW2) = 3.
+347. **FS131-I5l handed back** (Stage 38 SAVED, harness ≈ 381k by the task notice; record `fs131-w5c`'s `plans/FS131-I5-implementation.md`, Stages 35–38;
+     report `data/fs131/reports/FS131-I5l.md`; commits `6d2d58d5`, `ee8e3b56`, `3a141ffb`, `931ceef6`, `6d316ef2`, pushed). **Proved over named open leaves**:
+     `cv_hd` (FS114-CV-HD's equivalences) over `cv_hd_main`, itself over two open children `cv_hd_main_inType` (CVB § 1.6's branch `G_N`, new) and
+     `y3_end_needs`; `c_double` (FS112-C-DOUBLE) over `cv_hd` and this branch's stale `flankQ_upper/lower` (proved on `main`); `c_ends` (FS112-C-ENDS, erratum
+     form) over `cv_class`; `cv_exists` (FS114-CV-EXISTS, `BaseDense`) over `exists_terminal` and `dense3`, by CVB § 1.4's route, using neither CV-HD nor C-ENDS.
+     **[kernel] on the standard three**: `upper_bounds_of_inType_N` (CVB § 1.6, `G_N ⇒ υ± = 1`), `stuckAlong_of_run` (plan § 9.1, stronger: no ≤ 3 colours, no
+     terminality), `stuckAlong_of_mem_stuckRun`, `lower_flank_horns_at_N` (CVB § 1.4 item 5 / YB3 § 3.1 Steps 2–3), `mergeAvailable_of_not_mem_pole` (CVB § 1.6),
+     and five helpers. Wave 5 at 21 `sorry` declarations on this branch (25 at launch); `Terminal` 4. **Receipt** (Keryx): `origin/fs131-w5c` is `6d316ef2`; the
+     latest build log (`build/gate/build/20261005T064611Z-2087752.log`) ends "Build completed successfully (5370 jobs)", 0 warnings other than `sorry`;
+     `Terminal`'s `sorry` declarations by grep: `exists_red`, `exists_terminal`, `y3_end_needs`, `cv_hd_main_inType`; `cv_exists` carries none;
+     `tools/fs131_i5h_stmt_check.py 72149b07` run by Keryx: PASS; `I5lAxioms36.out` and `…38.out` parsed (9 of 15 and 4 of 7 standard; the rest on `sorryAx`
+     through the open leaves, as reported). **Generalizations**: a stuck vertex's axis passes to a chain neighbour with one shared colour, one contact and one
+     half-plane; CV-EXISTS needs neither CV-L0 nor CVB § 1.4 item 5's `|P_cl(N)| ≤ 3` count; CVB § 1.6's "h at N tangent to ±a" holds with `κ₃ = −1` and `¬H_S`
+     at any `κ₂`. **Tool defect, fixed by the job**: `tools/fs131_i5h_stmt_check.py --self-test`'s first plant matched `n3_end_four_colours` (added after the
+     base, never checked) and could not fire; re-aimed at `n3_end_of_not_inType`, all three fire. **The finding that needs a ruling**: `exists_red` (N2-RED
+     merges at every both-kind arc centred at a three-colour point) and `exists_terminal` (N2-TERM's `Terminal` clause needs every available MERGE performed)
+     need W-MERGE, which ruling 295 barred from wave 5 — **ruling 295's own reversal condition is met** ("it would change if wave 5's skeleton came to cite
+     `exists_merge`"). **And a hazard Keryx found checking it**: the copy of `exists_merge` still declared (with `sorry`) in the stale `Contact` on `fs131-w5`,
+     `fs131-w5c` and `fs131-w5p` (`Contact.lean:4094`, `:4094`, `:721`) carries the **unsatisfiable pre-269 clause** `(∀ x ∉ sphere v ρ, F'.coloursAt x ⊆
+     F.coloursAt x)` (item 268), not ruling 269's `F'.coloursAt v ⊆ F.coloursAt v`; by script, `fs131-w5c`'s statement differs from `fs131-w4mm`'s `Contact`
+     `exists_merge` (which equals `Moves`' `exists_merge_aux`) at exactly that clause. Nothing on any wave-5 branch cites it yet (grep). Credit: I5l, for naming
+     the blocker with ruling 295's own words.
+348. **Ruling on item 347: MERGE returns to wave 5's path; its continuation takes I5l's slot.** (a) **`exists_red` and `exists_terminal` may cite W-MERGE —
+     only in ruling 269's form.** The next `Terminal` implementer first replaces the stale `exists_merge` statement in `fs131-w5c`'s `Contact.lean` by the text of
+     `fs131-w4mm`'s `Contact` `exists_merge` (statement and docstring copied by script, checked identical, `sorry` body kept), and cites only that. Alternative
+     weighed: citing the stale copy and letting the landing sort it out. Why not: it is unsatisfiable (item 268), so anything built on its bad clause would be
+     unsound and break at the landing. Confidence: high. (b) **Wave 5's landing now waits for MERGE's**: MERGE lands on `main` (restoring `exists_merge` and
+     `exists_merge_aux` in ruling 269's form, item 295 (a)) before wave 5's landing merges `main`; or MERGE's branch merges into wave 5 at its landing, whichever
+     is ready first — ruled then. (c) **I5l's slot → MERGE's continuation, FS131-IMM3, on `fs131-w4mm` from IMM2's Stage 5** (record § 5.2; `exists_gap`'s clause
+     restated first, item 344 (a)). Alternative weighed: the `Terminal` continuation now. Why: MERGE's chain (about 2–2.5 sessions at IMM2's measured pace, then
+     its landing) is now the longest path to wave 5's landing; the `Terminal` half's four leaves need only MERGE's statement, so they can start at the next
+     slot without waiting for its proof. Confidence: medium (the two chains are within a session of each other). (d) **Queue**: the `Terminal` continuation
+     FS131-I5n (with (a) as its first step) at the next free slot, then the SEP lane FS131-RS1, then `bend_away`'s implementer, `disc1_local`. In flight after
+     IMM3's launch: 1 (I5m) + 1 (RW2) + 1 (IMM3) = 3.
