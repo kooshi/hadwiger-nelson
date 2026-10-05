@@ -3593,6 +3593,16 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonpos_of_preconnected
 #print axioms HadwigerNelson.Plane.ArcMap.dist_radial_hex_in
 #print axioms HadwigerNelson.Plane.ArcMap.hex_point_in
+-- FS131-I5m (stage 36): `bv_nd`'s children, BV-ND steps 2–4
+#print axioms HadwigerNelson.Plane.ArcMap.sq_dist_germ
+#print axioms HadwigerNelson.Plane.ArcMap.germ_dist_cmp_one
+#print axioms HadwigerNelson.Plane.ArcMap.exists_chart_of_noRep
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_sector_of_region
+#print axioms HadwigerNelson.Plane.ArcMap.BranchGerms.next_adj
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_shared
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.pair_le
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.pair_ge
+#print axioms HadwigerNelson.Plane.ArcMap.tangent_pair_ne_one
 
 #eval IO.println "=== PURCHASED ==="
 

@@ -165,6 +165,10 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
 - Stage 35 (`data/fs131/i5m/build-stage35.log`; `build/gate/build/20261005T062507Z-1929717.log`; axioms `I5mAxioms35.out`, control `bv_nd` with
   `sorryAx`, `linkage_dot_ne_zero` clean), `Plane/ValidMap/HexRing`: `HadwigerNelson.Plane.ArcMap.rot_in` (FS112-ROTHEX, N2-ROT's inward row (B+, B−));
   children `hex_side_far`, `Valid.cone_re_nonpos_of_preconnected`, `dist_radial_hex_in`, `hex_point_in` (all `ArcMap.`).
+- Stage 36 (`data/fs131/i5m/build-stage36.log`; `build/gate/build/20261005T064038Z-2050688.log`; axioms `I5mAxioms36.out`, control `bv_l3` with
+  `sorryAx`, `linkage_dot_ne_zero` clean), `HexRing`: `HadwigerNelson.Plane.ArcMap.bv_nd` (FS114-BV-HEX's (BV-ND), BASE-V § 1b.2 steps 2–4, with unit
+  arcs, at every `k`), and with it `bv_nd1`; children `sq_dist_germ`, `germ_dist_cmp_one`, `exists_chart_of_noRep`, `IsSectorChart.exists_sector_of_region`,
+  `BranchGerms.next_adj`, `IsSectorChart.exists_shared`, `Valid.pair_le`, `Valid.pair_ge`, `tangent_pair_ne_one` (all `ArcMap.`).
 
 ## Stage 1 — SAVED: the readback
 
@@ -1606,3 +1610,42 @@ block (a comment line names this stage), above the `=== PURCHASED ===` banner. `
 M holds, low.
 
 ## Stage 35 — SAVED
+
+## Stage 36 — SAVED: `bv_nd` proved (a kernel theorem), and with it `bv_nd1`
+
+**`bv_nd` is proved as stated** (FS114-BV-HEX's (BV-ND), `plans/BASE-V-verification.md` § 1b.2 steps 2–4; `Plane/ValidMap/HexRing`), with unit arcs and
+at every `k`. The route, in the map's own terms (new children in brackets):
+1. At each of `x₀ = r_{u₁}(φ)`, `y₀ = r_{u₂}(χ)` (H: no four colours, no repeated colour) a sector chart with at most three sectors of pairwise
+   distinct colours [`exists_chart_of_noRep`, from `localSectors_disj`; the proof of `isCubicTrichromatic_of_three_of_noRep` without the count];
+   the germ points of a colour near the point lie in that colour's sector [`IsSectorChart.exists_sector_of_region`].
+2. Step 2 (first order): with `E = x₀ − y₀`, the germ of `ω(u₂)` on side `σ` sits at squared distance `1 + 2(1 + a)(1 − cos t) − 2 D sin t` from
+   `x₀`, `D = ⟨σ i e χ, E⟩` [`sq_dist_germ`, an identity]; so the `α`-germ ahead of `y₀` (`D > 0`) comes within `1` of `x₀` and the `β`-germ behind
+   goes beyond [`germ_dist_cmp_one`].
+3. Validity along connected sectors: one `α`-point of `y₀`'s sector within `1` of `x₀ ∈ cl A₁` puts every pair of `cl A₁ × cl A₂` within `1`
+   [`Valid.pair_le`]; one `β`-point beyond `1` puts every `β`-pair at `≥ 1` [`Valid.pair_ge`].
+4. Step 3: with at most three sectors the `α`- and `β`-sectors are adjacent [`BranchGerms.next_adj`, by `decide` for `n ≤ 3`], so at each small
+   distance `s` there is a point of both closures [`IsSectorChart.exists_shared`, from `mem_closure_sector_of_lt` and `e_nextDir`]; at `x₀` it lies
+   on `ω(y₀)` (`≤ 1` and `≥ 1`), at `y₀` on `ω(x₀)`.
+5. Step 4: two such points at the same `s ∈ (0, 1)` are `1 − s²` or `√(1 + 2s²)` apart, never `1` [`tangent_pair_ne_one`, real algebra in the
+   frame of `E`]; the first contradicts the `β`-pairs, the second the `α`-pairs.
+
+**What the proof reads** (recorded in `bv_nd`'s docstring): only `y₀`'s sense — the component of `ω(u₂)`'s velocity along `E` — and, at `x₀`, only
+that both colours are carried there. The `DoubleEvent`'s first dot condition and the senses of `ω(u₁)`'s germs are not used (validity makes them
+follow). A **generalization**, not stated as a theorem: BV-ND holds with the double event replaced by "`x₀` carries `α` and `β`, and `y₀` switches
+`β → α` moving toward `x₀`". Read against the informal claim (BV-ND, plan § 8.2, G-BVND): "no double event at two points of the domain outside
+`F(M) ∪ R(M)`, every `k`, any centres; with unit arcs, at cusps" — **same**. `bv_nd1` (proved over `bv_nd` by FS131-I5, stage 5) is now a kernel
+theorem.
+
+**Statements unchanged** (`tools/fs131_i5_stmt_check.py d61edefc`: PASS); `bv_nd`'s docstring gained the paragraph above. New names collision-free
+(`git grep` on `origin/fs131-w5p`, `origin/fs131-w5c`, `origin/fs131-w4`, `main`, `origin/fs131-w5`: none).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T064038Z-2050688.log`; driver log `data/fs131/i5m/build-stage36.log`). Wave 5's sorry declarations (distinct sites):
+**20** (`HexRing` 1: `bv_l3`), mine 2. Axioms (`I5mAxioms36.lean` → `.out`): `bv_nd`, `bv_nd1`, the nine children and `rot_in` on the standard three
+(`BranchGerms.next_adj` on `[propext]`); control `bv_l3` reads `sorryAx`, `linkage_dot_ne_zero` clean. `scripts/Axioms.lean`: the nine children
+added to the "FS131-I5g" block (comment line names this stage). `tools/check_architecture.py`: PASS.
+
+**Re-pricing from the first two leaves** (`rot_in`, `bv_nd`): about 40k and 35k tokens of context, every child compiling within two rounds. The
+plan's M and M–H hold, low; the cost of `bv_l3` and `exists_preBend` is in their new content (stage 37), not in iteration.
+
+## Stage 36 — SAVED

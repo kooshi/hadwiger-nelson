@@ -1553,15 +1553,351 @@ theorem linkage_dot_ne_zero {u₁ u₂ : ℂ} (ht : dist u₁ u₂ ≠ 1 ∧ dis
       have : (dist u₁ u₂ - 3) * (dist u₁ u₂ + 3) = 0 := by linear_combination h
       rcases mul_eq_zero.mp this with h' | h' <;> linarith)
 
+/-! ### BV-ND's steps 2–4: the children -/
+
+/-- **The squared distance from `x` along a germ of `ω(u)`** (child of `bv_nd`): with `E = x − r(χ)`, `|E| = 1`, the point `r(χ + σt)` lies at
+squared distance `1 + 2(1 + a)(1 − cos t) − 2 D sin t` from `x`, where `a = Re(E conj e χ)` and `D = ⟨σ i e χ, E⟩` is the component of the
+germ's velocity along `E`. -/
+theorem sq_dist_germ (u x : ℂ) (χ : ℝ) (σ : Side) (t : ℝ) (h1 : dist x (ringPt u χ) = 1) :
+    dist x (ringPt u (χ + σ.sign * t)) ^ 2 = 1 + 2 * (1 + ((x - ringPt u χ) * starRingEnd ℂ (e χ)).re) * (1 - Real.cos t) -
+      2 * dot ((σ.sign : ℂ) * (I * e χ)) (x - ringPt u χ) * Real.sin t := by
+  have hE : ‖x - ringPt u χ‖ ^ 2 = 1 := by rw [← dist_eq_norm, h1]; norm_num
+  rw [norm_sq_eq_re_im] at hE
+  have hχ : Real.cos χ ^ 2 + Real.sin χ ^ 2 = 1 := Real.cos_sq_add_sin_sq χ
+  have ht : Real.cos t ^ 2 + Real.sin t ^ 2 = 1 := Real.cos_sq_add_sin_sq t
+  rw [dist_eq_norm, norm_sq_eq_re_im]
+  set p := (x - ringPt u χ).re with hp
+  set q := (x - ringPt u χ).im with hq
+  have hx : x - ringPt u (χ + σ.sign * t) = (x - ringPt u χ) + (e χ - e (χ + σ.sign * t)) := by
+    simp only [ringPt]; ring
+  rw [hx]
+  simp only [dot, Complex.add_re, Complex.add_im, Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im, re_e, im_e,
+    Complex.conj_re, Complex.conj_im, Complex.I_re, Complex.I_im, Complex.ofReal_re, Complex.ofReal_im, ← hp, ← hq]
+  cases σ <;> simp only [Side.sign, Real.cos_add, Real.sin_add, neg_mul, one_mul, Real.cos_neg, Real.sin_neg] <;>
+    linear_combination hE + ((1 - Real.cos t) ^ 2 + Real.sin t ^ 2) * hχ + ht
+
+/-- **A germ moving toward `x` comes within `1` of it; one moving away goes beyond `1`** (child of `bv_nd`, BV-ND step 2's first-order
+fact): at `y = r(χ)` with `|x − y| = 1`, the germ of `ω(u)` on side `σ` has velocity `σ i e χ`; if its component along `x − y` is positive,
+the germ's points near `y` are nearer than `1` to `x`, and if it is negative, farther. -/
+theorem germ_dist_cmp_one (u x : ℂ) (χ : ℝ) (σ : Side) (h1 : dist x (ringPt u χ) = 1) :
+    (0 < dot ((σ.sign : ℂ) * (I * e χ)) (x - ringPt u χ) →
+      ∃ δ > 0, ∀ t ∈ Ioo 0 δ, dist x (ringPt u (χ + σ.sign * t)) < 1) ∧
+    (dot ((σ.sign : ℂ) * (I * e χ)) (x - ringPt u χ) < 0 →
+      ∃ δ > 0, ∀ t ∈ Ioo 0 δ, 1 < dist x (ringPt u (χ + σ.sign * t))) := by
+  set a := ((x - ringPt u χ) * starRingEnd ℂ (e χ)).re with ha
+  set D := dot ((σ.sign : ℂ) * (I * e χ)) (x - ringPt u χ) with hD
+  have ha1 : |a| ≤ 1 := by
+    have : ‖(x - ringPt u χ) * starRingEnd ℂ (e χ)‖ = 1 := by
+      rw [norm_mul, Complex.norm_conj, norm_e, mul_one, ← dist_eq_norm, h1]
+    calc |a| ≤ ‖(x - ringPt u χ) * starRingEnd ℂ (e χ)‖ := Complex.abs_re_le_norm _
+      _ = 1 := this
+  have ha0 : 0 ≤ 1 + a := by linarith [(abs_le.mp ha1).1]
+  have ha2 : 1 + a ≤ 2 := by linarith [(abs_le.mp ha1).2]
+  have hsq := sq_dist_germ u x χ σ
+  constructor
+  · intro hD0
+    refine ⟨min 1 (D / 2), lt_min one_pos (by linarith), fun t ht => ?_⟩
+    have ht0 := ht.1
+    have ht1 : t < 1 := lt_of_lt_of_le ht.2 (min_le_left _ _)
+    have htD : t < D / 2 := lt_of_lt_of_le ht.2 (min_le_right _ _)
+    have hc := Real.one_sub_sq_div_two_le_cos (x := t)
+    have hs := Real.sin_gt_sub_cube ht0
+    have hA0 : 0 ≤ 1 - Real.cos t := by linarith [Real.cos_le_one t]
+    have hL : 2 * (1 + a) * (1 - Real.cos t) ≤ 2 * t ^ 2 := by
+      have h1' : (1 + a) * (1 - Real.cos t) ≤ 2 * (t ^ 2 / 2) :=
+        mul_le_mul ha2 (by linarith) hA0 (by norm_num)
+      linarith
+    have ht3 : t ^ 3 ≤ t := by nlinarith
+    have hR1 : D * (t - t ^ 3 / 6) < D * Real.sin t := mul_lt_mul_of_pos_left hs hD0
+    have hR2 : t ^ 2 < D * (t - t ^ 3 / 6) := by nlinarith
+    have hlt : dist x (ringPt u (χ + σ.sign * t)) ^ 2 < 1 := by rw [hsq t h1]; linarith
+    nlinarith [dist_nonneg (x := x) (y := ringPt u (χ + σ.sign * t))]
+  · intro hD0
+    refine ⟨1, one_pos, fun t ht => ?_⟩
+    have hs := Real.sin_pos_of_pos_of_lt_pi ht.1 (by linarith [Real.pi_gt_three, ht.2])
+    have hA0 : 0 ≤ 1 - Real.cos t := by linarith [Real.cos_le_one t]
+    have h0 := mul_nonneg ha0 hA0
+    have h3 : 0 < -D * Real.sin t := mul_pos (by linarith) hs
+    have hgt : 1 < dist x (ringPt u (χ + σ.sign * t)) ^ 2 := by rw [hsq t h1]; nlinarith
+    nlinarith [dist_nonneg (x := x) (y := ringPt u (χ + σ.sign * t))]
+
+/-- **A chart at a point with no four colours and no repeated colour** (child of `bv_nd`): at most three sectors, of pairwise distinct
+colours (a repeated sector colour is a repeated colour at every small radius), with the chart's disjointness clause. -/
+theorem exists_chart_of_noRep {x : ℂ} (hx : x ∈ F.dom) (hH : x ∉ F.fourSet ∪ F.repSet) :
+    ∃ r₀ n, ∃ G : BranchGerms n, F.IsSectorChart G x r₀ ∧ (∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) ∧
+      n ≤ 3 ∧ ∃ f : Fin n → Fin k, Function.Injective f ∧ ∀ i, G.sector x r₀ i ⊆ F.region (f i) := by
+  obtain ⟨r₀, n, G, hC, hdisj⟩ := localSectors_disj F hx
+  have hnr : ¬ F.HasRepeatedColour x := fun h => hH (Or.inr ⟨hx, h⟩)
+  have h4 : (F.coloursAt x).ncard < 4 := by
+    by_contra h; push Not at h; exact hH (Or.inl ⟨hx, h⟩)
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · subst hn
+    exact ⟨r₀, 0, G, hC, hdisj, by norm_num, Fin.elim0, fun i => i.elim0, fun i => i.elim0⟩
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  choose p hp using fun i => hC.sector_nonempty hr₀ i
+  have hcol : ∀ i, ∀ r ∈ Ioc 0 r₀, ∀ z ∈ G.sector x r i, F.col z = F.col (p i) := fun i r hr z hz =>
+    (hC.isPreconnected r₀ hr₀ i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hr₀ i))
+      (G.sector_mono hr.2 i hz) (hp i)
+  have hsec : ∀ i, G.sector x r₀ i ⊆ F.region (F.col (p i)) := fun i z hz =>
+    ⟨hC.sector_subset_interiorPts hn hr₀ i hz, hcol i r₀ hr₀ z hz⟩
+  have hmem : ∀ i, F.col (p i) ∈ F.coloursAt x := fun i => closure_mono (hsec i) (hC.mem_closure_sector hr₀ i)
+  have hinj : Function.Injective fun i => F.col (p i) := by
+    intro i j heq
+    by_contra hij
+    apply hnr
+    refine ⟨F.col (p i), ?_⟩
+    filter_upwards [Ioc_mem_nhdsGT hC.pos] with r hr
+    have hi : G.sector x r i ∈ F.sectorsOf x r (F.col (p i)) :=
+      ⟨(hC.isSector_iff hn hr).mpr ⟨i, rfl⟩, fun z hz => hcol i r hr z hz⟩
+    have hj : G.sector x r j ∈ F.sectorsOf x r (F.col (p i)) :=
+      ⟨(hC.isSector_iff hn hr).mpr ⟨j, rfl⟩, fun z hz => (hcol j r hr z hz).trans heq.symm⟩
+    have hne : G.sector x r i ≠ G.sector x r j := by
+      intro h
+      obtain ⟨z, hz⟩ := hC.sector_nonempty hr i
+      exact Set.disjoint_left.mp (hC.disjoint r hr i j hij) hz (h ▸ hz)
+    calc (2 : ℕ∞) = ({G.sector x r i, G.sector x r j} : Set (Set ℂ)).encard := (Set.encard_pair hne).symm
+      _ ≤ (F.sectorsOf x r (F.col (p i))).encard :=
+          Set.encard_le_encard (Set.insert_subset hi (Set.singleton_subset_iff.mpr hj))
+  have hn3 : n ≤ 3 := by
+    have hcard : (Finset.univ.image fun i => F.col (p i)).card = n := by
+      rw [Finset.card_image_of_injective _ hinj, Finset.card_univ, Fintype.card_fin]
+    have hsub : (↑(Finset.univ.image fun i => F.col (p i)) : Set (Fin k)) ⊆ F.coloursAt x := by
+      intro c hc; simp only [Finset.coe_image, Finset.coe_univ, image_univ, mem_range] at hc
+      obtain ⟨i, rfl⟩ := hc; exact hmem i
+    have := Set.ncard_le_ncard hsub (Set.toFinite _)
+    rw [Set.ncard_coe_finset, hcard] at this
+    omega
+  exact ⟨r₀, n, G, hC, hdisj, hn3, _, hinj, hsec⟩
+
+/-- A point of a colour class near a chart's point lies in the sector of that colour (child of `bv_nd`). -/
+theorem IsSectorChart.exists_sector_of_region {n : ℕ} {G : BranchGerms n} {x : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G x r₀)
+    (hn : 0 < n) {f : Fin n → Fin k} (hsec : ∀ i, G.sector x r₀ i ⊆ F.region (f i)) {c : Fin k} {z : ℂ}
+    (hz : z ∈ F.region c) (hzx : dist z x < r₀) : ∃ i, f i = c ∧ z ∈ G.sector x r₀ i := by
+  have : z ∈ ball x r₀ ∩ F.interiorPts := ⟨hzx, hz.1⟩
+  rw [hC.cover r₀ ⟨hC.pos, le_rfl⟩ hn] at this
+  obtain ⟨i, hi⟩ := mem_iUnion.mp this
+  exact ⟨i, ((hsec i hi).2).symm.trans hz.2, hi⟩
+
+/-- Among at most three germs, of two distinct ones each follows the other or is followed by it (child of `bv_nd`). -/
+theorem BranchGerms.next_adj : ∀ n : ℕ, n ≤ 3 → ∀ a b : Fin n, a ≠ b →
+    BranchGerms.next a = b ∨ BranchGerms.next b = a := by
+  intro n hn
+  interval_cases n <;> decide
+
+/-- **Two sectors of a chart with at most three germs share a boundary branch** (child of `bv_nd`): at every distance `s` below the
+chart's radius there is a point at distance `s` from the base in the closure of both. -/
+theorem IsSectorChart.exists_shared {n : ℕ} {G : BranchGerms n} {v : ℂ} {r₀ : ℝ} (hC : F.IsSectorChart G v r₀)
+    (hdisj : ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) (hn3 : n ≤ 3) {a b : Fin n} (hab : a ≠ b)
+    {s : ℝ} (hs : s ∈ Ioo 0 r₀) :
+    ∃ P, dist P v = s ∧ P ∈ closure (G.sector v r₀ a) ∧ P ∈ closure (G.sector v r₀ b) := by
+  have hord := G.dir_lt_nextDir hC.sorted hC.curv hdisj s hs
+  have hdist : ∀ φ : ℝ, dist (v + (s : ℂ) * e φ) v = s := fun φ => by
+    rw [dist_eq_norm, add_sub_cancel_left, norm_mul, norm_e, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hs.1]
+  have key : ∀ a b : Fin n, BranchGerms.next a = b →
+      ∃ P, dist P v = s ∧ P ∈ closure (G.sector v r₀ a) ∧ P ∈ closure (G.sector v r₀ b) := by
+    intro a b hnext
+    refine ⟨v + (s : ℂ) * e (G.nextDir a s), hdist _, (BranchGerms.mem_closure_sector_of_lt hs a (hord a)).2, ?_⟩
+    rw [G.e_nextDir, hnext]
+    exact (BranchGerms.mem_closure_sector_of_lt hs b (hord b)).1
+  rcases BranchGerms.next_adj n hn3 a b hab with h | h
+  · exact key a b h
+  · obtain ⟨P, h1, h2, h3⟩ := key b a h
+    exact ⟨P, h1, h3, h2⟩
+
+/-- **Validity along two connected pieces of one class, near case** (child of `bv_nd`, BV-ND step 2): if `A` and `B` are connected pieces of
+the class of `c`, `x ∈ cl A` and some `w ∈ B` is nearer than `1` to `x`, then every pair of `cl A × cl B` is at distance at most `1`. -/
+theorem Valid.pair_le (hF : F.Valid) {c : Fin k} {A B : Set ℂ} (hA : IsPreconnected A) (hB : IsPreconnected B)
+    (hAc : A ⊆ F.region c) (hBc : B ⊆ F.region c) {x w : ℂ} (hx : x ∈ closure A) (hw : w ∈ B) (hxw : dist x w < 1) :
+    ∀ P ∈ closure A, ∀ Q ∈ closure B, dist P Q ≤ 1 := by
+  have h1 : ∀ z ∈ A, dist w z < 1 := by
+    rcases hF.dist_lt_or_gt_of_isPreconnected (hBc hw) hA (hAc.trans subset_closure) with h | h
+    · exact h
+    · exfalso
+      have hcl : closure A ⊆ {z | 1 ≤ dist w z} :=
+        closure_minimal (fun z hz => (h z hz).le) (isClosed_le continuous_const (continuous_const.dist continuous_id))
+      have := hcl hx
+      rw [mem_setOf_eq, dist_comm] at this
+      linarith
+  have h2 : ∀ z ∈ A, ∀ q ∈ B, dist z q < 1 := by
+    intro z hz
+    rcases hF.dist_lt_or_gt_of_isPreconnected (hAc hz) hB (hBc.trans subset_closure) with h | h
+    · exact h
+    · exfalso
+      have := h w hw
+      have := h1 z hz
+      rw [dist_comm] at this
+      linarith
+  have h3 : ∀ z ∈ A, ∀ Q ∈ closure B, dist z Q ≤ 1 := fun z hz =>
+    closure_minimal (fun q hq => (h2 z hz q hq).le) (isClosed_le (continuous_const.dist continuous_id) continuous_const)
+  intro P hP Q hQ
+  exact closure_minimal (fun z hz => h3 z hz Q hQ) (isClosed_le (continuous_id.dist continuous_const) continuous_const) hP
+
+/-- **Validity along two connected pieces of one class, far case** (child of `bv_nd`): as `Valid.pair_le` with some `w ∈ B` farther than
+`1` from `x`; then every pair of `cl A × cl B` is at distance at least `1`. -/
+theorem Valid.pair_ge (hF : F.Valid) {c : Fin k} {A B : Set ℂ} (hA : IsPreconnected A) (hB : IsPreconnected B)
+    (hAc : A ⊆ F.region c) (hBc : B ⊆ F.region c) {x w : ℂ} (hx : x ∈ closure A) (hw : w ∈ B) (hxw : 1 < dist x w) :
+    ∀ P ∈ closure A, ∀ Q ∈ closure B, 1 ≤ dist P Q := by
+  have h1 : ∀ z ∈ A, 1 < dist w z := by
+    rcases hF.dist_lt_or_gt_of_isPreconnected (hBc hw) hA (hAc.trans subset_closure) with h | h
+    · exfalso
+      have hcl : closure A ⊆ {z | dist w z ≤ 1} :=
+        closure_minimal (fun z hz => (h z hz).le) (isClosed_le (continuous_const.dist continuous_id) continuous_const)
+      have := hcl hx
+      rw [mem_setOf_eq, dist_comm] at this
+      linarith
+    · exact h
+  have h2 : ∀ z ∈ A, ∀ q ∈ B, 1 < dist z q := by
+    intro z hz
+    rcases hF.dist_lt_or_gt_of_isPreconnected (hAc hz) hB (hBc.trans subset_closure) with h | h
+    · exfalso
+      have := h w hw
+      have := h1 z hz
+      rw [dist_comm] at this
+      linarith
+    · exact h
+  have h3 : ∀ z ∈ A, ∀ Q ∈ closure B, 1 ≤ dist z Q := fun z hz =>
+    closure_minimal (fun q hq => (h2 z hz q hq).le) (isClosed_le continuous_const (continuous_const.dist continuous_id))
+  intro P hP Q hQ
+  exact closure_minimal (fun z hz => h3 z hz Q hQ) (isClosed_le continuous_const (continuous_id.dist continuous_const)) hP
+
+/-- **Two tangent unit arcs never meet at distance `1` near their bases** (child of `bv_nd`, BV-ND step 4; `tools/base_v_linkage.py` K3,
+K4): with `|x − y| = 1`, a point `P` of `ω(y)` at distance `s` from `x` and a point `Q` of `ω(x)` at distance `s` from `y`, `0 < s < 1`, are at
+distance `1 − s²` (same side of the line `xy`) or `√(1 + 2s²)` (opposite sides) — never `1`. -/
+theorem tangent_pair_ne_one {x y P Q : ℂ} (h : dist x y = 1) {s : ℝ} (hs : 0 < s) (hs1 : s < 1) (hPy : dist P y = 1)
+    (hPx : dist P x = s) (hQx : dist Q x = 1) (hQy : dist Q y = s) : dist P Q ≠ 1 := by
+  set E := x - y with hE
+  have hE1 : ‖E‖ = 1 := by rw [hE, ← dist_eq_norm, h]
+  have hEE : E * starRingEnd ℂ E = 1 := by
+    rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, hE1]; norm_num
+  have hn : ∀ Z : ℂ, ‖Z * starRingEnd ℂ E‖ = ‖Z‖ := fun Z => by rw [norm_mul, Complex.norm_conj, hE1, mul_one]
+  have hP1 : ‖(P - y) * starRingEnd ℂ E‖ = 1 := by rw [hn, ← dist_eq_norm, hPy]
+  have hP2 : ‖(P - y) * starRingEnd ℂ E - 1‖ = s := by
+    rw [show (P - y) * starRingEnd ℂ E - 1 = (P - x) * starRingEnd ℂ E by rw [← hEE, hE]; ring, hn, ← dist_eq_norm, hPx]
+  have hQ1 : ‖(Q - y) * starRingEnd ℂ E - 1‖ = 1 := by
+    rw [show (Q - y) * starRingEnd ℂ E - 1 = (Q - x) * starRingEnd ℂ E by rw [← hEE, hE]; ring, hn, ← dist_eq_norm, hQx]
+  have hQ2 : ‖(Q - y) * starRingEnd ℂ E‖ = s := by rw [hn, ← dist_eq_norm, hQy]
+  intro hPQ
+  have hPQ' : ‖(P - y) * starRingEnd ℂ E - (Q - y) * starRingEnd ℂ E‖ = 1 := by
+    rw [← sub_mul, show P - y - (Q - y) = P - Q by ring, hn, ← dist_eq_norm, hPQ]
+  set a := ((P - y) * starRingEnd ℂ E).re
+  set b := ((P - y) * starRingEnd ℂ E).im
+  set c := ((Q - y) * starRingEnd ℂ E).re
+  set d := ((Q - y) * starRingEnd ℂ E).im
+  have e1 : a ^ 2 + b ^ 2 = 1 := by rw [← norm_sq_eq_re_im, hP1]; norm_num
+  have e2 : (a - 1) ^ 2 + b ^ 2 = s ^ 2 := by
+    rw [← hP2, norm_sq_eq_re_im]; simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, sub_zero]; rfl
+  have e3 : (c - 1) ^ 2 + d ^ 2 = 1 := by
+    have := congrArg (· ^ 2) hQ1
+    simp only [one_pow, norm_sq_eq_re_im, Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im, sub_zero] at this
+    exact this
+  have e4 : c ^ 2 + d ^ 2 = s ^ 2 := by rw [← norm_sq_eq_re_im, hQ2]
+  have e5 : (a - c) ^ 2 + (b - d) ^ 2 = 1 := by
+    have := congrArg (· ^ 2) hPQ'
+    simp only [one_pow, norm_sq_eq_re_im, Complex.sub_re, Complex.sub_im] at this
+    exact this
+  have ha : a = 1 - s ^ 2 / 2 := by linear_combination (e1 - e2) / 2
+  have hc : c = s ^ 2 / 2 := by linear_combination (e4 - e3) / 2
+  have hb : b ^ 2 = s ^ 2 - s ^ 4 / 4 := by rw [ha] at e1; linear_combination e1
+  have hd : d ^ 2 = s ^ 2 - s ^ 4 / 4 := by rw [hc] at e4; linear_combination e4
+  have hbd : b * d = s ^ 4 / 4 := by rw [ha, hc] at e5; linear_combination (hb + hd - e5) / 2
+  have hsq : (s ^ 4 / 4) ^ 2 = (s ^ 2 - s ^ 4 / 4) ^ 2 := by
+    have h0 : (b * d) ^ 2 = b ^ 2 * d ^ 2 := by ring
+    rw [hbd, hb, hd] at h0; rw [h0]; ring
+  have hz : s ^ 4 * (2 - s ^ 2) = 0 := by linear_combination (-2) * hsq
+  have : 0 < s ^ 4 * (2 - s ^ 2) := mul_pos (by positivity) (by nlinarith)
+  linarith
+
 /-- **FS114-BV-HEX, (BV-ND)** (NoDouble, `plans/BASE-V-verification.md` § 1b.2): no double event at two points neither of which carries four
 colours or a repeated colour (so the two sectors each circle passes between are adjacent) — **with unit arcs**, at cusps. Read at every
 `k` and for any centres: the event's definition carries BV-ND's `μ ≠ 0`, which is where `1 < |u₁ − u₂| < 2` entered (step 1,
 `linkage_dot_ne_zero`); steps 2–4 read neither. A widening, reported (G-BVND), whose instance `u₁ = u₂` is BV-ND1. A refutation: no model
-expected. -/
+expected. **The proof reads one sense** (FS131-I5m): only the component of `ω(u₂)`'s velocity at `y₀` along `x₀ − y₀`, which puts a point of the
+`α`-sector at `y₀` within `1` of `x₀` and a point of its `β`-sector beyond (`germ_dist_cmp_one`); at `x₀` it reads only that both colours are
+carried there. Validity then sends every `α`-pair of the two points' sectors within `1` and every `β`-pair beyond (`Valid.pair_le`, `_ge`), so
+the `α|β` boundary at each point lies on the other's unit circle (`IsSectorChart.exists_shared`, at most three sectors), and two such tangent arcs
+are never at distance `1` (`tangent_pair_ne_one`). -/
 theorem bv_nd (hF : F.Valid) {u₁ u₂ : ℂ} {φ χ : ℝ} {α β : Fin k} (hx : ringPt u₁ φ ∈ F.dom) (hy : ringPt u₂ χ ∈ F.dom)
     (hD : F.DoubleEvent u₁ φ u₂ χ α β) (hH : ringPt u₁ φ ∉ F.fourSet ∪ F.repSet ∧ ringPt u₂ χ ∉ F.fourSet ∪ F.repSet) :
     False := by
-  sorry
+  obtain ⟨h1, hαβ, s₁, s₂, -, hd₂, gα₁, gβ₁, gβ₂, gα₂⟩ := hD
+  obtain ⟨r₁, n₁, G₁, hC₁, hdisj₁, hn₁, f₁, -, hsec₁⟩ := exists_chart_of_noRep hx hH.1
+  obtain ⟨r₂, n₂, G₂, hC₂, hdisj₂, hn₂, f₂, -, hsec₂⟩ := exists_chart_of_noRep hy hH.2
+  have hr₁ : r₁ ∈ Ioc 0 r₁ := ⟨hC₁.pos, le_rfl⟩
+  have hr₂ : r₂ ∈ Ioc 0 r₂ := ⟨hC₂.pos, le_rfl⟩
+  -- germ points of a class, near the germ's base
+  have hgpt : ∀ {u : ℂ} {θ : ℝ} {s : Side} {c : Fin k} {ρ : ℝ}, GermIn u θ s (F.region c) → 0 < ρ →
+      ∃ δ > 0, ∀ t ∈ Ioo 0 δ, ringPt u (θ + s.sign * t) ∈ F.region c ∧ dist (ringPt u (θ + s.sign * t)) (ringPt u θ) < ρ := by
+    intro u θ s c ρ ⟨δ, hδ, hsub⟩ hρ
+    refine ⟨min δ ρ, lt_min hδ hρ, fun t ht => ⟨hsub ⟨t, ⟨ht.1, lt_of_lt_of_le ht.2 (min_le_left _ _)⟩, rfl⟩, ?_⟩⟩
+    rw [dist_comm]
+    exact lt_of_le_of_lt (dist_ringPt_germ_le u θ s ht.1.le) (lt_of_lt_of_le ht.2 (min_le_right _ _))
+  have hcol : ∀ {u : ℂ} {θ : ℝ} {s : Side} {c : Fin k}, GermIn u θ s (F.region c) → c ∈ F.coloursAt (ringPt u θ) :=
+    fun ⟨_, hδ, hsub⟩ => closure_mono hsub (ringPt_mem_closure_germ _ _ _ hδ)
+  have hn0 : ∀ {v : ℂ} {n : ℕ} {G : BranchGerms n} {r₀ : ℝ}, F.IsSectorChart G v r₀ → α ∈ F.coloursAt v →
+      β ∈ F.coloursAt v → 0 < n := by
+    intro v n G r₀ hC ha hb
+    have h2 : ({α, β} : Set (Fin k)).ncard ≤ (F.coloursAt v).ncard :=
+      Set.ncard_le_ncard (insert_subset ha (singleton_subset_iff.mpr hb)) (Set.toFinite _)
+    rw [Set.ncard_pair hαβ] at h2
+    have h3 := hC.ncard_coloursAt_le
+    by_contra h0
+    have hn : n = 0 := by omega
+    rw [hn] at h3
+    have h4 : (F.coloursAt v).ncard ≤ 1 := h3
+    omega
+  have hn₁0 := hn0 hC₁ (hcol gα₁) (hcol gβ₁)
+  have hn₂0 := hn0 hC₂ (hcol gα₂) (hcol gβ₂)
+  -- a germ point of a class near a chart's point lies in that class's sector
+  have hsecpt : ∀ {u : ℂ} {θ : ℝ} {s : Side} {c : Fin k} {n : ℕ} {G : BranchGerms n} {r₀ : ℝ} {f : Fin n → Fin k},
+      F.IsSectorChart G (ringPt u θ) r₀ → 0 < n → (∀ i, G.sector (ringPt u θ) r₀ i ⊆ F.region (f i)) →
+      GermIn u θ s (F.region c) → ∃ i, f i = c := by
+    intro u θ s c n G r₀ f hC hn hsec hg
+    obtain ⟨δ, hδ, hpt⟩ := hgpt hg hC.pos
+    obtain ⟨hz, hzd⟩ := hpt (δ / 2) ⟨by linarith, by linarith⟩
+    obtain ⟨i, hi, -⟩ := hC.exists_sector_of_region hn hsec hz hzd
+    exact ⟨i, hi⟩
+  -- at `y₀`: the `α`-germ ahead comes within `1` of `x₀`, the `β`-germ behind goes beyond `1`
+  obtain ⟨δn, hδn, hnear⟩ := (germ_dist_cmp_one u₂ (ringPt u₁ φ) χ s₂ h1).1 hd₂
+  have hd₂' : dot ((s₂.flip.sign : ℂ) * (I * e χ)) (ringPt u₁ φ - ringPt u₂ χ) < 0 := by
+    have : dot ((s₂.flip.sign : ℂ) * (I * e χ)) (ringPt u₁ φ - ringPt u₂ χ) =
+        -dot ((s₂.sign : ℂ) * (I * e χ)) (ringPt u₁ φ - ringPt u₂ χ) := by
+      simp only [Side.sign_flip, Complex.ofReal_neg, dot, neg_mul, Complex.neg_re]
+    rw [this]; linarith
+  obtain ⟨δf, hδf, hfar⟩ := (germ_dist_cmp_one u₂ (ringPt u₁ φ) χ s₂.flip h1).2 hd₂'
+  obtain ⟨δa, hδa, hga⟩ := hgpt gα₂ hC₂.pos
+  obtain ⟨δb, hδb, hgb⟩ := hgpt gβ₂ hC₂.pos
+  obtain ⟨hwα, hwαd⟩ := hga (min δn δa / 2) ⟨by positivity, by linarith [min_le_right δn δa, lt_min hδn hδa]⟩
+  have hwαx := hnear (min δn δa / 2) ⟨by positivity, by linarith [min_le_left δn δa, lt_min hδn hδa]⟩
+  obtain ⟨hwβ, hwβd⟩ := hgb (min δf δb / 2) ⟨by positivity, by linarith [min_le_right δf δb, lt_min hδf hδb]⟩
+  have hwβx := hfar (min δf δb / 2) ⟨by positivity, by linarith [min_le_left δf δb, lt_min hδf hδb]⟩
+  obtain ⟨a₂, hfa₂, hwa₂⟩ := hC₂.exists_sector_of_region hn₂0 hsec₂ hwα hwαd
+  obtain ⟨b₂, hfb₂, hwb₂⟩ := hC₂.exists_sector_of_region hn₂0 hsec₂ hwβ hwβd
+  obtain ⟨a₁, hfa₁⟩ := hsecpt hC₁ hn₁0 hsec₁ gα₁
+  obtain ⟨b₁, hfb₁⟩ := hsecpt hC₁ hn₁0 hsec₁ gβ₁
+  have hab₁ : a₁ ≠ b₁ := fun h => hαβ (hfa₁.symm.trans (h ▸ hfb₁))
+  have hab₂ : a₂ ≠ b₂ := fun h => hαβ (hfa₂.symm.trans (h ▸ hfb₂))
+  -- BV-ND step 2: every `α`-pair is within `1`, every `β`-pair beyond `1` (on the closures, `≤ 1` and `≥ 1`)
+  have hpα := hF.pair_le (hC₁.isPreconnected r₁ hr₁ a₁) (hC₂.isPreconnected r₂ hr₂ a₂) (hfa₁ ▸ hsec₁ a₁)
+    (hfa₂ ▸ hsec₂ a₂) (hC₁.mem_closure_sector hr₁ a₁) hwa₂ hwαx
+  have hpβ := hF.pair_ge (hC₁.isPreconnected r₁ hr₁ b₁) (hC₂.isPreconnected r₂ hr₂ b₂) (hfb₁ ▸ hsec₁ b₁)
+    (hfb₂ ▸ hsec₂ b₂) (hC₁.mem_closure_sector hr₁ b₁) hwb₂ hwβx
+  -- step 3: the `α|β` boundary at `x₀` lies on `ω(y₀)`, the one at `y₀` on `ω(x₀)`
+  set s := min (min r₁ r₂) 1 / 2 with hs
+  have hs0 : 0 < s := by have := lt_min (lt_min hC₁.pos hC₂.pos) one_pos; positivity
+  have hsr₁ : s < r₁ := by have := min_le_left (min r₁ r₂) 1; have := min_le_left r₁ r₂; linarith
+  have hsr₂ : s < r₂ := by have := min_le_left (min r₁ r₂) 1; have := min_le_right r₁ r₂; linarith
+  have hs1 : s < 1 := by have := min_le_right (min r₁ r₂) 1; linarith
+  obtain ⟨P, hPd, hPA, hPB⟩ := hC₁.exists_shared hdisj₁ hn₁ hab₁ ⟨hs0, hsr₁⟩
+  obtain ⟨Q, hQd, hQA, hQB⟩ := hC₂.exists_shared hdisj₂ hn₂ hab₂ ⟨hs0, hsr₂⟩
+  have hPy : dist P (ringPt u₂ χ) = 1 :=
+    le_antisymm (hpα P hPA _ (hC₂.mem_closure_sector hr₂ a₂)) (hpβ P hPB _ (hC₂.mem_closure_sector hr₂ b₂))
+  have hQx : dist Q (ringPt u₁ φ) = 1 := by
+    rw [dist_comm]
+    exact le_antisymm (hpα _ (hC₁.mem_closure_sector hr₁ a₁) Q hQA) (hpβ _ (hC₁.mem_closure_sector hr₁ b₁) Q hQB)
+  -- step 4: two tangent unit arcs, never at distance `1`
+  rcases lt_or_gt_of_ne (tangent_pair_ne_one h1 hs0 hs1 hPy hPd hQx hQd) with hlt | hgt
+  · have := hpβ P hPB Q hQB; linarith
+  · have := hpα P hPA Q hQA; linarith
 
 /-- **FS114-BV-HEX, (BV-ND1)** (`plans/BASE-V-verification.md` § 2.3): BV-ND under the `60°` rotation of one circle — two points `x₀ = r(φ)`,
 `σx₀ = r(φ + 60°)` of `ω(u)` switching between the same pair of colours in opposite senses (`α → β` at `x₀`, `β → α` at `σx₀`, both read
