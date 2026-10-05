@@ -3431,6 +3431,25 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.mergeCol_of_mem_sector_out
 #print axioms HadwigerNelson.Plane.ArcMap.Near.mem_merge_interiorPts_of_mem
 #print axioms HadwigerNelson.Plane.ArcMap.Near.branchPt_mem_merge_interiorPts_iff
+#print axioms HadwigerNelson.Plane.exists_step_of_strictMono
+#print axioms HadwigerNelson.Plane.ArcMap.finite_tiles_ball_of_goodAt
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.mem_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.Near.gapSec_of_mem_rimArc
+#print axioms HadwigerNelson.Plane.ArcMap.Near.chain_subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.Near.isOpen_chain
+#print axioms HadwigerNelson.Plane.ArcMap.Near.isClear_chain
+#print axioms HadwigerNelson.Plane.ArcMap.Near.closure_gapSet_subset
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_region_of_region
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_region_cases
+#print axioms HadwigerNelson.Plane.ArcMap.Near.closure_merge_region
+#print axioms HadwigerNelson.Plane.ArcMap.Near.chain_subset_merge_region
+#print axioms HadwigerNelson.Plane.ArcMap.Near.v_mem_closure_merge_tile
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_exists_tile
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_tile_split
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_tile_cover
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_isContact_iff
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_inType_iff
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_outType_iff
 
 #eval IO.println "=== PURCHASED ==="
 

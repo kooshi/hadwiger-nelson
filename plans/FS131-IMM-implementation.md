@@ -106,6 +106,15 @@ Each [kernel], reading exactly `[propext, Classical.choice, Quot.sound]`: `tanHe
 `ArcMap.Near.mem_merge_interiorPts_of_mem`, `ArcMap.Near.branchPt_mem_merge_interiorPts_iff`, and the leaf
 **`ArcMap.Near.merge_not_hasRepeatedColour_rim`** (13 theorems).
 
+### FS131-IMM4 (stage 12; build `build/gate/build/20261005T083812Z-2758320.log`, axioms `data/fs131/imm/axioms-stage12.txt`, all in `MergeMove` unless named)
+
+Each [kernel], reading exactly `[propext, Classical.choice, Quot.sound]`: `exists_step_of_strictMono`, `ArcMap.finite_tiles_ball_of_goodAt`,
+`ArcMap.IsTile.mem_of_mem_closure`, `ArcMap.Near.gapSec_of_mem_rimArc`, `chain_subset_ball`, `isOpen_chain`, `isClear_chain`,
+`closure_gapSet_subset`, `merge_region_of_region`, `merge_region_cases`, `closure_merge_region`, `chain_subset_merge_region`,
+`v_mem_closure_merge_tile`, `merge_exists_tile`, `merge_tile_split`, `merge_tile_cover`, `merge_isContact_iff`, `merge_inType_iff`,
+`merge_outType_iff`, and the leaf **`ArcMap.Near.merge_allowedCone`** (20 theorems); with them **`HadwigerNelson.Plane.ArcMap.exists_merge_aux`
+(in `Moves`) reads exactly the standard three** — MERGE has no `sorry` beneath.
+
 ## Stage 1 — SAVED: the readback, the as-given build
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -654,3 +663,60 @@ PASS; `tools/fs131_im_split.py --check` PASS. No `axiom`, no `native_decide`, no
 (its docstring rewritten from "open leaf").
 
 **Proved** (12 children and the leaf, in `MergeMove`'s new block "FS131-IMM4: the rim clause", listed under "Theorems this phase proved").
+
+## Stage 12 — SAVED (FS131-IMM4): `merge_allowedCone` proved; `exists_merge_aux` carries no `sorryAx`
+
+**The route** (record § 5.2, § 8.2 item 2): for `v′ ∉ B̄(v, ρ)` and every `w`, the contacts agree and so do their types, so the cones agree.
+- **`F`'s class of `c` survives** (`merge_region_of_region`): its points are interior to the new map (the new map's arcs are trimmed arcs and
+  germ arcs of `F`, and the rim arc, which runs through gap sectors only — `gapSec_of_mem_rimArc`, by `exists_step_of_strictMono` along the
+  lifted directions — none of colour `c` by `hgap`) and keep the colour `c`.
+- **The new class** (`merge_region_cases`): `F`'s class, the gap out to `ρ/2`, or cut branch points inside `ρ` of germs with `c` after them;
+  so `closure F'.region c ⊆ closure F.region c ∪ closure gapSet(ρ/2)` (`closure_merge_region`), and `closure gapSet(ρ/2) ⊆ {v} ∪ chain(ρ)`
+  (`closure_gapSet_subset`), where the chain out to `ρ` (the first `c`-sector, the gap, the last `c`-sector) is open (`isOpen_chain`) and
+  clear for `c` in `F` (`isClear_chain`: `c`-sectors by validity, gap points by `exists_gap`'s clearness), so it meets no unit circle about a
+  closure point of `F`'s class (`dist_ne_one_of_isOpen_isClear`, IMM1's).
+- **Contacts** (`merge_isContact_iff`): `c ∈ coloursAt v′` agrees (the gap's closure is inside `B̄(v, ρ)`); a contact of the new class is
+  `F`'s, or `v` (in the closure of `F`'s class), or a chain point (at distance `≠ 1` from `v′`).
+- **Tiles** — `merge_exists_tile`: each `c`-tile of `F` lies in one of the new map; `merge_tile_split`: a `c`-tile of the new map lies
+  inside or outside `ω(v′)` (the new map is valid, `merge_valid`; `ne1_region`); `merge_tile_cover`: a `c`-tile `T′` of the new map with a
+  contact `w` in its closure holds a `c`-tile of `F` with `w` in its closure — if `T′` misses `B̄(v, ρ)` it is a tile of `F`; otherwise its
+  points are in the closure of `T′ ∩ F.region c` or the gap (a cut branch point has a ball inside `T′` meeting the sector after its germ),
+  the contact is not a chain point, `v` is handled by `v_mem_closure_merge_tile` (the tile holds a `c`-sector of `F` at `v`, or the merged
+  chain, which holds the first `c`-sector), and `T′` holds finitely many tiles of `F` — each meets `B(v, (ρ + ρ₀)/2)` (else it is clopen in
+  `T′`, using `IsTile.mem_of_mem_closure` off the disc), and finitely many tiles meet a ball inside a good ball (`finite_tiles_ball_of_goodAt`).
+- **Types** (`merge_inType_iff`, `merge_outType_iff`) from the three tile facts; the leaf by `ext`.
+
+**One binder renamed, the type unchanged**: `merge_allowedCone`'s hypothesis `(hv1 : F.Covers v 1)` is not used by the proof (finiteness
+comes from the good ball `X.hG`, clearness from `exists_gap`'s `hgc`), so the unused-variable linter fired on it; it is renamed `_hv1`,
+which leaves the theorem's type and the assembly's call in `Moves` unchanged (positional). No hypothesis or conclusion changed. The
+docstring says so.
+
+**Proved** (19 children and the leaf, in `MergeMove`'s new block "FS131-IMM4: `D_c(v′)` off the disc", listed under "Theorems this phase
+proved"). `data/fs131/imm/wip/C.lean` (the working file) is deleted, its content in `MergeMove`.
+
+### 12.1 The build, the axioms, the checks
+
+Under the slot: **OK**, 446 of 446 batches, 3 modules rebuilt (`MergeMove` 19 s, `Moves` 2.5 s, `Proofs`), 8 min 27 s; "Build completed
+successfully (5363 jobs)"; warnings only `declaration uses 'sorry'` — `Moves` l. 574 `exists_rayMerge_aux` (this branch's pre-RAY copy);
+`Contact`, `BaseSteps`, `UnitArc` as before; **none in `MergeMove`** (4 modules with warnings, down from 5). Log
+`build/gate/build/20261005T083812Z-2758320.log`; terminal output `data/fs131/imm/build-stage12.log`. **Axioms** against that build's oleans
+(`lake env lean data/fs131/imm/AxiomsIMM.lean` under the slot, `data/fs131/imm/axioms-stage12.txt`; `exists_rayMerge_aux` added to the
+receipt as the control): `tools/fs131_imm_axioms.py data/fs131/imm/axioms-stage12.txt --expect-sorry HadwigerNelson.Plane.ArcMap.exists_rayMerge_aux`
+— **153 records: 139 on exactly the standard three, 13 on fewer (two axiom-free, eleven on `[propext]` or `[propext, Quot.sound]`), 1 with
+`sorryAx` — `exists_rayMerge_aux`, the control — and 0 foreign; PASS.** In particular **`exists_merge_aux` reads exactly `[propext,
+Classical.choice, Quot.sound]`**, as do both former leaves. The same expectation on stage 11's receipt FAILS, naming `merge_allowedCone`
+and `exists_merge_aux` (still `sorryAx` then) and the absent control. `grep -c sorry` on `MergeMove`: 0. `tools/fs131_imm_decls.py --check`:
+FAIL naming the 19 new theorems in both files before their lines were added, PASS (151 theorems) after; `tools/fs131_im_statements.py
+--check` PASS; `tools/fs131_im_split.py --check` PASS. No `axiom`, no `native_decide`, no backlog statement changed.
+
+### 12.2 What is proved, and what is left (the handover)
+
+**MERGE is proved**: `exists_merge_aux` (wave 4's FS110-W-MERGE, in ruling 269's form) and all 151 theorems of `MergeMove` are on the
+standard three or fewer, with no `sorry` beneath; the build is green. **Left for MERGE's landing** (a later job, on Keryx's word, not this
+one): merging this branch into the wave's line and `main` (with `framePt → fromFrame` and whatever else the landing rules), restoring
+`exists_merge`'s `sorry` in `Contact` by `exists_merge_aux`, and the full gate (`scripts/axioms.sh` — the MergeMove records in
+`scripts/Axioms.lean`'s FS131-IMM1 block are now all clean — `vacuity.sh`, linters, the counts). The two theorems of `Moves` this branch
+does not own (`exists_rayMerge_aux`, pre-RAY) and the other modules' `sorry`s are untouched.
+
+No front-page drafts: the brief withholds the gate from this job, and the `## Drafts for the front page` section belongs to the run that
+gates MERGE's landing.
