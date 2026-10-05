@@ -2126,3 +2126,36 @@ infrastructure and is not in the repository.
 **Drafts for the front page**: none — wave 5 is not at its gate.
 
 ## Stage 44 — SAVED
+
+## Stage 52 — SAVED (FS131-M6): the readback, and the as-given build
+
+*FS131-M6, wave 5's second sync (Opus), continuing this record on branch `fs131-w5c` in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w5c` from
+`8d84435e`. Brief: `data/fs131/briefs/FS131-M6-sync.md` (main tree). My set (ruling 389 (b)): merge `origin/fs131-w5` (which carries `main`) into `fs131-w5c`,
+`framePt → fromFrame` on this branch's side, copies removed, checked; then, as budget allows, lane B's `run_hornBoundsQR`, `stuckRun_ne_univ`, and
+`badCount_lt_top`'s unused `hc` dropped (ruling 389 (a)). Numbered 52 on: `fs131-w5`'s side of this record runs to Stage 51, this branch's to Stage 44, and
+the merge (next stage) joins both.*
+
+### 52.1 The brief's quotations against their sources (standing rule 3)
+
+`tools/fs131_m6_quotes.py` (a copy of KL1's checker under this job's prefix): **9 quotations, 0 failures**, exit 0 (`data/fs131/m6/quote-check.txt`) —
+`CLAUDE.md` § Counter-priors; inventory items 389, 388, 386, 355, 340, 373; the first lines of `run_hornBoundsQR` and `stuckRun_ne_univ` (`Terminal` at
+`8d84435e`). `--self-test` (a one-letter plant in the first quotation): **fired**, 1 failure (`quote-check-selftest.txt`). Read in full: items 340, 355,
+373, 386, 388, 389; M5's Stages 47–51 on `fs131-w5`'s copy of this record (Stage 48: git took `main`'s side for every wave-4 module by itself; three
+append-conflicts kept both, ours first; `framePt → fromFrame` in `FlankUA`; copies found by `tools/fs131_m5_dupes.py` and deleted or made `private`;
+checked byte for byte by `tools/fs131_m5_merge_check.py` and three-way by `tools/fs131_wl_mergestmts.py --rename framePt=fromFrame`). No mismatch.
+
+### 52.2 The as-given build (`8d84435e`)
+
+`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` from inside the worktree, before any edit: **OK — all 1757 modules already
+up to date, nothing built, 9 modules with warnings**, exit 0 (`build/gate/build/20261005T110003Z-3543531.log`; driver log `data/fs131/m6/build-asgiven.log`);
+every warning `declaration uses 'sorry'` (30), no `error:` line.
+
+### 52.3 The ground before the merge
+
+Merge base `75689a4c`; `origin/fs131-w5` at `385b5ad3` when read (KP2's stage 1 over M5's `ae881022`). Changed on both sides since the base: `ARCHITECTURE.md`,
+`Proofs.lean`, `scripts/Axioms.lean`, this record, `Plane/ValidMap/BaseDense`, `Plane/ValidMap/Contact` — the brief's six. `sorry` by file (`grep -rcw`,
+`data/fs131/m6/sorry-counts-before.txt`): `BaseDense` 2, `BaseWalk` 5, `Contact` 3, `Dense` 1, `HexRing` 6, `MapGraph` 3, `Procedure` 4, `Terminal` 2,
+`UnitArc` 5, `Packed` 1 (a docstring word). On `origin/fs131-w5`: `BaseDense` 4, `BendCollar` 1, `HexRing` 1, `Terminal` 9 (its stale copy of this lane),
+`Packed` 1, `Cover` 1, `CoverExamples` 2 (docstring words).
+
+## Stage 52 — SAVED
