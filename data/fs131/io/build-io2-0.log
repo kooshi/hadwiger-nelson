@@ -1,0 +1,11 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> build: this run's full output: build/gate/build/20261005T111305Z-3633604.log
+    ⚠ [5701/5750] Replayed Proofs.HadwigerNelson.Plane.ValidMap.OpenMove
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:568:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:636:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:672:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:682:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/ValidMap/OpenMove.lean:693:8: declaration uses `sorry`
+    All targets up-to-date (5750 jobs).
+==> build: OK — all 1767 modules already up to date, nothing built, 1 module(s) with warnings, 2s
+    full output: build/gate/build/20261005T111305Z-3633604.log

@@ -223,3 +223,40 @@ for a model of the hypotheses together; `cuspFrag` is not one — its colour `1`
 instance, is not yet in Lean; the same gap item 375 names for `exists_merge`).
 
 ## Stage 3 — SAVED (FS131-IO1)
+
+## Stage 4 — SAVED (FS131-IO2): the readback and the as-given build
+
+*FS131-IO2 (de Bruijn, the implementer, on Opus) continues this record from here, on `fs131-wop` at `7b24117b`. Brief:
+`data/fs131/briefs/FS131-IO2-open.md` (on `main`). Report: `data/fs131/reports/FS131-IO2.md`.*
+
+### 4.1 The brief's quotations against their sources (standing rule 3)
+
+| quotation (first words) | source | result |
+|---|---|---|
+| "Do not consider Lean formalization a cost. It's practically mechanical for us, it's just a matter of time." | `CLAUDE.md` § Counter-priors | **matches** |
+| "theorem exists_open (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ : ℝ} {c : Fin k}" | `OpenMove.lean` l. 712 at `7b24117b` | **matches** |
+| "1. **`open_hlc`** (template `merge_hlc`, ~130 lines): add the cases a point of `W` (open, constant `c`); a point of the gap germ" | this record § 3.3 | **matches** |
+| "2. **`open_valid`** (template `merge_valid`): `Valid.of_agreesOff` on `B̄(v, ρ)`; a recoloured point is a gap point or a wedge point," | § 3.3 | **matches** |
+| "3. **`open_degree_horns`** (template `merge_hasSectors`, the partition at `r < ρ/2` by `encard_sectorsOf_of_partition`; here" | § 3.3 | **matches** |
+| "4. **`open_rim`** (template `merge_not_hasRepeatedColour_rim`, `merge_ncard_coloursAt_rim`): near a rim point the new map equals MERGE's" | § 3.3 | **matches** |
+| "5. **`open_allowedCone`** (template `merge_allowedCone` and its 19 children): the chain becomes `chain ∪ W ∪` the horn, open and clear for" | § 3.3 | **matches** |
+| item 391, "**FS131-IO1 handed back** (Stage 3 SAVED, harness ≈ 408k by the task notice; …" | `main`'s `plans/FS131-close-inventory.md` l. 3507 | **matches** |
+| item 392, "**Rulings on IO1's held items, and its slot.** (a) **The lone form `h1` is kept**: after MERGE is ruled out at `v`, a horn whose colour's cone is" | `main`'s inventory l. 3524 | **matches** |
+| item 384, "**FS131-E6 done: F6 is real, and repaired with no backlog statement changed** (harness ≈ 540k …" | `main`'s inventory l. 3411 | **matches** |
+| item 385, "**Rulings on E6's held items, and its slot.** (a) **`exists_arcStep`'s horn clause accepted** (…" | `main`'s inventory l. 3435 | **matches** |
+| item 367, "**FS131-IMM4 done: MERGE is proved** (harness ≈ 472k …" | `main`'s inventory l. 3187 | **matches** |
+
+No mismatch.
+
+### 4.2 Read for this job
+
+`plans/STANDING-RULES.md`, `LEAN.md` in full; `RUNNING.md` § Building and § Make the gate fail; this record's Stages 1–3 in full;
+`plans/FS131-E6-derivation.md` § 4.2 (E6-OPEN); `OpenMove.lean` whole.
+
+### 4.3 The branch builds as given
+
+Under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`), before any edit: **OK — "all 1767 modules
+already up to date, nothing built, 1 module(s) with warnings"** (the five `sorry` leaves in `OpenMove`, l. 568, 636, 672, 682, 693), exit 0;
+log `build/gate/build/20261005T111305Z-3633604.log`, terminal output `data/fs131/io/build-io2-0.log`.
+
+## Stage 4 — SAVED (FS131-IO2)
