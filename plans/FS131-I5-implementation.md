@@ -63,6 +63,28 @@ Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
 Wired by FS131-I5c (over `sorry` children): `stuck_structure_ua` (over the new child `stuck_flanks_ua`), `BaseCtx.retArcs_finite` (over `pseudo_finite`),
 `BaseCtx.hex_base` (over `rot_noThird` and `bv_hex`).
 
+### FS131-I5d (wave 5's fourth implementer)
+
+*Kernel-checked on the builds of stages 16–18 (`data/fs131/i5d/build-stage16.log`, `-stage17.log`, `-stage18.log`; gate logs named in each stage);
+axioms read from those builds' oleans (`data/fs131/i5d/I5dAxioms16.out`, `I5dAxioms17.out`, `I5dAxioms18.out`; each with a control reading `sorryAx`).*
+
+Kernel theorems, on `[propext, Classical.choice, Quot.sound]`:
+- `HadwigerNelson.Plane.ArcMap.stuck_flanks_ua` (`Plane/ValidMap/Terminal`) — N4-STUCK (ii) with unit arcs (FS114-CV § 1.4); with it I5c's wiring
+  `HadwigerNelson.Plane.ArcMap.stuck_structure_ua` (FS112-WALK row 5, N4-STUCK (i)–(ii) with unit arcs) is a kernel theorem.
+- `HadwigerNelson.Plane.ArcMap.cv_l0` (`Terminal`) — FS114-CV-HD's (CV-L0).
+- `HadwigerNelson.Plane.ArcMap.n3_end_chain` (`Terminal`) — FS112-N3-END's chain clause (inventory item 74).
+- `HadwigerNelson.Plane.ArcMap.BaseCtx.pseudo_nonempty`, `BaseCtx.pseudo_finite` (`Plane/ValidMap/BaseWalk`) — NB3 steps 3 and 4; with the second, I5c's
+  wiring `BaseCtx.retArcs_finite` (FS110-CD Lemma R's finiteness) is a kernel theorem.
+- Children: the module `Plane/ValidMap/FlankUA` (29 theorems: `not_mem_angleIcc_add_pi`, `shadow_of_not_shave`, `not_outType_N_of_flankAbove_one`,
+  `not_outType_S_of_flankBelow_neg_one`, `srcG_of_shadow`, `srcH_of_shadow`, `dot_nonneg_of_srcG`, `dot_nonpos_of_srcH`, `region_near_of_inType`,
+  `dist_N_S`, `region_far_S_of_srcG`, `region_far_N_of_srcH`, `flank_ne_of_shadows`, `exists_isRingArc_of_onRingArc` (plan § 9.1's shared child),
+  `N_add_eq_framePt`, `S_add_eq_framePt`, `framePt_normSq_aux`, `horn_radial_N`, `horn_radial_S`, `not_antipodal_coneAt_N_of_horn`,
+  `not_antipodal_coneAt_S_of_horn`, `horn_poles_contact`, `coloursAt_eq_of_mem_interiorPts`, `abs_le_norm_e_sub_one`, `sphere_near_mem_ringArc`,
+  `IsRingArc.coloursAt_eq`, `IsFlankAbove.unique`, `horn_bounds_of_noMerge`, `hasSectors_one_of_contacts`), and `chainVertex_antipodal` (`Terminal`).
+
+Wired by FS131-I5d (over a `sorry` child): `n3_end` (FS112-N3-END, moved to wave 5 by item 289) — its second disjunct proved; its first case is the new
+child `n3_end_of_not_inType` (NB3-END items 2–5).
+
 ## Stage 1 — SAVED: the readback
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -713,3 +735,42 @@ exit 0 (`build/gate/build/20261005T011148Z-52561.log`; driver log `data/fs131/i5
 three leaves, every child, `not_mem_coloursAt_of_tile_dist` and `retArcs_finite` on the standard three; the control `exists_pseudoCircle` reads `sorryAx`.
 
 ## Stage 17 — SAVED
+
+## Stage 18 — SAVED: `n3_end` proved over one named child (its first case); the handoff
+
+**`n3_end`** (`Terminal`, moved here at stage 15; statement and docstring verbatim) — proved over the new child **`n3_end_of_not_inType`**, on FS131-I4m's
+Stage 38 route (inventory items 288–289: no `hQR`, the split on an in-type `g`-tile at `N`):
+- **an in-type upper flank at `N`** (the second disjunct, proved): `κ₂ ≤ 1` (`horn_bounds_of_noMerge`: `woodallCone`'s sectors are horns with bounds in
+  `[−1, 1]`, and `hornSet_curv_eq` identifies the given horn's bounds); `κ₂ ≥ 1`, since at `κ₂ < 1` wave 4's `outType_N_of_flankAbove` makes `g` out-type at
+  `N`; and for any `c`-horn along `α + π`, `stuck_flanks_ua` (with `horn_poles_contact`) makes `g` its `+n` flank (`IsFlankAbove.unique`), so at a bound
+  above `−1` wave 4's `outType_S_of_flankBelow` in the turned frame (whose `S′` is `N`) would make `g` out-type at `N` again.
+- **no in-type upper flank at `N`** (the first disjunct): the child `n3_end_of_not_inType`, `sorry` — NB3-END items 2–5 with item 2's premise read as I4m
+  read it. It is the leaf's whole open part (I4m priced the leaf at two sessions; the half proved here was the cheap half). What it can start from:
+  `srcG_of_shadow` already gives "in-type at `N` or out-type at `S′`", so here `g` is out-type at `S′`; the work is the two `g`-sectors at `S′` (items 2–3),
+  the colours `y ≠ z` beside its `+a` horn (item 4, the SHAVE contradiction for `z = y`) and the in-type `y`-tile at `v − 2n` (item 5, `noBoth`).
+
+Children added: `IsFlankAbove.unique`, `horn_bounds_of_noMerge` (`FlankUA`), `n3_end_of_not_inType` (`Terminal`, the `sorry`). `scripts/Axioms.lean` and
+`ARCHITECTURE.md` updated; `tools/check_architecture.py`: PASS; names collision-free.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 6 modules rebuilt, 8 with warnings, every warning `declaration uses 'sorry'`**,
+exit 0 (`build/gate/build/20261005T013008Z-182604.log`; driver log `data/fs131/i5d/build-stage18.log`). Wave 5's sorry declarations: **33** (`Terminal` 9 —
+`n3_end_of_not_inType` in place of `n3_end` —, `Dense` 2, `HexRing` 7, `MapGraph` 3, `BaseWalk` 8, `BaseDense` 4), **26 this lane's**. Axioms
+(`data/fs131/i5d/I5dAxioms18.lean` → `I5dAxioms18.out`): `IsFlankAbove.unique`, `horn_bounds_of_noMerge`, `stuck_flanks_ua`, `n3_end_chain` on the standard
+three; `n3_end` and its child read `sorryAx` (the control).
+
+**What is left in this lane (26), and where it stands** (for wave 5's next implementer):
+- **`Terminal` (9)**: `n3_end_of_not_inType` (above); the CV-HD cluster `cv_hd_main` (H: CVB § 1.6, both branches), `y3_end_needs` (H: YB3 § 3.1's seven
+  colours), then `cv_hd`, `cv_class`, `c_double`, `c_ends` (with `stuckAlong_of_run`, plan § 9.1) — `FlankUA`'s sources and `chainVertex_antipodal`,
+  `not_antipodal_coneAt_*_of_horn` are the tools they share; the limit constructions `exists_red`, `exists_terminal`.
+- **`BaseWalk` (5 of 8)**: `pseudo_ncard_le_two` (needs ruling 218 (b)'s `cor3_local`: `cor3` needs `Covers x 1`, which `B̄(u, 2)` does not give at
+  `x ∈ ω(p)`); `exists_pseudoCircle` (the bridge: a construction over `pseudo_finite`, `pair_i`, `pair_ii`, `pseudo_ncard_le_two`); `reduce`, `select`
+  (circle-abstract); `l3_base`.
+- **`HexRing` (7)**: `rot_noThird` rests on `cor3`, which lives in `Dense`, downstream of `HexRing` — not citable as the modules stand (a finding, record
+  report); `rot_out`, `rot_in` read `rot_noThird`; `hex_regular` (sector geometry: the cones of a cubic vertex as contiguous closed intervals, then
+  arithmetic); `bv_hex`, `bv_l3`, `bv_nd` (BASE-V; `bv_nd`'s step 4 needs the α|β edge at a point of ≤ 3 colours from its sector chart).
+- **`Dense` (2)**: `disc1_local`, `cor3`. **`BaseDense` (3 of 4)**: `row134BaseUA` (the assembly), `exists_preBend` (over wave 4's `bend_toward`),
+  `cv_exists` (needs CVB § 1.4's bi-infinite-run argument as a lemma beside `exists_terminal`, I5c's note).
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 18 — SAVED

@@ -632,6 +632,20 @@ theorem c_double {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuc
       (∃ θ₂, α + π / 2 < θ₂ ∧ F.IsQArc (E - e (α + π / 2)) (α + π / 2) θ₂) := by
   sorry
 
+/-- **FS112-N3-END, its first case** (a child of `n3_end`, FS131-I5d): with no in-type upper-flank tile at `N`, the first disjunct — four colours and
+a repeated colour at `S′ = v − n`, a both-kind unit arc centred at `v − 2n`. NB3-END items 2–5 (`plans/FS112-NB3-verification.md` l. 232–243) with
+item 2's premise read as "no in-type `g`-tile at `N`" (FS131-I4m's reading, inventory items 288–289: NB3 leaves the case `κ₂ = 1`, `g ∉ P_cl(N)` to its
+item 1, whose conclusion is not this statement): the `g`-shadow on both horns then comes from out-type `g`-tiles at `S′` tangent to `±a` (`srcG_of_shadow`
+gives "in-type at `N` or out-type at `S′`"), two sectors of `g` at `S′`; `S′` terminal makes them horns; the colours `y ≠ z` beside the `+a` horn
+(SHAVE otherwise); an in-type `y`-tile at `v − 2n` Siamese to the lower flank. The open part of `n3_end`. A step inside a refutation-shaped row: no
+model expected. -/
+theorem n3_end_of_not_inType (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v : ℂ} {α κ₂ : ℝ} {c : Fin k}
+    (hst : F.IsStuck v) (h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α (-1) κ₂ c)
+    (hno : ∀ g, F.IsFlankAbove v α κ₂ g → ¬ (F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2)))) :
+    4 ≤ (F.coloursAt (v - e (α + π / 2))).ncard ∧ F.HasRepeatedColour (v - e (α + π / 2)) ∧
+      ∃ θ₁ θ₂, F.BothKind (v - 2 * e (α + π / 2)) θ₁ θ₂ := by
+  sorry
+
 /-- **FS112-N3-END** (NB3's corrected form): in a terminal valid map of the plane, let `v` be stuck with exactly three colours, its
 two-sector colour `c` having a horn along `e α` whose lower arc has curvature `−1` (an arc of `ω(v − n)`). Then either `v − n` carries
 at least four colours and a repeated colour and `v − 2n` is the centre of a both-kind unit arc, or the upper flank colour `g` is
@@ -643,7 +657,30 @@ theorem n3_end (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {v : ℂ} {�
         ∃ θ₁ θ₂, F.BothKind (v - 2 * e (α + π / 2)) θ₁ θ₂) ∨
       ∃ g, F.IsFlankAbove v α κ₂ g ∧ F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2)) ∧ κ₂ = 1 ∧
         ∀ κ₃ κ₄, F.IsHorn v (α + π) κ₃ κ₄ c → κ₃ = -1 := by
-  sorry
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  by_cases hin : ∃ g, F.IsFlankAbove v α κ₂ g ∧ F.IsContact v g (v + e (α + π / 2)) ∧ F.InType v g (v + e (α + π / 2))
+  · -- an in-type upper flank at `N`: the flank lies in `B(N, 1)`, so `κ₂ = 1`, and the `−e α` horn's `+n` flank (the same colour) too
+    right
+    obtain ⟨g, hg, hgc, hgi⟩ := hin
+    obtain ⟨-, hκ2⟩ := horn_bounds_of_noMerge hF (hvC v) hst.1 le_rfl hc2 hH
+    have hk2 : κ₂ = 1 := by
+      by_contra hne
+      exact (contact_inType_or_outType hF (hvC v) hgc).2
+        ⟨hgi, outType_N_of_flankAbove hF (hvC v) (lt_of_le_of_ne hκ2 hne) hg hgc.2.2⟩
+    refine ⟨g, hg, hgc, hgi, hk2, fun κ₃ κ₄ Hd => ?_⟩
+    obtain ⟨hκ3, hκ4⟩ := horn_bounds_of_noMerge hF (hvC v) hst.1 le_rfl hc2 Hd
+    obtain ⟨hN, hS⟩ := horn_poles_contact hF (hvC v) hst.1 le_rfl hc2 hH
+    obtain ⟨g₁, -, -, -, -, -, -, hg₁, -, -, hg₁d, -⟩ :=
+      stuck_flanks_ua hF (hvC v) hst h3.le hH Hd le_rfl hκ2 hκ3 hκ4 hc2 hN hS
+    have hg₁g : g₁ = g := hg₁.unique hg
+    subst hg₁g
+    by_contra hne
+    have hout := outType_S_of_flankBelow hF (hvC v) (lt_of_le_of_ne hκ3 (Ne.symm hne)) hg₁d
+      (by rw [sub_e_add_pi_add]; exact hgc.2.2)
+    rw [sub_e_add_pi_add] at hout
+    exact (contact_inType_or_outType hF (hvC v) hgc).2 ⟨hgi, hout⟩
+  · left
+    exact n3_end_of_not_inType hF hP hT hst h3 hc2 hH fun g hg hgi => hin ⟨g, hg, hgi⟩
 
 /-- **FS112-N3-END's chain clause** ("and the chain is the single vertex", inventory item 74; wave 4's `n3_end` states the rest): in
 n3_end's setting (a terminal valid plane map, `v` stuck with three colours, `c`'s horn along `e α` with lower bound `−1`), in its second

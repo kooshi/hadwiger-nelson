@@ -3281,6 +3281,9 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.sphere_near_mem_ringArc
 #print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.coloursAt_eq
 #print axioms HadwigerNelson.Plane.ArcMap.chainVertex_antipodal
+#print axioms HadwigerNelson.Plane.ArcMap.IsFlankAbove.unique
+#print axioms HadwigerNelson.Plane.ArcMap.horn_bounds_of_noMerge
+#print axioms HadwigerNelson.Plane.ArcMap.n3_end_of_not_inType
 
 /-! ## FS-131 wave 5 (job FS131-I5b) — wave 5's second implementer: Lemma 1's children, the holed fragment -/
 

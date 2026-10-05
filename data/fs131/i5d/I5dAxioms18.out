@@ -1,0 +1,6 @@
+'HadwigerNelson.Plane.ArcMap.n3_end' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.n3_end_of_not_inType' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsFlankAbove.unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.horn_bounds_of_noMerge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.stuck_flanks_ua' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.n3_end_chain' depends on axioms: [propext, Classical.choice, Quot.sound]
