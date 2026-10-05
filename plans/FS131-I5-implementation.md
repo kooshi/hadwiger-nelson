@@ -1772,3 +1772,29 @@ both sides; no `axiom`, no `native_decide`. The merge commit is made with `git c
 resolved paths explicitly, standing rule 6's intent).
 
 ## Stage 39 — SAVED
+
+## Stage 40 — SAVED (FS131-I5o): `disc1_local` proved (a kernel theorem)
+
+**`disc1_local` is proved as stated** (FS112-DISC1 on a fragment, `Plane/ValidMap/Dense`), by FS106-TS-T's argument read on one closed square (order changed
+by ruling 360 (c): `disc1_local` before `bv_l3`). New declarations, all in `Dense` (names collision-free on `HEAD`, `origin/fs131-w5c`, `origin/fs131-w4mm`,
+`origin/main`):
+- `IsRegOf` (a region of a family of classes: `AeProperRegions.IsRegion` with the classes given directly), with `IsRegOf.subset`, `.isPreconnected`,
+  `.chain_step`, `.dist_lt_one`, and `unitPairsNull_of_dist_ne_one`; two spec examples (the plane is a region of `univ`; `∅` is not a region);
+- `exists_three_le_multicolour_square`: open classes with no unit pair inside a class, **dense and locally finite only at the points of a closed square of
+  side `s > 1`**, have a point of the square in three class closures. The proof is `AeProperRegions.exists_three_le_multicolour`'s, transformed by script
+  (`R.cls` → `cls`, `R.IsRegion` → `IsRegOf cls`, the global local finiteness chosen only at points of the square, `R.dense p` → the hypothesis at `p`);
+- `ArcMap.exists_three_le_coloursAt_square`: a valid map whose domain holds such a square has a point of at least three colours in it (density by
+  `dense_interiorPts`, local finiteness by `finite_tiles_near`, both at domain points; `region_locallyFinite`'s argument with `hx : x ∈ F.dom`);
+- `ArcMap.closedSquare_subset_closedBall`: the square of side `6/5` about `x` lies in `B̄(x, 1)` (half-diagonal `3√2/5 < 1`).
+`disc1_local`: the square of side `6/5` about `x` is in `B̄(x, 1) ⊆ F.dom`, so it holds a point of three colours. Read against the informal claim (FS129-OR1-
+LOCALDENSE's reading of FS112-DISC1: "a valid fragment covering `B̄(x, 1)` has a point of at least three colours in `B̄(x, 1)`") — **same**; the route differs
+from the docstring's quoted FS129 wording (nested tiles), which the docstring keeps as the row's own words (a `--` comment in the proof says so). Strictly
+more is true by the proof: the point lies within `3√2/5` of `x`, for any valid fragment whose domain holds that square.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 448 of 448 batches, 4 modules rebuilt (`Dense`, `BaseWalk`, `BaseDense`, `Proofs`), 5 with warnings
+(`Dense` has none now), every warning `declaration uses 'sorry'`**, exit 0, 8 min 43 s (`build/gate/build/20261005T084436Z-2794592.log`; driver log
+`data/fs131/i5o/build-stage40.log`). Axioms (`I5oAxioms40.lean` → `.out`): `disc1_local` and its nine children on the standard three; control `bv_l3` on
+`sorryAx`. `scripts/Axioms.lean`: the eight new theorems added under "-- FS131-I5o (stage 40)" after I5m's stage-37 lines. `tools/fs131_i5_stmt_check.py
+d61edefc`: PASS; `tools/check_architecture.py`: PASS. Wave 5's `sorry` declarations: **12** (mine left: `bv_l3`, `exists_preBend`).
+
+## Stage 40 — SAVED

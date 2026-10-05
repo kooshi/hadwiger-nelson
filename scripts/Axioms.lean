@@ -3858,6 +3858,15 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.half_le_sin
 #print axioms HadwigerNelson.Plane.ArcMap.linkage_cmp
 #print axioms HadwigerNelson.Plane.ArcMap.linkage_end
+-- FS131-I5o (stage 40): FS106-TS-T on a square inside a fragment, children of `disc1_local`
+#print axioms HadwigerNelson.Plane.IsRegOf.subset
+#print axioms HadwigerNelson.Plane.IsRegOf.isPreconnected
+#print axioms HadwigerNelson.Plane.unitPairsNull_of_dist_ne_one
+#print axioms HadwigerNelson.Plane.IsRegOf.chain_step
+#print axioms HadwigerNelson.Plane.IsRegOf.dist_lt_one
+#print axioms HadwigerNelson.Plane.exists_three_le_multicolour_square
+#print axioms HadwigerNelson.Plane.ArcMap.exists_three_le_coloursAt_square
+#print axioms HadwigerNelson.Plane.ArcMap.closedSquare_subset_closedBall
 
 /-! ## FS-131 wave 5 (job FS131-IX1) — the crossing lemma's children (`inter_nonempty_of_interleaved` itself is in FS131-KP's block) -/
 
