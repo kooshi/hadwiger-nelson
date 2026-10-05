@@ -3593,6 +3593,16 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S
 #print axioms HadwigerNelson.Plane.ArcMap.n3_end_four_colours
 #print axioms HadwigerNelson.Plane.ArcMap.n3_end_bothKind
+-- FS131-I5k (extending this block): NB3-END items 3–5 (`Terminal`)
+#print axioms HadwigerNelson.Plane.ringPt_S_sub_eq_framePt
+#print axioms HadwigerNelson.Plane.isPreconnected_hornSet_of_abs_le
+#print axioms HadwigerNelson.Plane.not_mem_angleIcc_S_self
+#print axioms HadwigerNelson.Plane.ArcMap.IsHorn.isRingArc_lower_ua
+#print axioms HadwigerNelson.Plane.ArcMap.exists_mem_sectorsOf_of_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_horn_of_mem_coneAt_of_stuck
+#print axioms HadwigerNelson.Plane.ArcMap.not_outType_v_of_flankBelow_neg_one
+#print axioms HadwigerNelson.Plane.ArcMap.isStuck_of_hasRepeatedColour
+#print axioms HadwigerNelson.Plane.ArcMap.flank_coneAt_S
 
 #eval IO.println "=== PURCHASED ==="
 

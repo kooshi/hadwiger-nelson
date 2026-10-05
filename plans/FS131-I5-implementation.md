@@ -1468,3 +1468,79 @@ to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/202
 `BaseDense` 3 (`cv_exists` among them), `MapGraph` 3 — wave 5 **28**, I5i's count; wave 4's stale `Contact`, `UnitArc`.
 
 ## Stage 32 — SAVED
+
+## Stage 33 — SAVED (FS131-I5k): NB3-END items 3–5 in the kernel, so `n3_end_of_not_inType` and `n3_end` are kernel theorems
+
+**What this stage proves.** `n3_end_four_colours` (NB3-END items 3–4) and `n3_end_bothKind` (item 5), the two children I5i left, so
+`n3_end_of_not_inType` and FS112-N3-END (`n3_end`) rest on no `sorry`. No statement changed; no `axiom`; no `native_decide`.
+
+**Items 3–4, by a shorter route than NB3's.** `S′ = v − n` has a repeated colour (`flank_two_sectors_at_S`, item 2) and the map is terminal,
+so `S′` is stuck (`isStuck_of_hasRepeatedColour`: no move anywhere, and a colour's sector count is eventually constant). With at most three
+colours `S′` would be a chain vertex, where every colour — `c` among them, carried at `S′` by N3-DEG — approaches along both directions of one
+axis (`chainVertex_antipodal`); U1 keeps `c`'s cone at `S′` free of antipodal pairs (`not_antipodal_coneAt_S_of_horn`). So `#P_cl(S′) ≥ 4`.
+NB3's colours `y ≠ z` beside `g`'s `+a` horn and its SHAVE step are not used. **A generalization** for the report: NB3-END items 3–4's four
+colours follow from item 2, terminality at `S′` and U1 alone.
+
+**Item 5, NB3's route in the kernel** (every step went through; none failed):
+
+| NB3-END item 5 | Lean |
+|---|---|
+| `g`'s two sectors at `S′` are horns along `±a`, with out-type contacts at `v` and `v − 2n` (item 3) | `flank_coneAt_S` (`α ∈ cone(g)` at `S′`, E5's F2–F4: the first half of `flank_two_sectors_at_S`'s proof); `exists_horn_of_mem_coneAt_of_stuck` (N3-DEG's horns at a stuck point, `woodallCone_isHorn_ua`, located by a direction of the class: `exists_mem_sectorsOf_of_mem_coneAt`, `e_eq_of_mem_coneAt_hornSet`) |
+| "No SHAVE of that horn needs a `y`-shadow on it" | `IsHorn.exists_flankBelow`, `shadow_of_not_shave` |
+| the shadow's source: in-type at `v − 2n`, or out-type at `v` | `srcH_of_shadow` at `S′` |
+| "`y ∉ P_cl(v)`" | the out-type branch puts `y` in `P_cl(v) = {c, g, h}`: `c` by U1 (`α ∉ [α + π, α + 2π − φ]`, `not_mem_angleIcc_S_self`), `g` by validity (its own shadow on its own horn), `h` because its flank below `c`'s horn lies in `B(S′, 1)` and has `v` in its closure (`not_outType_v_of_flankBelow_neg_one`, over `isPreconnected_hornSet_of_abs_le`) |
+| "possible only when the horn's lower arc is an arc of `ω(P₋₂)`" | the in-type contact keeps `y`'s class near `S′` in `B̄(v − 2n, 1)` (`region_near_of_inType`); a band point above curvature `−1` would leave it, so `κ₁′ = −1` |
+| "that arc has `s_in = y`, `s_out = g`, both in `P_cl(P₋₂)`" | `IsHorn.isRingArc_lower_ua` (the ring arc), `y` from the in-type contact, `g` from the out-type contact at `v − 2n` |
+
+NB3's "`z ≠ y`" is not needed for item 5 either (the upper flank `z` enters only as `shadow_of_not_shave`'s argument).
+
+**A copy, flagged for the merge.** `IsHorn.isRingArc_lower_ua` is wave 4's `IsHorn.isRingArc_lower` (engine 5, `UnitArc` on `main`), proved
+here under its own name because this branch does not carry wave 4's landing and the brief does not take `main`; its proof is `main`'s with
+`fromFrame` read as this branch's `framePt` and one identity (`ringPt_S_sub_eq_framePt`) in place of `main`'s `normalPt_sub_add_eq_fromFrame`.
+At the merge with `main` it should collapse to a citation of `IsHorn.isRingArc_lower` (the docstring says so).
+
+Children added (all `Terminal`, all proved): `ringPt_S_sub_eq_framePt`, `isPreconnected_hornSet_of_abs_le`, `not_mem_angleIcc_S_self`,
+`ArcMap.IsHorn.isRingArc_lower_ua`, `ArcMap.exists_mem_sectorsOf_of_mem_coneAt`, `ArcMap.exists_horn_of_mem_coneAt_of_stuck`,
+`ArcMap.not_outType_v_of_flankBelow_neg_one`, `ArcMap.isStuck_of_hasRepeatedColour`, `ArcMap.flank_coneAt_S`. Names checked unique by
+`git grep` over `main`, `origin/fs131-w5`, `origin/fs131-w5p`, `origin/fs131-ww`, `origin/fs131-w5c`. The two leaves' docstrings now state the
+routes taken (statements untouched).
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 72149b07`: **PASS**; and against my launch, `tools/fs131_i5h_stmt_check.py 33320123`
+(which also covers I5i's children `n3_end_four_colours`, `n3_end_bothKind`, `flank_two_sectors_at_S`): **PASS**. `tools/check_architecture.py`:
+**PASS** (no new module).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt (`Terminal`, `Dense`, `BaseWalk`, `BaseDense`,
+`Proofs`), 8 with warnings, every warning `declaration uses 'sorry'`**, exit 0, 8 min 35 s (`build/gate/build/20261005T053544Z-1692375.log`;
+driver log `data/fs131/i5k/build-stage33.log`). `Terminal`'s `sorry` declarations: **8** (`exists_red`, `exists_terminal`, `cv_hd_main`, `cv_hd`,
+`cv_class`, `y3_end_needs`, `c_ends`, `c_double`); wave 5 **26** (28 at launch).
+
+**Axioms, read from this build's oleans** (`data/fs131/i5k/I5kAxioms33.lean` → `I5kAxioms33.out`, 12 GiB slot, exit 0): `n3_end_four_colours`,
+`n3_end_bothKind`, `n3_end_of_not_inType`, `n3_end` and the nine children on `[propext, Classical.choice, Quot.sound]`; controls: `cv_class`
+reads `sorryAx` (the reader sees the failure the print guards against), `ArcMap.linkage_dot_ne_zero` the standard three. `scripts/Axioms.lean`:
+the "FS131-I5h" block extended by a commented line and the nine children's records (`n3_end`, `n3_end_of_not_inType` already had theirs).
+
+**Re-pricing** (the brief: "from your first two hard leaves"). Both leaves together cost about 60k tokens of context, against I5i's estimate of
+about one session for items 3–5: the toolkit (wave 4's and I5d–I5i's lemmas) carried nearly every step, and the one missing piece (the ring
+arc) was a copy. The CV-HD cluster's leaves are of the same kind where they read the stuck structure; `exists_red`/`exists_terminal` (limit
+constructions) are not.
+
+### Theorems this phase proved
+
+All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5k/I5kAxioms33.out`):
+- `HadwigerNelson.Plane.ArcMap.n3_end_four_colours` (`Plane/ValidMap/Terminal.lean`) — NB3-END items 3–4: `#P_cl(v − n) ≥ 4`.
+- `HadwigerNelson.Plane.ArcMap.n3_end_bothKind` (`Terminal`) — NB3-END item 5: a both-kind unit arc centred at `v − 2n`.
+- hence `ArcMap.n3_end_of_not_inType` and **`ArcMap.n3_end`** (FS112-N3-END, NB3's corrected form with item 288's case split) rest on no
+  `sorry`.
+- children: `ringPt_S_sub_eq_framePt`, `isPreconnected_hornSet_of_abs_le`, `not_mem_angleIcc_S_self`, `ArcMap.IsHorn.isRingArc_lower_ua`,
+  `ArcMap.exists_mem_sectorsOf_of_mem_coneAt`, `ArcMap.exists_horn_of_mem_coneAt_of_stuck`, `ArcMap.not_outType_v_of_flankBelow_neg_one`,
+  `ArcMap.isStuck_of_hasRepeatedColour`, `ArcMap.flank_coneAt_S`.
+
+**In progress, not in the tree** (`data/fs131/i5k/Scratch5.lean`, iteration only, against this build's oleans): `cv_class` assembled — its
+"None" disjunct over a general form of § 3.4 (`flank_two_sectors_at_S_gen`, any bounds in `[−1, 1]`, E5 § 3.5's "U1 or SEP at each end", with
+mirrored chart lemmas `κ_le_of_disjoint_end`, `tanBelow_of_mem_sector_end`, `exists_tanAbove_of_sector_end`, the angle lemma
+`angle_pinch_ends` and `IsFlankBelow.unique`), applied at `S′` for `g` and in the turned frame at `N` for `h`; its bowtie disjunct over `cv_hd`,
+`c_double` and `n3_end_chain`. Folded in at Stage 34.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 33 — SAVED
