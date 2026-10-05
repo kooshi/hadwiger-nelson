@@ -2643,3 +2643,34 @@ reason by the close.*
      their briefs; the first slot to free is not refilled, and from then on at most three run. **Queue when a slot frees under three**: the freed lane's own
      continuation if its leaves remain on the longest path (the planar chain, then wave 5's halves); else IMM2 (MERGE), then `bend_away`'s implementer (E5 § 4 its
      route), then `disc1_local` after `fs131-w5p` merges back. Memory's staffing line rewritten. The handoff rewritten before a compaction, at Kooshi's word.
+324. **FS131-IP4 handed back** (Stage 15 SAVED, harness ≈ 699k by the task notice — past its 500k line; budgets are guidance, so not a slip, though IP4 named it
+     one; record `fs131-w5p`'s `plans/FS131-planar-implementation.md`, Stages 12–15; report `data/fs131/reports/FS131-IP4.md`; commits `bf27d9a4`, `689374fd`
+     (the merge of `fs131-w5t`), `fd239a28`, `49e05b97`, `18cbf0a3`, `14e0d12a`, `aa753bb1`, pushed). **Results, [kernel], statements unchanged**:
+     `BaseCtx.retArcs_not_abut` (NEST-A) on the standard three; `BaseCtx.retArcs_not_interleaved` (NEST-X), so `retArcs_nested`; `BaseCtx.endpoint_of_far_end`
+     (END-C), so `exists_endpoint` (FS110-CD Lemma E with CE R1–R4) — these carry `sorryAx` only through `cor3`, `pseudo_finite` (wave 5), `pair_ii`, `noBoth`
+     (wave 4), used by statement; `orient_aux`/`orient`/`BaseCtx.orient_pair` (one-sidedness along a continuum, over the crossing lemma alone — **PATH was never
+     built and none of the three leaves needed it**) and `circ_local` (the D-cut at a general circle point) on the standard three; 26 further children.
+     **T-GRAPH is now on `fs131-w5p`** (the merge, build OK). **The 60° question** (brief FS131-IP1 Done means 3, carried): `IsRetArc`'s 60° bound holds — a
+     chord of exactly 1 between two such points is excluded by `pair_ii` with `noBoth`; no statement defect. **Receipt** (Keryx): the seven commits exist and
+     `origin/fs131-w5p` is `aa753bb1`; both build logs (`build/gate/build/20261005T032249Z-941152.log`, `…20261005T040047Z-1228628.log`) end "Build completed
+     successfully (5405 jobs)", 0 warnings other than `` declaration uses `sorry` ``; `sorry` by grep: `PlaneTopology` 0, `MapTopology` 0, `MapGraph` 8,
+     `BaseWalk` 12 (15 at IP3's end; the diff on `BaseWalk` removes three `sorry` lines and nothing else), `BaseDense` 3; `data/fs131/ip/axioms-ip4-stage15.txt`
+     parsed by script: 25 records, 17 within the standard three, 8 on `sorryAx` (the four consumed leaves and their four consumers); `orient_aux`, `orient`,
+     `orient_pair` within the standard three in `axioms-ip4-stage14.txt`; `endpoint_of_far_end`'s statement read against its docstring and CD Lemma E's shape.
+     **The consumed leaves are already proved elsewhere** (Keryx, by grep): `cor3` (`Plane/ValidMap/Cor3.lean:478`) and `BaseCtx.pseudo_finite` (`BaseWalk.lean:1019`)
+     carry no `sorry` on `fs131-w5`; `pair_ii` and `noBoth` are on `main` (wave 4, 0 `sorry`) — so after `fs131-w5p` merges into `fs131-w5` and wave 5 merges
+     `main`, the planar chain's proved leaves carry no `sorryAx`. IP4's "question for another lane" (new consumers) needs no relay. **Generalizations**: `orient`
+     holds for any open set one-sided along any continuum in the closed disc; `circ_local` and `orient` need no colour count and nothing of the base. **Prediction
+     scored**: item 312's re-price put `endpoint_of_far_end` at about 1 session and the two `retArcs` at 0.2 each; all three, with `orient` and `circ_local`, took
+     about 75 minutes of wall clock and two builds. **Correction owed** (the next implementer on `fs131-w5p`, at a build): three `BaseWalk` docstrings describe
+     routes not taken — `retArcs_not_interleaved` and `retArcs_not_abut` the PATH route, `endpoint_of_far_end` an "owed before proving" reading now done.
+     **Left on `fs131-w5p`** (8, all in `MapGraph`): F-LOC, F-CONN, F-INF, F-ONE, F-SEP, `not_isHoleOf_chain`, `isHoleOf_cluster`, F-RING; record § 15.3 gives paper
+     routes for F-INF, F-CONN, F-LOC and both adversaries (F-INF and F-CONN share one lemma: every point lies in the closure of an outer tile, from
+     `exists_outermost`). **Done-means 4 not met**: F-RING not reached or measured; IP4's observation — its separation clause most plausibly needs `orient`'s class
+     argument and may need no boundary walks. **Order**: `orient` and the two `retArcs` before `endpoint_of_far_end`, as the brief allows (record § 14.1).
+     Credit: IP4, for replacing PATH by one-sidedness over the crossing lemma.
+325. **Ruling on IP4's slot: not refilled** (item 323: the first slot to free stays empty). In flight: 1 (WL1) + 1 (I5g) + 1 (I5h) = 3, at the cap. **Queue for
+     the next slot to free**: the planar continuation, FS131-IP5 on `fs131-w5p` from Stage 15 (the eight `MapGraph` leaves in record § 15.3's order, F-RING
+     measured from its first child, the three docstrings of item 324 fixed) — unless the lane that frees is wave 5's and its own leaves are then the longer path,
+     ruled at that hand-back; then IMM2, `bend_away`'s implementer, `disc1_local`. Alternative weighed: refilling now with IP5, since the planar chain is the
+     longest path. Why not: Kooshi set three for usage, and the four running jobs were allowed to finish only as a wind-down. Confidence: high.
