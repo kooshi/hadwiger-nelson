@@ -1,0 +1,25 @@
+== control: Contact's amended clause changed to a strict subset
+1
+ok: exists_shave in the working Contact is d4f946ae's statement plus the ruled amendments
+ok: exists_shave_aux has Contact's statement of exists_shave verbatim (8 lines; diff empty)
+ok: exists_rayMerge in the working Contact is d4f946ae's statement plus the ruled amendments
+ok: exists_rayMerge_aux has Contact's statement of exists_rayMerge verbatim (7 lines; diff empty)
+FAIL: exists_merge: the working Contact's statement differs from d4f946ae's plus the ruled amendments
+ok: exists_merge_aux has Contact's statement of exists_merge verbatim (6 lines; diff empty)
+FAIL: 1 statement(s) differ
+statements exit=1
+ok: source lines 26-1056 (1031 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1716-1718 (3 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1373-1386 (14 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 2627-2632 (6 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1058-1372 (315 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1388-1715 (328 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+ok: source lines 1720-2592 (873 lines) verbatim in Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean
+FAIL: Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean differs from d4f946ae's minus the moved ranges plus the import
+FAIL: 1 check(s) failed
+move exit=1
+wrote Proofs/HadwigerNelson/Plane/ValidMap/Cone.lean (2607 lines) and Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean
+restored: statements exit=0
+restored: move exit=0
+== control: an amendment whose old text is absent (applied to a source without it)
+raised: amendment of item 269: old text occurs 0 times (expected 1): "`c` has `n` sectors at `v`, no point off the disc's rim gains a colour"

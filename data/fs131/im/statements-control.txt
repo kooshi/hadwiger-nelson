@@ -1,0 +1,13 @@
+FAIL: exists_shave: statement text differs
+--- Contact:exists_shave
++++ Moves:exists_shave_aux
+@@ -1,5 +1,5 @@
+  (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {α κ₁ κ₂ σ : ℝ} {c g h : Fin k}
+-    {n : ℕ} (hn : F.HasSectors v c (n + 1)) (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : -1 ≤ κ₁) (h2 : κ₂ ≤ 1)
++    {n : ℕ} (hn : F.HasSectors v c (n + 1)) (hH : F.IsHorn v α κ₁ κ₂ c) (h1 : -1 ≤ κ₁) (h2 : κ₂ < 1)
+     (hg : F.IsFlankAbove v α κ₂ g) (hh : F.IsFlankBelow v α κ₁ h) (hσ₁ : κ₁ ≤ σ) (hσ₂ : σ ≤ κ₂)
+     (hclear : ∀ᶠ r in 𝓝[>] (0 : ℝ), ∀ z ∈ hornSet v α κ₁ κ₂ r,
+       (TanAbove v α σ z → F.IsClear g z) ∧ (¬ TanAbove v α σ z → F.IsClear h z)) :
+ok: exists_rayMerge_aux has Contact's statement of exists_rayMerge verbatim (7 lines; diff empty)
+ok: exists_merge_aux has Contact's statement of exists_merge verbatim (6 lines; diff empty)
+FAIL: 1 statement(s) differ
