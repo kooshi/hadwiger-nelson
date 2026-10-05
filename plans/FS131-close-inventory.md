@@ -3578,3 +3578,27 @@ reason by the close.*
      (with the margin) for the same kind of gap and found none; `open_hlc`, `open_valid` iteration-clean, a build running. **Ruling: accepted** — the same
      reasons as item 393 (the lane's own definition; `exists_open`'s and `HasHornCount`'s statements unchanged). Confidence: high. Credit: IO2, for a second
      counterexample at the configuration's boundary, and for checking the other leaves for the same gap. Sent to IO2 by message.
+398. **FS131-M6 handed back: `fs131-w5` merged into `fs131-w5c`** (Stage 55 SAVED, harness ≈ 446k by the task notice; record `fs131-w5c`'s
+     `plans/FS131-I5-implementation.md`, Stages 52–55; report `data/fs131/reports/FS131-M6.md`; commits `e37e864d`, `06f39aef` (the merge; parents `e37e864d`,
+     `385b5ad3`), `5a857e50`, `87e95385`, pushed). **The merge**: byte-for-byte check PASS on 1,787 files; three-way statement check exactly the 4 declared
+     deletions; duplicate pairs 0; build OK. **Now standard on this branch**: `flankQ_upper`, `flankQ_lower`, `cv_class`, `c_double`, `c_ends`, `exists_merge`.
+     **[kernel], standard three**: `run_hornBoundsQR` (N2-TERM's clause 3 horn bounds), `hornBoundsQR_of_isChainVertex` (at every chain vertex of a terminal map,
+     along every direction), `horn_flanks_of_isChainVertex` (every horn at a chain vertex is one of the two-sector colour's horns), `BranchGerms.horn_cases_four`;
+     `badCount_lt_top` without its unused `hc` (ruling 389 (a)). **Left**: `stuckRun_ne_univ` (lane B's last leaf; `shadow_recursion`, M–H, about one session;
+     its "no bound is ±1" step now short). **Receipt** (Keryx): `origin/fs131-w5c` is `87e95385`; the merge commit's parents as stated; the latest build log
+     (`build/gate/build/20261005T114745Z-3978587.log`) ends "Build completed successfully (5791 jobs)", 0 warnings other than `sorry`; `sorry` by grep:
+     `BaseDense` 3, `BendCollar` 1, `HexRing` 1, `Procedure` 3, `Terminal` 1, `Limit` 0, `HornShadow` 0; no `framePt` left in any file of the branch;
+     `M6Axioms53.out`, `…54.out` parsed: the named standard, the controls on `sorryAx`. **Generalizations**: `run_hornBoundsQR` reads neither `hv` nor `h3`.
+     **Slip, its own**: the first post-merge build hit the heartbeat limit on an `nlinarith` side condition (replaced by `mul_le_of_le_one_left`). **Tool
+     defect**: `tools/fs131_m5_dupes.py` misses near-copies differing only by a namespace qualifier or a section variable; M6's `tools/fs131_m6_dupes.py` adds a
+     normalized-statement class (plant fired). **Corrections owed**: `Limit` now imports `MapTopology` (10 more modules, all already under `Procedure`/`Terminal`)
+     to cite `BranchGerms.branchPt_mem_closure_sector`, whose natural home is `Plane/LocalStructure`; two older repeats left (`Limit`'s
+     `coloursAt_eq_singleton_of_interior` ~ `FlankUA`'s `coloursAt_eq_of_mem_interiorPts`; `Procedure`'s `ringPt_add_int` ~ `BaseWalk`'s `ringPt_add_int_mul`).
+     **Note**: `origin/fs131-w5` moved to `4ced8071` during the job (KP2's stages); those commits are not in this merge. Credit: M6, for a merge checked file by
+     file and the horn-bound theorem in general form.
+399. **Rulings on M6's held items, and its slot.** (a) **`Limit`'s import of `MapTopology`: kept** (no new module enters the procedure's closure); the lemma's
+     move to `Plane/LocalStructure` joins item 387 (a)'s tidy moves. Confidence: high. (b) **The record's stage numbering: kept** as M6 joined it (the
+     inventory's citations stay valid). (c) **M6's slot → lane C of the collar bend, FS131-CC1, on the new branch `fs131-w5k`** (cut from `fs131-w5` at
+     `2736ab8c`, CG1's move commit; worktree by the recipe, `.lake/build` copied from the idle `fs131-w5c` with no `lake` running), as item 395 (c) queued.
+     `stuckRun_ne_univ` and the procedure's last steps take the next slot, on `fs131-w5c`. Confidence: high. In flight after CC1's launch: 1 (IO2) + 1 (CG1) + 1
+     (CC1) = 3.

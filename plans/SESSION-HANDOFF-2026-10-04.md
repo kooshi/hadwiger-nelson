@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–395 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–399 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **395**.
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **399**.
 >
 > **Held in the kernel, on `main`**: **MERGE** (item 375: `main` at `ca4dcfa2`, gated `df473bfe`, counts filed, item 376 — 3,807 records, 3,784 clean); waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -13,14 +13,15 @@ that judge the milestone, written before any job).*
 > three run now, and every slot that frees from here is refilled from the queue.
 >
 > **Running (3)** — each reports to "main" by hand-back; its report file is on its branch:
-> - **FS131-M6** (`fs131-w5c`): `origin/fs131-w5` (with `main`) merged into `fs131-w5c`, copies removed, `framePt → fromFrame` on its side; then lane B's
->   `run_hornBoundsQR`, `stuckRun_ne_univ`. Brief `data/fs131/briefs/FS131-M6-sync.md`.
+> - **FS131-CC1** (`fs131-w5k`, a new branch from `fs131-w5` at `2736ab8c`): the collar bend's lane C — `Pushforward`, C's `BendCollar` children, B0.
+>   Brief `data/fs131/briefs/FS131-CC1-collar.md`.
 > - **FS131-CG1** (`fs131-w5`): the collar bend's lane G — G's block moved to a new `CollarMap` first (its commit cuts lane C's branch), then `RadialPush` and
 >   the map-level children. Brief `data/fs131/briefs/FS131-CG1-collar.md`.
 > - **FS131-IO2** (`fs131-wop`): OPEN finished — `exists_open`'s five leaves over their MERGE templates, the positive `HasHornCount` example. Brief
 >   `data/fs131/briefs/FS131-IO2-open.md`.
 >
-> **Done since the compaction**: **FS131-KP2** (item 394: the collar bend planned — 53 children, about 4,750 lines, lanes G and C; the bent map as `F`'s
+> **Done since the compaction**: **FS131-M6** (items 398–399: **`fs131-w5` merged into `fs131-w5c`**; `run_hornBoundsQR` in the kernel; `stuckRun_ne_univ`
+> left); IO2's second finding (item 397: `OpenConfig` gains `ray0`); CG1's move commit `2736ab8c` (item 396); **FS131-KP2** (item 394: the collar bend planned — 53 children, about 4,750 lines, lanes G and C; the bent map as `F`'s
 > pushforward); IO2's finding (item 393: `OpenConfig` gains a clear margin); **FS131-IO1** (items 391–392: OPEN's statement settled (lone form kept), its configuration and four clauses in the kernel;
 > five leaves left); **FS131-IL2** (items 388–389: **the limit's lane A complete** — `Limit` free of `sorry`; `exists_clean`, the finiteness lemmas,
 > `mergeAvailable_of_bothKind` in the kernel); **FS131-M5** (items 386–387: **`main` merged into `fs131-w5`** — wave 4's stale leaves now standard there; three `exists_preBend`
@@ -54,9 +55,8 @@ that judge the milestone, written before any job).*
 > `grep -cP '^\s*sorry\s*$|:= sorry|by sorry'`; the axioms print parsed by script from the job's data file; one statement read back); log the item; rule the
 > slot per item 323. **At each landing** (as WL1's, items 326–327): read the saved gate logs, file the drafts with `scripts/gate_report.py axioms|vacuity` and `tools/claude_md_fact_audit.py --base <last CLAUDE.md commit>` run **before** committing, push notify Kooshi.
 >
-> **Queue for the next freed slot (items 383, 385, 389, 395)**, in order: (1) **lane C of the collar bend, FS131-CC1**, on a new branch `fs131-w5k` cut from
-> `fs131-w5` after CG1's move commit (`Pushforward`, C's `BendCollar` children, B0); (2) the freed lane's own continuation if on wave 5's path; (3) **the
-> procedure's last steps** on `fs131-w5c` after M6 (`exists_vertexStep` and `exists_arcStep` restated, items 383 (b), 385 (a); the moves' new lemmas, KL1's plan
+> **Queue for the next freed slot (items 383, 385, 389, 395)**, in order: (1) the freed lane's own continuation if on wave 5's path; (2) **`stuckRun_ne_univ` and the
+> procedure's last steps** on `fs131-w5c` (`exists_vertexStep` and `exists_arcStep` restated, items 383 (b), 385 (a); the moves' new lemmas, KL1's plan
 > § 3.3; OPEN merged in from `fs131-wop` once IO2 lands it; `exists_terminalSeq`); (4) **the remaining three `exists_preBend` children** (`hfree_of_baseHyp`,
 > `finite_maxRingArcs`, `maxRingArcs_subset_of_bend`) **with `bv_l3`'s move and proof** (to `BaseWalk` after `l3_base`, item 370 (a)), on a branch cut from
 > `fs131-w5` (disjoint from the collar's files); then `bend_away`'s implementer (branch `fs131-w4ba` at `71cca146`, E5 § 4; lands on its own); and the tidy
@@ -119,7 +119,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 
 | job | model | brief | reports to |
 |---|---|---|---|
-| FS131-M6 (`fs131-w5` into `fs131-w5c`; lane B; items 388–389) | Opus | `data/fs131/briefs/FS131-M6-sync.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-M6.md` |
+| FS131-CC1 (the collar bend's lane C on `fs131-w5k`; items 395–399) | Opus | `data/fs131/briefs/FS131-CC1-collar.md` | branch `fs131-w5k`'s `data/fs131/reports/FS131-CC1.md` |
 | FS131-CG1 (the collar bend's lane G on `fs131-w5`; items 394–395) | Opus | `data/fs131/briefs/FS131-CG1-collar.md` | branch `fs131-w5`'s `data/fs131/reports/FS131-CG1.md` |
 | FS131-IO2 (OPEN finished on `fs131-wop`; items 391–392) | Opus | `data/fs131/briefs/FS131-IO2-open.md` | branch `fs131-wop`'s `data/fs131/reports/FS131-IO2.md` |
 
