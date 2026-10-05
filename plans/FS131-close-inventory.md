@@ -3620,3 +3620,19 @@ reason by the close.*
      (item 2), the inhabitant note (item 3). Alternative weighed: `stuckRun_ne_univ` and the procedure's last steps on `fs131-w5c`. Why: OPEN's last leaf is about
      500 lines over MERGE templates and the procedure's vertex step cites `exists_open`; the procedure job then merges `fs131-wop` in with OPEN whole.
      Confidence: high. In flight after IO3's launch: 1 (CG1) + 1 (CC1) + 1 (IO3) = 3.
+402. **FS131-CG1 done: the collar's lane G complete** (harness ≈ 478k by the task notice; record `fs131-w5`'s `plans/FS131-collar-kernel-plan.md`, Stages
+     7–11; report `data/fs131/reports/FS131-CG1.md`; commits `7526e68a`, `2736ab8c` (the move), `1fe73b0b`, `d8b4a23d`, `da7ffa8d`, `5059983d`, pushed).
+     **`RadialPush` and `CollarMap` hold no `sorry`**: all 20 `RadialPush` children [kernel] on the standard three (`pushHomeo` a homeomorphism of the plane,
+     acting ray by ray, the identity off the open collar; the `tangRad` family; `collarArcs_carrier`; `dist_lt_one_of_mem_polarSet`); 8 `CollarMap` children
+     [kernel]; `map_Γ`, `map_lens`, `map_agreesOff`, `map_valid` proved but on `sorryAx` through lane C's `pushforward_locallyConstant` and
+     `pushforward_interiorPts` only; 62 supporting theorems. Lane G took about 1,190 lines against 2,250 planned. **Receipt** (Keryx): `origin/fs131-w5` is
+     `5059983d`; the build log (`build/gate/build/20261005T122643Z-11522.log`) ends "Build completed successfully (5791 jobs)"; `sorry` by grep `RadialPush` 0,
+     `CollarMap` 0; `data/fs131/cg/CGAxioms.out`: 102 records, 95 standard, 7 on `sorryAx` (as reported, predicted before the print). **Tool defect, its own,
+     fixed**: `tools/fs131_cg_stmt.py` read a proof-opening `by` as statement text and did not check new names against the library (10 plants fire now).
+     **Slip, its own, caught**: a `sed` rename also rewrote Woodall's `#print axioms` line; restored. **Correction**: item 390's "opens with `clear hlen hmax`" —
+     the skeleton reads `have _ := hlen` / `have _ := hmax`. **For lane C**: lemmas on `fs131-w5` citable by C's children but absent from `fs131-w5k` until a merge
+     (record). **Held**: the merge of `fs131-w5k` into `fs131-w5` (disjoint files but `scripts/Axioms.lean`, keep both blocks) after CC1. Credit: CG1, for the lane
+     at half its price.
+403. **Ruling on CG1's slot: `stuckRun_ne_univ` and the procedure's last steps on `fs131-w5c`** (queue (2)), brief to be written from M6's and IL2's — **held
+     for the session after the compaction now due** (coordinator's context at 93%); the slot stays open until then. In flight: 1 (CC1, waiting on its build) +
+     1 (IO3) = 2.
