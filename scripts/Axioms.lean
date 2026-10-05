@@ -3416,6 +3416,8 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_hasSectors
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_coloursAt_rim
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_ncard_coloursAt_rim
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_not_hasRepeatedColour_rim
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_allowedCone
 
 #eval IO.println "=== PURCHASED ==="
 

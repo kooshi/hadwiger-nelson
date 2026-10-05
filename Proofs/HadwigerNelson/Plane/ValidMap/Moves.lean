@@ -588,7 +588,28 @@ theorem exists_merge_aux (hF : F.Valid) {v : ℂ} (hv : F.Covers v 1) {c : Fin k
       (F.Condition5 → F'.Condition5) ∧ F'.HasSectors v c n ∧ F'.coloursAt v ⊆ F.coloursAt v ∧
       (∀ x ∈ sphere v ρ, (F'.coloursAt x).ncard ≤ 3 ∧ ¬ F'.HasRepeatedColour x) ∧
       ∀ v' ∉ closedBall v ρ, F'.allowedCone v' c = F.allowedCone v' c := by
-  sorry
+  classical
+  obtain ⟨X⟩ := ArcMap.exists_near (hv (mem_closedBall_self zero_le_one))
+  have hpos : 0 < X.n := X.pos_of_hasSectors (by omega) hn
+  have hcnt : {i | X.col i = c}.encard = (n : ℕ∞) + 1 := by
+    have := X.encard_col_eq hpos hn; push_cast at this; exact this
+  obtain ⟨s, a, b, hab, hbn, hca, hcb, hgap, ρc, hρc0, hgc⟩ := X.exists_gap hF hv hn1 hn hD
+  obtain ⟨ρ', h'⟩ := X.eventually_small.exists
+  have hρ'0 := h'.1
+  set ρ := min (ρ' / 2) (ρc / 2) with hρdef
+  have hρ0 : 0 < ρ := lt_min (by linarith) (by linarith)
+  have hρρ' : ρ < ρ' := (min_le_left _ _).trans_lt (by linarith)
+  have hρc : ρ ≤ ρc := (min_le_right _ _).trans (by linarith)
+  have h : X.Small ρ := h'.mono hρ0 hρρ'.le
+  refine ⟨ρ, hρ0, F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) X.mem_dom hρ0
+    (ArcMap.Near.mergeArcs_nondegenerate h hbn) (ArcMap.Near.mergeArcs_finite ρ)
+    (ArcMap.Near.merge_hlc h' hρρ' h hab hbn hca hcb), ArcMap.Near.merge_valid hF h' hρρ' h hab hbn hρc hgc,
+    ArcMap.Near.merge_agreesOff h, ArcMap.Near.merge_ringArcsWithin h, ArcMap.Near.merge_condition5 h hbn,
+    ArcMap.Near.merge_hasSectors h hab hbn hca hcb hgap hcnt, ArcMap.Near.merge_coloursAt_self h hab hbn hca,
+    fun x hx => ⟨ArcMap.Near.merge_ncard_coloursAt_rim h' hρρ' h hpos hx,
+      ArcMap.Near.merge_not_hasRepeatedColour_rim h' hρρ' h hab hbn hx⟩,
+    ArcMap.Near.merge_allowedCone hF hv h' hρρ' h hab hbn hca hcb hgap hρc hgc⟩
+
 
 end ArcMap
 

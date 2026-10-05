@@ -2401,3 +2401,49 @@ end Near
 end ArcMap
 
 end HadwigerNelson.Plane
+
+/-! ## FS131-IMM3: MERGE's two open leaves (record § 8.2 items 1–2) — the assembly in `Moves.exists_merge_aux` reads them -/
+
+namespace HadwigerNelson.Plane
+
+open Complex Real Set Filter Topology Metric
+
+namespace ArcMap
+
+namespace Near
+
+variable {k : ℕ} {F : ArcMap k} {v : ℂ} {X : F.Near v} {s : Fin X.n} {a b : ℕ}
+
+section Surgery
+
+variable {c : Fin k} {ρ : ℝ} {hv : v ∈ F.dom} {hρ : 0 < ρ} {hA : ∀ A ∈ X.G.mergeArcs v X.col s a b ρ, A.Nondegenerate}
+  {hAf : (X.G.mergeArcs v X.col s a b ρ).Finite}
+  {hlc : ∀ x ∈ F.dom, x ∉ ⋃ A ∈ F.trimArcs v ρ ∪ X.G.mergeArcs v X.col s a b ρ, A.carrier →
+    ∀ᶠ y in 𝓝 x, X.G.mergeCol v X.col F.col s a b c ρ y = X.G.mergeCol v X.col F.col s a b c ρ x}
+
+/-- **No repeated colour at a rim point** after MERGE (record § 8.2 item 1: the sides lemma). **Open leaf**, believed true: at a rim point on no
+germ one sector; on a non-phantom germ the new map is `F` near the point, two sectors of two colours; on a phantom germ one sector. -/
+theorem merge_not_hasRepeatedColour_rim {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) (hab : a < b)
+    (hbn : b < X.n) {x : ℂ} (hx : x ∈ sphere v ρ) :
+    ¬ (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).HasRepeatedColour x := by
+  sorry
+
+/-- **`D_c(v′)` unchanged off `B̄(v, ρ)`** after MERGE (record § 8.2 item 2). **Open leaf**, believed true (IMM1's and IMM2's route, § 5.2):
+the contacts agree since the recoloured gap's closure lies in `{v}` and an open set of points clear for `c`; the types agree since a
+merged `c`-tile misses `ω(v′)` (the new map is valid, `merge_valid`). -/
+theorem merge_allowedCone (hF : F.Valid) (hv1 : F.Covers v 1) {ρ' : ℝ} (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ)
+    (hab : a < b) (hbn : b < X.n) (hca : X.col (BranchGerms.idx s a) = c) (hcb : X.col (BranchGerms.idx s b) = c)
+    (hgap : ∀ m, a < m → m < b → X.col (BranchGerms.idx s m) ≠ c) {ρc : ℝ} (hρc : ρ ≤ ρc)
+    (hgc : ∀ t ∈ Ioo 0 ρc, ∀ φ, X.G.liftDir s (a + 1) t ≤ φ → φ ≤ X.G.liftDir s b t → F.IsClear c (v + (t : ℂ) * e φ)) :
+    ∀ v' ∉ closedBall v ρ,
+      (F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) hv hρ hA hAf hlc).allowedCone v' c =
+        F.allowedCone v' c := by
+  sorry
+
+end Surgery
+
+end Near
+
+end ArcMap
+
+end HadwigerNelson.Plane

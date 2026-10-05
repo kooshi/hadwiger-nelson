@@ -69,7 +69,7 @@ reading exactly `[propext, Classical.choice, Quot.sound]` (`exists_merge_aux` re
 
 Definitions: `BranchGerms.idx`, `turns`, `lift`, `liftDir` (spec examples beside them). The interface for the rest is `ArcMap.Near.exists_gap` (record § 4.1–4.2 proved).
 
-Still open: `exists_merge_aux` (§ 5.2).
+Still open: `exists_merge_aux`'s two leaves (§ 9).
 
 ### FS131-IMM3 (stage 7; build `build/gate/build/20261005T071525Z-2257155.log`, axioms `data/fs131/imm/axioms-stage7.txt`, all in `MergeMove`)
 
@@ -91,6 +91,11 @@ Each [kernel], reading exactly `[propext, Classical.choice, Quot.sound]`: `ArcMa
 `gap_sides_idx`, `mem_chain`, `sector_subset_chain`, `isPreconnected_chain`, `mem_merge_interiorPts_iff`, `mem_interiorPts_of_merge_rim`,
 **`merge_agreesOff`**, **`merge_ringArcsWithin`**, **`merge_condition5`**, **`merge_coloursAt_self`**, **`merge_valid`**, **`merge_hasSectors`**,
 **`merge_coloursAt_rim`**, **`merge_ncard_coloursAt_rim`** (16 theorems). Definition: `ArcMap.Near.chain` (spec examples beside it).
+
+### FS131-IMM3 (stage 9; build `build/gate/build/20261005T074636Z-2448915.log`, axioms `data/fs131/imm/axioms-stage9.txt`)
+
+No new kernel theorem: `exists_merge_aux`'s body is the assembly, sorry-free, over the two **open leaves** `ArcMap.Near.merge_not_hasRepeatedColour_rim`
+and `ArcMap.Near.merge_allowedCone` (each `sorry`, in `MergeMove`); its axioms read `sorryAx` through them.
 
 
 ## Stage 1 — SAVED: the readback, the as-given build
@@ -530,3 +535,37 @@ theorems (32 lines) before their receipt lines were added, PASS (118 theorems) a
    `F' := F.surgery v ρ (mergeArcs) (mergeCol) X.mem_dom h.1 (mergeArcs_nondegenerate h hbn) (mergeArcs_finite ρ) (merge_hlc h' hρρ' h hab hbn hca hcb)`
    and the clauses `merge_valid`, `merge_agreesOff`, `merge_ringArcsWithin`, `merge_condition5`, `merge_hasSectors`, `merge_coloursAt_self`,
    `merge_ncard_coloursAt_rim` with items 1 and 2.
+
+## Stage 9 — SAVED (FS131-IMM3): `exists_merge_aux` assembled over two open leaves
+
+**The assembly** (`Moves.exists_merge_aux`'s proof body, its statement unchanged — `tools/fs131_im_statements.py --check` PASS): `X` from `exists_near`,
+`hcnt` from `Near.encard_col_eq`, `s a b ρc hgc` from `exists_gap` (restated form), `ρ'` with `X.Small ρ'` (`eventually_small`), `ρ := min (ρ'/2)
+(ρc/2)`, so `X.Small ρ`, `ρ < ρ'`, `ρ ≤ ρc`; `F' := F.surgery v ρ (X.G.mergeArcs v X.col s a b ρ) (X.G.mergeCol v X.col F.col s a b c ρ) X.mem_dom _
+(mergeArcs_nondegenerate h hbn) (mergeArcs_finite ρ) (merge_hlc h' hρρ' h hab hbn hca hcb)`; the clauses are stage 8's lemmas and the two leaves.
+
+**The two open leaves**, in `MergeMove`, each `sorry` and each stated for the surgery with its proof arguments implicit:
+- `merge_not_hasRepeatedColour_rim (h' : X.Small ρ') (hρρ' : ρ < ρ') (h : X.Small ρ) (hab : a < b) (hbn : b < X.n) (hx : x ∈ sphere v ρ) :
+  ¬ F'.HasRepeatedColour x` — § 8.2 item 1 (the sides lemma).
+- `merge_allowedCone (hF : F.Valid) (hv1 : F.Covers v 1) h' hρρ' h hab hbn hca hcb hgap (hρc : ρ ≤ ρc) hgc : ∀ v' ∉ closedBall v ρ,
+  F'.allowedCone v' c = F.allowedCone v' c` — § 8.2 item 2. It carries every hypothesis the assembly has, so it is no stronger than
+  `exists_merge_aux`'s own clause for this construction; its truth is IMM1's and IMM2's belief (record § 4.4, § 5.2), not yet checked here.
+
+Both are believed true; neither has been attacked beyond the reading in § 8.2. A successor proves them in place (no statement of a backlog
+theorem changes; the leaves are this lane's children and may be restated if a hypothesis proves missing — say so in the record).
+
+### 9.1 The build, the axioms, the checks
+
+Under the slot: **OK**, 446 of 446 batches, 3 modules rebuilt, 8 min 28 s; "Build completed successfully (5363 jobs)"; warnings `declaration uses
+'sorry'` — `MergeMove` l. 2426 `merge_not_hasRepeatedColour_rim`, l. 2434 `merge_allowedCone`; `Moves` l. 574 `exists_rayMerge_aux` only
+(`exists_merge_aux` no longer); `Contact`, `BaseSteps`, `UnitArc` as before. Log `build/gate/build/20261005T074636Z-2448915.log`; terminal output
+`data/fs131/imm/build-stage9.log`. **Axioms** (`data/fs131/imm/axioms-stage9.txt`): 121 records — 116 on exactly the standard three, 2 axiom-free,
+and on `sorryAx` besides exactly the two leaves and `exists_merge_aux` (the control: the print sees the `sorry` beneath the assembly).
+`tools/fs131_imm_decls.py --check` PASS (120 theorems, the two leaves' receipt lines added); `tools/fs131_im_statements.py --check` PASS;
+`tools/fs131_im_split.py --check` PASS. No `axiom`, no `native_decide`, no backlog statement changed.
+
+### 9.2 For whoever continues
+
+Prove `merge_not_hasRepeatedColour_rim` (§ 8.2 item 1, about 200 lines: the sides lemma by convexity on one side and star-convexity on the other,
+then three cases) and `merge_allowedCone` (§ 8.2 item 2 and § 5.2's route, about 300–400 lines). Iterate with `data/fs131/imm/wip/C.lean`
+(imports `Moves`) via `bash data/fs131/imm/iter.sh data/fs131/imm/wip/C.lean` after refreshing the mirror (`cp -a .lake/build/lib/lean/.
+build/imm-mirror/` after a green build; the mirror is current at stage 9). Then MERGE's landing (a later job).

@@ -119,4 +119,6 @@ set_option pp.fullNames true
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_hasSectors
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_coloursAt_rim
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_ncard_coloursAt_rim
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_not_hasRepeatedColour_rim
+#print axioms HadwigerNelson.Plane.ArcMap.Near.merge_allowedCone
 #print axioms HadwigerNelson.Plane.ArcMap.exists_merge_aux
