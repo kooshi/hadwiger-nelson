@@ -1,10 +1,10 @@
 # Session handoff — 2026-10-04: FS-131, the Lean backlog, in flight (written before a compaction, at Kooshi's word)
 
 *Rewritten 2026-10-05 by Keryx at Kooshi's word ("it's worth a handoff and compaction again before we go overnight"). Current state only. A successor arriving with nothing
-reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–339 at this writing; its first two sections are the rules
+reads this first, then `plans/FS131-close-inventory.md` — every item, ruling and receipt (items 1–342 at this writing; its first two sections are the rules
 that judge the milestone, written before any job).*
 
-> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **339**.
+> **Latest (written before a compaction at Kooshi's word, 2026-10-05, before an overnight run):** inventory items run to **342**.
 >
 > **Held in the kernel, on `main`**: waves 1, 2, 3, **4** and **Woodall's chain** (item 326: `main` at `2b91cf2d`, gated `08e64ae5`, counts filed, item 327 — 3,654 records, 3,633 clean); waves 1–4 (wave 4 landed, item 318: `main` at `60ff1843`, gated `4fa41167`, counts filed, item 319 — 3,397
 > audit records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases; 0 `sorry` in `Proofs/`); Lebesgue (151); `localSectors` (171).
@@ -17,10 +17,11 @@ that judge the milestone, written before any job).*
 >   (a later job). Brief `data/fs131/briefs/FS131-IMM2-merge.md`.
 > - **FS131-RW1** (`fs131-w5p`): the boundary walk's WALK lane — ADJ, then `exists_boundaryWalk` over RL1's C1–C10 (plan `plans/FS131-ringlist-kernel-plan.md`
 >   § 4); the longest path to wave 5's landing (5–6 sessions planned). Brief `data/fs131/briefs/FS131-RW1-walk.md`.
-> - **FS131-I5k** (`fs131-w5c`): wave 5's `Terminal` half from I5i's Stage 31 — `n3_end_four_colours` and `n3_end_bothKind` (NB3-END items 3–5), `cv_class`,
->   the CV-HD cluster, `exists_red`, `exists_terminal`, `cv_exists`. Brief `data/fs131/briefs/FS131-I5k-terminal.md`.
+> - **FS131-I5l** (`fs131-w5c`): wave 5's `Terminal` half from I5k's Stage 34 — `cv_hd` over `cv_hd_main` and `y3_end_needs`, `c_double`, `c_ends`, `exists_red`,
+>   `exists_terminal`, `cv_exists`. Brief `data/fs131/briefs/FS131-I5l-terminal.md`.
 >
-> **Done since the compaction**: **FS131-RL1** (items 338–339: the boundary walk planned — WALK and SEP over ADJ; two lanes; the crossing lemma outside a
+> **Done since the compaction**: **FS131-I5k** (items 340–341: NB3-END items 3–5 in the kernel, so FS112-N3-END (`n3_end`) has no `sorry` beneath; `cv_class`
+> over `cv_hd`, `c_double`; merge notes for the landing); **FS131-RL1** (items 338–339: the boundary walk planned — WALK and SEP over ADJ; two lanes; the crossing lemma outside a
 > disc proved); **FS131-I5j** (items 336–337: `coneAt_of_cubic`, `hex_regular`, `bv_hex`, `rot_out` in the kernel; `row134BaseUA` rests only on
 > the planar three; 4 leaves left on that half — `rot_in`, `bv_nd`, `bv_l3`, `exists_preBend` — with slack); **FS131-I5i** (items 334–335: NB3-END item 2 held in the kernel, `flank_two_sectors_at_S`; `n3_end_of_not_inType` over two
 > children; report filed by Keryx); **FS131-IP5** (items 332–333: F-LOC, F-CONN, F-INF, F-ONE, F-SEP and both adversaries in the kernel, Janiszewski for holes;
@@ -56,7 +57,7 @@ that judge the milestone, written before any job).*
 > step 3's check against `finSep` (308); KP's `LEAN.md` line (282); `InMK` (274 (a)); `ARCHITECTURE.md` prose counts; the stuck-fragment model stub (304);
 > the consolidated errata register Kooshi asked about (offered: Clerk, at a free slot, or at the filing); finished worktrees' removal after rescuing cited gate
 > logs (leb, w1, w2, w2d, w3, w3b, w4, w4c, w4m, w5b, w5x after its merge, w5t after its merge). **Tool defects owed**: `tools/fs131_i5_dupes.py`'s FORK (284);
-> the axiom self-test's hard-coded counts (259); the brief gate's wrong-§ false pass (206, 215); `scripts/vacuity-controls.lean`'s duplicate CONTROL 33–36
+> the axiom self-test's hard-coded counts (259); the brief gate's wrong-§ false pass (206, 215) and its reading of a `§` inside a heading's text (342); `scripts/vacuity-controls.lean`'s duplicate CONTROL 33–36
 > numbering (318); `tools/fs131_i4_treedupes.py` reading a docstring `class` line (296); `tools/bib_audit.py` flagging a prose placeholder (302).
 > Reporting: no per-step reports; push only for what Kooshi must know (memory `reporting-cadence`).
 
@@ -98,7 +99,7 @@ step 5's equality case open with unit arcs — one mind (W), from the page image
 |---|---|---|---|
 | FS131-IMM2 (MERGE on `fs131-w4mm`, from IMM1's stage 3; items 336–337) | Opus | `data/fs131/briefs/FS131-IMM2-merge.md` | branch `fs131-w4mm`'s `data/fs131/reports/FS131-IMM2.md` |
 | FS131-RW1 (the WALK lane on `fs131-w5p`; items 338–339) | Opus | `data/fs131/briefs/FS131-RW1-walk.md` | branch `fs131-w5p`'s `data/fs131/reports/FS131-RW1.md` |
-| FS131-I5k (wave 5's `Terminal` half from I5i's Stage 31; items 334–335) | Opus | `data/fs131/briefs/FS131-I5k-terminal.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-I5k.md` |
+| FS131-I5l (wave 5's `Terminal` half from I5k's Stage 34; items 340–341) | Opus | `data/fs131/briefs/FS131-I5l-terminal.md` | branch `fs131-w5c`'s `data/fs131/reports/FS131-I5l.md` |
 
 
 **Implementers are Opus** (Kooshi, item 137): each launches with `model: "opus"` (the agent file says so too) and counts one slot.

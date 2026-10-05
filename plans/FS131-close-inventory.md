@@ -2872,3 +2872,33 @@ reason by the close.*
      **`IsBoundaryWalk` / `IsEdgeOf` changes**: allowed to the WALK lane as RL1's handoff says (only where the construction cannot meet a field or clause and SEP
      does not read it), each reported in the record; once an SEP lane runs in parallel, any such change is messaged to me first, since SEP reads those fields.
      Why: the vocabulary is this job's own, and SEP's proof is the only reader. Confidence: high. In flight after RW1's launch: 1 (I5k) + 1 (IMM2) + 1 (RW1) = 3.
+340. **FS131-I5k handed back: FS112-N3-END is held** (Stage 34 SAVED, harness ≈ 434k by the task notice; record `fs131-w5c`'s `plans/FS131-I5-implementation.md`,
+     Stages 32–34; report `data/fs131/reports/FS131-I5k.md` (the harness accepted the write this time); commits `3f6208af`, `aa7d2013`, `a4900311`, `8e1ba1ad`,
+     `8458054e`, pushed). **Results, [kernel] on the standard three**: `ArcMap.n3_end_four_colours` (NB3-END items 3–4, `#P_cl(v − n) ≥ 4`) and
+     `ArcMap.n3_end_bothKind` (item 5, a both-kind unit arc centred at `v − 2n`), so **`ArcMap.n3_end_of_not_inType` and `ArcMap.n3_end` — FS112-N3-END in NB3's
+     corrected form with item 288's case split — carry no `sorry` beneath**; `ArcMap.flank_two_sectors_at_S_gen` (E5 § 3.5's claim: an upper flank with no in-type
+     contact at `N` has at least two sectors at `S′`, for any horn bounds in `[−1, 1]`). `cv_class` (CV-CLASS) proved over `cv_hd` and `c_double`, both open (its
+     own `sorry` gone; `sorryAx` through them). Every step of NB3-END items 3–5 and of E5 § 3.5 the proofs use went through in Lean. **Receipt** (Keryx): the five
+     commits exist and `origin/fs131-w5c` is `8458054e`; the stage-34 build log (`build/gate/build/20261005T054738Z-1755163.log`) ends "Build completed
+     successfully (5370 jobs)", 0 warnings other than `sorry`; `Terminal`'s `sorry` declarations by grep are the seven named open (`exists_red`,
+     `exists_terminal`, `cv_hd_main`, `cv_hd`, `y3_end_needs`, `c_ends`, `c_double`); `tools/fs131_i5h_stmt_check.py` run by Keryx against `72149b07` and
+     `33320123`: PASS both; the 20 removed non-`sorry` lines are `cv_class`'s block moved below the lemmas it cites (statement unchanged, the checker says);
+     `I5kAxioms33.out` parsed: `n3_end_four_colours`, `n3_end_bothKind`, `n3_end_of_not_inType`, `n3_end` standard; `I5kAxioms34.out`: `n3_end`,
+     `flank_two_sectors_at_S_gen` standard, controls `cv_class`, `cv_hd` on `sorryAx`. **Generalizations** (record Stages 33–34): items 3–4 follow from item 2,
+     terminality at `S′` and U1 alone — NB3's `y ≠ z` and its SHAVE step unused; item 5 needs no `z ≠ y` either, and its `y = h` case is a tile argument, not U1;
+     E5 § 3.5's two-sector claim holds at every bound in `[−1, 1]`, and cv_class's "≥ 4 colours" alternative is never needed (both neighbours turn out stuck).
+     **Merge notes** (for wave 5's landing): `ArcMap.IsHorn.isRingArc_lower_ua` copies wave 4's `IsHorn.isRingArc_lower` (on `main`) — replace by a citation when
+     `fs131-w5c` meets `main`; `c_double`'s route reads `flankQ_upper/lower_of_qrOnly`, whose wave-4 bodies are `sorry` on this branch and proved on `main`;
+     `cv_class` moved lower in `Terminal` (plan line references stale). **Prediction scored**: I5i priced items 3–5 at one session; they took about 60k tokens,
+     `cv_class` with its general lemma about 50k. **Left (7)**: `cv_hd_main` (H), `y3_end_needs` (H), `cv_hd` (M), `c_double` (E–M), `c_ends` (M), `exists_red`,
+     `exists_terminal` (H, the limit constructions), `cv_exists` (`BaseDense`) — routes in record Stage 34. Credit: I5k, for NB3-END items 3–4 from item 2 alone.
+341. **Ruling on I5k's slot: the `Terminal` continuation, FS131-I5l, on `fs131-w5c` from Stage 34.** In flight after it: 1 (IMM2) + 1 (RW1) + 1 (I5l) = 3. Choice:
+     of the lanes with slack against the WALK lane (5–6 sessions planned), the `Terminal` half has the least (seven leaves, two of them limit constructions,
+     about two to three sessions on I5k's re-price), ahead of I5j's four and the SEP lane — ruling 339 (b)'s "less slack first". Order: `cv_hd` over
+     `cv_hd_main` (with `y3_end_needs`), `c_double`, `c_ends`, then `exists_red`, `exists_terminal`, `cv_exists`. Alternative weighed: a merge of `main` into the
+     wave-5 branches first, so leaves cite wave 4's proofs instead of copies. Why not now: the copies are one lemma, `sorryAx` through `main`-proved bodies costs
+     nothing until the landing, and the landing job merges `main` anyway; a mid-flight merge would cost a slot and race the running lanes. Confidence: high.
+342. **Tool defect: the brief gate reads a `§` inside a heading's text as the section address.** I5l's brief quoted lines under the heading "Stage 34 — SAVED
+     (FS131-I5k): `cv_class` proved over `cv_hd`, `c_double` and a general form of E5 § 3.4; the handover", and the gate failed four quotations with "has no
+     heading § 3.4". Worked around by addressing the heading's text up to "of E5" (gate PASS). Owed to agent-forge's `forge/STATUS.md` under Keryx with that
+     repro, beside items 206 and 215's wrong-§ false pass.
