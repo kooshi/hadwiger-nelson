@@ -1844,3 +1844,36 @@ to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/202
 `cv_hd_main_inType` l. 2182) — I5l's count.
 
 ## Stage 39 — SAVED
+
+## Stage 40 — SAVED (FS131-I5n): ruling 348 (a)'s swap — `exists_merge` in ruling 269's form
+
+**What this stage changes.** In `Proofs/HadwigerNelson/Plane/ValidMap/Contact.lean`, `exists_merge`'s docstring and statement are replaced by the text of
+`fs131-w4mm`'s `Contact` `exists_merge` (ruling 269's form), copied by script; its `sorry` body is kept. No other line of `Contact` changed; no proof
+cites `exists_merge` on this branch.
+
+**The copy, by script** (`tools/fs131_i5n_merge_swap.py`, new): `--apply` reads the block (from the docstring opening `/-- **FS110-W-MERGE**` through the
+statement's `:= by`) from the committed ref `origin/fs131-w4mm` (= `0cdac72c`; never that tree's working copy, which FS131-IMM3 edits) and writes it over
+this tree's block. The diff it applied:
+
+```
+-`c` has `n` sectors at `v`, no point off the disc's rim gains a colour, the new points on the rim carry at most three colours
++`c` has `n` sectors at `v`, `v` gains no colour, the new points on the rim carry at most three colours
+-      (F.Condition5 → F'.Condition5) ∧ F'.HasSectors v c n ∧ (∀ x ∉ sphere v ρ, F'.coloursAt x ⊆ F.coloursAt x) ∧
++      (F.Condition5 → F'.Condition5) ∧ F'.HasSectors v c n ∧ F'.coloursAt v ⊆ F.coloursAt v ∧
+```
+
+`--check` afterwards: **IDENTICAL** (1054 characters, 11 lines; the body after `:= by` begins `sorry`), exit 0. `--self-test` (plants `F'.coloursAt w` for
+`F'.coloursAt v` in this tree's block): **fired** (DIFFERENT, exit 0 for the self-test). Before the swap `--check` read DIFFERENT, exit 1 (Stage 39).
+**Every statement of `Contact` against `6d316ef2`** (I5h's checker's statement reader, run over `Contact` by a one-off script): 180 declarations then and
+now; changed: `exists_merge` only; none missing, none new.
+
+**The lane's statement checker**: `tools/fs131_i5h_stmt_check.py 72149b07`: **PASS** (exit 0). It reads `Terminal`, `BaseDense` and `FlankUA` only, not
+`Contact`, so it does not report the swap — the script and the one-off read above do.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 9 modules rebuilt (`Contact`'s dependents: its docstring is environment data),
+8 with warnings, every warning `declaration uses 'sorry'`**, exit 0, 9 min 39 s (`build/gate/build/20261005T070700Z-2207119.log`, ends "Build completed
+successfully (5370 jobs)"; its one `error:` line is the up-to-date probe's "target is out-of-date"; driver log `data/fs131/i5n/build-stage40-swap.log`).
+`Contact`'s `sorry` warnings on this branch: l. 4064, 4078, 4094 (`exists_shave`, `exists_rayMerge`, `exists_merge` — wave 4's, stale here, all three
+unchanged in status); `Terminal`'s: 4, as at launch.
+
+## Stage 40 — SAVED
