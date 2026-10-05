@@ -3566,3 +3566,15 @@ reason by the close.*
      medium-high. In flight after CG1's launch: 1 (M6) + 1 (IO2) + 1 (CG1) = 3.
 396. **FS131-CG1, by message: G's block moved** to `Plane/ValidMap/CollarMap` at commit `2736ab8c` on `fs131-w5` (pushed; build OK; statements checked by
      `tools/fs131_cg_stmt.py --move`, 9 plants fired). Lane C's branch `fs131-w5k` is cut from it at the next free slot (item 395 (c)); its brief written now.
+397. **FS131-IO2, by message: `open_degree_horns` is also false as stated; a second one-field repair to `OpenConfig`.** `OpenConfig.ray` puts the ray strictly
+     inside the partial sector only for `t > 0` (`L_rp(t) < ψ < L_{rp+1}(t)`); at `t = 0` it gives only `lift s rp ≤ ψ ≤ lift s (rp+1)` — if `ψ` equals the horn's
+     direction the merged piece `sectorBetween v (lift s 0) κ₀ ψ 0 r` is itself a horn set (`sectorBetween_eq_hornSet`), so the old horn is replaced by a new
+     one (`j′ = j`). **Counterexample** (by hand; `k = 2`, `v = 0`, `dom = ball(0, r₁)`, `r₁ < 1/2`): two germs tangent at 0 along `α`, curving clockwise with
+     `κ₀ = −2`, `κ₁ = −1`; the cusp between them coloured `c`, the rest `c₂`; valid; `OpenConfig` with up, `s = 0`, `b = 1`, `ψ = α` satisfies every field (the
+     margin trivially); OPEN's merged piece is `hornSet v α (−2) 0 r`, so the horn count and degree are unchanged. `exists_open` stays true
+     (`exists_openConfig_up` takes `ψ = lift p b + ψ₁` with `0 < ψ₁ ≤ gap/2`; the down side symmetrically). **Proposed repair**: a field `ray0 : X.G.lift s
+     (BranchGerms.rayPos up b) < ψ ∧ ψ < X.G.lift s (BranchGerms.rayPos up b + 1)`, proved in `exists_openConfig_up/_down` from `ψ₁ > 0` and `ψ₁ ≤ gap/2`; then
+     both pieces have interior cones (`ne_hornSet_of_interior_coneAt`), `j′ ≤ j − 1`, degree `n − (b − 1) ≤ n`. IO2 checked `open_rim` and `open_allowedCone`
+     (with the margin) for the same kind of gap and found none; `open_hlc`, `open_valid` iteration-clean, a build running. **Ruling: accepted** — the same
+     reasons as item 393 (the lane's own definition; `exists_open`'s and `HasHornCount`'s statements unchanged). Confidence: high. Credit: IO2, for a second
+     counterexample at the configuration's boundary, and for checking the other leaves for the same gap. Sent to IO2 by message.
