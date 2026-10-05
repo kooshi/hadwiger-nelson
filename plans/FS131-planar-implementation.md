@@ -132,7 +132,24 @@ skeleton unchanged (`tools/fs131_rw_stmt_check.py`: all 148 declarations of `Map
 - `ArcMap.IsPortGraph.exists_shared_vertex` (**C7**) — on a connected set, the edges are connected through shared vertices
 - `ArcMap.isBoundaryWalk_of_trail`, `ArcMap.BasedTrail.insert_all`, `ArcMap.BasedTrail.map` (**C10**) — the assembly
 
-**FS131-RS1 (stages 27–)**, the boundary walk's SEP lane (brief `data/fs131/briefs/FS131-RS1-sep.md`, on `main`): none yet (filled at each saved stage).
+**FS131-RS1 (stages 27–)**, the boundary walk's SEP lane (brief `data/fs131/briefs/FS131-RS1-sep.md`, on `main`), all [kernel], each on exactly the
+standard three or a subset (receipt `data/fs131/rs/axioms-rs1.txt` against the stage-29 build's oleans, checked by `tools/fs131_ip_axioms.py`); statements
+of the skeleton unchanged (`tools/fs131_rw_stmt_check.py e27da6c1`: all 215 uniquely named declarations of `MapGraph` and `MapTopology` byte-identical):
+
+- `ArcMap.IsBoundaryWalk.sep` (**SEP**) — a tile a boundary walk lists twice separates, in `M̂ − x − y`, the entries strictly between its two positions
+  from those strictly outside (`Plane/ValidMap/MapGraph`); with it `filledGraph_ringList` (F-RING), `filledGraph_rings`, `filledGraph_planarLike`,
+  `cvb_thom_reduced` and `cvb_thom` rest on the standard three
+- `inter_nonempty_of_interleaved_exterior_of_isClosed` (**SEP-X**) — the crossing lemma outside a disc for a closed set, bounded or not
+  (`Plane/ValidMap/MapTopology` § F)
+- `isPreconnected_biUnion_Icc_mod` (**SEP-CHAIN**) — pieces chained by hinges, read mod the length, have a connected union; helper `mod_prev_succ`
+  (`MapTopology` § F)
+- `isPreconnected_union_insert_diff_ball` (**SEP-K1**) — two connected sets off a disc, joined at a common closure point off the closed disc, are
+  connected (`MapTopology` § F)
+- `ArcMap.exists_isClosed_of_reachable_offTwo` (**SEP-S**) — a chain in `M̂ − x − y` gives a closed connected set of filled closures off `x`, `y`
+  (`MapGraph`)
+- `ArcMap.IsBoundaryWalk.exists_piece` (**SEP-PIECE**) — each other position's piece (tile closure or edge) is closed, connected, holds its two
+  hinges, and misses `x ∪ y`, the disc at `p i` and the point `p j`; helpers `ArcMap.IsEdgeOf.disjoint_closure_ball`, `ArcMap.mod_succ_prev`
+  (`MapGraph`)
 
 IP1's thirty-two declarations and IP2's seventeen (plus `exists_eleventh_of`, conditional on `noBoth`). `exists_unenclosed_or_bad`'s three joints are closed; the leaf itself still rests on `exists_outermost` and
 `unenclosed_of_rim_vertex`.
@@ -1456,3 +1473,71 @@ the rest — **SEP-S** (`exists_isClosed_of_reachable_offTwo`), the helper `IsEd
 file `data/fs131/rs/SepScratch.lean`, on the standard three by `#print axioms` there (one fix: unfolding the interval's lower end before
 `split_ifs`). So the re-price is moot: what is left is moving them into `MapGraph` before `IsBoundaryWalk.sep`, the build and the receipt —
 **about 0.1 session**, against RL1's 1.2–1.5 for SEP.
+
+## Stage 29 — SAVED (FS131-RS1): SEP proved — `IsBoundaryWalk.sep` has no `sorry`; the build, the receipt, and the handover
+
+### 29.1 Proved (`Plane/ValidMap/MapGraph`, namespace `ArcMap`, before `IsBoundaryWalk.sep`; statement of the leaf unchanged)
+
+- **`exists_isClosed_of_reachable_offTwo`** (**SEP-S**): `a ⇝ b` in `M̂ − x − y` gives a closed preconnected `S ⊇ cl â ∪ cl b̂` inside the union of the
+  filled closures of outer tiles other than `x`, `y` (induction on the walk).
+- **`IsEdgeOf.disjoint_closure_ball`**: the closure of an open set off `x` and `y` misses an edge's pure disc (the disc holds only `x`, `y` and the edge,
+  and the edge lies in `cl x`).
+- **`IsBoundaryWalk.exists_piece`** (**SEP-PIECE**) with **`mod_succ_prev`** (spec example at the wrap): at a position `q ≠ i, j` (two appearances of `y`),
+  the closure of the entry, or its edge if the entry is `y` (an edge entry by `rep`), is closed and preconnected, holds both hinges, misses `x ∪ y`, the
+  open disc at `p i` and the point `p j` (`apart` for edges; `disjoint_closure_ball` for tiles).
+- **`IsBoundaryWalk.sep`** (**SEP**), its body: § 27.4's route — `K₂` = `E₂ ∪ (positions i+1 … m) ∪ S ∪ (positions n … i+len−1, mod len) ∪ E₁`,
+  closed and connected (SEP-CHAIN on pieces extended by `E i`, `E j` at `i`, `j`), every point off `x`, `y`, `p j` and the open disc; `K₁` = `x`, `y` off
+  the disc with `p j` (SEP-K1); the circle points `θ₁ ∈ E₁`, `θ₃ ∈ E₂` and `θ₂`, `θ₄ ∈ x ∪ y` interleave, so SEP-X makes `K₂ ∩ K₁` nonempty — a point
+  of `K₂` in `x`, `y` or equal to `p j`, which no point of `K₂` is. Its docstring is rewritten to the route taken (statement untouched).
+
+One fix in the move: `IsTile.isOpen_fill` is declared later in `MapGraph`, so the fill's openness is inlined (`IsHoleOf.isOpen`). The working file
+`data/fs131/rs/SepScratch.lean` is removed. Total time on SEP: about 35 minutes from the readback, no obligation needing a third attempt, no dispatch.
+
+### 29.2 The build
+
+Under the slot (40 GiB, 8 cpus, `BATCH=4`), my wrapper writing its `EXIT` line: **OK — 447 of 447 batches, 2 modules rebuilt (`MapGraph` 21 s, `Proofs`
+1.7 s), 8 modules with warnings (was 9: `MapGraph` has none now — no `sorry`, linter silent), `EXIT 0`, 8 min 29 s** (`build/gate/build/20261005T081136Z-2602331.log`;
+driver log `data/fs131/rs/build-s29.log`). Every remaining warning is `declaration uses 'sorry'`.
+
+### 29.3 The receipt
+
+`data/fs131/rs/AxiomsRS1.lean` (importing `MapGraph`, `pp.fullNames`) run against the stage-29 build's oleans → `data/fs131/rs/axioms-rs1.txt` (19 records),
+checked by `tools/fs131_ip_axioms.py` (IP2's checker, run, not edited) against `data/fs131/rs/axioms-rs1-clean.txt` / `axioms-rs1-sorry.txt`: **`OK: 18 clean on the
+standard three, 1 controls on sorryAx`** — clean: the eight children of §§ 28.1, 29.1, **`IsBoundaryWalk.sep`**, `IsBoundaryWalk.isRing`,
+`exists_boundaryWalk`, **`filledGraph_ringList`**, `filledGraph_rings`, `filledGraph_oneInf`, `filledGraph_finSep`, **`filledGraph_planarLike`**,
+**`cvb_thom_reduced`**, **`cvb_thom`** (`mod_prev_succ` and `mod_succ_prev` on `[propext, Quot.sound]`, the rest on the standard three); the control
+`ArcMap.rot_noThird` (`HexRing` l. 184, a skeleton leaf imported through `MapTopology`) on `sorryAx`. Planted fault (the control listed as clean) → `FAIL …
+NOT CLEAN [… 'sorryAx']`, exit 1. `scripts/Axioms.lean`'s FS131-KP block gains the eight children under "-- FS131-RS1's children" (byte-equal to the
+receipt's list by `diff`); `IsBoundaryWalk.sep` was already listed (RL1). No `axiom`, no `native_decide`; `grep -w sorry` finds none in `MapGraph` or
+`MapTopology` (its control: the same grep at `e27da6c1` finds `MapGraph`'s one). No import changed, no module added (`tools/check_architecture.py` exit 0;
+`ARCHITECTURE.md`, `Proofs.lean` untouched).
+
+### 29.4 Statements
+
+`tools/fs131_rw_stmt_check.py e27da6c1` (RW2's, run, not edited) over every uniquely named declaration of `MapGraph` and `MapTopology` at `e27da6c1`
+(215): **all SAME, PASS** (`data/fs131/rs/stmt-check-rs1.txt`) — `IsBoundaryWalk`, `IsBoundaryWalk.sep`, `IsEdgeOf`, `inter_nonempty_of_interleaved_exterior`
+among them. That tool compares a signature up to `:=`/`where`, so for the two definitions SEP reads I also checked the diff: against `e27da6c1` the
+removed lines of `MapGraph` and `MapTopology` are nine — `IsBoundaryWalk.sep`'s old docstring (8) and its `sorry` (1); `IsEdgeOf`'s body and
+`IsBoundaryWalk`'s fields are untouched. Control: a declaration absent at the base (`IsBoundaryWalk.exists_piece`) → `MISSING`, `FAIL`, exit 1.
+
+### 29.5 What is proved and what is left
+
+**SEP is proved, and with WALK the planar chain's last leaf is closed on this branch**: `IsBoundaryWalk.sep` carries no `sorry` beneath and rests on the
+standard three, and so do F-RING (`filledGraph_ringList`), `filledGraph_planarLike` and FS114-CVB-THOM (`cvb_thom_reduced`, `cvb_thom`). Nothing of SEP is
+left. **What still reads `sorryAx` on the branch** (82 declarations with a `sorry`, listed in `data/fs131/rs/sorry-leaves-s29.txt`): `BaseDense` 3, `BaseSteps`
+16, `BaseWalk` 12, `Contact` 10, `Dense` 3, `HexRing` 7, `Terminal` 12, `UnitArc` 19 — wave 5's other halves (termination, density) and the skeleton leaves
+other lanes own on other branches; none in `MapGraph`, `MapTopology`, `CurveGraph`, `PlaneTopology` or `Thomassen`, and none beneath any record of § 29.3.
+`IsBoundaryWalk` and `IsEdgeOf` are unchanged (no field was needed, so nothing was messaged).
+
+### 29.6 For the coordinator
+
+- **Hypothesis-strength finding** (no statement changed): `IsBoundaryWalk.sep` holds for any `ArcMap`, valid or not — tiles need not be bounded — by the
+  crossing lemma for closed sets (SEP-X), which is strictly stronger than RL1's `inter_nonempty_of_interleaved_exterior` (that lemma is now a corollary
+  in all but name; I left it, as its statement is not mine).
+- **RL1's SEP-ROT and SEP-REDUCE were not needed** (§ 27.4): the pure point of the edge at `i` and the point `p j` serve for every `m`, `n` directly, and the
+  wrap is read mod the length inside SEP-CHAIN.
+- **For the landing**: 8 new audited records in the FS131-KP block, all clean; `IsBoundaryWalk.sep`, `filledGraph_ringList`, `cvb_thom_reduced` (and their
+  dependents) leave the `sorryAx` side. No new structure is taken as a hypothesis (no vacuity registration owed by this job). I ran neither `axioms.sh` nor
+  `vacuity.sh` (not this job's), so I give no gate counts.
+- **Drafts for the front page**: none from this job — the brief rules out the gate, so there are no gate counts to draft; the ledger and Atlas
+  regrade of F-RING / FS114-CVB-THOM to [kernel] waits for wave 5's landing, whose job drafts them against the gate it runs.

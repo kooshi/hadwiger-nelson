@@ -3260,6 +3260,10 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.isPreconnected_biUnion_Icc_mod
 #print axioms HadwigerNelson.Plane.inter_nonempty_of_interleaved_exterior_of_isClosed
 #print axioms HadwigerNelson.Plane.isPreconnected_union_insert_diff_ball
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isClosed_of_reachable_offTwo
+#print axioms HadwigerNelson.Plane.ArcMap.IsEdgeOf.disjoint_closure_ball
+#print axioms HadwigerNelson.Plane.ArcMap.mod_succ_prev
+#print axioms HadwigerNelson.Plane.ArcMap.IsBoundaryWalk.exists_piece
 
 /-! ## FS-131 wave 4 (job FS131-I4c) — the implementer's added children (FS106-L's geometric step and sweeps; TS-T's regions) -/
 
