@@ -168,6 +168,7 @@ import Proofs.HadwigerNelson.Plane.LocalStructure
 import Proofs.HadwigerNelson.Plane.SixFragment
 import Proofs.HadwigerNelson.Plane.Tiles
 import Proofs.HadwigerNelson.Plane.PlaneTopology
+import Proofs.HadwigerNelson.Plane.CurveGraph
 import Proofs.HadwigerNelson.Plane.RingGerm
 import Proofs.HadwigerNelson.Plane.Lens
 import Proofs.HadwigerNelson.Plane.RingBand
