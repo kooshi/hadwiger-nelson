@@ -1957,3 +1957,69 @@ All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5n/
   `ArcMap.IsSectorChart.exists_index_of_mem_coloursAt` (`Terminal`).
 
 ## Stage 41 — SAVED
+
+## Stage 42 — SAVED (FS131-I5n): `y3_end_needs` reduced to its case `g ∉ P_cl(N)`; the handover
+
+**What this stage proves.** `y3_end_needs` no longer uses `sorry` itself: its case `g ∈ P_cl(N)` is closed by the seven-colour count of Stage 41, and
+its case `g ∉ P_cl(N)` is a new open child, `y3_end_needs_of_not_mem` (YB3 § 3.1 Steps 3–4: the levels at `N` and `N + n`). No statement changed; no
+`axiom`; no `native_decide`.
+
+**How.** Stage 41's proof reads only `g ∈ P_cl(N)` from `G_N`, so it is now stated as that: **`seven_colours_at_N`** (over `Valid`, `IsPlaneMap`,
+`Terminal`; `QROnly` is not read), and `cv_hd_main_inType` is a two-line corollary. `y3_end_needs` carries no `QROnly`, so I5l's
+`lower_flank_horns_at_N` is now the corollary of **`lower_flank_horns_at_N_of`** (the same proof over `Valid`, `IsPlaneMap`, `Terminal`; the original
+statement unchanged). `y3_end_needs` splits on `g ∈ P_cl(N)`: the first case is `seven_colours_at_N`, the second `y3_end_needs_of_not_mem` (whose
+statement drops `¬G_N`, which `g ∉ P_cl(N)` implies). The unused hypothesis `hnoG` of `y3_end_needs` is referenced once in its body, so the linter is
+silent with its binder name unchanged.
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 72149b07`: **PASS** (exit 0).
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`), after the linter fix: **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning
+`declaration uses 'sorry'`** (0 others; the first run of this stage, `build/gate/build/20261005T074739Z-2455558.log`, showed the unused-variable warning
+on `hnoG`, fixed), exit 0, 8 min 43 s (`build/gate/build/20261005T075711Z-2522128.log`, ends "Build completed successfully (5370 jobs)"; driver log
+`data/fs131/i5n/build-stage42.log`). `Terminal`'s `sorry` declarations: **3** (`exists_red` l. 799, `exists_terminal` l. 811, `y3_end_needs_of_not_mem`
+l. 2605); wave 5 **20** (`Terminal` 3, `BaseDense` 2, `BaseWalk` 5, `HexRing` 6, `MapGraph` 3, `Dense` 1).
+
+**Axioms, read from this build's oleans** (`data/fs131/i5n/I5nAxioms42.lean` → `I5nAxioms42.out`, 12 GiB slot, exit 0, re-run after the final build):
+`lower_flank_horns_at_N_of`, `lower_flank_horns_at_N`, `seven_colours_at_N`, `cv_hd_main_inType` on `[propext, Classical.choice, Quot.sound]`;
+`y3_end_needs`, `cv_hd_main`, `cv_hd`, `c_double` read `sorryAx` (through `y3_end_needs_of_not_mem`; `c_double` also through this branch's stale
+`flankQ_*`); controls: `y3_end_needs_of_not_mem` and `exists_merge` read `sorryAx`, `mergeAvailable_of_two_sectors` the standard three.
+`scripts/Axioms.lean`: the three new records added to the "FS131-I5h" block.
+
+### Theorems this phase proved
+
+All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5n/I5nAxioms42.out`):
+- `HadwigerNelson.Plane.ArcMap.seven_colours_at_N` (`Plane/ValidMap/Terminal.lean`) — CVB § 1.6's seven-colour count at `N` with `G_N` read as
+  `g ∈ P_cl(N)`; `cv_hd_main_inType` its corollary.
+- `ArcMap.lower_flank_horns_at_N_of` (`Terminal`) — I5l's `lower_flank_horns_at_N` over `Valid`, `IsPlaneMap`, `Terminal`.
+- proved **over an open child**: `ArcMap.y3_end_needs` (over `y3_end_needs_of_not_mem`).
+
+### The handover: what is proved, what is left (for the next `Terminal` implementer)
+
+**Proved this session** (Stages 41–42, kernel on the standard three): `cv_hd_main_inType`, `seven_colours_at_N`, `lower_flank_horns_at_N_of`, U1 for a
+flank colour (`coneAt_N_subset_of_flankAbove`, `coneAt_S_subset_of_flankBelow`, the radial lemmas), and the chart toolkit (`card_le_encard_sectorsOf`,
+`mergeAvailable_of_two_sectors`, `exists_index_of_mem_coloursAt`, `BranchGerms.exists_succ`/`exists_pred`, `Mono.false_of_full`, the angle lemmas).
+`exists_merge` is in ruling 269's form (Stage 40).
+
+**Left (3 in `Terminal`)**:
+1. **`y3_end_needs_of_not_mem`** (H; YB3 § 3.1 Steps 3–4, `g ∉ P_cl(N)`). Step 3 with the Stage 41 toolkit: the chart at `N` with `Q±`
+   (`lower_flank_horns_at_N_of`), the four flanking sectors `a, b, c', d` and their colours (`exists_succ`/`exists_pred`, `exists_col`), none `c` (U1:
+   `coneAt_N_subset_of_horn`, `coneAt_S_subset_of_horn` turned) nor `h` (`card_le_encard_sectorsOf` against `HasSectors N h 2`), absent at `E`, so
+   pairwise distinct on distinct sectors (`mergeAvailable_of_two_sectors`); `a ≠ c'` by `c`'s sector (as in `seven_colours_at_N`). Without `g`, the
+   lower side may be one sector (`b = d`, YB3's `y`): `P_cl(N) ⊇ {c, h, x₁, x₂, y}`, at most six — the count at `N` cannot finish, as YB3 says. Step 4
+   at `N + n`: no SHAVE at `N` (`hstN.2.2.1`) gives an `x₁`-shadow on `Q₊` (and on `Q₋` for `x₂`) and a `y`-shadow; the shadow sources are as in
+   `flank_two_sectors_at_S`'s proof (`shadow_of_not_shave`, `srcG_of_shadow`, the `witness_*` lemmas), one level up: in-type `x₁` at `N + n` (so `Q₊`'s
+   upper arc on `ω(N + n)`, `upper_bounds_of_inType_N`'s argument at `N`) and out-type `y` at `N + n` tangent to `±a`; then `y` has two sectors at
+   `N + n` (its two contacts), horns along `±e α` (`stuck_horns_ua` needs `N + n` stuck: no MERGE of `y` there by `mergeAvailable_of_not_mem_pole`, as
+   `y ∉ P_cl(N)`… — to be checked: YB3 reads "no MERGE" of `y` at `N + n`, and `N + n` need not be stuck; `woodallCone_isHorn_ua` with an empty
+   `int D_y(N + n)` is the form to use), with upper flanks `z₁ ≠ z₂` outside `{c, h, x₁, x₂, y}` (their tiles outside `B̄(N, 1)`, out-type contacts of
+   `N`: `outType_iff`), and `g` absent at `N`… so `z₁, z₂` are two colours outside a five-set, one of which is `g` at most: a seventh colour. Price:
+   one session; Step 4's shadow sources at `N + n` are the new work (YB3's FLANK-at-`N` sharpening (b), contact arcs of `ω(N)`, may need a chart
+   lemma).
+2. **`exists_red`, `exists_terminal`** (H, the limit constructions): may now cite `exists_merge` in ruling 269's form (ruling 348 (a)); not started.
+   The plan's row (§ 9.1, l. 391): the measure is the locally finite count, descending per move inside a ball; the limit by local eventual
+   constancy. Each also needs the whole-arc bends (N2-RED) and N4-TERM's `Φ` (N2-TERM); `IsModification` is weak (plan § 2.2's adversary), which
+   the limit can use. Price: one to two sessions each.
+
+**Drafts for the front page**: none — wave 5 is not at its gate.
+
+## Stage 42 — SAVED

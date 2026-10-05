@@ -2307,14 +2307,9 @@ theorem IsSectorChart.exists_index_of_mem_coloursAt {n : ℕ} {G : BranchGerms n
     rw [hC.cone r₀ hr₀ i]; exact Icc_subset_angleIcc _ _ ⟨le_rfl, hC.sorted.mono i⟩
   exact coneAt_mono (hj' r₀ hr₀) w this
 
-/-- **The lower flank's two horns at `N`** (FS114-CVB § 1.4 item 5 and § 1.6, YB3 § 3.1 Steps 2–3, in the setting of `cv_hd_main`'s and
-`y3_end_needs`'s hypotheses with any `κ₂`): at a stuck vertex `E` with three colours whose `−e α` horn has its `N`-side arc on `ω(N)` (`κ₃ = −1`)
-and no in-type lower-flank contact at `S`, the point `N` is stuck with at least four colours, and the lower flank `h` has exactly two sectors
-there — cusp horns along `±e α` with bounds in `[−1, 1]` and out-type contacts at `N + n` and `E` — the `h`-tiles `Q±` of CVB. E5 § 3.4 and
-NB3-END items 3–4 in the frame turned by `π` (`flank_two_sectors_at_S`, `n3_end_four_colours`), N3-DEG at `N` (`stuck_horns_ua`), the axis by
-`dot_eq_zero_of_antipodal_contact` at the contact `E`. Shared first step of `cv_hd_main_inType` and `y3_end_needs` (FS131-I5l). A step inside a
-refutation: no model expected. -/
-theorem lower_flank_horns_at_N {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E)
+/-- **The lower flank's two horns at `N`, over `Valid`, `IsPlaneMap` and `Terminal`** (`lower_flank_horns_at_N` with `QROnly` not read, for
+`y3_end_needs`'s hypotheses, which carry no `QROnly`; FS131-I5n moved I5l's proof here unchanged). A step inside a refutation: no model expected. -/
+theorem lower_flank_horns_at_N_of {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {E : ℂ} (hst : F.IsStuck E)
     (h3 : (F.coloursAt E).ncard = 3) {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₄ : ℝ} (hH : F.IsHorn E α κ₁ κ₂ c)
     (hH' : F.IsHorn E (α + π) (-1) κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α κ₂ g) (hh : F.IsFlankBelow E α κ₁ h)
     (hnoHS : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) :
@@ -2324,7 +2319,6 @@ theorem lower_flank_horns_at_N {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (
         (F.IsContact (E + e (α + π / 2)) h (E + e (α + π / 2) + e (α + π / 2)) ∧
           F.OutType (E + e (α + π / 2)) h (E + e (α + π / 2) + e (α + π / 2))) ∧
         (F.IsContact (E + e (α + π / 2)) h E ∧ F.OutType (E + e (α + π / 2)) h E) := by
-  obtain ⟨hF, hP, hT, -⟩ := id hM
   have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
   have hdom : ∀ x, x ∈ F.dom := fun x => by rw [hP]; exact mem_univ x
   set N := E + e (α + π / 2) with hNdef
@@ -2368,36 +2362,42 @@ theorem lower_flank_horns_at_N {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (
     rw [hn, ← sub_eq_add_neg, hNn] at hcN
     exact ⟨hstN, h4, hh2', μ₃, μ₄, μ₁, μ₂, Hd.congr he', Hu.congr he, h3', h4', h1, h2, hcS, hcN⟩
 
-/-- **FS112-Y3-END-NEEDS, corrected** (`plans/FS112-YB3-verification.md` § 3.1, YB3-NEEDS; the form FS114-CVB's `¬G_N` branch reads,
-`plans/FS114-CVB-verification.md` § 1.6): in a terminal valid six-coloured map of the plane, a stuck vertex `E` with three colours whose
-horns' `N`-side arcs both lie on `ω(N)` (`κ₂ = 1`, `κ₃ = −1`), with no in-type upper-flank contact at `N` and no in-type lower-flank
-contact at `S` (so `λ_E > −1` on the in-type side: YB3's correction, the bowtie excluded), is impossible — its levels need a seventh
-colour. Inventory item 69's supporting lemma (not a backlog row). A step inside a proof by contradiction: no model expected. -/
-theorem y3_end_needs {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {E : ℂ} (hst : F.IsStuck E)
-    (h3 : (F.coloursAt E).ncard = 3) {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₄ : ℝ}
-    (hH : F.IsHorn E α κ₁ 1 c) (hH' : F.IsHorn E (α + π) (-1) κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α 1 g)
-    (hh : F.IsFlankBelow E α κ₁ h)
-    (hnoG : ¬ (F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2))))
-    (hnoH : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) : False := by
-  sorry
+/-- **The lower flank's two horns at `N`** (FS114-CVB § 1.4 item 5 and § 1.6, YB3 § 3.1 Steps 2–3, in the setting of `cv_hd_main`'s and
+`y3_end_needs`'s hypotheses with any `κ₂`): at a stuck vertex `E` with three colours whose `−e α` horn has its `N`-side arc on `ω(N)` (`κ₃ = −1`)
+and no in-type lower-flank contact at `S`, the point `N` is stuck with at least four colours, and the lower flank `h` has exactly two sectors
+there — cusp horns along `±e α` with bounds in `[−1, 1]` and out-type contacts at `N + n` and `E` — the `h`-tiles `Q±` of CVB. E5 § 3.4 and
+NB3-END items 3–4 in the frame turned by `π` (`flank_two_sectors_at_S`, `n3_end_four_colours`), N3-DEG at `N` (`stuck_horns_ua`), the axis by
+`dot_eq_zero_of_antipodal_contact` at the contact `E`. Shared first step of `cv_hd_main_inType` and `y3_end_needs` (FS131-I5l). A step inside a
+refutation: no model expected. -/
+theorem lower_flank_horns_at_N {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E)
+    (h3 : (F.coloursAt E).ncard = 3) {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₄ : ℝ} (hH : F.IsHorn E α κ₁ κ₂ c)
+    (hH' : F.IsHorn E (α + π) (-1) κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α κ₂ g) (hh : F.IsFlankBelow E α κ₁ h)
+    (hnoHS : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) :
+    F.IsStuck (E + e (α + π / 2)) ∧ 4 ≤ (F.coloursAt (E + e (α + π / 2))).ncard ∧ F.HasSectors (E + e (α + π / 2)) h 2 ∧
+      ∃ μ₁ μ₂ μ₃ μ₄ : ℝ, F.IsHorn (E + e (α + π / 2)) α μ₁ μ₂ h ∧ F.IsHorn (E + e (α + π / 2)) (α + π) μ₃ μ₄ h ∧
+        -1 ≤ μ₁ ∧ μ₂ ≤ 1 ∧ -1 ≤ μ₃ ∧ μ₄ ≤ 1 ∧
+        (F.IsContact (E + e (α + π / 2)) h (E + e (α + π / 2) + e (α + π / 2)) ∧
+          F.OutType (E + e (α + π / 2)) h (E + e (α + π / 2) + e (α + π / 2))) ∧
+        (F.IsContact (E + e (α + π / 2)) h E ∧ F.OutType (E + e (α + π / 2)) h E) := by
+  obtain ⟨hF, hP, hT, -⟩ := id hM
+  exact lower_flank_horns_at_N_of hF hP hT hst h3 hc2 hH hH' hg hh hnoHS
 
-/-- **FS114-CV-HD's main clause, branch `G_N`** (`plans/FS114-CVB-verification.md` § 1.6, "Branch `G_N`", YB3-N5's content with its MERGE made
-explicit): in a terminal valid six-coloured map, at a stuck vertex `E` with three colours whose horns' `N`-side arcs both lie on `ω(N)`
-(`κ₂ = 1`, `κ₃ = −1`), an in-type upper-flank contact at `N` with no in-type lower-flank contact at `S` is impossible — at `N` there
-are seven distinct colours. Route (FS131-I5n; CVB's count with the four sectors flanking the `h`-horns `Q±` in place of the ring tiles):
+/-- **Seven colours at `N`** (FS114-CVB § 1.6, "Branch `G_N`", with `G_N` read only as `g ∈ P_cl(N)`): in a terminal valid six-coloured map
+of the plane, at a stuck vertex `E` with three colours whose horns' `N`-side arcs both lie on `ω(N)` (`κ₂ = 1`, `κ₃ = −1`), with no in-type
+lower-flank contact at `S`, the upper flank colour `g` is not carried at `N`. Route (FS131-I5n; CVB's count with the four sectors flanking the `h`-horns `Q±` in place of the ring tiles):
 `c, g, h`, and the colours of the sectors just after and just before `Q₊` and `Q₋` in the sector chart at `N`. Each of the four carries
 `±e α` in its cone, so it is not `c` (U1 at `N`: `c`'s cone in the pinch about `+n`), not `g` (U1 for the flank: `g`'s cone in the pinch
 about `−n`, `coneAt_N_subset_of_flankAbove`, `coneAt_S_subset_of_flankBelow`), not `h` (`h` has only the two sectors `Q±`), so absent at
 `E = N − n`; two of them equal would be two sectors of one colour, MERGE at `N` (`mergeAvailable_of_two_sectors`), unless they are one
-sector — excluded by the germ order and, for the two sides, by `c`'s sector above and `g`'s below (`Mono.disjoint`). Only `g ∈ P_cl(N)` is
-read from `G_N`. A child of `cv_hd_main` (FS131-I5l), a step inside a proof by contradiction: no model expected. -/
-theorem cv_hd_main_inType {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.coloursAt E).ncard = 3)
+sector — excluded by the germ order and, for the two sides, by `c`'s sector above and `g`'s below (`Mono.disjoint`). It closes CVB's branch
+`G_N` (`cv_hd_main_inType`) and Y3-END-NEEDS's case `g ∈ P_cl(N)` (`y3_end_needs`; YB3 § 3.1 Step 3 (a) shows `g ∉ P_cl(N)` there). A step
+inside a proof by contradiction: no model expected. -/
+theorem seven_colours_at_N {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.coloursAt E).ncard = 3)
     {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₄ : ℝ} (hH : F.IsHorn E α κ₁ 1 c)
     (hH' : F.IsHorn E (α + π) (-1) κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α 1 g) (hh : F.IsFlankBelow E α κ₁ h)
-    (hGN : F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2)))
+    (hgN : g ∈ F.coloursAt (E + e (α + π / 2)))
     (hnoHS : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) : False := by
   have hπ := Real.pi_pos
-  obtain ⟨hF, hP, -, -⟩ := id hM
   have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
   have hdom : ∀ x, x ∈ F.dom := fun x => by rw [hP]; exact mem_univ x
   obtain ⟨h1, -⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH
@@ -2411,7 +2411,7 @@ theorem cv_hd_main_inType {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst :
   subst hgg hhh
   -- the lower flank's two horns `Q±` at `N`, which is stuck
   obtain ⟨hstN, -, hhN2, μ₁, μ₂, μ₃, μ₄, Qp, Qm, -, -, -, -, -, -⟩ :=
-    lower_flank_horns_at_N hM hst h3 hc2 hH hH' hg hh hnoHS
+    lower_flank_horns_at_N_of hF hP hT hst h3 hc2 hH hH' hg hh hnoHS
   set N := E + e (α + π / 2) with hNdef
   have hNE : N - e (α + π / 2) = E := by rw [hNdef]; ring
   have hNE' : N + e (α + π + π / 2) = E := by rw [add_e_add_pi_add, hNE]
@@ -2576,7 +2576,7 @@ theorem cv_hd_main_inType {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst :
   have hbd : b ≠ d := by
     intro heq
     subst heq
-    obtain ⟨ig, hig, hβig⟩ := hC.exists_index_of_mem_coloursAt hn hGN.1.2.2
+    obtain ⟨ig, hig, hβig⟩ := hC.exists_index_of_mem_coloursAt hn hgN
     have higb : b ≠ ig := by
       rintro rfl; exact hxdg (colEq b xd g hxd hig)
     have he' : e (G.nextβ b) = e (α + π + π) := by
@@ -2597,6 +2597,49 @@ theorem cv_hd_main_inType {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst :
       ⟨hxab, hxac', hxad⟩, ⟨hxbc', hxbd⟩, hxcd, not_false⟩
   have := hnd.length_le_card
   simp at this
+
+/-- **FS112-Y3-END-NEEDS, the case `g ∉ P_cl(N)`** (`plans/FS112-YB3-verification.md` § 3.1 Steps 3–4, with Step 3's sharpening (a)): the case
+of `y3_end_needs` that `seven_colours_at_N` leaves. YB3's levels: `P_cl(N) = {c, h, x₁, x₂, y}` (Step 3); no SHAVE at `N` needs an in-type `x₁`
+at `N + n` and an out-type `y` at `N + n` tangent to `±a`, whose two sectors there are horns with upper flanks `z₁ ≠ z₂` outside the five — a
+seventh colour (Step 4). Open (FS131-I5n's reduction of `y3_end_needs`). A step inside a proof by contradiction: no model expected. -/
+theorem y3_end_needs_of_not_mem {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {E : ℂ} (hst : F.IsStuck E)
+    (h3 : (F.coloursAt E).ncard = 3) {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₄ : ℝ}
+    (hH : F.IsHorn E α κ₁ 1 c) (hH' : F.IsHorn E (α + π) (-1) κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α 1 g)
+    (hh : F.IsFlankBelow E α κ₁ h)
+    (hnoH : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2))))
+    (hgN : g ∉ F.coloursAt (E + e (α + π / 2))) : False := by
+  sorry
+
+/-- **FS112-Y3-END-NEEDS, corrected** (`plans/FS112-YB3-verification.md` § 3.1, YB3-NEEDS; the form FS114-CVB's `¬G_N` branch reads,
+`plans/FS114-CVB-verification.md` § 1.6): in a terminal valid six-coloured map of the plane, a stuck vertex `E` with three colours whose
+horns' `N`-side arcs both lie on `ω(N)` (`κ₂ = 1`, `κ₃ = −1`), with no in-type upper-flank contact at `N` and no in-type lower-flank
+contact at `S` (so `λ_E > −1` on the in-type side: YB3's correction, the bowtie excluded), is impossible — its levels need a seventh
+colour. Inventory item 69's supporting lemma (not a backlog row). A step inside a proof by contradiction: no model expected. -/
+theorem y3_end_needs {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.Terminal) {E : ℂ} (hst : F.IsStuck E)
+    (h3 : (F.coloursAt E).ncard = 3) {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₄ : ℝ}
+    (hH : F.IsHorn E α κ₁ 1 c) (hH' : F.IsHorn E (α + π) (-1) κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α 1 g)
+    (hh : F.IsFlankBelow E α κ₁ h)
+    (hnoG : ¬ (F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2))))
+    (hnoH : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) : False := by
+  -- `g ∈ P_cl(N)`: seven colours at `N` (`seven_colours_at_N`); else YB3's levels (`y3_end_needs_of_not_mem`). Neither reads `¬G_N`:
+  -- the first needs only `g ∈ P_cl(N)`, and in the second `g ∉ P_cl(N)` leaves no `g`-contact at `N` at all.
+  have _ := hnoG
+  by_cases hgN : g ∈ F.coloursAt (E + e (α + π / 2))
+  · exact seven_colours_at_N hF hP hT hst h3 hc2 hH hH' hg hh hgN hnoH
+  · exact y3_end_needs_of_not_mem hF hP hT hst h3 hc2 hH hH' hg hh hnoH hgN
+
+/-- **FS114-CV-HD's main clause, branch `G_N`** (`plans/FS114-CVB-verification.md` § 1.6, "Branch `G_N`", YB3-N5's content with its MERGE made
+explicit): in a terminal valid six-coloured map, at a stuck vertex `E` with three colours whose horns' `N`-side arcs both lie on `ω(N)`
+(`κ₂ = 1`, `κ₃ = −1`), an in-type upper-flank contact at `N` with no in-type lower-flank contact at `S` is impossible — at `N` there
+are seven distinct colours. Proved by `seven_colours_at_N` (FS131-I5n), which reads only `g ∈ P_cl(N)` from `G_N`. A child of `cv_hd_main` (FS131-I5l), a step inside a
+proof by contradiction: no model expected. -/
+theorem cv_hd_main_inType {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.coloursAt E).ncard = 3)
+    {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₄ : ℝ} (hH : F.IsHorn E α κ₁ 1 c)
+    (hH' : F.IsHorn E (α + π) (-1) κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α 1 g) (hh : F.IsFlankBelow E α κ₁ h)
+    (hGN : F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2)))
+    (hnoHS : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) : False := by
+  obtain ⟨hF, hP, hT, -⟩ := id hM
+  exact seven_colours_at_N hF hP hT hst h3 hc2 hH hH' hg hh hGN.1.2.2 hnoHS
 
 /-- **FS114-CV-HD, the main clause**: in a terminal valid six-coloured map, at a stuck vertex `E` with three colours whose two-sector
 colour `c` has horns along `±e α`, both upper bounds `1` (the `+e α` horn's upper arc and the `−e α` horn's arc on the `N` side on

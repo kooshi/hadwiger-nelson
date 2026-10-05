@@ -3640,6 +3640,9 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.card_le_encard_sectorsOf
 #print axioms HadwigerNelson.Plane.ArcMap.mergeAvailable_of_two_sectors
 #print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_index_of_mem_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.lower_flank_horns_at_N_of
+#print axioms HadwigerNelson.Plane.ArcMap.seven_colours_at_N
+#print axioms HadwigerNelson.Plane.ArcMap.y3_end_needs_of_not_mem
 
 #eval IO.println "=== PURCHASED ==="
 
