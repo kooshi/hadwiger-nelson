@@ -198,7 +198,22 @@ proves `badCount_eq_zero_iff`.
 
 ## Theorems this phase proved (FS131-IL1)
 
-None yet (updated at each saved stage).
+All [kernel], read against the stage-8 build's oleans (`data/fs131/il/ILAxioms.out`, Stage 8); each on `[propext, Classical.choice,
+Quot.sound]` or a subset unless the print says otherwise. In `Plane/ValidMap/Limit`:
+- the plan's leaves: `ArcMap.LocalStep.mono`; `ArcMap.LocalSeq.exists_stab`, `.frozen`, `.limitArcs_locallyFinite`, `.limitCol_locallyConstant`,
+  `.eventually_agreesOn`, `.limit_valid`, `.limit_isModification`, `.limit_isTerminalMap` (and the definition `.limit`, now sorry-free);
+  `ArcMap.coloursAt_eq_of_agreesOn`, `.onRingArc_iff_of_agreesOn`, `.mergeAvailable_iff_of_agreesOn`, `.rayAvailable_iff_of_agreesOn`,
+  `.shaveAvailable_iff_of_agreesOn`, `.qrAt_iff_of_agreesOn`; `ArcMap.not_available_of_not_isSite`; `ArcMap.IsClean.eventually_not_isSite`;
+- children added: `ArcMap.finite_arcs_inter_compact`, `.mem_Γ_iff`, `.AgreesOff.symm`, `.mem_closure_iff_of_inter_eq`, `.region_inter_eq_of_agreesOn`,
+  `.interiorPts_inter_eq_of_agreesOn`, `.mem_closure_region_inter_iff`, `.isSector_iff_of_agreesOn`, `.IsSector.subset_ball`,
+  `.sectorsOf_eq_of_agreesOn`, `.eventually_ball_subset`, `.hasSectors_iff_of_agreesOn`, `.hasRepeatedColour_iff_of_agreesOn`,
+  `.hornSet_subset_ball`, `.isHorn_iff_of_agreesOn`, `.subset_region_iff_of_agreesOn`, `.isFlankAbove_iff_of_agreesOn`,
+  `.isFlankBelow_iff_of_agreesOn`, `.isClear_iff_of_agreesOn`, `.isTile_of_agreesOn`, `.tileOf_iff_of_agreesOn`, `.inType_iff_of_agreesOn`,
+  `.allowedCone_eq_of_agreesOn`, `.isRingArc_iff_of_agreesOn`, `.isQArc_iff_of_agreesOn`, `.isR2Arc_iff_of_agreesOn`,
+  `.LocalSeq.arc_origin`, `.LocalSeq.agree_of_not_mem`, `.LocalSeq.col_eq_limitCol`, `.LocalSeq.exists_disjoint_of_isCompact`,
+  `.LocalSeq.limitArcs_inter_eq`, `.LocalSeq.eventually_mem_limitInterior_iff`, `.LocalSeq.agreesOn_of_disjoint`, `.LocalSeq.exists_agreesOn_ball`,
+  `.interior_coneAt_hornSet_eq_empty`, `.germ_eq_curveGerm_of_goodAt`, `.not_isSite_of_goodAt`, and `Arc.curve_eq_of_mem`.
+In `Plane/ValidMap/Procedure`: no theorem; three spec examples (below).
 
 ## Stage 5 — SAVED (FS131-IL1): the readback and the as-given build
 
@@ -229,3 +244,57 @@ modules already up to date, nothing built, 10 modules with warnings**, exit 0 (`
   frontier included (`limit_isModification`'s third clause quantifies over all `x`).
 
 ## Stage 5 — SAVED (FS131-IL1)
+
+## Stage 6 — SAVED (FS131-IL1): `frozen` and its consumers, and the re-pricing
+
+- **Proved** (commit `a305d41c`, then `333a88cf`): `LocalStep.mono`; `exists_stab` (`LocallyFinite.point_finite`, bounded above);
+  `frozen` over the child `arc_origin` (KL1's route exactly: `K'` = the arcs of `F 0` and the supports meeting `K`, compact; past the
+  supports meeting `K'` nothing on `K` changes); `limitArcs_locallyFinite`, `limitCol_locallyConstant`, `eventually_agreesOn`, `limit_valid`,
+  `limit_isModification`, over five children: `agree_of_not_mem`, `col_eq_limitCol`, `exists_disjoint_of_isCompact`, `limitArcs_inter_eq`,
+  `eventually_mem_limitInterior_iff` (pointwise: `frozen` at `{z}`), `agreesOn_of_disjoint` (**the limit agrees with every stage past the supports
+  meeting any set `t`, on `t`** — not only near compact parts of the domain, since `LocallyFinite U` is over all of `ℂ`; this is what reads
+  `coloursAt` at frontier points of the domain in `limit_isModification`).
+- **Build** (`a305d41c`): OK, 447 of 447 batches, 7 modules rebuilt, 8 min 47 s, exit 0 (`build/gate/build/20261005T093324Z-3028114.log`;
+  driver log `data/fs131/il/build-stage6.log`).
+- **Re-price** (the brief's checkpoint, after `frozen`): `frozen` and its five consumers took well under the plan's "one session" (about a fifth);
+  the locality lemmas the same order. `IsClean.eventually_not_isSite` is **H, not M** (planar geometry at a point of `Γ`: see Stage 7);
+  `exists_clean` stays **H** (Stage 8 § 8.3 carries the design).
+
+## Stage 6 — SAVED (FS131-IL1)
+
+## Stage 7 — SAVED (FS131-IL1): locality, terminality, sites; the domain defect in three `Procedure` children
+
+- **Locality** (commit `333a88cf`): the six lemmas. `MERGE`'s needs validity only through tiles: **in a valid map a tile lies in `B(x, 1)` for
+  each point `x` of its closure** (`IsTile.subset_ball`), so two valid maps agreeing on an open `W ⊇ B̄(v, 3)` have the same tiles at every
+  contact (`isTile_of_agreesOn`, `tileOf_iff_of_agreesOn`), hence the same in- and out-types and allowed cones. KL1's
+  `tile_subset_ball_or_disjoint` was not needed. Sectors, horns, flanks, clearness (unit circles about points of `B(v, 1)` lie in `B̄(v, 2)`),
+  ring arcs, (Q) and (R2) (the witness at distance `2`) are read in `B̄(·, 3)` with no validity.
+- `limit_isTerminalMap` and `not_available_of_not_isSite`: proved.
+- **`IsClean.eventually_not_isSite`** (commit `d3d38d3a`): at `x ∈ dom` take a good radius `ρ₀` (`exists_goodAt`); at `y ∈ B(x, ρ₀)`, `y ≠ x`,
+  `not_isSite_of_goodAt`. Off `Γ` the chart at `y` has no germ and one sector, the ball. On `Γ`, every arc near `y` passes through `y` (good
+  radius at `y`) and through `x`, and any two share `y ≠ x`, so (`GoodAt.uniq` at `x`, then `Arc.curve_eq_of_mem`) all lie on one curve through
+  `y`; so every germ of `y`'s chart is, at each small distance, one of that curve's two germs (`germ_eq_curveGerm_of_goodAt`, through
+  `exists_eq_branchPt_curveGerm`). Distinct germs never meet at one distance (`localSectors_disj`), so there are at most two; clean gives at
+  least two; the two leave `y` in opposite directions (their difference quotients tend to norms `0` and `2`), so both sector cones have
+  non-empty interior while a horn's has none (`interior_coneAt_hornSet_eq_empty`, from `Contact`'s `e_eq_of_mem_coneAt_hornSet`); the two
+  sectors carry the two colours, one sector each. `Limit` now imports `Plane/Tiles`, `Plane/ValidMap/Sectors`, `Plane/ValidMap/Contact`
+  (`ARCHITECTURE.md` row updated; `tools/check_architecture.py`: PASS, `data/fs131/il/arch-stage7.txt`).
+- **Build** (`7722c2c6`, before `eventually_not_isSite`): OK, 447 of 447 batches, 7 rebuilt, 8 min 46 s, exit 0
+  (`build/gate/build/20261005T094524Z-3097403.log`; `data/fs131/il/build-stage7.log`).
+- **Statement defect, sent to Keryx mid-job and ruled (inventory item 380): three of KL1's `Procedure` children are false without a domain
+  hypothesis.** `badCount_eq_zero_iff (hF : F.Valid) (P : ℂ)` — counterexample: `P = 0`, `k = 2`, `dom = {z : 1/2 < |z| < 3/2, 0 < arg z < π/6}`,
+  `arcs = {Arc.circ 0 1 0 (π/6)}`, colour `0` inside `ω(0)` and `1` outside (each colour's part has diameter about `0.81 < 1`, so valid). Its
+  ring arcs about `0` are the `[θ₁, θ₂]` with `0 < θ₁ < θ₂ < π/6` (the arc's ends are not in `dom`), none maximal, so `badCount F 0 = 0`; yet none
+  is (Q) or (R2), since `0 ∉ closure dom` makes `coloursAt 0 = ∅`. `badCount_lt_top` and `treatPts_inter_finite` have the same gap (maximal arcs,
+  or centres in `K` of unit arcs, accumulating at the domain's frontier; sketched, not built). **Old statements**:
+  `badCount_eq_zero_iff (hF : F.Valid) (P : ℂ)`, `badCount_lt_top (hF : F.Valid) (hc : F.IsClean) (P : ℂ)`,
+  `treatPts_inter_finite (hc : F.IsClean) {K : Set ℂ} (hK : IsCompact K) (hKd : K ⊆ F.dom)`. **New** (Keryx's ruling): each with
+  `(hP : F.IsPlaneMap)` added — after `hF` in the first two (`badCount_lt_top (hF) (hP) (hc) (P)`), first in the third. Their only consumer,
+  `exists_terminalSeq`, carries `hP`. Conclusions unchanged; `treatPts_inter_finite` had no `Valid` to drop.
+- **Spec examples** (commit `7722c2c6`) owed by KL1's plan: `IsMaxRingArc` (none on the one-colour plane), `badCount` (`0` there), `treatPts`
+  (`∅` on the one-colour plane — one sector per point, so no repeated colour and no horn; **adversary**: `0 ∈ unitArcPlane.treatPts`).
+- **Statement warts kept, not changed** (KL1's binders): `onRingArc_iff_of_agreesOn`'s `x` and `hW`, `rayAvailable_iff_of_agreesOn`'s and
+  `shaveAvailable_iff_of_agreesOn`'s `hW`, `eventually_agreesOn`'s `hKd` are unused by their proofs; each is referenced by a `have _ := …` so the
+  unused-variables linter stays silent.
+
+## Stage 7 — SAVED (FS131-IL1)
