@@ -3418,6 +3418,19 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_ncard_coloursAt_rim
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_not_hasRepeatedColour_rim
 #print axioms HadwigerNelson.Plane.ArcMap.Near.merge_allowedCone
+-- FS131-IMM4
+#print axioms HadwigerNelson.Plane.tanHeight_combo
+#print axioms HadwigerNelson.Plane.side_ineq
+#print axioms HadwigerNelson.Plane.isPreconnected_side_plane
+#print axioms HadwigerNelson.Plane.frame_mul_e
+#print axioms HadwigerNelson.Plane.isPreconnected_side
+#print axioms HadwigerNelson.Plane.isPreconnected_of_two_sides
+#print axioms HadwigerNelson.Plane.ArcMap.Near.sides_preconnected
+#print axioms HadwigerNelson.Plane.ArcMap.encard_sectorsOf_le_one
+#print axioms HadwigerNelson.Plane.ArcMap.Near.norm_of_mem_rimArc
+#print axioms HadwigerNelson.Plane.ArcMap.Near.mergeCol_of_mem_sector_out
+#print axioms HadwigerNelson.Plane.ArcMap.Near.mem_merge_interiorPts_of_mem
+#print axioms HadwigerNelson.Plane.ArcMap.Near.branchPt_mem_merge_interiorPts_iff
 
 #eval IO.println "=== PURCHASED ==="
 

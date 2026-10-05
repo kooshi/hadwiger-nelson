@@ -98,6 +98,14 @@ No new kernel theorem: `exists_merge_aux`'s body is the assembly, sorry-free, ov
 and `ArcMap.Near.merge_allowedCone` (each `sorry`, in `MergeMove`); its axioms read `sorryAx` through them.
 
 
+### FS131-IMM4 (stage 11; build `build/gate/build/20261005T081907Z-2639896.log`, axioms `data/fs131/imm/axioms-stage11.txt`, all in `MergeMove`)
+
+Each [kernel], reading exactly `[propext, Classical.choice, Quot.sound]`: `tanHeight_combo`, `side_ineq`, `isPreconnected_side_plane`,
+`frame_mul_e`, `isPreconnected_side`, `isPreconnected_of_two_sides`, `ArcMap.Near.sides_preconnected` (**the sides lemma**),
+`ArcMap.encard_sectorsOf_le_one`, `ArcMap.Near.norm_of_mem_rimArc`, `ArcMap.Near.mergeCol_of_mem_sector_out`,
+`ArcMap.Near.mem_merge_interiorPts_of_mem`, `ArcMap.Near.branchPt_mem_merge_interiorPts_iff`, and the leaf
+**`ArcMap.Near.merge_not_hasRepeatedColour_rim`** (13 theorems).
+
 ## Stage 1 — SAVED: the readback, the as-given build
 
 ### 1.1 The brief's quotations against their sources (standing rule 3)
@@ -603,3 +611,46 @@ up to date, nothing built", 2 s; warnings only `declaration uses 'sorry'` (`Merg
 `exists_rayMerge_aux`; `Contact`, `BaseSteps`, `UnitArc` as before). Log `build/gate/build/20261005T080558Z-2587020.log`; terminal output
 `data/fs131/imm/build-asgiven-imm4.log`. The iteration mirror `build/imm-mirror` was older than this build's oleans (02:44 against 02:54) and was
 refreshed from them.
+
+## Stage 11 — SAVED (FS131-IMM4): `merge_not_hasRepeatedColour_rim` proved (the sides lemma, then the three cases)
+
+**The route** (record § 8.2 item 1, sharpened): at a rim point `x`, every count is shown `≤ 1` for all small `r`.
+- **The sides lemma, one argument for both sides and every curvature** (`isPreconnected_side_plane`): in the frame along the germ's
+  tangent, `tanHeight κ` is a quadratic with Hessian `−κ` (`tanHeight_combo`), so for `w₀` on the circle (`tanHeight κ w₀ = 0`) and
+  `|κ| r ≤ 2/5`, each side `{σ · tanHeight > 0}` of `B(w₀, r)` is **star-convex about `w₀ + σ (r/2) g`**, `g = (−κ X₀, 1 − κ Y₀)` the unit
+  normal (`‖g‖² = 1 − 2κ tanHeight = 1`): there `σ · tanHeight = r/2 − σκ r²/8`, and along a segment to a point `z` of the side the excess
+  is `≥ (1 − b)(r/2)(1 − (5/2)|κ| r) + b σ tanHeight(z) > 0` (`side_ineq`). No sign cases: IMM2's convex/star-convex split and the
+  `κ = 0` half-planes are one statement. `isPreconnected_side` moves it into the plane by the frame's isometry (`frame_mul_e`).
+- `sides_preconnected`: at a germ's point at distance `ρ < ρ'`, for small `r` the two chart sectors beside the germ, cut to `B(x, r)`,
+  are the two sides (the circle meets the ball in the branch only: `eq_branchPt_of_tanHeight_eq_zero` with `frameX > 0` near `x`, and
+  `tanHeight_branchPt`), hence preconnected (`isPreconnected_of_two_sides`: disjoint open non-empty `A`, `B` with `A ∪ B = P ∪ Q`, `P`, `Q`
+  preconnected, are `P` and `Q`). It needs `p ≠ next p` (two or more germs; MERGE has `X.n ≥ 2`).
+- The new map near `x` (`B(x, r)` misses `B̄(v, ρ/2)`): sector points are interior to it (`mem_merge_interiorPts_of_mem`: off the rim arc,
+  `F`'s interior points stay interior), with the sector's colour (`mergeCol_of_mem_sector_out`); a germ point at `t ∈ (ρ/2, ρ')` is interior
+  exactly when `t < ρ` on a phantom germ (`branchPt_mem_merge_interiorPts_iff`). Then (R1) `x` on no germ: the interior points are the ball,
+  preconnected, so at most one sector of any colour (`encard_sectorsOf_le_one`); (R2) a non-phantom germ: two pieces, the sectors beside
+  the germ, of the two different colours beside it (`encard_sectorsOf_of_partition` over `Bool`); (R3) a phantom germ: one preconnected
+  piece (the two sides joined through a cut branch point `y₀` in both closures).
+
+**Re-priced** (the brief's standing order, after the first leaf): leaf 1 took about 500 lines (343 of children, 157 of proof), every child
+compiled at the first or second attempt; IMM3 priced it at about 200. Leaf 2 was drafted in the same stage's iteration and compiles in
+`data/fs131/imm/wip/C.lean` (about 480 lines, see Stage 12), so no further re-pricing is needed.
+
+### 11.1 The build, the axioms, the checks
+
+Under the slot (`scripts/slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh`): **OK**, 446 of 446 batches, 3 modules
+rebuilt (`MergeMove` 18 s, `Moves` 2.6 s, `Proofs`), 8 min 27 s; "Build completed successfully (5363 jobs)"; warnings only `declaration uses
+'sorry'` — `MergeMove` l. 2933 `merge_allowedCone` (the one open leaf), `Moves` l. 574 `exists_rayMerge_aux`; `Contact`, `BaseSteps`, `UnitArc`
+as before. Log `build/gate/build/20261005T081907Z-2639896.log`; terminal output `data/fs131/imm/build-stage11.log`. **Axioms** against that
+build's oleans (`lake env lean data/fs131/imm/AxiomsIMM.lean` under the slot, `data/fs131/imm/axioms-stage11.txt`), read by the new tool
+**`tools/fs131_imm_axioms.py`** (re-joins Lean's wrapped lines, parses names with apostrophes, classes each record; `--self-test` passes the
+clean receipt and fires on a planted sorry, a planted foreign axiom, a missing control and an empty parse): **133 records — 118 on exactly
+the standard three, 13 on fewer (two axiom-free, eleven on `[propext]` or `[propext, Quot.sound]`), 2 with `sorryAx` (`merge_allowedCone` and
+`exists_merge_aux`, the control), 0 foreign; PASS with `--expect-sorry` those two.** The same tool on `axioms-stage9.txt` with this
+expectation FAILS naming `merge_not_hasRepeatedColour_rim` — the stage's change, seen by the instrument. (IMM3's "116 on exactly the
+standard three" counted the subset records with them: 105 + 13 = 116 + 2.) `tools/fs131_imm_decls.py --check`: FAIL naming the 12 new
+theorems in both receipt files (24 lines) before their lines were added, PASS (132 theorems) after; `tools/fs131_im_statements.py --check`
+PASS; `tools/fs131_im_split.py --check` PASS. No `axiom`, no `native_decide`, no backlog statement changed; the leaf's statement unchanged
+(its docstring rewritten from "open leaf").
+
+**Proved** (12 children and the leaf, in `MergeMove`'s new block "FS131-IMM4: the rim clause", listed under "Theorems this phase proved").
