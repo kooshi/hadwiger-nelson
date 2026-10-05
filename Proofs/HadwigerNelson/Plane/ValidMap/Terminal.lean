@@ -699,6 +699,24 @@ theorem flankQ_lower_of_qrOnly (hF : F.Valid) (hQR : F.QROnly) {v : ℂ} (hv : F
           ∀ᶠ r in 𝓝[>] (0 : ℝ), hornSet v α (-1) κ₂ r ⊆ shadow (F.region h))) :=
   flankQ_lower hF hv hH hh hcS fun _ _ _ _ h => hQR _ _ _ _ _ h
 
+/-- **A (Q) arc read a whole number of turns later** is the same (Q) arc: `ringPt` is `2π`-periodic. -/
+theorem IsQArc.add_int_mul {P : ℂ} {θ₁ θ₂ : ℝ} (h : F.IsQArc P θ₁ θ₂) (m : ℤ) :
+    F.IsQArc P (θ₁ + 2 * π * m) (θ₂ + 2 * π * m) := by
+  obtain ⟨d, d', ⟨h12, hsub, hcol⟩, hd, hd', h4⟩ := h
+  have hpt : ∀ θ, ringPt P (θ + 2 * π * m) = ringPt P θ := fun θ => by
+    simp only [ringPt, e_add_int_mul]
+  have harc : ringArc P (θ₁ + 2 * π * m) (θ₂ + 2 * π * m) = ringArc P θ₁ θ₂ := by
+    ext z
+    simp only [ringArc, mem_image, mem_Icc]
+    constructor
+    · rintro ⟨θ, ⟨h1, h2⟩, rfl⟩
+      exact ⟨θ - 2 * π * m, ⟨by linarith, by linarith⟩, by rw [← hpt (θ - 2 * π * m), sub_add_cancel]⟩
+    · rintro ⟨θ, ⟨h1, h2⟩, rfl⟩
+      exact ⟨θ + 2 * π * m, ⟨by linarith, by linarith⟩, hpt θ⟩
+  refine ⟨d, d', ⟨by linarith, harc ▸ hsub, fun θ hθ => ?_⟩, hd, hd', h4⟩
+  have := hcol (θ - 2 * π * m) ⟨by linarith [hθ.1], by linarith [hθ.2]⟩
+  rwa [← hpt (θ - 2 * π * m), sub_add_cancel] at this
+
 /-! ## FS114-CV-HD: CV-L0, the main clause, the equivalences, CV-CLASS -/
 
 /-- **FS114-CV-HD, (CV-L0)**: in a terminal valid map a stuck vertex with at most three colours centres no unit arc, so `Γ ∩ ω(E)` is
@@ -739,31 +757,69 @@ theorem cv_l0 (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.colo
     exact not_mem_angleIcc_add_pi (by linarith) (hcone h1) (hcone h2)
   exact ⟨hno, (F.finite_ringΓ_off_ringArc hv).subset fun x hx => ⟨hx, hno x⟩⟩
 
-/-- **FS114-CV-HD, the main clause**: in a terminal valid six-coloured map, at a stuck vertex `E` with three colours whose two-sector
-colour `c` has horns along `±e α`, both upper bounds `1` (the `+e α` horn's upper arc and the `−e α` horn's arc on the `N` side on
-`ω(N)`: `κ₂ = 1`, `κ₃ = −1`) and no in-type lower-flank tile at `E − n` is impossible. A step inside a proof by contradiction where no
-model is expected (`cv_hd`'s cycle consumes it). -/
-theorem cv_hd_main {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.coloursAt E).ncard = 3)
-    {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₃ κ₄ : ℝ} (hH : F.IsHorn E α κ₁ κ₂ c)
-    (hH' : F.IsHorn E (α + π) κ₃ κ₄ c) {h : Fin 6} (hh : F.IsFlankBelow E α κ₁ h)
-    (hυ : κ₂ = 1 ∧ κ₃ = -1)
-    (hnoHS : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) : False := by
-  sorry
+/-- **One colour flanks a horn from below** (the mirror of `IsFlankAbove.unique`): two lower flanks at one bound share the band between it
+and the higher of their lower limits. Model of the hypotheses: `bowtie` at `0` (`bowtie_flanks`). -/
+theorem IsFlankBelow.unique {v : ℂ} {α κ : ℝ} {h h' : Fin k} (hh : F.IsFlankBelow v α κ h) (hh' : F.IsFlankBelow v α κ h') :
+    h = h' := by
+  obtain ⟨a, ha, hev⟩ := hh
+  obtain ⟨b, hb, hev'⟩ := hh'
+  obtain ⟨r, ⟨hr1, hr2⟩, hr0⟩ := ((hev.and hev').and self_mem_nhdsWithin).exists
+  have hab := max_lt ha hb
+  obtain ⟨z, hz, -, -⟩ := exists_mem_hornSet_aboveBelow v α (κ₁ := max a b) (κ₂ := κ) (s := (max a b + κ) / 2)
+    (m := κ + 1) hr0 (by linarith) (by linarith) (by intro h; linarith)
+  have z1 := hr1 (hornSet_mono (le_max_left a b) le_rfl hz)
+  have z2 := hr2 (hornSet_mono (le_max_right a b) le_rfl hz)
+  exact z1.2.symm.trans z2.2
 
-/-- **FS114-CV-HD, the equivalences**: in a terminal valid six-coloured map, at a stuck vertex `E` with three colours (horns of `c` along
-`±e α`, upper flank `g`, lower flank `h`), the four conditions are equivalent — `G_N` (an in-type `g`-contact at `N`), `H_S` (an in-type
-`h`-contact at `S`), `υ± = 1` (`κ₂ = 1 ∧ κ₃ = −1`: both horns' `N`-side arcs on `ω(N)`) and `λ± = −1` (`κ₁ = −1 ∧ κ₄ = 1`: both `S`-side
-arcs on `ω(S)`). Model of the local hypotheses with all four conditions: `bowtie` at `0` (a fragment; `GENERIC` on terminal plane maps). -/
-theorem cv_hd {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.coloursAt E).ncard = 3)
-    {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₃ κ₄ : ℝ} (hH : F.IsHorn E α κ₁ κ₂ c)
-    (hH' : F.IsHorn E (α + π) κ₃ κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α κ₂ g) (hh : F.IsFlankBelow E α κ₁ h) :
-    ((F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2))) ↔
-        (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) ∧
-      ((F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2))) ↔ (κ₂ = 1 ∧ κ₃ = -1)) ∧
-      ((κ₂ = 1 ∧ κ₃ = -1) ↔ (κ₁ = -1 ∧ κ₄ = 1)) := by
-  sorry
+/-- **CV-HD's Siamese arrow `G_N ⇒ υ± = 1`** (`plans/FS114-CVB-verification.md` § 1.6, "the two easy arrows"): at a stuck vertex `E` with at
+most three colours, an in-type upper-flank contact at `N` forces both horns' `N`-side arcs onto `ω(N)` — `κ₂ = 1` (else the flank's contact
+at `N` is out-type, `outType_N_of_flankAbove`) and `κ₃ = −1` (the same for the `−e α` horn, whose `N`-side flank is `g` again,
+`stuck_flanks_ua`). The argument of `n3_end`'s second branch, at any lower bounds. Inhabitant of the hypotheses: `bowtie` at `0`. -/
+theorem upper_bounds_of_inType_N (hF : F.Valid) (hP : F.IsPlaneMap) {E : ℂ} (hst : F.IsStuck E)
+    (h3 : (F.coloursAt E).ncard ≤ 3) {c : Fin k} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₃ κ₄ : ℝ}
+    (hH : F.IsHorn E α κ₁ κ₂ c) (hH' : F.IsHorn E (α + π) κ₃ κ₄ c) {g : Fin k} (hg : F.IsFlankAbove E α κ₂ g)
+    (hGN : F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2))) : κ₂ = 1 ∧ κ₃ = -1 := by
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  obtain ⟨h1, h2⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH
+  obtain ⟨h3', h4⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH'
+  obtain ⟨hgc, hgi⟩ := hGN
+  have hk2 : κ₂ = 1 := by
+    by_contra hne
+    exact (contact_inType_or_outType hF (hvC E) hgc).2
+      ⟨hgi, outType_N_of_flankAbove hF (hvC E) (lt_of_le_of_ne h2 hne) hg hgc.2.2⟩
+  refine ⟨hk2, ?_⟩
+  obtain ⟨hN, hS⟩ := horn_poles_contact hF (hvC E) hst.1 le_rfl hc2 hH
+  obtain ⟨g₁, -, -, -, -, -, -, hg₁, -, -, hg₁d, -⟩ :=
+    stuck_flanks_ua hF (hvC E) hst h3 hH hH' h1 h2 h3' h4 hc2 hN hS
+  have hg₁g : g₁ = g := hg₁.unique hg
+  subst hg₁g
+  by_contra hne
+  have hout := outType_S_of_flankBelow hF (hvC E) (lt_of_le_of_ne h3' (Ne.symm hne)) hg₁d
+    (by rw [sub_e_add_pi_add]; exact hgc.2.2)
+  rw [sub_e_add_pi_add] at hout
+  exact (contact_inType_or_outType hF (hvC E) hgc).2 ⟨hgi, hout⟩
 
-/-! ## FS112-Y3-END-NEEDS (corrected), FS112-C-ENDS, FS112-C-DOUBLE, FS112-N3-END's chain clause -/
+/-- **A stuck vertex in the frame turned by `π`**: at a stuck vertex `E` with at most three colours (horns of `c` along `±e α`, upper flank
+`g`, lower flank `h`), the configuration read along `e (α + π)` is the same with `g ↔ h` — the horn along `α + π + π` is the horn along `α`,
+`h` is the turned horn's upper flank and `g` its lower one, and the turned frame's poles are `S` and `N` (`stuck_flanks_ua`,
+`IsFlankAbove.unique`, `IsFlankBelow.unique`). Inhabitant of the hypotheses: `bowtie` at `0`. -/
+theorem stuck_turned_frame (hF : F.Valid) (hP : F.IsPlaneMap) {E : ℂ} (hst : F.IsStuck E)
+    (h3 : (F.coloursAt E).ncard ≤ 3) {c : Fin k} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₃ κ₄ : ℝ}
+    (hH : F.IsHorn E α κ₁ κ₂ c) (hH' : F.IsHorn E (α + π) κ₃ κ₄ c) {g h : Fin k} (hg : F.IsFlankAbove E α κ₂ g)
+    (hh : F.IsFlankBelow E α κ₁ h) :
+    F.IsHorn E (α + π + π) κ₁ κ₂ c ∧ F.IsFlankAbove E (α + π) κ₄ h ∧ F.IsFlankBelow E (α + π) κ₃ g ∧
+      E + e (α + π + π / 2) = E - e (α + π / 2) ∧ E - e (α + π + π / 2) = E + e (α + π / 2) := by
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  obtain ⟨h1, h2⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH
+  obtain ⟨h3', h4⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH'
+  obtain ⟨hN, hS⟩ := horn_poles_contact hF (hvC E) hst.1 le_rfl hc2 hH
+  obtain ⟨g₁, h₁, -, -, -, -, -, hg₁, hh₁, hh₁d, hg₁d, -⟩ :=
+    stuck_flanks_ua hF (hvC E) hst h3 hH hH' h1 h2 h3' h4 hc2 hN hS
+  have hgg : g₁ = g := hg₁.unique hg
+  have hhh : h₁ = h := IsFlankBelow.unique hh₁ hh
+  subst hgg hhh
+  exact ⟨hH.congr (by rw [show α + π + π = α + 2 * π * ((1 : ℤ) : ℝ) by push_cast; ring, e_add_int_mul]),
+    hh₁d, hg₁d, add_e_add_pi_add E α, sub_e_add_pi_add E α⟩
 
 /-- **FS112-Y3-END-NEEDS, corrected** (`plans/FS112-YB3-verification.md` § 3.1, YB3-NEEDS; the form FS114-CVB's `¬G_N` branch reads,
 `plans/FS114-CVB-verification.md` § 1.6): in a terminal valid six-coloured map of the plane, a stuck vertex `E` with three colours whose
@@ -778,15 +834,69 @@ theorem y3_end_needs {F : ArcMap 6} (hF : F.Valid) (hP : F.IsPlaneMap) (hT : F.T
     (hnoH : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) : False := by
   sorry
 
-/-- **FS112-C-ENDS** in its erratum's form (caution C116; `plans/FS112-derivation.md:443` item 2) — FS114-CV-HD's (CV-ENDS): in a
-terminal valid six-coloured map, the point of the normal line one step beyond each finite end of a stuck chain has at least four colours.
-The chain is the stuck run through a vertex stuck along `e α`; its upper end is a member `j` with `j + 1` outside, its lower end a member
-with `j − 1` outside. No model of a stuck chain in a terminal valid plane map is known (`GENERIC`, FS-115). -/
-theorem c_ends {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : ℝ} (hv : F.StuckAlong v α) {j : ℤ}
-    (hj : j ∈ F.stuckRun v α) :
-    (j + 1 ∉ F.stuckRun v α → 4 ≤ (F.coloursAt (v + ((j + 1 : ℤ) : ℂ) * e (α + π / 2))).ncard) ∧
-      (j - 1 ∉ F.stuckRun v α → 4 ≤ (F.coloursAt (v + ((j - 1 : ℤ) : ℂ) * e (α + π / 2))).ncard) := by
+/-- **FS114-CV-HD's main clause, branch `G_N`** (`plans/FS114-CVB-verification.md` § 1.6, "Branch `G_N`", YB3-N5's content with its MERGE made
+explicit): in a terminal valid six-coloured map, at a stuck vertex `E` with three colours whose horns' `N`-side arcs both lie on `ω(N)`
+(`κ₂ = 1`, `κ₃ = −1`), an in-type upper-flank contact at `N` with no in-type lower-flank contact at `S` is impossible — at `N` the colours
+`c, g, h`, the ring colours `r₊ ≠ r₋` of the tiles holding the arcs of `ω(E)` leaving `N`, and the upper neighbours `x₁ ≠ x₂` of the
+`h`-tiles `Q±` are seven distinct colours. A child of `cv_hd_main` (FS131-I5l), a step inside a proof by contradiction: no model expected. -/
+theorem cv_hd_main_inType {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.coloursAt E).ncard = 3)
+    {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₄ : ℝ} (hH : F.IsHorn E α κ₁ 1 c)
+    (hH' : F.IsHorn E (α + π) (-1) κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α 1 g) (hh : F.IsFlankBelow E α κ₁ h)
+    (hGN : F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2)))
+    (hnoHS : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) : False := by
   sorry
+
+/-- **FS114-CV-HD, the main clause**: in a terminal valid six-coloured map, at a stuck vertex `E` with three colours whose two-sector
+colour `c` has horns along `±e α`, both upper bounds `1` (the `+e α` horn's upper arc and the `−e α` horn's arc on the `N` side on
+`ω(N)`: `κ₂ = 1`, `κ₃ = −1`) and no in-type lower-flank tile at `E − n` is impossible. A step inside a proof by contradiction where no
+model is expected (`cv_hd`'s cycle consumes it). -/
+theorem cv_hd_main {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.coloursAt E).ncard = 3)
+    {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₃ κ₄ : ℝ} (hH : F.IsHorn E α κ₁ κ₂ c)
+    (hH' : F.IsHorn E (α + π) κ₃ κ₄ c) {h : Fin 6} (hh : F.IsFlankBelow E α κ₁ h)
+    (hυ : κ₂ = 1 ∧ κ₃ = -1)
+    (hnoHS : ¬ (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) : False := by
+  -- CVB § 1.6's two branches on `G_N`: seven colours at `N` (`cv_hd_main_inType`), or Y3-END-NEEDS as corrected (`y3_end_needs`)
+  obtain ⟨hF, hP, hT, -⟩ := id hM
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  obtain ⟨h1, h2⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH
+  obtain ⟨h3', h4⟩ := horn_bounds_of_noMerge hF (hvC E) hst.1 le_rfl hc2 hH'
+  obtain ⟨hN, hS⟩ := horn_poles_contact hF (hvC E) hst.1 le_rfl hc2 hH
+  obtain ⟨g, h₀, -, -, -, -, -, hg, hh₀, -, -, -⟩ := stuck_flanks_ua hF (hvC E) hst h3.le hH hH' h1 h2 h3' h4 hc2 hN hS
+  have hhh : h₀ = h := IsFlankBelow.unique hh₀ hh
+  subst hhh
+  obtain ⟨rfl, rfl⟩ := hυ
+  by_cases hGN : F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2))
+  · exact cv_hd_main_inType hM hst h3 hc2 hH hH' hg hh hGN hnoHS
+  · exact y3_end_needs hF hP hT hst h3 hc2 hH hH' hg hh hGN hnoHS
+
+/-- **FS114-CV-HD, the equivalences**: in a terminal valid six-coloured map, at a stuck vertex `E` with three colours (horns of `c` along
+`±e α`, upper flank `g`, lower flank `h`), the four conditions are equivalent — `G_N` (an in-type `g`-contact at `N`), `H_S` (an in-type
+`h`-contact at `S`), `υ± = 1` (`κ₂ = 1 ∧ κ₃ = −1`: both horns' `N`-side arcs on `ω(N)`) and `λ± = −1` (`κ₁ = −1 ∧ κ₄ = 1`: both `S`-side
+arcs on `ω(S)`). Model of the local hypotheses with all four conditions: `bowtie` at `0` (a fragment; `GENERIC` on terminal plane maps). -/
+theorem cv_hd {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuck E) (h3 : (F.coloursAt E).ncard = 3)
+    {c : Fin 6} (hc2 : F.HasSectors E c 2) {α κ₁ κ₂ κ₃ κ₄ : ℝ} (hH : F.IsHorn E α κ₁ κ₂ c)
+    (hH' : F.IsHorn E (α + π) κ₃ κ₄ c) {g h : Fin 6} (hg : F.IsFlankAbove E α κ₂ g) (hh : F.IsFlankBelow E α κ₁ h) :
+    ((F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2))) ↔
+        (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2)))) ∧
+      ((F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2))) ↔ (κ₂ = 1 ∧ κ₃ = -1)) ∧
+      ((κ₂ = 1 ∧ κ₃ = -1) ↔ (κ₁ = -1 ∧ κ₄ = 1)) := by
+  -- the cycle `G_N → υ± → H_S → λ± → G_N` (CVB § 1.6, "Hence"): two Siamese arrows and the main clause, each in both frames
+  obtain ⟨hF, hP, -, -⟩ := id hM
+  obtain ⟨hH2, hhd, hgd, hNS, hSN⟩ := stuck_turned_frame hF hP hst h3.le hc2 hH hH' hg hh
+  have A : (F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2))) → κ₂ = 1 ∧ κ₃ = -1 :=
+    upper_bounds_of_inType_N hF hP hst h3.le hc2 hH hH' hg
+  have B : κ₂ = 1 ∧ κ₃ = -1 → (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2))) := fun hυ => by
+    by_contra hno
+    exact cv_hd_main hM hst h3 hc2 hH hH' hh hυ hno
+  have C : (F.IsContact E h (E - e (α + π / 2)) ∧ F.InType E h (E - e (α + π / 2))) → κ₁ = -1 ∧ κ₄ = 1 := fun hx => by
+    have := upper_bounds_of_inType_N hF hP hst h3.le hc2 hH' hH2 hhd (by rw [hNS]; exact hx)
+    exact ⟨this.2, this.1⟩
+  have D : κ₁ = -1 ∧ κ₄ = 1 → (F.IsContact E g (E + e (α + π / 2)) ∧ F.InType E g (E + e (α + π / 2))) := fun hl => by
+    by_contra hno
+    exact cv_hd_main hM hst h3 hc2 hH' hH2 hgd ⟨hl.2, hl.1⟩ (by rw [hSN]; exact hno)
+  exact ⟨⟨fun x => B (A x), fun x => D (C x)⟩, ⟨fun x => A (D (C x)), B⟩, ⟨fun x => C (B x), fun x => A (D x)⟩⟩
+
+/-! ## FS112-Y3-END-NEEDS (corrected), FS112-C-ENDS, FS112-C-DOUBLE, FS112-N3-END's chain clause -/
 
 /-- **FS112-C-DOUBLE** (caution C116: a regrade only): in a terminal valid six-coloured map (`IsTerminalMap` — the reading of "terminal
 valid map" settled here, § 2.2 of the plan: wave 4's `Terminal` and N2-TERM's clause 1), a stuck vertex `E` with three colours all
@@ -804,7 +914,50 @@ theorem c_double {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuc
       (∃ θ₁, θ₁ < α - π / 2 ∧ F.IsQArc (E + e (α + π / 2)) θ₁ (α - π / 2)) ∧
       (∃ θ₁, θ₁ < α + π / 2 ∧ F.IsQArc (E - e (α + π / 2)) θ₁ (α + π / 2)) ∧
       (∃ θ₂, α + π / 2 < θ₂ ∧ F.IsQArc (E - e (α + π / 2)) (α + π / 2) θ₂) := by
-  sorry
+  -- CV-HD's cycle gives `H_S` and `G_N`; each horn-bounding arc is FLANK-Q's ring arc, both-kind at its centre (the in-type flank colour and
+  -- the out-type `c`), so not (R2): (Q) by `QROnly`, with at least four colours (FS114-CVB § 1.6, "Hence")
+  obtain ⟨hF, hP, -, hQR⟩ := id hM
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  obtain ⟨-, hhd, hgd, hNS, hSN⟩ := stuck_turned_frame hF hP hst h3.le hc2 hH hH' hg hh
+  obtain ⟨hGH, hHυ, -⟩ := cv_hd hM hst h3 hc2 hH hH' hg hh
+  have hHS := hHυ.mpr ⟨rfl, rfl⟩
+  have hGN := hGH.mpr hHS
+  obtain ⟨hcN, hcS⟩ := horn_poles_contact hF (hvC E) hst.1 le_rfl hc2 hH
+  -- `N`: the `+e α` horn's upper arc
+  obtain ⟨θ₂, hθ₂, -, hQN₁⟩ := flankQ_upper_of_qrOnly hF hQR (hvC E) hH hg hcN
+  have hQN₁' : F.IsQArc (E + e (α + π / 2)) (α - π / 2) θ₂ := by
+    rcases hQN₁ with ⟨hQ, -⟩ | ⟨-, hgN, -⟩
+    · exact hQ
+    · exact absurd hGN.1.2.2 hgN
+  -- `N`: the `−e α` horn's arc on the `N` side (its lower arc in its own frame)
+  obtain ⟨θ₁, hθ₁, -, hQN₂⟩ := flankQ_lower_of_qrOnly hF hQR (hvC E) hH' hgd (by rw [hSN]; exact hcN)
+  rw [hSN] at hQN₂
+  have hQN₂' : F.IsQArc (E + e (α + π / 2)) θ₁ (α + π + π / 2) := by
+    rcases hQN₂ with ⟨hQ, -⟩ | ⟨-, hgN, -⟩
+    · exact hQ
+    · exact absurd hGN.1.2.2 hgN
+  -- `S`: the `+e α` horn's lower arc
+  obtain ⟨θ₃, hθ₃, -, hQS₁⟩ := flankQ_lower_of_qrOnly hF hQR (hvC E) hH hh hcS
+  have hQS₁' : F.IsQArc (E - e (α + π / 2)) θ₃ (α + π / 2) := by
+    rcases hQS₁ with ⟨hQ, -⟩ | ⟨-, hhS, -⟩
+    · exact hQ
+    · exact absurd hHS.1.2.2 hhS
+  -- `S`: the `−e α` horn's arc on the `S` side (its upper arc in its own frame)
+  obtain ⟨θ₄, hθ₄, -, hQS₂⟩ := flankQ_upper_of_qrOnly hF hQR (hvC E) hH' hhd (by rw [hNS]; exact hcS)
+  rw [hNS, show α + π - π / 2 = α + π / 2 by ring] at hQS₂
+  rw [show α + π - π / 2 = α + π / 2 by ring] at hθ₄
+  have hQS₂' : F.IsQArc (E - e (α + π / 2)) (α + π / 2) θ₄ := by
+    rcases hQS₂ with ⟨hQ, -⟩ | ⟨-, hhS, -⟩
+    · exact hQ
+    · exact absurd hHS.1.2.2 hhS
+  have hN2 := hQN₂'.add_int_mul (-1)
+  rw [show α + π + π / 2 + 2 * π * ((-1 : ℤ) : ℝ) = α - π / 2 by push_cast; ring] at hN2
+  have hN4 : 4 ≤ (F.coloursAt (E + e (α + π / 2))).ncard := by
+    obtain ⟨-, -, -, -, -, h4⟩ := hQN₁'; exact h4
+  have hS4 : 4 ≤ (F.coloursAt (E - e (α + π / 2))).ncard := by
+    obtain ⟨-, -, -, -, -, h4⟩ := hQS₁'; exact h4
+  exact ⟨hGN, hHS, hN4, hS4, ⟨θ₂, hθ₂, hQN₁'⟩,
+    ⟨θ₁ + 2 * π * ((-1 : ℤ) : ℝ), by push_cast; linarith, hN2⟩, ⟨θ₃, hθ₃, hQS₁'⟩, ⟨θ₄, hθ₄, hQS₂'⟩⟩
 
 /-! ## NB3-END item 2: two sectors of the upper flank at `S′` (FS131-I5i, E5 § 3.4 over SEP) -/
 
@@ -1619,20 +1772,6 @@ theorem flank_coneAt_S (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {α κ₂ : 
   refine ⟨y, hy, hyS, hyε, ?_⟩
   simpa using hdir
 
-/-- **One colour flanks a horn from below** (the mirror of `IsFlankAbove.unique`): two lower flanks at one bound share the band between it
-and the higher of their lower limits. Model of the hypotheses: `bowtie` at `0` (`bowtie_flanks`). -/
-theorem IsFlankBelow.unique {v : ℂ} {α κ : ℝ} {h h' : Fin k} (hh : F.IsFlankBelow v α κ h) (hh' : F.IsFlankBelow v α κ h') :
-    h = h' := by
-  obtain ⟨a, ha, hev⟩ := hh
-  obtain ⟨b, hb, hev'⟩ := hh'
-  obtain ⟨r, ⟨hr1, hr2⟩, hr0⟩ := ((hev.and hev').and self_mem_nhdsWithin).exists
-  have hab := max_lt ha hb
-  obtain ⟨z, hz, -, -⟩ := exists_mem_hornSet_aboveBelow v α (κ₁ := max a b) (κ₂ := κ) (s := (max a b + κ) / 2)
-    (m := κ + 1) hr0 (by linarith) (by linarith) (by intro h; linarith)
-  have z1 := hr1 (hornSet_mono (le_max_left a b) le_rfl hz)
-  have z2 := hr2 (hornSet_mono (le_max_right a b) le_rfl hz)
-  exact z1.2.symm.trans z2.2
-
 /-- **E5 § 3.4 at any bounds** (E5 § 3.5's "by § 3.4's argument with `cv_class`'s bounds"): at a stuck vertex with three colours whose
 two-sector colour `c` has horns along `±e α` with bounds in `[−1, 1]`, an upper flank `g` with no in-type contact at `N` has at least two
 sectors at `S′ = v − n` for every small radius. `flank_two_sectors_at_S`'s argument (E5's F1–F6), with both ends of the half-disc closed:
@@ -2106,6 +2245,186 @@ theorem cv_class {F : ArcMap 6} (hM : F.IsTerminalMap) {E : ℂ} (hst : F.IsStuc
     exact ⟨hgS, hhN, Or.inl (isStuck_of_hasRepeatedColour hT (hdom _) ⟨h, hhN⟩),
       Or.inl (isStuck_of_hasRepeatedColour hT (hdom _) ⟨g, hgS⟩)⟩
 
+/-! ## FS112-C-ENDS (placed after `cv_class`, which it reads) -/
+
+/-- `StuckAlong` reads its axis only through `e α`. -/
+theorem StuckAlong.congr {v : ℂ} {α α' : ℝ} (he : e α = e α') (h : F.StuckAlong v α) : F.StuckAlong v α' := by
+  obtain ⟨hst, c, m, κ₁, κ₂, hm, hc, hH⟩ := h
+  exact ⟨hst, c, m, κ₁, κ₂, hm, hc, hH.congr he⟩
+
+/-- **The stuck structure along a given horn's axis**: at a stuck vertex with at most three colours, a horn of a colour with two or more
+sectors along `e α` is one of the two horns of `stuck_structure_ua`, so its structure (the opposite horn, two sectors, three colours, the
+flanks) holds along `e α` itself (`e_eq_or_of_two_horns`; along the opposite axis the flanks swap). Inhabitant of the hypotheses: `bowtie`
+at `0`. -/
+theorem stuck_structure_at_axis (hF : F.Valid) {w : ℂ} (hv : F.Covers w 1) (hst : F.IsStuck w)
+    (h3 : (F.coloursAt w).ncard ≤ 3) {c : Fin k} {m : ℕ} (hm : 2 ≤ m) (hc : F.HasSectors w c m) {α κ₁ κ₂ : ℝ}
+    (hH : F.IsHorn w α κ₁ κ₂ c) :
+    ∃ κ₁' κ₂' κ₃ κ₄ : ℝ, ∃ g h : Fin k, F.IsHorn w α κ₁' κ₂' c ∧ F.IsHorn w (α + π) κ₃ κ₄ c ∧ F.HasSectors w c 2 ∧
+      (F.coloursAt w).ncard = 3 ∧ F.IsFlankAbove w α κ₂' g ∧ F.IsFlankBelow w α κ₁' h := by
+  obtain ⟨β, κ₁', κ₂', κ₃, κ₄, g, h, Hu, Hd, -, -, -, -, hc2, -, hcol, hgh, hgc, hhc, fa, fb, fa', fb', -⟩ :=
+    stuck_structure_ua hF hv hst h3 hm hc
+  have h3' : (F.coloursAt w).ncard = 3 := by
+    rw [hcol, Set.ncard_insert_of_notMem (by simp [hgc.symm, hhc.symm]), Set.ncard_pair hgh]
+  rcases e_eq_or_of_two_horns hc2 Hu Hd hH with he | he
+  · have he' : e (β + π) = e (α + π) := by rw [e_add_pi', e_add_pi', he]
+    exact ⟨κ₁', κ₂', κ₃, κ₄, g, h, Hu.congr he.symm, Hd.congr he', hc2, h3', fa.congr he.symm, fb.congr he.symm⟩
+  · have he' : e β = e (α + π) := by rw [e_add_pi', he, e_add_pi', neg_neg]
+    exact ⟨κ₃, κ₄, κ₁', κ₂', h, g, Hd.congr he.symm, Hu.congr he', hc2, h3', fa'.congr he.symm, fb'.congr he.symm⟩
+
+/-- **The axis propagates to a chain neighbour** (the plan's `stuckAlong_of_run`, § 9.1: "the cone colour alternates, the axis does not"):
+if `v` is stuck along `±e α` and its neighbour `w = v ± n` is a chain vertex, then `w` is stuck along `±e α`. A colour of `v` (its
+two-sector colour, whose out-type contacts sit at `v ± n`) is carried at `w`, and at the chain vertex `w` every colour approaches along both
+directions of `w`'s axis `β`; `v` is a contact of that colour on `ω(w)`, of one type, whose half-plane holds `e β` and `−e β`, so
+`e β ⊥ v − w`. No `≤ 3` colours at `v` and no terminality are read. Inhabitant of the hypotheses: none known on a plane map (a two-vertex
+stuck chain, FS-115); `GENERIC`. -/
+theorem stuckAlong_of_run (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {α : ℝ}
+    (hv : F.StuckAlong v α ∨ F.StuckAlong v (α + π)) {w : ℂ}
+    (hw : w = v + e (α + π / 2) ∨ w = v - e (α + π / 2)) (hwc : F.IsChainVertex w) :
+    F.StuckAlong w α ∨ F.StuckAlong w (α + π) := by
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  -- a colour of `v` carried at `w`: the two-sector colour, whose out-type contacts sit at `v ± n`
+  have hcol : ∃ c, c ∈ F.coloursAt v ∧ c ∈ F.coloursAt w := by
+    have key : ∀ α' : ℝ, F.StuckAlong v α' → (e (α' + π / 2) = e (α + π / 2) ∨ e (α' + π / 2) = -e (α + π / 2)) →
+        ∃ c, c ∈ F.coloursAt v ∧ c ∈ F.coloursAt w := by
+      intro α' ⟨hst, c, m, κ₁, κ₂, hm, hc, hH⟩ he
+      obtain ⟨hN, hS⟩ := horn_poles_contact hF (hvC v) hst.1 hm hc hH
+      refine ⟨c, hN.1.1, ?_⟩
+      rcases he with he | he <;> rcases hw with rfl | rfl
+      · rw [← he]; exact hN.1.2.2
+      · rw [← he]; exact hS.1.2.2
+      · rw [← neg_neg (e (α + π / 2)), ← he, ← sub_eq_add_neg]; exact hS.1.2.2
+      · rw [sub_eq_add_neg, ← he]; exact hN.1.2.2
+    rcases hv with h | h
+    · exact key α h (Or.inl rfl)
+    · exact key (α + π) h (Or.inr (by rw [show α + π + π / 2 = (α + π / 2) + π by ring, e_add_pi']))
+  obtain ⟨c, hcv, hcw⟩ := hcol
+  have hvw : dist v w = 1 := by
+    rcases hw with rfl | rfl
+    · rw [dist_eq_norm, show v - (v + e (α + π / 2)) = -e (α + π / 2) by ring, norm_neg, norm_e]
+    · rw [dist_eq_norm, show v - (v - e (α + π / 2)) = e (α + π / 2) by ring, norm_e]
+  -- the chain vertex `w`: its axis `β`, along which every colour (`c` among them) approaches both ways
+  obtain ⟨hstw, h3w⟩ := hwc
+  obtain ⟨c', m', hm', hc'⟩ := hstw.2.2.2
+  obtain ⟨β, κ₁, κ₂, κ₃, κ₄, g, h, Hu, Hd, -, -, -, -, hc2, -, hcolw, -, -, -, fa, fb, fa', fb', -⟩ :=
+    stuck_structure_ua hF (hvC w) hstw h3w hm' hc'
+  have hcone : β ∈ coneAt (F.region c) w ∧ β + π ∈ coneAt (F.region c) w := by
+    rw [hcolw] at hcw
+    simp only [mem_insert_iff, mem_singleton_iff] at hcw
+    rcases hcw with rfl | rfl | rfl
+    · exact ⟨Hu.mem_coneAt_region, Hd.mem_coneAt_region⟩
+    · exact ⟨fa.mem_coneAt, fb'.mem_coneAt⟩
+    · exact ⟨fb.mem_coneAt, fa'.mem_coneAt⟩
+  -- `v` is a contact of `c` on `ω(w)`, of one type: both `e β` and `−e β` lie in its half-plane, so `e β ⊥ v − w`
+  have hcont : F.IsContact w c v := ⟨hcw, hvw, hcv⟩
+  have hA1 := coneAt_subset_allowedCone hF (hvC w) hcone.1 v hcont
+  have hA2 := coneAt_subset_allowedCone hF (hvC w) hcone.2 v hcont
+  have hdot : dot (e β) (v - w) = 0 := by
+    rw [e_add_pi', dot_neg_left] at hA2
+    rcases (contact_inType_or_outType hF (hvC w) hcont).1 with hi | ho
+    · have := hA1.1 hi; have := hA2.1 hi; linarith
+    · have := hA1.2 ho; have := hA2.2 ho; linarith
+  have hsin : Real.sin (β - α) = 0 := by
+    have hcos : Real.cos (β - (α + π / 2)) = 0 := by
+      rcases hw with rfl | rfl
+      · rw [show v - (v + e (α + π / 2)) = -e (α + π / 2) by ring, dot_neg_right, dot_e_e] at hdot; linarith
+      · rw [show v - (v - e (α + π / 2)) = e (α + π / 2) by ring, dot_e_e] at hdot; exact hdot
+    rwa [show β - (α + π / 2) = (β - α) - π / 2 by ring, Real.cos_sub_pi_div_two] at hcos
+  rcases e_eq_or_of_sin_sub_eq_zero hsin with he | he
+  · exact Or.inl ⟨hstw, c', 2, κ₁, κ₂, le_rfl, hc2, Hu.congr he⟩
+  · exact Or.inr ⟨hstw, c', 2, κ₁, κ₂, le_rfl, hc2, Hu.congr he⟩
+
+/-- **Every vertex of the stuck run is stuck along `±e α`** (`stuckAlong_of_run` by induction on `|j|`). -/
+theorem stuckAlong_of_mem_stuckRun (hF : F.Valid) (hP : F.IsPlaneMap) {v : ℂ} {α : ℝ} (hv : F.StuckAlong v α) {j : ℤ}
+    (hj : j ∈ F.stuckRun v α) :
+    F.StuckAlong (v + (j : ℂ) * e (α + π / 2)) α ∨ F.StuckAlong (v + (j : ℂ) * e (α + π / 2)) (α + π) := by
+  suffices H : ∀ m : ℕ, ∀ i : ℤ, i.natAbs = m → i ∈ F.stuckRun v α →
+      F.StuckAlong (v + (i : ℂ) * e (α + π / 2)) α ∨ F.StuckAlong (v + (i : ℂ) * e (α + π / 2)) (α + π) from
+    H _ j rfl hj
+  intro m
+  induction m with
+  | zero =>
+    intro i hi _
+    rw [Int.natAbs_eq_zero.mp hi]
+    left; simpa using hv
+  | succ m ih =>
+    intro i hi hir
+    have hi0 : i ≠ 0 := by rintro rfl; simp at hi
+    rcases lt_or_gt_of_ne hi0 with hneg | hpos
+    · -- `i < 0`: from `i + 1`
+      have hir' : i + 1 ∈ F.stuckRun v α := mem_stuckRun_of_between hir (by omega) (by omega)
+      have hP' := ih (i + 1) (by omega) hir'
+      refine stuckAlong_of_run hF hP hP' (Or.inr ?_) (isChainVertex_of_mem_stuckRun hir)
+      push_cast; ring
+    · have hir' : i - 1 ∈ F.stuckRun v α := mem_stuckRun_of_between hir (by omega) (by omega)
+      have hP' := ih (i - 1) (by omega) hir'
+      refine stuckAlong_of_run hF hP hP' (Or.inl ?_) (isChainVertex_of_mem_stuckRun hir)
+      push_cast; ring
+
+/-- **Each neighbour of a chain vertex along its axis carries four colours or is stuck** (CV-CLASS, `cv_class`, in both of its cases). -/
+theorem four_or_stuck_of_chainVertex {F : ArcMap 6} (hM : F.IsTerminalMap) {w : ℂ} {α : ℝ} (hw : F.StuckAlong w α)
+    (h3 : (F.coloursAt w).ncard ≤ 3) :
+    (4 ≤ (F.coloursAt (w + e (α + π / 2))).ncard ∨ F.IsStuck (w + e (α + π / 2))) ∧
+      (4 ≤ (F.coloursAt (w - e (α + π / 2))).ncard ∨ F.IsStuck (w - e (α + π / 2))) := by
+  obtain ⟨hF, hP, -, -⟩ := id hM
+  have hvC : ∀ x, F.Covers x 1 := fun x z _ => by rw [hP]; exact mem_univ z
+  obtain ⟨hst, c, m, κ₁, κ₂, hm, hc, hH⟩ := hw
+  obtain ⟨κ₁', κ₂', κ₃, κ₄, g, h, Hu, Hd, hc2, h3', hg, hh⟩ := stuck_structure_at_axis hF (hvC w) hst h3 hm hc hH
+  rcases cv_class hM hst h3' hc2 Hu Hd hg hh with ⟨-, -, -, -, hN, hS, -⟩ | ⟨-, -, hN, hS⟩
+  · exact ⟨Or.inl hN, Or.inl hS⟩
+  · exact ⟨hN.symm, hS.symm⟩
+
+/-- **FS112-C-ENDS** in its erratum's form (caution C116; `plans/FS112-derivation.md:443` item 2) — FS114-CV-HD's (CV-ENDS): in a
+terminal valid six-coloured map, the point of the normal line one step beyond each finite end of a stuck chain has at least four colours.
+The chain is the stuck run through a vertex stuck along `e α`; its upper end is a member `j` with `j + 1` outside, its lower end a member
+with `j − 1` outside. No model of a stuck chain in a terminal valid plane map is known (`GENERIC`, FS-115). Route (FS114-CVB § 1.8, CV-ENDS): the end vertex is a
+chain vertex whose axis is `±e α` (`stuckAlong_of_mem_stuckRun`, the plan's `stuckAlong_of_run` by induction along the run); CV-CLASS there
+(`cv_class`) makes each neighbour along `±n` four-coloured or stuck (`four_or_stuck_of_chainVertex`), and the neighbour beyond the end is not a
+chain vertex, so a stuck one carries at least four colours. Placed after `cv_class`. -/
+theorem c_ends {F : ArcMap 6} (hM : F.IsTerminalMap) {v : ℂ} {α : ℝ} (hv : F.StuckAlong v α) {j : ℤ}
+    (hj : j ∈ F.stuckRun v α) :
+    (j + 1 ∉ F.stuckRun v α → 4 ≤ (F.coloursAt (v + ((j + 1 : ℤ) : ℂ) * e (α + π / 2))).ncard) ∧
+      (j - 1 ∉ F.stuckRun v α → 4 ≤ (F.coloursAt (v + ((j - 1 : ℤ) : ℂ) * e (α + π / 2))).ncard) := by
+  obtain ⟨hF, hP, -, -⟩ := id hM
+  set w := v + (j : ℂ) * e (α + π / 2) with hwdef
+  have hw3 : (F.coloursAt w).ncard ≤ 3 := (isChainVertex_of_mem_stuckRun hj).2
+  -- a neighbour outside the run is not a chain vertex
+  have hout : ∀ s : ℤ, (s = 1 ∨ s = -1) → j + s ∉ F.stuckRun v α →
+      ¬ F.IsChainVertex (v + ((j + s : ℤ) : ℂ) * e (α + π / 2)) := by
+    intro s hs hns hcv
+    apply hns
+    intro i hi1 hi2
+    by_cases hij : i = j + s
+    · rw [hij]; exact hcv
+    · exact isChainVertex_of_mem_stuckRun
+        (mem_stuckRun_of_between hj (by rcases hs with rfl | rfl <;> omega) (by rcases hs with rfl | rfl <;> omega))
+  -- each neighbour of `w` along `±n` has four colours or is stuck
+  have hnb : ∀ x, (x = w + e (α + π / 2) ∨ x = w - e (α + π / 2)) → 4 ≤ (F.coloursAt x).ncard ∨ F.IsStuck x := by
+    intro x hx
+    rcases stuckAlong_of_mem_stuckRun hF hP hv hj with h | h
+    · have := four_or_stuck_of_chainVertex hM h hw3
+      rcases hx with rfl | rfl
+      · exact this.1
+      · exact this.2
+    · have := four_or_stuck_of_chainVertex hM h hw3
+      rw [sub_e_add_pi_add, add_e_add_pi_add] at this
+      rcases hx with rfl | rfl
+      · exact this.2
+      · exact this.1
+  have hfin : ∀ s : ℤ, (s = 1 ∨ s = -1) → j + s ∉ F.stuckRun v α →
+      4 ≤ (F.coloursAt (v + ((j + s : ℤ) : ℂ) * e (α + π / 2))).ncard := by
+    intro s hs hns
+    have hx : v + ((j + s : ℤ) : ℂ) * e (α + π / 2) = w + e (α + π / 2) ∨
+        v + ((j + s : ℤ) : ℂ) * e (α + π / 2) = w - e (α + π / 2) := by
+      rcases hs with rfl | rfl
+      · left; rw [hwdef]; push_cast; ring
+      · right; rw [hwdef]; push_cast; ring
+    rcases hnb _ hx with h4 | hst
+    · exact h4
+    · by_contra hlt
+      exact hout s hs hns ⟨hst, by omega⟩
+  exact ⟨fun h => hfin 1 (Or.inl rfl) h, fun h => by
+    have := hfin (-1) (Or.inr rfl) (by simpa [sub_eq_add_neg] using h)
+    simpa [sub_eq_add_neg] using this⟩
 
 end ArcMap
 

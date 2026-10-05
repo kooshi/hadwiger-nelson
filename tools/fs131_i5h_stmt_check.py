@@ -33,8 +33,10 @@ def main():
     base = sys.argv[1]
     if '--self-test' in sys.argv:
         plants = {
-            'hypothesis changed (n3_end_of_not_inType)': lambda f, t: t.replace('(h3 : (F.coloursAt v).ncard = 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α (-1) κ₂ c)\n    (hno',
-                                                                           '(h3 : (F.coloursAt v).ncard ≤ 3) (hc2 : F.HasSectors v c 2) (hH : F.IsHorn v α (-1) κ₂ c)\n    (hno', 1) if f.endswith('Terminal.lean') else t,
+            # FS131-I5l: aimed inside `n3_end_of_not_inType` itself — the bare string first matched `n3_end_four_colours` (added after the
+            # base, so unchecked), and the plant stopped firing
+            'hypothesis changed (n3_end_of_not_inType)': lambda f, t: (lambda i: t[:i] + t[i:].replace('(h3 : (F.coloursAt v).ncard = 3)',
+                                                                           '(h3 : (F.coloursAt v).ncard ≤ 3)', 1))(t.index('theorem n3_end_of_not_inType')) if f.endswith('Terminal.lean') else t,
             'conclusion changed (cv_exists)': lambda f, t: t.replace('∃ x, 4 ≤', '∃ x, 3 ≤', 1) if f.endswith('BaseDense.lean') else t,
             'declaration renamed (cv_class)': lambda f, t: t.replace('theorem cv_class ', 'theorem cv_class_renamed ', 1) if f.endswith('Terminal.lean') else t,
         }

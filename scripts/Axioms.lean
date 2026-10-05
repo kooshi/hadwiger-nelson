@@ -3610,6 +3610,16 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.exists_tanAbove_of_sector_end
 #print axioms HadwigerNelson.Plane.ArcMap.IsFlankBelow.unique
 #print axioms HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S_gen
+-- FS131-I5l (extending this block): CV-HD's arrows, the turned frame, C-ENDS's run propagation, CV-EXISTS's chain step (`Terminal`)
+#print axioms HadwigerNelson.Plane.ArcMap.upper_bounds_of_inType_N
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_turned_frame
+#print axioms HadwigerNelson.Plane.ArcMap.cv_hd_main_inType
+#print axioms HadwigerNelson.Plane.ArcMap.IsQArc.add_int_mul
+#print axioms HadwigerNelson.Plane.ArcMap.StuckAlong.congr
+#print axioms HadwigerNelson.Plane.ArcMap.stuck_structure_at_axis
+#print axioms HadwigerNelson.Plane.ArcMap.stuckAlong_of_run
+#print axioms HadwigerNelson.Plane.ArcMap.stuckAlong_of_mem_stuckRun
+#print axioms HadwigerNelson.Plane.ArcMap.four_or_stuck_of_chainVertex
 
 #eval IO.println "=== PURCHASED ==="
 

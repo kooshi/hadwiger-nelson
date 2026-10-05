@@ -1638,3 +1638,63 @@ to date, nothing built, 8 modules with warnings**, exit 0 (`build/gate/build/202
 `BaseDense` 3 (`cv_exists` among them), `MapGraph` 3 — wave 5 **25**, I5k's count.
 
 ## Stage 35 — SAVED
+
+## Stage 36 — SAVED (FS131-I5l): `cv_hd`, `c_double`, `c_ends` proved; `cv_hd_main` reduced to its branch `G_N` and `y3_end_needs`
+
+**What this stage proves.** `cv_hd` (FS114-CV-HD's equivalences), `c_double` (FS112-C-DOUBLE) and `c_ends` (FS112-C-ENDS, erratum form) no longer
+use `sorry` themselves; `cv_hd_main` is assembled over its two branches. No statement changed; no `axiom`; no `native_decide`. Declarations moved
+(statements untouched, `tools/fs131_i5h_stmt_check.py` reads by name): `IsFlankBelow.unique` up before CV-HD (it is read there now), `y3_end_needs`
+before `cv_hd_main` (its `¬G_N` branch), `c_ends` after `cv_class` (it reads CV-CLASS), under a section "FS112-C-ENDS (placed after `cv_class`)".
+
+**The routes** (every step went through; none failed):
+
+| leaf | hand route | Lean |
+|---|---|---|
+| `cv_hd` | CVB § 1.6 "Hence": `G_N ⇒ υ± ⇒ H_S ⇒ λ± ⇒ G_N` | the Siamese arrow `upper_bounds_of_inType_N` (n3_end's second-branch argument at any lower bounds) and `cv_hd_main`, each in both frames; the frame turned by `π` is `stuck_turned_frame` (the horn along `α + π + π`, the flanks swapped, the poles swapped) |
+| `cv_hd_main` | CVB § 1.6, two branches on `G_N` | `¬G_N`: `y3_end_needs` (its statement verbatim); `G_N`: the new child **`cv_hd_main_inType`** (open), CVB's "Branch `G_N`" (seven colours at `N`) |
+| `c_double` | CVB § 1.6 "Hence" (FS114-CV's route, R-CDOUBLE) | `cv_hd` gives `H_S` and `G_N` from `υ± = 1`; each horn arc is FLANK-Q's ring arc (`flankQ_upper_of_qrOnly`, `flankQ_lower_of_qrOnly`, in both frames), its (R2) branch excluded by the in-type flank colour carried at the centre, so (Q) with four colours; the `−a` horn's `N` arc is read a turn back (`IsQArc.add_int_mul`) |
+| `c_ends` | CVB § 1.8 (CV-ENDS) | the end vertex is a chain vertex stuck along `±e α` (`stuckAlong_of_mem_stuckRun`: the plan's `stuckAlong_of_run` by induction on `\|j\|`); CV-CLASS there (`cv_class`, with the axis fixed by `stuck_structure_at_axis`) makes each neighbour along `±n` four-coloured or stuck (`four_or_stuck_of_chainVertex`); the neighbour beyond the end is not a chain vertex, so a stuck one has four colours |
+
+**`stuckAlong_of_run` (plan § 9.1, "M–H; the one structural lemma the chain rows share")**, proved by a shorter route than NB3's: a colour of
+`v` (the two-sector colour, out-type at `v ± n`) is carried at the chain neighbour `w`; at `w` every colour approaches along both directions of
+`w`'s axis `β` (`stuck_structure_ua`); `v` is a contact of that colour on `ω(w)`, of one type, so both `e β` and `−e β` lie in one closed
+half-plane (`coneAt_subset_allowedCone`), forcing `e β ⊥ v − w`. **A generalization** for the report: the axis propagates with no use of `≤ 3`
+colours at `v`, of terminality, or of the cone colour's alternation.
+
+**Children added** (all `Terminal`, all proved): `upper_bounds_of_inType_N`, `stuck_turned_frame`, `IsQArc.add_int_mul`, `StuckAlong.congr`,
+`stuck_structure_at_axis`, `stuckAlong_of_run`, `stuckAlong_of_mem_stuckRun`, `four_or_stuck_of_chainVertex`; one open child, `cv_hd_main_inType`
+(CVB § 1.6's branch `G_N`, stated as the branch: `hυ` substituted, `G_N` and `¬H_S` as hypotheses). Names checked unique by `git grep` over
+`main`, `origin/fs131-w5`, `origin/fs131-w5p`, `origin/fs131-ww`, `origin/fs131-w4mm` (to be re-run at the next stage before the handover).
+
+**A tool defect, fixed** (my touches include `tools/fs131_i5h_*.py`): `tools/fs131_i5h_stmt_check.py --self-test`'s first plant **did not fire** —
+its bare string first matched `n3_end_four_colours` (added after the base `72149b07`, so unchecked), and the plant edited that instead. Re-aimed
+inside `n3_end_of_not_inType`; the self-test now fires all three plants, the unplanted control passes.
+
+**Statements unchanged**: `tools/fs131_i5h_stmt_check.py 72149b07`: **PASS** (exit 0); `… 8458054e` (my launch): **PASS**.
+
+**The build** (slot 40 GiB, 8 cpus, `BATCH=4`): **OK — 447 of 447 batches, 5 modules rebuilt, 8 with warnings, every warning `declaration uses
+'sorry'`**, exit 0, 8 min 49 s (`build/gate/build/20261005T061611Z-1871940.log`, ends "Build completed successfully (5370 jobs)"; driver log
+`data/fs131/i5l/build-stage36.log`). `Terminal`'s `sorry` declarations: **4** (`exists_red`, `exists_terminal`, `y3_end_needs`, `cv_hd_main_inType`);
+wave 5 **22** (25 at launch).
+
+**Axioms, read from this build's oleans** (`data/fs131/i5l/I5lAxioms36.lean` → `I5lAxioms36.out`, 12 GiB slot, exit 0): the eight proved children
+on `[propext, Classical.choice, Quot.sound]`; `cv_hd_main`, `cv_hd`, `c_double`, `four_or_stuck_of_chainVertex`, `c_ends` read `sorryAx` (through
+`cv_hd_main_inType`, `y3_end_needs`, and the branch's stale `flankQ_upper`/`flankQ_lower`, proved on `main`); controls: `y3_end_needs` reads
+`sorryAx`, `ArcMap.linkage_dot_ne_zero` the standard three. `scripts/Axioms.lean`: the nine new records added to the "FS131-I5h" block.
+
+**Re-pricing** (the brief: "from your first two hard leaves"). `cv_hd` and `c_double` cost about 25k tokens of context together, `c_ends` with
+`stuckAlong_of_run` about 20k: the toolkit carried every step. The open hard leaves are of another kind: `cv_hd_main_inType` and `y3_end_needs` each
+need a full local chart at `N` (and at `N + n`) and five to seven MERGE/separation arguments — one session each on this rate; `exists_red` and
+`exists_terminal` are limit constructions over the moves, and cite W-MERGE (`exists_merge`), which ruling 295 bars from wave 5 (see the handover).
+
+### Theorems this phase proved
+
+All [kernel], axioms `[propext, Classical.choice, Quot.sound]` (`data/fs131/i5l/I5lAxioms36.out`):
+- `HadwigerNelson.Plane.ArcMap.upper_bounds_of_inType_N` (`Plane/ValidMap/Terminal.lean`) — CV-HD's Siamese arrow `G_N ⇒ υ± = 1`.
+- `ArcMap.stuck_turned_frame`, `ArcMap.IsQArc.add_int_mul`, `ArcMap.StuckAlong.congr`, `ArcMap.stuck_structure_at_axis` (`Terminal`).
+- `ArcMap.stuckAlong_of_run` (`Terminal`) — the plan's shared chain lemma: the axis propagates to a chain neighbour; `ArcMap.stuckAlong_of_mem_stuckRun`.
+- proved **over open leaves** (their axioms include `sorryAx` until those land): `ArcMap.cv_hd` (over `cv_hd_main`), `ArcMap.cv_hd_main` (over
+  `cv_hd_main_inType`, `y3_end_needs`), `ArcMap.c_double` (over `cv_hd`, `flankQ_*`), `ArcMap.c_ends` and `ArcMap.four_or_stuck_of_chainVertex`
+  (over `cv_class`).
+
+## Stage 36 — SAVED
