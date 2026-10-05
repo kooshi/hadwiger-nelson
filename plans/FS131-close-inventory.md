@@ -3602,3 +3602,21 @@ reason by the close.*
      `2736ab8c`, CG1's move commit; worktree by the recipe, `.lake/build` copied from the idle `fs131-w5c` with no `lake` running), as item 395 (c) queued.
      `stuckRun_ne_univ` and the procedure's last steps take the next slot, on `fs131-w5c`. Confidence: high. In flight after CC1's launch: 1 (IO2) + 1 (CG1) + 1
      (CC1) = 3.
+400. **FS131-IO2 handed back** (Stage 10 SAVED, harness ≈ 560k by the task notice — past its line; it stopped at Stage 9 to run the handover; record
+     `fs131-wop`'s `plans/FS131-IO-implementation.md`, Stages 4–10; report `data/fs131/reports/FS131-IO2.md`; commits `0343377a` … `276aeaff`, pushed).
+     **Results, [kernel] on the standard three**: `Near.open_hlc` (OPEN's colouring locally constant off the trimmed and new arcs), `Near.open_valid`,
+     `Near.open_degree_horns` (degree becomes `n − (b − 1)`, horn count down by at least one), `Near.open_rim` (rim points carry at most three colours, none
+     repeated); 56 children, among them reusable lemmas (`isOpen_sectorBetween`, `isPreconnected_sectorBetween`, `Ioo_subset_coneAt_sectorBetween`,
+     `ArcMap.isSector_iff_of_partition'`, `Near.hasHornCount_chart`, `Near.sector_eq_hornSet_iff`). The two `OpenConfig` repairs made (`margin`, item 393; `ray0`,
+     item 397; diffs `data/fs131/io/margin.diff`, `ray0.diff`). **Left**: `open_allowedCone` (route in record § 10.3 item 1, every child a MERGE child with the wedge
+     added), the positive `HasHornCount` example, `exists_open`'s inhabitant note. **Receipt** (Keryx): `origin/fs131-wop` is `276aeaff`; the build log
+     (`build/gate/build/20261005T115945Z-4035875.log`) ends "Build completed successfully (5750 jobs)", 0 warnings other than `sorry`; `OpenMove`'s only `sorry`
+     by grep is `open_allowedCone`; `data/fs131/io/axioms-io2-classified.txt`: 90 records, 88 standard, 2 on `sorryAx` (the leaf and `exists_open`, control), 0
+     foreign. **No correction to E6-OPEN owed**: E6's step 4 chooses `ψ₁ ∈ (0, min(ε, ψ_X))`, which gives both fields — IO1's `OpenConfig` recorded less than the
+     construction provides. **Tool defect, its own, caught**: its axioms classifier first dropped a name with a prime (`--expect` failed 89 against 90 before
+     use); fixed with a planted control. **Slip, its own**: a commit named wrongly in Stage 7's text, corrected. Credit: IO2, for two counterexamples at the
+     configuration's boundary and four leaves.
+401. **Ruling on IO2's slot: OPEN's last leaf, FS131-IO3, on `fs131-wop`** — `open_allowedCone` by record § 10.3 item 1, the positive `HasHornCount` example
+     (item 2), the inhabitant note (item 3). Alternative weighed: `stuckRun_ne_univ` and the procedure's last steps on `fs131-w5c`. Why: OPEN's last leaf is about
+     500 lines over MERGE templates and the procedure's vertex step cites `exists_open`; the procedure job then merges `fs131-wop` in with OPEN whole.
+     Confidence: high. In flight after IO3's launch: 1 (CG1) + 1 (CC1) + 1 (IO3) = 3.
