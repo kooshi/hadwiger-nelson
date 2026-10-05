@@ -3690,6 +3690,46 @@ four-colour clause (`four_of_bothKind_simple`, recorded above, now without `hnc`
 #print axioms HadwigerNelson.Plane.ArcMap.run_hornBoundsQR
 #print axioms HadwigerNelson.Plane.ArcMap.stuckRun_ne_univ
 
+-- FS131-IL1 (lane A of the limit): `Plane/ValidMap/Limit`'s supporting lemmas (locality, the limit's agreement, sites)
+#print axioms HadwigerNelson.Plane.ArcMap.finite_arcs_inter_compact
+#print axioms HadwigerNelson.Plane.ArcMap.mem_Γ_iff
+#print axioms HadwigerNelson.Plane.ArcMap.AgreesOff.symm
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_iff_of_inter_eq
+#print axioms HadwigerNelson.Plane.ArcMap.region_inter_eq_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.interiorPts_inter_eq_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_region_inter_iff
+#print axioms HadwigerNelson.Plane.ArcMap.isSector_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.IsSector.subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.sectorsOf_eq_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.eventually_ball_subset
+#print axioms HadwigerNelson.Plane.ArcMap.hasSectors_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.hasRepeatedColour_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.hornSet_subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.isHorn_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.subset_region_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.isFlankAbove_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.isFlankBelow_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.isClear_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.isTile_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.tileOf_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.inType_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.allowedCone_eq_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.isRingArc_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.isQArc_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.isR2Arc_iff_of_agreesOn
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.arc_origin
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.agree_of_not_mem
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.col_eq_limitCol
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.exists_disjoint_of_isCompact
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.limitArcs_inter_eq
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.eventually_mem_limitInterior_iff
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.agreesOn_of_disjoint
+#print axioms HadwigerNelson.Plane.ArcMap.LocalSeq.exists_agreesOn_ball
+#print axioms HadwigerNelson.Plane.ArcMap.interior_coneAt_hornSet_eq_empty
+#print axioms HadwigerNelson.Plane.ArcMap.germ_eq_curveGerm_of_goodAt
+#print axioms HadwigerNelson.Plane.ArcMap.not_isSite_of_goodAt
+#print axioms HadwigerNelson.Plane.Arc.curve_eq_of_mem
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

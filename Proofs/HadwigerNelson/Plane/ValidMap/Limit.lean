@@ -1,5 +1,7 @@
 import Proofs.HadwigerNelson.Plane.ValidMap.Chain
 import Proofs.HadwigerNelson.Plane.Tiles
+import Proofs.HadwigerNelson.Plane.ValidMap.Sectors
+import Proofs.HadwigerNelson.Plane.ValidMap.Contact
 
 /-!
 # The limit of a locally finite sequence of local steps (FS131-KL1)
@@ -691,6 +693,111 @@ theorem limit_isTerminalMap (hP : (S.F 0).IsPlaneMap) (hval : ∀ n, (S.F n).Val
 
 end LocalSeq
 
+/-- **An arc's full curve does not depend on which of its points it is seen from.** -/
+theorem _root_.HadwigerNelson.Plane.Arc.curve_eq_of_mem {a : Arc} {x y : ℂ} (hx : x ∈ a.carrier) (hy : y ∈ a.carrier) :
+    a.curve x = a.curve y := by
+  cases a with
+  | seg u v =>
+    have key : ∀ w ∈ segment ℝ u v, ((w - u) * (starRingEnd ℂ) (I * (v - u))).re = 0 := by
+      intro w hw
+      rw [segment_eq_image'] at hw
+      obtain ⟨t, -, rfl⟩ := hw
+      rw [add_sub_cancel_left, map_mul, Complex.conj_I, real_smul, mul_comm (-I), ← mul_assoc, mul_assoc (t : ℂ),
+        Complex.mul_conj, ← Complex.ofReal_mul]
+      simp
+    ext z
+    simp only [Arc.curve, Arc.curveData, curveAt, mem_setOf_eq, zero_mul]
+    have h1 : ((z - x) * (starRingEnd ℂ) (I * (v - u))).re =
+        ((z - u) * (starRingEnd ℂ) (I * (v - u))).re - ((x - u) * (starRingEnd ℂ) (I * (v - u))).re := by
+      rw [← Complex.sub_re, ← sub_mul]; ring_nf
+    have h2 : ((z - y) * (starRingEnd ℂ) (I * (v - u))).re =
+        ((z - u) * (starRingEnd ℂ) (I * (v - u))).re - ((y - u) * (starRingEnd ℂ) (I * (v - u))).re := by
+      rw [← Complex.sub_re, ← sub_mul]; ring_nf
+    rw [h1, h2, key x hx, key y hy]
+  | circ c ρ θ₀ θ₁ =>
+    have key : ∀ w ∈ (Arc.circ c ρ θ₀ θ₁).carrier, ∀ z,
+        (1 * Complex.normSq (z - w) = 2 * ((z - w) * (starRingEnd ℂ) (c - w)).re ↔ Complex.normSq (z - c) = ρ ^ 2) := by
+      intro w hw z
+      obtain ⟨θ, -, rfl⟩ := hw
+      have hn : Complex.normSq (c - (c + ρ * e θ)) = ρ ^ 2 := by
+        rw [sub_add_cancel_left, Complex.normSq_neg, Complex.normSq_mul, Complex.normSq_ofReal, Complex.normSq_eq_norm_sq,
+          norm_e]; ring
+      have hsub : Complex.normSq (z - c) = Complex.normSq (z - (c + ρ * e θ)) + Complex.normSq (c - (c + ρ * e θ)) -
+          2 * ((z - (c + ρ * e θ)) * (starRingEnd ℂ) (c - (c + ρ * e θ))).re := by
+        rw [← Complex.normSq_sub]; ring_nf
+      rw [hsub, hn]; constructor <;> intro h <;> linarith
+    ext z
+    simp only [Arc.curve, Arc.curveData, curveAt, mem_setOf_eq]
+    rw [key x hx z, key y hy z]
+
+/-- A horn's cone at its base point has empty interior (it approaches along its axis only). -/
+theorem interior_coneAt_hornSet_eq_empty (v : ℂ) (α κ₁ κ₂ r : ℝ) : interior (coneAt (hornSet v α κ₁ κ₂ r) v) = ∅ := by
+  refine eq_empty_iff_forall_notMem.mpr fun t ht => ?_
+  obtain ⟨U, hU, hUo, htU⟩ := mem_interior.mp ht
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hUo t htU
+  have h1 := e_eq_of_mem_coneAt_hornSet (hU htU)
+  have h2 := e_eq_of_mem_coneAt_hornSet (hU (hball (show t + min ε 1 / 2 ∈ ball t ε by
+    rw [mem_ball, Real.dist_eq, add_sub_cancel_left, abs_of_pos (by positivity)]
+    linarith [min_le_left ε 1])))
+  obtain ⟨m, hm⟩ := e_eq_e_iff.mp (h2.trans h1.symm)
+  have hπ := Real.pi_pos
+  have hm0 : min ε 1 / 2 = 2 * π * m := by linarith
+  have hpos : 0 < min ε 1 / 2 := by positivity
+  have hsmall : min ε 1 / 2 < 2 * π := by linarith [min_le_right ε 1, Real.two_le_pi]
+  rcases lt_trichotomy m 0 with h | h | h
+  · have : (m : ℝ) ≤ -1 := by exact_mod_cast Int.le_sub_one_iff.mpr h
+    nlinarith
+  · rw [h] at hm0; push_cast at hm0; linarith
+  · have : (1 : ℝ) ≤ m := by exact_mod_cast h
+    nlinarith
+
+/-- **The germs at a point of `Γ` near a point `x` with a good radius lie on one curve**: at `y ∈ B(x, ρ₀)`, `y ≠ x`, on an arc
+`a₀`, every germ of a chart at `y` is, at each small distance, one of the two germs of `a₀`'s curve. -/
+theorem germ_eq_curveGerm_of_goodAt {F : ArcMap k} {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x ρ₀) {y : ℂ} (hy : y ∈ ball x ρ₀) (hyx : y ≠ x)
+    {a₀ : Arc} (ha₀ : a₀ ∈ F.arcs) (hya₀ : y ∈ a₀.carrier) {r₀ : ℝ} {n : ℕ} {G : BranchGerms n}
+    (hC : F.IsSectorChart G y r₀) :
+    ∃ ρ > 0, ∀ i, ∀ s ∈ Ioo 0 ρ, ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧ branchPt y (G.β i) (G.κ i) s =
+      branchPt y (curveGerm (a₀.curveData y).1 (a₀.curveData y).2 σ).1
+        (curveGerm (a₀.curveData y).1 (a₀.curveData y).2 σ).2 s := by
+  have hyd : y ∈ F.dom := hG.subdom hy
+  obtain ⟨ρy, hGy⟩ := F.exists_goodAt hyd
+  have hb := Arc.curveData_ne (F.nondegenerate a₀ ha₀) hya₀
+  have hbn : 0 < ‖(a₀.curveData y).2‖ := norm_pos_iff.mpr hb
+  have hκ : 0 ≤ (a₀.curveData y).1 ∧ (a₀.curveData y).1 ≤ 1 := by
+    rcases Arc.curveData_kappa y a₀ with h | h <;> rw [h] <;> norm_num
+  have hdx : 0 < dist y x := dist_pos.mpr hyx
+  have hdρ : 0 < ρ₀ - dist y x := by rw [mem_ball] at hy; linarith
+  set ρ := min (min r₀ ρy) (min (ρ₀ - dist y x) ‖(a₀.curveData y).2‖) with hρ
+  have hρ0 : 0 < ρ := lt_min (lt_min hC.pos hGy.pos) (lt_min hdρ hbn)
+  have hxa₀ : x ∈ a₀.carrier := hG.through a₀ ha₀ ⟨y, hya₀, hy⟩
+  -- `Γ` near `y` lies on `a₀`'s curve
+  have hΓ : ∀ z ∈ F.Γ, z ∈ ball y ρ → z ∈ a₀.curve y := by
+    intro z hz hzb
+    obtain ⟨a, ha, hza⟩ := mem_iUnion₂.mp hz.2
+    have hzy : z ∈ ball y ρy := ball_subset_ball ((min_le_left _ _).trans (min_le_right _ _)) hzb
+    have hzx : z ∈ ball x ρ₀ := by
+      rw [mem_ball] at hzb ⊢
+      have h1 : ρ ≤ ρ₀ - dist y x := (min_le_right _ _).trans (min_le_left _ _)
+      linarith [dist_triangle z y x]
+    have hya : y ∈ a.carrier := hGy.through a ha ⟨z, hza, hzy⟩
+    have hxa : x ∈ a.carrier := hG.through a ha ⟨z, hza, hzx⟩
+    have heq := hG.uniq a ha a₀ ha₀ ⟨z, hza, hzx⟩ ⟨y, hya₀, hy⟩ y hy hyx (Arc.carrier_subset_curve hxa hya)
+      (Arc.carrier_subset_curve hxa₀ hya₀)
+    rw [← Arc.curve_eq_of_mem hxa₀ hya₀, ← heq]
+    exact Arc.carrier_subset_curve hxa hza
+  refine ⟨ρ, hρ0, fun i s hs => ?_⟩
+  have hsr₀ : s < r₀ := hs.2.trans_le ((min_le_left _ _).trans (min_le_left _ _))
+  have hq : branchPt y (G.β i) (G.κ i) s ∈ (F.Γ ∩ ball y r₀) \ {y} := by
+    rw [hC.branches]; exact mem_iUnion.mpr ⟨i, s, ⟨hs.1, hsr₀⟩, rfl⟩
+  have hnorm := norm_branchPt_sub y (G.β i) (G.κ i) hs.1.le
+  have hqb : branchPt y (G.β i) (G.κ i) s ∈ ball y ρ := by rw [mem_ball, dist_eq_norm, hnorm]; exact hs.2
+  have hqc := hΓ _ hq.1.1 hqb
+  have hsb : s < ‖(a₀.curveData y).2‖ := hs.2.trans_le ((min_le_right _ _).trans (min_le_right _ _))
+  obtain ⟨σ, hσ, hqσ⟩ := exists_eq_branchPt_curveGerm hκ.1 hb hqc hq.2 (by
+    rw [hnorm]; nlinarith [hκ.2, hs.1])
+  rw [hnorm] at hqσ
+  exact ⟨σ, hσ, hqσ⟩
+
 /-! ## Clean maps and their sites -/
 
 variable (F : ArcMap k)
@@ -704,6 +811,181 @@ def IsSite (x : ℂ) : Prop := x ∈ F.dom ∧ (F.HasRepeatedColour x ∨ ∃ α
 
 variable {F}
 
+/-- **Near a point with a good radius, a point of a clean map other than it is no site**: off `Γ` its one sector is the ball;
+on `Γ` its germs are the two of the one curve through it (`germ_eq_curveGerm_of_goodAt`), in opposite directions, so it has
+two sectors, of two colours (clean), neither a horn. -/
+theorem not_isSite_of_goodAt {F : ArcMap k} (hc : F.IsClean) {x : ℂ} {ρ₀ : ℝ} (hG : F.GoodAt x ρ₀) {y : ℂ}
+    (hy : y ∈ ball x ρ₀) (hyx : y ≠ x) : ¬ F.IsSite y := by
+  have hyd : y ∈ F.dom := hG.subdom hy
+  obtain ⟨r₀, n, G, hC, hdisj⟩ := localSectors_disj F hyd
+  have hr₀ : r₀ ∈ Ioc 0 r₀ := ⟨hC.pos, le_rfl⟩
+  suffices key : ∀ r ∈ Ioc 0 r₀, (∀ S, F.IsSector y r S → (interior (coneAt S y)).Nonempty) ∧
+      ∀ c, (F.sectorsOf y r c).encard ≤ 1 by
+    rintro ⟨-, ⟨c, hrep⟩ | ⟨α, κ₁, κ₂, c, -, hH⟩⟩
+    · obtain ⟨r, h2, hr⟩ := (hrep.and (Ioc_mem_nhdsGT hC.pos)).exists
+      have := h2.trans ((key r hr).2 c)
+      norm_num at this
+    · obtain ⟨r, ⟨hS, -⟩, hr⟩ := (hH.and (Ioc_mem_nhdsGT hC.pos)).exists
+      have := (key r hr).1 _ hS
+      rw [interior_coneAt_hornSet_eq_empty] at this
+      exact not_nonempty_empty this
+  intro r hr
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · -- off `Γ`: the one sector is the ball
+    refine ⟨fun S hS => ?_, fun c => ?_⟩
+    · rw [(hC.isSector_iff_of_zero hn hr).mp hS, coneAt_ball_self y hr.1, interior_univ]; exact univ_nonempty
+    · exact (encard_le_encard (show F.sectorsOf y r c ⊆ {ball y r} from fun S hS =>
+        (hC.isSector_iff_of_zero hn hr).mp hS.1)).trans (by rw [encard_singleton])
+  -- on `Γ`
+  have hyΓ : y ∈ F.Γ := hC.mem_Γ.mpr hn
+  obtain ⟨a₀, ha₀, hya₀⟩ := mem_iUnion₂.mp hyΓ.2
+  obtain ⟨ρ, hρ, hgerm⟩ := germ_eq_curveGerm_of_goodAt hG hy hyx ha₀ hya₀ hC
+  have hinj : ∀ i j, i ≠ j → ∀ s ∈ Ioo 0 (min ρ r₀),
+      branchPt y (G.β i) (G.κ i) s ≠ branchPt y (G.β j) (G.κ j) s := by
+    intro i j hij s hs heq
+    apply hdisj i j hij s ⟨hs.1, hs.2.trans_le (min_le_right _ _)⟩
+    rw [branchPt_eq, branchPt_eq] at heq
+    have hs0 : (s : ℂ) ≠ 0 := by exact_mod_cast hs.1.ne'
+    exact mul_left_cancel₀ hs0 (add_left_cancel heq)
+  have hgerm' : ∀ i, ∀ s ∈ Ioo 0 (min ρ r₀), ∃ σ : ℝ, (σ = 1 ∨ σ = -1) ∧ branchPt y (G.β i) (G.κ i) s =
+      branchPt y (curveGerm (a₀.curveData y).1 (a₀.curveData y).2 σ).1
+        (curveGerm (a₀.curveData y).1 (a₀.curveData y).2 σ).2 s :=
+    fun i s hs => hgerm i s ⟨hs.1, hs.2.trans_le (min_le_left _ _)⟩
+  have hmin : 0 < min ρ r₀ := lt_min hρ hC.pos
+  -- at most two germs
+  have hn2 : n ≤ 2 := by
+    by_contra h3
+    push Not at h3
+    have hs₀ : min ρ r₀ / 2 ∈ Ioo 0 (min ρ r₀) := ⟨by positivity, by linarith⟩
+    choose σ hσ hσeq using fun i : Fin n => hgerm' i _ hs₀
+    have key3 : ∀ a b c : ℝ, (a = 1 ∨ a = -1) → (b = 1 ∨ b = -1) → (c = 1 ∨ c = -1) → a = b ∨ a = c ∨ b = c := by
+      intro a b c ha hb hc
+      rcases ha with rfl | rfl <;> rcases hb with rfl | rfl <;> rcases hc with rfl | rfl <;> norm_num
+    have hpair : ∀ i j : Fin n, i ≠ j → σ i ≠ σ j := fun i j hij heq =>
+      hinj i j hij _ hs₀ (by rw [hσeq i, hσeq j, heq])
+    rcases key3 _ _ _ (hσ ⟨0, by omega⟩) (hσ ⟨1, by omega⟩) (hσ ⟨2, by omega⟩) with h | h | h
+    · exact hpair _ _ (by simp [Fin.ext_iff]) h
+    · exact hpair _ _ (by simp [Fin.ext_iff]) h
+    · exact hpair _ _ (by simp [Fin.ext_iff]) h
+  -- at least two (clean)
+  have hn2' : n = 2 := by
+    have h1 := hc y hyΓ
+    have h2 := hC.ncard_coloursAt_le
+    rcases le_total n 1 with h | h
+    · rw [max_eq_right h] at h2; omega
+    · rw [max_eq_left h] at h2; omega
+  subst hn2'
+  -- the two germs leave `y` in different directions
+  set b := (a₀.curveData y).2 with hbdef
+  have hdir : e (G.β 0) ≠ e (G.β 1) := by
+    intro hβ
+    have hf : Tendsto (fun s => ‖e (germDir (G.β 0) (G.κ 0) s) - e (germDir (G.β 1) (G.κ 1) s)‖) (𝓝 0) (𝓝 0) := by
+      have hcont : Continuous (fun s => ‖e (germDir (G.β 0) (G.κ 0) s) - e (germDir (G.β 1) (G.κ 1) s)‖) := by
+        unfold germDir e; fun_prop
+      have := hcont.tendsto 0
+      simpa [germDir_zero, hβ] using this
+    set g₁ := curveGerm (a₀.curveData y).1 b 1 with hg₁
+    set g₂ := curveGerm (a₀.curveData y).1 b (-1) with hg₂
+    have e1 : e g₁.1 = e (arg b - π / 2) := by
+      have := e_toIcoMod_add (arg b - 1 * (π / 2)) 0
+      rw [add_zero, add_zero] at this
+      rw [hg₁, curveGerm]; dsimp only; rw [this, one_mul]
+    have e2 : e g₂.1 = - e (arg b - π / 2) := by
+      have := e_toIcoMod_add (arg b - -1 * (π / 2)) 0
+      rw [add_zero, add_zero] at this
+      rw [hg₂, curveGerm]; dsimp only
+      rw [this, show arg b - -1 * (π / 2) = (arg b - π / 2) + π by ring, e_add_pi]
+    have hh : Tendsto (fun s => ‖e (germDir g₁.1 g₁.2 s) - e (germDir g₂.1 g₂.2 s)‖) (𝓝 0) (𝓝 2) := by
+      have hcont : Continuous (fun s => ‖e (germDir g₁.1 g₁.2 s) - e (germDir g₂.1 g₂.2 s)‖) := by
+        unfold germDir e; fun_prop
+      have := hcont.tendsto 0
+      simp only [germDir_zero] at this
+      rwa [e1, e2, sub_neg_eq_add, ← two_mul, norm_mul, norm_e, mul_one, Complex.norm_two] at this
+    have hev : ∀ᶠ s in 𝓝[>] (0 : ℝ), ‖e (germDir (G.β 0) (G.κ 0) s) - e (germDir (G.β 1) (G.κ 1) s)‖ < 1 ∧
+        1 < ‖e (germDir g₁.1 g₁.2 s) - e (germDir g₂.1 g₂.2 s)‖ ∧ s < min ρ r₀ :=
+      nhdsWithin_le_nhds ((hf.eventually (gt_mem_nhds one_pos)).and
+        ((hh.eventually (lt_mem_nhds one_lt_two)).and (gt_mem_nhds hmin)))
+    obtain ⟨s, ⟨hfs, hhs, hsρ⟩, hs0⟩ := (hev.and self_mem_nhdsWithin).exists
+    have hs0 : (0 : ℝ) < s := hs0
+    have hs : s ∈ Ioo 0 (min ρ r₀) := ⟨hs0, hsρ⟩
+    obtain ⟨σ0, hσ0, h0⟩ := hgerm' 0 s hs
+    obtain ⟨σ1, hσ1, h1⟩ := hgerm' 1 s hs
+    have hne : σ0 ≠ σ1 := fun h => hinj 0 1 (by decide) s hs (by rw [h0, h1, h])
+    have hnorm : ∀ β κ β' κ', ‖branchPt y β κ s - branchPt y β' κ' s‖ =
+        s * ‖e (germDir β κ s) - e (germDir β' κ' s)‖ := by
+      intro β κ β' κ'
+      rw [branchPt_eq, branchPt_eq, show y + (s : ℂ) * e (germDir β κ s) - (y + (s : ℂ) * e (germDir β' κ' s)) =
+        (s : ℂ) * (e (germDir β κ s) - e (germDir β' κ' s)) by ring, norm_mul, Complex.norm_real,
+        Real.norm_of_nonneg hs0.le]
+    have key : ‖branchPt y (G.β 0) (G.κ 0) s - branchPt y (G.β 1) (G.κ 1) s‖ =
+        ‖branchPt y g₁.1 g₁.2 s - branchPt y g₂.1 g₂.2 s‖ := by
+      rw [h0, h1]
+      rcases hσ0 with rfl | rfl <;> rcases hσ1 with rfl | rfl
+      · exact absurd rfl hne
+      · rfl
+      · rw [norm_sub_rev]
+      · exact absurd rfl hne
+    rw [hnorm, hnorm] at key
+    have := mul_left_cancel₀ hs0.ne' key
+    linarith
+  -- each sector's cone is a proper arc of directions
+  have hnext : ∀ i : Fin 2, e (G.nextβ i) = e (G.β (BranchGerms.next i)) := fun i => by
+    have := G.e_nextDir i 0
+    simpa [BranchGerms.nextDir, BranchGerms.dir, germDir_zero] using this
+  have hlt : ∀ i : Fin 2, G.β i < G.nextβ i := by
+    intro i
+    rcases hC.sorted.2 i with h | ⟨h, -⟩
+    · exact h
+    · exfalso
+      have := hnext i
+      rw [← h] at this
+      fin_cases i
+      · exact hdir this
+      · exact hdir this.symm
+  -- the two sectors' colours
+  choose p hp using fun i => hC.sector_nonempty hr₀ i
+  have hcolconst : ∀ i, ∀ z ∈ G.sector y r₀ i, F.col z = F.col (p i) := fun i z hz =>
+    (hC.isPreconnected r₀ hr₀ i).constant (F.continuousOn_col.mono (hC.sector_subset_interiorPts hn hr₀ i)) hz (hp i)
+  have hcols : F.col (p 0) ≠ F.col (p 1) := by
+    intro heq
+    have hsub : F.coloursAt y ⊆ {F.col (p 0)} := by
+      intro j hj
+      obtain ⟨z, hz, hzd⟩ := Metric.mem_closure_iff.mp hj r₀ hC.pos
+      have hz' : z ∈ ⋃ i, G.sector y r₀ i := by
+        rw [← hC.cover r₀ hr₀ hn]; exact ⟨by rw [mem_ball, dist_comm]; exact hzd, hz.1⟩
+      obtain ⟨i, hi⟩ := mem_iUnion.mp hz'
+      rw [mem_singleton_iff, ← hz.2, hcolconst i z hi]
+      fin_cases i
+      · rfl
+      · exact heq.symm
+    have := ncard_le_ncard hsub (finite_singleton _)
+    rw [ncard_singleton] at this
+    have := hc y hyΓ
+    omega
+  refine ⟨fun S hS => ?_, fun c => ?_⟩
+  · obtain ⟨i, rfl⟩ := (hC.isSector_iff hn hr).mp hS
+    rw [hC.cone r hr i]
+    exact ⟨(G.β i + G.nextβ i) / 2, mem_interior.mpr ⟨Ioo (G.β i) (G.nextβ i),
+      Ioo_subset_Icc_self.trans (Icc_subset_angleIcc _ _), isOpen_Ioo, ⟨by linarith [hlt i], by linarith [hlt i]⟩⟩⟩
+  · have hcolr : ∀ i, ∀ S, S = G.sector y r i → S ⊆ F.col ⁻¹' {c} → F.col (p i) = c := by
+      rintro i S rfl hS
+      obtain ⟨z, hz⟩ := hC.sector_nonempty hr i
+      rw [← hcolconst i z (G.sector_mono hr.2 i hz)]
+      exact hS hz
+    refine encard_le_one_iff.mpr fun S S' hS hS' => ?_
+    obtain ⟨i, rfl⟩ := (hC.isSector_iff hn hr).mp hS.1
+    obtain ⟨j, rfl⟩ := (hC.isSector_iff hn hr).mp hS'.1
+    have hi := hcolr i _ rfl hS.2
+    have hj := hcolr j _ rfl hS'.2
+    by_cases hij : i = j
+    · rw [hij]
+    · exfalso
+      fin_cases i <;> fin_cases j
+      · exact hij rfl
+      · exact hcols (hi.trans hj.symm)
+      · exact hcols (hj.trans hi.symm)
+      · exact hij rfl
+
 /-- Off the sites no move is available (MERGE needs two sectors of one colour; MERGE-RAY and SHAVE need a horn). -/
 theorem not_available_of_not_isSite {x : ℂ} (hx : x ∈ F.dom) (hs : ¬ F.IsSite x) :
     ¬ F.MergeAvailable x ∧ ¬ F.RayAvailable x ∧ ¬ F.ShaveAvailable x := by
@@ -715,7 +997,9 @@ theorem not_available_of_not_isSite {x : ℂ} (hx : x ∈ F.dom) (hs : ¬ F.IsSi
 /-- **A clean map's sites are isolated** (in a sector chart every point of the punctured ball is interior or on one branch with two
 colours across it: one sector each side, no horn). -/
 theorem IsClean.eventually_not_isSite (hc : F.IsClean) {x : ℂ} (hx : x ∈ F.dom) : ∀ᶠ y in 𝓝[≠] x, ¬ F.IsSite y := by
-  sorry
+  obtain ⟨ρ₀, hG⟩ := F.exists_goodAt hx
+  filter_upwards [nhdsWithin_le_nhds (ball_mem_nhds x hG.pos), self_mem_nhdsWithin] with y hy hyx
+  exact not_isSite_of_goodAt hc hG hy hyx
 
 /-- **Cleaning**: every valid map has a clean valid modification with the same colours at every point — the one-coloured parts of
 `Γ` dropped (each arc replaced by its maximal sub-arcs of points of two or more colours), their points given the one colour around

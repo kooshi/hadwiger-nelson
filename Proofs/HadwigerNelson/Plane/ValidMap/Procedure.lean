@@ -47,18 +47,22 @@ def treatPts : Set ℂ := {v | F.IsSite v ∨ ∃ x, F.OnRingArc v x}
 
 variable {F}
 
-/-- `badCount F P = 0` exactly when every ring arc about `P` is (Q) or (R2) (every ring arc lies in a maximal one, `l60_le`). -/
-theorem badCount_eq_zero_iff (hF : F.Valid) (P : ℂ) :
+/-- `badCount F P = 0` exactly when every ring arc about `P` is (Q) or (R2) (every ring arc lies in a maximal one, `l60_le`). Of the
+plane (FS131-IL1, inventory item 380): on a smaller domain a ring arc whose ends leave the domain lies in no maximal one, and the
+lemma is false (an open annular sector carrying one unit arc, `plans/FS131-limit-kernel-plan.md` Stage 7). -/
+theorem badCount_eq_zero_iff (hF : F.Valid) (hP : F.IsPlaneMap) (P : ℂ) :
     F.badCount P = 0 ↔ ∀ θ₁ θ₂ c c', F.IsRingArc P θ₁ θ₂ c c' → F.IsQArc P θ₁ θ₂ ∨ F.IsR2Arc P θ₁ θ₂ := by
   sorry
 
-/-- **Finitely many maximal arcs about a point** of a clean valid map (the sides change only at sites of `ω(P)`, finitely many). -/
-theorem badCount_lt_top (hF : F.Valid) (hc : F.IsClean) (P : ℂ) : F.badCount P < ⊤ := by
+/-- **Finitely many maximal arcs about a point** of a clean valid map of the plane (the sides change only at sites of `ω(P)`,
+finitely many; the plane hypothesis, inventory item 380, keeps the maximal arcs from accumulating at the domain's frontier). -/
+theorem badCount_lt_top (hF : F.Valid) (hP : F.IsPlaneMap) (hc : F.IsClean) (P : ℂ) : F.badCount P < ⊤ := by
   sorry
 
-/-- **Treatment points are locally finite** in a clean map: sites are isolated (`IsClean.eventually_not_isSite`) and closed; the
-centres of the unit arcs meeting a compact set are finitely many (local finiteness of the arcs). -/
-theorem treatPts_inter_finite (hc : F.IsClean) {K : Set ℂ} (hK : IsCompact K) (hKd : K ⊆ F.dom) :
+/-- **Treatment points are locally finite** in a clean map of the plane: sites are isolated (`IsClean.eventually_not_isSite`) and
+closed; the centres of the unit arcs meeting a compact set are finitely many (local finiteness of the arcs on `cthickening 1 K`,
+which the plane hypothesis, inventory item 380, keeps inside the domain). -/
+theorem treatPts_inter_finite (hP : F.IsPlaneMap) (hc : F.IsClean) {K : Set ℂ} (hK : IsCompact K) (hKd : K ⊆ F.dom) :
     (K ∩ F.treatPts).Finite := by
   sorry
 
