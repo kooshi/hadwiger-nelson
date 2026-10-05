@@ -3005,3 +3005,29 @@ reason by the close.*
      leaves are the longer and are on wave 5's path beside MERGE; I5m's two wait with the SEP lane. **Queue now**: the SEP lane FS131-RS1, wave 5's
      non-`Terminal` continuation FS131-I5o (`bv_l3`, `exists_preBend`), `bend_away`'s implementer, `disc1_local`. In flight after I5n's launch: 1 (RW2) + 1
      (IMM3) + 1 (I5n) = 3.
+351. **FS131-RW2 done: WALK is held** (harness ≈ 477k by the task notice; record `fs131-w5p`'s `plans/FS131-planar-implementation.md`, Stages 23–26; report
+     `data/fs131/reports/FS131-RW2.md`; commits `e9669763`, `f6e06b97`, `6988eb8e`, `eb957c10`, `e27da6c1`, pushed). **Results, [kernel] on the standard three,
+     statements unchanged**: **`ArcMap.exists_boundaryWalk`** (WALK: every filled outer tile has a boundary walk — a cyclic list of `x`'s neighbours, consecutive
+     closures sharing a hinge, a tile repeated only at edges of `x`, each edge's pure disc missing the other edges); C5a `port_arc` with IP3's `port_pair`
+     re-proved over it (statement byte-identical); C5b–C5d `ArcMap.exists_isPortGraph` (a compact connected set with an even, positive curve star at each point
+     has a port graph over any finite vertex set holding its non-regular points — the new structure `ArcMap.IsPortGraph`); C5d on the map
+     `ArcMap.exists_edgeOf` (each edge of the port graph of `∂ cl x̂` is `IsEdgeOf x y …` for exactly one outer tile `y`); C7
+     `IsPortGraph.exists_shared_vertex`; C10 `isBoundaryWalk_of_trail`, `BasedTrail.insert_all`, `BasedTrail.map`; ten children. **F-RING
+     (`filledGraph_ringList`), and through it `filledGraph_planarLike` and `cvb_thom_reduced`, now rest only on SEP.** **Receipt** (Keryx): the five commits
+     exist and `origin/fs131-w5p` is `e27da6c1`; the final build log (`build/gate/build/20261005T073716Z-2385209.log`) ends "Build completed successfully (5405
+     jobs)", 0 warnings other than `sorry`, and the driver log `data/fs131/rw/build-rw2-final.log` ends `EXIT 0`; `MapGraph`'s only `sorry` declaration by grep
+     is `IsBoundaryWalk.sep`; `CurveGraph` 0, `MapTopology` 0; `data/fs131/rw/axioms-rw2b.txt` parsed: 24 records, 21 standard (`exists_boundaryWalk`,
+     `port_pair` among them), the controls `sep`, `filledGraph_ringList`, `cvb_thom_reduced` on `sorryAx`; `data/fs131/rw/stmt-check-rw2.txt` ends PASS (148
+     statements in `MapGraph` and `CurveGraph` byte-identical to `515e28af`); the scratch file `data/fs131/rw/WalkScratch.lean` is gone; no `lake` running in
+     the tree. **Prediction scored**: RL1 priced WALK at 4–6 sessions; RW1 re-priced the rest at about one; C5a–C10 and the body took about 1.1 hours.
+     **Linter control fired**: 17 `IsPortGraph` fields flagged for missing docstrings, silent after they were added. **Tools**: `tools/fs131_rw_stmt_check.py`
+     (plants fired), the wrapper `data/fs131/rw/rw2-build.sh` (writes START and EXIT). **Held for the landing**: `ArcMap.IsPortGraph` is a new structure taken as a
+     hypothesis — RW2's draft files it OUT in `scripts/Vacuity.lean`'s registration list (like `IsSectorChart`: its existence is a theorem,
+     `exists_isPortGraph`); the gate's counts will change at landing (18 new records). `exists_boundaryWalk`'s docstring rewritten to the route taken. Credit:
+     RW2, for the port graph in general form.
+352. **Ruling on RW2's slot: the SEP lane, FS131-RS1, on `fs131-w5p` itself** (RW2 finished, so no new branch), from `e27da6c1`: SEP's six children in RL1's
+     plan § 4.1 order (SEP-ROT and SEP-CHAIN first, re-priced after them; then SEP-S, SEP-K1, SEP-CORE, SEP-REDUCE), then `IsBoundaryWalk.sep`'s body — the
+     planar chain's last leaf. Alternative weighed: wave 5's non-`Terminal` continuation (`bv_l3`, `exists_preBend`). Why: SEP is the last leaf of the
+     planar chain and closes F-RING, `filledGraph_planarLike` and `cvb_thom_reduced`; both have slack against the `Terminal` and MERGE chains, and SEP was
+     queued first. **`IsPortGraph`'s vacuity registration**: held for wave 5's landing job (the file is the gate's), with RW2's draft. Confidence: high. In flight
+     after RS1's launch: 1 (IMM3) + 1 (I5n) + 1 (RS1) = 3.
